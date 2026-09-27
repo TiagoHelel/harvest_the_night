@@ -314,3 +314,47 @@ Notes:
 - The payout itself is task 0061. What RESULT records now is the outcome it will
   be computed from - night number, survived, how long it took - so the result
   screen reads one dictionary rather than interrogating the world afterwards.
+
+## 0007 - The resource ledger - done 2026-09-27
+
+What changed: `Resources` owns what the player has and is the only way it
+changes. `add`/`gain` to give, `spend`/`pay` to take, `can_afford` and
+`missing` to ask. `GameData.STARTING_RESOURCES` says what day 1 begins with.
+
+Files: src/core/resources.gd, src/core/game_data.gd, src/core/state.gd,
+src/tools/headless_check.gd
+
+Verify: PASS - 7 passed, 2 skipped, 9s. **123 asserts, 0 failed** (86 before).
+
+**Both guards moved deliberately.** Sim 2127612543 -> 673656594: the state
+gained `held` and `gained`. Data 3714036227 -> 1015548053: the tables gained
+`STARTING_RESOURCES`.
+
+Notes:
+
+- **Paying is all or nothing, and that is the whole point of the file.** The
+  obvious implementation - a loop of `spend()` over the cost - takes the wood,
+  fails on the iron, and leaves the player four wood poorer with nothing to show
+  for it. `pay()` checks `can_afford()` across every line first. Asserted by
+  hashing the state before a failed payment and after it: not even the
+  affordable line moves.
+- **Deviation from the prompt, on purpose.** It asked for a negative balance to
+  be "a hard error in debug and a clamped no-op in release". Implemented as
+  clamp-always plus `push_error`-always instead. Godot's `assert()` would give
+  literally what was asked, but a rule that resolves differently in two builds
+  breaks both the determinism guard and the browser-matches-desktop promise -
+  and it would make the clamp untestable, because the assert would halt the
+  headless check. The error is diagnostics; the clamp is the rule, in every
+  build.
+- **No starting iron**, deliberately. The first gun tower costs 15 iron and
+  there is no way to get it but the rock face, which is the lesson day 1 is
+  meant to teach. Starting stock is 25 money, 12 wood, 6 stone: enough to buy
+  seeds and put up a fence without standing around, not enough to skip the day.
+- `gained` only ever goes up, including for things later spent - that is what
+  the statistics screen of task 0069 reports and what a balance sweep reads to
+  find out where a run's wood actually came from.
+- Every Dictionary walk sorts its keys first. Nothing in this file draws from
+  the RNG today, so nothing depends on the order yet; the day something does,
+  the hash would otherwise start depending on the order a cost literal happened
+  to be typed in.
+- An unknown resource id is refused and does not quietly create itself.

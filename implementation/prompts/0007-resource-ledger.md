@@ -1,7 +1,7 @@
 # 0007 - The resource ledger
 
 - **Phase:** 0 - Foundation
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0003
 - **Likely files:** src/core/resources.gd
 

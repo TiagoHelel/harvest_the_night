@@ -122,6 +122,18 @@ const BUY_MARKUP := 2.5                 # LEVER: multiplier, 1.8-3.5
 ## How much of a structure's cost comes back when it is sold.
 const SELL_BACK_FRACTION := 0.6         # LEVER: fraction, 0.4-0.8
 
+## What the player wakes up on day 1 with.
+##
+## `design.md` section 5: a small amount. Small enough that day 1 is about
+## going and getting things, large enough to buy the first seeds and put up the
+## first fence without standing around. Deliberately no iron: the first tower
+## has to be earned at the rock face, which is the lesson day 1 teaches.
+const STARTING_RESOURCES: Dictionary = {   # LEVER: units each, 0-40
+	MONEY: 25,
+	WOOD: 12,
+	STONE: 6,
+}
+
 
 # ===================================================================== crops
 
@@ -696,6 +708,7 @@ static func digest() -> int:
 		"farm": [GRID_WIDTH, GRID_HEIGHT, TILE_SIZE, HOUSE_HP],
 		"resources": RESOURCES,
 		"sell_price": SELL_PRICE,
+		"starting": STARTING_RESOURCES,
 		"trade": [BUY_MARKUP, SELL_BACK_FRACTION],
 		"crops": CROPS,
 		"water": [WATER_GROWTH_BONUS],

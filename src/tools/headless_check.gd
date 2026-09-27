@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 4
+const GROUPS := 5
 
 var passed := 0
 var failed := 0
@@ -66,6 +66,7 @@ func _run() -> void:
 	_task_0003_game_data()
 	_task_0005_guards()
 	_task_0006_phases()
+	_task_0007_resources()
 
 
 func _finish() -> void:
@@ -371,5 +372,85 @@ func _task_0006_phases() -> void:
 		Phases.name_of(int(guard["phase"])))
 	expect(int(guard["day"]) == 1, "and did not move the day counter",
 		str(guard["day"]))
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## 0007 - the ledger: all or nothing, never below zero, one source of truth.
+func _task_0007_resources() -> void:
+	var state := State.create(21)
+
+	# A new game starts on what design.md calls a small amount, and on no iron
+	# at all - the first tower has to be earned at the rock face.
+	expect(Resources.amount(state, GameData.WOOD) == 12, "starting wood",
+		str(Resources.amount(state, GameData.WOOD)))
+	expect(Resources.amount(state, GameData.IRON) == 0, "and no starting iron",
+		str(Resources.amount(state, GameData.IRON)))
+	for id in GameData.RESOURCES:
+		expect((state["held"] as Dictionary).has(id),
+			"the ledger knows about %s" % id)
+
+	# Adding and spending the simple way.
+	Resources.add(state, GameData.IRON, 10)
+	expect(Resources.amount(state, GameData.IRON) == 10, "adding works")
+	expect(Resources.spend(state, GameData.IRON, 4), "spending works")
+	expect(Resources.amount(state, GameData.IRON) == 6, "and leaves the rest",
+		str(Resources.amount(state, GameData.IRON)))
+
+	# **Spending more than you have changes nothing at all.**
+	var before := State.hash_of(state)
+	expect(not Resources.spend(state, GameData.IRON, 7), "overspending fails")
+	expect(State.hash_of(state) == before, "and changed nothing")
+
+	# **A cost is all or nothing.** This is the one that matters: the obvious
+	# loop-of-spend takes the wood, fails on the iron, and leaves the player
+	# poorer with nothing to show for it.
+	var cost := {GameData.WOOD: 10, GameData.IRON: 99}
+	expect(not Resources.can_afford(state, cost), "a short cost is unaffordable")
+	before = State.hash_of(state)
+	expect(not Resources.pay(state, cost), "and cannot be paid")
+	expect(State.hash_of(state) == before,
+		"a failed payment takes neither line - not even the affordable one")
+	expect(Resources.amount(state, GameData.WOOD) == 12,
+		"the wood is still there", str(Resources.amount(state, GameData.WOOD)))
+
+	# An affordable cost takes every line.
+	var real_cost := {GameData.WOOD: 10, GameData.IRON: 6}
+	expect(Resources.can_afford(state, real_cost), "an affordable cost is")
+	expect(Resources.pay(state, real_cost), "and is paid")
+	expect(Resources.amount(state, GameData.WOOD) == 2, "wood taken",
+		str(Resources.amount(state, GameData.WOOD)))
+	expect(Resources.amount(state, GameData.IRON) == 0, "iron taken",
+		str(Resources.amount(state, GameData.IRON)))
+
+	# What it is short by, for the tooltip that explains a greyed button.
+	var short := Resources.missing(state, {GameData.WOOD: 5, GameData.STONE: 1})
+	expect(short.size() == 1 and int(short[GameData.WOOD]) == 3,
+		"missing() names only what is short, and by how much", str(short))
+
+	# Nothing can go below zero, whatever the build.
+	expect(Resources.amount(state, GameData.IRON) == 0, "at zero")
+	expect(not Resources.spend(state, GameData.IRON, 1), "cannot go below it")
+	expect(Resources.amount(state, GameData.IRON) == 0, "still zero",
+		str(Resources.amount(state, GameData.IRON)))
+
+	# The running total only ever goes up, which is what the statistics screen
+	# of task 0069 will report.
+	var gained: Dictionary = state["gained"]
+	expect(int(gained[GameData.IRON]) == 10,
+		"the total gained remembers what was spent", str(gained[GameData.IRON]))
+
+	# gain() is add() across a whole yield.
+	Resources.gain(state, {GameData.FISH: 2, GameData.WHEAT: 3})
+	expect(Resources.amount(state, GameData.FISH) == 2, "a yield lands")
+	expect(Resources.amount(state, GameData.WHEAT) == 3, "every line of it")
+
+	# An unknown id is refused rather than quietly inventing a resource.
+	print("  (the ERROR lines below are deliberate - unknown ids refused)")
+	Resources.add(state, &"unobtainium", 5)
+	expect(not (state["held"] as Dictionary).has(&"unobtainium"),
+		"adding an unknown resource does not create it")
+	expect(not Resources.spend(state, &"unobtainium", 1),
+		"and it cannot be spent")
 
 	_completed += 1     # last line: an abandoned group never gets here

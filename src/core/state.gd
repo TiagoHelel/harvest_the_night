@@ -36,6 +36,7 @@ static func create(seed_value: int) -> Dictionary:
 		"rng": Rng.create(seed_value),
 	}
 	state.merge(Phases.initial())
+	state.merge(Resources.initial())
 	return state
 
 
