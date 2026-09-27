@@ -1,7 +1,7 @@
 # 0012 - Debug overlay
 
 - **Phase:** 0 - Foundation
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0005, 0006
 - **Likely files:** src/ui/debug_overlay.gd
 

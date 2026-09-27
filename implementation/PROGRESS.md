@@ -538,3 +538,46 @@ Notes:
   belt-and-braces rather than a necessity, and it stays that way - a test that
   depends on autoload ordering is a test that breaks for reasons unrelated to
   what it checks.
+
+## 0012 - Debug overlay - done 2026-09-27
+
+What changed: F3 puts up what you actually want while tuning - phase, day,
+night, every tick counter, the seed and the live RNG words, fps, speed, ticks
+per frame, what the last batch cost in microseconds per tick, what the player
+holds, and what is standing on the farm by kind. **Phase 0 is finished.**
+
+Files: src/ui/debug_overlay.gd, src/ui/sim_driver.gd, src/ui/main.gd,
+scenes/Main.tscn, project.godot, src/tools/input_check.gd
+
+Verify: PASS - 9 passed, 1 skipped, 12s. 205 asserts, **28 cases, 0 failed**.
+Both hashes unchanged, which is one of this task's done-whens.
+
+Notes:
+
+- **It reads and never writes**, so "toggling it does not move the hash" is
+  true by construction. Checked anyway, with the driver frozen first so that
+  the ordinary tick is not the thing doing the moving - "by construction" is
+  exactly how view layers start writing to state.
+- **It is not in a release build at all.** `_ready()` frees the node when
+  `OS.is_debug_build()` is false, so there is no key combination to find and no
+  per-frame cost in a shipped game.
+- `SimDriver` now measures what a frame's ticks cost, because it is the only
+  thing that knows how many ran. A real clock read, which is fine: it is not a
+  rule. `input_check` asserts the number is a measurement and not a decorative
+  zero - it reads about 8 microseconds a tick on a farm of 100 occupants.
+- **Half a done-when is deferred, and it is worth saying so plainly.** "It
+  shows the tick cost climbing when a hundred zombies are alive" cannot be
+  checked until task 0025 provides a hundred zombies. The counter is live and
+  asserted; task 0102 is where the number becomes a gate.
+- **Two things came from looking at it rather than from the asserts.** Nodes
+  added in code without a `name` get an internal `@PanelContainer@2` that
+  nothing can find, which broke the input case until they were named - and
+  naming them is the whole reason `require_control` can be loud. And Godot's
+  default panel is nearly transparent, so the readout was sitting unreadable on
+  top of the title; it has its own opaque style now rather than the game theme,
+  because a debug overlay should look the same whatever the theme is doing.
+- `debug_overlay` is the first named input action (F3). Task 0095 makes the set
+  rebindable; the point today is that no keycode is written at a call site.
+- The overlay is handed its driver by the screen that owns it rather than going
+  looking for one, so two simulations on screen would each be described by
+  their own.

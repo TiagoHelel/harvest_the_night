@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`##......................`  **11 / 108 done**
+`###.....................`  **12 / 108 done**
 
-0 doing / 97 todo / 0 blocked across 9 phases.
+0 doing / 96 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0012 - Debug overlay**. The whole of what is left is
+First up: **0013 - The world renders**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,23 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-97 task(s) left, the ready ones first, then what they
+96 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0012 - Debug overlay
-
-Ready to pick up.  Likely files: `src/ui/debug_overlay.gd`.
-
-The thing you actually want while tuning: what phase, what tick, what seed, how many entities and what the frame costs.
-
-- Toggled by an input action, off by default, never in the release build path
-- Shows phase, day, night, tick, seed, resource totals and live entity counts
-- Shows ticks simulated per frame and the millisecond cost of the last tick batch
-- Draws over everything and never steals mouse input
-
-  - done when: Toggling it does not move the determinism hash
-  - done when: It shows the tick cost climbing when a hundred zombies are alive
 
 ### 0013 - The world renders
 
@@ -1490,7 +1476,7 @@ For the player who beat the Giant and wants to know how far the farm goes. Cheap
   - done when: Night 25 is generated and playable
   - done when: The same seed generates the same night 25 twice
 
-## 0 - Foundation  (11/12)
+## 0 - Foundation  (12/12)
 
 - [x] **0001** [Godot project scaffold](prompts/0001-project-scaffold.md)
 - [x] **0002** [Fixed-timestep deterministic simulation](prompts/0002-sim-tick.md)
@@ -1503,7 +1489,7 @@ For the player who beat the Giant and wants to know how far the farm goes. Cheap
 - [x] **0009** [Settings singleton](prompts/0009-settings.md)
 - [x] **0010** [Save the profile and the run](prompts/0010-save.md)
 - [x] **0011** [input_check harness](prompts/0011-input-check.md)
-- [ ] **0012** [Debug overlay](prompts/0012-debug-overlay.md)
+- [x] **0012** [Debug overlay](prompts/0012-debug-overlay.md)
 
 ## 1 - The first playable build  (0/15)
 

@@ -17,6 +17,7 @@ const BOOT_SEED := 20260927
 @onready var _pitch: Label = %Pitch
 @onready var _clock: Label = %Clock
 @onready var _driver: SimDriver = %SimDriver
+@onready var _debug: CanvasLayer = %DebugOverlay
 
 
 func _ready() -> void:
@@ -27,6 +28,12 @@ func _ready() -> void:
 
 	_driver.ticked.connect(_on_ticked)
 	_driver.start(BOOT_SEED)
+
+	# The overlay is handed its driver rather than going looking for one: a
+	# screen owns its simulation, and two on screen at once would still each
+	# describe their own.
+	if is_instance_valid(_debug) and _debug.has_method("watch"):
+		_debug.watch(_driver)
 	_show(_driver.state)
 
 

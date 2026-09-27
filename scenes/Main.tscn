@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://src/ui/main.gd" id="1_main"]
 [ext_resource type="Script" path="res://src/ui/sim_driver.gd" id="2_driver"]
+[ext_resource type="Script" path="res://src/ui/debug_overlay.gd" id="3_debug"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -68,3 +69,7 @@ horizontal_alignment = 1
 [node name="SimDriver" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("2_driver")
+
+[node name="DebugOverlay" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_debug")

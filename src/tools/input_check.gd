@@ -34,7 +34,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 1
+const CASES := 2
 
 var passed := 0
 var failed := 0
@@ -65,6 +65,7 @@ func _process(delta: float) -> bool:
 
 func _run() -> void:
 	await _case_0011_harness()
+	await _case_0012_debug_overlay()
 	_finish()
 
 
@@ -155,6 +156,83 @@ func _case_0011_harness() -> void:
 
 	await close_scene()
 	expect(_scene == null, "and the scene is torn down for the next case")
+
+	_completed += 1     # last line: an abandoned case never gets here
+
+
+## 0012 - the overlay: it toggles, it reads, and it changes nothing.
+func _case_0012_debug_overlay() -> void:
+	await open_scene(MAIN_SCENE)
+
+	var overlay := locate_control("DebugOverlay")
+	expect(overlay != null,
+		"the debug overlay is present in a debug build - if this fails in a "
+		+ "release build that is correct, it frees itself")
+	if overlay == null:
+		_completed += 1
+		await close_scene()
+		return
+
+	expect(not overlay.visible, "it is off by default - a player never sees it")
+
+	var driver: SimDriver = require_control("SimDriver")
+	await frames(10)
+
+	# **Toggling it cannot move the game.** The overlay reads the state and
+	# never writes to it, so this is true by construction - and checked anyway,
+	# because "by construction" is how view layers start writing to state.
+	var before := State.hash_of(driver.state)
+	var tick_before := int(driver.state["tick"])
+	driver.running = false                  # freeze, so the tick is not the
+	await frames(2)                         # thing that moved the hash
+
+	await tap_key(KEY_F3)
+	expect(overlay.visible, "F3 turns it on")
+	await frames(5)
+	await tap_key(KEY_F3)
+	expect(not overlay.visible, "and F3 turns it off again")
+
+	expect(State.hash_of(driver.state) == before,
+		"toggling it did not move the determinism hash",
+		"%d vs %d" % [State.hash_of(driver.state), before])
+	expect(int(driver.state["tick"]) == tick_before,
+		"nor advance the simulation")
+	driver.running = true
+
+	# It says the true things about the game it is watching.
+	await tap_key(KEY_F3)
+	await frames(12)
+	var label: Label = overlay.find_child("Readout", true, false)
+	expect(label != null and not label.text.is_empty(), "it has something to say")
+	if label != null:
+		expect(label.text.contains("DAY"), "it names the phase", label.text)
+		expect(label.text.contains("seed"), "and the seed")
+		expect(label.text.contains("us/tick"), "and what a tick costs")
+		expect(label.text.contains("tree"), "and what is standing on the farm")
+
+	# The cost is measured, not printed as a decorative zero. The other half of
+	# this task's done-when - that it climbs with a hundred zombies on the farm
+	# - has to wait for task 0025 to give us a hundred zombies.
+	expect(driver.peak_usec > 0, "the tick cost is a real measurement",
+		"%d us peak over %d ticks" % [driver.peak_usec, driver.last_ticks])
+
+	# **It never steals the mouse.** A probe under where the overlay draws must
+	# still receive the click.
+	var probe := Button.new()
+	probe.name = "UnderOverlay"
+	probe.position = Vector2(8, 8)          # the overlay sits at 4,4
+	probe.size = Vector2(60, 20)
+	var clicks := [0]
+	probe.pressed.connect(func() -> void: clicks[0] += 1)
+	_scene.add_child(probe)
+	await frames(2)
+	await click_at(Vector2(20, 14))
+	expect(clicks[0] == 1,
+		"a click lands on what is underneath the overlay, not on the overlay",
+		str(clicks[0]))
+
+	await tap_key(KEY_F3)
+	await close_scene()
 
 	_completed += 1     # last line: an abandoned case never gets here
 
