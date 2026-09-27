@@ -41,7 +41,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 21
+const CASES := 22
 
 var passed := 0
 var failed := 0
@@ -92,6 +92,7 @@ func _run() -> void:
 	await _case_0038_away()
 	await _case_0039_clock()
 	await _case_0040_shop()
+	await _case_0041_tutorial()
 	_finish()
 
 
@@ -2237,6 +2238,96 @@ func _case_0040_shop() -> void:
 	await until(func() -> bool: return not Shop.is_open(state),
 		"the stall to close")
 	expect(not Shop.is_open(state), "escape leaves the stall")
+
+	await close_scene()
+	_completed += 1     # last line: an abandoned case never gets here
+
+
+## 0041 - five lines that follow the thing they are about.
+func _case_0041_tutorial() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var prompt: TutorialPrompt = require_control("TutorialPrompt")
+	if driver == null or prompt == null:
+		_completed += 1
+		await close_scene()
+		return
+
+	var state := driver.state
+	await frames(3)
+
+	# **It is up on day one**, on the first line.
+	expect(prompt.visible, "day one starts with something to read")
+	expect(prompt.showing() == &"chop", "and it is about the trees",
+		str(prompt.showing()))
+	var line: Label = require_control("TutorialLine")
+	expect(line != null and not line.text.strip_edges().is_empty(),
+		"there is a line of text", line.text if line else "")
+
+	# **It sits over the thing**, not in a corner - and on the screen.
+	var arrow: Label = require_control("TutorialArrow")
+	expect(arrow != null and arrow.visible, "with a pointer under it")
+	var box := line.get_global_rect()
+	expect(box.position.x >= 0.0 and box.end.x <= 480.0
+		and box.position.y >= 0.0 and box.end.y <= 270.0,
+		"and all of it is on the screen", str(box))
+	var first_at := arrow.position
+
+	# **It follows.** Move the farmer and the pointer goes with the nearest
+	# tree, because which tree is nearest is a fact about where you are.
+	var trees := Farm.cells_with(state, &"tree")
+	var far: Vector2i = trees[trees.size() - 1]
+	_stand_at(state, _free_cell_beside(state, far), Player.SOUTH)
+	await frames(3)
+	expect(arrow.position != first_at,
+		"walking across the farm moves the pointer",
+		"%s then %s" % [first_at, arrow.position])
+
+	# **Doing the thing makes it go away**, and the next one appears.
+	Resources.gain(state, {GameData.WOOD: 5})
+	await until(func() -> bool: return prompt.showing() == &"plant",
+		"the second line")
+	expect(prompt.showing() == &"plant",
+		"chopping moves it on to the sowing", str(prompt.showing()))
+
+	# **It takes nothing away.** The line is up and every key still works.
+	var before := int(state["day_tick"])
+	await hold_key(KEY_B, 4)
+	await until(func() -> bool: return Building.is_active(state),
+		"build mode with the prompt up")
+	expect(Building.is_active(state),
+		"build mode opens while the tutorial is talking")
+	await hold_key(KEY_B, 4)
+	await until(func() -> bool: return not Building.is_active(state),
+		"build mode to close")
+	expect(int(state["day_tick"]) > before,
+		"and the day ran the whole time", str(int(state["day_tick"]) - before))
+
+	# **Out of order is fine.** Skip straight to the last thing the game has
+	# not asked for yet and watch the lines behind it disappear.
+	Resources.gain(state, {GameData.WOOD: 200, GameData.IRON: 200,
+		GameData.STONE: 200})
+	var spot := Vector2i(-1, -1)
+	for y in range(4, 12):
+		for x in range(20, 32):
+			if Farm.buildable(state, Vector2i(x, y)):
+				spot = Vector2i(x, y)
+				break
+		if spot != Vector2i(-1, -1):
+			break
+	expect(Building.place(state, &"gun_tower", spot),
+		"a tower goes down out of order")
+	await until(func() -> bool: return Tutorial.is_done(state, &"build"),
+		"the build line to tick itself off")
+	expect(Tutorial.is_done(state, &"build"),
+		"and the line about building is simply gone, unread")
+
+	# **It goes away with the day.**
+	await hold_key(KEY_N, 4)
+	await until(func() -> bool: return int(state["phase"]) != Phases.DAY,
+		"the night")
+	await frames(3)
+	expect(not prompt.visible, "and nothing is being taught at night")
 
 	await close_scene()
 	_completed += 1     # last line: an abandoned case never gets here

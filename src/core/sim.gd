@@ -88,6 +88,8 @@ static func _tick_day(state: Dictionary) -> void:
 	Fishing.tick(state, Player.cell(state))
 	Gathering.tick(state)
 	Livestock.tick(state)
+	# Watching, never gating: it can only notice that something happened.
+	Tutorial.tick(state)
 	Crafting.tick(state)
 	Player.tick(state)
 

@@ -608,6 +608,14 @@ const RESOURCE_GROUPS: Array = [
 const EMPTY_RELOAD_PERCENT := 300       # LEVER: percent of normal, 150-500
 const EMPTY_DAMAGE_PERCENT := 30        # LEVER: percent of normal, 10-60
 
+## How much day one is allowed to say.
+##
+## The task allows seven lines; five is what it takes. The length is here too
+## because a line that wraps is two lines wearing a hat.
+const MAX_TUTORIAL_LINES := 7           # LEVER: lines, 3-9
+const MAX_TUTORIAL_LINE_LENGTH := 76    # LEVER: characters, 40-90
+
+
 ## What the stall has of each thing when the day starts.
 ##
 ## **Small, and it refreshes once a day rather than once a visit.** A stall
@@ -623,6 +631,31 @@ const DAILY_STOCK: Dictionary = {        # LEVER: units a day, 2-40
 	CORN: 8,
 	CARROT: 12,
 }
+
+
+## Day one, in five lines.
+##
+## **Five, and the task allows seven.** Every line has to earn its place: it
+## names the thing, says which key, and stops. A tutorial the player reads is
+## already a tutorial that is too long, so these are written to be understood
+## from the corner of the eye while walking towards the thing they are stuck
+## to.
+##
+## `src/core/tutorial.gd` decides when each is finished, from the state, and
+## `src/ui/` draws it over the cell it is about. Nothing here locks anything:
+## a player who ignores all five reaches exactly the same night.
+##
+## Task 0097 translates these; until then they are English like everything
+## else, and they are the only player-facing prose in `game_data.gd`.
+const TUTORIAL: Array = [
+	{"id": &"chop", "line": "Wood is in the trees. Stand at one and hold SPACE."},
+	{"id": &"plant", "line": "Soil takes a seed. SPACE turns it, SPACE sows it."},
+	{"id": &"craft", "line": "The workshop turns what you gathered into walls."},
+	{"id": &"build", "line": "B shows what can go on the farm. Put it between "
+		+ "the house and the dark."},
+	{"id": &"night", "line": "The night comes when you send for it, and not "
+		+ "before. N, or the button."},
+]
 
 
 ## What repairing costs, per hit point put back.
@@ -902,6 +935,7 @@ static func validate() -> Array:
 	errors.append_array(check_ammo(DEFENCES, RECIPES))
 	errors.append_array(check_groups(RESOURCE_GROUPS, RESOURCES))
 	errors.append_array(check_stall(DAILY_STOCK, SELL_PRICE, BUY_MARKUP))
+	errors.append_array(check_tutorial(TUTORIAL))
 
 	for res in sorted_names(REPAIR_COST_PER_HP.keys()):
 		if not RESOURCES.has(res):
@@ -1382,6 +1416,29 @@ static func check_stall(stock: Dictionary, prices: Dictionary,
 	return errors
 
 
+## Day one's lines. Short, few, and each about something the game has.
+static func check_tutorial(steps: Array) -> Array:
+	var errors: Array = []
+	var seen: Dictionary = {}
+	if steps.size() > MAX_TUTORIAL_LINES:
+		errors.append("day one has %d lines and may have %d"
+			% [steps.size(), MAX_TUTORIAL_LINES])
+	for entry in steps:
+		var step: Dictionary = entry
+		var id := StringName(step["id"])
+		if seen.has(id):
+			errors.append("tutorial step '%s' appears twice" % id)
+		seen[id] = true
+		var line: String = step["line"]
+		if line.strip_edges().is_empty():
+			errors.append("tutorial step '%s' says nothing" % id)
+		if line.length() > MAX_TUTORIAL_LINE_LENGTH:
+			errors.append(("tutorial step '%s' is %d characters and may be %d - "
+				+ "a line nobody reads at a glance is a line nobody reads")
+				% [id, line.length(), MAX_TUTORIAL_LINE_LENGTH])
+	return errors
+
+
 static func check_nights(nights: Array) -> Array:
 	var errors: Array = []
 	for n in nights.size():
@@ -1421,6 +1478,7 @@ static func digest() -> int:
 		"starting": STARTING_RESOURCES,
 		"trade": [BUY_MARKUP, SELL_BACK_FRACTION],
 		"stock": DAILY_STOCK,
+		"tutorial": TUTORIAL,
 		"crops": CROPS,
 		"water": [WATER_GROWTH_BONUS, WATER_CAN_CAPACITY,
 			WATER_LASTS_UNTIL_NIGHT],

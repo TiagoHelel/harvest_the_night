@@ -1,7 +1,7 @@
 # 0041 - The first day teaches itself
 
 - **Phase:** 2 - The full day
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0039, 0040
 - **Likely files:** src/core/tutorial.gd
 

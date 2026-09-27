@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`#########...............`  **40 / 108 done**
+`#########...............`  **41 / 108 done**
 
-0 doing / 68 todo / 0 blocked across 9 phases.
+0 doing / 67 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0041 - The first day teaches itself**. The whole of what is left is
+First up: **0042 - Data-driven defences**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,24 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-68 task(s) left, the ready ones first, then what they
+67 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0041 - The first day teaches itself
-
-Ready to pick up.  Likely files: `src/core/tutorial.gd`.
-
-Day 1 should teach chop, plant, craft, build and the night button without a wall of text or a cage.
-
-- Prompts appear on the thing they describe and disappear when it is done
-- Nothing is locked: a player who already knows can ignore all of it
-- Night 1 stays the tutorial night the design document asks for - a handful of basic zombies
-- Seven lines of text at most in the whole first day
-- A profile flag so it never shows twice
-
-  - done when: Someone who has not seen the game reaches the first night without being told anything out loud
-  - done when: Skipping every prompt still leaves a winnable night 1
 
 ### 0042 - Data-driven defences
 
@@ -691,7 +676,7 @@ Something recognisable in a taskbar and on an itch page, and two seconds before 
 
 ### 0101 - Onboarding in seven lines
 
-Waits on 0041, 0097.  Likely files: `src/core/tutorial.gd`.
+Waits on 0097.  Likely files: `src/core/tutorial.gd`.
 
 A stranger reaches night 1 and understands the loop, with no more text than the design document allows.
 
@@ -1082,7 +1067,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0026** [The tower kills the zombie](prompts/0026-combat.md)
 - [x] **0027** [Three waves, a result screen, and back to the farm](prompts/0027-first-loop.md)
 
-## 2 - The full day  (13/14)
+## 2 - The full day  (14/14)
 
 - [x] **0028** [Corn and carrot](prompts/0028-three-crops.md)
 - [x] **0029** [Growth stages and watering](prompts/0029-growth-stages.md)
@@ -1097,7 +1082,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0038** [Production runs while you are elsewhere](prompts/0038-idle-production.md)
 - [x] **0039** [The day clock and dusk](prompts/0039-day-clock.md)
 - [x] **0040** [The shop grows](prompts/0040-shop-full.md)
-- [ ] **0041** [The first day teaches itself](prompts/0041-tutorial-day.md)
+- [x] **0041** [The first day teaches itself](prompts/0041-tutorial-day.md)
 
 ## 3 - The full night  (0/17)
 
@@ -1175,7 +1160,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 
 ## 8 - Ship the MVP  (0/8)
 
-- [ ] **0101** [Onboarding in seven lines](prompts/0101-onboarding.md) - needs 0041, 0097
+- [ ] **0101** [Onboarding in seven lines](prompts/0101-onboarding.md) - needs 0097
 - [ ] **0102** [A performance budget](prompts/0102-perf-budget.md) - needs 0060
 - [ ] **0103** [Crash and error reporting](prompts/0103-error-report.md)
 - [ ] **0104** [Saves survive an update](prompts/0104-save-compat.md) - needs 0062

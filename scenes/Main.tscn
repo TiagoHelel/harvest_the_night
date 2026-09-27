@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3]
+[gd_scene load_steps=12 format=3]
 
 [ext_resource type="Script" path="res://src/ui/main.gd" id="1_main"]
 [ext_resource type="Script" path="res://src/ui/sim_driver.gd" id="2_driver"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://src/ui/result_screen.gd" id="8_result"]
 [ext_resource type="Script" path="res://src/ui/inventory_panel.gd" id="9_inventory"]
 [ext_resource type="Script" path="res://src/ui/workshop_panel.gd" id="10_workshop"]
+[ext_resource type="Script" path="res://src/ui/tutorial_prompt.gd" id="11_tutorial"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_main")
@@ -60,6 +61,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("5_shop")
+
+[node name="TutorialPrompt" type="Control" parent="UI/Screen"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("11_tutorial")
 
 [node name="WorkshopPanel" type="Control" parent="UI/Screen"]
 unique_name_in_owner = true

@@ -64,6 +64,11 @@ static func begin_preparation(state: Dictionary) -> bool:
 	# do once on day one and never again.
 	Farming.dry_out(state)
 	_enter(state, PREPARATION)
+	# **After the phase changes**, because the last line of day one is "send
+	# for the night" and the only way to know it was sent for is that it is no
+	# longer day. Ticking before the change asked whether the night had
+	# started and was told no, every time.
+	Tutorial.tick(state)
 	return true
 
 

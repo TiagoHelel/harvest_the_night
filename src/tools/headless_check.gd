@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 33
+const GROUPS := 34
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -97,6 +97,7 @@ func _run() -> void:
 	_task_0038_idle()
 	_task_0039_clock()
 	_task_0040_shop()
+	_task_0041_tutorial()
 
 
 func _finish() -> void:
@@ -5042,5 +5043,168 @@ func _task_0040_shop() -> void:
 	expect(not Shop.show_tab(state, &"haggle"),
 		"there is no third tab")
 	expect(Shop.tab(state) == Shop.BUY, "and asking for one changes nothing")
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## 0041 - day one teaches itself, and teaches nothing by force.
+func _task_0041_tutorial() -> void:
+	# **Five lines, and seven allowed.** Short enough to read walking.
+	var steps := Tutorial.steps()
+	expect(steps.size() <= GameData.MAX_TUTORIAL_LINES,
+		"day one says no more than the task allows",
+		"%d lines" % steps.size())
+	expect(GameData.check_tutorial(steps).is_empty(),
+		"and the shipped lines pass their own check",
+		str(GameData.check_tutorial(steps)))
+	var longest := 0
+	for entry in steps:
+		longest = maxi(longest, (entry as Dictionary)["line"].length())
+	print("  day one: %d lines, longest %d characters"
+		% [steps.size(), longest])
+
+	var wordy: Array = steps.duplicate(true)
+	(wordy[0] as Dictionary)["line"] = "x".repeat(200)
+	expect(not GameData.check_tutorial(wordy).is_empty(),
+		"a line nobody could read at a glance is refused")
+	var twice: Array = steps.duplicate(true)
+	twice.append((steps[0] as Dictionary).duplicate())
+	expect(not GameData.check_tutorial(twice).is_empty(),
+		"and the same step twice")
+	var crowded: Array = []
+	for i in GameData.MAX_TUTORIAL_LINES + 1:
+		crowded.append({"id": StringName("x%d" % i), "line": "a line"})
+	expect(not GameData.check_tutorial(crowded).is_empty(),
+		"and one line too many")
+
+	# **It teaches the five things the task names.**
+	var ids: Array = []
+	for entry in steps:
+		ids.append(StringName((entry as Dictionary)["id"]))
+	for wanted in [&"chop", &"plant", &"craft", &"build", &"night"]:
+		expect(ids.has(wanted), "day one covers %s" % wanted, str(ids))
+
+	# **It starts at the beginning and points at something.**
+	var state := State.create(2300)
+	expect(Tutorial.progress(state) == 0, "nothing done yet")
+	expect(Tutorial.current(state)["id"] == &"chop",
+		"the first line is about the trees",
+		str(Tutorial.current(state)))
+	expect(Tutorial.points_at(state) != Tutorial.NOWHERE,
+		"and it points at a tile", str(Tutorial.points_at(state)))
+	expect(Farm.occupant(state, Tutorial.points_at(state)).get("id", &"")
+		== &"tree", "which has a tree on it",
+		str(Farm.occupant(state, Tutorial.points_at(state))))
+
+	# It points at the *nearest* one, so it is a label and not a treasure hunt.
+	var trees := Farm.cells_with(state, &"tree")
+	var here := Player.cell(state)
+	var pointed := Tutorial.points_at(state)
+	var closest := 1 << 30
+	for found in trees:
+		var cell: Vector2i = found
+		closest = mini(closest, absi(cell.x - here.x) + absi(cell.y - here.y))
+	expect(absi(pointed.x - here.x) + absi(pointed.y - here.y) == closest,
+		"the nearest one", "%s from %s" % [pointed, here])
+
+	# **A step finishes when the thing happens**, however it happened - which
+	# is what makes following the prompts and ignoring them the same game.
+	Resources.gain(state, {GameData.WOOD: 5})
+	Sim.advance(state, 2)
+	expect(Tutorial.is_done(state, &"chop"),
+		"wood arriving finishes the first line, whatever brought it")
+	expect(Tutorial.current(state)["id"] == &"plant",
+		"and the second one is up", str(Tutorial.current(state)))
+	expect(Tutorial.points_at(state) != Tutorial.NOWHERE,
+		"pointing at bare soil")
+	expect(Farm.terrain_at(state, Tutorial.points_at(state))
+		== Farm.Terrain.SOIL, "which is soil",
+		str(Tutorial.points_at(state)))
+
+	# **A finished step stays finished.**
+	Resources.spend(state, GameData.WOOD,
+		Resources.amount(state, GameData.WOOD))
+	Sim.advance(state, 2)
+	expect(Tutorial.is_done(state, &"chop"),
+		"selling the wood again does not put the line back")
+
+	# **Nothing is locked.** The done-when: skipping every prompt leaves the
+	# game exactly as playable. Run the whole of day one **backwards** - the
+	# night button first, which is the last line - and check it all works.
+	var rebel := State.create(2301)
+	Resources.gain(rebel, {GameData.WOOD: 200, GameData.STONE: 200,
+		GameData.IRON: 200, GameData.MONEY: 200})
+	expect(Tutorial.current(rebel)["id"] == &"chop",
+		"the first line is up and being ignored")
+
+	var spot := _room_for(rebel, Vector2i(1, 1))
+	expect(Building.place(rebel, &"gun_tower", spot),
+		"a tower goes down while the game is still saying 'chop a tree'")
+	var bench := Building.anchor_of(rebel,
+		Farm.cells_with(rebel, &"workshop")[0])
+	expect(Crafting.enqueue(rebel, bench, &"wall_kit"),
+		"and the bench takes a job out of order")
+	var plot := _a_plot(rebel)
+	Farming.act(rebel, plot)
+	Farming.act(rebel, plot)
+	expect(Farming.crop_on(rebel, plot) != &"",
+		"and a seed goes in the ground")
+	Sim.advance(rebel, 2)
+	expect(Tutorial.progress(rebel) >= 4,
+		"four of the five lines are simply gone, unread",
+		str(Tutorial.progress(rebel)))
+
+	# **And night one is still winnable for the player who read nothing.** The
+	# other done-when, driven to the payout.
+	var armed := State.create(2302)
+	Resources.gain(armed, {GameData.WOOD: 200, GameData.IRON: 200})
+	var placed := 0
+	for y in [7, 9, 11]:
+		for x in range(22, 32):
+			if placed >= 4:
+				break
+			if Building.place(armed, &"gun_tower", Vector2i(x, y)):
+				placed += 1
+	expect(placed == 4, "four towers, which is a day's iron", str(placed))
+	expect(Tutorial.progress(armed) == 0,
+		"and not a single prompt has been finished on purpose",
+		str(Tutorial.progress(armed)))
+
+	(armed["intent"] as Dictionary)["begin_night"] = true
+	Sim.advance(armed, 1)
+	Sim.advance(armed, GameData.PREPARATION_TICKS)
+	for _t in 12000:
+		Sim.advance(armed, 1)
+		if int(armed["phase"]) != Phases.NIGHT:
+			break
+	expect(int(armed["phase"]) == Phases.RESULT, "the night resolves",
+		Phases.name_of(int(armed["phase"])))
+	var payout := Rewards.last(armed)
+	expect(bool(payout["survived"]),
+		"and night one is survived by somebody who read nothing",
+		str(payout))
+	print("  night one, having ignored every prompt: %s, house %d/%d"
+		% ["survived" if bool(payout["survived"]) else "lost",
+			int(payout["house_hp"]), GameData.HOUSE_HP])
+
+	# **Night one is still the tutorial night.** A handful of basic zombies.
+	var wave := Waves.table(1)
+	expect(Waves.size_of(1) <= 16, "night one is a handful",
+		str(Waves.size_of(1)))
+	for row in wave:
+		expect(StringName((row as Array)[0]) == &"walker",
+			"and all of them the basic kind", str(row))
+
+	# **The last line finishes when the night is sent for**, which is the one
+	# step the player cannot do by accident.
+	var sender := State.create(2303)
+	for id in [&"chop", &"plant", &"craft", &"build"]:
+		((sender["tutorial"] as Dictionary)["done"] as Array).append(id)
+	expect(Tutorial.current(sender)["id"] == &"night",
+		"the last line is about the button", str(Tutorial.current(sender)))
+	expect(not Tutorial.is_finished(sender), "and it is not finished yet")
+	Phases.begin_preparation(sender)
+	expect(Tutorial.is_finished(sender),
+		"sending for the night finishes day one")
 
 	_completed += 1     # last line: an abandoned group never gets here

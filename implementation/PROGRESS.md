@@ -2773,3 +2773,96 @@ full buy tab fits without scrolling.
 
 `python tools/verify.py` prints PASS: 1206 asserts, 352 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+
+## 0041 - The first day teaches itself - done 2026-09-27
+
+Five lines, each stuck to the thing it is about, and not one of them in the
+way.
+
+**What changed.** New `src/core/tutorial.gd` and `src/ui/tutorial_prompt.gd`.
+Day one shows a line over the nearest tree, then the bare plot, then the
+workshop, then the ground in front of the house, then the night button - and
+each disappears the moment the thing happens.
+
+Files: `src/core/tutorial.gd` (new), `src/ui/tutorial_prompt.gd` (new),
+`game_data.gd`, `state.gd`, `sim.gd`, `phases.gd`, `scenes/Main.tscn`,
+`src/ui/main.gd`, both test tools.
+Verify: 1242 headless / 364 input / both hashes moved on purpose, below.
+
+### It watches; it never gates
+
+Nothing in either file can stop the player doing anything. There is no "chop a
+tree before you may plant", no greyed button, no cage - a step is finished
+when the **state** says the thing happened, whether the player read the line
+or found it on their own.
+
+That is what makes the second done-when true rather than hopeful: removing
+every prompt changes nothing about what is possible. The assert for it plays
+day one **backwards** - a tower down, a job queued and a seed sown while the
+game is still saying "chop a tree" - and then drives night one to the payout
+with four towers and not a single prompt read on purpose. It survives,
+house 100/100.
+
+### Which is how the first real bug turned up
+
+`tick()` checked only the **current** step, so a player who built a tower
+while the first line was still up stayed stuck on the tree: four things
+learned and one line of credit for them. The suggested order is a suggestion,
+so it now sweeps every unfinished step each tick. A prompt you have already
+satisfied should never be on screen, whatever order you got there in.
+
+The second was quieter. `Tutorial.tick()` went into `begin_preparation()`
+*before* `_enter(state, PREPARATION)`, and the last step asks "is it still
+day?" - so it asked whether the night had started and was told no, every
+single time. It ticks after the phase changes now.
+
+### Five lines, and the check that keeps it five
+
+`GameData.TUTORIAL` is the whole script, and `check_tutorial()` refuses more
+than `MAX_TUTORIAL_LINES` (seven, as the task allows - five is what it took),
+a repeated step, an empty line, or one longer than 76 characters. The longest
+shipped line is 71.
+
+That last limit is the one worth having: a line that wraps is two lines
+wearing a hat, and a tutorial the player *reads* is already too long. These
+are written to be taken in from the corner of the eye on the way to the thing
+they are stuck to.
+
+### The flag, and a parse trap
+
+"Never shows twice" is `gameplay/tutorial_seen`, which was already sitting in
+`Settings.DEFAULTS` waiting. `Settings` is an autoload, so `src/core/` may not
+touch it: `Tutorial` answers `is_finished()` and the screen decides whether to
+have asked at all.
+
+**Reaching it as `Settings.get_bool(...)` fails the parse row.** `verify.py`
+checks every script on its own with `--check-only`, where no autoload is
+registered - so a file that works perfectly at runtime is a compile error to
+the checker. `get_node_or_null("/root/Settings")` with a null guard parses,
+and has the side benefit of surviving a test scene with no settings service,
+which is what `input_check` builds.
+
+### Notes
+
+- The prompt is clamped to the screen. The nearest tree can be at the edge of
+  the view, and a line half off the side is a line nobody reads.
+- Night one is unchanged and asserted to stay what `design.md` asks for: at
+  most a handful, all of them the basic kind.
+- The pointer follows. Walking across the farm moves it to whichever tree is
+  now nearest, because which tree is nearest is a fact about where the player
+  is rather than about the tutorial.
+
+### Hashes
+
+| | from | to | why |
+|---|---|---|---|
+| sim hash | `2555127123` | `1534932614` | the state gained `tutorial`, and the scenario's farmer finishes several of the steps in passing |
+| data hash | `1783085191` | `1228581114` | `TUTORIAL` is new and is in `digest()` |
+
+`python tools/verify.py` prints PASS: 1242 asserts, 364 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.
+
+**This closes phase 2.** The full day is done: three crops, watering, fishing,
+iron, oil, energy, cooking, ammunition, the inventory, the queue, idle
+production, the clock, the shop and now day one teaching itself. Phase 3 is the
+full night.
