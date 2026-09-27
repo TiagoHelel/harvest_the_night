@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`#######.................`  **30 / 108 done**
+`#######.................`  **31 / 108 done**
 
-0 doing / 78 todo / 0 blocked across 9 phases.
+0 doing / 77 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0031 - Iron from the rock face**. The whole of what is left is
+First up: **0032 - Oil**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,24 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-78 task(s) left, the ready ones first, then what they
+77 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0031 - Iron from the rock face
-
-Ready to pick up.  Likely files: `src/core/gathering.gd, src/core/game_data.gd`.
-
-The resource that gates towers. Iron should feel like the thing you are always a little short of.
-
-- Iron comes only from the rock face region, and only from ore nodes, not loose rocks
-- Ore takes longer per hit than stone and yields less
-- Ore respawn is slower than stone respawn and both are levers
-- A day's mining should buy roughly one tower - state the arithmetic in the journal
-- Iron is not sellable at a profit against what a tower costs
-
-  - done when: Mining a full day yields iron inside the range the journal claims
-  - done when: The rock face cannot be exhausted permanently
 
 ### 0032 - Oil
 
@@ -58,6 +43,21 @@ Fire needs fuel. Oil is pressed rather than gathered, which makes it the first r
 
   - done when: Oil can be produced and sold, and the sale is a real temptation against the flamethrower cost
   - done when: `headless_check` runs the press for a known number of ticks
+
+### 0033 - The generator and energy
+
+Ready to pick up.  Likely files: `src/core/power.gd`.
+
+Energy, the resource on the reference sheet that gates the advanced structures and makes placement matter.
+
+- A generator burns a fuel over ticks and produces energy
+- Energy is a rate, not a stockpile: structures draw it while they run
+- A structure with no power runs at a reduced rate rather than switching off - degraded, not dead
+- The HUD shows supply against draw
+- Generator output, fuel burn and each structure's draw are levers
+
+  - done when: Building one structure too many visibly slows everything rather than stopping it
+  - done when: Running out of fuel mid-night degrades the defence and the night still resolves
 
 ### 0034 - Cooking: food and meat
 
@@ -255,20 +255,20 @@ When it breaks on someone else's machine, get enough to fix it without them.
   - done when: A deliberate crash produces a report with the seed and the tick
   - done when: The run is still loadable afterwards
 
-### 0033 - The generator and energy
+### 0035 - Gunpowder and ammunition
 
-Waits on 0031.  Likely files: `src/core/power.gd`.
+Waits on 0032, 0033.  Likely files: `src/core/crafting.gd, src/core/towers.gd`.
 
-Energy, the resource on the reference sheet that gates the advanced structures and makes placement matter.
+Towers that consume something. The clearest possible version of 'what you made today decides what tonight can do'.
 
-- A generator burns a fuel over ticks and produces energy
-- Energy is a rate, not a stockpile: structures draw it while they run
-- A structure with no power runs at a reduced rate rather than switching off - degraded, not dead
-- The HUD shows supply against draw
-- Generator output, fuel burn and each structure's draw are levers
+- Gunpowder from corn and oil; incendiary rounds from oil and wood
+- A tower draws from a shared ammunition pool at a rate that is a lever
+- Out of ammunition means a much slower basic shot, never a silent dead tower
+- The night HUD shows the pool draining
+- Ammunition left over carries into the next night
 
-  - done when: Building one structure too many visibly slows everything rather than stopping it
-  - done when: Running out of fuel mid-night degrades the defence and the night still resolves
+  - done when: A night fought with no gunpowder is survivable but clearly worse
+  - done when: The pool drains at the rate the levers claim over a scripted night
 
 ### 0037 - The workshop queue
 
@@ -523,21 +523,6 @@ One warm loop for the farm, one cold one for the night, and a crossfade on the r
 
   - done when: The loop point is inaudible
   - done when: The crossfade lands with the transition, not before or after it
-
-### 0035 - Gunpowder and ammunition
-
-Waits on 0032, 0033.  Likely files: `src/core/crafting.gd, src/core/towers.gd`.
-
-Towers that consume something. The clearest possible version of 'what you made today decides what tonight can do'.
-
-- Gunpowder from corn and oil; incendiary rounds from oil and wood
-- A tower draws from a shared ammunition pool at a rate that is a lever
-- Out of ammunition means a much slower basic shot, never a silent dead tower
-- The night HUD shows the pool draining
-- Ammunition left over carries into the next night
-
-  - done when: A night fought with no gunpowder is survivable but clearly worse
-  - done when: The pool drains at the rate the levers claim over a scripted night
 
 ### 0038 - Production runs while you are elsewhere
 
@@ -1228,14 +1213,14 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0026** [The tower kills the zombie](prompts/0026-combat.md)
 - [x] **0027** [Three waves, a result screen, and back to the farm](prompts/0027-first-loop.md)
 
-## 2 - The full day  (3/14)
+## 2 - The full day  (4/14)
 
 - [x] **0028** [Corn and carrot](prompts/0028-three-crops.md)
 - [x] **0029** [Growth stages and watering](prompts/0029-growth-stages.md)
 - [x] **0030** [Fishing](prompts/0030-fishing.md)
-- [ ] **0031** [Iron from the rock face](prompts/0031-iron.md)
+- [x] **0031** [Iron from the rock face](prompts/0031-iron.md)
 - [ ] **0032** [Oil](prompts/0032-oil.md)
-- [ ] **0033** [The generator and energy](prompts/0033-generator.md) - needs 0031
+- [ ] **0033** [The generator and energy](prompts/0033-generator.md)
 - [ ] **0034** [Cooking: food and meat](prompts/0034-cooking.md)
 - [ ] **0035** [Gunpowder and ammunition](prompts/0035-ammunition.md) - needs 0032, 0033
 - [ ] **0036** [The inventory](prompts/0036-inventory.md)

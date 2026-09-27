@@ -240,26 +240,37 @@ const GATHERING: Dictionary = {
 		"yield": {STONE: 2},            # LEVER: units, 1-4
 		"regrow_ticks": 0,              # 0 means gone for good, not a lever
 	},
-	# The rock face, which `design.md` section 5 says gives stone and iron.
-	# Five seams at 3 stone, back every 90 seconds: about 39 stone across a
-	# 240 second day of nothing but mining, against 10 for a wall.
+	# Stone, out of the same cliff as the iron and much easier to get: the
+	# short swing, the big yield and the quick regrowth. Five seams at 3 stone,
+	# back every 90 seconds, is about 39 stone across a 240 second day of
+	# nothing but mining, against 10 for a wall.
 	&"seam": {
 		"work_ticks": 2 * SECONDS,      # LEVER: ticks per swing, 20-120
 		"hits": 3,                      # LEVER: swings, 2-5
 		"yield": {STONE: 3},            # LEVER: units, 2-5
 		"regrow_ticks": 90 * SECONDS,   # LEVER: ticks, 45-180 seconds worth
 	},
+	# Iron, and the thing you are always slightly short of - which is
+	# deliberate, because it gates every tower.
+	#
+	# **Worse than stone on all three dials**, which is what makes the cliff a
+	# choice about what you came for rather than a place you leave with
+	# everything:
+	#
+	#     seam   2s a swing, 3 swings, 3 stone, back in 90s
+	#     ore    3s a swing, 3 swings, 1 iron,  back in 120s
+	#
+	# The day that buys one tower: eight nodes, nine seconds of swinging each,
+	# and a hundred and twenty to come back. A node gives twice in a 240 second
+	# day - mine it at 0, again at 129 - so the cliff is worth **16 iron**, for
+	# 144 seconds of the day spent standing at it. A gun tower is 15. That is
+	# the whole design of this resource: a day at the rock face is a tower, and
+	# it is most of the day.
 	&"ore": {
-		# Iron is the thing you are always slightly short of, and that is
-		# deliberate: it gates every tower. A node has to come back inside a day
-		# or the whole rock face yields one iron per node per day, and a 15 iron
-		# tower would take three days of nothing but mining. Six nodes, remined
-		# four times, is about 24 iron a day for 144 seconds of a 240 second day
-		# spent at the rock face - one tower, and a real cost.
-		"work_ticks": 2 * SECONDS,      # LEVER: ticks per swing, 20-120
+		"work_ticks": 3 * SECONDS,      # LEVER: ticks per swing, 20-150
 		"hits": 3,                      # LEVER: swings, 2-5
 		"yield": {IRON: 1},             # LEVER: units, 1-2
-		"regrow_ticks": 60 * SECONDS,   # LEVER: ticks, 30-120 seconds worth
+		"regrow_ticks": 120 * SECONDS,  # LEVER: ticks, 60-240 seconds worth
 	},
 }
 
@@ -682,23 +693,23 @@ const DEFEAT_KEEPS_TECH := true
 ## `validate()` checks the shape, so a row typed one character short is a red
 ## line rather than a farm that is subtly wrong down one edge.
 const FARM_MAP: Array = [
-	"TTT.TTTT....TTT..TT.....TTT...TT..TTT.TT",
-	"T...................#####...........T..T",
-	"T..ssssss......ppp..##S##r.o...........T",
-	"...ssssss.....pHHHp.#S###..o...........T",
-	"...ssssss......HHH..###S##o.....r.......",
-	"T..ssssss......HHH...###S#.............T",
-	"...ssssss.....ppppp..#S###r...o.........",
-	"T.........w...............o............T",
-	"..ssssss....WW.p....r.....r...........TT",
-	"..ssssss....WW.p...$$........o...T.T...T",
-	"..ssssss.......p...............rTT.TT.TT",
+	"TTT.TTTT....TTT..TT.....TT....TT..TTT.TT",
+	"....................S######o........T...",
+	"T..ssssss......ppp..S######o...........T",
+	"...ssssss.....pHHHp.S######o...........T",
+	"...ssssss......HHH..S######o....r.......",
+	"T..ssssss......HHH..S######o...........T",
+	"...ssssss.....ppppp.#####ooo............",
+	"T.........w............................T",
+	"..ssssss....WW.p....r.....r............T",
+	"..ssssss....WW.p...$$............T.T...T",
+	"..ssssss.......p...............rTT.TT..T",
 	"T..............p.................TT.T..T",
 	".....r.........p....T.........TT.TT.TT..",
 	"T.........=====p......T.........TT.T...T",
 	"..~~~~~~~~=====.........................",
 	".~~~~~~~~~~~~~~~~~..............TT......",
-	"~~~~~~~~~~~~~~~~~~~~~~~....TT.........TT",
+	"~~~~~~~~~~~~~~~~~~~~~~~....TT...........",
 	"~~~~~~~~~~~~~~~~~~~~~~~~~~..TTT...TTTTTT",
 ]
 
@@ -744,6 +755,8 @@ static func validate() -> Array:
 	errors.append_array(check_nights(NIGHTS))
 	errors.append_array(check_map(FARM_MAP))
 	errors.append_array(check_fishing(FISHING))
+	errors.append_array(check_iron(GATHERING, FARM_MAP))
+	errors.append_array(check_reachable(GATHERING, FARM_MAP))
 
 	for res in REPAIR_COST_PER_HP:
 		if not RESOURCES.has(res):
@@ -823,6 +836,136 @@ static func _crop_offer(crops: Dictionary, id: StringName) -> Dictionary:
 	var net := int(data["yield"]) * int(SELL_PRICE.get(id, 0)) 		- int(data["seed_cost"])
 	return {"value": net * visits, "visits": visits,
 		"seed": int(data["seed_cost"])}
+
+
+## The four cells beside a cell. Typed, because an untyped array literal
+## makes its loop variable a Variant and `cell + step` stops being a
+## Vector2i the moment it is.
+const NEIGHBOUR_STEPS: Array[Vector2i] = [
+	Vector2i(0, 1), Vector2i(0, -1), Vector2i(1, 0), Vector2i(-1, 0),
+]
+
+
+## Iron comes out of the cliff and nowhere else, and it is dearer than stone.
+##
+## Both are things a balance pass could undo without anything else noticing:
+## a node dropped on the lawn would be iron with no walk attached, and ore made
+## quicker than stone would make the whole rock face one resource with two
+## names.
+static func check_iron(nodes: Dictionary, rows: Array) -> Array:
+	var errors: Array = []
+	var ore: Dictionary = nodes[&"ore"]
+	var seam: Dictionary = nodes[&"seam"]
+
+	if int(ore["work_ticks"]) <= int(seam["work_ticks"]):
+		errors.append("ore swings in %d ticks and stone in %d - iron is meant "
+			% [ore["work_ticks"], seam["work_ticks"]] + "to be the slow one")
+	if _worth(ore["yield"]) >= _worth(seam["yield"]):
+		errors.append("a swing at ore is worth %d and at stone %d"
+			% [_worth(ore["yield"]), _worth(seam["yield"])])
+	if int(ore["regrow_ticks"]) <= int(seam["regrow_ticks"]):
+		errors.append("ore comes back in %d ticks and stone in %d - iron is "
+			% [ore["regrow_ticks"], seam["regrow_ticks"]] + "meant to be scarcer")
+
+	# Every source of iron, and where it is standing.
+	for id in sorted_names(nodes.keys()):
+		var node: Dictionary = nodes[id]
+		if not (node["yield"] as Dictionary).has(IRON):
+			continue
+		if id != &"ore":
+			errors.append("'%s' gives iron as well as ore does" % id)
+		for found in _cells_of_char(rows, _char_for(id)):
+			var cell: Vector2i = found
+			if not _in_a_cliff(rows, cell):
+				errors.append("there is %s at %s with no rock face around it"
+					% [id, cell])
+	return errors
+
+
+## Which map character puts this occupant down. Read off the legend rather than
+## written twice.
+static func _char_for(id: StringName) -> String:
+	for ch in MAP_LEGEND:
+		if StringName((MAP_LEGEND[ch] as Array)[1]) == id:
+			return ch
+	return ""
+
+
+static func _cells_of_char(rows: Array, ch: String) -> Array:
+	var out: Array = []
+	if ch == "":
+		return out
+	for y in rows.size():
+		var row: String = rows[y]
+		for x in row.length():
+			if row[x] == ch:
+				out.append(Vector2i(x, y))
+	return out
+
+
+## Whether a cell has rock-face terrain orthogonally beside it. One lonely
+## boulder is not a cliff, and iron is only meant to come out of a cliff.
+static func _in_a_cliff(rows: Array, cell: Vector2i) -> bool:
+	for step in NEIGHBOUR_STEPS:
+		var at: Vector2i = cell + step
+		if at.y < 0 or at.y >= rows.size():
+			continue
+		var row: String = rows[at.y]
+		if at.x < 0 or at.x >= row.length():
+			continue
+		var entry: Variant = MAP_LEGEND.get(row[at.x], null)
+		if entry != null and int((entry as Array)[0]) == 3:
+			return true
+	return false
+
+
+## Every node on the map has somewhere to stand next to it.
+##
+## **The five stone seams failed this from the day the map was written.** They
+## were drawn inside the rock-face block, walled in on all four sides by
+## unwalkable cliff, and nothing noticed for thirty tasks - because the asserts
+## fetched a seam by its id and asked what it offered, which it answered
+## perfectly well from a cell no farmer could ever get to. A resource that is
+## on the map and not in the game is the kind of bug that only a real walk
+## finds, so the walk is now a check.
+static func check_reachable(nodes: Dictionary, rows: Array) -> Array:
+	var errors: Array = []
+	for id in sorted_names(nodes.keys()):
+		var ch := _char_for(id)
+		if ch == "":
+			continue        # not something the map places
+		var placed := _cells_of_char(rows, ch)
+		if placed.is_empty():
+			continue        # regrowth-only, or placed by something else
+		for found in placed:
+			var cell: Vector2i = found
+			if not _has_room_beside(rows, cell):
+				errors.append(("'%s' at %s is walled in - there is nowhere to "
+					+ "stand and mine it") % [id, cell])
+	return errors
+
+
+## Whether any orthogonal neighbour of a cell is ground a person can stand on.
+static func _has_room_beside(rows: Array, cell: Vector2i) -> bool:
+	for step in NEIGHBOUR_STEPS:
+		var at: Vector2i = cell + step
+		if at.y < 0 or at.y >= rows.size():
+			continue
+		var row: String = rows[at.y]
+		if at.x < 0 or at.x >= row.length():
+			continue
+		var entry: Variant = MAP_LEGEND.get(row[at.x], null)
+		if entry == null:
+			continue
+		var pair: Array = entry
+		# Water and the rock face cannot be stood on, and neither can a cell
+		# with something already on it.
+		if int(pair[0]) == 2 or int(pair[0]) == 3:
+			continue
+		if StringName(pair[1]) != &"":
+			continue
+		return true
+	return false
 
 
 static func check_gathering(nodes: Dictionary) -> Array:

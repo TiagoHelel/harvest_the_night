@@ -1671,3 +1671,133 @@ table was laid out.
 
 `python tools/verify.py` prints PASS: 686 asserts, 192 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+
+## 0031 - Iron from the rock face - done 2026-09-27
+
+The resource that gates every tower, and the discovery that five of the map's
+thirteen mining nodes had never been reachable.
+
+**What changed.** Ore is now worse than stone on all three dials, the rock face
+was redrawn so every node sits on a surface somebody can stand at, and there
+are eight ore nodes instead of six. A day at the cliff is 16 iron; a gun tower
+is 15.
+
+Files: `src/core/game_data.gd`, `src/tools/headless_check.gd`.
+Verify: 727 headless / 192 input / both hashes moved on purpose, below.
+
+### The arithmetic
+
+The task asks for a day's mining to buy roughly one tower and for the sums to
+be here.
+
+Where it started, ore and stone were the same swing and ore came back
+**faster** than stone, which is backwards for the scarce resource:
+
+|  | swing | swings | yield | back in |
+|---|---|---|---|---|
+| seam | 2s | 3 | 3 stone | 90s |
+| ore | 2s | 3 | 1 iron | 60s |
+
+What shipped:
+
+|  | swing | swings | yield | back in |
+|---|---|---|---|---|
+| seam | 2s | 3 | 3 stone | 90s |
+| ore | **3s** | 3 | 1 iron | **120s** |
+
+Slower per swing, less per node, slower to return - all three, so the cliff is
+a choice about what you came for rather than a place you leave with
+everything.
+
+Eight nodes, nine seconds of swinging each, a hundred and twenty to come back.
+A node gives twice in a 240 second day - take it at 0, again at 129 - so the
+cliff is worth **16 iron**. A gun tower is 15 iron and 10 wood. That is the
+whole design of the resource: a day at the rock face is a tower.
+
+**And the cliff is regrowth-bound, not swing-bound**, which I did not expect
+and which is the more useful fact. Measured, by mining a whole day three ways:
+
+    tight route (no walking)      16 iron
+    strolling (1.5s a node)       16 iron
+    a deliberately bad route      12 iron
+
+Sixteen harvests take 144 seconds of swinging out of 240, so the other 96 are
+spent waiting for nodes to come back - and any walk shorter than about three
+seconds a node disappears into that waiting. The consequence: `regrow_ticks`
+is the real dial on iron, and the 96 idle seconds are exactly the window the
+farm is meant to fill. Mine the cliff, farm while it regrows. That is the loop
+the game wants and it fell out of the numbers rather than being arranged.
+
+Both the strolling and the bad route are asserted, so the boundary is
+documented rather than folklore.
+
+### Five seams that were never in the game
+
+Redrawing the cliff, I checked that a farmer could stand next to each node -
+and **the five stone seams could not be reached, and never could**. They were
+drawn inside the `#` block, walled in on all four sides by unwalkable rock,
+from the day the map was written in task 0003 until now.
+
+Thirty tasks of asserts never caught it. They all did the same thing:
+
+    Farm.cells_with(state, &"seam")[0]   ->  "a seam offers mining"
+
+which is perfectly true, and perfectly useless, from a cell no player can get
+to. The test fetched the node by id and asked what it offered; nobody asked
+whether anybody could get there. Same shape as the ore-regrowth bug of task
+0017 - a test that certifies the easy instance certifies the easy instance.
+
+So the walk is a check now. `check_reachable()` runs over every occupant in
+`GATHERING` and refuses any that has no walkable orthogonal neighbour, with a
+teeth-test that buries an ore node in cliff and expects a complaint.
+
+The cliff was redrawn as a solid block with the nodes on its faces: stone down
+the west side, iron down the east side and along the bottom. It reads better
+than the scattered version too - you mine the exposed rock.
+
+    20        27
+     S######o
+     S######o
+     S######o
+     S######o
+     S######o
+     #####ooo
+
+Three ore nodes that were sitting on their own in open ground - (30,6), (26,7)
+and (29,9) - were removed. "Iron comes only from the rock face region" is a
+requirement, and a lone ore tile in the middle of the lawn is iron with no walk
+attached.
+
+**Seven border trees** were walled in by other trees as well. Rather than
+exempt them and weaken the rule, a single-cell gap was opened beside each. One
+scare on the way: the first fixup script was scoped to every occupant and
+punched a hole in the farmhouse, whose interior cells legitimately have no
+walkable neighbour. Restored, and the check is scoped to `GATHERING` - which it
+already was; only the throwaway script was too greedy.
+
+### Notes
+
+- Two map-count asserts were restated as counts off the map rather than
+  literals: the border wood and the loose boulders are scenery and move when
+  the map does. The **ore count stayed a literal 8 with a comment saying why**
+  - it is load-bearing, because the day's iron is computed from it, so a node
+  added or removed is a balance change and should fail a test.
+- Clearing the cliff into the rock face cost two loose boulders, 7 down to 5.
+  Loose rock does not regrow, so it is a small nerf to day-one stone; seams
+  give stone for ever and 5 boulders is still more than a wall.
+- "Iron is not sellable at a profit against what a tower costs" is asserted
+  directly: a tower's worth of iron sells for $105 and costs $270 to buy back
+  at the stall's markup. Mining stays the way you get iron.
+- `Array.sort()` on an untyped array literal makes its loop variable a Variant
+  and `cell + step` stops being a `Vector2i` - the parse error that cost two
+  runs here. There is a typed `GameData.NEIGHBOUR_STEPS` now.
+
+### Hashes
+
+| | from | to | why |
+|---|---|---|---|
+| sim hash | `3926216903` | `485801538` | the farm map: the cliff redrawn, 8 ore instead of 6, three strays and two boulders gone, eight gaps in the border wood |
+| data hash | `2916488539` | `135663565` | the same map, plus ore's swing 2s -> 3s and regrowth 60s -> 120s |
+
+`python tools/verify.py` prints PASS: 727 asserts, 192 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

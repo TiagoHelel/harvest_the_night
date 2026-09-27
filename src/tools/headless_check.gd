@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 23
+const GROUPS := 24
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -87,6 +87,7 @@ func _run() -> void:
 	_task_0028_crops()
 	_task_0029_watering()
 	_task_0030_fishing()
+	_task_0031_iron()
 
 
 func _finish() -> void:
@@ -499,7 +500,10 @@ func _task_0008_farm() -> void:
 		str(Farm.cells_with(state, &"house").size()))
 	expect(Farm.cells_with(state, &"tree").size() >= 40, "there is a wood",
 		str(Farm.cells_with(state, &"tree").size()))
-	expect(Farm.cells_with(state, &"ore").size() == 6, "six ore nodes",
+	# **Eight, and the number matters.** A day at the cliff is worth two
+	# harvests per node, and task 0031 set that against the price of a gun
+	# tower - so an ore node added or removed is a balance change, not scenery.
+	expect(Farm.cells_with(state, &"ore").size() == 8, "eight ore nodes",
 		str(Farm.cells_with(state, &"ore").size()))
 	expect(Farm.cells_of(state, Farm.Terrain.SOIL).size() == 48, "a field",
 		str(Farm.cells_of(state, Farm.Terrain.SOIL).size()))
@@ -830,7 +834,10 @@ func _remove_file(path: String) -> void:
 func _task_0016_gathering() -> void:
 	var state := State.create(41)
 	var trees := Farm.cells_with(state, &"tree")
-	expect(trees.size() == 76, "the wood is the size the map says",
+	# Counted off the map rather than written down again. The border wood is
+	# scenery and it moves when the map does; what matters is that it is a wood.
+	expect(trees.size() == _char_count(&"tree"),
+		"the wood is the size the map says",
 		str(trees.size()))
 
 	var tree: Vector2i = trees[10]
@@ -993,7 +1000,8 @@ func _task_0017_stone() -> void:
 	# Two sources, and they behave differently on purpose.
 	var loose := Farm.cells_with(state, &"rock")
 	var seams := Farm.cells_with(state, &"seam")
-	expect(loose.size() == 7, "seven boulders on the lawn", str(loose.size()))
+	expect(loose.size() == _char_count(&"rock"),
+		"the boulders on the lawn are the ones the map drew", str(loose.size()))
 	expect(seams.size() == 5, "five seams in the rock face", str(seams.size()))
 
 	for cell in seams:
@@ -3041,3 +3049,225 @@ func _rare_in(log: Array) -> int:
 		if bool((entry as Array)[1]):
 			n += 1
 	return n
+
+
+## How many of an occupant the farm map draws. For asserts about scenery, which
+## moves when the map does - the ones that are really about balance name their
+## number and say why.
+func _char_count(id: StringName) -> int:
+	var ch := ""
+	for key in GameData.MAP_LEGEND:
+		if StringName((GameData.MAP_LEGEND[key] as Array)[1]) == id:
+			ch = key
+			break
+	if ch == "":
+		return 0
+	var n := 0
+	for row in GameData.FARM_MAP:
+		n += (row as String).count(ch)
+	return n
+
+
+## 0031 - iron: the slow resource, out of the cliff and nowhere else.
+func _task_0031_iron() -> void:
+	var ore: Dictionary = GameData.GATHERING[&"ore"]
+	var seam: Dictionary = GameData.GATHERING[&"seam"]
+
+	# **Worse than stone on all three dials**, which is what stops the cliff
+	# being one resource with two names.
+	expect(int(ore["work_ticks"]) > int(seam["work_ticks"]),
+		"ore takes longer per swing than stone",
+		"%d against %d" % [ore["work_ticks"], seam["work_ticks"]])
+	expect(int(ore["regrow_ticks"]) > int(seam["regrow_ticks"]),
+		"and comes back slower",
+		"%d against %d" % [ore["regrow_ticks"], seam["regrow_ticks"]])
+	var ore_yield := 0
+	for res in (ore["yield"] as Dictionary):
+		ore_yield += int((ore["yield"] as Dictionary)[res])
+	var seam_yield := 0
+	for res in (seam["yield"] as Dictionary):
+		seam_yield += int((seam["yield"] as Dictionary)[res])
+	expect(ore_yield < seam_yield, "and yields less for it",
+		"%d against %d" % [ore_yield, seam_yield])
+
+	# **Iron comes out of ore and nothing else.**
+	var state := State.create(1300)
+	for id in [&"tree", &"rock", &"seam"]:
+		var out: Dictionary = (GameData.GATHERING[id] as Dictionary)["yield"]
+		expect(not out.has(GameData.IRON),
+			"a %s gives no iron" % id, str(out))
+	expect((ore["yield"] as Dictionary).has(GameData.IRON),
+		"and ore is what does")
+
+	# **Every node is in the cliff**, and the check that says so has teeth.
+	expect(GameData.check_iron(GameData.GATHERING, GameData.FARM_MAP).is_empty(),
+		"the shipped farm passes the iron check",
+		str(GameData.check_iron(GameData.GATHERING, GameData.FARM_MAP)))
+	var lawn: Array = GameData.FARM_MAP.duplicate()
+	lawn[12] = (lawn[12] as String).substr(0, 8) + "o" \
+		+ (lawn[12] as String).substr(9)
+	expect(not GameData.check_iron(GameData.GATHERING, lawn).is_empty(),
+		"and an ore node dropped on the lawn is refused",
+		str(GameData.check_iron(GameData.GATHERING, lawn)))
+	var quick: Dictionary = GameData.GATHERING.duplicate(true)
+	(quick[&"ore"] as Dictionary)["work_ticks"] = int(seam["work_ticks"])
+	expect(not GameData.check_iron(quick, GameData.FARM_MAP).is_empty(),
+		"and ore that swings as fast as stone is refused")
+
+	# **Nothing on the map is walled in.** The five stone seams were, from the
+	# day the map was drawn until this task, and no assert noticed because they
+	# all fetched a seam by id from a cell nobody could stand next to.
+	expect(GameData.check_reachable(GameData.GATHERING,
+		GameData.FARM_MAP).is_empty(),
+		"every node on the farm has somewhere to stand beside it",
+		str(GameData.check_reachable(GameData.GATHERING, GameData.FARM_MAP)))
+	for found in Farm.cells_with(state, &"ore") + Farm.cells_with(state, &"seam"):
+		var node: Vector2i = found
+		expect(_somewhere_to_stand(state, node),
+			"a farmer can reach the node at %s" % node)
+
+	var buried: Array = GameData.FARM_MAP.duplicate()
+	buried[1] = "T..................#########........T..T"
+	buried[2] = "T..ssssss......ppp.####o####...........T"
+	buried[3] = "...ssssss.....pHHHp.########...........T"
+	expect(not GameData.check_reachable(GameData.GATHERING, buried).is_empty(),
+		"and a node with cliff on all four sides is refused",
+		str(GameData.check_reachable(GameData.GATHERING, buried)))
+
+	# **A day at the cliff buys a tower.** The arithmetic the journal claims,
+	# measured by mining for a whole day and counting what comes out.
+	# Two routes: a tight one where the next node is always the next tile, and
+	# a deliberately bad one that spends ten seconds walking to each. **The
+	# cliff is regrowth-bound, not swing-bound** - below about ninety ticks of
+	# travel a node the waiting absorbs the walk entirely, which is why the
+	# first two of these are the same number.
+	var mined := _mine_for_a_day(1301, 0)
+	var strolled := _mine_for_a_day(1302, 45)
+	var walked := _mine_for_a_day(1303, 300)
+	print("  a day at the cliff: %d iron on a tight route, %d strolling, "
+		% [mined, strolled] + "%d on a bad one" % walked)
+	expect(strolled == mined,
+		"a short walk between nodes costs nothing - the day is spent waiting "
+		+ "for the cliff, not swinging at it", "%d against %d" % [strolled, mined])
+	expect(walked < mined,
+		"and a bad route does cost, so the regrowth lever is not the only one",
+		"%d against %d" % [walked, mined])
+	var tower: Dictionary = (GameData.DEFENCES[&"gun_tower"] as Dictionary)["cost"]
+	var needed := int(tower[GameData.IRON])
+	expect(mined >= 12 and mined <= 18,
+		"a day of nothing but mining is 12 to 18 iron", str(mined))
+	expect(walked >= 12, "and even a bad route is 12 or more", str(walked))
+	expect(mined >= needed,
+		"which buys a gun tower", "%d iron for a %d iron tower" % [mined, needed])
+	expect(mined < needed * 2,
+		"and only just - two towers is two days", str(mined))
+
+	# **The rock face cannot be exhausted.** Strip every node on it and come
+	# back; a farm that could be mined flat would be a run that ended on day 3.
+	var stripped := State.create(1310)
+	var cliff := Farm.cells_with(stripped, &"ore") \
+		+ Farm.cells_with(stripped, &"seam")
+	expect(cliff.size() == 13, "thirteen nodes in the cliff", str(cliff.size()))
+	for found in cliff:
+		var node: Vector2i = found
+		for _swing in 12:
+			if Farm.is_empty(stripped, node):
+				break
+			Gathering.strike(stripped, node)
+	expect(Farm.cells_with(stripped, &"ore").is_empty(),
+		"the whole face can be mined out")
+	expect(Farm.cells_with(stripped, &"seam").is_empty(), "every seam too")
+	expect(Gathering.regrowing(stripped) == cliff.size(),
+		"and all of it is coming back", str(Gathering.regrowing(stripped)))
+
+	Sim.advance(stripped, int(ore["regrow_ticks"]) + 2)
+	expect(Farm.cells_with(stripped, &"ore").size() == 8,
+		"every ore node is back",
+		str(Farm.cells_with(stripped, &"ore").size()))
+	expect(Farm.cells_with(stripped, &"seam").size() == 5,
+		"and every seam", str(Farm.cells_with(stripped, &"seam").size()))
+	expect(Gathering.regrowing(stripped) == 0, "with nothing left pending")
+
+	# And it survives being done over and over, which is what "permanently"
+	# means - one regrowth working is not the same as the cliff being eternal.
+	for _round in 3:
+		for found in Farm.cells_with(stripped, &"ore"):
+			var node: Vector2i = found
+			for _swing in 12:
+				if Farm.is_empty(stripped, node):
+					break
+				Gathering.strike(stripped, node)
+		Sim.advance(stripped, int(ore["regrow_ticks"]) + 2)
+	expect(Farm.cells_with(stripped, &"ore").size() == 8,
+		"and it is still all there after four days of stripping it",
+		str(Farm.cells_with(stripped, &"ore").size()))
+
+	# **A loose boulder does not come back**, which is the reward for clearing
+	# one, and it is not iron so it does not touch this balance.
+	var lawn_state := State.create(1304)
+	var boulders := Farm.cells_with(lawn_state, &"rock")
+	expect(boulders.size() > 0, "there are boulders on the lawn")
+	var boulder: Vector2i = boulders[0]
+	for _swing in 12:
+		if Farm.is_empty(lawn_state, boulder):
+			break
+		Gathering.strike(lawn_state, boulder)
+	Sim.advance(lawn_state, int(ore["regrow_ticks"]) * 3)
+	expect(Farm.is_empty(lawn_state, boulder),
+		"and a cleared one stays cleared - that is the build space you earned")
+
+	# **Iron cannot be turned into more iron through the stall.** Selling a
+	# tower's worth and buying it straight back has to be a loss, or mining
+	# stops being the way you get iron.
+	var paid := Shop.sell_price(GameData.IRON) * needed
+	var back := Shop.buy_price(GameData.IRON) * needed
+	expect(paid < back,
+		"selling a tower's iron does not buy a tower's iron back",
+		"$%d for it, $%d to replace it" % [paid, back])
+	expect(Shop.buy_price(GameData.IRON) > Shop.sell_price(GameData.IRON),
+		"the stall always charges more than it pays for iron",
+		"%d against %d" % [Shop.buy_price(GameData.IRON),
+			Shop.sell_price(GameData.IRON)])
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## Whether there is anywhere beside this cell that a person could stand.
+func _somewhere_to_stand(state: Dictionary, cell: Vector2i) -> bool:
+	for step in [Vector2i(0, 1), Vector2i(0, -1), Vector2i(1, 0),
+			Vector2i(-1, 0)]:
+		var at: Vector2i = cell + (step as Vector2i)
+		if Farm.walkable(state, at):
+			return true
+	return false
+
+
+## Mine ore, and nothing else, for a whole day. Returns the iron.
+##
+## `travel` is ticks spent getting from one node to the next, so the same
+## measurement can say what the cliff is worth standing on it and what it is
+## worth walking around it.
+func _mine_for_a_day(seed_value: int, travel: int) -> int:
+	var state := State.create(seed_value)
+	var start := Resources.amount(state, GameData.IRON)
+	var swing := int((GameData.GATHERING[&"ore"] as Dictionary)["work_ticks"])
+	var at := Vector2i(-1, -1)
+	var left := 0
+
+	for _tick in GameData.DAY_TICKS:
+		if at == Vector2i(-1, -1):
+			var free := Farm.cells_with(state, &"ore")
+			if free.is_empty():
+				Sim.advance(state, 1)       # nothing up; wait for regrowth
+				continue
+			at = free[0]
+			left = swing + travel
+		left -= 1
+		if left <= 0:
+			Gathering.strike(state, at)
+			left = swing
+			if Farm.is_empty(state, at):
+				at = Vector2i(-1, -1)
+		Sim.advance(state, 1)
+
+	return Resources.amount(state, GameData.IRON) - start
