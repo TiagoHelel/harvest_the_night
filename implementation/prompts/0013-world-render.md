@@ -1,7 +1,7 @@
 # 0013 - The world renders
 
 - **Phase:** 1 - The first playable build
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0008
 - **Likely files:** src/ui/world_view.gd, scenes/World.tscn
 

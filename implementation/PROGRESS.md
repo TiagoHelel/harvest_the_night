@@ -581,3 +581,49 @@ Notes:
 - The overlay is handed its driver by the screen that owns it rather than going
   looking for one, so two simulations on screen would each be described by
   their own.
+
+## 0013 - The world renders - done 2026-09-27
+
+What changed: the farm is on screen. `WorldView` draws the terrain on a
+`TileMapLayer` and the occupants on a y-sorted layer above it, with a camera
+fenced in at the farm's edges. `Main.tscn` stopped being a boot screen and
+became the game screen.
+
+Files: src/ui/world_view.gd, scenes/World.tscn, scenes/Main.tscn,
+src/ui/main.gd, src/tools/input_check.gd
+
+Verify: PASS - 9 passed, 1 skipped, 13s. 205 asserts, **41 cases, 0 failed**
+(28 before). Both hashes unchanged, which is one of this task's done-whens.
+
+Notes:
+
+- **The camera is locked vertically and the map was drawn for it.** The farm is
+  640x288 and the viewport 480x270, so there are 160 pixels of horizontal pan
+  and only 18 of vertical. Locking Y to the middle crops nine pixels off the top
+  and the bottom - and rows 0 and 17 are the tree line and the far water, a
+  decorative border rather than anywhere the player goes. A camera drifting over
+  eighteen pixels would be motion sickness in exchange for nothing.
+- **Godot's camera limits do the clamping**, so no arithmetic here can produce
+  the gap or the repeated column the done-when warns about. Checked at both
+  edges, by eye and by assert.
+- **`cell_to_screen()` is why click cases will keep working.** `input_check`
+  asks the view for it by name, so a click on a cell goes wherever the camera
+  has put it. Two of the older case-0011 asserts went stale the moment this
+  landed - the naive identity mapping was no longer the answer - and were
+  rewritten to check the round trip instead of today's coordinates.
+- The other stale assert was "the clock moved": the label reads in whole
+  seconds now, so twenty frames of it say nothing. It checks the tick counter
+  instead, which is what it was really asking about.
+- Redraw is a signature check on the occupant dictionary, not a rebuild per
+  frame. Godot's `Dictionary.hash()` is cheap and notices a placement or a
+  removal; the determinism hash is a different thing for a different job and is
+  not used for this.
+- **Looking at it found what the asserts could not.** The first render had trees
+  at a green close to the grass in value, inset two pixels - they vanished into
+  the lawn. Placeholder art has exactly one job, which is to be legible, so the
+  trees went darker and every occupant got a darker rim so a block reads as an
+  object rather than as a stain.
+- Terrain is built once and never touched again: nothing in the game turns grass
+  into water, and the day and the night are the same tiles by design.
+- The placeholder tileset and textures are generated in this file. Tasks 0014
+  and 0072 replace two functions and nothing else in the view will know.

@@ -34,7 +34,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 2
+const CASES := 3
 
 var passed := 0
 var failed := 0
@@ -66,6 +66,7 @@ func _process(delta: float) -> bool:
 func _run() -> void:
 	await _case_0011_harness()
 	await _case_0012_debug_overlay()
+	await _case_0013_world_view()
 	_finish()
 
 
@@ -90,7 +91,7 @@ func _case_0011_harness() -> void:
 
 	# The real scene, with the nodes it says it has.
 	expect(_scene != null, "the main scene loads")
-	expect(require_control("Title") != null, "the title label is there")
+	expect(require_control("WorldView") != null, "the farm is on screen")
 	expect(require_control("Clock") != null, "the clock label is there")
 	expect(require_control("SimDriver") != null, "the sim driver is there")
 
@@ -112,13 +113,14 @@ func _case_0011_harness() -> void:
 	expect(locate_control("NoSuchControlExists") == null,
 		"while locate() is the quiet one, for asking whether something is there")
 
-	# The clock is running, which means the scene is really being ticked and
-	# not merely instantiated.
-	var clock: Label = require_control("Clock")
-	var first := clock.text
+	# The scene is really being ticked and not merely instantiated. The tick
+	# counter rather than the clock label: the label reads in whole seconds, so
+	# twenty frames of it say nothing at all.
+	var driver: SimDriver = require_control("SimDriver")
+	var first := int(driver.state["tick"])
 	await frames(20)
-	expect(clock.text != first, "the scene is live - the clock moved",
-		"%s then %s" % [first, clock.text])
+	expect(int(driver.state["tick"]) > first, "the scene is live - it is ticking",
+		"%d then %d" % [first, driver.state["tick"]])
 
 	# A mouse click reaches a Control and its handler runs.
 	var probe := Button.new()
@@ -145,13 +147,18 @@ func _case_0011_harness() -> void:
 	await press_key(KEY_F9, false)
 	expect(not Input.is_key_pressed(KEY_F9), "and lets go")
 
-	# Clicking a farm cell. The mapping is the identity today because the
-	# viewport is the farm's own resolution and there is no camera yet; task
-	# 0013 gives the world view a `cell_to_screen()` and this starts asking it.
-	var centre := cell_to_screen(Vector2i(2, 3))
-	expect(centre == Vector2(2 * GameData.TILE_SIZE + 8, 3 * GameData.TILE_SIZE + 8),
-		"a farm cell maps to the middle of its tile", str(centre))
-	await click_cell(Vector2i(2, 3))
+	# Clicking a farm cell. Now that task 0013 has given the world view a
+	# camera, the mapping comes from the view rather than from the naive
+	# identity - so what is checked here is that a cell lands somewhere on
+	# screen and comes back as itself, not where it happens to be today.
+	var view: WorldView = require_control("WorldView")
+	var centre := cell_to_screen(Vector2i(20, 9))
+	expect(centre.x > 0.0 and centre.y > 0.0, "a farm cell is somewhere on screen",
+		str(centre))
+	expect(view.screen_to_cell(centre) == Vector2i(20, 9),
+		"and the screen position maps back to the cell it came from",
+		str(view.screen_to_cell(centre)))
+	await click_cell(Vector2i(20, 9))
 	expect(true, "clicking a cell does not throw")
 
 	await close_scene()
@@ -234,6 +241,88 @@ func _case_0012_debug_overlay() -> void:
 	await tap_key(KEY_F3)
 	await close_scene()
 
+	_completed += 1     # last line: an abandoned case never gets here
+
+
+## 0013 - the view: it draws the farm, it tracks the camera, it changes nothing.
+func _case_0013_world_view() -> void:
+	await open_scene(MAIN_SCENE)
+
+	var view: WorldView = require_control("WorldView")
+	var driver: SimDriver = require_control("SimDriver")
+	expect(view != null and driver != null, "the screen has both halves")
+	if view == null or driver == null:
+		_completed += 1
+		await close_scene()
+		return
+
+	# Everything on the farm got drawn, and nothing was drawn twice.
+	var occupants: Dictionary = driver.state["occupants"]
+	var drawn := view.find_child("Occupants", true, false)
+	expect(drawn != null and drawn.get_child_count() == occupants.size(),
+		"one sprite per occupant, no more and no fewer",
+		"%d drawn, %d on the farm"
+		% [drawn.get_child_count() if drawn else -1, occupants.size()])
+
+	# **Moving the camera cannot move the game.** The view reads the state and
+	# never writes to it; this is the assert that keeps it that way.
+	driver.running = false
+	await frames(2)
+	var before := State.hash_of(driver.state)
+	view.look_at_cell(Vector2i(0, 9))
+	await frames(3)
+	view.look_at_cell(Vector2i(39, 9))
+	await frames(3)
+	expect(State.hash_of(driver.state) == before,
+		"panning the camera did not move the determinism hash")
+	driver.running = true
+
+	# **A click on a cell goes where the camera put it.** This is why
+	# cell_to_screen exists at all: without it every click case would be wrong
+	# the moment the camera moved.
+	view.look_at_cell(Vector2i(0, 9))
+	await frames(3)
+	var left_edge := view.cell_to_screen(Vector2i(2, 9))
+	view.look_at_cell(Vector2i(39, 9))
+	await frames(3)
+	var right_edge := view.cell_to_screen(Vector2i(2, 9))
+	expect(left_edge.x != right_edge.x,
+		"the same cell is at a different place after a pan",
+		"%s then %s" % [left_edge, right_edge])
+
+	# Screen and cell are each other's inverse, wherever the camera is.
+	for cell in [Vector2i(20, 9), Vector2i(25, 4), Vector2i(30, 12)]:
+		expect(view.screen_to_cell(view.cell_to_screen(cell)) == cell,
+			"cell %s survives a round trip through the screen" % cell,
+			str(view.screen_to_cell(view.cell_to_screen(cell))))
+	expect(view.screen_to_cell(Vector2(-500, -500)) == Vector2i(-1, -1),
+		"and a position off the farm is not a cell")
+
+	# **The camera is clamped**, so panning past either end shows the farm
+	# rather than a gap. Godot does the clamping; this checks it was asked to.
+	var cam: Camera2D = view.find_child("Camera", true, false)
+	expect(cam != null and cam.limit_right == WorldView.WORLD_SIZE.x,
+		"the camera is fenced in at the farm's edge")
+	view.look_at_cell(Vector2i(-50, 9))
+	await frames(3)
+	expect(view.cell_to_screen(Vector2i(0, 0)).x >= -1.0,
+		"panning hard left still starts at column 0",
+		str(view.cell_to_screen(Vector2i(0, 0))))
+
+	# The occupant layer follows the farm when the farm changes, without
+	# anybody having to say so.
+	var count_before := drawn.get_child_count()
+	Farm.place(driver.state, Vector2i(11, 8), {"id": &"gun_tower"})
+	await frames(4)
+	expect(drawn.get_child_count() == count_before + 1,
+		"placing something redraws the layer",
+		"%d then %d" % [count_before, drawn.get_child_count()])
+	Farm.remove(driver.state, Vector2i(11, 8))
+	await frames(4)
+	expect(drawn.get_child_count() == count_before,
+		"and taking it away redraws it again")
+
+	await close_scene()
 	_completed += 1     # last line: an abandoned case never gets here
 
 

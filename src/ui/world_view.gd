@@ -1,0 +1,230 @@
+class_name WorldView
+extends Node2D
+
+## The farm, on screen.
+##
+## **It reads the core state and never writes to it.** Everything here is a
+## consequence of `Farm`; if the view and the rules ever disagree, the view is
+## wrong. That is what lets the headless tools and the autoplayer play the same
+## game with no window at all.
+##
+## Two layers, because they sort differently. Terrain is a `TileMapLayer` - flat,
+## built once, never touched again, because terrain does not change. Occupants
+## and actors go on a y-sorted `Node2D` above it, so a tree drawn at the bottom
+## of the screen is in front of a tower drawn above it, which is what makes a
+## three-quarter view read as depth rather than as a spreadsheet.
+##
+## ## Placeholder art
+##
+## The tileset and the occupant textures are generated here from flat colours.
+## Task 0014 brings the sprite pipeline and task 0072 the real tileset; when
+## they land, `_build_terrain_tileset()` and `_texture_for()` are the only two
+## functions that change, and nothing else in this file knows the difference.
+
+## The farm is 640x288 pixels and the viewport is 480x270, so there are 160
+## pixels of horizontal pan and 18 of vertical.
+##
+## **Vertically the camera is locked to the middle**, which crops nine pixels
+## off the top and the bottom. That is deliberate and the map is drawn for it:
+## row 0 and row 17 are the tree line and the far water, a decorative border
+## rather than anywhere the player goes. A camera that drifted up and down over
+## eighteen pixels would be motion sickness in exchange for nothing.
+const WORLD_SIZE := Vector2i(
+	GameData.GRID_WIDTH * GameData.TILE_SIZE,
+	GameData.GRID_HEIGHT * GameData.TILE_SIZE)
+
+## Placeholder terrain colours, in `Farm.Terrain` order.
+const TERRAIN_COLOURS: Array = [
+	Color8(106, 150, 70),       # GRASS
+	Color8(122, 88, 56),        # SOIL
+	Color8(58, 110, 165),       # WATER
+	Color8(110, 108, 120),      # ROCK
+	Color8(168, 143, 102),      # PATH
+	Color8(140, 100, 60),       # FLOOR
+]
+
+## Placeholder occupant colours.
+##
+## Chosen for **contrast against what they stand on**, not for beauty. The
+## first render had trees at a green close to the grass in value and they
+## vanished; placeholder art whose only job is legibility has to be legible.
+const OCCUPANT_COLOURS: Dictionary = {
+	&"tree": Color8(24, 58, 32),
+	&"rock": Color8(150, 148, 158),
+	&"ore": Color8(196, 150, 70),
+	&"house": Color8(176, 66, 58),
+	&"shop": Color8(214, 186, 96),
+	&"gun_tower": Color8(120, 130, 160),
+	&"wall": Color8(130, 128, 136),
+	&"fence": Color8(150, 116, 74),
+	&"barricade": Color8(160, 130, 90),
+}
+
+## Anything not in the table above, so a new occupant shows up as an obvious
+## magenta block rather than as nothing at all.
+const UNKNOWN_COLOUR := Color8(220, 60, 200)
+
+@onready var _terrain: TileMapLayer = $Terrain
+@onready var _occupants: Node2D = $Occupants
+@onready var _camera: Camera2D = $Camera
+
+var _state: Dictionary = {}
+var _dirty := true
+var _last_signature := 0
+var _textures: Dictionary = {}
+
+
+func _ready() -> void:
+	_terrain.tile_set = _build_terrain_tileset()
+
+	# Camera limits are the farm's edges, so panning can never show a gap or a
+	# repeated column - the engine does the clamping and no arithmetic here can
+	# get it wrong.
+	_camera.limit_left = 0
+	_camera.limit_top = 0
+	_camera.limit_right = WORLD_SIZE.x
+	_camera.limit_bottom = WORLD_SIZE.y
+	_camera.position_smoothing_enabled = false      # pixel art: no half pixels
+	_camera.ignore_rotation = true
+	_camera.make_current()
+	_camera.position = Vector2(WORLD_SIZE) * 0.5
+
+
+## Point the view at a game. Called by whatever screen owns the simulation.
+func show_state(state: Dictionary) -> void:
+	_state = state
+	_dirty = true
+	_draw_terrain()
+	_refresh()
+
+
+## Redraw the occupants next frame. Called by anything that knows it changed
+## the farm; the signature check below catches the rest.
+func mark_dirty() -> void:
+	_dirty = true
+
+
+func _process(_delta: float) -> void:
+	if _state.is_empty():
+		return
+	# **Not rebuilt every frame.** Godot's Dictionary hash is cheap and exact
+	# enough to notice a placement or a removal; the determinism hash is a
+	# different thing for a different job and is not used here.
+	var signature: int = (_state["occupants"] as Dictionary).hash()
+	if signature != _last_signature:
+		_last_signature = signature
+		_dirty = true
+	if _dirty:
+		_dirty = false
+		_refresh()
+
+
+# ------------------------------------------------------------------- camera
+
+## Keep the camera on a cell, clamped to the farm and locked vertically.
+func look_at_cell(cell: Vector2i) -> void:
+	_camera.position.x = float(cell.x * GameData.TILE_SIZE + GameData.TILE_SIZE / 2)
+	_camera.position.y = float(WORLD_SIZE.y) * 0.5
+
+
+## Where a farm cell is on screen, in viewport pixels.
+##
+## `input_check` asks for this by name so that a click on a cell goes wherever
+## the camera has put it, rather than wherever it would have been if the camera
+## had never moved.
+func cell_to_screen(cell: Vector2i) -> Vector2:
+	var local := Vector2(cell) * float(GameData.TILE_SIZE) \
+		+ Vector2.ONE * (float(GameData.TILE_SIZE) * 0.5)
+	return get_global_transform_with_canvas() * local
+
+
+## Which cell a screen position is over, or (-1, -1) when it is off the farm.
+func screen_to_cell(position: Vector2) -> Vector2i:
+	var local: Vector2 = get_global_transform_with_canvas().affine_inverse() * position
+	var cell := Vector2i((local / float(GameData.TILE_SIZE)).floor())
+	return cell if Grid.in_bounds(cell) else Vector2i(-1, -1)
+
+
+# -------------------------------------------------------------------- drawing
+
+## Terrain is built once. It cannot change: nothing in the game turns grass
+## into water, and the day and the night are the same tiles by design.
+func _draw_terrain() -> void:
+	if _state.is_empty():
+		return
+	_terrain.clear()
+	var bytes: PackedByteArray = _state["terrain"]
+	for idx in Grid.CELLS:
+		var cell := Grid.cell(idx)
+		_terrain.set_cell(cell, 0, Vector2i(int(bytes[idx]), 0))
+
+
+func _refresh() -> void:
+	for child in _occupants.get_children():
+		child.queue_free()
+	if _state.is_empty():
+		return
+
+	var occupants: Dictionary = _state["occupants"]
+	# Sorted, so that two runs build the same tree in the same order. Nothing
+	# depends on it yet; the day something here draws from the RNG, it will.
+	var keys: Array = occupants.keys()
+	keys.sort()
+	for idx in keys:
+		var id: StringName = (occupants[idx] as Dictionary)["id"]
+		var cell := Grid.cell(idx)
+		var sprite := Sprite2D.new()
+		sprite.texture = _texture_for(id)
+		sprite.centered = false
+		sprite.position = Vector2(cell) * float(GameData.TILE_SIZE)
+		_occupants.add_child(sprite)
+
+
+# ------------------------------------------------- placeholder art, until 0014
+
+func _build_terrain_tileset() -> TileSet:
+	var size := GameData.TILE_SIZE
+	var image := Image.create(size * TERRAIN_COLOURS.size(), size, false,
+		Image.FORMAT_RGBA8)
+	for t in TERRAIN_COLOURS.size():
+		var base: Color = TERRAIN_COLOURS[t]
+		for y in size:
+			for x in size:
+				# A darker top-left edge, so the tile grid reads while the art
+				# is still flat colour. The real tileset of task 0072 will not
+				# need it.
+				var shade := 0.88 if (x == 0 or y == 0) else 1.0
+				image.set_pixel(t * size + x, y,
+					Color(base.r * shade, base.g * shade, base.b * shade))
+
+	var source := TileSetAtlasSource.new()
+	source.texture = ImageTexture.create_from_image(image)
+	source.texture_region_size = Vector2i(size, size)
+	for t in TERRAIN_COLOURS.size():
+		source.create_tile(Vector2i(t, 0))
+
+	var tile_set := TileSet.new()
+	tile_set.tile_size = Vector2i(size, size)
+	tile_set.add_source(source, 0)
+	return tile_set
+
+
+func _texture_for(id: StringName) -> Texture2D:
+	if _textures.has(id):
+		return _textures[id]
+	var size := GameData.TILE_SIZE
+	var colour: Color = OCCUPANT_COLOURS.get(id, UNKNOWN_COLOUR)
+	var image := Image.create(size, size, false, Image.FORMAT_RGBA8)
+	# Inset by one pixel so the terrain still shows around the edge, with a
+	# darker rim so a block reads as an object rather than as a stain on the
+	# grass.
+	var rim := Color(colour.r * 0.55, colour.g * 0.55, colour.b * 0.55)
+	for y in size:
+		for x in size:
+			var edge := x <= 1 or y <= 1 or x >= size - 2 or y >= size - 2
+			var outside := x == 0 or y == 0 or x == size - 1 or y == size - 1
+			image.set_pixel(x, y,
+				Color(0, 0, 0, 0) if outside else (rim if edge else colour))
+	var tex := ImageTexture.create_from_image(image)
+	_textures[id] = tex
+	return tex
