@@ -28,13 +28,20 @@ extends SceneTree
 
 const MAIN_SCENE := "res://scenes/Main.tscn"
 
-## The check takes well under a second; this is the backstop for a scene that
-## never finishes loading or an `await` that never returns.
+## How long the run may go without a single assert landing.
+##
+## **A stall, not a budget.** This used to be the whole run's time, and
+## that is a deadline that every new case eats into: the eleventh one
+## tripped it on a suite where nothing was wrong at all. Every `expect()`
+## puts it back to zero, so what it now catches is what it was always for -
+## a scene that never loads, an `await` that never returns, a case that
+## stopped making progress - and it does that just as well whether there
+## are eleven cases or two hundred.
 const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 10
+const CASES := 11
 
 var passed := 0
 var failed := 0
@@ -74,6 +81,7 @@ func _run() -> void:
 	await _case_0023_build_mode()
 	await _case_0027_the_loop()
 	await _case_0028_seeds()
+	await _case_0029_watering()
 	_finish()
 
 
@@ -1030,6 +1038,9 @@ func hold_key(keycode: int, frame_count: int) -> void:
 
 
 func expect(ok: bool, what: String, detail: String = "") -> void:
+	# An assert landing is the definition of progress, so it is what puts
+	# the watchdog back to zero.
+	_elapsed = 0.0
 	if ok:
 		passed += 1
 	else:
@@ -1157,3 +1168,137 @@ func _reachable_plot(state: Dictionary) -> Vector2i:
 		if Farm.walkable(state, cell + Vector2i(0, -1)):
 			return cell
 	return Vector2i(-1, -1)
+
+
+## 0029 - filling the can at the well, and watering a row with one held key.
+func _case_0029_watering() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var hud: DayHud = require_control("DayHud")
+	if driver == null or hud == null:
+		_completed += 1
+		await close_scene()
+		return
+
+	var state := driver.state
+	var can: Label = require_control("WaterCan")
+	expect(can != null, "the HUD says how much water is in hand")
+
+	# **An empty can says where to fill it.** A number on its own would leave a
+	# player who has not found the well with no idea what to do about it.
+	expect(Farming.water_carried(state) == 0, "the can starts empty")
+	await frames(2)
+	expect(can != null and can.text.to_lower().contains("well"),
+		"and an empty one points at the well", can.text if can else "")
+
+	# **Walking up to the well fills it**, with nothing pressed.
+	var well: Vector2i = Farm.cells_with(state, &"well")[0]
+	_stand_at(state, well + Vector2i(0, -1))
+	await until(func() -> bool: return Farming.water_carried(state) > 0,
+		"standing by the well to fill the can")
+	expect(Farming.water_carried(state) == GameData.WATER_CAN_CAPACITY,
+		"standing next to the well fills the can to the top",
+		str(Farming.water_carried(state)))
+	await frames(2)
+	expect(can != null and can.text.contains(str(GameData.WATER_CAN_CAPACITY)),
+		"and the HUD says so", can.text if can else "")
+
+	# A row of four, planted and dry, with somewhere to stand at the west end.
+	var row := _a_planted_row(state, 4)
+	expect(row.size() == 4, "there is a row to water", str(row.size()))
+	if row.size() < 4:
+		await close_scene()
+		_completed += 1
+		return
+	for cell in row:
+		expect(not Farming.is_watered(state, cell), "and it is dry to start")
+
+	var start: Vector2i = row[0] + Vector2i(-1, 0)
+	_stand_at(state, start, Player.EAST)
+	await frames(2)
+	var before := Farming.water_carried(state)
+
+	# **One held key and a walk down the row.** Not four presses, and not four
+	# stops: watering is the one verb that finishes on the tick it starts, so
+	# stepping does not cancel it the way stepping cancels chopping.
+	await press_key(KEY_SPACE, true)
+	await press_key(KEY_D, true)
+	await until(func() -> bool: return Farming.is_watered(state, row[3]),
+		"the walk to reach the end of the row", 900)
+	await press_key(KEY_D, false)
+	await press_key(KEY_SPACE, false)
+	await frames(2)
+
+	var wet := 0
+	for cell in row:
+		if Farming.is_watered(state, cell):
+			wet += 1
+	expect(wet == row.size(), "holding water across a row waters all of it",
+		"%d of %d" % [wet, row.size()])
+
+	# **Once each.** A held key on a verb that repeated would have emptied the
+	# can into the first tile.
+	var spent := before - Farming.water_carried(state)
+	expect(spent == row.size(), "one tile off the can per tile, not one per "
+		+ "tick", "%d spent for %d tiles" % [spent, row.size()])
+
+	# And walking back over it spends nothing, because there is nothing to do.
+	var after_row := Farming.water_carried(state)
+	await press_key(KEY_SPACE, true)
+	await press_key(KEY_A, true)
+	await frames(60)
+	await press_key(KEY_A, false)
+	await press_key(KEY_SPACE, false)
+	await frames(2)
+	expect(Farming.water_carried(state) == after_row,
+		"walking back over a wet row spends nothing",
+		str(Farming.water_carried(state)))
+
+	# **The night dries it out**, so the chore comes round again tomorrow.
+	await hold_key(KEY_N, 4)
+	await until(func() -> bool:
+		return int(state["phase"]) != Phases.DAY, "the night to start")
+	var still_wet := 0
+	for cell in row:
+		if Farming.is_watered(state, cell):
+			still_wet += 1
+	expect(still_wet == 0, "the night dries the whole field out",
+		str(still_wet))
+
+	await close_scene()
+	_completed += 1     # last line: an abandoned case never gets here
+
+
+## Put the farmer on a cell, the way the other cases do.
+func _stand_at(state: Dictionary, cell: Vector2i,
+		facing: int = Player.SOUTH) -> void:
+	var who: Dictionary = state["player"]
+	who["pos"] = [cell.x * Player.SUBTILE + Player.SUBTILE / 2,
+		cell.y * Player.SUBTILE + Player.SUBTILE / 2]
+	who["facing"] = facing
+	who["action"] = {}
+
+
+## `count` soil cells in a row running east, planted and with a free tile at
+## the west end to start the walk from.
+func _a_planted_row(state: Dictionary, count: int) -> Array:
+	Resources.gain(state, {GameData.MONEY: 100})
+	for found in Farm.cells_of(state, Farm.Terrain.SOIL):
+		var cell: Vector2i = found
+		if not Farm.walkable(state, cell + Vector2i(-1, 0)):
+			continue
+		var run: Array = []
+		for i in count:
+			var at := cell + Vector2i(i, 0)
+			if Farm.terrain_at(state, at) != Farm.Terrain.SOIL \
+					or not Farm.is_empty(state, at):
+				break
+			run.append(at)
+		if run.size() < count:
+			continue
+		for planted in run:
+			var at2: Vector2i = planted
+			Farming.act(state, at2)         # till
+			Farming.act(state, at2)         # plant
+		return run
+	return []

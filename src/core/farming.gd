@@ -27,7 +27,22 @@ extends RefCounted
 ## the key will actually do rather than "farm".
 
 ## What one plot looks like when it has just been turned over.
-const EMPTY_PLOT := {"crop": &"", "growth": 0, "watered": false}
+##
+## `soak` is hundredths of a tick of growth banked from watering. See `tick()`
+## for why the bonus is carried as a fraction rather than applied as one.
+const EMPTY_PLOT := {"crop": &"", "growth": 0, "watered": false, "soak": 0}
+
+## What the well and the pond are, as far as a watering can is concerned.
+const WELL := &"well"
+
+## The four cells a farmer can reach from where they stand.
+##
+## **Spelled out here rather than taken from `Player.FACING_STEPS`.**
+## `Player` asks `Interact`, `Interact` asks this file, and this file
+## asking `Player` back would close the ring.
+const NEIGHBOURS: Array[Vector2i] = [
+	Vector2i(0, 1), Vector2i(-1, 0), Vector2i(0, -1), Vector2i(1, 0),
+]
 
 
 static func initial() -> Dictionary:
@@ -39,6 +54,10 @@ static func initial() -> Dictionary:
 		# state is one flat namespace: this collided silently and planting did
 		# nothing at all until `State.create()` learned to refuse duplicates.
 		"selected_seed": seeds()[0],
+		# Tiles' worth of water in hand. Filled by standing next to water, spent
+		# one tile at a time. Starts empty: the farmer walks out of the house in
+		# the morning carrying nothing.
+		"water_can": 0,
 	}
 
 
@@ -146,6 +165,48 @@ static func stage(state: Dictionary, cell: Vector2i) -> int:
 	return mini(grown * (stages - 1) / maxi(needed, 1), stages - 2)
 
 
+## Whether this plot has been watered since the last night.
+static func is_watered(state: Dictionary, cell: Vector2i) -> bool:
+	return bool(plot(state, cell).get("watered", false))
+
+
+## How many tiles' worth of water is in hand.
+static func water_carried(state: Dictionary) -> int:
+	return int(state["water_can"])
+
+
+## Whether a canful can be drawn from this cell. The pond counts by its
+## terrain and the well by what is standing on it, so "water comes from the
+## pond and the well" is one question with one answer.
+static func is_water_source(state: Dictionary, cell: Vector2i) -> bool:
+	if not Grid.in_bounds(cell):
+		return false
+	if Farm.terrain_at(state, cell) == Farm.Terrain.WATER:
+		return true
+	return Farm.occupant(state, cell).get("id", &"") == WELL
+
+
+## Top the can up when the farmer is standing next to water.
+##
+## **No keypress.** Filling a bucket is not a decision - walking to the water
+## is, and that is the part the carry limit makes you do. Pressing a key to
+## fill would also have to fight the pond for the interact verb, because a
+## water tile already offers `fish` (task 0030) and a tile cannot offer two
+## things without the player having to guess which.
+##
+## Called from `Sim._tick_day()` rather than from `tick()`, because it needs
+## to know where the player is and `Player` already calls into `Interact`,
+## which calls in here - asking the other way round would be a cycle.
+static func refill_beside(state: Dictionary, here: Vector2i) -> bool:
+	if int(state["water_can"]) >= GameData.WATER_CAN_CAPACITY:
+		return false
+	for step in NEIGHBOURS:
+		if is_water_source(state, here + step):
+			state["water_can"] = GameData.WATER_CAN_CAPACITY
+			return true
+	return false
+
+
 static func is_ready(state: Dictionary, cell: Vector2i) -> bool:
 	var here := plot(state, cell)
 	var crop: StringName = here.get("crop", &"")
@@ -170,7 +231,12 @@ static func verb_at(state: Dictionary, cell: Vector2i) -> StringName:
 		return &"plant"
 	if is_ready(state, cell):
 		return &"harvest"
-	return &""                  # growing: there is nothing useful to do yet
+	# **The one chore.** A growing crop used to offer nothing at all, which made
+	# the middle of a crop's life a place the player had no reason to stand. Dry
+	# ground with water in the can offers the can.
+	if not is_watered(state, cell) and water_carried(state) > 0:
+		return &"water"
+	return &""                  # growing, watered: nothing useful to do yet
 
 
 # -------------------------------------------------------------------- doing
@@ -184,6 +250,8 @@ static func act(state: Dictionary, cell: Vector2i) -> void:
 			_plant(state, cell)
 		&"harvest":
 			_harvest(state, cell)
+		&"water":
+			_water(state, cell)
 
 
 static func _till(state: Dictionary, cell: Vector2i) -> void:
@@ -204,6 +272,36 @@ static func _plant(state: Dictionary, cell: Vector2i) -> void:
 	var here: Dictionary = (state["plots"] as Dictionary)[Grid.index(cell)]
 	here["crop"] = seed_id
 	here["growth"] = 0
+
+
+## One tile off the can. **Never fatal and never wasted**: a tile that is
+## already wet does not offer the verb, so holding the key down the row spends
+## exactly one per tile.
+static func _water(state: Dictionary, cell: Vector2i) -> void:
+	if int(state["water_can"]) <= 0:
+		return
+	var here: Dictionary = (state["plots"] as Dictionary)[Grid.index(cell)]
+	if bool(here["watered"]):
+		return
+	here["watered"] = true
+	state["water_can"] = int(state["water_can"]) - 1
+
+
+## The water goes off with the sun. Called when the night begins.
+##
+## `design.md` makes the farm and the fortress the same ground at different
+## hours; watering is a day thing, and a plot that stayed wet through the night
+## would make the chore a once-per-run job rather than a daily one.
+static func dry_out(state: Dictionary) -> void:
+	if not GameData.WATER_LASTS_UNTIL_NIGHT:
+		return                  # the lever says watering is permanent
+	var plots: Dictionary = state["plots"]
+	var keys: Array = plots.keys()
+	keys.sort()
+	for idx in keys:
+		var here: Dictionary = plots[idx]
+		here["watered"] = false
+		here["soak"] = 0
 
 
 ## Take the crop and leave the ground turned over, ready for the next one.
@@ -242,6 +340,19 @@ static func tick(state: Dictionary) -> void:
 		if int(here["growth"]) >= needed:
 			continue
 		here["growth"] = int(here["growth"]) + 1
+
+		# **The bonus is banked, not rounded.** Fifty percent of a tick is not a
+		# number a plot can hold, and rounding it to one or to zero every tick
+		# would be a 100% bonus or none at all. So the percentage accumulates in
+		# hundredths and pays out a whole tick whenever it has one - exact,
+		# integer throughout, and any percentage works, which is what makes
+		# WATER_GROWTH_BONUS a lever rather than a choice between two numbers.
+		if not bool(here["watered"]):
+			continue
+		here["soak"] = int(here["soak"]) + GameData.WATER_GROWTH_BONUS
+		while int(here["soak"]) >= 100 and int(here["growth"]) < needed:
+			here["soak"] = int(here["soak"]) - 100
+			here["growth"] = int(here["growth"]) + 1
 
 
 ## How many plots are tilled, and how many of those are carrying something.

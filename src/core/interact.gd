@@ -42,6 +42,7 @@ const DEFAULT_TICKS: Dictionary = {
 	&"till": 1 * GameData.SECONDS,          # LEVER: ticks, 15-60
 	&"plant": GameData.SECONDS / 3,         # LEVER: ticks, 5-30
 	&"harvest": GameData.SECONDS / 3,       # LEVER: ticks, 5-30
+	&"water": 1,                    # instant; see INSTANT below
 	&"fish": 1 * GameData.SECONDS,
 	&"trade": 1,                    # opening a panel is not work
 	# Starting a job is a moment. The job itself takes as long as the recipe
@@ -61,7 +62,23 @@ const DEFAULT_TICKS: Dictionary = {
 ## own verbs, and they go on their own list when they arrive.
 const DAY_ONLY: Array = [
 	&"chop", &"mine", &"till", &"plant", &"harvest", &"fish", &"trade", &"craft",
+	&"water",
 ]
+
+
+## Verbs that finish on the tick they start, moving or not.
+##
+## **Watering a row has to be one held key and a walk down it.** Every other
+## verb here stops the moment the player steps, which is right for chopping -
+## half a tree does not stay half chopped - and wrong for a watering can. A
+## verb on this list skips the action state entirely: `Player` completes it
+## where it stands, and a tile that has already been watered stops offering it,
+## so holding the key across a row waters each tile exactly once.
+const INSTANT: Array = [&"water"]
+
+
+static func is_instant(verb: StringName) -> bool:
+	return INSTANT.has(verb)
 
 
 ## What this cell offers, or `&""` for nothing.
@@ -129,7 +146,7 @@ static func complete(state: Dictionary, cell: Vector2i, verb: StringName) -> voi
 	match verb:
 		&"chop", &"mine":
 			Gathering.strike(state, cell)
-		&"till", &"plant", &"harvest":
+		&"till", &"plant", &"harvest", &"water":
 			Farming.act(state, cell)
 		&"fish":
 			pass        # task 0030

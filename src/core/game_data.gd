@@ -198,9 +198,24 @@ const CROPS: Dictionary = {
 ## How much faster a watered tile grows, and how long the watering lasts.
 ##
 ## Unwatered is slower, never dead: this is a cozy game and a missed chore is
-## not a punishment.
-const WATER_GROWTH_BONUS := 0.35        # LEVER: fraction faster, 0.1-0.6
+## not a punishment. Thirty-five percent brings carrot in at forty-four seconds
+## instead of sixty - far enough apart to see across a field, not so far that
+## forgetting ruins a day.
+##
+## **A percentage, not a fraction.** This was `0.35` from the day the table was
+## laid out, and nothing ever read it. A float in `src/core/` is a desync
+## waiting for a machine that rounds differently, so it became an integer the
+## moment something needed it: `Farming.tick()` banks it in hundredths of a
+## tick and pays out whole ticks, which is exact for any percentage.
+const WATER_GROWTH_BONUS := 35          # LEVER: percent faster, 10-60
 const WATER_LASTS_UNTIL_NIGHT := true
+
+## How many tiles one canful waters.
+##
+## The field is forty-eight plots, so watering all of it is six trips to the
+## water. That is the chore: worth doing, never required, and the reason the
+## well is somewhere you have to walk to.
+const WATER_CAN_CAPACITY := 8           # LEVER: tiles per fill, 3-20
 
 
 # ================================================================== gathering
@@ -674,7 +689,7 @@ const FARM_MAP: Array = [
 	"...ssssss......HHH..###S##o.....r.......",
 	"T..ssssss......HHH...###S#.............T",
 	"...ssssss.....ppppp..#S###r...o.........",
-	"T.........................o............T",
+	"T.........w...............o............T",
 	"..ssssss....WW.p....r.....r...........TT",
 	"..ssssss....WW.p...$$........o...T.T...T",
 	"..ssssss.......p...............rTT.TT.TT",
@@ -703,6 +718,7 @@ const MAP_LEGEND: Dictionary = {
 	"H": [5, &"house"],
 	"$": [5, &"shop"],
 	"W": [5, &"workshop"],
+	"w": [0, &"well"],
 }
 
 
@@ -944,7 +960,8 @@ static func digest() -> int:
 		"starting": STARTING_RESOURCES,
 		"trade": [BUY_MARKUP, SELL_BACK_FRACTION],
 		"crops": CROPS,
-		"water": [WATER_GROWTH_BONUS],
+		"water": [WATER_GROWTH_BONUS, WATER_CAN_CAPACITY,
+			WATER_LASTS_UNTIL_NIGHT],
 		"gathering": GATHERING,
 		"fishing": FISHING,
 		"recipes": RECIPES,

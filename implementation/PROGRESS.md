@@ -1457,3 +1457,123 @@ Two deliberate moves, in two steps.
 
 `python tools/verify.py` prints PASS: 582 asserts, 163 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+
+## 0029 - Growth stages and watering - done 2026-09-27
+
+A field you can read from across the farm, and one chore worth walking for.
+
+**What changed.** All three crops have four drawn stages now, not just wheat.
+Watering is a new verb on a growing plot: it wants water in hand, the can fills
+by standing next to the pond or the new well, and a watered tile grows 35%
+faster until the night dries it out. Holding the key and walking down a row
+waters each tile once.
+
+Files: `src/core/farming.gd`, `game_data.gd`, `interact.gd`, `player.gd`,
+`phases.gd`, `farm.gd`, `sim.gd`, `src/ui/world_view.gd`, `day_hud.gd`,
+`main.gd`, `tools/sprite_maps.py`, both test tools.
+Verify: 640 headless / 177 input / both hashes moved on purpose, below.
+
+### The levers were already there, as floats
+
+`WATER_GROWTH_BONUS := 0.35` and `WATER_LASTS_UNTIL_NIGHT := true` had been
+sitting in `game_data.gd` since the table was laid out, read by nothing, and
+`digest()` already had a `"water"` key - which is how I found them: my own
+duplicate lever collided with it and the parser said so.
+
+The float had to go. `src/core/` is integer-only on purpose, and a growth rate
+multiplied by 0.35 is the exact shape of a desync that shows up on one
+machine. So the lever kept its name and became `35`, a percentage.
+
+Applying a percentage per tick with integers is the only interesting part:
+0.35 of a tick is not a number a plot can hold, and rounding it every tick
+gives either a 100% bonus or none. Each watered plot banks
+`WATER_GROWTH_BONUS` hundredths per tick and spends a whole tick whenever it
+has one. Exact, integer throughout, and any percentage works - which is what
+makes it a lever rather than a choice between two numbers. Measured: wheat
+ripens at 1999 ticks watered against 2699 dry, and 2700/1.35 = 2000.
+
+### Where the water comes from
+
+The pond is eight rows south of the north field, so a range from open water
+would never have reached the crops. The task asks for "the pond and the well"
+and there was no well anywhere in the game, so one went into the farm map at
+(10, 7), between the two fields, as a fixture that cannot be sold - a player
+who sold their own well would have sold the only water north of the pond.
+
+**The can fills by standing next to a source, with nothing pressed.** Two
+reasons, and the second decided it:
+
+- Filling a bucket is not a decision. Walking to the water is, and the carry
+  limit is what makes you do it.
+- A water tile already offers `fish` (task 0030). A tile that offered two
+  verbs would make the player guess which key does which.
+
+`WATER_CAN_CAPACITY` is 8, so the whole 48-plot field is six trips.
+
+### An instant verb, and the thing that made it necessary
+
+Every verb in the game stops the moment the player steps - right for a tree,
+where half-chopped should not persist in some invisible ledger, and wrong for
+a watering can. So `water` went on a new `Interact.INSTANT` list: it finishes
+on the tick it starts, owns no action state, and `Player` completes it where
+it stands whether or not the farmer is moving. A tile that has been watered
+stops offering the verb, which is what makes a held key water each tile once
+instead of emptying the can into the first one.
+
+That was not enough on its own, and the input case is what caught it: **the
+first attempt watered nothing at all.** `main.gd` writes `intent["interact"]`
+on the *edge* of the key, because a job that has started repeats itself from
+then on without the key being read again. An instant verb has no job to
+repeat, so the edge fires once and the whole walk does nothing.
+
+So the intent now carries both: `interact` is the edge that starts work, and
+`interact_held` is the level, written every frame like `move` and never
+consumed. Two fields because they genuinely mean two different things, and the
+autoplayer of task 0067 will want the same two.
+
+### The watchdog was a deadline, not a watchdog
+
+Adding an eleventh input case made `input_check` fail with "a case never
+finished" - on a suite where nothing was wrong. `WATCHDOG_SECONDS` was being
+measured across the **whole run**, so every case ever added ate into it and the
+eleventh one ran out of budget.
+
+That is a false alarm that gets more likely with every task, and it would have
+been blamed on whatever case happened to be last. `expect()` now puts the
+timer back to zero, so it measures what it was always for - how long the run
+has gone without a single assert landing - and does that as well with two
+hundred cases as with eleven.
+
+### Notes
+
+- **Wet earth is drawn under the crop, not instead of it.** The first version
+  swapped the tile art and a watered row vanished the moment it sprouted,
+  which is a chore with no feedback - the player would be back to remembering
+  which tiles they had done.
+- Looked at the sprites as a contact sheet rather than trusting the maps.
+  Caught corn's ready-stage cob running off the right edge of the tile; both
+  cobs are inboard now. Carrot going green-to-orange at stage 3 is the clearest
+  read of the three.
+- `Farming` deliberately does **not** call `Player`. `Player` asks `Interact`,
+  `Interact` asks `Farming`, and closing that ring is a cyclic reference; the
+  four neighbour steps are spelled out locally and `Sim._tick_day()` is what
+  passes the player's cell in for the refill.
+- `WATER_LASTS_UNTIL_NIGHT` is honoured rather than assumed - `dry_out()`
+  returns early if it is ever turned off.
+
+### Hashes
+
+Both moved on purpose.
+
+| | from | to | why |
+|---|---|---|---|
+| sim hash | `670145679` | `569302775` | the state gained `water_can`, every plot gained `soak`, the intent gained `interact_held`, and the farm gained a well |
+| data hash | `553378396` | `2916488539` | the farm map, `WATER_GROWTH_BONUS` 0.35 -> 35, and the can and the lifetime joining `digest()` |
+
+`python tools/verify.py` prints PASS: 640 asserts, 177 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.
+
+**Follow-up worth a task:** the well is a fixture on the map. A *buildable*
+well would make "where is my water" a placement decision on a bigger farm, and
+`BUILDINGS` already has the shape for it. Not in the MVP unless the fields
+move.

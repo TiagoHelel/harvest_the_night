@@ -26,6 +26,13 @@ extends Control
 ## of numbers. The rows are built from `Farming.seeds()`, so a fourth crop
 ## appears here, on a number key, without this file being touched.
 ##
+## ## The watering can
+##
+## Under the strip, because the two are one chore: what am I about to plant,
+## and have I got water for it. It says where to fill up rather than only how
+## much is left - an empty can and no explanation is how a player decides the
+## mechanic is broken.
+##
 ## ## The night button
 ##
 ## Bottom right, and it says what it will do rather than just "night". It is a
@@ -60,6 +67,7 @@ var _labels: Dictionary = {}        # resource id -> Label
 var _last: Dictionary = {}          # resource id -> the number it last showed
 var _flash: Dictionary = {}         # resource id -> seconds of glow left
 var _seed_rows: Dictionary = {}     # crop id -> Label
+var _water: Label
 
 
 func _ready() -> void:
@@ -95,6 +103,11 @@ func _ready() -> void:
 
 	_build_seed_strip()
 
+	# The can sits under the seed strip, because the two are the same chore:
+	# what am I about to plant, and have I got water for it.
+	_water = _label("WaterCan",
+		Vector2(7, 46 + Farming.seeds().size() * 10 + 3), DIM)
+
 	_night = Button.new()
 	_night.name = "NightButton"
 	_night.text = "SWITCH TO NIGHT"
@@ -116,7 +129,7 @@ func _build_seed_strip() -> void:
 	strip.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	strip.color = Color(0.05, 0.04, 0.09, 0.66)
 	strip.position = Vector2(4, 33)
-	strip.size = Vector2(118, 13 + ids.size() * 10)
+	strip.size = Vector2(134, 13 + ids.size() * 10 + 14)
 	add_child(strip)
 
 	var heading := _label("SeedHeading", Vector2(7, 35), WARM)
@@ -200,6 +213,14 @@ func _refresh(force: bool) -> void:
 			_flash[id] = FLASH_SECONDS
 		_last[id] = held
 		(_labels[id] as Label).text = "%s %d" % [_short(id), held]
+
+	# **The can, and where to fill it when it is empty.** A number on its own
+	# would leave a player who has never found the well holding an empty can
+	# with no idea why.
+	var carried := Farming.water_carried(_state)
+	_water.text = "WATER %d/%d" % [carried, GameData.WATER_CAN_CAPACITY] \
+		if carried > 0 else "WATER  fill at the well"
+	_water.modulate = PICKED if carried > 0 else DIM
 
 	# The chosen row is lit, so the strip answers "what am I about to plant"
 	# without the player having to remember which key they last pressed.

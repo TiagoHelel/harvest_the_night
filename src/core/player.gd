@@ -82,6 +82,14 @@ static func initial() -> Dictionary:
 			# The button on the result screen. Same road as every other input,
 			# so the autoplayer of task 0067 can finish a night.
 			"confirm_result": false,
+			# **Held, not pressed**, and a separate field because the two mean
+			# different things. `interact` is the edge: it starts a job, and
+			# the job repeats itself from then on without the key being read
+			# again. An instant verb has no job to repeat, so watering a row
+			# off the edge alone watered exactly one tile - the first press -
+			# and then nothing for the whole walk. This one is a level, like
+			# `move`: written every frame, never consumed.
+			"interact_held": false,
 		},
 	}
 
@@ -142,6 +150,15 @@ static func tick(state: Dictionary) -> void:
 		intent["cancel"] = false
 		return
 
+	# **Instant verbs happen on the tick, walking or not.** Watering a row is
+	# meant to be one held key and a walk down it, and every verb below this
+	# line stops the moment the player steps - right for a tree, wrong for a
+	# watering can. A tile that has been watered stops offering the verb, so
+	# holding the key across a row waters each tile exactly once.
+	if bool(intent.get("interact", false)) \
+			or bool(intent.get("interact_held", false)):
+		_do_instant(state, target(state))
+
 	if bool(intent.get("cancel", false)) or (dx != 0 or dy != 0):
 		# Walking away gives up on whatever was being done. Half a tree does
 		# not stay half chopped in some invisible ledger.
@@ -156,6 +173,10 @@ static func tick(state: Dictionary) -> void:
 
 	# Intent is consumed, not remembered: a key held down is written again next
 	# frame, and one that was let go stops mattering immediately.
+	#
+	# `interact_held` and `move` are not cleared, because they are levels
+	# rather than edges - the UI writes what the keyboard is doing every frame,
+	# and a level this tick cleared is a level the next tick has to rediscover.
 	intent["interact"] = false
 	intent["cancel"] = false
 
@@ -210,10 +231,20 @@ static func _facing_for(dx: int, dy: int, current: int) -> int:
 
 # ------------------------------------------------------------------- doing
 
+## An instant verb, done where the player is standing. Nothing is remembered:
+## there is no action to interrupt and nothing to walk away from.
+static func _do_instant(state: Dictionary, cell_target: Vector2i) -> void:
+	var verb := Interact.verb_at(state, cell_target)
+	if verb != &"" and Interact.is_instant(verb):
+		Interact.complete(state, cell_target, verb)
+
+
 static func _begin(state: Dictionary, cell_target: Vector2i) -> void:
 	var verb := Interact.verb_at(state, cell_target)
 	if verb == &"":
 		return
+	if Interact.is_instant(verb):
+		return          # already done above, and it owns no action state
 	var ticks := Interact.ticks_for(state, cell_target, verb)
 	var player: Dictionary = state["player"]
 	# Face what you are about to do, even if the target was the fallback.

@@ -74,6 +74,10 @@ func _process(_delta: float) -> void:
 	move[1] = int(Input.get_axis(&"move_up", &"move_down"))
 	if _just_pressed(&"interact"):
 		intent["interact"] = true
+	# **The level as well as the edge.** Holding the key is how a row gets
+	# watered in one walk; the edge is what starts a job that then repeats
+	# itself. See `Player.initial()` for why they are two fields.
+	intent["interact_held"] = Input.is_action_pressed(&"interact")
 	if _just_pressed(&"cancel"):
 		intent["cancel"] = true
 

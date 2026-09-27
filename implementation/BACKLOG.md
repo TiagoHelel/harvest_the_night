@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`######..................`  **28 / 108 done**
+`######..................`  **29 / 108 done**
 
-0 doing / 80 todo / 0 blocked across 9 phases.
+0 doing / 79 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0029 - Growth stages and watering**. The whole of what is left is
+First up: **0030 - Fishing**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,24 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-80 task(s) left, the ready ones first, then what they
+79 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0029 - Growth stages and watering
-
-Ready to pick up.  Likely files: `src/core/farming.gd`.
-
-A field you can read at a glance, and one small daily chore that rewards coming back.
-
-- Four visible stages per crop, driven by the growth ticks already in data
-- Watering a tile speeds growth by a lever percentage until the next night
-- Unwatered is slower, never fatal - this is a cozy game, not a punishment
-- Water comes from the pond and the well, with a range or a carry limit that is a lever
-- Watering the whole field is one held input, not forty clicks
-
-  - done when: A watered and an unwatered tile planted together finish a measurable distance apart
-  - done when: Holding the water input across a row waters the row once each
 
 ### 0030 - Fishing
 
@@ -572,7 +557,7 @@ Towers that consume something. The clearest possible version of 'what you made t
 
 ### 0038 - Production runs while you are elsewhere
 
-Waits on 0037, 0029.  Likely files: `src/core/sim.gd`.
+Waits on 0037.  Likely files: `src/core/sim.gd`.
 
 The feeling the design document asks for: 'I built a machine and now I want to find out whether it works'.
 
@@ -1259,10 +1244,10 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0026** [The tower kills the zombie](prompts/0026-combat.md)
 - [x] **0027** [Three waves, a result screen, and back to the farm](prompts/0027-first-loop.md)
 
-## 2 - The full day  (1/14)
+## 2 - The full day  (2/14)
 
 - [x] **0028** [Corn and carrot](prompts/0028-three-crops.md)
-- [ ] **0029** [Growth stages and watering](prompts/0029-growth-stages.md)
+- [x] **0029** [Growth stages and watering](prompts/0029-growth-stages.md)
 - [ ] **0030** [Fishing](prompts/0030-fishing.md)
 - [ ] **0031** [Iron from the rock face](prompts/0031-iron.md)
 - [ ] **0032** [Oil](prompts/0032-oil.md)
@@ -1271,7 +1256,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [ ] **0035** [Gunpowder and ammunition](prompts/0035-ammunition.md) - needs 0032, 0033
 - [ ] **0036** [The inventory](prompts/0036-inventory.md)
 - [ ] **0037** [The workshop queue](prompts/0037-craft-queue.md) - needs 0036
-- [ ] **0038** [Production runs while you are elsewhere](prompts/0038-idle-production.md) - needs 0037, 0029
+- [ ] **0038** [Production runs while you are elsewhere](prompts/0038-idle-production.md) - needs 0037
 - [ ] **0039** [The day clock and dusk](prompts/0039-day-clock.md)
 - [ ] **0040** [The shop grows](prompts/0040-shop-full.md)
 - [ ] **0041** [The first day teaches itself](prompts/0041-tutorial-day.md) - needs 0039, 0040

@@ -475,18 +475,33 @@ func _refresh_plots() -> void:
 	keys.sort()
 	for idx in keys:
 		var cell := Grid.cell(int(idx))
-		var crop: StringName = (plots[idx] as Dictionary)["crop"]
-		var art := "tilled" if crop == &"" \
-			else "%s_%d" % [crop, Farming.stage(_state, cell)]
-		var texture := _crop_texture(art)
-		if texture == null:
-			continue
-		var sprite := Sprite2D.new()
-		sprite.texture = texture
-		sprite.centered = false
-		sprite.position = Vector2(cell) * size
-		_plots.add_child(sprite)
-		_plot_sprites.append(sprite)
+		var here: Dictionary = plots[idx]
+
+		# **The earth first, the crop on top of it.** Watering has to stay
+		# visible under a crop that is already up - a wet row you cannot see
+		# once it has sprouted is a chore with no feedback, and the player would
+		# be back to counting which tiles they had done.
+		_plot_sprite("tilled_wet" if bool(here["watered"]) else "tilled",
+			cell, size)
+
+		var crop: StringName = here["crop"]
+		if crop != &"":
+			_plot_sprite("%s_%d" % [crop, Farming.stage(_state, cell)],
+				cell, size)
+
+
+## One sprite on one plot. Two of them stack on a watered tile with something
+## growing in it, which is why this is a function rather than a block.
+func _plot_sprite(art: String, cell: Vector2i, size: float) -> void:
+	var texture := _crop_texture(art)
+	if texture == null:
+		return
+	var sprite := Sprite2D.new()
+	sprite.texture = texture
+	sprite.centered = false
+	sprite.position = Vector2(cell) * size
+	_plots.add_child(sprite)
+	_plot_sprites.append(sprite)
 
 
 ## A crop sprite, cached. A stage the pipeline has not drawn falls back to the

@@ -166,6 +166,215 @@ SPRITES = {
 
     # ----------------------------------------------------------------- crops
 
+    # Wet earth. The same furrows as `crops/tilled`, darker and without the
+    # dry crumb, so a watered row reads from across the farm - which is the
+    # whole point of a chore you do a row at a time.
+    "crops/tilled_wet": dict(size=TILE, legend={
+        "d": "soil_dark", "s": "soil", "i": "ink", ".": None,
+    }, rows=[
+        "iiiiiiiiiiiiiiii",
+        "iddiddiddiddiddi",
+        "iddiddiddiddiddi",
+        "iiiiiiiiiiiiiiii",
+        "ddiddiddiddiddid",
+        "ddiddiddiddiddid",
+        "iiiiiiiiiiiiiiii",
+        "iddiddiddiddiddi",
+        "iddiddiddiddiddi",
+        "iiiiiiiiiiiiiiii",
+        "ddiddiddiddiddid",
+        "ddiddiddiddiddid",
+        "iiiiiiiiiiiiiiii",
+        "iddiddiddiddiddi",
+        "iddiddiddiddiddi",
+        "iiiiiiiiiiiiiiii",
+    ]),
+
+    # Corn, just in. Two mounds rather than wheat's four: corn is planted
+    # wide, and it is the silhouette that has to say which crop this is from
+    # the other side of the field.
+    "crops/corn_0": dict(size=TILE, legend={
+        "d": "soil_dark", ".": None,
+    }, rows=[
+        "................",
+        "................",
+        "................",
+        "................",
+        "....dd....dd....",
+        "...dddd..dddd...",
+        "....dd....dd....",
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+    ]),
+
+    # Sprouted: a single blade each, already taller than wheat at the same
+    # stage.
+    "crops/corn_1": dict(size=TILE, legend={
+        "g": "leaf_dark", "l": "leaf", ".": None,
+    }, rows=[
+        "................",
+        "................",
+        "................",
+        "...l.......l....",
+        "...gl......gl...",
+        "....g.......g...",
+        "....g.......g...",
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+    ]),
+
+    # Full stalks, leaves out, no cobs yet.
+    "crops/corn_2": dict(size=TILE, legend={
+        "g": "leaf_dark", "l": "leaf", "L": "leaf_light", ".": None,
+    }, rows=[
+        "................",
+        "....L.......L...",
+        "...Lg......Lg...",
+        "..LlgL....LlgL..",
+        "...lgl.....lgl..",
+        "..Llgl....Llgl..",
+        "...lgl.....lgl..",
+        "....g.......g...",
+        "....g.......g...",
+        "....g.......g...",
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+    ]),
+
+    # Ready: the cob is gold and it is on the outside, where it can be seen.
+    "crops/corn_3": dict(size=TILE, legend={
+        "g": "leaf_dark", "l": "leaf", "L": "leaf_light",
+        "c": "gold", "C": "gold_light", ".": None,
+    }, rows=[
+        "................",
+        "....L.......L...",
+        "...Lg.C....Lg.C.",
+        "..LlgLCC..LlgLCC",
+        "...lglCc...lglCc",
+        "..LlglCc..LlglCc",
+        "...lgl.c...lgl.c",
+        "....g.......g...",
+        "....g.......g...",
+        "....g.......g...",
+        "....g.......g...",
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+    ]),
+
+    # Carrot, just in. Four small mounds, close together - carrot is the
+    # crowded crop, which is part of why it pays per plot.
+    "crops/carrot_0": dict(size=TILE, legend={
+        "d": "soil_dark", ".": None,
+    }, rows=[
+        "................",
+        "................",
+        "................",
+        "..dd..dd..dd....",
+        "..dd..dd..dd....",
+        "................",
+        "................",
+        "................",
+        "..dd..dd..dd....",
+        "..dd..dd..dd....",
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+    ]),
+
+    # Sprouted: feathery tops, low to the ground.
+    "crops/carrot_1": dict(size=TILE, legend={
+        "g": "leaf_dark", "l": "leaf", ".": None,
+    }, rows=[
+        "................",
+        "................",
+        "..l....l....l...",
+        "..gl...gl...gl..",
+        "..g....g....g...",
+        "................",
+        "................",
+        "................",
+        "..l....l....l...",
+        "..gl...gl...gl..",
+        "..g....g....g...",
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+    ]),
+
+    # Tops out, nothing showing above the soil yet.
+    "crops/carrot_2": dict(size=TILE, legend={
+        "g": "leaf_dark", "l": "leaf", "L": "leaf_light", ".": None,
+    }, rows=[
+        "................",
+        "..L.l..L.l..L.l.",
+        ".lLgl.lLgl.lLgl.",
+        "..lgl..lgl..lgl.",
+        "..ggg..ggg..ggg.",
+        "................",
+        "................",
+        "..L.l..L.l..L.l.",
+        ".lLgl.lLgl.lLgl.",
+        "..lgl..lgl..lgl.",
+        "..ggg..ggg..ggg.",
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+    ]),
+
+    # Ready: the orange shoulder is up out of the ground. That is the whole
+    # read - a field of carrots goes from green to orange the moment it can
+    # be pulled.
+    "crops/carrot_3": dict(size=TILE, legend={
+        "g": "leaf_dark", "l": "leaf", "L": "leaf_light",
+        "o": "flame", "d": "gold_dark", ".": None,
+    }, rows=[
+        "................",
+        "..L.l..L.l..L.l.",
+        ".lLgl.lLgl.lLgl.",
+        "..lgl..lgl..lgl.",
+        "..ooo..ooo..ooo.",
+        "..odo..odo..odo.",
+        "................",
+        "..L.l..L.l..L.l.",
+        ".lLgl.lLgl.lLgl.",
+        "..lgl..lgl..lgl.",
+        "..ooo..ooo..ooo.",
+        "..odo..odo..odo.",
+        "................",
+        "................",
+        "................",
+        "................",
+    ]),
+
+
     # Turned earth waiting for a seed. Darker and rougher than the field it
     # sits on, so a tilled row reads from across the farm.
     "crops/tilled": dict(size=TILE, legend={
@@ -279,6 +488,32 @@ SPRITES = {
     ]),
 
     # ---------------------------------------------------------------- props
+
+    # The well. Stone ring, a roof on two posts and water down the shaft - the
+    # only water north of the pond, and it has to read as water from a screen
+    # away or nobody will walk to it.
+    "props/well": dict(size=TILE, legend={
+        "t": "stone", "d": "stone_dark", "l": "stone_light",
+        "r": "roof", "R": "roof_light", "w": "wood_dark",
+        "a": "water", "A": "water_light", "i": "ink", ".": None,
+    }, rows=[
+        "......iiii......",
+        "....iiRRRRii....",
+        "...iRRrrrrRRi...",
+        "..iRrrrrrrrrRi..",
+        ".irrrrrrrrrrrri.",
+        "iiiiiwiiiiwiiiii",
+        "....iwi..iwi....",
+        "....iwi..iwi....",
+        "...iltiiiitli...",
+        "..iltaAAAAatli..",
+        "..itaaAAAAaati..",
+        "..itaaaaaaaati..",
+        "..idttttttttdi..",
+        "..iddddddddddi..",
+        "...iiiiiiiiii...",
+        "................",
+    ]),
 
     # A tree. The canopy overhangs the trunk, so a row of them reads as a wood
     # rather than as lollipops.

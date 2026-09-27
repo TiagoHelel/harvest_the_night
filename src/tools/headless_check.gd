@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 21
+const GROUPS := 22
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -85,6 +85,7 @@ func _run() -> void:
 	_task_0026_combat()
 	_task_0027_the_loop()
 	_task_0028_crops()
+	_task_0029_watering()
 
 
 func _finish() -> void:
@@ -2625,3 +2626,187 @@ func _wins_at(ids: Array, score: Callable) -> StringName:
 		elif n == best_score:
 			tied = true
 	return &"" if tied else best
+
+
+## 0029 - four stages you can see, and one chore worth doing.
+func _task_0029_watering() -> void:
+	# **Four stages, and each one is reachable.** The stage is computed from the
+	# growth ticks already in data, so this is really a check that the division
+	# lands on every step rather than skipping one on a short crop.
+	for id in Farming.seeds():
+		var data: Dictionary = GameData.CROPS[id]
+		var stages := int(data["stages"])
+		expect(stages == 4, "%s has four stages" % id, str(stages))
+		var state := State.create(1100)
+		Resources.gain(state, {GameData.MONEY: 100})
+		Farming.select_seed(state, id)
+		var cell := _a_plot(state)
+		Farming.act(state, cell)
+		Farming.act(state, cell)
+		var seen: Array = []
+		for _i in int(data["growth_ticks"]) + 1:
+			var stage := Farming.stage(state, cell)
+			if not seen.has(stage):
+				seen.append(stage)
+			Sim.advance(state, 1)
+		seen.sort()
+		expect(seen == [0, 1, 2, 3],
+			"%s passes through every one of them" % id, str(seen))
+
+		# And there is art for each, so "visible" means visible.
+		for stage in 4:
+			var path := "res://sprites/crops/%s_%d.png" % [id, stage]
+			expect(ResourceLoader.exists(path),
+				"%s stage %d has a sprite" % [id, stage], path)
+
+	# **The water comes from the pond and the well**, and both answer the same
+	# question the same way.
+	var farm := State.create(1101)
+	var pond: Vector2i = Farm.cells_of(farm, Farm.Terrain.WATER)[0]
+	expect(Farming.is_water_source(farm, pond), "the pond is a water source")
+	var wells := Farm.cells_with(farm, &"well")
+	expect(wells.size() == 1, "there is a well on the farm", str(wells.size()))
+	expect(Farming.is_water_source(farm, wells[0]), "and it is a water source")
+	expect(not Farming.is_water_source(farm, _a_plot(farm)),
+		"a soil tile is not")
+	expect(not Farm.remove(farm, wells[0]),
+		"and the well cannot be sold - it is the only water north of the pond")
+
+	# **The can fills by standing next to water**, not by pressing anything. A
+	# water tile already offers `fish`, and a tile that offered two things would
+	# make the player guess which.
+	expect(Farming.water_carried(farm) == 0, "the can starts empty",
+		str(Farming.water_carried(farm)))
+	expect(not Farming.refill_beside(farm, _a_plot(farm)),
+		"standing in the field fills nothing")
+	expect(Farming.refill_beside(farm, wells[0] + Vector2i(0, 1)),
+		"standing next to the well fills the can")
+	expect(Farming.water_carried(farm) == GameData.WATER_CAN_CAPACITY,
+		"right to the top", str(Farming.water_carried(farm)))
+	expect(not Farming.refill_beside(farm, wells[0] + Vector2i(0, 1)),
+		"and a full can does not refill - nothing to do, nothing done")
+
+	var shore := pond + Vector2i(0, -1)
+	var beside_pond := State.create(1102)
+	expect(Farming.refill_beside(beside_pond, shore),
+		"the pond fills it too", str(shore))
+
+	# **Watered finishes measurably ahead of dry.** The done-when of this task,
+	# and the one number a player will actually feel.
+	var race := State.create(1103)
+	Resources.gain(race, {GameData.MONEY: 100})
+	Farming.select_seed(race, GameData.WHEAT)
+	var field := Farm.cells_of(race, Farm.Terrain.SOIL)
+	var wet: Vector2i = field[0]
+	var dry: Vector2i = field[1]
+	for cell in [wet, dry]:
+		Farming.act(race, cell)             # till
+		Farming.act(race, cell)             # plant
+	race["water_can"] = GameData.WATER_CAN_CAPACITY
+	expect(Farming.verb_at(race, wet) == &"water",
+		"a growing crop with water in hand offers the can",
+		str(Farming.verb_at(race, wet)))
+	Farming.act(race, wet)
+	expect(Farming.is_watered(race, wet), "and watering it takes")
+	expect(not Farming.is_watered(race, dry), "the one beside it is still dry")
+	expect(Farming.water_carried(race) == GameData.WATER_CAN_CAPACITY - 1,
+		"one tile off the can", str(Farming.water_carried(race)))
+	expect(Farming.verb_at(race, wet) == &"",
+		"and a wet tile offers nothing - which is what stops a held key "
+		+ "watering it twice", str(Farming.verb_at(race, wet)))
+	Farming.act(race, wet)
+	expect(Farming.water_carried(race) == GameData.WATER_CAN_CAPACITY - 1,
+		"watering it again spends nothing", str(Farming.water_carried(race)))
+
+	var wet_at := -1
+	var dry_at := -1
+	for t in 8000:
+		Sim.advance(race, 1)
+		if wet_at < 0 and Farming.is_ready(race, wet):
+			wet_at = t
+		if dry_at < 0 and Farming.is_ready(race, dry):
+			dry_at = t
+		if wet_at >= 0 and dry_at >= 0:
+			break
+	print("  wheat: watered ready at %d ticks, dry at %d - %d apart"
+		% [wet_at, dry_at, dry_at - wet_at])
+	expect(wet_at > 0 and dry_at > 0, "both of them came up",
+		"%d and %d" % [wet_at, dry_at])
+	expect(wet_at < dry_at, "the watered one first",
+		"%d against %d" % [wet_at, dry_at])
+	# A second of daylight apart is the floor for "measurable": less than that
+	# and nobody watching the field would be able to tell.
+	expect(dry_at - wet_at >= GameData.SECONDS,
+		"by more than a second of daylight", "%d ticks" % (dry_at - wet_at))
+	# And it is the bonus, not a coincidence: dry takes the ticks the table
+	# says, watered takes those ticks scaled by the lever.
+	var needed := int((GameData.CROPS[GameData.WHEAT] as Dictionary)["growth_ticks"])
+	expect(dry_at == needed - 1, "dry takes exactly what the table says",
+		"%d against %d" % [dry_at, needed])
+	expect(absi(wet_at - (needed * 100 / (100 + GameData.WATER_GROWTH_BONUS))) <= 2,
+		"and watered takes that over the lever", "%d ticks" % wet_at)
+
+	# **Never fatal.** The dry one still ripened, and it still pays the same.
+	var paid := Resources.amount(race, GameData.WHEAT)
+	Farming.act(race, dry)
+	expect(Resources.amount(race, GameData.WHEAT) - paid
+		== int((GameData.CROPS[GameData.WHEAT] as Dictionary)["yield"]),
+		"and a crop nobody watered pays the same as one they did",
+		str(Resources.amount(race, GameData.WHEAT) - paid))
+
+	# **An empty can offers nothing**, rather than offering a verb that fails.
+	var empty := State.create(1104)
+	Resources.gain(empty, {GameData.MONEY: 100})
+	var thirsty := _a_plot(empty)
+	Farming.act(empty, thirsty)
+	Farming.act(empty, thirsty)
+	expect(Farming.water_carried(empty) == 0, "no water in hand")
+	expect(Farming.verb_at(empty, thirsty) == &"",
+		"so the tile offers nothing to do",
+		str(Farming.verb_at(empty, thirsty)))
+	Farming.act(empty, thirsty)
+	expect(not Farming.is_watered(empty, thirsty),
+		"and watering with an empty can does nothing")
+	expect(Farming.water_carried(empty) == 0, "least of all go negative",
+		str(Farming.water_carried(empty)))
+
+	# **The carry limit is a limit.** One canful waters exactly that many tiles.
+	var carrying := State.create(1105)
+	Resources.gain(carrying, {GameData.MONEY: 200})
+	carrying["water_can"] = GameData.WATER_CAN_CAPACITY
+	var row := Farm.cells_of(carrying, Farm.Terrain.SOIL)
+	var watered := 0
+	for i in GameData.WATER_CAN_CAPACITY + 3:
+		var cell: Vector2i = row[i]
+		Farming.act(carrying, cell)         # till
+		Farming.act(carrying, cell)         # plant
+		Farming.act(carrying, cell)         # water, while there is water
+		if Farming.is_watered(carrying, cell):
+			watered += 1
+	expect(watered == GameData.WATER_CAN_CAPACITY,
+		"a canful waters exactly what the lever says", str(watered))
+	expect(Farming.water_carried(carrying) == 0, "and then it is empty")
+
+	# **The water goes off with the sun.** A plot that stayed wet overnight
+	# would make this a once-per-run job rather than a daily one.
+	expect(Farming.is_watered(carrying, row[0]), "wet at dusk")
+	var soaked := int(Farming.plot(carrying, row[0])["soak"])
+	Phases.begin_preparation(carrying)
+	expect(not Farming.is_watered(carrying, row[0]),
+		"and dry when the night begins")
+	expect(int(Farming.plot(carrying, row[0])["soak"]) == 0,
+		"with the banked fraction gone too - a crop cannot save up a night's "
+		+ "worth of watering it did not get", str(soaked))
+	expect(Farming.crop_on(carrying, row[0]) != &"",
+		"the crop itself is untouched")
+
+	# **The verb is instant**, which is what lets a held key water a row while
+	# the player walks down it. Every other verb stops dead when they step.
+	expect(Interact.is_instant(&"water"), "watering is an instant verb")
+	for verb in [&"chop", &"mine", &"till", &"plant", &"harvest"]:
+		expect(not Interact.is_instant(verb),
+			"%s is not - it is work, and walking away gives up on it" % verb)
+	expect(Interact.DAY_ONLY.has(&"water"),
+		"and it belongs to the daylight like the rest of the farm")
+
+	_completed += 1     # last line: an abandoned group never gets here

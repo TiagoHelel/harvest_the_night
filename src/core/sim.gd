@@ -58,6 +58,10 @@ static func _tick_day(state: Dictionary) -> void:
 
 	Building.tick(state)
 	Farming.tick(state)
+	# **Filling the can is a fact about where the player is standing**, so it
+	# is asked here where both are in scope rather than from inside `Farming`,
+	# which `Player` already reaches through `Interact`.
+	Farming.refill_beside(state, Player.cell(state))
 	Gathering.tick(state)
 	Crafting.tick(state)
 	Player.tick(state)

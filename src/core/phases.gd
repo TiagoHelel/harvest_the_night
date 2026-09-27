@@ -60,6 +60,9 @@ static func begin_preparation(state: Dictionary) -> bool:
 	# Whatever was open closes with the day. Standing at the market while the
 	# first zombie walks in would be a panel that outlived its reason.
 	state["open_panel"] = &""
+	# The water goes off with the sun: watering is a daily chore, not a job you
+	# do once on day one and never again.
+	Farming.dry_out(state)
 	_enter(state, PREPARATION)
 	return true
 

@@ -28,7 +28,10 @@ const UNWALKABLE := [Terrain.WATER, Terrain.ROCK]
 
 ## Occupants that were there when the farm was made and are part of it.
 ## The house can never be built on, sold, or walked through.
-const FIXTURES := [&"house", &"shop"]
+## The well joined these at task 0029: it is where the water comes from, and a
+## player who sold their own well would have sold the farm's only water north
+## of the pond.
+const FIXTURES := [&"house", &"shop", &"well"]
 
 
 ## The keys this subsystem owns. `State.create()` merges them in.

@@ -1,7 +1,7 @@
 # 0029 - Growth stages and watering
 
 - **Phase:** 2 - The full day
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0028
 - **Likely files:** src/core/farming.gd
 
