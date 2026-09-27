@@ -1,7 +1,7 @@
 # 0015 - The player walks and interacts
 
 - **Phase:** 1 - The first playable build
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0013
 - **Likely files:** src/core/player.gd, src/ui/player_view.gd
 

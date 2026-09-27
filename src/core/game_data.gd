@@ -70,6 +70,13 @@ const TILE_SIZE := 16
 ## What the farmhouse can take before the night is lost.
 const HOUSE_HP := 100                   # LEVER: hit points, 60-200
 
+## How fast the player walks, in `Player.SUBTILE` units per tick.
+##
+## 64 units is a tile and there are 30 ticks a second, so 6 is 2.8 tiles a
+## second - brisk enough to cross the farm without the day feeling like a
+## commute, slow enough that the farm feels like a place rather than a menu.
+const PLAYER_SPEED := 6                 # LEVER: subtile units per tick, 3-12
+
 
 # ================================================================== resources
 
@@ -780,7 +787,8 @@ static func digest() -> int:
 	return State.hash_of({
 		"time": [TICK_HZ, DAY_TICKS, DUSK_AT_TICK, PREPARATION_TICKS,
 			MAX_CATCH_UP_TICKS],
-		"farm": [GRID_WIDTH, GRID_HEIGHT, TILE_SIZE, HOUSE_HP],
+		"farm": [GRID_WIDTH, GRID_HEIGHT, TILE_SIZE, HOUSE_HP,
+			PLAYER_SPEED],
 		"map": FARM_MAP,
 		"resources": RESOURCES,
 		"sell_price": SELL_PRICE,

@@ -34,7 +34,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 3
+const CASES := 4
 
 var passed := 0
 var failed := 0
@@ -67,6 +67,7 @@ func _run() -> void:
 	await _case_0011_harness()
 	await _case_0012_debug_overlay()
 	await _case_0013_world_view()
+	await _case_0015_player()
 	_finish()
 
 
@@ -129,7 +130,7 @@ func _case_0011_harness() -> void:
 	probe.size = Vector2(80, 24)
 	var clicks := [0]
 	probe.pressed.connect(func() -> void: clicks[0] += 1)
-	_scene.add_child(probe)
+	require_control("Screen").add_child(probe)
 	await frames(2)
 
 	await click_control("ClickProbe")
@@ -231,7 +232,7 @@ func _case_0012_debug_overlay() -> void:
 	probe.size = Vector2(60, 20)
 	var clicks := [0]
 	probe.pressed.connect(func() -> void: clicks[0] += 1)
-	_scene.add_child(probe)
+	require_control("Screen").add_child(probe)
 	await frames(2)
 	await click_at(Vector2(20, 14))
 	expect(clicks[0] == 1,
@@ -272,10 +273,12 @@ func _case_0013_world_view() -> void:
 	# Everything on the farm got drawn, and nothing was drawn twice.
 	var occupants: Dictionary = driver.state["occupants"]
 	var drawn := view.find_child("Occupants", true, false)
-	expect(drawn != null and drawn.get_child_count() == occupants.size(),
+	# Only the sprites: the layer also holds the highlight and the player, who
+	# live here so that walking behind a tree puts them behind the tree.
+	expect(drawn != null and _sprites_in(drawn) == occupants.size(),
 		"one sprite per occupant, no more and no fewer",
 		"%d drawn, %d on the farm"
-		% [drawn.get_child_count() if drawn else -1, occupants.size()])
+		% [_sprites_in(drawn) if drawn else -1, occupants.size()])
 
 	# **Moving the camera cannot move the game.** The view reads the state and
 	# never writes to it; this is the assert that keeps it that way.
@@ -292,16 +295,17 @@ func _case_0013_world_view() -> void:
 
 	# **A click on a cell goes where the camera put it.** This is why
 	# cell_to_screen exists at all: without it every click case would be wrong
-	# the moment the camera moved.
-	view.look_at_cell(Vector2i(0, 9))
-	await frames(3)
-	var left_edge := view.cell_to_screen(Vector2i(2, 9))
-	view.look_at_cell(Vector2i(39, 9))
-	await frames(3)
-	var right_edge := view.cell_to_screen(Vector2i(2, 9))
-	expect(left_edge.x != right_edge.x,
-		"the same cell is at a different place after a pan",
-		"%s then %s" % [left_edge, right_edge])
+	# the moment the camera moved - and since task 0015 the camera follows the
+	# player, so it moves constantly.
+	var cam_probe: Camera2D = view.find_child("Camera", true, false)
+	var before_walk := cam_probe.position.x
+	var at_cell_before := view.cell_to_screen(Vector2i(20, 9))
+	await hold_key(KEY_D, 60)
+	expect(cam_probe.position.x > before_walk,
+		"the camera follows the player east",
+		"%.0f then %.0f" % [before_walk, cam_probe.position.x])
+	expect(view.cell_to_screen(Vector2i(20, 9)).x != at_cell_before.x,
+		"so a fixed cell is somewhere else on screen afterwards")
 
 	# Screen and cell are each other's inverse, wherever the camera is.
 	for cell in [Vector2i(20, 9), Vector2i(25, 4), Vector2i(30, 12)]:
@@ -317,10 +321,14 @@ func _case_0013_world_view() -> void:
 	expect(cam != null and cam.limit_right == WorldView.WORLD_SIZE.x,
 		"the camera is fenced in at the farm's edge")
 	view.look_at_cell(Vector2i(-50, 9))
-	await frames(3)
-	expect(view.cell_to_screen(Vector2i(0, 0)).x >= -1.0,
-		"panning hard left still starts at column 0",
-		str(view.cell_to_screen(Vector2i(0, 0))))
+	await frames(1)
+	expect(cam.position.x >= 240.0,
+		"the camera cannot be pushed past the farm left edge",
+		str(cam.position.x))
+	view.look_at_cell(Vector2i(500, 9))
+	await frames(1)
+	expect(cam.position.x <= float(WorldView.WORLD_SIZE.x) - 240.0,
+		"nor past its right edge", str(cam.position.x))
 
 	# The occupant layer follows the farm when the farm changes, without
 	# anybody having to say so.
@@ -337,6 +345,144 @@ func _case_0013_world_view() -> void:
 
 	await close_scene()
 	_completed += 1     # last line: an abandoned case never gets here
+
+
+## 0015 - the player: they walk, the pond stops them, and interact does the
+## thing in front of them.
+func _case_0015_player() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var view: WorldView = require_control("WorldView")
+	if driver == null or view == null:
+		_completed += 1
+		await close_scene()
+		return
+
+	var start := Player.cell(driver.state)
+	expect(Farm.walkable(driver.state, start),
+		"the player starts somewhere legal", str(start))
+
+	# Walking, and the facing that comes with it.
+	await hold_key(KEY_S, 20)
+	expect(Player.facing(driver.state) == Player.SOUTH,
+		"walking down faces down")
+	expect(Player.cell(driver.state).y >= start.y, "and moves down",
+		"%s to %s" % [start, Player.cell(driver.state)])
+
+	await hold_key(KEY_A, 30)
+	expect(Player.facing(driver.state) == Player.WEST,
+		"walking left faces left")
+
+	# **The pond stops you rather than swallowing you.** Walk south-west for
+	# long enough to reach the water and check where the player ended up.
+	for _i in 8:
+		await hold_key(KEY_S, 30)
+		await hold_key(KEY_A, 30)
+	var landed := Player.cell(driver.state)
+	expect(Farm.walkable(driver.state, landed),
+		"after walking into the pond the player is on dry land", str(landed))
+	expect(Farm.terrain_at(driver.state, landed) != Farm.Terrain.WATER,
+		"and specifically not in the water",
+		str(Farm.terrain_at(driver.state, landed)))
+
+	# **The same inputs from the same seed end on the same cell.** The property
+	# the whole tick design exists for.
+	var replay_a := _replay_walk(int(driver.state["seed"]))
+	var replay_b := _replay_walk(int(driver.state["seed"]))
+	expect(replay_a == replay_b, "the same key sequence ends at the same cell",
+		"%s vs %s" % [replay_a, replay_b])
+
+	# Interact starts whatever the faced cell offers.
+	var state := driver.state
+	var tree_cells := Farm.cells_with(state, &"tree")
+	expect(not tree_cells.is_empty(), "there are trees to chop")
+
+	# Put the player beside a tree directly: walking to a named tree is the
+	# autoplayer's job at task 0067, not this case's.
+	var tree := Vector2i(-1, -1)
+	var beside := Vector2i(-1, -1)
+	for candidate in tree_cells:
+		var spot := _walkable_neighbour(state, candidate)
+		if spot != Vector2i(-1, -1):
+			tree = candidate
+			beside = spot
+			break
+	expect(beside != Vector2i(-1, -1), "and one can be stood next to",
+		str(tree))
+	if beside != Vector2i(-1, -1):
+		driver.running = false
+		await frames(2)
+		var who: Dictionary = state["player"]
+		who["pos"] = [beside.x * Player.SUBTILE + Player.SUBTILE / 2,
+			beside.y * Player.SUBTILE + Player.SUBTILE / 2]
+		who["facing"] = _facing_from(beside, tree)
+		driver.running = true
+		await frames(3)
+
+		expect(Player.target(state) == tree, "the target is the tree faced",
+			"%s facing %d gives %s"
+			% [beside, Player.facing(state), Player.target(state)])
+		expect(Interact.verb_at(state, tree) == &"chop",
+			"which offers chopping")
+
+		await hold_key(KEY_SPACE, 4)
+		await frames(3)
+		expect(Player.is_busy(state), "pressing interact starts the work")
+		var action: Dictionary = who["action"]
+		expect(action.get("verb", &"") == &"chop", "and the work is chopping",
+			str(action))
+
+		# **Walking away gives it up**, rather than leaving half a tree chopped
+		# in an invisible ledger.
+		await hold_key(KEY_W, 6)
+		expect(not Player.is_busy(state), "walking away stops the work")
+
+	await close_scene()
+	_completed += 1     # last line: an abandoned case never gets here
+
+
+## Drive the same keys into a fresh game twice and see where the player lands.
+func _replay_walk(seed_value: int) -> Vector2i:
+	var state := State.create(seed_value)
+	var script: Array = [
+		[Vector2i(1, 0), 25], [Vector2i(0, 1), 40], [Vector2i(-1, -1), 30],
+		[Vector2i(0, -1), 15], [Vector2i(1, 1), 50],
+	]
+	for step in script:
+		var direction: Vector2i = step[0]
+		for _i in int(step[1]):
+			var move: Array = (state["intent"] as Dictionary)["move"]
+			move[0] = direction.x
+			move[1] = direction.y
+			Sim.tick(state)
+	return Player.cell(state)
+
+
+func _walkable_neighbour(state: Dictionary, cell: Vector2i) -> Vector2i:
+	for step in Grid.STEPS:
+		var n: Vector2i = cell + step
+		if Grid.in_bounds(n) and Farm.walkable(state, n):
+			return n
+	return Vector2i(-1, -1)
+
+
+func _facing_from(from_cell: Vector2i, to_cell: Vector2i) -> int:
+	var d: Vector2i = to_cell - from_cell
+	if d.y > 0:
+		return Player.SOUTH
+	if d.y < 0:
+		return Player.NORTH
+	if d.x < 0:
+		return Player.WEST
+	return Player.EAST
+
+
+func _sprites_in(node: Node) -> int:
+	var n := 0
+	for child in node.get_children():
+		if child is Sprite2D:
+			n += 1
+	return n
 
 
 # ----------------------------------------------------------------- the helpers
@@ -438,6 +584,15 @@ func press_key(keycode: int, pressed: bool) -> void:
 func tap_key(keycode: int) -> void:
 	await press_key(keycode, true)
 	await press_key(keycode, false)
+
+
+## Hold a key down for a number of frames, then let go. What "walk east for a
+## second" looks like from outside the game.
+func hold_key(keycode: int, frame_count: int) -> void:
+	await press_key(keycode, true)
+	await frames(frame_count)
+	await press_key(keycode, false)
+	await frames(2)
 
 
 func expect(ok: bool, what: String, detail: String = "") -> void:

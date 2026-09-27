@@ -1,9 +1,15 @@
-extends Control
+extends Node
 
 ## The game screen.
 ##
 ## It owns the simulation, hands it to the world view to draw and to the debug
-## overlay to describe, and keeps the clock in the corner. Task 0091 puts a
+## overlay to describe, and keeps the clock in the corner.
+##
+## **The UI is on its own `CanvasLayer`, and it has to be.** A `Camera2D`
+## transforms the whole default canvas, so a HUD that shared it would slide
+## around the screen as the camera followed the player - and a button would be
+## picked at a different place from where it was drawn. Found by input_check
+## the moment the camera started following anybody. Task 0091 puts a
 ## title screen in front of it and task 0092 a router above both; until then
 ## this is the whole game.
 
@@ -12,8 +18,20 @@ extends Control
 ## habit the whole codebase is built on.
 const BOOT_SEED := 20260927
 
+## The edge of each one-shot action, tracked here rather than taken from
+## `Input.is_action_just_pressed()`.
+##
+## **That function is only true during the frame the event arrived in**, so a
+## press that lands after this node's `_process` has already run that frame is
+## lost entirely. With a keyboard it is a rare dropped keypress; with
+## synthesised input it made a test fail one run in three, which is how it was
+## found. `is_action_pressed()` is level rather than edge, so comparing it with
+## last frame cannot race with anything.
+var _was_down: Dictionary = {}
+
 @onready var _clock: Label = %Clock
 @onready var _world: WorldView = %WorldView
+@onready var _player_view: PlayerView = %WorldView/Occupants/PlayerView
 @onready var _driver: SimDriver = %SimDriver
 @onready var _debug: CanvasLayer = %DebugOverlay
 
@@ -25,7 +43,8 @@ func _ready() -> void:
 	_driver.start(BOOT_SEED)
 
 	_world.show_state(_driver.state)
-	_world.look_at_cell(Farm.house_centre(_driver.state))
+	_player_view.show_state(_driver.state)
+	_world.look_at_cell(Player.cell(_driver.state))
 
 	# The overlay is handed its driver rather than going looking for one: a
 	# screen owns its simulation, and two on screen at once would still each
@@ -35,15 +54,54 @@ func _ready() -> void:
 	_show(_driver.state)
 
 
+## **The only place keys become game input.**
+##
+## Nothing is applied here: what the player is asking for is written into
+## `state["intent"]` and the tick decides what it means. That is what lets the
+## autoplayer of task 0067 drive the same game by writing the same field, and
+## it is why holding a key in a menu cannot move the farmer.
+func _process(_delta: float) -> void:
+	if _driver.state.is_empty():
+		return
+	var intent: Dictionary = _driver.state["intent"]
+	var move: Array = intent["move"]
+	move[0] = int(Input.get_axis(&"move_left", &"move_right"))
+	move[1] = int(Input.get_axis(&"move_up", &"move_down"))
+	if _just_pressed(&"interact"):
+		intent["interact"] = true
+	if _just_pressed(&"cancel"):
+		intent["cancel"] = true
+
+	_world.highlight(_target_cell())
+	_world.look_at_cell(Player.cell(_driver.state))
+
+
+## True on the frame an action goes from up to down, whenever that frame is.
+func _just_pressed(action: StringName) -> bool:
+	var down := Input.is_action_pressed(action)
+	var edge := down and not bool(_was_down.get(action, false))
+	_was_down[action] = down
+	return edge
+
+
+## What the player would act on, or nowhere when there is nothing to do there.
+func _target_cell() -> Vector2i:
+	var state := _driver.state
+	var cell := Player.target(state)
+	return cell if Interact.verb_at(state, cell) != &"" else Vector2i(-1, -1)
+
+
 func _on_ticked(state: Dictionary) -> void:
 	_show(state)
 
 
 func _show(state: Dictionary) -> void:
 	var tick: int = int(state.get("tick", 0))
-	_clock.text = "%s %d   %d:%02d" % [
+	var doing: Dictionary = (state["player"] as Dictionary)["action"]
+	_clock.text = "%s %d   %d:%02d%s" % [
 		Phases.name_of(int(state.get("phase", 0))),
 		int(state.get("day", 1)),
 		tick / (GameData.TICK_HZ * 60),
 		(tick / GameData.TICK_HZ) % 60,
+		"" if doing.is_empty() else "   " + str(doing["verb"]),
 	]

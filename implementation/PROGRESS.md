@@ -672,3 +672,59 @@ Notes:
 - The palette names a day ramp and a night ramp. Task 0071 applies them as a
   shader - the same pixels, relit - which is how `design.md` section 18 gets
   two realities out of one set of sprites.
+
+## 0015 - The player walks and interacts - done 2026-09-27
+
+What changed: somebody is on the farm. `Player` owns position, facing and
+whatever they are in the middle of doing; `Interact` owns what a cell offers.
+The camera follows, the faced cell is framed, and the UI moved onto its own
+canvas layer.
+
+Files: src/core/player.gd, src/core/interact.gd, src/core/game_data.gd,
+src/core/sim.gd, src/core/state.gd, src/ui/player_view.gd, src/ui/world_view.gd,
+src/ui/main.gd, scenes/Main.tscn, scenes/World.tscn, project.godot,
+src/tools/input_check.gd
+
+Verify: PASS - 10 passed, 1 skipped, 19s. 205 asserts, **59 cases, 0 failed**
+(43 before). **Sim hash 3413240837 -> 4066923035** (the state gained the player
+and the intent, and the player ticks). **Data hash 2522481920 -> 3593855788**
+(`PLAYER_SPEED`).
+
+Notes:
+
+- **Position is sub-tile and integer.** 64 units to a tile, `PLAYER_SPEED` of 6
+  a tick: 2.8 tiles a second, smooth at 30Hz, and no floating point anywhere
+  near it. Walking has to feel continuous or the farm is a board game, but a
+  float position accumulates differently on different machines and the hash
+  guard would start failing for reasons nobody could find.
+- **The UI does not move the player.** It writes what is being asked for into
+  `state["intent"]` and the tick decides what it means - which is what lets the
+  autoplayer of task 0067 drive the game by writing the same field. Asserted:
+  the same key script from the same seed ends on the same cell, twice.
+- **`Interact` is why `player.gd` does not know what a tree is.** Two tables and
+  three functions: what a cell offers, how long it takes, and what happens when
+  the time is up. Every arm of `complete()` is deliberately empty until the task
+  that owns it lands, so the wiring is testable end to end before any payload
+  exists. 0016 fills chop, 0018 farm, 0030 fish, 0020 trade.
+- Movement resolves one axis at a time, so walking into a wall at an angle
+  slides along it. Diagonals are scaled by 181/256 or a player holding two keys
+  crosses the farm 41% faster, which is the oldest bug in top-down movement.
+- **Three real problems, all found by running it rather than by reasoning:**
+  - **A `Camera2D` drags the whole default canvas, Controls included.** The
+    clock was sliding around and a button was being picked somewhere other than
+    where it was drawn. The UI is on its own `CanvasLayer` now. The HUD of task
+    0021 would have hit this on its first day.
+  - **`Input.is_action_just_pressed()` is only true during the frame the event
+    arrived in.** A press landing after this node's `_process` had already run
+    that frame was lost outright - a rare dropped keypress with a keyboard, and
+    a test that failed one run in three with synthesised input. Main compares
+    `is_action_pressed()` with last frame instead, which cannot race. Four
+    consecutive clean runs after.
+  - **A negative `z_index` inside a Y-sorted parent put the target frame behind
+    the TileMapLayer**, so the highlight was being drawn under the grass and
+    nothing appeared at all. It is its own node between the terrain and the
+    actors now.
+- The player view sits at the feet and offsets the sprite upwards, rather than
+  sitting at the sprite's corner: Y-sorting uses the node's own y, and sorting a
+  character by the top of their head draws them behind things they are standing
+  in front of.

@@ -38,6 +38,7 @@ static func create(seed_value: int) -> Dictionary:
 	state.merge(Phases.initial())
 	state.merge(Resources.initial())
 	state.merge(Farm.initial())
+	state.merge(Player.initial())
 	return state
 
 

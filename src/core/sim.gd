@@ -37,6 +37,7 @@ static func tick(state: Dictionary) -> void:
 ## The cozy half. Growing, gathering, producing, selling.
 static func _tick_day(state: Dictionary) -> void:
 	state["day_tick"] = int(state["day_tick"]) + 1
+	Player.tick(state)
 
 	# Systems hang off here as the backlog adds them, in a fixed written order:
 	# farming (0018), crafting and the queue (0019, 0037), the press and the

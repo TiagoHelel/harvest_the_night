@@ -74,6 +74,16 @@ var _dirty := true
 var _last_signature := 0
 var _textures: Dictionary = {}
 
+## The sprites this view created, so that `_refresh()` can clear them without
+## also destroying the player, who lives in the same y-sorted layer in order to
+## sort against the trees.
+var _sprites: Array[Node] = []
+
+## A frame around the cell the player would act on, drawn over the terrain and
+## under everything standing on it. Task 0023 reuses it for the build ghost.
+var _highlight: Node2D
+var _highlight_cell := Vector2i(-1, -1)
+
 
 func _ready() -> void:
 	_terrain.tile_set = _build_terrain_tileset()
@@ -89,6 +99,16 @@ func _ready() -> void:
 	_camera.ignore_rotation = true
 	_camera.make_current()
 	_camera.position = Vector2(WORLD_SIZE) * 0.5
+
+	# **Its own node between the terrain and the actors**, rather than a
+	# negative z_index inside the sorted layer. Negative z inside a Y-sorted
+	# parent put it behind the TileMapLayer, so the frame was drawn under the
+	# grass and nothing appeared on screen at all.
+	_highlight = Node2D.new()
+	_highlight.name = "Highlight"
+	_highlight.draw.connect(_draw_highlight)
+	add_child(_highlight)
+	move_child(_highlight, 1)       # after Terrain, before Occupants
 
 
 ## Point the view at a game. Called by whatever screen owns the simulation.
@@ -121,6 +141,27 @@ func _process(_delta: float) -> void:
 
 
 # ------------------------------------------------------------------- camera
+
+## Frame the cell the player would act on, or nothing when there is nothing to
+## act on. Called by the screen each frame; redraws only when it moves.
+func highlight(cell: Vector2i) -> void:
+	if cell == _highlight_cell:
+		return
+	_highlight_cell = cell
+	if _highlight != null:
+		_highlight.queue_redraw()
+
+
+func _draw_highlight() -> void:
+	if not Grid.in_bounds(_highlight_cell):
+		return
+	var size := float(GameData.TILE_SIZE)
+	var rect := Rect2(Vector2(_highlight_cell) * size, Vector2(size, size))
+	# A frame rather than a fill: the player needs to see what is on the tile
+	# as well as that it is selected.
+	_highlight.draw_rect(rect, Color(1.0, 0.98, 0.85, 0.85), false, 1.0)
+	_highlight.draw_rect(rect.grow(-1.0), Color(0.0, 0.0, 0.0, 0.25), false, 1.0)
+
 
 ## Keep the camera on a cell, clamped to the farm and locked vertically.
 func look_at_cell(cell: Vector2i) -> void:
@@ -161,8 +202,9 @@ func _draw_terrain() -> void:
 
 
 func _refresh() -> void:
-	for child in _occupants.get_children():
-		child.queue_free()
+	for sprite in _sprites:
+		sprite.queue_free()
+	_sprites.clear()
 	if _state.is_empty():
 		return
 
@@ -179,6 +221,7 @@ func _refresh() -> void:
 		sprite.centered = false
 		sprite.position = Vector2(cell) * float(GameData.TILE_SIZE)
 		_occupants.add_child(sprite)
+		_sprites.append(sprite)
 
 
 # ----------------------------------------------------------------- the art
