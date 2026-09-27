@@ -1,0 +1,7 @@
+# The tooling writes LF; keep it that way so 159 future task commits do not
+# churn line endings. Godot and Python are both happy with LF on Windows.
+* text=auto eol=lf
+*.png binary
+*.exe binary
+*.wasm binary
+*.pck binary
