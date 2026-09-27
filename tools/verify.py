@@ -120,7 +120,9 @@ def check_godot_present():
         return check("godot project", False,
                      "Godot not at %s - set $GODOT" % GODOT)
     code, out = godot(["--headless", "--import"], timeout=300)
-    return check("godot import", code == 0, tail(out))
+    # The importer is chatty even when it succeeds; only its failures are
+    # worth a line in the report.
+    return check("godot import", code == 0, "" if code == 0 else tail(out))
 
 
 def check_script(name, script, missing_note, args=(), pattern=None):
@@ -188,21 +190,40 @@ def check_exports():
     if not os.path.exists(GODOT):
         return skip("exports", "Godot not on this machine")
     presets = open(rel("export_presets.cfg"), encoding="utf-8").read()
-    names = re.findall(r'^name="([^"]+)"', presets, re.M)
-    if not names:
+    # Each preset names itself and says where it writes; take both from the
+    # file rather than inventing a path, so the check exports exactly what a
+    # release would.
+    pairs = re.findall(r'^name="([^"]+)"[\s\S]*?^export_path="([^"]*)"',
+                       presets, re.M)
+    if not pairs:
         return skip("exports", "no presets configured")
-    os.makedirs(rel("build"), exist_ok=True)
+    if not export_templates_installed():
+        return skip("exports", "no export templates for this Godot - install "
+                               "them from Editor > Manage Export Templates")
     bad = []
-    for n in names:
-        out_path = "build/%s/harvest_the_night%s" % (
-            n.lower().replace(" ", "_"),
-            ".html" if "web" in n.lower() else ".exe")
-        os.makedirs(os.path.dirname(rel(*out_path.split("/"))), exist_ok=True)
-        code, out = godot(["--headless", "--export-release", n, out_path],
+    for name, out_path in pairs:
+        if not out_path:
+            bad.append("%s: no export_path" % name)
+            continue
+        dest = rel(*out_path.split("/"))
+        os.makedirs(os.path.dirname(dest), exist_ok=True)
+        code, out = godot(["--headless", "--export-release", name, out_path],
                           timeout=900)
-        if code != 0 or not os.path.exists(rel(*out_path.split("/"))):
-            bad.append("%s: %s" % (n, tail(out, 3)))
+        if code != 0 or not os.path.exists(dest):
+            bad.append("%s: %s" % (name, tail(out, 3)))
     return check("exports", not bad, "; ".join(bad)[:300])
+
+
+def export_templates_installed():
+    """Templates are a ~1GB download the engine does not ship with.
+
+    Without them every export fails with the same unhelpful error, so the
+    check says which button to press instead of pretending the build broke."""
+    base = os.path.join(os.environ.get("APPDATA", ""), "Godot",
+                        "export_templates")
+    if not os.path.isdir(base):
+        return False
+    return any(os.scandir(base))
 
 
 # ------------------------------------------------------------------- the run

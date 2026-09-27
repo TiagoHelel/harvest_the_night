@@ -1,7 +1,7 @@
 # 0001 - Godot project scaffold
 
 - **Phase:** 0 - Foundation
-- **Status:** todo
+- **Status:** done
 - **Depends on:** nothing
 - **Likely files:** project.godot, scenes/Main.tscn, src/ui/main.gd, .gitignore
 

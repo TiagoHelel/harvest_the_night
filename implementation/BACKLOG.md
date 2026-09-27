@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`........................`  **0 / 108 done**
+`........................`  **1 / 108 done**
 
-0 doing / 108 todo / 0 blocked across 9 phases.
+0 doing / 107 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0001 - Godot project scaffold**. The whole of what is left is
+First up: **0002 - Fixed-timestep deterministic simulation**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,31 +26,13 @@ which rewrites this file for you.
 
 ## What is open
 
-108 task(s) left, the ready ones first, then what they
+107 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
-### 0001 - Godot project scaffold
-
-Ready to pick up.  Likely files: `project.godot, scenes/Main.tscn, src/ui/main.gd, .gitignore`.
-
-The repository holds a design document and a reference image and nothing else. Turn it into a Godot 4.7 project that opens, boots and exports, with the directory layout every later task assumes.
-
-- Godot 4.7 project at the repository root, renderer `gl_compatibility` so the Web export works
-- Base viewport 480x270 at 16px tiles, stretch mode `viewport` with integer scaling: this is a pixel art game and half pixels are a bug, not a look
-- Directories: `src/core/`, `src/ui/`, `src/tools/`, `scenes/`, `sprites/`, `assets/`, with a one-line README in each saying what belongs there
-- `scenes/Main.tscn` boots to a plain screen showing the game name and the build version from `src/core/build_info.gd`
-- `.gitignore` for Godot 4 (`.godot/`, `build/`, `*.tmp`, exports)
-- `export_presets.cfg` with a Windows desktop and a Web preset, both writing into `build/`
-- `git init` and one commit if this is not a repository yet
-
-  - done when: Opening the project in the editor produces no error or warning
-  - done when: `godot --headless --path . --import` exits 0
-  - done when: Both exports produce a file in `build/`
-
 ### 0002 - Fixed-timestep deterministic simulation
 
-Waits on 0001.  Likely files: `src/core/sim.gd, src/core/rng.gd, src/core/state.gd`.
+Ready to pick up.  Likely files: `src/core/sim.gd, src/core/rng.gd, src/core/state.gd`.
 
 One tick function that advances the whole world at a fixed rate. Crop growth, tower fire, zombie walking, the headless tests, the double speed button and skipping a night all become the same code run a different number of times.
 
@@ -66,7 +48,7 @@ One tick function that advances the whole world at a fixed rate. Crop growth, to
 
 ### 0003 - game_data.gd, the one file of levers
 
-Waits on 0001.  Likely files: `src/core/game_data.gd`.
+Ready to pick up.  Likely files: `src/core/game_data.gd`.
 
 Every number a designer would want to turn, in one file, before there are numbers scattered across ten.
 
@@ -82,7 +64,7 @@ Every number a designer would want to turn, in one file, before there are number
 
 ### 0009 - Settings singleton
 
-Waits on 0001.  Likely files: `src/core/settings.gd, project.godot`.
+Ready to pick up.  Likely files: `src/core/settings.gd, project.godot`.
 
 One place that owns every user setting and writes it to `user://settings.cfg`, so the options menus later only read and write it.
 
@@ -98,7 +80,7 @@ One place that owns every user setting and writes it to `user://settings.cfg`, s
 
 ### 0014 - Sprites generated from ASCII maps
 
-Waits on 0001.  Likely files: `tools/gen_sprites.py, sprites/`.
+Ready to pick up.  Likely files: `tools/gen_sprites.py, sprites/`.
 
 Art that a script owns. One palette, one generator, one command - so the set stays consistent and a colour change is one edit rather than forty.
 
@@ -1666,17 +1648,17 @@ For the player who beat the Giant and wants to know how far the farm goes. Cheap
   - done when: Night 25 is generated and playable
   - done when: The same seed generates the same night 25 twice
 
-## 0 - Foundation  (0/12)
+## 0 - Foundation  (1/12)
 
-- [ ] **0001** [Godot project scaffold](prompts/0001-project-scaffold.md)
-- [ ] **0002** [Fixed-timestep deterministic simulation](prompts/0002-sim-tick.md) - needs 0001
-- [ ] **0003** [game_data.gd, the one file of levers](prompts/0003-game-data.md) - needs 0001
+- [x] **0001** [Godot project scaffold](prompts/0001-project-scaffold.md)
+- [ ] **0002** [Fixed-timestep deterministic simulation](prompts/0002-sim-tick.md)
+- [ ] **0003** [game_data.gd, the one file of levers](prompts/0003-game-data.md)
 - [ ] **0004** [Headless check harness](prompts/0004-headless-check.md) - needs 0002
 - [ ] **0005** [verify.py and the determinism guard](prompts/0005-verify-and-hash.md) - needs 0004
 - [ ] **0006** [The phase machine: day, preparation, night, result](prompts/0006-phase-machine.md) - needs 0002, 0003
 - [ ] **0007** [The resource ledger](prompts/0007-resource-ledger.md) - needs 0003
 - [ ] **0008** [The farm grid](prompts/0008-farm-grid.md) - needs 0002, 0003
-- [ ] **0009** [Settings singleton](prompts/0009-settings.md) - needs 0001
+- [ ] **0009** [Settings singleton](prompts/0009-settings.md)
 - [ ] **0010** [Save the profile and the run](prompts/0010-save.md) - needs 0006, 0007, 0008
 - [ ] **0011** [input_check harness](prompts/0011-input-check.md) - needs 0005
 - [ ] **0012** [Debug overlay](prompts/0012-debug-overlay.md) - needs 0005, 0006
@@ -1684,7 +1666,7 @@ For the player who beat the Giant and wants to know how far the farm goes. Cheap
 ## 1 - The first playable build  (0/15)
 
 - [ ] **0013** [The world renders](prompts/0013-world-render.md) - needs 0008
-- [ ] **0014** [Sprites generated from ASCII maps](prompts/0014-sprite-pipeline.md) - needs 0001
+- [ ] **0014** [Sprites generated from ASCII maps](prompts/0014-sprite-pipeline.md)
 - [ ] **0015** [The player walks and interacts](prompts/0015-player.md) - needs 0013
 - [ ] **0016** [Trees and wood](prompts/0016-wood.md) - needs 0015, 0007
 - [ ] **0017** [Rocks and stone](prompts/0017-stone.md) - needs 0016
