@@ -4412,3 +4412,114 @@ on top of it.
 
 `python tools/verify.py` prints PASS: 2022 asserts, 463 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+
+## 0060 - The ten nights, authored
+
+### The curves, as numbers
+
+| night | sent | $reward | hit points to kill | gap |
+|---|---|---|---|---|
+| 1 | 12 | 36 | 240 | 15s |
+| 2 | 20 | 60 | 400 | 15s |
+| 3 | 24 | 78 | 420 | 14s |
+| 4 | 40 | 138 | 620 | 14s |
+| 5 | 41 | 164 | 980 | 13s |
+| 6 | 48 | 214 | 1400 | 13s |
+| 7 | 54 | 254 | 1520 | 9s |
+| 8 | 69 | 342 | 2030 | 8s |
+| 9 | 80 | 416 | 2560 | 6s |
+| 10 | 85 | 540 | 3470 | 4s |
+
+All three climb, every night, which the old table did not: it dipped on four
+of the ten. **Hit points to kill is the honest measure** of a night's size -
+three tanks are not three walkers - and it is what the dips were hiding.
+
+The gap is a second curve under the first: fifteen seconds of room down to
+four. The same crowd arriving with less breathing space is a harder crowd, and
+it is the cheapest difficulty there is because it costs no extra enemies.
+
+Section 10 exactly: walker on 1, runner on 3, tank on 5, breaker on 7, Giant
+on 10 - and **the night after each arrival sends more of it than the night it
+arrived**, which is asserted rather than eyeballed. A player meets a new
+problem while they can still afford to get it wrong and is examined on it when
+they cannot.
+
+### Two instruments
+
+`python tools/nights.py` reads the table. `python tools/play_nights.py` plays
+all ten with a scripted build that never farms, never repairs, never drops a
+barricade and never fires a flare, and says which fell - the floor, not a
+player.
+
+Its build comes out of a **purse**: what the previous nights paid, plus a
+farming allowance. Writing it that way turned up the most important thing this
+task learned.
+
+### The farming allowance is most of the answer
+
+At $300 a day, two thirds of the purse by night ten is that one made-up
+number. So the tool sweeps three:
+
+| a day of farming | what fell |
+|---|---|
+| $0 | nights 2 through 9 - only the tutorial survives |
+| $150 | nights 3 and 10 |
+| $300 | nothing |
+
+That is the shape the game wants at the middle row: **night ten falls to a
+player who only builds**, which is the requirement that it needs the tech tree
+(tasks 0063 and 0064), and farming is not optional, which is the premise of
+the game.
+
+It is also the honest limit of this task. The real number is measured by the
+autoplayer at 0067 and the curve is settled against it at 0068; authoring
+against a guess and calling it balanced would have been the wrong kind of
+confident. The sweep is in the tool so that whoever does 0068 sees the
+sensitivity rather than inheriting my constant.
+
+Night 3 was softened from ten runners to six along the way: at ten it was the
+hardest of the first five, so the night that *introduces* the runner killed
+you while night four, the one meant to examine you on it, held comfortably.
+An introduction that kills you is not an introduction.
+
+### An eight-breaker softlock, and it had been there all along
+
+Nights 7, 8 and 9 never ended. Eight breakers stood at (14, 9) for fifty-six
+thousand ticks chewing the workshop, and the workshop never lost a hit point.
+
+`FARM_MAP` places occupants as `{"id": ...}` with **no hit points at all**, so
+`Farm.damage()` read zero, refused to take anything off, and the breakers
+never finished. `BUILDINGS` had never declared `hp` either - task 0049 noticed
+that and left it, because nothing could damage a building then. Task 0052 gave
+breakers a reason to try, and this is the bill for it.
+
+Both ends are closed: map-placed occupants get the hit points their table
+declares, the four buildings declare some, and `Pathing.prey_cells()` refuses
+to lead anybody to a cell with no hit points on it. The second is belt as well
+as braces - if anything else ever appears without them, the hunt field simply
+will not send a breaker to stand in front of it.
+
+### Four asserts that were over-claiming
+
+All four went red on a real fix rather than a regression, and all four are
+now narrower and truer:
+
+- The ammunition fixture fought night seven, which gained breakers and a
+  nine-second gap. It fights night five with four gun towers now - guns need
+  no powder, which was always this fixture's own point.
+- Task 0052's "the house takes nothing while there is a tower standing" is
+  false now that the workshop can be eaten. What holds is the ordering: the
+  towers take more than the house does.
+- Task 0057's ruined night sent twenty-four breakers at four towers, which is
+  not a bad night, it is the end of the run. Twelve, so the subject is the
+  morning after.
+
+### Hashes
+
+| | from | to | why |
+|---|---|---|---|
+| sim hash | `2087687126` | `893100662` | the farm starts with a workshop that has hit points, and nights are authored differently |
+| data hash | `2743853196` | `543765201` | ten re-authored nights and four buildings that declare hit points |
+
+`python tools/verify.py` prints PASS: 2135 asserts, 463 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

@@ -49,7 +49,17 @@ static func initial() -> Dictionary:
 			terrain[idx] = int(entry[0])
 			var occupant_id: StringName = entry[1]
 			if occupant_id != &"":
+				# **With the hit points its table declares.** A map-placed
+				# occupant used to get none, so anything on the farm at dawn
+				# on day one could not be damaged at all - and a breaker
+				# standing next to it chewed for ever. Trees and seams have
+				# no table entry and stay as they were: `Gathering` owns
+				# them and nothing is meant to bite one.
 				occupants[idx] = {"id": occupant_id}
+				var entry_for: Variant = Building.entry_of(occupant_id)
+				if entry_for != null:
+					occupants[idx]["hp"] = int((entry_for as Dictionary)
+						.get("hp", 1))
 
 	return {
 		"terrain": terrain,

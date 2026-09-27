@@ -435,22 +435,34 @@ const QUEUE_LENGTH := 5                 # LEVER: items, 3-10
 const BASE_ENERGY := 4                  # LEVER: energy per tick, 0-10
 
 const BUILDINGS: Dictionary = {
+	# **Buildings have hit points.** They had none at all until task 0060,
+	# which meant `Building.place()` gave them one apiece and the workshop
+	# `FARM_MAP` puts on the farm got none - so `Farm.damage()` read zero,
+	# refused to take anything off, and eight breakers stood beside it
+	# chewing for fifty-six thousand ticks. The night never ended.
+	#
+	# Sturdier than a fence, softer than a wall: losing one is meant to hurt
+	# without being the thing that ends a night.
 	&"workshop": {
+		"hp": 80,                       # LEVER: hit points, 40-160
 		"cost": {WOOD: 20, STONE: 10},
 		"energy_draw": 0,
 		"size": Vector2i(2, 2),
 	},
 	&"press": {
+		"hp": 80,                       # LEVER: hit points, 40-160
 		"cost": {WOOD: 25, IRON: 5},
 		"energy_draw": 2,               # LEVER: energy per tick, 1-5
 		"size": Vector2i(2, 2),
 	},
 	&"kitchen": {
+		"hp": 70,                       # LEVER: hit points, 40-160
 		"cost": {WOOD: 15, STONE: 15},
 		"energy_draw": 1,               # LEVER: energy per tick, 0-3
 		"size": Vector2i(2, 2),
 	},
 	&"generator": {
+		"hp": 90,                       # LEVER: hit points, 40-160
 		"cost": {IRON: 20, STONE: 10},
 		"energy_draw": 0,
 		"energy_output": 10,            # LEVER: energy per tick, 5-20
@@ -1074,11 +1086,48 @@ const SPAWN_INTERVAL_TICKS := 20        # LEVER: ticks, 8-45
 ##
 ## `note` is for the summary `tools/nights.py` prints, which is the whole of
 ## "a summary of all ten nights can be printed headlessly".
+## The ten nights of `design.md`, section 10.
+##
+## **A night is a record, not a bare list of rows.** Task 0059 turned it into
+## one so that the two numbers a designer most wants to turn - how long before
+## the first wave, and how long between them - live on the night they belong
+## to rather than being repeated on every row of it. A night is:
+##
+##     {"note": ..., "opening_ticks": ..., "gap_ticks": ..., "waves": [...]}
+##
+## and a wave is `[enemy, count, spawn]`, with an optional fourth entry that
+## overrides the night's gap for that one wave.
+##
+## ## The curve, and what it is measured in
+##
+## Task 0060 authored these against three numbers that all have to climb:
+## **how many arrive**, **what they are worth**, and **how many hit points
+## there are to get through**. The last is the honest measure of a night's
+## size, because three tanks are not three walkers - and the old table dipped
+## on four of the ten by it.
+##
+## `python tools/nights.py` prints all three, and
+## `python tools/play_nights.py` plays them with a scripted build and says
+## which fell. Both were written for this task and are the instrument it was
+## authored with.
+##
+## ## One new thing a night, and the night after is where it bites
+##
+## The walker on 1, the runner on 3, the tank on 5, the breaker on 7 and the
+## Giant on 10 - which is section 10 exactly. Each of those is a gentle
+## introduction and the night after it is the hard one, so a player meets a
+## new problem while they can still afford to get it wrong, and is examined on
+## it when they cannot.
+##
+## The gap between waves tightens as the run goes on, from fifteen seconds to
+## ten. That is a second curve under the first one: the same crowd arriving
+## with less room to breathe between waves is a harder crowd, and it is the
+## cheapest difficulty there is because it costs no extra enemies.
 const NIGHTS: Array = [
 	{
-		"note": "the tutorial night: winnable with the one tower the first day buys",
+		"note": "the tutorial night: one tower, one side, and time to watch",
 		"opening_ticks": 0,
-		"gap_ticks": WAVE_GAP_TICKS,
+		"gap_ticks": 15 * SECONDS,
 		"waves": [
 			[&"walker", 3, 0],
 			[&"walker", 4, 0],
@@ -1086,100 +1135,119 @@ const NIGHTS: Array = [
 		],
 	},
 	{
-		"note": "more of the same, from two sides",
+		"note": "the same again from two sides, so one tower is not enough",
 		"opening_ticks": 0,
-		"gap_ticks": WAVE_GAP_TICKS,
+		"gap_ticks": 15 * SECONDS,
 		"waves": [
 			[&"walker", 6, 0],
-			[&"walker", 5, 1],
+			[&"walker", 6, 1],
 			[&"walker", 8, 0],
 		],
 	},
 	{
-		"note": "the first runner",
+		"note": "the first runners: fast, fragile, and they ignore your walls",
 		"opening_ticks": 0,
-		"gap_ticks": WAVE_GAP_TICKS,
+		"gap_ticks": 14 * SECONDS,
+		# **Six, not ten.** At ten this was the hardest night of the first
+		# five - a player meeting the runner for the first time lost to it,
+		# with night four, the one that is meant to examine them on it,
+		# holding comfortably. An introduction that kills you is not an
+		# introduction. Measured with `tools/play_nights.py` at $150 a day.
 		"waves": [
 			[&"walker", 6, 0],
-			[&"runner", 3, 1],
-			[&"walker", 8, 0],
-			[&"runner", 5, 1],
+			[&"runner", 2, 1],
+			[&"walker", 12, 0],
+			[&"runner", 4, 1],
 		],
 	},
 	{
-		"note": "a bigger version of what night 3 taught",
+		"note": "runners in numbers - the night that asks for rate of fire",
 		"opening_ticks": 0,
-		"gap_ticks": WAVE_GAP_TICKS,
+		"gap_ticks": 14 * SECONDS,
 		"waves": [
 			[&"walker", 10, 0],
-			[&"runner", 6, 1],
+			[&"runner", 8, 1],
 			[&"walker", 12, 0],
+			[&"runner", 10, 1],
 		],
 	},
 	{
-		"note": "the first tank",
+		"note": "the first tank: one thing a crossbow line cannot chew through",
 		"opening_ticks": 0,
-		"gap_ticks": WAVE_GAP_TICKS,
+		"gap_ticks": 13 * SECONDS,
 		"waves": [
-			[&"walker", 8, 0],
+			[&"walker", 10, 0],
 			[&"tank", 1, 0],
-			[&"runner", 6, 1],
+			[&"runner", 14, 1],
+			[&"walker", 14, 0],
 			[&"tank", 2, 0],
 		],
 	},
 	{
-		"note": "everything so far, mixed",
+		"note": "tanks in threes, with the crowd still coming",
 		"opening_ticks": 0,
-		"gap_ticks": WAVE_GAP_TICKS,
+		"gap_ticks": 13 * SECONDS,
 		"waves": [
 			[&"walker", 12, 0],
-			[&"runner", 8, 1],
-			[&"tank", 3, 0],
+			[&"tank", 2, 0],
+			[&"runner", 16, 1],
 			[&"walker", 14, 1],
+			[&"tank", 4, 0],
 		],
 	},
 	{
-		"note": "the breakers arrive and go for the towers",
+		"note": "the breakers arrive, and an uncovered tower line is a debt",
 		"opening_ticks": 0,
-		"gap_ticks": WAVE_GAP_TICKS,
+		"gap_ticks": 9 * SECONDS,
 		"waves": [
-			[&"walker", 10, 0],
+			[&"walker", 12, 0],
 			[&"breaker", 4, 1],
-			[&"runner", 8, 0],
-			[&"breaker", 6, 1],
+			[&"runner", 16, 1],
+			[&"tank", 4, 0],
+			[&"walker", 14, 0],
+			[&"breaker", 4, 1],
 		],
 	},
 	{
-		"note": "a large night",
+		"note": "a large night: everything at once and more of it",
 		"opening_ticks": 0,
-		"gap_ticks": WAVE_GAP_TICKS,
+		"gap_ticks": 8 * SECONDS,
 		"waves": [
-			[&"walker", 18, 0],
-			[&"runner", 10, 1],
-			[&"breaker", 6, 0],
-			[&"tank", 4, 1],
+			[&"walker", 14, 0],
+			[&"breaker", 6, 1],
+			[&"runner", 20, 1],
+			[&"tank", 5, 0],
+			[&"walker", 16, 0],
+			[&"breaker", 8, 1],
 		],
 	},
 	{
 		"note": "the heavy mix, and the dress rehearsal for the Giant",
 		"opening_ticks": 0,
-		"gap_ticks": WAVE_GAP_TICKS,
+		"gap_ticks": 6 * SECONDS,
 		"waves": [
-			[&"walker", 20, 0],
+			[&"walker", 16, 0],
 			[&"breaker", 8, 1],
-			[&"tank", 5, 0],
-			[&"runner", 14, 1],
-			[&"tank", 3, 0],
+			[&"runner", 24, 1],
+			[&"tank", 8, 0],
+			[&"walker", 16, 0],
+			[&"breaker", 8, 1],
 		],
 	},
 	{
 		"note": "the Giant, with company so it cannot be focused down alone",
 		"opening_ticks": 0,
-		"gap_ticks": WAVE_GAP_TICKS,
+		"gap_ticks": 4 * SECONDS,
 		"waves": [
-			[&"walker", 14, 0],
+			[&"walker", 16, 0],
+			[&"breaker", 6, 1],
+			# **It walks in while the farm is already busy.** A Giant that
+			# arrived alone would be a duel; arriving third, with runners
+			# behind it, is a test of the whole build.
 			[&"giant", 1, 0],
-			[&"walker", 16, 1],
+			[&"runner", 26, 1],
+			[&"tank", 8, 0],
+			[&"walker", 20, 0],
 			[&"breaker", 8, 1],
 		],
 	},

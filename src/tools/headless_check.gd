@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 52
+const GROUPS := 53
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -116,6 +116,7 @@ func _run() -> void:
 	_task_0057_structures()
 	_task_0058_giant()
 	_task_0059_wave_data()
+	_task_0060_ten_nights()
 
 
 func _finish() -> void:
@@ -4247,13 +4248,13 @@ func _mixed_night(seed_value: int, rounds: int) -> Dictionary:
 		GameData.STONE: 900, GameData.OIL: 400, GameData.GUNPOWDER: 200})
 
 	var guns := 0
-	for y in [7, 9]:
+	for y in [7, 9, 6, 10]:
 		for x in range(22, 30):
-			if guns >= 2:
+			if guns >= 4:
 				break
 			if Building.place(state, &"gun_tower", Vector2i(x, y)):
 				guns += 1
-		if guns >= 2:
+		if guns >= 4:
 			break
 	var mortars := 0
 	for y in [7, 9, 11, 12]:
@@ -4275,10 +4276,17 @@ func _mixed_night(seed_value: int, rounds: int) -> Dictionary:
 		Resources.gain(state, {GameData.GUNPOWDER: rounds})
 	Resources.gain(state, {GameData.OIL: 80})
 
-	state["day"] = 7
+	# **Night five, not seven.** Task 0060 re-authored the curve: seven
+	# gained the breakers and a nine-second gap and six gained a third tank,
+	# and six towers with no walls lost both of them whatever was in the
+	# pool - and a night lost both ways cannot show that the pool made a
+	# difference. Five is the latest one this fixture survives dry, and it
+	# has the tanks that mortars are for, which is what it wanted a late
+	# night for in the first place.
+	state["day"] = 5
 	Phases.begin_preparation(state)
 	Sim.advance(state, GameData.PREPARATION_TICKS)
-	expect(guns == 2 and mortars == 4,
+	expect(guns == 4 and mortars == 4,
 		"the scripted night has the towers it thinks it has",
 		"%d guns, %d mortars" % [guns, mortars])
 
@@ -7720,10 +7728,13 @@ func _task_0052_breaker() -> void:
 		"%d against %d"
 			% [covered["damage_to_towers"], naked["damage_to_towers"]])
 
-	# And it is the towers they came for, not the house, in both cases.
-	expect(naked["house_lost"] == 0,
-		"the house takes nothing while there is a tower standing",
-		str(naked["house_lost"]))
+	# **It is the towers they came for, not the house.** Not "the house takes
+	# nothing": task 0060 gave the workshop hit points, so a breaker that has
+	# eaten the farm's buildings does go on to the roof. What holds is the
+	# ordering - they spend themselves on what you built first.
+	expect(naked["damage_to_towers"] > naked["house_lost"],
+		"the towers take more than the house does",
+		"%d against %d" % [naked["damage_to_towers"], naked["house_lost"]])
 
 	_completed += 1     # last line: an abandoned group never gets here
 
@@ -8825,7 +8836,11 @@ func _a_ruined_night(seed_value: int) -> Dictionary:
 	_night_falls(state)
 
 	Pathing.refresh(state)
-	for _i in 24:
+	# **Twelve, not twenty-four.** The subject of this test is the morning
+	# after a bad night, and twenty-four breakers against four towers is not
+	# a bad night, it is the end of the run - which measures nothing about
+	# whether the farm is still playable.
+	for _i in 12:
 		Enemies.spawn(state, &"breaker", 0)
 	for _tick in 4000:
 		Sim.advance(state, 1)
@@ -9330,3 +9345,163 @@ func _what_a_night_sends(night: int) -> Dictionary:
 		"spawns": spawns,
 		"reward": money,
 	}
+
+
+## 0060 - the ten nights as a curve rather than a list.
+func _task_0060_ten_nights() -> void:
+	# **All three curves climb.** How many arrive, what they are worth, and
+	# how many hit points there are to get through - the last being the
+	# honest measure of a night's size, since three tanks are not three
+	# walkers. The old table dipped on four of the ten by it.
+	var sent := 0
+	var money := 0
+	var meat := 0
+	var counts: Array = []
+	var purses: Array = []
+	var weights: Array = []
+	for night in range(1, GameData.MVP_NIGHTS + 1):
+		var now_sent := Waves.size_of(night)
+		var now_money := Waves.reward_of(night)
+		var now_meat := _hit_points_sent(night)
+		counts.append(now_sent)
+		purses.append(now_money)
+		weights.append(now_meat)
+		if night > 1:
+			expect(now_sent > sent,
+				"night %d sends more than night %d" % [night, night - 1],
+				"%d against %d" % [now_sent, sent])
+			expect(now_money > money,
+				"and is worth more", "%d against %d" % [now_money, money])
+			expect(now_meat > meat,
+				"and has more to kill", "%d against %d" % [now_meat, meat])
+		sent = now_sent
+		money = now_money
+		meat = now_meat
+	print("  sent:    %s" % str(counts))
+	print("  reward:  %s" % str(purses))
+	print("  to kill: %s" % str(weights))
+
+	# **The gap tightens as the run goes on**, which is difficulty that costs
+	# no extra enemies: the same crowd with less room to breathe.
+	var gaps: Array = []
+	for night in range(1, GameData.MVP_NIGHTS + 1):
+		gaps.append(int(Waves.night_of(night)["gap_ticks"]))
+	print("  gaps:    %s ticks" % str(gaps))
+	for night in range(2, GameData.MVP_NIGHTS + 1):
+		expect(int(gaps[night - 1]) <= int(gaps[night - 2]),
+			"night %d gives no more room than night %d" % [night, night - 1],
+			"%d against %d" % [gaps[night - 1], gaps[night - 2]])
+	expect(int(gaps[GameData.MVP_NIGHTS - 1]) < int(gaps[0]) / 2,
+		"and the last night is under half the room of the first",
+		"%d against %d" % [gaps[GameData.MVP_NIGHTS - 1], gaps[0]])
+
+	# **Section 10 exactly**: one new thing a night, on the night it says.
+	var arrives: Dictionary = {}
+	for night in range(1, GameData.MVP_NIGHTS + 1):
+		for id in GameData.sorted_names(Waves.kinds_of(night).keys()):
+			if not arrives.has(id):
+				arrives[id] = night
+	print("  first seen: %s" % str(arrives))
+	for pair in [[&"walker", 1], [&"runner", 3], [&"tank", 5],
+			[&"breaker", 7], [&"giant", 10]]:
+		var id: StringName = (pair as Array)[0]
+		expect(int(arrives.get(id, 0)) == int((pair as Array)[1]),
+			"the %s arrives on night %d, as design.md section 10 says"
+				% [id, int((pair as Array)[1])],
+			str(arrives.get(id, 0)))
+
+	# **And the night after a new thing is the hard one.** A player meets a
+	# new problem while they can still afford to get it wrong.
+	for id in GameData.sorted_names(arrives.keys()):
+		var first := int(arrives[id])
+		if first >= GameData.MVP_NIGHTS:
+			continue
+		var then := int(Waves.kinds_of(first).get(id, 0))
+		var after := int(Waves.kinds_of(first + 1).get(id, 0))
+		expect(after > then,
+			"more %s on night %d than on the night it arrived"
+				% [id, first + 1], "%d against %d" % [after, then])
+
+	# **Night one is beatable with the tower the tutorial gives you.** The
+	# requirement, run rather than argued.
+	var alone := _play_a_night(1, [[&"gun_tower", 1]])
+	print("  night 1 with one gun tower and nothing else: %s, house %d/%d"
+		% ["held" if alone["held"] else "FELL", alone["house"],
+			GameData.HOUSE_HP])
+	expect(alone["held"],
+		"one tower holds night one", str(alone))
+	expect(int(alone["house"]) < GameData.HOUSE_HP,
+		"and it costs the house something - a tutorial you cannot lose "
+		+ "teaches nothing", str(alone["house"]))
+
+	# ...and with nothing at all it does not, or the tutorial night would be
+	# teaching that building is optional.
+	var bare := _play_a_night(1, [])
+	expect(not bare["held"],
+		"an undefended farm loses night one", str(bare))
+
+	# **Every night plays start to finish.** No night that cannot end.
+	for night in range(1, GameData.MVP_NIGHTS + 1):
+		var ran := _run_a_night_out(night)
+		expect(ran["ended"],
+			"night %d ends on its own" % night, str(ran))
+		expect(int(ran["sent"]) == Waves.size_of(night),
+			"having sent everything the table promised",
+			"%d against %d" % [ran["sent"], Waves.size_of(night)])
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## Everything a night sends, weighed by hit points.
+func _hit_points_sent(night: int) -> int:
+	var total := 0
+	for row in Waves.table(night):
+		var kind: Dictionary = GameData.ENEMIES[(row as Array)[0]]
+		total += int(kind["hp"]) * int((row as Array)[1])
+	return total
+
+
+## Play one night with a given build and see whether the house survives.
+func _play_a_night(night: int, build: Array) -> Dictionary:
+	var state := State.create(5100 + night)
+	state["night"] = night
+	state["day"] = night
+	Resources.gain(state, {GameData.WOOD: 9000, GameData.STONE: 9000,
+		GameData.IRON: 9000, GameData.OIL: 9000, GameData.GUNPOWDER: 9000})
+	Phases.begin_preparation(state)
+	for pair in build:
+		_line_of_towers(state, StringName((pair as Array)[0]),
+			int((pair as Array)[1]))
+	Sim.advance(state, GameData.PREPARATION_TICKS)
+
+	for _tick in 40000:
+		if int(state["phase"]) != Phases.NIGHT:
+			break
+		Sim.advance(state, 1)
+	return {
+		"held": int(state["house_hp"]) > 0,
+		"house": int(state["house_hp"]),
+	}
+
+
+## Run a night out with a house that cannot fall, and count what turned up.
+## **Proves the night ends**, which is what "playable start to finish" means
+## when nobody is playing.
+func _run_a_night_out(night: int) -> Dictionary:
+	var state := State.create(5200 + night)
+	state["night"] = night
+	state["day"] = night
+	Phases.begin_preparation(state)
+	Sim.advance(state, GameData.PREPARATION_TICKS)
+	state["house_hp"] = 1 << 20
+
+	var seen: Dictionary = {}
+	var ended := false
+	for _tick in 60000:
+		if int(state["phase"]) != Phases.NIGHT:
+			ended = true
+			break
+		for id in Entities.ids(state):
+			seen[id] = true
+		Sim.advance(state, 1)
+	return {"ended": ended, "sent": seen.size()}

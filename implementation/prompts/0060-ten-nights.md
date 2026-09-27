@@ -1,7 +1,7 @@
 # 0060 - The ten nights, authored
 
 - **Phase:** 4 - Ten nights and progression
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0059, 0058
 - **Likely files:** src/core/game_data.gd
 

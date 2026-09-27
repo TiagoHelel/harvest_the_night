@@ -225,8 +225,18 @@ static func prey_cells(state: Dictionary) -> Array:
 		var idx := int(key)
 		if idx < 0 or idx >= Grid.CELLS:
 			continue
-		if is_prey(StringName((occupants[key] as Dictionary)["id"])):
-			out.append(Grid.cell(idx))
+		var on: Dictionary = occupants[key]
+		if not is_prey(StringName(on["id"])):
+			continue
+		# **Nothing that cannot be hurt is worth coming for.** A prey cell
+		# with no hit points is a breaker standing in front of it for the
+		# rest of the night, which is how task 0060 found a workshop that
+		# had none. Belt as well as braces: the workshop has hit points now,
+		# and if anything else ever turns up without them the hunt field
+		# will simply not lead anybody to it.
+		if int(on.get("hp", 0)) <= 0:
+			continue
+		out.append(Grid.cell(idx))
 	return out
 
 

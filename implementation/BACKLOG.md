@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`#############...........`  **59 / 109 done**
+`#############...........`  **60 / 109 done**
 
-0 doing / 50 todo / 0 blocked across 9 phases.
+0 doing / 49 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0060 - The ten nights, authored**. The whole of what is left is
+First up: **0061 - Night rewards**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,25 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-50 task(s) left, the ready ones first, then what they
+49 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0060 - The ten nights, authored
-
-Ready to pick up.  Likely files: `src/core/game_data.gd`.
-
-Section 10 of the design document, as a real difficulty curve: tutorial, more, the runner, the tank, the breaker, the boss.
-
-- Ten nights following the design document exactly: 1 tutorial, 3 first runner, 5 first tank, 7 breakers, 8 large, 9 heavy mix, 10 the Giant
-- Each night introduces at most one new thing, and night 2 of a new enemy is where it gets hard
-- Enemy count and reward curve upward smoothly - plot it in the journal
-- Night 1 is beatable with the tower the tutorial gives you and nothing else
-- Night 10 is not beatable without upgrades from the tech tree
-
-  - done when: All ten are playable start to finish
-  - done when: The count and reward curves are in the journal as numbers
-  - done when: A headless run plays all ten with a scripted build and reports which ones fell
 
 ### 0061 - Night rewards
 
@@ -60,6 +44,20 @@ Section 12: surviving pays money, resources and technology, and the payout is th
 
   - done when: The same night defended two ways pays differently, in the right direction
   - done when: The itemised numbers add up to what the ledger received
+
+### 0066 - Night 10 and the end of the run
+
+Ready to pick up.  Likely files: `src/core/phases.gd, src/ui/result_screen.gd`.
+
+**The MVP is complete here.** Beating the Giant ends the run with a summary that answers the design document's question.
+
+- A run summary: days played, resources gathered, zombies killed, structures lost, the build that won
+- The run is recorded to the profile and a new one can be started
+- An option to continue past night 10 into 0070's endless mode
+- It is a real ending, with a screen worth reaching
+
+  - done when: A full run from day 1 to the Giant can be played in one sitting
+  - done when: The journal answers, honestly: after surviving the first night, did you want to go back to the farm and improve? That is the success criterion of the entire MVP
 
 ### 0067 - The autoplayer
 
@@ -122,6 +120,21 @@ Master, SFX and Music buses plus a small `Audio.play(id)`, so the sound tasks af
   - done when: Master at zero silences everything including music
   - done when: Twenty simultaneous shots produce one clean sound, not clipping
 
+### 0102 - A performance budget
+
+Ready to pick up.  Likely files: `tools/perf.py, src/tools/perf_check.gd`.
+
+A number, checked automatically, instead of a feeling about whether it runs well.
+
+- A budget in milliseconds per frame for the worst case: night 10, everything built, lights and particles on
+- A headless benchmark that reports tick cost, path cost and entity count
+- Wired into `verify.py`, failing when the budget is exceeded
+- A baseline file, moved deliberately the way the hash is
+- The report names the most expensive system, so a regression points at itself
+
+  - done when: The worst case is inside the budget on this machine
+  - done when: Adding a deliberately slow loop makes verify fail and name it
+
 ### 0103 - Crash and error reporting
 
 Ready to pick up.  Likely files: `src/app/crash.gd`.
@@ -167,20 +180,6 @@ Section 3 of the loop diagram: defeat takes part of the stock. It has to hurt en
   - done when: Losing twice in a row leaves a farm that can still recover
   - done when: The itemised loss matches what the ledger actually lost
 
-### 0066 - Night 10 and the end of the run
-
-Waits on 0060.  Likely files: `src/core/phases.gd, src/ui/result_screen.gd`.
-
-**The MVP is complete here.** Beating the Giant ends the run with a summary that answers the design document's question.
-
-- A run summary: days played, resources gathered, zombies killed, structures lost, the build that won
-- The run is recorded to the profile and a new one can be started
-- An option to continue past night 10 into 0070's endless mode
-- It is a real ending, with a screen worth reaching
-
-  - done when: A full run from day 1 to the Giant can be played in one sitting
-  - done when: The journal answers, honestly: after surviving the first night, did you want to go back to the farm and improve? That is the success criterion of the entire MVP
-
 ### 0068 - A balance sweep over the ten nights
 
 Waits on 0067.  Likely files: `tools/balance.py, implementation/BALANCE.md`.
@@ -195,6 +194,35 @@ Use the autoplayer: find the nights that are trivial, the ones that are impossib
 
   - done when: No night has a win rate of 100% or 0% across every policy
   - done when: The report is in the repository and the applied changes are in game_data
+
+### 0069 - Run statistics
+
+Waits on 0066.  Likely files: `src/core/stats.gd, src/ui/stats_screen.gd`.
+
+What the player did, kept across runs, because a number going up is its own reason to play another night.
+
+- Per run and lifetime: nights survived, zombies killed by type, resources gathered, structures built and lost, best night reached
+- Recorded in core on the tick, read by the screen
+- It survives a crash: written with the profile, not at the end of a run
+- Reachable from the main menu
+
+  - done when: Killing ten zombies increments by exactly ten
+  - done when: Quitting mid-run and returning keeps the run's numbers
+
+### 0070 - Endless nights past ten
+
+Waits on 0066.  Likely files: `src/core/endless.gd`.
+
+For the player who beat the Giant and wants to know how far the farm goes. Cheap to build, and it answers whether the loop holds past its authored content.
+
+- Waves generated from a curve past night 10, seeded and reproducible
+- The curve scales count and mix, never invents an enemy that does not exist
+- A Giant every fifth night, scaling
+- A best night reached, kept in the profile
+- It is off the critical path: a menu option, not the default
+
+  - done when: Night 25 is generated and playable
+  - done when: The same seed generates the same night 25 twice
 
 ### 0072 - The farm tileset
 
@@ -336,21 +364,6 @@ One warm loop for the farm, one cold one for the night, and a crossfade on the r
   - done when: The loop point is inaudible
   - done when: The crossfade lands with the transition, not before or after it
 
-### 0102 - A performance budget
-
-Waits on 0060.  Likely files: `tools/perf.py, src/tools/perf_check.gd`.
-
-A number, checked automatically, instead of a feeling about whether it runs well.
-
-- A budget in milliseconds per frame for the worst case: night 10, everything built, lights and particles on
-- A headless benchmark that reports tick cost, path cost and entity count
-- Wired into `verify.py`, failing when the budget is exceeded
-- A baseline file, moved deliberately the way the hash is
-- The report names the most expensive system, so a regression points at itself
-
-  - done when: The worst case is inside the budget on this machine
-  - done when: Adding a deliberately slow loop makes verify fail and name it
-
 ### 0063 - The tech tree
 
 Waits on 0062.  Likely files: `src/core/tech.gd, src/ui/tech_screen.gd`.
@@ -366,35 +379,6 @@ Somewhere to spend the points, small enough to read on one screen and real enoug
   - done when: Every node is reachable inside ten nights, but not all of them
   - done when: The choice between branches is real: say in the journal which one you would take and why
   - done when: `input_check` buys a node
-
-### 0069 - Run statistics
-
-Waits on 0066.  Likely files: `src/core/stats.gd, src/ui/stats_screen.gd`.
-
-What the player did, kept across runs, because a number going up is its own reason to play another night.
-
-- Per run and lifetime: nights survived, zombies killed by type, resources gathered, structures built and lost, best night reached
-- Recorded in core on the tick, read by the screen
-- It survives a crash: written with the profile, not at the end of a run
-- Reachable from the main menu
-
-  - done when: Killing ten zombies increments by exactly ten
-  - done when: Quitting mid-run and returning keeps the run's numbers
-
-### 0070 - Endless nights past ten
-
-Waits on 0066.  Likely files: `src/core/endless.gd`.
-
-For the player who beat the Giant and wants to know how far the farm goes. Cheap to build, and it answers whether the loop holds past its authored content.
-
-- Waves generated from a curve past night 10, seeded and reproducible
-- The curve scales count and mix, never invents an enemy that does not exist
-- A Giant every fifth night, scaling
-- A best night reached, kept in the profile
-- It is off the critical path: a menu option, not the default
-
-  - done when: Night 25 is generated and playable
-  - done when: The same seed generates the same night 25 twice
 
 ### 0077 - Particles
 
@@ -853,16 +837,16 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0057** [Structures take damage and die](prompts/0057-structure-damage.md)
 - [x] **0058** [The Giant](prompts/0058-boss-giant.md)
 
-## 4 - Ten nights and progression  (1/12)
+## 4 - Ten nights and progression  (2/12)
 
 - [x] **0059** [Waves as data](prompts/0059-wave-data.md)
-- [ ] **0060** [The ten nights, authored](prompts/0060-ten-nights.md)
+- [x] **0060** [The ten nights, authored](prompts/0060-ten-nights.md)
 - [ ] **0061** [Night rewards](prompts/0061-rewards.md)
 - [ ] **0062** [Technology points](prompts/0062-tech-points.md) - needs 0061
 - [ ] **0063** [The tech tree](prompts/0063-tech-tree.md) - needs 0062
 - [ ] **0064** [Tower I, II, automatic](prompts/0064-tower-upgrades.md) - needs 0063
 - [ ] **0065** [Losing a night costs you](prompts/0065-defeat.md) - needs 0061
-- [ ] **0066** [Night 10 and the end of the run](prompts/0066-run-end.md) - needs 0060
+- [ ] **0066** [Night 10 and the end of the run](prompts/0066-run-end.md)
 - [ ] **0067** [The autoplayer](prompts/0067-autoplayer.md)
 - [ ] **0068** [A balance sweep over the ten nights](prompts/0068-balance-sweep.md) - needs 0067
 - [ ] **0069** [Run statistics](prompts/0069-stats.md) - needs 0066
@@ -911,7 +895,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 ## 8 - Ship the MVP  (0/8)
 
 - [ ] **0101** [Onboarding in seven lines](prompts/0101-onboarding.md) - needs 0097
-- [ ] **0102** [A performance budget](prompts/0102-perf-budget.md) - needs 0060
+- [ ] **0102** [A performance budget](prompts/0102-perf-budget.md)
 - [ ] **0103** [Crash and error reporting](prompts/0103-error-report.md)
 - [ ] **0104** [Saves survive an update](prompts/0104-save-compat.md) - needs 0062
 - [ ] **0105** [A playtest build](prompts/0105-playtest-build.md) - needs 0100, 0103
