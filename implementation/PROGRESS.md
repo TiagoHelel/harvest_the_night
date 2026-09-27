@@ -811,3 +811,51 @@ Notes:
   has its own assert.
   The lesson is the cheap one: a test that only covers the easy instance of a
   general mechanism is a test that certifies the easy instance.
+
+## 0018 - Wheat: till, plant, grow, harvest - done 2026-09-27
+
+What changed: the crop cycle, which is the semi-idle heart of the day. Four
+verbs on a soil tile, growth in stages that only advances by daylight, and a
+field that survives the night untouched.
+
+Files: src/core/farming.gd, src/core/interact.gd, src/core/sim.gd,
+src/core/state.gd, src/ui/world_view.gd, tools/sprite_maps.py, sprites/crops/,
+src/tools/headless_check.gd
+
+Verify: PASS - 10 passed, 1 skipped, 22s. **286 asserts, 0 failed** (259
+before). **Sim hash 3337239467 -> 2213922541** (the state gained `plots` and
+`selected_seed`, and farming ticks). Data hash unchanged: the crop table was
+already there from task 0003.
+
+Notes:
+
+- **A plot is not an occupant**, and the second reason is the real one. You can
+  walk across your own field, which an occupant would prevent - but more
+  importantly, **at night the field is ground to defend**. Zombies walk over
+  the wheat. Making a crop an occupant would have turned every planted tile
+  into a wall, and the player would have discovered on night 3 that they had
+  accidentally built a maze out of carrots.
+- **One verb with four meanings, resolved by the cell.** `Interact` asks
+  `Farming` what a soil tile offers and gets `till`, `plant`, `harvest` or
+  nothing, so the highlight can say what the key will actually do. "Farm" would
+  have been one word for four different keypresses.
+- **Seeds are money, not an inventory item.** Buying a packet and then planting
+  from it is two steps and a number to manage, for a decision the player already
+  made by walking to the field. Task 0040 may revisit it; `_plant()` is the one
+  function that would change.
+- **The night does nothing at all**, asserted directly: 300 ticks of growth
+  before dusk, a whole night of preparation and 2000 night ticks, and the number
+  has not moved; then 100 ticks of the next morning and it is exactly 400. That
+  falls out of not being ticked rather than having to be arranged, which is what
+  plain data in the state buys.
+- **A name collision in the flat state, and a guard so it cannot recur.**
+  Farming called its chosen crop `"seed"` - already the run's RNG seed.
+  `Dictionary.merge()` silently kept one of them, planting did nothing at all,
+  and the only symptom was a type error three files away. `State.create()` now
+  adopts each subsystem's keys one at a time and **refuses a name that is
+  already taken**, naming the subsystem that asked. The flat namespace is what
+  makes the state hashable and savable in one piece; this is the price, and it
+  is now paid once rather than every time.
+- Stage arithmetic is integer throughout. A stage boundary landing differently
+  on two machines would be a visible desync in something nobody would think to
+  look at.

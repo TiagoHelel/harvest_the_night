@@ -1,7 +1,7 @@
 # 0018 - Wheat: till, plant, grow, harvest
 
 - **Phase:** 1 - The first playable build
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0015, 0007, 0006
 - **Likely files:** src/core/farming.gd
 

@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`####....................`  **17 / 108 done**
+`####....................`  **18 / 108 done**
 
-0 doing / 91 todo / 0 blocked across 9 phases.
+0 doing / 90 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0018 - Wheat: till, plant, grow, harvest**. The whole of what is left is
+First up: **0019 - The workshop and its first recipe**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,24 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-91 task(s) left, the ready ones first, then what they
+90 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0018 - Wheat: till, plant, grow, harvest
-
-Ready to pick up.  Likely files: `src/core/farming.gd`.
-
-The crop cycle, which is the semi-idle heart of the day: do a thing, go away, come back to something better.
-
-- Four verbs on a soil tile: till, plant, (wait), harvest
-- Growth advances on the tick during DAY only, never during NIGHT
-- Growth stages are data, so the sprite can follow them later
-- A planted tile survives the night and keeps growing the next day
-- Harvest yields wheat through the ledger and returns the tile to tilled soil
-
-  - done when: Planting, ending the day, surviving a night and returning shows growth unchanged over the night and resumed after it
-  - done when: The growth lever changes the number of ticks and nothing else
 
 ### 0019 - The workshop and its first recipe
 
@@ -60,6 +45,21 @@ The bridge the whole game rests on: day resources become night structures. Wood 
   - done when: Wood plus stone becomes a barricade in the crafting time and the resources are gone
   - done when: Cancelling mid-craft does not refund and does not duplicate
 
+### 0020 - The shop: sell and buy
+
+Ready to pick up.  Likely files: `src/core/shop.gd, src/ui/shop_panel.gd`.
+
+Money, and the first reason to care about which resource you gathered.
+
+- Sell any sellable resource at the price in game_data; the reference sheet's prices are the starting point
+- Buy wheat seed and, later, whatever 0040 adds
+- A panel that opens on interacting with the stall and closes on cancel, pausing nothing
+- Buying and selling both go through the ledger
+- The shop refuses a sale it cannot pay for rather than going negative
+
+  - done when: Selling ten wood gives exactly the listed price times ten
+  - done when: `input_check` opens the shop, sells something and closes it
+
 ### 0021 - The day HUD
 
 Ready to pick up.  Likely files: `src/ui/day_hud.gd`.
@@ -75,6 +75,22 @@ The bar across the top of the reference sheet: what day it is, what you have, an
   - done when: Gathering wood updates the HUD the same tick
   - done when: The night button is reachable by keyboard as well as mouse
   - done when: `input_check` presses it
+
+### 0028 - Corn and carrot
+
+Ready to pick up.  Likely files: `src/core/farming.gd, src/core/game_data.gd`.
+
+Three crops with a real choice between them: fast and cheap, slow and valuable, and one that feeds the defence.
+
+- Wheat, corn and carrot, differing in growth time, sale price and what they feed into
+- A crop is a data entry; adding a fourth takes no code
+- Seed cost and sale price are set so no crop strictly dominates - show the arithmetic in the journal
+- Corn is the defence crop: it is what gunpowder and rations come from later
+- The planting menu shows time to grow and price per tick of growth
+
+  - done when: A fourth crop is one dictionary entry - check it and say so
+  - done when: No crop is the right answer at every money level
+  - done when: `headless_check` asserts each crop's yield and timing
 
 ### 0030 - Fishing
 
@@ -167,21 +183,6 @@ When it breaks on someone else's machine, get enough to fix it without them.
   - done when: A deliberate crash produces a report with the seed and the tick
   - done when: The run is still loadable afterwards
 
-### 0020 - The shop: sell and buy
-
-Waits on 0018.  Likely files: `src/core/shop.gd, src/ui/shop_panel.gd`.
-
-Money, and the first reason to care about which resource you gathered.
-
-- Sell any sellable resource at the price in game_data; the reference sheet's prices are the starting point
-- Buy wheat seed and, later, whatever 0040 adds
-- A panel that opens on interacting with the stall and closes on cancel, pausing nothing
-- Buying and selling both go through the ledger
-- The shop refuses a sale it cannot pay for rather than going negative
-
-  - done when: Selling ten wood gives exactly the listed price times ten
-  - done when: `input_check` opens the shop, sells something and closes it
-
 ### 0022 - Switching reality
 
 Waits on 0021.  Likely files: `src/ui/world_view.gd, src/core/phases.gd`.
@@ -198,21 +199,20 @@ The same farm, a different world. Press the button and the day farm becomes the 
   - done when: Switching twice returns to a day that is identical except for the day counter
   - done when: The transition is skippable and the game does not wait on it
 
-### 0028 - Corn and carrot
+### 0029 - Growth stages and watering
 
-Waits on 0018.  Likely files: `src/core/farming.gd, src/core/game_data.gd`.
+Waits on 0028.  Likely files: `src/core/farming.gd`.
 
-Three crops with a real choice between them: fast and cheap, slow and valuable, and one that feeds the defence.
+A field you can read at a glance, and one small daily chore that rewards coming back.
 
-- Wheat, corn and carrot, differing in growth time, sale price and what they feed into
-- A crop is a data entry; adding a fourth takes no code
-- Seed cost and sale price are set so no crop strictly dominates - show the arithmetic in the journal
-- Corn is the defence crop: it is what gunpowder and rations come from later
-- The planting menu shows time to grow and price per tick of growth
+- Four visible stages per crop, driven by the growth ticks already in data
+- Watering a tile speeds growth by a lever percentage until the next night
+- Unwatered is slower, never fatal - this is a cozy game, not a punishment
+- Water comes from the pond and the well, with a range or a carry limit that is a lever
+- Watering the whole field is one held input, not forty clicks
 
-  - done when: A fourth crop is one dictionary entry - check it and say so
-  - done when: No crop is the right answer at every money level
-  - done when: `headless_check` asserts each crop's yield and timing
+  - done when: A watered and an unwatered tile planted together finish a measurable distance apart
+  - done when: Holding the water input across a row waters the row once each
 
 ### 0032 - Oil
 
@@ -243,6 +243,20 @@ Energy, the resource on the reference sheet that gates the advanced structures a
   - done when: Building one structure too many visibly slows everything rather than stopping it
   - done when: Running out of fuel mid-night degrades the defence and the night still resolves
 
+### 0034 - Cooking: food and meat
+
+Waits on 0030, 0028.  Likely files: `src/core/crafting.gd`.
+
+The kitchen from the reference sheet: raw crops and fish become food, which is what repairs and heals during the night.
+
+- Recipes turning crops, fish and meat into food
+- Food is the night's repair and heal currency, per the design document's resource table
+- Cooked food is worth more than its inputs sold separately, or the kitchen has no reason to exist
+- Meat comes from the farm animals on the reference sheet; keep it to a passive trickle, not an animal husbandry system
+
+  - done when: A cooked dish sells for more than its inputs - state the margin
+  - done when: Food spent on repair during a night is taken through the ledger
+
 ### 0037 - The workshop queue
 
 Waits on 0019, 0036.  Likely files: `src/core/crafting.gd, src/ui/workshop_panel.gd`.
@@ -272,6 +286,21 @@ Time passing, without taking away the design document's promise that the player 
 
   - done when: A player who ignores the clock entirely is not punished for it
   - done when: The clock stops in the shop panel and resumes on close
+
+### 0040 - The shop grows
+
+Waits on 0020, 0028.  Likely files: `src/core/shop.gd, src/ui/shop_panel.gd`.
+
+Somewhere for money to go: all three seeds, materials when you are short, and the first upgrades.
+
+- Seeds for all three crops, and materials at a markup over their sale price
+- Buying materials is always worse than gathering them, so money cannot replace playing
+- A small daily stock that refreshes, so the shop cannot be drained into an exploit
+- Prices in game_data, every one a lever
+- Buy and sell are two tabs, not two shops
+
+  - done when: Buy-then-sell on the same item loses money at every price
+  - done when: Stock refreshes once per day and not once per visit
 
 ### 0084 - The sounds of the day
 
@@ -319,35 +348,6 @@ Something to shoot at. Zombies come in from the edges and head for the farmhouse
   - done when: Two runs from one seed produce the same zombie positions at tick 1000
   - done when: A zombie with no path at all stands still rather than crashing
 
-### 0029 - Growth stages and watering
-
-Waits on 0028.  Likely files: `src/core/farming.gd`.
-
-A field you can read at a glance, and one small daily chore that rewards coming back.
-
-- Four visible stages per crop, driven by the growth ticks already in data
-- Watering a tile speeds growth by a lever percentage until the next night
-- Unwatered is slower, never fatal - this is a cozy game, not a punishment
-- Water comes from the pond and the well, with a range or a carry limit that is a lever
-- Watering the whole field is one held input, not forty clicks
-
-  - done when: A watered and an unwatered tile planted together finish a measurable distance apart
-  - done when: Holding the water input across a row waters the row once each
-
-### 0034 - Cooking: food and meat
-
-Waits on 0030, 0028.  Likely files: `src/core/crafting.gd`.
-
-The kitchen from the reference sheet: raw crops and fish become food, which is what repairs and heals during the night.
-
-- Recipes turning crops, fish and meat into food
-- Food is the night's repair and heal currency, per the design document's resource table
-- Cooked food is worth more than its inputs sold separately, or the kitchen has no reason to exist
-- Meat comes from the farm animals on the reference sheet; keep it to a passive trickle, not an animal husbandry system
-
-  - done when: A cooked dish sells for more than its inputs - state the margin
-  - done when: Food spent on repair during a night is taken through the ledger
-
 ### 0035 - Gunpowder and ammunition
 
 Waits on 0032, 0033.  Likely files: `src/core/crafting.gd, src/core/towers.gd`.
@@ -363,20 +363,34 @@ Towers that consume something. The clearest possible version of 'what you made t
   - done when: A night fought with no gunpowder is survivable but clearly worse
   - done when: The pool drains at the rate the levers claim over a scripted night
 
-### 0040 - The shop grows
+### 0038 - Production runs while you are elsewhere
 
-Waits on 0020, 0028.  Likely files: `src/core/shop.gd, src/ui/shop_panel.gd`.
+Waits on 0037, 0029.  Likely files: `src/core/sim.gd`.
 
-Somewhere for money to go: all three seeds, materials when you are short, and the first upgrades.
+The feeling the design document asks for: 'I built a machine and now I want to find out whether it works'.
 
-- Seeds for all three crops, and materials at a markup over their sale price
-- Buying materials is always worse than gathering them, so money cannot replace playing
-- A small daily stock that refreshes, so the shop cannot be drained into an exploit
-- Prices in game_data, every one a lever
-- Buy and sell are two tabs, not two shops
+- Crops, presses, generators and queues all advance on the same tick regardless of camera or player position
+- No system may depend on being on screen - find and remove any that does
+- Returning to a building shows what happened while away, not a silent jump
+- A day spent entirely fishing still produces from everything else
 
-  - done when: Buy-then-sell on the same item loses money at every price
-  - done when: Stock refreshes once per day and not once per visit
+  - done when: A scripted day where the player never leaves the pond still finishes the crafting queue
+  - done when: The tick cost of a fully built farm stays inside the budget
+
+### 0041 - The first day teaches itself
+
+Waits on 0039, 0040.  Likely files: `src/core/tutorial.gd`.
+
+Day 1 should teach chop, plant, craft, build and the night button without a wall of text or a cage.
+
+- Prompts appear on the thing they describe and disappear when it is done
+- Nothing is locked: a player who already knows can ignore all of it
+- Night 1 stays the tutorial night the design document asks for - a handful of basic zombies
+- Seven lines of text at most in the whole first day
+- A profile flag so it never shows twice
+
+  - done when: Someone who has not seen the game reaches the first night without being told anything out loud
+  - done when: Skipping every prompt still leaves a winnable night 1
 
 ### 0071 - The two palettes
 
@@ -423,35 +437,6 @@ The first thing that fights for you: cheap, single target, medium range, fires b
   - done when: Two runs from the same seed fire at the same targets on the same ticks
   - done when: A tower with nothing in range costs no measurable time per tick
   - done when: Halving the rate of fire lever halves the shots in a fixed number of ticks
-
-### 0038 - Production runs while you are elsewhere
-
-Waits on 0037, 0029.  Likely files: `src/core/sim.gd`.
-
-The feeling the design document asks for: 'I built a machine and now I want to find out whether it works'.
-
-- Crops, presses, generators and queues all advance on the same tick regardless of camera or player position
-- No system may depend on being on screen - find and remove any that does
-- Returning to a building shows what happened while away, not a silent jump
-- A day spent entirely fishing still produces from everything else
-
-  - done when: A scripted day where the player never leaves the pond still finishes the crafting queue
-  - done when: The tick cost of a fully built farm stays inside the budget
-
-### 0041 - The first day teaches itself
-
-Waits on 0039, 0040.  Likely files: `src/core/tutorial.gd`.
-
-Day 1 should teach chop, plant, craft, build and the night button without a wall of text or a cage.
-
-- Prompts appear on the thing they describe and disappear when it is done
-- Nothing is locked: a player who already knows can ignore all of it
-- Night 1 stays the tutorial night the design document asks for - a handful of basic zombies
-- Seven lines of text at most in the whole first day
-- A profile flag so it never shows twice
-
-  - done when: Someone who has not seen the game reaches the first night without being told anything out loud
-  - done when: Skipping every prompt still leaves a winnable night 1
 
 ### 0046 - Fences and walls
 
@@ -1414,16 +1399,16 @@ For the player who beat the Giant and wants to know how far the farm goes. Cheap
 - [x] **0011** [input_check harness](prompts/0011-input-check.md)
 - [x] **0012** [Debug overlay](prompts/0012-debug-overlay.md)
 
-## 1 - The first playable build  (5/15)
+## 1 - The first playable build  (6/15)
 
 - [x] **0013** [The world renders](prompts/0013-world-render.md)
 - [x] **0014** [Sprites generated from ASCII maps](prompts/0014-sprite-pipeline.md)
 - [x] **0015** [The player walks and interacts](prompts/0015-player.md)
 - [x] **0016** [Trees and wood](prompts/0016-wood.md)
 - [x] **0017** [Rocks and stone](prompts/0017-stone.md)
-- [ ] **0018** [Wheat: till, plant, grow, harvest](prompts/0018-wheat.md)
+- [x] **0018** [Wheat: till, plant, grow, harvest](prompts/0018-wheat.md)
 - [ ] **0019** [The workshop and its first recipe](prompts/0019-workshop.md)
-- [ ] **0020** [The shop: sell and buy](prompts/0020-shop.md) - needs 0018
+- [ ] **0020** [The shop: sell and buy](prompts/0020-shop.md)
 - [ ] **0021** [The day HUD](prompts/0021-day-hud.md)
 - [ ] **0022** [Switching reality](prompts/0022-reality-switch.md) - needs 0021
 - [ ] **0023** [Build mode](prompts/0023-build-mode.md) - needs 0019, 0022
@@ -1434,7 +1419,7 @@ For the player who beat the Giant and wants to know how far the farm goes. Cheap
 
 ## 2 - The full day  (0/14)
 
-- [ ] **0028** [Corn and carrot](prompts/0028-three-crops.md) - needs 0018
+- [ ] **0028** [Corn and carrot](prompts/0028-three-crops.md)
 - [ ] **0029** [Growth stages and watering](prompts/0029-growth-stages.md) - needs 0028
 - [ ] **0030** [Fishing](prompts/0030-fishing.md)
 - [ ] **0031** [Iron from the rock face](prompts/0031-iron.md)

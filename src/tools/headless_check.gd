@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 10
+const GROUPS := 11
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -74,6 +74,7 @@ func _run() -> void:
 	_task_0010_save()
 	_task_0016_gathering()
 	_task_0017_stone()
+	_task_0018_wheat()
 
 
 func _finish() -> void:
@@ -1057,5 +1058,119 @@ func _task_0017_stone() -> void:
 		"a seam offers mining")
 	expect(Interact.verb_at(state, Farm.cells_with(state, &"ore")[0]) == &"mine",
 		"and so does ore")
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## 0018 - wheat: till, plant, wait, harvest, and a night that changes nothing.
+func _task_0018_wheat() -> void:
+	var state := State.create(71)
+	var field := Farm.cells_of(state, Farm.Terrain.SOIL)
+	expect(field.size() == 48, "there is a field", str(field.size()))
+
+	var plot: Vector2i = field[0]
+	var data: Dictionary = GameData.CROPS[GameData.WHEAT]
+	var grow_ticks := int(data["growth_ticks"])
+
+	# **Four verbs, and the cell says which one it is offering.** "farm" would
+	# have been one word for four different keypresses.
+	expect(Interact.verb_at(state, plot) == &"till", "untouched soil offers a till")
+	Interact.complete(state, plot, &"till")
+	expect(Farming.is_tilled(state, plot), "and tilling turns it over")
+	expect(Interact.verb_at(state, plot) == &"plant", "turned earth offers a seed")
+
+	var money_before := Resources.amount(state, GameData.MONEY)
+	Interact.complete(state, plot, &"plant")
+	expect(Farming.crop_on(state, plot) == GameData.WHEAT, "which goes in")
+	expect(Resources.amount(state, GameData.MONEY)
+		== money_before - int(data["seed_cost"]),
+		"and is paid for", str(Resources.amount(state, GameData.MONEY)))
+	expect(Interact.verb_at(state, plot) == &"",
+		"a growing crop offers nothing - there is nothing useful to do yet")
+
+	# It grows, in stages, and only reaches the last one when it is ready.
+	expect(Farming.stage(state, plot) == 0, "it starts at stage 0")
+	Sim.advance(state, grow_ticks / 2)
+	var midway := Farming.stage(state, plot)
+	expect(midway > 0 and midway < int(data["stages"]) - 1,
+		"halfway through it is halfway through", str(midway))
+	expect(not Farming.is_ready(state, plot), "and not ready")
+
+	Sim.advance(state, grow_ticks - grow_ticks / 2)
+	expect(Farming.is_ready(state, plot), "on the tick the lever says, it is")
+	expect(Farming.stage(state, plot) == int(data["stages"]) - 1,
+		"at its last stage", str(Farming.stage(state, plot)))
+	expect(Interact.verb_at(state, plot) == &"harvest", "and offers a harvest")
+
+	# Harvest pays through the ledger and leaves the ground ready for the next.
+	var wheat_before := Resources.amount(state, GameData.WHEAT)
+	Interact.complete(state, plot, &"harvest")
+	expect(Resources.amount(state, GameData.WHEAT)
+		== wheat_before + int(data["yield"]),
+		"harvesting pays the yield",
+		str(Resources.amount(state, GameData.WHEAT)))
+	expect(Farming.is_tilled(state, plot), "and leaves the ground turned over")
+	expect(Farming.crop_on(state, plot) == &"", "with nothing in it")
+	expect(Interact.verb_at(state, plot) == &"plant", "ready for the next seed")
+
+	# **A night changes nothing, and the morning picks up where it left off.**
+	# The done-when of this task, and the reason a plot is plain data.
+	var overnight := State.create(72)
+	var bed: Vector2i = Farm.cells_of(overnight, Farm.Terrain.SOIL)[3]
+	Interact.complete(overnight, bed, &"till")
+	Interact.complete(overnight, bed, &"plant")
+	Sim.advance(overnight, 300)
+	var growth_at_dusk := int(Farming.plot(overnight, bed)["growth"])
+	expect(growth_at_dusk == 300, "it grew all afternoon", str(growth_at_dusk))
+
+	Phases.begin_preparation(overnight)
+	Sim.advance(overnight, GameData.PREPARATION_TICKS + 2000)
+	expect(int(Farming.plot(overnight, bed)["growth"]) == growth_at_dusk,
+		"and not one tick during the whole night",
+		str(Farming.plot(overnight, bed)["growth"]))
+	expect(Farming.crop_on(overnight, bed) == GameData.WHEAT,
+		"the crop is still in the ground")
+
+	Phases.enter_result(overnight, true)
+	Phases.begin_day(overnight)
+	Sim.advance(overnight, 100)
+	expect(int(Farming.plot(overnight, bed)["growth"]) == growth_at_dusk + 100,
+		"and in the morning it carries on from exactly where it was",
+		str(Farming.plot(overnight, bed)["growth"]))
+
+	# No money, no seed, and no half-planted tile.
+	var broke := State.create(73)
+	var dirt: Vector2i = Farm.cells_of(broke, Farm.Terrain.SOIL)[0]
+	Resources.spend(broke, GameData.MONEY,
+		Resources.amount(broke, GameData.MONEY))
+	Interact.complete(broke, dirt, &"till")
+	Interact.complete(broke, dirt, &"plant")
+	expect(Farming.crop_on(broke, dirt) == &"",
+		"planting with no money plants nothing")
+	expect(Farming.is_tilled(broke, dirt), "and leaves the tilled ground alone")
+
+	# A whole field, because one plot is not a field.
+	var farmed := State.create(74)
+	Resources.add(farmed, GameData.MONEY, 500)
+	for cell in Farm.cells_of(farmed, Farm.Terrain.SOIL):
+		Interact.complete(farmed, cell, &"till")
+		Interact.complete(farmed, cell, &"plant")
+	var counts := Farming.counts(farmed)
+	expect(int(counts["planted"]) == 48, "forty-eight plots planted",
+		str(counts))
+	Sim.advance(farmed, grow_ticks)
+	expect(int(Farming.counts(farmed)["ready"]) == 48,
+		"and all of them come up together",
+		str(Farming.counts(farmed)))
+	var before_harvest := Resources.amount(farmed, GameData.WHEAT)
+	for cell in Farm.cells_of(farmed, Farm.Terrain.SOIL):
+		Interact.complete(farmed, cell, &"harvest")
+	expect(Resources.amount(farmed, GameData.WHEAT)
+		== before_harvest + 48 * int(data["yield"]),
+		"paying the whole field", str(Resources.amount(farmed, GameData.WHEAT)))
+
+	# You can walk across your own field, and a zombie will be able to too.
+	expect(Farm.walkable(farmed, Farm.cells_of(farmed, Farm.Terrain.SOIL)[10]),
+		"a planted tile is still ground, not furniture")
 
 	_completed += 1     # last line: an abandoned group never gets here

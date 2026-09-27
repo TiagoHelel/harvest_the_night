@@ -35,12 +35,30 @@ static func create(seed_value: int) -> Dictionary:
 		"tick": 0,
 		"rng": Rng.create(seed_value),
 	}
-	state.merge(Phases.initial())
-	state.merge(Resources.initial())
-	state.merge(Farm.initial())
-	state.merge(Player.initial())
-	state.merge(Gathering.initial())
+	_adopt(state, Phases.initial(), "Phases")
+	_adopt(state, Resources.initial(), "Resources")
+	_adopt(state, Farm.initial(), "Farm")
+	_adopt(state, Player.initial(), "Player")
+	_adopt(state, Gathering.initial(), "Gathering")
+	_adopt(state, Farming.initial(), "Farming")
 	return state
+
+
+## Merge one subsystem's keys in, and **refuse a name that is already taken**.
+##
+## The state is one flat namespace shared by every subsystem, which is what
+## makes it hashable, savable and diffable in one piece. The cost is that two
+## subsystems can pick the same key - and `Dictionary.merge()` silently keeps
+## one of them. Farming called its chosen crop `"seed"`, which was already the
+## run's RNG seed; planting did nothing at all and the only symptom was a type
+## error three files away.
+static func _adopt(state: Dictionary, keys: Dictionary, owner: String) -> void:
+	for key in keys:
+		if state.has(key):
+			push_error("State: %s wants the key '%s' and something already "
+				% [owner, key] + "owns it. Pick another name.")
+			continue
+		state[key] = keys[key]
 
 
 ## A deep copy, safe to simulate forward without touching the original.

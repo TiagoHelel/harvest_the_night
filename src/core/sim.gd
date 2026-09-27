@@ -37,6 +37,7 @@ static func tick(state: Dictionary) -> void:
 ## The cozy half. Growing, gathering, producing, selling.
 static func _tick_day(state: Dictionary) -> void:
 	state["day_tick"] = int(state["day_tick"]) + 1
+	Farming.tick(state)
 	Gathering.tick(state)
 	Player.tick(state)
 

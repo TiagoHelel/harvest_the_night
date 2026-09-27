@@ -86,6 +86,13 @@ var _sprites: Array[Node] = []
 var _highlight: Node2D
 var _highlight_cell := Vector2i(-1, -1)
 
+## The field: turned earth and whatever is growing in it. Flat on the ground
+## rather than standing on it, because a crop is not something you walk around
+## - and at night it is ground to defend, not furniture.
+var _plots: Node2D
+var _plot_sprites: Array[Node] = []
+var _plots_signature := 0
+
 
 func _ready() -> void:
 	_terrain.tile_set = _build_terrain_tileset()
@@ -106,6 +113,11 @@ func _ready() -> void:
 	# negative z_index inside the sorted layer. Negative z inside a Y-sorted
 	# parent put it behind the TileMapLayer, so the frame was drawn under the
 	# grass and nothing appeared on screen at all.
+	_plots = Node2D.new()
+	_plots.name = "Plots"
+	add_child(_plots)
+	move_child(_plots, 1)           # after Terrain, before the highlight
+
 	_highlight = Node2D.new()
 	_highlight.name = "Highlight"
 	_highlight.draw.connect(_draw_highlight)
@@ -119,6 +131,7 @@ func show_state(state: Dictionary) -> void:
 	_dirty = true
 	_draw_terrain()
 	_refresh()
+	_refresh_plots()
 
 
 ## Redraw the occupants next frame. Called by anything that knows it changed
@@ -140,6 +153,11 @@ func _process(_delta: float) -> void:
 	if _dirty:
 		_dirty = false
 		_refresh()
+
+	var plots: int = (_state["plots"] as Dictionary).hash()
+	if plots != _plots_signature:
+		_plots_signature = plots
+		_refresh_plots()
 
 
 # ------------------------------------------------------------------- camera
@@ -226,12 +244,59 @@ func _refresh() -> void:
 		_sprites.append(sprite)
 
 
+## Turned earth, and the crop on it at whatever stage it has reached.
+func _refresh_plots() -> void:
+	for sprite in _plot_sprites:
+		sprite.queue_free()
+	_plot_sprites.clear()
+	if _state.is_empty() or _plots == null:
+		return
+
+	var size := float(GameData.TILE_SIZE)
+	var plots: Dictionary = _state["plots"]
+	var keys: Array = plots.keys()
+	keys.sort()
+	for idx in keys:
+		var cell := Grid.cell(int(idx))
+		var crop: StringName = (plots[idx] as Dictionary)["crop"]
+		var art := "tilled" if crop == &"" \
+			else "%s_%d" % [crop, Farming.stage(_state, cell)]
+		var texture := _crop_texture(art)
+		if texture == null:
+			continue
+		var sprite := Sprite2D.new()
+		sprite.texture = texture
+		sprite.centered = false
+		sprite.position = Vector2(cell) * size
+		_plots.add_child(sprite)
+		_plot_sprites.append(sprite)
+
+
+## A crop sprite, cached. A stage the pipeline has not drawn falls back to the
+## turned earth rather than to nothing, so a missing frame looks like a missing
+## frame instead of like a field that stopped growing.
+func _crop_texture(art: String) -> Texture2D:
+	var key := StringName("crop/" + art)
+	if _textures.has(key):
+		return _textures[key]
+	var path := CROP_DIR + art + ".png"
+	if not ResourceLoader.exists(path):
+		push_warning("no crop sprite at %s" % path)
+		path = CROP_DIR + "tilled.png"
+		if not ResourceLoader.exists(path):
+			return null
+	var texture: Texture2D = load(path)
+	_textures[key] = texture
+	return texture
+
+
 # ----------------------------------------------------------------- the art
 
 ## The terrain atlas: six tiles in a strip, in `Farm.Terrain` order, generated
 ## by `tools/gen_sprites.py` from `tools/sprite_maps.py`.
 const TERRAIN_ATLAS := "res://sprites/terrain/atlas.png"
 const PROP_DIR := "res://sprites/props/"
+const CROP_DIR := "res://sprites/crops/"
 
 
 func _build_terrain_tileset() -> TileSet:

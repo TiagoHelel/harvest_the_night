@@ -23,8 +23,12 @@ const OCCUPANT_VERBS: Dictionary = {
 }
 
 ## When nothing is standing there, the ground decides.
+##
+## Soil is the exception: what a field offers depends on what is in it, so it
+## asks `Farming` rather than answering from a table. That is why the highlight
+## can say "harvest" instead of "farm", and why the player is never told a key
+## does something it does not.
 const TERRAIN_VERBS: Dictionary = {
-	Farm.Terrain.SOIL: &"farm",
 	Farm.Terrain.WATER: &"fish",
 }
 
@@ -33,7 +37,10 @@ const TERRAIN_VERBS: Dictionary = {
 const DEFAULT_TICKS: Dictionary = {
 	&"chop": 3 * GameData.SECONDS,
 	&"mine": 4 * GameData.SECONDS,
-	&"farm": 1 * GameData.SECONDS,
+	# Turning earth is work; dropping a seed in and pulling a crop out are not.
+	&"till": 1 * GameData.SECONDS,          # LEVER: ticks, 15-60
+	&"plant": GameData.SECONDS / 3,         # LEVER: ticks, 5-30
+	&"harvest": GameData.SECONDS / 3,       # LEVER: ticks, 5-30
 	&"fish": 1 * GameData.SECONDS,
 	&"trade": 1,                    # opening a panel is not work
 }
@@ -46,6 +53,8 @@ static func verb_at(state: Dictionary, cell: Vector2i) -> StringName:
 	var on := Farm.occupant(state, cell)
 	if not on.is_empty():
 		return OCCUPANT_VERBS.get(on["id"], &"")
+	if Farm.terrain_at(state, cell) == Farm.Terrain.SOIL:
+		return Farming.verb_at(state, cell)
 	return TERRAIN_VERBS.get(Farm.terrain_at(state, cell), &"")
 
 
@@ -75,8 +84,8 @@ static func complete(state: Dictionary, cell: Vector2i, verb: StringName) -> voi
 	match verb:
 		&"chop", &"mine":
 			Gathering.strike(state, cell)
-		&"farm":
-			pass        # task 0018: till, plant, harvest
+		&"till", &"plant", &"harvest":
+			Farming.act(state, cell)
 		&"fish":
 			pass        # task 0030
 		&"trade":

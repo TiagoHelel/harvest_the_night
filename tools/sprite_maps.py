@@ -164,6 +164,120 @@ SPRITES = {
         "dddddddddddddddd",
     ]),
 
+    # ----------------------------------------------------------------- crops
+
+    # Turned earth waiting for a seed. Darker and rougher than the field it
+    # sits on, so a tilled row reads from across the farm.
+    "crops/tilled": dict(size=TILE, legend={
+        "d": "soil_dark", "s": "soil", "i": "ink", ".": None,
+    }, rows=[
+        "dddddddddddddddd",
+        "dssdssdssdssdssd",
+        "dssdssdssdssdssd",
+        "dddddddddddddddd",
+        "ssdssdssdssdssds",
+        "ssdssdssdssdssds",
+        "dddddddddddddddd",
+        "dssdssdssdssdssd",
+        "dssdssdssdssdssd",
+        "dddddddddddddddd",
+        "ssdssdssdssdssds",
+        "ssdssdssdssdssds",
+        "dddddddddddddddd",
+        "dssdssdssdssdssd",
+        "dssdssdssdssdssd",
+        "dddddddddddddddd",
+    ]),
+
+    # Wheat, just in. Four seed mounds and nothing showing.
+    "crops/wheat_0": dict(size=TILE, legend={
+        "d": "soil_dark", "g": "grass_dark", ".": None,
+    }, rows=[
+        "................",
+        "................",
+        "................",
+        "...dd......dd...",
+        "..dddd....dddd..",
+        "...dd......dd...",
+        "................",
+        "................",
+        "................",
+        "...dd......dd...",
+        "..dddd....dddd..",
+        "...dd......dd...",
+        "................",
+        "................",
+        "................",
+        "................",
+    ]),
+
+    # Sprouted.
+    "crops/wheat_1": dict(size=TILE, legend={
+        "g": "grass_dark", "l": "grass", ".": None,
+    }, rows=[
+        "................",
+        "................",
+        "................",
+        "....g......g....",
+        "...glg....glg...",
+        "....g......g....",
+        "................",
+        "................",
+        "................",
+        "....g......g....",
+        "...glg....glg...",
+        "....g......g....",
+        "................",
+        "................",
+        "................",
+        "................",
+    ]),
+
+    # Growing: taller, still green.
+    "crops/wheat_2": dict(size=TILE, legend={
+        "g": "grass_dark", "l": "grass", "L": "grass_light", ".": None,
+    }, rows=[
+        "................",
+        "................",
+        "....L......L....",
+        "...gLg....gLg...",
+        "...glg....glg...",
+        "...glg....glg...",
+        "....g......g....",
+        "................",
+        "....L......L....",
+        "...gLg....gLg...",
+        "...glg....glg...",
+        "...glg....glg...",
+        "....g......g....",
+        "................",
+        "................",
+        "................",
+    ]),
+
+    # Ready: heavy ears, gold rather than green.
+    "crops/wheat_3": dict(size=TILE, legend={
+        "g": "gold_dark", "l": "gold", "L": "gold_light",
+        "s": "grass_dark", ".": None,
+    }, rows=[
+        "................",
+        "...L.L....L.L...",
+        "..LlLlL..LlLlL..",
+        "..LlllL..LlllL..",
+        "...glg....glg...",
+        "...sgs....sgs...",
+        "....s......s....",
+        "................",
+        "...L.L....L.L...",
+        "..LlLlL..LlLlL..",
+        "..LlllL..LlllL..",
+        "...glg....glg...",
+        "...sgs....sgs...",
+        "....s......s....",
+        "................",
+        "................",
+    ]),
+
     # ---------------------------------------------------------------- props
 
     # A tree. The canopy overhangs the trunk, so a row of them reads as a wood
