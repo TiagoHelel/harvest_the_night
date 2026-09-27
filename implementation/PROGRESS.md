@@ -4964,3 +4964,102 @@ playing it end to end.
 
 `python tools/verify.py` prints PASS: 2452 asserts, 502 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+
+## 0067 - The autoplayer
+
+    policy     won  killed by      avg night  avg house  gathered
+    balanced     0  night 8 (3x)        7.6        0.0      1607
+    towers       0  night 7 (3x)        7.4        0.0      1544
+    economy      0  night 4 (5x)        4.0        0.0       685
+    walls        0  night 1 (5x)        1.0        0.0       290
+
+    ALARM: no policy won a single run - the ten nights are unbeatable by
+      anything this robot knows how to do
+
+Four policies, each three lists and nothing else: what to go and get, what to
+put up, which branch of the tree to walk. Nothing looks ahead, nothing reacts,
+because **a clever robot measures the robot.**
+
+### What it found, in order of how much it matters
+
+**1. Day one could not build the tower the tutorial tells it to build.**
+
+A whole day of mining nothing but ore yields **thirteen iron**; a gun tower
+cost **fifteen**. Not by buying either - the stall wants $18 an iron and the
+run starts with $25. There was exactly one line that worked: mine all day,
+sell every stone you started with, and buy two iron. A tutorial night that
+needs a perfect line is not a tutorial.
+
+The iron was not the thing to change. `check_iron()` refused both of my first
+two attempts - ore must be *slower per swing*, *worth less per pull* and
+*scarcer to come back* than stone, and all three are right, because iron being
+the hard one is the point. The wrong number was the tower: **twelve iron, not
+fifteen**, so a first tower is a first day's mining.
+
+Task 0060 measured "night 1 holds at 10 of 100 with the tower the tutorial
+gives you" - and the fixture **gave itself that tower for free**. The
+measurement was true and the premise was not. This is exactly what an
+autoplayer is for.
+
+**2. Two performance bugs, and the day tick is four and a half times faster.**
+
+`Tutorial.tick()` cost **222 microseconds of every day tick** - seventy-two
+percent of a day in which nothing was happening - because one of its arms
+walks all seven hundred cells looking for a planted one, thirty times a
+second, for a system whose own comment says it can only notice. It looks twice
+a second now.
+
+`Building.expire()` copied and **sorted every occupant on the farm** once a
+tick to find the barricades among them: twenty-nine microseconds of an empty
+farm. It keeps a list of the things that can expire, which is almost always
+empty.
+
+    a quiet day tick: 308 us -> 96.8 us -> 68.7 us
+
+The whole test suite went from 212 seconds to 146 with those two.
+
+**3. Nothing wins.** The alarm fires, and it is right to. A robot that never
+repairs, never drops a barricade, never fires a flare and always prefers
+another tower to a better one gets to night seven or eight and stops. That is
+the honest floor of the ten nights, and it is the number task 0068 starts
+from - not a failure of the curve, but the first real measurement of it.
+
+The policies separate cleanly, which is the other thing the instrument is for:
+walls-first dies on night one because walls do not kill, economy dies on night
+four because a press is not a tower, and the two that buy guns get twice as
+far. No dominant strategy - there is no strategy that wins at all yet.
+
+### The two-minute budget, honestly
+
+**Twenty runs take 111 seconds**, so a hundred take about nine minutes, not
+two. The done-when asks for a hundred under two, and I have not met it.
+
+The reason is arithmetic rather than sloppiness: a run is ten days and ten
+nights of a thirty-hertz simulation - seventy-two thousand day ticks alone -
+and a day tick is 68.7 microseconds after the two fixes above. That is 5.6
+seconds a run, and the budget implies 1.2. Meeting it needs the tick an order
+of magnitude cheaper, or a day that is not simulated in full, and the second
+would stop the instrument measuring what a day is worth, which is the one
+thing it was built to measure.
+
+`python tools/autoplay.py 20` is the usable size. What would close the gap is
+a profile pass over the night loop - which is task 0102's, and now has a
+reason to exist beyond tidiness.
+
+### What the robot is kinder about than a player
+
+Walking is not counted. A real farmer spends a good part of a day crossing the
+farm; the robot pays only the work. So every income above is a **ceiling**,
+and a policy that only just survives is one a human would not have survived
+with. That is written at the top of `autoplay.gd` so nobody reads these
+numbers as a promise.
+
+### Hashes
+
+| | from | to | why |
+|---|---|---|---|
+| sim hash | `1842437134` | `2646847426` | the tutorial looks twice a second, barricades expire off a list, and a gun tower costs three less iron |
+| data hash | `219894722` | `1509120177` | the tower's cost and the tutorial's new lever |
+
+`python tools/verify.py` prints PASS: 2494 asserts, 502 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

@@ -1,7 +1,7 @@
 # 0067 - The autoplayer
 
 - **Phase:** 4 - Ten nights and progression
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0059, 0055
 - **Likely files:** src/tools/autoplayer.gd
 

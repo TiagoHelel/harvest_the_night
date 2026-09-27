@@ -63,6 +63,13 @@ const PREPARATION_TICKS := 20 * SECONDS # LEVER: ticks, 10-45 seconds worth
 
 ## The whole world, in tiles. About 1.3 screens wide and just over one tall at
 ## 480x270, which is what `design.md` asks for.
+## How often the tutorial looks to see whether a step has been done.
+##
+## It only watches, so it can watch slowly: every fifteen ticks is twice a
+## second, which nobody can tell from instant, and it is fifteen times less of
+## the day tick than asking every one.
+const TUTORIAL_CHECK_TICKS := 15        # LEVER: ticks, 1-30
+
 ## What crossing one tile of each terrain costs somebody walking in, in
 ## **tiles-equivalent**: ordinary ground is 1, so a structure's `path_cost`
 ## reads as "how many tiles of detour going through this is worth".
@@ -578,7 +585,19 @@ const BURN_EVERY_TICKS := SECONDS
 ## code stops growing a branch per tower.
 const DEFENCES: Dictionary = {
 	&"gun_tower": {
-		"cost": {WOOD: 10, IRON: 15},
+		# **Twelve iron, not fifteen**, and the autoplayer of task 0067 is
+		# what found it. A whole day of mining nothing else yields thirteen
+		# iron - the cliff has eight seams and they come back once in a day -
+		# so at fifteen the first tower could not be built on the first day
+		# except by the one perfect line: mine all day, sell every stone you
+		# started with, and buy two iron at eighteen dollars each.
+		#
+		# The iron itself was not the thing to change. `check_iron()` holds
+		# ore to being slower per swing, worth less per pull and scarcer to
+		# come back than stone, and all three are right - iron is meant to be
+		# the hard one. What was wrong was a first tower that cost more than
+		# a first day can make.
+		"cost": {WOOD: 10, IRON: 12},
 		"targeting": TARGET_CLOSEST_TO_HOUSE,
 		"shape": SHAPE_SINGLE,
 		"hp": 60,                       # LEVER: hit points, 30-120

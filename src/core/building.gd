@@ -33,6 +33,9 @@ extends RefCounted
 
 static func initial() -> Dictionary:
 	return {
+		# Cells with something on them that takes itself away. Almost always
+		# empty; see `expire()`.
+		"expiring": [],
 		"build": {
 			"active": false,
 			"selected": &"",
@@ -378,6 +381,7 @@ static func place(state: Dictionary, id: StringName, cell: Vector2i) -> bool:
 	var occupant := {"id": id, "hp": int(entry.get("hp", 1))}
 	if entry.has("lifetime_ticks"):
 		occupant["expires"] = int(state["tick"]) + int(entry["lifetime_ticks"])
+		_will_expire(state, cell)
 
 	# Counted the moment it goes down, not when it comes up: a barricade that
 	# was chewed through still used one of tonight's five.
@@ -476,19 +480,38 @@ static func tick(state: Dictionary) -> void:
 ## The barricade is the only one today, and it is what stops it quietly
 ## becoming a cheaper wall.
 static func expire(state: Dictionary) -> void:
+	# **Only the things that can expire are looked at.** This used to copy
+	# and sort every occupant on the farm - a hundred and ten keys - once a
+	# tick, to find the barricades among them: twenty-nine microseconds of
+	# every tick of a day on which nothing had been built at all. Task 0067
+	# needed a hundred runs of ten nights and found it.
+	var waiting: Array = state["expiring"]
+	if waiting.is_empty():
+		return
 	var occupants: Dictionary = state["occupants"]
 	var now := int(state["tick"])
 	var gone: Array = []
-	var keys: Array = occupants.keys()
-	keys.sort()
-	for idx in keys:
-		var on: Dictionary = occupants[idx]
-		if on.has("expires") and now >= int(on["expires"]):
+	var left: Array = []
+	for idx in waiting:
+		var on: Variant = occupants.get(idx, null)
+		if on == null or not (on as Dictionary).has("expires"):
+			continue        # sold, chewed through, or never had one
+		if now >= int((on as Dictionary)["expires"]):
 			gone.append(idx)
+		else:
+			left.append(idx)
+	state["expiring"] = left
 	for idx in gone:
 		occupants.erase(idx)
 	if not gone.is_empty():
 		state["grid_version"] = int(state["grid_version"]) + 1
+
+
+## Remember that this cell has something on it with a lifetime.
+static func _will_expire(state: Dictionary, cell: Vector2i) -> void:
+	var idx := Grid.index(cell)
+	if idx >= 0 and not (state["expiring"] as Array).has(idx):
+		(state["expiring"] as Array).append(idx)
 
 
 static func select(state: Dictionary, id: StringName) -> void:

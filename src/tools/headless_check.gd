@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 59
+const GROUPS := 60
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -123,6 +123,7 @@ func _run() -> void:
 	_task_0064_tower_levels()
 	_task_0065_defeat()
 	_task_0066_run_end()
+	_task_0067_autoplay()
 
 
 func _finish() -> void:
@@ -5205,7 +5206,7 @@ func _task_0041_tutorial() -> void:
 	# **A step finishes when the thing happens**, however it happened - which
 	# is what makes following the prompts and ignoring them the same game.
 	Resources.gain(state, {GameData.WOOD: 5})
-	Sim.advance(state, 2)
+	Sim.advance(state, GameData.TUTORIAL_CHECK_TICKS + 1)
 	expect(Tutorial.is_done(state, &"chop"),
 		"wood arriving finishes the first line, whatever brought it")
 	expect(Tutorial.current(state)["id"] == &"plant",
@@ -5219,7 +5220,7 @@ func _task_0041_tutorial() -> void:
 	# **A finished step stays finished.**
 	Resources.spend(state, GameData.WOOD,
 		Resources.amount(state, GameData.WOOD))
-	Sim.advance(state, 2)
+	Sim.advance(state, GameData.TUTORIAL_CHECK_TICKS + 1)
 	expect(Tutorial.is_done(state, &"chop"),
 		"selling the wood again does not put the line back")
 
@@ -5244,7 +5245,7 @@ func _task_0041_tutorial() -> void:
 	Farming.act(rebel, plot)
 	expect(Farming.crop_on(rebel, plot) != &"",
 		"and a seed goes in the ground")
-	Sim.advance(rebel, 2)
+	Sim.advance(rebel, GameData.TUTORIAL_CHECK_TICKS + 1)
 	expect(Tutorial.progress(rebel) >= 4,
 		"four of the five lines are simply gone, unread",
 		str(Tutorial.progress(rebel)))
@@ -10557,3 +10558,80 @@ func _play_a_whole_run(seed_value: int) -> Dictionary:
 	out["money_on_the_ledger"] = Resources.amount(state, GameData.MONEY)
 	out["over"] = Run.is_over(state)
 	return out
+
+
+## 0067 - the robot that plays, so balance is measured.
+func _task_0067_autoplay() -> void:
+	# **Four policies, and each is three lists and nothing else.**
+	expect(Autoplay.names().size() == 4,
+		"four ways to play", str(Autoplay.names()))
+	for name in Autoplay.names():
+		var policy: Dictionary = Autoplay.POLICIES[name]
+		for field in ["note", "gather", "build", "tech"]:
+			expect(policy.has(field),
+				"%s declares its %s" % [name, field], str(policy))
+		expect(not (policy["build"] as Array).is_empty(),
+			"%s builds something" % name)
+		for id in (policy["build"] as Array):
+			expect(Building.entry_of(StringName(id)) != null,
+				"%s builds a thing that exists: %s" % [name, id])
+		for id in (policy["tech"] as Array):
+			expect(not Tech.node(StringName(id)).is_empty(),
+				"%s walks a branch that exists: %s" % [name, id])
+		for res in (policy["gather"] as Array):
+			expect(GameData.RESOURCES.has(StringName(res)),
+				"%s gathers a real resource: %s" % [name, res])
+
+	# **The same seed is the same run.** An instrument that cannot be
+	# repeated measures nothing.
+	var once := Autoplay.play(6700, &"towers")
+	var twice := Autoplay.play(6700, &"towers")
+	expect(int(once["died_on"]) == int(twice["died_on"]),
+		"the same seed dies on the same night",
+		"%d against %d" % [once["died_on"], twice["died_on"]])
+	expect(int(once["killed"]) == int(twice["killed"]),
+		"having killed the same number", "%d against %d"
+			% [once["killed"], twice["killed"]])
+	expect((once["nights"] as Array).size()
+		== (twice["nights"] as Array).size(),
+		"over the same nights")
+	var other := Autoplay.play(6701, &"towers")
+	expect(int(other["killed"]) != int(once["killed"])
+		or int(other["died_on"]) != int(once["died_on"]),
+		"and another seed is another run - the test would pass on a "
+		+ "constant otherwise", str(other["killed"]))
+
+	# **It reports what the task asks for, per night.**
+	for row in (once["nights"] as Array):
+		var night: Dictionary = row
+		for field in ["night", "held", "house", "spent", "towers"]:
+			expect(night.has(field),
+				"every night reports its %s" % field, str(night))
+		expect(int(night["spent"]) >= 0,
+			"and what was spent is a number", str(night["spent"]))
+
+	# **It gets a tower up on the first day.**
+	#
+	# This is the thing the robot found and it is worth an assert of its own:
+	# a whole day of mining yields thirteen iron, so at fifteen the first
+	# tower could not be built on the first day at all.
+	var day_one: Dictionary = (once["nights"] as Array)[0]
+	print("  night one, played by the robot: %s, house %d, %d tower(s)"
+		% ["held" if day_one["held"] else "lost", int(day_one["house"]),
+			int(day_one["towers"])])
+	expect(int(day_one["towers"]) >= 1,
+		"a day's work buys the tower the tutorial asks for",
+		str(day_one["towers"]))
+	var iron := int((GameData.DEFENCES[&"gun_tower"]
+		as Dictionary)["cost"][GameData.IRON])
+	expect(iron <= 13,
+		"because the tower costs no more iron than a day of mining makes",
+		"%d against 13" % iron)
+
+	# **The alarm can fire.** A detector that cannot say "no" detects nothing.
+	print("  the robot reaches night %d with the towers policy"
+		% (once["nights"] as Array).size())
+	expect((once["nights"] as Array).size() >= 4,
+		"the robot gets past the early nights", str(once["nights"].size()))
+
+	_completed += 1     # last line: an abandoned group never gets here
