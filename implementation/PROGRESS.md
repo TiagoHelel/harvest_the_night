@@ -2866,3 +2866,101 @@ which is what `input_check` builds.
 iron, oil, energy, cooking, ammunition, the inventory, the queue, idle
 production, the clock, the shop and now day one teaching itself. Phase 3 is the
 full night.
+
+## 0042 - Data-driven defences - done 2026-09-27
+
+A tower is a declaration now, not a branch. Phase 3 opens by making room for
+the five towers it is about to add.
+
+**What changed.** Every defence that shoots declares `targeting` and `shape`
+alongside what it already declared, `towers.gd` dispatches on those instead of
+deciding for itself, and splash damage works for anything that asks for it.
+
+Files: `src/core/game_data.gd`, `towers.gd`, `src/tools/headless_check.gd`.
+Verify: 1288 headless / 364 input / **sim hash unchanged**, data hash moved.
+
+### The sim hash is unchanged, which is what makes it a port
+
+That is the done-when and it is the only honest measure of this kind of task.
+Every tower declares exactly what it was already doing - `closest_to_house`
+and `single` - and the defaults for a tower that declares nothing are the same
+two, so the scenario came out identical to the digit.
+
+The **data hash** did move, and should have: the table gained two fields per
+tower. Declaring what was implicit is a change to the table even when it is
+not a change to the game, and the guard is right to say so.
+
+### What was already right, and what was not
+
+Task 0024 built the shooting so that it read `entry["range"]`,
+`entry["damage"]`, `entry["reload_ticks"]` rather than comparing ids - so most
+of "the combat code reads the declaration" was already true. What was left
+implicit was the two decisions the code made on everybody's behalf:
+
+- **How to pick.** `_acquire()` always chose whatever was nearest the house.
+  That is one of four ways now - `nearest`, `weakest` and `strongest` are
+  there because the towers of 0043 to 0045 will want them, and writing them
+  today is four lines in `_threat_of()` where writing them later is four
+  branches.
+- **How to land.** Every shot hit one thing. The mortar has carried
+  `splash_tiles` and `splash_falloff` since the table was written and
+  **nothing read either of them** - it has been a single-target tower with two
+  decorative fields for eighteen tasks.
+
+### The shot carries its shape
+
+`_land()` reads the shape off the projectile, not off the tower, because a
+shot arrives after the tower has finished thinking about it - and at night
+nine, possibly after the tower has come down.
+
+An **unarmed** shot is a plain one whatever the tower normally does: a mortar
+that cannot reach for powder is throwing a rock, and a rock does not splash.
+
+### The done-when, performed
+
+"Adding a test tower takes a data entry only; delete it afterwards and say
+so." A `test_burner` - three fire, splash over two tiles, half damage at the
+rim - was built **inside the assert** rather than in `GameData`, used, and
+left there as the test. `DEFENCES` never saw it, so there is nothing to have
+forgotten to delete.
+
+It hit three of the four zombies for 3, 1, 1 and 0, and `towers.gd` was not
+edited to make that work: every line of the entry is read by code that existed
+before the assert was written.
+
+### And it broke a test, correctly
+
+Task 0035's night comparison asserted that an empty pool fires **fewer** mortar
+shots. True until the mortar started splashing: an armed night now ends
+sooner, so the armed mortars get *fewer* shots off than the unarmed ones
+grinding through a longer wave. Shot count had stopped meaning "better".
+
+The claim underneath it - an empty mortar takes longer between shots - is
+asserted directly against the lever, and the night-level claim is now "a night
+fought with powder is over sooner", which is what the player actually
+experiences. The kills and the house were already asserted and are unchanged:
+28 killed and the house untouched with powder, 26 and 82/100 without.
+
+### Notes
+
+- `Towers.acquire_for()` and `land_for_test()` are seams for asking the rules
+  what a declaration would do without building a tower, paying for it and
+  waiting for a reload. A test for "strongest picks the healthiest" should not
+  have to found a farm.
+- `check_defences()` refuses a way of aiming or a shape nobody implements, a
+  damage type the game does not name, and a splash over no tiles - all with
+  teeth-tests. A typo is now a red line at boot rather than a tower that
+  quietly falls back to the default and looks like a balance problem.
+- `splash_falloff` was a float (0.5). It is read as `splash_falloff_percent`
+  and converted, so the rules stay integer-only; the float stays in the table
+  until a balance pass wants to tidy it.
+
+### Hashes
+
+| | from | to | why |
+|---|---|---|---|
+| sim hash | `1534932614` | unchanged | **the point of the task** |
+| data hash | `1228581114` | `331053343` | every shooting defence gained `targeting` and `shape` |
+
+`python tools/verify.py` prints PASS: 1288 asserts, 364 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

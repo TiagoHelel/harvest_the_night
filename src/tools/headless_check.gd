@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 34
+const GROUPS := 35
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -98,6 +98,7 @@ func _run() -> void:
 	_task_0039_clock()
 	_task_0040_shop()
 	_task_0041_tutorial()
+	_task_0042_declared()
 
 
 func _finish() -> void:
@@ -4121,9 +4122,20 @@ func _task_0035_ammunition() -> void:
 	expect(int(dry["mortar_shots"]) > 0,
 		"an empty pool still shoots - never a silent dead tower",
 		str(dry["by_kind"]))
-	expect(int(dry["mortar_shots"]) < int(armed["mortar_shots"]),
-		"more slowly", "%d against %d"
-			% [dry["mortar_shots"], armed["mortar_shots"]])
+	# **Slower is measured per shot, not per night.** This compared the number
+	# of mortar shots and expected the empty pool to fire fewer - which was
+	# true until task 0042 gave the mortar its splash. An armed night now ends
+	# sooner, so the armed mortars get *fewer* shots off than the unarmed ones
+	# grinding through a longer wave, and "fewer shots" stopped meaning
+	# "better". The reload itself is the claim, and it is a lever:
+	var mortar_reload := int((GameData.DEFENCES[&"mortar"]
+		as Dictionary)["reload_ticks"])
+	expect(Ammo.weak_reload(mortar_reload) > mortar_reload,
+		"an empty mortar takes longer between shots",
+		"%d against %d" % [Ammo.weak_reload(mortar_reload), mortar_reload])
+	expect(int(armed["ticks"]) < int(dry["ticks"]),
+		"and a night fought with powder is over sooner",
+		"%d ticks against %d" % [armed["ticks"], dry["ticks"]])
 	expect(int(dry["killed"]) < int(armed["killed"]),
 		"and it kills fewer",
 		"%d against %d" % [dry["killed"], armed["killed"]])
@@ -4226,6 +4238,7 @@ func _mixed_night(seed_value: int, rounds: int) -> Dictionary:
 	return {
 		"state": state,
 		"shots": total,
+		"ticks": int(state["night_tick"]),
 		"by_kind": by_kind,
 		"mortar_shots": int(by_kind.get(&"mortar", 0)),
 		"left": Resources.amount(state, GameData.GUNPOWDER),
@@ -5208,3 +5221,188 @@ func _task_0041_tutorial() -> void:
 		"sending for the night finishes day one")
 
 	_completed += 1     # last line: an abandoned group never gets here
+
+
+## 0042 - a tower is a declaration, not a branch.
+func _task_0042_declared() -> void:
+	# **Every tower that shoots says how it aims and how it lands.**
+	for id in GameData.sorted_names(GameData.DEFENCES.keys()):
+		var entry: Dictionary = GameData.DEFENCES[id]
+		if not entry.has("reload_ticks"):
+			continue        # a wall does not shoot
+		expect(entry.has("targeting"), "%s says how it aims" % id)
+		expect(GameData.TARGETING.has(StringName(entry["targeting"])),
+			"in a way the game knows", str(entry.get("targeting", "")))
+		expect(entry.has("shape"), "%s says how it lands" % id)
+		expect(GameData.SHAPES.has(StringName(entry["shape"])),
+			"in a shape the game knows", str(entry.get("shape", "")))
+		expect(GameData.DAMAGE_TYPES.has(StringName(entry.get("damage_type",
+			GameData.DAMAGE_IMPACT))), "%s deals a damage type the game names" % id,
+			str(entry.get("damage_type", "")))
+		for field in ["cost", "range", "damage", "energy_draw"]:
+			expect(entry.has(field), "%s declares its %s" % [id, field])
+
+	expect(GameData.check_defences(GameData.DEFENCES).is_empty(),
+		"the shipped defences pass their own check",
+		str(GameData.check_defences(GameData.DEFENCES)))
+	var typo: Dictionary = GameData.DEFENCES.duplicate(true)
+	(typo[&"gun_tower"] as Dictionary)["targeting"] = &"whatever_is_closest"
+	expect(not GameData.check_defences(typo).is_empty(),
+		"and a way of aiming nobody implements is refused at boot")
+	typo = GameData.DEFENCES.duplicate(true)
+	(typo[&"gun_tower"] as Dictionary)["shape"] = &"beam"
+	expect(not GameData.check_defences(typo).is_empty(),
+		"and so is a shape nobody implements")
+	typo = GameData.DEFENCES.duplicate(true)
+	(typo[&"mortar"] as Dictionary)["splash_tiles"] = 0
+	expect(not GameData.check_defences(typo).is_empty(),
+		"and a splash over no tiles at all")
+
+	# **Three damage types, named in one place.**
+	expect(GameData.DAMAGE_TYPES.size() == 3, "impact, fire and explosive",
+		str(GameData.DAMAGE_TYPES))
+
+	# **The port moved nothing.** The gun tower declares what it always did:
+	# nearest the house, one target.
+	var gun: Dictionary = GameData.DEFENCES[&"gun_tower"]
+	expect(StringName(gun["targeting"]) == GameData.TARGET_CLOSEST_TO_HOUSE,
+		"the gun tower still shoots whatever is closest to the house")
+	expect(StringName(gun["shape"]) == GameData.SHAPE_SINGLE,
+		"and still hits one thing")
+
+	# And the defaults are the old behaviour, so a tower that declares nothing
+	# behaves exactly as every tower did before this task.
+	var bare := {"cost": {}, "range": 5, "damage": 2, "reload_ticks": 30,
+		"energy_draw": 0, "hp": 10}
+	expect(StringName(bare.get("targeting",
+		GameData.TARGET_CLOSEST_TO_HOUSE)) == GameData.TARGET_CLOSEST_TO_HOUSE,
+		"saying nothing about aiming means the old way")
+	expect(StringName(bare.get("shape", GameData.SHAPE_SINGLE))
+		== GameData.SHAPE_SINGLE, "and saying nothing about shape means one "
+		+ "target")
+
+	# **Aiming is one comparison per way**, and each picks a different zombie.
+	var field := _three_in_a_row(2400)
+	var state: Dictionary = field["state"]
+	var tower: Vector2i = field["tower"]
+	var near: int = field["near"]
+	var far: int = field["far"]
+	var hurt: int = field["hurt"]
+
+	expect(_aims_at(state, tower, GameData.TARGET_NEAREST) == near,
+		"nearest picks the one closest to the tower", str(near))
+	expect(_aims_at(state, tower, GameData.TARGET_CLOSEST_TO_HOUSE) == far,
+		"closest_to_house picks the one furthest along", str(far))
+	expect(_aims_at(state, tower, GameData.TARGET_WEAKEST) == hurt,
+		"weakest picks the one already hurt", str(hurt))
+	expect(_aims_at(state, tower, GameData.TARGET_STRONGEST) != hurt,
+		"and strongest does not")
+
+	# ------------------------------------------- the done-when, performed
+
+	# **A new tower that deals 3 fire in a radius is one entry.**
+	#
+	# Built here, used, and thrown away - `GameData.DEFENCES` never sees it, so
+	# there is nothing to delete from the shipped game afterwards and nothing
+	# that can be forgotten. What it proves is that `towers.gd` needed no edit:
+	# every line of the entry below is read by code that already existed before
+	# this assert was written.
+	var burner := {
+		"cost": {GameData.WOOD: 1},
+		"hp": 20,
+		"damage": 3,
+		"damage_type": GameData.DAMAGE_FIRE,
+		"targeting": GameData.TARGET_CLOSEST_TO_HOUSE,
+		"shape": GameData.SHAPE_SPLASH,
+		"splash_tiles": 2,
+		"splash_falloff_percent": 50,
+		"range": 8,
+		"reload_ticks": 30,
+		"energy_draw": 0,
+	}
+	expect(GameData.check_defences({&"test_burner": burner}).is_empty(),
+		"a tower dealing 3 fire in a radius passes the check",
+		str(GameData.check_defences({&"test_burner": burner})))
+
+	var splashed := _splash_test(2401, burner)
+	print("  3 fire in a radius of 2: %d hit, damage %s"
+		% [int(splashed["hit"]), str(splashed["damage"])])
+	expect(int(splashed["hit"]) >= 3,
+		"and it hits everything in the radius, not one thing",
+		str(splashed["hit"]))
+	expect(int(splashed["middle"]) == 3,
+		"full damage in the middle", str(splashed["middle"]))
+	expect(int(splashed["edge"]) < int(splashed["middle"])
+		and int(splashed["edge"]) > 0,
+		"and less at the edge, but never nothing",
+		"%d against %d" % [splashed["edge"], splashed["middle"]])
+	expect(int(splashed["outside"]) == 0,
+		"and nothing at all beyond the radius", str(splashed["outside"]))
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## What a tower with this way of aiming would shoot, without building one.
+func _aims_at(state: Dictionary, from: Vector2i, how: StringName) -> int:
+	var entry: Dictionary = (GameData.DEFENCES[&"gun_tower"]
+		as Dictionary).duplicate(true)
+	entry["targeting"] = how
+	entry["range"] = 20
+	return Towers.acquire_for(state, from, entry)
+
+
+## A tower, and three zombies: one close, one further along towards the house,
+## and one already hurt.
+func _three_in_a_row(seed_value: int) -> Dictionary:
+	var state := State.create(seed_value)
+	Resources.gain(state, {GameData.WOOD: 200, GameData.IRON: 200})
+	var tower := _room_for(state, Vector2i(1, 1))
+	Building.place(state, &"gun_tower", tower)
+	Phases.begin_preparation(state)
+	Sim.advance(state, GameData.PREPARATION_TICKS)
+
+	var house := Farm.house_centre(state)
+	var near := Entities.spawn(state, &"walker", tower + Vector2i(2, 0))
+	var far := Entities.spawn(state, &"walker",
+		Vector2i(house.x + 1, house.y + 1))
+	var hurt := Entities.spawn(state, &"walker", tower + Vector2i(4, 0))
+	Entities.set_hp(state, hurt, 1)
+	return {"state": state, "tower": tower, "near": near, "far": far,
+		"hurt": hurt}
+
+
+## Fire one splash shot into a huddle and report what it did.
+func _splash_test(seed_value: int, entry: Dictionary) -> Dictionary:
+	var state := State.create(seed_value)
+	Phases.begin_preparation(state)
+	Sim.advance(state, GameData.PREPARATION_TICKS)
+
+	# A middle, two at one tile, and one well outside the radius.
+	var middle_cell := Farm.house_centre(state) + Vector2i(4, 4)
+	var middle := Entities.spawn(state, &"walker", middle_cell)
+	var beside := Entities.spawn(state, &"walker",
+		middle_cell + Vector2i(2, 0))
+	var also := Entities.spawn(state, &"walker", middle_cell + Vector2i(0, 2))
+	var away := Entities.spawn(state, &"walker", middle_cell + Vector2i(6, 6))
+
+	var before: Dictionary = {}
+	for id in [middle, beside, also, away]:
+		before[id] = int(Entities.get_one(state, id).get("hp", 0))
+
+	Towers.land_for_test(state, entry, middle)
+
+	var hit := 0
+	var took: Dictionary = {}
+	for id in [middle, beside, also, away]:
+		var lost := int(before[id]) \
+			- int(Entities.get_one(state, id).get("hp", 0))
+		took[id] = lost
+		if lost > 0:
+			hit += 1
+	return {
+		"hit": hit,
+		"middle": int(took[middle]),
+		"edge": int(took[beside]),
+		"outside": int(took[away]),
+		"damage": str(took.values()),
+	}

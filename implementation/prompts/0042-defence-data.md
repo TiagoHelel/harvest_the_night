@@ -1,7 +1,7 @@
 # 0042 - Data-driven defences
 
 - **Phase:** 3 - The full night
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0024
 - **Likely files:** src/core/towers.gd, src/core/game_data.gd
 

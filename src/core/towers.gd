@@ -119,12 +119,21 @@ static func _cool_down(state: Dictionary) -> void:
 # ----------------------------------------------------------------- targeting
 
 ## The id this tower should shoot, or 0 for nothing in range.
+## Pick something to shoot, the way this tower says it picks.
+##
+## **The declaration decides, not the id.** Before task 0042 every tower did
+## the same thing - nearest the house - because that was the only thing the
+## code did. It still is what they all declare, which is why this port moved
+## no behaviour; what changed is that a mortar wanting the thickest part of
+## the crowd is now one word in a table rather than a branch in here.
 static func _acquire(state: Dictionary, from: Vector2i, entry: Dictionary) -> int:
 	var reach := int(entry.get("range", 0))
 	if reach <= 0:
 		return 0
 	var minimum := int(entry.get("min_range", 0))
 	var house := Farm.house_centre(state)
+	var how := StringName(entry.get("targeting",
+		GameData.TARGET_CLOSEST_TO_HOUSE))
 
 	var best := 0
 	var best_threat := 1 << 30
@@ -141,14 +150,61 @@ static func _acquire(state: Dictionary, from: Vector2i, entry: Dictionary) -> in
 		# towers being too weak, and is not.
 		if not Combat.worth_shooting(state, id):
 			continue
-		var threat := Grid.manhattan(cell, house)
-		# Nearest the house wins; the lower id breaks a tie. `Entities.ids()`
-		# is sorted, so the first one found at a given distance is already the
-		# lowest id and `<` rather than `<=` keeps it.
+		# **Lower is better, whatever "better" means to this tower.** One
+		# comparison for every way of aiming, so adding a sixth is a line in
+		# `_threat_of` and nothing else.
+		var threat := _threat_of(state, how, id, cell, from, house)
+		# The lower entity id breaks a tie. `Entities.ids()` is sorted, so the
+		# first one found at a given score is already the lowest id and `<`
+		# rather than `<=` keeps it.
 		if threat < best_threat:
 			best_threat = threat
 			best = id
 	return best
+
+
+## How much this tower wants to shoot that one. Lower wins.
+##
+## `closest_to_house` is the original and the default: the thing nearest the
+## thing being defended. The others exist because the towers of tasks 0043 to
+## 0045 will want them, and because writing them now is four lines while
+## writing them later is four branches.
+static func _threat_of(state: Dictionary, how: StringName, id: int,
+		cell: Vector2i, from: Vector2i, house: Vector2i) -> int:
+	match how:
+		GameData.TARGET_NEAREST:
+			return Grid.chebyshev(from, cell)
+		GameData.TARGET_WEAKEST:
+			return Entities.get_one(state, id).get("hp", 0)
+		GameData.TARGET_STRONGEST:
+			return -int(Entities.get_one(state, id).get("hp", 0))
+	return Grid.manhattan(cell, house)
+
+
+## Ask what a given declaration would shoot from a given cell.
+##
+## **The seam that makes a declaration testable without building one.** A test
+## for "strongest picks the healthiest" should not have to put a tower on the
+## farm, pay for it and wait for a reload; it should be able to hand the rules
+## an entry and get an answer.
+static func acquire_for(state: Dictionary, from: Vector2i,
+		entry: Dictionary) -> int:
+	return _acquire(state, from, entry)
+
+
+## Land one shot of this declaration on this target, now.
+##
+## The same seam for the other half: what a shape does when it arrives, asked
+## directly rather than by waiting for a projectile to fly.
+static func land_for_test(state: Dictionary, entry: Dictionary,
+		target: int) -> void:
+	_land(state, {
+		"damage": int(entry.get("damage", 1)),
+		"type": StringName(entry.get("damage_type", GameData.DAMAGE_IMPACT)),
+		"shape": StringName(entry.get("shape", GameData.SHAPE_SINGLE)),
+		"splash_tiles": int(entry.get("splash_tiles", 1)),
+		"splash_falloff_percent": int(entry.get("splash_falloff_percent", 100)),
+	}, target)
 
 
 ## What a tower would shoot right now, for the threat overlay of task 0158 and
@@ -186,6 +242,15 @@ static func _fire(state: Dictionary, from: Vector2i, kind: StringName,
 		"damage": int(entry.get("damage", 1)) if armed 			else Ammo.weak_damage(int(entry.get("damage", 1))),
 		"type": StringName(entry.get("damage_type", GameData.DAMAGE_IMPACT)) 			if armed else GameData.DAMAGE_IMPACT,
 		"armed": armed,
+		# **The shot carries its shape**, because it lands after the tower has
+		# finished thinking about it - and, at night nine, possibly after the
+		# tower has come down. An unarmed shot is a plain one whatever the
+		# tower normally does: a mortar that cannot reach for powder is
+		# throwing a rock, and a rock does not splash.
+		"shape": StringName(entry.get("shape", GameData.SHAPE_SINGLE)) 			if armed else GameData.SHAPE_SINGLE,
+		"splash_tiles": int(entry.get("splash_tiles", 1)),
+		"splash_falloff_percent": int(entry.get("splash_falloff_percent",
+			int(float(entry.get("splash_falloff", 1.0)) * 100.0))),
 		"speed": maxi(speed, 1),
 	})
 
@@ -211,8 +276,7 @@ static func _advance_projectiles(state: Dictionary) -> void:
 		var distance := absi(delta.x) + absi(delta.y)
 
 		if distance <= step:
-			Combat.hit(state, target, int(shot["damage"]),
-				StringName(shot["type"]))
+			_land(state, shot, target)
 			landed.append(shot)
 			continue
 
@@ -223,6 +287,35 @@ static func _advance_projectiles(state: Dictionary) -> void:
 
 	for shot in landed:
 		flying.erase(shot)
+
+
+## A shot arrives. **What it does when it gets there is the shape it carries**,
+## not the tower it came from - the tower is long since irrelevant and may not
+## even be standing.
+static func _land(state: Dictionary, shot: Dictionary, target: int) -> void:
+	var damage := int(shot["damage"])
+	var kind := StringName(shot["type"])
+	if StringName(shot.get("shape", GameData.SHAPE_SINGLE)) 			!= GameData.SHAPE_SPLASH:
+		Combat.hit(state, target, damage, kind)
+		return
+
+	# Everything within the radius, full damage at the middle falling to
+	# `splash_falloff` of it at the edge. Sorted by entity id, because two
+	# machines have to kill the same one first.
+	var middle := Entities.cell_of(state, target)
+	var radius := maxi(int(shot.get("splash_tiles", 1)), 1)
+	var edge := int(shot.get("splash_falloff_percent", 100))
+	for id in Entities.ids(state):
+		var cell := Entities.cell_of(state, id)
+		if cell.x < 0:
+			continue
+		var apart := Grid.chebyshev(middle, cell)
+		if apart > radius:
+			continue
+		# Integer throughout: full in the middle, `edge` percent at the rim,
+		# straight line between.
+		var share := 100 - (100 - edge) * apart / radius
+		Combat.hit(state, id, maxi(damage * share / 100, 1), kind)
 
 
 ## How many shots are in the air, for the debug overlay and the perf budget.

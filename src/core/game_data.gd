@@ -449,9 +449,41 @@ const UNPOWERED_PERCENT := 25           # LEVER: percent of full speed, 10-60
 
 # =================================================================== defences
 
+## **How a tower picks what to shoot.** Declared rather than assumed, because
+## the next five towers do not all want the same answer: a mortar wants the
+## thickest part of the crowd and a crossbow wants the longest line.
+##
+## `closest_to_house` is what every tower did implicitly before this task, and
+## it is the default, so a tower that says nothing behaves exactly as it did.
+const TARGET_CLOSEST_TO_HOUSE := &"closest_to_house"
+const TARGET_NEAREST := &"nearest"
+const TARGET_WEAKEST := &"weakest"
+const TARGET_STRONGEST := &"strongest"
+
+const TARGETING: Array = [
+	TARGET_CLOSEST_TO_HOUSE, TARGET_NEAREST, TARGET_WEAKEST, TARGET_STRONGEST,
+]
+
+
+## **How the damage lands.** `single` is one target and is the default;
+## `splash` is everything within `splash_tiles`, falling off to
+## `splash_falloff` of the damage at the edge.
+##
+## A new tower that deals three fire in a radius is
+## `{"shape": SHAPE_SPLASH, "damage": 3, "damage_type": DAMAGE_FIRE,
+## "splash_tiles": 2}` and no edit to `towers.gd` at all. There is an assert
+## that builds exactly that and then deletes it again.
+const SHAPE_SINGLE := &"single"
+const SHAPE_SPLASH := &"splash"
+
+const SHAPES: Array = [SHAPE_SINGLE, SHAPE_SPLASH]
+
+
 const DAMAGE_IMPACT := &"impact"
 const DAMAGE_FIRE := &"fire"
 const DAMAGE_EXPLOSIVE := &"explosive"
+
+const DAMAGE_TYPES: Array = [DAMAGE_IMPACT, DAMAGE_FIRE, DAMAGE_EXPLOSIVE]
 
 ## The six things from the reference sheet that go on the farm at night.
 ##
@@ -461,6 +493,8 @@ const DAMAGE_EXPLOSIVE := &"explosive"
 const DEFENCES: Dictionary = {
 	&"gun_tower": {
 		"cost": {WOOD: 10, IRON: 15},
+		"targeting": TARGET_CLOSEST_TO_HOUSE,
+		"shape": SHAPE_SINGLE,
 		"hp": 60,                       # LEVER: hit points, 30-120
 		"damage": 6,                    # LEVER: per shot, 3-12
 		"damage_type": DAMAGE_IMPACT,
@@ -472,6 +506,8 @@ const DEFENCES: Dictionary = {
 	},
 	&"flame_tower": {
 		"cost": {WOOD: 20, IRON: 25, OIL: 10},
+		"targeting": TARGET_NEAREST,
+		"shape": SHAPE_SINGLE,   # task 0043 gives it the cone
 		"hp": 70,                       # LEVER: hit points, 40-140
 		"damage": 3,                    # LEVER: per tick in the cone, 1-6
 		"damage_type": DAMAGE_FIRE,
@@ -485,6 +521,8 @@ const DEFENCES: Dictionary = {
 	},
 	&"mortar": {
 		"cost": {STONE: 30, IRON: 35, GUNPOWDER: 15},
+		"targeting": TARGET_CLOSEST_TO_HOUSE,
+		"shape": SHAPE_SPLASH,
 		"hp": 55,                       # LEVER: hit points, 30-100
 		"damage": 40,                   # LEVER: at the centre, 20-70
 		"damage_type": DAMAGE_EXPLOSIVE,
@@ -501,6 +539,8 @@ const DEFENCES: Dictionary = {
 	},
 	&"auto_crossbow": {
 		"cost": {WOOD: 15, IRON: 20},
+		"targeting": TARGET_CLOSEST_TO_HOUSE,
+		"shape": SHAPE_SINGLE,   # task 0045 gives it the line
 		"hp": 50,                       # LEVER: hit points, 30-90
 		"damage": 3,                    # LEVER: per bolt, 1-6
 		"damage_type": DAMAGE_IMPACT,
@@ -1204,8 +1244,31 @@ static func check_buildings(buildings: Dictionary) -> Array:
 
 static func check_defences(defences: Dictionary) -> Array:
 	var errors: Array = []
-	for defence_id in defences:
+	for defence_id in sorted_names(defences.keys()):
 		var defence: Dictionary = defences[defence_id]
+
+		# **A tower that shoots says how it picks and how it lands.** The words
+		# are checked against the lists above, so a typo is a red line at boot
+		# rather than a tower that quietly falls back to the default and looks
+		# like a balance problem.
+		if defence.has("reload_ticks"):
+			var aim := StringName(defence.get("targeting",
+				TARGET_CLOSEST_TO_HOUSE))
+			if not TARGETING.has(aim):
+				errors.append("defence '%s' aims by '%s', which is not a way of "
+					% [defence_id, aim] + "aiming")
+			var shape := StringName(defence.get("shape", SHAPE_SINGLE))
+			if not SHAPES.has(shape):
+				errors.append("defence '%s' lands as '%s', which is not a shape"
+					% [defence_id, shape])
+			elif shape == SHAPE_SPLASH and int(defence.get("splash_tiles", 0)) <= 0:
+				errors.append("defence '%s' splashes over no tiles at all"
+					% defence_id)
+			var kind := StringName(defence.get("damage_type", DAMAGE_IMPACT))
+			if not DAMAGE_TYPES.has(kind):
+				errors.append("defence '%s' deals '%s', which is not a damage type"
+					% [defence_id, kind])
+
 		for res in (defence["cost"] as Dictionary):
 			if not RESOURCES.has(res):
 				errors.append("defence '%s' costs unknown '%s'"

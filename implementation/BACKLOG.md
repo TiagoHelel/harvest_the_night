@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`#########...............`  **41 / 108 done**
+`#########...............`  **42 / 108 done**
 
-0 doing / 67 todo / 0 blocked across 9 phases.
+0 doing / 66 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0042 - Data-driven defences**. The whole of what is left is
+First up: **0043 - The flamethrower tower**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,24 +26,53 @@ which rewrites this file for you.
 
 ## What is open
 
-67 task(s) left, the ready ones first, then what they
+66 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
-### 0042 - Data-driven defences
+### 0043 - The flamethrower tower
 
-Ready to pick up.  Likely files: `src/core/towers.gd, src/core/game_data.gd`.
+Ready to pick up.  Likely files: `src/core/game_data.gd`.
 
-Before adding five more towers, make a tower a data entry, so the combat code stops growing a branch per structure.
+The reference sheet's second tower: expensive, short range, continuous area damage, and it burns oil.
 
-- A structure declares: targeting, damage type, shape, rate, range, cost, energy draw, ammunition use
-- The combat code reads the declaration instead of comparing ids
-- The shooting tower is ported with no behaviour change at all
-- Damage types: impact, fire, explosive - named in one place
-- A new tower that deals 3 fire in a radius is one entry and no combat edit
+- A cone in front of it rather than a single target
+- Damage over time that keeps burning after the zombie leaves the cone
+- Burn does not stack into absurdity: refresh the duration, do not add a second instance
+- It consumes oil while firing and is much weaker without it
+- Cost, range, cone angle, damage and burn duration are levers
 
-  - done when: The determinism hash is unchanged after the port - that is what makes it a port
-  - done when: Adding a test tower takes a data entry only; delete it afterwards and say so
+  - done when: A crowd walking through the cone takes the damage the levers claim
+  - done when: Two flamethrowers on one zombie do not double the burn
+
+### 0044 - The mortar
+
+Ready to pick up.  Likely files: `src/core/game_data.gd`.
+
+The long shot: slow, expensive, splash damage, and it cannot hit what is next to it.
+
+- A minimum range as well as a maximum - this is what makes placement a decision
+- A shell with real flight time that lands where the target was aimed, not where it ended up
+- Splash with falloff from the centre
+- It consumes gunpowder per shot
+- Minimum range, flight time, radius and falloff are levers
+
+  - done when: A zombie that walks out of the blast between firing and landing survives - and that reads as fair
+  - done when: Splash damage at the edge is the falloff the lever claims
+
+### 0045 - The auto-crossbow
+
+Ready to pick up.  Likely files: `src/core/game_data.gd`.
+
+The reference sheet's last tower: cheap, fast, low damage each, and it hits everything in a line.
+
+- A bolt that pierces, losing a lever's fraction of its damage per target
+- It fires along a line the player can see while placing it
+- Cheap in iron, hungry for energy - the reason to build the generator
+- Strong against the runner, weak against the tank, by construction
+
+  - done when: A line of five zombies takes the falloff the lever claims
+  - done when: It is clearly the wrong answer against a tank and clearly the right one against a rush
 
 ### 0046 - Fences and walls
 
@@ -60,6 +89,21 @@ The other half of a tower defence: making the zombies walk where you want them t
   - done when: Walling a lane visibly reroutes the next wave
   - done when: Sealing the farm completely makes them break in rather than freeze
   - done when: The field rebuild cost stays inside the budget with fifty walls
+
+### 0048 - Mines and traps
+
+Ready to pick up.  Likely files: `src/core/towers.gd, src/core/game_data.gd`.
+
+The reference sheet's mine: no targeting, no upkeep, high damage, and then it is gone.
+
+- Triggers on an enemy entering its cell, not on a timer
+- High damage in a small radius, then it removes itself
+- It is invisible to the player as a firing thing: no range circle, no target line
+- A limited number armed per night, replenished by crafting
+- Damage, radius and cost are levers
+
+  - done when: A mine under the choke point kills what the levers say it kills
+  - done when: Two mines in adjacent cells do not chain into a fifty damage cascade - or they do, deliberately, and the journal says so
 
 ### 0054 - The player's ability
 
@@ -168,50 +212,6 @@ When it breaks on someone else's machine, get enough to fix it without them.
   - done when: A deliberate crash produces a report with the seed and the tick
   - done when: The run is still loadable afterwards
 
-### 0043 - The flamethrower tower
-
-Waits on 0042.  Likely files: `src/core/game_data.gd`.
-
-The reference sheet's second tower: expensive, short range, continuous area damage, and it burns oil.
-
-- A cone in front of it rather than a single target
-- Damage over time that keeps burning after the zombie leaves the cone
-- Burn does not stack into absurdity: refresh the duration, do not add a second instance
-- It consumes oil while firing and is much weaker without it
-- Cost, range, cone angle, damage and burn duration are levers
-
-  - done when: A crowd walking through the cone takes the damage the levers claim
-  - done when: Two flamethrowers on one zombie do not double the burn
-
-### 0044 - The mortar
-
-Waits on 0042.  Likely files: `src/core/game_data.gd`.
-
-The long shot: slow, expensive, splash damage, and it cannot hit what is next to it.
-
-- A minimum range as well as a maximum - this is what makes placement a decision
-- A shell with real flight time that lands where the target was aimed, not where it ended up
-- Splash with falloff from the centre
-- It consumes gunpowder per shot
-- Minimum range, flight time, radius and falloff are levers
-
-  - done when: A zombie that walks out of the blast between firing and landing survives - and that reads as fair
-  - done when: Splash damage at the edge is the falloff the lever claims
-
-### 0045 - The auto-crossbow
-
-Waits on 0042.  Likely files: `src/core/game_data.gd`.
-
-The reference sheet's last tower: cheap, fast, low damage each, and it hits everything in a line.
-
-- A bolt that pierces, losing a lever's fraction of its damage per target
-- It fires along a line the player can see while placing it
-- Cheap in iron, hungry for energy - the reason to build the generator
-- Strong against the runner, weak against the tank, by construction
-
-  - done when: A line of five zombies takes the falloff the lever claims
-  - done when: It is clearly the wrong answer against a tank and clearly the right one against a rush
-
 ### 0047 - Barricades
 
 Waits on 0046.  Likely files: `src/core/game_data.gd`.
@@ -225,21 +225,6 @@ The emergency answer: almost free, almost paper, and placeable while the night i
 
   - done when: Placing one mid-wave buys the measurable seconds the lever claims
   - done when: It expires on its own if it survives the night
-
-### 0048 - Mines and traps
-
-Waits on 0042.  Likely files: `src/core/towers.gd, src/core/game_data.gd`.
-
-The reference sheet's mine: no targeting, no upkeep, high damage, and then it is gone.
-
-- Triggers on an enemy entering its cell, not on a timer
-- High damage in a small radius, then it removes itself
-- It is invisible to the player as a firing thing: no range circle, no target line
-- A limited number armed per night, replenished by crafting
-- Damage, radius and cost are levers
-
-  - done when: A mine under the choke point kills what the levers say it kills
-  - done when: Two mines in adjacent cells do not chain into a fifty damage cascade - or they do, deliberately, and the journal says so
 
 ### 0049 - Zombies path around walls
 
@@ -304,7 +289,7 @@ Somebody worth watching walk around: four directions, walking, and the work verb
 
 ### 0075 - Buildings and towers
 
-Waits on 0071, 0042.  Likely files: `tools/gen_sprites.py, sprites/buildings/`.
+Waits on 0071.  Likely files: `tools/gen_sprites.py, sprites/buildings/`.
 
 The house, the workshop, the press, the generator, the shop, and every tower at its three levels.
 
@@ -977,7 +962,7 @@ The thing that gets people to look: thirty seconds that show the farm, the switc
 
 ### 0064 - Tower I, II, automatic
 
-Waits on 0063, 0042.  Likely files: `src/core/towers.gd, src/core/game_data.gd`.
+Waits on 0063.  Likely files: `src/core/towers.gd, src/core/game_data.gd`.
 
 The upgrade chain the design document draws: a tower that grows with the run instead of being replaced by a different tower.
 
@@ -1084,15 +1069,15 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0040** [The shop grows](prompts/0040-shop-full.md)
 - [x] **0041** [The first day teaches itself](prompts/0041-tutorial-day.md)
 
-## 3 - The full night  (0/17)
+## 3 - The full night  (1/17)
 
-- [ ] **0042** [Data-driven defences](prompts/0042-defence-data.md)
-- [ ] **0043** [The flamethrower tower](prompts/0043-tower-flame.md) - needs 0042
-- [ ] **0044** [The mortar](prompts/0044-tower-mortar.md) - needs 0042
-- [ ] **0045** [The auto-crossbow](prompts/0045-tower-crossbow.md) - needs 0042
+- [x] **0042** [Data-driven defences](prompts/0042-defence-data.md)
+- [ ] **0043** [The flamethrower tower](prompts/0043-tower-flame.md)
+- [ ] **0044** [The mortar](prompts/0044-tower-mortar.md)
+- [ ] **0045** [The auto-crossbow](prompts/0045-tower-crossbow.md)
 - [ ] **0046** [Fences and walls](prompts/0046-walls.md)
 - [ ] **0047** [Barricades](prompts/0047-barricades.md) - needs 0046
-- [ ] **0048** [Mines and traps](prompts/0048-traps.md) - needs 0042
+- [ ] **0048** [Mines and traps](prompts/0048-traps.md)
 - [ ] **0049** [Zombies path around walls](prompts/0049-pathing-walls.md) - needs 0046
 - [ ] **0050** [The runner](prompts/0050-enemy-runner.md) - needs 0049
 - [ ] **0051** [The tank](prompts/0051-enemy-tank.md) - needs 0049
@@ -1111,7 +1096,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [ ] **0061** [Night rewards](prompts/0061-rewards.md) - needs 0059
 - [ ] **0062** [Technology points](prompts/0062-tech-points.md) - needs 0061
 - [ ] **0063** [The tech tree](prompts/0063-tech-tree.md) - needs 0062
-- [ ] **0064** [Tower I, II, automatic](prompts/0064-tower-upgrades.md) - needs 0063, 0042
+- [ ] **0064** [Tower I, II, automatic](prompts/0064-tower-upgrades.md) - needs 0063
 - [ ] **0065** [Losing a night costs you](prompts/0065-defeat.md) - needs 0061
 - [ ] **0066** [Night 10 and the end of the run](prompts/0066-run-end.md) - needs 0060, 0058
 - [ ] **0067** [The autoplayer](prompts/0067-autoplayer.md) - needs 0059, 0055
@@ -1125,7 +1110,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [ ] **0072** [The farm tileset](prompts/0072-tileset.md) - needs 0071
 - [ ] **0073** [The player sprite](prompts/0073-player-art.md) - needs 0071
 - [ ] **0074** [Zombie sprites](prompts/0074-zombie-art.md) - needs 0071, 0050, 0051, 0052
-- [ ] **0075** [Buildings and towers](prompts/0075-building-art.md) - needs 0071, 0042
+- [ ] **0075** [Buildings and towers](prompts/0075-building-art.md) - needs 0071
 - [ ] **0076** [Night lighting](prompts/0076-lighting.md) - needs 0071
 - [ ] **0077** [Particles](prompts/0077-particles.md) - needs 0074, 0075
 - [ ] **0078** [The reality transition](prompts/0078-transition.md) - needs 0076
