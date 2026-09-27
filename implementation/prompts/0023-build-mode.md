@@ -1,7 +1,7 @@
 # 0023 - Build mode
 
 - **Phase:** 1 - The first playable build
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0008, 0019, 0022
 - **Likely files:** src/ui/build_mode.gd, src/core/building.gd
 

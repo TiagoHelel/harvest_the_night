@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 15
+const GROUPS := 16
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -79,6 +79,7 @@ func _run() -> void:
 	_task_0020_shop()
 	_task_0021_night_intent()
 	_task_0022_reality()
+	_task_0023_building()
 
 
 func _finish() -> void:
@@ -1526,5 +1527,139 @@ func _task_0022_reality() -> void:
 	# Daylight puts the verbs back.
 	expect(Interact.verb_at(cycled, Farm.cells_with(cycled, &"tree")[10])
 		== &"chop", "and in the morning there are trees to chop again")
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## 0023 - build mode: what goes down, where, at what price, and what comes back.
+func _task_0023_building() -> void:
+	var state := State.create(121)
+	Resources.gain(state, {GameData.WOOD: 200, GameData.STONE: 200,
+		GameData.IRON: 200, GameData.GUNPOWDER: 50, GameData.OIL: 50})
+
+	# **A structure cannot go on water, on the rock face, or on something.**
+	var pond: Vector2i = Farm.cells_of(state, Farm.Terrain.WATER)[0]
+	var cliff: Vector2i = Farm.cells_of(state, Farm.Terrain.ROCK)[0]
+	var house: Vector2i = Farm.cells_with(state, &"house")[0]
+	expect(Building.why_not(state, &"wall", pond) == "in the water",
+		"not in the pond", Building.why_not(state, &"wall", pond))
+	expect(Building.why_not(state, &"wall", cliff) == "on the rock face",
+		"not on the cliff", Building.why_not(state, &"wall", cliff))
+	expect(Building.why_not(state, &"wall", house) == "on the house",
+		"not on the house", Building.why_not(state, &"wall", house))
+	expect(not Building.place(state, &"wall", pond), "and placing is refused")
+
+	# On grass it goes, and the cost comes out of the ledger.
+	var spot := _any_buildable(state)
+	var cost := Building.cost_of(&"gun_tower")
+	var wood_before := Resources.amount(state, GameData.WOOD)
+	var iron_before := Resources.amount(state, GameData.IRON)
+	expect(Building.can_place(state, &"gun_tower", spot), "grass will take it")
+	expect(Building.place(state, &"gun_tower", spot), "and it goes down")
+	expect(Farm.occupant(state, spot)["id"] == &"gun_tower", "it is there")
+	expect(int(Farm.occupant(state, spot)["hp"])
+		== int((GameData.DEFENCES[&"gun_tower"] as Dictionary)["hp"]),
+		"with its hit points")
+	expect(Resources.amount(state, GameData.WOOD)
+		== wood_before - int(cost[GameData.WOOD]), "the wood was paid")
+	expect(Resources.amount(state, GameData.IRON)
+		== iron_before - int(cost[GameData.IRON]), "and the iron")
+	expect(not Building.place(state, &"wall", spot),
+		"a second thing cannot stack on it")
+
+	# **Place and sell in a loop is always a loss**, never a money printer.
+	var before_loop := State.hash_of(state)
+	var loop_cell := _any_buildable(state)
+	for _i in 5:
+		Building.place(state, &"wall", loop_cell)
+		Building.sell(state, loop_cell)
+	expect(Resources.amount(state, GameData.STONE) < 200,
+		"five build-and-sell cycles cost stone",
+		str(Resources.amount(state, GameData.STONE)))
+	expect(Farm.occupant(state, loop_cell).is_empty(),
+		"and the cell is empty at the end")
+	expect(before_loop != State.hash_of(state), "the loop was not free")
+
+	# The refund is a fraction, rounded down so the round trip always loses.
+	var refund_cell := _any_buildable(state)
+	Building.place(state, &"wall", refund_cell)
+	var stone_before := Resources.amount(state, GameData.STONE)
+	var back := Building.sell(state, refund_cell)
+	expect(int(back.get(GameData.STONE, 0))
+		== int(floor(float(Building.cost_of(&"wall")[GameData.STONE])
+			* GameData.SELL_BACK_FRACTION)),
+		"the refund is the fraction, rounded down", str(back))
+	expect(Resources.amount(state, GameData.STONE) > stone_before,
+		"and it arrives through the ledger")
+	for id in Building.catalogue(state):
+		var full := Building.cost_of(id)
+		var given := Building.refund_for_cost(full)
+		for res in full:
+			expect(int(given.get(res, 0)) < int(full[res]),
+				"selling a %s back never returns all its %s" % [id, res])
+
+	# **Nothing of the farm's is the player's to sell.**
+	expect(Building.sell(state, Farm.cells_with(state, &"tree")[0]).is_empty(),
+		"a tree cannot be sold back")
+	expect(Building.sell(state, house).is_empty(), "nor the house")
+	expect(Farm.cells_with(state, &"house").size() == 9, "which is still there")
+
+	# **A kit is the cost paid early**, and it is spent instead of the ledger.
+	var banker := State.create(122)
+	Resources.gain(banker, {GameData.WOOD: 100, GameData.STONE: 100})
+	var bench: Vector2i = Farm.cells_with(banker, &"workshop")[0]
+	Crafting.start(banker, bench, &"wall_kit")
+	Sim.advance(banker, int((GameData.RECIPES[&"wall_kit"] as Dictionary)["ticks"]))
+	expect(Crafting.kits(banker, &"wall") == 1, "a wall is banked")
+	var stone_banked := Resources.amount(banker, GameData.STONE)
+	var kit_cell := _any_buildable(banker)
+	expect(Building.place(banker, &"wall", kit_cell), "and goes down")
+	expect(Crafting.kits(banker, &"wall") == 0, "spending the kit")
+	expect(Resources.amount(banker, GameData.STONE) == stone_banked,
+		"and not the ledger", str(Resources.amount(banker, GameData.STONE)))
+
+	# **Night takes only what says it may.** That is what makes the barricade
+	# the emergency answer rather than a cheaper wall.
+	var nightly := State.create(123)
+	Resources.gain(nightly, {GameData.WOOD: 100, GameData.STONE: 100})
+	Phases.begin_preparation(nightly)
+	expect(Building.allowed_in_phase(nightly, &"wall"),
+		"preparation takes anything")
+	Sim.advance(nightly, GameData.PREPARATION_TICKS)
+	expect(int(nightly["phase"]) == Phases.NIGHT, "and then it is night")
+	expect(not Building.allowed_in_phase(nightly, &"wall"),
+		"a wall cannot go up mid-wave")
+	expect(Building.allowed_in_phase(nightly, &"barricade"),
+		"but a barricade can")
+	expect(Building.why_not(nightly, &"wall", _any_buildable(nightly))
+		== "not at night", "and it says why")
+
+	# A barricade expires rather than quietly becoming a wall.
+	var quick := _any_buildable(nightly)
+	expect(Building.place(nightly, &"barricade", quick), "one goes down")
+	var life := int((GameData.DEFENCES[&"barricade"] as Dictionary)["lifetime_ticks"])
+	Sim.advance(nightly, life - 2)
+	expect(Farm.occupant(nightly, quick).get("id", &"") == &"barricade",
+		"and holds for its lifetime")
+	Sim.advance(nightly, 4)
+	expect(Farm.occupant(nightly, quick).is_empty(),
+		"then takes itself away", str(Farm.occupant(nightly, quick)))
+
+	# Through the intent, which is the road the autoplayer takes.
+	var driven := State.create(124)
+	Resources.gain(driven, {GameData.WOOD: 100, GameData.IRON: 100})
+	var target := _any_buildable(driven)
+	Building.select(driven, &"gun_tower")
+	var intent: Dictionary = driven["intent"]
+	intent["build_cell"] = [target.x, target.y]
+	intent["build_place"] = true
+	Sim.advance(driven, 1)
+	expect(Farm.occupant(driven, target).get("id", &"") == &"gun_tower",
+		"writing the intent builds it", str(Farm.occupant(driven, target)))
+	intent["build_cell"] = [target.x, target.y]
+	intent["build_sell"] = true
+	Sim.advance(driven, 1)
+	expect(Farm.occupant(driven, target).is_empty(),
+		"and writing the other one takes it back up")
 
 	_completed += 1     # last line: an abandoned group never gets here

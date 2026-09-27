@@ -109,6 +109,13 @@ var _plots: Node2D
 var _plot_sprites: Array[Node] = []
 var _plots_signature := 0
 
+## The build ghost: a half-transparent sprite of what would go down, under a
+## frame that is green when it fits and red when it does not.
+var _ghost: Sprite2D
+var _ghost_frame: Node2D
+var _ghost_cell := Vector2i(-1, -1)
+var _ghost_ok := false
+
 ## The light. One node, two colours, and whatever is between them right now.
 var _light: CanvasModulate
 var _lit_for := -1                  # the phase the fade is heading towards
@@ -144,6 +151,13 @@ func _ready() -> void:
 	_plots.name = "Plots"
 	add_child(_plots)
 	move_child(_plots, 1)           # after Terrain, before the highlight
+
+	_ghost = Sprite2D.new()
+	_ghost.name = "Ghost"
+	_ghost.centered = false
+	_ghost.visible = false
+	_ghost.modulate = Color(1, 1, 1, 0.55)
+	_occupants.add_child(_ghost)
 
 	_highlight = Node2D.new()
 	_highlight.name = "Highlight"
@@ -252,10 +266,55 @@ func highlight(cell: Vector2i) -> void:
 		_highlight.queue_redraw()
 
 
-func _draw_highlight() -> void:
-	if not Grid.in_bounds(_highlight_cell):
+## Put a ghost of `id` on `cell`, framed green when it will go there and red
+## when it will not.
+func show_ghost(cell: Vector2i, id: StringName, ok: bool) -> void:
+	if _ghost == null:
 		return
 	var size := float(GameData.TILE_SIZE)
+	_ghost.texture = _texture_for(id)
+	_ghost.position = Vector2(cell) * size
+	_ghost.visible = true
+	if cell == _ghost_cell and ok == _ghost_ok:
+		return
+	_ghost_cell = cell
+	_ghost_ok = ok
+	if _highlight != null:
+		_highlight.queue_redraw()
+
+
+## Whether the ghost is currently saying yes. What the frame colour means, in
+## a form a test can ask about - a colour drawn into a canvas is not.
+func ghost_is_ok() -> bool:
+	return _ghost != null and _ghost.visible and _ghost_ok
+
+
+func ghost_cell() -> Vector2i:
+	return _ghost_cell if _ghost != null and _ghost.visible else Vector2i(-1, -1)
+
+
+func hide_ghost() -> void:
+	if _ghost == null or not _ghost.visible:
+		return
+	_ghost.visible = false
+	_ghost_cell = Vector2i(-1, -1)
+	if _highlight != null:
+		_highlight.queue_redraw()
+
+
+func _draw_highlight() -> void:
+	var size := float(GameData.TILE_SIZE)
+
+	# The build frame first, so that a ghost and an interact target on the same
+	# cell both show and the build one is on top.
+	if _ghost != null and _ghost.visible and Grid.in_bounds(_ghost_cell):
+		var ghost_rect := Rect2(Vector2(_ghost_cell) * size, Vector2(size, size))
+		var colour := Color(0.45, 0.95, 0.45, 0.95) if _ghost_ok \
+			else Color(0.95, 0.35, 0.35, 0.95)
+		_highlight.draw_rect(ghost_rect, colour, false, 1.0)
+
+	if not Grid.in_bounds(_highlight_cell):
+		return
 	var rect := Rect2(Vector2(_highlight_cell) * size, Vector2(size, size))
 	# A frame rather than a fill: the player needs to see what is on the tile
 	# as well as that it is selected.

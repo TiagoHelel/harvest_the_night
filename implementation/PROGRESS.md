@@ -1044,3 +1044,53 @@ Notes:
   processes running at once against one `.godot/` cache. **Do not run Godot in
   parallel against the same project** - they fight over the import cache and
   the loser reports nonsense.
+
+## 0023 - Build mode - done 2026-09-27
+
+What changed: things go on the farm. A palette of everything the phase allows,
+a ghost that is green where it fits and red where it does not with the reason
+underneath, a left click to place and a right click to sell back.
+
+Files: src/core/building.gd, src/ui/build_mode.gd, src/core/game_data.gd,
+src/core/player.gd, src/core/sim.gd, src/core/state.gd, src/ui/world_view.gd,
+src/ui/main.gd, scenes/Main.tscn, project.godot, src/tools/headless_check.gd,
+src/tools/input_check.gd
+
+Verify: PASS - 10 passed, 1 skipped, 34s. **424 asserts, 0 failed** (375
+before), **122 cases, 0 failed** (94 before). **Sim hash 1543735352 ->
+3694981960**, **data hash 1084797554 -> 2501830300**.
+
+Notes:
+
+- **One price, in one place, checked.** A structure's cost was written twice -
+  in `DEFENCES[id]["cost"]` and again as a workshop recipe's inputs - and the
+  two had **already drifted**: 4 wood against 3 for the barricade, before
+  anything used either. `GameData.validate()` now refuses a build where a kit
+  recipe's inputs are not exactly the cost of the thing it makes. A kit is that
+  cost paid in advance, which is how a player puts a wall up at night when
+  there is nothing to gather.
+- **Place and sell can never be a money printer.** The refund is a fraction of
+  the cost rounded **down**, and the assert checks it for every structure in
+  the catalogue rather than for one - rounding up on something cheap is the
+  sort of thing nobody finds until somebody does.
+- **Night takes only what says it may**, which is the barricade and nothing
+  else. That is what makes it `design.md` section 8's emergency answer rather
+  than a cheaper wall, and it expires on a timer so it cannot quietly become
+  one either.
+- **The palette shows what it cannot afford.** Greyed, priced, with the
+  shortfall on the reason line - a menu that grew as you got richer would teach
+  nothing about what to go and get.
+- Nothing of the farm's is the player's to sell: a tree, the house and the
+  workshop all refuse, asserted.
+- **`get_viewport().get_mouse_position()` does not follow a synthesised event.**
+  It asks the display server, so under `input_check` the ghost sat wherever the
+  real cursor happened to be and every placement went to the wrong cell. The
+  pointer is taken from the events themselves now, which is both testable and
+  closer to what the player actually did. Motion is watched in `_input` rather
+  than `_unhandled_input` because the palette panel eats it first.
+- **A screenshot of this is harder than a test of it.** A windowed run has a
+  real cursor whose motion events overwrite a synthesised one, so the ghost in
+  a capture goes wherever the mouse physically is. The render was confirmed by
+  driving `show_ghost()` directly; the input path is `input_check`'s job, and
+  the verdict is now exposed as `ghost_is_ok()` so a test can ask about it - a
+  colour drawn into a canvas is not something a test can read.

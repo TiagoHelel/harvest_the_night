@@ -34,7 +34,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 7
+const CASES := 8
 
 var passed := 0
 var failed := 0
@@ -71,6 +71,7 @@ func _run() -> void:
 	await _case_0020_shop()
 	await _case_0021_day_hud()
 	await _case_0022_reality()
+	await _case_0023_build_mode()
 	_finish()
 
 
@@ -492,10 +493,12 @@ func _any_buildable(state: Dictionary) -> Vector2i:
 	return Vector2i(-1, -1)
 
 
+## Occupant sprites only. The layer also holds the player and, since task
+## 0023, the build ghost - which is a Sprite2D and is nobody's occupant.
 func _sprites_in(node: Node) -> int:
 	var n := 0
 	for child in node.get_children():
-		if child is Sprite2D:
+		if child is Sprite2D and child.name != "Ghost":
 			n += 1
 	return n
 
@@ -720,6 +723,108 @@ func _case_0022_reality() -> void:
 
 	await close_scene()
 	_completed += 1     # last line: an abandoned case never gets here
+
+
+## 0023 - build mode through the screen: the ghost, a click, a right click.
+func _case_0023_build_mode() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var view: WorldView = require_control("WorldView")
+	var build: BuildMode = require_control("BuildMode")
+	if driver == null or view == null or build == null:
+		_completed += 1
+		await close_scene()
+		return
+
+	var state := driver.state
+	Resources.gain(state, {GameData.WOOD: 100, GameData.STONE: 100,
+		GameData.IRON: 100})
+	expect(not build.visible, "build mode starts off")
+
+	await hold_key(KEY_B, 4)
+	await until(func() -> bool: return build.visible, "build mode to open")
+	expect(build.visible, "B opens it")
+	expect(Building.selected(state) != &"", "with something selected",
+		str(Building.selected(state)))
+
+	# The palette lists everything the phase allows.
+	for id in Building.catalogue(state):
+		expect(locate_control("build_%s" % id) != null,
+			"the palette offers %s" % id)
+
+	await click_control("build_wall")
+	await frames(3)
+	expect(Building.selected(state) == &"wall", "clicking a row selects it",
+		str(Building.selected(state)))
+
+	# **The ghost.** Point at grass and it is green; point at the pond and it
+	# is red with a reason.
+	var ghost: Sprite2D = view.find_child("Ghost", true, false)
+	expect(ghost != null, "there is a ghost")
+
+	var grass := _any_buildable(state)
+	await _point_at(view, grass)
+	expect(ghost.visible, "it shows over the farm")
+	var reason: Label = require_control("BuildReason")
+	expect(reason != null and reason.text.is_empty(),
+		"and says nothing is wrong", reason.text if reason else "")
+	expect(view.ghost_cell() == grass, "on the cell under the cursor",
+		str(view.ghost_cell()))
+	expect(view.ghost_is_ok(), "framed green, because it fits")
+
+	var pond: Vector2i = Farm.cells_of(state, Farm.Terrain.WATER)[0]
+	await _point_at(view, pond)
+	expect(reason.text == "in the water", "over the pond it says why not",
+		reason.text)
+	expect(not view.ghost_is_ok(), "and framed red, because it does not fit")
+
+	# Over something already built, it refuses for a different reason.
+	var taken: Vector2i = Farm.cells_with(state, &"house")[0]
+	await _point_at(view, taken)
+	expect(not view.ghost_is_ok(), "over the house it refuses too")
+	expect(reason.text == "on the house", "naming the house", reason.text)
+
+	# **A click places it.** Through the same intent the rules read.
+	await _point_at(view, grass)
+	var stone_before := Resources.amount(state, GameData.STONE)
+	await click_at(view.cell_to_screen(grass))
+	await until(func() -> bool:
+		return not Farm.occupant(state, grass).is_empty(), "the wall to go up")
+	expect(Farm.occupant(state, grass).get("id", &"") == &"wall",
+		"a wall is built where the cursor was",
+		str(Farm.occupant(state, grass)))
+	expect(Resources.amount(state, GameData.STONE) < stone_before,
+		"and it was paid for")
+
+	# **A right click sells it back.**
+	var stone_after_build := Resources.amount(state, GameData.STONE)
+	await _point_at(view, grass)
+	await click_at(view.cell_to_screen(grass), MOUSE_BUTTON_RIGHT)
+	await until(func() -> bool: return Farm.occupant(state, grass).is_empty(),
+		"the wall to come back up")
+	expect(Farm.occupant(state, grass).is_empty(), "right click takes it back up")
+	expect(Resources.amount(state, GameData.STONE) > stone_after_build,
+		"and some of the stone comes back")
+	expect(Resources.amount(state, GameData.STONE) < stone_before,
+		"but not all of it")
+
+	await hold_key(KEY_B, 4)
+	await until(func() -> bool: return not build.visible, "build mode to close")
+	expect(not build.visible, "and B closes it")
+	expect(not ghost.visible, "taking the ghost with it")
+
+	await close_scene()
+	_completed += 1     # last line: an abandoned case never gets here
+
+
+## Put the mouse over a cell and let the build panel notice.
+func _point_at(view: WorldView, cell: Vector2i) -> void:
+	var motion := InputEventMouseMotion.new()
+	motion.position = view.cell_to_screen(cell)
+	motion.global_position = motion.position
+	Input.warp_mouse(motion.position)
+	root.push_input(motion)
+	await frames(3)
 
 
 # ----------------------------------------------------------------- the helpers

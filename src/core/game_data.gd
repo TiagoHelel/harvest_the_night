@@ -244,15 +244,19 @@ const FISHING: Dictionary = {
 ## The bridge the whole game rests on: everything here takes something the day
 ## produced and makes something the night needs.
 const RECIPES: Dictionary = {
+	# **A kit is the structure's cost, paid in advance.** The inputs below are
+	# the same numbers as the `cost` in DEFENCES, and `check_recipes()` refuses
+	# a build where they have drifted apart - they were already 4 wood against
+	# 3 the day this was noticed.
 	&"barricade_kit": {
 		"station": &"workshop",
-		"inputs": {WOOD: 4, STONE: 2},
+		"inputs": {WOOD: 3, STONE: 2},
 		"output": {&"barricade": 1},
 		"ticks": 6 * SECONDS,           # LEVER: ticks, 3-15 seconds worth
 	},
 	&"fence_kit": {
 		"station": &"workshop",
-		"inputs": {WOOD: 6},
+		"inputs": {WOOD: 5},
 		"output": {&"fence": 1},
 		"ticks": 5 * SECONDS,           # LEVER: ticks, 3-12 seconds worth
 	},
@@ -720,6 +724,16 @@ static func check_recipes(recipes: Dictionary) -> Array:
 			if not RESOURCES.has(out) and not DEFENCES.has(out):
 				errors.append("recipe '%s' makes unknown '%s'"
 					% [recipe_id, out])
+				continue
+			# **A kit is the structure's cost, paid early.** Two places to
+			# write one price is two places for it to drift, so the drift is a
+			# red line rather than a surprise at the shop counter.
+			if DEFENCES.has(out) and int((recipe["output"] as Dictionary)[out]) == 1:
+				var price: Dictionary = (DEFENCES[out] as Dictionary)["cost"]
+				if recipe["inputs"] != price:
+					errors.append(("recipe '%s' costs %s and the '%s' it makes "
+						+ "costs %s - a kit has to be the price paid early")
+						% [recipe_id, recipe["inputs"], out, price])
 	return errors
 
 

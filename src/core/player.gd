@@ -74,6 +74,11 @@ static func initial() -> Dictionary:
 			# The night button, the N key and the autoplayer all write this.
 			# **The HUD does not change the phase**; the tick does.
 			"begin_night": false,
+			# Build mode: the cell the player is pointing at, and what they
+			# want done with it. `[-1, -1]` is "nowhere".
+			"build_cell": [-1, -1],
+			"build_place": false,
+			"build_sell": false,
 		},
 	}
 
