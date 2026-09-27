@@ -120,6 +120,23 @@ static func place(state: Dictionary, cell: Vector2i, occupant_data: Dictionary) 
 	return true
 
 
+## Put something back that the farm owns, wherever it belongs.
+##
+## **Not `place()`**, and the difference matters: `place()` asks whether the
+## *player* may build there, and the rock face is not buildable. Ore and stone
+## seams live in the rock face, so regrowth going through `place()` meant they
+## were quietly never coming back - a bug that survived task 0016 because the
+## only thing tested for regrowth was a tree, and trees stand on grass.
+##
+## This asks only that the cell is on the farm and empty.
+static func restore(state: Dictionary, cell: Vector2i, occupant_data: Dictionary) -> bool:
+	var idx := Grid.index(cell)
+	if idx < 0 or not is_empty(state, cell):
+		return false
+	(state["occupants"] as Dictionary)[idx] = occupant_data.duplicate(true)
+	return true
+
+
 ## Take whatever is on a cell off it. False when there was nothing, or when it
 ## is part of the farm rather than something put there.
 static func remove(state: Dictionary, cell: Vector2i) -> bool:

@@ -1,7 +1,7 @@
 # 0017 - Rocks and stone
 
 - **Phase:** 1 - The first playable build
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0016
 - **Likely files:** src/core/gathering.gd
 

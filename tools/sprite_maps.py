@@ -213,6 +213,30 @@ SPRITES = {
         "................",
     ]),
 
+    # A stone seam in the rock face: layered, so it reads as something cut out
+    # of the cliff rather than a boulder someone left there.
+    "props/seam": dict(size=TILE, legend={
+        "t": "stone", "d": "stone_dark", "l": "stone_light",
+        "i": "ink", ".": None,
+    }, rows=[
+        "................",
+        "..iiiiiiiiiiii..",
+        ".illlllllllllti.",
+        ".ilttttttttttti.",
+        ".idddddddddddti.",
+        ".iltttttttttlti.",
+        ".ilttttttttttti.",
+        ".iddddddddddddi.",
+        ".iltttttttttlti.",
+        ".ilttttttttttti.",
+        ".idddddddddddti.",
+        ".ilttttttttttti.",
+        ".ilttttttttttti.",
+        ".iddddddddddddi.",
+        "..iiiiiiiiiiii..",
+        "................",
+    ]),
+
     # Iron ore in the rock face. The gold flecks are the whole point: it has to
     # be tellable from a boulder at a glance, because one is a tower and the
     # other is a wall.

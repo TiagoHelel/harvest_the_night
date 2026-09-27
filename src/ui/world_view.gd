@@ -54,6 +54,7 @@ const OCCUPANT_COLOURS: Dictionary = {
 	&"stump": Color8(96, 70, 44),
 	&"rock": Color8(150, 148, 158),
 	&"ore": Color8(196, 150, 70),
+	&"seam": Color8(120, 118, 130),
 	&"house": Color8(176, 66, 58),
 	&"shop": Color8(214, 186, 96),
 	&"gun_tower": Color8(120, 130, 160),

@@ -3,21 +3,31 @@ extends RefCounted
 
 ## Taking things out of the farm, and the farm putting them back.
 ##
-## One implementation for everything you hit with a tool. A tree, a boulder and
-## an ore seam differ only in their row of `GameData.GATHERING`: how long a
-## swing takes, how many swings it takes, what it gives, what it leaves behind,
-## and how long until it comes back. Task 0017 adds stone and task 0031 adds
-## iron **without adding any code here** - that is the test of whether this was
-## written generally enough, and the journal for 0017 should say whether it was.
+## One implementation for everything you hit with a tool. A tree, a boulder, a
+## stone seam and an ore vein differ only in their row of `GameData.GATHERING`:
+## how long a swing takes, how many swings it takes, what it gives, what it
+## leaves behind, and how long until it comes back.
+##
+## Task 0017 added two of those - loose rock and the seam - as data entries and
+## **three lines of code**, the `regrow > 0` guard below, which bought a
+## behaviour rather than a special case. Task 0031 adds iron and should need
+## none at all.
 ##
 ## ## Nothing can be exhausted for good
 ##
-## Every node that is used up schedules its own return. A player who chopped
-## the whole wood on day 1 has a farm again on day 2, because a farm you can
-## strip-mine into uselessness is a farm you stop playing on. The pending
-## returns live in `state["regrowing"]` as a flat, sorted list - flat because it
-## has to survive a save, and sorted because two runs of the same seed have to
-## bring the same tree back on the same tick.
+## Every node that is used up schedules its own return, unless its
+## `regrow_ticks` is zero. A player who chopped the whole wood on day 1 has a
+## farm again on day 2, because a farm you can strip-mine into uselessness is a
+## farm you stop playing on.
+##
+## The exception is deliberate and small: a loose boulder on the lawn is cleared
+## once and the cell is yours afterwards. Stone stays infinite because it also
+## comes out of the rock face, which does come back - so the reward for tidying
+## the lawn is build space, not a resource nobody else can have.
+##
+## The pending returns live in `state["regrowing"]` as a flat, sorted list -
+## flat because it has to survive a save, and sorted because two runs of the
+## same seed have to bring the same tree back on the same tick.
 ##
 ## ## Swings, not clicks
 ##
@@ -73,9 +83,14 @@ static func strike(state: Dictionary, cell: Vector2i) -> Dictionary:
 	Farm.remove(state, cell)
 	var leaves: StringName = node.get("leaves", &"")
 	if leaves != &"":
-		Farm.place(state, cell, {"id": leaves})
+		Farm.restore(state, cell, {"id": leaves})
 
-	_schedule(state, cell, id, int(node["regrow_ticks"]))
+	# **A regrowth of zero means gone for good.** Loose boulders on the lawn
+	# are cleared once and the cell is yours; the rock face they came off is
+	# what keeps stone infinite.
+	var regrow := int(node["regrow_ticks"])
+	if regrow > 0:
+		_schedule(state, cell, id, regrow)
 
 	var gained: Dictionary = node["yield"]
 	Resources.gain(state, gained)
@@ -109,7 +124,7 @@ static func tick(state: Dictionary) -> void:
 			if not _is_leftover(on["id"]):
 				continue
 			Farm.remove(state, cell)
-		Farm.place(state, cell, {"id": StringName(entry[PENDING_ID])})
+		Farm.restore(state, cell, {"id": StringName(entry[PENDING_ID])})
 
 
 ## How many things are waiting to come back, for the debug overlay and for the

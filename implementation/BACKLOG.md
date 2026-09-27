@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`####....................`  **16 / 108 done**
+`####....................`  **17 / 108 done**
 
-0 doing / 92 todo / 0 blocked across 9 phases.
+0 doing / 91 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0017 - Rocks and stone**. The whole of what is left is
+First up: **0018 - Wheat: till, plant, grow, harvest**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,23 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-92 task(s) left, the ready ones first, then what they
+91 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0017 - Rocks and stone
-
-Ready to pick up.  Likely files: `src/core/gathering.gd`.
-
-The second resource, on the same machinery as wood, which is the test of whether that machinery was general enough.
-
-- Rocks use the same gathering code with different data, not a second implementation
-- Stone per rock and respawn delay are levers
-- The rock face region respawns rocks; loose rocks on grass do not
-- Adding stone takes a data entry and no new function
-
-  - done when: Adding a third gatherable would be a data entry only - say so in the journal after checking
-  - done when: `headless_check` covers stone yield the same way as wood
 
 ### 0018 - Wheat: till, plant, grow, harvest
 
@@ -58,6 +44,21 @@ The crop cycle, which is the semi-idle heart of the day: do a thing, go away, co
 
   - done when: Planting, ending the day, surviving a night and returning shows growth unchanged over the night and resumed after it
   - done when: The growth lever changes the number of ticks and nothing else
+
+### 0019 - The workshop and its first recipe
+
+Ready to pick up.  Likely files: `src/core/crafting.gd`.
+
+The bridge the whole game rests on: day resources become night structures. Wood plus stone becomes a barricade.
+
+- Recipes are data: inputs, output, ticks to craft
+- Crafting takes the inputs at the start, not at the end, so cancelling costs something
+- One recipe at a time here; the queue arrives at 0037
+- The workshop is a building on the grid the player walks to and interacts with
+- A recipe whose inputs are short is shown as unaffordable rather than hidden
+
+  - done when: Wood plus stone becomes a barricade in the crafting time and the resources are gone
+  - done when: Cancelling mid-craft does not refund and does not duplicate
 
 ### 0021 - The day HUD
 
@@ -90,6 +91,21 @@ The pond earns its place: the highest value per action on the farm, paid for wit
   - done when: The bite delay is drawn from the run RNG and replays identically
   - done when: Fishing with no reaction for a whole day yields nothing and crashes nothing
   - done when: `input_check` lands one fish
+
+### 0031 - Iron from the rock face
+
+Ready to pick up.  Likely files: `src/core/gathering.gd, src/core/game_data.gd`.
+
+The resource that gates towers. Iron should feel like the thing you are always a little short of.
+
+- Iron comes only from the rock face region, and only from ore nodes, not loose rocks
+- Ore takes longer per hit than stone and yields less
+- Ore respawn is slower than stone respawn and both are levers
+- A day's mining should buy roughly one tower - state the arithmetic in the journal
+- Iron is not sellable at a profit against what a tower costs
+
+  - done when: Mining a full day yields iron inside the range the journal claims
+  - done when: The rock face cannot be exhausted permanently
 
 ### 0036 - The inventory
 
@@ -151,21 +167,6 @@ When it breaks on someone else's machine, get enough to fix it without them.
   - done when: A deliberate crash produces a report with the seed and the tick
   - done when: The run is still loadable afterwards
 
-### 0019 - The workshop and its first recipe
-
-Waits on 0017.  Likely files: `src/core/crafting.gd`.
-
-The bridge the whole game rests on: day resources become night structures. Wood plus stone becomes a barricade.
-
-- Recipes are data: inputs, output, ticks to craft
-- Crafting takes the inputs at the start, not at the end, so cancelling costs something
-- One recipe at a time here; the queue arrives at 0037
-- The workshop is a building on the grid the player walks to and interacts with
-- A recipe whose inputs are short is shown as unaffordable rather than hidden
-
-  - done when: Wood plus stone becomes a barricade in the crafting time and the resources are gone
-  - done when: Cancelling mid-craft does not refund and does not duplicate
-
 ### 0020 - The shop: sell and buy
 
 Waits on 0018.  Likely files: `src/core/shop.gd, src/ui/shop_panel.gd`.
@@ -213,20 +214,49 @@ Three crops with a real choice between them: fast and cheap, slow and valuable, 
   - done when: No crop is the right answer at every money level
   - done when: `headless_check` asserts each crop's yield and timing
 
-### 0031 - Iron from the rock face
+### 0032 - Oil
 
-Waits on 0017.  Likely files: `src/core/gathering.gd, src/core/game_data.gd`.
+Waits on 0019.  Likely files: `src/core/crafting.gd, src/core/game_data.gd`.
 
-The resource that gates towers. Iron should feel like the thing you are always a little short of.
+Fire needs fuel. Oil is pressed rather than gathered, which makes it the first resource that costs a building.
 
-- Iron comes only from the rock face region, and only from ore nodes, not loose rocks
-- Ore takes longer per hit than stone and yields less
-- Ore respawn is slower than stone respawn and both are levers
-- A day's mining should buy roughly one tower - state the arithmetic in the journal
-- Iron is not sellable at a profit against what a tower costs
+- A press that turns corn or fish into oil over ticks
+- Oil feeds the flamethrower tower and incendiary ammunition
+- Oil is the most valuable thing to sell and the most useful to keep: that tension is the point
+- Press throughput is a lever
 
-  - done when: Mining a full day yields iron inside the range the journal claims
-  - done when: The rock face cannot be exhausted permanently
+  - done when: Oil can be produced and sold, and the sale is a real temptation against the flamethrower cost
+  - done when: `headless_check` runs the press for a known number of ticks
+
+### 0033 - The generator and energy
+
+Waits on 0031, 0019.  Likely files: `src/core/power.gd`.
+
+Energy, the resource on the reference sheet that gates the advanced structures and makes placement matter.
+
+- A generator burns a fuel over ticks and produces energy
+- Energy is a rate, not a stockpile: structures draw it while they run
+- A structure with no power runs at a reduced rate rather than switching off - degraded, not dead
+- The HUD shows supply against draw
+- Generator output, fuel burn and each structure's draw are levers
+
+  - done when: Building one structure too many visibly slows everything rather than stopping it
+  - done when: Running out of fuel mid-night degrades the defence and the night still resolves
+
+### 0037 - The workshop queue
+
+Waits on 0019, 0036.  Likely files: `src/core/crafting.gd, src/ui/workshop_panel.gd`.
+
+Semi-idle in one feature: queue five things, walk away, come back to five things.
+
+- A queue per production building with a length that is a lever
+- Inputs are taken when an item starts, not when it is queued
+- Cancelling a queued item that has not started refunds it in full
+- The queue advances on the tick whether or not the player is looking
+- The panel shows time remaining on the current item
+
+  - done when: Queue three barricades, walk to the pond and back, and three exist
+  - done when: Cancelling the second of three leaves the first and the third intact
 
 ### 0039 - The day clock and dusk
 
@@ -304,35 +334,6 @@ A field you can read at a glance, and one small daily chore that rewards coming 
   - done when: A watered and an unwatered tile planted together finish a measurable distance apart
   - done when: Holding the water input across a row waters the row once each
 
-### 0032 - Oil
-
-Waits on 0019.  Likely files: `src/core/crafting.gd, src/core/game_data.gd`.
-
-Fire needs fuel. Oil is pressed rather than gathered, which makes it the first resource that costs a building.
-
-- A press that turns corn or fish into oil over ticks
-- Oil feeds the flamethrower tower and incendiary ammunition
-- Oil is the most valuable thing to sell and the most useful to keep: that tension is the point
-- Press throughput is a lever
-
-  - done when: Oil can be produced and sold, and the sale is a real temptation against the flamethrower cost
-  - done when: `headless_check` runs the press for a known number of ticks
-
-### 0033 - The generator and energy
-
-Waits on 0031, 0019.  Likely files: `src/core/power.gd`.
-
-Energy, the resource on the reference sheet that gates the advanced structures and makes placement matter.
-
-- A generator burns a fuel over ticks and produces energy
-- Energy is a rate, not a stockpile: structures draw it while they run
-- A structure with no power runs at a reduced rate rather than switching off - degraded, not dead
-- The HUD shows supply against draw
-- Generator output, fuel burn and each structure's draw are levers
-
-  - done when: Building one structure too many visibly slows everything rather than stopping it
-  - done when: Running out of fuel mid-night degrades the defence and the night still resolves
-
 ### 0034 - Cooking: food and meat
 
 Waits on 0030, 0028.  Likely files: `src/core/crafting.gd`.
@@ -347,20 +348,20 @@ The kitchen from the reference sheet: raw crops and fish become food, which is w
   - done when: A cooked dish sells for more than its inputs - state the margin
   - done when: Food spent on repair during a night is taken through the ledger
 
-### 0037 - The workshop queue
+### 0035 - Gunpowder and ammunition
 
-Waits on 0019, 0036.  Likely files: `src/core/crafting.gd, src/ui/workshop_panel.gd`.
+Waits on 0032, 0033.  Likely files: `src/core/crafting.gd, src/core/towers.gd`.
 
-Semi-idle in one feature: queue five things, walk away, come back to five things.
+Towers that consume something. The clearest possible version of 'what you made today decides what tonight can do'.
 
-- A queue per production building with a length that is a lever
-- Inputs are taken when an item starts, not when it is queued
-- Cancelling a queued item that has not started refunds it in full
-- The queue advances on the tick whether or not the player is looking
-- The panel shows time remaining on the current item
+- Gunpowder from corn and oil; incendiary rounds from oil and wood
+- A tower draws from a shared ammunition pool at a rate that is a lever
+- Out of ammunition means a much slower basic shot, never a silent dead tower
+- The night HUD shows the pool draining
+- Ammunition left over carries into the next night
 
-  - done when: Queue three barricades, walk to the pond and back, and three exist
-  - done when: Cancelling the second of three leaves the first and the third intact
+  - done when: A night fought with no gunpowder is survivable but clearly worse
+  - done when: The pool drains at the rate the levers claim over a scripted night
 
 ### 0040 - The shop grows
 
@@ -422,21 +423,6 @@ The first thing that fights for you: cheap, single target, medium range, fires b
   - done when: Two runs from the same seed fire at the same targets on the same ticks
   - done when: A tower with nothing in range costs no measurable time per tick
   - done when: Halving the rate of fire lever halves the shots in a fixed number of ticks
-
-### 0035 - Gunpowder and ammunition
-
-Waits on 0032, 0033.  Likely files: `src/core/crafting.gd, src/core/towers.gd`.
-
-Towers that consume something. The clearest possible version of 'what you made today decides what tonight can do'.
-
-- Gunpowder from corn and oil; incendiary rounds from oil and wood
-- A tower draws from a shared ammunition pool at a rate that is a lever
-- Out of ammunition means a much slower basic shot, never a silent dead tower
-- The night HUD shows the pool draining
-- Ammunition left over carries into the next night
-
-  - done when: A night fought with no gunpowder is survivable but clearly worse
-  - done when: The pool drains at the rate the levers claim over a scripted night
 
 ### 0038 - Production runs while you are elsewhere
 
@@ -1428,15 +1414,15 @@ For the player who beat the Giant and wants to know how far the farm goes. Cheap
 - [x] **0011** [input_check harness](prompts/0011-input-check.md)
 - [x] **0012** [Debug overlay](prompts/0012-debug-overlay.md)
 
-## 1 - The first playable build  (4/15)
+## 1 - The first playable build  (5/15)
 
 - [x] **0013** [The world renders](prompts/0013-world-render.md)
 - [x] **0014** [Sprites generated from ASCII maps](prompts/0014-sprite-pipeline.md)
 - [x] **0015** [The player walks and interacts](prompts/0015-player.md)
 - [x] **0016** [Trees and wood](prompts/0016-wood.md)
-- [ ] **0017** [Rocks and stone](prompts/0017-stone.md)
+- [x] **0017** [Rocks and stone](prompts/0017-stone.md)
 - [ ] **0018** [Wheat: till, plant, grow, harvest](prompts/0018-wheat.md)
-- [ ] **0019** [The workshop and its first recipe](prompts/0019-workshop.md) - needs 0017
+- [ ] **0019** [The workshop and its first recipe](prompts/0019-workshop.md)
 - [ ] **0020** [The shop: sell and buy](prompts/0020-shop.md) - needs 0018
 - [ ] **0021** [The day HUD](prompts/0021-day-hud.md)
 - [ ] **0022** [Switching reality](prompts/0022-reality-switch.md) - needs 0021
@@ -1451,7 +1437,7 @@ For the player who beat the Giant and wants to know how far the farm goes. Cheap
 - [ ] **0028** [Corn and carrot](prompts/0028-three-crops.md) - needs 0018
 - [ ] **0029** [Growth stages and watering](prompts/0029-growth-stages.md) - needs 0028
 - [ ] **0030** [Fishing](prompts/0030-fishing.md)
-- [ ] **0031** [Iron from the rock face](prompts/0031-iron.md) - needs 0017
+- [ ] **0031** [Iron from the rock face](prompts/0031-iron.md)
 - [ ] **0032** [Oil](prompts/0032-oil.md) - needs 0019
 - [ ] **0033** [The generator and energy](prompts/0033-generator.md) - needs 0031, 0019
 - [ ] **0034** [Cooking: food and meat](prompts/0034-cooking.md) - needs 0030, 0028

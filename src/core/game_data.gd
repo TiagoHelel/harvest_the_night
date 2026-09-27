@@ -191,11 +191,24 @@ const GATHERING: Dictionary = {
 		"regrow_ticks": 120 * SECONDS,  # LEVER: ticks, 60-240 seconds worth
 		"leaves": &"stump",
 	},
+	# A boulder sitting on the lawn. **It does not come back**, and that is
+	# the reward for clearing one: the cell underneath becomes build space for
+	# good. The farm still cannot be stripped, because stone comes out of the
+	# rock face for ever - see `seam` below.
 	&"rock": {
 		"work_ticks": 2 * SECONDS,      # LEVER: ticks per swing, 20-120
 		"hits": 2,                      # LEVER: swings, 1-4
 		"yield": {STONE: 2},            # LEVER: units, 1-4
-		"regrow_ticks": 150 * SECONDS,  # LEVER: ticks, 90-300 seconds worth
+		"regrow_ticks": 0,              # 0 means gone for good, not a lever
+	},
+	# The rock face, which `design.md` section 5 says gives stone and iron.
+	# Five seams at 3 stone, back every 90 seconds: about 39 stone across a
+	# 240 second day of nothing but mining, against 10 for a wall.
+	&"seam": {
+		"work_ticks": 2 * SECONDS,      # LEVER: ticks per swing, 20-120
+		"hits": 3,                      # LEVER: swings, 2-5
+		"yield": {STONE: 3},            # LEVER: units, 2-5
+		"regrow_ticks": 90 * SECONDS,   # LEVER: ticks, 45-180 seconds worth
 	},
 	&"ore": {
 		# Iron is the thing you are always slightly short of, and that is
@@ -589,11 +602,11 @@ const DEFEAT_KEEPS_TECH := true
 const FARM_MAP: Array = [
 	"TTT.TTTT....TTT..TT.....TTT...TT..TTT.TT",
 	"T...................#####...........T..T",
-	"T..ssssss......ppp..#####r.o...........T",
-	"...ssssss.....pHHHp.#####..o...........T",
-	"...ssssss......HHH..######o.....r.......",
-	"T..ssssss......HHH...#####.............T",
-	"...ssssss.....ppppp..#####r...o.........",
+	"T..ssssss......ppp..##S##r.o...........T",
+	"...ssssss.....pHHHp.#S###..o...........T",
+	"...ssssss......HHH..###S##o.....r.......",
+	"T..ssssss......HHH...###S#.............T",
+	"...ssssss.....ppppp..#S###r...o.........",
 	"T.........................o............T",
 	"..ssssss.......p....r.....r...........TT",
 	"..ssssss.......p...$$........o...T.T...T",
@@ -619,6 +632,7 @@ const MAP_LEGEND: Dictionary = {
 	"T": [0, &"tree"],
 	"r": [0, &"rock"],
 	"o": [3, &"ore"],
+	"S": [3, &"seam"],
 	"H": [5, &"house"],
 	"$": [5, &"shop"],
 }

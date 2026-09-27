@@ -18,6 +18,7 @@ const OCCUPANT_VERBS: Dictionary = {
 	&"tree": &"chop",
 	&"rock": &"mine",
 	&"ore": &"mine",
+	&"seam": &"mine",
 	&"shop": &"trade",
 }
 

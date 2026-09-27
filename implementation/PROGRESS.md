@@ -773,3 +773,41 @@ Notes:
 - **One tree is exactly `hits` x `work_ticks`**, driven through the real player
   action machinery rather than by calling `strike()` directly, so the assert
   covers the wiring as well as the arithmetic.
+
+## 0017 - Rocks and stone - done 2026-09-27
+
+What changed: stone, from two sources that behave differently on purpose. Five
+seams cut into the rock face, which come back; seven boulders on the lawn,
+which do not. And a bug that had been silently live since task 0016.
+
+Files: src/core/game_data.gd, src/core/gathering.gd, src/core/farm.gd,
+src/core/interact.gd, tools/sprite_maps.py, sprites/props/seam.png,
+src/ui/world_view.gd, src/tools/headless_check.gd
+
+Verify: PASS - 10 passed, 1 skipped, 21s. **259 asserts, 0 failed** (230
+before). **Sim hash 2123598417 -> 3337239467**, **data hash 3968728927 ->
+3627249258** - the map gained five seams and the gathering table two rows.
+
+Notes:
+
+- **Was task 0016 general enough? Almost.** Adding the loose boulder and the
+  seam took two data rows and **three lines of code** - a `regrow > 0` guard,
+  which bought a behaviour rather than a special case. Task 0031's iron should
+  need none at all. The class doc of `gathering.gd` has been corrected to say
+  so rather than to keep claiming zero.
+- **The rock face needed stone in it, and that came out of the requirement.**
+  "Loose rocks do not respawn" would have made stone finite at 14 for the whole
+  game, against 10 for a single wall. `design.md` section 5 says the mining area
+  gives stone *and* iron, so five seams were cut into the cliff: 3 stone each,
+  back every 90 seconds, about 39 stone across a day of nothing but mining.
+  Clearing a boulder is now a reward - the cell becomes build space for good -
+  rather than a way to run the farm dry.
+- **A bug that survived task 0016, found by this task's first failing assert.**
+  Regrowth went through `Farm.place()`, which asks whether the *player* may
+  build on a cell - and the rock face is not buildable. So **ore had never been
+  coming back** since the day it was written, and nothing noticed because the
+  only regrowth tested was a tree, and trees stand on grass. `Farm.restore()`
+  now exists for things the farm owns putting themselves back, and ore regrowth
+  has its own assert.
+  The lesson is the cheap one: a test that only covers the easy instance of a
+  general mechanism is a test that certifies the easy instance.

@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 9
+const GROUPS := 10
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -73,6 +73,7 @@ func _run() -> void:
 	_task_0009_settings()
 	_task_0010_save()
 	_task_0016_gathering()
+	_task_0017_stone()
 
 
 func _finish() -> void:
@@ -959,3 +960,102 @@ func _face_towards(from_cell: Vector2i, to_cell: Vector2i) -> int:
 	if d.x < 0:
 		return Player.WEST
 	return Player.EAST
+
+
+## 0017 - stone: the same machine with different rows, and a lawn you can clear
+## for good.
+func _task_0017_stone() -> void:
+	var state := State.create(61)
+
+	# Two sources, and they behave differently on purpose.
+	var loose := Farm.cells_with(state, &"rock")
+	var seams := Farm.cells_with(state, &"seam")
+	expect(loose.size() == 7, "seven boulders on the lawn", str(loose.size()))
+	expect(seams.size() == 5, "five seams in the rock face", str(seams.size()))
+
+	for cell in seams:
+		expect(Farm.terrain_at(state, cell) == Farm.Terrain.ROCK,
+			"a seam is in the rock face, not on the grass", str(cell))
+	for cell in loose:
+		expect(Farm.terrain_at(state, cell) == Farm.Terrain.GRASS,
+			"and a boulder is on the grass", str(cell))
+
+	# Stone arrives through the ledger, exactly as wood does.
+	var rock_data: Dictionary = GameData.GATHERING[&"rock"]
+	var per_rock := int((rock_data["yield"] as Dictionary)[GameData.STONE])
+	var boulder: Vector2i = loose[0]
+	var before := Resources.amount(state, GameData.STONE)
+	for i in int(rock_data["hits"]) - 1:
+		expect(Gathering.strike(state, boulder).is_empty(),
+			"boulder swing %d gives nothing yet" % (i + 1))
+	Gathering.strike(state, boulder)
+	expect(Resources.amount(state, GameData.STONE) == before + per_rock,
+		"and the last swing pays the whole boulder",
+		"%d then %d" % [before, Resources.amount(state, GameData.STONE)])
+
+	# **A cleared boulder does not come back, and the cell is yours.** That is
+	# the reward for tidying the lawn.
+	expect(Farm.occupant(state, boulder).is_empty(), "the cell is empty")
+	expect(Farm.buildable(state, boulder), "and buildable now")
+	Sim.advance(state, int(GameData.GATHERING[&"seam"]["regrow_ticks"]) * 3)
+	expect(Farm.occupant(state, boulder).is_empty(),
+		"and three regrowth delays later it is still empty",
+		str(Farm.occupant(state, boulder)))
+
+	# **The seam does come back**, which is what keeps stone infinite.
+	var seam_data: Dictionary = GameData.GATHERING[&"seam"]
+	var per_seam := int((seam_data["yield"] as Dictionary)[GameData.STONE])
+	var seam: Vector2i = seams[0]
+	before = Resources.amount(state, GameData.STONE)
+	for _i in int(seam_data["hits"]):
+		Gathering.strike(state, seam)
+	expect(Resources.amount(state, GameData.STONE) == before + per_seam,
+		"a seam pays %d stone" % per_seam,
+		str(Resources.amount(state, GameData.STONE) - before))
+	expect(Farm.occupant(state, seam).is_empty(), "and is worked out")
+	Sim.advance(state, int(seam_data["regrow_ticks"]))
+	expect(Farm.occupant(state, seam).get("id", &"") == &"seam",
+		"until the rock face puts it back", str(Farm.occupant(state, seam)))
+
+	# **The farm cannot be stripped of stone**, even after every boulder is
+	# gone for ever: the rock face alone keeps paying.
+	var stripped := State.create(62)
+	for cell in Farm.cells_with(stripped, &"rock"):
+		for _i in int(rock_data["hits"]):
+			Gathering.strike(stripped, cell)
+	expect(Farm.cells_with(stripped, &"rock").is_empty(),
+		"every boulder cleared")
+	var stone_before := Resources.amount(stripped, GameData.STONE)
+	for _round in 3:
+		for cell in Farm.cells_with(stripped, &"seam"):
+			for _i in int(seam_data["hits"]):
+				Gathering.strike(stripped, cell)
+		Sim.advance(stripped, int(seam_data["regrow_ticks"]))
+	expect(Resources.amount(stripped, GameData.STONE)
+		== stone_before + 3 * seams.size() * per_seam,
+		"and three cycles of the rock face paid %d more"
+		% (3 * seams.size() * per_seam),
+		str(Resources.amount(stripped, GameData.STONE) - stone_before))
+
+	# **Ore comes back too**, which nothing checked until this task: it lives
+	# in the rock face, and the rock face is not buildable, so regrowth going
+	# through the player's own placement rule meant it never returned.
+	var ore_data: Dictionary = GameData.GATHERING[&"ore"]
+	var vein: Vector2i = Farm.cells_with(state, &"ore")[0]
+	var iron_before := Resources.amount(state, GameData.IRON)
+	for _i in int(ore_data["hits"]):
+		Gathering.strike(state, vein)
+	expect(Resources.amount(state, GameData.IRON) > iron_before,
+		"a vein pays iron")
+	expect(Farm.occupant(state, vein).is_empty(), "and is worked out")
+	Sim.advance(state, int(ore_data["regrow_ticks"]))
+	expect(Farm.occupant(state, vein).get("id", &"") == &"ore",
+		"and the rock face puts it back", str(Farm.occupant(state, vein)))
+
+	# A seam is mined, like ore, and offers the verb to prove it.
+	expect(Interact.verb_at(state, seams[1]) == &"mine",
+		"a seam offers mining")
+	expect(Interact.verb_at(state, Farm.cells_with(state, &"ore")[0]) == &"mine",
+		"and so does ore")
+
+	_completed += 1     # last line: an abandoned group never gets here
