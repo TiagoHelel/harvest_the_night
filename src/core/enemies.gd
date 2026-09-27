@@ -113,7 +113,15 @@ static func _walk(state: Dictionary, id: int) -> void:
 	var here := Vector2i(at.x / Player.SUBTILE, at.y / Player.SUBTILE)
 	var next := Pathing.step_from(state, here)
 	if next == here:
-		return                  # nowhere to go: stand there. Task 0049.
+		# **Nowhere to go means chew.** A wall that sealed the farm used to
+		# make the whole wave stand still for ever - a player who walled
+		# themselves in won the night by doing nothing, which is not a tower
+		# defence, it is a puzzle with one answer.
+		#
+		# `design.md` is explicit that a wall buys time rather than safety, so
+		# a zombie with no path takes the nearest thing in its way apart.
+		_chew(state, id, data, here)
+		return
 
 	var aim := Vector2i(next.x * Player.SUBTILE + Player.SUBTILE / 2,
 		next.y * Player.SUBTILE + Player.SUBTILE / 2)
@@ -139,6 +147,48 @@ static func _walk(state: Dictionary, id: int) -> void:
 
 
 ## Reaching the house costs the house and costs the zombie: it is spent.
+## No way through, so take the way through apart.
+##
+## Looks at the four neighbours and bites whichever structure is nearest the
+## house - the one actually in the way, rather than whatever happens to be
+## first in reading order. With nothing adjacent at all it simply waits, which
+## only happens when a zombie is walled into a pocket it never walked into.
+static func _chew(state: Dictionary, id: int, data: Dictionary,
+		here: Vector2i) -> void:
+	var best := Vector2i(-1, -1)
+	var best_distance := 1 << 30
+	for step in NEIGHBOURS:
+		var at: Vector2i = here + step
+		if not Grid.in_bounds(at):
+			continue
+		var on := Farm.occupant(state, at)
+		if on.is_empty() or Farm.FIXTURES.has(StringName(on["id"])):
+			continue
+		if int(on.get("hp", 0)) <= 0:
+			continue
+		# Nearest the house wins, so a wave eats through the line rather than
+		# nibbling the far side of it.
+		var apart := Grid.manhattan(at, Farm.house_centre(state))
+		if apart < best_distance:
+			best_distance = apart
+			best = at
+	if best.x < 0:
+		return
+
+	var one := Entities.get_one(state, id)
+	# The same cadence as walking: a zombie that would cross a tile this tick
+	# takes a bite instead, so a fast one chews faster and the ticks-per-tile
+	# lever means one thing in both places.
+	Farm.damage(state, best, int(data["damage"]))
+	one["chewing"] = Grid.index(best)
+
+
+## The four cells around a cell, in a fixed order.
+const NEIGHBOURS: Array[Vector2i] = [
+	Vector2i(0, 1), Vector2i(-1, 0), Vector2i(0, -1), Vector2i(1, 0),
+]
+
+
 static func _bite(state: Dictionary, id: int, data: Dictionary) -> void:
 	state["house_hp"] = maxi(int(state["house_hp"]) - int(data["damage"]), 0)
 	state["breaches"] = int(state["breaches"]) + 1

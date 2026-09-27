@@ -329,6 +329,31 @@ func highlight(cell: Vector2i) -> void:
 
 ## Put a ghost of `id` on `cell`, framed green when it will go there and red
 ## when it will not.
+## The route the zombies would take if the thing being held went down here.
+##
+## Drawn as a dotted line over the farm while build mode is up, so the player
+## sees what a wall does **before** paying for it. Empty when there is nothing
+## to show, which is most of the time: only a thing that blocks the way has a
+## route to preview.
+var _preview: Array = []
+
+
+func show_route(cells: Array) -> void:
+	if cells == _preview:
+		return
+	_preview = cells
+	if _highlight != null:
+		_highlight.queue_redraw()
+
+
+func clear_route() -> void:
+	show_route([])
+
+
+func previewed_route() -> Array:
+	return _preview
+
+
 func show_ghost(cell: Vector2i, id: StringName, ok: bool) -> void:
 	if _ghost == null:
 		return
@@ -364,6 +389,20 @@ func hide_ghost() -> void:
 
 
 func _draw_highlight() -> void:
+	# **The route a wall would leave**, dotted so it reads as a prediction
+	# rather than as something on the farm.
+	if not _preview.is_empty():
+		var size := float(GameData.TILE_SIZE)
+		var step := 0
+		for found in _preview:
+			step += 1
+			if step % 2 == 0:
+				continue
+			var cell: Vector2i = found
+			_highlight.draw_rect(Rect2(Vector2(cell) * size
+				+ Vector2(size, size) * 0.4, Vector2(size, size) * 0.2),
+				Color(1.0, 0.85, 0.45, 0.75))
+
 	var size := float(GameData.TILE_SIZE)
 
 	# The build frame first, so that a ghost and an interact target on the same

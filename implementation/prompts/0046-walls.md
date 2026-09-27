@@ -1,7 +1,7 @@
 # 0046 - Fences and walls
 
 - **Phase:** 3 - The full night
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0023
 - **Likely files:** src/core/building.gd, src/core/pathing.gd
 

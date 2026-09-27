@@ -174,6 +174,29 @@ static func restore(state: Dictionary, cell: Vector2i, occupant_data: Dictionary
 	return true
 
 
+## Take hit points off whatever is standing here. Returns what was taken,
+## which is never more than it had - so a caller counting damage cannot count
+## overkill, the same promise `Combat.hit()` makes about a zombie.
+##
+## **Destroying it removes it**, which bumps `grid_version` and so rebuilds the
+## flow field on the next tick. A hole in a wall is a new way through, and the
+## zombies find it because the field is asked, not remembered.
+static func damage(state: Dictionary, cell: Vector2i, amount: int) -> int:
+	if amount <= 0:
+		return 0
+	var on := occupant(state, cell)
+	if on.is_empty() or FIXTURES.has(StringName(on["id"])):
+		return 0
+	var left := int(on.get("hp", 0))
+	if left <= 0:
+		return 0
+	var taken := mini(amount, left)
+	on["hp"] = left - taken
+	if int(on["hp"]) <= 0:
+		remove(state, cell)
+	return taken
+
+
 ## Take whatever is on a cell off it. False when there was nothing, or when it
 ## is part of the farm rather than something put there.
 static func remove(state: Dictionary, cell: Vector2i) -> bool:

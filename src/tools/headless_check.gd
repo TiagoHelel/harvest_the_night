@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 38
+const GROUPS := 39
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -102,6 +102,7 @@ func _run() -> void:
 	_task_0043_flame()
 	_task_0044_mortar()
 	_task_0045_crossbow()
+	_task_0046_walls()
 
 
 func _finish() -> void:
@@ -1999,12 +2000,26 @@ func _task_0025_zombies() -> void:
 			Farm.place(boxed, wall_cell, {"id": &"wall", "hp": 120})
 	Pathing.refresh(boxed)
 	var trapped := Entities.spawn(boxed, &"walker", spot)
-	var where_it_was := Entities.position(boxed, trapped)
+	var walls_before := Farm.cells_with(boxed, &"wall").size()
 	Sim.advance(boxed, 90)
 	expect(Entities.alive(boxed, trapped), "a boxed-in zombie is still there")
-	expect(Entities.position(boxed, trapped) == where_it_was,
-		"and stands still rather than crashing",
-		str(Entities.position(boxed, trapped)))
+
+	# **And it chews its way out.** This asserted that it stood still, which
+	# was true and was the placeholder: `_walk()` carried a comment saying
+	# "nowhere to go: stand there. Task 0049." Task 0046 is where that gets
+	# answered, and the answer is that a wall buys time rather than safety -
+	# a farm sealed completely would otherwise be a night won by doing
+	# nothing, which is a puzzle with one answer rather than a tower defence.
+	var chewed := 0
+	for offset in Grid.STEPS_8:
+		var wall_cell: Vector2i = spot + offset
+		var on := Farm.occupant(boxed, wall_cell)
+		if on.get("id", &"") == &"wall" and int(on.get("hp", 0)) < 120:
+			chewed += 1
+	expect(chewed > 0 or Farm.cells_with(boxed, &"wall").size() < walls_before,
+		"and starts eating the wall rather than standing there for ever",
+		"%d damaged, %d walls left"
+			% [chewed, Farm.cells_with(boxed, &"wall").size()])
 
 	# **It walks in, and the house feels it.**
 	var raided := _fresh_night(404)
@@ -5977,3 +5992,242 @@ func _bolt_beside(seed_value: int, entry: Dictionary) -> Dictionary:
 		"behind": int(before[behind])
 			- int(Entities.get_one(state, behind).get("hp", 0)),
 	}
+
+
+## 0046 - fences and walls: making them walk where you want them to.
+func _task_0046_walls() -> void:
+	var fence: Dictionary = GameData.DEFENCES[&"fence"]
+	var wall: Dictionary = GameData.DEFENCES[&"wall"]
+
+	# **Cheap wood against slow stone.**
+	expect((fence["cost"] as Dictionary).has(GameData.WOOD),
+		"a fence is wood", str(fence["cost"]))
+	expect((wall["cost"] as Dictionary).has(GameData.STONE),
+		"and a wall is stone", str(wall["cost"]))
+	expect(int(fence["hp"]) < int(wall["hp"]),
+		"a fence comes down sooner than a wall",
+		"%d against %d" % [fence["hp"], wall["hp"]])
+	expect(int(fence["path_cost"]) < int(wall["path_cost"]),
+		"and is less of a detour while it stands",
+		"%d against %d" % [fence["path_cost"], wall["path_cost"]])
+	for lever in ["hp", "cost", "path_cost"]:
+		expect(fence.has(lever) and wall.has(lever),
+			"both declare their %s" % lever)
+
+	# **Walls change the field, and the field notices.**
+	var farm := _fresh_night(2800)
+	Pathing.refresh(farm)
+	var lane := _open_lane(farm)
+	expect(lane != Vector2i(-1, -1), "there is a lane to wall")
+	var before := Pathing.distance(farm, lane)
+	expect(before < Pathing.UNREACHABLE, "which is on a route to the house",
+		str(before))
+
+	var version := int(farm["grid_version"])
+	expect(Farm.place(farm, lane, {"id": &"wall", "hp": int(wall["hp"])}),
+		"a wall goes into it")
+	expect(int(farm["grid_version"]) > version,
+		"which bumps the version the field watches",
+		str(farm["grid_version"]))
+	Pathing.refresh(farm)
+	expect(Pathing.distance(farm, lane) == Pathing.UNREACHABLE,
+		"and the walled cell is off the map as far as walking goes",
+		str(Pathing.distance(farm, lane)))
+
+	# **Walling a lane reroutes the wave.** The done-when: the same spawn, the
+	# same seed, a measurably different first step.
+	var open_farm := _fresh_night(2801)
+	Pathing.refresh(open_farm)
+	var spawn: Vector2i = Enemies.spawn_cells(open_farm, 0)[0]
+	var open_route := _route_from(open_farm, spawn)
+
+	var blocked := _fresh_night(2801)
+	var closed := _wall_a_lane(blocked, spawn)
+	expect(closed > 0, "a line of wall goes down across the way in",
+		str(closed))
+	Pathing.refresh(blocked)
+	var blocked_route := _route_from(blocked, spawn)
+
+	print("  the way in: %d steps open, %d steps walled"
+		% [open_route.size(), blocked_route.size()])
+	expect(blocked_route != open_route,
+		"walling a lane sends them a different way",
+		"%d steps against %d" % [blocked_route.size(), open_route.size()])
+	# **They go round it**, which is the claim. Not "the long way is longer":
+	# a detour around three cells of wall on open ground can come out the same
+	# number of four-way steps, and it did - 27 against 27 with a different
+	# path. What a wall guarantees is that nobody walks through it.
+	var walked_through := 0
+	for found in blocked_route:
+		var step: Vector2i = found
+		if Farm.occupant(blocked, step).get("id", &"") == &"wall":
+			walked_through += 1
+	expect(walked_through == 0,
+		"and not one step of the new route is through a wall",
+		str(walked_through))
+	var was_open := 0
+	for found in open_route:
+		var step: Vector2i = found
+		if Farm.occupant(blocked, step).get("id", &"") == &"wall":
+			was_open += 1
+	expect(was_open > 0,
+		"while the old one went straight through where the wall now is",
+		str(was_open))
+	expect(not blocked_route.is_empty(),
+		"but there is still a way in")
+
+	# **Sealing the farm makes them break in rather than freeze.** The other
+	# done-when, and the whole reason a wall buys time and not safety.
+	var sealed := _fresh_night(2802)
+	var boxed := _seal_a_pocket(sealed)
+	expect(boxed["walls"] > 0, "a zombie is walled in on every side",
+		str(boxed["walls"]))
+	Pathing.refresh(sealed)
+	expect(Pathing.step_from(sealed, boxed["cell"]) == boxed["cell"],
+		"with nowhere at all to walk")
+
+	var standing := Farm.cells_with(sealed, &"wall").size()
+	var hp_before := _wall_hp_around(sealed, boxed["cell"])
+	Sim.advance(sealed, 120)
+	var hp_after := _wall_hp_around(sealed, boxed["cell"])
+	expect(hp_after < hp_before
+		or Farm.cells_with(sealed, &"wall").size() < standing,
+		"it eats the wall rather than standing there",
+		"%d hit points against %d" % [hp_after, hp_before])
+
+	# Long enough and it gets out, which is the promise: a wall is time.
+	Sim.advance(sealed, 2400)
+	expect(Farm.cells_with(sealed, &"wall").size() < standing,
+		"and given long enough it is through",
+		"%d walls left of %d"
+			% [Farm.cells_with(sealed, &"wall").size(), standing])
+
+	# **A wall takes exactly what it is hit for, and never more than it has.**
+	var hitting := _fresh_night(2803)
+	var at := _open_lane(hitting)
+	Farm.place(hitting, at, {"id": &"wall", "hp": 20})
+	expect(Farm.damage(hitting, at, 6) == 6, "six off a wall is six")
+	expect(int(Farm.occupant(hitting, at).get("hp", 0)) == 14,
+		"leaving fourteen", str(Farm.occupant(hitting, at).get("hp", 0)))
+	expect(Farm.damage(hitting, at, 100) == 14,
+		"and a hundred more takes the fourteen that were left, not a hundred")
+	expect(Farm.is_empty(hitting, at), "destroying it takes it off the farm")
+	expect(Farm.damage(hitting, at, 5) == 0, "and hitting the gap does nothing")
+
+	# The house is not a wall and cannot be chewed off the map.
+	var house: Vector2i = Farm.cells_with(hitting, &"house")[0]
+	expect(Farm.damage(hitting, house, 500) == 0,
+		"the house is not something you can take apart")
+	expect(not Farm.is_empty(hitting, house), "and it is still standing")
+
+	# **Fifty walls and the field still rebuilds inside the budget.**
+	var heavy := _fresh_night(2804)
+	var built := 0
+	for y in range(2, 16):
+		for x in range(20, 34):
+			if built >= 50:
+				break
+			if Farm.place(heavy, Vector2i(x, y),
+					{"id": &"wall", "hp": int(wall["hp"])}):
+				built += 1
+		if built >= 50:
+			break
+	expect(built == 50, "fifty walls go up", str(built))
+
+	var started := Time.get_ticks_usec()
+	for _i in 20:
+		heavy["flow_version"] = -1          # force a rebuild
+		Pathing.refresh(heavy)
+	var each := float(Time.get_ticks_usec() - started) / 20.0
+	var budget := 1000000.0 / float(GameData.TICK_HZ)
+	print("  the field with fifty walls rebuilds in %.0f us, %.0f%% of a tick"
+		% [each, each * 100.0 / budget])
+	expect(each < budget / 2.0,
+		"a rebuild is well under half a tick even at fifty walls",
+		"%.0f us against %.0f" % [each, budget])
+
+	# And it only rebuilds when the farm changes, which is what makes the
+	# above a rare cost rather than a per-tick one.
+	var version_now := int(heavy["flow_version"])
+	Pathing.refresh(heavy)
+	Pathing.refresh(heavy)
+	expect(int(heavy["flow_version"]) == version_now,
+		"and asking again when nothing moved costs nothing")
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## A cell the zombies currently walk through on their way in.
+func _open_lane(state: Dictionary) -> Vector2i:
+	Pathing.refresh(state)
+	var spawn: Vector2i = Enemies.spawn_cells(state, 0)[0]
+	var at := spawn
+	for _step in 6:
+		var next := Pathing.step_from(state, at)
+		if next == at:
+			break
+		at = next
+	return at if Farm.buildable(state, at) else Vector2i(-1, -1)
+
+
+## The cells a zombie would walk from here to the house.
+func _route_from(state: Dictionary, from: Vector2i) -> Array:
+	var out: Array = []
+	var at := from
+	for _step in 200:
+		var next := Pathing.step_from(state, at)
+		if next == at:
+			break
+		out.append(next)
+		at = next
+	return out
+
+
+## A line of wall across the route out of this spawn. Returns how many stood.
+func _wall_a_lane(state: Dictionary, spawn: Vector2i) -> int:
+	Pathing.refresh(state)
+	var route := _route_from(state, spawn)
+	if route.size() < 4:
+		return 0
+	var across: Vector2i = route[2]
+	# **Short enough that there is a way round.** Seven cells across the
+	# approach sealed it outright and the route came back empty - which is a
+	# perfectly good wall and the wrong test: this one is about rerouting, and
+	# sealing has its own assert below.
+	var built := 0
+	for offset in range(-1, 2):
+		var cell := Vector2i(across.x, across.y + offset)
+		if Farm.buildable(state, cell):
+			if Farm.place(state, cell, {"id": &"wall",
+					"hp": int((GameData.DEFENCES[&"wall"] as Dictionary)["hp"])}):
+				built += 1
+	return built
+
+
+## A zombie with wall on all four sides of it.
+func _seal_a_pocket(state: Dictionary) -> Dictionary:
+	Pathing.refresh(state)
+	var cell := Vector2i(30, 9)
+	while not Farm.buildable(state, cell) and cell.x < 36:
+		cell.x += 1
+	var walls := 0
+	for offset in [Vector2i(0, 1), Vector2i(0, -1), Vector2i(1, 0),
+			Vector2i(-1, 0)]:
+		var at: Vector2i = cell + offset
+		if Farm.buildable(state, at):
+			if Farm.place(state, at, {"id": &"wall",
+					"hp": int((GameData.DEFENCES[&"wall"] as Dictionary)["hp"])}):
+				walls += 1
+	var id := Entities.spawn(state, &"walker", cell)
+	return {"id": id, "cell": cell, "walls": walls}
+
+
+## The hit points left in the walls around a cell.
+func _wall_hp_around(state: Dictionary, cell: Vector2i) -> int:
+	var total := 0
+	for offset in [Vector2i(0, 1), Vector2i(0, -1), Vector2i(1, 0),
+			Vector2i(-1, 0)]:
+		var on := Farm.occupant(state, cell + offset)
+		if on.get("id", &"") == &"wall":
+			total += int(on.get("hp", 0))
+	return total

@@ -3242,3 +3242,101 @@ for "fired" here. Both were fine when written.
 
 `python tools/verify.py` prints PASS: 1386 asserts, 364 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+
+## 0046 - Fences and walls - done 2026-09-27
+
+The other half of a tower defence: making them walk where you want them to,
+and making that cost them time rather than stopping them.
+
+**What changed.** Structures can be damaged and destroyed, a zombie with no
+path chews through the nearest wall instead of standing still, and holding a
+wall over a tile draws the route the wave would take instead.
+
+Files: `src/core/farm.gd`, `enemies.gd`, `pathing.gd`, `src/ui/build_mode.gd`,
+`world_view.gd`, `src/tools/determinism.gd`, both test tools.
+Verify: 1417 headless / 371 input / sim hash moved on purpose, below.
+
+### "Task 0049" was a comment in `_walk()`
+
+    var next := Pathing.step_from(state, here)
+    if next == here:
+        return                  # nowhere to go: stand there. Task 0049.
+
+A farm sealed completely made the entire wave stand still for ever. A player
+who walled themselves in won the night by doing nothing, which is not a tower
+defence - it is a puzzle with one answer.
+
+`design.md` is explicit that a wall buys **time** rather than safety, so a
+zombie with nowhere to go takes the nearest thing in its way apart. It bites
+whichever neighbour is nearest the house rather than whichever is first in
+reading order, so a wave eats through a line instead of nibbling the far side
+of it.
+
+Destroying a wall removes it, which bumps `grid_version`, which rebuilds the
+field on the next tick. A hole in a wall is a new way through and they find it
+because the field is asked rather than remembered.
+
+That directly reversed an assert from task 0025 - "a boxed-in zombie stands
+still rather than crashing" - which was true, and was the placeholder that
+comment described. It now asserts that it eats its way out, and says why it
+changed.
+
+### `Farm.damage()`
+
+The same promise `Combat.hit()` makes about a zombie: it never reports more
+than was there, so a caller counting damage cannot count overkill. Asserted
+from both ends - six off a twenty-point wall is six, a hundred more takes the
+fourteen that were left, and hitting the resulting gap does nothing. The house
+and the other fixtures refuse the whole thing.
+
+### Showing the route before paying for it
+
+`Pathing.route_if_blocked()` builds one throwaway field with the cell
+pretended-blocked, reads the route out of it, and throws it away. The
+alternative - put the wall down, look, take it up - costs the player the stone
+if they change their mind and costs the code a build-and-undo that has to be
+exactly reversible.
+
+It is drawn dotted, so it reads as a prediction rather than as something on
+the farm, and **only for things whose job is traffic**: a player placing a
+tower is thinking about range, not about where the queue goes. The input case
+checks both halves, and then checks the honest one - that the route the
+preview drew is exactly the route they take once the wall is down.
+
+### Two asserts of mine that claimed more than the game promises
+
+- **"The long way round is longer."** It is not, necessarily: a detour around
+  three cells of wall on open ground came out at 27 four-way steps against 27,
+  by a different path. What a wall actually guarantees is that nobody walks
+  through it, so that is what it asserts now - no step of the new route is on
+  a wall, and the old route went straight through where the wall now is.
+- **A seven-cell wall across the approach** sealed it outright and the route
+  came back empty. A perfectly good wall and the wrong test; the reroute test
+  uses three cells and sealing has its own.
+
+### The palette rebuilds under the click
+
+The input case failed selecting a tower straight after placing a wall.
+Placing changed what was affordable, so the palette rebuilt on the next frame
+and the click landed on whatever had taken that row's place. Four frames of
+settle. Worth knowing for the next case that clicks a palette twice.
+
+### Notes
+
+- Fifty walls, twenty forced rebuilds: **4.7 ms each, 14% of a tick** - and
+  asserted to be under half. It is a rare cost by construction, and there is
+  an assert that asking again when nothing moved does no work at all.
+- The determinism scenario got three cells of wall. Walls are the only thing
+  in the game that changes where the zombies walk, and a scenario with none of
+  them guarded none of that. Deliberately not a seal: that is a different
+  night, and the chewing has its own asserts.
+
+### Hashes
+
+| | from | to | why |
+|---|---|---|---|
+| sim hash | `1578557944` | `4196864933` | the scenario now has walls in it, so the flow field it hashes is a different field |
+| data hash | `1540632093` | unchanged | no table moved |
+
+`python tools/verify.py` prints PASS: 1417 asserts, 371 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

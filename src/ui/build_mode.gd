@@ -92,6 +92,7 @@ func _process(_delta: float) -> void:
 	if not visible:
 		if _view != null:
 			_view.hide_ghost()
+			_view.clear_route()
 		return
 
 	var key := "%s|%d|%d" % [Building.selected(_state), int(_state["phase"]),
@@ -123,6 +124,32 @@ func _follow_cursor() -> void:
 	var reason := Building.why_not(_state, id, cell)
 	_view.show_ghost(cell, id, reason.is_empty())
 	_reason.text = reason
+
+	# **What the zombies would do about it.** Only for a thing that actually
+	# blocks the way, and only where it could go: previewing a route around a
+	# tower the player cannot afford is answering a question nobody asked.
+	if reason.is_empty() and _blocks_the_way(id):
+		_view.show_route(Pathing.route_if_blocked(_state, cell,
+			_a_way_in(), ROUTE_STEPS))
+	else:
+		_view.clear_route()
+
+
+## Whether this is a thing zombies have to go round. A tower blocks too, but
+## a player putting one down is thinking about range, not about traffic; the
+## line is for the things whose whole job is traffic.
+func _blocks_the_way(id: StringName) -> bool:
+	return (GameData.DEFENCES.get(id, {}) as Dictionary).has("path_cost")
+
+
+## Where to draw the route from: the spawn the next wave uses.
+func _a_way_in() -> Vector2i:
+	var cells := Enemies.spawn_cells(_state, 0)
+	return Vector2i(-1, -1) if cells.is_empty() else cells[0]
+
+
+## Long enough to cross the farm, short enough that a preview is cheap.
+const ROUTE_STEPS := 120
 
 
 ## Motion is watched here rather than in `_unhandled_input`, because a panel

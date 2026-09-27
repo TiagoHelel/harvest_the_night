@@ -180,6 +180,18 @@ func _set_the_farm_going(state: Dictionary) -> void:
 		if guns >= 2:
 			break
 
+	# **A short line of wall**, so the flow field is something other than open
+	# ground. Walls are the only thing in the game that changes where the
+	# zombies walk, and a scenario with none of them guards none of that.
+	# Deliberately not a seal: a sealed farm is a different night, and the
+	# chewing that answers it has its own asserts.
+	var walled := 0
+	for y in [6, 7, 8]:
+		if walled >= 3:
+			break
+		if Building.place(state, &"wall", Vector2i(28, y)):
+			walled += 1
+
 	# **A line in the water**, so the fishing RNG is drawn from inside the
 	# scenario rather than never at all.
 	for found in Farm.cells_of(state, Farm.Terrain.WATER):

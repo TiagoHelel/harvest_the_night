@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`##########..............`  **45 / 109 done**
+`##########..............`  **46 / 109 done**
 
-0 doing / 64 todo / 0 blocked across 9 phases.
+0 doing / 63 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0046 - Fences and walls**. The whole of what is left is
+First up: **0047 - Barricades**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,25 +26,23 @@ which rewrites this file for you.
 
 ## What is open
 
-64 task(s) left, the ready ones first, then what they
+63 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
-### 0046 - Fences and walls
+### 0047 - Barricades
 
-Ready to pick up.  Likely files: `src/core/building.gd, src/core/pathing.gd`.
+Ready to pick up.  Likely files: `src/core/game_data.gd`.
 
-The other half of a tower defence: making the zombies walk where you want them to.
+The emergency answer: almost free, almost paper, and placeable while the night is running.
 
-- A fence is cheap wood with low hit points; a wall is stone and slow to break
-- Walls change the flow field, and the field is rebuilt when one is placed or destroyed
-- A wall cannot fully seal the house: if every path is blocked, zombies attack the nearest wall instead of standing still
-- Placing shows the path the zombies will take afterwards
-- Hit points and cost are levers
+- Cheapest structure in the game, from the workshop's first recipe
+- It may be placed during NIGHT, which no other structure may
+- It has a short lifetime as well as hit points, so it cannot become a permanent wall
+- A limit on how many may be placed per night, and it is a lever
 
-  - done when: Walling a lane visibly reroutes the next wave
-  - done when: Sealing the farm completely makes them break in rather than freeze
-  - done when: The field rebuild cost stays inside the budget with fifty walls
+  - done when: Placing one mid-wave buys the measurable seconds the lever claims
+  - done when: It expires on its own if it survives the night
 
 ### 0048 - Mines and traps
 
@@ -60,6 +58,37 @@ The reference sheet's mine: no targeting, no upkeep, high damage, and then it is
 
   - done when: A mine under the choke point kills what the levers say it kills
   - done when: Two mines in adjacent cells do not chain into a fifty damage cascade - or they do, deliberately, and the journal says so
+
+### 0049 - Zombies path around walls
+
+Ready to pick up.  Likely files: `src/core/pathing.gd`.
+
+Make the flow field earn its keep: cost, not just blocked, so zombies prefer the open lane and break through when they must.
+
+- Path cost per terrain and per structure, so a wall is expensive rather than impossible
+- A zombie whose cheapest path is still expensive attacks the structure instead of walking around the world
+- Recompute is incremental or cached: it must not cost a frame when a wall falls mid-wave
+- Deterministic tie-breaking everywhere in the field
+- No zombie ever oscillates between two cells
+
+  - done when: A hundred zombies and a maze stay inside the tick budget
+  - done when: The same seed and the same maze give the same arrival order
+  - done when: A headless test asserts no zombie is in the same pair of cells for 20 ticks
+
+### 0053 - Repair during the night
+
+Ready to pick up.  Likely files: `src/core/building.gd, src/ui/night_hud.gd`.
+
+A reason to be present at night: spend food and wood to put a wall back up while the wave is still coming.
+
+- Repair costs food or wood per hit point restored, and the rate is a lever
+- It takes time and the player must be near the structure
+- A destroyed structure cannot be repaired, only rebuilt
+- The house itself can be repaired, at a worse rate
+- Repairing is interruptible
+
+  - done when: Repairing a wall mid-wave measurably changes whether it holds
+  - done when: `input_check` repairs something
 
 ### 0054 - The player's ability
 
@@ -168,50 +197,47 @@ When it breaks on someone else's machine, get enough to fix it without them.
   - done when: A deliberate crash produces a report with the seed and the tick
   - done when: The run is still loadable afterwards
 
-### 0047 - Barricades
+### 0050 - The runner
 
-Waits on 0046.  Likely files: `src/core/game_data.gd`.
+Waits on 0049.  Likely files: `src/core/game_data.gd`.
 
-The emergency answer: almost free, almost paper, and placeable while the night is running.
+The first enemy that changes what you build: fast, fragile, and it arrives before the mortar can reload.
 
-- Cheapest structure in the game, from the workshop's first recipe
-- It may be placed during NIGHT, which no other structure may
-- It has a short lifetime as well as hit points, so it cannot become a permanent wall
-- A limit on how many may be placed per night, and it is a lever
+- Roughly twice the basic speed and half the hit points - state the real numbers
+- It ignores structures and runs straight for the house
+- It punishes a defence made only of slow, expensive towers
+- Speed, hit points and reward are levers
 
-  - done when: Placing one mid-wave buys the measurable seconds the lever claims
-  - done when: It expires on its own if it survives the night
+  - done when: A crossbow line stops a rush and a mortar alone does not
+  - done when: It arrives first when mixed into a wave with basics
 
-### 0049 - Zombies path around walls
+### 0051 - The tank
 
-Waits on 0046.  Likely files: `src/core/pathing.gd`.
+Waits on 0049.  Likely files: `src/core/game_data.gd`.
 
-Make the flow field earn its keep: cost, not just blocked, so zombies prefer the open lane and break through when they must.
+The enemy that needs concentrated damage: slow, heavy, and it shrugs off chip damage.
 
-- Path cost per terrain and per structure, so a wall is expensive rather than impossible
-- A zombie whose cheapest path is still expensive attacks the structure instead of walking around the world
-- Recompute is incremental or cached: it must not cost a frame when a wall falls mid-wave
-- Deterministic tie-breaking everywhere in the field
-- No zombie ever oscillates between two cells
+- High hit points and a flat reduction against each hit, so many small hits are worse than few big ones
+- Slow enough that the player watches it come
+- It is the reason the mortar exists
+- Hit points, reduction and speed are levers
 
-  - done when: A hundred zombies and a maze stay inside the tick budget
-  - done when: The same seed and the same maze give the same arrival order
-  - done when: A headless test asserts no zombie is in the same pair of cells for 20 ticks
+  - done when: A crossbow wall barely scratches it and a mortar drops it - measure both
+  - done when: The reduction cannot take a hit below zero damage
 
-### 0053 - Repair during the night
+### 0052 - The breaker
 
-Waits on 0046.  Likely files: `src/core/building.gd, src/ui/night_hud.gd`.
+Waits on 0049.  Likely files: `src/core/enemies.gd, src/core/game_data.gd`.
 
-A reason to be present at night: spend food and wood to put a wall back up while the wave is still coming.
+The enemy that goes after what you built: it targets structures first and the house second.
 
-- Repair costs food or wood per hit point restored, and the rate is a lever
-- It takes time and the player must be near the structure
-- A destroyed structure cannot be repaired, only rebuilt
-- The house itself can be repaired, at a worse rate
-- Repairing is interruptible
+- It picks the nearest structure on its path, not the house
+- Extra damage against structures and little against the house
+- It makes an undefended tower line a liability, which is the point
+- Target selection is deterministic and ordered
 
-  - done when: Repairing a wall mid-wave measurably changes whether it holds
-  - done when: `input_check` repairs something
+  - done when: A wave of breakers dismantles an unprotected tower line
+  - done when: With the towers covered, they die before they reach one
 
 ### 0072 - The farm tileset
 
@@ -338,47 +364,52 @@ One warm loop for the farm, one cold one for the night, and a crossfade on the r
   - done when: The loop point is inaudible
   - done when: The crossfade lands with the transition, not before or after it
 
-### 0050 - The runner
+### 0057 - Structures take damage and die
 
-Waits on 0049.  Likely files: `src/core/game_data.gd`.
+Waits on 0052.  Likely files: `src/core/combat.gd, src/core/building.gd`.
 
-The first enemy that changes what you build: fast, fragile, and it arrives before the mortar can reload.
+Losing things. A structure that breaks should be a small disaster the player watched happen.
 
-- Roughly twice the basic speed and half the hit points - state the real numbers
-- It ignores structures and runs straight for the house
-- It punishes a defence made only of slow, expensive towers
-- Speed, hit points and reward are levers
+- Every structure has hit points and a visible damage state
+- Destruction frees the cell, rebuilds the flow field and leaves rubble that clears by morning
+- Damaged structures survive into the next day at their current hit points
+- A repair cost that is cheaper than rebuilding, so repairing is the right move
+- Nothing in the state dangles after a structure dies
 
-  - done when: A crossbow line stops a rush and a mortar alone does not
-  - done when: It arrives first when mixed into a wave with basics
+  - done when: Destroying a wall mid-wave reroutes the zombies the same tick
+  - done when: A structure at 1 hit point is still working, and looks wounded
+  - done when: A night of heavy losses leaves a morning that is still playable
 
-### 0051 - The tank
+### 0059 - Waves as data
 
-Waits on 0049.  Likely files: `src/core/game_data.gd`.
+Waits on 0050, 0051, 0052.  Likely files: `src/core/waves.gd, src/core/game_data.gd`.
 
-The enemy that needs concentrated damage: slow, heavy, and it shrugs off chip damage.
+Before authoring ten nights, make a night a table. Composition, timing and spawn points become numbers a designer edits, not code.
 
-- High hit points and a flat reduction against each hit, so many small hits are worse than few big ones
-- Slow enough that the player watches it come
-- It is the reason the mortar exists
-- Hit points, reduction and speed are levers
+- A night is a list of waves; a wave is a list of (enemy, count, spawn point, delay)
+- Wave gaps and the delay before the first wave are per night
+- Spawn points may differ per wave, so a night can come from two sides
+- A night definition is validated at load: an unknown enemy id fails loudly
+- Total enemy count and total reward per night are computable without running it
 
-  - done when: A crossbow wall barely scratches it and a mortar drops it - measure both
-  - done when: The reduction cannot take a hit below zero damage
+  - done when: Editing a wave table changes the night with no code edit
+  - done when: `validate()` catches a typo in an enemy id
+  - done when: A summary of all ten nights can be printed headlessly
 
-### 0052 - The breaker
+### 0074 - Zombie sprites
 
-Waits on 0049, 0046.  Likely files: `src/core/enemies.gd, src/core/game_data.gd`.
+Waits on 0071, 0050, 0051, 0052.  Likely files: `tools/gen_sprites.py, sprites/enemies/`.
 
-The enemy that goes after what you built: it targets structures first and the house second.
+Four enemies that are told apart at a glance in a dark field at 480x270, which is the only test that matters.
 
-- It picks the nearest structure on its path, not the house
-- Extra damage against structures and little against the house
-- It makes an undefended tower line a liability, which is the point
-- Target selection is deterministic and ordered
+- Basic, runner, tank and breaker, distinct in silhouette before colour
+- Walk, attack and death for each
+- The Giant, larger, with its telegraph as a distinct pose
+- A rim light so they read against the night ramp
+- Silhouette test: all five in black at 100% zoom must still be distinguishable
 
-  - done when: A wave of breakers dismantles an unprotected tower line
-  - done when: With the towers covered, they die before they reach one
+  - done when: The silhouette test passes - put the image in the journal
+  - done when: A screenshot of a mixed wave is readable at native resolution
 
 ### 0078 - The reality transition
 
@@ -437,113 +468,6 @@ The little bubbles on the owner's sheet - !, ?, a heart, a note, an idea, a star
 
   - done when: A reaction appears on the tick the thing happens and clears itself
   - done when: Turning them all off leaves the determinism hash unchanged
-
-### 0057 - Structures take damage and die
-
-Waits on 0046, 0052.  Likely files: `src/core/combat.gd, src/core/building.gd`.
-
-Losing things. A structure that breaks should be a small disaster the player watched happen.
-
-- Every structure has hit points and a visible damage state
-- Destruction frees the cell, rebuilds the flow field and leaves rubble that clears by morning
-- Damaged structures survive into the next day at their current hit points
-- A repair cost that is cheaper than rebuilding, so repairing is the right move
-- Nothing in the state dangles after a structure dies
-
-  - done when: Destroying a wall mid-wave reroutes the zombies the same tick
-  - done when: A structure at 1 hit point is still working, and looks wounded
-  - done when: A night of heavy losses leaves a morning that is still playable
-
-### 0059 - Waves as data
-
-Waits on 0050, 0051, 0052.  Likely files: `src/core/waves.gd, src/core/game_data.gd`.
-
-Before authoring ten nights, make a night a table. Composition, timing and spawn points become numbers a designer edits, not code.
-
-- A night is a list of waves; a wave is a list of (enemy, count, spawn point, delay)
-- Wave gaps and the delay before the first wave are per night
-- Spawn points may differ per wave, so a night can come from two sides
-- A night definition is validated at load: an unknown enemy id fails loudly
-- Total enemy count and total reward per night are computable without running it
-
-  - done when: Editing a wave table changes the night with no code edit
-  - done when: `validate()` catches a typo in an enemy id
-  - done when: A summary of all ten nights can be printed headlessly
-
-### 0074 - Zombie sprites
-
-Waits on 0071, 0050, 0051, 0052.  Likely files: `tools/gen_sprites.py, sprites/enemies/`.
-
-Four enemies that are told apart at a glance in a dark field at 480x270, which is the only test that matters.
-
-- Basic, runner, tank and breaker, distinct in silhouette before colour
-- Walk, attack and death for each
-- The Giant, larger, with its telegraph as a distinct pose
-- A rim light so they read against the night ramp
-- Silhouette test: all five in black at 100% zoom must still be distinguishable
-
-  - done when: The silhouette test passes - put the image in the journal
-  - done when: A screenshot of a mixed wave is readable at native resolution
-
-### 0082 - Screenshots, and actually looking at them
-
-Waits on 0078.  Likely files: `src/tools/shot.gd, implementation/shots/`.
-
-A command that puts the game in a known state and takes the picture, so a visual change can be checked instead of hoped for.
-
-- `shot.gd` takes named scenarios: farm at noon, farm at dusk, a wave mid-fight, the result screen, the tech tree
-- It runs headless and writes PNGs under `implementation/shots/<id>/`
-- The scenario is built from a seed and a scripted state, so two runs give the same picture
-- The runner loop is updated to say: after a visual task, take the shots and look at them
-
-  - done when: One command produces the whole set
-  - done when: The set is recognisably the game on the reference sheet
-
-### 0089 - Tooltips
-
-Waits on 0081.  Likely files: `src/ui/tooltip.gd`.
-
-Every cost, stat and icon explains itself, so the game does not need a manual.
-
-- A hover tooltip on resources, structures, recipes, tech nodes and enemies
-- It shows the numbers from game_data, never a copy of them
-- A short delay before it appears and none before it moves to the next
-- It never leaves the screen edge
-- Keyboard focus shows the same tooltip as hover
-
-  - done when: Every interactive element has one
-  - done when: Changing a lever changes the tooltip with no other edit
-
-### 0091 - The title screen
-
-Waits on 0081.  Likely files: `src/ui/title_screen.gd, scenes/Title.tscn`.
-
-The game currently boots into a farm. Make it boot into a game.
-
-- The farm at dusk behind the title, with the night creeping in - the premise, in one image
-- The logo, generated with the same tools as everything else
-- Continue, New run, Statistics, Options, Quit
-- Continue is absent, not greyed, when there is no save
-- Any key or click moves past the ident into the menu
-
-  - done when: Booting lands here and not in a run
-  - done when: The screen says what kind of game this is before a word is read
-
-### 0097 - English and Portuguese
-
-Waits on 0081.  Likely files: `src/app/i18n.gd, assets/locale/`.
-
-Every string through a translation table, with pt-BR alongside English - the reference sheet is in Portuguese and so is the audience.
-
-- No literal player-facing string left in code: keys only
-- English and pt-BR CSVs, English as the fallback
-- A checker that finds missing keys, unused keys and strings that overflow their control
-- Language is a setting and applies without a restart
-- Plurals and number formatting handled, not concatenated
-
-  - done when: The checker reports zero missing keys in both languages
-  - done when: Switching language mid-game updates every visible screen
-  - done when: No pt-BR string overflows its control - the checker proves it
 
 ### 0058 - The Giant
 
@@ -606,49 +530,65 @@ Fire, smoke, sparks, dust and the small amount of blood the design document allo
   - done when: A busy wave stays inside the frame budget with particles on
   - done when: Turning them off does not change the outcome of a night
 
-### 0092 - The main menu and the router
+### 0082 - Screenshots, and actually looking at them
 
-Waits on 0091.  Likely files: `src/app/app.gd, src/ui/main_menu.gd`.
+Waits on 0078.  Likely files: `src/tools/shot.gd, implementation/shots/`.
 
-One router that owns which screen is up, so screens stop knowing about each other.
+A command that puts the game in a known state and takes the picture, so a visual change can be checked instead of hoped for.
 
-- An `App` autoload with `goto(state)` and a `state_changed` signal
-- States: BOOT, TITLE, MENU, RUN, TECH, STATS, OPTIONS, SUMMARY
-- A back stack, so Options returns to whoever opened it
-- No `get_node('/root/...')` reaching across screens
-- The run becomes one state rather than the root scene
+- `shot.gd` takes named scenarios: farm at noon, farm at dusk, a wave mid-fight, the result screen, the tech tree
+- It runs headless and writes PNGs under `implementation/shots/<id>/`
+- The scenario is built from a seed and a scripted state, so two runs give the same picture
+- The runner loop is updated to say: after a visual task, take the shots and look at them
 
-  - done when: Options from the title and from the pause menu both return correctly
-  - done when: `input_check` still drives a full night after the refactor
+  - done when: One command produces the whole set
+  - done when: The set is recognisably the game on the reference sheet
 
-### 0099 - An icon and a boot ident
+### 0089 - Tooltips
 
-Waits on 0091.  Likely files: `tools/gen_icon.py, assets/icon.png`.
+Waits on 0081.  Likely files: `src/ui/tooltip.gd`.
 
-Something recognisable in a taskbar and on an itch page, and two seconds before the title that are not the Godot logo.
+Every cost, stat and icon explains itself, so the game does not need a manual.
 
-- An icon generated at every size a platform asks for, readable at 16x16
-- It says farm and night in one image
-- The boot splash is replaced; no default Godot branding anywhere
-- A short ident, skippable on any input
+- A hover tooltip on resources, structures, recipes, tech nodes and enemies
+- It shows the numbers from game_data, never a copy of them
+- A short delay before it appears and none before it moves to the next
+- It never leaves the screen edge
+- Keyboard focus shows the same tooltip as hover
 
-  - done when: The 16x16 icon is still recognisable
-  - done when: No Godot logo appears anywhere in a release build
+  - done when: Every interactive element has one
+  - done when: Changing a lever changes the tooltip with no other edit
 
-### 0101 - Onboarding in seven lines
+### 0091 - The title screen
 
-Waits on 0097.  Likely files: `src/core/tutorial.gd`.
+Waits on 0081.  Likely files: `src/ui/title_screen.gd, scenes/Title.tscn`.
 
-A stranger reaches night 1 and understands the loop, with no more text than the design document allows.
+The game currently boots into a farm. Make it boot into a game.
 
-- Seven lines, total, across the whole first day
-- Each appears on the thing it describes
-- The reality switch is explained by showing it, not by describing it
-- Every line is translated
-- Watch someone play it and write down where they stopped
+- The farm at dusk behind the title, with the night creeping in - the premise, in one image
+- The logo, generated with the same tools as everything else
+- Continue, New run, Statistics, Options, Quit
+- Continue is absent, not greyed, when there is no save
+- Any key or click moves past the ident into the menu
 
-  - done when: A first-time player reaches the end of night 1 without being told anything out loud
-  - done when: The journal names where they hesitated, because that is the finding
+  - done when: Booting lands here and not in a run
+  - done when: The screen says what kind of game this is before a word is read
+
+### 0097 - English and Portuguese
+
+Waits on 0081.  Likely files: `src/app/i18n.gd, assets/locale/`.
+
+Every string through a translation table, with pt-BR alongside English - the reference sheet is in Portuguese and so is the audience.
+
+- No literal player-facing string left in code: keys only
+- English and pt-BR CSVs, English as the fallback
+- A checker that finds missing keys, unused keys and strings that overflow their control
+- Language is a setting and applies without a restart
+- Plurals and number formatting handled, not concatenated
+
+  - done when: The checker reports zero missing keys in both languages
+  - done when: Switching language mid-game updates every visible screen
+  - done when: No pt-BR string overflows its control - the checker proves it
 
 ### 0060 - The ten nights, authored
 
@@ -742,6 +682,80 @@ A short running account of what just happened, because at 4x speed the player wi
   - done when: A night at 4x is followable from the log alone
   - done when: It holds a bounded number of entries and cannot grow without limit
 
+### 0092 - The main menu and the router
+
+Waits on 0091.  Likely files: `src/app/app.gd, src/ui/main_menu.gd`.
+
+One router that owns which screen is up, so screens stop knowing about each other.
+
+- An `App` autoload with `goto(state)` and a `state_changed` signal
+- States: BOOT, TITLE, MENU, RUN, TECH, STATS, OPTIONS, SUMMARY
+- A back stack, so Options returns to whoever opened it
+- No `get_node('/root/...')` reaching across screens
+- The run becomes one state rather than the root scene
+
+  - done when: Options from the title and from the pause menu both return correctly
+  - done when: `input_check` still drives a full night after the refactor
+
+### 0099 - An icon and a boot ident
+
+Waits on 0091.  Likely files: `tools/gen_icon.py, assets/icon.png`.
+
+Something recognisable in a taskbar and on an itch page, and two seconds before the title that are not the Godot logo.
+
+- An icon generated at every size a platform asks for, readable at 16x16
+- It says farm and night in one image
+- The boot splash is replaced; no default Godot branding anywhere
+- A short ident, skippable on any input
+
+  - done when: The 16x16 icon is still recognisable
+  - done when: No Godot logo appears anywhere in a release build
+
+### 0101 - Onboarding in seven lines
+
+Waits on 0097.  Likely files: `src/core/tutorial.gd`.
+
+A stranger reaches night 1 and understands the loop, with no more text than the design document allows.
+
+- Seven lines, total, across the whole first day
+- Each appears on the thing it describes
+- The reality switch is explained by showing it, not by describing it
+- Every line is translated
+- Watch someone play it and write down where they stopped
+
+  - done when: A first-time player reaches the end of night 1 without being told anything out loud
+  - done when: The journal names where they hesitated, because that is the finding
+
+### 0063 - The tech tree
+
+Waits on 0062.  Likely files: `src/core/tech.gd, src/ui/tech_screen.gd`.
+
+Somewhere to spend the points, small enough to read on one screen and real enough to change how a night goes.
+
+- Around twelve nodes, no more: the design document forbids a giant tree in the MVP
+- Three branches: production, defence, survival
+- Prerequisites are data; a node shows what it needs and what it gives
+- It opens from the day HUD and never during a wave
+- Spending is confirmed and is not refundable - or is, for a fee, and the fee is a lever
+
+  - done when: Every node is reachable inside ten nights, but not all of them
+  - done when: The choice between branches is real: say in the journal which one you would take and why
+  - done when: `input_check` buys a node
+
+### 0066 - Night 10 and the end of the run
+
+Waits on 0060, 0058.  Likely files: `src/core/phases.gd, src/ui/result_screen.gd`.
+
+**The MVP is complete here.** Beating the Giant ends the run with a summary that answers the design document's question.
+
+- A run summary: days played, resources gathered, zombies killed, structures lost, the build that won
+- The run is recorded to the profile and a new one can be started
+- An option to continue past night 10 into 0070's endless mode
+- It is a real ending, with a screen worth reaching
+
+  - done when: A full run from day 1 to the Giant can be played in one sitting
+  - done when: The journal answers, honestly: after surviving the first night, did you want to go back to the farm and improve? That is the success criterion of the entire MVP
+
 ### 0093 - Options: video
 
 Waits on 0092.  Likely files: `src/ui/options_video.gd`.
@@ -816,67 +830,6 @@ Two builds anyone can run, from one command, with the Web one small enough that 
   - done when: The Web build is inside its budget and the number is printed
   - done when: The two builds produce the same determinism hash
 
-### 0107 - Store assets
-
-Waits on 0082, 0099.  Likely files: `tools/gen_marketing.py, build/store/`.
-
-The page it goes on: capsule images, screenshots, the pitch, generated from the game rather than mocked up.
-
-- Capsules at the usual sizes, from the real game and the real palette
-- Five screenshots from `shot.gd`, picked to show the loop, not five of the farm
-- The elevator pitch from section 20 of the design document, edited to fit a store page
-- An animated GIF of the reality switch
-- English and Portuguese copy
-
-  - done when: One command regenerates the whole set
-  - done when: The screenshots show a day, a night, the switch, a busy wave and the tech tree
-
-### 0063 - The tech tree
-
-Waits on 0062.  Likely files: `src/core/tech.gd, src/ui/tech_screen.gd`.
-
-Somewhere to spend the points, small enough to read on one screen and real enough to change how a night goes.
-
-- Around twelve nodes, no more: the design document forbids a giant tree in the MVP
-- Three branches: production, defence, survival
-- Prerequisites are data; a node shows what it needs and what it gives
-- It opens from the day HUD and never during a wave
-- Spending is confirmed and is not refundable - or is, for a fee, and the fee is a lever
-
-  - done when: Every node is reachable inside ten nights, but not all of them
-  - done when: The choice between branches is real: say in the journal which one you would take and why
-  - done when: `input_check` buys a node
-
-### 0066 - Night 10 and the end of the run
-
-Waits on 0060, 0058.  Likely files: `src/core/phases.gd, src/ui/result_screen.gd`.
-
-**The MVP is complete here.** Beating the Giant ends the run with a summary that answers the design document's question.
-
-- A run summary: days played, resources gathered, zombies killed, structures lost, the build that won
-- The run is recorded to the profile and a new one can be started
-- An option to continue past night 10 into 0070's endless mode
-- It is a real ending, with a screen worth reaching
-
-  - done when: A full run from day 1 to the Giant can be played in one sitting
-  - done when: The journal answers, honestly: after surviving the first night, did you want to go back to the farm and improve? That is the success criterion of the entire MVP
-
-### 0098 - Accessibility
-
-Waits on 0093, 0097.  Likely files: `src/app/a11y.gd, src/ui/options_a11y.gd`.
-
-The cheap things that decide whether a lot of people can play it at all.
-
-- Screen shake, flashing and particle density each separately reducible
-- A larger UI scale and a high-contrast HUD option
-- Colour-blind safe damage types: shape and icon, never colour alone
-- Hold-to-act as an alternative to repeated pressing
-- A slower game speed option that scales the tick budget, not the rules
-
-  - done when: Every damage type is identifiable in greyscale
-  - done when: The slow speed option does not change the determinism hash
-  - done when: The game is playable start to finish with shake and flashing off
-
 ### 0102 - A performance budget
 
 Waits on 0060.  Likely files: `tools/perf.py, src/tools/perf_check.gd`.
@@ -906,35 +859,20 @@ Adding a lever or a tech node must not delete somebody's run.
   - done when: Every golden save loads and plays
   - done when: Adding a resource to game_data does not break a save that predates it
 
-### 0105 - A playtest build
+### 0107 - Store assets
 
-Waits on 0100, 0103.  Likely files: `tools/playtest.py`.
+Waits on 0082, 0099.  Likely files: `tools/gen_marketing.py, build/store/`.
 
-A build to put in front of someone, with the instrumentation to learn something from it.
+The page it goes on: capsule images, screenshots, the pitch, generated from the game rather than mocked up.
 
-- A build flag that turns on local session logging: nights reached, time per day, what was built, where the run ended
-- The log is a local file the player can read and send, never an upload
-- A one-page note for the tester: what to try, what to ignore, what to report
-- An in-game feedback key that timestamps a note into the log
-- It is obvious it is a playtest build
+- Capsules at the usual sizes, from the real game and the real palette
+- Five screenshots from `shot.gd`, picked to show the loop, not five of the farm
+- The elevator pitch from section 20 of the design document, edited to fit a store page
+- An animated GIF of the reality switch
+- English and Portuguese copy
 
-  - done when: A session produces a readable log
-  - done when: `tools/playtest.py` summarises a folder of logs into the questions that matter
-
-### 0108 - The devlog and a trailer clip
-
-Waits on 0082, 0107.  Likely files: `tools/devlog.py, docs/devlog/`.
-
-The thing that gets people to look: thirty seconds that show the farm, the switch and the horde.
-
-- A scripted capture: a day of farming, the transition, a night holding, a wall falling
-- It is captured from a seeded run, so it can be captured again
-- A devlog page from the journal: what the loop was meant to be and what it turned out to be
-- Honest about what is not in the MVP
-- Both in English and Portuguese
-
-  - done when: The clip is thirty seconds and needs no explanation
-  - done when: The devlog is generated from `implementation/PROGRESS.md` rather than written twice
+  - done when: One command regenerates the whole set
+  - done when: The screenshots show a day, a night, the switch, a busy wave and the tech tree
 
 ### 0064 - Tower I, II, automatic
 
@@ -979,6 +917,52 @@ For the player who beat the Giant and wants to know how far the farm goes. Cheap
 
   - done when: Night 25 is generated and playable
   - done when: The same seed generates the same night 25 twice
+
+### 0098 - Accessibility
+
+Waits on 0093, 0097.  Likely files: `src/app/a11y.gd, src/ui/options_a11y.gd`.
+
+The cheap things that decide whether a lot of people can play it at all.
+
+- Screen shake, flashing and particle density each separately reducible
+- A larger UI scale and a high-contrast HUD option
+- Colour-blind safe damage types: shape and icon, never colour alone
+- Hold-to-act as an alternative to repeated pressing
+- A slower game speed option that scales the tick budget, not the rules
+
+  - done when: Every damage type is identifiable in greyscale
+  - done when: The slow speed option does not change the determinism hash
+  - done when: The game is playable start to finish with shake and flashing off
+
+### 0105 - A playtest build
+
+Waits on 0100, 0103.  Likely files: `tools/playtest.py`.
+
+A build to put in front of someone, with the instrumentation to learn something from it.
+
+- A build flag that turns on local session logging: nights reached, time per day, what was built, where the run ended
+- The log is a local file the player can read and send, never an upload
+- A one-page note for the tester: what to try, what to ignore, what to report
+- An in-game feedback key that timestamps a note into the log
+- It is obvious it is a playtest build
+
+  - done when: A session produces a readable log
+  - done when: `tools/playtest.py` summarises a folder of logs into the questions that matter
+
+### 0108 - The devlog and a trailer clip
+
+Waits on 0082, 0107.  Likely files: `tools/devlog.py, docs/devlog/`.
+
+The thing that gets people to look: thirty seconds that show the farm, the switch and the horde.
+
+- A scripted capture: a day of farming, the transition, a night holding, a wall falling
+- It is captured from a seeded run, so it can be captured again
+- A devlog page from the journal: what the loop was meant to be and what it turned out to be
+- Honest about what is not in the MVP
+- Both in English and Portuguese
+
+  - done when: The clip is thirty seconds and needs no explanation
+  - done when: The devlog is generated from `implementation/PROGRESS.md` rather than written twice
 
 ### 0106 - The release checklist
 
@@ -1045,24 +1029,24 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0040** [The shop grows](prompts/0040-shop-full.md)
 - [x] **0041** [The first day teaches itself](prompts/0041-tutorial-day.md)
 
-## 3 - The full night  (4/17)
+## 3 - The full night  (5/17)
 
 - [x] **0042** [Data-driven defences](prompts/0042-defence-data.md)
 - [x] **0043** [The flamethrower tower](prompts/0043-tower-flame.md)
 - [x] **0044** [The mortar](prompts/0044-tower-mortar.md)
 - [x] **0045** [The auto-crossbow](prompts/0045-tower-crossbow.md)
-- [ ] **0046** [Fences and walls](prompts/0046-walls.md)
-- [ ] **0047** [Barricades](prompts/0047-barricades.md) - needs 0046
+- [x] **0046** [Fences and walls](prompts/0046-walls.md)
+- [ ] **0047** [Barricades](prompts/0047-barricades.md)
 - [ ] **0048** [Mines and traps](prompts/0048-traps.md)
-- [ ] **0049** [Zombies path around walls](prompts/0049-pathing-walls.md) - needs 0046
+- [ ] **0049** [Zombies path around walls](prompts/0049-pathing-walls.md)
 - [ ] **0050** [The runner](prompts/0050-enemy-runner.md) - needs 0049
 - [ ] **0051** [The tank](prompts/0051-enemy-tank.md) - needs 0049
-- [ ] **0052** [The breaker](prompts/0052-enemy-breaker.md) - needs 0049, 0046
-- [ ] **0053** [Repair during the night](prompts/0053-repair.md) - needs 0046
+- [ ] **0052** [The breaker](prompts/0052-enemy-breaker.md) - needs 0049
+- [ ] **0053** [Repair during the night](prompts/0053-repair.md)
 - [ ] **0054** [The player's ability](prompts/0054-ability.md)
 - [ ] **0055** [Double speed and skipping the night](prompts/0055-speed-controls.md)
 - [ ] **0056** [The night HUD](prompts/0056-night-hud.md)
-- [ ] **0057** [Structures take damage and die](prompts/0057-structure-damage.md) - needs 0046, 0052
+- [ ] **0057** [Structures take damage and die](prompts/0057-structure-damage.md) - needs 0052
 - [ ] **0058** [The Giant](prompts/0058-boss-giant.md) - needs 0051, 0052, 0057
 
 ## 4 - Ten nights and progression  (0/12)

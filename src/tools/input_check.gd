@@ -41,7 +41,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 22
+const CASES := 23
 
 var passed := 0
 var failed := 0
@@ -93,6 +93,7 @@ func _run() -> void:
 	await _case_0039_clock()
 	await _case_0040_shop()
 	await _case_0041_tutorial()
+	await _case_0046_walls()
 	_finish()
 
 
@@ -2331,3 +2332,121 @@ func _case_0041_tutorial() -> void:
 
 	await close_scene()
 	_completed += 1     # last line: an abandoned case never gets here
+
+
+## 0046 - holding a wall over a tile and seeing where they would go instead.
+func _case_0046_walls() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var build: BuildMode = require_control("BuildMode")
+	var world: WorldView = require_control("WorldView")
+	if driver == null or build == null or world == null:
+		_completed += 1
+		await close_scene()
+		return
+
+	var state := driver.state
+	Resources.gain(state, {GameData.STONE: 200, GameData.WOOD: 200,
+		GameData.IRON: 200})
+
+	await hold_key(KEY_B, 4)
+	await until(func() -> bool: return Building.is_active(state),
+		"build mode to open")
+
+	# **A wall shows the route; a tower does not.** The line is for the things
+	# whose whole job is traffic.
+	await click_control("build_wall")
+	await until(func() -> bool: return Building.selected(state) == &"wall",
+		"the wall to be selected")
+
+	Pathing.refresh(state)
+	var lane := Vector2i(-1, -1)
+	var spawn: Vector2i = Enemies.spawn_cells(state, 0)[0]
+	var at := spawn
+	for _step in 5:
+		var next := Pathing.step_from(state, at)
+		if next == at:
+			break
+		at = next
+	if Farm.buildable(state, at):
+		lane = at
+	expect(lane != Vector2i(-1, -1), "there is a lane to hover over")
+	if lane == Vector2i(-1, -1):
+		await close_scene()
+		_completed += 1
+		return
+
+	await move_mouse_to_cell(lane)
+	await frames(3)
+	var route := world.previewed_route()
+	expect(not route.is_empty(),
+		"holding a wall over the lane draws where they would go instead",
+		str(route.size()))
+
+	# It is a prediction, not a change: nothing is on the farm yet.
+	expect(Farm.is_empty(state, lane),
+		"and nothing has been built to find that out")
+	var stone := Resources.amount(state, GameData.STONE)
+
+	# **The route it shows is the route they take.** Put it down and compare.
+	await click_cell(lane)
+	await until(func() -> bool: return not Farm.is_empty(state, lane),
+		"the wall to go down")
+	expect(Resources.amount(state, GameData.STONE) < stone,
+		"the wall is paid for now")
+	Pathing.refresh(state)
+	var real: Array = []
+	var walk := spawn
+	for _step in 120:
+		var next := Pathing.step_from(state, walk)
+		if next == walk:
+			break
+		real.append(next)
+		walk = next
+	expect(real == route,
+		"and it is exactly the route the preview drew",
+		"%d steps against %d" % [real.size(), route.size()])
+
+	# **A tower gets no line**, because a player placing one is thinking about
+	# range rather than about traffic.
+	# Let the palette settle: placing the wall changed what is affordable, so
+	# the rows are rebuilt on the next frame and a click aimed at a row that
+	# is about to be replaced lands on whatever takes its place.
+	await frames(4)
+	await click_control("build_gun_tower")
+	await until(func() -> bool: return Building.selected(state) == &"gun_tower",
+		"the tower to be selected")
+	await move_mouse_to_cell(lane + Vector2i(1, 1))
+	await frames(3)
+	expect(world.previewed_route().is_empty(),
+		"holding a tower draws no route", str(world.previewed_route().size()))
+
+	# **And closing build mode takes it away.**
+	await click_control("build_wall")
+	await move_mouse_to_cell(lane + Vector2i(2, 0))
+	await frames(3)
+	await hold_key(KEY_B, 4)
+	await until(func() -> bool: return not Building.is_active(state),
+		"build mode to close")
+	await frames(3)
+	expect(world.previewed_route().is_empty(),
+		"the line goes with the palette", str(world.previewed_route().size()))
+
+	await close_scene()
+	_completed += 1     # last line: an abandoned case never gets here
+
+
+## Put the pointer over a cell, the way a player moving the mouse would.
+func move_mouse_to_cell(cell: Vector2i) -> void:
+	var world: WorldView = require_control("WorldView")
+	if world == null:
+		return
+	var size := float(GameData.TILE_SIZE)
+	var middle := Vector2(cell) * size + Vector2(size, size) * 0.5
+	var at := world.get_viewport_transform() * (world.get_global_transform()
+		* middle)
+	var ev := InputEventMouseMotion.new()
+	ev.position = at
+	ev.global_position = at
+	Input.parse_input_event(ev)
+	await process_frame

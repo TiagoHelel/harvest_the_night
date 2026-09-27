@@ -94,6 +94,68 @@ static func step_from(state: Dictionary, cell: Vector2i) -> Vector2i:
 	return best
 
 
+## The route a zombie would take from here, **as if this cell were blocked**.
+##
+## The whole of "placing shows the path they will take afterwards". The
+## alternative is to put the wall down, look, and take it up again - which
+## costs the player the stone if they change their mind, and costs the code a
+## build-and-undo that has to be exactly reversible.
+##
+## It builds one throwaway field and throws it away. That is the same few
+## milliseconds `refresh()` costs, paid only while somebody is holding a wall
+## over a tile and moving the mouse - and it is why the answer is cached
+## against the cell being considered.
+static func route_if_blocked(state: Dictionary, blocked: Vector2i,
+		from: Vector2i, most: int = 200) -> Array:
+	var was: Variant = (state["occupants"] as Dictionary).get(
+		Grid.index(blocked), null)
+	var occupants: Dictionary = state["occupants"]
+	var idx := Grid.index(blocked)
+	if idx < 0:
+		return []
+
+	# Pretend, ask, put it back. Nothing else may run between these two lines,
+	# and nothing does: this is a query, not a tick.
+	occupants[idx] = {"id": &"wall", "hp": 1}
+	var field := _build(state)
+	if was == null:
+		occupants.erase(idx)
+	else:
+		occupants[idx] = was
+
+	var out: Array = []
+	var at := from
+	for _step in most:
+		var next := _step_in(field, at)
+		if next == at:
+			break
+		out.append(next)
+		at = next
+	return out
+
+
+## One step downhill in a given field. `step_from()` is this against the
+## field the game is actually using.
+static func _step_in(field: PackedInt32Array, cell: Vector2i) -> Vector2i:
+	var idx := Grid.index(cell)
+	if idx < 0 or field.size() != Grid.CELLS:
+		return cell
+	var best := cell
+	var best_distance := int(field[idx])
+	if best_distance == UNREACHABLE:
+		return cell
+	for step in Grid.STEPS:
+		var at: Vector2i = cell + (step as Vector2i)
+		var into := Grid.index(at)
+		if into < 0:
+			continue
+		var distance := int(field[into])
+		if distance < best_distance:
+			best_distance = distance
+			best = at
+	return best
+
+
 ## Whether anything can get from this cell to the house at all.
 static func reachable(state: Dictionary, cell: Vector2i) -> bool:
 	return distance(state, cell) != UNREACHABLE
