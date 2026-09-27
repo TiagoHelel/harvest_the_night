@@ -1,7 +1,7 @@
 # 0008 - The farm grid
 
 - **Phase:** 0 - Foundation
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0002, 0003
 - **Likely files:** src/core/grid.gd, src/core/farm.gd
 

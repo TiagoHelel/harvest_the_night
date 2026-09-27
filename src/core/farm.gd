@@ -1,0 +1,174 @@
+class_name Farm
+extends RefCounted
+
+## The farm: what every cell is made of, and what is standing on it.
+##
+## **One grid, both realities.** `design.md` pillar 1 is that there is a single
+## farm and it is the whole world; pillar 2 is that the night is the same tiles
+## doing a different job. So there is one terrain array and one occupant table,
+## and the day screen and the night screen are two views of them. A second copy
+## for the night would be a second thing to keep in step, and it would drift the
+## first week.
+##
+## Terrain is a `PackedByteArray` of `Grid.CELLS`: compact, copied deeply by
+## `State.copy()`, and hashed as one string rather than 720.
+##
+## Occupants are sparse - most of the farm is empty - so they live in a
+## Dictionary keyed by flat index. An occupant is plain data: `{"id": &"tree",
+## ...}` plus whatever its kind needs. At most one per cell, which is what makes
+## `place()` able to refuse rather than stack.
+
+enum Terrain { GRASS, SOIL, WATER, ROCK, PATH, FLOOR }
+
+## Terrain nothing can be built on, whatever is or is not standing there.
+const UNBUILDABLE := [Terrain.WATER, Terrain.ROCK]
+
+## Terrain nothing can walk across.
+const UNWALKABLE := [Terrain.WATER, Terrain.ROCK]
+
+## Occupants that were there when the farm was made and are part of it.
+## The house can never be built on, sold, or walked through.
+const FIXTURES := [&"house", &"shop"]
+
+
+## The keys this subsystem owns. `State.create()` merges them in.
+static func initial() -> Dictionary:
+	var terrain := PackedByteArray()
+	terrain.resize(Grid.CELLS)
+	var occupants := {}
+
+	for y in Grid.HEIGHT:
+		var row: String = GameData.FARM_MAP[y]
+		for x in Grid.WIDTH:
+			var ch := row[x]
+			var entry: Array = GameData.MAP_LEGEND[ch]
+			var idx := Grid.index(Vector2i(x, y))
+			terrain[idx] = int(entry[0])
+			var occupant_id: StringName = entry[1]
+			if occupant_id != &"":
+				occupants[idx] = {"id": occupant_id}
+
+	return {"terrain": terrain, "occupants": occupants}
+
+
+static func terrain_at(state: Dictionary, cell: Vector2i) -> int:
+	var idx := Grid.index(cell)
+	return -1 if idx < 0 else int((state["terrain"] as PackedByteArray)[idx])
+
+
+## What is standing on a cell, or an empty Dictionary. **The only way to ask.**
+static func occupant(state: Dictionary, cell: Vector2i) -> Dictionary:
+	var idx := Grid.index(cell)
+	if idx < 0:
+		return {}
+	return (state["occupants"] as Dictionary).get(idx, {})
+
+
+static func is_empty(state: Dictionary, cell: Vector2i) -> bool:
+	return occupant(state, cell).is_empty()
+
+
+## Whether something may be placed here. **The only way to ask.**
+##
+## Water and the rock face are out because of what they are; anything already
+## occupied is out because a cell holds one thing; the house is out because it
+## is the thing being defended, and a player who walls in their own front door
+## has not made an interesting decision.
+static func buildable(state: Dictionary, cell: Vector2i) -> bool:
+	var t := terrain_at(state, cell)
+	if t < 0 or UNBUILDABLE.has(t):
+		return false
+	return is_empty(state, cell)
+
+
+## Why not, in words, for the ghost that turns red under the cursor.
+## Empty when it is buildable.
+static func why_not_buildable(state: Dictionary, cell: Vector2i) -> String:
+	var t := terrain_at(state, cell)
+	if t < 0:
+		return "off the farm"
+	if t == Terrain.WATER:
+		return "in the water"
+	if t == Terrain.ROCK:
+		return "on the rock face"
+	var on := occupant(state, cell)
+	if not on.is_empty():
+		if on["id"] == &"house":
+			return "on the house"
+		return "already occupied by a %s" % on["id"]
+	return ""
+
+
+## Whether a person or a zombie can stand here.
+##
+## Fixtures block; so does anything the player built, which is the whole point
+## of a wall. Task 0049 turns this into a cost rather than a yes or no, so that
+## a zombie prefers the open lane and breaks through when it must.
+static func walkable(state: Dictionary, cell: Vector2i) -> bool:
+	var t := terrain_at(state, cell)
+	if t < 0 or UNWALKABLE.has(t):
+		return false
+	return is_empty(state, cell)
+
+
+## Put something on a cell. False and no change when it will not go there.
+static func place(state: Dictionary, cell: Vector2i, occupant_data: Dictionary) -> bool:
+	if not buildable(state, cell):
+		return false
+	var occupants: Dictionary = state["occupants"]
+	occupants[Grid.index(cell)] = occupant_data.duplicate(true)
+	return true
+
+
+## Take whatever is on a cell off it. False when there was nothing, or when it
+## is part of the farm rather than something put there.
+static func remove(state: Dictionary, cell: Vector2i) -> bool:
+	var idx := Grid.index(cell)
+	if idx < 0:
+		return false
+	var occupants: Dictionary = state["occupants"]
+	if not occupants.has(idx):
+		return false
+	if FIXTURES.has((occupants[idx] as Dictionary)["id"]):
+		return false
+	occupants.erase(idx)
+	return true
+
+
+## Every cell holding a given occupant id, in index order.
+##
+## Sorted by construction: the caller gets the same list in the same order on
+## every machine, which matters the moment something iterates trees and draws
+## from the RNG.
+static func cells_with(state: Dictionary, id: StringName) -> Array:
+	var out: Array = []
+	var occupants: Dictionary = state["occupants"]
+	var keys: Array = occupants.keys()
+	keys.sort()
+	for idx in keys:
+		if (occupants[idx] as Dictionary)["id"] == id:
+			out.append(Grid.cell(idx))
+	return out
+
+
+## Every cell of a given terrain, in index order. The field is
+## `cells_of(state, Farm.Terrain.SOIL)`; the pond is the WATER one.
+static func cells_of(state: Dictionary, terrain: int) -> Array:
+	var out: Array = []
+	var bytes: PackedByteArray = state["terrain"]
+	for idx in Grid.CELLS:
+		if int(bytes[idx]) == terrain:
+			out.append(Grid.cell(idx))
+	return out
+
+
+## Where the farmhouse is - the centre of its 3x3, which is what the flow field
+## of task 0025 aims at and what the camera frames.
+static func house_centre(state: Dictionary) -> Vector2i:
+	var cells := cells_with(state, &"house")
+	if cells.is_empty():
+		return Vector2i(Grid.WIDTH / 2, Grid.HEIGHT / 2)
+	var sum := Vector2i.ZERO
+	for c in cells:
+		sum += c
+	return Vector2i(sum.x / cells.size(), sum.y / cells.size())

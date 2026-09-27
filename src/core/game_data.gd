@@ -556,6 +556,63 @@ const DEFEAT_KEEPS_MONEY := true
 const DEFEAT_KEEPS_TECH := true
 
 
+# ====================================================================== the map
+
+## The farm, as one 40x18 picture.
+##
+## **The whole world is this map**, by day and by night alike: `design.md`
+## pillar 1 is that there is one farm and it is everything, and pillar 2 is that
+## the night is the same tiles doing a different job. Two maps would be two
+## things to keep in step, and they would drift the first week.
+##
+## Regions are not coordinates written down somewhere else - they are what the
+## characters say. Move the pond by editing the pond.
+##
+##     .  grass          s  soil, the field       ~  water
+##     #  rock face      p  path                  =  wooden floor and jetty
+##     T  tree           r  loose rock            o  iron ore
+##     H  the farmhouse  $  the shop stall
+##
+## `validate()` checks the shape, so a row typed one character short is a red
+## line rather than a farm that is subtly wrong down one edge.
+const FARM_MAP: Array = [
+	"TTT.TTTT....TTT..TT.....TTT...TT..TTT.TT",
+	"T...................#####...........T..T",
+	"T..ssssss......ppp..#####r.o...........T",
+	"...ssssss.....pHHHp.#####..o...........T",
+	"...ssssss......HHH..######o.....r.......",
+	"T..ssssss......HHH...#####.............T",
+	"...ssssss.....ppppp..#####r...o.........",
+	"T.........................o............T",
+	"..ssssss.......p....r.....r...........TT",
+	"..ssssss.......p...$$........o...T.T...T",
+	"..ssssss.......p...............rTT.TT.TT",
+	"T..............p.................TT.T..T",
+	".....r.........p....T.........TT.TT.TT..",
+	"T.........=====p......T.........TT.T...T",
+	"..~~~~~~~~=====.........................",
+	".~~~~~~~~~~~~~~~~~..............TT......",
+	"~~~~~~~~~~~~~~~~~~~~~~~....TT.........TT",
+	"~~~~~~~~~~~~~~~~~~~~~~~~~~..TTT...TTTTTT",
+]
+
+## What each character means: the terrain under it, and what is standing on it.
+## Terrain values are `Farm.Terrain`; an empty occupant is `&""`.
+const MAP_LEGEND: Dictionary = {
+	".": [0, &""],          # grass
+	"s": [1, &""],          # soil
+	"~": [2, &""],          # water
+	"#": [3, &""],          # rock face
+	"p": [4, &""],          # path
+	"=": [5, &""],          # wooden floor
+	"T": [0, &"tree"],
+	"r": [0, &"rock"],
+	"o": [3, &"ore"],
+	"H": [5, &"house"],
+	"$": [5, &"shop"],
+}
+
+
 # ==================================================================== validate
 
 ## Every id that one table points at, checked against the table that defines it.
@@ -576,6 +633,7 @@ static func validate() -> Array:
 	errors.append_array(check_buildings(BUILDINGS))
 	errors.append_array(check_defences(DEFENCES))
 	errors.append_array(check_nights(NIGHTS))
+	errors.append_array(check_map(FARM_MAP))
 
 	for key in [&"common_yield", &"rare_yield"]:
 		for res in (FISHING[key] as Dictionary):
@@ -674,6 +732,23 @@ static func check_defences(defences: Dictionary) -> Array:
 	return errors
 
 
+static func check_map(rows: Array) -> Array:
+	var errors: Array = []
+	if rows.size() != GRID_HEIGHT:
+		errors.append("the farm map is %d rows, not %d"
+			% [rows.size(), GRID_HEIGHT])
+	for y in rows.size():
+		var row: String = rows[y]
+		if row.length() != GRID_WIDTH:
+			errors.append("farm map row %d is %d wide, not %d"
+				% [y, row.length(), GRID_WIDTH])
+		for x in row.length():
+			if not MAP_LEGEND.has(row[x]):
+				errors.append("farm map row %d column %d is '%s', which the "
+					% [y, x, row[x]] + "legend does not know")
+	return errors
+
+
 static func check_nights(nights: Array) -> Array:
 	var errors: Array = []
 	for n in nights.size():
@@ -706,6 +781,7 @@ static func digest() -> int:
 		"time": [TICK_HZ, DAY_TICKS, DUSK_AT_TICK, PREPARATION_TICKS,
 			MAX_CATCH_UP_TICKS],
 		"farm": [GRID_WIDTH, GRID_HEIGHT, TILE_SIZE, HOUSE_HP],
+		"map": FARM_MAP,
 		"resources": RESOURCES,
 		"sell_price": SELL_PRICE,
 		"starting": STARTING_RESOURCES,

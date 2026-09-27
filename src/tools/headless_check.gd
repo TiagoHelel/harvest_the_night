@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 5
+const GROUPS := 6
 
 var passed := 0
 var failed := 0
@@ -67,6 +67,7 @@ func _run() -> void:
 	_task_0005_guards()
 	_task_0006_phases()
 	_task_0007_resources()
+	_task_0008_farm()
 
 
 func _finish() -> void:
@@ -452,5 +453,93 @@ func _task_0007_resources() -> void:
 		"adding an unknown resource does not create it")
 	expect(not Resources.spend(state, &"unobtainium", 1),
 		"and it cannot be spent")
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## 0008 - the farm: one grid, both realities, and a place() that refuses.
+func _task_0008_farm() -> void:
+	var state := State.create(31)
+
+	expect(Grid.CELLS == 40 * 18, "the farm is 40x18", str(Grid.CELLS))
+	expect((state["terrain"] as PackedByteArray).size() == Grid.CELLS,
+		"every cell has terrain")
+
+	# Index and cell are each other's inverse, at both corners and in between.
+	for idx in [0, 1, 39, 40, 359, Grid.CELLS - 1]:
+		expect(Grid.index(Grid.cell(idx)) == idx,
+			"index and cell round-trip at %d" % idx)
+	expect(Grid.index(Vector2i(-1, 0)) == -1, "off the farm is -1")
+	expect(Grid.index(Vector2i(0, -1)) == -1, "off the top is -1 too")
+	expect(Grid.index(Vector2i(Grid.WIDTH, 0)) == -1,
+		"and one past the right edge does not wrap onto the next row")
+
+	# The map made the farm the design document asks for.
+	expect(Farm.cells_with(state, &"house").size() == 9,
+		"the farmhouse is three by three",
+		str(Farm.cells_with(state, &"house").size()))
+	expect(Farm.cells_with(state, &"tree").size() >= 40, "there is a wood",
+		str(Farm.cells_with(state, &"tree").size()))
+	expect(Farm.cells_with(state, &"ore").size() == 6, "six ore nodes",
+		str(Farm.cells_with(state, &"ore").size()))
+	expect(Farm.cells_of(state, Farm.Terrain.SOIL).size() == 48, "a field",
+		str(Farm.cells_of(state, Farm.Terrain.SOIL).size()))
+	expect(Farm.cells_of(state, Farm.Terrain.WATER).size() > 60, "a pond",
+		str(Farm.cells_of(state, Farm.Terrain.WATER).size()))
+	expect(Farm.cells_with(state, &"shop").size() == 2, "a shop stall")
+
+	# Water and rock refuse to be built on, and say why.
+	var pond: Vector2i = Farm.cells_of(state, Farm.Terrain.WATER)[0]
+	expect(not Farm.buildable(state, pond), "nothing is built in the pond")
+	expect(Farm.why_not_buildable(state, pond) == "in the water",
+		"and it says why", Farm.why_not_buildable(state, pond))
+	expect(not Farm.walkable(state, pond), "and nobody walks into it")
+
+	var cliff: Vector2i = Farm.cells_of(state, Farm.Terrain.ROCK)[0]
+	expect(not Farm.buildable(state, cliff), "nor on the rock face")
+
+	# **The house is never buildable and never removable.**
+	var house: Vector2i = Farm.cells_with(state, &"house")[0]
+	expect(not Farm.buildable(state, house), "nothing is built on the house")
+	expect(Farm.why_not_buildable(state, house) == "on the house",
+		"and it says so", Farm.why_not_buildable(state, house))
+	expect(not Farm.remove(state, house), "and the house cannot be removed")
+	expect(Farm.cells_with(state, &"house").size() == 9, "it is still there")
+
+	# **Place then remove leaves the farm byte-identical.** The done-when of
+	# this task, and the property a build-then-sell loop depends on.
+	var spot := Vector2i(12, 8)
+	expect(Farm.buildable(state, spot), "an empty patch of grass is buildable")
+	var before := State.hash_of(state)
+	expect(Farm.place(state, spot, {"id": &"gun_tower", "hp": 60}),
+		"a tower goes down")
+	expect(State.hash_of(state) != before, "which changed the farm")
+	expect(not Farm.buildable(state, spot), "and the cell is taken now")
+	expect(not Farm.walkable(state, spot), "and blocks the way")
+	expect(Farm.occupant(state, spot)["id"] == &"gun_tower",
+		"occupant() says what is there")
+	expect(not Farm.place(state, spot, {"id": &"wall"}),
+		"a second thing cannot stack on it")
+	expect(Farm.remove(state, spot), "and it comes back up")
+	expect(State.hash_of(state) == before,
+		"leaving the farm byte-identical to before it was placed")
+
+	# A placed occupant is copied in, so the caller's dictionary cannot be a
+	# back door into the state afterwards.
+	var shared := {"id": &"wall", "hp": 120}
+	Farm.place(state, spot, shared)
+	shared["hp"] = 9999
+	expect(int(Farm.occupant(state, spot)["hp"]) == 120,
+		"place() copies rather than aliasing",
+		str(Farm.occupant(state, spot)["hp"]))
+	Farm.remove(state, spot)
+
+	# One grid, both realities: the night sees exactly what the day built.
+	Farm.place(state, Vector2i(13, 8), {"id": &"wall"})
+	Phases.begin_preparation(state)
+	Sim.advance(state, GameData.PREPARATION_TICKS)
+	expect(int(state["phase"]) == Phases.NIGHT, "night fell")
+	expect(Farm.occupant(state, Vector2i(13, 8))["id"] == &"wall",
+		"and the wall built by day is in the same cell by night")
 
 	_completed += 1     # last line: an abandoned group never gets here

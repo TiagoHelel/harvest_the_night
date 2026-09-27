@@ -358,3 +358,49 @@ Notes:
   the hash would otherwise start depending on the order a cost literal happened
   to be typed in.
 - An unknown resource id is refused and does not quietly create itself.
+
+## 0008 - The farm grid - done 2026-09-27
+
+What changed: the farm exists. `GameData.FARM_MAP` is one 40x18 ASCII picture
+of the whole world; `Grid` is the cell arithmetic and `Farm` is what is made of
+what and what is standing on it. `buildable()` and `occupant()` are the only
+way anything asks.
+
+Files: src/core/farm.gd, src/core/grid.gd, src/core/game_data.gd,
+src/core/state.gd, src/tools/headless_check.gd
+
+Verify: PASS - 7 passed, 2 skipped, 9s. **160 asserts, 0 failed** (123 before).
+
+**Both guards moved deliberately.** Sim 673656594 -> 3413240837: the state
+gained `terrain` and `occupants`. Data 1015548053 -> 2522481920: the tables
+gained `FARM_MAP` and its legend.
+
+Notes:
+
+- **One grid, both realities**, which is `design.md` pillars 1 and 2 made
+  structural. There is one terrain array and one occupant table; the day screen
+  and the night screen will be two views of them. Asserted end to end: a wall
+  placed by day is in the same cell after `begin_preparation` and a night
+  falling. A second copy for the night would be a second thing to keep in step
+  and it would have drifted inside a week.
+- **Regions are the map, not coordinates written down twice.** `cells_with()`
+  and `cells_of()` derive the field, the pond, the wood, the rock face and the
+  house from the characters. Moving the pond means editing the pond.
+- **Place-then-remove leaves the farm byte-identical**, the done-when of this
+  task, checked by hashing before and after. The build-then-sell loop of task
+  0023 depends on it, and so does anything that previews a placement.
+- `place()` deep-copies what it is handed, so a caller holding on to the
+  dictionary it passed cannot reach back into the state afterwards. Asserted.
+- The house is a fixture: not buildable on, not removable, and
+  `why_not_buildable()` says which of the reasons applies so the red ghost of
+  task 0023 can explain itself.
+- **I rendered the map and looked at it**, which found something the asserts
+  could not: the trees were a decorative border rather than the "area de
+  arvores" `design.md` asks for, so there was nowhere to go for wood. Added a
+  grove on the open right-hand side - 60 trees became 76.
+- `Grid.STEPS` is a written-down order, not an incidental one. A flow field
+  breaks ties between equally short paths by whichever neighbour it saw first,
+  so that order decides which way a zombie walks around a wall and has to be
+  the same on every machine. Task 0025 depends on it.
+- Terrain is a `PackedByteArray`: 720 bytes, deep-copied by `State.copy()` and
+  folded by the hash as one string rather than 720.
