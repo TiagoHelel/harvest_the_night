@@ -435,6 +435,11 @@ func _refresh_actors() -> void:
 		var one := Entities.get_one(_state, int(ids[i]))
 		var sprite: Sprite2D = _actor_sprites[i]
 		sprite.texture = _texture_for(StringName(one["kind"]))
+		# **A hit reads at a glance.** The rules say how long something stays
+		# lit; the view only turns that into white. Task 0088 adds the shake
+		# and the numbers on top.
+		sprite.modulate = Color(2.4, 2.2, 2.2) if int(one.get("hurt", 0)) > 0 \
+			else Color(1, 1, 1)
 		sprite.position = Vector2(
 			floorf(float(one["pos"][0]) * scale_factor
 				- float(GameData.TILE_SIZE) * 0.5),

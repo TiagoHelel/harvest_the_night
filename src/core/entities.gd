@@ -82,17 +82,15 @@ static func cell_of(state: Dictionary, id: int) -> Vector2i:
 	return Vector2i(pos.x / Player.SUBTILE, pos.y / Player.SUBTILE)
 
 
-## Take hit points off. Returns what was actually dealt, which is never more
-## than the thing had left - task 0026 needs that to stop wasting overkill.
-static func damage(state: Dictionary, id: int, amount: int) -> int:
+## **Damage does not live here.** `Combat.hit()` is the one place armour, the
+## minimum hit and the kill are decided, and a second way in would be a second
+## set of rules that agreed with the first until somebody changed one of them.
+##
+## This is the raw write `Combat` uses, and nothing else should call it.
+static func set_hp(state: Dictionary, id: int, hp: int) -> void:
 	var one := get_one(state, id)
-	if one.is_empty() or amount <= 0:
-		return 0
-	var dealt := mini(amount, int(one["hp"]))
-	one["hp"] = int(one["hp"]) - dealt
-	if int(one["hp"]) <= 0:
-		remove(state, id)
-	return dealt
+	if not one.is_empty():
+		one["hp"] = hp
 
 
 static func remove(state: Dictionary, id: int) -> void:

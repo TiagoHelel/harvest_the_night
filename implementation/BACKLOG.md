@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`######..................`  **25 / 108 done**
+`######..................`  **26 / 108 done**
 
-0 doing / 83 todo / 0 blocked across 9 phases.
+0 doing / 82 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0026 - The tower kills the zombie**. The whole of what is left is
+First up: **0027 - Three waves, a result screen, and back to the farm**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,24 +26,26 @@ which rewrites this file for you.
 
 ## What is open
 
-83 task(s) left, the ready ones first, then what they
+82 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
-### 0026 - The tower kills the zombie
+### 0027 - Three waves, a result screen, and back to the farm
 
-Ready to pick up.  Likely files: `src/core/combat.gd`.
+Ready to pick up.  Likely files: `src/core/waves.gd, src/ui/result_screen.gd`.
 
-Close the fight: projectiles land, damage is dealt, zombies die and drop what the night pays.
+**The MVP checkpoint.** Three waves of basic zombies, a night that ends, a payout, and a day 2 that is better than day 1. If this is not fun, nothing after it will be.
 
-- Damage resolution in one place, so every later tower and enemy goes through it
-- Overkill is not wasted on a second target; a dead target stops being shot at the same tick
-- Death removes the entity cleanly with no dangling reference in the state
-- Hit, death and the projectile are visible - a kill should read at a glance
-- Entity ids are stable and ordered so the hash cannot depend on spawn order
+- Three waves with a gap between them, all from data
+- The night ends when the last zombie of the last wave is gone, or when the house falls
+- A result screen showing what survived, what was killed and what it paid
+- Surviving pays money and resources; losing costs part of the stock, and both numbers are levers
+- Confirming the result returns to DAY with the day counter moved on
 
-  - done when: A tower clears a lane of ten zombies with the expected number of shots
-  - done when: `headless_check` runs a scripted fight and asserts the survivor count
+  - done when: A human can play: gather, craft, build, fight, get paid, repeat - without the console open
+  - done when: The whole first cycle takes about three minutes
+  - done when: `headless_check` plays all three waves and asserts the payout
+  - done when: Say in the journal whether it was fun, honestly, because that is the question this whole phase exists to answer
 
 ### 0028 - Corn and carrot
 
@@ -227,23 +229,6 @@ When it breaks on someone else's machine, get enough to fix it without them.
   - done when: A deliberate crash produces a report with the seed and the tick
   - done when: The run is still loadable afterwards
 
-### 0027 - Three waves, a result screen, and back to the farm
-
-Waits on 0026.  Likely files: `src/core/waves.gd, src/ui/result_screen.gd`.
-
-**The MVP checkpoint.** Three waves of basic zombies, a night that ends, a payout, and a day 2 that is better than day 1. If this is not fun, nothing after it will be.
-
-- Three waves with a gap between them, all from data
-- The night ends when the last zombie of the last wave is gone, or when the house falls
-- A result screen showing what survived, what was killed and what it paid
-- Surviving pays money and resources; losing costs part of the stock, and both numbers are levers
-- Confirming the result returns to DAY with the day counter moved on
-
-  - done when: A human can play: gather, craft, build, fight, get paid, repeat - without the console open
-  - done when: The whole first cycle takes about three minutes
-  - done when: `headless_check` plays all three waves and asserts the payout
-  - done when: Say in the journal whether it was fun, honestly, because that is the question this whole phase exists to answer
-
 ### 0029 - Growth stages and watering
 
 Waits on 0028.  Likely files: `src/core/farming.gd`.
@@ -407,6 +392,67 @@ Make the flow field earn its keep: cost, not just blocked, so zombies prefer the
   - done when: The same seed and the same maze give the same arrival order
   - done when: A headless test asserts no zombie is in the same pair of cells for 20 ticks
 
+### 0053 - Repair during the night
+
+Waits on 0046, 0027.  Likely files: `src/core/building.gd, src/ui/night_hud.gd`.
+
+A reason to be present at night: spend food and wood to put a wall back up while the wave is still coming.
+
+- Repair costs food or wood per hit point restored, and the rate is a lever
+- It takes time and the player must be near the structure
+- A destroyed structure cannot be repaired, only rebuilt
+- The house itself can be repaired, at a worse rate
+- Repairing is interruptible
+
+  - done when: Repairing a wall mid-wave measurably changes whether it holds
+  - done when: `input_check` repairs something
+
+### 0054 - The player's ability
+
+Waits on 0027.  Likely files: `src/core/ability.gd, src/ui/night_hud.gd`.
+
+One button that lets the player change a night they are losing, without turning the game into an action game.
+
+- One ability with a cooldown in ticks: a flare that slows and damages everything in an area
+- The cooldown is long enough that using it is a decision
+- It is resolved on the tick like everything else and is in the determinism hash
+- It reads clearly on screen: the player should see it working
+- Damage, radius, slow and cooldown are levers
+
+  - done when: It turns one losing wave per night, not every wave
+  - done when: Two uses in the same second are impossible
+
+### 0055 - Double speed and skipping the night
+
+Waits on 0027.  Likely files: `src/ui/night_hud.gd, src/core/sim.gd`.
+
+The semi-idle promise: if the defence is clearly going to hold, let the player say so and move on.
+
+- 1x, 2x and 4x, implemented as ticks per frame - never as a changed tick rate
+- Skip to the end simulates the rest of the night as fast as it can and shows the result
+- A skipped night and a watched night give an identical outcome from the same state - this is the test of the whole tick design
+- Speed is remembered across nights
+- Skipping is refused while the house is under a lever's worth of hit points, because that night is worth watching
+
+  - done when: Watched and skipped nights from one seed produce the same hash
+  - done when: 4x does not drop frames on a full board
+  - done when: `headless_check` runs a night both ways and compares
+
+### 0056 - The night HUD
+
+Waits on 0027.  Likely files: `src/ui/night_hud.gd`.
+
+Section 14 of the design document: which night, which wave, how the house is doing, and the three buttons.
+
+- Night number, wave counter, house hit point bar, ammunition and energy
+- Repair, ability and speed as the three controls, exactly as the design document lays them out
+- An incoming wave is announced before it arrives
+- The house bar turning dangerous is impossible to miss
+- It replaces the day HUD on the phase change, sharing no state
+
+  - done when: Every number on it is readable at 480x270 scaled up
+  - done when: `input_check` presses all three controls
+
 ### 0072 - The farm tileset
 
 Waits on 0071.  Likely files: `tools/gen_sprites.py, sprites/terrain/`.
@@ -499,7 +545,7 @@ Chop, mine, till, plant, water, the fishing splash and the bite, the craft, the 
 
 ### 0085 - The sounds of the night
 
-Waits on 0083, 0026.  Likely files: `tools/gen_sfx.py, assets/sfx/`.
+Waits on 0083.  Likely files: `tools/gen_sfx.py, assets/sfx/`.
 
 The other half: shots, the flamethrower, the mortar, impacts, the groan, the death, the wall breaking, the house being hit.
 
@@ -612,67 +658,6 @@ The enemy that goes after what you built: it targets structures first and the ho
 
   - done when: A wave of breakers dismantles an unprotected tower line
   - done when: With the towers covered, they die before they reach one
-
-### 0053 - Repair during the night
-
-Waits on 0046, 0027.  Likely files: `src/core/building.gd, src/ui/night_hud.gd`.
-
-A reason to be present at night: spend food and wood to put a wall back up while the wave is still coming.
-
-- Repair costs food or wood per hit point restored, and the rate is a lever
-- It takes time and the player must be near the structure
-- A destroyed structure cannot be repaired, only rebuilt
-- The house itself can be repaired, at a worse rate
-- Repairing is interruptible
-
-  - done when: Repairing a wall mid-wave measurably changes whether it holds
-  - done when: `input_check` repairs something
-
-### 0054 - The player's ability
-
-Waits on 0027.  Likely files: `src/core/ability.gd, src/ui/night_hud.gd`.
-
-One button that lets the player change a night they are losing, without turning the game into an action game.
-
-- One ability with a cooldown in ticks: a flare that slows and damages everything in an area
-- The cooldown is long enough that using it is a decision
-- It is resolved on the tick like everything else and is in the determinism hash
-- It reads clearly on screen: the player should see it working
-- Damage, radius, slow and cooldown are levers
-
-  - done when: It turns one losing wave per night, not every wave
-  - done when: Two uses in the same second are impossible
-
-### 0055 - Double speed and skipping the night
-
-Waits on 0027.  Likely files: `src/ui/night_hud.gd, src/core/sim.gd`.
-
-The semi-idle promise: if the defence is clearly going to hold, let the player say so and move on.
-
-- 1x, 2x and 4x, implemented as ticks per frame - never as a changed tick rate
-- Skip to the end simulates the rest of the night as fast as it can and shows the result
-- A skipped night and a watched night give an identical outcome from the same state - this is the test of the whole tick design
-- Speed is remembered across nights
-- Skipping is refused while the house is under a lever's worth of hit points, because that night is worth watching
-
-  - done when: Watched and skipped nights from one seed produce the same hash
-  - done when: 4x does not drop frames on a full board
-  - done when: `headless_check` runs a night both ways and compares
-
-### 0056 - The night HUD
-
-Waits on 0027.  Likely files: `src/ui/night_hud.gd`.
-
-Section 14 of the design document: which night, which wave, how the house is doing, and the three buttons.
-
-- Night number, wave counter, house hit point bar, ammunition and energy
-- Repair, ability and speed as the three controls, exactly as the design document lays them out
-- An incoming wave is announced before it arrives
-- The house bar turning dangerous is impossible to miss
-- It replaces the day HUD on the phase change, sharing no state
-
-  - done when: Every number on it is readable at 480x270 scaled up
-  - done when: `input_check` presses all three controls
 
 ### 0078 - The reality transition
 
@@ -992,7 +977,7 @@ Use the autoplayer: find the nights that are trivial, the ones that are impossib
 
 ### 0088 - Juice: shake, hit stop, damage numbers
 
-Waits on 0026, 0077.  Likely files: `src/ui/juice.gd`.
+Waits on 0077.  Likely files: `src/ui/juice.gd`.
 
 Make a kill feel like a kill. Small, cheap, and entirely in the view layer.
 
@@ -1289,7 +1274,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0011** [input_check harness](prompts/0011-input-check.md)
 - [x] **0012** [Debug overlay](prompts/0012-debug-overlay.md)
 
-## 1 - The first playable build  (13/15)
+## 1 - The first playable build  (14/15)
 
 - [x] **0013** [The world renders](prompts/0013-world-render.md)
 - [x] **0014** [Sprites generated from ASCII maps](prompts/0014-sprite-pipeline.md)
@@ -1304,8 +1289,8 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0023** [Build mode](prompts/0023-build-mode.md)
 - [x] **0024** [The shooting tower](prompts/0024-tower-gun.md)
 - [x] **0025** [Zombies walk to the house](prompts/0025-zombies-walk.md)
-- [ ] **0026** [The tower kills the zombie](prompts/0026-combat.md)
-- [ ] **0027** [Three waves, a result screen, and back to the farm](prompts/0027-first-loop.md) - needs 0026
+- [x] **0026** [The tower kills the zombie](prompts/0026-combat.md)
+- [ ] **0027** [Three waves, a result screen, and back to the farm](prompts/0027-first-loop.md)
 
 ## 2 - The full day  (0/14)
 
@@ -1378,10 +1363,10 @@ The list you run before publishing, written once, so nothing is remembered at th
 
 - [ ] **0083** [Audio buses and a sound manager](prompts/0083-audio-buses.md)
 - [ ] **0084** [The sounds of the day](prompts/0084-sfx-day.md) - needs 0083
-- [ ] **0085** [The sounds of the night](prompts/0085-sfx-night.md) - needs 0083, 0026
+- [ ] **0085** [The sounds of the night](prompts/0085-sfx-night.md) - needs 0083
 - [ ] **0086** [Two pieces of music](prompts/0086-music.md) - needs 0083
 - [ ] **0087** [Ambience](prompts/0087-ambience.md) - needs 0084, 0085
-- [ ] **0088** [Juice: shake, hit stop, damage numbers](prompts/0088-juice.md) - needs 0026, 0077
+- [ ] **0088** [Juice: shake, hit stop, damage numbers](prompts/0088-juice.md) - needs 0077
 - [ ] **0089** [Tooltips](prompts/0089-tooltips.md) - needs 0081
 - [ ] **0090** [The log panel](prompts/0090-log-panel.md) - needs 0081, 0061
 

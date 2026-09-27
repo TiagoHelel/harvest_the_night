@@ -123,6 +123,12 @@ static func _acquire(state: Dictionary, from: Vector2i, entry: Dictionary) -> in
 		var distance := Grid.chebyshev(from, cell)
 		if distance > reach or distance < minimum:
 			continue
+		# **Not what is already accounted for.** Without this a line of towers
+		# all fires at the leader, most of those shots land on a corpse, and
+		# the wave behind walks past untouched - which looks exactly like the
+		# towers being too weak, and is not.
+		if not Combat.worth_shooting(state, id):
+			continue
 		var threat := Grid.manhattan(cell, house)
 		# Nearest the house wins; the lower id breaks a tie. `Entities.ids()`
 		# is sorted, so the first one found at a given distance is already the
@@ -188,7 +194,8 @@ static func _advance_projectiles(state: Dictionary) -> void:
 		var distance := absi(delta.x) + absi(delta.y)
 
 		if distance <= step:
-			Entities.damage(state, target, int(shot["damage"]))
+			Combat.hit(state, target, int(shot["damage"]),
+				StringName(shot["type"]))
 			landed.append(shot)
 			continue
 

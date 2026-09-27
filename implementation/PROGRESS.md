@@ -1189,3 +1189,46 @@ Notes:
 - The farm-identity assert from task 0008 was asking about the whole state,
   which now carries a counter of how many times the farm changed. It asks about
   the ground and what is standing on it instead - which is what it meant.
+
+## 0026 - The tower kills the zombie - done 2026-09-27
+
+What changed: damage happens in one place. `Combat` owns armour, the minimum
+hit, the kill and the hurt flash, and towers stop committing shots to something
+that is already dead.
+
+Files: src/core/combat.gd, src/core/entities.gd, src/core/towers.gd,
+src/core/game_data.gd, src/core/sim.gd, src/core/state.gd, src/core/enemies.gd,
+src/ui/world_view.gd, src/tools/headless_check.gd
+
+Verify: PASS - 10 passed, 1 skipped, 42s. **492 asserts, 0 failed** (470
+before). **Sim hash 1177574569 -> 3224086426**, **data hash 3315067798 ->
+4216175348**.
+
+Notes:
+
+- **Armour never takes all of a hit.** Flat reduction is what makes many small
+  hits worse than a few big ones, which is what `design.md` section 9 asks the
+  tank for - but reduction that could reach zero makes a tank **immune** to the
+  auto-crossbow rather than bad against it, and an immune enemy in a tower
+  defence is not a hard fight, it is a night nobody can end. `MINIMUM_HIT` is 1.
+- **Nothing commits to a corpse.** A target with enough already in the air to
+  kill it stops being a target. Without it, a line of towers all fires at the
+  leader, most of those shots land on a body and the wave behind walks past
+  untouched - which looks exactly like the towers being too weak. Asserted with
+  three towers and a leader one shot from dying.
+- `Entities.damage()` is gone; `Combat.hit()` is the only way in, and it writes
+  through the one `set_hp`. A second way in would be a second set of rules that
+  agreed with the first until somebody changed one of them.
+- **A test that measured the weather.** "Fifty zombies cost under a millisecond
+  a tick" passed on its own and failed under `verify.py`, because `verify`
+  leaves the machine busier. It now asserts the **invariant** - two hundred
+  ticks of fifty zombies rebuild the flow field no times at all - which is true
+  on any machine and catches the algorithmic regression that the microseconds
+  were standing in for. The number is still printed, for information. Task 0102
+  owns the wall-clock budget, and it should: a correctness suite that fails when
+  the machine is busy is a suite people learn to re-run.
+- **A balance finding worth having before task 0060 writes ten nights:** one
+  gun tower against seven walkers kills five and lets two through. The check
+  prints it and asserts only that all seven are accounted for - a lane of
+  walking zombies is a test of the balance, not of the arithmetic, so the
+  shots-per-kill count is measured against a penned group instead.

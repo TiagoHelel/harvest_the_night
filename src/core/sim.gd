@@ -92,6 +92,7 @@ static func _tick_night(state: Dictionary) -> void:
 	# tested (0027).
 	Enemies.tick(state)
 	Towers.tick(state)
+	Combat.tick(state)
 
 
 ## Advance by `ticks`, which is how every caller outside a frame loop uses it:

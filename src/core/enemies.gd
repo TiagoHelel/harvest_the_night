@@ -34,11 +34,6 @@ static func initial() -> Dictionary:
 ##
 ## `where` is an index into `GameData.SPAWNS`, which is what a wave table names.
 static func spawn(state: Dictionary, kind: StringName, where: int) -> int:
-	# **The field first.** Spawning asks whether a cell can reach the house,
-	# and the field is only rebuilt when something needs it - so the first
-	# spawn of a night was asking a field that had never been built and being
-	# told nowhere was reachable. Every zombie of wave one vanished silently.
-	Pathing.refresh(state)
 	var options := spawn_cells(state, where)
 	if options.is_empty():
 		return 0
@@ -50,6 +45,15 @@ static func spawn(state: Dictionary, kind: StringName, where: int) -> int:
 ## The cells a given spawn point can use: the ones in its region that something
 ## can actually stand on and get to the house from.
 static func spawn_cells(state: Dictionary, where: int) -> Array:
+	# **The field first.** This asks whether a cell can reach the house, and
+	# the field is only rebuilt when something needs it - so the first spawn of
+	# a night was asking a field that had never been built, being told nowhere
+	# was reachable, and every zombie of wave one vanished silently.
+	#
+	# The refresh belongs here rather than in `spawn()`, because this is where
+	# the question is asked and anything else that asks it wants the same
+	# answer.
+	Pathing.refresh(state)
 	var regions: Array = GameData.SPAWNS
 	if where < 0 or where >= regions.size():
 		return []

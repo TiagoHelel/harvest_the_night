@@ -451,6 +451,12 @@ const ABILITY: Dictionary = {
 	"cooldown_ticks": 45 * SECONDS,     # LEVER: ticks, 20-90 seconds worth
 }
 
+## How long something stays lit after it is hit.
+##
+## Long enough to read at 30 ticks a second, short enough that a crowd being
+## shot does not become a wall of white.
+const HURT_TICKS := 5                   # LEVER: ticks, 2-12
+
 ## Speeds the night may be watched at. Ticks per tick, never a changed rate.
 const SPEEDS: Array = [1, 2, 4]
 
@@ -859,6 +865,7 @@ static func digest() -> int:
 		"repair": [REPAIR_COST_PER_HP, REPAIR_TICKS_PER_HP,
 			HOUSE_REPAIR_PENALTY],
 		"ability": ABILITY,
+		"hurt": [HURT_TICKS],
 		"speeds": SPEEDS,
 		"enemies": ENEMIES,
 		"nights": NIGHTS,

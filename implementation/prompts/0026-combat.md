@@ -1,7 +1,7 @@
 # 0026 - The tower kills the zombie
 
 - **Phase:** 1 - The first playable build
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0024, 0025
 - **Likely files:** src/core/combat.gd
 
