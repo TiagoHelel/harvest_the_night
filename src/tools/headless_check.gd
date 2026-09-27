@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 41
+const GROUPS := 42
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -105,6 +105,7 @@ func _run() -> void:
 	_task_0046_walls()
 	_task_0047_barricades()
 	_task_0048_traps()
+	_task_0049_pathing()
 
 
 func _finish() -> void:
@@ -6038,9 +6039,19 @@ func _task_0046_walls() -> void:
 		"which bumps the version the field watches",
 		str(farm["grid_version"]))
 	Pathing.refresh(farm)
-	expect(Pathing.distance(farm, lane) == Pathing.UNREACHABLE,
-		"and the walled cell is off the map as far as walking goes",
-		str(Pathing.distance(farm, lane)))
+	# **Task 0049 changed what this cell is.** It used to be off the map -
+	# `UNREACHABLE`, a hole nothing could enter. A wall is now priced instead,
+	# so the cell is still there and stepping into it costs what breaking the
+	# wall is worth. The claim the assert makes is the same one: after a wall
+	# goes in, that cell is not somewhere anybody walks for free.
+	var ground := Farm.cost_of_terrain(Farm.terrain_at(farm, lane))
+	expect(Pathing.entry_cost(farm, lane) == ground + int(wall["path_cost"]),
+		"and stepping into the walled cell costs what the wall is worth",
+		"%d against %d" % [Pathing.entry_cost(farm, lane),
+			ground + int(wall["path_cost"])])
+	expect(Pathing.entry_cost(farm, lane) > ground * 8,
+		"which is many times what open ground costs",
+		str(Pathing.entry_cost(farm, lane)))
 
 	# **Walling a lane reroutes the wave.** The done-when: the same spawn, the
 	# same seed, a measurably different first step.
@@ -6091,8 +6102,16 @@ func _task_0046_walls() -> void:
 	expect(boxed["walls"] > 0, "a zombie is walled in on every side",
 		str(boxed["walls"]))
 	Pathing.refresh(sealed)
-	expect(Pathing.step_from(sealed, boxed["cell"]) == boxed["cell"],
-		"with nowhere at all to walk")
+	# **Also changed by task 0049.** "Nowhere at all to walk" was true while a
+	# wall was a hole in the map; now the cheapest way out of the pocket is
+	# through one of the walls, and that is what the field hands back. The
+	# outcome asserted underneath - it eats its way out - is unchanged, and it
+	# is now reached by the zombie being sent *into* the wall rather than by it
+	# giving up and biting whatever is nearest.
+	var way_out := Pathing.step_from(sealed, boxed["cell"])
+	expect(way_out != boxed["cell"] and Pathing.breaks_through(sealed, way_out),
+		"with no way out that is not through a wall",
+		str(way_out))
 
 	var standing := Farm.cells_with(sealed, &"wall").size()
 	var hp_before := _wall_hp_around(sealed, boxed["cell"])
@@ -6346,25 +6365,31 @@ func _task_0047_barricades() -> void:
 	# **Placing one mid-wave buys the seconds the lever claims.** The other
 	# done-when - and it took three goes to measure honestly.
 	#
-	# A barricade dropped on open ground buys **two ticks**. Not a bug: a
-	# structure is currently a yes or a no, so the field simply routes around
-	# it, and three across a wide approach came out at twenty-seven steps
-	# against twenty-seven - the same thing task 0046 found out about walls.
-	# `path_cost`, which every blocking structure declares and nothing reads,
-	# is what will make an obstacle cost something without sealing anything,
-	# and it belongs to task 0049.
+	# A barricade dropped on open ground used to buy **two ticks**, because a
+	# structure was a yes or a no and the field simply routed around it: three
+	# across a wide approach came out at twenty-seven steps against
+	# twenty-seven. `path_cost` was declared on every blocking structure and
+	# read by nothing, and this comment said it belonged to task 0049.
 	#
-	# What a barricade buys **today** is the time it takes to eat, and that is
-	# the lever: hit points over the biter's damage, one bite per tile of
-	# walking. That is what this measures.
+	# It does now - but **one barricade on open ground is still nearly free**,
+	# and claiming otherwise would be picking a number again. On a four-way
+	# grid every way between two cells not in a straight line is the same
+	# length, so stepping around a single obstacle costs nothing at all. What
+	# changed is that the cell has a price, and the price is what makes a
+	# *line* of them expensive - which task 0049's own group measures.
 	var open_ground := _time_to_the_house(2902, false)
 	var detoured := _time_to_the_house(2902, true)
-	print("  dropped in the open, a barricade costs them %d ticks - it is "
-		% (detoured - open_ground) + "walked round, which is task 0049's job "
-		+ "to make expensive")
+	var priced := _barricade_price(2902)
+	print("  dropped in the way, one barricade costs them %d ticks - the ways "
+		% (detoured - open_ground)
+		+ "round it are the same length - but stepping into it costs %d"
+		% priced)
 	expect(detoured >= open_ground,
 		"a barricade in the way never helps them",
 		"%d against %d" % [detoured, open_ground])
+	expect(priced == 1 + int(bar["path_cost"]),
+		"and it is not a cell anybody walks through for free any more",
+		str(priced))
 
 	var walker: Dictionary = GameData.ENEMIES[&"walker"]
 	var bites := (int(bar["hp"]) + int(walker["damage"]) - 1) 		/ int(walker["damage"])
@@ -6431,10 +6456,26 @@ func _armed_night(seed_value: int) -> Dictionary:
 ## the cell the zombie is about to step into, and that zombie either goes
 ## round it or eats it. Both cost time, and the time is what this measures.
 ##
-## The lever that would make an obstacle cost something *without* being in the
-## way - `path_cost`, which every blocking structure declares and nothing
-## reads yet - belongs to task 0049: "a zombie prefers the open lane and breaks
-## through when it must". Until then a structure is a yes or a no.
+## What stepping onto the cell a barricade was dropped on costs.
+func _barricade_price(seed_value: int) -> int:
+	var state := _armed_night(seed_value)
+	Pathing.refresh(state)
+	var spawn: Vector2i = Enemies.spawn_cells(state, 0)[0]
+	var at := spawn
+	for _step in 3:
+		var next := Pathing.step_from(state, at)
+		if next == at:
+			break
+		at = next
+	Building.place(state, &"barricade", at)
+	Pathing.refresh(state)
+	return Pathing.entry_cost(state, at)
+
+
+## Task 0049 made `path_cost` mean something, so an obstacle now costs without
+## having to seal anything - but one of them on open ground is still walked
+## around for nothing, because on a four-way grid the ways round are the same
+## length as the way through.
 func _time_to_the_house(seed_value: int, blocked: bool) -> int:
 	var state := _armed_night(seed_value)
 	Pathing.refresh(state)
@@ -6718,3 +6759,379 @@ func _mine_blast(seed_value: int, entry: Dictionary) -> Array:
 	for id in who:
 		took.append(500 - int(Entities.get_one(state, int(id)).get("hp", 0)))
 	return took
+
+
+## 0049 - the field costs rather than refuses, so a wall delays instead of
+## diverting, and nothing can ever walk in a circle.
+func _task_0049_pathing() -> void:
+	var wall: Dictionary = GameData.DEFENCES[&"wall"]
+
+	# **A cost per terrain, and the table says which.**
+	expect(GameData.TERRAIN_COST.size() == Farm.Terrain.size(),
+		"every terrain has a cost and no cost has a spare terrain",
+		"%d costs against %d terrains"
+			% [GameData.TERRAIN_COST.size(), Farm.Terrain.size()])
+	expect(Farm.cost_of_terrain(Farm.Terrain.GRASS) == 1,
+		"ordinary ground costs one, which is the unit everything else is in")
+	for t in Farm.UNWALKABLE:
+		expect(Farm.cost_of_terrain(int(t)) == 0,
+			"and nothing crosses water or rock at any price")
+	expect(Farm.cost_of_terrain(Farm.Terrain.SOIL)
+		> Farm.cost_of_terrain(Farm.Terrain.PATH),
+		"a tilled bed is heavier going than the lane beside it - which is what "
+		+ "makes them prefer the lane")
+	expect(GameData.check_pathing(GameData.TERRAIN_COST, GameData.DEFENCES,
+		GameData.BUILDINGS).is_empty(),
+		"the shipped tables pass their own check",
+		str(GameData.check_pathing(GameData.TERRAIN_COST, GameData.DEFENCES,
+			GameData.BUILDINGS)))
+	var too_wide: Dictionary = GameData.DEFENCES.duplicate(true)
+	(too_wide[&"wall"] as Dictionary)["path_cost"] = GameData.WIDEST_STEP + 1
+	expect(not GameData.check_pathing(GameData.TERRAIN_COST, too_wide,
+		GameData.BUILDINGS).is_empty(),
+		"a step wider than the wheel is refused - a bucket short does not fail "
+		+ "loudly, it routes wrongly")
+	var unbreakable: Dictionary = GameData.DEFENCES.duplicate(true)
+	(unbreakable[&"wall"] as Dictionary)["hp"] = 0
+	expect(not GameData.check_pathing(GameData.TERRAIN_COST, unbreakable,
+		GameData.BUILDINGS).is_empty(),
+		"and so is a way through a thing that cannot be broken")
+
+	# **A cost per structure, and only a barrier has one.** The towers and the
+	# workshops are holes in the map; the walls are doors with a price on them.
+	var priced := _fresh_night(3100)
+	var ground := 1
+	for id in GameData.sorted_names(GameData.DEFENCES.keys()):
+		var entry: Dictionary = GameData.DEFENCES[id]
+		var spot := _room_for(priced, Vector2i(1, 1))
+		Farm.place(priced, spot, {"id": id, "hp": maxi(int(entry.get("hp", 1)), 1)})
+		Pathing.refresh(priced)
+		var cost := Pathing.entry_cost(priced, spot)
+		if Traps.is_trap(id):
+			expect(cost == ground, "a %s costs nothing to step onto" % id,
+				str(cost))
+		elif entry.has("path_cost"):
+			expect(cost == ground + int(entry["path_cost"]),
+				"a %s costs the ground plus what breaking it is worth" % id,
+				str(cost))
+		else:
+			expect(cost == Pathing.IMPASSABLE,
+				"and there is no way through a %s at all: they go round it" % id,
+				str(cost))
+		Farm.remove(priced, spot)
+
+	# **A wall is a delay, not a diversion.** The requirement: when the way
+	# round is dearer than the way through, they come through.
+	var short_way := _walled_lane(3101, true)
+	var long_way := _walled_lane(3101, false)
+	print("  a gap in the line: %s. Sealed: %s"
+		% [str(short_way), str(long_way)])
+	expect(short_way["through"] == 0,
+		"with a gap in the line they take the gap and break nothing",
+		str(short_way))
+	expect(short_way["arrived"], "and they get in")
+	expect(long_way["through"] > 0,
+		"sealed in, the cheapest way home runs through the wall itself",
+		str(long_way))
+	expect(long_way["broken"] > 0,
+		"so they take it apart rather than walking round the world",
+		str(long_way))
+	expect(long_way["reachable"],
+		"and a walled farm is still reachable - expensive is not impossible",
+		str(long_way))
+
+	# **Nothing can oscillate**, and the reason is arithmetic rather than a
+	# rule: every step is onto a cell whose field value is this one's less what
+	# entering cost, and entering always costs at least one. So a zombie's
+	# field value strictly falls on every step it takes.
+	var watched := _watch_a_maze(3102, 60, 1200)
+	print("  %d zombies over %d ticks: %d steps, all downhill, "
+		% [watched["zombies"], watched["ticks"], watched["steps"]]
+		+ "%d that were not" % watched["uphill"])
+	expect(watched["steps"] > 400, "they did a great deal of walking",
+		str(watched["steps"]))
+	expect(watched["uphill"] == 0,
+		"and not one step of it was to a cell that was no closer to home",
+		str(watched["uphill"]))
+	# The done-when's own words, which the invariant above makes impossible.
+	expect(watched["flapping"] == 0,
+		"so no zombie was ever back and forth between the same two cells "
+		+ "inside twenty ticks", str(watched["flapping"]))
+	expect(watched["revisited"] == 0,
+		"nor back on a cell it had already left",
+		str(watched["revisited"]))
+
+	# **The same seed and the same maze give the same arrival order.**
+	var first := _arrivals_in_a_maze(3103)
+	var again := _arrivals_in_a_maze(3103)
+	expect(first.size() > 3, "several of them got in", str(first.size()))
+	expect(first == again,
+		"and the same seed and maze arrive in the same order, every time",
+		"%s against %s" % [str(first.slice(0, 6)), str(again.slice(0, 6))])
+	var elsewhere := _arrivals_in_a_maze(3104)
+	expect(first != elsewhere,
+		"while another seed does not - the test would pass on a constant "
+		+ "otherwise", str(elsewhere.slice(0, 6)))
+
+	# **A hundred zombies and a maze stay inside the tick budget.**
+	#
+	# The budget is that a tick takes less than a tick: at 30Hz there are 33
+	# milliseconds and everything else on the machine wants some of them. This
+	# is the worst case on purpose - the walls are coming down all through it,
+	# so the field is being rebuilt over and over rather than cached.
+	var crowd := _maze_night(3105)
+	for _i in 100:
+		Enemies.spawn(crowd, &"walker", 0)
+	expect(Entities.count(crowd) == 100, "a hundred of them are on the farm",
+		str(Entities.count(crowd)))
+	var walls_before := Farm.cells_with(crowd, &"wall").size()
+	var started := Time.get_ticks_usec()
+	Sim.advance(crowd, 900)                 # half a minute of it
+	var spent := Time.get_ticks_usec() - started
+	var per_tick := float(spent) / 900.0
+	var budget := 1000000.0 / float(GameData.TICK_HZ)
+	var rebuilds := walls_before - Farm.cells_with(crowd, &"wall").size()
+	print("  a hundred zombies in a maze: %.1f us a tick, %.0f%% of the %.0f us "
+		% [per_tick, per_tick * 100.0 / budget, budget]
+		+ "at %dHz allows (%d walls came down, %d still walking)"
+		% [GameData.TICK_HZ, rebuilds, Entities.count(crowd)])
+	expect(per_tick < budget / 2.0,
+		"a hundred of them in a maze tick in well under half the budget",
+		"%.1f us against %.0f" % [per_tick, budget])
+	expect(rebuilds > 0,
+		"and they were chewing through it the whole time, so the field was "
+		+ "being rebuilt rather than cached", str(rebuilds))
+
+	# **One rebuild, measured on its own**, because that is the frame a wall
+	# falls on and the one that could stutter.
+	var sample := _maze_night(3106)
+	Pathing.refresh(sample)
+	var worst := 0
+	for _i in 20:
+		sample["grid_version"] = int(sample["grid_version"]) + 1
+		var at := Time.get_ticks_usec()
+		Pathing.refresh(sample)
+		worst = maxi(worst, Time.get_ticks_usec() - at)
+	print("  the worst single rebuild of a maze: %d us, %.0f%% of a tick"
+		% [worst, float(worst) * 100.0 / budget])
+	expect(float(worst) < budget,
+		"a wall falling costs less than the tick it falls on",
+		"%d us against %.0f" % [worst, budget])
+	# Cached when nothing moved, which is what keeps the other ticks free.
+	var cached := Time.get_ticks_usec()
+	for _i in 1000:
+		Pathing.refresh(sample)
+	var each := float(Time.get_ticks_usec() - cached) / 1000.0
+	expect(each < per_tick / 4.0,
+		"and a tick that changed nothing pays almost nothing to find out",
+		"%.2f us" % each)
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## A night with a maze of wall across it: staggered lines with gaps, so the way
+## in is never a straight one - and **the line nearest the house has no gap**,
+## so the last thing between them and it has to come down.
+##
+## That is both halves of the task in one layout. They walk the gaps while
+## walking is cheaper, and they chew when it is not.
+func _maze_night(seed_value: int) -> Dictionary:
+	var state := _fresh_night(seed_value)
+	var hp := int((GameData.DEFENCES[&"wall"] as Dictionary)["hp"])
+	var home := Farm.house_centre(state)
+	Pathing.refresh(state)
+	var spawn: Vector2i = Enemies.spawn_cells(state, 0)[0]
+
+	var columns: Array = []
+	var column := 6
+	while column < Grid.WIDTH - 4:
+		columns.append(column)
+		column += 7
+
+	# **Nearest the house on the side they come from.** Picking the nearest
+	# line outright put the solid one behind the house, where nothing walking
+	# in from the east ever met it - and a hundred zombies strolled through a
+	# maze that was supposed to stop them.
+	var sealed := -1
+	for x in columns:
+		var between := (int(x) - home.x) * (spawn.x - home.x) > 0
+		if not between:
+			continue
+		if sealed < 0 or absi(int(x) - home.x) < absi(sealed - home.x):
+			sealed = int(x)
+
+	var offset := 0
+	for x in columns:
+		for y in Grid.HEIGHT:
+			# One gap per line, in a different place each time - except the
+			# line nearest the house, which has none.
+			if int(x) != sealed and y % 7 == offset:
+				continue
+			var cell := Vector2i(int(x), y)
+			if Farm.buildable(state, cell):
+				Farm.place(state, cell, {"id": &"wall", "hp": hp})
+		offset = (offset + 3) % 7
+	Pathing.refresh(state)
+	return state
+
+
+## Wall the whole column a zombie's route passes through, with or without one
+## cell left open, and report what it did about it.
+func _walled_lane(seed_value: int, with_a_gap: bool) -> Dictionary:
+	var state := _fresh_night(seed_value)
+	Pathing.refresh(state)
+	var spawn: Vector2i = Enemies.spawn_cells(state, 0)[0]
+	var route := _route_from(state, spawn)
+	var column: int = (route[4] as Vector2i).x
+	var hp := int((GameData.DEFENCES[&"wall"] as Dictionary)["hp"])
+
+	var gap := (route[4] as Vector2i).y
+	var built := 0
+	for y in Grid.HEIGHT:
+		if with_a_gap and y == gap:
+			continue
+		var cell := Vector2i(column, y)
+		if Farm.buildable(state, cell):
+			Farm.place(state, cell, {"id": &"wall", "hp": hp})
+			built += 1
+	Pathing.refresh(state)
+
+	var walker := Entities.spawn(state, &"walker", spawn)
+	var house_before := int(state["house_hp"])
+	var standing := _wall_hp_in_column(state, column)
+	var through := 0
+	var arrived := false
+	for _tick in 4000:
+		Sim.advance(state, 1)
+		if not Entities.alive(state, walker):
+			arrived = int(state["house_hp"]) < house_before
+			break
+		var at := Entities.cell_of(state, walker)
+		if at.x >= 0 and Farm.occupant(state, at).get("id", &"") == &"wall":
+			through += 1
+		var aim := Pathing.step_from(state, at)
+		if aim != at and Pathing.breaks_through(state, aim):
+			through += 1
+	return {
+		"built": built,
+		"through": through,
+		"arrived": arrived,
+		"broken": standing - _wall_hp_in_column(state, column),
+		"reachable": Pathing.reachable(state, spawn),
+	}
+
+
+## The hit points still standing in one column of wall.
+func _wall_hp_in_column(state: Dictionary, column: int) -> int:
+	var total := 0
+	for y in Grid.HEIGHT:
+		var on := Farm.occupant(state, Vector2i(column, y))
+		if on.get("id", &"") == &"wall":
+			total += int(on.get("hp", 0))
+	return total
+
+
+## Watch a crowd walk a maze and count every step that was not downhill.
+##
+## **Only while the grid holds still.** A wall coming down rebuilds the field
+## and a zombie's own cell can legitimately be worth more afterwards, so a
+## tick that changed the grid is not a tick this can judge.
+func _watch_a_maze(seed_value: int, crowd: int, ticks: int) -> Dictionary:
+	var state := _maze_night(seed_value)
+	for _i in crowd:
+		Enemies.spawn(state, &"walker", 0)
+
+	var was: Dictionary = {}                # id -> [cell, field value]
+	var seen: Dictionary = {}               # id -> {cell index: true}
+	var recent: Dictionary = {}             # id -> the last cells, newest last
+	var steps := 0
+	var uphill := 0
+	var revisited := 0
+	var flapping := 0
+
+	for _tick in ticks:
+		var version := int(state["grid_version"])
+		Sim.advance(state, 1)
+		var stable := int(state["grid_version"]) == version
+		for id in Entities.ids(state):
+			var at := Entities.cell_of(state, id)
+			if at.x < 0:
+				continue
+			var worth := Pathing.distance(state, at)
+
+			# The last twenty cells, for the done-when's own wording.
+			var trail: Array = recent.get(id, [])
+			trail.append(Grid.index(at))
+			if trail.size() > 20:
+				trail.remove_at(0)
+			recent[id] = trail
+			if trail.size() == 20 and _is_flapping(trail):
+				flapping += 1
+
+			if not was.has(id):
+				was[id] = [at, worth]
+				seen[id] = {Grid.index(at): true}
+				continue
+			var before: Array = was[id]
+			var from: Vector2i = before[0]
+			if at == from:
+				was[id] = [at, worth]
+				continue
+
+			steps += 1
+			if stable and worth >= int(before[1]):
+				uphill += 1
+			var been: Dictionary = seen[id]
+			if stable and been.has(Grid.index(at)):
+				revisited += 1
+			been[Grid.index(at)] = true
+			was[id] = [at, worth]
+
+	return {
+		"zombies": crowd,
+		"ticks": ticks,
+		"steps": steps,
+		"uphill": uphill,
+		"revisited": revisited,
+		"flapping": flapping,
+	}
+
+
+## Whether a trail of cells is somebody going back and forth between two of
+## them: exactly two cells, and more than one change between them.
+func _is_flapping(trail: Array) -> bool:
+	var distinct: Dictionary = {}
+	var changes := 0
+	for i in trail.size():
+		distinct[trail[i]] = true
+		if i > 0 and trail[i] != trail[i - 1]:
+			changes += 1
+	return distinct.size() == 2 and changes > 1
+
+
+## The order a crowd reaches the house in, as a list of entity ids.
+func _arrivals_in_a_maze(seed_value: int) -> Array:
+	var state := _maze_night(seed_value)
+	for _i in 30:
+		Enemies.spawn(state, &"walker", 0)
+
+	var order: Array = []
+	var breaches := int(state["breaches"])
+	var alive: Array = Entities.ids(state)
+	for _tick in 3000:
+		Sim.advance(state, 1)
+		var now := int(state["breaches"])
+		if now == breaches:
+			continue
+		# Somebody got in. Which ones went missing this tick, in id order, is
+		# the arrival order - and `Entities.ids()` is sorted, so it is the same
+		# order on every machine.
+		var still: Array = Entities.ids(state)
+		for id in alive:
+			if not still.has(id):
+				order.append(id)
+		alive = still
+		breaches = now
+		if order.size() >= 8:
+			break
+	return order

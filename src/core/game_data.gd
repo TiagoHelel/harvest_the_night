@@ -63,6 +63,28 @@ const PREPARATION_TICKS := 20 * SECONDS # LEVER: ticks, 10-45 seconds worth
 
 ## The whole world, in tiles. About 1.3 screens wide and just over one tall at
 ## 480x270, which is what `design.md` asks for.
+## What crossing one tile of each terrain costs somebody walking in, in
+## **tiles-equivalent**: ordinary ground is 1, so a structure's `path_cost`
+## reads as "how many tiles of detour going through this is worth".
+##
+## Zero means nothing crosses it at all. In `Farm.Terrain` order - `Farm`
+## indexes this, because the enum is its and the number is a lever, and
+## `check_pathing()` holds the two to the same length.
+const TERRAIN_COST: Array = [
+	1,      # GRASS  - LEVER: ordinary ground, and the unit everything else is in
+	2,      # SOIL   - LEVER: tilled earth is heavy going, 1-3
+	0,      # WATER  - nothing crosses it
+	0,      # ROCK   - nor this
+	1,      # PATH   - LEVER: the lane between the beds, 1-2
+	1,      # FLOOR  - LEVER: inside a building's footprint, 1-2
+]
+
+## The most one step onto a neighbouring cell can possibly cost. It sizes the
+## bucket wheel the flow field is swept with, so it has to be at least the
+## worst terrain plus the worst `path_cost` - which `check_pathing()` checks
+## rather than trusting.
+const WIDEST_STEP := 32
+
 const GRID_WIDTH := 40
 const GRID_HEIGHT := 18
 const TILE_SIZE := 16
@@ -1083,6 +1105,7 @@ static func validate() -> Array:
 	errors.append_array(check_groups(RESOURCE_GROUPS, RESOURCES))
 	errors.append_array(check_stall(DAILY_STOCK, SELL_PRICE, BUY_MARKUP))
 	errors.append_array(check_tutorial(TUTORIAL))
+	errors.append_array(check_pathing(TERRAIN_COST, DEFENCES, BUILDINGS))
 
 	for res in sorted_names(REPAIR_COST_PER_HP.keys()):
 		if not RESOURCES.has(res):
@@ -1095,6 +1118,42 @@ static func validate() -> Array:
 
 	if DUSK_AT_TICK > DAY_TICKS:
 		errors.append("dusk falls after the day is over")
+
+	return errors
+
+
+## The cost field has to be able to represent every step it can be asked to
+## take, and a bucket wheel that is one short does not fail loudly - it puts a
+## cell in the wrong bucket and the route comes out subtly wrong. So the
+## widest step is checked against the tables rather than kept in step by hand.
+static func check_pathing(terrain: Array, defences: Dictionary,
+		buildings: Dictionary) -> Array:
+	var errors: Array = []
+
+	var ground := 0
+	for cost in terrain:
+		if int(cost) < 0:
+			errors.append("a terrain costs less than nothing to cross")
+		ground = maxi(ground, int(cost))
+	if ground <= 0:
+		errors.append("no terrain can be crossed at all")
+
+	for table in [defences, buildings]:
+		for id in sorted_names((table as Dictionary).keys()):
+			var entry: Dictionary = (table as Dictionary)[id]
+			var through := int(entry.get("path_cost", 0))
+			if through < 0:
+				errors.append("'%s' costs less than nothing to break" % id)
+			if ground + through > WIDEST_STEP:
+				errors.append(("stepping into '%s' costs %d, which is wider than "
+					+ "WIDEST_STEP (%d)") % [id, ground + through, WIDEST_STEP])
+			# **A thing you can walk through is a thing you can break.** The
+			# field prices a barrier by how long getting through it takes; if
+			# nothing could take it apart, a zombie would route into it and then
+			# stand there for the rest of the night.
+			if through > 0 and int(entry.get("hp", 0)) <= 0:
+				errors.append(("'%s' declares a path cost but has no hit points - "
+					+ "there would be no way through it after all") % id)
 
 	return errors
 
@@ -1732,6 +1791,7 @@ static func digest() -> int:
 		"queue": [QUEUE_LENGTH],
 		"buildings": BUILDINGS,
 		"defences": DEFENCES,
+		"pathing": [TERRAIN_COST, WIDEST_STEP],
 		"repair": [REPAIR_COST_PER_HP, REPAIR_TICKS_PER_HP,
 			HOUSE_REPAIR_PENALTY],
 		"ability": ABILITY,

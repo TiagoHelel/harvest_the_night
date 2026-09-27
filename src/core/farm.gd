@@ -91,6 +91,18 @@ static func terrain_at(state: Dictionary, cell: Vector2i) -> int:
 	return -1 if idx < 0 else int((state["terrain"] as PackedByteArray)[idx])
 
 
+## What crossing a tile of this terrain costs somebody walking in. Zero when
+## nothing crosses it.
+##
+## The numbers are `GameData.TERRAIN_COST` and the order is `Terrain`: the
+## lever belongs in the table with the other levers and the enum belongs here,
+## so this is the one line that knows both.
+static func cost_of_terrain(terrain: int) -> int:
+	if terrain < 0 or terrain >= GameData.TERRAIN_COST.size():
+		return 0
+	return int(GameData.TERRAIN_COST[terrain])
+
+
 ## What is standing on a cell, or an empty Dictionary. **The only way to ask.**
 static func occupant(state: Dictionary, cell: Vector2i) -> Dictionary:
 	var idx := Grid.index(cell)
@@ -137,8 +149,10 @@ static func why_not_buildable(state: Dictionary, cell: Vector2i) -> String:
 ## Whether a person or a zombie can stand here.
 ##
 ## Fixtures block; so does anything the player built, which is the whole point
-## of a wall. Task 0049 turns this into a cost rather than a yes or no, so that
-## a zombie prefers the open lane and breaks through when it must.
+## of a wall. **This stayed a yes or a no** when task 0049 made the flow field
+## a cost field: the farmer does not break through their own wall, and a price
+## on a cell is a price for somebody who can pay it by biting. The cost lives
+## in `Pathing`, which is the one place it means anything.
 static func walkable(state: Dictionary, cell: Vector2i) -> bool:
 	var t := terrain_at(state, cell)
 	if t < 0 or UNWALKABLE.has(t):

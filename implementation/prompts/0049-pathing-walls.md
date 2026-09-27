@@ -1,7 +1,7 @@
 # 0049 - Zombies path around walls
 
 - **Phase:** 3 - The full night
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0025, 0046
 - **Likely files:** src/core/pathing.gd
 

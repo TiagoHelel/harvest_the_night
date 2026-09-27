@@ -3508,3 +3508,116 @@ everybody first and then the numbers belong to wherever they ended up.
 
 `python tools/verify.py` prints PASS: 1500 asserts, 371 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+
+## 0049 - Zombies path around walls
+
+The flow field stopped being a count of steps and became a count of cost. A
+wall used to be a hole in the map: impassable, so the field routed around it,
+so a zombie would walk the whole length of the farm rather than touch one and
+only ever broke something when it was sealed in with no route at all.
+
+`design.md` says a wall "bloqueia/atrasa" - blocks *and delays* - and a barrier
+that is always walked around does neither for long. So a barrier is priced
+instead. Stepping onto a cell costs what the terrain costs plus the
+structure's `path_cost`, which reads as "going through this is worth this many
+tiles of detour", and a zombie whose cheapest way home runs through a wall
+stops and takes the wall apart, because that genuinely is the cheapest way
+home.
+
+`path_cost` had been declared on the fence, the wall and the barricade since
+the table was written, and until today nothing read it. Task 0047 left a
+comment in its own test saying so and naming this task; that comment is now
+the measurement underneath it.
+
+### Only a barrier is priced
+
+A tower and a workshop declare no `path_cost` and stay impassable, so a wave
+flows **through** the walls and **around** the buildings. That is the
+distinction the table already drew, and it is the one the game wants: the
+player's towers are not a road, and the enemy that goes after towers on
+purpose is task 0052, which would have had nothing left to be if every zombie
+already chewed through them.
+
+Terrain is priced too. Ordinary ground is one, tilled soil is two, so a wave
+prefers the lane between the beds to the beds themselves - which is the goal's
+own sentence, and now a number rather than a hope.
+
+### The sweep had the edge backwards
+
+The bug worth the task, and it hid where bugs like to. A sweep outward from
+the house prices each step by the cell it is *expanding into*; the walking
+goes the other way, so the move being priced is the neighbour's move **into
+the cell being expanded**. While every cell cost one those were the same
+number and the mistake was invisible. With a wall worth twenty-one they are
+not: the field came out disagreeing with the step function, cells appeared
+whose cheapest neighbour was worth more than they were, and a zombie walked in
+a circle for four hundred steps instead of arriving.
+
+It was found by asking a walled-in zombie what route it took and getting a
+four-hundred-step answer on a forty-by-eighteen farm.
+
+### Nothing can oscillate, and it is arithmetic
+
+Every step is onto a cell worth `field[here] - enter(next)`, and every `enter`
+is at least one, so a zombie's field value **strictly falls on every step it
+takes**. It cannot return to a cell it has left, because that cell is worth
+more than where it is standing. That is not a tie-break rule bolted on
+afterwards, it is the shape of the field.
+
+The done-when asks for "no zombie in the same pair of cells for 20 ticks" and
+that is asserted literally, but the assert underneath it is the real one: over
+sixty zombies and twelve hundred ticks of maze, **1818 steps and not one of
+them uphill**. Only while the grid holds still - a wall coming down rebuilds
+the field and a zombie's own cell can legitimately be worth more afterwards,
+so a tick that changed the grid is a tick the check skips.
+
+### Dial's algorithm, not a heap
+
+Every step costs between one and `WIDEST_STEP`, so the cells to visit are
+filed by cost into that many buckets and read back in order. Same answer a
+priority queue gives, a fraction of the work, and the order inside a bucket is
+the order things went in - one fewer thing that can differ between machines.
+`check_pathing()` holds `WIDEST_STEP` against the tables, because a wheel one
+bucket short does not fail loudly, it files a cell wrongly and the route comes
+out subtly wrong.
+
+Buckets are plain `Array`s and not `PackedInt32Array`s on purpose: a packed
+array is a value type, so `wheel[i].append(x)` would append to a copy.
+
+### Measured
+
+    a hundred zombies in a maze: 1602.7 us a tick, 5% of the 33333 us at 30Hz allows
+    the worst single rebuild of a maze: 3432 us, 10% of a tick
+    60 zombies over 1200 ticks: 1818 steps, all downhill, 0 that were not
+    dropped in the way, one barricade costs them 2 ticks - the ways round it
+      are the same length - but stepping into it costs 5
+
+The first rebuild cost 5785 us because it asked the occupant table about all
+seven hundred cells to find the forty with an answer. Terrain is now filled in
+one pass over the bytes and only the occupied cells are looked up.
+
+**One barricade on open ground is still nearly free** and the test says so.
+On a four-way grid every route between two cells not in a straight line is the
+same length, so stepping around a single obstacle costs nothing at all. What
+the price changes is a *line* of them, and that is what task 0049's own group
+measures: with a gap in the line they take the gap and break nothing; sealed,
+they come through the wall and a hundred and twenty hit points of it go.
+
+### Three asserts of 0046 and 0047 claimed the old rule
+
+They were updated rather than deleted, and each one still makes the same claim
+in the new world: the walled cell used to be `UNREACHABLE` and is now priced
+at what the wall is worth; the sealed pocket used to have "nowhere at all to
+walk" and now has no way out that is not through a wall; the barricade used to
+buy two ticks with a note saying task 0049 would fix that, and now carries the
+price instead of the promise.
+
+### Hashes
+
+| | from | to | why |
+|---|---|---|---|
+| sim hash | `203117208` | `1819315534` | the field is a cost field, so they route differently and break through instead of walking round; the state gained `flow_cost` |
+| data hash | `2308311333` | `3566119030` | `TERRAIN_COST` and `WIDEST_STEP` are levers, so they joined the digest |
+
+`python tools/verify.py` prints PASS: 1535 asserts, 371 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

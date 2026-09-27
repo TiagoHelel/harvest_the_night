@@ -4,9 +4,20 @@ extends RefCounted
 ## Zombies, walking in.
 ##
 ## They spawn at the edges, follow the flow field to the farmhouse, and take a
-## bite out of it when they arrive. That is the whole of it tonight; task 0049
-## teaches them to break a wall rather than stand in front of it, and 0050 to
-## 0052 give them reasons to be told apart.
+## bite out of it when they arrive. Tasks 0050 to 0052 give them reasons to be
+## told apart.
+##
+## ## Going through rather than around
+##
+## The field prices a barrier instead of refusing it (see `Pathing`), so the
+## cheapest way home can run straight through a wall. When it does, a zombie
+## does not walk into the wall - it stands where it is and takes the wall
+## apart, which is the same decision expressed as damage instead of movement.
+##
+## That is what makes a wall worth building **and** worth building well. Before
+## task 0049 they only ever broke something when they were sealed in with no
+## route at all, so one gap in a line meant the whole wave filed through it and
+## the line never lost a hit point.
 ##
 ## ## Movement is integer, and exactly the speed the lever says
 ##
@@ -122,6 +133,12 @@ static func _walk(state: Dictionary, id: int) -> void:
 		# a zombie with no path takes the nearest thing in its way apart.
 		_chew(state, id, data, here)
 		return
+	if Pathing.breaks_through(state, next):
+		# **The cheapest way home is through this.** Not the nearest structure
+		# and not the one lowest in reading order: the one the field picked,
+		# which is the one actually in the way.
+		_gnaw(state, id, data, next)
+		return
 
 	var aim := Vector2i(next.x * Player.SUBTILE + Player.SUBTILE / 2,
 		next.y * Player.SUBTILE + Player.SUBTILE / 2)
@@ -149,6 +166,12 @@ static func _walk(state: Dictionary, id: int) -> void:
 ## Reaching the house costs the house and costs the zombie: it is spent.
 ## No way through, so take the way through apart.
 ##
+## This is the **sealed-in** case only: no neighbour improves at all, which
+## after task 0049 means the way out is blocked by something with no way
+## through it - a ring of towers, or a pocket between the rocks and the pond.
+## A zombie with a wall in front of it is not here; the field sent it into the
+## wall and `_walk()` turned that into a bite.
+##
 ## Looks at the four neighbours and bites whichever structure is nearest the
 ## house - the one actually in the way, rather than whatever happens to be
 ## first in reading order. With nothing adjacent at all it simply waits, which
@@ -174,22 +197,32 @@ static func _chew(state: Dictionary, id: int, data: Dictionary,
 			best = at
 	if best.x < 0:
 		return
+	_gnaw(state, id, data, best)
 
-	# **One bite per tile's worth of time.** `_walk()` gates this on `move`,
-	# which is *sub-units* rather than tiles - a walker covers three of
-	# sixty-four in a tick - so biting on every one of those was twenty
-	# damage in two ticks and a barricade that bought nothing at all.
-	#
-	# A bite costs what crossing a tile costs, so a fast zombie chews fast and
-	# `ticks_per_tile` means one thing in both places.
+
+## One bite out of a named cell.
+##
+## **One bite per tile's worth of time.** `_walk()` gates this on `move`, which
+## is *sub-units* rather than tiles - a walker covers three of sixty-four in a
+## tick - so biting on every one of those was twenty damage in two ticks and a
+## barricade that bought nothing at all.
+##
+## A bite costs what crossing a tile costs, so a fast zombie chews fast and
+## `ticks_per_tile` means one thing in both places. It is also what makes
+## `path_cost` an honest number: going through a wall really does cost about
+## the time that walking `hp / damage` tiles would.
+static func _gnaw(state: Dictionary, id: int, data: Dictionary,
+		cell: Vector2i) -> void:
 	var one := Entities.get_one(state, id)
+	if one.is_empty():
+		return
 	var wait := int(one.get("chew_wait", 0))
 	if wait > 0:
 		one["chew_wait"] = wait - 1
 		return
 	one["chew_wait"] = maxi(int(data["ticks_per_tile"]), 1)
-	Farm.damage(state, best, int(data["damage"]))
-	one["chewing"] = Grid.index(best)
+	Farm.damage(state, cell, int(data["damage"]))
+	one["chewing"] = Grid.index(cell)
 
 
 ## The four cells around a cell, in a fixed order.
