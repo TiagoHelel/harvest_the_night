@@ -18,6 +18,28 @@ config/features=PackedStringArray("4.7", "GL Compatibility")
 boot_splash/bg_color=Color(0.054902, 0.047059, 0.098039, 1)
 boot_splash/show_image=false
 
+[importer_defaults]
+
+; Pixel art, imported exactly as generated: no mipmaps, no compression, and no
+; 3D detection quietly turning either of them back on. Filtering is nearest
+; project-wide via rendering/textures/canvas_textures/default_texture_filter.
+texture={
+"compress/mode": 0,
+"compress/high_quality": false,
+"compress/normal_map": 0,
+"compress/channel_pack": 0,
+"mipmaps/generate": false,
+"mipmaps/limit": -1,
+"roughness/mode": 0,
+"process/fix_alpha_border": false,
+"process/premult_alpha": false,
+"process/normal_map_invert_y": false,
+"process/hdr_as_srgb": false,
+"process/hdr_clamp_exposure": false,
+"process/size_limit": 0,
+"detect_3d/compress_to": 0
+}
+
 [autoload]
 
 ; Application services, not rules. src/core/ cannot see these and must not:

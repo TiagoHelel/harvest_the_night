@@ -256,6 +256,19 @@ func _case_0013_world_view() -> void:
 		await close_scene()
 		return
 
+	# The generated art is what is on screen, not the fallback blocks. A
+	# forgotten `python tools/gen_sprites.py` would otherwise look like a
+	# slightly duller farm rather than like a missing build step.
+	var terrain := view.find_child("Terrain", true, false)
+	expect(terrain != null and terrain.tile_set != null, "the tileset is built")
+	if terrain != null and terrain.tile_set != null:
+		var src: TileSetAtlasSource = terrain.tile_set.get_source(0)
+		expect(src != null and src.texture != null
+			and src.texture.resource_path == WorldView.TERRAIN_ATLAS,
+			"and it is the generated atlas, not the emergency flat one",
+			src.texture.resource_path if src != null and src.texture != null
+			else "nothing")
+
 	# Everything on the farm got drawn, and nothing was drawn twice.
 	var occupants: Dictionary = driver.state["occupants"]
 	var drawn := view.find_child("Occupants", true, false)

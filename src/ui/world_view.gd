@@ -14,12 +14,13 @@ extends Node2D
 ## of the screen is in front of a tower drawn above it, which is what makes a
 ## three-quarter view read as depth rather than as a spreadsheet.
 ##
-## ## Placeholder art
+## ## Where the art comes from
 ##
-## The tileset and the occupant textures are generated here from flat colours.
-## Task 0014 brings the sprite pipeline and task 0072 the real tileset; when
-## they land, `_build_terrain_tileset()` and `_texture_for()` are the only two
-## functions that change, and nothing else in this file knows the difference.
+## `sprites/`, generated from the ASCII maps in `tools/sprite_maps.py` by
+## `tools/gen_sprites.py`. **Nothing here paints anything.** An occupant that
+## the pipeline has not drawn yet falls back to a flat block in the colour
+## table below - deliberately visible, so "nobody has drawn the house" looks
+## like a placeholder rather than like a design choice. Task 0075 draws them.
 
 ## The farm is 640x288 pixels and the viewport is 480x270, so there are 160
 ## pixels of horizontal pan and 18 of vertical.
@@ -43,11 +44,11 @@ const TERRAIN_COLOURS: Array = [
 	Color8(140, 100, 60),       # FLOOR
 ]
 
-## Placeholder occupant colours.
+## Fallback colours, for occupants the sprite pipeline has not drawn yet.
 ##
-## Chosen for **contrast against what they stand on**, not for beauty. The
-## first render had trees at a green close to the grass in value and they
-## vanished; placeholder art whose only job is legibility has to be legible.
+## Chosen for **contrast against what they stand on**, not for beauty: an early
+## render had trees at a green close to the grass in value and they vanished
+## into the lawn. Anything with a PNG in `sprites/props/` ignores this table.
 const OCCUPANT_COLOURS: Dictionary = {
 	&"tree": Color8(24, 58, 32),
 	&"rock": Color8(150, 148, 158),
@@ -180,25 +181,24 @@ func _refresh() -> void:
 		_occupants.add_child(sprite)
 
 
-# ------------------------------------------------- placeholder art, until 0014
+# ----------------------------------------------------------------- the art
+
+## The terrain atlas: six tiles in a strip, in `Farm.Terrain` order, generated
+## by `tools/gen_sprites.py` from `tools/sprite_maps.py`.
+const TERRAIN_ATLAS := "res://sprites/terrain/atlas.png"
+const PROP_DIR := "res://sprites/props/"
+
 
 func _build_terrain_tileset() -> TileSet:
 	var size := GameData.TILE_SIZE
-	var image := Image.create(size * TERRAIN_COLOURS.size(), size, false,
-		Image.FORMAT_RGBA8)
-	for t in TERRAIN_COLOURS.size():
-		var base: Color = TERRAIN_COLOURS[t]
-		for y in size:
-			for x in size:
-				# A darker top-left edge, so the tile grid reads while the art
-				# is still flat colour. The real tileset of task 0072 will not
-				# need it.
-				var shade := 0.88 if (x == 0 or y == 0) else 1.0
-				image.set_pixel(t * size + x, y,
-					Color(base.r * shade, base.g * shade, base.b * shade))
+	var texture: Texture2D = load(TERRAIN_ATLAS)
+	if texture == null:
+		push_error("no terrain atlas at %s - run: python tools/gen_sprites.py"
+			% TERRAIN_ATLAS)
+		texture = _flat_atlas()
 
 	var source := TileSetAtlasSource.new()
-	source.texture = ImageTexture.create_from_image(image)
+	source.texture = texture
 	source.texture_region_size = Vector2i(size, size)
 	for t in TERRAIN_COLOURS.size():
 		source.create_tile(Vector2i(t, 0))
@@ -209,9 +209,24 @@ func _build_terrain_tileset() -> TileSet:
 	return tile_set
 
 
+## A drawn sprite when the pipeline has one, and an obvious flat block when it
+## does not. Cached, because this is called once per occupant per redraw.
 func _texture_for(id: StringName) -> Texture2D:
 	if _textures.has(id):
 		return _textures[id]
+
+	var path := PROP_DIR + str(id) + ".png"
+	if ResourceLoader.exists(path):
+		var drawn: Texture2D = load(path)
+		if drawn != null:
+			_textures[id] = drawn
+			return drawn
+
+	return _flat_block(id)
+
+
+## The fallback. Task 0075 makes this unreachable.
+func _flat_block(id: StringName) -> Texture2D:
 	var size := GameData.TILE_SIZE
 	var colour: Color = OCCUPANT_COLOURS.get(id, UNKNOWN_COLOUR)
 	var image := Image.create(size, size, false, Image.FORMAT_RGBA8)
@@ -228,3 +243,16 @@ func _texture_for(id: StringName) -> Texture2D:
 	var tex := ImageTexture.create_from_image(image)
 	_textures[id] = tex
 	return tex
+
+
+## Only reached when the atlas is missing, so that a forgotten generator step
+## is a loud error plus a playable farm rather than a black screen.
+func _flat_atlas() -> Texture2D:
+	var size := GameData.TILE_SIZE
+	var image := Image.create(size * TERRAIN_COLOURS.size(), size, false,
+		Image.FORMAT_RGBA8)
+	for t in TERRAIN_COLOURS.size():
+		for y in size:
+			for x in size:
+				image.set_pixel(t * size + x, y, TERRAIN_COLOURS[t])
+	return ImageTexture.create_from_image(image)

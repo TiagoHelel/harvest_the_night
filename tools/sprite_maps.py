@@ -1,0 +1,297 @@
+# -*- coding: utf-8 -*-
+"""Every sprite in the game, as a picture you can read in a text editor.
+
+A sprite is a legend and a list of rows. Each character is one pixel; `.` is
+transparent. The legend maps a character to a colour name in `tools/palette.py`
+- never to a literal colour, so that changing the game's green is one edit in
+one file rather than a search through forty maps.
+
+**This is the source.** There are no hand-authored PNGs in this repository and
+there must not be: `tools/gen_sprites.py` turns what is below into
+`sprites/**.png`, and a PNG that did not come from here has no way to follow the
+palette when the palette moves.
+
+Sizes are checked by the generator, so a row typed one character short is a
+message rather than a sprite that is subtly wrong down one edge.
+
+    16x16   tiles and props
+    16x24   actors - the extra eight pixels are head-room above the tile they
+            stand on, which is what makes a three-quarter view read
+"""
+
+# 16x16 unless a sprite says otherwise.
+TILE = (16, 16)
+ACTOR = (16, 24)
+
+
+SPRITES = {
+
+    # ------------------------------------------------------------- terrain
+
+    # Grass with enough specks to stop a field of it looking like paper, and
+    # not so many that a tower placed on it stops being the thing you look at.
+    "terrain/grass": dict(size=TILE, legend={
+        "g": "grass", "d": "grass_dark", "l": "grass_light",
+    }, rows=[
+        "gggggggggggggggg",
+        "gggdggggggggglgg",
+        "gggggggggggggggg",
+        "gdggggggggglgggg",
+        "gggggggggggggggg",
+        "ggggggdggggggggg",
+        "gglgggggggggggdg",
+        "gggggggggggggggg",
+        "gggggggggglggggg",
+        "ggdggggggggggggg",
+        "gggggggggggggggg",
+        "gggggglgggdggggg",
+        "gggggggggggggggg",
+        "gdgggggggggggggg",
+        "gggggggggggggglg",
+        "gggggggggggggggg",
+    ]),
+
+    # Tilled earth. The furrows run across, so a planted field reads as rows
+    # rather than as a brown rectangle.
+    "terrain/soil": dict(size=TILE, legend={
+        "s": "soil", "d": "soil_dark", "l": "soil_light",
+    }, rows=[
+        "ssssssssssssssss",
+        "llllllllllllllll",
+        "ssssssssssssssss",
+        "dddddddddddddddd",
+        "ssssssssssssssss",
+        "llllllllllllllll",
+        "ssssssssssssssss",
+        "dddddddddddddddd",
+        "ssssssssssssssss",
+        "llllllllllllllll",
+        "ssssssssssssssss",
+        "dddddddddddddddd",
+        "ssssssssssssssss",
+        "llllllllllllllll",
+        "ssssssssssssssss",
+        "dddddddddddddddd",
+    ]),
+
+    # The pond. Two frames of this animate at task 0072; one is enough to see
+    # that the ripples are the readable part.
+    "terrain/water": dict(size=TILE, legend={
+        "w": "water", "d": "water_dark", "l": "water_light",
+    }, rows=[
+        "wwwwwwwwwwwwwwww",
+        "wwlllwwwwwwwwwww",
+        "wwwwwwwwwwlllwww",
+        "wwwwwwwwwwwwwwww",
+        "wwwwwwdddwwwwwww",
+        "wwwwwwwwwwwwwwww",
+        "wlllwwwwwwwwwwww",
+        "wwwwwwwwwwwwwwdd",
+        "wwwwwwwwwwwwwwww",
+        "wwwwwwwwlllwwwww",
+        "wwwwwwwwwwwwwwww",
+        "wwdddwwwwwwwwwww",
+        "wwwwwwwwwwwwwwww",
+        "wwwwwwwwwwwlllww",
+        "wwwwwwwwwwwwwwww",
+        "wwwwwwwwwwwwwwww",
+    ]),
+
+    # The rock face. Blocky on purpose: it should read as something you mine
+    # rather than something you walk on.
+    "terrain/rock": dict(size=TILE, legend={
+        "t": "stone", "d": "stone_dark", "l": "stone_light",
+    }, rows=[
+        "llllllltddddddtl",
+        "lttttttttttttttd",
+        "ltttttttttttttdd",
+        "lttttdttttttttdd",
+        "dddddddttttttttd",
+        "ltttttdttttttttd",
+        "ltttttdtttdddddd",
+        "ltttttdtttttttdd",
+        "ltttttdtttttttdd",
+        "lddddddddtttttdd",
+        "lttttttttdttttdd",
+        "lttttttttdttttdd",
+        "lttttttttdttttdd",
+        "lttttttttdttttdd",
+        "ltttttttttttttdd",
+        "dddddddddddddddd",
+    ]),
+
+    # A trodden path. Pale dirt with the stones that come up through it.
+    "terrain/path": dict(size=TILE, legend={
+        "p": "soil_light", "d": "soil", "k": "bone_dark",
+    }, rows=[
+        "pppppppppppppppp",
+        "ppppkppppppppppp",
+        "pppppppppppdpppp",
+        "ppppppppppppppkp",
+        "ppdppppppppppppp",
+        "pppppppkpppppppp",
+        "pppppppppppppppp",
+        "ppppppppppdppppp",
+        "pkpppppppppppppp",
+        "pppppppppppppppp",
+        "ppppppdpppppkppp",
+        "pppppppppppppppp",
+        "ppppppppppppppdp",
+        "ppkppppppppppppp",
+        "pppppppppppppppp",
+        "pppppppppppppppp",
+    ]),
+
+    # Board floor: the jetty, the porch, the inside of anything built.
+    "terrain/floor": dict(size=TILE, legend={
+        "w": "wood", "d": "wood_dark", "l": "wood_light",
+    }, rows=[
+        "wwwwwwwwwwwwwwww",
+        "wwwlwwwwwwwwwwww",
+        "wwwwwwwwwwwlwwww",
+        "dddddddddddddddd",
+        "wwwwwwwwwwwwwwww",
+        "wwwwwwwlwwwwwwww",
+        "wlwwwwwwwwwwwwww",
+        "dddddddddddddddd",
+        "wwwwwwwwwwwwwwww",
+        "wwwwwwwwwwwlwwww",
+        "wwwlwwwwwwwwwwww",
+        "dddddddddddddddd",
+        "wwwwwwwwwwwwwwww",
+        "wwwwwlwwwwwwwwww",
+        "wwwwwwwwwwwwwlww",
+        "dddddddddddddddd",
+    ]),
+
+    # ---------------------------------------------------------------- props
+
+    # A tree. The canopy overhangs the trunk, so a row of them reads as a wood
+    # rather than as lollipops.
+    "props/tree": dict(size=TILE, legend={
+        "L": "leaf_light", "l": "leaf", "d": "leaf_dark",
+        "w": "wood_dark", "W": "wood", "i": "ink", ".": None,
+    }, rows=[
+        "......iiii......",
+        "....iilLLlii....",
+        "...ilLLLLLLli...",
+        "..ilLLLlLLLLli..",
+        ".idlLLlllLLLLdi.",
+        ".idLLlllllLLLdi.",
+        "idLLlllddlllLLdi",
+        "idLlllddddlllLdi",
+        "idlllddddddllldi",
+        ".idllddddddlldi.",
+        "..iddlddddlddi..",
+        "...iidddddii....",
+        ".....iWwWi......",
+        ".....iWwWi......",
+        ".....iWwwi......",
+        "....iiwwwii.....",
+    ]),
+
+    # A loose boulder. Something you break for stone and then it is gone.
+    "props/rock": dict(size=TILE, legend={
+        "t": "stone", "d": "stone_dark", "l": "stone_light",
+        "i": "ink", ".": None,
+    }, rows=[
+        "................",
+        "................",
+        "......iiii......",
+        "....iilllti.....",
+        "...illlltttii...",
+        "..illlttttttti..",
+        ".illltttttttdti.",
+        ".ilttttttttdddi.",
+        ".itttttttddddti.",
+        ".ittttddddddtti.",
+        "..idttdddddtti..",
+        "...iddddddtii...",
+        "....iidddii.....",
+        "......iiii......",
+        "................",
+        "................",
+    ]),
+
+    # Iron ore in the rock face. The gold flecks are the whole point: it has to
+    # be tellable from a boulder at a glance, because one is a tower and the
+    # other is a wall.
+    "props/ore": dict(size=TILE, legend={
+        "t": "stone", "d": "stone_dark", "l": "stone_light",
+        "g": "gold", "G": "gold_light", "i": "ink", ".": None,
+    }, rows=[
+        "................",
+        ".....iiiii......",
+        "...iilltttii....",
+        "..illtgGgtttii..",
+        ".illtggGgttttti.",
+        ".ilttgGggtttdti.",
+        ".ittttggttddddi.",
+        ".itttttttdGgddi.",
+        ".ittdttttdGggdi.",
+        ".itdddttdddggdi.",
+        "..iddgGgdddtti..",
+        "...idggGgdtii...",
+        "....iidggdii....",
+        "......iiii......",
+        "................",
+        "................",
+    ]),
+
+    # The shop stall: a striped awning and a counter.
+    "props/shop": dict(size=TILE, legend={
+        "b": "bone", "r": "roof", "w": "wood", "d": "wood_dark",
+        "l": "wood_light", "g": "gold_light", "i": "ink", ".": None,
+    }, rows=[
+        "................",
+        "..iiiiiiiiiiii..",
+        ".ibbrrbbrrbbrri.",
+        ".ibbrrbbrrbbrri.",
+        ".iiiiiiiiiiiiii.",
+        "..i..........i..",
+        "..i...gggg...i..",
+        "..i..gggggg..i..",
+        "..i...gggg...i..",
+        "..i..........i..",
+        ".illlllllllllli.",
+        ".iwwwwwwwwwwwwi.",
+        ".idwwwwwwwwwwdi.",
+        ".id..........di.",
+        ".id..........di.",
+        "..i..........i..",
+    ]),
+
+    # ---------------------------------------------------------------- actors
+
+    # A placeholder body at actor size, to prove 16x24 works end to end. Task
+    # 0073 replaces it with the farmer and their verbs.
+    "actors/placeholder": dict(size=ACTOR, legend={
+        "s": "bone", "h": "wood_dark", "c": "roof", "t": "wood",
+        "i": "ink", ".": None,
+    }, rows=[
+        "................",
+        "................",
+        ".....iiiiii.....",
+        "....ihhhhhhi....",
+        "...ihhhhhhhhi...",
+        "...ihssssssHi...".replace("H", "h"),
+        "...isisssssi....",
+        "...issssssi.....",
+        "....isssssi.....",
+        ".....iiiii......",
+        "....icccci......",
+        "...icccccci.....",
+        "..icccccccci....",
+        "..icccccccci....",
+        "..icccccccci....",
+        "...icccccci.....",
+        "....icccci......",
+        "....itiiti......",
+        "....itiiti......",
+        "....itiiti......",
+        "....itiiti......",
+        "...iitiitii.....",
+        "...ihhiihhi.....",
+        "....iiiiii......",
+    ]),
+}

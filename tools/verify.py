@@ -132,6 +132,21 @@ def check_godot_present():
     return check("godot import", code == 0, "" if code == 0 else tail(out))
 
 
+def check_sprites():
+    """The PNGs still match the maps they came from.
+
+    Art is build output: `tools/sprite_maps.py` is the source and `sprites/` is
+    what falls out of it. Committing the output means a fresh clone runs with no
+    build step, and it also means somebody can open a PNG in an editor and paint
+    over it - after which the palette no longer owns that sprite and nobody
+    finds out until a colour change leaves one thing the old green."""
+    if not os.path.isdir(rel("sprites")):
+        return skip("sprites", "nothing generated yet - task 0014")
+    code, out = run([sys.executable, "tools/gen_sprites.py", "--check"])
+    return check("sprites", code == 0, tail(out, 6) if code else
+                 out.strip().splitlines()[-1].strip() if out.strip() else "")
+
+
 def check_core_is_pure():
     """src/core/ is node-free, clock-free and unseeded-random-free.
 
@@ -350,6 +365,7 @@ def main():
     check_godot_present()
     check_scripts_parse()
     check_core_is_pure()
+    check_sprites()
 
     if not hashes_only:
         check_script("headless_check", "src/tools/headless_check.gd",

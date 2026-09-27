@@ -627,3 +627,48 @@ Notes:
   into water, and the day and the night are the same tiles by design.
 - The placeholder tileset and textures are generated in this file. Tasks 0014
   and 0072 replace two functions and nothing else in the view will know.
+
+## 0014 - Sprites generated from ASCII maps - done 2026-09-27
+
+What changed: the game has art, and a script owns it. `tools/palette.py` is the
+one colour table, `tools/sprite_maps.py` is every sprite as a picture you can
+read in a text editor, and `tools/gen_sprites.py` turns the second through the
+first into `sprites/**.png`. The world view loads them instead of inventing
+flat colours.
+
+Files: tools/palette.py, tools/sprite_maps.py, tools/gen_sprites.py,
+sprites/ (12 PNGs + README), src/ui/world_view.gd, project.godot,
+tools/verify.py, src/tools/input_check.gd
+
+Verify: PASS - 10 passed, 1 skipped, 13s. 205 asserts, **43 cases, 0 failed**.
+Both hashes unchanged: art is not a rule.
+
+Notes:
+
+- **The PNG writer is hand-rolled, and that is the point.** Pillow is not a
+  dependency of the game and writes a timestamp chunk by default, which would
+  make every regeneration a diff - a build output that changes every time it is
+  built is one nobody can check. Four chunks, fixed compression level, and the
+  bytes are a function of the pixels and of nothing else. Measured: two runs,
+  byte-identical, `5e3544f4c0ce` both times.
+- **One character is one pixel**, measured rather than asserted: changing a
+  single `g` to another colour in one row of `terrain/grass` and re-rendering
+  changed **exactly 1 pixel**.
+- **`verify.py` has a `sprites` row now.** The PNGs are committed so a clone
+  runs with no build step - which also means somebody can open one in an editor
+  and paint over it, after which the palette no longer owns that sprite and
+  nobody finds out until a colour change leaves one thing the old green.
+  `--check` catches it.
+- **Import settings are project-wide, not per file.** `[importer_defaults]` in
+  `project.godot` turns off mipmaps, compression and 3D detection for every
+  texture, so a sprite added later cannot arrive with the wrong settings
+  because somebody forgot. Verified in the generated `.import`.
+- The world view loads `sprites/` and keeps the flat colour blocks only as a
+  fallback for occupants nothing has drawn yet - the farmhouse, until task
+  0075. It is deliberately visible: "nobody has drawn the house" should look
+  like a placeholder, not like a design choice. `input_check` asserts the
+  tileset is the generated atlas and not the emergency flat one, so a forgotten
+  generator step is a red line rather than a slightly duller farm.
+- The palette names a day ramp and a night ramp. Task 0071 applies them as a
+  shader - the same pixels, relit - which is how `design.md` section 18 gets
+  two realities out of one set of sprites.

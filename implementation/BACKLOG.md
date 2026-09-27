@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`###.....................`  **13 / 108 done**
+`###.....................`  **14 / 108 done**
 
-0 doing / 95 todo / 0 blocked across 9 phases.
+0 doing / 94 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0014 - Sprites generated from ASCII maps**. The whole of what is left is
+First up: **0015 - The player walks and interacts**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,25 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-95 task(s) left, the ready ones first, then what they
+94 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0014 - Sprites generated from ASCII maps
-
-Ready to pick up.  Likely files: `tools/gen_sprites.py, sprites/`.
-
-Art that a script owns. One palette, one generator, one command - so the set stays consistent and a colour change is one edit rather than forty.
-
-- `tools/gen_sprites.py` turns ASCII maps plus a named palette into PNGs under `sprites/`
-- 16x16 for tiles and props, 16x24 for actors, drawn on a transparent background
-- One palette table shared by every sprite, with the day and night ramps named
-- Running it twice produces byte-identical files
-- Hand-authored PNGs are not allowed: the map is the source
-
-  - done when: `python tools/gen_sprites.py` regenerates the whole set
-  - done when: Editing one character in a map changes exactly one pixel
-  - done when: The generated sheet imports with nearest-neighbour filtering and no mipmaps
 
 ### 0015 - The player walks and interacts
 
@@ -91,6 +75,21 @@ Somewhere to see everything at once, which the HUD cannot do once there are twel
 
   - done when: Every resource in game_data appears without being listed twice
   - done when: Adding a resource to game_data makes it appear with no UI edit
+
+### 0080 - A pixel font
+
+Ready to pick up.  Likely files: `tools/gen_font.py, assets/fonts/`.
+
+Type that is crisp at 480x270 and does not fight the art.
+
+- A bitmap font generated from the same kind of ASCII maps as the sprites
+- Full Latin-1 coverage, so Portuguese accents work when 0097 arrives
+- Two sizes: HUD and heading
+- No filtering, no hinting, integer positions only
+- Numbers are tabular so a counter does not jitter
+
+  - done when: Every accented character in the Portuguese strings renders
+  - done when: A changing number does not shift the text around it
 
 ### 0083 - Audio buses and a sound manager
 
@@ -200,21 +199,6 @@ Time passing, without taking away the design document's promise that the player 
   - done when: A player who ignores the clock entirely is not punished for it
   - done when: The clock stops in the shop panel and resumes on close
 
-### 0080 - A pixel font
-
-Waits on 0014.  Likely files: `tools/gen_font.py, assets/fonts/`.
-
-Type that is crisp at 480x270 and does not fight the art.
-
-- A bitmap font generated from the same kind of ASCII maps as the sprites
-- Full Latin-1 coverage, so Portuguese accents work when 0097 arrives
-- Two sizes: HUD and heading
-- No filtering, no hinting, integer positions only
-- Numbers are tabular so a counter does not jitter
-
-  - done when: Every accented character in the Portuguese strings renders
-  - done when: A changing number does not shift the text around it
-
 ### 0084 - The sounds of the day
 
 Waits on 0083.  Likely files: `tools/gen_sfx.py, assets/sfx/`.
@@ -292,7 +276,7 @@ Three crops with a real choice between them: fast and cheap, slow and valuable, 
 
 ### 0071 - The two palettes
 
-Waits on 0014, 0022.  Likely files: `tools/gen_sprites.py, src/ui/palette.gd`.
+Waits on 0022.  Likely files: `tools/gen_sprites.py, src/ui/palette.gd`.
 
 Section 18: warm and cozy by day, blue and purple by night, from one set of sprites. The reference sheet is the target.
 
@@ -757,7 +741,7 @@ One router that owns which screen is up, so screens stop knowing about each othe
 
 ### 0099 - An icon and a boot ident
 
-Waits on 0014, 0091.  Likely files: `tools/gen_icon.py, assets/icon.png`.
+Waits on 0091.  Likely files: `tools/gen_icon.py, assets/icon.png`.
 
 Something recognisable in a taskbar and on an itch page, and two seconds before the title that are not the Godot logo.
 
@@ -1475,10 +1459,10 @@ For the player who beat the Giant and wants to know how far the farm goes. Cheap
 - [x] **0011** [input_check harness](prompts/0011-input-check.md)
 - [x] **0012** [Debug overlay](prompts/0012-debug-overlay.md)
 
-## 1 - The first playable build  (1/15)
+## 1 - The first playable build  (2/15)
 
 - [x] **0013** [The world renders](prompts/0013-world-render.md)
-- [ ] **0014** [Sprites generated from ASCII maps](prompts/0014-sprite-pipeline.md)
+- [x] **0014** [Sprites generated from ASCII maps](prompts/0014-sprite-pipeline.md)
 - [ ] **0015** [The player walks and interacts](prompts/0015-player.md)
 - [ ] **0016** [Trees and wood](prompts/0016-wood.md) - needs 0015
 - [ ] **0017** [Rocks and stone](prompts/0017-stone.md) - needs 0016
@@ -1547,7 +1531,7 @@ For the player who beat the Giant and wants to know how far the farm goes. Cheap
 
 ## 5 - Art and visual direction  (0/12)
 
-- [ ] **0071** [The two palettes](prompts/0071-palettes.md) - needs 0014, 0022
+- [ ] **0071** [The two palettes](prompts/0071-palettes.md) - needs 0022
 - [ ] **0072** [The farm tileset](prompts/0072-tileset.md) - needs 0071
 - [ ] **0073** [The player sprite](prompts/0073-player-art.md) - needs 0071, 0015
 - [ ] **0074** [Zombie sprites](prompts/0074-zombie-art.md) - needs 0071, 0050, 0051, 0052
@@ -1556,7 +1540,7 @@ For the player who beat the Giant and wants to know how far the farm goes. Cheap
 - [ ] **0077** [Particles](prompts/0077-particles.md) - needs 0074, 0075
 - [ ] **0078** [The reality transition](prompts/0078-transition.md) - needs 0076
 - [ ] **0079** [Resource icons and the UI kit](prompts/0079-ui-kit.md) - needs 0071, 0021
-- [ ] **0080** [A pixel font](prompts/0080-font.md) - needs 0014
+- [ ] **0080** [A pixel font](prompts/0080-font.md)
 - [ ] **0081** [The UI theme](prompts/0081-theme.md) - needs 0079, 0080
 - [ ] **0082** [Screenshots, and actually looking at them](prompts/0082-screenshots.md) - needs 0078
 
@@ -1581,7 +1565,7 @@ For the player who beat the Giant and wants to know how far the farm goes. Cheap
 - [ ] **0096** [The pause menu](prompts/0096-pause-menu.md) - needs 0092
 - [ ] **0097** [English and Portuguese](prompts/0097-i18n.md) - needs 0081
 - [ ] **0098** [Accessibility](prompts/0098-accessibility.md) - needs 0093, 0097
-- [ ] **0099** [An icon and a boot ident](prompts/0099-icon-ident.md) - needs 0014, 0091
+- [ ] **0099** [An icon and a boot ident](prompts/0099-icon-ident.md) - needs 0091
 - [ ] **0100** [Exports: Windows and Web](prompts/0100-exports.md) - needs 0092
 
 ## 8 - Ship the MVP  (0/8)

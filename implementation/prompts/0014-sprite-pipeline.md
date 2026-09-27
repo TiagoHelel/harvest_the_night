@@ -1,7 +1,7 @@
 # 0014 - Sprites generated from ASCII maps
 
 - **Phase:** 1 - The first playable build
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0001
 - **Likely files:** tools/gen_sprites.py, sprites/
 
