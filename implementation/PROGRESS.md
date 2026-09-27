@@ -3437,3 +3437,74 @@ what it asserts.
 
 `python tools/verify.py` prints PASS: 1453 asserts, 371 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+
+## 0048 - Mines and traps
+
+A mine is the first defence that never aims. It has no `range`, no
+`reload_ticks` and no `energy_draw`, and the whole of task 0048 is arranging
+for that to be true everywhere rather than only in the table.
+
+`Towers` collects by `reload_ticks`, so a mine is invisible to it for free -
+it is never in a targeting loop, never draws a circle, and costs nothing on a
+tick with nobody near it. The new `src/core/traps.gd` runs straight after
+`Enemies.tick()` and asks one question per zombie: is there a trap under me.
+That is a dictionary lookup per entity, the cheapest thing in the night loop,
+and it means a mine goes off on the tick a foot lands on it.
+
+`one_shot` was in `DEFENCES` from the start and nothing read it. It is now
+what `Traps.is_trap()` means, and `check_defences()` refuses a trap that also
+declares a `range` or a `reload_ticks` - a trap does not aim.
+
+### Every mine was a little wall
+
+The one that was worth the whole task. `Pathing._passable()` treated **every**
+occupant as blocking, which is what makes a wall a wall - and made a mine a
+wall too. The flow field routed around each one, so a minefield was a set of
+obstacles that every zombie could see and step past, and a mine would never
+have gone off except by accident.
+
+It was not visible in the rules or in the table. What found it was one assert
+asking the route where it went after a mine was laid on it: the route had
+moved. Traps are now passable, and the assert holds the route to the same
+cells and the same length as before the mine went down.
+
+### They do not chain, on purpose
+
+The done-when asks for a decision and for the journal to record it: **a mine's
+blast damages entities and nothing else.** Two mines side by side are two
+mines.
+
+The reason is that a chain collapses per-mine placement into one decision. If
+mines set each other off, the best move is always to put every mine you own in
+one line and let the pile do the work, and the difference between a good
+placement and a bad one disappears into how many you have. `design.md` wants
+the farm to be a set of small choices.
+
+It also keeps everything else's splash away from them. A mortar shell landing
+beside a mine used to be a real possibility for the farm's own guns to disarm
+the farm they were defending; there is an assert for that too.
+
+`armed_limit` (six) is what stops a rich player carpeting the approach, and
+`mine_kit` at the workshop is what makes each one spent a thing to make again
+rather than a loss. `why_not()` says which limit it is - "6 armed is all the
+farm will take" is a different sentence from "short 5 iron".
+
+### Measured
+
+    a walker set one off 61 ticks (2.0s) after it came in
+    a mine: 60 damage over 1 tile, 60% at the rim -> [60, 36, 0]
+
+Sixty in the middle, thirty-six a tile out, nothing past it, and sixty is
+three walkers' worth of hit points. The rings are measured through a
+`detonate_for_test()` seam rather than through a tick, because a tick moves
+everybody first and then the numbers belong to wherever they ended up.
+
+### Hashes
+
+| | from | to | why |
+|---|---|---|---|
+| sim hash | `961536146` | `203117208` | the state gained `traps_sprung`, the night loop gained a pass, and traps no longer block the flow field |
+| data hash | `2510238421` | `2308311333` | the mine gained its falloff and its armed limit, and `mine_kit` joined the recipes |
+
+`python tools/verify.py` prints PASS: 1500 asserts, 371 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

@@ -327,6 +327,16 @@ const RECIPES: Dictionary = {
 		"output": {&"fence": 1},
 		"ticks": 5 * SECONDS,           # LEVER: ticks, 3-12 seconds worth
 	},
+	# **The mine is made, not bought.** A mine spent is a mine to craft again,
+	# which is what "replenished by crafting" means and what keeps gunpowder
+	# worth having. `check_recipes()` holds these inputs to the mine's own
+	# cost, so the two cannot drift.
+	&"mine_kit": {
+		"station": &"workshop",
+		"inputs": {IRON: 5, GUNPOWDER: 8},
+		"output": {&"mine": 1},
+		"ticks": 8 * SECONDS,           # LEVER: ticks, 4-20 seconds worth
+	},
 	&"wall_kit": {
 		"station": &"workshop",
 		"inputs": {STONE: 10},
@@ -643,7 +653,16 @@ const DEFENCES: Dictionary = {
 		"damage": 60,                   # LEVER: on trigger, 30-100
 		"damage_type": DAMAGE_EXPLOSIVE,
 		"splash_tiles": 1,              # LEVER: tiles, 1-2
+		"splash_falloff_percent": 60,   # LEVER: percent at the rim, 30-90
+		# **It goes off once and is then gone**, which is what `Traps` reads to
+		# know a thing is a trap at all. It is also why a mine has no
+		# `reload_ticks`: it never aims at anything, so `Towers` must never
+		# collect it.
 		"one_shot": true,
+		# How many may be armed on the farm at a time. Crafting is what
+		# replenishes them - each one spent is one to make again - and this is
+		# what stops a rich player carpeting the approach.
+		"armed_limit": 6,               # LEVER: how many, 3-12
 		"energy_draw": 0,
 	},
 	&"fence": {
@@ -1405,6 +1424,18 @@ static func check_defences(defences: Dictionary) -> Array:
 			errors.append(("defence '%s' has a damage and a range and no way of "
 				+ "firing - it looks exactly like a tower and is not one")
 				% defence_id)
+
+		# **A trap is not a tower and must never look like one.** It has no
+		# range and no reload on purpose: `Towers` collects by `reload_ticks`
+		# and a mine that had one would start aiming, drawing a line and
+		# costing a targeting loop every tick for something that only ever
+		# waits.
+		if bool(defence.get("one_shot", false)):
+			if defence.has("reload_ticks") or defence.has("range"):
+				errors.append(("defence '%s' goes off once and also declares a "
+					+ "range or a reload - a trap does not aim") % defence_id)
+			if int(defence.get("damage", 0)) <= 0:
+				errors.append("defence '%s' goes off and does nothing" % defence_id)
 
 		# **A thing that may go down at night has to be temporary.** A
 		# barricade that outlived the night would be a cheaper wall, and the

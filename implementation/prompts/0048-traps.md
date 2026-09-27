@@ -1,7 +1,7 @@
 # 0048 - Mines and traps
 
 - **Phase:** 3 - The full night
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0042
 - **Likely files:** src/core/towers.gd, src/core/game_data.gd
 

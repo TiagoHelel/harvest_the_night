@@ -133,6 +133,9 @@ static func _tick_night(state: Dictionary) -> void:
 	Power.tick(state)
 	Waves.tick(state)
 	Enemies.tick(state)
+	# **Straight after everybody has moved**, so a mine goes off on the tick a
+	# foot lands on it rather than up to a tick later.
+	Traps.tick(state)
 	Towers.tick(state)
 	Combat.tick(state)
 

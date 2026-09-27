@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`##########..............`  **47 / 109 done**
+`###########.............`  **48 / 109 done**
 
-0 doing / 62 todo / 0 blocked across 9 phases.
+0 doing / 61 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0048 - Mines and traps**. The whole of what is left is
+First up: **0049 - Zombies path around walls**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,24 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-62 task(s) left, the ready ones first, then what they
+61 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0048 - Mines and traps
-
-Ready to pick up.  Likely files: `src/core/towers.gd, src/core/game_data.gd`.
-
-The reference sheet's mine: no targeting, no upkeep, high damage, and then it is gone.
-
-- Triggers on an enemy entering its cell, not on a timer
-- High damage in a small radius, then it removes itself
-- It is invisible to the player as a firing thing: no range circle, no target line
-- A limited number armed per night, replenished by crafting
-- Damage, radius and cost are levers
-
-  - done when: A mine under the choke point kills what the levers say it kills
-  - done when: Two mines in adjacent cells do not chain into a fifty damage cascade - or they do, deliberately, and the journal says so
 
 ### 0049 - Zombies path around walls
 
@@ -1015,7 +1000,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0040** [The shop grows](prompts/0040-shop-full.md)
 - [x] **0041** [The first day teaches itself](prompts/0041-tutorial-day.md)
 
-## 3 - The full night  (6/17)
+## 3 - The full night  (7/17)
 
 - [x] **0042** [Data-driven defences](prompts/0042-defence-data.md)
 - [x] **0043** [The flamethrower tower](prompts/0043-tower-flame.md)
@@ -1023,7 +1008,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0045** [The auto-crossbow](prompts/0045-tower-crossbow.md)
 - [x] **0046** [Fences and walls](prompts/0046-walls.md)
 - [x] **0047** [Barricades](prompts/0047-barricades.md)
-- [ ] **0048** [Mines and traps](prompts/0048-traps.md)
+- [x] **0048** [Mines and traps](prompts/0048-traps.md)
 - [ ] **0049** [Zombies path around walls](prompts/0049-pathing-walls.md)
 - [ ] **0050** [The runner](prompts/0050-enemy-runner.md) - needs 0049
 - [ ] **0051** [The tank](prompts/0051-enemy-tank.md) - needs 0049

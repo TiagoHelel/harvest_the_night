@@ -48,6 +48,7 @@ static func create(seed_value: int) -> Dictionary:
 	_adopt(state, Pathing.initial(), "Pathing")
 	_adopt(state, Enemies.initial(), "Enemies")
 	_adopt(state, Combat.initial(), "Combat")
+	_adopt(state, Traps.initial(), "Traps")
 	_adopt(state, Tutorial.initial(), "Tutorial")
 	_adopt(state, Shop.initial(), "Shop")
 	_adopt(state, Livestock.initial(), "Livestock")

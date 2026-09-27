@@ -202,11 +202,19 @@ static func _build(state: Dictionary) -> PackedInt32Array:
 ## Not `Farm.walkable`: the house itself is the destination, so it has to be
 ## reachable even though nothing can stand on it. Everything else that is
 ## occupied blocks, which is what makes a wall a wall.
+##
+## **Except a trap.** A mine is a thing you step on, and an occupant that
+## blocks is an occupant the flow field routes around - so every mine on the
+## farm would have been a little wall with a zombie-shaped gap beside it, seen
+## and avoided by everything that walks. Task 0048 found it by asking the
+## route where it went after a mine was laid on it, and the route had moved.
 static func _passable(state: Dictionary, cell: Vector2i) -> bool:
 	var terrain := Farm.terrain_at(state, cell)
 	if terrain < 0 or Farm.UNWALKABLE.has(terrain):
 		return false
 	var on := Farm.occupant(state, cell)
 	if on.is_empty():
+		return true
+	if Traps.is_trap(StringName(on["id"])):
 		return true
 	return on["id"] == &"house"

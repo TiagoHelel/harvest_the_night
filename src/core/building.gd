@@ -190,6 +190,9 @@ static func why_not(state: Dictionary, id: StringName, cell: Vector2i) -> String
 	# **The allowance, before the money.** Being told "you have used your five"
 	# is a different sentence from "you are short two wood", and the first one
 	# is the one that is true.
+	if Traps.is_trap(id) and Traps.room_for(state, id) <= 0:
+		return "%d armed is all the farm will take" % int(
+			(entry_of(id) as Dictionary).get("armed_limit", 0))
 	if left_tonight(state, id) <= 0:
 		return "%d a night, and that was the last" % int(
 			(entry_of(id) as Dictionary).get("per_night_limit", 0))

@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 40
+const GROUPS := 41
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -104,6 +104,7 @@ func _run() -> void:
 	_task_0045_crossbow()
 	_task_0046_walls()
 	_task_0047_barricades()
+	_task_0048_traps()
 
 
 func _finish() -> void:
@@ -6490,3 +6491,230 @@ func _time_to_chew(seed_value: int, hp: int = 0) -> int:
 		if left < standing:
 			return tick
 	return 0
+
+
+## 0048 - the mine: no aiming, no upkeep, one bang, and they do not chain.
+func _task_0048_traps() -> void:
+	var mine: Dictionary = GameData.DEFENCES[&"mine"]
+
+	# **It is not a tower, and nothing about it says otherwise.**
+	expect(Traps.is_trap(&"mine"), "a mine is a trap")
+	expect(not mine.has("reload_ticks"),
+		"it has no reload - `Towers` collects by that and must never see it")
+	expect(not mine.has("range"),
+		"and no range, so there is no circle to draw and nothing to aim")
+	expect(int(mine["energy_draw"]) == 0, "and it draws no power: no upkeep")
+	for id in GameData.sorted_names(GameData.DEFENCES.keys()):
+		if id == &"mine":
+			continue
+		expect(not Traps.is_trap(id), "and nothing else is a trap: %s" % id)
+
+	expect(GameData.check_defences(GameData.DEFENCES).is_empty(),
+		"the shipped defences pass their own check",
+		str(GameData.check_defences(GameData.DEFENCES)))
+	var aiming: Dictionary = GameData.DEFENCES.duplicate(true)
+	(aiming[&"mine"] as Dictionary)["reload_ticks"] = 30
+	expect(not GameData.check_defences(aiming).is_empty(),
+		"a trap that declares a reload is refused - a trap does not aim")
+
+	# **Replenished by crafting**, which is what makes a spent mine a decision
+	# rather than a loss.
+	var recipe: Dictionary = GameData.RECIPES[&"mine_kit"]
+	expect((recipe["output"] as Dictionary).has(&"mine"),
+		"the workshop makes mines", str(recipe["output"]))
+	expect(recipe["inputs"] == mine["cost"],
+		"at exactly what one costs, which `check_recipes()` enforces",
+		str(recipe["inputs"]))
+	expect((recipe["inputs"] as Dictionary).has(GameData.GUNPOWDER),
+		"and gunpowder is what makes it go bang")
+
+	# **They are laid by day.** Only the barricade goes down once it is dark,
+	# so a minefield is something you decide on before they come.
+	var prepared := _armed_prep(3000)
+	var spot := _room_for(prepared, Vector2i(1, 1))
+	expect(Building.place(prepared, &"mine", spot), "a mine goes down by day")
+	expect(not Towers.cells(prepared).has(spot),
+		"and the list of things that shoot does not contain it",
+		str(Towers.cells(prepared)))
+	expect(Towers.target_of(prepared, spot) == 0,
+		"and it is aiming at nothing, because it does not aim")
+	_night_falls(prepared)
+	expect(not Building.can_place(prepared, &"mine",
+		_room_for(prepared, Vector2i(1, 1))),
+		"and once it is dark no more go down")
+
+	# **A mine is not a wall.** An occupant that blocks is an occupant the flow
+	# field routes around, so this asks the route where it goes after one is
+	# laid on it - and the answer has to be "over it, same as before".
+	var quiet := _armed_prep(3002)
+	Pathing.refresh(quiet)
+	var spawn: Vector2i = Enemies.spawn_cells(quiet, 0)[0]
+	var before_route := _route_from(quiet, spawn)
+	expect(before_route.size() > 6, "they have a way in to start with",
+		str(before_route.size()))
+	var laid: Vector2i = before_route[3]
+	expect(Building.place(quiet, &"mine", laid), "a mine on their way in")
+	Pathing.refresh(quiet)
+	var after_route := _route_from(quiet, spawn)
+	expect(after_route.has(laid),
+		"and the route still goes over it - a mine they walk around is no mine",
+		str(after_route.slice(0, 6)))
+	expect(after_route.size() == before_route.size(),
+		"not one step longer, either",
+		"%d against %d" % [after_route.size(), before_route.size()])
+
+	# **It triggers on arrival, not on a timer.** Twenty seconds of nobody.
+	_night_falls(quiet)
+	Sim.advance(quiet, 600)
+	expect(not Farm.is_empty(quiet, laid),
+		"twenty seconds pass and it is still waiting - it is not on a timer")
+	expect(Traps.sprung(quiet) == 0, "and nothing has gone off")
+
+	var walker := Entities.spawn(quiet, &"walker", spawn)
+	var waited := 0
+	for tick in 4000:
+		Sim.advance(quiet, 1)
+		if Traps.sprung(quiet) > 0:
+			waited = tick + 1
+			break
+	expect(waited > 0, "and then somebody walks in and it goes off",
+		"nothing in 4000 ticks")
+	expect(Farm.is_empty(quiet, laid), "the mine is spent and gone")
+	expect(not Entities.alive(quiet, walker),
+		"and sixty damage is the end of a twenty point walker")
+	print("  a walker set one off %d ticks (%.1fs) after it came in"
+		% [waited, float(waited) / float(GameData.TICK_HZ)])
+
+	# **It kills what the levers say it kills.** The done-when, at the middle,
+	# at the rim, and a tile past it.
+	var blast := _mine_blast(3003, mine)
+	var armour := int((GameData.ENEMIES[&"walker"]
+		as Dictionary).get("armour", 0))
+	var edge := int(mine["splash_falloff_percent"])
+	var radius := int(mine["splash_tiles"])
+	print("  a mine: %d damage over %d tile%s, %d%% at the rim -> %s"
+		% [mine["damage"], radius, "" if radius == 1 else "s", edge, str(blast)])
+	expect(int(blast[0]) == maxi(int(mine["damage"]) - armour, 1),
+		"the one standing on it takes the whole charge", str(blast[0]))
+	for ring in range(1, radius + 1):
+		var share := 100 - (100 - edge) * ring / radius
+		expect(int(blast[ring]) == maxi(maxi(int(mine["damage"]) * share / 100, 1)
+			- armour, 1), "and a tile out takes %d%% of it" % share,
+			str(blast[ring]))
+	expect(int(blast[radius + 1]) == 0,
+		"and one past the rim takes nothing", str(blast[radius + 1]))
+	expect(int(blast[0]) >= int(GameData.ENEMIES[&"walker"]["hp"]),
+		"which is enough to kill what it is for")
+
+	# **Two mines side by side do not chain.** The done-when asks for a
+	# decision and for the journal to say so, and the decision is that they do
+	# not: a blast damages entities and leaves structures alone.
+	var pair := _fresh_night(3004)
+	var strip := _room_for(pair, Vector2i(2, 1))
+	var a := strip
+	var b := strip + Vector2i(1, 0)
+	expect(Farm.place(pair, a, {"id": &"mine", "hp": 1}), "one mine")
+	expect(Farm.place(pair, b, {"id": &"mine", "hp": 1}), "and another beside it")
+	var victim := Entities.spawn(pair, &"walker", a)
+	Entities.set_hp(pair, victim, 500)
+	Traps.detonate_for_test(pair, a)
+
+	expect(Farm.is_empty(pair, a), "standing on one sets that one off")
+	expect(not Farm.is_empty(pair, b),
+		"and the one next to it is still armed - a blast hurts people, not "
+		+ "structures")
+	expect(Traps.sprung(pair) == 1, "one bang, not two", str(Traps.sprung(pair)))
+	var took := 500 - int(Entities.get_one(pair, victim).get("hp", 0))
+	expect(took == maxi(int(mine["damage"]) - armour, 1),
+		"and one mine's worth of damage, not two", str(took))
+
+	# The same rule is what keeps the farm's own guns from disarming it.
+	var friendly := _fresh_night(3005)
+	var under := _room_for(friendly, Vector2i(1, 1))
+	Farm.place(friendly, under, {"id": &"mine", "hp": 1})
+	var shelled := Entities.spawn(friendly, &"walker", under + Vector2i(1, 0))
+	Entities.set_hp(friendly, shelled, 500)
+	Towers.land_at_for_test(friendly, GameData.DEFENCES[&"mortar"],
+		under + Vector2i(1, 0))
+	expect(not Farm.is_empty(friendly, under),
+		"a mortar shell landing beside a mine does not set it off",
+		"or the farm's own guns disarm the farm")
+
+	# **A limited number armed at a time**, which is what stops a rich player
+	# carpeting the approach and never thinking about where.
+	var limit := int(mine["armed_limit"])
+	var field := _armed_prep(3001)
+	var down := 0
+	for _i in limit + 4:
+		var cell := _room_for(field, Vector2i(1, 1))
+		if cell == Vector2i(-1, -1):
+			break
+		if Building.place(field, &"mine", cell):
+			down += 1
+	expect(down == limit, "exactly the limit are armed, however many are tried",
+		str(down))
+	expect(Traps.armed(field, &"mine") == limit, "and that many are on the farm",
+		str(Traps.armed(field, &"mine")))
+	expect(Traps.room_for(field, &"mine") == 0, "with room for no more")
+	expect(Resources.can_afford(field, mine["cost"]),
+		"and it is the limit talking, not the money")
+	expect(Building.why_not(field, &"mine",
+		_room_for(field, Vector2i(1, 1))).contains("armed"),
+		"so the reason says which limit it is",
+		Building.why_not(field, &"mine", _room_for(field, Vector2i(1, 1))))
+
+	# One spent is one to make again, which is the loop the limit creates.
+	Farm.remove(field, Farm.cells_with(field, &"mine")[0])
+	expect(Traps.room_for(field, &"mine") == 1,
+		"one spent is one more that may be laid",
+		str(Traps.room_for(field, &"mine")))
+	expect(Traps.room_for(field, &"wall") > 1000,
+		"and a thing with no limit declared has none applied",
+		str(Traps.room_for(field, &"wall")))
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## A preparation phase with the materials to build, and the night still to
+## come. **Mines are laid by day**: once it is dark `allowed_in_phase()` lets
+## nothing but the barricade go down.
+func _armed_prep(seed_value: int) -> Dictionary:
+	var state := State.create(seed_value)
+	Resources.gain(state, {GameData.WOOD: 400, GameData.STONE: 400,
+		GameData.IRON: 400, GameData.GUNPOWDER: 400})
+	Phases.begin_preparation(state)
+	return state
+
+
+## ...and then let it get dark, with no wave due.
+func _night_falls(state: Dictionary) -> void:
+	Sim.advance(state, GameData.PREPARATION_TICKS)
+	_park_the_waves(state)
+
+
+## Set one mine off under a line of walkers and report what each ring took.
+##
+## By hand rather than by tick: a tick moves everybody first, and then the
+## numbers belong to wherever they ended up rather than to the ring they
+## started on.
+func _mine_blast(seed_value: int, entry: Dictionary) -> Array:
+	var state := _fresh_night(seed_value)
+	var radius := int(entry.get("splash_tiles", 1))
+	var middle := _room_for(state, Vector2i(radius + 2, 1))
+	Farm.place(state, middle, {"id": &"mine", "hp": 1})
+
+	var who: Array = []
+	for ring in range(0, radius + 2):
+		var id := Entities.spawn(state, &"walker", middle + Vector2i(ring, 0))
+		# Enough health to live through it, or the number measured is the
+		# walker's hit points and not the mine's damage - the lesson task 0044
+		# learned the hard way.
+		Entities.set_hp(state, id, 500)
+		who.append(id)
+
+	Traps.detonate_for_test(state, middle)
+
+	var took: Array = []
+	for id in who:
+		took.append(500 - int(Entities.get_one(state, int(id)).get("hp", 0)))
+	return took
