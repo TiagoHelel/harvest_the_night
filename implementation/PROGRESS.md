@@ -452,3 +452,45 @@ Notes:
 - A key not in `DEFAULTS` does not exist: it cannot be read, cannot be written,
   and is dropped from a file that has it. A value of the wrong type falls back
   to its default rather than poisoning a panel.
+
+## 0010 - Save the profile and the run - done 2026-09-27
+
+What changed: two files, `user://run.sav` and `user://profile.sav`. The run save
+is the core state and nothing else; the profile is what outlives a run. Both
+written atomically, both checked before they are trusted.
+
+Files: src/app/save.gd, src/tools/headless_check.gd
+
+Verify: PASS - 8 passed, 2 skipped, 10s. **205 asserts, 0 failed** (182 before).
+Both hashes unchanged: saving reads the state and never writes to it.
+
+Notes:
+
+- **The save is the state, not a second description of it.** Because
+  `src/core/` has been plain data since task 0002, saving is serialisation
+  rather than a parallel account of the world that could quietly disagree with
+  the real one. The whole file is `{"state": state}`.
+- **`var_to_bytes`, not JSON.** Measured with a probe before committing to it:
+  it round-trips `StringName`, `PackedByteArray`, integer dictionary keys and
+  the int-versus-float distinction exactly, and JSON loses every one of those.
+  **Never `var_to_bytes_with_objects`** - that would let a save file instantiate
+  a script, and a save file is data somebody else can hand you.
+- **Mid-night saves finish the night identically.** Asserted directly: save at
+  night tick 500, advance the original and the reloaded copy 3000 ticks each,
+  hashes match. That only holds because the RNG stream position is part of the
+  state, which is what task 0002 bought.
+- **The checksum earns its place.** The same probe showed `bytes_to_var` on a
+  truncated buffer returns null after printing two engine errors about Variant
+  decoding - true but useless to a player. Header, length and FNV-1a checksum
+  are all checked first, so a damaged save is refused with a message about the
+  save. Six ways of being wrong are covered: truncated, a single flipped bit,
+  not ours, empty, too short, and from a format this build does not know.
+- **The previous save becomes the backup**, and only then does the new one take
+  its place. A crash at any point leaves either the old file, or the old file as
+  `.bak` plus a complete `.tmp` - never a half-written save.
+- A profile from an older build gains the keys this build added rather than
+  being rejected; one from a newer build keeps what this build understands.
+  Losing somebody's statistics because they opened an older copy of the game
+  would be unforgivable, and it is the kind of thing that happens by default.
+- `Save` is static functions on a `RefCounted`, not an autoload: nothing here
+  needs to be in the tree, and the headless check calls it directly.

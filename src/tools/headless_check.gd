@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 7
+const GROUPS := 8
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -71,6 +71,7 @@ func _run() -> void:
 	_task_0007_resources()
 	_task_0008_farm()
 	_task_0009_settings()
+	_task_0010_save()
 
 
 func _finish() -> void:
@@ -684,3 +685,116 @@ func _wipe_settings_files() -> void:
 	for path in ["user://settings.cfg", "user://settings.cfg.tmp"]:
 		if FileAccess.file_exists(path):
 			DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
+
+
+## 0010 - saving: exact, atomic, and never fatal when the file is wrong.
+func _task_0010_save() -> void:
+	Save.delete_run()
+	_remove_file(Save.PROFILE_PATH)
+	_remove_file(Save.PROFILE_PATH + ".bak")
+
+	expect(not Save.has_run(), "a fresh install has no run")
+	expect(Save.read_run().is_empty(), "and reading one gives nothing")
+	expect(int(Save.read_profile()["best_night"]) == 0,
+		"a missing profile is a fresh profile, not an error")
+
+	# Play a bit of a day, build something, spend something.
+	var state := State.create(777)
+	Sim.advance(state, 900)
+	Resources.add(state, GameData.IRON, 17)
+	Resources.pay(state, {GameData.WOOD: 5})
+	Farm.place(state, Vector2i(12, 8), {"id": &"gun_tower", "hp": 60})
+	Phases.begin_preparation(state)
+	Sim.advance(state, GameData.PREPARATION_TICKS + 500)
+	expect(int(state["phase"]) == Phases.NIGHT, "we are mid-night")
+
+	# **The round trip is exact**, which is the whole reason the state is plain
+	# data and the save uses var_to_bytes rather than JSON.
+	expect(Save.write_run(state), "the run writes")
+	expect(Save.has_run(), "and the file is there")
+	var loaded := Save.read_run()
+	expect(not loaded.is_empty(), "and reads back")
+	expect(State.hash_of(loaded) == State.hash_of(state),
+		"byte for byte - same resources, same farm, same tick, same RNG",
+		"%d vs %d" % [State.hash_of(loaded), State.hash_of(state)])
+	expect(Resources.amount(loaded, GameData.IRON) == 17, "resources survived")
+	expect(Farm.occupant(loaded, Vector2i(12, 8))["id"] == &"gun_tower",
+		"the farm survived")
+	expect(int(loaded["night_tick"]) == 500, "and the night is where it was",
+		str(loaded["night_tick"]))
+
+	# **The night finishes the same way it would have without the interruption.**
+	# This is the property that makes saving mid-night safe at all, and it only
+	# holds because the RNG stream position is part of the state.
+	Sim.advance(state, 3000)
+	Sim.advance(loaded, 3000)
+	expect(State.hash_of(loaded) == State.hash_of(state),
+		"a reloaded night plays out identically to an uninterrupted one",
+		"%d vs %d" % [State.hash_of(loaded), State.hash_of(state)])
+
+	# The previous save becomes the backup rather than being thrown away.
+	Save.write_run(state)
+	expect(FileAccess.file_exists(Save.RUN_PATH + ".bak"),
+		"the second save keeps the first as a backup")
+
+	# **A truncated file is refused, not crashed on.**
+	var good := FileAccess.open(Save.RUN_PATH, FileAccess.READ)
+	var whole := good.get_buffer(good.get_length())
+	good.close()
+
+	print("  (the WARNINGs below are deliberate - damaged saves being refused)")
+	_write_bytes(Save.RUN_PATH, whole.slice(0, whole.size() / 2))
+	expect(Save.read_run().is_empty(), "a truncated save is refused")
+
+	# A flipped bit in the middle is caught by the checksum, not by letting
+	# bytes_to_var decode nonsense into a game.
+	var bent := whole.duplicate()
+	bent[bent.size() - 10] = (int(bent[bent.size() - 10]) + 1) % 256
+	_write_bytes(Save.RUN_PATH, bent)
+	expect(Save.read_run().is_empty(), "a flipped bit is caught by the checksum")
+
+	# Somebody else's file, and an empty one.
+	_write_bytes(Save.RUN_PATH, "not a save at all, just some text".to_ascii_buffer())
+	expect(Save.read_run().is_empty(), "a file that is not ours is refused")
+	_write_bytes(Save.RUN_PATH, PackedByteArray())
+	expect(Save.read_run().is_empty(), "an empty file is refused")
+
+	# A save from a build that does not exist yet is refused rather than
+	# half-read into a game that would then be subtly wrong.
+	var future := whole.duplicate()
+	future[4] = 99
+	_write_bytes(Save.RUN_PATH, future)
+	expect(Save.read_run().is_empty(), "a save from the future is refused")
+
+	# The profile survives its own round trip.
+	var profile := Save.default_profile()
+	profile["best_night"] = 7
+	profile["runs_won"] = 2
+	expect(Save.write_profile(profile), "the profile writes")
+	var back := Save.read_profile()
+	expect(int(back["best_night"]) == 7 and int(back["runs_won"]) == 2,
+		"and reads back", str(back))
+
+	# A profile missing a key this build added gains it rather than breaking.
+	expect(Save.write_profile({"version": 1, "best_night": 3}), "an old profile")
+	var merged := Save.read_profile()
+	expect(int(merged["best_night"]) == 3, "keeps what it had")
+	expect(merged.has("unlocks") and merged.has("stats"),
+		"and gains the keys this build expects", str(merged.keys()))
+
+	Save.delete_run()
+	_remove_file(Save.PROFILE_PATH)
+	_remove_file(Save.PROFILE_PATH + ".bak")
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+func _write_bytes(path: String, bytes: PackedByteArray) -> void:
+	var f := FileAccess.open(path, FileAccess.WRITE)
+	f.store_buffer(bytes)
+	f.close()
+
+
+func _remove_file(path: String) -> void:
+	if FileAccess.file_exists(path):
+		DirAccess.remove_absolute(ProjectSettings.globalize_path(path))

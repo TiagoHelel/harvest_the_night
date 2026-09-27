@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`##......................`  **9 / 108 done**
+`##......................`  **10 / 108 done**
 
-0 doing / 99 todo / 0 blocked across 9 phases.
+0 doing / 98 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0010 - Save the profile and the run**. The whole of what is left is
+First up: **0011 - input_check harness**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,25 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-99 task(s) left, the ready ones first, then what they
+98 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0010 - Save the profile and the run
-
-Ready to pick up.  Likely files: `src/app/save.gd`.
-
-Quitting on day 4 and coming back to day 4. The state is already plain data, so this is serialisation and versioning, not a redesign.
-
-- The run save is the core state plus a version and the RNG stream position - nothing from `src/ui/`
-- The profile save holds what survives a run: unlocks, statistics, settings pointer
-- Atomic write, and a `.bak` of the previous save kept
-- Loading a save from an older version runs migrations in order or refuses with a readable message
-- A save written mid-NIGHT reloads mid-NIGHT with the wave where it was
-
-  - done when: Save on day 3, quit, load: same resources, same buildings, same grid
-  - done when: Save mid-night, load, and the determinism hash of the rest of the night matches an uninterrupted run
-  - done when: A truncated save file is refused, not crashed on
 
 ### 0011 - input_check harness
 
@@ -153,6 +137,21 @@ Master, SFX and Music buses plus a small `Audio.play(id)`, so the sound tasks af
   - done when: Master at zero silences everything including music
   - done when: Twenty simultaneous shots produce one clean sound, not clipping
 
+### 0103 - Crash and error reporting
+
+Ready to pick up.  Likely files: `src/app/crash.gd`.
+
+When it breaks on someone else's machine, get enough to fix it without them.
+
+- A handler that writes state, seed, tick, phase and the last log lines to `user://crash/`
+- A dialogue offering the file's location rather than vanishing
+- The run save is preserved, not overwritten by the crash
+- No personal data in the report - say what is in it
+- It never sends anything anywhere by itself
+
+  - done when: A deliberate crash produces a report with the seed and the tick
+  - done when: The run is still loadable afterwards
+
 ### 0015 - The player walks and interacts
 
 Waits on 0013.  Likely files: `src/core/player.gd, src/ui/player_view.gd`.
@@ -228,21 +227,6 @@ Chop, mine, till, plant, water, the fishing splash and the bite, the craft, the 
 
   - done when: Chopping a tree for a full minute does not become annoying - go and check
   - done when: Regenerating produces byte-identical files
-
-### 0103 - Crash and error reporting
-
-Waits on 0010.  Likely files: `src/app/crash.gd`.
-
-When it breaks on someone else's machine, get enough to fix it without them.
-
-- A handler that writes state, seed, tick, phase and the last log lines to `user://crash/`
-- A dialogue offering the file's location rather than vanishing
-- The run save is preserved, not overwritten by the crash
-- No personal data in the report - say what is in it
-- It never sends anything anywhere by itself
-
-  - done when: A deliberate crash produces a report with the seed and the tick
-  - done when: The run is still loadable afterwards
 
 ### 0016 - Trees and wood
 
@@ -743,7 +727,7 @@ The other half of a tower defence: making the zombies walk where you want them t
 
 ### 0092 - The main menu and the router
 
-Waits on 0091, 0010.  Likely files: `src/app/app.gd, src/ui/main_menu.gd`.
+Waits on 0091.  Likely files: `src/app/app.gd, src/ui/main_menu.gd`.
 
 One router that owns which screen is up, so screens stop knowing about each other.
 
@@ -1465,7 +1449,7 @@ A number, checked automatically, instead of a feeling about whether it runs well
 
 ### 0104 - Saves survive an update
 
-Waits on 0010, 0062.  Likely files: `src/app/save.gd`.
+Waits on 0062.  Likely files: `src/app/save.gd`.
 
 Adding a lever or a tech node must not delete somebody's run.
 
@@ -1494,7 +1478,7 @@ The upgrade chain the design document draws: a tower that grows with the run ins
 
 ### 0069 - Run statistics
 
-Waits on 0066, 0010.  Likely files: `src/core/stats.gd, src/ui/stats_screen.gd`.
+Waits on 0066.  Likely files: `src/core/stats.gd, src/ui/stats_screen.gd`.
 
 What the player did, kept across runs, because a number going up is its own reason to play another night.
 
@@ -1521,7 +1505,7 @@ For the player who beat the Giant and wants to know how far the farm goes. Cheap
   - done when: Night 25 is generated and playable
   - done when: The same seed generates the same night 25 twice
 
-## 0 - Foundation  (9/12)
+## 0 - Foundation  (10/12)
 
 - [x] **0001** [Godot project scaffold](prompts/0001-project-scaffold.md)
 - [x] **0002** [Fixed-timestep deterministic simulation](prompts/0002-sim-tick.md)
@@ -1532,7 +1516,7 @@ For the player who beat the Giant and wants to know how far the farm goes. Cheap
 - [x] **0007** [The resource ledger](prompts/0007-resource-ledger.md)
 - [x] **0008** [The farm grid](prompts/0008-farm-grid.md)
 - [x] **0009** [Settings singleton](prompts/0009-settings.md)
-- [ ] **0010** [Save the profile and the run](prompts/0010-save.md)
+- [x] **0010** [Save the profile and the run](prompts/0010-save.md)
 - [ ] **0011** [input_check harness](prompts/0011-input-check.md)
 - [ ] **0012** [Debug overlay](prompts/0012-debug-overlay.md)
 
@@ -1603,7 +1587,7 @@ For the player who beat the Giant and wants to know how far the farm goes. Cheap
 - [ ] **0066** [Night 10 and the end of the run](prompts/0066-run-end.md) - needs 0060, 0058
 - [ ] **0067** [The autoplayer](prompts/0067-autoplayer.md) - needs 0059, 0055
 - [ ] **0068** [A balance sweep over the ten nights](prompts/0068-balance-sweep.md) - needs 0067
-- [ ] **0069** [Run statistics](prompts/0069-stats.md) - needs 0066, 0010
+- [ ] **0069** [Run statistics](prompts/0069-stats.md) - needs 0066
 - [ ] **0070** [Endless nights past ten](prompts/0070-endless.md) - needs 0066, 0059
 
 ## 5 - Art and visual direction  (0/12)
@@ -1635,7 +1619,7 @@ For the player who beat the Giant and wants to know how far the farm goes. Cheap
 ## 7 - Shell and product  (0/10)
 
 - [ ] **0091** [The title screen](prompts/0091-title-screen.md) - needs 0081
-- [ ] **0092** [The main menu and the router](prompts/0092-main-menu.md) - needs 0091, 0010
+- [ ] **0092** [The main menu and the router](prompts/0092-main-menu.md) - needs 0091
 - [ ] **0093** [Options: video](prompts/0093-options-video.md) - needs 0092
 - [ ] **0094** [Options: audio](prompts/0094-options-audio.md) - needs 0083, 0092
 - [ ] **0095** [Options: controls](prompts/0095-options-controls.md) - needs 0092
@@ -1649,8 +1633,8 @@ For the player who beat the Giant and wants to know how far the farm goes. Cheap
 
 - [ ] **0101** [Onboarding in seven lines](prompts/0101-onboarding.md) - needs 0041, 0097
 - [ ] **0102** [A performance budget](prompts/0102-perf-budget.md) - needs 0060
-- [ ] **0103** [Crash and error reporting](prompts/0103-error-report.md) - needs 0010
-- [ ] **0104** [Saves survive an update](prompts/0104-save-compat.md) - needs 0010, 0062
+- [ ] **0103** [Crash and error reporting](prompts/0103-error-report.md)
+- [ ] **0104** [Saves survive an update](prompts/0104-save-compat.md) - needs 0062
 - [ ] **0105** [A playtest build](prompts/0105-playtest-build.md) - needs 0100, 0103
 - [ ] **0106** [The release checklist](prompts/0106-release-checklist.md) - needs 0105, 0099
 - [ ] **0107** [Store assets](prompts/0107-store-assets.md) - needs 0082, 0099
