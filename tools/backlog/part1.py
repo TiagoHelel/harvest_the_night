@@ -73,21 +73,28 @@ TASKS = [
               "A recipe pointing at a resource that does not exist fails "
               "`validate()` with the offending id in the message"]),
 
-    dict(id=4, phase=P0, title="Headless check harness", slug="headless-check",
-         deps=[2],
-         files="src/tools/headless_check.gd",
-         goal="The gate that every later rule hangs its test on: run the game's "
-              "rules with no window, assert, and exit non-zero when one breaks.",
-         req=["Runs as `godot --headless --path . --script "
-              "res://src/tools/headless_check.gd`",
-              "A tiny `expect(condition, message)` helper; the failure prints the "
-              "message and the values, not just `false`",
-              "Prints `N asserts, M failed` on the last line and exits 1 if M > 0",
-              "First asserts cover the tick loop, the RNG stream and "
-              "`GameData.validate()`",
+    dict(id=4, phase=P0, title="Harden the headless check harness",
+         slug="headless-check", deps=[2, 3],
+         files="src/tools/headless_check.gd, tools/verify.py",
+         goal="Task 0002 shipped `headless_check.gd` with its own asserts, "
+              "because the house rule is that a rule ships with its test. It "
+              "has one bad failure mode: **a script error before the final "
+              "`quit()` leaves the SceneTree running forever**, so a broken "
+              "check hangs the backlog loop instead of failing it. Fix that, "
+              "and finish the harness.",
+         req=["A script error must end the run non-zero, not idle. Guard "
+              "`_initialize()` so anything that escapes still prints and quits",
+              "`verify.py` already bounds it with a timeout; keep that as the "
+              "belt to this task's braces, and make the timeout message stay "
+              "accurate",
+              "Add the `GameData.validate()` asserts that task 0003 made "
+              "possible",
+              "Asserts stay grouped by the task that introduced them, one "
+              "function each, so a failure names the design that moved",
               "No dependency on anything in `src/ui/`"],
-         dod=["It finishes in under 10 seconds",
-              "Breaking a rule on purpose makes it exit 1 and name the assert",
+         dod=["Introducing a deliberate script error makes it exit non-zero "
+              "within a second instead of hanging - test this, do not assume it",
+              "It finishes in under 10 seconds",
               "It runs with no `.godot/` cache present"]),
 
     dict(id=5, phase=P0, title="verify.py and the determinism guard",

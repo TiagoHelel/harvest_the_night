@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://src/ui/main.gd" id="1_main"]
+[ext_resource type="Script" path="res://src/ui/sim_driver.gd" id="2_driver"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -56,3 +57,14 @@ modulate = Color(0.45, 0.43, 0.56, 1)
 layout_mode = 2
 text = "v0.1.0"
 horizontal_alignment = 1
+
+[node name="Clock" type="Label" parent="Rows"]
+unique_name_in_owner = true
+modulate = Color(0.35, 0.34, 0.45, 1)
+layout_mode = 2
+text = "tick 0"
+horizontal_alignment = 1
+
+[node name="SimDriver" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_driver")

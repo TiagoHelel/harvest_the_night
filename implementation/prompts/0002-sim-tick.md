@@ -1,7 +1,7 @@
 # 0002 - Fixed-timestep deterministic simulation
 
 - **Phase:** 0 - Foundation
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0001
 - **Likely files:** src/core/sim.gd, src/core/rng.gd, src/core/state.gd
 

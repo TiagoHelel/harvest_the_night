@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`........................`  **1 / 108 done**
+`........................`  **2 / 108 done**
 
-0 doing / 107 todo / 0 blocked across 9 phases.
+0 doing / 106 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0002 - Fixed-timestep deterministic simulation**. The whole of what is left is
+First up: **0003 - game_data.gd, the one file of levers**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,25 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-107 task(s) left, the ready ones first, then what they
+106 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0002 - Fixed-timestep deterministic simulation
-
-Ready to pick up.  Likely files: `src/core/sim.gd, src/core/rng.gd, src/core/state.gd`.
-
-One tick function that advances the whole world at a fixed rate. Crop growth, tower fire, zombie walking, the headless tests, the double speed button and skipping a night all become the same code run a different number of times.
-
-- `TICK_HZ = 30` in game_data; `Sim.tick(state)` advances exactly one tick and returns nothing
-- The UI accumulates `delta` and calls `tick()` a whole number of times. A partial tick never happens, and a slow frame catches up with a cap so it cannot spiral
-- `src/core/rng.gd`: a seeded PCG the state carries. `randi()` and `randf()` are banned in `src/core/`, and so is `Time.*`
-- `state` is plain data - Dictionary and Array of primitives - so it can be deep-copied, hashed, saved and diffed
-- `state.tick` is the only clock the rules ever read
-
-  - done when: 10000 ticks from one seed, run twice, hash identical
-  - done when: Nothing under `src/core/` says `extends Node`
-  - done when: `grep -rE 'randf|randi|Time\.' src/core/` finds only `rng.gd`
 
 ### 0003 - game_data.gd, the one file of levers
 
@@ -94,25 +78,25 @@ Art that a script owns. One palette, one generator, one command - so the set sta
   - done when: Editing one character in a map changes exactly one pixel
   - done when: The generated sheet imports with nearest-neighbour filtering and no mipmaps
 
-### 0004 - Headless check harness
+### 0004 - Harden the headless check harness
 
-Waits on 0002.  Likely files: `src/tools/headless_check.gd`.
+Waits on 0003.  Likely files: `src/tools/headless_check.gd, tools/verify.py`.
 
-The gate that every later rule hangs its test on: run the game's rules with no window, assert, and exit non-zero when one breaks.
+Task 0002 shipped `headless_check.gd` with its own asserts, because the house rule is that a rule ships with its test. It has one bad failure mode: **a script error before the final `quit()` leaves the SceneTree running forever**, so a broken check hangs the backlog loop instead of failing it. Fix that, and finish the harness.
 
-- Runs as `godot --headless --path . --script res://src/tools/headless_check.gd`
-- A tiny `expect(condition, message)` helper; the failure prints the message and the values, not just `false`
-- Prints `N asserts, M failed` on the last line and exits 1 if M > 0
-- First asserts cover the tick loop, the RNG stream and `GameData.validate()`
+- A script error must end the run non-zero, not idle. Guard `_initialize()` so anything that escapes still prints and quits
+- `verify.py` already bounds it with a timeout; keep that as the belt to this task's braces, and make the timeout message stay accurate
+- Add the `GameData.validate()` asserts that task 0003 made possible
+- Asserts stay grouped by the task that introduced them, one function each, so a failure names the design that moved
 - No dependency on anything in `src/ui/`
 
+  - done when: Introducing a deliberate script error makes it exit non-zero within a second instead of hanging - test this, do not assume it
   - done when: It finishes in under 10 seconds
-  - done when: Breaking a rule on purpose makes it exit 1 and name the assert
   - done when: It runs with no `.godot/` cache present
 
 ### 0006 - The phase machine: day, preparation, night, result
 
-Waits on 0002, 0003.  Likely files: `src/core/phases.gd, src/core/sim.gd`.
+Waits on 0003.  Likely files: `src/core/phases.gd, src/core/sim.gd`.
 
 The loop the whole game is: DAY to PREPARATION to NIGHT to RESULT and back to DAY, owned by the rules rather than by a screen.
 
@@ -144,7 +128,7 @@ One place that owns how much of everything the player has, so no later system in
 
 ### 0008 - The farm grid
 
-Waits on 0002, 0003.  Likely files: `src/core/grid.gd, src/core/farm.gd`.
+Waits on 0003.  Likely files: `src/core/grid.gd, src/core/farm.gd`.
 
 The farm is one grid and it is the entire world. Day and night are the same tiles with a different job, which is the whole idea of the game.
 
@@ -1287,7 +1271,7 @@ One button that lets the player change a night they are losing, without turning 
 
 ### 0055 - Double speed and skipping the night
 
-Waits on 0002, 0027.  Likely files: `src/ui/night_hud.gd, src/core/sim.gd`.
+Waits on 0027.  Likely files: `src/ui/night_hud.gd, src/core/sim.gd`.
 
 The semi-idle promise: if the defence is clearly going to hold, let the player say so and move on.
 
@@ -1648,16 +1632,16 @@ For the player who beat the Giant and wants to know how far the farm goes. Cheap
   - done when: Night 25 is generated and playable
   - done when: The same seed generates the same night 25 twice
 
-## 0 - Foundation  (1/12)
+## 0 - Foundation  (2/12)
 
 - [x] **0001** [Godot project scaffold](prompts/0001-project-scaffold.md)
-- [ ] **0002** [Fixed-timestep deterministic simulation](prompts/0002-sim-tick.md)
+- [x] **0002** [Fixed-timestep deterministic simulation](prompts/0002-sim-tick.md)
 - [ ] **0003** [game_data.gd, the one file of levers](prompts/0003-game-data.md)
-- [ ] **0004** [Headless check harness](prompts/0004-headless-check.md) - needs 0002
+- [ ] **0004** [Harden the headless check harness](prompts/0004-headless-check.md) - needs 0003
 - [ ] **0005** [verify.py and the determinism guard](prompts/0005-verify-and-hash.md) - needs 0004
-- [ ] **0006** [The phase machine: day, preparation, night, result](prompts/0006-phase-machine.md) - needs 0002, 0003
+- [ ] **0006** [The phase machine: day, preparation, night, result](prompts/0006-phase-machine.md) - needs 0003
 - [ ] **0007** [The resource ledger](prompts/0007-resource-ledger.md) - needs 0003
-- [ ] **0008** [The farm grid](prompts/0008-farm-grid.md) - needs 0002, 0003
+- [ ] **0008** [The farm grid](prompts/0008-farm-grid.md) - needs 0003
 - [ ] **0009** [Settings singleton](prompts/0009-settings.md)
 - [ ] **0010** [Save the profile and the run](prompts/0010-save.md) - needs 0006, 0007, 0008
 - [ ] **0011** [input_check harness](prompts/0011-input-check.md) - needs 0005
@@ -1713,7 +1697,7 @@ For the player who beat the Giant and wants to know how far the farm goes. Cheap
 - [ ] **0052** [The breaker](prompts/0052-enemy-breaker.md) - needs 0049, 0046
 - [ ] **0053** [Repair during the night](prompts/0053-repair.md) - needs 0046, 0027
 - [ ] **0054** [The player's ability](prompts/0054-ability.md) - needs 0027
-- [ ] **0055** [Double speed and skipping the night](prompts/0055-speed-controls.md) - needs 0002, 0027
+- [ ] **0055** [Double speed and skipping the night](prompts/0055-speed-controls.md) - needs 0027
 - [ ] **0056** [The night HUD](prompts/0056-night-hud.md) - needs 0027
 - [ ] **0057** [Structures take damage and die](prompts/0057-structure-damage.md) - needs 0046, 0052
 - [ ] **0058** [The Giant](prompts/0058-boss-giant.md) - needs 0051, 0052, 0057

@@ -125,6 +125,13 @@ def check_godot_present():
     return check("godot import", code == 0, "" if code == 0 else tail(out))
 
 
+# A Godot tool script that errors before its final quit() does not exit: the
+# SceneTree keeps running with nothing left to do. Unattended, that hangs the
+# backlog loop instead of failing it, which is strictly worse than a red line.
+# Every script run is bounded, and the timeout reads as a FAIL.
+SCRIPT_TIMEOUT_S = 120
+
+
 def check_script(name, script, missing_note, args=(), pattern=None):
     """Run a Godot tool script, or skip when the backlog has not written it."""
     if not os.path.exists(rel("project.godot")):
@@ -133,7 +140,11 @@ def check_script(name, script, missing_note, args=(), pattern=None):
     if not os.path.exists(path):
         return skip(name, missing_note)
     code, out = godot(["--headless", "--script", "res://" + script,
-                       *(["--", *args] if args else [])])
+                       *(["--", *args] if args else [])],
+                      timeout=SCRIPT_TIMEOUT_S)
+    if code == 124:
+        return check(name, False, "hung - it never reached quit(). A script "
+                                  "error leaves the SceneTree running.")
     if pattern:
         m = re.search(pattern, out)
         detail = m.group(0) if m else tail(out, 4)
@@ -155,7 +166,8 @@ def check_determinism(accept):
     if not os.path.exists(rel(*script.split("/"))):
         return skip(name, "no determinism.gd yet - task 0005")
 
-    code, out = godot(["--headless", "--script", "res://" + script])
+    code, out = godot(["--headless", "--script", "res://" + script],
+                      timeout=SCRIPT_TIMEOUT_S)
     if code != 0:
         return check(name, False, tail(out))
     m = re.search(r"(-?\d{4,})", out)

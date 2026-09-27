@@ -88,3 +88,49 @@ Notes:
   pass.
 - `.gitignore`, `.gitattributes` and the first commits already existed from the
   backlog session, so the "git init" requirement was already satisfied.
+
+## 0002 - Fixed-timestep deterministic simulation - done 2026-09-27
+
+What changed: the one clock the whole game runs on. `Sim.tick(state)` advances
+the world exactly once at 30Hz; `Sim.ticks_for()` turns a frame's `delta` into a
+whole number of ticks with the remainder carried over and a cap on catching up;
+`Rng` is a seeded xorshift128 the state carries; `State` is plain Dictionary and
+Array with a deep copy and an order-independent hash. `SimDriver` is the only
+thing in the game that touches `delta`, and the boot screen now shows the clock
+running so the tick is visible rather than merely asserted.
+
+Files: src/core/sim.gd, src/core/rng.gd, src/core/state.gd,
+src/core/game_data.gd, src/ui/sim_driver.gd, src/ui/main.gd, scenes/Main.tscn,
+src/tools/headless_check.gd, tools/verify.py, tools/backlog/part1.py
+
+Verify: PASS - 4 passed, 3 skipped. **13 asserts, 0 failed.** No hash baseline
+yet (task 0005 records it), but the number the guard will lock in is here:
+**10000 ticks at seed 1234 hashes to 440001231.**
+
+Notes:
+
+- **`randi_range` and `randf` are taken.** GDScript has both as globals, so a
+  static method of the same name loses to the built-in at the call site *inside
+  the same file* - `Rng.chance()` was silently calling the engine's
+  `randi_range(from, to)` and the parser only complained about the argument
+  count. Renamed to `Rng.int_between()` and `Rng.unit_float()`. That is better
+  than the prompt asked for: `grep -rE 'randi|randf|Time\.' src/core/` now finds
+  **no calls at all**, only the doc comments explaining the ban, instead of "only
+  rng.gd".
+- **A Godot tool script that errors never exits.** `extends SceneTree` with a
+  parse error in `_initialize()` leaves the tree running forever, so the check
+  hangs instead of failing - it cost two 120-second timeouts to find. `verify.py`
+  now bounds every script run at 120s and reports a timeout as "hung - it never
+  reached quit()". **Task 0004 was rescoped** from "build the harness" to "harden
+  it": the harness shipped here with 0002's asserts, because the house rule is
+  that a rule ships with its test, and the hang is the real work left. Its prompt
+  is rewritten and its deps now include 0003.
+- The RNG is xorshift128 over four 32-bit words with every intermediate masked
+  back into 32 bits. That masking is not decoration: GDScript's `>>` is an
+  arithmetic shift, so an unmasked port goes wrong the first time a value crosses
+  the sign bit, and it goes wrong differently on different builds.
+- The state hash sorts Dictionary keys before folding. Iteration is insertion
+  order, so two equal states built in different orders would otherwise hash
+  differently - it has to be a hash of the state, not of how it was assembled.
+- `MAX_CATCH_UP_TICKS = 8` drops a long stall rather than paying it. Confirmed
+  on screen: 150 frames from a cold start reached tick 138, not tick 900.
