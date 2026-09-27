@@ -95,10 +95,27 @@ TRANSPARENT = None
 # Applied by task 0071 as a shader, so it costs nothing per sprite and can be
 # tuned without regenerating a single PNG.
 RAMPS = {
+    # Noon: the light the farm was drawn under, and the one everything else
+    # is measured against.
     "day": {
         "tint":       (1.02, 1.00, 0.96),
         "lift":       (0.00, 0.00, 0.00),
         "saturation": 1.00,
+    },
+    # **Morning and evening, either side of it.** `design.md` asks for light
+    # that warms and then cools across a day, and a farm lit identically from
+    # the first tick to the last is a farm where time is a number in a corner.
+    # Both are gentle on purpose: this is a cozy half, and a dawn you have to
+    # squint through would be a reason to skip it.
+    "dawn": {
+        "tint":       (0.92, 0.90, 1.02),
+        "lift":       (0.02, 0.02, 0.05),
+        "saturation": 0.92,
+    },
+    "dusk": {
+        "tint":       (1.06, 0.88, 0.80),
+        "lift":       (0.05, 0.02, 0.00),
+        "saturation": 0.95,
     },
     "night": {
         # Green is pulled down hardest. A farm is mostly grass, and a tint that

@@ -45,6 +45,19 @@ static func _tick_result(state: Dictionary) -> void:
 
 ## The cozy half. Growing, gathering, producing, selling.
 static func _tick_day(state: Dictionary) -> void:
+	# **Time does not pass in a menu.** Standing at the stall haggling is not
+	# an afternoon, and a player who opened the shop to think and came back to
+	# a field of dead crops would learn to think somewhere else.
+	#
+	# This is a *modal* panel - the shop - and not the inventory of task 0036,
+	# which deliberately does not set `open_panel` and deliberately does not
+	# stop the clock: a glance at your own pockets is not a conversation.
+	#
+	# `Player.tick()` still runs, because cancel is how you leave.
+	if StringName(state["open_panel"]) != &"":
+		Player.tick(state)
+		return
+
 	state["day_tick"] = int(state["day_tick"]) + 1
 
 	# **Asked for last frame, decided here.** The button writes an intent and

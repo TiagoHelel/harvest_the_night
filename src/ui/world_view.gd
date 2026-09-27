@@ -239,7 +239,7 @@ func _process(delta: float) -> void:
 func _light_for_phase(delta: float) -> void:
 	var phase := int(_state["phase"])
 	var wants_day := phase == Phases.DAY
-	var target: Color = PaletteData.DAY_TINT if wants_day 		else PaletteData.NIGHT_TINT
+	var target: Color = _daylight_now() if wants_day 		else PaletteData.NIGHT_TINT
 
 	if phase != _lit_for:
 		# Only a change between the two realities is worth a fade; DAY to DAY
@@ -250,6 +250,7 @@ func _light_for_phase(delta: float) -> void:
 		_lit_for = phase
 
 	if _fade >= 1.0:
+		# Settled, so it follows the sun rather than sitting on one colour.
 		_light.color = target
 		return
 
@@ -259,6 +260,32 @@ func _light_for_phase(delta: float) -> void:
 	# `is_transitioning()` true long after the fade looked over.
 	_fade = minf(_fade + delta / TRANSITION_SECONDS, 1.0)
 	_light.color = _fade_from.lerp(target, _fade)
+
+
+## The colour of the daylight right now: cool at dawn, plain at noon, warm at
+## dusk and a little warmer past it.
+##
+## **A day lit identically from the first tick to the last is a day where time
+## is a number in a corner.** `design.md` asks for light that warms and then
+## cools, and this is the whole of it - one lerp between three colours the
+## palette already generates, costing nothing per sprite because it is a single
+## `CanvasModulate`.
+##
+## It is deliberately gentle. This is the cozy half, and a dawn you have to
+## squint through would be a reason to skip the morning.
+func _daylight_now() -> Color:
+	if _state.is_empty():
+		return PaletteData.DAY_TINT
+	var through := float(Phases.day_percent(_state)) / 100.0
+
+	# Dawn to noon over the first half, noon to dusk over the second. Past
+	# dusk it keeps going towards the evening colour rather than stopping, so
+	# a day that runs over looks like one.
+	if through <= 0.5:
+		return PaletteData.DAWN_TINT.lerp(PaletteData.DAY_TINT,
+			clampf(through / 0.5, 0.0, 1.0))
+	return PaletteData.DAY_TINT.lerp(PaletteData.DUSK_TINT,
+		clampf((through - 0.5) / 0.5, 0.0, 1.0))
 
 
 ## Cut the fade short. The simulation was never waiting for it, so this changes
@@ -278,7 +305,14 @@ func is_transitioning() -> bool:
 ## depends on how busy the machine is, and an assert that depends on that is an
 ## assert that fails for reasons nobody can act on.
 func light_target() -> Color:
-	return PaletteData.DAY_TINT if int(_state.get("phase", Phases.DAY)) 		== Phases.DAY else PaletteData.NIGHT_TINT
+	if int(_state.get("phase", Phases.DAY)) != Phases.DAY:
+		return PaletteData.NIGHT_TINT
+	# **The day's light, at the hour it is.** This returned the noon
+	# constant, which was right until task 0039 gave the sun somewhere to
+	# travel - after which it was a function that reported where the light
+	# used to go rather than where it is going, which is the one thing a
+	# test is meant to be able to ask.
+	return _daylight_now()
 
 
 # ------------------------------------------------------------------- camera

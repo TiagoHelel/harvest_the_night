@@ -277,12 +277,19 @@ func _refresh(force: bool) -> void:
 
 	# The clock lives here now rather than in its own label on the other side
 	# of the screen, where it sat on top of the resource grid.
-	var tick := int(_state["tick"])
-	_day.text = "DAY %d   %d:%02d" % [
+	#
+	# **`day_tick`, not `tick`.** The global counter never resets, so on day
+	# three this read 12:00 and kept climbing - a clock measuring how long the
+	# session had been running rather than how much of today is left, which is
+	# the one thing it is for.
+	var tick := int(_state["day_tick"])
+	_day.text = "DAY %d   %d:%02d%s" % [
 		int(_state["day"]),
 		tick / (GameData.TICK_HZ * 60),
 		(tick / GameData.TICK_HZ) % 60,
+		"  DUSK" if Phases.is_dusk(_state) else "",
 	]
+	_day.modulate = LIT if Phases.is_dusk(_state) else WARM
 	var money := Resources.amount(_state, GameData.MONEY)
 	if force or money != int(_last.get(GameData.MONEY, -1)):
 		if not force and _last.has(GameData.MONEY):

@@ -1,7 +1,7 @@
 # 0039 - The day clock and dusk
 
 - **Phase:** 2 - The full day
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0006, 0021
 - **Likely files:** src/core/phases.gd, src/ui/day_hud.gd
 

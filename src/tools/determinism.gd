@@ -71,7 +71,16 @@ func _run() -> void:
 	# bare tick. The numbers below are part of the scenario: changing one moves
 	# the sim hash, which is fine as long as the journal says why.
 	var rolling := _sample(0, state)
-	rolling = _advance_sampling(state, 3000, rolling)   # a day on the farm
+	rolling = _advance_sampling(state, 1500, rolling)   # a morning on the farm
+
+	# **A visit to the stall**, because the shop stops the clock (task 0039)
+	# and a rule nothing in the scenario exercises is a rule the guard cannot
+	# see. This is the same reason the farmer plants and queues above.
+	Shop.open(state)
+	rolling = _advance_sampling(state, 500, rolling)
+	Shop.close(state)
+
+	rolling = _advance_sampling(state, 1500, rolling)   # and the afternoon
 	Phases.begin_preparation(state)
 	rolling = _advance_sampling(state, GameData.PREPARATION_TICKS, rolling)
 	rolling = _advance_sampling(state, 3000, rolling)   # a night being fought

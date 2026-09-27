@@ -41,7 +41,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 19
+const CASES := 20
 
 var passed := 0
 var failed := 0
@@ -90,6 +90,7 @@ func _run() -> void:
 	await _case_0036_inventory()
 	await _case_0037_queue()
 	await _case_0038_away()
+	await _case_0039_clock()
 	_finish()
 
 
@@ -689,8 +690,15 @@ func _case_0022_reality() -> void:
 		return
 
 	await frames(30)
-	expect(light.color.is_equal_approx(PaletteData.DAY_TINT),
-		"and by day it is the day's", str(light.color))
+	# **The daylight moves across the day** since task 0039, so this cannot
+	# ask for `DAY_TINT` on the nose any more - at dawn it is the cool colour
+	# and at dusk the warm one, with noon in between. What matters is that it
+	# is a *daylight*: somewhere on the dawn-noon-dusk line and nowhere near
+	# the night.
+	expect(_is_daylight(light.color),
+		"and by day it is one of the day's", str(light.color))
+	expect(not light.color.is_equal_approx(PaletteData.NIGHT_TINT),
+		"and nothing like the night's", str(light.color))
 
 	var state := driver.state
 	var day_colour := light.color
@@ -2019,6 +2027,106 @@ func _case_0038_away() -> void:
 		expect(back.text.contains("barricade_kit"),
 			"naming what was made", back.text)
 		expect(back.text.contains("2"), "and how many", back.text)
+
+	await close_scene()
+	_completed += 1     # last line: an abandoned case never gets here
+
+
+## Whether a colour is somewhere on the day's dawn-noon-dusk line.
+##
+## Each channel has to sit inside the range those three colours span, with a
+## little slack for the fade being part way. Asking "is it exactly noon" was
+## the old test and stopped being answerable when the light started moving.
+func _is_daylight(colour: Color) -> bool:
+	var lights: Array = [PaletteData.DAWN_TINT, PaletteData.DAY_TINT,
+		PaletteData.DUSK_TINT]
+	for channel in 3:
+		var low := 9.0
+		var high := -9.0
+		for entry in lights:
+			var each: Color = entry
+			low = minf(low, each[channel])
+			high = maxf(high, each[channel])
+		if colour[channel] < low - 0.06 or colour[channel] > high + 0.06:
+			return false
+	return true
+
+
+## 0039 - the clock, the light, and the stall that stops both.
+func _case_0039_clock() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var world: WorldView = require_control("WorldView")
+	if driver == null or world == null:
+		_completed += 1
+		await close_scene()
+		return
+
+	var state := driver.state
+	var clock: Label = require_control("Day")
+	expect(clock != null, "there is a clock")
+	await frames(2)
+	expect(clock != null and clock.text.begins_with("DAY 1"),
+		"saying which day", clock.text if clock else "")
+	expect(clock != null and clock.text.contains("0:0"),
+		"and starting near the top of it", clock.text if clock else "")
+
+	# **The light is not the same at dawn as at dusk.**
+	var dawn := world.light_target()
+	Sim.advance(state, GameData.DAY_TICKS / 2)
+	await frames(4)
+	var noon := world.light_target()
+	Sim.advance(state, GameData.DAY_TICKS / 2 - 30)
+	await frames(4)
+	var evening := world.light_target()
+	expect(not dawn.is_equal_approx(noon),
+		"the light moves from dawn to noon",
+		"%s then %s" % [dawn, noon])
+	expect(not noon.is_equal_approx(evening),
+		"and from noon to evening", "%s then %s" % [noon, evening])
+	expect(evening.r > dawn.r,
+		"warming as it goes - evening is redder than morning",
+		"%.2f against %.2f" % [evening.r, dawn.r])
+
+	# **Past dusk the button asks rather than pressing itself.**
+	var night: Button = require_control("NightButton")
+	expect(night != null, "there is a night button")
+	await until(func() -> bool: return Phases.is_dusk(state), "dusk", 300)
+	await frames(4)
+	expect(Phases.is_dusk(state), "it is dusk")
+	expect(night != null and night.text.to_lower().contains("waiting"),
+		"and the button asks", night.text if night else "")
+	expect(int(state["phase"]) == Phases.DAY,
+		"but the night has not started itself",
+		Phases.name_of(int(state["phase"])))
+	expect(clock != null and clock.text.to_lower().contains("dusk"),
+		"and the clock says so too", clock.text if clock else "")
+
+	Sim.advance(state, 600)
+	await frames(4)
+	expect(int(state["phase"]) == Phases.DAY,
+		"twenty seconds later it still has not",
+		Phases.name_of(int(state["phase"])))
+
+	# **The stall stops the clock**, on screen and in the state.
+	var shop: ShopPanel = require_control("ShopPanel")
+	Shop.open(state)
+	await until(func() -> bool: return shop.visible, "the stall to open")
+	var shown := clock.text
+	var ticked := int(state["day_tick"])
+	await frames(30)
+	expect(int(state["day_tick"]) == ticked,
+		"the day clock stops while the stall is open",
+		str(int(state["day_tick"]) - ticked))
+	expect(clock.text == shown, "and the label with it", clock.text)
+
+	await tap_key(KEY_ESCAPE)
+	await until(func() -> bool: return not Shop.is_open(state),
+		"the stall to close")
+	await frames(20)
+	expect(int(state["day_tick"]) > ticked,
+		"and closing it starts the day again",
+		str(int(state["day_tick"]) - ticked))
 
 	await close_scene()
 	_completed += 1     # last line: an abandoned case never gets here

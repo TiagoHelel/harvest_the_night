@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 31
+const GROUPS := 32
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -95,6 +95,7 @@ func _run() -> void:
 	_task_0036_inventory()
 	_task_0037_queue()
 	_task_0038_idle()
+	_task_0039_clock()
 
 
 func _finish() -> void:
@@ -1416,16 +1417,32 @@ func _task_0020_shop() -> void:
 		"%s to %s" % [before_cell, Player.cell(state)])
 	expect(Shop.is_open(state), "and the panel is still up")
 
-	# **Nothing pauses.** design.md section 13 is about a farm that runs
-	# itself, and a shop that stopped the world would be the one place it did
-	# not.
+	# **The stall pauses the day, and this used to assert the opposite.**
+	#
+	# Task 0020 read `design.md` section 13 - a farm that runs itself - as
+	# meaning the shop must not stop the world, and asserted that the wheat
+	# kept growing while the player haggled. Task 0039 asks for the reverse in
+	# as many words: "time does not pass in menus", with a done-when naming the
+	# shop panel.
+	#
+	# 0039 wins, and it is the better reading: section 13 is about the farm
+	# running while you are *doing something else on the farm*, which is what
+	# task 0038 measures. Standing at a stall talking to a shopkeeper is not
+	# somewhere else on the farm, it is a conversation - and a player who
+	# opened the shop to think and came back to a dead field would learn to
+	# think somewhere else. The inventory of task 0036 is the other half of
+	# the distinction: a glance at your own pockets does not stop anything.
 	var plot: Vector2i = Farm.cells_of(state, Farm.Terrain.SOIL)[0]
 	Interact.complete(state, plot, &"till")
 	Interact.complete(state, plot, &"plant")
 	var growth_before := int(Farming.plot(state, plot)["growth"])
+	var clock_before := int(state["day_tick"])
 	Sim.advance(state, 60)
-	expect(int(Farming.plot(state, plot)["growth"]) == growth_before + 60,
-		"the wheat kept growing while the player haggled",
+	expect(int(state["day_tick"]) == clock_before,
+		"the clock stops while the player haggles",
+		str(int(state["day_tick"]) - clock_before))
+	expect(int(Farming.plot(state, plot)["growth"]) == growth_before,
+		"and so does the wheat",
 		str(Farming.plot(state, plot)["growth"]))
 
 	move[0] = 0
@@ -4731,3 +4748,147 @@ func _a_full_farm(seed_value: int) -> Dictionary:
 	Phases.begin_preparation(state)
 	Sim.advance(state, GameData.PREPARATION_TICKS)
 	return state
+
+
+## 0039 - time passing, without taking the choice away.
+func _task_0039_clock() -> void:
+	var state := State.create(2100)
+
+	# **A day is a lever's worth of ticks**, and the clock counts today rather
+	# than the session.
+	expect(int(state["day_tick"]) == 0, "a day starts at zero")
+	expect(Phases.day_percent(state) == 0, "and nought through it")
+	Sim.advance(state, GameData.DAY_TICKS / 2)
+	expect(absi(Phases.day_percent(state) - 50) <= 1, "halfway at halfway",
+		str(Phases.day_percent(state)))
+	expect(int(state["day_tick"]) == GameData.DAY_TICKS / 2,
+		"the day clock is the day's", str(state["day_tick"]))
+
+	# **Dusk is where the lever says, and it is not the end of anything.**
+	expect(not Phases.is_dusk(state), "halfway is not dusk")
+	expect(Phases.overtime_percent(state) == 0, "and nothing is overtime yet")
+	Sim.advance(state, GameData.DUSK_AT_TICK - int(state["day_tick"]))
+	expect(Phases.is_dusk(state), "dusk falls where the lever says",
+		str(state["day_tick"]))
+	expect(int(state["phase"]) == Phases.DAY,
+		"and the day carries on through it",
+		Phases.name_of(int(state["phase"])))
+
+	# **A player who ignores the clock is not punished for it.** The done-when,
+	# and the whole of `design.md`'s promise that the player switches reality
+	# when they want to.
+	var stubborn := State.create(2101)
+	Resources.gain(stubborn, {GameData.WOOD: 100, GameData.MONEY: 100})
+	var plot: Vector2i = Farm.cells_of(stubborn, Farm.Terrain.SOIL)[0]
+	Farming.act(stubborn, plot)
+	Farming.act(stubborn, plot)
+	var house_before := int(stubborn["house_hp"])
+	var purse := Resources.amount(stubborn, GameData.MONEY)
+	var wood := Resources.amount(stubborn, GameData.WOOD)
+
+	# Three whole days' worth of ticks without ever pressing the night button.
+	Sim.advance(stubborn, GameData.DAY_TICKS * 3)
+	expect(int(stubborn["phase"]) == Phases.DAY,
+		"the night never starts itself, however long you leave it",
+		Phases.name_of(int(stubborn["phase"])))
+	expect(int(stubborn["day"]) == 1, "and the day counter does not creep",
+		str(stubborn["day"]))
+	expect(int(stubborn["house_hp"]) == house_before,
+		"the house is untouched", str(stubborn["house_hp"]))
+	expect(Resources.amount(stubborn, GameData.MONEY) == purse,
+		"nothing is taken", str(Resources.amount(stubborn, GameData.MONEY)))
+	expect(Resources.amount(stubborn, GameData.WOOD) >= wood,
+		"nothing spoils", str(Resources.amount(stubborn, GameData.WOOD)))
+	expect(Farming.is_ready(stubborn, plot),
+		"and the crop that was planted is simply ready")
+	expect(Farming.crop_on(stubborn, plot) != &"",
+		"rather than having withered for being left")
+	print("  three days past dusk: %d%% through, %d%% overtime, house %d/%d"
+		% [Phases.day_percent(stubborn), Phases.overtime_percent(stubborn),
+			int(stubborn["house_hp"]), GameData.HOUSE_HP])
+
+	# The nudge is a nudge: a number that grows, nothing that bites.
+	expect(Phases.overtime_percent(stubborn) > 100,
+		"the overtime is plainly visible",
+		str(Phases.overtime_percent(stubborn)))
+	expect(Phases.is_dusk(stubborn), "and it is still saying so")
+
+	# **The night starts when the player says so, at any hour.**
+	(stubborn["intent"] as Dictionary)["begin_night"] = true
+	Sim.advance(stubborn, 1)
+	expect(int(stubborn["phase"]) == Phases.PREPARATION,
+		"pressing the button three days late still works",
+		Phases.name_of(int(stubborn["phase"])))
+
+	var early := State.create(2102)
+	(early["intent"] as Dictionary)["begin_night"] = true
+	Sim.advance(early, 1)
+	expect(int(early["phase"]) == Phases.PREPARATION,
+		"and pressing it at dawn works too - it is the player's choice",
+		Phases.name_of(int(early["phase"])))
+
+	# **The clock stops in the shop and resumes on close.** The other
+	# done-when, and it changed an assert of task 0020's that said the
+	# opposite - see the note in that group.
+	var shopping := State.create(2103)
+	var shop_plot: Vector2i = Farm.cells_of(shopping, Farm.Terrain.SOIL)[0]
+	Farming.act(shopping, shop_plot)
+	Farming.act(shopping, shop_plot)
+	Sim.advance(shopping, 30)
+	var clock := int(shopping["day_tick"])
+	var grown := int(Farming.plot(shopping, shop_plot)["growth"])
+
+	Shop.open(shopping)
+	expect(Shop.is_open(shopping), "the stall is open")
+	Sim.advance(shopping, 300)
+	expect(int(shopping["day_tick"]) == clock,
+		"ten seconds of haggling is not ten seconds of the day",
+		str(int(shopping["day_tick"]) - clock))
+	expect(int(Farming.plot(shopping, shop_plot)["growth"]) == grown,
+		"and the crop did not grow through it",
+		str(Farming.plot(shopping, shop_plot)["growth"]))
+
+	Shop.close(shopping)
+	Sim.advance(shopping, 60)
+	expect(int(shopping["day_tick"]) == clock + 60,
+		"and closing it starts the day again",
+		str(int(shopping["day_tick"]) - clock))
+	expect(int(Farming.plot(shopping, shop_plot)["growth"]) == grown + 60,
+		"with the crop picking up where it left off",
+		str(Farming.plot(shopping, shop_plot)["growth"]))
+
+	# **The inventory is not a menu**, which is the other half of the
+	# distinction: a glance at your own pockets stops nothing.
+	expect(StringName(shopping["open_panel"]) == &"",
+		"nothing is open now")
+	var looking := int(shopping["day_tick"])
+	Sim.advance(shopping, 30)
+	expect(int(shopping["day_tick"]) == looking + 30,
+		"and with no modal panel up the day runs",
+		str(int(shopping["day_tick"]) - looking))
+
+	# **Cancel still leaves the stall**, which is the one thing that has to
+	# work while the world is stopped.
+	Shop.open(shopping)
+	(shopping["intent"] as Dictionary)["cancel"] = true
+	Sim.advance(shopping, 1)
+	expect(not Shop.is_open(shopping),
+		"cancel gets you out of a stopped world")
+
+	# **Night and the payout are not the day clock.** Stopping for a menu is a
+	# daytime rule; a wave does not wait for anybody.
+	var nightly := State.create(2104)
+	Phases.begin_preparation(nightly)
+	Sim.advance(nightly, GameData.PREPARATION_TICKS)
+	var night_tick := int(nightly["night_tick"])
+	Sim.advance(nightly, 30)
+	expect(int(nightly["night_tick"]) == night_tick + 30,
+		"the night runs on its own clock",
+		str(int(nightly["night_tick"]) - night_tick))
+	expect(Phases.day_percent(nightly) == 100,
+		"and the day is over as far as the sun is concerned",
+		str(Phases.day_percent(nightly)))
+	expect(Phases.overtime_percent(nightly) == 0,
+		"with no overtime at night", str(Phases.overtime_percent(nightly)))
+
+	_completed += 1     # last line: an abandoned group never gets here

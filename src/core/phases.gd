@@ -121,6 +121,28 @@ static func begin_day(state: Dictionary) -> bool:
 
 ## Past dusk the night button starts asking to be pressed. It never presses
 ## itself: `design.md` promises the player switches reality when they want to.
+## How far through the day it is, as a percentage. Past a hundred once the day
+## has run over, which it is allowed to do.
+##
+## **The one number the light and the clock both read.** Keeping it here rather
+## than in the HUD means the autoplayer and the tests can ask the same question
+## the sun is answering.
+static func day_percent(state: Dictionary) -> int:
+	if int(state["phase"]) != DAY:
+		return 100
+	return int(state["day_tick"]) * 100 / maxi(GameData.DAY_TICKS, 1)
+
+
+## How far past dusk, as a percentage of the day. Zero before dusk.
+static func overtime_percent(state: Dictionary) -> int:
+	if int(state["phase"]) != DAY:
+		return 0
+	var over := int(state["day_tick"]) - GameData.DUSK_AT_TICK
+	if over <= 0:
+		return 0
+	return over * 100 / maxi(GameData.DAY_TICKS - GameData.DUSK_AT_TICK, 1)
+
+
 static func is_dusk(state: Dictionary) -> bool:
 	return (int(state["phase"]) == DAY
 		and int(state["day_tick"]) >= GameData.DUSK_AT_TICK)

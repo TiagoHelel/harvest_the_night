@@ -2568,3 +2568,103 @@ player queue something. The widening in 0037 is already paying for itself.
 
 `python tools/verify.py` prints PASS: 1099 asserts, 314 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+
+## 0039 - The day clock and dusk - done 2026-09-27
+
+Time passing, without taking away the promise that the player switches reality
+when they want to.
+
+**What changed.** The clock counts today rather than the session, the daylight
+travels from a cool dawn through noon to a warm dusk, and a modal panel stops
+the day. Dusk says so and presses nothing.
+
+Files: `src/core/sim.gd`, `phases.gd`, `src/ui/day_hud.gd`, `world_view.gd`,
+`tools/palette.py`, `src/tools/determinism.gd`, both test tools.
+Verify: 1130 headless / 330 input / sim hash moved on purpose, below.
+
+### Two tasks disagreed, and the later one was right
+
+Task 0020 asserted, in as many words, **"the wheat kept growing while the
+player haggled"** - reading `design.md` section 13 (a farm that runs itself)
+as meaning the shop must not stop the world. Task 0039 asks for the reverse:
+"time does not pass in menus", with a done-when naming the shop panel.
+
+0039 wins, and on reflection it is the better reading of the same section.
+Section 13 is about the farm running **while you are doing something else on
+the farm** - which is exactly what task 0038 measured a task ago, and which
+this does not touch. Standing at a stall talking to a shopkeeper is not
+somewhere else on the farm, it is a conversation. A player who opened the shop
+to think and came back to a dead field would learn to think somewhere else,
+which is the opposite of cozy.
+
+The inventory of task 0036 is the other half of the distinction and did not
+need changing: it deliberately does not set `open_panel`, so a glance at your
+own pockets stops nothing. Modal panel stops the clock, view does not.
+
+0020's assert now says the new rule and carries the whole of that reasoning,
+so the next person to read it finds the argument rather than an unexplained
+reversal.
+
+### The clock was counting the wrong thing
+
+`day_hud` read `state["tick"]`, the global counter, which never resets. On day
+three it said 12:00 and kept climbing - a clock measuring how long the session
+had been running rather than how much of today is left, which is the one thing
+it is for. It reads `day_tick` now, and says DUSK when it is.
+
+### The light goes somewhere
+
+`docs/reference-sheet.png` has one daylight and the light system had one
+colour to match. `design.md` asks for light that warms and then cools across
+a day, so `tools/palette.py` grew `dawn` and `dusk` ramps either side of the
+existing `day`, and the `CanvasModulate` lerps dawn to noon over the first
+half and noon to dusk over the second - continuing past dusk, so a day that
+runs over looks like one.
+
+It costs nothing per sprite: one node, one colour, as it was before.
+
+`light_target()` - the function tests are supposed to ask, because waiting for
+a fade to finish depends on how busy the machine is - was still returning the
+noon constant. A function that reports where the light *used* to go is worse
+than no function, and the input case caught it.
+
+### The guard, again
+
+The shop pause is a rules change and both hashes came back unchanged, because
+the scenario never opened the shop. One task after widening it, the same
+lesson: **a rule nothing in the scenario exercises is a rule the guard cannot
+see.** The farmer now visits the stall mid-morning and leaves again.
+
+Proved it with the same method as 0037: with the pause `3097167654`, with the
+pause switched off `3547075508`.
+
+### The done-whens
+
+- **A player who ignores the clock is not punished for it.** Three whole days'
+  worth of ticks past dusk without pressing the button: 300% through the day,
+  1100% overtime, house 100/100, nothing taken, nothing spoiled, and the crop
+  that was planted is simply ready. Then the button still works. It also works
+  at dawn - the choice is the player's at any hour, which is `design.md`'s
+  promise stated as an assert.
+- **The clock stops in the shop panel and resumes on close.** Ten seconds of
+  haggling is not ten seconds of the day, the crop does not grow through it,
+  and closing it picks up exactly where it left off. Cancel still gets you out
+  of a stopped world, which is the one thing that has to keep working.
+
+### Notes
+
+- `Phases.day_percent()` and `overtime_percent()` are in `src/core/` rather
+  than the HUD so the light, the tests and the autoplayer of task 0067 all ask
+  the sun the same question.
+- Night and the payout keep their own clocks. Stopping for a menu is a daytime
+  rule; a wave does not wait for anybody.
+
+### Hashes
+
+| | from | to | why |
+|---|---|---|---|
+| sim hash | `3866599667` | `3097167654` | the scenario now visits the stall, and the stall stops the clock |
+| data hash | `2144055300` | unchanged | the dawn and dusk ramps are in `tools/palette.py`, which is art, not balance - `digest()` has never covered it |
+
+`python tools/verify.py` prints PASS: 1130 asserts, 330 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

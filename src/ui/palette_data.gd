@@ -48,10 +48,20 @@ const COLOURS := {
 	&"wood_light": Color8(168, 124, 78),
 }
 
+## The dawn ramp: what the same pixels look like after dark.
+const DAWN_TINT := Color(0.920, 0.900, 1.020)
+const DAWN_LIFT := Color(0.020, 0.020, 0.050)
+const DAWN_SATURATION := 0.920
+
 ## The day ramp: what the same pixels look like by day.
 const DAY_TINT := Color(1.020, 1.000, 0.960)
 const DAY_LIFT := Color(0.000, 0.000, 0.000)
 const DAY_SATURATION := 1.000
+
+## The dusk ramp: what the same pixels look like after dark.
+const DUSK_TINT := Color(1.060, 0.880, 0.800)
+const DUSK_LIFT := Color(0.050, 0.020, 0.000)
+const DUSK_SATURATION := 0.950
 
 ## The night ramp: what the same pixels look like after dark.
 const NIGHT_TINT := Color(0.340, 0.360, 0.900)
