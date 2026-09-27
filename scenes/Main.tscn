@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://src/ui/main.gd" id="1_main"]
 [ext_resource type="Script" path="res://src/ui/sim_driver.gd" id="2_driver"]
 [ext_resource type="Script" path="res://src/ui/debug_overlay.gd" id="3_debug"]
 [ext_resource type="PackedScene" path="res://scenes/World.tscn" id="4_world"]
 [ext_resource type="Script" path="res://src/ui/shop_panel.gd" id="5_shop"]
+[ext_resource type="Script" path="res://src/ui/day_hud.gd" id="6_hud"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_main")
@@ -24,21 +25,16 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Clock" type="Label" parent="UI/Screen"]
+[node name="DayHud" type="Control" parent="UI/Screen"]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
+anchors_preset = 15
 anchor_right = 1.0
-offset_left = -160.0
-offset_top = 4.0
-offset_right = -4.0
-offset_bottom = 20.0
-grow_horizontal = 0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
-modulate = Color(0.92, 0.94, 1, 1)
-text = "DAY 1"
-horizontal_alignment = 2
+script = ExtResource("6_hud")
 
 [node name="ShopPanel" type="Control" parent="UI/Screen"]
 unique_name_in_owner = true

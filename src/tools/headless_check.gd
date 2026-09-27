@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 13
+const GROUPS := 14
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -77,6 +77,7 @@ func _run() -> void:
 	_task_0018_wheat()
 	_task_0019_workshop()
 	_task_0020_shop()
+	_task_0021_night_intent()
 
 
 func _finish() -> void:
@@ -1413,5 +1414,36 @@ func _task_0020_shop() -> void:
 	for id in Shop.buyable():
 		expect(Shop.buy_price(id) > Shop.sell_price(id),
 			"buying %s and selling it back loses money" % id)
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## 0021 - the night is asked for, not taken. The HUD writes an intent and the
+## rules decide, so the keyboard, the mouse and the autoplayer share a road.
+func _task_0021_night_intent() -> void:
+	var state := State.create(101)
+	expect(int(state["phase"]) == Phases.DAY, "it is the day")
+
+	(state["intent"] as Dictionary)["begin_night"] = true
+	Sim.advance(state, 1)
+	expect(int(state["phase"]) == Phases.PREPARATION,
+		"asking for the night gets it", Phases.name_of(int(state["phase"])))
+	expect(not bool((state["intent"] as Dictionary)["begin_night"]),
+		"and the asking is consumed, not remembered")
+
+	# Asking again from the wrong phase is refused, the way every transition is.
+	print("  (the ERROR line below is deliberate - a refused transition)")
+	(state["intent"] as Dictionary)["begin_night"] = true
+	Sim.advance(state, 1)
+	expect(int(state["phase"]) == Phases.PREPARATION,
+		"asking twice changes nothing")
+
+	# Dusk asks and does not press. The whole promise of design.md section 4.
+	var evening := State.create(102)
+	Sim.advance(evening, GameData.DUSK_AT_TICK + 600)
+	expect(Phases.is_dusk(evening), "it is past dusk")
+	expect(int(evening["phase"]) == Phases.DAY,
+		"and the day has still not ended itself",
+		Phases.name_of(int(evening["phase"])))
 
 	_completed += 1     # last line: an abandoned group never gets here

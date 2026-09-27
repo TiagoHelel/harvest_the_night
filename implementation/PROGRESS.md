@@ -948,3 +948,45 @@ Notes:
   silently started another and drained the stock.
   The assert that keeps it honest is not "escape closes it" but **"and stays
   closed a second later"**.
+
+## 0021 - The day HUD - done 2026-09-27
+
+What changed: the bar across the top of the reference sheet. Which day it is,
+what time it is, what is in the purse, six totals that matter, and the button
+that starts the night.
+
+Files: src/ui/day_hud.gd, src/core/player.gd, src/core/sim.gd, project.godot,
+scenes/Main.tscn, src/ui/main.gd, src/tools/headless_check.gd,
+src/tools/input_check.gd
+
+Verify: PASS - 10 passed, 1 skipped, 26s. **358 asserts, 0 failed**, **83 cases,
+0 failed** (82 before). **Sim hash 684454707 -> 1543735352** (the intent gained
+`begin_night`). Data hash unchanged.
+
+Notes:
+
+- **The HUD does not change the phase.** Pressing the button writes
+  `intent["begin_night"]` and the tick decides, so the mouse, the `N` key and
+  the autoplayer of task 0067 all take the same road into the night. Asserted
+  both through the button and through the key.
+- **The same tick, not the next frame.** Every number is a lookup rather than a
+  copy, so the HUD and the ledger cannot drift apart. `input_check` adds wood
+  and checks the label two frames later.
+- A changed total lights up and fades back over four tenths of a second. A farm
+  is a place where you are looking somewhere else, and a number quietly
+  incrementing is a number nobody sees.
+- **Past dusk the button changes what it says** and brightens; it still never
+  presses itself. `design.md` promises the player switches reality when they
+  want to, and a day that ended on its own would quietly take that away.
+- **Three things came from looking at it rather than from the asserts.** The
+  old clock label was sitting on top of the new resource grid, so it was folded
+  into the day label and the node deleted. The button's text ran off the right
+  edge. And pale text on a sunlit farm is text nobody can read, so the bar got a
+  dark strip behind it.
+- **"WOO", "STO", "IRO".** The first version abbreviated to three letters, which
+  is not shorthand, it is a puzzle. At font size 9 the longest of these words is
+  forty pixels and the bar is four hundred and eighty - so they are spelled out
+  until task 0079 draws the icons.
+- `main.gd` no longer listens for the tick signal. Every panel reads the state
+  each frame and draws what it finds; a signal per tick would have meant a
+  redraw per tick, which at 4x speed is four times the work for one picture.

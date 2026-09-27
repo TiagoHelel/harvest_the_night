@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`####....................`  **20 / 108 done**
+`#####...................`  **21 / 108 done**
 
-0 doing / 88 todo / 0 blocked across 9 phases.
+0 doing / 87 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0021 - The day HUD**. The whole of what is left is
+First up: **0022 - Switching reality**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,25 +26,25 @@ which rewrites this file for you.
 
 ## What is open
 
-88 task(s) left, the ready ones first, then what they
+87 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
-### 0021 - The day HUD
+### 0022 - Switching reality
 
-Ready to pick up.  Likely files: `src/ui/day_hud.gd`.
+Ready to pick up.  Likely files: `src/ui/world_view.gd, src/core/phases.gd`.
 
-The bar across the top of the reference sheet: what day it is, what you have, and the button that starts the night.
+The same farm, a different world. Press the button and the day farm becomes the night map: same tiles, same buildings, new rules and a new light.
 
-- Day counter, money, and the resources that matter, laid out like section 14 of the design document
-- A resource that changes flashes briefly so a gain is visible without watching the number
-- The night button sits bottom right and says what it will do
-- The HUD reads state and holds none of its own
-- It survives a window resize at every supported integer scale
+- The switch is a phase transition, not a scene change: the grid object is the same object
+- Day and night tint, and a short transition between them
+- Day-only actors leave and night-only actors arrive as part of the transition
+- The player recognises the farm instantly: nothing moves, only the light and what is on it
+- Switching is allowed from DAY only, and lands in PREPARATION
 
-  - done when: Gathering wood updates the HUD the same tick
-  - done when: The night button is reachable by keyboard as well as mouse
-  - done when: `input_check` presses it
+  - done when: A building placed by day is in the same cell by night
+  - done when: Switching twice returns to a day that is identical except for the day counter
+  - done when: The transition is skippable and the game does not wait on it
 
 ### 0028 - Corn and carrot
 
@@ -121,6 +121,21 @@ Somewhere to see everything at once, which the HUD cannot do once there are twel
   - done when: Every resource in game_data appears without being listed twice
   - done when: Adding a resource to game_data makes it appear with no UI edit
 
+### 0039 - The day clock and dusk
+
+Ready to pick up.  Likely files: `src/core/phases.gd, src/ui/day_hud.gd`.
+
+Time passing, without taking away the design document's promise that the player switches reality when they want to.
+
+- A day is a lever's worth of ticks and the HUD shows it as a clock or a sun
+- The light warms and then cools across the day
+- At dusk the night button starts asking to be pressed; it does not press itself
+- Past dusk the day keeps running, with a gentle nudge rather than a penalty
+- Time does not pass in menus
+
+  - done when: A player who ignores the clock entirely is not punished for it
+  - done when: The clock stops in the shop panel and resumes on close
+
 ### 0080 - A pixel font
 
 Ready to pick up.  Likely files: `tools/gen_font.py, assets/fonts/`.
@@ -167,21 +182,37 @@ When it breaks on someone else's machine, get enough to fix it without them.
   - done when: A deliberate crash produces a report with the seed and the tick
   - done when: The run is still loadable afterwards
 
-### 0022 - Switching reality
+### 0023 - Build mode
 
-Waits on 0021.  Likely files: `src/ui/world_view.gd, src/core/phases.gd`.
+Waits on 0022.  Likely files: `src/ui/build_mode.gd, src/core/building.gd`.
 
-The same farm, a different world. Press the button and the day farm becomes the night map: same tiles, same buildings, new rules and a new light.
+Placing things on the farm: pick a structure, see where it can go, pay for it, put it there.
 
-- The switch is a phase transition, not a scene change: the grid object is the same object
-- Day and night tint, and a short transition between them
-- Day-only actors leave and night-only actors arrive as part of the transition
-- The player recognises the farm instantly: nothing moves, only the light and what is on it
-- Switching is allowed from DAY only, and lands in PREPARATION
+- A build palette of what the player owns or can afford
+- A ghost under the cursor, green where it fits and red where it does not, with the reason on hover
+- Cost is checked and taken on placement, through the ledger
+- Right click sells the structure under the cursor back for a fraction, and the fraction is a lever
+- Build mode works in DAY and PREPARATION, and in NIGHT only for what 0053 later allows
 
-  - done when: A building placed by day is in the same cell by night
-  - done when: Switching twice returns to a day that is identical except for the day counter
-  - done when: The transition is skippable and the game does not wait on it
+  - done when: A structure cannot be placed on water, rock or another structure
+  - done when: Placing and selling in a loop neither creates nor destroys resources beyond the sell fraction
+  - done when: `input_check` places one and sells it
+
+### 0025 - Zombies walk to the house
+
+Waits on 0022.  Likely files: `src/core/enemies.gd, src/core/pathing.gd`.
+
+Something to shoot at. Zombies come in from the edges and head for the farmhouse, and the house has hit points.
+
+- A flow field computed once from the house over the walkable grid, not A* per zombie - it is cheap, it is deterministic and it will hold a hundred of them
+- The field is recomputed only when the grid changes
+- Spawn points are edge cells in data; spawn order and timing come from the seeded RNG
+- Reaching the house deals damage and removes the zombie
+- House hit points are a lever and hitting zero ends the night
+
+  - done when: Fifty zombies pathing costs under a millisecond a tick
+  - done when: Two runs from one seed produce the same zombie positions at tick 1000
+  - done when: A zombie with no path at all stands still rather than crashing
 
 ### 0029 - Growth stages and watering
 
@@ -242,21 +273,6 @@ Semi-idle in one feature: queue five things, walk away, come back to five things
   - done when: Queue three barricades, walk to the pond and back, and three exist
   - done when: Cancelling the second of three leaves the first and the third intact
 
-### 0039 - The day clock and dusk
-
-Waits on 0021.  Likely files: `src/core/phases.gd, src/ui/day_hud.gd`.
-
-Time passing, without taking away the design document's promise that the player switches reality when they want to.
-
-- A day is a lever's worth of ticks and the HUD shows it as a clock or a sun
-- The light warms and then cools across the day
-- At dusk the night button starts asking to be pressed; it does not press itself
-- Past dusk the day keeps running, with a gentle nudge rather than a penalty
-- Time does not pass in menus
-
-  - done when: A player who ignores the clock entirely is not punished for it
-  - done when: The clock stops in the shop panel and resumes on close
-
 ### 0040 - The shop grows
 
 Waits on 0028.  Likely files: `src/core/shop.gd, src/ui/shop_panel.gd`.
@@ -272,6 +288,21 @@ Somewhere for money to go: all three seeds, materials when you are short, and th
   - done when: Buy-then-sell on the same item loses money at every price
   - done when: Stock refreshes once per day and not once per visit
 
+### 0071 - The two palettes
+
+Waits on 0022.  Likely files: `tools/gen_sprites.py, src/ui/palette.gd`.
+
+Section 18: warm and cozy by day, blue and purple by night, from one set of sprites. The reference sheet is the target.
+
+- One base palette, around 32 colours, sampled from `docs/reference-sheet.png`
+- A day ramp and a night ramp, applied as a shader or a modulate, never as a second set of PNGs
+- The night ramp keeps the farm recognisable: same shapes, different light
+- Fire, lamps and the moon are the only warm things at night
+- Both ramps are data and can be tuned without regenerating sprites
+
+  - done when: Switching reality changes nothing but the light, and the farm is instantly recognisable - the whole point of the design document
+  - done when: A screenshot of each sits next to the reference sheet and holds up
+
 ### 0084 - The sounds of the day
 
 Waits on 0083.  Likely files: `tools/gen_sfx.py, assets/sfx/`.
@@ -286,37 +317,36 @@ Chop, mine, till, plant, water, the fishing splash and the bite, the craft, the 
   - done when: Chopping a tree for a full minute does not become annoying - go and check
   - done when: Regenerating produces byte-identical files
 
-### 0023 - Build mode
+### 0086 - Two pieces of music
 
-Waits on 0022.  Likely files: `src/ui/build_mode.gd, src/core/building.gd`.
+Waits on 0083, 0022.  Likely files: `tools/gen_music.py, assets/music/`.
 
-Placing things on the farm: pick a structure, see where it can go, pay for it, put it there.
+One warm loop for the farm, one cold one for the night, and a crossfade on the reality switch.
 
-- A build palette of what the player owns or can afford
-- A ghost under the cursor, green where it fits and red where it does not, with the reason on hover
-- Cost is checked and taken on placement, through the ledger
-- Right click sells the structure under the cursor back for a fraction, and the fraction is a lever
-- Build mode works in DAY and PREPARATION, and in NIGHT only for what 0053 later allows
+- Generated, looping cleanly, a couple of minutes each
+- The two share a motif, so the night is recognisably the same farm
+- A crossfade tied to the transition length
+- An intensity layer that comes in on the last wave of a night
+- Music is off in menus by default, and that is a setting
 
-  - done when: A structure cannot be placed on water, rock or another structure
-  - done when: Placing and selling in a loop neither creates nor destroys resources beyond the sell fraction
-  - done when: `input_check` places one and sells it
+  - done when: The loop point is inaudible
+  - done when: The crossfade lands with the transition, not before or after it
 
-### 0025 - Zombies walk to the house
+### 0024 - The shooting tower
 
-Waits on 0022.  Likely files: `src/core/enemies.gd, src/core/pathing.gd`.
+Waits on 0023.  Likely files: `src/core/towers.gd`.
 
-Something to shoot at. Zombies come in from the edges and head for the farmhouse, and the house has hit points.
+The first thing that fights for you: cheap, single target, medium range, fires by itself.
 
-- A flow field computed once from the house over the walkable grid, not A* per zombie - it is cheap, it is deterministic and it will hold a hundred of them
-- The field is recomputed only when the grid changes
-- Spawn points are edge cells in data; spawn order and timing come from the seeded RNG
-- Reaching the house deals damage and removes the zombie
-- House hit points are a lever and hitting zero ends the night
+- Range, rate of fire, damage and cost are levers
+- Targeting is deterministic: nearest to the house, ties broken by entity id, never by iteration order
+- It fires on the tick, and reload is counted in ticks
+- A projectile with travel time, not an instant hit - the night should be watchable
+- It does nothing at all during DAY
 
-  - done when: Fifty zombies pathing costs under a millisecond a tick
-  - done when: Two runs from one seed produce the same zombie positions at tick 1000
-  - done when: A zombie with no path at all stands still rather than crashing
+  - done when: Two runs from the same seed fire at the same targets on the same ticks
+  - done when: A tower with nothing in range costs no measurable time per tick
+  - done when: Halving the rate of fire lever halves the shots in a fixed number of ticks
 
 ### 0035 - Gunpowder and ammunition
 
@@ -361,52 +391,6 @@ Day 1 should teach chop, plant, craft, build and the night button without a wall
 
   - done when: Someone who has not seen the game reaches the first night without being told anything out loud
   - done when: Skipping every prompt still leaves a winnable night 1
-
-### 0071 - The two palettes
-
-Waits on 0022.  Likely files: `tools/gen_sprites.py, src/ui/palette.gd`.
-
-Section 18: warm and cozy by day, blue and purple by night, from one set of sprites. The reference sheet is the target.
-
-- One base palette, around 32 colours, sampled from `docs/reference-sheet.png`
-- A day ramp and a night ramp, applied as a shader or a modulate, never as a second set of PNGs
-- The night ramp keeps the farm recognisable: same shapes, different light
-- Fire, lamps and the moon are the only warm things at night
-- Both ramps are data and can be tuned without regenerating sprites
-
-  - done when: Switching reality changes nothing but the light, and the farm is instantly recognisable - the whole point of the design document
-  - done when: A screenshot of each sits next to the reference sheet and holds up
-
-### 0086 - Two pieces of music
-
-Waits on 0083, 0022.  Likely files: `tools/gen_music.py, assets/music/`.
-
-One warm loop for the farm, one cold one for the night, and a crossfade on the reality switch.
-
-- Generated, looping cleanly, a couple of minutes each
-- The two share a motif, so the night is recognisably the same farm
-- A crossfade tied to the transition length
-- An intensity layer that comes in on the last wave of a night
-- Music is off in menus by default, and that is a setting
-
-  - done when: The loop point is inaudible
-  - done when: The crossfade lands with the transition, not before or after it
-
-### 0024 - The shooting tower
-
-Waits on 0023.  Likely files: `src/core/towers.gd`.
-
-The first thing that fights for you: cheap, single target, medium range, fires by itself.
-
-- Range, rate of fire, damage and cost are levers
-- Targeting is deterministic: nearest to the house, ties broken by entity id, never by iteration order
-- It fires on the tick, and reload is counted in ticks
-- A projectile with travel time, not an instant hit - the night should be watchable
-- It does nothing at all during DAY
-
-  - done when: Two runs from the same seed fire at the same targets on the same ticks
-  - done when: A tower with nothing in range costs no measurable time per tick
-  - done when: Halving the rate of fire lever halves the shots in a fixed number of ticks
 
 ### 0046 - Fences and walls
 
@@ -472,7 +456,7 @@ The half of the reference sheet that sells the whole idea: the same farm, lit by
 
 ### 0079 - Resource icons and the UI kit
 
-Waits on 0071, 0021.  Likely files: `tools/gen_sprites.py, sprites/ui/`.
+Waits on 0071.  Likely files: `tools/gen_sprites.py, sprites/ui/`.
 
 The bottom half of the reference sheet: an icon per resource, and the panels, frames and buttons they sit in.
 
@@ -576,7 +560,7 @@ One Theme resource every control uses, so a colour change is one edit and no scr
 
 ### 0027 - Three waves, a result screen, and back to the farm
 
-Waits on 0026, 0021.  Likely files: `src/core/waves.gd, src/ui/result_screen.gd`.
+Waits on 0026.  Likely files: `src/core/waves.gd, src/ui/result_screen.gd`.
 
 **The MVP checkpoint.** Three waves of basic zombies, a night that ends, a payout, and a day 2 that is better than day 1. If this is not fun, nothing after it will be.
 
@@ -1369,7 +1353,7 @@ For the player who beat the Giant and wants to know how far the farm goes. Cheap
 - [x] **0011** [input_check harness](prompts/0011-input-check.md)
 - [x] **0012** [Debug overlay](prompts/0012-debug-overlay.md)
 
-## 1 - The first playable build  (8/15)
+## 1 - The first playable build  (9/15)
 
 - [x] **0013** [The world renders](prompts/0013-world-render.md)
 - [x] **0014** [Sprites generated from ASCII maps](prompts/0014-sprite-pipeline.md)
@@ -1379,13 +1363,13 @@ For the player who beat the Giant and wants to know how far the farm goes. Cheap
 - [x] **0018** [Wheat: till, plant, grow, harvest](prompts/0018-wheat.md)
 - [x] **0019** [The workshop and its first recipe](prompts/0019-workshop.md)
 - [x] **0020** [The shop: sell and buy](prompts/0020-shop.md)
-- [ ] **0021** [The day HUD](prompts/0021-day-hud.md)
-- [ ] **0022** [Switching reality](prompts/0022-reality-switch.md) - needs 0021
+- [x] **0021** [The day HUD](prompts/0021-day-hud.md)
+- [ ] **0022** [Switching reality](prompts/0022-reality-switch.md)
 - [ ] **0023** [Build mode](prompts/0023-build-mode.md) - needs 0022
 - [ ] **0024** [The shooting tower](prompts/0024-tower-gun.md) - needs 0023
 - [ ] **0025** [Zombies walk to the house](prompts/0025-zombies-walk.md) - needs 0022
 - [ ] **0026** [The tower kills the zombie](prompts/0026-combat.md) - needs 0024, 0025
-- [ ] **0027** [Three waves, a result screen, and back to the farm](prompts/0027-first-loop.md) - needs 0026, 0021
+- [ ] **0027** [Three waves, a result screen, and back to the farm](prompts/0027-first-loop.md) - needs 0026
 
 ## 2 - The full day  (0/14)
 
@@ -1400,7 +1384,7 @@ For the player who beat the Giant and wants to know how far the farm goes. Cheap
 - [ ] **0036** [The inventory](prompts/0036-inventory.md)
 - [ ] **0037** [The workshop queue](prompts/0037-craft-queue.md) - needs 0036
 - [ ] **0038** [Production runs while you are elsewhere](prompts/0038-idle-production.md) - needs 0037, 0029
-- [ ] **0039** [The day clock and dusk](prompts/0039-day-clock.md) - needs 0021
+- [ ] **0039** [The day clock and dusk](prompts/0039-day-clock.md)
 - [ ] **0040** [The shop grows](prompts/0040-shop-full.md) - needs 0028
 - [ ] **0041** [The first day teaches itself](prompts/0041-tutorial-day.md) - needs 0039, 0040
 
@@ -1449,7 +1433,7 @@ For the player who beat the Giant and wants to know how far the farm goes. Cheap
 - [ ] **0076** [Night lighting](prompts/0076-lighting.md) - needs 0071, 0022
 - [ ] **0077** [Particles](prompts/0077-particles.md) - needs 0074, 0075
 - [ ] **0078** [The reality transition](prompts/0078-transition.md) - needs 0076
-- [ ] **0079** [Resource icons and the UI kit](prompts/0079-ui-kit.md) - needs 0071, 0021
+- [ ] **0079** [Resource icons and the UI kit](prompts/0079-ui-kit.md) - needs 0071
 - [ ] **0080** [A pixel font](prompts/0080-font.md)
 - [ ] **0081** [The UI theme](prompts/0081-theme.md) - needs 0079, 0080
 - [ ] **0082** [Screenshots, and actually looking at them](prompts/0082-screenshots.md) - needs 0078

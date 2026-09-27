@@ -37,6 +37,16 @@ static func tick(state: Dictionary) -> void:
 ## The cozy half. Growing, gathering, producing, selling.
 static func _tick_day(state: Dictionary) -> void:
 	state["day_tick"] = int(state["day_tick"]) + 1
+
+	# **Asked for last frame, decided here.** The button writes an intent and
+	# the rules act on it, so the keyboard, the mouse and the autoplayer all
+	# take the same road into the night.
+	var intent: Dictionary = state["intent"]
+	if bool(intent.get("begin_night", false)):
+		intent["begin_night"] = false
+		Phases.begin_preparation(state)
+		return
+
 	Farming.tick(state)
 	Gathering.tick(state)
 	Crafting.tick(state)

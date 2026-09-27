@@ -1,7 +1,7 @@
 # 0021 - The day HUD
 
 - **Phase:** 1 - The first playable build
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0007, 0006
 - **Likely files:** src/ui/day_hud.gd
 

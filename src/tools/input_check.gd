@@ -34,7 +34,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 5
+const CASES := 6
 
 var passed := 0
 var failed := 0
@@ -69,6 +69,7 @@ func _run() -> void:
 	await _case_0013_world_view()
 	await _case_0015_player()
 	await _case_0020_shop()
+	await _case_0021_day_hud()
 	_finish()
 
 
@@ -94,7 +95,7 @@ func _case_0011_harness() -> void:
 	# The real scene, with the nodes it says it has.
 	expect(_scene != null, "the main scene loads")
 	expect(require_control("WorldView") != null, "the farm is on screen")
-	expect(require_control("Clock") != null, "the clock label is there")
+	expect(require_control("Day") != null, "the day label is there")
 	expect(require_control("SimDriver") != null, "the sim driver is there")
 
 	# **Prove it fails loudly**, rather than trusting that it would. A control
@@ -567,6 +568,76 @@ func _case_0020_shop() -> void:
 	await frames(30)
 	expect(not panel.visible, "and stays closed a second later")
 	expect(not Shop.is_open(state), "and the game agrees it is closed")
+
+	await close_scene()
+	_completed += 1     # last line: an abandoned case never gets here
+
+
+## 0021 - the HUD: it tells the truth the same tick, and the button works by
+## mouse and by key.
+func _case_0021_day_hud() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var hud: DayHud = require_control("DayHud")
+	if driver == null or hud == null:
+		_completed += 1
+		await close_scene()
+		return
+
+	var state := driver.state
+	expect(hud.visible, "the day HUD is up during the day")
+
+	var day_label: Label = require_control("Day")
+	var money_label: Label = require_control("Money")
+	var wood_label: Label = require_control("res_wood")
+	# The label carries the clock as well as the day now, so this asks what it
+	# is for rather than what it happened to read the day it was written.
+	expect(day_label != null and day_label.text.begins_with("DAY 1"),
+		"it says which day", day_label.text if day_label else "")
+	expect(day_label != null and day_label.text.contains(":"),
+		"and what time it is", day_label.text if day_label else "")
+	expect(money_label != null and money_label.text.contains("25"),
+		"and what is in the purse",
+		money_label.text if money_label else "")
+
+	# **The same tick.** Not next frame, not after a refresh timer.
+	var before := wood_label.text
+	Resources.add(state, GameData.WOOD, 7)
+	await frames(2)
+	expect(wood_label.text != before, "gathering wood updates the HUD at once",
+		"%s then %s" % [before, wood_label.text])
+	expect(wood_label.text.contains("19"), "with the right number",
+		wood_label.text)
+
+	# A changed number lights up and settles back, so a gain is visible from
+	# the corner of the eye.
+	var lit := wood_label.modulate
+	await frames(60)
+	expect(wood_label.modulate != lit, "and the flash fades back",
+		"%s then %s" % [lit, wood_label.modulate])
+
+	# **The button is reachable by keyboard.**
+	var button: Button = require_control("NightButton")
+	expect(button != null and button.focus_mode != Control.FOCUS_NONE,
+		"the night button can take focus")
+
+	# Pressing it asks for the night, and the rules give it.
+	expect(int(state["phase"]) == Phases.DAY, "still day")
+	await click_control("NightButton")
+	await frames(20)
+	expect(int(state["phase"]) == Phases.PREPARATION,
+		"clicking it starts the night", Phases.name_of(int(state["phase"])))
+	expect(not hud.visible, "and the day HUD goes away with the day")
+
+	# The key does the same thing from a fresh day.
+	await open_scene(MAIN_SCENE)
+	driver = require_control("SimDriver")
+	expect(int(driver.state["phase"]) == Phases.DAY, "a fresh day")
+	await hold_key(KEY_N, 4)
+	await frames(20)
+	expect(int(driver.state["phase"]) == Phases.PREPARATION,
+		"and N does what the button does",
+		Phases.name_of(int(driver.state["phase"])))
 
 	await close_scene()
 	_completed += 1     # last line: an abandoned case never gets here

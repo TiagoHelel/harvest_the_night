@@ -29,9 +29,9 @@ const BOOT_SEED := 20260927
 ## last frame cannot race with anything.
 var _was_down: Dictionary = {}
 
-@onready var _clock: Label = %Clock
 @onready var _world: WorldView = %WorldView
 @onready var _shop: ShopPanel = %ShopPanel
+@onready var _hud: DayHud = %DayHud
 @onready var _player_view: PlayerView = %WorldView/Occupants/PlayerView
 @onready var _driver: SimDriver = %SimDriver
 @onready var _debug: CanvasLayer = %DebugOverlay
@@ -40,12 +40,12 @@ var _was_down: Dictionary = {}
 func _ready() -> void:
 	print(BuildInfo.line())
 
-	_driver.ticked.connect(_on_ticked)
 	_driver.start(BOOT_SEED)
 
 	_world.show_state(_driver.state)
 	_player_view.show_state(_driver.state)
 	_shop.show_state(_driver.state)
+	_hud.show_state(_driver.state)
 	_world.look_at_cell(Player.cell(_driver.state))
 
 	# The overlay is handed its driver rather than going looking for one: a
@@ -53,7 +53,6 @@ func _ready() -> void:
 	# describe their own.
 	if is_instance_valid(_debug) and _debug.has_method("watch"):
 		_debug.watch(_driver)
-	_show(_driver.state)
 
 
 ## **The only place keys become game input.**
@@ -94,17 +93,7 @@ func _target_cell() -> Vector2i:
 	return cell if Interact.verb_at(state, cell) != &"" else Vector2i(-1, -1)
 
 
-func _on_ticked(state: Dictionary) -> void:
-	_show(state)
+## Nothing listens for a tick any more: every panel reads the state each frame
+## and draws what it finds. A signal per tick would have meant a redraw per
+## tick, which at 4x speed is four times the work for the same picture.
 
-
-func _show(state: Dictionary) -> void:
-	var tick: int = int(state.get("tick", 0))
-	var doing: Dictionary = (state["player"] as Dictionary)["action"]
-	_clock.text = "%s %d   %d:%02d%s" % [
-		Phases.name_of(int(state.get("phase", 0))),
-		int(state.get("day", 1)),
-		tick / (GameData.TICK_HZ * 60),
-		(tick / GameData.TICK_HZ) % 60,
-		"" if doing.is_empty() else "   " + str(doing["verb"]),
-	]

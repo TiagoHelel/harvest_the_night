@@ -67,7 +67,14 @@ static func initial() -> Dictionary:
 		# autoplayer of task 0067 sell a day's wood with no window open.
 		"open_panel": &"",
 		# Written by the UI or the autoplayer, read by the tick, cleared by it.
-		"intent": {"move": [0, 0], "interact": false, "cancel": false},
+		"intent": {
+			"move": [0, 0],
+			"interact": false,
+			"cancel": false,
+			# The night button, the N key and the autoplayer all write this.
+			# **The HUD does not change the phase**; the tick does.
+			"begin_night": false,
+		},
 	}
 
 
