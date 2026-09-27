@@ -72,6 +72,11 @@ const OCCUPANT_COLOURS: Dictionary = {
 	&"wall": Color8(130, 128, 136),
 	&"fence": Color8(150, 116, 74),
 	&"barricade": Color8(160, 130, 90),
+	&"walker": Color8(85, 118, 82),
+	&"runner": Color8(120, 140, 80),
+	&"tank": Color8(70, 92, 70),
+	&"breaker": Color8(110, 80, 70),
+	&"giant": Color8(140, 70, 70),
 }
 
 ## Anything not in the table above, so a new occupant shows up as an obvious
@@ -116,6 +121,14 @@ var _ghost_frame: Node2D
 var _ghost_cell := Vector2i(-1, -1)
 var _ghost_ok := false
 
+## The night: everything alive that is not the player, and everything in the
+## air. Redrawn every frame rather than on a dirty flag - at night this is the
+## thing that is always moving, so a signature check would cost more than the
+## redraw it saved.
+var _actors: Node2D
+var _actor_sprites: Array[Node] = []
+var _shots: Node2D
+
 ## The light. One node, two colours, and whatever is between them right now.
 var _light: CanvasModulate
 var _lit_for := -1                  # the phase the fade is heading towards
@@ -151,6 +164,16 @@ func _ready() -> void:
 	_plots.name = "Plots"
 	add_child(_plots)
 	move_child(_plots, 1)           # after Terrain, before the highlight
+
+	_actors = Node2D.new()
+	_actors.name = "Actors"
+	_occupants.add_child(_actors)
+
+	_shots = Node2D.new()
+	_shots.name = "Shots"
+	_shots.z_index = 8              # over everything on the ground
+	_shots.draw.connect(_draw_shots)
+	add_child(_shots)
 
 	_ghost = Sprite2D.new()
 	_ghost.name = "Ghost"
@@ -200,6 +223,10 @@ func _process(delta: float) -> void:
 	if plots != _plots_signature:
 		_plots_signature = plots
 		_refresh_plots()
+
+	_refresh_actors()
+	if _shots != null:
+		_shots.queue_redraw()
 
 
 # -------------------------------------------------------------------- light
@@ -381,6 +408,52 @@ func _refresh() -> void:
 		sprite.position = Vector2(cell) * float(GameData.TILE_SIZE)
 		_occupants.add_child(sprite)
 		_sprites.append(sprite)
+
+
+## Everything alive that is not the player.
+##
+## Placeholder blocks until task 0074 draws the zombies. They are in the
+## y-sorted layer, so one walking past a tree goes behind it.
+func _refresh_actors() -> void:
+	if _actors == null:
+		return
+	var ids := Entities.ids(_state)
+	# Pool the sprites: a wave is a hundred things moving every frame, and
+	# freeing and rebuilding a hundred nodes a frame is the one place this view
+	# could plausibly cost something.
+	while _actor_sprites.size() < ids.size():
+		var sprite := Sprite2D.new()
+		sprite.centered = false
+		_actors.add_child(sprite)
+		_actor_sprites.append(sprite)
+	while _actor_sprites.size() > ids.size():
+		var spare: Node = _actor_sprites.pop_back()
+		spare.queue_free()
+
+	var scale_factor := float(GameData.TILE_SIZE) / float(Player.SUBTILE)
+	for i in ids.size():
+		var one := Entities.get_one(_state, int(ids[i]))
+		var sprite: Sprite2D = _actor_sprites[i]
+		sprite.texture = _texture_for(StringName(one["kind"]))
+		sprite.position = Vector2(
+			floorf(float(one["pos"][0]) * scale_factor
+				- float(GameData.TILE_SIZE) * 0.5),
+			floorf(float(one["pos"][1]) * scale_factor
+				- float(GameData.TILE_SIZE) * 0.5))
+
+
+## Shots in the air. Two pixels of bright, which at this resolution is enough
+## to follow a line of fire across the farm.
+func _draw_shots() -> void:
+	if _state.is_empty():
+		return
+	var scale_factor := float(GameData.TILE_SIZE) / float(Player.SUBTILE)
+	for shot in (_state["projectiles"] as Array):
+		var at := Vector2(
+			floorf(float(shot["pos"][0]) * scale_factor),
+			floorf(float(shot["pos"][1]) * scale_factor))
+		_shots.draw_rect(Rect2(at - Vector2.ONE, Vector2(2, 2)),
+			PaletteData.COLOURS[&"flame_hot"])
 
 
 ## Turned earth, and the crop on it at whatever stage it has reached.

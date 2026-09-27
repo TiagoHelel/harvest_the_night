@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 16
+const GROUPS := 17
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -80,6 +80,7 @@ func _run() -> void:
 	_task_0021_night_intent()
 	_task_0022_reality()
 	_task_0023_building()
+	_task_0024_tower()
 
 
 func _finish() -> void:
@@ -1663,3 +1664,165 @@ func _task_0023_building() -> void:
 		"and writing the other one takes it back up")
 
 	_completed += 1     # last line: an abandoned group never gets here
+
+
+## 0024 - the gun tower: it reloads, it picks the right target, and it puts
+## something in the air rather than subtracting a number.
+func _task_0024_tower() -> void:
+	var entry: Dictionary = GameData.DEFENCES[&"gun_tower"]
+
+	# **Nothing during the day.** A tower is furniture until the sun goes down.
+	var daytime := _night_with_tower(false)
+	var tower_cell: Vector2i = daytime["tower"]
+	var state: Dictionary = daytime["state"]
+	Entities.spawn(state, &"walker", tower_cell + Vector2i(2, 0))
+	var hp_before := int(Entities.get_one(state, 1)["hp"])
+	Sim.advance(state, int(entry["reload_ticks"]) * 3)
+	expect(Entities.get_one(state, 1).get("hp", -1) == hp_before,
+		"a tower does nothing at all during the day",
+		str(Entities.get_one(state, 1)))
+
+	# At night it shoots.
+	var night := _night_with_tower(true)
+	state = night["state"]
+	tower_cell = night["tower"]
+	var victim := Entities.spawn(state, &"walker", tower_cell + Vector2i(2, 0))
+	expect(Towers.target_of(state, tower_cell) == victim,
+		"it picks the one thing in range", str(Towers.target_of(state, tower_cell)))
+
+	# **Something travels.** A shot is in the air before it is a subtraction.
+	Sim.advance(state, 1)
+	expect(Towers.in_flight(state) == 1, "a shot is in the air",
+		str(Towers.in_flight(state)))
+	expect(Entities.alive(state, victim), "and the target is still up")
+
+	Sim.advance(state, 20)
+	expect(Towers.in_flight(state) == 0, "the shot lands")
+	expect(int(Entities.get_one(state, victim)["hp"])
+		< int((GameData.ENEMIES[&"walker"] as Dictionary)["hp"]),
+		"and takes hit points off", str(Entities.get_one(state, victim)))
+
+	# **Out of range is out of range.**
+	var far := _night_with_tower(true)
+	state = far["state"]
+	tower_cell = far["tower"]
+	var distant := tower_cell + Vector2i(int(entry["range"]) + 3, 0)
+	if Grid.in_bounds(distant):
+		Entities.spawn(state, &"walker", distant)
+		expect(Towers.target_of(state, tower_cell) == 0,
+			"nothing beyond the range is a target")
+		Sim.advance(state, int(entry["reload_ticks"]) + 5)
+		expect(Towers.in_flight(state) == 0, "and nothing is fired")
+
+	# **Nearest the house, not nearest the tower.** The thing about to reach
+	# the farmhouse is the thing worth shooting.
+	var choosing := _night_with_tower(true)
+	state = choosing["state"]
+	tower_cell = choosing["tower"]
+	var house := Farm.house_centre(state)
+	var near_tower := Entities.spawn(state, &"walker", tower_cell + Vector2i(1, 0))
+	var near_house := Entities.spawn(state, &"walker", tower_cell + Vector2i(-1, 0))
+	var a := Grid.manhattan(Entities.cell_of(state, near_tower), house)
+	var b := Grid.manhattan(Entities.cell_of(state, near_house), house)
+	var expected := near_house if b < a else near_tower
+	expect(Towers.target_of(state, tower_cell) == expected,
+		"it shoots whichever is closer to the house",
+		"%d at %d from the house, %d at %d" % [near_tower, a, near_house, b])
+
+	# **A tie is broken by the lower id, never by iteration order.**
+	var tied := _night_with_tower(true)
+	state = tied["state"]
+	tower_cell = tied["tower"]
+	var first := 0
+	var second := 0
+	for id in Entities.ids(state):
+		Entities.remove(state, id)
+	# Two at the same distance from the house, on either side of the tower.
+	var left := tower_cell + Vector2i(-1, 0)
+	var right := tower_cell + Vector2i(1, 0)
+	if Grid.manhattan(left, house) == Grid.manhattan(right, house):
+		first = Entities.spawn(state, &"walker", left)
+		second = Entities.spawn(state, &"walker", right)
+		expect(Towers.target_of(state, tower_cell) == mini(first, second),
+			"a tie goes to the lower id",
+			"%d vs %d" % [first, second])
+
+	# **Two runs of the same seed fire at the same targets on the same ticks.**
+	var log_a := _shooting_log(301)
+	var log_b := _shooting_log(301)
+	expect(log_a == log_b, "the same seed shoots the same script",
+		"%d entries vs %d" % [log_a.size(), log_b.size()])
+	expect(log_a.size() > 3, "and there was something to compare",
+		str(log_a.size()))
+
+	# **Halving the rate of fire halves the shots.** The lever is the lever.
+	var fast := _shots_in(600, int(entry["reload_ticks"]))
+	var slow := _shots_in(600, int(entry["reload_ticks"]) * 2)
+	expect(absi(fast - slow * 2) <= 1,
+		"twice the reload is half the shots", "%d against %d" % [fast, slow])
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## A farm at night with one gun tower on it, and the cell it stands on.
+func _night_with_tower(at_night: bool) -> Dictionary:
+	var state := State.create(201)
+	Resources.gain(state, {GameData.WOOD: 200, GameData.IRON: 200})
+	var cell := Vector2i(24, 9)
+	while not Farm.buildable(state, cell) and cell.x < 34:
+		cell.x += 1
+	Building.place(state, &"gun_tower", cell)
+	if at_night:
+		Phases.begin_preparation(state)
+		Sim.advance(state, GameData.PREPARATION_TICKS)
+	return {"state": state, "tower": cell}
+
+
+## Which target was hit on which tick, for a run of a given seed.
+func _shooting_log(seed_value: int) -> Array:
+	var state := State.create(seed_value)
+	Resources.gain(state, {GameData.WOOD: 200, GameData.IRON: 200})
+	var cell := Vector2i(24, 9)
+	while not Farm.buildable(state, cell) and cell.x < 34:
+		cell.x += 1
+	Building.place(state, &"gun_tower", cell)
+	Phases.begin_preparation(state)
+	Sim.advance(state, GameData.PREPARATION_TICKS)
+	for offset in [Vector2i(1, 0), Vector2i(2, 0), Vector2i(-1, 1)]:
+		Entities.spawn(state, &"walker", cell + offset)
+
+	var log: Array = []
+	for _i in 400:
+		var before := Towers.in_flight(state)
+		Sim.advance(state, 1)
+		if Towers.in_flight(state) > before:
+			log.append([int(state["tick"]),
+				Towers.target_of(state, cell), Entities.count(state)])
+	return log
+
+
+## How many shots a tower gets off in `ticks`, with a given reload.
+func _shots_in(ticks: int, reload: int) -> int:
+	var state := State.create(202)
+	Resources.gain(state, {GameData.WOOD: 200, GameData.IRON: 200})
+	var cell := Vector2i(24, 9)
+	while not Farm.buildable(state, cell) and cell.x < 34:
+		cell.x += 1
+	Building.place(state, &"gun_tower", cell)
+	Phases.begin_preparation(state)
+	Sim.advance(state, GameData.PREPARATION_TICKS)
+
+	# A target that cannot die, so the count is about the reload and nothing
+	# else. Its hit points are topped up every tick.
+	var dummy := Entities.spawn(state, &"walker", cell + Vector2i(1, 0))
+	var fired := 0
+	for _i in ticks:
+		Farm.occupant(state, cell)["reload"] = mini(
+			int(Farm.occupant(state, cell).get("reload", 0)), reload)
+		var before := Towers.in_flight(state)
+		Sim.advance(state, 1)
+		if Towers.in_flight(state) > before:
+			fired += 1
+			Farm.occupant(state, cell)["reload"] = reload
+		Entities.get_one(state, dummy)["hp"] = 9999
+	return fired

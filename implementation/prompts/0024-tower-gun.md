@@ -1,7 +1,7 @@
 # 0024 - The shooting tower
 
 - **Phase:** 1 - The first playable build
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0023
 - **Likely files:** src/core/towers.gd
 

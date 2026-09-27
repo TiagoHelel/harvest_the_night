@@ -83,10 +83,14 @@ static func _tick_night(state: Dictionary) -> void:
 	Building.tick(state)
 	Player.tick(state)
 
-	# Systems hang off here as the backlog adds them, in this order: waves
-	# spawn (0027), enemies move (0025), towers acquire and fire (0024),
-	# projectiles land and damage resolves (0026), the dead are removed, and
-	# only then is the end of the night tested.
+	# The order below **is** the rules. Enemies move before towers fire, so a
+	# zombie that stepped into range this tick can be shot this tick rather
+	# than next - which is what makes a range circle mean what it looks like.
+	#
+	# Waves spawn (0027), enemies move (0025), towers acquire and fire, shots
+	# in the air advance and land, and only then is the end of the night
+	# tested (0027).
+	Towers.tick(state)
 
 
 ## Advance by `ticks`, which is how every caller outside a frame loop uses it:

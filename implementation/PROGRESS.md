@@ -1094,3 +1094,50 @@ Notes:
   driving `show_ghost()` directly; the input path is `input_check`'s job, and
   the verdict is now exposed as `ghost_is_ok()` so a test can ask about it - a
   colour drawn into a canvas is not something a test can read.
+
+## 0024 - The shooting tower - done 2026-09-27
+
+What changed: the first thing that fights for you. A tower reloads, picks a
+target and puts something in the air. `Entities` is the table everything alive
+lives in, and the world draws both it and the shots.
+
+Files: src/core/towers.gd, src/core/entities.gd, src/core/sim.gd,
+src/core/state.gd, src/ui/world_view.gd, src/tools/headless_check.gd
+
+Verify: PASS - 10 passed, 1 skipped, 38s. **436 asserts, 0 failed** (424
+before). **Sim hash 3694981960 -> 4008937129** (the state gained `entities`
+and `projectiles`). Data hash unchanged: the tower was already in the table.
+
+Notes:
+
+- **`Entities` was built here rather than in task 0025**, because a tower with
+  nothing to shoot at cannot be tested. It is the same call as `Gathering` in
+  0016: write the shared thing once, and let the task that needs it most build
+  it. 0025 adds walking and spawning from waves; the table, the ids and the
+  damage are here.
+- **An id, not a reference.** A projectile in flight names the thing it is
+  chasing. A reference to a dictionary would either dangle when the target died
+  or keep it alive after it should be gone, and ids are also the only ordering
+  in the game that cannot depend on how a Dictionary felt like iterating.
+- **Nearest the house, not nearest the tower.** The thing about to reach the
+  farmhouse is the thing worth shooting; a tower that fired at whatever
+  wandered closest to itself would let the leader through while it plinked at
+  the back of the queue. Asserted with two targets at deliberately different
+  distances.
+- **Ties go to the lower id**, asserted with two walkers equidistant from the
+  house on either side of the tower.
+- **Two runs of the same seed shoot the same script.** The check records which
+  target was hit on which tick across 400 ticks and compares the whole log,
+  rather than comparing a final number that could match by luck.
+- **Halving the rate of fire halves the shots**, measured over 600 ticks
+  against an immortal target so the count is about the reload and nothing else.
+- **A quiet tick costs nothing.** With no entities alive the tower loop does
+  not walk the grid looking for targets; it only counts reloads down. A farm
+  covered in towers on a quiet tick should not pay for the wave that is not
+  there.
+- The order inside `_tick_night` is now written down as a rule: enemies move
+  *before* towers fire, so something that stepped into range this tick can be
+  shot this tick - which is what makes a range circle mean what it looks like.
+- Actor sprites are pooled rather than freed and rebuilt each frame. A wave is
+  a hundred things moving every frame and that is the one place this view could
+  plausibly cost something.
