@@ -41,7 +41,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 15
+const CASES := 16
 
 var passed := 0
 var failed := 0
@@ -86,6 +86,7 @@ func _run() -> void:
 	await _case_0032_press()
 	await _case_0033_power()
 	await _case_0034_livestock()
+	await _case_0035_ammo()
 	_finish()
 
 
@@ -1733,6 +1734,54 @@ func _case_0034_livestock() -> void:
 			as Dictionary)["holds"]),
 		"once, not once a tick - a held key does not milk it dry",
 		str(Resources.amount(state, GameData.MEAT)))
+
+	await close_scene()
+	_completed += 1     # last line: an abandoned case never gets here
+
+
+## 0035 - the pool, and watching it drain after dark.
+func _case_0035_ammo() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var hud: DayHud = require_control("DayHud")
+	if driver == null or hud == null:
+		_completed += 1
+		await close_scene()
+		return
+
+	var state := driver.state
+	var ammo: Label = require_control("AmmoLine")
+	expect(ammo != null, "the HUD has an ammunition line")
+	if ammo == null:
+		await close_scene()
+		_completed += 1
+		return
+
+	await frames(2)
+	expect(ammo.visible, "and it is up on day one")
+	for res in Ammo.kinds():
+		expect(ammo.text.contains(str(res)),
+			"it names %s" % res, ammo.text)
+
+	# **An empty pool is flagged**, rather than being a number nobody reads.
+	for res in Ammo.kinds():
+		Resources.spend(state, res, Resources.amount(state, res))
+	await frames(2)
+	var warned := ammo.modulate
+	Resources.gain(state, {GameData.GUNPOWDER: 9, GameData.INCENDIARY: 9})
+	await frames(2)
+	expect(ammo.modulate != warned, "and a stocked one is not",
+		"%s then %s" % [warned, ammo.modulate])
+	expect(ammo.text.contains("9"), "with the count on it", ammo.text)
+
+	# **It stays up after dark**, which is when it is actually draining.
+	await hold_key(KEY_N, 4)
+	await until(func() -> bool: return not hud.shows_day(), "the day to end")
+	await frames(2)
+	expect(not hud.shows_day(), "the day HUD is gone")
+	expect(ammo.visible, "and the ammunition line is not")
+	expect(ammo.text.contains(str(GameData.GUNPOWDER)),
+		"still naming the pool", ammo.text)
 
 	await close_scene()
 	_completed += 1     # last line: an abandoned case never gets here

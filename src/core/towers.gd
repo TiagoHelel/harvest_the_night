@@ -90,11 +90,20 @@ static func tick(state: Dictionary) -> void:
 		var target := _acquire(state, cell, entry)
 		if target == 0:
 			continue
-		_fire(state, cell, tower["id"], entry, target)
+
+		# **A round comes out of the pool, or the shot is a bad one.** Not a
+		# silent tower: `design.md` does not do punishment mechanics, and a
+		# tower that stopped is a tower the player stops looking at.
+		var armed := Ammo.spend(state, tower["id"])
+		_fire(state, cell, tower["id"], entry, target, armed)
+
 		# **Asked fresh after every shot**, so a generator running dry part way
 		# through a night slows the guns from the next shot rather than from the
-		# next night.
-		tower["reload"] = Power.scaled_ticks(state, int(entry["reload_ticks"]))
+		# next night. The same is true of the pool running out.
+		var reload_ticks := int(entry["reload_ticks"])
+		if not armed:
+			reload_ticks = Ammo.weak_reload(reload_ticks)
+		tower["reload"] = Power.scaled_ticks(state, reload_ticks)
 
 
 ## Reload everything, without looking for targets. What a quiet tick costs.
@@ -156,8 +165,12 @@ static func target_of(state: Dictionary, cell: Vector2i) -> int:
 
 # --------------------------------------------------------------- projectiles
 
+## `armed` is whether a round was paid for. An unarmed shot is the tower doing
+## the best it can with what is in the hopper: a third of the damage, plain
+## impact, and none of what made it special - a mortar that cannot reach for
+## powder is lobbing a rock.
 static func _fire(state: Dictionary, from: Vector2i, kind: StringName,
-		entry: Dictionary, target: int) -> void:
+		entry: Dictionary, target: int, armed: bool = true) -> void:
 	var tiles_per_second := float(entry.get("projectile_tiles_per_second", 12))
 	var speed := int(tiles_per_second * float(Player.SUBTILE)
 		/ float(GameData.TICK_HZ))
@@ -170,8 +183,9 @@ static func _fire(state: Dictionary, from: Vector2i, kind: StringName,
 		"pos": [from.x * Player.SUBTILE + Player.SUBTILE / 2,
 				from.y * Player.SUBTILE + Player.SUBTILE / 2],
 		"target": target,
-		"damage": int(entry.get("damage", 1)),
-		"type": StringName(entry.get("damage_type", GameData.DAMAGE_IMPACT)),
+		"damage": int(entry.get("damage", 1)) if armed 			else Ammo.weak_damage(int(entry.get("damage", 1))),
+		"type": StringName(entry.get("damage_type", GameData.DAMAGE_IMPACT)) 			if armed else GameData.DAMAGE_IMPACT,
+		"armed": armed,
 		"speed": maxi(speed, 1),
 	})
 

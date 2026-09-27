@@ -1,7 +1,7 @@
 # 0035 - Gunpowder and ammunition
 
 - **Phase:** 2 - The full day
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0032, 0033
 - **Likely files:** src/core/crafting.gd, src/core/towers.gd
 

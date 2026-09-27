@@ -91,6 +91,11 @@ const CORN := &"corn"
 const CARROT := &"carrot"
 const MEAT := &"meat"
 const GUNPOWDER := &"gunpowder"
+## `design.md` section 5: "Oleo + Madeira -> Municao incendiaria". The
+## flamethrower used to declare it burned raw oil, which at $26 a drop every
+## two seconds was the most expensive trigger in the game - forty-five drops
+## over a night, eleven hundred dollars of fuel. Rounds are what it burns now.
+const INCENDIARY := &"incendiary"
 const MONEY := &"money"
 const ENERGY := &"energy"
 
@@ -98,7 +103,7 @@ const ENERGY := &"energy"
 ## lays them out.
 const RESOURCES: Array = [
 	WOOD, STONE, IRON, FOOD, FISH, OIL,
-	WHEAT, CORN, CARROT, MEAT, GUNPOWDER, MONEY, ENERGY,
+	WHEAT, CORN, CARROT, MEAT, GUNPOWDER, INCENDIARY, MONEY, ENERGY,
 ]
 
 ## What the shop will buy, and for how much.
@@ -126,6 +131,10 @@ const SELL_PRICE: Dictionary = {        # LEVER: money each, 1-30
 	# Above the oil it is made from, per craft: two corn and a drop of oil is
 	# $36 in and $44 out. `check_chain()` is what keeps that true.
 	GUNPOWDER: 22,
+	# A drop of oil and two logs make four rounds: $30 of goods into $36 of
+	# ammunition. A thin margin on purpose - rounds are for burning, not for
+	# selling, and `check_chain()` still wants the kitchen to beat the stall.
+	INCENDIARY: 9,
 }
 
 ## What the shop charges, as a multiple of what it pays.
@@ -341,6 +350,13 @@ const RECIPES: Dictionary = {
 		"output": {OIL: 1},
 		"ticks": 25 * SECONDS,          # LEVER: ticks, 10-45 seconds worth
 	},
+	# The flamethrower's rounds. `design.md` section 5 names this one exactly.
+	&"make_incendiary": {
+		"station": &"workshop",
+		"inputs": {OIL: 1, WOOD: 2},
+		"output": {INCENDIARY: 4},
+		"ticks": 10 * SECONDS,          # LEVER: ticks, 5-25 seconds worth
+	},
 	&"make_gunpowder": {
 		"station": &"workshop",
 		"inputs": {CORN: 2, OIL: 1},
@@ -463,7 +479,7 @@ const DEFENCES: Dictionary = {
 		"cone_degrees": 60,             # LEVER: degrees, 30-90
 		"burn_ticks": 3 * SECONDS,      # LEVER: ticks, 1-6 seconds worth
 		"burn_damage": 2,               # LEVER: per second burning, 1-5
-		"ammo": {OIL: 1},
+		"ammo": {INCENDIARY: 1},
 		"ammo_every_ticks": 2 * SECONDS,
 		"energy_draw": 2,
 	},
@@ -490,6 +506,9 @@ const DEFENCES: Dictionary = {
 		"damage_type": DAMAGE_IMPACT,
 		"range": 7,                     # LEVER: tiles, 5-10
 		"reload_ticks": 15,             # LEVER: ticks, 8-30
+		# Bolts, not powder: the crossbow is the tower you can keep firing
+		# on a night when the workshop stood idle. It pays for that in
+		# energy instead - three, the hungriest thing on the farm.
 		"projectile_tiles_per_second": 22,
 		"pierce": 5,                    # LEVER: targets in the line, 2-8
 		"pierce_falloff": 0.4,          # LEVER: fraction lost each, 0.2-0.6
@@ -552,6 +571,17 @@ const LIVESTOCK: Dictionary = {
 		"holds": 1,                     # LEVER: units before it stops, 1-4
 	},
 }
+
+## What a tower manages on an empty pool.
+##
+## **A slow basic shot, never a silent tower.** A tower that stopped would be a
+## tower the player stops looking at, and a night that is lost before it starts
+## is not the setback `design.md` asks for - it is an ending. So an empty
+## mortar still lobs something: three times as long to reload, a third of the
+## damage, and none of what made it a mortar. Enough to survive an easy night
+## and nowhere near enough for a hard one.
+const EMPTY_RELOAD_PERCENT := 300       # LEVER: percent of normal, 150-500
+const EMPTY_DAMAGE_PERCENT := 30        # LEVER: percent of normal, 10-60
 
 ## What repairing costs, per hit point put back.
 const REPAIR_COST_PER_HP: Dictionary = {FOOD: 1, WOOD: 1}
@@ -827,6 +857,7 @@ static func validate() -> Array:
 	errors.append_array(check_reachable(GATHERING, FARM_MAP))
 	errors.append_array(check_chain(RECIPES, SELL_PRICE))
 	errors.append_array(check_livestock(LIVESTOCK, FARM_MAP))
+	errors.append_array(check_ammo(DEFENCES, RECIPES))
 
 	for res in sorted_names(REPAIR_COST_PER_HP.keys()):
 		if not RESOURCES.has(res):
@@ -1234,6 +1265,34 @@ static func check_livestock(animals: Dictionary, rows: Array) -> Array:
 	return errors
 
 
+## Every round a tower fires is a round the farm can make.
+##
+## The same bug as the meat of task 0034, one table along: a tower can declare
+## it fires anything, and until this existed nothing asked whether the player
+## had any way of producing it. A tower whose ammunition cannot be made is a
+## tower that is permanently on its weak shot, and nothing in the game would
+## say why.
+static func check_ammo(defences: Dictionary, recipes: Dictionary) -> Array:
+	var errors: Array = []
+	var makeable: Dictionary = {}
+	for id in sorted_names(recipes.keys()):
+		for res in sorted_names(((recipes[id] as Dictionary)["output"]
+				as Dictionary).keys()):
+			makeable[res] = true
+
+	for id in sorted_names(defences.keys()):
+		var defence: Dictionary = defences[id]
+		if not defence.has("ammo"):
+			continue
+		for res in sorted_names((defence["ammo"] as Dictionary).keys()):
+			if not RESOURCES.has(res):
+				errors.append("'%s' fires unknown '%s'" % [id, res])
+			elif not makeable.has(res):
+				errors.append(("'%s' fires '%s' and no recipe makes any - that "
+					+ "tower can never fire a proper shot") % [id, res])
+	return errors
+
+
 static func check_nights(nights: Array) -> Array:
 	var errors: Array = []
 	for n in nights.size():
@@ -1277,6 +1336,7 @@ static func digest() -> int:
 			WATER_LASTS_UNTIL_NIGHT],
 		"power": [BASE_ENERGY, UNPOWERED_PERCENT],
 		"livestock": LIVESTOCK,
+		"ammo": [EMPTY_RELOAD_PERCENT, EMPTY_DAMAGE_PERCENT],
 		"gathering": GATHERING,
 		"fishing": FISHING,
 		"recipes": RECIPES,

@@ -48,6 +48,12 @@ extends Control
 ## be told. So `_refresh()` hides the **contents** rather than the panel, and
 ## the power line is the one child left showing.
 ##
+## ## The ammunition pool, also after dark
+##
+## Beside the power line and for the same reason: a mortar running out of
+## powder mid-wave is something the player has to be able to see happening, and
+## everything else in this panel belongs to the day.
+##
 ## ## The night button
 ##
 ## Bottom right, and it says what it will do rather than just "night". It is a
@@ -87,6 +93,7 @@ var _seed_rows: Dictionary = {}     # crop id -> Label
 var _water: Label
 var _line: Label
 var _power: Label
+var _ammo: Label
 var _day_only: Array[Control] = []
 
 
@@ -136,6 +143,9 @@ func _ready() -> void:
 	# **Bottom left, and it stays up after dark.** Supply against draw, and
 	# what that is doing to the speed of everything.
 	_power = _label("PowerLine", Vector2(4, 258), DIM)
+
+	# Under the power line, and up after dark for the same reason.
+	_ammo = _label("AmmoLine", Vector2(4, 248), DIM)
 
 	_night = Button.new()
 	_night.name = "NightButton"
@@ -244,9 +254,20 @@ func _refresh(force: bool) -> void:
 			% [supply, draw, percent]
 	_power.modulate = SHORT if percent < 100 else DIM
 
+	# **What is left to shoot**, and a warning when a kind has run dry.
+	var parts: Array = []
+	var empty := false
+	for res in Ammo.kinds():
+		var held := Resources.amount(_state, res)
+		parts.append("%s %d" % [res, held])
+		if held <= 0:
+			empty = true
+	_ammo.text = "AMMO  " + "   ".join(parts) if not parts.is_empty() 		else "AMMO  none needed"
+	_ammo.modulate = SHORT if empty else DIM
+
 	if _day_only.is_empty():
 		for child in get_children():
-			if child is Control and child != _power:
+			if child is Control and child != _power and child != _ammo:
 				_day_only.append(child as Control)
 	for node in _day_only:
 		node.visible = daylight

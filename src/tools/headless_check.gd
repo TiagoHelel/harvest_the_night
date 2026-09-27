@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 27
+const GROUPS := 28
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -91,6 +91,7 @@ func _run() -> void:
 	_task_0032_oil()
 	_task_0033_power()
 	_task_0034_cooking()
+	_task_0035_ammunition()
 
 
 func _finish() -> void:
@@ -250,8 +251,25 @@ func _task_0003_game_data() -> void:
 
 	# Every resource the reference sheet shows is here, and every sellable one
 	# has a price.
-	expect(GameData.RESOURCES.size() == 13, "thirteen resources",
+	#
+	# **Named rather than counted.** This was `size() == 13`, which is a test
+	# that fails when the game grows and says nothing about what is missing -
+	# task 0035 added incendiary rounds and all it reported was "14". The panel
+	# on `docs/reference-sheet.png` has twelve things on it; those twelve have
+	# to exist. Carrot and incendiary do not appear on that panel and are not
+	# listed here, which is the point: the sheet is a floor, not a ceiling.
+	for res in [GameData.WOOD, GameData.STONE, GameData.IRON, GameData.FOOD,
+			GameData.FISH, GameData.OIL, GameData.WHEAT, GameData.CORN,
+			GameData.MEAT, GameData.GUNPOWDER, GameData.MONEY,
+			GameData.ENERGY]:
+		expect(GameData.RESOURCES.has(res),
+			"the sheet shows %s, so the game has it" % res)
+	expect(GameData.RESOURCES.size() >= 12,
+		"and at least the twelve the sheet shows",
 		str(GameData.RESOURCES.size()))
+	expect(GameData.RESOURCES.size()
+		== GameData.sorted_names(GameData.RESOURCES).size(),
+		"with no duplicates in the list", str(GameData.RESOURCES.size()))
 	for res in GameData.SELL_PRICE:
 		expect(GameData.RESOURCES.has(res), "a priced thing is a resource",
 			str(res))
@@ -3919,3 +3937,253 @@ func _price_of(amounts: Dictionary) -> int:
 	for res in GameData.sorted_names(amounts.keys()):
 		total += int(GameData.SELL_PRICE.get(res, 0)) * int(amounts[res])
 	return total
+
+
+## 0035 - what you made today decides what tonight can do.
+func _task_0035_ammunition() -> void:
+	# **Both kinds of round, from what `design.md` section 5 says makes them.**
+	var powder: Dictionary = GameData.RECIPES[&"make_gunpowder"]
+	expect((powder["inputs"] as Dictionary).has(GameData.CORN)
+		and (powder["inputs"] as Dictionary).has(GameData.OIL),
+		"gunpowder comes from corn and oil", str(powder["inputs"]))
+	var rounds: Dictionary = GameData.RECIPES[&"make_incendiary"]
+	expect((rounds["inputs"] as Dictionary).has(GameData.OIL)
+		and (rounds["inputs"] as Dictionary).has(GameData.WOOD),
+		"and incendiary rounds from oil and wood", str(rounds["inputs"]))
+	expect((rounds["output"] as Dictionary).has(GameData.INCENDIARY),
+		"which is what comes out", str(rounds["output"]))
+
+	# **Everything a tower fires can be made.** The meat bug of task 0034, one
+	# table along: a tower may declare it fires anything at all.
+	expect(GameData.check_ammo(GameData.DEFENCES, GameData.RECIPES).is_empty(),
+		"every round a tower fires is one the farm can make",
+		str(GameData.check_ammo(GameData.DEFENCES, GameData.RECIPES)))
+	var exotic: Dictionary = GameData.DEFENCES.duplicate(true)
+	(exotic[&"mortar"] as Dictionary)["ammo"] = {GameData.MEAT: 1}
+	expect(not GameData.check_ammo(exotic, GameData.RECIPES).is_empty(),
+		"and a tower firing something no recipe makes is refused")
+
+	# **The flamethrower burns rounds, not raw oil.** It used to declare a drop
+	# of oil every two seconds, which at $26 a drop is eleven hundred dollars of
+	# fuel across one night.
+	var flame := Ammo.needed_by(&"flame_tower")
+	expect(flame.has(GameData.INCENDIARY),
+		"the flamethrower burns incendiary rounds", str(flame))
+	expect(not flame.has(GameData.OIL),
+		"and not the oil itself - that is what the rounds are made of")
+	var per_round := 0
+	for res in GameData.sorted_names((rounds["inputs"] as Dictionary).keys()):
+		per_round += int(GameData.SELL_PRICE.get(res, 0)) \
+			* int((rounds["inputs"] as Dictionary)[res])
+	print("  a burst of %d rounds costs $%d of goods, against $%d of raw oil"
+		% [int((rounds["output"] as Dictionary)[GameData.INCENDIARY]), per_round,
+			int((rounds["output"] as Dictionary)[GameData.INCENDIARY])
+				* int(GameData.SELL_PRICE[GameData.OIL])])
+
+	# **One pool, in the ledger, shared.**
+	var state := State.create(1700)
+	expect(Ammo.kinds().size() >= 2, "there is more than one kind of round",
+		str(Ammo.kinds()))
+	for res in Ammo.kinds():
+		expect(GameData.RESOURCES.has(res),
+			"%s is a resource, so it is in the ledger" % res)
+	expect(not Ammo.uses_ammo(&"gun_tower"),
+		"the basic tower needs nothing - it is what you have on a bad day")
+	expect(Ammo.uses_ammo(&"mortar"), "the mortar does")
+	expect(Ammo.shots_left(state, &"gun_tower") > 1000,
+		"a tower that needs nothing is never short",
+		str(Ammo.shots_left(state, &"gun_tower")))
+
+	Resources.spend(state, GameData.GUNPOWDER,
+		Resources.amount(state, GameData.GUNPOWDER))
+	expect(Ammo.shots_left(state, &"mortar") == 0, "an empty pool is empty")
+	expect(not Ammo.has_ammo(state, &"mortar"), "and the mortar knows it")
+	Resources.gain(state, {GameData.GUNPOWDER: 7})
+	expect(Ammo.shots_left(state, &"mortar") == 7, "seven rounds, seven shots",
+		str(Ammo.shots_left(state, &"mortar")))
+	expect(Ammo.spend(state, &"mortar"), "firing takes one")
+	expect(Resources.amount(state, GameData.GUNPOWDER) == 6,
+		"out of the ledger", str(Resources.amount(state, GameData.GUNPOWDER)))
+
+	# **Towers compete for it.** Six mortars drain it six times as fast, which
+	# is what makes how many you build a question about supply.
+	for _i in 6:
+		Ammo.spend(state, &"mortar")
+	expect(Resources.amount(state, GameData.GUNPOWDER) == 0,
+		"six more shots and it is gone",
+		str(Resources.amount(state, GameData.GUNPOWDER)))
+	expect(not Ammo.spend(state, &"mortar"),
+		"and the seventh finds nothing")
+	expect(Resources.amount(state, GameData.GUNPOWDER) == 0,
+		"taking nothing for the attempt")
+
+	# **The weak shot is weak, not absent.**
+	var full := int((GameData.DEFENCES[&"mortar"] as Dictionary)["damage"])
+	expect(Ammo.weak_damage(full) < full, "an unarmed shot hits for less",
+		"%d against %d" % [Ammo.weak_damage(full), full])
+	expect(Ammo.weak_damage(full) > 0, "but it does hit",
+		str(Ammo.weak_damage(full)))
+	expect(Ammo.weak_damage(1) >= 1,
+		"and the weakest tower in the game still does something")
+	var reload := int((GameData.DEFENCES[&"mortar"] as Dictionary)["reload_ticks"])
+	expect(Ammo.weak_reload(reload) > reload, "and takes longer over it",
+		"%d against %d" % [Ammo.weak_reload(reload), reload])
+	expect(Ammo.weak_reload(reload) < reload * 10,
+		"but not so long that it may as well have stopped",
+		str(Ammo.weak_reload(reload)))
+
+	# **The pool drains at the rate the levers claim.** The done-when: a
+	# scripted night, counting shots against rounds spent.
+	var armed := _mixed_night(1701, 60)
+	var spent := 60 - int(armed["left"])
+	print("  a night with 60 rounds: %d shots (%s), %d rounds gone, %d left"
+		% [int(armed["shots"]), str(armed["by_kind"]), spent,
+			int(armed["left"])])
+	expect(int(armed["mortar_shots"]) > 0, "the mortars fired",
+		str(armed["by_kind"]))
+	var per_shot := int((GameData.DEFENCES[&"mortar"]
+		as Dictionary)["ammo"][GameData.GUNPOWDER])
+	expect(spent == int(armed["mortar_shots"]) * per_shot,
+		"one round per mortar shot, exactly what the table says - and nothing "
+		+ "at all for the gun towers, which fire for free",
+		"%d rounds for %d mortar shots of %d total"
+			% [spent, armed["mortar_shots"], armed["shots"]])
+
+	# **Ammunition left over carries into the next night.** Nothing clears it,
+	# because it is a resource - but that is worth an assert rather than a
+	# assumption.
+	var carried := int(armed["left"])
+	if carried > 0:
+		var after: Dictionary = armed["state"]
+		(after["intent"] as Dictionary)["confirm_result"] = true
+		Sim.advance(after, 1)
+		expect(int(after["phase"]) == Phases.DAY, "morning")
+		expect(Resources.amount(after, GameData.GUNPOWDER) >= carried,
+			"and what was left in the pool is still there",
+			str(Resources.amount(after, GameData.GUNPOWDER)))
+
+	# **A night with no powder is survivable but clearly worse.** The other
+	# done-when, measured: the same night, the same seed, the same towers.
+	var dry := _mixed_night(1701, 0)
+	print("  with powder: %d killed, house %d, %d mortar shots"
+		% [int(armed["killed"]), int(armed["house"]),
+			int(armed["mortar_shots"])])
+	print("  without:     %d killed, house %d, %d mortar shots"
+		% [int(dry["killed"]), int(dry["house"]), int(dry["mortar_shots"])])
+	expect(int(dry["mortar_shots"]) > 0,
+		"an empty pool still shoots - never a silent dead tower",
+		str(dry["by_kind"]))
+	expect(int(dry["mortar_shots"]) < int(armed["mortar_shots"]),
+		"more slowly", "%d against %d"
+			% [dry["mortar_shots"], armed["mortar_shots"]])
+	expect(int(dry["killed"]) < int(armed["killed"]),
+		"and it kills fewer",
+		"%d against %d" % [dry["killed"], armed["killed"]])
+	expect(int(dry["house"]) < int(armed["house"]),
+		"and the house takes more for it",
+		"%d against %d" % [dry["house"], armed["house"]])
+	expect(int(dry["house"]) > 0,
+		"but the night is survivable without a workshop behind it",
+		str(dry["house"]))
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## A scripted night behind a mixed defence, with `rounds` in the pool.
+##
+## Everything about it is fixed - the seed, the towers, the night, the power -
+## so the only thing that differs between two runs is the ammunition.
+##
+## **Gun towers as well as mortars**, deliberately. A mortar cannot defend
+## itself inside its own minimum range, so a farm defended only by mortars
+## loses whatever is in the pool; and a night that is lost both ways cannot
+## show that the pool made a difference. The guns need no ammunition, which is
+## also the answer to "what do I do on a night the workshop stood idle".
+##
+## **A generator, with oil**, so that energy is not the variable. Six towers on
+## the farm's own four would be running at two thirds speed and the comparison
+## would be measuring that instead.
+##
+## **A late night**, because an early one is over before the difference shows:
+## on night three the guns alone held it without the house being touched, and
+## with powder and without came out identical in every number.
+func _mixed_night(seed_value: int, rounds: int) -> Dictionary:
+	var state := State.create(seed_value)
+	# **Gunpowder to build with, as well as to fire.** A mortar costs fifteen
+	# of it, so the first version of this granted wood, iron, stone and oil and
+	# then placed no mortars at all - and reported seventy-two shots and zero
+	# rounds spent, which is exactly what three gun towers on their own look
+	# like. The pool is emptied again below, after the building is paid for.
+	Resources.gain(state, {GameData.WOOD: 900, GameData.IRON: 900,
+		GameData.STONE: 900, GameData.OIL: 400, GameData.GUNPOWDER: 200})
+
+	var guns := 0
+	for y in [7, 9]:
+		for x in range(22, 30):
+			if guns >= 2:
+				break
+			if Building.place(state, &"gun_tower", Vector2i(x, y)):
+				guns += 1
+		if guns >= 2:
+			break
+	var mortars := 0
+	for y in [7, 9, 11, 12]:
+		for x in range(10, 18):
+			if mortars >= 4:
+				break
+			if Building.place(state, &"mortar", Vector2i(x, y)):
+				mortars += 1
+		if mortars >= 4:
+			break
+
+	var gen := _room_for(state, Building.size_of(&"generator"))
+	Building.place(state, &"generator", gen)
+
+	# The pool, set exactly, after everything is paid for.
+	Resources.spend(state, GameData.GUNPOWDER,
+		Resources.amount(state, GameData.GUNPOWDER))
+	if rounds > 0:
+		Resources.gain(state, {GameData.GUNPOWDER: rounds})
+	Resources.gain(state, {GameData.OIL: 80})
+
+	state["day"] = 7
+	Phases.begin_preparation(state)
+	Sim.advance(state, GameData.PREPARATION_TICKS)
+	expect(guns == 2 and mortars == 4,
+		"the scripted night has the towers it thinks it has",
+		"%d guns, %d mortars" % [guns, mortars])
+
+	# **Shots counted per kind, off the projectile id.** Watching `in_flight`
+	# misses a shot created and resolved inside one tick, which at a mortar's
+	# range is most of them; and a total across all towers cannot be compared
+	# against rounds spent, because a gun tower fires for nothing.
+	var next_id := int(state["next_projectile_id"])
+	var by_kind := {}
+	for _t in 20000:
+		Sim.advance(state, 1)
+		for shot in (state["projectiles"] as Array):
+			var fired: Dictionary = shot
+			if int(fired["id"]) < next_id:
+				continue
+			var kind: StringName = fired["from"]
+			by_kind[kind] = int(by_kind.get(kind, 0)) + 1
+			next_id = maxi(next_id, int(fired["id"]) + 1)
+		if int(state["phase"]) != Phases.NIGHT:
+			break
+
+	var total := 0
+	for kind in GameData.sorted_names(by_kind.keys()):
+		total += int(by_kind[kind])
+
+	return {
+		"state": state,
+		"shots": total,
+		"by_kind": by_kind,
+		"mortar_shots": int(by_kind.get(&"mortar", 0)),
+		"left": Resources.amount(state, GameData.GUNPOWDER),
+		"killed": int(state["killed"]),
+		"house": int(state["house_hp"]),
+		"survived": bool((Rewards.last(state) as Dictionary).get("survived",
+			false)),
+		"towers": guns + mortars,
+	}

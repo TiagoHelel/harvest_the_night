@@ -2169,3 +2169,114 @@ trying; a whole house cannot be repaired; a house is never mended past whole.
 
 `python tools/verify.py` prints PASS: 893 asserts, 247 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+
+## 0035 - Gunpowder and ammunition - done 2026-09-27
+
+Towers that consume something, and a farm where what you made today decides
+what tonight can do.
+
+**What changed.** New `src/core/ammo.gd`. Incendiary rounds are a resource and
+a recipe; the flamethrower burns them instead of raw oil; mortars draw
+gunpowder from a shared pool in the ledger; and a tower with an empty pool
+keeps shooting, slower and weaker.
+
+Files: `src/core/ammo.gd` (new), `game_data.gd`, `towers.gd`,
+`src/ui/day_hud.gd`, both test tools.
+Verify: 947 headless / 256 input / both hashes moved on purpose, below.
+
+### The flamethrower was burning money
+
+`design.md` section 5 names the recipe exactly - "Oleo + Madeira -> Municao
+incendiaria" - and the flamethrower's data declared `ammo: {OIL: 1}` every two
+seconds. Oil is $26 since task 0032, so forty-five ticks of flame across one
+night is **eleven hundred dollars of fuel**, burning the single most valuable
+thing on the farm straight out of the tank.
+
+So `INCENDIARY` is a resource now, `make_incendiary` turns 1 oil and 2 wood
+into 4 rounds, and the flamethrower burns those. The same burst costs **$30 of
+goods instead of $104 of raw oil**, and the margin on the recipe is thin on
+purpose: rounds are for burning, not for selling.
+
+### One pool, in the ledger
+
+There is no magazine per tower and there will not be one. Ammunition is a
+resource held in `state["resources"]`, which buys three things the task asks
+for without a line of code each:
+
+- **What is left carries into the next night**, because nothing clears it.
+- **Towers compete for it.** Six mortars drain the pool six times as fast, so
+  how many you build is a question about supply and not only about money.
+- It shows up in the inventory, the shop and on the HUD for free, because
+  those already know what a resource is.
+
+### Out of ammunition is a worse tower, never a dead one
+
+A silent tower is a tower the player stops looking at. An empty mortar still
+lobs something: `EMPTY_RELOAD_PERCENT` (300) longer between shots,
+`EMPTY_DAMAGE_PERCENT` (30) of the damage, plain impact, and none of what made
+it a mortar - no splash. A tower that cannot reach for powder is throwing a
+rock.
+
+### The done-whens, measured
+
+The same seed, the same six towers, the same night seven, the same generator
+with oil so that energy is not the variable. The only difference is the pool:
+
+| | killed | house | mortar shots |
+|---|---|---|---|
+| 60 rounds | 28 | **100 / 100** | 22 |
+| no rounds | 26 | **82 / 100** | 17 |
+
+Survivable, and clearly worse. And the drain is exactly what the table claims:
+**22 rounds for 22 mortar shots**, with the 63 gun-tower shots in the same
+night costing nothing at all.
+
+### Three goes at a test that could tell the two cases apart
+
+Worth writing down, because each failure was the test being wrong about the
+game rather than the game being wrong:
+
+1. **Zero shots for fifteen rounds spent.** I was counting
+   `Towers.in_flight()` rising between ticks, which misses a shot created and
+   resolved inside one tick - at a mortar's range, most of them. Counted off
+   `next_projectile_id`, which only ever goes up.
+2. **Seventy-two shots and zero rounds.** A mortar *costs* fifteen gunpowder
+   to build. The helper granted wood, iron, stone and oil, placed no mortars
+   at all, and reported what three gun towers look like. There is an assert now
+   that the scripted night has the towers it thinks it has.
+3. **With powder and without came out identical.** Night three, and the gun
+   towers held it alone without the house being touched. A comparison that
+   cannot distinguish the two cases is not a test of anything. Night seven, two
+   guns and four mortars.
+
+Along the way, "one round per shot" turned out to be the wrong invariant
+entirely: a gun tower fires for free, so rounds spent equals *mortar* shots,
+not shots. Counted per kind now.
+
+### Notes
+
+- `check_ammo()` refuses a tower that fires something no recipe makes. Exactly
+  the meat bug of task 0034 one table along - a tower may declare it fires
+  anything, and a tower whose ammunition cannot be made would be permanently
+  on its weak shot with nothing in the game to say why.
+- The `thirteen resources` assert became a **named** list instead of a count.
+  A count fails when the game grows and tells you nothing: this one reported
+  "14". The twelve things on the reference sheet's panel have to exist; carrot
+  and incendiary are not on that panel and are not listed. The sheet is a
+  floor, not a ceiling.
+- The ammunition line sits under the power line and stays up after dark for
+  the same reason: a mortar running dry mid-wave is something the player has
+  to be able to watch happen.
+- One self-inflicted scare: a botched edit left `projectile_tiles_per_second`
+  in the crossbow twice, which is a parse error in GDScript. Caught by the
+  parse row before anything else ran.
+
+### Hashes
+
+| | from | to | why |
+|---|---|---|---|
+| sim hash | `2650491902` | `3087806628` | projectiles carry whether they were armed, and the towers now spend from the pool |
+| data hash | `3799311961` | `4237661147` | `INCENDIARY` and its price, the `make_incendiary` recipe, the flamethrower's ammunition, and the two empty-pool levers |
+
+`python tools/verify.py` prints PASS: 947 asserts, 256 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

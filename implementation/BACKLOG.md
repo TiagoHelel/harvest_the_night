@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`########................`  **34 / 108 done**
+`########................`  **35 / 108 done**
 
-0 doing / 74 todo / 0 blocked across 9 phases.
+0 doing / 73 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0035 - Gunpowder and ammunition**. The whole of what is left is
+First up: **0036 - The inventory**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,24 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-74 task(s) left, the ready ones first, then what they
+73 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0035 - Gunpowder and ammunition
-
-Ready to pick up.  Likely files: `src/core/crafting.gd, src/core/towers.gd`.
-
-Towers that consume something. The clearest possible version of 'what you made today decides what tonight can do'.
-
-- Gunpowder from corn and oil; incendiary rounds from oil and wood
-- A tower draws from a shared ammunition pool at a rate that is a lever
-- Out of ammunition means a much slower basic shot, never a silent dead tower
-- The night HUD shows the pool draining
-- Ammunition left over carries into the next night
-
-  - done when: A night fought with no gunpowder is survivable but clearly worse
-  - done when: The pool drains at the rate the levers claim over a scripted night
 
 ### 0036 - The inventory
 
@@ -1170,7 +1155,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0026** [The tower kills the zombie](prompts/0026-combat.md)
 - [x] **0027** [Three waves, a result screen, and back to the farm](prompts/0027-first-loop.md)
 
-## 2 - The full day  (7/14)
+## 2 - The full day  (8/14)
 
 - [x] **0028** [Corn and carrot](prompts/0028-three-crops.md)
 - [x] **0029** [Growth stages and watering](prompts/0029-growth-stages.md)
@@ -1179,7 +1164,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0032** [Oil](prompts/0032-oil.md)
 - [x] **0033** [The generator and energy](prompts/0033-generator.md)
 - [x] **0034** [Cooking: food and meat](prompts/0034-cooking.md)
-- [ ] **0035** [Gunpowder and ammunition](prompts/0035-ammunition.md)
+- [x] **0035** [Gunpowder and ammunition](prompts/0035-ammunition.md)
 - [ ] **0036** [The inventory](prompts/0036-inventory.md)
 - [ ] **0037** [The workshop queue](prompts/0037-craft-queue.md) - needs 0036
 - [ ] **0038** [Production runs while you are elsewhere](prompts/0038-idle-production.md) - needs 0037
