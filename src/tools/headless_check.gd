@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 49
+const GROUPS := 50
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -113,6 +113,7 @@ func _run() -> void:
 	_task_0054_ability()
 	_task_0055_speed()
 	_task_0056_night_hud()
+	_task_0057_structures()
 
 
 func _finish() -> void:
@@ -7870,7 +7871,10 @@ func _task_0053_repair() -> void:
 	Building.place(broke, &"wall", bare)
 	_night_falls(broke)
 	Farm.damage(broke, bare, 50)
-	for res in GameData.sorted_names(GameData.REPAIR_COST_PER_HP.keys()):
+	# **Its own materials**, which task 0057 made the rule: a wall is mended
+	# with stone, not with the larder. Emptying the food here used to be what
+	# made this test pass and is now beside the point.
+	for res in GameData.sorted_names(Building.cost_of(&"wall").keys()):
 		Resources.spend(broke, res, Resources.amount(broke, res))
 	expect(Interact.verb_at(broke, bare) == &"",
 		"with nothing to mend it with, the cell offers nothing - the player is "
@@ -7885,13 +7889,22 @@ func _task_0053_repair() -> void:
 	print("  ten hit points: %s on a wall, %s on the house (%d ticks each "
 		% [str(on_wall), str(on_house), Repair.ticks_at(night, spot)]
 		+ "against %d)" % Repair.ticks_at(night, house))
-	for res in GameData.sorted_names(on_wall.keys()):
-		expect(int(on_house[res]) > int(on_wall[res]),
-			"the house costs more %s per hit point" % res,
-			"%d against %d" % [on_house[res], on_wall[res]])
-		expect(int(on_house[res]) == int(on_wall[res])
-			* GameData.HOUSE_REPAIR_PERCENT / 100,
-			"by exactly the penalty the lever names", str(on_house[res]))
+	# **They are not in the same currency any more**, which task 0057 made
+	# the rule: a wall is mended with its own stone and the house with food,
+	# because the house has no build cost to take a share of. So they are
+	# compared by what the goods are worth rather than resource by resource.
+	expect(_price_of(on_house) > _price_of(on_wall),
+		"ten hit points of house costs more than ten of wall",
+		"$%d against $%d" % [_price_of(on_house), _price_of(on_wall)])
+	for res in GameData.sorted_names(on_house.keys()):
+		expect(int(on_house[res]) == int(GameData.REPAIR_COST_PER_HP[res])
+			* 10 * GameData.HOUSE_REPAIR_PERCENT / 100,
+			"and it is the flat rate times the house's own penalty",
+			str(on_house[res]))
+	expect(GameData.sorted_names(on_wall.keys())
+		== GameData.sorted_names(Building.cost_of(&"wall").keys()),
+		"a wall is mended in exactly what a wall is built from",
+		str(on_wall))
 	expect(Repair.ticks_at(night, house) > Repair.ticks_at(night, spot),
 		"and takes longer per hit point",
 		"%d against %d"
@@ -7926,10 +7939,12 @@ func _task_0053_repair() -> void:
 	expect(quit_early["mended"] > 0,
 		"keeping what was already paid for - it is interrupted, not undone",
 		str(quit_early["mended"]))
-	expect(mend["spent"] == mend["mended"]
-		* int(GameData.REPAIR_COST_PER_HP[GameData.FOOD]),
-		"and every hit point that went back was paid for",
-		"%d food for %d hp" % [mend["spent"], mend["mended"]])
+	expect(mend["spent"] > 0,
+		"and every hit point that went back was paid for, in stone or on "
+		+ "the slate", "%d hundredths for %d hp"
+			% [mend["spent"], mend["mended"]])
+	print("    which came to %d hundredths of %s for %d hit points"
+		% [mend["spent"], _mended_with(&"wall"), mend["mended"]])
 
 	# **Out of reach is out of the question.**
 	var far := _mend_a_wall(3504, 400, false, true)
@@ -7945,13 +7960,15 @@ func _task_0053_repair() -> void:
 	# The two rates, which are what decide it and are both levers.
 	var chewing := int(walker["damage"]) * 100 / int(walker["ticks_per_tile"])
 	var mending := 100 / GameData.REPAIR_TICKS_PER_HP
-	print("  a wall under a walker: %d ticks on its own, %d with somebody "
-		% [alone["fell_at"], helped["fell_at"]]
-		+ "mending it (%d food). Chewing %d.%02d a tick against mending "
-		% [helped["spent"], chewing / 100, chewing % 100]
-		+ "%d.%02d" % [mending / 100, mending % 100])
+	print(("  a wall under a walker: %d ticks on its own, %d with somebody "
+		+ "mending it (%d hundredths of stone). Chewing %d.%02d a tick "
+		+ "against mending %d.%02d")
+		% [alone["fell_at"], helped["fell_at"], helped["spent"],
+			chewing / 100, chewing % 100, mending / 100, mending % 100])
 	expect(alone["fell_at"] > 0, "on its own the wall goes down", str(alone))
-	expect(helped["spent"] > 0, "mending it costs food and wood", str(helped))
+	expect(helped["spent"] > 0,
+		"mending it costs stone - the wall's own material, at half what a "
+		+ "new one costs", str(helped))
 	# **Measurably changes whether it holds**, which is the done-when. It
 	# does not hold *for ever*: one walker takes 0.50 hit points a tick off
 	# and one repairer puts 0.33 back, so the wall is still losing - slowly.
@@ -7983,7 +8000,9 @@ func _mend_a_wall(seed_value: int, ticks: int, walk_off: bool,
 	var hurt := int(Farm.occupant(state, spot).get("hp", 0))
 
 	_stand_beside(state, spot if not stand_off else Farm.house_centre(state))
-	var food_before := Resources.amount(state, GameData.FOOD)
+	var paid_in := _mended_with(&"wall")
+	var before_units := Resources.amount(state, paid_in)
+	var before_owed := int(Repair.banked(state).get(paid_in, 0))
 	var intent: Dictionary = state["intent"]
 	for tick in ticks:
 		intent["interact"] = tick == 0
@@ -7995,8 +8014,17 @@ func _mend_a_wall(seed_value: int, ticks: int, walk_off: bool,
 	return {
 		"ticks": ticks if not walk_off else ticks / 2,
 		"mended": int(Farm.occupant(state, spot).get("hp", 0)) - hurt,
-		"spent": food_before - Resources.amount(state, GameData.FOOD),
+		# **In hundredths, and counting the slate.** A wall is four
+		# hundredths of a stone a hit point, so what was paid and what is
+		# owed are the same question asked twice.
+		"spent": (before_units - Resources.amount(state, paid_in)) * 100
+			+ int(Repair.banked(state).get(paid_in, 0)) - before_owed,
 	}
+
+
+## What a given structure is mended with: its own first material.
+func _mended_with(id: StringName) -> StringName:
+	return GameData.sorted_names(Building.cost_of(id).keys())[0]
 
 
 ## Stand the player on a cell next to this one, facing it.
@@ -8040,7 +8068,9 @@ func _wall_under_attack(seed_value: int, mending: bool) -> Dictionary:
 	# to distract either of them.
 	Entities.spawn(state, &"walker", spawn)
 	_stand_beside(state, spot)
-	var food_before := Resources.amount(state, GameData.FOOD)
+	var paid_in := _mended_with(&"wall")
+	var before_units := Resources.amount(state, paid_in)
+	var before_owed := int(Repair.banked(state).get(paid_in, 0))
 	var intent: Dictionary = state["intent"]
 	var fell_at := 0
 	for _tick in 3000:
@@ -8060,7 +8090,8 @@ func _wall_under_attack(seed_value: int, mending: bool) -> Dictionary:
 		fell_at = 0         # it held
 	return {
 		"fell_at": fell_at,
-		"spent": food_before - Resources.amount(state, GameData.FOOD),
+		"spent": (before_units - Resources.amount(state, paid_in)) * 100
+			+ int(Repair.banked(state).get(paid_in, 0)) - before_owed,
 	}
 
 
@@ -8512,3 +8543,304 @@ func _task_0056_night_hud() -> void:
 		"%d against %d" % [Waves.incoming_in(running), first])
 
 	_completed += 1     # last line: an abandoned group never gets here
+
+
+## 0057 - losing things: a structure that breaks is a small disaster, and
+## mending one is cheaper than starting again.
+func _task_0057_structures() -> void:
+	# **Mending is cheaper than rebuilding. For everything.**
+	#
+	# This is the whole of the requirement and it used to be false for every
+	# structure in the game, by between seven and fifty-six times.
+	var dearest := 0
+	for id in GameData.sorted_names(GameData.DEFENCES.keys()):
+		var entry: Dictionary = GameData.DEFENCES[id]
+		var full := int(entry.get("hp", 0))
+		if full <= 0:
+			continue
+		var build := _price_of(entry["cost"])
+		var mend := _price_of_hundredths(_rate_for(id), full)
+		dearest = maxi(dearest, mend * 100 / maxi(build, 1))
+		expect(mend < build,
+			"mending a %s outright is cheaper than a new one" % id,
+			"$%d against $%d" % [mend, build])
+	print("  the dearest repair on the farm is %d%% of building new"
+		% dearest)
+	expect(dearest <= GameData.REPAIR_PERCENT + 5,
+		"and none of them is much over the lever that sets it",
+		"%d%% against %d%%" % [dearest, GameData.REPAIR_PERCENT])
+
+	# **In its own materials.**
+	var farm := _armed_prep(3900)
+	for id in [&"wall", &"fence", &"gun_tower"]:
+		var cell := _room_for(farm, Building.size_of(id))
+		expect(Building.place(farm, id, cell), "a %s goes up" % id)
+		expect(GameData.sorted_names(
+			Repair.per_hp_hundredths(farm, cell).keys())
+			== GameData.sorted_names(Building.cost_of(id).keys()),
+			"a %s is mended with exactly what it is built from" % id,
+			str(Repair.per_hp_hundredths(farm, cell)))
+		Farm.remove(farm, cell)
+
+	# **Nothing is free to keep standing.** Even a barricade costs a
+	# hundredth, or a night would be a contest of patience.
+	for id in GameData.sorted_names(GameData.DEFENCES.keys()):
+		for res in GameData.sorted_names(_rate_for(id).keys()):
+			expect(int(_rate_for(id)[res]) >= 1,
+				"a %s costs something per hit point" % id,
+				str(_rate_for(id)))
+
+	# **The slate.** Four hundredths of a stone is not a payment, so it is
+	# banked until a whole one falls due - and the rate stays exact.
+	var slate := _armed_prep(3901)
+	var wall := _room_for(slate, Vector2i(1, 1))
+	Building.place(slate, &"wall", wall)
+	_night_falls(slate)
+	Farm.damage(slate, wall, 100)
+	var stone := Resources.amount(slate, GameData.STONE)
+	var each := int(Repair.per_hp_hundredths(slate, wall)[GameData.STONE])
+	expect(Repair.apply(slate, wall, 1) == 1, "one hit point goes back")
+	expect(Resources.amount(slate, GameData.STONE) == stone,
+		"and nothing whole comes out of the store for it",
+		str(Resources.amount(slate, GameData.STONE)))
+	expect(int(Repair.banked(slate)[GameData.STONE]) == each,
+		"it is on the slate instead",
+		str(Repair.banked(slate)))
+	var enough := (100 + each - 1) / each
+	Repair.apply(slate, wall, enough)
+	expect(Resources.amount(slate, GameData.STONE) < stone,
+		"and a whole stone comes out when the slate says so",
+		str(Resources.amount(slate, GameData.STONE)))
+	expect(int(Repair.banked(slate)[GameData.STONE]) < 100,
+		"with the remainder carried, so the rate stays exact",
+		str(Repair.banked(slate)))
+
+	# **A structure at one hit point is still working.** The done-when.
+	var hurt := _armed_prep(3902)
+	Resources.gain(hurt, {GameData.OIL: 400, GameData.IRON: 400,
+		GameData.WOOD: 400, GameData.STONE: 400})
+	Building.place(hurt, &"generator",
+		_room_for(hurt, Building.size_of(&"generator")))
+	var tower: Vector2i = _line_of_towers(hurt, &"gun_tower", 1)[0]
+	_night_falls(hurt)
+	Sim.advance(hurt, 1)
+	var supply := Power.supply(hurt)
+	Farm.damage(hurt, tower, int((GameData.DEFENCES[&"gun_tower"]
+		as Dictionary)["hp"]) - 1)
+	expect(int(Farm.occupant(hurt, tower).get("hp", 0)) == 1,
+		"a tower at one hit point",
+		str(Farm.occupant(hurt, tower).get("hp", 0)))
+	expect(Towers.cells(hurt).has(tower),
+		"is still a tower", str(Towers.cells(hurt)))
+	expect(Power.supply(hurt) == supply,
+		"and still draws its power - a wounded thing is not a broken one")
+	var victim := Entities.spawn(hurt, &"walker", tower + Vector2i(2, 0))
+	Entities.set_hp(hurt, victim, 500)
+	var was := int(Entities.get_one(hurt, victim).get("hp", 0))
+	Sim.advance(hurt, 120)
+	expect(int(Entities.get_one(hurt, victim).get("hp", 0)) < was,
+		"and it is still shooting", str(was))
+
+	# **Destroying a wall reroutes them the same tick.** The other done-when.
+	var lane := _walled_lane_route(3903)
+	print("  a wall falling: the way in cost %d, and %d on the tick it fell"
+		% [lane["cost_before"], lane["cost_after"]])
+	expect(lane["before"] > 0 and lane["after"] > 0, "both routes exist",
+		str(lane))
+	expect(lane["version_moved"],
+		"destroying it bumps the version the field watches", str(lane))
+	expect(int(lane["cost_after"]) < int(lane["cost_before"]),
+		"and the way in is cheaper on that very tick",
+		"%d against %d" % [lane["cost_after"], lane["cost_before"]])
+	expect(lane["had_to_break"] and not lane["has_to_break"],
+		"they had to chew through that cell and now they walk it",
+		str(lane))
+
+	# **Rubble, and it is not an obstacle.**
+	var wreck := _armed_prep(3904)
+	var doomed := _room_for(wreck, Vector2i(1, 1))
+	Building.place(wreck, &"wall", doomed)
+	_night_falls(wreck)
+	expect(Farm.rubble_at(wreck, doomed) == &"", "nothing broken yet")
+	Farm.damage(wreck, doomed, 999)
+	expect(Farm.is_empty(wreck, doomed), "the wall is gone")
+	expect(Farm.rubble_at(wreck, doomed) == &"wall",
+		"and there is wall-shaped rubble where it stood",
+		str(Farm.rubble_at(wreck, doomed)))
+	Pathing.refresh(wreck)
+	expect(Pathing.entry_cost(wreck, doomed)
+		== Farm.cost_of_terrain(Farm.terrain_at(wreck, doomed)),
+		"which costs nothing to walk over - rubble is a mark on the ground, "
+		+ "not half a wall", str(Pathing.entry_cost(wreck, doomed)))
+	expect(Farm.buildable(wreck, doomed),
+		"and you can build on it again")
+
+	# **It clears by morning.**
+	Phases.enter_result(wreck, true)
+	(wreck["intent"] as Dictionary)["confirm_result"] = true
+	Sim.advance(wreck, 2)
+	expect(int(wreck["phase"]) == Phases.DAY, "morning",
+		str(wreck["phase"]))
+	expect(Farm.rubble_at(wreck, doomed) == &"",
+		"and the yard is swept", str(Farm.rubble_cells(wreck)))
+
+	# **Damaged structures survive the night at the hit points they have.**
+	var kept := _armed_prep(3905)
+	var survivor := _room_for(kept, Vector2i(1, 1))
+	Building.place(kept, &"wall", survivor)
+	_night_falls(kept)
+	Farm.damage(kept, survivor, 70)
+	var left := int(Farm.occupant(kept, survivor).get("hp", 0))
+	Phases.enter_result(kept, true)
+	(kept["intent"] as Dictionary)["confirm_result"] = true
+	Sim.advance(kept, 2)
+	expect(int(kept["phase"]) == Phases.DAY, "morning again")
+	expect(int(Farm.occupant(kept, survivor).get("hp", 0)) == left,
+		"the wall is still standing, still hurt, at exactly the hit points "
+		+ "it went to bed with",
+		str(Farm.occupant(kept, survivor).get("hp", 0)))
+
+	# **Nothing dangles.** A workshop that falls with a job running takes the
+	# job with it.
+	var busy := _armed_prep(3906)
+	Resources.gain(busy, {GameData.IRON: 400, GameData.WOOD: 400})
+	var bench: Vector2i = Farm.cells_with(busy, &"workshop")[0]
+	var recipe: StringName = Crafting.recipes_at(&"workshop")[0]
+	expect(Crafting.start(busy, bench, recipe), "a job goes on at the bench")
+	expect(not Crafting.queue_at(busy, bench).is_empty(),
+		"and the queue has it", str(Crafting.queue_at(busy, bench)))
+	Farm.remove(busy, bench)
+	expect(Crafting.queue_at(busy, bench).is_empty(),
+		"the workshop falls and the queue goes with it - it used to sit in "
+		+ "the state for ever, the inputs spent and nothing ever delivered",
+		str(Crafting.queue_at(busy, bench)))
+	expect(Crafting.made_at(busy, bench).is_empty(),
+		"and so does its record, or the next bench built here would open "
+		+ "with somebody else's history in it",
+		str(Crafting.made_at(busy, bench)))
+
+	# **A night of heavy losses leaves a morning that is still playable.**
+	var wrecked := _a_ruined_night(3907)
+	print("  after a night that took %d structures: %d left standing, "
+		% [wrecked["lost"], wrecked["standing"]]
+		+ "%d rubble swept, house at %d"
+		% [wrecked["rubble"], wrecked["house"]])
+	expect(wrecked["lost"] > 0, "the night took things", str(wrecked))
+	expect(wrecked["house"] > 0, "the house is still up", str(wrecked))
+	expect(wrecked["rubble"] == 0, "the yard is clear", str(wrecked))
+	expect(wrecked["reachable"],
+		"and the farm is still a farm: everything still connects",
+		str(wrecked))
+	expect(wrecked["can_build"],
+		"and there is somewhere to build again", str(wrecked))
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## What one hit point of a structure costs, in hundredths, off the table alone.
+func _rate_for(id: StringName) -> Dictionary:
+	var entry: Dictionary = GameData.DEFENCES[id]
+	var full := maxi(int(entry.get("hp", 0)), 1)
+	var out := {}
+	for res in GameData.sorted_names((entry["cost"] as Dictionary).keys()):
+		out[res] = maxi(int((entry["cost"] as Dictionary)[res])
+			* GameData.REPAIR_PERCENT / full, 1)
+	return out
+
+
+## What `hp` hit points at a given hundredths rate are worth in goods.
+func _price_of_hundredths(rates: Dictionary, hp: int) -> int:
+	var total := 0
+	for res in GameData.sorted_names(rates.keys()):
+		total += int(rates[res]) * hp * int(GameData.SELL_PRICE.get(res, 1))
+	return total / 100
+
+
+## Wall a lane, let a zombie get near, knock the wall down and see whether the
+## route it would take changed on that very tick.
+func _walled_lane_route(seed_value: int) -> Dictionary:
+	var state := _fresh_night(seed_value)
+	Pathing.refresh(state)
+	var spawn: Vector2i = Enemies.spawn_cells(state, 0)[0]
+	var route := _route_from(state, spawn)
+	var column: int = (route[4] as Vector2i).x
+	var hp := int((GameData.DEFENCES[&"wall"] as Dictionary)["hp"])
+	for y in Grid.HEIGHT:
+		var cell := Vector2i(column, y)
+		if Farm.buildable(state, cell):
+			Farm.place(state, cell, {"id": &"wall", "hp": hp})
+	Pathing.refresh(state)
+	var before := _route_from(state, spawn)
+
+	var version := int(state["grid_version"])
+	# Knock out the one they were coming through.
+	var through := Vector2i(-1, -1)
+	for step in before:
+		if Farm.occupant(state, step).get("id", &"") == &"wall":
+			through = step
+			break
+	if through.x < 0:
+		return {"before": before.size(), "after": 0, "changed": false,
+			"version_moved": false}
+	var cost_before := Pathing.distance(state, spawn)
+	var had_to_break := Pathing.breaks_through(state, through)
+	Farm.damage(state, through, 9999)
+	Pathing.refresh(state)
+	var after := _route_from(state, spawn)
+	return {
+		"before": before.size(),
+		"after": after.size(),
+		# **The cost, not the cells.** Knocking a hole in the line they were
+		# already coming through does not move them - it makes the way they
+		# were taking free. What changed is what it costs and whether they
+		# have to stop and chew to use it.
+		"cost_before": cost_before,
+		"cost_after": Pathing.distance(state, spawn),
+		"had_to_break": had_to_break,
+		"has_to_break": Pathing.breaks_through(state, through),
+		"version_moved": int(state["grid_version"]) > version,
+	}
+
+
+## A night that goes badly: towers and walls up, a crowd sent at them, and the
+## morning after.
+func _a_ruined_night(seed_value: int) -> Dictionary:
+	var state := _armed_prep(seed_value)
+	Resources.gain(state, {GameData.OIL: 900, GameData.IRON: 900,
+		GameData.WOOD: 900, GameData.STONE: 900, GameData.GUNPOWDER: 900})
+	var built := _line_of_towers(state, &"gun_tower", 4)
+	var walls: Array = []
+	for _i in 6:
+		var cell := _room_for(state, Vector2i(1, 1))
+		if Building.place(state, &"wall", cell):
+			walls.append(cell)
+	_night_falls(state)
+
+	Pathing.refresh(state)
+	for _i in 24:
+		Enemies.spawn(state, &"breaker", 0)
+	for _tick in 4000:
+		Sim.advance(state, 1)
+		if Entities.count(state) == 0:
+			break
+
+	var standing := 0
+	for cell in built + walls:
+		if not Farm.is_empty(state, cell):
+			standing += 1
+	var lost := built.size() + walls.size() - standing
+
+	Phases.enter_result(state, true)
+	(state["intent"] as Dictionary)["confirm_result"] = true
+	Sim.advance(state, 2)
+	Pathing.refresh(state)
+
+	return {
+		"lost": lost,
+		"standing": standing,
+		"rubble": Farm.rubble_cells(state).size(),
+		"house": int(state["house_hp"]),
+		"reachable": Pathing.reachable(state,
+			Enemies.spawn_cells(state, 0)[0]),
+		"can_build": _room_for(state, Vector2i(1, 1)) != Vector2i(-1, -1),
+	}

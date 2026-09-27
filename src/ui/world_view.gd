@@ -687,6 +687,35 @@ func _texture_for(id: StringName) -> Texture2D:
 	return _flat_block(id)
 
 
+## How battered a structure looks, as a tint.
+##
+## White while it is whole, and by the time it is nearly gone it is dark and
+## red. Below `WOUNDED_AT` only, so an untouched farm is not a farm of faintly
+## grey buildings.
+##
+## A tint rather than a second piece of art, because there are eight
+## structures and that would be eight more ASCII maps to keep in step with
+## them - and because the shade is continuous, so a wall at a third reads
+## differently from a wall at two thirds.
+func _wear_of(on: Dictionary, id: StringName) -> Color:
+	var entry: Variant = Building.entry_of(id)
+	if entry == null:
+		return Color.WHITE
+	var full := int((entry as Dictionary).get("hp", 0))
+	if full <= 0:
+		return Color.WHITE
+	var share := clampf(float(int(on.get("hp", full))) / float(full), 0.0, 1.0)
+	if share >= WOUNDED_AT:
+		return Color.WHITE
+	var hurt := 1.0 - share / WOUNDED_AT     # 0 at the threshold, 1 at death
+	return Color(1.0, lerpf(1.0, 0.45, hurt), lerpf(1.0, 0.38, hurt),
+		1.0).darkened(hurt * 0.25)
+
+
+## Below this share of its hit points a structure starts to look it.
+const WOUNDED_AT := 0.75
+
+
 ## The fallback. Task 0075 makes this unreachable.
 func _flat_block(id: StringName) -> Texture2D:
 	var size := GameData.TILE_SIZE

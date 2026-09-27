@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`############............`  **56 / 109 done**
+`#############...........`  **57 / 109 done**
 
-0 doing / 53 todo / 0 blocked across 9 phases.
+0 doing / 52 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0057 - Structures take damage and die**. The whole of what is left is
+First up: **0058 - The Giant**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,25 +26,25 @@ which rewrites this file for you.
 
 ## What is open
 
-53 task(s) left, the ready ones first, then what they
+52 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
-### 0057 - Structures take damage and die
+### 0058 - The Giant
 
-Ready to pick up.  Likely files: `src/core/combat.gd, src/core/building.gd`.
+Ready to pick up.  Likely files: `src/core/enemies.gd, src/core/game_data.gd`.
 
-Losing things. A structure that breaks should be a small disaster the player watched happen.
+The single boss of the MVP: the test of the build you made over nine nights.
 
-- Every structure has hit points and a visible damage state
-- Destruction frees the cell, rebuilds the flow field and leaves rubble that clears by morning
-- Damaged structures survive into the next day at their current hit points
-- A repair cost that is cheaper than rebuilding, so repairing is the right move
-- Nothing in the state dangles after a structure dies
+- Very high hit points, slow, and it smashes structures on its way through
+- It arrives with ordinary zombies, so the player cannot aim everything at it
+- It forces concentrated damage: a defence of only cheap towers cannot kill it in time
+- One readable telegraph before its heavy attack
+- Beating it is the end of the MVP run
 
-  - done when: Destroying a wall mid-wave reroutes the zombies the same tick
-  - done when: A structure at 1 hit point is still working, and looks wounded
-  - done when: A night of heavy losses leaves a morning that is still playable
+  - done when: A well-built night 9 defence beats it with something to spare
+  - done when: A defence of nothing but crossbows loses to it
+  - done when: It never softlocks the night by becoming unreachable
 
 ### 0059 - Waves as data
 
@@ -123,21 +123,21 @@ When it breaks on someone else's machine, get enough to fix it without them.
   - done when: A deliberate crash produces a report with the seed and the tick
   - done when: The run is still loadable afterwards
 
-### 0058 - The Giant
+### 0060 - The ten nights, authored
 
-Waits on 0057.  Likely files: `src/core/enemies.gd, src/core/game_data.gd`.
+Waits on 0059, 0058.  Likely files: `src/core/game_data.gd`.
 
-The single boss of the MVP: the test of the build you made over nine nights.
+Section 10 of the design document, as a real difficulty curve: tutorial, more, the runner, the tank, the breaker, the boss.
 
-- Very high hit points, slow, and it smashes structures on its way through
-- It arrives with ordinary zombies, so the player cannot aim everything at it
-- It forces concentrated damage: a defence of only cheap towers cannot kill it in time
-- One readable telegraph before its heavy attack
-- Beating it is the end of the MVP run
+- Ten nights following the design document exactly: 1 tutorial, 3 first runner, 5 first tank, 7 breakers, 8 large, 9 heavy mix, 10 the Giant
+- Each night introduces at most one new thing, and night 2 of a new enemy is where it gets hard
+- Enemy count and reward curve upward smoothly - plot it in the journal
+- Night 1 is beatable with the tower the tutorial gives you and nothing else
+- Night 10 is not beatable without upgrades from the tech tree
 
-  - done when: A well-built night 9 defence beats it with something to spare
-  - done when: A defence of nothing but crossbows loses to it
-  - done when: It never softlocks the night by becoming unreachable
+  - done when: All ten are playable start to finish
+  - done when: The count and reward curves are in the journal as numbers
+  - done when: A headless run plays all ten with a scripted build and reports which ones fell
 
 ### 0061 - Night rewards
 
@@ -309,22 +309,6 @@ One warm loop for the farm, one cold one for the night, and a crossfade on the r
   - done when: The loop point is inaudible
   - done when: The crossfade lands with the transition, not before or after it
 
-### 0060 - The ten nights, authored
-
-Waits on 0059, 0058.  Likely files: `src/core/game_data.gd`.
-
-Section 10 of the design document, as a real difficulty curve: tutorial, more, the runner, the tank, the breaker, the boss.
-
-- Ten nights following the design document exactly: 1 tutorial, 3 first runner, 5 first tank, 7 breakers, 8 large, 9 heavy mix, 10 the Giant
-- Each night introduces at most one new thing, and night 2 of a new enemy is where it gets hard
-- Enemy count and reward curve upward smoothly - plot it in the journal
-- Night 1 is beatable with the tower the tutorial gives you and nothing else
-- Night 10 is not beatable without upgrades from the tech tree
-
-  - done when: All ten are playable start to finish
-  - done when: The count and reward curves are in the journal as numbers
-  - done when: A headless run plays all ten with a scripted build and reports which ones fell
-
 ### 0062 - Technology points
 
 Waits on 0061.  Likely files: `src/core/tech.gd`.
@@ -354,6 +338,20 @@ Section 3 of the loop diagram: defeat takes part of the stock. It has to hurt en
 
   - done when: Losing twice in a row leaves a farm that can still recover
   - done when: The itemised loss matches what the ledger actually lost
+
+### 0066 - Night 10 and the end of the run
+
+Waits on 0060, 0058.  Likely files: `src/core/phases.gd, src/ui/result_screen.gd`.
+
+**The MVP is complete here.** Beating the Giant ends the run with a summary that answers the design document's question.
+
+- A run summary: days played, resources gathered, zombies killed, structures lost, the build that won
+- The run is recorded to the profile and a new one can be started
+- An option to continue past night 10 into 0070's endless mode
+- It is a real ending, with a screen worth reaching
+
+  - done when: A full run from day 1 to the Giant can be played in one sitting
+  - done when: The journal answers, honestly: after surviving the first night, did you want to go back to the farm and improve? That is the success criterion of the entire MVP
 
 ### 0068 - A balance sweep over the ten nights
 
@@ -428,6 +426,21 @@ The bed under everything: birds and water by day, wind and distant groaning by n
   - done when: Standing still on the farm for a minute is pleasant, not empty
   - done when: The ambience never masks the house-damage sound
 
+### 0102 - A performance budget
+
+Waits on 0060.  Likely files: `tools/perf.py, src/tools/perf_check.gd`.
+
+A number, checked automatically, instead of a feeling about whether it runs well.
+
+- A budget in milliseconds per frame for the worst case: night 10, everything built, lights and particles on
+- A headless benchmark that reports tick cost, path cost and entity count
+- Wired into `verify.py`, failing when the budget is exceeded
+- A baseline file, moved deliberately the way the hash is
+- The report names the most expensive system, so a regression points at itself
+
+  - done when: The worst case is inside the budget on this machine
+  - done when: Adding a deliberately slow loop makes verify fail and name it
+
 ### 0109 - The character reacts
 
 Waits on 0073.  Likely files: `src/core/player.gd, src/ui/player_view.gd`.
@@ -459,19 +472,34 @@ Somewhere to spend the points, small enough to read on one screen and real enoug
   - done when: The choice between branches is real: say in the journal which one you would take and why
   - done when: `input_check` buys a node
 
-### 0066 - Night 10 and the end of the run
+### 0069 - Run statistics
 
-Waits on 0060, 0058.  Likely files: `src/core/phases.gd, src/ui/result_screen.gd`.
+Waits on 0066.  Likely files: `src/core/stats.gd, src/ui/stats_screen.gd`.
 
-**The MVP is complete here.** Beating the Giant ends the run with a summary that answers the design document's question.
+What the player did, kept across runs, because a number going up is its own reason to play another night.
 
-- A run summary: days played, resources gathered, zombies killed, structures lost, the build that won
-- The run is recorded to the profile and a new one can be started
-- An option to continue past night 10 into 0070's endless mode
-- It is a real ending, with a screen worth reaching
+- Per run and lifetime: nights survived, zombies killed by type, resources gathered, structures built and lost, best night reached
+- Recorded in core on the tick, read by the screen
+- It survives a crash: written with the profile, not at the end of a run
+- Reachable from the main menu
 
-  - done when: A full run from day 1 to the Giant can be played in one sitting
-  - done when: The journal answers, honestly: after surviving the first night, did you want to go back to the farm and improve? That is the success criterion of the entire MVP
+  - done when: Killing ten zombies increments by exactly ten
+  - done when: Quitting mid-run and returning keeps the run's numbers
+
+### 0070 - Endless nights past ten
+
+Waits on 0066, 0059.  Likely files: `src/core/endless.gd`.
+
+For the player who beat the Giant and wants to know how far the farm goes. Cheap to build, and it answers whether the loop holds past its authored content.
+
+- Waves generated from a curve past night 10, seeded and reproducible
+- The curve scales count and mix, never invents an enemy that does not exist
+- A Giant every fifth night, scaling
+- A best night reached, kept in the profile
+- It is off the critical path: a menu option, not the default
+
+  - done when: Night 25 is generated and playable
+  - done when: The same seed generates the same night 25 twice
 
 ### 0082 - Screenshots, and actually looking at them
 
@@ -564,21 +592,6 @@ Every string through a translation table, with pt-BR alongside English - the ref
   - done when: Switching language mid-game updates every visible screen
   - done when: No pt-BR string overflows its control - the checker proves it
 
-### 0102 - A performance budget
-
-Waits on 0060.  Likely files: `tools/perf.py, src/tools/perf_check.gd`.
-
-A number, checked automatically, instead of a feeling about whether it runs well.
-
-- A budget in milliseconds per frame for the worst case: night 10, everything built, lights and particles on
-- A headless benchmark that reports tick cost, path cost and entity count
-- Wired into `verify.py`, failing when the budget is exceeded
-- A baseline file, moved deliberately the way the hash is
-- The report names the most expensive system, so a regression points at itself
-
-  - done when: The worst case is inside the budget on this machine
-  - done when: Adding a deliberately slow loop makes verify fail and name it
-
 ### 0104 - Saves survive an update
 
 Waits on 0062.  Likely files: `src/app/save.gd`.
@@ -607,35 +620,6 @@ The upgrade chain the design document draws: a tower that grows with the run ins
 
   - done when: Upgrading a tower mid-preparation works and costs what it says
   - done when: A level 3 tower is clearly better and clearly not free
-
-### 0069 - Run statistics
-
-Waits on 0066.  Likely files: `src/core/stats.gd, src/ui/stats_screen.gd`.
-
-What the player did, kept across runs, because a number going up is its own reason to play another night.
-
-- Per run and lifetime: nights survived, zombies killed by type, resources gathered, structures built and lost, best night reached
-- Recorded in core on the tick, read by the screen
-- It survives a crash: written with the profile, not at the end of a run
-- Reachable from the main menu
-
-  - done when: Killing ten zombies increments by exactly ten
-  - done when: Quitting mid-run and returning keeps the run's numbers
-
-### 0070 - Endless nights past ten
-
-Waits on 0066, 0059.  Likely files: `src/core/endless.gd`.
-
-For the player who beat the Giant and wants to know how far the farm goes. Cheap to build, and it answers whether the loop holds past its authored content.
-
-- Waves generated from a curve past night 10, seeded and reproducible
-- The curve scales count and mix, never invents an enemy that does not exist
-- A Giant every fifth night, scaling
-- A best night reached, kept in the profile
-- It is off the critical path: a menu option, not the default
-
-  - done when: Night 25 is generated and playable
-  - done when: The same seed generates the same night 25 twice
 
 ### 0092 - The main menu and the router
 
@@ -881,7 +865,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0040** [The shop grows](prompts/0040-shop-full.md)
 - [x] **0041** [The first day teaches itself](prompts/0041-tutorial-day.md)
 
-## 3 - The full night  (15/17)
+## 3 - The full night  (16/17)
 
 - [x] **0042** [Data-driven defences](prompts/0042-defence-data.md)
 - [x] **0043** [The flamethrower tower](prompts/0043-tower-flame.md)
@@ -898,8 +882,8 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0054** [The player's ability](prompts/0054-ability.md)
 - [x] **0055** [Double speed and skipping the night](prompts/0055-speed-controls.md)
 - [x] **0056** [The night HUD](prompts/0056-night-hud.md)
-- [ ] **0057** [Structures take damage and die](prompts/0057-structure-damage.md)
-- [ ] **0058** [The Giant](prompts/0058-boss-giant.md) - needs 0057
+- [x] **0057** [Structures take damage and die](prompts/0057-structure-damage.md)
+- [ ] **0058** [The Giant](prompts/0058-boss-giant.md)
 
 ## 4 - Ten nights and progression  (0/12)
 

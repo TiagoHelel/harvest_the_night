@@ -1,7 +1,7 @@
 # 0057 - Structures take damage and die
 
 - **Phase:** 3 - The full night
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0046, 0052
 - **Likely files:** src/core/combat.gd, src/core/building.gd
 

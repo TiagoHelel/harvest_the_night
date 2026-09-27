@@ -2505,7 +2505,11 @@ func _case_0053_repair() -> void:
 		"and the cell offers to be mended",
 		str(Interact.verb_at(state, spot)))
 
-	var food_before := Resources.amount(state, GameData.FOOD)
+	# A wall is mended with stone since task 0057 - its own material, at a
+	# share of what building it cost.
+	var paid_in: StringName = GameData.sorted_names(
+		Building.cost_of(&"wall").keys())[0]
+	var food_before := Resources.amount(state, paid_in)
 
 	# **The key that does everything else does this too.** No repair button,
 	# no mode: stand in front of it and hold the same key you chop with.
@@ -2516,9 +2520,15 @@ func _case_0053_repair() -> void:
 	expect(mended > hurt,
 		"holding the interact key puts hit points back into the wall",
 		"%d against %d" % [mended, hurt])
-	expect(Resources.amount(state, GameData.FOOD) < food_before,
-		"and food comes out of the larder to pay for them",
-		str(Resources.amount(state, GameData.FOOD)))
+	# **What it cost, counting what is still on the slate.** A wall is four
+	# hundredths of a stone a hit point since task 0057, so a short mend is
+	# genuinely a debt rather than a payment, and asking the ledger alone
+	# would be asking the wrong question.
+	var owed := int(Repair.banked(state).get(paid_in, 0))
+	var spent := (food_before - Resources.amount(state, paid_in)) * 100 + owed
+	expect(spent > 0,
+		"and it costs %s, banked or paid" % paid_in,
+		"%d hundredths" % spent)
 
 	# **Walking away stops it**, the same as every other job.
 	var at_release := int(Farm.occupant(state, spot).get("hp", 0))

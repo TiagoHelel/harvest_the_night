@@ -54,6 +54,9 @@ static func initial() -> Dictionary:
 	return {
 		"terrain": terrain,
 		"occupants": occupants,
+		# What was destroyed and where, until the morning sweeps it up. Keyed
+		# by cell index, value is what used to stand there.
+		"rubble": {},
 		# **Bumped by every placement and removal.** `Pathing` rebuilds its
 		# flow field when the one it holds was built for an older number - a
 		# counter rather than a hash of the occupants, because hashing them
@@ -101,6 +104,16 @@ static func cost_of_terrain(terrain: int) -> int:
 	if terrain < 0 or terrain >= GameData.TERRAIN_COST.size():
 		return 0
 	return int(GameData.TERRAIN_COST[terrain])
+
+
+## Everything the rest of the game keyed to a cell, undone.
+##
+## **One place, called from `remove()`**, so that a system which keeps
+## something per cell has one door to close rather than every caller of
+## `remove()` having to know about it. "Nothing dangles after a structure
+## dies" is a promise this function keeps.
+static func forget_cell(state: Dictionary, cell: Vector2i) -> void:
+	Crafting.forget_cell(state, cell)
 
 
 ## What is standing on a cell, or an empty Dictionary. **The only way to ask.**
@@ -207,8 +220,47 @@ static func damage(state: Dictionary, cell: Vector2i, amount: int) -> int:
 	var taken := mini(amount, left)
 	on["hp"] = left - taken
 	if int(on["hp"]) <= 0:
+		var id := StringName(on["id"])
 		remove(state, cell)
+		_leave_rubble(state, cell, id)
 	return taken
+
+
+## What is lying on a cell after something on it was destroyed, or `&""`.
+##
+## **Not an occupant.** Rubble that occupied its cell would be a wall the
+## zombies could not walk through and the player could not build on, which is
+## a broken wall doing the job of a whole one. It is a mark on the ground the
+## view draws and the morning sweeps up, and nothing else in the game reads
+## it.
+static func rubble_at(state: Dictionary, cell: Vector2i) -> StringName:
+	var idx := Grid.index(cell)
+	if idx < 0:
+		return &""
+	return StringName((state["rubble"] as Dictionary).get(idx, &""))
+
+
+static func rubble_cells(state: Dictionary) -> Array:
+	var out: Array = []
+	var rubble: Dictionary = state["rubble"]
+	var keys: Array = rubble.keys()
+	keys.sort()
+	for idx in keys:
+		out.append(Grid.cell(int(idx)))
+	return out
+
+
+## Sweep the yard. Called when a day begins: the night's wreckage is part of
+## the night, and a farm that never cleared would silt up over ten of them.
+static func clear_rubble(state: Dictionary) -> void:
+	state["rubble"] = {}
+
+
+static func _leave_rubble(state: Dictionary, cell: Vector2i,
+		id: StringName) -> void:
+	var idx := Grid.index(cell)
+	if idx >= 0:
+		(state["rubble"] as Dictionary)[idx] = id
 
 
 ## Take whatever is on a cell off it. False when there was nothing, or when it
@@ -222,6 +274,14 @@ static func remove(state: Dictionary, cell: Vector2i) -> bool:
 		return false
 	if FIXTURES.has((occupants[idx] as Dictionary)["id"]):
 		return false
+	# **Whatever else was keyed to this cell goes with it.** A workshop that
+	# falls with a queue running used to leave the queue in the state for ever
+	# - the inputs spent, nothing ever delivered, and a new workshop on the
+	# same cell inheriting a job it never started.
+	forget_cell(state, cell)
+	# **Rubble, if it was broken rather than sold.** Set by `damage()`, which
+	# is the only caller that means "this was destroyed"; selling a tower
+	# leaves a tidy cell.
 	occupants.erase(idx)
 	_changed(state)
 	return true

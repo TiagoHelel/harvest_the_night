@@ -828,7 +828,25 @@ const TUTORIAL: Array = [
 
 
 ## What repairing costs, per hit point put back.
+## What a hit point of **the house** costs. The house has no build cost to
+## take a share of, and `design.md`'s resource table gives food the night's
+## "cura/reparo" job, so this is where food does it.
 const REPAIR_COST_PER_HP: Dictionary = {FOOD: 1, WOOD: 1}
+
+## What mending a structure all the way costs, as a percentage of building a
+## new one - in **its own materials**, a wall in stone and a tower in iron.
+##
+## **A flat price per hit point could not work.** Task 0057 measured the old
+## rule and found repairing dearer than rebuilding for every structure in the
+## game, by between seven and fifty-six times: a hundred and twenty hit points
+## of wall at one food and one wood each is $1680 of goods against a $30 wall.
+## Food is the most valuable thing on the farm after oil, and a hit point is a
+## very small thing. A share of what the thing cost is the only rule that
+## scales from a four-wood barricade to a mortar.
+##
+## Half, so mending is plainly the right move and still costs enough that
+## letting a wall fall hurts.
+const REPAIR_PERCENT := 50              # LEVER: percent of building new, 20-80
 const REPAIR_TICKS_PER_HP := 3          # LEVER: ticks, 1-8
 ## **A percentage, not a multiplier.** This was `2.0` and nothing read it, for
 ## the same reason nothing could: `src/core/` is integer arithmetic. The sixth
@@ -1950,7 +1968,7 @@ static func digest() -> int:
 		"defences": DEFENCES,
 		"pathing": [TERRAIN_COST, WIDEST_STEP],
 		"repair": [REPAIR_COST_PER_HP, REPAIR_TICKS_PER_HP,
-			HOUSE_REPAIR_PERCENT],
+			HOUSE_REPAIR_PERCENT, REPAIR_PERCENT],
 		"ability": ABILITY,
 		"hurt": [HURT_TICKS],
 		"speeds": [SPEEDS, SKIP_MIN_HOUSE_PERCENT],

@@ -124,6 +124,9 @@ static func begin_day(state: Dictionary) -> bool:
 		push_error("begin_day from %s" % name_of(int(state["phase"])))
 		return false
 	state["day_tick"] = 0
+	# **The yard is swept first.** The night's wreckage belongs to the
+	# night, and a farm that never cleared would silt up over ten of them.
+	Farm.clear_rubble(state)
 	# A new day, a new stall. It refuses if it has already been out today, so
 	# calling it here and on the first tick costs nothing.
 	Shop.restock(state)

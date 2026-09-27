@@ -4164,3 +4164,92 @@ up at night, and they still are.
 
 `python tools/verify.py` prints PASS: 1753 asserts, 463 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+
+## 0057 - Structures take damage and die
+
+### Repairing was seven to fifty-six times dearer than rebuilding
+
+The requirement is "a repair cost that is cheaper than rebuilding, so
+repairing is the right move". It was the opposite, for every structure in the
+game, and not marginally:
+
+| | build | hit points | repair, old rule |
+|---|---|---|---|
+| wall | $30 | 120 | $1680 |
+| fence | $10 | 30 | $420 |
+| gun tower | $125 | 60 | $840 |
+| mortar | $665 | 55 | $770 |
+
+`REPAIR_COST_PER_HP` was one food and one wood **per hit point**, and food is
+the most valuable thing on the farm after oil. A flat price per hit point
+cannot work across a four-wood barricade and a thirty-stone mortar: the only
+rule that scales is **a share of what the thing cost**, in its own materials.
+
+So a wall is mended with stone and a tower with iron, at `REPAIR_PERCENT` -
+half - of building a new one, in proportion to how much is missing. The
+dearest repair on the farm is now 50% of building new, which the test asserts
+for every structure rather than for the one I happened to check.
+
+The house keeps the old rule, and that is the point: it has no build cost to
+take a share of, and `design.md`'s resource table gives food the night's
+"cura/reparo" job. Food repairs the thing that ends the run; a wall is
+carpentry.
+
+### The slate
+
+Four hundredths of a stone per hit point is not a payment. The cost is kept in
+hundredths and banked, and a whole stone leaves the ledger when one falls due -
+the same arrangement `Farming` uses for watering, so the rate stays what the
+designer set rather than whatever integer division left of it. Every structure
+costs **at least one hundredth** a hit point, because a wall that was free to
+hold would make a night a contest of patience rather than of resources.
+
+### Nothing dangles
+
+`state["crafting"]` is keyed by station cell. A workshop that fell with a job
+running left that job in the state for ever - the inputs spent, nothing ever
+delivered, and a new workshop on the same cell inheriting a queue it never
+started. `Farm.remove()` now calls `forget_cell()`, one door for everything
+keyed to a cell, and `Crafting` drops both the queue and the production record
+through it. The inputs are **not** refunded: they went in when the job
+started, and a player paid for losing a building would be being paid for
+losing a building.
+
+### Rubble is a mark, not an obstacle
+
+It is not an occupant. Rubble that occupied its cell would be a wall the
+zombies could not walk through and the player could not build on - a broken
+wall doing the job of a whole one. It is a separate map from cell to what used
+to stand there, the view draws it as a smudge, `Phases.begin_day()` sweeps it,
+and nothing else in the game reads it.
+
+### Measured
+
+    the dearest repair on the farm is 50% of building new
+    a wall falling: the way in cost 47, and 27 on the tick it fell
+    after a night that took 4 structures: 6 left standing, 0 rubble swept, house at 100
+    a wall under a walker: 293 ticks on its own, 839 with somebody mending it
+      (1036 hundredths of stone)
+
+The wall-falling line needed the assert rewritten. "Destroying a wall mid-wave
+reroutes the zombies the same tick" turned out to be the wrong question: they
+were already routing *through* that cell, because task 0049 made a wall a
+price rather than a hole. Knocking it out does not move them, it makes the way
+they were already taking free - 47 down to 27 - and stops them having to chew
+to use it. That is what the assert says now.
+
+A tower at one hit point is still a tower: it is in the firing list, it still
+draws its power, and it still shoots. It just looks terrible, which is the
+other half of the done-when - below three quarters of its hit points a
+structure is tinted darker and redder the closer it is to going, as a tint
+rather than eight more ASCII maps to keep in step.
+
+### Hashes
+
+| | from | to | why |
+|---|---|---|---|
+| sim hash | `2770152428` | `694966054` | the state gained the repair slate and the rubble map, and a destroyed structure now clears what was keyed to its cell |
+| data hash | `1839419045` | `158064256` | `REPAIR_PERCENT` is a lever, so it joined the digest |
+
+`python tools/verify.py` prints PASS: 1814 asserts, 463 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

@@ -43,6 +43,21 @@ extends RefCounted
 ## recipe made it.
 
 
+## The station on this cell is gone. Drop its queue and its record.
+##
+## **The queue's inputs are not refunded.** They went in when the job started,
+## the job is on the floor with the building, and a player who got their iron
+## back out of a burning workshop would be being paid for losing it.
+static func forget_cell(state: Dictionary, cell: Vector2i) -> void:
+	var idx := Grid.index(cell)
+	if idx < 0:
+		return
+	(state["crafting"] as Dictionary).erase(idx)
+	# The record of what it ever made goes too, or the next station built on
+	# this cell opens with somebody else's history in it.
+	(state["produced"] as Dictionary).erase(idx)
+
+
 static func initial() -> Dictionary:
 	return {
 		# {station cell index: {"recipe": id, "left": ticks, "total": ticks}}
