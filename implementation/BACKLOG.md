@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`###########.............`  **51 / 109 done**
+`###########.............`  **52 / 109 done**
 
-0 doing / 58 todo / 0 blocked across 9 phases.
+0 doing / 57 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0052 - The breaker**. The whole of what is left is
+First up: **0053 - Repair during the night**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,23 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-58 task(s) left, the ready ones first, then what they
+57 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0052 - The breaker
-
-Ready to pick up.  Likely files: `src/core/enemies.gd, src/core/game_data.gd`.
-
-The enemy that goes after what you built: it targets structures first and the house second.
-
-- It picks the nearest structure on its path, not the house
-- Extra damage against structures and little against the house
-- It makes an undefended tower line a liability, which is the point
-- Target selection is deterministic and ordered
-
-  - done when: A wave of breakers dismantles an unprotected tower line
-  - done when: With the towers covered, they die before they reach one
 
 ### 0053 - Repair during the night
 
@@ -105,6 +91,38 @@ Section 14 of the design document: which night, which wave, how the house is doi
   - done when: Every number on it is readable at 480x270 scaled up
   - done when: `input_check` presses all three controls
 
+### 0057 - Structures take damage and die
+
+Ready to pick up.  Likely files: `src/core/combat.gd, src/core/building.gd`.
+
+Losing things. A structure that breaks should be a small disaster the player watched happen.
+
+- Every structure has hit points and a visible damage state
+- Destruction frees the cell, rebuilds the flow field and leaves rubble that clears by morning
+- Damaged structures survive into the next day at their current hit points
+- A repair cost that is cheaper than rebuilding, so repairing is the right move
+- Nothing in the state dangles after a structure dies
+
+  - done when: Destroying a wall mid-wave reroutes the zombies the same tick
+  - done when: A structure at 1 hit point is still working, and looks wounded
+  - done when: A night of heavy losses leaves a morning that is still playable
+
+### 0059 - Waves as data
+
+Ready to pick up.  Likely files: `src/core/waves.gd, src/core/game_data.gd`.
+
+Before authoring ten nights, make a night a table. Composition, timing and spawn points become numbers a designer edits, not code.
+
+- A night is a list of waves; a wave is a list of (enemy, count, spawn point, delay)
+- Wave gaps and the delay before the first wave are per night
+- Spawn points may differ per wave, so a night can come from two sides
+- A night definition is validated at load: an unknown enemy id fails loudly
+- Total enemy count and total reward per night are computable without running it
+
+  - done when: Editing a wave table changes the night with no code edit
+  - done when: `validate()` catches a typo in an enemy id
+  - done when: A summary of all ten nights can be printed headlessly
+
 ### 0071 - The two palettes
 
 Ready to pick up.  Likely files: `tools/gen_sprites.py, src/ui/palette.gd`.
@@ -166,37 +184,51 @@ When it breaks on someone else's machine, get enough to fix it without them.
   - done when: A deliberate crash produces a report with the seed and the tick
   - done when: The run is still loadable afterwards
 
-### 0057 - Structures take damage and die
+### 0058 - The Giant
 
-Waits on 0052.  Likely files: `src/core/combat.gd, src/core/building.gd`.
+Waits on 0057.  Likely files: `src/core/enemies.gd, src/core/game_data.gd`.
 
-Losing things. A structure that breaks should be a small disaster the player watched happen.
+The single boss of the MVP: the test of the build you made over nine nights.
 
-- Every structure has hit points and a visible damage state
-- Destruction frees the cell, rebuilds the flow field and leaves rubble that clears by morning
-- Damaged structures survive into the next day at their current hit points
-- A repair cost that is cheaper than rebuilding, so repairing is the right move
-- Nothing in the state dangles after a structure dies
+- Very high hit points, slow, and it smashes structures on its way through
+- It arrives with ordinary zombies, so the player cannot aim everything at it
+- It forces concentrated damage: a defence of only cheap towers cannot kill it in time
+- One readable telegraph before its heavy attack
+- Beating it is the end of the MVP run
 
-  - done when: Destroying a wall mid-wave reroutes the zombies the same tick
-  - done when: A structure at 1 hit point is still working, and looks wounded
-  - done when: A night of heavy losses leaves a morning that is still playable
+  - done when: A well-built night 9 defence beats it with something to spare
+  - done when: A defence of nothing but crossbows loses to it
+  - done when: It never softlocks the night by becoming unreachable
 
-### 0059 - Waves as data
+### 0061 - Night rewards
 
-Waits on 0052.  Likely files: `src/core/waves.gd, src/core/game_data.gd`.
+Waits on 0059.  Likely files: `src/core/rewards.gd`.
 
-Before authoring ten nights, make a night a table. Composition, timing and spawn points become numbers a designer edits, not code.
+Section 12: surviving pays money, resources and technology, and the payout is the reason to go again.
 
-- A night is a list of waves; a wave is a list of (enemy, count, spawn point, delay)
-- Wave gaps and the delay before the first wave are per night
-- Spawn points may differ per wave, so a night can come from two sides
-- A night definition is validated at load: an unknown enemy id fails loudly
-- Total enemy count and total reward per night are computable without running it
+- The payout is computed from the night's data, not hardcoded per night
+- A bonus for structures that survived intact, so defending well pays more than barely holding
+- The result screen itemises it the way the design document shows
+- Rewards go through the ledger
+- Every multiplier is a lever
 
-  - done when: Editing a wave table changes the night with no code edit
-  - done when: `validate()` catches a typo in an enemy id
-  - done when: A summary of all ten nights can be printed headlessly
+  - done when: The same night defended two ways pays differently, in the right direction
+  - done when: The itemised numbers add up to what the ledger received
+
+### 0067 - The autoplayer
+
+Waits on 0059, 0055.  Likely files: `src/tools/autoplayer.gd`.
+
+A robot that plays the ten nights, so balance is measured over hundreds of runs instead of guessed at over three.
+
+- A scripted day policy - gather, craft, build - and a night that runs itself
+- Several policies: all towers, all walls, economy first, balanced
+- Runs headless, seeded, and reports per night: survived, house hit points left, resources spent
+- It is a measuring instrument, not an AI: simple and readable beats clever
+- A dominant strategy detector: flag when one policy wins every night by a wide margin
+
+  - done when: 100 seeded runs finish in under two minutes
+  - done when: The report names which night kills each policy
 
 ### 0072 - The farm tileset
 
@@ -235,7 +267,7 @@ Somebody worth watching walk around: four directions, walking, and the work verb
 
 ### 0074 - Zombie sprites
 
-Waits on 0071, 0052.  Likely files: `tools/gen_sprites.py, sprites/enemies/`.
+Waits on 0071.  Likely files: `tools/gen_sprites.py, sprites/enemies/`.
 
 Four enemies that are told apart at a glance in a dark field at 480x270, which is the only test that matters.
 
@@ -338,51 +370,66 @@ One warm loop for the farm, one cold one for the night, and a crossfade on the r
   - done when: The loop point is inaudible
   - done when: The crossfade lands with the transition, not before or after it
 
-### 0058 - The Giant
+### 0060 - The ten nights, authored
 
-Waits on 0052, 0057.  Likely files: `src/core/enemies.gd, src/core/game_data.gd`.
+Waits on 0059, 0058.  Likely files: `src/core/game_data.gd`.
 
-The single boss of the MVP: the test of the build you made over nine nights.
+Section 10 of the design document, as a real difficulty curve: tutorial, more, the runner, the tank, the breaker, the boss.
 
-- Very high hit points, slow, and it smashes structures on its way through
-- It arrives with ordinary zombies, so the player cannot aim everything at it
-- It forces concentrated damage: a defence of only cheap towers cannot kill it in time
-- One readable telegraph before its heavy attack
-- Beating it is the end of the MVP run
+- Ten nights following the design document exactly: 1 tutorial, 3 first runner, 5 first tank, 7 breakers, 8 large, 9 heavy mix, 10 the Giant
+- Each night introduces at most one new thing, and night 2 of a new enemy is where it gets hard
+- Enemy count and reward curve upward smoothly - plot it in the journal
+- Night 1 is beatable with the tower the tutorial gives you and nothing else
+- Night 10 is not beatable without upgrades from the tech tree
 
-  - done when: A well-built night 9 defence beats it with something to spare
-  - done when: A defence of nothing but crossbows loses to it
-  - done when: It never softlocks the night by becoming unreachable
+  - done when: All ten are playable start to finish
+  - done when: The count and reward curves are in the journal as numbers
+  - done when: A headless run plays all ten with a scripted build and reports which ones fell
 
-### 0061 - Night rewards
+### 0062 - Technology points
 
-Waits on 0059.  Likely files: `src/core/rewards.gd`.
+Waits on 0061.  Likely files: `src/core/tech.gd`.
 
-Section 12: surviving pays money, resources and technology, and the payout is the reason to go again.
+The currency of permanent improvement, and the thing that makes night 4 feel different from night 3.
 
-- The payout is computed from the night's data, not hardcoded per night
-- A bonus for structures that survived intact, so defending well pays more than barely holding
-- The result screen itemises it the way the design document shows
-- Rewards go through the ledger
-- Every multiplier is a lever
+- One point per night survived, plus bonus points for the conditions in data
+- Points persist in the run save and are spent in the tech tree
+- Points cannot be earned by replaying a night already survived
+- The total available across ten nights is fixed and known - print it
 
-  - done when: The same night defended two ways pays differently, in the right direction
-  - done when: The itemised numbers add up to what the ledger received
+  - done when: Ten nights yield exactly the number of points the journal claims
+  - done when: Replaying a survived night yields none
+  - done when: Points survive a save and a reload
 
-### 0067 - The autoplayer
+### 0065 - Losing a night costs you
 
-Waits on 0059, 0055.  Likely files: `src/tools/autoplayer.gd`.
+Waits on 0061.  Likely files: `src/core/rewards.gd, src/ui/result_screen.gd`.
 
-A robot that plays the ten nights, so balance is measured over hundreds of runs instead of guessed at over three.
+Section 3 of the loop diagram: defeat takes part of the stock. It has to hurt enough to matter and little enough to continue.
 
-- A scripted day policy - gather, craft, build - and a night that runs itself
-- Several policies: all towers, all walls, economy first, balanced
-- Runs headless, seeded, and reports per night: survived, house hit points left, resources spent
-- It is a measuring instrument, not an AI: simple and readable beats clever
-- A dominant strategy detector: flag when one policy wins every night by a wide margin
+- A lever's fraction of resources lost, with money and technology untouched
+- Structures destroyed in the night stay destroyed
+- The night can be retried; the day in between is not skipped
+- The result screen says exactly what was lost
+- Losing never ends the run in the MVP - it costs a day
 
-  - done when: 100 seeded runs finish in under two minutes
-  - done when: The report names which night kills each policy
+  - done when: Losing twice in a row leaves a farm that can still recover
+  - done when: The itemised loss matches what the ledger actually lost
+
+### 0068 - A balance sweep over the ten nights
+
+Waits on 0067.  Likely files: `tools/balance.py, implementation/BALANCE.md`.
+
+Use the autoplayer: find the nights that are trivial, the ones that are impossible, and the levers that are doing nothing.
+
+- Sweep the important levers across a range and record the win rate per night
+- A written report with the curve, the outliers and a recommendation per lever
+- Apply the recommendations and re-run
+- A lever that changes nothing across its whole range is reported as dead weight
+- The determinism hash will move: record both numbers
+
+  - done when: No night has a win rate of 100% or 0% across every policy
+  - done when: The report is in the repository and the applied changes are in game_data
 
 ### 0077 - Particles
 
@@ -457,66 +504,35 @@ The little bubbles on the owner's sheet - !, ?, a heart, a note, an idea, a star
   - done when: A reaction appears on the tick the thing happens and clears itself
   - done when: Turning them all off leaves the determinism hash unchanged
 
-### 0060 - The ten nights, authored
+### 0063 - The tech tree
 
-Waits on 0059, 0058.  Likely files: `src/core/game_data.gd`.
+Waits on 0062.  Likely files: `src/core/tech.gd, src/ui/tech_screen.gd`.
 
-Section 10 of the design document, as a real difficulty curve: tutorial, more, the runner, the tank, the breaker, the boss.
+Somewhere to spend the points, small enough to read on one screen and real enough to change how a night goes.
 
-- Ten nights following the design document exactly: 1 tutorial, 3 first runner, 5 first tank, 7 breakers, 8 large, 9 heavy mix, 10 the Giant
-- Each night introduces at most one new thing, and night 2 of a new enemy is where it gets hard
-- Enemy count and reward curve upward smoothly - plot it in the journal
-- Night 1 is beatable with the tower the tutorial gives you and nothing else
-- Night 10 is not beatable without upgrades from the tech tree
+- Around twelve nodes, no more: the design document forbids a giant tree in the MVP
+- Three branches: production, defence, survival
+- Prerequisites are data; a node shows what it needs and what it gives
+- It opens from the day HUD and never during a wave
+- Spending is confirmed and is not refundable - or is, for a fee, and the fee is a lever
 
-  - done when: All ten are playable start to finish
-  - done when: The count and reward curves are in the journal as numbers
-  - done when: A headless run plays all ten with a scripted build and reports which ones fell
+  - done when: Every node is reachable inside ten nights, but not all of them
+  - done when: The choice between branches is real: say in the journal which one you would take and why
+  - done when: `input_check` buys a node
 
-### 0062 - Technology points
+### 0066 - Night 10 and the end of the run
 
-Waits on 0061.  Likely files: `src/core/tech.gd`.
+Waits on 0060, 0058.  Likely files: `src/core/phases.gd, src/ui/result_screen.gd`.
 
-The currency of permanent improvement, and the thing that makes night 4 feel different from night 3.
+**The MVP is complete here.** Beating the Giant ends the run with a summary that answers the design document's question.
 
-- One point per night survived, plus bonus points for the conditions in data
-- Points persist in the run save and are spent in the tech tree
-- Points cannot be earned by replaying a night already survived
-- The total available across ten nights is fixed and known - print it
+- A run summary: days played, resources gathered, zombies killed, structures lost, the build that won
+- The run is recorded to the profile and a new one can be started
+- An option to continue past night 10 into 0070's endless mode
+- It is a real ending, with a screen worth reaching
 
-  - done when: Ten nights yield exactly the number of points the journal claims
-  - done when: Replaying a survived night yields none
-  - done when: Points survive a save and a reload
-
-### 0065 - Losing a night costs you
-
-Waits on 0061.  Likely files: `src/core/rewards.gd, src/ui/result_screen.gd`.
-
-Section 3 of the loop diagram: defeat takes part of the stock. It has to hurt enough to matter and little enough to continue.
-
-- A lever's fraction of resources lost, with money and technology untouched
-- Structures destroyed in the night stay destroyed
-- The night can be retried; the day in between is not skipped
-- The result screen says exactly what was lost
-- Losing never ends the run in the MVP - it costs a day
-
-  - done when: Losing twice in a row leaves a farm that can still recover
-  - done when: The itemised loss matches what the ledger actually lost
-
-### 0068 - A balance sweep over the ten nights
-
-Waits on 0067.  Likely files: `tools/balance.py, implementation/BALANCE.md`.
-
-Use the autoplayer: find the nights that are trivial, the ones that are impossible, and the levers that are doing nothing.
-
-- Sweep the important levers across a range and record the win rate per night
-- A written report with the curve, the outliers and a recommendation per lever
-- Apply the recommendations and re-run
-- A lever that changes nothing across its whole range is reported as dead weight
-- The determinism hash will move: record both numbers
-
-  - done when: No night has a win rate of 100% or 0% across every policy
-  - done when: The report is in the repository and the applied changes are in game_data
+  - done when: A full run from day 1 to the Giant can be played in one sitting
+  - done when: The journal answers, honestly: after surviving the first night, did you want to go back to the farm and improve? That is the success criterion of the entire MVP
 
 ### 0082 - Screenshots, and actually looking at them
 
@@ -609,80 +625,6 @@ Every string through a translation table, with pt-BR alongside English - the ref
   - done when: Switching language mid-game updates every visible screen
   - done when: No pt-BR string overflows its control - the checker proves it
 
-### 0063 - The tech tree
-
-Waits on 0062.  Likely files: `src/core/tech.gd, src/ui/tech_screen.gd`.
-
-Somewhere to spend the points, small enough to read on one screen and real enough to change how a night goes.
-
-- Around twelve nodes, no more: the design document forbids a giant tree in the MVP
-- Three branches: production, defence, survival
-- Prerequisites are data; a node shows what it needs and what it gives
-- It opens from the day HUD and never during a wave
-- Spending is confirmed and is not refundable - or is, for a fee, and the fee is a lever
-
-  - done when: Every node is reachable inside ten nights, but not all of them
-  - done when: The choice between branches is real: say in the journal which one you would take and why
-  - done when: `input_check` buys a node
-
-### 0066 - Night 10 and the end of the run
-
-Waits on 0060, 0058.  Likely files: `src/core/phases.gd, src/ui/result_screen.gd`.
-
-**The MVP is complete here.** Beating the Giant ends the run with a summary that answers the design document's question.
-
-- A run summary: days played, resources gathered, zombies killed, structures lost, the build that won
-- The run is recorded to the profile and a new one can be started
-- An option to continue past night 10 into 0070's endless mode
-- It is a real ending, with a screen worth reaching
-
-  - done when: A full run from day 1 to the Giant can be played in one sitting
-  - done when: The journal answers, honestly: after surviving the first night, did you want to go back to the farm and improve? That is the success criterion of the entire MVP
-
-### 0092 - The main menu and the router
-
-Waits on 0091.  Likely files: `src/app/app.gd, src/ui/main_menu.gd`.
-
-One router that owns which screen is up, so screens stop knowing about each other.
-
-- An `App` autoload with `goto(state)` and a `state_changed` signal
-- States: BOOT, TITLE, MENU, RUN, TECH, STATS, OPTIONS, SUMMARY
-- A back stack, so Options returns to whoever opened it
-- No `get_node('/root/...')` reaching across screens
-- The run becomes one state rather than the root scene
-
-  - done when: Options from the title and from the pause menu both return correctly
-  - done when: `input_check` still drives a full night after the refactor
-
-### 0099 - An icon and a boot ident
-
-Waits on 0091.  Likely files: `tools/gen_icon.py, assets/icon.png`.
-
-Something recognisable in a taskbar and on an itch page, and two seconds before the title that are not the Godot logo.
-
-- An icon generated at every size a platform asks for, readable at 16x16
-- It says farm and night in one image
-- The boot splash is replaced; no default Godot branding anywhere
-- A short ident, skippable on any input
-
-  - done when: The 16x16 icon is still recognisable
-  - done when: No Godot logo appears anywhere in a release build
-
-### 0101 - Onboarding in seven lines
-
-Waits on 0097.  Likely files: `src/core/tutorial.gd`.
-
-A stranger reaches night 1 and understands the loop, with no more text than the design document allows.
-
-- Seven lines, total, across the whole first day
-- Each appears on the thing it describes
-- The reality switch is explained by showing it, not by describing it
-- Every line is translated
-- Watch someone play it and write down where they stopped
-
-  - done when: A first-time player reaches the end of night 1 without being told anything out loud
-  - done when: The journal names where they hesitated, because that is the finding
-
 ### 0102 - A performance budget
 
 Waits on 0060.  Likely files: `tools/perf.py, src/tools/perf_check.gd`.
@@ -755,6 +697,50 @@ For the player who beat the Giant and wants to know how far the farm goes. Cheap
 
   - done when: Night 25 is generated and playable
   - done when: The same seed generates the same night 25 twice
+
+### 0092 - The main menu and the router
+
+Waits on 0091.  Likely files: `src/app/app.gd, src/ui/main_menu.gd`.
+
+One router that owns which screen is up, so screens stop knowing about each other.
+
+- An `App` autoload with `goto(state)` and a `state_changed` signal
+- States: BOOT, TITLE, MENU, RUN, TECH, STATS, OPTIONS, SUMMARY
+- A back stack, so Options returns to whoever opened it
+- No `get_node('/root/...')` reaching across screens
+- The run becomes one state rather than the root scene
+
+  - done when: Options from the title and from the pause menu both return correctly
+  - done when: `input_check` still drives a full night after the refactor
+
+### 0099 - An icon and a boot ident
+
+Waits on 0091.  Likely files: `tools/gen_icon.py, assets/icon.png`.
+
+Something recognisable in a taskbar and on an itch page, and two seconds before the title that are not the Godot logo.
+
+- An icon generated at every size a platform asks for, readable at 16x16
+- It says farm and night in one image
+- The boot splash is replaced; no default Godot branding anywhere
+- A short ident, skippable on any input
+
+  - done when: The 16x16 icon is still recognisable
+  - done when: No Godot logo appears anywhere in a release build
+
+### 0101 - Onboarding in seven lines
+
+Waits on 0097.  Likely files: `src/core/tutorial.gd`.
+
+A stranger reaches night 1 and understands the loop, with no more text than the design document allows.
+
+- Seven lines, total, across the whole first day
+- Each appears on the thing it describes
+- The reality switch is explained by showing it, not by describing it
+- Every line is translated
+- Watch someone play it and write down where they stopped
+
+  - done when: A first-time player reaches the end of night 1 without being told anything out loud
+  - done when: The journal names where they hesitated, because that is the finding
 
 ### 0093 - Options: video
 
@@ -956,7 +942,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0040** [The shop grows](prompts/0040-shop-full.md)
 - [x] **0041** [The first day teaches itself](prompts/0041-tutorial-day.md)
 
-## 3 - The full night  (10/17)
+## 3 - The full night  (11/17)
 
 - [x] **0042** [Data-driven defences](prompts/0042-defence-data.md)
 - [x] **0043** [The flamethrower tower](prompts/0043-tower-flame.md)
@@ -968,17 +954,17 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0049** [Zombies path around walls](prompts/0049-pathing-walls.md)
 - [x] **0050** [The runner](prompts/0050-enemy-runner.md)
 - [x] **0051** [The tank](prompts/0051-enemy-tank.md)
-- [ ] **0052** [The breaker](prompts/0052-enemy-breaker.md)
+- [x] **0052** [The breaker](prompts/0052-enemy-breaker.md)
 - [ ] **0053** [Repair during the night](prompts/0053-repair.md)
 - [ ] **0054** [The player's ability](prompts/0054-ability.md)
 - [ ] **0055** [Double speed and skipping the night](prompts/0055-speed-controls.md)
 - [ ] **0056** [The night HUD](prompts/0056-night-hud.md)
-- [ ] **0057** [Structures take damage and die](prompts/0057-structure-damage.md) - needs 0052
-- [ ] **0058** [The Giant](prompts/0058-boss-giant.md) - needs 0052, 0057
+- [ ] **0057** [Structures take damage and die](prompts/0057-structure-damage.md)
+- [ ] **0058** [The Giant](prompts/0058-boss-giant.md) - needs 0057
 
 ## 4 - Ten nights and progression  (0/12)
 
-- [ ] **0059** [Waves as data](prompts/0059-wave-data.md) - needs 0052
+- [ ] **0059** [Waves as data](prompts/0059-wave-data.md)
 - [ ] **0060** [The ten nights, authored](prompts/0060-ten-nights.md) - needs 0059, 0058
 - [ ] **0061** [Night rewards](prompts/0061-rewards.md) - needs 0059
 - [ ] **0062** [Technology points](prompts/0062-tech-points.md) - needs 0061
@@ -997,7 +983,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [ ] **0072** [The farm tileset](prompts/0072-tileset.md) - needs 0071
 - [ ] **0073** [The player sprite](prompts/0073-player-art.md) - needs 0071
 - [ ] **0109** [The character reacts](prompts/0109-player-emotes.md) - needs 0073
-- [ ] **0074** [Zombie sprites](prompts/0074-zombie-art.md) - needs 0071, 0052
+- [ ] **0074** [Zombie sprites](prompts/0074-zombie-art.md) - needs 0071
 - [ ] **0075** [Buildings and towers](prompts/0075-building-art.md) - needs 0071
 - [ ] **0076** [Night lighting](prompts/0076-lighting.md) - needs 0071
 - [ ] **0077** [Particles](prompts/0077-particles.md) - needs 0074, 0075

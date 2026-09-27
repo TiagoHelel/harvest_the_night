@@ -3793,3 +3793,75 @@ the entity count.
 
 `python tools/verify.py` prints PASS: 1592 asserts, 371 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+
+## 0052 - The breaker
+
+Two fields that had been in the enemy table since it was written and read by
+nothing: `targets_structures` and `structure_damage_multiplier`. The second
+could not have been read - it was `3.0`, and `src/core/` is integer
+arithmetic. That is the fifth fraction found this way after
+`WATER_GROWTH_BONUS`, `BROWNOUT_RATE`, `splash_falloff` and `pierce_falloff`,
+so `check_enemies()` now refuses a float in the table outright.
+
+### A third field
+
+A breaker walks downhill to the nearest thing you built, the same way
+everything else walks downhill to the house: the same sweep from different
+seeds. `Pathing` keeps a third field seeded at every **structure** - the
+towers, the workshop, the generator.
+
+What counts as a structure is the rule task 0049 already wrote, read
+backwards. A wall declares a `path_cost` and is a door with a price on it; a
+tower declares none and is not a door at all. So the things with no way
+through them are exactly the things worth coming for, and `is_prey()` and
+`_cost_of()` are two readings of one line in the table.
+
+That makes target selection deterministic and ordered for free: nearest by
+what the walk costs rather than by a straight line, and downhill every step,
+so a breaker can no more circle a tower than a walker can circle the house.
+With nothing left standing the field has no answer and it falls through to the
+house.
+
+The sweep is skipped when there is nothing to hunt. The farm is never actually
+in that state - `FARM_MAP` starts with a workshop, and a workshop is something
+the player can lose - which took three failed asserts to notice. The fix was
+to clear the farm in the test rather than to pretend it was clear.
+
+### Little against the house
+
+Damage eight to five, which is half a walker: "little against the house" is
+half the requirement and it has to be visible in the number. At eight it was
+almost a walker with a hobby. Three hundred percent of five is fifteen, so it
+does half what a walker does to the roof and half again what a walker does to
+a tower.
+
+### Measured
+
+    a breaker does 5 to the house and 15 to a structure; a walker does 10 to both
+    offered two towers it went for (35, 7), 7 away against 30
+    six breakers against four gun towers: 0 of 4 towers left, 2 breakers killed.
+      With five crossbows covering them: 4 of 4 left, 6 killed
+
+Both done-whens, in one line. An uncovered line of four gun towers is taken
+apart completely and only two of the six attackers die doing it; the same line
+with five crossbows over it loses nothing and kills all six. The house takes
+nothing in either case, because there was always a tower standing.
+
+### The rebuild is creeping up
+
+Three sweeps now, and the worst single rebuild of a maze has gone 3432 →
+4563 → 7846 microseconds across tasks 0049, 0050 and 0052 - ten percent of a
+tick to twenty-four. It still passes its assert with room and a hundred
+zombies in a maze still cost 1607 us a tick, because the sweeps are paid on
+the tick a wall falls and nowhere else. But a fourth field would be the point
+to stop adding them and start sharing one, and task 0102 owns that number.
+
+### Hashes
+
+| | from | to | why |
+|---|---|---|---|
+| sim hash | `3756808106` | `3214589414` | the state gained the hunt field and its costs |
+| data hash | `2262728717` | `1507247408` | the breaker does five at the house instead of eight, and two fractions became percentages |
+
+`python tools/verify.py` prints PASS: 1631 asserts, 371 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

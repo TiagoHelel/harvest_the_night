@@ -931,8 +931,25 @@ const ENEMIES: Dictionary = {
 		# an uncovered tower line a liability.
 		"hp": 45,                       # LEVER: hit points, 25-80
 		"ticks_per_tile": 21,           # LEVER: ticks, 15-30
-		"damage": 8,                    # LEVER: to the house, 4-14
-		"structure_damage_multiplier": 3.0,   # LEVER: multiplier, 2.0-5.0
+		# **Five, which is half a walker.** "Little against the house" is half
+		# the requirement and it has to be visible in the number: at eight it
+		# was almost a walker with a hobby. What it costs you is the tower it
+		# is standing on, not the roof.
+		"damage": 5,                    # LEVER: to the house, 3-10
+		# **A percentage, not a multiplier.** This was `3.0` and nothing read
+		# it - the same story as `WATER_GROWTH_BONUS` (0029), `BROWNOUT_RATE`
+		# (0033), `splash_falloff` (0044) and `pierce_falloff` (0045). The
+		# table was written in fractions and the rules want integers.
+		#
+		# Three hundred of five is fifteen: half again what a walker does to a
+		# structure, out of something that does half what a walker does to the
+		# house.
+		"structure_damage_percent": 300,   # LEVER: percent, 200-500
+		# **What it walks towards.** Read by `Enemies` through the hunt field
+		# in `Pathing`: a breaker goes to the nearest thing you built and
+		# takes it apart, and only heads for the house when there is nothing
+		# left standing. Declared since the table was written and read by
+		# nothing until task 0052.
 		"targets_structures": true,
 		"reward": 8,                    # LEVER: money, 4-14
 		"armour": 1,
@@ -941,7 +958,9 @@ const ENEMIES: Dictionary = {
 		"hp": 900,                      # LEVER: hit points, 500-1600
 		"ticks_per_tile": 50,           # LEVER: ticks, 40-70
 		"damage": 40,                   # LEVER: to the house, 25-60
-		"structure_damage_multiplier": 4.0,
+		"structure_damage_percent": 400,   # LEVER: percent, 200-600
+		# A giant walks at the house and flattens whatever is in the way; it
+		# does not go looking. The going-looking one is the breaker.
 		"targets_structures": false,
 		"telegraph_ticks": 1 * SECONDS, # LEVER: ticks before the heavy hit
 		"reward": 120,                  # LEVER: money, 60-200
@@ -1796,6 +1815,20 @@ static func check_enemies(enemies: Dictionary) -> Array:
 				errors.append("enemy '%s' has no %s" % [id, field])
 		if int(one.get("armour", 0)) < 0:
 			errors.append("enemy '%s' has less than no armour" % id)
+		# **No floats in the table.** `src/core/` is integer arithmetic and a
+		# fraction in a lever is a float multiply waiting to happen in the
+		# tick. Two of these went unread for fifty tasks precisely because
+		# nothing could use them as written.
+		for key in sorted_names(one.keys()):
+			if typeof(one[key]) == TYPE_FLOAT:
+				errors.append(("enemy '%s' declares '%s' as a fraction - the "
+					+ "rules are integers, so it wants a percentage")
+					% [id, key])
+		var percent := int(one.get("structure_damage_percent", 100))
+		if percent < 100:
+			errors.append(("enemy '%s' does less to a structure than to the "
+				+ "house, which is what the multiplier is for not to do")
+				% id)
 		if not bool(one.get("ignores_structures", false)):
 			fastest = mini(fastest, int(one.get("ticks_per_tile", 1 << 30)))
 

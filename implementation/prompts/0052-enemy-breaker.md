@@ -1,7 +1,7 @@
 # 0052 - The breaker
 
 - **Phase:** 3 - The full night
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0049, 0046
 - **Likely files:** src/core/enemies.gd, src/core/game_data.gd
 

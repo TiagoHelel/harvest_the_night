@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 44
+const GROUPS := 45
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -108,6 +108,7 @@ func _run() -> void:
 	_task_0049_pathing()
 	_task_0050_runner()
 	_task_0051_tank()
+	_task_0052_breaker()
 
 
 func _finish() -> void:
@@ -7551,3 +7552,243 @@ func _tank_against(seed_value: int, id: StringName, count: int) -> Dictionary:
 			- last_seen,
 		"powered": Power.percent(state) == 100,
 	}
+
+
+## 0052 - the breaker: it comes for the towers, and an uncovered line is a
+## liability.
+func _task_0052_breaker() -> void:
+	var breaker: Dictionary = GameData.ENEMIES[&"breaker"]
+	var walker: Dictionary = GameData.ENEMIES[&"walker"]
+	var percent := int(breaker["structure_damage_percent"])
+
+	# **Extra against a structure, little against the house.**
+	var on_a_tower := int(breaker["damage"]) * percent / 100
+	print("  a breaker does %d to the house and %d to a structure; a walker "
+		% [breaker["damage"], on_a_tower] + "does %d to both"
+		% walker["damage"])
+	expect(int(breaker["damage"]) < int(walker["damage"]),
+		"less to the house than a walker does", str(breaker["damage"]))
+	expect(on_a_tower > int(walker["damage"]),
+		"and more to a tower than a walker does", str(on_a_tower))
+	expect(percent >= 200, "three times its own damage, at least", str(percent))
+
+	expect(GameData.check_enemies(GameData.ENEMIES).is_empty(),
+		"the shipped enemies pass their own check",
+		str(GameData.check_enemies(GameData.ENEMIES)))
+	var fractional: Dictionary = GameData.ENEMIES.duplicate(true)
+	(fractional[&"breaker"] as Dictionary)["structure_damage_percent"] = 3.0
+	expect(not GameData.check_enemies(fractional).is_empty(),
+		"a fraction in the table is refused - the rules are integers, and two "
+		+ "of these went unread for fifty tasks because of it")
+	var gentle: Dictionary = GameData.ENEMIES.duplicate(true)
+	(gentle[&"breaker"] as Dictionary)["structure_damage_percent"] = 50
+	expect(not GameData.check_enemies(gentle).is_empty(),
+		"and so is one that does less to a structure than to the house")
+
+	# **What it has come for.** A tower, not a wall: a wall is a door with a
+	# price on it and a tower is not a door at all, which is the same rule
+	# `_cost_of()` reads the other way round.
+	for id in GameData.sorted_names(GameData.DEFENCES.keys()):
+		var entry: Dictionary = GameData.DEFENCES[id]
+		var wanted := not entry.has("path_cost") and not Traps.is_trap(id)
+		expect(Pathing.is_prey(id) == wanted,
+			"a breaker %s a %s" % ["comes for" if wanted else "ignores", id])
+	for id in GameData.sorted_names(GameData.BUILDINGS.keys()):
+		expect(Pathing.is_prey(id), "and it comes for a %s" % id)
+	for id in [&"house", &"well", &"shop", &"tree"]:
+		expect(not Pathing.is_prey(id),
+			"but a %s is the farm, not a thing you built" % id)
+
+	# **It walks to the tower, not to the house.**
+	var hunt := _armed_prep(3400)
+	var tower: Vector2i = _line_of_towers(hunt, &"gun_tower", 1)[0]
+	expect(Pathing.is_prey(&"gun_tower"), "a tower is built at %s" % tower)
+	_night_falls(hunt)
+	Pathing.refresh(hunt)
+	var spawn: Vector2i = Enemies.spawn_cells(hunt, 0)[0]
+	expect(Pathing.distance_hunt(hunt, spawn) < Pathing.UNREACHABLE,
+		"with something built, there is a way to it",
+		str(Pathing.distance_hunt(hunt, spawn)))
+	var towards := Pathing.step_hunt(hunt, spawn)
+	expect(towards != spawn, "and a first step towards it", str(towards))
+	expect(Pathing.distance_hunt(hunt, towards)
+		< Pathing.distance_hunt(hunt, spawn),
+		"which is closer to it than where it is standing - downhill, so it "
+		+ "cannot walk in a circle any more than anything else can")
+
+	# **With nothing left standing it heads for the house**, which is the
+	# endgame after a breaker wave has eaten everything.
+	#
+	# The farm does not start bare: `FARM_MAP` puts a workshop on it, and a
+	# workshop is something the player can lose, so a breaker comes for that
+	# too. This took three failed asserts to notice, and the right fix was to
+	# clear the farm rather than to pretend it was clear.
+	var bare := _fresh_night(3401)
+	expect(not Pathing.prey_cells(bare).is_empty(),
+		"the farm starts with something worth coming for",
+		str(Pathing.prey_cells(bare)))
+	for cell in Pathing.prey_cells(bare):
+		Farm.remove(bare, cell)
+	Pathing.refresh(bare)
+	expect(Pathing.prey_cells(bare).is_empty(),
+		"and once it is all gone there is nothing to come for",
+		str(Pathing.prey_cells(bare)))
+	expect(Pathing.step_hunt(bare, spawn) == spawn,
+		"so the hunt field has no answer")
+	var lost := Entities.spawn(bare, &"breaker", spawn)
+	var house_before := int(bare["house_hp"])
+	for _tick in 6000:
+		Sim.advance(bare, 1)
+		if not Entities.alive(bare, lost):
+			break
+	expect(int(bare["house_hp"]) < house_before,
+		"and it falls through to the house, which is the only thing left",
+		str(bare["house_hp"]))
+	expect(house_before - int(bare["house_hp"]) == int(breaker["damage"]),
+		"for exactly the little it does there",
+		str(house_before - int(bare["house_hp"])))
+
+	# **The nearest one, and the same one twice.**
+	var pick := _which_it_goes_for(3402)
+	var again := _which_it_goes_for(3402)
+	print("  offered two towers it went for %s, %d away against %d"
+		% [str(pick["chosen"]), pick["near"], pick["far"]])
+	expect(pick["chosen"] == pick["nearest"],
+		"it goes for the nearer of two towers", str(pick))
+	expect(pick["chosen"] == again["chosen"],
+		"and for the same one on a second run - the field is the ordering",
+		"%s against %s" % [str(pick["chosen"]), str(again["chosen"])])
+
+	# **A wave of breakers dismantles an unprotected tower line.** The
+	# done-when, and the reason the breaker exists.
+	var naked := _breakers_against(3403, 4, 0, 6)
+	var covered := _breakers_against(3403, 4, 5, 6)
+	print("  six breakers against four gun towers: %d of %d towers left, "
+		% [naked["towers_left"], naked["towers"]]
+		+ "%d breakers killed. With five crossbows covering them: %d of %d "
+		% [naked["killed"], covered["towers_left"], covered["towers"]]
+		+ "left, %d killed" % covered["killed"])
+	expect(naked["powered"] and covered["powered"],
+		"both farms had the power on",
+		"%s and %s" % [str(naked["powered"]), str(covered["powered"])])
+	expect(naked["towers_left"] < naked["towers"],
+		"an uncovered line loses towers", str(naked))
+	expect(naked["damage_to_towers"] > 0,
+		"and it is the towers taking the damage", str(naked))
+
+	# **With the towers covered, they die before they reach one.**
+	expect(covered["killed"] == 6,
+		"covered, every breaker dies", str(covered))
+	expect(covered["damage_to_towers"] < naked["damage_to_towers"],
+		"and the line takes less for being covered",
+		"%d against %d"
+			% [covered["damage_to_towers"], naked["damage_to_towers"]])
+
+	# And it is the towers they came for, not the house, in both cases.
+	expect(naked["house_lost"] == 0,
+		"the house takes nothing while there is a tower standing",
+		str(naked["house_lost"]))
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## Two towers at different distances from the spawn: which one does it walk
+## to, and is it the nearer.
+func _which_it_goes_for(seed_value: int) -> Dictionary:
+	var state := _armed_prep(seed_value)
+	_night_falls(state)
+	Pathing.refresh(state)
+	var spawn: Vector2i = Enemies.spawn_cells(state, 0)[0]
+
+	# One near the spawn and one across the farm, both off the walking route.
+	var near := Vector2i(spawn.x - 4, spawn.y + 3)
+	var far := Vector2i(6, spawn.y + 3)
+	for cell in [near, far]:
+		if not Farm.place(state, cell, {"id": &"gun_tower", "hp": 60}):
+			return {"chosen": Vector2i(-1, -1), "nearest": Vector2i(-2, -2)}
+	Pathing.refresh(state)
+
+	# Walk the hunt field and see which one it arrives beside.
+	var at := spawn
+	var chosen := Vector2i(-1, -1)
+	for _step in 400:
+		var next := Pathing.step_hunt(state, at)
+		if next == at:
+			break
+		if next == near or next == far:
+			chosen = next
+			break
+		at = next
+	return {
+		"chosen": chosen,
+		# **Nearest by what walking there costs**, measured the only honest
+		# way: a farm with just that one tower on it and the hunt field's
+		# answer from the spawn. Manhattan distance is a different question
+		# and would have been a different assert.
+		"nearest": near if _cost_to_reach(seed_value, near)
+			<= _cost_to_reach(seed_value, far) else far,
+		"near": _cost_to_reach(seed_value, near),
+		"far": _cost_to_reach(seed_value, far),
+	}
+
+
+## What walking from the spawn to one tower costs, with nothing else built.
+func _cost_to_reach(seed_value: int, cell: Vector2i) -> int:
+	var state := _fresh_night(seed_value)
+	Farm.place(state, cell, {"id": &"gun_tower", "hp": 60})
+	Pathing.refresh(state)
+	return Pathing.distance_hunt(state, Enemies.spawn_cells(state, 0)[0])
+
+
+## A line of gun towers, optionally covered by crossbows, against a wave of
+## breakers. Reports what was left of it.
+func _breakers_against(seed_value: int, line: int, guards: int,
+		count: int) -> Dictionary:
+	var state := _armed_prep(seed_value)
+	Resources.gain(state, {GameData.OIL: 900, GameData.GUNPOWDER: 900,
+		GameData.STONE: 900, GameData.IRON: 900, GameData.WOOD: 900})
+	for _i in 3:
+		Building.place(state, &"generator",
+			_room_for(state, Building.size_of(&"generator")))
+	var built := _line_of_towers(state, &"gun_tower", line)
+	if guards > 0:
+		_line_of_towers(state, &"auto_crossbow", guards, built)
+	_night_falls(state)
+	Sim.advance(state, 1)
+
+	var hp_before := _hp_of(state, built)
+	Pathing.refresh(state)
+	var spawn: Vector2i = Enemies.spawn_cells(state, 0)[0]
+	var house_before := int(state["house_hp"])
+	for i in count:
+		Entities.spawn(state, &"breaker", spawn)
+		if i < count - 1:
+			Sim.advance(state, GameData.SPAWN_INTERVAL_TICKS)
+	for _tick in 5000:
+		Sim.advance(state, 1)
+		if Entities.count(state) == 0:
+			break
+
+	var standing := 0
+	for cell in built:
+		if not Farm.is_empty(state, cell):
+			standing += 1
+	return {
+		"towers": built.size(),
+		"towers_left": standing,
+		"damage_to_towers": hp_before - _hp_of(state, built),
+		# Killed is what neither got in nor is still walking: counting
+		# "everything that did not breach" would call a stalemate a victory.
+		"killed": count - int(state["breaches"]) - Entities.count(state),
+		"still_walking": Entities.count(state),
+		"house_lost": house_before - int(state["house_hp"]),
+		"powered": Power.percent(state) == 100,
+	}
+
+
+## The hit points still standing on a list of cells.
+func _hp_of(state: Dictionary, cells: Array) -> int:
+	var total := 0
+	for cell in cells:
+		total += int(Farm.occupant(state, cell).get("hp", 0))
+	return total

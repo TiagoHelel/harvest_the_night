@@ -52,6 +52,17 @@ extends RefCounted
 ## through like everybody else. A runner that stood still in front of a wall
 ## would make sealing the farm a win condition.
 ##
+## ## Three fields, because not everybody is going to the same place
+##
+## The third is swept from every **structure** rather than from the house:
+## towers, the workshop, the generator - the things a breaker comes for (task
+## 0052). It is the same sweep with different seeds, so a breaker walks
+## downhill to the nearest thing you built exactly the way everything else
+## walks downhill to the house, and it cannot oscillate for the same reason.
+##
+## It is skipped entirely when there is nothing built, which is most of night
+## one, and a breaker with an empty hunt field falls through to the house.
+##
 ## ## A zombie cannot oscillate
 ##
 ## Every step is onto a cell whose field value is `field[here] - enter(next)`,
@@ -96,6 +107,10 @@ static func initial() -> Dictionary:
 		# barrier is a hole in the map rather than a door with a price.
 		"flow_open": PackedInt32Array(),
 		"open_cost": PackedInt32Array(),
+		# And again for somebody who has come for the towers rather than for
+		# the house. Empty when there is nothing built to come for.
+		"flow_hunt": PackedInt32Array(),
+		"hunt_cost": PackedInt32Array(),
 		# Which `grid_version` the four above were built for. -1 is "never".
 		"flow_version": -1,
 	}
@@ -111,6 +126,8 @@ static func refresh(state: Dictionary) -> void:
 	state["flow_cost"] = built["cost"]
 	state["flow_open"] = built["open_field"]
 	state["open_cost"] = built["open_cost"]
+	state["flow_hunt"] = built["hunt_field"]
+	state["hunt_cost"] = built["hunt_cost"]
 	state["flow_version"] = int(state["grid_version"])
 
 
@@ -163,6 +180,56 @@ static func step_around(state: Dictionary, cell: Vector2i) -> Vector2i:
 	return _step_in(state["flow_open"], state["open_cost"], cell)
 
 
+## The next cell on the way to **the nearest thing the player built**. The
+## same cell back means there is nothing left standing to go for, and the
+## caller falls back to `step_from()`.
+static func step_hunt(state: Dictionary, cell: Vector2i) -> Vector2i:
+	return _step_in(state["flow_hunt"], state["hunt_cost"], cell)
+
+
+## What reaching the nearest structure costs from here. `UNREACHABLE` when
+## there is nothing to reach.
+static func distance_hunt(state: Dictionary, cell: Vector2i) -> int:
+	var idx := Grid.index(cell)
+	if idx < 0:
+		return UNREACHABLE
+	var field: PackedInt32Array = state["flow_hunt"]
+	if field.size() != Grid.CELLS:
+		return UNREACHABLE
+	return int(field[idx])
+
+
+## Whether this is a thing a breaker has come for: something the player built
+## that is not a barrier, a trap or part of the farm.
+##
+## **The same predicate `_cost_of()` uses to say "no way through".** A wall is
+## a door with a price on it and a tower is not a door at all, so the things
+## with no way through them are exactly the things worth coming for. One rule,
+## read two ways.
+static func is_prey(id: StringName) -> bool:
+	if id == &"house" or Farm.FIXTURES.has(id) or Traps.is_trap(id):
+		return false
+	var entry: Variant = Building.entry_of(id)
+	if entry == null:
+		return false        # a tree or a seam: part of the farm, not built
+	return int((entry as Dictionary).get("path_cost", 0)) <= 0
+
+
+## Every cell with something on it a breaker has come for.
+static func prey_cells(state: Dictionary) -> Array:
+	var out: Array = []
+	var occupants: Dictionary = state["occupants"]
+	var where: Array = occupants.keys()
+	where.sort()
+	for key in where:
+		var idx := int(key)
+		if idx < 0 or idx >= Grid.CELLS:
+			continue
+		if is_prey(StringName((occupants[key] as Dictionary)["id"])):
+			out.append(Grid.cell(idx))
+	return out
+
+
 ## What getting home costs somebody who will not break anything.
 static func distance_around(state: Dictionary, cell: Vector2i) -> int:
 	var idx := Grid.index(cell)
@@ -212,6 +279,8 @@ static func route_if_blocked(state: Dictionary, blocked: Vector2i,
 	# and nothing does: this is a query, not a tick.
 	occupants[idx] = {"id": &"wall", "hp": 1}
 	var built := _build(state)
+	# The preview is about where a wall sends them, so it reads the field
+	# everything walks by - not the one a breaker hunts by.
 	if was == null:
 		occupants.erase(idx)
 	else:
@@ -283,16 +352,38 @@ static func reachable(state: Dictionary, cell: Vector2i) -> bool:
 ## off the same one pass over the farm.
 static func _build(state: Dictionary) -> Dictionary:
 	var costs := _entry_costs(state)
+	var home := Farm.cells_with(state, &"house")
+
+	# **Skipped when there is nothing to hunt.** Most of night one has nothing
+	# built on the farm at all, and a sweep of seven hundred cells to find out
+	# that the answer is "nowhere" is a sweep worth not doing.
+	var prey := prey_cells(state)
+	var hunt_cost: PackedInt32Array = costs["cost"]
+	var hunt_field := PackedInt32Array()
+	if not prey.is_empty():
+		# A tower is impassable in the field everything else reads, which is
+		# what makes a wave flow around it. The sweep has to be able to leave
+		# one, so here they cost what the ground under them costs.
+		hunt_cost = costs["cost"].duplicate()
+		for cell in prey:
+			hunt_cost[Grid.index(cell)] = Farm.cost_of_terrain(
+				Farm.terrain_at(state, cell))
+		hunt_field = _sweep(state, hunt_cost, prey)
+
 	return {
 		"cost": costs["cost"],
-		"field": _sweep(state, costs["cost"]),
+		"field": _sweep(state, costs["cost"], home),
 		"open_cost": costs["open"],
-		"open_field": _sweep(state, costs["open"]),
+		"open_field": _sweep(state, costs["open"], home),
+		"hunt_cost": hunt_cost,
+		"hunt_field": hunt_field,
 	}
 
 
-## One field, swept out from the house against one set of entry costs.
-static func _sweep(state: Dictionary, cost: PackedInt32Array) -> PackedInt32Array:
+## One field, swept out from a set of seed cells against one set of entry
+## costs. The seeds are wherever whoever reads this field is trying to get to.
+static func _sweep(state: Dictionary, cost: PackedInt32Array,
+		seeds: Array) -> PackedInt32Array:
 	var field := PackedInt32Array()
 	field.resize(Grid.CELLS)
 	field.fill(UNREACHABLE)
@@ -312,7 +403,7 @@ static func _sweep(state: Dictionary, cost: PackedInt32Array) -> PackedInt32Arra
 		wheel.append([])
 
 	var queued := 0
-	for cell in Farm.cells_with(state, &"house"):
+	for cell in seeds:
 		var idx := Grid.index(cell)
 		if idx < 0 or int(field[idx]) == 0:
 			continue

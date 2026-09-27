@@ -7,6 +7,14 @@ extends RefCounted
 ## bite out of it when they arrive. Tasks 0050 to 0052 give them reasons to be
 ## told apart.
 ##
+## ## What they are walking towards
+##
+## Most of them are walking at the house. A **runner** goes round what you
+## built instead of through it (task 0050) and a **breaker** goes at what you
+## built instead of at the house (task 0052); each reads a different field out
+## of `Pathing`, swept from a different place, and none of them knows how the
+## walking works.
+##
 ## ## Going through rather than around
 ##
 ## The field prices a barrier instead of refusing it (see `Pathing`), so the
@@ -130,6 +138,13 @@ static func _walk(state: Dictionary, id: int) -> void:
 	var next := here
 	if bool(data.get("ignores_structures", false)):
 		next = Pathing.step_around(state, here)
+	# **A breaker has come for the towers.** It walks the field swept from
+	# everything the player built, and falls through to the house only when
+	# there is nothing left standing to go for. Nearest by what the walk
+	# costs, which is a better answer than "nearest in a straight line" and
+	# is ordered and deterministic because the field is.
+	elif bool(data.get("targets_structures", false)):
+		next = Pathing.step_hunt(state, here)
 	if next == here:
 		next = Pathing.step_from(state, here)
 	if next == here:
@@ -230,7 +245,12 @@ static func _gnaw(state: Dictionary, id: int, data: Dictionary,
 		one["chew_wait"] = wait - 1
 		return
 	one["chew_wait"] = maxi(int(data["ticks_per_tile"]), 1)
-	Farm.damage(state, cell, int(data["damage"]))
+	# **What it does to a thing is not what it does to the house.** A breaker
+	# is three hundred percent here and five at the door; a giant is four
+	# hundred. Everything else declares nothing and gets a hundred, so the
+	# multiply is free for them and the table says which is which.
+	var percent := int(data.get("structure_damage_percent", 100))
+	Farm.damage(state, cell, maxi(int(data["damage"]) * percent / 100, 1))
 	one["chewing"] = Grid.index(cell)
 
 
