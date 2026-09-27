@@ -148,5 +148,5 @@ static func all_verbs() -> Array:
 	for v in OCCUPANT_VERBS.values() + TERRAIN_VERBS.values():
 		if not verbs.has(v):
 			verbs.append(v)
-	verbs.sort()
+	verbs = GameData.sorted_names(verbs)
 	return verbs

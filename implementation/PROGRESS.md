@@ -1310,3 +1310,150 @@ right now than a third crop would. Not reordering it, because the day's
 resources are what the night's towers cost and 0031-0035 feed 0043-0048
 directly, but if the next playtest says the same thing, that is the swap to
 make.
+
+## 0028 - Corn and carrot
+
+Three crops that are a real choice, and a determinism bug found by checking
+whether a fourth one needs any code.
+
+### The arithmetic
+
+The task asks for seed cost and sale price set so that no crop strictly
+dominates, and for the sums to be here. Sale prices are `design.md` section 6
+and were left alone; the **seed costs** carry the balance.
+
+Where it started, per plot across a 240 second day:
+
+| crop | grow | seed | sells | net a harvest | harvests | **a day** |
+|---|---|---|---|---|---|---|
+| wheat | 90s | $3 | 2 x $4 | 5 | 2 | **10** |
+| corn | 180s | $6 | 3 x $5 | 9 | 1 | **9** |
+| carrot | 60s | $4 | 2 x $3 | 2 | 4 | **8** |
+
+Carrot was strictly worse than wheat: less money, twice the walking, and a
+dearer seed. That is not a choice, it is a trap, and it is what the done-when
+"no crop is the right answer at every money level" is pointing at.
+
+First attempt was to flatten them - seeds 2/3/3, every crop worth 12 a day,
+differing only in how often you come back. It reads well and it is still
+wrong: wheat at 12 a day, 2 visits and a $2 seed beats carrot at 12 a day,
+4 visits and a $3 seed on every axis at once. Equal money is not
+non-domination when the other two axes still line up the same way.
+
+What shipped, seeds **1 / 2 / 4**:
+
+| crop | grow | seed | sells | net a harvest | harvests | **a day** |
+|---|---|---|---|---|---|---|
+| carrot | 60s | $1 | 2 x $3 | 5 | 4 | **20** |
+| wheat | 90s | $2 | 2 x $4 | 6 | 2 | **12** |
+| corn | 180s | $4 | 3 x $5 | 11 | 1 | **11** |
+
+Three axes, and nobody wins all three:
+
+- **carrot** - most money, cheapest to start, and wants you standing in the
+  field all day.
+- **corn** - least money, one visit, four dollars up front. What you plant
+  before going down the mine. Also the only crop that becomes gunpowder.
+- **wheat** - beats corn on money and carrot on walking, and is the one crop
+  nothing downstream competes for, so every wheat is sellable.
+
+And the money-level question the task asks directly: **with a dollar in your
+pocket only carrot goes in the ground.** There is an assert for that.
+
+The domination test is `x.value >= y.value and x.visits <= y.visits and
+x.seed <= y.seed`. Rather than assert it once, `GameData.check_crops()` now
+computes it over every pair at boot, so a later balance pass cannot quietly
+flatten the choice - and the fourth crop somebody adds is checked on the way
+in, by name, with both sets of numbers in the message.
+
+### A fourth crop is one dictionary entry - checked, not claimed
+
+Done-when says to check it and say so, so it was checked rather than reasoned
+about: a `pumpkin` was added to `RESOURCES`, `SELL_PRICE` and `CROPS` - three
+data entries, no code - and the suite run against it.
+
+**No game code needed changing.** The seed strip grew a fourth row with the
+right grow time and per-day value, key 4 selected it, it tilled, planted,
+grew, harvested and paid, and the balance guard checked it against the other
+three. 602 asserts and 168 input cases ran, up from 582 and 163, because the
+per-crop loops are loops over the table.
+
+Three asserts failed, all of them tests naming the three-crop world rather
+than code: the resource count, the expected sorted list, and "carrot pays the
+most over a day". That is the right kind of failure - a test that says what
+the game is today.
+
+Then pumpkin was removed. The only trace left is one line of comment in
+`sorted_names()`, which is where it earned its place:
+
+### Sorting StringNames does not sort them
+
+The first fourth-crop run printed the seed list as
+`[pumpkin, carrot, corn, wheat]` - out of a `.sort()`.
+
+**GDScript compares a `StringName` by its internal pointer**, not by its text.
+That is the point of the type and it is why it is fast. It also means every
+`keys.sort()` in `src/core/` over id-keyed Dictionaries - twelve of them - was
+ordering by the order the strings happened to be interned in, which is source
+file order.
+
+Stable within a build, and that is the worst kind of stable. Move two `const`
+lines in `game_data.gd` and the rules iterate in a different order and the
+determinism hash moves, for a diff that changed no behaviour. The house rule
+says sort the keys; the code called `sort()` and satisfied the letter of it
+while delivering none of the intent.
+
+`state.gd:hash_of()` was doing it too, which means **the determinism guard was
+hashing the layout of the source file** along with the state.
+
+Fixed with `GameData.sorted_names()`, which sorts by `String(v)`, and every
+StringName site routed through it. `hash_of()` sorts by `str(k)` instead,
+because its keys are a mix of ints and names and it only needs a total order
+that is the same on every build - "10" before "2" is fine, pointer order is
+not.
+
+One thing this broke on the way: `state["crafting"]` is keyed by **cell index**,
+an int, and `sorted_names()` turned `42` into `&"42"` so the station lookup
+missed and five crafting asserts failed. Plain `sort()` is correct there and
+has a comment now saying which kind of key it is sorting. The lesson is the
+familiar one in a new shape - a helper named for the common case gets applied
+to the uncommon one.
+
+There is an assert that `sorted_names` puts `apple` before `apple pie` before
+`mango` before `zebra`, so nobody optimises it back into `.sort()`.
+
+### Other notes
+
+- **A new farm starts on carrot**, not wheat: `Farming.initial()` takes
+  `seeds()[0]` rather than naming a crop, and carrot is both alphabetically
+  first and the right default - it is the cheapest seed and the fastest
+  feedback. This is the whole of the first sim hash move below; confirmed by
+  putting wheat back temporarily and watching the hash return to the old
+  number exactly.
+- The 0018 group is about wheat, so it now **asks for wheat by name** instead
+  of leaning on whatever the default happens to be.
+- `Farming.select_seed()` is called straight from the HUD rather than going
+  through `state["intent"]`, matching `Building.select()`. A selection has no
+  rule to decide and no tick to wait for - it is a mode, not an action. The
+  autoplayer of task 0067 calls the same function.
+- The number keys are read as **keycodes, not named actions**. An action per
+  crop would mean editing `project.godot` every time somebody adds a
+  dictionary entry, which is the opposite of what this task is for. Task 0095
+  rebinds the named actions; a hotbar stays positional.
+- The strip shows **value per day**, not sale price, because sale price is the
+  wrong pair of numbers to compare: corn sells for more than carrot and carrot
+  is worth nearly three times as much per plot per day.
+
+### Hashes
+
+Two deliberate moves, in two steps.
+
+| | from | to | why |
+|---|---|---|---|
+| sim hash | `721873783` | `431908473` | a new farm starts on carrot, not wheat |
+| data hash | `1636540132` | `3327150656` | seed costs 3/6/4 -> 2/4/1 |
+| sim hash | `431908473` | `670145679` | id-keyed Dictionaries now fold in text order |
+| data hash | `3327150656` | `553378396` | same, for `GameData.digest()` |
+
+`python tools/verify.py` prints PASS: 582 asserts, 163 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

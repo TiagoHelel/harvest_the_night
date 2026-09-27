@@ -123,8 +123,7 @@ static func missing(state: Dictionary, cost: Dictionary) -> Dictionary:
 ## the day something in this file draws from the RNG the hash would start
 ## depending on how a literal was typed.
 static func _sorted(d: Dictionary) -> Array:
-	var keys: Array = d.keys()
-	keys.sort()
+	var keys := GameData.sorted_names(d.keys())
 	return keys
 
 

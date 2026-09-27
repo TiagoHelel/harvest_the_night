@@ -34,7 +34,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 9
+const CASES := 10
 
 var passed := 0
 var failed := 0
@@ -73,6 +73,7 @@ func _run() -> void:
 	await _case_0022_reality()
 	await _case_0023_build_mode()
 	await _case_0027_the_loop()
+	await _case_0028_seeds()
 	_finish()
 
 
@@ -1038,3 +1039,121 @@ func expect(ok: bool, what: String, detail: String = "") -> void:
 func _fail(what: String, detail: String = "") -> void:
 	failed += 1
 	print("  FAIL  ", what, "  ", detail)
+
+
+## 0028 - picking a seed with a number key, and the strip that says why.
+func _case_0028_seeds() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var hud: DayHud = require_control("DayHud")
+	if driver == null or hud == null:
+		_completed += 1
+		await close_scene()
+		return
+
+	var state := driver.state
+	var ids := Farming.seeds()
+
+	# **There is a row per crop, and it was built from the table.** Nothing in
+	# the HUD names a crop, so a fourth one appears here on its own.
+	for id in ids:
+		var row: Label = require_control("seed_%s" % id)
+		expect(row != null, "the strip has a row for %s" % id)
+		if row == null:
+			continue
+		expect(row.text.contains(str(id)), "which says what it is", row.text)
+		expect(row.text.contains("%ds" % Farming.seconds_to_grow(id)),
+			"and how long it takes to grow", row.text)
+		expect(row.text.contains(str(Farming.value_per_day(id))),
+			"and what a plot of it is worth over a day", row.text)
+		expect(row.text.contains("$%d" % int((GameData.CROPS[id]
+			as Dictionary)["seed_cost"])), "and what the seed costs", row.text)
+
+	# **The chosen row is the lit one**, so the strip answers "what am I about
+	# to plant" without the player remembering which key they last pressed.
+	var first: Label = require_control("seed_%s" % ids[0])
+	var second: Label = require_control("seed_%s" % ids[1])
+	await frames(2)
+	expect(first.modulate != second.modulate,
+		"the selected crop is lit and the others are not",
+		"%s against %s" % [first.modulate, second.modulate])
+	var lit_colour := first.modulate
+
+	# **The number key picks**, through the real key, in the real scene.
+	expect(Farming.selected_seed(state) == StringName(ids[0]),
+		"the first crop is what a new farm starts on",
+		str(Farming.selected_seed(state)))
+	await tap_key(KEY_2)
+	await until(func() -> bool:
+		return Farming.selected_seed(state) == StringName(ids[1]),
+		"the 2 key to pick the second crop")
+	expect(Farming.selected_seed(state) == StringName(ids[1]),
+		"2 picks the second crop", str(Farming.selected_seed(state)))
+	await frames(2)
+	expect(second.modulate == lit_colour, "and the strip moves the light",
+		"%s" % second.modulate)
+	expect(first.modulate != lit_colour, "off the one it left", "%s"
+		% first.modulate)
+
+	# **A key past the last crop changes nothing**, rather than selecting
+	# something that is not there and failing at the furrow a minute later.
+	await tap_key(KEY_6)
+	await frames(2)
+	expect(Farming.selected_seed(state) == StringName(ids[1]),
+		"a number with no crop behind it is ignored",
+		str(Farming.selected_seed(state)))
+
+	# **And what gets planted is what the strip said.** Walk the farmer onto a
+	# plot, till it, plant it, and look at what came up.
+	await tap_key(KEY_3)
+	await until(func() -> bool:
+		return Farming.selected_seed(state) == StringName(ids[2]),
+		"the 3 key to pick the third crop")
+	var chosen := Farming.selected_seed(state)
+
+	var cell := _reachable_plot(state)
+	expect(cell != Vector2i(-1, -1), "there is soil to stand next to")
+	if cell != Vector2i(-1, -1):
+		var stand := cell + Vector2i(0, -1)
+		var who: Dictionary = state["player"]
+		who["pos"] = [stand.x * Player.SUBTILE + Player.SUBTILE / 2,
+			stand.y * Player.SUBTILE + Player.SUBTILE / 2]
+		who["facing"] = Player.SOUTH
+		await frames(2)
+		expect(Player.target(state) == cell, "the farmer is looking at it",
+			str(Player.target(state)))
+
+		await hold_key(KEY_SPACE, 4)
+		await until(func() -> bool: return Farming.is_tilled(state, cell),
+			"the ground to be turned over")
+		expect(Farming.is_tilled(state, cell), "space tills it")
+
+		await hold_key(KEY_SPACE, 4)
+		await until(func() -> bool: return Farming.crop_on(state, cell) != &"",
+			"a seed to go in")
+		expect(Farming.crop_on(state, cell) == chosen,
+			"and what went in is what the strip said it would be",
+			"%s, not %s" % [Farming.crop_on(state, cell), chosen])
+
+	# The strip is a day thing: it goes away with the day.
+	await hold_key(KEY_N, 4)
+	await until(func() -> bool: return not hud.visible, "the day HUD to go")
+	expect(not hud.visible, "and the seed strip goes with the day")
+	await tap_key(KEY_1)
+	await frames(2)
+	expect(Farming.selected_seed(state) == chosen,
+		"a number key at night picks nothing - there is no field to plant",
+		str(Farming.selected_seed(state)))
+
+	await close_scene()
+	_completed += 1     # last line: an abandoned case never gets here
+
+
+## A soil cell with a free tile above it to stand on.
+func _reachable_plot(state: Dictionary) -> Vector2i:
+	for cell in Farm.cells_of(state, Farm.Terrain.SOIL):
+		if not Farm.is_empty(state, cell) or Farming.is_tilled(state, cell):
+			continue
+		if Farm.walkable(state, cell + Vector2i(0, -1)):
+			return cell
+	return Vector2i(-1, -1)

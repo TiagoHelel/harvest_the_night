@@ -122,6 +122,5 @@ static func _standing(state: Dictionary) -> int:
 
 
 static func _sorted(d: Dictionary) -> Array:
-	var keys: Array = d.keys()
-	keys.sort()
+	var keys := GameData.sorted_names(d.keys())
 	return keys

@@ -17,6 +17,15 @@ extends Control
 ## a few tenths of a second - so picking up wood is visible from the corner of
 ## the eye rather than only to somebody watching the number.
 ##
+## ## The seed strip
+##
+## Down the left, one row per crop: what it costs, how long it takes and what
+## a plot of it is worth over a whole day. **That last number is the reason the
+## strip exists** - corn sells for more than carrot and carrot is worth more per
+## day, and a player comparing the two sale prices is comparing the wrong pair
+## of numbers. The rows are built from `Farming.seeds()`, so a fourth crop
+## appears here, on a number key, without this file being touched.
+##
 ## ## The night button
 ##
 ## Bottom right, and it says what it will do rather than just "night". It is a
@@ -34,6 +43,11 @@ const SHOWN: Array = [
 ## How long a changed number stays lit.
 const FLASH_SECONDS := 0.45
 
+## The keys that pick a seed, in `Farming.seeds()` order.
+const SEED_KEYS: Array = [KEY_1, KEY_2, KEY_3, KEY_4, KEY_5, KEY_6]
+
+const PICKED := Color(1.0, 0.92, 0.62)
+
 const DIM := Color(0.62, 0.60, 0.70)
 const LIT := Color(1.0, 0.95, 0.70)
 const WARM := Color(0.95, 0.85, 0.55)
@@ -45,6 +59,7 @@ var _night: Button
 var _labels: Dictionary = {}        # resource id -> Label
 var _last: Dictionary = {}          # resource id -> the number it last showed
 var _flash: Dictionary = {}         # resource id -> seconds of glow left
+var _seed_rows: Dictionary = {}     # crop id -> Label
 
 
 func _ready() -> void:
@@ -78,6 +93,8 @@ func _ready() -> void:
 			_labels[id] = label
 			_last[id] = -1
 
+	_build_seed_strip()
+
 	_night = Button.new()
 	_night.name = "NightButton"
 	_night.text = "SWITCH TO NIGHT"
@@ -87,6 +104,31 @@ func _ready() -> void:
 	_night.focus_mode = Control.FOCUS_ALL          # the keyboard can reach it
 	_night.pressed.connect(_ask_for_night)
 	add_child(_night)
+
+
+## One row per crop, read off the data. Nothing here names wheat, corn or
+## carrot: the strip is whatever `GameData.CROPS` turned out to hold.
+func _build_seed_strip() -> void:
+	var ids := Farming.seeds()
+
+	var strip := ColorRect.new()
+	strip.name = "SeedStrip"
+	strip.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	strip.color = Color(0.05, 0.04, 0.09, 0.66)
+	strip.position = Vector2(4, 33)
+	strip.size = Vector2(118, 13 + ids.size() * 10)
+	add_child(strip)
+
+	var heading := _label("SeedHeading", Vector2(7, 35), WARM)
+	heading.text = "# CROP    $  TIME  /DAY"
+
+	for i in ids.size():
+		var id: StringName = ids[i]
+		var row := _label("seed_%s" % id, Vector2(7, 46 + i * 10), DIM)
+		row.text = "%d %-7s $%-2d %3ds  %2d" % [i + 1, str(id),
+			int((GameData.CROPS[id] as Dictionary)["seed_cost"]),
+			Farming.seconds_to_grow(id), Farming.value_per_day(id)]
+		_seed_rows[id] = row
 
 
 func show_state(state: Dictionary) -> void:
@@ -103,6 +145,21 @@ func _process(delta: float) -> void:
 	# `N` does what the button does, for a player whose hands are on the keys.
 	if Input.is_action_just_pressed(&"night"):
 		_ask_for_night()
+
+
+## **The number keys are read as keys, not as actions.** One action per crop
+## would put a `plant_crop_4` in `project.godot` every time somebody adds a
+## dictionary entry, which is the opposite of what this task is for. Task 0095
+## rebinds the named actions; these stay positional, the way a hotbar is.
+func _unhandled_input(event: InputEvent) -> void:
+	if _state.is_empty() or int(_state["phase"]) != Phases.DAY:
+		return
+	var key := event as InputEventKey
+	if key == null or not key.pressed or key.echo:
+		return
+	var slot := SEED_KEYS.find(key.keycode)
+	if slot >= 0 and Farming.select_seed_at(_state, slot):
+		get_viewport().set_input_as_handled()
 
 
 ## Ask the rules to start the night. **The HUD does not change the phase**: it
@@ -143,6 +200,12 @@ func _refresh(force: bool) -> void:
 			_flash[id] = FLASH_SECONDS
 		_last[id] = held
 		(_labels[id] as Label).text = "%s %d" % [_short(id), held]
+
+	# The chosen row is lit, so the strip answers "what am I about to plant"
+	# without the player having to remember which key they last pressed.
+	var chosen := Farming.selected_seed(_state)
+	for id in _seed_rows:
+		(_seed_rows[id] as Label).modulate = PICKED if id == chosen else DIM
 
 	# **Past dusk the button asks.** It never presses itself: `design.md`
 	# promises the player switches reality when they want to.

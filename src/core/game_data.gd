@@ -146,25 +146,49 @@ const STARTING_RESOURCES: Dictionary = {   # LEVER: units each, 0-40
 
 ## The three crops of `design.md`, each with a different reason to plant it.
 ##
-## Wheat is the money crop, corn is the industry crop - oil and gunpowder come
-## out of it - and carrot is the food crop, which is what repairs a wall at
-## three in the morning. Ranked by money alone carrot is the worst, and that is
-## the point: it is not bought for money.
+## ## Money, attention, capital - pick two
+##
+## Per plot across a 240 second day, with the seed paid for:
+##
+##     carrot  60s   seed $1   net  5  x 4 harvests  = 20     four visits
+##     wheat   90s   seed $2   net  6  x 2 harvests  = 12     two visits
+##     corn   180s   seed $4   net 11  x 1 harvest   = 11     one visit
+##
+## Carrot pays the most and costs the least to start - and wants you standing in
+## the field all day. Corn pays the least and asks for one visit and four
+## dollars, so it is what you plant before going down the mine. Wheat is neither
+## and beats each of them at something: more money than corn, half the walking
+## of carrot.
+##
+## **No crop is better than another on money, visits and seed cost at once** -
+## `check_crops()` enforces that, so a later balance pass cannot quietly flatten
+## the choice. Before this was tuned it was flat: wheat paid 10 a day to
+## carrot's 8 for half the walking and a cheaper seed, which is not a choice,
+## it is a trap.
+##
+## The **seed costs** are what carry the balance; the sale prices are
+## `design.md` section 6 and stay where the document put them.
+##
+## On top of the money each one feeds something the others do not: wheat is the
+## money crop, corn is the industry crop - oil and gunpowder come out of it -
+## and carrot is the food crop, which is what repairs a wall at three in the
+## morning. Which is why corn stays worth planting even on the arithmetic
+## above: the day you need gunpowder, corn is the only crop that makes any.
 const CROPS: Dictionary = {
 	WHEAT: {
-		"seed_cost": 3,                 # LEVER: money, 1-8
+		"seed_cost": 2,                 # LEVER: money, 1-8
 		"growth_ticks": 90 * SECONDS,   # LEVER: ticks, 30-180 seconds worth
 		"yield": 2,                     # LEVER: units per harvest, 1-4
 		"stages": 4,
 	},
 	CORN: {
-		"seed_cost": 6,                 # LEVER: money, 3-12
+		"seed_cost": 4,                 # LEVER: money, 1-10
 		"growth_ticks": 180 * SECONDS,  # LEVER: ticks, 90-300 seconds worth
 		"yield": 3,                     # LEVER: units per harvest, 2-5
 		"stages": 4,
 	},
 	CARROT: {
-		"seed_cost": 4,                 # LEVER: money, 2-8
+		"seed_cost": 1,                 # LEVER: money, 1-8
 		"growth_ticks": 60 * SECONDS,   # LEVER: ticks, 30-120 seconds worth
 		"yield": 2,                     # LEVER: units per harvest, 1-4
 		"stages": 4,
@@ -724,6 +748,30 @@ static func validate() -> Array:
 	return errors
 
 
+## Sort ids alphabetically, by the text of them.
+##
+## **`Array.sort()` on StringNames does not do this.** GDScript compares a
+## StringName by its internal pointer, which is fast and is why the type
+## exists - and which means a "sorted" array of them comes out in the order the
+## strings happened to be interned in. Measured, not assumed: adding a fourth
+## crop produced `[pumpkin, carrot, corn, wheat]` out of a `.sort()`.
+##
+## That order is stable within a build and changes when somebody moves two
+## `const` lines, which is the worst kind of stable: the rules would iterate in
+## a different order and the determinism hash would move, for a diff that
+## touched no behaviour at all. Every place in `src/core/` that sorts ids goes
+## through here.
+static func sorted_names(values: Array) -> Array:
+	var text: Array = []
+	for v in values:
+		text.append(String(v))
+	text.sort()
+	var out: Array = []
+	for s in text:
+		out.append(StringName(s))
+	return out
+
+
 static func check_crops(crops: Dictionary) -> Array:
 	var errors: Array = []
 	for crop_id in crops:
@@ -733,7 +781,36 @@ static func check_crops(crops: Dictionary) -> Array:
 			errors.append("crop '%s' has no sell price" % crop_id)
 		if int((crops[crop_id] as Dictionary)["growth_ticks"]) <= 0:
 			errors.append("crop '%s' grows in no time at all" % crop_id)
+
+	# **No crop may be the right answer at every money level.** A crop that
+	# pays at least as much per day, for no more visits, off a no larger seed,
+	# is a crop that makes every other one a mistake - and three crops one of
+	# which is always correct is one crop and two traps.
+	#
+	# This is computed rather than asserted so that the fourth crop somebody
+	# adds is checked on the way in, at boot, by name.
+	var ids := sorted_names(crops.keys())
+	for a in ids:
+		for b in ids:
+			if a == b:
+				continue
+			var x := _crop_offer(crops, a)
+			var y := _crop_offer(crops, b)
+			if x["value"] >= y["value"] and x["visits"] <= y["visits"] 					and x["seed"] <= y["seed"]:
+				errors.append(("crop '%s' dominates '%s' - %s against %s; "
+					+ "move a seed cost") % [a, b, x, y])
 	return errors
+
+
+## What one plot of a crop offers over a day: money, trips, and the money it
+## takes to start. The three axes `check_crops()` refuses to let one crop win
+## outright.
+static func _crop_offer(crops: Dictionary, id: StringName) -> Dictionary:
+	var data: Dictionary = crops[id]
+	var visits := DAY_TICKS / maxi(int(data["growth_ticks"]), 1)
+	var net := int(data["yield"]) * int(SELL_PRICE.get(id, 0)) 		- int(data["seed_cost"])
+	return {"value": net * visits, "visits": visits,
+		"seed": int(data["seed_cost"])}
 
 
 static func check_gathering(nodes: Dictionary) -> Array:

@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 20
+const GROUPS := 21
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -84,6 +84,7 @@ func _run() -> void:
 	_task_0025_zombies()
 	_task_0026_combat()
 	_task_0027_the_loop()
+	_task_0028_crops()
 
 
 func _finish() -> void:
@@ -1084,6 +1085,10 @@ func _task_0017_stone() -> void:
 ## 0018 - wheat: till, plant, wait, harvest, and a night that changes nothing.
 func _task_0018_wheat() -> void:
 	var state := State.create(71)
+	# **Asked for by name.** Since task 0028 there are three crops and a new
+	# farm starts on carrot, the cheapest; a group about wheat has to say wheat
+	# rather than lean on whichever one happens to be the default.
+	Farming.select_seed(state, GameData.WHEAT)
 	var field := Farm.cells_of(state, Farm.Terrain.SOIL)
 	expect(field.size() == 48, "there is a field", str(field.size()))
 
@@ -1135,6 +1140,7 @@ func _task_0018_wheat() -> void:
 	# **A night changes nothing, and the morning picks up where it left off.**
 	# The done-when of this task, and the reason a plot is plain data.
 	var overnight := State.create(72)
+	Farming.select_seed(overnight, GameData.WHEAT)
 	var bed: Vector2i = Farm.cells_of(overnight, Farm.Terrain.SOIL)[3]
 	Interact.complete(overnight, bed, &"till")
 	Interact.complete(overnight, bed, &"plant")
@@ -1170,6 +1176,7 @@ func _task_0018_wheat() -> void:
 
 	# A whole field, because one plot is not a field.
 	var farmed := State.create(74)
+	Farming.select_seed(farmed, GameData.WHEAT)
 	Resources.add(farmed, GameData.MONEY, 500)
 	for cell in Farm.cells_of(farmed, Farm.Terrain.SOIL):
 		Interact.complete(farmed, cell, &"till")
@@ -2403,3 +2410,218 @@ func _arm_the_farm(state: Dictionary, count: int) -> void:
 			if Farm.buildable(state, cell):
 				if Building.place(state, &"gun_tower", cell):
 					placed += 1
+
+
+## 0028 - three crops, and no right answer among them.
+func _task_0028_crops() -> void:
+	# **Sorting StringNames is not what it looks like.** `Array.sort()` orders
+	# them by internal pointer - by the order the strings were interned in -
+	# so a "sorted" list of ids comes out in source-file order and moves when
+	# somebody reorders two `const` lines. Found by adding a fourth crop and
+	# getting [pumpkin, carrot, corn, wheat] back. Everything in src/core/ that
+	# sorts ids goes through GameData.sorted_names() now, and this is the assert
+	# that keeps it there.
+	var jumbled: Array = [&"zebra", &"apple", &"mango", &"apple pie"]
+	expect(GameData.sorted_names(jumbled)
+		== [&"apple", &"apple pie", &"mango", &"zebra"],
+		"sorted_names sorts by the text, which is what sorted means",
+		str(GameData.sorted_names(jumbled)))
+	expect(GameData.sorted_names([]) == [], "and an empty list stays empty")
+
+	var ids := Farming.seeds()
+	expect(ids.size() == GameData.CROPS.size(),
+		"every crop is in the seed list", str(ids))
+	expect(ids == [GameData.CARROT, GameData.CORN, GameData.WHEAT],
+		"in a fixed, sorted order - the state is not allowed to depend on "
+		+ "Dictionary order", str(ids))
+
+	# **Each crop yields and times what the table says.** Planted, grown a tick
+	# at a time, and harvested through the real verbs.
+	for id in ids:
+		var data: Dictionary = GameData.CROPS[id]
+		var state := State.create(900)
+		Resources.gain(state, {GameData.MONEY: 100})
+		var money_before := Resources.amount(state, GameData.MONEY)
+		var cell := _a_plot(state)
+		expect(Farming.select_seed(state, id), "%s can be chosen" % id)
+		Farming.act(state, cell)                # till
+		Farming.act(state, cell)                # plant
+		expect(Farming.crop_on(state, cell) == id,
+			"%s is what went in the ground" % id,
+			str(Farming.crop_on(state, cell)))
+		expect(Resources.amount(state, GameData.MONEY)
+			== money_before - int(data["seed_cost"]),
+			"and the seed was paid for",
+			str(Resources.amount(state, GameData.MONEY)))
+
+		var needed := int(data["growth_ticks"])
+		Sim.advance(state, needed - 1)
+		expect(not Farming.is_ready(state, cell),
+			"%s is not ready a tick early" % id)
+		expect(Farming.verb_at(state, cell) == &"",
+			"and offers nothing to do while it grows", str(id))
+		Sim.advance(state, 1)
+		expect(Farming.is_ready(state, cell),
+			"%s is ready on the tick the table says" % id, str(needed))
+		expect(Farming.verb_at(state, cell) == &"harvest",
+			"and now it can be harvested")
+
+		var before := Resources.amount(state, id)
+		Farming.act(state, cell)
+		expect(Resources.amount(state, id) - before == int(data["yield"]),
+			"%s yields what the table says" % id,
+			str(Resources.amount(state, id) - before))
+		expect(Farming.is_tilled(state, cell)
+			and Farming.crop_on(state, cell) == &"",
+			"and leaves the ground turned over for the next one")
+
+	# **They differ, on every axis.** Three crops that grew at the same rate
+	# would be one crop with three names.
+	var times: Array = []
+	var values: Array = []
+	var costs: Array = []
+	for id in ids:
+		times.append(Farming.seconds_to_grow(id))
+		values.append(Farming.value_per_day(id))
+		costs.append(int((GameData.CROPS[id] as Dictionary)["seed_cost"]))
+		print("  %-7s $%d seed, %3ds, %d a harvest, %d visits, %d a day"
+			% [id, int((GameData.CROPS[id] as Dictionary)["seed_cost"]),
+				Farming.seconds_to_grow(id), Farming.value_per_harvest(id),
+				Farming.harvests_per_day(id), Farming.value_per_day(id)])
+	expect(_all_different(times), "no two crops grow at the same rate",
+		str(times))
+	expect(_all_different(values), "and none is worth the same over a day",
+		str(values))
+	expect(_all_different(costs), "and none costs the same to start",
+		str(costs))
+
+	# **No crop is the right answer at every money level.** More money per day,
+	# for no more trips across the farm, off a no larger seed, would make every
+	# other crop a mistake. `GameData.check_crops()` is what enforces it; this
+	# is the same sum spelled out, so a failure here names the pair.
+	for a in ids:
+		for b in ids:
+			if a == b:
+				continue
+			var seed_a := int((GameData.CROPS[a] as Dictionary)["seed_cost"])
+			var seed_b := int((GameData.CROPS[b] as Dictionary)["seed_cost"])
+			expect(not (Farming.value_per_day(a) >= Farming.value_per_day(b)
+				and Farming.harvests_per_day(a) <= Farming.harvests_per_day(b)
+				and seed_a <= seed_b),
+				"%s does not dominate %s" % [a, b],
+				"%d a day in %d visits off a $%d seed, against %d/%d/$%d"
+					% [Farming.value_per_day(a), Farming.harvests_per_day(a),
+						seed_a, Farming.value_per_day(b),
+						Farming.harvests_per_day(b), seed_b])
+
+	# And each one wins at something, which is the other half of a real choice.
+	expect(_wins_at(ids, func(id: StringName) -> int:
+		return Farming.value_per_day(id)) == GameData.CARROT,
+		"carrot pays the most over a day")
+	expect(_wins_at(ids, func(id: StringName) -> int:
+		return -Farming.harvests_per_day(id)) == GameData.CORN,
+		"corn asks for the fewest trips across the farm")
+	expect(_wins_at(ids, func(id: StringName) -> int:
+		return -int((GameData.CROPS[id] as Dictionary)["seed_cost"]))
+		== GameData.CARROT, "and carrot is what a broke player can afford")
+	expect(Farming.value_per_day(GameData.WHEAT)
+		> Farming.value_per_day(GameData.CORN)
+		and Farming.harvests_per_day(GameData.WHEAT)
+		< Farming.harvests_per_day(GameData.CARROT),
+		"wheat beats corn on money and carrot on walking")
+
+	# **A broke player has exactly one option**, which is what "no right answer
+	# at every money level" means when you have a dollar.
+	var broke := State.create(901)
+	Resources.spend(broke, GameData.MONEY,
+		Resources.amount(broke, GameData.MONEY) - 1)
+	expect(Resources.amount(broke, GameData.MONEY) == 1, "a dollar left")
+	var affordable: Array = []
+	for id in ids:
+		if int((GameData.CROPS[id] as Dictionary)["seed_cost"]) <= 1:
+			affordable.append(id)
+	expect(affordable == [GameData.CARROT],
+		"and carrot is the only thing that can go in the ground",
+		str(affordable))
+
+	# The furrow refuses rather than half-planting: no money, no seed, and the
+	# plot is still tilled and still empty.
+	var poor_cell := _a_plot(broke)
+	Farming.select_seed(broke, GameData.CORN)
+	Farming.act(broke, poor_cell)               # till
+	Farming.act(broke, poor_cell)               # plant - and cannot
+	expect(Farming.crop_on(broke, poor_cell) == &"",
+		"corn at four dollars does not go in on one")
+	expect(Resources.amount(broke, GameData.MONEY) == 1,
+		"and the dollar is safe")
+	expect(Farming.verb_at(broke, poor_cell) == &"plant",
+		"the plot is still waiting for a seed")
+
+	# **Selecting refuses what is not a crop**, rather than storing it and
+	# failing at the furrow a minute later.
+	var picky := State.create(902)
+	expect(not Farming.select_seed(picky, &"gun_tower"),
+		"a gun tower is not a seed")
+	expect(not Farming.select_seed_at(picky, ids.size()),
+		"and there is no slot past the last crop")
+	expect(Farming.selected_seed(picky) == StringName(ids[0]),
+		"so the selection is untouched", str(Farming.selected_seed(picky)))
+	expect(Farming.select_seed_at(picky, 1), "slot 2 picks the second crop")
+	expect(Farming.selected_seed(picky) == StringName(ids[1]),
+		"which is the sorted second", str(Farming.selected_seed(picky)))
+
+	# **A fourth crop is one dictionary entry.** Nothing outside GameData names
+	# a crop, so the list the menu, the number keys and the save file work from
+	# is whatever the table turned out to hold.
+	expect(Farming.seeds().size() == GameData.CROPS.size(),
+		"the seed list is the crop table, not a copy of it")
+	expect(DayHud.SEED_KEYS.size() > GameData.CROPS.size(),
+		"and there is a spare number key for the next one",
+		str(DayHud.SEED_KEYS.size()))
+	expect(GameData.check_crops(GameData.CROPS).is_empty(),
+		"the shipped table passes its own balance check",
+		str(GameData.check_crops(GameData.CROPS)))
+
+	# The check has teeth: a crop that beats another on all three axes is
+	# refused. Built here rather than shipped, so the table stays honest.
+	var rigged: Dictionary = GameData.CROPS.duplicate(true)
+	(rigged[GameData.WHEAT] as Dictionary)["seed_cost"] = 0
+	(rigged[GameData.WHEAT] as Dictionary)["growth_ticks"] = \
+		int((GameData.CROPS[GameData.CARROT] as Dictionary)["growth_ticks"])
+	expect(not GameData.check_crops(rigged).is_empty(),
+		"a free crop that grows as fast as carrot and sells for more is refused",
+		str(GameData.check_crops(rigged)))
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## A soil cell nobody has touched.
+func _a_plot(state: Dictionary) -> Vector2i:
+	for cell in Farm.cells_of(state, Farm.Terrain.SOIL):
+		if Farm.is_empty(state, cell) and not Farming.is_tilled(state, cell):
+			return cell
+	return Vector2i(-1, -1)
+
+
+func _all_different(values: Array) -> bool:
+	for i in values.size():
+		for j in range(i + 1, values.size()):
+			if values[i] == values[j]:
+				return false
+	return true
+
+
+## Which id scores highest on `score`, or `&""` when two of them tie.
+func _wins_at(ids: Array, score: Callable) -> StringName:
+	var best: StringName = &""
+	var best_score := -(1 << 40)
+	var tied := false
+	for id in ids:
+		var n := int(score.call(id))
+		if n > best_score:
+			best_score = n
+			best = StringName(id)
+			tied = false
+		elif n == best_score:
+			tied = true
+	return &"" if tied else best

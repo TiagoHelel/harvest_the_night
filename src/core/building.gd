@@ -49,8 +49,7 @@ static func initial() -> Dictionary:
 ## cannot be paid for and says why.
 static func catalogue(state: Dictionary) -> Array:
 	var out: Array = []
-	var ids: Array = GameData.DEFENCES.keys()
-	ids.sort()
+	var ids := GameData.sorted_names(GameData.DEFENCES.keys())
 	for id in ids:
 		if allowed_in_phase(state, id):
 			out.append(id)
@@ -98,8 +97,7 @@ static func why_not(state: Dictionary, id: StringName, cell: Vector2i) -> String
 	if not affordable(state, id):
 		var short := Resources.missing(state, cost_of(id))
 		var parts: Array = []
-		var keys: Array = short.keys()
-		keys.sort()
+		var keys := GameData.sorted_names(short.keys())
 		for res in keys:
 			parts.append("%d %s" % [short[res], res])
 		return "short " + ", ".join(parts)
@@ -119,8 +117,7 @@ static func refund_for(state: Dictionary, cell: Vector2i) -> Dictionary:
 ## be checked against every structure at once rather than one at a time.
 static func refund_for_cost(cost: Dictionary) -> Dictionary:
 	var back := {}
-	var keys: Array = cost.keys()
-	keys.sort()
+	var keys := GameData.sorted_names(cost.keys())
 	for res in keys:
 		# **Rounded down**, so the round trip is always a loss. Rounding up on
 		# a cheap structure would make place-and-sell a money printer, which is

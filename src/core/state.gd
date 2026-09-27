@@ -94,10 +94,22 @@ static func _fold(h: int, value: Variant) -> int:
 			# two states that are equal in every value can still be built in
 			# different orders. Sorting is what makes this a hash of the state
 			# rather than a hash of how the state was assembled.
+			#
+			# **Sorted by their text**, because the keys here are a mix of ints
+			# and StringNames and `Array.sort()` orders a StringName by its
+			# internal pointer - that is, by the order the strings happened to
+			# be interned in, which moves when somebody reorders two `const`
+			# lines. A hash that depended on that would be a hash of the source
+			# file's layout. Text order is not the prettiest total order - "10"
+			# sorts before "2" - but it is the same one on every build, which
+			# is the only property this needs.
 			var d: Dictionary = value
-			var keys: Array = d.keys()
+			var keys: Array = []
+			for k in d:
+				keys.append([str(k), k])
 			keys.sort()
-			for k in keys:
+			for pair in keys:
+				var k: Variant = (pair as Array)[1]
 				h = _fold(h, k)
 				h = _fold(h, d[k])
 		TYPE_ARRAY:

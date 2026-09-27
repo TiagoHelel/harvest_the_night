@@ -49,8 +49,7 @@ static func initial() -> Dictionary:
 ## Every recipe a station can make, in a fixed order.
 static func recipes_at(station: StringName) -> Array:
 	var out: Array = []
-	var ids: Array = GameData.RECIPES.keys()
-	ids.sort()
+	var ids := GameData.sorted_names(GameData.RECIPES.keys())
 	for id in ids:
 		if (GameData.RECIPES[id] as Dictionary)["station"] == station:
 			out.append(id)
@@ -149,7 +148,8 @@ static func tick(state: Dictionary) -> void:
 		return
 
 	# Sorted, so that two stations finishing on the same tick deliver in the
-	# same order every run.
+	# same order every run. **Plain `sort()` here and not `sorted_names()`**:
+	# these keys are cell indices, and integers sort as integers.
 	var done: Array = []
 	var keys: Array = all.keys()
 	keys.sort()
@@ -169,8 +169,7 @@ static func tick(state: Dictionary) -> void:
 ## the pile of things waiting to be placed.
 static func _deliver(state: Dictionary, recipe_id: StringName) -> void:
 	var output: Dictionary = (GameData.RECIPES[recipe_id] as Dictionary)["output"]
-	var ids: Array = output.keys()
-	ids.sort()
+	var ids := GameData.sorted_names(output.keys())
 	for id in ids:
 		var n := int(output[id])
 		if GameData.RESOURCES.has(id):

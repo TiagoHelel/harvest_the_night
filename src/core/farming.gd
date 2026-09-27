@@ -33,17 +33,83 @@ const EMPTY_PLOT := {"crop": &"", "growth": 0, "watered": false}
 static func initial() -> Dictionary:
 	return {
 		"plots": {},
-		# Which seed goes in the ground. Task 0028 puts three crops behind this
-		# and task 0040 sells them; until then there is one and it is wheat.
+		# Which seed goes in the ground, chosen from the strip in the day HUD.
 		#
 		# **Not `"seed"`.** That name is already the run's RNG seed, and the
 		# state is one flat namespace: this collided silently and planting did
 		# nothing at all until `State.create()` learned to refuse duplicates.
-		"selected_seed": GameData.WHEAT,
+		"selected_seed": seeds()[0],
 	}
 
 
 # ------------------------------------------------------------------- asking
+
+## Every crop there is, in a fixed order, which is the order the seed strip
+## draws them and the order the number keys pick them.
+##
+## **Read off `GameData.CROPS`, sorted.** There is no list of crops anywhere
+## else - adding a fourth is one dictionary entry and it appears in the menu, on
+## a number key and in the save file without a line of code being written. The
+## sort is what makes that safe: Dictionary order in the state is not something
+## the determinism hash is allowed to depend on.
+static func seeds() -> Array:
+	return GameData.sorted_names(GameData.CROPS.keys())
+
+
+static func selected_seed(state: Dictionary) -> StringName:
+	return StringName(state["selected_seed"])
+
+
+## Choose what the next `plant` puts in the ground. Refuses anything that is
+## not a crop rather than storing it and failing later at the furrow.
+static func select_seed(state: Dictionary, id: StringName) -> bool:
+	if not GameData.CROPS.has(id):
+		return false
+	state["selected_seed"] = id
+	return true
+
+
+## Pick by position in `seeds()`, which is what the number keys send.
+static func select_seed_at(state: Dictionary, index: int) -> bool:
+	var ids := seeds()
+	if index < 0 or index >= ids.size():
+		return false
+	return select_seed(state, StringName(ids[index]))
+
+
+# --------------------------------------------------------------- the choice
+
+## What one plot of this crop is worth over one whole day, seed paid for.
+##
+## **This is the number the three crops are balanced on**, and the menu shows
+## it, because the interesting part of the choice is not visible otherwise: corn
+## pays four times what carrot pays per harvest and carrot harvests four times
+## as often, so a player comparing the two sale prices is comparing the wrong
+## pair of numbers.
+##
+## Harvests are counted whole. Half a corn at dusk is worth nothing, which is
+## exactly why the slow crop wants planting in the morning.
+static func value_per_day(id: StringName) -> int:
+	return value_per_harvest(id) * harvests_per_day(id)
+
+
+## Sale value of one harvest less what the seed cost.
+static func value_per_harvest(id: StringName) -> int:
+	var data: Dictionary = GameData.CROPS[id]
+	return int(data["yield"]) * int(GameData.SELL_PRICE[id]) 		- int(data["seed_cost"])
+
+
+## How many times a plot of this comes round in a day. Also how many times the
+## player has to walk back to it, which is the real cost of the fast crops.
+static func harvests_per_day(id: StringName) -> int:
+	var ticks := int((GameData.CROPS[id] as Dictionary)["growth_ticks"])
+	return GameData.DAY_TICKS / maxi(ticks, 1)
+
+
+## Growing time in whole seconds, for the menu.
+static func seconds_to_grow(id: StringName) -> int:
+	return int((GameData.CROPS[id] as Dictionary)["growth_ticks"]) 		/ GameData.TICK_HZ
+
 
 ## The plot on a cell, or an empty Dictionary when the ground is untouched.
 static func plot(state: Dictionary, cell: Vector2i) -> Dictionary:

@@ -1,7 +1,7 @@
 # 0028 - Corn and carrot
 
 - **Phase:** 2 - The full day
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0018
 - **Likely files:** src/core/farming.gd, src/core/game_data.gd
 
