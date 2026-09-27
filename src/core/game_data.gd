@@ -675,3 +675,44 @@ static func check_nights(nights: Array) -> Array:
 		errors.append("MVP_NIGHTS is %d but %d nights are written"
 			% [MVP_NIGHTS, nights.size()])
 	return errors
+
+
+## One integer standing for every balance table in this file.
+##
+## The **data guard**, which is a different question from the simulation guard.
+## The simulation hash answers "do the rules still do the same thing"; this one
+## answers "is the design still the design". Today no rule reads a lever yet -
+## the systems that will are tasks 0018 onward - so a state hash would be blind
+## to a balance change, and a balance change is exactly the thing that must
+## never happen by accident.
+##
+## Every table is listed here by hand. **A new table means a line here**, and
+## the alternative - reflecting over the class - would silently stop covering
+## whatever was added last.
+static func digest() -> int:
+	return State.hash_of({
+		"time": [TICK_HZ, DAY_TICKS, DUSK_AT_TICK, PREPARATION_TICKS,
+			MAX_CATCH_UP_TICKS],
+		"farm": [GRID_WIDTH, GRID_HEIGHT, TILE_SIZE, HOUSE_HP],
+		"resources": RESOURCES,
+		"sell_price": SELL_PRICE,
+		"trade": [BUY_MARKUP, SELL_BACK_FRACTION],
+		"crops": CROPS,
+		"water": [WATER_GROWTH_BONUS],
+		"gathering": GATHERING,
+		"fishing": FISHING,
+		"recipes": RECIPES,
+		"queue": [QUEUE_LENGTH],
+		"buildings": BUILDINGS,
+		"power": [BROWNOUT_RATE],
+		"defences": DEFENCES,
+		"repair": [REPAIR_COST_PER_HP, REPAIR_TICKS_PER_HP,
+			HOUSE_REPAIR_PENALTY],
+		"ability": ABILITY,
+		"speeds": SPEEDS,
+		"enemies": ENEMIES,
+		"nights": NIGHTS,
+		"wave_gap": [WAVE_GAP_TICKS, MVP_NIGHTS],
+		"rewards": REWARDS,
+		"defeat": [DEFEAT_RESOURCE_LOSS, DEFEAT_KEEPS_MONEY, DEFEAT_KEEPS_TECH],
+	})

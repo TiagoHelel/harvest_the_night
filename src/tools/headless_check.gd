@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 2
+const GROUPS := 3
 
 var passed := 0
 var failed := 0
@@ -64,6 +64,7 @@ func _process(delta: float) -> bool:
 func _run() -> void:
 	_task_0002_tick_and_rng()
 	_task_0003_game_data()
+	_task_0005_guards()
 
 
 func _finish() -> void:
@@ -265,5 +266,29 @@ func _task_0003_game_data() -> void:
 
 	# Dusk falls inside the day.
 	expect(GameData.DUSK_AT_TICK < GameData.DAY_TICKS, "dusk is before night")
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## 0005 - the two hash guards: the numbers they watch have to be stable, and
+## they have to actually be watching something.
+func _task_0005_guards() -> void:
+	# A digest that changed between two calls would fail the guard every run
+	# and teach everybody to pass --accept without looking, which is how a
+	# guard becomes decoration.
+	expect(GameData.digest() == GameData.digest(),
+		"the data digest is stable across calls")
+	expect(GameData.digest() != State.hash_of({}),
+		"the data digest actually folds the tables")
+
+	# The scenario the sim guard runs must be reproducible for the guard to
+	# mean anything - the same property headless_check asserts for the tick,
+	# checked here at the exact length the guard uses.
+	var a := State.create(424242)
+	var b := State.create(424242)
+	Sim.advance(a, 20000)
+	Sim.advance(b, 20000)
+	expect(State.hash_of(a) == State.hash_of(b),
+		"the guarded scenario replays identically")
 
 	_completed += 1     # last line: an abandoned group never gets here

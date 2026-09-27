@@ -80,24 +80,29 @@ House rules, non-negotiable:
 python tools/verify.py
 ```
 
-Parse check, `headless_check`, the determinism guard, `input_check` and both
-exports. A check whose target does not exist yet prints SKIP - the backlog
-builds them one at a time, and an early task is not expected to have all of
-them. It prints one PASS or FAIL. **Everything that is not a SKIP must pass.**
+Parse check, every script compiled with `--check-only`, `headless_check`, the
+two hash guards, `input_check` and both exports. A check whose target does not
+exist yet prints SKIP - the backlog builds them one at a time, and an early task
+is not expected to have all of them. It prints one PASS or FAIL. **Everything
+that is not a SKIP must pass.**
 
 Run `verify.py` rather than the Godot scripts by hand: it does `--import`
 first, which refreshes the global `class_name` cache. A brand new `class_name`
 is invisible to `--script` runs until that happens, and the error you get
 instead is a misleading "Identifier not declared in the current scope".
 
-About the hash:
+About the two hashes:
 
-- If the task **intentionally** changed a game rule, the hash will move. That
-  is fine: run `python tools/verify.py --accept`, and record the old and the new
-  number in the journal.
-- If it moved and the task had no business touching the rules, **that is a
-  bug**. Find it before doing anything else. A view-layer task moving the hash
-  means something in `src/ui/` is writing to the state.
+- The **sim hash** moves when the rules do: a fixed scenario, a fixed seed, a
+  fixed number of ticks. The **data hash** moves when the balance tables in
+  `game_data.gd` do. A port that changes no behaviour moves neither.
+- If the task **intentionally** moved one, that is fine: run
+  `python tools/verify.py --accept`, and record the old and the new number in
+  the journal. It prints both for you.
+- If one moved and the task had no business moving it, **that is a bug**. Find
+  it before doing anything else. A view-layer task moving the sim hash means
+  something in `src/ui/` is writing to the state; a task that was not a balance
+  pass moving the data hash means a number was changed in passing.
 
 If the task changed anything visible, capture the screenshots and **actually
 look at them** (once task 0082 exists):

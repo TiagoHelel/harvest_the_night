@@ -1,7 +1,7 @@
 # 0005 - verify.py and the determinism guard
 
 - **Phase:** 0 - Foundation
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0004
 - **Likely files:** tools/verify.py, tools/determinism_hash.txt, src/tools/determinism.gd
 

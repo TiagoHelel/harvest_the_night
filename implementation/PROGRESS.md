@@ -221,3 +221,50 @@ Notes:
   path and the watchdog is the backstop.
 - `verify.py`'s 120s timeout stays as the outermost belt. It is now the third
   line of defence rather than the only one.
+
+## 0005 - verify.py and the determinism guard - done 2026-09-27
+
+What changed: `src/tools/determinism.gd` runs a fixed scenario and prints two
+numbers, and `verify.py` guards both against baseline files. **Two guards, not
+one**, because they answer two different questions.
+
+Files: src/tools/determinism.gd, src/core/game_data.gd, tools/verify.py,
+tools/determinism_sim_hash.txt, tools/determinism_data_hash.txt,
+src/tools/headless_check.gd, implementation/README.md,
+implementation/prompts/00-RUNNER-LOOP.md
+
+Verify: PASS - 7 passed, 2 skipped, 8s. 60 asserts, 0 failed.
+
+**First baselines recorded: sim 2393142509, data 3714036227.**
+
+Notes:
+
+- **Why two.** The prompt's done-when says "changing a lever makes the hash move
+  and the run FAILs until --accept". It would not have. No rule reads a lever
+  yet - the systems that will are 0018 onward - so a hash of the simulated state
+  is blind to a balance change today, and a balance change is precisely the
+  thing that must never happen by accident. So:
+  - **sim hash**: `State.create(424242)` advanced 20000 ticks, hashed. Moves
+    when the rules do. Every system the backlog adds ticks inside `Sim.tick()`,
+    so each starts being covered the moment it lands without this file changing.
+  - **data hash**: `GameData.digest()`, a fold over every balance table. Moves
+    when the design does.
+  A port that changes no behaviour must move neither, which makes "port with
+  zero behaviour change" a checkable claim rather than a hopeful one - task 0042
+  depends on exactly that.
+- **Both directions were tested, not assumed:**
+  - lever `HOUSE_HP` 100 -> 110: data hash 3714036227 -> 1895612796, **FAIL**;
+    sim hash unchanged. `--accept` records it and prints `3714036227 ->
+    1895612796` with a reminder to journal it. Putting the lever back is caught
+    too - a revert is a change like any other.
+  - a rule change, `Sim.tick()` made to consume randomness: sim hash 2393142509
+    -> 2870855444, **FAIL**; data hash unchanged.
+  - no baseline at all: **FAIL** with "no baseline yet", not a silent pass.
+- `GameData.digest()` lists its tables by hand. Reflecting over the class would
+  have been shorter and would silently stop covering whatever was added last;
+  **a new table means a new line there**, and that is on purpose.
+- `determinism.gd` carries the same watchdog and the same reached-the-end flag
+  as `headless_check` - a scenario that dies half way must not print a number
+  anybody trusts.
+- `implementation/README.md` and the runner loop both talked about "the
+  determinism hash" in the singular. Updated.

@@ -27,7 +27,14 @@ GODOT = os.environ.get(
     "C:/Users/PC GAMER DA FAMILIA/Documents/Godot/"
     "Godot_v4.7.2-stable_win64_console.exe")
 
-HASH_FILE = os.path.join(ROOT, "tools", "determinism_hash.txt")
+# One guard per question. SIM asks whether the rules still do the same thing
+# from the same seed; DATA asks whether the design is still the design. A port
+# that changes no behaviour moves neither. A balance pass moves DATA and says
+# so in the journal. A new system that consumes randomness moves SIM.
+GUARDS = [
+    ("sim hash", r"^SIM (-?\d+)", "determinism_sim_hash.txt"),
+    ("data hash", r"^DATA (-?\d+)", "determinism_data_hash.txt"),
+]
 
 # Budget on the development machine. Every row is timed and the total is
 # printed, so the budget is a measurement rather than a hope.
@@ -185,34 +192,55 @@ def check_script(name, script, missing_note, args=(), pattern=None):
 
 
 def check_determinism(accept):
-    """The hash guard.
+    """The hash guards.
 
-    The baseline is a file rather than a comment so that moving it is a diff
+    Each baseline is a file rather than a comment so that moving it is a diff
     somebody reviews, and the failure names the command that accepts it: a
-    guard whose fix nobody can remember is a guard people switch off."""
-    name = "determinism hash"
+    guard whose fix nobody can remember is a guard people switch off.
+
+    One run of the scenario produces every number, so adding a guard costs a
+    regex and a filename rather than another Godot launch."""
     script = "src/tools/determinism.gd"
     if not os.path.exists(rel("project.godot")):
-        return skip(name, "no project yet")
+        for name, _, _ in GUARDS:
+            skip(name, "no project yet")
+        return True
     if not os.path.exists(rel(*script.split("/"))):
-        return skip(name, "no determinism.gd yet - task 0005")
+        for name, _, _ in GUARDS:
+            skip(name, "no determinism.gd yet - task 0005")
+        return True
 
     code, out = godot(["--headless", "--script", "res://" + script],
                       timeout=SCRIPT_TIMEOUT_S)
+    if code == 124:
+        for name, _, _ in GUARDS:
+            check(name, False, "the scenario hung - it never reached quit()")
+        return False
     if code != 0:
-        return check(name, False, tail(out))
-    m = re.search(r"(-?\d{4,})", out)
+        for name, _, _ in GUARDS:
+            check(name, False, tail(out, 4))
+        return False
+
+    ok = True
+    for name, pattern, filename in GUARDS:
+        ok = guard_one(name, out, pattern, rel("tools", filename), accept) and ok
+    return ok
+
+
+def guard_one(name, out, pattern, path, accept):
+    m = re.search(pattern, out, re.M)
     current = m.group(1) if m else ""
     expected = ""
-    if os.path.exists(HASH_FILE):
-        expected = open(HASH_FILE, encoding="utf-8").read().strip()
+    if os.path.exists(path):
+        expected = open(path, encoding="utf-8").read().strip()
     moved = bool(expected) and bool(current) and current != expected
     if accept and current:
-        open(HASH_FILE, "w", encoding="utf-8", newline="\n").write(current + "\n")
+        with open(path, "w", encoding="utf-8", newline="\n") as f:
+            f.write(current + "\n")
     guards.append((name, expected, current, moved))
 
     if not current:
-        return check(name, False, "the script printed no number")
+        return check(name, False, "the scenario printed no number for it")
     if not expected:
         return check(name, bool(accept),
                      "recorded %s, the first baseline" % current if accept
@@ -223,7 +251,7 @@ def check_determinism(accept):
                      else "%s unchanged" % current)
     return check(name, current == expected,
                  "%s unchanged" % current if current == expected
-                 else "%s, expected %s - a rule changed. If on purpose: "
+                 else "%s, expected %s - something moved. If on purpose: "
                       "python tools/verify.py --accept" % (current, expected))
 
 

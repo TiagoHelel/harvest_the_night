@@ -105,7 +105,8 @@ A task is done when `python tools/verify.py` prints PASS. That runs:
 | backlog index | `BACKLOG.md` matches the Status lines |
 | godot import | no script errors anywhere |
 | `headless_check` | the game rules, every assert the backlog has added |
-| determinism guard | the hash in `tools/determinism_hash.txt` |
+| sim hash | the rules still do the same thing from the same seed |
+| data hash | the balance tables are still the balance tables |
 | `input_check` | walking, gathering, building, shopping, fighting |
 | exports | Windows and Web still build |
 
@@ -113,12 +114,17 @@ A task is done when `python tools/verify.py` prints PASS. That runs:
 task number that will create them. That is intended: it is what lets task 0001
 run the command at all. A SKIP is not a pass - it is a reminder.
 
-The determinism hash is the important one. If a task changes a game rule, the
-hash **will** change: that is fine, record the old and new value in the journal
-and accept the new baseline with `python tools/verify.py --accept`. If the hash
-changes and the task had no business touching the rules, that is a bug - find it
-before doing anything else. A task in `src/ui/` that moves the hash means the
-view layer is writing to the state.
+**The two hash guards are the important ones**, and they answer two different
+questions. The **sim hash** is a fixed scenario run for a fixed number of ticks
+from a fixed seed: it moves when the rules do. The **data hash** folds every
+balance table in `game_data.gd`: it moves when the design does. A port that
+changes no behaviour must move neither.
+
+Either moving on purpose is fine: record the old and the new number in the
+journal and accept the new baseline with `python tools/verify.py --accept`,
+which prints both. Either moving when the task had no business doing it is a
+bug - find it before anything else. A task in `src/ui/` that moves the sim hash
+means the view layer is writing to the state.
 
 ---
 

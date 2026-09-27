@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`#.......................`  **4 / 108 done**
+`#.......................`  **5 / 108 done**
 
-0 doing / 104 todo / 0 blocked across 9 phases.
+0 doing / 103 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0005 - verify.py and the determinism guard**. The whole of what is left is
+First up: **0006 - The phase machine: day, preparation, night, result**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,25 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-104 task(s) left, the ready ones first, then what they
+103 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0005 - verify.py and the determinism guard
-
-Ready to pick up.  Likely files: `tools/verify.py, tools/determinism_hash.txt, src/tools/determinism.gd`.
-
-A bootstrap `tools/verify.py` already exists so that task 0001 had something to run. Finish it: write the determinism guard it is waiting for, and make the export check real.
-
-- Read the bootstrap first - the check order and the SKIP behaviour are already there and are not up for redesign
-- `determinism.gd` runs a fixed scripted scenario for a fixed number of ticks and prints one integer
-- `--accept` records a moved hash and prints the old and the new number; `--fast` skips the exports
-- The Godot executable comes from `$GODOT`, defaulting to `C:/Users/PC GAMER DA FAMILIA/Documents/Godot/Godot_v4.7.2-stable_win64_console.exe`
-- Every row is timed and the total is printed
-
-  - done when: `python tools/verify.py` prints PASS on the scaffold, with SKIPs for what does not exist yet
-  - done when: Deleting the hash file then `--accept` records a first baseline
-  - done when: Changing a lever makes the hash move and the run FAIL until `--accept`
 
 ### 0006 - The phase machine: day, preparation, night, result
 
@@ -109,6 +93,21 @@ One place that owns every user setting and writes it to `user://settings.cfg`, s
   - done when: Delete the file: the game boots on defaults with no error
   - done when: Corrupt the file by hand: the game boots on defaults and says so in the log
 
+### 0011 - input_check harness
+
+Ready to pick up.  Likely files: `src/tools/input_check.gd`.
+
+The other half of the gate: drive real clicks and keys through the real UI with no human, so a refactor that breaks placing a tower is caught the same minute.
+
+- Runs headless against the real scenes, synthesising `InputEventMouseButton` and `InputEventKey`
+- A helper to click a world cell and one to click a named control
+- Prints `N cases, M failed` and exits non-zero on failure
+- Each case leaves the game in a known state for the next one
+- It is wired into `verify.py` from this task on
+
+  - done when: It drives at least one full interaction end to end
+  - done when: It fails loudly when a control it names is missing, rather than silently passing
+
 ### 0014 - Sprites generated from ASCII maps
 
 Ready to pick up.  Likely files: `tools/gen_sprites.py, sprites/`.
@@ -141,24 +140,9 @@ Quitting on day 4 and coming back to day 4. The state is already plain data, so 
   - done when: Save mid-night, load, and the determinism hash of the rest of the night matches an uninterrupted run
   - done when: A truncated save file is refused, not crashed on
 
-### 0011 - input_check harness
-
-Waits on 0005.  Likely files: `src/tools/input_check.gd`.
-
-The other half of the gate: drive real clicks and keys through the real UI with no human, so a refactor that breaks placing a tower is caught the same minute.
-
-- Runs headless against the real scenes, synthesising `InputEventMouseButton` and `InputEventKey`
-- A helper to click a world cell and one to click a named control
-- Prints `N cases, M failed` and exits non-zero on failure
-- Each case leaves the game in a known state for the next one
-- It is wired into `verify.py` from this task on
-
-  - done when: It drives at least one full interaction end to end
-  - done when: It fails loudly when a control it names is missing, rather than silently passing
-
 ### 0012 - Debug overlay
 
-Waits on 0005, 0006.  Likely files: `src/ui/debug_overlay.gd`.
+Waits on 0006.  Likely files: `src/ui/debug_overlay.gd`.
 
 The thing you actually want while tuning: what phase, what tick, what seed, how many entities and what the frame costs.
 
@@ -701,7 +685,7 @@ Day 1 should teach chop, plant, craft, build and the night button without a wall
 
 ### 0082 - Screenshots, and actually looking at them
 
-Waits on 0005, 0078.  Likely files: `src/tools/shot.gd, implementation/shots/`.
+Waits on 0078.  Likely files: `src/tools/shot.gd, implementation/shots/`.
 
 A command that puts the game in a known state and takes the picture, so a visual change can be checked instead of hoped for.
 
@@ -984,7 +968,7 @@ Escape stops the world, and pausing mid-night is safe.
 
 ### 0100 - Exports: Windows and Web
 
-Waits on 0005, 0092.  Likely files: `export_presets.cfg, tools/release.py`.
+Waits on 0092.  Likely files: `export_presets.cfg, tools/release.py`.
 
 Two builds anyone can run, from one command, with the Web one small enough that a stranger will wait for it.
 
@@ -1529,7 +1513,7 @@ Waits on 0060, 0058.  Likely files: `src/core/phases.gd, src/ui/result_screen.gd
 
 ### 0102 - A performance budget
 
-Waits on 0005, 0060.  Likely files: `tools/perf.py, src/tools/perf_check.gd`.
+Waits on 0060.  Likely files: `tools/perf.py, src/tools/perf_check.gd`.
 
 A number, checked automatically, instead of a feeling about whether it runs well.
 
@@ -1600,20 +1584,20 @@ For the player who beat the Giant and wants to know how far the farm goes. Cheap
   - done when: Night 25 is generated and playable
   - done when: The same seed generates the same night 25 twice
 
-## 0 - Foundation  (4/12)
+## 0 - Foundation  (5/12)
 
 - [x] **0001** [Godot project scaffold](prompts/0001-project-scaffold.md)
 - [x] **0002** [Fixed-timestep deterministic simulation](prompts/0002-sim-tick.md)
 - [x] **0003** [game_data.gd, the one file of levers](prompts/0003-game-data.md)
 - [x] **0004** [Harden the headless check harness](prompts/0004-headless-check.md)
-- [ ] **0005** [verify.py and the determinism guard](prompts/0005-verify-and-hash.md)
+- [x] **0005** [verify.py and the determinism guard](prompts/0005-verify-and-hash.md)
 - [ ] **0006** [The phase machine: day, preparation, night, result](prompts/0006-phase-machine.md)
 - [ ] **0007** [The resource ledger](prompts/0007-resource-ledger.md)
 - [ ] **0008** [The farm grid](prompts/0008-farm-grid.md)
 - [ ] **0009** [Settings singleton](prompts/0009-settings.md)
 - [ ] **0010** [Save the profile and the run](prompts/0010-save.md) - needs 0006, 0007, 0008
-- [ ] **0011** [input_check harness](prompts/0011-input-check.md) - needs 0005
-- [ ] **0012** [Debug overlay](prompts/0012-debug-overlay.md) - needs 0005, 0006
+- [ ] **0011** [input_check harness](prompts/0011-input-check.md)
+- [ ] **0012** [Debug overlay](prompts/0012-debug-overlay.md) - needs 0006
 
 ## 1 - The first playable build  (0/15)
 
@@ -1698,7 +1682,7 @@ For the player who beat the Giant and wants to know how far the farm goes. Cheap
 - [ ] **0079** [Resource icons and the UI kit](prompts/0079-ui-kit.md) - needs 0071, 0021
 - [ ] **0080** [A pixel font](prompts/0080-font.md) - needs 0014
 - [ ] **0081** [The UI theme](prompts/0081-theme.md) - needs 0079, 0080
-- [ ] **0082** [Screenshots, and actually looking at them](prompts/0082-screenshots.md) - needs 0005, 0078
+- [ ] **0082** [Screenshots, and actually looking at them](prompts/0082-screenshots.md) - needs 0078
 
 ## 6 - Sound and juice  (0/8)
 
@@ -1722,12 +1706,12 @@ For the player who beat the Giant and wants to know how far the farm goes. Cheap
 - [ ] **0097** [English and Portuguese](prompts/0097-i18n.md) - needs 0081
 - [ ] **0098** [Accessibility](prompts/0098-accessibility.md) - needs 0093, 0097
 - [ ] **0099** [An icon and a boot ident](prompts/0099-icon-ident.md) - needs 0014, 0091
-- [ ] **0100** [Exports: Windows and Web](prompts/0100-exports.md) - needs 0005, 0092
+- [ ] **0100** [Exports: Windows and Web](prompts/0100-exports.md) - needs 0092
 
 ## 8 - Ship the MVP  (0/8)
 
 - [ ] **0101** [Onboarding in seven lines](prompts/0101-onboarding.md) - needs 0041, 0097
-- [ ] **0102** [A performance budget](prompts/0102-perf-budget.md) - needs 0005, 0060
+- [ ] **0102** [A performance budget](prompts/0102-perf-budget.md) - needs 0060
 - [ ] **0103** [Crash and error reporting](prompts/0103-error-report.md) - needs 0010
 - [ ] **0104** [Saves survive an update](prompts/0104-save-compat.md) - needs 0010, 0062
 - [ ] **0105** [A playtest build](prompts/0105-playtest-build.md) - needs 0100, 0103
