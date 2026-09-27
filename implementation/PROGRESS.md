@@ -4859,3 +4859,108 @@ to what the requirement actually says.
 
 `python tools/verify.py` prints PASS: 2426 asserts, 502 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+
+## 0066 - Night 10 and the end of the run
+
+**The MVP is complete here.**
+
+    a whole run: 11 days, 10 nights won, 473 killed, 0 structures lost,
+      house at 140
+    the build that won: { auto_crossbow: 10, mortar: 3 }
+
+Four hundred and seventy-three is every enemy the ten nights send. The test
+plays the whole thing - the waves, the towers, the flow field, the Giant - and
+asserts the run ends, the boss goes down, and there are more days than nights
+because every night has a day in front of it.
+
+### The summary is a lookup, and one number was lying
+
+`killed` and `breaches` are cleared by `begin_night()` - a night that
+inherited last night's count would start halfway through - so a run summary
+built from them reported **the last night and called it a run**: 85 instead of
+473. The assert that caught it was "with a few hundred zombies killed", which
+is the sort of loose bound that only ever fires when something is properly
+wrong. `Combat` and `Enemies` keep a run tally beside the night's now.
+
+Everything else in the summary is genuinely a lookup - days lived, what was
+gathered, what is standing - so there is no second ledger to disagree with the
+first. The only thing `Run` adds to the state is the count of structures lost,
+because the morning sweeps the rubble and the number would be gone by the end.
+
+### Two doors
+
+A beaten run offers a new farm or **endless**. `Run.go_endless()` sets the
+flag and stops there: what night eleven is made of is task 0070's, and
+`Waves.table()` already answers an empty list past the authored ten, so an
+endless run arriving before 0070 is a quiet farm rather than a crash.
+
+The run is written to the profile before either door - `runs_won`,
+`best_night` and the summary - because a win that was not recorded is a win
+the player did not have. Task 0069 fills in the rest of the profile.
+
+---
+
+## The question, answered honestly
+
+> After surviving the first night, did you want to go back to the farm and
+> improve? That is the success criterion of the entire MVP.
+
+Task 0027 answered this with **"the pull is there and there is nothing to pull
+towards"**, and listed four reasons. Here they are again, against what exists
+now:
+
+1. **"Improve only means another identical tower."** Four towers, three levels
+   each, four barriers, mines, a twelve-node tree, and a defence that is a
+   shape rather than a count - walls reroute, mortars need range, crossbows
+   need power, breakers eat what you built. **Closed.**
+2. **"No knife-edge."** Measured, at a middling farming income: night 1 holds
+   at 10 of 100 with exactly the tower the tutorial gives you, night 2 at 20,
+   night 6 at 10, night 10 at 45. Night 3 is lost outright by a player who
+   only builds. That is the tension the design document asked for, and it is
+   a number rather than an opinion. **Closed.**
+3. **"A kill does not land."** Tasks 0077, 0085 and 0088 - sound, numbers,
+   particles - are still ahead. **Open.**
+4. **"The day is mostly walking."** Fishing, livestock, the press, the
+   kitchen, the stall and the tree all landed, so there is more to do; but
+   chopping is still holding a key, and the day is still the half with the
+   fewest decisions per minute. **Half closed.**
+
+So the honest answer is **yes, and with one large caveat.**
+
+Yes, because the structure that makes a player go back to the farm is now
+demonstrably there: three currencies that do three different jobs (money buys
+tonight, materials build tonight, technology buys every night after it), a
+first night you barely survive, a third night you lose if you did not farm,
+and a loss that costs a day and gives the night back rather than ending the
+run.
+
+The caveat is that **I have measured this game, not played it.** Every claim
+above is a number out of `headless_check`, `input_check`, `tools/nights.py` or
+`tools/play_nights.py`. The scripted player in `play_nights.py` never farms,
+never repairs, never drops a barricade and never fires a flare, and the
+farming income that makes the curve work - $150 a day - is a **fixture I
+invented**, not a measurement. What it is worth is exactly what task 0067's
+autoplayer measures and task 0068's sweep settles.
+
+And the half of the loop I can least speak for is the half the design document
+cares most about: whether a day on the farm is *pleasant*. Walking, chopping,
+planting, waiting for corn. A test can tell me the corn grows in the time the
+lever says. It cannot tell me anybody wants to watch it.
+
+That is not a reason to stop - it is what the next four tasks are for, and it
+is why 0068 comes before the polish rather than after it. But this checkpoint
+is supposed to be answered honestly, and the honest answer is that the loop's
+**skeleton** is sound and measured, and its **feel** is still owed a human
+playing it end to end.
+
+---
+
+### Hashes
+
+| | from | to | why |
+|---|---|---|---|
+| sim hash | `3497456322` | `3890789334` | the state counts structures lost, kills and breaches for the whole run, and carries the endless flag |
+| data hash | `219894722` | `219894722` | **unchanged** - no lever moved |
+
+`python tools/verify.py` prints PASS: 2452 asserts, 502 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

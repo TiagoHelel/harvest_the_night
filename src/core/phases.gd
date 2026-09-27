@@ -146,6 +146,11 @@ static func enter_result(state: Dictionary, survived: bool) -> bool:
 	state["day"] = int(state["day"]) + 1
 	if survived:
 		state["nights_won"] = int(state["nights_won"]) + 1
+		# **The run can end here.** Ten nights and the Giant is the MVP, and
+		# `Run.is_over()` is what the result screen asks to know whether it
+		# is showing a night or an ending.
+		if Run.is_over(state):
+			state["last_result"]["run_over"] = true
 	_enter(state, RESULT)
 	return true
 

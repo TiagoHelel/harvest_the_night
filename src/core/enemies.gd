@@ -60,6 +60,8 @@ static func initial() -> Dictionary:
 	return {
 		# How many have reached the house, for the result screen of task 0027.
 		"breaches": 0,
+		# And for the whole run, which `begin_night()` does not clear.
+		"breaches_all_run": 0,
 	}
 
 
@@ -333,6 +335,7 @@ const NEIGHBOURS: Array[Vector2i] = [
 static func _bite(state: Dictionary, id: int, data: Dictionary) -> void:
 	state["house_hp"] = maxi(int(state["house_hp"]) - int(data["damage"]), 0)
 	state["breaches"] = int(state["breaches"]) + 1
+	state["breaches_all_run"] = int(state.get("breaches_all_run", 0)) + 1
 	Entities.remove(state, id)
 
 	if int(state["house_hp"]) <= 0:

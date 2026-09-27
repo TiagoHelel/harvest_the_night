@@ -1,7 +1,7 @@
 # 0066 - Night 10 and the end of the run
 
 - **Phase:** 4 - Ten nights and progression
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0060, 0058
 - **Likely files:** src/core/phases.gd, src/ui/result_screen.gd
 

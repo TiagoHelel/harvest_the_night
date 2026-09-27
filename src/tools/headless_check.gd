@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 58
+const GROUPS := 59
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -122,6 +122,7 @@ func _run() -> void:
 	_task_0063_tech_tree()
 	_task_0064_tower_levels()
 	_task_0065_defeat()
+	_task_0066_run_end()
 
 
 func _finish() -> void:
@@ -10407,3 +10408,152 @@ func _lose_twice(seed_value: int) -> Dictionary:
 		"can_afford_a_tower": Resources.can_afford(state,
 			Building.cost_of(&"gun_tower")),
 	}
+
+
+## 0066 - ten nights and the Giant: the end of the MVP.
+func _task_0066_run_end() -> void:
+	# **A run ends one way.** Losing costs a day and never the run.
+	var going := _a_run_at_night(6600, 4)
+	expect(not Run.is_over(going), "four nights in, the run is not over")
+	_lose_the_night(going)
+	expect(not Run.is_over(going),
+		"and losing does not end it - a loss costs a day",
+		str(Phases.nights_won(going)))
+
+	var nearly := _a_run_at_night(6601, GameData.MVP_NIGHTS)
+	expect(Run.is_final_night(nearly),
+		"night %d is the last authored one" % GameData.MVP_NIGHTS,
+		str(nearly["night"]))
+	expect(not Run.is_over(nearly), "and it has not been beaten yet")
+	Phases.enter_result(nearly, true)
+	expect(Run.is_over(nearly),
+		"beating it ends the run", str(Phases.nights_won(nearly)))
+	expect(bool((nearly["last_result"] as Dictionary).get("run_over", false)),
+		"and the result says so, for the screen to read",
+		str(nearly["last_result"]))
+
+	# **Carrying on.**
+	expect(Run.go_endless(nearly), "a beaten run may carry on")
+	expect(Run.is_endless(nearly), "into the endless nights of task 0070")
+	expect(not Run.is_over(nearly),
+		"and then it is a run again rather than an ending")
+	var early := _a_run_at_night(6602, 3)
+	expect(not Run.go_endless(early),
+		"but a run that has not been beaten cannot skip to the end")
+
+	# **A whole run, day one to the Giant.** The done-when, played rather
+	# than argued.
+	var whole := _play_a_whole_run(6603)
+	print("  a whole run: %d days, %d nights won, %d killed, %d structures "
+		% [whole["days"], whole["nights_won"], whole["killed"],
+			whole["structures_lost"]] + "lost, house at %d"
+		% whole["house_hp"])
+	print("    the build that won: %s" % str(whole["build"]))
+	print("    gathered: %s" % str(whole["gathered"]))
+	expect(int(whole["nights_won"]) == GameData.MVP_NIGHTS,
+		"all ten nights are won", str(whole["nights_won"]))
+	expect(int(whole["bosses"]) == 1,
+		"and the Giant went down", str(whole["bosses"]))
+	expect(int(whole["days"]) > GameData.MVP_NIGHTS,
+		"over more days than there were nights - every night has a day in "
+		+ "front of it", str(whole["days"]))
+	expect(int(whole["killed"]) > 400,
+		"with a few hundred zombies killed", str(whole["killed"]))
+	expect(not (whole["build"] as Dictionary).is_empty(),
+		"and something left standing to have done it with",
+		str(whole["build"]))
+	expect(not (whole["gathered"] as Dictionary).is_empty(),
+		"and a haul to show for the days", str(whole["gathered"]))
+
+	# **The summary is a lookup, not a second ledger.**
+	expect(int(whole["money"]) == whole["money_on_the_ledger"],
+		"the money on the summary is the money in the purse",
+		"%d against %d" % [whole["money"], whole["money_on_the_ledger"]])
+	var by_kind := 0
+	for kind in GameData.sorted_names((whole["killed_by_kind"]
+		as Dictionary).keys()):
+		by_kind += int((whole["killed_by_kind"] as Dictionary)[kind])
+	expect(by_kind == int(whole["killed"]),
+		"and the kills by kind add up to the kills",
+		"%d against %d" % [by_kind, whole["killed"]])
+
+	# **Structures lost are counted even though the rubble is swept.**
+	var losing := _a_run_at_night(6604, 2)
+	var before := Run.structures_lost(losing)
+	var doomed := _room_for(losing, Vector2i(1, 1))
+	Farm.place(losing, doomed, {"id": &"wall", "hp": 30})
+	Farm.damage(losing, doomed, 999)
+	expect(Run.structures_lost(losing) == before + 1,
+		"a wall coming down is counted", str(Run.structures_lost(losing)))
+	Farm.clear_rubble(losing)
+	expect(Run.structures_lost(losing) == before + 1,
+		"and the morning sweeping the rubble does not un-count it",
+		str(Run.structures_lost(losing)))
+
+	# **The run is written to the profile.**
+	var won := _a_run_at_night(6605, GameData.MVP_NIGHTS)
+	Phases.enter_result(won, true)
+	var profile := Save.default_profile()
+	var after := Run.record(won, profile)
+	expect(int(after["runs_won"]) == 1,
+		"a beaten run is a won run on the profile", str(after["runs_won"]))
+	expect(int(after["best_night"]) == GameData.MVP_NIGHTS,
+		"and the best night reached is the last one",
+		str(after["best_night"]))
+	expect((after["stats"] as Dictionary).has("last_run"),
+		"with the summary kept for the screen", str(after["stats"]))
+	expect(int(profile["runs_won"]) == 0,
+		"and the profile handed in was not changed under the caller",
+		str(profile["runs_won"]))
+
+	var lost_run := _a_run_at_night(6606, 4)
+	expect(int((Run.record(lost_run, Save.default_profile()))["runs_won"])
+		== 0, "a run that was not beaten wins nothing")
+	expect(int((Run.record(lost_run, Save.default_profile()))["best_night"])
+		== 3, "but how far it got is still recorded")
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## Play all ten nights with a build that grows, and hand back the summary.
+##
+## **The nights are fought for real** - the waves, the towers, the flow field -
+## but the days are not lived through: a day is a hundred and eighty seconds
+## of a farmer walking about, and what this is testing is whether ten nights
+## and an ending hold together, not whether the crops grow.
+func _play_a_whole_run(seed_value: int) -> Dictionary:
+	var state := State.create(seed_value)
+	Resources.gain(state, {GameData.WOOD: 9000, GameData.STONE: 9000,
+		GameData.IRON: 9000, GameData.OIL: 9000, GameData.GUNPOWDER: 9000,
+		GameData.FOOD: 9000, GameData.TECH: 40})
+
+	for night in range(1, GameData.MVP_NIGHTS + 1):
+		# A day: buy what the tree allows and put another tower up.
+		for id in [&"true sights", &"long barrels", &"oiled works",
+				&"stout timbers"]:
+			Tech.buy(state, StringName(id))
+		_line_of_towers(state, &"auto_crossbow", 1)
+		if night % 3 == 0:
+			_line_of_towers(state, &"mortar", 1)
+		if night % 4 == 0:
+			Building.place(state, &"generator",
+				_room_for(state, Building.size_of(&"generator")))
+
+		Phases.begin_preparation(state)
+		Sim.advance(state, GameData.PREPARATION_TICKS)
+		# The house is mended between nights, which is what a day is for.
+		state["house_hp"] = Phases.house_full(state)
+
+		for _tick in 40000:
+			if int(state["phase"]) != Phases.NIGHT:
+				break
+			Sim.advance(state, 1)
+		if int(state["phase"]) == Phases.NIGHT:
+			break       # a night that would not end is a failure worth seeing
+		(state["intent"] as Dictionary)["confirm_result"] = true
+		Sim.advance(state, 2)
+
+	var out := Run.summary(state)
+	out["money_on_the_ledger"] = Resources.amount(state, GameData.MONEY)
+	out["over"] = Run.is_over(state)
+	return out

@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`##############..........`  **65 / 109 done**
+`###############.........`  **66 / 109 done**
 
-0 doing / 44 todo / 0 blocked across 9 phases.
+0 doing / 43 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0066 - Night 10 and the end of the run**. The whole of what is left is
+First up: **0067 - The autoplayer**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,23 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-44 task(s) left, the ready ones first, then what they
+43 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0066 - Night 10 and the end of the run
-
-Ready to pick up.  Likely files: `src/core/phases.gd, src/ui/result_screen.gd`.
-
-**The MVP is complete here.** Beating the Giant ends the run with a summary that answers the design document's question.
-
-- A run summary: days played, resources gathered, zombies killed, structures lost, the build that won
-- The run is recorded to the profile and a new one can be started
-- An option to continue past night 10 into 0070's endless mode
-- It is a real ending, with a screen worth reaching
-
-  - done when: A full run from day 1 to the Giant can be played in one sitting
-  - done when: The journal answers, honestly: after surviving the first night, did you want to go back to the farm and improve? That is the success criterion of the entire MVP
 
 ### 0067 - The autoplayer
 
@@ -58,6 +44,35 @@ A robot that plays the ten nights, so balance is measured over hundreds of runs 
 
   - done when: 100 seeded runs finish in under two minutes
   - done when: The report names which night kills each policy
+
+### 0069 - Run statistics
+
+Ready to pick up.  Likely files: `src/core/stats.gd, src/ui/stats_screen.gd`.
+
+What the player did, kept across runs, because a number going up is its own reason to play another night.
+
+- Per run and lifetime: nights survived, zombies killed by type, resources gathered, structures built and lost, best night reached
+- Recorded in core on the tick, read by the screen
+- It survives a crash: written with the profile, not at the end of a run
+- Reachable from the main menu
+
+  - done when: Killing ten zombies increments by exactly ten
+  - done when: Quitting mid-run and returning keeps the run's numbers
+
+### 0070 - Endless nights past ten
+
+Ready to pick up.  Likely files: `src/core/endless.gd`.
+
+For the player who beat the Giant and wants to know how far the farm goes. Cheap to build, and it answers whether the loop holds past its authored content.
+
+- Waves generated from a curve past night 10, seeded and reproducible
+- The curve scales count and mix, never invents an enemy that does not exist
+- A Giant every fifth night, scaling
+- A best night reached, kept in the profile
+- It is off the critical path: a menu option, not the default
+
+  - done when: Night 25 is generated and playable
+  - done when: The same seed generates the same night 25 twice
 
 ### 0071 - The two palettes
 
@@ -163,35 +178,6 @@ Use the autoplayer: find the nights that are trivial, the ones that are impossib
 
   - done when: No night has a win rate of 100% or 0% across every policy
   - done when: The report is in the repository and the applied changes are in game_data
-
-### 0069 - Run statistics
-
-Waits on 0066.  Likely files: `src/core/stats.gd, src/ui/stats_screen.gd`.
-
-What the player did, kept across runs, because a number going up is its own reason to play another night.
-
-- Per run and lifetime: nights survived, zombies killed by type, resources gathered, structures built and lost, best night reached
-- Recorded in core on the tick, read by the screen
-- It survives a crash: written with the profile, not at the end of a run
-- Reachable from the main menu
-
-  - done when: Killing ten zombies increments by exactly ten
-  - done when: Quitting mid-run and returning keeps the run's numbers
-
-### 0070 - Endless nights past ten
-
-Waits on 0066.  Likely files: `src/core/endless.gd`.
-
-For the player who beat the Giant and wants to know how far the farm goes. Cheap to build, and it answers whether the loop holds past its authored content.
-
-- Waves generated from a curve past night 10, seeded and reproducible
-- The curve scales count and mix, never invents an enemy that does not exist
-- A Giant every fifth night, scaling
-- A best night reached, kept in the profile
-- It is off the critical path: a menu option, not the default
-
-  - done when: Night 25 is generated and playable
-  - done when: The same seed generates the same night 25 twice
 
 ### 0072 - The farm tileset
 
@@ -761,7 +747,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0057** [Structures take damage and die](prompts/0057-structure-damage.md)
 - [x] **0058** [The Giant](prompts/0058-boss-giant.md)
 
-## 4 - Ten nights and progression  (7/12)
+## 4 - Ten nights and progression  (8/12)
 
 - [x] **0059** [Waves as data](prompts/0059-wave-data.md)
 - [x] **0060** [The ten nights, authored](prompts/0060-ten-nights.md)
@@ -770,11 +756,11 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0063** [The tech tree](prompts/0063-tech-tree.md)
 - [x] **0064** [Tower I, II, automatic](prompts/0064-tower-upgrades.md)
 - [x] **0065** [Losing a night costs you](prompts/0065-defeat.md)
-- [ ] **0066** [Night 10 and the end of the run](prompts/0066-run-end.md)
+- [x] **0066** [Night 10 and the end of the run](prompts/0066-run-end.md)
 - [ ] **0067** [The autoplayer](prompts/0067-autoplayer.md)
 - [ ] **0068** [A balance sweep over the ten nights](prompts/0068-balance-sweep.md) - needs 0067
-- [ ] **0069** [Run statistics](prompts/0069-stats.md) - needs 0066
-- [ ] **0070** [Endless nights past ten](prompts/0070-endless.md) - needs 0066
+- [ ] **0069** [Run statistics](prompts/0069-stats.md)
+- [ ] **0070** [Endless nights past ten](prompts/0070-endless.md)
 
 ## 5 - Art and visual direction  (0/13)
 

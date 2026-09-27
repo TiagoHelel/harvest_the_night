@@ -127,6 +127,14 @@ static func _kill(state: Dictionary, id: int) -> void:
 	var by_kind: Dictionary = state["killed_by_kind"]
 	var kind: StringName = one["kind"]
 	by_kind[kind] = int(by_kind.get(kind, 0)) + 1
+
+	# **The run's own tally, beside the night's.** `killed` is cleared every
+	# `begin_night()` - a night that inherited last night's count would be a
+	# night that started halfway through - so the run summary of task 0066
+	# would have read the last night and called it ten.
+	state["killed_all_run"] = int(state.get("killed_all_run", 0)) + 1
+	var ever: Dictionary = state["killed_by_kind_all_run"]
+	ever[kind] = int(ever.get(kind, 0)) + 1
 	# **A boss going down is a fact about the run**, not about the night.
 	# `is_boss` had been in the table since it was written and nothing read
 	# it; task 0066 ends the run on this.
@@ -143,6 +151,10 @@ static func initial() -> Dictionary:
 	return {
 		"killed": 0,
 		"killed_by_kind": {},
+		# The same two for the whole run, which the night reset does not
+		# touch. See `_kill()`.
+		"killed_all_run": 0,
+		"killed_by_kind_all_run": {},
 		# How many bosses this run has put down. The MVP has one, and task
 		# 0066 ends the run when it falls.
 		"bosses_down": 0,

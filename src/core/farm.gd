@@ -271,6 +271,11 @@ static func _leave_rubble(state: Dictionary, cell: Vector2i,
 	var idx := Grid.index(cell)
 	if idx >= 0:
 		(state["rubble"] as Dictionary)[idx] = id
+	# **Counted here because the morning sweeps the rubble.** By the end of a
+	# run there would be nothing left to count, and "structures lost" is one
+	# of the five numbers the run summary is made of.
+	if GameData.DEFENCES.has(id) or GameData.BUILDINGS.has(id):
+		Run.lost_a_structure(state)
 
 
 ## Take whatever is on a cell off it. False when there was nothing, or when it

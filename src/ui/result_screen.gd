@@ -21,6 +21,11 @@ var _state: Dictionary = {}
 var _title: Label
 var _lines: VBoxContainer
 var _continue: Button
+var _play_on: Button
+
+## Set by `main.gd`, so the ending can start a new run. The screen asks; the
+## app does.
+var driver: SimDriver
 var _built_for := -1
 
 
@@ -68,11 +73,26 @@ func _ready() -> void:
 	_continue = Button.new()
 	_continue.name = "ContinueButton"
 	_continue.text = "BACK TO THE FARM"
+	_continue.clip_text = true
 	_continue.custom_minimum_size = Vector2(206, 20)
 	_continue.add_theme_font_size_override("font_size", 9)
 	_continue.focus_mode = Control.FOCUS_ALL
 	_continue.pressed.connect(_confirm)
 	column.add_child(_continue)
+
+	# **The second door, and it is only there at the end.** A run that has
+	# been beaten offers to carry on; task 0070 is what makes night eleven
+	# worth playing, and this is the switch that asks for it.
+	_play_on = Button.new()
+	_play_on.name = "PlayOnButton"
+	_play_on.text = "PLAY ON - THE NIGHTS KEEP COMING"
+	_play_on.clip_text = true
+	_play_on.custom_minimum_size = Vector2(206, 20)
+	_play_on.add_theme_font_size_override("font_size", 9)
+	_play_on.focus_mode = Control.FOCUS_ALL
+	_play_on.visible = false
+	_play_on.pressed.connect(_carry_on)
+	column.add_child(_play_on)
 
 
 func show_state(state: Dictionary) -> void:
@@ -107,7 +127,39 @@ func _process(_delta: float) -> void:
 func _confirm() -> void:
 	if _state.is_empty():
 		return
+	# **At the end of a run, this button starts another one.** The run is
+	# written to the profile first: a win that was not recorded is a win the
+	# player did not have.
+	if Run.is_over(_state):
+		_record_and_restart()
+		return
 	(_state["intent"] as Dictionary)["confirm_result"] = true
+
+
+## Carry on into the nights past the authored ten.
+func _carry_on() -> void:
+	if _state.is_empty() or not Run.is_over(_state):
+		return
+	_record(_state)
+	Run.go_endless(_state)
+	(_state["intent"] as Dictionary)["confirm_result"] = true
+
+
+## Write the run to the profile and deal a new farm.
+func _record_and_restart() -> void:
+	_record(_state)
+	if driver == null:
+		return
+	# A different seed, so a second run is a different farm's worth of luck.
+	driver.start(int(Time.get_unix_time_from_system()) & 0x7FFFFFFF)
+	_state = driver.state
+	visible = false
+
+
+## The profile is the thing that outlives a run.
+func _record(state: Dictionary) -> void:
+	var profile := Save.read_profile()
+	Save.write_profile(Run.record(state, profile))
 
 
 func _build(payout: Dictionary) -> void:
@@ -118,6 +170,17 @@ func _build(payout: Dictionary) -> void:
 		return
 
 	var survived := bool(payout["survived"])
+
+	# **The end of the run gets its own screen.** Ten nights and the Giant is
+	# the whole MVP, and a player who has just done it should not be handed
+	# the same four lines they have read nine times.
+	if _state != null and not _state.is_empty() and Run.is_over(_state):
+		_build_the_ending()
+		_continue.text = "A NEW FARM, A NEW TEN NIGHTS"
+		_play_on.visible = true
+		return
+	_play_on.visible = false
+
 	_title.text = "NIGHT %d %s" % [int(payout["night"]),
 		"SURVIVED" if survived else "LOST"]
 	_title.modulate = WON if survived else LOST
@@ -172,6 +235,38 @@ func _build(payout: Dictionary) -> void:
 			_row("  " + "  ".join(taken), "", LOST)
 		_gap()
 		_row("money and the farm are untouched", "", DIM)
+
+## The run summary: what the whole thing was.
+##
+## Every line is a lookup off `Run.summary()`, which is itself a lookup off
+## the state. There is no second ledger here to disagree with the first.
+func _build_the_ending() -> void:
+	var run := Run.summary(_state)
+	_title.text = "THE FARM HELD"
+	_title.modulate = WON
+
+	_row("%d days, %d nights, the Giant down"
+		% [int(run["days"]), int(run["nights_won"])], "", WON)
+	_row("zombies killed", str(int(run["killed"])), DIM)
+	_row("got through", str(int(run["breaches"])), DIM)
+	_row("structures lost", str(int(run["structures_lost"])), DIM)
+
+	var hauled: Array = []
+	for id in _sorted(run["gathered"] as Dictionary):
+		hauled.append("%d %s" % [int((run["gathered"] as Dictionary)[id]), id])
+	if not hauled.is_empty():
+		_row("  gathered " + "  ".join(hauled.slice(0, 4)), "", DIM)
+
+	_gap()
+	_row("THE BUILD THAT WON", "", WON)
+	var built: Array = []
+	for id in _sorted(run["build"] as Dictionary):
+		built.append("%d %s" % [int((run["build"] as Dictionary)[id]), id])
+	_row("  " + ("  ".join(built) if not built.is_empty()
+		else "nothing left standing"), "", WON)
+	if not (run["technology"] as Array).is_empty():
+		_row("  " + ", ".join(run["technology"] as Array), "", DIM)
+
 
 func _row(left: String, right: String, colour: Color) -> void:
 	var row := HBoxContainer.new()

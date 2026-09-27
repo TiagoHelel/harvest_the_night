@@ -60,6 +60,7 @@ func _ready() -> void:
 	_night_hud.show_state(_driver.state)
 	_tech.show_state(_driver.state)
 	_build.show_state(_driver.state, _world)
+	_result.driver = _driver
 	_result.show_state(_driver.state)
 	_inventory.show_state(_driver.state)
 	_workshop.show_state(_driver.state)
