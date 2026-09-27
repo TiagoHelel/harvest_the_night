@@ -122,31 +122,40 @@ func _build(payout: Dictionary) -> void:
 		"SURVIVED" if survived else "LOST"]
 	_title.modulate = WON if survived else LOST
 
-	_row("zombies killed", str(int(payout["killed"])), DIM)
-	_row("got through", str(int(payout["breaches"])), DIM)
-	_row("the house", "%d / %d" % [int(payout["house_hp"]), GameData.HOUSE_HP],
-		DIM)
-	_row("still standing", "%d of them untouched"
-		% int(payout.get("intact", 0)) if int(payout.get("structures", 0)) > 0
-		else "nothing built", DIM)
+	# **Four numbers on two rows, not four.** A `Label` reserves its font's
+	# line height whatever `custom_minimum_size` claims, so a row here is
+	# twenty-two pixels: eight of them plus a title and a button is taller
+	# than the screen, and the button goes off the bottom - which ends the
+	# run, because "back to the farm" is the only way out of this screen.
+	# `input_check` asserts it is on screen.
+	_row("killed %d, %d got through" % [int(payout["killed"]),
+		int(payout["breaches"])], "", DIM)
+	_row("house %d/%d, %d built still up"
+		% [int(payout["house_hp"]), GameData.HOUSE_HP,
+			int(payout.get("structures", 0))],
+		"%d untouched" % int(payout.get("intact", 0)), DIM)
 
 	_gap()
 	if survived:
 		_row("PAID", "", WON)
+		# Materials on one line and money on the next, for the same reason.
+		var goods: Array = []
+		var purse: Array = []
 		for id in _sorted(payout["gained"] as Dictionary):
 			var n := int((payout["gained"] as Dictionary)[id])
-			_row("  " + str(id), "+%d" % n, WON)
+			if id == GameData.MONEY or id == GameData.TECH:
+				purse.append("+%d %s" % [n, id])
+			else:
+				goods.append("+%d %s" % [n, id])
+		if not goods.is_empty():
+			_row("  " + "  ".join(goods), "", WON)
+		if not purse.is_empty():
+			_row("  " + "  ".join(purse), "", WON)
 
 		# **What the defending was worth**, which is the half of `design.md`
 		# section 12 that changes how the next night gets built: "+ $112"
 		# tells a player they were paid, "for defending well + $32" tells
 		# them what they were paid *for*.
-		#
-		# **One line, not seven.** The full breakdown is in the payout for
-		# task 0069's statistics; a row here is twenty-two pixels whatever it
-		# claims - a `Label` reserves its font's line height the way a
-		# `Button` reserves thirty-one - and seven of them pushed "back to
-		# the farm" off the bottom of the screen, which ended the run.
 		var from: Dictionary = payout.get("money_from", {})
 		var well := int(from.get("nothing touched", 0)) 			+ int(from.get("still standing", 0)) 			+ int(from.get("the house untouched", 0))
 		if well > 0:
@@ -156,11 +165,13 @@ func _build(payout: Dictionary) -> void:
 		var lost: Dictionary = payout["lost"]
 		if lost.is_empty():
 			_row("  nothing - there was nothing to take", "", DIM)
-		for id in _sorted(lost):
-			_row("  " + str(id), "-%d" % int(lost[id]), LOST)
+		else:
+			var taken: Array = []
+			for id in _sorted(lost):
+				taken.append("-%d %s" % [int(lost[id]), id])
+			_row("  " + "  ".join(taken), "", LOST)
 		_gap()
 		_row("money and the farm are untouched", "", DIM)
-
 
 func _row(left: String, right: String, colour: Color) -> void:
 	var row := HBoxContainer.new()

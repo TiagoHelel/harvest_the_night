@@ -113,6 +113,11 @@ const CORN := &"corn"
 const CARROT := &"carrot"
 const MEAT := &"meat"
 const GUNPOWDER := &"gunpowder"
+## **Technology, and it is a resource on purpose.** It goes through the same
+## ledger as everything else, so saving it, showing it and spending it are
+## problems already solved - and `Rewards._is_tech()` has been waiting for
+## this name since task 0061.
+const TECH := &"tech"
 ## `design.md` section 5: "Oleo + Madeira -> Municao incendiaria". The
 ## flamethrower used to declare it burned raw oil, which at $26 a drop every
 ## two seconds was the most expensive trigger in the game - forty-five drops
@@ -125,7 +130,7 @@ const ENERGY := &"energy"
 ## lays them out.
 const RESOURCES: Array = [
 	WOOD, STONE, IRON, FOOD, FISH, OIL,
-	WHEAT, CORN, CARROT, MEAT, GUNPOWDER, INCENDIARY, MONEY, ENERGY,
+	WHEAT, CORN, CARROT, MEAT, GUNPOWDER, INCENDIARY, MONEY, ENERGY, TECH,
 ]
 
 ## What the shop will buy, and for how much.
@@ -774,7 +779,7 @@ const RESOURCE_GROUPS: Array = [
 	{"name": &"larder", "members": [FOOD, FISH, MEAT]},
 	{"name": &"crops", "members": [WHEAT, CORN, CARROT]},
 	{"name": &"workshop", "members": [OIL, GUNPOWDER, INCENDIARY]},
-	{"name": &"the farm", "members": [MONEY, ENERGY]},
+	{"name": &"the farm", "members": [MONEY, ENERGY, TECH]},
 ]
 
 
@@ -1297,6 +1302,20 @@ const REWARDS: Dictionary = {
 	"house_untouched_bonus": 25,        # LEVER: money, 10-50
 	"tech_points": 1,                   # LEVER: per night survived, 1-2
 }
+
+## What a night can be worth **beyond finishing it**, as conditions rather
+## than as code. `Tech._earned()` has one arm per `id` here and shouts if a
+## row arrives without one: a bonus that silently never pays is worse than a
+## bonus that does not exist.
+##
+## Three of them, each asking for something a little harder than the last, so
+## that a player who wants the tree faster has three things to aim at rather
+## than one number to grind.
+const TECH_BONUSES: Array = [
+	{"id": &"house untouched", "points": 1},    # LEVER: points, 0-2
+	{"id": &"nothing lost", "points": 1},       # LEVER: points, 0-2
+	{"id": &"not one got through", "points": 1},# LEVER: points, 0-2
+]
 
 ## Losing a night takes a share of the stock. It must hurt enough to matter and
 ## little enough to keep playing: `design.md` is explicit that a loss costs a
@@ -2191,4 +2210,5 @@ static func digest() -> int:
 		"rewards": REWARDS,
 		"defeat": [DEFEAT_LOSS_PERCENT, DEFEAT_KEEPS_MONEY,
 			DEFEAT_KEEPS_TECH],
+		"tech": TECH_BONUSES,
 	})

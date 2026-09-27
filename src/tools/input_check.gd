@@ -922,6 +922,21 @@ func _case_0027_the_loop() -> void:
 	var money_before := Resources.amount(state, GameData.MONEY)
 	expect(money_before > 25, "the payout already landed",
 		str(money_before))
+	# **The one way out of this screen has to be on it.** The payout has
+	# grown a row at tasks 0061 and 0062 and both times pushed this button
+	# off the bottom of a 270-pixel screen, which ends the run - a `Label`
+	# reserves its font's line height whatever it is told, so every row is
+	# twenty-two pixels.
+	var out: Control = locate_control("ContinueButton") as Control
+	var frame: Control = locate_control("ResultFrame") as Control
+	expect(out != null and frame != null, "the result screen has a way out")
+	if out != null:
+		var box := out.get_global_rect()
+		expect(box.end.y <= 270.0 and box.position.y >= 0.0,
+			"and it is on the screen", str(box))
+		expect(frame.get_global_rect().end.y <= 270.0,
+			"with the whole payout above it",
+			str(frame.get_global_rect()))
 	await click_control("ContinueButton")
 	await until(func() -> bool: return int(state["phase"]) == Phases.DAY,
 		"the farm to come back")

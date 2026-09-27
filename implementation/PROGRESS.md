@@ -4585,3 +4585,69 @@ waiting for the resource 0062 adds.
 
 `python tools/verify.py` prints PASS: 2168 asserts, 463 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+
+## 0062 - Technology points
+
+    technology: 10 at worst, 40 at best (1 a night, then house untouched +1,
+      nothing lost +1, not one got through +1)
+
+That line is the answer to "the total available across ten nights is fixed and
+known - print it", and it is the budget task 0063 has to price the tech tree
+against. `python tools/nights.py` prints it beside the enemy and money curves.
+
+### A resource, on purpose
+
+Technology goes through the same ledger as wood: saving it, showing it and
+spending it are problems already solved, and `Rewards._is_tech()` has been
+waiting for the name since task 0061. It is in a resource group like
+everything else and has **no sell price**, which is what stops it being a
+thing you trade.
+
+### The bonuses are conditions in a table
+
+`TECH_BONUSES` says what is worth an extra point and `Tech._earned()` has one
+arm per `id`, with a `push_error` for a row nobody has implemented - because a
+bonus that silently never pays is worse than a bonus that does not exist.
+
+    a perfect night pays { "for surviving": 1, "house untouched": 1,
+      "nothing lost": 1, "not one got through": 1 }
+    a night that cost the house and a wall pays { "for surviving": 1 }
+
+Four against one. Playing well is worth technology as well as money, and
+adding a fourth way to earn a point is a table entry rather than a rule.
+
+### A night pays once
+
+`nights_paid` remembers which nights have handed their points over, so
+reloading a save from before a night you already beat cannot beat it again for
+the technology. Money and resources are deliberately **not** protected this
+way: replaying a night costs a real night of the ten and the ten are the run,
+so the money takes care of itself. Technology is permanent, so it is the one
+that has to be defended - and the test saves, reloads, and checks the
+reloaded run cannot re-earn the night it was saved after.
+
+    ten nights played perfectly: 40 technology. Ten played badly: 10
+
+### The result screen, for the third time
+
+Adding a technology line to the payout pushed "back to the farm" off the
+bottom of the screen again - the same failure as task 0061 and for the same
+reason: a `Label` reserves its font's line height whatever
+`custom_minimum_size` says, so every row is twenty-two pixels.
+
+Nudging the frame up twice was treating the symptom. The screen now says the
+same things in half the rows - "killed 34, 2 got through" on one line,
+materials on one line, money and technology on another - and **`input_check`
+asserts that the continue button and the whole frame are inside 270 pixels**.
+It is the only way out of that screen, so it going off the bottom does not
+look like a layout bug, it looks like the run ending.
+
+### Hashes
+
+| | from | to | why |
+|---|---|---|---|
+| sim hash | `1987400090` | `1638064280` | the state gained a technology balance and the record of which nights have paid |
+| data hash | `1743728276` | `1475198535` | a new resource, a new group member and the bonus table |
+
+`python tools/verify.py` prints PASS: 2204 asserts, 468 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

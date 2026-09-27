@@ -48,9 +48,17 @@ static func settle(state: Dictionary, survived: bool) -> Dictionary:
 	}
 
 	if survived:
+		# **Technology first**, so that the points are in the ledger before
+		# the itemised list is built from it - and so a night that has
+		# already paid its technology says so in the same breath as paying
+		# the money for the one being replayed.
+		var points := Tech.award(state, int(state["night"]))
 		for id in _sorted(lines):
 			Resources.add(state, id, int(lines[id]))
+		if points > 0:
+			lines[GameData.TECH] = points
 		summary["gained"] = lines
+		summary["tech"] = points
 	else:
 		for id in _sorted(lines):
 			Resources.spend(state, id, int(lines[id]))

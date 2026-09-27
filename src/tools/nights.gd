@@ -43,6 +43,17 @@ func _init() -> void:
 	print("  %d enemies over %d nights, worth $%d"
 		% [enemies, GameData.MVP_NIGHTS, money])
 
+	# **What the run pays in technology**, which is the budget task 0063 has
+	# to price the tech tree against: the floor is one a night for finishing,
+	# the ceiling is every bonus every night.
+	var bonuses: Array = []
+	for row in GameData.TECH_BONUSES:
+		bonuses.append("%s +%d" % [(row as Dictionary)["id"],
+			int((row as Dictionary)["points"])])
+	print("  technology: %d at worst, %d at best (%d a night, then %s)"
+		% [Tech.least_available(), Tech.total_available(),
+			int(GameData.REWARDS["tech_points"]), ", ".join(bonuses)])
+
 	# **When each kind first turns up.** `design.md` section 10 wants one new
 	# thing a night, and this is the line that shows whether it got one.
 	var arrivals: Array = []

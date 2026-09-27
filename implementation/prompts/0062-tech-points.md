@@ -1,7 +1,7 @@
 # 0062 - Technology points
 
 - **Phase:** 4 - Ten nights and progression
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0061
 - **Likely files:** src/core/tech.gd
 

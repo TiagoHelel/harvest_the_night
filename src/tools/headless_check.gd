@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 54
+const GROUPS := 55
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -118,6 +118,7 @@ func _run() -> void:
 	_task_0059_wave_data()
 	_task_0060_ten_nights()
 	_task_0061_rewards()
+	_task_0062_tech()
 
 
 func _finish() -> void:
@@ -9655,3 +9656,172 @@ func _a_settled_night(seed_value: int, towers: int, hurt: int,
 	payout["received_money"] = int(received.get(GameData.MONEY, 0))
 	payout["wood_before"] = wood_before
 	return payout
+
+
+## 0062 - technology: the currency you keep.
+func _task_0062_tech() -> void:
+	# **It is a resource, so the ledger already knows how to hold it.**
+	expect(GameData.RESOURCES.has(GameData.TECH),
+		"technology is a resource", str(GameData.TECH))
+	expect(GameData.check_groups(GameData.RESOURCE_GROUPS,
+		GameData.RESOURCES).is_empty(),
+		"and it is in a group, like everything else",
+		str(GameData.check_groups(GameData.RESOURCE_GROUPS,
+			GameData.RESOURCES)))
+	expect(not GameData.SELL_PRICE.has(GameData.TECH),
+		"but it has no price - it is not a thing you sell")
+
+	# **Every bonus in the table has an arm that answers it.** A bonus that
+	# silently never pays is worse than one that does not exist.
+	var night := _a_won_night(6200, 1)
+	for row in GameData.TECH_BONUSES:
+		var bonus: Dictionary = row
+		expect(int(bonus["points"]) >= 0,
+			"the %s bonus is a whole number of points" % bonus["id"],
+			str(bonus["points"]))
+		expect(typeof(bonus["points"]) == TYPE_INT,
+			"and a lever, not a fraction")
+	expect(not Tech.would_pay(night, 2).is_empty(),
+		"a night that has not paid yet has something to pay",
+		str(Tech.would_pay(night, 2)))
+
+	# **The total across ten nights is fixed and known.** The requirement, and
+	# the number task 0063 budgets the tree against.
+	var most := Tech.total_available()
+	var least := Tech.least_available()
+	var each := int(GameData.REWARDS["tech_points"])
+	var bonus_points := 0
+	for row in GameData.TECH_BONUSES:
+		bonus_points += int((row as Dictionary)["points"])
+	print("  ten nights pay %d technology at worst and %d at best: %d a "
+		% [least, most, each] + "night, and %d more for a night played well"
+		% bonus_points)
+	expect(least == each * GameData.MVP_NIGHTS,
+		"one a night, ten nights", str(least))
+	expect(most == (each + bonus_points) * GameData.MVP_NIGHTS,
+		"and every bonus every night is the ceiling", str(most))
+	expect(most > least,
+		"there is something to play well for",
+		"%d against %d" % [most, least])
+
+	# **A perfect night pays the lot.**
+	var perfect := _a_won_night(6201, 3, true)
+	print("  a perfect night pays %s" % str(perfect["paid"]))
+	expect(int(perfect["points"]) == each + bonus_points,
+		"a night nobody touched pays every bonus",
+		str(perfect["points"]))
+	expect(Tech.held(perfect["state"]) == int(perfect["points"]),
+		"and the points are in the ledger",
+		str(Tech.held(perfect["state"])))
+
+	# ...and a scruffy one pays only for finishing.
+	var scruffy := _a_won_night(6202, 4, false)
+	print("  a night that cost the house and a wall pays %s"
+		% str(scruffy["paid"]))
+	expect(int(scruffy["points"]) == each,
+		"a night that cost the house, a structure and a breach pays one",
+		str(scruffy["points"]))
+	expect(int(perfect["points"]) > int(scruffy["points"]),
+		"so playing well is worth technology as well as money",
+		"%d against %d" % [perfect["points"], scruffy["points"]])
+
+	# **Replaying a survived night yields none.** The done-when.
+	var again: Dictionary = scruffy["state"]
+	var had := Tech.held(again)
+	expect(Tech.already_paid(again, 4), "night four has paid")
+	expect(Tech.would_pay(again, 4).is_empty(),
+		"so it has nothing left to pay", str(Tech.would_pay(again, 4)))
+	expect(Tech.award(again, 4) == 0, "and awarding it again pays nothing")
+	expect(Tech.held(again) == had,
+		"with the ledger unmoved", str(Tech.held(again)))
+	# Another night still pays, or the guard would be a wall rather than a
+	# gate.
+	expect(Tech.award(again, 5) > 0,
+		"but the next night still does", str(Tech.held(again)))
+
+	# **Ten nights yield exactly what the journal claims.** The done-when,
+	# run rather than argued: ten perfect nights against ten scruffy ones.
+	var best := _ten_nights(6203, true)
+	var worst := _ten_nights(6204, false)
+	print("  ten nights played perfectly: %d technology. Ten played badly: %d"
+		% [best, worst])
+	expect(best == most,
+		"ten perfect nights pay exactly the ceiling",
+		"%d against %d" % [best, most])
+	expect(worst == least,
+		"and ten scruffy ones exactly the floor",
+		"%d against %d" % [worst, least])
+
+	# **Points survive a save and a reload.** The done-when.
+	var kept: Dictionary = perfect["state"]
+	var before := Tech.held(kept)
+	expect(Save.write_run(kept), "the run saves")
+	var reloaded := Save.read_run()
+	expect(not reloaded.is_empty(), "and reads back")
+	expect(Tech.held(reloaded) == before,
+		"with the technology still in it",
+		"%d against %d" % [Tech.held(reloaded), before])
+	expect((reloaded["nights_paid"] as Array).size()
+		== (kept["nights_paid"] as Array).size(),
+		"and the record of which nights have paid, or a reload would be a "
+		+ "way to farm it", str(reloaded["nights_paid"]))
+	expect(Tech.award(reloaded, int(kept["night"])) == 0,
+		"which is the point: the reloaded run cannot re-earn that night")
+	Save.delete_run()
+
+	# **And losing keeps it.** `DEFEAT_KEEPS_TECH`, read at last.
+	var beaten := _a_won_night(6205, 6, true)
+	var technology := Tech.held(beaten["state"])
+	Resources.gain(beaten["state"], {GameData.WOOD: 100})
+	Rewards.settle(beaten["state"], false)
+	expect(Tech.held(beaten["state"]) == technology,
+		"a lost night takes no technology - it is what you keep",
+		str(Tech.held(beaten["state"])))
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## A night that has just been won, with the farm in a chosen condition.
+##
+## `clean` means nothing was touched: no breach, no rubble, a whole house. The
+## scruffy version arranges one of each, which is what the bonuses are for.
+func _a_won_night(seed_value: int, night: int,
+		clean: bool = true) -> Dictionary:
+	var state := State.create(seed_value)
+	state["night"] = night
+	state["day"] = night
+	Phases.begin_preparation(state)
+	if not clean:
+		state["house_hp"] = GameData.HOUSE_HP - 10
+		state["breaches"] = 2
+		# Something the player built, knocked down, so there is rubble.
+		var spot := _room_for(state, Vector2i(1, 1))
+		Resources.gain(state, {GameData.STONE: 100})
+		Building.place(state, &"wall", spot)
+		Farm.damage(state, spot, 9999)
+
+	var paid := Tech.would_pay(state, night)
+	var points := Tech.award(state, night)
+	return {"state": state, "points": points, "paid": paid}
+
+
+## Ten nights, all won, all in the same condition. Returns the technology.
+func _ten_nights(seed_value: int, clean: bool) -> int:
+	var state := State.create(seed_value)
+	Phases.begin_preparation(state)
+	for night in range(1, GameData.MVP_NIGHTS + 1):
+		state["night"] = night
+		state["day"] = night
+		if clean:
+			state["house_hp"] = GameData.HOUSE_HP
+			state["breaches"] = 0
+			Farm.clear_rubble(state)
+		else:
+			state["house_hp"] = GameData.HOUSE_HP - 1
+			state["breaches"] = 1
+			Resources.gain(state, {GameData.STONE: 100})
+			var spot := _room_for(state, Vector2i(1, 1))
+			Building.place(state, &"wall", spot)
+			Farm.damage(state, spot, 9999)
+		Tech.award(state, night)
+	return Tech.held(state)

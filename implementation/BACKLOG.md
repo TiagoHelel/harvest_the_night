@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`#############...........`  **61 / 109 done**
+`##############..........`  **62 / 109 done**
 
-0 doing / 48 todo / 0 blocked across 9 phases.
+0 doing / 47 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0062 - Technology points**. The whole of what is left is
+First up: **0063 - The tech tree**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,24 +26,25 @@ which rewrites this file for you.
 
 ## What is open
 
-48 task(s) left, the ready ones first, then what they
+47 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
-### 0062 - Technology points
+### 0063 - The tech tree
 
-Ready to pick up.  Likely files: `src/core/tech.gd`.
+Ready to pick up.  Likely files: `src/core/tech.gd, src/ui/tech_screen.gd`.
 
-The currency of permanent improvement, and the thing that makes night 4 feel different from night 3.
+Somewhere to spend the points, small enough to read on one screen and real enough to change how a night goes.
 
-- One point per night survived, plus bonus points for the conditions in data
-- Points persist in the run save and are spent in the tech tree
-- Points cannot be earned by replaying a night already survived
-- The total available across ten nights is fixed and known - print it
+- Around twelve nodes, no more: the design document forbids a giant tree in the MVP
+- Three branches: production, defence, survival
+- Prerequisites are data; a node shows what it needs and what it gives
+- It opens from the day HUD and never during a wave
+- Spending is confirmed and is not refundable - or is, for a fee, and the fee is a lever
 
-  - done when: Ten nights yield exactly the number of points the journal claims
-  - done when: Replaying a survived night yields none
-  - done when: Points survive a save and a reload
+  - done when: Every node is reachable inside ten nights, but not all of them
+  - done when: The choice between branches is real: say in the journal which one you would take and why
+  - done when: `input_check` buys a node
 
 ### 0065 - Losing a night costs you
 
@@ -165,21 +166,34 @@ When it breaks on someone else's machine, get enough to fix it without them.
   - done when: A deliberate crash produces a report with the seed and the tick
   - done when: The run is still loadable afterwards
 
-### 0063 - The tech tree
+### 0104 - Saves survive an update
 
-Waits on 0062.  Likely files: `src/core/tech.gd, src/ui/tech_screen.gd`.
+Ready to pick up.  Likely files: `src/app/save.gd`.
 
-Somewhere to spend the points, small enough to read on one screen and real enough to change how a night goes.
+Adding a lever or a tech node must not delete somebody's run.
 
-- Around twelve nodes, no more: the design document forbids a giant tree in the MVP
-- Three branches: production, defence, survival
-- Prerequisites are data; a node shows what it needs and what it gives
-- It opens from the day HUD and never during a wave
-- Spending is confirmed and is not refundable - or is, for a fee, and the fee is a lever
+- A save version and a migration per bump, applied in order
+- A missing key takes the default; an unknown key is dropped with a warning
+- Golden saves in the repository, one per version, loaded by `verify.py`
+- A save that cannot be migrated says so, keeps the file, and offers a new run
 
-  - done when: Every node is reachable inside ten nights, but not all of them
-  - done when: The choice between branches is real: say in the journal which one you would take and why
-  - done when: `input_check` buys a node
+  - done when: Every golden save loads and plays
+  - done when: Adding a resource to game_data does not break a save that predates it
+
+### 0064 - Tower I, II, automatic
+
+Waits on 0063.  Likely files: `src/core/towers.gd, src/core/game_data.gd`.
+
+The upgrade chain the design document draws: a tower that grows with the run instead of being replaced by a different tower.
+
+- Each tower has three levels, each an entry in data, not a subclass
+- An upgrade costs resources on the spot and is gated by a tech node
+- Level 3 changes behaviour, not only numbers - that is what earns the word 'automatic'
+- The upgrade is visible on the sprite
+- Upgrading in place keeps the tower's current hit points proportionally
+
+  - done when: Upgrading a tower mid-preparation works and costs what it says
+  - done when: A level 3 tower is clearly better and clearly not free
 
 ### 0068 - A balance sweep over the ten nights
 
@@ -364,35 +378,6 @@ One warm loop for the farm, one cold one for the night, and a crossfade on the r
 
   - done when: The loop point is inaudible
   - done when: The crossfade lands with the transition, not before or after it
-
-### 0104 - Saves survive an update
-
-Waits on 0062.  Likely files: `src/app/save.gd`.
-
-Adding a lever or a tech node must not delete somebody's run.
-
-- A save version and a migration per bump, applied in order
-- A missing key takes the default; an unknown key is dropped with a warning
-- Golden saves in the repository, one per version, loaded by `verify.py`
-- A save that cannot be migrated says so, keeps the file, and offers a new run
-
-  - done when: Every golden save loads and plays
-  - done when: Adding a resource to game_data does not break a save that predates it
-
-### 0064 - Tower I, II, automatic
-
-Waits on 0063.  Likely files: `src/core/towers.gd, src/core/game_data.gd`.
-
-The upgrade chain the design document draws: a tower that grows with the run instead of being replaced by a different tower.
-
-- Each tower has three levels, each an entry in data, not a subclass
-- An upgrade costs resources on the spot and is gated by a tech node
-- Level 3 changes behaviour, not only numbers - that is what earns the word 'automatic'
-- The upgrade is visible on the sprite
-- Upgrading in place keeps the tower's current hit points proportionally
-
-  - done when: Upgrading a tower mid-preparation works and costs what it says
-  - done when: A level 3 tower is clearly better and clearly not free
 
 ### 0077 - Particles
 
@@ -822,13 +807,13 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0057** [Structures take damage and die](prompts/0057-structure-damage.md)
 - [x] **0058** [The Giant](prompts/0058-boss-giant.md)
 
-## 4 - Ten nights and progression  (3/12)
+## 4 - Ten nights and progression  (4/12)
 
 - [x] **0059** [Waves as data](prompts/0059-wave-data.md)
 - [x] **0060** [The ten nights, authored](prompts/0060-ten-nights.md)
 - [x] **0061** [Night rewards](prompts/0061-rewards.md)
-- [ ] **0062** [Technology points](prompts/0062-tech-points.md)
-- [ ] **0063** [The tech tree](prompts/0063-tech-tree.md) - needs 0062
+- [x] **0062** [Technology points](prompts/0062-tech-points.md)
+- [ ] **0063** [The tech tree](prompts/0063-tech-tree.md)
 - [ ] **0064** [Tower I, II, automatic](prompts/0064-tower-upgrades.md) - needs 0063
 - [ ] **0065** [Losing a night costs you](prompts/0065-defeat.md)
 - [ ] **0066** [Night 10 and the end of the run](prompts/0066-run-end.md)
@@ -882,7 +867,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [ ] **0101** [Onboarding in seven lines](prompts/0101-onboarding.md) - needs 0097
 - [ ] **0102** [A performance budget](prompts/0102-perf-budget.md)
 - [ ] **0103** [Crash and error reporting](prompts/0103-error-report.md)
-- [ ] **0104** [Saves survive an update](prompts/0104-save-compat.md) - needs 0062
+- [ ] **0104** [Saves survive an update](prompts/0104-save-compat.md)
 - [ ] **0105** [A playtest build](prompts/0105-playtest-build.md) - needs 0100, 0103
 - [ ] **0106** [The release checklist](prompts/0106-release-checklist.md) - needs 0105, 0099
 - [ ] **0107** [Store assets](prompts/0107-store-assets.md) - needs 0082, 0099
