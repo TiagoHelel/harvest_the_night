@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`#########...............`  **42 / 108 done**
+`#########...............`  **42 / 109 done**
 
-0 doing / 66 todo / 0 blocked across 9 phases.
+0 doing / 67 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-66 task(s) left, the ready ones first, then what they
+67 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -274,18 +274,23 @@ Grass, soil, water, rock, path, wooden floor and fence, with edges that meet eac
 
 ### 0073 - The player sprite
 
-Waits on 0071.  Likely files: `tools/gen_sprites.py, sprites/actors/`.
+Waits on 0071.  Likely files: `tools/cut_sheet.py, sprites/actors/, src/ui/player_view.gd`.
 
-Somebody worth watching walk around: four directions, walking, and the work verbs.
+Somebody worth watching walk around: four directions, walking, and the work verbs - cut from the sheet the owner drew rather than generated from an ASCII map.
 
-- Four facings, idle and walk, plus chop, mine, water, fish and craft
-- 16x24, on the same palette as everything else
-- A shadow, because without one the character floats
+- **The art already exists**: `docs/sprites_sem_fundo.png`, 1536x1024 RGBA, with idle, walk, chop, mine, hoe, water, fish, plant, carry and a row of reactions
+- **Decide the size first, and write the answer in the journal.** The sheet is a painted image, not pixel art: 82,714 distinct colours and no blocky native resolution, with frames about 100x170. The game is 480x270 on 16px tiles, where a character is 16x24. Those cannot both be true. The three ways out are (a) downscale to 16x24 and lose the drawing, (b) render the player larger than a tile - 32x48 over the 16px grid, which is what Stardew does - or (c) raise the whole game to 32px tiles and 960x540. (b) is the cheapest and changes no other art
+- A cutting tool in `tools/`, not by hand: the frames are not on a clean grid and have a soft glow between them, so the cut is code with the offsets as data and is re-runnable when the sheet is redrawn
+- The glow keyed out, so a frame has hard alpha and no halo over the grass
+- Every verb the game has maps to a row: chop, mine, till, plant, water, fish, craft, and idle and walk in four facings
 - The animation is driven by the core state's action, not by the view guessing
 - Frame counts and speeds are data
+- A shadow, because without one the character floats
 
   - done when: Every verb in the game has an animation and none plays the wrong one
   - done when: Walking diagonally picks a facing and stays with it
+  - done when: Re-running the cutting tool on the same sheet produces byte-identical PNGs
+  - done when: The chosen size is stated in the journal with the reason
 
 ### 0075 - Buildings and towers
 
@@ -461,6 +466,21 @@ The bed under everything: birds and water by day, wind and distant groaning by n
 
   - done when: Standing still on the farm for a minute is pleasant, not empty
   - done when: The ambience never masks the house-damage sound
+
+### 0109 - The character reacts
+
+Waits on 0073.  Likely files: `src/core/player.gd, src/ui/player_view.gd`.
+
+The little bubbles on the owner's sheet - !, ?, a heart, a note, an idea, a star - used for the two or three moments the game already has and nothing more.
+
+- The sheet's reaction row is cut with the rest of task 0073 and is available as named frames
+- A reaction is a fact in the state with a lifetime, not a thing the view invents, so the autoplayer and a replay see the same ones
+- Used only where the game already has a moment: a bite on the line, a crop coming ready nearby, a structure destroyed, the night arriving. Four at most
+- Never during a wave except for damage - a farmer with a music note over their head while the house burns is the wrong game
+- It is decoration: removing every reaction changes nothing about what is possible, and there is an assert for that
+
+  - done when: A reaction appears on the tick the thing happens and clears itself
+  - done when: Turning them all off leaves the determinism hash unchanged
 
 ### 0057 - Structures take damage and die
 
@@ -1104,11 +1124,12 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [ ] **0069** [Run statistics](prompts/0069-stats.md) - needs 0066
 - [ ] **0070** [Endless nights past ten](prompts/0070-endless.md) - needs 0066, 0059
 
-## 5 - Art and visual direction  (0/12)
+## 5 - Art and visual direction  (0/13)
 
 - [ ] **0071** [The two palettes](prompts/0071-palettes.md)
 - [ ] **0072** [The farm tileset](prompts/0072-tileset.md) - needs 0071
 - [ ] **0073** [The player sprite](prompts/0073-player-art.md) - needs 0071
+- [ ] **0109** [The character reacts](prompts/0109-player-emotes.md) - needs 0073
 - [ ] **0074** [Zombie sprites](prompts/0074-zombie-art.md) - needs 0071, 0050, 0051, 0052
 - [ ] **0075** [Buildings and towers](prompts/0075-building-art.md) - needs 0071
 - [ ] **0076** [Night lighting](prompts/0076-lighting.md) - needs 0071

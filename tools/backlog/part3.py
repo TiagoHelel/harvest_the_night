@@ -234,19 +234,62 @@ TASKS = [
 
     dict(id=73, phase=P5, title="The player sprite", slug="player-art",
          deps=[71, 15],
-         files="tools/gen_sprites.py, sprites/actors/",
-         goal="Somebody worth watching walk around: four directions, walking, and "
-              "the work verbs.",
-         req=["Four facings, idle and walk, plus chop, mine, water, fish and "
-              "craft",
-              "16x24, on the same palette as everything else",
-              "A shadow, because without one the character floats",
+         files="tools/cut_sheet.py, sprites/actors/, src/ui/player_view.gd",
+         goal="Somebody worth watching walk around: four directions, walking, "
+              "and the work verbs - cut from the sheet the owner drew rather "
+              "than generated from an ASCII map.",
+         req=["**The art already exists**: `docs/sprites_sem_fundo.png`, "
+              "1536x1024 RGBA, with idle, walk, chop, mine, hoe, water, fish, "
+              "plant, carry and a row of reactions",
+              "**Decide the size first, and write the answer in the journal.** "
+              "The sheet is a painted image, not pixel art: 82,714 distinct "
+              "colours and no blocky native resolution, with frames about "
+              "100x170. The game is 480x270 on 16px tiles, where a character "
+              "is 16x24. Those cannot both be true. The three ways out are (a) "
+              "downscale to 16x24 and lose the drawing, (b) render the player "
+              "larger than a tile - 32x48 over the 16px grid, which is what "
+              "Stardew does - or (c) raise the whole game to 32px tiles and "
+              "960x540. (b) is the cheapest and changes no other art",
+              "A cutting tool in `tools/`, not by hand: the frames are not on "
+              "a clean grid and have a soft glow between them, so the cut is "
+              "code with the offsets as data and is re-runnable when the sheet "
+              "is redrawn",
+              "The glow keyed out, so a frame has hard alpha and no halo over "
+              "the grass",
+              "Every verb the game has maps to a row: chop, mine, till, plant, "
+              "water, fish, craft, and idle and walk in four facings",
               "The animation is driven by the core state's action, not by the "
               "view guessing",
-              "Frame counts and speeds are data"],
-         dod=["Every verb in the game has an animation and none plays the wrong "
-              "one",
-              "Walking diagonally picks a facing and stays with it"]),
+              "Frame counts and speeds are data",
+              "A shadow, because without one the character floats"],
+         dod=["Every verb in the game has an animation and none plays the "
+              "wrong one",
+              "Walking diagonally picks a facing and stays with it",
+              "Re-running the cutting tool on the same sheet produces "
+              "byte-identical PNGs",
+              "The chosen size is stated in the journal with the reason"]),
+
+    dict(id=109, phase=P5, title="The character reacts", slug="player-emotes",
+         deps=[73],
+         files="src/core/player.gd, src/ui/player_view.gd",
+         goal="The little bubbles on the owner's sheet - !, ?, a heart, a "
+              "note, an idea, a star - used for the two or three moments the "
+              "game already has and nothing more.",
+         req=["The sheet's reaction row is cut with the rest of task 0073 and "
+              "is available as named frames",
+              "A reaction is a fact in the state with a lifetime, not a thing "
+              "the view invents, so the autoplayer and a replay see the same "
+              "ones",
+              "Used only where the game already has a moment: a bite on the "
+              "line, a crop coming ready nearby, a structure destroyed, the "
+              "night arriving. Four at most",
+              "Never during a wave except for damage - a farmer with a music "
+              "note over their head while the house burns is the wrong game",
+              "It is decoration: removing every reaction changes nothing about "
+              "what is possible, and there is an assert for that"],
+         dod=["A reaction appears on the tick the thing happens and clears "
+              "itself",
+              "Turning them all off leaves the determinism hash unchanged"]),
 
     dict(id=74, phase=P5, title="Zombie sprites", slug="zombie-art",
          deps=[71, 50, 51, 52],

@@ -3,24 +3,29 @@
 - **Phase:** 5 - Art and visual direction
 - **Status:** todo
 - **Depends on:** 0071, 0015
-- **Likely files:** tools/gen_sprites.py, sprites/actors/
+- **Likely files:** tools/cut_sheet.py, sprites/actors/, src/ui/player_view.gd
 
 ## Goal
 
-Somebody worth watching walk around: four directions, walking, and the work verbs.
+Somebody worth watching walk around: four directions, walking, and the work verbs - cut from the sheet the owner drew rather than generated from an ASCII map.
 
 ## Requirements
 
-- Four facings, idle and walk, plus chop, mine, water, fish and craft
-- 16x24, on the same palette as everything else
-- A shadow, because without one the character floats
+- **The art already exists**: `docs/sprites_sem_fundo.png`, 1536x1024 RGBA, with idle, walk, chop, mine, hoe, water, fish, plant, carry and a row of reactions
+- **Decide the size first, and write the answer in the journal.** The sheet is a painted image, not pixel art: 82,714 distinct colours and no blocky native resolution, with frames about 100x170. The game is 480x270 on 16px tiles, where a character is 16x24. Those cannot both be true. The three ways out are (a) downscale to 16x24 and lose the drawing, (b) render the player larger than a tile - 32x48 over the 16px grid, which is what Stardew does - or (c) raise the whole game to 32px tiles and 960x540. (b) is the cheapest and changes no other art
+- A cutting tool in `tools/`, not by hand: the frames are not on a clean grid and have a soft glow between them, so the cut is code with the offsets as data and is re-runnable when the sheet is redrawn
+- The glow keyed out, so a frame has hard alpha and no halo over the grass
+- Every verb the game has maps to a row: chop, mine, till, plant, water, fish, craft, and idle and walk in four facings
 - The animation is driven by the core state's action, not by the view guessing
 - Frame counts and speeds are data
+- A shadow, because without one the character floats
 
 ## Done when
 
 - [ ] Every verb in the game has an animation and none plays the wrong one
 - [ ] Walking diagonally picks a facing and stays with it
+- [ ] Re-running the cutting tool on the same sheet produces byte-identical PNGs
+- [ ] The chosen size is stated in the journal with the reason
 - [ ] `python tools/verify.py` prints PASS
 - [ ] the determinism hash is unchanged, or the change is deliberate and both
       the old and the new number are in the journal
