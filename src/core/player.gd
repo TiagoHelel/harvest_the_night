@@ -90,6 +90,11 @@ static func initial() -> Dictionary:
 			# and then nothing for the whole walk. This one is a level, like
 			# `move`: written every frame, never consumed.
 			"interact_held": false,
+			# **The one button of task 0054.** An edge, like `interact`: a
+			# flare is a decision about a moment, and a held key that fired
+			# one the instant the cooldown ended would be the game deciding
+			# for the player. `Ability.tick()` consumes it.
+			"ability": false,
 		},
 	}
 

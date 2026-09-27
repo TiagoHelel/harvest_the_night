@@ -3944,3 +3944,76 @@ Both worth recording, because both looked like bugs and were not:
 
 `python tools/verify.py` prints PASS: 1663 asserts, 380 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+
+## 0054 - The player's ability
+
+The whole `ABILITY` table had been in `game_data.gd` since it was written and
+read by nothing, `slow_fraction: 0.5` among it - the seventh fraction found
+that way, and one that could not have been read, because the rules are
+integers. It is `slow_percent: 50` now, and it means percent of normal speed,
+which is what a designer means by "half speed" and the opposite of what
+`ticks_per_tile` measures.
+
+### One button, no target
+
+`design.md`'s fourth pillar says the night is semi-idle: the player watches
+the defence they built do the work and "pode eventualmente" step in. So the
+ability is one press with a long wait rather than a weapon. It goes off where
+the player is standing, which means the decision is *where to be* when the
+wave arrives - made with their feet, minutes earlier - rather than with a
+cursor in the moment.
+
+The slow is what turns the wave, not the damage. Twenty-five kills a walker
+outright and dents a tank; five seconds of half speed is five seconds of every
+tower on the farm getting a free volley into the same crowd.
+
+### Forty-five seconds was every wave
+
+The lever said 45 seconds and the done-when asks for one turned wave a night.
+Night one runs **1612 ticks - fifty-four seconds** - so at 45 the flare came
+back inside the night and a three-wave night got a flare a wave. At 80 it is
+one press, measured, and a longer night later in the run buys a second.
+
+Two rules make that readable rather than fiddly: the wait runs only at night,
+and **every night starts charged**. If it ran by day it would be pure
+bookkeeping, since a day is longer than any cooldown. If it carried over, a
+player who flared the last wave of night three would start night four with a
+flare that is mysteriously not ready and nothing on screen to explain why.
+
+### Measured
+
+    a flare of 25 over 3 tiles: [25, 25, 25, 25, 0]
+    night 1 runs 1612 ticks (54s) and pays for 1 flare, at a 80s cooldown
+    a wave of 8 walkers at an undefended house: 80 damage without the flare,
+      50 with it
+
+Flat inside the radius and nothing at all outside it - no falloff, because the
+table declares none and a flare is a flare rather than a shell. The last line
+is the done-when: the same seed, the same crowd, the same undefended house,
+and one press is worth thirty hit points of roof.
+
+The other done-when - two uses in the same second are impossible - is asserted
+twice over: through the rule, and through four taps of the key inside a second
+in `input_check`.
+
+### Seeing it
+
+The burst is an expanding ring at the player's feet, drawn from what the rules
+already recorded: where it went off and how many ticks of it are left. That is
+the same arrangement as `hurt` in `Combat` - the view must not have to
+remember anything the rules know - and it means the picture cannot disagree
+with the damage. `charge_percent()` is there for the ring the night HUD will
+draw at task 0056.
+
+`F` is the key, and it is in `project.godot` beside the others rather than
+read from the keyboard directly.
+
+### Hashes
+
+| | from | to | why |
+|---|---|---|---|
+| sim hash | `3214589414` | `2770152428` | the state gained the ability block, and enemies gained a `slow` |
+| data hash | `3795708698` | `2691269033` | `slow_fraction` became `slow_percent`, the cooldown went 45s to 80s, and the table gained a damage type and the flare's own draw time |
+
+`python tools/verify.py` prints PASS: 1721 asserts, 391 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

@@ -115,6 +115,12 @@ static func _walk(state: Dictionary, id: int) -> void:
 		return
 
 	var per_tile := maxi(int(data["ticks_per_tile"]), 1)
+	# **Flared things walk slowly**, and the count runs down whether they are
+	# walking or chewing - five seconds is five seconds.
+	var slow := int(one.get("slow", 0))
+	if slow > 0:
+		one["slow"] = slow - 1
+		per_tile = Ability.slowed_ticks(per_tile)
 
 	# The remainder is carried, so the speed is exactly what the lever says
 	# rather than whatever integer division left behind.

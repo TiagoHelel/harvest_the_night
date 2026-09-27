@@ -41,7 +41,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 24
+const CASES := 25
 
 var passed := 0
 var failed := 0
@@ -95,6 +95,7 @@ func _run() -> void:
 	await _case_0041_tutorial()
 	await _case_0046_walls()
 	await _case_0053_repair()
+	await _case_0054_ability()
 	_finish()
 
 
@@ -2526,6 +2527,73 @@ func _case_0053_repair() -> void:
 	expect(int(Farm.occupant(state, spot).get("hp", 0)) == at_release,
 		"and nothing more goes into the wall after that",
 		str(Farm.occupant(state, spot).get("hp", 0)))
+
+	await close_scene()
+	_completed += 1     # last line: an abandoned case never gets here
+
+
+## 0054 - the flare, off the key it lives on.
+func _case_0054_ability() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	if driver == null:
+		_completed += 1
+		await close_scene()
+		return
+
+	var state := driver.state
+
+	# **Not by day**, and the key says so by doing nothing.
+	expect(int(state["phase"]) == Phases.DAY, "it starts as day")
+	await tap_key(KEY_F)
+	await frames(3)
+	expect(Ability.flares_used(state) == 0,
+		"pressing it in daylight does nothing",
+		str(Ability.flares_used(state)))
+
+	Phases.begin_preparation(state)
+	Sim.advance(state, GameData.PREPARATION_TICKS)
+	expect(int(state["phase"]) == Phases.NIGHT, "it is night")
+	expect(Ability.ready(state), "and the flare is charged")
+
+	# Something standing next to the player to be flared.
+	var beside := Player.cell(state) + Vector2i(1, 0)
+	if not Farm.walkable(state, beside):
+		beside = Player.cell(state)
+	var victim := Entities.spawn(state, &"walker", beside)
+	Entities.set_hp(state, victim, 500)
+	var hp_before := int(Entities.get_one(state, victim).get("hp", 0))
+
+	await tap_key(KEY_F)
+	await until(func() -> bool: return Ability.flares_used(state) > 0,
+		"the flare to go off")
+	expect(Ability.flares_used(state) == 1, "one press, one flare",
+		str(Ability.flares_used(state)))
+	expect(int(Entities.get_one(state, victim).get("hp", 0)) < hp_before,
+		"and the thing beside the player is hurt by it",
+		str(Entities.get_one(state, victim).get("hp", 0)))
+	expect(Ability.is_slowed(state, victim), "and slowed")
+
+	# **The player can see it.** The rules record where it went off, which is
+	# all the view needs and all it is allowed to know.
+	expect(Ability.flare_at(state) == [Player.cell(state).x,
+		Player.cell(state).y],
+		"the burst is recorded where the player is standing",
+		str(Ability.flare_at(state)))
+
+	# **Two in the same second are impossible**, through the key as well as
+	# through the rule.
+	var after := Ability.flares_used(state)
+	for _i in 4:
+		await tap_key(KEY_F)
+	await frames(6)
+	expect(Ability.flares_used(state) == after,
+		"four more presses inside a second set off nothing",
+		str(Ability.flares_used(state)))
+	expect(not Ability.ready(state), "it is still waiting")
+	expect(Ability.charge_percent(state) < 100,
+		"and the ring the HUD draws is not full",
+		str(Ability.charge_percent(state)))
 
 	await close_scene()
 	_completed += 1     # last line: an abandoned case never gets here

@@ -842,12 +842,30 @@ const REPAIR_TICKS_PER_HP := 3          # LEVER: ticks, 1-8
 const HOUSE_REPAIR_PERCENT := 200       # LEVER: percent, 150-300
 
 ## The one button the player has during a night.
+## The one button of `design.md`'s fourth pillar: the player "pode
+## eventualmente" step into a night they are losing, and this is the stepping.
+##
+## The slow is what turns a wave, not the damage. Twenty-five kills a walker
+## and dents a tank; five seconds of half speed is five seconds of every tower
+## on the farm getting a free volley into the same crowd.
 const ABILITY: Dictionary = {
 	"damage": 25,                       # LEVER: in the area, 10-50
+	"damage_type": DAMAGE_EXPLOSIVE,
 	"radius_tiles": 3,                  # LEVER: tiles, 2-5
-	"slow_fraction": 0.5,               # LEVER: fraction of speed, 0.2-0.8
+	# **Percent of normal speed, not a fraction.** This was `0.5` and nothing
+	# read it - the seventh fraction found that way, after
+	# `WATER_GROWTH_BONUS`, `BROWNOUT_RATE`, `splash_falloff`,
+	# `pierce_falloff`, `structure_damage_multiplier` and
+	# `HOUSE_REPAIR_PENALTY`. The rules are integers.
+	"slow_percent": 50,                 # LEVER: percent of speed, 20-80
 	"slow_ticks": 5 * SECONDS,          # LEVER: ticks, 2-10 seconds worth
-	"cooldown_ticks": 45 * SECONDS,     # LEVER: ticks, 20-90 seconds worth
+	# **Long enough that using it is a decision.** Measured against the
+	# nights rather than picked: at 45 seconds a three-minute night got four
+	# flares, which is one a wave and no decision at all. At 80 it is one
+	# turned wave and a second only if the night runs long.
+	"cooldown_ticks": 80 * SECONDS,     # LEVER: ticks, 20-90 seconds worth
+	# How long the view keeps drawing the burst. Purely how it looks.
+	"flare_ticks": 1 * SECONDS,         # LEVER: ticks, 10-45
 }
 
 ## How long something stays lit after it is hit.

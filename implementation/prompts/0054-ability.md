@@ -1,7 +1,7 @@
 # 0054 - The player's ability
 
 - **Phase:** 3 - The full night
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0027
 - **Likely files:** src/core/ability.gd, src/ui/night_hud.gd
 

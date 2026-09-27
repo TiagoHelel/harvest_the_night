@@ -78,6 +78,8 @@ func _process(_delta: float) -> void:
 	var move: Array = intent["move"]
 	move[0] = int(Input.get_axis(&"move_left", &"move_right"))
 	move[1] = int(Input.get_axis(&"move_up", &"move_down"))
+	if _just_pressed(&"ability"):
+		intent["ability"] = true
 	if _just_pressed(&"interact"):
 		intent["interact"] = true
 	# **The level as well as the edge.** Holding the key is how a row gets

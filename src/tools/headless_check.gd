@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 46
+const GROUPS := 47
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -110,6 +110,7 @@ func _run() -> void:
 	_task_0051_tank()
 	_task_0052_breaker()
 	_task_0053_repair()
+	_task_0054_ability()
 
 
 func _finish() -> void:
@@ -8059,3 +8060,264 @@ func _wall_under_attack(seed_value: int, mending: bool) -> Dictionary:
 		"fell_at": fell_at,
 		"spent": food_before - Resources.amount(state, GameData.FOOD),
 	}
+
+
+## 0054 - the flare: one button, one decision, and a long wait.
+func _task_0054_ability() -> void:
+	var table: Dictionary = GameData.ABILITY
+	var walker: Dictionary = GameData.ENEMIES[&"walker"]
+
+	# **The levers are whole numbers.**
+	for key in ["damage", "radius_tiles", "slow_percent", "slow_ticks",
+			"cooldown_ticks", "flare_ticks"]:
+		expect(table.has(key), "the ability declares %s" % key)
+		expect(typeof(table[key]) == TYPE_INT,
+			"and %s is a whole number - it was 0.5 once" % key,
+			str(typeof(table[key])))
+	expect(int(table["slow_percent"]) < 100,
+		"slowed is slower than not slowed", str(table["slow_percent"]))
+	expect(Ability.slowed_ticks(int(walker["ticks_per_tile"]))
+		> int(walker["ticks_per_tile"]),
+		"so a flared walker takes longer over a tile",
+		str(Ability.slowed_ticks(int(walker["ticks_per_tile"]))))
+	expect(Ability.slowed_ticks(int(walker["ticks_per_tile"]))
+		== int(walker["ticks_per_tile"]) * 100 / int(table["slow_percent"]),
+		"by exactly what the percentage says")
+
+	# **Not by day.** There is nothing to slow at noon.
+	var noon := State.create(3600)
+	expect(int(noon["phase"]) == Phases.DAY, "it is daytime")
+	expect(not Ability.ready(noon), "the flare is not ready by day")
+	expect(not Ability.use(noon), "and pressing it does nothing")
+	expect(Ability.flares_used(noon) == 0, "nothing went off",
+		str(Ability.flares_used(noon)))
+
+	# **One press, then a long wait.** The done-when: two uses in the same
+	# second are impossible.
+	var night := _fresh_night(3601)
+	expect(Ability.ready(night), "at night it is ready")
+	expect(Ability.charge_percent(night) == 100, "and fully charged",
+		str(Ability.charge_percent(night)))
+	expect(Ability.use(night), "it goes off")
+	expect(Ability.flares_used(night) == 1, "once")
+	expect(not Ability.ready(night), "and is not ready again on the same tick")
+	expect(not Ability.use(night), "a second press does nothing at all")
+	expect(Ability.flares_used(night) == 1, "still once",
+		str(Ability.flares_used(night)))
+
+	Sim.advance(night, GameData.SECONDS)
+	expect(not Ability.ready(night),
+		"nor a second later - which is the done-when, in its own words",
+		str(Ability.cooldown_left(night)))
+	expect(Ability.charge_percent(night) < 100, "the ring is not full",
+		str(Ability.charge_percent(night)))
+
+	var wait := int(table["cooldown_ticks"])
+	Sim.advance(night, wait - GameData.SECONDS - 1)
+	expect(not Ability.ready(night), "nor a tick before its time",
+		str(Ability.cooldown_left(night)))
+	Sim.advance(night, 2)
+	expect(Ability.ready(night), "and ready on the tick the lever says",
+		str(Ability.cooldown_left(night)))
+	expect(Ability.charge_percent(night) == 100, "with a full ring")
+
+	# **The wait runs only at night, and every night starts charged.**
+	var carried := _fresh_night(3602)
+	Ability.use(carried)
+	var mid := Ability.cooldown_left(carried)
+	expect(mid > 0, "the flare is spent")
+	Phases.enter_result(carried, true)
+	Sim.advance(carried, 300)
+	expect(Ability.cooldown_left(carried) == mid,
+		"ten seconds of the result screen do not charge it",
+		"%d against %d" % [Ability.cooldown_left(carried), mid])
+
+	# ...and the next night hands it back, so nobody ever begins a night
+	# looking at a flare that is not ready for a reason they cannot see.
+	(carried["intent"] as Dictionary)["confirm_result"] = true
+	Sim.advance(carried, 2)
+	Phases.begin_preparation(carried)
+	Sim.advance(carried, GameData.PREPARATION_TICKS)
+	expect(int(carried["phase"]) == Phases.NIGHT, "another night")
+	expect(Ability.ready(carried),
+		"which begins with the flare charged",
+		str(Ability.cooldown_left(carried)))
+	expect(Ability.flare_at(carried).is_empty(),
+		"and nothing of the old one left to draw")
+
+	# **It hurts and slows everything in the radius, and nothing outside it.**
+	var burst := _flare_a_line(3603)
+	print("  a flare of %d over %d tiles: %s"
+		% [table["damage"], table["radius_tiles"], str(burst["took"])])
+	var radius := int(table["radius_tiles"])
+	var armour := int(walker.get("armour", 0))
+	for ring in range(0, radius + 1):
+		expect(int(burst["took"][ring])
+			== maxi(int(table["damage"]) - armour, Combat.MINIMUM_HIT),
+			"a walker %d tiles out takes the whole charge" % ring,
+			str(burst["took"][ring]))
+		expect(bool(burst["slowed"][ring]),
+			"and is walking slowly", str(burst["slowed"]))
+	expect(int(burst["took"][radius + 1]) == 0,
+		"and one tile past the rim takes nothing",
+		str(burst["took"][radius + 1]))
+	expect(not bool(burst["slowed"][radius + 1]),
+		"and is not slowed either", str(burst["slowed"]))
+	expect(int(table["damage"]) >= int(walker["hp"]),
+		"one flare kills a walker outright, which is what makes it a turn",
+		str(table["damage"]))
+
+	# **The slow wears off.**
+	var wears := _fresh_night(3604)
+	var one := Entities.spawn(wears, &"walker", Player.cell(wears))
+	Entities.set_hp(wears, one, 500)
+	Ability.use(wears)
+	expect(Ability.is_slowed(wears, one), "it is slowed")
+	Sim.advance(wears, int(table["slow_ticks"]) + 2)
+	expect(not Ability.is_slowed(wears, one),
+		"and five seconds later it is not", str(table["slow_ticks"]))
+
+	# **The view is told where it happened, and then forgets.**
+	var seen := _fresh_night(3605)
+	expect(Ability.flare_at(seen).is_empty(), "nothing to draw yet")
+	Ability.use(seen)
+	expect(Ability.flare_at(seen) == [Player.cell(seen).x,
+		Player.cell(seen).y],
+		"it went off where the player is standing",
+		str(Ability.flare_at(seen)))
+	Sim.advance(seen, int(table["flare_ticks"]) + 2)
+	expect(Ability.flare_at(seen).is_empty(),
+		"and a second later there is nothing left to draw")
+
+	# **One turned wave a night, not every wave.** The other done-when,
+	# measured against a real night rather than argued.
+	var whole := _count_the_flares(3606)
+	print("  night %d runs %d ticks (%.0fs) and pays for %d flare%s, at a "
+		% [whole["night"], whole["ticks"],
+			float(whole["ticks"]) / float(GameData.TICK_HZ), whole["flares"],
+			"" if whole["flares"] == 1 else "s"]
+		+ "%ds cooldown" % (int(table["cooldown_ticks"]) / GameData.SECONDS))
+	expect(whole["flares"] >= 1,
+		"a night pays for at least one flare - it has to be usable",
+		str(whole["flares"]))
+	expect(whole["flares"] <= 2,
+		"and at most two, so it turns a wave rather than every wave",
+		str(whole["flares"]))
+	expect(whole["waves"] > whole["flares"],
+		"there are more waves in a night than there are flares for them",
+		"%d waves, %d flares" % [whole["waves"], whole["flares"]])
+
+	# **It turns a wave that was being lost.** The same seed, the same crowd,
+	# the same undefended farm: the only difference is one press.
+	var lost := _flare_a_wave(3607, false)
+	var turned := _flare_a_wave(3607, true)
+	print("  a wave of %d walkers at an undefended house: %d damage without "
+		% [lost["sent"], lost["house_lost"]] + "the flare, %d with it"
+		% turned["house_lost"])
+	expect(lost["house_lost"] > 0, "without it the house is bitten",
+		str(lost))
+	expect(turned["house_lost"] < lost["house_lost"],
+		"and one press measurably changes that",
+		"%d against %d" % [turned["house_lost"], lost["house_lost"]])
+	expect(turned["flares"] == 1, "off one flare", str(turned["flares"]))
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## A line of walkers running out from the player, and what a flare did to each.
+func _flare_a_line(seed_value: int) -> Dictionary:
+	var state := _fresh_night(seed_value)
+	var centre := Player.cell(state)
+	var radius := int(GameData.ABILITY["radius_tiles"])
+
+	var who: Array = []
+	for ring in range(0, radius + 2):
+		var at := centre + Vector2i(ring, 0)
+		var id := Entities.spawn(state, &"walker", at)
+		# Enough health to live through it, or the number measured is the
+		# walker's hit points rather than the flare's damage.
+		Entities.set_hp(state, id, 500)
+		who.append(id)
+
+	Ability.use(state)
+
+	var took: Array = []
+	var slowed: Array = []
+	for id in who:
+		took.append(500 - int(Entities.get_one(state, int(id)).get("hp", 0)))
+		slowed.append(Ability.is_slowed(state, int(id)))
+	return {"took": took, "slowed": slowed}
+
+
+## Run one whole night and count how many flares its length pays for.
+func _count_the_flares(seed_value: int) -> Dictionary:
+	var state := State.create(seed_value)
+	Phases.begin_preparation(state)
+	Sim.advance(state, GameData.PREPARATION_TICKS)
+	# The house cannot fall, or the night ends early and the count is of a
+	# short night rather than of a night.
+	state["house_hp"] = 1 << 20
+	var waves := (GameData.NIGHTS[0] as Array).size()
+
+	var flares := 0
+	var ticks := 0
+	for _tick in 20000:
+		if int(state["phase"]) != Phases.NIGHT:
+			break
+		if Ability.ready(state):
+			Ability.use(state)
+			flares += 1
+		Sim.advance(state, 1)
+		ticks += 1
+	return {
+		"night": 1,
+		"ticks": ticks,
+		"flares": flares,
+		"waves": waves,
+	}
+
+
+## One crowd of walkers at an undefended house, with or without one press.
+func _flare_a_wave(seed_value: int, press: bool) -> Dictionary:
+	var state := _fresh_night(seed_value)
+	Pathing.refresh(state)
+	var spawn: Vector2i = Enemies.spawn_cells(state, 0)[0]
+	var route := _route_from(state, spawn)
+
+	# The player waits four tiles out from the house, on the way in - which is
+	# the decision the flare really asks for, made with their feet.
+	var stand: Vector2i = route[route.size() - 5]
+	var who: Dictionary = state["player"]
+	who["pos"] = [stand.x * Player.SUBTILE + Player.SUBTILE / 2,
+		stand.y * Player.SUBTILE + Player.SUBTILE / 2]
+
+	var sent := 8
+	for i in sent:
+		Entities.spawn(state, &"walker", spawn)
+		if i < sent - 1:
+			Sim.advance(state, GameData.SPAWN_INTERVAL_TICKS)
+
+	var before := int(state["house_hp"])
+	for _tick in 4000:
+		# Fire when the crowd is on top of them, which is what a player does.
+		if press and Ability.ready(state) and _crowd_near(state, stand) >= 3:
+			(state["intent"] as Dictionary)["ability"] = true
+		Sim.advance(state, 1)
+		if Entities.count(state) == 0:
+			break
+	return {
+		"sent": sent,
+		"house_lost": before - int(state["house_hp"]),
+		"flares": Ability.flares_used(state),
+	}
+
+
+## How many enemies are inside a flare's reach of this cell.
+func _crowd_near(state: Dictionary, cell: Vector2i) -> int:
+	var radius := int(GameData.ABILITY["radius_tiles"])
+	var near := 0
+	for id in Entities.ids(state):
+		var at := Entities.cell_of(state, id)
+		if at.x >= 0 and Grid.chebyshev(cell, at) <= radius:
+			near += 1
+	return near

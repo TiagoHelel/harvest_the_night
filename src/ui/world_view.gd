@@ -405,6 +405,26 @@ func _draw_highlight() -> void:
 
 	var size := float(GameData.TILE_SIZE)
 
+	# **The flare.** An expanding ring at the player's feet, fading as it goes,
+	# so the one button reads as something that happened *there* rather than a
+	# number changing in a corner.
+	#
+	# Drawn entirely from what the rules already recorded - where it went off
+	# and how many ticks are left - so there is nothing for the view to
+	# remember and nothing here that could disagree with the damage.
+	var burst := Ability.flare_at(_state)
+	if not burst.is_empty():
+		var full := maxf(float(GameData.ABILITY["flare_ticks"]), 1.0)
+		var left := float(Ability.flare_ticks(_state))
+		var grown := 1.0 - left / full          # 0 at the bang, 1 at the end
+		var reach := float(int(GameData.ABILITY["radius_tiles"])) + 0.5
+		var middle := (Vector2(float(burst[0]), float(burst[1]))
+			+ Vector2(0.5, 0.5)) * size
+		_highlight.draw_arc(middle, reach * size * grown, 0.0, TAU, 40,
+			Color(1.0, 0.86, 0.42, 0.9 * left / full), 2.0, true)
+		_highlight.draw_circle(middle, reach * size * grown,
+			Color(1.0, 0.78, 0.35, 0.22 * left / full))
+
 	# The build frame first, so that a ghost and an interact target on the same
 	# cell both show and the build one is on top.
 	if _ghost != null and _ghost.visible and Grid.in_bounds(_ghost_cell):

@@ -132,6 +132,9 @@ static func _tick_night(state: Dictionary) -> void:
 	# tested (0027).
 	Power.tick(state)
 	Waves.tick(state)
+	# **Before anybody moves.** A flare pressed on the tick a crowd arrives
+	# should slow that crowd's step, not the one after it.
+	Ability.tick(state)
 	Enemies.tick(state)
 	# **Straight after everybody has moved**, so a mine goes off on the tick a
 	# foot lands on it rather than up to a tick later.

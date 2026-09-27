@@ -82,6 +82,7 @@ static func begin_night(state: Dictionary) -> bool:
 		return false
 	# A new night, a fresh allowance of whatever is limited per night.
 	Building.forget_tonight(state)
+	Ability.recharge(state)
 
 	state["night"] = int(state["day"])
 	state["night_tick"] = 0
