@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`###########.............`  **50 / 109 done**
+`###########.............`  **51 / 109 done**
 
-0 doing / 59 todo / 0 blocked across 9 phases.
+0 doing / 58 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0051 - The tank**. The whole of what is left is
+First up: **0052 - The breaker**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,23 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-59 task(s) left, the ready ones first, then what they
+58 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0051 - The tank
-
-Ready to pick up.  Likely files: `src/core/game_data.gd`.
-
-The enemy that needs concentrated damage: slow, heavy, and it shrugs off chip damage.
-
-- High hit points and a flat reduction against each hit, so many small hits are worse than few big ones
-- Slow enough that the player watches it come
-- It is the reason the mortar exists
-- Hit points, reduction and speed are levers
-
-  - done when: A crossbow wall barely scratches it and a mortar drops it - measure both
-  - done when: The reduction cannot take a hit below zero damage
 
 ### 0052 - The breaker
 
@@ -198,7 +184,7 @@ Losing things. A structure that breaks should be a small disaster the player wat
 
 ### 0059 - Waves as data
 
-Waits on 0051, 0052.  Likely files: `src/core/waves.gd, src/core/game_data.gd`.
+Waits on 0052.  Likely files: `src/core/waves.gd, src/core/game_data.gd`.
 
 Before authoring ten nights, make a night a table. Composition, timing and spawn points become numbers a designer edits, not code.
 
@@ -249,7 +235,7 @@ Somebody worth watching walk around: four directions, walking, and the work verb
 
 ### 0074 - Zombie sprites
 
-Waits on 0071, 0051, 0052.  Likely files: `tools/gen_sprites.py, sprites/enemies/`.
+Waits on 0071, 0052.  Likely files: `tools/gen_sprites.py, sprites/enemies/`.
 
 Four enemies that are told apart at a glance in a dark field at 480x270, which is the only test that matters.
 
@@ -354,7 +340,7 @@ One warm loop for the farm, one cold one for the night, and a crossfade on the r
 
 ### 0058 - The Giant
 
-Waits on 0051, 0052, 0057.  Likely files: `src/core/enemies.gd, src/core/game_data.gd`.
+Waits on 0052, 0057.  Likely files: `src/core/enemies.gd, src/core/game_data.gd`.
 
 The single boss of the MVP: the test of the build you made over nine nights.
 
@@ -970,7 +956,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0040** [The shop grows](prompts/0040-shop-full.md)
 - [x] **0041** [The first day teaches itself](prompts/0041-tutorial-day.md)
 
-## 3 - The full night  (9/17)
+## 3 - The full night  (10/17)
 
 - [x] **0042** [Data-driven defences](prompts/0042-defence-data.md)
 - [x] **0043** [The flamethrower tower](prompts/0043-tower-flame.md)
@@ -981,18 +967,18 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0048** [Mines and traps](prompts/0048-traps.md)
 - [x] **0049** [Zombies path around walls](prompts/0049-pathing-walls.md)
 - [x] **0050** [The runner](prompts/0050-enemy-runner.md)
-- [ ] **0051** [The tank](prompts/0051-enemy-tank.md)
+- [x] **0051** [The tank](prompts/0051-enemy-tank.md)
 - [ ] **0052** [The breaker](prompts/0052-enemy-breaker.md)
 - [ ] **0053** [Repair during the night](prompts/0053-repair.md)
 - [ ] **0054** [The player's ability](prompts/0054-ability.md)
 - [ ] **0055** [Double speed and skipping the night](prompts/0055-speed-controls.md)
 - [ ] **0056** [The night HUD](prompts/0056-night-hud.md)
 - [ ] **0057** [Structures take damage and die](prompts/0057-structure-damage.md) - needs 0052
-- [ ] **0058** [The Giant](prompts/0058-boss-giant.md) - needs 0051, 0052, 0057
+- [ ] **0058** [The Giant](prompts/0058-boss-giant.md) - needs 0052, 0057
 
 ## 4 - Ten nights and progression  (0/12)
 
-- [ ] **0059** [Waves as data](prompts/0059-wave-data.md) - needs 0051, 0052
+- [ ] **0059** [Waves as data](prompts/0059-wave-data.md) - needs 0052
 - [ ] **0060** [The ten nights, authored](prompts/0060-ten-nights.md) - needs 0059, 0058
 - [ ] **0061** [Night rewards](prompts/0061-rewards.md) - needs 0059
 - [ ] **0062** [Technology points](prompts/0062-tech-points.md) - needs 0061
@@ -1011,7 +997,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [ ] **0072** [The farm tileset](prompts/0072-tileset.md) - needs 0071
 - [ ] **0073** [The player sprite](prompts/0073-player-art.md) - needs 0071
 - [ ] **0109** [The character reacts](prompts/0109-player-emotes.md) - needs 0073
-- [ ] **0074** [Zombie sprites](prompts/0074-zombie-art.md) - needs 0071, 0051, 0052
+- [ ] **0074** [Zombie sprites](prompts/0074-zombie-art.md) - needs 0071, 0052
 - [ ] **0075** [Buildings and towers](prompts/0075-building-art.md) - needs 0071
 - [ ] **0076** [Night lighting](prompts/0076-lighting.md) - needs 0071
 - [ ] **0077** [Particles](prompts/0077-particles.md) - needs 0074, 0075

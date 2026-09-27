@@ -897,12 +897,34 @@ const ENEMIES: Dictionary = {
 	},
 	&"tank": {
 		# Armour is flat and applies per hit, so many small hits are worse than
-		# a few big ones. That is the reason the mortar exists.
+		# a few big ones.
+		#
+		# **Four, and four is where the lever stops meaning anything.** A
+		# crossbow bolt is five, so armour four leaves one - and one is
+		# `Combat.MINIMUM_HIT`, the floor that stops an enemy being immune.
+		# Armour five and six take nothing more off a bolt and do take more
+		# off a shell, so they make the tank *worse* at being the thing the
+		# mortar is for. Measured in task 0051: a bolt lands 20% of its
+		# damage on a tank and a shell lands 90%.
+		"armour": 4,                    # LEVER: damage off each hit, 1-4
+		# **A hundred and twenty, left alone.** Task 0051 tried 160 and 220
+		# looking for the fight its prompt describes - a crossbow wall that
+		# barely scratches a tank and a mortar that drops it - and measured
+		# its way to the conclusion that no hit points produce it. Four
+		# crossbows and one mortar do 0.267 and 0.240 damage a tick against
+		# armour four, which is an eleven percent difference: every value
+		# either lets both of them win or leaves both on a knife edge. At 160
+		# the tank reached the house with 10 hit points of 160; at 220 the
+		# mortars missed the kill by 8.
+		#
+		# So the armour does the work and the hit points stay where the rest
+		# of the curve was built around them. The balance pass at 0060 has
+		# the arithmetic in the journal.
 		"hp": 120,                      # LEVER: hit points, 70-220
+		# Slow enough to watch it come: one tile and a quarter a second.
 		"ticks_per_tile": 38,           # LEVER: ticks, 30-50
 		"damage": 15,                   # LEVER: to the house, 8-25
 		"reward": 12,                   # LEVER: money, 6-20
-		"armour": 3,                    # LEVER: damage off each hit, 1-6
 	},
 	&"breaker": {
 		# It goes for what you built rather than what you live in, which makes

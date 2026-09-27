@@ -3708,3 +3708,88 @@ and nowhere else.
 
 `python tools/verify.py` prints PASS: 1556 asserts, 371 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+
+## 0051 - The tank
+
+One lever moved and one done-when could not be met. Both are worth the space.
+
+### Armour four, and four is where the lever stops meaning anything
+
+A crossbow bolt is five damage and `Combat.MINIMUM_HIT` is one, so armour four
+leaves exactly the floor. Armour five takes nothing more off a bolt and does
+take another point off a shell - which makes the tank **worse** at being the
+thing concentrated damage is for. So four is not a number picked in the middle
+of a range, it is the knee, and the lever's range is written down as 1-4 now
+rather than 1-6.
+
+What it buys, measured: against a tank a bolt lands 1 of its 5 and a shell
+lands 36 of its 40. Twenty percent against ninety. A hundred and twenty bolts
+to kill one, or four shells. Against a walker both land all of it, so it is
+the tank that makes the difference and not the towers - which is the
+requirement, exactly.
+
+### The done-when that is not true
+
+> A crossbow wall barely scratches it and a mortar drops it - measure both
+
+It is not achievable by tuning the tank, and the arithmetic says why before
+any measuring does. Against armour four:
+
+| | damage a tick, per tower | per 1000 goods |
+|---|---|---|
+| auto_crossbow | 0.0667 | 0.392 |
+| mortar | 0.2400 | 0.361 |
+
+Four crossbows are 0.267 a tick against one mortar's 0.240 - eleven percent
+apart - and the crossbow is *also* the marginally cheaper way to buy that
+damage. Two curves that close cannot be separated by the hit points between
+them. Measured at three values rather than argued:
+
+- **120** - four crossbows kill it in 616 ticks. Not "barely scratches".
+- **160** - the tank reaches the house with 10 of 160 left. A knife edge, and
+  my own assert caught me calling it "barely scratched".
+- **220** - the wall fails properly, with 70 of 220 left. And two mortars at
+  twice the price fail too, by 8 hit points.
+
+So the hit points stayed at 120, where the rest of the curve was built around
+them, and the armour does the work. If the tank is meant to be the reason the
+mortar exists then the lever is on the **mortar** - its reload or its price -
+and that belongs to a balance pass rather than to an enemy task. The finding
+is written into `implementation/prompts/0060-ten-nights.md` so it is in front
+of whoever does it, with the warning that touching the mortar re-opens task
+0050's measurement.
+
+What is asserted instead is what is true and is the actual requirement: half
+as many mortars kill a tank in less time than a wall of crossbows does, and
+per tower it is not close.
+
+### Measured
+
+    a tank: 120 hit points, 4 armour, 38 ticks a tile against a walker's 20, 0 and 20
+    against a tank a bolt lands 1 of its 5 (20%) and a shell 36 of its 40 (90%)
+    it takes 120 bolts to kill one, or 4 shells
+    a tank: four crossbows ($680) killed it in 616 ticks; two mortars ($1330,
+      half the towers) in 392
+      which is 2464 tower-ticks of crossbow against 784 of mortar
+
+The other done-when, that the reduction cannot take a hit below zero, is
+asserted directly: a hit of one, two, four or five against armour four all
+take at least `MINIMUM_HIT` off and the tank's health always goes down; a hit
+of zero or of minus fifty does nothing at all rather than healing it.
+
+### A number in a log that was not the number
+
+`_tank_against()` first reported how much health the tank had left by asking
+afterwards - and reaching the house takes it off the farm, so the answer was
+always zero. It samples every tick now. The same mistake task 0044 made with
+the entity count.
+
+### Hashes
+
+| | from | to | why |
+|---|---|---|---|
+| sim hash | `3756808106` | `3756808106` | **unchanged** - no rule moved, and there is no tank in the determinism scenario |
+| data hash | `2814341152` | `2262728717` | the tank's armour went from three to four |
+
+`python tools/verify.py` prints PASS: 1592 asserts, 371 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

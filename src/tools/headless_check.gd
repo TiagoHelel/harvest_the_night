@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 43
+const GROUPS := 44
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -107,6 +107,7 @@ func _run() -> void:
 	_task_0048_traps()
 	_task_0049_pathing()
 	_task_0050_runner()
+	_task_0051_tank()
 
 
 func _finish() -> void:
@@ -7370,5 +7371,183 @@ func _rush_against(seed_value: int, id: StringName, count: int) -> Dictionary:
 		"reached": reached,
 		"killed": sent - reached,
 		"house_lost": before - int(state["house_hp"]),
+		"powered": Power.percent(state) == 100,
+	}
+
+
+## 0051 - the tank: flat reduction, so a small hit is mostly wasted and a big
+## one is not.
+func _task_0051_tank() -> void:
+	var tank: Dictionary = GameData.ENEMIES[&"tank"]
+	var walker: Dictionary = GameData.ENEMIES[&"walker"]
+	var bolt: Dictionary = GameData.DEFENCES[&"auto_crossbow"]
+	var shell: Dictionary = GameData.DEFENCES[&"mortar"]
+	var armour := int(tank["armour"])
+
+	# **The heaviest and the slowest thing that is not the boss.**
+	print("  a tank: %d hit points, %d armour, %d ticks a tile against a "
+		% [tank["hp"], armour, tank["ticks_per_tile"]]
+		+ "walker's %d, %d and %d"
+		% [walker["hp"], walker.get("armour", 0), walker["ticks_per_tile"]])
+	for id in GameData.sorted_names(GameData.ENEMIES.keys()):
+		var one: Dictionary = GameData.ENEMIES[id]
+		if id == &"tank" or bool(one.get("is_boss", false)):
+			continue
+		expect(int(one["hp"]) < int(tank["hp"]),
+			"a tank outlasts a %s" % id, str(one["hp"]))
+		expect(int(one.get("armour", 0)) < armour,
+			"and is better armoured than a %s" % id, str(one.get("armour", 0)))
+		expect(int(one["ticks_per_tile"]) < int(tank["ticks_per_tile"]),
+			"and slower than one: you watch it come", str(one["ticks_per_tile"]))
+
+	# **Four is where the lever stops meaning anything**, which is why it is
+	# four. A bolt is five, so armour four leaves the minimum hit - and armour
+	# five takes nothing more off the bolt while still taking more off a shell.
+	expect(armour == int(bolt["damage"]) - Combat.MINIMUM_HIT,
+		"the tank's armour is exactly what floors a crossbow bolt",
+		"%d against %d" % [armour, int(bolt["damage"]) - Combat.MINIMUM_HIT])
+	expect(maxi(int(bolt["damage"]) - armour, Combat.MINIMUM_HIT)
+		== maxi(int(bolt["damage"]) - (armour + 1), Combat.MINIMUM_HIT),
+		"one more point of it would buy nothing against a bolt")
+	expect(int(shell["damage"]) - armour > int(shell["damage"]) - (armour + 1),
+		"while still costing a shell - so more armour makes a tank worse at "
+		+ "being what the mortar is for")
+
+	# **The reduction cannot take a hit below zero.** The done-when.
+	var floor_test := _fresh_night(3300)
+	var heavy := Entities.spawn(floor_test, &"tank",
+		_room_for(floor_test, Vector2i(1, 1)))
+	var full := int(Entities.get_one(floor_test, heavy)["hp"])
+	for amount in [1, 2, armour, armour + 1]:
+		var was := int(Entities.get_one(floor_test, heavy)["hp"])
+		var took := Combat.hit(floor_test, heavy, int(amount))
+		var now := int(Entities.get_one(floor_test, heavy)["hp"])
+		expect(took >= Combat.MINIMUM_HIT,
+			"a hit of %d still takes at least the minimum off" % amount,
+			str(took))
+		expect(now < was,
+			"and its health goes down, never up - armour is reduction, not "
+			+ "healing", "%d from %d" % [now, was])
+		expect(took == maxi(int(amount) - armour, Combat.MINIMUM_HIT),
+			"by exactly what the armour leaves", str(took))
+	expect(Combat.hit(floor_test, heavy, 0) == 0,
+		"and a hit of nothing is nothing, not a heal")
+	expect(Combat.hit(floor_test, heavy, -50) == 0,
+		"nor is a hit of less than nothing")
+	expect(int(Entities.get_one(floor_test, heavy)["hp"]) < full,
+		"the tank has taken damage and none of it was negative")
+
+	# **Many small hits are worse than few big ones**, which is the whole
+	# requirement, measured as how much of what was fired actually lands.
+	var bolt_lands := maxi(int(bolt["damage"]) - armour, Combat.MINIMUM_HIT)
+	var shell_lands := maxi(int(shell["damage"]) - armour, Combat.MINIMUM_HIT)
+	var bolt_share := bolt_lands * 100 / int(bolt["damage"])
+	var shell_share := shell_lands * 100 / int(shell["damage"])
+	print("  against a tank a bolt lands %d of its %d (%d%%) and a shell %d of "
+		% [bolt_lands, bolt["damage"], bolt_share, shell_lands]
+		+ "its %d (%d%%)" % [shell["damage"], shell_share])
+	expect(shell_share > bolt_share * 4,
+		"a shell keeps four times the share of its damage that a bolt does",
+		"%d%% against %d%%" % [shell_share, bolt_share])
+	# And against something unarmoured the two are the same, so it is the tank
+	# that makes the difference and not the towers.
+	for id in [&"walker", &"runner"]:
+		var soft: Dictionary = GameData.ENEMIES[id]
+		var soft_armour := int(soft.get("armour", 0))
+		expect(maxi(int(bolt["damage"]) - soft_armour, Combat.MINIMUM_HIT)
+			== int(bolt["damage"]),
+			"against a %s a bolt lands all of it" % id)
+
+	var bolts_to_kill := (int(tank["hp"]) + bolt_lands - 1) / bolt_lands
+	var shells_to_kill := (int(tank["hp"]) + shell_lands - 1) / shell_lands
+	print("  it takes %d bolts to kill one, or %d shells"
+		% [bolts_to_kill, shells_to_kill])
+	expect(bolts_to_kill > shells_to_kill * 20,
+		"twenty times as many bolts as shells, which is what a flat reduction "
+		+ "does to chip damage",
+		"%d against %d" % [bolts_to_kill, shells_to_kill])
+
+	# **Concentrated damage is what kills it**, in a night rather than in
+	# arithmetic: four crossbows against two mortars, on farms with the power
+	# on so it is the towers being compared and not the generators.
+	#
+	# The prompt asks for a crossbow wall that *barely scratches* a tank, and
+	# that turned out not to be a thing this table can do. Four crossbows and
+	# one mortar deal 0.267 and 0.240 damage a tick against armour four - an
+	# eleven percent difference - so any hit points that let the mortar win
+	# let the crossbows win too. It was measured at 120, 160 and 220: at 160
+	# the tank got in with 10 left, at 220 the mortars missed by 8. What is
+	# true, and asserted here, is that half as many mortars kill it in less
+	# time; the journal has the arithmetic and task 0060 has the levers.
+	var wall := _tank_against(3301, &"auto_crossbow", 4)
+	var shells := _tank_against(3301, &"mortar", 2)
+	print("  a tank: four crossbows ($%d) killed it in %d ticks; two mortars "
+		% [wall["spend"], wall["ticks"]]
+		+ "($%d, half the towers) in %d" % [shells["spend"], shells["ticks"]])
+	expect(wall["powered"] and shells["powered"],
+		"both farms had the power on, so this is about the towers",
+		"%s and %s" % [str(wall["powered"]), str(shells["powered"])])
+	expect(not wall["got_in"] and not shells["got_in"],
+		"both of them stop it in the end", "%s and %s" % [str(wall), str(shells)])
+	expect(shells["ticks"] < wall["ticks"],
+		"but half as many mortars do it in less time - concentrated damage "
+		+ "is what a flat reduction asks for",
+		"%d ticks against %d" % [shells["ticks"], wall["ticks"]])
+	# Tower-ticks: how long a tower had to stand there, times how many of
+	# them. The real measure of which tower the job wants.
+	var bolt_cost := int(wall["ticks"]) * int(wall["towers"])
+	var shell_cost := int(shells["ticks"]) * int(shells["towers"])
+	print("    which is %d tower-ticks of crossbow against %d of mortar"
+		% [bolt_cost, shell_cost])
+	expect(shell_cost * 3 < bolt_cost,
+		"three times the tower-ticks to do it with bolts",
+		"%d against %d" % [bolt_cost, shell_cost])
+
+	# The same wall is not simply a bad wall: it stops what it is for.
+	var soft_wall := _rush_against(3302, &"auto_crossbow", 4)
+	expect(soft_wall["house_lost"] == 0,
+		"the same four crossbows stop a rush of runners dead - it is the tank "
+		+ "they cannot hurt, not the towers that cannot shoot",
+		str(soft_wall))
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## One tank against one kind of tower, on a farm with the power on.
+func _tank_against(seed_value: int, id: StringName, count: int) -> Dictionary:
+	var state := _armed_prep(seed_value)
+	Resources.gain(state, {GameData.OIL: 900, GameData.GUNPOWDER: 900,
+		GameData.STONE: 900, GameData.IRON: 900, GameData.WOOD: 900})
+	for _i in 2:
+		Building.place(state, &"generator",
+			_room_for(state, Building.size_of(&"generator")))
+	var built := _line_of_towers(state, id, count)
+	_night_falls(state)
+	Sim.advance(state, 1)
+
+	Pathing.refresh(state)
+	var spawn: Vector2i = Enemies.spawn_cells(state, 0)[0]
+	var heavy := Entities.spawn(state, &"tank", spawn)
+	var before := int(state["house_hp"])
+	var ticks := 0
+	# **Sampled every tick.** Reaching the house takes the tank off the farm,
+	# so asking afterwards how much health it had left always answers zero -
+	# a number in a log that is not the number being measured.
+	var last_seen := int(Entities.get_one(state, heavy).get("hp", 0))
+	for tick in 6000:
+		Sim.advance(state, 1)
+		if not Entities.alive(state, heavy):
+			ticks = tick
+			break
+		last_seen = int(Entities.get_one(state, heavy).get("hp", 0))
+	var got_in := int(state["house_hp"]) < before
+	return {
+		"towers": built.size(),
+		"spend": _price_of(Building.cost_of(id)) * count,
+		"ticks": ticks,
+		"got_in": got_in,
+		"hp_left": last_seen if got_in else 0,
+		"took": int((GameData.ENEMIES[&"tank"] as Dictionary)["hp"])
+			- last_seen,
 		"powered": Power.percent(state) == 100,
 	}

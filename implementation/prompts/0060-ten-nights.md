@@ -17,6 +17,21 @@ Section 10 of the design document, as a real difficulty curve: tutorial, more, t
 - Night 1 is beatable with the tower the tutorial gives you and nothing else
 - Night 10 is not beatable without upgrades from the tech tree
 
+## What task 0051 found and left here
+
+The mortar is not a better answer to a tank than a wall of crossbows, and no
+tank lever makes it one. Against armour four a crossbow does one damage every
+fifteen ticks and a mortar thirty-six every hundred and fifty, so four
+crossbows are 0.267 a tick against one mortar's 0.240 - eleven percent apart -
+and at 170 against 665 goods the crossbow is also the cheaper way to buy it.
+0051 measured the tank at 120, 160 and 220 hit points: every value either
+lets both towers win or leaves both on a knife edge.
+
+If the tank is meant to be the reason the mortar exists, the lever is on the
+**mortar** rather than on the tank - its `reload_ticks` (3 to 8 seconds,
+currently 5) or its price. Changing either affects task 0050's measurement
+that one mortar does not stop a rush of runners, so re-run that group.
+
 ## Done when
 
 - [ ] All ten are playable start to finish
