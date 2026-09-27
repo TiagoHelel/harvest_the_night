@@ -3,7 +3,7 @@
 - **Phase:** 8 - Ship the MVP
 - **Status:** todo
 - **Depends on:** 0010
-- **Likely files:** src/core/crash.gd
+- **Likely files:** src/app/crash.gd
 
 ## Goal
 

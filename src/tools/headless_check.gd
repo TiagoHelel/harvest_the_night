@@ -32,7 +32,9 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 6
+const GROUPS := 7
+
+const SettingsScript := preload("res://src/app/settings.gd")
 
 var passed := 0
 var failed := 0
@@ -68,6 +70,7 @@ func _run() -> void:
 	_task_0006_phases()
 	_task_0007_resources()
 	_task_0008_farm()
+	_task_0009_settings()
 
 
 func _finish() -> void:
@@ -543,3 +546,141 @@ func _task_0008_farm() -> void:
 		"and the wall built by day is in the same cell by night")
 
 	_completed += 1     # last line: an abandoned group never gets here
+
+
+## 0009 - settings: it survives, it never crashes, and a bad file is not fatal.
+##
+## The autoload is not instantiated in a `--script` run, so these drive a plain
+## instance - which is why every method works without being in the tree.
+func _task_0009_settings() -> void:
+	_wipe_settings_files()
+
+	# **A missing file is the first run, not an error.**
+	var s: Node = SettingsScript.new()
+	s.load_from_disk()
+	expect(s.loaded_from_defaults(), "a missing file starts on defaults")
+	expect(is_equal_approx(s.get_float(&"audio/master"), 1.0),
+		"and the default is the default", str(s.get_float(&"audio/master")))
+
+	# A changed value fires its own key, once, and only when it changed.
+	var fired: Array = []
+	s.changed.connect(func(key: StringName) -> void: fired.append(key))
+	s.set_value(&"audio/master", 0.4)
+	expect(fired == [&"audio/master"], "changing a key emits exactly that key",
+		str(fired))
+	s.set_value(&"audio/master", 0.4)
+	expect(fired.size() == 1, "setting it to what it already is emits nothing",
+		str(fired))
+
+	# **It survived.** A second instance reads what the first one wrote.
+	var again: Node = SettingsScript.new()
+	again.load_from_disk()
+	expect(not again.loaded_from_defaults(), "the file was found")
+	expect(is_equal_approx(again.get_float(&"audio/master"), 0.4),
+		"and the value survived a reload",
+		str(again.get_float(&"audio/master")))
+	expect(is_equal_approx(again.get_float(&"audio/music"), 0.8),
+		"untouched keys are still their defaults")
+
+	# **A corrupt file boots on defaults and says so.**
+	var f := FileAccess.open(s.PATH, FileAccess.WRITE)
+	f.store_string("[[[ this is not a config file = = = ]]")
+	f.close()
+	print("  (the WARNING below is deliberate - a corrupt file being refused)")
+	var broken: Node = SettingsScript.new()
+	broken.load_from_disk()
+	expect(broken.loaded_from_defaults(), "a corrupt file starts on defaults")
+	expect(is_equal_approx(broken.get_float(&"audio/master"), 1.0),
+		"with every value back at its default")
+	expect(FileAccess.file_exists(s.PATH),
+		"and the bad file is left alone rather than deleted")
+
+	# The same for a file that parses but is somebody else's - ConfigFile is
+	# lenient enough that "it loaded" proves nothing about who wrote it.
+	var foreign := ConfigFile.new()
+	foreign.set_value("audio", "master", 0.9)      # no [meta] version
+	foreign.save(s.PATH)
+	print("  (the WARNING below is deliberate - a file we did not write)")
+	var alien: Node = SettingsScript.new()
+	alien.load_from_disk()
+	expect(alien.loaded_from_defaults(),
+		"a file without our version marker is not trusted")
+	expect(is_equal_approx(alien.get_float(&"audio/master"), 1.0),
+		"and none of its values are used",
+		str(alien.get_float(&"audio/master")))
+	alien.free()
+
+	# A key from an older build is dropped rather than kept for ever.
+	_wipe_settings_files()
+	var cfg := ConfigFile.new()
+	cfg.set_value("meta", "version", broken.VERSION)
+	cfg.set_value("audio", "master", 0.25)
+	cfg.set_value("audio", "quadrophonic", true)     # never existed
+	cfg.set_value("video", "vsync", "yes")           # right key, wrong type
+	cfg.save(s.PATH)
+	print("  (the WARNING below is deliberate - unknown keys being dropped)")
+	var loaded: Node = SettingsScript.new()
+	loaded.load_from_disk()
+	expect(is_equal_approx(loaded.get_float(&"audio/master"), 0.25),
+		"a good key is read")
+	expect(loaded.get_bool(&"video/vsync") == true,
+		"a key of the wrong type falls back to its default rather than "
+		+ "poisoning a panel")
+
+	# Groups are what an options tab is.
+	var audio: Dictionary = loaded.group(&"audio")
+	expect(audio.size() == 5, "the audio group is five settings",
+		str(audio.size()))
+	expect(audio.has(&"audio/master") and not audio.has(&"video/vsync"),
+		"and holds only its own")
+
+	# Reset puts one key, or all of them, back.
+	loaded.set_value(&"a11y/ui_scale", 2.0)
+	loaded.reset(&"a11y/ui_scale")
+	expect(is_equal_approx(loaded.get_float(&"a11y/ui_scale"), 1.0),
+		"one key resets")
+	loaded.set_value(&"audio/music", 0.1)
+	loaded.reset()
+	expect(is_equal_approx(loaded.get_float(&"audio/music"), 0.8),
+		"and everything resets")
+
+	# An unknown key is refused at the call site too.
+	print("  (the ERROR lines below are deliberate - unknown keys refused)")
+	expect(loaded.get_value(&"video/raytracing") == null,
+		"reading a key that does not exist returns null and complains")
+	loaded.set_value(&"video/raytracing", true)
+	expect(not loaded._values.has(&"video/raytracing"),
+		"and writing one does not invent it")
+	loaded.set_value(&"audio/master", "loud")
+	expect(is_equal_approx(loaded.get_float(&"audio/master"), 1.0),
+		"a value of the wrong type is refused")
+
+	# **The crash window is covered.** A run that died between removing the old
+	# file and renaming the new one leaves only the temporary file; the next
+	# load recovers it instead of silently resetting the player's options.
+	_wipe_settings_files()
+	var rescue := ConfigFile.new()
+	rescue.set_value("meta", "version", broken.VERSION)
+	rescue.set_value("audio", "sfx", 0.33)
+	rescue.save(s.TEMP_PATH)
+	print("  (the WARNING below is deliberate - a temp file being recovered)")
+	var recovered: Node = SettingsScript.new()
+	recovered.load_from_disk()
+	expect(is_equal_approx(recovered.get_float(&"audio/sfx"), 0.33),
+		"a settings file left half-written is recovered, not thrown away",
+		str(recovered.get_float(&"audio/sfx")))
+
+	_wipe_settings_files()
+	s.free()
+	again.free()
+	broken.free()
+	loaded.free()
+	recovered.free()
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+func _wipe_settings_files() -> void:
+	for path in ["user://settings.cfg", "user://settings.cfg.tmp"]:
+		if FileAccess.file_exists(path):
+			DirAccess.remove_absolute(ProjectSettings.globalize_path(path))

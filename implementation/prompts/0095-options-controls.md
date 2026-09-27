@@ -3,7 +3,7 @@
 - **Phase:** 7 - Shell and product
 - **Status:** todo
 - **Depends on:** 0009, 0092
-- **Likely files:** src/ui/options_controls.gd, src/core/input_actions.gd
+- **Likely files:** src/ui/options_controls.gd, src/app/input_actions.gd
 
 ## Goal
 

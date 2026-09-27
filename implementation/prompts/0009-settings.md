@@ -1,9 +1,9 @@
 # 0009 - Settings singleton
 
 - **Phase:** 0 - Foundation
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0001
-- **Likely files:** src/core/settings.gd, project.godot
+- **Likely files:** src/app/settings.gd, project.godot
 
 ## Goal
 

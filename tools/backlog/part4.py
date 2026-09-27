@@ -13,7 +13,7 @@ TASKS = [
     # ============================================== phase 6 - sound and juice
     dict(id=83, phase=P6, title="Audio buses and a sound manager",
          slug="audio-buses", deps=[9],
-         files="src/core/audio.gd, default_bus_layout.tres",
+         files="src/app/audio.gd, default_bus_layout.tres",
          goal="Master, SFX and Music buses plus a small `Audio.play(id)`, so the "
               "sound tasks after this only have to drop in files.",
          req=["Three buses in `default_bus_layout.tres`",
@@ -69,7 +69,7 @@ TASKS = [
               "The crossfade lands with the transition, not before or after it"]),
 
     dict(id=87, phase=P6, title="Ambience", slug="ambience", deps=[84, 85],
-         files="src/core/ambience.gd",
+         files="src/app/ambience.gd",
          goal="The bed under everything: birds and water by day, wind and "
               "distant groaning by night.",
          req=["A day bed and a night bed, cross-fading with the transition",
@@ -141,7 +141,7 @@ TASKS = [
 
     dict(id=92, phase=P7, title="The main menu and the router",
          slug="main-menu", deps=[91, 10],
-         files="src/core/app.gd, src/ui/main_menu.gd",
+         files="src/app/app.gd, src/ui/main_menu.gd",
          goal="One router that owns which screen is up, so screens stop knowing "
               "about each other.",
          req=["An `App` autoload with `goto(state)` and a `state_changed` signal",
@@ -182,7 +182,7 @@ TASKS = [
 
     dict(id=95, phase=P7, title="Options: controls", slug="options-controls",
          deps=[9, 92],
-         files="src/ui/options_controls.gd, src/core/input_actions.gd",
+         files="src/ui/options_controls.gd, src/app/input_actions.gd",
          goal="Named actions instead of hardcoded keys, and a screen to rebind "
               "them.",
          req=["Every key the game reads is a named action: move, interact, build, "
@@ -208,7 +208,7 @@ TASKS = [
               "Pausing for five minutes does not fast-forward on resume"]),
 
     dict(id=97, phase=P7, title="English and Portuguese", slug="i18n", deps=[81],
-         files="src/core/i18n.gd, assets/locale/",
+         files="src/app/i18n.gd, assets/locale/",
          goal="Every string through a translation table, with pt-BR alongside "
               "English - the reference sheet is in Portuguese and so is the "
               "audience.",
@@ -224,7 +224,7 @@ TASKS = [
 
     dict(id=98, phase=P7, title="Accessibility", slug="accessibility",
          deps=[93, 97],
-         files="src/core/a11y.gd, src/ui/options_a11y.gd",
+         files="src/app/a11y.gd, src/ui/options_a11y.gd",
          goal="The cheap things that decide whether a lot of people can play it "
               "at all.",
          req=["Screen shake, flashing and particle density each separately "
@@ -305,7 +305,7 @@ TASKS = [
 
     dict(id=103, phase=P8, title="Crash and error reporting", slug="error-report",
          deps=[10],
-         files="src/core/crash.gd",
+         files="src/app/crash.gd",
          goal="When it breaks on someone else's machine, get enough to fix it "
               "without them.",
          req=["A handler that writes state, seed, tick, phase and the last log "
@@ -319,7 +319,7 @@ TASKS = [
 
     dict(id=104, phase=P8, title="Saves survive an update", slug="save-compat",
          deps=[10, 62],
-         files="src/core/save.gd",
+         files="src/app/save.gd",
          goal="Adding a lever or a tech node must not delete somebody's run.",
          req=["A save version and a migration per bump, applied in order",
               "A missing key takes the default; an unknown key is dropped with a "

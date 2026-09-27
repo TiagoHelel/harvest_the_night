@@ -3,7 +3,7 @@
 - **Phase:** 6 - Sound and juice
 - **Status:** todo
 - **Depends on:** 0009
-- **Likely files:** src/core/audio.gd, default_bus_layout.tres
+- **Likely files:** src/app/audio.gd, default_bus_layout.tres
 
 ## Goal
 

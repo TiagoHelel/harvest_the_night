@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`##......................`  **8 / 108 done**
+`##......................`  **9 / 108 done**
 
-0 doing / 100 todo / 0 blocked across 9 phases.
+0 doing / 99 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0009 - Settings singleton**. The whole of what is left is
+First up: **0010 - Save the profile and the run**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,29 +26,13 @@ which rewrites this file for you.
 
 ## What is open
 
-100 task(s) left, the ready ones first, then what they
+99 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
-### 0009 - Settings singleton
-
-Ready to pick up.  Likely files: `src/core/settings.gd, project.godot`.
-
-One place that owns every user setting and writes it to `user://settings.cfg`, so the options menus later only read and write it.
-
-- `Settings` autoload with typed getters grouped as video, audio, gameplay and controls
-- Atomic save: temp file then rename, so a crash mid-write cannot corrupt the config
-- A `version` field and a migration hook for when keys change
-- Defaults in one dictionary; an unknown key on load is dropped with a warning and never crashes
-- `signal changed(key)` so panels react instead of polling
-
-  - done when: Change a value, quit, relaunch: it survived
-  - done when: Delete the file: the game boots on defaults with no error
-  - done when: Corrupt the file by hand: the game boots on defaults and says so in the log
-
 ### 0010 - Save the profile and the run
 
-Ready to pick up.  Likely files: `src/core/save.gd`.
+Ready to pick up.  Likely files: `src/app/save.gd`.
 
 Quitting on day 4 and coming back to day 4. The state is already plain data, so this is serialisation and versioning, not a redesign.
 
@@ -153,6 +137,22 @@ Somewhere to see everything at once, which the HUD cannot do once there are twel
   - done when: Every resource in game_data appears without being listed twice
   - done when: Adding a resource to game_data makes it appear with no UI edit
 
+### 0083 - Audio buses and a sound manager
+
+Ready to pick up.  Likely files: `src/app/audio.gd, default_bus_layout.tres`.
+
+Master, SFX and Music buses plus a small `Audio.play(id)`, so the sound tasks after this only have to drop in files.
+
+- Three buses in `default_bus_layout.tres`
+- `Audio` autoload mapping a string id to a stream and a bus
+- Volumes read from Settings on boot and on `changed`
+- An unknown id warns once and stays silent
+- A polyphony cap and a same-frame dedupe, so twenty towers firing on one tick cannot clip
+
+  - done when: `Audio.play('missing')` warns exactly once and does not crash
+  - done when: Master at zero silences everything including music
+  - done when: Twenty simultaneous shots produce one clean sound, not clipping
+
 ### 0015 - The player walks and interacts
 
 Waits on 0013.  Likely files: `src/core/player.gd, src/ui/player_view.gd`.
@@ -215,25 +215,23 @@ Type that is crisp at 480x270 and does not fight the art.
   - done when: Every accented character in the Portuguese strings renders
   - done when: A changing number does not shift the text around it
 
-### 0083 - Audio buses and a sound manager
+### 0084 - The sounds of the day
 
-Waits on 0009.  Likely files: `src/core/audio.gd, default_bus_layout.tres`.
+Waits on 0083.  Likely files: `tools/gen_sfx.py, assets/sfx/`.
 
-Master, SFX and Music buses plus a small `Audio.play(id)`, so the sound tasks after this only have to drop in files.
+Chop, mine, till, plant, water, the fishing splash and the bite, the craft, the sale - generated, not licensed.
 
-- Three buses in `default_bus_layout.tres`
-- `Audio` autoload mapping a string id to a stream and a bus
-- Volumes read from Settings on boot and on `changed`
-- An unknown id warns once and stays silent
-- A polyphony cap and a same-frame dedupe, so twenty towers firing on one tick cannot clip
+- `tools/gen_sfx.py` synthesises every effect to WAV and is deterministic
+- Every day verb has a sound and a small random pitch so repetition does not grate
+- Cozy, soft, short: the day is the calm half
+- The bite is the most attention-grabbing sound of the day, because it is the only one with a window
 
-  - done when: `Audio.play('missing')` warns exactly once and does not crash
-  - done when: Master at zero silences everything including music
-  - done when: Twenty simultaneous shots produce one clean sound, not clipping
+  - done when: Chopping a tree for a full minute does not become annoying - go and check
+  - done when: Regenerating produces byte-identical files
 
 ### 0103 - Crash and error reporting
 
-Waits on 0010.  Likely files: `src/core/crash.gd`.
+Waits on 0010.  Likely files: `src/app/crash.gd`.
 
 When it breaks on someone else's machine, get enough to fix it without them.
 
@@ -322,20 +320,6 @@ Section 18: warm and cozy by day, blue and purple by night, from one set of spri
 
   - done when: Switching reality changes nothing but the light, and the farm is instantly recognisable - the whole point of the design document
   - done when: A screenshot of each sits next to the reference sheet and holds up
-
-### 0084 - The sounds of the day
-
-Waits on 0083.  Likely files: `tools/gen_sfx.py, assets/sfx/`.
-
-Chop, mine, till, plant, water, the fishing splash and the bite, the craft, the sale - generated, not licensed.
-
-- `tools/gen_sfx.py` synthesises every effect to WAV and is deterministic
-- Every day verb has a sound and a small random pitch so repetition does not grate
-- Cozy, soft, short: the day is the calm half
-- The bite is the most attention-grabbing sound of the day, because it is the only one with a window
-
-  - done when: Chopping a tree for a full minute does not become annoying - go and check
-  - done when: Regenerating produces byte-identical files
 
 ### 0086 - Two pieces of music
 
@@ -682,7 +666,7 @@ The game currently boots into a farm. Make it boot into a game.
 
 ### 0097 - English and Portuguese
 
-Waits on 0081.  Likely files: `src/core/i18n.gd, assets/locale/`.
+Waits on 0081.  Likely files: `src/app/i18n.gd, assets/locale/`.
 
 Every string through a translation table, with pt-BR alongside English - the reference sheet is in Portuguese and so is the audience.
 
@@ -759,7 +743,7 @@ The other half of a tower defence: making the zombies walk where you want them t
 
 ### 0092 - The main menu and the router
 
-Waits on 0091, 0010.  Likely files: `src/core/app.gd, src/ui/main_menu.gd`.
+Waits on 0091, 0010.  Likely files: `src/app/app.gd, src/ui/main_menu.gd`.
 
 One router that owns which screen is up, so screens stop knowing about each other.
 
@@ -863,7 +847,7 @@ Make the flow field earn its keep: cost, not just blocked, so zombies prefer the
 
 ### 0093 - Options: video
 
-Waits on 0009, 0092.  Likely files: `src/ui/options_video.gd`.
+Waits on 0092.  Likely files: `src/ui/options_video.gd`.
 
 Resolution, window mode and scaling, done properly for a pixel art game.
 
@@ -892,7 +876,7 @@ Master, music, effects and ambience, with a test sound on each.
 
 ### 0095 - Options: controls
 
-Waits on 0009, 0092.  Likely files: `src/ui/options_controls.gd, src/core/input_actions.gd`.
+Waits on 0092.  Likely files: `src/ui/options_controls.gd, src/app/input_actions.gd`.
 
 Named actions instead of hardcoded keys, and a screen to rebind them.
 
@@ -1100,7 +1084,7 @@ The other half: shots, the flamethrower, the mortar, impacts, the groan, the dea
 
 ### 0098 - Accessibility
 
-Waits on 0093, 0097.  Likely files: `src/core/a11y.gd, src/ui/options_a11y.gd`.
+Waits on 0093, 0097.  Likely files: `src/app/a11y.gd, src/ui/options_a11y.gd`.
 
 The cheap things that decide whether a lot of people can play it at all.
 
@@ -1254,7 +1238,7 @@ Four enemies that are told apart at a glance in a dark field at 480x270, which i
 
 ### 0087 - Ambience
 
-Waits on 0084, 0085.  Likely files: `src/core/ambience.gd`.
+Waits on 0084, 0085.  Likely files: `src/app/ambience.gd`.
 
 The bed under everything: birds and water by day, wind and distant groaning by night.
 
@@ -1481,7 +1465,7 @@ A number, checked automatically, instead of a feeling about whether it runs well
 
 ### 0104 - Saves survive an update
 
-Waits on 0010, 0062.  Likely files: `src/core/save.gd`.
+Waits on 0010, 0062.  Likely files: `src/app/save.gd`.
 
 Adding a lever or a tech node must not delete somebody's run.
 
@@ -1537,7 +1521,7 @@ For the player who beat the Giant and wants to know how far the farm goes. Cheap
   - done when: Night 25 is generated and playable
   - done when: The same seed generates the same night 25 twice
 
-## 0 - Foundation  (8/12)
+## 0 - Foundation  (9/12)
 
 - [x] **0001** [Godot project scaffold](prompts/0001-project-scaffold.md)
 - [x] **0002** [Fixed-timestep deterministic simulation](prompts/0002-sim-tick.md)
@@ -1547,7 +1531,7 @@ For the player who beat the Giant and wants to know how far the farm goes. Cheap
 - [x] **0006** [The phase machine: day, preparation, night, result](prompts/0006-phase-machine.md)
 - [x] **0007** [The resource ledger](prompts/0007-resource-ledger.md)
 - [x] **0008** [The farm grid](prompts/0008-farm-grid.md)
-- [ ] **0009** [Settings singleton](prompts/0009-settings.md)
+- [x] **0009** [Settings singleton](prompts/0009-settings.md)
 - [ ] **0010** [Save the profile and the run](prompts/0010-save.md)
 - [ ] **0011** [input_check harness](prompts/0011-input-check.md)
 - [ ] **0012** [Debug overlay](prompts/0012-debug-overlay.md)
@@ -1639,7 +1623,7 @@ For the player who beat the Giant and wants to know how far the farm goes. Cheap
 
 ## 6 - Sound and juice  (0/8)
 
-- [ ] **0083** [Audio buses and a sound manager](prompts/0083-audio-buses.md) - needs 0009
+- [ ] **0083** [Audio buses and a sound manager](prompts/0083-audio-buses.md)
 - [ ] **0084** [The sounds of the day](prompts/0084-sfx-day.md) - needs 0083
 - [ ] **0085** [The sounds of the night](prompts/0085-sfx-night.md) - needs 0083, 0026
 - [ ] **0086** [Two pieces of music](prompts/0086-music.md) - needs 0083, 0022
@@ -1652,9 +1636,9 @@ For the player who beat the Giant and wants to know how far the farm goes. Cheap
 
 - [ ] **0091** [The title screen](prompts/0091-title-screen.md) - needs 0081
 - [ ] **0092** [The main menu and the router](prompts/0092-main-menu.md) - needs 0091, 0010
-- [ ] **0093** [Options: video](prompts/0093-options-video.md) - needs 0009, 0092
+- [ ] **0093** [Options: video](prompts/0093-options-video.md) - needs 0092
 - [ ] **0094** [Options: audio](prompts/0094-options-audio.md) - needs 0083, 0092
-- [ ] **0095** [Options: controls](prompts/0095-options-controls.md) - needs 0009, 0092
+- [ ] **0095** [Options: controls](prompts/0095-options-controls.md) - needs 0092
 - [ ] **0096** [The pause menu](prompts/0096-pause-menu.md) - needs 0092
 - [ ] **0097** [English and Portuguese](prompts/0097-i18n.md) - needs 0081
 - [ ] **0098** [Accessibility](prompts/0098-accessibility.md) - needs 0093, 0097

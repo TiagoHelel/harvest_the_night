@@ -132,6 +132,42 @@ def check_godot_present():
     return check("godot import", code == 0, "" if code == 0 else tail(out))
 
 
+def check_core_is_pure():
+    """src/core/ is node-free, clock-free and unseeded-random-free.
+
+    This is the house rule the whole determinism guarantee rests on, so it is
+    checked rather than remembered. A node in there would mean the rules could
+    not run headless; a clock read or a bare randi() would mean two runs of the
+    same seed diverge, and the hash guard would start failing for reasons
+    nobody could find."""
+    banned = [
+        (re.compile(r"^\s*extends\s+Node"), "extends Node"),
+        (re.compile(r"(?<![\w.])randi\s*\("), "randi()"),
+        (re.compile(r"(?<![\w.])randf\s*\("), "randf()"),
+        (re.compile(r"(?<![\w.])randi_range\s*\("), "randi_range()"),
+        (re.compile(r"(?<![\w.])randf_range\s*\("), "randf_range()"),
+        (re.compile(r"Time\."), "Time."),
+        (re.compile(r"RandomNumberGenerator"), "RandomNumberGenerator"),
+        (re.compile(r"OS\.")," OS."),
+    ]
+    bad = []
+    core = rel("src", "core")
+    if not os.path.isdir(core):
+        return skip("core is pure", "no src/core/ yet")
+    for f in sorted(os.listdir(core)):
+        if not f.endswith(".gd"):
+            continue
+        for n, line in enumerate(open(os.path.join(core, f),
+                                     encoding="utf-8"), 1):
+            # A doc comment explaining the ban is not a violation of it.
+            if line.lstrip().startswith("#"):
+                continue
+            for pattern, what in banned:
+                if pattern.search(line):
+                    bad.append("%s:%d %s" % (f, n, what))
+    return check("core is pure", not bad, "; ".join(bad)[:300])
+
+
 def check_scripts_parse():
     """Every .gd in the project, parsed.
 
@@ -313,6 +349,7 @@ def main():
     check_backlog()
     check_godot_present()
     check_scripts_parse()
+    check_core_is_pure()
 
     if not hashes_only:
         check_script("headless_check", "src/tools/headless_check.gd",

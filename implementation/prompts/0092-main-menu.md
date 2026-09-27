@@ -3,7 +3,7 @@
 - **Phase:** 7 - Shell and product
 - **Status:** todo
 - **Depends on:** 0091, 0010
-- **Likely files:** src/core/app.gd, src/ui/main_menu.gd
+- **Likely files:** src/app/app.gd, src/ui/main_menu.gd
 
 ## Goal
 

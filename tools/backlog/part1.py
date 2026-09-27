@@ -179,7 +179,7 @@ TASKS = [
               "byte-identical afterwards"]),
 
     dict(id=9, phase=P0, title="Settings singleton", slug="settings", deps=[1],
-         files="src/core/settings.gd, project.godot",
+         files="src/app/settings.gd, project.godot",
          goal="One place that owns every user setting and writes it to "
               "`user://settings.cfg`, so the options menus later only read and "
               "write it.",
@@ -198,7 +198,7 @@ TASKS = [
 
     dict(id=10, phase=P0, title="Save the profile and the run", slug="save",
          deps=[6, 7, 8],
-         files="src/core/save.gd",
+         files="src/app/save.gd",
          goal="Quitting on day 4 and coming back to day 4. The state is already "
               "plain data, so this is serialisation and versioning, not a "
               "redesign.",

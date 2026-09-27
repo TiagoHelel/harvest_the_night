@@ -404,3 +404,51 @@ Notes:
   the same on every machine. Task 0025 depends on it.
 - Terrain is a `PackedByteArray`: 720 bytes, deep-copied by `State.copy()` and
   folded by the hash as one string rather than 720.
+
+## 0009 - Settings singleton - done 2026-09-27
+
+What changed: `Settings` owns every presentation and comfort option and writes
+them to `user://settings.cfg`. One defaults dictionary, namespaced keys, typed
+getters, `changed(key)`, an atomic save and a migration hook.
+
+**A new directory, `src/app/`**, and nine backlog prompts moved into it.
+
+Files: src/app/settings.gd, src/app/README.md, project.godot, tools/verify.py,
+src/tools/headless_check.gd, tools/backlog/part1.py, tools/backlog/part4.py
+
+Verify: PASS - 8 passed, 2 skipped, 10s. **182 asserts, 0 failed** (160 before).
+Both hashes unchanged, correctly: nothing here is a rule or a lever.
+
+Notes:
+
+- **`src/app/` exists because the house rule would otherwise have been broken
+  nine times.** The prompt put `settings.gd` in `src/core/`, and eight later
+  prompts did the same for save, audio, ambience, the router, input actions,
+  i18n, a11y and crash reporting. Every one of those is a node that touches the
+  disk. `src/core/` earns its guarantee - headless, deterministic, replayable -
+  by being narrow, and a settings file reading `user://` is exactly what it must
+  not contain. All nine prompts now say `src/app/`; they were all still `todo`,
+  so regenerating them lost nothing.
+- **The rule is now checked rather than remembered.** `verify.py` has a **core
+  is pure** row: no `extends Node`, no `randi`/`randf`/`randi_range`/
+  `randf_range`, no `Time.`, no `OS.`, no `RandomNumberGenerator` anywhere in
+  `src/core/`, doc comments excepted. It would have caught this drift on task
+  0010 instead of task 0009.
+- **The test found a real hole, which is what tests are for.**
+  `ConfigFile.load()` returning OK does not mean the file was ours: Godot's
+  parser is lenient enough to read `[[[ this is not a config file ]]` as a
+  section and report success. A genuinely corrupt file was therefore reaching
+  the happy path, coming up on defaults, and never telling anybody. Every file
+  this class writes carries `[meta] version`; one that does not is now treated
+  as corrupt, warned about, and left on disk rather than overwritten.
+- **The crash window is closed, not ignored.** Windows will not rename onto an
+  existing file, so an atomic save has to remove the old one first - leaving a
+  moment where neither file exists. `_recover_path()` reads the temporary file
+  when the real one is missing, so a crash in that window costs nothing.
+  Asserted.
+- Settings works on a plain `Settings.new()` outside the tree. An autoload is
+  only added to the root when a scene runs, so a `--script` check would never
+  see one; `_ready()` does nothing but call `load_from_disk()`.
+- A key not in `DEFAULTS` does not exist: it cannot be read, cannot be written,
+  and is dropped from a file that has it. A value of the wrong type falls back
+  to its default rather than poisoning a panel.

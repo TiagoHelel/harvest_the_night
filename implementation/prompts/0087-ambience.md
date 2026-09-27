@@ -3,7 +3,7 @@
 - **Phase:** 6 - Sound and juice
 - **Status:** todo
 - **Depends on:** 0084, 0085
-- **Likely files:** src/core/ambience.gd
+- **Likely files:** src/app/ambience.gd
 
 ## Goal
 

@@ -18,6 +18,12 @@ config/features=PackedStringArray("4.7", "GL Compatibility")
 boot_splash/bg_color=Color(0.054902, 0.047059, 0.098039, 1)
 boot_splash/show_image=false
 
+[autoload]
+
+; Application services, not rules. src/core/ cannot see these and must not:
+; they are nodes, they touch the disk, and they are not deterministic.
+Settings="*res://src/app/settings.gd"
+
 [display]
 
 ; 480x270 is 16:9 at 30x17 tiles of 16px, and scales to 1080p at exactly 4x.
