@@ -2280,3 +2280,97 @@ not shots. Counted per kind now.
 
 `python tools/verify.py` prints PASS: 947 asserts, 256 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+
+## 0036 - The inventory - done 2026-09-27
+
+Somewhere to see all fourteen resources, which a 480 pixel top bar cannot do.
+
+**What changed.** New `src/core/inventory.gd` and `src/ui/inventory_panel.gd`,
+and a `RESOURCE_GROUPS` table read off the reference sheet. `I` opens a panel
+listing every resource with its amount and its price, grouped, and the day
+carries on behind it.
+
+Files: `src/core/inventory.gd` (new), `src/ui/inventory_panel.gd` (new),
+`game_data.gd`, `scenes/Main.tscn`, `project.godot`, `src/ui/main.gd`, both
+test tools.
+Verify: 1033 headless / 293 input / **sim hash unchanged**, data hash moved.
+
+### It holds nothing
+
+There is no inventory in the state and there is not going to be one. Every
+function in `inventory.gd` is a question about `state["resources"]` answered on
+the spot. A panel with its own totals is a panel that can disagree with the
+ledger, and the number the player believes is the one on screen.
+
+There is an assert that `state` has no `"inventory"` key at all, which is the
+bluntest way to say it.
+
+**Why it is in `src/core/` when it draws nothing:** what is shown and in what
+order is a rule, not a decoration. It has to be the same on every machine and
+derived from `GameData` rather than typed into a panel - which is also what
+makes the second done-when true rather than hopeful.
+
+### Grouped off the sheet
+
+`docs/reference-sheet.png` lays its resource panel out in two rows of six -
+wood, stone, iron, food, fish, oil, then wheat, corn, meat, gunpowder, money,
+energy. Not alphabetical and not arbitrary: what you gather, then what you grow
+and what you make of it. Named:
+
+    materials   wood, stone, iron
+    larder      food, fish, meat
+    crops       wheat, corn, carrot
+    workshop    oil, gunpowder, incendiary
+    the farm    money, energy
+
+Carrot and incendiary are not on the sheet's panel and sit with their own kind.
+
+### Adding a resource makes it appear - checked, not claimed
+
+Done-when says so, so it was done rather than reasoned about. An `amber` was
+added to `RESOURCES` and `SELL_PRICE` and **deliberately to no group**, and
+nothing else was touched:
+
+    before   14 rows in 5 groups
+    after    15 rows in 6 groups: ... and "other"
+
+No UI edit, no grouping edit. `Inventory.groups()` sweeps whatever is in no
+group into `GROUP_OTHER` rather than dropping it, so forgetting the grouping
+table is a cosmetic mistake and never an invisible resource.
+
+One assert failed during the experiment - "everything the game ships with has
+a group" - which is the assert doing its job rather than a bug. Amber was then
+removed.
+
+### Notes
+
+- **The day does not stop.** `design.md` calls the farm the cozy half, and a
+  panel that paused the clock would make checking your stores a free action and
+  reading the HUD a chore you do instead. It also does not set
+  `state["open_panel"]` the way the stall does, so the farmer can walk with it
+  open - there is nothing in it to click, so there is nothing to steal.
+- **Blank, not `$0`**, for money and energy. Money does not sell for money and
+  energy is a rate rather than a thing in a sack; "$0" reads as worthless,
+  which is a different claim from "not for sale".
+- A resource you have none of still gets a row. A thing you have none of is a
+  thing you can go and get, and a list that grew as you got richer would teach
+  nothing about where to go.
+- `_build()` takes rows out of the tree before freeing them, which is the bug
+  task 0032 found in the build palette. Written that way from the start here.
+- `check_groups()` refuses a resource in two groups or a group naming
+  something that is not a resource, both with teeth-tests.
+
+### Hashes
+
+| | from | to | why |
+|---|---|---|---|
+| sim hash | `3087806628` | unchanged | **as it should be.** This task added a view; a view-layer task that moved the sim hash would mean something in `src/ui/` was writing to the state |
+| data hash | `4237661147` | `2144055300` | `RESOURCE_GROUPS` is new and is in `digest()` |
+
+The grouping is presentation rather than balance, so it is worth saying why it
+is in the digest at all: it is data in `game_data.gd` that `src/core/` reads
+and that the asserts depend on the order of, and `digest()` already covers the
+farm map and the resource list for the same reason.
+
+`python tools/verify.py` prints PASS: 1033 asserts, 293 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

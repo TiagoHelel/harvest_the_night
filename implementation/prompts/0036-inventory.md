@@ -1,7 +1,7 @@
 # 0036 - The inventory
 
 - **Phase:** 2 - The full day
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0007
 - **Likely files:** src/core/inventory.gd, src/ui/inventory_panel.gd
 

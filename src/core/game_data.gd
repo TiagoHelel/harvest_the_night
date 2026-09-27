@@ -572,6 +572,31 @@ const LIVESTOCK: Dictionary = {
 	},
 }
 
+## How the inventory panel groups things, in the order it draws them.
+##
+## **Off the reference sheet.** `docs/reference-sheet.png` lays its resource
+## panel out in two rows of six - wood, stone, iron, food, fish, oil on the
+## top and wheat, corn, meat, gunpowder, money, energy underneath - which is
+## not alphabetical and not arbitrary: it is what you gather, then what you
+## grow and what you make of it. These groups are that, named, with the two
+## resources the sheet does not show (carrot, incendiary) sitting with their
+## own kind.
+##
+## **A resource in no group still appears.** `Inventory.groups()` sweeps
+## whatever is left into `GROUP_OTHER` rather than dropping it, so adding one
+## to `RESOURCES` and forgetting this table is a cosmetic mistake and not an
+## invisible resource. That is the done-when of task 0036.
+const GROUP_OTHER := &"other"
+
+const RESOURCE_GROUPS: Array = [
+	{"name": &"materials", "members": [WOOD, STONE, IRON]},
+	{"name": &"larder", "members": [FOOD, FISH, MEAT]},
+	{"name": &"crops", "members": [WHEAT, CORN, CARROT]},
+	{"name": &"workshop", "members": [OIL, GUNPOWDER, INCENDIARY]},
+	{"name": &"the farm", "members": [MONEY, ENERGY]},
+]
+
+
 ## What a tower manages on an empty pool.
 ##
 ## **A slow basic shot, never a silent tower.** A tower that stopped would be a
@@ -858,6 +883,7 @@ static func validate() -> Array:
 	errors.append_array(check_chain(RECIPES, SELL_PRICE))
 	errors.append_array(check_livestock(LIVESTOCK, FARM_MAP))
 	errors.append_array(check_ammo(DEFENCES, RECIPES))
+	errors.append_array(check_groups(RESOURCE_GROUPS, RESOURCES))
 
 	for res in sorted_names(REPAIR_COST_PER_HP.keys()):
 		if not RESOURCES.has(res):
@@ -1293,6 +1319,24 @@ static func check_ammo(defences: Dictionary, recipes: Dictionary) -> Array:
 	return errors
 
 
+## The inventory grouping. Nothing named twice, nothing named that is not a
+## resource - a stray in no group is fine and lands in "other".
+static func check_groups(grouped: Array, resources: Array) -> Array:
+	var errors: Array = []
+	var seen: Dictionary = {}
+	for entry in grouped:
+		var group: Dictionary = entry
+		for id in (group["members"] as Array):
+			if not resources.has(id):
+				errors.append("group '%s' lists '%s', which is not a resource"
+					% [group["name"], id])
+			if seen.has(id):
+				errors.append("'%s' is in two groups: '%s' and '%s'"
+					% [id, seen[id], group["name"]])
+			seen[id] = group["name"]
+	return errors
+
+
 static func check_nights(nights: Array) -> Array:
 	var errors: Array = []
 	for n in nights.size():
@@ -1337,6 +1381,7 @@ static func digest() -> int:
 		"power": [BASE_ENERGY, UNPOWERED_PERCENT],
 		"livestock": LIVESTOCK,
 		"ammo": [EMPTY_RELOAD_PERCENT, EMPTY_DAMAGE_PERCENT],
+		"groups": RESOURCE_GROUPS,
 		"gathering": GATHERING,
 		"fishing": FISHING,
 		"recipes": RECIPES,

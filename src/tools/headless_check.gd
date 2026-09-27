@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 28
+const GROUPS := 29
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -92,6 +92,7 @@ func _run() -> void:
 	_task_0033_power()
 	_task_0034_cooking()
 	_task_0035_ammunition()
+	_task_0036_inventory()
 
 
 func _finish() -> void:
@@ -4187,3 +4188,131 @@ func _mixed_night(seed_value: int, rounds: int) -> Dictionary:
 			false)),
 		"towers": guns + mortars,
 	}
+
+
+## 0036 - everything you own, once each.
+func _task_0036_inventory() -> void:
+	var state := State.create(1800)
+
+	# **Every resource appears, and none of them twice.** The done-when.
+	var rows := Inventory.rows(state)
+	var seen: Dictionary = {}
+	for entry in rows:
+		var r: Dictionary = entry
+		var id: StringName = r["id"]
+		expect(not seen.has(id), "%s is listed once" % id)
+		seen[id] = true
+		expect(GameData.RESOURCES.has(id),
+			"and %s is a real resource" % id)
+	expect(rows.size() == GameData.RESOURCES.size(),
+		"every resource in game_data is on the list",
+		"%d rows for %d resources"
+			% [rows.size(), GameData.RESOURCES.size()])
+	for id in GameData.RESOURCES:
+		expect(seen.has(id), "%s is not left off" % id)
+
+	# **Grouped, and the groups are the reference sheet's.**
+	var grouped := Inventory.groups(state)
+	expect(grouped.size() >= 2, "there is more than one group",
+		str(grouped.size()))
+	var names: Array = []
+	for entry in grouped:
+		names.append(StringName((entry as Dictionary)["name"]))
+	expect(names.size() == GameData.sorted_names(names).size(),
+		"no group appears twice", str(names))
+	print("  %d rows in %d groups: %s"
+		% [rows.size(), grouped.size(), str(names)])
+
+	expect(GameData.check_groups(GameData.RESOURCE_GROUPS,
+		GameData.RESOURCES).is_empty(),
+		"the shipped grouping passes its own check",
+		str(GameData.check_groups(GameData.RESOURCE_GROUPS,
+			GameData.RESOURCES)))
+	var twice: Array = GameData.RESOURCE_GROUPS.duplicate(true)
+	((twice[1] as Dictionary)["members"] as Array).append(GameData.WOOD)
+	expect(not GameData.check_groups(twice, GameData.RESOURCES).is_empty(),
+		"and a resource put in two groups is refused")
+	var ghost: Array = GameData.RESOURCE_GROUPS.duplicate(true)
+	((ghost[0] as Dictionary)["members"] as Array).append(&"moonstone")
+	expect(not GameData.check_groups(ghost, GameData.RESOURCES).is_empty(),
+		"and a group naming something that is not a resource")
+
+	# **Nothing falls off the end.** Every resource is in a named group, so the
+	# catch-all is empty today - and it is there so that the day somebody adds
+	# a resource and forgets the grouping table, it shows up anyway.
+	var stray := 0
+	for entry in grouped:
+		if StringName((entry as Dictionary)["name"]) == GameData.GROUP_OTHER:
+			stray = ((entry as Dictionary)["rows"] as Array).size()
+	expect(stray == 0, "everything the game ships with has a group",
+		str(stray))
+
+	# **It is a view of the ledger, not a copy of it.**
+	var before := 0
+	for entry in Inventory.rows(state):
+		if StringName((entry as Dictionary)["id"]) == GameData.WOOD:
+			before = int((entry as Dictionary)["held"])
+	Resources.gain(state, {GameData.WOOD: 7})
+	var after := 0
+	for entry in Inventory.rows(state):
+		if StringName((entry as Dictionary)["id"]) == GameData.WOOD:
+			after = int((entry as Dictionary)["held"])
+	expect(after == before + 7,
+		"a number that moves in the ledger has moved here too",
+		"%d then %d" % [before, after])
+	expect(not state.has("inventory"),
+		"and there is no inventory in the state to disagree with it",
+		str(state.keys().size()))
+
+	# **Prices, and the difference between free and not for sale.**
+	for entry in Inventory.rows(state):
+		var r: Dictionary = entry
+		if GameData.SELL_PRICE.has(r["id"]):
+			expect(bool(r["sellable"]), "%s can be sold" % r["id"])
+			expect(int(r["price"]) == int(GameData.SELL_PRICE[r["id"]]),
+				"at the price the table says", str(r["price"]))
+		else:
+			expect(not bool(r["sellable"]),
+				"%s is not for sale, which is not the same as worth nothing"
+					% r["id"])
+	expect(not GameData.SELL_PRICE.has(GameData.MONEY),
+		"money does not sell for money")
+	expect(not GameData.SELL_PRICE.has(GameData.ENERGY),
+		"and energy is a rate, not a thing in a sack")
+
+	# **What the larder is worth**, which is what the shop of task 0040 shows
+	# against what you are about to spend.
+	var by_hand := 0
+	for entry in Inventory.rows(state):
+		var r: Dictionary = entry
+		by_hand += int(r["held"]) * int(r["price"])
+	expect(Inventory.worth(state) == by_hand, "the total is the sum of it",
+		str(Inventory.worth(state)))
+
+	var bare := State.create(1801)
+	for id in GameData.RESOURCES:
+		Resources.spend(bare, id, Resources.amount(bare, id))
+	expect(Inventory.worth(bare) == 0, "an empty farm is worth nothing",
+		str(Inventory.worth(bare)))
+	expect(Inventory.kinds_held(bare) == 0, "and holds nothing")
+	expect(Inventory.rows(bare).size() == rows.size(),
+		"but still lists everything - a resource you have none of is a "
+		+ "resource you can go and get", str(Inventory.rows(bare).size()))
+	Resources.gain(bare, {GameData.IRON: 3})
+	expect(Inventory.kinds_held(bare) == 1, "one kind held")
+	expect(Inventory.worth(bare)
+		== 3 * int(GameData.SELL_PRICE[GameData.IRON]),
+		"and worth what it is worth", str(Inventory.worth(bare)))
+
+	# **The order is fixed**, so two runs draw the same panel.
+	var again := Inventory.rows(State.create(1800))
+	var first_ids: Array = []
+	var second_ids: Array = []
+	for entry in rows:
+		first_ids.append(StringName((entry as Dictionary)["id"]))
+	for entry in again:
+		second_ids.append(StringName((entry as Dictionary)["id"]))
+	expect(first_ids == second_ids, "the panel is in the same order every run",
+		str(second_ids))
+
+	_completed += 1     # last line: an abandoned group never gets here

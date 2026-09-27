@@ -41,7 +41,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 16
+const CASES := 17
 
 var passed := 0
 var failed := 0
@@ -87,6 +87,7 @@ func _run() -> void:
 	await _case_0033_power()
 	await _case_0034_livestock()
 	await _case_0035_ammo()
+	await _case_0036_inventory()
 	_finish()
 
 
@@ -1782,6 +1783,78 @@ func _case_0035_ammo() -> void:
 	expect(ammo.visible, "and the ammunition line is not")
 	expect(ammo.text.contains(str(GameData.GUNPOWDER)),
 		"still naming the pool", ammo.text)
+
+	await close_scene()
+	_completed += 1     # last line: an abandoned case never gets here
+
+
+## 0036 - the inventory, on one key, without stopping the day.
+func _case_0036_inventory() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var panel: InventoryPanel = require_control("InventoryPanel")
+	if driver == null or panel == null:
+		_completed += 1
+		await close_scene()
+		return
+
+	var state := driver.state
+	await frames(2)
+	expect(not panel.is_open(), "the inventory starts closed")
+
+	# **One key opens it.**
+	await tap_key(KEY_I)
+	await until(func() -> bool: return panel.is_open(), "the panel to open")
+	expect(panel.is_open(), "I opens the inventory")
+	await frames(2)
+
+	# **Every resource is on it, once**, with a row built from the table.
+	for id in GameData.RESOURCES:
+		var row: Control = require_control("inv_%s" % id)
+		expect(row != null, "%s has a row" % id)
+		var held: Label = require_control("inv_held_%s" % id)
+		if held != null:
+			expect(held.text == str(Resources.amount(state, id)),
+				"saying how much %s there is" % id, held.text)
+
+	# **The numbers follow the ledger while it is open.**
+	var wood: Label = require_control("inv_held_%s" % GameData.WOOD)
+	expect(wood != null, "there is a wood row")
+	if wood != null:
+		var before := wood.text
+		Resources.gain(state, {GameData.WOOD: 11})
+		await until(func() -> bool:
+			return (require_control("inv_held_%s" % GameData.WOOD)
+				as Label).text != before, "the row to follow the ledger")
+		var now: Label = require_control("inv_held_%s" % GameData.WOOD)
+		expect(now.text == str(Resources.amount(state, GameData.WOOD)),
+			"it is a view of the ledger, not a snapshot of it", now.text)
+
+	# **The day does not stop.** The clock runs and the crops grow behind it.
+	var tick_before := int(state["tick"])
+	await frames(20)
+	expect(int(state["tick"]) > tick_before,
+		"the day keeps running while the panel is up",
+		"%d then %d" % [tick_before, state["tick"]])
+	expect(panel.is_open(), "and the panel is still up")
+
+	# **And it takes no keys away**, unlike the stall: the farmer can still
+	# walk with it open.
+	expect(StringName(state["open_panel"]) == &"",
+		"the inventory does not claim the keyboard",
+		str(state["open_panel"]))
+
+	# **The same key closes it**, and so does cancel.
+	await tap_key(KEY_I)
+	await until(func() -> bool: return not panel.is_open(),
+		"the panel to close")
+	expect(not panel.is_open(), "I closes it again")
+	await tap_key(KEY_I)
+	await until(func() -> bool: return panel.is_open(), "the panel to reopen")
+	await tap_key(KEY_ESCAPE)
+	await until(func() -> bool: return not panel.is_open(),
+		"escape to close it")
+	expect(not panel.is_open(), "and escape does too")
 
 	await close_scene()
 	_completed += 1     # last line: an abandoned case never gets here
