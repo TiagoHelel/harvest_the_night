@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`........................`  **2 / 108 done**
+`#.......................`  **3 / 108 done**
 
-0 doing / 106 todo / 0 blocked across 9 phases.
+0 doing / 105 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0003 - game_data.gd, the one file of levers**. The whole of what is left is
+First up: **0004 - Harden the headless check harness**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,25 +26,72 @@ which rewrites this file for you.
 
 ## What is open
 
-106 task(s) left, the ready ones first, then what they
+105 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
-### 0003 - game_data.gd, the one file of levers
+### 0004 - Harden the headless check harness
 
-Ready to pick up.  Likely files: `src/core/game_data.gd`.
+Ready to pick up.  Likely files: `src/tools/headless_check.gd, tools/verify.py`.
 
-Every number a designer would want to turn, in one file, before there are numbers scattered across ten.
+Task 0002 shipped `headless_check.gd` with its own asserts, because the house rule is that a rule ships with its test. It has one bad failure mode: **a script error before the final `quit()` leaves the SceneTree running forever**, so a broken check hangs the backlog loop instead of failing it. Fix that, and finish the harness.
 
-- Sections: time, crops, gathering, prices, recipes, buildings, towers, enemies, waves, rewards
-- `# LEVER` on every balance dial, with the unit and a sane range in the comment
-- Data only: no branching, no node references, no logic
-- Ids are `StringName` constants, never bare strings at the call site
-- A `validate()` that cross-checks every id a recipe, wave or building refers to
+- A script error must end the run non-zero, not idle. Guard `_initialize()` so anything that escapes still prints and quits
+- `verify.py` already bounds it with a timeout; keep that as the belt to this task's braces, and make the timeout message stay accurate
+- Add the `GameData.validate()` asserts that task 0003 made possible
+- Asserts stay grouped by the task that introduced them, one function each, so a failure names the design that moved
+- No dependency on anything in `src/ui/`
 
-  - done when: Changing the wheat growth lever changes growth and nothing else
-  - done when: `headless_check` calls `validate()` and it passes
-  - done when: A recipe pointing at a resource that does not exist fails `validate()` with the offending id in the message
+  - done when: Introducing a deliberate script error makes it exit non-zero within a second instead of hanging - test this, do not assume it
+  - done when: It finishes in under 10 seconds
+  - done when: It runs with no `.godot/` cache present
+
+### 0006 - The phase machine: day, preparation, night, result
+
+Ready to pick up.  Likely files: `src/core/phases.gd, src/core/sim.gd`.
+
+The loop the whole game is: DAY to PREPARATION to NIGHT to RESULT and back to DAY, owned by the rules rather than by a screen.
+
+- An enum in core plus `state.phase`, `state.day` and `state.night`
+- Transitions are functions on the state, not signals: `Phases.begin_night(state)` and friends
+- DAY and NIGHT both advance by the same `Sim.tick`; only what ticks inside them differs
+- PREPARATION is the build step between pressing the night button and the first zombie: the clock does not run and nothing attacks
+- RESULT computes the payout and is the only place the day counter moves
+
+  - done when: A headless run walks DAY, PREPARATION, NIGHT, RESULT, DAY with no UI loaded
+  - done when: The day counter increments exactly once per cycle
+  - done when: Crops do not grow during NIGHT and zombies do not spawn during DAY
+
+### 0007 - The resource ledger
+
+Ready to pick up.  Likely files: `src/core/resources.gd`.
+
+One place that owns how much of everything the player has, so no later system invents its own counter.
+
+- `add(state, id, n)`, `spend(state, id, n) -> bool`, `can_afford(state, cost) -> bool` where cost is a Dictionary
+- `spend` is all-or-nothing: a cost of two things with only one affordable changes neither
+- Negative balances are impossible; an attempt is a hard error in debug and a clamped no-op in release
+- A running total of everything ever gathered, for the stats screen later
+- Resources are the ones on the reference sheet: wood, stone, iron, food, fish, oil, wheat, corn, meat, gunpowder, money, energy
+
+  - done when: Spending more than you have returns false and changes nothing
+  - done when: An atomic multi-resource cost either takes all of it or none
+  - done when: `headless_check` covers both
+
+### 0008 - The farm grid
+
+Ready to pick up.  Likely files: `src/core/grid.gd, src/core/farm.gd`.
+
+The farm is one grid and it is the entire world. Day and night are the same tiles with a different job, which is the whole idea of the game.
+
+- 40x18 tiles at 16px: about 1.3 screens wide and just over one tall, which is what the design document asks for
+- A tile carries terrain (grass, soil, water, rock, path, floor) and at most one occupant id
+- Regions marked out in data, not hardcoded coordinates: house, field, pond, wood, rock face, build space, shop
+- Water and rock are not buildable; the house tile is never buildable
+- `buildable(state, cell)` and `occupant(state, cell)` are the only way anything asks
+
+  - done when: The same grid serves the day screen and the night screen with no second copy
+  - done when: A headless test places and removes an occupant and the grid is byte-identical afterwards
 
 ### 0009 - Settings singleton
 
@@ -77,100 +124,6 @@ Art that a script owns. One palette, one generator, one command - so the set sta
   - done when: `python tools/gen_sprites.py` regenerates the whole set
   - done when: Editing one character in a map changes exactly one pixel
   - done when: The generated sheet imports with nearest-neighbour filtering and no mipmaps
-
-### 0004 - Harden the headless check harness
-
-Waits on 0003.  Likely files: `src/tools/headless_check.gd, tools/verify.py`.
-
-Task 0002 shipped `headless_check.gd` with its own asserts, because the house rule is that a rule ships with its test. It has one bad failure mode: **a script error before the final `quit()` leaves the SceneTree running forever**, so a broken check hangs the backlog loop instead of failing it. Fix that, and finish the harness.
-
-- A script error must end the run non-zero, not idle. Guard `_initialize()` so anything that escapes still prints and quits
-- `verify.py` already bounds it with a timeout; keep that as the belt to this task's braces, and make the timeout message stay accurate
-- Add the `GameData.validate()` asserts that task 0003 made possible
-- Asserts stay grouped by the task that introduced them, one function each, so a failure names the design that moved
-- No dependency on anything in `src/ui/`
-
-  - done when: Introducing a deliberate script error makes it exit non-zero within a second instead of hanging - test this, do not assume it
-  - done when: It finishes in under 10 seconds
-  - done when: It runs with no `.godot/` cache present
-
-### 0006 - The phase machine: day, preparation, night, result
-
-Waits on 0003.  Likely files: `src/core/phases.gd, src/core/sim.gd`.
-
-The loop the whole game is: DAY to PREPARATION to NIGHT to RESULT and back to DAY, owned by the rules rather than by a screen.
-
-- An enum in core plus `state.phase`, `state.day` and `state.night`
-- Transitions are functions on the state, not signals: `Phases.begin_night(state)` and friends
-- DAY and NIGHT both advance by the same `Sim.tick`; only what ticks inside them differs
-- PREPARATION is the build step between pressing the night button and the first zombie: the clock does not run and nothing attacks
-- RESULT computes the payout and is the only place the day counter moves
-
-  - done when: A headless run walks DAY, PREPARATION, NIGHT, RESULT, DAY with no UI loaded
-  - done when: The day counter increments exactly once per cycle
-  - done when: Crops do not grow during NIGHT and zombies do not spawn during DAY
-
-### 0007 - The resource ledger
-
-Waits on 0003.  Likely files: `src/core/resources.gd`.
-
-One place that owns how much of everything the player has, so no later system invents its own counter.
-
-- `add(state, id, n)`, `spend(state, id, n) -> bool`, `can_afford(state, cost) -> bool` where cost is a Dictionary
-- `spend` is all-or-nothing: a cost of two things with only one affordable changes neither
-- Negative balances are impossible; an attempt is a hard error in debug and a clamped no-op in release
-- A running total of everything ever gathered, for the stats screen later
-- Resources are the ones on the reference sheet: wood, stone, iron, food, fish, oil, wheat, corn, meat, gunpowder, money, energy
-
-  - done when: Spending more than you have returns false and changes nothing
-  - done when: An atomic multi-resource cost either takes all of it or none
-  - done when: `headless_check` covers both
-
-### 0008 - The farm grid
-
-Waits on 0003.  Likely files: `src/core/grid.gd, src/core/farm.gd`.
-
-The farm is one grid and it is the entire world. Day and night are the same tiles with a different job, which is the whole idea of the game.
-
-- 40x18 tiles at 16px: about 1.3 screens wide and just over one tall, which is what the design document asks for
-- A tile carries terrain (grass, soil, water, rock, path, floor) and at most one occupant id
-- Regions marked out in data, not hardcoded coordinates: house, field, pond, wood, rock face, build space, shop
-- Water and rock are not buildable; the house tile is never buildable
-- `buildable(state, cell)` and `occupant(state, cell)` are the only way anything asks
-
-  - done when: The same grid serves the day screen and the night screen with no second copy
-  - done when: A headless test places and removes an occupant and the grid is byte-identical afterwards
-
-### 0080 - A pixel font
-
-Waits on 0014.  Likely files: `tools/gen_font.py, assets/fonts/`.
-
-Type that is crisp at 480x270 and does not fight the art.
-
-- A bitmap font generated from the same kind of ASCII maps as the sprites
-- Full Latin-1 coverage, so Portuguese accents work when 0097 arrives
-- Two sizes: HUD and heading
-- No filtering, no hinting, integer positions only
-- Numbers are tabular so a counter does not jitter
-
-  - done when: Every accented character in the Portuguese strings renders
-  - done when: A changing number does not shift the text around it
-
-### 0083 - Audio buses and a sound manager
-
-Waits on 0009.  Likely files: `src/core/audio.gd, default_bus_layout.tres`.
-
-Master, SFX and Music buses plus a small `Audio.play(id)`, so the sound tasks after this only have to drop in files.
-
-- Three buses in `default_bus_layout.tres`
-- `Audio` autoload mapping a string id to a stream and a bus
-- Volumes read from Settings on boot and on `changed`
-- An unknown id warns once and stays silent
-- A polyphony cap and a same-frame dedupe, so twenty towers firing on one tick cannot clip
-
-  - done when: `Audio.play('missing')` warns exactly once and does not crash
-  - done when: Master at zero silences everything including music
-  - done when: Twenty simultaneous shots produce one clean sound, not clipping
 
 ### 0005 - verify.py and the determinism guard
 
@@ -250,19 +203,36 @@ Somewhere to see everything at once, which the HUD cannot do once there are twel
   - done when: Every resource in game_data appears without being listed twice
   - done when: Adding a resource to game_data makes it appear with no UI edit
 
-### 0084 - The sounds of the day
+### 0080 - A pixel font
 
-Waits on 0083.  Likely files: `tools/gen_sfx.py, assets/sfx/`.
+Waits on 0014.  Likely files: `tools/gen_font.py, assets/fonts/`.
 
-Chop, mine, till, plant, water, the fishing splash and the bite, the craft, the sale - generated, not licensed.
+Type that is crisp at 480x270 and does not fight the art.
 
-- `tools/gen_sfx.py` synthesises every effect to WAV and is deterministic
-- Every day verb has a sound and a small random pitch so repetition does not grate
-- Cozy, soft, short: the day is the calm half
-- The bite is the most attention-grabbing sound of the day, because it is the only one with a window
+- A bitmap font generated from the same kind of ASCII maps as the sprites
+- Full Latin-1 coverage, so Portuguese accents work when 0097 arrives
+- Two sizes: HUD and heading
+- No filtering, no hinting, integer positions only
+- Numbers are tabular so a counter does not jitter
 
-  - done when: Chopping a tree for a full minute does not become annoying - go and check
-  - done when: Regenerating produces byte-identical files
+  - done when: Every accented character in the Portuguese strings renders
+  - done when: A changing number does not shift the text around it
+
+### 0083 - Audio buses and a sound manager
+
+Waits on 0009.  Likely files: `src/core/audio.gd, default_bus_layout.tres`.
+
+Master, SFX and Music buses plus a small `Audio.play(id)`, so the sound tasks after this only have to drop in files.
+
+- Three buses in `default_bus_layout.tres`
+- `Audio` autoload mapping a string id to a stream and a bus
+- Volumes read from Settings on boot and on `changed`
+- An unknown id warns once and stays silent
+- A polyphony cap and a same-frame dedupe, so twenty towers firing on one tick cannot clip
+
+  - done when: `Audio.play('missing')` warns exactly once and does not crash
+  - done when: Master at zero silences everything including music
+  - done when: Twenty simultaneous shots produce one clean sound, not clipping
 
 ### 0011 - input_check harness
 
@@ -339,6 +309,20 @@ Time passing, without taking away the design document's promise that the player 
 
   - done when: A player who ignores the clock entirely is not punished for it
   - done when: The clock stops in the shop panel and resumes on close
+
+### 0084 - The sounds of the day
+
+Waits on 0083.  Likely files: `tools/gen_sfx.py, assets/sfx/`.
+
+Chop, mine, till, plant, water, the fishing splash and the bite, the craft, the sale - generated, not licensed.
+
+- `tools/gen_sfx.py` synthesises every effect to WAV and is deterministic
+- Every day verb has a sound and a small random pitch so repetition does not grate
+- Cozy, soft, short: the day is the calm half
+- The bite is the most attention-grabbing sound of the day, because it is the only one with a window
+
+  - done when: Chopping a tree for a full minute does not become annoying - go and check
+  - done when: Regenerating produces byte-identical files
 
 ### 0103 - Crash and error reporting
 
@@ -1632,16 +1616,16 @@ For the player who beat the Giant and wants to know how far the farm goes. Cheap
   - done when: Night 25 is generated and playable
   - done when: The same seed generates the same night 25 twice
 
-## 0 - Foundation  (2/12)
+## 0 - Foundation  (3/12)
 
 - [x] **0001** [Godot project scaffold](prompts/0001-project-scaffold.md)
 - [x] **0002** [Fixed-timestep deterministic simulation](prompts/0002-sim-tick.md)
-- [ ] **0003** [game_data.gd, the one file of levers](prompts/0003-game-data.md)
-- [ ] **0004** [Harden the headless check harness](prompts/0004-headless-check.md) - needs 0003
+- [x] **0003** [game_data.gd, the one file of levers](prompts/0003-game-data.md)
+- [ ] **0004** [Harden the headless check harness](prompts/0004-headless-check.md)
 - [ ] **0005** [verify.py and the determinism guard](prompts/0005-verify-and-hash.md) - needs 0004
-- [ ] **0006** [The phase machine: day, preparation, night, result](prompts/0006-phase-machine.md) - needs 0003
-- [ ] **0007** [The resource ledger](prompts/0007-resource-ledger.md) - needs 0003
-- [ ] **0008** [The farm grid](prompts/0008-farm-grid.md) - needs 0003
+- [ ] **0006** [The phase machine: day, preparation, night, result](prompts/0006-phase-machine.md)
+- [ ] **0007** [The resource ledger](prompts/0007-resource-ledger.md)
+- [ ] **0008** [The farm grid](prompts/0008-farm-grid.md)
 - [ ] **0009** [Settings singleton](prompts/0009-settings.md)
 - [ ] **0010** [Save the profile and the run](prompts/0010-save.md) - needs 0006, 0007, 0008
 - [ ] **0011** [input_check harness](prompts/0011-input-check.md) - needs 0005

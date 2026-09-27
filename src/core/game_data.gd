@@ -3,33 +3,675 @@ extends RefCounted
 
 ## Every number a designer might want to turn, in one place.
 ##
-## Task 0003 fills this out - crops, gathering, prices, recipes, buildings,
-## towers, enemies, waves, rewards - and adds `validate()`. For now it holds the
-## clock, which is the one thing task 0002 needs.
+## Nothing in here branches, calls a node or computes anything: it is data, and
+## `validate()` at the bottom is the only function. A rule that needs a number
+## reads it from here; a number that appears anywhere else in `src/core/` is a
+## bug waiting for a balance pass to find it.
 ##
-## `# LEVER` marks a balance dial: a number whose value is a design choice. A
-## number without it is structural, and changing it breaks something rather than
-## tuning it.
+## `# LEVER` marks a balance dial - a number whose value is a design choice,
+## with its unit and a sane range beside it. A number without `# LEVER` is
+## structural: changing it breaks something rather than tuning it.
+##
+## **Durations are in ticks**, at `TICK_HZ` to the second, because the rules
+## never see real seconds. `SECONDS` at the bottom converts for readability at
+## the point of writing, not at runtime.
+##
+## The reference sheet, `docs/reference-sheet.png`, is where the resource,
+## tower and enemy line-ups come from. `design.md` is where the scope comes
+## from: ten nights, one boss, no more.
 
+
+# ============================================================ time and the tick
 
 ## Simulation rate, in ticks per second.
 ##
-## Everything in the game advances at this rate: crop growth, tower fire, zombie
-## walking, the headless tests, the double speed button and skipping a night are
-## all the same code run a different number of times.
+## Everything advances at this rate: crop growth, tower fire, zombie walking,
+## the headless tests, the double speed button and skipping a night are all the
+## same code run a different number of times.
 ##
-## **Not a lever.** Changing it rescales every duration in the game at once and
+## **Not a lever.** Changing it rescales every duration below at once and
 ## invalidates the determinism hash. Tune durations, not the clock.
 const TICK_HZ := 30
 
 ## Seconds of real time in one tick.
 const TICK_SECONDS := 1.0 / float(TICK_HZ)
 
+## Ticks in a second, for writing durations readably: `4 * SECONDS`.
+const SECONDS := TICK_HZ
+
 ## The most ticks one frame may simulate before the rest is thrown away.
 ##
-## A frame that stalls - alt-tab, a breakpoint, the first import, a laptop
-## waking up - comes back owing whole seconds of simulation. Paying all of it in
-## one frame makes the next frame stall too, and that is how a spiral starts.
-## The cap means a long stall costs the player a moment of game time instead of
-## a frozen window.
-const MAX_CATCH_UP_TICKS := 8   # LEVER: 8 ticks is about a quarter of a second
+## A frame that stalls - alt-tab, a breakpoint, a laptop waking up - comes back
+## owing whole seconds. Paying all of it in one frame makes the next frame stall
+## too, and that is how a spiral starts. The cap costs the player a moment of
+## game time instead of a frozen window.
+const MAX_CATCH_UP_TICKS := 8           # LEVER: ticks, 4-16
+
+## How long a day runs before dusk.
+##
+## The day does not end on its own: `design.md` promises the player switches
+## reality when they want to. Past dusk the night button starts asking, and that
+## is all it does.
+const DAY_TICKS := 240 * SECONDS        # LEVER: ticks, 120-480 seconds worth
+const DUSK_AT_TICK := 192 * SECONDS     # LEVER: ticks, 0.7-0.9 of DAY_TICKS
+
+## The build window between pressing the night button and the first spawn.
+const PREPARATION_TICKS := 20 * SECONDS # LEVER: ticks, 10-45 seconds worth
+
+
+# ===================================================================== the farm
+
+## The whole world, in tiles. About 1.3 screens wide and just over one tall at
+## 480x270, which is what `design.md` asks for.
+const GRID_WIDTH := 40
+const GRID_HEIGHT := 18
+const TILE_SIZE := 16
+
+## What the farmhouse can take before the night is lost.
+const HOUSE_HP := 100                   # LEVER: hit points, 60-200
+
+
+# ================================================================== resources
+
+const WOOD := &"wood"
+const STONE := &"stone"
+const IRON := &"iron"
+const FOOD := &"food"
+const FISH := &"fish"
+const OIL := &"oil"
+const WHEAT := &"wheat"
+const CORN := &"corn"
+const CARROT := &"carrot"
+const MEAT := &"meat"
+const GUNPOWDER := &"gunpowder"
+const MONEY := &"money"
+const ENERGY := &"energy"
+
+## Every resource the ledger knows about, in the order the reference sheet
+## lays them out.
+const RESOURCES: Array = [
+	WOOD, STONE, IRON, FOOD, FISH, OIL,
+	WHEAT, CORN, CARROT, MEAT, GUNPOWDER, MONEY, ENERGY,
+]
+
+## What the shop will buy, and for how much.
+##
+## `design.md` sets wood, stone, iron, wheat, fish and oil; the rest follow the
+## same scale. Money is not here because money does not sell for money, and
+## neither does energy, which is a rate rather than a stock (task 0033).
+const SELL_PRICE: Dictionary = {        # LEVER: money each, 1-30
+	WOOD: 2,
+	STONE: 3,
+	IRON: 7,
+	FOOD: 12,
+	FISH: 8,
+	OIL: 10,
+	WHEAT: 4,
+	CORN: 5,
+	CARROT: 3,
+	MEAT: 9,
+	GUNPOWDER: 14,
+}
+
+## What the shop charges, as a multiple of what it pays.
+##
+## Above 1 by design and by a wide margin: buying a material must always be
+## worse than going and getting it, or money quietly replaces playing the game.
+const BUY_MARKUP := 2.5                 # LEVER: multiplier, 1.8-3.5
+
+## How much of a structure's cost comes back when it is sold.
+const SELL_BACK_FRACTION := 0.6         # LEVER: fraction, 0.4-0.8
+
+
+# ===================================================================== crops
+
+## The three crops of `design.md`, each with a different reason to plant it.
+##
+## Wheat is the money crop, corn is the industry crop - oil and gunpowder come
+## out of it - and carrot is the food crop, which is what repairs a wall at
+## three in the morning. Ranked by money alone carrot is the worst, and that is
+## the point: it is not bought for money.
+const CROPS: Dictionary = {
+	WHEAT: {
+		"seed_cost": 3,                 # LEVER: money, 1-8
+		"growth_ticks": 90 * SECONDS,   # LEVER: ticks, 30-180 seconds worth
+		"yield": 2,                     # LEVER: units per harvest, 1-4
+		"stages": 4,
+	},
+	CORN: {
+		"seed_cost": 6,                 # LEVER: money, 3-12
+		"growth_ticks": 180 * SECONDS,  # LEVER: ticks, 90-300 seconds worth
+		"yield": 3,                     # LEVER: units per harvest, 2-5
+		"stages": 4,
+	},
+	CARROT: {
+		"seed_cost": 4,                 # LEVER: money, 2-8
+		"growth_ticks": 60 * SECONDS,   # LEVER: ticks, 30-120 seconds worth
+		"yield": 2,                     # LEVER: units per harvest, 1-4
+		"stages": 4,
+	},
+}
+
+## How much faster a watered tile grows, and how long the watering lasts.
+##
+## Unwatered is slower, never dead: this is a cozy game and a missed chore is
+## not a punishment.
+const WATER_GROWTH_BONUS := 0.35        # LEVER: fraction faster, 0.1-0.6
+const WATER_LASTS_UNTIL_NIGHT := true
+
+
+# ================================================================== gathering
+
+## Trees, rocks and ore: how long a hit takes, what it gives, how long until it
+## comes back. Nothing on the farm can be exhausted permanently.
+const GATHERING: Dictionary = {
+	&"tree": {
+		"work_ticks": 3 * SECONDS,      # LEVER: ticks of chopping, 1-6 seconds
+		"yield": {WOOD: 3},             # LEVER: units, 1-5
+		"regrow_ticks": 120 * SECONDS,  # LEVER: ticks, 60-240 seconds worth
+	},
+	&"rock": {
+		"work_ticks": 4 * SECONDS,      # LEVER: ticks, 2-8 seconds worth
+		"yield": {STONE: 2},            # LEVER: units, 1-4
+		"regrow_ticks": 150 * SECONDS,  # LEVER: ticks, 90-300 seconds worth
+	},
+	&"ore": {
+		# Iron is the thing you are always slightly short of, and that is
+		# deliberate: it is what gates every tower. A day spent entirely at the
+		# rock face buys roughly one tower - see the arithmetic in the journal.
+		# A node has to come back inside a day or the whole rock face yields one
+		# iron per node per day, and buying a 15 iron tower would take three
+		# days of nothing but mining. See the arithmetic in the journal.
+		"work_ticks": 6 * SECONDS,      # LEVER: ticks, 3-10 seconds worth
+		"yield": {IRON: 1},             # LEVER: units, 1-2
+		"regrow_ticks": 60 * SECONDS,   # LEVER: ticks, 30-120 seconds worth
+	},
+}
+
+## Fishing: how long the wait is, how long you have to react, how often it is
+## the good one. The pond pays the most per action and costs attention rather
+## than resources.
+const FISHING: Dictionary = {
+	"bite_min_ticks": 2 * SECONDS,      # LEVER: ticks, 1-4 seconds worth
+	"bite_max_ticks": 10 * SECONDS,     # LEVER: ticks, 5-20 seconds worth
+	"window_ticks": 45,                 # LEVER: ticks to react, 20-60
+	"rare_in": 6,                       # LEVER: 1 in N is the rare one, 4-12
+	"common_yield": {FISH: 1},
+	"rare_yield": {FISH: 3},
+}
+
+
+# ==================================================================== recipes
+
+## What turns into what, and how long it takes.
+##
+## The bridge the whole game rests on: everything here takes something the day
+## produced and makes something the night needs.
+const RECIPES: Dictionary = {
+	&"barricade_kit": {
+		"station": &"workshop",
+		"inputs": {WOOD: 4, STONE: 2},
+		"output": {&"barricade": 1},
+		"ticks": 6 * SECONDS,           # LEVER: ticks, 3-15 seconds worth
+	},
+	&"fence_kit": {
+		"station": &"workshop",
+		"inputs": {WOOD: 6},
+		"output": {&"fence": 1},
+		"ticks": 5 * SECONDS,           # LEVER: ticks, 3-12 seconds worth
+	},
+	&"wall_kit": {
+		"station": &"workshop",
+		"inputs": {STONE: 10},
+		"output": {&"wall": 1},
+		"ticks": 10 * SECONDS,          # LEVER: ticks, 5-20 seconds worth
+	},
+	&"press_oil": {
+		"station": &"press",
+		"inputs": {CORN: 4},
+		"output": {OIL: 1},
+		"ticks": 20 * SECONDS,          # LEVER: ticks, 10-40 seconds worth
+	},
+	&"make_gunpowder": {
+		"station": &"workshop",
+		"inputs": {CORN: 2, OIL: 1},
+		"output": {GUNPOWDER: 2},
+		"ticks": 15 * SECONDS,          # LEVER: ticks, 8-30 seconds worth
+	},
+	&"cook_meal": {
+		"station": &"kitchen",
+		"inputs": {CARROT: 2, WHEAT: 1},
+		"output": {FOOD: 2},
+		"ticks": 12 * SECONDS,          # LEVER: ticks, 6-25 seconds worth
+	},
+	&"cook_fish": {
+		"station": &"kitchen",
+		"inputs": {FISH: 1, CARROT: 1},
+		"output": {FOOD: 3},
+		"ticks": 15 * SECONDS,          # LEVER: ticks, 8-30 seconds worth
+	},
+	&"cook_roast": {
+		"station": &"kitchen",
+		"inputs": {MEAT: 1, CORN: 1},
+		"output": {FOOD: 4},
+		"ticks": 18 * SECONDS,          # LEVER: ticks, 10-35 seconds worth
+	},
+}
+
+## How many items a production building may have queued at once.
+const QUEUE_LENGTH := 5                 # LEVER: items, 3-10
+
+
+# ================================================================== buildings
+
+## The production side of the farm. Energy draw is what task 0033 turns into a
+## reason to care where the generator is.
+const BUILDINGS: Dictionary = {
+	&"workshop": {
+		"cost": {WOOD: 20, STONE: 10},
+		"energy_draw": 0,
+		"size": Vector2i(2, 2),
+	},
+	&"press": {
+		"cost": {WOOD: 25, IRON: 5},
+		"energy_draw": 2,               # LEVER: energy per tick, 1-5
+		"size": Vector2i(2, 2),
+	},
+	&"kitchen": {
+		"cost": {WOOD: 15, STONE: 15},
+		"energy_draw": 1,               # LEVER: energy per tick, 0-3
+		"size": Vector2i(2, 2),
+	},
+	&"generator": {
+		"cost": {IRON: 20, STONE: 10},
+		"energy_draw": 0,
+		"energy_output": 10,            # LEVER: energy per tick, 5-20
+		"fuel": {OIL: 1},
+		"fuel_every_ticks": 30 * SECONDS,   # LEVER: ticks, 15-60 seconds worth
+		"size": Vector2i(2, 2),
+	},
+}
+
+## What a structure runs at when the farm is drawing more energy than it makes.
+##
+## Degraded, never dead: a brown-out should slow the defence and let the night
+## resolve, not switch the towers off and end it.
+const BROWNOUT_RATE := 0.5              # LEVER: fraction of normal, 0.25-0.8
+
+
+# =================================================================== defences
+
+const DAMAGE_IMPACT := &"impact"
+const DAMAGE_FIRE := &"fire"
+const DAMAGE_EXPLOSIVE := &"explosive"
+
+## The six things from the reference sheet that go on the farm at night.
+##
+## `range` and `min_range` are in tiles. `reload_ticks` is the gap between
+## shots. Task 0042 turns these entries into declarative behaviour so the combat
+## code stops growing a branch per tower.
+const DEFENCES: Dictionary = {
+	&"gun_tower": {
+		"cost": {WOOD: 10, IRON: 15},
+		"hp": 60,                       # LEVER: hit points, 30-120
+		"damage": 6,                    # LEVER: per shot, 3-12
+		"damage_type": DAMAGE_IMPACT,
+		"range": 5,                     # LEVER: tiles, 3-8
+		"reload_ticks": 1 * SECONDS,    # LEVER: ticks, 15-60
+		"projectile_tiles_per_second": 14,
+		"energy_draw": 1,               # LEVER: energy per tick, 0-3
+		"targets": 1,
+	},
+	&"flame_tower": {
+		"cost": {WOOD: 20, IRON: 25, OIL: 10},
+		"hp": 70,                       # LEVER: hit points, 40-140
+		"damage": 3,                    # LEVER: per tick in the cone, 1-6
+		"damage_type": DAMAGE_FIRE,
+		"range": 3,                     # LEVER: tiles, 2-5
+		"cone_degrees": 60,             # LEVER: degrees, 30-90
+		"burn_ticks": 3 * SECONDS,      # LEVER: ticks, 1-6 seconds worth
+		"burn_damage": 2,               # LEVER: per second burning, 1-5
+		"ammo": {OIL: 1},
+		"ammo_every_ticks": 2 * SECONDS,
+		"energy_draw": 2,
+	},
+	&"mortar": {
+		"cost": {STONE: 30, IRON: 35, GUNPOWDER: 15},
+		"hp": 55,                       # LEVER: hit points, 30-100
+		"damage": 40,                   # LEVER: at the centre, 20-70
+		"damage_type": DAMAGE_EXPLOSIVE,
+		"range": 12,                    # LEVER: tiles, 8-16
+		# A minimum range is what makes placing a mortar a decision rather than
+		# a purchase: it cannot defend itself.
+		"min_range": 4,                 # LEVER: tiles, 2-6
+		"splash_tiles": 2,              # LEVER: tiles, 1-3
+		"splash_falloff": 0.5,          # LEVER: fraction at the edge, 0.2-0.8
+		"reload_ticks": 5 * SECONDS,    # LEVER: ticks, 3-8 seconds worth
+		"flight_ticks": 45,             # LEVER: ticks in the air, 20-75
+		"ammo": {GUNPOWDER: 1},
+		"energy_draw": 1,
+	},
+	&"auto_crossbow": {
+		"cost": {WOOD: 15, IRON: 20},
+		"hp": 50,                       # LEVER: hit points, 30-90
+		"damage": 3,                    # LEVER: per bolt, 1-6
+		"damage_type": DAMAGE_IMPACT,
+		"range": 7,                     # LEVER: tiles, 5-10
+		"reload_ticks": 15,             # LEVER: ticks, 8-30
+		"projectile_tiles_per_second": 22,
+		"pierce": 5,                    # LEVER: targets in the line, 2-8
+		"pierce_falloff": 0.4,          # LEVER: fraction lost each, 0.2-0.6
+		"energy_draw": 3,               # hungry: the reason to build a generator
+	},
+	&"mine": {
+		"cost": {IRON: 5, GUNPOWDER: 8},
+		"hp": 1,
+		"damage": 60,                   # LEVER: on trigger, 30-100
+		"damage_type": DAMAGE_EXPLOSIVE,
+		"splash_tiles": 1,              # LEVER: tiles, 1-2
+		"one_shot": true,
+		"energy_draw": 0,
+	},
+	&"fence": {
+		"cost": {WOOD: 5},
+		"hp": 30,                       # LEVER: hit points, 15-60
+		"path_cost": 6,                 # LEVER: tiles-equivalent detour, 3-12
+		"energy_draw": 0,
+	},
+	&"wall": {
+		"cost": {STONE: 10},
+		"hp": 120,                      # LEVER: hit points, 60-250
+		"path_cost": 20,                # LEVER: tiles-equivalent detour, 10-40
+		"energy_draw": 0,
+	},
+	&"barricade": {
+		"cost": {WOOD: 3, STONE: 2},
+		"hp": 20,                       # LEVER: hit points, 10-40
+		"path_cost": 4,                 # LEVER: tiles-equivalent detour, 2-8
+		# It may go down mid-wave, which nothing else may - and it expires, so
+		# it cannot quietly become a cheaper wall.
+		"placeable_at_night": true,
+		"lifetime_ticks": 60 * SECONDS, # LEVER: ticks, 30-120 seconds worth
+		"per_night_limit": 5,           # LEVER: how many, 2-10
+		"energy_draw": 0,
+	},
+}
+
+## What repairing costs, per hit point put back.
+const REPAIR_COST_PER_HP: Dictionary = {FOOD: 1, WOOD: 1}
+const REPAIR_TICKS_PER_HP := 3          # LEVER: ticks, 1-8
+const HOUSE_REPAIR_PENALTY := 2.0       # LEVER: multiplier, 1.5-3.0
+
+## The one button the player has during a night.
+const ABILITY: Dictionary = {
+	"damage": 25,                       # LEVER: in the area, 10-50
+	"radius_tiles": 3,                  # LEVER: tiles, 2-5
+	"slow_fraction": 0.5,               # LEVER: fraction of speed, 0.2-0.8
+	"slow_ticks": 5 * SECONDS,          # LEVER: ticks, 2-10 seconds worth
+	"cooldown_ticks": 45 * SECONDS,     # LEVER: ticks, 20-90 seconds worth
+}
+
+## Speeds the night may be watched at. Ticks per tick, never a changed rate.
+const SPEEDS: Array = [1, 2, 4]
+
+
+# ==================================================================== enemies
+
+## The four of `design.md` plus the one boss.
+##
+## Speed is **ticks to cross one tile**, so it stays an integer and two machines
+## cannot disagree about where a zombie is. Lower is faster.
+const ENEMIES: Dictionary = {
+	&"walker": {
+		"hp": 20,                       # LEVER: hit points, 10-40
+		"ticks_per_tile": 20,           # LEVER: ticks, 12-30 (lower is faster)
+		"damage": 5,                    # LEVER: to the house, 2-10
+		"reward": 3,                    # LEVER: money, 1-6
+		"armour": 0,
+	},
+	&"runner": {
+		# Fast and fragile: it arrives before a mortar can reload, which is what
+		# makes a defence of only slow expensive towers wrong.
+		"hp": 10,                       # LEVER: hit points, 6-20
+		"ticks_per_tile": 9,            # LEVER: ticks, 6-14
+		"damage": 3,                    # LEVER: to the house, 1-6
+		"reward": 4,                    # LEVER: money, 2-8
+		"armour": 0,
+	},
+	&"tank": {
+		# Armour is flat and applies per hit, so many small hits are worse than
+		# a few big ones. That is the reason the mortar exists.
+		"hp": 120,                      # LEVER: hit points, 70-220
+		"ticks_per_tile": 38,           # LEVER: ticks, 30-50
+		"damage": 15,                   # LEVER: to the house, 8-25
+		"reward": 12,                   # LEVER: money, 6-20
+		"armour": 3,                    # LEVER: damage off each hit, 1-6
+	},
+	&"breaker": {
+		# It goes for what you built rather than what you live in, which makes
+		# an uncovered tower line a liability.
+		"hp": 45,                       # LEVER: hit points, 25-80
+		"ticks_per_tile": 21,           # LEVER: ticks, 15-30
+		"damage": 8,                    # LEVER: to the house, 4-14
+		"structure_damage_multiplier": 3.0,   # LEVER: multiplier, 2.0-5.0
+		"targets_structures": true,
+		"reward": 8,                    # LEVER: money, 4-14
+		"armour": 1,
+	},
+	&"giant": {
+		"hp": 900,                      # LEVER: hit points, 500-1600
+		"ticks_per_tile": 50,           # LEVER: ticks, 40-70
+		"damage": 40,                   # LEVER: to the house, 25-60
+		"structure_damage_multiplier": 4.0,
+		"targets_structures": false,
+		"telegraph_ticks": 1 * SECONDS, # LEVER: ticks before the heavy hit
+		"reward": 120,                  # LEVER: money, 60-200
+		"armour": 6,                    # LEVER: damage off each hit, 3-10
+		"is_boss": true,
+	},
+}
+
+
+# ====================================================================== nights
+
+## The ten nights of `design.md`, section 10.
+##
+## A night is a list of waves; a wave is `[enemy, count, spawn, delay_ticks]`,
+## where `delay_ticks` is the gap after the previous wave. Task 0059 formalises
+## this into a validated table and task 0060 tunes the curve - what is here is
+## the shape, so that the first playable build of task 0027 has three waves to
+## fight and the rest has somewhere to grow.
+const WAVE_GAP_TICKS := 15 * SECONDS    # LEVER: ticks, 8-30 seconds worth
+
+const NIGHTS: Array = [
+	# 1 - the tutorial night: winnable with the one tower the first day buys.
+	[[&"walker", 3, 0, 0], [&"walker", 4, 0, WAVE_GAP_TICKS],
+	 [&"walker", 5, 0, WAVE_GAP_TICKS]],
+	# 2 - more of the same, from two sides.
+	[[&"walker", 6, 0, 0], [&"walker", 5, 1, WAVE_GAP_TICKS],
+	 [&"walker", 8, 0, WAVE_GAP_TICKS]],
+	# 3 - the first runner.
+	[[&"walker", 6, 0, 0], [&"runner", 3, 1, WAVE_GAP_TICKS],
+	 [&"walker", 8, 0, WAVE_GAP_TICKS], [&"runner", 5, 1, WAVE_GAP_TICKS]],
+	# 4 - a bigger version of what night 3 taught.
+	[[&"walker", 10, 0, 0], [&"runner", 6, 1, WAVE_GAP_TICKS],
+	 [&"walker", 12, 0, WAVE_GAP_TICKS]],
+	# 5 - the first tank.
+	[[&"walker", 8, 0, 0], [&"tank", 1, 0, WAVE_GAP_TICKS],
+	 [&"runner", 6, 1, WAVE_GAP_TICKS], [&"tank", 2, 0, WAVE_GAP_TICKS]],
+	# 6 - everything so far, mixed.
+	[[&"walker", 12, 0, 0], [&"runner", 8, 1, WAVE_GAP_TICKS],
+	 [&"tank", 3, 0, WAVE_GAP_TICKS], [&"walker", 14, 1, WAVE_GAP_TICKS]],
+	# 7 - the breakers arrive and go for the towers.
+	[[&"walker", 10, 0, 0], [&"breaker", 4, 1, WAVE_GAP_TICKS],
+	 [&"runner", 8, 0, WAVE_GAP_TICKS], [&"breaker", 6, 1, WAVE_GAP_TICKS]],
+	# 8 - a large night.
+	[[&"walker", 18, 0, 0], [&"runner", 10, 1, WAVE_GAP_TICKS],
+	 [&"breaker", 6, 0, WAVE_GAP_TICKS], [&"tank", 4, 1, WAVE_GAP_TICKS]],
+	# 9 - the heavy mix, and the dress rehearsal for the Giant.
+	[[&"walker", 20, 0, 0], [&"breaker", 8, 1, WAVE_GAP_TICKS],
+	 [&"tank", 5, 0, WAVE_GAP_TICKS], [&"runner", 14, 1, WAVE_GAP_TICKS],
+	 [&"tank", 3, 0, WAVE_GAP_TICKS]],
+	# 10 - the Giant, with company so it cannot be focused down alone.
+	[[&"walker", 14, 0, 0], [&"giant", 1, 0, WAVE_GAP_TICKS],
+	 [&"walker", 16, 1, WAVE_GAP_TICKS], [&"breaker", 8, 1, WAVE_GAP_TICKS]],
+]
+
+## How many nights the MVP has. Past this, task 0070 generates them.
+const MVP_NIGHTS := 10
+
+
+# ===================================================================== rewards
+
+## What a night pays, and what losing one costs.
+const REWARDS: Dictionary = {
+	# Paid for finishing the night at all, growing with the night number.
+	"base_money": 30,                   # LEVER: money, 15-60
+	"money_per_night": 15,              # LEVER: money added per night, 5-30
+	"resources": {WOOD: 10, STONE: 8, IRON: 4},
+	"resources_per_night": {WOOD: 4, STONE: 3, IRON: 2},
+	# Defending well should pay more than barely holding.
+	"intact_structure_bonus": 4,        # LEVER: money each, 1-10
+	"house_untouched_bonus": 25,        # LEVER: money, 10-50
+	"tech_points": 1,                   # LEVER: per night survived, 1-2
+}
+
+## Losing a night takes a share of the stock. It must hurt enough to matter and
+## little enough to keep playing: `design.md` is explicit that a loss costs a
+## day, never the run.
+const DEFEAT_RESOURCE_LOSS := 0.25      # LEVER: fraction, 0.1-0.4
+const DEFEAT_KEEPS_MONEY := true
+const DEFEAT_KEEPS_TECH := true
+
+
+# ==================================================================== validate
+
+## Every id that one table points at, checked against the table that defines it.
+##
+## Returns a list of problems, empty when there are none. `headless_check` calls
+## it, so a typo in a recipe is a red line the same minute rather than a crash
+## on night 7.
+##
+## The checks below each take their table rather than reading the constant, so
+## that `headless_check` can hand one a deliberately broken table and assert
+## that it complains. A validator nobody has ever seen fail is a validator
+## nobody should trust.
+static func validate() -> Array:
+	var errors: Array = []
+	errors.append_array(check_crops(CROPS))
+	errors.append_array(check_gathering(GATHERING))
+	errors.append_array(check_recipes(RECIPES))
+	errors.append_array(check_buildings(BUILDINGS))
+	errors.append_array(check_defences(DEFENCES))
+	errors.append_array(check_nights(NIGHTS))
+
+	for key in [&"common_yield", &"rare_yield"]:
+		for res in (FISHING[key] as Dictionary):
+			if not RESOURCES.has(res):
+				errors.append("fishing %s yields unknown '%s'" % [key, res])
+
+	for res in REPAIR_COST_PER_HP:
+		if not RESOURCES.has(res):
+			errors.append("repair costs unknown '%s'" % res)
+
+	for key in [&"resources", &"resources_per_night"]:
+		for res in (REWARDS[key] as Dictionary):
+			if not RESOURCES.has(res):
+				errors.append("rewards %s gives unknown '%s'" % [key, res])
+
+	if DUSK_AT_TICK > DAY_TICKS:
+		errors.append("dusk falls after the day is over")
+
+	return errors
+
+
+static func check_crops(crops: Dictionary) -> Array:
+	var errors: Array = []
+	for crop_id in crops:
+		if not RESOURCES.has(crop_id):
+			errors.append("crop '%s' is not a resource" % crop_id)
+		if not SELL_PRICE.has(crop_id):
+			errors.append("crop '%s' has no sell price" % crop_id)
+		if int((crops[crop_id] as Dictionary)["growth_ticks"]) <= 0:
+			errors.append("crop '%s' grows in no time at all" % crop_id)
+	return errors
+
+
+static func check_gathering(nodes: Dictionary) -> Array:
+	var errors: Array = []
+	for node_id in nodes:
+		for res in ((nodes[node_id] as Dictionary)["yield"] as Dictionary):
+			if not RESOURCES.has(res):
+				errors.append("gathering '%s' yields unknown '%s'"
+					% [node_id, res])
+	return errors
+
+
+static func check_recipes(recipes: Dictionary) -> Array:
+	var errors: Array = []
+	for recipe_id in recipes:
+		var recipe: Dictionary = recipes[recipe_id]
+		if not BUILDINGS.has(recipe["station"]):
+			errors.append("recipe '%s' wants unknown station '%s'"
+				% [recipe_id, recipe["station"]])
+		for res in (recipe["inputs"] as Dictionary):
+			if not RESOURCES.has(res):
+				errors.append("recipe '%s' takes unknown '%s'"
+					% [recipe_id, res])
+		for out in (recipe["output"] as Dictionary):
+			# An output is either a resource or something placeable.
+			if not RESOURCES.has(out) and not DEFENCES.has(out):
+				errors.append("recipe '%s' makes unknown '%s'"
+					% [recipe_id, out])
+	return errors
+
+
+static func check_buildings(buildings: Dictionary) -> Array:
+	var errors: Array = []
+	for building_id in buildings:
+		var building: Dictionary = buildings[building_id]
+		for res in (building["cost"] as Dictionary):
+			if not RESOURCES.has(res):
+				errors.append("building '%s' costs unknown '%s'"
+					% [building_id, res])
+		if building.has("fuel"):
+			for res in (building["fuel"] as Dictionary):
+				if not RESOURCES.has(res):
+					errors.append("building '%s' burns unknown '%s'"
+						% [building_id, res])
+	return errors
+
+
+static func check_defences(defences: Dictionary) -> Array:
+	var errors: Array = []
+	for defence_id in defences:
+		var defence: Dictionary = defences[defence_id]
+		for res in (defence["cost"] as Dictionary):
+			if not RESOURCES.has(res):
+				errors.append("defence '%s' costs unknown '%s'"
+					% [defence_id, res])
+		if defence.has("ammo"):
+			for res in (defence["ammo"] as Dictionary):
+				if not RESOURCES.has(res):
+					errors.append("defence '%s' fires unknown '%s'"
+						% [defence_id, res])
+		if defence.has("min_range") and defence.has("range"):
+			if int(defence["min_range"]) >= int(defence["range"]):
+				errors.append(("defence '%s' has a minimum range at or past "
+					+ "its maximum") % defence_id)
+	return errors
+
+
+static func check_nights(nights: Array) -> Array:
+	var errors: Array = []
+	for n in nights.size():
+		for wave in (nights[n] as Array):
+			if not ENEMIES.has(wave[0]):
+				errors.append("night %d sends unknown enemy '%s'"
+					% [n + 1, wave[0]])
+			if int(wave[1]) <= 0:
+				errors.append("night %d has a wave of %d" % [n + 1, wave[1]])
+	if nights.size() != MVP_NIGHTS:
+		errors.append("MVP_NIGHTS is %d but %d nights are written"
+			% [MVP_NIGHTS, nights.size()])
+	return errors

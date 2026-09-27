@@ -134,3 +134,48 @@ Notes:
   differently - it has to be a hash of the state, not of how it was assembled.
 - `MAX_CATCH_UP_TICKS = 8` drops a long stall rather than paying it. Confirmed
   on screen: 150 frames from a cold start reached tick 138, not tick 900.
+
+## 0003 - game_data.gd, the one file of levers - done 2026-09-27
+
+What changed: the file everything else reads its numbers from. Thirteen
+resources, three crops, gathering and fishing, eight recipes, four production
+buildings, eight defences, five enemies, the ten nights of `design.md` section
+10, and the reward and defeat tables. `# LEVER` on every balance dial with its
+unit and a sane range. `validate()` cross-checks every id one table points at
+against the table that defines it.
+
+Files: src/core/game_data.gd, src/tools/headless_check.gd
+
+Verify: PASS - 4 passed, 3 skipped. **57 asserts, 0 failed** (13 before this
+task). Hash unchanged at 440001231, correctly: this task added data and no rule
+reads any of it yet.
+
+Notes:
+
+- **The validator is tested failing, not only passing.** Each check takes its
+  table rather than reading the constant, so `headless_check` hands
+  `check_recipes()` a recipe wanting `unobtainium` and asserts the error names
+  it, and hands `check_nights()` a wave of `vampire` and asserts the same. A
+  validator nobody has seen fail is one nobody should trust.
+- **The economy, as arithmetic.** Crops, net of seed, per second of growth:
+  wheat (2 x $4 - $3) / 90s = **$0.056/s**, corn (3 x $5 - $6) / 180s =
+  **$0.050/s**, carrot (2 x $3 - $4) / 60s = **$0.033/s**. Wheat wins on money
+  and is meant to - carrot's value is food, which is what repairs a wall at
+  three in the morning, and corn's is oil and gunpowder. That is how task 0028's
+  "no crop strictly dominates" is supposed to hold, and task 0068 is where it
+  gets measured instead of reasoned about.
+- **One number was wrong and the arithmetic found it.** Ore respawn was 240s,
+  the whole length of a day, which means each node yields one iron per day and a
+  15-iron gun tower costs three days of nothing but mining. Task 0031 asks that
+  a day's mining buy roughly one tower. Dropped to 60s: six nodes re-minable
+  four times is ~24 iron a day at 6s a hit, which is 144s of a 240s day spent
+  at the rock face - a real cost, and one tower.
+- The wheat growth lever was turned from 90s to 45s and back as a check: it
+  appears in exactly one place, no assert moved and the hash did not move. The
+  behavioural half of "changes growth and nothing else" is not observable until
+  task 0018 plants something, and 0018's prompt already asks for that assert.
+- Speeds are **ticks per tile**, not tiles per second, so they stay integers and
+  two machines cannot disagree about where a zombie is.
+- Carrot is in, though the reference sheet shows only wheat and corn:
+  `design.md` section 5 names three crops and the document is the scope
+  authority.

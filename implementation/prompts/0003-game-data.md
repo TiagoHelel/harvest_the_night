@@ -1,7 +1,7 @@
 # 0003 - game_data.gd, the one file of levers
 
 - **Phase:** 0 - Foundation
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0001
 - **Likely files:** src/core/game_data.gd
 
