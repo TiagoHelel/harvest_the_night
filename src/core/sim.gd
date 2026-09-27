@@ -56,6 +56,10 @@ static func _tick_day(state: Dictionary) -> void:
 		Phases.begin_preparation(state)
 		return
 
+	# **First**, so that everything below it runs at the speed the farm can
+	# actually manage this tick rather than last tick's.
+	Power.tick(state)
+
 	Building.tick(state)
 	Farming.tick(state)
 	# **Filling the can is a fact about where the player is standing**, so it
@@ -106,6 +110,7 @@ static func _tick_night(state: Dictionary) -> void:
 	# Waves spawn (0027), enemies move (0025), towers acquire and fire, shots
 	# in the air advance and land, and only then is the end of the night
 	# tested (0027).
+	Power.tick(state)
 	Waves.tick(state)
 	Enemies.tick(state)
 	Towers.tick(state)

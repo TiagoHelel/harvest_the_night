@@ -41,7 +41,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 13
+const CASES := 14
 
 var passed := 0
 var failed := 0
@@ -84,6 +84,7 @@ func _run() -> void:
 	await _case_0029_watering()
 	await _case_0030_fishing()
 	await _case_0032_press()
+	await _case_0033_power()
 	_finish()
 
 
@@ -645,8 +646,9 @@ func _case_0021_day_hud() -> void:
 		"the night button to take effect")
 	expect(int(state["phase"]) == Phases.PREPARATION,
 		"clicking it starts the night", Phases.name_of(int(state["phase"])))
-	await until(func() -> bool: return not hud.visible, "the day HUD to go")
-	expect(not hud.visible, "and the day HUD goes away with the day")
+	await until(func() -> bool: return not hud.shows_day(),
+		"the day HUD to go")
+	expect(not hud.shows_day(), "and the day HUD goes away with the day")
 
 	# The key does the same thing from a fresh day.
 	await open_scene(MAIN_SCENE)
@@ -880,7 +882,7 @@ func _case_0027_the_loop() -> void:
 
 	await until(func() -> bool: return result.visible, "the payout to come up")
 	expect(result.visible, "and the payout comes up")
-	expect(not hud.visible, "with the day HUD out of the way")
+	expect(not hud.shows_day(), "with the day HUD out of the way")
 
 	var title: Label = require_control("ResultTitle")
 	expect(title != null and title.text.contains("NIGHT 1"),
@@ -897,8 +899,9 @@ func _case_0027_the_loop() -> void:
 		"the farm to come back")
 	expect(int(state["phase"]) == Phases.DAY, "and it goes back to the farm")
 	expect(int(state["day"]) == 2, "on day two", str(state["day"]))
-	await until(func() -> bool: return hud.visible, "the day HUD to return")
-	expect(hud.visible, "with the HUD back")
+	await until(func() -> bool: return hud.shows_day(),
+		"the day HUD to return")
+	expect(hud.shows_day(), "with the HUD back")
 	expect(not result.visible, "and the payout gone")
 
 	# **Day two is a better day than day one.** The whole point of the loop.
@@ -1150,8 +1153,9 @@ func _case_0028_seeds() -> void:
 
 	# The strip is a day thing: it goes away with the day.
 	await hold_key(KEY_N, 4)
-	await until(func() -> bool: return not hud.visible, "the day HUD to go")
-	expect(not hud.visible, "and the seed strip goes with the day")
+	await until(func() -> bool: return not hud.shows_day(),
+		"the day HUD to go")
+	expect(not hud.shows_day(), "and the seed strip goes with the day")
 	await tap_key(KEY_1)
 	await frames(2)
 	expect(Farming.selected_seed(state) == chosen,
@@ -1557,3 +1561,93 @@ func _free_cell_beside(state: Dictionary, cell: Vector2i) -> Vector2i:
 		if Farm.walkable(state, at):
 			return at
 	return Vector2i(-1, -1)
+
+
+## 0033 - the power line, and what it says when the farm is over-built.
+func _case_0033_power() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var hud: DayHud = require_control("DayHud")
+	if driver == null or hud == null:
+		_completed += 1
+		await close_scene()
+		return
+
+	var state := driver.state
+	var power: Label = require_control("PowerLine")
+	expect(power != null, "the HUD has a power line")
+	if power == null:
+		await close_scene()
+		_completed += 1
+		return
+
+	await frames(2)
+	expect(power.visible, "and it is up on day one")
+	expect(power.text.contains("%d" % Power.supply(state)),
+		"saying what the farm supplies", power.text)
+	expect(power.text.contains("/"), "against what it draws", power.text)
+	var settled := power.modulate
+
+	# **Build past the farm's means and the line says so.**
+	Resources.gain(state, {GameData.WOOD: 600, GameData.IRON: 600})
+	var built := 0
+	for y in range(3, 12):
+		for x in range(22, 34):
+			if built >= 4:
+				break
+			if Building.place(state, &"auto_crossbow", Vector2i(x, y)):
+				built += 1
+		if built >= 4:
+			break
+	expect(built == 4, "four hungry towers go up", str(built))
+	await until(func() -> bool: return Power.is_short(state),
+		"the farm to run short")
+	await frames(2)
+	expect(Power.is_short(state), "and the farm is short",
+		"%d/%d" % [Power.supply(state), Power.draw(state)])
+	expect(power.text.contains("%d%%" % Power.percent(state)),
+		"the line says what that is doing to the speed of things", power.text)
+	expect(power.modulate != settled, "and it changes colour to say so",
+		"%s then %s" % [settled, power.modulate])
+
+	# **A generator puts it back.**
+	Resources.gain(state, Building.cost_of(&"generator"))
+	Resources.gain(state, {GameData.OIL: 20})
+	var spot := Vector2i(-1, -1)
+	for y in range(3, 12):
+		for x in range(24, 34):
+			var origin := Vector2i(x, y)
+			var clear := true
+			for at in Building.footprint(&"generator", origin):
+				if not Farm.buildable(state, at):
+					clear = false
+					break
+			if clear:
+				spot = origin
+				break
+		if spot != Vector2i(-1, -1):
+			break
+	expect(spot != Vector2i(-1, -1), "there is room for a generator")
+	if spot != Vector2i(-1, -1):
+		expect(Building.place(state, &"generator", spot), "and it goes up")
+		await until(func() -> bool: return not Power.is_short(state),
+			"the generator to take up the slack")
+		await frames(2)
+		expect(not Power.is_short(state),
+			"and the farm is not short any more",
+			"%d/%d" % [Power.supply(state), Power.draw(state)])
+		expect(power.modulate == settled, "the line settles back", "%s"
+			% power.modulate)
+
+	# **It stays up after dark**, which is when a generator running dry is the
+	# thing a player most needs to be told about.
+	await hold_key(KEY_N, 4)
+	await until(func() -> bool: return not hud.shows_day(), "the day to end")
+	await frames(2)
+	expect(not hud.shows_day(), "the day HUD is gone")
+	expect(power.visible, "and the power line is not - towers draw at night")
+	expect(power.text.contains("/"),
+		"still saying supply against draw", power.text)
+
+	await close_scene()
+	_completed += 1     # last line: an abandoned case never gets here

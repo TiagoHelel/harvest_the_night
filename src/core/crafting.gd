@@ -164,7 +164,9 @@ static func start(state: Dictionary, cell: Vector2i, recipe_id: StringName) -> b
 	var recipe: Dictionary = GameData.RECIPES[recipe_id]
 	if not Resources.pay(state, recipe["inputs"]):
 		return false            # all or nothing, as ever
-	var ticks := maxi(int(recipe["ticks"]), 1)
+	# The batch is costed when it starts. A brown-out half way through does not
+	# lengthen work already committed - the corn is in the hopper.
+	var ticks := maxi(Power.scaled_ticks(state, int(recipe["ticks"])), 1)
 	(state["crafting"] as Dictionary)[Grid.index(cell)] = {
 		"recipe": recipe_id,
 		"left": ticks,

@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 25
+const GROUPS := 26
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -89,6 +89,7 @@ func _run() -> void:
 	_task_0030_fishing()
 	_task_0031_iron()
 	_task_0032_oil()
+	_task_0033_power()
 
 
 func _finish() -> void:
@@ -3487,3 +3488,225 @@ func _room_for(state: Dictionary, size: Vector2i) -> Vector2i:
 			if clear:
 				return origin
 	return Vector2i(-1, -1)
+
+
+## 0033 - energy: a rate, and a farm that slows rather than stops.
+func _task_0033_power() -> void:
+	# **Energy is not a stockpile**, and the clearest statement of that is that
+	# there is none of it in the ledger, ever.
+	var state := State.create(1500)
+	expect(Resources.amount(state, GameData.ENERGY) == 0,
+		"no energy in the ledger", str(Resources.amount(state, GameData.ENERGY)))
+	Sim.advance(state, 300)
+	expect(Resources.amount(state, GameData.ENERGY) == 0,
+		"and none accumulates - it is a rate, not a tank",
+		str(Resources.amount(state, GameData.ENERGY)))
+
+	# **A bare farm runs at full speed.** Nothing built, nothing drawing.
+	expect(Power.draw(state) == 0, "an empty farm draws nothing",
+		str(Power.draw(state)))
+	expect(Power.supply(state) == GameData.BASE_ENERGY,
+		"and makes its own trickle", str(Power.supply(state)))
+	expect(Power.percent(state) == 100, "so everything runs at full speed")
+	expect(not Power.is_short(state), "and nothing is short")
+
+	# **Draw is what is standing on the farm.**
+	Resources.gain(state, {GameData.WOOD: 400, GameData.IRON: 400,
+		GameData.STONE: 400, GameData.OIL: 400, GameData.GUNPOWDER: 200})
+	var towers := _line_of_towers(state, &"gun_tower", GameData.BASE_ENERGY)
+	expect(towers.size() == GameData.BASE_ENERGY, "a tower per unit of supply",
+		str(towers.size()))
+	Sim.advance(state, 1)
+	var each := int((GameData.DEFENCES[&"gun_tower"]
+		as Dictionary)["energy_draw"])
+	expect(Power.draw(state) == towers.size() * each,
+		"every tower draws", str(Power.draw(state)))
+	expect(Power.percent(state) == 100,
+		"and the farm's own supply covers exactly this many",
+		"%d/%d" % [Power.supply(state), Power.draw(state)])
+
+	# **One too many, and everything slows.** The done-when.
+	var reload := int((GameData.DEFENCES[&"gun_tower"]
+		as Dictionary)["reload_ticks"])
+	expect(Power.scaled_ticks(state, reload) == reload,
+		"a full farm reloads in the time the table says", str(reload))
+
+	var extra := _line_of_towers(state, &"gun_tower", 1, towers)
+	expect(extra.size() == 1, "one more tower goes up")
+	Sim.advance(state, 1)
+	expect(Power.is_short(state), "and now the farm is short",
+		"%d/%d" % [Power.supply(state), Power.draw(state)])
+	var slowed := Power.scaled_ticks(state, reload)
+	print("  %d towers on %d supply: %d%% - reload %d ticks becomes %d"
+		% [towers.size() + 1, Power.supply(state), Power.percent(state),
+			reload, slowed])
+	expect(slowed > reload, "so everything takes longer", str(slowed))
+	expect(Power.percent(state) > 0 and slowed < reload * 100,
+		"and nothing has stopped - slower, not off", str(slowed))
+
+	# **It is proportional**, not a cliff. Twice the draw, about twice as slow.
+	expect(Power.percent(state)
+		== GameData.BASE_ENERGY * 100 / Power.draw(state),
+		"the percentage is supply over draw", str(Power.percent(state)))
+
+	# **The floor holds.** Build far past your means and the farm is slow, not
+	# dead - `design.md` does not do punishment mechanics.
+	var swamped := State.create(1501)
+	Resources.gain(swamped, {GameData.WOOD: 900, GameData.IRON: 900})
+	_line_of_towers(swamped, &"auto_crossbow", 12)
+	Sim.advance(swamped, 1)
+	expect(Power.draw(swamped) > GameData.BASE_ENERGY * 4,
+		"a farm built well past its means", str(Power.draw(swamped)))
+	expect(Power.percent(swamped) == GameData.UNPOWERED_PERCENT,
+		"runs at the floor and no lower", str(Power.percent(swamped)))
+	var crawl := Power.scaled_ticks(swamped, reload)
+	expect(crawl == reload * 100 / GameData.UNPOWERED_PERCENT,
+		"which is a quarter speed, not a stop", str(crawl))
+
+	# **A generator supplies, burns fuel, and stops when the oil runs out.**
+	var plant := State.create(1502)
+	Resources.gain(plant, {GameData.WOOD: 400, GameData.IRON: 400})
+	_line_of_towers(plant, &"auto_crossbow", 4)
+	Sim.advance(plant, 1)
+	var unpowered := Power.percent(plant)
+	expect(unpowered < 100, "four hungry towers outrun the farm",
+		"%d/%d" % [Power.supply(plant), Power.draw(plant)])
+
+	Resources.gain(plant, Building.cost_of(&"generator"))
+	var spot := _room_for(plant, Building.size_of(&"generator"))
+	expect(Building.place(plant, &"generator", spot), "a generator goes up")
+	expect(Power.generators(plant).size() == 1, "one generator",
+		str(Power.generators(plant).size()))
+	expect(Power.draw(plant) == 4 * int((GameData.DEFENCES[&"auto_crossbow"]
+		as Dictionary)["energy_draw"]),
+		"which draws nothing itself", str(Power.draw(plant)))
+
+	var fuel: Dictionary = (GameData.BUILDINGS[&"generator"]
+		as Dictionary)["fuel"]
+	Resources.gain(plant, {GameData.OIL: 2})
+	var oil_before := Resources.amount(plant, GameData.OIL)
+	Sim.advance(plant, 1)
+	expect(Power.is_running(plant, spot), "and it lights")
+	expect(Resources.amount(plant, GameData.OIL)
+		== oil_before - int(fuel[GameData.OIL]),
+		"burning a drop to start", str(Resources.amount(plant, GameData.OIL)))
+	expect(Power.supply(plant) == GameData.BASE_ENERGY
+		+ int((GameData.BUILDINGS[&"generator"] as Dictionary)["energy_output"]),
+		"and supplying on top of the farm's own",
+		str(Power.supply(plant)))
+	expect(Power.percent(plant) > unpowered,
+		"so the towers speed up", "%d against %d"
+			% [Power.percent(plant), unpowered])
+
+	# It burns on the tick the lever says, and no sooner.
+	var every := int((GameData.BUILDINGS[&"generator"]
+		as Dictionary)["fuel_every_ticks"])
+	var held := Resources.amount(plant, GameData.OIL)
+	Sim.advance(plant, every - 2)
+	expect(Resources.amount(plant, GameData.OIL) == held,
+		"no second drop early", str(Resources.amount(plant, GameData.OIL)))
+	Sim.advance(plant, 2)
+	expect(Resources.amount(plant, GameData.OIL) == held - 1,
+		"and one exactly when the lever says",
+		str(Resources.amount(plant, GameData.OIL)))
+
+	# Out of oil: it stops supplying, and the farm falls back to its own.
+	Sim.advance(plant, every * 2)
+	expect(Resources.amount(plant, GameData.OIL) == 0, "the oil runs out",
+		str(Resources.amount(plant, GameData.OIL)))
+	expect(not Power.is_running(plant, spot), "and the generator stops")
+	expect(Power.supply(plant) == GameData.BASE_ENERGY,
+		"leaving the farm on its own trickle", str(Power.supply(plant)))
+	expect(Power.percent(plant) == unpowered,
+		"exactly where it was before the generator",
+		"%d against %d" % [Power.percent(plant), unpowered])
+
+	# **A generator with nothing to power does not burn anything.**
+	var idle := State.create(1503)
+	Resources.gain(idle, Building.cost_of(&"generator"))
+	Resources.gain(idle, {GameData.OIL: 5})
+	var idle_spot := _room_for(idle, Building.size_of(&"generator"))
+	expect(Building.place(idle, &"generator", idle_spot), "a generator alone")
+	Sim.advance(idle, every * 3)
+	expect(Resources.amount(idle, GameData.OIL) == 5,
+		"burns nothing when nothing is drawing - there is no tank for it to "
+		+ "go into", str(Resources.amount(idle, GameData.OIL)))
+
+	# **Running out mid-night degrades the defence and the night resolves.**
+	# The other done-when, driven all the way to the payout.
+	var night := State.create(1504)
+	Resources.gain(night, {GameData.WOOD: 600, GameData.IRON: 600})
+	_line_of_towers(night, &"auto_crossbow", 5)
+	Resources.gain(night, Building.cost_of(&"generator"))
+	var gen := _room_for(night, Building.size_of(&"generator"))
+	expect(Building.place(night, &"generator", gen), "a generator for the night")
+	Resources.spend(night, GameData.OIL, Resources.amount(night, GameData.OIL))
+	Resources.gain(night, {GameData.OIL: 1})    # one drop: a minute of power
+
+	# **A late night**, because night one is over in forty seconds and a drop
+	# of oil lasts a minute - the generator would outlive the wave and there
+	# would be no brown-out to watch.
+	night["day"] = 8
+	Phases.begin_preparation(night)
+	Sim.advance(night, GameData.PREPARATION_TICKS)
+	expect(int(night["phase"]) == Phases.NIGHT, "a long night, with the lights on")
+	Sim.advance(night, 1)           # the first night tick is what lights it
+	expect(Power.is_running(night, gen), "the generator is turning")
+	var lit := Power.percent(night)
+
+	var dark_at := -1
+	var shots := 0
+	for t in 12000:
+		var before := Towers.in_flight(night)
+		Sim.advance(night, 1)
+		if Towers.in_flight(night) > before:
+			shots += 1
+		if dark_at < 0 and not Power.is_running(night, gen):
+			dark_at = t
+		if int(night["phase"]) != Phases.NIGHT:
+			break
+	expect(dark_at > 0, "the oil ran out part way through", str(dark_at))
+	expect(Power.percent(night) < lit, "and the farm dimmed",
+		"%d then %d" % [lit, Power.percent(night)])
+	expect(shots > 0, "the towers kept shooting in the dark", str(shots))
+	expect(int(night["phase"]) == Phases.RESULT,
+		"and the night resolved rather than hanging",
+		Phases.name_of(int(night["phase"])))
+	print("  a night on one drop of oil: dark at tick %d, %d shots, %s"
+		% [dark_at, shots,
+			"survived" if bool(Rewards.last(night)["survived"]) else "lost"])
+
+	# **The build phase does not burn fuel**, because the clock does not run.
+	var waiting := State.create(1505)
+	Resources.gain(waiting, {GameData.WOOD: 400, GameData.IRON: 400})
+	_line_of_towers(waiting, &"auto_crossbow", 4)
+	Resources.gain(waiting, Building.cost_of(&"generator"))
+	var idle_gen := _room_for(waiting, Building.size_of(&"generator"))
+	Building.place(waiting, &"generator", idle_gen)
+	Resources.spend(waiting, GameData.OIL,
+		Resources.amount(waiting, GameData.OIL))
+	Resources.gain(waiting, {GameData.OIL: 10})
+	Phases.begin_preparation(waiting)
+	var oil_at_dusk := Resources.amount(waiting, GameData.OIL)
+	Sim.advance(waiting, GameData.PREPARATION_TICKS - 1)
+	expect(Resources.amount(waiting, GameData.OIL) == oil_at_dusk,
+		"a generator burns nothing while the player is deciding where to build",
+		str(Resources.amount(waiting, GameData.OIL)))
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## `count` towers in a row somewhere they will fit. Returns where they went.
+func _line_of_towers(state: Dictionary, id: StringName, count: int,
+		avoid: Array = []) -> Array:
+	var out: Array = []
+	for y in range(2, Grid.HEIGHT - 2):
+		for x in range(20, Grid.WIDTH - 2):
+			if out.size() >= count:
+				return out
+			var cell := Vector2i(x, y)
+			if avoid.has(cell):
+				continue
+			if Building.place(state, id, cell):
+				out.append(cell)
+	return out

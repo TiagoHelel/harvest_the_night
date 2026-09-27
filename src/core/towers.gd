@@ -91,7 +91,10 @@ static func tick(state: Dictionary) -> void:
 		if target == 0:
 			continue
 		_fire(state, cell, tower["id"], entry, target)
-		tower["reload"] = int(entry["reload_ticks"])
+		# **Asked fresh after every shot**, so a generator running dry part way
+		# through a night slows the guns from the next shot rather than from the
+		# next night.
+		tower["reload"] = Power.scaled_ticks(state, int(entry["reload_ticks"]))
 
 
 ## Reload everything, without looking for targets. What a quiet tick costs.

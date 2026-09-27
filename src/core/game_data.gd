@@ -375,6 +375,17 @@ const QUEUE_LENGTH := 5                 # LEVER: items, 3-10
 
 ## The production side of the farm. Energy draw is what task 0033 turns into a
 ## reason to care where the generator is.
+## What the farm makes without a generator.
+##
+## **The reason the first press is not miserable.** With nothing here, a press
+## on day one would draw two against a supply of nothing and grind along at a
+## quarter speed until the player built a generator - which burns oil, which
+## comes out of the press. Not a deadlock, but an hour of wondering what is
+## wrong. Four is the press and a tower or two; past that the farm has grown
+## beyond its own means, which is exactly when a generator should be the
+## answer.
+const BASE_ENERGY := 4                  # LEVER: energy per tick, 0-10
+
 const BUILDINGS: Dictionary = {
 	&"workshop": {
 		"cost": {WOOD: 20, STONE: 10},
@@ -396,16 +407,28 @@ const BUILDINGS: Dictionary = {
 		"energy_draw": 0,
 		"energy_output": 10,            # LEVER: energy per tick, 5-20
 		"fuel": {OIL: 1},
-		"fuel_every_ticks": 30 * SECONDS,   # LEVER: ticks, 15-60 seconds worth
+		# A drop a minute, so a full day and night of running is five or six oil
+		# against the twelve a press can make in a day. Expensive enough to be a
+		# decision, cheap enough that the answer is sometimes yes.
+		"fuel_every_ticks": 60 * SECONDS,   # LEVER: ticks, 20-120 seconds worth
 		"size": Vector2i(2, 2),
 	},
 }
 
-## What a structure runs at when the farm is drawing more energy than it makes.
+## How well things run on no power at all.
 ##
-## Degraded, never dead: a brown-out should slow the defence and let the night
-## resolve, not switch the towers off and end it.
-const BROWNOUT_RATE := 0.5              # LEVER: fraction of normal, 0.25-0.8
+## Degraded, never dead: a brown-out slows the defence and lets the night
+## resolve, rather than switching the towers off and ending it. `design.md`
+## calls a lost night a setback and not an ending, and a night the player
+## watches instead of playing is the wrong kind of loss.
+##
+## **A percentage, not a fraction.** This was `0.5` from the day the table was
+## written and nothing ever read it; a float in `src/core/` is a desync waiting
+## for a machine that rounds differently, so it became an integer the moment
+## something needed it. Twenty-five rather than fifty, because with
+## `BASE_ENERGY` below the farm only reaches this floor when it has been built
+## well past its means.
+const UNPOWERED_PERCENT := 25           # LEVER: percent of full speed, 10-60
 
 
 # =================================================================== defences
@@ -1194,12 +1217,12 @@ static func digest() -> int:
 		"crops": CROPS,
 		"water": [WATER_GROWTH_BONUS, WATER_CAN_CAPACITY,
 			WATER_LASTS_UNTIL_NIGHT],
+		"power": [BASE_ENERGY, UNPOWERED_PERCENT],
 		"gathering": GATHERING,
 		"fishing": FISHING,
 		"recipes": RECIPES,
 		"queue": [QUEUE_LENGTH],
 		"buildings": BUILDINGS,
-		"power": [BROWNOUT_RATE],
 		"defences": DEFENCES,
 		"repair": [REPAIR_COST_PER_HP, REPAIR_TICKS_PER_HP,
 			HOUSE_REPAIR_PENALTY],

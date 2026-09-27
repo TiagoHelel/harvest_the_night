@@ -40,6 +40,14 @@ extends Control
 ## plain: **task 0078 draws the float going under**, which is the version a
 ## player should get, and this is what keeps the mechanic playable until then.
 ##
+## ## The power line stays up at night
+##
+## Everything else here belongs to the day and goes away with it. The energy
+## readout does not: towers draw while they are shooting, and a generator
+## running dry half way through a wave is the one moment a player most needs to
+## be told. So `_refresh()` hides the **contents** rather than the panel, and
+## the power line is the one child left showing.
+##
 ## ## The night button
 ##
 ## Bottom right, and it says what it will do rather than just "night". It is a
@@ -62,6 +70,7 @@ const SEED_KEYS: Array = [KEY_1, KEY_2, KEY_3, KEY_4, KEY_5, KEY_6]
 
 const PICKED := Color(1.0, 0.92, 0.62)
 const BITE := Color(1.0, 0.85, 0.35)
+const SHORT := Color(0.96, 0.55, 0.36)
 
 const DIM := Color(0.62, 0.60, 0.70)
 const LIT := Color(1.0, 0.95, 0.70)
@@ -77,6 +86,8 @@ var _flash: Dictionary = {}         # resource id -> seconds of glow left
 var _seed_rows: Dictionary = {}     # crop id -> Label
 var _water: Label
 var _line: Label
+var _power: Label
+var _day_only: Array[Control] = []
 
 
 func _ready() -> void:
@@ -122,6 +133,10 @@ func _ready() -> void:
 	_line = _label("FishingLine", Vector2(186, 208), BITE)
 	_line.visible = false
 
+	# **Bottom left, and it stays up after dark.** Supply against draw, and
+	# what that is doing to the speed of everything.
+	_power = _label("PowerLine", Vector2(4, 258), DIM)
+
 	_night = Button.new()
 	_night.name = "NightButton"
 	_night.text = "SWITCH TO NIGHT"
@@ -156,6 +171,23 @@ func _build_seed_strip() -> void:
 			int((GameData.CROPS[id] as Dictionary)["seed_cost"]),
 			Farming.seconds_to_grow(id), Farming.value_per_day(id)]
 		_seed_rows[id] = row
+
+
+## Everything that belongs to the daylight, hidden together when it ends.
+func _remember_day_only(nodes: Array) -> void:
+	for node in nodes:
+		if node is Control:
+			_day_only.append(node as Control)
+
+
+## Whether the day's own chrome is up: the bar, the seed strip, the night
+## button. **Not `visible`** - the panel itself stays up after dark to carry
+## the power line, so a test that asked the node would be asking the wrong
+## question and getting the wrong answer.
+func shows_day() -> bool:
+	if _state.is_empty() or _day_only.is_empty():
+		return visible
+	return visible and _day_only[0].visible
 
 
 func show_state(state: Dictionary) -> void:
@@ -200,8 +232,26 @@ func _ask_for_night() -> void:
 
 func _refresh(force: bool) -> void:
 	var phase := int(_state["phase"])
-	visible = phase == Phases.DAY
-	if not visible:
+	var daylight := phase == Phases.DAY
+
+	# **The power line first**, because it is the one thing here that outlives
+	# the day.
+	var supply := Power.supply(_state)
+	var draw := Power.draw(_state)
+	var percent := Power.percent(_state)
+	_power.text = "POWER %d/%d" % [supply, draw] \
+		if percent >= 100 else "POWER %d/%d  everything at %d%%" \
+			% [supply, draw, percent]
+	_power.modulate = SHORT if percent < 100 else DIM
+
+	if _day_only.is_empty():
+		for child in get_children():
+			if child is Control and child != _power:
+				_day_only.append(child as Control)
+	for node in _day_only:
+		node.visible = daylight
+	visible = true
+	if not daylight:
 		return
 
 	# The clock lives here now rather than in its own label on the other side
@@ -244,7 +294,7 @@ func _refresh(force: bool) -> void:
 
 	# **The line, while there is one.** Waiting says so quietly; a bite shouts,
 	# because the window is a second and a half.
-	_line.visible = Fishing.is_casting(_state)
+	_line.visible = daylight and Fishing.is_casting(_state)
 	if _line.visible:
 		var biting := Fishing.is_biting(_state)
 		_line.text = "A BITE - PRESS SPACE" if biting else "waiting for a bite"

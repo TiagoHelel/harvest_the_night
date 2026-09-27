@@ -1,7 +1,7 @@
 # 0033 - The generator and energy
 
 - **Phase:** 2 - The full day
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0031, 0019
 - **Likely files:** src/core/power.gd
 

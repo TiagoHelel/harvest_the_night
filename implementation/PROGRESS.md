@@ -1923,3 +1923,129 @@ every row sat somewhere it was not drawn. Harmless at eight rows. Fixed.
 **Follow-up:** task 0033's generator and 0034's kitchen are both `BUILDINGS`
 entries, so both are now placeable and workable without further plumbing. The
 `energy_draw` on the press is still data only - 0033 owns it.
+
+## 0033 - The generator and energy - done 2026-09-27
+
+Energy, and the farm that slows down rather than switching off.
+
+**What changed.** New `src/core/power.gd`. Everything placed on the farm draws
+energy while it runs; the farm supplies a trickle of its own and a generator
+burns oil for more. Draw more than you make and **everything slows together**,
+in proportion, with a floor - a tower reloads more slowly, the press takes
+longer, and nothing ever stops.
+
+Files: `src/core/power.gd` (new), `game_data.gd`, `state.gd`, `sim.gd`,
+`towers.gd`, `crafting.gd`, `src/ui/day_hud.gd`, `tools/sprite_maps.py`, both
+test tools.
+Verify: 839 headless / 237 input / both hashes moved on purpose, below.
+
+### A rate, not a stockpile
+
+There is no energy in the ledger and there never will be. `Power.tick()`
+recomputes supply and draw and turns them into a **percentage**, and the whole
+of the rest of the game touches it through one function:
+
+    Power.scaled_ticks(state, ticks)  ->  ticks * 100 / percent
+
+At full power that hands back exactly what it was given, which is why nothing
+measured before this file existed moved by a tick. A tower asks it how long to
+reload and the press asks it how long a batch takes; neither knows what a
+generator is.
+
+Two call sites, and the difference between them is deliberate:
+
+- **A tower asks after every shot**, so a generator running dry half way
+  through a night slows the guns from the next shot rather than the next night.
+- **The press asks when a batch starts.** A brown-out does not lengthen work
+  already committed - the corn is in the hopper.
+
+### `BROWNOUT_RATE` was already there, and was a float
+
+`const BROWNOUT_RATE := 0.5` had been in `game_data.gd` since the table was
+written, read by nothing, with `digest()` already carrying a `"power"` key -
+which is how I found it, the same way as `WATER_GROWTH_BONUS` in task 0029:
+my own duplicate lever collided with it and the parser said so.
+
+It became `UNPOWERED_PERCENT := 25`, an integer, because a float in `src/core/`
+is a desync waiting for a machine that rounds differently. Twenty-five rather
+than fifty because of the other new lever:
+
+### The farm has a trickle of its own
+
+`BASE_ENERGY := 4`. Without it, the first press on day one would draw two
+against a supply of nothing and grind at the floor until the player built a
+generator - which burns oil, which comes out of the press. Not a deadlock, but
+an hour of wondering what is wrong.
+
+Four is the press and a tower or two. Past that the farm has grown beyond its
+own means, which is exactly when a generator should be the answer. Measured:
+
+    4 gun towers on 4 supply   100%   reload 30 ticks
+    5 gun towers on 4 supply    80%   reload 37 ticks
+    12 auto-crossbows           25%   reload 120 ticks - the floor, not a stop
+
+`fuel_every_ticks` went from 30 seconds to 60: a full day and night of running
+is five or six oil against the twelve a press can make in a day. Expensive
+enough to be a decision, cheap enough that the answer is sometimes yes.
+
+A generator **burns nothing when nothing is drawing**. There is no tank for the
+energy to go into, so a generator idling on an empty farm would be the player
+paying oil for nothing. It also burns nothing during the build phase, where the
+clock does not run.
+
+### It tripled the test suite, and the fix was the flow field's
+
+`Power.tick()` runs at 30Hz through every day and every night, and the first
+version scanned and sorted the whole occupant table twice per tick - once for
+the draw and once to find the generators. `headless_check` went from 18 seconds
+to **51**.
+
+The farm's draw only changes when something goes up or comes down, which is
+exactly what `grid_version` counts. Both lists are cached against it now and
+the suite is back to 18 seconds. Same fix and same reason as the flow field in
+task 0025: ask what changed, not what is. Worth writing down that the
+performance regression showed up in the wall clock of the test run rather than
+in any assert - task 0102 owns the budget, but a 3x slowdown compounds, and
+the cheapest time to fix it is the hour it appears.
+
+### The power line outlives the day
+
+The HUD requirement is "supply against draw", and the day HUD hides itself when
+the day ends - which is precisely backwards for this number, because towers
+draw at night and a generator running dry mid-wave is the one moment a player
+most needs to be told.
+
+So `DayHud` stays up and hides its **contents** instead. The power line is the
+one child left showing after dark. Three existing asserts were asking
+`hud.visible` and meaning "is the day's chrome up", so they got
+`DayHud.shows_day()`, which is the question they were actually asking.
+
+### The done-whens
+
+- **Building one too many visibly slows everything rather than stopping it** -
+  five gun towers on four supply is 80%, and a 30-tick reload becomes 37.
+  Twelve auto-crossbows is the 25% floor and still fires.
+- **Running out of fuel mid-night degrades the defence and the night still
+  resolves** - driven end to end on one drop of oil: dark at tick 1799 (a
+  minute, exactly what the lever says), 203 shots fired after that, night
+  survived and settled to a payout. Night one had to be swapped for night
+  eight: night one is over in forty seconds and a drop of oil lasts a minute,
+  so the generator outlived the wave and there was no brown-out to watch.
+
+### Notes
+
+- The generator is drawn as one 32x32 split into quarters, like the press: a
+  stone housing with a lit burner in the middle, a stack and a cable. Looked at
+  it assembled rather than trusting the ASCII.
+- `_total_draw` skips the generator itself and counts a multi-tile building
+  once, by anchor - four cells of one press are one press.
+
+### Hashes
+
+| | from | to | why |
+|---|---|---|---|
+| sim hash | `680464820` | `3918087068` | the state gained `power`: supply, draw, percent, the burn timers and the two caches |
+| data hash | `3582057941` | `1017850053` | `BASE_ENERGY` is new, `BROWNOUT_RATE` 0.5 became `UNPOWERED_PERCENT` 25, and the generator burns a drop a minute instead of every thirty seconds |
+
+`python tools/verify.py` prints PASS: 839 asserts, 237 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.
