@@ -1,7 +1,7 @@
 # 0034 - Cooking: food and meat
 
 - **Phase:** 2 - The full day
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0030, 0028
 - **Likely files:** src/core/crafting.gd
 

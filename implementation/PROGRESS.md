@@ -2049,3 +2049,123 @@ one child left showing after dark. Three existing asserts were asking
 
 `python tools/verify.py` prints PASS: 839 asserts, 237 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+
+## 0034 - Cooking: food and meat - done 2026-09-27
+
+The kitchen, the animals meat has to come from, and somewhere for food to go
+other than the stall.
+
+**What changed.** Two new core files: `livestock.gd` and `repair.gd`. A cow and
+two chickens stand on the grass and slowly have something worth collecting; the
+kitchen turns crops, fish and meat into food; and food can now be spent putting
+hit points back, through the ledger.
+
+Files: `src/core/livestock.gd` (new), `repair.gd` (new), `game_data.gd`,
+`interact.gd`, `state.gd`, `sim.gd`, `tools/sprite_maps.py`, both test tools.
+Verify: 893 headless / 247 input / both hashes moved on purpose, below.
+
+### Nothing in the world made any meat
+
+`MEAT` has been in the resource table with a price of $9 since task 0003, and
+`cook_roast` has wanted one since the same day. **Nothing produced a single
+unit of it for thirty-three tasks.** The recipe was unreachable and no check
+said so, because every table checked its own contents and none of them asked
+whether a resource anybody wanted could actually be got.
+
+`check_livestock()` asks that now - it refuses a farm where nothing produces
+meat, and a recipe that wants a resource nothing makes.
+
+The answer was on the reference sheet the whole time: a chicken and a cow,
+loose on the grass, not penned. So that is what went on the map, south-west of
+the house where the sheet has them.
+
+### A trickle, and what "passive" was taken to mean
+
+The task says to keep it to a passive trickle and not an animal husbandry
+system. Passive was read as **nothing to manage**: no feed, no water, no
+breeding, no happiness, no shelter. An animal stands there and accumulates.
+
+What it was *not* read as is "arrives in the ledger without you". The player
+walks over and collects, because that is the same bargain as every other thing
+on this farm - it happens while you are elsewhere and comes to nothing if you
+never come back - and because an animal that paid out automatically would be
+wallpaper with a number attached.
+
+`holds` is what keeps it a trickle rather than idle income: a full animal
+**stops**. A cow nobody visits does not bank a fortnight of beef.
+
+    cow       1 meat every 80s, holds 2
+    chicken   1 meat every 50s, holds 1
+
+Both are asleep at night, like the rest of the farm.
+
+`_animals()` is cached against `grid_version` from the start rather than after
+a profiling scare - task 0033 paid that tuition already.
+
+### The margins
+
+The done-when asks for a dish to sell for more than its inputs, with the
+margin stated. Measured, printed by the suite:
+
+| dish | inputs | food out | margin |
+|---|---|---|---|
+| cook_meal | 2 carrot + 1 wheat, $10 | 2 food, $24 | **+$14 (240%)** |
+| cook_fish | 1 fish + 1 carrot, $11 | 3 food, $36 | **+$25 (327%)** |
+| cook_roast | 1 meat + 1 corn, $14 | 4 food, $48 | **+$34 (342%)** |
+
+These were already true - `check_chain()` from task 0032 has been enforcing
+"a recipe gains value" across the whole table since it was written, and the
+kitchen passes it the same way the press does. What 0034 adds is that the
+kitchen can now be built and stood at, which task 0032's generic station verb
+made possible, and that meat exists.
+
+### What food is for
+
+Until this task, food was a thing you cooked and then sold, which made the
+kitchen a money press with a thematic hat on. `design.md`'s resource table
+calls it the night's repair and heal currency, and `REPAIR_COST_PER_HP` has
+been sitting in `game_data.gd` - `{food: 1, wood: 1}` - read by nothing.
+
+`repair.gd` is the **ledger path** and deliberately nothing more: what a hit
+point costs, how many the larder can cover, and taking them. It knows nothing
+about where the player is standing.
+
+**Task 0053 owns the night interaction** - being near the thing, taking time
+over it, being interrupted, the worse rate for the house - and there is a
+`REPAIR_TICKS_PER_HP` lever already in the table waiting for it. Splitting it
+this way is what lets 0034's done-when ("food spent on repair during a night is
+taken through the ledger") be true and tested now without 0034 quietly doing
+0053's job.
+
+All or nothing per hit point: `max_affordable()` works out what the ledger can
+cover before anything is spent, so there is no way to end up with half a hit
+point paid for. Asserted: an empty larder buys no repair and takes nothing for
+trying; a whole house cannot be repaired; a house is never mended past whole.
+
+### Notes
+
+- **Looked at the reference sheet properly**, which I should have been doing
+  on the art tasks before this one. It settled the animals (loose, not penned),
+  confirmed the well from task 0029, and showed meat as a red steak.
+- The cow's first draft was a white box on legs - the patches were
+  `bone_dark`, a shade away from `bone`. Redrawn with `ink_soft` patches, dark
+  ears and a red eye, and it reads as a cow next to the chicken now.
+- One input assert was wrong about the engine rather than the game:
+  `Player.target()` returns the cell ahead whatever is on it, so "an empty
+  chicken is not a target" was never going to be true. The assert that matters
+  is that it offers no verb and a held key takes nothing, which is what it says
+  now.
+- `digest()` already had a `"repair"` key, so my duplicate collided. Third
+  time this session - `WATER_GROWTH_BONUS` in 0029, `BROWNOUT_RATE` in 0033,
+  and now this. The table was laid out with the whole game in it and the
+  backlog keeps catching up to it.
+
+### Hashes
+
+| | from | to | why |
+|---|---|---|---|
+| sim hash | `3918087068` | `2650491902` | the state gained `livestock`, and the farm gained a cow and two chickens |
+| data hash | `1017850053` | `3799311961` | the `LIVESTOCK` table is new and it is in `digest()`, and so are the three animals on the map |
+
+`python tools/verify.py` prints PASS: 893 asserts, 247 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

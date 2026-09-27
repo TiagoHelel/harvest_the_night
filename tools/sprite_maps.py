@@ -701,6 +701,55 @@ SPRITES = {
         "................",
     ]),
 
+    # The cow from the reference sheet: white with black patches, side on,
+    # head to the left. Sixteen pixels is not much of a cow, so the read is
+    # the silhouette and the patches, not the face.
+    "props/cow": dict(size=TILE, legend={
+        "b": "bone", "d": "bone_dark", "k": "ink_soft", "i": "ink",
+        "r": "roof_light", ".": None,
+    }, rows=[
+        "................",
+        "................",
+        "..ii........ii..",
+        ".ikki......ikki.",
+        ".ikkkiiiiiikkki.",
+        "ibbbkkkkkkkkbbbi",
+        "iribbkkkkkkbbbbi",
+        "iibbbbbbbbkkkbbi",
+        ".ibkkkbbbbkkkbbi",
+        ".ibkkkbbbbbbbbi.",
+        ".ibbbbbbbbbbbbi.",
+        "..iiiiiiiiiiii..",
+        "..ii.ii..ii.ii..",
+        "..ik.ik..ik.ik..",
+        "..ii.ii..ii.ii..",
+        "................",
+    ]),
+
+    # A chicken. Smaller, rounder, a red comb and a gold beak - the two bits
+    # of colour are what tell it apart from a rock at this size.
+    "props/chicken": dict(size=TILE, legend={
+        "b": "bone", "d": "bone_dark", "i": "ink",
+        "r": "roof", "g": "gold_light", ".": None,
+    }, rows=[
+        "................",
+        "................",
+        "................",
+        ".....irri.......",
+        "....ibbbi.......",
+        "...igbibi.......",
+        "...ibbbbiiii....",
+        "....ibbbbbbdi...",
+        "....ibbbbbbbdi..",
+        "....ibbbbbbbdi..",
+        "....idbbbbbddi..",
+        ".....iiddddii...",
+        "......ii..ii....",
+        "......ig..ig....",
+        "......ii..ii....",
+        "................",
+    ]),
+
     # A tree. The canopy overhangs the trunk, so a row of them reads as a wood
     # rather than as lollipops.
     "props/tree": dict(size=TILE, legend={

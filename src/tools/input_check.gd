@@ -41,7 +41,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 14
+const CASES := 15
 
 var passed := 0
 var failed := 0
@@ -85,6 +85,7 @@ func _run() -> void:
 	await _case_0030_fishing()
 	await _case_0032_press()
 	await _case_0033_power()
+	await _case_0034_livestock()
 	_finish()
 
 
@@ -1648,6 +1649,90 @@ func _case_0033_power() -> void:
 	expect(power.visible, "and the power line is not - towers draw at night")
 	expect(power.text.contains("/"),
 		"still saying supply against draw", power.text)
+
+	await close_scene()
+	_completed += 1     # last line: an abandoned case never gets here
+
+
+## 0034 - walking over to the chickens.
+func _case_0034_livestock() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	if driver == null:
+		_completed += 1
+		await close_scene()
+		return
+
+	var state := driver.state
+	var hens := Farm.cells_with(state, &"chicken")
+	expect(hens.size() > 0, "there are chickens on the farm")
+	if hens.is_empty():
+		await close_scene()
+		_completed += 1
+		return
+
+	# Pick one with somewhere to stand beside it.
+	var hen := Vector2i(-1, -1)
+	var stand := Vector2i(-1, -1)
+	for found in hens:
+		var at: Vector2i = found
+		var beside := _free_cell_beside(state, at)
+		if beside != Vector2i(-1, -1):
+			hen = at
+			stand = beside
+			break
+	expect(hen != Vector2i(-1, -1), "one of them can be walked up to")
+	if hen == Vector2i(-1, -1):
+		await close_scene()
+		_completed += 1
+		return
+
+	# **An empty chicken offers nothing**, so the key does nothing and the
+	# highlight says so. (`Player.target()` still points at it - the fallback
+	# returns the cell ahead whatever is on it, and it is `verb_at` that
+	# decides whether anything happens.)
+	_stand_at(state, stand, _facing_towards(stand, hen))
+	await frames(2)
+	expect(Interact.verb_at(state, hen) == &"",
+		"a chicken with nothing to give offers nothing",
+		str(Interact.verb_at(state, hen)))
+	var nothing := Resources.amount(state, GameData.MEAT)
+	await hold_key(KEY_SPACE, 6)
+	await frames(2)
+	expect(Resources.amount(state, GameData.MEAT) == nothing,
+		"and pressing interact at it takes nothing",
+		str(Resources.amount(state, GameData.MEAT)))
+
+	# Wait for it to have something. Driven at speed rather than in real time.
+	var every := int((GameData.LIVESTOCK[&"chicken"]
+		as Dictionary)["every_ticks"])
+	Sim.advance(state, every + 2)
+	await frames(2)
+	expect(Livestock.ready_at(state, hen) > 0, "it has something now",
+		str(Livestock.ready_at(state, hen)))
+	_stand_at(state, stand, _facing_towards(stand, hen))
+	await frames(2)
+	expect(Player.target(state) == hen, "and now the farmer can aim at it",
+		str(Player.target(state)))
+	expect(Interact.verb_at(state, hen) == &"collect",
+		"which offers to collect", str(Interact.verb_at(state, hen)))
+
+	# **Press interact and the meat is in the ledger.**
+	var before := Resources.amount(state, GameData.MEAT)
+	await hold_key(KEY_SPACE, 4)
+	await until(func() -> bool:
+		return Resources.amount(state, GameData.MEAT) > before,
+		"the meat to come in")
+	expect(Resources.amount(state, GameData.MEAT) > before,
+		"collecting puts meat in the ledger",
+		"%d then %d" % [before, Resources.amount(state, GameData.MEAT)])
+	expect(Livestock.ready_at(state, hen) == 0, "and the chicken is empty")
+	await frames(4)
+	expect(Resources.amount(state, GameData.MEAT)
+		== before + int((GameData.LIVESTOCK[&"chicken"]
+			as Dictionary)["holds"]),
+		"once, not once a tick - a held key does not milk it dry",
+		str(Resources.amount(state, GameData.MEAT)))
 
 	await close_scene()
 	_completed += 1     # last line: an abandoned case never gets here

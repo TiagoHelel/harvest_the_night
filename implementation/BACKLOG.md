@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`#######.................`  **33 / 108 done**
+`########................`  **34 / 108 done**
 
-0 doing / 75 todo / 0 blocked across 9 phases.
+0 doing / 74 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0034 - Cooking: food and meat**. The whole of what is left is
+First up: **0035 - Gunpowder and ammunition**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,23 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-75 task(s) left, the ready ones first, then what they
+74 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0034 - Cooking: food and meat
-
-Ready to pick up.  Likely files: `src/core/crafting.gd`.
-
-The kitchen from the reference sheet: raw crops and fish become food, which is what repairs and heals during the night.
-
-- Recipes turning crops, fish and meat into food
-- Food is the night's repair and heal currency, per the design document's resource table
-- Cooked food is worth more than its inputs sold separately, or the kitchen has no reason to exist
-- Meat comes from the farm animals on the reference sheet; keep it to a passive trickle, not an animal husbandry system
-
-  - done when: A cooked dish sells for more than its inputs - state the margin
-  - done when: Food spent on repair during a night is taken through the ledger
 
 ### 0035 - Gunpowder and ammunition
 
@@ -1184,7 +1170,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0026** [The tower kills the zombie](prompts/0026-combat.md)
 - [x] **0027** [Three waves, a result screen, and back to the farm](prompts/0027-first-loop.md)
 
-## 2 - The full day  (6/14)
+## 2 - The full day  (7/14)
 
 - [x] **0028** [Corn and carrot](prompts/0028-three-crops.md)
 - [x] **0029** [Growth stages and watering](prompts/0029-growth-stages.md)
@@ -1192,7 +1178,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0031** [Iron from the rock face](prompts/0031-iron.md)
 - [x] **0032** [Oil](prompts/0032-oil.md)
 - [x] **0033** [The generator and energy](prompts/0033-generator.md)
-- [ ] **0034** [Cooking: food and meat](prompts/0034-cooking.md)
+- [x] **0034** [Cooking: food and meat](prompts/0034-cooking.md)
 - [ ] **0035** [Gunpowder and ammunition](prompts/0035-ammunition.md)
 - [ ] **0036** [The inventory](prompts/0036-inventory.md)
 - [ ] **0037** [The workshop queue](prompts/0037-craft-queue.md) - needs 0036

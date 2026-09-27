@@ -47,6 +47,8 @@ const DEFAULT_TICKS: Dictionary = {
 	# player's action. Reeling is a single tick because the window is what
 	# makes it hard, not the pulling.
 	&"reel": 1,
+	# Picking something up off a cow is not work.
+	&"collect": GameData.SECONDS / 3,       # LEVER: ticks, 5-30
 	&"trade": 1,                    # opening a panel is not work
 	# Starting a job is a moment. The job itself takes as long as the recipe
 	# says, and the player is free to walk away while it runs.
@@ -65,7 +67,7 @@ const DEFAULT_TICKS: Dictionary = {
 ## own verbs, and they go on their own list when they arrive.
 const DAY_ONLY: Array = [
 	&"chop", &"mine", &"till", &"plant", &"harvest", &"fish", &"trade", &"craft",
-	&"water", &"reel",
+	&"water", &"reel", &"collect",
 ]
 
 
@@ -103,6 +105,8 @@ static func _offered(state: Dictionary, cell: Vector2i) -> StringName:
 		# a `BUILDINGS` entry and some recipes, and nothing here changes.
 		if Crafting.is_station(on["id"]):
 			return &"craft"
+		if Livestock.is_animal(on["id"]):
+			return Livestock.verb_at(state, cell)
 		return OCCUPANT_VERBS.get(on["id"], &"")
 	var terrain := Farm.terrain_at(state, cell)
 	if terrain == Farm.Terrain.SOIL:
@@ -169,6 +173,8 @@ static func complete(state: Dictionary, cell: Vector2i, verb: StringName) -> voi
 			Fishing.begin(state, cell)
 		&"reel":
 			Fishing.reel(state)
+		&"collect":
+			Livestock.collect(state, cell)
 		&"craft":
 			Crafting.start_at(state, cell)
 		&"trade":
@@ -183,7 +189,7 @@ static func all_verbs() -> Array:
 	var verbs: Array = []
 	for v in OCCUPANT_VERBS.values() + TERRAIN_VERBS.values() \
 			+ [&"till", &"plant", &"harvest", &"water", &"fish", &"reel",
-				&"craft"]:
+				&"craft", &"collect"]:
 		if not verbs.has(v):
 			verbs.append(v)
 	verbs = GameData.sorted_names(verbs)

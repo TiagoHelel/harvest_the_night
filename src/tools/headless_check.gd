@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 26
+const GROUPS := 27
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -90,6 +90,7 @@ func _run() -> void:
 	_task_0031_iron()
 	_task_0032_oil()
 	_task_0033_power()
+	_task_0034_cooking()
 
 
 func _finish() -> void:
@@ -3710,3 +3711,211 @@ func _line_of_towers(state: Dictionary, id: StringName, count: int,
 			if Building.place(state, id, cell):
 				out.append(cell)
 	return out
+
+
+## 0034 - the kitchen, the animals, and what food is actually for.
+func _task_0034_cooking() -> void:
+	# **Crops, fish and meat all become food.**
+	var kitchen := Crafting.recipes_at(&"kitchen")
+	expect(kitchen.size() >= 3, "the kitchen has a few things to cook",
+		str(kitchen))
+	var from_crop := false
+	var from_fish := false
+	var from_meat := false
+	for id in kitchen:
+		var recipe: Dictionary = GameData.RECIPES[id]
+		expect((recipe["output"] as Dictionary).has(GameData.FOOD),
+			"%s makes food" % id, str(recipe["output"]))
+		var inputs: Dictionary = recipe["inputs"]
+		for res in GameData.sorted_names(inputs.keys()):
+			if GameData.CROPS.has(res):
+				from_crop = true
+			if res == GameData.FISH:
+				from_fish = true
+			if res == GameData.MEAT:
+				from_meat = true
+	expect(from_crop, "crops go in the pot")
+	expect(from_fish, "and fish")
+	expect(from_meat, "and meat")
+
+	# **Every dish is worth more cooked than its parts sold separately**, or
+	# the kitchen has no reason to exist. The margins, stated.
+	for id in kitchen:
+		var recipe: Dictionary = GameData.RECIPES[id]
+		var into := _price_of(recipe["inputs"])
+		var made := _price_of(recipe["output"])
+		print("  %-11s $%2d of inputs -> $%2d of food   +$%d (%d%%)"
+			% [id, into, made, made - into, made * 100 / maxi(into, 1)])
+		expect(made > into, "%s is worth cooking" % id,
+			"$%d against $%d" % [made, into])
+
+	# **Meat comes from somewhere now.** It has been in the resource table with
+	# a price and a recipe since task 0003 and nothing in the world made any.
+	var state := State.create(1600)
+	var cows := Farm.cells_with(state, &"cow")
+	var hens := Farm.cells_with(state, &"chicken")
+	expect(cows.size() > 0, "there is a cow on the farm", str(cows.size()))
+	expect(hens.size() > 0, "and chickens", str(hens.size()))
+	expect(GameData.check_livestock(GameData.LIVESTOCK,
+		GameData.FARM_MAP).is_empty(),
+		"the farm passes its own livestock check",
+		str(GameData.check_livestock(GameData.LIVESTOCK, GameData.FARM_MAP)))
+	var barren: Dictionary = GameData.LIVESTOCK.duplicate(true)
+	for id in barren:
+		(barren[id] as Dictionary)["produces"] = {GameData.WOOD: 1}
+	expect(not GameData.check_livestock(barren, GameData.FARM_MAP).is_empty(),
+		"and a farm where nothing produces meat is refused")
+
+	# **A trickle: nothing to do but come back.**
+	var cow: Vector2i = cows[0]
+	var entry: Dictionary = GameData.LIVESTOCK[&"cow"]
+	expect(Livestock.ready_at(state, cow) == 0, "the cow starts with nothing")
+	expect(Interact.verb_at(state, cow) == &"",
+		"and offers nothing to do", str(Interact.verb_at(state, cow)))
+
+	Sim.advance(state, int(entry["every_ticks"]) - 1)
+	expect(Livestock.ready_at(state, cow) == 0, "nothing a tick early")
+	Sim.advance(state, 1)
+	expect(Livestock.ready_at(state, cow) == 1,
+		"and one on the tick the lever says", str(Livestock.ready_at(state, cow)))
+	expect(Interact.verb_at(state, cow) == &"collect",
+		"now there is something to take", str(Interact.verb_at(state, cow)))
+
+	# **It fills up and stops.** A cow nobody visits does not bank a fortnight
+	# of beef; the farm rewards coming back, not being left alone.
+	Sim.advance(state, int(entry["every_ticks"]) * (int(entry["holds"]) + 3))
+	expect(Livestock.ready_at(state, cow) == int(entry["holds"]),
+		"a cow fills up and stops", str(Livestock.ready_at(state, cow)))
+
+	var meat_before := Resources.amount(state, GameData.MEAT)
+	Interact.complete(state, cow, &"collect")
+	expect(Resources.amount(state, GameData.MEAT)
+		== meat_before + int(entry["holds"]),
+		"and collecting takes all of it",
+		str(Resources.amount(state, GameData.MEAT)))
+	expect(Livestock.ready_at(state, cow) == 0, "leaving the cow empty")
+	expect(Interact.verb_at(state, cow) == &"",
+		"with nothing to do until it has something again")
+	var after_collect := Resources.amount(state, GameData.MEAT)
+	Interact.complete(state, cow, &"collect")
+	expect(Resources.amount(state, GameData.MEAT) == after_collect,
+		"and collecting an empty cow takes nothing",
+		str(Resources.amount(state, GameData.MEAT)))
+
+	# **The animals are asleep at night**, like the rest of the farm.
+	var nightly := State.create(1601)
+	var hen: Vector2i = Farm.cells_with(nightly, &"chicken")[0]
+	var hen_entry: Dictionary = GameData.LIVESTOCK[&"chicken"]
+	Phases.begin_preparation(nightly)
+	Sim.advance(nightly, GameData.PREPARATION_TICKS)
+	Sim.advance(nightly, int(hen_entry["every_ticks"]) * 2)
+	expect(Livestock.ready_at(nightly, hen) == 0,
+		"a chicken lays nothing during a wave",
+		str(Livestock.ready_at(nightly, hen)))
+	expect(Interact.verb_at(nightly, hen) == &"",
+		"and there is nothing to collect in the dark")
+
+	# **Cooking, end to end, at a real kitchen.**
+	var cooking := State.create(1602)
+	Resources.gain(cooking, Building.cost_of(&"kitchen"))
+	var spot := _room_for(cooking, Building.size_of(&"kitchen"))
+	expect(Building.place(cooking, &"kitchen", spot), "a kitchen goes up")
+	expect(Interact.verb_at(cooking, spot) == &"craft",
+		"and offers to cook", str(Interact.verb_at(cooking, spot)))
+	expect(Crafting.selected_at(cooking, &"kitchen") in kitchen,
+		"knowing a kitchen recipe", str(Crafting.selected_at(cooking, &"kitchen")))
+
+	var dish := &"cook_roast"
+	var roast: Dictionary = GameData.RECIPES[dish]
+	expect(Crafting.select_recipe(cooking, dish), "set it to the roast")
+	Resources.gain(cooking, roast["inputs"])
+	var food_before := Resources.amount(cooking, GameData.FOOD)
+	Interact.complete(cooking, spot, &"craft")
+	expect(Crafting.busy(cooking, spot), "it starts")
+	Sim.advance(cooking, int(roast["ticks"]))
+	expect(Resources.amount(cooking, GameData.FOOD)
+		== food_before + int((roast["output"] as Dictionary)[GameData.FOOD]),
+		"and out comes dinner",
+		str(Resources.amount(cooking, GameData.FOOD)))
+
+	# ------------------------------------------------ what food is actually for
+
+	# **Repairing costs food, and it comes out of the ledger.** The done-when.
+	expect(GameData.REPAIR_COST_PER_HP.has(GameData.FOOD),
+		"repair is paid for in food", str(GameData.REPAIR_COST_PER_HP))
+	var per_hp := Repair.cost_for(1)
+	expect(per_hp == GameData.REPAIR_COST_PER_HP, "one hit point is one lot",
+		str(per_hp))
+	var ten := Repair.cost_for(10)
+	for res in GameData.sorted_names(ten.keys()):
+		expect(int(ten[res]) == int(GameData.REPAIR_COST_PER_HP[res]) * 10,
+			"ten hit points is ten lots of %s" % res, str(ten[res]))
+	expect(Repair.cost_for(0).is_empty(), "and nothing costs nothing")
+
+	var hurt := State.create(1603)
+	var house: Vector2i = Farm.cells_with(hurt, &"house")[0]
+	Phases.begin_preparation(hurt)
+	Sim.advance(hurt, GameData.PREPARATION_TICKS)
+	expect(int(hurt["phase"]) == Phases.NIGHT, "it is night")
+	expect(Repair.damage_at(hurt, house) == 0, "the house is whole")
+	expect(not Repair.needs_repair(hurt, house), "so there is nothing to mend")
+	expect(Repair.apply(hurt, house, 5) == 0,
+		"and repairing a whole house does nothing")
+
+	hurt["house_hp"] = GameData.HOUSE_HP - 20
+	expect(Repair.damage_at(hurt, house) == 20, "twenty hit points of damage",
+		str(Repair.damage_at(hurt, house)))
+	expect(Repair.needs_repair(hurt, house), "which wants mending")
+
+	# No food, no repair - and nothing taken for the attempt.
+	for res in GameData.sorted_names(GameData.REPAIR_COST_PER_HP.keys()):
+		Resources.spend(hurt, res, Resources.amount(hurt, res))
+	expect(Repair.affordable_hp(hurt) == 0, "an empty larder buys no repair")
+	expect(Repair.apply(hurt, house, 10) == 0, "so nothing goes back")
+	expect(int(hurt["house_hp"]) == GameData.HOUSE_HP - 20,
+		"and the house is where it was", str(hurt["house_hp"]))
+
+	# With food, it does - and the food is gone from the ledger.
+	Resources.gain(hurt, {GameData.FOOD: 12, GameData.WOOD: 12})
+	var food_held := Resources.amount(hurt, GameData.FOOD)
+	var wood_held := Resources.amount(hurt, GameData.WOOD)
+	var put_back := Repair.apply(hurt, house, 8)
+	expect(put_back == 8, "eight hit points go back", str(put_back))
+	expect(int(hurt["house_hp"]) == GameData.HOUSE_HP - 12,
+		"and the house is that much better", str(hurt["house_hp"]))
+	expect(Resources.amount(hurt, GameData.FOOD)
+		== food_held - 8 * int(GameData.REPAIR_COST_PER_HP[GameData.FOOD]),
+		"paid for in food, out of the ledger",
+		str(Resources.amount(hurt, GameData.FOOD)))
+	expect(Resources.amount(hurt, GameData.WOOD)
+		== wood_held - 8 * int(GameData.REPAIR_COST_PER_HP[GameData.WOOD]),
+		"and in wood", str(Resources.amount(hurt, GameData.WOOD)))
+
+	# **Never more than is broken, and never more than is paid for.**
+	expect(Repair.max_affordable(hurt, house) == mini(12,
+		Repair.affordable_hp(hurt)),
+		"what is missing, capped by what is in the larder",
+		str(Repair.max_affordable(hurt, house)))
+	var rest := Repair.apply_all(hurt, house)
+	expect(int(hurt["house_hp"]) <= GameData.HOUSE_HP,
+		"a house is never mended past whole", str(hurt["house_hp"]))
+	print("  repair: %d hp for %s, house back to %d/%d"
+		% [put_back + rest, str(Repair.cost_for(put_back + rest)),
+			int(hurt["house_hp"]), GameData.HOUSE_HP])
+
+	# **Food is worth spending rather than selling**, at least sometimes: a
+	# night's repair has to be a real alternative to the money.
+	expect(int(GameData.SELL_PRICE[GameData.FOOD]) > 0,
+		"food has a price, so spending it is a decision")
+	expect(int(GameData.REPAIR_COST_PER_HP[GameData.FOOD]) > 0,
+		"and repair is what it is spent on")
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## What a pile of resources fetches at the stall.
+func _price_of(amounts: Dictionary) -> int:
+	var total := 0
+	for res in GameData.sorted_names(amounts.keys()):
+		total += int(GameData.SELL_PRICE.get(res, 0)) * int(amounts[res])
+	return total

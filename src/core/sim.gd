@@ -70,6 +70,7 @@ static func _tick_day(state: Dictionary) -> void:
 	# where the farmer is standing, and walking off gives it up.
 	Fishing.tick(state, Player.cell(state))
 	Gathering.tick(state)
+	Livestock.tick(state)
 	Crafting.tick(state)
 	Player.tick(state)
 

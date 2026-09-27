@@ -529,6 +529,30 @@ const DEFENCES: Dictionary = {
 	},
 }
 
+## The animals on the reference sheet, and the meat that comes off them.
+##
+## **A trickle, and nothing to manage.** No feed, no water, no breeding, no
+## happiness - an animal stands on the grass and slowly has something worth
+## taking. A farm sim's animal loop is a game of its own and this is a tower
+## defence with a farm attached.
+##
+## `holds` is what stops it being idle income: a full animal stops producing,
+## so meat is something you collect on your rounds rather than something that
+## piles up while you are at the rock face. The cow is the slow, worthwhile
+## one; the chickens are the quick, small ones.
+const LIVESTOCK: Dictionary = {
+	&"cow": {
+		"produces": {MEAT: 1},
+		"every_ticks": 80 * SECONDS,    # LEVER: ticks, 40-180 seconds worth
+		"holds": 2,                     # LEVER: units before it stops, 1-5
+	},
+	&"chicken": {
+		"produces": {MEAT: 1},
+		"every_ticks": 50 * SECONDS,    # LEVER: ticks, 25-120 seconds worth
+		"holds": 1,                     # LEVER: units before it stops, 1-4
+	},
+}
+
 ## What repairing costs, per hit point put back.
 const REPAIR_COST_PER_HP: Dictionary = {FOOD: 1, WOOD: 1}
 const REPAIR_TICKS_PER_HP := 3          # LEVER: ticks, 1-8
@@ -746,8 +770,8 @@ const FARM_MAP: Array = [
 	"..ssssss....WW.p....r.....r............T",
 	"..ssssss....WW.p...$$............T.T...T",
 	"..ssssss.......p...............rTT.TT..T",
-	"T..............p.................TT.T..T",
-	".....r.........p....T.........TT.TT.TT..",
+	"T.......c...c..p.................TT.T..T",
+	".....r.....C...p....T.........TT.TT.TT..",
 	"T.........=====p......T.........TT.T...T",
 	"..~~~~~~~~=====.........................",
 	".~~~~~~~~~~~~~~~~~..............TT......",
@@ -772,6 +796,8 @@ const MAP_LEGEND: Dictionary = {
 	"$": [5, &"shop"],
 	"W": [5, &"workshop"],
 	"w": [0, &"well"],
+	"C": [0, &"cow"],
+	"c": [0, &"chicken"],
 }
 
 
@@ -800,8 +826,9 @@ static func validate() -> Array:
 	errors.append_array(check_iron(GATHERING, FARM_MAP))
 	errors.append_array(check_reachable(GATHERING, FARM_MAP))
 	errors.append_array(check_chain(RECIPES, SELL_PRICE))
+	errors.append_array(check_livestock(LIVESTOCK, FARM_MAP))
 
-	for res in REPAIR_COST_PER_HP:
+	for res in sorted_names(REPAIR_COST_PER_HP.keys()):
 		if not RESOURCES.has(res):
 			errors.append("repair costs unknown '%s'" % res)
 
@@ -1176,6 +1203,37 @@ static func check_chain(recipes: Dictionary, prices: Dictionary) -> Array:
 	return errors
 
 
+## The animals, and the meat they are the only source of.
+static func check_livestock(animals: Dictionary, rows: Array) -> Array:
+	var errors: Array = []
+	var makes_meat := false
+	for id in sorted_names(animals.keys()):
+		var animal: Dictionary = animals[id]
+		for res in sorted_names((animal["produces"] as Dictionary).keys()):
+			if not RESOURCES.has(res):
+				errors.append("'%s' produces unknown '%s'" % [id, res])
+			if res == MEAT:
+				makes_meat = true
+		if int(animal["every_ticks"]) <= 0:
+			errors.append("'%s' produces in no time at all" % id)
+		if int(animal["holds"]) <= 0:
+			errors.append("'%s' holds nothing, so it can never be collected" % id)
+		if _cells_of_char(rows, _char_for(id)).is_empty():
+			errors.append("there is no '%s' anywhere on the farm" % id)
+
+	# **Meat has to come from somewhere.** It is in the resource table, it has a
+	# price, and a recipe turns it into the best meal in the game - and for the
+	# first thirty-three tasks nothing in the world produced a single unit of
+	# it.
+	if not makes_meat:
+		errors.append("nothing on the farm produces meat")
+	for id in sorted_names(RECIPES.keys()):
+		var inputs: Dictionary = (RECIPES[id] as Dictionary)["inputs"]
+		if inputs.has(MEAT) and not makes_meat:
+			errors.append("'%s' wants meat and nothing makes any" % id)
+	return errors
+
+
 static func check_nights(nights: Array) -> Array:
 	var errors: Array = []
 	for n in nights.size():
@@ -1218,6 +1276,7 @@ static func digest() -> int:
 		"water": [WATER_GROWTH_BONUS, WATER_CAN_CAPACITY,
 			WATER_LASTS_UNTIL_NIGHT],
 		"power": [BASE_ENERGY, UNPOWERED_PERCENT],
+		"livestock": LIVESTOCK,
 		"gathering": GATHERING,
 		"fishing": FISHING,
 		"recipes": RECIPES,
