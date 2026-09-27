@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`#########...............`  **43 / 109 done**
+`##########..............`  **44 / 109 done**
 
-0 doing / 66 todo / 0 blocked across 9 phases.
+0 doing / 65 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0044 - The mortar**. The whole of what is left is
+First up: **0045 - The auto-crossbow**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,24 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-66 task(s) left, the ready ones first, then what they
+65 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0044 - The mortar
-
-Ready to pick up.  Likely files: `src/core/game_data.gd`.
-
-The long shot: slow, expensive, splash damage, and it cannot hit what is next to it.
-
-- A minimum range as well as a maximum - this is what makes placement a decision
-- A shell with real flight time that lands where the target was aimed, not where it ended up
-- Splash with falloff from the centre
-- It consumes gunpowder per shot
-- Minimum range, flight time, radius and falloff are levers
-
-  - done when: A zombie that walks out of the blast between firing and landing survives - and that reads as fair
-  - done when: Splash damage at the edge is the falloff the lever claims
 
 ### 0045 - The auto-crossbow
 
@@ -1074,11 +1059,11 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0040** [The shop grows](prompts/0040-shop-full.md)
 - [x] **0041** [The first day teaches itself](prompts/0041-tutorial-day.md)
 
-## 3 - The full night  (2/17)
+## 3 - The full night  (3/17)
 
 - [x] **0042** [Data-driven defences](prompts/0042-defence-data.md)
 - [x] **0043** [The flamethrower tower](prompts/0043-tower-flame.md)
-- [ ] **0044** [The mortar](prompts/0044-tower-mortar.md)
+- [x] **0044** [The mortar](prompts/0044-tower-mortar.md)
 - [ ] **0045** [The auto-crossbow](prompts/0045-tower-crossbow.md)
 - [ ] **0046** [Fences and walls](prompts/0046-walls.md)
 - [ ] **0047** [Barricades](prompts/0047-barricades.md) - needs 0046

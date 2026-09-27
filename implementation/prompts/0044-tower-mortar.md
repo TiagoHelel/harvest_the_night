@@ -1,7 +1,7 @@
 # 0044 - The mortar
 
 - **Phase:** 3 - The full night
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0042
 - **Likely files:** src/core/game_data.gd
 

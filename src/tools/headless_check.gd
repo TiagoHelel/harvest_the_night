@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 36
+const GROUPS := 37
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -100,6 +100,7 @@ func _run() -> void:
 	_task_0041_tutorial()
 	_task_0042_declared()
 	_task_0043_flame()
+	_task_0044_mortar()
 
 
 func _finish() -> void:
@@ -5598,3 +5599,205 @@ func _a_crowd(seed_value: int) -> Dictionary:
 	var aside := Entities.spawn(state, &"walker", tower + Vector2i(0, 3))
 	return {"state": state, "tower": tower, "in_line": in_line,
 		"behind": behind, "aside": aside}
+
+
+## 0044 - the mortar: the only thing on the farm that can miss.
+func _task_0044_mortar() -> void:
+	var entry: Dictionary = GameData.DEFENCES[&"mortar"]
+
+	# **Every lever the task names.**
+	for lever in ["min_range", "flight_ticks", "splash_tiles",
+			"splash_falloff_percent", "ammo", "reload_ticks"]:
+		expect(entry.has(lever), "the mortar declares its %s" % lever)
+	expect(StringName(entry["aim"]) == GameData.AIM_BALLISTIC,
+		"and that its shells are aimed at a place", str(entry["aim"]))
+	expect(StringName(entry["shape"]) == GameData.SHAPE_SPLASH,
+		"and land as a splash", str(entry["shape"]))
+	expect(int(entry["min_range"]) > 0
+		and int(entry["min_range"]) < int(entry["range"]),
+		"with a minimum range inside its maximum",
+		"%d of %d" % [entry["min_range"], entry["range"]])
+
+	expect(GameData.check_defences(GameData.DEFENCES).is_empty(),
+		"the shipped defences pass their own check",
+		str(GameData.check_defences(GameData.DEFENCES)))
+	var instant: Dictionary = GameData.DEFENCES.duplicate(true)
+	(instant[&"mortar"] as Dictionary)["flight_ticks"] = 0
+	expect(not GameData.check_defences(instant).is_empty(),
+		"a shell that arrives instantly is refused - that is a bullet with "
+		+ "extra words")
+	var nonsense: Dictionary = GameData.DEFENCES.duplicate(true)
+	(nonsense[&"mortar"] as Dictionary)["aim"] = &"boomerang"
+	expect(not GameData.check_defences(nonsense).is_empty(),
+		"and so is a way of travelling nobody implements")
+
+	# **A tower with a damage and a range and no way of firing is refused.**
+	# The hole that hid the flamethrower for eighteen tasks (see 0043).
+	var silent: Dictionary = GameData.DEFENCES.duplicate(true)
+	(silent[&"gun_tower"] as Dictionary).erase("reload_ticks")
+	expect(not GameData.check_defences(silent).is_empty(),
+		"a thing that looks exactly like a tower has to be one",
+		str(GameData.check_defences(silent)))
+
+	# **It cannot hit what is next to it.** The whole of why placing one is a
+	# decision rather than a purchase.
+	var field := _mortar_field(2600)
+	var state: Dictionary = field["state"]
+	var tower: Vector2i = field["tower"]
+	var close := Entities.spawn(state, &"walker",
+		tower + Vector2i(int(entry["min_range"]) - 1, 0))
+	expect(Towers.acquire_for(state, tower, entry) != close,
+		"a zombie inside the minimum range is not a target", str(close))
+	var reachable := Entities.spawn(state, &"walker",
+		tower + Vector2i(int(entry["min_range"]) + 1, 0))
+	expect(Towers.acquire_for(state, tower, entry) == reachable,
+		"and one just outside it is", str(reachable))
+	Entities.remove(state, close)
+	Entities.remove(state, reachable)
+
+	# **A shell takes the flight time the lever says, and lands where it was
+	# aimed.**
+	var standing := _mortar_field(2601)
+	var patient: Dictionary = standing["state"]
+	var sitting := Entities.spawn(patient, &"walker",
+		standing["tower"] + Vector2i(int(entry["range"]) - 2, 0))
+	var hp := int(Entities.get_one(patient, sitting).get("hp", 0))
+	var shots := int(patient["next_projectile_id"])
+
+	for _t in 400:
+		Sim.advance(patient, 1)
+		if int(patient["next_projectile_id"]) > shots:
+			break
+	expect(int(patient["next_projectile_id"]) > shots, "the mortar fired")
+	expect(Towers.in_flight(patient) > 0, "and there is a shell in the air")
+	expect(int(Entities.get_one(patient, sitting).get("hp", 0)) == hp,
+		"which has not landed yet",
+		str(Entities.get_one(patient, sitting).get("hp", 0)))
+
+	Sim.advance(patient, int(entry["flight_ticks"]) - 1)
+	expect(int(Entities.get_one(patient, sitting).get("hp", 0)) == hp,
+		"nor a tick before the lever says",
+		str(Entities.get_one(patient, sitting).get("hp", 0)))
+	Sim.advance(patient, 1)
+	expect(int(Entities.get_one(patient, sitting).get("hp", 0)) < hp
+		or not Entities.alive(patient, sitting),
+		"and then it arrives",
+		str(Entities.get_one(patient, sitting).get("hp", 0)))
+
+	# **A zombie that walks out of the blast survives.** The done-when, and
+	# the character of the whole tower.
+	var dodging := _mortar_field(2602)
+	var quick: Dictionary = dodging["state"]
+	var runner := Entities.spawn(quick, &"walker",
+		dodging["tower"] + Vector2i(int(entry["range"]) - 2, 0))
+	var runner_hp := int(Entities.get_one(quick, runner).get("hp", 0))
+	var before_shot := int(quick["next_projectile_id"])
+	for _t in 400:
+		Sim.advance(quick, 1)
+		if int(quick["next_projectile_id"]) > before_shot:
+			break
+	expect(Towers.in_flight(quick) > 0, "a shell is on its way")
+
+	# Straight out of the radius while it is still in the air.
+	var away := Entities.cell_of(quick, runner) \
+		+ Vector2i(int(entry["splash_tiles"]) + 3, 0)
+	Entities.get_one(quick, runner)["pos"] = [
+		away.x * Player.SUBTILE + Player.SUBTILE / 2,
+		away.y * Player.SUBTILE + Player.SUBTILE / 2]
+	Sim.advance(quick, int(entry["flight_ticks"]) + 2)
+	expect(Entities.alive(quick, runner),
+		"a zombie that walked out of the blast is alive")
+	expect(int(Entities.get_one(quick, runner).get("hp", 0)) == runner_hp,
+		"and untouched - the shell landed where it was aimed",
+		str(Entities.get_one(quick, runner).get("hp", 0)))
+	print("  a shell takes %d ticks; a zombie %d tiles clear of the aim point "
+		% [int(entry["flight_ticks"]), int(entry["splash_tiles"]) + 3]
+		+ "walks away whole")
+
+	# **The falloff at the edge is what the lever claims.** The other
+	# done-when, measured at each ring.
+	var blast := _splash_rings(2603, entry)
+	var damage := int(entry["damage"])
+	var armour := int((GameData.ENEMIES[&"walker"]
+		as Dictionary).get("armour", 0))
+	var edge_percent := int(entry["splash_falloff_percent"])
+	var radius := int(entry["splash_tiles"])
+	print("  splash %d over %d tiles, %d%% at the rim: %s"
+		% [damage, radius, edge_percent, str(blast)])
+
+	expect(int(blast[0]) == maxi(damage - armour, 1),
+		"the middle takes the whole shell", str(blast[0]))
+	for ring in range(1, radius + 1):
+		var share := 100 - (100 - edge_percent) * ring / radius
+		expect(int(blast[ring]) == maxi(maxi(damage * share / 100, 1) - armour, 1),
+			"ring %d takes %d%% of it" % [ring, share], str(blast[ring]))
+	expect(int(blast[radius]) < int(blast[0]),
+		"so the rim takes less than the middle",
+		"%d against %d" % [blast[radius], blast[0]])
+	expect(int(blast[radius + 1]) == 0,
+		"and a tile past the rim takes nothing at all",
+		str(blast[radius + 1]))
+
+	# **A shell costs a round.**
+	expect(Ammo.needed_by(&"mortar").has(GameData.GUNPOWDER),
+		"the mortar fires gunpowder", str(Ammo.needed_by(&"mortar")))
+	var counting := _mortar_field(2604)
+	Resources.spend(counting["state"], GameData.GUNPOWDER,
+		Resources.amount(counting["state"], GameData.GUNPOWDER))
+	Resources.gain(counting["state"], {GameData.GUNPOWDER: 3})
+	Entities.spawn(counting["state"], &"walker",
+		counting["tower"] + Vector2i(int(entry["range"]) - 2, 0))
+	var rounds := 3
+	var fired := int((counting["state"] as Dictionary)["next_projectile_id"])
+	Sim.advance(counting["state"], int(entry["reload_ticks"]) * 4)
+	var went := int((counting["state"] as Dictionary)["next_projectile_id"]) \
+		- fired
+	var spent := rounds - Resources.amount(counting["state"], GameData.GUNPOWDER)
+	expect(spent > 0 and spent <= went,
+		"a round goes out of the pool for every shell that goes up",
+		"%d rounds for %d shells" % [spent, went])
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## A mortar on a farm at night, with powder and nothing to shoot at yet.
+func _mortar_field(seed_value: int) -> Dictionary:
+	var state := State.create(seed_value)
+	Resources.gain(state, {GameData.STONE: 400, GameData.IRON: 400,
+		GameData.GUNPOWDER: 400})
+	var tower := _room_for(state, Vector2i(1, 1))
+	Building.place(state, &"mortar", tower)
+	Phases.begin_preparation(state)
+	Sim.advance(state, GameData.PREPARATION_TICKS)
+	_park_the_waves(state)
+	return {"state": state, "tower": tower}
+
+
+## Land one shell in the middle of a line of zombies, and report what each
+## ring took. Index 0 is the middle, index n is n tiles out.
+func _splash_rings(seed_value: int, entry: Dictionary) -> Array:
+	var state := _fresh_night(seed_value)
+	var middle := Farm.house_centre(state) + Vector2i(8, 6)
+	var radius := int(entry["splash_tiles"])
+
+	# **Given enough health to survive the shell.** A walker has twenty hit
+	# points and a mortar does forty, and `Combat.hit()` never reports more
+	# than what was left - so every ring read "20" and the falloff was
+	# invisible. Measuring damage means measuring it on something that lives
+	# through it.
+	var who: Array = []
+	for ring in range(0, radius + 2):
+		var id := Entities.spawn(state, &"walker", middle + Vector2i(ring, 0))
+		Entities.set_hp(state, id, 500)
+		who.append(id)
+	var before: Array = []
+	for id in who:
+		before.append(int(Entities.get_one(state, int(id)).get("hp", 0)))
+
+	Towers.land_at_for_test(state, entry, middle)
+
+	var took: Array = []
+	for i in who.size():
+		took.append(int(before[i])
+			- int(Entities.get_one(state, int(who[i])).get("hp", 0)))
+	return took

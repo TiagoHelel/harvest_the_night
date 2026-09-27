@@ -3063,3 +3063,94 @@ A test that shares a state with everything else measures everything else.
 hide any future tower. `check_defences()` should probably refuse a `DEFENCES`
 entry that declares a `damage` and a `range` but no way of firing - it looks
 exactly like a tower and is not one.
+
+## 0044 - The mortar - done 2026-09-27
+
+The long shot, and the only thing on the farm that can miss.
+
+**What changed.** A shell is aimed at a **place** rather than at a zombie, and
+takes the flight time the lever says to get there. Splash falls off from the
+centre by the number in the table, and `check_defences()` gained the guard
+that would have caught the flamethrower.
+
+Files: `src/core/game_data.gd`, `towers.gd`, `src/tools/headless_check.gd`.
+Verify: 1356 headless / 364 input / **sim hash unchanged**, data hash moved.
+
+### Aimed at a place
+
+Every projectile in the game chased its target and could not miss. `AIM_GUIDED`
+is still the default and still what everything else does, because a bullet
+that leads its target is a bullet nobody can read.
+
+`AIM_BALLISTIC` is the mortar, and it is the whole of the tower's character:
+the cell is taken **at the moment of firing**, the shell counts down
+`flight_ticks`, and it lands there whether or not anything is still standing
+on it. Measured: a shell takes 45 ticks, and a zombie five tiles clear of the
+aim point by the time it arrives walks away without a scratch.
+
+That reads as fair because the shell is visible the whole way - it is carried
+towards the aim point every tick so the view has something to draw - and
+because the thing that saved the zombie is the thing the player can see it
+doing.
+
+`_land()` became `_land_at()` and takes a **cell**. Splash is inherently about
+a place; a shell that had to be handed a live entity could not land on an
+empty patch of dirt, which is exactly what a mortar shell does when its target
+moved.
+
+### The falloff, measured
+
+Forty damage, two tiles of radius, fifty percent at the rim:
+
+    middle   40
+    ring 1   30      (75%)
+    ring 2   20      (50%)
+    ring 3    0
+
+`splash_falloff` was `0.5` and `towers.gd` was turning it into a percentage at
+the moment of firing - a float multiply in the one place this game does not
+allow any. It is `splash_falloff_percent: 50` now. That is the third time this
+has come up (`WATER_GROWTH_BONUS` in 0029, `BROWNOUT_RATE` in 0033): the table
+was written in fractions and the rules want integers.
+
+### The test was measuring the cap, not the damage
+
+The falloff asserts failed first time with every ring reading exactly **20** -
+which is a walker's hit points. `Combat.hit()` never reports more than what
+was left, deliberately, so that a caller counting damage cannot count overkill;
+and a forty-damage shell on a twenty-point walker reports twenty three times
+over, and the falloff was invisible behind it.
+
+The rings are given five hundred hit points now. **Measuring damage means
+measuring it on something that lives through it** - otherwise the number is
+the target's health, not the weapon's.
+
+### The hole that hid the flamethrower is closed
+
+Task 0043 found that the flamethrower had never fired because
+`Towers._find_towers()` wants a `reload_ticks` and it had none - and that every
+check in `check_defences()` was guarded on the same field, so nothing
+validated it either.
+
+`check_defences()` now refuses, **outside that guard**, any entry with a
+`damage` and a `range` and no way of firing: it looks exactly like a tower and
+is not one. There is a teeth-test that strips `reload_ticks` off the gun tower
+and expects a complaint.
+
+### Notes
+
+- The minimum range is real and asserted from both sides: a zombie one tile
+  inside it is not a target, one tile outside is. That is what makes placing a
+  mortar a decision rather than a purchase - it cannot defend itself.
+- `aim` was already taken as a local in `check_defences()` by task 0042's
+  targeting word. The new one is `travel`, and the comment says why.
+
+### Hashes
+
+| | from | to | why |
+|---|---|---|---|
+| sim hash | `1963778898` | unchanged | the scenario has no mortar on it |
+| data hash | `2382052639` | `1443374447` | the mortar gained `aim`, and `splash_falloff` 0.5 became `splash_falloff_percent` 50 |
+
+`python tools/verify.py` prints PASS: 1356 asserts, 364 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

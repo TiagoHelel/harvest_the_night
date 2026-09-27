@@ -486,6 +486,21 @@ const SHAPE_CONE := &"cone"
 const SHAPES: Array = [SHAPE_SINGLE, SHAPE_SPLASH, SHAPE_CONE]
 
 
+## **What a shot in the air is doing.** `guided` follows what it was fired at
+## and cannot miss; `ballistic` is aimed at a place, takes `flight_ticks` to
+## get there, and lands whether or not anything is still standing on it.
+##
+## Guided is the default, because it is what every tower did before task 0044
+## and because a bullet that leads its target is a bullet nobody can read.
+## A mortar is the exception and the whole of its character: it is the only
+## thing on the farm that can miss, which is what makes standing still in
+## front of one a mistake and walking out of it a save.
+const AIM_GUIDED := &"guided"
+const AIM_BALLISTIC := &"ballistic"
+
+const AIMS: Array = [AIM_GUIDED, AIM_BALLISTIC]
+
+
 const DAMAGE_IMPACT := &"impact"
 const DAMAGE_FIRE := &"fire"
 const DAMAGE_EXPLOSIVE := &"explosive"
@@ -565,8 +580,17 @@ const DEFENCES: Dictionary = {
 		# a purchase: it cannot defend itself.
 		"min_range": 4,                 # LEVER: tiles, 2-6
 		"splash_tiles": 2,              # LEVER: tiles, 1-3
-		"splash_falloff": 0.5,          # LEVER: fraction at the edge, 0.2-0.8
+		# **A percentage, not a fraction.** This was `0.5` and `towers.gd` was
+		# turning it into one at the moment of firing - a float multiply in the
+		# one place this game does not allow any. Same story as
+		# `WATER_GROWTH_BONUS` in task 0029 and `BROWNOUT_RATE` in 0033: the
+		# table was written in fractions and the rules want integers.
+		"splash_falloff_percent": 50,   # LEVER: percent at the edge, 20-80
 		"reload_ticks": 5 * SECONDS,    # LEVER: ticks, 3-8 seconds worth
+		# **Aimed at a place, not at a zombie.** A shell that followed its
+		# target would be a guided missile with a long fuse, and the minimum
+		# range below would be the only interesting thing about the tower.
+		"aim": AIM_BALLISTIC,
 		"flight_ticks": 45,             # LEVER: ticks in the air, 20-75
 		"ammo": {GUNPOWDER: 1},
 		"energy_draw": 1,
@@ -1316,6 +1340,21 @@ static func check_defences(defences: Dictionary) -> Array:
 						errors.append(("defence '%s' opens %d degrees, which is "
 							+ "%d per mille, but says %d")
 							% [defence_id, degrees, wanted, spread])
+			# `aim` is taken: task 0042 uses it for the targeting word.
+			var travel := StringName(defence.get("aim", AIM_GUIDED))
+			if not AIMS.has(travel):
+				errors.append("defence '%s' fires '%s' shots, which is not a way "
+					% [defence_id, travel] + "for a shot to travel")
+			elif travel == AIM_BALLISTIC 					and int(defence.get("flight_ticks", 0)) <= 0:
+				errors.append(("defence '%s' lobs a shell that arrives instantly, "
+					+ "which is a bullet with extra words") % defence_id)
+
+			# **A thing that looks like a tower has to be one.** The flamethrower
+			# declared a range, a damage, a cone and a burn and had no
+			# `reload_ticks`, so `Towers` never collected it and it had never
+			# fired a shot in its life - found in task 0043, eighteen tasks after
+			# it was written. Nothing said so because every check in here was
+			# guarded on the field it was missing.
 			var kind := StringName(defence.get("damage_type", DAMAGE_IMPACT))
 			if not DAMAGE_TYPES.has(kind):
 				errors.append("defence '%s' deals '%s', which is not a damage type"
@@ -1325,6 +1364,14 @@ static func check_defences(defences: Dictionary) -> Array:
 			if not RESOURCES.has(res):
 				errors.append("defence '%s' costs unknown '%s'"
 					% [defence_id, res])
+		# Outside the `reload_ticks` guard on purpose: this is the check for the
+		# hole that guard left.
+		if defence.has("damage") and defence.has("range") \
+				and not defence.has("reload_ticks"):
+			errors.append(("defence '%s' has a damage and a range and no way of "
+				+ "firing - it looks exactly like a tower and is not one")
+				% defence_id)
+
 		if defence.has("ammo"):
 			for res in (defence["ammo"] as Dictionary):
 				if not RESOURCES.has(res):

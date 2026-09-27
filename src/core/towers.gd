@@ -201,13 +201,29 @@ static func acquire_for(state: Dictionary, from: Vector2i,
 ## directly rather than by waiting for a projectile to fly.
 static func land_for_test(state: Dictionary, entry: Dictionary,
 		target: int) -> void:
-	_land(state, {
+	_land_at(state, {
 		"damage": int(entry.get("damage", 1)),
 		"type": StringName(entry.get("damage_type", GameData.DAMAGE_IMPACT)),
 		"shape": StringName(entry.get("shape", GameData.SHAPE_SINGLE)),
 		"splash_tiles": int(entry.get("splash_tiles", 1)),
 		"splash_falloff_percent": int(entry.get("splash_falloff_percent", 100)),
-	}, target)
+	}, Entities.cell_of(state, target), target)
+
+
+## Land one shell of this declaration **on a cell**, now.
+##
+## The splash seam. `land_for_test()` above lands on whoever was being chased,
+## which is what a guided shot does; a mortar shell lands on a patch of dirt
+## and everything near it finds out.
+static func land_at_for_test(state: Dictionary, entry: Dictionary,
+		cell: Vector2i) -> void:
+	_land_at(state, {
+		"damage": int(entry.get("damage", 1)),
+		"type": StringName(entry.get("damage_type", GameData.DAMAGE_IMPACT)),
+		"shape": StringName(entry.get("shape", GameData.SHAPE_SINGLE)),
+		"splash_tiles": int(entry.get("splash_tiles", 1)),
+		"splash_falloff_percent": int(entry.get("splash_falloff_percent", 100)),
+	}, cell)
 
 
 ## What a tower would shoot right now, for the threat overlay of task 0158 and
@@ -234,6 +250,12 @@ static func _fire(state: Dictionary, from: Vector2i, kind: StringName,
 	var speed := int(tiles_per_second * float(Player.SUBTILE)
 		/ float(GameData.TICK_HZ))
 
+	# The cell it is aimed at, taken **now**. This is the whole of "lands
+	# where it was aimed, not where it ended up".
+	var aimed := Entities.cell_of(state, target)
+	if aimed.x < 0:
+		aimed = from
+
 	var id := int(state["next_projectile_id"])
 	state["next_projectile_id"] = id + 1
 	(state["projectiles"] as Array).append({
@@ -252,9 +274,14 @@ static func _fire(state: Dictionary, from: Vector2i, kind: StringName,
 		# throwing a rock, and a rock does not splash.
 		"shape": StringName(entry.get("shape", GameData.SHAPE_SINGLE)) 			if armed else GameData.SHAPE_SINGLE,
 		"splash_tiles": int(entry.get("splash_tiles", 1)),
-		"splash_falloff_percent": int(entry.get("splash_falloff_percent",
-			int(float(entry.get("splash_falloff", 1.0)) * 100.0))),
+		"splash_falloff_percent": int(entry.get("splash_falloff_percent", 100)),
 		"speed": maxi(speed, 1),
+		# **Where it is going, and how long it has.** A guided shot ignores
+		# both and chases `target`; a ballistic one was aimed at a place and
+		# arrives there whether or not anything is still standing on it.
+		"aim": StringName(entry.get("aim", GameData.AIM_GUIDED)),
+		"to": [aimed.x, aimed.y],
+		"left": int(entry.get("flight_ticks", 0)),
 	})
 
 
@@ -265,6 +292,22 @@ static func _advance_projectiles(state: Dictionary) -> void:
 
 	var landed: Array = []
 	for shot in flying:
+		# **A shell in the air does not care what happened to anybody.** It
+		# counts down and lands on the cell it was aimed at - which is what
+		# lets a zombie walk out of it, and what makes standing still in front
+		# of a mortar a mistake.
+		if StringName(shot.get("aim", GameData.AIM_GUIDED)) 				== GameData.AIM_BALLISTIC:
+			shot["left"] = int(shot["left"]) - 1
+			if int(shot["left"]) <= 0:
+				_land_at(state, shot, Vector2i(int(shot["to"][0]),
+					int(shot["to"][1])))
+				landed.append(shot)
+			else:
+				_carry_towards(shot, Vector2i(int(shot["to"][0]),
+					int(shot["to"][1])) * Player.SUBTILE
+					+ Vector2i(Player.SUBTILE / 2, Player.SUBTILE / 2))
+			continue
+
 		var target := int(shot["target"])
 		if not Entities.alive(state, target):
 			# The thing it was chasing died first. The shot is wasted, which is
@@ -279,7 +322,7 @@ static func _advance_projectiles(state: Dictionary) -> void:
 		var distance := absi(delta.x) + absi(delta.y)
 
 		if distance <= step:
-			_land(state, shot, target)
+			_land_at(state, shot, Entities.cell_of(state, target), target)
 			landed.append(shot)
 			continue
 
@@ -358,17 +401,35 @@ static func burn_cone_for_test(state: Dictionary, from: Vector2i,
 ## A shot arrives. **What it does when it gets there is the shape it carries**,
 ## not the tower it came from - the tower is long since irrelevant and may not
 ## even be standing.
-static func _land(state: Dictionary, shot: Dictionary, target: int) -> void:
+## Move a shell along, so the view has somewhere to draw it. Nothing about the
+## damage depends on this: a ballistic shot lands on its tick wherever the
+## marker has got to.
+static func _carry_towards(shot: Dictionary, to: Vector2i) -> void:
+	var at := Vector2i(int(shot["pos"][0]), int(shot["pos"][1]))
+	var left := maxi(int(shot["left"]), 1)
+	shot["pos"][0] = at.x + (to.x - at.x) / left
+	shot["pos"][1] = at.y + (to.y - at.y) / left
+
+
+## A shot arrives **at a cell**. What it does there is the shape it carries,
+## not the tower it came from - the tower is long since irrelevant and may not
+## even be standing.
+##
+## `target` is who it was chasing, and is only used by `single`: a guided shot
+## hits what it followed. A splash does not need one, which is why a shell can
+## land on an empty patch of dirt and still be a mortar shell.
+static func _land_at(state: Dictionary, shot: Dictionary, middle: Vector2i,
+		target: int = 0) -> void:
 	var damage := int(shot["damage"])
 	var kind := StringName(shot["type"])
 	if StringName(shot.get("shape", GameData.SHAPE_SINGLE)) 			!= GameData.SHAPE_SPLASH:
-		Combat.hit(state, target, damage, kind)
+		if target != 0:
+			Combat.hit(state, target, damage, kind)
 		return
 
 	# Everything within the radius, full damage at the middle falling to
-	# `splash_falloff` of it at the edge. Sorted by entity id, because two
-	# machines have to kill the same one first.
-	var middle := Entities.cell_of(state, target)
+	# `splash_falloff_percent` of it at the edge. Sorted by entity id, because
+	# two machines have to kill the same one first.
 	var radius := maxi(int(shot.get("splash_tiles", 1)), 1)
 	var edge := int(shot.get("splash_falloff_percent", 100))
 	for id in Entities.ids(state):
