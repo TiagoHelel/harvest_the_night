@@ -14,7 +14,9 @@ extends Control
 ## same road the autoplayer of task 0067 will take, and it is why a placement
 ## can never happen on a frame the rules did not agree to.
 
-const ROW_HEIGHT := 15
+## Kept short on purpose: the palette has to fit on a 270 pixel screen
+## with a dozen things on it.
+const ROW_HEIGHT := 11
 
 var _state: Dictionary = {}
 var _view: WorldView
@@ -39,7 +41,7 @@ func _ready() -> void:
 
 	var frame := PanelContainer.new()
 	frame.name = "Frame"
-	frame.position = Vector2(4, 32)
+	frame.position = Vector2(4, 30)
 	frame.custom_minimum_size = Vector2(124, 0)
 	frame.mouse_filter = Control.MOUSE_FILTER_STOP
 	var box := StyleBoxFlat.new()
@@ -62,6 +64,10 @@ func _ready() -> void:
 
 	_rows = VBoxContainer.new()
 	_rows.name = "BuildRows"
+	# No gap between rows. The default theme puts four pixels between children,
+	# which across a dozen entries is fifty pixels of nothing on a screen that
+	# is two hundred and seventy tall.
+	_rows.add_theme_constant_override("separation", 0)
 	column.add_child(_rows)
 
 	_reason = Label.new()
@@ -156,7 +162,14 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _build_palette() -> void:
+	# **Out of the tree first, then freed.** `queue_free()` alone is deferred,
+	# so for one frame the container holds the old rows and the new ones and
+	# lays out twice as many as it has - every row sits somewhere it is not
+	# drawn, and a click lands on the wrong one. Harmless while the palette was
+	# eight rows of defences and immediately visible at twelve, when task 0032
+	# added the buildings: clicking "press" selected "auto_crossbow".
 	for child in _rows.get_children():
+		_rows.remove_child(child)
 		child.queue_free()
 
 	for id in Building.catalogue(_state):
@@ -164,6 +177,24 @@ func _build_palette() -> void:
 		row.name = "build_%s" % id
 		row.custom_minimum_size = Vector2(114, ROW_HEIGHT)
 		row.add_theme_font_size_override("font_size", 8)
+		# **The theme's padding, overridden.** A default Button reserves about
+		# twenty pixels whatever `ROW_HEIGHT` says, and twelve of those is 327
+		# pixels of palette on a 270 pixel screen - which is exactly what
+		# happened when task 0032 made the four buildings placeable: the press
+		# row landed at y=294 and could not be clicked at all. There is an
+		# assert in input_check now that the whole palette is on the screen.
+		for style in ["normal", "hover", "pressed", "focus", "disabled"]:
+			var box := StyleBoxFlat.new()
+			box.bg_color = Color(0.12, 0.11, 0.18, 0.0 if style == "focus" 				else 0.8)
+			if style == "pressed":
+				box.bg_color = Color(0.32, 0.30, 0.20, 0.95)
+			elif style == "hover":
+				box.bg_color = Color(0.20, 0.19, 0.28, 0.9)
+			box.content_margin_left = 3
+			box.content_margin_right = 3
+			box.content_margin_top = 1
+			box.content_margin_bottom = 1
+			row.add_theme_stylebox_override(style, box)
 		row.text = "%s  %s" % [id, _price_of(id)]
 		row.toggle_mode = true
 		row.button_pressed = id == Building.selected(_state)

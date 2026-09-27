@@ -112,12 +112,20 @@ const SELL_PRICE: Dictionary = {        # LEVER: money each, 1-30
 	IRON: 7,
 	FOOD: 12,
 	FISH: 8,
-	OIL: 10,
+	# **The most valuable thing on the farm to sell, and that is the point.**
+	# Four corn is $20 of crop; pressing it is twenty seconds and turns it into
+	# $26 of oil. So the press pays for itself - and then every drop of it is
+	# also the only fuel a flamethrower burns, and that tower wants ten of them.
+	# Two hundred and sixty dollars, or a tower. Task 0032 exists for that
+	# sentence.
+	OIL: 26,
 	WHEAT: 4,
 	CORN: 5,
 	CARROT: 3,
 	MEAT: 9,
-	GUNPOWDER: 14,
+	# Above the oil it is made from, per craft: two corn and a drop of oil is
+	# $36 in and $44 out. `check_chain()` is what keeps that true.
+	GUNPOWDER: 22,
 }
 
 ## What the shop charges, as a multiple of what it pays.
@@ -316,11 +324,22 @@ const RECIPES: Dictionary = {
 		"output": {&"wall": 1},
 		"ticks": 10 * SECONDS,          # LEVER: ticks, 5-20 seconds worth
 	},
+	# Corn is the oil crop, and this is where it stops being food.
 	&"press_oil": {
 		"station": &"press",
 		"inputs": {CORN: 4},
 		"output": {OIL: 1},
 		"ticks": 20 * SECONDS,          # LEVER: ticks, 10-40 seconds worth
+	},
+	# **The other way in**, for the day you have a good pond and a bad field.
+	# Deliberately the worse deal - three fish is $24 against corn's $20, and
+	# a fish is worth more cooked than pressed - so this is the fallback rather
+	# than the route.
+	&"press_fish_oil": {
+		"station": &"press",
+		"inputs": {FISH: 3},
+		"output": {OIL: 1},
+		"ticks": 25 * SECONDS,          # LEVER: ticks, 10-45 seconds worth
 	},
 	&"make_gunpowder": {
 		"station": &"workshop",
@@ -757,6 +776,7 @@ static func validate() -> Array:
 	errors.append_array(check_fishing(FISHING))
 	errors.append_array(check_iron(GATHERING, FARM_MAP))
 	errors.append_array(check_reachable(GATHERING, FARM_MAP))
+	errors.append_array(check_chain(RECIPES, SELL_PRICE))
 
 	for res in REPAIR_COST_PER_HP:
 		if not RESOURCES.has(res):
@@ -1088,13 +1108,49 @@ static func check_fishing(table: Dictionary) -> Array:
 	return errors
 
 
-## What a pile of resources sells for. Used by the fishing check to compare the
-## two catches without either of them naming a number twice.
-static func _worth(amounts: Dictionary) -> int:
+## What a pile of resources sells for, against a given price list.
+##
+## **The price list is a parameter and it has to be.** It read `SELL_PRICE`
+## directly at first, which made `check_chain`'s argument decorative - the
+## teeth-test handed it a table where oil was worth a dollar, the check looked
+## at the real one, and the test passed by agreeing with itself.
+static func _worth(amounts: Dictionary, prices: Dictionary = SELL_PRICE) -> int:
 	var total := 0
 	for res in sorted_names(amounts.keys()):
-		total += int(SELL_PRICE.get(res, 0)) * int(amounts[res])
+		total += int(prices.get(res, 0)) * int(amounts[res])
 	return total
+
+
+## Every recipe is worth making.
+##
+## A recipe whose output sells for less than its inputs is a station the player
+## should never walk to, and it is the easiest thing in the game to break by
+## moving one price: before this existed, four corn worth $20 pressed into one
+## oil worth $10, so the press destroyed half the value of everything put into
+## it and the "sell it or keep it" tension the design wants was no tension at
+## all - you kept it because selling it was strictly worse.
+##
+## Kits are skipped: their output is a structure, which has no sale price
+## because it is not a resource. `check_recipes()` already holds them to the
+## structure's build cost.
+static func check_chain(recipes: Dictionary, prices: Dictionary) -> Array:
+	var errors: Array = []
+	for id in sorted_names(recipes.keys()):
+		var recipe: Dictionary = recipes[id]
+		var out: Dictionary = recipe["output"]
+		var sellable := true
+		for res in sorted_names(out.keys()):
+			if not prices.has(res):
+				sellable = false
+				break
+		if not sellable:
+			continue
+		var into := _worth(recipe["inputs"], prices)
+		var made := _worth(out, prices)
+		if made <= into:
+			errors.append(("'%s' turns $%d of goods into $%d - nobody would "
+				+ "ever walk to that station") % [id, into, made])
+	return errors
 
 
 static func check_nights(nights: Array) -> Array:

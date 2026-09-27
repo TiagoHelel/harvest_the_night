@@ -20,7 +20,6 @@ const OCCUPANT_VERBS: Dictionary = {
 	&"ore": &"mine",
 	&"seam": &"mine",
 	&"shop": &"trade",
-	&"workshop": &"craft",
 }
 
 ## When nothing is standing there, the ground decides.
@@ -98,6 +97,12 @@ static func verb_at(state: Dictionary, cell: Vector2i) -> StringName:
 static func _offered(state: Dictionary, cell: Vector2i) -> StringName:
 	var on := Farm.occupant(state, cell)
 	if not on.is_empty():
+		# **Any station with a recipe offers to make it.** This was a table
+		# entry naming the workshop, which is why the press and the kitchen
+		# could be built and then stood next to uselessly. A fourth station is
+		# a `BUILDINGS` entry and some recipes, and nothing here changes.
+		if Crafting.is_station(on["id"]):
+			return &"craft"
 		return OCCUPANT_VERBS.get(on["id"], &"")
 	var terrain := Farm.terrain_at(state, cell)
 	if terrain == Farm.Terrain.SOIL:
@@ -165,7 +170,7 @@ static func complete(state: Dictionary, cell: Vector2i, verb: StringName) -> voi
 		&"reel":
 			Fishing.reel(state)
 		&"craft":
-			Crafting.start(state, cell, state["selected_recipe"])
+			Crafting.start_at(state, cell)
 		&"trade":
 			Shop.open(state)
 		_:
@@ -177,7 +182,8 @@ static func complete(state: Dictionary, cell: Vector2i, verb: StringName) -> voi
 static func all_verbs() -> Array:
 	var verbs: Array = []
 	for v in OCCUPANT_VERBS.values() + TERRAIN_VERBS.values() \
-			+ [&"till", &"plant", &"harvest", &"water", &"fish", &"reel"]:
+			+ [&"till", &"plant", &"harvest", &"water", &"fish", &"reel",
+				&"craft"]:
 		if not verbs.has(v):
 			verbs.append(v)
 	verbs = GameData.sorted_names(verbs)

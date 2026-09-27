@@ -38,13 +38,61 @@ static func initial() -> Dictionary:
 		"crafting": {},
 		# {structure id: how many are built and waiting to be placed}
 		"kits": {},
-		# What the workshop makes when you press interact. Task 0037 puts a
-		# panel in front of this; until then there is one recipe worth making.
-		"selected_recipe": &"barricade_kit",
+		# **What each station makes when you press interact - one per station.**
+		# It was a single id, which worked while the workshop was the only
+		# station you could reach and broke the moment the press became
+		# buildable: standing at a press with `barricade_kit` selected would
+		# have made nothing and said nothing about why. Task 0037 puts a panel
+		# in front of this and writes to the same place.
+		"selected_recipe": _default_selection(),
 	}
 
 
+## The first recipe of every station that has one, in sorted order. Built from
+## the table rather than written down, so a new station arrives selected.
+static func _default_selection() -> Dictionary:
+	var out := {}
+	for id in GameData.sorted_names(GameData.RECIPES.keys()):
+		var station: StringName = (GameData.RECIPES[id] as Dictionary)["station"]
+		if not out.has(station):
+			out[station] = id
+	return out
+
+
 # ------------------------------------------------------------------- asking
+
+
+## Whether this is something that makes things.
+static func is_station(id: StringName) -> bool:
+	return not recipes_at(id).is_empty()
+
+
+## What this station will make next.
+static func selected_at(state: Dictionary, station: StringName) -> StringName:
+	return StringName((state["selected_recipe"] as Dictionary).get(station, &""))
+
+
+## Choose what a station makes. Refuses a recipe that station cannot make,
+## rather than storing it and failing at the bench.
+static func select_recipe(state: Dictionary, recipe_id: StringName) -> bool:
+	var recipe: Variant = GameData.RECIPES.get(recipe_id, null)
+	if recipe == null:
+		return false
+	var station: StringName = (recipe as Dictionary)["station"]
+	(state["selected_recipe"] as Dictionary)[station] = recipe_id
+	return true
+
+
+## Start whatever the station on this cell is set to make.
+##
+## **The anchor, not the cell under the cursor.** A press is two by two, and
+## four jobs running on four corners of one press would be four presses.
+static func start_at(state: Dictionary, cell: Vector2i) -> bool:
+	var id: StringName = Farm.occupant(state, cell).get("id", &"")
+	if not is_station(id):
+		return false
+	return start(state, Building.anchor_of(state, cell),
+		selected_at(state, id))
 
 ## Every recipe a station can make, in a fixed order.
 static func recipes_at(station: StringName) -> Array:

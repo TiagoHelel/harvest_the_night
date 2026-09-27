@@ -49,16 +49,78 @@ static func initial() -> Dictionary:
 ## cannot be paid for and says why.
 static func catalogue(state: Dictionary) -> Array:
 	var out: Array = []
-	var ids := GameData.sorted_names(GameData.DEFENCES.keys())
-	for id in ids:
+	for id in placeable_ids():
 		if allowed_in_phase(state, id):
 			out.append(id)
 	return out
 
 
+## Everything that can be put on the farm: the defences, and since task 0032
+## the production buildings too.
+##
+## **Two tables and one placer.** A press is not a tower and its entry lives
+## with the other buildings, but "can I put this here, can I pay for it, what
+## does it cost to take up again" is the same question for both - and the day
+## build mode had a second code path for buildings is the day the two answers
+## start disagreeing.
+static func placeable_ids() -> Array:
+	return GameData.sorted_names(GameData.DEFENCES.keys()) \
+		+ GameData.sorted_names(GameData.BUILDINGS.keys())
+
+
+## The entry for anything placeable, from whichever table holds it.
+static func entry_of(id: StringName) -> Variant:
+	if GameData.DEFENCES.has(id):
+		return GameData.DEFENCES[id]
+	if GameData.BUILDINGS.has(id):
+		return GameData.BUILDINGS[id]
+	return null
+
+
+static func is_placeable(id: StringName) -> bool:
+	return entry_of(id) != null
+
+
 static func cost_of(id: StringName) -> Dictionary:
-	var entry: Variant = GameData.DEFENCES.get(id, null)
+	var entry: Variant = entry_of(id)
 	return {} if entry == null else (entry as Dictionary)["cost"]
+
+
+## How many tiles it covers. Towers are one; a press is two by two.
+static func size_of(id: StringName) -> Vector2i:
+	var entry: Variant = entry_of(id)
+	if entry == null:
+		return Vector2i.ONE
+	return (entry as Dictionary).get("size", Vector2i.ONE)
+
+
+## Every cell a thing of this size would cover, anchored at its top left.
+##
+## The farmhouse has worked this way since the map was drawn - nine cells each
+## holding `{"id": "house"}` - so a multi-tile building is not a new idea here,
+## only a placeable one. Each cell also carries the anchor, so that four cells
+## of press are one press and not four.
+static func footprint(id: StringName, origin: Vector2i) -> Array:
+	var size := size_of(id)
+	var out: Array = []
+	for dy in size.y:
+		for dx in size.x:
+			out.append(origin + Vector2i(dx, dy))
+	return out
+
+
+## Which cell of a multi-tile building is the one that owns it. Jobs, hit
+## points and selling all key off this, so standing at either half of a press
+## is standing at the same press.
+static func anchor_of(state: Dictionary, cell: Vector2i) -> Vector2i:
+	var on := Farm.occupant(state, cell)
+	if on.is_empty():
+		return cell
+	var at: Variant = on.get("anchor", null)
+	if at == null:
+		return cell
+	var pair: Array = at
+	return Vector2i(int(pair[0]), int(pair[1]))
 
 
 ## Whether the phase lets this go down at all.
@@ -68,7 +130,9 @@ static func allowed_in_phase(state: Dictionary, id: StringName) -> bool:
 		return true
 	if phase != Phases.NIGHT:
 		return false
-	var entry: Variant = GameData.DEFENCES.get(id, null)
+	# A production building is a day job. Nothing in `BUILDINGS` carries
+	# `placeable_at_night`, so this falls out rather than being spelled out.
+	var entry: Variant = entry_of(id)
 	return entry != null \
 		and bool((entry as Dictionary).get("placeable_at_night", false))
 
@@ -87,13 +151,16 @@ static func can_place(state: Dictionary, id: StringName, cell: Vector2i) -> bool
 ## Why it will not go there, in words, for the red ghost and the tooltip.
 ## Empty when it will.
 static func why_not(state: Dictionary, id: StringName, cell: Vector2i) -> String:
-	if not GameData.DEFENCES.has(id):
+	if not is_placeable(id):
 		return "nothing selected"
 	if not allowed_in_phase(state, id):
 		return "not at night"
-	var terrain_reason := Farm.why_not_buildable(state, cell)
-	if not terrain_reason.is_empty():
-		return terrain_reason
+	# **Every cell it would cover**, not only the one under the cursor. A press
+	# hanging half off the farm is the bug this stops.
+	for at in footprint(id, cell):
+		var terrain_reason := Farm.why_not_buildable(state, at)
+		if not terrain_reason.is_empty():
+			return terrain_reason
 	if not affordable(state, id):
 		var short := Resources.missing(state, cost_of(id))
 		var parts: Array = []
@@ -108,7 +175,7 @@ static func why_not(state: Dictionary, id: StringName, cell: Vector2i) -> String
 ## nothing there, or when it is not the player's to sell.
 static func refund_for(state: Dictionary, cell: Vector2i) -> Dictionary:
 	var on := Farm.occupant(state, cell)
-	if on.is_empty() or not GameData.DEFENCES.has(on["id"]):
+	if on.is_empty() or not is_placeable(on["id"]):
 		return {}
 	return refund_for_cost(cost_of(on["id"]))
 
@@ -141,21 +208,40 @@ static func place(state: Dictionary, id: StringName, cell: Vector2i) -> bool:
 		if not Resources.pay(state, cost_of(id)):
 			return false
 
-	var entry: Dictionary = GameData.DEFENCES[id]
+	var entry: Dictionary = entry_of(id)
 	var occupant := {"id": id, "hp": int(entry.get("hp", 1))}
 	if entry.has("lifetime_ticks"):
 		occupant["expires"] = int(state["tick"]) + int(entry["lifetime_ticks"])
-	return Farm.place(state, cell, occupant)
+
+	var cells := footprint(id, cell)
+	if cells.size() > 1:
+		occupant["anchor"] = [cell.x, cell.y]
+	for at in cells:
+		if not Farm.place(state, at, occupant):
+			# Half a press is worse than none. Take back whatever went down.
+			for done in cells:
+				if done == at:
+					break
+				Farm.remove(state, done)
+			Resources.gain(state, cost_of(id))
+			return false
+	return true
 
 
 ## Take it back up for a fraction of what it cost. Returns what came back.
 static func sell(state: Dictionary, cell: Vector2i) -> Dictionary:
+	var id: StringName = Farm.occupant(state, cell).get("id", &"")
+	if not is_placeable(id):
+		return {}
 	var back := refund_for(state, cell)
-	if back.is_empty() and Farm.occupant(state, cell).is_empty():
-		return {}
-	if not GameData.DEFENCES.has(Farm.occupant(state, cell).get("id", &"")):
-		return {}
-	if not Farm.remove(state, cell):
+	# Selling any tile of a building sells the building, and takes every tile
+	# of it with it.
+	var at := anchor_of(state, cell)
+	var removed := false
+	for part in footprint(id, at):
+		if Farm.occupant(state, part).get("id", &"") == id:
+			removed = Farm.remove(state, part) or removed
+	if not removed:
 		return {}
 	Resources.gain(state, back)
 	return back
@@ -230,7 +316,7 @@ static func expire(state: Dictionary) -> void:
 
 
 static func select(state: Dictionary, id: StringName) -> void:
-	if not GameData.DEFENCES.has(id):
+	if not is_placeable(id):
 		return
 	var build: Dictionary = state["build"]
 	build["selected"] = id

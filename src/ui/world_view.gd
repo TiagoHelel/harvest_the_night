@@ -400,10 +400,11 @@ func _refresh() -> void:
 	var keys: Array = occupants.keys()
 	keys.sort()
 	for idx in keys:
-		var id: StringName = (occupants[idx] as Dictionary)["id"]
+		var on: Dictionary = occupants[idx]
+		var id: StringName = on["id"]
 		var cell := Grid.cell(idx)
 		var sprite := Sprite2D.new()
-		sprite.texture = _texture_for(id)
+		sprite.texture = _texture_for(_art_for(on, cell))
 		sprite.centered = false
 		sprite.position = Vector2(cell) * float(GameData.TILE_SIZE)
 		_occupants.add_child(sprite)
@@ -553,6 +554,22 @@ func _build_terrain_tileset() -> TileSet:
 
 ## A drawn sprite when the pipeline has one, and an obvious flat block when it
 ## does not. Cached, because this is called once per occupant per redraw.
+## Which sprite a cell of an occupant wants.
+##
+## A one-tile thing wants its own name. A multi-tile one - a press is two by
+## two - wants the quarter of itself that this cell is, so the four cells make
+## one machine rather than four little machines. `_texture_for` falls back to
+## the plain name, so a building whose quarters nobody has drawn yet still
+## shows up.
+func _art_for(on: Dictionary, cell: Vector2i) -> StringName:
+	var at: Variant = on.get("anchor", null)
+	if at == null:
+		return on["id"]
+	var pair: Array = at
+	return StringName("%s_%d_%d" % [on["id"], cell.x - int(pair[0]),
+		cell.y - int(pair[1])])
+
+
 func _texture_for(id: StringName) -> Texture2D:
 	if _textures.has(id):
 		return _textures[id]
@@ -563,6 +580,16 @@ func _texture_for(id: StringName) -> Texture2D:
 		if drawn != null:
 			_textures[id] = drawn
 			return drawn
+
+	# A quarter nobody has drawn falls back to the whole thing, and that to a
+	# flat block, so a new building is visible before it is pretty.
+	var name := str(id)
+	var cut := name.rfind("_")
+	if cut > 0 and name.substr(cut + 1).is_valid_int():
+		var without_row := name.substr(0, cut)
+		cut = without_row.rfind("_")
+		if cut > 0 and without_row.substr(cut + 1).is_valid_int():
+			return _texture_for(StringName(without_row.substr(0, cut)))
 
 	return _flat_block(id)
 

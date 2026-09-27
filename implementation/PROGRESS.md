@@ -1801,3 +1801,125 @@ already was; only the throwaway script was too greedy.
 
 `python tools/verify.py` prints PASS: 727 asserts, 192 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+
+## 0032 - Oil - done 2026-09-27
+
+The first resource that costs a building, which meant first making it possible
+to build one.
+
+**What changed.** Build mode can place the production buildings, not only the
+defences, and honours their footprints. The press is 2x2, costs 25 wood and 5
+iron, and turns corn or fish into oil. Oil is now the dearest thing in the
+ledger, and a flamethrower's ten drops of it are $260 if you sell them instead.
+
+Files: `src/core/building.gd`, `crafting.gd`, `interact.gd`, `game_data.gd`,
+`src/ui/world_view.gd`, `build_mode.gd`, `tools/sprite_maps.py`, both test
+tools.
+Verify: 797 headless / 222 input / both hashes moved on purpose, below.
+
+### The press could be built and then stood next to uselessly
+
+Three things were missing and none of them was the recipe - `press_oil` has
+been in the table since task 0003.
+
+1. **`Building` was hardwired to `DEFENCES`** in ten places, so a press could
+   never go on the farm at all. It now reads either table through `entry_of()`,
+   and `BUILDINGS` falls out of the night rule for free: nothing in there
+   carries `placeable_at_night`, so a press is a day job without that being
+   spelled out anywhere.
+2. **Footprints.** A press is 2x2. Placing writes the occupant to all four
+   cells with an `anchor` on each, `why_not()` checks every cell so a press
+   cannot hang off the edge, and a failed placement takes back whatever went
+   down and refunds - half a press is worse than none. This is not a new idea
+   in this codebase: the farmhouse has been nine cells of `{"id": "house"}`
+   since the map was drawn. It is only a placeable one now.
+3. **`OCCUPANT_VERBS` named the workshop.** So the press and the kitchen
+   offered nothing when you stood at them. Any station with a recipe now
+   offers `craft`, which also unblocks task 0034's kitchen.
+
+`selected_recipe` was a single id, which worked while the workshop was the
+only station you could reach. It is a Dictionary keyed by station now, built
+from the recipe table so a new station arrives already selected, and
+`start_at()` resolves the **anchor** - four corners of one press are one press,
+not four, and there is an assert that the other three corners take no more
+corn.
+
+### The arithmetic
+
+Four corn is $20 of crop. Pressing it was twenty seconds of work for one oil
+worth **$10** - the press destroyed half the value of everything put into it.
+
+That is not the tension the task asks for. "Sell it or keep it" is only a
+decision if selling is a real option; at $10 you kept the oil because selling
+it was strictly worse, which is not a choice, it is an absence of one.
+
+So oil went to **$26** and gunpowder, which is made from it, to **$22**:
+
+| recipe | in | out |
+|---|---|---|
+| press_oil | 4 corn, $20 | 1 oil, $26 |
+| press_fish_oil | 3 fish, $24 | 1 oil, $26 |
+| make_gunpowder | 2 corn + 1 oil, $36 | 2 gunpowder, $44 |
+| cook_fish | 1 fish + 1 carrot, $11 | 3 food, $36 |
+
+Oil is now the dearest single thing on the farm, which the task asks for
+directly, and a flamethrower's ten oil is **$260** on the stall - against a
+night's base reward of $20. That is the temptation, and it is asserted.
+
+The fish route is deliberately the worse deal: three fish is $24 against corn's
+$20, and a fish is worth more cooked than pressed. It is the day you have a
+good pond and a bad field, not the route.
+
+`check_chain()` now refuses any recipe whose output sells for less than its
+inputs. **Its first version had a bug the teeth-test caught**: `_worth()` read
+`SELL_PRICE` directly instead of the price list it was handed, so the check
+looked at the real table while the test handed it a rigged one, and passed by
+agreeing with itself. The price list is a parameter now.
+
+### The build palette did not fit on the screen
+
+Making four buildings placeable took the palette from eight rows to twelve, and
+`input_check` said "clicking press selects auto_crossbow".
+
+It was not the click. The palette was **327 pixels tall on a 270 pixel
+screen** - the press row sat at y=294, below the bottom edge, and could not be
+clicked by anybody. A default `Button` reserves about twenty pixels whatever
+`ROW_HEIGHT` says, and `VBoxContainer` adds four more between each. Rows now
+carry their own compact styleboxes, the separation is zero, and the panel is
+255 -> 187 tall.
+
+There is an assert that every row of the palette is on the screen, so the next
+task that adds a defence is told rather than finding out.
+
+A second, quieter bug was found on the way: `_build_palette()` called
+`queue_free()` on the old rows without removing them from the tree first.
+`queue_free` is deferred, so for one frame the container laid out both sets and
+every row sat somewhere it was not drawn. Harmless at eight rows. Fixed.
+
+### Notes
+
+- The press is drawn as one 32x32 picture split into four quarters by the
+  generator, rather than four sprites authored separately - much easier to get
+  a beam and a screw to line up across a tile boundary. `world_view` asks for
+  `press_0_0` and falls back to `press` and then to a flat block, so a building
+  whose quarters nobody has drawn is visible before it is pretty.
+- Looked at the assembled press rather than trusting the ASCII. The first one
+  read as an archway: two feet with a gap between them. Redrawn with a solid
+  stone basin, a timber beam and an oil spout.
+- The test case's first spot for the press was underneath the build panel,
+  where the click never reaches the farm. It places east of the panel now, and
+  says why.
+
+### Hashes
+
+| | from | to | why |
+|---|---|---|---|
+| sim hash | `485801538` | `680464820` | `selected_recipe` went from one id to one per station |
+| data hash | `135663565` | `3582057941` | oil $10 -> $26, gunpowder $14 -> $22, and the `press_fish_oil` recipe |
+
+`python tools/verify.py` prints PASS: 797 asserts, 222 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.
+
+**Follow-up:** task 0033's generator and 0034's kitchen are both `BUILDINGS`
+entries, so both are now placeable and workable without further plumbing. The
+`energy_draw` on the press is still data only - 0033 owns it.

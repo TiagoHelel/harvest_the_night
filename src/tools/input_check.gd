@@ -41,7 +41,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 12
+const CASES := 13
 
 var passed := 0
 var failed := 0
@@ -83,6 +83,7 @@ func _run() -> void:
 	await _case_0028_seeds()
 	await _case_0029_watering()
 	await _case_0030_fishing()
+	await _case_0032_press()
 	_finish()
 
 
@@ -1411,3 +1412,148 @@ func _facing_towards(here: Vector2i, there: Vector2i) -> int:
 	if step.y < 0:
 		return Player.NORTH
 	return Player.EAST if step.x > 0 else Player.WEST
+
+
+## 0032 - putting a press on the farm and pressing corn into oil.
+func _case_0032_press() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var build: BuildMode = require_control("BuildMode")
+	if driver == null or build == null:
+		_completed += 1
+		await close_scene()
+		return
+
+	var state := driver.state
+	Resources.gain(state, Building.cost_of(&"press"))
+	Resources.gain(state, {GameData.CORN: 20})
+
+	# **The press is in the build palette.** It was not before this task: the
+	# palette read the defences table and a press is not a defence.
+	await hold_key(KEY_B, 4)
+	await until(func() -> bool: return Building.is_active(state),
+		"build mode to open")
+	expect(Building.is_active(state), "B opens build mode")
+	var row: Button = require_control("build_press")
+	expect(row != null, "and the palette has a row for the press")
+	if row == null:
+		await close_scene()
+		_completed += 1
+		return
+
+	# **Every row of the palette is on the screen.** Making the buildings
+	# placeable took it from eight rows to twelve and pushed the last of them
+	# to y=294 on a 270 pixel screen - the press could not be clicked at all.
+	# The next task that adds a defence gets told, rather than finding out.
+	var frame: Control = require_control("Frame")
+	var screen := Vector2(480, 270)
+	expect(frame != null and frame.get_global_rect().end.y <= screen.y,
+		"the build palette fits on the screen",
+		str(frame.get_global_rect()) if frame else "")
+	for id in Building.catalogue(state):
+		var each: Control = require_control("build_%s" % id)
+		if each == null:
+			continue
+		var box := each.get_global_rect()
+		expect(box.position.y >= 0 and box.end.y <= screen.y,
+			"the %s row is somewhere it can be clicked" % id, str(box))
+	await click_control("build_press")
+	await until(func() -> bool: return Building.selected(state) == &"press",
+		"the press to be selected")
+	expect(Building.selected(state) == &"press", "clicking it selects it",
+		str(Building.selected(state)))
+
+	# **Down it goes**, two tiles by two, paid for out of the ledger.
+	var spot := _room_for_press(state)
+	expect(spot != Vector2i(-1, -1), "there is room for a press")
+	if spot == Vector2i(-1, -1):
+		await close_scene()
+		_completed += 1
+		return
+	var wood_before := Resources.amount(state, GameData.WOOD)
+	await click_cell(spot)
+	await until(func() -> bool:
+		return Farm.occupant(state, spot).get("id", &"") == &"press",
+		"the press to go down")
+	expect(Farm.occupant(state, spot).get("id", &"") == &"press",
+		"clicking the farm puts it there",
+		str(Farm.occupant(state, spot)))
+	expect(Resources.amount(state, GameData.WOOD) < wood_before,
+		"and it was paid for")
+	var covered := 0
+	for at in Building.footprint(&"press", spot):
+		if Farm.occupant(state, at).get("id", &"") == &"press":
+			covered += 1
+	expect(covered == 4, "all four tiles of it are there", str(covered))
+
+	# B toggles it, the same key that opened it.
+	await hold_key(KEY_B, 4)
+	await until(func() -> bool: return not Building.is_active(state),
+		"build mode to close")
+	expect(not Building.is_active(state), "B closes build mode again")
+
+	# **Stand at it and press interact.** The far corner, because any tile of
+	# a press is the same press.
+	var corner: Vector2i = Building.footprint(&"press", spot)[3]
+	var stand := _free_cell_beside(state, corner)
+	expect(stand != Vector2i(-1, -1), "somewhere to stand at the press")
+	if stand == Vector2i(-1, -1):
+		await close_scene()
+		_completed += 1
+		return
+	_stand_at(state, stand, _facing_towards(stand, corner))
+	await frames(2)
+	expect(Player.target(state) == corner, "the farmer is at the press",
+		str(Player.target(state)))
+	expect(Interact.verb_at(state, corner) == &"craft",
+		"which offers to make something",
+		str(Interact.verb_at(state, corner)))
+
+	Crafting.select_recipe(state, &"press_oil")
+	var oil_before := Resources.amount(state, GameData.OIL)
+	await hold_key(KEY_SPACE, 4)
+	await until(func() -> bool: return Crafting.busy(state, spot),
+		"the press to start")
+	expect(Crafting.busy(state, spot), "and pressing interact starts it")
+
+	# **And it finishes into oil.** Driven at speed, because twenty seconds of
+	# real time is not something a test should sit through.
+	var ticks := int((GameData.RECIPES[&"press_oil"] as Dictionary)["ticks"])
+	Sim.advance(state, ticks + 2)
+	await frames(2)
+	expect(Resources.amount(state, GameData.OIL) > oil_before,
+		"and out comes oil",
+		"%d then %d" % [oil_before, Resources.amount(state, GameData.OIL)])
+
+	await close_scene()
+	_completed += 1     # last line: an abandoned case never gets here
+
+
+## Two by two of clear farm, away from the house and the field edges.
+## **East of the build panel.** The palette covers the left eighth of the
+## screen, so a press placed under it is a press the click never reaches - and
+## the cell has to be on camera, which near the farmer it is.
+func _room_for_press(state: Dictionary) -> Vector2i:
+	for y in range(6, Grid.HEIGHT - 3):
+		for x in range(24, Grid.WIDTH - 6):
+			var origin := Vector2i(x, y)
+			var clear := true
+			for at in Building.footprint(&"press", origin):
+				if not Farm.buildable(state, at):
+					clear = false
+					break
+			# Somewhere to stand at it afterwards, or the rest of the case has
+			# nowhere to put the farmer.
+			if clear and _free_cell_beside(state, origin + Vector2i(1, 1)) \
+					!= Vector2i(-1, -1):
+				return origin
+	return Vector2i(-1, -1)
+
+
+func _free_cell_beside(state: Dictionary, cell: Vector2i) -> Vector2i:
+	for step in [Vector2i(1, 0), Vector2i(0, 1), Vector2i(0, -1),
+			Vector2i(-1, 0)]:
+		var at: Vector2i = cell + (step as Vector2i)
+		if Farm.walkable(state, at):
+			return at
+	return Vector2i(-1, -1)

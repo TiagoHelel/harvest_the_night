@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`#######.................`  **31 / 108 done**
+`#######.................`  **32 / 108 done**
 
-0 doing / 77 todo / 0 blocked across 9 phases.
+0 doing / 76 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0032 - Oil**. The whole of what is left is
+First up: **0033 - The generator and energy**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,23 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-77 task(s) left, the ready ones first, then what they
+76 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0032 - Oil
-
-Ready to pick up.  Likely files: `src/core/crafting.gd, src/core/game_data.gd`.
-
-Fire needs fuel. Oil is pressed rather than gathered, which makes it the first resource that costs a building.
-
-- A press that turns corn or fish into oil over ticks
-- Oil feeds the flamethrower tower and incendiary ammunition
-- Oil is the most valuable thing to sell and the most useful to keep: that tension is the point
-- Press throughput is a lever
-
-  - done when: Oil can be produced and sold, and the sale is a real temptation against the flamethrower cost
-  - done when: `headless_check` runs the press for a known number of ticks
 
 ### 0033 - The generator and energy
 
@@ -257,7 +243,7 @@ When it breaks on someone else's machine, get enough to fix it without them.
 
 ### 0035 - Gunpowder and ammunition
 
-Waits on 0032, 0033.  Likely files: `src/core/crafting.gd, src/core/towers.gd`.
+Waits on 0033.  Likely files: `src/core/crafting.gd, src/core/towers.gd`.
 
 Towers that consume something. The clearest possible version of 'what you made today decides what tonight can do'.
 
@@ -1213,16 +1199,16 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0026** [The tower kills the zombie](prompts/0026-combat.md)
 - [x] **0027** [Three waves, a result screen, and back to the farm](prompts/0027-first-loop.md)
 
-## 2 - The full day  (4/14)
+## 2 - The full day  (5/14)
 
 - [x] **0028** [Corn and carrot](prompts/0028-three-crops.md)
 - [x] **0029** [Growth stages and watering](prompts/0029-growth-stages.md)
 - [x] **0030** [Fishing](prompts/0030-fishing.md)
 - [x] **0031** [Iron from the rock face](prompts/0031-iron.md)
-- [ ] **0032** [Oil](prompts/0032-oil.md)
+- [x] **0032** [Oil](prompts/0032-oil.md)
 - [ ] **0033** [The generator and energy](prompts/0033-generator.md)
 - [ ] **0034** [Cooking: food and meat](prompts/0034-cooking.md)
-- [ ] **0035** [Gunpowder and ammunition](prompts/0035-ammunition.md) - needs 0032, 0033
+- [ ] **0035** [Gunpowder and ammunition](prompts/0035-ammunition.md) - needs 0033
 - [ ] **0036** [The inventory](prompts/0036-inventory.md)
 - [ ] **0037** [The workshop queue](prompts/0037-craft-queue.md) - needs 0036
 - [ ] **0038** [Production runs while you are elsewhere](prompts/0038-idle-production.md) - needs 0037

@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 24
+const GROUPS := 25
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -88,6 +88,7 @@ func _run() -> void:
 	_task_0029_watering()
 	_task_0030_fishing()
 	_task_0031_iron()
+	_task_0032_oil()
 
 
 func _finish() -> void:
@@ -3271,3 +3272,218 @@ func _mine_for_a_day(seed_value: int, travel: int) -> int:
 		Sim.advance(state, 1)
 
 	return Resources.amount(state, GameData.IRON) - start
+
+
+## 0032 - oil: the first resource that costs a building.
+func _task_0032_oil() -> void:
+	# **Two ways in**, which is what "corn or fish" asks for.
+	var into_oil: Array = []
+	for id in Crafting.recipes_at(&"press"):
+		into_oil.append(id)
+	expect(into_oil.size() >= 2, "the press takes more than one thing",
+		str(into_oil))
+	var corn_route := false
+	var fish_route := false
+	for id in into_oil:
+		var recipe: Dictionary = GameData.RECIPES[id]
+		expect((recipe["output"] as Dictionary).has(GameData.OIL),
+			"%s makes oil" % id, str(recipe["output"]))
+		if (recipe["inputs"] as Dictionary).has(GameData.CORN):
+			corn_route = true
+		if (recipe["inputs"] as Dictionary).has(GameData.FISH):
+			fish_route = true
+	expect(corn_route, "corn presses into oil")
+	expect(fish_route, "and so does fish")
+
+	# **Oil is the most valuable thing on the farm to sell.**
+	var dearest := &""
+	var best := -1
+	for res in GameData.sorted_names(GameData.SELL_PRICE.keys()):
+		if int(GameData.SELL_PRICE[res]) > best:
+			best = int(GameData.SELL_PRICE[res])
+			dearest = res
+	expect(dearest == GameData.OIL, "oil is the dearest thing in the ledger",
+		"%s at $%d" % [dearest, best])
+
+	# **And pressing gains value**, or the tension is not a tension: you would
+	# keep the oil because selling it was worse, which is not a decision.
+	var corn_in := 4 * int(GameData.SELL_PRICE[GameData.CORN])
+	var oil_out := int(GameData.SELL_PRICE[GameData.OIL])
+	expect(oil_out > corn_in,
+		"four corn is worth more as a drop of oil than as four corn",
+		"$%d against $%d" % [oil_out, corn_in])
+	expect(GameData.check_chain(GameData.RECIPES,
+		GameData.SELL_PRICE).is_empty(),
+		"and every recipe in the game gains value",
+		str(GameData.check_chain(GameData.RECIPES, GameData.SELL_PRICE)))
+	var cheap: Dictionary = GameData.SELL_PRICE.duplicate()
+	cheap[GameData.OIL] = 1
+	expect(not GameData.check_chain(GameData.RECIPES, cheap).is_empty(),
+		"a press that destroyed value would be refused")
+
+	# **The temptation, in money.** A flamethrower's oil against what that oil
+	# would fetch at the stall.
+	var flame: Dictionary = (GameData.DEFENCES[&"flame_tower"] as Dictionary)["cost"]
+	expect(flame.has(GameData.OIL), "the flamethrower burns oil", str(flame))
+	var tower_oil := int(flame[GameData.OIL])
+	var temptation := tower_oil * oil_out
+	print("  a flamethrower is %d oil - $%d if you sell it instead"
+		% [tower_oil, temptation])
+	expect(temptation > int(GameData.REWARDS["base_money"]) * 3,
+		"and selling it instead is real money, not pocket change",
+		"$%d" % temptation)
+
+	# **A press is built, not inherited.** It costs, it covers four tiles, and
+	# it will not hang off the edge of the farm.
+	var state := State.create(1400)
+	expect(Building.is_placeable(&"press"), "a press can be placed")
+	expect(Building.size_of(&"press") == Vector2i(2, 2), "two by two",
+		str(Building.size_of(&"press")))
+	expect(Building.footprint(&"press", Vector2i(4, 4)).size() == 4,
+		"covering four cells")
+	expect(Building.catalogue(state).has(&"press"),
+		"and the build palette offers it")
+
+	var cost := Building.cost_of(&"press")
+	expect(not cost.is_empty(), "it costs something", str(cost))
+	expect(not Building.affordable(state, &"press"),
+		"and a farm on day one cannot afford it - that is the point of the task")
+	Resources.gain(state, cost)
+	expect(Building.affordable(state, &"press"), "having gathered for it, it can")
+
+	var spot := _room_for(state, Vector2i(2, 2))
+	expect(spot != Vector2i(-1, -1), "there is room for one")
+	var purse := Resources.amount(state, GameData.WOOD)
+	expect(Building.place(state, &"press", spot), "and down it goes")
+	expect(Resources.amount(state, GameData.WOOD)
+		< purse, "paid for out of the ledger")
+	for at in Building.footprint(&"press", spot):
+		expect(Farm.occupant(state, at).get("id", &"") == &"press",
+			"every tile of it is press", str(at))
+		expect(Building.anchor_of(state, at) == spot,
+			"and every tile points at the same press", str(at))
+		expect(not Farm.walkable(state, at), "you cannot walk through it")
+
+	# **Off the edge is refused, and refused before anything is paid.**
+	var edge := State.create(1401)
+	Resources.gain(edge, Building.cost_of(&"press"))
+	var wood_before := Resources.amount(edge, GameData.WOOD)
+	var brink := Vector2i(-1, -1)
+	for y in Grid.HEIGHT:
+		var at := Vector2i(Grid.WIDTH - 1, y)
+		if Farm.buildable(edge, at):
+			brink = at
+			break
+	expect(brink != Vector2i(-1, -1), "there is a clear cell on the east edge")
+	expect(not Building.place(edge, &"press", brink),
+		"a press hanging off the farm is refused", str(brink))
+	expect(Resources.amount(edge, GameData.WOOD) == wood_before,
+		"and nothing was charged for it",
+		str(Resources.amount(edge, GameData.WOOD)))
+	expect(Farm.occupant(edge, brink).is_empty(),
+		"and no half a press was left behind")
+
+	# **Standing at any tile of it works the same press.**
+	var corner: Vector2i = Building.footprint(&"press", spot)[3]
+	expect(Interact.verb_at(state, corner) == &"craft",
+		"a press offers to make something",
+		str(Interact.verb_at(state, corner)))
+	expect(Crafting.selected_at(state, &"press") != &"",
+		"and it arrives knowing what to make",
+		str(Crafting.selected_at(state, &"press")))
+	expect(Crafting.selected_at(state, &"press") in Crafting.recipes_at(&"press"),
+		"which is something a press can make")
+
+	# **The press runs for exactly the ticks the recipe says.** The done-when.
+	var recipe_id := &"press_oil"
+	var recipe: Dictionary = GameData.RECIPES[recipe_id]
+	var ticks := int(recipe["ticks"])
+	expect(Crafting.select_recipe(state, recipe_id), "set it to press oil")
+	Resources.gain(state, recipe["inputs"])
+	var corn_before := Resources.amount(state, GameData.CORN)
+	var oil_before := Resources.amount(state, GameData.OIL)
+
+	expect(Interact.verb_at(state, corner) == &"craft", "still offers craft")
+	Interact.complete(state, corner, &"craft")
+	expect(Crafting.busy(state, spot),
+		"pressing interact at the far corner starts a job on the press")
+	expect(Resources.amount(state, GameData.CORN)
+		== corn_before - int((recipe["inputs"] as Dictionary)[GameData.CORN]),
+		"the corn goes in when the job starts, not when it finishes",
+		str(Resources.amount(state, GameData.CORN)))
+
+	Sim.advance(state, ticks - 1)
+	expect(Resources.amount(state, GameData.OIL) == oil_before,
+		"no oil a tick early", str(Resources.amount(state, GameData.OIL)))
+	expect(Crafting.busy(state, spot), "and the press is still working")
+	Sim.advance(state, 1)
+	expect(Resources.amount(state, GameData.OIL)
+		== oil_before + int((recipe["output"] as Dictionary)[GameData.OIL]),
+		"and on the tick the recipe says, oil",
+		str(Resources.amount(state, GameData.OIL)))
+	expect(not Crafting.busy(state, spot), "the press is free again")
+	print("  the press: %d corn in, %d ticks, %d oil out"
+		% [int((recipe["inputs"] as Dictionary)[GameData.CORN]), ticks,
+			int((recipe["output"] as Dictionary)[GameData.OIL])])
+
+	# **Throughput is a lever**, which means the tick count is the only thing
+	# that decides how long it takes.
+	expect(ticks > 0 and ticks == int(GameData.RECIPES[recipe_id]["ticks"]),
+		"the press runs on the recipe's own tick count", str(ticks))
+
+	# **Four corners, one job.** Four presses' worth of work out of one press
+	# would be the bug a 2x2 station invites.
+	Resources.gain(state, {GameData.CORN: 40})
+	Interact.complete(state, corner, &"craft")
+	expect(Crafting.busy(state, spot), "a job is running")
+	var corn_mid := Resources.amount(state, GameData.CORN)
+	for at in Building.footprint(&"press", spot):
+		Interact.complete(state, at, &"craft")
+	expect(Resources.amount(state, GameData.CORN) == corn_mid,
+		"and the other three corners take no more corn - it is one press",
+		str(Resources.amount(state, GameData.CORN)))
+
+	# **Oil can be sold.**
+	Sim.advance(state, ticks)
+	var oil_held := Resources.amount(state, GameData.OIL)
+	expect(oil_held > 0, "there is oil to sell", str(oil_held))
+	expect(Shop.sellable().has(GameData.OIL), "and the stall takes it")
+	var money_before := Resources.amount(state, GameData.MONEY)
+	var paid := Shop.sell(state, GameData.OIL, oil_held)
+	expect(paid == oil_held * oil_out, "at the price the table says",
+		"$%d for %d" % [paid, oil_held])
+	expect(Resources.amount(state, GameData.MONEY) == money_before + paid,
+		"and the money arrives")
+	expect(Resources.amount(state, GameData.OIL) == 0, "and the oil is gone")
+
+	# **Selling any tile of it sells the whole press.**
+	var torn := State.create(1402)
+	Resources.gain(torn, Building.cost_of(&"press"))
+	var plot := _room_for(torn, Vector2i(2, 2))
+	expect(Building.place(torn, &"press", plot), "a press to tear down")
+	var far: Vector2i = Building.footprint(&"press", plot)[3]
+	var back := Building.sell(torn, far)
+	expect(not back.is_empty(), "selling the far corner sells it", str(back))
+	for at in Building.footprint(&"press", plot):
+		expect(Farm.is_empty(torn, at),
+			"and every tile of it comes up", str(at))
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## Somewhere a thing of this size will fit, clear of everything.
+func _room_for(state: Dictionary, size: Vector2i) -> Vector2i:
+	for y in range(Grid.HEIGHT - size.y):
+		for x in range(Grid.WIDTH - size.x):
+			var origin := Vector2i(x, y)
+			var clear := true
+			for dy in size.y:
+				for dx in size.x:
+					if not Farm.buildable(state, origin + Vector2i(dx, dy)):
+						clear = false
+						break
+				if not clear:
+					break
+			if clear:
+				return origin
+	return Vector2i(-1, -1)
