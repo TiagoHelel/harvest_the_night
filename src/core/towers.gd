@@ -83,14 +83,17 @@ static func tick(state: Dictionary) -> void:
 	var occupants: Dictionary = state["occupants"]
 	for idx in _towers(state):
 		var tower: Dictionary = occupants[idx]
-		var entry: Dictionary = GameData.DEFENCES[tower["id"]]
+		var cell_of_it := Grid.cell(int(idx))
+		# **The levelled entry**, so a Torre Automatica is the gun tower's
+		# own row with its three numbers changed and nothing here knows.
+		var entry: Dictionary = Building.entry_at(state, cell_of_it)
 
 		var reload := int(tower.get("reload", 0))
 		if reload > 0:
 			tower["reload"] = reload - 1
 			continue
 
-		var cell := Grid.cell(int(idx))
+		var cell := cell_of_it
 		var target := _acquire(state, cell, entry)
 		if target == 0:
 			continue
@@ -105,13 +108,28 @@ static func tick(state: Dictionary) -> void:
 		# flamethrower worked. Task 0033's power assert was reading zero from
 		# a wall of crossbows that were firing perfectly well.
 		state["shots_fired"] = int(state.get("shots_fired", 0)) + 1
-		match StringName(entry.get("shape", GameData.SHAPE_SINGLE)):
-			GameData.SHAPE_CONE:
-				_burn_cone(state, cell, entry, target, armed)
-			GameData.SHAPE_LINE:
-				_pierce_line(state, cell, entry, target, armed)
-			_:
-				_fire(state, cell, tower["id"], entry, target, armed)
+		# **How many things it shoots at once.** `targets` has been in the
+		# table since it was written and nothing read it; it is what a level
+		# three tower gets, and it is the whole of the word "automatic" -
+		# a behaviour rather than a bigger number.
+		#
+		# Each extra target is acquired with the ones already taken excluded,
+		# so a tower with two barrels does not put both into the same zombie.
+		var barrels := maxi(int(entry.get("targets", 1)), 1)
+		var taken: Array = [target]
+		while taken.size() < barrels:
+			var another := _acquire(state, cell, entry, taken)
+			if another == 0:
+				break
+			taken.append(another)
+		for at in taken:
+			match StringName(entry.get("shape", GameData.SHAPE_SINGLE)):
+				GameData.SHAPE_CONE:
+					_burn_cone(state, cell, entry, int(at), armed)
+				GameData.SHAPE_LINE:
+					_pierce_line(state, cell, entry, int(at), armed)
+				_:
+					_fire(state, cell, tower["id"], entry, int(at), armed)
 
 		# **Asked fresh after every shot**, so a generator running dry part way
 		# through a night slows the guns from the next shot rather than from the
@@ -162,7 +180,8 @@ static func reach_of(state: Dictionary, entry: Dictionary) -> int:
 		+ Tech.bonus(state, "tower_range_bonus", 0)
 
 
-static func _acquire(state: Dictionary, from: Vector2i, entry: Dictionary) -> int:
+static func _acquire(state: Dictionary, from: Vector2i, entry: Dictionary,
+		skip: Array = []) -> int:
 	var reach := reach_of(state, entry)
 	if reach <= 0:
 		return 0
@@ -174,6 +193,9 @@ static func _acquire(state: Dictionary, from: Vector2i, entry: Dictionary) -> in
 	var best := 0
 	var best_threat := 1 << 30
 	for id in Entities.ids(state):
+		# Already being shot at by this tower's other barrel.
+		if skip.has(id):
+			continue
 		var cell := Entities.cell_of(state, id)
 		if cell.x < 0:
 			continue

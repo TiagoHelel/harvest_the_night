@@ -4731,3 +4731,73 @@ inside 480x270.
 
 `python tools/verify.py` prints PASS: 2306 asserts, 502 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+
+## 0064 - Tower I, II, automatic
+
+    a gun tower: 6 damage and 5 range at level one, 11 and 6 at three,
+      shooting 2 at once
+    over one night a level one gun tower killed 3; a level three killed 16,
+      for $625 of upgrades
+    a tower at half health upgraded: 60 of 120
+
+Three levels per tower, each **an entry in a table laid over the tower's own
+row**. A level three gun tower is `DEFENCES[&"gun_tower"]` with four numbers
+changed, and `Building.entry_at()` is the one place that does the laying-over
+- so `Towers` gets the upgraded answer without knowing levels exist, and a
+fourth level would be a row in the table.
+
+### What earns the word "automatic"
+
+`targets` had been in the gun tower's row since the table was written and
+nothing read it. It is what level three gives: a Torre Automatica picks a
+second target with the first one excluded and shoots both, which is a
+behaviour rather than a bigger number. Every tower's last level changes how it
+works rather than only how much - the crossbow gets a second target too, the
+mortar loses its minimum range (the thing that made it a decision rather than
+a purchase), and the flamethrower's fire lasts twice as long. The test asserts
+that for all four rather than for the one I happened to check.
+
+### Gated by the tree, and paid for on the spot
+
+Level two wants `true sights` and level three wants `oiled works` - the first
+and third of the defence branch. That makes the branch task 0063's journal
+recommended worth more than its own numbers, and it means upgrading is a thing
+you unlock once and then pay for every time.
+
+Upgrading also reads **`tower_cost_percent`**, which 0063 handed out and
+nothing asked for because `cost_of()` has no state to ask with. An upgrade
+does, so `a standing order` now makes every upgrade a quarter cheaper. One of
+the three gaps that task left is closed; `craft_percent` and `sell_percent`
+are still waiting for systems nobody has reopened.
+
+### Hit points carry proportionally
+
+A tower at half health that becomes a level three with more of them is still
+at half health - 60 of 120. Upgrading is not a repair, and a player who could
+mend a wall by upgrading it would never mend anything again.
+
+### Visible, without waiting for art
+
+One pip a level, above the tower. `_art_for()` asks for `gun_tower_lv2` first
+and `_texture_for()` falls back to the plain name, so per-level art is a map
+in `tools/sprite_maps.py` away and nothing in the view changes when it
+arrives. Until then a row of small bright squares is legible at sixteen pixels
+in a way a recoloured sprite is not, and a player can tell at a glance which
+towers they have paid to improve.
+
+### Middle click
+
+The third thing you can do to a cell in build mode, beside left to place and
+right to sell - three buttons rather than three modes. It writes
+`build_upgrade` into the intent and the rules decide, which is the same road
+the keyboard and the autoplayer take.
+
+### Hashes
+
+| | from | to | why |
+|---|---|---|---|
+| sim hash | `2915513296` | `1577582652` | a tower carries a level, and every tower now declares how many things it shoots at once |
+| data hash | `3501718695` | `219894722` | the level table, and `targets` on the three towers that lacked it |
+
+`python tools/verify.py` prints PASS: 2396 asserts, 502 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

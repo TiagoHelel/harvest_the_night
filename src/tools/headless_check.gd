@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 56
+const GROUPS := 57
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -120,6 +120,7 @@ func _run() -> void:
 	_task_0061_rewards()
 	_task_0062_tech()
 	_task_0063_tech_tree()
+	_task_0064_tower_levels()
 
 
 func _finish() -> void:
@@ -9995,3 +9996,197 @@ func _a_tree_on(state: Dictionary) -> Vector2i:
 	for cell in Farm.cells_with(state, &"tree"):
 		return cell
 	return Vector2i(-1, -1)
+
+
+## 0064 - Torre I, Torre II, Torre Automatica.
+func _task_0064_tower_levels() -> void:
+	# **Every level is an entry in data, and the table holds together.**
+	expect(GameData.TOP_TOWER_LEVEL == 3, "three levels",
+		str(GameData.TOP_TOWER_LEVEL))
+	for id in GameData.sorted_names(GameData.TOWER_LEVELS.keys()):
+		var steps: Array = GameData.TOWER_LEVELS[id]
+		expect(steps.size() == GameData.TOP_TOWER_LEVEL - 1,
+			"a %s has two upgrades" % id, str(steps.size()))
+		expect(GameData.DEFENCES.has(id),
+			"and %s is a defence that exists" % id)
+		var last := 0
+		for step in steps:
+			var one: Dictionary = step
+			expect(not Tech.node(StringName(one["needs"])).is_empty(),
+				"%s wants a tree node that exists: %s" % [id, one["needs"]])
+			expect(not (one["cost"] as Dictionary).is_empty(),
+				"and costs something", str(one["cost"]))
+			var price := _price_of(one["cost"])
+			expect(price > last,
+				"and each level costs more than the one before",
+				"%d against %d" % [price, last])
+			last = price
+			for key in GameData.sorted_names((one["gives"]
+				as Dictionary).keys()):
+				expect((GameData.DEFENCES[id] as Dictionary).has(key),
+					"%s level change touches a field it has: %s" % [id, key])
+
+	# **Upgrading in preparation works and costs what it says.** The
+	# done-when.
+	var farm := _a_prep_with_tech(6400, [])
+	var cell: Vector2i = _line_of_towers(farm, &"gun_tower", 1)[0]
+	expect(Building.level_at(farm, cell) == 1, "a new tower is level one",
+		str(Building.level_at(farm, cell)))
+	expect(Building.why_not_upgrade(farm, cell).contains("tree"),
+		"and cannot be upgraded until the tree allows it",
+		Building.why_not_upgrade(farm, cell))
+	expect(not Building.upgrade(farm, cell), "so it is refused")
+
+	# **The tree is a daytime thing** (task 0063), so the node was bought
+	# before the sun went down and the upgrade happens in preparation - which
+	# is exactly what the requirement asks for.
+	farm["phase"] = Phases.DAY
+	expect(Tech.buy(farm, &"true sights"), "the tree node is bought")
+	farm["phase"] = Phases.PREPARATION
+	expect(Building.can_upgrade(farm, cell), "and now it can be upgraded",
+		Building.why_not_upgrade(farm, cell))
+	var bill := Building.upgrade_cost(farm, cell)
+	var purse: Dictionary = {}
+	for res in GameData.sorted_names(bill.keys()):
+		purse[res] = Resources.amount(farm, res)
+	expect(Building.upgrade(farm, cell), "it upgrades")
+	expect(Building.level_at(farm, cell) == 2, "to level two",
+		str(Building.level_at(farm, cell)))
+	for res in GameData.sorted_names(bill.keys()):
+		expect(Resources.amount(farm, res)
+			== int(purse[res]) - int(bill[res]),
+			"and %s came out of the store, exactly what it said" % res,
+			str(Resources.amount(farm, res)))
+
+	# **Level three changes behaviour, not only numbers.**
+	expect(Building.why_not_upgrade(farm, cell).contains("tree"),
+		"level three wants its own node first",
+		Building.why_not_upgrade(farm, cell))
+	farm["phase"] = Phases.DAY
+	expect(Tech.buy(farm, &"long barrels") and Tech.buy(farm, &"oiled works"),
+		"which is deeper in the same branch")
+	farm["phase"] = Phases.PREPARATION
+	expect(Building.upgrade(farm, cell), "and then it goes to three")
+	expect(Building.level_at(farm, cell) == GameData.TOP_TOWER_LEVEL,
+		"the top level", str(Building.level_at(farm, cell)))
+	expect(Building.why_not_upgrade(farm, cell).contains("automatic"),
+		"and there is nowhere further to go",
+		Building.why_not_upgrade(farm, cell))
+
+	var plain: Dictionary = GameData.DEFENCES[&"gun_tower"]
+	var top := Building.entry_at(farm, cell)
+	print("  a gun tower: %d damage and %d range at level one, %d and %d at "
+		% [plain["damage"], plain["range"], top["damage"], top["range"]]
+		+ "three, shooting %d at once" % int(top.get("targets", 1)))
+	expect(int(top["targets"]) > int(plain.get("targets", 1)),
+		"a Torre Automatica shoots more than one thing at a time - which is "
+		+ "a behaviour, not a bigger number", str(top["targets"]))
+	for id in GameData.sorted_names(GameData.TOWER_LEVELS.keys()):
+		var last_step: Dictionary = (GameData.TOWER_LEVELS[id]
+			as Array)[GameData.TOP_TOWER_LEVEL - 2]
+		var changed := false
+		for key in ["targets", "min_range", "burn_ticks", "pierce"]:
+			if (last_step["gives"] as Dictionary).has(key):
+				changed = true
+		expect(changed,
+			"and every tower's last level changes how it works: %s" % id,
+			str(last_step["gives"]))
+
+	# **A level three tower is clearly better and clearly not free.** The
+	# other done-when, measured in a night rather than in the table.
+	var one_shot := _tower_over_a_night(6401, 1)
+	var upgraded := _tower_over_a_night(6401, 3)
+	print("  over one night a level one gun tower killed %d; a level three "
+		% one_shot["killed"] + "killed %d, for $%d of upgrades"
+		% [upgraded["killed"], upgraded["spent"]])
+	expect(int(upgraded["killed"]) > int(one_shot["killed"]),
+		"a level three kills more", "%d against %d"
+			% [upgraded["killed"], one_shot["killed"]])
+	expect(int(upgraded["spent"]) > 0,
+		"and it was not free", str(upgraded["spent"]))
+	expect(int(upgraded["spent"]) > _price_of(Building.cost_of(&"gun_tower")),
+		"in fact the two upgrades cost more than the tower did",
+		"%d against %d" % [upgraded["spent"],
+			_price_of(Building.cost_of(&"gun_tower"))])
+
+	# **Hit points carry proportionally.**
+	var hurt := _a_prep_with_tech(6402, [&"true sights"])
+	var wounded: Vector2i = _line_of_towers(hurt, &"gun_tower", 1)[0]
+	var full := int((GameData.DEFENCES[&"gun_tower"] as Dictionary)["hp"])
+	Farm.damage(hurt, wounded, full / 2)
+	expect(int(Farm.occupant(hurt, wounded)["hp"]) == full - full / 2,
+		"a tower at half health", str(Farm.occupant(hurt, wounded)["hp"]))
+	expect(Building.upgrade(hurt, wounded), "is upgraded")
+	var now_full := int(Building.entry_at(hurt, wounded)["hp"])
+	var left := int(Farm.occupant(hurt, wounded)["hp"])
+	print("  a tower at half health upgraded: %d of %d" % [left, now_full])
+	expect(left < now_full,
+		"and is still hurt - upgrading is not a repair", str(left))
+	expect(left > now_full / 3 and left <= now_full * 6 / 10,
+		"at about the share it was on", "%d of %d" % [left, now_full])
+
+	# **Not while they are coming.**
+	var night := _a_prep_with_tech(6403, [&"true sights"])
+	var after_dark: Vector2i = _line_of_towers(night, &"gun_tower", 1)[0]
+	_night_falls(night)
+	expect(Building.why_not_upgrade(night, after_dark).contains("coming"),
+		"the forge is shut once they are walking in",
+		Building.why_not_upgrade(night, after_dark))
+	expect(not Building.upgrade(night, after_dark), "and nothing is upgraded")
+
+	# **The tree's discount is read at last.**
+	var dear := _a_prep_with_tech(6404, [&"true sights"])
+	var thrifty := _a_prep_with_tech(6404, [&"true sights", &"long barrels",
+		&"oiled works", &"a standing order"])
+	var at_a: Vector2i = _line_of_towers(dear, &"gun_tower", 1)[0]
+	var at_b: Vector2i = _line_of_towers(thrifty, &"gun_tower", 1)[0]
+	expect(_price_of(Building.upgrade_cost(thrifty, at_b))
+		< _price_of(Building.upgrade_cost(dear, at_a)),
+		"a standing order makes upgrading cheaper - the node task 0063 "
+		+ "handed out and nothing asked for", "%d against %d"
+			% [_price_of(Building.upgrade_cost(thrifty, at_b)),
+				_price_of(Building.upgrade_cost(dear, at_a))])
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## One gun tower at a given level, one night, and what it killed.
+func _tower_over_a_night(seed_value: int, level: int) -> Dictionary:
+	var state := _a_prep_with_tech(seed_value, [&"true sights",
+		&"long barrels", &"oiled works"])
+	Building.place(state, &"generator",
+		_room_for(state, Building.size_of(&"generator")))
+	var cell: Vector2i = _line_of_towers(state, &"gun_tower", 1)[0]
+
+	var spent := 0
+	while Building.level_at(state, cell) < level:
+		spent += _price_of(Building.upgrade_cost(state, cell))
+		if not Building.upgrade(state, cell):
+			break
+	_night_falls(state)
+	Sim.advance(state, 1)
+
+	Pathing.refresh(state)
+	for _i in 30:
+		Enemies.spawn(state, &"walker", 0)
+	for _tick in 4000:
+		Sim.advance(state, 1)
+		if Entities.count(state) == 0:
+			break
+	return {"killed": int(state["killed"]), "spent": spent}
+
+
+## A preparation phase with the materials to build, and some of the tree
+## already bought.
+##
+## **The nodes are bought by day**, because task 0063 shut the tree after
+## dark: what a player does in preparation is spend what the daytime decided.
+func _a_prep_with_tech(seed_value: int, nodes: Array) -> Dictionary:
+	var state := State.create(seed_value)
+	Resources.gain(state, {GameData.WOOD: 900, GameData.STONE: 900,
+		GameData.IRON: 900, GameData.GUNPOWDER: 900, GameData.OIL: 900,
+		GameData.TECH: 40})
+	for id in nodes:
+		Tech.buy(state, StringName(id))
+	Phases.begin_preparation(state)
+	return state

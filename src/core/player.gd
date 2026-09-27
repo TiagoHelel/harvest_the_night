@@ -79,6 +79,9 @@ static func initial() -> Dictionary:
 			"build_cell": [-1, -1],
 			"build_place": false,
 			"build_sell": false,
+			# **Upgrading a tower in place**, task 0064. A third verb on the
+			# same road: the UI says where and what, the rules decide.
+			"build_upgrade": false,
 			# The button on the result screen. Same road as every other input,
 			# so the autoplayer of task 0067 can finish a night.
 			"confirm_result": false,

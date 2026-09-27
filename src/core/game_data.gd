@@ -622,6 +622,8 @@ const DEFENCES: Dictionary = {
 		# close as a fixed tick gets without pretending otherwise.
 		"reload_ticks": SECONDS / 2,    # LEVER: ticks, 5-30
 		"ammo": {INCENDIARY: 1},
+		# One thing at a time until a level says otherwise.
+		"targets": 1,
 		"ammo_every_ticks": 2 * SECONDS,
 		"energy_draw": 2,
 	},
@@ -650,6 +652,8 @@ const DEFENCES: Dictionary = {
 		"aim": AIM_BALLISTIC,
 		"flight_ticks": 45,             # LEVER: ticks in the air, 20-75
 		"ammo": {GUNPOWDER: 1},
+		# One thing at a time until a level says otherwise.
+		"targets": 1,
 		"energy_draw": 1,
 	},
 	&"auto_crossbow": {
@@ -683,7 +687,9 @@ const DEFENCES: Dictionary = {
 		# Another fraction turned into a percentage, after `WATER_GROWTH_BONUS`
 		# (0029), `BROWNOUT_RATE` (0033) and `splash_falloff` (0044). The table
 		# was written in fractions; the rules want integers.
-		"pierce_falloff_percent": 20,   # LEVER: percent of the original, 10-40
+		"pierce_falloff_percent": 20,
+		# One thing at a time until a level says otherwise.
+		"targets": 1,   # LEVER: percent of the original, 10-40
 		"energy_draw": 3,               # hungry: the reason to build a generator
 	},
 	&"mine": {
@@ -1302,6 +1308,65 @@ const REWARDS: Dictionary = {
 	"house_untouched_bonus": 25,        # LEVER: money, 10-50
 	"tech_points": 1,                   # LEVER: per night survived, 1-2
 }
+
+## What a tower becomes, twice. `design.md` section 12 draws it as
+## Torre I -> Torre II -> Torre Automatica.
+##
+## **Entries in a table, not subclasses.** A level is a handful of fields laid
+## over the tower's own, so a level three gun tower is `DEFENCES[&"gun_tower"]`
+## with three numbers changed - and `Building.entry_at()` is the one place
+## that does the laying-over. Adding a fourth level is a row here.
+##
+## ## Level three earns the word "automatic"
+##
+## Each one ends in a **behaviour** change rather than another number: the gun
+## tower and the crossbow start shooting two things at once (`targets`, which
+## has been in the table since it was written and read by nothing), the mortar
+## stops needing a minimum range, and the flamethrower's fire lasts twice as
+## long. A level three that was only bigger numbers would be a lever with a
+## price tag on it.
+##
+## ## Gated by the tree as well as by the purse
+##
+## Level two wants `true sights` and level three wants `oiled works` - the
+## first and third of the defence branch. That is deliberate: it makes the
+## branch task 0063's journal recommends worth more than its own numbers, and
+## it means upgrading is a thing you unlock once and then pay for every time.
+const TOWER_LEVELS: Dictionary = {
+	&"gun_tower": [
+		{"needs": &"true sights", "cost": {WOOD: 10, IRON: 20},
+			"gives": {"damage": 9, "hp": 90, "range": 6}},
+		{"needs": &"oiled works", "cost": {IRON: 35, GUNPOWDER: 10},
+			"gives": {"damage": 11, "hp": 120, "range": 6, "targets": 2}},
+	],
+	&"auto_crossbow": [
+		{"needs": &"true sights", "cost": {WOOD: 15, IRON: 25},
+			"gives": {"damage": 7, "hp": 75, "pierce": 6}},
+		{"needs": &"oiled works", "cost": {IRON: 40, GUNPOWDER: 15},
+			"gives": {"damage": 9, "hp": 100, "pierce": 7, "targets": 2}},
+	],
+	&"mortar": [
+		{"needs": &"true sights", "cost": {STONE: 25, IRON: 30},
+			"gives": {"damage": 55, "hp": 80, "splash_tiles": 2}},
+		{"needs": &"oiled works", "cost": {IRON: 45, GUNPOWDER: 25},
+			# **No minimum range.** The thing that made a mortar a decision
+			# rather than a purchase, lifted - which is what the last level
+			# of anything should be worth.
+			"gives": {"damage": 70, "hp": 110, "splash_tiles": 3,
+				"min_range": 0}},
+	],
+	&"flame_tower": [
+		{"needs": &"true sights", "cost": {WOOD: 15, IRON: 20, OIL: 10},
+			"gives": {"damage": 4, "hp": 95, "burn_damage": 3}},
+		{"needs": &"oiled works", "cost": {IRON: 35, OIL: 25},
+			"gives": {"damage": 5, "hp": 130, "burn_damage": 4,
+				"burn_ticks": 6 * SECONDS}},
+	],
+}
+
+## The most any tower can be upgraded to. Level one is the thing as built.
+const TOP_TOWER_LEVEL := 3
+
 
 ## The tech tree: twelve nodes, three branches, four deep.
 ##
@@ -2285,4 +2350,5 @@ static func digest() -> int:
 		"defeat": [DEFEAT_LOSS_PERCENT, DEFEAT_KEEPS_MONEY,
 			DEFEAT_KEEPS_TECH],
 		"tech": [TECH_BONUSES, TECH_TREE, TECH_REFUND_PERCENT],
+		"levels": [TOWER_LEVELS, TOP_TOWER_LEVEL],
 	})

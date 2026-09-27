@@ -185,6 +185,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		# **Right click sells**, and only in build mode: a stray right click
 		# while farming should not take a tower down.
 		intent["build_sell"] = true
+	elif click.button_index == MOUSE_BUTTON_MIDDLE:
+		# **Middle click upgrades**, so the three things you can do to a cell
+		# in build mode are three buttons rather than three modes.
+		intent["build_upgrade"] = true
 		get_viewport().set_input_as_handled()
 
 

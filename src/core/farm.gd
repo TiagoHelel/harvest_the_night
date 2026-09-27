@@ -299,6 +299,15 @@ static func remove(state: Dictionary, cell: Vector2i) -> bool:
 
 ## Something went up or came down. Anything that caches a fact about the shape
 ## of the farm watches this number.
+## Tell everything that caches against the farm that it has changed.
+##
+## **For a change that is not a placement or a removal**: an upgraded tower is
+## the same occupant on the same cell with a different range, and the
+## targeting list and the flow field both hold opinions that are now stale.
+static func touch(state: Dictionary) -> void:
+	_changed(state)
+
+
 static func _changed(state: Dictionary) -> void:
 	state["grid_version"] = int(state["grid_version"]) + 1
 

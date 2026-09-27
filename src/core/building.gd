@@ -86,6 +86,129 @@ static func entry_of(id: StringName) -> Variant:
 	return null
 
 
+# ------------------------------------------------------------- the levels
+
+## What level the thing on this cell is. One is as built.
+static func level_at(state: Dictionary, cell: Vector2i) -> int:
+	return maxi(int(Farm.occupant(state, cell).get("level", 1)), 1)
+
+
+## The table entry for what is standing here, **with its level laid over it**.
+##
+## The one place a level means anything. A level three gun tower is the gun
+## tower's own row with three numbers changed, so everything that reads a
+## tower - what it hits for, how far it sees, how long it reloads - gets the
+## upgraded answer without knowing levels exist.
+static func entry_at(state: Dictionary, cell: Vector2i) -> Dictionary:
+	var on := Farm.occupant(state, cell)
+	if on.is_empty():
+		return {}
+	var base: Variant = entry_of(StringName(on["id"]))
+	if base == null:
+		return {}
+	var level := maxi(int(on.get("level", 1)), 1)
+	if level <= 1:
+		return base
+	var out: Dictionary = (base as Dictionary).duplicate(true)
+	for step in _levels_of(StringName(on["id"])).slice(0, level - 1):
+		for key in GameData.sorted_names(((step as Dictionary)["gives"]
+			as Dictionary).keys()):
+			out[key] = ((step as Dictionary)["gives"] as Dictionary)[key]
+	return out
+
+
+## The upgrade steps a tower has, or an empty list for something that has none.
+static func _levels_of(id: StringName) -> Array:
+	return GameData.TOWER_LEVELS.get(id, [])
+
+
+## What upgrading this cell one level would cost, the tree's discount applied.
+static func upgrade_cost(state: Dictionary, cell: Vector2i) -> Dictionary:
+	var on := Farm.occupant(state, cell)
+	if on.is_empty():
+		return {}
+	var steps := _levels_of(StringName(on["id"]))
+	var level := level_at(state, cell)
+	if level - 1 >= steps.size():
+		return {}
+	var cost: Dictionary = (steps[level - 1] as Dictionary)["cost"]
+	# **`tower_cost_percent`, read at last.** Task 0063 handed this number
+	# out and nothing asked for it, because `cost_of()` has no state to ask
+	# with. An upgrade does.
+	var percent := Tech.bonus(state, "tower_cost_percent", 100)
+	var out := {}
+	for res in GameData.sorted_names(cost.keys()):
+		out[res] = maxi(int(cost[res]) * percent / 100, 1)
+	return out
+
+
+## What the tree node for the next level is, or `&""`.
+static func upgrade_needs(state: Dictionary, cell: Vector2i) -> StringName:
+	var on := Farm.occupant(state, cell)
+	if on.is_empty():
+		return &""
+	var steps := _levels_of(StringName(on["id"]))
+	var level := level_at(state, cell)
+	if level - 1 >= steps.size():
+		return &""
+	return StringName((steps[level - 1] as Dictionary)["needs"])
+
+
+## Why this cell cannot be upgraded, in words. Empty when it can.
+static func why_not_upgrade(state: Dictionary, cell: Vector2i) -> String:
+	var on := Farm.occupant(state, cell)
+	if on.is_empty():
+		return "nothing there"
+	if _levels_of(StringName(on["id"])).is_empty():
+		return "a %s does not upgrade" % on["id"]
+	if level_at(state, cell) >= GameData.TOP_TOWER_LEVEL:
+		return "already automatic"
+	# **Not while they are coming.** The same rule the tech tree follows: an
+	# upgrade is a decision made before the night, not a button pressed
+	# during it.
+	if int(state["phase"]) == Phases.NIGHT:
+		return "not while they are coming"
+	var needs := upgrade_needs(state, cell)
+	if needs != &"" and not Tech.owns(state, needs):
+		return "needs %s from the tree" % needs
+	if not Resources.can_afford(state, upgrade_cost(state, cell)):
+		var short := Resources.missing(state, upgrade_cost(state, cell))
+		var parts: Array = []
+		for res in GameData.sorted_names(short.keys()):
+			parts.append("%d %s" % [short[res], res])
+		return "short " + ", ".join(parts)
+	return ""
+
+
+static func can_upgrade(state: Dictionary, cell: Vector2i) -> bool:
+	return why_not_upgrade(state, cell).is_empty()
+
+
+## Upgrade the tower on this cell. False and nothing spent when it will not go.
+##
+## **Hit points carry proportionally.** A tower at half health that becomes a
+## level three with more of them is still at half health: upgrading is not a
+## repair, and a player who could mend a wall by upgrading it would never mend
+## anything again.
+static func upgrade(state: Dictionary, cell: Vector2i) -> bool:
+	if not can_upgrade(state, cell):
+		return false
+	if not Resources.pay(state, upgrade_cost(state, cell)):
+		return false
+
+	var on := Farm.occupant(state, cell)
+	var was_full := int(entry_at(state, cell).get("hp", 1))
+	var share := int(on.get("hp", was_full)) * 100 / maxi(was_full, 1)
+
+	on["level"] = level_at(state, cell) + 1
+	var now_full := int(entry_at(state, cell).get("hp", 1))
+	on["hp"] = maxi(now_full * share / 100, 1)
+	# A tower whose range or shape changed is a different tower to the
+	# targeting code, and the field has an opinion about occupants.
+	Farm.touch(state)
+	return true
+
+
 static func is_placeable(id: StringName) -> bool:
 	return entry_of(id) != null
 
@@ -326,9 +449,11 @@ static func tick(state: Dictionary) -> void:
 	var intent: Dictionary = state["intent"]
 	var place_asked := bool(intent.get("build_place", false))
 	var sell_asked := bool(intent.get("build_sell", false))
+	var upgrade_asked := bool(intent.get("build_upgrade", false))
 	intent["build_place"] = false
 	intent["build_sell"] = false
-	if not (place_asked or sell_asked):
+	intent["build_upgrade"] = false
+	if not (place_asked or sell_asked or upgrade_asked):
 		return
 
 	var at: Array = intent.get("build_cell", [-1, -1])
@@ -336,6 +461,9 @@ static func tick(state: Dictionary) -> void:
 	if not Grid.in_bounds(cell):
 		return
 
+	if upgrade_asked:
+		upgrade(state, cell)
+		return
 	if sell_asked:
 		sell(state, cell)
 		return

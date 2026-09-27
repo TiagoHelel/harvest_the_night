@@ -515,6 +515,18 @@ func _refresh() -> void:
 		sprite.position = Vector2(cell) * float(GameData.TILE_SIZE)
 		_occupants.add_child(sprite)
 		_sprites.append(sprite)
+		# **One pip a level, above the tower.** The art for a Torre II does
+		# not exist yet and this does not wait for it: a player has to be
+		# able to tell at a glance which of their towers they have paid to
+		# improve, and a row of small bright squares is legible at sixteen
+		# pixels in a way that a recoloured sprite is not.
+		for pip in maxi(int(on.get("level", 1)) - 1, 0):
+			var mark := ColorRect.new()
+			mark.color = Color(1.0, 0.86, 0.42, 0.95)
+			mark.position = Vector2(cell) * float(GameData.TILE_SIZE) 				+ Vector2(2.0 + pip * 4.0, 1.0)
+			mark.size = Vector2(3.0, 3.0)
+			_occupants.add_child(mark)
+			_sprites.append(mark)
 
 
 ## Everything alive that is not the player.

@@ -1,7 +1,7 @@
 # 0064 - Tower I, II, automatic
 
 - **Phase:** 4 - Ten nights and progression
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0063, 0042
 - **Likely files:** src/core/towers.gd, src/core/game_data.gd
 
