@@ -28,6 +28,23 @@ extends RefCounted
 ## wave behind it walks past untouched - which looks exactly like the towers
 ## being too weak and is not.
 
+## Whether anything with `is_boss` is on the farm right now. The night HUD
+## puts a name and a health bar up for it.
+static func boss_here(state: Dictionary) -> int:
+	for id in Entities.ids(state):
+		var kind: StringName = Entities.get_one(state, id).get("kind", &"")
+		if kind == &"":
+			continue
+		if bool((GameData.ENEMIES[kind] as Dictionary).get("is_boss", false)):
+			return id
+	return 0
+
+
+## How many bosses have been put down this run.
+static func bosses_down(state: Dictionary) -> int:
+	return int(state.get("bosses_down", 0))
+
+
 ## What lands however good the armour is.
 const MINIMUM_HIT := 1
 
@@ -110,6 +127,11 @@ static func _kill(state: Dictionary, id: int) -> void:
 	var by_kind: Dictionary = state["killed_by_kind"]
 	var kind: StringName = one["kind"]
 	by_kind[kind] = int(by_kind.get(kind, 0)) + 1
+	# **A boss going down is a fact about the run**, not about the night.
+	# `is_boss` had been in the table since it was written and nothing read
+	# it; task 0066 ends the run on this.
+	if bool((GameData.ENEMIES[kind] as Dictionary).get("is_boss", false)):
+		state["bosses_down"] = int(state.get("bosses_down", 0)) + 1
 
 	Entities.remove(state, id)
 	# **Nothing is left pointing at it.** A projectile chasing a dead id is
@@ -121,6 +143,9 @@ static func initial() -> Dictionary:
 	return {
 		"killed": 0,
 		"killed_by_kind": {},
+		# How many bosses this run has put down. The MVP has one, and task
+		# 0066 ends the run when it falls.
+		"bosses_down": 0,
 		# {entity id: {"left": ticks, "damage": per second, "next": ticks}}
 		"burning": {},
 	}

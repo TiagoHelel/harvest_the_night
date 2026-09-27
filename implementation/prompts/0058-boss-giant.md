@@ -1,7 +1,7 @@
 # 0058 - The Giant
 
 - **Phase:** 3 - The full night
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0051, 0052, 0057
 - **Likely files:** src/core/enemies.gd, src/core/game_data.gd
 

@@ -405,6 +405,19 @@ func _draw_highlight() -> void:
 
 	var size := float(GameData.TILE_SIZE)
 
+	# **What the Giant is about to hit.** A ring closing on the cell it has
+	# picked, so the second the telegraph buys is a second the player can see
+	# and spend. Drawn from the rules' own wind-up, so it cannot promise a
+	# blow that is not coming.
+	for id in Entities.ids(_state):
+		var aimed := Enemies.winding_at(_state, id)
+		if aimed.x < 0:
+			continue
+		var middle := (Vector2(aimed) + Vector2(0.5, 0.5)) * size
+		var swing := fmod(float(Time.get_ticks_msec()) / 400.0, 1.0)
+		_highlight.draw_arc(middle, size * (1.4 - 0.6 * swing), 0.0, TAU, 24,
+			Color(1.0, 0.45, 0.30, 0.9), 2.0, true)
+
 	# **The flare.** An expanding ring at the player's feet, fading as it goes,
 	# so the one button reads as something that happened *there* rather than a
 	# number changing in a corner.

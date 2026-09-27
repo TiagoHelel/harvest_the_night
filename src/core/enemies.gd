@@ -7,6 +7,20 @@ extends RefCounted
 ## bite out of it when they arrive. Tasks 0050 to 0052 give them reasons to be
 ## told apart.
 ##
+## ## A heavy blow is announced before it lands
+##
+## An enemy with `telegraph_ticks` winds up the first time it swings at
+## something, standing there for a second before anything is damaged. Only the
+## Giant has one, and it is the difference between a wall vanishing and a wall
+## you were given a second to do something about - a flare, a barricade, or
+## simply getting out of the way.
+##
+## **It costs the swing nothing.** The wind-up is the front of the first wait,
+## not an extra one: blows land on `ticks_per_tile` as they always did, and
+## what the telegraph buys is that the *first* one is seen coming and every
+## one after it is visibly imminent. A boss that hit more slowly for having a
+## tell would be a boss you would rather it did not have.
+##
 ## ## What they are walking towards
 ##
 ## Most of them are walking at the house. A **runner** goes round what you
@@ -111,6 +125,11 @@ static func _walk(state: Dictionary, id: int) -> void:
 	var on := Vector2i(int(one["pos"][0]) / Player.SUBTILE,
 		int(one["pos"][1]) / Player.SUBTILE)
 	if Farm.occupant(state, on).get("id", &"") == &"house":
+		# **The house is announced too.** Something that takes forty hit
+		# points off the roof in one blow does not get to do it on the tick
+		# it arrives.
+		if not _swung_at_the_house(state, id, data, on):
+			return
 		_bite(state, id, data)
 		return
 
@@ -193,6 +212,25 @@ static func _walk(state: Dictionary, id: int) -> void:
 		_bite(state, id, data)
 
 
+## Whether a telegraphing enemy has finished winding up at the house. True at
+## once for everything that does not telegraph.
+static func _swung_at_the_house(state: Dictionary, id: int,
+		data: Dictionary, cell: Vector2i) -> bool:
+	var telegraph := int(data.get("telegraph_ticks", 0))
+	if telegraph <= 0:
+		return true
+	var one := Entities.get_one(state, id)
+	if int(one.get("winding_at", -1)) != Grid.index(cell):
+		one["winding_at"] = Grid.index(cell)
+		one["chew_wait"] = telegraph
+		return false
+	var wait := int(one.get("chew_wait", 0))
+	if wait > 0:
+		one["chew_wait"] = wait - 1
+		return false
+	return true
+
+
 ## Reaching the house costs the house and costs the zombie: it is spent.
 ## No way through, so take the way through apart.
 ##
@@ -246,6 +284,13 @@ static func _gnaw(state: Dictionary, id: int, data: Dictionary,
 	var one := Entities.get_one(state, id)
 	if one.is_empty():
 		return
+	# **The wind-up, once per target.** Turning to something new is what a
+	# player sees; from then on the wait itself is the tell.
+	var telegraph := int(data.get("telegraph_ticks", 0))
+	if telegraph > 0 and int(one.get("winding_at", -1)) != Grid.index(cell):
+		one["winding_at"] = Grid.index(cell)
+		one["chew_wait"] = telegraph
+		return
 	var wait := int(one.get("chew_wait", 0))
 	if wait > 0:
 		one["chew_wait"] = wait - 1
@@ -258,6 +303,25 @@ static func _gnaw(state: Dictionary, id: int, data: Dictionary,
 	var percent := int(data.get("structure_damage_percent", 100))
 	Farm.damage(state, cell, maxi(int(data["damage"]) * percent / 100, 1))
 	one["chewing"] = Grid.index(cell)
+
+
+## Whether this one is winding up a blow rather than walking. For the view,
+## and for the asserts.
+static func is_winding(state: Dictionary, id: int) -> bool:
+	var one := Entities.get_one(state, id)
+	if one.is_empty() or int(one.get("winding_at", -1)) < 0:
+		return false
+	var telegraph := int((GameData.ENEMIES[one["kind"]] as Dictionary)
+		.get("telegraph_ticks", 0))
+	return telegraph > 0 and int(one.get("chew_wait", 0)) > 0
+
+
+## The cell a wind-up is aimed at, or `(-1, -1)`.
+static func winding_at(state: Dictionary, id: int) -> Vector2i:
+	var one := Entities.get_one(state, id)
+	var idx := int(one.get("winding_at", -1))
+	return Grid.cell(idx) if idx >= 0 and is_winding(state, id) \
+		else Vector2i(-1, -1)
 
 
 ## The four cells around a cell, in a fixed order.

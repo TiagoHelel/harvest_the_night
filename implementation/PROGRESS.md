@@ -4253,3 +4253,75 @@ rather than eight more ASCII maps to keep in step.
 
 `python tools/verify.py` prints PASS: 1814 asserts, 463 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+
+## 0058 - The Giant
+
+Nine hundred hit points, fifty ticks a tile, six armour, four hundred percent
+against anything it walks into, and the only `is_boss` in the table. The
+numbers were all there; what the Giant did not have was the two fields nothing
+read - `telegraph_ticks` and `is_boss`.
+
+### One readable telegraph
+
+An enemy with `telegraph_ticks` winds up the first time it swings at
+something: thirty ticks of standing there, measured, before a wall loses a hit
+point. Only the Giant has one, and it is the difference between a wall
+vanishing and a wall you were given a second to do something about.
+
+**It costs the swing nothing.** The wind-up is the front of the first wait
+rather than an extra one, so blows still land on `ticks_per_tile` and what the
+tell buys is that the first is seen coming. A boss that hit more slowly for
+having a tell would be a boss you would rather it did not have.
+
+After a blow it goes straight into winding up the next, which the assert
+originally denied and was wrong about. The tell is continuous while it is
+working on one thing, so the player's question is never "is it about to swing"
+but "how long have I got" - and that is the better question.
+
+### Measured
+
+    a giant swings after 30 ticks of wind-up; the lever says 30
+    a giant against 16 crossbows ($2720): got in with 130 hp left.
+      Against 4 mortars ($2660): killed in 1147 ticks
+    a mixed defence ($3340) kills it in 845 ticks, 406 before it would have
+      reached the house (13.5s of room)
+    sealed in with wall: the giant got in after 1284 ticks
+    sealed in with gun_tower: the giant got in after 1284 ticks
+
+The middle line is the requirement, and it is the shape task 0051 could not
+find for the tank: **the same money, opposite outcomes, and the concentrated
+build is the cheaper one.** Sixteen crossbows cost more than four mortars and
+lose; four mortars kill it with a hundred ticks in hand. Armour six floors a
+five-damage bolt at the minimum hit, so a crossbow line is paying for rate it
+cannot use - which is the sentence the tank was supposed to write and the
+Giant actually does.
+
+A crossbow line *can* beat it with enough of them: twenty ($3400) kill it in
+889 ticks. It costs more than the mixed build and leaves less room, which is
+the right shape for "cheap towers are not the answer" rather than "cheap
+towers are forbidden".
+
+### No softlock, either way round
+
+Walled in behind a full column it ploughs through, because task 0049 priced
+walls. Ringed by gun towers - which declare no path cost and are holes in the
+map - it falls through to the sealed-in chew that task 0046 put there. Both
+end with it in the house at 1284 ticks and neither ends with it standing
+still, which is the done-when.
+
+### What 0066 gets
+
+`Combat` counts `bosses_down` and can name the boss on the farm. The night HUD
+puts a bar and a name up for it, flashing while it winds up, so the second the
+telegraph buys is a second the player can see. Ending the run on that number
+is task 0066's job, and the number is waiting for it.
+
+### Hashes
+
+| | from | to | why |
+|---|---|---|---|
+| sim hash | `694966054` | `2087687126` | the state gained `bosses_down`, and a telegraphing enemy's first blow lands thirty ticks later than it used to |
+| data hash | `158064256` | `158064256` | **unchanged** - no lever moved, the two that had been sitting there are simply read now |
+
+`python tools/verify.py` prints PASS: 1857 asserts, 463 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 50
+const GROUPS := 51
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -114,6 +114,7 @@ func _run() -> void:
 	_task_0055_speed()
 	_task_0056_night_hud()
 	_task_0057_structures()
+	_task_0058_giant()
 
 
 func _finish() -> void:
@@ -8844,3 +8845,281 @@ func _a_ruined_night(seed_value: int) -> Dictionary:
 			Enemies.spawn_cells(state, 0)[0]),
 		"can_build": _room_for(state, Vector2i(1, 1)) != Vector2i(-1, -1),
 	}
+
+
+## 0058 - the Giant: nine nights of building, tested by one thing.
+func _task_0058_giant() -> void:
+	var giant: Dictionary = GameData.ENEMIES[&"giant"]
+
+	# **The biggest, the slowest, the best armoured, and the only boss.**
+	for id in GameData.sorted_names(GameData.ENEMIES.keys()):
+		if id == &"giant":
+			continue
+		var one: Dictionary = GameData.ENEMIES[id]
+		expect(int(one["hp"]) < int(giant["hp"]),
+			"a giant outlasts a %s" % id, str(one["hp"]))
+		expect(int(one["ticks_per_tile"]) < int(giant["ticks_per_tile"]),
+			"and is slower than one - you watch it come", str(one))
+		expect(int(one.get("armour", 0)) < int(giant["armour"]),
+			"and better armoured", str(one.get("armour", 0)))
+		expect(not bool(one.get("is_boss", false)),
+			"and it is the only boss in the table", id)
+	expect(int(giant["structure_damage_percent"]) > 100,
+		"it smashes what it walks into", str(giant["structure_damage_percent"]))
+	expect(not bool(giant["targets_structures"]),
+		"but it does not go looking - that is the breaker's job")
+
+	# **It arrives with company**, so the player cannot aim everything at it.
+	var last: Array = GameData.NIGHTS[GameData.MVP_NIGHTS - 1]
+	var with_it := 0
+	var boss_waves := 0
+	for row in last:
+		if StringName((row as Array)[0]) == &"giant":
+			boss_waves += 1
+		else:
+			with_it += int((row as Array)[1])
+	expect(boss_waves == 1, "the last night has exactly one giant in it",
+		str(boss_waves))
+	expect(with_it >= 20,
+		"and a crowd of ordinary zombies around it", str(with_it))
+	var seen := 0
+	for night in GameData.NIGHTS:
+		for row in night:
+			if StringName((row as Array)[0]) == &"giant":
+				seen += 1
+	expect(seen == 1, "and it appears once in the ten nights", str(seen))
+
+	# **One readable telegraph before the heavy blow.** The requirement.
+	var wind := _giant_winds_up(4300)
+	print("  a giant swings after %d ticks of wind-up; the lever says %d"
+		% [wind["waited"], giant["telegraph_ticks"]])
+	expect(wind["waited"] == int(giant["telegraph_ticks"]),
+		"it stands there for exactly the telegraph before anything breaks",
+		"%d against %d" % [wind["waited"], giant["telegraph_ticks"]])
+	expect(wind["was_winding"],
+		"and it is visibly winding up the whole time", str(wind))
+	expect(wind["damage"] > 0, "then the blow lands", str(wind))
+	expect(wind["damage"] == int(giant["damage"])
+		* int(giant["structure_damage_percent"]) / 100,
+		"for four times its own damage, which is why it is announced",
+		str(wind["damage"]))
+	# **And then it is winding up the next one.** The tell is continuous
+	# while it is working on the same thing, which is what a player wants:
+	# the question is never "is it about to swing", it is "how long have I
+	# got". Asserted rather than assumed, because the first version of this
+	# line claimed the opposite and was wrong.
+	expect(wind["winding_after"],
+		"and it goes straight into winding up the next blow", str(wind))
+
+	# A walker has no tell, because it does not need one.
+	var plain := _giant_winds_up(4301, &"walker")
+	expect(plain["waited"] == 0,
+		"a walker bites on the tick it arrives - only a heavy blow is "
+		+ "announced", str(plain["waited"]))
+
+	# **Killing it is a fact about the run.**
+	var arena := _fresh_night(4302)
+	expect(Combat.bosses_down(arena) == 0, "no boss down yet")
+	expect(Combat.boss_here(arena) == 0, "and none on the farm")
+	var boss := Entities.spawn(arena, &"giant", Farm.house_centre(arena)
+		+ Vector2i(6, 4))
+	expect(Combat.boss_here(arena) == boss,
+		"a giant on the farm is found", str(Combat.boss_here(arena)))
+	Combat.hit(arena, boss, int(giant["hp"]) * 2)
+	expect(not Entities.alive(arena, boss), "it goes down")
+	expect(Combat.bosses_down(arena) == 1,
+		"and the run remembers - task 0066 ends on this",
+		str(Combat.bosses_down(arena)))
+	expect(Combat.boss_here(arena) == 0, "with none left on the farm")
+
+	# **It never softlocks the night by becoming unreachable.** The done-when,
+	# both ways round: walled in, and ringed by things with no way through.
+	for sealed_with in [&"wall", &"gun_tower"]:
+		var boxed := _giant_sealed_in(4303, sealed_with)
+		print("  sealed in with %s: the giant %s"
+			% [sealed_with, "got in after %d ticks" % boxed["ticks"]
+				if boxed["got_in"] else "is still out there"])
+		expect(boxed["got_in"],
+			"sealed in behind %s it breaks through rather than standing "
+				% sealed_with + "there for ever", str(boxed))
+		expect(boxed["broke"] > 0,
+			"taking the %s apart to do it" % sealed_with, str(boxed))
+
+	# **A defence of only cheap towers cannot kill it in time**, and one that
+	# concentrates damage can - for less money.
+	var bolts := _giant_against(4304, [[&"auto_crossbow", 16]])
+	var shells := _giant_against(4304, [[&"mortar", 4]])
+	print("  a giant against %d crossbows ($%d): %s. Against %d mortars "
+		% [bolts["towers"], bolts["spend"],
+			"got in with %d hp left" % bolts["hp_left"] if bolts["got_in"]
+				else "killed in %d ticks" % bolts["ticks"], shells["towers"]]
+		+ "($%d): %s" % [shells["spend"],
+			"got in with %d hp left" % shells["hp_left"] if shells["got_in"]
+				else "killed in %d ticks" % shells["ticks"]])
+	expect(bolts["powered"] and shells["powered"],
+		"both farms had the power on, so this is about the towers",
+		"%s and %s" % [str(bolts["powered"]), str(shells["powered"])])
+	expect(bolts["got_in"],
+		"a line of nothing but crossbows does not stop it", str(bolts))
+	expect(not shells["got_in"],
+		"and concentrated damage does", str(shells))
+	expect(shells["spend"] <= bolts["spend"],
+		"for no more money - it is what the damage is shaped like, not how "
+		+ "much of it there is",
+		"$%d against $%d" % [shells["spend"], bolts["spend"]])
+
+	# **A well-built night nine defence beats it with something to spare.**
+	var good := _giant_against(4305, [[&"mortar", 4], [&"auto_crossbow", 4]])
+	var spare := int(good["arrives_at"]) - int(good["ticks"])
+	print("  a mixed defence ($%d) kills it in %d ticks, %d before it would "
+		% [good["spend"], good["ticks"], spare]
+		+ "have reached the house (%.1fs of room)"
+		% (float(spare) / float(GameData.TICK_HZ)))
+	expect(not good["got_in"], "a mixed defence kills it", str(good))
+	expect(spare > 5 * GameData.SECONDS,
+		"with seconds to spare rather than on the doorstep",
+		"%d ticks" % spare)
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## Put one in front of a wall and watch what it does before the wall loses
+## anything.
+func _giant_winds_up(seed_value: int,
+		kind: StringName = &"giant") -> Dictionary:
+	var state := _armed_prep(seed_value)
+	Pathing.refresh(state)
+	var spawn: Vector2i = Enemies.spawn_cells(state, 0)[0]
+	var route := _route_from(state, spawn)
+	var column: int = (route[2] as Vector2i).x
+	var hp := int((GameData.DEFENCES[&"wall"] as Dictionary)["hp"]) * 20
+	for y in Grid.HEIGHT:
+		var cell := Vector2i(column, y)
+		if Farm.buildable(state, cell):
+			Farm.place(state, cell, {"id": &"wall", "hp": hp})
+	_night_falls(state)
+	Pathing.refresh(state)
+
+	var one := Entities.spawn(state, kind, spawn)
+	var waited := 0
+	var was_winding := false
+	var damage := 0
+	var standing := _wall_hp_in_column(state, column)
+	for _tick in 6000:
+		Sim.advance(state, 1)
+		if not Entities.alive(state, one):
+			break
+		var now := _wall_hp_in_column(state, column)
+		if now < standing:
+			damage = standing - now
+			break
+		# Only count the ticks it spends winding up, not the walk in.
+		if Enemies.is_winding(state, one):
+			was_winding = true
+			waited += 1
+	return {
+		"waited": waited,
+		"was_winding": was_winding,
+		"damage": damage,
+		"winding_after": Enemies.is_winding(state, one),
+	}
+
+
+## A giant with no way out at all, and whether it makes one.
+func _giant_sealed_in(seed_value: int, with_what: StringName) -> Dictionary:
+	var state := _armed_prep(seed_value)
+	Resources.gain(state, {GameData.OIL: 900, GameData.IRON: 900,
+		GameData.WOOD: 900, GameData.STONE: 900})
+	Pathing.refresh(state)
+	var spawn: Vector2i = Enemies.spawn_cells(state, 0)[0]
+	var route := _route_from(state, spawn)
+	var column: int = (route[3] as Vector2i).x
+	var hp := int((GameData.DEFENCES[with_what] as Dictionary)["hp"])
+	var built := 0
+	for y in Grid.HEIGHT:
+		var cell := Vector2i(column, y)
+		if Farm.buildable(state, cell):
+			Farm.place(state, cell, {"id": with_what, "hp": hp})
+			built += 1
+	_night_falls(state)
+	Pathing.refresh(state)
+
+	var before := int(state["house_hp"])
+	var standing := built * hp
+	Entities.spawn(state, &"giant", spawn)
+	var ticks := 0
+	for tick in 12000:
+		Sim.advance(state, 1)
+		ticks = tick
+		if int(state["house_hp"]) < before or Entities.count(state) == 0:
+			break
+	var left := 0
+	for y in Grid.HEIGHT:
+		var on := Farm.occupant(state, Vector2i(column, y))
+		if StringName(on.get("id", &"")) == with_what:
+			left += int(on.get("hp", 0))
+	return {
+		"got_in": int(state["house_hp"]) < before,
+		"ticks": ticks,
+		"broke": standing - left,
+	}
+
+
+## One giant against one build, on a farm with the power on.
+func _giant_against(seed_value: int, mix: Array) -> Dictionary:
+	var state := _armed_prep(seed_value)
+	Resources.gain(state, {GameData.OIL: 4000, GameData.IRON: 4000,
+		GameData.WOOD: 4000, GameData.STONE: 4000, GameData.GUNPOWDER: 4000})
+	for _i in 6:
+		var plant := _room_for(state, Building.size_of(&"generator"))
+		if plant != Vector2i(-1, -1):
+			Building.place(state, &"generator", plant)
+
+	var spend := 0
+	var towers := 0
+	for pair in mix:
+		var id: StringName = (pair as Array)[0]
+		var placed := _line_of_towers(state, id, int((pair as Array)[1]))
+		towers += placed.size()
+		spend += _price_of(Building.cost_of(id)) * placed.size()
+	_night_falls(state)
+	Sim.advance(state, 1)
+
+	Pathing.refresh(state)
+	var spawn: Vector2i = Enemies.spawn_cells(state, 0)[0]
+	var boss := Entities.spawn(state, &"giant", spawn)
+	var before := int(state["house_hp"])
+	var last_hp := int((GameData.ENEMIES[&"giant"] as Dictionary)["hp"])
+	var ticks := 0
+	for tick in 12000:
+		Sim.advance(state, 1)
+		ticks = tick
+		if not Entities.alive(state, boss):
+			break
+		last_hp = int(Entities.get_one(state, boss).get("hp", 0))
+	return {
+		"towers": towers,
+		"spend": spend,
+		"ticks": ticks,
+		# **Killed or arrived?** Reaching the house takes it off the farm
+		# too, so "is it alive" answers both questions with the same word.
+		"got_in": int(state["house_hp"]) < before,
+		"hp_left": last_hp,
+		"arrives_at": _giant_walk_in(seed_value),
+		"powered": Power.percent(state) == 100,
+	}
+
+
+## How long an undefended farm gives them: the tick the giant would reach the
+## house on with nothing in its way.
+func _giant_walk_in(seed_value: int) -> int:
+	var state := _fresh_night(seed_value)
+	Pathing.refresh(state)
+	var spawn: Vector2i = Enemies.spawn_cells(state, 0)[0]
+	var before := int(state["house_hp"])
+	Entities.spawn(state, &"giant", spawn)
+	for tick in 12000:
+		Sim.advance(state, 1)
+		if int(state["house_hp"]) < before:
+			return tick
+	return 0

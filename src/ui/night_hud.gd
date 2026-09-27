@@ -52,6 +52,9 @@ var _house_back: ColorRect
 var _house_fill: ColorRect
 var _house_text: Label
 var _announce: Label
+var _boss_back: ColorRect
+var _boss_fill: ColorRect
+var _boss_name: Label
 var _bar: Control
 var _repair: Button
 var _flare: Button
@@ -98,6 +101,30 @@ func _ready() -> void:
 	add_child(_house_fill)
 
 	_house_text = _label("HouseNumbers", Vector2(170, 12), DIM)
+
+	# **The boss gets a bar of its own.** Nine nights of building are being
+	# tested by one thing, and a number in a corner is not how that should
+	# read.
+	_boss_back = ColorRect.new()
+	_boss_back.name = "BossBarBack"
+	_boss_back.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_boss_back.color = Color(0.14, 0.06, 0.10, 0.92)
+	_boss_back.position = Vector2(120, 30)
+	_boss_back.size = Vector2(240, 9)
+	_boss_back.visible = false
+	add_child(_boss_back)
+
+	_boss_fill = ColorRect.new()
+	_boss_fill.name = "BossBar"
+	_boss_fill.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_boss_fill.color = Color(0.86, 0.26, 0.30)
+	_boss_fill.position = Vector2(121, 31)
+	_boss_fill.size = Vector2(238, 7)
+	_boss_fill.visible = false
+	add_child(_boss_fill)
+
+	_boss_name = _label("BossName", Vector2(120, 40), WARM)
+	_boss_name.visible = false
 
 	# **The announcement, in the middle, where you are already looking.**
 	_announce = _label("WaveWarning", Vector2(0, 92), WARM)
@@ -229,7 +256,34 @@ func _refresh() -> void:
 			int(at[1])), seconds]
 		_announce.modulate = WARM if fmod(_pulse, 0.6) < 0.3 else DIM
 
+	_refresh_boss()
 	_refresh_controls()
+
+
+## The boss bar, up only while there is one on the farm.
+func _refresh_boss() -> void:
+	var boss := Combat.boss_here(_state)
+	var here := boss != 0
+	_boss_back.visible = here
+	_boss_fill.visible = here
+	_boss_name.visible = here
+	if not here:
+		return
+	var one := Entities.get_one(_state, boss)
+	var kind: StringName = one.get("kind", &"")
+	var full := maxi(int((GameData.ENEMIES[kind] as Dictionary)["hp"]), 1)
+	var share := clampf(float(int(one.get("hp", 0))) / float(full), 0.0, 1.0)
+	_boss_fill.size = Vector2(maxf(238.0 * share, 0.0), 7.0)
+	_boss_name.text = "%s  %d/%d" % [str(kind).to_upper(),
+		int(one.get("hp", 0)), full]
+	# **And it flashes while it is winding up**, which is the second the
+	# player has to do something about the blow.
+	if Enemies.is_winding(_state, boss):
+		_boss_name.modulate = DANGER if fmod(_pulse, 0.3) < 0.15 else WARM
+		_boss_fill.color = Color(1.0, 0.72, 0.30)
+	else:
+		_boss_name.modulate = WARM
+		_boss_fill.color = Color(0.86, 0.26, 0.30)
 
 
 func _refresh_controls() -> void:

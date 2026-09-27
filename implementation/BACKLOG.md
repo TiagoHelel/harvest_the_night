@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`#############...........`  **57 / 109 done**
+`#############...........`  **58 / 109 done**
 
-0 doing / 52 todo / 0 blocked across 9 phases.
+0 doing / 51 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0058 - The Giant**. The whole of what is left is
+First up: **0059 - Waves as data**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,25 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-52 task(s) left, the ready ones first, then what they
+51 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0058 - The Giant
-
-Ready to pick up.  Likely files: `src/core/enemies.gd, src/core/game_data.gd`.
-
-The single boss of the MVP: the test of the build you made over nine nights.
-
-- Very high hit points, slow, and it smashes structures on its way through
-- It arrives with ordinary zombies, so the player cannot aim everything at it
-- It forces concentrated damage: a defence of only cheap towers cannot kill it in time
-- One readable telegraph before its heavy attack
-- Beating it is the end of the MVP run
-
-  - done when: A well-built night 9 defence beats it with something to spare
-  - done when: A defence of nothing but crossbows loses to it
-  - done when: It never softlocks the night by becoming unreachable
 
 ### 0059 - Waves as data
 
@@ -125,7 +109,7 @@ When it breaks on someone else's machine, get enough to fix it without them.
 
 ### 0060 - The ten nights, authored
 
-Waits on 0059, 0058.  Likely files: `src/core/game_data.gd`.
+Waits on 0059.  Likely files: `src/core/game_data.gd`.
 
 Section 10 of the design document, as a real difficulty curve: tutorial, more, the runner, the tank, the breaker, the boss.
 
@@ -341,7 +325,7 @@ Section 3 of the loop diagram: defeat takes part of the stock. It has to hurt en
 
 ### 0066 - Night 10 and the end of the run
 
-Waits on 0060, 0058.  Likely files: `src/core/phases.gd, src/ui/result_screen.gd`.
+Waits on 0060.  Likely files: `src/core/phases.gd, src/ui/result_screen.gd`.
 
 **The MVP is complete here.** Beating the Giant ends the run with a summary that answers the design document's question.
 
@@ -865,7 +849,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0040** [The shop grows](prompts/0040-shop-full.md)
 - [x] **0041** [The first day teaches itself](prompts/0041-tutorial-day.md)
 
-## 3 - The full night  (16/17)
+## 3 - The full night  (17/17)
 
 - [x] **0042** [Data-driven defences](prompts/0042-defence-data.md)
 - [x] **0043** [The flamethrower tower](prompts/0043-tower-flame.md)
@@ -883,18 +867,18 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0055** [Double speed and skipping the night](prompts/0055-speed-controls.md)
 - [x] **0056** [The night HUD](prompts/0056-night-hud.md)
 - [x] **0057** [Structures take damage and die](prompts/0057-structure-damage.md)
-- [ ] **0058** [The Giant](prompts/0058-boss-giant.md)
+- [x] **0058** [The Giant](prompts/0058-boss-giant.md)
 
 ## 4 - Ten nights and progression  (0/12)
 
 - [ ] **0059** [Waves as data](prompts/0059-wave-data.md)
-- [ ] **0060** [The ten nights, authored](prompts/0060-ten-nights.md) - needs 0059, 0058
+- [ ] **0060** [The ten nights, authored](prompts/0060-ten-nights.md) - needs 0059
 - [ ] **0061** [Night rewards](prompts/0061-rewards.md) - needs 0059
 - [ ] **0062** [Technology points](prompts/0062-tech-points.md) - needs 0061
 - [ ] **0063** [The tech tree](prompts/0063-tech-tree.md) - needs 0062
 - [ ] **0064** [Tower I, II, automatic](prompts/0064-tower-upgrades.md) - needs 0063
 - [ ] **0065** [Losing a night costs you](prompts/0065-defeat.md) - needs 0061
-- [ ] **0066** [Night 10 and the end of the run](prompts/0066-run-end.md) - needs 0060, 0058
+- [ ] **0066** [Night 10 and the end of the run](prompts/0066-run-end.md) - needs 0060
 - [ ] **0067** [The autoplayer](prompts/0067-autoplayer.md) - needs 0059
 - [ ] **0068** [A balance sweep over the ten nights](prompts/0068-balance-sweep.md) - needs 0067
 - [ ] **0069** [Run statistics](prompts/0069-stats.md) - needs 0066
