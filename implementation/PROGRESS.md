@@ -179,3 +179,45 @@ Notes:
 - Carrot is in, though the reference sheet shows only wheat and corn:
   `design.md` section 5 names three crops and the document is the scope
   authority.
+
+## 0004 - Harden the headless check harness - done 2026-09-27
+
+What changed: the harness can no longer report success for work it did not do,
+and can no longer hang instead of failing. Three mechanisms, cheapest first: a
+group counter, a watchdog, and a new parse gate in `verify.py`.
+
+Files: src/tools/headless_check.gd, tools/verify.py
+
+Verify: PASS - 5 passed, 3 skipped. 57 asserts, 0 failed. Hash still 440001231
+(nothing here touches a rule). Whole run 7s warm, 8s from a deleted `.godot/`;
+`headless_check` itself 0.3s against its 10s budget.
+
+Notes:
+
+- **GDScript has no exceptions, and that is the whole problem.** A runtime
+  error prints, abandons the function it happened in, and returns to the
+  caller. A check that died half way would otherwise sail on to the end of the
+  file and print `0 failed` for asserts it never reached. Each `_task_NNNN_*`
+  group now increments `_completed` **as its last statement**, so an abandoned
+  group cannot count itself, and `_finish()` fails when fewer groups finished
+  than `GROUPS` says exist. Adding a group means bumping that constant.
+- **`--import` does not parse scripts.** Measured, not assumed: a script with
+  `not_a_real_function_anywhere()` in it imports clean and exits 0.
+  `--check-only --script` does compile, and exits 1 when it cannot. `verify.py`
+  gained a **script parse** row that runs it over every `.gd` - 8 scripts, 2.5s
+  - so a parse error is caught before any tool script gets the chance to
+  half-run.
+- **All three failure paths were tested, not assumed**, as the prompt insisted:
+  - a runtime error half way through a group: **exit 1 in 506ms**, reporting
+    `a check group did not finish - 1 of 2 completed`
+  - a parse error in `sim.gd`, a dependency: **exit 1 in 507ms**, and
+    `verify.py` also fails at the parse gate naming the file and the line
+  - `_initialize()` never returning at all: the watchdog ends the main loop at
+    **5.4s** with `0 of 2 completed`, instead of idling for ever
+- The watchdog is `_process()` returning `true`. `SceneTree` inherits
+  `MainLoop._process(delta) -> bool` and returning true ends the loop - checked
+  with a throwaway probe before relying on it. It is reached only when
+  `_initialize()` never returns, which is why the group counter is the fast
+  path and the watchdog is the backstop.
+- `verify.py`'s 120s timeout stays as the outermost belt. It is now the third
+  line of defence rather than the only one.

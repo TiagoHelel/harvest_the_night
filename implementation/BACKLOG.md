@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`#.......................`  **3 / 108 done**
+`#.......................`  **4 / 108 done**
 
-0 doing / 105 todo / 0 blocked across 9 phases.
+0 doing / 104 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0004 - Harden the headless check harness**. The whole of what is left is
+First up: **0005 - verify.py and the determinism guard**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,25 +26,25 @@ which rewrites this file for you.
 
 ## What is open
 
-105 task(s) left, the ready ones first, then what they
+104 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
-### 0004 - Harden the headless check harness
+### 0005 - verify.py and the determinism guard
 
-Ready to pick up.  Likely files: `src/tools/headless_check.gd, tools/verify.py`.
+Ready to pick up.  Likely files: `tools/verify.py, tools/determinism_hash.txt, src/tools/determinism.gd`.
 
-Task 0002 shipped `headless_check.gd` with its own asserts, because the house rule is that a rule ships with its test. It has one bad failure mode: **a script error before the final `quit()` leaves the SceneTree running forever**, so a broken check hangs the backlog loop instead of failing it. Fix that, and finish the harness.
+A bootstrap `tools/verify.py` already exists so that task 0001 had something to run. Finish it: write the determinism guard it is waiting for, and make the export check real.
 
-- A script error must end the run non-zero, not idle. Guard `_initialize()` so anything that escapes still prints and quits
-- `verify.py` already bounds it with a timeout; keep that as the belt to this task's braces, and make the timeout message stay accurate
-- Add the `GameData.validate()` asserts that task 0003 made possible
-- Asserts stay grouped by the task that introduced them, one function each, so a failure names the design that moved
-- No dependency on anything in `src/ui/`
+- Read the bootstrap first - the check order and the SKIP behaviour are already there and are not up for redesign
+- `determinism.gd` runs a fixed scripted scenario for a fixed number of ticks and prints one integer
+- `--accept` records a moved hash and prints the old and the new number; `--fast` skips the exports
+- The Godot executable comes from `$GODOT`, defaulting to `C:/Users/PC GAMER DA FAMILIA/Documents/Godot/Godot_v4.7.2-stable_win64_console.exe`
+- Every row is timed and the total is printed
 
-  - done when: Introducing a deliberate script error makes it exit non-zero within a second instead of hanging - test this, do not assume it
-  - done when: It finishes in under 10 seconds
-  - done when: It runs with no `.godot/` cache present
+  - done when: `python tools/verify.py` prints PASS on the scaffold, with SKIPs for what does not exist yet
+  - done when: Deleting the hash file then `--accept` records a first baseline
+  - done when: Changing a lever makes the hash move and the run FAIL until `--accept`
 
 ### 0006 - The phase machine: day, preparation, night, result
 
@@ -125,22 +125,6 @@ Art that a script owns. One palette, one generator, one command - so the set sta
   - done when: Editing one character in a map changes exactly one pixel
   - done when: The generated sheet imports with nearest-neighbour filtering and no mipmaps
 
-### 0005 - verify.py and the determinism guard
-
-Waits on 0004.  Likely files: `tools/verify.py, tools/determinism_hash.txt, src/tools/determinism.gd`.
-
-A bootstrap `tools/verify.py` already exists so that task 0001 had something to run. Finish it: write the determinism guard it is waiting for, and make the export check real.
-
-- Read the bootstrap first - the check order and the SKIP behaviour are already there and are not up for redesign
-- `determinism.gd` runs a fixed scripted scenario for a fixed number of ticks and prints one integer
-- `--accept` records a moved hash and prints the old and the new number; `--fast` skips the exports
-- The Godot executable comes from `$GODOT`, defaulting to `C:/Users/PC GAMER DA FAMILIA/Documents/Godot/Godot_v4.7.2-stable_win64_console.exe`
-- Every row is timed and the total is printed
-
-  - done when: `python tools/verify.py` prints PASS on the scaffold, with SKIPs for what does not exist yet
-  - done when: Deleting the hash file then `--accept` records a first baseline
-  - done when: Changing a lever makes the hash move and the run FAIL until `--accept`
-
 ### 0010 - Save the profile and the run
 
 Waits on 0006, 0007, 0008.  Likely files: `src/core/save.gd`.
@@ -156,6 +140,35 @@ Quitting on day 4 and coming back to day 4. The state is already plain data, so 
   - done when: Save on day 3, quit, load: same resources, same buildings, same grid
   - done when: Save mid-night, load, and the determinism hash of the rest of the night matches an uninterrupted run
   - done when: A truncated save file is refused, not crashed on
+
+### 0011 - input_check harness
+
+Waits on 0005.  Likely files: `src/tools/input_check.gd`.
+
+The other half of the gate: drive real clicks and keys through the real UI with no human, so a refactor that breaks placing a tower is caught the same minute.
+
+- Runs headless against the real scenes, synthesising `InputEventMouseButton` and `InputEventKey`
+- A helper to click a world cell and one to click a named control
+- Prints `N cases, M failed` and exits non-zero on failure
+- Each case leaves the game in a known state for the next one
+- It is wired into `verify.py` from this task on
+
+  - done when: It drives at least one full interaction end to end
+  - done when: It fails loudly when a control it names is missing, rather than silently passing
+
+### 0012 - Debug overlay
+
+Waits on 0005, 0006.  Likely files: `src/ui/debug_overlay.gd`.
+
+The thing you actually want while tuning: what phase, what tick, what seed, how many entities and what the frame costs.
+
+- Toggled by an input action, off by default, never in the release build path
+- Shows phase, day, night, tick, seed, resource totals and live entity counts
+- Shows ticks simulated per frame and the millisecond cost of the last tick batch
+- Draws over everything and never steals mouse input
+
+  - done when: Toggling it does not move the determinism hash
+  - done when: It shows the tick cost climbing when a hundred zombies are alive
 
 ### 0013 - The world renders
 
@@ -233,35 +246,6 @@ Master, SFX and Music buses plus a small `Audio.play(id)`, so the sound tasks af
   - done when: `Audio.play('missing')` warns exactly once and does not crash
   - done when: Master at zero silences everything including music
   - done when: Twenty simultaneous shots produce one clean sound, not clipping
-
-### 0011 - input_check harness
-
-Waits on 0005.  Likely files: `src/tools/input_check.gd`.
-
-The other half of the gate: drive real clicks and keys through the real UI with no human, so a refactor that breaks placing a tower is caught the same minute.
-
-- Runs headless against the real scenes, synthesising `InputEventMouseButton` and `InputEventKey`
-- A helper to click a world cell and one to click a named control
-- Prints `N cases, M failed` and exits non-zero on failure
-- Each case leaves the game in a known state for the next one
-- It is wired into `verify.py` from this task on
-
-  - done when: It drives at least one full interaction end to end
-  - done when: It fails loudly when a control it names is missing, rather than silently passing
-
-### 0012 - Debug overlay
-
-Waits on 0005, 0006.  Likely files: `src/ui/debug_overlay.gd`.
-
-The thing you actually want while tuning: what phase, what tick, what seed, how many entities and what the frame costs.
-
-- Toggled by an input action, off by default, never in the release build path
-- Shows phase, day, night, tick, seed, resource totals and live entity counts
-- Shows ticks simulated per frame and the millisecond cost of the last tick batch
-- Draws over everything and never steals mouse input
-
-  - done when: Toggling it does not move the determinism hash
-  - done when: It shows the tick cost climbing when a hundred zombies are alive
 
 ### 0015 - The player walks and interacts
 
@@ -1616,13 +1600,13 @@ For the player who beat the Giant and wants to know how far the farm goes. Cheap
   - done when: Night 25 is generated and playable
   - done when: The same seed generates the same night 25 twice
 
-## 0 - Foundation  (3/12)
+## 0 - Foundation  (4/12)
 
 - [x] **0001** [Godot project scaffold](prompts/0001-project-scaffold.md)
 - [x] **0002** [Fixed-timestep deterministic simulation](prompts/0002-sim-tick.md)
 - [x] **0003** [game_data.gd, the one file of levers](prompts/0003-game-data.md)
-- [ ] **0004** [Harden the headless check harness](prompts/0004-headless-check.md)
-- [ ] **0005** [verify.py and the determinism guard](prompts/0005-verify-and-hash.md) - needs 0004
+- [x] **0004** [Harden the headless check harness](prompts/0004-headless-check.md)
+- [ ] **0005** [verify.py and the determinism guard](prompts/0005-verify-and-hash.md)
 - [ ] **0006** [The phase machine: day, preparation, night, result](prompts/0006-phase-machine.md)
 - [ ] **0007** [The resource ledger](prompts/0007-resource-ledger.md)
 - [ ] **0008** [The farm grid](prompts/0008-farm-grid.md)

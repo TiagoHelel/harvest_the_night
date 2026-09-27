@@ -125,6 +125,37 @@ def check_godot_present():
     return check("godot import", code == 0, "" if code == 0 else tail(out))
 
 
+def check_scripts_parse():
+    """Every .gd in the project, parsed.
+
+    `--import` does NOT do this: it imports resources and exits 0 with a script
+    full of parse errors sitting next to it - measured, not assumed. Only
+    `--check-only --script` actually compiles one, and it exits 1 when it
+    cannot. Catching a parse error here means the tool scripts below never get
+    the chance to half-run, which is the failure mode that hangs a loop."""
+    if not os.path.exists(rel("project.godot")) or not os.path.exists(GODOT):
+        return skip("script parse", "no project yet")
+    bad = []
+    count = 0
+    for dirpath, dirnames, filenames in os.walk(ROOT):
+        dirnames[:] = [d for d in dirnames
+                       if d not in (".godot", ".git", "build", "__pycache__")]
+        for f in sorted(filenames):
+            if not f.endswith(".gd"):
+                continue
+            res = "res://" + os.path.relpath(
+                os.path.join(dirpath, f), ROOT).replace("\\", "/")
+            count += 1
+            code, out = godot(["--headless", "--check-only", "--script", res],
+                              timeout=60)
+            if code != 0:
+                first = next((l for l in out.splitlines()
+                              if "Error" in l or "error" in l), "")
+                bad.append("%s %s" % (res, first.strip()[:160]))
+    return check("script parse", not bad,
+                 ("%d scripts" % count) if not bad else "; ".join(bad)[:400])
+
+
 # A Godot tool script that errors before its final quit() does not exit: the
 # SceneTree keeps running with nothing left to do. Unattended, that hangs the
 # backlog loop instead of failing it, which is strictly worse than a red line.
@@ -253,6 +284,7 @@ def main():
     check_python()
     check_backlog()
     check_godot_present()
+    check_scripts_parse()
 
     if not hashes_only:
         check_script("headless_check", "src/tools/headless_check.gd",

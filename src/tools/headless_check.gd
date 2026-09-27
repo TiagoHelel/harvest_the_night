@@ -7,21 +7,73 @@ extends SceneTree
 ##
 ## Every rule the backlog adds gets its asserts here in the same pass that adds
 ## the rule, grouped by the task that introduced them - so a failure says which
-## piece of design just moved.
+## piece of design just moved. **Adding a group means bumping `GROUPS`.**
 ##
-## **A script error before the final `quit()` leaves the SceneTree running
-## forever** rather than failing: a headless check that hangs the loop instead
-## of breaking it. `verify.py` bounds every Godot script with a timeout for
-## exactly that reason, and task 0004 makes this file fail fast on its own.
+## ## Failing rather than hanging
+##
+## GDScript has no exceptions. A runtime error does not stop the program: it
+## prints, abandons the function it happened in, and returns to the caller. A
+## check that dies half way would therefore reach the end of this file with a
+## clean `0 failed` and report success for work it never did.
+##
+## Three things stop that, cheapest first:
+##
+## 1. Each group increments `_completed` **as its last statement**, so a group
+##    that was abandoned mid-way never counts. `_finish()` fails when fewer
+##    groups finished than `GROUPS` says exist.
+## 2. `_process()` is a watchdog. It only runs when `_initialize()` never
+##    returned at all - a parse error in something this file depends on - and it
+##    ends the main loop rather than letting the SceneTree idle for ever.
+## 3. `verify.py` bounds the whole run with a timeout, as the belt to these
+##    braces, and runs `--check-only` over every script before this one starts.
+
+## How long to wait before deciding `_initialize()` is never coming back.
+## The whole check takes about a third of a second, so this is ample.
+const WATCHDOG_SECONDS := 5.0
+
+## How many `_task_NNNN_*` groups `_run()` is expected to finish.
+const GROUPS := 2
 
 var passed := 0
 var failed := 0
 
+var _completed := 0
+var _finished := false
+var _elapsed := 0.0
+
 
 func _initialize() -> void:
+	_run()
+	_finish()
+
+
+## Reached only when `_initialize()` did not return - which in practice means a
+## parse error in a script this one depends on, so `_run()` never started.
+func _process(delta: float) -> bool:
+	_elapsed += delta
+	if _elapsed < WATCHDOG_SECONDS:
+		return false
+	push_error("headless_check: watchdog fired after %.0fs" % _elapsed)
+	print("WATCHDOG: _initialize() never returned. Something it depends on ",
+		"failed to parse - run: godot --headless --path . --check-only ",
+		"--script res://src/tools/headless_check.gd")
+	_finish()
+	return true
+
+
+func _run() -> void:
 	_task_0002_tick_and_rng()
 	_task_0003_game_data()
 
+
+func _finish() -> void:
+	if _finished:
+		return
+	_finished = true
+	if _completed < GROUPS:
+		failed += 1
+		print("  FAIL  a check group did not finish   %d of %d completed"
+			% [_completed, GROUPS])
 	print("%d asserts, %d failed" % [passed + failed, failed])
 	quit(1 if failed > 0 else 0)
 
@@ -128,6 +180,8 @@ func _task_0002_tick_and_rng() -> void:
 	expect(int(tiny[0]) == 0 and float(tiny[1]) > 0.0,
 		"a short frame owes no tick and carries the remainder")
 
+	_completed += 1     # last line: an abandoned group never gets here
+
 
 ## 0003 - the lever file: every cross-reference resolves, and the validator
 ## that says so is itself shown to fail when it should.
@@ -211,3 +265,5 @@ func _task_0003_game_data() -> void:
 
 	# Dusk falls inside the day.
 	expect(GameData.DUSK_AT_TICK < GameData.DAY_TICKS, "dusk is before night")
+
+	_completed += 1     # last line: an abandoned group never gets here

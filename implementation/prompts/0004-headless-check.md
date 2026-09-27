@@ -1,7 +1,7 @@
 # 0004 - Harden the headless check harness
 
 - **Phase:** 0 - Foundation
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0002, 0003
 - **Likely files:** src/tools/headless_check.gd, tools/verify.py
 
