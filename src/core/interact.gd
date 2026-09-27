@@ -150,7 +150,9 @@ static func ticks_for(state: Dictionary, cell: Vector2i, verb: StringName) -> in
 	if not on.is_empty():
 		var node: Variant = GameData.GATHERING.get(on["id"], null)
 		if node != null and (node as Dictionary).has("work_ticks"):
-			return int((node as Dictionary)["work_ticks"])
+			# Sharp tools, if the tree has been up that branch.
+			return int((node as Dictionary)["work_ticks"]) * 100 \
+				/ maxi(Tech.bonus(state, "gather_percent", 100), 1)
 	return int(DEFAULT_TICKS.get(verb, GameData.SECONDS))
 
 

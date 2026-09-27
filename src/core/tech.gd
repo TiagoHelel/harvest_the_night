@@ -49,7 +49,145 @@ static func initial() -> Dictionary:
 		# rather than a set, because a `State` has to be plain data - and it
 		# is ten entries at most.
 		"nights_paid": [],
+		# Which nodes of the tree have been bought, in the order they were.
+		"tech_owned": [],
 	}
+
+
+# --------------------------------------------------------------- the tree
+
+## Every node, in table order. The screen draws this and nothing else.
+static func tree() -> Array:
+	return GameData.TECH_TREE
+
+
+## The branches, in the order they are drawn.
+static func branches() -> Array:
+	var out: Array = []
+	for row in GameData.TECH_TREE:
+		var branch: StringName = (row as Dictionary)["branch"]
+		if not out.has(branch):
+			out.append(branch)
+	return out
+
+
+## The nodes of one branch, cheapest first.
+static func nodes_of(branch: StringName) -> Array:
+	var out: Array = []
+	for row in GameData.TECH_TREE:
+		if (row as Dictionary)["branch"] == branch:
+			out.append(row)
+	return out
+
+
+## One node by id, or an empty Dictionary.
+static func node(id: StringName) -> Dictionary:
+	for row in GameData.TECH_TREE:
+		if (row as Dictionary)["id"] == id:
+			return row
+	return {}
+
+
+static func owns(state: Dictionary, id: StringName) -> bool:
+	return (state["tech_owned"] as Array).has(id)
+
+
+## Everything bought so far.
+static func owned(state: Dictionary) -> Array:
+	return state["tech_owned"]
+
+
+## Why this node cannot be bought, in words, for the tooltip. Empty when it
+## can.
+static func why_not_buy(state: Dictionary, id: StringName) -> String:
+	var one := node(id)
+	if one.is_empty():
+		return "no such thing"
+	if owns(state, id):
+		return "already yours"
+	# **Never during a wave.** The requirement, and the reason for it: a tree
+	# a player can re-cut while the crowd is walking in is not a decision
+	# made before the night, it is a menu they pause in.
+	if int(state["phase"]) != Phases.DAY:
+		return "the workshop is shut after dark"
+	for needed in (one["needs"] as Array):
+		if not owns(state, StringName(needed)):
+			return "needs %s first" % needed
+	if held(state) < int(one["cost"]):
+		return "costs %d, and you have %d" % [int(one["cost"]), held(state)]
+	return ""
+
+
+static func can_buy(state: Dictionary, id: StringName) -> bool:
+	return why_not_buy(state, id).is_empty()
+
+
+## Buy a node. False and nothing spent when it will not go.
+static func buy(state: Dictionary, id: StringName) -> bool:
+	if not can_buy(state, id):
+		return false
+	var one := node(id)
+	if not spend(state, int(one["cost"])):
+		return false
+	(state["tech_owned"] as Array).append(id)
+	return true
+
+
+## Whether anything bought depends on this one.
+static func depends_on(state: Dictionary, id: StringName) -> Array:
+	var out: Array = []
+	for row in GameData.TECH_TREE:
+		var one: Dictionary = row
+		var mine := owns(state, StringName(one["id"]))
+		if mine and (one["needs"] as Array).has(id):
+			out.append(one["id"])
+	return out
+
+
+## What selling a node back would return.
+static func refund_for(id: StringName) -> int:
+	var one := node(id)
+	if one.is_empty():
+		return 0
+	return int(one["cost"]) * GameData.TECH_REFUND_PERCENT / 100
+
+
+## Sell a node back for a share of what it cost.
+##
+## **Refused while something you own still needs it**, or the tree could be
+## left with a branch hanging off nothing - and a node whose prerequisite is
+## gone is a node you did not earn.
+static func refund(state: Dictionary, id: StringName) -> int:
+	if not owns(state, id) or int(state["phase"]) != Phases.DAY:
+		return 0
+	if not depends_on(state, id).is_empty():
+		return 0
+	var back := refund_for(id)
+	(state["tech_owned"] as Array).erase(id)
+	if back > 0:
+		Resources.add(state, GameData.TECH, back)
+	return back
+
+
+# -------------------------------------------------------------- the effects
+
+## What the tree is worth for one named number.
+##
+## **The one door every system uses.** `Towers` asks what
+## `tower_damage_percent` is and does not know a tree exists; the tree hands
+## out numbers and does not know what a tower is. `missing` is what to answer
+## when nobody has bought anything that touches it, which is almost always.
+static func bonus(state: Dictionary, key: String, missing: int) -> int:
+	if state.is_empty() or not state.has("tech_owned"):
+		return missing
+	for id in (state["tech_owned"] as Array):
+		var one := node(StringName(id))
+		if one.is_empty():
+			continue
+		var gives: Dictionary = one["gives"]
+		if gives.has(key):
+			return int(gives[key])
+	return missing
 
 
 # ------------------------------------------------------------------- asking

@@ -178,6 +178,11 @@ static func water_carried(state: Dictionary) -> int:
 ## Whether a canful can be drawn from this cell. The pond counts by its
 ## terrain and the well by what is standing on it, so "water comes from the
 ## pond and the well" is one question with one answer.
+## How much the watering can holds, the tree included.
+static func can_capacity(state: Dictionary) -> int:
+	return GameData.WATER_CAN_CAPACITY 		+ Tech.bonus(state, "water_can_bonus", 0)
+
+
 static func is_water_source(state: Dictionary, cell: Vector2i) -> bool:
 	if not Grid.in_bounds(cell):
 		return false
@@ -198,11 +203,11 @@ static func is_water_source(state: Dictionary, cell: Vector2i) -> bool:
 ## to know where the player is and `Player` already calls into `Interact`,
 ## which calls in here - asking the other way round would be a cycle.
 static func refill_beside(state: Dictionary, here: Vector2i) -> bool:
-	if int(state["water_can"]) >= GameData.WATER_CAN_CAPACITY:
+	if int(state["water_can"]) >= can_capacity(state):
 		return false
 	for step in NEIGHBOURS:
 		if is_water_source(state, here + step):
-			state["water_can"] = GameData.WATER_CAN_CAPACITY
+			state["water_can"] = can_capacity(state)
 			return true
 	return false
 

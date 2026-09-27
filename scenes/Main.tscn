@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3]
+[gd_scene load_steps=14 format=3]
 
 [ext_resource type="Script" path="res://src/ui/main.gd" id="1_main"]
 [ext_resource type="Script" path="res://src/ui/sim_driver.gd" id="2_driver"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://src/ui/day_hud.gd" id="6_hud"]
 [ext_resource type="Script" path="res://src/ui/build_mode.gd" id="7_build"]
 [ext_resource type="Script" path="res://src/ui/night_hud.gd" id="12_nighthud"]
+[ext_resource type="Script" path="res://src/ui/tech_panel.gd" id="13_tech"]
 [ext_resource type="Script" path="res://src/ui/result_screen.gd" id="8_result"]
 [ext_resource type="Script" path="res://src/ui/inventory_panel.gd" id="9_inventory"]
 [ext_resource type="Script" path="res://src/ui/workshop_panel.gd" id="10_workshop"]
@@ -106,6 +107,17 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("9_inventory")
+
+[node name="TechPanel" type="Control" parent="UI/Screen"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("13_tech")
 
 [node name="ResultScreen" type="Control" parent="UI/Screen"]
 unique_name_in_owner = true

@@ -76,6 +76,11 @@ static func begin_preparation(state: Dictionary) -> bool:
 ##
 ## Called by the player ending the build step early, and by `Sim.tick()` when
 ## `GameData.PREPARATION_TICKS` have passed.
+## What a whole house is worth tonight, the tree included.
+static func house_full(state: Dictionary) -> int:
+	return GameData.HOUSE_HP + Tech.bonus(state, "house_hp_bonus", 0)
+
+
 static func begin_night(state: Dictionary) -> bool:
 	if int(state["phase"]) != PREPARATION:
 		push_error("begin_night from %s" % name_of(int(state["phase"])))
@@ -92,7 +97,9 @@ static func begin_night(state: Dictionary) -> bool:
 	state["killed"] = 0
 	state["killed_by_kind"] = {}
 	state["breaches"] = 0
-	state["house_hp"] = GameData.HOUSE_HP
+	# Stout timbers, if the tree has them: the roof is mended to whatever it
+	# can hold tonight rather than to what the table alone says.
+	state["house_hp"] = house_full(state)
 	_enter(state, NIGHT)
 	Waves.begin(state)
 	return true

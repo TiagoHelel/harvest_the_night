@@ -116,7 +116,9 @@ static func tick(state: Dictionary) -> void:
 		# **Asked fresh after every shot**, so a generator running dry part way
 		# through a night slows the guns from the next shot rather than from the
 		# next night. The same is true of the pool running out.
-		var reload_ticks := int(entry["reload_ticks"])
+		# The tree oils the works, if it has been bought.
+		var reload_ticks := int(entry["reload_ticks"]) \
+			* Tech.bonus(state, "tower_reload_percent", 100) / 100
 		if not armed:
 			reload_ticks = Ammo.weak_reload(reload_ticks)
 		tower["reload"] = Power.scaled_ticks(state, reload_ticks)
@@ -142,8 +144,26 @@ static func _cool_down(state: Dictionary) -> void:
 ## code did. It still is what they all declare, which is why this port moved
 ## no behaviour; what changed is that a mortar wanting the thickest part of
 ## the crowd is now one word in a table rather than a branch in here.
-static func _acquire(state: Dictionary, from: Vector2i, entry: Dictionary) -> int:
+## What a tower hits for tonight, and how far it sees.
+##
+## **One place each**, because the tree, the empty pool and the table all have
+## an opinion and four copies of that arithmetic would be four chances for
+## them to disagree.
+static func damage_of(state: Dictionary, entry: Dictionary,
+		armed: bool = true) -> int:
+	var damage := int(entry.get("damage", 1)) \
+		* Tech.bonus(state, "tower_damage_percent", 100) / 100
+	return damage if armed else Ammo.weak_damage(damage)
+
+
+static func reach_of(state: Dictionary, entry: Dictionary) -> int:
 	var reach := int(entry.get("range", 0))
+	return 0 if reach <= 0 else reach \
+		+ Tech.bonus(state, "tower_range_bonus", 0)
+
+
+static func _acquire(state: Dictionary, from: Vector2i, entry: Dictionary) -> int:
+	var reach := reach_of(state, entry)
 	if reach <= 0:
 		return 0
 	var minimum := int(entry.get("min_range", 0))
@@ -215,7 +235,7 @@ static func acquire_for(state: Dictionary, from: Vector2i,
 static func land_for_test(state: Dictionary, entry: Dictionary,
 		target: int) -> void:
 	_land_at(state, {
-		"damage": int(entry.get("damage", 1)),
+		"damage": damage_of(state, entry),
 		"type": StringName(entry.get("damage_type", GameData.DAMAGE_IMPACT)),
 		"shape": StringName(entry.get("shape", GameData.SHAPE_SINGLE)),
 		"splash_tiles": int(entry.get("splash_tiles", 1)),
@@ -231,7 +251,7 @@ static func land_for_test(state: Dictionary, entry: Dictionary,
 static func land_at_for_test(state: Dictionary, entry: Dictionary,
 		cell: Vector2i) -> void:
 	_land_at(state, {
-		"damage": int(entry.get("damage", 1)),
+		"damage": damage_of(state, entry),
 		"type": StringName(entry.get("damage_type", GameData.DAMAGE_IMPACT)),
 		"shape": StringName(entry.get("shape", GameData.SHAPE_SINGLE)),
 		"splash_tiles": int(entry.get("splash_tiles", 1)),
@@ -277,7 +297,7 @@ static func _fire(state: Dictionary, from: Vector2i, kind: StringName,
 		"pos": [from.x * Player.SUBTILE + Player.SUBTILE / 2,
 				from.y * Player.SUBTILE + Player.SUBTILE / 2],
 		"target": target,
-		"damage": int(entry.get("damage", 1)) if armed 			else Ammo.weak_damage(int(entry.get("damage", 1))),
+		"damage": damage_of(state, entry, armed),
 		"type": StringName(entry.get("damage_type", GameData.DAMAGE_IMPACT)) 			if armed else GameData.DAMAGE_IMPACT,
 		"armed": armed,
 		# **The shot carries its shape**, because it lands after the tower has
@@ -367,10 +387,8 @@ static func _pierce_line(state: Dictionary, from: Vector2i,
 	var aim := Entities.cell_of(state, target) - from
 	if aim == Vector2i.ZERO:
 		return
-	var reach := int(entry.get("range", 0))
-	var damage := int(entry.get("damage", 1))
-	if not armed:
-		damage = Ammo.weak_damage(damage)
+	var reach := reach_of(state, entry)
+	var damage := damage_of(state, entry, armed)
 	var falloff := int(entry.get("pierce_falloff_percent", 0))
 	var most := maxi(int(entry.get("pierce", 1)), 1)
 	var kind := StringName(entry.get("damage_type", GameData.DAMAGE_IMPACT))

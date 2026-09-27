@@ -1,7 +1,7 @@
 # 0063 - The tech tree
 
 - **Phase:** 4 - Ten nights and progression
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0062
 - **Likely files:** src/core/tech.gd, src/ui/tech_screen.gd
 

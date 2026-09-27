@@ -139,6 +139,8 @@ static func left_tonight(state: Dictionary, id: StringName) -> int:
 	if entry == null:
 		return 0
 	var limit := int((entry as Dictionary).get("per_night_limit", 0))
+	if limit > 0:
+		limit += Tech.bonus(state, "barricade_bonus", 0)
 	if limit <= 0:
 		return 1 << 30          # no limit declared, so no limit applied
 	return maxi(limit - placed_tonight(state, id), 0)

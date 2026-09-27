@@ -41,7 +41,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 27
+const CASES := 28
 
 var passed := 0
 var failed := 0
@@ -98,6 +98,7 @@ func _run() -> void:
 	await _case_0054_ability()
 	await _case_0055_speed()
 	await _case_0056_night_hud()
+	await _case_0063_tech_tree()
 	_finish()
 
 
@@ -2888,6 +2889,80 @@ func _case_0056_night_hud() -> void:
 	await frames(2)
 	expect(not warning.visible,
 		"with one a long way off it is not - it is a warning, not furniture")
+
+	await close_scene()
+	_completed += 1     # last line: an abandoned case never gets here
+
+
+## 0063 - the tech tree, opened and spent from.
+func _case_0063_tech_tree() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var panel: TechPanel = require_control("TechPanel")
+	if driver == null or panel == null:
+		_completed += 1
+		await close_scene()
+		return
+
+	var state := driver.state
+	Resources.gain(state, {GameData.TECH: 20})
+
+	# **It is not up until it is asked for.**
+	await frames(2)
+	expect(not panel.is_open(), "the tree starts closed")
+	await tap_key(KEY_T)
+	await until(func() -> bool: return panel.is_open(), "the tree to open")
+	expect(panel.is_open(), "T opens it")
+
+	# **Everything on it is on the screen.** Twelve buttons and three column
+	# headings at 480x270 is the tightest thing in the game, and a node that
+	# hangs off the edge is a node nobody can buy.
+	var first: StringName = Tech.nodes_of(&"production")[0]["id"]
+	var second: StringName = Tech.nodes_of(&"production")[1]["id"]
+	for row in Tech.tree():
+		var id: StringName = (row as Dictionary)["id"]
+		var button: Control = locate_control(
+			"Tech_" + str(id).replace(" ", "_")) as Control
+		expect(button != null, "the tree draws %s" % id)
+		if button == null:
+			continue
+		var box := button.get_global_rect()
+		expect(box.position.x >= 0.0 and box.position.y >= 0.0
+			and box.end.x <= 480.0 and box.end.y <= 270.0,
+			"and %s is on the screen" % id, str(box))
+
+	# **Buying one.** The done-when.
+	var had := Tech.held(state)
+	var cost := int(Tech.node(first)["cost"])
+	expect(not Tech.owns(state, first), "the first node is unbought")
+	await click_control("Tech_" + str(first).replace(" ", "_"))
+	await until(func() -> bool: return Tech.owns(state, first),
+		"the node to be bought")
+	expect(Tech.owns(state, first), "clicking a node buys it")
+	expect(Tech.held(state) == had - cost,
+		"for its price out of the purse", str(Tech.held(state)))
+
+	# A node whose prerequisite is now owned becomes live; one already bought
+	# does not.
+	await frames(3)
+	var bought: Button = locate_control(
+		"Tech_" + str(first).replace(" ", "_")) as Button
+	var next_one: Button = locate_control(
+		"Tech_" + str(second).replace(" ", "_")) as Button
+	expect(bought.disabled, "a node you own cannot be bought again")
+	expect(not next_one.disabled,
+		"and the one behind it has come alive", next_one.tooltip_text)
+
+	# **Never during a wave.** The panel shuts itself when the night starts.
+	Phases.begin_preparation(state)
+	Sim.advance(state, GameData.PREPARATION_TICKS)
+	await frames(3)
+	expect(int(state["phase"]) == Phases.NIGHT, "it is night")
+	expect(not panel.is_open(),
+		"and the tree closes itself rather than sitting over a wave")
+	await tap_key(KEY_T)
+	await frames(3)
+	expect(not panel.is_open(), "and will not open after dark")
 
 	await close_scene()
 	_completed += 1     # last line: an abandoned case never gets here

@@ -4651,3 +4651,83 @@ look like a layout bug, it looks like the run ending.
 
 `python tools/verify.py` prints PASS: 2204 asserts, 468 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+
+## 0063 - The tech tree
+
+    the whole tree costs 45; ten nights pay 40 at best and 10 at worst
+    a whole branch costs 15, so a good run takes two and a bit
+
+Twelve nodes, three branches, four deep, priced so that **every node is
+reachable inside ten nights and not all of them are** - which is the done-when
+and is the only thing that makes the choice a choice. The test walks every
+node's chain of prerequisites and checks the whole chain is affordable, then
+checks the three branches together are not.
+
+### Which branch I would take, and why
+
+**Defence, then survival.** The tree hands out numbers the rules already read,
+so the three branches are comparable:
+
+| branch | what the four give |
+|---|---|
+| production | chopping 30% faster, +4 water, crafting 35% faster, +25% on sales |
+| defence | +20% tower damage, +1 range, −20% reload, −25% tower cost |
+| survival | +40 house, −40% repair, +3 barricades a night, flare at 55% |
+
+Production compounds - it is the only branch that makes the *next* branch
+affordable - so on paper it is the greedy first pick. It is the wrong one.
+Task 0060 measured what actually kills a run: nights 3 and 10 at a middling
+income, and both are lost to **throughput**, not to poverty. `true sights` and
+`long barrels` cost five points together and are worth more than a fifth of
+every tower's damage, because range is time and time is more shots.
+
+Survival second, because `stout timbers` is two points for forty percent more
+house and it is the cheapest node in the tree by what it saves. Production
+last, and only what is left over: a farm that is not standing sells nothing.
+
+If the run is going well by night five, that reverses - the money branch pays
+for towers the defence branch then improves - and that is the tree working.
+
+### The effects are numbers the rules already read
+
+`Tech.bonus(state, key, missing)` is the one door. `Towers` asks what
+`tower_damage_percent` is worth and does not know a tree exists; the tree
+hands out numbers and does not know what a tower is. Nine of the twelve are
+wired that way through their owning system - towers, the house, repair,
+barricades, the flare, chopping, the watering can - and `check` holds one key
+to one node, because `bonus()` answers with the first node that mentions a key
+and two claiming the same number would leave one silently doing nothing.
+
+`tower_cost_percent`, `craft_percent` and `sell_percent` hand their numbers
+out but nothing asks yet: cost is threaded through `Building.cost_of()` which
+has no state to ask with, and the other two belong to systems task 0064 is
+about to reopen. The nodes are bought and owned; what they are worth arrives
+with the task that owns those call sites.
+
+### Refundable, for a fee
+
+`TECH_REFUND_PERCENT` at 50. A player who spent six points on the wrong branch
+on night three should not live with it for seven nights, and one who can
+re-cut the whole tree between waves is not choosing. Selling back is refused
+while something you own still needs the node, so the tree cannot be left
+hanging off nothing.
+
+### A `Button` sizes itself to its text
+
+Fifth member of this family, after 0032, 0040, 0055 and 0061. "the flare comes
+back in a little over half the time" made a node button a hundred and
+ninety-three pixels wide and pushed the survival column off a
+four-hundred-and-eighty pixel screen - `custom_minimum_size` is a *minimum*,
+and the text wins. The buttons are clipped to name and cost now, the sentence
+moved to a line under the tree, and `input_check` asserts all twelve nodes are
+inside 480x270.
+
+### Hashes
+
+| | from | to | why |
+|---|---|---|---|
+| sim hash | `1638064280` | `2915513296` | the state gained the list of nodes owned, and nine systems now ask the tree for a number |
+| data hash | `1475198535` | `3501718695` | the tree and its refund lever joined the digest |
+
+`python tools/verify.py` prints PASS: 2306 asserts, 502 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

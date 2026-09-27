@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 55
+const GROUPS := 56
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -119,6 +119,7 @@ func _run() -> void:
 	_task_0060_ten_nights()
 	_task_0061_rewards()
 	_task_0062_tech()
+	_task_0063_tech_tree()
 
 
 func _finish() -> void:
@@ -9825,3 +9826,172 @@ func _ten_nights(seed_value: int, clean: bool) -> int:
 			Farm.damage(state, spot, 9999)
 		Tech.award(state, night)
 	return Tech.held(state)
+
+
+## 0063 - the tech tree: twelve nodes and not enough points for them.
+func _task_0063_tech_tree() -> void:
+	# **Twelve nodes, three branches, and the design document's "no giant
+	# tree" taken literally.**
+	expect(Tech.tree().size() == 12,
+		"twelve nodes, no more", str(Tech.tree().size()))
+	expect(Tech.branches().size() == 3,
+		"in three branches", str(Tech.branches()))
+	for branch in Tech.branches():
+		expect(Tech.nodes_of(StringName(branch)).size() == 4,
+			"four deep: %s" % branch,
+			str(Tech.nodes_of(StringName(branch)).size()))
+
+	# **Prerequisites are data, and they hold together.**
+	var keys: Dictionary = {}
+	var whole := 0
+	for row in Tech.tree():
+		var one: Dictionary = row
+		whole += int(one["cost"])
+		expect(int(one["cost"]) > 0, "%s costs something" % one["id"])
+		expect(not str(one["note"]).is_empty(),
+			"and says what it gives", str(one["id"]))
+		for needed in (one["needs"] as Array):
+			expect(not Tech.node(StringName(needed)).is_empty(),
+				"%s needs %s, which exists" % [one["id"], needed])
+			expect(Tech.node(StringName(needed))["branch"] == one["branch"],
+				"and is in the same branch", str(needed))
+		# **One key, one node.** `Tech.bonus()` answers with the first node
+		# that mentions a key, so two nodes claiming the same number would
+		# make one of them silently do nothing.
+		for key in (one["gives"] as Dictionary):
+			expect(not keys.has(key),
+				"'%s' is given by one node only" % key,
+				"%s and %s" % [str(keys.get(key, "")), str(one["id"])])
+			keys[key] = one["id"]
+
+	# **Every node is reachable inside ten nights, but not all of them.** The
+	# done-when, and the whole reason for the prices.
+	var best := Tech.total_available()
+	print("  the whole tree costs %d; ten nights pay %d at best and %d at "
+		% [whole, best, Tech.least_available()] + "worst")
+	expect(whole > best,
+		"the tree costs more than the best run earns - a player cannot have "
+		+ "all of it", "%d against %d" % [whole, best])
+	for row in Tech.tree():
+		var one: Dictionary = row
+		var deep := int(one["cost"])
+		var walk: Array = one["needs"]
+		while not walk.is_empty():
+			var parent := Tech.node(StringName(walk[0]))
+			deep += int(parent["cost"])
+			walk = parent["needs"]
+		expect(deep <= best,
+			"%s and everything it needs comes to %d, which ten nights pay "
+				% [one["id"], deep] + "for", str(deep))
+	# A whole branch is affordable and two are not quite everything.
+	var branch_cost := 0
+	for row in Tech.nodes_of(StringName(Tech.branches()[0])):
+		branch_cost += int((row as Dictionary)["cost"])
+	print("  a whole branch costs %d, so a good run takes two and a bit"
+		% branch_cost)
+	expect(branch_cost <= best,
+		"a whole branch is affordable", str(branch_cost))
+	expect(branch_cost * 3 > best,
+		"and all three are not", "%d against %d" % [branch_cost * 3, best])
+
+	# **Buying, and what it refuses.**
+	var day := _a_day_with_points(6300, 20)
+	var first: StringName = Tech.nodes_of(&"defence")[0]["id"]
+	var second: StringName = Tech.nodes_of(&"defence")[1]["id"]
+	expect(Tech.why_not_buy(day, second).contains("needs"),
+		"a node whose prerequisite is unbought says so",
+		Tech.why_not_buy(day, second))
+	expect(not Tech.buy(day, second), "and will not be bought")
+	var before := Tech.held(day)
+	expect(Tech.buy(day, first), "the first of a branch goes straight in")
+	expect(Tech.owns(day, first), "and is owned", str(Tech.owned(day)))
+	expect(Tech.held(day) == before - int(Tech.node(first)["cost"]),
+		"for exactly its price", str(Tech.held(day)))
+	expect(Tech.why_not_buy(day, first).contains("already"),
+		"and will not be bought twice", Tech.why_not_buy(day, first))
+	expect(Tech.buy(day, second), "now the second will go in")
+
+	var poor := _a_day_with_points(6301, 1)
+	expect(Tech.why_not_buy(poor, first).contains("costs"),
+		"and a node you cannot afford says the price",
+		Tech.why_not_buy(poor, first))
+
+	# **Never during a wave.** The requirement.
+	var night := _a_day_with_points(6302, 20)
+	Phases.begin_preparation(night)
+	Sim.advance(night, GameData.PREPARATION_TICKS)
+	expect(int(night["phase"]) == Phases.NIGHT, "it is night")
+	expect(Tech.why_not_buy(night, first).contains("after dark"),
+		"the tree is shut after dark", Tech.why_not_buy(night, first))
+	expect(not Tech.buy(night, first), "and nothing is bought")
+	expect(Tech.refund(night, first) == 0, "nor sold back")
+
+	# **A refund, for a fee, and the fee is a lever.**
+	var sorry := _a_day_with_points(6303, 20)
+	Tech.buy(sorry, first)
+	Tech.buy(sorry, second)
+	expect(Tech.refund(sorry, first) == 0,
+		"the root of a branch cannot be sold while its child is owned",
+		str(Tech.depends_on(sorry, first)))
+	var purse := Tech.held(sorry)
+	var back := Tech.refund(sorry, second)
+	expect(back == int(Tech.node(second)["cost"])
+		* GameData.TECH_REFUND_PERCENT / 100,
+		"selling the leaf back returns the lever's share", str(back))
+	expect(back < int(Tech.node(second)["cost"]),
+		"which is less than it cost - changing your mind is not free",
+		str(back))
+	expect(Tech.held(sorry) == purse + back, "and the points come back",
+		str(Tech.held(sorry)))
+	expect(not Tech.owns(sorry, second), "with the node gone")
+	expect(Tech.refund(sorry, first) > 0,
+		"and now the root can go too")
+
+	# **The effects are real.** One assert per branch, through the rules
+	# rather than through the table.
+	var plain := _a_day_with_points(6304, 40)
+	var geared := _a_day_with_points(6305, 40)
+	var tower: Dictionary = GameData.DEFENCES[&"gun_tower"]
+	expect(Tech.buy(geared, &"true sights"), "the defence branch is bought")
+	expect(Towers.damage_of(geared, tower) > Towers.damage_of(plain, tower),
+		"a tower with true sights hits harder", "%d against %d"
+			% [Towers.damage_of(geared, tower), Towers.damage_of(plain, tower)])
+	expect(Tech.buy(geared, &"long barrels"), "and the next")
+	expect(Towers.reach_of(geared, tower) > Towers.reach_of(plain, tower),
+		"and reaches further", "%d against %d"
+			% [Towers.reach_of(geared, tower), Towers.reach_of(plain, tower)])
+
+	expect(Tech.buy(geared, &"stout timbers"), "the survival branch too")
+	expect(Phases.house_full(geared) > Phases.house_full(plain),
+		"and the house holds more", "%d against %d"
+			% [Phases.house_full(geared), Phases.house_full(plain)])
+
+	expect(Tech.buy(geared, &"sharp tools"), "and the production branch")
+	var tree_cell := _a_tree_on(geared)
+	expect(tree_cell.x >= 0, "there is a tree to chop")
+	expect(Interact.ticks_for(geared, tree_cell, &"chop")
+		< Interact.ticks_for(plain, tree_cell, &"chop"),
+		"and chopping is quicker", "%d against %d"
+			% [Interact.ticks_for(geared, tree_cell, &"chop"),
+				Interact.ticks_for(plain, tree_cell, &"chop")])
+
+	# Nothing bought changes nothing, which is what `missing` is for.
+	expect(Towers.damage_of(plain, tower) == int(tower["damage"]),
+		"and a farm that bought nothing is exactly the table",
+		str(Towers.damage_of(plain, tower)))
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## A day with technology in the purse and nothing bought.
+func _a_day_with_points(seed_value: int, points: int) -> Dictionary:
+	var state := State.create(seed_value)
+	Resources.gain(state, {GameData.TECH: points})
+	return state
+
+
+## Any cell with a tree on it.
+func _a_tree_on(state: Dictionary) -> Vector2i:
+	for cell in Farm.cells_with(state, &"tree"):
+		return cell
+	return Vector2i(-1, -1)

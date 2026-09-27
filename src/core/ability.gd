@@ -84,7 +84,8 @@ static func cooldown_left(state: Dictionary) -> int:
 ## How far through the wait it is, as a percentage. A hundred is ready, and the
 ## HUD of task 0056 draws this as a ring.
 static func charge_percent(state: Dictionary) -> int:
-	var full := int(GameData.ABILITY["cooldown_ticks"])
+	var full := int(GameData.ABILITY["cooldown_ticks"]) \
+		* Tech.bonus(state, "flare_percent", 100) / 100
 	if full <= 0:
 		return 100
 	return mini((full - cooldown_left(state)) * 100 / full, 100)
@@ -128,7 +129,8 @@ static func use(state: Dictionary) -> bool:
 		return false
 
 	var one: Dictionary = state["ability"]
-	one["cooldown"] = int(GameData.ABILITY["cooldown_ticks"])
+	one["cooldown"] = int(GameData.ABILITY["cooldown_ticks"]) \
+		* Tech.bonus(state, "flare_percent", 100) / 100
 	one["flares"] = int(one["flares"]) + 1
 
 	var centre := Player.cell(state)

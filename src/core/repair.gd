@@ -108,7 +108,8 @@ static func per_hp_hundredths(state: Dictionary,
 		# **At least one hundredth**, so nothing on the farm is free to keep
 		# standing - a wall that cost nothing to hold would make a night a
 		# contest of patience rather than of resources.
-		out[res] = maxi(int(cost[res]) * GameData.REPAIR_PERCENT / full, 1)
+		out[res] = maxi(int(cost[res]) * GameData.REPAIR_PERCENT
+			* Tech.bonus(state, "repair_percent", 100) / 100 / full, 1)
 	return out
 
 

@@ -33,6 +33,7 @@ var _was_down: Dictionary = {}
 @onready var _shop: ShopPanel = %ShopPanel
 @onready var _hud: DayHud = %DayHud
 @onready var _night_hud: NightHud = %NightHud
+@onready var _tech: TechPanel = %TechPanel
 @onready var _build: BuildMode = %BuildMode
 @onready var _result: ResultScreen = %ResultScreen
 @onready var _inventory: InventoryPanel = %InventoryPanel
@@ -57,6 +58,7 @@ func _ready() -> void:
 	_hud.show_state(_driver.state)
 	_night_hud.driver = _driver
 	_night_hud.show_state(_driver.state)
+	_tech.show_state(_driver.state)
 	_build.show_state(_driver.state, _world)
 	_result.show_state(_driver.state)
 	_inventory.show_state(_driver.state)

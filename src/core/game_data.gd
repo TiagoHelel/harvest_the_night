@@ -1303,6 +1303,80 @@ const REWARDS: Dictionary = {
 	"tech_points": 1,                   # LEVER: per night survived, 1-2
 }
 
+## The tech tree: twelve nodes, three branches, four deep.
+##
+## `design.md` section 12 wants somewhere to spend technology and is explicit
+## that the MVP does **not** get a giant tree. Twelve fits on one screen, and
+## the shape - three branches of four - is what makes the choice legible: a
+## player can see the whole thing and still not have it.
+##
+## ## Priced against the ten nights
+##
+## A run pays 10 technology at worst and 40 at best (`Tech.total_available()`).
+## A branch costs 2 + 3 + 4 + 6 = 15, so all three cost 45 - **more than the
+## best run earns**. That is the point: every node is reachable inside ten
+## nights and not all of them are, which is the done-when.
+##
+## A good run takes two branches and the shallow end of the third. A bad run
+## takes four or five shallow nodes and feels it.
+##
+## ## The effect is a number the rules already read
+##
+## Every node hands one entry to `Tech.bonus()`, and the system that owns that
+## number asks for it. Nothing here knows what a tower is; `Towers` knows what
+## `tower_damage_percent` is worth and asks. A thirteenth node is a row here
+## plus one `Tech.bonus()` call wherever it belongs.
+const TECH_TREE: Array = [
+	# ---------------------------------------------------------- production
+	{"id": &"sharp tools", "branch": &"production", "cost": 2, "needs": [],
+		"gives": {"gather_percent": 130},
+		"note": "chopping and mining go half again as fast"},
+	{"id": &"full cans", "branch": &"production", "cost": 3,
+		"needs": [&"sharp tools"], "gives": {"water_can_bonus": 4},
+		"note": "the watering can holds four more"},
+	{"id": &"steady hands", "branch": &"production", "cost": 4,
+		"needs": [&"full cans"], "gives": {"craft_percent": 135},
+		"note": "the workshop, press and kitchen work a third faster"},
+	{"id": &"a name at market", "branch": &"production", "cost": 6,
+		"needs": [&"steady hands"], "gives": {"sell_percent": 125},
+		"note": "everything you sell fetches a quarter more"},
+
+	# ------------------------------------------------------------- defence
+	{"id": &"true sights", "branch": &"defence", "cost": 2, "needs": [],
+		"gives": {"tower_damage_percent": 120},
+		"note": "every tower hits a fifth harder"},
+	{"id": &"long barrels", "branch": &"defence", "cost": 3,
+		"needs": [&"true sights"], "gives": {"tower_range_bonus": 1},
+		"note": "every tower reaches one tile further"},
+	{"id": &"oiled works", "branch": &"defence", "cost": 4,
+		"needs": [&"long barrels"], "gives": {"tower_reload_percent": 80},
+		"note": "every tower reloads a fifth sooner"},
+	{"id": &"a standing order", "branch": &"defence", "cost": 6,
+		"needs": [&"oiled works"], "gives": {"tower_cost_percent": 75},
+		"note": "towers cost a quarter less to build"},
+
+	# ------------------------------------------------------------ survival
+	{"id": &"stout timbers", "branch": &"survival", "cost": 2, "needs": [],
+		"gives": {"house_hp_bonus": 40},
+		"note": "the house takes forty more before it falls"},
+	{"id": &"a full larder", "branch": &"survival", "cost": 3,
+		"needs": [&"stout timbers"], "gives": {"repair_percent": 60},
+		"note": "mending costs two fifths less"},
+	{"id": &"spare stakes", "branch": &"survival", "cost": 4,
+		"needs": [&"a full larder"], "gives": {"barricade_bonus": 3},
+		"note": "three more barricades a night"},
+	{"id": &"a second flare", "branch": &"survival", "cost": 6,
+		"needs": [&"spare stakes"], "gives": {"flare_percent": 55},
+		"note": "the flare comes back in a little over half the time"},
+]
+
+## What refunding a node costs, as a percentage of what it cost to buy. **Not
+## free and not forbidden**: a player who spent six points on the wrong branch
+## on night three should not have to live with it for seven nights, and a
+## player who can shuffle the whole tree between waves is not choosing.
+const TECH_REFUND_PERCENT := 50         # LEVER: percent returned, 0-100
+
+
 ## What a night can be worth **beyond finishing it**, as conditions rather
 ## than as code. `Tech._earned()` has one arm per `id` here and shouts if a
 ## row arrives without one: a bonus that silently never pays is worse than a
@@ -2210,5 +2284,5 @@ static func digest() -> int:
 		"rewards": REWARDS,
 		"defeat": [DEFEAT_LOSS_PERCENT, DEFEAT_KEEPS_MONEY,
 			DEFEAT_KEEPS_TECH],
-		"tech": TECH_BONUSES,
+		"tech": [TECH_BONUSES, TECH_TREE, TECH_REFUND_PERCENT],
 	})
