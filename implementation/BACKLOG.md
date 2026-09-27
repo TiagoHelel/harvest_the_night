@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`##########..............`  **44 / 109 done**
+`##########..............`  **45 / 109 done**
 
-0 doing / 65 todo / 0 blocked across 9 phases.
+0 doing / 64 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0045 - The auto-crossbow**. The whole of what is left is
+First up: **0046 - Fences and walls**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,23 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-65 task(s) left, the ready ones first, then what they
+64 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0045 - The auto-crossbow
-
-Ready to pick up.  Likely files: `src/core/game_data.gd`.
-
-The reference sheet's last tower: cheap, fast, low damage each, and it hits everything in a line.
-
-- A bolt that pierces, losing a lever's fraction of its damage per target
-- It fires along a line the player can see while placing it
-- Cheap in iron, hungry for energy - the reason to build the generator
-- Strong against the runner, weak against the tank, by construction
-
-  - done when: A line of five zombies takes the falloff the lever claims
-  - done when: It is clearly the wrong answer against a tank and clearly the right one against a rush
 
 ### 0046 - Fences and walls
 
@@ -1059,12 +1045,12 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0040** [The shop grows](prompts/0040-shop-full.md)
 - [x] **0041** [The first day teaches itself](prompts/0041-tutorial-day.md)
 
-## 3 - The full night  (3/17)
+## 3 - The full night  (4/17)
 
 - [x] **0042** [Data-driven defences](prompts/0042-defence-data.md)
 - [x] **0043** [The flamethrower tower](prompts/0043-tower-flame.md)
 - [x] **0044** [The mortar](prompts/0044-tower-mortar.md)
-- [ ] **0045** [The auto-crossbow](prompts/0045-tower-crossbow.md)
+- [x] **0045** [The auto-crossbow](prompts/0045-tower-crossbow.md)
 - [ ] **0046** [Fences and walls](prompts/0046-walls.md)
 - [ ] **0047** [Barricades](prompts/0047-barricades.md) - needs 0046
 - [ ] **0048** [Mines and traps](prompts/0048-traps.md)

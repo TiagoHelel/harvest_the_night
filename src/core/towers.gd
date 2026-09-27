@@ -31,9 +31,13 @@ extends RefCounted
 
 
 static func initial() -> Dictionary:
+	# `shots_fired` is merged in below; it lives here so that `State.create()`
+	# adopts it with the rest of the tower state.
 	return {
 		"projectiles": [],
 		"next_projectile_id": 1,
+		# Every shot any tower has fired, whatever shape it was.
+		"shots_fired": 0,
 		# The cells that shoot, and the `grid_version` that list was made for.
 		# **Rebuilt only when the farm changes**: scanning a hundred and ten
 		# occupants every tick to find the four towers among them was most of
@@ -95,10 +99,19 @@ static func tick(state: Dictionary) -> void:
 		# silent tower: `design.md` does not do punishment mechanics, and a
 		# tower that stopped is a tower the player stops looking at.
 		var armed := Ammo.spend(state, tower["id"])
-		if StringName(entry.get("shape", GameData.SHAPE_SINGLE)) 				== GameData.SHAPE_CONE:
-			_burn_cone(state, cell, entry, target, armed)
-		else:
-			_fire(state, cell, tower["id"], entry, target, armed)
+		# **Every shot, whatever shape it is.** Three of the four shapes fire
+		# nothing that flies - a cone and a line land at once - so counting
+		# projectiles stopped meaning "did it shoot" the moment the
+		# flamethrower worked. Task 0033's power assert was reading zero from
+		# a wall of crossbows that were firing perfectly well.
+		state["shots_fired"] = int(state.get("shots_fired", 0)) + 1
+		match StringName(entry.get("shape", GameData.SHAPE_SINGLE)):
+			GameData.SHAPE_CONE:
+				_burn_cone(state, cell, entry, target, armed)
+			GameData.SHAPE_LINE:
+				_pierce_line(state, cell, entry, target, armed)
+			_:
+				_fire(state, cell, tower["id"], entry, target, armed)
 
 		# **Asked fresh after every shot**, so a generator running dry part way
 		# through a night slows the guns from the next shot rather than from the
@@ -335,6 +348,75 @@ static func _advance_projectiles(state: Dictionary) -> void:
 		flying.erase(shot)
 
 
+## Everything standing on the straight line to the target, in order, until the
+## bolt has been through `pierce` of them.
+##
+## **The order is the whole feature.** A bolt that hit the far one first and
+## the near one last would be the same total damage arranged so that standing
+## in a queue did not matter - and standing in a queue is exactly what the
+## crossbow punishes.
+##
+## Like the cone it lands at once: a bolt crosses its whole range in a third of
+## a second, and chasing it down the line would be bookkeeping for something
+## the player reads as instantaneous.
+##
+## Integer throughout, and the same two products as the cone - the dot for "in
+## front of the tower", the cross for "on the line rather than beside it".
+static func _pierce_line(state: Dictionary, from: Vector2i,
+		entry: Dictionary, target: int, armed: bool) -> void:
+	var aim := Entities.cell_of(state, target) - from
+	if aim == Vector2i.ZERO:
+		return
+	var reach := int(entry.get("range", 0))
+	var damage := int(entry.get("damage", 1))
+	if not armed:
+		damage = Ammo.weak_damage(damage)
+	var falloff := int(entry.get("pierce_falloff_percent", 0))
+	var most := maxi(int(entry.get("pierce", 1)), 1)
+	var kind := StringName(entry.get("damage_type", GameData.DAMAGE_IMPACT))
+
+	# Everything on the line, nearest first. `Entities.ids()` is sorted, so two
+	# standing the same distance away are always taken in the same order.
+	var queue: Array = []
+	for id in Entities.ids(state):
+		var cell := Entities.cell_of(state, id)
+		if cell.x < 0 or Grid.chebyshev(from, cell) > reach:
+			continue
+		var to := cell - from
+		if to.x * aim.x + to.y * aim.y <= 0:
+			continue        # behind the tower
+		# **A line one tile wide.** The cross product is the perpendicular
+		# distance times the aim's length, so comparing it against the aim's
+		# length squared asks "within about a tile of the line" with no square
+		# root and nothing dividing before it multiplies.
+		if absi(to.x * aim.y - to.y * aim.x) * 2 > aim.length_squared():
+			continue        # beside the line, not on it
+		queue.append([Grid.chebyshev(from, cell), id])
+	queue.sort()
+
+	var through := 0
+	for pair in queue:
+		if through >= most:
+			break
+		# **A share of the original**, not of what is left. Taking a fifth off
+		# what remains is 5, 4, 3.2, 2.56 and an integer mess that floors out
+		# after three; taking it off the original is 5, 4, 3, 2, 1, which is a
+		# curve a player can count.
+		var share := maxi(100 - falloff * through, 0)
+		var dealt := damage * share / 100
+		if dealt <= 0:
+			break           # the bolt has nothing left to give
+		Combat.hit(state, int((pair as Array)[1]), dealt, kind)
+		through += 1
+
+
+## Fire the line of a given declaration, now, at a given target. The seam the
+## other shapes have.
+static func pierce_line_for_test(state: Dictionary, from: Vector2i,
+		entry: Dictionary, target: int, armed: bool) -> void:
+	_pierce_line(state, from, entry, target, armed)
+
+
 ## Everything in the wedge between this tower and what it is aiming at.
 ##
 ## **Nothing is thrown.** A flamethrower reaches its whole range instantly, so
@@ -443,6 +525,15 @@ static func _land_at(state: Dictionary, shot: Dictionary, middle: Vector2i,
 		# straight line between.
 		var share := 100 - (100 - edge) * apart / radius
 		Combat.hit(state, id, maxi(damage * share / 100, 1), kind)
+
+
+## How many shots every tower on the farm has fired, ever.
+##
+## **What a test should ask**, rather than counting what is in the air: a cone
+## and a line put nothing there, and a guided shot that resolves inside one
+## tick is never seen either.
+static func shots_fired(state: Dictionary) -> int:
+	return int(state.get("shots_fired", 0))
 
 
 ## How many shots are in the air, for the debug overlay and the perf budget.

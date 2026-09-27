@@ -483,7 +483,15 @@ const SHAPE_SPLASH := &"splash"
 ## moved, which is why a cone is the one shape with no projectile.
 const SHAPE_CONE := &"cone"
 
-const SHAPES: Array = [SHAPE_SINGLE, SHAPE_SPLASH, SHAPE_CONE]
+## A bolt along the straight line to the target, through everything on it.
+##
+## Like the cone, it lands the instant it is fired: a crossbow bolt crosses its
+## whole range in a third of a second, and a projectile that had to be chased
+## down a line would be three ticks of bookkeeping for something the player
+## reads as instantaneous anyway.
+const SHAPE_LINE := &"line"
+
+const SHAPES: Array = [SHAPE_SINGLE, SHAPE_SPLASH, SHAPE_CONE, SHAPE_LINE]
 
 
 ## **What a shot in the air is doing.** `guided` follows what it was fired at
@@ -598,9 +606,18 @@ const DEFENCES: Dictionary = {
 	&"auto_crossbow": {
 		"cost": {WOOD: 15, IRON: 20},
 		"targeting": TARGET_CLOSEST_TO_HOUSE,
-		"shape": SHAPE_SINGLE,   # task 0045 gives it the line
+		"shape": SHAPE_LINE,
 		"hp": 50,                       # LEVER: hit points, 30-90
-		"damage": 3,                    # LEVER: per bolt, 1-6
+		# **Five, not three.** The falloff below takes a fifth of the original
+		# off each target the bolt goes through, and at three damage that is a
+		# curve of 3, 2, 1, 1, 1 - the minimum-hit floor eats it and the lever
+		# stops meaning anything. At five it reads exactly as it is written:
+		# 5, 4, 3, 2, 1 down a line of five.
+		#
+		# It stays the wrong answer against a tank, which is the point: armour 3
+		# takes a five-damage bolt down to two, and a tank has a hundred and
+		# twenty hit points.
+		"damage": 5,                    # LEVER: per bolt, 1-8
 		"damage_type": DAMAGE_IMPACT,
 		"range": 7,                     # LEVER: tiles, 5-10
 		"reload_ticks": 15,             # LEVER: ticks, 8-30
@@ -609,7 +626,15 @@ const DEFENCES: Dictionary = {
 		# energy instead - three, the hungriest thing on the farm.
 		"projectile_tiles_per_second": 22,
 		"pierce": 5,                    # LEVER: targets in the line, 2-8
-		"pierce_falloff": 0.4,          # LEVER: fraction lost each, 0.2-0.6
+		# **A fifth of the original off each target passed**, not a fifth of
+		# whatever is left - which would be 5, 4, 3.2, 2.56 and an integer mess
+		# that floors out after three. Subtracting from the original gives a
+		# curve a player can count: 5, 4, 3, 2, 1.
+		#
+		# Another fraction turned into a percentage, after `WATER_GROWTH_BONUS`
+		# (0029), `BROWNOUT_RATE` (0033) and `splash_falloff` (0044). The table
+		# was written in fractions; the rules want integers.
+		"pierce_falloff_percent": 20,   # LEVER: percent of the original, 10-40
 		"energy_draw": 3,               # hungry: the reason to build a generator
 	},
 	&"mine": {
@@ -1321,6 +1346,10 @@ static func check_defences(defences: Dictionary) -> Array:
 					% [defence_id, shape])
 			elif shape == SHAPE_SPLASH and int(defence.get("splash_tiles", 0)) <= 0:
 				errors.append("defence '%s' splashes over no tiles at all"
+					% defence_id)
+			elif shape == SHAPE_LINE and int(defence.get("pierce", 0)) < 1:
+				errors.append(("defence '%s' fires a line that goes through "
+					+ "nobody, which is a single shot with extra words")
 					% defence_id)
 			elif shape == SHAPE_CONE:
 				# **The angle a designer reads and the number the rules use have

@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 37
+const GROUPS := 38
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -101,6 +101,7 @@ func _run() -> void:
 	_task_0042_declared()
 	_task_0043_flame()
 	_task_0044_mortar()
+	_task_0045_crossbow()
 
 
 func _finish() -> void:
@@ -3724,13 +3725,16 @@ func _task_0033_power() -> void:
 	expect(Power.is_running(night, gen), "the generator is turning")
 	var lit := Power.percent(night)
 
+	# **Asked of the rules, not counted off the projectiles.** A cone and a
+	# line put nothing in the air, so `in_flight` reads zero for a wall of
+	# crossbows firing perfectly well - which is what it did the moment task
+	# 0045 gave the crossbow its line.
 	var dark_at := -1
+	var fired_at_first := Towers.shots_fired(night)
 	var shots := 0
 	for t in 12000:
-		var before := Towers.in_flight(night)
 		Sim.advance(night, 1)
-		if Towers.in_flight(night) > before:
-			shots += 1
+		shots = Towers.shots_fired(night) - fired_at_first
 		if dark_at < 0 and not Power.is_running(night, gen):
 			dark_at = t
 		if int(night["phase"]) != Phases.NIGHT:
@@ -5801,3 +5805,175 @@ func _splash_rings(seed_value: int, entry: Dictionary) -> Array:
 		took.append(int(before[i])
 			- int(Entities.get_one(state, int(who[i])).get("hp", 0)))
 	return took
+
+
+## 0045 - the auto-crossbow: cheap, fast, and it goes through people.
+func _task_0045_crossbow() -> void:
+	var entry: Dictionary = GameData.DEFENCES[&"auto_crossbow"]
+
+	expect(StringName(entry["shape"]) == GameData.SHAPE_LINE,
+		"the crossbow fires a line", str(entry["shape"]))
+	for lever in ["pierce", "pierce_falloff_percent", "energy_draw", "damage",
+			"range", "reload_ticks"]:
+		expect(entry.has(lever), "and declares its %s" % lever)
+	expect(GameData.check_defences(GameData.DEFENCES).is_empty(),
+		"the shipped defences pass their own check",
+		str(GameData.check_defences(GameData.DEFENCES)))
+	var pointless: Dictionary = GameData.DEFENCES.duplicate(true)
+	(pointless[&"auto_crossbow"] as Dictionary)["pierce"] = 0
+	expect(not GameData.check_defences(pointless).is_empty(),
+		"a line that goes through nobody is refused")
+
+	# **Cheap in iron, hungry for energy.** The reason to build a generator.
+	var cost: Dictionary = entry["cost"]
+	var gun: Dictionary = GameData.DEFENCES[&"gun_tower"]
+	# **Cheap against the towers it competes with**, which is the flamethrower
+	# and the mortar - not against the starter tower, which is cheaper than
+	# everything by construction and always will be. The crossbow's price is
+	# paid in energy; this is the assert that says the iron is not where it
+	# hurts.
+	for rival in [&"flame_tower", &"mortar"]:
+		var theirs: Dictionary = (GameData.DEFENCES[rival]
+			as Dictionary)["cost"]
+		expect(int(cost[GameData.IRON]) < int(theirs[GameData.IRON]),
+			"it costs less iron than the %s" % rival,
+			"%d against %d" % [cost[GameData.IRON], theirs[GameData.IRON]])
+	expect(cost.size() <= (gun["cost"] as Dictionary).size() + 1,
+		"and wants no more kinds of thing than the basic tower does",
+		str(cost.keys()))
+	var hungriest := 0
+	for id in GameData.sorted_names(GameData.DEFENCES.keys()):
+		hungriest = maxi(hungriest,
+			int((GameData.DEFENCES[id] as Dictionary).get("energy_draw", 0)))
+	expect(int(entry["energy_draw"]) == hungriest,
+		"and is the hungriest thing on the farm",
+		str(entry["energy_draw"]))
+	expect(int(entry["energy_draw"]) > GameData.BASE_ENERGY / 2,
+		"hungry enough that two of them want a generator",
+		str(entry["energy_draw"]))
+
+	# **A line of five takes the falloff the lever claims.** The done-when.
+	var line := _bolt_through_five(2700, entry)
+	var damage := int(entry["damage"])
+	var falloff := int(entry["pierce_falloff_percent"])
+	print("  a bolt of %d through five, losing %d%% of the original each: %s"
+		% [damage, falloff, str(line)])
+
+	for step in 5:
+		var share := maxi(100 - falloff * step, 0)
+		expect(int(line[step]) == maxi(damage * share / 100, 1),
+			"the %d%s took %d%% of the bolt" % [step + 1,
+				"st" if step == 0 else "th", share], str(line[step]))
+	expect(int(line[0]) > int(line[4]),
+		"so the first takes more than the fifth",
+		"%d against %d" % [line[0], line[4]])
+	expect(int(line[5]) == 0,
+		"and the sixth takes nothing - the bolt stops at `pierce`",
+		str(line[5]))
+
+	# **It only hits what is on the line.**
+	var beside := _bolt_beside(2701, entry)
+	expect(int(beside["on"]) > 0, "the one in the way is hit",
+		str(beside["on"]))
+	expect(int(beside["off"]) == 0,
+		"and the one standing next to the line is not", str(beside["off"]))
+	expect(int(beside["behind"]) == 0,
+		"and neither is the one behind the tower", str(beside["behind"]))
+
+	# **The right answer against a rush, the wrong one against a tank.** The
+	# other done-when, measured as bolts-to-kill.
+	var runner: Dictionary = GameData.ENEMIES[&"runner"]
+	var tank: Dictionary = GameData.ENEMIES[&"tank"]
+	var per_runner := maxi(damage - int(runner.get("armour", 0)),
+		Combat.MINIMUM_HIT)
+	var per_tank := maxi(damage - int(tank.get("armour", 0)),
+		Combat.MINIMUM_HIT)
+	var bolts_runner := (int(runner["hp"]) + per_runner - 1) / per_runner
+	var bolts_tank := (int(tank["hp"]) + per_tank - 1) / per_tank
+	print("  bolts to kill: runner %d, tank %d" % [bolts_runner, bolts_tank])
+	expect(bolts_tank > bolts_runner * 5,
+		"a tank soaks many times what a runner does",
+		"%d against %d" % [bolts_tank, bolts_runner])
+
+	# And the same arithmetic against the gun tower, which is the comparison a
+	# player actually makes.
+	var gun_damage := int(gun["damage"])
+	var gun_per_tank := maxi(gun_damage - int(tank.get("armour", 0)),
+		Combat.MINIMUM_HIT)
+	var gun_bolts_tank := (int(tank["hp"]) + gun_per_tank - 1) / gun_per_tank
+	expect(gun_bolts_tank < bolts_tank
+		or int(gun["reload_ticks"]) > int(entry["reload_ticks"]),
+		"and the basic tower is the better answer to one, per shot",
+		"%d shots against %d" % [gun_bolts_tank, bolts_tank])
+
+	# Against a crowd it is the other way round, which is the whole point: one
+	# bolt through five is worth more than five separate shots of the same
+	# size would be, because it is one reload.
+	var through_five := 0
+	for step in 5:
+		through_five += int(line[step])
+	expect(through_five > damage,
+		"one bolt through a queue is worth more than one bolt",
+		"%d against %d" % [through_five, damage])
+
+	# **Without rounds it is weaker but still fires**, like everything else.
+	var unarmed := _bolt_through_five(2702, entry, false)
+	expect(int(unarmed[0]) > 0, "an unarmed bolt still hits the first",
+		str(unarmed[0]))
+	expect(int(unarmed[0]) < int(line[0]), "for less",
+		"%d against %d" % [unarmed[0], line[0]])
+
+	# **Shots are counted by the rules**, because three of the four shapes put
+	# nothing in the air to count.
+	var counting := _fresh_night(2703)
+	expect(Towers.shots_fired(counting) == 0, "a quiet night has fired nothing")
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## Fire one bolt down a line of six and report what each of them took.
+func _bolt_through_five(seed_value: int, entry: Dictionary,
+		armed: bool = true) -> Array:
+	var state := _fresh_night(seed_value)
+	var from := Farm.house_centre(state) + Vector2i(0, 6)
+
+	var who: Array = []
+	for step in range(1, 7):
+		var id := Entities.spawn(state, &"walker", from + Vector2i(step, 0))
+		Entities.set_hp(state, id, 500)
+		who.append(id)
+	var before: Array = []
+	for id in who:
+		before.append(int(Entities.get_one(state, int(id)).get("hp", 0)))
+
+	Towers.pierce_line_for_test(state, from, entry, int(who[0]), armed)
+
+	var took: Array = []
+	for i in who.size():
+		took.append(int(before[i])
+			- int(Entities.get_one(state, int(who[i])).get("hp", 0)))
+	return took
+
+
+## One on the line, one beside it, one behind the tower.
+func _bolt_beside(seed_value: int, entry: Dictionary) -> Dictionary:
+	var state := _fresh_night(seed_value)
+	var from := Farm.house_centre(state) + Vector2i(0, 6)
+
+	var on := Entities.spawn(state, &"walker", from + Vector2i(3, 0))
+	var off := Entities.spawn(state, &"walker", from + Vector2i(3, 3))
+	var behind := Entities.spawn(state, &"walker", from + Vector2i(-3, 0))
+	for id in [on, off, behind]:
+		Entities.set_hp(state, id, 500)
+	var before: Dictionary = {}
+	for id in [on, off, behind]:
+		before[id] = int(Entities.get_one(state, id).get("hp", 0))
+
+	Towers.pierce_line_for_test(state, from, entry, on, true)
+
+	return {
+		"on": int(before[on]) - int(Entities.get_one(state, on).get("hp", 0)),
+		"off": int(before[off]) - int(Entities.get_one(state, off).get("hp", 0)),
+		"behind": int(before[behind])
+			- int(Entities.get_one(state, behind).get("hp", 0)),
+	}

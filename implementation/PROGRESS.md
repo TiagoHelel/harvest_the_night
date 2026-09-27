@@ -3154,3 +3154,91 @@ and expects a complaint.
 
 `python tools/verify.py` prints PASS: 1356 asserts, 364 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+
+## 0045 - The auto-crossbow - done 2026-09-27
+
+The reference sheet's last tower, and the fourth shape. Every tower on the
+sheet now does something only it does.
+
+**What changed.** `SHAPE_LINE`: a bolt down the straight line to the target,
+through everything on it, losing a share of the original damage per target
+passed. And a shot counter in the rules, because three of the four shapes now
+fire nothing that flies.
+
+Files: `src/core/game_data.gd`, `towers.gd`, `src/tools/headless_check.gd`.
+Verify: 1386 headless / 364 input / both hashes moved on purpose, below.
+
+### The falloff, measured
+
+    a bolt of 5 through five, losing 20% of the original each: [5, 4, 3, 2, 1, 0]
+
+**A share of the original, not of what is left.** Taking a fifth off what
+remains is 5, 4, 3.2, 2.56 - an integer mess that floors out after three and a
+lever that stops meaning anything. Taking it off the original gives a curve a
+player can count, and the sixth zombie takes nothing because the bolt stops at
+`pierce`.
+
+Two numbers moved to make that readable:
+
+- `damage` 3 -> 5. At three, a fifth off each step is 3, 2, 1, 1, 1 and the
+  minimum-hit floor eats the curve.
+- `pierce_falloff` 0.4 -> `pierce_falloff_percent` 20. The **fourth** fraction
+  turned into a percentage, after `WATER_GROWTH_BONUS` (0029),
+  `BROWNOUT_RATE` (0033) and `splash_falloff` (0044). The table was written in
+  fractions throughout and the rules want integers; this is the last of them
+  in the defence table.
+
+### Right against a rush, wrong against a tank - by arithmetic
+
+    bolts to kill:  runner 2,  tank 60
+
+A runner has ten hit points and no armour, so a five-damage bolt takes two. A
+tank has a hundred and twenty and armour three, so the same bolt does two a
+time and needs sixty. That is not a balance pass, it is what the numbers
+already said - the task's requirement was to make it true "by construction",
+and armour was already the construction.
+
+And a bolt through a queue of five is worth 15 against a single shot's 5, off
+one reload. One tower, two completely different answers depending on what
+walks into it.
+
+### Counting shots stopped working
+
+Task 0033's power assert - "the towers kept shooting in the dark" - started
+reading **zero** from a wall of crossbows that were firing perfectly well. It
+counted `Towers.in_flight()` rising, and a line puts nothing in the air. The
+cone had the same hole since 0043 and got away with it because that test used
+mortars.
+
+`Towers.shots_fired()` is a counter in the state now, incremented once per
+shot whatever shape it is. Three of the four shapes land at once; counting
+projectiles has not meant "did it shoot" since the flamethrower started
+working.
+
+That is the second time this week a test has been measuring a proxy that
+stopped tracking the thing: shot counts for "worse" in task 0042, projectiles
+for "fired" here. Both were fine when written.
+
+### Notes
+
+- The line is one tile wide, tested with a cross product against the aim's
+  length squared - no square root, nothing dividing before it multiplies, and
+  the same two products the cone uses.
+- Nearest first, and the order is the whole feature: a bolt that hit the far
+  one first would be the same damage arranged so that standing in a queue did
+  not matter.
+- "Cheap in iron" is cheap **against the towers it competes with** - the
+  flamethrower and the mortar - not against the starter tower, which is
+  cheaper than everything by construction. The crossbow's price is paid in
+  energy: three, the hungriest thing on the farm, which is task 0033's
+  generator earning its place.
+
+### Hashes
+
+| | from | to | why |
+|---|---|---|---|
+| sim hash | `1963778898` | `1578557944` | the state gained `shots_fired` |
+| data hash | `1443374447` | `1540632093` | the crossbow's shape became `line`, its damage 3 -> 5, and `pierce_falloff` 0.4 became `pierce_falloff_percent` 20 |
+
+`python tools/verify.py` prints PASS: 1386 asserts, 364 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.
