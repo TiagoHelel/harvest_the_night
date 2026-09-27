@@ -31,6 +31,7 @@ var _was_down: Dictionary = {}
 
 @onready var _clock: Label = %Clock
 @onready var _world: WorldView = %WorldView
+@onready var _shop: ShopPanel = %ShopPanel
 @onready var _player_view: PlayerView = %WorldView/Occupants/PlayerView
 @onready var _driver: SimDriver = %SimDriver
 @onready var _debug: CanvasLayer = %DebugOverlay
@@ -44,6 +45,7 @@ func _ready() -> void:
 
 	_world.show_state(_driver.state)
 	_player_view.show_state(_driver.state)
+	_shop.show_state(_driver.state)
 	_world.look_at_cell(Player.cell(_driver.state))
 
 	# The overlay is handed its driver rather than going looking for one: a
@@ -72,7 +74,8 @@ func _process(_delta: float) -> void:
 	if _just_pressed(&"cancel"):
 		intent["cancel"] = true
 
-	_world.highlight(_target_cell())
+	_world.highlight(Vector2i(-1, -1) if Shop.is_open(_driver.state)
+		else _target_cell())
 	_world.look_at_cell(Player.cell(_driver.state))
 
 

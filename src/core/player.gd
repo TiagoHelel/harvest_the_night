@@ -61,6 +61,11 @@ static func initial() -> Dictionary:
 			# `{"verb": &"chop", "cell": [x, y], "left": n, "total": n}`
 			"action": {},
 		},
+		# Which panel is up: `&""`, `&"shop"`, and later the workshop and the
+		# tech tree. **Core owns this**, so "the player is shopping" is a fact
+		# about the game rather than about a node - which is what lets the
+		# autoplayer of task 0067 sell a day's wood with no window open.
+		"open_panel": &"",
 		# Written by the UI or the autoplayer, read by the tick, cleared by it.
 		"intent": {"move": [0, 0], "interact": false, "cancel": false},
 	}
@@ -112,6 +117,15 @@ static func tick(state: Dictionary) -> void:
 	var move: Array = intent["move"]
 	var dx := signi(int(move[0]))
 	var dy := signi(int(move[1]))
+
+	# **A panel takes the keys.** Walking away from a stall you are standing at
+	# would be a way to shop while running, and cancel is how you leave.
+	if StringName(state["open_panel"]) != &"":
+		if bool(intent.get("cancel", false)):
+			state["open_panel"] = &""
+		intent["interact"] = false
+		intent["cancel"] = false
+		return
 
 	if bool(intent.get("cancel", false)) or (dx != 0 or dy != 0):
 		# Walking away gives up on whatever was being done. Half a tree does
@@ -218,10 +232,13 @@ static func _advance_action(state: Dictionary) -> void:
 	if int(action["left"]) > 0:
 		return
 
-	Interact.complete(state, at, action["verb"])
+	var verb: StringName = StringName(action["verb"])
+	Interact.complete(state, at, verb)
 	# Keep going on the same target while it still offers the same verb, so
-	# chopping a tree is one held key rather than four presses.
-	if Interact.verb_at(state, at) == action["verb"]:
+	# chopping a tree is one held key rather than four presses - but only for
+	# verbs that are work. A trade does not change what the stall offers, so
+	# repeating it reopened the panel on the tick after it was closed.
+	if Interact.repeats(verb) and Interact.verb_at(state, at) == verb:
 		action["left"] = int(action["total"])
 	else:
 		_stop(state)

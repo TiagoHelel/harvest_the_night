@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`####....................`  **19 / 108 done**
+`####....................`  **20 / 108 done**
 
-0 doing / 89 todo / 0 blocked across 9 phases.
+0 doing / 88 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0020 - The shop: sell and buy**. The whole of what is left is
+First up: **0021 - The day HUD**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,24 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-89 task(s) left, the ready ones first, then what they
+88 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0020 - The shop: sell and buy
-
-Ready to pick up.  Likely files: `src/core/shop.gd, src/ui/shop_panel.gd`.
-
-Money, and the first reason to care about which resource you gathered.
-
-- Sell any sellable resource at the price in game_data; the reference sheet's prices are the starting point
-- Buy wheat seed and, later, whatever 0040 adds
-- A panel that opens on interacting with the stall and closes on cancel, pausing nothing
-- Buying and selling both go through the ledger
-- The shop refuses a sale it cannot pay for rather than going negative
-
-  - done when: Selling ten wood gives exactly the listed price times ten
-  - done when: `input_check` opens the shop, sells something and closes it
 
 ### 0021 - The day HUD
 
@@ -274,7 +259,7 @@ Time passing, without taking away the design document's promise that the player 
 
 ### 0040 - The shop grows
 
-Waits on 0020, 0028.  Likely files: `src/core/shop.gd, src/ui/shop_panel.gd`.
+Waits on 0028.  Likely files: `src/core/shop.gd, src/ui/shop_panel.gd`.
 
 Somewhere for money to go: all three seeds, materials when you are short, and the first upgrades.
 
@@ -1384,7 +1369,7 @@ For the player who beat the Giant and wants to know how far the farm goes. Cheap
 - [x] **0011** [input_check harness](prompts/0011-input-check.md)
 - [x] **0012** [Debug overlay](prompts/0012-debug-overlay.md)
 
-## 1 - The first playable build  (7/15)
+## 1 - The first playable build  (8/15)
 
 - [x] **0013** [The world renders](prompts/0013-world-render.md)
 - [x] **0014** [Sprites generated from ASCII maps](prompts/0014-sprite-pipeline.md)
@@ -1393,7 +1378,7 @@ For the player who beat the Giant and wants to know how far the farm goes. Cheap
 - [x] **0017** [Rocks and stone](prompts/0017-stone.md)
 - [x] **0018** [Wheat: till, plant, grow, harvest](prompts/0018-wheat.md)
 - [x] **0019** [The workshop and its first recipe](prompts/0019-workshop.md)
-- [ ] **0020** [The shop: sell and buy](prompts/0020-shop.md)
+- [x] **0020** [The shop: sell and buy](prompts/0020-shop.md)
 - [ ] **0021** [The day HUD](prompts/0021-day-hud.md)
 - [ ] **0022** [Switching reality](prompts/0022-reality-switch.md) - needs 0021
 - [ ] **0023** [Build mode](prompts/0023-build-mode.md) - needs 0022
@@ -1416,7 +1401,7 @@ For the player who beat the Giant and wants to know how far the farm goes. Cheap
 - [ ] **0037** [The workshop queue](prompts/0037-craft-queue.md) - needs 0036
 - [ ] **0038** [Production runs while you are elsewhere](prompts/0038-idle-production.md) - needs 0037, 0029
 - [ ] **0039** [The day clock and dusk](prompts/0039-day-clock.md) - needs 0021
-- [ ] **0040** [The shop grows](prompts/0040-shop-full.md) - needs 0020, 0028
+- [ ] **0040** [The shop grows](prompts/0040-shop-full.md) - needs 0028
 - [ ] **0041** [The first day teaches itself](prompts/0041-tutorial-day.md) - needs 0039, 0040
 
 ## 3 - The full night  (0/17)

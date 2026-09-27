@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 12
+const GROUPS := 13
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -76,6 +76,7 @@ func _run() -> void:
 	_task_0017_stone()
 	_task_0018_wheat()
 	_task_0019_workshop()
+	_task_0020_shop()
 
 
 func _finish() -> void:
@@ -1302,5 +1303,115 @@ func _task_0019_workshop() -> void:
 	var press_recipe: Dictionary = GameData.RECIPES[&"press_oil"]
 	expect(GameData.RESOURCES.has((press_recipe["output"] as Dictionary).keys()[0]),
 		"the press makes a resource, not a kit")
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## 0020 - the stall: selling is how a morning becomes a tower, and buying is
+## always a bad deal.
+func _task_0020_shop() -> void:
+	var state := State.create(91)
+	var stall: Vector2i = Farm.cells_with(state, &"shop")[0]
+
+	expect(Interact.verb_at(state, stall) == &"trade", "the stall offers trade")
+	expect(not Shop.is_open(state), "and nothing is open to begin with")
+	Interact.complete(state, stall, &"trade")
+	expect(Shop.is_open(state), "interacting opens it")
+
+	# **A panel takes the keys.** Walking away from a stall you are standing at
+	# would be a way to shop while running.
+	var before_cell := Player.cell(state)
+	var move: Array = (state["intent"] as Dictionary)["move"]
+	move[0] = 1
+	Sim.advance(state, 30)
+	expect(Player.cell(state) == before_cell,
+		"the player does not wander off while shopping",
+		"%s to %s" % [before_cell, Player.cell(state)])
+	expect(Shop.is_open(state), "and the panel is still up")
+
+	# **Nothing pauses.** design.md section 13 is about a farm that runs
+	# itself, and a shop that stopped the world would be the one place it did
+	# not.
+	var plot: Vector2i = Farm.cells_of(state, Farm.Terrain.SOIL)[0]
+	Interact.complete(state, plot, &"till")
+	Interact.complete(state, plot, &"plant")
+	var growth_before := int(Farming.plot(state, plot)["growth"])
+	Sim.advance(state, 60)
+	expect(int(Farming.plot(state, plot)["growth"]) == growth_before + 60,
+		"the wheat kept growing while the player haggled",
+		str(Farming.plot(state, plot)["growth"]))
+
+	move[0] = 0
+	(state["intent"] as Dictionary)["cancel"] = true
+	Sim.advance(state, 1)
+	expect(not Shop.is_open(state), "cancel closes it")
+
+	# **Selling ten wood pays exactly ten times the listed price.**
+	var trader := State.create(92)
+	Resources.add(trader, GameData.WOOD, 10)
+	var wood_price := Shop.sell_price(GameData.WOOD)
+	var money_before := Resources.amount(trader, GameData.MONEY)
+	var wood_before := Resources.amount(trader, GameData.WOOD)
+	var paid := Shop.sell(trader, GameData.WOOD, 10)
+	expect(paid == wood_price * 10, "ten wood pays ten times the price",
+		"%d for %d each" % [paid, wood_price])
+	expect(Resources.amount(trader, GameData.MONEY) == money_before + paid,
+		"through the ledger")
+	expect(Resources.amount(trader, GameData.WOOD) == wood_before - 10,
+		"and the wood is gone")
+
+	# **All or nothing.** A shop that quietly sold what it could would empty
+	# your bag when you fumbled a number.
+	Resources.spend(trader, GameData.WOOD,
+		Resources.amount(trader, GameData.WOOD))
+	Resources.add(trader, GameData.WOOD, 4)
+	var hash_before := State.hash_of(trader)
+	expect(Shop.sell(trader, GameData.WOOD, 10) == 0,
+		"selling more than you have sells none of it")
+	expect(State.hash_of(trader) == hash_before, "and changes nothing at all")
+	expect(Shop.sell_all(trader, GameData.WOOD) == wood_price * 4,
+		"while sell-all sells what is there")
+
+	# Money does not sell for money, and neither does energy.
+	expect(not Shop.sellable().has(GameData.MONEY), "money is not sellable")
+	expect(not Shop.sellable().has(GameData.ENERGY), "nor is energy")
+	expect(Shop.sell(trader, GameData.MONEY, 1) == 0,
+		"and trying is refused")
+
+	# **Buying is always worse than going and getting it.** At every price, or
+	# money quietly replaces playing the game.
+	for id in Shop.sellable():
+		expect(Shop.buy_price(id) > Shop.sell_price(id),
+			"%s costs more to buy than it pays to sell" % id,
+			"%d buy, %d sell" % [Shop.buy_price(id), Shop.sell_price(id)])
+
+	var buyer := State.create(93)
+	Resources.add(buyer, GameData.MONEY, 1000)
+	var stone_before := Resources.amount(buyer, GameData.STONE)
+	var cost := Shop.buy_price(GameData.STONE) * 5
+	var purse := Resources.amount(buyer, GameData.MONEY)
+	expect(Shop.buy(buyer, GameData.STONE, 5), "five stone can be bought")
+	expect(Resources.amount(buyer, GameData.STONE) == stone_before + 5,
+		"and arrive")
+	expect(Resources.amount(buyer, GameData.MONEY) == purse - cost,
+		"at the price on the label",
+		str(Resources.amount(buyer, GameData.MONEY)))
+
+	# **The shop refuses rather than going negative.**
+	var broke := State.create(94)
+	Resources.spend(broke, GameData.MONEY,
+		Resources.amount(broke, GameData.MONEY))
+	var broke_hash := State.hash_of(broke)
+	expect(not Shop.buy(broke, GameData.IRON, 1),
+		"with no money nothing is bought")
+	expect(State.hash_of(broke) == broke_hash, "and nothing moves")
+	expect(Resources.amount(broke, GameData.MONEY) == 0,
+		"least of all the money", str(Resources.amount(broke, GameData.MONEY)))
+
+	# Buy then sell always loses. The round trip has to be a loss at every
+	# price or there is a money printer on the farm.
+	for id in Shop.buyable():
+		expect(Shop.buy_price(id) > Shop.sell_price(id),
+			"buying %s and selling it back loses money" % id)
 
 	_completed += 1     # last line: an abandoned group never gets here

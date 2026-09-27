@@ -34,7 +34,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 4
+const CASES := 5
 
 var passed := 0
 var failed := 0
@@ -68,6 +68,7 @@ func _run() -> void:
 	await _case_0012_debug_overlay()
 	await _case_0013_world_view()
 	await _case_0015_player()
+	await _case_0020_shop()
 	_finish()
 
 
@@ -495,6 +496,80 @@ func _sprites_in(node: Node) -> int:
 		if child is Sprite2D:
 			n += 1
 	return n
+
+
+## 0020 - the stall, through the real panel: open it, sell something, leave.
+func _case_0020_shop() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var panel: ShopPanel = require_control("ShopPanel")
+	if driver == null or panel == null:
+		_completed += 1
+		await close_scene()
+		return
+
+	var state := driver.state
+	expect(not panel.visible, "the panel starts closed")
+
+	# Stand at the stall and press interact, the way a player would.
+	var stall: Vector2i = Farm.cells_with(state, &"shop")[0]
+	var beside := _walkable_neighbour(state, stall)
+	expect(beside != Vector2i(-1, -1), "the stall can be stood next to")
+	if beside == Vector2i(-1, -1):
+		_completed += 1
+		await close_scene()
+		return
+
+	driver.running = false
+	await frames(2)
+	var who: Dictionary = state["player"]
+	who["pos"] = [beside.x * Player.SUBTILE + Player.SUBTILE / 2,
+		beside.y * Player.SUBTILE + Player.SUBTILE / 2]
+	who["facing"] = _facing_from(beside, stall)
+	Resources.add(state, GameData.WOOD, 12)
+	driver.running = true
+	await frames(3)
+
+	expect(Player.target(state) == stall, "the stall is the target",
+		str(Player.target(state)))
+	await hold_key(KEY_SPACE, 4)
+	await frames(20)
+	expect(panel.visible, "pressing interact opens the panel")
+
+	# Sell, by clicking the button a player would click.
+	var wood_before := Resources.amount(state, GameData.WOOD)
+	var money_before := Resources.amount(state, GameData.MONEY)
+	await click_control("sell_one_wood")
+	await frames(4)
+	expect(Resources.amount(state, GameData.WOOD) == wood_before - 1,
+		"clicking sell sells one", str(Resources.amount(state, GameData.WOOD)))
+	expect(Resources.amount(state, GameData.MONEY)
+		== money_before + Shop.sell_price(GameData.WOOD),
+		"and pays for it", str(Resources.amount(state, GameData.MONEY)))
+
+	await click_control("sell_all_wood")
+	await frames(4)
+	expect(Resources.amount(state, GameData.WOOD) == 0,
+		"and sell-all empties the bag",
+		str(Resources.amount(state, GameData.WOOD)))
+
+	# A row with nothing behind it is shown and refuses to be pressed.
+	var button := locate_control("sell_one_wood")
+	expect(button != null and button.disabled,
+		"a row with none left is greyed rather than gone")
+
+	# Leaving.
+	await hold_key(KEY_ESCAPE, 4)
+	await frames(20)
+	expect(not panel.visible, "escape closes it")
+	# **And it stays closed.** The trade action used to repeat, so the panel
+	# reopened on the tick after it was shut.
+	await frames(30)
+	expect(not panel.visible, "and stays closed a second later")
+	expect(not Shop.is_open(state), "and the game agrees it is closed")
+
+	await close_scene()
+	_completed += 1     # last line: an abandoned case never gets here
 
 
 # ----------------------------------------------------------------- the helpers

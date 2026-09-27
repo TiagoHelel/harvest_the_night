@@ -904,3 +904,47 @@ Notes:
   that breaks whenever the map gains a building, and a failure that teaches
   nothing about the thing being tested is worse than no test - it is a test that
   gets edited without being read.
+
+## 0020 - The shop: sell and buy - done 2026-09-27
+
+What changed: money, and the first reason to care which resource you went and
+got. A stall that takes anything sellable, sells raw materials back at a markup,
+and a panel that opens on interact and closes on escape without pausing a thing.
+
+Files: src/core/shop.gd, src/ui/shop_panel.gd, src/core/interact.gd,
+src/core/player.gd, scenes/Main.tscn, src/ui/main.gd,
+src/tools/headless_check.gd, src/tools/input_check.gd
+
+Verify: PASS - 10 passed, 1 skipped, 25s. **352 asserts, 0 failed** (316
+before), **70 cases, 0 failed** (59 before). **Sim hash 865751178 -> 684454707**
+(the state gained `open_panel`). Data hash unchanged: prices were already there.
+
+Notes:
+
+- **A panel is a state, not a screen.** `state["open_panel"]` is owned by core:
+  the interact verb sets it, the cancel intent clears it, and `src/ui/` only
+  draws whatever it says. That makes "the player is shopping" a fact about the
+  game rather than about a node, which is what will let the autoplayer of task
+  0067 sell a day's wood with no window open.
+- **Nothing pauses.** Asserted: sixty ticks of haggling grew the wheat by sixty.
+  `design.md` section 13 is about a farm that runs itself, and a shop that
+  stopped the world would be the one place it did not.
+- **Selling is all or nothing.** Selling ten wood when you have four sells none
+  of them - checked by hashing the state before and after. A shop that quietly
+  sold what it could would empty your bag when you fumbled a number.
+- Buying is always a worse deal than going and getting it, at **every** price -
+  asserted for each sellable thing rather than for one. A shop that could
+  replace an afternoon at the rock face would quietly replace playing the game.
+- **Deviation:** the prompt asked for "buy wheat seed". Task 0018 made seeds
+  money rather than an inventory item, so there is nothing to buy - the buy side
+  stocks raw materials instead, which is the emergency exit for being three
+  stone short at dusk. Task 0040 gives it stock and a daily limit.
+- **A real bug, and input_check found it.** The player repeats an action while
+  the cell still offers the same verb - which is right for chopping a tree and
+  wrong for opening a stall. Escape closed the panel and the very next tick
+  reopened it, because the stall still offered `trade`. Verbs are now either
+  work, which repeats, or one-shot, which does not; `trade` and `craft` are
+  one-shot. The second one mattered too: a finished crafting job would have
+  silently started another and drained the stock.
+  The assert that keeps it honest is not "escape closes it" but **"and stays
+  closed a second later"**.

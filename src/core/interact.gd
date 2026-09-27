@@ -78,6 +78,22 @@ static func ticks_for(state: Dictionary, cell: Vector2i, verb: StringName) -> in
 	return int(DEFAULT_TICKS.get(verb, GameData.SECONDS))
 
 
+## Whether holding the key keeps doing it.
+##
+## **True for work, false for anything that opens something.** Chopping a tree
+## should be one held key rather than four presses, so `Player` restarts the
+## action while the cell still offers the same verb. Opening the stall through
+## that loop meant the panel reopened on the tick after the player closed it -
+## escape worked, and then a tick later it had not. Found by input_check.
+static func repeats(verb: StringName) -> bool:
+	return not ONE_SHOT.has(verb)
+
+
+## Verbs that happen once per press. They do not change what the cell offers,
+## so without this they would happen for ever.
+const ONE_SHOT: Array = [&"trade", &"craft"]
+
+
 ## The work is finished. Do whatever the verb means.
 ##
 ## One arm per verb, and an arm that belongs to a task the backlog has not
@@ -95,7 +111,7 @@ static func complete(state: Dictionary, cell: Vector2i, verb: StringName) -> voi
 		&"craft":
 			Crafting.start(state, cell, state["selected_recipe"])
 		&"trade":
-			pass        # task 0020 opens the shop panel
+			Shop.open(state)
 		_:
 			push_error("Interact.complete: nobody implements '%s'" % verb)
 
