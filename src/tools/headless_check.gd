@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 48
+const GROUPS := 49
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -112,6 +112,7 @@ func _run() -> void:
 	_task_0053_repair()
 	_task_0054_ability()
 	_task_0055_speed()
+	_task_0056_night_hud()
 
 
 func _finish() -> void:
@@ -8457,3 +8458,57 @@ func _a_night_to_run(seed_value: int) -> Dictionary:
 	_line_of_towers(state, &"gun_tower", 3)
 	Sim.advance(state, GameData.PREPARATION_TICKS)
 	return state
+
+
+## 0056 - what the night HUD is allowed to ask the rules.
+func _task_0056_night_hud() -> void:
+	# **The warning arrives before the skip goes away.** If the danger line
+	# were under the skip line, the first a player knew of trouble would be a
+	# control going dead, which is the game telling them off rather than
+	# telling them something.
+	expect(GameData.HOUSE_DANGER_PERCENT > GameData.SKIP_MIN_HOUSE_PERCENT,
+		"the house turns red before it stops being skippable",
+		"%d against %d" % [GameData.HOUSE_DANGER_PERCENT,
+			GameData.SKIP_MIN_HOUSE_PERCENT])
+	expect(GameData.WAVE_WARNING_TICKS > 0
+		and GameData.WAVE_WARNING_TICKS < GameData.WAVE_GAP_TICKS,
+		"and a wave is announced inside the gap before it, not across it",
+		"%d against %d" % [GameData.WAVE_WARNING_TICKS,
+			GameData.WAVE_GAP_TICKS])
+
+	# **A wave counter that counts.**
+	var night := _scheduled_night(3800)
+	var at: Array = Waves.progress(night)
+	expect(int(at[1]) == Waves.table(int(night["night"])).size(),
+		"the counter's second number is how many waves the night has",
+		str(at))
+	expect(int(at[0]) >= 1 and int(at[0]) <= int(at[1]),
+		"and the first is one of them", str(at))
+
+	# **The countdown is the gap before a wave, not the space inside one.**
+	var wave: Dictionary = night["wave"]
+	wave["done"] = false
+	wave["left"] = 0
+	wave["wait"] = 90
+	expect(Waves.incoming_in(night) == 90,
+		"with nothing left to send, the wait is the next wave coming",
+		str(Waves.incoming_in(night)))
+	wave["left"] = 3
+	expect(Waves.incoming_in(night) == 0,
+		"with a wave still arriving there is nothing to announce",
+		str(Waves.incoming_in(night)))
+	wave["left"] = 0
+	wave["done"] = true
+	expect(Waves.incoming_in(night) == 0,
+		"and nothing more is coming when the night is done sending",
+		str(Waves.incoming_in(night)))
+
+	# It counts down on its own, which is what makes it a countdown.
+	var running := _scheduled_night(3801)
+	var first := Waves.incoming_in(running)
+	Sim.advance(running, 10)
+	expect(Waves.incoming_in(running) < first or first == 0,
+		"and it comes down as the night runs",
+		"%d against %d" % [Waves.incoming_in(running), first])
+
+	_completed += 1     # last line: an abandoned group never gets here

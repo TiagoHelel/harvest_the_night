@@ -41,7 +41,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 26
+const CASES := 27
 
 var passed := 0
 var failed := 0
@@ -97,6 +97,7 @@ func _run() -> void:
 	await _case_0053_repair()
 	await _case_0054_ability()
 	await _case_0055_speed()
+	await _case_0056_night_hud()
 	_finish()
 
 
@@ -2611,16 +2612,20 @@ func _case_0055_speed() -> void:
 		return
 
 	var state := driver.state
-	var speed_line: Label = locate_control("SpeedLine") as Label
+	# The speed read-out is the night HUD's own button since task 0056; the
+	# skip line stays here, because skipping is not one of the three
+	# controls `design.md` draws.
+	var speed_line: Button = locate_control("SpeedButton") as Button
 	var skip_line: Label = locate_control("SkipLine") as Label
 	expect(speed_line != null and skip_line != null,
-		"the night's two read-outs exist")
+		"the speed control and the skip line both exist")
 	expect(hud.driver != null,
 		"and the HUD was handed the driver to work them with")
 
 	# **Neither is up by day**, and neither key does anything then.
 	await frames(2)
-	expect(not speed_line.visible, "the speed line is down by day")
+	expect(not speed_line.is_visible_in_tree(),
+		"the speed control is down by day")
 	expect(not skip_line.visible, "and so is the skip line")
 	driver.set_speed(1)
 	await tap_key(KEY_V)
@@ -2632,10 +2637,10 @@ func _case_0055_speed() -> void:
 	Sim.advance(state, GameData.PREPARATION_TICKS)
 	await frames(2)
 	expect(int(state["phase"]) == Phases.NIGHT, "it is night")
-	expect(speed_line.visible and skip_line.visible,
+	expect(speed_line.is_visible_in_tree() and skip_line.visible,
 		"and after dark both are up")
 	expect(speed_line.text.contains("1x"),
-		"the speed line says what speed it is", speed_line.text)
+		"the speed control says what speed it is", speed_line.text)
 
 	# **V cycles the table.**
 	var seen: Array = [driver.speed]
@@ -2654,7 +2659,7 @@ func _case_0055_speed() -> void:
 	driver.set_speed(4)
 	await frames(2)
 	expect(speed_line.text.contains("4x"),
-		"the line says what it is doing", speed_line.text)
+		"the control says what it is doing", speed_line.text)
 	var before := int(state["tick"])
 	Sim.advance(state, 40)
 	expect(int(state["tick"]) == before + 40,
@@ -2708,5 +2713,156 @@ func _case_0055_speed() -> void:
 	# Put it back, so this case leaves nothing behind for the next one.
 	if again != null:
 		again.set_speed(1)
+	await close_scene()
+	_completed += 1     # last line: an abandoned case never gets here
+
+
+## 0056 - the night HUD, and all three of its controls pressed.
+func _case_0056_night_hud() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var hud: DayHud = require_control("DayHud")
+	var night_hud: NightHud = require_control("NightHud")
+	if driver == null or hud == null or night_hud == null:
+		_completed += 1
+		await close_scene()
+		return
+
+	var state := driver.state
+	driver.set_speed(1)
+
+	# **It is not up by day**, and the day HUD is.
+	await frames(2)
+	expect(not night_hud.visible, "the night HUD is down in daylight")
+	expect(hud.shows_day(), "and the day's own chrome is up")
+
+	Phases.begin_preparation(state)
+	Sim.advance(state, GameData.PREPARATION_TICKS)
+	await frames(2)
+	expect(int(state["phase"]) == Phases.NIGHT, "it is night")
+	expect(night_hud.visible, "the night HUD replaces it")
+	expect(not hud.shows_day(), "and the day's chrome is gone")
+
+	# **Every number on it.**
+	var night_label: Label = locate_control("NightNumber") as Label
+	var wave_label: Label = locate_control("WaveCounter") as Label
+	var left_label: Label = locate_control("ZombiesLeft") as Label
+	var house_text: Label = locate_control("HouseNumbers") as Label
+	var house_bar: ColorRect = locate_control("HouseBar") as ColorRect
+	expect(night_label != null and wave_label != null and left_label != null
+		and house_text != null and house_bar != null,
+		"which night, which wave, how many left and how the house is doing")
+	expect(night_label.text.contains(str(int(state["night"]))),
+		"the night number is the night", night_label.text)
+	expect(wave_label.text.contains("/"),
+		"the wave counter is a counter", wave_label.text)
+	expect(house_text.text.contains(str(GameData.HOUSE_HP)),
+		"and the house says both numbers", house_text.text)
+
+	# **Readable at 480x270**: everything on it is inside the screen.
+	for named in ["NightNumber", "WaveCounter", "ZombiesLeft",
+			"HouseNumbers", "HouseBar", "NightBar", "RepairButton",
+			"FlareButton", "SpeedButton"]:
+		var ctl: Control = locate_control(named) as Control
+		expect(ctl != null, "the HUD has a %s" % named)
+		if ctl == null:
+			continue
+		var box := ctl.get_global_rect()
+		expect(box.position.x >= 0.0 and box.position.y >= 0.0
+			and box.end.x <= 480.0 and box.end.y <= 270.0,
+			"%s is on the screen" % named, str(box))
+		expect(ctl.get_global_rect().size.y <= 24.0,
+			"%s did not grow a thirty-one pixel button box" % named,
+			str(box.size))
+
+	# **The house bar shrinks with the house, and goes red.**
+	var whole := house_bar.size.x
+	state["house_hp"] = GameData.HOUSE_HP / 2
+	await frames(2)
+	expect(house_bar.size.x < whole,
+		"half a house is a shorter bar",
+		"%f against %f" % [house_bar.size.x, whole])
+	state["house_hp"] = maxi(GameData.HOUSE_HP
+		* GameData.HOUSE_DANGER_PERCENT / 100 - 1, 1)
+	await frames(2)
+	expect(house_text.modulate.r > house_text.modulate.g,
+		"and a house in danger is red", str(house_text.modulate))
+	state["house_hp"] = GameData.HOUSE_HP
+
+	# **All three controls, pressed.** The done-when.
+	#
+	# Repair first: park the player next to something broken so the control
+	# is live, then click it and watch hit points go back.
+	var spot := Vector2i(-1, -1)
+	var stand := Vector2i(-1, -1)
+	for y in range(3, Grid.HEIGHT - 3):
+		for x in range(20, Grid.WIDTH - 3):
+			var cell := Vector2i(x, y)
+			if Farm.buildable(state, cell) 					and Farm.walkable(state, cell + Vector2i(-1, 0)):
+				spot = cell
+				stand = cell + Vector2i(-1, 0)
+				break
+		if spot.x >= 0:
+			break
+	expect(spot.x >= 0, "there is somewhere to put a wall")
+	Farm.place(state, spot, {"id": &"wall",
+		"hp": int((GameData.DEFENCES[&"wall"] as Dictionary)["hp"])})
+	Farm.damage(state, spot, 60)
+	Resources.gain(state, {GameData.FOOD: 200, GameData.WOOD: 200})
+	_stand_at(state, stand, Player.EAST)
+	await frames(2)
+
+	var repair: Button = locate_control("RepairButton") as Button
+	expect(not repair.disabled,
+		"facing a broken wall, the repair control is live")
+	var hurt := int(Farm.occupant(state, spot).get("hp", 0))
+	await click_control("RepairButton")
+	await until(func() -> bool:
+		return int(Farm.occupant(state, spot).get("hp", 0)) > hurt,
+		"the wall to be mended")
+	expect(int(Farm.occupant(state, spot).get("hp", 0)) > hurt,
+		"clicking it puts hit points back",
+		str(Farm.occupant(state, spot).get("hp", 0)))
+
+	# The flare, and it reports its own wait afterwards.
+	var flare: Button = locate_control("FlareButton") as Button
+	expect(Ability.ready(state), "the flare is charged")
+	expect(not flare.disabled, "so the control is live")
+	await click_control("FlareButton")
+	await until(func() -> bool: return Ability.flares_used(state) > 0,
+		"the flare to go off")
+	expect(Ability.flares_used(state) == 1, "clicking it sets one off",
+		str(Ability.flares_used(state)))
+	await frames(2)
+	expect(flare.disabled, "and then the control goes dead")
+	expect(flare.text.contains("%"),
+		"saying how far through the wait it is", flare.text)
+
+	# And the speed.
+	await click_control("SpeedButton")
+	await frames(2)
+	expect(driver.speed != 1, "clicking the speed control changes the speed",
+		str(driver.speed))
+	var shown: Button = locate_control("SpeedButton") as Button
+	expect(shown.text.contains(str(driver.speed)),
+		"and it says which", shown.text)
+	driver.set_speed(1)
+
+	# **A wave is announced before it arrives.**
+	var warning: Label = locate_control("WaveWarning") as Label
+	expect(warning != null, "there is a wave warning")
+	var wave: Dictionary = state["wave"]
+	wave["done"] = false
+	wave["left"] = 0
+	wave["wait"] = GameData.WAVE_WARNING_TICKS - 1
+	await frames(2)
+	expect(warning.visible, "with a wave seconds away it is up")
+	expect(warning.text.contains("INCOMING"),
+		"and it says so", warning.text)
+	wave["wait"] = GameData.WAVE_WARNING_TICKS * 8
+	await frames(2)
+	expect(not warning.visible,
+		"with one a long way off it is not - it is a warning, not furniture")
+
 	await close_scene()
 	_completed += 1     # last line: an abandoned case never gets here

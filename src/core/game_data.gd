@@ -881,6 +881,18 @@ const HURT_TICKS := 5                   # LEVER: ticks, 2-12
 ## different speeds would be playing different games.
 const SPEEDS: Array = [1, 2, 4]
 
+## Below this the house bar goes red and pulses. **Above the skip line on
+## purpose**: the warning has to arrive before the night stops being skippable,
+## or the first the player knows of trouble is a control going dead.
+const HOUSE_DANGER_PERCENT := 60        # LEVER: percent of full, 40-75
+
+## How long before a wave arrives the HUD says it is coming.
+##
+## Long enough to decide something - a barricade goes down in a moment, a wall
+## mended takes a few seconds - and short enough that the warning is about
+## this wave rather than a permanent fixture.
+const WAVE_WARNING_TICKS := 4 * SECONDS # LEVER: ticks, 2-8 seconds worth
+
 ## How much house has to be left before the night may be skipped.
 ##
 ## **Because that night is worth watching.** Skipping is the semi-idle promise
@@ -1942,6 +1954,7 @@ static func digest() -> int:
 		"ability": ABILITY,
 		"hurt": [HURT_TICKS],
 		"speeds": [SPEEDS, SKIP_MIN_HOUSE_PERCENT],
+		"night_hud": [HOUSE_DANGER_PERCENT, WAVE_WARNING_TICKS],
 		"enemies": ENEMIES,
 		"nights": NIGHTS,
 		"wave_gap": [WAVE_GAP_TICKS, SPAWN_INTERVAL_TICKS, MVP_NIGHTS],

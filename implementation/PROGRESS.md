@@ -4093,3 +4093,74 @@ tripping over its own persistence.
 
 `python tools/verify.py` prints PASS: 1745 asserts, 411 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+
+## 0056 - The night HUD
+
+`design.md` section 14, on its own node: which night, which wave, how many are
+left, how the house is doing, and the three controls the design draws along
+the bottom - `[REPARAR] [HABILIDADE] [VELOCIDADE x2]`.
+
+### The mouse mystery of 0055, solved
+
+Task 0055 could not make a button work in the bottom-right corner of `DayHud`
+and left the finding here. The answer was in `Main.tscn`: **`DayHud` is the
+first child of `Screen`**, which puts it at the bottom of the UI's hit order,
+and it carries `mouse_filter = 2` in the scene file as well as in its own
+`_ready()`. `ShopPanel`, whose buttons have always worked, has no such line
+and comes later.
+
+So the night HUD is a sibling placed **after** the day HUD - above it in the
+hit order - with its buttons inside a `MOUSE_FILTER_STOP` frame, the way
+`BuildMode`'s palette already does it. All three controls are clicked in
+`input_check` and all three do what they say. The speed control that 0055
+could not click is one of them.
+
+The thirty-one pixel `Button` trap was there too, for the third time after
+tasks 0032 and 0040, and is fixed the same way: styleboxes with the vertical
+content margins taken out. `input_check` now asserts that **every** control on
+the night HUD is inside 480x270 and is not taller than 24 pixels, so the
+fourth time will be a red test rather than a hunt.
+
+### The three controls take the same road as the keys
+
+`REPAIR` writes `intent["interact"]`, `FLARE` writes `intent["ability"]`, and
+the speed button asks the driver. None of them touches the state, so a button,
+a key and the autoplayer of task 0067 all arrive at the rules the same way.
+
+They also say what they are: repair goes dim unless the cell the player faces
+can actually be mended, and the flare shows its own wait as a percentage
+instead of a bare refusal.
+
+### Impossible to miss
+
+The house bar is the biggest thing on the bar, and under
+`HOUSE_DANGER_PERCENT` it turns red **and pulses at half a second**, because a
+colour change alone is something you can be looking away from. The lever sits
+deliberately above `SKIP_MIN_HOUSE_PERCENT`: the warning has to arrive before
+the night stops being skippable, or the first a player knows of trouble is a
+control going dead. `headless_check` asserts that ordering rather than trusting
+two numbers to stay on the right side of each other.
+
+An incoming wave is announced four seconds out with the seconds on it, so the
+player knows whether there is time to mend the wall first. `Waves` gained
+`incoming_in()` for it, which answers the gap **before** a wave rather than
+the space between two of its members - one field carries both, and the
+difference is whether anything is still waiting to be sent.
+
+### What it deliberately does not own
+
+The power and ammunition lines stay on the day HUD. They have been up in both
+phases since task 0033 and their comments say why; moving them would have
+given two panels an opinion about the same number, which is what "sharing no
+state" is actually guarding against. Two existing input cases assert they are
+up at night, and they still are.
+
+### Hashes
+
+| | from | to | why |
+|---|---|---|---|
+| sim hash | `2770152428` | `2770152428` | **unchanged** - a HUD that moved the sim hash would be a HUD writing to the state |
+| data hash | `177116930` | `1839419045` | `HOUSE_DANGER_PERCENT` and `WAVE_WARNING_TICKS` are levers, so they joined the digest |
+
+`python tools/verify.py` prints PASS: 1753 asserts, 463 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

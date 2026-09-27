@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`############............`  **55 / 109 done**
+`############............`  **56 / 109 done**
 
-0 doing / 54 todo / 0 blocked across 9 phases.
+0 doing / 53 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0056 - The night HUD**. The whole of what is left is
+First up: **0057 - Structures take damage and die**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,24 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-54 task(s) left, the ready ones first, then what they
+53 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0056 - The night HUD
-
-Ready to pick up.  Likely files: `src/ui/night_hud.gd`.
-
-Section 14 of the design document: which night, which wave, how the house is doing, and the three buttons.
-
-- Night number, wave counter, house hit point bar, ammunition and energy
-- Repair, ability and speed as the three controls, exactly as the design document lays them out
-- An incoming wave is announced before it arrives
-- The house bar turning dangerous is impossible to miss
-- It replaces the day HUD on the phase change, sharing no state
-
-  - done when: Every number on it is readable at 480x270 scaled up
-  - done when: `input_check` presses all three controls
 
 ### 0057 - Structures take damage and die
 
@@ -896,7 +881,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0040** [The shop grows](prompts/0040-shop-full.md)
 - [x] **0041** [The first day teaches itself](prompts/0041-tutorial-day.md)
 
-## 3 - The full night  (14/17)
+## 3 - The full night  (15/17)
 
 - [x] **0042** [Data-driven defences](prompts/0042-defence-data.md)
 - [x] **0043** [The flamethrower tower](prompts/0043-tower-flame.md)
@@ -912,7 +897,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0053** [Repair during the night](prompts/0053-repair.md)
 - [x] **0054** [The player's ability](prompts/0054-ability.md)
 - [x] **0055** [Double speed and skipping the night](prompts/0055-speed-controls.md)
-- [ ] **0056** [The night HUD](prompts/0056-night-hud.md)
+- [x] **0056** [The night HUD](prompts/0056-night-hud.md)
 - [ ] **0057** [Structures take damage and die](prompts/0057-structure-damage.md)
 - [ ] **0058** [The Giant](prompts/0058-boss-giant.md) - needs 0057
 

@@ -109,6 +109,19 @@ static func progress(state: Dictionary) -> Array:
 	return [at, rows.size()]
 
 
+## Ticks until the next wave starts, or zero when one is already coming in or
+## the night is done sending.
+##
+## **The gap before a wave, not the space between two of its members.** The
+## same field carries both, so the difference is whether anything is still
+## waiting to be sent out of the current one.
+static func incoming_in(state: Dictionary) -> int:
+	var wave: Dictionary = state["wave"]
+	if bool(wave["done"]) or int(wave["left"]) > 0:
+		return 0
+	return maxi(int(wave["wait"]), 0)
+
+
 ## How many are still to come tonight, counting what is already out there.
 static func remaining(state: Dictionary) -> int:
 	var rows := table(int(state["night"]))
