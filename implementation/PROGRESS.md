@@ -990,3 +990,57 @@ Notes:
 - `main.gd` no longer listens for the tick signal. Every panel reads the state
   each frame and draws what it finds; a signal per tick would have meant a
   redraw per tick, which at 4x speed is four times the work for one picture.
+
+## 0022 - Switching reality - done 2026-09-27
+
+What changed: the moment the game is named after. The same farm, relit. The
+light fades between two tints from the palette, the daylight verbs are put away
+at dusk, and the player walks their defences after dark.
+
+Files: src/ui/world_view.gd, src/ui/palette_data.gd (generated),
+tools/palette.py, tools/gen_sprites.py, src/core/interact.gd, src/core/sim.gd,
+src/core/phases.gd, src/tools/headless_check.gd, src/tools/input_check.gd
+
+Verify: PASS - 10 passed, 1 skipped, 27s. **375 asserts, 0 failed**, **94 cases,
+0 failed**. Both hashes unchanged: the player ticking at night changes nothing
+while nobody is pressing anything, and the scenario presses nothing.
+
+Notes:
+
+- **Nothing moves but the light.** Asserted rather than eyeballed: the terrain,
+  the occupants and the plots are hashed before the switch and after it, and
+  they are the same number. A tower built by day is in the same cell by night
+  because it is the same dictionary.
+- **The palette is generated into GDScript** by `gen_sprites.py`, so the night
+  ramp the view applies and the colours the sprites were drawn against are the
+  same numbers by construction. A hand-kept second copy would have drifted the
+  first time somebody tuned a colour, and the drift would have been invisible
+  because both copies would look plausible.
+- **The farm is asleep after dark.** `Interact` puts the daylight verbs away in
+  any phase but DAY - chopping a tree while a wave comes in would be the one
+  thing on the night map that was not about the night, and the systems behind
+  those verbs do not tick then anyway, so a verb that still worked would be a
+  verb that lied. The player still walks: `design.md` section 8 has them out
+  there repairing and aiming.
+- **The night is teal, not purple, and that is as far as a multiply goes.**
+  `CanvasModulate` can only multiply, and a farm is mostly grass: multiplying
+  green by blue leaves green. The tint pulls green down hardest, which gets it
+  to a cold blue-teal that reads as another world. The reference sheet's purple
+  needs a *lift* as well as a tint, and nothing that multiplies can add light -
+  task 0076 has the shader.
+- **The fade was an exponential approach pretending to be a fade.** Lerping the
+  current colour towards the target every frame arrives quickly and never quite
+  finishes, so `is_transitioning()` stayed true long after it looked over. It
+  lerps from where it started now.
+- **Frame counts are not time, and that was three flaky asserts.** A tick is
+  owed every thirtieth of a second and a headless frame can be a thousandth, so
+  "wait four frames for the phase to change" is a bet on how busy the machine
+  is - it passed alone and failed one run in four under load. `input_check` has
+  an `until(condition)` helper now and every wait that meant "until something
+  happened" uses it. Six parallel runs, all clean.
+- **The hash guard flagged a move I could not explain, and it was right to.**
+  Investigated rather than accepted: the scenario is stable at 1543735352 with
+  and without this task's core changes, and the odd number came from six Godot
+  processes running at once against one `.godot/` cache. **Do not run Godot in
+  parallel against the same project** - they fight over the import cache and
+  the loser reports nonsense.

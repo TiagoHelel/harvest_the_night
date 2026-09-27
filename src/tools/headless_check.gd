@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 14
+const GROUPS := 15
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -78,6 +78,7 @@ func _run() -> void:
 	_task_0019_workshop()
 	_task_0020_shop()
 	_task_0021_night_intent()
+	_task_0022_reality()
 
 
 func _finish() -> void:
@@ -1445,5 +1446,85 @@ func _task_0021_night_intent() -> void:
 	expect(int(evening["phase"]) == Phases.DAY,
 		"and the day has still not ended itself",
 		Phases.name_of(int(evening["phase"])))
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## 0022 - the same farm, a different world. Nothing moves but the light and
+## what the farm will let you do.
+func _task_0022_reality() -> void:
+	var state := State.create(111)
+
+	# Build something and note the whole farm, so that "nothing moved" can be
+	# checked rather than eyeballed.
+	var spot := _any_buildable(state)
+	Farm.place(state, spot, {"id": &"gun_tower", "hp": 60})
+	var tilled: Vector2i = Farm.cells_of(state, Farm.Terrain.SOIL)[0]
+	Interact.complete(state, tilled, &"till")
+	Interact.complete(state, tilled, &"plant")
+	var farm_by_day := State.hash_of({
+		"terrain": state["terrain"],
+		"occupants": state["occupants"],
+		"plots": state["plots"],
+	})
+
+	# **The switch is a transition, not a new world.**
+	expect(Phases.begin_preparation(state), "the day can end")
+	expect(int(state["phase"]) == Phases.PREPARATION, "into preparation")
+	Sim.advance(state, GameData.PREPARATION_TICKS)
+	expect(int(state["phase"]) == Phases.NIGHT, "and then the night")
+
+	expect(Farm.occupant(state, spot)["id"] == &"gun_tower",
+		"the tower built by day is in the same cell by night")
+	expect(State.hash_of({
+		"terrain": state["terrain"],
+		"occupants": state["occupants"],
+		"plots": state["plots"],
+	}) == farm_by_day, "and the whole farm is the farm it was")
+
+	# **The farm is asleep after dark.** The verbs of the daylight are put away,
+	# so nothing offers to be chopped while a wave is coming in.
+	var tree: Vector2i = Farm.cells_with(state, &"tree")[10]
+	expect(Interact.verb_at(state, tree) == &"",
+		"a tree offers nothing at night", str(Interact.verb_at(state, tree)))
+	expect(Interact.verb_at(state, Farm.cells_with(state, &"shop")[0]) == &"",
+		"and neither does the stall")
+	expect(Interact.verb_at(state, tilled) == &"", "nor the field")
+
+	# But the player is still out there, and still walks.
+	var before := Player.cell(state)
+	var move: Array = (state["intent"] as Dictionary)["move"]
+	move[0] = 1
+	Sim.advance(state, 40)
+	move[0] = 0
+	expect(Player.cell(state) != before,
+		"the player walks their defences at night",
+		"%s to %s" % [before, Player.cell(state)])
+
+	# A panel does not survive the sunset.
+	var shopper := State.create(112)
+	Shop.open(shopper)
+	expect(Shop.is_open(shopper), "the market is open")
+	Phases.begin_preparation(shopper)
+	expect(not Shop.is_open(shopper), "and closes with the day")
+
+	# **Switching twice gives back the same day, one number further on.**
+	var cycled := State.create(113)
+	var morning := State.copy(cycled)
+	Phases.begin_preparation(cycled)
+	Sim.advance(cycled, GameData.PREPARATION_TICKS + 500)
+	Phases.enter_result(cycled, true)
+	Phases.begin_day(cycled)
+
+	expect(int(cycled["day"]) == int(morning["day"]) + 1,
+		"the day counter moved once", str(cycled["day"]))
+	for key in ["terrain", "occupants", "plots", "held"]:
+		expect(State.hash_of({key: cycled[key]})
+			== State.hash_of({key: morning[key]}),
+			"and %s came back untouched" % key)
+
+	# Daylight puts the verbs back.
+	expect(Interact.verb_at(cycled, Farm.cells_with(cycled, &"tree")[10])
+		== &"chop", "and in the morning there are trees to chop again")
 
 	_completed += 1     # last line: an abandoned group never gets here

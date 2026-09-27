@@ -61,6 +61,7 @@ static func _tick_day(state: Dictionary) -> void:
 ## The build step. The clock does not run and nothing attacks: this is the one
 ## stretch of the game where the player is not being asked to hurry.
 static func _tick_preparation(state: Dictionary) -> void:
+	Player.tick(state)
 	if int(state["phase_tick"]) >= GameData.PREPARATION_TICKS:
 		Phases.begin_night(state)
 
@@ -73,6 +74,11 @@ static func _tick_preparation(state: Dictionary) -> void:
 ## a Dictionary happens to iterate in.
 static func _tick_night(state: Dictionary) -> void:
 	state["night_tick"] = int(state["night_tick"]) + 1
+
+	# The player is on the farm after dark too - `design.md` section 8 has them
+	# repairing, aiming and dropping barricades. What they can *do* out there is
+	# decided by `Interact`, which puts the daylight verbs away at dusk.
+	Player.tick(state)
 
 	# Systems hang off here as the backlog adds them, in this order: waves
 	# spawn (0027), enemies move (0025), towers acquire and fire (0024),

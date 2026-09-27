@@ -1,7 +1,7 @@
 # 0022 - Switching reality
 
 - **Phase:** 1 - The first playable build
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0006, 0021
 - **Likely files:** src/ui/world_view.gd, src/core/phases.gd
 

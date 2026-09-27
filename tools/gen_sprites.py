@@ -27,6 +27,14 @@ from sprite_maps import SPRITES                   # noqa: E402
 
 OUT = os.path.join(ROOT, "sprites")
 
+# The palette, again, in GDScript.
+#
+# **Generated, not typed twice.** The view needs the night ramp and the game is
+# not going to read a .py file at runtime; a hand-kept second copy would drift
+# the first time somebody tuned a colour, and the drift would be invisible
+# because both copies would look plausible.
+PALETTE_GD = os.path.join(ROOT, "src", "ui", "palette_data.gd")
+
 # The terrain tiles, in `Farm.Terrain` order, packed into one strip so the
 # TileMapLayer has a single atlas rather than six textures.
 TERRAIN_ORDER = ["grass", "soil", "water", "rock", "path", "floor"]
@@ -123,6 +131,48 @@ def png_bytes(width, height, pixels):
             + chunk(b"IEND", b""))
 
 
+def palette_gd():
+    """`src/ui/palette_data.gd`, written from `tools/palette.py`."""
+    lines = [
+        "class_name PaletteData",
+        "extends RefCounted",
+        "",
+        "## The palette, generated from `tools/palette.py` by",
+        "## `tools/gen_sprites.py`. **Do not edit.**",
+        "##",
+        "## The sprites are drawn against these colours and the night ramp is",
+        "## applied over them at runtime, so the two have to be the same numbers.",
+        "## `python tools/gen_sprites.py --check` fails when this file and the",
+        "## palette disagree.",
+        "",
+        "const COLOURS := {",
+    ]
+    for name in sorted(palette.COLOURS):
+        r, g, b = palette.COLOURS[name]
+        lines.append('	&"%s": Color8(%d, %d, %d),' % (name, r, g, b))
+    lines.append("}")
+    lines.append("")
+    for ramp_name in sorted(palette.RAMPS):
+        ramp = palette.RAMPS[ramp_name]
+        tint = ramp["tint"]
+        lift = ramp["lift"]
+        lines.append("## The %s ramp: what the same pixels look like %s." % (
+            ramp_name, "by day" if ramp_name == "day" else "after dark"))
+        lines.append("const %s_TINT := Color(%.3f, %.3f, %.3f)"
+                     % (ramp_name.upper(), tint[0], tint[1], tint[2]))
+        lines.append("const %s_LIFT := Color(%.3f, %.3f, %.3f)"
+                     % (ramp_name.upper(), lift[0], lift[1], lift[2]))
+        lines.append("const %s_SATURATION := %.3f"
+                     % (ramp_name.upper(), ramp["saturation"]))
+        if "warm_keep" in ramp:
+            lines.append("## Anything brighter than this keeps its own colour:")
+            lines.append("## firelight, a lit window, the moon.")
+            lines.append("const %s_WARM_KEEP := %.3f"
+                         % (ramp_name.upper(), ramp["warm_keep"]))
+        lines.append("")
+    return "\n".join(lines).encode("utf-8")
+
+
 def write(path, data):
     """Write only when the bytes changed, so an unchanged sprite keeps its
     modification time and Godot does not re-import the world every run."""
@@ -150,6 +200,11 @@ def everything():
     return out
 
 
+def palette_target():
+    """(path on disk, bytes) for the generated GDScript palette."""
+    return PALETTE_GD, palette_gd()
+
+
 def main():
     check = "--check" in sys.argv
     listing = "--list" in sys.argv
@@ -160,10 +215,14 @@ def main():
         print("FAIL  %s" % e)
         return 1
 
+    gd_path, gd_bytes = palette_target()
+
     if listing:
         for path in sorted(files):
             print("  %-28s %5d bytes" % (path, len(files[path])))
-        print("%d files" % len(files))
+        print("  %-28s %5d bytes"
+              % (os.path.relpath(gd_path, ROOT), len(gd_bytes)))
+        print("%d files" % (len(files) + 1))
         return 0
 
     if check:
@@ -176,6 +235,9 @@ def main():
             with open(full, "rb") as f:
                 if f.read() != data:
                     stale.append(path + " (edited by hand, or the map moved)")
+        if not os.path.exists(gd_path) or open(gd_path, "rb").read() != gd_bytes:
+            stale.append(os.path.relpath(gd_path, ROOT)
+                         + " (the palette moved)")
         if stale:
             print("FAIL  %d sprite(s) out of date:" % len(stale))
             for s in stale:
@@ -189,6 +251,10 @@ def main():
     for path, data in sorted(files.items()):
         if write(path, data):
             written += 1
+    if not os.path.exists(gd_path) or open(gd_path, "rb").read() != gd_bytes:
+        with open(gd_path, "wb") as f:
+            f.write(gd_bytes)
+        written += 1
     digest = hashlib.sha256(
         b"".join(files[p] for p in sorted(files))).hexdigest()[:12]
     print("sprites: %d files, %d written, %d unchanged  [%s]"

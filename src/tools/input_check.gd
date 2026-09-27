@@ -34,7 +34,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 6
+const CASES := 7
 
 var passed := 0
 var failed := 0
@@ -70,6 +70,7 @@ func _run() -> void:
 	await _case_0015_player()
 	await _case_0020_shop()
 	await _case_0021_day_hud()
+	await _case_0022_reality()
 	_finish()
 
 
@@ -534,7 +535,7 @@ func _case_0020_shop() -> void:
 	expect(Player.target(state) == stall, "the stall is the target",
 		str(Player.target(state)))
 	await hold_key(KEY_SPACE, 4)
-	await frames(20)
+	await until(func() -> bool: return panel.visible, "the shop to open")
 	expect(panel.visible, "pressing interact opens the panel")
 
 	# Sell, by clicking the button a player would click.
@@ -561,7 +562,7 @@ func _case_0020_shop() -> void:
 
 	# Leaving.
 	await hold_key(KEY_ESCAPE, 4)
-	await frames(20)
+	await until(func() -> bool: return not panel.visible, "the shop to close")
 	expect(not panel.visible, "escape closes it")
 	# **And it stays closed.** The trade action used to repeat, so the panel
 	# reopened on the tick after it was shut.
@@ -624,9 +625,12 @@ func _case_0021_day_hud() -> void:
 	# Pressing it asks for the night, and the rules give it.
 	expect(int(state["phase"]) == Phases.DAY, "still day")
 	await click_control("NightButton")
-	await frames(20)
+	await until(func() -> bool:
+		return int(state["phase"]) == Phases.PREPARATION,
+		"the night button to take effect")
 	expect(int(state["phase"]) == Phases.PREPARATION,
 		"clicking it starts the night", Phases.name_of(int(state["phase"])))
+	await until(func() -> bool: return not hud.visible, "the day HUD to go")
 	expect(not hud.visible, "and the day HUD goes away with the day")
 
 	# The key does the same thing from a fresh day.
@@ -634,10 +638,85 @@ func _case_0021_day_hud() -> void:
 	driver = require_control("SimDriver")
 	expect(int(driver.state["phase"]) == Phases.DAY, "a fresh day")
 	await hold_key(KEY_N, 4)
-	await frames(20)
+	var keyed := driver.state
+	await until(func() -> bool:
+		return int(keyed["phase"]) == Phases.PREPARATION, "N to take effect")
 	expect(int(driver.state["phase"]) == Phases.PREPARATION,
 		"and N does what the button does",
 		Phases.name_of(int(driver.state["phase"])))
+
+	await close_scene()
+	_completed += 1     # last line: an abandoned case never gets here
+
+
+## 0022 - the light changes and the farm does not.
+func _case_0022_reality() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var view: WorldView = require_control("WorldView")
+	if driver == null or view == null:
+		_completed += 1
+		await close_scene()
+		return
+
+	var light: CanvasModulate = view.find_child("Light", true, false)
+	expect(light != null, "the world has a light")
+	if light == null:
+		_completed += 1
+		await close_scene()
+		return
+
+	await frames(30)
+	expect(light.color.is_equal_approx(PaletteData.DAY_TINT),
+		"and by day it is the day's", str(light.color))
+
+	var state := driver.state
+	var day_colour := light.color
+
+	# Press the night button the way a player would.
+	await click_control("NightButton")
+	await until(func() -> bool: return int(state["phase"]) != Phases.DAY,
+		"the night to begin")
+	expect(int(state["phase"]) != Phases.DAY, "the night has begun")
+	expect(view.light_target().is_equal_approx(PaletteData.NIGHT_TINT),
+		"and the light is heading for the night", str(view.light_target()))
+
+	# **The simulation never waits for it.** The tick keeps running while the
+	# light is on its way.
+	var tick_mid := int(state["tick"])
+	await frames(10)
+	expect(int(state["tick"]) >= tick_mid,
+		"the game runs while the light is changing")
+	expect(light.color != day_colour, "and the light has left the day behind",
+		str(light.color))
+
+	# **Skipping lands where watching would have.** How far a fade has got
+	# after N frames depends on how busy the machine is, so nothing here asks
+	# that - it asks where the fade ends, which is a fact.
+	view.skip_transition()
+	await frames(2)
+	expect(light.color.is_equal_approx(PaletteData.NIGHT_TINT),
+		"skipping lands it on the night", str(light.color))
+	expect(not view.is_transitioning(), "and stops")
+
+	# **Skipping lands in the same place watching would have.**
+	await open_scene(MAIN_SCENE)
+	driver = require_control("SimDriver")
+	view = require_control("WorldView")
+	light = view.find_child("Light", true, false)
+	await frames(20)
+	var fresh_day := light.color
+	var fresh_state := driver.state
+	await click_control("NightButton")
+	await until(func() -> bool: return light.color != fresh_day,
+		"the light to start moving")
+	expect(light.color != fresh_day, "a fresh fade has started moving",
+		str(light.color))
+	view.skip_transition()
+	await frames(2)
+	expect(not view.is_transitioning(), "skipping ends it")
+	expect(light.color.is_equal_approx(PaletteData.NIGHT_TINT),
+		"at the colour it was heading for", str(light.color))
 
 	await close_scene()
 	_completed += 1     # last line: an abandoned case never gets here
@@ -669,6 +748,23 @@ func close_scene() -> void:
 func frames(n: int) -> void:
 	for _i in maxi(n, 1):
 		await process_frame
+
+
+## Wait until something is true, or give up and say so.
+##
+## **Frame counts are not time.** A tick is owed every thirtieth of a second and
+## a headless frame can be a thousandth, so "wait four frames for the phase to
+## change" is a bet on how busy the machine is - which is exactly the bet that
+## made this file fail one run in four under load and pass on its own. Waiting
+## for the condition is both faster when things are quick and correct when they
+## are not.
+func until(condition: Callable, what: String, max_frames: int = 600) -> bool:
+	for _i in max_frames:
+		if condition.call():
+			return true
+		await process_frame
+	_fail("timed out waiting for %s" % what)
+	return false
 
 
 ## Find a control by node name, anywhere under the scene. **Loud**: a name that

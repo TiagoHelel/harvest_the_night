@@ -57,6 +57,9 @@ static func begin_preparation(state: Dictionary) -> bool:
 	if int(state["phase"]) != DAY:
 		push_error("begin_preparation from %s" % name_of(int(state["phase"])))
 		return false
+	# Whatever was open closes with the day. Standing at the market while the
+	# first zombie walks in would be a panel that outlived its reason.
+	state["open_panel"] = &""
 	_enter(state, PREPARATION)
 	return true
 

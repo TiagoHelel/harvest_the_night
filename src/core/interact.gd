@@ -50,16 +50,41 @@ const DEFAULT_TICKS: Dictionary = {
 }
 
 
+## Verbs that belong to the daylight.
+##
+## **The farm is asleep after dark.** Chopping a tree while a wave is coming in
+## would be the one thing on the night map that was not about the night - and
+## the systems behind these do not tick then anyway, so a verb that still
+## worked would be a verb that lied.
+##
+## Repairing (task 0053) and dropping a barricade (task 0047) are the night's
+## own verbs, and they go on their own list when they arrive.
+const DAY_ONLY: Array = [
+	&"chop", &"mine", &"till", &"plant", &"harvest", &"fish", &"trade", &"craft",
+]
+
+
 ## What this cell offers, or `&""` for nothing.
 static func verb_at(state: Dictionary, cell: Vector2i) -> StringName:
 	if not Grid.in_bounds(cell):
 		return &""
+	var verb := _offered(state, cell)
+	if int(state["phase"]) != Phases.DAY and DAY_ONLY.has(verb):
+		return &""
+	return verb
+
+
+static func _offered(state: Dictionary, cell: Vector2i) -> StringName:
 	var on := Farm.occupant(state, cell)
 	if not on.is_empty():
 		return OCCUPANT_VERBS.get(on["id"], &"")
 	if Farm.terrain_at(state, cell) == Farm.Terrain.SOIL:
 		return Farming.verb_at(state, cell)
 	return TERRAIN_VERBS.get(Farm.terrain_at(state, cell), &"")
+
+
+## What the cell would offer if the sun were up. Split out so that the day-only
+## rule is in one place rather than repeated in every branch.
 
 
 ## How many ticks one go at it takes.

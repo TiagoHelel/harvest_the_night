@@ -14,6 +14,16 @@ extends Node2D
 ## of the screen is in front of a tower drawn above it, which is what makes a
 ## three-quarter view read as depth rather than as a spreadsheet.
 ##
+## ## Two realities, one set of pixels
+##
+## `design.md` section 18 asks the player to recognise the farm instantly and
+## feel that it is not the same place. So **nothing moves**: the same tiles, the
+## same buildings, the same camera - only the light changes, through a
+## `CanvasModulate` tinted by `PaletteData`, and a short fade between the two.
+##
+## The fade is cosmetic all the way down. The simulation never waits for it, and
+## skipping it lands in exactly the state watching it would have.
+##
 ## ## Where the art comes from
 ##
 ## `sprites/`, generated from the ASCII maps in `tools/sprite_maps.py` by
@@ -68,6 +78,11 @@ const OCCUPANT_COLOURS: Dictionary = {
 ## magenta block rather than as nothing at all.
 const UNKNOWN_COLOUR := Color8(220, 60, 200)
 
+## How long the light takes to change. Cosmetic, so it is not in `game_data`:
+## a purely visual number in the data hash would mean a balance-neutral tweak
+## failed the guard. Task 0078 makes it a setting.
+const TRANSITION_SECONDS := 1.1
+
 @onready var _terrain: TileMapLayer = $Terrain
 @onready var _occupants: Node2D = $Occupants
 @onready var _camera: Camera2D = $Camera
@@ -94,6 +109,12 @@ var _plots: Node2D
 var _plot_sprites: Array[Node] = []
 var _plots_signature := 0
 
+## The light. One node, two colours, and whatever is between them right now.
+var _light: CanvasModulate
+var _lit_for := -1                  # the phase the fade is heading towards
+var _fade := 1.0                    # 0 at the start of a change, 1 when done
+var _fade_from := Color.WHITE       # where the fade started
+
 
 func _ready() -> void:
 	_terrain.tile_set = _build_terrain_tileset()
@@ -114,6 +135,11 @@ func _ready() -> void:
 	# negative z_index inside the sorted layer. Negative z inside a Y-sorted
 	# parent put it behind the TileMapLayer, so the frame was drawn under the
 	# grass and nothing appeared on screen at all.
+	_light = CanvasModulate.new()
+	_light.name = "Light"
+	_light.color = PaletteData.DAY_TINT
+	add_child(_light)
+
 	_plots = Node2D.new()
 	_plots.name = "Plots"
 	add_child(_plots)
@@ -141,9 +167,10 @@ func mark_dirty() -> void:
 	_dirty = true
 
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if _state.is_empty():
 		return
+	_light_for_phase(delta)
 	# **Not rebuilt every frame.** Godot's Dictionary hash is cheap and exact
 	# enough to notice a placement or a removal; the determinism hash is a
 	# different thing for a different job and is not used here.
@@ -159,6 +186,58 @@ func _process(_delta: float) -> void:
 	if plots != _plots_signature:
 		_plots_signature = plots
 		_refresh_plots()
+
+
+# -------------------------------------------------------------------- light
+
+## Move the light towards whatever the phase asks for.
+##
+## PREPARATION counts as night: the sun is down and the first zombie is on its
+## way, and a build step lit like an afternoon would be lying about what is
+## about to happen.
+func _light_for_phase(delta: float) -> void:
+	var phase := int(_state["phase"])
+	var wants_day := phase == Phases.DAY
+	var target: Color = PaletteData.DAY_TINT if wants_day 		else PaletteData.NIGHT_TINT
+
+	if phase != _lit_for:
+		# Only a change between the two realities is worth a fade; DAY to DAY
+		# after a result screen is not a transition, it is the same light.
+		var was_day := _lit_for == Phases.DAY or _lit_for == -1
+		_fade = 1.0 if was_day == wants_day else 0.0
+		_fade_from = _light.color
+		_lit_for = phase
+
+	if _fade >= 1.0:
+		_light.color = target
+		return
+
+	# **From where it started, not from where it is.** Lerping the current
+	# colour towards the target every frame is an exponential approach: the
+	# colour arrives quickly and the progress never quite finishes, which made
+	# `is_transitioning()` true long after the fade looked over.
+	_fade = minf(_fade + delta / TRANSITION_SECONDS, 1.0)
+	_light.color = _fade_from.lerp(target, _fade)
+
+
+## Cut the fade short. The simulation was never waiting for it, so this changes
+## what is on screen and nothing else.
+func skip_transition() -> void:
+	_fade = 1.0
+
+
+## True while the light is still moving, for task 0078.
+func is_transitioning() -> bool:
+	return _fade < 1.0
+
+
+## The colour the light is heading for, whether or not it has got there.
+##
+## What a test should ask about: whether the fade has finished after N frames
+## depends on how busy the machine is, and an assert that depends on that is an
+## assert that fails for reasons nobody can act on.
+func light_target() -> Color:
+	return PaletteData.DAY_TINT if int(_state.get("phase", Phases.DAY)) 		== Phases.DAY else PaletteData.NIGHT_TINT
 
 
 # ------------------------------------------------------------------- camera

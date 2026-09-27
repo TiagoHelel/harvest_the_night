@@ -101,7 +101,12 @@ RAMPS = {
         "saturation": 1.00,
     },
     "night": {
-        "tint":       (0.42, 0.48, 0.86),
+        # Green is pulled down hardest. A farm is mostly grass, and a tint that
+        # kept green anywhere near blue left the night reading as a dim
+        # afternoon rather than as another world. This is as far as a multiply
+        # can go: getting the reference sheet's purple needs a lift as well as
+        # a tint, and a multiply cannot add light. Task 0076 has the shader.
+        "tint":       (0.34, 0.36, 0.90),
         "lift":       (0.06, 0.05, 0.14),
         "saturation": 0.72,
         # Anything above this brightness keeps its own colour: firelight, a lit
