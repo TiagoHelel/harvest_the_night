@@ -14,18 +14,56 @@ extends RefCounted
 
 
 ## Advance the world by exactly one tick.
+##
+## Which systems run is decided by the phase, and by nothing else. That is what
+## makes "crops do not grow at night" and "no zombie spawns in the afternoon"
+## structural facts rather than conditions somebody has to remember to write in
+## fifteen different places.
 static func tick(state: Dictionary) -> void:
 	state["tick"] = int(state["tick"]) + 1
+	state["phase_tick"] = int(state["phase_tick"]) + 1
 
-	# Systems hang off here as the backlog adds them: farming (0018), crafting
-	# (0019), the day clock (0039), enemies (0025), towers (0024), waves
-	# (0027). Each is a static function taking the state, called from here in a
-	# fixed written order.
-	#
-	# **The order is part of the rules.** Whether towers fire before or after
-	# zombies move decides whether a zombie dies on the tile it entered or the
-	# one after, so it is written down here rather than discovered from
-	# whatever order a Dictionary happens to iterate in.
+	match int(state["phase"]):
+		Phases.DAY:
+			_tick_day(state)
+		Phases.PREPARATION:
+			_tick_preparation(state)
+		Phases.NIGHT:
+			_tick_night(state)
+		Phases.RESULT:
+			pass        # nothing moves while the player reads the payout
+
+
+## The cozy half. Growing, gathering, producing, selling.
+static func _tick_day(state: Dictionary) -> void:
+	state["day_tick"] = int(state["day_tick"]) + 1
+
+	# Systems hang off here as the backlog adds them, in a fixed written order:
+	# farming (0018), crafting and the queue (0019, 0037), the press and the
+	# generator (0032, 0033), regrowth (0016). Each is a static function taking
+	# the state.
+
+
+## The build step. The clock does not run and nothing attacks: this is the one
+## stretch of the game where the player is not being asked to hurry.
+static func _tick_preparation(state: Dictionary) -> void:
+	if int(state["phase_tick"]) >= GameData.PREPARATION_TICKS:
+		Phases.begin_night(state)
+
+
+## The dangerous half. Spawning, walking, shooting, dying.
+##
+## **The order is part of the rules.** Whether towers fire before or after
+## zombies move decides whether a zombie dies on the tile it entered or the one
+## after, so it is written down here rather than discovered from whatever order
+## a Dictionary happens to iterate in.
+static func _tick_night(state: Dictionary) -> void:
+	state["night_tick"] = int(state["night_tick"]) + 1
+
+	# Systems hang off here as the backlog adds them, in this order: waves
+	# spawn (0027), enemies move (0025), towers acquire and fire (0024),
+	# projectiles land and damage resolves (0026), the dead are removed, and
+	# only then is the end of the night tested.
 
 
 ## Advance by `ticks`, which is how every caller outside a frame loop uses it:

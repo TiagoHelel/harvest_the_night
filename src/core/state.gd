@@ -24,13 +24,19 @@ const _MASK := 0xFFFFFFFF
 
 
 ## A new game.
+##
+## Each subsystem contributes the keys it owns through its own `initial()`, so
+## that adding one is an edit in that file plus a line here, rather than a
+## growing literal nobody can find their way around.
 static func create(seed_value: int) -> Dictionary:
-	return {
+	var state := {
 		"version": VERSION,
 		"seed": seed_value,
 		"tick": 0,
 		"rng": Rng.create(seed_value),
 	}
+	state.merge(Phases.initial())
+	return state
 
 
 ## A deep copy, safe to simulate forward without touching the original.

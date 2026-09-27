@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 3
+const GROUPS := 4
 
 var passed := 0
 var failed := 0
@@ -65,6 +65,7 @@ func _run() -> void:
 	_task_0002_tick_and_rng()
 	_task_0003_game_data()
 	_task_0005_guards()
+	_task_0006_phases()
 
 
 func _finish() -> void:
@@ -290,5 +291,85 @@ func _task_0005_guards() -> void:
 	Sim.advance(b, 20000)
 	expect(State.hash_of(a) == State.hash_of(b),
 		"the guarded scenario replays identically")
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## 0006 - the loop the whole game is, walked with no UI in the room.
+func _task_0006_phases() -> void:
+	var state := State.create(11)
+	expect(int(state["phase"]) == Phases.DAY, "a new game starts in the day",
+		Phases.name_of(int(state["phase"])))
+	expect(int(state["day"]) == 1, "and on day 1", str(state["day"]))
+
+	# A full cycle, and the day counter moves exactly once across it.
+	var day_before: int = int(state["day"])
+	Sim.advance(state, 600)
+	expect(int(state["day_tick"]) == 600, "the day clock ran",
+		str(state["day_tick"]))
+	expect(int(state["night_tick"]) == 0, "no zombie spawned in the afternoon",
+		str(state["night_tick"]))
+
+	expect(Phases.begin_preparation(state), "the night button works")
+	expect(int(state["phase"]) == Phases.PREPARATION, "it lands in preparation")
+
+	# Preparation ends itself after its lever's worth of ticks.
+	Sim.advance(state, GameData.PREPARATION_TICKS - 1)
+	expect(int(state["phase"]) == Phases.PREPARATION,
+		"preparation lasts as long as the lever says")
+	Sim.advance(state, 1)
+	expect(int(state["phase"]) == Phases.NIGHT, "then the night begins",
+		Phases.name_of(int(state["phase"])))
+	expect(int(state["night"]) == 1, "it is night 1", str(state["night"]))
+
+	var day_clock_at_dusk: int = int(state["day_tick"])
+	Sim.advance(state, 400)
+	expect(int(state["night_tick"]) == 400, "the night clock ran",
+		str(state["night_tick"]))
+	expect(int(state["day_tick"]) == day_clock_at_dusk,
+		"nothing grew during the night",
+		"%d then %d" % [day_clock_at_dusk, state["day_tick"]])
+
+	expect(Phases.enter_result(state, true), "the night can end")
+	expect(int(state["phase"]) == Phases.RESULT, "it lands on the result")
+	expect(int(state["day"]) == day_before + 1,
+		"the day counter moved exactly once", str(state["day"]))
+	expect((state["last_result"] as Dictionary)["survived"] == true,
+		"the result records what happened")
+
+	# Nothing at all moves while the player reads the payout.
+	var frozen := State.copy(state)
+	frozen.erase("tick")
+	Sim.advance(state, 300)
+	var after := State.copy(state)
+	after.erase("tick")
+	after.erase("phase_tick")
+	frozen.erase("phase_tick")
+	expect(State.hash_of(frozen) == State.hash_of(after),
+		"the world is still while the result is up")
+
+	expect(Phases.begin_day(state), "and back to the farm")
+	expect(int(state["phase"]) == Phases.DAY, "a full cycle closed")
+	expect(int(state["day_tick"]) == 0, "the new day starts at dawn",
+		str(state["day_tick"]))
+
+	# Dusk asks; it never presses the button itself.
+	Sim.advance(state, GameData.DUSK_AT_TICK)
+	expect(Phases.is_dusk(state), "dusk is noticed")
+	expect(int(state["phase"]) == Phases.DAY,
+		"but the day does not end itself - design.md promises that")
+
+	# An illegal move is refused whole, not half applied. The four ERROR lines
+	# this prints are deliberate: they are the refusals being tested.
+	print("  (the ERROR lines below are deliberate - refused transitions)")
+	var guard := State.create(3)
+	expect(not Phases.begin_night(guard), "no night straight from the day")
+	expect(not Phases.enter_result(guard, true), "no result without a night")
+	expect(not Phases.begin_day(guard), "no dawn without a result")
+	expect(int(guard["phase"]) == Phases.DAY,
+		"a refused transition changed nothing",
+		Phases.name_of(int(guard["phase"])))
+	expect(int(guard["day"]) == 1, "and did not move the day counter",
+		str(guard["day"]))
 
 	_completed += 1     # last line: an abandoned group never gets here

@@ -51,7 +51,21 @@ func _process(delta: float) -> bool:
 
 func _run() -> void:
 	var state := State.create(SCENARIO_SEED)
-	Sim.advance(state, SCENARIO_TICKS)
+
+	# **Walk the whole loop**, so that the guard covers the phase machine and
+	# everything the backlog later hangs off each phase, rather than only the
+	# bare tick. The numbers below are part of the scenario: changing one moves
+	# the sim hash, which is fine as long as the journal says why.
+	Sim.advance(state, 3000)                    # a day on the farm
+	Phases.begin_preparation(state)
+	Sim.advance(state, GameData.PREPARATION_TICKS)   # ends itself into NIGHT
+	Sim.advance(state, 3000)                    # a night being fought
+	Phases.enter_result(state, true)
+	Sim.advance(state, 200)                     # the payout on screen
+	Phases.begin_day(state)
+
+	var spent: int = int(state["tick"])
+	Sim.advance(state, SCENARIO_TICKS - spent)  # the rest of the next day
 
 	print("SIM ", State.hash_of(state))
 	print("DATA ", GameData.digest())

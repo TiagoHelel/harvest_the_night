@@ -36,7 +36,9 @@ func _on_ticked(state: Dictionary) -> void:
 
 func _show(state: Dictionary) -> void:
 	var tick: int = int(state.get("tick", 0))
-	_clock.text = "tick %d  -  %d:%02d" % [
+	_clock.text = "%s %d   tick %d   %d:%02d" % [
+		Phases.name_of(int(state.get("phase", 0))),
+		int(state.get("day", 1)),
 		tick,
 		tick / (GameData.TICK_HZ * 60),
 		(tick / GameData.TICK_HZ) % 60,

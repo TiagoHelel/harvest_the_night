@@ -268,3 +268,49 @@ Notes:
   anybody trusts.
 - `implementation/README.md` and the runner loop both talked about "the
   determinism hash" in the singular. Updated.
+
+## 0006 - The phase machine: day, preparation, night, result - done 2026-09-27
+
+What changed: `Phases` owns DAY -> PREPARATION -> NIGHT -> RESULT -> DAY as four
+functions on the state, and `Sim.tick()` now dispatches on the phase rather than
+running one undifferentiated list. The boot screen shows the phase and the day
+so the machine is visible rather than only asserted.
+
+Files: src/core/phases.gd, src/core/sim.gd, src/core/state.gd,
+src/tools/determinism.gd, src/tools/headless_check.gd, src/ui/main.gd
+
+Verify: PASS - 7 passed, 2 skipped, 8s. **86 asserts, 0 failed** (60 before).
+
+**Sim hash moved deliberately: 2393142509 -> 2127612543.** Two reasons, both
+this task's job: the state gained the six keys `Phases.initial()` owns, and the
+scenario in `determinism.gd` now walks a whole cycle instead of sitting in the
+day. Data hash unchanged at 3714036227, correctly - no lever was touched.
+
+Notes:
+
+- **The phase decides which systems tick, and nothing else does.** That is what
+  makes "crops do not grow at night" and "no zombie spawns in the afternoon"
+  structural facts rather than conditions somebody has to remember to write in
+  fifteen places. Neither crops nor zombies exist yet, so the assert is on
+  `day_tick` and `night_tick`: 600 ticks of day move one and not the other, 400
+  ticks of night move the other and not the one. When the real systems land they
+  hang off `_tick_day` and `_tick_night` and inherit the property.
+- **A transition refuses rather than half-applies.** `begin_night()` from DAY
+  returns false, pushes an error and changes nothing - checked, including that
+  the day counter did not move. A corrupted phase would otherwise surface three
+  thousand ticks later as a zombie on a sunny afternoon. The check prints four
+  deliberate ERROR lines and says so on the line above them, so nobody learns to
+  scroll past ERROR in this log.
+- **PREPARATION ends itself** after `GameData.PREPARATION_TICKS`, and the player
+  can end it early. That makes it the first lever any rule actually reads.
+- **Dusk asks, it never presses.** `is_dusk()` is true past the lever and the
+  phase stays DAY - `design.md` promises the player switches reality when they
+  want to, and an auto-advancing day would quietly take that away.
+- RESULT freezes the world: 300 ticks inside it leave the state hash unchanged
+  apart from `tick` and `phase_tick`. Asserted, because "nothing moves while the
+  payout is up" is easy to believe and easy to get wrong.
+- `State.create()` now merges each subsystem's own `initial()` instead of
+  growing one literal nobody can navigate. `Phases.initial()` is the first.
+- The payout itself is task 0061. What RESULT records now is the outcome it will
+  be computed from - night number, survived, how long it took - so the result
+  screen reads one dictionary rather than interrogating the world afterwards.

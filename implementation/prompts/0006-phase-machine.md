@@ -1,7 +1,7 @@
 # 0006 - The phase machine: day, preparation, night, result
 
 - **Phase:** 0 - Foundation
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0002, 0003
 - **Likely files:** src/core/phases.gd, src/core/sim.gd
 

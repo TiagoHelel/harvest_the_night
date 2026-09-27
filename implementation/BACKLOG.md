@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`#.......................`  **5 / 108 done**
+`#.......................`  **6 / 108 done**
 
-0 doing / 103 todo / 0 blocked across 9 phases.
+0 doing / 102 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0006 - The phase machine: day, preparation, night, result**. The whole of what is left is
+First up: **0007 - The resource ledger**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,25 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-103 task(s) left, the ready ones first, then what they
+102 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0006 - The phase machine: day, preparation, night, result
-
-Ready to pick up.  Likely files: `src/core/phases.gd, src/core/sim.gd`.
-
-The loop the whole game is: DAY to PREPARATION to NIGHT to RESULT and back to DAY, owned by the rules rather than by a screen.
-
-- An enum in core plus `state.phase`, `state.day` and `state.night`
-- Transitions are functions on the state, not signals: `Phases.begin_night(state)` and friends
-- DAY and NIGHT both advance by the same `Sim.tick`; only what ticks inside them differs
-- PREPARATION is the build step between pressing the night button and the first zombie: the clock does not run and nothing attacks
-- RESULT computes the payout and is the only place the day counter moves
-
-  - done when: A headless run walks DAY, PREPARATION, NIGHT, RESULT, DAY with no UI loaded
-  - done when: The day counter increments exactly once per cycle
-  - done when: Crops do not grow during NIGHT and zombies do not spawn during DAY
 
 ### 0007 - The resource ledger
 
@@ -108,6 +92,20 @@ The other half of the gate: drive real clicks and keys through the real UI with 
   - done when: It drives at least one full interaction end to end
   - done when: It fails loudly when a control it names is missing, rather than silently passing
 
+### 0012 - Debug overlay
+
+Ready to pick up.  Likely files: `src/ui/debug_overlay.gd`.
+
+The thing you actually want while tuning: what phase, what tick, what seed, how many entities and what the frame costs.
+
+- Toggled by an input action, off by default, never in the release build path
+- Shows phase, day, night, tick, seed, resource totals and live entity counts
+- Shows ticks simulated per frame and the millisecond cost of the last tick batch
+- Draws over everything and never steals mouse input
+
+  - done when: Toggling it does not move the determinism hash
+  - done when: It shows the tick cost climbing when a hundred zombies are alive
+
 ### 0014 - Sprites generated from ASCII maps
 
 Ready to pick up.  Likely files: `tools/gen_sprites.py, sprites/`.
@@ -126,7 +124,7 @@ Art that a script owns. One palette, one generator, one command - so the set sta
 
 ### 0010 - Save the profile and the run
 
-Waits on 0006, 0007, 0008.  Likely files: `src/core/save.gd`.
+Waits on 0007, 0008.  Likely files: `src/core/save.gd`.
 
 Quitting on day 4 and coming back to day 4. The state is already plain data, so this is serialisation and versioning, not a redesign.
 
@@ -139,20 +137,6 @@ Quitting on day 4 and coming back to day 4. The state is already plain data, so 
   - done when: Save on day 3, quit, load: same resources, same buildings, same grid
   - done when: Save mid-night, load, and the determinism hash of the rest of the night matches an uninterrupted run
   - done when: A truncated save file is refused, not crashed on
-
-### 0012 - Debug overlay
-
-Waits on 0006.  Likely files: `src/ui/debug_overlay.gd`.
-
-The thing you actually want while tuning: what phase, what tick, what seed, how many entities and what the frame costs.
-
-- Toggled by an input action, off by default, never in the release build path
-- Shows phase, day, night, tick, seed, resource totals and live entity counts
-- Shows ticks simulated per frame and the millisecond cost of the last tick batch
-- Draws over everything and never steals mouse input
-
-  - done when: Toggling it does not move the determinism hash
-  - done when: It shows the tick cost climbing when a hundred zombies are alive
 
 ### 0013 - The world renders
 
@@ -172,7 +156,7 @@ Draw the grid the rules own, with a camera that shows the farm the way the refer
 
 ### 0021 - The day HUD
 
-Waits on 0007, 0006.  Likely files: `src/ui/day_hud.gd`.
+Waits on 0007.  Likely files: `src/ui/day_hud.gd`.
 
 The bar across the top of the reference sheet: what day it is, what you have, and the button that starts the night.
 
@@ -249,7 +233,7 @@ Somebody to be on the farm: eight-way movement on the grid and one interact key 
 
 ### 0022 - Switching reality
 
-Waits on 0006, 0021.  Likely files: `src/ui/world_view.gd, src/core/phases.gd`.
+Waits on 0021.  Likely files: `src/ui/world_view.gd, src/core/phases.gd`.
 
 The same farm, a different world. Press the button and the day farm becomes the night map: same tiles, same buildings, new rules and a new light.
 
@@ -265,7 +249,7 @@ The same farm, a different world. Press the button and the day farm becomes the 
 
 ### 0039 - The day clock and dusk
 
-Waits on 0006, 0021.  Likely files: `src/core/phases.gd, src/ui/day_hud.gd`.
+Waits on 0021.  Likely files: `src/core/phases.gd, src/ui/day_hud.gd`.
 
 Time passing, without taking away the design document's promise that the player switches reality when they want to.
 
@@ -324,7 +308,7 @@ The first resource in the world. Hit a tree, get wood, the tree goes away and co
 
 ### 0018 - Wheat: till, plant, grow, harvest
 
-Waits on 0015, 0007, 0006.  Likely files: `src/core/farming.gd`.
+Waits on 0015, 0007.  Likely files: `src/core/farming.gd`.
 
 The crop cycle, which is the semi-idle heart of the day: do a thing, go away, come back to something better.
 
@@ -714,7 +698,7 @@ Every cost, stat and icon explains itself, so the game does not need a manual.
 
 ### 0091 - The title screen
 
-Waits on 0081, 0006.  Likely files: `src/ui/title_screen.gd, scenes/Title.tscn`.
+Waits on 0081.  Likely files: `src/ui/title_screen.gd, scenes/Title.tscn`.
 
 The game currently boots into a farm. Make it boot into a game.
 
@@ -954,7 +938,7 @@ Named actions instead of hardcoded keys, and a screen to rebind them.
 
 ### 0096 - The pause menu
 
-Waits on 0092, 0006.  Likely files: `src/ui/pause_menu.gd`.
+Waits on 0092.  Likely files: `src/ui/pause_menu.gd`.
 
 Escape stops the world, and pausing mid-night is safe.
 
@@ -1584,20 +1568,20 @@ For the player who beat the Giant and wants to know how far the farm goes. Cheap
   - done when: Night 25 is generated and playable
   - done when: The same seed generates the same night 25 twice
 
-## 0 - Foundation  (5/12)
+## 0 - Foundation  (6/12)
 
 - [x] **0001** [Godot project scaffold](prompts/0001-project-scaffold.md)
 - [x] **0002** [Fixed-timestep deterministic simulation](prompts/0002-sim-tick.md)
 - [x] **0003** [game_data.gd, the one file of levers](prompts/0003-game-data.md)
 - [x] **0004** [Harden the headless check harness](prompts/0004-headless-check.md)
 - [x] **0005** [verify.py and the determinism guard](prompts/0005-verify-and-hash.md)
-- [ ] **0006** [The phase machine: day, preparation, night, result](prompts/0006-phase-machine.md)
+- [x] **0006** [The phase machine: day, preparation, night, result](prompts/0006-phase-machine.md)
 - [ ] **0007** [The resource ledger](prompts/0007-resource-ledger.md)
 - [ ] **0008** [The farm grid](prompts/0008-farm-grid.md)
 - [ ] **0009** [Settings singleton](prompts/0009-settings.md)
-- [ ] **0010** [Save the profile and the run](prompts/0010-save.md) - needs 0006, 0007, 0008
+- [ ] **0010** [Save the profile and the run](prompts/0010-save.md) - needs 0007, 0008
 - [ ] **0011** [input_check harness](prompts/0011-input-check.md)
-- [ ] **0012** [Debug overlay](prompts/0012-debug-overlay.md) - needs 0006
+- [ ] **0012** [Debug overlay](prompts/0012-debug-overlay.md)
 
 ## 1 - The first playable build  (0/15)
 
@@ -1606,11 +1590,11 @@ For the player who beat the Giant and wants to know how far the farm goes. Cheap
 - [ ] **0015** [The player walks and interacts](prompts/0015-player.md) - needs 0013
 - [ ] **0016** [Trees and wood](prompts/0016-wood.md) - needs 0015, 0007
 - [ ] **0017** [Rocks and stone](prompts/0017-stone.md) - needs 0016
-- [ ] **0018** [Wheat: till, plant, grow, harvest](prompts/0018-wheat.md) - needs 0015, 0007, 0006
+- [ ] **0018** [Wheat: till, plant, grow, harvest](prompts/0018-wheat.md) - needs 0015, 0007
 - [ ] **0019** [The workshop and its first recipe](prompts/0019-workshop.md) - needs 0007, 0017
 - [ ] **0020** [The shop: sell and buy](prompts/0020-shop.md) - needs 0007, 0018
-- [ ] **0021** [The day HUD](prompts/0021-day-hud.md) - needs 0007, 0006
-- [ ] **0022** [Switching reality](prompts/0022-reality-switch.md) - needs 0006, 0021
+- [ ] **0021** [The day HUD](prompts/0021-day-hud.md) - needs 0007
+- [ ] **0022** [Switching reality](prompts/0022-reality-switch.md) - needs 0021
 - [ ] **0023** [Build mode](prompts/0023-build-mode.md) - needs 0008, 0019, 0022
 - [ ] **0024** [The shooting tower](prompts/0024-tower-gun.md) - needs 0023
 - [ ] **0025** [Zombies walk to the house](prompts/0025-zombies-walk.md) - needs 0022, 0008
@@ -1630,7 +1614,7 @@ For the player who beat the Giant and wants to know how far the farm goes. Cheap
 - [ ] **0036** [The inventory](prompts/0036-inventory.md) - needs 0007
 - [ ] **0037** [The workshop queue](prompts/0037-craft-queue.md) - needs 0019, 0036
 - [ ] **0038** [Production runs while you are elsewhere](prompts/0038-idle-production.md) - needs 0037, 0029
-- [ ] **0039** [The day clock and dusk](prompts/0039-day-clock.md) - needs 0006, 0021
+- [ ] **0039** [The day clock and dusk](prompts/0039-day-clock.md) - needs 0021
 - [ ] **0040** [The shop grows](prompts/0040-shop-full.md) - needs 0020, 0028
 - [ ] **0041** [The first day teaches itself](prompts/0041-tutorial-day.md) - needs 0039, 0040
 
@@ -1697,12 +1681,12 @@ For the player who beat the Giant and wants to know how far the farm goes. Cheap
 
 ## 7 - Shell and product  (0/10)
 
-- [ ] **0091** [The title screen](prompts/0091-title-screen.md) - needs 0081, 0006
+- [ ] **0091** [The title screen](prompts/0091-title-screen.md) - needs 0081
 - [ ] **0092** [The main menu and the router](prompts/0092-main-menu.md) - needs 0091, 0010
 - [ ] **0093** [Options: video](prompts/0093-options-video.md) - needs 0009, 0092
 - [ ] **0094** [Options: audio](prompts/0094-options-audio.md) - needs 0083, 0092
 - [ ] **0095** [Options: controls](prompts/0095-options-controls.md) - needs 0009, 0092
-- [ ] **0096** [The pause menu](prompts/0096-pause-menu.md) - needs 0092, 0006
+- [ ] **0096** [The pause menu](prompts/0096-pause-menu.md) - needs 0092
 - [ ] **0097** [English and Portuguese](prompts/0097-i18n.md) - needs 0081
 - [ ] **0098** [Accessibility](prompts/0098-accessibility.md) - needs 0093, 0097
 - [ ] **0099** [An icon and a boot ident](prompts/0099-icon-ident.md) - needs 0014, 0091
