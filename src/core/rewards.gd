@@ -11,7 +11,17 @@ extends RefCounted
 ## The itemised list is kept rather than only the total, because the result
 ## screen has to be able to say *why* - "you were paid more because nothing you
 ## built came down" is a sentence that changes how the next night gets built,
-## and "+ $112" is not.
+## and "+ $112" is not. **The money is itemised too**, into the fee, the
+## bounty, and the two bonuses, so the screen can show the arithmetic rather
+## than the answer.
+##
+## ## Intact, not merely upright
+##
+## The structure bonus is paid per thing that came through **without a
+## scratch**. A wall at one hit point held the line and is worth the smaller
+## standing bonus; the player who never let it be touched is the one being
+## paid more, which is what "defending well pays more than barely holding"
+## has to mean if it is to mean anything.
 ##
 ## Losing costs a share of the stock and nothing else. `design.md` is explicit
 ## that a loss costs a day, not the run: money and technology survive, the
@@ -30,6 +40,9 @@ static func settle(state: Dictionary, survived: bool) -> Dictionary:
 		"breaches": int(state["breaches"]),
 		"house_hp": int(state["house_hp"]),
 		"structures": _standing(state),
+		"intact": _intact(state),
+		# Where the money came from, for the screen. Empty on a loss.
+		"money_from": {} if not survived else _money_from(state),
 		"gained": {},
 		"lost": {},
 	}
@@ -72,17 +85,12 @@ static func _lines(state: Dictionary, survived: bool) -> Dictionary:
 	var table: Dictionary = GameData.REWARDS
 	var out := {}
 
-	# Money: a flat fee plus a bit more every night, plus what was killed, plus
-	# the two bonuses that reward defending well rather than merely surviving.
-	var money := int(table["base_money"]) + int(table["money_per_night"]) * night
-	for kind in _sorted(state["killed_by_kind"] as Dictionary):
-		var data: Variant = GameData.ENEMIES.get(kind, null)
-		if data != null:
-			money += int((data as Dictionary)["reward"]) \
-				* int((state["killed_by_kind"] as Dictionary)[kind])
-	money += int(table["intact_structure_bonus"]) * _standing(state)
-	if int(state["house_hp"]) >= GameData.HOUSE_HP:
-		money += int(table["house_untouched_bonus"])
+	# Money, itemised in `_money_from()` and added up here, so that the total
+	# and the breakdown cannot drift apart: there is one place that knows.
+	var money := 0
+	var from := _money_from(state)
+	for line in _sorted(from):
+		money += int(from[line])
 	out[GameData.MONEY] = money
 
 	# Materials, so that a night pays towards the next one's defences and not
@@ -94,18 +102,77 @@ static func _lines(state: Dictionary, survived: bool) -> Dictionary:
 	return out
 
 
-## A fraction of everything, rounded down. Money and technology are untouched:
-## `design.md` says a loss costs a day, not the run.
+## Where the money came from. **The one place that knows**, so the total on
+## the ledger and the lines on the screen are the same arithmetic.
+static func _money_from(state: Dictionary) -> Dictionary:
+	var table: Dictionary = GameData.REWARDS
+	var night := int(state["night"])
+	var out := {
+		"for the night": int(table["base_money"])
+			+ int(table["money_per_night"]) * night,
+		"bounty": 0,
+		"nothing touched": 0,
+		"still standing": 0,
+		"the house untouched": 0,
+	}
+	for kind in _sorted(state["killed_by_kind"] as Dictionary):
+		var data: Variant = GameData.ENEMIES.get(kind, null)
+		if data != null:
+			out["bounty"] = int(out["bounty"]) 				+ int((data as Dictionary)["reward"]) 				* int((state["killed_by_kind"] as Dictionary)[kind])
+
+	var intact := _intact(state)
+	out["nothing touched"] = int(table["intact_structure_bonus"]) * intact
+	out["still standing"] = int(table["standing_structure_bonus"]) \
+		* maxi(_standing(state) - intact, 0)
+	if int(state["house_hp"]) >= GameData.HOUSE_HP:
+		out["the house untouched"] = int(table["house_untouched_bonus"])
+	return out
+
+
+## A share of everything, rounded down. **What it spares is a lever**:
+## `design.md` says a loss costs a day, not the run, and which of money and
+## technology that protects is the table's business rather than this
+## function's. Both were declared and read by nothing until task 0061.
 static func _loss(state: Dictionary) -> Dictionary:
 	var out := {}
 	for id in GameData.RESOURCES:
-		if id == GameData.MONEY or id == GameData.ENERGY:
+		if id == GameData.ENERGY:
+			continue        # a rate, not a stock: there is nothing to take
+		if id == GameData.MONEY and GameData.DEFEAT_KEEPS_MONEY:
+			continue
+		if GameData.DEFEAT_KEEPS_TECH and _is_tech(id):
 			continue
 		var held := Resources.amount(state, id)
-		var gone := int(floor(float(held) * GameData.DEFEAT_RESOURCE_LOSS))
+		var gone := held * GameData.DEFEAT_LOSS_PERCENT / 100
 		if gone > 0:
 			out[id] = gone
 	return out
+
+
+## Whether this is the technology currency.
+##
+## **It does not exist yet** - task 0062 adds it - so this answers by name
+## against whatever is in the resource table rather than against a constant
+## that is not there. `DEFEAT_KEEPS_TECH` was declared with the table and read
+## by nothing; when 0062 lands, this is already waiting for it.
+static func _is_tech(id: StringName) -> bool:
+	return id == &"tech"
+
+
+## How many of the player's own structures came through without a scratch.
+static func _intact(state: Dictionary) -> int:
+	var n := 0
+	var occupants: Dictionary = state["occupants"]
+	var keys: Array = occupants.keys()
+	keys.sort()
+	for idx in keys:
+		var on: Dictionary = occupants[idx]
+		var entry: Variant = GameData.DEFENCES.get(on["id"], null)
+		if entry == null:
+			continue
+		if int(on.get("hp", 0)) >= int((entry as Dictionary).get("hp", 0)):
+			n += 1
+	return n
 
 
 ## How many of the player's own structures are still standing. What the

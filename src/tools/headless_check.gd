@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 53
+const GROUPS := 54
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -117,6 +117,7 @@ func _run() -> void:
 	_task_0058_giant()
 	_task_0059_wave_data()
 	_task_0060_ten_nights()
+	_task_0061_rewards()
 
 
 func _finish() -> void:
@@ -2456,8 +2457,7 @@ func _task_0027_the_loop() -> void:
 		if int(beaten["phase"]) != Phases.NIGHT:
 			break
 	expect(Resources.amount(beaten, GameData.WOOD)
-		== wood_before - int(floor(float(wood_before)
-			* GameData.DEFEAT_RESOURCE_LOSS)),
+		== wood_before - wood_before * GameData.DEFEAT_LOSS_PERCENT / 100,
 		"a quarter of the wood is gone",
 		"%d of %d left" % [Resources.amount(beaten, GameData.WOOD), wood_before])
 	expect(Resources.amount(beaten, GameData.MONEY) == money_before,
@@ -9505,3 +9505,153 @@ func _run_a_night_out(night: int) -> Dictionary:
 			seen[id] = true
 		Sim.advance(state, 1)
 	return {"ended": ended, "sent": seen.size()}
+
+
+## 0061 - what a night pays, and why.
+func _task_0061_rewards() -> void:
+	var table: Dictionary = GameData.REWARDS
+
+	# **Every multiplier is a whole number.**
+	for key in ["base_money", "money_per_night", "intact_structure_bonus",
+			"standing_structure_bonus", "house_untouched_bonus"]:
+		expect(table.has(key), "the payout declares %s" % key)
+		expect(typeof(table[key]) == TYPE_INT,
+			"and %s is a lever, not a fraction" % key, str(typeof(table[key])))
+	expect(typeof(GameData.DEFEAT_LOSS_PERCENT) == TYPE_INT,
+		"and so is what losing costs - it was 0.25 for fifty-eight tasks",
+		str(typeof(GameData.DEFEAT_LOSS_PERCENT)))
+	expect(int(table["intact_structure_bonus"])
+		> int(table["standing_structure_bonus"]),
+		"untouched pays better than merely upright",
+		"%d against %d" % [table["intact_structure_bonus"],
+			table["standing_structure_bonus"]])
+
+	# **The payout is computed from the night, not written down per night.**
+	var quiet := _a_settled_night(6100, 0, 0)
+	var later := _a_settled_night(6100, 0, 0, 9)
+	expect(int((later["gained"] as Dictionary)[GameData.MONEY])
+		> int((quiet["gained"] as Dictionary)[GameData.MONEY]),
+		"a later night pays more for the same fight",
+		"%d against %d" % [(later["gained"] as Dictionary)[GameData.MONEY],
+			(quiet["gained"] as Dictionary)[GameData.MONEY]])
+	for id in GameData.sorted_names(
+			(table["resources_per_night"] as Dictionary).keys()):
+		expect(int((later["gained"] as Dictionary)[id])
+			> int((quiet["gained"] as Dictionary)[id]),
+			"and more %s with it" % id,
+			str((later["gained"] as Dictionary)[id]))
+
+	# **The same night defended two ways pays differently**, in the right
+	# direction. The done-when: same seed, same night, same kills - the only
+	# difference is what the defence went through.
+	var untouched := _a_settled_night(6101, 6, 0)
+	var battered := _a_settled_night(6101, 6, 6)
+	var money_a := int((untouched["gained"] as Dictionary)[GameData.MONEY])
+	var money_b := int((battered["gained"] as Dictionary)[GameData.MONEY])
+	print("  six towers untouched pays $%d; the same six all damaged pays $%d"
+		% [money_a, money_b])
+	expect(int(untouched["intact"]) == 6 and int(battered["intact"]) == 0,
+		"one farm came through without a scratch and one did not",
+		"%d against %d" % [untouched["intact"], battered["intact"]])
+	expect(int(untouched["structures"]) == int(battered["structures"]),
+		"with the same number left standing either way",
+		"%d against %d" % [untouched["structures"], battered["structures"]])
+	expect(money_a > money_b,
+		"defending well pays more than barely holding", "%d against %d"
+			% [money_a, money_b])
+	expect(money_a - money_b == 6 * (int(table["intact_structure_bonus"])
+		- int(table["standing_structure_bonus"])),
+		"by exactly the difference between the two bonuses",
+		str(money_a - money_b))
+
+	# And a house that was never touched is worth its own bonus.
+	var scratched := _a_settled_night(6101, 6, 0, 1, 10)
+	expect(int((untouched["gained"] as Dictionary)[GameData.MONEY])
+		- int((scratched["gained"] as Dictionary)[GameData.MONEY])
+		== int(table["house_untouched_bonus"]),
+		"and a house that took a bite costs exactly the house bonus",
+		str((scratched["gained"] as Dictionary)[GameData.MONEY]))
+
+	# **The itemised numbers add up to what the ledger received.** The other
+	# done-when.
+	var paid := _a_settled_night(6102, 4, 2)
+	var itemised := 0
+	for line in GameData.sorted_names((paid["money_from"]
+		as Dictionary).keys()):
+		itemised += int((paid["money_from"] as Dictionary)[line])
+	print("  the payout itemises as %s" % str(paid["money_from"]))
+	expect(itemised == int((paid["gained"] as Dictionary)[GameData.MONEY]),
+		"the lines add up to the total",
+		"%d against %d" % [itemised,
+			(paid["gained"] as Dictionary)[GameData.MONEY]])
+	expect(int(paid["received_money"])
+		== int((paid["gained"] as Dictionary)[GameData.MONEY]),
+		"and the total is what went into the ledger",
+		"%d against %d" % [paid["received_money"],
+			(paid["gained"] as Dictionary)[GameData.MONEY]])
+	for id in GameData.sorted_names((paid["gained"] as Dictionary).keys()):
+		expect(int((paid["received"] as Dictionary)[id])
+			== int((paid["gained"] as Dictionary)[id]),
+			"and every line of %s went in too" % id,
+			str((paid["received"] as Dictionary)[id]))
+
+	# **Losing costs a share of the stock and not the run.**
+	var beaten := _a_settled_night(6103, 2, 0, 4, 0, false)
+	expect(int(beaten["received_money"]) == 0,
+		"a lost night takes no money - a loss costs a day, not the run",
+		str(beaten["received_money"]))
+	expect(not (beaten["lost"] as Dictionary).has(GameData.MONEY),
+		"and the money is not even on the list", str(beaten["lost"]))
+	expect(not (beaten["lost"] as Dictionary).has(GameData.ENERGY),
+		"nor energy, which is a rate rather than a stock",
+		str(beaten["lost"]))
+	expect((beaten["lost"] as Dictionary).has(GameData.WOOD),
+		"but the wood is", str(beaten["lost"]))
+	expect(int((beaten["lost"] as Dictionary)[GameData.WOOD])
+		== int(beaten["wood_before"]) * GameData.DEFEAT_LOSS_PERCENT / 100,
+		"by exactly the percentage the lever names",
+		str((beaten["lost"] as Dictionary)[GameData.WOOD]))
+	expect(int(beaten["money_from"].size()) == 0,
+		"and there is no money breakdown on a night nobody was paid for")
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## Settle a night with a scripted farm and report the payout beside what the
+## ledger actually moved.
+##
+## `towers` go up, `hurt` of them are chewed to half, `house` is what the roof
+## has left. Nothing is run: `settle()` is the thing under test, and a real
+## night would make the kill counts differ between two runs.
+func _a_settled_night(seed_value: int, towers: int, hurt: int,
+		night: int = 1, house: int = -1, survived: bool = true) -> Dictionary:
+	var state := State.create(seed_value)
+	state["night"] = night
+	state["day"] = night
+	Resources.gain(state, {GameData.WOOD: 400, GameData.STONE: 400,
+		GameData.IRON: 400, GameData.OIL: 400})
+	Phases.begin_preparation(state)
+
+	var up := _line_of_towers(state, &"gun_tower", towers)
+	for i in mini(hurt, up.size()):
+		Farm.damage(state, up[i], int((GameData.DEFENCES[&"gun_tower"]
+			as Dictionary)["hp"]) / 2)
+	if house >= 0:
+		state["house_hp"] = house
+
+	var before: Dictionary = {}
+	for id in GameData.sorted_names(GameData.RESOURCES):
+		before[id] = Resources.amount(state, id)
+	var wood_before := Resources.amount(state, GameData.WOOD)
+
+	var payout := Rewards.settle(state, survived)
+
+	var received: Dictionary = {}
+	for id in GameData.sorted_names(GameData.RESOURCES):
+		var moved := Resources.amount(state, id) - int(before[id])
+		if moved != 0:
+			received[id] = moved
+	payout["received"] = received
+	payout["received_money"] = int(received.get(GameData.MONEY, 0))
+	payout["wood_before"] = wood_before
+	return payout

@@ -1,7 +1,7 @@
 # 0061 - Night rewards
 
 - **Phase:** 4 - Ten nights and progression
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0059, 0007
 - **Likely files:** src/core/rewards.gd
 

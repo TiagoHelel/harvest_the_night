@@ -38,7 +38,12 @@ func _ready() -> void:
 
 	var frame := PanelContainer.new()
 	frame.name = "ResultFrame"
-	frame.position = Vector2(128, 40)
+	# **Room for the itemised money.** A `PanelContainer` grows with what is
+	# in it, and task 0061 added up to seven rows saying where the money came
+	# from: at y=40 that pushed "back to the farm" off the bottom of a
+	# two-hundred-and-seventy pixel screen and the run could not continue.
+	# `input_check` asserts the button is on screen now.
+	frame.position = Vector2(128, 30)
 	frame.custom_minimum_size = Vector2(224, 190)
 	var box := StyleBoxFlat.new()
 	box.bg_color = Color(0.07, 0.06, 0.12, 0.98)
@@ -121,7 +126,9 @@ func _build(payout: Dictionary) -> void:
 	_row("got through", str(int(payout["breaches"])), DIM)
 	_row("the house", "%d / %d" % [int(payout["house_hp"]), GameData.HOUSE_HP],
 		DIM)
-	_row("still standing", "%d" % int(payout["structures"]), DIM)
+	_row("still standing", "%d of them untouched"
+		% int(payout.get("intact", 0)) if int(payout.get("structures", 0)) > 0
+		else "nothing built", DIM)
 
 	_gap()
 	if survived:
@@ -129,6 +136,21 @@ func _build(payout: Dictionary) -> void:
 		for id in _sorted(payout["gained"] as Dictionary):
 			var n := int((payout["gained"] as Dictionary)[id])
 			_row("  " + str(id), "+%d" % n, WON)
+
+		# **What the defending was worth**, which is the half of `design.md`
+		# section 12 that changes how the next night gets built: "+ $112"
+		# tells a player they were paid, "for defending well + $32" tells
+		# them what they were paid *for*.
+		#
+		# **One line, not seven.** The full breakdown is in the payout for
+		# task 0069's statistics; a row here is twenty-two pixels whatever it
+		# claims - a `Label` reserves its font's line height the way a
+		# `Button` reserves thirty-one - and seven of them pushed "back to
+		# the farm" off the bottom of the screen, which ended the run.
+		var from: Dictionary = payout.get("money_from", {})
+		var well := int(from.get("nothing touched", 0)) 			+ int(from.get("still standing", 0)) 			+ int(from.get("the house untouched", 0))
+		if well > 0:
+			_row("  for defending well", "+%d" % well, WON)
 	else:
 		_row("LOST", "", LOST)
 		var lost: Dictionary = payout["lost"]

@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`#############...........`  **60 / 109 done**
+`#############...........`  **61 / 109 done**
 
-0 doing / 49 todo / 0 blocked across 9 phases.
+0 doing / 48 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0061 - Night rewards**. The whole of what is left is
+First up: **0062 - Technology points**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,24 +26,39 @@ which rewrites this file for you.
 
 ## What is open
 
-49 task(s) left, the ready ones first, then what they
+48 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
-### 0061 - Night rewards
+### 0062 - Technology points
 
-Ready to pick up.  Likely files: `src/core/rewards.gd`.
+Ready to pick up.  Likely files: `src/core/tech.gd`.
 
-Section 12: surviving pays money, resources and technology, and the payout is the reason to go again.
+The currency of permanent improvement, and the thing that makes night 4 feel different from night 3.
 
-- The payout is computed from the night's data, not hardcoded per night
-- A bonus for structures that survived intact, so defending well pays more than barely holding
-- The result screen itemises it the way the design document shows
-- Rewards go through the ledger
-- Every multiplier is a lever
+- One point per night survived, plus bonus points for the conditions in data
+- Points persist in the run save and are spent in the tech tree
+- Points cannot be earned by replaying a night already survived
+- The total available across ten nights is fixed and known - print it
 
-  - done when: The same night defended two ways pays differently, in the right direction
-  - done when: The itemised numbers add up to what the ledger received
+  - done when: Ten nights yield exactly the number of points the journal claims
+  - done when: Replaying a survived night yields none
+  - done when: Points survive a save and a reload
+
+### 0065 - Losing a night costs you
+
+Ready to pick up.  Likely files: `src/core/rewards.gd, src/ui/result_screen.gd`.
+
+Section 3 of the loop diagram: defeat takes part of the stock. It has to hurt enough to matter and little enough to continue.
+
+- A lever's fraction of resources lost, with money and technology untouched
+- Structures destroyed in the night stay destroyed
+- The night can be retried; the day in between is not skipped
+- The result screen says exactly what was lost
+- Losing never ends the run in the MVP - it costs a day
+
+  - done when: Losing twice in a row leaves a farm that can still recover
+  - done when: The itemised loss matches what the ledger actually lost
 
 ### 0066 - Night 10 and the end of the run
 
@@ -150,35 +165,21 @@ When it breaks on someone else's machine, get enough to fix it without them.
   - done when: A deliberate crash produces a report with the seed and the tick
   - done when: The run is still loadable afterwards
 
-### 0062 - Technology points
+### 0063 - The tech tree
 
-Waits on 0061.  Likely files: `src/core/tech.gd`.
+Waits on 0062.  Likely files: `src/core/tech.gd, src/ui/tech_screen.gd`.
 
-The currency of permanent improvement, and the thing that makes night 4 feel different from night 3.
+Somewhere to spend the points, small enough to read on one screen and real enough to change how a night goes.
 
-- One point per night survived, plus bonus points for the conditions in data
-- Points persist in the run save and are spent in the tech tree
-- Points cannot be earned by replaying a night already survived
-- The total available across ten nights is fixed and known - print it
+- Around twelve nodes, no more: the design document forbids a giant tree in the MVP
+- Three branches: production, defence, survival
+- Prerequisites are data; a node shows what it needs and what it gives
+- It opens from the day HUD and never during a wave
+- Spending is confirmed and is not refundable - or is, for a fee, and the fee is a lever
 
-  - done when: Ten nights yield exactly the number of points the journal claims
-  - done when: Replaying a survived night yields none
-  - done when: Points survive a save and a reload
-
-### 0065 - Losing a night costs you
-
-Waits on 0061.  Likely files: `src/core/rewards.gd, src/ui/result_screen.gd`.
-
-Section 3 of the loop diagram: defeat takes part of the stock. It has to hurt enough to matter and little enough to continue.
-
-- A lever's fraction of resources lost, with money and technology untouched
-- Structures destroyed in the night stay destroyed
-- The night can be retried; the day in between is not skipped
-- The result screen says exactly what was lost
-- Losing never ends the run in the MVP - it costs a day
-
-  - done when: Losing twice in a row leaves a farm that can still recover
-  - done when: The itemised loss matches what the ledger actually lost
+  - done when: Every node is reachable inside ten nights, but not all of them
+  - done when: The choice between branches is real: say in the journal which one you would take and why
+  - done when: `input_check` buys a node
 
 ### 0068 - A balance sweep over the ten nights
 
@@ -364,21 +365,34 @@ One warm loop for the farm, one cold one for the night, and a crossfade on the r
   - done when: The loop point is inaudible
   - done when: The crossfade lands with the transition, not before or after it
 
-### 0063 - The tech tree
+### 0104 - Saves survive an update
 
-Waits on 0062.  Likely files: `src/core/tech.gd, src/ui/tech_screen.gd`.
+Waits on 0062.  Likely files: `src/app/save.gd`.
 
-Somewhere to spend the points, small enough to read on one screen and real enough to change how a night goes.
+Adding a lever or a tech node must not delete somebody's run.
 
-- Around twelve nodes, no more: the design document forbids a giant tree in the MVP
-- Three branches: production, defence, survival
-- Prerequisites are data; a node shows what it needs and what it gives
-- It opens from the day HUD and never during a wave
-- Spending is confirmed and is not refundable - or is, for a fee, and the fee is a lever
+- A save version and a migration per bump, applied in order
+- A missing key takes the default; an unknown key is dropped with a warning
+- Golden saves in the repository, one per version, loaded by `verify.py`
+- A save that cannot be migrated says so, keeps the file, and offers a new run
 
-  - done when: Every node is reachable inside ten nights, but not all of them
-  - done when: The choice between branches is real: say in the journal which one you would take and why
-  - done when: `input_check` buys a node
+  - done when: Every golden save loads and plays
+  - done when: Adding a resource to game_data does not break a save that predates it
+
+### 0064 - Tower I, II, automatic
+
+Waits on 0063.  Likely files: `src/core/towers.gd, src/core/game_data.gd`.
+
+The upgrade chain the design document draws: a tower that grows with the run instead of being replaced by a different tower.
+
+- Each tower has three levels, each an entry in data, not a subclass
+- An upgrade costs resources on the spot and is gated by a tech node
+- Level 3 changes behaviour, not only numbers - that is what earns the word 'automatic'
+- The upgrade is visible on the sprite
+- Upgrading in place keeps the tower's current hit points proportionally
+
+  - done when: Upgrading a tower mid-preparation works and costs what it says
+  - done when: A level 3 tower is clearly better and clearly not free
 
 ### 0077 - Particles
 
@@ -438,20 +452,6 @@ The bed under everything: birds and water by day, wind and distant groaning by n
   - done when: Standing still on the farm for a minute is pleasant, not empty
   - done when: The ambience never masks the house-damage sound
 
-### 0104 - Saves survive an update
-
-Waits on 0062.  Likely files: `src/app/save.gd`.
-
-Adding a lever or a tech node must not delete somebody's run.
-
-- A save version and a migration per bump, applied in order
-- A missing key takes the default; an unknown key is dropped with a warning
-- Golden saves in the repository, one per version, loaded by `verify.py`
-- A save that cannot be migrated says so, keeps the file, and offers a new run
-
-  - done when: Every golden save loads and plays
-  - done when: Adding a resource to game_data does not break a save that predates it
-
 ### 0109 - The character reacts
 
 Waits on 0073.  Likely files: `src/core/player.gd, src/ui/player_view.gd`.
@@ -466,21 +466,6 @@ The little bubbles on the owner's sheet - !, ?, a heart, a note, an idea, a star
 
   - done when: A reaction appears on the tick the thing happens and clears itself
   - done when: Turning them all off leaves the determinism hash unchanged
-
-### 0064 - Tower I, II, automatic
-
-Waits on 0063.  Likely files: `src/core/towers.gd, src/core/game_data.gd`.
-
-The upgrade chain the design document draws: a tower that grows with the run instead of being replaced by a different tower.
-
-- Each tower has three levels, each an entry in data, not a subclass
-- An upgrade costs resources on the spot and is gated by a tech node
-- Level 3 changes behaviour, not only numbers - that is what earns the word 'automatic'
-- The upgrade is visible on the sprite
-- Upgrading in place keeps the tower's current hit points proportionally
-
-  - done when: Upgrading a tower mid-preparation works and costs what it says
-  - done when: A level 3 tower is clearly better and clearly not free
 
 ### 0082 - Screenshots, and actually looking at them
 
@@ -529,7 +514,7 @@ Every cost, stat and icon explains itself, so the game does not need a manual.
 
 ### 0090 - The log panel
 
-Waits on 0081, 0061.  Likely files: `src/ui/log_panel.gd`.
+Waits on 0081.  Likely files: `src/ui/log_panel.gd`.
 
 A short running account of what just happened, because at 4x speed the player will miss things.
 
@@ -837,15 +822,15 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0057** [Structures take damage and die](prompts/0057-structure-damage.md)
 - [x] **0058** [The Giant](prompts/0058-boss-giant.md)
 
-## 4 - Ten nights and progression  (2/12)
+## 4 - Ten nights and progression  (3/12)
 
 - [x] **0059** [Waves as data](prompts/0059-wave-data.md)
 - [x] **0060** [The ten nights, authored](prompts/0060-ten-nights.md)
-- [ ] **0061** [Night rewards](prompts/0061-rewards.md)
-- [ ] **0062** [Technology points](prompts/0062-tech-points.md) - needs 0061
+- [x] **0061** [Night rewards](prompts/0061-rewards.md)
+- [ ] **0062** [Technology points](prompts/0062-tech-points.md)
 - [ ] **0063** [The tech tree](prompts/0063-tech-tree.md) - needs 0062
 - [ ] **0064** [Tower I, II, automatic](prompts/0064-tower-upgrades.md) - needs 0063
-- [ ] **0065** [Losing a night costs you](prompts/0065-defeat.md) - needs 0061
+- [ ] **0065** [Losing a night costs you](prompts/0065-defeat.md)
 - [ ] **0066** [Night 10 and the end of the run](prompts/0066-run-end.md)
 - [ ] **0067** [The autoplayer](prompts/0067-autoplayer.md)
 - [ ] **0068** [A balance sweep over the ten nights](prompts/0068-balance-sweep.md) - needs 0067
@@ -877,7 +862,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [ ] **0087** [Ambience](prompts/0087-ambience.md) - needs 0084, 0085
 - [ ] **0088** [Juice: shake, hit stop, damage numbers](prompts/0088-juice.md) - needs 0077
 - [ ] **0089** [Tooltips](prompts/0089-tooltips.md) - needs 0081
-- [ ] **0090** [The log panel](prompts/0090-log-panel.md) - needs 0081, 0061
+- [ ] **0090** [The log panel](prompts/0090-log-panel.md) - needs 0081
 
 ## 7 - Shell and product  (0/10)
 

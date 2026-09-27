@@ -4523,3 +4523,65 @@ now narrower and truer:
 
 `python tools/verify.py` prints PASS: 2135 asserts, 463 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+
+## 0061 - Night rewards
+
+Most of this was built early. What it did not have was the thing its own
+requirement asks for: **"a bonus for structures that survived intact"** was
+paid per structure still *upright*, so a wall at one hit point earned exactly
+what a wall nobody touched earned, and "defending well pays more than barely
+holding" was not true of the code.
+
+It is now paid per structure that came through **without a scratch**, with a
+smaller `standing_structure_bonus` for the ones that took damage and held
+anyway - so a hard-won night is still worth more than a quiet one, without
+being worth as much as a clean one.
+
+    six towers untouched pays $94; the same six all damaged pays $76
+
+Same seed, same night, same kills, same number left standing: the eighteen
+dollars is exactly six times the difference between the two bonuses, which is
+what the assert checks rather than just "more".
+
+### The money says where it came from
+
+    { "for the night": 45, "bounty": 0, "nothing touched": 8,
+      "still standing": 2, "the house untouched": 25 }
+
+`design.md` section 12 itemises the payout and the file's own header said the
+list exists so the screen can say *why* - but money was one lump, so it could
+not. `_money_from()` is the one place that knows now, and the total is that
+dictionary added up, so the lines and the total cannot drift apart.
+
+The screen shows one headline row - "for defending well + $32" - rather than
+all five. **A `Label` reserves its font's line height** the way a `Button`
+reserves thirty-one pixels, so each row is twenty-two pixels whatever it
+claims; seven of them grew the result frame to 269 pixels and pushed "back to
+the farm" off the bottom of the screen, which ended the run. That is the
+fourth member of this family after tasks 0032, 0040 and 0055, and the first
+one on a `Label`.
+
+### Three more unread levers
+
+- `DEFEAT_RESOURCE_LOSS` was `0.25` - the eighth fraction found this way. It
+  is `DEFEAT_LOSS_PERCENT` at 25 now.
+- `DEFEAT_KEEPS_MONEY` and `DEFEAT_KEEPS_TECH` had been declared with the
+  table and read by nothing: `Rewards` skipped money *by name* and energy by
+  accident, so turning either lever off would have changed nothing at all.
+  Both are read now, and energy is skipped for a stated reason - it is a rate,
+  not a stock, so there is nothing to take.
+
+`tech_points` is still unread, deliberately: task 0062 owns "one point per
+night survived, plus bonus points" word for word, and half-paying it here
+would have been taking its work rather than doing mine. `_is_tech()` is
+waiting for the resource 0062 adds.
+
+### Hashes
+
+| | from | to | why |
+|---|---|---|---|
+| sim hash | `893100662` | `1987400090` | the payout in the state carries the money breakdown and the intact count |
+| data hash | `543765201` | `1743728276` | a new standing bonus, and the defeat fraction became a percentage |
+
+`python tools/verify.py` prints PASS: 2168 asserts, 463 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

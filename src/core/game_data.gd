@@ -1285,8 +1285,15 @@ const REWARDS: Dictionary = {
 	"money_per_night": 15,              # LEVER: money added per night, 5-30
 	"resources": {WOOD: 10, STONE: 8, IRON: 4},
 	"resources_per_night": {WOOD: 4, STONE: 3, IRON: 2},
-	# Defending well should pay more than barely holding.
+	# **Defending well should pay more than barely holding**, so this is paid
+	# per structure that came through **without a scratch** rather than per
+	# structure still upright. A wall at one hit point held the line and is
+	# worth nothing here; the player who never let it be touched is the one
+	# being paid.
 	"intact_structure_bonus": 4,        # LEVER: money each, 1-10
+	# And a smaller one for the ones that took damage and held anyway, so
+	# that a hard-won night is not worth less than a quiet one.
+	"standing_structure_bonus": 1,      # LEVER: money each, 0-4
 	"house_untouched_bonus": 25,        # LEVER: money, 10-50
 	"tech_points": 1,                   # LEVER: per night survived, 1-2
 }
@@ -1294,7 +1301,15 @@ const REWARDS: Dictionary = {
 ## Losing a night takes a share of the stock. It must hurt enough to matter and
 ## little enough to keep playing: `design.md` is explicit that a loss costs a
 ## day, never the run.
-const DEFEAT_RESOURCE_LOSS := 0.25      # LEVER: fraction, 0.1-0.4
+## **A percentage, not a fraction.** This was `0.25` - the eighth of them
+## found this way, after `WATER_GROWTH_BONUS`, `BROWNOUT_RATE`,
+## `splash_falloff`, `pierce_falloff`, `structure_damage_multiplier`,
+## `HOUSE_REPAIR_PENALTY` and `slow_fraction`. The rules are integers.
+const DEFEAT_LOSS_PERCENT := 25         # LEVER: percent of the stock, 10-40
+
+## What a loss does **not** take. Both were declared with the table and read
+## by nothing: `Rewards` skipped money by name and energy by accident, so
+## turning either of these off changed nothing at all.
 const DEFEAT_KEEPS_MONEY := true
 const DEFEAT_KEEPS_TECH := true
 
@@ -2174,5 +2189,6 @@ static func digest() -> int:
 		"wave_gap": [WAVE_GAP_TICKS, SPAWN_INTERVAL_TICKS, MVP_NIGHTS],
 		"spawns": SPAWNS,
 		"rewards": REWARDS,
-		"defeat": [DEFEAT_RESOURCE_LOSS, DEFEAT_KEEPS_MONEY, DEFEAT_KEEPS_TECH],
+		"defeat": [DEFEAT_LOSS_PERCENT, DEFEAT_KEEPS_MONEY,
+			DEFEAT_KEEPS_TECH],
 	})
