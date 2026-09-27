@@ -1,0 +1,27 @@
+# Godot 4
+.godot/
+/android/
+*.translation
+
+# Builds and exports
+build/
+export/
+*.pck
+*.zip
+
+# Generated at runtime, not source
+implementation/logs/
+__pycache__/
+*.pyc
+
+# Editor and OS
+.vscode/
+.idea/
+*.tmp
+*.bak
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Godot writes these next to .gd files; they ARE source and must be committed:
+# !*.gd.uid

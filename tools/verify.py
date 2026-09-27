@@ -1,0 +1,259 @@
+# -*- coding: utf-8 -*-
+"""Everything that must pass before a backlog task counts as done.
+
+    python tools/verify.py            full run
+    python tools/verify.py --fast     skips the exports
+    python tools/verify.py --accept   records a determinism hash that moved
+    python tools/verify.py --hashes   only the parse check and the hash guard
+
+Exit code 0 only when every check either passed or skipped.
+
+**This is the bootstrap version.** The repository starts as a design document
+and a reference image, so on day one almost everything here has nothing to run
+against. A check whose target does not exist yet prints SKIP with the reason
+instead of failing, which is what lets task 0001 run this command at all. Task
+0005 fills in the determinism guard and hardens the rest; the shape below is
+deliberately the shape that task expects to find.
+"""
+import os
+import re
+import subprocess
+import sys
+import time
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+GODOT = os.environ.get(
+    "GODOT",
+    "C:/Users/PC GAMER DA FAMILIA/Documents/Godot/"
+    "Godot_v4.7.2-stable_win64_console.exe")
+
+HASH_FILE = os.path.join(ROOT, "tools", "determinism_hash.txt")
+
+# Budget on the development machine. Every row is timed and the total is
+# printed, so the budget is a measurement rather than a hope.
+BUDGET_S = 300
+
+results = []            # (name, status, detail) where status is PASS/FAIL/SKIP
+guards = []             # (name, old, new, moved)
+_started = time.time()
+_last = time.time()
+
+
+def rel(*parts):
+    return os.path.join(ROOT, *parts)
+
+
+def run(cmd, timeout=600):
+    try:
+        p = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True,
+                           timeout=timeout, shell=False,
+                           encoding="utf-8", errors="replace")
+    except FileNotFoundError:
+        return 127, "executable not found: %s" % cmd[0]
+    except subprocess.TimeoutExpired:
+        return 124, "timed out after %ds" % timeout
+    return p.returncode, (p.stdout or "") + (p.stderr or "")
+
+
+def godot(args, timeout=600):
+    return run([GODOT, "--path", ".", *args], timeout=timeout)
+
+
+def row(name, status, detail=""):
+    """One line of the report, with what it cost.
+
+    The seconds are the time since the previous row, printed so that a check
+    that starts costing minutes shows up in the output rather than in
+    somebody's patience."""
+    global _last
+    now = time.time()
+    took, _last = now - _last, now
+    results.append((name, status, detail))
+    print("  %-28s %-4s %5.1fs%s" % (name, status, took,
+                                     ("  " + detail) if detail else ""))
+    return status != "FAIL"
+
+
+def check(name, ok, detail=""):
+    return row(name, "PASS" if ok else "FAIL", detail)
+
+
+def skip(name, why):
+    return row(name, "SKIP", why)
+
+
+def tail(out, n=12):
+    lines = [l for l in out.strip().splitlines() if l.strip()]
+    return " | ".join(lines[-n:])[:400]
+
+
+# ----------------------------------------------------------------- the checks
+
+def check_python():
+    """The backlog tooling itself has to import before anything else can."""
+    bad = []
+    for dirpath, dirnames, filenames in os.walk(rel("tools")):
+        dirnames[:] = [d for d in dirnames if d != "__pycache__"]
+        for f in sorted(filenames):
+            if not f.endswith(".py"):
+                continue
+            p = os.path.join(dirpath, f)
+            try:
+                # compile() rather than py_compile: nothing is written, which
+                # matters because os.devnull on Windows is `nul` and py_compile
+                # refuses to treat it as an output file.
+                compile(open(p, encoding="utf-8").read(), p, "exec")
+            except Exception as e:
+                bad.append("%s: %s" % (os.path.relpath(p, ROOT), e))
+    return check("python tooling", not bad, "; ".join(bad)[:300])
+
+
+def check_backlog():
+    code, out = run([sys.executable, "tools/gen_backlog.py", "--index-only"])
+    return check("backlog index", code == 0, tail(out, 3) if code else "")
+
+
+def check_godot_present():
+    if not os.path.exists(rel("project.godot")):
+        return skip("godot project", "no project.godot yet - task 0001")
+    if not os.path.exists(GODOT):
+        return check("godot project", False,
+                     "Godot not at %s - set $GODOT" % GODOT)
+    code, out = godot(["--headless", "--import"], timeout=300)
+    return check("godot import", code == 0, tail(out))
+
+
+def check_script(name, script, missing_note, args=(), pattern=None):
+    """Run a Godot tool script, or skip when the backlog has not written it."""
+    if not os.path.exists(rel("project.godot")):
+        return skip(name, "no project yet")
+    path = rel(*script.split("/"))
+    if not os.path.exists(path):
+        return skip(name, missing_note)
+    code, out = godot(["--headless", "--script", "res://" + script,
+                       *(["--", *args] if args else [])])
+    if pattern:
+        m = re.search(pattern, out)
+        detail = m.group(0) if m else tail(out, 4)
+    else:
+        detail = "" if code == 0 else tail(out)
+    return check(name, code == 0, detail)
+
+
+def check_determinism(accept):
+    """The hash guard.
+
+    The baseline is a file rather than a comment so that moving it is a diff
+    somebody reviews, and the failure names the command that accepts it: a
+    guard whose fix nobody can remember is a guard people switch off."""
+    name = "determinism hash"
+    script = "src/tools/determinism.gd"
+    if not os.path.exists(rel("project.godot")):
+        return skip(name, "no project yet")
+    if not os.path.exists(rel(*script.split("/"))):
+        return skip(name, "no determinism.gd yet - task 0005")
+
+    code, out = godot(["--headless", "--script", "res://" + script])
+    if code != 0:
+        return check(name, False, tail(out))
+    m = re.search(r"(-?\d{4,})", out)
+    current = m.group(1) if m else ""
+    expected = ""
+    if os.path.exists(HASH_FILE):
+        expected = open(HASH_FILE, encoding="utf-8").read().strip()
+    moved = bool(expected) and bool(current) and current != expected
+    if accept and current:
+        open(HASH_FILE, "w", encoding="utf-8", newline="\n").write(current + "\n")
+    guards.append((name, expected, current, moved))
+
+    if not current:
+        return check(name, False, "the script printed no number")
+    if not expected:
+        return check(name, bool(accept),
+                     "recorded %s, the first baseline" % current if accept
+                     else "no baseline yet: python tools/verify.py --accept")
+    if accept:
+        return check(name, True,
+                     "recorded %s (was %s)" % (current, expected) if moved
+                     else "%s unchanged" % current)
+    return check(name, current == expected,
+                 "%s unchanged" % current if current == expected
+                 else "%s, expected %s - a rule changed. If on purpose: "
+                      "python tools/verify.py --accept" % (current, expected))
+
+
+def check_exports():
+    if not os.path.exists(rel("export_presets.cfg")):
+        return skip("exports", "no export_presets.cfg yet - task 0001")
+    if not os.path.exists(GODOT):
+        return skip("exports", "Godot not on this machine")
+    presets = open(rel("export_presets.cfg"), encoding="utf-8").read()
+    names = re.findall(r'^name="([^"]+)"', presets, re.M)
+    if not names:
+        return skip("exports", "no presets configured")
+    os.makedirs(rel("build"), exist_ok=True)
+    bad = []
+    for n in names:
+        out_path = "build/%s/harvest_the_night%s" % (
+            n.lower().replace(" ", "_"),
+            ".html" if "web" in n.lower() else ".exe")
+        os.makedirs(os.path.dirname(rel(*out_path.split("/"))), exist_ok=True)
+        code, out = godot(["--headless", "--export-release", n, out_path],
+                          timeout=900)
+        if code != 0 or not os.path.exists(rel(*out_path.split("/"))):
+            bad.append("%s: %s" % (n, tail(out, 3)))
+    return check("exports", not bad, "; ".join(bad)[:300])
+
+
+# ------------------------------------------------------------------- the run
+
+def main():
+    accept = "--accept" in sys.argv
+    fast = "--fast" in sys.argv
+    hashes_only = "--hashes" in sys.argv
+
+    print("")
+    print("HARVEST THE NIGHT - verify")
+    print("  godot: %s" % ("found" if os.path.exists(GODOT) else "MISSING " + GODOT))
+    print("")
+
+    check_python()
+    check_backlog()
+    check_godot_present()
+
+    if not hashes_only:
+        check_script("headless_check", "src/tools/headless_check.gd",
+                     "not written yet - task 0004",
+                     pattern=r"\d+ asserts?, \d+ failed")
+    check_determinism(accept)
+    if not hashes_only:
+        check_script("input_check", "src/tools/input_check.gd",
+                     "not written yet - task 0011",
+                     pattern=r"\d+ cases?, \d+ failed")
+        if fast:
+            skip("exports", "--fast")
+        else:
+            check_exports()
+
+    failed = [r for r in results if r[1] == "FAIL"]
+    skipped = [r for r in results if r[1] == "SKIP"]
+    total = time.time() - _started
+
+    print("")
+    if guards and accept:
+        for name, old, new, moved in guards:
+            if moved:
+                print("  guard %s moved: %s -> %s" % (name, old, new))
+                print("  write both numbers in implementation/PROGRESS.md.")
+    print("  %d passed, %d skipped, %d failed in %.0fs%s" % (
+        len(results) - len(failed) - len(skipped), len(skipped), len(failed),
+        total, "  (OVER BUDGET)" if total > BUDGET_S else ""))
+    print("")
+    print("FAIL" if failed else "PASS")
+    for name, _, detail in failed:
+        print("  %s: %s" % (name, detail))
+    return 1 if failed else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
