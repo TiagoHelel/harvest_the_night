@@ -48,11 +48,13 @@ static func verb_at(state: Dictionary, cell: Vector2i) -> StringName:
 	return TERRAIN_VERBS.get(Farm.terrain_at(state, cell), &"")
 
 
-## How many ticks of standing there it takes.
+## How many ticks one go at it takes.
 ##
-## The gathering table is the authority where it has an opinion, so that
-## chopping time is a lever next to how much wood a tree gives rather than a
-## number hidden in a verb table.
+## For anything gatherable that is one **swing**, not the whole job: a tree has
+## hit points and `Player` repeats the action while the verb still holds. The
+## gathering table is the authority where it has an opinion, so that chopping
+## time is a lever next to how much wood a tree gives rather than a number
+## hidden in a verb table.
 static func ticks_for(state: Dictionary, cell: Vector2i, verb: StringName) -> int:
 	var on := Farm.occupant(state, cell)
 	if not on.is_empty():
@@ -64,13 +66,14 @@ static func ticks_for(state: Dictionary, cell: Vector2i, verb: StringName) -> in
 
 ## The work is finished. Do whatever the verb means.
 ##
-## Every arm is deliberately empty until the task that owns it lands, so that
-## the wiring can be tested end to end before any of the payloads exist - and
-## so that adding a payload is one arm rather than a hunt through the player.
+## One arm per verb, and an arm that belongs to a task the backlog has not
+## reached yet is deliberately empty - so the wiring can be tested end to end
+## before the payload exists, and so adding the payload is one arm rather than
+## a hunt through the player.
 static func complete(state: Dictionary, cell: Vector2i, verb: StringName) -> void:
 	match verb:
 		&"chop", &"mine":
-			pass        # task 0016 (wood) and 0017 (stone), 0031 (iron)
+			Gathering.strike(state, cell)
 		&"farm":
 			pass        # task 0018: till, plant, harvest
 		&"fish":

@@ -51,6 +51,7 @@ const TERRAIN_COLOURS: Array = [
 ## into the lawn. Anything with a PNG in `sprites/props/` ignores this table.
 const OCCUPANT_COLOURS: Dictionary = {
 	&"tree": Color8(24, 58, 32),
+	&"stump": Color8(96, 70, 44),
 	&"rock": Color8(150, 148, 158),
 	&"ore": Color8(196, 150, 70),
 	&"house": Color8(176, 66, 58),

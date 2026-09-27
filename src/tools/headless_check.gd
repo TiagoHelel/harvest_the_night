@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 8
+const GROUPS := 9
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -72,6 +72,7 @@ func _run() -> void:
 	_task_0008_farm()
 	_task_0009_settings()
 	_task_0010_save()
+	_task_0016_gathering()
 
 
 func _finish() -> void:
@@ -798,3 +799,163 @@ func _write_bytes(path: String, bytes: PackedByteArray) -> void:
 func _remove_file(path: String) -> void:
 	if FileAccess.file_exists(path):
 		DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
+
+
+## 0016 - the wood: swings fell a tree, the ledger gets the wood, and the farm
+## grows back.
+func _task_0016_gathering() -> void:
+	var state := State.create(41)
+	var trees := Farm.cells_with(state, &"tree")
+	expect(trees.size() == 76, "the wood is the size the map says",
+		str(trees.size()))
+
+	var tree: Vector2i = trees[10]
+	var node: Dictionary = GameData.GATHERING[&"tree"]
+	var swings := int(node["hits"])
+	var wood_each := int((node["yield"] as Dictionary)[GameData.WOOD])
+
+	# **A tree has hit points, not a click.** Every swing but the last gives
+	# nothing, and the tree is still standing.
+	var wood_before := Resources.amount(state, GameData.WOOD)
+	for i in swings - 1:
+		var got := Gathering.strike(state, tree)
+		expect(got.is_empty(), "swing %d gives nothing yet" % (i + 1), str(got))
+		expect(Farm.occupant(state, tree)["id"] == &"tree",
+			"and the tree is still standing")
+	expect(Resources.amount(state, GameData.WOOD) == wood_before,
+		"nothing has been paid out yet")
+
+	# The last swing fells it, pays, and leaves a stump.
+	var final := Gathering.strike(state, tree)
+	expect(int(final.get(GameData.WOOD, 0)) == wood_each,
+		"the last swing gives the whole tree", str(final))
+	expect(Resources.amount(state, GameData.WOOD) == wood_before + wood_each,
+		"through the ledger, not around it",
+		str(Resources.amount(state, GameData.WOOD)))
+	expect(Farm.occupant(state, tree).get("id", &"") == &"stump",
+		"and leaves a stump", str(Farm.occupant(state, tree)))
+	expect(Gathering.regrowing(state) == 1, "with one thing coming back")
+
+	# Hitting the stump does nothing: it is scenery, not a second tree.
+	expect(Gathering.strike(state, tree).is_empty(), "a stump gives nothing")
+	expect(Interact.verb_at(state, tree) == &"", "and offers no verb")
+
+	# **It comes back.** Not a tick early, and as a tree rather than a stump.
+	var wait := int(node["regrow_ticks"])
+	Sim.advance(state, wait - 1)
+	expect(Farm.occupant(state, tree)["id"] == &"stump",
+		"still a stump one tick short of the timer")
+	Sim.advance(state, 1)
+	expect(Farm.occupant(state, tree).get("id", &"") == &"tree",
+		"and a tree on the tick the timer says",
+		str(Farm.occupant(state, tree)))
+	expect(Gathering.regrowing(state) == 0, "with nothing left pending")
+
+	# **The farm cannot be stripped for good.** Chop every tree on it, wait,
+	# and the wood is back - all 76 of them.
+	var all_trees := Farm.cells_with(state, &"tree")
+	var expected_wood := Resources.amount(state, GameData.WOOD) \
+		+ all_trees.size() * wood_each
+	for cell in all_trees:
+		for _i in swings:
+			Gathering.strike(state, cell)
+	expect(Farm.cells_with(state, &"tree").is_empty(), "the wood is gone")
+	expect(Resources.amount(state, GameData.WOOD) == expected_wood,
+		"and paid for every tree of it",
+		"%d expected, %d held"
+		% [expected_wood, Resources.amount(state, GameData.WOOD)])
+
+	Sim.advance(state, wait)
+	expect(Farm.cells_with(state, &"tree").size() == all_trees.size(),
+		"and after the regrowth delay every one of them is back",
+		str(Farm.cells_with(state, &"tree").size()))
+	expect(Farm.cells_with(state, &"stump").is_empty(),
+		"with no stumps left behind")
+
+	# **A known amount of wood from a known number of ticks.** One tree is
+	# `hits` swings of `work_ticks`, driven through the real action machinery
+	# rather than by calling strike() directly.
+	var timed := State.create(9)
+	var target: Vector2i = Farm.cells_with(timed, &"tree")[20]
+	var beside := _first_walkable_beside(timed, target)
+	expect(beside != Vector2i(-1, -1), "a tree with room to stand beside it")
+	if beside != Vector2i(-1, -1):
+		var who: Dictionary = timed["player"]
+		who["pos"] = [beside.x * Player.SUBTILE + Player.SUBTILE / 2,
+			beside.y * Player.SUBTILE + Player.SUBTILE / 2]
+		who["facing"] = _face_towards(beside, target)
+		(timed["intent"] as Dictionary)["interact"] = true
+
+		var per_tree := int(node["hits"]) * int(node["work_ticks"])
+		var before := Resources.amount(timed, GameData.WOOD)
+		Sim.advance(timed, per_tree)
+		expect(Resources.amount(timed, GameData.WOOD) == before + wood_each,
+			"%d ticks of chopping is exactly one tree" % per_tree,
+			"%d then %d" % [before, Resources.amount(timed, GameData.WOOD)])
+
+	# **Walking away gives it up.** Half a tree does not stay half chopped.
+	var quitter := State.create(3)
+	var stand := _first_walkable_beside(quitter,
+		Farm.cells_with(quitter, &"tree")[20])
+	var chopped: Vector2i = Farm.cells_with(quitter, &"tree")[20]
+	if stand != Vector2i(-1, -1):
+		var who2: Dictionary = quitter["player"]
+		who2["pos"] = [stand.x * Player.SUBTILE + Player.SUBTILE / 2,
+			stand.y * Player.SUBTILE + Player.SUBTILE / 2]
+		who2["facing"] = _face_towards(stand, chopped)
+		(quitter["intent"] as Dictionary)["interact"] = true
+		Sim.advance(quitter, int(node["work_ticks"]))
+		expect(Gathering.swings_left(quitter, chopped) == swings - 1,
+			"one swing landed", str(Gathering.swings_left(quitter, chopped)))
+		var move: Array = (quitter["intent"] as Dictionary)["move"]
+		move[0] = 1
+		Sim.advance(quitter, 2)
+		expect(not Player.is_busy(quitter), "walking away stopped the work")
+
+	# **The night does not heal the wood.** A farm that quietly regrew behind a
+	# firefight would be the one thing on the night map not about the night.
+	var nocturnal := State.create(5)
+	var night_tree: Vector2i = Farm.cells_with(nocturnal, &"tree")[5]
+	for _i in swings:
+		Gathering.strike(nocturnal, night_tree)
+	Phases.begin_preparation(nocturnal)
+	Sim.advance(nocturnal, GameData.PREPARATION_TICKS)
+	var pending_at_dusk := Gathering.regrowing(nocturnal)
+	Sim.advance(nocturnal, wait)
+	expect(Gathering.regrowing(nocturnal) == pending_at_dusk,
+		"a whole night of it moved nothing along",
+		"%d then %d" % [pending_at_dusk, Gathering.regrowing(nocturnal)])
+
+	# Something built on the cell keeps it. The farm gives up on that one
+	# rather than knocking a tower over to put a tree back.
+	var built := State.create(7)
+	var taken: Vector2i = Farm.cells_with(built, &"tree")[30]
+	for _i in swings:
+		Gathering.strike(built, taken)
+	Farm.remove(built, taken)                  # clear the stump
+	Farm.place(built, taken, {"id": &"gun_tower"})
+	Sim.advance(built, wait + 5)
+	expect(Farm.occupant(built, taken)["id"] == &"gun_tower",
+		"a tower on the cell is not replaced by the tree",
+		str(Farm.occupant(built, taken)))
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+func _first_walkable_beside(state: Dictionary, cell: Vector2i) -> Vector2i:
+	for step in Grid.STEPS:
+		var n: Vector2i = cell + step
+		if Grid.in_bounds(n) and Farm.walkable(state, n):
+			return n
+	return Vector2i(-1, -1)
+
+
+func _face_towards(from_cell: Vector2i, to_cell: Vector2i) -> int:
+	var d: Vector2i = to_cell - from_cell
+	if d.y > 0:
+		return Player.SOUTH
+	if d.y < 0:
+		return Player.NORTH
+	if d.x < 0:
+		return Player.WEST
+	return Player.EAST

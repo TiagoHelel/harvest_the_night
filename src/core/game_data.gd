@@ -185,23 +185,27 @@ const WATER_LASTS_UNTIL_NIGHT := true
 ## comes back. Nothing on the farm can be exhausted permanently.
 const GATHERING: Dictionary = {
 	&"tree": {
-		"work_ticks": 3 * SECONDS,      # LEVER: ticks of chopping, 1-6 seconds
-		"yield": {WOOD: 3},             # LEVER: units, 1-5
+		"work_ticks": 1 * SECONDS,      # LEVER: ticks per swing, 15-90
+		"hits": 3,                      # LEVER: swings to fell it, 1-6
+		"yield": {WOOD: 3},             # LEVER: units, all on the last swing
 		"regrow_ticks": 120 * SECONDS,  # LEVER: ticks, 60-240 seconds worth
+		"leaves": &"stump",
 	},
 	&"rock": {
-		"work_ticks": 4 * SECONDS,      # LEVER: ticks, 2-8 seconds worth
+		"work_ticks": 2 * SECONDS,      # LEVER: ticks per swing, 20-120
+		"hits": 2,                      # LEVER: swings, 1-4
 		"yield": {STONE: 2},            # LEVER: units, 1-4
 		"regrow_ticks": 150 * SECONDS,  # LEVER: ticks, 90-300 seconds worth
 	},
 	&"ore": {
 		# Iron is the thing you are always slightly short of, and that is
-		# deliberate: it is what gates every tower. A day spent entirely at the
-		# rock face buys roughly one tower - see the arithmetic in the journal.
-		# A node has to come back inside a day or the whole rock face yields one
-		# iron per node per day, and buying a 15 iron tower would take three
-		# days of nothing but mining. See the arithmetic in the journal.
-		"work_ticks": 6 * SECONDS,      # LEVER: ticks, 3-10 seconds worth
+		# deliberate: it gates every tower. A node has to come back inside a day
+		# or the whole rock face yields one iron per node per day, and a 15 iron
+		# tower would take three days of nothing but mining. Six nodes, remined
+		# four times, is about 24 iron a day for 144 seconds of a 240 second day
+		# spent at the rock face - one tower, and a real cost.
+		"work_ticks": 2 * SECONDS,      # LEVER: ticks per swing, 20-120
+		"hits": 3,                      # LEVER: swings, 2-5
 		"yield": {IRON: 1},             # LEVER: units, 1-2
 		"regrow_ticks": 60 * SECONDS,   # LEVER: ticks, 30-120 seconds worth
 	},

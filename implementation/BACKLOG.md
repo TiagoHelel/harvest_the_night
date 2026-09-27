@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`###.....................`  **15 / 108 done**
+`####....................`  **16 / 108 done**
 
-0 doing / 93 todo / 0 blocked across 9 phases.
+0 doing / 92 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0016 - Trees and wood**. The whole of what is left is
+First up: **0017 - Rocks and stone**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,24 +26,23 @@ which rewrites this file for you.
 
 ## What is open
 
-93 task(s) left, the ready ones first, then what they
+92 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
-### 0016 - Trees and wood
+### 0017 - Rocks and stone
 
-Ready to pick up.  Likely files: `src/core/gathering.gd, src/core/game_data.gd`.
+Ready to pick up.  Likely files: `src/core/gathering.gd`.
 
-The first resource in the world. Hit a tree, get wood, the tree goes away and comes back.
+The second resource, on the same machinery as wood, which is the test of whether that machinery was general enough.
 
-- A tree has hit points in ticks of chopping, not a single click
-- Wood per tree and regrowth delay are levers
-- A chopped tree leaves a stump that regrows on a timer so the farm never runs dry
-- Chopping is interrupted cleanly if the player walks away
-- The yield is added through the resource ledger, never directly
+- Rocks use the same gathering code with different data, not a second implementation
+- Stone per rock and respawn delay are levers
+- The rock face region respawns rocks; loose rocks on grass do not
+- Adding stone takes a data entry and no new function
 
-  - done when: Chopping every tree and waiting the regrowth delay restores them all
-  - done when: A headless run gathers a known amount of wood from a known number of ticks
+  - done when: Adding a third gatherable would be a data entry only - say so in the journal after checking
+  - done when: `headless_check` covers stone yield the same way as wood
 
 ### 0018 - Wheat: till, plant, grow, harvest
 
@@ -152,19 +151,20 @@ When it breaks on someone else's machine, get enough to fix it without them.
   - done when: A deliberate crash produces a report with the seed and the tick
   - done when: The run is still loadable afterwards
 
-### 0017 - Rocks and stone
+### 0019 - The workshop and its first recipe
 
-Waits on 0016.  Likely files: `src/core/gathering.gd`.
+Waits on 0017.  Likely files: `src/core/crafting.gd`.
 
-The second resource, on the same machinery as wood, which is the test of whether that machinery was general enough.
+The bridge the whole game rests on: day resources become night structures. Wood plus stone becomes a barricade.
 
-- Rocks use the same gathering code with different data, not a second implementation
-- Stone per rock and respawn delay are levers
-- The rock face region respawns rocks; loose rocks on grass do not
-- Adding stone takes a data entry and no new function
+- Recipes are data: inputs, output, ticks to craft
+- Crafting takes the inputs at the start, not at the end, so cancelling costs something
+- One recipe at a time here; the queue arrives at 0037
+- The workshop is a building on the grid the player walks to and interacts with
+- A recipe whose inputs are short is shown as unaffordable rather than hidden
 
-  - done when: Adding a third gatherable would be a data entry only - say so in the journal after checking
-  - done when: `headless_check` covers stone yield the same way as wood
+  - done when: Wood plus stone becomes a barricade in the crafting time and the resources are gone
+  - done when: Cancelling mid-craft does not refund and does not duplicate
 
 ### 0020 - The shop: sell and buy
 
@@ -213,6 +213,21 @@ Three crops with a real choice between them: fast and cheap, slow and valuable, 
   - done when: No crop is the right answer at every money level
   - done when: `headless_check` asserts each crop's yield and timing
 
+### 0031 - Iron from the rock face
+
+Waits on 0017.  Likely files: `src/core/gathering.gd, src/core/game_data.gd`.
+
+The resource that gates towers. Iron should feel like the thing you are always a little short of.
+
+- Iron comes only from the rock face region, and only from ore nodes, not loose rocks
+- Ore takes longer per hit than stone and yields less
+- Ore respawn is slower than stone respawn and both are levers
+- A day's mining should buy roughly one tower - state the arithmetic in the journal
+- Iron is not sellable at a profit against what a tower costs
+
+  - done when: Mining a full day yields iron inside the range the journal claims
+  - done when: The rock face cannot be exhausted permanently
+
 ### 0039 - The day clock and dusk
 
 Waits on 0021.  Likely files: `src/core/phases.gd, src/ui/day_hud.gd`.
@@ -242,20 +257,21 @@ Chop, mine, till, plant, water, the fishing splash and the bite, the craft, the 
   - done when: Chopping a tree for a full minute does not become annoying - go and check
   - done when: Regenerating produces byte-identical files
 
-### 0019 - The workshop and its first recipe
+### 0023 - Build mode
 
-Waits on 0017.  Likely files: `src/core/crafting.gd`.
+Waits on 0019, 0022.  Likely files: `src/ui/build_mode.gd, src/core/building.gd`.
 
-The bridge the whole game rests on: day resources become night structures. Wood plus stone becomes a barricade.
+Placing things on the farm: pick a structure, see where it can go, pay for it, put it there.
 
-- Recipes are data: inputs, output, ticks to craft
-- Crafting takes the inputs at the start, not at the end, so cancelling costs something
-- One recipe at a time here; the queue arrives at 0037
-- The workshop is a building on the grid the player walks to and interacts with
-- A recipe whose inputs are short is shown as unaffordable rather than hidden
+- A build palette of what the player owns or can afford
+- A ghost under the cursor, green where it fits and red where it does not, with the reason on hover
+- Cost is checked and taken on placement, through the ledger
+- Right click sells the structure under the cursor back for a fraction, and the fraction is a lever
+- Build mode works in DAY and PREPARATION, and in NIGHT only for what 0053 later allows
 
-  - done when: Wood plus stone becomes a barricade in the crafting time and the resources are gone
-  - done when: Cancelling mid-craft does not refund and does not duplicate
+  - done when: A structure cannot be placed on water, rock or another structure
+  - done when: Placing and selling in a loop neither creates nor destroys resources beyond the sell fraction
+  - done when: `input_check` places one and sells it
 
 ### 0025 - Zombies walk to the house
 
@@ -288,20 +304,34 @@ A field you can read at a glance, and one small daily chore that rewards coming 
   - done when: A watered and an unwatered tile planted together finish a measurable distance apart
   - done when: Holding the water input across a row waters the row once each
 
-### 0031 - Iron from the rock face
+### 0032 - Oil
 
-Waits on 0017.  Likely files: `src/core/gathering.gd, src/core/game_data.gd`.
+Waits on 0019.  Likely files: `src/core/crafting.gd, src/core/game_data.gd`.
 
-The resource that gates towers. Iron should feel like the thing you are always a little short of.
+Fire needs fuel. Oil is pressed rather than gathered, which makes it the first resource that costs a building.
 
-- Iron comes only from the rock face region, and only from ore nodes, not loose rocks
-- Ore takes longer per hit than stone and yields less
-- Ore respawn is slower than stone respawn and both are levers
-- A day's mining should buy roughly one tower - state the arithmetic in the journal
-- Iron is not sellable at a profit against what a tower costs
+- A press that turns corn or fish into oil over ticks
+- Oil feeds the flamethrower tower and incendiary ammunition
+- Oil is the most valuable thing to sell and the most useful to keep: that tension is the point
+- Press throughput is a lever
 
-  - done when: Mining a full day yields iron inside the range the journal claims
-  - done when: The rock face cannot be exhausted permanently
+  - done when: Oil can be produced and sold, and the sale is a real temptation against the flamethrower cost
+  - done when: `headless_check` runs the press for a known number of ticks
+
+### 0033 - The generator and energy
+
+Waits on 0031, 0019.  Likely files: `src/core/power.gd`.
+
+Energy, the resource on the reference sheet that gates the advanced structures and makes placement matter.
+
+- A generator burns a fuel over ticks and produces energy
+- Energy is a rate, not a stockpile: structures draw it while they run
+- A structure with no power runs at a reduced rate rather than switching off - degraded, not dead
+- The HUD shows supply against draw
+- Generator output, fuel burn and each structure's draw are levers
+
+  - done when: Building one structure too many visibly slows everything rather than stopping it
+  - done when: Running out of fuel mid-night degrades the defence and the night still resolves
 
 ### 0034 - Cooking: food and meat
 
@@ -316,6 +346,21 @@ The kitchen from the reference sheet: raw crops and fish become food, which is w
 
   - done when: A cooked dish sells for more than its inputs - state the margin
   - done when: Food spent on repair during a night is taken through the ledger
+
+### 0037 - The workshop queue
+
+Waits on 0019, 0036.  Likely files: `src/core/crafting.gd, src/ui/workshop_panel.gd`.
+
+Semi-idle in one feature: queue five things, walk away, come back to five things.
+
+- A queue per production building with a length that is a lever
+- Inputs are taken when an item starts, not when it is queued
+- Cancelling a queued item that has not started refunds it in full
+- The queue advances on the tick whether or not the player is looking
+- The panel shows time remaining on the current item
+
+  - done when: Queue three barricades, walk to the pond and back, and three exist
+  - done when: Cancelling the second of three leaves the first and the third intact
 
 ### 0040 - The shop grows
 
@@ -362,65 +407,50 @@ One warm loop for the farm, one cold one for the night, and a crossfade on the r
   - done when: The loop point is inaudible
   - done when: The crossfade lands with the transition, not before or after it
 
-### 0023 - Build mode
+### 0024 - The shooting tower
 
-Waits on 0019, 0022.  Likely files: `src/ui/build_mode.gd, src/core/building.gd`.
+Waits on 0023.  Likely files: `src/core/towers.gd`.
 
-Placing things on the farm: pick a structure, see where it can go, pay for it, put it there.
+The first thing that fights for you: cheap, single target, medium range, fires by itself.
 
-- A build palette of what the player owns or can afford
-- A ghost under the cursor, green where it fits and red where it does not, with the reason on hover
-- Cost is checked and taken on placement, through the ledger
-- Right click sells the structure under the cursor back for a fraction, and the fraction is a lever
-- Build mode works in DAY and PREPARATION, and in NIGHT only for what 0053 later allows
+- Range, rate of fire, damage and cost are levers
+- Targeting is deterministic: nearest to the house, ties broken by entity id, never by iteration order
+- It fires on the tick, and reload is counted in ticks
+- A projectile with travel time, not an instant hit - the night should be watchable
+- It does nothing at all during DAY
 
-  - done when: A structure cannot be placed on water, rock or another structure
-  - done when: Placing and selling in a loop neither creates nor destroys resources beyond the sell fraction
-  - done when: `input_check` places one and sells it
+  - done when: Two runs from the same seed fire at the same targets on the same ticks
+  - done when: A tower with nothing in range costs no measurable time per tick
+  - done when: Halving the rate of fire lever halves the shots in a fixed number of ticks
 
-### 0032 - Oil
+### 0035 - Gunpowder and ammunition
 
-Waits on 0019.  Likely files: `src/core/crafting.gd, src/core/game_data.gd`.
+Waits on 0032, 0033.  Likely files: `src/core/crafting.gd, src/core/towers.gd`.
 
-Fire needs fuel. Oil is pressed rather than gathered, which makes it the first resource that costs a building.
+Towers that consume something. The clearest possible version of 'what you made today decides what tonight can do'.
 
-- A press that turns corn or fish into oil over ticks
-- Oil feeds the flamethrower tower and incendiary ammunition
-- Oil is the most valuable thing to sell and the most useful to keep: that tension is the point
-- Press throughput is a lever
+- Gunpowder from corn and oil; incendiary rounds from oil and wood
+- A tower draws from a shared ammunition pool at a rate that is a lever
+- Out of ammunition means a much slower basic shot, never a silent dead tower
+- The night HUD shows the pool draining
+- Ammunition left over carries into the next night
 
-  - done when: Oil can be produced and sold, and the sale is a real temptation against the flamethrower cost
-  - done when: `headless_check` runs the press for a known number of ticks
+  - done when: A night fought with no gunpowder is survivable but clearly worse
+  - done when: The pool drains at the rate the levers claim over a scripted night
 
-### 0033 - The generator and energy
+### 0038 - Production runs while you are elsewhere
 
-Waits on 0031, 0019.  Likely files: `src/core/power.gd`.
+Waits on 0037, 0029.  Likely files: `src/core/sim.gd`.
 
-Energy, the resource on the reference sheet that gates the advanced structures and makes placement matter.
+The feeling the design document asks for: 'I built a machine and now I want to find out whether it works'.
 
-- A generator burns a fuel over ticks and produces energy
-- Energy is a rate, not a stockpile: structures draw it while they run
-- A structure with no power runs at a reduced rate rather than switching off - degraded, not dead
-- The HUD shows supply against draw
-- Generator output, fuel burn and each structure's draw are levers
+- Crops, presses, generators and queues all advance on the same tick regardless of camera or player position
+- No system may depend on being on screen - find and remove any that does
+- Returning to a building shows what happened while away, not a silent jump
+- A day spent entirely fishing still produces from everything else
 
-  - done when: Building one structure too many visibly slows everything rather than stopping it
-  - done when: Running out of fuel mid-night degrades the defence and the night still resolves
-
-### 0037 - The workshop queue
-
-Waits on 0019, 0036.  Likely files: `src/core/crafting.gd, src/ui/workshop_panel.gd`.
-
-Semi-idle in one feature: queue five things, walk away, come back to five things.
-
-- A queue per production building with a length that is a lever
-- Inputs are taken when an item starts, not when it is queued
-- Cancelling a queued item that has not started refunds it in full
-- The queue advances on the tick whether or not the player is looking
-- The panel shows time remaining on the current item
-
-  - done when: Queue three barricades, walk to the pond and back, and three exist
-  - done when: Cancelling the second of three leaves the first and the third intact
+  - done when: A scripted day where the player never leaves the pond still finishes the crafting queue
+  - done when: The tick cost of a fully built farm stays inside the budget
 
 ### 0041 - The first day teaches itself
 
@@ -436,6 +466,22 @@ Day 1 should teach chop, plant, craft, build and the night button without a wall
 
   - done when: Someone who has not seen the game reaches the first night without being told anything out loud
   - done when: Skipping every prompt still leaves a winnable night 1
+
+### 0046 - Fences and walls
+
+Waits on 0023.  Likely files: `src/core/building.gd, src/core/pathing.gd`.
+
+The other half of a tower defence: making the zombies walk where you want them to.
+
+- A fence is cheap wood with low hit points; a wall is stone and slow to break
+- Walls change the flow field, and the field is rebuilt when one is placed or destroyed
+- A wall cannot fully seal the house: if every path is blocked, zombies attack the nearest wall instead of standing still
+- Placing shows the path the zombies will take afterwards
+- Hit points and cost are levers
+
+  - done when: Walling a lane visibly reroutes the next wave
+  - done when: Sealing the farm completely makes them break in rather than freeze
+  - done when: The field rebuild cost stays inside the budget with fifty walls
 
 ### 0072 - The farm tileset
 
@@ -498,96 +544,6 @@ The bottom half of the reference sheet: an icon per resource, and the panels, fr
   - done when: Every resource in game_data has an icon and no icon is orphaned
   - done when: The icon set laid out in a row is recognisable against the reference sheet
 
-### 0024 - The shooting tower
-
-Waits on 0023.  Likely files: `src/core/towers.gd`.
-
-The first thing that fights for you: cheap, single target, medium range, fires by itself.
-
-- Range, rate of fire, damage and cost are levers
-- Targeting is deterministic: nearest to the house, ties broken by entity id, never by iteration order
-- It fires on the tick, and reload is counted in ticks
-- A projectile with travel time, not an instant hit - the night should be watchable
-- It does nothing at all during DAY
-
-  - done when: Two runs from the same seed fire at the same targets on the same ticks
-  - done when: A tower with nothing in range costs no measurable time per tick
-  - done when: Halving the rate of fire lever halves the shots in a fixed number of ticks
-
-### 0035 - Gunpowder and ammunition
-
-Waits on 0032, 0033.  Likely files: `src/core/crafting.gd, src/core/towers.gd`.
-
-Towers that consume something. The clearest possible version of 'what you made today decides what tonight can do'.
-
-- Gunpowder from corn and oil; incendiary rounds from oil and wood
-- A tower draws from a shared ammunition pool at a rate that is a lever
-- Out of ammunition means a much slower basic shot, never a silent dead tower
-- The night HUD shows the pool draining
-- Ammunition left over carries into the next night
-
-  - done when: A night fought with no gunpowder is survivable but clearly worse
-  - done when: The pool drains at the rate the levers claim over a scripted night
-
-### 0038 - Production runs while you are elsewhere
-
-Waits on 0037, 0029.  Likely files: `src/core/sim.gd`.
-
-The feeling the design document asks for: 'I built a machine and now I want to find out whether it works'.
-
-- Crops, presses, generators and queues all advance on the same tick regardless of camera or player position
-- No system may depend on being on screen - find and remove any that does
-- Returning to a building shows what happened while away, not a silent jump
-- A day spent entirely fishing still produces from everything else
-
-  - done when: A scripted day where the player never leaves the pond still finishes the crafting queue
-  - done when: The tick cost of a fully built farm stays inside the budget
-
-### 0046 - Fences and walls
-
-Waits on 0023.  Likely files: `src/core/building.gd, src/core/pathing.gd`.
-
-The other half of a tower defence: making the zombies walk where you want them to.
-
-- A fence is cheap wood with low hit points; a wall is stone and slow to break
-- Walls change the flow field, and the field is rebuilt when one is placed or destroyed
-- A wall cannot fully seal the house: if every path is blocked, zombies attack the nearest wall instead of standing still
-- Placing shows the path the zombies will take afterwards
-- Hit points and cost are levers
-
-  - done when: Walling a lane visibly reroutes the next wave
-  - done when: Sealing the farm completely makes them break in rather than freeze
-  - done when: The field rebuild cost stays inside the budget with fifty walls
-
-### 0078 - The reality transition
-
-Waits on 0076.  Likely files: `src/ui/transition.gd`.
-
-The moment the game is named after. Two seconds that say: same farm, different world.
-
-- The light drains from warm to cold across the whole farm at once
-- Day actors leave and night structures wake during it
-- It is skippable, and it never blocks the simulation
-- It plays in both directions, and coming back to the farm in the morning is the reward half
-- Length is a lever and a setting
-
-  - done when: It is the clip you would put first in a trailer - say in the journal whether it is yet
-  - done when: Skipping it lands in exactly the same state as watching it
-
-### 0081 - The UI theme
-
-Waits on 0079, 0080.  Likely files: `assets/theme.tres, src/ui/`.
-
-One Theme resource every control uses, so a colour change is one edit and no screen is the odd one out.
-
-- Every Control style in one Theme: no per-node style overrides anywhere
-- Built from the palette and the UI kit, not from Godot's defaults
-- Focus, hover and disabled states defined for everything interactive
-- A UI scale factor that works at every integer window scale
-
-  - done when: `grep` finds no `add_theme_*_override` left in `src/ui/`
-  - done when: Every screen looks like the same game
-
 ### 0026 - The tower kills the zombie
 
 Waits on 0024, 0025.  Likely files: `src/core/combat.gd`.
@@ -648,65 +604,34 @@ Make the flow field earn its keep: cost, not just blocked, so zombies prefer the
   - done when: The same seed and the same maze give the same arrival order
   - done when: A headless test asserts no zombie is in the same pair of cells for 20 ticks
 
-### 0082 - Screenshots, and actually looking at them
+### 0078 - The reality transition
 
-Waits on 0078.  Likely files: `src/tools/shot.gd, implementation/shots/`.
+Waits on 0076.  Likely files: `src/ui/transition.gd`.
 
-A command that puts the game in a known state and takes the picture, so a visual change can be checked instead of hoped for.
+The moment the game is named after. Two seconds that say: same farm, different world.
 
-- `shot.gd` takes named scenarios: farm at noon, farm at dusk, a wave mid-fight, the result screen, the tech tree
-- It runs headless and writes PNGs under `implementation/shots/<id>/`
-- The scenario is built from a seed and a scripted state, so two runs give the same picture
-- The runner loop is updated to say: after a visual task, take the shots and look at them
+- The light drains from warm to cold across the whole farm at once
+- Day actors leave and night structures wake during it
+- It is skippable, and it never blocks the simulation
+- It plays in both directions, and coming back to the farm in the morning is the reward half
+- Length is a lever and a setting
 
-  - done when: One command produces the whole set
-  - done when: The set is recognisably the game on the reference sheet
+  - done when: It is the clip you would put first in a trailer - say in the journal whether it is yet
+  - done when: Skipping it lands in exactly the same state as watching it
 
-### 0089 - Tooltips
+### 0081 - The UI theme
 
-Waits on 0081.  Likely files: `src/ui/tooltip.gd`.
+Waits on 0079, 0080.  Likely files: `assets/theme.tres, src/ui/`.
 
-Every cost, stat and icon explains itself, so the game does not need a manual.
+One Theme resource every control uses, so a colour change is one edit and no screen is the odd one out.
 
-- A hover tooltip on resources, structures, recipes, tech nodes and enemies
-- It shows the numbers from game_data, never a copy of them
-- A short delay before it appears and none before it moves to the next
-- It never leaves the screen edge
-- Keyboard focus shows the same tooltip as hover
+- Every Control style in one Theme: no per-node style overrides anywhere
+- Built from the palette and the UI kit, not from Godot's defaults
+- Focus, hover and disabled states defined for everything interactive
+- A UI scale factor that works at every integer window scale
 
-  - done when: Every interactive element has one
-  - done when: Changing a lever changes the tooltip with no other edit
-
-### 0091 - The title screen
-
-Waits on 0081.  Likely files: `src/ui/title_screen.gd, scenes/Title.tscn`.
-
-The game currently boots into a farm. Make it boot into a game.
-
-- The farm at dusk behind the title, with the night creeping in - the premise, in one image
-- The logo, generated with the same tools as everything else
-- Continue, New run, Statistics, Options, Quit
-- Continue is absent, not greyed, when there is no save
-- Any key or click moves past the ident into the menu
-
-  - done when: Booting lands here and not in a run
-  - done when: The screen says what kind of game this is before a word is read
-
-### 0097 - English and Portuguese
-
-Waits on 0081.  Likely files: `src/app/i18n.gd, assets/locale/`.
-
-Every string through a translation table, with pt-BR alongside English - the reference sheet is in Portuguese and so is the audience.
-
-- No literal player-facing string left in code: keys only
-- English and pt-BR CSVs, English as the fallback
-- A checker that finds missing keys, unused keys and strings that overflow their control
-- Language is a setting and applies without a restart
-- Plurals and number formatting handled, not concatenated
-
-  - done when: The checker reports zero missing keys in both languages
-  - done when: Switching language mid-game updates every visible screen
-  - done when: No pt-BR string overflows its control - the checker proves it
+  - done when: `grep` finds no `add_theme_*_override` left in `src/ui/`
+  - done when: Every screen looks like the same game
 
 ### 0027 - Three waves, a result screen, and back to the farm
 
@@ -841,6 +766,20 @@ The house, the workshop, the press, the generator, the shop, and every tower at 
   - done when: A level 1 and a level 3 tower are told apart instantly
   - done when: A damaged wall reads as damaged without a health bar
 
+### 0082 - Screenshots, and actually looking at them
+
+Waits on 0078.  Likely files: `src/tools/shot.gd, implementation/shots/`.
+
+A command that puts the game in a known state and takes the picture, so a visual change can be checked instead of hoped for.
+
+- `shot.gd` takes named scenarios: farm at noon, farm at dusk, a wave mid-fight, the result screen, the tech tree
+- It runs headless and writes PNGs under `implementation/shots/<id>/`
+- The scenario is built from a seed and a scripted state, so two runs give the same picture
+- The runner loop is updated to say: after a visual task, take the shots and look at them
+
+  - done when: One command produces the whole set
+  - done when: The set is recognisably the game on the reference sheet
+
 ### 0085 - The sounds of the night
 
 Waits on 0083, 0026.  Likely files: `tools/gen_sfx.py, assets/sfx/`.
@@ -856,49 +795,51 @@ The other half: shots, the flamethrower, the mortar, impacts, the groan, the dea
   - done when: With eyes closed, a night's audio says roughly what is happening
   - done when: Fifty zombies do not turn into noise
 
-### 0092 - The main menu and the router
+### 0089 - Tooltips
 
-Waits on 0091.  Likely files: `src/app/app.gd, src/ui/main_menu.gd`.
+Waits on 0081.  Likely files: `src/ui/tooltip.gd`.
 
-One router that owns which screen is up, so screens stop knowing about each other.
+Every cost, stat and icon explains itself, so the game does not need a manual.
 
-- An `App` autoload with `goto(state)` and a `state_changed` signal
-- States: BOOT, TITLE, MENU, RUN, TECH, STATS, OPTIONS, SUMMARY
-- A back stack, so Options returns to whoever opened it
-- No `get_node('/root/...')` reaching across screens
-- The run becomes one state rather than the root scene
+- A hover tooltip on resources, structures, recipes, tech nodes and enemies
+- It shows the numbers from game_data, never a copy of them
+- A short delay before it appears and none before it moves to the next
+- It never leaves the screen edge
+- Keyboard focus shows the same tooltip as hover
 
-  - done when: Options from the title and from the pause menu both return correctly
-  - done when: `input_check` still drives a full night after the refactor
+  - done when: Every interactive element has one
+  - done when: Changing a lever changes the tooltip with no other edit
 
-### 0099 - An icon and a boot ident
+### 0091 - The title screen
 
-Waits on 0091.  Likely files: `tools/gen_icon.py, assets/icon.png`.
+Waits on 0081.  Likely files: `src/ui/title_screen.gd, scenes/Title.tscn`.
 
-Something recognisable in a taskbar and on an itch page, and two seconds before the title that are not the Godot logo.
+The game currently boots into a farm. Make it boot into a game.
 
-- An icon generated at every size a platform asks for, readable at 16x16
-- It says farm and night in one image
-- The boot splash is replaced; no default Godot branding anywhere
-- A short ident, skippable on any input
+- The farm at dusk behind the title, with the night creeping in - the premise, in one image
+- The logo, generated with the same tools as everything else
+- Continue, New run, Statistics, Options, Quit
+- Continue is absent, not greyed, when there is no save
+- Any key or click moves past the ident into the menu
 
-  - done when: The 16x16 icon is still recognisable
-  - done when: No Godot logo appears anywhere in a release build
+  - done when: Booting lands here and not in a run
+  - done when: The screen says what kind of game this is before a word is read
 
-### 0101 - Onboarding in seven lines
+### 0097 - English and Portuguese
 
-Waits on 0041, 0097.  Likely files: `src/core/tutorial.gd`.
+Waits on 0081.  Likely files: `src/app/i18n.gd, assets/locale/`.
 
-A stranger reaches night 1 and understands the loop, with no more text than the design document allows.
+Every string through a translation table, with pt-BR alongside English - the reference sheet is in Portuguese and so is the audience.
 
-- Seven lines, total, across the whole first day
-- Each appears on the thing it describes
-- The reality switch is explained by showing it, not by describing it
-- Every line is translated
-- Watch someone play it and write down where they stopped
+- No literal player-facing string left in code: keys only
+- English and pt-BR CSVs, English as the fallback
+- A checker that finds missing keys, unused keys and strings that overflow their control
+- Language is a setting and applies without a restart
+- Plurals and number formatting handled, not concatenated
 
-  - done when: A first-time player reaches the end of night 1 without being told anything out loud
-  - done when: The journal names where they hesitated, because that is the finding
+  - done when: The checker reports zero missing keys in both languages
+  - done when: Switching language mid-game updates every visible screen
+  - done when: No pt-BR string overflows its control - the checker proves it
 
 ### 0053 - Repair during the night
 
@@ -1022,6 +963,111 @@ The bed under everything: birds and water by day, wind and distant groaning by n
   - done when: Standing still on the farm for a minute is pleasant, not empty
   - done when: The ambience never masks the house-damage sound
 
+### 0092 - The main menu and the router
+
+Waits on 0091.  Likely files: `src/app/app.gd, src/ui/main_menu.gd`.
+
+One router that owns which screen is up, so screens stop knowing about each other.
+
+- An `App` autoload with `goto(state)` and a `state_changed` signal
+- States: BOOT, TITLE, MENU, RUN, TECH, STATS, OPTIONS, SUMMARY
+- A back stack, so Options returns to whoever opened it
+- No `get_node('/root/...')` reaching across screens
+- The run becomes one state rather than the root scene
+
+  - done when: Options from the title and from the pause menu both return correctly
+  - done when: `input_check` still drives a full night after the refactor
+
+### 0099 - An icon and a boot ident
+
+Waits on 0091.  Likely files: `tools/gen_icon.py, assets/icon.png`.
+
+Something recognisable in a taskbar and on an itch page, and two seconds before the title that are not the Godot logo.
+
+- An icon generated at every size a platform asks for, readable at 16x16
+- It says farm and night in one image
+- The boot splash is replaced; no default Godot branding anywhere
+- A short ident, skippable on any input
+
+  - done when: The 16x16 icon is still recognisable
+  - done when: No Godot logo appears anywhere in a release build
+
+### 0101 - Onboarding in seven lines
+
+Waits on 0041, 0097.  Likely files: `src/core/tutorial.gd`.
+
+A stranger reaches night 1 and understands the loop, with no more text than the design document allows.
+
+- Seven lines, total, across the whole first day
+- Each appears on the thing it describes
+- The reality switch is explained by showing it, not by describing it
+- Every line is translated
+- Watch someone play it and write down where they stopped
+
+  - done when: A first-time player reaches the end of night 1 without being told anything out loud
+  - done when: The journal names where they hesitated, because that is the finding
+
+### 0058 - The Giant
+
+Waits on 0051, 0052, 0057.  Likely files: `src/core/enemies.gd, src/core/game_data.gd`.
+
+The single boss of the MVP: the test of the build you made over nine nights.
+
+- Very high hit points, slow, and it smashes structures on its way through
+- It arrives with ordinary zombies, so the player cannot aim everything at it
+- It forces concentrated damage: a defence of only cheap towers cannot kill it in time
+- One readable telegraph before its heavy attack
+- Beating it is the end of the MVP run
+
+  - done when: A well-built night 9 defence beats it with something to spare
+  - done when: A defence of nothing but crossbows loses to it
+  - done when: It never softlocks the night by becoming unreachable
+
+### 0061 - Night rewards
+
+Waits on 0059.  Likely files: `src/core/rewards.gd`.
+
+Section 12: surviving pays money, resources and technology, and the payout is the reason to go again.
+
+- The payout is computed from the night's data, not hardcoded per night
+- A bonus for structures that survived intact, so defending well pays more than barely holding
+- The result screen itemises it the way the design document shows
+- Rewards go through the ledger
+- Every multiplier is a lever
+
+  - done when: The same night defended two ways pays differently, in the right direction
+  - done when: The itemised numbers add up to what the ledger received
+
+### 0067 - The autoplayer
+
+Waits on 0059, 0055.  Likely files: `src/tools/autoplayer.gd`.
+
+A robot that plays the ten nights, so balance is measured over hundreds of runs instead of guessed at over three.
+
+- A scripted day policy - gather, craft, build - and a night that runs itself
+- Several policies: all towers, all walls, economy first, balanced
+- Runs headless, seeded, and reports per night: survived, house hit points left, resources spent
+- It is a measuring instrument, not an AI: simple and readable beats clever
+- A dominant strategy detector: flag when one policy wins every night by a wide margin
+
+  - done when: 100 seeded runs finish in under two minutes
+  - done when: The report names which night kills each policy
+
+### 0077 - Particles
+
+Waits on 0074, 0075.  Likely files: `src/ui/particles.gd`.
+
+Fire, smoke, sparks, dust and the small amount of blood the design document allows - the difference between a hit and a hit that felt like one.
+
+- Muzzle flash, impact spark, explosion, burning, smoke from the chimney and from wreckage, dust when something falls
+- Pixel particles on the shared palette, not soft gradients
+- A hard cap on live particles, and the cap is a setting
+- Particles are view only: never in the state, never in the hash
+- Blood is restrained, as section 18 asks
+
+  - done when: A busy wave stays inside the frame budget with particles on
+  - done when: Turning them off does not change the outcome of a night
+
 ### 0093 - Options: video
 
 Waits on 0092.  Likely files: `src/ui/options_video.gd`.
@@ -1110,113 +1156,6 @@ The page it goes on: capsule images, screenshots, the pitch, generated from the 
 
   - done when: One command regenerates the whole set
   - done when: The screenshots show a day, a night, the switch, a busy wave and the tech tree
-
-### 0058 - The Giant
-
-Waits on 0051, 0052, 0057.  Likely files: `src/core/enemies.gd, src/core/game_data.gd`.
-
-The single boss of the MVP: the test of the build you made over nine nights.
-
-- Very high hit points, slow, and it smashes structures on its way through
-- It arrives with ordinary zombies, so the player cannot aim everything at it
-- It forces concentrated damage: a defence of only cheap towers cannot kill it in time
-- One readable telegraph before its heavy attack
-- Beating it is the end of the MVP run
-
-  - done when: A well-built night 9 defence beats it with something to spare
-  - done when: A defence of nothing but crossbows loses to it
-  - done when: It never softlocks the night by becoming unreachable
-
-### 0061 - Night rewards
-
-Waits on 0059.  Likely files: `src/core/rewards.gd`.
-
-Section 12: surviving pays money, resources and technology, and the payout is the reason to go again.
-
-- The payout is computed from the night's data, not hardcoded per night
-- A bonus for structures that survived intact, so defending well pays more than barely holding
-- The result screen itemises it the way the design document shows
-- Rewards go through the ledger
-- Every multiplier is a lever
-
-  - done when: The same night defended two ways pays differently, in the right direction
-  - done when: The itemised numbers add up to what the ledger received
-
-### 0067 - The autoplayer
-
-Waits on 0059, 0055.  Likely files: `src/tools/autoplayer.gd`.
-
-A robot that plays the ten nights, so balance is measured over hundreds of runs instead of guessed at over three.
-
-- A scripted day policy - gather, craft, build - and a night that runs itself
-- Several policies: all towers, all walls, economy first, balanced
-- Runs headless, seeded, and reports per night: survived, house hit points left, resources spent
-- It is a measuring instrument, not an AI: simple and readable beats clever
-- A dominant strategy detector: flag when one policy wins every night by a wide margin
-
-  - done when: 100 seeded runs finish in under two minutes
-  - done when: The report names which night kills each policy
-
-### 0077 - Particles
-
-Waits on 0074, 0075.  Likely files: `src/ui/particles.gd`.
-
-Fire, smoke, sparks, dust and the small amount of blood the design document allows - the difference between a hit and a hit that felt like one.
-
-- Muzzle flash, impact spark, explosion, burning, smoke from the chimney and from wreckage, dust when something falls
-- Pixel particles on the shared palette, not soft gradients
-- A hard cap on live particles, and the cap is a setting
-- Particles are view only: never in the state, never in the hash
-- Blood is restrained, as section 18 asks
-
-  - done when: A busy wave stays inside the frame budget with particles on
-  - done when: Turning them off does not change the outcome of a night
-
-### 0098 - Accessibility
-
-Waits on 0093, 0097.  Likely files: `src/app/a11y.gd, src/ui/options_a11y.gd`.
-
-The cheap things that decide whether a lot of people can play it at all.
-
-- Screen shake, flashing and particle density each separately reducible
-- A larger UI scale and a high-contrast HUD option
-- Colour-blind safe damage types: shape and icon, never colour alone
-- Hold-to-act as an alternative to repeated pressing
-- A slower game speed option that scales the tick budget, not the rules
-
-  - done when: Every damage type is identifiable in greyscale
-  - done when: The slow speed option does not change the determinism hash
-  - done when: The game is playable start to finish with shake and flashing off
-
-### 0105 - A playtest build
-
-Waits on 0100, 0103.  Likely files: `tools/playtest.py`.
-
-A build to put in front of someone, with the instrumentation to learn something from it.
-
-- A build flag that turns on local session logging: nights reached, time per day, what was built, where the run ended
-- The log is a local file the player can read and send, never an upload
-- A one-page note for the tester: what to try, what to ignore, what to report
-- An in-game feedback key that timestamps a note into the log
-- It is obvious it is a playtest build
-
-  - done when: A session produces a readable log
-  - done when: `tools/playtest.py` summarises a folder of logs into the questions that matter
-
-### 0108 - The devlog and a trailer clip
-
-Waits on 0082, 0107.  Likely files: `tools/devlog.py, docs/devlog/`.
-
-The thing that gets people to look: thirty seconds that show the farm, the switch and the horde.
-
-- A scripted capture: a day of farming, the transition, a night holding, a wall falling
-- It is captured from a seeded run, so it can be captured again
-- A devlog page from the journal: what the loop was meant to be and what it turned out to be
-- Honest about what is not in the MVP
-- Both in English and Portuguese
-
-  - done when: The clip is thirty seconds and needs no explanation
-  - done when: The devlog is generated from `implementation/PROGRESS.md` rather than written twice
 
 ### 0060 - The ten nights, authored
 
@@ -1310,20 +1249,51 @@ A short running account of what just happened, because at 4x speed the player wi
   - done when: A night at 4x is followable from the log alone
   - done when: It holds a bounded number of entries and cannot grow without limit
 
-### 0106 - The release checklist
+### 0098 - Accessibility
 
-Waits on 0105, 0099.  Likely files: `implementation/RELEASE.md`.
+Waits on 0093, 0097.  Likely files: `src/app/a11y.gd, src/ui/options_a11y.gd`.
 
-The list you run before publishing, written once, so nothing is remembered at the wrong moment.
+The cheap things that decide whether a lot of people can play it at all.
 
-- Every check with its command: verify, exports, save compatibility, the i18n checker, the perf budget, both builds smoke-tested
-- Version bump, changelog, and a tag
-- A known-issues section that is honest
-- A rollback plan in one paragraph
-- Run it once, end to end, and fix what it finds
+- Screen shake, flashing and particle density each separately reducible
+- A larger UI scale and a high-contrast HUD option
+- Colour-blind safe damage types: shape and icon, never colour alone
+- Hold-to-act as an alternative to repeated pressing
+- A slower game speed option that scales the tick budget, not the rules
 
-  - done when: Running the list top to bottom produces a publishable build
-  - done when: The journal records what the first run of it found, because it will find something
+  - done when: Every damage type is identifiable in greyscale
+  - done when: The slow speed option does not change the determinism hash
+  - done when: The game is playable start to finish with shake and flashing off
+
+### 0105 - A playtest build
+
+Waits on 0100, 0103.  Likely files: `tools/playtest.py`.
+
+A build to put in front of someone, with the instrumentation to learn something from it.
+
+- A build flag that turns on local session logging: nights reached, time per day, what was built, where the run ended
+- The log is a local file the player can read and send, never an upload
+- A one-page note for the tester: what to try, what to ignore, what to report
+- An in-game feedback key that timestamps a note into the log
+- It is obvious it is a playtest build
+
+  - done when: A session produces a readable log
+  - done when: `tools/playtest.py` summarises a folder of logs into the questions that matter
+
+### 0108 - The devlog and a trailer clip
+
+Waits on 0082, 0107.  Likely files: `tools/devlog.py, docs/devlog/`.
+
+The thing that gets people to look: thirty seconds that show the farm, the switch and the horde.
+
+- A scripted capture: a day of farming, the transition, a night holding, a wall falling
+- It is captured from a seeded run, so it can be captured again
+- A devlog page from the journal: what the loop was meant to be and what it turned out to be
+- Honest about what is not in the MVP
+- Both in English and Portuguese
+
+  - done when: The clip is thirty seconds and needs no explanation
+  - done when: The devlog is generated from `implementation/PROGRESS.md` rather than written twice
 
 ### 0063 - The tech tree
 
@@ -1384,6 +1354,21 @@ Adding a lever or a tech node must not delete somebody's run.
   - done when: Every golden save loads and plays
   - done when: Adding a resource to game_data does not break a save that predates it
 
+### 0106 - The release checklist
+
+Waits on 0105, 0099.  Likely files: `implementation/RELEASE.md`.
+
+The list you run before publishing, written once, so nothing is remembered at the wrong moment.
+
+- Every check with its command: verify, exports, save compatibility, the i18n checker, the perf budget, both builds smoke-tested
+- Version bump, changelog, and a tag
+- A known-issues section that is honest
+- A rollback plan in one paragraph
+- Run it once, end to end, and fix what it finds
+
+  - done when: Running the list top to bottom produces a publishable build
+  - done when: The journal records what the first run of it found, because it will find something
+
 ### 0064 - Tower I, II, automatic
 
 Waits on 0063, 0042.  Likely files: `src/core/towers.gd, src/core/game_data.gd`.
@@ -1443,13 +1428,13 @@ For the player who beat the Giant and wants to know how far the farm goes. Cheap
 - [x] **0011** [input_check harness](prompts/0011-input-check.md)
 - [x] **0012** [Debug overlay](prompts/0012-debug-overlay.md)
 
-## 1 - The first playable build  (3/15)
+## 1 - The first playable build  (4/15)
 
 - [x] **0013** [The world renders](prompts/0013-world-render.md)
 - [x] **0014** [Sprites generated from ASCII maps](prompts/0014-sprite-pipeline.md)
 - [x] **0015** [The player walks and interacts](prompts/0015-player.md)
-- [ ] **0016** [Trees and wood](prompts/0016-wood.md)
-- [ ] **0017** [Rocks and stone](prompts/0017-stone.md) - needs 0016
+- [x] **0016** [Trees and wood](prompts/0016-wood.md)
+- [ ] **0017** [Rocks and stone](prompts/0017-stone.md)
 - [ ] **0018** [Wheat: till, plant, grow, harvest](prompts/0018-wheat.md)
 - [ ] **0019** [The workshop and its first recipe](prompts/0019-workshop.md) - needs 0017
 - [ ] **0020** [The shop: sell and buy](prompts/0020-shop.md) - needs 0018

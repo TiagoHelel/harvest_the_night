@@ -728,3 +728,48 @@ Notes:
   sitting at the sprite's corner: Y-sorting uses the node's own y, and sorting a
   character by the top of their head draws them behind things they are standing
   in front of.
+
+## 0016 - Trees and wood - done 2026-09-27
+
+What changed: the first resource comes out of the world. `Gathering` owns
+everything you hit with a tool - swings, yield, what is left behind, and the
+farm putting it back - and `Interact.complete()` has its first filled-in arm.
+
+Files: src/core/gathering.gd, src/core/game_data.gd, src/core/interact.gd,
+src/core/sim.gd, src/core/state.gd, tools/sprite_maps.py, sprites/props/stump.png,
+src/ui/world_view.gd, src/tools/headless_check.gd
+
+Verify: PASS - 10 passed, 1 skipped, 21s. **230 asserts, 0 failed** (205
+before). **Sim hash 4066923035 -> 2123598417** (the state gained `regrowing`,
+and gathering ticks). **Data hash 3593855788 -> 3968728927** (`hits` and
+`leaves`, and the retimed swings).
+
+Notes:
+
+- **Written for all three gatherables, not just trees.** A tree, a boulder and
+  an ore seam differ only in their row of `GameData.GATHERING`. Task 0017 adds
+  stone and 0031 iron; if either has to touch `gathering.gd`, this task was not
+  general enough and 0017's journal should say so.
+- **A node has hit points measured in swings**, and the yield arrives when the
+  last one lands rather than a little at a time. Dribbling it out would make
+  "a day's mining buys one tower" depend on where the player happened to stop,
+  and those totals are what the economy of task 0003 was balanced on.
+  Per-swing feedback belongs to the particles of task 0077.
+- Swings retimed so felling something is not a chore: a tree is 3 swings of 1
+  second rather than one swing of 3; ore is 3 swings of 2 seconds, which keeps
+  the 24-iron day the 0003 journal worked out.
+- **Nothing can be stripped for good.** Asserted at full scale: chop all 76
+  trees, wait the regrowth delay, and all 76 are back with no stumps left. A
+  farm you can strip-mine into uselessness is a farm you stop playing on.
+- The pending list is flat and sorted by cell, because it has to survive a save
+  and because two runs of the same seed must bring the same tree back on the
+  same tick.
+- **The night does not heal the wood.** Regrowth ticks in the day only:
+  asserted across a whole night, which moved nothing along. A farm quietly
+  regrowing behind a firefight would be the one thing on the night map that was
+  not about the night.
+- A structure built where a tree was keeps the cell - the farm gives up on that
+  one rather than knocking a tower over to put a tree back.
+- **One tree is exactly `hits` x `work_ticks`**, driven through the real player
+  action machinery rather than by calling `strike()` directly, so the assert
+  covers the wiring as well as the arithmetic.

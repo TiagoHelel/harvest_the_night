@@ -261,6 +261,30 @@ SPRITES = {
         "..i..........i..",
     ]),
 
+    # What a felled tree leaves until it grows back. Low and pale, so a wood
+    # half chopped reads at a glance as a wood half chopped.
+    "props/stump": dict(size=TILE, legend={
+        "w": "wood", "d": "wood_dark", "l": "wood_light",
+        "i": "ink", ".": None,
+    }, rows=[
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+        ".....iiiiii.....",
+        "....illlllli....",
+        "...ilwwwwwwli...",
+        "...idwwddwwdi...",
+        "...idwwwwwwdi...",
+        "....iddddddi....",
+        ".....iiiiii.....",
+    ]),
+
     # ---------------------------------------------------------------- actors
 
     # A placeholder body at actor size, to prove 16x24 works end to end. Task
