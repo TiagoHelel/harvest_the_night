@@ -2374,3 +2374,104 @@ farm map and the resource list for the same reason.
 
 `python tools/verify.py` prints PASS: 1033 asserts, 293 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+
+## 0037 - The workshop queue - done 2026-09-27
+
+Semi-idle in one feature - and, on the way, the discovery that the sim hash
+was guarding almost nothing.
+
+**What changed.** `state["crafting"]` holds a list per station instead of one
+job. Queuing is free, the inputs go in when an item reaches the front, and a
+new `WorkshopPanel` appears when the farmer stands at a bench and counts down
+what it is making.
+
+Files: `src/core/crafting.gd`, `src/ui/workshop_panel.gd` (new),
+`src/tools/determinism.gd`, `scenes/Main.tscn`, `src/ui/main.gd`, both test
+tools.
+Verify: 1080 headless / 308 input / sim hash moved on purpose, below.
+
+### Queuing is free; starting is not
+
+The two requirements read like a contradiction - "inputs are taken when an
+item starts, not when it is queued" and "cancelling a queued item that has not
+started refunds it in full" - and are not. An item that has not started has
+had nothing spent on it, so removing it gives back everything it cost, which
+is nothing. The item at the **front** has the wood in it already, and that
+wood does not come back. That is what keeps stopping a decision rather than a
+free undo.
+
+The arrangement buys one more thing that was not asked for and matters: **a
+queue that cannot be paid for waits.** Line up five barricades with an empty
+larder and the front one retries every tick, so a player can queue and then go
+and fetch the wood. Throwing the item away for being early would make the
+queue a thing you only dare use after gathering, which is the opposite of
+semi-idle.
+
+That did change an assert from task 0019, which said a job you could not
+afford must be refused. It now says the new rule, and checks the whole of it:
+queuing is allowed, nothing is taken, the front item stalls, and the wood
+arriving starts it.
+
+### The sim hash was guarding almost nothing
+
+Rewriting crafting from one job per station into a queue moved the sim hash by
+**zero digits**. That is not reassurance.
+
+Two separate holes, and both are worth writing down because the guard is what
+every other task leans on:
+
+**1. The scenario never had the player do anything.** `determinism.gd` created
+a state and advanced it through the phases. That covers everything that ticks
+on its own - waves, animals, power, regrowth - and covers none of the systems
+that need somebody to press a key. Crafting, planting, building and fishing
+were all outside it. The file's own documentation invited the fix ("when a
+system needs setting up to be exercised, the setup goes here"), so the farmer
+now plants nine tiles of three crops, waters four of them, queues three items
+at the workshop, puts up two gun towers and casts a line before the clock
+starts.
+
+**2. The hash was taken at the end.** With the setup added, I deliberately
+broke crafting - made the queue advance twice as fast - and the hash *still*
+did not move: twenty thousand ticks is long enough for the queue to finish
+either way, and three kits are three kits whether they took ten seconds or
+twenty. **A guard on the final state cannot see a change in timing**, which is
+most of what the rules are.
+
+SIM is a rolling fold now, sampling the whole state every 250 ticks. Re-tested
+the same deliberate break: `1766805932` correct against `1503858902` broken,
+with DATA correctly unchanged because nothing in the tables moved. The guard
+has teeth.
+
+Everything from here on is measured against a scenario that plays the game
+rather than watching it, so more tasks will move this number - which is the
+point. A guard that never fires is not guarding.
+
+### The panel
+
+There is no key for it. Standing at a workshop, a press or a kitchen is what
+opens it, because a key would be one more thing to remember for information
+the player has already walked over to get. The front item gets a name and a
+countdown, everything behind it gets a line, clicking a recipe queues it and
+clicking a queued item takes it off.
+
+The countdown updates every frame while the rows only rebuild when the queue
+changes - a timer that only moved when the queue moved would be a timer that
+stood still.
+
+### Notes
+
+- `start()` kept its name and now queues, because it is what `Interact` calls
+  and what every test since task 0019 says. `cancel()` still cancels what is
+  running; `cancel_at()` and `cancel_all()` are the new ones.
+- One assert of mine was wrong in the ordinary way: it compared wood against
+  `200` after gaining 200 on top of the starting stock. Measures the delta now.
+
+### Hashes
+
+| | from | to | why |
+|---|---|---|---|
+| sim hash | `3087806628` | `1766805932` | the scenario now plants, queues, builds and fishes, and the number is a rolling fold over the run rather than the state at the end |
+| data hash | `2144055300` | unchanged | no table moved: the queue is a rules change and `QUEUE_LENGTH` was already there |
+
+`python tools/verify.py` prints PASS: 1080 asserts, 308 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

@@ -35,6 +35,7 @@ var _was_down: Dictionary = {}
 @onready var _build: BuildMode = %BuildMode
 @onready var _result: ResultScreen = %ResultScreen
 @onready var _inventory: InventoryPanel = %InventoryPanel
+@onready var _workshop: WorkshopPanel = %WorkshopPanel
 @onready var _player_view: PlayerView = %WorldView/Occupants/PlayerView
 @onready var _driver: SimDriver = %SimDriver
 @onready var _debug: CanvasLayer = %DebugOverlay
@@ -52,6 +53,7 @@ func _ready() -> void:
 	_build.show_state(_driver.state, _world)
 	_result.show_state(_driver.state)
 	_inventory.show_state(_driver.state)
+	_workshop.show_state(_driver.state)
 	_world.look_at_cell(Player.cell(_driver.state))
 
 	# The overlay is handed its driver rather than going looking for one: a

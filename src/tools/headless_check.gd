@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 29
+const GROUPS := 30
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -93,6 +93,7 @@ func _run() -> void:
 	_task_0034_cooking()
 	_task_0035_ammunition()
 	_task_0036_inventory()
+	_task_0037_queue()
 
 
 func _finish() -> void:
@@ -1347,9 +1348,35 @@ func _task_0019_workshop() -> void:
 	var short := Crafting.missing(broke, &"barricade_kit")
 	expect(short.has(GameData.WOOD) and not short.has(GameData.STONE),
 		"and the shortfall names the wood and not the stone", str(short))
-	expect(not Crafting.start(broke, poor_bench, &"barricade_kit"),
-		"starting it anyway does nothing")
-	expect(not Crafting.busy(broke, poor_bench), "and leaves the bench free")
+	# **Queuing it anyway is allowed, and costs nothing.** This asserted the
+	# opposite until task 0037: inputs used to be taken the moment a job was
+	# started, so starting one you could not afford had to be refused. Now they
+	# are taken when an item reaches the front, which means a player can line
+	# up five barricades and go and fetch the wood - and an item that cannot be
+	# paid for waits rather than being thrown away for being early.
+	var purse := Resources.amount(broke, GameData.STONE)
+	expect(Crafting.start(broke, poor_bench, &"barricade_kit"),
+		"queuing it anyway is allowed")
+	expect(Crafting.busy(broke, poor_bench), "and the bench has it lined up")
+	expect(Crafting.is_stalled(broke, poor_bench),
+		"waiting on materials rather than on time")
+	expect(Resources.amount(broke, GameData.STONE) == purse,
+		"and nothing has been taken for it",
+		str(Resources.amount(broke, GameData.STONE)))
+	Sim.advance(broke, 60)
+	expect(Crafting.is_stalled(broke, poor_bench),
+		"it is still waiting a couple of seconds later")
+	expect(Resources.amount(broke, GameData.STONE) == purse,
+		"and still nothing taken")
+
+	Resources.gain(broke, {GameData.WOOD: 20})
+	Sim.advance(broke, 2)
+	expect(not Crafting.is_stalled(broke, poor_bench),
+		"the wood arriving starts it")
+	expect(Resources.amount(broke, GameData.WOOD) < 20,
+		"and that is when the wood goes in",
+		str(Resources.amount(broke, GameData.WOOD)))
+	Crafting.cancel_all(broke, poor_bench)
 
 	# A job belongs to its station, so the press and the kitchen need no new
 	# machinery - and neither would a second workshop.
@@ -4314,5 +4341,175 @@ func _task_0036_inventory() -> void:
 		second_ids.append(StringName((entry as Dictionary)["id"]))
 	expect(first_ids == second_ids, "the panel is in the same order every run",
 		str(second_ids))
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## 0037 - queue five things, walk away, come back to five things.
+func _task_0037_queue() -> void:
+	var state := State.create(1900)
+	Resources.gain(state, {GameData.WOOD: 200, GameData.STONE: 200})
+	var bench := Building.anchor_of(state,
+		Farm.cells_with(state, &"workshop")[0])
+
+	# **The queue has a length and it is a lever.**
+	expect(Crafting.room_at(state, bench) == GameData.QUEUE_LENGTH,
+		"an idle bench will take a full queue",
+		str(Crafting.room_at(state, bench)))
+	for _i in GameData.QUEUE_LENGTH:
+		expect(Crafting.enqueue(state, bench, &"barricade_kit"),
+			"another one goes on")
+	expect(Crafting.room_at(state, bench) == 0, "until it is full")
+	expect(not Crafting.enqueue(state, bench, &"barricade_kit"),
+		"and then it takes no more")
+	expect(Crafting.queue_at(state, bench).size() == GameData.QUEUE_LENGTH,
+		"exactly as many as the lever says",
+		str(Crafting.queue_at(state, bench).size()))
+	Crafting.cancel_all(state, bench)
+
+	# **Inputs are taken when an item starts, not when it is queued.**
+	var recipe: Dictionary = GameData.RECIPES[&"barricade_kit"]
+	var wood_each := int((recipe["inputs"] as Dictionary)[GameData.WOOD])
+	var wood_before := Resources.amount(state, GameData.WOOD)
+	for _i in 3:
+		Crafting.enqueue(state, bench, &"barricade_kit")
+	expect(Resources.amount(state, GameData.WOOD)
+		== wood_before - wood_each,
+		"three queued, one paid for - the front one and no more",
+		"%d of %d" % [wood_before - Resources.amount(state, GameData.WOOD),
+			wood_each * 3])
+	expect(Crafting.making(state, bench) == &"barricade_kit",
+		"the first is running", str(Crafting.making(state, bench)))
+	expect(not Crafting.is_stalled(state, bench), "and not waiting on anything")
+
+	# **Cancelling one that has not started costs nothing and gives nothing.**
+	var held := Resources.amount(state, GameData.WOOD)
+	expect(Crafting.cancel_at(state, bench, 2),
+		"the third can be taken off")
+	expect(Resources.amount(state, GameData.WOOD) == held,
+		"and nothing comes back, because nothing went in",
+		str(Resources.amount(state, GameData.WOOD)))
+	expect(Crafting.queue_at(state, bench).size() == 2, "two left",
+		str(Crafting.queue_at(state, bench).size()))
+
+	# **Cancelling the running one loses its inputs.** That is what makes
+	# stopping a decision rather than a free undo.
+	Crafting.cancel_at(state, bench, 0)
+	expect(Resources.amount(state, GameData.WOOD) == held - wood_each,
+		"the next one steps up and pays its own way",
+		str(Resources.amount(state, GameData.WOOD)))
+	expect(Crafting.queue_at(state, bench).size() == 1, "one left")
+	Crafting.cancel_all(state, bench)
+
+	# ---------------------------------------------------- the two done-whens
+
+	# **Queue three barricades, walk to the pond and back, and three exist.**
+	var walk := State.create(1901)
+	Resources.gain(walk, {GameData.WOOD: 200, GameData.STONE: 200})
+	var bench2 := Building.anchor_of(walk,
+		Farm.cells_with(walk, &"workshop")[0])
+	var kits_before := Crafting.kits(walk, &"barricade")
+	var larder := Resources.amount(walk, GameData.WOOD)
+	for _i in 3:
+		expect(Crafting.enqueue(walk, bench2, &"barricade_kit"),
+			"one of three on the queue")
+
+	# Off to the pond, which is the far corner of the farm, and back.
+	var pond: Vector2i = Farm.cells_of(walk, Farm.Terrain.WATER)[0]
+	var who: Dictionary = walk["player"]
+	who["pos"] = [pond.x * Player.SUBTILE + Player.SUBTILE / 2,
+		(pond.y - 1) * Player.SUBTILE + Player.SUBTILE / 2]
+	var each := int(recipe["ticks"])
+	Sim.advance(walk, each * 3 + 6)
+	who["pos"] = [bench2.x * Player.SUBTILE + Player.SUBTILE / 2,
+		(bench2.y + 1) * Player.SUBTILE + Player.SUBTILE / 2]
+
+	expect(Crafting.kits(walk, &"barricade") == kits_before + 3,
+		"three queued, three made, nobody watching",
+		str(Crafting.kits(walk, &"barricade")))
+	expect(not Crafting.busy(walk, bench2), "and the bench is free again")
+	expect(larder - Resources.amount(walk, GameData.WOOD) == wood_each * 3,
+		"having paid for exactly three",
+		"%d of wood gone" % (larder - Resources.amount(walk, GameData.WOOD)))
+
+	# **Cancelling the second of three leaves the first and the third.**
+	var three := State.create(1902)
+	Resources.gain(three, {GameData.WOOD: 200, GameData.STONE: 200})
+	var bench3 := Building.anchor_of(three,
+		Farm.cells_with(three, &"workshop")[0])
+	Crafting.enqueue(three, bench3, &"barricade_kit")
+	Crafting.enqueue(three, bench3, &"fence_kit")
+	Crafting.enqueue(three, bench3, &"wall_kit")
+	expect(Crafting.queue_at(three, bench3)
+		== [&"barricade_kit", &"fence_kit", &"wall_kit"],
+		"three different things, in order",
+		str(Crafting.queue_at(three, bench3)))
+
+	expect(Crafting.cancel_at(three, bench3, 1), "the middle one comes off")
+	expect(Crafting.queue_at(three, bench3) == [&"barricade_kit", &"wall_kit"],
+		"leaving the first and the third, in order",
+		str(Crafting.queue_at(three, bench3)))
+	expect(Crafting.making(three, bench3) == &"barricade_kit",
+		"the one that was running is still running",
+		str(Crafting.making(three, bench3)))
+
+	var walls_before := Crafting.kits(three, &"wall")
+	var fences_before := Crafting.kits(three, &"fence")
+	Sim.advance(three, int(recipe["ticks"])
+		+ int((GameData.RECIPES[&"wall_kit"] as Dictionary)["ticks"]) + 6)
+	expect(Crafting.kits(three, &"barricade") == 1, "the first one arrives",
+		str(Crafting.kits(three, &"barricade")))
+	expect(Crafting.kits(three, &"wall") == walls_before + 1,
+		"and the third", str(Crafting.kits(three, &"wall")))
+	expect(Crafting.kits(three, &"fence") == fences_before,
+		"and nothing at all from the one that was cancelled",
+		str(Crafting.kits(three, &"fence")))
+
+	# **A queue advances on the tick whether anyone is looking**, and it is one
+	# item at a time rather than all of them at once.
+	var watched := State.create(1903)
+	Resources.gain(watched, {GameData.WOOD: 200, GameData.STONE: 200})
+	var bench4 := Building.anchor_of(watched,
+		Farm.cells_with(watched, &"workshop")[0])
+	for _i in 3:
+		Crafting.enqueue(watched, bench4, &"barricade_kit")
+	Sim.advance(watched, int(recipe["ticks"]) + 1)
+	expect(Crafting.kits(watched, &"barricade") == 1,
+		"one item's worth of ticks makes one item",
+		str(Crafting.kits(watched, &"barricade")))
+	expect(Crafting.queue_at(watched, bench4).size() == 2,
+		"and the queue is one shorter",
+		str(Crafting.queue_at(watched, bench4).size()))
+	var progress := Crafting.progress_at(watched, bench4)
+	expect(int(progress[1]) == int(recipe["ticks"]),
+		"the next one has a full run ahead of it", str(progress))
+	expect(int(progress[0]) > 0 and int(progress[0]) <= int(progress[1]),
+		"and some of it left", str(progress))
+
+	# **A queue you cannot pay for waits rather than being thrown away.**
+	var early := State.create(1904)
+	var bench5 := Building.anchor_of(early,
+		Farm.cells_with(early, &"workshop")[0])
+	for id in GameData.RESOURCES:
+		Resources.spend(early, id, Resources.amount(early, id))
+	for _i in 3:
+		expect(Crafting.enqueue(early, bench5, &"barricade_kit"),
+			"queuing with an empty larder is allowed")
+	expect(Crafting.is_stalled(early, bench5), "and the front one waits")
+	Sim.advance(early, 200)
+	expect(Crafting.kits(early, &"barricade") == 0, "nothing is made",
+		str(Crafting.kits(early, &"barricade")))
+	expect(Crafting.queue_at(early, bench5).size() == 3,
+		"and nothing is thrown away for being early",
+		str(Crafting.queue_at(early, bench5).size()))
+
+	Resources.gain(early, {GameData.WOOD: 200, GameData.STONE: 200})
+	Sim.advance(early, int(recipe["ticks"]) + 4)
+	expect(Crafting.kits(early, &"barricade") == 1,
+		"and the wood arriving sets the whole thing going",
+		str(Crafting.kits(early, &"barricade")))
+
+	print("  a queue of %d, one at a time, %d ticks each"
+		% [GameData.QUEUE_LENGTH, int(recipe["ticks"])])
 
 	_completed += 1     # last line: an abandoned group never gets here

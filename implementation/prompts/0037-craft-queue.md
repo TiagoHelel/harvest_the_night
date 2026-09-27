@@ -1,7 +1,7 @@
 # 0037 - The workshop queue
 
 - **Phase:** 2 - The full day
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0019, 0036
 - **Likely files:** src/core/crafting.gd, src/ui/workshop_panel.gd
 

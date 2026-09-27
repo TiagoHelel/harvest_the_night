@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`########................`  **36 / 108 done**
+`########................`  **37 / 108 done**
 
-0 doing / 72 todo / 0 blocked across 9 phases.
+0 doing / 71 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0037 - The workshop queue**. The whole of what is left is
+First up: **0038 - Production runs while you are elsewhere**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,24 +26,23 @@ which rewrites this file for you.
 
 ## What is open
 
-72 task(s) left, the ready ones first, then what they
+71 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
-### 0037 - The workshop queue
+### 0038 - Production runs while you are elsewhere
 
-Ready to pick up.  Likely files: `src/core/crafting.gd, src/ui/workshop_panel.gd`.
+Ready to pick up.  Likely files: `src/core/sim.gd`.
 
-Semi-idle in one feature: queue five things, walk away, come back to five things.
+The feeling the design document asks for: 'I built a machine and now I want to find out whether it works'.
 
-- A queue per production building with a length that is a lever
-- Inputs are taken when an item starts, not when it is queued
-- Cancelling a queued item that has not started refunds it in full
-- The queue advances on the tick whether or not the player is looking
-- The panel shows time remaining on the current item
+- Crops, presses, generators and queues all advance on the same tick regardless of camera or player position
+- No system may depend on being on screen - find and remove any that does
+- Returning to a building shows what happened while away, not a silent jump
+- A day spent entirely fishing still produces from everything else
 
-  - done when: Queue three barricades, walk to the pond and back, and three exist
-  - done when: Cancelling the second of three leaves the first and the third intact
+  - done when: A scripted day where the player never leaves the pond still finishes the crafting queue
+  - done when: The tick cost of a fully built farm stays inside the budget
 
 ### 0039 - The day clock and dusk
 
@@ -212,20 +211,6 @@ When it breaks on someone else's machine, get enough to fix it without them.
 
   - done when: A deliberate crash produces a report with the seed and the tick
   - done when: The run is still loadable afterwards
-
-### 0038 - Production runs while you are elsewhere
-
-Waits on 0037.  Likely files: `src/core/sim.gd`.
-
-The feeling the design document asks for: 'I built a machine and now I want to find out whether it works'.
-
-- Crops, presses, generators and queues all advance on the same tick regardless of camera or player position
-- No system may depend on being on screen - find and remove any that does
-- Returning to a building shows what happened while away, not a silent jump
-- A day spent entirely fishing still produces from everything else
-
-  - done when: A scripted day where the player never leaves the pond still finishes the crafting queue
-  - done when: The tick cost of a fully built farm stays inside the budget
 
 ### 0041 - The first day teaches itself
 
@@ -1141,7 +1126,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0026** [The tower kills the zombie](prompts/0026-combat.md)
 - [x] **0027** [Three waves, a result screen, and back to the farm](prompts/0027-first-loop.md)
 
-## 2 - The full day  (9/14)
+## 2 - The full day  (10/14)
 
 - [x] **0028** [Corn and carrot](prompts/0028-three-crops.md)
 - [x] **0029** [Growth stages and watering](prompts/0029-growth-stages.md)
@@ -1152,8 +1137,8 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0034** [Cooking: food and meat](prompts/0034-cooking.md)
 - [x] **0035** [Gunpowder and ammunition](prompts/0035-ammunition.md)
 - [x] **0036** [The inventory](prompts/0036-inventory.md)
-- [ ] **0037** [The workshop queue](prompts/0037-craft-queue.md)
-- [ ] **0038** [Production runs while you are elsewhere](prompts/0038-idle-production.md) - needs 0037
+- [x] **0037** [The workshop queue](prompts/0037-craft-queue.md)
+- [ ] **0038** [Production runs while you are elsewhere](prompts/0038-idle-production.md)
 - [ ] **0039** [The day clock and dusk](prompts/0039-day-clock.md)
 - [ ] **0040** [The shop grows](prompts/0040-shop-full.md)
 - [ ] **0041** [The first day teaches itself](prompts/0041-tutorial-day.md) - needs 0039, 0040

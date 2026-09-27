@@ -41,7 +41,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 17
+const CASES := 18
 
 var passed := 0
 var failed := 0
@@ -88,6 +88,7 @@ func _run() -> void:
 	await _case_0034_livestock()
 	await _case_0035_ammo()
 	await _case_0036_inventory()
+	await _case_0037_queue()
 	_finish()
 
 
@@ -1855,6 +1856,105 @@ func _case_0036_inventory() -> void:
 	await until(func() -> bool: return not panel.is_open(),
 		"escape to close it")
 	expect(not panel.is_open(), "and escape does too")
+
+	await close_scene()
+	_completed += 1     # last line: an abandoned case never gets here
+
+
+## 0037 - standing at the bench and lining five things up.
+func _case_0037_queue() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var panel: WorkshopPanel = require_control("WorkshopPanel")
+	if driver == null or panel == null:
+		_completed += 1
+		await close_scene()
+		return
+
+	var state := driver.state
+	Resources.gain(state, {GameData.WOOD: 200, GameData.STONE: 200})
+	await frames(2)
+	expect(not panel.is_open(),
+		"the workshop panel is not up out in the field")
+
+	# **Walking up to the bench is what opens it.** There is no key: the panel
+	# is what being at the bench looks like.
+	var bench := Building.anchor_of(state,
+		Farm.cells_with(state, &"workshop")[0])
+	var stand := _free_cell_beside(state, bench)
+	expect(stand != Vector2i(-1, -1), "somewhere to stand at the workshop")
+	if stand == Vector2i(-1, -1):
+		await close_scene()
+		_completed += 1
+		return
+	_stand_at(state, stand, _facing_towards(stand, bench))
+	await until(func() -> bool: return panel.is_open(),
+		"the panel to appear at the bench")
+	expect(panel.is_open(), "standing at the bench opens it")
+
+	var title: Label = require_control("WorkshopTitle")
+	expect(title != null and title.text.to_lower().contains("workshop"),
+		"and it says which bench", title.text if title else "")
+
+	# **Clicking a recipe puts it on the queue**, and does not pay for it
+	# unless it goes straight to the front.
+	var before := Crafting.queue_at(state, bench).size()
+	await click_control("make_barricade_kit")
+	await until(func() -> bool:
+		return Crafting.queue_at(state, bench).size() > before,
+		"the click to queue one")
+	expect(Crafting.queue_at(state, bench).size() == before + 1,
+		"clicking a recipe queues it",
+		str(Crafting.queue_at(state, bench)))
+
+	var wood_after_first := Resources.amount(state, GameData.WOOD)
+	await click_control("make_barricade_kit")
+	await click_control("make_barricade_kit")
+	await frames(4)
+	expect(Crafting.queue_at(state, bench).size() == 3,
+		"three lined up", str(Crafting.queue_at(state, bench)))
+	expect(Resources.amount(state, GameData.WOOD) == wood_after_first,
+		"and queuing the other two cost nothing - the wood goes in when an "
+		+ "item reaches the front",
+		str(Resources.amount(state, GameData.WOOD)))
+
+	# **The panel counts down the one that is running.**
+	var progress: Label = require_control("WorkshopProgress")
+	expect(progress != null, "there is a progress line")
+	if progress != null:
+		expect(progress.text.contains("barricade_kit"),
+			"naming what is being made", progress.text)
+		expect(progress.text.contains("s"), "and how long is left", progress.text)
+		var shown := progress.text
+		await frames(20)
+		expect(progress.text != shown, "which goes down as it works",
+			"%s then %s" % [shown, progress.text])
+
+	# **Clicking a queued item takes it off**, and the rest stay in order.
+	var queued := Crafting.queue_at(state, bench).duplicate()
+	await click_control("queued_1")
+	await until(func() -> bool:
+		return Crafting.queue_at(state, bench).size() < queued.size(),
+		"the middle one to come off")
+	expect(Crafting.queue_at(state, bench).size() == queued.size() - 1,
+		"one fewer", str(Crafting.queue_at(state, bench)))
+	expect(Crafting.making(state, bench) == StringName(queued[0]),
+		"and the one that was running still is",
+		str(Crafting.making(state, bench)))
+
+	# **Walking away closes it**, and the queue keeps going without anybody
+	# looking - which is the whole feature.
+	var kits_before := Crafting.kits(state, &"barricade")
+	_stand_at(state, Vector2i(stand.x, stand.y + 3), Player.SOUTH)
+	await until(func() -> bool: return not panel.is_open(),
+		"the panel to close when the farmer walks off")
+	expect(not panel.is_open(), "walking away closes it")
+	Sim.advance(state, int((GameData.RECIPES[&"barricade_kit"]
+		as Dictionary)["ticks"]) + 4)
+	await frames(2)
+	expect(Crafting.kits(state, &"barricade") > kits_before,
+		"and the bench carried on without being watched",
+		str(Crafting.kits(state, &"barricade")))
 
 	await close_scene()
 	_completed += 1     # last line: an abandoned case never gets here

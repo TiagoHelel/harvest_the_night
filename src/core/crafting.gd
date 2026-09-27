@@ -8,19 +8,30 @@ extends RefCounted
 ## stone stop being things you sell and become a barricade that stands between
 ## a zombie and your house.
 ##
-## ## Inputs are taken when the job starts
+## ## Inputs are taken when an item starts, not when it is queued
 ##
-## Not when it finishes. Cancelling costs you the materials, which is the whole
-## reason cancelling is a decision rather than a free undo - and it means the
-## ledger can never be asked for something twice by two stations counting on
-## the same wood.
+## Queuing five barricades costs nothing at all. The wood goes in when an item
+## reaches the front and begins, one at a time, which is the only arrangement
+## that makes a queue honest:
 ##
-## ## A job belongs to a station, not to the game
+## - **Queuing cannot bankrupt you.** Five items' worth of inputs taken up
+##   front would make the queue a thing you dare not use.
+## - **Cancelling something that has not started is free**, because nothing was
+##   spent on it. Cancelling the item that is *running* costs the materials,
+##   and that is what keeps stopping a decision rather than a free undo.
+## - The ledger can never be asked for the same wood twice by two stations,
+##   because each of them takes what it needs at the moment it needs it.
 ##
-## `state["crafting"]` is keyed by the cell the workshop stands on, so the press
-## and the kitchen of tasks 0032 and 0034 need no new machinery, and neither
-## does a second workshop. One job per station until task 0037 puts a queue
-## behind the same interface.
+## A queue that could not be paid for simply waits: the item at the front
+## retries every tick until the player brings back enough wood, rather than
+## being thrown away for being early.
+##
+## ## A queue belongs to a station, not to the game
+##
+## `state["crafting"]` is keyed by the cell the station stands on, so the press
+## and the kitchen need no new machinery and neither does a second workshop.
+## Each entry holds a **list**: `queue[0]` is what is running and the rest are
+## waiting. `QUEUE_LENGTH` is how many fit.
 ##
 ## ## Kits are not resources
 ##
@@ -107,16 +118,32 @@ static func recipes_at(station: StringName) -> Array:
 ## Whether the player could start this now. **A recipe they cannot afford is
 ## shown and refused, never hidden**: a menu that grows as you get richer is a
 ## menu that teaches nothing about what to go and get.
-static func can_start(state: Dictionary, cell: Vector2i, recipe_id: StringName) -> bool:
-	if busy(state, cell):
-		return false
+## Whether this station will take another one of these.
+##
+## **Affording it is not asked here.** Queuing is free and the inputs are taken
+## when the item reaches the front, so a player can line up five barricades and
+## go and fetch the wood - which is the semi-idle promise of `design.md`
+## section 13 rather than a trap for anybody who queues before gathering.
+static func can_queue(state: Dictionary, cell: Vector2i,
+		recipe_id: StringName) -> bool:
 	var recipe: Variant = GameData.RECIPES.get(recipe_id, null)
 	if recipe == null:
 		return false
 	var on := Farm.occupant(state, cell)
 	if on.is_empty() or on["id"] != (recipe as Dictionary)["station"]:
 		return false
-	return Resources.can_afford(state, (recipe as Dictionary)["inputs"])
+	return room_at(state, cell) > 0
+
+
+## Whether the player could start this **now**, materials and all. What the
+## panel greys a line on, and what `start()` still asks.
+static func can_start(state: Dictionary, cell: Vector2i, recipe_id: StringName) -> bool:
+	if busy(state, cell):
+		return false
+	if not can_queue(state, cell, recipe_id):
+		return false
+	var recipe: Dictionary = GameData.RECIPES[recipe_id]
+	return Resources.can_afford(state, recipe["inputs"])
 
 
 ## What is short, for the tooltip that explains a greyed line.
@@ -127,13 +154,47 @@ static func missing(state: Dictionary, recipe_id: StringName) -> Dictionary:
 	return Resources.missing(state, (recipe as Dictionary)["inputs"])
 
 
+## Whether anything is queued at this station, running or waiting.
 static func busy(state: Dictionary, cell: Vector2i) -> bool:
-	return (state["crafting"] as Dictionary).has(Grid.index(cell))
+	return not queue_at(state, cell).is_empty()
 
 
 ## The job at a station, or an empty Dictionary.
 static func job(state: Dictionary, cell: Vector2i) -> Dictionary:
 	return (state["crafting"] as Dictionary).get(Grid.index(cell), {})
+
+
+## What is lined up at this station: `[0]` is running, the rest are waiting.
+static func queue_at(state: Dictionary, cell: Vector2i) -> Array:
+	var at := job(state, cell)
+	return [] if at.is_empty() else (at["queue"] as Array)
+
+
+## What this station is making right now, or `&""`.
+static func making(state: Dictionary, cell: Vector2i) -> StringName:
+	var lined_up := queue_at(state, cell)
+	return &"" if lined_up.is_empty() else StringName(lined_up[0])
+
+
+## How many more items this station will take.
+static func room_at(state: Dictionary, cell: Vector2i) -> int:
+	return maxi(GameData.QUEUE_LENGTH - queue_at(state, cell).size(), 0)
+
+
+## Ticks left on the item at the front, and how many it started with. For the
+## bar on the panel. Zero when nothing is running or nothing can be paid for.
+static func progress_at(state: Dictionary, cell: Vector2i) -> Array:
+	var at := job(state, cell)
+	if at.is_empty():
+		return [0, 0]
+	return [int(at["left"]), int(at["total"])]
+
+
+## Whether the front item is waiting on materials rather than on time. What the
+## panel says instead of a countdown.
+static func is_stalled(state: Dictionary, cell: Vector2i) -> bool:
+	var at := job(state, cell)
+	return not at.is_empty() and int(at["total"]) <= 0
 
 
 ## How many of a structure are built and waiting to be placed.
@@ -157,33 +218,91 @@ static func take_kit(state: Dictionary, id: StringName) -> bool:
 
 # -------------------------------------------------------------------- doing
 
-## Begin a job. **Takes the inputs now.**
-static func start(state: Dictionary, cell: Vector2i, recipe_id: StringName) -> bool:
-	if not can_start(state, cell, recipe_id):
+## Put one on the end of the queue. **Costs nothing.**
+static func enqueue(state: Dictionary, cell: Vector2i,
+		recipe_id: StringName) -> bool:
+	if not can_queue(state, cell, recipe_id):
 		return false
-	var recipe: Dictionary = GameData.RECIPES[recipe_id]
-	if not Resources.pay(state, recipe["inputs"]):
-		return false            # all or nothing, as ever
-	# The batch is costed when it starts. A brown-out half way through does not
-	# lengthen work already committed - the corn is in the hopper.
-	var ticks := maxi(Power.scaled_ticks(state, int(recipe["ticks"])), 1)
-	(state["crafting"] as Dictionary)[Grid.index(cell)] = {
-		"recipe": recipe_id,
-		"left": ticks,
-		"total": ticks,
-	}
+	var all: Dictionary = state["crafting"]
+	var idx := Grid.index(cell)
+	if not all.has(idx):
+		all[idx] = {"queue": [], "left": 0, "total": 0}
+	var at: Dictionary = all[idx]
+	(at["queue"] as Array).append(recipe_id)
+	if (at["queue"] as Array).size() == 1:
+		_begin_front(state, at)
 	return true
 
 
-## Give up on a job. **Nothing comes back** - the inputs went in when it
-## started, and that is what makes stopping a choice.
+## Queue one. Kept under its old name because it is what `Interact` calls and
+## what every test since task 0019 says.
+static func start(state: Dictionary, cell: Vector2i, recipe_id: StringName) -> bool:
+	return enqueue(state, cell, recipe_id)
+
+
+## Take the item at `index` out of the queue. `0` is the one running.
+##
+## **What it costs depends on whether it started.** An item still waiting has
+## had nothing spent on it, so removing it is free. The one at the front has
+## the wood in it already and that wood does not come back - which is what
+## keeps stopping a decision rather than a free undo.
+static func cancel_at(state: Dictionary, cell: Vector2i, index: int) -> bool:
+	var all: Dictionary = state["crafting"]
+	var idx := Grid.index(cell)
+	if not all.has(idx):
+		return false
+	var at: Dictionary = all[idx]
+	var lined_up: Array = at["queue"]
+	if index < 0 or index >= lined_up.size():
+		return false
+
+	lined_up.remove_at(index)
+	if lined_up.is_empty():
+		all.erase(idx)
+		return true
+	if index == 0:
+		_begin_front(state, at)     # the next one steps up and pays its way
+	return true
+
+
+## Give up on whatever is running, leaving the rest of the queue alone.
 static func cancel(state: Dictionary, cell: Vector2i) -> bool:
+	return cancel_at(state, cell, 0)
+
+
+## Throw the whole queue away. The running item's inputs are gone; the rest
+## cost nothing and so give nothing back.
+static func cancel_all(state: Dictionary, cell: Vector2i) -> bool:
 	var all: Dictionary = state["crafting"]
 	var idx := Grid.index(cell)
 	if not all.has(idx):
 		return false
 	all.erase(idx)
 	return true
+
+
+## Start the item at the front, paying for it.
+##
+## **A front item that cannot be paid for waits.** `total` stays at zero, which
+## is what `is_stalled()` reads, and every tick tries again - so a queue lined
+## up before the wood was gathered picks itself up the moment the wood arrives
+## rather than throwing the item away for being early.
+static func _begin_front(state: Dictionary, at: Dictionary) -> void:
+	var lined_up: Array = at["queue"]
+	if lined_up.is_empty():
+		at["left"] = 0
+		at["total"] = 0
+		return
+	var recipe: Dictionary = GameData.RECIPES[StringName(lined_up[0])]
+	if not Resources.pay(state, recipe["inputs"]):
+		at["left"] = 0
+		at["total"] = 0
+		return
+	# The batch is costed when it starts. A brown-out half way through does not
+	# lengthen work already committed - the corn is in the hopper.
+	var ticks := maxi(Power.scaled_ticks(state, int(recipe["ticks"])), 1)
+	at["left"] = ticks
+	at["total"] = ticks
 
 
 ## One tick of everything on the farm making something. Called from
@@ -200,19 +319,38 @@ static func tick(state: Dictionary) -> void:
 	# Sorted, so that two stations finishing on the same tick deliver in the
 	# same order every run. **Plain `sort()` here and not `sorted_names()`**:
 	# these keys are cell indices, and integers sort as integers.
-	var done: Array = []
 	var keys: Array = all.keys()
 	keys.sort()
+	var emptied: Array = []
 	for idx in keys:
-		var current: Dictionary = all[idx]
-		current["left"] = int(current["left"]) - 1
-		if int(current["left"]) <= 0:
-			done.append(idx)
+		var at: Dictionary = all[idx]
 
-	for idx in done:
-		var recipe_id: StringName = StringName((all[idx] as Dictionary)["recipe"])
-		all.erase(idx)
+		# **A stalled front item retries.** `total` of zero means the inputs
+		# were not there when it stepped up; every tick asks again, so a queue
+		# lined up before the wood was gathered starts itself the moment the
+		# wood arrives rather than being thrown away for being early.
+		if int(at["total"]) <= 0:
+			_begin_front(state, at)
+			if int(at["total"]) <= 0:
+				continue
+			continue        # it starts this tick; the first of its ticks is next
+
+		at["left"] = int(at["left"]) - 1
+		if int(at["left"]) > 0:
+			continue
+
+		# Off the front, delivered, and the next one steps up and pays.
+		var lined_up: Array = at["queue"]
+		var recipe_id := StringName(lined_up[0])
+		lined_up.remove_at(0)
 		_deliver(state, recipe_id)
+		if lined_up.is_empty():
+			emptied.append(idx)
+		else:
+			_begin_front(state, at)
+
+	for idx in emptied:
+		all.erase(idx)
 
 
 ## Put the output where it belongs: a resource in the ledger, a structure on
