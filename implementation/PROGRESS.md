@@ -3621,3 +3621,90 @@ price instead of the promise.
 
 `python tools/verify.py` prints PASS: 1535 asserts, 371 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+
+## 0050 - The runner
+
+The runner's numbers were in the table from the start and its waves were in
+the nights from the start. What it did not have was the one rule that makes it
+a different problem rather than a fast walker: **it does not stop for what you
+built.**
+
+Ten hit points against a walker's twenty and nine ticks a tile against twenty
+- half the life and two hundred and twenty-two percent of the speed, which is
+what the requirement asks to be stated. Less damage when it lands and a bigger
+reward, because it is harder to kill and cheaper when it gets through.
+
+### Two fields
+
+Task 0049 made a wall a price rather than a hole, so everything now breaks
+through when breaking through is cheapest. A runner must not, so `Pathing`
+sweeps a second field from the same entry costs with every barrier taken out
+of the map - the pre-0049 field, in other words - and `ignores_structures` on
+an enemy is what picks which one it reads.
+
+The alternative was to let a runner take its second-favourite neighbour out of
+the shared field, and that is a step uphill: the one thing the shape of the
+field guarantees cannot happen, and the guarantee that makes oscillation
+impossible. A second field costs one more sweep per grid change and nothing
+per tick, which is the right side of that trade.
+
+**A runner with no way round falls back to the shared field** and breaks
+through like everybody else. A runner that stood still in front of a wall
+would turn sealing the farm into a win condition, which task 0046 already
+learned once.
+
+### Three fixtures that were wrong before the code was
+
+Worth recording, because all three looked like failures of the rule and were
+failures of the test:
+
+- The check on the table compared a structure-ignorer against the **slowest**
+  enemy that stops, which is the giant at fifty ticks a tile. Anything is
+  faster than that, so a "runner" slower than a walker passed. It compares
+  against the fastest one that stops now.
+- The long way round was left open at row seventeen of the column, and row
+  seventeen of that column is a tree. The line was sealed after all and every
+  runner dutifully ate through a wall it was supposed to run around. The gap
+  is now the bottom-most cell anything can actually stand on.
+- The way round that line is eighteen tiles and a wall is worth twenty-one, so
+  the **walker** went round it too - and was right to. The test that tells the
+  two of them apart has to use a barrier worth less than the detour, so it
+  uses a fence at six.
+
+### Measured
+
+    a fence with the long way round open: a walker took 30 hit points out of
+      it in 544 ticks; a runner took 0 and got there in 388
+    through a maze: a runner 334 ticks against 226 in the open; a walker 741
+      against 501
+    a wave of five and five, all from one cell: runner, runner, runner,
+      runner, runner, walker, walker, walker, walker, walker
+    a rush of 8 runners: three crossbows let 0 through for 0 damage; one
+      mortar let 4 through for 12
+
+The last line is the done-when and the reason the runner exists. Both farms
+had a generator and ran at a hundred percent, so it is a comparison of towers
+and not of budgets: a crossbow draws three against a mortar's one, and a farm
+makes four on its own, so without the generator this would have measured which
+tower fits rather than which tower stops a rush.
+
+A maze costs a walker two hundred and forty ticks and a runner a hundred and
+eight, for the same reason: half of what a maze does to a walker is make it
+stop and chew.
+
+### The extra sweep
+
+The worst single rebuild went from 3432 us to 4563 us - ten percent of a tick
+to fourteen. A hundred zombies in a maze cost 1585 us a tick against 1602
+before, which is noise. The second field is paid for on the tick a wall falls
+and nowhere else.
+
+### Hashes
+
+| | from | to | why |
+|---|---|---|---|
+| sim hash | `1819315534` | `3756808106` | the state gained the second field and its costs, and runners route differently |
+| data hash | `3566119030` | `2814341152` | the runner declares `ignores_structures` |
+
+`python tools/verify.py` prints PASS: 1556 asserts, 371 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

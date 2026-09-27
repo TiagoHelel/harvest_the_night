@@ -122,7 +122,16 @@ static func _walk(state: Dictionary, id: int) -> void:
 	# nothing - and with fifty of them that was most of the tick.
 	var at := Vector2i(int(one["pos"][0]), int(one["pos"][1]))
 	var here := Vector2i(at.x / Player.SUBTILE, at.y / Player.SUBTILE)
-	var next := Pathing.step_from(state, here)
+	# **A runner goes round what you built.** It asks the field with the
+	# barriers taken out of it, and only falls back to the one everybody else
+	# uses when that field has no answer - which means there is no way round
+	# at all, and standing still in front of a wall would turn sealing the
+	# farm into a win condition.
+	var next := here
+	if bool(data.get("ignores_structures", false)):
+		next = Pathing.step_around(state, here)
+	if next == here:
+		next = Pathing.step_from(state, here)
 	if next == here:
 		# **Nowhere to go means chew.** A wall that sealed the farm used to
 		# make the whole wave stand still for ever - a player who walled

@@ -34,6 +34,24 @@ extends RefCounted
 ## game wants: the player's towers are not a road, and the enemy that goes
 ## after towers on purpose is task 0052.
 ##
+## ## Two fields, because not everybody agrees about walls
+##
+## The field above is for somebody who will break through when breaking
+## through is cheapest. A **runner** will not: it goes round what you built
+## and runs at the house, which is what makes a maze useless against it and a
+## tower line the only answer (task 0050).
+##
+## So there is a second field swept from the same entry costs with every
+## barrier taken out of the map - the pre-0049 field, in other words. It is
+## one more sweep per grid change and no cost at all per tick, and the
+## alternative was to let a runner pick its second-favourite neighbour out of
+## the shared field, which is a step uphill and the one thing the shape of
+## this field guarantees cannot happen.
+##
+## A runner with **no** way round falls back to the shared field and breaks
+## through like everybody else. A runner that stood still in front of a wall
+## would make sealing the farm a win condition.
+##
 ## ## A zombie cannot oscillate
 ##
 ## Every step is onto a cell whose field value is `field[here] - enter(next)`,
@@ -74,7 +92,11 @@ static func initial() -> Dictionary:
 		# occupant table anything, which is what makes the hot line four array
 		# reads instead of four dictionary lookups.
 		"flow_cost": PackedInt32Array(),
-		# Which `grid_version` the two above were built for. -1 is "never".
+		# The same two again for somebody who will not break anything: every
+		# barrier is a hole in the map rather than a door with a price.
+		"flow_open": PackedInt32Array(),
+		"open_cost": PackedInt32Array(),
+		# Which `grid_version` the four above were built for. -1 is "never".
 		"flow_version": -1,
 	}
 
@@ -87,6 +109,8 @@ static func refresh(state: Dictionary) -> void:
 	var built := _build(state)
 	state["flow"] = built["field"]
 	state["flow_cost"] = built["cost"]
+	state["flow_open"] = built["open_field"]
+	state["open_cost"] = built["open_cost"]
 	state["flow_version"] = int(state["grid_version"])
 
 
@@ -128,45 +152,26 @@ static func entry_cost(state: Dictionary, cell: Vector2i) -> int:
 ## Nowhere to go is a real answer, not a failure: it means every neighbour is
 ## impassable or leads away from home.
 static func step_from(state: Dictionary, cell: Vector2i) -> Vector2i:
-	# Both arrays are taken once and read four times. Going through
-	# `distance()` meant four dictionary lookups, four bounds checks and four
-	# size checks for what is eight array reads - and this is the hottest line
-	# in the night.
-	var field: PackedInt32Array = state["flow"]
-	var cost: PackedInt32Array = state["flow_cost"]
-	if field.size() != Grid.CELLS or cost.size() != Grid.CELLS:
-		return cell
+	return _step_in(state["flow"], state["flow_cost"], cell)
+
+
+## The next cell on the way to the house **for somebody who will not break
+## anything**: the same question against the field with the barriers taken
+## out. The same cell back means there is no way round, and the caller falls
+## back to `step_from()`.
+static func step_around(state: Dictionary, cell: Vector2i) -> Vector2i:
+	return _step_in(state["flow_open"], state["open_cost"], cell)
+
+
+## What getting home costs somebody who will not break anything.
+static func distance_around(state: Dictionary, cell: Vector2i) -> int:
 	var idx := Grid.index(cell)
 	if idx < 0:
-		return cell
-	var here := int(field[idx])
-	if here == UNREACHABLE or here == 0:
-		return cell
-
-	var best := cell
-	var best_total := UNREACHABLE
-	for offset in Grid.STEPS:
-		var n: Vector2i = cell + offset
-		if n.x < 0 or n.y < 0 or n.x >= Grid.WIDTH or n.y >= Grid.HEIGHT:
-			continue
-		var n_idx := n.y * Grid.WIDTH + n.x
-		var enter := int(cost[n_idx])
-		if enter == IMPASSABLE:
-			continue
-		var there := int(field[n_idx])
-		if there == UNREACHABLE:
-			continue
-		# **What the step costs, not what the cell is worth.** Comparing raw
-		# field values was right while every step cost one and is wrong now: a
-		# wall's own field value is small, because the wall is near the house.
-		# What makes it expensive is getting into it.
-		var total := there + enter
-		# `<` rather than `<=`, so the first direction in `Grid.STEPS` wins a
-		# tie. Which side of a wall a wave flows around is a rule.
-		if total < best_total:
-			best_total = total
-			best = n
-	return best
+		return UNREACHABLE
+	var field: PackedInt32Array = state["flow_open"]
+	if field.size() != Grid.CELLS:
+		return UNREACHABLE
+	return int(field[idx])
 
 
 ## Whether the way on runs through something that has to come down first.
@@ -225,29 +230,45 @@ static func route_if_blocked(state: Dictionary, blocked: Vector2i,
 	return out
 
 
-## One step downhill in a given field. `step_from()` is this against the
-## field the game is actually using.
+## One step downhill in a given field, and **the hottest line in the night**.
+##
+## The two arrays are taken once and read four times. Going through
+## `distance()` meant four dictionary lookups, four bounds checks and four
+## size checks for what is eight array reads.
 static func _step_in(field: PackedInt32Array, cost: PackedInt32Array,
 		cell: Vector2i) -> Vector2i:
+	if field.size() != Grid.CELLS or cost.size() != Grid.CELLS:
+		return cell
 	var idx := Grid.index(cell)
-	if idx < 0 or field.size() != Grid.CELLS:
+	if idx < 0:
 		return cell
-	if int(field[idx]) == UNREACHABLE or int(field[idx]) == 0:
+	var here := int(field[idx])
+	if here == UNREACHABLE or here == 0:
 		return cell
+
 	var best := cell
 	var best_total := UNREACHABLE
-	for step in Grid.STEPS:
-		var at: Vector2i = cell + (step as Vector2i)
-		var into := Grid.index(at)
-		if into < 0:
+	for offset in Grid.STEPS:
+		var n: Vector2i = cell + offset
+		if n.x < 0 or n.y < 0 or n.x >= Grid.WIDTH or n.y >= Grid.HEIGHT:
 			continue
-		var enter := int(cost[into])
-		if enter == IMPASSABLE or int(field[into]) == UNREACHABLE:
+		var n_idx := n.y * Grid.WIDTH + n.x
+		var enter := int(cost[n_idx])
+		if enter == IMPASSABLE:
 			continue
-		var total := int(field[into]) + enter
+		var there := int(field[n_idx])
+		if there == UNREACHABLE:
+			continue
+		# **What the step costs, not what the cell is worth.** Comparing raw
+		# field values was right while every step cost one and is wrong now: a
+		# wall's own field value is small, because the wall is near the house.
+		# What makes it expensive is getting into it.
+		var total := there + enter
+		# `<` rather than `<=`, so the first direction in `Grid.STEPS` wins a
+		# tie. Which side of a wall a wave flows around is a rule.
 		if total < best_total:
 			best_total = total
-			best = at
+			best = n
 	return best
 
 
@@ -258,10 +279,20 @@ static func reachable(state: Dictionary, cell: Vector2i) -> bool:
 
 # ------------------------------------------------------------------ building
 
-## The field and the entry costs it was swept with, built together because the
-## second is what the first means.
+## Both fields and both sets of entry costs, built together because they come
+## off the same one pass over the farm.
 static func _build(state: Dictionary) -> Dictionary:
-	var cost := _entry_costs(state)
+	var costs := _entry_costs(state)
+	return {
+		"cost": costs["cost"],
+		"field": _sweep(state, costs["cost"]),
+		"open_cost": costs["open"],
+		"open_field": _sweep(state, costs["open"]),
+	}
+
+
+## One field, swept out from the house against one set of entry costs.
+static func _sweep(state: Dictionary, cost: PackedInt32Array) -> PackedInt32Array:
 	var field := PackedInt32Array()
 	field.resize(Grid.CELLS)
 	field.fill(UNREACHABLE)
@@ -332,7 +363,7 @@ static func _build(state: Dictionary) -> Dictionary:
 					(wheel[through % wheel_size] as Array).append(n_idx)
 					queued += 1
 		d += 1
-	return {"field": field, "cost": cost}
+	return field
 
 
 ## What stepping onto each cell costs, `IMPASSABLE` where nothing may.
@@ -345,12 +376,15 @@ static func _build(state: Dictionary) -> Dictionary:
 ## first version asked `Farm.occupant()` about every cell on the farm - seven
 ## hundred dictionary lookups to find the forty that had an answer - and that
 ## was most of the rebuild.
-static func _entry_costs(state: Dictionary) -> PackedInt32Array:
+static func _entry_costs(state: Dictionary) -> Dictionary:
 	var cost := PackedInt32Array()
 	cost.resize(Grid.CELLS)
 	var terrain: PackedByteArray = state["terrain"]
 	for idx in Grid.CELLS:
 		cost[idx] = Farm.cost_of_terrain(int(terrain[idx]))
+	# The two are the same everywhere nobody has built anything, which is most
+	# of the farm.
+	var open := cost.duplicate()
 
 	var occupants: Dictionary = state["occupants"]
 	# Sorted, though nothing here depends on the order: each entry writes its
@@ -363,9 +397,14 @@ static func _entry_costs(state: Dictionary) -> PackedInt32Array:
 		var idx := int(key)
 		if idx < 0 or idx >= Grid.CELLS or int(cost[idx]) == IMPASSABLE:
 			continue
-		cost[idx] = _through(StringName((occupants[key] as Dictionary)["id"]),
-			int(cost[idx]))
-	return cost
+		var ground := int(cost[idx])
+		var priced := _through(StringName((occupants[key] as Dictionary)["id"]),
+			ground)
+		cost[idx] = priced
+		# A barrier - something that cost more to enter than the ground under
+		# it - is a door in one field and a wall in the other.
+		open[idx] = IMPASSABLE if priced != ground else priced
+	return {"cost": cost, "open": open}
 
 
 ## What stepping onto a cell with this standing on it costs, given what the

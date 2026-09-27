@@ -874,11 +874,26 @@ const ENEMIES: Dictionary = {
 	&"runner": {
 		# Fast and fragile: it arrives before a mortar can reload, which is what
 		# makes a defence of only slow expensive towers wrong.
+		#
+		# Half a walker's hit points and better than twice its speed, which is
+		# the shape the task asks for: twenty against ten, twenty ticks a tile
+		# against nine.
 		"hp": 10,                       # LEVER: hit points, 6-20
 		"ticks_per_tile": 9,            # LEVER: ticks, 6-14
 		"damage": 3,                    # LEVER: to the house, 1-6
 		"reward": 4,                    # LEVER: money, 2-8
 		"armour": 0,
+		# **It does not stop for what you built.** Everything else takes a
+		# wall apart when the wall is the cheapest way home (task 0049); a
+		# runner goes round, and if there is no way round it gives up and
+		# breaks through like the rest. A runner that stood still in front of
+		# a wall would make walling the farm a win condition, which is the
+		# thing task 0046 already learned once.
+		#
+		# It is what makes the runner a different problem rather than a fast
+		# walker: a maze does nothing to it, and only something that shoots
+		# will do.
+		"ignores_structures": true,
 	},
 	&"tank": {
 		# Armour is flat and applies per hit, so many small hits are worse than
@@ -1094,6 +1109,7 @@ static func validate() -> Array:
 	errors.append_array(check_recipes(RECIPES))
 	errors.append_array(check_buildings(BUILDINGS))
 	errors.append_array(check_defences(DEFENCES))
+	errors.append_array(check_enemies(ENEMIES))
 	errors.append_array(check_nights(NIGHTS))
 	errors.append_array(check_map(FARM_MAP))
 	errors.append_array(check_fishing(FISHING))
@@ -1735,6 +1751,40 @@ static func check_tutorial(steps: Array) -> Array:
 			errors.append(("tutorial step '%s' is %d characters and may be %d - "
 				+ "a line nobody reads at a glance is a line nobody reads")
 				% [id, line.length(), MAX_TUTORIAL_LINE_LENGTH])
+	return errors
+
+
+## Every enemy needs the four numbers the night loop reads off it, and the one
+## that ignores structures has to be worth ignoring them for.
+##
+## The second half is the design claim written down: a runner that was not
+## faster than a walker would just be a walker that takes the long way round,
+## and the tower line that stops it would be the same tower line.
+static func check_enemies(enemies: Dictionary) -> Array:
+	var errors: Array = []
+	# **The fastest thing that does stop**, not the slowest. Measuring against
+	# the slowest meant measuring against the giant at fifty ticks a tile,
+	# which anything is faster than - the check passed a "runner" slower than
+	# a walker and said nothing.
+	var fastest := 1 << 30
+	for id in sorted_names(enemies.keys()):
+		var one: Dictionary = enemies[id]
+		for field in ["hp", "ticks_per_tile", "damage", "reward"]:
+			if int(one.get(field, 0)) <= 0:
+				errors.append("enemy '%s' has no %s" % [id, field])
+		if int(one.get("armour", 0)) < 0:
+			errors.append("enemy '%s' has less than no armour" % id)
+		if not bool(one.get("ignores_structures", false)):
+			fastest = mini(fastest, int(one.get("ticks_per_tile", 1 << 30)))
+
+	for id in sorted_names(enemies.keys()):
+		var one: Dictionary = enemies[id]
+		if not bool(one.get("ignores_structures", false)):
+			continue
+		if int(one.get("ticks_per_tile", 0)) >= fastest:
+			errors.append(("enemy '%s' ignores structures without being "
+				+ "faster than the ones that do not - it would be a slow "
+				+ "zombie taking the long way round") % id)
 	return errors
 
 

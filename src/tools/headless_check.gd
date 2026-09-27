@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 42
+const GROUPS := 43
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -106,6 +106,7 @@ func _run() -> void:
 	_task_0047_barricades()
 	_task_0048_traps()
 	_task_0049_pathing()
+	_task_0050_runner()
 
 
 func _finish() -> void:
@@ -6822,8 +6823,8 @@ func _task_0049_pathing() -> void:
 
 	# **A wall is a delay, not a diversion.** The requirement: when the way
 	# round is dearer than the way through, they come through.
-	var short_way := _walled_lane(3101, true)
-	var long_way := _walled_lane(3101, false)
+	var short_way := _walled_lane(3101, &"route")
+	var long_way := _walled_lane(3101, &"none")
 	print("  a gap in the line: %s. Sealed: %s"
 		% [str(short_way), str(long_way)])
 	expect(short_way["through"] == 0,
@@ -6935,7 +6936,7 @@ func _task_0049_pathing() -> void:
 ##
 ## That is both halves of the task in one layout. They walk the gaps while
 ## walking is cheaper, and they chew when it is not.
-func _maze_night(seed_value: int) -> Dictionary:
+func _maze_night(seed_value: int, seal_the_last: bool = true) -> Dictionary:
 	var state := _fresh_night(seed_value)
 	var hp := int((GameData.DEFENCES[&"wall"] as Dictionary)["hp"])
 	var home := Farm.house_centre(state)
@@ -6953,7 +6954,7 @@ func _maze_night(seed_value: int) -> Dictionary:
 	# in from the east ever met it - and a hundred zombies strolled through a
 	# maze that was supposed to stop them.
 	var sealed := -1
-	for x in columns:
+	for x in (columns if seal_the_last else []):
 		var between := (int(x) - home.x) * (spawn.x - home.x) > 0
 		if not between:
 			continue
@@ -6975,36 +6976,61 @@ func _maze_night(seed_value: int) -> Dictionary:
 	return state
 
 
-## Wall the whole column a zombie's route passes through, with or without one
-## cell left open, and report what it did about it.
-func _walled_lane(seed_value: int, with_a_gap: bool) -> Dictionary:
+## Wall the whole column a zombie's route passes through and report what it
+## did about it.
+##
+## `where_gap` is the whole experiment:
+##
+## - `&"route"` leaves the cell it was walking through open, so there is a way
+##   round that costs nothing and everybody takes it.
+## - `&"none"` seals the column, so the only way on is through the wall.
+## - `&"end"` leaves the far bottom corner open, so there **is** a way round
+##   and it is a long one - longer than a wall is worth. That is the cell that
+##   tells a walker and a runner apart.
+func _walled_lane(seed_value: int, where_gap: StringName,
+		kind: StringName = &"walker",
+		barrier: StringName = &"wall") -> Dictionary:
 	var state := _fresh_night(seed_value)
 	Pathing.refresh(state)
 	var spawn: Vector2i = Enemies.spawn_cells(state, 0)[0]
 	var route := _route_from(state, spawn)
 	var column: int = (route[4] as Vector2i).x
-	var hp := int((GameData.DEFENCES[&"wall"] as Dictionary)["hp"])
+	var hp := int((GameData.DEFENCES[barrier] as Dictionary)["hp"])
 
-	var gap := (route[4] as Vector2i).y
+	var gap := -1
+	if where_gap == &"route":
+		gap = (route[4] as Vector2i).y
+	elif where_gap == &"end":
+		# **The bottom-most cell anything can actually stand on.** The last
+		# row of this column is a tree, so leaving row seventeen unwalled left
+		# the line sealed after all and every runner dutifully ate its way
+		# through a wall it was supposed to run around.
+		for y in range(Grid.HEIGHT - 1, -1, -1):
+			if Farm.walkable(state, Vector2i(column, y)):
+				gap = y
+				break
+
 	var built := 0
 	for y in Grid.HEIGHT:
-		if with_a_gap and y == gap:
+		if y == gap:
 			continue
 		var cell := Vector2i(column, y)
 		if Farm.buildable(state, cell):
-			Farm.place(state, cell, {"id": &"wall", "hp": hp})
+			Farm.place(state, cell, {"id": barrier, "hp": hp})
 			built += 1
 	Pathing.refresh(state)
 
-	var walker := Entities.spawn(state, &"walker", spawn)
+	var walker := Entities.spawn(state, kind, spawn)
 	var house_before := int(state["house_hp"])
-	var standing := _wall_hp_in_column(state, column)
+	var standing := _wall_hp_in_column(state, column, barrier)
 	var through := 0
 	var arrived := false
-	for _tick in 4000:
+	var took := 0
+	for tick in 6000:
 		Sim.advance(state, 1)
 		if not Entities.alive(state, walker):
 			arrived = int(state["house_hp"]) < house_before
+			took = tick
 			break
 		var at := Entities.cell_of(state, walker)
 		if at.x >= 0 and Farm.occupant(state, at).get("id", &"") == &"wall":
@@ -7016,17 +7042,19 @@ func _walled_lane(seed_value: int, with_a_gap: bool) -> Dictionary:
 		"built": built,
 		"through": through,
 		"arrived": arrived,
-		"broken": standing - _wall_hp_in_column(state, column),
+		"took": took,
+		"broken": standing - _wall_hp_in_column(state, column, barrier),
 		"reachable": Pathing.reachable(state, spawn),
 	}
 
 
-## The hit points still standing in one column of wall.
-func _wall_hp_in_column(state: Dictionary, column: int) -> int:
+## The hit points still standing in one column of barrier.
+func _wall_hp_in_column(state: Dictionary, column: int,
+		barrier: StringName = &"wall") -> int:
 	var total := 0
 	for y in Grid.HEIGHT:
 		var on := Farm.occupant(state, Vector2i(column, y))
-		if on.get("id", &"") == &"wall":
+		if on.get("id", &"") == barrier:
 			total += int(on.get("hp", 0))
 	return total
 
@@ -7135,3 +7163,212 @@ func _arrivals_in_a_maze(seed_value: int) -> Array:
 		if order.size() >= 8:
 			break
 	return order
+
+
+## 0050 - the runner: half the hit points, better than twice the speed, and it
+## will not stop for anything you built.
+func _task_0050_runner() -> void:
+	var walker: Dictionary = GameData.ENEMIES[&"walker"]
+	var runner: Dictionary = GameData.ENEMIES[&"runner"]
+
+	# **The real numbers**, which the requirement asks to be stated.
+	var faster := int(walker["ticks_per_tile"]) * 100 \
+		/ int(runner["ticks_per_tile"])
+	print("  a runner: %d hit points against a walker's %d, %d ticks a tile "
+		% [runner["hp"], walker["hp"], runner["ticks_per_tile"]]
+		+ "against %d - %d%% of the speed, %d%% of the life"
+		% [walker["ticks_per_tile"], faster,
+			int(runner["hp"]) * 100 / int(walker["hp"])])
+	expect(int(runner["hp"]) * 2 == int(walker["hp"]),
+		"half a walker's hit points, exactly", str(runner["hp"]))
+	expect(faster >= 200, "and better than twice its speed", "%d%%" % faster)
+	expect(int(runner["damage"]) < int(walker["damage"]),
+		"it does less when it lands - speed is what it is for, not damage")
+	expect(int(runner["reward"]) > int(walker["reward"]),
+		"and it is worth more, because killing one is harder")
+
+	expect(GameData.check_enemies(GameData.ENEMIES).is_empty(),
+		"the shipped enemies pass their own check",
+		str(GameData.check_enemies(GameData.ENEMIES)))
+	var sluggish: Dictionary = GameData.ENEMIES.duplicate(true)
+	(sluggish[&"runner"] as Dictionary)["ticks_per_tile"] = \
+		int(walker["ticks_per_tile"]) + 1
+	expect(not GameData.check_enemies(sluggish).is_empty(),
+		"and one that ignores structures without being faster is refused - it "
+		+ "would be a slow zombie taking the long way round")
+
+	# **It ignores what you built.** The same wall, the same seed, the same
+	# spawn: the only difference is who walks into it.
+	#
+	# The gap is at the far end of the line, so there **is** a way round and it
+	# is a long one. A walker prices it and decides the fence is cheaper; a
+	# runner does not price it at all.
+	#
+	# **A fence rather than a wall**, and measured rather than assumed: the
+	# way round this line is eighteen tiles and a wall is worth twenty-one, so
+	# a walker went round it too and was right to. A fence is worth six, which
+	# is the side of the arithmetic where the two of them disagree.
+	var fence := _walled_lane(3200, &"end", &"walker", &"fence")
+	var runs := _walled_lane(3200, &"end", &"runner", &"fence")
+	var chews := fence
+	print("  a fence with the long way round open: a walker took %d hit "
+		% chews["broken"] + "points out of it in %d ticks; a runner took %d "
+		% [chews["took"], runs["broken"]] + "and got there in %d"
+		% runs["took"])
+	expect(chews["broken"] > 0,
+		"a walker breaks through rather than walking round the world",
+		str(chews))
+	expect(runs["broken"] == 0,
+		"and a runner does not touch it", str(runs))
+	expect(runs["arrived"], "it goes the long way and arrives anyway",
+		str(runs))
+	expect(runs["took"] < chews["took"],
+		"and it is there first even going the long way round",
+		"%d ticks against %d" % [runs["took"], chews["took"]])
+
+	# **Unless there is no way round at all.** Then it gives up and breaks
+	# through like everybody else - a runner that stood still in front of a
+	# wall would make sealing the farm a win condition, which is the thing task
+	# 0046 learned once already.
+	var sealed := _walled_lane(3201, &"none", &"runner", &"fence")
+	expect(sealed["broken"] > 0,
+		"walled in on every side, a runner breaks through after all",
+		str(sealed))
+	expect(sealed["arrived"], "and gets in", str(sealed))
+
+	# **A maze is nothing to it**, which is the same rule seen from the front.
+	var open_run := _time_to_arrive(3202, &"runner", false)
+	var mazed_run := _time_to_arrive(3202, &"runner", true)
+	var open_walk := _time_to_arrive(3202, &"walker", false)
+	var mazed_walk := _time_to_arrive(3202, &"walker", true)
+	print("  through a maze: a runner %d ticks against %d in the open; a "
+		% [mazed_run, open_run] + "walker %d against %d"
+		% [mazed_walk, open_walk])
+	expect(mazed_run > 0 and mazed_walk > 0, "both of them get in",
+		"%d and %d" % [mazed_run, mazed_walk])
+	expect(mazed_walk - open_walk > mazed_run - open_run,
+		"a maze costs a walker more than it costs a runner",
+		"%d against %d" % [mazed_walk - open_walk, mazed_run - open_run])
+
+	# **It arrives first when mixed in with basics.** Same cell, same tick.
+	var order := _mixed_wave(3203)
+	print("  a wave of five and five, all from one cell: %s" % str(order))
+	expect(order.size() >= 4, "several of them got in", str(order))
+	expect(order[0] == &"runner", "and a runner was first", str(order))
+	var runners_first := 0
+	for i in mini(order.size(), 5):
+		if order[i] == &"runner":
+			runners_first += 1
+	expect(runners_first == 5,
+		"in fact the whole rush arrives before the first walker",
+		str(order))
+
+	# **A crossbow line stops a rush and a mortar alone does not.** The
+	# done-when, and the reason the runner exists: it punishes a defence made
+	# only of slow expensive towers.
+	var bolts := _rush_against(3204, &"auto_crossbow", 3)
+	var shell := _rush_against(3204, &"mortar", 1)
+	print("  a rush of %d runners: three crossbows let %d through for %d "
+		% [bolts["sent"], bolts["reached"], bolts["house_lost"]]
+		+ "damage; one mortar let %d through for %d"
+		% [shell["reached"], shell["house_lost"]])
+	expect(bolts["powered"] and shell["powered"],
+		"both farms had the power on, so this is about the towers",
+		"%s and %s" % [str(bolts["powered"]), str(shell["powered"])])
+	expect(bolts["house_lost"] == 0,
+		"a line of crossbows stops the rush dead", str(bolts))
+	expect(shell["house_lost"] > 0,
+		"and one mortar does not - it is still reloading",
+		str(shell))
+	expect(bolts["killed"] > shell["killed"],
+		"the fast cheap tower kills more of them than the slow dear one",
+		"%d against %d" % [bolts["killed"], shell["killed"]])
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## How long one of these takes to reach the house, with or without a maze in
+## the way. Zero when it never got there.
+func _time_to_arrive(seed_value: int, kind: StringName, mazed: bool) -> int:
+	var state := _maze_night(seed_value, false) if mazed 		else _fresh_night(seed_value)
+	Pathing.refresh(state)
+	var spawn: Vector2i = Enemies.spawn_cells(state, 0)[0]
+	var one := Entities.spawn(state, kind, spawn)
+	var before := int(state["house_hp"])
+	for tick in 8000:
+		Sim.advance(state, 1)
+		if not Entities.alive(state, one):
+			return tick if int(state["house_hp"]) < before else 0
+	return 0
+
+
+## Five walkers and five runners out of the same cell on the same tick, and
+## the order they get in.
+func _mixed_wave(seed_value: int) -> Array:
+	var state := _fresh_night(seed_value)
+	Pathing.refresh(state)
+	var spawn: Vector2i = Enemies.spawn_cells(state, 0)[0]
+
+	var kinds: Dictionary = {}
+	for _i in 5:
+		kinds[Entities.spawn(state, &"walker", spawn)] = &"walker"
+		kinds[Entities.spawn(state, &"runner", spawn)] = &"runner"
+
+	var order: Array = []
+	var alive: Array = Entities.ids(state)
+	var breaches := int(state["breaches"])
+	for _tick in 6000:
+		Sim.advance(state, 1)
+		if int(state["breaches"]) == breaches:
+			continue
+		var still: Array = Entities.ids(state)
+		for id in alive:
+			if not still.has(id):
+				order.append(kinds[id])
+		alive = still
+		breaches = int(state["breaches"])
+		if order.size() >= 10:
+			break
+	return order
+
+
+## A rush of runners against one kind of tower, on a farm with the power on.
+##
+## **The power matters.** A crossbow draws three and a mortar one, and the
+## farm makes four on its own - so without a generator this would be a test of
+## which tower fits in the budget rather than which tower stops a rush.
+func _rush_against(seed_value: int, id: StringName, count: int) -> Dictionary:
+	var state := _armed_prep(seed_value)
+	Resources.gain(state, {GameData.OIL: 400, GameData.GUNPOWDER: 400,
+		GameData.STONE: 400, GameData.IRON: 400, GameData.WOOD: 400})
+	for _i in 2:
+		var plant := _room_for(state, Building.size_of(&"generator"))
+		Building.place(state, &"generator", plant)
+	var built := _line_of_towers(state, id, count)
+	_night_falls(state)
+	Sim.advance(state, 1)
+
+	Pathing.refresh(state)
+	var spawn: Vector2i = Enemies.spawn_cells(state, 0)[0]
+	var sent := 8
+	var before := int(state["house_hp"])
+	var breaches := int(state["breaches"])
+	for i in sent:
+		Entities.spawn(state, &"runner", spawn)
+		if i < sent - 1:
+			Sim.advance(state, GameData.SPAWN_INTERVAL_TICKS)
+
+	for _tick in 4000:
+		Sim.advance(state, 1)
+		if Entities.count(state) == 0:
+			break
+
+	var reached := int(state["breaches"]) - breaches
+	return {
+		"towers": built.size(),
+		"sent": sent,
+		"reached": reached,
+		"killed": sent - reached,
+		"house_lost": before - int(state["house_hp"]),
+		"powered": Power.percent(state) == 100,
+	}
