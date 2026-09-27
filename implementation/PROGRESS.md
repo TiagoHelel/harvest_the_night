@@ -4325,3 +4325,90 @@ is task 0066's job, and the number is waiting for it.
 
 `python tools/verify.py` prints PASS: 1857 asserts, 463 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+
+## 0059 - Waves as data
+
+A night was a bare list of rows and every row carried `WAVE_GAP_TICKS`. It is
+a record now:
+
+```gdscript
+{
+    "note": "the first runner",
+    "opening_ticks": 0,
+    "gap_ticks": WAVE_GAP_TICKS,
+    "waves": [[&"walker", 6, 0], [&"runner", 3, 1], ...],
+}
+```
+
+The two numbers a designer most wants to turn - how long before the first wave
+and how long between them - now live on the night they belong to. Under the
+old shape, changing the pace of a night meant editing every one of its rows
+and hoping none were missed; thirty-four rows carried that constant. A wave
+that wants a different pace still says so, in an optional fourth entry, so
+nothing was taken away.
+
+`note` is not decoration: it is what the summary prints, and it is the line
+that says what each night is *for*.
+
+### The sim hash did not move
+
+Which is the whole claim of a data refactor, and the reason to be pleased with
+this one. The nights send exactly the same things at exactly the same ticks;
+only the shape a designer types changed.
+
+### Validated loudly
+
+`check_nights()` used to check two things. It now refuses a night that is not
+a record, one missing any of its four fields, one that sends nothing, a wave
+that is not `(enemy, count, spawn)` with an optional delay, an unknown enemy
+id, a wave of nobody, a spawn point that is not on the map, and time running
+backwards. Every one of those has an assert that feeds it a bad table and
+checks the complaint comes back - including the done-when's typo, where the
+assert also checks the message **names the typo** rather than just the night.
+
+### Computable without running it
+
+`Waves` answers `size_of`, `reward_of`, `kinds_of`, `spawns_of`, `note_for`
+and `summary_of` off the table alone. The test proves they are not merely
+plausible: it runs night one with a house that cannot fall, counts what
+actually turned up, and asserts the table predicted it kind for kind, count
+for count, spawn for spawn, and dollar for dollar.
+
+### The summary
+
+`python tools/nights.py`:
+
+```
+  night  1   3 waves   12 enemies  $36    from [0]  12 walker  - the tutorial night
+  night  5   4 waves   17 enemies  $84    from [0, 1]  6 runner, 3 tank, 8 walker  - the first tank
+  night 10   4 waves   39 enemies  $274   from [0, 1]  8 breaker, 1 giant, 30 walker  - the Giant
+
+  290 enemies over 10 nights, worth $1369
+  first seen: breaker on 7, giant on 10, runner on 3, tank on 5, walker on 1
+```
+
+...and a bar chart of the count curve, which already shows what task 0060 has
+to fix: nights 5, 7 and 10 dip in raw numbers because they trade count for
+heavier enemies, so the curve reads as a sawtooth rather than a climb. That is
+0060's job and it now has the instrument to do it with.
+
+The "one new thing a night" rule of `design.md` section 10 is asserted rather
+than hoped for: no night introduces more than one kind, every kind in the
+table turns up, and the Giant is on the last one.
+
+### Nine tests were reading the table directly
+
+Four in `headless_check` reached into `GameData.NIGHTS[n]` as an array. They
+go through `Waves` now, which is what the module is for - and is why the
+refactor was worth doing where it was rather than at 0060 with the authoring
+on top of it.
+
+### Hashes
+
+| | from | to | why |
+|---|---|---|---|
+| sim hash | `2087687126` | `2087687126` | **unchanged** - the same nights, sent the same way |
+| data hash | `158064256` | `2743853196` | `NIGHTS` is a different shape, with the same content in it |
+
+`python tools/verify.py` prints PASS: 2022 asserts, 463 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

@@ -1,7 +1,7 @@
 # 0059 - Waves as data
 
 - **Phase:** 4 - Ten nights and progression
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0027, 0050, 0051, 0052
 - **Likely files:** src/core/waves.gd, src/core/game_data.gd
 

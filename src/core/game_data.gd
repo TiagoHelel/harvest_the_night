@@ -1058,38 +1058,131 @@ const WAVE_GAP_TICKS := 15 * SECONDS    # LEVER: ticks, 8-30 seconds worth
 ## while the player watches.
 const SPAWN_INTERVAL_TICKS := 20        # LEVER: ticks, 8-45
 
+## The ten nights of `design.md`, section 10.
+##
+## **A night is a record, not a bare list of rows.** Task 0059 turned it into
+## one so that the two numbers a designer most wants to turn - how long before
+## the first wave, and how long between them - live on the night they belong
+## to rather than being repeated on every row of it. A night is:
+##
+##     {"note": ..., "opening_ticks": ..., "gap_ticks": ..., "waves": [...]}
+##
+## and a wave is `[enemy, count, spawn]`, with an optional fourth entry that
+## overrides the night's gap for that one wave. The old shape repeated
+## `WAVE_GAP_TICKS` on thirty-four rows; changing the pace of a night meant
+## editing every row of it and hoping none were missed.
+##
+## `note` is for the summary `tools/nights.py` prints, which is the whole of
+## "a summary of all ten nights can be printed headlessly".
 const NIGHTS: Array = [
-	# 1 - the tutorial night: winnable with the one tower the first day buys.
-	[[&"walker", 3, 0, 0], [&"walker", 4, 0, WAVE_GAP_TICKS],
-	 [&"walker", 5, 0, WAVE_GAP_TICKS]],
-	# 2 - more of the same, from two sides.
-	[[&"walker", 6, 0, 0], [&"walker", 5, 1, WAVE_GAP_TICKS],
-	 [&"walker", 8, 0, WAVE_GAP_TICKS]],
-	# 3 - the first runner.
-	[[&"walker", 6, 0, 0], [&"runner", 3, 1, WAVE_GAP_TICKS],
-	 [&"walker", 8, 0, WAVE_GAP_TICKS], [&"runner", 5, 1, WAVE_GAP_TICKS]],
-	# 4 - a bigger version of what night 3 taught.
-	[[&"walker", 10, 0, 0], [&"runner", 6, 1, WAVE_GAP_TICKS],
-	 [&"walker", 12, 0, WAVE_GAP_TICKS]],
-	# 5 - the first tank.
-	[[&"walker", 8, 0, 0], [&"tank", 1, 0, WAVE_GAP_TICKS],
-	 [&"runner", 6, 1, WAVE_GAP_TICKS], [&"tank", 2, 0, WAVE_GAP_TICKS]],
-	# 6 - everything so far, mixed.
-	[[&"walker", 12, 0, 0], [&"runner", 8, 1, WAVE_GAP_TICKS],
-	 [&"tank", 3, 0, WAVE_GAP_TICKS], [&"walker", 14, 1, WAVE_GAP_TICKS]],
-	# 7 - the breakers arrive and go for the towers.
-	[[&"walker", 10, 0, 0], [&"breaker", 4, 1, WAVE_GAP_TICKS],
-	 [&"runner", 8, 0, WAVE_GAP_TICKS], [&"breaker", 6, 1, WAVE_GAP_TICKS]],
-	# 8 - a large night.
-	[[&"walker", 18, 0, 0], [&"runner", 10, 1, WAVE_GAP_TICKS],
-	 [&"breaker", 6, 0, WAVE_GAP_TICKS], [&"tank", 4, 1, WAVE_GAP_TICKS]],
-	# 9 - the heavy mix, and the dress rehearsal for the Giant.
-	[[&"walker", 20, 0, 0], [&"breaker", 8, 1, WAVE_GAP_TICKS],
-	 [&"tank", 5, 0, WAVE_GAP_TICKS], [&"runner", 14, 1, WAVE_GAP_TICKS],
-	 [&"tank", 3, 0, WAVE_GAP_TICKS]],
-	# 10 - the Giant, with company so it cannot be focused down alone.
-	[[&"walker", 14, 0, 0], [&"giant", 1, 0, WAVE_GAP_TICKS],
-	 [&"walker", 16, 1, WAVE_GAP_TICKS], [&"breaker", 8, 1, WAVE_GAP_TICKS]],
+	{
+		"note": "the tutorial night: winnable with the one tower the first day buys",
+		"opening_ticks": 0,
+		"gap_ticks": WAVE_GAP_TICKS,
+		"waves": [
+			[&"walker", 3, 0],
+			[&"walker", 4, 0],
+			[&"walker", 5, 0],
+		],
+	},
+	{
+		"note": "more of the same, from two sides",
+		"opening_ticks": 0,
+		"gap_ticks": WAVE_GAP_TICKS,
+		"waves": [
+			[&"walker", 6, 0],
+			[&"walker", 5, 1],
+			[&"walker", 8, 0],
+		],
+	},
+	{
+		"note": "the first runner",
+		"opening_ticks": 0,
+		"gap_ticks": WAVE_GAP_TICKS,
+		"waves": [
+			[&"walker", 6, 0],
+			[&"runner", 3, 1],
+			[&"walker", 8, 0],
+			[&"runner", 5, 1],
+		],
+	},
+	{
+		"note": "a bigger version of what night 3 taught",
+		"opening_ticks": 0,
+		"gap_ticks": WAVE_GAP_TICKS,
+		"waves": [
+			[&"walker", 10, 0],
+			[&"runner", 6, 1],
+			[&"walker", 12, 0],
+		],
+	},
+	{
+		"note": "the first tank",
+		"opening_ticks": 0,
+		"gap_ticks": WAVE_GAP_TICKS,
+		"waves": [
+			[&"walker", 8, 0],
+			[&"tank", 1, 0],
+			[&"runner", 6, 1],
+			[&"tank", 2, 0],
+		],
+	},
+	{
+		"note": "everything so far, mixed",
+		"opening_ticks": 0,
+		"gap_ticks": WAVE_GAP_TICKS,
+		"waves": [
+			[&"walker", 12, 0],
+			[&"runner", 8, 1],
+			[&"tank", 3, 0],
+			[&"walker", 14, 1],
+		],
+	},
+	{
+		"note": "the breakers arrive and go for the towers",
+		"opening_ticks": 0,
+		"gap_ticks": WAVE_GAP_TICKS,
+		"waves": [
+			[&"walker", 10, 0],
+			[&"breaker", 4, 1],
+			[&"runner", 8, 0],
+			[&"breaker", 6, 1],
+		],
+	},
+	{
+		"note": "a large night",
+		"opening_ticks": 0,
+		"gap_ticks": WAVE_GAP_TICKS,
+		"waves": [
+			[&"walker", 18, 0],
+			[&"runner", 10, 1],
+			[&"breaker", 6, 0],
+			[&"tank", 4, 1],
+		],
+	},
+	{
+		"note": "the heavy mix, and the dress rehearsal for the Giant",
+		"opening_ticks": 0,
+		"gap_ticks": WAVE_GAP_TICKS,
+		"waves": [
+			[&"walker", 20, 0],
+			[&"breaker", 8, 1],
+			[&"tank", 5, 0],
+			[&"runner", 14, 1],
+			[&"tank", 3, 0],
+		],
+	},
+	{
+		"note": "the Giant, with company so it cannot be focused down alone",
+		"opening_ticks": 0,
+		"gap_ticks": WAVE_GAP_TICKS,
+		"waves": [
+			[&"walker", 14, 0],
+			[&"giant", 1, 0],
+			[&"walker", 16, 1],
+			[&"breaker", 8, 1],
+		],
+	},
 ]
 
 ## How many nights the MVP has. Past this, task 0070 generates them.
@@ -1913,15 +2006,50 @@ static func check_enemies(enemies: Dictionary) -> Array:
 	return errors
 
 
+## Every night, checked at load. **An unknown enemy id fails loudly**, which
+## is the requirement, and so does every other way a hand-written table can be
+## wrong: no waves, a wave of nobody, a spawn point that is not on the map, a
+## night with no pace.
 static func check_nights(nights: Array) -> Array:
 	var errors: Array = []
 	for n in nights.size():
-		for wave in (nights[n] as Array):
+		var night: Variant = nights[n]
+		if typeof(night) != TYPE_DICTIONARY:
+			errors.append("night %d is not a record" % [n + 1])
+			continue
+		var one: Dictionary = night
+
+		for field in ["waves", "note", "opening_ticks", "gap_ticks"]:
+			if not one.has(field):
+				errors.append("night %d has no '%s'" % [n + 1, field])
+		if not one.has("waves"):
+			continue
+		if int(one.get("opening_ticks", -1)) < 0 \
+				or int(one.get("gap_ticks", -1)) < 0:
+			errors.append("night %d waits less than no time" % [n + 1])
+
+		var waves: Array = one["waves"]
+		if waves.is_empty():
+			errors.append("night %d sends nothing at all" % [n + 1])
+		for w in waves.size():
+			var wave: Array = waves[w]
+			if wave.size() < 3 or wave.size() > 4:
+				errors.append(("night %d wave %d is not (enemy, count, "
+					+ "spawn) with an optional delay") % [n + 1, w + 1])
+				continue
 			if not ENEMIES.has(wave[0]):
 				errors.append("night %d sends unknown enemy '%s'"
 					% [n + 1, wave[0]])
 			if int(wave[1]) <= 0:
 				errors.append("night %d has a wave of %d" % [n + 1, wave[1]])
+			if int(wave[2]) < 0 or int(wave[2]) >= SPAWNS.size():
+				errors.append("night %d wave %d comes from spawn %d, and "
+					% [n + 1, w + 1, int(wave[2])]
+					+ "there are %d" % SPAWNS.size())
+			if wave.size() > 3 and int(wave[3]) < 0:
+				errors.append("night %d wave %d waits less than no time"
+					% [n + 1, w + 1])
+
 	if nights.size() != MVP_NIGHTS:
 		errors.append("MVP_NIGHTS is %d but %d nights are written"
 			% [MVP_NIGHTS, nights.size()])

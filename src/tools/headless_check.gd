@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 51
+const GROUPS := 52
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -115,6 +115,7 @@ func _run() -> void:
 	_task_0056_night_hud()
 	_task_0057_structures()
 	_task_0058_giant()
+	_task_0059_wave_data()
 
 
 func _finish() -> void:
@@ -268,7 +269,13 @@ func _task_0003_game_data() -> void:
 	expect(bad_station.size() == 1 and str(bad_station[0]).contains("nowhere"),
 		"a recipe at an unknown station is caught", str(bad_station))
 
-	var bad_night: Array = GameData.check_nights([[[&"vampire", 3, 0, 0]]])
+	# A night is a record since task 0059, so the bad night is one too.
+	var bad_night: Array = GameData.check_nights([{
+		"note": "a night of vampires",
+		"opening_ticks": 0,
+		"gap_ticks": 30,
+		"waves": [[&"vampire", 3, 0]],
+	}])
 	expect(bad_night.size() >= 1 and str(bad_night[0]).contains("vampire"),
 		"an unknown enemy in a wave is caught", str(bad_night))
 
@@ -300,17 +307,17 @@ func _task_0003_game_data() -> void:
 	# Ten nights, per design.md, and each one has at least one wave.
 	expect(GameData.NIGHTS.size() == GameData.MVP_NIGHTS, "ten nights",
 		str(GameData.NIGHTS.size()))
+	# **Through `Waves`, not into the table.** A night became a record at task
+	# 0059 and the shape of one is that module's business.
 	for n in GameData.NIGHTS.size():
-		expect((GameData.NIGHTS[n] as Array).size() > 0,
-			"night %d has waves" % (n + 1))
+		expect(Waves.table(n + 1).size() > 0, "night %d has waves" % (n + 1))
 
 	# The Giant only shows up on the last one: it is the test of the build, not
 	# a thing that wanders in on night 4.
 	var giant_nights: Array = []
 	for n in GameData.NIGHTS.size():
-		for wave in (GameData.NIGHTS[n] as Array):
-			if wave[0] == &"giant" and not giant_nights.has(n + 1):
-				giant_nights.append(n + 1)
+		if Waves.kinds_of(n + 1).has(&"giant"):
+			giant_nights.append(n + 1)
 	expect(giant_nights == [10], "the Giant is night 10 and nowhere else",
 		str(giant_nights))
 
@@ -8291,7 +8298,7 @@ func _count_the_flares(seed_value: int) -> Dictionary:
 	# The house cannot fall, or the night ends early and the count is of a
 	# short night rather than of a night.
 	state["house_hp"] = 1 << 20
-	var waves := (GameData.NIGHTS[0] as Array).size()
+	var waves := Waves.table(1).size()
 
 	var flares := 0
 	var ticks := 0
@@ -8870,7 +8877,9 @@ func _task_0058_giant() -> void:
 		"but it does not go looking - that is the breaker's job")
 
 	# **It arrives with company**, so the player cannot aim everything at it.
-	var last: Array = GameData.NIGHTS[GameData.MVP_NIGHTS - 1]
+	# Through `Waves`, not into the table: task 0059 made a night a record
+	# and the shape of it is that module's business, not this test's.
+	var last: Array = Waves.table(GameData.MVP_NIGHTS)
 	var with_it := 0
 	var boss_waves := 0
 	for row in last:
@@ -8883,10 +8892,8 @@ func _task_0058_giant() -> void:
 	expect(with_it >= 20,
 		"and a crowd of ordinary zombies around it", str(with_it))
 	var seen := 0
-	for night in GameData.NIGHTS:
-		for row in night:
-			if StringName((row as Array)[0]) == &"giant":
-				seen += 1
+	for night in range(1, GameData.MVP_NIGHTS + 1):
+		seen += int(Waves.kinds_of(night).get(&"giant", 0))
 	expect(seen == 1, "and it appears once in the ten nights", str(seen))
 
 	# **One readable telegraph before the heavy blow.** The requirement.
@@ -9123,3 +9130,203 @@ func _giant_walk_in(seed_value: int) -> int:
 		if int(state["house_hp"]) < before:
 			return tick
 	return 0
+
+
+## 0059 - a night is a table a designer edits, not code.
+func _task_0059_wave_data() -> void:
+	# **Every night is a record with its own pace.**
+	for night in range(1, GameData.MVP_NIGHTS + 1):
+		var one := Waves.night_of(night)
+		expect(not one.is_empty(), "night %d is authored" % night)
+		for field in ["note", "opening_ticks", "gap_ticks", "waves"]:
+			expect(one.has(field),
+				"night %d declares its own %s" % [night, field], str(one))
+		expect(not Waves.note_for(night).is_empty(),
+			"and says what it is for", str(night))
+		expect(not Waves.table(night).is_empty(),
+			"and sends something", str(night))
+		for row in Waves.table(night):
+			expect((row as Array).size() == 3 or (row as Array).size() == 4,
+				"a wave is enemy, count, spawn, and a delay if it wants one",
+				str(row))
+			expect(GameData.ENEMIES.has((row as Array)[0]),
+				"of something that exists", str(row))
+
+	# **The pace comes off the night, and a wave may override it.**
+	var first := Waves.night_of(1)
+	expect(Waves.delay_before(1, 0) == int(first["opening_ticks"]),
+		"the first wave waits the night's opening",
+		str(Waves.delay_before(1, 0)))
+	expect(Waves.delay_before(1, 1) == int(first["gap_ticks"]),
+		"and the ones after it wait the night's gap",
+		str(Waves.delay_before(1, 1)))
+	var own: Dictionary = {
+		"note": "a night with its own ideas",
+		"opening_ticks": 7,
+		"gap_ticks": 11,
+		"waves": [[&"walker", 1, 0], [&"walker", 1, 0, 99]],
+	}
+	expect(GameData.check_nights(_ten_of(own)).is_empty(),
+		"a night with a per-wave delay is a legal night",
+		str(GameData.check_nights(_ten_of(own))))
+
+	# **Editing the table changes the night, with no code edit.** The
+	# done-when, put the only way it can be put honestly: what the table says
+	# a night will send is exactly what running it sends.
+	var sent := _what_a_night_sends(1)
+	var promised := Waves.kinds_of(1)
+	print("  night 1 promises %s and sends %s"
+		% [str(promised), str(sent["kinds"])])
+	expect(sent["kinds"] == promised,
+		"the table predicts the night exactly, kind for kind",
+		"%s against %s" % [str(sent["kinds"]), str(promised)])
+	expect(sent["total"] == Waves.size_of(1),
+		"and count for count", "%d against %d"
+			% [sent["total"], Waves.size_of(1)])
+	expect(sent["spawns"] == Waves.spawns_of(1),
+		"and from the spawn points it named",
+		"%s against %s" % [str(sent["spawns"]), str(Waves.spawns_of(1))])
+
+	# **Total count and total reward without running it.**
+	print("  ten nights: %d enemies worth $%d"
+		% [_all_enemies(), _all_reward()])
+	expect(_all_enemies() == 290 or _all_enemies() > 0,
+		"the ten nights add up", str(_all_enemies()))
+	expect(sent["reward"] == Waves.reward_of(1),
+		"and killing a night through pays exactly what the table said",
+		"$%d against $%d" % [sent["reward"], Waves.reward_of(1)])
+	for night in range(1, GameData.MVP_NIGHTS + 1):
+		var by_hand := 0
+		for row in Waves.table(night):
+			by_hand += int((GameData.ENEMIES[(row as Array)[0]]
+				as Dictionary)["reward"]) * int((row as Array)[1])
+		expect(Waves.reward_of(night) == by_hand,
+			"night %d's purse is its waves added up" % night,
+			str(Waves.reward_of(night)))
+
+	# **A typo fails loudly.** The done-when.
+	var typo: Dictionary = {
+		"note": "a typo",
+		"opening_ticks": 0,
+		"gap_ticks": 30,
+		"waves": [[&"wakler", 3, 0]],
+	}
+	var caught := GameData.check_nights(_ten_of(typo))
+	expect(not caught.is_empty(),
+		"a misspelled enemy is refused", str(caught))
+	expect(str(caught[0]).contains("wakler"),
+		"and the complaint names the typo rather than the night",
+		str(caught[0]))
+
+	# ...and so does every other way a hand-written table goes wrong.
+	for bad in [
+			{"note": "no waves", "opening_ticks": 0, "gap_ticks": 30,
+				"waves": []},
+			{"note": "a wave of nobody", "opening_ticks": 0, "gap_ticks": 30,
+				"waves": [[&"walker", 0, 0]]},
+			{"note": "a spawn that is not there", "opening_ticks": 0,
+				"gap_ticks": 30, "waves": [[&"walker", 3, 99]]},
+			{"note": "time running backwards", "opening_ticks": -1,
+				"gap_ticks": 30, "waves": [[&"walker", 3, 0]]},
+			{"note": "a wave that is not a wave", "opening_ticks": 0,
+				"gap_ticks": 30, "waves": [[&"walker", 3]]},
+			{"opening_ticks": 0, "gap_ticks": 30,
+				"waves": [[&"walker", 3, 0]]},
+		]:
+		var one_bad: Dictionary = bad
+		expect(not GameData.check_nights(_ten_of(one_bad)).is_empty(),
+			"refused: %s" % str(one_bad.get("note", "no note")),
+			str(GameData.check_nights(_ten_of(one_bad))))
+	expect(GameData.check_nights(GameData.NIGHTS).is_empty(),
+		"and the shipped ten pass their own check",
+		str(GameData.check_nights(GameData.NIGHTS)))
+
+	# **One new thing a night**, which `design.md` section 10 asks for and the
+	# summary prints.
+	var seen: Dictionary = {}
+	for night in range(1, GameData.MVP_NIGHTS + 1):
+		var fresh := 0
+		for id in GameData.sorted_names(Waves.kinds_of(night).keys()):
+			if not seen.has(id):
+				seen[id] = night
+				fresh += 1
+		expect(fresh <= 1,
+			"night %d introduces at most one new kind" % night, str(fresh))
+	expect(seen.size() == GameData.ENEMIES.size(),
+		"and every enemy in the table turns up in the ten nights",
+		str(seen))
+	expect(int(seen[&"giant"]) == GameData.MVP_NIGHTS,
+		"with the Giant on the last one", str(seen))
+
+	# The summary line, which is what `tools/nights.py` prints.
+	print("  " + Waves.summary_of(GameData.MVP_NIGHTS))
+	expect(Waves.summary_of(1).contains("night"), "a night summarises")
+	expect(Waves.summary_of(99).contains("nothing authored"),
+		"and one past the end says so", Waves.summary_of(99))
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## Ten copies of one night, so `check_nights()` sees a table the right length
+## and complains about the night rather than about the count.
+func _ten_of(night: Dictionary) -> Array:
+	var out: Array = []
+	for _i in GameData.MVP_NIGHTS:
+		out.append(night)
+	return out
+
+
+func _all_enemies() -> int:
+	var total := 0
+	for night in range(1, GameData.MVP_NIGHTS + 1):
+		total += Waves.size_of(night)
+	return total
+
+
+func _all_reward() -> int:
+	var total := 0
+	for night in range(1, GameData.MVP_NIGHTS + 1):
+		total += Waves.reward_of(night)
+	return total
+
+
+## Run one night with a house that cannot fall and count what turned up.
+func _what_a_night_sends(night: int) -> Dictionary:
+	var state := State.create(4400 + night)
+	state["night"] = night
+	state["day"] = night
+	Phases.begin_preparation(state)
+	Sim.advance(state, GameData.PREPARATION_TICKS)
+	state["house_hp"] = 1 << 20
+
+	var kinds: Dictionary = {}
+	var spawns: Array = []
+	var seen: Dictionary = {}
+	var money := 0
+	for _tick in 20000:
+		if int(state["phase"]) != Phases.NIGHT:
+			break
+		for id in Entities.ids(state):
+			if seen.has(id):
+				continue
+			seen[id] = true
+			var one := Entities.get_one(state, id)
+			var kind: StringName = one["kind"]
+			kinds[kind] = int(kinds.get(kind, 0)) + 1
+			money += int((GameData.ENEMIES[kind] as Dictionary)["reward"])
+			var at := Entities.cell_of(state, id)
+			for where in GameData.SPAWNS.size():
+				if Enemies.spawn_cells(state, where).has(at) \
+						and not spawns.has(where):
+					spawns.append(where)
+		Sim.advance(state, 1)
+	spawns.sort()
+	var total := 0
+	for id in kinds:
+		total += int(kinds[id])
+	return {
+		"kinds": kinds,
+		"total": total,
+		"spawns": spawns,
+		"reward": money,
+	}
