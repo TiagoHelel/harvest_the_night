@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 19
+const GROUPS := 20
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -83,6 +83,7 @@ func _run() -> void:
 	_task_0024_tower()
 	_task_0025_zombies()
 	_task_0026_combat()
+	_task_0027_the_loop()
 
 
 func _finish() -> void:
@@ -1643,6 +1644,7 @@ func _task_0023_building() -> void:
 		"preparation takes anything")
 	Sim.advance(nightly, GameData.PREPARATION_TICKS)
 	expect(int(nightly["phase"]) == Phases.NIGHT, "and then it is night")
+	_park_the_waves(nightly)
 	expect(not Building.allowed_in_phase(nightly, &"wall"),
 		"a wall cannot go up mid-wave")
 	expect(Building.allowed_in_phase(nightly, &"barricade"),
@@ -1790,6 +1792,7 @@ func _night_with_tower(at_night: bool) -> Dictionary:
 	if at_night:
 		Phases.begin_preparation(state)
 		Sim.advance(state, GameData.PREPARATION_TICKS)
+		_park_the_waves(state)
 	return {"state": state, "tower": cell}
 
 
@@ -1803,6 +1806,7 @@ func _shooting_log(seed_value: int) -> Array:
 	Building.place(state, &"gun_tower", cell)
 	Phases.begin_preparation(state)
 	Sim.advance(state, GameData.PREPARATION_TICKS)
+	_park_the_waves(state)
 	for offset in [Vector2i(1, 0), Vector2i(2, 0), Vector2i(-1, 1)]:
 		Entities.spawn(state, &"walker", cell + offset)
 
@@ -1826,6 +1830,7 @@ func _shots_in(ticks: int, reload: int) -> int:
 	Building.place(state, &"gun_tower", cell)
 	Phases.begin_preparation(state)
 	Sim.advance(state, GameData.PREPARATION_TICKS)
+	_park_the_waves(state)
 
 	# A target that cannot die, so the count is about the reload and nothing
 	# else. Its hit points are topped up every tick.
@@ -1965,9 +1970,7 @@ func _task_0025_zombies() -> void:
 	# **Spawning works on a night nobody has prepared.** The test above had
 	# called `Pathing.refresh()` by hand, which is a precondition the game does
 	# not arrange - and with it the first wave of every night spawned nothing.
-	var cold := State.create(507)
-	Phases.begin_preparation(cold)
-	Sim.advance(cold, GameData.PREPARATION_TICKS)
+	var cold := _fresh_night(507)
 	expect(Enemies.spawn(cold, &"walker", 0) > 0,
 		"the first zombie of a night spawns without anybody refreshing anything")
 	expect(Entities.count(cold) == 1, "and is out there",
@@ -2006,12 +2009,34 @@ func _task_0025_zombies() -> void:
 	_completed += 1     # last line: an abandoned group never gets here
 
 
-## A farm at night with nothing on it yet.
+## A farm at night with nothing on it and nothing coming.
+##
+## **The wave schedule is parked.** Since task 0027 a night sends what its table
+## says and ends when everything sent is dead - which is right, and which means
+## a test about pathing or a barricade's lifetime would otherwise be fighting
+## twelve walkers it did not ask for, or would find the night over before it
+## started. Tests that are about waves use `_scheduled_night()`.
 func _fresh_night(seed_value: int) -> Dictionary:
+	var state := _scheduled_night(seed_value)
+	_park_the_waves(state)
+	return state
+
+
+## A farm at night with its real schedule running.
+func _scheduled_night(seed_value: int) -> Dictionary:
 	var state := State.create(seed_value)
 	Phases.begin_preparation(state)
 	Sim.advance(state, GameData.PREPARATION_TICKS)
 	return state
+
+
+## Stop the night sending anything, and stop it deciding it is finished.
+func _park_the_waves(state: Dictionary) -> void:
+	var wave: Dictionary = state["wave"]
+	wave["done"] = false
+	wave["index"] = 0
+	wave["left"] = 0
+	wave["wait"] = 1 << 30
 
 
 ## Where every zombie is at tick 1000, for a given seed.
@@ -2201,3 +2226,180 @@ func _fight_result(seed_value: int) -> Array:
 	Sim.advance(state, 1200)
 	return [int(state["killed"]), Entities.count(state),
 		int(state["house_hp"]), State.hash_of(state)]
+
+
+## 0027 - the whole loop: three waves, a payout, and a day 2.
+func _task_0027_the_loop() -> void:
+	# **Night one is what design.md says it is.**
+	var rows := Waves.table(1)
+	expect(rows.size() == 3, "night one is three waves", str(rows.size()))
+	expect(Waves.size_of(1) == 12, "of twelve walkers in total",
+		str(Waves.size_of(1)))
+	for row in rows:
+		expect(StringName((row as Array)[0]) == &"walker",
+			"all of them basic - it is the tutorial night")
+
+	# **Everything the table says arrives, one at a time.**
+	var sent := _scheduled_night(801)
+	expect(int(sent["night"]) == 1, "it is night one", str(sent["night"]))
+	var seen := 0
+	var most_at_once := 0
+	for _i in 6000:
+		var before := Entities.count(sent)
+		Sim.advance(sent, 1)
+		if Entities.count(sent) > before:
+			seen += Entities.count(sent) - before
+		most_at_once = maxi(most_at_once, Entities.count(sent))
+		if int(sent["phase"]) != Phases.NIGHT:
+			break
+	expect(seen == 12, "all twelve were sent", str(seen))
+	expect(most_at_once < 12,
+		"and never all at once - they walk out of the dark in a line",
+		str(most_at_once))
+
+	# **The night ends by itself**, one way or the other.
+	expect(int(sent["phase"]) == Phases.RESULT,
+		"the night ended on its own", Phases.name_of(int(sent["phase"])))
+
+	# **An undefended farm loses.** Twelve walkers at five damage against a
+	# hundred hit points, and nothing shooting back.
+	var naked := _scheduled_night(802)
+	for _i in 6000:
+		Sim.advance(naked, 1)
+		if int(naked["phase"]) != Phases.NIGHT:
+			break
+	expect(not bool((naked["last_result"] as Dictionary)["survived"]),
+		"a farm with no towers on it loses night one")
+	expect(int(naked["house_hp"]) == 0, "with the house down",
+		str(naked["house_hp"]))
+
+	# **A defended farm survives, and gets paid.**
+	var held := _defended_night(803)
+	for _i in 8000:
+		Sim.advance(held, 1)
+		if int(held["phase"]) != Phases.NIGHT:
+			break
+	expect(int(held["phase"]) == Phases.RESULT, "the night ends",
+		Phases.name_of(int(held["phase"])))
+	var payout := Rewards.last(held)
+	print("  night one, four towers: survived=%s killed=%d through=%d house=%d"
+		% [payout.get("survived", false), int(payout.get("killed", 0)),
+			int(payout.get("breaches", 0)), int(payout.get("house_hp", 0))])
+	expect(bool(payout["survived"]), "four towers hold night one",
+		str(payout))
+	expect(int(payout["killed"]) == 12, "killing all twelve",
+		str(payout["killed"]))
+
+	# The payout is itemised and it is what arrived.
+	var gained: Dictionary = payout["gained"]
+	expect(gained.has(GameData.MONEY), "it pays money")
+	expect(gained.has(GameData.WOOD) and gained.has(GameData.IRON),
+		"and materials towards the next night", str(gained.keys()))
+	expect(int(gained[GameData.MONEY]) > int(GameData.REWARDS["base_money"]),
+		"more than the flat fee, because things were killed",
+		str(gained[GameData.MONEY]))
+
+	# **Defending well pays more than barely holding.** The same night, one
+	# with the house untouched and one without.
+	var scratched := _defended_night(803)
+	scratched["house_hp"] = GameData.HOUSE_HP - 1
+	scratched["killed_by_kind"] = {}
+	scratched["killed"] = 0
+	var poorer := Rewards.preview(scratched, true)
+	var untouched := _defended_night(803)
+	untouched["killed_by_kind"] = {}
+	untouched["killed"] = 0
+	var richer := Rewards.preview(untouched, true)
+	expect(int(richer[GameData.MONEY]) > int(poorer[GameData.MONEY]),
+		"an untouched house is worth more than a scratched one",
+		"%d against %d" % [richer[GameData.MONEY], poorer[GameData.MONEY]])
+
+	# **Losing costs a share of the stock and nothing else.**
+	var beaten := _scheduled_night(804)
+	Resources.gain(beaten, {GameData.WOOD: 100, GameData.STONE: 40})
+	# What was held, not what was handed over: the farm starts with some.
+	var wood_before := Resources.amount(beaten, GameData.WOOD)
+	var money_before := Resources.amount(beaten, GameData.MONEY)
+	for _i in 6000:
+		Sim.advance(beaten, 1)
+		if int(beaten["phase"]) != Phases.NIGHT:
+			break
+	expect(Resources.amount(beaten, GameData.WOOD)
+		== wood_before - int(floor(float(wood_before)
+			* GameData.DEFEAT_RESOURCE_LOSS)),
+		"a quarter of the wood is gone",
+		"%d of %d left" % [Resources.amount(beaten, GameData.WOOD), wood_before])
+	expect(Resources.amount(beaten, GameData.MONEY) == money_before,
+		"the money is not - a loss costs a day, not the run",
+		str(Resources.amount(beaten, GameData.MONEY)))
+
+	# **Confirming goes back to the farm, one day on.**
+	var day_before := int(beaten["day"])
+	expect(int(beaten["phase"]) == Phases.RESULT, "the payout is up")
+	(beaten["intent"] as Dictionary)["confirm_result"] = true
+	Sim.advance(beaten, 1)
+	expect(int(beaten["phase"]) == Phases.DAY, "and confirming ends it",
+		Phases.name_of(int(beaten["phase"])))
+	expect(int(beaten["day"]) == day_before,
+		"the day counter moved when the night ended, not twice",
+		str(beaten["day"]))
+	expect(int(beaten["day_tick"]) == 0, "a fresh morning")
+	expect(int(beaten["house_hp"]) == 0,
+		"and the house is still down until night two rebuilds it")
+
+	# **The farm is still there in the morning**, which is what makes a loss a
+	# setback rather than an ending.
+	expect(Farm.cells_with(beaten, &"tree").size() > 0, "the wood is there")
+	expect(Interact.verb_at(beaten, Farm.cells_with(beaten, &"tree")[0])
+		== &"chop", "and can be chopped again")
+
+	# **The whole cycle, driven end to end.** Day, build, night, payout, day.
+	var run := State.create(805)
+	expect(int(run["day"]) == 1 and int(run["phase"]) == Phases.DAY, "day one")
+	Resources.gain(run, {GameData.WOOD: 60, GameData.IRON: 60})
+	_arm_the_farm(run, 4)
+	(run["intent"] as Dictionary)["begin_night"] = true
+	Sim.advance(run, 1)
+	expect(int(run["phase"]) == Phases.PREPARATION, "the night is asked for")
+	var ticks := 0
+	for _i in 12000:
+		Sim.advance(run, 1)
+		ticks += 1
+		if int(run["phase"]) == Phases.RESULT:
+			break
+	(run["intent"] as Dictionary)["confirm_result"] = true
+	Sim.advance(run, 1)
+	expect(int(run["phase"]) == Phases.DAY, "and it comes back to the farm")
+	expect(int(run["day"]) == 2, "on day two", str(run["day"]))
+	print("  a whole night takes %d ticks - %.0f seconds"
+		% [ticks, float(ticks) / float(GameData.TICK_HZ)])
+	expect(ticks < 240 * GameData.SECONDS,
+		"and a night is minutes, not an evening",
+		"%d ticks" % ticks)
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## A night with towers already up, the way a player who spent their day would
+## arrive at one.
+func _defended_night(seed_value: int) -> Dictionary:
+	var state := State.create(seed_value)
+	Resources.gain(state, {GameData.WOOD: 200, GameData.IRON: 200,
+		GameData.STONE: 200})
+	_arm_the_farm(state, 4)
+	Phases.begin_preparation(state)
+	Sim.advance(state, GameData.PREPARATION_TICKS)
+	return state
+
+
+## Put `count` gun towers between the east spawn and the house.
+func _arm_the_farm(state: Dictionary, count: int) -> void:
+	var placed := 0
+	for x in range(22, 34):
+		for y in [7, 9, 11, 5]:
+			if placed >= count:
+				return
+			var cell := Vector2i(x, y)
+			if Farm.buildable(state, cell):
+				if Building.place(state, &"gun_tower", cell):
+					placed += 1

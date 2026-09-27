@@ -74,7 +74,15 @@ static func begin_night(state: Dictionary) -> bool:
 		return false
 	state["night"] = int(state["day"])
 	state["night_tick"] = 0
+	# Everything about what is coming is reset here rather than by whoever
+	# happens to look first: a night that inherited last night's wave counter
+	# would be a night that started halfway through.
+	state["killed"] = 0
+	state["killed_by_kind"] = {}
+	state["breaches"] = 0
+	state["house_hp"] = GameData.HOUSE_HP
 	_enter(state, NIGHT)
+	Waves.begin(state)
 	return true
 
 

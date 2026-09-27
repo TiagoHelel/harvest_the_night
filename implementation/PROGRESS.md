@@ -1232,3 +1232,81 @@ Notes:
   prints it and asserts only that all seven are accounted for - a lane of
   walking zombies is a test of the balance, not of the arithmetic, so the
   shots-per-kill count is measured against a penned group instead.
+
+## 0027 - Three waves, a result screen, and back to the farm - done 2026-09-27
+
+## THE FIRST PLAYABLE BUILD. Phase 1 is complete.
+
+What changed: the loop closes. Three waves arrive from the table, the night
+ends by itself, the payout is itemised on screen, and confirming it returns to
+a day that is better than the one before.
+
+Files: src/core/waves.gd, src/core/rewards.gd, src/ui/result_screen.gd,
+src/core/phases.gd, src/core/sim.gd, src/core/state.gd, src/core/player.gd,
+src/core/enemies.gd, src/core/game_data.gd, scenes/Main.tscn, src/ui/main.gd,
+src/tools/headless_check.gd, src/tools/input_check.gd
+
+Verify: PASS - 10 passed, 1 skipped, 53s. **524 asserts, 0 failed** (492
+before), **136 cases, 0 failed** (122 before). **Sim hash 3224086426 ->
+721873783**, **data hash 4216175348 -> 1636540132**.
+
+### Measured
+
+- A whole night is **2050 ticks, 68 seconds** - preparation, three waves, and
+  the last walker dying.
+- Four gun towers hold night one: **12 killed, 0 through, house untouched**,
+  paying **$122 + 10 wood + 8 stone + 4 iron**.
+- One gun tower against seven walkers kills five and lets two through.
+- Day one, mining flat out: 6 ore nodes at 6 seconds each is 6 iron in 36
+  seconds, then 60 seconds of regrowth. Fifteen iron - one gun tower - takes
+  about **190 seconds of a 240 second day**, of which 84 seconds is waiting
+  that can be spent chopping, planting or fishing. So day one is a real day and
+  the tower at the end of it is a real purchase.
+
+### A balance change the checkpoint forced
+
+**Night one was unloseable.** Twelve walkers at five damage is 60 against a
+house of 100, so a farm with nothing built on it survived the tutorial night
+with forty hit points to spare - the one night whose job is to teach that you
+have to build was teaching the opposite. Walker damage is **10** now: twelve of
+them is 120 against 100, undefended loses, one tower holds it with room. The
+rest of the enemy table is left for task 0068 to sweep against the autoplayer.
+
+### Was it fun? Honestly: not yet, and the reasons are specific
+
+The **structure** is right. The cycle closes, the numbers go up, the night is
+watchable - projectiles travel, the horde walks out of the dark two at a time,
+the house bar is the thing you are actually watching. The decision "do I spend
+today mining or farming" is real, because iron gates towers and iron is slow.
+
+But the answer to `design.md` section 17 - *after surviving the first night, do
+you want to go back and improve?* - is **"the pull is there and there is
+nothing to pull towards"**. Four things, in the order they matter:
+
+1. **"Improve" only means "another identical tower."** One tower, one enemy.
+   There is no *build* to make and so no decision with a shape. This is exactly
+   what phase 3 exists for (tasks 0042-0058: five towers, four enemies, walls
+   that reroute), and it is the single biggest gap.
+2. **No knife-edge.** With four towers night one is a foregone conclusion; with
+   none it is a loss. Nothing in between, because there is only one dial. The
+   tension the design document is after needs the other towers to exist before
+   it can exist.
+3. **A kill does not land.** A three-frame flash and nothing else - no sound, no
+   number, no particle. Tasks 0077, 0085 and 0088.
+4. **The day is mostly walking.** Gathering is holding a key; fishing (0030) is
+   the first thing in the day with a decision inside it.
+
+None of that is a reason to stop - it is a reason phases 2 and 3 are next, and
+every one of those four is already a task. What the checkpoint was for was
+finding out whether the *loop* works before building forty things on top of it,
+and it does: the three minutes exist, they end somewhere better than they
+started, and the reason to go again is legible even though what you would go
+and do is not yet varied enough to be interesting.
+
+**Recommendation for the next phase:** the backlog runs 0028-0041 (the full
+day) before 0042-0058 (the full night). On this evidence the night is the
+hungrier half - a second tower and a second enemy would do more for the loop
+right now than a third crop would. Not reordering it, because the day's
+resources are what the night's towers cost and 0031-0035 feed 0043-0048
+directly, but if the next playtest says the same thing, that is the swap to
+make.

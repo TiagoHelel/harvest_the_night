@@ -145,8 +145,8 @@ static func _bite(state: Dictionary, id: int, data: Dictionary) -> void:
 	Entities.remove(state, id)
 
 	if int(state["house_hp"]) <= 0:
-		# The night is lost the moment the house falls. Task 0027 is what pays
-		# out afterwards; this is only the ending.
+		# The night is lost the moment the house falls.
+		Rewards.settle(state, false)
 		Phases.enter_result(state, false)
 
 

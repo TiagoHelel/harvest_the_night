@@ -469,9 +469,15 @@ const SPEEDS: Array = [1, 2, 4]
 ## cannot disagree about where a zombie is. Lower is faster.
 const ENEMIES: Dictionary = {
 	&"walker": {
+		# **Ten, not five.** Twelve of them is night one, and at five damage a
+		# farm with nothing built on it survived the tutorial night with forty
+		# hit points to spare - so the one night whose job is to teach that you
+		# have to build taught the opposite. At ten, twelve walkers are 120
+		# against a house of 100: undefended loses, one tower holds it with
+		# room. Task 0068 sweeps the rest of this table against the autoplayer.
 		"hp": 20,                       # LEVER: hit points, 10-40
 		"ticks_per_tile": 20,           # LEVER: ticks, 12-30 (lower is faster)
-		"damage": 5,                    # LEVER: to the house, 2-10
+		"damage": 10,                   # LEVER: to the house, 4-16
 		"reward": 3,                    # LEVER: money, 1-6
 		"armour": 0,
 	},
@@ -528,6 +534,13 @@ const ENEMIES: Dictionary = {
 ## the shape, so that the first playable build of task 0027 has three waves to
 ## fight and the rest has somewhere to grow.
 const WAVE_GAP_TICKS := 15 * SECONDS    # LEVER: ticks, 8-30 seconds worth
+
+## How long between two members of the same wave.
+##
+## Eight zombies materialising on one tick is a magic trick; eight walking out
+## of the dark in a line is a wave, and it gives the towers something to do
+## while the player watches.
+const SPAWN_INTERVAL_TICKS := 20        # LEVER: ticks, 8-45
 
 const NIGHTS: Array = [
 	# 1 - the tutorial night: winnable with the one tower the first day buys.
@@ -869,7 +882,7 @@ static func digest() -> int:
 		"speeds": SPEEDS,
 		"enemies": ENEMIES,
 		"nights": NIGHTS,
-		"wave_gap": [WAVE_GAP_TICKS, MVP_NIGHTS],
+		"wave_gap": [WAVE_GAP_TICKS, SPAWN_INTERVAL_TICKS, MVP_NIGHTS],
 		"spawns": SPAWNS,
 		"rewards": REWARDS,
 		"defeat": [DEFEAT_RESOURCE_LOSS, DEFEAT_KEEPS_MONEY, DEFEAT_KEEPS_TECH],

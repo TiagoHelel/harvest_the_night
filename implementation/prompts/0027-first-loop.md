@@ -1,7 +1,7 @@
 # 0027 - Three waves, a result screen, and back to the farm
 
 - **Phase:** 1 - The first playable build
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0026, 0021
 - **Likely files:** src/core/waves.gd, src/ui/result_screen.gd
 

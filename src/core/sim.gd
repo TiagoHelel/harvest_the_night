@@ -31,7 +31,16 @@ static func tick(state: Dictionary) -> void:
 		Phases.NIGHT:
 			_tick_night(state)
 		Phases.RESULT:
-			pass        # nothing moves while the player reads the payout
+			_tick_result(state)
+
+
+## The payout, on screen. **Nothing else moves**: the farm waits while it is
+## read, which is the one moment in the game that it does.
+static func _tick_result(state: Dictionary) -> void:
+	var intent: Dictionary = state["intent"]
+	if bool(intent.get("confirm_result", false)):
+		intent["confirm_result"] = false
+		Phases.begin_day(state)
 
 
 ## The cozy half. Growing, gathering, producing, selling.
@@ -90,6 +99,7 @@ static func _tick_night(state: Dictionary) -> void:
 	# Waves spawn (0027), enemies move (0025), towers acquire and fire, shots
 	# in the air advance and land, and only then is the end of the night
 	# tested (0027).
+	Waves.tick(state)
 	Enemies.tick(state)
 	Towers.tick(state)
 	Combat.tick(state)

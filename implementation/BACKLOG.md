@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`######..................`  **26 / 108 done**
+`######..................`  **27 / 108 done**
 
-0 doing / 82 todo / 0 blocked across 9 phases.
+0 doing / 81 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0027 - Three waves, a result screen, and back to the farm**. The whole of what is left is
+First up: **0028 - Corn and carrot**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,26 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-82 task(s) left, the ready ones first, then what they
+81 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0027 - Three waves, a result screen, and back to the farm
-
-Ready to pick up.  Likely files: `src/core/waves.gd, src/ui/result_screen.gd`.
-
-**The MVP checkpoint.** Three waves of basic zombies, a night that ends, a payout, and a day 2 that is better than day 1. If this is not fun, nothing after it will be.
-
-- Three waves with a gap between them, all from data
-- The night ends when the last zombie of the last wave is gone, or when the house falls
-- A result screen showing what survived, what was killed and what it paid
-- Surviving pays money and resources; losing costs part of the stock, and both numbers are levers
-- Confirming the result returns to DAY with the day counter moved on
-
-  - done when: A human can play: gather, craft, build, fight, get paid, repeat - without the console open
-  - done when: The whole first cycle takes about three minutes
-  - done when: `headless_check` plays all three waves and asserts the payout
-  - done when: Say in the journal whether it was fun, honestly, because that is the question this whole phase exists to answer
 
 ### 0028 - Corn and carrot
 
@@ -167,6 +150,52 @@ The other half of a tower defence: making the zombies walk where you want them t
   - done when: Walling a lane visibly reroutes the next wave
   - done when: Sealing the farm completely makes them break in rather than freeze
   - done when: The field rebuild cost stays inside the budget with fifty walls
+
+### 0054 - The player's ability
+
+Ready to pick up.  Likely files: `src/core/ability.gd, src/ui/night_hud.gd`.
+
+One button that lets the player change a night they are losing, without turning the game into an action game.
+
+- One ability with a cooldown in ticks: a flare that slows and damages everything in an area
+- The cooldown is long enough that using it is a decision
+- It is resolved on the tick like everything else and is in the determinism hash
+- It reads clearly on screen: the player should see it working
+- Damage, radius, slow and cooldown are levers
+
+  - done when: It turns one losing wave per night, not every wave
+  - done when: Two uses in the same second are impossible
+
+### 0055 - Double speed and skipping the night
+
+Ready to pick up.  Likely files: `src/ui/night_hud.gd, src/core/sim.gd`.
+
+The semi-idle promise: if the defence is clearly going to hold, let the player say so and move on.
+
+- 1x, 2x and 4x, implemented as ticks per frame - never as a changed tick rate
+- Skip to the end simulates the rest of the night as fast as it can and shows the result
+- A skipped night and a watched night give an identical outcome from the same state - this is the test of the whole tick design
+- Speed is remembered across nights
+- Skipping is refused while the house is under a lever's worth of hit points, because that night is worth watching
+
+  - done when: Watched and skipped nights from one seed produce the same hash
+  - done when: 4x does not drop frames on a full board
+  - done when: `headless_check` runs a night both ways and compares
+
+### 0056 - The night HUD
+
+Ready to pick up.  Likely files: `src/ui/night_hud.gd`.
+
+Section 14 of the design document: which night, which wave, how the house is doing, and the three buttons.
+
+- Night number, wave counter, house hit point bar, ammunition and energy
+- Repair, ability and speed as the three controls, exactly as the design document lays them out
+- An incoming wave is announced before it arrives
+- The house bar turning dangerous is impossible to miss
+- It replaces the day HUD on the phase change, sharing no state
+
+  - done when: Every number on it is readable at 480x270 scaled up
+  - done when: `input_check` presses all three controls
 
 ### 0071 - The two palettes
 
@@ -394,7 +423,7 @@ Make the flow field earn its keep: cost, not just blocked, so zombies prefer the
 
 ### 0053 - Repair during the night
 
-Waits on 0046, 0027.  Likely files: `src/core/building.gd, src/ui/night_hud.gd`.
+Waits on 0046.  Likely files: `src/core/building.gd, src/ui/night_hud.gd`.
 
 A reason to be present at night: spend food and wood to put a wall back up while the wave is still coming.
 
@@ -406,52 +435,6 @@ A reason to be present at night: spend food and wood to put a wall back up while
 
   - done when: Repairing a wall mid-wave measurably changes whether it holds
   - done when: `input_check` repairs something
-
-### 0054 - The player's ability
-
-Waits on 0027.  Likely files: `src/core/ability.gd, src/ui/night_hud.gd`.
-
-One button that lets the player change a night they are losing, without turning the game into an action game.
-
-- One ability with a cooldown in ticks: a flare that slows and damages everything in an area
-- The cooldown is long enough that using it is a decision
-- It is resolved on the tick like everything else and is in the determinism hash
-- It reads clearly on screen: the player should see it working
-- Damage, radius, slow and cooldown are levers
-
-  - done when: It turns one losing wave per night, not every wave
-  - done when: Two uses in the same second are impossible
-
-### 0055 - Double speed and skipping the night
-
-Waits on 0027.  Likely files: `src/ui/night_hud.gd, src/core/sim.gd`.
-
-The semi-idle promise: if the defence is clearly going to hold, let the player say so and move on.
-
-- 1x, 2x and 4x, implemented as ticks per frame - never as a changed tick rate
-- Skip to the end simulates the rest of the night as fast as it can and shows the result
-- A skipped night and a watched night give an identical outcome from the same state - this is the test of the whole tick design
-- Speed is remembered across nights
-- Skipping is refused while the house is under a lever's worth of hit points, because that night is worth watching
-
-  - done when: Watched and skipped nights from one seed produce the same hash
-  - done when: 4x does not drop frames on a full board
-  - done when: `headless_check` runs a night both ways and compares
-
-### 0056 - The night HUD
-
-Waits on 0027.  Likely files: `src/ui/night_hud.gd`.
-
-Section 14 of the design document: which night, which wave, how the house is doing, and the three buttons.
-
-- Night number, wave counter, house hit point bar, ammunition and energy
-- Repair, ability and speed as the three controls, exactly as the design document lays them out
-- An incoming wave is announced before it arrives
-- The house bar turning dangerous is impossible to miss
-- It replaces the day HUD on the phase change, sharing no state
-
-  - done when: Every number on it is readable at 480x270 scaled up
-  - done when: `input_check` presses all three controls
 
 ### 0072 - The farm tileset
 
@@ -720,7 +703,7 @@ Losing things. A structure that breaks should be a small disaster the player wat
 
 ### 0059 - Waves as data
 
-Waits on 0027, 0050, 0051, 0052.  Likely files: `src/core/waves.gd, src/core/game_data.gd`.
+Waits on 0050, 0051, 0052.  Likely files: `src/core/waves.gd, src/core/game_data.gd`.
 
 Before authoring ten nights, make a night a table. Composition, timing and spawn points become numbers a designer edits, not code.
 
@@ -1274,7 +1257,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0011** [input_check harness](prompts/0011-input-check.md)
 - [x] **0012** [Debug overlay](prompts/0012-debug-overlay.md)
 
-## 1 - The first playable build  (14/15)
+## 1 - The first playable build  (15/15)
 
 - [x] **0013** [The world renders](prompts/0013-world-render.md)
 - [x] **0014** [Sprites generated from ASCII maps](prompts/0014-sprite-pipeline.md)
@@ -1290,7 +1273,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0024** [The shooting tower](prompts/0024-tower-gun.md)
 - [x] **0025** [Zombies walk to the house](prompts/0025-zombies-walk.md)
 - [x] **0026** [The tower kills the zombie](prompts/0026-combat.md)
-- [ ] **0027** [Three waves, a result screen, and back to the farm](prompts/0027-first-loop.md)
+- [x] **0027** [Three waves, a result screen, and back to the farm](prompts/0027-first-loop.md)
 
 ## 2 - The full day  (0/14)
 
@@ -1322,16 +1305,16 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [ ] **0050** [The runner](prompts/0050-enemy-runner.md) - needs 0049
 - [ ] **0051** [The tank](prompts/0051-enemy-tank.md) - needs 0049
 - [ ] **0052** [The breaker](prompts/0052-enemy-breaker.md) - needs 0049, 0046
-- [ ] **0053** [Repair during the night](prompts/0053-repair.md) - needs 0046, 0027
-- [ ] **0054** [The player's ability](prompts/0054-ability.md) - needs 0027
-- [ ] **0055** [Double speed and skipping the night](prompts/0055-speed-controls.md) - needs 0027
-- [ ] **0056** [The night HUD](prompts/0056-night-hud.md) - needs 0027
+- [ ] **0053** [Repair during the night](prompts/0053-repair.md) - needs 0046
+- [ ] **0054** [The player's ability](prompts/0054-ability.md)
+- [ ] **0055** [Double speed and skipping the night](prompts/0055-speed-controls.md)
+- [ ] **0056** [The night HUD](prompts/0056-night-hud.md)
 - [ ] **0057** [Structures take damage and die](prompts/0057-structure-damage.md) - needs 0046, 0052
 - [ ] **0058** [The Giant](prompts/0058-boss-giant.md) - needs 0051, 0052, 0057
 
 ## 4 - Ten nights and progression  (0/12)
 
-- [ ] **0059** [Waves as data](prompts/0059-wave-data.md) - needs 0027, 0050, 0051, 0052
+- [ ] **0059** [Waves as data](prompts/0059-wave-data.md) - needs 0050, 0051, 0052
 - [ ] **0060** [The ten nights, authored](prompts/0060-ten-nights.md) - needs 0059, 0058
 - [ ] **0061** [Night rewards](prompts/0061-rewards.md) - needs 0059
 - [ ] **0062** [Technology points](prompts/0062-tech-points.md) - needs 0061

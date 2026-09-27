@@ -34,7 +34,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 8
+const CASES := 9
 
 var passed := 0
 var failed := 0
@@ -72,6 +72,7 @@ func _run() -> void:
 	await _case_0021_day_hud()
 	await _case_0022_reality()
 	await _case_0023_build_mode()
+	await _case_0027_the_loop()
 	_finish()
 
 
@@ -825,6 +826,79 @@ func _point_at(view: WorldView, cell: Vector2i) -> void:
 	Input.warp_mouse(motion.position)
 	root.push_input(motion)
 	await frames(3)
+
+
+## 0027 - the loop, through the screen: press night, watch it, take the money,
+## come back to the farm.
+func _case_0027_the_loop() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var result: ResultScreen = require_control("ResultScreen")
+	var hud: DayHud = require_control("DayHud")
+	if driver == null or result == null:
+		_completed += 1
+		await close_scene()
+		return
+
+	var state := driver.state
+	expect(not result.visible, "the payout is not up during the day")
+
+	# Arm the farm the way a player who spent their day would, then press the
+	# button a player would press.
+	Resources.gain(state, {GameData.WOOD: 200, GameData.IRON: 200})
+	var placed := 0
+	for x in range(22, 34):
+		for y in [7, 9, 11, 5]:
+			if placed < 4 and Farm.buildable(state, Vector2i(x, y)):
+				if Building.place(state, &"gun_tower", Vector2i(x, y)):
+					placed += 1
+	expect(placed == 4, "four towers go up", str(placed))
+
+	await click_control("NightButton")
+	await until(func() -> bool: return int(state["phase"]) != Phases.DAY,
+		"the night to begin")
+
+	# Let the night play out. Faster than real time, because a night is a
+	# minute and a test is not.
+	driver.speed = 8
+	await until(func() -> bool: return int(state["phase"]) == Phases.RESULT,
+		"the night to finish", 4000)
+	driver.speed = 1
+	expect(int(state["phase"]) == Phases.RESULT, "the night ends by itself",
+		Phases.name_of(int(state["phase"])))
+
+	await until(func() -> bool: return result.visible, "the payout to come up")
+	expect(result.visible, "and the payout comes up")
+	expect(not hud.visible, "with the day HUD out of the way")
+
+	var title: Label = require_control("ResultTitle")
+	expect(title != null and title.text.contains("NIGHT 1"),
+		"it says which night", title.text if title else "")
+	expect(title != null and title.text.contains("SURVIVED"),
+		"and how it went", title.text if title else "")
+
+	# **Taking the money is a click.**
+	var money_before := Resources.amount(state, GameData.MONEY)
+	expect(money_before > 25, "the payout already landed",
+		str(money_before))
+	await click_control("ContinueButton")
+	await until(func() -> bool: return int(state["phase"]) == Phases.DAY,
+		"the farm to come back")
+	expect(int(state["phase"]) == Phases.DAY, "and it goes back to the farm")
+	expect(int(state["day"]) == 2, "on day two", str(state["day"]))
+	await until(func() -> bool: return hud.visible, "the day HUD to return")
+	expect(hud.visible, "with the HUD back")
+	expect(not result.visible, "and the payout gone")
+
+	# **Day two is a better day than day one.** The whole point of the loop.
+	expect(Resources.amount(state, GameData.MONEY) > 25,
+		"there is more money than the farm started with",
+		str(Resources.amount(state, GameData.MONEY)))
+	expect(Interact.verb_at(state, Farm.cells_with(state, &"tree")[0]) == &"chop",
+		"and there are trees to chop again")
+
+	await close_scene()
+	_completed += 1     # last line: an abandoned case never gets here
 
 
 # ----------------------------------------------------------------- the helpers
