@@ -41,7 +41,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 23
+const CASES := 24
 
 var passed := 0
 var failed := 0
@@ -94,6 +94,7 @@ func _run() -> void:
 	await _case_0040_shop()
 	await _case_0041_tutorial()
 	await _case_0046_walls()
+	await _case_0053_repair()
 	_finish()
 
 
@@ -2450,3 +2451,81 @@ func move_mouse_to_cell(cell: Vector2i) -> void:
 	ev.global_position = at
 	Input.parse_input_event(ev)
 	await process_frame
+
+
+## 0053 - mending a wall at night, through the key that does it.
+func _case_0053_repair() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	if driver == null:
+		_completed += 1
+		await close_scene()
+		return
+
+	var state := driver.state
+	Resources.gain(state, {GameData.STONE: 200, GameData.WOOD: 200,
+		GameData.FOOD: 200})
+
+	# A wall the player can stand next to, and a night to mend it in.
+	var spot := Vector2i(-1, -1)
+	var stand := Vector2i(-1, -1)
+	for y in range(2, Grid.HEIGHT - 2):
+		for x in range(20, Grid.WIDTH - 2):
+			var cell := Vector2i(x, y)
+			var beside := cell + Vector2i(-1, 0)
+			if Farm.buildable(state, cell) and Farm.walkable(state, beside):
+				spot = cell
+				stand = beside
+				break
+		if spot.x >= 0:
+			break
+	expect(spot.x >= 0, "there is somewhere to put a wall")
+	if spot.x < 0:
+		await close_scene()
+		_completed += 1
+		return
+
+	Farm.place(state, spot, {"id": &"wall",
+		"hp": int((GameData.DEFENCES[&"wall"] as Dictionary)["hp"])})
+	Phases.begin_preparation(state)
+	Sim.advance(state, GameData.PREPARATION_TICKS)
+	expect(int(state["phase"]) == Phases.NIGHT, "it is night")
+
+	Farm.damage(state, spot, 60)
+	var hurt := int(Farm.occupant(state, spot).get("hp", 0))
+	expect(Repair.needs_repair(state, spot), "the wall wants mending")
+
+	_stand_at(state, stand, Player.EAST)
+	expect(Player.target(state) == spot,
+		"the player is facing it", str(Player.target(state)))
+	expect(Interact.verb_at(state, spot) == &"repair",
+		"and the cell offers to be mended",
+		str(Interact.verb_at(state, spot)))
+
+	var food_before := Resources.amount(state, GameData.FOOD)
+
+	# **The key that does everything else does this too.** No repair button,
+	# no mode: stand in front of it and hold the same key you chop with.
+	await hold_key(KEY_SPACE, 40)
+	await frames(2)
+
+	var mended := int(Farm.occupant(state, spot).get("hp", 0))
+	expect(mended > hurt,
+		"holding the interact key puts hit points back into the wall",
+		"%d against %d" % [mended, hurt])
+	expect(Resources.amount(state, GameData.FOOD) < food_before,
+		"and food comes out of the larder to pay for them",
+		str(Resources.amount(state, GameData.FOOD)))
+
+	# **Walking away stops it**, the same as every other job.
+	var at_release := int(Farm.occupant(state, spot).get("hp", 0))
+	await hold_key(KEY_A, 6)
+	await frames(6)
+	expect(not Player.is_busy(state),
+		"stepping away gives up on the job")
+	expect(int(Farm.occupant(state, spot).get("hp", 0)) == at_release,
+		"and nothing more goes into the wall after that",
+		str(Farm.occupant(state, spot).get("hp", 0)))
+
+	await close_scene()
+	_completed += 1     # last line: an abandoned case never gets here

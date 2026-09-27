@@ -8,14 +8,24 @@ extends RefCounted
 ## you cooked and then sold, which made the kitchen a money press with a
 ## thematic hat on.
 ##
-## ## What this task owns and what task 0053 does not get for free
+## ## The ledger, and then the night
 ##
-## 0034 owns the **ledger path**: what a hit point costs, whether it can be
-## paid for, and taking it. Task 0053 owns the night interaction on top of it -
-## standing near the thing, taking time over it, being interrupted, and the
-## worse rate for the house. So the functions here are deliberately about
-## arithmetic and resources and know nothing about where the player is
-## standing.
+## 0034 owned the **ledger path**: what a hit point costs, whether it can be
+## paid for, and taking it. Task 0053 added the rest of it - the worse rate for
+## the house, and how long a hit point takes.
+##
+## **Standing near it, taking time and being interrupted are not here**, and
+## that is the point. Repair is a verb like chopping: `Interact` offers it on a
+## cell that is damaged and can be paid for, `Player` runs it off the same
+## action loop as everything else, and walking away stops it because walking
+## away stops every job in the game. One hit point per work cycle, so the key
+## being held down is what makes the wall come back.
+##
+## ## The house costs more and takes longer
+##
+## One lever, `HOUSE_REPAIR_PERCENT`, applied to both. Patching a roof is not
+## nailing a plank back onto a fence, and a player who wants the wall up before
+## the next wave should be out there rather than indoors.
 ##
 ## ## All or nothing, per hit point
 ##
@@ -34,7 +44,9 @@ const HOUSE := &"house"
 
 # ------------------------------------------------------------------- asking
 
-## What putting `hp` hit points back costs.
+## What putting `hp` hit points back costs **at the base rate**, before
+## anything about which cell it is. The UI shows this; the rules use
+## `cost_at()`.
 static func cost_for(hp: int) -> Dictionary:
 	var out := {}
 	if hp <= 0:
@@ -42,6 +54,41 @@ static func cost_for(hp: int) -> Dictionary:
 	for res in GameData.sorted_names(GameData.REPAIR_COST_PER_HP.keys()):
 		out[res] = int(GameData.REPAIR_COST_PER_HP[res]) * hp
 	return out
+
+
+## Whether this cell is the house, which is charged at the worse rate.
+static func is_house(state: Dictionary, cell: Vector2i) -> bool:
+	return StringName(Farm.occupant(state, cell).get("id", &"")) == HOUSE
+
+
+## What this cell charges, as a percentage of the base rate.
+static func percent_at(state: Dictionary, cell: Vector2i) -> int:
+	return GameData.HOUSE_REPAIR_PERCENT if is_house(state, cell) else 100
+
+
+## What putting `hp` hit points back into **this cell** costs.
+static func cost_at(state: Dictionary, cell: Vector2i, hp: int) -> Dictionary:
+	var percent := percent_at(state, cell)
+	var out := {}
+	for res in GameData.sorted_names(cost_for(hp).keys()):
+		# Never free because the arithmetic rounded down: a hit point that
+		# was being paid for at all is paid for.
+		out[res] = maxi(int(cost_for(hp)[res]) * percent / 100, 1)
+	return out
+
+
+## How long one hit point takes to put back into this cell.
+static func ticks_at(state: Dictionary, cell: Vector2i) -> int:
+	return maxi(GameData.REPAIR_TICKS_PER_HP * percent_at(state, cell) / 100, 1)
+
+
+## Whether there is something here to mend **and** the means to mend it.
+##
+## Both halves matter: `Interact` offers the verb off this, and a cell that
+## offered "repair" with an empty larder would be the game telling the player a
+## key does something it does not.
+static func can_mend(state: Dictionary, cell: Vector2i) -> bool:
+	return max_affordable(state, cell) > 0
 
 
 ## How much is missing from whatever is on this cell. The house answers for
@@ -64,11 +111,12 @@ static func needs_repair(state: Dictionary, cell: Vector2i) -> bool:
 	return damage_at(state, cell) > 0
 
 
-## The most hit points the ledger could pay for right now, whatever is damaged.
-static func affordable_hp(state: Dictionary) -> int:
+## The most hit points the ledger could pay for right now at a given rate.
+static func affordable_hp(state: Dictionary, percent: int = 100) -> int:
 	var most := -1
 	for res in GameData.sorted_names(GameData.REPAIR_COST_PER_HP.keys()):
-		var each := int(GameData.REPAIR_COST_PER_HP[res])
+		var each := maxi(int(GameData.REPAIR_COST_PER_HP[res]) * percent / 100,
+			1)
 		if each <= 0:
 			continue
 		var can := Resources.amount(state, res) / each
@@ -77,9 +125,10 @@ static func affordable_hp(state: Dictionary) -> int:
 
 
 ## How many hit points could actually go back into this cell: what is missing,
-## capped by what can be paid for.
+## capped by what can be paid for at this cell's rate.
 static func max_affordable(state: Dictionary, cell: Vector2i) -> int:
-	return mini(damage_at(state, cell), affordable_hp(state))
+	return mini(damage_at(state, cell),
+		affordable_hp(state, percent_at(state, cell)))
 
 
 # -------------------------------------------------------------------- doing
@@ -93,7 +142,7 @@ static func apply(state: Dictionary, cell: Vector2i, hp: int) -> int:
 	var doing := mini(hp, max_affordable(state, cell))
 	if doing <= 0:
 		return 0
-	if not Resources.pay(state, cost_for(doing)):
+	if not Resources.pay(state, cost_at(state, cell, doing)):
 		return 0
 
 	var on := Farm.occupant(state, cell)

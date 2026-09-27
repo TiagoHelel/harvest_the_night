@@ -830,7 +830,16 @@ const TUTORIAL: Array = [
 ## What repairing costs, per hit point put back.
 const REPAIR_COST_PER_HP: Dictionary = {FOOD: 1, WOOD: 1}
 const REPAIR_TICKS_PER_HP := 3          # LEVER: ticks, 1-8
-const HOUSE_REPAIR_PENALTY := 2.0       # LEVER: multiplier, 1.5-3.0
+## **A percentage, not a multiplier.** This was `2.0` and nothing read it, for
+## the same reason nothing could: `src/core/` is integer arithmetic. The sixth
+## fraction found that way, after `WATER_GROWTH_BONUS`, `BROWNOUT_RATE`,
+## `splash_falloff`, `pierce_falloff` and `structure_damage_multiplier`.
+##
+## It costs the house twice as much per hit point **and** takes twice as long,
+## which is one number doing both jobs: patching the roof is not the same kind
+## of work as nailing a plank back on a fence, and a player who wants the wall
+## up before the next wave should be out there rather than indoors.
+const HOUSE_REPAIR_PERCENT := 200       # LEVER: percent, 150-300
 
 ## The one button the player has during a night.
 const ABILITY: Dictionary = {
@@ -1898,7 +1907,7 @@ static func digest() -> int:
 		"defences": DEFENCES,
 		"pathing": [TERRAIN_COST, WIDEST_STEP],
 		"repair": [REPAIR_COST_PER_HP, REPAIR_TICKS_PER_HP,
-			HOUSE_REPAIR_PENALTY],
+			HOUSE_REPAIR_PERCENT],
 		"ability": ABILITY,
 		"hurt": [HURT_TICKS],
 		"speeds": SPEEDS,

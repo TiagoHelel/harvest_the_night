@@ -3865,3 +3865,82 @@ to stop adding them and start sharing one, and task 0102 owns that number.
 
 `python tools/verify.py` prints PASS: 1631 asserts, 371 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+
+## 0053 - Repair during the night
+
+Task 0034 built the ledger half of this and said in its own header what it was
+leaving behind: "standing near the thing, taking time over it, being
+interrupted, and the worse rate for the house". All four are here, and three
+of them cost no new machinery at all.
+
+### Repair is a verb
+
+`Interact` offers `repair` on a cell that is damaged and can be paid for, and
+everything else falls out of the loop that already exists. `Player` runs it
+like chopping a tree: one hit point per work cycle, so a wall comes back a
+plank at a time; walking away stops it because walking away stops every job in
+the game; and standing near it is `Player.target()`, the same reach every
+other verb uses.
+
+`interact.gd` had named this task in a comment since it was written -
+"Repairing (task 0053) and dropping a barricade (task 0047) are the night's
+own verbs" - so the work was to not put repair on `DAY_ONLY` and to fill in
+one arm of `complete()`.
+
+The highlight needed nothing: `main.gd` asks `Interact.verb_at()` what the
+cell under the player offers and draws a box when the answer is not empty, so
+a chewed wall started glowing at night without a line of view code. That is
+what the verb table is for.
+
+### Two more unread levers
+
+`REPAIR_TICKS_PER_HP` had been in the table since 0034 and nothing read it.
+`HOUSE_REPAIR_PENALTY` had been `2.0` - the sixth fraction found this way, and
+it could not have been read, because the rules are integers. It is
+`HOUSE_REPAIR_PERCENT` at 200 now, and it does both jobs the requirement asks
+for: the house costs twice as much per hit point **and** takes twice as long.
+One number, because patching a roof is not nailing a plank back onto a fence.
+
+0034's own asserts were written at the base rate for the house, since the
+penalty was unread. They read the house rate now.
+
+### Measured
+
+    ten hit points: {food: 10, wood: 10} on a wall, {food: 20, wood: 20} on
+      the house (3 ticks each against 6)
+    left to it for 400 ticks it put 90 hit points back; walking away after
+      200 put back 66
+    a wall under a walker: 293 ticks on its own, 839 with somebody mending it
+      (259 food). Chewing 0.50 a tick against mending 0.33
+
+The last line is the done-when and it wants reading carefully. Mending a wall
+mid-wave nearly triples how long it stands - 293 ticks to 839 - and that is
+"measurably changes whether it holds". It does **not** hold for ever: a walker
+takes half a hit point a tick off and a repairer puts a third of one back, so
+the wall is still losing, slowly. That is time bought rather than a wall that
+never falls, and both numbers are levers - `REPAIR_TICKS_PER_HP` (1-8, at 3)
+against the walker's damage and speed. At 2 the two rates tie exactly and at 1
+the repairer wins outright; whether one pair of hands should beat one zombie
+is a balance question, and it is written here rather than decided quietly.
+
+### Two tests that were wrong about the game
+
+Both worth recording, because both looked like bugs and were not:
+
+- The first interruption test released the key half way and measured no
+  difference. Correct: a verb here runs until the player cancels, steps, or
+  the cell stops offering it. One press fells a whole tree, and repairing is
+  not a special case. It walks away now.
+- The first "wall under attack" test put one wall on the route and nobody ever
+  chewed it. Also correct: task 0049 measured that a single wall on open
+  ground is walked around for nothing. The test seals the column.
+
+### Hashes
+
+| | from | to | why |
+|---|---|---|---|
+| sim hash | `3214589414` | `3214589414` | **unchanged** - repair only happens when the player acts, and the determinism scenario does not repair |
+| data hash | `1507247408` | `3795708698` | `HOUSE_REPAIR_PENALTY` 2.0 became `HOUSE_REPAIR_PERCENT` 200 |
+
+`python tools/verify.py` prints PASS: 1663 asserts, 380 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

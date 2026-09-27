@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 45
+const GROUPS := 46
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -109,6 +109,7 @@ func _run() -> void:
 	_task_0050_runner()
 	_task_0051_tank()
 	_task_0052_breaker()
+	_task_0053_repair()
 
 
 func _finish() -> void:
@@ -3971,36 +3972,59 @@ func _task_0034_cooking() -> void:
 	for res in GameData.sorted_names(GameData.REPAIR_COST_PER_HP.keys()):
 		Resources.spend(hurt, res, Resources.amount(hurt, res))
 	expect(Repair.affordable_hp(hurt) == 0, "an empty larder buys no repair")
+	expect(not Repair.can_mend(hurt, house),
+		"and nothing offers to be mended when there is nothing to mend it "
+		+ "with - the highlight never promises a key that would do nothing")
 	expect(Repair.apply(hurt, house, 10) == 0, "so nothing goes back")
 	expect(int(hurt["house_hp"]) == GameData.HOUSE_HP - 20,
 		"and the house is where it was", str(hurt["house_hp"]))
 
 	# With food, it does - and the food is gone from the ledger.
-	Resources.gain(hurt, {GameData.FOOD: 12, GameData.WOOD: 12})
+	#
+	# **The house is charged at the worse rate**, which task 0053 made real:
+	# `HOUSE_REPAIR_PERCENT` had been in the table since 0034 and nothing read
+	# it, so this block used to be written at the base rate and twelve of each
+	# bought eight hit points. It buys six now, and that is the lever working.
+	Resources.gain(hurt, {GameData.FOOD: 24, GameData.WOOD: 24})
 	var food_held := Resources.amount(hurt, GameData.FOOD)
 	var wood_held := Resources.amount(hurt, GameData.WOOD)
 	var put_back := Repair.apply(hurt, house, 8)
 	expect(put_back == 8, "eight hit points go back", str(put_back))
 	expect(int(hurt["house_hp"]) == GameData.HOUSE_HP - 12,
 		"and the house is that much better", str(hurt["house_hp"]))
+	var each := Repair.cost_at(hurt, house, 8)
 	expect(Resources.amount(hurt, GameData.FOOD)
-		== food_held - 8 * int(GameData.REPAIR_COST_PER_HP[GameData.FOOD]),
+		== food_held - int(each[GameData.FOOD]),
 		"paid for in food, out of the ledger",
 		str(Resources.amount(hurt, GameData.FOOD)))
 	expect(Resources.amount(hurt, GameData.WOOD)
-		== wood_held - 8 * int(GameData.REPAIR_COST_PER_HP[GameData.WOOD]),
+		== wood_held - int(each[GameData.WOOD]),
 		"and in wood", str(Resources.amount(hurt, GameData.WOOD)))
+	expect(int(each[GameData.FOOD])
+		== 8 * int(GameData.REPAIR_COST_PER_HP[GameData.FOOD])
+			* GameData.HOUSE_REPAIR_PERCENT / 100,
+		"which is the base rate times the house's own penalty",
+		str(each[GameData.FOOD]))
 
 	# **Never more than is broken, and never more than is paid for.**
+	# Capped by what the larder buys **at this cell's rate**, which for the
+	# house is half what the same food would buy on a fence.
 	expect(Repair.max_affordable(hurt, house) == mini(12,
-		Repair.affordable_hp(hurt)),
+		Repair.affordable_hp(hurt, Repair.percent_at(hurt, house))),
 		"what is missing, capped by what is in the larder",
 		str(Repair.max_affordable(hurt, house)))
+	expect(Repair.affordable_hp(hurt, Repair.percent_at(hurt, house))
+		< Repair.affordable_hp(hurt),
+		"and the same food goes half as far on the house as on a wall",
+		"%d against %d"
+			% [Repair.affordable_hp(hurt, Repair.percent_at(hurt, house)),
+				Repair.affordable_hp(hurt)])
 	var rest := Repair.apply_all(hurt, house)
 	expect(int(hurt["house_hp"]) <= GameData.HOUSE_HP,
 		"a house is never mended past whole", str(hurt["house_hp"]))
-	print("  repair: %d hp for %s, house back to %d/%d"
-		% [put_back + rest, str(Repair.cost_for(put_back + rest)),
+	print("  repair: %d hp of house for %s (the base rate is %s), back to %d/%d"
+		% [put_back + rest, str(Repair.cost_at(hurt, house, put_back + rest)),
+			str(Repair.cost_for(put_back + rest)),
 			int(hurt["house_hp"]), GameData.HOUSE_HP])
 
 	# **Food is worth spending rather than selling**, at least sometimes: a
@@ -7792,3 +7816,246 @@ func _hp_of(state: Dictionary, cells: Array) -> int:
 	for cell in cells:
 		total += int(Farm.occupant(state, cell).get("hp", 0))
 	return total
+
+
+## 0053 - repairing at night: a reason to be out there while it is coming.
+func _task_0053_repair() -> void:
+	var wall_hp := int((GameData.DEFENCES[&"wall"] as Dictionary)["hp"])
+
+	# **It is a night verb, and one of only two.**
+	expect(not Interact.DAY_ONLY.has(&"repair"),
+		"repairing works after dark", str(Interact.DAY_ONLY))
+	expect(Interact.all_verbs().has(&"repair"),
+		"and it is a verb the tables know about")
+	expect(not Interact.is_instant(&"repair"),
+		"it is work rather than a moment")
+	expect(Interact.repeats(&"repair"),
+		"and it keeps at it once started - one hit point a cycle, the same "
+		+ "way one press fells a whole tree")
+
+	# **A damaged wall offers to be mended, a whole one does not.**
+	var night := _armed_prep(3500)
+	Resources.gain(night, {GameData.FOOD: 400, GameData.WOOD: 400})
+	var spot := _room_for(night, Vector2i(1, 1))
+	expect(Building.place(night, &"wall", spot), "a wall goes up")
+	_night_falls(night)
+	expect(Interact.verb_at(night, spot) == &"",
+		"a whole wall offers nothing", str(Interact.verb_at(night, spot)))
+	Farm.damage(night, spot, 50)
+	expect(Interact.verb_at(night, spot) == &"repair",
+		"a chewed one offers to be mended",
+		str(Interact.verb_at(night, spot)))
+
+	# **A destroyed one cannot be repaired, only rebuilt.** The requirement.
+	var rubble := _armed_prep(3501)
+	Resources.gain(rubble, {GameData.FOOD: 400, GameData.WOOD: 400})
+	var gone := _room_for(rubble, Vector2i(1, 1))
+	Building.place(rubble, &"wall", gone)
+	_night_falls(rubble)
+	Farm.damage(rubble, gone, wall_hp * 2)
+	expect(Farm.is_empty(rubble, gone), "the wall is gone")
+	expect(Repair.damage_at(rubble, gone) == 0,
+		"and an empty cell has nothing to mend",
+		str(Repair.damage_at(rubble, gone)))
+	expect(not Repair.can_mend(rubble, gone), "so it offers nothing")
+	expect(Repair.apply(rubble, gone, 10) == 0,
+		"and putting hit points into a hole does nothing at all")
+
+	# **An empty larder offers nothing either.**
+	var broke := _armed_prep(3502)
+	var bare := _room_for(broke, Vector2i(1, 1))
+	Building.place(broke, &"wall", bare)
+	_night_falls(broke)
+	Farm.damage(broke, bare, 50)
+	for res in GameData.sorted_names(GameData.REPAIR_COST_PER_HP.keys()):
+		Resources.spend(broke, res, Resources.amount(broke, res))
+	expect(Interact.verb_at(broke, bare) == &"",
+		"with nothing to mend it with, the cell offers nothing - the player is "
+		+ "never told a key does something it does not",
+		str(Interact.verb_at(broke, bare)))
+
+	# **The house costs more and takes longer.** The requirement, both halves
+	# out of one lever.
+	var house: Vector2i = Farm.cells_with(night, &"house")[0]
+	var on_house := Repair.cost_at(night, house, 10)
+	var on_wall := Repair.cost_at(night, spot, 10)
+	print("  ten hit points: %s on a wall, %s on the house (%d ticks each "
+		% [str(on_wall), str(on_house), Repair.ticks_at(night, spot)]
+		+ "against %d)" % Repair.ticks_at(night, house))
+	for res in GameData.sorted_names(on_wall.keys()):
+		expect(int(on_house[res]) > int(on_wall[res]),
+			"the house costs more %s per hit point" % res,
+			"%d against %d" % [on_house[res], on_wall[res]])
+		expect(int(on_house[res]) == int(on_wall[res])
+			* GameData.HOUSE_REPAIR_PERCENT / 100,
+			"by exactly the penalty the lever names", str(on_house[res]))
+	expect(Repair.ticks_at(night, house) > Repair.ticks_at(night, spot),
+		"and takes longer per hit point",
+		"%d against %d"
+			% [Repair.ticks_at(night, house), Repair.ticks_at(night, spot)])
+	expect(Interact.ticks_for(night, house, &"repair")
+		== Repair.ticks_at(night, house),
+		"which is what the action loop asks for and gets",
+		str(Interact.ticks_for(night, house, &"repair")))
+	expect(typeof(GameData.HOUSE_REPAIR_PERCENT) == TYPE_INT,
+		"and the penalty is a whole number - it was 2.0 and unreadable for "
+		+ "nineteen tasks")
+
+	# **Mending takes time, and walking away stops it.**
+	#
+	# Walking away, not letting go: a verb in this game runs until the player
+	# cancels, steps, or the cell stops offering it. That is how chopping has
+	# always worked - one press fells a tree - and repairing is not a special
+	# case. The first version of this test released the key and measured no
+	# difference at all, which is the rule working rather than failing.
+	var mend := _mend_a_wall(3503, 400, false)
+	var quit_early := _mend_a_wall(3503, 400, true)
+	print("  left to it for %d ticks it put %d hit points back; walking away "
+		% [mend["ticks"], mend["mended"]] + "after %d put back %d"
+		% [quit_early["ticks"], quit_early["mended"]])
+	expect(mend["mended"] > 0, "it mends the wall", str(mend))
+	expect(mend["mended"] <= mend["ticks"] / GameData.REPAIR_TICKS_PER_HP,
+		"no faster than the lever allows - it is work, not a button",
+		"%d in %d ticks" % [mend["mended"], mend["ticks"]])
+	expect(quit_early["mended"] < mend["mended"],
+		"and walking away stops it where it got to",
+		"%d against %d" % [quit_early["mended"], mend["mended"]])
+	expect(quit_early["mended"] > 0,
+		"keeping what was already paid for - it is interrupted, not undone",
+		str(quit_early["mended"]))
+	expect(mend["spent"] == mend["mended"]
+		* int(GameData.REPAIR_COST_PER_HP[GameData.FOOD]),
+		"and every hit point that went back was paid for",
+		"%d food for %d hp" % [mend["spent"], mend["mended"]])
+
+	# **Out of reach is out of the question.**
+	var far := _mend_a_wall(3504, 400, false, true)
+	expect(far["mended"] == 0,
+		"standing across the farm from a broken wall mends nothing",
+		str(far))
+
+	# **Repairing mid-wave measurably changes whether it holds.** The
+	# done-when: the same wall, the same walker, the same seed.
+	var alone := _wall_under_attack(3505, false)
+	var helped := _wall_under_attack(3505, true)
+	var walker: Dictionary = GameData.ENEMIES[&"walker"]
+	# The two rates, which are what decide it and are both levers.
+	var chewing := int(walker["damage"]) * 100 / int(walker["ticks_per_tile"])
+	var mending := 100 / GameData.REPAIR_TICKS_PER_HP
+	print("  a wall under a walker: %d ticks on its own, %d with somebody "
+		% [alone["fell_at"], helped["fell_at"]]
+		+ "mending it (%d food). Chewing %d.%02d a tick against mending "
+		% [helped["spent"], chewing / 100, chewing % 100]
+		+ "%d.%02d" % [mending / 100, mending % 100])
+	expect(alone["fell_at"] > 0, "on its own the wall goes down", str(alone))
+	expect(helped["spent"] > 0, "mending it costs food and wood", str(helped))
+	# **Measurably changes whether it holds**, which is the done-when. It
+	# does not hold *for ever*: one walker takes 0.50 hit points a tick off
+	# and one repairer puts 0.33 back, so the wall is still losing - slowly.
+	# Both numbers are levers and the journal has the arithmetic.
+	expect(helped["fell_at"] > alone["fell_at"] * 2,
+		"and somebody mending it more than doubles how long it stands",
+		"%d against %d" % [helped["fell_at"], alone["fell_at"]])
+	expect(chewing > mending,
+		"one pair of hands does not out-mend one walker at these levers - "
+		+ "which is why it is time bought rather than a wall that never "
+		+ "falls", "%d against %d" % [chewing, mending])
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## Put the player next to a damaged wall and set them mending.
+##
+## `walk_off` has them step away half way through, which is how a job is
+## interrupted here; `stand_off` parks them across the farm from the start,
+## which is the reach test.
+func _mend_a_wall(seed_value: int, ticks: int, walk_off: bool,
+		stand_off: bool = false) -> Dictionary:
+	var state := _armed_prep(seed_value)
+	Resources.gain(state, {GameData.FOOD: 400, GameData.WOOD: 400})
+	var spot := _room_for(state, Vector2i(1, 1))
+	Building.place(state, &"wall", spot)
+	_night_falls(state)
+	Farm.damage(state, spot, 90)
+	var hurt := int(Farm.occupant(state, spot).get("hp", 0))
+
+	_stand_beside(state, spot if not stand_off else Farm.house_centre(state))
+	var food_before := Resources.amount(state, GameData.FOOD)
+	var intent: Dictionary = state["intent"]
+	for tick in ticks:
+		intent["interact"] = tick == 0
+		# Half way through, take one step. That is what stops a job.
+		intent["move"] = [1, 0] if walk_off and tick == ticks / 2 else [0, 0]
+		Sim.advance(state, 1)
+	intent["move"] = [0, 0]
+
+	return {
+		"ticks": ticks if not walk_off else ticks / 2,
+		"mended": int(Farm.occupant(state, spot).get("hp", 0)) - hurt,
+		"spent": food_before - Resources.amount(state, GameData.FOOD),
+	}
+
+
+## Stand the player on a cell next to this one, facing it.
+func _stand_beside(state: Dictionary, cell: Vector2i) -> void:
+	var player: Dictionary = state["player"]
+	for i in Player.FACING_STEPS.size():
+		var step: Vector2i = Player.FACING_STEPS[i]
+		var at: Vector2i = cell - step
+		if not Farm.walkable(state, at):
+			continue
+		player["pos"] = [at.x * Player.SUBTILE + Player.SUBTILE / 2,
+			at.y * Player.SUBTILE + Player.SUBTILE / 2]
+		player["facing"] = i
+		return
+	# Nowhere to stand: put them on it, which `Player.target()` also accepts.
+	player["pos"] = [cell.x * Player.SUBTILE + Player.SUBTILE / 2,
+		cell.y * Player.SUBTILE + Player.SUBTILE / 2]
+
+
+## One walker chewing one wall, with or without somebody mending it.
+func _wall_under_attack(seed_value: int, mending: bool) -> Dictionary:
+	var state := _armed_prep(seed_value)
+	Resources.gain(state, {GameData.FOOD: 900, GameData.WOOD: 900})
+	Pathing.refresh(state)
+	var spawn: Vector2i = Enemies.spawn_cells(state, 0)[0]
+	var route := _route_from(state, spawn)
+	var spot: Vector2i = route[4]
+	# **The whole column, not one wall.** A single wall on open ground is
+	# walked around for nothing - task 0049 measured that - so a test of
+	# mending a wall under attack has to put the wall somewhere they have to
+	# come through.
+	var hp := int((GameData.DEFENCES[&"wall"] as Dictionary)["hp"])
+	for y in Grid.HEIGHT:
+		var cell := Vector2i(spot.x, y)
+		if Farm.buildable(state, cell):
+			Farm.place(state, cell, {"id": &"wall", "hp": hp})
+	_night_falls(state)
+	Pathing.refresh(state)
+
+	# A walker that has to come through this cell, and nothing else on the farm
+	# to distract either of them.
+	Entities.spawn(state, &"walker", spawn)
+	_stand_beside(state, spot)
+	var food_before := Resources.amount(state, GameData.FOOD)
+	var intent: Dictionary = state["intent"]
+	var fell_at := 0
+	for _tick in 3000:
+		# **Pressed every tick, not once at the start.** The wall is whole
+		# when the night begins, so a cell that offers nothing to do is a
+		# press that starts nothing - and the player standing there waiting
+		# for the first bite is exactly what this measures.
+		intent["interact"] = mending
+		intent["interact_held"] = mending
+		Sim.advance(state, 1)
+		fell_at += 1
+		if Farm.is_empty(state, spot):
+			break
+	intent["interact_held"] = false
+	intent["interact"] = false
+	if not Farm.is_empty(state, spot):
+		fell_at = 0         # it held
+	return {
+		"fell_at": fell_at,
+		"spent": food_before - Resources.amount(state, GameData.FOOD),
+	}

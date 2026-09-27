@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`###########.............`  **52 / 109 done**
+`############............`  **53 / 109 done**
 
-0 doing / 57 todo / 0 blocked across 9 phases.
+0 doing / 56 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0053 - Repair during the night**. The whole of what is left is
+First up: **0054 - The player's ability**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,24 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-57 task(s) left, the ready ones first, then what they
+56 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0053 - Repair during the night
-
-Ready to pick up.  Likely files: `src/core/building.gd, src/ui/night_hud.gd`.
-
-A reason to be present at night: spend food and wood to put a wall back up while the wave is still coming.
-
-- Repair costs food or wood per hit point restored, and the rate is a lever
-- It takes time and the player must be near the structure
-- A destroyed structure cannot be repaired, only rebuilt
-- The house itself can be repaired, at a worse rate
-- Repairing is interruptible
-
-  - done when: Repairing a wall mid-wave measurably changes whether it holds
-  - done when: `input_check` repairs something
 
 ### 0054 - The player's ability
 
@@ -942,7 +927,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0040** [The shop grows](prompts/0040-shop-full.md)
 - [x] **0041** [The first day teaches itself](prompts/0041-tutorial-day.md)
 
-## 3 - The full night  (11/17)
+## 3 - The full night  (12/17)
 
 - [x] **0042** [Data-driven defences](prompts/0042-defence-data.md)
 - [x] **0043** [The flamethrower tower](prompts/0043-tower-flame.md)
@@ -955,7 +940,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0050** [The runner](prompts/0050-enemy-runner.md)
 - [x] **0051** [The tank](prompts/0051-enemy-tank.md)
 - [x] **0052** [The breaker](prompts/0052-enemy-breaker.md)
-- [ ] **0053** [Repair during the night](prompts/0053-repair.md)
+- [x] **0053** [Repair during the night](prompts/0053-repair.md)
 - [ ] **0054** [The player's ability](prompts/0054-ability.md)
 - [ ] **0055** [Double speed and skipping the night](prompts/0055-speed-controls.md)
 - [ ] **0056** [The night HUD](prompts/0056-night-hud.md)

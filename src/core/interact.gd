@@ -53,6 +53,11 @@ const DEFAULT_TICKS: Dictionary = {
 	# Starting a job is a moment. The job itself takes as long as the recipe
 	# says, and the player is free to walk away while it runs.
 	&"craft": GameData.SECONDS / 3,         # LEVER: ticks, 5-30
+	# **Per hit point, not per repair.** One work cycle puts one hit point
+	# back, so a held key mends a wall a plank at a time and letting go stops
+	# it exactly where it got to. `ticks_for()` asks the cell, because the
+	# house takes longer.
+	&"repair": GameData.REPAIR_TICKS_PER_HP,
 }
 
 
@@ -63,8 +68,10 @@ const DEFAULT_TICKS: Dictionary = {
 ## the systems behind these do not tick then anyway, so a verb that still
 ## worked would be a verb that lied.
 ##
-## Repairing (task 0053) and dropping a barricade (task 0047) are the night's
-## own verbs, and they go on their own list when they arrive.
+## **Repairing is not on this list**, which is the whole of "a reason to be
+## present at night": it is the one verb that works while a wave is coming in,
+## and dropping a barricade (task 0047) is the other. Both were named here
+## before either existed.
 const DAY_ONLY: Array = [
 	&"chop", &"mine", &"till", &"plant", &"harvest", &"fish", &"trade", &"craft",
 	&"water", &"reel", &"collect",
@@ -99,6 +106,14 @@ static func verb_at(state: Dictionary, cell: Vector2i) -> StringName:
 static func _offered(state: Dictionary, cell: Vector2i) -> StringName:
 	var on := Farm.occupant(state, cell)
 	if not on.is_empty():
+		# **Mending comes first, and only when it can be done.** A damaged
+		# workshop offers to be put right before it offers to make anything,
+		# because a workshop with four hit points left is about to be a hole
+		# in the ground. It stops offering the moment it is whole again or
+		# the larder is empty, so the highlight never promises a key that
+		# would do nothing - and crafting comes back by itself.
+		if Repair.can_mend(state, cell):
+			return &"repair"
 		# **Any station with a recipe offers to make it.** This was a table
 		# entry naming the workshop, which is why the press and the kitchen
 		# could be built and then stood next to uselessly. A fourth station is
@@ -128,6 +143,9 @@ static func _offered(state: Dictionary, cell: Vector2i) -> StringName:
 ## time is a lever next to how much wood a tree gives rather than a number
 ## hidden in a verb table.
 static func ticks_for(state: Dictionary, cell: Vector2i, verb: StringName) -> int:
+	# The house takes twice as long per hit point as a fence does.
+	if verb == &"repair":
+		return Repair.ticks_at(state, cell)
 	var on := Farm.occupant(state, cell)
 	if not on.is_empty():
 		var node: Variant = GameData.GATHERING.get(on["id"], null)
@@ -179,6 +197,11 @@ static func complete(state: Dictionary, cell: Vector2i, verb: StringName) -> voi
 			Crafting.start_at(state, cell)
 		&"trade":
 			Shop.open(state)
+		&"repair":
+			# One hit point per cycle. The loop that repeats a verb is what
+			# turns a held key into a mended wall, and letting go is what
+			# makes it interruptible - the same machinery as chopping.
+			Repair.apply(state, cell, 1)
 		_:
 			push_error("Interact.complete: nobody implements '%s'" % verb)
 
@@ -189,7 +212,7 @@ static func all_verbs() -> Array:
 	var verbs: Array = []
 	for v in OCCUPANT_VERBS.values() + TERRAIN_VERBS.values() \
 			+ [&"till", &"plant", &"harvest", &"water", &"fish", &"reel",
-				&"craft", &"collect"]:
+				&"craft", &"collect", &"repair"]:
 		if not verbs.has(v):
 			verbs.append(v)
 	verbs = GameData.sorted_names(verbs)
