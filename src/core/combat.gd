@@ -87,6 +87,10 @@ static func worth_shooting(state: Dictionary, id: int) -> bool:
 
 ## One tick of the hurt flash counting down. Called from `Sim._tick_night()`.
 static func tick(state: Dictionary) -> void:
+	# **Before the early return.** A thing can be on fire on a tick when
+	# nothing else is happening, and the fire going out is the last thing that
+	# happens on some nights.
+	_tick_burning(state)
 	if Entities.count(state) == 0:
 		return
 	for id in Entities.ids(state):
@@ -117,4 +121,73 @@ static func initial() -> Dictionary:
 	return {
 		"killed": 0,
 		"killed_by_kind": {},
+		# {entity id: {"left": ticks, "damage": per second, "next": ticks}}
+		"burning": {},
 	}
+
+
+# ------------------------------------------------------------------- burning
+
+## Set something alight, or top it up if it already is.
+##
+## **Refreshed, never stacked.** Two flamethrowers on one zombie is one fire
+## burning for the full duration, not two fires burning at once - otherwise six
+## towers would be six times the damage and the flamethrower would stop being a
+## tower and start being a win button. The stronger of the two damages wins,
+## which is what makes upgrading one matter without making a second one
+## pointless.
+static func set_alight(state: Dictionary, id: int, damage: int,
+		ticks: int) -> void:
+	if damage <= 0 or ticks <= 0 or not Entities.alive(state, id):
+		return
+	var burning: Dictionary = state["burning"]
+	if burning.has(id):
+		var already: Dictionary = burning[id]
+		already["left"] = maxi(int(already["left"]), ticks)
+		already["damage"] = maxi(int(already["damage"]), damage)
+		return
+	burning[id] = {
+		"left": ticks,
+		"damage": damage,
+		"next": GameData.BURN_EVERY_TICKS,
+	}
+
+
+static func is_burning(state: Dictionary, id: int) -> bool:
+	return (state["burning"] as Dictionary).has(id)
+
+
+## How long this one has left to burn, in ticks. Zero when it is not.
+static func burn_left(state: Dictionary, id: int) -> int:
+	var burning: Dictionary = state["burning"]
+	return 0 if not burning.has(id) else int((burning[id] as Dictionary)["left"])
+
+
+## One tick of everything on fire.
+##
+## **It keeps burning after it leaves the cone**, which is the whole of what
+## damage over time buys: a flamethrower that only hurt what was standing in
+## front of it would be a short-range gun tower that cost oil.
+static func _tick_burning(state: Dictionary) -> void:
+	var burning: Dictionary = state["burning"]
+	if burning.is_empty():
+		return
+	# Sorted, because two things burning out on the same tick have to die in
+	# the same order on every machine.
+	var ids: Array = burning.keys()
+	ids.sort()
+	var out: Array = []
+	for id in ids:
+		if not Entities.alive(state, int(id)):
+			out.append(id)
+			continue
+		var fire: Dictionary = burning[id]
+		fire["left"] = int(fire["left"]) - 1
+		fire["next"] = int(fire["next"]) - 1
+		if int(fire["next"]) <= 0:
+			fire["next"] = GameData.BURN_EVERY_TICKS
+			hit(state, int(id), int(fire["damage"]), GameData.DAMAGE_FIRE)
+		if int(fire["left"]) <= 0 or not Entities.alive(state, int(id)):
+			out.append(id)
+	for id in out:
+		burning.erase(id)

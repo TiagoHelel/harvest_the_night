@@ -2964,3 +2964,102 @@ experiences. The kills and the house were already asserted and are unchanged:
 
 `python tools/verify.py` prints PASS: 1288 asserts, 364 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+
+## 0043 - The flamethrower tower - done 2026-09-27
+
+A wedge that lands the instant it is fired, and a fire that outlives it.
+
+**What changed.** `SHAPE_CONE` joins the shapes from task 0042, `Combat` learned
+to set things alight, and the flamethrower was given the one field it turned
+out to have been missing since the table was written.
+
+Files: `src/core/game_data.gd`, `towers.gd`, `combat.gd`,
+`src/tools/headless_check.gd`.
+Verify: 1326 headless / 364 input / both hashes moved on purpose, below.
+
+### The flamethrower had never fired a shot
+
+`Towers._find_towers()` collects everything with a `reload_ticks`. **The
+flamethrower does not have one** - it never did. It could be built, it cost
+twenty wood, twenty-five iron and ten oil, it declared a range, a damage, a
+cone and a burn, and it was invisible to the code that makes towers shoot.
+
+It has been that way since the table was written. Nothing caught it because
+every test of the flamethrower asked the *table* what it would do, and the
+table was right - it was the list that never contained it. Task 0042's
+declaration check missed it for the same reason: that check is guarded on
+`has("reload_ticks")`, so a tower with no reload is a tower nobody validates
+either.
+
+Found only because the cone written for it turned out to be unreachable when
+the teeth-test for the cone's own check refused to fire.
+
+It reloads twice a second now. A flamethrower is a continuous thing and that
+is as close as a fixed tick gets without pretending otherwise.
+
+### One angle, two numbers, and a check between them
+
+`cone_degrees` is what a designer reads. `cone_spread_permille` is what the
+rules use - the tangent of the half-angle, in thousandths of a tile per tile
+along the aim. 60 degrees is 577.
+
+Two ways of saying one thing is two things that drift, so `check_defences()`
+works the tangent out at boot and refuses a farm where they disagree by more
+than a rounding step. That is the same arrangement `check_recipes()` has for a
+kit's price, and it is what keeps the trigonometry **at boot and never in a
+tick**: the wedge test itself is integer throughout - a dot product for "in
+front", a cross product for "off to the side", and one multiply on each side
+of the comparison so nothing divides before it multiplies.
+
+### Refreshed, never stacked
+
+`Combat.set_alight()` tops a fire up rather than lighting a second one. Eight
+flamethrowers on one zombie is one fire doing two a second, not sixteen - the
+done-when, and the number that would have turned the flamethrower from a tower
+into a win button.
+
+Refreshing is not capping, though: the **longer** of the two durations and the
+**stronger** of the two damages survive, so a better flamethrower is still
+better and a second one still extends the burn.
+
+The fire keeps burning after the zombie leaves the cone, which is the whole of
+what damage over time buys. A flamethrower that only hurt what was standing in
+front of it would be a short-range gun tower that costs oil.
+
+### Three goes at measuring the burn
+
+The stacking assert failed twice, and both times the test was measuring
+something other than what it claimed - because the flamethrower had just
+become a tower that really fires:
+
+1. The victim was left standing in the cone, so the number included the
+   flamethrower hitting it four times a second.
+2. Moved to the house, where the wave that had walked in behind it finished
+   the job.
+3. Measured on a bare night with no tower and no wave: **2**, which is
+   `burn_damage`, which is the claim.
+
+A test that shares a state with everything else measures everything else.
+
+### Notes
+
+- Without rounds the cone is a pilot light: the weak damage of task 0035 and
+  **no fire at all**. What makes a flamethrower a flamethrower is the thing it
+  cannot do without oil, which is the tension task 0032 set up.
+- The cone is the one shape with no projectile. There is nothing in the air to
+  chase a target that has already moved, which is also why it cannot miss.
+
+### Hashes
+
+| | from | to | why |
+|---|---|---|---|
+| sim hash | `1534932614` | `1963778898` | the state gained `burning` |
+| data hash | `331053343` | `2382052639` | the flamethrower gained `reload_ticks` and `cone_spread_permille` and its shape became `cone`; `BURN_EVERY_TICKS` is new |
+
+`python tools/verify.py` prints PASS: 1326 asserts, 364 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.
+
+**Worth a look on the next pass:** the same "no `reload_ticks`" hole would
+hide any future tower. `check_defences()` should probably refuse a `DEFENCES`
+entry that declares a `damage` and a `range` but no way of firing - it looks
+exactly like a tower and is not one.

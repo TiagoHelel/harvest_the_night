@@ -476,7 +476,14 @@ const TARGETING: Array = [
 const SHAPE_SINGLE := &"single"
 const SHAPE_SPLASH := &"splash"
 
-const SHAPES: Array = [SHAPE_SINGLE, SHAPE_SPLASH]
+## A wedge in front of the tower, pointed at whatever it is shooting.
+##
+## **It lands the instant it is fired.** A flamethrower does not throw
+## anything: there is nothing in the air to chase a target that has already
+## moved, which is why a cone is the one shape with no projectile.
+const SHAPE_CONE := &"cone"
+
+const SHAPES: Array = [SHAPE_SINGLE, SHAPE_SPLASH, SHAPE_CONE]
 
 
 const DAMAGE_IMPACT := &"impact"
@@ -484,6 +491,13 @@ const DAMAGE_FIRE := &"fire"
 const DAMAGE_EXPLOSIVE := &"explosive"
 
 const DAMAGE_TYPES: Array = [DAMAGE_IMPACT, DAMAGE_FIRE, DAMAGE_EXPLOSIVE]
+
+## How often a burning thing takes its burn damage.
+##
+## Once a second rather than once a tick, so `burn_damage` in the tables reads
+## as what a designer means by it - "two a second" - and so that a burn is a
+## handful of arithmetic over its life instead of ninety.
+const BURN_EVERY_TICKS := SECONDS
 
 ## The six things from the reference sheet that go on the farm at night.
 ##
@@ -507,7 +521,7 @@ const DEFENCES: Dictionary = {
 	&"flame_tower": {
 		"cost": {WOOD: 20, IRON: 25, OIL: 10},
 		"targeting": TARGET_NEAREST,
-		"shape": SHAPE_SINGLE,   # task 0043 gives it the cone
+		"shape": SHAPE_CONE,
 		"hp": 70,                       # LEVER: hit points, 40-140
 		"damage": 3,                    # LEVER: per tick in the cone, 1-6
 		"damage_type": DAMAGE_FIRE,
@@ -515,6 +529,26 @@ const DEFENCES: Dictionary = {
 		"cone_degrees": 60,             # LEVER: degrees, 30-90
 		"burn_ticks": 3 * SECONDS,      # LEVER: ticks, 1-6 seconds worth
 		"burn_damage": 2,               # LEVER: per second burning, 1-5
+		# **How wide the wedge opens, in thousandths of a tile per tile.** The
+		# rules use this and `cone_degrees` is what a designer reads;
+		# `check_defences()` refuses a farm where the two have drifted apart, the
+		# same way `check_recipes()` does for a kit's price.
+		#
+		# Trigonometry belongs in the check, not in the tick: `tan(30 degrees)`
+		# is 577 thousandths, and a rule that worked it out every tick would be
+		# floating-point arithmetic in the one place this game does not allow
+		# any.
+		"cone_spread_permille": 577,
+		# **How often the cone goes off.** The flamethrower had no
+		# `reload_ticks` at all, which meant `Towers._find_towers()` - which
+		# collects everything with one - never saw it: it could be built, it
+		# cost twenty wood, twenty-five iron and ten oil, and it had never
+		# fired a shot in its life. Found in task 0043 when the cone that was
+		# written for it turned out to be unreachable.
+		#
+		# Twice a second: a flamethrower is a continuous thing and this is as
+		# close as a fixed tick gets without pretending otherwise.
+		"reload_ticks": SECONDS / 2,    # LEVER: ticks, 5-30
 		"ammo": {INCENDIARY: 1},
 		"ammo_every_ticks": 2 * SECONDS,
 		"energy_draw": 2,
@@ -1264,6 +1298,24 @@ static func check_defences(defences: Dictionary) -> Array:
 			elif shape == SHAPE_SPLASH and int(defence.get("splash_tiles", 0)) <= 0:
 				errors.append("defence '%s' splashes over no tiles at all"
 					% defence_id)
+			elif shape == SHAPE_CONE:
+				# **The angle a designer reads and the number the rules use have
+				# to agree.** Two ways of saying one thing is two things that
+				# drift, which is what `check_recipes()` exists for one table
+				# along. The trigonometry is here, once, at boot - never in a
+				# tick.
+				var degrees := int(defence.get("cone_degrees", 0))
+				var spread := int(defence.get("cone_spread_permille", 0))
+				if degrees <= 0 or degrees >= 180:
+					errors.append("defence '%s' has a cone of %d degrees"
+						% [defence_id, degrees])
+				else:
+					var wanted := int(round(tan(deg_to_rad(float(degrees) / 2.0))
+						* 1000.0))
+					if absi(spread - wanted) > 2:
+						errors.append(("defence '%s' opens %d degrees, which is "
+							+ "%d per mille, but says %d")
+							% [defence_id, degrees, wanted, spread])
 			var kind := StringName(defence.get("damage_type", DAMAGE_IMPACT))
 			if not DAMAGE_TYPES.has(kind):
 				errors.append("defence '%s' deals '%s', which is not a damage type"

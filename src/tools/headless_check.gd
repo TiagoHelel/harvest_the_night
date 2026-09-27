@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 35
+const GROUPS := 36
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -99,6 +99,7 @@ func _run() -> void:
 	_task_0040_shop()
 	_task_0041_tutorial()
 	_task_0042_declared()
+	_task_0043_flame()
 
 
 func _finish() -> void:
@@ -5406,3 +5407,194 @@ func _splash_test(seed_value: int, entry: Dictionary) -> Dictionary:
 		"outside": int(took[away]),
 		"damage": str(took.values()),
 	}
+
+
+## 0043 - the flamethrower: a wedge that lands now and a fire that outlasts it.
+func _task_0043_flame() -> void:
+	var entry: Dictionary = GameData.DEFENCES[&"flame_tower"]
+
+	# **It declares a cone, and the two ways of saying how wide agree.**
+	expect(StringName(entry["shape"]) == GameData.SHAPE_CONE,
+		"the flamethrower lands as a cone", str(entry["shape"]))
+	expect(int(entry["cone_degrees"]) > 0, "with an angle a designer reads")
+	expect(int(entry["cone_spread_permille"]) > 0,
+		"and a number the rules use")
+	expect(GameData.check_defences(GameData.DEFENCES).is_empty(),
+		"and the two of them agree",
+		str(GameData.check_defences(GameData.DEFENCES)))
+
+	var drifted: Dictionary = GameData.DEFENCES.duplicate(true)
+	(drifted[&"flame_tower"] as Dictionary)["cone_spread_permille"] = 999
+	expect(not GameData.check_defences(drifted).is_empty(),
+		"and a farm where they have drifted apart is refused")
+	drifted = GameData.DEFENCES.duplicate(true)
+	(drifted[&"flame_tower"] as Dictionary)["cone_degrees"] = 0
+	expect(not GameData.check_defences(drifted).is_empty(),
+		"and so is a cone of no degrees at all")
+
+	# **Every lever the task names is there.**
+	for lever in ["cost", "range", "cone_degrees", "damage", "burn_ticks",
+			"burn_damage", "ammo"]:
+		expect(entry.has(lever), "the flamethrower declares its %s" % lever)
+
+	# **A crowd in the cone all takes it, and nothing behind does.**
+	var field := _a_crowd(2500)
+	var state: Dictionary = field["state"]
+	var tower: Vector2i = field["tower"]
+	var in_line: Array = field["in_line"]
+	var behind: int = field["behind"]
+	var aside: int = field["aside"]
+
+	var before: Dictionary = {}
+	for id in in_line + [behind, aside]:
+		before[id] = int(Entities.get_one(state, int(id)).get("hp", 0))
+
+	Towers.burn_cone_for_test(state, tower, entry, int(in_line[0]), true)
+
+	var burnt := 0
+	for id in in_line:
+		var lost := int(before[id]) \
+			- int(Entities.get_one(state, int(id)).get("hp", 0))
+		if lost > 0:
+			burnt += 1
+	expect(burnt == in_line.size(),
+		"everything standing in the cone takes the hit",
+		"%d of %d" % [burnt, in_line.size()])
+	expect(int(Entities.get_one(state, behind).get("hp", 0))
+		== int(before[behind]),
+		"and the one behind the tower takes nothing - a cone has a back")
+	expect(int(Entities.get_one(state, aside).get("hp", 0))
+		== int(before[aside]),
+		"and neither does the one off to the side")
+	print("  a %d degree cone at range %d caught %d of %d in front"
+		% [int(entry["cone_degrees"]), int(entry["range"]), burnt,
+			in_line.size()])
+
+	# **The damage is what the levers claim.** One pass of the cone takes
+	# `damage`, and the fire takes `burn_damage` a second after that.
+	var arithmetic := _a_crowd(2501)
+	var lone: int = (arithmetic["in_line"] as Array)[0]
+	var full := int(Entities.get_one(arithmetic["state"], lone).get("hp", 0))
+	var armour := int((GameData.ENEMIES[&"walker"] as Dictionary).get("armour", 0))
+	Towers.burn_cone_for_test(arithmetic["state"], arithmetic["tower"], entry,
+		lone, true)
+	expect(full - int(Entities.get_one(arithmetic["state"], lone).get("hp", 0))
+		== maxi(int(entry["damage"]) - armour, 1),
+		"one pass of the cone takes what the table says",
+		str(full - int(Entities.get_one(arithmetic["state"], lone).get("hp", 0))))
+
+	# **And it keeps burning after it leaves.**
+	var state2: Dictionary = arithmetic["state"]
+	expect(Combat.is_burning(state2, lone), "and it is alight")
+	expect(Combat.burn_left(state2, lone) == int(entry["burn_ticks"]),
+		"for as long as the lever says",
+		str(Combat.burn_left(state2, lone)))
+
+	# Walk it out of the cone entirely; the fire goes with it.
+	var far := Farm.house_centre(state2)
+	Entities.get_one(state2, lone)["pos"] = [far.x * Player.SUBTILE,
+		far.y * Player.SUBTILE]
+	var before_burn := int(Entities.get_one(state2, lone).get("hp", 0))
+	Sim.advance(state2, GameData.BURN_EVERY_TICKS)
+	expect(int(Entities.get_one(state2, lone).get("hp", 0)) < before_burn,
+		"a thing that walked out of the cone is still on fire",
+		str(int(Entities.get_one(state2, lone).get("hp", 0))))
+
+	Sim.advance(state2, int(entry["burn_ticks"]) + GameData.BURN_EVERY_TICKS)
+	expect(not Combat.is_burning(state2, lone) \
+		or not Entities.alive(state2, lone),
+		"and the fire goes out on its own",
+		str(Combat.burn_left(state2, lone)))
+
+	# **Two flamethrowers on one zombie do not double the burn.** The
+	# done-when, and the reason `set_alight` refreshes rather than stacking.
+	var doubled := _a_crowd(2502)
+	var twice: Dictionary = doubled["state"]
+	var victim: int = (doubled["in_line"] as Array)[0]
+	Combat.set_alight(twice, victim, int(entry["burn_damage"]),
+		int(entry["burn_ticks"]))
+	var one_fire := Combat.burn_left(twice, victim)
+	Combat.set_alight(twice, victim, int(entry["burn_damage"]),
+		int(entry["burn_ticks"]))
+	expect(Combat.burn_left(twice, victim) == one_fire,
+		"a second flamethrower refreshes the fire rather than lighting another",
+		"%d against %d" % [Combat.burn_left(twice, victim), one_fire])
+
+	# Six of them are still one fire, which is the number that would have made
+	# this a win button.
+	#
+	# **Measured on a bare night**, with no tower and no wave: the flamethrower
+	# is a tower that really fires now, so a victim left anywhere near one is
+	# measuring the cone as well as the fire, and a victim parked on the house
+	# is measuring the wave that walked in behind it. The claim here is about
+	# one number and nothing else.
+	var quiet := _fresh_night(2505)
+	var alone := Entities.spawn(quiet, &"walker", Farm.house_centre(quiet)
+		+ Vector2i(6, 6))
+	for _i in 8:
+		Combat.set_alight(quiet, alone, int(entry["burn_damage"]),
+			int(entry["burn_ticks"]))
+	var burning_hp := int(Entities.get_one(quiet, alone).get("hp", 0))
+	Sim.advance(quiet, GameData.BURN_EVERY_TICKS)
+	var taken := burning_hp - int(Entities.get_one(quiet, alone).get("hp", 0))
+	expect(taken == maxi(int(entry["burn_damage"]) - armour, 1),
+		"and eight of them take one fire's damage a second, not eight",
+		str(taken))
+
+	# **A longer fire wins, and a stronger one wins.** Refreshing is not
+	# capping: a better flamethrower has to be better.
+	var mixed := _a_crowd(2503)
+	var hot: Dictionary = mixed["state"]
+	var who: int = (mixed["in_line"] as Array)[0]
+	Combat.set_alight(hot, who, 2, 60)
+	Combat.set_alight(hot, who, 5, 30)
+	expect(Combat.burn_left(hot, who) == 60,
+		"the longer of the two durations survives",
+		str(Combat.burn_left(hot, who)))
+
+	# **Without rounds it is a pilot light**, which is the point of the oil.
+	var dry := _a_crowd(2504)
+	var cold: Dictionary = dry["state"]
+	var unlucky: int = (dry["in_line"] as Array)[0]
+	var hp_before := int(Entities.get_one(cold, unlucky).get("hp", 0))
+	Towers.burn_cone_for_test(cold, dry["tower"], entry, unlucky, false)
+	var weak := hp_before - int(Entities.get_one(cold, unlucky).get("hp", 0))
+	expect(weak > 0, "an unarmed flamethrower still does something",
+		str(weak))
+	expect(weak < maxi(int(entry["damage"]) - armour, 1),
+		"but less", "%d against %d"
+			% [weak, maxi(int(entry["damage"]) - armour, 1)])
+	expect(not Combat.is_burning(cold, unlucky),
+		"and it sets nothing alight - the fire is what the rounds buy")
+
+	# **The oil is the cost.** Incendiary rounds are made of it (task 0035).
+	var rounds := Ammo.needed_by(&"flame_tower")
+	expect(rounds.has(GameData.INCENDIARY),
+		"the flamethrower burns rounds", str(rounds))
+	var recipe: Dictionary = GameData.RECIPES[&"make_incendiary"]
+	expect((recipe["inputs"] as Dictionary).has(GameData.OIL),
+		"which are made of oil", str(recipe["inputs"]))
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## A flame tower with three zombies in a line in front of it, one behind it
+## and one off to the side.
+func _a_crowd(seed_value: int) -> Dictionary:
+	var state := State.create(seed_value)
+	Resources.gain(state, {GameData.WOOD: 400, GameData.IRON: 400,
+		GameData.OIL: 400, GameData.INCENDIARY: 400})
+	var tower := _room_for(state, Vector2i(1, 1))
+	Building.place(state, &"flame_tower", tower)
+	Phases.begin_preparation(state)
+	Sim.advance(state, GameData.PREPARATION_TICKS)
+
+	# Straight out to the east, well inside the range.
+	var in_line: Array = []
+	for step in [1, 2, 3]:
+		in_line.append(Entities.spawn(state, &"walker",
+			tower + Vector2i(step, 0)))
+	var behind := Entities.spawn(state, &"walker", tower + Vector2i(-2, 0))
+	var aside := Entities.spawn(state, &"walker", tower + Vector2i(0, 3))
+	return {"state": state, "tower": tower, "in_line": in_line,
+		"behind": behind, "aside": aside}

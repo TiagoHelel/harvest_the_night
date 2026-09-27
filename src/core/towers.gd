@@ -95,7 +95,10 @@ static func tick(state: Dictionary) -> void:
 		# silent tower: `design.md` does not do punishment mechanics, and a
 		# tower that stopped is a tower the player stops looking at.
 		var armed := Ammo.spend(state, tower["id"])
-		_fire(state, cell, tower["id"], entry, target, armed)
+		if StringName(entry.get("shape", GameData.SHAPE_SINGLE)) 				== GameData.SHAPE_CONE:
+			_burn_cone(state, cell, entry, target, armed)
+		else:
+			_fire(state, cell, tower["id"], entry, target, armed)
 
 		# **Asked fresh after every shot**, so a generator running dry part way
 		# through a night slows the guns from the next shot rather than from the
@@ -287,6 +290,69 @@ static func _advance_projectiles(state: Dictionary) -> void:
 
 	for shot in landed:
 		flying.erase(shot)
+
+
+## Everything in the wedge between this tower and what it is aiming at.
+##
+## **Nothing is thrown.** A flamethrower reaches its whole range instantly, so
+## there is no projectile to chase a target that has already moved - which is
+## also why the cone is the one shape that cannot miss.
+##
+## The wedge is integer arithmetic throughout: for each thing in range, how far
+## along the aim it is and how far off to the side, and it is in if the side is
+## within `cone_spread_permille` thousandths of a tile per tile along. That is
+## the tangent of the half-angle, worked out once at boot by
+## `GameData.check_defences()` and never in here.
+static func _burn_cone(state: Dictionary, from: Vector2i, entry: Dictionary,
+		target: int, armed: bool) -> void:
+	var aim := Entities.cell_of(state, target) - from
+	if aim == Vector2i.ZERO:
+		aim = Vector2i(1, 0)
+	var reach := int(entry.get("range", 0))
+	var spread := int(entry.get("cone_spread_permille", 0))
+	var damage := int(entry.get("damage", 1))
+	var burn := int(entry.get("burn_damage", 0))
+	var burn_ticks := int(entry.get("burn_ticks", 0))
+	if not armed:
+		# A pilot light. The weak shot of task 0035, and no fire at all: what
+		# makes a flamethrower a flamethrower is the thing it cannot do
+		# without rounds.
+		damage = Ammo.weak_damage(damage)
+		burn = 0
+
+	for id in Entities.ids(state):
+		var cell := Entities.cell_of(state, id)
+		if cell.x < 0:
+			continue
+		var to := cell - from
+		if Grid.chebyshev(from, cell) > reach:
+			continue
+		# **In front, not behind.** The dot product against the aim, which is
+		# negative for anything the tower has its back to.
+		var along := to.x * aim.x + to.y * aim.y
+		if along <= 0:
+			continue
+		# The perpendicular distance, times the aim's length so that both
+		# sides of the comparison are in the same units and no division
+		# happens before the multiply.
+		var across := absi(to.x * aim.y - to.y * aim.x)
+		if across * 1000 > along * spread:
+			continue
+
+		Combat.hit(state, id, damage,
+			StringName(entry.get("damage_type", GameData.DAMAGE_FIRE)))
+		if burn > 0 and burn_ticks > 0:
+			Combat.set_alight(state, id, burn, burn_ticks)
+
+
+## Fire the cone of a given declaration, now, at a given target.
+##
+## The same kind of seam as `acquire_for()` and `land_for_test()`: a test for
+## "a crowd in the wedge all takes it" should be able to ask the rules rather
+## than build a farm and wait for a reload.
+static func burn_cone_for_test(state: Dictionary, from: Vector2i,
+		entry: Dictionary, target: int, armed: bool) -> void:
+	_burn_cone(state, from, entry, target, armed)
 
 
 ## A shot arrives. **What it does when it gets there is the shape it carries**,

@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`#########...............`  **42 / 109 done**
+`#########...............`  **43 / 109 done**
 
-0 doing / 67 todo / 0 blocked across 9 phases.
+0 doing / 66 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0043 - The flamethrower tower**. The whole of what is left is
+First up: **0044 - The mortar**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,24 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-67 task(s) left, the ready ones first, then what they
+66 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0043 - The flamethrower tower
-
-Ready to pick up.  Likely files: `src/core/game_data.gd`.
-
-The reference sheet's second tower: expensive, short range, continuous area damage, and it burns oil.
-
-- A cone in front of it rather than a single target
-- Damage over time that keeps burning after the zombie leaves the cone
-- Burn does not stack into absurdity: refresh the duration, do not add a second instance
-- It consumes oil while firing and is much weaker without it
-- Cost, range, cone angle, damage and burn duration are levers
-
-  - done when: A crowd walking through the cone takes the damage the levers claim
-  - done when: Two flamethrowers on one zombie do not double the burn
 
 ### 0044 - The mortar
 
@@ -1089,10 +1074,10 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0040** [The shop grows](prompts/0040-shop-full.md)
 - [x] **0041** [The first day teaches itself](prompts/0041-tutorial-day.md)
 
-## 3 - The full night  (1/17)
+## 3 - The full night  (2/17)
 
 - [x] **0042** [Data-driven defences](prompts/0042-defence-data.md)
-- [ ] **0043** [The flamethrower tower](prompts/0043-tower-flame.md)
+- [x] **0043** [The flamethrower tower](prompts/0043-tower-flame.md)
 - [ ] **0044** [The mortar](prompts/0044-tower-mortar.md)
 - [ ] **0045** [The auto-crossbow](prompts/0045-tower-crossbow.md)
 - [ ] **0046** [Fences and walls](prompts/0046-walls.md)
