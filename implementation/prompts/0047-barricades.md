@@ -1,7 +1,7 @@
 # 0047 - Barricades
 
 - **Phase:** 3 - The full night
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0046
 - **Likely files:** src/core/game_data.gd
 

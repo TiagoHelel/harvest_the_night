@@ -3340,3 +3340,100 @@ settle. Worth knowing for the next case that clicks a palette twice.
 
 `python tools/verify.py` prints PASS: 1417 asserts, 371 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+
+## 0047 - Barricades - done 2026-09-27
+
+Almost free, almost paper, and the only thing you may throw down while they
+are already coming.
+
+**What changed.** `per_night_limit` is enforced, a barricade costs four wood
+and nothing else, and a zombie chewing through one bites at the speed it
+walks rather than every tick.
+
+Files: `src/core/building.gd`, `enemies.gd`, `phases.gd`, `game_data.gd`,
+`src/tools/headless_check.gd`.
+Verify: 1453 headless / 371 input / both hashes moved on purpose, below.
+
+### Three declared fields, one of them read
+
+`placeable_at_night` and `lifetime_ticks` were already wired - build mode
+honours the first and `Building.expire()` the second. **`per_night_limit` was
+not read by anything**, so a barricade could be thrown down as fast as the wood
+held out, which is a wall you rebuild rather than an emergency answer.
+
+It is counted per night, cleared by `begin_night()`, and counted **when one
+goes down rather than when one comes up**: a barricade that was chewed through
+still used one of tonight's five, or the limit is a limit on how many stand
+rather than on how many you get. The refusal says which it is, too - "five a
+night, and that was the last" is a different sentence from "you are short two
+wood", and the first one is the true one.
+
+`check_defences()` now refuses a night-placeable thing that never expires -
+that is a wall you can build mid-wave - or one with no limit at all.
+
+### It was not the cheapest thing in the game
+
+Three wood and two stone is **$12** of goods against a fence's $10, and the
+task's first requirement is "cheapest structure in the game". Four wood is
+$8, and stone was the wrong currency anyway for a thing you throw down while
+they are already coming: a barricade should be one trip to one tree.
+
+That change took a group down with it. The crafting group read
+`inputs[GameData.STONE]` directly, which was fine while a barricade cost
+stone and became a **missing-key access** the moment it did not - aborting
+`_task_0019` silently, twenty-nine asserts short, with nothing in the FAIL
+list to say so. It reads `inputs.get(STONE, 0)` now. A test that indexes a
+recipe for an input it may not have breaks on a balance change rather than
+reporting one.
+
+### What a barricade actually buys, in three goes
+
+The done-when is "placing one mid-wave buys the measurable seconds the lever
+claims", and the first two measurements said **zero**:
+
+1. Three dropped across a wide approach: 27 steps against 27. The field
+   routes around them for nothing - exactly what task 0046 found out about
+   walls, on the same afternoon.
+2. Walling the approach down to a single gap and plugging it: still nothing.
+   The wall was thirteen cells and the map is eighteen tall, so they went
+   round the whole thing.
+3. Dropped into the cell a walking zombie was about to enter: **two ticks**.
+
+Two ticks is correct, and it is worth being plain about why. A structure is
+currently a **yes or a no** - `Pathing._passable()` returns false and that is
+all - so anything that does not seal a route costs nothing. `path_cost`, which
+every blocking structure declares and **nothing reads**, is what makes an
+obstacle expensive without making it impassable, and it belongs to task 0049:
+"a zombie prefers the open lane and breaks through when it must".
+
+So what a barricade buys today is the time it takes to **eat**, and that is a
+lever: hit points over the biter's damage, one bite per tile's worth of time.
+Measured at **21 ticks** for a twenty-point barricade against a ten-damage
+walker, which is exactly two bites, and a barricade with twice the hit points
+costs more.
+
+### The bite had no cadence
+
+Finding that out needed a fix. `_walk()` gates chewing on `move`, which is
+**sub-units and not tiles** - a walker covers three of sixty-four in a tick -
+so task 0046's chewing was biting on every one of them: twenty damage in two
+ticks, and a barricade that bought nothing. A bite now costs what crossing a
+tile costs, so a fast zombie chews fast and `ticks_per_tile` means one thing
+in both places.
+
+### And one assert of mine claimed a number the game does not
+
+"It costs at least a second" was a threshold I picked, not one the levers
+say - two bites is two thirds of a second. What makes it measurable is that it
+is exactly the arithmetic and that it moves when the lever does, so that is
+what it asserts.
+
+### Hashes
+
+| | from | to | why |
+|---|---|---|---|
+| sim hash | `4196864933` | `961536146` | the state gained `placed_tonight`, and chewing has a cadence |
+| data hash | `1540632093` | `2510238421` | a barricade is four wood instead of three wood and two stone, and its kit with it |
+
+`python tools/verify.py` prints PASS: 1453 asserts, 371 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

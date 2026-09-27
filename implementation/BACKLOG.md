@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`##########..............`  **46 / 109 done**
+`##########..............`  **47 / 109 done**
 
-0 doing / 63 todo / 0 blocked across 9 phases.
+0 doing / 62 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0047 - Barricades**. The whole of what is left is
+First up: **0048 - Mines and traps**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,23 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-63 task(s) left, the ready ones first, then what they
+62 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0047 - Barricades
-
-Ready to pick up.  Likely files: `src/core/game_data.gd`.
-
-The emergency answer: almost free, almost paper, and placeable while the night is running.
-
-- Cheapest structure in the game, from the workshop's first recipe
-- It may be placed during NIGHT, which no other structure may
-- It has a short lifetime as well as hit points, so it cannot become a permanent wall
-- A limit on how many may be placed per night, and it is a lever
-
-  - done when: Placing one mid-wave buys the measurable seconds the lever claims
-  - done when: It expires on its own if it survives the night
 
 ### 0048 - Mines and traps
 
@@ -1029,14 +1015,14 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0040** [The shop grows](prompts/0040-shop-full.md)
 - [x] **0041** [The first day teaches itself](prompts/0041-tutorial-day.md)
 
-## 3 - The full night  (5/17)
+## 3 - The full night  (6/17)
 
 - [x] **0042** [Data-driven defences](prompts/0042-defence-data.md)
 - [x] **0043** [The flamethrower tower](prompts/0043-tower-flame.md)
 - [x] **0044** [The mortar](prompts/0044-tower-mortar.md)
 - [x] **0045** [The auto-crossbow](prompts/0045-tower-crossbow.md)
 - [x] **0046** [Fences and walls](prompts/0046-walls.md)
-- [ ] **0047** [Barricades](prompts/0047-barricades.md)
+- [x] **0047** [Barricades](prompts/0047-barricades.md)
 - [ ] **0048** [Mines and traps](prompts/0048-traps.md)
 - [ ] **0049** [Zombies path around walls](prompts/0049-pathing-walls.md)
 - [ ] **0050** [The runner](prompts/0050-enemy-runner.md) - needs 0049

@@ -175,10 +175,19 @@ static func _chew(state: Dictionary, id: int, data: Dictionary,
 	if best.x < 0:
 		return
 
+	# **One bite per tile's worth of time.** `_walk()` gates this on `move`,
+	# which is *sub-units* rather than tiles - a walker covers three of
+	# sixty-four in a tick - so biting on every one of those was twenty
+	# damage in two ticks and a barricade that bought nothing at all.
+	#
+	# A bite costs what crossing a tile costs, so a fast zombie chews fast and
+	# `ticks_per_tile` means one thing in both places.
 	var one := Entities.get_one(state, id)
-	# The same cadence as walking: a zombie that would cross a tile this tick
-	# takes a bite instead, so a fast one chews faster and the ticks-per-tile
-	# lever means one thing in both places.
+	var wait := int(one.get("chew_wait", 0))
+	if wait > 0:
+		one["chew_wait"] = wait - 1
+		return
+	one["chew_wait"] = maxi(int(data["ticks_per_tile"]), 1)
 	Farm.damage(state, best, int(data["damage"]))
 	one["chewing"] = Grid.index(best)
 

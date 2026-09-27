@@ -317,7 +317,7 @@ const RECIPES: Dictionary = {
 	# 3 the day this was noticed.
 	&"barricade_kit": {
 		"station": &"workshop",
-		"inputs": {WOOD: 3, STONE: 2},
+		"inputs": {WOOD: 4},
 		"output": {&"barricade": 1},
 		"ticks": 6 * SECONDS,           # LEVER: ticks, 3-15 seconds worth
 	},
@@ -659,7 +659,12 @@ const DEFENCES: Dictionary = {
 		"energy_draw": 0,
 	},
 	&"barricade": {
-		"cost": {WOOD: 3, STONE: 2},
+		# **The cheapest thing in the game, and wood alone.** Three wood and
+		# two stone came to $12 of goods against the fence's $10, so the
+		# "cheapest structure" the task asks for was not - and stone is the
+		# wrong currency for a thing you throw down while they are already
+		# coming. Four wood is $8, and it is one trip to one tree.
+		"cost": {WOOD: 4},
 		"hp": 20,                       # LEVER: hit points, 10-40
 		"path_cost": 4,                 # LEVER: tiles-equivalent detour, 2-8
 		# It may go down mid-wave, which nothing else may - and it expires, so
@@ -1400,6 +1405,19 @@ static func check_defences(defences: Dictionary) -> Array:
 			errors.append(("defence '%s' has a damage and a range and no way of "
 				+ "firing - it looks exactly like a tower and is not one")
 				% defence_id)
+
+		# **A thing that may go down at night has to be temporary.** A
+		# barricade that outlived the night would be a cheaper wall, and the
+		# whole point of letting one go down mid-wave is that it buys seconds
+		# rather than ground.
+		if bool(defence.get("placeable_at_night", false)):
+			if int(defence.get("lifetime_ticks", 0)) <= 0:
+				errors.append(("defence '%s' may be placed at night and never "
+					+ "expires - that is a wall you can build mid-wave")
+					% defence_id)
+			if int(defence.get("per_night_limit", 0)) <= 0:
+				errors.append(("defence '%s' may be placed at night with no limit "
+					+ "on how many") % defence_id)
 
 		if defence.has("ammo"):
 			for res in (defence["ammo"] as Dictionary):

@@ -80,6 +80,9 @@ static func begin_night(state: Dictionary) -> bool:
 	if int(state["phase"]) != PREPARATION:
 		push_error("begin_night from %s" % name_of(int(state["phase"])))
 		return false
+	# A new night, a fresh allowance of whatever is limited per night.
+	Building.forget_tonight(state)
+
 	state["night"] = int(state["day"])
 	state["night_tick"] = 0
 	# Everything about what is coming is reset here rather than by whoever

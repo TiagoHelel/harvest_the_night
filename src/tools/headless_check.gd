@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 39
+const GROUPS := 40
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -103,6 +103,7 @@ func _run() -> void:
 	_task_0044_mortar()
 	_task_0045_crossbow()
 	_task_0046_walls()
+	_task_0047_barricades()
 
 
 func _finish() -> void:
@@ -1295,9 +1296,15 @@ func _task_0019_workshop() -> void:
 		== wood_before - int(inputs[GameData.WOOD]),
 		"the wood is gone immediately",
 		str(Resources.amount(state, GameData.WOOD)))
+	# **Only what the recipe asks for.** This read `inputs[STONE]` directly,
+	# which was fine while a barricade cost stone - and became a missing-key
+	# access that took the whole group down with it the moment task 0047 made
+	# it four wood and nothing else. Indexing a recipe for an input it may not
+	# have is a test that breaks on a balance change rather than reporting one.
 	expect(Resources.amount(state, GameData.STONE)
-		== stone_before - int(inputs[GameData.STONE]),
-		"and so is the stone")
+		== stone_before - int(inputs.get(GameData.STONE, 0)),
+		"and the stone is whatever the recipe asked for, which may be none",
+		str(Resources.amount(state, GameData.STONE)))
 	expect(Crafting.busy(state, bench), "the bench is busy")
 	expect(Crafting.kits(state, &"barricade") == 0, "and nothing is made yet")
 
@@ -6231,3 +6238,255 @@ func _wall_hp_around(state: Dictionary, cell: Vector2i) -> int:
 		if on.get("id", &"") == &"wall":
 			total += int(on.get("hp", 0))
 	return total
+
+
+## 0047 - barricades: almost free, almost paper, and you may throw one down
+## while they are already coming.
+func _task_0047_barricades() -> void:
+	var bar: Dictionary = GameData.DEFENCES[&"barricade"]
+
+	# **The cheapest thing in the game.**
+	var mine := _price_of(bar["cost"])
+	for id in GameData.sorted_names(GameData.DEFENCES.keys()):
+		if id == &"barricade":
+			continue
+		expect(mine <= _price_of((GameData.DEFENCES[id]
+			as Dictionary)["cost"]),
+			"a barricade costs no more than a %s" % id,
+			"$%d against $%d" % [mine,
+				_price_of((GameData.DEFENCES[id] as Dictionary)["cost"])])
+	print("  a barricade is $%d of goods; the next cheapest defence is $%d"
+		% [mine, _second_cheapest_defence()])
+
+	# **And it is the workshop's first recipe**, so it is what a player makes
+	# before they know what they are doing.
+	expect(Crafting.recipes_at(&"workshop")[0] == &"barricade_kit",
+		"the workshop's first recipe is the barricade",
+		str(Crafting.recipes_at(&"workshop")))
+
+	# **It is the only thing that may go down at night.**
+	for id in GameData.sorted_names(GameData.DEFENCES.keys()):
+		var allowed := bool((GameData.DEFENCES[id]
+			as Dictionary).get("placeable_at_night", false))
+		expect(allowed == (id == &"barricade"),
+			"only the barricade goes down at night, not the %s" % id)
+
+	expect(GameData.check_defences(GameData.DEFENCES).is_empty(),
+		"the shipped defences pass their own check",
+		str(GameData.check_defences(GameData.DEFENCES)))
+	var forever: Dictionary = GameData.DEFENCES.duplicate(true)
+	(forever[&"barricade"] as Dictionary).erase("lifetime_ticks")
+	expect(not GameData.check_defences(forever).is_empty(),
+		"a night-placeable thing that never expires is refused - that is a "
+		+ "wall you can build mid-wave")
+	var endless: Dictionary = GameData.DEFENCES.duplicate(true)
+	(endless[&"barricade"] as Dictionary).erase("per_night_limit")
+	expect(not GameData.check_defences(endless).is_empty(),
+		"and so is one with no limit on how many")
+
+	# **The allowance is real, and it is per night.**
+	var night := _armed_night(2900)
+	var limit := int(bar["per_night_limit"])
+	expect(Building.left_tonight(night, &"barricade") == limit,
+		"a fresh night allows the whole limit",
+		str(Building.left_tonight(night, &"barricade")))
+	expect(Building.left_tonight(night, &"wall") > 1000,
+		"and a thing with no limit declared has none applied",
+		str(Building.left_tonight(night, &"wall")))
+
+	var down := 0
+	for _i in limit + 3:
+		var spot := _room_for(night, Vector2i(1, 1))
+		if spot == Vector2i(-1, -1):
+			break
+		if Building.place(night, &"barricade", spot):
+			down += 1
+	expect(down == limit, "exactly the limit go down, however many are tried",
+		str(down))
+	expect(Building.left_tonight(night, &"barricade") == 0, "and then none")
+	expect(Building.why_not(night, &"barricade",
+		_room_for(night, Vector2i(1, 1))).contains("night"),
+		"and the reason says so rather than blaming the wood",
+		Building.why_not(night, &"barricade",
+			_room_for(night, Vector2i(1, 1))))
+
+	# **Used is used**, even if it came down again.
+	var placed := Farm.cells_with(night, &"barricade")
+	expect(placed.size() == limit, "the barricades are on the farm")
+	Farm.damage(night, placed[0], 999)
+	expect(Farm.is_empty(night, placed[0]), "one is chewed through")
+	expect(Building.left_tonight(night, &"barricade") == 0,
+		"and it still counts against tonight's five - otherwise the limit is "
+		+ "a limit on how many stand, not on how many you get")
+
+	# **A new night, a fresh allowance.**
+	Phases.enter_result(night, true)
+	(night["intent"] as Dictionary)["confirm_result"] = true
+	Sim.advance(night, 2)
+	Phases.begin_preparation(night)
+	Sim.advance(night, GameData.PREPARATION_TICKS)
+	expect(int(night["phase"]) == Phases.NIGHT, "another night")
+	expect(Building.left_tonight(night, &"barricade") == limit,
+		"which allows the whole limit again",
+		str(Building.left_tonight(night, &"barricade")))
+
+	# **It expires on its own if it survives.** The done-when.
+	var quiet := _armed_night(2901)
+	var spot := _room_for(quiet, Vector2i(1, 1))
+	expect(Building.place(quiet, &"barricade", spot), "one goes down")
+	var life := int(bar["lifetime_ticks"])
+	Sim.advance(quiet, life - 2)
+	expect(not Farm.is_empty(quiet, spot),
+		"it is still there a tick before its time")
+	Sim.advance(quiet, 3)
+	expect(Farm.is_empty(quiet, spot),
+		"and gone on its own when the lever says, with nobody touching it")
+
+	# **Placing one mid-wave buys the seconds the lever claims.** The other
+	# done-when - and it took three goes to measure honestly.
+	#
+	# A barricade dropped on open ground buys **two ticks**. Not a bug: a
+	# structure is currently a yes or a no, so the field simply routes around
+	# it, and three across a wide approach came out at twenty-seven steps
+	# against twenty-seven - the same thing task 0046 found out about walls.
+	# `path_cost`, which every blocking structure declares and nothing reads,
+	# is what will make an obstacle cost something without sealing anything,
+	# and it belongs to task 0049.
+	#
+	# What a barricade buys **today** is the time it takes to eat, and that is
+	# the lever: hit points over the biter's damage, one bite per tile of
+	# walking. That is what this measures.
+	var open_ground := _time_to_the_house(2902, false)
+	var detoured := _time_to_the_house(2902, true)
+	print("  dropped in the open, a barricade costs them %d ticks - it is "
+		% (detoured - open_ground) + "walked round, which is task 0049's job "
+		+ "to make expensive")
+	expect(detoured >= open_ground,
+		"a barricade in the way never helps them",
+		"%d against %d" % [detoured, open_ground])
+
+	var walker: Dictionary = GameData.ENEMIES[&"walker"]
+	var bites := (int(bar["hp"]) + int(walker["damage"]) - 1) 		/ int(walker["damage"])
+	# The first bite lands on arrival and each one after it costs a tile's
+	# worth of time, so two bites is one gap rather than two.
+	var expected := (bites - 1) * int(walker["ticks_per_tile"]) + 1
+	var chewed := _time_to_chew(2903)
+	print("  eating through one takes %d ticks (%.1fs); %d bites of %d at one "
+		% [chewed, float(chewed) / float(GameData.TICK_HZ), bites,
+			int(walker["damage"])] + "a tile is %d" % expected)
+	expect(chewed > 0, "a walled-in zombie eats its way out", str(chewed))
+	# **Not "at least a second"** - that was a number I picked rather than one
+	# the game claims. Twenty hit points against a ten-damage walker is two
+	# bites and two thirds of a second, and what makes it measurable is that it
+	# is exactly what the levers say and moves when they do.
+	expect(chewed > int(walker["ticks_per_tile"]),
+		"eating one costs more than walking past where it stood",
+		"%d ticks against %d" % [chewed, walker["ticks_per_tile"]])
+	expect(absi(chewed - expected) <= int(walker["ticks_per_tile"]),
+		"which is its hit points over what bites it, one bite a tile",
+		"%d against %d" % [chewed, expected])
+
+	# And the lever moves it: twice the hit points, about twice the time.
+	var tough := _time_to_chew(2903, int(bar["hp"]) * 2)
+	expect(tough > chewed,
+		"a tougher barricade buys more of them",
+		"%d against %d" % [tough, chewed])
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## The price of the cheapest defence that is not the barricade.
+func _second_cheapest_defence() -> int:
+	var best := 1 << 30
+	for id in GameData.sorted_names(GameData.DEFENCES.keys()):
+		if id == &"barricade":
+			continue
+		best = mini(best, _price_of((GameData.DEFENCES[id]
+			as Dictionary)["cost"]))
+	return best
+
+
+## A night with the materials to build during it.
+func _armed_night(seed_value: int) -> Dictionary:
+	var state := State.create(seed_value)
+	Resources.gain(state, {GameData.WOOD: 400, GameData.STONE: 400,
+		GameData.IRON: 400})
+	Phases.begin_preparation(state)
+	Sim.advance(state, GameData.PREPARATION_TICKS)
+	_park_the_waves(state)
+	return state
+
+
+## How long one zombie takes to reach the house, with and without a barricade
+## thrown down in front of it part way there.
+##
+## **Dropped in front of a walking zombie, which is the feature.** Placing one
+## on open ground before the wave arrives costs nothing at all - the field
+## routes around three of them for the same twenty-seven steps, which is what
+## task 0046 found out about walls on the same afternoon, and walling the
+## approach down to a gap only moves the detour further out.
+##
+## What a barricade is for is the moment one is already coming: it goes into
+## the cell the zombie is about to step into, and that zombie either goes
+## round it or eats it. Both cost time, and the time is what this measures.
+##
+## The lever that would make an obstacle cost something *without* being in the
+## way - `path_cost`, which every blocking structure declares and nothing
+## reads yet - belongs to task 0049: "a zombie prefers the open lane and breaks
+## through when it must". Until then a structure is a yes or a no.
+func _time_to_the_house(seed_value: int, blocked: bool) -> int:
+	var state := _armed_night(seed_value)
+	Pathing.refresh(state)
+	var spawn: Vector2i = Enemies.spawn_cells(state, 0)[0]
+	var walker := Entities.spawn(state, &"walker", spawn)
+	var house_before := int(state["house_hp"])
+	var dropped := not blocked
+
+	for tick in 20000:
+		# Half way there, put one in its path - the cell it is about to enter.
+		if not dropped and tick > 200:
+			var here := Entities.cell_of(state, walker)
+			var next := Pathing.step_from(state, here)
+			if next != here and Building.place(state, &"barricade", next):
+				Pathing.refresh(state)
+				dropped = true
+
+		Sim.advance(state, 1)
+		if int(state["house_hp"]) < house_before:
+			return tick
+		if not Entities.alive(state, walker):
+			return 0        # something killed it; the measurement is void
+	return 0
+
+
+## How long a walker takes to eat through one barricade, boxed in by them.
+func _time_to_chew(seed_value: int, hp: int = 0) -> int:
+	var state := _armed_night(seed_value)
+	Pathing.refresh(state)
+	var cell := _room_for(state, Vector2i(1, 1))
+	var life := int((GameData.DEFENCES[&"barricade"] as Dictionary)["hp"])
+	if hp > 0:
+		life = hp
+
+	var around: Array = []
+	for offset in [Vector2i(0, 1), Vector2i(0, -1), Vector2i(1, 0),
+			Vector2i(-1, 0)]:
+		var at: Vector2i = cell + offset
+		if Farm.place(state, at, {"id": &"barricade", "hp": life,
+				"expires": int(state["tick"]) + 100000}):
+			around.append(at)
+	Pathing.refresh(state)
+	if around.is_empty():
+		return 0
+
+	Entities.spawn(state, &"walker", cell)
+	var standing := around.size()
+	for tick in 20000:
+		Sim.advance(state, 1)
+		var left := 0
+		for found in around:
+			if not Farm.is_empty(state, found):
+				left += 1
+		if left < standing:
+			return tick
+	return 0

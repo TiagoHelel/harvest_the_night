@@ -36,6 +36,15 @@ static func initial() -> Dictionary:
 		"build": {
 			"active": false,
 			"selected": &"",
+			# **How many of each thing have gone down tonight.**
+			# `{id: count}`, cleared when a night begins.
+			#
+			# `per_night_limit` has been in `DEFENCES` since the table was
+			# written and nothing read it - the barricade could be thrown down
+			# as fast as the wood held out, which is a wall you rebuild rather
+			# than an emergency answer. Task 0047 is where the number starts
+			# meaning something.
+			"placed_tonight": {},
 		},
 	}
 
@@ -123,6 +132,29 @@ static func anchor_of(state: Dictionary, cell: Vector2i) -> Vector2i:
 	return Vector2i(int(pair[0]), int(pair[1]))
 
 
+## How many more of this may go down tonight. A big number for anything with
+## no limit, so callers do not have to know which is which.
+static func left_tonight(state: Dictionary, id: StringName) -> int:
+	var entry: Variant = entry_of(id)
+	if entry == null:
+		return 0
+	var limit := int((entry as Dictionary).get("per_night_limit", 0))
+	if limit <= 0:
+		return 1 << 30          # no limit declared, so no limit applied
+	return maxi(limit - placed_tonight(state, id), 0)
+
+
+## How many of this have gone down since the night began.
+static func placed_tonight(state: Dictionary, id: StringName) -> int:
+	return int((((state["build"] as Dictionary)["placed_tonight"])
+		as Dictionary).get(id, 0))
+
+
+## A new night, a fresh allowance. Called from `Phases.begin_night()`.
+static func forget_tonight(state: Dictionary) -> void:
+	(state["build"] as Dictionary)["placed_tonight"] = {}
+
+
 ## Whether the phase lets this go down at all.
 static func allowed_in_phase(state: Dictionary, id: StringName) -> bool:
 	var phase := int(state["phase"])
@@ -155,6 +187,12 @@ static func why_not(state: Dictionary, id: StringName, cell: Vector2i) -> String
 		return "nothing selected"
 	if not allowed_in_phase(state, id):
 		return "not at night"
+	# **The allowance, before the money.** Being told "you have used your five"
+	# is a different sentence from "you are short two wood", and the first one
+	# is the one that is true.
+	if left_tonight(state, id) <= 0:
+		return "%d a night, and that was the last" % int(
+			(entry_of(id) as Dictionary).get("per_night_limit", 0))
 	# **Every cell it would cover**, not only the one under the cursor. A press
 	# hanging half off the farm is the bug this stops.
 	for at in footprint(id, cell):
@@ -212,6 +250,11 @@ static func place(state: Dictionary, id: StringName, cell: Vector2i) -> bool:
 	var occupant := {"id": id, "hp": int(entry.get("hp", 1))}
 	if entry.has("lifetime_ticks"):
 		occupant["expires"] = int(state["tick"]) + int(entry["lifetime_ticks"])
+
+	# Counted the moment it goes down, not when it comes up: a barricade that
+	# was chewed through still used one of tonight's five.
+	var tally: Dictionary = (state["build"] as Dictionary)["placed_tonight"]
+	tally[id] = int(tally.get(id, 0)) + 1
 
 	var cells := footprint(id, cell)
 	if cells.size() > 1:
