@@ -874,8 +874,21 @@ const ABILITY: Dictionary = {
 ## shot does not become a wall of white.
 const HURT_TICKS := 5                   # LEVER: ticks, 2-12
 
-## Speeds the night may be watched at. Ticks per tick, never a changed rate.
+## Speeds the night may be watched at. **Ticks per frame, never a changed tick
+## rate**: at 4x the sim runs four ticks where it would have run one, and every
+## rule still sees the same fixed tick it always saw. A changed rate would make
+## the speed button part of the simulation, and then two players watching at
+## different speeds would be playing different games.
 const SPEEDS: Array = [1, 2, 4]
+
+## How much house has to be left before the night may be skipped.
+##
+## **Because that night is worth watching.** Skipping is the semi-idle promise
+## for a night that is clearly going to hold; a night that is nearly lost is
+## the one the player should see, and the one where a flare or a barricade in
+## the right second is the difference. Letting it be skipped would be letting
+## the player skip the only interesting part of the game.
+const SKIP_MIN_HOUSE_PERCENT := 50      # LEVER: percent of full, 25-75
 
 
 # ==================================================================== enemies
@@ -1928,7 +1941,7 @@ static func digest() -> int:
 			HOUSE_REPAIR_PERCENT],
 		"ability": ABILITY,
 		"hurt": [HURT_TICKS],
-		"speeds": SPEEDS,
+		"speeds": [SPEEDS, SKIP_MIN_HOUSE_PERCENT],
 		"enemies": ENEMIES,
 		"nights": NIGHTS,
 		"wave_gap": [WAVE_GAP_TICKS, SPAWN_INTERVAL_TICKS, MVP_NIGHTS],

@@ -18,7 +18,20 @@ signal ticked(state: Dictionary)
 ## The game. Empty until `start()`.
 var state: Dictionary = {}
 
-## Ticks run per real tick owed. 1, 2 or 4 - the speed buttons of task 0055.
+## Ticks run per real tick owed: one of `GameData.SPEEDS`.
+##
+## **Ticks per frame, not a changed tick rate.** At 4x this runs four ticks
+## where it would have run one; every rule still sees the same fixed tick. That
+## is why a night watched at 4x and a night skipped outright end in the same
+## state, and why the speed button is not part of the simulation.
+##
+## It is remembered in `Settings` rather than here, so it survives a restart as
+## well as a night.
+##
+## **Set it with `set_speed()`**, which snaps it to the table and remembers it.
+## It is a plain field rather than a property with a setter because a setter
+## that assigns to its own property recurses until the stack runs out - which
+## it duly did, and took twenty seconds of watchdog to say so.
 var speed := 1
 
 ## False while paused or in a menu. A paused game banks nothing: the
@@ -37,10 +50,46 @@ var peak_usec := 0
 var _accumulator := 0.0
 
 
+## Set the speed, snapped to one the table offers, and remember it.
+func set_speed(value: int) -> void:
+	var wanted := 1
+	for offered in GameData.SPEEDS:
+		if int(offered) == value:
+			wanted = value
+	speed = wanted
+	# `get_node_or_null`, because `--check-only` and the headless tools run
+	# with no autoloads registered and a missing setting is not a crash.
+	var settings := get_node_or_null("/root/Settings")
+	if settings != null:
+		settings.set_value(&"gameplay/night_speed", wanted)
+
+
+## The next speed in the table, wrapping. What one button does.
+func cycle_speed() -> int:
+	var speeds: Array = GameData.SPEEDS
+	var at := speeds.find(speed)
+	set_speed(int(speeds[(at + 1) % speeds.size()]))
+	return speed
+
+
+## Run the rest of the night now. Returns the ticks it took, or zero when the
+## rules refused - the house being too low is the only reason.
+func skip_night() -> int:
+	if state.is_empty():
+		return 0
+	var ticks := Sim.skip_night(state)
+	if ticks > 0:
+		ticked.emit(state)
+	return ticks
+
+
 func start(seed_value: int) -> void:
 	state = State.create(seed_value)
 	_accumulator = 0.0
 	peak_usec = 0
+	var settings := get_node_or_null("/root/Settings")
+	if settings != null:
+		set_speed(int(settings.get_int(&"gameplay/night_speed")))
 
 
 func _process(delta: float) -> void:

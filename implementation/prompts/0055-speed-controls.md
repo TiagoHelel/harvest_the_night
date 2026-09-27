@@ -1,7 +1,7 @@
 # 0055 - Double speed and skipping the night
 
 - **Phase:** 3 - The full night
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0002, 0027
 - **Likely files:** src/ui/night_hud.gd, src/core/sim.gd
 

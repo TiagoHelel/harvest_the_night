@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`############............`  **54 / 109 done**
+`############............`  **55 / 109 done**
 
-0 doing / 55 todo / 0 blocked across 9 phases.
+0 doing / 54 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0055 - Double speed and skipping the night**. The whole of what is left is
+First up: **0056 - The night HUD**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,25 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-55 task(s) left, the ready ones first, then what they
+54 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0055 - Double speed and skipping the night
-
-Ready to pick up.  Likely files: `src/ui/night_hud.gd, src/core/sim.gd`.
-
-The semi-idle promise: if the defence is clearly going to hold, let the player say so and move on.
-
-- 1x, 2x and 4x, implemented as ticks per frame - never as a changed tick rate
-- Skip to the end simulates the rest of the night as fast as it can and shows the result
-- A skipped night and a watched night give an identical outcome from the same state - this is the test of the whole tick design
-- Speed is remembered across nights
-- Skipping is refused while the house is under a lever's worth of hit points, because that night is worth watching
-
-  - done when: Watched and skipped nights from one seed produce the same hash
-  - done when: 4x does not drop frames on a full board
-  - done when: `headless_check` runs a night both ways and compares
 
 ### 0056 - The night HUD
 
@@ -187,7 +171,7 @@ Section 12: surviving pays money, resources and technology, and the payout is th
 
 ### 0067 - The autoplayer
 
-Waits on 0059, 0055.  Likely files: `src/tools/autoplayer.gd`.
+Waits on 0059.  Likely files: `src/tools/autoplayer.gd`.
 
 A robot that plays the ten nights, so balance is measured over hundreds of runs instead of guessed at over three.
 
@@ -912,7 +896,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0040** [The shop grows](prompts/0040-shop-full.md)
 - [x] **0041** [The first day teaches itself](prompts/0041-tutorial-day.md)
 
-## 3 - The full night  (13/17)
+## 3 - The full night  (14/17)
 
 - [x] **0042** [Data-driven defences](prompts/0042-defence-data.md)
 - [x] **0043** [The flamethrower tower](prompts/0043-tower-flame.md)
@@ -927,7 +911,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0052** [The breaker](prompts/0052-enemy-breaker.md)
 - [x] **0053** [Repair during the night](prompts/0053-repair.md)
 - [x] **0054** [The player's ability](prompts/0054-ability.md)
-- [ ] **0055** [Double speed and skipping the night](prompts/0055-speed-controls.md)
+- [x] **0055** [Double speed and skipping the night](prompts/0055-speed-controls.md)
 - [ ] **0056** [The night HUD](prompts/0056-night-hud.md)
 - [ ] **0057** [Structures take damage and die](prompts/0057-structure-damage.md)
 - [ ] **0058** [The Giant](prompts/0058-boss-giant.md) - needs 0057
@@ -942,7 +926,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [ ] **0064** [Tower I, II, automatic](prompts/0064-tower-upgrades.md) - needs 0063
 - [ ] **0065** [Losing a night costs you](prompts/0065-defeat.md) - needs 0061
 - [ ] **0066** [Night 10 and the end of the run](prompts/0066-run-end.md) - needs 0060, 0058
-- [ ] **0067** [The autoplayer](prompts/0067-autoplayer.md) - needs 0059, 0055
+- [ ] **0067** [The autoplayer](prompts/0067-autoplayer.md) - needs 0059
 - [ ] **0068** [A balance sweep over the ten nights](prompts/0068-balance-sweep.md) - needs 0067
 - [ ] **0069** [Run statistics](prompts/0069-stats.md) - needs 0066
 - [ ] **0070** [Endless nights past ten](prompts/0070-endless.md) - needs 0066, 0059

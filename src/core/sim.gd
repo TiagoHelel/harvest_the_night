@@ -143,6 +143,53 @@ static func _tick_night(state: Dictionary) -> void:
 	Combat.tick(state)
 
 
+# ------------------------------------------------------------- skipping ahead
+
+## Whether the rest of tonight may be run off without watching it.
+static func can_skip(state: Dictionary) -> bool:
+	return why_not_skip(state).is_empty()
+
+
+## Why it may not be skipped, in words, for the button's tooltip. Empty when
+## it may.
+static func why_not_skip(state: Dictionary) -> String:
+	if int(state["phase"]) != Phases.NIGHT:
+		return "only at night"
+	var left := int(state["house_hp"]) * 100 / maxi(GameData.HOUSE_HP, 1)
+	if left < GameData.SKIP_MIN_HOUSE_PERCENT:
+		return "the house is at %d%% - this one is worth watching" % left
+	return ""
+
+
+## Run the rest of the night now.
+##
+## **It is the same ticks, in the same order, with nothing skipped.** "Skip"
+## is the player skipping the watching, not the game skipping the simulating:
+## this is `advance()` until the night is over, so a skipped night and a
+## watched night from the same state end identically. That is the property the
+## whole fixed-tick design exists for, and `headless_check` runs a night both
+## ways and compares the hash.
+##
+## Returns how many ticks it took, or zero when it was refused.
+static func skip_night(state: Dictionary) -> int:
+	if not can_skip(state):
+		return 0
+	var ticks := 0
+	# A bound rather than a `while true`: a rule that stopped ending nights
+	# should hang a test, not the game.
+	while ticks < MOST_TICKS_IN_A_NIGHT:
+		if int(state["phase"]) != Phases.NIGHT:
+			break
+		tick(state)
+		ticks += 1
+	return ticks
+
+
+## Longer than any night the tables can produce, and short enough that hitting
+## it is a bug rather than a wait.
+const MOST_TICKS_IN_A_NIGHT := 60 * 60 * GameData.TICK_HZ
+
+
 ## Advance by `ticks`, which is how every caller outside a frame loop uses it:
 ## the headless tests, the autoplayer, and skipping the rest of a night.
 static func advance(state: Dictionary, ticks: int) -> void:

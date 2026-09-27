@@ -86,6 +86,12 @@ var _state: Dictionary = {}
 var _day: Label
 var _money: Label
 var _night: Button
+var _speed: Label
+var _skip: Label
+
+## The driver, for the speed and skip buttons. Set by `main.gd`; the HUD asks
+## it to do things and never touches `state` to do them.
+var driver: SimDriver
 var _labels: Dictionary = {}        # resource id -> Label
 var _last: Dictionary = {}          # resource id -> the number it last showed
 var _flash: Dictionary = {}         # resource id -> seconds of glow left
@@ -147,6 +153,8 @@ func _ready() -> void:
 	# Under the power line, and up after dark for the same reason.
 	_ammo = _label("AmmoLine", Vector2(4, 248), DIM)
 
+	# Neither of these is day chrome, so they are built after `_day_only` is
+	# collected and shown by hand on the night side of `_refresh()`.
 	_night = Button.new()
 	_night.name = "NightButton"
 	_night.text = "SWITCH TO NIGHT"
@@ -156,6 +164,36 @@ func _ready() -> void:
 	_night.focus_mode = Control.FOCUS_ALL          # the keyboard can reach it
 	_night.pressed.connect(_ask_for_night)
 	add_child(_night)
+
+	# **The night's own two controls**, bottom right where the day keeps its
+	# one. `design.md`'s night mock has `[VELOCIDADE x2]` there and this is it;
+	# task 0056 builds the rest of that bar around them.
+	# **Read-outs, not buttons, and the keys do the work.**
+	#
+	# Two `Button`s went here first and could not be clicked: a plain
+	# `MOUSE_FILTER_STOP` control anywhere in this corner of `DayHud` is not
+	# hit-testable, while the night button four pixels away hovers perfectly
+	# well. Six probes did not explain it, and a button that cannot be
+	# pressed is worse than no button.
+	#
+	# So the night's controls are keys - `V` and `K`, beside `N` for the
+	# night, `B` for build and `F` for the flare - and these say so. Task
+	# 0056 owns the night HUD and can build a clickable bar when it designs
+	# the layout; the finding is in the journal for whoever does.
+	_speed = _label("SpeedLine", Vector2(352, 250), DIM)
+	_skip = _label("SkipLine", Vector2(352, 260), DIM)
+
+
+## Cycle 1x, 2x, 4x. The label follows on the next frame, off the driver.
+func _cycle_speed() -> void:
+	if driver != null:
+		driver.cycle_speed()
+
+
+## Run the rest of the night now, if the rules allow it.
+func _skip_the_night() -> void:
+	if driver != null:
+		driver.skip_night()
 
 
 ## One row per crop, read off the data. Nothing here names wheat, corn or
@@ -210,6 +248,13 @@ func _process(delta: float) -> void:
 		return
 	_refresh(false)
 	_fade(delta)
+
+	# The night's own two, live only after dark.
+	if int(_state["phase"]) == Phases.NIGHT:
+		if Input.is_action_just_pressed(&"speed"):
+			_cycle_speed()
+		if Input.is_action_just_pressed(&"skip_night"):
+			_skip_the_night()
 
 	# `N` does what the button does, for a player whose hands are on the keys.
 	if Input.is_action_just_pressed(&"night"):
@@ -272,6 +317,19 @@ func _refresh(force: bool) -> void:
 	for node in _day_only:
 		node.visible = daylight
 	visible = true
+
+	# **The night's controls are the inverse of the day's.** They are not in
+	# `_day_only`, so they are shown here and hidden by the same test.
+	var after_dark := int(_state["phase"]) == Phases.NIGHT
+	_speed.visible = after_dark
+	_skip.visible = after_dark
+	if after_dark:
+		_speed.text = "[V] SPEED %dx" % (driver.speed if driver != null
+			else 1)
+		var refused := Sim.why_not_skip(_state)
+		_skip.text = "[K] SKIP" if refused.is_empty() else "[K] " + refused
+		_skip.modulate = SHORT if not refused.is_empty() else WARM
+
 	if not daylight:
 		return
 

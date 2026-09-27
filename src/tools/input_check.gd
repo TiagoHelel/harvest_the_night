@@ -41,7 +41,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 25
+const CASES := 26
 
 var passed := 0
 var failed := 0
@@ -96,6 +96,7 @@ func _run() -> void:
 	await _case_0046_walls()
 	await _case_0053_repair()
 	await _case_0054_ability()
+	await _case_0055_speed()
 	_finish()
 
 
@@ -2595,5 +2596,117 @@ func _case_0054_ability() -> void:
 		"and the ring the HUD draws is not full",
 		str(Ability.charge_percent(state)))
 
+	await close_scene()
+	_completed += 1     # last line: an abandoned case never gets here
+
+
+## 0055 - speed and skipping, off the keys they live on.
+func _case_0055_speed() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var hud: DayHud = require_control("DayHud")
+	if driver == null or hud == null:
+		_completed += 1
+		await close_scene()
+		return
+
+	var state := driver.state
+	var speed_line: Label = locate_control("SpeedLine") as Label
+	var skip_line: Label = locate_control("SkipLine") as Label
+	expect(speed_line != null and skip_line != null,
+		"the night's two read-outs exist")
+	expect(hud.driver != null,
+		"and the HUD was handed the driver to work them with")
+
+	# **Neither is up by day**, and neither key does anything then.
+	await frames(2)
+	expect(not speed_line.visible, "the speed line is down by day")
+	expect(not skip_line.visible, "and so is the skip line")
+	driver.set_speed(1)
+	await tap_key(KEY_V)
+	await frames(2)
+	expect(driver.speed == 1, "V does nothing in daylight",
+		str(driver.speed))
+
+	Phases.begin_preparation(state)
+	Sim.advance(state, GameData.PREPARATION_TICKS)
+	await frames(2)
+	expect(int(state["phase"]) == Phases.NIGHT, "it is night")
+	expect(speed_line.visible and skip_line.visible,
+		"and after dark both are up")
+	expect(speed_line.text.contains("1x"),
+		"the speed line says what speed it is", speed_line.text)
+
+	# **V cycles the table.**
+	var seen: Array = [driver.speed]
+	for _i in GameData.SPEEDS.size():
+		await tap_key(KEY_V)
+		await frames(2)
+		if not seen.has(driver.speed):
+			seen.append(driver.speed)
+	expect(seen.size() == GameData.SPEEDS.size(),
+		"V reaches every speed the table offers", str(seen))
+	expect(driver.speed == 1, "and comes back round to one",
+		str(driver.speed))
+
+	# **Speed is never a changed tick rate.** Whatever it says, a tick is a
+	# tick: forty ticks are forty ticks at 4x.
+	driver.set_speed(4)
+	await frames(2)
+	expect(speed_line.text.contains("4x"),
+		"the line says what it is doing", speed_line.text)
+	var before := int(state["tick"])
+	Sim.advance(state, 40)
+	expect(int(state["tick"]) == before + 40,
+		"forty ticks are forty ticks at any speed",
+		str(int(state["tick"]) - before))
+
+	# **K runs the rest of the night.**
+	driver.set_speed(1)
+	state["house_hp"] = GameData.HOUSE_HP
+	await frames(2)
+	expect(Sim.can_skip(state), "the house is healthy, so it may be skipped")
+	expect(skip_line.text.contains("SKIP"),
+		"and the line offers it", skip_line.text)
+	await tap_key(KEY_K)
+	await frames(3)
+	expect(int(state["phase"]) != Phases.NIGHT,
+		"pressing K ends the night", str(state["phase"]))
+
+	# **And it is refused when the night is worth watching.**
+	#
+	# Skipping leaves the run on the result screen, so that has to be dealt
+	# with before there is another night to refuse to skip.
+	(state["intent"] as Dictionary)["confirm_result"] = true
+	Sim.advance(state, 2)
+	Phases.begin_preparation(state)
+	Sim.advance(state, GameData.PREPARATION_TICKS)
+	state["house_hp"] = 1
+	await frames(2)
+	expect(int(state["phase"]) == Phases.NIGHT, "another night")
+	expect(skip_line.text.contains("watching"),
+		"with the house nearly gone the line says why rather than offering",
+		skip_line.text)
+	var night_tick := int(state["night_tick"])
+	await tap_key(KEY_K)
+	await frames(3)
+	expect(int(state["phase"]) == Phases.NIGHT,
+		"pressing it anyway changes nothing", str(state["phase"]))
+	expect(int(state["night_tick"]) > night_tick,
+		"and the night is still running", str(state["night_tick"]))
+
+	# **Speed is remembered.** Four goes in, the scene closes, and the next
+	# one opens at four.
+	driver.set_speed(4)
+	await close_scene()
+	await open_scene(MAIN_SCENE)
+	var again: SimDriver = require_control("SimDriver")
+	expect(again != null and again.speed == 4,
+		"a new scene opens at the speed the last one was left at",
+		str(again.speed if again != null else -1))
+
+	# Put it back, so this case leaves nothing behind for the next one.
+	if again != null:
+		again.set_speed(1)
 	await close_scene()
 	_completed += 1     # last line: an abandoned case never gets here

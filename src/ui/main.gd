@@ -50,6 +50,9 @@ func _ready() -> void:
 	_world.show_state(_driver.state)
 	_player_view.show_state(_driver.state)
 	_shop.show_state(_driver.state)
+	# The HUD drives the speed and skip buttons through this,
+	# rather than reaching into the state to do it itself.
+	_hud.driver = _driver
 	_hud.show_state(_driver.state)
 	_build.show_state(_driver.state, _world)
 	_result.show_state(_driver.state)

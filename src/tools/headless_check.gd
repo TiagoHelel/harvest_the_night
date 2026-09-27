@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 47
+const GROUPS := 48
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -111,6 +111,7 @@ func _run() -> void:
 	_task_0052_breaker()
 	_task_0053_repair()
 	_task_0054_ability()
+	_task_0055_speed()
 
 
 func _finish() -> void:
@@ -8321,3 +8322,138 @@ func _crowd_near(state: Dictionary, cell: Vector2i) -> int:
 		if at.x >= 0 and Grid.chebyshev(cell, at) <= radius:
 			near += 1
 	return near
+
+
+## 0055 - speed and skipping: the same night either way, and the proof of the
+## whole fixed-tick design.
+func _task_0055_speed() -> void:
+	# **The speeds are ticks per frame and the table says so.**
+	expect(GameData.SPEEDS.has(1) and GameData.SPEEDS.has(2)
+		and GameData.SPEEDS.has(4), "one, two and four times",
+		str(GameData.SPEEDS))
+	for at in GameData.SPEEDS:
+		expect(typeof(at) == TYPE_INT,
+			"and every one of them is a whole number of ticks", str(at))
+	expect(int(GameData.SPEEDS[0]) == 1,
+		"the first is normal speed, so a fresh run watches at 1x")
+
+	# **Four ticks at 4x are four ticks at 1x.** Not a claim about a button:
+	# a claim about `advance()`, which is all the button does more of.
+	var once := _fresh_night(3700)
+	var four_at_a_time := _fresh_night(3700)
+	for _i in 400:
+		Sim.advance(once, 1)
+	for _i in 100:
+		Sim.advance(four_at_a_time, 4)
+	expect(State.hash_of(once) == State.hash_of(four_at_a_time),
+		"four hundred ticks one at a time and a hundred lots of four are the "
+		+ "same night", "%d against %d"
+			% [State.hash_of(once), State.hash_of(four_at_a_time)])
+
+	# **Skipping is refused when the night is worth watching.** The
+	# requirement, and the reason for it.
+	var hurt := _fresh_night(3701)
+	expect(Sim.can_skip(hurt), "a healthy house may skip the night")
+	expect(Sim.why_not_skip(hurt).is_empty(), "with no reason not to",
+		Sim.why_not_skip(hurt))
+	hurt["house_hp"] = GameData.HOUSE_HP 		* GameData.SKIP_MIN_HOUSE_PERCENT / 100 - 1
+	expect(not Sim.can_skip(hurt),
+		"a house under the line may not - that night is the game",
+		str(hurt["house_hp"]))
+	expect(Sim.why_not_skip(hurt).contains("watching"),
+		"and the button says why rather than just refusing",
+		Sim.why_not_skip(hurt))
+	expect(Sim.skip_night(hurt) == 0, "so nothing is skipped")
+	var was := State.hash_of(hurt)
+	Sim.skip_night(hurt)
+	expect(State.hash_of(hurt) == was,
+		"and a refused skip changes nothing at all", str(State.hash_of(hurt)))
+
+	# Nor by day: there is nothing to skip.
+	var noon := State.create(3702)
+	expect(not Sim.can_skip(noon), "there is no night to skip at noon")
+	expect(Sim.why_not_skip(noon) == "only at night", Sim.why_not_skip(noon))
+
+	# **Watched and skipped from one state end identically.** The done-when,
+	# and what the prompt calls the test of the whole tick design.
+	var watched := _a_night_to_run(3703)
+	var skipped := _a_night_to_run(3703)
+	expect(State.hash_of(watched) == State.hash_of(skipped),
+		"the two runs start identical",
+		"%d against %d" % [State.hash_of(watched), State.hash_of(skipped)])
+
+	var watched_ticks := 0
+	for _tick in Sim.MOST_TICKS_IN_A_NIGHT:
+		if int(watched["phase"]) != Phases.NIGHT:
+			break
+		Sim.advance(watched, 1)
+		watched_ticks += 1
+	var skipped_ticks := Sim.skip_night(skipped)
+
+	print("  a night watched: %d ticks. Skipped: %d. Hash %d against %d"
+		% [watched_ticks, skipped_ticks, State.hash_of(watched),
+			State.hash_of(skipped)])
+	expect(watched_ticks > 100, "the night was a real one",
+		str(watched_ticks))
+	expect(skipped_ticks == watched_ticks,
+		"skipping runs exactly the ticks watching would have",
+		"%d against %d" % [skipped_ticks, watched_ticks])
+	expect(State.hash_of(watched) == State.hash_of(skipped),
+		"and the two end in the same state, to the hash",
+		"%d against %d" % [State.hash_of(watched), State.hash_of(skipped)])
+	expect(int(watched["breaches"]) == int(skipped["breaches"]),
+		"the same number got in", "%d against %d"
+			% [watched["breaches"], skipped["breaches"]])
+	expect(int(watched["house_hp"]) == int(skipped["house_hp"]),
+		"and the house is in the same state",
+		"%d against %d" % [watched["house_hp"], skipped["house_hp"]])
+	expect(int(skipped["phase"]) != Phases.NIGHT,
+		"and the night is over", str(skipped["phase"]))
+
+	# **And at 4x as well**, which is the same claim through the other door.
+	var quick := _a_night_to_run(3703)
+	for _tick in Sim.MOST_TICKS_IN_A_NIGHT / 4:
+		if int(quick["phase"]) != Phases.NIGHT:
+			break
+		Sim.advance(quick, 4)
+	expect(int(quick["phase"]) != Phases.NIGHT, "a 4x night ends too")
+	expect(int(quick["breaches"]) == int(watched["breaches"]),
+		"and the same number got in watching it fast",
+		"%d against %d" % [quick["breaches"], watched["breaches"]])
+
+	# **4x does not drop frames on a full board.** The done-when: four ticks
+	# of a busy farm have to fit in one frame, with room.
+	#
+	# **A board with something on it.** The first version of this measured a
+	# farm with towers and crops on it and printed "0 zombies" beside the
+	# number - a quiet farm at four times nothing. A hundred of them in a
+	# maze, walls coming down, is the worst frame the game has.
+	var loaded := _maze_night(3704)
+	for _i in 100:
+		Enemies.spawn(loaded, &"walker", 0)
+	var started := Time.get_ticks_usec()
+	Sim.advance(loaded, 1200)
+	var per_tick := float(Time.get_ticks_usec() - started) / 1200.0
+	var budget := 1000000.0 / float(GameData.TICK_HZ)
+	var fastest := int(GameData.SPEEDS[GameData.SPEEDS.size() - 1])
+	print("  a full farm at %dx: %.0f us a frame against a %.0f us budget "
+		% [fastest, per_tick * fastest, budget]
+		+ "(%d zombies, %.1f us a tick)"
+		% [Entities.count(loaded), per_tick])
+	expect(per_tick * float(fastest) < budget,
+		"four ticks of a full farm fit inside one frame",
+		"%.0f us against %.0f" % [per_tick * fastest, budget])
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## A night with something to actually happen in it: a farm with towers, a
+## house that can be bitten, and the waves left switched on.
+func _a_night_to_run(seed_value: int) -> Dictionary:
+	var state := State.create(seed_value)
+	Resources.gain(state, {GameData.WOOD: 400, GameData.STONE: 400,
+		GameData.IRON: 400, GameData.GUNPOWDER: 400, GameData.OIL: 400})
+	Phases.begin_preparation(state)
+	_line_of_towers(state, &"gun_tower", 3)
+	Sim.advance(state, GameData.PREPARATION_TICKS)
+	return state

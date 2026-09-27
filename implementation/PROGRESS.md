@@ -4017,3 +4017,79 @@ read from the keyboard directly.
 
 `python tools/verify.py` prints PASS: 1721 asserts, 391 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+
+## 0055 - Double speed and skipping the night
+
+The property this task exists to prove is that **speed is not part of the
+simulation**, and the clearest evidence is in the guards: the sim hash did not
+move. Ticks per frame, never a changed tick rate, so a night watched at 4x, a
+night watched at 1x and a night skipped outright are the same night.
+
+    a night watched: 1375 ticks. Skipped: 1375. Hash 1834013722 against 1834013722
+
+`Sim.skip_night()` is `tick()` in a loop until the night is over - the player
+skips the watching, not the game the simulating - which is why that line reads
+the way it does and why the done-when could be asserted rather than argued.
+The same claim is made twice more: four hundred ticks one at a time against a
+hundred lots of four, and a 4x night against a 1x one, both to the hash.
+
+Skipping is refused under half a house, because that night is the game: a
+flare or a barricade in the right second is the whole of what the night is
+for, and letting it be skipped would let the player skip the only interesting
+part. The refusal says which, so the read-out can explain itself.
+
+### Four ticks of the worst frame the game has
+
+    a full farm at 4x: 5223 us a frame against a 33333 us budget
+      (80 zombies, 1305.7 us a tick)
+
+Measured on a hundred zombies in a maze with walls coming down, not on a quiet
+farm: the first version of that assert printed "0 zombies" beside its number,
+which is four times nothing.
+
+### The buttons that could not be pressed
+
+`design.md`'s night mock has `[REPARAR] [HABILIDADE] [VELOCIDADE x2]` along
+the bottom, so this task built two buttons there - and they could not be
+clicked. Not the 31-pixel `Button` trap the project has hit twice before,
+though that was there too and was fixed: after making them exactly the size
+they claimed, and then building them identically to the night button four
+pixels away, and then wrapping them in a `MOUSE_FILTER_STOP` frame the way
+`BuildMode` does, a bare `Control` in that corner of `DayHud` still reported
+no hover at all while `NightButton` beside it hovered perfectly. Six probes
+did not explain it.
+
+A button that cannot be pressed is worse than no button, so the night's
+controls are **keys** - `V` and `K`, beside `N` for the night, `B` for build
+and `F` for the flare - and what is on screen says so: `[V] SPEED 1x` and
+`[K] SKIP`, with the skip line turning red and printing the reason when the
+house is too low. That is `input_check`-testable, which the buttons were not.
+
+**Task 0056 owns the night HUD.** If it wants a clickable bar it will be
+designing that corner from scratch anyway, and this note is here so it knows
+the trap is waiting.
+
+### A setter that called itself
+
+`var speed := 1: set = set_speed` with `speed = wanted` inside `set_speed` is
+infinite recursion, and it cost twenty seconds of watchdog and a hunt through
+the HUD before the stack trace pointed at the driver. `speed` is a plain field
+with a `set_speed()` method now.
+
+### Remembered
+
+`gameplay/night_speed` was in `Settings.DEFAULTS` and unread. The driver reads
+it on `start()` and writes it on every change, so the speed survives a night
+and a restart. The test asserts it by closing the scene and opening another -
+and had to be rewritten to set the speed by hand first, because it was
+tripping over its own persistence.
+
+### Hashes
+
+| | from | to | why |
+|---|---|---|---|
+| sim hash | `2770152428` | `2770152428` | **unchanged, and that is the point** - speed and skipping add no rules |
+| data hash | `2691269033` | `177116930` | `SKIP_MIN_HOUSE_PERCENT` is a lever, so it joined the digest |
+
+`python tools/verify.py` prints PASS: 1745 asserts, 411 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.
