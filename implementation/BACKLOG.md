@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`####....................`  **18 / 108 done**
+`####....................`  **19 / 108 done**
 
-0 doing / 90 todo / 0 blocked across 9 phases.
+0 doing / 89 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0019 - The workshop and its first recipe**. The whole of what is left is
+First up: **0020 - The shop: sell and buy**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,24 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-90 task(s) left, the ready ones first, then what they
+89 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0019 - The workshop and its first recipe
-
-Ready to pick up.  Likely files: `src/core/crafting.gd`.
-
-The bridge the whole game rests on: day resources become night structures. Wood plus stone becomes a barricade.
-
-- Recipes are data: inputs, output, ticks to craft
-- Crafting takes the inputs at the start, not at the end, so cancelling costs something
-- One recipe at a time here; the queue arrives at 0037
-- The workshop is a building on the grid the player walks to and interacts with
-- A recipe whose inputs are short is shown as unaffordable rather than hidden
-
-  - done when: Wood plus stone becomes a barricade in the crafting time and the resources are gone
-  - done when: Cancelling mid-craft does not refund and does not duplicate
 
 ### 0020 - The shop: sell and buy
 
@@ -122,6 +107,20 @@ The resource that gates towers. Iron should feel like the thing you are always a
 
   - done when: Mining a full day yields iron inside the range the journal claims
   - done when: The rock face cannot be exhausted permanently
+
+### 0032 - Oil
+
+Ready to pick up.  Likely files: `src/core/crafting.gd, src/core/game_data.gd`.
+
+Fire needs fuel. Oil is pressed rather than gathered, which makes it the first resource that costs a building.
+
+- A press that turns corn or fish into oil over ticks
+- Oil feeds the flamethrower tower and incendiary ammunition
+- Oil is the most valuable thing to sell and the most useful to keep: that tension is the point
+- Press throughput is a lever
+
+  - done when: Oil can be produced and sold, and the sale is a real temptation against the flamethrower cost
+  - done when: `headless_check` runs the press for a known number of ticks
 
 ### 0036 - The inventory
 
@@ -214,23 +213,9 @@ A field you can read at a glance, and one small daily chore that rewards coming 
   - done when: A watered and an unwatered tile planted together finish a measurable distance apart
   - done when: Holding the water input across a row waters the row once each
 
-### 0032 - Oil
-
-Waits on 0019.  Likely files: `src/core/crafting.gd, src/core/game_data.gd`.
-
-Fire needs fuel. Oil is pressed rather than gathered, which makes it the first resource that costs a building.
-
-- A press that turns corn or fish into oil over ticks
-- Oil feeds the flamethrower tower and incendiary ammunition
-- Oil is the most valuable thing to sell and the most useful to keep: that tension is the point
-- Press throughput is a lever
-
-  - done when: Oil can be produced and sold, and the sale is a real temptation against the flamethrower cost
-  - done when: `headless_check` runs the press for a known number of ticks
-
 ### 0033 - The generator and energy
 
-Waits on 0031, 0019.  Likely files: `src/core/power.gd`.
+Waits on 0031.  Likely files: `src/core/power.gd`.
 
 Energy, the resource on the reference sheet that gates the advanced structures and makes placement matter.
 
@@ -259,7 +244,7 @@ The kitchen from the reference sheet: raw crops and fish become food, which is w
 
 ### 0037 - The workshop queue
 
-Waits on 0019, 0036.  Likely files: `src/core/crafting.gd, src/ui/workshop_panel.gd`.
+Waits on 0036.  Likely files: `src/core/crafting.gd, src/ui/workshop_panel.gd`.
 
 Semi-idle in one feature: queue five things, walk away, come back to five things.
 
@@ -318,7 +303,7 @@ Chop, mine, till, plant, water, the fishing splash and the bite, the craft, the 
 
 ### 0023 - Build mode
 
-Waits on 0019, 0022.  Likely files: `src/ui/build_mode.gd, src/core/building.gd`.
+Waits on 0022.  Likely files: `src/ui/build_mode.gd, src/core/building.gd`.
 
 Placing things on the farm: pick a structure, see where it can go, pay for it, put it there.
 
@@ -1399,7 +1384,7 @@ For the player who beat the Giant and wants to know how far the farm goes. Cheap
 - [x] **0011** [input_check harness](prompts/0011-input-check.md)
 - [x] **0012** [Debug overlay](prompts/0012-debug-overlay.md)
 
-## 1 - The first playable build  (6/15)
+## 1 - The first playable build  (7/15)
 
 - [x] **0013** [The world renders](prompts/0013-world-render.md)
 - [x] **0014** [Sprites generated from ASCII maps](prompts/0014-sprite-pipeline.md)
@@ -1407,11 +1392,11 @@ For the player who beat the Giant and wants to know how far the farm goes. Cheap
 - [x] **0016** [Trees and wood](prompts/0016-wood.md)
 - [x] **0017** [Rocks and stone](prompts/0017-stone.md)
 - [x] **0018** [Wheat: till, plant, grow, harvest](prompts/0018-wheat.md)
-- [ ] **0019** [The workshop and its first recipe](prompts/0019-workshop.md)
+- [x] **0019** [The workshop and its first recipe](prompts/0019-workshop.md)
 - [ ] **0020** [The shop: sell and buy](prompts/0020-shop.md)
 - [ ] **0021** [The day HUD](prompts/0021-day-hud.md)
 - [ ] **0022** [Switching reality](prompts/0022-reality-switch.md) - needs 0021
-- [ ] **0023** [Build mode](prompts/0023-build-mode.md) - needs 0019, 0022
+- [ ] **0023** [Build mode](prompts/0023-build-mode.md) - needs 0022
 - [ ] **0024** [The shooting tower](prompts/0024-tower-gun.md) - needs 0023
 - [ ] **0025** [Zombies walk to the house](prompts/0025-zombies-walk.md) - needs 0022
 - [ ] **0026** [The tower kills the zombie](prompts/0026-combat.md) - needs 0024, 0025
@@ -1423,12 +1408,12 @@ For the player who beat the Giant and wants to know how far the farm goes. Cheap
 - [ ] **0029** [Growth stages and watering](prompts/0029-growth-stages.md) - needs 0028
 - [ ] **0030** [Fishing](prompts/0030-fishing.md)
 - [ ] **0031** [Iron from the rock face](prompts/0031-iron.md)
-- [ ] **0032** [Oil](prompts/0032-oil.md) - needs 0019
-- [ ] **0033** [The generator and energy](prompts/0033-generator.md) - needs 0031, 0019
+- [ ] **0032** [Oil](prompts/0032-oil.md)
+- [ ] **0033** [The generator and energy](prompts/0033-generator.md) - needs 0031
 - [ ] **0034** [Cooking: food and meat](prompts/0034-cooking.md) - needs 0030, 0028
 - [ ] **0035** [Gunpowder and ammunition](prompts/0035-ammunition.md) - needs 0032, 0033
 - [ ] **0036** [The inventory](prompts/0036-inventory.md)
-- [ ] **0037** [The workshop queue](prompts/0037-craft-queue.md) - needs 0019, 0036
+- [ ] **0037** [The workshop queue](prompts/0037-craft-queue.md) - needs 0036
 - [ ] **0038** [Production runs while you are elsewhere](prompts/0038-idle-production.md) - needs 0037, 0029
 - [ ] **0039** [The day clock and dusk](prompts/0039-day-clock.md) - needs 0021
 - [ ] **0040** [The shop grows](prompts/0040-shop-full.md) - needs 0020, 0028

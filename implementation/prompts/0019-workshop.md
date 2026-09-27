@@ -1,7 +1,7 @@
 # 0019 - The workshop and its first recipe
 
 - **Phase:** 1 - The first playable build
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0007, 0017
 - **Likely files:** src/core/crafting.gd
 

@@ -595,6 +595,7 @@ const DEFEAT_KEEPS_TECH := true
 ##     .  grass          s  soil, the field       ~  water
 ##     #  rock face      p  path                  =  wooden floor and jetty
 ##     T  tree           r  loose rock            o  iron ore
+##     S  stone seam     W  the workshop
 ##     H  the farmhouse  $  the shop stall
 ##
 ## `validate()` checks the shape, so a row typed one character short is a red
@@ -608,8 +609,8 @@ const FARM_MAP: Array = [
 	"T..ssssss......HHH...###S#.............T",
 	"...ssssss.....ppppp..#S###r...o.........",
 	"T.........................o............T",
-	"..ssssss.......p....r.....r...........TT",
-	"..ssssss.......p...$$........o...T.T...T",
+	"..ssssss....WW.p....r.....r...........TT",
+	"..ssssss....WW.p...$$........o...T.T...T",
 	"..ssssss.......p...............rTT.TT.TT",
 	"T..............p.................TT.T..T",
 	".....r.........p....T.........TT.TT.TT..",
@@ -635,6 +636,7 @@ const MAP_LEGEND: Dictionary = {
 	"S": [3, &"seam"],
 	"H": [5, &"house"],
 	"$": [5, &"shop"],
+	"W": [5, &"workshop"],
 }
 
 

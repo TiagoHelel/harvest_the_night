@@ -39,6 +39,7 @@ static func _tick_day(state: Dictionary) -> void:
 	state["day_tick"] = int(state["day_tick"]) + 1
 	Farming.tick(state)
 	Gathering.tick(state)
+	Crafting.tick(state)
 	Player.tick(state)
 
 	# Systems hang off here as the backlog adds them, in a fixed written order:

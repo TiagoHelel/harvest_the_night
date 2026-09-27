@@ -859,3 +859,48 @@ Notes:
 - Stage arithmetic is integer throughout. A stage boundary landing differently
   on two machines would be a visible desync in something nobody would think to
   look at.
+
+## 0019 - The workshop and its first recipe - done 2026-09-27
+
+What changed: the bridge the whole game rests on. Wood and stone stop being
+things you sell and become a barricade. The farm comes with a workshop,
+crafting runs whether anybody is watching, and cancelling costs you the
+materials.
+
+Files: src/core/crafting.gd, src/core/game_data.gd, src/core/interact.gd,
+src/core/sim.gd, src/core/state.gd, src/ui/world_view.gd,
+src/tools/headless_check.gd, src/tools/input_check.gd
+
+Verify: PASS - 10 passed, 1 skipped, 23s. **316 asserts, 0 failed** (286
+before). **Sim hash 2213922541 -> 865751178** (a workshop on the map, plus
+`crafting`, `kits` and `selected_recipe`). **Data hash 3627249258 ->
+1084797554** (the map and the legend).
+
+Notes:
+
+- **Inputs are taken when the job starts**, not when it finishes. That is the
+  whole reason cancelling is a decision rather than a free undo, and it means
+  two stations can never be counting on the same wood. Asserted from both ends:
+  the wood is gone the tick the job begins, and cancelling halfway gives none of
+  it back and does not let the job quietly finish later either.
+- **A job belongs to a station, not to the game.** `state["crafting"]` is keyed
+  by the cell the workshop stands on, so the press of task 0032 and the kitchen
+  of 0034 need no new machinery, and neither would a second workshop. Task 0037
+  puts a queue behind the same interface.
+- **A kit is not a resource.** A barricade goes to `state["kits"]`, which build
+  mode will draw from, rather than to the ledger - a structure in the resource
+  table would turn up in the shop's sell list and on the HUD, and it is neither
+  of those things. What decides is the output id, not the recipe, so the press
+  making oil goes to the ledger without anybody writing a rule for it.
+- **A recipe you cannot afford is refused and still listed.** A menu that grows
+  as you get richer teaches nothing about what to go and get. `missing()` names
+  the shortfall so the tooltip of task 0089 can explain a greyed line.
+- The workshop is on the map rather than built, because task 0023 is where
+  building arrives and `design.md` section 19 asks for one workshop in the first
+  playable build. It draws as colour blocks like the farmhouse; task 0075 draws
+  the buildings and can give multi-tile occupants a single anchored sprite.
+- **Four tests were naming cells that the workshop then landed on.** They now
+  search for a free cell instead of writing one down. A named cell is a test
+  that breaks whenever the map gains a building, and a failure that teaches
+  nothing about the thing being tested is worse than no test - it is a test that
+  gets edited without being read.

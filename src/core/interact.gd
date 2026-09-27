@@ -20,6 +20,7 @@ const OCCUPANT_VERBS: Dictionary = {
 	&"ore": &"mine",
 	&"seam": &"mine",
 	&"shop": &"trade",
+	&"workshop": &"craft",
 }
 
 ## When nothing is standing there, the ground decides.
@@ -43,6 +44,9 @@ const DEFAULT_TICKS: Dictionary = {
 	&"harvest": GameData.SECONDS / 3,       # LEVER: ticks, 5-30
 	&"fish": 1 * GameData.SECONDS,
 	&"trade": 1,                    # opening a panel is not work
+	# Starting a job is a moment. The job itself takes as long as the recipe
+	# says, and the player is free to walk away while it runs.
+	&"craft": GameData.SECONDS / 3,         # LEVER: ticks, 5-30
 }
 
 
@@ -88,6 +92,8 @@ static func complete(state: Dictionary, cell: Vector2i, verb: StringName) -> voi
 			Farming.act(state, cell)
 		&"fish":
 			pass        # task 0030
+		&"craft":
+			Crafting.start(state, cell, state["selected_recipe"])
 		&"trade":
 			pass        # task 0020 opens the shop panel
 		_:

@@ -333,12 +333,13 @@ func _case_0013_world_view() -> void:
 	# The occupant layer follows the farm when the farm changes, without
 	# anybody having to say so.
 	var count_before := drawn.get_child_count()
-	Farm.place(driver.state, Vector2i(11, 8), {"id": &"gun_tower"})
+	var free := _any_buildable(driver.state)
+	Farm.place(driver.state, free, {"id": &"gun_tower"})
 	await frames(4)
 	expect(drawn.get_child_count() == count_before + 1,
 		"placing something redraws the layer",
 		"%d then %d" % [count_before, drawn.get_child_count()])
-	Farm.remove(driver.state, Vector2i(11, 8))
+	Farm.remove(driver.state, free)
 	await frames(4)
 	expect(drawn.get_child_count() == count_before,
 		"and taking it away redraws it again")
@@ -475,6 +476,17 @@ func _facing_from(from_cell: Vector2i, to_cell: Vector2i) -> int:
 	if d.x < 0:
 		return Player.WEST
 	return Player.EAST
+
+
+## Somewhere nothing is standing and something could be. Found rather than
+## written down, so that a map gaining a building does not fail a test about
+## something else.
+func _any_buildable(state: Dictionary) -> Vector2i:
+	for idx in Grid.CELLS:
+		var cell := Grid.cell(idx)
+		if Farm.buildable(state, cell):
+			return cell
+	return Vector2i(-1, -1)
 
 
 func _sprites_in(node: Node) -> int:

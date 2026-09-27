@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 11
+const GROUPS := 12
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -75,6 +75,7 @@ func _run() -> void:
 	_task_0016_gathering()
 	_task_0017_stone()
 	_task_0018_wheat()
+	_task_0019_workshop()
 
 
 func _finish() -> void:
@@ -515,7 +516,11 @@ func _task_0008_farm() -> void:
 
 	# **Place then remove leaves the farm byte-identical.** The done-when of
 	# this task, and the property a build-then-sell loop depends on.
-	var spot := Vector2i(12, 8)
+	# **Found, not written down.** This used to be a hardcoded cell, and task
+	# 0019 put the workshop on it - so the test failed for a reason that had
+	# nothing to do with what it was checking.
+	var spot := _any_buildable(state)
+	expect(spot != Vector2i(-1, -1), "there is somewhere to build")
 	expect(Farm.buildable(state, spot), "an empty patch of grass is buildable")
 	var before := State.hash_of(state)
 	expect(Farm.place(state, spot, {"id": &"gun_tower", "hp": 60}),
@@ -542,11 +547,12 @@ func _task_0008_farm() -> void:
 	Farm.remove(state, spot)
 
 	# One grid, both realities: the night sees exactly what the day built.
-	Farm.place(state, Vector2i(13, 8), {"id": &"wall"})
+	var walled := _any_buildable(state)
+	Farm.place(state, walled, {"id": &"wall"})
 	Phases.begin_preparation(state)
 	Sim.advance(state, GameData.PREPARATION_TICKS)
 	expect(int(state["phase"]) == Phases.NIGHT, "night fell")
-	expect(Farm.occupant(state, Vector2i(13, 8))["id"] == &"wall",
+	expect(Farm.occupant(state, walled)["id"] == &"wall",
 		"and the wall built by day is in the same cell by night")
 
 	_completed += 1     # last line: an abandoned group never gets here
@@ -706,7 +712,8 @@ func _task_0010_save() -> void:
 	Sim.advance(state, 900)
 	Resources.add(state, GameData.IRON, 17)
 	Resources.pay(state, {GameData.WOOD: 5})
-	Farm.place(state, Vector2i(12, 8), {"id": &"gun_tower", "hp": 60})
+	var built_on := _any_buildable(state)
+	Farm.place(state, built_on, {"id": &"gun_tower", "hp": 60})
 	Phases.begin_preparation(state)
 	Sim.advance(state, GameData.PREPARATION_TICKS + 500)
 	expect(int(state["phase"]) == Phases.NIGHT, "we are mid-night")
@@ -721,7 +728,7 @@ func _task_0010_save() -> void:
 		"byte for byte - same resources, same farm, same tick, same RNG",
 		"%d vs %d" % [State.hash_of(loaded), State.hash_of(state)])
 	expect(Resources.amount(loaded, GameData.IRON) == 17, "resources survived")
-	expect(Farm.occupant(loaded, Vector2i(12, 8))["id"] == &"gun_tower",
+	expect(Farm.occupant(loaded, built_on)["id"] == &"gun_tower",
 		"the farm survived")
 	expect(int(loaded["night_tick"]) == 500, "and the night is where it was",
 		str(loaded["night_tick"]))
@@ -1172,5 +1179,128 @@ func _task_0018_wheat() -> void:
 	# You can walk across your own field, and a zombie will be able to too.
 	expect(Farm.walkable(farmed, Farm.cells_of(farmed, Farm.Terrain.SOIL)[10]),
 		"a planted tile is still ground, not furniture")
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## Somewhere on the farm nothing is standing and something could be.
+##
+## Tests ask for one rather than naming a cell, because a named cell is a test
+## that breaks whenever the map gains a building - which is a failure that
+## teaches nothing about the thing being tested.
+func _any_buildable(state: Dictionary) -> Vector2i:
+	for idx in Grid.CELLS:
+		var cell := Grid.cell(idx)
+		if Farm.buildable(state, cell) and not Farming.is_tilled(state, cell):
+			return cell
+	return Vector2i(-1, -1)
+
+
+## 0019 - the workshop: wood and stone stop being things you sell.
+func _task_0019_workshop() -> void:
+	var state := State.create(81)
+
+	var benches := Farm.cells_with(state, &"workshop")
+	expect(benches.size() == 4, "the farm comes with a workshop",
+		str(benches.size()))
+	var bench: Vector2i = benches[0]
+	expect(Interact.verb_at(state, bench) == &"craft",
+		"and it offers crafting")
+
+	var recipe: Dictionary = GameData.RECIPES[&"barricade_kit"]
+	var inputs: Dictionary = recipe["inputs"]
+	var ticks := int(recipe["ticks"])
+
+	# **The inputs go in at the start.** That is what makes cancelling a
+	# decision rather than a free undo.
+	Resources.add(state, GameData.WOOD, 20)
+	Resources.add(state, GameData.STONE, 20)
+	var wood_before := Resources.amount(state, GameData.WOOD)
+	var stone_before := Resources.amount(state, GameData.STONE)
+
+	expect(Crafting.can_start(state, bench, &"barricade_kit"),
+		"an affordable recipe can be started")
+	expect(Crafting.start(state, bench, &"barricade_kit"), "and starting works")
+	expect(Resources.amount(state, GameData.WOOD)
+		== wood_before - int(inputs[GameData.WOOD]),
+		"the wood is gone immediately",
+		str(Resources.amount(state, GameData.WOOD)))
+	expect(Resources.amount(state, GameData.STONE)
+		== stone_before - int(inputs[GameData.STONE]),
+		"and so is the stone")
+	expect(Crafting.busy(state, bench), "the bench is busy")
+	expect(Crafting.kits(state, &"barricade") == 0, "and nothing is made yet")
+
+	# One recipe at a time until task 0037.
+	expect(not Crafting.can_start(state, bench, &"barricade_kit"),
+		"a busy bench takes no second job")
+
+	# **It finishes on the tick the recipe says**, and it runs whether or not
+	# anybody is watching it.
+	Sim.advance(state, ticks - 1)
+	expect(Crafting.kits(state, &"barricade") == 0,
+		"one tick short of the recipe, nothing")
+	Sim.advance(state, 1)
+	expect(Crafting.kits(state, &"barricade") == 1,
+		"and on the tick, a barricade",
+		str(Crafting.kits(state, &"barricade")))
+	expect(not Crafting.busy(state, bench), "the bench is free again")
+	expect(Resources.amount(state, GameData.WOOD)
+		== wood_before - int(inputs[GameData.WOOD]),
+		"and nothing came back that should not have")
+
+	# **A kit is not a resource.** It has to be somewhere build mode can find
+	# it, and nowhere the shop or the HUD will.
+	expect(not GameData.RESOURCES.has(&"barricade"),
+		"a barricade is not in the resource table")
+	expect(Resources.amount(state, GameData.WOOD) >= 0, "and wood still is")
+	expect(Crafting.take_kit(state, &"barricade"), "a kit can be taken")
+	expect(Crafting.kits(state, &"barricade") == 0, "leaving none")
+	expect(not Crafting.take_kit(state, &"barricade"),
+		"and taking one that is not there is refused, not negative")
+
+	# **Cancelling refunds nothing and duplicates nothing.**
+	var wood_at_start := Resources.amount(state, GameData.WOOD)
+	Crafting.start(state, bench, &"barricade_kit")
+	var wood_after_start := Resources.amount(state, GameData.WOOD)
+	Sim.advance(state, ticks / 2)
+	expect(Crafting.cancel(state, bench), "a job can be given up")
+	expect(Resources.amount(state, GameData.WOOD) == wood_after_start,
+		"and nothing comes back",
+		"%d at start, %d after cancelling"
+		% [wood_at_start, Resources.amount(state, GameData.WOOD)])
+	Sim.advance(state, ticks * 2)
+	expect(Crafting.kits(state, &"barricade") == 0,
+		"nor does the cancelled job quietly finish later")
+	expect(not Crafting.busy(state, bench), "the bench is free")
+
+	# **A recipe you cannot afford is refused, not hidden.** A menu that grows
+	# as you get richer teaches nothing about what to go and get.
+	var broke := State.create(82)
+	var poor_bench: Vector2i = Farm.cells_with(broke, &"workshop")[0]
+	Resources.spend(broke, GameData.WOOD,
+		Resources.amount(broke, GameData.WOOD))
+	expect(not Crafting.can_start(broke, poor_bench, &"barricade_kit"),
+		"with no wood it cannot be started")
+	expect(Crafting.recipes_at(&"workshop").has(&"barricade_kit"),
+		"but it is still on the list")
+	var short := Crafting.missing(broke, &"barricade_kit")
+	expect(short.has(GameData.WOOD) and not short.has(GameData.STONE),
+		"and the shortfall names the wood and not the stone", str(short))
+	expect(not Crafting.start(broke, poor_bench, &"barricade_kit"),
+		"starting it anyway does nothing")
+	expect(not Crafting.busy(broke, poor_bench), "and leaves the bench free")
+
+	# A job belongs to its station, so the press and the kitchen need no new
+	# machinery - and neither would a second workshop.
+	expect(not Crafting.can_start(state, Farm.cells_with(state, &"shop")[0],
+		&"barricade_kit"),
+		"a recipe cannot be made at the wrong station")
+
+	# A recipe whose output is a resource goes to the ledger instead.
+	var presser := State.create(83)
+	var press_recipe: Dictionary = GameData.RECIPES[&"press_oil"]
+	expect(GameData.RESOURCES.has((press_recipe["output"] as Dictionary).keys()[0]),
+		"the press makes a resource, not a kit")
 
 	_completed += 1     # last line: an abandoned group never gets here
