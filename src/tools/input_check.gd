@@ -41,7 +41,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 20
+const CASES := 21
 
 var passed := 0
 var failed := 0
@@ -91,6 +91,7 @@ func _run() -> void:
 	await _case_0037_queue()
 	await _case_0038_away()
 	await _case_0039_clock()
+	await _case_0040_shop()
 	_finish()
 
 
@@ -563,6 +564,14 @@ func _case_0020_shop() -> void:
 	# Sell, by clicking the button a player would click.
 	var wood_before := Resources.amount(state, GameData.WOOD)
 	var money_before := Resources.amount(state, GameData.MONEY)
+	var sell_button: Control = require_control("sell_one_wood")
+	if sell_button != null:
+		var box := sell_button.get_global_rect()
+		var at := box.position + box.size * 0.5
+		print("  0020 clicking sell_one_wood at %s (rect %s); panel %s; top %s"
+			% [at, box, str((require_control("ShopPanel") as Control)
+				.get_global_rect()),
+				str(sell_button.get_viewport().gui_get_hovered_control())])
 	await click_control("sell_one_wood")
 	await frames(4)
 	expect(Resources.amount(state, GameData.WOOD) == wood_before - 1,
@@ -2127,6 +2136,107 @@ func _case_0039_clock() -> void:
 	expect(int(state["day_tick"]) > ticked,
 		"and closing it starts the day again",
 		str(int(state["day_tick"]) - ticked))
+
+	await close_scene()
+	_completed += 1     # last line: an abandoned case never gets here
+
+
+## 0040 - two tabs, a shelf that empties, and the seeds side by side.
+func _case_0040_shop() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var shop: ShopPanel = require_control("ShopPanel")
+	if driver == null or shop == null:
+		_completed += 1
+		await close_scene()
+		return
+
+	var state := driver.state
+	Resources.gain(state, {GameData.MONEY: 4000})
+	Shop.open(state)
+	await until(func() -> bool: return shop.visible, "the stall to open")
+	await frames(2)
+
+	# **It opens on selling**, which is what the player came for.
+	expect(Shop.tab(state) == Shop.SELL, "the stall opens on selling",
+		str(Shop.tab(state)))
+	var probe: Button = require_control("sell_one_wood")
+	print("  PROBE sell_one_wood: rect %s, disabled %s, scroll %s"
+		% [str(probe.get_global_rect()) if probe else "none",
+			str(probe.disabled) if probe else "?",
+			str((require_control("Scroll") as Control).get_global_rect())])
+	expect(probe != null, "so the sell rows are there")
+	expect(locate_control("buy_one_wood") == null,
+		"and the buy rows are not - it is one tab at a time")
+
+	# **Two tabs, not two shops.**
+	await click_control("tab_buy")
+	await until(func() -> bool: return Shop.tab(state) == Shop.BUY,
+		"the buy tab")
+	await frames(2)
+	expect(Shop.tab(state) == Shop.BUY, "clicking BUY switches",
+		str(Shop.tab(state)))
+	expect(require_control("buy_one_wood") != null, "and the buy rows appear")
+	expect(locate_control("sell_one_wood") == null, "as the sell rows go")
+
+	# **The shelf is on the label, and it empties.**
+	var label: Label = require_control("buy_label_stone")
+	expect(label != null, "the stone row says what is left")
+	if label != null:
+		expect(label.text.contains(str(Shop.stock_of(state, GameData.STONE))),
+			"with today's number on it", label.text)
+
+	var shelf := Shop.stock_of(state, GameData.STONE)
+	await click_control("buy_one_stone")
+	await until(func() -> bool:
+		return Shop.stock_of(state, GameData.STONE) < shelf,
+		"one off the shelf")
+	expect(Shop.stock_of(state, GameData.STONE) == shelf - 1,
+		"buying one takes one off it",
+		str(Shop.stock_of(state, GameData.STONE)))
+	await frames(2)
+	var after: Label = require_control("buy_label_stone")
+	expect(after != null and after.text.contains(str(shelf - 1)),
+		"and the label says so", after.text if after else "")
+
+	# Empty it, and the button stops offering.
+	while Shop.stock_of(state, GameData.STONE) > 0:
+		Shop.buy(state, GameData.STONE, 1)
+	await frames(4)
+	var sold_out: Button = require_control("buy_one_stone")
+	expect(sold_out != null and sold_out.disabled,
+		"an empty shelf is a button that says no rather than one that lies")
+
+	# **The seeds, side by side with what the choice needs.**
+	for id in Farming.seeds():
+		var seed: Label = require_control("seed_label_%s" % id)
+		expect(seed != null, "%s has a row" % id)
+		if seed == null:
+			continue
+		expect(seed.text.contains("%ds" % Farming.seconds_to_grow(id)),
+			"saying how long it takes", seed.text)
+		expect(seed.text.contains(str(Farming.value_per_day(id))),
+			"and what it is worth over a day", seed.text)
+
+	var other := &""
+	for id in Farming.seeds():
+		if Farming.selected_seed(state) != id:
+			other = id
+			break
+	var sow: Button = require_control("sow_%s" % other)
+	print("  sow_%s: rect %s, disabled %s"
+		% [other, str(sow.get_global_rect()) if sow else "none",
+			str(sow.disabled) if sow else "?"])
+	await click_control("sow_%s" % other)
+	await until(func() -> bool: return Farming.selected_seed(state) == other,
+		"the seed to change")
+	expect(Farming.selected_seed(state) == other,
+		"and clicking one picks it", str(Farming.selected_seed(state)))
+
+	await tap_key(KEY_ESCAPE)
+	await until(func() -> bool: return not Shop.is_open(state),
+		"the stall to close")
+	expect(not Shop.is_open(state), "escape leaves the stall")
 
 	await close_scene()
 	_completed += 1     # last line: an abandoned case never gets here

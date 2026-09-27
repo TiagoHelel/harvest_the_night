@@ -2668,3 +2668,108 @@ pause switched off `3547075508`.
 
 `python tools/verify.py` prints PASS: 1130 asserts, 330 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+
+## 0040 - The shop grows - done 2026-09-27
+
+A stall with a shelf that empties, two tabs, and no way to make money standing
+at it.
+
+**What changed.** The stall carries a few of each material and each crop,
+refreshed at dawn; buying and selling are two tabs of one conversation; and
+the seeds sit on the buy tab with everything the choice needs on one line.
+
+Files: `src/core/shop.gd`, `game_data.gd`, `state.gd`, `phases.gd`, `sim.gd`,
+`src/ui/shop_panel.gd`, both test tools.
+Verify: 1206 headless / 352 input / both hashes moved on purpose, below.
+
+### No money button
+
+The done-when is "buy-then-sell loses money at every price", and it is the one
+thing here that would break the game if it were false. `check_stall()` walks
+every priced resource and refuses a table where the buy price is not above the
+sell price - and the asserts round-trip it for real, through the ledger, on
+every single thing the stall carries.
+
+The thinnest margin in the shop is wood, three dollars in the stall's favour.
+
+**Why a check and not one assert:** `BUY_MARKUP` is a float with a rounding
+rule between it and the price, so "the markup is above one" and "you cannot
+make money going round in a circle" are different claims, and it is the circle
+that matters. A markup of exactly 1.0 is refused, with a teeth-test.
+
+### The shelf
+
+`DAILY_STOCK` is small and refreshes **once per day, not once per visit**.
+Restocking when you walked away and came back would be unlimited stock with
+extra walking, and unlimited stock is a stall a player with money never has to
+leave. Running it dry is meant to happen and to be a reason to go and gather.
+
+Buying is all-or-nothing against the shelf as well as the purse: buying five
+when three are left buys none of them, the same rule as selling. What is left
+is on the label, because a price with no stock beside it is a button that
+refuses for a reason the player cannot see.
+
+The stall opens **stocked**, not one tick later: a farm exists before its
+first tick - the tests build one and trade with it, and so would a save loaded
+at dawn.
+
+### Selling first
+
+The stall opens on the sell tab. A stall is where a morning of chopping
+becomes money; buying is the emergency exit. Opening on the tab nobody wants
+is one click on every single visit.
+
+The tab is `Shop.tab()` - a fact about the game rather than about a node, like
+`open_panel` itself - so the autoplayer of task 0067 can buy without a window
+existing, and the tab buttons are lit from the state rather than from the
+click.
+
+### The seeds are here because this is where you compare them
+
+They are not stock and they are not bought: planting pays `seed_cost` at the
+furrow (task 0028). What the stall adds is the three of them **side by side
+with their prices, their growing times and what a plot of each is worth over a
+day** - which is the comparison the decision actually needs, and which no
+amount of standing in a field provides.
+
+### A long, expensive bug hunt, and what it was
+
+The 0020 shop case started failing: the sell button existed, was enabled, was
+at the right place on screen, and clicking it did nothing - the connected
+lambda never fired. I bisected the panel across half a dozen runs, ruling out
+the tab container, the button styling, the rebuild frequency and
+`remove_child`.
+
+It was none of them. A line-based edit of mine had written a literal backslash
+followed by the letter `n` in place of a line continuation, so
+`shop_panel.gd` **did not parse at all** - and the failure that surfaced was
+"the click does nothing" rather than anything mentioning a parse error,
+because the scene loaded with a broken script attached.
+
+Two lessons, and the second is the useful one:
+
+- `--check-only` on the file I am editing is three seconds and would have said
+  so immediately. It is the first thing to run when behaviour goes strange
+  after an edit, before any theory about the engine.
+- **The theories were all plausible and all wrong.** Six runs went into
+  hypotheses about mouse filters, scroll containers and rebuild timing,
+  because the symptom was a UI symptom. The evidence that would have settled
+  it in one step was sitting in a parse check I did not run.
+
+### And a real one underneath it
+
+Once it parsed, the seed rows were at y=350 on a 270-pixel screen. A default
+`Button` reserves thirty-one pixels whatever `custom_minimum_size` says, and
+eleven rows of that overflows the box - exactly the build palette bug of task
+0032, in a second panel. `_button()` overrides the theme's padding now and a
+full buy tab fits without scrolling.
+
+### Hashes
+
+| | from | to | why |
+|---|---|---|---|
+| sim hash | `3097167654` | `2555127123` | the state gained `stall`: a shelf, the day it was stocked, and which tab is showing |
+| data hash | `2144055300` | `1783085191` | `DAILY_STOCK` is new and is in `digest()` |
+
+`python tools/verify.py` prints PASS: 1206 asserts, 352 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

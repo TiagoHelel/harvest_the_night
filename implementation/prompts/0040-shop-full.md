@@ -1,7 +1,7 @@
 # 0040 - The shop grows
 
 - **Phase:** 2 - The full day
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0020, 0028
 - **Likely files:** src/core/shop.gd, src/ui/shop_panel.gd
 

@@ -58,6 +58,10 @@ static func _tick_day(state: Dictionary) -> void:
 		Player.tick(state)
 		return
 
+	# The first morning, and any morning the phase machine did not open. It
+	# refuses when the stock is already today's, so this is one comparison.
+	Shop.restock(state)
+
 	state["day_tick"] = int(state["day_tick"]) + 1
 
 	# **Asked for last frame, decided here.** The button writes an intent and

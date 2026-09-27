@@ -115,6 +115,9 @@ static func begin_day(state: Dictionary) -> bool:
 		push_error("begin_day from %s" % name_of(int(state["phase"])))
 		return false
 	state["day_tick"] = 0
+	# A new day, a new stall. It refuses if it has already been out today, so
+	# calling it here and on the first tick costs nothing.
+	Shop.restock(state)
 	_enter(state, DAY)
 	return true
 

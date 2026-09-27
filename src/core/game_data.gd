@@ -608,6 +608,23 @@ const RESOURCE_GROUPS: Array = [
 const EMPTY_RELOAD_PERCENT := 300       # LEVER: percent of normal, 150-500
 const EMPTY_DAMAGE_PERCENT := 30        # LEVER: percent of normal, 10-60
 
+## What the stall has of each thing when the day starts.
+##
+## **Small, and it refreshes once a day rather than once a visit.** A stall
+## with unlimited stock is a stall a player with money never has to leave, and
+## one that restocked when you walked away and came back is the same thing with
+## extra walking. Running it dry is meant to be a thing that happens and a
+## reason to go and gather.
+const DAILY_STOCK: Dictionary = {        # LEVER: units a day, 2-40
+	WOOD: 15,
+	STONE: 12,
+	IRON: 8,
+	WHEAT: 10,
+	CORN: 8,
+	CARROT: 12,
+}
+
+
 ## What repairing costs, per hit point put back.
 const REPAIR_COST_PER_HP: Dictionary = {FOOD: 1, WOOD: 1}
 const REPAIR_TICKS_PER_HP := 3          # LEVER: ticks, 1-8
@@ -884,6 +901,7 @@ static func validate() -> Array:
 	errors.append_array(check_livestock(LIVESTOCK, FARM_MAP))
 	errors.append_array(check_ammo(DEFENCES, RECIPES))
 	errors.append_array(check_groups(RESOURCE_GROUPS, RESOURCES))
+	errors.append_array(check_stall(DAILY_STOCK, SELL_PRICE, BUY_MARKUP))
 
 	for res in sorted_names(REPAIR_COST_PER_HP.keys()):
 		if not RESOURCES.has(res):
@@ -1337,6 +1355,33 @@ static func check_groups(grouped: Array, resources: Array) -> Array:
 	return errors
 
 
+## The stall. Everything it sells is a real resource with a real price, and
+## buying one and selling it straight back is always a loss.
+##
+## **The second half is the one that matters.** `BUY_MARKUP` is a float and a
+## rounding rule sits between it and the price, so "the markup is above one" is
+## not the same claim as "you cannot make money going round in a circle" - and
+## it is the circle that would break the game.
+static func check_stall(stock: Dictionary, prices: Dictionary,
+		markup: float) -> Array:
+	var errors: Array = []
+	for id in sorted_names(stock.keys()):
+		if not RESOURCES.has(id):
+			errors.append("the stall stocks '%s', which is not a resource" % id)
+		elif not prices.has(id):
+			errors.append("the stall stocks '%s', which has no price" % id)
+		if int(stock[id]) <= 0:
+			errors.append("the stall stocks no '%s' at all" % id)
+
+	for id in sorted_names(prices.keys()):
+		var sells_for := int(prices[id])
+		var costs := int(ceil(float(sells_for) * markup))
+		if costs <= sells_for:
+			errors.append(("'%s' costs $%d and sells for $%d - buy it and sell "
+				+ "it back and you are richer") % [id, costs, sells_for])
+	return errors
+
+
 static func check_nights(nights: Array) -> Array:
 	var errors: Array = []
 	for n in nights.size():
@@ -1375,6 +1420,7 @@ static func digest() -> int:
 		"sell_price": SELL_PRICE,
 		"starting": STARTING_RESOURCES,
 		"trade": [BUY_MARKUP, SELL_BACK_FRACTION],
+		"stock": DAILY_STOCK,
 		"crops": CROPS,
 		"water": [WATER_GROWTH_BONUS, WATER_CAN_CAPACITY,
 			WATER_LASTS_UNTIL_NIGHT],

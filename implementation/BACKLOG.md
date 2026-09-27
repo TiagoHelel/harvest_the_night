@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`#########...............`  **39 / 108 done**
+`#########...............`  **40 / 108 done**
 
-0 doing / 69 todo / 0 blocked across 9 phases.
+0 doing / 68 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0040 - The shop grows**. The whole of what is left is
+First up: **0041 - The first day teaches itself**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,24 +26,24 @@ which rewrites this file for you.
 
 ## What is open
 
-69 task(s) left, the ready ones first, then what they
+68 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
-### 0040 - The shop grows
+### 0041 - The first day teaches itself
 
-Ready to pick up.  Likely files: `src/core/shop.gd, src/ui/shop_panel.gd`.
+Ready to pick up.  Likely files: `src/core/tutorial.gd`.
 
-Somewhere for money to go: all three seeds, materials when you are short, and the first upgrades.
+Day 1 should teach chop, plant, craft, build and the night button without a wall of text or a cage.
 
-- Seeds for all three crops, and materials at a markup over their sale price
-- Buying materials is always worse than gathering them, so money cannot replace playing
-- A small daily stock that refreshes, so the shop cannot be drained into an exploit
-- Prices in game_data, every one a lever
-- Buy and sell are two tabs, not two shops
+- Prompts appear on the thing they describe and disappear when it is done
+- Nothing is locked: a player who already knows can ignore all of it
+- Night 1 stays the tutorial night the design document asks for - a handful of basic zombies
+- Seven lines of text at most in the whole first day
+- A profile flag so it never shows twice
 
-  - done when: Buy-then-sell on the same item loses money at every price
-  - done when: Stock refreshes once per day and not once per visit
+  - done when: Someone who has not seen the game reaches the first night without being told anything out loud
+  - done when: Skipping every prompt still leaves a winnable night 1
 
 ### 0042 - Data-driven defences
 
@@ -182,21 +182,6 @@ When it breaks on someone else's machine, get enough to fix it without them.
 
   - done when: A deliberate crash produces a report with the seed and the tick
   - done when: The run is still loadable afterwards
-
-### 0041 - The first day teaches itself
-
-Waits on 0040.  Likely files: `src/core/tutorial.gd`.
-
-Day 1 should teach chop, plant, craft, build and the night button without a wall of text or a cage.
-
-- Prompts appear on the thing they describe and disappear when it is done
-- Nothing is locked: a player who already knows can ignore all of it
-- Night 1 stays the tutorial night the design document asks for - a handful of basic zombies
-- Seven lines of text at most in the whole first day
-- A profile flag so it never shows twice
-
-  - done when: Someone who has not seen the game reaches the first night without being told anything out loud
-  - done when: Skipping every prompt still leaves a winnable night 1
 
 ### 0043 - The flamethrower tower
 
@@ -1097,7 +1082,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0026** [The tower kills the zombie](prompts/0026-combat.md)
 - [x] **0027** [Three waves, a result screen, and back to the farm](prompts/0027-first-loop.md)
 
-## 2 - The full day  (12/14)
+## 2 - The full day  (13/14)
 
 - [x] **0028** [Corn and carrot](prompts/0028-three-crops.md)
 - [x] **0029** [Growth stages and watering](prompts/0029-growth-stages.md)
@@ -1111,8 +1096,8 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0037** [The workshop queue](prompts/0037-craft-queue.md)
 - [x] **0038** [Production runs while you are elsewhere](prompts/0038-idle-production.md)
 - [x] **0039** [The day clock and dusk](prompts/0039-day-clock.md)
-- [ ] **0040** [The shop grows](prompts/0040-shop-full.md)
-- [ ] **0041** [The first day teaches itself](prompts/0041-tutorial-day.md) - needs 0040
+- [x] **0040** [The shop grows](prompts/0040-shop-full.md)
+- [ ] **0041** [The first day teaches itself](prompts/0041-tutorial-day.md)
 
 ## 3 - The full night  (0/17)
 

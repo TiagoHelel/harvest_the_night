@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 32
+const GROUPS := 33
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -96,6 +96,7 @@ func _run() -> void:
 	_task_0037_queue()
 	_task_0038_idle()
 	_task_0039_clock()
+	_task_0040_shop()
 
 
 func _finish() -> void:
@@ -4890,5 +4891,156 @@ func _task_0039_clock() -> void:
 		str(Phases.day_percent(nightly)))
 	expect(Phases.overtime_percent(nightly) == 0,
 		"with no overtime at night", str(Phases.overtime_percent(nightly)))
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## 0040 - a stall with stock, and no way to make money standing at it.
+func _task_0040_shop() -> void:
+	var state := State.create(2200)
+
+	# **Buy-then-sell loses money at every price.** The done-when, and the one
+	# thing that would break the game if it were false - a single item that
+	# could be bought and sold back at a profit is an infinite money button.
+	var worst := 999999
+	var worst_id := &""
+	for id in GameData.sorted_names(GameData.SELL_PRICE.keys()):
+		var costs := Shop.buy_price(id)
+		var fetches := Shop.sell_price(id)
+		expect(costs > fetches,
+			"%s costs more than it fetches" % id,
+			"$%d against $%d" % [costs, fetches])
+		if costs - fetches < worst:
+			worst = costs - fetches
+			worst_id = id
+	print("  the thinnest margin in the shop is %s, %d in the stall's favour"
+		% [worst_id, worst])
+	expect(worst > 0, "and the thinnest of them is still the stall's",
+		str(worst))
+
+	expect(GameData.check_stall(GameData.DAILY_STOCK, GameData.SELL_PRICE,
+		GameData.BUY_MARKUP).is_empty(),
+		"the shipped stall passes its own check",
+		str(GameData.check_stall(GameData.DAILY_STOCK, GameData.SELL_PRICE,
+			GameData.BUY_MARKUP)))
+	expect(not GameData.check_stall(GameData.DAILY_STOCK,
+		GameData.SELL_PRICE, 1.0).is_empty(),
+		"and a markup of one is refused - that is the money button")
+
+	# Round-tripped for real, through the ledger, on every single thing.
+	for id in Shop.buyable():
+		var round_trip := State.create(2201)
+		Resources.gain(round_trip, {GameData.MONEY: 5000})
+		var purse := Resources.amount(round_trip, GameData.MONEY)
+		expect(Shop.buy(round_trip, id, 3), "three %s bought" % id)
+		Shop.sell(round_trip, id, 3)
+		expect(Resources.amount(round_trip, GameData.MONEY) < purse,
+			"buying three %s and selling them back is a loss" % id,
+			"%d then %d" % [purse,
+				Resources.amount(round_trip, GameData.MONEY)])
+
+	# **Buying is always worse than gathering.** A tree is three wood for three
+	# swings and costs nothing; the same wood at the stall is real money.
+	var tree: Dictionary = GameData.GATHERING[&"tree"]
+	var from_a_tree := int((tree["yield"] as Dictionary)[GameData.WOOD])
+	expect(Shop.buy_price(GameData.WOOD) * from_a_tree > 0,
+		"a tree's worth of wood costs money at the stall",
+		str(Shop.buy_price(GameData.WOOD) * from_a_tree))
+	expect(Shop.buy_price(GameData.WOOD)
+		> Shop.sell_price(GameData.WOOD),
+		"and you cannot chop, sell, and buy back more than you had")
+
+	# **Seeds for all three crops**, side by side with what the choice needs.
+	for id in Farming.seeds():
+		expect(GameData.CROPS.has(id), "%s is a crop" % id)
+		expect(Farming.value_per_day(id) > 0,
+			"with a day's worth to compare", str(Farming.value_per_day(id)))
+		expect(Farming.seconds_to_grow(id) > 0, "and a growing time")
+		expect(Shop.buyable().has(id),
+			"and the stall deals in %s itself" % id, str(Shop.buyable()))
+
+	# **Nothing the workshop makes is for sale.** A stall that sold oil would
+	# be a way to skip owning a press.
+	for id in [GameData.OIL, GameData.GUNPOWDER, GameData.INCENDIARY,
+			GameData.FOOD]:
+		expect(not Shop.buyable().has(id),
+			"the stall does not sell %s - that is what the farm is for" % id)
+		expect(Shop.sellable().has(id), "but it will take it off you")
+
+	# ------------------------------------------------- stock, and when it comes
+
+	# **A daily stock, out from the first morning.**
+	for id in Shop.buyable():
+		expect(Shop.stock_of(state, id) == int(GameData.DAILY_STOCK[id]),
+			"day one opens with a full shelf of %s" % id,
+			str(Shop.stock_of(state, id)))
+
+	# **It runs out**, and running out is the point.
+	var buyer := State.create(2202)
+	Resources.gain(buyer, {GameData.MONEY: 100000})
+	var shelf := Shop.stock_of(buyer, GameData.STONE)
+	expect(Shop.buy(buyer, GameData.STONE, shelf),
+		"the whole shelf can be bought", str(shelf))
+	expect(Shop.stock_of(buyer, GameData.STONE) == 0, "and then it is empty")
+	expect(not Shop.buy(buyer, GameData.STONE, 1),
+		"with no more to be had at any price")
+	expect(not Shop.can_buy(buyer, GameData.STONE, 1),
+		"and the panel is told so rather than finding out")
+	expect(Shop.can_buy(buyer, GameData.WOOD, 1),
+		"while the rest of the shelf is untouched")
+
+	# All or nothing against the stock, the same as against the purse.
+	var few := State.create(2203)
+	Resources.gain(few, {GameData.MONEY: 100000})
+	var iron := Shop.stock_of(few, GameData.IRON)
+	expect(not Shop.buy(few, GameData.IRON, iron + 1),
+		"buying more than is there buys none of it")
+	expect(Shop.stock_of(few, GameData.IRON) == iron,
+		"and the shelf is untouched", str(Shop.stock_of(few, GameData.IRON)))
+
+	# **Refreshes once per day, not once per visit.** The other done-when.
+	var visits := State.create(2204)
+	Resources.gain(visits, {GameData.MONEY: 100000})
+	Shop.buy(visits, GameData.WOOD, 5)
+	var left := Shop.stock_of(visits, GameData.WOOD)
+	expect(left == int(GameData.DAILY_STOCK[GameData.WOOD]) - 5,
+		"five off the shelf", str(left))
+
+	for _visit in 4:
+		Shop.open(visits)
+		Sim.advance(visits, 5)
+		Shop.close(visits)
+		Sim.advance(visits, 30)
+	expect(Shop.stock_of(visits, GameData.WOOD) == left,
+		"four more visits put nothing back on the shelf",
+		str(Shop.stock_of(visits, GameData.WOOD)))
+	expect(not Shop.restock(visits),
+		"and asking for a restock on the same day refuses")
+
+	# A night, and the morning after.
+	Phases.begin_preparation(visits)
+	Sim.advance(visits, GameData.PREPARATION_TICKS)
+	expect(Shop.stock_of(visits, GameData.WOOD) == left,
+		"the night puts nothing back either",
+		str(Shop.stock_of(visits, GameData.WOOD)))
+	Phases.enter_result(visits, true)
+	(visits["intent"] as Dictionary)["confirm_result"] = true
+	Sim.advance(visits, 2)
+	expect(int(visits["phase"]) == Phases.DAY, "morning")
+	expect(Shop.stock_of(visits, GameData.WOOD)
+		== int(GameData.DAILY_STOCK[GameData.WOOD]),
+		"and the shelf is full again",
+		str(Shop.stock_of(visits, GameData.WOOD)))
+
+	# **The tabs are a fact about the game**, so the autoplayer can switch
+	# them and a test can ask which one is showing.
+	expect(Shop.tab(state) == Shop.SELL,
+		"the stall opens on selling, which is what you came for",
+		str(Shop.tab(state)))
+	expect(Shop.show_tab(state, Shop.BUY), "and can be switched to buying")
+	expect(Shop.tab(state) == Shop.BUY, "which sticks", str(Shop.tab(state)))
+	expect(not Shop.show_tab(state, &"haggle"),
+		"there is no third tab")
+	expect(Shop.tab(state) == Shop.BUY, "and asking for one changes nothing")
 
 	_completed += 1     # last line: an abandoned group never gets here
