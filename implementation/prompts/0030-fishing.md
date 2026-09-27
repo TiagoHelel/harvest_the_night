@@ -1,7 +1,7 @@
 # 0030 - Fishing
 
 - **Phase:** 2 - The full day
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0015, 0007
 - **Likely files:** src/core/fishing.gd
 

@@ -41,7 +41,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 11
+const CASES := 12
 
 var passed := 0
 var failed := 0
@@ -82,6 +82,7 @@ func _run() -> void:
 	await _case_0027_the_loop()
 	await _case_0028_seeds()
 	await _case_0029_watering()
+	await _case_0030_fishing()
 	_finish()
 
 
@@ -1302,3 +1303,111 @@ func _a_planted_row(state: Dictionary, count: int) -> Array:
 			Farming.act(state, at2)         # plant
 		return run
 	return []
+
+
+## 0030 - standing at the pond and landing one, through the real keys.
+func _case_0030_fishing() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	if driver == null:
+		_completed += 1
+		await close_scene()
+		return
+
+	var state := driver.state
+	var line: Label = require_control("FishingLine")
+	expect(line != null, "the HUD has somewhere to say there is a line out")
+	await frames(2)
+	expect(line != null and not line.visible,
+		"and it says nothing when nobody is fishing")
+
+	# Stand on the bank looking at the water.
+	var shore := _a_shore(state)
+	expect(shore != Vector2i(-1, -1), "there is a bank to fish from")
+	if shore == Vector2i(-1, -1):
+		await close_scene()
+		_completed += 1
+		return
+	var pond := _water_beside(state, shore)
+	_stand_at(state, shore, _facing_towards(shore, pond))
+	await frames(2)
+	expect(Player.target(state) == pond, "the farmer is looking at the water",
+		str(Player.target(state)))
+	expect(Interact.verb_at(state, pond) == &"fish",
+		"which offers a cast", str(Interact.verb_at(state, pond)))
+
+	# **Cast.** One press, and then the wait is out of the player's hands.
+	await hold_key(KEY_SPACE, 4)
+	await until(func() -> bool: return Fishing.is_casting(state),
+		"the cast to go in")
+	expect(Fishing.is_casting(state), "pressing interact casts")
+	expect(Fishing.line_cell(state) == pond, "into the water in front",
+		str(Fishing.line_cell(state)))
+	await frames(2)
+	expect(line != null and line.visible,
+		"and the HUD says there is a line out")
+
+	# **Wait for the bite**, which is the part the player cannot hurry.
+	var bit := await until(func() -> bool: return Fishing.is_biting(state),
+		"a fish to bite", 1200)
+	expect(bit, "something bites inside the lever range")
+	await frames(1)
+	expect(line != null and line.text.to_lower().contains("bite"),
+		"and the HUD shouts about it", line.text if line else "")
+	expect(Interact.verb_at(state, pond) == &"reel",
+		"the water says reel now", str(Interact.verb_at(state, pond)))
+
+	# **Land it.** A press inside the window, and the fish is in the basket.
+	var before := Resources.amount(state, GameData.FISH)
+	await tap_key(KEY_SPACE)
+	await until(func() -> bool:
+		return Resources.amount(state, GameData.FISH) > before,
+		"the fish to come in")
+	expect(Resources.amount(state, GameData.FISH) > before,
+		"reeling inside the window lands a fish",
+		"%d then %d" % [before, Resources.amount(state, GameData.FISH)])
+	expect(not Fishing.is_casting(state), "and the line comes out with it")
+	await frames(2)
+	expect(line != null and not line.visible, "and the HUD goes quiet")
+
+	# **Walking away gives a cast up**, through the real movement keys.
+	await hold_key(KEY_SPACE, 4)
+	await until(func() -> bool: return Fishing.is_casting(state),
+		"a second cast to go in")
+	await press_key(KEY_W, true)
+	await frames(40)
+	await press_key(KEY_W, false)
+	await frames(2)
+	expect(not Fishing.is_casting(state),
+		"walking off the bank gives the cast up")
+
+	await close_scene()
+	_completed += 1     # last line: an abandoned case never gets here
+
+
+## Land next to open water.
+func _a_shore(state: Dictionary) -> Vector2i:
+	for found in Farm.cells_of(state, Farm.Terrain.WATER):
+		var wet: Vector2i = found
+		for step in [Vector2i(0, -1), Vector2i(-1, 0), Vector2i(1, 0)]:
+			var dry: Vector2i = wet + step
+			if Farm.walkable(state, dry) and Farm.walkable(state, dry + step):
+				return dry
+	return Vector2i(-1, -1)
+
+
+func _water_beside(state: Dictionary, shore: Vector2i) -> Vector2i:
+	for step in [Vector2i(0, 1), Vector2i(1, 0), Vector2i(-1, 0),
+			Vector2i(0, -1)]:
+		if Farm.terrain_at(state, shore + step) == Farm.Terrain.WATER:
+			return shore + step
+	return Vector2i(-1, -1)
+
+
+func _facing_towards(here: Vector2i, there: Vector2i) -> int:
+	var step := there - here
+	if step.y > 0:
+		return Player.SOUTH
+	if step.y < 0:
+		return Player.NORTH
+	return Player.EAST if step.x > 0 else Player.WEST

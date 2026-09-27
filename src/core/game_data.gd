@@ -743,11 +743,7 @@ static func validate() -> Array:
 	errors.append_array(check_defences(DEFENCES))
 	errors.append_array(check_nights(NIGHTS))
 	errors.append_array(check_map(FARM_MAP))
-
-	for key in [&"common_yield", &"rare_yield"]:
-		for res in (FISHING[key] as Dictionary):
-			if not RESOURCES.has(res):
-				errors.append("fishing %s yields unknown '%s'" % [key, res])
+	errors.append_array(check_fishing(FISHING))
 
 	for res in REPAIR_COST_PER_HP:
 		if not RESOURCES.has(res):
@@ -919,6 +915,43 @@ static func check_map(rows: Array) -> Array:
 				errors.append("farm map row %d column %d is '%s', which the "
 					% [y, x, row[x]] + "legend does not know")
 	return errors
+
+
+## The pond. Checked like the rest of the tables rather than trusted, because
+## a bite window of zero ticks is a pond that can never be fished and nothing
+## else in the game would say so.
+static func check_fishing(table: Dictionary) -> Array:
+	var errors: Array = []
+	for key in [&"common_yield", &"rare_yield"]:
+		var out: Dictionary = table[key]
+		if out.is_empty():
+			errors.append("fishing %s gives nothing at all" % key)
+		for res in sorted_names(out.keys()):
+			if not RESOURCES.has(res):
+				errors.append("fishing %s yields unknown '%s'" % [key, res])
+	if int(table["bite_min_ticks"]) > int(table["bite_max_ticks"]):
+		errors.append("fishing bites sooner than it can - min %d, max %d"
+			% [table["bite_min_ticks"], table["bite_max_ticks"]])
+	if int(table["window_ticks"]) <= 0:
+		errors.append("fishing gives no window to react in")
+	if int(table["rare_in"]) < 1:
+		errors.append("fishing rare_in must be at least 1")
+	# The rare one has to be worth the wait, or it is not a rare one.
+	var common := _worth(table["common_yield"])
+	var rare := _worth(table["rare_yield"])
+	if rare <= common:
+		errors.append("the rare fish is worth %d and the common one %d"
+			% [rare, common])
+	return errors
+
+
+## What a pile of resources sells for. Used by the fishing check to compare the
+## two catches without either of them naming a number twice.
+static func _worth(amounts: Dictionary) -> int:
+	var total := 0
+	for res in sorted_names(amounts.keys()):
+		total += int(SELL_PRICE.get(res, 0)) * int(amounts[res])
+	return total
 
 
 static func check_nights(nights: Array) -> Array:

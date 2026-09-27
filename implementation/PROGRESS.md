@@ -1577,3 +1577,97 @@ Both moved on purpose.
 well would make "where is my water" a placement decision on a bigger farm, and
 `BUILDINGS` already has the shape for it. Not in the MVP unless the fields
 move.
+
+## 0030 - Fishing - done 2026-09-27
+
+The pond earns its place: nothing to spend, everything to pay attention to.
+
+**What changed.** New `src/core/fishing.gd`. Standing on the bank facing water
+and pressing interact casts a line; a seeded wait later the float goes under
+and there are 45 ticks to react; reeling inside that window lands a common or
+a rare fish. Missing it costs the time and nothing else.
+
+Files: `src/core/fishing.gd` (new), `interact.gd`, `state.gd`, `sim.gd`,
+`game_data.gd`, `src/ui/day_hud.gd`, both test tools.
+Verify: 686 headless / 192 input / sim hash moved on purpose, data hash
+unchanged.
+
+### One rod, and the draw happens at the cast
+
+`state["fishing"]` is one cast or nothing - not a list. A farmer has one rod,
+and the moment there are two lines in the water the player is doing something
+else while they wait, which is exactly the attention the pond is charging for.
+Other water offers nothing while a line is out, and there is an assert for it.
+
+Both random decisions - **how long the wait is** and **whether it is the rare
+one** - are drawn in `begin()`, at the cast. Drawing the fish at the reel
+instead would mean a fast hand changed what was on the hook, and `rare_in`
+would stop being a lever and start being a reflex prize. Thirty casts on one
+seed produce an identical log to thirty casts on the same seed and a different
+one to another, which is the done-when.
+
+### Reeling is a press, watering is a hold
+
+Task 0029 put `water` on `Interact.INSTANT`, firing off `interact_held` - the
+level - so one held key waters a row while you walk. Reeling deliberately does
+**not** go there. A player holding the key down while they wait would land
+every fish without ever reacting to one, and reacting is the entire mechanic.
+So `reel` takes the `interact` edge through the ordinary action path, and it
+is on `ONE_SHOT`.
+
+That the two verbs needed opposite treatment is the argument for having split
+the edge from the level last task rather than overloading one field.
+
+### Water asks, the way soil asks
+
+`TERRAIN_VERBS` had `WATER: &"fish"` as a flat entry. It could not stay: what
+the pond offers depends on whether there is a line in it and whether that line
+is biting. So water now asks `Fishing.verb_at()` exactly as soil asks
+`Farming.verb_at()`, `TERRAIN_VERBS` is empty, and the highlight says "reel"
+at the one moment reeling does anything rather than "fish" at a pond that
+already has a line in it.
+
+`all_verbs()` was reading the two verb tables and therefore quietly listed
+none of the farming verbs. It now includes the ones the two subsystems
+produce, so task 0089's tooltip can find them.
+
+### A bite you cannot see is not a reaction test
+
+Task 0078 draws the float going under, and it is not written yet - which would
+have left this task shipping a mechanic that is literally unplayable: a window
+of a second and a half, opening with no signal at all.
+
+So the day HUD says "waiting for a bite" quietly and "A BITE - PRESS SPACE"
+loudly, in the middle of the screen under the farmer rather than in a corner,
+because the player is looking at the water. It is deliberately plain and 0078
+replaces it.
+
+### Notes
+
+- `check_fishing()` joins the other table checks: a window of zero ticks is a
+  pond nobody can fish, a bite that comes sooner than it can is nonsense, and a
+  rare fish worth no more than the common one is not a rare fish. All three
+  have a teeth-test that builds the broken table and expects a complaint.
+- **Walking away gives the cast up**, the same rule as every other job on the
+  farm. Without it a player could cast, go mining, and come back to a fish that
+  had waited all day. `Sim._tick_day()` passes the player's cell in, the same
+  way it does for the watering can, because `Fishing` calling `Player` would
+  close the `Player -> Interact -> Fishing` ring.
+- The rare rate is asserted over 400 casts and allowed to land within half the
+  expected count. Thirty casts gave 3 where 5 was expected, which is noise, not
+  a bug - a tight assert on a small sample is a test that fails on Tuesdays.
+- Ran `input_check` three times over: 192 cases, 0 failed, every time. The bite
+  delay is deterministic from `BOOT_SEED`, so the reaction case is not a race.
+
+### Hashes
+
+| | from | to | why |
+|---|---|---|---|
+| sim hash | `569302775` | `3926216903` | the state gained `fishing` and `last_catch` |
+
+The **data hash did not move**, which is right: this task added a `check_` for
+the fishing table and turned no lever in it. The numbers were all set when the
+table was laid out.
+
+`python tools/verify.py` prints PASS: 686 asserts, 192 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 22
+const GROUPS := 23
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -86,6 +86,7 @@ func _run() -> void:
 	_task_0027_the_loop()
 	_task_0028_crops()
 	_task_0029_watering()
+	_task_0030_fishing()
 
 
 func _finish() -> void:
@@ -2810,3 +2811,233 @@ func _task_0029_watering() -> void:
 		"and it belongs to the daylight like the rest of the farm")
 
 	_completed += 1     # last line: an abandoned group never gets here
+
+
+## 0030 - the pond: a wait you have to watch, and a miss that costs nothing.
+func _task_0030_fishing() -> void:
+	var table: Dictionary = GameData.FISHING
+	expect(GameData.check_fishing(table).is_empty(),
+		"the shipped pond passes its own check",
+		str(GameData.check_fishing(table)))
+
+	# The check has teeth. A window of no ticks is a pond nobody can fish, and
+	# a rare fish worth less than the common one is not a rare fish.
+	var broken: Dictionary = table.duplicate(true)
+	broken["window_ticks"] = 0
+	expect(not GameData.check_fishing(broken).is_empty(),
+		"a pond with no window to react in is refused")
+	broken = table.duplicate(true)
+	broken["rare_yield"] = (table["common_yield"] as Dictionary).duplicate()
+	expect(not GameData.check_fishing(broken).is_empty(),
+		"and so is a rare fish worth no more than the common one")
+	broken = table.duplicate(true)
+	broken["bite_min_ticks"] = int(table["bite_max_ticks"]) + 1
+	expect(not GameData.check_fishing(broken).is_empty(),
+		"and a bite that comes sooner than it can")
+
+	# **You cast from the shore at the water**, and only at the water.
+	var state := State.create(1200)
+	var shore := _a_shore(state)
+	expect(shore != Vector2i(-1, -1), "there is somewhere to fish from")
+	var pond := _water_beside(state, shore)
+	expect(Interact.verb_at(state, pond) == &"fish",
+		"open water offers a cast", str(Interact.verb_at(state, pond)))
+	expect(not Fishing.begin(state, shore),
+		"and dry land does not - you cannot fish the lawn")
+	expect(not Fishing.is_casting(state), "so nothing is in the water")
+
+	# **The wait is drawn at the cast**, once, inside the lever range.
+	expect(Fishing.begin(state, pond), "casting puts a line in")
+	expect(Fishing.is_casting(state), "and there is a line in the water")
+	expect(Fishing.line_cell(state) == pond, "at the cell it was cast into",
+		str(Fishing.line_cell(state)))
+	var wait := Fishing.ticks_left(state)
+	expect(wait >= int(table["bite_min_ticks"])
+		and wait <= int(table["bite_max_ticks"]),
+		"and the wait is inside the lever range", "%d ticks" % wait)
+	expect(not Fishing.is_biting(state), "nothing is biting yet")
+	expect(not Fishing.begin(state, pond),
+		"and a second cast is refused - one farmer, one rod")
+
+	# **One rod, one cell.** Other water offers nothing while a line is out.
+	var elsewhere := _other_water(state, pond)
+	if elsewhere != Vector2i(-1, -1):
+		expect(Interact.verb_at(state, elsewhere) == &"",
+			"other water offers nothing while a line is out",
+			str(Interact.verb_at(state, elsewhere)))
+	expect(Interact.verb_at(state, pond) == &"",
+		"and waiting is waiting - there is nothing to press",
+		str(Interact.verb_at(state, pond)))
+
+	# **The float goes under on the tick the draw said**, and the window opens.
+	for _i in wait - 1:
+		Fishing.tick(state, shore)
+	expect(not Fishing.is_biting(state), "still nothing a tick early",
+		str(Fishing.ticks_left(state)))
+	Fishing.tick(state, shore)
+	expect(Fishing.is_biting(state), "and then it bites")
+	expect(Fishing.ticks_left(state) == int(table["window_ticks"]),
+		"with the whole window to react in", str(Fishing.ticks_left(state)))
+	expect(Interact.verb_at(state, pond) == &"reel",
+		"now the water says reel rather than cast",
+		str(Interact.verb_at(state, pond)))
+
+	# **Reeling in the window pays.**
+	var before := Resources.amount(state, GameData.FISH)
+	var caught := Fishing.reel(state)
+	expect(not caught.is_empty(), "reeling in the window lands it", str(caught))
+	expect(Resources.amount(state, GameData.FISH) > before,
+		"and the fish is in the basket",
+		str(Resources.amount(state, GameData.FISH)))
+	expect(not Fishing.is_casting(state), "the line comes out with it")
+	expect(Interact.verb_at(state, pond) == &"fish", "and the water can be "
+		+ "cast into again", str(Interact.verb_at(state, pond)))
+
+	# **The same seed lands the same fish on the same tick.** The done-when of
+	# this task, and the reason the draw happens at the cast.
+	var first := _fishing_log(1201, 30)
+	var again := _fishing_log(1201, 30)
+	expect(first == again, "the same seed fishes the same pond",
+		"%s against %s" % [first.slice(0, 4), again.slice(0, 4)])
+	var other := _fishing_log(1202, 30)
+	expect(first != other, "and a different seed does not - the wait is "
+		+ "really being drawn", str(other.slice(0, 4)))
+	print("  thirty casts on seed 1201: %d rare, first four waits %s"
+		% [_rare_in(first), str(first.slice(0, 4))])
+
+	# **Both fish exist, and the rare one is rarer.** Thirty casts is a small
+	# sample, so this asks for the shape rather than the exact fraction.
+	var log := _fishing_log(1203, 400)
+	var rare := _rare_in(log)
+	expect(rare > 0, "the rare fish happens", str(rare))
+	expect(rare < log.size(), "and so does the common one", str(rare))
+	var expected := log.size() / int(table["rare_in"])
+	expect(absi(rare - expected) <= expected / 2,
+		"about one in %d of them, over four hundred casts"
+			% int(table["rare_in"]),
+		"%d where %d was expected" % [rare, expected])
+
+	# **Missing the window loses nothing but the time.**
+	var patient := State.create(1204)
+	var shore2 := _a_shore(patient)
+	var pond2 := _water_beside(patient, shore2)
+	var purse := Resources.amount(patient, GameData.MONEY)
+	expect(Fishing.begin(patient, pond2), "a line goes in")
+	for _i in int(table["bite_max_ticks"]) + int(table["window_ticks"]) + 2:
+		Fishing.tick(patient, shore2)
+	expect(not Fishing.is_casting(patient),
+		"a window nobody reacted to closes on its own")
+	expect(Resources.amount(patient, GameData.FISH) == 0,
+		"with no fish", str(Resources.amount(patient, GameData.FISH)))
+	expect(Resources.amount(patient, GameData.MONEY) == purse,
+		"and nothing taken for it - a miss costs the time and no more",
+		str(Resources.amount(patient, GameData.MONEY)))
+	expect(Fishing.reel(patient).is_empty(),
+		"reeling an empty pond catches nothing")
+
+	# **A whole day of not reacting yields nothing and crashes nothing.** The
+	# other done-when, driven through `Sim` rather than by hand.
+	var idle := State.create(1205)
+	var idle_shore := _a_shore(idle)
+	var idle_pond := _water_beside(idle, idle_shore)
+	var who: Dictionary = idle["player"]
+	who["pos"] = [idle_shore.x * Player.SUBTILE + Player.SUBTILE / 2,
+		idle_shore.y * Player.SUBTILE + Player.SUBTILE / 2]
+	expect(Fishing.begin(idle, idle_pond), "cast, and then look away")
+	Sim.advance(idle, GameData.DAY_TICKS)
+	expect(Resources.amount(idle, GameData.FISH) == 0,
+		"a whole day of not reacting catches nothing",
+		str(Resources.amount(idle, GameData.FISH)))
+	expect(not Fishing.is_casting(idle), "and leaves no line in the water")
+	expect(int(idle["phase"]) == Phases.DAY, "and the day is still standing")
+
+	# **Walking away gives the cast up.** Without this a player could cast, go
+	# mining, and come back to a fish that waited all day - which is the
+	# opposite of what the pond charges for.
+	var wanderer := State.create(1206)
+	var bank := _a_shore(wanderer)
+	var water := _water_beside(wanderer, bank)
+	expect(Fishing.begin(wanderer, water), "a line goes in")
+	Fishing.tick(wanderer, bank)
+	expect(Fishing.is_casting(wanderer), "and standing there keeps it")
+	Fishing.tick(wanderer, bank + Vector2i(0, -3))
+	expect(not Fishing.is_casting(wanderer),
+		"walking off gives it up, like every other job on the farm")
+
+	# **The pond is asleep after dark**, like the rest of the farm.
+	var nightly := State.create(1207)
+	var night_shore := _a_shore(nightly)
+	var night_pond := _water_beside(nightly, night_shore)
+	expect(Interact.verb_at(nightly, night_pond) == &"fish", "by day, a cast")
+	Phases.begin_preparation(nightly)
+	Sim.advance(nightly, GameData.PREPARATION_TICKS)
+	expect(Interact.verb_at(nightly, night_pond) == &"",
+		"and after dark the pond offers nothing",
+		str(Interact.verb_at(nightly, night_pond)))
+
+	# **Reeling is a press, not a hold.** A held key that reeled would land
+	# every fish without the player ever reacting to one.
+	expect(Interact.ONE_SHOT.has(&"reel"), "reeling happens once per press")
+	expect(not Interact.is_instant(&"reel"),
+		"and it is not an instant verb - that is what watering is for")
+	expect(Interact.all_verbs().has(&"reel"),
+		"and the tooltip of task 0089 can find it",
+		str(Interact.all_verbs()))
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## Land you can stand on with open water orthogonally beside it.
+func _a_shore(state: Dictionary) -> Vector2i:
+	for found in Farm.cells_of(state, Farm.Terrain.WATER):
+		var wet: Vector2i = found
+		for step in [Vector2i(0, -1), Vector2i(-1, 0), Vector2i(1, 0),
+				Vector2i(0, 1)]:
+			var dry: Vector2i = wet + step
+			if Farm.walkable(state, dry):
+				return dry
+	return Vector2i(-1, -1)
+
+
+func _water_beside(state: Dictionary, shore: Vector2i) -> Vector2i:
+	for step in [Vector2i(0, 1), Vector2i(1, 0), Vector2i(-1, 0),
+			Vector2i(0, -1)]:
+		if Farm.terrain_at(state, shore + step) == Farm.Terrain.WATER:
+			return shore + step
+	return Vector2i(-1, -1)
+
+
+func _other_water(state: Dictionary, not_this: Vector2i) -> Vector2i:
+	for found in Farm.cells_of(state, Farm.Terrain.WATER):
+		var wet: Vector2i = found
+		if wet != not_this:
+			return wet
+	return Vector2i(-1, -1)
+
+
+## `casts` casts on one seed, always reeled the moment they bite. Each entry is
+## the wait that was drawn and whether it was the rare one - which is the whole
+## of what the RNG decides about a cast, so two identical logs are two
+## identical ponds.
+func _fishing_log(seed_value: int, casts: int) -> Array:
+	var state := State.create(seed_value)
+	var shore := _a_shore(state)
+	var pond := _water_beside(state, shore)
+	var out: Array = []
+	for _i in casts:
+		Fishing.begin(state, pond)
+		var wait := Fishing.ticks_left(state)
+		var rare := bool(Fishing.cast_of(state)["rare"])
+		while not Fishing.is_biting(state):
+			Fishing.tick(state, shore)
+		Fishing.reel(state)
+		out.append([wait, rare])
+	return out
+
+
+func _rare_in(log: Array) -> int:
+	var n := 0
+	for entry in log:
+		if bool((entry as Array)[1]):
+			n += 1
+	return n

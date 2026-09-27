@@ -25,13 +25,13 @@ const OCCUPANT_VERBS: Dictionary = {
 
 ## When nothing is standing there, the ground decides.
 ##
-## Soil is the exception: what a field offers depends on what is in it, so it
-## asks `Farming` rather than answering from a table. That is why the highlight
-## can say "harvest" instead of "farm", and why the player is never told a key
-## does something it does not.
-const TERRAIN_VERBS: Dictionary = {
-	Farm.Terrain.WATER: &"fish",
-}
+## Soil and water are the exceptions: what a field offers depends on what is in
+## it and what the pond offers depends on whether there is a line in it, so
+## they ask `Farming` and `Fishing` rather than answering from a table. That is
+## why the highlight can say "harvest" instead of "farm" and "reel" at the one
+## moment reeling does anything, and why the player is never told a key does
+## something it does not.
+const TERRAIN_VERBS: Dictionary = {}
 
 ## How long a verb takes when the thing itself does not say. A verb that has a
 ## `work_ticks` in `GameData.GATHERING` uses that instead.
@@ -44,6 +44,10 @@ const DEFAULT_TICKS: Dictionary = {
 	&"harvest": GameData.SECONDS / 3,       # LEVER: ticks, 5-30
 	&"water": 1,                    # instant; see INSTANT below
 	&"fish": 1 * GameData.SECONDS,
+	# The cast is the moment; the wait afterwards is `Fishing`, not the
+	# player's action. Reeling is a single tick because the window is what
+	# makes it hard, not the pulling.
+	&"reel": 1,
 	&"trade": 1,                    # opening a panel is not work
 	# Starting a job is a moment. The job itself takes as long as the recipe
 	# says, and the player is free to walk away while it runs.
@@ -62,7 +66,7 @@ const DEFAULT_TICKS: Dictionary = {
 ## own verbs, and they go on their own list when they arrive.
 const DAY_ONLY: Array = [
 	&"chop", &"mine", &"till", &"plant", &"harvest", &"fish", &"trade", &"craft",
-	&"water",
+	&"water", &"reel",
 ]
 
 
@@ -95,9 +99,12 @@ static func _offered(state: Dictionary, cell: Vector2i) -> StringName:
 	var on := Farm.occupant(state, cell)
 	if not on.is_empty():
 		return OCCUPANT_VERBS.get(on["id"], &"")
-	if Farm.terrain_at(state, cell) == Farm.Terrain.SOIL:
+	var terrain := Farm.terrain_at(state, cell)
+	if terrain == Farm.Terrain.SOIL:
 		return Farming.verb_at(state, cell)
-	return TERRAIN_VERBS.get(Farm.terrain_at(state, cell), &"")
+	if terrain == Farm.Terrain.WATER:
+		return Fishing.verb_at(state, cell)
+	return TERRAIN_VERBS.get(terrain, &"")
 
 
 ## What the cell would offer if the sun were up. Split out so that the day-only
@@ -133,7 +140,12 @@ static func repeats(verb: StringName) -> bool:
 
 ## Verbs that happen once per press. They do not change what the cell offers,
 ## so without this they would happen for ever.
-const ONE_SHOT: Array = [&"trade", &"craft"]
+## **Reeling is here and watering is not**, which is the whole difference
+## between the two. Watering repeats off `interact_held`, the level, so one
+## held key does a row. A held key that reeled would land every fish without
+## the player ever reacting to one, and reacting is the mechanic - so reeling
+## takes the press, once, and the cast it belongs to is gone afterwards anyway.
+const ONE_SHOT: Array = [&"trade", &"craft", &"reel"]
 
 
 ## The work is finished. Do whatever the verb means.
@@ -149,7 +161,9 @@ static func complete(state: Dictionary, cell: Vector2i, verb: StringName) -> voi
 		&"till", &"plant", &"harvest", &"water":
 			Farming.act(state, cell)
 		&"fish":
-			pass        # task 0030
+			Fishing.begin(state, cell)
+		&"reel":
+			Fishing.reel(state)
 		&"craft":
 			Crafting.start(state, cell, state["selected_recipe"])
 		&"trade":
@@ -162,7 +176,8 @@ static func complete(state: Dictionary, cell: Vector2i, verb: StringName) -> voi
 ## tooltip of task 0089.
 static func all_verbs() -> Array:
 	var verbs: Array = []
-	for v in OCCUPANT_VERBS.values() + TERRAIN_VERBS.values():
+	for v in OCCUPANT_VERBS.values() + TERRAIN_VERBS.values() \
+			+ [&"till", &"plant", &"harvest", &"water", &"fish", &"reel"]:
 		if not verbs.has(v):
 			verbs.append(v)
 	verbs = GameData.sorted_names(verbs)

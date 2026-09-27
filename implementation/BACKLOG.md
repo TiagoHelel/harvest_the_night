@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`######..................`  **29 / 108 done**
+`#######.................`  **30 / 108 done**
 
-0 doing / 79 todo / 0 blocked across 9 phases.
+0 doing / 78 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0030 - Fishing**. The whole of what is left is
+First up: **0031 - Iron from the rock face**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,25 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-79 task(s) left, the ready ones first, then what they
+78 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0030 - Fishing
-
-Ready to pick up.  Likely files: `src/core/fishing.gd`.
-
-The pond earns its place: the highest value per action on the farm, paid for with attention rather than resources.
-
-- Cast from a shore or jetty tile facing water, on the interact action
-- A bite after a seeded random delay inside a lever range, then a window to react
-- Common and rare fish, with the rare chance a lever
-- Missing the window loses nothing but the time
-- Fish sell high and feed cooking later
-
-  - done when: The bite delay is drawn from the run RNG and replays identically
-  - done when: Fishing with no reaction for a whole day yields nothing and crashes nothing
-  - done when: `input_check` lands one fish
 
 ### 0031 - Iron from the rock face
 
@@ -74,6 +58,20 @@ Fire needs fuel. Oil is pressed rather than gathered, which makes it the first r
 
   - done when: Oil can be produced and sold, and the sale is a real temptation against the flamethrower cost
   - done when: `headless_check` runs the press for a known number of ticks
+
+### 0034 - Cooking: food and meat
+
+Ready to pick up.  Likely files: `src/core/crafting.gd`.
+
+The kitchen from the reference sheet: raw crops and fish become food, which is what repairs and heals during the night.
+
+- Recipes turning crops, fish and meat into food
+- Food is the night's repair and heal currency, per the design document's resource table
+- Cooked food is worth more than its inputs sold separately, or the kitchen has no reason to exist
+- Meat comes from the farm animals on the reference sheet; keep it to a passive trickle, not an animal husbandry system
+
+  - done when: A cooked dish sells for more than its inputs - state the margin
+  - done when: Food spent on repair during a night is taken through the ledger
 
 ### 0036 - The inventory
 
@@ -271,20 +269,6 @@ Energy, the resource on the reference sheet that gates the advanced structures a
 
   - done when: Building one structure too many visibly slows everything rather than stopping it
   - done when: Running out of fuel mid-night degrades the defence and the night still resolves
-
-### 0034 - Cooking: food and meat
-
-Waits on 0030.  Likely files: `src/core/crafting.gd`.
-
-The kitchen from the reference sheet: raw crops and fish become food, which is what repairs and heals during the night.
-
-- Recipes turning crops, fish and meat into food
-- Food is the night's repair and heal currency, per the design document's resource table
-- Cooked food is worth more than its inputs sold separately, or the kitchen has no reason to exist
-- Meat comes from the farm animals on the reference sheet; keep it to a passive trickle, not an animal husbandry system
-
-  - done when: A cooked dish sells for more than its inputs - state the margin
-  - done when: Food spent on repair during a night is taken through the ledger
 
 ### 0037 - The workshop queue
 
@@ -1244,15 +1228,15 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0026** [The tower kills the zombie](prompts/0026-combat.md)
 - [x] **0027** [Three waves, a result screen, and back to the farm](prompts/0027-first-loop.md)
 
-## 2 - The full day  (2/14)
+## 2 - The full day  (3/14)
 
 - [x] **0028** [Corn and carrot](prompts/0028-three-crops.md)
 - [x] **0029** [Growth stages and watering](prompts/0029-growth-stages.md)
-- [ ] **0030** [Fishing](prompts/0030-fishing.md)
+- [x] **0030** [Fishing](prompts/0030-fishing.md)
 - [ ] **0031** [Iron from the rock face](prompts/0031-iron.md)
 - [ ] **0032** [Oil](prompts/0032-oil.md)
 - [ ] **0033** [The generator and energy](prompts/0033-generator.md) - needs 0031
-- [ ] **0034** [Cooking: food and meat](prompts/0034-cooking.md) - needs 0030
+- [ ] **0034** [Cooking: food and meat](prompts/0034-cooking.md)
 - [ ] **0035** [Gunpowder and ammunition](prompts/0035-ammunition.md) - needs 0032, 0033
 - [ ] **0036** [The inventory](prompts/0036-inventory.md)
 - [ ] **0037** [The workshop queue](prompts/0037-craft-queue.md) - needs 0036

@@ -33,6 +33,13 @@ extends Control
 ## much is left - an empty can and no explanation is how a player decides the
 ## mechanic is broken.
 ##
+## ## The line in the water
+##
+## One label in the middle of the screen while a cast is out, because a bite
+## nobody can see is a reaction test with nothing to react to. It is deliberately
+## plain: **task 0078 draws the float going under**, which is the version a
+## player should get, and this is what keeps the mechanic playable until then.
+##
 ## ## The night button
 ##
 ## Bottom right, and it says what it will do rather than just "night". It is a
@@ -54,6 +61,7 @@ const FLASH_SECONDS := 0.45
 const SEED_KEYS: Array = [KEY_1, KEY_2, KEY_3, KEY_4, KEY_5, KEY_6]
 
 const PICKED := Color(1.0, 0.92, 0.62)
+const BITE := Color(1.0, 0.85, 0.35)
 
 const DIM := Color(0.62, 0.60, 0.70)
 const LIT := Color(1.0, 0.95, 0.70)
@@ -68,6 +76,7 @@ var _last: Dictionary = {}          # resource id -> the number it last showed
 var _flash: Dictionary = {}         # resource id -> seconds of glow left
 var _seed_rows: Dictionary = {}     # crop id -> Label
 var _water: Label
+var _line: Label
 
 
 func _ready() -> void:
@@ -107,6 +116,11 @@ func _ready() -> void:
 	# what am I about to plant, and have I got water for it.
 	_water = _label("WaterCan",
 		Vector2(7, 46 + Farming.seeds().size() * 10 + 3), DIM)
+
+	# Middle of the screen, under the farmer rather than in a corner: the
+	# player is looking at the water, not at the top bar.
+	_line = _label("FishingLine", Vector2(186, 208), BITE)
+	_line.visible = false
 
 	_night = Button.new()
 	_night.name = "NightButton"
@@ -227,6 +241,14 @@ func _refresh(force: bool) -> void:
 	var chosen := Farming.selected_seed(_state)
 	for id in _seed_rows:
 		(_seed_rows[id] as Label).modulate = PICKED if id == chosen else DIM
+
+	# **The line, while there is one.** Waiting says so quietly; a bite shouts,
+	# because the window is a second and a half.
+	_line.visible = Fishing.is_casting(_state)
+	if _line.visible:
+		var biting := Fishing.is_biting(_state)
+		_line.text = "A BITE - PRESS SPACE" if biting else "waiting for a bite"
+		_line.modulate = BITE if biting else DIM
 
 	# **Past dusk the button asks.** It never presses itself: `design.md`
 	# promises the player switches reality when they want to.
