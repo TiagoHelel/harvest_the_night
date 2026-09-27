@@ -1141,3 +1141,51 @@ Notes:
 - Actor sprites are pooled rather than freed and rebuilt each frame. A wave is
   a hundred things moving every frame and that is the one place this view could
   plausibly cost something.
+
+## 0025 - Zombies walk to the house - done 2026-09-27
+
+What changed: the night has something in it. Zombies spawn at two edges,
+follow one flow field to the farmhouse, and take a bite out of it when they
+arrive. The house can fall, and when it does the night ends.
+
+Files: src/core/pathing.gd, src/core/enemies.gd, src/core/farm.gd,
+src/core/towers.gd, src/core/game_data.gd, src/core/sim.gd, src/core/state.gd,
+src/core/building.gd, src/tools/headless_check.gd
+
+Verify: PASS - 10 passed, 1 skipped, 40s. **470 asserts, 0 failed** (436
+before). **Sim hash 4008937129 -> 1177574569**, **data hash 2501830300 ->
+3315067798** (the spawn table, the grid version and the house's hit points).
+
+Notes:
+
+- **One field, not one search each.** A breadth-first sweep out from the house
+  fills every cell with its distance; a zombie reads four neighbours and steps
+  to the smallest. It is also the right answer rather than only the fast one:
+  every zombie agrees what the shortest way is, so a wall reroutes the whole
+  wave at once and the player can watch their plan work.
+- **A version, not a hash.** `Farm` bumps `grid_version` on every placement and
+  removal and the field rebuilds when it is behind. Hashing the occupants every
+  tick to find out nothing moved is the cost the field exists to avoid.
+- **Two spawn edges, not four.** A farm attacked from every side at once cannot
+  be defended with the towers a first night affords, and the reason to choose
+  where a wall goes disappears with it.
+- **Fifty zombies went from 2316 microseconds a tick to 566**, against a budget
+  of a thousand. Three things, in order of what they were worth:
+  - the flow field was read **once per sub-unit of movement** rather than once
+    per tick, which is three lookups where one would do;
+  - `Farm.house_centre()` scanned and sorted every occupant on the farm, once
+    per tower per tick - the house is a fixture and never moves, so it is
+    worked out once now;
+  - `Towers.tick` walked all hundred and ten occupants each tick to find the
+    four towers; it keeps a list keyed by `grid_version`.
+- **A bug the test was too helpful to catch.** `Enemies.spawn()` asks whether a
+  cell can reach the house, and the field is only built when something needs
+  it - so **the first wave of every night spawned nothing at all**. The check
+  had called `Pathing.refresh()` by hand first, which is a precondition the
+  game does not arrange. It now spawns onto a night nobody prepared, and the
+  refresh lives where the question is asked.
+- **A zombie standing on the house never bit it**, because the field says
+  "stay where you are" at distance zero. Standing on it counts now.
+- The farm-identity assert from task 0008 was asking about the whole state,
+  which now carries a counter of how many times the farm changed. It asks about
+  the ground and what is standing on it instead - which is what it meant.

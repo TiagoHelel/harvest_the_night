@@ -90,6 +90,7 @@ static func _tick_night(state: Dictionary) -> void:
 	# Waves spawn (0027), enemies move (0025), towers acquire and fire, shots
 	# in the air advance and land, and only then is the end of the night
 	# tested (0027).
+	Enemies.tick(state)
 	Towers.tick(state)
 
 

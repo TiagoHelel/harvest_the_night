@@ -45,6 +45,8 @@ static func create(seed_value: int) -> Dictionary:
 	_adopt(state, Building.initial(), "Building")
 	_adopt(state, Entities.initial(), "Entities")
 	_adopt(state, Towers.initial(), "Towers")
+	_adopt(state, Pathing.initial(), "Pathing")
+	_adopt(state, Enemies.initial(), "Enemies")
 	return state
 
 

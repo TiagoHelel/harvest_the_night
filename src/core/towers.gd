@@ -34,7 +34,34 @@ static func initial() -> Dictionary:
 	return {
 		"projectiles": [],
 		"next_projectile_id": 1,
+		# The cells that shoot, and the `grid_version` that list was made for.
+		# **Rebuilt only when the farm changes**: scanning a hundred and ten
+		# occupants every tick to find the four towers among them was most of
+		# what a quiet tick cost.
+		"tower_cells": [],
+		"tower_version": -1,
 	}
+
+
+## The cells that shoot, refreshed when the farm has changed under them.
+static func _towers(state: Dictionary) -> Array:
+	if int(state["tower_version"]) != int(state["grid_version"]):
+		state["tower_cells"] = _find_towers(state)
+		state["tower_version"] = int(state["grid_version"])
+	return state["tower_cells"]
+
+
+static func _find_towers(state: Dictionary) -> Array:
+	var out: Array = []
+	var occupants: Dictionary = state["occupants"]
+	var keys: Array = occupants.keys()
+	keys.sort()
+	for idx in keys:
+		var entry: Variant = GameData.DEFENCES.get(
+			(occupants[idx] as Dictionary)["id"], null)
+		if entry != null and (entry as Dictionary).has("reload_ticks"):
+			out.append(int(idx))
+	return out
 
 
 # ------------------------------------------------------------------ the tick
@@ -50,13 +77,9 @@ static func tick(state: Dictionary) -> void:
 		return
 
 	var occupants: Dictionary = state["occupants"]
-	var cells: Array = occupants.keys()
-	cells.sort()
-	for idx in cells:
+	for idx in _towers(state):
 		var tower: Dictionary = occupants[idx]
-		var entry: Variant = GameData.DEFENCES.get(tower["id"], null)
-		if entry == null or not (entry as Dictionary).has("reload_ticks"):
-			continue
+		var entry: Dictionary = GameData.DEFENCES[tower["id"]]
 
 		var reload := int(tower.get("reload", 0))
 		if reload > 0:
@@ -64,19 +87,17 @@ static func tick(state: Dictionary) -> void:
 			continue
 
 		var cell := Grid.cell(int(idx))
-		var target := _acquire(state, cell, entry as Dictionary)
+		var target := _acquire(state, cell, entry)
 		if target == 0:
 			continue
-		_fire(state, cell, tower["id"], entry as Dictionary, target)
-		tower["reload"] = int((entry as Dictionary)["reload_ticks"])
+		_fire(state, cell, tower["id"], entry, target)
+		tower["reload"] = int(entry["reload_ticks"])
 
 
 ## Reload everything, without looking for targets. What a quiet tick costs.
 static func _cool_down(state: Dictionary) -> void:
 	var occupants: Dictionary = state["occupants"]
-	var cells: Array = occupants.keys()
-	cells.sort()
-	for idx in cells:
+	for idx in _towers(state):
 		var tower: Dictionary = occupants[idx]
 		var reload := int(tower.get("reload", 0))
 		if reload > 0:
@@ -188,12 +209,6 @@ static func in_flight(state: Dictionary) -> int:
 ## Every tower on the farm, in cell order.
 static func cells(state: Dictionary) -> Array:
 	var out: Array = []
-	var occupants: Dictionary = state["occupants"]
-	var keys: Array = occupants.keys()
-	keys.sort()
-	for idx in keys:
-		var entry: Variant = GameData.DEFENCES.get(
-			(occupants[idx] as Dictionary)["id"], null)
-		if entry != null and (entry as Dictionary).has("reload_ticks"):
-			out.append(Grid.cell(int(idx)))
+	for idx in _towers(state):
+		out.append(Grid.cell(int(idx)))
 	return out

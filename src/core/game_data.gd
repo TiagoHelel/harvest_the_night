@@ -560,6 +560,25 @@ const NIGHTS: Array = [
 ## How many nights the MVP has. Past this, task 0070 generates them.
 const MVP_NIGHTS := 10
 
+## Where the horde comes in, as `[[x, y], ...]` per spawn point.
+##
+## The wave tables above name these by index: `0` is the east edge, which is
+## the open ground the farm was drawn to have, and `1` is the south, across the
+## bottom of the map. A cell that is not walkable or cannot reach the house is
+## skipped at spawn time rather than being kept in step by hand here.
+##
+## **Two sides, not four.** A farm attacked from every direction at once cannot
+## be defended with the handful of towers a first night affords, and the reason
+## to choose where a wall goes disappears with it.
+const SPAWNS: Array = [
+	# 0 - the east edge, down the open right-hand side.
+	[[39, 4], [39, 5], [39, 6], [39, 7], [39, 8], [39, 9],
+	 [39, 10], [39, 11], [39, 12], [39, 13]],
+	# 1 - the south, along the bottom of the open ground.
+	[[26, 14], [28, 14], [30, 14], [32, 14], [34, 14],
+	 [24, 13], [36, 13]],
+]
+
 
 # ===================================================================== rewards
 
@@ -844,6 +863,7 @@ static func digest() -> int:
 		"enemies": ENEMIES,
 		"nights": NIGHTS,
 		"wave_gap": [WAVE_GAP_TICKS, MVP_NIGHTS],
+		"spawns": SPAWNS,
 		"rewards": REWARDS,
 		"defeat": [DEFEAT_RESOURCE_LOSS, DEFEAT_KEEPS_MONEY, DEFEAT_KEEPS_TECH],
 	})

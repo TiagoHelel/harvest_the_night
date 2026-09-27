@@ -228,6 +228,8 @@ static func expire(state: Dictionary) -> void:
 			gone.append(idx)
 	for idx in gone:
 		occupants.erase(idx)
+	if not gone.is_empty():
+		state["grid_version"] = int(state["grid_version"]) + 1
 
 
 static func select(state: Dictionary, id: StringName) -> void:

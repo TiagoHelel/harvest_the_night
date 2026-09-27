@@ -1,7 +1,7 @@
 # 0025 - Zombies walk to the house
 
 - **Phase:** 1 - The first playable build
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0022, 0008
 - **Likely files:** src/core/enemies.gd, src/core/pathing.gd
 

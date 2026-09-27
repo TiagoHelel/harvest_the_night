@@ -48,7 +48,39 @@ static func initial() -> Dictionary:
 			if occupant_id != &"":
 				occupants[idx] = {"id": occupant_id}
 
-	return {"terrain": terrain, "occupants": occupants}
+	return {
+		"terrain": terrain,
+		"occupants": occupants,
+		# **Bumped by every placement and removal.** `Pathing` rebuilds its
+		# flow field when the one it holds was built for an older number - a
+		# counter rather than a hash of the occupants, because hashing them
+		# every tick to find out nothing moved is the cost the field exists to
+		# avoid.
+		"grid_version": 1,
+		# What the farmhouse can take. A lever, and the night ends when it
+		# reaches zero.
+		"house_hp": GameData.HOUSE_HP,
+		# **Worked out once.** The house is a fixture and never moves, and
+		# `house_centre()` was scanning and sorting every occupant on the farm -
+		# once per tower per tick, which with a wave on the ground was most of
+		# what targeting cost.
+		"house_cell": _centre_of(occupants),
+	}
+
+
+## The middle of the 3x3 farmhouse, from the occupant table it was built from.
+static func _centre_of(occupants: Dictionary) -> Array:
+	var sum := Vector2i.ZERO
+	var n := 0
+	var keys: Array = occupants.keys()
+	keys.sort()
+	for idx in keys:
+		if (occupants[idx] as Dictionary)["id"] == &"house":
+			sum += Grid.cell(int(idx))
+			n += 1
+	if n == 0:
+		return [Grid.WIDTH / 2, Grid.HEIGHT / 2]
+	return [sum.x / n, sum.y / n]
 
 
 static func terrain_at(state: Dictionary, cell: Vector2i) -> int:
@@ -117,6 +149,7 @@ static func place(state: Dictionary, cell: Vector2i, occupant_data: Dictionary) 
 		return false
 	var occupants: Dictionary = state["occupants"]
 	occupants[Grid.index(cell)] = occupant_data.duplicate(true)
+	_changed(state)
 	return true
 
 
@@ -134,6 +167,7 @@ static func restore(state: Dictionary, cell: Vector2i, occupant_data: Dictionary
 	if idx < 0 or not is_empty(state, cell):
 		return false
 	(state["occupants"] as Dictionary)[idx] = occupant_data.duplicate(true)
+	_changed(state)
 	return true
 
 
@@ -149,7 +183,14 @@ static func remove(state: Dictionary, cell: Vector2i) -> bool:
 	if FIXTURES.has((occupants[idx] as Dictionary)["id"]):
 		return false
 	occupants.erase(idx)
+	_changed(state)
 	return true
+
+
+## Something went up or came down. Anything that caches a fact about the shape
+## of the farm watches this number.
+static func _changed(state: Dictionary) -> void:
+	state["grid_version"] = int(state["grid_version"]) + 1
 
 
 ## Every cell holding a given occupant id, in index order.
@@ -182,10 +223,5 @@ static func cells_of(state: Dictionary, terrain: int) -> Array:
 ## Where the farmhouse is - the centre of its 3x3, which is what the flow field
 ## of task 0025 aims at and what the camera frames.
 static func house_centre(state: Dictionary) -> Vector2i:
-	var cells := cells_with(state, &"house")
-	if cells.is_empty():
-		return Vector2i(Grid.WIDTH / 2, Grid.HEIGHT / 2)
-	var sum := Vector2i.ZERO
-	for c in cells:
-		sum += c
-	return Vector2i(sum.x / cells.size(), sum.y / cells.size())
+	var at: Array = state["house_cell"]
+	return Vector2i(int(at[0]), int(at[1]))

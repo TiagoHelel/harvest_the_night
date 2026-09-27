@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`#####...................`  **24 / 108 done**
+`######..................`  **25 / 108 done**
 
-0 doing / 84 todo / 0 blocked across 9 phases.
+0 doing / 83 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0025 - Zombies walk to the house**. The whole of what is left is
+First up: **0026 - The tower kills the zombie**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,25 +26,24 @@ which rewrites this file for you.
 
 ## What is open
 
-84 task(s) left, the ready ones first, then what they
+83 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
-### 0025 - Zombies walk to the house
+### 0026 - The tower kills the zombie
 
-Ready to pick up.  Likely files: `src/core/enemies.gd, src/core/pathing.gd`.
+Ready to pick up.  Likely files: `src/core/combat.gd`.
 
-Something to shoot at. Zombies come in from the edges and head for the farmhouse, and the house has hit points.
+Close the fight: projectiles land, damage is dealt, zombies die and drop what the night pays.
 
-- A flow field computed once from the house over the walkable grid, not A* per zombie - it is cheap, it is deterministic and it will hold a hundred of them
-- The field is recomputed only when the grid changes
-- Spawn points are edge cells in data; spawn order and timing come from the seeded RNG
-- Reaching the house deals damage and removes the zombie
-- House hit points are a lever and hitting zero ends the night
+- Damage resolution in one place, so every later tower and enemy goes through it
+- Overkill is not wasted on a second target; a dead target stops being shot at the same tick
+- Death removes the entity cleanly with no dangling reference in the state
+- Hit, death and the projectile are visible - a kill should read at a glance
+- Entity ids are stable and ordered so the hash cannot depend on spawn order
 
-  - done when: Fifty zombies pathing costs under a millisecond a tick
-  - done when: Two runs from one seed produce the same zombie positions at tick 1000
-  - done when: A zombie with no path at all stands still rather than crashing
+  - done when: A tower clears a lane of ten zombies with the expected number of shots
+  - done when: `headless_check` runs a scripted fight and asserts the survivor count
 
 ### 0028 - Corn and carrot
 
@@ -228,20 +227,22 @@ When it breaks on someone else's machine, get enough to fix it without them.
   - done when: A deliberate crash produces a report with the seed and the tick
   - done when: The run is still loadable afterwards
 
-### 0026 - The tower kills the zombie
+### 0027 - Three waves, a result screen, and back to the farm
 
-Waits on 0025.  Likely files: `src/core/combat.gd`.
+Waits on 0026.  Likely files: `src/core/waves.gd, src/ui/result_screen.gd`.
 
-Close the fight: projectiles land, damage is dealt, zombies die and drop what the night pays.
+**The MVP checkpoint.** Three waves of basic zombies, a night that ends, a payout, and a day 2 that is better than day 1. If this is not fun, nothing after it will be.
 
-- Damage resolution in one place, so every later tower and enemy goes through it
-- Overkill is not wasted on a second target; a dead target stops being shot at the same tick
-- Death removes the entity cleanly with no dangling reference in the state
-- Hit, death and the projectile are visible - a kill should read at a glance
-- Entity ids are stable and ordered so the hash cannot depend on spawn order
+- Three waves with a gap between them, all from data
+- The night ends when the last zombie of the last wave is gone, or when the house falls
+- A result screen showing what survived, what was killed and what it paid
+- Surviving pays money and resources; losing costs part of the stock, and both numbers are levers
+- Confirming the result returns to DAY with the day counter moved on
 
-  - done when: A tower clears a lane of ten zombies with the expected number of shots
-  - done when: `headless_check` runs a scripted fight and asserts the survivor count
+  - done when: A human can play: gather, craft, build, fight, get paid, repeat - without the console open
+  - done when: The whole first cycle takes about three minutes
+  - done when: `headless_check` plays all three waves and asserts the payout
+  - done when: Say in the journal whether it was fun, honestly, because that is the question this whole phase exists to answer
 
 ### 0029 - Growth stages and watering
 
@@ -392,7 +393,7 @@ The reference sheet's mine: no targeting, no upkeep, high damage, and then it is
 
 ### 0049 - Zombies path around walls
 
-Waits on 0025, 0046.  Likely files: `src/core/pathing.gd`.
+Waits on 0046.  Likely files: `src/core/pathing.gd`.
 
 Make the flow field earn its keep: cost, not just blocked, so zombies prefer the open lane and break through when they must.
 
@@ -496,6 +497,21 @@ Chop, mine, till, plant, water, the fishing splash and the bite, the craft, the 
   - done when: Chopping a tree for a full minute does not become annoying - go and check
   - done when: Regenerating produces byte-identical files
 
+### 0085 - The sounds of the night
+
+Waits on 0083, 0026.  Likely files: `tools/gen_sfx.py, assets/sfx/`.
+
+The other half: shots, the flamethrower, the mortar, impacts, the groan, the death, the wall breaking, the house being hit.
+
+- Every tower and every enemy has its own sound
+- The house taking damage is the most alarming sound in the game
+- A distance falloff, so the far side of the farm is quieter
+- The Giant is audible before it is visible
+- The same generator as 0084
+
+  - done when: With eyes closed, a night's audio says roughly what is happening
+  - done when: Fifty zombies do not turn into noise
+
 ### 0086 - Two pieces of music
 
 Waits on 0083.  Likely files: `tools/gen_music.py, assets/music/`.
@@ -510,23 +526,6 @@ One warm loop for the farm, one cold one for the night, and a crossfade on the r
 
   - done when: The loop point is inaudible
   - done when: The crossfade lands with the transition, not before or after it
-
-### 0027 - Three waves, a result screen, and back to the farm
-
-Waits on 0026.  Likely files: `src/core/waves.gd, src/ui/result_screen.gd`.
-
-**The MVP checkpoint.** Three waves of basic zombies, a night that ends, a payout, and a day 2 that is better than day 1. If this is not fun, nothing after it will be.
-
-- Three waves with a gap between them, all from data
-- The night ends when the last zombie of the last wave is gone, or when the house falls
-- A result screen showing what survived, what was killed and what it paid
-- Surviving pays money and resources; losing costs part of the stock, and both numbers are levers
-- Confirming the result returns to DAY with the day counter moved on
-
-  - done when: A human can play: gather, craft, build, fight, get paid, repeat - without the console open
-  - done when: The whole first cycle takes about three minutes
-  - done when: `headless_check` plays all three waves and asserts the payout
-  - done when: Say in the journal whether it was fun, honestly, because that is the question this whole phase exists to answer
 
 ### 0035 - Gunpowder and ammunition
 
@@ -614,50 +613,6 @@ The enemy that goes after what you built: it targets structures first and the ho
   - done when: A wave of breakers dismantles an unprotected tower line
   - done when: With the towers covered, they die before they reach one
 
-### 0078 - The reality transition
-
-Waits on 0076.  Likely files: `src/ui/transition.gd`.
-
-The moment the game is named after. Two seconds that say: same farm, different world.
-
-- The light drains from warm to cold across the whole farm at once
-- Day actors leave and night structures wake during it
-- It is skippable, and it never blocks the simulation
-- It plays in both directions, and coming back to the farm in the morning is the reward half
-- Length is a lever and a setting
-
-  - done when: It is the clip you would put first in a trailer - say in the journal whether it is yet
-  - done when: Skipping it lands in exactly the same state as watching it
-
-### 0081 - The UI theme
-
-Waits on 0079, 0080.  Likely files: `assets/theme.tres, src/ui/`.
-
-One Theme resource every control uses, so a colour change is one edit and no screen is the odd one out.
-
-- Every Control style in one Theme: no per-node style overrides anywhere
-- Built from the palette and the UI kit, not from Godot's defaults
-- Focus, hover and disabled states defined for everything interactive
-- A UI scale factor that works at every integer window scale
-
-  - done when: `grep` finds no `add_theme_*_override` left in `src/ui/`
-  - done when: Every screen looks like the same game
-
-### 0085 - The sounds of the night
-
-Waits on 0083, 0026.  Likely files: `tools/gen_sfx.py, assets/sfx/`.
-
-The other half: shots, the flamethrower, the mortar, impacts, the groan, the death, the wall breaking, the house being hit.
-
-- Every tower and every enemy has its own sound
-- The house taking damage is the most alarming sound in the game
-- A distance falloff, so the far side of the farm is quieter
-- The Giant is audible before it is visible
-- The same generator as 0084
-
-  - done when: With eyes closed, a night's audio says roughly what is happening
-  - done when: Fifty zombies do not turn into noise
-
 ### 0053 - Repair during the night
 
 Waits on 0046, 0027.  Likely files: `src/core/building.gd, src/ui/night_hud.gd`.
@@ -719,6 +674,49 @@ Section 14 of the design document: which night, which wave, how the house is doi
   - done when: Every number on it is readable at 480x270 scaled up
   - done when: `input_check` presses all three controls
 
+### 0078 - The reality transition
+
+Waits on 0076.  Likely files: `src/ui/transition.gd`.
+
+The moment the game is named after. Two seconds that say: same farm, different world.
+
+- The light drains from warm to cold across the whole farm at once
+- Day actors leave and night structures wake during it
+- It is skippable, and it never blocks the simulation
+- It plays in both directions, and coming back to the farm in the morning is the reward half
+- Length is a lever and a setting
+
+  - done when: It is the clip you would put first in a trailer - say in the journal whether it is yet
+  - done when: Skipping it lands in exactly the same state as watching it
+
+### 0081 - The UI theme
+
+Waits on 0079, 0080.  Likely files: `assets/theme.tres, src/ui/`.
+
+One Theme resource every control uses, so a colour change is one edit and no screen is the odd one out.
+
+- Every Control style in one Theme: no per-node style overrides anywhere
+- Built from the palette and the UI kit, not from Godot's defaults
+- Focus, hover and disabled states defined for everything interactive
+- A UI scale factor that works at every integer window scale
+
+  - done when: `grep` finds no `add_theme_*_override` left in `src/ui/`
+  - done when: Every screen looks like the same game
+
+### 0087 - Ambience
+
+Waits on 0084, 0085.  Likely files: `src/app/ambience.gd`.
+
+The bed under everything: birds and water by day, wind and distant groaning by night.
+
+- A day bed and a night bed, cross-fading with the transition
+- Positional touches: the pond is louder near the pond
+- It ducks under an important sound rather than fighting it
+- It is on its own bus so it can be turned down alone
+
+  - done when: Standing still on the farm for a minute is pleasant, not empty
+  - done when: The ambience never masks the house-damage sound
+
 ### 0057 - Structures take damage and die
 
 Waits on 0046, 0052.  Likely files: `src/core/combat.gd, src/core/building.gd`.
@@ -779,20 +777,6 @@ A command that puts the game in a known state and takes the picture, so a visual
 
   - done when: One command produces the whole set
   - done when: The set is recognisably the game on the reference sheet
-
-### 0087 - Ambience
-
-Waits on 0084, 0085.  Likely files: `src/app/ambience.gd`.
-
-The bed under everything: birds and water by day, wind and distant groaning by night.
-
-- A day bed and a night bed, cross-fading with the transition
-- Positional touches: the pond is louder near the pond
-- It ducks under an important sound rather than fighting it
-- It is on its own bus so it can be turned down alone
-
-  - done when: Standing still on the farm for a minute is pleasant, not empty
-  - done when: The ambience never masks the house-damage sound
 
 ### 0089 - Tooltips
 
@@ -1305,7 +1289,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0011** [input_check harness](prompts/0011-input-check.md)
 - [x] **0012** [Debug overlay](prompts/0012-debug-overlay.md)
 
-## 1 - The first playable build  (12/15)
+## 1 - The first playable build  (13/15)
 
 - [x] **0013** [The world renders](prompts/0013-world-render.md)
 - [x] **0014** [Sprites generated from ASCII maps](prompts/0014-sprite-pipeline.md)
@@ -1319,8 +1303,8 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0022** [Switching reality](prompts/0022-reality-switch.md)
 - [x] **0023** [Build mode](prompts/0023-build-mode.md)
 - [x] **0024** [The shooting tower](prompts/0024-tower-gun.md)
-- [ ] **0025** [Zombies walk to the house](prompts/0025-zombies-walk.md)
-- [ ] **0026** [The tower kills the zombie](prompts/0026-combat.md) - needs 0025
+- [x] **0025** [Zombies walk to the house](prompts/0025-zombies-walk.md)
+- [ ] **0026** [The tower kills the zombie](prompts/0026-combat.md)
 - [ ] **0027** [Three waves, a result screen, and back to the farm](prompts/0027-first-loop.md) - needs 0026
 
 ## 2 - The full day  (0/14)
@@ -1349,7 +1333,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [ ] **0046** [Fences and walls](prompts/0046-walls.md)
 - [ ] **0047** [Barricades](prompts/0047-barricades.md) - needs 0046
 - [ ] **0048** [Mines and traps](prompts/0048-traps.md) - needs 0042
-- [ ] **0049** [Zombies path around walls](prompts/0049-pathing-walls.md) - needs 0025, 0046
+- [ ] **0049** [Zombies path around walls](prompts/0049-pathing-walls.md) - needs 0046
 - [ ] **0050** [The runner](prompts/0050-enemy-runner.md) - needs 0049
 - [ ] **0051** [The tank](prompts/0051-enemy-tank.md) - needs 0049
 - [ ] **0052** [The breaker](prompts/0052-enemy-breaker.md) - needs 0049, 0046

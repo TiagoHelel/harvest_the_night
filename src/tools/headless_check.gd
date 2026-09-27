@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 17
+const GROUPS := 18
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -81,6 +81,7 @@ func _run() -> void:
 	_task_0022_reality()
 	_task_0023_building()
 	_task_0024_tower()
+	_task_0025_zombies()
 
 
 func _finish() -> void:
@@ -527,10 +528,14 @@ func _task_0008_farm() -> void:
 	var spot := _any_buildable(state)
 	expect(spot != Vector2i(-1, -1), "there is somewhere to build")
 	expect(Farm.buildable(state, spot), "an empty patch of grass is buildable")
-	var before := State.hash_of(state)
+	# **The farm, not the whole state.** Since task 0025 the farm carries a
+	# `grid_version` that counts how many times it changed - which is the point
+	# of it, and which means the state cannot come back byte-identical. What
+	# has to come back identical is the ground and what is standing on it.
+	var before := _farm_hash(state)
 	expect(Farm.place(state, spot, {"id": &"gun_tower", "hp": 60}),
 		"a tower goes down")
-	expect(State.hash_of(state) != before, "which changed the farm")
+	expect(_farm_hash(state) != before, "which changed the farm")
 	expect(not Farm.buildable(state, spot), "and the cell is taken now")
 	expect(not Farm.walkable(state, spot), "and blocks the way")
 	expect(Farm.occupant(state, spot)["id"] == &"gun_tower",
@@ -538,7 +543,7 @@ func _task_0008_farm() -> void:
 	expect(not Farm.place(state, spot, {"id": &"wall"}),
 		"a second thing cannot stack on it")
 	expect(Farm.remove(state, spot), "and it comes back up")
-	expect(State.hash_of(state) == before,
+	expect(_farm_hash(state) == before,
 		"leaving the farm byte-identical to before it was placed")
 
 	# A placed occupant is copied in, so the caller's dictionary cannot be a
@@ -1193,6 +1198,15 @@ func _task_0018_wheat() -> void:
 ## Tests ask for one rather than naming a cell, because a named cell is a test
 ## that breaks whenever the map gains a building - which is a failure that
 ## teaches nothing about the thing being tested.
+## The ground and what is standing on it, without the counters that describe
+## how it got that way.
+func _farm_hash(state: Dictionary) -> int:
+	return State.hash_of({
+		"terrain": state["terrain"],
+		"occupants": state["occupants"],
+	})
+
+
 func _any_buildable(state: Dictionary) -> Vector2i:
 	for idx in Grid.CELLS:
 		var cell := Grid.cell(idx)
@@ -1826,3 +1840,176 @@ func _shots_in(ticks: int, reload: int) -> int:
 			Farm.occupant(state, cell)["reload"] = reload
 		Entities.get_one(state, dummy)["hp"] = 9999
 	return fired
+
+
+## 0025 - the walk in: one field, every zombie, and a house that can fall.
+func _task_0025_zombies() -> void:
+	var state := _fresh_night(401)
+
+	# **The field is built from the house outwards.**
+	Pathing.refresh(state)
+	var house: Vector2i = Farm.cells_with(state, &"house")[0]
+	expect(Pathing.distance(state, house) == 0, "the house is distance zero")
+	var beside := house + Vector2i(0, 1)
+	expect(Pathing.distance(state, beside) <= 2, "next to it is next to it",
+		str(Pathing.distance(state, beside)))
+	expect(Pathing.distance(state, Farm.cells_of(state, Farm.Terrain.WATER)[0])
+		== Pathing.UNREACHABLE, "and the pond is not a route")
+
+	# Every spawn point can get there, or it is not a spawn point.
+	for where in GameData.SPAWNS.size():
+		var cells := Enemies.spawn_cells(state, where)
+		expect(not cells.is_empty(), "spawn point %d has somewhere to stand"
+			% where)
+		for cell in cells:
+			expect(Pathing.reachable(state, cell),
+				"and %s can reach the house" % cell)
+
+	# **Rebuilt only when the grid changes.**
+	var version := int(state["flow_version"])
+	Sim.advance(state, 30)
+	expect(int(state["flow_version"]) == version,
+		"thirty quiet ticks rebuild nothing", str(state["flow_version"]))
+	# Through `Farm` rather than `Building`: a wall may not go up mid-wave, and
+	# what is checked here is the field noticing, not the phase rule.
+	Farm.place(state, _any_buildable(state), {"id": &"wall", "hp": 120})
+	Pathing.refresh(state)
+	expect(int(state["flow_version"]) > version,
+		"and a wall going up does", str(state["flow_version"]))
+
+	# **A wall reroutes the wave.** Box the house in and the way round is
+	# longer than it was.
+	var walled := _fresh_night(402)
+	Pathing.refresh(walled)
+	var corner: Vector2i = Farm.cells_with(walled, &"house")[0] + Vector2i(4, 4)
+	var straight := Pathing.distance(walled, corner)
+	for dy in range(-3, 4):
+		var block: Vector2i = Farm.house_centre(walled) + Vector2i(2, dy)
+		if Farm.buildable(walled, block):
+			Farm.place(walled, block, {"id": &"wall", "hp": 120})
+	Pathing.refresh(walled)
+	expect(Pathing.distance(walled, corner) > straight,
+		"a wall makes the way round longer",
+		"%d then %d" % [straight, Pathing.distance(walled, corner)])
+
+	# **Nowhere to go is an answer, not a crash.**
+	var boxed := _fresh_night(403)
+	var spot := Vector2i(30, 9)
+	while not Farm.buildable(boxed, spot) and spot.x < 36:
+		spot.x += 1
+	for offset in Grid.STEPS_8:
+		var wall_cell: Vector2i = spot + offset
+		if Farm.buildable(boxed, wall_cell):
+			Farm.place(boxed, wall_cell, {"id": &"wall", "hp": 120})
+	Pathing.refresh(boxed)
+	var trapped := Entities.spawn(boxed, &"walker", spot)
+	var where_it_was := Entities.position(boxed, trapped)
+	Sim.advance(boxed, 90)
+	expect(Entities.alive(boxed, trapped), "a boxed-in zombie is still there")
+	expect(Entities.position(boxed, trapped) == where_it_was,
+		"and stands still rather than crashing",
+		str(Entities.position(boxed, trapped)))
+
+	# **It walks in, and the house feels it.**
+	var raided := _fresh_night(404)
+	Pathing.refresh(raided)
+	var start: Vector2i = Enemies.spawn_cells(raided, 0)[0]
+	var walker := Entities.spawn(raided, &"walker", start)
+	var far := Pathing.distance(raided, start)
+	expect(far > 5, "it starts a good way out", str(far))
+
+	var hp_before := int(raided["house_hp"])
+	var per_tile := int((GameData.ENEMIES[&"walker"] as Dictionary)["ticks_per_tile"])
+	Sim.advance(raided, far * per_tile + 60)
+	expect(not Entities.alive(raided, walker),
+		"it arrives and is spent", str(Entities.count(raided)))
+	expect(int(raided["house_hp"])
+		== hp_before - int((GameData.ENEMIES[&"walker"] as Dictionary)["damage"]),
+		"taking a bite out of the house", str(raided["house_hp"]))
+	expect(int(raided["breaches"]) == 1, "and counted as a breach")
+
+	# **The speed is exactly what the lever says.** Not what integer division
+	# left behind: 64 units over 20 ticks is 3.2, and truncating that would be
+	# a sixth slower than the table promises.
+	var timed := _fresh_night(405)
+	Pathing.refresh(timed)
+	var lane: Vector2i = Enemies.spawn_cells(timed, 0)[0]
+	var runner := Entities.spawn(timed, &"walker", lane)
+	var before_distance := Pathing.distance(timed, lane)
+	Sim.advance(timed, per_tile * 4)
+	if Entities.alive(timed, runner):
+		var now := Pathing.distance(timed, Entities.cell_of(timed, runner))
+		expect(before_distance - now == 4,
+			"four tiles in four tiles' worth of ticks",
+			"%d then %d" % [before_distance, now])
+
+	# **The house falling ends the night.**
+	var doomed := _fresh_night(406)
+	Pathing.refresh(doomed)
+	doomed["house_hp"] = 1
+	# Just outside it, so the walk in is what lands the blow.
+	var porch: Vector2i = Farm.house_centre(doomed) + Vector2i(0, 2)
+	while not Farm.walkable(doomed, porch) and porch.y < Grid.HEIGHT - 1:
+		porch.y += 1
+	Entities.spawn(doomed, &"walker", porch)
+	Sim.advance(doomed, per_tile * 3)
+	expect(int(doomed["house_hp"]) == 0, "the house falls",
+		str(doomed["house_hp"]))
+	expect(int(doomed["phase"]) == Phases.RESULT,
+		"and the night ends there and then",
+		Phases.name_of(int(doomed["phase"])))
+	expect((doomed["last_result"] as Dictionary)["survived"] == false,
+		"recorded as a loss")
+
+	# **Spawning works on a night nobody has prepared.** The test above had
+	# called `Pathing.refresh()` by hand, which is a precondition the game does
+	# not arrange - and with it the first wave of every night spawned nothing.
+	var cold := State.create(507)
+	Phases.begin_preparation(cold)
+	Sim.advance(cold, GameData.PREPARATION_TICKS)
+	expect(Enemies.spawn(cold, &"walker", 0) > 0,
+		"the first zombie of a night spawns without anybody refreshing anything")
+	expect(Entities.count(cold) == 1, "and is out there",
+		str(Entities.count(cold)))
+
+	# **The same seed puts every zombie in the same place at tick 1000.**
+	expect(_horde_positions(501) == _horde_positions(501),
+		"a seed replays the whole horde")
+	expect(_horde_positions(501) != _horde_positions(502),
+		"and a different seed does not")
+
+	# **Fifty of them cost almost nothing**, because the field is built once.
+	var crowd := _fresh_night(503)
+	for _i in 50:
+		Enemies.spawn(crowd, &"walker", 0)
+	expect(Entities.count(crowd) == 50, "fifty are out there",
+		str(Entities.count(crowd)))
+	var started := Time.get_ticks_usec()
+	Sim.advance(crowd, 200)
+	var per_tick := float(Time.get_ticks_usec() - started) / 200.0
+	print("  fifty zombies: %.1f us a tick" % per_tick)
+	expect(per_tick < 1000.0, "fifty zombies cost under a millisecond a tick",
+		"%.1f us" % per_tick)
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## A farm at night with nothing on it yet.
+func _fresh_night(seed_value: int) -> Dictionary:
+	var state := State.create(seed_value)
+	Phases.begin_preparation(state)
+	Sim.advance(state, GameData.PREPARATION_TICKS)
+	return state
+
+
+## Where every zombie is at tick 1000, for a given seed.
+func _horde_positions(seed_value: int) -> Array:
+	var state := _fresh_night(seed_value)
+	for _i in 12:
+		Enemies.spawn(state, &"walker", 0)
+		Enemies.spawn(state, &"walker", 1)
+	Sim.advance(state, 1000)
+	var out: Array = []
+	for id in Entities.ids(state):
+		out.append([id, Entities.position(state, id)])
+	return out
