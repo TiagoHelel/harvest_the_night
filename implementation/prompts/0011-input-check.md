@@ -1,7 +1,7 @@
 # 0011 - input_check harness
 
 - **Phase:** 0 - Foundation
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0005
 - **Likely files:** src/tools/input_check.gd
 

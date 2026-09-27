@@ -494,3 +494,47 @@ Notes:
   would be unforgivable, and it is the kind of thing that happens by default.
 - `Save` is static functions on a `RefCounted`, not an autoload: nothing here
   needs to be in the tree, and the headless check calls it directly.
+
+## 0011 - input_check harness - done 2026-09-27
+
+What changed: real clicks and real keys, through the real scenes, with nobody
+in the room. `input_check.gd` opens a scene, finds controls by name, clicks
+them, clicks farm cells, presses keys, and tears the scene down for the next
+case. Wired into `verify.py`, which now has only one SKIP left.
+
+Files: src/tools/input_check.gd
+
+Verify: PASS - 9 passed, 1 skipped, 11s. 205 asserts, **15 cases, 0 failed**.
+Both hashes unchanged: nothing here is a rule.
+
+Notes:
+
+- **Headless really is enough**, measured with a probe before the file was
+  written: with `--headless` the viewport is the project's own 480x270,
+  `root.push_input()` reaches Controls and fires their signals, and
+  `Input.parse_input_event()` sets `Input.is_key_pressed()`. So there is no
+  window and - more importantly - no separate "test mode" path through the UI.
+  A test mode is a thing that can be right while the real path is wrong.
+- **The harness is proved to fail loudly, not assumed to.** `require_control()`
+  on a name that is not there records a failure; the case asks for a control
+  that does not exist, checks the failure landed, and takes it back off the
+  tally. That is the only place in the file that does so and it says so on the
+  line above. Separately verified from outside: renaming `Clock` to `ClockTypo`
+  produces two failures and exit 1.
+- `locate_control()` is the quiet counterpart, for asking whether something is
+  there at all.
+- **There is nothing in the game to click yet**, so the case checks the
+  machinery that will click it: that the scene is live (the clock moves between
+  frames), that a synthesised click reaches a control's handler and a click
+  elsewhere does not, that a held key stays held and a tapped one lets go.
+  Real interactions get their own `_case_NNNN_*` as the backlog adds them.
+- `cell_to_screen()` asks the world view for the mapping when there is one, so
+  the camera of task 0013 is accounted for automatically. Until then the
+  viewport is the farm's own resolution and the mapping is the obvious one.
+- Cases are counted the way `headless_check` counts groups: the counter is the
+  last line of each case, so one that dies half way cannot report success.
+- Noticed in passing: autoloads **do** run under `--script`, so `Settings` was
+  alive during the check. `headless_check` instantiating its own copy is
+  belt-and-braces rather than a necessity, and it stays that way - a test that
+  depends on autoload ordering is a test that breaks for reasons unrelated to
+  what it checks.

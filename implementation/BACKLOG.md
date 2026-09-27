@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`##......................`  **10 / 108 done**
+`##......................`  **11 / 108 done**
 
-0 doing / 98 todo / 0 blocked across 9 phases.
+0 doing / 97 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0011 - input_check harness**. The whole of what is left is
+First up: **0012 - Debug overlay**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,24 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-98 task(s) left, the ready ones first, then what they
+97 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0011 - input_check harness
-
-Ready to pick up.  Likely files: `src/tools/input_check.gd`.
-
-The other half of the gate: drive real clicks and keys through the real UI with no human, so a refactor that breaks placing a tower is caught the same minute.
-
-- Runs headless against the real scenes, synthesising `InputEventMouseButton` and `InputEventKey`
-- A helper to click a world cell and one to click a named control
-- Prints `N cases, M failed` and exits non-zero on failure
-- Each case leaves the game in a known state for the next one
-- It is wired into `verify.py` from this task on
-
-  - done when: It drives at least one full interaction end to end
-  - done when: It fails loudly when a control it names is missing, rather than silently passing
 
 ### 0012 - Debug overlay
 
@@ -1505,7 +1490,7 @@ For the player who beat the Giant and wants to know how far the farm goes. Cheap
   - done when: Night 25 is generated and playable
   - done when: The same seed generates the same night 25 twice
 
-## 0 - Foundation  (10/12)
+## 0 - Foundation  (11/12)
 
 - [x] **0001** [Godot project scaffold](prompts/0001-project-scaffold.md)
 - [x] **0002** [Fixed-timestep deterministic simulation](prompts/0002-sim-tick.md)
@@ -1517,7 +1502,7 @@ For the player who beat the Giant and wants to know how far the farm goes. Cheap
 - [x] **0008** [The farm grid](prompts/0008-farm-grid.md)
 - [x] **0009** [Settings singleton](prompts/0009-settings.md)
 - [x] **0010** [Save the profile and the run](prompts/0010-save.md)
-- [ ] **0011** [input_check harness](prompts/0011-input-check.md)
+- [x] **0011** [input_check harness](prompts/0011-input-check.md)
 - [ ] **0012** [Debug overlay](prompts/0012-debug-overlay.md)
 
 ## 1 - The first playable build  (0/15)
