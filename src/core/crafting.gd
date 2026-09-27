@@ -49,6 +49,14 @@ static func initial() -> Dictionary:
 		"crafting": {},
 		# {structure id: how many are built and waiting to be placed}
 		"kits": {},
+		# **What each station has ever delivered**, by cell:
+		# `{cell index: {"made": {recipe id: count}, "at": tick}}`.
+		#
+		# Kept apart from `crafting` because that entry is erased the moment a
+		# queue empties, and "what happened while you were away" is a question
+		# you ask precisely when the queue has finished. It only ever grows,
+		# which makes it cheap: nothing scans it and nothing clears it.
+		"produced": {},
 		# **What each station makes when you press interact - one per station.**
 		# It was a single id, which worked while the workshop was the only
 		# station you could reach and broke the moment the press became
@@ -344,6 +352,7 @@ static func tick(state: Dictionary) -> void:
 		var recipe_id := StringName(lined_up[0])
 		lined_up.remove_at(0)
 		_deliver(state, recipe_id)
+		_record(state, Grid.cell(int(idx)), recipe_id)
 		if lined_up.is_empty():
 			emptied.append(idx)
 		else:
@@ -351,6 +360,42 @@ static func tick(state: Dictionary) -> void:
 
 	for idx in emptied:
 		all.erase(idx)
+
+
+## What a station has delivered in total, and on which tick it last did.
+## Empty for a bench nobody has used.
+static func produced_at(state: Dictionary, cell: Vector2i) -> Dictionary:
+	return (state["produced"] as Dictionary).get(Grid.index(cell), {})
+
+
+## Everything a station has made, as `{recipe id: count}`.
+static func made_at(state: Dictionary, cell: Vector2i) -> Dictionary:
+	var log := produced_at(state, cell)
+	return {} if log.is_empty() else (log["made"] as Dictionary)
+
+
+## The tick this station last finished something, or -1.
+static func last_delivery_at(state: Dictionary, cell: Vector2i) -> int:
+	var log := produced_at(state, cell)
+	return -1 if log.is_empty() else int(log["at"])
+
+
+## Write down that this station finished one of these.
+##
+## **The record the panel reads to say what happened while you were elsewhere.**
+## `design.md` section 13 promises you come back to something better; a bench
+## that silently jumped from three queued to three kits in the pile would be
+## the same event with none of the telling.
+static func _record(state: Dictionary, cell: Vector2i,
+		recipe_id: StringName) -> void:
+	var all: Dictionary = state["produced"]
+	var idx := Grid.index(cell)
+	if not all.has(idx):
+		all[idx] = {"made": {}, "at": -1}
+	var log: Dictionary = all[idx]
+	var made: Dictionary = log["made"]
+	made[recipe_id] = int(made.get(recipe_id, 0)) + 1
+	log["at"] = int(state["tick"])
 
 
 ## Put the output where it belongs: a resource in the ledger, a structure on

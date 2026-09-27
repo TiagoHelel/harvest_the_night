@@ -2475,3 +2475,96 @@ stood still.
 
 `python tools/verify.py` prints PASS: 1080 asserts, 308 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+
+## 0038 - Production runs while you are elsewhere - done 2026-09-27
+
+Mostly an audit, and the audit is the deliverable: the farm does not care
+where you are standing, and now there is a test that says so rather than a
+reading of the code that hopes so.
+
+**What changed.** `Crafting` keeps a record of what each station has ever
+delivered, the workshop panel reports the difference when you walk back up to
+a bench, and there are two measurements: a day run twice with the farmer
+parked in two places, and the tick cost of a farm with 237 towers on it.
+
+Files: `src/core/crafting.gd`, `src/ui/workshop_panel.gd`, both test tools.
+Verify: 1099 headless / 314 input / sim hash moved on purpose, below.
+
+### Measured, not read
+
+"No system may depend on being on screen - find and remove any that does" is
+the sort of requirement that is easy to satisfy by reading the code and
+declaring it fine. So instead: **the same scripted day, run twice**, with the
+farmer parked at the pond and parked at the bench, doing nothing at all in
+either case. Nine tiles sown, three items queued at the workshop, a press
+running, the animals standing there.
+
+Every number came out identical - 3 kits, 3 oil, 29700 ticks of crop growth,
+4 meat waiting - and so did **a hash of the entire state**, with four keys
+excluded:
+
+    player      the farmer themselves
+    intent      what they are pressing
+    water_can   fills by standing next to water (task 0029)
+    fishing     a line, given up by walking away (task 0030)
+
+That list is the complete set of things in this game that care where the
+player is, and each one is deliberate. **Nothing that produces anything is on
+it.** Hashing the farm rather than comparing half a dozen counters is what
+makes this a real answer: it says every byte came out the same, including
+things nobody thought to count.
+
+The first version of the assert compared the *whole* state hash and failed,
+correctly - a farmer at the pond is not a farmer at the bench. That failure
+was the test being imprecise about its own claim, and fixing it is what
+produced the list above.
+
+### The tick budget
+
+A farm with **237 gun towers**, every soil tile planted, a generator, and
+night ten's waves walking in: **189 microseconds a tick**, which is one
+percent of the 33 milliseconds that 30Hz allows.
+
+Task 0102 owns tuning this. What is asserted here is a wide margin - under
+half the budget - and the real number is printed either way, so a regression
+shows up in the log before it is a failure. That is the lesson of task 0026:
+a wall-clock assert with a tight bound fails on a busy machine and teaches
+nothing.
+
+One correction on the way: the first version printed the zombie count *before*
+advancing, which is always zero because the waves have not started. A number
+in a log that is not the number being measured is worse than no number.
+
+### Coming back to something better
+
+`design.md` section 13 promises the semi-idle loop, and a bench that silently
+went from three queued to three kits in the pile would be the same event with
+none of the telling. `state["produced"]` is a running tally per station,
+deliberately kept apart from `state["crafting"]` because that entry is erased
+the moment a queue empties - and "what happened while you were away" is
+exactly the question you ask when the queue has finished.
+
+The panel remembers what it last showed for each bench and reports the
+difference: *while you were away: 2 barricade_kit*. **That memory is the
+panel's, not the game's** - the running total is state, but what this
+particular screen has already told this particular player is a fact about the
+screen.
+
+The first version never showed the line at all. It decided "have I been here
+before" by asking whether the remembered tally was empty, which is also what a
+first visit to a bench that has made nothing looks like - so every visit was
+a first visit. It asks whether the bench has an entry at all now.
+
+### Hashes
+
+| | from | to | why |
+|---|---|---|---|
+| sim hash | `1766805932` | `3866599667` | the state gained `produced`, and the widened scenario of task 0037 queues at the workshop, so deliveries are recorded in it |
+| data hash | `2144055300` | unchanged | no table moved |
+
+Worth noting that the guard caught this immediately, which it would not have
+done a task ago: `produced` only appears because the scenario now has the
+player queue something. The widening in 0037 is already paying for itself.
+
+`python tools/verify.py` prints PASS: 1099 asserts, 314 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

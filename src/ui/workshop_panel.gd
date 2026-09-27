@@ -14,6 +14,19 @@ extends Control
 ## something better. A queue you cannot see is a queue you do not trust, so the
 ## front item gets a countdown and a bar and everything behind it gets a line.
 ##
+## ## What happened while you were elsewhere
+##
+## `design.md` section 13 promises you come back to something better. A bench
+## that had silently gone from three queued to three kits in the pile would be
+## the same event with none of the telling, so the panel keeps the tally it
+## last showed for each bench and reports the difference when the farmer walks
+## back up: "while you were away: 3 barricade_kit".
+##
+## **That memory is the panel's, not the game's.** `Crafting.made_at()` is the
+## running total and lives in the state; what *this viewer* has already been
+## told is a fact about this screen, and putting it in the state would be a
+## second player's panel telling the first player's lies.
+##
 ## ## Nothing here is a rule
 ##
 ## The rows come from `Crafting.queue_at()` and the countdown from
@@ -34,6 +47,9 @@ var _recipes: VBoxContainer
 var _queue: VBoxContainer
 var _progress: Label
 var _built_for := ""
+## {station cell index: the tally this panel last showed for it}
+var _last_seen: Dictionary = {}
+var _away: Label
 
 
 func _ready() -> void:
@@ -64,6 +80,10 @@ func _ready() -> void:
 
 	_progress = _line("WorkshopProgress", "", RUNNING)
 	column.add_child(_progress)
+
+	_away = _line("WorkshopAway", "", HEADING)
+	_away.visible = false
+	column.add_child(_away)
 
 	_queue = VBoxContainer.new()
 	_queue.name = "WorkshopQueue"
@@ -105,6 +125,13 @@ func _process(_delta: float) -> void:
 		_built_for = ""
 		return
 
+	# **What arrived since this panel last had its eyes on this bench.**
+	# Worked out on arrival and then held, so it does not flicker away while
+	# the player is reading it; the tally is banked when they walk off.
+	if _built_for == "":
+		_away.text = _what_happened(cell)
+		_away.visible = _away.text != ""
+
 	var signature := _signature(cell)
 	if signature != _built_for:
 		_built_for = signature
@@ -123,6 +150,31 @@ func _process(_delta: float) -> void:
 	else:
 		_progress.text = "idle"
 		_progress.modulate = DIM
+
+
+## The difference between what this bench has made and what this panel last
+## told the player about it, in words. Empty when nothing has changed.
+func _what_happened(cell: Vector2i) -> String:
+	var made := Crafting.made_at(_state, cell)
+	var idx := Grid.index(cell)
+	# **Whether we have looked, not what we saw.** Testing the remembered tally
+	# for emptiness conflated "never been here" with "been here, and it had
+	# made nothing yet" - which is every first visit to a bench, so the line
+	# never appeared at all.
+	var first_look := not _last_seen.has(idx)
+	var seen: Dictionary = _last_seen.get(idx, {})
+	_last_seen[idx] = made.duplicate()
+	if first_look:
+		return ""               # no "while you were away" before you were here
+
+	var parts: Array = []
+	for id in GameData.sorted_names(made.keys()):
+		var since := int(made[id]) - int(seen.get(id, 0))
+		if since > 0:
+			parts.append("%d %s" % [since, id])
+	if parts.is_empty():
+		return ""
+	return "while you were away:  " + ", ".join(parts)
 
 
 func _signature(cell: Vector2i) -> String:

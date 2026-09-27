@@ -1,7 +1,7 @@
 # 0038 - Production runs while you are elsewhere
 
 - **Phase:** 2 - The full day
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0037, 0029
 - **Likely files:** src/core/sim.gd
 

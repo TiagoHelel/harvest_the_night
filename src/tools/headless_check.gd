@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 30
+const GROUPS := 31
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -94,6 +94,7 @@ func _run() -> void:
 	_task_0035_ammunition()
 	_task_0036_inventory()
 	_task_0037_queue()
+	_task_0038_idle()
 
 
 func _finish() -> void:
@@ -4513,3 +4514,220 @@ func _task_0037_queue() -> void:
 		% [GameData.QUEUE_LENGTH, int(recipe["ticks"])])
 
 	_completed += 1     # last line: an abandoned group never gets here
+
+
+## 0038 - the farm does not care where you are standing.
+func _task_0038_idle() -> void:
+	# **The same day, twice, with the farmer in two different places.**
+	#
+	# This is the whole task in one assert. Not "I read the code and nothing
+	# looked at the camera" - the same scripted day run with the player parked
+	# at the pond and parked at the bench, and every number that came out of
+	# the farm compared.
+	var pond_day := _a_busy_day(2000, true)
+	var bench_day := _a_busy_day(2000, false)
+
+	for key in GameData.sorted_names(pond_day.keys()):
+		if key == &"where":
+			continue        # the one thing that is meant to differ
+		expect(pond_day[key] == bench_day[key],
+			"a day at the pond and a day at the bench produce the same %s" % key,
+			"%s against %s" % [pond_day[key], bench_day[key]])
+	print("  a day at the pond: %s" % str(pond_day))
+
+	# **A scripted day where the player never leaves the pond still finishes
+	# the crafting queue.** The done-when, named.
+	expect(int(pond_day[&"kits"]) >= 3,
+		"three queued at dawn, three in the pile by dusk, nobody watching",
+		str(pond_day[&"kits"]))
+	expect(int(pond_day[&"oil"]) > 0, "the press pressed", str(pond_day[&"oil"]))
+	expect(int(pond_day[&"grown"]) > 0, "the crops grew",
+		str(pond_day[&"grown"]))
+	expect(int(pond_day[&"meat"]) > 0, "the animals produced",
+		str(pond_day[&"meat"]))
+
+	# **And a bench records what it did**, so walking back up to it is not a
+	# silent jump from three queued to three kits in the pile.
+	var log := State.create(2001)
+	Resources.gain(log, {GameData.WOOD: 200, GameData.STONE: 200})
+	var bench := Building.anchor_of(log, Farm.cells_with(log, &"workshop")[0])
+	expect(Crafting.made_at(log, bench).is_empty(),
+		"a bench nobody has used has made nothing")
+	expect(Crafting.last_delivery_at(log, bench) == -1,
+		"and has never delivered anything")
+
+	for _i in 2:
+		Crafting.enqueue(log, bench, &"barricade_kit")
+	var ticks := int((GameData.RECIPES[&"barricade_kit"]
+		as Dictionary)["ticks"])
+	Sim.advance(log, ticks + 2)
+	expect(int(Crafting.made_at(log, bench).get(&"barricade_kit", 0)) == 1,
+		"one delivered", str(Crafting.made_at(log, bench)))
+	var first_at := Crafting.last_delivery_at(log, bench)
+	expect(first_at > 0, "on a tick it wrote down", str(first_at))
+
+	Sim.advance(log, ticks + 2)
+	expect(int(Crafting.made_at(log, bench).get(&"barricade_kit", 0)) == 2,
+		"two delivered", str(Crafting.made_at(log, bench)))
+	expect(Crafting.last_delivery_at(log, bench) > first_at,
+		"and the second is later than the first",
+		str(Crafting.last_delivery_at(log, bench)))
+
+	# The record outlives the queue, which is the point of keeping it apart.
+	expect(not Crafting.busy(log, bench), "the queue has emptied")
+	expect(int(Crafting.made_at(log, bench).get(&"barricade_kit", 0)) == 2,
+		"and the record of what it made is still there",
+		str(Crafting.made_at(log, bench)))
+
+	# **The tick cost of a fully built farm stays inside the budget.**
+	#
+	# The budget is that a tick takes less than a tick: at 30Hz the game has
+	# 33 milliseconds and everything else on the machine needs some of them.
+	# Task 0102 owns tuning this; what is asserted here is a wide margin, and
+	# the real number is printed either way so a regression is visible in the
+	# log before it is a failure.
+	var loaded := _a_full_farm(2002)
+	var towers := Farm.cells_with(loaded, &"gun_tower").size()
+	var planted := int(Farming.counts(loaded)["planted"])
+	var started := Time.get_ticks_usec()
+	Sim.advance(loaded, 1800)               # a minute of a busy farm
+	var spent := Time.get_ticks_usec() - started
+	var per_tick := float(spent) / 1800.0
+	var budget := 1000000.0 / float(GameData.TICK_HZ)
+	# **Counted after the run, not before it.** The first version printed the
+	# entity count before advancing, which is always zero: the waves had not
+	# started yet. A number in a log that is not the number being measured is
+	# worse than no number.
+	print("  a full farm (%d towers, %d crops, %d zombies): %.1f us a tick"
+		% [towers, planted, Entities.count(loaded), per_tick])
+	print("    which is %.0f%% of the %.0f us a tick at %dHz allows"
+		% [per_tick * 100.0 / budget, budget, GameData.TICK_HZ])
+	expect(per_tick < budget / 2.0,
+		"a busy farm ticks in well under half its budget",
+		"%.1f us against %.0f" % [per_tick, budget])
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## A day with everything on the farm working, and the farmer parked somewhere.
+##
+## `at_the_pond` decides where they stand and nothing else. Two runs of this
+## with different answers have to come out identical in every number, which is
+## what "no system may depend on being on screen" means when it is measured
+## rather than read.
+func _a_busy_day(seed_value: int, at_the_pond: bool) -> Dictionary:
+	var state := State.create(seed_value)
+	Resources.gain(state, {GameData.WOOD: 400, GameData.STONE: 400,
+		GameData.IRON: 400, GameData.CORN: 80, GameData.MONEY: 400})
+
+	# A field, sown and watered.
+	var seeds := Farming.seeds()
+	var sown := 0
+	for found in Farm.cells_of(state, Farm.Terrain.SOIL):
+		var cell: Vector2i = found
+		if sown >= 9:
+			break
+		Farming.select_seed(state, StringName(seeds[sown % seeds.size()]))
+		Farming.act(state, cell)
+		Farming.act(state, cell)
+		sown += 1
+
+	# A queue on the bench.
+	var bench := Building.anchor_of(state, Farm.cells_with(state, &"workshop")[0])
+	for _i in 3:
+		Crafting.enqueue(state, bench, &"barricade_kit")
+
+	# A press, running.
+	var press := _room_for(state, Building.size_of(&"press"))
+	Resources.gain(state, Building.cost_of(&"press"))
+	Building.place(state, &"press", press)
+	Crafting.select_recipe(state, &"press_oil")
+	for _i in 3:
+		Crafting.enqueue(state, press, &"press_oil")
+
+	# And the farmer, parked, doing nothing at all for the whole day.
+	var stand: Vector2i = bench + Vector2i(0, 1)
+	if at_the_pond:
+		var wet: Vector2i = Farm.cells_of(state, Farm.Terrain.WATER)[0]
+		stand = wet + Vector2i(0, -1)
+	var who: Dictionary = state["player"]
+	who["pos"] = [stand.x * Player.SUBTILE + Player.SUBTILE / 2,
+		stand.y * Player.SUBTILE + Player.SUBTILE / 2]
+
+	var grown_before := 0
+	for found in Farm.cells_of(state, Farm.Terrain.SOIL):
+		grown_before += int(Farming.plot(state, found).get("growth", 0))
+
+	Sim.advance(state, GameData.DAY_TICKS - int(state["tick"]))
+
+	var grown := 0
+	for found in Farm.cells_of(state, Farm.Terrain.SOIL):
+		grown += int(Farming.plot(state, found).get("growth", 0))
+	var meat := 0
+	for found in Farm.cells_with(state, &"cow") + Farm.cells_with(state, &"chicken"):
+		meat += Livestock.ready_at(state, found)
+
+	return {
+		&"where": &"pond" if at_the_pond else &"bench",
+		&"kits": Crafting.kits(state, &"barricade"),
+		&"oil": Resources.amount(state, GameData.OIL),
+		&"grown": grown - grown_before,
+		&"meat": meat,
+		&"made": Crafting.made_at(state, bench).get(&"barricade_kit", 0),
+		&"hash": _hash_of_the_farm(state),
+	}
+
+
+## The whole state except the parts that are *supposed* to depend on where the
+## farmer is standing.
+##
+## A far stronger check than comparing half a dozen counters: it says every
+## byte of the farm came out the same. The four exceptions are the complete
+## list of things in this game that care about the player's position, and each
+## of them is deliberate:
+##
+## - `player` and `intent` are the farmer themselves.
+## - `water_can` fills by standing next to water (task 0029), so a day at the
+##   pond ends with a full can and a day at the bench does not.
+## - `fishing` is a line in the water, which is given up by walking away
+##   (task 0030).
+##
+## **Nothing that produces anything is on that list**, which is the task.
+func _hash_of_the_farm(state: Dictionary) -> int:
+	var bare: Dictionary = state.duplicate(true)
+	for key in ["player", "intent", "water_can", "fishing"]:
+		bare.erase(key)
+	return State.hash_of(bare)
+
+
+## A farm with as much on it as the MVP allows, for the tick budget.
+func _a_full_farm(seed_value: int) -> Dictionary:
+	var state := State.create(seed_value)
+	Resources.gain(state, {GameData.WOOD: 4000, GameData.STONE: 4000,
+		GameData.IRON: 4000, GameData.OIL: 400, GameData.GUNPOWDER: 400,
+		GameData.INCENDIARY: 400, GameData.CORN: 400})
+
+	# Every soil tile planted.
+	var seeds := Farming.seeds()
+	var sown := 0
+	for found in Farm.cells_of(state, Farm.Terrain.SOIL):
+		var cell: Vector2i = found
+		Farming.select_seed(state, StringName(seeds[sown % seeds.size()]))
+		Farming.act(state, cell)
+		Farming.act(state, cell)
+		sown += 1
+
+	# As many towers as will fit on the east half.
+	var built := 0
+	for y in range(1, Grid.HEIGHT - 1):
+		for x in range(19, Grid.WIDTH - 1):
+			if Building.place(state, &"gun_tower", Vector2i(x, y)):
+				built += 1
+	var gen := _room_for(state, Building.size_of(&"generator"))
+	Building.place(state, &"generator", gen)
+
+	# A night, with everything the table sends.
+	state["day"] = GameData.MVP_NIGHTS
+	Phases.begin_preparation(state)
+	Sim.advance(state, GameData.PREPARATION_TICKS)
+	return state

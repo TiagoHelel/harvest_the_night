@@ -41,7 +41,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 18
+const CASES := 19
 
 var passed := 0
 var failed := 0
@@ -89,6 +89,7 @@ func _run() -> void:
 	await _case_0035_ammo()
 	await _case_0036_inventory()
 	await _case_0037_queue()
+	await _case_0038_away()
 	_finish()
 
 
@@ -1955,6 +1956,69 @@ func _case_0037_queue() -> void:
 	expect(Crafting.kits(state, &"barricade") > kits_before,
 		"and the bench carried on without being watched",
 		str(Crafting.kits(state, &"barricade")))
+
+	await close_scene()
+	_completed += 1     # last line: an abandoned case never gets here
+
+
+## 0038 - walking back to a bench and being told what it did.
+func _case_0038_away() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var panel: WorkshopPanel = require_control("WorkshopPanel")
+	if driver == null or panel == null:
+		_completed += 1
+		await close_scene()
+		return
+
+	var state := driver.state
+	Resources.gain(state, {GameData.WOOD: 200, GameData.STONE: 200})
+	var bench := Building.anchor_of(state,
+		Farm.cells_with(state, &"workshop")[0])
+	var stand := _free_cell_beside(state, bench)
+	if stand == Vector2i(-1, -1):
+		await close_scene()
+		_completed += 1
+		return
+
+	# Queue three, stand at the bench once so the panel has seen the tally.
+	for _i in 3:
+		Crafting.enqueue(state, bench, &"barricade_kit")
+	_stand_at(state, stand, _facing_towards(stand, bench))
+	await until(func() -> bool: return panel.is_open(), "the panel to open")
+	var away: Label = require_control("WorkshopAway")
+	expect(away != null, "there is a line for what happened while away")
+	await frames(2)
+	expect(away == null or not away.visible,
+		"which says nothing the first time you walk up",
+		away.text if away else "")
+
+	# **Walk off to the pond, let the bench work, walk back.**
+	var pond: Vector2i = Farm.cells_of(state, Farm.Terrain.WATER)[0]
+	_stand_at(state, pond + Vector2i(0, -1), Player.SOUTH)
+	await until(func() -> bool: return not panel.is_open(),
+		"the panel to close when the farmer leaves")
+
+	var ticks := int((GameData.RECIPES[&"barricade_kit"]
+		as Dictionary)["ticks"])
+	var kits_before := Crafting.kits(state, &"barricade")
+	Sim.advance(state, ticks * 2 + 6)
+	await frames(2)
+	expect(Crafting.kits(state, &"barricade") >= kits_before + 2,
+		"the bench worked while the farmer stood at the pond",
+		str(Crafting.kits(state, &"barricade")))
+
+	_stand_at(state, stand, _facing_towards(stand, bench))
+	await until(func() -> bool: return panel.is_open(),
+		"the panel to open again")
+	await frames(2)
+	var back: Label = require_control("WorkshopAway")
+	expect(back != null and back.visible,
+		"and coming back says what happened", back.text if back else "")
+	if back != null:
+		expect(back.text.contains("barricade_kit"),
+			"naming what was made", back.text)
+		expect(back.text.contains("2"), "and how many", back.text)
 
 	await close_scene()
 	_completed += 1     # last line: an abandoned case never gets here
