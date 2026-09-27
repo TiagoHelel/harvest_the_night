@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`##############..........`  **64 / 109 done**
+`##############..........`  **65 / 109 done**
 
-0 doing / 45 todo / 0 blocked across 9 phases.
+0 doing / 44 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0065 - Losing a night costs you**. The whole of what is left is
+First up: **0066 - Night 10 and the end of the run**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,24 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-45 task(s) left, the ready ones first, then what they
+44 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0065 - Losing a night costs you
-
-Ready to pick up.  Likely files: `src/core/rewards.gd, src/ui/result_screen.gd`.
-
-Section 3 of the loop diagram: defeat takes part of the stock. It has to hurt enough to matter and little enough to continue.
-
-- A lever's fraction of resources lost, with money and technology untouched
-- Structures destroyed in the night stay destroyed
-- The night can be retried; the day in between is not skipped
-- The result screen says exactly what was lost
-- Losing never ends the run in the MVP - it costs a day
-
-  - done when: Losing twice in a row leaves a farm that can still recover
-  - done when: The itemised loss matches what the ledger actually lost
 
 ### 0066 - Night 10 and the end of the run
 
@@ -776,7 +761,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0057** [Structures take damage and die](prompts/0057-structure-damage.md)
 - [x] **0058** [The Giant](prompts/0058-boss-giant.md)
 
-## 4 - Ten nights and progression  (6/12)
+## 4 - Ten nights and progression  (7/12)
 
 - [x] **0059** [Waves as data](prompts/0059-wave-data.md)
 - [x] **0060** [The ten nights, authored](prompts/0060-ten-nights.md)
@@ -784,7 +769,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0062** [Technology points](prompts/0062-tech-points.md)
 - [x] **0063** [The tech tree](prompts/0063-tech-tree.md)
 - [x] **0064** [Tower I, II, automatic](prompts/0064-tower-upgrades.md)
-- [ ] **0065** [Losing a night costs you](prompts/0065-defeat.md)
+- [x] **0065** [Losing a night costs you](prompts/0065-defeat.md)
 - [ ] **0066** [Night 10 and the end of the run](prompts/0066-run-end.md)
 - [ ] **0067** [The autoplayer](prompts/0067-autoplayer.md)
 - [ ] **0068** [A balance sweep over the ten nights](prompts/0068-balance-sweep.md) - needs 0067

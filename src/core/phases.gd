@@ -30,14 +30,27 @@ static func name_of(phase: int) -> String:
 
 ## The keys this machine owns, and what a new game starts them at.
 ## `State.create()` merges these in.
+## How many nights the run has got past. The night to be fought is this plus
+## one, which is what makes a lost night one you fight again.
+static func nights_won(state: Dictionary) -> int:
+	return int(state["nights_won"])
+
+
 static func initial() -> Dictionary:
 	return {
 		"phase": DAY,
 		"day": 1,
-		# The night about to be fought, or 0 before the first one. It follows
-		# the day counter rather than counting separately: night 3 is the night
-		# at the end of day 3, and two numbers that must agree are one number.
+		# The night about to be fought, or 0 before the first one.
+		#
+		# **It is not the day counter.** It was, until task 0065: `night 3 is
+		# the night at the end of day 3` read well and meant that losing
+		# night three sent the run on to night four, so a player could lose
+		# their way to the Giant without beating anything. The night to fight
+		# is the one after the last one won.
 		"night": 0,
+		# How many nights the run has got past. A lost night does not move
+		# it, which is the whole of "the night can be retried".
+		"nights_won": 0,
 		# Ticks since the current phase began. Every phase uses it, which is
 		# why it is here and not in three places.
 		"phase_tick": 0,
@@ -89,7 +102,9 @@ static func begin_night(state: Dictionary) -> bool:
 	Building.forget_tonight(state)
 	Ability.recharge(state)
 
-	state["night"] = int(state["day"])
+	# The night to be fought is the one after the last one won, not the
+	# number of days that have gone by. See `enter_result()`.
+	state["night"] = int(state["nights_won"]) + 1
 	state["night_tick"] = 0
 	# Everything about what is coming is reset here rather than by whoever
 	# happens to look first: a night that inherited last night's wave counter
@@ -120,7 +135,17 @@ static func enter_result(state: Dictionary, survived: bool) -> bool:
 		"survived": survived,
 		"ticks": int(state["night_tick"]),
 	}
+	# **A day passes either way; a night is only got past by surviving it.**
+	#
+	# These used to be the same number - `begin_night()` set the night from
+	# the day - so losing night three moved the run on to night four, and a
+	# player could lose their way to the Giant without ever beating anything.
+	# `design.md` and task 0065 both say a loss costs **a day**, so the day
+	# advances and the night does not: you get another morning to prepare and
+	# the same night comes back.
 	state["day"] = int(state["day"]) + 1
+	if survived:
+		state["nights_won"] = int(state["nights_won"]) + 1
 	_enter(state, RESULT)
 	return true
 

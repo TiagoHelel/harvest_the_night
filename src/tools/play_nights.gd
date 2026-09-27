@@ -127,8 +127,11 @@ func _hit_points_of(night: int) -> int:
 ## One night, on a farm built out of a budget.
 func _play(night: int, budget: int) -> Dictionary:
 	var state := State.create(5000 + night)
+	# `night` follows `nights_won` since task 0065, so a fixture that picks a
+	# night has to say which nights are behind it.
 	state["night"] = night
 	state["day"] = night
+	state["nights_won"] = night - 1
 	# Materials and power are not what is being measured: the build is.
 	Resources.gain(state, {GameData.WOOD: 9000, GameData.STONE: 9000,
 		GameData.IRON: 9000, GameData.OIL: 9000, GameData.GUNPOWDER: 9000,

@@ -1,7 +1,7 @@
 # 0065 - Losing a night costs you
 
 - **Phase:** 4 - Ten nights and progression
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0061
 - **Likely files:** src/core/rewards.gd, src/ui/result_screen.gd
 

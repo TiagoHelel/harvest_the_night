@@ -4801,3 +4801,61 @@ the keyboard and the autoplayer take.
 
 `python tools/verify.py` prints PASS: 2396 asserts, 502 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+
+## 0065 - Losing a night costs you
+
+### Losing skipped the night instead of repeating it
+
+The bug worth the task, and it had been there since phases were written.
+`begin_night()` set the night from the day counter - "night 3 is the night at
+the end of day 3", which reads well - and `enter_result()` advanced the day
+whether the night was won or lost. So **losing night three sent the run on to
+night four**, and a player could lose their way to the Giant without beating
+anything.
+
+`design.md` and the requirement both say a loss costs **a day**. A day passes
+either way now, and a night is only got past by surviving it:
+`state["nights_won"]` counts what the run has beaten and the night to fight is
+that plus one. Losing gives you another morning and the same night.
+
+Thirteen asserts went red at once, all of them fixtures that set
+`state["night"]` by hand and then began the night - which now got night one
+whatever they asked for. They say it the one way that works now, through
+`_fight_night()`, which sets the nights behind it as well as the number.
+
+### Measured
+
+    losing took { wood: 103, stone: 101, iron: 100, food: 50 }
+    after losing twice: { wood: 174, stone: 172, iron: 169 } left,
+      night 5 again, 6 technology
+
+A quarter of each, which is `DEFEAT_LOSS_PERCENT`, and the itemised list is
+compared against the ledger both ways: every line on the list moved that much,
+and **nothing moved that was not on the list**. Money and technology are
+untouched, and the test checks there was some of each to take so that is a
+rule rather than an empty purse.
+
+Losing twice in a row leaves a farm that can still recover: the same night is
+still there, on a morning, with somewhere to build and enough left to build a
+tower with. That is the done-when, and "enough to build a tower" is the
+measure that makes it mean something - a run that could not rebuild would be a
+run that had ended.
+
+### What was already right
+
+Structures that fell stay fallen and ones that were only chewed are still
+there, still hurt - task 0057's work, asserted here. The result screen says
+exactly what was lost - task 0061's, compacted at 0062. The fraction, the
+money and the technology are levers that 0061 made readable. This task's own
+contribution is the day-versus-night fix and the asserts that hold all of it
+to what the requirement actually says.
+
+### Hashes
+
+| | from | to | why |
+|---|---|---|---|
+| sim hash | `1577582652` | `3497456322` | the state counts nights won, and the night to fight comes off it |
+| data hash | `219894722` | `219894722` | **unchanged** - no lever moved |
+
+`python tools/verify.py` prints PASS: 2426 asserts, 502 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

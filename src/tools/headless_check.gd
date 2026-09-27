@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 57
+const GROUPS := 58
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -121,6 +121,7 @@ func _run() -> void:
 	_task_0062_tech()
 	_task_0063_tech_tree()
 	_task_0064_tower_levels()
+	_task_0065_defeat()
 
 
 func _finish() -> void:
@@ -3761,7 +3762,7 @@ func _task_0033_power() -> void:
 	# **A late night**, because night one is over in forty seconds and a drop
 	# of oil lasts a minute - the generator would outlive the wave and there
 	# would be no brown-out to watch.
-	night["day"] = 8
+	_fight_night(night, 8)
 	Phases.begin_preparation(night)
 	Sim.advance(night, GameData.PREPARATION_TICKS)
 	expect(int(night["phase"]) == Phases.NIGHT, "a long night, with the lights on")
@@ -4286,7 +4287,7 @@ func _mixed_night(seed_value: int, rounds: int) -> Dictionary:
 	# difference. Five is the latest one this fixture survives dry, and it
 	# has the tanks that mortars are for, which is what it wanted a late
 	# night for in the first place.
-	state["day"] = 5
+	_fight_night(state, 5)
 	Phases.begin_preparation(state)
 	Sim.advance(state, GameData.PREPARATION_TICKS)
 	expect(guns == 4 and mortars == 4,
@@ -9311,8 +9312,7 @@ func _all_reward() -> int:
 ## Run one night with a house that cannot fall and count what turned up.
 func _what_a_night_sends(night: int) -> Dictionary:
 	var state := State.create(4400 + night)
-	state["night"] = night
-	state["day"] = night
+	_fight_night(state, night)
 	Phases.begin_preparation(state)
 	Sim.advance(state, GameData.PREPARATION_TICKS)
 	state["house_hp"] = 1 << 20
@@ -9467,8 +9467,7 @@ func _hit_points_sent(night: int) -> int:
 ## Play one night with a given build and see whether the house survives.
 func _play_a_night(night: int, build: Array) -> Dictionary:
 	var state := State.create(5100 + night)
-	state["night"] = night
-	state["day"] = night
+	_fight_night(state, night)
 	Resources.gain(state, {GameData.WOOD: 9000, GameData.STONE: 9000,
 		GameData.IRON: 9000, GameData.OIL: 9000, GameData.GUNPOWDER: 9000})
 	Phases.begin_preparation(state)
@@ -9492,8 +9491,7 @@ func _play_a_night(night: int, build: Array) -> Dictionary:
 ## when nobody is playing.
 func _run_a_night_out(night: int) -> Dictionary:
 	var state := State.create(5200 + night)
-	state["night"] = night
-	state["day"] = night
+	_fight_night(state, night)
 	Phases.begin_preparation(state)
 	Sim.advance(state, GameData.PREPARATION_TICKS)
 	state["house_hp"] = 1 << 20
@@ -9629,8 +9627,7 @@ func _task_0061_rewards() -> void:
 func _a_settled_night(seed_value: int, towers: int, hurt: int,
 		night: int = 1, house: int = -1, survived: bool = true) -> Dictionary:
 	var state := State.create(seed_value)
-	state["night"] = night
-	state["day"] = night
+	_fight_night(state, night)
 	Resources.gain(state, {GameData.WOOD: 400, GameData.STONE: 400,
 		GameData.IRON: 400, GameData.OIL: 400})
 	Phases.begin_preparation(state)
@@ -9790,8 +9787,7 @@ func _task_0062_tech() -> void:
 func _a_won_night(seed_value: int, night: int,
 		clean: bool = true) -> Dictionary:
 	var state := State.create(seed_value)
-	state["night"] = night
-	state["day"] = night
+	_fight_night(state, night)
 	Phases.begin_preparation(state)
 	if not clean:
 		state["house_hp"] = GameData.HOUSE_HP - 10
@@ -9812,8 +9808,7 @@ func _ten_nights(seed_value: int, clean: bool) -> int:
 	var state := State.create(seed_value)
 	Phases.begin_preparation(state)
 	for night in range(1, GameData.MVP_NIGHTS + 1):
-		state["night"] = night
-		state["day"] = night
+		_fight_night(state, night)
 		if clean:
 			state["house_hp"] = GameData.HOUSE_HP
 			state["breaches"] = 0
@@ -10190,3 +10185,225 @@ func _a_prep_with_tech(seed_value: int, nodes: Array) -> Dictionary:
 		Tech.buy(state, StringName(id))
 	Phases.begin_preparation(state)
 	return state
+
+
+## Point a state at a given night, the way the rules do.
+##
+## **`night` is not the day counter** since task 0065: `begin_night()` sets it
+## from `nights_won`, because losing a night has to give you that night again.
+## A fixture that set `night` by hand and then began the night got night one,
+## whatever it asked for - which is how thirteen asserts went red at once.
+func _fight_night(state: Dictionary, night: int) -> void:
+	state["night"] = night
+	state["day"] = night
+	state["nights_won"] = night - 1
+
+
+## 0065 - losing a night costs a day, not the run.
+func _task_0065_defeat() -> void:
+	# **A lost night is fought again.** The requirement, and the bug task
+	# 0065 found: the night used to be the day counter, so losing night three
+	# moved the run on to night four and a player could lose their way to the
+	# Giant without beating anything.
+	var run := _a_run_at_night(6500, 3)
+	expect(int(run["night"]) == 3, "it is night three", str(run["night"]))
+	var day_before := int(run["day"])
+	_lose_the_night(run)
+	expect(int(run["day"]) == day_before + 1,
+		"losing costs a day", str(run["day"]))
+	expect(Phases.nights_won(run) == 2,
+		"and no night is won by it", str(Phases.nights_won(run)))
+	_to_the_next_night(run)
+	expect(int(run["night"]) == 3,
+		"so night three comes again - the night is retried",
+		str(run["night"]))
+
+	# ...and surviving it moves on.
+	Phases.enter_result(run, true)
+	expect(Phases.nights_won(run) == 3, "surviving wins the night",
+		str(Phases.nights_won(run)))
+	(run["intent"] as Dictionary)["confirm_result"] = true
+	Sim.advance(run, 2)
+	Phases.begin_preparation(run)
+	Sim.advance(run, GameData.PREPARATION_TICKS)
+	expect(int(run["night"]) == 4, "and the next one is four",
+		str(run["night"]))
+
+	# **The day in between is not skipped.**
+	var slow := _a_run_at_night(6501, 2)
+	_lose_the_night(slow)
+	expect(int(slow["phase"]) == Phases.RESULT,
+		"a lost night ends on the result screen", str(slow["phase"]))
+	(slow["intent"] as Dictionary)["confirm_result"] = true
+	Sim.advance(slow, 2)
+	expect(int(slow["phase"]) == Phases.DAY,
+		"and confirming goes to a day, not to another night",
+		str(slow["phase"]))
+	expect(int(slow["day_tick"]) < GameData.SECONDS,
+		"a whole one, from the top rather than the middle of the last",
+		"%d of %d ticks" % [slow["day_tick"], GameData.DAY_TICKS])
+
+	# **The itemised loss matches what the ledger lost.** The done-when.
+	var counted := _lose_and_count(6502)
+	print("  losing took %s" % str(counted["lost"]))
+	expect(not (counted["lost"] as Dictionary).is_empty(),
+		"losing takes something", str(counted["lost"]))
+	for id in GameData.sorted_names((counted["lost"] as Dictionary).keys()):
+		expect(int((counted["moved"] as Dictionary).get(id, 0))
+			== -int((counted["lost"] as Dictionary)[id]),
+			"the %s on the list is the %s off the ledger" % [id, id],
+			"%d against %d" % [int((counted["moved"]
+				as Dictionary).get(id, 0)),
+				(counted["lost"] as Dictionary)[id]])
+	for id in GameData.sorted_names((counted["moved"] as Dictionary).keys()):
+		expect((counted["lost"] as Dictionary).has(id),
+			"and nothing moved that was not on the list: %s" % id,
+			str(counted["moved"]))
+
+	# **Money and technology are untouched.**
+	expect(int((counted["moved"] as Dictionary).get(GameData.MONEY, 0)) == 0,
+		"the money is not touched - a loss costs a day, not the run")
+	expect(int((counted["moved"] as Dictionary).get(GameData.TECH, 0)) == 0,
+		"and neither is the technology, which is what you keep")
+	expect(int(counted["kept_money"]) > 0 and int(counted["kept_tech"]) > 0,
+		"and there was some of each to take, so that is a rule rather than "
+		+ "an empty purse", "%d and %d"
+			% [counted["kept_money"], counted["kept_tech"]])
+
+	# **Structures destroyed in the night stay destroyed.**
+	var wrecked := _lose_with_a_wall(6503)
+	expect(int(wrecked["before"]) > 0, "a wall stood at dusk",
+		str(wrecked["before"]))
+	expect(int(wrecked["after"]) < int(wrecked["before"]),
+		"and fewer stand in the morning - what fell stays fallen",
+		"%d against %d" % [wrecked["after"], wrecked["before"]])
+	expect(wrecked["hurt_kept"],
+		"and one that was only chewed is still there, still hurt",
+		str(wrecked))
+
+	# **Losing twice in a row leaves a farm that can still recover.** The
+	# other done-when.
+	var twice := _lose_twice(6504)
+	print("  after losing twice: %s left, night %d again, %d technology"
+		% [str(twice["left"]), twice["night"], twice["tech"]])
+	expect(int(twice["night"]) == int(twice["was_night"]),
+		"the same night is still there to fight",
+		"%d against %d" % [twice["night"], twice["was_night"]])
+	expect(int(twice["phase"]) == Phases.DAY,
+		"on a morning, with a farm", str(twice["phase"]))
+	expect(twice["can_build"],
+		"there is somewhere to build", str(twice))
+	expect(twice["can_afford_a_tower"],
+		"and enough left to build something with - a run that could not "
+		+ "rebuild would be a run that had ended", str(twice["left"]))
+	expect(int(twice["tech"]) > 0,
+		"the technology survived both, so the tree is still there",
+		str(twice["tech"]))
+	expect(int(twice["days"]) == 2,
+		"and it cost two days", str(twice["days"]))
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## A run standing on the day before a given night, with a stocked farm.
+func _a_run_at_night(seed_value: int, night: int) -> Dictionary:
+	var state := State.create(seed_value)
+	state["nights_won"] = night - 1
+	state["day"] = night
+	Resources.gain(state, {GameData.WOOD: 400, GameData.STONE: 400,
+		GameData.IRON: 400, GameData.FOOD: 200, GameData.TECH: 6})
+	Phases.begin_preparation(state)
+	Sim.advance(state, GameData.PREPARATION_TICKS)
+	return state
+
+
+## Knock the house down and let the rules do the rest.
+func _lose_the_night(state: Dictionary) -> void:
+	state["house_hp"] = 0
+	Rewards.settle(state, false)
+	Phases.enter_result(state, false)
+
+
+## Confirm the result, live the day, and go back out.
+func _to_the_next_night(state: Dictionary) -> void:
+	(state["intent"] as Dictionary)["confirm_result"] = true
+	Sim.advance(state, 2)
+	Phases.begin_preparation(state)
+	Sim.advance(state, GameData.PREPARATION_TICKS)
+
+
+## Lose a night and compare the itemised list against the ledger.
+func _lose_and_count(seed_value: int) -> Dictionary:
+	var state := _a_run_at_night(seed_value, 4)
+	var before: Dictionary = {}
+	for id in GameData.sorted_names(GameData.RESOURCES):
+		before[id] = Resources.amount(state, id)
+	var kept_money := Resources.amount(state, GameData.MONEY)
+	var kept_tech := Resources.amount(state, GameData.TECH)
+
+	state["house_hp"] = 0
+	var payout := Rewards.settle(state, false)
+
+	var moved: Dictionary = {}
+	for id in GameData.sorted_names(GameData.RESOURCES):
+		var shift := Resources.amount(state, id) - int(before[id])
+		if shift != 0:
+			moved[id] = shift
+	return {
+		"lost": payout["lost"],
+		"moved": moved,
+		"kept_money": kept_money,
+		"kept_tech": kept_tech,
+	}
+
+
+## Lose a night with walls on the farm, and see what is there in the morning.
+func _lose_with_a_wall(seed_value: int) -> Dictionary:
+	var state := _a_run_at_night(seed_value, 3)
+	var doomed := _room_for(state, Vector2i(1, 1))
+	Farm.place(state, doomed, {"id": &"wall", "hp": 120})
+	var chewed := _room_for(state, Vector2i(1, 1))
+	Farm.place(state, chewed, {"id": &"wall", "hp": 120})
+	var before := Farm.cells_with(state, &"wall").size()
+
+	Farm.damage(state, doomed, 9999)
+	Farm.damage(state, chewed, 40)
+	_lose_the_night(state)
+	(state["intent"] as Dictionary)["confirm_result"] = true
+	Sim.advance(state, 2)
+
+	var on := Farm.occupant(state, chewed)
+	return {
+		"before": before,
+		"after": Farm.cells_with(state, &"wall").size(),
+		"hurt_kept": on.get("id", &"") == &"wall" and int(on.get("hp", 0)) < 120,
+	}
+
+
+## Lose the same night twice and report what is left to carry on with.
+func _lose_twice(seed_value: int) -> Dictionary:
+	var state := _a_run_at_night(seed_value, 5)
+	var was_night := int(state["night"])
+	var started := int(state["day"])
+	for _i in 2:
+		_lose_the_night(state)
+		_to_the_next_night(state)
+	# Back to a morning to look at the wreckage.
+	_lose_the_night(state)
+	(state["intent"] as Dictionary)["confirm_result"] = true
+	Sim.advance(state, 2)
+
+	var left: Dictionary = {}
+	for id in [GameData.WOOD, GameData.STONE, GameData.IRON]:
+		left[id] = Resources.amount(state, id)
+	return {
+		"was_night": was_night,
+		"night": int(state["night"]),
+		"phase": int(state["phase"]),
+		"days": int(state["day"]) - started - 1,
+		"left": left,
+		"tech": Resources.amount(state, GameData.TECH),
+		"can_build": _room_for(state, Vector2i(1, 1)) != Vector2i(-1, -1),
+		"can_afford_a_tower": Resources.can_afford(state,
+			Building.cost_of(&"gun_tower")),
+	}
