@@ -25,6 +25,7 @@
 [ext_resource type="Script" path="res://src/ui/tooltip.gd" id="23_tip"]
 [ext_resource type="Script" path="res://src/ui/log_panel.gd" id="24_log"]
 [ext_resource type="Script" path="res://src/ui/options_screen.gd" id="25_options"]
+[ext_resource type="Script" path="res://src/ui/pause_menu.gd" id="26_pause"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_main")
@@ -197,6 +198,17 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("24_log")
+
+[node name="PauseMenu" type="Control" parent="UI/Screen"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("26_pause")
 
 [node name="OptionsScreen" type="Control" parent="UI/Screen"]
 unique_name_in_owner = true

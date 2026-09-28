@@ -41,7 +41,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 52
+const CASES := 53
 
 ## The pixels two pieces of text in one row must have between them. Two is
 ## the width of the gap inside a letter at this size, so anything less reads
@@ -128,6 +128,7 @@ func _run() -> void:
 	await _case_0093_video()
 	await _case_0094_audio()
 	await _case_0095_controls()
+	await _case_0096_pause()
 	_finish()
 
 
@@ -5342,3 +5343,149 @@ func _key_event(code: int) -> InputEventKey:
 	var key := InputEventKey.new()
 	key.keycode = code
 	return key
+func _case_0096_pause() -> void:
+	await open_scene(MAIN_SCENE)
+	var router: Node = root.get_node_or_null(^"App")
+	var driver: SimDriver = _scene.get_node("%SimDriver")
+	var menu: PauseMenu = locate_control("PauseMenu") as PauseMenu
+	if router == null or menu == null:
+		expect(menu != null, "the pause menu is in the scene")
+		await close_scene()
+		_completed += 1
+		return
+	await frames(6)
+	expect(driver.running, "a run is running")
+	expect(not menu.is_open(), "with no pause menu on it")
+
+	# **The pause key stops the world.**
+	await tap_key(KEY_P)
+	await frames(4)
+	expect(router.here() == router.PAUSE, "the pause key pauses",
+		router.name_of(router.here()))
+	expect(menu.is_open(), "and the menu is up")
+	expect(not driver.running, "and the driver has stopped")
+	var held := int(driver.state["tick"])
+	await frames(12)
+	expect(int(driver.state["tick"]) == held,
+		"and no tick runs while it is up",
+		"%d against %d" % [int(driver.state["tick"]), held])
+
+	# The same key closes it, and the game carries on.
+	await tap_key(KEY_P)
+	await frames(4)
+	expect(router.here() == router.RUN, "and closes it again",
+		router.name_of(router.here()))
+	expect(driver.running, "with the world going again")
+	expect(not menu.is_open(), "and the menu put away")
+
+	# **Options from the pause menu comes back to the pause menu**, and the
+	# game stays stopped the whole way.
+	await tap_key(KEY_P)
+	await frames(3)
+	await click_control("Pause_options")
+	await frames(4)
+	expect(router.here() == router.OPTIONS, "OPTIONS opens the options",
+		router.name_of(router.here()))
+	expect(not driver.running,
+		"and the game is still stopped, two screens deep")
+	await click_control("OptionsBack")
+	await frames(4)
+	expect(router.here() == router.PAUSE, "Back returns to the pause menu",
+		router.name_of(router.here()))
+	expect(not driver.running, "still stopped")
+	expect(menu.is_open(), "and the menu is back")
+
+	# **Abandon asks twice, and says what it is taking.**
+	expect(menu.label_of(&"abandon") == "ABANDON RUN",
+		"the entry reads plainly at first", menu.label_of(&"abandon"))
+	await click_control("Pause_abandon")
+	await frames(3)
+	expect(menu.asking(), "one press asks rather than doing it")
+	expect(router.here() == router.PAUSE, "and nothing has happened yet",
+		router.name_of(router.here()))
+	expect(menu.label_of(&"abandon") == "YES, ABANDON IT",
+		"the entry says what pressing it again does",
+		menu.label_of(&"abandon"))
+	expect(menu.cost_shown().contains("DAY"),
+		"and what will be lost is on the screen", menu.cost_shown())
+
+	# Anything else drops the question.
+	await click_control("Pause_resume")
+	await frames(4)
+	expect(not menu.asking(), "walking away drops the question")
+	expect(router.here() == router.RUN, "RESUME resumes",
+		router.name_of(router.here()))
+	expect(driver.running, "and the world with it")
+
+	# **Save and quit writes the run and leaves.**
+	Save.delete_run()
+	await tap_key(KEY_P)
+	await frames(3)
+	var at_save := int(driver.state["tick"])
+	await click_control("Pause_save")
+	await frames(4)
+	expect(router.here() == router.TITLE, "SAVE AND QUIT goes to the title",
+		router.name_of(router.here()))
+	expect(Save.has_run(), "with a run on the disk")
+	expect(int(Save.read_run().get("tick", -1)) == at_save,
+		"which is the game that was on the screen",
+		"%d against %d" % [int(Save.read_run().get("tick", -1)), at_save])
+	await close_scene()
+
+	# **And CONTINUE picks it up.** Which is the point of saving: the title
+	# has offered this entry since task 0091 and until now it started a new
+	# game.
+	await open_scene("res://scenes/Title.tscn")
+	router = root.get_node_or_null(^"App")
+	await frames(4)
+	await tap_key(KEY_X)
+	await frames(3)
+	var title: TitleScreen = _scene as TitleScreen
+	expect(title != null and title.is_shown(&"continue", true),
+		"the title offers CONTINUE when there is a run to continue")
+	expect(locate_control("Menu_continue") != null,
+		"and the entry is on the menu")
+
+	# **The button is pressed, and the router brings up the scene itself.**
+	# Every other case in this file opens its own; here the loading is the
+	# thing being tested, so what comes up is read and then cleaned away.
+	# `change_scene_to_file` is deferred, hence the wait.
+	await click_control("Menu_continue")
+	await frames(10)
+	expect(router.last_scene() == MAIN_SCENE,
+		"and pressing it brings up the run", router.last_scene())
+	var brought: Node = current_scene
+	expect(brought != null, "which the router loaded by itself")
+	if brought != null:
+		var carried: SimDriver = brought.get_node("%SimDriver")
+		expect(int(carried.state["tick"]) >= at_save,
+			"and the run comes back where it was left, not at nought",
+			"%d against %d" % [int(carried.state["tick"]), at_save])
+		current_scene = null
+		root.remove_child(brought)
+		brought.free()
+	await close_scene()
+
+	# The rest is driven the usual way, on a run resumed by hand.
+	router.ask_to_resume()
+	await open_scene(MAIN_SCENE)
+	await frames(6)
+	driver = _scene.get_node("%SimDriver")
+	expect(int(driver.state["tick"]) >= at_save,
+		"and by hand as well as by the button",
+		"%d against %d" % [int(driver.state["tick"]), at_save])
+
+	# **Abandon, pressed twice, takes it.**
+	await tap_key(KEY_P)
+	await frames(3)
+	menu = locate_control("PauseMenu") as PauseMenu
+	await click_control("Pause_abandon")
+	await frames(3)
+	await click_control("Pause_abandon")
+	await frames(4)
+	expect(router.here() == router.TITLE, "the second press ends the run",
+		router.name_of(router.here()))
+	expect(not Save.has_run(), "and the save goes with it")
+	await close_scene()
+	Save.delete_run()
+	_completed += 1

@@ -32,13 +32,14 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 88
+const GROUPS := 89
 
 const SettingsScript := preload("res://src/app/settings.gd")
 const AppScript := preload("res://src/app/app.gd")
 const VideoScript := preload("res://src/app/video.gd")
 const OptionsAudioScript := preload("res://src/ui/options_audio.gd")
 const ActionsScript := preload("res://src/app/input_actions.gd")
+const PauseScript := preload("res://src/ui/pause_menu.gd")
 const OptionsScript := preload("res://src/ui/options_screen.gd")
 const AudioScript := preload("res://src/app/audio.gd")
 const SfxScript := preload("res://src/ui/sfx.gd")
@@ -163,6 +164,7 @@ func _run() -> void:
 	_task_0093_video()
 	_task_0094_audio()
 	_task_0095_controls()
+	_task_0096_pause()
 
 
 func _finish() -> void:
@@ -12433,10 +12435,10 @@ func _task_0082_shots() -> void:
 	# constant, kept on purpose for the same reason the audio group counts
 	# its settings: a scenario arriving without anybody deciding to add one
 	# should be a failing row rather than an extra picture nobody looks at.
-	expect(names.size() == 8,
+	expect(names.size() == 9,
 		"the five scenarios task 0082 names, and one per options tab",
 		"%d: %s" % [names.size(), str(names)])
-	for wanted in ["noon", "dusk", "wave", "result", "tech",
+	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",
 			"options_video", "options_audio", "options_controls"]:
 		expect(names.has(wanted), "there is a '%s' scenario" % wanted)
 
@@ -13592,8 +13594,11 @@ func _task_0092_router() -> void:
 			if String(AppScript.NAMES[state]) == wanted:
 				found = true
 		expect(found, "the router has a %s state" % wanted)
-	expect(AppScript.STATES.size() == 8,
-		"and eight of them, which is the list the task gives",
+	# **Nine since task 0096 added PAUSE.** A counted constant, deliberately:
+	# a state arriving without anybody deciding to add one is a state nothing
+	# routes to.
+	expect(AppScript.STATES.size() == 9,
+		"and nine of them - task 0092's eight, and the pause menu",
 		str(AppScript.STATES.size()))
 
 	# **The whole machine, with no tree.** Changing a scene is the one thing
@@ -14217,4 +14222,136 @@ func _task_0095_controls() -> void:
 
 	settings.reset()
 	actions.apply()
+	_completed += 1
+## 0096 - pausing, and the two things a pause must not do.
+func _task_0096_pause() -> void:
+	# **PAUSE is an overlay, not a scene.** A paused run is the run, stopped.
+	expect(AppScript.STATES.has(AppScript.PAUSE), "the router has a PAUSE")
+	expect(String(AppScript.NAMES[AppScript.PAUSE]) == "PAUSE",
+		"with a name to print")
+	expect(not AppScript.SCENES.has(AppScript.PAUSE),
+		"and it is not a scene of its own")
+
+	var router: Node = AppScript.new()
+	router.reset(router.RUN)
+	expect(not router.paused(), "a run is not paused")
+	expect(router.goto(router.PAUSE), "the pause menu opens over it")
+	expect(router.paused(), "and stops the world")
+	expect(router.depth() == 1, "with the run still under it")
+
+	# **Options opened from the pause menu leaves the game paused.** The
+	# whole reason `paused()` reads the stack and not just the top of it: a
+	# player changing the volume mid-night has not un-paused.
+	expect(router.goto(router.OPTIONS), "Options opens over the pause menu")
+	expect(router.paused(), "and the world is still stopped",
+		router.name_of(router.here()))
+	expect(router.back(), "and Back returns to the pause menu")
+	expect(router.here() == router.PAUSE, "which is where it came from",
+		router.name_of(router.here()))
+	expect(router.back(), "and again to the run")
+	expect(not router.paused(), "which starts again")
+
+	# Options opened from the menu, with no run under it, is not a pause.
+	router.reset(router.MENU)
+	router.goto(router.OPTIONS)
+	expect(not router.paused(),
+		"the same screen opened from the title pauses nothing")
+
+	# Abandoning goes to a scene, and a scene forgets the way back - so a
+	# player cannot end up at the title with the world still stopped.
+	router.reset(router.RUN)
+	router.goto(router.PAUSE)
+	router.goto(router.TITLE)
+	expect(not router.paused(), "leaving the run leaves the pause with it")
+	expect(router.depth() == 0, "and the stack with it", str(router.depth()))
+
+	# **The one-shot that says to carry on from a save.** Read once, so a run
+	# opened any other way starts fresh.
+	expect(not router.take_resume(), "nothing asks to resume by default")
+	router.ask_to_resume()
+	expect(router.take_resume(), "asking is remembered")
+	expect(not router.take_resume(), "and only once")
+	router.ask_to_resume()
+	router.reset(router.RUN)
+	expect(not router.take_resume(), "and a reset forgets it")
+	router.free()
+
+	# **The menu offers the four the task names.**
+	var offered: Array = []
+	for entry in PauseScript.ENTRIES:
+		offered.append(String(entry[0]))
+	for wanted in ["resume", "options", "save", "abandon"]:
+		expect(offered.has(wanted), "the menu offers %s" % wanted,
+			str(offered))
+	expect(offered.size() == 4, "and nothing else", str(offered))
+
+	# ---- and the part with the done-whens in it
+
+	# **A pause banks nothing.** Two drivers, the same seed, the same number
+	# of frames of game - and one of them stopped for five minutes in the
+	# middle of it. Driven by hand at a fixed delta, because a check that
+	# waited for real frames would be measuring this machine.
+	var frame := 1.0 / 60.0
+	var straight: SimDriver = SimDriver.new()
+	straight.start(0x0096)
+	for i in 240:
+		straight._process(frame)
+
+	var stopped: SimDriver = SimDriver.new()
+	stopped.start(0x0096)
+	for i in 120:
+		stopped._process(frame)
+	var mid_tick := int(stopped.state["tick"])
+	stopped.running = false
+	# Five minutes, in frames a great deal longer than a frame - which is
+	# what a window left alone actually hands you.
+	for i in 300:
+		stopped._process(1.0)
+	expect(int(stopped.state["tick"]) == mid_tick,
+		"a paused game runs no ticks at all",
+		"%d against %d" % [int(stopped.state["tick"]), mid_tick])
+
+	# **And does not fast-forward on resume**, which is the other done-when:
+	# the first frame back runs the one tick it is owed and not five minutes
+	# of banked farm.
+	stopped.running = true
+	stopped._process(frame)
+	expect(stopped.last_ticks <= maxi(stopped.speed, 1),
+		"the first frame after five minutes paused runs one tick",
+		"%d ticks" % stopped.last_ticks)
+	for i in 119:
+		stopped._process(frame)
+
+	expect(int(stopped.state["tick"]) == int(straight.state["tick"]),
+		"the same frames of game make the same number of ticks",
+		"%d against %d" % [int(stopped.state["tick"]),
+			int(straight.state["tick"])])
+	expect(State.hash_of(stopped.state) == State.hash_of(straight.state),
+		"and a paused night resumed is the same night",
+		"%d against %d" % [State.hash_of(stopped.state),
+			State.hash_of(straight.state)])
+	straight.free()
+	stopped.free()
+
+	# **A resumed game owes nothing either.** Saving is `var_to_bytes` of the
+	# state, so what comes back is the same game - and it comes back with an
+	# empty accumulator rather than with whatever the old one held.
+	var carried: SimDriver = SimDriver.new()
+	carried.start(0x0096)
+	for i in 240:
+		carried._process(frame)
+	var written := carried.state.duplicate(true)
+	var later: SimDriver = SimDriver.new()
+	later.resume(written)
+	expect(State.hash_of(later.state) == State.hash_of(carried.state),
+		"a run read back is the run that was written",
+		"%d against %d" % [State.hash_of(later.state),
+			State.hash_of(carried.state)])
+	later._process(frame)
+	expect(later.last_ticks <= maxi(later.speed, 1),
+		"and its first frame is one frame, not the time it spent on disk",
+		"%d ticks" % later.last_ticks)
+	carried.free()
+	later.free()
+
 	_completed += 1

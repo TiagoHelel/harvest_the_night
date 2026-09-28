@@ -8354,3 +8354,103 @@ which thing is done.
 
 `python tools/verify.py` prints PASS: 5899 asserts, 862 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+## 0096 - The pause menu - done 2026-09-28
+
+What changed: P stops the world mid-night and offers four things - resume,
+options, save and quit, abandon. `PAUSE` is a router state, `App.paused()` is
+what `Main` turns the driver off, and the title's CONTINUE finally continues.
+
+Files: `src/ui/pause_menu.gd` (new), `src/app/app.gd`, `src/ui/main.gd`,
+`src/ui/sim_driver.gd`, `src/ui/title_screen.gd`, `scenes/Main.tscn`,
+`src/tools/shot.gd`, `src/tools/headless_check.gd`,
+`src/tools/input_check.gd`.
+
+Verify: 5933 headless / 895 input / both hashes unchanged.
+Shots: `implementation/shots/0096/pause.png`.
+
+### The pause rule was written at task 0006 and nothing had ever turned it
+
+`SimDriver.running` has been there since the driver was, with a comment naming
+this task: a driver that is not running does not advance its accumulator, so
+five minutes paused is five minutes of nothing rather than five minutes owed.
+What was missing was something that turned it and a check that measured it.
+
+Both done-whens are measured rather than argued. Two drivers, same seed, 240
+frames of game each - one of them stopped for **three hundred frames of one
+whole second** in the middle, which is what a window left alone actually hands
+you. Same tick count, same `State.hash_of`, and the first frame back runs one
+tick. Making the accumulator advance while paused fails all three: the frame
+after the pause runs eight ticks and the two hashes come apart.
+
+### `paused()` reads the stack, not the top of it
+
+Options opened from the pause menu leaves the game stopped, and the screen
+that would have to know that is not the one that does. So `App.paused()` is
+true while `PAUSE` is anywhere on the stack, and `Main` turns the driver off
+that. Reading only the top of the stack fails two asserts, one in each suite.
+
+Abandoning is a change of scene, and a change of scene clears the stack - so
+there is no way to end up at the title with the world still stopped.
+
+`STATES` is nine now rather than eight. Deliberate, and still a counted
+constant: a state arriving without anybody deciding to add one is a state
+nothing routes to.
+
+### Abandon asks twice, and the second question is the interesting one
+
+The first press replaces the entry with **YES, ABANDON IT** and puts what is
+about to be lost under it - the day, the nights survived, what is standing.
+A confirmation that only says "are you sure?" is a confirmation people learn
+to press twice without reading. Any other entry drops the question, and so
+does closing the menu.
+
+The panel is already tall enough for those two lines before they appear, so
+pressing ABANDON does not move the other three entries out from under the
+pointer.
+
+### CONTINUE now continues, which is what makes saving worth doing
+
+`title_screen.gd` has said since task 0091 that "the run on disk is picked up
+by `Main`; task 0096 is what saves one mid-night, and until then this is the
+same door as new". SAVE AND QUIT is that save, so this is the task that owes
+the other half of it.
+
+`App` carries a **one-shot**: CONTINUE sets it, `Main` takes it and it clears.
+Loading automatically whenever a save existed would have been simpler and
+wrong - `Save.write_run` already fires at the end of every night, so the
+suite's first saved run would have been picked up by every scene opened after
+it, and two hundred cases would have been testing somebody else's game.
+
+`begin_run` and `resume_run` now share one `_hand_out()`, because two lists of
+twenty `show_state` calls drift the first time somebody adds a screen. What is
+*not* shared is `Stats.begin_run` - a run resumed from a save was counted the
+day it started, and counting it again would make every quit and carry on look
+like a new attempt.
+
+### The router really does change the scene, which the harness had never seen
+
+Every case in `input_check` opens its own scene. Pressing CONTINUE is the
+first time a *button* brings one up: `App._change_scene` calls
+`change_scene_to_file`, and a second `Main` duly appeared next to the one the
+harness was holding, so the run under test was a fresh one and the assert read
+`5 against 8`.
+
+Found by probe rather than by reading, and the case is honest about it now -
+it presses the button, waits for the deferred load, reads the run the router
+brought up, and clears it away before carrying on the usual way.
+
+### One more autoload lookup moved to the main loop
+
+`SimDriver` asked for `/root/Settings` with `get_node_or_null`, which errors
+from a node that is not in a tree - and driving the driver by hand is the only
+way to measure what a pause does to the accumulator. It asks
+`Engine.get_main_loop()` now, the same as `Audio`, `Video` and `Actions`.
+
+### Hashes
+
+Both unchanged - `215410677` and `2601044827`. **Which is the point of the
+task**: a paused night resumed is the same night, and the hash is how that is
+known rather than believed.
+
+`python tools/verify.py` prints PASS: 5933 asserts, 895 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

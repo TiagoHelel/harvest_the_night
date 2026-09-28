@@ -71,6 +71,7 @@ const SCENARIOS: Array = [
 	["wave", "a wave mid-fight", ""],
 	["result", "the night's result", "ResultScreen"],
 	["tech", "the tech tree", "TechPanel"],
+	["pause", "the pause menu", "PauseMenu"],
 	["options_video", "the video tab", "OptionsScreen:video"],
 	["options_audio", "the audio tab", "OptionsScreen:audio"],
 	["options_controls", "the controls tab", "OptionsScreen:controls"],
@@ -171,6 +172,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"wave": _set_wave(state)
 		"result": _set_result(state)
 		"tech": _set_tech(state)
+		"pause": _set_pause(state)
 		"options_video": _set_options_video(state)
 		"options_audio": _set_options_audio(state)
 		"options_controls": _set_options_controls(state)
@@ -253,7 +255,8 @@ func _only_showing(main: Node, wanted: String) -> void:
 	var want_screen := wanted.get_slice(":", 0)
 	var want_tab := wanted.get_slice(":", 1) if wanted.contains(":") else ""
 	for named in ["ShopPanel", "TechPanel", "StatsScreen", "InventoryPanel",
-			"WorkshopPanel", "ResultScreen", "OptionsScreen"]:
+			"WorkshopPanel", "ResultScreen", "OptionsScreen",
+			"PauseMenu"]:
 		var screen: Control = main.get_node_or_null("%" + named)
 		if screen == null:
 			continue
@@ -277,6 +280,12 @@ func _only_showing(main: Node, wanted: String) -> void:
 ## The farm at noon with the options over it, for looking at a settings tab
 ## rather than at the farm. One per tab, because they are one screen and only
 ## one of them is on it at a time.
+## The pause menu over a night, because that is when it matters: the
+## whole point of it is that the world stops with a wave on the screen.
+func _set_pause(state: Dictionary) -> void:
+	_set_wave(state)
+
+
 func _set_options_video(state: Dictionary) -> void:
 	_set_noon(state)
 

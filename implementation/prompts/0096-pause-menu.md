@@ -1,7 +1,7 @@
 # 0096 - The pause menu
 
 - **Phase:** 7 - Shell and product
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0092, 0006
 - **Likely files:** src/ui/pause_menu.gd
 

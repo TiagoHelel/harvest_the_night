@@ -54,6 +54,7 @@ var _router: Node
 @onready var _workshop: WorkshopPanel = %WorkshopPanel
 @onready var _tutorial: TutorialPrompt = %TutorialPrompt
 @onready var _stats: StatsScreen = %StatsScreen
+@onready var _pause: PauseMenu = %PauseMenu
 @onready var _lighting: Lighting = %Lighting
 @onready var _particles: Particles = %Particles
 @onready var _transition: Transition = %Transition
@@ -95,7 +96,16 @@ func _ready() -> void:
 	# one.
 	UiKit.dress(self, _dressed)
 
-	begin_run(BOOT_SEED)
+	# **The router before the run**, since task 0096: the title's CONTINUE
+	# leaves a one-shot on it saying to pick up the save, and a run that
+	# started before anybody asked would have thrown the save away.
+	_router = get_node_or_null(^"/root/App")
+	var carry_on: bool = _router != null and _router.take_resume()
+	var saved: Dictionary = Save.read_run() if carry_on else {}
+	if saved.is_empty():
+		begin_run(BOOT_SEED)
+	else:
+		resume_run(saved)
 
 	# The overlay is handed its driver rather than going looking for one: a
 	# screen owns its simulation, and two on screen at once would still each
@@ -107,11 +117,12 @@ func _ready() -> void:
 	# says so on the way in, and from here on `App` decides which of the
 	# run's panels is up - the keys ask it, the title menu asks it, and
 	# neither of them knows the other exists.
-	_router = get_node_or_null(^"/root/App")
 	if _router != null:
 		if not _router.state_changed.is_connected(_went):
 			_router.state_changed.connect(_went)
 		_router.reset(_router.RUN)
+	if not _pause.chose.is_connected(_pause_chose):
+		_pause.chose.connect(_pause_chose)
 
 
 ## Show whichever of the run's overlays the router says is up.
@@ -122,6 +133,14 @@ func _went(_to: int, _from: int) -> void:
 	var tech_up: bool = at == _router.TECH
 	var stats_up: bool = at == _router.STATS
 	var options_up: bool = at == _router.OPTIONS
+	var pause_up: bool = at == _router.PAUSE
+	if _pause != null and pause_up != _pause.is_open():
+		_pause.set_open(pause_up)
+	# **The world is stopped while the pause menu is anywhere on the stack**,
+	# not only while it is the top of it - Options opened from it leaves the
+	# game paused. `App.paused()` is the one that knows; this turns the only
+	# thing that advances time.
+	_driver.running = not _router.paused()
 	if tech_up != _tech.is_open():
 		_tech.open() if tech_up else _tech.close()
 	if _stats != null and stats_up != _stats.is_open():
@@ -145,7 +164,27 @@ func _went(_to: int, _from: int) -> void:
 ## impossible to forget.
 func begin_run(seed_value: int) -> void:
 	_driver.start(seed_value)
+	_hand_out()
 
+	# **The profile, and a run counted the moment it starts.** `runs_started`
+	# is the one lifetime number that cannot be folded out of a state: by the
+	# time there is a state to read, the run has already begun.
+	#
+	# Not in `_hand_out()`, because a run resumed from a save was counted the
+	# day it was first started and counting it again would make every quit
+	# and carry on look like a new attempt.
+	_profile = Stats.begin_run(Save.read_profile())
+	Save.write_profile(_profile)
+	_stats.show_profile(_profile)
+
+
+## Hand the state every screen holds to every screen that holds one.
+##
+## **Shared by `begin_run` and `resume_run`**, which is the point: a screen
+## left holding the old dictionary draws a game that has stopped advancing,
+## and two lists of twenty `show_state` calls would drift the first time
+## somebody added a screen.
+func _hand_out() -> void:
 	_world.show_state(_driver.state)
 	_player_view.show_state(_driver.state)
 	_shop.show_state(_driver.state)
@@ -170,14 +209,8 @@ func begin_run(seed_value: int) -> void:
 	_ambience.show_state(_driver.state, _world)
 	_juice.show_state(_driver.state, _world, _driver)
 	_log.show_state(_driver.state)
-
-	# **The profile, and a run counted the moment it starts.** `runs_started`
-	# is the one lifetime number that cannot be folded out of a state: by the
-	# time there is a state to read, the run has already begun.
-	_profile = Stats.begin_run(Save.read_profile())
-	Save.write_profile(_profile)
 	_stats.show_state(_driver.state)
-	_stats.show_profile(_profile)
+	_pause.show_state(_driver.state)
 
 	_world.look_at_cell(Player.cell(_driver.state))
 
@@ -219,6 +252,39 @@ func _process(_delta: float) -> void:
 ## Fold this run's numbers into the profile and write both files, once per
 ## night survived.
 ##
+## Start a run from a save file rather than from a seed.
+##
+## `begin_run` builds a state and hands it round; this is handed one and does
+## the same round. Everything after `_driver` is identical, which is why they
+## share `_hand_out()` rather than being two lists that drift.
+func resume_run(saved: Dictionary) -> void:
+	_driver.resume(saved)
+	_hand_out()
+	_profile = Save.read_profile()
+	_stats.show_profile(_profile)
+	# Already banked up to here, so the night that has not finished yet is
+	# the next one to trigger a save rather than the first one counted twice.
+	_banked_nights = Phases.nights_won(_driver.state)
+
+
+## What the pause menu asked for. **The screen says what it wants and this
+## does it**, because saving and abandoning a run are not a screen's to do.
+func _pause_chose(which: StringName) -> void:
+	match which:
+		&"save":
+			_profile = Stats.fold(_profile, _driver.state)
+			Save.write_profile(_profile)
+			Save.write_run(_driver.state)
+			if _router != null:
+				_router.goto(_router.TITLE)
+		&"abandon":
+			# **The run goes, the profile stays.** What a player earned over
+			# every run they have played is not what they are abandoning.
+			Save.delete_run()
+			if _router != null:
+				_router.goto(_router.TITLE)
+
+
 ## **This is what "written with the profile, not at the end of a run" means.**
 ## A player who crashes on night nine should lose the night, not the run, and
 ## a run's statistics only exist on a state that a crash takes with it.

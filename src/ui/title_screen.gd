@@ -250,8 +250,11 @@ func _pick(which: StringName) -> void:
 			Save.delete_run()
 			_router.goto(_router.RUN)
 		&"continue":
-			# The run on disk is picked up by `Main`; task 0096 is what saves
-			# one mid-night, and until then this is the same door as new.
+			# **The one-shot the run reads on the way in.** Task 0096 both
+			# writes the save - from the pause menu - and makes this pick it
+			# up; any other way into a run starts fresh, which is what keeps
+			# a save written by one check out of the next one.
+			_router.ask_to_resume()
 			_router.goto(_router.RUN)
 		&"stats":
 			_router.goto(_router.STATS)

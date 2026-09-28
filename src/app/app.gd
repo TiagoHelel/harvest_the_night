@@ -41,6 +41,7 @@ enum {
 	TITLE,
 	MENU,
 	RUN,
+	PAUSE,
 	TECH,
 	STATS,
 	OPTIONS,
@@ -48,13 +49,15 @@ enum {
 }
 
 ## Every state, in order, for the checks and for printing.
-const STATES: Array = [BOOT, TITLE, MENU, RUN, TECH, STATS, OPTIONS, SUMMARY]
+const STATES: Array = [BOOT, TITLE, MENU, RUN, PAUSE, TECH, STATS,
+	OPTIONS, SUMMARY]
 
 const NAMES: Dictionary = {
 	BOOT: "BOOT",
 	TITLE: "TITLE",
 	MENU: "MENU",
 	RUN: "RUN",
+	PAUSE: "PAUSE",
 	TECH: "TECH",
 	STATS: "STATS",
 	OPTIONS: "OPTIONS",
@@ -77,6 +80,14 @@ signal state_changed(to: int, from: int)
 
 var _here := BOOT
 var _stack: Array = []
+
+## Whether the next run should pick up the save on disk.
+##
+## **A one-shot, read once and cleared.** The title's CONTINUE sets it and
+## `Main` takes it; a run opened any other way - the boot scene, a check, the
+## screenshot tool - starts fresh, which is what stops a save file written by
+## one test leaking into the next one.
+var _resume := false
 
 ## How many times a scene change has been asked for, and the last one asked
 ## for. Read by the checks, which have no business changing scenes.
@@ -142,6 +153,28 @@ func back() -> bool:
 	return true
 
 
+## Whether the world is stopped.
+##
+## **True while the pause menu is anywhere on the stack**, not only while it
+## is the top of it: Options opened from the pause menu leaves the game
+## paused, and the screen that would have to know that is not the one that
+## does. `Main` reads this and turns the driver.
+func paused() -> bool:
+	return _here == PAUSE or _stack.has(PAUSE)
+
+
+## Say that the next run should carry on from the save.
+func ask_to_resume() -> void:
+	_resume = true
+
+
+## And take that back, which clears it.
+func take_resume() -> bool:
+	var was := _resume
+	_resume = false
+	return was
+
+
 ## Back all the way out of every overlay, to the scene underneath.
 func close_overlays() -> void:
 	while back():
@@ -157,6 +190,7 @@ func close_overlays() -> void:
 ## like it had done nothing.
 func reset(to: int = BOOT) -> void:
 	_stack.clear()
+	_resume = false
 	_here = to
 	_changes = 0
 	_last_scene = String(SCENES.get(to, ""))

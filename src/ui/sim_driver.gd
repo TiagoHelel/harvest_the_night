@@ -64,6 +64,27 @@ var _accumulator := 0.0
 var _hold := 0.0
 
 
+## The remembered speed, or the one the game ships with.
+func _take_speed() -> void:
+	var settings := _settings()
+	if settings != null:
+		set_speed(int(settings.get_int(&"gameplay/night_speed")))
+
+
+## `Settings`, asked of the engine rather than of this node.
+##
+## **`get_node_or_null("/root/Settings")` errors from a node that is not in a
+## tree yet**, which is every node a `SceneTree` check builds during
+## `_initialize()` - and this is the one thing task 0096 has to drive by hand
+## to measure what a pause does to the accumulator. The same answer at every
+## point of a node's life, and no autoload named at parse time.
+func _settings() -> Node:
+	var loop := Engine.get_main_loop() as SceneTree
+	if loop == null or loop.root == null:
+		return null
+	return loop.root.get_node_or_null(^"Settings")
+
+
 ## Set the speed, snapped to one the table offers, and remember it.
 func set_speed(value: int) -> void:
 	var wanted := 1
@@ -71,9 +92,7 @@ func set_speed(value: int) -> void:
 		if int(offered) == value:
 			wanted = value
 	speed = wanted
-	# `get_node_or_null`, because `--check-only` and the headless tools run
-	# with no autoloads registered and a missing setting is not a crash.
-	var settings := get_node_or_null("/root/Settings")
+	var settings := _settings()
 	if settings != null:
 		settings.set_value(&"gameplay/night_speed", wanted)
 
@@ -101,9 +120,22 @@ func start(seed_value: int) -> void:
 	state = State.create(seed_value)
 	_accumulator = 0.0
 	peak_usec = 0
-	var settings := get_node_or_null("/root/Settings")
-	if settings != null:
-		set_speed(int(settings.get_int(&"gameplay/night_speed")))
+	_take_speed()
+
+
+## Carry on from a game that was already going: a save file, read back.
+##
+## **The accumulator starts at nothing**, the same as a new run. A resumed
+## game owes no ticks: whatever real time passed between quitting and coming
+## back is not time the farm spent growing.
+func resume(saved: Dictionary) -> void:
+	if saved.is_empty() or not saved.has("tick"):
+		push_warning("SimDriver: nothing to resume")
+		return
+	state = saved
+	_accumulator = 0.0
+	peak_usec = 0
+	_take_speed()
 
 
 func _process(delta: float) -> void:
