@@ -71,6 +71,7 @@ const SCENARIOS: Array = [
 	["wave", "a wave mid-fight", ""],
 	["result", "the night's result", "ResultScreen"],
 	["tech", "the tech tree", "TechPanel"],
+	["options", "the video tab", "OptionsScreen"],
 ]
 
 var _written := 0
@@ -168,6 +169,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"wave": _set_wave(state)
 		"result": _set_result(state)
 		"tech": _set_tech(state)
+		"options": _set_options(state)
 
 	_walk_to(state, _standing_at)
 	main.get_node("%WorldView").look_at_cell(Player.cell(state))
@@ -242,7 +244,7 @@ func _result_lines(state: Dictionary) -> int:
 ## Bring one screen up and put the others away, so a picture has one subject.
 func _only_showing(main: Node, wanted: String) -> void:
 	for named in ["ShopPanel", "TechPanel", "StatsScreen", "InventoryPanel",
-			"WorkshopPanel", "ResultScreen"]:
+			"WorkshopPanel", "ResultScreen", "OptionsScreen"]:
 		var screen: Control = main.get_node_or_null("%" + named)
 		if screen == null:
 			continue
@@ -261,6 +263,13 @@ func _only_showing(main: Node, wanted: String) -> void:
 ## the farmer starts on grass beside the house. `Interact.verb_at` knows
 ## where the soil is; asking it is shorter than either guess and cannot go
 ## stale when the map moves.
+## The farm at noon with the options over it, for looking at a settings tab
+## rather than at the farm. Task 0093 added it; 0094 and 0095 draw their own
+## tabs into the same frame.
+func _set_options(state: Dictionary) -> void:
+	_set_noon(state)
+
+
 func _a_sown_field(state: Dictionary) -> void:
 	Resources.gain(state, {GameData.MONEY: 240, GameData.WOOD: 180,
 		GameData.STONE: 120, GameData.IRON: 90, GameData.OIL: 30})

@@ -54,6 +54,10 @@ Audio="*res://src/app/audio.gd"
 ; Task 0092: which screen is up, and how to get back. Registered after
 ; the services it may want to ask about, and before any scene runs.
 App="*res://src/app/app.gd"
+; Task 0093: puts the video settings on the window, and takes a bad
+; mode back on its own. The sibling of Audio, which does the same for
+; the buses.
+Video="*res://src/app/video.gd"
 
 [audio]
 

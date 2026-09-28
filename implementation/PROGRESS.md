@@ -8013,3 +8013,133 @@ Both unchanged - `215410677` and `2601044827`. A router is not a rule.
 
 `python tools/verify.py` prints PASS: 5691 asserts, 802 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+## 0093 - Options: video - done 2026-09-28
+
+What changed: the video settings are applied. `Settings` has held
+`video/window_mode`, `video/scale`, `video/integer_scaling`, `video/vsync` and
+`video/max_fps` since task 0009 and **nothing had ever read them** - the game
+came up at whatever `project.godot` said and those five keys were a promise
+nobody kept. `Video` is a new autoload, the sibling of `Audio`, and
+`OptionsVideo` is the first tab in the frame task 0092 left empty.
+
+Files: `src/app/video.gd` (new), `src/ui/options_video.gd` (new),
+`src/app/settings.gd`, `src/ui/options_screen.gd`, `project.godot`,
+`src/tools/shot.gd`, `src/tools/headless_check.gd`, `src/tools/input_check.gd`.
+
+Verify: 5725 headless / 821 input / both hashes unchanged.
+Shot: `implementation/shots/0093/options.png`.
+
+### The list marks the multiples rather than hiding the rest
+
+The requirement is "a resolution list built from the monitor, **marking** the
+integer multiples of 480x270", and the first version of this offered only the
+multiples - a defensible-sounding rule that is wrong on the machines people
+actually own. A 1366x768 laptop has no whole multiple at its own size, and
+neither does a 1920x1200 monitor; a game that refused to run at native there
+would be being clever at the player's expense.
+
+So `sizes_on(monitor)` returns the multiples that fit **plus the monitor's own
+size**, each entry saying whether it is a multiple and which one, and the
+buttons wear that as an `x3` suffix. The note under them is the key to the
+mark, and it does not name the multiples, because how many there are comes off
+the monitor: the screenshot was taken on a 1440p machine and goes up to `x5`.
+
+That needed somewhere to put a size that is not a multiple, so `video/size` is
+a new settings key - a string, `""` when the multiple in `video/scale` is what
+is wanted, `"1366x768"` when it is not. A string rather than a `Vector2i`
+because the config file is read by hand as often as by the game.
+
+**A non-multiple window is still crisp**, which is the reason it is safe to
+offer at all: with integer scaling on, Godot's INTEGER stretch draws the
+largest whole multiple that fits and puts bars round it.
+
+### The countdown lives in the autoload, not in the screen
+
+A fullscreen mode a driver refuses leaves a player looking at nothing, and the
+control that would put it back is on the screen they can no longer see. So
+every change of mode is provisional: it applies at once, arms
+`REVERT_SECONDS = 8.0`, and goes back on its own if nobody presses KEEP.
+
+Eight rather than the ten the task allows, because ten seconds of a black
+screen is a long time when you are not sure the game is still running.
+
+The screen only draws it. Every decision - which sizes fit, which are
+multiples, how long the countdown is - is a static function over a `Vector2i`
+in `video.gd`, which is the only way to test a resolution list built from
+hardware: the checks hand it a 1366x768 laptop and a 4K monitor that nobody
+here owns.
+
+### Three things this got wrong, all found by the checks
+
+**`--script` registers the autoloads.** The first version of the check added
+its own `Settings` node to `root` to drive `Video` with; there was already one
+there, so Godot renamed the new one and `Video` went on reading the first. The
+tell was an assert reading mode 0 while the disk two lines later said 1. The
+check uses the real autoload now.
+
+**`is_inside_tree()` is false before the main loop starts.** Measured: a node
+added to `root` during a `SceneTree`'s `_initialize()` reports false and
+`get_tree()` on it is null, while the main loop's own `root` finds it fine.
+`Audio` guards on `is_inside_tree()` for a good reason - `get_tree()` errors
+outright otherwise - but asking `Engine.get_main_loop()` is true at every point
+of a node's life and needs no guard at all.
+
+**The tab did not follow the settings.** It redrew on its own clicks only, so
+when the countdown ran out and `Video` put the old size back with nobody
+touching anything, the size it had just taken away was still marked as chosen -
+which reads as the revert having failed. It listens to `Settings.changed` now.
+Found by an assert about the warning label, which is a smaller version of the
+same bug.
+
+### Square pixels off breaks coordinate input, in the harness only
+
+`input_check` clicks by coordinate. With no window at all the root viewport's
+final transform is the identity while the stretch is INTEGER and a 0.13 scale
+with a fourteen pixel offset the moment it is FRACTIONAL - measured - so every
+click after turning square pixels off lands somewhere else entirely.
+
+That is a property of a 0x0 headless window, not of the game. The case turns
+them off with a real click, checks the viewport and the warning, and turns them
+back on through the setting, which is the same path the button takes. It is the
+last thing the case does, so nothing clicks afterwards.
+
+### The sixth screenshot scenario
+
+`options` joins task 0082's five, so a settings tab can be looked at rather
+than reasoned about. It is a noon farm with the frame over it, and tasks 0094
+and 0095 draw into the same picture.
+
+The count in the 0082 group is now six and is still a counted constant on
+purpose, the same as the audio group's settings: a scenario arriving without
+anybody deciding to add one should be a failing row.
+
+Looking at it is what caught the note saying "x2 and x3 sizes" on a monitor
+whose list runs to x5.
+
+### The bugs planted to check the checks
+
+- The 4K cap made a no-op: "a 4K list is capped at the five biggest" fails with
+  8, and "starting at a size somebody would actually pick" with 480x270.
+- The monitor's own size marked as a multiple: "two of them marked" fails with
+  3, and the entry itself is printed.
+- `revert()` never called: "every part of what worked before is back" fails
+  with `2/2/'1366x768'`, and `input_check`'s "comes back on its own" with 3.
+
+Two more were proved by accident while the autoload lookup was broken: the
+frame cap not reaching the engine, and the countdown not arming.
+
+### What is honest about "applies and survives a restart"
+
+The restart half is real: the check writes a mode, builds a second `Settings`,
+reads it off the disk and finds it. The applying half is only half testable
+without a display - the frame cap and the stretch mode are watched because they
+exist with no window, and the three `DisplayServer` calls that move the window
+itself are skipped under headless and are not covered by anything. Said out
+loud rather than quietly counted.
+
+### Hashes
+
+Both unchanged - `215410677` and `2601044827`. A window is not a rule.
+
+`python tools/verify.py` prints PASS: 5725 asserts, 821 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

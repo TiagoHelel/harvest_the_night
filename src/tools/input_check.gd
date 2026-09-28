@@ -41,7 +41,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 49
+const CASES := 50
 
 ## The pixels two pieces of text in one row must have between them. Two is
 ## the width of the gap inside a letter at this size, so anything less reads
@@ -125,6 +125,7 @@ func _run() -> void:
 	await _case_0090_log()
 	await _case_0091_title()
 	await _case_0092_router()
+	await _case_0093_video()
 	_finish()
 
 
@@ -4921,8 +4922,8 @@ func _case_0092_router() -> void:
 	expect(frame != null and frame.visible, "and the frame is up")
 	var options: OptionsScreen = frame as OptionsScreen
 	if options != null:
-		expect(options.tabs().is_empty(),
-			"with no tabs yet - tasks 0093 to 0095 register them",
+		expect(options.tabs() == [&"video"],
+			"with the one tab task 0093 registered - 0094 and 0095 add theirs",
 			str(options.tabs()))
 
 	await click_control("OptionsBack")
@@ -4984,3 +4985,109 @@ func _case_0092_router() -> void:
 
 	await close_scene()
 	_completed += 1     # last line: an abandoned case never gets here
+func _case_0093_video() -> void:
+	await open_scene("res://scenes/Title.tscn")
+	var video: Node = root.get_node_or_null(^"Video")
+	var settings: Node = root.get_node_or_null(^"Settings")
+	if video == null or settings == null:
+		expect(video != null, "the video autoload is up")
+		expect(settings != null, "and the settings autoload with it")
+		await close_scene()
+		_completed += 1
+		return
+
+	var was_mode: int = settings.get_int(&"video/window_mode")
+	var was_scale: int = settings.get_int(&"video/scale")
+	var was_size: String = String(settings.get_string(&"video/size"))
+	var was_cap: int = settings.get_int(&"video/max_fps")
+	var was_crisp: bool = settings.get_bool(&"video/integer_scaling")
+
+	await frames(4)
+	await tap_key(KEY_X)
+	await frames(3)
+	await click_control("Menu_options")
+	await frames(4)
+	var frame: OptionsScreen = require_control("OptionsScreen") as OptionsScreen
+	expect(frame != null and frame.tabs().has(&"video"),
+		"the options screen has a video tab now",
+		str(frame.tabs()) if frame != null else "no frame")
+	var tab: OptionsVideo = locate_control("OptionsVideo") as OptionsVideo
+	expect(tab != null and tab.visible,
+		"and it is the one showing, being the only one registered")
+	if tab == null:
+		await close_scene()
+		_completed += 1
+		return
+
+	# **The list is the monitor's.** Headless answers 1920x1080, so four
+	# sizes, every one of them a whole multiple and every one marked.
+	expect(tab.size_choices() == 4, "four sizes are offered",
+		str(tab.size_choices()))
+	expect(tab.marked_sizes() == 4, "and all four marked as multiples",
+		str(tab.marked_sizes()))
+
+	# A frame cap is the one control with no countdown, and it lands on the
+	# engine rather than only in a file.
+	await click_control("VideoCap_120")
+	await frames(2)
+	expect(Engine.max_fps == 120, "picking a cap caps the engine",
+		str(Engine.max_fps))
+	expect(not tab.countdown_showing(),
+		"and asks nothing, because a cap cannot hide the screen")
+
+	expect(not tab.warning_showing(),
+		"with square pixels on, the note is the key to the marks")
+
+	# **A size is provisional.** It applies at once and asks to be kept.
+	await click_control("VideoSize_960x540")
+	await frames(2)
+	expect(settings.get_int(&"video/scale") == 2,
+		"picking a size applies it at once",
+		str(settings.get_int(&"video/scale")))
+	expect(video.waiting(), "and starts a countdown")
+	expect(tab.countdown_showing(), "which the screen shows")
+	await click_control("VideoKeep")
+	await frames(2)
+	expect(not video.waiting(), "KEEP ends it")
+	expect(not tab.countdown_showing(), "and the question goes away")
+
+	# Nobody answers this one, so it puts itself back.
+	await click_control("VideoSize_1440x810")
+	await frames(2)
+	expect(settings.get_int(&"video/scale") == 3, "a second size applies too",
+		str(settings.get_int(&"video/scale")))
+	video._process(video.REVERT_SECONDS + 0.5)
+	await frames(2)
+	expect(settings.get_int(&"video/scale") == 2,
+		"and comes back on its own when nobody keeps it",
+		str(settings.get_int(&"video/scale")))
+	expect(not tab.countdown_showing(), "with the question gone with it")
+
+	# **Square pixels go last, and go back without a click.** Measured: with
+	# no window at all the viewport's transform is the identity while the
+	# stretch is INTEGER and a 0.13 scale with a 14px offset the moment it is
+	# FRACTIONAL, so every coordinate this harness clicks after that lands
+	# somewhere else. The press that turns it off is real; the one that would
+	# turn it back is the setting, which is the same path the button takes.
+	await click_control("VideoCrisp")
+	await frames(2)
+	expect(root.content_scale_stretch
+		== Window.CONTENT_SCALE_STRETCH_FRACTIONAL,
+		"turning square pixels off reaches the viewport",
+		str(root.content_scale_stretch))
+	expect(tab.warning_showing(), "and the note becomes the warning")
+	settings.set_value(&"video/integer_scaling", true)
+	await frames(2)
+	expect(root.content_scale_stretch
+		== Window.CONTENT_SCALE_STRETCH_INTEGER, "and back on again",
+		str(root.content_scale_stretch))
+	expect(not tab.warning_showing(), "with the warning put away")
+
+	settings.set_value(&"video/window_mode", was_mode)
+	settings.set_value(&"video/scale", was_scale)
+	settings.set_value(&"video/size", was_size)
+	settings.set_value(&"video/max_fps", was_cap)
+	settings.set_value(&"video/integer_scaling", was_crisp)
+	await frames(2)
+	await close_scene()
+	_completed += 1

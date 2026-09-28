@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`####################....`  **92 / 109 done**
+`####################....`  **93 / 109 done**
 
-0 doing / 17 todo / 0 blocked across 9 phases.
+0 doing / 16 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0093 - Options: video**. The whole of what is left is
+First up: **0094 - Options: audio**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,24 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-17 task(s) left, the ready ones first, then what they
+16 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0093 - Options: video
-
-Ready to pick up.  Likely files: `src/ui/options_video.gd`.
-
-Resolution, window mode and scaling, done properly for a pixel art game.
-
-- A resolution list built from the monitor, marking the integer multiples of 480x270
-- Windowed, borderless and exclusive fullscreen
-- Integer scaling on by default, with a toggle and a warning about what turning it off does
-- VSync and an FPS cap
-- Applied immediately with a revert countdown, so a bad mode cannot strand the player
-
-  - done when: Every listed mode applies and survives a restart
-  - done when: Picking an impossible mode reverts on its own within ten seconds
 
 ### 0094 - Options: audio
 
@@ -195,7 +180,7 @@ The little bubbles on the owner's sheet - !, ?, a heart, a note, an idea, a star
 
 ### 0098 - Accessibility
 
-Waits on 0093, 0097.  Likely files: `src/app/a11y.gd, src/ui/options_a11y.gd`.
+Waits on 0097.  Likely files: `src/app/a11y.gd, src/ui/options_a11y.gd`.
 
 The cheap things that decide whether a lot of people can play it at all.
 
@@ -396,16 +381,16 @@ The thing that gets people to look: thirty seconds that show the farm, the switc
 - [x] **0089** [Tooltips](prompts/0089-tooltips.md)
 - [x] **0090** [The log panel](prompts/0090-log-panel.md)
 
-## 7 - Shell and product  (2/10)
+## 7 - Shell and product  (3/10)
 
 - [x] **0091** [The title screen](prompts/0091-title-screen.md)
 - [x] **0092** [The main menu and the router](prompts/0092-main-menu.md)
-- [ ] **0093** [Options: video](prompts/0093-options-video.md)
+- [x] **0093** [Options: video](prompts/0093-options-video.md)
 - [ ] **0094** [Options: audio](prompts/0094-options-audio.md)
 - [ ] **0095** [Options: controls](prompts/0095-options-controls.md)
 - [ ] **0096** [The pause menu](prompts/0096-pause-menu.md)
 - [ ] **0097** [English and Portuguese](prompts/0097-i18n.md)
-- [ ] **0098** [Accessibility](prompts/0098-accessibility.md) - needs 0093, 0097
+- [ ] **0098** [Accessibility](prompts/0098-accessibility.md) - needs 0097
 - [ ] **0099** [An icon and a boot ident](prompts/0099-icon-ident.md)
 - [ ] **0100** [Exports: Windows and Web](prompts/0100-exports.md)
 

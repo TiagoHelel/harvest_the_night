@@ -32,10 +32,11 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 85
+const GROUPS := 86
 
 const SettingsScript := preload("res://src/app/settings.gd")
 const AppScript := preload("res://src/app/app.gd")
+const VideoScript := preload("res://src/app/video.gd")
 const OptionsScript := preload("res://src/ui/options_screen.gd")
 const AudioScript := preload("res://src/app/audio.gd")
 const SfxScript := preload("res://src/ui/sfx.gd")
@@ -157,6 +158,7 @@ func _run() -> void:
 	_task_0090_log()
 	_task_0091_title()
 	_task_0092_router()
+	_task_0093_video()
 
 
 func _finish() -> void:
@@ -12423,10 +12425,14 @@ func _task_0082_shots() -> void:
 			names.append(parts[1])
 			screens.append(parts[5])
 
-	expect(names.size() == 5,
-		"the five scenarios the task names are all there",
+	# **Six since task 0093 added `options`.** A counted constant, kept on
+	# purpose for the same reason the audio group counts its settings: a
+	# scenario arriving without anybody deciding to add one should be a
+	# failing row rather than an extra picture nobody looks at.
+	expect(names.size() == 6,
+		"the five scenarios task 0082 names, and the options tab",
 		"%d: %s" % [names.size(), str(names)])
-	for wanted in ["noon", "dusk", "wave", "result", "tech"]:
+	for wanted in ["noon", "dusk", "wave", "result", "tech", "options"]:
 		expect(names.has(wanted), "there is a '%s' scenario" % wanted)
 
 	# Every one has a builder, so a scenario added to the table and not
@@ -13668,7 +13674,8 @@ func _task_0092_router() -> void:
 	# reached by path - they have to be, because `verify.py` parses each
 	# script alone - but a screen naming another screen's node is what this
 	# task exists to remove.
-	var allowed := ["/root/App", "/root/Settings", "/root/Audio"]
+	var allowed := ["/root/App", "/root/Settings", "/root/Audio",
+		"/root/Video"]
 	var reaching: Array = []
 	var folder := DirAccess.open("res://src/ui/")
 	if folder != null:
@@ -13696,3 +13703,170 @@ func _task_0092_router() -> void:
 			OptionsScript.TABS.size()])
 
 	_completed += 1     # last line: an abandoned group never gets here
+## 0093 - the video settings, which nothing had ever applied.
+##
+## The list is built from the monitor, so the only way to test it is to be
+## given one - which is why every decision in `video.gd` is a static function
+## over a `Vector2i` rather than a read of the hardware.
+func _task_0093_video() -> void:
+	expect(VideoScript.multiples_on(Vector2i(1920, 1080)) == [1, 2, 3, 4],
+		"a 1080p monitor fits four whole multiples of 480x270",
+		str(VideoScript.multiples_on(Vector2i(1920, 1080))))
+	expect(VideoScript.multiples_on(Vector2i(320, 200)) == [1],
+		"and a screen too small for even one is still offered one, because "
+		+ "a game with no resolutions is a game that cannot be started",
+		str(VideoScript.multiples_on(Vector2i(320, 200))))
+	expect(VideoScript.best_on(Vector2i(1920, 1080)) == 4,
+		"the biggest that fits is what a first run takes",
+		str(VideoScript.best_on(Vector2i(1920, 1080))))
+
+	var hd: Array = VideoScript.sizes_on(Vector2i(1920, 1080))
+	expect(hd.size() == 4, "a 1080p list is those four and nothing else",
+		str(hd.size()))
+	var unmarked := 0
+	for entry in hd:
+		if not bool(entry["crisp"]):
+			unmarked += 1
+	expect(unmarked == 0,
+		"every one of them marked, because 1920x1080 is 4x exactly",
+		str(unmarked))
+	expect(Vector2i(hd[hd.size() - 1]["size"]) == Vector2i(1920, 1080),
+		"ending at the monitor's own size",
+		str(hd[hd.size() - 1]["size"]))
+
+	# **The laptop, which is why the list marks rather than filters.** There
+	# is no whole multiple of 480x270 at 1366x768, and a player on one still
+	# wants their own screen.
+	var laptop: Array = VideoScript.sizes_on(Vector2i(1366, 768))
+	expect(laptop.size() == 3, "a 1366x768 laptop is offered three sizes",
+		str(laptop.size()))
+	var marked := 0
+	for entry in laptop:
+		if bool(entry["crisp"]):
+			marked += 1
+	expect(marked == 2, "two of them marked as whole multiples", str(marked))
+	expect(Vector2i(laptop[2]["size"]) == Vector2i(1366, 768)
+		and not bool(laptop[2]["crisp"]),
+		"and the third is the screen itself, offered and not marked",
+		str(laptop[2]))
+	var rising := true
+	for i in range(1, laptop.size()):
+		var here := Vector2i(laptop[i]["size"])
+		var before := Vector2i(laptop[i - 1]["size"])
+		rising = rising and here.x * here.y > before.x * before.y
+	expect(rising, "smallest first, however they were found")
+
+	# A 4K screen fits eight multiples, and 480x270 on a 4K screen is a
+	# postage stamp nobody would pick.
+	var uhd: Array = VideoScript.sizes_on(Vector2i(3840, 2160))
+	expect(uhd.size() == VideoScript.MOST,
+		"a 4K list is capped at the five biggest rather than all eight",
+		str(uhd.size()))
+	expect(Vector2i(uhd[0]["size"]) == Vector2i(1920, 1080),
+		"starting at a size somebody would actually pick",
+		str(uhd[0]["size"]))
+
+	expect(VideoScript.is_crisp(Vector2i(960, 540)),
+		"a whole multiple shows square pixels")
+	expect(not VideoScript.is_crisp(Vector2i(1366, 768)),
+		"a size that is not one does not")
+	expect(not VideoScript.is_crisp(Vector2i(960, 270)),
+		"and neither does a size that is a multiple on one axis only")
+
+	expect(VideoScript.size_from(VideoScript.text_of(Vector2i(1366, 768)))
+		== Vector2i(1366, 768), "a size survives the settings file")
+	expect(VideoScript.size_from("nonsense") == Vector2i.ZERO,
+		"a settings file somebody edited badly reads as nothing")
+	expect(VideoScript.size_from("100x50") == Vector2i.ZERO,
+		"and so does a size smaller than the game itself")
+
+	# ---- applied, provisionally, and taken back on its own
+
+	expect(VideoScript.REVERT_SECONDS > 0.0
+		and VideoScript.REVERT_SECONDS <= 10.0,
+		"an unconfirmed mode comes back inside the ten seconds allowed",
+		str(VideoScript.REVERT_SECONDS))
+
+	# **The real `Settings`, not a second one.** This file is run with
+	# `--script`, which registers the project's autoloads, so there is one
+	# under `root` already - and a check that added its own would watch that
+	# copy while `Video` went on reading the first. Measured the hard way:
+	# the disk said one mode and the assert read another.
+	#
+	# `Video` is a loose instance on purpose, to hold the countdown this check
+	# drives by hand without the autoload's own clock also draining it.
+	var settings: Node = root.get_node_or_null(^"Settings")
+	expect(settings != null, "the settings autoload is under root")
+	if settings == null:
+		_completed += 1
+		return
+	var video: Node = VideoScript.new()
+	var was_stretch: int = root.content_scale_stretch
+
+	# **Applying is not only a window.** The two halves that exist with no
+	# display at all are the frame cap and the stretch, and they are the two
+	# this can watch.
+	settings.set_value(&"video/max_fps", 144)
+	video.apply()
+	expect(Engine.max_fps == 144, "the frame cap reaches the engine",
+		str(Engine.max_fps))
+	settings.set_value(&"video/integer_scaling", false)
+	video.apply()
+	expect(root.content_scale_stretch
+		== Window.CONTENT_SCALE_STRETCH_FRACTIONAL,
+		"and square pixels reach the viewport, which is where they live",
+		str(root.content_scale_stretch))
+
+	settings.set_value(&"video/integer_scaling", true)
+	settings.set_value(&"video/window_mode", VideoScript.WINDOWED)
+	settings.set_value(&"video/scale", 2)
+	settings.set_value(&"video/size", "")
+	video.apply()
+
+	# **The mode nobody can confirm**, because the screen it would be
+	# confirmed on is the one that went dark.
+	var was: Dictionary = video.try_mode(VideoScript.FULLSCREEN,
+		Vector2i(1366, 768))
+	expect(not was.is_empty(), "picking a mode says what it replaced")
+	expect(video.waiting(), "and starts the countdown")
+	expect(settings.get_int(&"video/window_mode") == VideoScript.FULLSCREEN,
+		"the new mode is on at once, not after the countdown",
+		str(settings.get_int(&"video/window_mode")))
+	expect(String(settings.get_string(&"video/size")) == "1366x768",
+		"including a size that is not a whole multiple",
+		String(settings.get_string(&"video/size")))
+	video._process(VideoScript.REVERT_SECONDS + 0.5)
+	expect(not video.waiting(),
+		"nobody confirmed it, so the countdown ran out")
+	expect(settings.get_int(&"video/window_mode") == VideoScript.WINDOWED
+		and settings.get_int(&"video/scale") == 2
+		and String(settings.get_string(&"video/size")) == "",
+		"and every part of what worked before is back",
+		"%d/%d/'%s'" % [settings.get_int(&"video/window_mode"),
+			settings.get_int(&"video/scale"),
+			String(settings.get_string(&"video/size"))])
+
+	# Confirmed, it stays - on the disk, which is what surviving a restart is.
+	video.try_mode(VideoScript.BORDERLESS, Vector2i(960, 540))
+	video.keep()
+	expect(not video.waiting(), "KEEP stops the countdown")
+	video._process(VideoScript.REVERT_SECONDS + 0.5)
+	expect(settings.get_int(&"video/window_mode") == VideoScript.BORDERLESS,
+		"and nothing takes it back afterwards",
+		str(settings.get_int(&"video/window_mode")))
+	var restarted: Node = SettingsScript.new()
+	restarted.load_from_disk()
+	expect(restarted.get_int(&"video/window_mode") == VideoScript.BORDERLESS
+		and restarted.get_int(&"video/scale") == 2,
+		"a fresh game reads the same mode back off the disk - the restart",
+		"%d/%d" % [restarted.get_int(&"video/window_mode"),
+			restarted.get_int(&"video/scale")])
+
+	# Put the machine back: a frame cap left at 144 would slow every check
+	# after this one.
+	settings.reset()
+	video.apply()
+	root.content_scale_stretch = was_stretch
+	video.free()
+	restarted.free()
+	_completed += 1
