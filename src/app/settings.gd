@@ -90,6 +90,14 @@ const DEFAULTS := {
 	&"a11y/particle_density": 1.0,
 	&"a11y/ui_scale": 1.0,
 	&"a11y/high_contrast": false,
+	# Task 0098. **On, because holding is the gentler of the two** and a
+	# player who prefers to press once per tile still can - the press is
+	# what starts it and letting go is what stops it.
+	&"a11y/hold_to_act": true,
+	# Task 0098: how much of a second of real time counts as a second of
+	# game. One is the game as it was balanced; the others hand the same
+	# ticks out more slowly.
+	&"a11y/slow": 1.0,
 
 	&"controls/bindings": {},           # task 0095 fills this
 }

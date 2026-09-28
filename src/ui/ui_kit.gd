@@ -202,13 +202,51 @@ const SPACED := &"Spaced"
 const OWNED := &"Owned"
 
 
+## The same nine roles, pushed apart. **Task 0098.**
+##
+## Not a second palette: every value here is still a name in
+## `PaletteData.COLOURS`, picked so that **no role is darker than it was and
+## the quiet ones stop being quiet** - `Dim` becomes the body colour and
+## `Faint` becomes what `Dim` was. What it costs is the hierarchy, which is
+## exactly the trade somebody turning it on is asking to make.
+##
+## The frames stay as they are. They are drawings, and a second set of them
+## would be art nobody asked for; the win here is in the words.
+const CONTRAST_ROLES := {
+	&"": &"bone",                   # already the brightest thing there is
+	&"Dim": &"bone",                # nothing is dim any more
+	&"Faint": &"bone_dark",         # and nothing is faint
+	&"Warm": &"flame_hot",
+	&"Money": &"gold_light",
+	&"Warn": &"flame",
+	&"Good": &"grass_light",
+	&"Bad": &"roof_light",
+	&"Cool": &"moon",
+}
+
+## Whether the game is wearing the pushed-apart colours.
+static var _high_contrast := false
+
+
+static func high_contrast() -> bool:
+	return _high_contrast
+
+
+## **Changing this does not redress anything.** `A11y` sets it and then walks
+## the tree, because a kit that reached into a tree would be a kit that knew
+## what a screen was.
+static func set_high_contrast(on: bool) -> void:
+	_high_contrast = on
+
+
 ## A colour by the name a screen knows it as, straight off the palette.
 ##
 ## An unknown name comes back as the body text colour rather than as magenta
 ## or as a crash: a typo should make a label look ordinary, not make the
 ## screen it is on disappear.
 static func colour(role: StringName = &"") -> Color:
-	var key: StringName = ROLES.get(role, ROLES[&""])
+	var table: Dictionary = CONTRAST_ROLES if _high_contrast else ROLES
+	var key: StringName = table.get(role, table[&""])
 	return PaletteData.COLOURS.get(key, Color.WHITE)
 
 

@@ -66,6 +66,10 @@ Actions="*res://src/app/input_actions.gd"
 ; carries is called `I18n`, and an autoload may not share a
 ; global class name.
 Locale="*res://src/app/i18n.gd"
+; Task 0098: puts the picture scale and the contrast on the tree, and
+; answers the two questions - slower, and holding - that other
+; screens ask it.
+Access="*res://src/app/a11y.gd"
 
 [audio]
 

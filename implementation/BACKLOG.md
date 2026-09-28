@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`#####################...`  **97 / 110 done**
+`#####################...`  **98 / 110 done**
 
-0 doing / 13 todo / 0 blocked across 9 phases.
+0 doing / 12 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0098 - Accessibility**. The whole of what is left is
+First up: **0099 - An icon and a boot ident**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,25 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-13 task(s) left, the ready ones first, then what they
+12 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0098 - Accessibility
-
-Ready to pick up.  Likely files: `src/app/a11y.gd, src/ui/options_a11y.gd`.
-
-The cheap things that decide whether a lot of people can play it at all.
-
-- Screen shake, flashing and particle density each separately reducible
-- A larger UI scale and a high-contrast HUD option
-- Colour-blind safe damage types: shape and icon, never colour alone
-- Hold-to-act as an alternative to repeated pressing
-- A slower game speed option that scales the tick budget, not the rules
-
-  - done when: Every damage type is identifiable in greyscale
-  - done when: The slow speed option does not change the determinism hash
-  - done when: The game is playable start to finish with shake and flashing off
 
 ### 0099 - An icon and a boot ident
 
@@ -336,7 +320,7 @@ The thing that gets people to look: thirty seconds that show the farm, the switc
 - [x] **0089** [Tooltips](prompts/0089-tooltips.md)
 - [x] **0090** [The log panel](prompts/0090-log-panel.md)
 
-## 7 - Shell and product  (7/11)
+## 7 - Shell and product  (8/11)
 
 - [x] **0091** [The title screen](prompts/0091-title-screen.md)
 - [x] **0092** [The main menu and the router](prompts/0092-main-menu.md)
@@ -345,7 +329,7 @@ The thing that gets people to look: thirty seconds that show the farm, the switc
 - [x] **0095** [Options: controls](prompts/0095-options-controls.md)
 - [x] **0096** [The pause menu](prompts/0096-pause-menu.md)
 - [x] **0097** [English and Portuguese](prompts/0097-i18n.md)
-- [ ] **0098** [Accessibility](prompts/0098-accessibility.md)
+- [x] **0098** [Accessibility](prompts/0098-accessibility.md)
 - [ ] **0099** [An icon and a boot ident](prompts/0099-icon-ident.md)
 - [ ] **0100** [Exports: Windows and Web](prompts/0100-exports.md)
 - [ ] **0110** [Refusals in two languages](prompts/0110-refusals.md)

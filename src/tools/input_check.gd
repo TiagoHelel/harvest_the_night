@@ -41,7 +41,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 54
+const CASES := 55
 
 ## The pixels two pieces of text in one row must have between them. Two is
 ## the width of the gap inside a letter at this size, so anything less reads
@@ -130,6 +130,7 @@ func _run() -> void:
 	await _case_0095_controls()
 	await _case_0096_pause()
 	await _case_0097_language()
+	await _case_0098_access()
 	_finish()
 
 
@@ -4926,8 +4927,9 @@ func _case_0092_router() -> void:
 	expect(frame != null and frame.visible, "and the frame is up")
 	var options: OptionsScreen = frame as OptionsScreen
 	if options != null:
-		expect(options.tabs() == [&"game", &"video", &"audio", &"controls"],
-			"with the four tabs tasks 0093 to 0097 registered, in TABS order",
+		expect(options.tabs() == [&"game", &"access", &"video", &"audio",
+			&"controls"],
+			"with the five tabs tasks 0093 to 0098 registered, in TABS order",
 			str(options.tabs()))
 
 	await click_control("OptionsBack")
@@ -5120,9 +5122,9 @@ func _case_0094_audio() -> void:
 	await click_control("Menu_options")
 	await frames(4)
 	var frame: OptionsScreen = require_control("OptionsScreen") as OptionsScreen
-	expect(frame != null and frame.tabs() == [&"game", &"video", &"audio",
-			&"controls"],
-		"the strip has all four tabs, in the order the frame names them",
+	expect(frame != null and frame.tabs() == [&"game", &"access",
+			&"video", &"audio", &"controls"],
+		"the strip has all five tabs, in the order the frame names them",
 		str(frame.tabs()) if frame != null else "no frame")
 
 	await click_control("OptionsTab_audio")
@@ -5567,4 +5569,95 @@ func _case_0097_language() -> void:
 		"and back again without reloading anything",
 		night_button.text if night_button else "")
 	await close_scene()
+	_completed += 1
+func _case_0098_access() -> void:
+	await open_scene("res://scenes/Title.tscn")
+	var settings: Node = root.get_node_or_null(^"Settings")
+	if settings == null:
+		expect(false, "the settings autoload is up")
+		await close_scene()
+		_completed += 1
+		return
+	for key in A11y.KEYS:
+		settings.reset(key)
+	await frames(3)
+
+	await tap_key(KEY_X)
+	await frames(3)
+	await click_control("Menu_options")
+	await frames(4)
+	await click_control("OptionsTab_access")
+	await frames(4)
+	var tab: OptionsA11y = locate_control("OptionsA11y") as OptionsA11y
+	expect(tab != null and tab.visible, "the access tab opens")
+	if tab == null:
+		await close_scene()
+		_completed += 1
+		return
+	expect(tab.rows() == A11y.KEYS.size(),
+		"with a row for every setting it owns", str(tab.rows()))
+
+	# **Shake off is shake off**, read where it is used rather than where it
+	# was written.
+	await click_control("Access_screen_shake_0")
+	await frames(3)
+	expect(is_equal_approx(settings.get_float(&"a11y/screen_shake"), 0.0),
+		"turning the shake off writes nought",
+		"%.2f" % settings.get_float(&"a11y/screen_shake"))
+	expect(is_equal_approx(tab.chosen(&"a11y/screen_shake"), 0.0),
+		"and the row says so", "%.2f" % tab.chosen(&"a11y/screen_shake"))
+
+	# **High contrast reaches the kit**, and the kit reaches every screen.
+	var was_dim := UiKit.colour(UiKit.DIM)
+	await click_control("Access_high_contrast")
+	await frames(4)
+	expect(UiKit.high_contrast(), "the contrast switch reaches the kit")
+	expect(UiKit.colour(UiKit.DIM) != was_dim,
+		"and the quiet colour stops being quiet")
+	expect(UiKit.colour(UiKit.DIM).get_luminance()
+		> was_dim.get_luminance(),
+		"by getting brighter, not by changing hue",
+		"%.2f against %.2f" % [UiKit.colour(UiKit.DIM).get_luminance(),
+			was_dim.get_luminance()])
+	await click_control("Access_high_contrast")
+	await frames(4)
+	expect(not UiKit.high_contrast(), "and back again")
+
+	# The slow speed, through the button.
+	await click_control("Access_slow_50")
+	await frames(3)
+	expect(is_equal_approx(settings.get_float(&"a11y/slow"), 0.5),
+		"the slowest speed writes a half",
+		"%.2f" % settings.get_float(&"a11y/slow"))
+	settings.reset(&"a11y/slow")
+	await close_scene()
+
+	# **Playable with shake and flashing off.** The done-when, as far as a
+	# harness can answer it: the night still begins, still ticks and still
+	# ends, with both of the things that make a screen hard to look at gone.
+	settings.set_value(&"a11y/screen_shake", 0.0)
+	settings.set_value(&"a11y/flashing", false)
+	await open_scene(MAIN_SCENE)
+	await frames(6)
+	var driver: SimDriver = _scene.get_node("%SimDriver")
+	(driver.state["intent"] as Dictionary)["begin_night"] = true
+	# The day hands over to the preparation, which hands over to the night on
+	# its own clock - so what is waited for here is the farm leaving the day,
+	# which is what the button actually does.
+	await until(func() -> bool:
+		return int(driver.state["phase"]) != Phases.DAY,
+		"the farm leaves the day")
+	var at := int(driver.state["tick"])
+	await frames(8)
+	expect(int(driver.state["tick"]) > at,
+		"and goes on ticking with the shake and the lamps turned off",
+		"%d against %d" % [int(driver.state["tick"]), at])
+	expect(is_equal_approx(settings.get_float(&"a11y/screen_shake"), 0.0),
+		"with the shake still off", "%.2f"
+		% settings.get_float(&"a11y/screen_shake"))
+	await close_scene()
+
+	for key in A11y.KEYS:
+		settings.reset(key)
+	await frames(2)
 	_completed += 1

@@ -8589,3 +8589,118 @@ holds keys.
 `python tools/verify.py` prints PASS: 5959 asserts, 907 input cases, 0 failed,
 and a new `strings` row reading 321 keys in 2 languages, all of them fit.
 `exports` is still the one SKIP and still wants the Godot export templates.
+## 0098 - Accessibility - done 2026-09-28
+
+What changed: eight settings that decide whether somebody can play at all,
+all of them on one tab, and four of them read by something for the first
+time. Damage types wear a shape as well as a colour, holding a button builds
+a fence, and the game will run slower without becoming a different game.
+
+Files: `src/app/a11y.gd` (new), `src/ui/options_a11y.gd` (new),
+`src/app/settings.gd`, `src/ui/ui_kit.gd`, `src/ui/sim_driver.gd`,
+`src/ui/build_mode.gd`, `src/ui/juice.gd`, `src/ui/options_screen.gd`,
+`project.godot`, `assets/locale/strings.csv`, `src/tools/shot.gd`,
+`src/tools/headless_check.gd`, `src/tools/input_check.gd`.
+
+Verify: 6018 headless / 918 input / both hashes unchanged.
+Shots: `implementation/shots/0098/options_access.png`,
+`wave.png` and `wave-contrast.png`.
+
+### Most of it was already built and nothing turned it
+
+Screen shake has been scaled by `a11y/screen_shake` since task 0055, the lamps
+have checked `a11y/flashing` since 0076, the emitters have scaled themselves by
+`a11y/particle_density` since 0077 and hit stop has read `a11y/hit_stop` since
+0088. Every one of those was a setting a player could only reach by editing a
+config file. **The tab is most of what this task is.**
+
+What genuinely had nobody reading it: the picture scale, the contrast, and two
+new keys - `a11y/hold_to_act` and `a11y/slow`.
+
+### A slower game is the same game, and the hash says so
+
+`a11y/slow` scales the **budget**, which is real seconds, and never the rate.
+`SimDriver` hands `Sim.ticks_for` a smaller delta; the ticks that run are the
+same ticks in the same order, there are just fewer of them a second.
+
+The done-when is "the slow speed option does not change the determinism hash",
+and it is measured rather than argued: two drivers on one seed, one at full
+speed for 240 frames and one at half for 480. Same tick count, same
+`State.hash_of`, and half the ticks in the same time. Reading the setting and
+throwing it away fails all three, with the two hashes printed side by side.
+
+### Three shapes, not three colours
+
+The damage numbers were told apart by colour alone, which is a colour coding
+that stops working for about one man in twelve. Each type carries a mark now -
+`+` for impact, `^` for fire, `*` for explosive - in the game's own font,
+drawn on the end of the number. **The colour stays**, for everybody who can
+see it; the shape is what survives greyscale.
+
+`A11y.distinct_marks()` is the done-when as a function rather than as a
+promise, and giving two types the same mark fails it with the table printed.
+
+### What a 480x270 game can honestly call a bigger UI
+
+Not a bigger font. The HUD is laid out in whole pixels against a viewport
+that is 480 across, and doubling the text would put half of it off the edge.
+`content_scale_factor` scales everything instead - the world with the words -
+so a player who needs it bigger gets it bigger and sees a little less farm.
+That is the trade a pixel game has; the alternative is a second layout nobody
+maintains.
+
+### High contrast is the same palette, pushed apart
+
+Not a second set of colours: `CONTRAST_ROLES` names the same nine roles from
+`PaletteData`, picked so that **no role is darker than it was** - `Dim`
+becomes the body colour and `Faint` becomes what `Dim` was. What it costs is
+the hierarchy, which is exactly the trade somebody turning it on is asking to
+make. A check compares the two tables role by role and fails on one that goes
+the wrong way.
+
+Measured on the shots rather than eyeballed: the dim HUD line goes from
+(184, 174, 154) to (232, 224, 207) with it on. `shot.py --contrast` is new and
+is how.
+
+The frames stay as they are. They are drawings, and a second set of them would
+be art nobody asked for; the win here is in the words.
+
+### Holding builds a fence
+
+A fence along one side of the farm is a dozen clicks, and a dozen clicks in
+the same second is the thing some hands cannot do. Holding the place button
+and dragging places one per cell and **never twice on the same one** - the
+cell the last one went on is remembered until the button comes up.
+
+`a11y/hold_to_act` ships on, because holding is the gentler of the two and a
+player who prefers one press per tile still gets exactly that.
+
+### The tab, and what is not a slider
+
+Eight rows, and everything except the two switches is a small list of named
+steps. A slider from nought to two asks a player how much screen shake they
+want in decimals; **OFF, HALF and FULL** asks them a question they can answer.
+
+Two lists have to agree and a check says so: every key `A11y` names is a
+setting that exists, and every `a11y/` setting is a row on the tab. Taking one
+off the tab fails it.
+
+`TABS` is five now - GAME, ACCESS, VIDEO, AUDIO, CONTROLS - and the counted
+constant moved with it, deliberately.
+
+### Playable with shake and flashing off
+
+As far as a harness can answer it: with both turned off the night is still
+asked for, the farm still leaves the day, and the ticks keep coming. The
+things that were turned off are view-layer only, so there was never a rule
+that could depend on them - which is the reason that answer is worth as much
+as it is.
+
+### Hashes
+
+Both unchanged - `215410677` and `2842078959`. The sim hash being unchanged
+**is** one of the done-whens: the slow speed is a different number of ticks a
+second and not a different tick.
+
+`python tools/verify.py` prints PASS: 6018 asserts, 918 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

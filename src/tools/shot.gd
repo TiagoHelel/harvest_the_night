@@ -72,6 +72,7 @@ const SCENARIOS: Array = [
 	["result", "the night's result", "ResultScreen"],
 	["tech", "the tech tree", "TechPanel"],
 	["pause", "the pause menu", "PauseMenu"],
+	["options_access", "the access tab", "OptionsScreen:access"],
 	["options_video", "the video tab", "OptionsScreen:video"],
 	["options_audio", "the audio tab", "OptionsScreen:audio"],
 	["options_controls", "the controls tab", "OptionsScreen:controls"],
@@ -108,6 +109,7 @@ func _initialize() -> void:
 	# translation fits the control it is in - task 0097 added a check that
 	# measures it, and this is how it is looked at.
 	var speaking := ""
+	var loud := false
 	var id := "latest"
 	var wanted: Array = []
 	for arg in args:
@@ -115,6 +117,8 @@ func _initialize() -> void:
 			var maybe := arg.substr(2)
 			if I18n.LOCALES.has(maybe):
 				speaking = maybe
+			elif maybe == "contrast":
+				loud = true
 			continue
 		if id == "latest" and not _is_scenario(arg):
 			id = arg
@@ -138,6 +142,12 @@ func _initialize() -> void:
 	# chimneys. Found by diffing two runs rather than by reading the code.
 	if speaking != "":
 		_tongue = "-" + speaking
+	# **Contrast is a flag too.** The same pictures with the quiet
+	# colours turned up, which is the only way to see what the
+	# switch actually costs.
+	if loud:
+		UiKit.set_high_contrast(true)
+		_tongue += "-contrast"
 
 	seed(SPARK_SEED)
 	var main: Node = load("res://scenes/Main.tscn").instantiate()
@@ -194,6 +204,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"result": _set_result(state)
 		"tech": _set_tech(state)
 		"pause": _set_pause(state)
+		"options_access": _set_options_access(state)
 		"options_video": _set_options_video(state)
 		"options_audio": _set_options_audio(state)
 		"options_controls": _set_options_controls(state)
@@ -305,6 +316,10 @@ func _only_showing(main: Node, wanted: String) -> void:
 ## whole point of it is that the world stops with a wave on the screen.
 func _set_pause(state: Dictionary) -> void:
 	_set_wave(state)
+
+
+func _set_options_access(state: Dictionary) -> void:
+	_set_noon(state)
 
 
 func _set_options_video(state: Dictionary) -> void:

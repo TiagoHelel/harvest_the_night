@@ -38,6 +38,14 @@ var _hovered := Vector2i(-1, -1)
 ## Events carry their own position and are what the player actually did.
 var _pointer := Vector2(-1, -1)
 
+## The cell the last placement went on, while a button is still down.
+##
+## **Task 0098: holding is an alternative to pressing.** A fence along one
+## side of the farm is a dozen clicks, and a dozen clicks in the same second
+## is the thing some hands cannot do. Dragging places one per cell and never
+## twice on the same one.
+var _held_cell := Vector2i(-1, -1)
+
 
 func _ready() -> void:
 	visible = false
@@ -97,6 +105,26 @@ func _process(_delta: float) -> void:
 		_build_palette()
 
 	_follow_cursor()
+	_keep_placing()
+
+
+## **Holding the button places one per cell, and never twice on the same
+## one.** The press itself is handled where every other press is; this is what
+## happens while it is still down and the cursor has moved somewhere new.
+##
+## Off when `a11y/hold_to_act` is off, for a player who would rather one press
+## meant one thing.
+func _keep_placing() -> void:
+	if not Input.is_action_pressed(&"place"):
+		_held_cell = Vector2i(-1, -1)
+		return
+	if _hovered == _held_cell or not Grid.in_bounds(_hovered):
+		return
+	var access := get_node_or_null(^"/root/Access")
+	if access != null and not access.holding():
+		return
+	_held_cell = _hovered
+	(_state["intent"] as Dictionary)["build_place"] = true
 
 
 ## Where the mouse is, what would happen there, and the ghost that says so.
@@ -173,6 +201,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	# binding like any other rather than a special case.
 	var intent: Dictionary = _state["intent"]
 	if event.is_action_pressed(&"place"):
+		_held_cell = _hovered
 		intent["build_place"] = true
 		get_viewport().set_input_as_handled()
 	elif event.is_action_pressed(&"remove"):

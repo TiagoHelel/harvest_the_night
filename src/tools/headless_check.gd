@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 90
+const GROUPS := 91
 
 const SettingsScript := preload("res://src/app/settings.gd")
 const AppScript := preload("res://src/app/app.gd")
@@ -40,6 +40,7 @@ const VideoScript := preload("res://src/app/video.gd")
 const OptionsAudioScript := preload("res://src/ui/options_audio.gd")
 const ActionsScript := preload("res://src/app/input_actions.gd")
 const PauseScript := preload("res://src/ui/pause_menu.gd")
+const OptionsA11yScript := preload("res://src/ui/options_a11y.gd")
 const OptionsScript := preload("res://src/ui/options_screen.gd")
 const AudioScript := preload("res://src/app/audio.gd")
 const SfxScript := preload("res://src/ui/sfx.gd")
@@ -166,6 +167,7 @@ func _run() -> void:
 	_task_0095_controls()
 	_task_0096_pause()
 	_task_0097_strings()
+	_task_0098_access()
 
 
 func _finish() -> void:
@@ -12437,11 +12439,12 @@ func _task_0082_shots() -> void:
 	# constant, kept on purpose for the same reason the audio group counts
 	# its settings: a scenario arriving without anybody deciding to add one
 	# should be a failing row rather than an extra picture nobody looks at.
-	expect(names.size() == 9,
+	expect(names.size() == 10,
 		"the five scenarios task 0082 names, and one per options tab",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",
-			"options_video", "options_audio", "options_controls"]:
+			"options_access", "options_video", "options_audio",
+			"options_controls"]:
 		expect(names.has(wanted), "there is a '%s' scenario" % wanted)
 
 	# Every one has a builder, so a scenario added to the table and not
@@ -13683,10 +13686,11 @@ func _task_0092_router() -> void:
 	# **The options frame is a seam, and the tabs that exist are the tabs it
 	# shows.** Same rule as the title menu's, one level down; tasks 0093 to
 	# 0095 are what register them.
-	expect(OptionsScript.TABS.size() == 4,
-		"there is room for the game, video, audio and controls",
+	expect(OptionsScript.TABS.size() == 5,
+		"there is room for the game, access, video, audio and controls",
 		str(OptionsScript.TABS))
-	for wanted in [&"game", &"video", &"audio", &"controls"]:
+	for wanted in [&"game", &"access", &"video", &"audio",
+			&"controls"]:
 		expect(OptionsScript.TABS.has(wanted),
 			"'%s' has a place on the strip" % wanted)
 
@@ -13695,7 +13699,7 @@ func _task_0092_router() -> void:
 	# script alone - but a screen naming another screen's node is what this
 	# task exists to remove.
 	var allowed := ["/root/App", "/root/Settings", "/root/Audio",
-		"/root/Video", "/root/Actions"]
+		"/root/Video", "/root/Actions", "/root/Access"]
 	var reaching: Array = []
 	var folder := DirAccess.open("res://src/ui/")
 	if folder != null:
@@ -14469,4 +14473,124 @@ func _task_0097_strings() -> void:
 	expect(String(SettingsScript.DEFAULTS[&"gameplay/language"]) == "en",
 		"and it ships in English",
 		str(SettingsScript.DEFAULTS[&"gameplay/language"]))
+	_completed += 1
+## 0098 - the settings that decide whether somebody can play at all.
+func _task_0098_access() -> void:
+	# **Every damage type is identifiable in greyscale**, which is the
+	# done-when - and it is answered by a shape rather than by a promise
+	# about a colour.
+	expect(A11y.distinct_marks(),
+		"the three damage types wear three different marks",
+		str(A11y.MARKS))
+	for type in [GameData.DAMAGE_IMPACT, GameData.DAMAGE_FIRE,
+			GameData.DAMAGE_EXPLOSIVE]:
+		expect(A11y.mark_of(type) != "",
+			"'%s' has one" % type, A11y.mark_of(type))
+		expect(A11y.mark_of(type).length() == 1,
+			"and it is one character, not a word", A11y.mark_of(type))
+
+	# The colour still differs as well, for everybody who can see it.
+	var tints: Dictionary = {}
+	for type in JuiceScript.TYPE_COLOURS:
+		var named: StringName = JuiceScript.TYPE_COLOURS[type]
+		expect(not tints.has(named),
+			"and '%s' is still its own colour too" % type, String(named))
+		tints[named] = true
+
+	# **The numbers the screen offers, and nothing off the end of them.**
+	expect(is_equal_approx(float(A11y.SLOWS[0]), 1.0),
+		"the game ships at its own speed", str(A11y.SLOWS[0]))
+	for one in A11y.SLOWS:
+		expect(float(one) > 0.0 and float(one) <= 1.0,
+			"and every other speed is slower, not faster", str(one))
+	expect(is_equal_approx(float(A11y.SCALES[0]), 1.0),
+		"the picture ships at its own size", str(A11y.SCALES[0]))
+	expect(is_equal_approx(A11y.nearest(0.62, A11y.SLOWS), 0.5),
+		"a number off the end of the list is snapped onto it",
+		"%.2f" % A11y.nearest(0.62, A11y.SLOWS))
+	expect(is_equal_approx(A11y.nearest(-4.0, A11y.SCALES), 1.0),
+		"including a hand-edited one that makes no sense",
+		"%.2f" % A11y.nearest(-4.0, A11y.SCALES))
+
+	# **Every setting this screen names is a setting that exists**, and every
+	# one that exists is on the screen. Two lists that have to agree.
+	var shown: Array = []
+	for row in OptionsA11yScript.ROWS:
+		shown.append(String((row as Array)[0]))
+	for key in A11y.KEYS:
+		expect(SettingsScript.DEFAULTS.has(key),
+			"'%s' is a setting" % key)
+		expect(shown.has(String(key)), "and it is on the access tab" % [])
+	for key in SettingsScript.DEFAULTS:
+		if not str(key).begins_with("a11y/"):
+			continue
+		expect(A11y.KEYS.has(key),
+			"and '%s' has not been left off it" % key)
+
+	# **High contrast is brighter, role by role.** Not a second palette - the
+	# same names, picked so nothing is darker than it was.
+	var dimmest_now := 2.0
+	var dimmest_high := 2.0
+	for role in UiKit.ROLES:
+		var plain: Color = PaletteData.COLOURS[UiKit.ROLES[role]]
+		var high: Color = PaletteData.COLOURS[UiKit.CONTRAST_ROLES[role]]
+		expect(high.get_luminance() >= plain.get_luminance() - 0.001,
+			"'%s' is no darker in high contrast" % role,
+			"%.2f against %.2f" % [high.get_luminance(),
+				plain.get_luminance()])
+		dimmest_now = minf(dimmest_now, plain.get_luminance())
+		dimmest_high = minf(dimmest_high, high.get_luminance())
+	expect(dimmest_high > dimmest_now,
+		"and the dimmest thing on the screen is brighter than it was",
+		"%.2f against %.2f" % [dimmest_high, dimmest_now])
+	expect(UiKit.CONTRAST_ROLES.size() == UiKit.ROLES.size(),
+		"with a role for every role", "%d against %d"
+		% [UiKit.CONTRAST_ROLES.size(), UiKit.ROLES.size()])
+
+	# ---- the done-when with the hash in it
+
+	# **A slower game is the same game.** Two drivers on one seed: one at
+	# full speed for two hundred and forty frames, one at half for four
+	# hundred and eighty. Same ticks, same order, same hash - because what
+	# `a11y/slow` scales is the budget, which is real seconds, and the rules
+	# do not measure themselves in real seconds.
+	var settings: Node = root.get_node_or_null(^"Settings")
+	if settings == null:
+		expect(false, "the settings autoload is under root")
+		_completed += 1
+		return
+	settings.reset(&"a11y/slow")
+	var frame := 1.0 / 60.0
+	var quick: SimDriver = SimDriver.new()
+	quick.start(0x0098)
+	for i in 240:
+		quick._process(frame)
+
+	settings.set_value(&"a11y/slow", 0.5)
+	var slow: SimDriver = SimDriver.new()
+	slow.start(0x0098)
+	for i in 480:
+		slow._process(frame)
+	expect(int(slow.state["tick"]) == int(quick.state["tick"]),
+		"twice the seconds at half the speed is the same number of ticks",
+		"%d against %d" % [int(slow.state["tick"]),
+			int(quick.state["tick"])])
+	expect(State.hash_of(slow.state) == State.hash_of(quick.state),
+		"and the same night, which is what the determinism hash is for",
+		"%d against %d" % [State.hash_of(slow.state),
+			State.hash_of(quick.state)])
+
+	# Half as many ticks in the same time, which is the point of it.
+	var halved: SimDriver = SimDriver.new()
+	halved.start(0x0098)
+	for i in 240:
+		halved._process(frame)
+	expect(int(halved.state["tick"]) * 2 == int(quick.state["tick"]),
+		"and half the ticks in the same time",
+		"%d against %d" % [int(halved.state["tick"]),
+			int(quick.state["tick"])])
+	quick.free()
+	slow.free()
+	halved.free()
+	settings.reset()
 	_completed += 1

@@ -71,6 +71,14 @@ func _take_speed() -> void:
 		set_speed(int(settings.get_int(&"gameplay/night_speed")))
 
 
+## How much of a second of real time counts as a second of game.
+func _slowness() -> float:
+	var settings := _settings()
+	if settings == null:
+		return 1.0
+	return A11y.nearest(float(settings.get_float(&"a11y/slow")), A11y.SLOWS)
+
+
 ## `Settings`, asked of the engine rather than of this node.
 ##
 ## **`get_node_or_null("/root/Settings")` errors from a node that is not in a
@@ -146,7 +154,11 @@ func _process(delta: float) -> void:
 		last_ticks = 0
 		last_usec = 0
 		return
-	var owed: Array = Sim.ticks_for(_accumulator, delta)
+	# **The budget is scaled, never the rate.** `a11y/slow` says how much of
+	# a second of real time counts as a second of game; the ticks that run
+	# are the same ticks in the same order, there are just fewer of them a
+	# second. Which is why the determinism hash cannot tell.
+	var owed: Array = Sim.ticks_for(_accumulator, delta * _slowness())
 	_accumulator = owed[1]
 	var ticks: int = int(owed[0]) * maxi(speed, 1)
 	last_ticks = ticks

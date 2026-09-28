@@ -20,13 +20,15 @@ extends Control
 
 ## What the strip can hold, in the order the tabs belong in. A task that
 ## builds one registers under its own name.
-const TABS: Array = [&"game", &"video", &"audio", &"controls"]
+const TABS: Array = [&"game", &"access", &"video", &"audio",
+	&"controls"]
 
 ## What each is called on the strip. Not the tab's own name upper-cased:
 ## "CONTROLS" is "CONTROLES" in Portuguese and an upper-cased `controls` is
 ## not.
 const TAB_NAMES: Dictionary = {
 	&"game": &"OPT_TAB_GAME",
+	&"access": &"OPT_TAB_ACCESS",
 	&"video": &"OPT_TAB_VIDEO",
 	&"audio": &"OPT_TAB_AUDIO",
 	&"controls": &"OPT_TAB_CONTROLS",
@@ -85,6 +87,10 @@ func _ready() -> void:
 	var game := OptionsGame.new()
 	game.name = "OptionsGame"
 	register(&"game", game)
+
+	var access := OptionsA11y.new()
+	access.name = "OptionsA11y"
+	register(&"access", access)
 
 	var video := OptionsVideo.new()
 	video.name = "OptionsVideo"

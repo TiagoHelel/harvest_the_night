@@ -1,7 +1,7 @@
 # 0098 - Accessibility
 
 - **Phase:** 7 - Shell and product
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0093, 0097
 - **Likely files:** src/app/a11y.gd, src/ui/options_a11y.gd
 

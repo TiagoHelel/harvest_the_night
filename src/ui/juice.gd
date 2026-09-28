@@ -103,6 +103,11 @@ var _n_at: PackedVector2Array = PackedVector2Array()
 var _n_amount: PackedInt32Array = PackedInt32Array()
 var _n_left: PackedFloat32Array = PackedFloat32Array()
 var _n_tint: PackedColorArray = PackedColorArray()
+
+## **The mark that survives greyscale.** A colour-blind player and a bad
+## monitor see the same three numbers; a `+`, a `^` and a `*` are three
+## different shapes to everybody. Task 0098.
+var _n_mark: PackedStringArray = PackedStringArray()
 var _n_next := 0
 
 ## The corpse pool.
@@ -131,6 +136,7 @@ func arm() -> void:
 	_n_amount.resize(MAX_NUMBERS)
 	_n_left.resize(MAX_NUMBERS)
 	_n_tint.resize(MAX_NUMBERS)
+	_n_mark.resize(MAX_NUMBERS)
 	_c_at.resize(MAX_CORPSES)
 	_c_left.resize(MAX_CORPSES)
 	_c_kind.resize(MAX_CORPSES)
@@ -336,6 +342,7 @@ func _number(at: Vector2, amount: int, type: StringName) -> void:
 	_n_amount[slot] = amount
 	_n_left[slot] = NUMBER_SECONDS
 	_n_tint[slot] = _colour_of(type)
+	_n_mark[slot] = A11y.mark_of(type)
 
 
 func _corpse(at: Vector2, kind: StringName) -> void:
@@ -409,7 +416,7 @@ func _draw() -> void:
 		var tint: Color = _n_tint[i]
 		tint.a = 1.0 - gone * gone
 		var at := to_screen * _n_at[i] - Vector2(0.0, NUMBER_RISE * gone)
-		var text := str(_n_amount[i])
+		var text := str(_n_amount[i]) + _n_mark[i]
 		var wide := font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1,
 			UiKit.FONT_SIZE).x
 		draw_string(font, (at - Vector2(wide * 0.5, 0.0)).round(), text,
