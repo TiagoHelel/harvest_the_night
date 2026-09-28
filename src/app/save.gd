@@ -42,6 +42,28 @@ const _FNV_OFFSET := 2166136261
 const _FNV_PRIME := 16777619
 const _MASK := 0xFFFFFFFF
 
+## Why the last read of a run did not produce one, as a string key, or `&""`.
+##
+## **A file that will not load is not the same as no file at all**, and the
+## title screen has to be able to tell them apart: one of them means CONTINUE
+## is absent because there is nothing to continue, and the other means
+## somebody's run is sitting on the disk unreadable and they deserve to be
+## told rather than quietly given a new farm.
+static var _trouble: StringName = &""
+
+## And what the trouble was about, for the log and for a check.
+static var _trouble_detail := ""
+
+## The trouble a save can be in. Each is a string key with a line behind it.
+const NO_SAVE := &""
+const TOO_SHORT := &"SAVE_TOO_SHORT"
+const NOT_OURS := &"SAVE_NOT_OURS"
+const TRUNCATED := &"SAVE_TRUNCATED"
+const DAMAGED := &"SAVE_DAMAGED"
+const FROM_THE_FUTURE := &"SAVE_FROM_THE_FUTURE"
+const NO_MIGRATION := &"SAVE_NO_MIGRATION"
+const NOT_A_SAVE := &"SAVE_NOT_A_SAVE"
+
 
 ## What a player who has never finished anything has.
 ##
@@ -67,21 +89,91 @@ static func has_run() -> bool:
 ## Write the game in progress. The state is already plain data, so this is the
 ## whole of it plus a wrapper.
 static func write_run(state: Dictionary) -> bool:
-	return _write(RUN_PATH, {"state": state})
+	return write_run_at(RUN_PATH, state)
+
+
+## The same, somewhere else. `tools/goldens/` is the only other caller: a
+## golden save has to be a real one, written by the real writer, or it tests
+## the check and not the game.
+static func write_run_at(path: String, state: Dictionary) -> bool:
+	return _write(path, {"state": state})
 
 
 ## Read the game in progress, or an empty Dictionary when there is not one, or
 ## when the file is damaged. **Never crashes and never half-loads**: a bad file
 ## leaves the caller with nothing, which it can tell from a good one.
 static func read_run() -> Dictionary:
-	var payload := _read(RUN_PATH)
+	return read_run_at(RUN_PATH)
+
+
+## Read a run from somewhere else, through every step the real one takes -
+## the header, the checksum, the migrations and the reconcile. The golden
+## saves are loaded with this, so what is checked is the road a player's save
+## travels and not a shorter one built for the check.
+static func read_run_at(path: String) -> Dictionary:
+	var payload := _read(path)
 	if payload.is_empty():
 		return {}
 	var state: Dictionary = payload.get("state", {})
 	if state.is_empty() or not state.has("tick"):
-		push_warning("Save: %s parsed but holds no game" % RUN_PATH)
-		return {}
+		return _no(NOT_A_SAVE, "%s parsed but holds no game" % path)
+
+	# **The numbered migrations first, then the shape.** A migration is
+	# written against the shape of the version it starts from, so a
+	# reconcile that ran before it would hand it a state with this build's
+	# keys in and the migration would be reading the wrong thing.
+	var was := int(state.get("version", 1))
+	if was > State.VERSION:
+		return _no(FROM_THE_FUTURE,
+			"the run is state %d and this build knows %d"
+				% [was, State.VERSION])
+	if was < State.VERSION:
+		var brought := step_up(state, was, State.VERSION, migrations())
+		if brought.is_empty():
+			return _no(NO_MIGRATION,
+				"nothing brings a state %d run up to %d"
+					% [was, State.VERSION])
+		state = brought
+
+	# **And then the shape, every time, not only when the version moved.**
+	# Most of what changes about a save never bumps a version: a subsystem
+	# arrives, a resource is added, a field appears on a structure. Those are
+	# not a migration, they are a new game having a key this one does not.
+	for note in State.reconcile(state):
+		push_warning("Save: %s" % note)
+	state["version"] = State.VERSION
 	return state
+
+
+## Whether there is a run worth offering to continue.
+##
+## Not `has_run()`, which only says a file exists. A save that cannot be read
+## must not put CONTINUE on the title screen: a button that throws away the
+## run it offered to resume is worse than no button.
+static func can_continue() -> bool:
+	return not read_run().is_empty()
+
+
+## Why the last read failed, as a string key, or `&""` when it did not fail
+## or there was nothing to read.
+static func trouble() -> StringName:
+	return _trouble
+
+
+## The same thing in a sentence, for the log.
+static func trouble_detail() -> String:
+	return _trouble_detail
+
+
+## Refuse, remember why, and say it once. **The file is never removed**: a
+## save this build cannot read is a save a later build may well be able to,
+## and deleting somebody's run because we did not understand it is the one
+## thing this module must not do.
+static func _no(which: StringName, why: String) -> Dictionary:
+	_trouble = which
+	_trouble_detail = why
+	push_warning("Save: %s" % why)
+	return {}
 
 
 static func delete_run() -> void:
@@ -148,6 +240,8 @@ static func _write(path: String, payload: Dictionary) -> bool:
 ## reason: missing, too short, wrong magic, wrong length, bad checksum, or a
 ## payload that will not decode.
 static func _read(path: String) -> Dictionary:
+	_trouble = NO_SAVE
+	_trouble_detail = ""
 	if not FileAccess.file_exists(path):
 		return {}
 	var f := FileAccess.open(path, FileAccess.READ)
@@ -160,12 +254,10 @@ static func _read(path: String) -> Dictionary:
 
 	const HEADER := 16
 	if raw.size() < HEADER:
-		push_warning("Save: %s is %d bytes, too short to be a save"
+		return _no(TOO_SHORT, "%s is %d bytes, too short to be a save"
 			% [path, raw.size()])
-		return {}
 	if raw.slice(0, 4).get_string_from_ascii() != MAGIC:
-		push_warning("Save: %s is not a %s save file" % [path, MAGIC])
-		return {}
+		return _no(NOT_OURS, "%s is not a %s save file" % [path, MAGIC])
 
 	var version := _read_u32(raw, 4)
 	var length := _read_u32(raw, 8)
@@ -173,43 +265,88 @@ static func _read(path: String) -> Dictionary:
 	var body := raw.slice(HEADER)
 
 	if body.size() != length:
-		push_warning("Save: %s claims %d bytes of payload and has %d - it was "
-			% [path, length, body.size()] + "truncated")
-		return {}
+		return _no(TRUNCATED,
+			"%s claims %d bytes of payload and has %d - it was truncated"
+				% [path, length, body.size()])
 	if checksum(body) != sum:
-		push_warning("Save: %s is damaged - the checksum does not match" % path)
-		return {}
+		return _no(DAMAGED,
+			"%s is damaged - the checksum does not match" % path)
 
 	if version > FORMAT_VERSION:
-		push_warning("Save: %s is format %d and this build understands %d"
-			% [path, version, FORMAT_VERSION])
-		return {}
+		return _no(FROM_THE_FUTURE,
+			"%s is format %d and this build understands %d"
+				% [path, version, FORMAT_VERSION])
 
 	var payload: Variant = bytes_to_var(body)
 	if typeof(payload) != TYPE_DICTIONARY:
-		push_warning("Save: %s decoded to a %s, not a save"
+		return _no(NOT_A_SAVE, "%s decoded to a %s, not a save"
 			% [path, type_string(typeof(payload))])
-		return {}
 
 	if version < FORMAT_VERSION:
 		payload = _migrate(payload, version)
+		if (payload as Dictionary).is_empty():
+			return _no(NO_MIGRATION,
+				"nothing brings a format %d file up to %d"
+					% [version, FORMAT_VERSION])
 	return payload
 
 
-## Bring an older file forward, one step per version, in order.
+## Bring an older **file** forward. The envelope, not what is inside it.
 ##
-## Nothing to do yet - there has only ever been format 1 - but the shape is
-## here so the first change has one obvious place to go, and `headless_check`
-## already covers the from-the-future and the too-old paths.
+## Nothing to do yet - there has only ever been format 1, because the header
+## and the encoding have not changed. What changes is the state, and that
+## goes through `migrations()` and `State.reconcile()` in `read_run()`.
 static func _migrate(payload: Dictionary, from_version: int) -> Dictionary:
+	return step_up(payload, from_version, FORMAT_VERSION, file_migrations())
+
+
+## One `Callable` per version bump, keyed by the version it starts from.
+##
+## `migrations()[3]` takes a state written by a build whose `State.VERSION`
+## was 3 and returns one a build with version 4 understands. It does not have
+## to fill in new keys - `State.reconcile()` does that for every load - only
+## the things filling in cannot express.
+##
+## **Empty, and that is the honest answer.** The state has been version 1 for
+## the whole of this project. The driver under it is not empty, and is
+## checked against a table `headless_check` supplies, because the moment
+## there is a real migration is the worst moment to find out the machinery
+## that runs them was never exercised.
+static func migrations() -> Dictionary:
+	return {}
+
+
+## And the same for the file format.
+static func file_migrations() -> Dictionary:
+	return {}
+
+
+## Apply `table`'s migrations in order from `from_version` to `to_version`.
+##
+## Returns the brought-forward payload, or an **empty Dictionary** when there
+## is a gap: a version with nothing to take it to the next one cannot be
+## loaded, and guessing is how a save gets quietly corrupted instead of
+## honestly refused.
+##
+## A pure function of its arguments, which is the point - `headless_check`
+## drives it with a table of its own and watches the steps happen in order,
+## so the driver is proven before anything depends on it.
+static func step_up(payload: Dictionary, from_version: int, to_version: int,
+		table: Dictionary) -> Dictionary:
+	var carried := payload
 	var v := from_version
-	while v < FORMAT_VERSION:
-		match v:
-			_:
-				push_warning("Save: no migration from format %d, keeping what "
-					% v + "this build recognises")
+	while v < to_version:
+		if not table.has(v):
+			push_warning("Save: no migration from version %d" % v)
+			return {}
+		var step: Callable = table[v]
+		var next: Variant = step.call(carried)
+		if typeof(next) != TYPE_DICTIONARY or (next as Dictionary).is_empty():
+			push_warning("Save: the migration from version %d gave nothing" % v)
+			return {}
+		carried = next
 		v += 1
-	return payload
+	return carried
 
 
 ## FNV-1a over the payload. Enough to catch truncation, a flipped bit and a

@@ -41,7 +41,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 58
+const CASES := 59
 
 ## The pixels two pieces of text in one row must have between them. Two is
 ## the width of the gap inside a letter at this size, so anything less reads
@@ -139,6 +139,7 @@ func _run() -> void:
 	await _case_0099_ident()
 	await _case_0100_version()
 	await _case_0103_crash()
+	await _case_0104_saves()
 	_finish()
 
 
@@ -252,6 +253,94 @@ func _empty_the_crash_folder() -> void:
 	for name in DirAccess.get_directories_at(Crash.DIR):
 		var inner := Crash.DIR.path_join(String(name))
 		Crash.erase(inner)
+
+
+## 0104 - a save that will not load, on the title screen.
+func _case_0104_saves() -> void:
+	_forget_any_loaded_scene()
+
+	# **A readable run first**, so the difference is the save and not the
+	# screen: CONTINUE is there, and nothing is being complained about.
+	var state := State.create(104105)
+	Sim.advance(state, 900)
+	Save.write_run(state)
+	await open_scene("res://scenes/Title.tscn")
+	await frames(3)
+	var title: TitleScreen = _scene as TitleScreen
+	var router: Node = root.get_node_or_null(^"App")
+	router.goto(router.MENU)
+	await frames(3)
+	expect(locate_control("Menu_continue") != null,
+		"a run that loads puts CONTINUE on the menu")
+	expect(title.trouble_says() == "",
+		"and the title has nothing to complain about",
+		title.trouble_says())
+	await close_scene()
+
+	# **Now the same file, written by a build that does not exist yet.**
+	# This is the one that matters: the file is fine, the game is fine, and
+	# this build simply cannot read that run.
+	_forget_any_loaded_scene()
+	state["version"] = State.VERSION + 1
+	Save.write_run(state)
+	expect(Save.has_run(), "the file is on the disk")
+	await open_scene("res://scenes/Title.tscn")
+	await frames(3)
+	title = _scene as TitleScreen
+	router = root.get_node_or_null(^"App")
+	router.goto(router.MENU)
+	await frames(3)
+
+	expect(locate_control("Menu_continue") == null,
+		"a run that does not load takes CONTINUE away")
+	expect(locate_control("Menu_new") != null,
+		"and NEW GAME is still there, which is the way out")
+
+	var says := title.trouble_says()
+	expect(says != "", "the title says why", says)
+	expect(says.contains(I18n.t(&"SAVE_UNREADABLE")),
+		"that the run could not be read", says)
+	expect(says.contains(I18n.t(&"SAVE_FROM_THE_FUTURE")),
+		"and which of the reasons it was", says)
+	expect(says.contains(I18n.t(&"SAVE_KEPT")),
+		"and that the file is still there", says)
+
+	# The frame, not the words: since the picture was looked at, the notice
+	# is a `PanelContainer` with a `Label` on it rather than orange text over
+	# a farm.
+	var panel: Control = locate_control("SaveTrouble") as Control
+	expect(panel != null and panel.visible, "and it is on the screen")
+	expect(panel == null or panel.get_global_rect().end.y
+		<= float(root.get_visible_rect().size.y),
+		"rather than off the bottom of it",
+		str(panel.get_global_rect()) if panel != null else "")
+	var words: Label = locate_control("SaveTroubleText") as Label
+	expect(words != null and words.text == says,
+		"with the sentence on it and not beside it")
+
+	# **And the file really was kept**, which is the promise underneath the
+	# sentence. A player pressing NEW GAME is choosing to lose it; the game
+	# has not chosen for them.
+	expect(Save.has_run(), "the save this build cannot read is still there")
+	await close_scene()
+
+	# The notice goes when the trouble does.
+	_forget_any_loaded_scene()
+	state["version"] = State.VERSION
+	Save.write_run(state)
+	await open_scene("res://scenes/Title.tscn")
+	await frames(3)
+	title = _scene as TitleScreen
+	router = root.get_node_or_null(^"App")
+	router.goto(router.MENU)
+	await frames(3)
+	expect(title.trouble_says() == "", "a readable run says nothing",
+		title.trouble_says())
+	expect(locate_control("Menu_continue") != null, "and CONTINUE is back")
+	await close_scene()
+
+	Save.delete_run()
+	_completed += 1
 
 
 func _finish() -> void:

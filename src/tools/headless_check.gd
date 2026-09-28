@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 95
+const GROUPS := 96
 
 const SettingsScript := preload("res://src/app/settings.gd")
 const AppScript := preload("res://src/app/app.gd")
@@ -173,6 +173,7 @@ func _run() -> void:
 	_task_0100_release()
 	_task_0102_budget()
 	_task_0103_crash()
+	_task_0104_saves()
 
 
 ## 0102 - the performance budget.
@@ -523,6 +524,310 @@ func _clear_crash_folder() -> void:
 	for name in DirAccess.get_directories_at(Crash.DIR):
 		var inner := Crash.DIR.path_join(String(name))
 		Crash.erase(inner)
+
+
+## 0104 - saves survive an update.
+func _task_0104_saves() -> void:
+	# ------------------------------------------- the two lists cover the state
+
+	# **A new subsystem has to say which it is.** The whole reconcile rests on
+	# knowing whose keys are whose, and a nested dictionary nobody classified
+	# is one that gets either rebuilt or abandoned by accident.
+	var fresh := State.create(104001)
+	var nested := State.nested_in(fresh)
+	var unclassified: Array = []
+	var twice: Array = []
+	for named in nested:
+		var in_tables := State.TABLES.has(named)
+		var in_run := State.RUN_DATA.has(named)
+		if not in_tables and not in_run:
+			unclassified.append(named)
+		if in_tables and in_run:
+			twice.append(named)
+	expect(unclassified.is_empty(),
+		"every nested dictionary is either a table or the run's own",
+		"unclassified: %s" % str(unclassified))
+	expect(twice.is_empty(), "and none of them is both", str(twice))
+
+	var absent: Array = []
+	for named in State.TABLES + State.RUN_DATA:
+		if not nested.has(String(named)):
+			absent.append(String(named))
+	expect(absent.is_empty(),
+		"and nothing is named that a state does not have", str(absent))
+	expect(State.RUN_DATA.has("occupants"),
+		"what is standing on the farm is the run's own, not a table")
+
+	# **Playing invents no keys.** The whole reconcile rests on
+	# `State.create()` describing every key a valid state can hold, and
+	# task 0104 found `Livestock` quietly creating two of them the first
+	# time it ran - so an old save being compared against a new game had
+	# them dropped as keys this build no longer had. Caching against a
+	# version is fine; doing it in a key nobody declared is not.
+	var played := State.create(104004)
+	Resources.gain(played, {GameData.WOOD: 600, GameData.STONE: 600,
+		GameData.MONEY: 600, GameData.CORN: 300})
+	Sim.advance(played, 900)
+	Phases.begin_preparation(played)
+	Sim.advance(played, GameData.PREPARATION_TICKS)
+	Sim.advance(played, 3000)
+	Sim.advance(played, 600)
+	var invented: Array = []
+	for key in played:
+		if not fresh.has(key):
+			invented.append(str(key))
+	invented.sort()
+	expect(invented.is_empty(),
+		"a day and a night invent no keys a new game does not have",
+		str(invented))
+	var lost: Array = []
+	for key in fresh:
+		if not played.has(key):
+			lost.append(str(key))
+	lost.sort()
+	expect(lost.is_empty(), "and lose none of them either", str(lost))
+
+	# ------------------------------------ a current save is not a save to mend
+
+	# **The one that matters most.** A reconcile that quietly rewrites today's
+	# state would move the determinism hash on one machine and not the next.
+	var before := State.hash_of(fresh)
+	var quiet := State.reconcile(fresh)
+	expect(quiet.is_empty(),
+		"reconciling a state this build wrote changes nothing",
+		str(quiet))
+	expect(State.hash_of(fresh) == before,
+		"and leaves the hash exactly where it was")
+
+	# ------------------------------------------------- and an old one is mended
+
+	var old := State.create(104002)
+	Sim.advance(old, 600)
+	var was_tick := int(old["tick"])
+	var was_wood := Resources.amount(old, GameData.WOOD)
+	var was_standing := (old["occupants"] as Dictionary).size()
+
+	# A build that predates four things, and one that has dropped two.
+	old.erase("events")
+	old.erase("tutorial")
+	(old["held"] as Dictionary).erase("oil")
+	(old["gained"] as Dictionary).erase("oil")
+	(old["ability"] as Dictionary).erase("flares")
+	old["moon_phase"] = 3
+	(old["held"] as Dictionary)["unobtainium"] = 7
+	# And something the player put there, in two places nothing may touch.
+	(old["occupants"] as Dictionary)[9999] = &"a_thing_the_player_built"
+	(old["plots"] as Dictionary)[8888] = {"crop": &"corn"}
+
+	var notes := State.reconcile(old)
+	expect(notes.size() >= 7, "an old save needs mending", str(notes.size()))
+	expect(old.has("events") and old.has("tutorial"),
+		"the keys it predates are filled in")
+	expect(not old.has("moon_phase"),
+		"the key this build no longer has is dropped")
+	expect((old["held"] as Dictionary).has("oil"),
+		"a resource added since is filled in")
+	expect(not (old["held"] as Dictionary).has("unobtainium"),
+		"and one taken away is dropped")
+	expect((old["ability"] as Dictionary).has("flares"),
+		"a field added to a structure is filled in")
+
+	# **A missing key takes the default, which is what a new game has.** Not
+	# nought: a run that never had the chance to gather a thing is not a run
+	# that spent it.
+	expect(int((old["held"] as Dictionary)["oil"])
+		== int(GameData.STARTING_RESOURCES.get(GameData.OIL, 0)),
+		"and what it is filled in with is what a new game starts with",
+		str((old["held"] as Dictionary)["oil"]))
+	expect(int((old["gained"] as Dictionary)["oil"]) == 0,
+		"while what was earned of it is nought, because none of it was")
+
+	# **And nothing the player did is touched.** This is the `occupants` trap
+	# written down as an assert: those keys are cell numbers a player made,
+	# and a reconcile that treated them as a table would take a farm apart.
+	expect((old["occupants"] as Dictionary).has(9999),
+		"what the player built is still standing")
+	expect((old["plots"] as Dictionary).has(8888),
+		"and what they sowed is still sown")
+	expect(int(old["tick"]) == was_tick, "the run is where it was")
+	expect(Resources.amount(old, GameData.WOOD) == was_wood,
+		"with the wood they had")
+	expect((old["occupants"] as Dictionary).size() == was_standing + 1,
+		"and nothing else added or taken away",
+		str((old["occupants"] as Dictionary).size()))
+
+	# The mended state is exactly this build's shape, and it plays.
+	var shape_now := State.nested_in(old)
+	expect(shape_now == nested, "it is this build's shape now")
+	var ticked := int(old["tick"])
+	Sim.advance(old, 300)
+	expect(int(old["tick"]) == ticked + 300, "and it advances like any other")
+
+	# ------------------------------------------------- migrations, in order
+
+	# **The driver is exercised with a table of its own**, because the real
+	# one is empty - the state has been version 1 for the whole project - and
+	# the moment there is a first real migration is the worst moment to find
+	# out the thing that runs them never ran.
+	_migration_steps = []
+	var table := {
+		1: _a_migration.bind(1),
+		2: _a_migration.bind(2),
+		3: _a_migration.bind(3),
+	}
+	var carried := Save.step_up({"n": 0}, 1, 4, table)
+	expect(_migration_steps == [1, 2, 3],
+		"migrations run in order, one per version",
+		str(_migration_steps))
+	expect(int(carried.get("n", -1)) == 3,
+		"and each one is handed what the last one gave it",
+		str(carried))
+
+	_migration_steps = []
+	expect(Save.step_up({"n": 0}, 1, 1, table).has("n"),
+		"a save that is already current runs none of them")
+	expect(_migration_steps.is_empty(), "and is handed straight back")
+
+	# **A gap is a refusal, not a guess.** Loading a version nothing brings
+	# forward and hoping is how a save gets quietly corrupted.
+	expect(Save.step_up({"n": 0}, 1, 4, {1: _a_migration.bind(1)}).is_empty(),
+		"a missing step refuses the whole thing")
+	expect(Save.step_up({"n": 0}, 1, 2,
+		{1: _a_bad_migration}).is_empty(),
+		"and so does a step that gives nothing back")
+	expect(Save.migrations().is_empty(),
+		"there are no real migrations yet, and the table says so")
+
+	# ------------------------------------------------ every golden loads and plays
+
+	var goldens := _goldens()
+	expect(goldens.size() >= 3, "there are golden saves in the repository",
+		str(goldens.size()))
+	for path in goldens:
+		var name := String(path).get_file()
+
+		var loaded := Save.read_run_at(String(path))
+		expect(not loaded.is_empty(), "%s loads" % name,
+			String(Save.trouble()))
+		if loaded.is_empty():
+			continue
+		expect(State.nested_in(loaded) == nested,
+			"%s comes out this build's shape" % name)
+		var missing: Array = []
+		for key in fresh:
+			if not loaded.has(key):
+				missing.append(str(key))
+		missing.sort()
+		expect(missing.is_empty(), "%s has every key a new game has" % name,
+			str(missing))
+
+		# **And plays**, which is the done-when and is not the same question.
+		var at := int(loaded["tick"])
+		Sim.advance(loaded, 600)
+		expect(int(loaded["tick"]) == at + 600, "%s plays on" % name)
+		expect(int(loaded["day"]) >= 1 and int(loaded["seed"]) != 0,
+			"%s is a run and not an empty state" % name)
+		expect((loaded["occupants"] as Dictionary).size() > 106,
+			"%s is a farm somebody built on" % name,
+			str((loaded["occupants"] as Dictionary).size()))
+
+	# **The old golden really is old.** Read underneath `read_run_at`, which
+	# would have mended it on the way past: a fixture that quietly stopped
+	# being the shape it is named for is a check that passes for nothing.
+	var older := _payload_of("res://tools/goldens/run-v%d-older.sav"
+		% State.VERSION)
+	expect(not older.is_empty(), "the older golden decodes")
+	if not older.is_empty():
+		var raw: Dictionary = older.get("state", {})
+		expect(not raw.has("events"),
+			"and it really is missing what it says it predates")
+		expect(not (raw.get("held", {}) as Dictionary).has("oil"),
+			"including a resource inside a table")
+	var newer := _payload_of("res://tools/goldens/run-v%d-newer.sav"
+		% State.VERSION)
+	var raw_new: Dictionary = newer.get("state", {})
+	expect(raw_new.has("moon_phase"),
+		"and the newer one really has a key this build does not")
+
+	# ------------------------------- a save that cannot be read says which, and stays
+
+	var kept := State.create(104003)
+	Sim.advance(kept, 120)
+	kept["version"] = State.VERSION + 1
+	expect(Save.write_run(kept), "a run from a newer build is written")
+	expect(Save.read_run().is_empty(), "and this build refuses it")
+	expect(Save.trouble() == Save.FROM_THE_FUTURE,
+		"saying which kind of refusal it is", String(Save.trouble()))
+	expect(Save.trouble_detail() != "", "with a line about it for the log")
+	expect(Save.has_run(), "**the file is kept**, not deleted")
+	expect(not Save.can_continue(),
+		"and CONTINUE has nowhere to go, so it will not be offered")
+
+	# A good one puts it all back.
+	kept["version"] = State.VERSION
+	Save.write_run(kept)
+	expect(not Save.read_run().is_empty(), "a readable run reads")
+	expect(Save.trouble() == Save.NO_SAVE, "with no trouble reported",
+		String(Save.trouble()))
+	expect(Save.can_continue(), "and CONTINUE has somewhere to go")
+
+	# Each kind of damage names itself, so the title can say which.
+	# **Sixteen bytes before the magic is even looked at.** The first version
+	# of this wrote "NOPE" and expected NOT_OURS; a four byte file is refused
+	# one step earlier than that, for being too short to be a header.
+	for pair in [[Save.NOT_OURS, "NOPEnnnnnnnnnnnnnnnnnnnn"],
+		[Save.TOO_SHORT, "abc"]]:
+		var f := FileAccess.open(Save.RUN_PATH, FileAccess.WRITE)
+		f.store_string(String(pair[1]))
+		f.close()
+		expect(Save.read_run().is_empty(), "a broken save is refused")
+		expect(Save.trouble() == pair[0], "and named",
+			String(Save.trouble()))
+	Save.delete_run()
+	expect(Save.read_run().is_empty(), "no save at all is not a trouble")
+	expect(Save.trouble() == Save.NO_SAVE,
+		"which is how the title tells the two apart", String(Save.trouble()))
+	_completed += 1
+
+
+## Which steps a driven migration ran, in the order it ran them.
+var _migration_steps: Array = []
+
+
+## A migration that records that it happened and counts up.
+func _a_migration(payload: Dictionary, which: int) -> Dictionary:
+	_migration_steps.append(which)
+	var out: Dictionary = payload.duplicate(true)
+	out["n"] = which
+	return out
+
+
+## And one that fails, which is a refusal and not a crash.
+func _a_bad_migration(_payload: Dictionary) -> Dictionary:
+	return {}
+
+
+## Every golden in the repository, sorted.
+func _goldens() -> Array:
+	var found: Array = []
+	if not DirAccess.dir_exists_absolute("res://tools/goldens"):
+		return found
+	for name in DirAccess.get_files_at("res://tools/goldens"):
+		if String(name).ends_with(".sav"):
+			found.append("res://tools/goldens/" + String(name))
+	found.sort()
+	return found
+
+
+## A save's payload with nothing done to it - no migration, no reconcile.
+func _payload_of(path: String) -> Dictionary:
+	if not FileAccess.file_exists(path):
+		return {}
+	var raw := FileAccess.get_file_as_bytes(path)
+	if raw.size() < 16:
+		return {}
+	var value: Variant = bytes_to_var(raw.slice(16))
+	return value if value is Dictionary else {}
 
 
 func _finish() -> void:

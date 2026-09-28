@@ -235,6 +235,7 @@ func _take_the_front(folder: String) -> void:
 	root.remove_child(title)
 	title.free()
 	await _take_the_crash(folder)
+	await _take_the_save_trouble(folder)
 
 
 ## And the crash dialogue, which lives on the title screen.
@@ -272,6 +273,49 @@ func _say_it_in(scene: Node) -> void:
 		return
 	I18n.use(_speaking)
 	I18n.relabel(scene)
+
+
+## And the title with a saved run on the disk that this build cannot read.
+##
+## **The player's own save is put back afterwards.** This has to write
+## `user://run.sav` to make the picture, and the machine taking the picture
+## is somebody's machine with somebody's farm on it.
+func _take_the_save_trouble(folder: String) -> void:
+	BootIdent.played()
+	var theirs := PackedByteArray()
+	if FileAccess.file_exists(Save.RUN_PATH):
+		theirs = FileAccess.get_file_as_bytes(Save.RUN_PATH)
+
+	var state := State.create(SEED)
+	Sim.advance(state, 1800)
+	state["version"] = State.VERSION + 1
+	Save.write_run(state)
+
+	var title: Node = load("res://scenes/Title.tscn").instantiate()
+	root.add_child(title)
+	await process_frame
+	_say_it_in(title)
+	var router := _router()
+	if router != null:
+		router.goto(router.MENU)
+	for _i in SETTLE:
+		await process_frame
+	await _shoot("save_trouble", folder)
+	root.remove_child(title)
+	title.free()
+
+	if theirs.is_empty():
+		Save.delete_run()
+	else:
+		var f := FileAccess.open(Save.RUN_PATH, FileAccess.WRITE)
+		if f != null:
+			f.store_buffer(theirs)
+			f.close()
+
+
+## The router, asked of the engine rather than of this script.
+func _router() -> Node:
+	return root.get_node_or_null(^"App")
 
 
 func _find(node: Node, named: String) -> Node:

@@ -28,6 +28,18 @@ static func initial() -> Dictionary:
 		# {animal cell index: {"ready": units waiting, "left": ticks to the
 		# next one}}
 		"livestock": {},
+		# **The cache below, declared rather than invented.** `_animals()`
+		# used to create these two the first time it ran, which made them
+		# keys a played state had and a new one did not - and task 0104's
+		# reconcile, which mends an old save by comparing it against a new
+		# game, dropped them both as keys this build no longer has. A state
+		# whose shape is not knowable from `State.create()` breaks the
+		# premise the save, the hash and the diff all rest on.
+		#
+		# `-1` is the sentinel `_animals()` already used, so this changes no
+		# behaviour: the first call still finds a mismatch and rebuilds.
+		"livestock_version": -1,
+		"livestock_cells": [],
 	}
 
 

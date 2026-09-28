@@ -13,10 +13,44 @@ extends RefCounted
 ## `state.tick`, so a typo is a missing key at the call site instead of a silent
 ## new one.
 
-## Bumped whenever the shape changes. Task 0010 hangs the save migrations off
-## it; until then it exists so that the first save has something to migrate
-## from.
+## Bumped whenever the shape changes in a way `reconcile()` cannot mend.
+##
+## **Two version numbers, because there are two questions.**
+## `Save.FORMAT_VERSION` is about the file - the magic, the header, how the
+## bytes are encoded - and `VERSION` is about what is inside it. A new
+## subsystem, a new resource or a new field on an existing one does not bump
+## this: `reconcile()` fills those in from a new game, which is what the
+## whole of `initial()` is for. What bumps it is a change no amount of
+## filling in can express - a key that means something different than it used
+## to, a number that changed units, two keys that became one. Then there is a
+## migration under it, and `Save` runs them in order.
 const VERSION := 1
+
+## The nested dictionaries whose keys come from the code.
+##
+## `held` and `gained` are keyed by `GameData.RESOURCES`; the rest are
+## structures with a fixed set of fields. Every key in one of these is a key
+## this build decided on, so a save that is missing one is a save written
+## before it existed and a save that has a spare one is a save written after
+## it was taken away. Both are mended by looking at a new game.
+const TABLES: Array = [
+	"ability", "build", "gained", "held", "intent", "player", "power",
+	"selected_recipe", "stall", "stats", "tutorial", "wave",
+]
+
+## And the ones whose keys come from playing.
+##
+## **`occupants` is why this list is written down rather than worked out.**
+## A new game starts with a hundred and six of them - the house, the trees,
+## the workshop - so "it starts empty, therefore it is the player's" is a
+## rule that would have thrown away every building in every save. What
+## separates these is not how full they are, it is who put the keys there.
+## Nothing in here is ever added to or taken from by `reconcile()`.
+const RUN_DATA: Array = [
+	"burning", "crafting", "entities", "fishing", "killed_by_kind",
+	"killed_by_kind_all_run", "kits", "last_result", "livestock",
+	"occupants", "payout", "plots", "produced", "repair_debt", "rubble",
+]
 
 const _FNV_OFFSET := 2166136261
 const _FNV_PRIME := 16777619
@@ -95,6 +129,83 @@ static func copy(state: Dictionary) -> Dictionary:
 ## The determinism guard is this number: two runs of the same seed that end with
 ## the same hash did the same thing, and a task that moves it changed a rule -
 ## deliberately, and recorded in the journal, or by accident, which is a bug.
+## Bring a state from an older build up to this one's shape, in place.
+##
+## Returns a line per repair, oldest concern first, for the journal and for a
+## check to read. An empty Array means it was already this shape - which is
+## what a state written by this build always is, and which
+## `headless_check` asserts, because a reconcile that quietly rewrites
+## today's save would move the determinism hash on a machine and not on the
+## one next to it.
+##
+## ## Two levels, and only two
+##
+## The top level, and one level inside each of `TABLES`. That is as deep as
+## the shape is decided by the code: below it is the run - what is standing
+## on which tile, which plot has what growing on it - and none of it is
+## anybody's to fill in.
+##
+## ## A missing key takes the default, which is what a new game has
+##
+## Not zero. A player whose save predates oil gets the starting amount of it,
+## because that is what the game gives somebody who starts today, and a run
+## that never had the chance to gather a thing should not be punished for it.
+static func reconcile(state: Dictionary) -> Array:
+	var notes: Array = []
+	if state.is_empty():
+		return notes
+	var fresh := create(int(state.get("seed", 0)))
+
+	# **Sorted, both ways round.** Two builds reading the same old save have
+	# to make the same repairs in the same order, or the first thing anybody
+	# notices is the determinism guard moving on one machine only.
+	for key in _sorted(fresh):
+		if not state.has(key):
+			state[key] = fresh[key]
+			notes.append("filled in '%s', which this save predates" % key)
+	for key in _sorted(state):
+		if not fresh.has(key):
+			state.erase(key)
+			notes.append("dropped '%s', which this build no longer has" % key)
+
+	for named in TABLES:
+		if not state.has(named) or not (state[named] is Dictionary):
+			continue
+		var mine: Dictionary = state[named]
+		var theirs: Dictionary = fresh[named]
+		for key in _sorted(theirs):
+			if not mine.has(key):
+				mine[key] = theirs[key]
+				notes.append("filled in '%s' in %s" % [str(key), named])
+		for key in _sorted(mine):
+			if not theirs.has(key):
+				mine.erase(key)
+				notes.append("dropped '%s' from %s" % [str(key), named])
+	return notes
+
+
+## Every nested Dictionary in a state, named. The union of `TABLES` and
+## `RUN_DATA` has to be exactly this, which `headless_check` asserts - a
+## subsystem that adds one and says which it is gets reconciled or left
+## alone on purpose, and one that says neither is a failing row.
+static func nested_in(state: Dictionary) -> Array:
+	var found: Array = []
+	for key in state:
+		if state[key] is Dictionary:
+			found.append(str(key))
+	found.sort()
+	return found
+
+
+## A Dictionary's keys, sorted, as Strings sort.
+static func _sorted(from: Dictionary) -> Array:
+	var keys: Array = []
+	for key in from:
+		keys.append(key)
+	keys.sort()
+	return keys
+
+
 static func hash_of(state: Dictionary) -> int:
 	return _fold(_FNV_OFFSET, state)
 

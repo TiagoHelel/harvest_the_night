@@ -249,6 +249,15 @@ RES_UNTOUCHED,0,%d untouched,%d intactos
 RES_UNTOUCHED_ALL,0,money and the farm are untouched,o dinheiro e a fazenda estão intactos
 RES_WAS_LOST,0,LOST,PERDIDA
 RES_ZOMBIES,0,zombies killed,zumbis mortos
+SAVE_DAMAGED,0,the file is damaged,o arquivo está danificado
+SAVE_FROM_THE_FUTURE,0,it was written by a newer version of the game,foi escrito por uma versão mais nova do jogo
+SAVE_KEPT,0,The file is still there. NEW RUN starts a fresh one.,O arquivo continua lá. NOVA PARTIDA começa outra do zero.
+SAVE_NOT_A_SAVE,0,there is no game inside the file,não há partida nenhuma dentro do arquivo
+SAVE_NOT_OURS,0,the file is not a save from this game,o arquivo não é um save deste jogo
+SAVE_NO_MIGRATION,0,this version cannot bring that run forward,esta versão não sabe trazer essa partida para cá
+SAVE_TOO_SHORT,0,the file is too small to be a save,o arquivo é pequeno demais para ser um save
+SAVE_TRUNCATED,0,the file was cut short,o arquivo foi cortado pela metade
+SAVE_UNREADABLE,0,THE SAVED RUN COULD NOT BE READ,A PARTIDA SALVA NÃO PÔDE SER LIDA
 SHOP_ALL,0,all,tudo
 SHOP_BUY,0,BUY,COMPRAR
 SHOP_BUY_ROW,0,%s  @ $%d   %d left,%s  @ $%d   %d restam

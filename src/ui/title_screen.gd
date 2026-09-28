@@ -101,6 +101,13 @@ func _ready() -> void:
 	Crash.sweep()
 	_to_announce = Crash.pending()
 	_version = get_node_or_null(^"UI/Screen/Version") as Label
+	# **A panel and the words on it.** The first version was a bare label
+	# over the backdrop, which is a farm: orange text on grass, trees and a
+	# roof, and the third line ran off the bottom of it. Everything else in
+	# this game that expects to be read sits on a frame.
+	_trouble = get_node_or_null(^"UI/Screen/SaveTrouble") as PanelContainer
+	_trouble_text = get_node_or_null(
+		^"UI/Screen/SaveTrouble/SaveTroubleText") as Label
 	_router = get_node_or_null(^"/root/App")
 	if _router != null and not _router.state_changed.is_connected(_went):
 		_router.state_changed.connect(_went)
@@ -133,6 +140,7 @@ func relabel() -> void:
 	if _menu == null:
 		return
 	_build_menu()
+	_wear_trouble()
 	_wear_version()
 	if _ident != null:
 		_ident.text = I18n.t(&"TITLE_PRESS_ANY")
@@ -216,6 +224,10 @@ func _wear(state: int) -> void:
 		_menu.visible = menu_up
 		if menu_up:
 			_focus_menu()
+	if _trouble != null:
+		# With the menu, because that is where CONTINUE is missing from and
+		# this is the sentence that says why.
+		_trouble.visible = menu_up and _why != Save.NO_SAVE
 	if _options != null:
 		_options.visible = options_up
 	if _stats != null:
@@ -273,7 +285,18 @@ func _build_menu() -> void:
 	for child in _menu.get_children():
 		_menu.remove_child(child)
 		child.queue_free()
-	var saved := Save.has_run()
+	# **Whether it loads, not whether it exists.** A CONTINUE that throws
+	# away the run it offered to resume is worse than no CONTINUE: the rule
+	# at the top of this file is that an entry with nowhere to go is absent,
+	# and a save this build cannot read is nowhere to go.
+	var saved := Save.can_continue()
+	# **Taken here, not asked for later.** `Save.trouble()` is about the last
+	# read, and the line above is that read - so the answer is caught while
+	# it is the right one rather than by a second function happening to run
+	# next. A planted bug found this: take `can_continue()` away and the
+	# notice went blank, because nothing had read the file that frame.
+	_why = Save.trouble()
+	_wear_trouble()
 	for entry in ENTRIES:
 		var which: StringName = entry[0]
 		if not is_shown(which, saved):
@@ -384,3 +407,37 @@ func _crash_closed() -> void:
 ## Which report is waiting, for a check that wants to watch it arrive.
 func announcing() -> String:
 	return _to_announce
+
+
+var _trouble: PanelContainer
+var _trouble_text: Label
+
+## What the last read of the run had to say, caught when it was read.
+var _why: StringName = &""
+
+
+## Say that there is a run on the disk this build cannot read.
+##
+## **Three things, because a player needs all three**: that it could not be
+## read, why - as far as anybody can tell from outside - and that the file has
+## not been thrown away. The third is the one that matters: somebody whose
+## save will not open should know the file is still sitting there before they
+## press NEW GAME, because a later build may well read it.
+func _wear_trouble() -> void:
+	if _trouble == null or _trouble_text == null:
+		return
+	if _why == Save.NO_SAVE:
+		_trouble_text.text = ""
+		_trouble.visible = false
+		return
+	_trouble_text.text = "%s%s%s%s%s" % [I18n.t(&"SAVE_UNREADABLE"),
+		"\n", I18n.t(_why), "\n", I18n.t(&"SAVE_KEPT")]
+	_trouble_text.theme_type_variation = UiKit.WARN
+	_trouble.visible = _router != null and _router.here() == _router.MENU
+
+
+# --------------------------------------------------- for the checks, 0104
+
+## What the title is saying about the save, if anything.
+func trouble_says() -> String:
+	return _trouble_text.text if _trouble_text != null else ""

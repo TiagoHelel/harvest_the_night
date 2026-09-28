@@ -48,6 +48,20 @@ offset_bottom = 248.0
 mouse_filter = 2
 horizontal_alignment = 1
 
+[node name="SaveTrouble" type="PanelContainer" parent="UI/Screen"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 78.0
+offset_top = 72.0
+offset_right = 402.0
+offset_bottom = 136.0
+
+[node name="SaveTroubleText" type="Label" parent="UI/Screen/SaveTrouble"]
+unique_name_in_owner = true
+layout_mode = 2
+horizontal_alignment = 1
+autowrap_mode = 2
+
 [node name="Menu" type="VBoxContainer" parent="UI/Screen"]
 layout_mode = 0
 offset_left = 170.0

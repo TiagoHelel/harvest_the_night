@@ -1,7 +1,7 @@
 # 0104 - Saves survive an update
 
 - **Phase:** 8 - Ship the MVP
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0010, 0062
 - **Likely files:** src/app/save.gd
 

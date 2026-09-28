@@ -9321,3 +9321,175 @@ three rows and says which answer is wrong.
 
 `python tools/verify.py` prints PASS: 6153 asserts, 945 input cases, 0 failed,
 20 rows, no skips.
+
+## 0104 - Saves survive an update - done 2026-09-28
+
+Adding a lever or a tech node must not delete somebody's run. `State.reconcile()`
+brings an old save up to this build's shape, `Save.step_up()` runs the numbered
+migrations in order for the changes filling in cannot express, and three golden
+saves in `tools/goldens/` are loaded and **played** by every run of the suite.
+
+### Two version numbers, because there are two questions
+
+`Save.FORMAT_VERSION` is about the file - the magic, the header, the encoding.
+`State.VERSION` is about what is inside it. **Most changes bump neither.** A
+new subsystem, a new resource, a new field on an existing structure: those are
+a new game having a key an old save does not, and that is what `reconcile()`
+is for. What bumps `State.VERSION` is a change no amount of filling in can
+express - a key that means something different than it used to, a number that
+changed units - and then there is a migration under it.
+
+### The reconcile is two levels deep, and which is which is written down
+
+The top level, and one level inside each of `State.TABLES`. Below that is the
+run itself and none of it is anybody's to fill in.
+
+**`occupants` is why the lists are written down rather than worked out.** The
+first rule I reached for was "a nested dictionary that a new game starts empty
+holds the player's own facts; a non-empty one is a table with a known key
+set". It is wrong, and expensively: a new game starts with a hundred and six
+occupants - the house, the trees, the workshop - so that rule would have
+dropped every building in every save as an unknown key. What separates the two
+is not how full it is, it is **who put the keys there**.
+
+So there are two lists, `TABLES` and `RUN_DATA`, and `headless_check` asserts
+that every nested dictionary in a state is in exactly one of them. A subsystem
+that adds one and does not say which it is fails a row rather than quietly
+getting its farm rebuilt. The planted version of that bug is worth quoting -
+with `occupants` moved into `TABLES`, the check said:
+
+    FAIL  what the player built is still standing
+    FAIL  run-v1.sav is a farm somebody built on  106
+
+A hundred and six. The golden was reset to the starting farm.
+
+### A missing key takes the default, which is a new game's value and not nought
+
+A player whose save predates oil gets the **starting amount** of it, because
+that is what the game gives somebody who starts today; what they have
+*earned* of it is nought, because none of it was. Both are asserted.
+
+### The state was not as knowable as everything here assumes
+
+The round-trip asserts from three earlier tasks broke the moment the reconcile
+went in, and the reason is worth writing down: **`Livestock` was inventing two
+top-level keys at runtime.** `_animals()` caches the animal cells against
+`grid_version` and created `livestock_version` and `livestock_cells` the first
+time it ran, so a played state had two keys a new game did not - and a
+reconcile that mends an old save by comparing it against a new game dropped
+them both.
+
+Caching against a version is right. Doing it in a key nobody declared is not:
+the save, the determinism hash and the state diff all rest on
+`State.create()` describing every key a valid state can hold. Both are now in
+`Livestock.initial()` at `-1` and `[]`, which is the sentinel `_animals()`
+already used, so it finds a mismatch on the first call and rebuilds exactly as
+before.
+
+The rule that keeps it true is a new assert: **play a day and a night and the
+key set does not change.** Not one key invented, not one lost.
+
+### The sim hash moved, and here is the proof it is only the shape
+
+**Sim `4262811284` -> `1961000123`.** Data unchanged at `407837701`.
+
+The guard is a *rolling* hash - it folds the state every few hundred ticks
+through the whole scenario - so two keys that now exist from tick 0 instead of
+appearing part way through change the early samples. The question is whether
+anything else did, and it was measured rather than argued:
+
+    with the keys declared        WHOLE 909080062  TICK 6500  WOOD 9  HOUSE 0
+    with them invented at runtime WHOLE 909080062  TICK 6500  WOOD 9  HOUSE 0
+
+Same scenario, same length, run with and without the change: the final state
+is identical to the last bit. The destination is the same and only the early
+part of the journey differs, in which keys exist and not in what anything is
+worth.
+
+### The migration driver is proven before anything depends on it
+
+`Save.migrations()` is **empty**, and that is the honest answer: the state has
+been version 1 for the whole of this project. The driver under it is not, and
+`headless_check` drives `step_up()` with a table of its own - three steps that
+record that they ran - and checks that they run in order, that each is handed
+what the last one gave it, that a save already current runs none of them, that
+a **gap refuses the whole thing** rather than guessing past it, and that a
+step returning nothing is a refusal and not a crash.
+
+The moment there is a first real migration is the worst possible moment to
+find out the machinery that runs them never ran.
+
+### Three golden saves, and the first one was a lawn
+
+`tools/goldens/run-v1.sav` is a real save written by the real writer.
+`run-v1-older.sav` is the same run with `events`, `tutorial`, the oil rows and
+`ability.flares` taken out - a build that predates all four. `run-v1-newer.sav`
+has two keys this build has never heard of. Between them they cover every
+shape of change there is: a new top-level key, a new row in a table keyed by
+`GameData`, and a new field on a structure.
+
+`src/tools/make_goldens.gd` writes them and **refuses to overwrite one**,
+because a golden is only worth anything if nobody regenerated it. When
+`State.VERSION` moves to 2, somebody runs it once on the last build that still
+said 1, checks in the file, and never touches it again.
+
+**The first version of it made a lawn.** It advanced a fresh state 5400 ticks
+and saved the result: day one, nothing built, a hundred and six occupants -
+which is the starting farm, and a golden of a new game passes every check
+while proving nothing. The one in the repository is sown, built on and one
+night older: day 2, night 1 won, 115 things standing, 14 crops in the ground.
+The check asserts that last part, which is how the `occupants` plant above got
+caught three times over.
+
+And the fixtures are checked for being what they claim: the older golden is
+decoded **underneath** `read_run_at`, which would have mended it on the way
+past, and really is missing what it says it predates.
+
+### A save that cannot be read says so, keeps the file, and offers a new run
+
+Every refusal now has a name - `SAVE_TOO_SHORT`, `SAVE_NOT_OURS`,
+`SAVE_TRUNCATED`, `SAVE_DAMAGED`, `SAVE_FROM_THE_FUTURE`,
+`SAVE_NO_MIGRATION`, `SAVE_NOT_A_SAVE` - and the title screen says which, in
+the player's language, on a panel above the menu.
+
+CONTINUE now comes off `Save.can_continue()` rather than `Save.has_run()`. A
+file existing is not a run: a CONTINUE that throws away the save it offered to
+resume is worse than no CONTINUE, and the rule at the top of `title_screen.gd`
+is already that an entry with nowhere to go is absent rather than greyed.
+
+**The file is never removed.** Not on a bad checksum, not on a version from
+the future, not on a failed migration. A save this build cannot read is one a
+later build may well read, and the player is told it is still there before
+they press NEW RUN.
+
+### Pictures
+
+`implementation/shots/0104/save_trouble.png` and `-pt_BR`. Two things came out
+of opening them:
+
+**The notice was orange text on a farm.** No panel - so it ran over the trees,
+the roof and the field, and the third line fell off the bottom of its label.
+It is a `PanelContainer` now, like everything else in this game that expects
+to be read.
+
+**It said NEW GAME and the button says NEW RUN.** A player told to press
+something that is not on the screen is a player who thinks the game is
+broken. Both languages fixed.
+
+### One fragility a planted bug found
+
+Taking `can_continue()` back out to check the case could fail did more than
+fail it: the notice went **blank**. `Save.trouble()` is about the *last read*,
+and the only reason the title had anything to say was that `can_continue()`
+happened to have read the file two lines earlier. The answer is now caught
+into `_why` at the moment of the read rather than asked for later by a
+function that assumes somebody else went first.
+
+### Still over budget
+
+`python tools/verify.py` is **307 seconds against its own 300**, up from 303.
+Unchanged in cause - `script parse`, `headless_check` and `input_check` are
+253s of it - and unchanged in owner: task 0106's prompt carries it.
+
+`python tools/verify.py` prints PASS: 6221 asserts, 960 input cases, 0 failed,
+20 rows, no skips.

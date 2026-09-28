@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`######################..`  **103 / 110 done**
+`#######################.`  **104 / 110 done**
 
-0 doing / 7 todo / 0 blocked across 9 phases.
+0 doing / 6 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0104 - Saves survive an update**. The whole of what is left is
+First up: **0105 - A playtest build**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,23 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-7 task(s) left, the ready ones first, then what they
+6 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0104 - Saves survive an update
-
-Ready to pick up.  Likely files: `src/app/save.gd`.
-
-Adding a lever or a tech node must not delete somebody's run.
-
-- A save version and a migration per bump, applied in order
-- A missing key takes the default; an unknown key is dropped with a warning
-- Golden saves in the repository, one per version, loaded by `verify.py`
-- A save that cannot be migrated says so, keeps the file, and offers a new run
-
-  - done when: Every golden save loads and plays
-  - done when: Adding a resource to game_data does not break a save that predates it
 
 ### 0105 - A playtest build
 
@@ -259,12 +245,12 @@ The thing that gets people to look: thirty seconds that show the farm, the switc
 - [x] **0100** [Exports: Windows and Web](prompts/0100-exports.md)
 - [ ] **0110** [Refusals in two languages](prompts/0110-refusals.md)
 
-## 8 - Ship the MVP  (3/8)
+## 8 - Ship the MVP  (4/8)
 
 - [x] **0101** [Onboarding in seven lines](prompts/0101-onboarding.md)
 - [x] **0102** [A performance budget](prompts/0102-perf-budget.md)
 - [x] **0103** [Crash and error reporting](prompts/0103-error-report.md)
-- [ ] **0104** [Saves survive an update](prompts/0104-save-compat.md)
+- [x] **0104** [Saves survive an update](prompts/0104-save-compat.md)
 - [ ] **0105** [A playtest build](prompts/0105-playtest-build.md)
 - [ ] **0106** [The release checklist](prompts/0106-release-checklist.md) - needs 0105
 - [ ] **0107** [Store assets](prompts/0107-store-assets.md)
