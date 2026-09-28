@@ -147,6 +147,29 @@ def check_sprites():
                  out.strip().splitlines()[-1].strip() if out.strip() else "")
 
 
+def check_player_art():
+    """The cut frames still match the sheet they came from.
+
+    Same argument as `check_sprites()`, one step further out: the sheet in
+    `docs/` is the source and `sprites/actors/` is what falls out of it. Task
+    0073 asks that re-running the cutting tool produce byte-identical PNGs,
+    and this is where that is a fact rather than a hope.
+
+    It **skips without Pillow** rather than failing. The cut PNGs are
+    committed, so the game runs and the suite passes on a machine that has
+    never installed it; only re-cutting needs it."""
+    if not os.path.exists(rel("tools/cut_sheet.py")):
+        return skip("player art", "no cutting tool yet - task 0073")
+    try:
+        import PIL                                   # noqa: F401
+    except ImportError:
+        return skip("player art", "needs Pillow to re-cut: "
+                    "python -m pip install pillow")
+    code, out = run([sys.executable, "tools/cut_sheet.py", "--check"])
+    return check("player art", code == 0, tail(out, 6) if code else
+                 out.strip().splitlines()[-1].strip() if out.strip() else "")
+
+
 def check_core_is_pure():
     """src/core/ is node-free, clock-free and unseeded-random-free.
 
@@ -366,6 +389,7 @@ def main():
     check_scripts_parse()
     check_core_is_pure()
     check_sprites()
+    check_player_art()
 
     if not hashes_only:
         check_script("headless_check", "src/tools/headless_check.gd",

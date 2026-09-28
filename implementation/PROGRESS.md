@@ -5696,3 +5696,145 @@ every cell of the farm; it costs nothing measurable and it is the only way to
 assert the distribution rather than the function.
 
 `exports` is still the one SKIP and still wants the Godot export templates.
+
+## 0073 - The player sprite - done 2026-09-28
+
+What changed: the farmer the owner drew is now the farmer in the game. A new
+`tools/cut_sheet.py` finds the frames on `docs/sprites_sem_fundo.png`, keys
+out the glow and writes 42 PNGs; `PlayerArt` says which one to play and
+`PlayerView` plays it. Screenshot: `implementation/shots/0073-player.png`.
+
+Files: `tools/cut_sheet.py` (new), `src/ui/player_art.gd` (new),
+`src/ui/player_frames.gd` (new, generated), `src/ui/player_view.gd`,
+`tools/sprite_maps.py`, `tools/verify.py`, `src/tools/headless_check.gd`,
+`src/tools/input_check.gd`.
+
+Verify: 4804 headless / 596 input / both hashes unchanged.
+
+### The size, and why
+
+**48x52 canvas, the character about 44 pixels tall, over an unchanged 16 pixel
+grid.** Two tiles wide and three tall.
+
+The sheet is a painting - half a million distinct colours, frames about 90x150
+- and the game is 480x270 on 16 pixel tiles where everything else is 16x16.
+Those two cannot both be true, and the task named the three ways out:
+
+- **Downscale to 16x24** and the drawing is gone. The owner drew a face, a
+  hat brim, a pair of dungarees with a button on them; at 16x24 that is four
+  brown pixels. The whole reason this task exists is that this art is better
+  than an ASCII map would be.
+- **Raise the game to 32 pixel tiles and 960x540** and every other sprite in
+  the project is redrawn, plus the tileset that shipped two tasks ago.
+- **Draw the player bigger than a tile**, which costs nothing else and is what
+  Stardew does with the same problem.
+
+The third. The canvas is a little wider and taller than the character so a
+raised axe or a cast fishing line has somewhere to be without the farmer
+shrinking to make room for it.
+
+**This is also the one place art does not come from an ASCII map**, which the
+house rules otherwise require and which task 0073 overrides in as many words.
+Everything else in `sprites/` still comes from `tools/sprite_maps.py`,
+including the shadow added here.
+
+### Finding frames that are not on a grid
+
+Rows of non-transparent pixels give the bands, columns within a band give the
+frames, and a run much wider than its neighbours is two frames that touch.
+
+**The splitting rule took two goes and the first one was quietly wrong.**
+Version one split a wide run at its thinnest column, whichever column that
+was. That cut the axe off the man swinging it: `chop_3` came out as a floating
+axe and `fish_1` as a line and a float with nobody holding them. The frames
+still looked like frames, which is what made it worth catching in a contact
+sheet rather than in the game.
+
+Measured, the difference is clean. Two poses that merely brush each other are
+joined by four to seven pixels; a raised axe is joined to its owner by twelve
+and a cast line by nine. So the test is the **thickness at the parting**
+rather than the shape of the dip, and `JOIN_PX` is 8.
+
+### One scale, and anchored by the feet
+
+Every frame is scaled by the same factor, worked out once from the height of a
+standing pose. Scaling each frame to fit its own box would make the farmer
+grow and shrink as they swung.
+
+They are placed by the **middle of the opaque pixels along the bottom** rather
+than by the bounding box, because a raised tool moves the box a long way and
+does not move the man. Anchoring on the box makes a farmer slide sideways
+between two frames of one swing.
+
+### What the sheet has and what it does not
+
+All the side art faces **west**; there is no east-facing set, so east is the
+west art mirrored. Determined by looking at the frames enlarged rather than
+guessing - a first attempt to work it out from where the skin-coloured pixels
+were failed, because it was finding hands as well as faces.
+
+The verbs are drawn side-on too, so a farmer tilling while facing north is
+drawn side-on. That is the sheet rather than a decision made here.
+
+There is no workbench pose, so `craft` borrows the one empty-handed standing
+frame, `reel` borrows the cast, `collect` borrows the lift, and `trade` and
+`repair` borrow the craft. **All of them are named in `PlayerArt.VERBS`**
+rather than falling through, because a verb that falls through to standing
+still is indistinguishable from a verb somebody forgot - and there is an
+assert that walks `Interact.DEFAULT_TICKS` and fails if any verb is missing or
+resolves to an idle.
+
+Bands 4 and 5 of the sheet - carrying crates, and a row of reactions
+including a sleep and a heart - are cut but unused. `--report` lists them, so
+they are a thing to spend rather than a thing lost.
+
+### The shadow, and a test that lied to me
+
+The shadow is an ASCII map like everything else, laid down at 0.42 alpha
+because the palette has no partial alpha in it.
+
+It appeared not to be drawing at all. I set its modulate to magenta, scaled it
+three times and counted magenta pixels on screen: **zero**. That was the test
+being wrong, not the shadow - `modulate` *multiplies*, and a near-black ink
+sprite tinted magenta stays near-black. Toggling `visible` and counting
+changed pixels found it immediately: 47 of them, drawing correctly the whole
+time and simply too faint at the alpha I first picked.
+
+Worth keeping because the wrong test pointed at a plausible culprit. The
+codebase already documents a Y-sort trap in this exact node - "negative z
+inside a Y-sorted parent put it behind the TileMapLayer" - and I spent a while
+chasing it.
+
+### An assert that was wrong about the rules
+
+I wrote `expect(view.playing() == "chop")` while holding a direction, on the
+reasoning that the rules stop a working farmer from moving so the drawing
+should agree. The suite said `walk_west`.
+
+The rules are the other way round, and say so plainly in `Player.tick()`:
+"Walking away gives up on whatever was being done. Half a tree does not stay
+half chopped in some invisible ledger." The assert now checks that, which is
+the right way round for a test and a rule to disagree.
+
+The other two failures in that case were mine too: `hold_key()` lets go before
+it returns, so every question I asked after it was about a farmer who had
+stopped walking.
+
+### Hashes
+
+Both unchanged - `2555959448` and `2601044827`. The animation reads
+`Player.facing()` and the action verb and writes nothing; the frame counts are
+generated into `src/ui/player_frames.gd` and the speeds live in the view, for
+the reason task 0039 gives about the light - a purely visual number in the
+data hash means a balance-neutral tweak fails the guard.
+
+### A new row in verify
+
+`player art` runs `python tools/cut_sheet.py --check`, so "re-running the
+cutting tool produces byte-identical PNGs" is a fact rather than a hope. It
+**skips without Pillow** rather than failing: the cut PNGs are committed, so
+the game runs and the suite passes on a machine that has never installed it,
+and only re-cutting needs it.
+
+`python tools/verify.py` prints PASS: 4804 asserts, 596 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

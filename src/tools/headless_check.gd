@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 65
+const GROUPS := 66
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -129,6 +129,7 @@ func _run() -> void:
 	_task_0070_endless()
 	_task_0071_palettes()
 	_task_0072_tileset()
+	_task_0073_player_art()
 
 
 func _finish() -> void:
@@ -11396,3 +11397,123 @@ func _side_pixels(image: Image, col: int, row: int, size: int,
 					row * size + y).a > 0.0:
 				n += 1
 	return n
+
+
+## 0073 - the player sprite, cut from the owner's sheet.
+func _task_0073_player_art() -> void:
+	# **Every verb the rules have plays something**, which is the done-when,
+	# and the list is read off `Interact` rather than typed here - a verb
+	# added to the rules and forgotten in the art is exactly what this is for.
+	var verbs := GameData.sorted_names(Interact.DEFAULT_TICKS.keys())
+	expect(verbs.size() >= 10, "the game has verbs to draw", str(verbs.size()))
+	for verb in verbs:
+		var pose := PlayerArt.pose(Player.SOUTH, false, StringName(verb))
+		expect(PlayerArt.VERBS.has(StringName(verb)),
+			"the verb '%s' is named in the art table" % verb,
+			"it would fall through to standing still, which looks like a "
+			+ "verb somebody forgot")
+		expect(PlayerFrames.COUNT.has(pose["name"]),
+			"and '%s' plays an animation that was cut" % verb,
+			str(pose["name"]))
+		expect(int(pose["frames"]) >= 1,
+			"with at least one frame", str(pose["frames"]))
+
+	# **And none plays the wrong one.** Two different verbs may share a
+	# drawing - the sheet has no workbench pose - but a verb must never
+	# quietly become idle, and the ones that do share say so in the table.
+	for verb in verbs:
+		var pose := PlayerArt.pose(Player.SOUTH, false, StringName(verb))
+		expect(not str(pose["name"]).begins_with("idle"),
+			"'%s' is not silently standing still" % verb, str(pose["name"]))
+	expect(str(PlayerArt.VERBS[&"chop"]) == "chop"
+		and str(PlayerArt.VERBS[&"mine"]) == "mine"
+		and str(PlayerArt.VERBS[&"till"]) == "till",
+		"and the ones the sheet drew play their own drawing")
+
+	# **All the side art faces west, and east is that art mirrored.** There is
+	# no east-facing set on the sheet and there does not need to be.
+	var south := PlayerArt.pose(Player.SOUTH, true, &"")
+	var north := PlayerArt.pose(Player.NORTH, true, &"")
+	var west := PlayerArt.pose(Player.WEST, true, &"")
+	var east := PlayerArt.pose(Player.EAST, true, &"")
+	expect(str(south["name"]) == "walk_south", "south walks south",
+		str(south["name"]))
+	expect(str(north["name"]) == "walk_north", "north walks north",
+		str(north["name"]))
+	expect(str(west["name"]) == "walk_west" and not bool(west["flip"]),
+		"west walks west, unmirrored", str(west))
+	expect(str(east["name"]) == "walk_west" and bool(east["flip"]),
+		"and east is the same drawing, mirrored", str(east))
+	for facing in [Player.SOUTH, Player.NORTH, Player.WEST]:
+		expect(not bool(PlayerArt.pose(facing, false, &"")["flip"]),
+			"nothing but east is mirrored", str(facing))
+
+	# **Standing and walking are different drawings.**
+	for facing in [Player.SOUTH, Player.NORTH, Player.WEST, Player.EAST]:
+		var still := PlayerArt.pose(facing, false, &"")
+		var going := PlayerArt.pose(facing, true, &"")
+		expect(str(still["name"]) != str(going["name"]),
+			"facing %d stands and walks differently" % facing,
+			str(still["name"]))
+		expect(str(still["name"]).begins_with("idle"),
+			"and standing still is an idle", str(still["name"]))
+
+	# **A verb beats walking.** Somebody chopping while holding a direction is
+	# chopping; the rules stop them moving and the drawing has to agree.
+	var busy := PlayerArt.pose(Player.SOUTH, true, &"chop")
+	expect(str(busy["name"]) == "chop",
+		"a verb is drawn even while a direction is held", str(busy["name"]))
+
+	# **Every frame the table promises is a file that exists.**
+	var counted := 0
+	for name in GameData.sorted_names(PlayerFrames.COUNT.keys()):
+		var frames := int(PlayerFrames.COUNT[name])
+		expect(frames >= 1, "%s has frames" % name, str(frames))
+		for i in frames:
+			var path := PlayerArt.texture_path(StringName(name), i)
+			expect(ResourceLoader.exists(path),
+				"the cut produced %s" % path)
+			counted += 1
+	print("  %d player frames on a %s canvas, feet at %s"
+		% [counted, str(PlayerFrames.CANVAS), str(PlayerFrames.FEET)])
+
+	# **The clock loops and never asks for a frame that is not there.**
+	var walk := PlayerArt.pose(Player.SOUTH, true, &"")
+	for step in 200:
+		var at := PlayerArt.frame_at(walk, float(step) * 0.037)
+		expect(at >= 0 and at < int(walk["frames"]),
+			"frame %d of the walk is one that exists" % at, str(at))
+	expect(PlayerArt.frame_at(walk, 0.0) == 0, "an animation starts at zero")
+	expect(PlayerArt.frame_at(walk, float(walk["frames"])
+		* float(walk["seconds"])) == 0, "and comes back round to it")
+
+	# **The canvas is the size task 0073 decided on**: two tiles wide and
+	# three tall over an unchanged sixteen pixel grid.
+	var tile := GameData.TILE_SIZE
+	expect(PlayerFrames.CANVAS.x >= tile * 2
+		and PlayerFrames.CANVAS.x <= tile * 4,
+		"the player is about two tiles wide", str(PlayerFrames.CANVAS))
+	expect(PlayerFrames.CANVAS.y >= tile * 3
+		and PlayerFrames.CANVAS.y <= tile * 4,
+		"and about three tall", str(PlayerFrames.CANVAS))
+	expect(PlayerFrames.FEET.y > PlayerFrames.CANVAS.y / 2,
+		"and stands near the bottom of it", str(PlayerFrames.FEET))
+
+	# **Walking diagonally picks a facing and stays with it.** The done-when,
+	# and it is a rule rather than a drawing - `Player` resolves eight
+	# directions onto four, and the art only has to not argue with it.
+	var state := State.create(7300)
+	var held := Player.facing(state)
+	var intent: Dictionary = state["intent"]
+	for tick in 60:
+		(intent["move"] as Array)[0] = 1
+		(intent["move"] as Array)[1] = 1
+		Sim.advance(state, 1)
+		if tick == 0:
+			held = Player.facing(state)
+		expect(Player.facing(state) == held,
+			"a held diagonal keeps one facing", str(Player.facing(state)))
+	expect(held == Player.SOUTH or held == Player.EAST,
+		"and it is one of the two the diagonal is made of", str(held))
+
+	_completed += 1     # last line: an abandoned group never gets here

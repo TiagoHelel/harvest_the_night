@@ -1,7 +1,7 @@
 # 0073 - The player sprite
 
 - **Phase:** 5 - Art and visual direction
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0071, 0015
 - **Likely files:** tools/cut_sheet.py, sprites/actors/, src/ui/player_view.gd
 

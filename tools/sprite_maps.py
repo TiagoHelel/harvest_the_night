@@ -26,6 +26,21 @@ ACTOR = (16, 24)
 
 SPRITES = {
 
+    # **The shadow under the farmer**, because without one a character floats.
+    # Drawn flat and wide, the shape a body casts at noon from above, and laid
+    # down at a low opacity by `PlayerView` - the palette has no partial alpha
+    # in it, so the softness is the sprite's modulate rather than its pixels.
+    "actors/shadow": dict(size=(20, 8), legend={"k": "ink"}, rows=[
+        "......kkkkkkkk......",
+        "....kkkkkkkkkkkk....",
+        "..kkkkkkkkkkkkkkkk..",
+        ".kkkkkkkkkkkkkkkkkk.",
+        ".kkkkkkkkkkkkkkkkkk.",
+        "..kkkkkkkkkkkkkkkk..",
+        "....kkkkkkkkkkkk....",
+        "......kkkkkkkk......",
+    ]),
+
     # ------------------------------------------------- terrain, task 0072
 
     # **Three more grasses, so a field is not one tile repeated.** A farm is

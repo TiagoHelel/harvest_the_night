@@ -41,7 +41,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 32
+const CASES := 33
 
 var passed := 0
 var failed := 0
@@ -103,6 +103,7 @@ func _run() -> void:
 	await _case_0070_endless()
 	await _case_0071_palettes()
 	await _case_0072_tileset()
+	await _case_0073_player_art()
 	_finish()
 
 
@@ -3297,6 +3298,100 @@ func _case_0072_tileset() -> void:
 			str(terrain.get_cell_atlas_coords(Grid.cell(idx))))
 		break
 	expect(found, "the farm has a pond to check")
+
+	await close_scene()
+	_completed += 1     # last line: an abandoned case never gets here
+
+
+## 0073 - the farmer, walking and working.
+func _case_0073_player_art() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var view: PlayerView = require_control("PlayerView")
+	if driver == null or view == null:
+		_completed += 1
+		await close_scene()
+		return
+
+	var state := driver.state
+	await frames(6)
+
+	var body: Sprite2D = view.find_child("Body", true, false)
+	var shadow: Sprite2D = view.find_child("Shadow", true, false)
+	expect(body != null and body.texture != null,
+		"the farmer is drawn from a cut frame")
+	expect(shadow != null and shadow.texture != null,
+		"and casts a shadow, so they are standing on the farm")
+	if body == null:
+		await close_scene()
+		_completed += 1
+		return
+
+	# **Standing still is an idle.**
+	expect(str(view.playing()).begins_with("idle"),
+		"a farmer nobody is moving stands still", str(view.playing()))
+
+	# **Walking west, and east is the same art mirrored.** The only facing
+	# evidence a screenshot could give, asked of the node instead.
+	# **Asked while the key is down.** `hold_key()` lets go before it returns,
+	# and a farmer who has stopped walking is standing still - which is what
+	# the first version of this asserted against and got `idle_west` for.
+	await press_key(KEY_A, true)
+	await frames(8)
+	expect(str(view.playing()) == "walk_west",
+		"walking left plays the west walk", str(view.playing()))
+	expect(not view.flipped(), "which is the art as it was drawn")
+	await press_key(KEY_A, false)
+	await frames(3)
+
+	await press_key(KEY_D, true)
+	await frames(8)
+	expect(str(view.playing()) == "walk_west",
+		"walking right plays the same drawing", str(view.playing()))
+	expect(view.flipped(), "mirrored, because the sheet has no east set")
+	await press_key(KEY_D, false)
+	await frames(3)
+
+	# **The animation is the state's.** Put an action on the player through
+	# the rules and the view has to follow it without being told.
+	# The action record is written straight onto the state, which is what
+	# `Player._begin()` does and what the view reads. Walking the farmer to a
+	# tree and holding SPACE would be testing `Interact`, which has its own
+	# case; what is under test here is that the drawing follows the state.
+	var here := Player.cell(state)
+	(state["player"] as Dictionary)["action"] = {
+		"verb": &"chop", "cell": [here.x, here.y],
+		"left": 90, "total": 90,
+	}
+	await until(func() -> bool: return str(view.playing()) == "chop",
+		"the chop to start playing")
+	expect(str(view.playing()) == "chop",
+		"a farmer the rules say is chopping is drawn chopping",
+		str(view.playing()))
+
+	# **And walking away gives it up**, which is the rule rather than my
+	# guess: `Player.tick()` calls `_stop()` the moment a direction is held,
+	# because "half a tree does not stay half chopped in some invisible
+	# ledger". The first version of this asserted the opposite - that a verb
+	# beats a held key - and the suite said otherwise, which is the right way
+	# round for a test and a rule to disagree.
+	await press_key(KEY_A, true)
+	await frames(8)
+	expect(Player.is_busy(state) == false,
+		"holding a direction gives up the work", str(Player.is_busy(state)))
+	expect(str(view.playing()) == "walk_west",
+		"and the farmer is drawn walking, not chopping on the spot",
+		str(view.playing()))
+	await press_key(KEY_A, false)
+	await frames(3)
+
+	# When the work ends the drawing goes back.
+	(state["player"] as Dictionary)["action"] = {}
+	await until(func() -> bool:
+		return not str(view.playing()).begins_with("chop"),
+		"the chop to end")
+	expect(not str(view.playing()).begins_with("chop"),
+		"and stops when the work does", str(view.playing()))
 
 	await close_scene()
 	_completed += 1     # last line: an abandoned case never gets here
