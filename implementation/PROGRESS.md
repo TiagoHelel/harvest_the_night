@@ -7147,3 +7147,111 @@ Both unchanged - `2555959448` and `2601044827`. Sound is not a rule.
 `python tools/verify.py` prints PASS: 5305 asserts, 699 input cases, 0 failed,
 with a new `sfx` row. `exports` is still the one SKIP and still wants the
 Godot export templates.
+
+## 0085 - The sounds of the night - done 2026-09-28
+
+What changed: fourteen night sounds from the same generator, a distance
+falloff in `Audio`, and `Sfx` grown a night half. Four defences and the mine,
+five enemy voices, and the four things that happen to them - an impact, a
+death, a wall going and the house being hit. Twenty-seven sounds in the game
+now, all of them arithmetic.
+
+Files: `tools/gen_sfx.py`, `assets/sfx/` (14 new WAVs), `src/app/audio.gd`,
+`src/ui/sfx.gd`, `src/tools/headless_check.gd`, `src/tools/input_check.gd`.
+
+Verify: 5380 headless / 707 input / both hashes unchanged.
+
+### Fifty zombies do not turn into noise
+
+The done-when, and the thing the whole night design turns on. **Groans are
+per kind, not per body.** Fifty walkers are one voice - the walkers groan,
+now and then, from wherever the nearest one is standing - so the rate is
+fixed by how many *sorts* of thing are out there, which is at most four.
+
+The first version of the test for this was going to count noises over a
+stretch of frames and see whether the number went up with the crowd. It
+would have been useless: the groan chance is `delta / 2.6` a frame, and in a
+headless check `delta` is a fraction of a millisecond, so nothing would have
+groaned and the test would have passed on an empty sky.
+
+So `Sfx.nearest_by_kind()` is public and the check asks **the claim**
+directly: five walkers are one voice, fifty walkers are still one voice, and
+a walker plus a runner plus a tank are three. Made per-body as an experiment
+it fails with `51 bodies making 51 voices`, which is precisely the sound the
+requirement is about.
+
+### A shot is a reload counter going up
+
+`reload` counts down every tick on the occupant, so the one tick it **rises**
+on is the tick the thing went off - the same reading `world_view.gd` already
+uses to put a muzzle flash in the right frame. Same shape as the
+`left + tick` invariant task 0084 used for the day's verbs: the rules record
+a countdown, and the view reads the edge rather than guessing from a
+projectile it can see.
+
+### The alarm, and the roar
+
+**The house being hit is the loudest sound in the game** at 0.95, against
+0.88 for the Giant and 0.70 for everything else at night. It is the only
+sound that means you are losing, and a game where the alarm is quieter than
+the gunfire has buried its own bad news. It is the one sound built to be
+unpleasant on purpose: a low boom, a bright crack, and two notes a semitone
+apart, which is the interval every alarm ever made is built on. Asserted
+against every other WAV in the folder rather than against a list, so a
+fifteenth night sound cannot quietly outgrow it.
+
+**The Giant is audible before it is visible**, which turned out to mean two
+separate things and both are asserted. Its roar is the longest sound in the
+game at 1.4 seconds, and `Sfx` plays it with **no position at all**, so the
+falloff leaves it alone and it arrives at full volume from the far fence. It
+is also the only enemy sound that rises where the rest fall, because
+something arriving and something dying should not sound the same.
+
+### The falloff is linear on purpose
+
+`Audio.loudness(ears, at)` is full volume within a tile and a half, falls to
+a floor of 0.3 at four hundred and eighty pixels - a screen width, so **a
+thing you can see is a thing you can hear** - and stays there.
+
+Linear rather than inverse-square, and it is a deliberate wrong answer:
+inverse-square is right for a point source in open air and wrong for a game
+where a wave chewing the fence you are not standing at is the thing you most
+need to be told about. Physics is not the brief; legibility is. The floor is
+0.3 rather than zero for the same reason, and there is an assert that says so
+in words.
+
+It is a static function for the same reason `is_silent` is: the rule is the
+part with a decision in it, and a check should ask it straight rather than
+infer it from a voice's volume.
+
+### Two asserts that were wrong before they were right
+
+- **"A defence with no `reload_ticks` has no sound."** Failed on the mine,
+  which is `one_shot`, never reloads, and is certainly not silent. The rule
+  is that a defence with **`damage`** makes a noise and one with only
+  `path_cost` does not: things that hurt are heard, things that block are
+  furniture.
+- **Task 0084's "nothing in the folder is unreached"** went red the moment
+  fourteen night files landed. That is the check working, not the check being
+  wrong - it now reads both halves.
+
+### The done-when I cannot check
+
+"With eyes closed, a night's audio says roughly what is happening" needs
+ears. `python tools/gen_sfx.py --preview <dir>` now renders `_a-night.wav`:
+twenty-one seconds of the night's sounds in the order the game would play
+them, at the volumes the falloff would give them - a wave in the distance,
+the guns answering, the Giant at nine seconds, a wall at twelve, the house
+taking two hits at fourteen. It went to the owner to listen to.
+
+The timeline reads `NEAR`, `EARSHOT` and `FAR_FLOOR` out of `audio.gd` rather
+than keeping copies, so what it renders is what the game would play. Same
+reason `pitch_jitter()` does.
+
+### Hashes
+
+Both unchanged - `2555959448` and `2601044827`. Sound is not a rule, and the
+night's watchers are all in `src/ui/`.
+
+`python tools/verify.py` prints PASS: 5380 asserts, 707 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

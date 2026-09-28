@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`##################......`  **84 / 109 done**
+`###################.....`  **85 / 109 done**
 
-0 doing / 25 todo / 0 blocked across 9 phases.
+0 doing / 24 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0085 - The sounds of the night**. The whole of what is left is
+First up: **0086 - Two pieces of music**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,24 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-25 task(s) left, the ready ones first, then what they
+24 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0085 - The sounds of the night
-
-Ready to pick up.  Likely files: `tools/gen_sfx.py, assets/sfx/`.
-
-The other half: shots, the flamethrower, the mortar, impacts, the groan, the death, the wall breaking, the house being hit.
-
-- Every tower and every enemy has its own sound
-- The house taking damage is the most alarming sound in the game
-- A distance falloff, so the far side of the farm is quieter
-- The Giant is audible before it is visible
-- The same generator as 0084
-
-  - done when: With eyes closed, a night's audio says roughly what is happening
-  - done when: Fifty zombies do not turn into noise
 
 ### 0086 - Two pieces of music
 
@@ -59,6 +44,20 @@ One warm loop for the farm, one cold one for the night, and a crossfade on the r
 
   - done when: The loop point is inaudible
   - done when: The crossfade lands with the transition, not before or after it
+
+### 0087 - Ambience
+
+Ready to pick up.  Likely files: `src/app/ambience.gd`.
+
+The bed under everything: birds and water by day, wind and distant groaning by night.
+
+- A day bed and a night bed, cross-fading with the transition
+- Positional touches: the pond is louder near the pond
+- It ducks under an important sound rather than fighting it
+- It is on its own bus so it can be turned down alone
+
+  - done when: Standing still on the farm for a minute is pleasant, not empty
+  - done when: The ambience never masks the house-damage sound
 
 ### 0088 - Juice: shake, hit stop, damage numbers
 
@@ -195,20 +194,6 @@ The little bubbles on the owner's sheet - !, ?, a heart, a note, an idea, a star
 
   - done when: A reaction appears on the tick the thing happens and clears itself
   - done when: Turning them all off leaves the determinism hash unchanged
-
-### 0087 - Ambience
-
-Waits on 0085.  Likely files: `src/app/ambience.gd`.
-
-The bed under everything: birds and water by day, wind and distant groaning by night.
-
-- A day bed and a night bed, cross-fading with the transition
-- Positional touches: the pond is louder near the pond
-- It ducks under an important sound rather than fighting it
-- It is on its own bus so it can be turned down alone
-
-  - done when: Standing still on the farm for a minute is pleasant, not empty
-  - done when: The ambience never masks the house-damage sound
 
 ### 0092 - The main menu and the router
 
@@ -505,13 +490,13 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0081** [The UI theme](prompts/0081-theme.md)
 - [x] **0082** [Screenshots, and actually looking at them](prompts/0082-screenshots.md)
 
-## 6 - Sound and juice  (2/8)
+## 6 - Sound and juice  (3/8)
 
 - [x] **0083** [Audio buses and a sound manager](prompts/0083-audio-buses.md)
 - [x] **0084** [The sounds of the day](prompts/0084-sfx-day.md)
-- [ ] **0085** [The sounds of the night](prompts/0085-sfx-night.md)
+- [x] **0085** [The sounds of the night](prompts/0085-sfx-night.md)
 - [ ] **0086** [Two pieces of music](prompts/0086-music.md)
-- [ ] **0087** [Ambience](prompts/0087-ambience.md) - needs 0085
+- [ ] **0087** [Ambience](prompts/0087-ambience.md)
 - [ ] **0088** [Juice: shake, hit stop, damage numbers](prompts/0088-juice.md)
 - [ ] **0089** [Tooltips](prompts/0089-tooltips.md)
 - [ ] **0090** [The log panel](prompts/0090-log-panel.md)

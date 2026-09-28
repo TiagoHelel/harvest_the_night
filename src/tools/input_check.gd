@@ -41,7 +41,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 41
+const CASES := 42
 
 ## The pixels two pieces of text in one row must have between them. Two is
 ## the width of the gap inside a letter at this size, so anything less reads
@@ -117,6 +117,7 @@ func _run() -> void:
 	await _case_0082_shots()
 	await _case_0083_audio()
 	await _case_0084_day_sounds()
+	await _case_0085_night_sounds()
 	_finish()
 
 
@@ -4177,6 +4178,95 @@ func _case_0084_day_sounds() -> void:
 	expect(audio.started() == 0,
 		"and an abandoned swing makes no sound at all",
 		"%d started, last '%s'" % [audio.started(), audio.last_played()])
+
+	driver.running = true
+	audio.stop_all()
+	await close_scene()
+	_completed += 1     # last line: an abandoned case never gets here
+func _case_0085_night_sounds() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var audio: Node = root.get_node_or_null(^"Audio")
+	var sfx: Sfx = require_control("Sfx")
+	if driver == null or audio == null or sfx == null:
+		expect(sfx != null, "the Sfx node is in the scene")
+		_completed += 1
+		await close_scene()
+		return
+	var state := driver.state
+
+	driver.running = false
+	await frames(2)
+	Resources.gain(state, {GameData.WOOD: 900, GameData.IRON: 900,
+		GameData.STONE: 900, GameData.GUNPOWDER: 200})
+	var here := Player.cell(state)
+	var put := 0
+	for y in range(here.y - 2, here.y + 5):
+		for x in range(here.x + 2, here.x + 9):
+			if put >= 4:
+				break
+			if Building.place(state, &"gun_tower", Vector2i(x, y)):
+				put += 1
+		if put >= 4:
+			break
+	expect(put >= 2, "there are guns on the farm", "%d up" % put)
+	Phases.begin_preparation(state)
+	Sim.advance(state, GameData.PREPARATION_TICKS + 1)
+	await frames(3)
+	expect(int(state["phase"]) == Phases.NIGHT, "and it is night",
+		Phases.name_of(int(state["phase"])))
+
+	# **Fifty zombies are not fifty voices.** The done-when, asked of the
+	# thing that decides it rather than counted off a stretch of frames: the
+	# crowd amounts to one entry per *sort* of thing, so ten times the
+	# zombies is exactly the same number of voices.
+	for i in 5:
+		Enemies.spawn(state, &"walker", i % GameData.SPAWNS.size())
+	await frames(2)
+	var few: int = sfx.nearest_by_kind().size()
+	expect(few == 1, "five walkers are one voice", "%d voices" % few)
+	for i in 45:
+		Enemies.spawn(state, &"walker", i % GameData.SPAWNS.size())
+	await frames(2)
+	var crowd := Entities.count(state)
+	expect(crowd >= 40, "there really is a crowd out there",
+		"%d bodies" % crowd)
+	var many: int = sfx.nearest_by_kind().size()
+	expect(many == few,
+		"and fifty walkers are still one voice, not fifty",
+		"%d bodies making %d voices" % [crowd, many])
+
+	# Different sorts do get their own, which is the other half of it - a
+	# crowd is meant to be a chord rather than either a wall or a monotone.
+	Enemies.spawn(state, &"runner", 0)
+	Enemies.spawn(state, &"tank", 1)
+	await frames(2)
+	expect(sfx.nearest_by_kind().size() == 3,
+		"three sorts of thing are three voices",
+		"%d" % sfx.nearest_by_kind().size())
+
+	# **The house being hit is heard.** The most important sound in the game,
+	# and the one that must never be missed.
+	audio.stop_all()
+	audio.forget_counts()
+	state["house_hp"] = int(state["house_hp"]) - 10
+	await frames(3)
+	expect(audio.plays_of(&"sfx/house_hit") >= 1,
+		"the house taking damage makes the alarm",
+		"last was '%s'" % audio.last_played())
+
+	# **A gun firing makes a gun's sound**, read off the reload counter going
+	# up rather than guessed from a projectile.
+	audio.forget_counts()
+	var fired := false
+	for i in 90:
+		Sim.advance(state, 2)
+		await frames(1)
+		if audio.plays_of(&"sfx/shot_gun") > 0:
+			fired = true
+			break
+	expect(fired, "a gun tower firing makes a gunshot",
+		"%d shots fired by the rules" % Towers.shots_fired(state))
 
 	driver.running = true
 	audio.stop_all()

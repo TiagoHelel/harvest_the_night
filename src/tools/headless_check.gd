@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 77
+const GROUPS := 78
 
 const SettingsScript := preload("res://src/app/settings.gd")
 const AudioScript := preload("res://src/app/audio.gd")
@@ -143,6 +143,7 @@ func _run() -> void:
 	_task_0082_shots()
 	_task_0083_audio()
 	_task_0084_day_sounds()
+	_task_0085_night_sounds()
 
 
 func _finish() -> void:
@@ -12636,10 +12637,13 @@ func _task_0084_day_sounds() -> void:
 		expect(SfxScript.VERB_SOUNDS.has(verb),
 			"the '%s' verb has a sound" % verb)
 
-	# Nothing else is in the folder: a WAV that no id reaches is a WAV
-	# somebody meant to wire up and did not.
+	# Nothing in the folder is unreached: a WAV that no id asks for is a WAV
+	# somebody meant to wire up and did not. **The night counts too** - this
+	# check was written when the day was all there was and went red the
+	# moment task 0085 put fourteen more files in, which is the check working
+	# rather than the check being wrong.
 	var heard: Dictionary = {}
-	for id in wanted:
+	for id in wanted + _night_sound_ids():
 		heard[String(id).get_file()] = true
 	var folder := DirAccess.open("res://assets/sfx/")
 	expect(folder != null, "assets/sfx exists")
@@ -12765,3 +12769,120 @@ func _wav_facts(path: String) -> Dictionary:
 		"late_hz": float(crossings_late)
 			/ maxf(float(count - half), 1.0) * rate / 2.0,
 	}
+## 0085 - the sounds of the night.
+func _task_0085_night_sounds() -> void:
+	# **Every defence that fires has a sound, and every enemy has a voice.**
+	# The lists are read off `GameData` rather than typed here, so a sixth
+	# enemy arriving in a year is silent for exactly as long as it takes to
+	# run this.
+	for id in GameData.sorted_names(GameData.DEFENCES.keys()):
+		# **A defence that does damage makes a noise; one that blocks does
+		# not.** The first version of this asked for a `reload_ticks` and
+		# failed on the mine, which is `one_shot` and never reloads - it
+		# detonates once and is gone, and it is certainly not silent. A
+		# fence, a wall and a barricade have no `damage` at all: they are
+		# furniture that things walk into.
+		var hurts := (GameData.DEFENCES[id] as Dictionary).has("damage")
+		expect(SfxScript.TOWER_SOUNDS.has(id) == hurts,
+			"the %s %s a sound, because it %s"
+			% [id, "has" if hurts else "has no",
+				"does damage" if hurts else "only blocks"])
+	for id in GameData.sorted_names(GameData.ENEMIES.keys()):
+		expect(SfxScript.ENEMY_SOUNDS.has(id),
+			"the %s has a voice of its own" % id)
+
+	var night: Array = _night_sound_ids()
+	for id in night:
+		expect(ResourceLoader.exists("res://assets/%s.wav" % id),
+			"the night has a sound for '%s'" % id)
+
+	# **The house is the loudest thing in the game.** It is the only sound
+	# that means you are losing, and a game where the alarm is quieter than
+	# the gunfire is a game that has buried its own bad news.
+	var alarm := _wav_facts("res://assets/%s.wav" % SfxScript.HOUSE_SOUND)
+	var loudest := 0.0
+	var loudest_name := ""
+	var folder := DirAccess.open("res://assets/sfx/")
+	if folder != null:
+		var names: Array = []
+		for file_name in folder.get_files():
+			if file_name.ends_with(".wav"):
+				names.append(file_name)
+		names.sort()
+		for file_name in names:
+			if file_name == String(SfxScript.HOUSE_SOUND).get_file() + ".wav":
+				continue
+			var one := _wav_facts("res://assets/sfx/" + file_name)
+			if one.is_empty():
+				continue
+			expect(one["peak"] <= 1.0, "'%s' does not clip" % file_name,
+				"%.3f" % one["peak"])
+			if float(one["peak"]) > loudest:
+				loudest = float(one["peak"])
+				loudest_name = file_name
+	expect(not alarm.is_empty() and float(alarm["peak"]) > loudest,
+		"the house being hit is the loudest sound in the game",
+		"%.2f against %s at %.2f"
+		% [alarm.get("peak", 0.0), loudest_name, loudest])
+
+	# **The Giant is heard before it is seen**, which means two things and
+	# both are asserted: its roar is the longest sound in the game, and `Sfx`
+	# plays it with no position, so the falloff leaves it alone.
+	var roar := _wav_facts("res://assets/%s.wav"
+		% SfxScript.ENEMY_SOUNDS[&"giant"])
+	var longest := 0.0
+	for id in night:
+		if id == SfxScript.ENEMY_SOUNDS[&"giant"]:
+			continue
+		var one := _wav_facts("res://assets/%s.wav" % id)
+		if not one.is_empty():
+			longest = maxf(longest, float(one["seconds"]))
+	expect(not roar.is_empty() and float(roar["seconds"]) > longest,
+		"the Giant's roar is longer than anything else at night",
+		"%.2fs against %.2fs" % [roar.get("seconds", 0.0), longest])
+
+	# **The distance falloff.** Asked of the rule rather than inferred from a
+	# voice's volume, the same way `is_silent` is.
+	var here := Vector2(100.0, 100.0)
+	expect(is_equal_approx(AudioScript.loudness(here, here), 1.0),
+		"a sound at your feet is at full volume")
+	expect(is_equal_approx(AudioScript.loudness(here, AudioScript.NOWHERE),
+		1.0), "and a sound with no position is too - that is what it means")
+	var near := AudioScript.loudness(here, here + Vector2(120.0, 0.0))
+	var far := AudioScript.loudness(here, here + Vector2(360.0, 0.0))
+	var miles := AudioScript.loudness(here, here + Vector2(4000.0, 0.0))
+	expect(near > far and far > miles,
+		"further away is quieter, all the way out",
+		"%.2f then %.2f then %.2f" % [near, far, miles])
+	expect(is_equal_approx(miles, AudioScript.FAR_FLOOR),
+		"and it bottoms out rather than going silent",
+		"%.2f against %.2f" % [miles, AudioScript.FAR_FLOOR])
+	expect(AudioScript.FAR_FLOOR > 0.0,
+		"a wave chewing the far fence is still something you can hear",
+		str(AudioScript.FAR_FLOOR))
+
+	# The gaps that stop a crowd becoming weather. A groan may not come round
+	# anything like as often as a shot may.
+	expect(SfxScript.GROAN_GAP > SfxScript.SHOT_GAP * 4,
+		"a groan waits far longer than a shot does",
+		"%d against %d" % [SfxScript.GROAN_GAP, SfxScript.SHOT_GAP])
+
+	print("  %d night sounds, alarm %.2f over %.2f, roar %.2fs"
+		% [night.size(), alarm.get("peak", 0.0), loudest,
+			roar.get("seconds", 0.0)])
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## Every id the night can ask for.
+func _night_sound_ids() -> Array:
+	var out: Array = []
+	for id in GameData.sorted_names(SfxScript.TOWER_SOUNDS.keys()):
+		out.append(SfxScript.TOWER_SOUNDS[id])
+	for id in GameData.sorted_names(SfxScript.ENEMY_SOUNDS.keys()):
+		out.append(SfxScript.ENEMY_SOUNDS[id])
+	out.append(SfxScript.IMPACT_SOUND)
+	out.append(SfxScript.DEATH_SOUND)
+	out.append(SfxScript.BREAK_SOUND)
+	out.append(SfxScript.HOUSE_SOUND)
+	return out

@@ -31,6 +31,21 @@ extends Node
 ## held key has to water a whole row as the player walks it. So it is spotted
 ## by counting watered plots instead. The bite has no verb at all - it is a
 ## window opening - and the sale is money arriving while the stall is open.
+##
+## ## The night, and why fifty zombies are not fifty groans
+##
+## A shot is a tower whose `reload` went **up**: it counts down, so a rise is
+## the tick it fired on, read off the rules rather than guessed from a
+## projectile. Impacts, deaths and wrecks are the edges `particles.gd`
+## already watches, for the same reasons and with the same caveat - missing
+## one costs a noise and nothing else.
+##
+## Groans are **per kind and not per body**. Fifty walkers do not groan fifty
+## times; the walkers groan, now and then, from wherever the nearest one is.
+## That is the whole of "fifty zombies do not turn into noise": the rate is
+## fixed by how many *sorts* of thing are out there, which is at most five,
+## and `input_check` asserts that ten times the crowd is not ten times the
+## sound.
 
 ## Verb -> the sound it makes. A verb absent from here is deliberately silent:
 ## `repair` is the night's and belongs to task 0085, and asking for a sound
@@ -52,6 +67,53 @@ const WATER_SOUND := &"sfx/water"
 const BITE_SOUND := &"sfx/bite"
 const SELL_SOUND := &"sfx/sell"
 
+## What each defence sounds like when it goes off. A defence absent from here
+## does not fire - a wall, a fence and a barricade are furniture.
+const TOWER_SOUNDS := {
+	&"gun_tower": &"sfx/shot_gun",
+	&"auto_crossbow": &"sfx/shot_bolt",
+	&"flame_tower": &"sfx/flame",
+	&"mortar": &"sfx/mortar",
+	&"mine": &"sfx/mine_blast",
+}
+
+## One voice each, so a crowd is a chord rather than a wall.
+const ENEMY_SOUNDS := {
+	&"walker": &"sfx/groan_walker",
+	&"runner": &"sfx/groan_runner",
+	&"tank": &"sfx/groan_tank",
+	&"breaker": &"sfx/groan_breaker",
+	&"giant": &"sfx/roar_giant",
+}
+
+## The `Audio` script, **preloaded rather than named**. `verify.py` parses
+## each file on its own with no autoloads registered, so `Audio.NOWHERE`
+## would be an undeclared identifier there and the parse row would go red for
+## a file that is perfectly correct at runtime. A preload is a resource path
+## and always resolves.
+const AudioScript := preload("res://src/app/audio.gd")
+
+const IMPACT_SOUND := &"sfx/impact"
+const DEATH_SOUND := &"sfx/death"
+const BREAK_SOUND := &"sfx/wall_break"
+const HOUSE_SOUND := &"sfx/house_hit"
+
+## How often one sort of enemy is heard from, on average. Not a rule and not
+## in `game_data.gd`: a groan changes nothing, and a number in there would
+## move the data hash for a noise.
+const GROAN_EVERY_SECONDS := 2.6
+
+## The shortest gap between two of the same sound, in frames at sixty.
+##
+## A tower may fire as fast as it reloads, so its gap is nearly nothing. A
+## groan that came round twice in half a second would be the same zombie
+## clearing its throat, so its gap is long. The house has no gap at all:
+## every hit it takes is one you are meant to count.
+const SHOT_GAP := 3
+const GROAN_GAP := 40
+const IMPACT_GAP := 5
+const DEATH_GAP := 8
+
 var _state: Dictionary = {}
 
 ## The cycle being watched: what it is, where, and the tick it finishes on.
@@ -62,6 +124,13 @@ var _due := -1
 var _was_biting := false
 var _watered := -1
 var _money := -1
+
+## The night's memory: reload counters by cell, what was alive and how hurt,
+## which occupants were standing, and the house.
+var _reloads: Dictionary = {}
+var _bodies: Dictionary = {}
+var _standing: Dictionary = {}
+var _house := -1
 
 var _audio: Node = null
 
@@ -77,11 +146,23 @@ func show_state(state: Dictionary) -> void:
 	_was_biting = false
 	_watered = -1
 	_money = -1
+	_forget_the_night()
 
 
-func _process(_delta: float) -> void:
+func _forget_the_night() -> void:
+	_reloads.clear()
+	_bodies.clear()
+	_standing.clear()
+	_house = -1
+
+
+func _process(delta: float) -> void:
 	if _state.is_empty():
 		return
+	# The ears go where the farmer is, because that is where the camera is.
+	if _audio != null:
+		_audio.listen_at(_where_the_player_is())
+
 	if int(_state["phase"]) != Phases.DAY:
 		# The farm is asleep after dark and these verbs do not tick then. The
 		# counters are reset so that coming back to the farm does not fire a
@@ -90,7 +171,11 @@ func _process(_delta: float) -> void:
 		_due = -1
 		_watered = -1
 		_money = -1
+		_watch_night(delta)
 		return
+	# And the night's memory goes the other way, so that a tower which fired
+	# on the last tick of a wave does not fire again at dawn.
+	_forget_the_night()
 	_watch_action()
 	_watch_water()
 	_watch_fishing()
@@ -175,6 +260,164 @@ func _ready() -> void:
 	_audio = get_node_or_null(^"/root/Audio")
 
 
+# ------------------------------------------------------------------ the night
+
+func _watch_night(delta: float) -> void:
+	_watch_towers()
+	_watch_bodies()
+	_watch_structures()
+	_watch_house()
+	_watch_groans(delta)
+
+
+## **A shot is a reload counter going up.** It counts down every tick, so the
+## one tick it rises on is the tick the thing went off - the same reading
+## `world_view.gd` uses to put a muzzle flash in the right frame.
+func _watch_towers() -> void:
+	var occupants: Dictionary = _state["occupants"]
+	var now: Dictionary = {}
+	# Cell indices, so these are integers and sort as integers.
+	var keys: Array = occupants.keys()
+	keys.sort()
+	for idx in keys:
+		var on: Dictionary = occupants[idx]
+		var id := StringName(on["id"])
+		if not TOWER_SOUNDS.has(id):
+			continue
+		var reload := int(on.get("reload", 0))
+		now[idx] = reload
+		if reload > int(_reloads.get(idx, reload)):
+			_ask_at(TOWER_SOUNDS[id], _cell_middle(Grid.cell(int(idx))),
+				SHOT_GAP)
+	_reloads = now
+
+
+## Impacts, deaths, and the Giant announcing itself.
+func _watch_bodies() -> void:
+	var now: Dictionary = {}
+	for entity_id in Entities.ids(_state):
+		var one := Entities.get_one(_state, int(entity_id))
+		if one.is_empty():
+			continue
+		var kind := StringName(one["kind"])
+		var hurt := int(one.get("hurt", 0))
+		var at := _body_middle(one)
+		now[int(entity_id)] = [kind, hurt, at]
+
+		var was: Variant = _bodies.get(int(entity_id), null)
+		if was == null:
+			# **Heard before it is seen.** `NOWHERE` rather than a position,
+			# so the roar arrives at full volume from the far fence - which
+			# is the requirement, and the only place the falloff is skipped
+			# on purpose.
+			if kind == &"giant":
+				_ask_at(ENEMY_SOUNDS[kind], AudioScript.NOWHERE, 1)
+			continue
+		# On the rise, not for as long as it shows: `hurt` is a countdown and
+		# reading it as a level emitted on every frame of it.
+		if hurt > int((was as Array)[1]):
+			_ask_at(IMPACT_SOUND, at, IMPACT_GAP)
+
+	for gone in _bodies:
+		if now.has(gone):
+			continue
+		var was_at: Vector2 = (_bodies[gone] as Array)[2]
+		_ask_at(DEATH_SOUND, was_at, DEATH_GAP)
+	_bodies = now
+
+
+## Something the player built is no longer there.
+func _watch_structures() -> void:
+	var occupants: Dictionary = _state["occupants"]
+	var now: Dictionary = {}
+	var keys: Array = occupants.keys()
+	keys.sort()             # cell indices, integers
+	for idx in keys:
+		var id := StringName((occupants[idx] as Dictionary)["id"])
+		if GameData.DEFENCES.has(id):
+			now[idx] = true
+	if not _standing.is_empty():
+		for gone in _standing:
+			if not now.has(gone):
+				_ask_at(BREAK_SOUND, _cell_middle(Grid.cell(int(gone))), 1)
+	_standing = now
+
+
+## **The one that means you are losing.** No gap on it: every hit is one the
+## player is meant to count.
+func _watch_house() -> void:
+	var hp := int(_state["house_hp"])
+	if _house >= 0 and hp < _house:
+		_ask_at(HOUSE_SOUND, _house_middle(), 1)
+	_house = hp
+
+
+## **Per kind, not per body.** However many are out there, the walkers are one
+## voice and they are heard from now and again, from wherever the nearest one
+## is standing.
+func _watch_groans(delta: float) -> void:
+	var nearest := nearest_by_kind()
+	for kind in GameData.sorted_names(nearest.keys()):
+		# A chance a frame rather than a timer, so two kinds that arrived
+		# together do not groan in lockstep for the rest of the night.
+		if randf() < delta / GROAN_EVERY_SECONDS:
+			_ask_at(ENEMY_SOUNDS[kind], nearest[kind], GROAN_GAP)
+
+
+## The closest of each sort of enemy, which is how many voices a crowd
+## amounts to.
+##
+## **This is the whole of "fifty zombies do not turn into noise".** Fifty
+## walkers are one entry, not fifty: the size of what this returns is capped
+## by how many *sorts* of thing exist, which is four. Public so that
+## `input_check` can ask the claim directly rather than counting noises over
+## a stretch of frames and hoping the random draw cooperated.
+func nearest_by_kind() -> Dictionary:
+	var nearest: Dictionary = {}
+	var ears := _where_the_player_is()
+	for entity_id in Entities.ids(_state):
+		var one := Entities.get_one(_state, int(entity_id))
+		if one.is_empty():
+			continue
+		var kind := StringName(one["kind"])
+		if not ENEMY_SOUNDS.has(kind) or kind == &"giant":
+			continue        # the Giant announces itself and does not mutter
+		var at := _body_middle(one)
+		var best: Variant = nearest.get(kind, null)
+		if best == null or ears.distance_to(at) < ears.distance_to(best):
+			nearest[kind] = at
+	return nearest
+
+
+# ----------------------------------------------------------------- the places
+
+func _where_the_player_is() -> Vector2:
+	return _cell_middle(Player.cell(_state))
+
+
+func _cell_middle(cell: Vector2i) -> Vector2:
+	var size := float(GameData.TILE_SIZE)
+	return Vector2(cell.x * size + size * 0.5, cell.y * size + size * 0.5)
+
+
+func _body_middle(one: Dictionary) -> Vector2:
+	var per := float(GameData.TILE_SIZE) / float(Player.SUBTILE)
+	return Vector2(float(one["pos"][0]), float(one["pos"][1])) * per
+
+
+func _house_middle() -> Vector2:
+	var cells := Farm.cells_with(_state, &"house")
+	if cells.is_empty():
+		return _where_the_player_is()
+	return _cell_middle(cells[cells.size() / 2] as Vector2i)
+
+
+# ------------------------------------------------------------------- the asks
+
 func _ask(id: StringName) -> void:
+	_ask_at(id, _where_the_player_is(), 1)
+
+
+func _ask_at(id: StringName, at: Vector2, gap: int) -> void:
 	if _audio != null:
-		_audio.play(id)
+		_audio.play(id, at, gap)

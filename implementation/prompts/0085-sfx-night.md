@@ -1,7 +1,7 @@
 # 0085 - The sounds of the night
 
 - **Phase:** 6 - Sound and juice
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0083, 0026
 - **Likely files:** tools/gen_sfx.py, assets/sfx/
 

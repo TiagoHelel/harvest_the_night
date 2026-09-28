@@ -33,6 +33,19 @@ behind it - miss it and the fish is gone - so it is allowed to be brighter and
 louder than the rest, and there is a check that it actually is. A sound that
 is supposed to grab attention and does not is worse than no sound, because the
 player learns to ignore the one that matters.
+
+## The night is the other half, and it is louder
+
+Task 0085 adds the defences, the enemies and the four things that happen to
+them. It is deliberately harsher: `design.md` promises two realities on the
+same tiles, and a player with their eyes shut should know which one they are
+in. Above the night sits one more tier - **the house being hit is the loudest
+sound in the game**, because it is the only one that means you are losing.
+
+Each enemy gets its **own** voice rather than a shared groan, because "fifty
+zombies do not turn into noise" is a done-when and five voices at five
+pitches is most of how it is met. The rest is in `Audio`: a distance falloff
+and a minimum gap between two plays of the same sound.
 """
 import io
 import math
@@ -53,6 +66,19 @@ SOFT_PEAK = 0.55
 
 ## What the bite may peak at. Louder on purpose; see the module docstring.
 LOUD_PEAK = 0.85
+
+## What the night peaks at. **The loud half of the game**: a shot has to cut
+## through a wave, and the design document's two realities are meant to feel
+## different before you have looked at the screen.
+NIGHT_PEAK = 0.70
+
+## The Giant, which is allowed to be bigger than everything except the alarm.
+GIANT_PEAK = 0.88
+
+## **The house being hit, which is the loudest sound in the game.** It is the
+## only one that means you are losing, and `headless_check` asserts that
+## nothing else reaches it.
+ALARM_PEAK = 0.95
 
 
 class Noise:
@@ -321,9 +347,145 @@ def reel():
     return mix(pull, gain(splash, 0.55))
 
 
+# ------------------------------------------------------------- the defences
+
+def shot_gun():
+    """A rifle crack. Short, hard, and the loudest thing on the farm bar one."""
+    crack = decay(highpass(noise(8501, 140), 700), 11.0, 1.0)
+    body = decay(lowpass(noise(8502, 140), 1800), 26.0, 1.0)
+    thump = decay(sweep(190.0, 70.0, 120, 0.5), 32.0, 2.0)
+    return mix(gain(crack, 0.85), gain(body, 0.5), gain(thump, 0.45))
+
+
+def shot_bolt():
+    """A crossbow: the string, then the air. No powder in it at all."""
+    string = decay(sweep(900.0, 320.0, 90, 0.5), 18.0, 1.5)
+    air = decay(highpass(lowpass(noise(8503, 130), 5200), 1800), 24.0, 2.0)
+    return mix(gain(string, 0.6), gain(air, 0.55))
+
+
+def flame():
+    """A flamethrower: no transient worth the name, all breath."""
+    body = sweep_lowpass(noise(8504, 420), 600.0, 2400.0)
+    body = highpass(body, 220)
+    roar = decay(lowpass(noise(8505, 420), 420), 260.0, 40.0)
+    return mix(gain(swell(body, 70.0, 220.0), 0.8), gain(roar, 0.45))
+
+
+def mortar():
+    """A mortar: the thump you feel, then the whistle going away."""
+    thump = decay(sweep(150.0, 44.0, 220, 0.4), 70.0, 3.0)
+    blast = decay(lowpass(noise(8506, 200), 900), 40.0, 2.0)
+    whistle = at(120, decay(sweep(1500.0, 900.0, 260, 1.4), 110.0, 30.0))
+    return mix(gain(thump, 0.8), gain(blast, 0.5), gain(whistle, 0.22))
+
+
+def mine_blast():
+    """A mine going off under something. All bottom end and grit."""
+    boom = decay(sweep(210.0, 38.0, 380, 0.35), 95.0, 1.5)
+    grit = decay(lowpass(noise(8507, 260), 2400), 50.0, 1.0)
+    return mix(gain(boom, 0.85), gain(grit, 0.55))
+
+
+# -------------------------------------------------------------- the enemies
+
+def _groan(seed, low_hz, high_hz, ms, rasp_hz, curve=1.0):
+    """One voice. Five of these at five pitches is most of the done-when.
+
+    A groan is a pitch wandering downward with noise dragged along under it -
+    a sine alone reads as a machine, and noise alone reads as wind.
+    """
+    voice = sweep(low_hz, high_hz, ms, curve)
+    breath = lowpass(noise(seed, ms), rasp_hz)
+    both = mix(gain(voice, 0.7), gain(breath, 0.45))
+    return swell(both, ms * 0.18, ms * 0.55)
+
+
+def groan_walker():
+    """The common one, and therefore the one that must not grate."""
+    return _groan(8510, 190.0, 132.0, 620, 900)
+
+
+def groan_runner():
+    """Higher and shorter: something in a hurry."""
+    return _groan(8511, 330.0, 268.0, 360, 1600)
+
+
+def groan_tank():
+    """The bottom of the register, and slow with it."""
+    return _groan(8512, 104.0, 74.0, 900, 520)
+
+
+def groan_breaker():
+    """Mid, with more grit than voice - it is here to chew through a wall."""
+    return _groan(8513, 240.0, 168.0, 520, 2200)
+
+
+def roar_giant():
+    """**Heard before it is seen.**
+
+    The lowest and longest thing in the game and the only enemy sound that
+    ignores the distance falloff, because the whole point of it is that it
+    reaches you from the far fence. It *rises* where every other groan falls,
+    which is what makes it read as something arriving rather than something
+    dying.
+    """
+    body = sweep(58.0, 96.0, 1400, 1.3)
+    growl = sweep(29.0, 48.0, 1400, 1.3)
+    breath = lowpass(noise(8514, 1400), 700)
+    both = mix(gain(body, 0.62), gain(growl, 0.4), gain(breath, 0.32))
+    return swell(both, 260.0, 520.0)
+
+
+# --------------------------------------------------------- what happens next
+
+def impact():
+    """Something landing in something soft. Short, so fifty of them can."""
+    thud = decay(lowpass(noise(8520, 120), 1100), 20.0, 1.0)
+    meat = decay(sweep(260.0, 120.0, 110, 0.5), 26.0, 1.5)
+    return mix(gain(thud, 0.7), gain(meat, 0.5))
+
+
+def death():
+    """A body going down: the voice gives out, then it lands."""
+    give = decay(sweep(210.0, 84.0, 260, 0.7), 80.0, 4.0)
+    rasp = decay(lowpass(noise(8521, 260), 1400), 60.0, 6.0)
+    land = at(190, decay(lowpass(noise(8522, 140), 700), 28.0, 2.0))
+    return mix(gain(give, 0.55), gain(rasp, 0.4), gain(land, 0.5))
+
+
+def wall_break():
+    """Wood letting go: a crack and then the pieces."""
+    snap = decay(highpass(noise(8523, 120), 1200), 14.0, 1.0)
+    timber = decay(sweep(320.0, 110.0, 200, 0.6), 50.0, 2.0)
+    debris = mix(
+        at(90, decay(lowpass(noise(8524, 90), 2600), 16.0)),
+        at(170, decay(lowpass(noise(8525, 90), 2200), 14.0)),
+        at(240, decay(lowpass(noise(8526, 110), 1800), 18.0)),
+    )
+    return mix(gain(snap, 0.7), gain(timber, 0.55), gain(debris, 0.45))
+
+
+def house_hit():
+    """**The most alarming sound in the game.**
+
+    It is the only one that means you are losing, so it is the loudest, and it
+    is built out of the three things ears refuse to ignore: a low boom you
+    feel, a bright crack on top of it, and two notes a semitone apart, which
+    is the interval every alarm ever made is built on. Nothing else in the
+    game is dissonant on purpose.
+    """
+    boom = decay(sweep(170.0, 52.0, 520, 0.4), 130.0, 1.5)
+    crack = decay(highpass(noise(8527, 180), 1600), 22.0, 1.0)
+    alarm_a = at(60, decay(tone(740.0, 420), 150.0, 6.0))
+    alarm_b = at(60, decay(tone(784.0, 420), 150.0, 6.0))
+    return mix(gain(boom, 0.8), gain(crack, 0.55),
+               gain(alarm_a, 0.3), gain(alarm_b, 0.3))
+
+
 ## Every day sound: the id the game asks for, the recipe, and what it may peak
 ## at. The id is what `Audio.play()` takes, minus the `sfx/` the folder adds.
-SOUNDS = [
+DAY_SOUNDS = [
     ("chop", chop, SOFT_PEAK),
     ("mine", mine, SOFT_PEAK),
     ("till", till, SOFT_PEAK),
@@ -338,6 +500,26 @@ SOUNDS = [
     ("reel", reel, SOFT_PEAK),
     ("bite", bite, LOUD_PEAK),
 ]
+
+## And the night's, which is the loud half.
+NIGHT_SOUNDS = [
+    ("shot_gun", shot_gun, NIGHT_PEAK),
+    ("shot_bolt", shot_bolt, NIGHT_PEAK),
+    ("flame", flame, NIGHT_PEAK),
+    ("mortar", mortar, NIGHT_PEAK),
+    ("mine_blast", mine_blast, NIGHT_PEAK),
+    ("groan_walker", groan_walker, NIGHT_PEAK),
+    ("groan_runner", groan_runner, NIGHT_PEAK),
+    ("groan_tank", groan_tank, NIGHT_PEAK),
+    ("groan_breaker", groan_breaker, NIGHT_PEAK),
+    ("roar_giant", roar_giant, GIANT_PEAK),
+    ("impact", impact, NIGHT_PEAK),
+    ("death", death, NIGHT_PEAK),
+    ("wall_break", wall_break, NIGHT_PEAK),
+    ("house_hit", house_hit, ALARM_PEAK),
+]
+
+SOUNDS = DAY_SOUNDS + NIGHT_SOUNDS
 
 
 # -------------------------------------------------------------------- the file
@@ -431,8 +613,100 @@ def preview(folder):
         hits += 1
     path = os.path.join(folder, "_a-minute-of-chopping.wav")
     io.open(path, "wb").write(wav_bytes(track))
-    print("  preview: %d sounds and %d chops over %.0fs in %s"
-          % (len(SOUNDS), hits, seconds, folder))
+    io.open(os.path.join(folder, "_a-night.wav"), "wb").write(
+        wav_bytes(a_night()))
+    print("  preview: %d day and %d night sounds, %d chops over %.0fs, "
+          % (len(DAY_SOUNDS), len(NIGHT_SOUNDS), hits, seconds)
+          + "and a %.0fs night, in %s"
+          % (max(t for t, _, _ in A_NIGHT) + 3.0, folder))
+
+
+## A night, as a timeline of (seconds, sound, how far away).
+##
+## **For the done-when that needs ears**: "with eyes closed, a night's audio
+## says roughly what is happening". A wave arrives in the distance, the guns
+## answer, something gets through, the Giant comes, a wall goes, and the house
+## takes two hits. Nothing here is the game - it is the game's sounds in the
+## order the game would play them, at the volumes the falloff would give them,
+## so the question can be asked of a file rather than of a playthrough.
+A_NIGHT = [
+    (0.4, "groan_walker", 440.0),
+    (1.1, "groan_walker", 400.0),
+    (1.9, "shot_gun", 40.0),
+    (2.3, "impact", 200.0),
+    (2.7, "shot_bolt", 60.0),
+    (3.0, "impact", 240.0),
+    (3.4, "groan_runner", 300.0),
+    (3.9, "shot_gun", 40.0),
+    (4.2, "death", 220.0),
+    (4.8, "shot_bolt", 60.0),
+    (5.1, "impact", 180.0),
+    (5.6, "mortar", 90.0),
+    (6.2, "death", 260.0),
+    (6.6, "groan_tank", 260.0),
+    (7.1, "flame", 70.0),
+    (7.9, "shot_gun", 40.0),
+    (8.3, "death", 200.0),
+    (9.0, "roar_giant", -1.0),
+    (10.6, "groan_breaker", 180.0),
+    (11.2, "mine_blast", 150.0),
+    (11.8, "shot_gun", 40.0),
+    (12.4, "wall_break", 120.0),
+    (13.0, "groan_breaker", 90.0),
+    (13.6, "impact", 80.0),
+    (14.2, "house_hit", 60.0),
+    (15.1, "shot_gun", 40.0),
+    (15.6, "house_hit", 60.0),
+    (16.4, "death", 100.0),
+    (17.0, "shot_bolt", 60.0),
+    (17.6, "death", 140.0),
+]
+
+
+def falloff(distance):
+    """`Audio.loudness`, read out of the GDScript rather than copied.
+
+    Same argument as `pitch_jitter`: two numbers that have to match and live
+    in different files are two numbers that will not. A distance below zero
+    means the sound has no position - the Giant's roar - and is full volume.
+    """
+    near = _audio_number("NEAR")
+    earshot = _audio_number("EARSHOT")
+    floor = _audio_number("FAR_FLOOR")
+    if distance < 0.0 or distance <= near:
+        return 1.0
+    if distance >= earshot:
+        return floor
+    return 1.0 - (1.0 - floor) * (distance - near) / (earshot - near)
+
+
+def a_night():
+    """The timeline above, mixed down."""
+    made = {name: render(recipe, peak) for name, recipe, peak in SOUNDS}
+    length = int(RATE * (max(t for t, _, _ in A_NIGHT) + 3.0))
+    track = [0.0] * length
+    for when, name, distance in A_NIGHT:
+        one = made[name]
+        level = falloff(distance)
+        start = int(when * RATE)
+        for i, v in enumerate(one):
+            if start + i >= length:
+                break
+            track[start + i] += v * level
+    # The night is busy and these are meant to overlap; keep it off the rails
+    # without squashing the dynamics that are the whole point.
+    high = max(abs(v) for v in track)
+    if high > 0.98:
+        track = [v * 0.98 / high for v in track]
+    return track
+
+
+def _audio_number(name):
+    path = os.path.join(ROOT, "src", "app", "audio.gd")
+    for line in io.open(path, encoding="utf-8"):
+        if line.startswith("const %s " % name):
+            return float(line.split(":=")[1].split("#")[0].strip())
+    raise SystemExit("gen_sfx: audio.gd has no %s any more" % name)
 
 
 def pitch_jitter():
@@ -476,7 +750,8 @@ def main():
                 print("  " + line)
             print("FAIL  run: python tools/gen_sfx.py")
             return 1
-        print("OK    %d day sounds match their recipes" % len(files))
+        print("OK    %d sounds match their recipes (%d day, %d night)"
+          % (len(files), len(DAY_SOUNDS), len(NIGHT_SOUNDS)))
         return 0
 
     os.makedirs(OUT, exist_ok=True)

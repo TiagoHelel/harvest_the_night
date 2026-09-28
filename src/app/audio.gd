@@ -84,6 +84,24 @@ const MAX_VOICES := 16
 ## listen to is the minute the game actually plays.
 const PITCH_JITTER := 0.06
 
+## Where a sound has no position, and is played at full volume wherever the
+## listener is. UI noises, and the Giant's roar, which is meant to carry.
+const NOWHERE := Vector2(1e12, 1e12)
+
+## Inside this many pixels a sound is at full volume. About a tile and a half:
+## anything the player is standing on top of is simply loud.
+const NEAR := 24.0
+
+## Past this it is as quiet as it gets. Four hundred and eighty is the width
+## of the screen, so **a thing you can see is a thing you can hear**, and the
+## far fence of a six-hundred-and-forty pixel farm is at the floor.
+const EARSHOT := 480.0
+
+## How quiet the far side of the farm is. **Not silent.** A wave chewing
+## through the fence you are not standing at is the thing you most need to be
+## told about, and a falloff that muted it would be a falloff that hid it.
+const FAR_FLOOR := 0.3
+
 ## Drawn from the global RNG, never the run's.
 ##
 ## A pitch is not a rule. `src/core/` owns one seeded stream and everything
@@ -103,8 +121,13 @@ const SettingsScript := preload("res://src/app/settings.gd")
 ## id -> AudioStream, filled by `_scan()` and by anything that generates one.
 var _streams: Dictionary = {}
 
-## id -> the frame it last started on, for the same-frame dedupe.
+## id -> the frame it last started on, for the dedupe and the gap.
 var _last_frame: Dictionary = {}
+
+## Where the ears are. The view sets it; `NOWHERE` until something does, which
+## makes every positioned sound full volume rather than silent - the safe way
+## round for a listener nobody remembered to place.
+var _ears := NOWHERE
 
 ## Ids that have already been complained about, so a sound asked for every
 ## tick does not fill the log with the same line sixty times a second.
@@ -119,6 +142,9 @@ var _frame := 0
 var _pitch := RandomNumberGenerator.new()
 
 var _last_played := &""
+
+## id -> how many times it has taken a voice.
+var _plays: Dictionary = {}
 
 var _started := 0
 var _deduped := 0
@@ -156,6 +182,13 @@ func _process(_delta: float) -> void:
 	_frame += 1
 
 
+## Put the ears somewhere. The camera follows the farmer, so this is the
+## farmer - which is also the answer a player would give if asked where they
+## are standing.
+func listen_at(where: Vector2) -> void:
+	_ears = where
+
+
 ## Move the dedupe on by one frame.
 ##
 ## `_process` calls this when there is a tree. A headless check has no frames
@@ -172,14 +205,15 @@ func frame_passed() -> void:
 ## Four reasons nothing starts, in the order they are decided:
 ##
 ## 1. **The id is not one we have.** Warned about once and never again.
-## 2. **It already started this frame.** Twenty towers firing on one tick is
-##    one gunshot, not twenty stacked on top of each other six samples apart -
-##    which is not twenty gunshots, it is a click and eighteen decibels of
-##    headroom gone.
+## 2. **It started too recently.** `gap` frames is the shortest allowed
+##    distance between two plays of the same id. One - the default - means
+##    "not twice in a frame", which is twenty towers firing on one tick
+##    becoming one gunshot rather than twenty stacked six samples apart. A
+##    bigger gap is what stops fifty zombies becoming weather.
 ## 3. **Every voice is busy.** Dropped rather than stealing one mid-sound,
 ##    because a stolen voice is an audible cut.
 ## 4. Something is wrong with the stream itself.
-func play(id: StringName) -> bool:
+func play(id: StringName, at: Vector2 = NOWHERE, gap: int = 1) -> bool:
 	var stream := _stream_for(id)
 	if stream == null:
 		if not _warned.has(id):
@@ -188,7 +222,7 @@ func play(id: StringName) -> bool:
 			push_warning("Audio: nothing called '%s' - staying silent" % id)
 		return false
 
-	if int(_last_frame.get(id, -1)) == _frame:
+	if _frame - int(_last_frame.get(id, -1000000)) < maxi(gap, 1):
 		_deduped += 1
 		return false
 	# **Recorded before the voice is looked for**, not after. Otherwise a full
@@ -206,6 +240,7 @@ func play(id: StringName) -> bool:
 	voice.bus = bus
 	voice.stream = stream
 	voice.pitch_scale = _jitter(bus)
+	voice.volume_db = linear_to_db(loudness(_ears, at))
 	# **Told to play only when the tree will take it.** `AudioStreamPlayer`
 	# errors with "playback can only happen when a node is inside the scene
 	# tree" while the tree is still starting, which is exactly when a headless
@@ -216,6 +251,7 @@ func play(id: StringName) -> bool:
 	if voice.is_inside_tree():
 		voice.play()
 	_last_played = id
+	_plays[id] = int(_plays.get(id, 0)) + 1
 	_started += 1
 	return true
 
@@ -277,7 +313,9 @@ func scan() -> int:
 
 func stop_all() -> void:
 	for voice in _voices:
-		(voice as AudioStreamPlayer).stop()
+		var player := voice as AudioStreamPlayer
+		player.stop()
+		player.volume_db = 0.0
 	_last_frame.clear()
 
 
@@ -305,6 +343,26 @@ func apply_volumes() -> void:
 		AudioServer.set_bus_mute(index, silent)
 		AudioServer.set_bus_volume_db(index,
 			0.0 if silent else linear_to_db(level))
+
+
+## How loud something at `at` is to ears at `ears`.
+##
+## Its own function, and a static one, for the reason `is_silent` is: the rule
+## is the part with a decision in it, and a check should be able to ask it
+## straight rather than infer it from a voice's volume. Linear between `NEAR`
+## and `EARSHOT` rather than inverse-square, because inverse-square is right
+## for a point source in open air and wrong for a game that wants the far
+## fence audible - physics is not the brief here, legibility is.
+static func loudness(ears: Vector2, at: Vector2) -> float:
+	if at == NOWHERE or ears == NOWHERE:
+		return 1.0
+	var distance := ears.distance_to(at)
+	if distance <= NEAR:
+		return 1.0
+	if distance >= EARSHOT:
+		return FAR_FLOOR
+	var across := (distance - NEAR) / (EARSHOT - NEAR)
+	return 1.0 - (1.0 - FAR_FLOOR) * across
 
 
 ## Whether a bus should be silent, given its level and the mute flag.
@@ -352,6 +410,13 @@ func last_played() -> StringName:
 	return _last_played
 
 
+## How many times one id has taken a voice since the counts were last
+## forgotten. `started()` answers "did anything happen"; on a farm with a
+## dozen things ticking, this answers the question worth asking.
+func plays_of(id: StringName) -> int:
+	return int(_plays.get(id, 0))
+
+
 func known_ids() -> Array:
 	return GameData.sorted_names(_streams.keys())
 
@@ -376,6 +441,8 @@ func warnings() -> int:
 
 
 func forget_counts() -> void:
+	_plays.clear()
+	_last_played = &""
 	_started = 0
 	_deduped = 0
 	_dropped = 0
