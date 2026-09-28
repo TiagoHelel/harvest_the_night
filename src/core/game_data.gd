@@ -1285,8 +1285,66 @@ const NIGHTS: Array = [
 	},
 ]
 
-## How many nights the MVP has. Past this, task 0070 generates them.
+## How many nights the MVP has. Past this, `Endless` generates them.
 const MVP_NIGHTS := 10
+
+## The curve that writes night eleven and everything after it.
+##
+## **The authored ten are the shape; this is the extrapolation.** A generated
+## night is the same record as a written one - note, opening, gap, waves - so
+## everything downstream of `Waves.night_of()` cannot tell the difference, and
+## nothing in `Enemies`, `Rewards` or the HUD needed a line about endless.
+##
+## ## What grows, and what must not
+##
+## `growth_percent` is added per night past the tenth, **not compounded**:
+## compounding turns night forty into a number with no relationship to a farm
+## anyone could build, and the point of endless is "how far does my build go",
+## not "watch an exponent win". Night ten sends 85, so at 12 a night past it
+## sends 85 + ten more each night: night 25 sends around 238.
+##
+## `mix` is a weight per kind and how much that weight shifts per night. The
+## walker's share falls and the tank's and breaker's rise, so a late night is
+## not merely a bigger early night - which is the difference between a curve
+## and a multiplier. **A weight never falls below one**: a kind that dropped
+## out entirely would quietly narrow the game the longer you played it.
+##
+## `is_boss` kinds are not in `mix` and cannot be: the Giant arrives on its own
+## schedule below, and rolling one out of the mix would put a boss on night
+## eleven. `validate()` refuses a mix that names one, or that names an enemy
+## which does not exist.
+const ENDLESS: Dictionary = {
+	# Added to the night's size per night past the tenth, of night ten's size.
+	"growth_percent": 12,           # LEVER: percent a night, 4-30
+	# **About** how many waves a generated night arrives in, and how often
+	# that grows. A target rather than a count: the bodies are dealt to the
+	# kinds in proportion, and the rounding sometimes lands a wave short.
+	"waves": 7,                     # LEVER: waves, 4-12
+	"extra_wave_every": 10,         # LEVER: nights per extra wave, 5-25
+	# A generated night is paced at the tightest the authored ten reach.
+	"opening_ticks": 0,
+	"gap_ticks": 4 * SECONDS,       # LEVER: ticks, 2-10 seconds worth
+	# The Giant comes back every fifth night - 15, 20, 25 - and one more of
+	# them every tenth, so night twenty brings two and night thirty three.
+	"giant_every": 5,               # LEVER: nights, 3-10
+	"giant_extra_every": 10,        # LEVER: nights per extra Giant, 5-30
+	# **The drift stops here.** Left to run, `walker` reaches its floor of one
+	# and stays there: night 99 was measured at 992 bodies of which **one** was
+	# a walker, against 386 breakers. A weight clamped at one is not a kind
+	# that still turns up, it is a kind that has dropped out with a rounding
+	# error for a headstone - which is exactly the narrowing the floor was put
+	# there to prevent. Twenty nights of drift and then a fixed heavy mix:
+	# night 99 becomes 110 walkers, 275 runners, 286 tanks and 319 breakers,
+	# which is a wall with everything still in it.
+	"mix_settles_after": 20,        # LEVER: nights of drift, 5-40
+	# kind -> [weight at night ten, how much it shifts each night after]
+	"mix": {
+		&"walker": [40, -1],        # LEVER: weight and drift
+		&"runner": [30, 1],         # LEVER: weight and drift
+		&"tank": [12, 2],           # LEVER: weight and drift
+		&"breaker": [18, 2],        # LEVER: weight and drift
+	},
+}
 
 ## Where the horde comes in, as `[[x, y], ...]` per spawn point.
 ##
@@ -2314,6 +2372,38 @@ static func check_nights(nights: Array) -> Array:
 				errors.append("night %d wave %d waits less than no time"
 					% [n + 1, w + 1])
 
+	# **The endless curve may not invent an enemy**, which is task 0070's own
+	# requirement, and may not name a boss: the Giant arrives on the schedule
+	# in `ENDLESS.giant_every`, and one rolled out of the weighted mix would
+	# turn up on night eleven.
+	var mix: Dictionary = ENDLESS["mix"]
+	if mix.is_empty():
+		errors.append("the endless mix is empty, so night eleven sends "
+			+ "nothing")
+	for kind in sorted_names(mix.keys()):
+		if not ENEMIES.has(kind):
+			errors.append("the endless mix names '%s', which is not an enemy"
+				% kind)
+			continue
+		if bool((ENEMIES[kind] as Dictionary).get("is_boss", false)):
+			errors.append("the endless mix names '%s', which is a boss - "
+				% kind + "bosses come from giant_every, not from the bag")
+		var pair: Variant = mix[kind]
+		if not (pair is Array) or (pair as Array).size() != 2:
+			errors.append("the endless mix entry for '%s' is not "
+				% kind + "[weight, drift]")
+	for field in ["growth_percent", "waves", "extra_wave_every", "gap_ticks",
+			"giant_every", "giant_extra_every", "mix_settles_after"]:
+		if not ENDLESS.has(field):
+			errors.append("the endless curve has no '%s'" % field)
+		elif int(ENDLESS.get(field, 0)) < 0:
+			errors.append("the endless curve's '%s' is negative" % field)
+	for field in ["waves", "extra_wave_every", "giant_every",
+			"giant_extra_every"]:
+		if int(ENDLESS.get(field, 0)) < 1:
+			errors.append("the endless curve's '%s' must be at least one, "
+				% field + "or it divides by zero or sends nothing")
+
 	if nights.size() != MVP_NIGHTS:
 		errors.append("MVP_NIGHTS is %d but %d nights are written"
 			% [MVP_NIGHTS, nights.size()])
@@ -2368,6 +2458,11 @@ static func digest() -> int:
 		"enemies": ENEMIES,
 		"nights": NIGHTS,
 		"wave_gap": [WAVE_GAP_TICKS, SPAWN_INTERVAL_TICKS, MVP_NIGHTS],
+		# **The generated nights are balance too.** They are not in `NIGHTS`,
+		# so without this line every lever of the endless curve could be
+		# turned without the data guard noticing - which is the one thing the
+		# guard exists to stop.
+		"endless": ENDLESS,
 		"spawns": SPAWNS,
 		"rewards": REWARDS,
 		"defeat": [DEFEAT_LOSS_PERCENT, DEFEAT_KEEPS_MONEY,

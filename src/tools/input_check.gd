@@ -41,7 +41,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 29
+const CASES := 30
 
 var passed := 0
 var failed := 0
@@ -100,6 +100,7 @@ func _run() -> void:
 	await _case_0056_night_hud()
 	await _case_0063_tech_tree()
 	await _case_0069_stats()
+	await _case_0070_endless()
 	_finish()
 
 
@@ -3039,6 +3040,68 @@ func _case_0069_stats() -> void:
 	await until(func() -> bool: return not screen.is_open(),
 		"the records to toggle shut")
 	expect(not screen.is_open(), "and R closes them")
+
+	await close_scene()
+	_completed += 1     # last line: an abandoned case never gets here
+
+
+## 0070 - playing on, past the authored ten.
+func _case_0070_endless() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var result: ResultScreen = require_control("ResultScreen")
+	if driver == null or result == null:
+		_completed += 1
+		await close_scene()
+		return
+
+	var state := driver.state
+
+	# **The second door is not there until the run has been beaten.** Task
+	# 0070's "off the critical path: a menu option, not the default" is this
+	# button: `BACK TO THE FARM` is what the screen does nine nights running,
+	# and playing on is the extra one that only appears at the end.
+	var play_on: Button = locate_control("PlayOnButton") as Button
+	expect(play_on != null, "the play-on button exists")
+	if play_on == null:
+		await close_scene()
+		_completed += 1
+		return
+	await frames(2)
+	expect(not play_on.visible, "and is not offered before the run is over")
+
+	# Beat the tenth night. The result screen reads the state, so putting the
+	# state at the end of a beaten run is putting the screen at the ending.
+	state["nights_won"] = GameData.MVP_NIGHTS
+	state["night"] = GameData.MVP_NIGHTS
+	expect(Run.is_over(state), "the run is over")
+	Phases.begin_preparation(state)
+	Sim.advance(state, GameData.PREPARATION_TICKS)
+	for _t in 40000:
+		if int(state["phase"]) != Phases.NIGHT:
+			break
+		Sim.advance(state, 1)
+	await until(func() -> bool: return play_on != null and play_on.visible,
+		"the ending to offer the second door")
+	expect(play_on.visible, "a beaten run offers to play on")
+
+	# **Clicking it puts the farm into night eleven**, which before task 0070
+	# was a quiet farm with nothing authored to fight.
+	var was := int(state["night"])
+	await click_control("PlayOnButton")
+	await until(func() -> bool: return Run.is_endless(driver.state),
+		"the run to go endless")
+	expect(Run.is_endless(driver.state), "clicking it carries the run on")
+	expect(not Run.is_over(driver.state),
+		"and the run stops being over", str(was))
+
+	# And the night it walks into is generated rather than empty.
+	var next_night := Phases.nights_won(driver.state) + 1
+	expect(next_night > GameData.MVP_NIGHTS,
+		"the next night is past the authored ten", str(next_night))
+	expect(Waves.size_of(next_night, int(driver.state["seed"])) > 0,
+		"and it has something to send",
+		str(Waves.summary_of(next_night, int(driver.state["seed"]))))
 
 	await close_scene()
 	_completed += 1     # last line: an abandoned case never gets here

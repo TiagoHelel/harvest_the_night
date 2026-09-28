@@ -5329,3 +5329,120 @@ Notes for next time: `runs_started` now climbs during `input_check`, because
 every case opens `Main.tscn` and every boot counts a run. That is correct
 behaviour and harmless, but it does mean the profile in `user://` is not a
 clean-room number on a development machine.
+
+## 0070 - Endless nights past ten - done 2026-09-27
+
+What changed: a new `src/core/endless.gd` writes night eleven and everything
+after it from a curve, and `Waves` hands one back wherever it used to hand
+back nothing. `python tools/nights.py 30` now prints the generated nights
+alongside the authored ten.
+
+Files: `src/core/endless.gd` (new), `src/core/waves.gd`,
+`src/core/game_data.gd`, `src/tools/nights.gd`, `tools/nights.py`,
+`src/tools/headless_check.gd`, `src/tools/input_check.gd`.
+
+Verify: 2873 headless / 561 input / sim hash unchanged, data hash moved.
+
+`design.md` says nothing about endless - it is scoped to the authored ten - so
+the shape here follows task 0070 and nothing else.
+
+### The integration is one function
+
+A generated night is exactly the record a person would have written: a note,
+an opening delay, a gap, and a list of `[kind, count, spawn]`. So
+`Waves.night_of()` returning a generated record past the tenth night is the
+**whole** of it. `table`, `size_of`, `reward_of`, `kinds_of`, `spawns_of`,
+`summary_of`, `delay_before` and the tick that sends them all carried on
+without knowing, and not a line in `Enemies`, `Rewards`, `Towers` or the HUD
+needed to hear about endless. `tools/nights.py` can print night 40 because it
+already knew how to print a night.
+
+The door into it already existed too: task 0066 built the `PLAY ON` button on
+the ending screen, calling `Run.go_endless()`. "Off the critical path: a menu
+option, not the default" was satisfied the day that button was written - `BACK
+TO THE FARM` is the default and this is the second one, and it only appears
+once the run has been beaten. Until today it led to a quiet farm.
+
+### Seeded, and *not* from the run's stream
+
+`Endless.night()` makes a fresh `Rng.create()` stream mixed from the run's
+seed and the night number, and never touches the run's own. That is not
+fastidiousness: `Waves.remaining()` is asked for the table **every tick** by
+the night HUD, and a pure question that advanced the run's RNG would make a
+night depend on how often somebody looked at the screen.
+
+`RandomNumberGenerator` is banned in `src/core/` and this is not an exception
+to that - `Rng.create()` hands back a plain four-word array, as saveable and
+hashable as anything else, and this one simply is not kept.
+
+### The curve fixes what comes; the seed fixes how it arrives
+
+Two runs meeting night 25 meet the same crowd - 240 bodies, two Giants, the
+same count of each kind - because that is the difficulty contract, and a night
+that was harder on an unlucky seed would make "how far did you get" mean
+nothing. The seed decides the **order**: which kind opens, how the heavy waves
+interleave, which side starts. Thirty seeds of night 25 give twenty-one
+different wave tables that all sum to the same thing.
+
+A consequence worth writing down: `summary_of(25, a)` and `summary_of(25, b)`
+print the same line, because a summary aggregates by kind. That is the summary
+not being the place to look, not the seed doing nothing.
+
+### Three things measurement changed my mind about
+
+1. **A floor of one is not variety.** The mix drifts - the walker's weight
+   falls, the tank's and breaker's rise - and I clamped each weight at one so
+   nothing could drop out. Printing night 99 showed 992 bodies of which
+   **one** was a walker, against 386 breakers. A kind that is one body in a
+   thousand has left the game and taken a rounding error as a headstone. Added
+   `mix_settles_after`: the drift runs for twenty nights and then stops, so
+   night 99 is 110 walkers, 275 runners, 286 tanks and 321 breakers - a wall
+   with everything still in it.
+2. **Rolling each wave's side independently looked varied and was worse.**
+   Night 20 came out with all seven waves on the east edge, which is a night
+   half a farm answers. Every authored night from the second onward comes from
+   both sides and this was not the place to take that back on a one-in-a-
+   hundred roll. The sides alternate now and the seed only picks which starts.
+3. **Which left the seed deciding almost nothing** - two seeds gave the same
+   night 25 half the time, because the only thing left to choose was a coin
+   flip. So the seed shuffles the order the kinds are dealt in, which changes
+   the night's shape without touching its totals or its sides.
+
+### Kept, not regenerated
+
+`Waves.tonight(state)` builds the generated record once, when the night it
+belongs to arrives, and puts it on the state - where it saves, loads and
+hashes with everything else. Generating it per call would have been a wave
+table sixty times a second for one answer, which is the mistake task 0025 paid
+for in the flow field and task 0067 in the tutorial. There is an assert that
+it survives a save unchanged and another that night 26 does not inherit night
+25's table.
+
+### An assert I wrote wrong
+
+`expect(str(kinds_of(25, 700)) == str(kinds_of(25, 729)))` failed on two
+tallies that were identical. `kinds_of()` fills its dictionary in wave order
+and the seed shuffles that order, so the same numbers printed differently -
+which is precisely the trap `State.hash_of()` sorts its keys to avoid, met
+from the other end. It compares sorted keys and values now.
+
+### Hashes
+
+| | from | to | why |
+|---|---|---|---|
+| sim hash | `2555959448` | `2555959448` | unchanged, and correctly so: the determinism scenario never reaches night eleven, so no generated night is ever built in it |
+| data hash | `3910754709` | `2601044827` | `GameData.ENDLESS` was added to `digest()`. **The generated nights are balance too**, and a curve outside the digest is eleven levers that could be turned without the guard noticing - which is the one thing the guard is for |
+
+`GameData.validate()` now refuses a curve that names an enemy which does not
+exist, that names a boss (the Giant arrives on `giant_every`; one rolled out
+of the weighted bag would turn up on night eleven), or whose divisors are
+zero.
+
+`python tools/verify.py` prints PASS: 2873 asserts, 561 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.
+
+Notes: `tools/nights.py` takes `[how many nights] [seed]` now. Night 11 sends
+95 against night 10's 85, night 25 sends 240 with two Giants, night 30 sends
+292 with three. Whether any of that is *winnable* is not known - task 0068
+recorded that no autoplayer policy has yet beaten night ten, and endless
+inherits that open question rather than answering it.

@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`###############.........`  **69 / 109 done**
+`###############.........`  **70 / 109 done**
 
-0 doing / 40 todo / 0 blocked across 9 phases.
+0 doing / 39 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0070 - Endless nights past ten**. The whole of what is left is
+First up: **0071 - The two palettes**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,24 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-40 task(s) left, the ready ones first, then what they
+39 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0070 - Endless nights past ten
-
-Ready to pick up.  Likely files: `src/core/endless.gd`.
-
-For the player who beat the Giant and wants to know how far the farm goes. Cheap to build, and it answers whether the loop holds past its authored content.
-
-- Waves generated from a curve past night 10, seeded and reproducible
-- The curve scales count and mix, never invents an enemy that does not exist
-- A Giant every fifth night, scaling
-- A best night reached, kept in the profile
-- It is off the critical path: a menu option, not the default
-
-  - done when: Night 25 is generated and playable
-  - done when: The same seed generates the same night 25 twice
 
 ### 0071 - The two palettes
 
@@ -703,7 +688,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0057** [Structures take damage and die](prompts/0057-structure-damage.md)
 - [x] **0058** [The Giant](prompts/0058-boss-giant.md)
 
-## 4 - Ten nights and progression  (11/12)
+## 4 - Ten nights and progression  (12/12)
 
 - [x] **0059** [Waves as data](prompts/0059-wave-data.md)
 - [x] **0060** [The ten nights, authored](prompts/0060-ten-nights.md)
@@ -716,7 +701,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0067** [The autoplayer](prompts/0067-autoplayer.md)
 - [x] **0068** [A balance sweep over the ten nights](prompts/0068-balance-sweep.md)
 - [x] **0069** [Run statistics](prompts/0069-stats.md)
-- [ ] **0070** [Endless nights past ten](prompts/0070-endless.md)
+- [x] **0070** [Endless nights past ten](prompts/0070-endless.md)
 
 ## 5 - Art and visual direction  (0/13)
 

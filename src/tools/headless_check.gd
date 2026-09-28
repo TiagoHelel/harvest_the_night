@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 62
+const GROUPS := 63
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -126,6 +126,7 @@ func _run() -> void:
 	_task_0067_autoplay()
 	_task_0068_balance()
 	_task_0069_stats()
+	_task_0070_endless()
 
 
 func _finish() -> void:
@@ -9291,8 +9292,12 @@ func _task_0059_wave_data() -> void:
 	# The summary line, which is what `tools/nights.py` prints.
 	print("  " + Waves.summary_of(GameData.MVP_NIGHTS))
 	expect(Waves.summary_of(1).contains("night"), "a night summarises")
-	expect(Waves.summary_of(99).contains("nothing authored"),
-		"and one past the end says so", Waves.summary_of(99))
+	# Task 0070 gave the nights past the tenth a curve to come from, so this
+	# used to read "nothing authored" and now reads like a night, which is the
+	# whole of that task's integration.
+	expect(Waves.summary_of(99).contains("past the ten"),
+		"and one past the end is generated rather than empty",
+		Waves.summary_of(99))
 
 	_completed += 1     # last line: an abandoned group never gets here
 
@@ -10909,3 +10914,203 @@ func _somewhere_for_a_wall(state: Dictionary) -> Vector2i:
 			if Building.can_place(state, &"wall", cell):
 				return cell
 	return Vector2i(-1, -1)
+
+
+## 0070 - the nights past the authored ten.
+func _task_0070_endless() -> void:
+	# **A generated night is the same record a person would have written.**
+	# That is the whole integration: everything downstream of `night_of()`
+	# carries on without a line about endless.
+	var twenty_five := Waves.night_of(25, 777)
+	expect(not twenty_five.is_empty(), "night 25 is generated")
+	for field in ["note", "opening_ticks", "gap_ticks", "waves"]:
+		expect(twenty_five.has(field),
+			"and it has the same '%s' an authored night has" % field,
+			str(twenty_five.keys()))
+	expect(Endless.is_generated(25) and not Endless.is_generated(10),
+		"the tenth is authored and the twenty-fifth is not")
+
+	# **It never invents an enemy**, which is the requirement, and every wave
+	# is a real row: a kind that exists, a count above zero, a spawn point
+	# that is on the map.
+	for night in [11, 12, 15, 20, 25, 40, 99]:
+		var rows := Waves.table(night, 777)
+		expect(not rows.is_empty(), "night %d sends something" % night)
+		for row in rows:
+			var wave: Array = row
+			expect(GameData.ENEMIES.has(StringName(wave[0])),
+				"night %d sends only enemies that exist" % night, str(wave[0]))
+			expect(int(wave[1]) > 0,
+				"and never a wave of nobody", str(wave))
+			expect(int(wave[2]) >= 0
+				and int(wave[2]) < (GameData.SPAWNS as Array).size(),
+				"and from a spawn point that is on the map", str(wave))
+
+	# **The same seed generates the same night 25 twice.** The done-when.
+	expect(str(Endless.night(777, 25)) == str(Endless.night(777, 25)),
+		"the same seed generates the same night 25 twice")
+	expect(str(Waves.night_of(25, 777)) == str(Endless.night(777, 25)),
+		"and Waves hands back exactly what Endless made")
+
+	# **And different seeds are different nights.** Not asserted on one pair:
+	# the seed decides the order the kinds are dealt and which side opens, so
+	# two particular seeds can legitimately agree. Thirty of them must not.
+	var seen: Dictionary = {}
+	for seed_value in range(700, 730):
+		seen[str(Endless.night(seed_value, 25))] = true
+	expect(seen.size() >= 10,
+		"and thirty seeds give many different night 25s", str(seen.size()))
+
+	# **What comes is the curve's, not the seed's.** A night that was harder
+	# on an unlucky seed would make "how far did you get" mean nothing.
+	expect(Waves.size_of(25, 700) == Waves.size_of(25, 729),
+		"every seed's night 25 sends the same number",
+		"%d against %d" % [Waves.size_of(25, 700), Waves.size_of(25, 729)])
+	# **Compared by contents, not by `str()`.** `kinds_of()` fills its
+	# dictionary in wave order and the seed shuffles that order, so two
+	# identical tallies print differently - which is the trap the state hash
+	# sorts its keys to avoid, met again from the other end.
+	var one_mix := Waves.kinds_of(25, 700)
+	var other_mix := Waves.kinds_of(25, 729)
+	expect(GameData.sorted_names(one_mix.keys())
+		== GameData.sorted_names(other_mix.keys()),
+		"of the same kinds", "%s against %s"
+			% [str(one_mix.keys()), str(other_mix.keys())])
+	for kind in GameData.sorted_names(one_mix.keys()):
+		expect(int(one_mix[kind]) == int(other_mix.get(kind, -1)),
+			"and the same number of %s" % kind,
+			"%d against %d" % [int(one_mix[kind]),
+				int(other_mix.get(kind, -1))])
+
+	# **The table sends exactly what it promises.** The dealing rounds, and
+	# the leftovers have to land somewhere rather than quietly vanishing.
+	for night in [11, 17, 25, 50]:
+		var total := 0
+		for row in Waves.table(night, 777):
+			total += int((row as Array)[1])
+		var promised := Endless.size_of(night) + Endless.giants_on(night)
+		expect(total == promised,
+			"night %d deals out every body it promised" % night,
+			"%d against %d" % [total, promised])
+
+	# **It grows.** Each generated night is at least as big as the one before,
+	# and bigger than the authored tenth.
+	var last := Waves.size_of(GameData.MVP_NIGHTS)
+	for night in range(GameData.MVP_NIGHTS + 1, 40):
+		var size := Waves.size_of(night, 777)
+		expect(size >= last, "night %d is no smaller than night %d"
+			% [night, night - 1], "%d against %d" % [size, last])
+		last = size
+
+	# **A Giant every fifth night, scaling.** The requirement, exactly.
+	var every := int((GameData.ENDLESS as Dictionary)["giant_every"])
+	for night in range(GameData.MVP_NIGHTS + 1, 46):
+		var giants := Endless.giants_on(night)
+		if night % every == 0:
+			expect(giants >= 1, "night %d brings a Giant" % night,
+				str(giants))
+		else:
+			expect(giants == 0, "and night %d does not" % night, str(giants))
+	expect(Endless.giants_on(40) > Endless.giants_on(15),
+		"and there are more of them later",
+		"%d against %d" % [Endless.giants_on(40), Endless.giants_on(15)])
+
+	# **The mix shifts and then settles.** A walker weight left to drift for
+	# ever reached its floor and the night sent one of them against 386
+	# breakers, which is the kind narrowing this was supposed to prevent.
+	var early: Dictionary = Waves.kinds_of(12, 777)
+	var late: Dictionary = Waves.kinds_of(60, 777)
+	expect(int(late.get(&"tank", 0)) * int(early.get(&"walker", 1))
+		> int(early.get(&"tank", 0)) * int(late.get(&"walker", 1)),
+		"a late night is heavier than an early one, not merely bigger",
+		"%s against %s" % [str(early), str(late)])
+	for kind in (GameData.ENDLESS["mix"] as Dictionary):
+		expect(int(late.get(StringName(kind), 0)) > 1,
+			"and %s has not been squeezed out of night 60" % kind,
+			str(late))
+
+	# **Both sides, always.** Rolling each wave's side on its own gave night
+	# 20 seven waves all on the east edge, which is a night half a farm
+	# answers.
+	for night in [11, 13, 20, 25, 33]:
+		expect(Waves.spawns_of(night, 777).size()
+			== (GameData.SPAWNS as Array).size(),
+			"night %d comes from every side" % night,
+			str(Waves.spawns_of(night, 777)))
+
+	# **Night 25 is playable.** The other done-when: it begins, it sends, and
+	# it ends.
+	var state := State.create(777)
+	state["endless"] = true
+	state["nights_won"] = 24
+	state["night"] = 25
+	Phases.begin_preparation(state)
+	Sim.advance(state, GameData.PREPARATION_TICKS)
+	expect(int(state["phase"]) == Phases.NIGHT, "night 25 starts")
+	var ever_out := 0
+	var ticks := 0
+	for _t in 200000:
+		if int(state["phase"]) != Phases.NIGHT:
+			break
+		Sim.advance(state, 1)
+		ticks += 1
+		ever_out = maxi(ever_out, Entities.count(state))
+	expect(ever_out > 0, "things walk out of the dark on it", str(ever_out))
+	expect(int(state["phase"]) != Phases.NIGHT,
+		"and night 25 ends rather than running for ever", str(ticks))
+	print("  night 25: %s, %d ticks, %d killed, %d breaches"
+		% [Waves.summary_of(25, 777).strip_edges(), ticks,
+			int(state["killed"]), int(state["breaches"])])
+
+	# **Tonight's table is generated once and kept.** `remaining()` is asked
+	# every tick by the HUD, and regenerating a wave table sixty times a
+	# second is the mistake tasks 0025 and 0067 both cost a day to.
+	var kept := State.create(777)
+	kept["endless"] = true
+	kept["nights_won"] = 24
+	kept["night"] = 25
+	var first := Waves.tonight(kept)
+	expect(str(first) == str(Waves.tonight(kept)),
+		"the night being fought is the same record every time it is asked for")
+	expect((kept["wave"] as Dictionary).has("tonight"),
+		"and it is kept on the state", str((kept["wave"] as Dictionary).keys()))
+	# It survives a save, because it is on the state like everything else.
+	Save.delete_run()
+	Save.write_run(kept)
+	var back := Save.read_run()
+	expect(not back.is_empty() and str(Waves.tonight(back)) == str(first),
+		"and it comes back off a save unchanged")
+	Save.delete_run()
+	# A different night throws the kept one away rather than fighting the
+	# wrong table.
+	kept["night"] = 26
+	kept["nights_won"] = 25
+	expect(str(Waves.tonight(kept)) != str(first),
+		"and the next night gets its own table")
+
+	# **The curve is validated.** It may not name an enemy that does not
+	# exist, and may not name a boss: one rolled out of the weighted bag would
+	# turn up on night eleven.
+	expect(GameData.validate().is_empty(),
+		"the shipped curve validates", str(GameData.validate()))
+
+	# **Best night reached, kept in the profile.** The requirement, and it
+	# needed nothing new: `nights_won` keeps climbing past ten.
+	var beaten := State.create(778)
+	beaten["endless"] = true
+	beaten["nights_won"] = 26
+	var profile := Run.record(beaten, Save.default_profile())
+	expect(int(profile["best_night"]) == 26,
+		"the profile keeps the best night reached, past the authored ten",
+		str(profile["best_night"]))
+	expect(int(Stats.lifetime(profile)["best_night"]) == 26,
+		"and the records screen reads it", str(Stats.lifetime(profile)))
+
+	# **Off the critical path.** `go_endless` refuses a run that has not been
+	# beaten, so night eleven cannot be reached by losing your way to it.
+	var early_run := State.create(779)
+	early_run["nights_won"] = 3
+	expect(not Run.go_endless(early_run),
+		"a run that has not been beaten cannot carry on past ten")
+
+	_completed += 1     # last line: an abandoned group never gets here

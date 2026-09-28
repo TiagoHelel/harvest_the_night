@@ -24,7 +24,8 @@ def main():
         return 1
     done = subprocess.run(
         [GODOT, "--headless", "--path", ROOT,
-         "--script", "res://src/tools/nights.gd"],
+         "--script", "res://src/tools/nights.gd",
+         "++"] + sys.argv[1:],
         capture_output=True, text=True)
     out = done.stdout or ""
     for line in out.splitlines():

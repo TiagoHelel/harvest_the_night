@@ -1,7 +1,7 @@
 # 0070 - Endless nights past ten
 
 - **Phase:** 4 - Ten nights and progression
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0066, 0059
 - **Likely files:** src/core/endless.gd
 

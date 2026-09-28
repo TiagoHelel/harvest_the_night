@@ -2,9 +2,14 @@ extends SceneTree
 
 ## Print the ten nights, without running one of them.
 ##
-## `python tools/nights.py`, or by hand:
+##     python tools/nights.py [how many nights] [seed]
 ##
-##     godot --headless --script src/tools/nights.gd
+## Past the tenth it prints what `Endless` generates, which is how task 0070's
+## curve was looked at while it was being written - `python tools/nights.py 40`
+## shows where the Giants land and whether the mix is still varied at night
+## forty. The seed only changes the order the waves arrive in, so a summary
+## line looks the same for every seed; it is there so the tool can be pointed
+## at a particular run.
 ##
 ## Everything here is read off `GameData.NIGHTS` through `Waves`, so the table
 ## is the only source: a designer who edits a wave sees it here on the next
@@ -25,23 +30,34 @@ func _init() -> void:
 		quit(1)
 		return
 
-	print("HARVEST THE NIGHT - the %d nights" % GameData.MVP_NIGHTS)
+	var last := GameData.MVP_NIGHTS
+	var seed_value := 0
+	var args := OS.get_cmdline_user_args()
+	if args.size() > 0 and str(args[0]).is_valid_int():
+		last = maxi(int(str(args[0])), 1)
+	if args.size() > 1 and str(args[1]).is_valid_int():
+		seed_value = int(str(args[1]))
+
+	print("HARVEST THE NIGHT - the %d nights%s" % [last,
+		"" if last <= GameData.MVP_NIGHTS
+		else " (%d authored, the rest generated from seed %d)"
+			% [GameData.MVP_NIGHTS, seed_value]])
 	print("")
 
 	var enemies := 0
 	var money := 0
 	var seen: Dictionary = {}
-	for night in range(1, GameData.MVP_NIGHTS + 1):
-		print("  " + Waves.summary_of(night))
-		enemies += Waves.size_of(night)
-		money += Waves.reward_of(night)
-		for id in GameData.sorted_names(Waves.kinds_of(night).keys()):
+	for night in range(1, last + 1):
+		print("  " + Waves.summary_of(night, seed_value))
+		enemies += Waves.size_of(night, seed_value)
+		money += Waves.reward_of(night, seed_value)
+		for id in GameData.sorted_names(Waves.kinds_of(night,
+				seed_value).keys()):
 			if not seen.has(id):
 				seen[id] = night
 
 	print("")
-	print("  %d enemies over %d nights, worth $%d"
-		% [enemies, GameData.MVP_NIGHTS, money])
+	print("  %d enemies over %d nights, worth $%d" % [enemies, last, money])
 
 	# **What the run pays in technology**, which is the budget task 0063 has
 	# to price the tech tree against: the floor is one a night for finishing,
@@ -64,11 +80,13 @@ func _init() -> void:
 	# The curve, as a shape rather than as numbers.
 	print("")
 	var widest := 1
-	for night in range(1, GameData.MVP_NIGHTS + 1):
-		widest = maxi(widest, Waves.size_of(night))
-	for night in range(1, GameData.MVP_NIGHTS + 1):
-		var count := Waves.size_of(night)
+	for night in range(1, last + 1):
+		widest = maxi(widest, Waves.size_of(night, seed_value))
+	for night in range(1, last + 1):
+		var count := Waves.size_of(night, seed_value)
 		var bar := "#".repeat(maxi(count * 40 / widest, 1))
-		print("  %2d %-41s %3d" % [night, bar, count])
+		print("  %2d %-41s %3d%s" % [night, bar, count,
+			"  <- %d Giant(s)" % Endless.giants_on(night)
+			if Endless.giants_on(night) > 0 else ""])
 
 	quit()
