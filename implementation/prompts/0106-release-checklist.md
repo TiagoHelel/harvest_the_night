@@ -17,6 +17,16 @@ The list you run before publishing, written once, so nothing is remembered at th
 - A rollback plan in one paragraph
 - Run it once, end to end, and fix what it finds
 
+- **Carried over from task 0103**: `python tools/verify.py` now takes 303
+  seconds against its own `BUDGET_S = 300` and prints `(OVER BUDGET)`, which
+  does not fail the run. Three rows are the whole of it: `script parse` at
+  94s, `headless_check` at 92s and `input_check` at 72s. The parse row
+  launches Godot once per script - 97 processes - and is the one that is
+  overhead rather than work. Decide here whether the number moves, the suite
+  gets faster, or the checklist runs the slow half separately. Raising the
+  budget to meet the measurement without saying so is the one answer that is
+  wrong.
+
 ## Done when
 
 - [ ] Running the list top to bottom produces a publishable build

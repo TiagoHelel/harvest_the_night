@@ -66,6 +66,14 @@ BLD_PRESS,0,press,prensa
 BLD_WORKSHOP,0,workshop,oficina
 BUILD_BANKED,0,(%d ready),(%d prontos)
 BUILD_TITLE,0,BUILD,OBRAS
+CRASH_BODY,0,"A report was written on this machine: the seed, the tick, and the last things that happened. No name, no addresses, nothing from outside the folder this game owns. Nothing was sent, and this game has no way to send it.","Um relatório foi escrito nesta máquina: a semente, o tick e as últimas coisas que aconteceram. Sem nome, sem endereços, nada de fora da pasta deste jogo. Nada foi enviado, e este jogo não sabe enviar."
+CRASH_CLOSE,160,CLOSE,FECHAR
+CRASH_NO_FOLDER,0,it is in the browser storage,fica no armazenamento do navegador
+CRASH_NO_STATE,0,the run was not kept with it,a partida não foi guardada junto
+CRASH_OPEN,160,SHOW THE FOLDER,MOSTRAR A PASTA
+CRASH_SEED,0,seed %d,semente %d
+CRASH_TICK,0,tick %d,tick %d
+CRASH_TITLE,160,IT STOPPED LAST TIME,PAROU DA ÚLTIMA VEZ
 CTL_ASKING,232,PRESS A KEY - BACK TO CANCEL,APERTE UMA TECLA - VOLTAR CANCELA
 CTL_CLASH,232,ALREADY %s,JÁ É %s
 CTL_NOTHING,104,-,-

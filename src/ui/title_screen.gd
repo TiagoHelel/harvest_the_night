@@ -89,6 +89,17 @@ func _ready() -> void:
 	_stats = get_node_or_null(^"UI/Screen/StatsScreen") as StatsScreen
 
 	_options = get_node_or_null(^"UI/Screen/OptionsScreen") as OptionsScreen
+	_crash = get_node_or_null(^"UI/Screen/CrashDialog") as CrashDialog
+	_ident_node = get_node_or_null(^"UI/Screen/BootIdent") as BootIdent
+
+	# **Task 0103: a crash that took the window is announced here.** A dead
+	# process cannot draw a dialogue, so "rather than vanishing" is kept one
+	# launch later - `sweep()` turns a breadcrumb the last session left
+	# behind into a report, and `pending()` is whichever report nobody has
+	# been shown yet, including one written by an error that did not stop
+	# the game at all.
+	Crash.sweep()
+	_to_announce = Crash.pending()
 	_version = get_node_or_null(^"UI/Screen/Version") as Label
 	_router = get_node_or_null(^"/root/App")
 	if _router != null and not _router.state_changed.is_connected(_went):
@@ -152,6 +163,7 @@ func _begin_backdrop() -> void:
 
 
 func _process(_delta: float) -> void:
+	_announce_a_crash()
 	if _state.is_empty():
 		return
 	# **The night creeps in, and then it is dusk again.** A title screen that
@@ -194,7 +206,11 @@ func _wear(state: int) -> void:
 	var options_up: bool = state == _router.OPTIONS
 	var stats_up: bool = state == _router.STATS
 	if _ident != null:
-		_ident.visible = state == _router.TITLE
+		# **Not while the crash dialogue is up**, because then it is a lie:
+		# the dialogue has the keyboard, and a screen that says PRESS ANY
+		# KEY under a panel where any key does nothing is a screen a player
+		# reasonably concludes is frozen.
+		_ident.visible = state == _router.TITLE and not _crash_is_up()
 		_ident.text = I18n.t(&"TITLE_PRESS_ANY")
 	if _menu != null:
 		_menu.visible = menu_up
@@ -217,6 +233,11 @@ func _focus_menu() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	# **The dialogue has the keyboard while it is up.** "Press any key" and
+	# a dialogue with two buttons on it cannot both be true, and the one
+	# that has something to say wins.
+	if _crash != null and _crash.showing():
+		return
 	if _router == null or _router.here() != _router.TITLE:
 		return
 	# **Any key or click.** Not a named action: a player who has just started
@@ -320,3 +341,46 @@ func menu_entries() -> Array:
 
 func backdrop_tick() -> int:
 	return int(_state.get("tick", 0))
+
+
+## The report waiting to be announced, or "" when there is nothing to say.
+var _to_announce := ""
+
+var _crash: CrashDialog
+var _ident_node: BootIdent
+
+
+## Put the crash dialogue up once the ident has finished playing.
+##
+## **Not in `_ready`.** The boot ident covers the whole screen for its first
+## few seconds, so a dialogue put up underneath it is a dialogue a player
+## dismisses by pressing the key that skips the ident. It waits, and then it
+## is the first thing on the screen.
+func _announce_a_crash() -> void:
+	if _to_announce == "" or _crash == null:
+		return
+	if _ident_node != null and _ident_node.running():
+		return
+	var folder := _to_announce
+	_to_announce = ""
+	_crash.show_report(folder)
+	if not _crash.closed.is_connected(_crash_closed):
+		_crash.closed.connect(_crash_closed)
+	_wear(_router.here() if _router != null else 0)
+
+
+## Whether the dialogue has the screen.
+func _crash_is_up() -> bool:
+	return _crash != null and _crash.showing()
+
+
+## It has been read and put away: the title screen is a title screen again.
+func _crash_closed() -> void:
+	_wear(_router.here() if _router != null else 0)
+
+
+# ------------------------------------------------------- for the checks, 0103
+
+## Which report is waiting, for a check that wants to watch it arrive.
+func announcing() -> String:
+	return _to_announce

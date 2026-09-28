@@ -95,6 +95,16 @@ var _standing_at := Vector2i.ZERO
 ## Put on the end of a picture's name when it is not in English.
 var _tongue := ""
 
+## Which language the pictures are in, on its own.
+##
+## **Separate from `_tongue`, which is a filename.** `--pt_BR --contrast`
+## makes that `-pt_BR-contrast`, and the one place that used to ask it for a
+## locale took everything after the dash and asked `I18n` for a language
+## called `pt_BR-contrast`. `I18n.use` falls back to English without
+## complaining, which is how `--title --pt_BR` wrote English pictures under
+## Portuguese names - found at task 0103 by taking one and looking at it.
+var _speaking := ""
+
 
 func _initialize() -> void:
 	var args := OS.get_cmdline_user_args()
@@ -145,6 +155,7 @@ func _initialize() -> void:
 	# chimneys. Found by diffing two runs rather than by reading the code.
 	if speaking != "":
 		_tongue = "-" + speaking
+		_speaking = speaking
 	# **Contrast is a flag too.** The same pictures with the quiet
 	# colours turned up, which is the only way to see what the
 	# switch actually costs.
@@ -206,6 +217,7 @@ func _take_the_front(folder: String) -> void:
 	root.add_child(title)
 	await process_frame
 	await process_frame
+	_say_it_in(title)
 
 	var ident := _find(title, "BootIdent") as BootIdent
 	if ident != null:
@@ -222,6 +234,44 @@ func _take_the_front(folder: String) -> void:
 	await _shoot("title", folder)
 	root.remove_child(title)
 	title.free()
+	await _take_the_crash(folder)
+
+
+## And the crash dialogue, which lives on the title screen.
+##
+## **A screen a player sees once, if ever**, which is exactly why it gets
+## photographed: nobody is going to notice it is wrong by playing. The report
+## is written before the scene is built, because the title reads the folder
+## in `_ready` and never again - and it is taken away afterwards, because a
+## picture is not a reason to leave a crash report on somebody's disk.
+func _take_the_crash(folder: String) -> void:
+	BootIdent.played()
+	var state := State.create(SEED)
+	Sim.advance(state, 5400)
+	var made := Crash.report(state,
+		"a picture of the dialogue, from tools/shot.py - nothing crashed")
+	var title: Node = load("res://scenes/Title.tscn").instantiate()
+	root.add_child(title)
+	await process_frame
+	_say_it_in(title)
+	for _i in SETTLE:
+		await process_frame
+	await _shoot("crash", folder)
+	root.remove_child(title)
+	title.free()
+	Crash.erase(made)
+
+
+## Put the chosen language on a scene that is already built.
+##
+## The `Locale` autoload sets the language from `Settings` in its own
+## `_ready`, so this has to happen after the scene exists rather than before
+## it - the same reason `_take()` does it where it does.
+func _say_it_in(scene: Node) -> void:
+	if _speaking == "":
+		return
+	I18n.use(_speaking)
+	I18n.relabel(scene)
 
 
 func _find(node: Node, named: String) -> Node:
@@ -246,8 +296,8 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 	# language from `Settings` in its own `_ready`, which happens somewhere
 	# in the middle of all this - so the language is put on again here, where
 	# nothing can come along afterwards and put it back.
-	if _tongue != "":
-		I18n.use(_tongue.substr(1))
+	if _speaking != "":
+		I18n.use(_speaking)
 		I18n.relabel(main)
 	var driver = main.get_node("%SimDriver")
 	var state: Dictionary = driver.state

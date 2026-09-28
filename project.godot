@@ -86,6 +86,18 @@ Access="*res://src/app/a11y.gd"
 ; of configuration that silently does nothing is worse than no line at all.
 buses/default_bus_layout="res://default_bus_layout.tres"
 
+[debug]
+
+; Task 0103: the crash report ends with the tail of this file, so there has
+; to be a file. The engine writes one by default when it is a debug build and
+; not when it is a release, which is exactly backwards for a report whose
+; whole purpose is a machine that is not this one: `enable_file_logging` on
+; means an exported build keeps one too. Five rotated files, so a player who
+; crashed three launches ago still has it.
+debug/file_logging/enable_file_logging=true
+debug/file_logging/log_path="user://logs/harvest.log"
+debug/file_logging/max_log_files=5
+
 [display]
 
 ; 480x270 is 16:9 at 30x17 tiles of 16px, and scales to 1080p at exactly 4x.

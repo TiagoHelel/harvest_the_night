@@ -41,7 +41,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 57
+const CASES := 58
 
 ## The pixels two pieces of text in one row must have between them. Two is
 ## the width of the gap inside a letter at this size, so anything less reads
@@ -138,7 +138,120 @@ func _run() -> void:
 	await _case_0098_access()
 	await _case_0099_ident()
 	await _case_0100_version()
+	await _case_0103_crash()
 	_finish()
+
+
+## 0103 - the crash dialogue, and the key it takes off the title screen.
+func _case_0103_crash() -> void:
+	_forget_any_loaded_scene()
+	_empty_the_crash_folder()
+
+	# Something to be told about. Written before the scene opens, because
+	# the title reads the folder once, in `_ready`.
+	var state := State.create(103104)
+	Sim.advance(state, 450)
+	var folder := Crash.report(state, "a deliberate crash, from input_check")
+	expect(folder != "", "there is a report to announce")
+
+	await open_scene("res://scenes/Title.tscn")
+	await frames(4)
+	var dialog: CrashDialog = locate_control("CrashDialog") as CrashDialog
+	expect(dialog != null, "the title scene has a crash dialogue on it")
+	if dialog == null or folder == "":
+		await close_scene()
+		_empty_the_crash_folder()
+		_completed += 1
+		return
+
+	expect(dialog.showing(),
+		"and it is up, because the last session did not end well")
+	expect(dialog.folder() == folder, "showing the report that was written",
+		dialog.folder())
+
+	# **It offers somewhere a player can actually go.** `user://` is not a
+	# folder anybody can open; the label is the real path.
+	var path: Label = locate_control("CrashPath") as Label
+	expect(path != null and path.text != "", "it says where the file is")
+	expect(path != null and not path.text.begins_with("user://"),
+		"in a path that exists on this machine",
+		path.text if path != null else "")
+
+	# And the two numbers that make it the same crash as the one in the file.
+	var facts: Label = locate_control("CrashFacts") as Label
+	expect(facts != null and facts.text.contains(str(int(state["seed"]))),
+		"and which run it was", facts.text if facts != null else "")
+	expect(facts != null and facts.text.contains(str(int(state["tick"]))),
+		"and which tick", facts.text if facts != null else "")
+
+	# **The new input path.** "Press any key" is the title screen's, and
+	# while this is up it is not the title screen's turn: a player who
+	# pressed a key to read the dialogue would be reading the menu instead.
+	var router: Node = root.get_node_or_null(^"App")
+	expect(router != null and router.here() == router.TITLE,
+		"the title is still the title")
+	await tap_key(KEY_Z)
+	await frames(3)
+	expect(router != null and router.here() == router.TITLE,
+		"a key does not get past the dialogue",
+		router.name_of(router.here()) if router != null else "no router")
+	expect(dialog.showing(), "and the dialogue is still up")
+
+	# Closing it hands the keyboard back.
+	await click_control("CrashClose")
+	await frames(3)
+	expect(not dialog.showing(), "CLOSE puts it away")
+	await tap_key(KEY_X)
+	await frames(3)
+	expect(router != null and router.here() == router.MENU,
+		"and the title has its key back",
+		router.name_of(router.here()) if router != null else "no router")
+	await close_scene()
+
+	# **Told once.** A game that opens on the same crash every launch for
+	# the rest of its life teaches a player to close it without reading.
+	await open_scene("res://scenes/Title.tscn")
+	await frames(4)
+	dialog = locate_control("CrashDialog") as CrashDialog
+	expect(dialog != null and not dialog.showing(),
+		"opening the title again does not announce it again")
+	await close_scene()
+
+	# And the report is still on disk, because a dialogue is not a bin.
+	expect(Crash.text_of(folder).contains("seed    %d" % int(state["seed"])),
+		"the report is still there to send")
+
+	_empty_the_crash_folder()
+	_completed += 1
+
+
+## Drop whatever the router loaded earlier and nobody took away.
+##
+## **`App.goto()` really changes the scene**, which task 0096 found out the
+## hard way: a case that sends the game to the title leaves a title screen
+## under the root as `current_scene`, and it stays there for every case after
+## it. Usually harmless - two screens that agree about everything. Not here:
+## the second title has no crash to announce, so it is the one that takes the
+## key this case is checking the dialogue keeps, and the case failed against
+## code that was right. Found with a print, after reading the assert twice.
+func _forget_any_loaded_scene() -> void:
+	if current_scene == null:
+		return
+	var stale: Node = current_scene
+	current_scene = null
+	root.remove_child(stale)
+	# `free` rather than `queue_free`: a deferred one is still in the tree
+	# for the frames this case spends pressing keys at it.
+	stale.free()
+
+
+## Leave `user://crash/` as it was found: empty.
+func _empty_the_crash_folder() -> void:
+	if not DirAccess.dir_exists_absolute(Crash.DIR):
+		return
+	for name in DirAccess.get_directories_at(Crash.DIR):
+		var inner := Crash.DIR.path_join(String(name))
+		Crash.erase(inner)
 
 
 func _finish() -> void:

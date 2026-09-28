@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`######################..`  **102 / 110 done**
+`######################..`  **103 / 110 done**
 
-0 doing / 8 todo / 0 blocked across 9 phases.
+0 doing / 7 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0103 - Crash and error reporting**. The whole of what is left is
+First up: **0104 - Saves survive an update**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,24 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-8 task(s) left, the ready ones first, then what they
+7 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0103 - Crash and error reporting
-
-Ready to pick up.  Likely files: `src/app/crash.gd`.
-
-When it breaks on someone else's machine, get enough to fix it without them.
-
-- A handler that writes state, seed, tick, phase and the last log lines to `user://crash/`
-- A dialogue offering the file's location rather than vanishing
-- The run save is preserved, not overwritten by the crash
-- No personal data in the report - say what is in it
-- It never sends anything anywhere by itself
-
-  - done when: A deliberate crash produces a report with the seed and the tick
-  - done when: The run is still loadable afterwards
 
 ### 0104 - Saves survive an update
 
@@ -58,6 +43,21 @@ Adding a lever or a tech node must not delete somebody's run.
 
   - done when: Every golden save loads and plays
   - done when: Adding a resource to game_data does not break a save that predates it
+
+### 0105 - A playtest build
+
+Ready to pick up.  Likely files: `tools/playtest.py`.
+
+A build to put in front of someone, with the instrumentation to learn something from it.
+
+- A build flag that turns on local session logging: nights reached, time per day, what was built, where the run ended
+- The log is a local file the player can read and send, never an upload
+- A one-page note for the tester: what to try, what to ignore, what to report
+- An in-game feedback key that timestamps a note into the log
+- It is obvious it is a playtest build
+
+  - done when: A session produces a readable log
+  - done when: `tools/playtest.py` summarises a folder of logs into the questions that matter
 
 ### 0107 - Store assets
 
@@ -103,20 +103,20 @@ The last English sentences in `src/core/`: the lines that say why a thing cannot
   - done when: `grep` finds no player-facing sentence left in `src/core/`
   - done when: Every refusal reads in Portuguese, and the checker proves it fits
 
-### 0105 - A playtest build
+### 0106 - The release checklist
 
-Waits on 0103.  Likely files: `tools/playtest.py`.
+Waits on 0105.  Likely files: `implementation/RELEASE.md`.
 
-A build to put in front of someone, with the instrumentation to learn something from it.
+The list you run before publishing, written once, so nothing is remembered at the wrong moment.
 
-- A build flag that turns on local session logging: nights reached, time per day, what was built, where the run ended
-- The log is a local file the player can read and send, never an upload
-- A one-page note for the tester: what to try, what to ignore, what to report
-- An in-game feedback key that timestamps a note into the log
-- It is obvious it is a playtest build
+- Every check with its command: verify, exports, save compatibility, the i18n checker, the perf budget, both builds smoke-tested
+- Version bump, changelog, and a tag
+- A known-issues section that is honest
+- A rollback plan in one paragraph
+- Run it once, end to end, and fix what it finds
 
-  - done when: A session produces a readable log
-  - done when: `tools/playtest.py` summarises a folder of logs into the questions that matter
+  - done when: Running the list top to bottom produces a publishable build
+  - done when: The journal records what the first run of it found, because it will find something
 
 ### 0108 - The devlog and a trailer clip
 
@@ -132,21 +132,6 @@ The thing that gets people to look: thirty seconds that show the farm, the switc
 
   - done when: The clip is thirty seconds and needs no explanation
   - done when: The devlog is generated from `implementation/PROGRESS.md` rather than written twice
-
-### 0106 - The release checklist
-
-Waits on 0105.  Likely files: `implementation/RELEASE.md`.
-
-The list you run before publishing, written once, so nothing is remembered at the wrong moment.
-
-- Every check with its command: verify, exports, save compatibility, the i18n checker, the perf budget, both builds smoke-tested
-- Version bump, changelog, and a tag
-- A known-issues section that is honest
-- A rollback plan in one paragraph
-- Run it once, end to end, and fix what it finds
-
-  - done when: Running the list top to bottom produces a publishable build
-  - done when: The journal records what the first run of it found, because it will find something
 
 ## 0 - Foundation  (12/12)
 
@@ -274,13 +259,13 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0100** [Exports: Windows and Web](prompts/0100-exports.md)
 - [ ] **0110** [Refusals in two languages](prompts/0110-refusals.md)
 
-## 8 - Ship the MVP  (2/8)
+## 8 - Ship the MVP  (3/8)
 
 - [x] **0101** [Onboarding in seven lines](prompts/0101-onboarding.md)
 - [x] **0102** [A performance budget](prompts/0102-perf-budget.md)
-- [ ] **0103** [Crash and error reporting](prompts/0103-error-report.md)
+- [x] **0103** [Crash and error reporting](prompts/0103-error-report.md)
 - [ ] **0104** [Saves survive an update](prompts/0104-save-compat.md)
-- [ ] **0105** [A playtest build](prompts/0105-playtest-build.md) - needs 0103
+- [ ] **0105** [A playtest build](prompts/0105-playtest-build.md)
 - [ ] **0106** [The release checklist](prompts/0106-release-checklist.md) - needs 0105
 - [ ] **0107** [Store assets](prompts/0107-store-assets.md)
 - [ ] **0108** [The devlog and a trailer clip](prompts/0108-devlog.md) - needs 0107

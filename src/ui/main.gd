@@ -185,6 +185,13 @@ func begin_run(seed_value: int) -> void:
 ## and two lists of twenty `show_state` calls would drift the first time
 ## somebody added a screen.
 func _hand_out() -> void:
+	# **Task 0103, and here for exactly the reason the rest of this is
+	# here.** `SimDriver.start()` replaces the dictionary, so a crash
+	# handler holding the old one would report a run that stopped
+	# advancing - the same failure, one layer down.
+	Crash.watch(_driver.state)
+	_crumb = 0.0
+
 	_world.show_state(_driver.state)
 	_player_view.show_state(_driver.state)
 	_shop.show_state(_driver.state)
@@ -224,6 +231,7 @@ func _hand_out() -> void:
 func _process(_delta: float) -> void:
 	if _driver.state.is_empty():
 		return
+	_drop_a_crumb(_delta)
 	var intent: Dictionary = _driver.state["intent"]
 	var move: Array = intent["move"]
 	move[0] = int(Input.get_axis(&"move_left", &"move_right"))
@@ -275,12 +283,14 @@ func _pause_chose(which: StringName) -> void:
 			_profile = Stats.fold(_profile, _driver.state)
 			Save.write_profile(_profile)
 			Save.write_run(_driver.state)
+			_left_on_purpose()
 			if _router != null:
 				_router.goto(_router.TITLE)
 		&"abandon":
 			# **The run goes, the profile stays.** What a player earned over
 			# every run they have played is not what they are abandoning.
 			Save.delete_run()
+			_left_on_purpose()
 			if _router != null:
 				_router.goto(_router.TITLE)
 
@@ -320,3 +330,30 @@ func _target_cell() -> Vector2i:
 ## and draws what it finds. A signal per tick would have meant a redraw per
 ## tick, which at 4x speed is four times the work for the same picture.
 
+
+
+## How long since the breadcrumb was rewritten.
+var _crumb := 0.0
+
+
+## Leave a trail, so a crash that takes the window with it still says which
+## seed and which tick it took.
+##
+## **Not every frame.** The run is fifteen kilobytes and this is a real file
+## write; once every `Crash.BREADCRUMB_SECONDS` is the trade, and what it
+## costs is that the recorded tick can be that far behind the one it died on.
+## What it buys is that there is a recorded tick at all.
+func _drop_a_crumb(delta: float) -> void:
+	_crumb += delta
+	if _crumb < Crash.BREADCRUMB_SECONDS:
+		return
+	_crumb = 0.0
+	Crash.mark()
+
+
+## The player is leaving on purpose. **Take the breadcrumb with them**, or
+## the next boot opens on a dialogue about a crash that was a player pressing
+## SAVE AND QUIT.
+func _left_on_purpose() -> void:
+	Crash.forget()
+	Crash.clear_mark()

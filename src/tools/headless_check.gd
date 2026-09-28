@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 94
+const GROUPS := 95
 
 const SettingsScript := preload("res://src/app/settings.gd")
 const AppScript := preload("res://src/app/app.gd")
@@ -172,6 +172,7 @@ func _run() -> void:
 	_task_0099_icon()
 	_task_0100_release()
 	_task_0102_budget()
+	_task_0103_crash()
 
 
 ## 0102 - the performance budget.
@@ -329,6 +330,199 @@ func _number_after(text: String, marker: String) -> int:
 		digits += text[i]
 		i += 1
 	return -1 if digits == "" else int(digits)
+
+
+## 0103 - the crash report.
+func _task_0103_crash() -> void:
+	# **This clears `user://crash/` at both ends.** It is a developer machine
+	# and these are the developer's own reports; a check that left seven
+	# folders behind every run would be a check that made the feature
+	# useless for the person maintaining it.
+	_clear_crash_folder()
+
+	# A run with something in it, saved, the way a player's would be.
+	var state := State.create(103103)
+	Sim.advance(state, 900)
+	var before := State.hash_of(state)
+	expect(Save.write_run(state), "a run is saved before the crash")
+
+	# **The deliberate crash.** There is no `try` in GDScript, so what a
+	# handler can be given is this: something noticed and said so.
+	var reason := "a deliberate crash, from headless_check"
+	var folder := Crash.report(state, reason)
+	expect(folder != "", "crashing on purpose writes a report", folder)
+	expect(folder.begins_with(Crash.DIR),
+		"and it writes it under user://crash/", folder)
+
+	var text := Crash.text_of(folder)
+	expect(text.contains("seed    %d" % int(state["seed"])),
+		"the report has the seed in it", str(int(state["seed"])))
+	expect(text.contains("tick    %d" % int(state["tick"])),
+		"and the tick", str(int(state["tick"])))
+	expect(text.contains("PHASE") or text.contains("DAY")
+		or text.contains("NIGHT"), "and which phase it was in")
+	expect(text.contains(reason), "and what it says happened")
+	expect(text.contains(BuildInfo.VERSION), "and which build it was")
+
+	# **The run goes in whole**, not just four numbers: a seed and a tick
+	# reproduce a run only when nobody touched it, and somebody always did.
+	var kept := Crash.snapshot_of(folder)
+	expect(not kept.is_empty(), "the whole run is in the folder beside it")
+	expect(State.hash_of(kept) == before,
+		"and it is the run that crashed, to the hash",
+		"%d against %d" % [State.hash_of(kept), before])
+
+	# ------------------------------------------- the run survives the crash
+
+	var reloaded := Save.read_run()
+	expect(not reloaded.is_empty(), "the run save is still there afterwards")
+	expect(State.hash_of(reloaded) == before,
+		"and it is the same run, untouched",
+		"%d against %d" % [State.hash_of(reloaded), before])
+
+	# Said the other way round as well, because the assert above would also
+	# pass if the crash had rewritten the save with identical bytes.
+	#
+	# **The code, not the prose.** The first version of this read the whole
+	# file and failed on `crash.gd`'s own doc comment, which says in as many
+	# words that it never touches `Save.RUN_PATH`. A check that cannot tell a
+	# promise from the thing it promises about is a check that teaches people
+	# to stop writing the promise down.
+	var source := _code_lines_of("res://src/app/crash.gd")
+	expect(not source.contains("Save."),
+		"and nothing in crash.gd can write a save at all")
+
+	# ------------------------------------------------- nothing is ever sent
+
+	# **The strongest version of "it never sends anything anywhere" is that
+	# there is nothing in the game that could.** A promise in a comment is
+	# worth what the next person remembers; this is a grep.
+	for way in ["HTTPRequest", "HTTPClient", "WebSocketPeer", "StreamPeerTCP",
+		"PacketPeer", "UDPServer", "TCPServer", "OS.execute",
+		"OS.create_process", "MultiplayerAPI"]:
+		expect(_nothing_in_src_says(way),
+			"nothing in the game can %s" % way)
+	expect(text.contains("sent nowhere"),
+		"and the report says so to whoever opens it")
+
+	# ------------------------------------------------ and no personal data
+
+	# The one way a name gets into a file this game writes is an absolute
+	# path in the engine's log, and every one of those has an account name
+	# in it. Checked on the real thing rather than on a fixture.
+	var home := OS.get_user_data_dir()
+	expect(Crash.scrub(home) == "<user>",
+		"the machine's own folder is scrubbed out", Crash.scrub(home))
+	expect(Crash.scrub("before %s after" % home) == "before <user> after",
+		"wherever it appears")
+	expect(not text.contains(home),
+		"and the report that was just written has none of it in")
+	var who := OS.get_environment("USERNAME")
+	if who == "":
+		who = OS.get_environment("USER")
+	if who.length() >= 3:
+		expect(not text.contains(who),
+			"nor the name of whoever is logged in")
+
+	# **Nowhere for a name to get in.** The other half of the promise: the
+	# game has no text field anywhere, so the run is numbers and there is
+	# nothing to leak even if the scrubber were wrong.
+	for widget in ["LineEdit", "TextEdit", "CodeEdit"]:
+		expect(_nothing_in_src_says(widget),
+			"the game never asks anybody to type: no %s" % widget)
+	expect(text.contains("WHAT IS IN IT") and text.contains("WHAT IS NOT"),
+		"and the report says what is in it and what is not")
+
+	# --------------------------------------------- the breadcrumb, both ways
+
+	# A run that ends properly leaves nothing behind.
+	Crash.watch(state)
+	Crash.mark()
+	expect(DirAccess.dir_exists_absolute(
+		Crash.DIR.path_join(Crash.IN_PROGRESS)),
+		"a run going leaves a breadcrumb")
+	Crash.clear_mark()
+	expect(not DirAccess.dir_exists_absolute(
+		Crash.DIR.path_join(Crash.IN_PROGRESS)),
+		"and leaving properly takes it away")
+	expect(Crash.sweep() == "",
+		"so the next boot finds nothing to announce")
+
+	# And one that does not leaves one, which the next boot promotes.
+	Crash.mark()
+	var promoted := Crash.sweep()
+	expect(promoted != "", "a breadcrumb left behind becomes a report")
+	expect(not DirAccess.dir_exists_absolute(
+		Crash.DIR.path_join(Crash.IN_PROGRESS)),
+		"and stops being a breadcrumb")
+	expect(Crash.text_of(promoted).contains("seed    %d"
+		% int(state["seed"])), "with the seed in it")
+	expect(State.hash_of(Crash.snapshot_of(promoted)) == before,
+		"and the run beside it")
+
+	# **Nothing to report when there is no run.** A player sitting on the
+	# title screen has not crashed out of anything.
+	Crash.forget()
+	Crash.mark()
+	expect(not DirAccess.dir_exists_absolute(
+		Crash.DIR.path_join(Crash.IN_PROGRESS)),
+		"an empty state leaves no breadcrumb")
+
+	# ------------------------------------------------ announced once, not ever
+
+	var waiting := Crash.pending()
+	expect(waiting != "", "a fresh report is waiting to be announced")
+	Crash.mark_seen(waiting)
+	expect(Crash.pending() != waiting,
+		"and once it has been shown it stops being")
+
+	# ------------------------------------------------------- it cannot pile up
+
+	for _i in Crash.KEEP + 3:
+		Crash.report(state, "one of many")
+	expect(Crash.folders().size() == Crash.KEEP,
+		"the folder keeps %d reports and no more" % Crash.KEEP,
+		str(Crash.folders().size()))
+
+	_clear_crash_folder()
+	Save.delete_run()
+	_completed += 1
+
+
+## Nothing under `src/` mentions this, comments included - a commented-out
+## `HTTPRequest` is a promise somebody is about to uncomment.
+func _nothing_in_src_says(needle: String) -> bool:
+	for folder in ["res://src/core", "res://src/app", "res://src/ui"]:
+		for name in DirAccess.get_files_at(folder):
+			if not String(name).ends_with(".gd"):
+				continue
+			var source := FileAccess.get_file_as_string(
+				String(folder).path_join(String(name)))
+			if source.contains(needle):
+				return false
+	return true
+
+
+## A file with its comments taken out, for a check about what code does.
+func _code_lines_of(path: String) -> String:
+	var out := PackedStringArray()
+	for line in FileAccess.get_file_as_string(path).split("
+"):
+		var trimmed := String(line).strip_edges()
+		if trimmed.begins_with("#"):
+			continue
+		out.append(line)
+	return "
+".join(out)
+
+
+## Start and end with an empty `user://crash/`.
+func _clear_crash_folder() -> void:
+	if not DirAccess.dir_exists_absolute(Crash.DIR):
+		return
+	for name in DirAccess.get_directories_at(Crash.DIR):
+		var inner := Crash.DIR.path_join(String(name))
+		Crash.erase(inner)
 
 
 func _finish() -> void:

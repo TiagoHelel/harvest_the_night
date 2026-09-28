@@ -9141,3 +9141,183 @@ is the right moment to decide whether the suite gets a fast mode by default.
 
 `python tools/verify.py` prints PASS: 6110 asserts, 930 input cases, 0 failed,
 20 rows, no skips.
+
+## 0103 - Crash and error reporting - done 2026-09-28
+
+When it breaks on somebody else's machine, get enough to fix it without them.
+`src/app/crash.gd` writes a folder under `user://crash/` holding a readable
+report and the whole run as the game had it; `src/ui/crash_dialog.gd` is what
+says so, on the title screen, in the player's language.
+
+### GDScript has no exceptions, so there are three mechanisms and not one
+
+There is no `try`. A script error prints and the frame carries on with a null
+where a number should be; a real crash takes the process before any GDScript
+runs. So:
+
+1. **A reported error.** Something notices an impossible state and calls
+   `Crash.report(state, reason)`. Full fidelity - the exact state at the exact
+   tick. This is the one that catches the failures this game will actually
+   have, because the rules are the part with the bugs in and the rules cannot
+   throw.
+2. **A breadcrumb.** `Crash.mark()` writes the same folder under a fixed name
+   every ten seconds while a run is going, and both ways out - `_exit_tree`
+   and `NOTIFICATION_WM_CLOSE_REQUEST` on `App`, and SAVE AND QUIT and
+   ABANDON in `Main` - delete it. A folder still there at the next boot means
+   the last session did not leave through the door. The recorded tick is up to
+   ten seconds stale, which is the price of not writing to disk every frame;
+   the run save is fifteen kilobytes and this is a real write.
+3. **`NOTIFICATION_CRASH`**, which the engine sends from its own crash handler
+   on desktop. The best account available when it fires, and the least
+   reliable to count on - which is why 2 exists.
+
+`Crash` keeps one static reference to the live run, set in `Main._hand_out()`.
+That is the function that exists because `SimDriver.start()` *replaces* the
+dictionary rather than emptying it, and a screen holding the old one draws a
+game that has stopped advancing. A crash handler holding the old one is the
+same bug one layer down, so it is set in the same place as the rest.
+
+### The dialogue is at the next boot, and that is the honest version
+
+The requirement says "a dialogue offering the file's location rather than
+vanishing". A dead process cannot draw a dialogue - that is what dying is. So
+the promise is kept one launch later: the title screen sweeps the breadcrumb
+into a report and puts the dialogue up once the boot ident has finished
+playing. A player who watched the window disappear gets told; a player whose
+machine did it while they were away finds out at all.
+
+It is announced **once**. `mark_seen` is written the moment it goes up rather
+than when it is closed, because a player who alt-F4s out of the dialogue has
+still been told, and a game that opens on the same crash every launch teaches
+people to close it without reading.
+
+### What is in it, said in the file and said again on screen
+
+The report is English on purpose: the dialogue tells the player what is in it
+in their own language, and the file is for whoever reads it in order to fix
+the game. Both say the same three things - what is in it, what is not, and
+that nothing was sent.
+
+    THE RUN
+      seed    103999
+      tick    3600
+      phase   NIGHT
+      day     1, nights won 0
+
+    THE LOG
+      tick 3000    night_began      night=1
+      tick 3001    wave_began       count=3 enemy=walker wave=1 waves=3
+      tick 3494    wave_began       count=4 enemy=walker wave=2 waves=3
+      tick 3502    house_hit        damage=10 left=90
+
+**`Events` is the log**, which is why task 0090 put it in the state: the view
+samples at whatever rate the machine manages and cannot say what happened in
+what order. Here it is printed as kinds and ticks rather than as sentences,
+because the person reading this is fixing the game and not playing it.
+
+### No personal data, and the strong version of that is a grep
+
+Two halves. The first: the one way a name gets into a file this game writes is
+an absolute path in the engine's log, and every one of those has an account
+name in it. `Crash.scrub()` takes the user data directory, the project
+directory, `USERPROFILE`, `HOME`, `USERNAME` and `USER` out, longest first so
+a home folder goes whole rather than leaving `<user>/AppData/...` behind.
+Values under three characters are left alone: an account called `al` would
+turn every `al` in the file into `<user>` to protect two letters that are not
+a name.
+
+The second: **there is nowhere for a name to get in.** `headless_check` now
+asserts there is no `LineEdit`, `TextEdit` or `CodeEdit` anywhere in
+`src/core/`, `src/app/` or `src/ui/`. The game never asks anybody to type, so
+the run is numbers.
+
+And "it never sends anything anywhere by itself" is asserted the same way:
+nothing under `src/` mentions `HTTPRequest`, `HTTPClient`, `WebSocketPeer`,
+`StreamPeerTCP`, `PacketPeer`, `UDPServer`, `TCPServer`, `OS.execute`,
+`OS.create_process` or `MultiplayerAPI`. A promise in a comment is worth what
+the next person remembers.
+
+**The path on screen is not scrubbed**, deliberately. The requirement is about
+the report. A scrubbed path is a path nobody can navigate to, and the person
+reading the dialogue is the person whose machine it is.
+
+### The run save is never touched
+
+Everything writes inside `user://crash/`. The check saves a run, crashes on
+purpose, and loads it back to the same hash - and then says it the other way
+round as well, because that assert would also pass if the crash had rewritten
+the save with identical bytes: nothing in `crash.gd`'s **code** mentions
+`Save.`. The first version of that read the whole file and failed on
+`crash.gd`'s own doc comment, which says in as many words that it never
+touches `Save.RUN_PATH`. A check that cannot tell a promise from the thing it
+promises about teaches people to stop writing the promise down.
+
+### Three things found by looking rather than by running
+
+**The dialogue was two thirds empty.** The frame was 172 tall against content
+that stopped at 110. Measured off the picture and set to 132.
+
+**`seed 82082082 tick 5400` was in `Faint`**, which is the colour of something
+a player cannot have, and which task 0099 already found unreadable on the
+version label. It is the one line a player is asked to compare against the
+file. Now `Warm`.
+
+**PRESS ANY KEY was still on the screen** under a dialogue that had taken the
+keyboard, which is a game a player reasonably concludes has frozen. The ident
+line now hides while the dialogue is up and comes back when it closes.
+
+### And one the pictures found that was nothing to do with this task
+
+`python tools/shot.py <id> --title --pt_BR` has been writing **English
+pictures under Portuguese names**. `--title` takes its two pictures before the
+language is applied, and the one place that did apply it read the locale out
+of `_tongue`, which is a *filename* - so `--pt_BR --contrast` asked `I18n` for
+a language called `pt_BR-contrast`, which falls back to English without
+complaining. There is now a `_speaking` that is a locale and a `_say_it_in()`
+that both paths call. The title screen says APERTE QUALQUER TECLA in
+`title-pt_BR.png` for the first time.
+
+Found by taking the picture and opening it, which is the entire argument for
+step 4.
+
+### The input case failed against code that was right
+
+"A key does not get past the dialogue" failed, reporting MENU. A print in
+`_unhandled_input` showed **two title screens**: the harness's own, with the
+dialogue up and guarded, and a second one left under the root by an earlier
+case that sent the game to the title through `App.goto` - which really does
+change the scene, as task 0096 found out. The second title had no crash to
+announce, so it was the one that took the key. The case now clears
+`current_scene` before it opens anything. Worth knowing for every later case
+that cares which screen is listening.
+
+### Pictures
+
+`implementation/shots/0103/crash.png` and `crash-pt_BR.png`. `shot.gd`'s
+`--title` path now takes a third picture: it writes a report, opens the title,
+photographs the dialogue and erases the report again, because a picture is not
+a reason to leave a crash report on somebody's disk.
+
+### Hashes
+
+Both unchanged: **sim `4262811284`**, **data `407837701`**. Nothing in
+`src/core/` was touched.
+
+### Two notes for whoever is next
+
+`project.godot` gained a `[debug]` section turning file logging **on**. Godot
+writes a log by default in a debug build and not in a release one, which is
+exactly backwards for a report whose whole purpose is a machine that is not
+this one. Five rotated files at `user://logs/harvest.log`.
+
+`python tools/verify.py` now takes **303 seconds against its own
+`BUDGET_S = 300`** and prints `(OVER BUDGET)`, which is a note and not a
+failure. `script parse` (94s), `headless_check` (92s) and `input_check` (72s)
+are the whole of it, and the parse row is the one that is overhead rather than
+work: it launches Godot once per script, ninety-seven times. Not fixed here,
+because raising a budget to meet a measurement is the opposite of having one -
+carried into **task 0106**, the release checklist, whose prompt now names the
+three rows and says which answer is wrong.
+
+`python tools/verify.py` prints PASS: 6153 asserts, 945 input cases, 0 failed,
+20 rows, no skips.

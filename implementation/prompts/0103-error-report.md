@@ -1,7 +1,7 @@
 # 0103 - Crash and error reporting
 
 - **Phase:** 8 - Ship the MVP
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0010
 - **Likely files:** src/app/crash.gd
 

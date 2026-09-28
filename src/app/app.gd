@@ -216,3 +216,29 @@ func _change_scene(path: String) -> void:
 	if tree == null:
 		return
 	tree.call_deferred("change_scene_to_file", path)
+
+
+## The two ways a session ends, and they are told apart by which one this is.
+##
+## **`NOTIFICATION_CRASH` is the engine's own crash handler**, which fires on
+## desktop when the process is going down for a reason nothing in GDScript
+## could have caught. It is the best account of a crash available and it is
+## not one to depend on: a hard enough failure takes the handler with it,
+## which is why `Crash` also leaves a breadcrumb every few seconds.
+##
+## A window closed, or a game quit, is the other way - and that one ends with
+## `_exit_tree`, below, taking the breadcrumb with it. Anything that leaves a
+## breadcrumb behind did not leave through either door.
+func _notification(what: int) -> void:
+	match what:
+		NOTIFICATION_CRASH:
+			Crash.report(Crash.live(),
+				"the engine's crash handler fired - the process was going"
+				+ " down and this is the last thing that ran")
+		NOTIFICATION_WM_CLOSE_REQUEST:
+			Crash.clear_mark()
+
+
+## Quit, closed, or the scene tree torn down: all of them on purpose.
+func _exit_tree() -> void:
+	Crash.clear_mark()
