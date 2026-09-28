@@ -690,6 +690,7 @@ func _refresh() -> void:
 	for sprite in _sprites:
 		sprite.queue_free()
 	_sprites.clear()
+	_find_fixture_corners()
 	if _state.is_empty():
 		return
 
@@ -705,7 +706,12 @@ func _refresh() -> void:
 		var sprite := Sprite2D.new()
 		sprite.texture = _texture_for(_art_for(on, cell))
 		sprite.centered = false
-		sprite.position = Vector2(cell) * float(GameData.TILE_SIZE)
+		# **Bottom-aligned onto the cell.** A tower is taller than its tile
+		# since task 0075 - a level three gun tower is forty pixels on a
+		# sixteen pixel footprint - and the extra belongs above, where a roof
+		# goes. Anything exactly a tile tall lands where it always did.
+		var art_high := sprite.texture.get_height() if sprite.texture != null 			else GameData.TILE_SIZE
+		sprite.position = Vector2(cell) * float(GameData.TILE_SIZE) 			+ Vector2(0.0, float(GameData.TILE_SIZE - art_high))
 		_occupants.add_child(sprite)
 		_sprites.append(sprite)
 		# **One pip a level, above the tower.** The art for a Torre II does
@@ -877,6 +883,8 @@ const PROP_DIR := "res://sprites/props/"
 ## `GameData.ENEMIES` knows about - a prop and a zombie could otherwise share
 ## a name and the prop would win by being looked up first.
 const ENEMY_DIR := "res://sprites/enemies/"
+## The house, the workshop, and every tower at every level. Task 0075.
+const BUILDING_DIR := "res://sprites/buildings/"
 
 ## How many ticks a walk frame lasts. Cosmetic, so it is here and not in
 ## `game_data`: a purely visual number in the data hash would mean a
@@ -931,34 +939,120 @@ func _build_terrain_tileset() -> TileSet:
 ## the plain name, so a building whose quarters nobody has drawn yet still
 ## shows up.
 func _art_for(on: Dictionary, cell: Vector2i) -> StringName:
+	var id: StringName = on["id"]
+
+	# **The house has nine tiles and no anchor.** `FARM_MAP` lays it down a
+	# cell at a time, so every one of them asks for the same drawing and the
+	# farm gets nine little houses. The corner of it is a fact the view can
+	# work out for itself, which is cheaper than changing what a fixture is
+	# in the rules and moving the determinism hash to do it.
 	var at: Variant = on.get("anchor", null)
+	if at == null and _fixture_corner.has(id):
+		var corner: Vector2i = _fixture_corner[id]
+		at = [corner.x, corner.y]
 	if at == null:
-		return on["id"]
+		return _worn(id, on)
+
 	var pair: Array = at
-	return StringName("%s_%d_%d" % [on["id"], cell.x - int(pair[0]),
-		cell.y - int(pair[1])])
+	return _worn(StringName("%s_%d_%d" % [id, cell.x - int(pair[0]),
+		cell.y - int(pair[1])]), on)
+
+
+## The same thing, at the level it has been paid up to and in the state it is
+## in. **The level first**: a Torre III that has been chewed is still a Torre
+## III, and `gen_sprites` makes a `_hurt` of every level for exactly that.
+func _worn(name: StringName, on: Dictionary) -> StringName:
+	var level := maxi(int(on.get("level", 1)), 1)
+	var full := StringName("%s_%d" % [name, level]) if level > 1 else name
+	if not _exists(full):
+		full = name
+	# **Firing beats damaged.** A tower that has just fired is the thing the
+	# eye should be on, and a muzzle flash over a hole reads fine; a hole
+	# where a flash should be reads as a tower that has stopped working.
+	if _just_fired(on):
+		var lit := StringName("%s_fire" % full)
+		if _exists(lit):
+			return lit
+	if not _is_hurt(on):
+		return full
+	var damaged := StringName("%s_hurt" % full)
+	return damaged if _exists(damaged) else full
+
+
+## Whether this tower fired in the last moment.
+##
+## `reload` counts **down** from whatever the shot cost, so a number near the
+## top is a gun that has just gone off. Read off the occupant the rules keep,
+## which means the flash lands on the tick the shot did and the view is not
+## guessing from a projectile it can see.
+func _just_fired(on: Dictionary) -> bool:
+	var left := int(on.get("reload", 0))
+	if left <= 0:
+		return false
+	var entry: Variant = Building.entry_of(StringName(on["id"]))
+	if entry == null:
+		return false
+	var whole := int((entry as Dictionary).get("reload_ticks", 0))
+	return whole > 0 and left * 100 >= whole * FLASH_PERCENT
+
+
+## Whether it has taken enough to show it. The same threshold the tint uses,
+## so the art and the colour agree about when something looks battered.
+func _is_hurt(on: Dictionary) -> bool:
+	var entry: Variant = Building.entry_of(StringName(on["id"]))
+	if entry == null:
+		return false
+	var full := int((entry as Dictionary).get("hp", 0))
+	if full <= 0:
+		return false
+	return float(int(on.get("hp", full))) / float(full) < WOUNDED_AT
+
+
+func _exists(name: StringName) -> bool:
+	for folder in [ENEMY_DIR, BUILDING_DIR, PROP_DIR]:
+		if ResourceLoader.exists(str(folder) + str(name) + ".png"):
+			return true
+	return false
+
+
+## Where each multi-tile fixture's top-left corner is, worked out once from
+## the farm itself.
+var _fixture_corner: Dictionary = {}
+
+
+func _find_fixture_corners() -> void:
+	_fixture_corner.clear()
+	if _state.is_empty():
+		return
+	var occupants: Dictionary = _state["occupants"]
+	for idx in occupants:
+		var id: StringName = (occupants[idx] as Dictionary)["id"]
+		if not Farm.FIXTURES.has(id):
+			continue
+		var cell := Grid.cell(int(idx))
+		if not _fixture_corner.has(id):
+			_fixture_corner[id] = cell
+			continue
+		var best: Vector2i = _fixture_corner[id]
+		_fixture_corner[id] = Vector2i(mini(best.x, cell.x),
+			mini(best.y, cell.y))
 
 
 func _texture_for(id: StringName) -> Texture2D:
 	if _textures.has(id):
 		return _textures[id]
 
-	# **The kind is the part before the first underscore.** `_pose_of()` asks
-	# for `walker_walk_b` and `giant_telegraph`, and neither is a key of
-	# `GameData.ENEMIES` - so testing the whole name sent every pose but the
-	# standing one to the prop directory, and from there to the flat purple
-	# block that means "nobody drew this". Four of them were standing in the
-	# wave screenshot before this line was right.
-	if GameData.ENEMIES.has(StringName(str(id).split("_")[0])):
-		var mine := ENEMY_DIR + str(id) + ".png"
-		if ResourceLoader.exists(mine):
-			var art: Texture2D = load(mine)
-			if art != null:
-				_textures[id] = art
-				return art
-
-	var path := PROP_DIR + str(id) + ".png"
-	if ResourceLoader.exists(path):
+	# **Ask each directory in turn for a file with that name.**
+	#
+	# This used to work out which directory a name belonged to by parsing the
+	# name - "the kind is the part before the first underscore" - which held
+	# for `walker_walk_b` and fell over on `gun_tower_2`, where the part
+	# before the first underscore is "gun". A file either exists or it does
+	# not, and asking is cheaper than guessing and cannot be wrong.
+	for folder in [ENEMY_DIR, BUILDING_DIR, PROP_DIR]:
+		var path := str(folder) + str(id) + ".png"
+		if not ResourceLoader.exists(path):
+			continue
 		var drawn: Texture2D = load(path)
 		if drawn != null:
 			_textures[id] = drawn
@@ -1027,6 +1121,11 @@ func _wear_of(on: Dictionary, id: StringName) -> Color:
 
 ## Below this share of its hit points a structure starts to look it.
 const WOUNDED_AT := 0.75
+
+## How much of a reload still has to be left for the muzzle to be lit. High,
+## so the flash is a moment rather than a lamp: at 80 a gun on a one second
+## reload is lit for about a fifth of a second after each shot.
+const FLASH_PERCENT := 80
 
 
 ## The fallback. Task 0075 makes this unreachable.

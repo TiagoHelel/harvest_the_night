@@ -5955,3 +5955,117 @@ moved either guard would be a drawing reaching into the rules.
 
 `python tools/verify.py` prints PASS: 4853 asserts, 607 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+
+## 0075 - Buildings and towers - done 2026-09-28
+
+What changed: the house, the workshop and the kitchen drawn whole and sliced
+into tiles; four towers drawn once each and grown into three levels; damaged,
+destroyed and firing states derived for everything that has them. Screenshots:
+`implementation/shots/0075-towers.png` (the two done-whens in one picture) and
+`0075-buildings.png` (the farm).
+
+Files: `tools/sprite_maps.py`, `tools/gen_sprites.py`, `src/ui/world_view.gd`,
+`sprites/buildings/` (generated, 58 files),
+`src/tools/headless_check.gd`.
+
+Verify: 4920 headless / 607 input / both hashes unchanged.
+
+### A level one and a level three, told apart instantly
+
+The answer that reads at sixteen pixels is **height**. A tower with two more
+stages in it is a different shape on the skyline; counting studs or reading a
+recoloured barrel is not instant.
+
+So each tower is drawn once, with six rows of plain post marked as the stage
+that repeats, and `gen_sprites.GROWS` stacks one more copy per level. A level
+three is twelve pixels taller than a level one - three quarters of a tile -
+and is recognisably the same tower, because the extra goes into the post and
+the head is untouched. There is an assert for both halves of that: taller by
+at least six pixels and a fifth, **and** the same top row of pixels.
+
+Four rows was the first try and gave eight pixels, which the check called too
+small. The mortar is deliberately exempt from the ratio: it sits on the ground
+rather than on a post, being squat is the whole of its silhouette, and it
+grows by its barrel instead.
+
+**The first version of the growth cut the towers' heads off.** It kept the
+canvas the same height and took the extra rows from the top - the one place a
+tower cannot spare them - so a level three gun tower was a post with a
+platform and no gun. The view bottom-aligns anything taller than a tile, so
+the image can simply be taller and the feet stay on the same grid line.
+
+### A damaged wall reads as damaged without a health bar
+
+`holed()` knocks out every seventh lit pixel, counted along the rows and
+carried across them so the holes land somewhere different on each one. A wall
+with bites out of it reads as damaged; a wall that is evenly speckled reads as
+a texture, which is why the count does not reset per row.
+
+Asserted as a range rather than a direction: a damaged thing has to have lost
+pixels, and it has to have lost between five and forty per cent of them -
+fewer is invisible, more is rubble. `_wreck` is the bottom third, holed, and
+has to have less again.
+
+### The house is one house
+
+`FARM_MAP` lays the house down a cell at a time, nine of them, with no anchor
+- so every cell asked for the same drawing and the farm had nine little
+houses on it. The corner is a fact the view can work out for itself, once, by
+taking the minimum x and y of the cells of each fixture. Cheaper than changing
+what a fixture is in the rules and moving the determinism hash to do it.
+
+It is drawn as one forty-eight by forty-eight map and sliced. Nine separate
+sixteen-pixel maps would be drawing a house you cannot see: a roof line has to
+meet across three files and the only way to check is to build it and look.
+
+**Its windows are `flame_hot` and that is load-bearing.** Task 0071's night
+ramp exempts anything the palette drew brighter than 0.80 and names what the
+exemption is for - "firelight, a lit window, the moon". These are the lit
+windows. The house is the warm thing on a cold field without a single light
+being placed, which is what "the biggest, warmest thing on the farm, by day
+and by night" comes to in pixels. Asserted: the brightest pixel in the house
+is above `NIGHT_WARM_KEEP`, and the house is more than four times the drawing
+of the largest defence.
+
+### Firing
+
+A five-pixel blossom stamped at a muzzle point declared per tower, because a
+flash belongs where the barrel is and only the drawing knows where that is.
+The view lights it off `reload`, which counts **down** from whatever the shot
+cost - so a number near the top is a gun that has just gone off, and the flash
+lands on the tick the shot did rather than being inferred from a projectile.
+
+Firing beats damaged in the lookup. A muzzle flash over a hole reads fine; a
+hole where a flash should be reads as a tower that has stopped working.
+
+### A guess replaced by a question
+
+`_texture_for()` worked out which directory a name belonged to by parsing the
+name - task 0074's "the kind is the part before the first underscore". That
+held for `walker_walk_b` and fell over on `gun_tower_2`, where the part before
+the first underscore is "gun". It asks each directory for a file with that
+name now. A file either exists or it does not, and asking is cheaper than
+guessing and cannot be wrong.
+
+### What is honestly still weak
+
+- **The workshop and the kitchen look alike.** Both are a shed with a red
+  roof and a lit window; the kitchen's stove is inside it and barely reads at
+  two tiles. They are told apart by where they are and by the panel that
+  opens, which is not nothing, but it is not the art doing the work.
+- **The derivations are derivations.** Holes, a stamped flash and a repeated
+  post are consistent and cheap and they are not a hand-drawn wreck. Same
+  trade as task 0074's poses, same place to put the work if it ever matters:
+  the maps.
+- The generator, press, shop, well, tree and rock were already drawn and are
+  untouched. They live in `sprites/props/` and stay there - `_texture_for()`
+  asks both directories, and moving them would be churn for tidiness.
+
+### Hashes
+
+Both unchanged - `2555959448` and `2601044827`. Maps, generated PNGs and a
+view. A building that moved either guard would be a drawing reaching into the
+rules.
+
+`python tools/verify.py` prints PASS: 4920 asserts, 607 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

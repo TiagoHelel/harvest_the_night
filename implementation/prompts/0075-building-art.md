@@ -1,7 +1,7 @@
 # 0075 - Buildings and towers
 
 - **Phase:** 5 - Art and visual direction
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0071, 0042
 - **Likely files:** tools/gen_sprites.py, sprites/buildings/
 

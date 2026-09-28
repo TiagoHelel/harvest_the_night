@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 67
+const GROUPS := 68
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -131,6 +131,7 @@ func _run() -> void:
 	_task_0072_tileset()
 	_task_0073_player_art()
 	_task_0074_zombie_art()
+	_task_0075_building_art()
 
 
 func _finish() -> void:
@@ -11670,3 +11671,171 @@ func _silhouette(image: Image) -> Array:
 					break
 			out[cy * 16 + cx] = any
 	return out
+
+
+## 0075 - the buildings and the towers.
+func _task_0075_building_art() -> void:
+	var towers := [&"gun_tower", &"flame_tower", &"mortar", &"auto_crossbow"]
+
+	# **Everything that can be built has a drawing.** The purple fallback
+	# block means "nobody drew this", and it is the thing this asserts away.
+	for id in GameData.sorted_names(GameData.DEFENCES.keys()):
+		expect(_building_art(StringName(id)) != null,
+			"the %s is drawn" % id)
+	for id in GameData.sorted_names(GameData.BUILDINGS.keys()):
+		var first := _building_art(StringName("%s_0_0" % id))
+		expect(first != null or _building_art(StringName(id)) != null,
+			"the %s is drawn" % id)
+	for corner_x in 3:
+		for corner_y in 3:
+			expect(_building_art(StringName("house_%d_%d"
+				% [corner_x, corner_y])) != null,
+				"the house has a tile at %d,%d" % [corner_x, corner_y])
+
+	# **A level one and a level three tower are told apart instantly.** The
+	# done-when, and the answer that reads at sixteen pixels is height.
+	for id in towers:
+		var one := _building_art(id)
+		var three := _building_art(StringName("%s_3" % id))
+		expect(one != null and three != null,
+			"the %s has a level one and a level three" % id)
+		if one == null or three == null:
+			continue
+		expect(three.get_height() > one.get_height(),
+			"and the level three %s is the taller of the two" % id,
+			"%d against %d" % [three.get_height(), one.get_height()])
+		# **Six pixels and a fifth.** Two pixels is a difference a caliper
+		# finds and a player does not; six is more than a third of a tile.
+		# Not a fixed ratio for all four - the mortar sits on the ground
+		# rather than on a post, and being squat is the whole of its
+		# silhouette, so it grows by its barrel and not by its legs.
+		expect(three.get_height() >= one.get_height() + 6
+			and three.get_height() * 5 >= one.get_height() * 6,
+			"by enough to see across a dark field",
+			"%d against %d" % [three.get_height(), one.get_height()])
+		# **And recognisably the same tower.** The head is untouched: the
+		# extra stages go into the post, so the top row of the drawing is the
+		# same row it was.
+		expect(_top_row(three) == _top_row(one),
+			"and is recognisably the same %s" % id)
+
+	# **A damaged wall reads as damaged without a health bar.** The other
+	# done-when: the art has holes in it, so the wall is visibly missing
+	# pieces rather than merely tinted.
+	for id in [&"wall", &"fence", &"barricade", &"gun_tower"]:
+		var whole := _building_art(id)
+		var hurt := _building_art(StringName("%s_hurt" % id))
+		expect(whole != null and hurt != null,
+			"the %s has a damaged state" % id)
+		if whole == null or hurt == null:
+			continue
+		var before := _lit_pixels(whole)
+		var after := _lit_pixels(hurt)
+		expect(after < before, "and it is visibly missing pieces",
+			"%d pixels against %d" % [after, before])
+		expect(after * 10 >= before * 6 and after * 10 <= before * 95,
+			"enough to read as damaged, not so much as to be rubble",
+			"%d of %d" % [after, before])
+		var wreck := _building_art(StringName("%s_wreck" % id))
+		expect(wreck != null and _lit_pixels(wreck) < after,
+			"and there is less of it again when it comes down")
+
+	# **The towers that fire have a frame where they are firing.**
+	for id in towers:
+		var quiet := _building_art(id)
+		var firing := _building_art(StringName("%s_fire" % id))
+		expect(firing != null, "the %s has a firing frame" % id)
+		if quiet == null or firing == null:
+			continue
+		expect(_lit_pixels(firing) > _lit_pixels(quiet),
+			"and something comes out of it", "%d against %d"
+				% [_lit_pixels(firing), _lit_pixels(quiet)])
+		expect(_brightest(firing) > PaletteData.NIGHT_WARM_KEEP,
+			"and the flash is bright enough to survive the night ramp",
+			"%.3f" % _brightest(firing))
+
+	# **The house is the landmark.** Biggest, and warm after dark: its windows
+	# are painted in a colour task 0071 exempts from the night tint, which is
+	# what "the warmest thing on the farm, by day and by night" comes to in
+	# pixels.
+	var house_area := 0
+	for corner_x in 3:
+		for corner_y in 3:
+			var tile := _building_art(StringName("house_%d_%d"
+				% [corner_x, corner_y]))
+			if tile != null:
+				house_area += _lit_pixels(tile)
+	var biggest := 0
+	for id in GameData.sorted_names(GameData.DEFENCES.keys()):
+		var art := _building_art(StringName(id))
+		if art != null:
+			biggest = maxi(biggest, _lit_pixels(art))
+	expect(house_area > biggest * 4,
+		"the house is far the biggest thing on the farm",
+		"%d pixels against %d" % [house_area, biggest])
+
+	var warm := 0.0
+	for corner_x in 3:
+		for corner_y in 3:
+			var tile := _building_art(StringName("house_%d_%d"
+				% [corner_x, corner_y]))
+			if tile != null:
+				warm = maxf(warm, _brightest(tile))
+	expect(warm > PaletteData.NIGHT_WARM_KEEP,
+		"and its windows stay lit after dark", "%.3f against %.3f"
+			% [warm, PaletteData.NIGHT_WARM_KEEP])
+
+	print("  the house is %d pixels of building; the biggest defence is %d"
+		% [house_area, biggest])
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## The drawing for a name, wherever it lives.
+##
+## Both directories, because `WorldView._texture_for()` asks both: the press
+## and the generator were drawn into `props/` by an earlier task and there is
+## no reason to move them. Looking in one place had this reporting that the
+## generator was undrawn while it was on screen.
+func _building_art(name: StringName) -> Image:
+	for folder in ["res://sprites/buildings/", "res://sprites/props/"]:
+		var path := "%s%s.png" % [folder, name]
+		if ResourceLoader.exists(path):
+			return Image.load_from_file(ProjectSettings.globalize_path(path))
+	return null
+
+
+func _lit_pixels(image: Image) -> int:
+	var n := 0
+	for y in image.get_height():
+		for x in image.get_width():
+			if image.get_pixel(x, y).a > 0.0:
+				n += 1
+	return n
+
+
+## The brightest thing in a drawing, by the same luma the night ramp uses.
+func _brightest(image: Image) -> float:
+	var best := 0.0
+	for y in image.get_height():
+		for x in image.get_width():
+			var c := image.get_pixel(x, y)
+			if c.a <= 0.0:
+				continue
+			best = maxf(best, c.r * 0.299 + c.g * 0.587 + c.b * 0.114)
+	return best
+
+
+## The first row of a drawing that has anything in it, as a string of which
+## columns are lit. Two towers with the same one have the same head.
+func _top_row(image: Image) -> String:
+	for y in image.get_height():
+		var line := ""
+		var any := false
+		for x in image.get_width():
+			var lit := image.get_pixel(x, y).a > 0.0
+			line += "#" if lit else "."
+			any = any or lit
+		if any:
+			return line
+	return ""

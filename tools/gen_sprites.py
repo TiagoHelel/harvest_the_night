@@ -159,6 +159,160 @@ def fallen(pixels):
     return out[-height:] if len(out) > height else out
 
 
+# **Buildings are drawn whole and sliced afterwards.**
+#
+# A house is three tiles by three and the view asks for it a tile at a time,
+# as `house_0_0` through `house_2_2`. Drawing nine separate sixteen by sixteen
+# maps means drawing a house you cannot see: the roof line has to meet across
+# three files and the only way to check is to build it and look. So the map is
+# one forty-eight by forty-eight drawing and this cuts it up.
+#
+# The names are `id_column_row`, which is what `WorldView._art_for()` asks for.
+SLICED = {
+    "buildings/house": ("house", 3, 3),
+    "buildings/workshop": ("workshop", 2, 2),
+    "buildings/kitchen": ("kitchen", 2, 2),
+}
+
+# **Towers grow.** Task 0075 asks that a level one and a level three tower be
+# told apart instantly, and the answer that reads at sixteen pixels is height:
+# a tower with two more stages in it is a different shape on the skyline, and
+# counting studs is not instant.
+#
+# Each entry is the row range of the stage that repeats - a plain section of
+# post with nothing on it - and the derivation stacks one more copy per level,
+# pushing everything above it up. The tower gets taller and stays the same
+# tower, which is the other half of the requirement.
+# Six rows of plain post on the three that stand on one, so a level three is
+# twelve pixels taller than a level one - three quarters of a tile, which is a
+# difference you see rather than measure. Four rows was eight pixels and the
+# check said so.
+#
+# The mortar is the exception and stays squat: it sits on the ground rather
+# than on a post, and the only thing it has to repeat is its barrel. Making it
+# as tall as the others would take away the one thing its silhouette has.
+GROWS = {
+    "buildings/gun_tower": (17, 23),
+    "buildings/flame_tower": (17, 23),
+    "buildings/mortar": (16, 20),
+    "buildings/auto_crossbow": (17, 23),
+}
+LEVELS = 3
+
+# **The muzzle, for the frame where something comes out of it.** One point per
+# tower, because a flash belongs where the barrel is and only the drawing
+# knows where that is. Derived like everything else here: the flash is stamped
+# on, so a tower that grows still fires from the same place relative to its
+# head.
+FIRES = {
+    "buildings/gun_tower": (13, 5),
+    "buildings/flame_tower": (11, 3),
+    "buildings/mortar": (10, 9),
+    "buildings/auto_crossbow": (14, 7),
+}
+
+# A small blossom of light. `flame_hot` in the middle, `flame` around it, and
+# both are above task 0071's night exemption - so a tower firing after dark
+# lights itself, which is the cheapest version of task 0076's job and stops
+# a gun line reading as scenery.
+FLASH = [
+    "  .  ",
+    " .o. ",
+    ".ohho",
+    " .o. ",
+    "  .  ",
+]
+
+
+def flashing(pixels, at):
+    """The same tower with its muzzle lit."""
+    hot = palette.rgba("flame_hot")
+    warm = palette.rgba("flame")
+    out = [list(r) for r in pixels]
+    ox, oy = at
+    for ry, row in enumerate(FLASH):
+        for rx, ch in enumerate(row):
+            if ch == " ":
+                continue
+            x = ox + rx - len(row) // 2
+            y = oy + ry - len(FLASH) // 2
+            if 0 <= y < len(out) and 0 <= x < len(out[0]):
+                out[y][x] = hot if ch == "h" else warm
+    return out
+
+# Everything that can be hit gets a damaged and a destroyed state. Derived,
+# for the reason the enemies' poses are: drawing two more of each by hand is
+# thirty more maps and the damage that reads is not detail, it is holes.
+HURT = ["buildings/gun_tower", "buildings/flame_tower", "buildings/mortar",
+        "buildings/auto_crossbow", "buildings/wall", "buildings/fence",
+        "buildings/barricade"]
+
+
+def _lit(pixel):
+    return pixel[3] != 0
+
+
+def holed(pixels, every, seed):
+    """The same thing with pixels knocked out of it.
+
+    **A deterministic scatter, not a random one.** `every`-th lit pixel goes,
+    counted along the row, which puts the holes in a different place on each
+    row without anything drawing a number. A wall with a bite out of one
+    corner reads as damaged; a wall that is evenly speckled reads as a
+    texture, so the count carries across rows rather than resetting.
+    """
+    out = []
+    n = seed
+    for row in pixels:
+        line = []
+        for px in row:
+            if _lit(px):
+                n += 1
+                if n % every == 0:
+                    line.append((0, 0, 0, 0))
+                    continue
+            line.append(px)
+        out.append(line)
+    return out
+
+
+def rubble(pixels):
+    """What is left when it comes down: the bottom third, holed."""
+    height = len(pixels)
+    keep = height - height // 3
+    out = [[(0, 0, 0, 0)] * len(pixels[0]) for _ in range(keep)]
+    out.extend(holed(pixels[keep:], 3, 1))
+    return out
+
+
+def grown(pixels, band, levels):
+    """One more copy of `band` per level above the first.
+
+    **The canvas grows with it.** The first version kept the canvas the same
+    height and took the extra rows off the top, which is the one place a
+    tower cannot spare them: a level three gun tower came out as a post with
+    a platform and no gun on it. The view bottom-aligns anything taller than
+    a tile onto the cell, so a taller image simply stands taller - the feet
+    stay on the same grid line and the head goes up into the row above.
+    """
+    low, high = band
+    stage = [list(r) for r in pixels[low:high]]
+    out = [list(r) for r in pixels]
+    for _extra in range(levels - 1):
+        out = out[:low] + [list(r) for r in stage] + out[low:]
+    return out
+
+
+def _sliced(name, pixels, cols, rows, tile):
+    out = {}
+    for col in range(cols):
+        for row in range(rows):
+            piece = [r[col * tile:(col + 1) * tile]
+                     for r in pixels[row * tile:(row + 1) * tile]]
+            out["buildings/%s_%d_%d" % (name, col, row)] = (tile, tile, piece)
+    return out
+
+
 # --------------------------------------------------------------- the renderer
 
 def render(name, spec):
@@ -352,6 +506,46 @@ def palette_gd():
 def derived_sprites():
     """{name: (w, h, pixels)} for every pose that is not drawn by hand."""
     out = {}
+
+    # Buildings, cut into the tiles the view asks for.
+    for key, (name, cols, rows) in sorted(SLICED.items()):
+        width, height, pixels = render(key, SPRITES[key])
+        if (width, height) != (cols * TILE_PX, rows * TILE_PX):
+            raise ValueError("%s is %dx%d and %s is %d by %d tiles"
+                             % (key, width, height, name, cols, rows))
+        out.update(_sliced(name, pixels, cols, rows, TILE_PX))
+
+    # Towers, at the levels the player can pay for.
+    for key, band in sorted(GROWS.items()):
+        width, height, pixels = render(key, SPRITES[key])
+        for level in range(2, LEVELS + 1):
+            tall = grown(pixels, band, level)
+            out["%s_%d" % (key, level)] = (width, len(tall), tall)
+
+    # The frame where a tower is firing, at every level it can be.
+    for key, at in sorted(FIRES.items()):
+        width, height, pixels = render(key, SPRITES[key])
+        out[key + "_fire"] = (width, height, flashing(pixels, at))
+        for level in range(2, LEVELS + 1):
+            tall = grown(pixels, GROWS[key], level)
+            # **The muzzle does not move.** `grown()` inserts its extra stages
+            # at the band, which is below the head, so every row above it
+            # keeps its index and the barrel is where it always was.
+            out["%s_%d_fire" % (key, level)] = (width, len(tall),
+                                                flashing(tall, at))
+
+    # And what everything that can be hit looks like on the way down.
+    for key in sorted(HURT):
+        width, height, pixels = render(key, SPRITES[key])
+        out[key + "_hurt"] = (width, height, holed(pixels, 7, 0))
+        flat = rubble(pixels)
+        out[key + "_wreck"] = (width, len(flat), flat)
+        if key in GROWS:
+            for level in range(2, LEVELS + 1):
+                tall = grown(pixels, GROWS[key], level)
+                out["%s_%d_hurt" % (key, level)] = (width, len(tall),
+                                                    holed(tall, 7, 0))
+
     for kind in DERIVED:
         key = "enemies/" + kind
         width, height, pixels = render(key, SPRITES[key])
