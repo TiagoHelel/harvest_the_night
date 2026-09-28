@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 69
+const GROUPS := 70
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -133,6 +133,7 @@ func _run() -> void:
 	_task_0074_zombie_art()
 	_task_0075_building_art()
 	_task_0076_lighting()
+	_task_0077_particles()
 
 
 func _finish() -> void:
@@ -11902,5 +11903,59 @@ func _task_0076_lighting() -> void:
 			"a light reaches a sensible number of tiles", str(radius))
 	expect(Lighting.HOUSE_RADIUS > Lighting.BURNING_RADIUS,
 		"and the house throws more light than a burning zombie")
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## 0077 - particles.
+func _task_0077_particles() -> void:
+	# **Pixel particles on the shared palette, not soft gradients.** Every
+	# colour a particle can be is a colour the farm is already painted in.
+	for name in [Particles.SPARK, Particles.EMBER, Particles.SMOKE,
+			Particles.DUST, Particles.BLOOD]:
+		expect(PaletteData.COLOURS.has(StringName(name)),
+			"a particle is drawn in '%s', which is on the palette" % name)
+
+	# **The hot ones survive the night and the cold ones do not**, which is
+	# what makes a spark read as fire and smoke read as smoke. Task 0071's
+	# threshold decides both, and this is the assert that notices if it moves.
+	# Only the **spark** clears it, and that is the palette's own design
+	# rather than an accident: task 0071 found that the one warm colour
+	# above the line is `flame_hot`, because `flame` sits below wheat. So a
+	# spark is the hot core and stays orange, and an ember is the orange
+	# around it and dims - which is what an ember at a distance does. An
+	# assert that demanded otherwise would be an assert demanding the palette
+	# be repainted to suit it.
+	var keep := PaletteData.NIGHT_WARM_KEEP
+	var spark: Color = PaletteData.COLOURS[StringName(Particles.SPARK)]
+	expect(spark.r * 0.299 + spark.g * 0.587 + spark.b * 0.114 > keep,
+		"a spark stays warm after dark, because it is the hot core")
+	for name in [Particles.EMBER, Particles.SMOKE, Particles.DUST]:
+		var dim: Color = PaletteData.COLOURS[StringName(name)]
+		expect(dim.r * 0.299 + dim.g * 0.587 + dim.b * 0.114 < keep,
+			"and '%s' is lit by the night like the rest of the farm" % name,
+			"%.3f against %.3f" % [dim.r * 0.299 + dim.g * 0.587
+				+ dim.b * 0.114, keep])
+
+	# **Blood is restrained**, as section 18 asks: the shortest life of the
+	# lot, so it is a flicker rather than a stain.
+	for kind in GameData.sorted_names(Particles.LIFE.keys()):
+		expect(float(Particles.LIFE[kind]) > 0.0,
+			"a %s particle lasts a moment" % kind, str(Particles.LIFE[kind]))
+	expect(float(Particles.LIFE[&"blood"]) < float(Particles.LIFE[&"smoke"]),
+		"blood is gone long before smoke is",
+		"%.2f against %.2f" % [Particles.LIFE[&"blood"],
+			Particles.LIFE[&"smoke"]])
+
+	# **The cap is a setting.**
+	var defaults: Dictionary = load("res://src/app/settings.gd").new().DEFAULTS
+	expect(defaults.has(&"video/max_particles"),
+		"the ceiling is something a player can move")
+	expect(int(defaults[&"video/max_particles"]) == Particles.DEFAULT_CAP,
+		"and the file and the setting agree about where it starts",
+		"%s against %d" % [str(defaults.get(&"video/max_particles")),
+			Particles.DEFAULT_CAP])
+	expect(defaults.has(&"a11y/particle_density"),
+		"and the tap is one they can turn down separately")
 
 	_completed += 1     # last line: an abandoned group never gets here

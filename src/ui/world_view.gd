@@ -1008,11 +1008,27 @@ func _is_hurt(on: Dictionary) -> bool:
 	return float(int(on.get("hp", full))) / float(full) < WOUNDED_AT
 
 
+## Whether there is art by that name, **remembered**.
+##
+## `ResourceLoader.exists()` touches the filesystem. This is asked two or
+## three times for every occupant on the farm, every frame, by `_worn()` - two
+## hundred and fifty occupants is seven hundred and fifty file checks a frame,
+## and it measured at twenty-six milliseconds of a sixteen millisecond budget
+## on a busy night. The answer cannot change while the game is running, so it
+## is asked once per name.
+var _known: Dictionary = {}
+
+
 func _exists(name: StringName) -> bool:
+	if _known.has(name):
+		return _known[name]
+	var found := false
 	for folder in [ENEMY_DIR, BUILDING_DIR, PROP_DIR]:
 		if ResourceLoader.exists(str(folder) + str(name) + ".png"):
-			return true
-	return false
+			found = true
+			break
+	_known[name] = found
+	return found
 
 
 ## Where each multi-tile fixture's top-left corner is, worked out once from

@@ -1,7 +1,7 @@
 # 0077 - Particles
 
 - **Phase:** 5 - Art and visual direction
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0074, 0075
 - **Likely files:** src/ui/particles.gd
 

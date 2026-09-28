@@ -6170,3 +6170,118 @@ inside the determinism hash.
 
 `python tools/verify.py` prints PASS: 4936 asserts, 614 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+
+## 0077 - Particles - done 2026-09-28
+
+What changed: `src/ui/particles.gd` - sparks off a hit, dust and a little
+blood off a death, smoke from chimneys and from wreckage, embers off anything
+burning, and a muzzle spray off a gun that has just fired. A fixed pool, a
+hard cap, and a density dial.
+
+Files: `src/ui/particles.gd` (new), `src/ui/world_view.gd`,
+`src/app/settings.gd`, `scenes/Main.tscn`, `src/ui/main.gd`,
+`src/tools/headless_check.gd`, `src/tools/input_check.gd`.
+
+Verify: 4959 headless / 648 input / both hashes unchanged.
+
+### In the world, where task 0076's lights could not go
+
+The lights had to be drawn **over** the night ramp, because a glow is mostly
+halo and a halo is dim by nature - there was no brightness for the ramp's
+exemption to catch. A particle is the opposite: one or two pixels, and a spark
+is `flame_hot`, which is over task 0071's line. So a spark exempts itself and
+stays orange while smoke, drawn in `stone_dark`, goes blue with the rest of
+the farm. Which is what smoke at night should do.
+
+Same rule as 0076, opposite answer, for a reason about the art rather than
+about the code.
+
+**Only the spark clears the line, and that is the palette's design.** Task
+0071 found that the one warm colour above it is `flame_hot`, because `flame`
+sits below *wheat*. So a spark is the hot core and stays orange and an ember
+is the orange around it and dims - which is what an ember at a distance does.
+My first assert demanded that embers stay warm too, which was an assert
+demanding the palette be repainted to suit it.
+
+### The view notices; the rules are not asked to say
+
+There is no "somebody died" signal and adding one would put a cosmetic concern
+into the rules. This keeps its own snapshot of the farm and looks at what
+changed - an entity gone is a death, an occupant gone is a wreck, a `hurt`
+counter that went **up** is an impact. Missing an event costs a puff of dust,
+which is the right price for keeping the state clean.
+
+### Three performance bugs, and the first measurement was wrong too
+
+The busy-wave budget is task 0077's done-when, and getting an honest number
+took four goes.
+
+1. **The measurement compared a busy night against an empty screen.** The
+   density-1.0 pass ran with seventy-five zombies being simulated and the
+   density-0.0 pass ran after the night had ended, because the loop guarded
+   its `Sim.advance` on the night still running. It reported that particles
+   cost 41 milliseconds a frame. They do not; the simulation of a full night
+   does. Both passes are measured on the same board with the clock held still
+   now.
+2. **`_slot()` scanned the pool twice per particle** - four hundred and twenty
+   steps to find a free one and another four hundred and twenty to find the
+   oldest. A ring overwrites in emission order, which is age order, and gets
+   the same answer by not asking the question.
+3. **Sparks were emitted every frame a thing was hurt.** `hurt` is a countdown
+   that stays set for several ticks. The spark belongs to the moment the
+   counter goes up.
+4. **The farm was walked sixty times a second** to find out whether a chimney
+   should smoke, which is an event that happens three times a second. The scan
+   runs on the smoke's own clock now, and the guns - whose flash *is* a
+   per-frame moment - keep a cached list of their own cells.
+
+And one that was not this task's:
+
+5. **`WorldView._exists()` touched the filesystem two or three times per
+   occupant per frame.** I added it in task 0075 to choose between a tower's
+   levels and its damaged art. Two hundred and fifty occupants is seven
+   hundred and fifty `ResourceLoader.exists()` calls a frame, and it was
+   costing **26 of a 16 millisecond budget on its own** - with particles
+   switched off entirely. The answer cannot change while the game runs, so it
+   is remembered per name.
+
+### The numbers
+
+On a board of five towers and **seventy-five enemies**, with the simulation
+held still so this is drawing and nothing else:
+
+| | ms a frame | live particles |
+|---|---|---|
+| before, particles off | 26.30 | 7 |
+| before, full density | 40.50 | 162 |
+| after, particles off | 2.09 | 17 |
+| after, full density | **2.97** | **420 (the cap)** |
+
+So particles cost **0.88 ms** with the pool completely full, against a
+sixteen millisecond budget - and the farm around them got twelve times
+cheaper on the way.
+
+### Cap and density are two different dials
+
+`video/max_particles` is the ceiling and `a11y/particle_density` is the tap.
+One decides how many can be alive and the other how many are asked for; a
+player on a weak machine wants the first and a player who finds movement
+tiring wants the second. `input_check` fills the pool well past the ceiling
+and asserts it never exceeds it, and asserts that zero density empties it and
+keeps it empty.
+
+### Cosmetic, and asserted rather than asserted-to
+
+Task 0077 asks that turning them off not change the outcome of a night.
+`input_check` plays the same night from the same seed at full, half and zero
+density, advancing the rules by hand and giving the particles frames to draw
+in between, and compares `State.hash_of()`. All three identical.
+
+### Hashes
+
+Both unchanged - `2555959448` and `2601044827`. Everything here drifts on a
+wall clock rather than on ticks, which is both correct for a view and the
+reason none of it can reach the guard even by accident.
+
+`python tools/verify.py` prints PASS: 4959 asserts, 648 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

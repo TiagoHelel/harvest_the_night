@@ -41,7 +41,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 35
+const CASES := 36
 
 var passed := 0
 var failed := 0
@@ -106,6 +106,7 @@ func _run() -> void:
 	await _case_0073_player_art()
 	await _case_0074_zombie_art()
 	await _case_0076_lighting()
+	await _case_0077_particles()
 	_finish()
 
 
@@ -3540,6 +3541,75 @@ func _night_with_lights(driver: SimDriver, lights: Lighting,
 	lights.set_quality(level)
 	Resources.gain(state, {GameData.WOOD: 400, GameData.IRON: 400,
 		GameData.STONE: 400})
+	var at := Player.cell(state)
+	for i in 4:
+		Building.place(state, &"gun_tower", Vector2i(at.x + 2 + i * 2, at.y + 1))
+	Phases.begin_preparation(state)
+	Sim.advance(state, GameData.PREPARATION_TICKS)
+	for chunk in 20:
+		Sim.advance(state, 30)
+		await frames(1)
+	return State.hash_of(state)
+
+
+## 0077 - particles, and the promise that they are only particles.
+func _case_0077_particles() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var bits: Particles = require_control("Particles")
+	if driver == null or bits == null:
+		_completed += 1
+		await close_scene()
+		return
+
+	await frames(4)
+	expect(bits.cap() > 0, "there is a cap", str(bits.cap()))
+
+	# **Turning them off does not change the outcome of a night.** Task
+	# 0077's done-when, asked the way task 0076 asks its own: play the same
+	# night from the same seed at three densities and compare the state hash.
+	var full: int = await _night_with_particles(driver, bits, 1.0)
+	var none: int = await _night_with_particles(driver, bits, 0.0)
+	expect(full == none,
+		"a night played with the particles off comes out identical",
+		"%d against %d" % [full, none])
+	var half: int = await _night_with_particles(driver, bits, 0.5)
+	expect(half == full, "and so does one played at half density", str(half))
+
+	# **The cap is a cap.** Fill it well past the ceiling and count.
+	bits.set_density(1.0)
+	bits.set_cap(40)
+	var state := driver.state
+	Phases.begin_preparation(state)
+	Sim.advance(state, GameData.PREPARATION_TICKS)
+	for _one in 60:
+		Enemies.spawn(state, &"walker", 0)
+	for _f in 30:
+		if int(state["phase"]) == Phases.NIGHT:
+			Sim.advance(state, 2)
+		await frames(1)
+		expect(bits.live() <= bits.cap(),
+			"never more alive than the cap allows",
+			"%d of %d" % [bits.live(), bits.cap()])
+
+	# And zero means zero, which is what the accessibility setting buys.
+	bits.set_density(0.0)
+	await frames(40)
+	expect(bits.live() == 0,
+		"at zero density they all go out and none come back",
+		str(bits.live()))
+
+	await close_scene()
+	_completed += 1     # last line: an abandoned case never gets here
+
+
+## Play the opening of a night at one density and hand back the state hash.
+func _night_with_particles(driver: SimDriver, bits: Particles,
+		density: float) -> int:
+	driver.start(770077)
+	var state := driver.state
+	bits.set_density(density)
+	Resources.gain(state, {GameData.WOOD: 400, GameData.IRON: 400})
 	var at := Player.cell(state)
 	for i in 4:
 		Building.place(state, &"gun_tower", Vector2i(at.x + 2 + i * 2, at.y + 1))

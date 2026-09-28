@@ -51,6 +51,11 @@ const DEFAULTS := {
 	# likely to cost frames on a weak machine, and the honest answer to
 	# that is a dial rather than a cleverer shader.
 	&"video/lights": 2,
+	# Task 0077: the hard ceiling on live particles. A wave is a hundred
+	# things dying at once, and an uncapped emitter is a frame budget
+	# with a hole in it. `a11y/particle_density` turns the tap down;
+	# this is the ceiling, which is a different thing.
+	&"video/max_particles": 420,
 
 	&"audio/master": 1.0,
 	&"audio/music": 0.8,

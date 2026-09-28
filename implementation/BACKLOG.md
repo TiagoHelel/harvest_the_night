@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`#################.......`  **76 / 109 done**
+`#################.......`  **77 / 109 done**
 
-0 doing / 33 todo / 0 blocked across 9 phases.
+0 doing / 32 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0077 - Particles**. The whole of what is left is
+First up: **0078 - The reality transition**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,24 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-33 task(s) left, the ready ones first, then what they
+32 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0077 - Particles
-
-Ready to pick up.  Likely files: `src/ui/particles.gd`.
-
-Fire, smoke, sparks, dust and the small amount of blood the design document allows - the difference between a hit and a hit that felt like one.
-
-- Muzzle flash, impact spark, explosion, burning, smoke from the chimney and from wreckage, dust when something falls
-- Pixel particles on the shared palette, not soft gradients
-- A hard cap on live particles, and the cap is a setting
-- Particles are view only: never in the state, never in the hash
-- Blood is restrained, as section 18 asks
-
-  - done when: A busy wave stays inside the frame budget with particles on
-  - done when: Turning them off does not change the outcome of a night
 
 ### 0078 - The reality transition
 
@@ -105,6 +90,22 @@ Master, SFX and Music buses plus a small `Audio.play(id)`, so the sound tasks af
   - done when: `Audio.play('missing')` warns exactly once and does not crash
   - done when: Master at zero silences everything including music
   - done when: Twenty simultaneous shots produce one clean sound, not clipping
+
+### 0088 - Juice: shake, hit stop, damage numbers
+
+Ready to pick up.  Likely files: `src/ui/juice.gd`.
+
+Make a kill feel like a kill. Small, cheap, and entirely in the view layer.
+
+- Screen shake scaled to the event, with a cap and a setting to disable it
+- A few frames of hit stop on a big hit, implemented without touching the tick rate
+- Floating damage numbers, colour-coded by damage type, batched when many land at once
+- A flash on a hit entity and a squash on death
+- None of it is in core and none of it touches the hash
+
+  - done when: Hit stop does not desynchronise the simulation - prove it with the hash
+  - done when: Everything here can be turned off and the game still reads
+  - done when: A crowded wave does not spawn a thousand number labels
 
 ### 0102 - A performance budget
 
@@ -236,22 +237,6 @@ One warm loop for the farm, one cold one for the night, and a crossfade on the r
 
   - done when: The loop point is inaudible
   - done when: The crossfade lands with the transition, not before or after it
-
-### 0088 - Juice: shake, hit stop, damage numbers
-
-Waits on 0077.  Likely files: `src/ui/juice.gd`.
-
-Make a kill feel like a kill. Small, cheap, and entirely in the view layer.
-
-- Screen shake scaled to the event, with a cap and a setting to disable it
-- A few frames of hit stop on a big hit, implemented without touching the tick rate
-- Floating damage numbers, colour-coded by damage type, batched when many land at once
-- A flash on a hit entity and a squash on death
-- None of it is in core and none of it touches the hash
-
-  - done when: Hit stop does not desynchronise the simulation - prove it with the hash
-  - done when: Everything here can be turned off and the game still reads
-  - done when: A crowded wave does not spawn a thousand number labels
 
 ### 0087 - Ambience
 
@@ -607,7 +592,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0069** [Run statistics](prompts/0069-stats.md)
 - [x] **0070** [Endless nights past ten](prompts/0070-endless.md)
 
-## 5 - Art and visual direction  (6/13)
+## 5 - Art and visual direction  (7/13)
 
 - [x] **0071** [The two palettes](prompts/0071-palettes.md)
 - [x] **0072** [The farm tileset](prompts/0072-tileset.md)
@@ -616,7 +601,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0074** [Zombie sprites](prompts/0074-zombie-art.md)
 - [x] **0075** [Buildings and towers](prompts/0075-building-art.md)
 - [x] **0076** [Night lighting](prompts/0076-lighting.md)
-- [ ] **0077** [Particles](prompts/0077-particles.md)
+- [x] **0077** [Particles](prompts/0077-particles.md)
 - [ ] **0078** [The reality transition](prompts/0078-transition.md)
 - [ ] **0079** [Resource icons and the UI kit](prompts/0079-ui-kit.md)
 - [ ] **0080** [A pixel font](prompts/0080-font.md)
@@ -630,7 +615,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [ ] **0085** [The sounds of the night](prompts/0085-sfx-night.md) - needs 0083
 - [ ] **0086** [Two pieces of music](prompts/0086-music.md) - needs 0083
 - [ ] **0087** [Ambience](prompts/0087-ambience.md) - needs 0084, 0085
-- [ ] **0088** [Juice: shake, hit stop, damage numbers](prompts/0088-juice.md) - needs 0077
+- [ ] **0088** [Juice: shake, hit stop, damage numbers](prompts/0088-juice.md)
 - [ ] **0089** [Tooltips](prompts/0089-tooltips.md) - needs 0081
 - [ ] **0090** [The log panel](prompts/0090-log-panel.md) - needs 0081
 
