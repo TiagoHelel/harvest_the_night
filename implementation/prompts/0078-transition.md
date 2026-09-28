@@ -1,7 +1,7 @@
 # 0078 - The reality transition
 
 - **Phase:** 5 - Art and visual direction
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0076
 - **Likely files:** src/ui/transition.gd
 

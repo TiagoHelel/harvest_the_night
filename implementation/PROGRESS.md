@@ -6285,3 +6285,105 @@ reason none of it can reach the guard even by accident.
 
 `python tools/verify.py` prints PASS: 4959 asserts, 648 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+
+## 0078 - The reality transition - done 2026-09-28
+
+What changed: `src/ui/transition.gd` - a band of light crossing the farm while
+the world flips, the day's animals fading out, and the guns flaring as they
+come on. The light drain itself is task 0039's and was already right; this is
+the theatre around it. Screenshot: `implementation/shots/0078-transition.png`,
+five frames of the change.
+
+Files: `src/ui/transition.gd` (new), `src/ui/world_view.gd`,
+`src/core/game_data.gd`, `src/app/settings.gd`, `scenes/Main.tscn`,
+`src/ui/main.gd`, `src/tools/headless_check.gd`, `src/tools/input_check.gd`.
+
+Verify: 4976 headless / 655 input / both hashes unchanged.
+
+### Is it the clip you would put first in a trailer?
+
+Task 0078 asks me to say, so: **not yet, and it is close.**
+
+What is there: the light drains from warm green to cold blue across the whole
+farm at once, a wash of light travels across it while that happens, the
+chickens and the cow fade away, the four gun towers flare gold as they come
+on, and the farmhouse windows light up. Two seconds, and at the end it is
+visibly a different world made of the same tiles. That is the idea the game is
+named after and it is legible.
+
+What a trailer clip would also have and this does not: the camera does not
+move, and nothing arrives. The first zombie stepping out of the treeline as
+the last of the light goes is the shot - and that is a wave-timing and camera
+question rather than a transition one. **The honest answer is that this is the
+beat, and the clip would be this plus a camera push and one walker.**
+
+### The length is a lever and a setting, and deliberately not in the digest
+
+`GameData.TRANSITION_SECONDS` - a lever, where levers live, because a designer
+will want to turn it while watching it. **Left out of `digest()` on purpose**:
+that guard watches the balance tables, and a two-second fade is not balance.
+Putting it in would mean a purely visual tweak failing a check about whether
+the game still plays the same.
+
+That is a decision rather than an oversight, so there is an assert for it -
+`headless_check` reads `digest()`'s own source and fails if the constant ever
+appears inside it. Otherwise the next person to wonder why the data hash did
+not move would have to work it out from first principles.
+
+`video/transition_seconds` overrides it for a player, and the
+`gameplay/skip_transition` flag that already existed now means "the shortest
+change the code can draw" rather than a special case that never fades.
+
+### Both directions, and the morning is the other one
+
+Dusk sweeps a cold band left to right; dawn sweeps a warm one right to left.
+Same code, colour and direction turned round - because it is the same event
+seen from either end, and because a morning that played as the evening
+backwards would feel like a rewind rather than a reward.
+
+### What the first version got wrong
+
+**The band read as a striped screen-wipe.** Seven hard-edged strips at 0.55
+opacity, chosen hard-edged on the grounds that this is a pixel-art game and a
+smooth alpha ramp across four hundred pixels would look like it came from
+somewhere else. That reasoning is right and the execution was not: at that
+strength the edges were the thing you saw. Thirteen narrower strips at 0.30
+read as one moving wash and are still made of hard edges.
+
+**And nothing woke up.** The task asks for night structures to wake and the
+first version only had the animals leaving, which is half an idea. The guns
+flare on a bell curve through the change and settle - an event rather than a
+permanent glow.
+
+### Two bugs of my own
+
+**Casting a freed object.** `WorldView._refresh()` throws its sprites away and
+builds new ones, so a cached list of them holds freed objects - and
+`sprite as Sprite2D` on one of those is an error rather than a null. Valid
+first, cast second; and the cache notices a rebuild rather than trusting the
+occupant count, which does not change when the view redraws for its own
+reasons.
+
+**A wait shorter than the thing waited for.** Task 0077's case asserted that
+particles all go out forty frames after the density is set to zero. Smoke
+lasts 1.6 seconds times up to 1.3, which is about a hundred and twenty-five
+frames. It passed when I wrote it and failed here, because this task made the
+transition longer and moved the timing under it. It waits for the last one
+now instead of guessing.
+
+### Skipping lands where watching does
+
+The done-when, and it is true for a structural reason rather than a careful
+one: nothing in the change is ever waited on, so the tick runs through it at
+the rate it runs through everything else. `input_check` plays the same night
+from one seed twice - watching every change, then skipping every change - and
+compares `State.hash_of()`. Identical.
+
+### Hashes
+
+Both unchanged - `2555959448` and `2601044827`. The data hash staying put is
+itself the evidence that the new lever is outside the digest, which is what
+the group asserts in words.
+
+`python tools/verify.py` prints PASS: 4976 asserts, 655 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

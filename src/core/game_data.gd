@@ -1285,6 +1285,16 @@ const NIGHTS: Array = [
 	},
 ]
 
+## How long the world takes to change, in seconds.
+##
+## **A lever here and not in the view**, because task 0078 asks for one and
+## because it is a number a designer will want to turn while watching it. It
+## is deliberately **not** in `digest()`: that guard watches the balance
+## tables, and a two-second fade is not balance - putting it in would mean a
+## purely visual tweak failing a check about whether the game plays the same.
+## `video/transition_seconds` lets a player move it as well.
+const TRANSITION_SECONDS := 1.6         # LEVER: seconds, 0.4-4.0
+
 ## How many nights the MVP has. Past this, `Endless` generates them.
 const MVP_NIGHTS := 10
 

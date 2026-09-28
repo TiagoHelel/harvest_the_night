@@ -41,7 +41,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 36
+const CASES := 37
 
 var passed := 0
 var failed := 0
@@ -107,6 +107,7 @@ func _run() -> void:
 	await _case_0074_zombie_art()
 	await _case_0076_lighting()
 	await _case_0077_particles()
+	await _case_0078_transition()
 	_finish()
 
 
@@ -3593,8 +3594,14 @@ func _case_0077_particles() -> void:
 			"%d of %d" % [bits.live(), bits.cap()])
 
 	# And zero means zero, which is what the accessibility setting buys.
+	#
+	# **Long enough for the longest-lived one.** Smoke lasts 1.6 seconds
+	# times up to 1.3, which is about a hundred and twenty-five frames; the
+	# first version waited forty and then asserted that thirteen puffs of
+	# smoke should already have gone out.
 	bits.set_density(0.0)
-	await frames(40)
+	await until(func() -> bool: return bits.live() == 0,
+		"the last particle to go out")
 	expect(bits.live() == 0,
 		"at zero density they all go out and none come back",
 		str(bits.live()))
@@ -3617,5 +3624,76 @@ func _night_with_particles(driver: SimDriver, bits: Particles,
 	Sim.advance(state, GameData.PREPARATION_TICKS)
 	for chunk in 20:
 		Sim.advance(state, 30)
+		await frames(1)
+	return State.hash_of(state)
+
+
+## 0078 - the moment the game is named after.
+func _case_0078_transition() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var view: WorldView = require_control("WorldView")
+	var moment: Transition = require_control("Transition")
+	if driver == null or view == null or moment == null:
+		_completed += 1
+		await close_scene()
+		return
+
+	var state := driver.state
+	await frames(6)
+	expect(view.transition_seconds() > 0.0,
+		"the change has a length", str(view.transition_seconds()))
+	expect(not view.is_transitioning(),
+		"and is not running before anything has changed")
+
+	# **It never blocks the simulation.** The tick has to keep moving while
+	# the world is changing, which is the whole reason skipping is free.
+	await click_control("NightButton")
+	await until(func() -> bool: return int(state["phase"]) != Phases.DAY,
+		"the night to begin")
+	await frames(3)
+	expect(view.is_transitioning(), "the change is running",
+		str(view.transition_progress()))
+	expect(view.going_dark(), "and it is going the dark way")
+	var was := int(state["tick"])
+	await frames(6)
+	expect(int(state["tick"]) > was,
+		"the game runs through the change rather than waiting for it",
+		"%d against %d" % [int(state["tick"]), was])
+
+	# It finishes on its own.
+	await until(func() -> bool: return not view.is_transitioning(),
+		"the change to end")
+	expect(view.transition_progress() >= 1.0,
+		"and ends at the end", str(view.transition_progress()))
+
+	# **Skipping lands in exactly the same state as watching.** The done-when.
+	# Two nights from one seed: one watched, one skipped at every change.
+	var watched: int = await _night_through_changes(driver, view, false)
+	var skipped: int = await _night_through_changes(driver, view, true)
+	expect(watched == skipped,
+		"skipping the change lands in exactly the state watching does",
+		"%d against %d" % [watched, skipped])
+
+	await close_scene()
+	_completed += 1     # last line: an abandoned case never gets here
+
+
+## Play a night, either watching every change or skipping it, and hand back
+## the state hash. The simulation is advanced by hand at a fixed rate, so the
+## only difference between the two runs is what the view was doing.
+func _night_through_changes(driver: SimDriver, view: WorldView,
+		skip: bool) -> int:
+	driver.start(780078)
+	var state := driver.state
+	Resources.gain(state, {GameData.WOOD: 400, GameData.IRON: 400})
+	var at := Player.cell(state)
+	for i in 4:
+		Building.place(state, &"gun_tower", Vector2i(at.x + 2 + i * 2, at.y + 1))
+	Phases.begin_preparation(state)
+	for chunk in 24:
+		Sim.advance(state, 30)
+		if skip:
+			view.skip_transition()
 		await frames(1)
 	return State.hash_of(state)

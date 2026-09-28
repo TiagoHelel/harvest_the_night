@@ -83,10 +83,12 @@ const OCCUPANT_COLOURS: Dictionary = {
 ## magenta block rather than as nothing at all.
 const UNKNOWN_COLOUR := Color8(220, 60, 200)
 
-## How long the light takes to change. Cosmetic, so it is not in `game_data`:
-## a purely visual number in the data hash would mean a balance-neutral tweak
-## failed the guard. Task 0078 makes it a setting.
-const TRANSITION_SECONDS := 1.1
+## How long the light takes to change, when nothing says otherwise. Task
+## 0078 moved the number itself to `GameData.TRANSITION_SECONDS` - a lever, so
+## a designer can turn it - and left it out of `digest()`, so turning it does
+## not fail a guard that watches balance. `video/transition_seconds` overrides
+## it for a player who has seen the moment enough times.
+var _transition_seconds := GameData.TRANSITION_SECONDS
 
 @onready var _terrain: TileMapLayer = $Terrain
 ## The edges, on their own layer over the terrain. A cell can only hold one
@@ -172,6 +174,7 @@ func _ready() -> void:
 	# below the whole HUD - which is a fact about the scene, not about the
 	# view. A `WorldView` opened on its own simply has no relight and draws in
 	# the palette's own colours, which is what a sprite check wants anyway.
+	_read_transition_length()
 	_relight = get_tree().root.find_child("Relight", true, false) as Relight
 
 	_light = CanvasModulate.new()
@@ -278,7 +281,7 @@ func _light_for_phase(delta: float) -> void:
 	# colour towards the target every frame is an exponential approach: the
 	# colour arrives quickly and the progress never quite finishes, which made
 	# `is_transitioning()` true long after the fade looked over.
-	_fade = minf(_fade + delta / TRANSITION_SECONDS, 1.0)
+	_fade = minf(_fade + delta / maxf(_transition_seconds, 0.05), 1.0)
 	_light.color = _fade_from.lerp(target, _fade)
 	_wear(_blend(_ramp_of(_fade_from), _ramp_now(), _fade))
 
@@ -411,6 +414,39 @@ func skip_transition() -> void:
 ## True while the light is still moving, for task 0078.
 func is_transitioning() -> bool:
 	return _fade < 1.0
+
+
+## How far through the change the world is, 0 at the start and 1 when it is
+## over. What `Transition` hangs its theatre on.
+func transition_progress() -> float:
+	return clampf(_fade, 0.0, 1.0)
+
+
+## Whether the world is on its way *into* the night, as opposed to out of it.
+## The morning is the reward half and does not look the same.
+func going_dark() -> bool:
+	return _lit_for != Phases.DAY
+
+
+## The length, read once, by path - `verify.py` parses every script on its own
+## with no autoload registered.
+func _read_transition_length() -> void:
+	var service := get_node_or_null("/root/Settings")
+	if service == null or not service.has_method("get_value"):
+		return
+	var seconds: Variant = service.get_value(&"video/transition_seconds")
+	if seconds != null and float(seconds) > 0.0:
+		_transition_seconds = float(seconds)
+	var skip: Variant = service.get_value(&"gameplay/skip_transition")
+	if skip != null and bool(skip):
+		# A player who has turned the moment off gets the shortest change
+		# the code can draw rather than a special case that never fades.
+		_transition_seconds = 0.05
+
+
+## For `input_check`, and for `Transition` to report honestly.
+func transition_seconds() -> float:
+	return _transition_seconds
 
 
 ## The colour the light is heading for, whether or not it has got there.

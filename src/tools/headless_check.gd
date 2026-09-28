@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 70
+const GROUPS := 71
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -134,6 +134,7 @@ func _run() -> void:
 	_task_0075_building_art()
 	_task_0076_lighting()
 	_task_0077_particles()
+	_task_0078_transition()
 
 
 func _finish() -> void:
@@ -11959,3 +11960,71 @@ func _task_0077_particles() -> void:
 		"and the tap is one they can turn down separately")
 
 	_completed += 1     # last line: an abandoned group never gets here
+
+
+## 0078 - the reality transition.
+func _task_0078_transition() -> void:
+	# **Length is a lever.** Task 0078 asks for one, and it is in
+	# `game_data.gd` with the others rather than hidden in the view.
+	expect(GameData.TRANSITION_SECONDS > 0.3
+		and GameData.TRANSITION_SECONDS < 5.0,
+		"the change takes a sensible number of seconds",
+		str(GameData.TRANSITION_SECONDS))
+
+	# **And deliberately not in the digest.** That guard watches the balance
+	# tables; a two-second fade is not balance, and putting it in would mean a
+	# purely visual tweak failing a check about whether the game plays the
+	# same. This asserts the decision rather than leaving it to be rediscovered
+	# by somebody wondering why the data hash moved.
+	var before := GameData.digest()
+	expect(before == GameData.digest(),
+		"the data hash is stable to read twice", str(before))
+	var source := FileAccess.get_file_as_string(
+		"res://src/core/game_data.gd")
+	var digest_from := source.find("static func digest()")
+	expect(digest_from > 0, "digest() is in game_data")
+	if digest_from > 0:
+		var digest_body := source.substr(digest_from, 3000)
+		expect(not digest_body.contains("TRANSITION_SECONDS"),
+			"and the transition's length is deliberately outside it")
+
+	# **And a setting**, so a player who has seen it enough can shorten it.
+	var defaults: Dictionary = load("res://src/app/settings.gd").new().DEFAULTS
+	expect(defaults.has(&"video/transition_seconds"),
+		"the length is something a player can move")
+	expect(float(defaults[&"video/transition_seconds"]) == 0.0,
+		"and starts at zero, which means 'use the lever'",
+		str(defaults.get(&"video/transition_seconds")))
+	expect(defaults.has(&"gameplay/skip_transition"),
+		"and there is still a switch to turn the moment off")
+
+	# **It plays in both directions.** The two bands are different colours,
+	# because the morning is the reward half and should not read as the
+	# evening played backwards.
+	expect(not Transition.INTO_DAY.is_equal_approx(Transition.INTO_NIGHT),
+		"dusk and dawn are not the same colour")
+	expect(Transition.INTO_DAY.r > Transition.INTO_DAY.b,
+		"the morning arrives warm", str(Transition.INTO_DAY))
+	expect(Transition.INTO_NIGHT.b > Transition.INTO_NIGHT.r,
+		"and the evening arrives cold", str(Transition.INTO_NIGHT))
+
+	# **Day actors and night machines are named**, so the theatre is data
+	# rather than a guess made in a draw call.
+	for id in Transition.DAY_ONLY:
+		expect(_is_farm_occupant(StringName(id)),
+			"the day-only actor '%s' is a thing on the farm" % id)
+	for id in Transition.WAKES:
+		expect(GameData.DEFENCES.has(StringName(id))
+			or GameData.BUILDINGS.has(StringName(id)),
+			"the waking structure '%s' is something that gets built" % id)
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+func _is_farm_occupant(id: StringName) -> bool:
+	var state := State.create(7800)
+	for idx in (state["occupants"] as Dictionary):
+		if StringName(((state["occupants"] as Dictionary)[idx]
+				as Dictionary)["id"]) == id:
+			return true
+	return false

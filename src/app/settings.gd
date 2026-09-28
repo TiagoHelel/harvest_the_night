@@ -66,6 +66,9 @@ const DEFAULTS := {
 	&"gameplay/language": "en",
 	&"gameplay/night_speed": 1,
 	&"gameplay/skip_transition": false,
+	# Task 0078: 0 means "use the lever in game_data". Anything else
+	# overrides it, for a player who has seen the moment enough times.
+	&"video/transition_seconds": 0.0,
 	&"gameplay/tutorial_seen": false,
 
 	&"a11y/screen_shake": 1.0,

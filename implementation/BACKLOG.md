@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`#################.......`  **77 / 109 done**
+`#################.......`  **78 / 109 done**
 
-0 doing / 32 todo / 0 blocked across 9 phases.
+0 doing / 31 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0078 - The reality transition**. The whole of what is left is
+First up: **0079 - Resource icons and the UI kit**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,24 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-32 task(s) left, the ready ones first, then what they
+31 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0078 - The reality transition
-
-Ready to pick up.  Likely files: `src/ui/transition.gd`.
-
-The moment the game is named after. Two seconds that say: same farm, different world.
-
-- The light drains from warm to cold across the whole farm at once
-- Day actors leave and night structures wake during it
-- It is skippable, and it never blocks the simulation
-- It plays in both directions, and coming back to the farm in the morning is the reward half
-- Length is a lever and a setting
-
-  - done when: It is the clip you would put first in a trailer - say in the journal whether it is yet
-  - done when: Skipping it lands in exactly the same state as watching it
 
 ### 0079 - Resource icons and the UI kit
 
@@ -74,6 +59,20 @@ Type that is crisp at 480x270 and does not fight the art.
 
   - done when: Every accented character in the Portuguese strings renders
   - done when: A changing number does not shift the text around it
+
+### 0082 - Screenshots, and actually looking at them
+
+Ready to pick up.  Likely files: `src/tools/shot.gd, implementation/shots/`.
+
+A command that puts the game in a known state and takes the picture, so a visual change can be checked instead of hoped for.
+
+- `shot.gd` takes named scenarios: farm at noon, farm at dusk, a wave mid-fight, the result screen, the tech tree
+- It runs headless and writes PNGs under `implementation/shots/<id>/`
+- The scenario is built from a seed and a scripted state, so two runs give the same picture
+- The runner loop is updated to say: after a visual task, take the shots and look at them
+
+  - done when: One command produces the whole set
+  - done when: The set is recognisably the game on the reference sheet
 
 ### 0083 - Audio buses and a sound manager
 
@@ -179,20 +178,6 @@ One Theme resource every control uses, so a colour change is one edit and no scr
 
   - done when: `grep` finds no `add_theme_*_override` left in `src/ui/`
   - done when: Every screen looks like the same game
-
-### 0082 - Screenshots, and actually looking at them
-
-Waits on 0078.  Likely files: `src/tools/shot.gd, implementation/shots/`.
-
-A command that puts the game in a known state and takes the picture, so a visual change can be checked instead of hoped for.
-
-- `shot.gd` takes named scenarios: farm at noon, farm at dusk, a wave mid-fight, the result screen, the tech tree
-- It runs headless and writes PNGs under `implementation/shots/<id>/`
-- The scenario is built from a seed and a scripted state, so two runs give the same picture
-- The runner loop is updated to say: after a visual task, take the shots and look at them
-
-  - done when: One command produces the whole set
-  - done when: The set is recognisably the game on the reference sheet
 
 ### 0084 - The sounds of the day
 
@@ -592,7 +577,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0069** [Run statistics](prompts/0069-stats.md)
 - [x] **0070** [Endless nights past ten](prompts/0070-endless.md)
 
-## 5 - Art and visual direction  (7/13)
+## 5 - Art and visual direction  (8/13)
 
 - [x] **0071** [The two palettes](prompts/0071-palettes.md)
 - [x] **0072** [The farm tileset](prompts/0072-tileset.md)
@@ -602,11 +587,11 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0075** [Buildings and towers](prompts/0075-building-art.md)
 - [x] **0076** [Night lighting](prompts/0076-lighting.md)
 - [x] **0077** [Particles](prompts/0077-particles.md)
-- [ ] **0078** [The reality transition](prompts/0078-transition.md)
+- [x] **0078** [The reality transition](prompts/0078-transition.md)
 - [ ] **0079** [Resource icons and the UI kit](prompts/0079-ui-kit.md)
 - [ ] **0080** [A pixel font](prompts/0080-font.md)
 - [ ] **0081** [The UI theme](prompts/0081-theme.md) - needs 0079, 0080
-- [ ] **0082** [Screenshots, and actually looking at them](prompts/0082-screenshots.md) - needs 0078
+- [ ] **0082** [Screenshots, and actually looking at them](prompts/0082-screenshots.md)
 
 ## 6 - Sound and juice  (0/8)
 
