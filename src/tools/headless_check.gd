@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 82
+const GROUPS := 83
 
 const SettingsScript := preload("res://src/app/settings.gd")
 const AudioScript := preload("res://src/app/audio.gd")
@@ -152,6 +152,7 @@ func _run() -> void:
 	_task_0087_ambience()
 	_task_0088_juice()
 	_task_0089_tooltips()
+	_task_0090_log()
 
 
 func _finish() -> void:
@@ -13370,5 +13371,103 @@ func _task_0089_tooltips() -> void:
 
 	print("  %d things described, %d defences and %d enemies by their levers"
 		% [keys.size(), GameData.DEFENCES.size(), GameData.ENEMIES.size()])
+
+	_completed += 1     # last line: an abandoned group never gets here
+## 0090 - the log.
+func _task_0090_log() -> void:
+	# **Every kind the rules can record has a severity and a sentence.** The
+	# list is the rules'; the words and the colour are the view's. A kind
+	# added to one and not the other is a line that shows up grey and blank,
+	# and this is what stops that shipping.
+	for kind in Events.KINDS:
+		expect(String(LogPanel.severity_of(kind)) != "",
+			"'%s' has a severity" % kind)
+		expect(LogPanel.HOLD.has(LogPanel.severity_of(kind)),
+			"and its severity is one that has a hold time" % [],
+			String(LogPanel.severity_of(kind)))
+		expect(LogPanel.TINTS.has(LogPanel.severity_of(kind)),
+			"and a colour" % [])
+
+	# **The alarming ones are held longer.** The requirement, as arithmetic.
+	expect(float(LogPanel.HOLD[&"bad"]) > float(LogPanel.HOLD[&"warn"]),
+		"a wall coming down stays up longer than a wave arriving",
+		"%.1f against %.1f" % [LogPanel.HOLD[&"bad"], LogPanel.HOLD[&"warn"]])
+	expect(float(LogPanel.HOLD[&"warn"]) > float(LogPanel.HOLD[&"note"]),
+		"and a wave arriving longer than the night starting")
+
+	# **Data, never words.** Every kind produces a sentence in the view, and
+	# nothing that comes out of the rules is one.
+	var state := State.create(90090)
+	var samples := {
+		&"night_began": {"night": 3},
+		&"wave_began": {"wave": 2, "waves": 4, "enemy": &"walker",
+			"count": 6},
+		&"structure_lost": {"id": &"gun_tower", "cell": [4, 5]},
+		&"house_hit": {"damage": 8, "left": 72},
+		&"crop_ready": {"crop": &"wheat", "cell": [2, 3]},
+		&"craft_done": {"recipe": &"barricade_kit", "cell": [6, 7]},
+		&"boss_arrived": {"enemy": &"giant"},
+		&"night_won": {"night": 3},
+		&"night_lost": {"night": 4},
+	}
+	for kind in Events.KINDS:
+		expect(samples.has(kind),
+			"the check has a sample for '%s'" % kind)
+		if not samples.has(kind):
+			continue
+		Events.add(state, kind, samples[kind] as Dictionary)
+	var written := Events.recent(state)
+	expect(written.size() == Events.KINDS.size(),
+		"every kind was recorded", "%d of %d"
+		% [written.size(), Events.KINDS.size()])
+	for one in written:
+		var event: Dictionary = one
+		var text := LogPanel.line_for(event)
+		expect(not text.strip_edges().is_empty(),
+			"'%s' reads as a sentence" % event["kind"], text)
+		expect(not text.contains("kind_of") and not text.contains("%"),
+			"and is finished rather than a half-filled template", text)
+	# The one that had a field collision: the wave line must name the enemy
+	# and not the event.
+	var wave_line := LogPanel.line_for({
+		"kind": &"wave_began", "wave": 2, "waves": 4, "enemy": &"runner",
+		"count": 1,
+	})
+	expect(wave_line.contains("runner"),
+		"a wave line names what is in the wave", wave_line)
+	expect(not wave_line.contains("wave_began"),
+		"and not the event that recorded it", wave_line)
+	expect(LogPanel.line_for({"kind": &"wave_began", "wave": 1, "waves": 1,
+		"enemy": &"walker", "count": 6}).contains("walkers"),
+		"and six of them are walkers, not walker")
+
+	# **It cannot grow.** The second done-when: a thousand events leave the
+	# cap, and the ones that survive are the newest.
+	var flood := State.create(90091)
+	for i in Events.CAP * 16:
+		flood["tick"] = i
+		Events.add(flood, &"house_hit", {"damage": 1, "left": i})
+	var kept := Events.recent(flood)
+	expect(kept.size() == Events.CAP,
+		"a thousand events leave exactly the cap",
+		"%d of %d" % [kept.size(), Events.CAP])
+	expect(int((kept[kept.size() - 1] as Dictionary)["left"])
+		== Events.CAP * 16 - 1,
+		"and the ones kept are the newest",
+		str((kept[kept.size() - 1] as Dictionary)["left"]))
+
+	# `since` slices the night out of a record that also holds the day.
+	expect(Events.since(flood, Events.CAP * 16 - 4).size() == 4,
+		"the last four ticks are four events",
+		str(Events.since(flood, Events.CAP * 16 - 4).size()))
+
+	# A kind nobody records is refused rather than written.
+	var strict := State.create(90092)
+	Events.add(strict, &"not_a_kind", {})
+	expect((strict["events"] as Array).is_empty(),
+		"an unknown kind writes nothing")
+
+	print("  %d kinds, all with words and a colour, capped at %d"
+		% [Events.KINDS.size(), Events.CAP])
 
 	_completed += 1     # last line: an abandoned group never gets here

@@ -411,6 +411,9 @@ static func _record(state: Dictionary, cell: Vector2i,
 	var made: Dictionary = log["made"]
 	made[recipe_id] = int(made.get(recipe_id, 0)) + 1
 	log["at"] = int(state["tick"])
+	Events.add(state, &"craft_done", {
+		"recipe": recipe_id, "cell": [cell.x, cell.y],
+	})
 
 
 ## Put the output where it belongs: a resource in the ledger, a structure on

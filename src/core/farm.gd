@@ -233,6 +233,9 @@ static func damage(state: Dictionary, cell: Vector2i, amount: int) -> int:
 		var id := StringName(on["id"])
 		remove(state, cell)
 		_leave_rubble(state, cell, id)
+		Events.add(state, &"structure_lost", {
+			"id": id, "cell": [cell.x, cell.y],
+		})
 	return taken
 
 

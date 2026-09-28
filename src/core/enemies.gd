@@ -334,6 +334,9 @@ const NEIGHBOURS: Array[Vector2i] = [
 
 static func _bite(state: Dictionary, id: int, data: Dictionary) -> void:
 	state["house_hp"] = maxi(int(state["house_hp"]) - int(data["damage"]), 0)
+	Events.add(state, &"house_hit", {
+		"damage": int(data["damage"]), "left": int(state["house_hp"]),
+	})
 	state["breaches"] = int(state["breaches"]) + 1
 	state["breaches_all_run"] = int(state.get("breaches_all_run", 0)) + 1
 	Entities.remove(state, id)

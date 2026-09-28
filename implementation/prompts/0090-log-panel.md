@@ -1,7 +1,7 @@
 # 0090 - The log panel
 
 - **Phase:** 6 - Sound and juice
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0081, 0061
 - **Likely files:** src/ui/log_panel.gd
 

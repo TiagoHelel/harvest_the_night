@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`####################....`  **89 / 109 done**
+`####################....`  **90 / 109 done**
 
-0 doing / 20 todo / 0 blocked across 9 phases.
+0 doing / 19 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0090 - The log panel**. The whole of what is left is
+First up: **0091 - The title screen**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,24 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-20 task(s) left, the ready ones first, then what they
+19 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0090 - The log panel
-
-Ready to pick up.  Likely files: `src/ui/log_panel.gd`.
-
-A short running account of what just happened, because at 4x speed the player will miss things.
-
-- The last few events: a wave arriving, a structure lost, a crop ready, a craft finished
-- Colour-coded by severity, with the alarming ones held longer
-- It fades when nothing is happening and never covers the farm
-- Events are emitted by core as data and formatted by the view
-- A key expands it into a scrollable history for the night
-
-  - done when: A night at 4x is followable from the log alone
-  - done when: It holds a bounded number of entries and cannot grow without limit
 
 ### 0091 - The title screen
 
@@ -430,7 +415,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0081** [The UI theme](prompts/0081-theme.md)
 - [x] **0082** [Screenshots, and actually looking at them](prompts/0082-screenshots.md)
 
-## 6 - Sound and juice  (7/8)
+## 6 - Sound and juice  (8/8)
 
 - [x] **0083** [Audio buses and a sound manager](prompts/0083-audio-buses.md)
 - [x] **0084** [The sounds of the day](prompts/0084-sfx-day.md)
@@ -439,7 +424,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0087** [Ambience](prompts/0087-ambience.md)
 - [x] **0088** [Juice: shake, hit stop, damage numbers](prompts/0088-juice.md)
 - [x] **0089** [Tooltips](prompts/0089-tooltips.md)
-- [ ] **0090** [The log panel](prompts/0090-log-panel.md)
+- [x] **0090** [The log panel](prompts/0090-log-panel.md)
 
 ## 7 - Shell and product  (0/10)
 

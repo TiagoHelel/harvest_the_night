@@ -41,7 +41,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 46
+const CASES := 47
 
 ## The pixels two pieces of text in one row must have between them. Two is
 ## the width of the gap inside a letter at this size, so anything less reads
@@ -122,6 +122,7 @@ func _run() -> void:
 	await _case_0087_ambience()
 	await _case_0088_juice()
 	await _case_0089_tooltips()
+	await _case_0090_log()
 	_finish()
 
 
@@ -2756,6 +2757,14 @@ func _case_0055_speed() -> void:
 	await frames(3)
 	expect(int(state["phase"]) == Phases.NIGHT,
 		"pressing it anyway changes nothing", str(state["phase"]))
+	# **Waited for rather than assumed.** Three frames is not a tick: the
+	# driver turns real seconds into ticks, and on a fast enough loop three
+	# frames can be less than one thirtieth of a second. This failed about
+	# one run in three, which is the worst kind of failure - it was found
+	# while adding something unrelated.
+	await until(func() -> bool:
+		return int(state["night_tick"]) > night_tick,
+		"the night to tick on", 600)
 	expect(int(state["night_tick"]) > night_tick,
 		"and the night is still running", str(state["night_tick"]))
 
@@ -4700,3 +4709,112 @@ func _hover(control: Control) -> void:
 	motion.global_position = at
 	root.push_input(motion)
 	await frames(2)
+func _case_0090_log() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var panel: LogPanel = require_control("LogPanel")
+	if driver == null or panel == null:
+		expect(panel != null, "the LogPanel is in the scene")
+		_completed += 1
+		await close_scene()
+		return
+	var state := driver.state
+
+	driver.running = false
+	await frames(2)
+	expect(panel.lines_showing() == 0,
+		"a quiet farm says nothing at all",
+		"%d lines" % panel.lines_showing())
+
+	# **A night at four times speed is followable from the log.** The
+	# done-when, asked by playing one: prepare, fight, and read what the log
+	# said about it afterwards.
+	Resources.gain(state, {GameData.WOOD: 900, GameData.IRON: 900,
+		GameData.STONE: 900, GameData.GUNPOWDER: 200})
+	var here := Player.cell(state)
+	var put := 0
+	for y in range(here.y - 2, here.y + 6):
+		for x in range(here.x + 3, here.x + 12):
+			if put >= 6:
+				break
+			if Building.place(state, &"gun_tower", Vector2i(x, y)):
+				put += 1
+		if put >= 6:
+			break
+	Phases.begin_preparation(state)
+	Sim.advance(state, GameData.PREPARATION_TICKS + 2)
+	await frames(3)
+	expect(int(state["phase"]) == Phases.NIGHT, "the night has begun",
+		Phases.name_of(int(state["phase"])))
+
+	var saw: Dictionary = {}
+	for i in 240:
+		Sim.advance(state, 12)          # four times speed, near enough
+		await frames(1)
+		for one in (state["events"] as Array):
+			saw[StringName((one as Dictionary)["kind"])] = true
+		if int(state["phase"]) != Phases.NIGHT:
+			break
+
+	expect(saw.has(&"night_began"),
+		"the log said the night began",
+		str(GameData.sorted_names(saw.keys())))
+	expect(saw.has(&"wave_began"),
+		"and that a wave was coming", str(GameData.sorted_names(saw.keys())))
+	expect(saw.size() >= 3,
+		"and enough else to follow what happened",
+		"%d kinds: %s" % [saw.size(), str(GameData.sorted_names(saw.keys()))])
+
+	# **It holds a bounded number of entries.** The other done-when, asked of
+	# a night that has actually been fought rather than of a loop.
+	expect((state["events"] as Array).size() <= Events.CAP,
+		"and the record never grew past its cap",
+		"%d of %d" % [(state["events"] as Array).size(), Events.CAP])
+
+	# **The lines fade when nothing is happening**, so the farm is never
+	# covered by a log nobody is reading.
+	#
+	# Asked as a countdown rather than by waiting it out: the holds are real
+	# seconds and this suite's frames go by far faster than those, so waiting
+	# for silence was eleven seconds of test and a timeout when it was not
+	# quite enough. What matters is that the clock runs down and is bounded -
+	# together those are "it goes away".
+	expect(panel.lines_showing() > 0, "something is on screen while it runs")
+	var was: float = panel.time_left()
+	var longest: float = float(LogPanel.HOLD[&"bad"]) + LogPanel.FADE
+	expect(was > 0.0 and was <= longest,
+		"a line has a bounded time to run",
+		"%.1fs against a longest of %.1fs" % [was, longest])
+	await frames(40)
+	expect(panel.time_left() < was,
+		"and it counts down while nothing else happens",
+		"%.2f against %.2f" % [panel.time_left(), was])
+	# And it really does reach nothing, which `show_state` also guarantees at
+	# the start of a run.
+	panel.show_state(state)
+	await frames(2)
+	expect(panel.lines_showing() == 0 and panel.time_left() == 0.0,
+		"and a new run opens on a silent log",
+		"%d lines" % panel.lines_showing())
+
+	# **A key expands it into the night's history.**
+	expect(not panel.is_expanded(), "it starts collapsed")
+	await tap_key(KEY_L)
+	await frames(3)
+	expect(panel.is_expanded(), "the log key opens the history")
+	expect(panel.history_lines() > 0,
+		"and there is a night in it to read",
+		"%d lines" % panel.history_lines())
+	var history: Control = require_control("LogHistory")
+	if history != null:
+		expect(history.visible, "the panel is up")
+		expect(history.get_global_rect().end.y <= 270.0
+			and history.get_global_rect().end.x <= 480.0,
+			"and fits on the screen", str(history.get_global_rect()))
+	await tap_key(KEY_L)
+	await frames(3)
+	expect(not panel.is_expanded(), "and the same key puts it away")
+
+	driver.running = true
+	await close_scene()
+	_completed += 1     # last line: an abandoned case never gets here

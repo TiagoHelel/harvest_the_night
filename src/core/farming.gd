@@ -345,6 +345,8 @@ static func tick(state: Dictionary) -> void:
 		if int(here["growth"]) >= needed:
 			continue
 		here["growth"] = int(here["growth"]) + 1
+		if int(here["growth"]) >= needed:
+			Events.add(state, &"crop_ready", {"crop": crop, "cell": _as_pair(Grid.cell(int(idx)))})
 
 		# **The bonus is banked, not rounded.** Fifty percent of a tick is not a
 		# number a plot can hold, and rounding it to one or to zero every tick
@@ -358,6 +360,16 @@ static func tick(state: Dictionary) -> void:
 		while int(here["soak"]) >= 100 and int(here["growth"]) < needed:
 			here["soak"] = int(here["soak"]) - 100
 			here["growth"] = int(here["growth"]) + 1
+			if int(here["growth"]) >= needed:
+				Events.add(state, &"crop_ready",
+					{"crop": crop, "cell": _as_pair(Grid.cell(int(idx)))})
+
+
+## A cell as the two numbers the state stores everywhere else. Events carry
+## plain data, so a `Vector2i` would be the one thing in the record that a
+## save file could not round-trip.
+static func _as_pair(cell: Vector2i) -> Array:
+	return [cell.x, cell.y]
 
 
 ## How many plots are tilled, and how many of those are carrying something.

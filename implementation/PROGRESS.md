@@ -7724,3 +7724,109 @@ state, and reads only the tables.
 
 `python tools/verify.py` prints PASS: 5566 asserts, 748 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+
+## 0090 - The log panel - done 2026-09-28
+
+What changed: the rules keep a short record of what they did, and the view
+reads it out. Four fading lines on the left while a night runs, and one key
+opens the whole night as a scrollable history. Screenshot:
+`implementation/shots/0090/wave.png` - "night 1 begins" in grey, "wave 1 of
+3: 3 walkers" in gold, two "fence destroyed" in red.
+
+Files: `src/core/events.gd` (new), `src/ui/log_panel.gd` (new),
+`src/core/state.gd`, `waves.gd`, `farm.gd`, `farming.gd`, `crafting.gd`,
+`phases.gd`, `enemies.gd`, `scenes/Main.tscn`, `src/ui/main.gd`,
+`project.godot`, `src/tools/headless_check.gd`, `src/tools/input_check.gd`.
+
+Verify: 5630 headless / 764 input.
+
+### The determinism hash moved, on purpose
+
+**`2555959448` -> `215410677`.** The data hash is unchanged.
+
+Task 0090's requirement is that "events are emitted by core as data", which
+means the rules now keep `state["events"]` - and `State.hash_of` folds the
+whole state. The done-when anticipates this and asks for both numbers, which
+is what this paragraph is.
+
+It is worth the move. Three view systems already work out what happened by
+comparing this frame with the last one, and that is right for a spark, where
+missing one costs a puff of dust. A **log** is a different promise: it says
+what happened and in what order. At four times speed a frame is eight ticks
+and seven of them are invisible, so a view that samples cannot make that
+promise. The record is deterministic - same seed, same events - so the hash
+is as stable as it ever was, just a different number.
+
+### It cannot grow
+
+Sixty-four entries, oldest dropped when the newest arrives. That is the
+second done-when and it is the reason this is safe to put in a dictionary
+that gets hashed, saved and copied: an unbounded list in there is a leak with
+a long fuse. The check throws a thousand events at it and asserts both that
+the cap holds and that the ones kept are the **newest**.
+
+### Data, never words
+
+An event is `{tick, kind, ...}` and `src/core/` contains not one sentence a
+player reads. `LogPanel.line_for` is the only place in the game that turns an
+event into English, which is what makes task 0097 a translation file rather
+than a rewrite of the simulation.
+
+Severity and colour are the view's too: nine kinds, each with a hold time and
+a theme role, and `headless_check` fails if a kind the rules can record has
+neither. **The alarming ones are held longer** - a wall coming down stays up
+ten seconds, a night beginning four - which is asserted as arithmetic rather
+than described.
+
+### Two bugs found by writing it down
+
+- **`kind` collided with `kind`.** The wave event carried the enemy under
+  `"kind"`, and `Events.add` writes the *event's* kind into the record under
+  the same name - so every wave line named the event instead of what was
+  arriving. The field is `enemy` now, and `Events.add` **refuses** a caller
+  that passes `tick` or `kind`, so the next one of these is an error rather
+  than a wrong sentence.
+- **The log replayed itself.** `show_state` set the read marker to -1, which
+  on a fresh state is nothing and on a state that already had a night in it
+  is sixty-four lines arriving at once. It marks everything already recorded
+  as read: a log opens silent.
+
+### A flake I did not write and could not leave
+
+`input_check` failed about one run in three on a case from task 0056 - "and
+the night is still running". It waits three frames and assumes a tick
+happened, and three frames on a fast loop can be less than a thirtieth of a
+second. It waits for the tick now.
+
+It has presumably been flaky since it was written and was found while adding
+something unrelated, which is the worst way to find one.
+
+### Where the fade is asked rather than waited out
+
+The holds are real seconds and this suite's frames go by far faster, so
+waiting for the log to fall silent was eleven seconds of test and a timeout
+when it was not quite enough. The case reads the countdown instead: a line
+has a bounded time to run, it goes down while nothing happens, and a new run
+opens silent. Together those are "it goes away", and none of them depends on
+how fast the machine is.
+
+### What is not here
+
+Nothing hovers an event to find out more, and the history is the **night's**
+rather than the run's - `Events.since` slices it at `night_tick`, so the day
+before is in the record but not on that panel. A day's history is a different
+panel and nothing has asked for one.
+
+The determinism tool prints one `enter_result from RESULT` error, which is
+pre-existing - checked by stashing this task's changes and running it. Its
+scenario calls `enter_result` after a night that already ended on its own.
+Harmless, and fixing it would move the hash for a reason that has nothing to
+do with this task, so it is left for whoever owns that tool next.
+
+### Hashes
+
+Sim `2555959448` -> `215410677`, deliberate, for the reason above. Data
+`2601044827` unchanged.
+
+`python tools/verify.py` prints PASS: 5630 asserts, 764 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

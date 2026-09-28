@@ -106,6 +106,7 @@ static func begin_night(state: Dictionary) -> bool:
 	# number of days that have gone by. See `enter_result()`.
 	state["night"] = int(state["nights_won"]) + 1
 	state["night_tick"] = 0
+	Events.add(state, &"night_began", {"night": int(state["night"])})
 	# Everything about what is coming is reset here rather than by whoever
 	# happens to look first: a night that inherited last night's wave counter
 	# would be a night that started halfway through.
@@ -135,6 +136,8 @@ static func enter_result(state: Dictionary, survived: bool) -> bool:
 		"survived": survived,
 		"ticks": int(state["night_tick"]),
 	}
+	Events.add(state, &"night_won" if survived else &"night_lost",
+		{"night": int(state["night"])})
 	# **A day passes either way; a night is only got past by surviving it.**
 	#
 	# These used to be the same number - `begin_night()` set the night from

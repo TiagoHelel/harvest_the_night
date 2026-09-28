@@ -155,6 +155,21 @@ static func tick(state: Dictionary) -> void:
 	var row: Array = rows[index]
 	if int(wave["left"]) <= 0:
 		wave["left"] = int(row[1])
+		# **On the first of a wave, not on every body in it.** A wave of
+		# fourteen walkers is one thing arriving, and a log that said so
+		# fourteen times would be a log nobody read.
+		# **`enemy`, not `kind`.** `Events.add` writes the event's own kind
+		# into the record, so a field called `kind` here would be quietly
+		# overwritten and every wave line would name the event instead of
+		# what was in it.
+		Events.add(state, &"wave_began", {
+			"wave": index + 1,
+			"waves": rows.size(),
+			"enemy": StringName(row[0]),
+			"count": int(row[1]),
+		})
+		if StringName(row[0]) == &"giant":
+			Events.add(state, &"boss_arrived", {"enemy": StringName(row[0])})
 
 	Enemies.spawn(state, StringName(row[0]), int(row[2]))
 	wave["left"] = int(wave["left"]) - 1

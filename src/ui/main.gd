@@ -58,6 +58,7 @@ var _dressed: Theme
 @onready var _music: Music = %Music
 @onready var _ambience: Ambience = %Ambience
 @onready var _juice: Juice = %Juice
+@onready var _log: LogPanel = %LogPanel
 @onready var _player_view: PlayerView = %WorldView/Occupants/PlayerView
 @onready var _driver: SimDriver = %SimDriver
 @onready var _debug: CanvasLayer = %DebugOverlay
@@ -134,6 +135,7 @@ func begin_run(seed_value: int) -> void:
 	_music.show_state(_driver.state, _world)
 	_ambience.show_state(_driver.state, _world)
 	_juice.show_state(_driver.state, _world, _driver)
+	_log.show_state(_driver.state)
 
 	# **The profile, and a run counted the moment it starts.** `runs_started`
 	# is the one lifetime number that cannot be folded out of a state: by the
