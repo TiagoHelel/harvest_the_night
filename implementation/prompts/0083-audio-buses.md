@@ -1,7 +1,7 @@
 # 0083 - Audio buses and a sound manager
 
 - **Phase:** 6 - Sound and juice
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0009
 - **Likely files:** src/app/audio.gd, default_bus_layout.tres
 

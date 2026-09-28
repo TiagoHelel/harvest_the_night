@@ -45,6 +45,16 @@ texture={
 ; Application services, not rules. src/core/ cannot see these and must not:
 ; they are nodes, they touch the disk, and they are not deterministic.
 Settings="*res://src/app/settings.gd"
+Audio="*res://src/app/audio.gd"
+
+[audio]
+
+; Four buses - Master, Music, SFX, Ambience - with the three children sending
+; to Master, so one flag silences everything. Godot loads this path by
+; default and the setting is here to say so out loud rather than to change
+; anything; `headless_check` asserts the buses actually exist, because a line
+; of configuration that silently does nothing is worse than no line at all.
+buses/default_bus_layout="res://default_bus_layout.tres"
 
 [display]
 

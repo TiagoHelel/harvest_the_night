@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`##################......`  **82 / 109 done**
+`##################......`  **83 / 109 done**
 
-0 doing / 27 todo / 0 blocked across 9 phases.
+0 doing / 26 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0083 - Audio buses and a sound manager**. The whole of what is left is
+First up: **0084 - The sounds of the day**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,25 +26,53 @@ which rewrites this file for you.
 
 ## What is open
 
-27 task(s) left, the ready ones first, then what they
+26 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
-### 0083 - Audio buses and a sound manager
+### 0084 - The sounds of the day
 
-Ready to pick up.  Likely files: `src/app/audio.gd, default_bus_layout.tres`.
+Ready to pick up.  Likely files: `tools/gen_sfx.py, assets/sfx/`.
 
-Master, SFX and Music buses plus a small `Audio.play(id)`, so the sound tasks after this only have to drop in files.
+Chop, mine, till, plant, water, the fishing splash and the bite, the craft, the sale - generated, not licensed.
 
-- Three buses in `default_bus_layout.tres`
-- `Audio` autoload mapping a string id to a stream and a bus
-- Volumes read from Settings on boot and on `changed`
-- An unknown id warns once and stays silent
-- A polyphony cap and a same-frame dedupe, so twenty towers firing on one tick cannot clip
+- `tools/gen_sfx.py` synthesises every effect to WAV and is deterministic
+- Every day verb has a sound and a small random pitch so repetition does not grate
+- Cozy, soft, short: the day is the calm half
+- The bite is the most attention-grabbing sound of the day, because it is the only one with a window
 
-  - done when: `Audio.play('missing')` warns exactly once and does not crash
-  - done when: Master at zero silences everything including music
-  - done when: Twenty simultaneous shots produce one clean sound, not clipping
+  - done when: Chopping a tree for a full minute does not become annoying - go and check
+  - done when: Regenerating produces byte-identical files
+
+### 0085 - The sounds of the night
+
+Ready to pick up.  Likely files: `tools/gen_sfx.py, assets/sfx/`.
+
+The other half: shots, the flamethrower, the mortar, impacts, the groan, the death, the wall breaking, the house being hit.
+
+- Every tower and every enemy has its own sound
+- The house taking damage is the most alarming sound in the game
+- A distance falloff, so the far side of the farm is quieter
+- The Giant is audible before it is visible
+- The same generator as 0084
+
+  - done when: With eyes closed, a night's audio says roughly what is happening
+  - done when: Fifty zombies do not turn into noise
+
+### 0086 - Two pieces of music
+
+Ready to pick up.  Likely files: `tools/gen_music.py, assets/music/`.
+
+One warm loop for the farm, one cold one for the night, and a crossfade on the reality switch.
+
+- Generated, looping cleanly, a couple of minutes each
+- The two share a motif, so the night is recognisably the same farm
+- A crossfade tied to the transition length
+- An intensity layer that comes in on the last wave of a night
+- Music is off in menus by default, and that is a setting
+
+  - done when: The loop point is inaudible
+  - done when: The crossfade lands with the transition, not before or after it
 
 ### 0088 - Juice: shake, hit stop, damage numbers
 
@@ -182,49 +210,19 @@ The little bubbles on the owner's sheet - !, ?, a heart, a note, an idea, a star
   - done when: A reaction appears on the tick the thing happens and clears itself
   - done when: Turning them all off leaves the determinism hash unchanged
 
-### 0084 - The sounds of the day
+### 0087 - Ambience
 
-Waits on 0083.  Likely files: `tools/gen_sfx.py, assets/sfx/`.
+Waits on 0084, 0085.  Likely files: `src/app/ambience.gd`.
 
-Chop, mine, till, plant, water, the fishing splash and the bite, the craft, the sale - generated, not licensed.
+The bed under everything: birds and water by day, wind and distant groaning by night.
 
-- `tools/gen_sfx.py` synthesises every effect to WAV and is deterministic
-- Every day verb has a sound and a small random pitch so repetition does not grate
-- Cozy, soft, short: the day is the calm half
-- The bite is the most attention-grabbing sound of the day, because it is the only one with a window
+- A day bed and a night bed, cross-fading with the transition
+- Positional touches: the pond is louder near the pond
+- It ducks under an important sound rather than fighting it
+- It is on its own bus so it can be turned down alone
 
-  - done when: Chopping a tree for a full minute does not become annoying - go and check
-  - done when: Regenerating produces byte-identical files
-
-### 0085 - The sounds of the night
-
-Waits on 0083.  Likely files: `tools/gen_sfx.py, assets/sfx/`.
-
-The other half: shots, the flamethrower, the mortar, impacts, the groan, the death, the wall breaking, the house being hit.
-
-- Every tower and every enemy has its own sound
-- The house taking damage is the most alarming sound in the game
-- A distance falloff, so the far side of the farm is quieter
-- The Giant is audible before it is visible
-- The same generator as 0084
-
-  - done when: With eyes closed, a night's audio says roughly what is happening
-  - done when: Fifty zombies do not turn into noise
-
-### 0086 - Two pieces of music
-
-Waits on 0083.  Likely files: `tools/gen_music.py, assets/music/`.
-
-One warm loop for the farm, one cold one for the night, and a crossfade on the reality switch.
-
-- Generated, looping cleanly, a couple of minutes each
-- The two share a motif, so the night is recognisably the same farm
-- A crossfade tied to the transition length
-- An intensity layer that comes in on the last wave of a night
-- Music is off in menus by default, and that is a setting
-
-  - done when: The loop point is inaudible
-  - done when: The crossfade lands with the transition, not before or after it
+  - done when: Standing still on the farm for a minute is pleasant, not empty
+  - done when: The ambience never masks the house-damage sound
 
 ### 0092 - The main menu and the router
 
@@ -270,20 +268,6 @@ A stranger reaches night 1 and understands the loop, with no more text than the 
   - done when: A first-time player reaches the end of night 1 without being told anything out loud
   - done when: The journal names where they hesitated, because that is the finding
 
-### 0087 - Ambience
-
-Waits on 0084, 0085.  Likely files: `src/app/ambience.gd`.
-
-The bed under everything: birds and water by day, wind and distant groaning by night.
-
-- A day bed and a night bed, cross-fading with the transition
-- Positional touches: the pond is louder near the pond
-- It ducks under an important sound rather than fighting it
-- It is on its own bus so it can be turned down alone
-
-  - done when: Standing still on the farm for a minute is pleasant, not empty
-  - done when: The ambience never masks the house-damage sound
-
 ### 0093 - Options: video
 
 Waits on 0092.  Likely files: `src/ui/options_video.gd`.
@@ -301,7 +285,7 @@ Resolution, window mode and scaling, done properly for a pixel art game.
 
 ### 0094 - Options: audio
 
-Waits on 0083, 0092.  Likely files: `src/ui/options_audio.gd`.
+Waits on 0092.  Likely files: `src/ui/options_audio.gd`.
 
 Master, music, effects and ambience, with a test sound on each.
 
@@ -535,12 +519,12 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0081** [The UI theme](prompts/0081-theme.md)
 - [x] **0082** [Screenshots, and actually looking at them](prompts/0082-screenshots.md)
 
-## 6 - Sound and juice  (0/8)
+## 6 - Sound and juice  (1/8)
 
-- [ ] **0083** [Audio buses and a sound manager](prompts/0083-audio-buses.md)
-- [ ] **0084** [The sounds of the day](prompts/0084-sfx-day.md) - needs 0083
-- [ ] **0085** [The sounds of the night](prompts/0085-sfx-night.md) - needs 0083
-- [ ] **0086** [Two pieces of music](prompts/0086-music.md) - needs 0083
+- [x] **0083** [Audio buses and a sound manager](prompts/0083-audio-buses.md)
+- [ ] **0084** [The sounds of the day](prompts/0084-sfx-day.md)
+- [ ] **0085** [The sounds of the night](prompts/0085-sfx-night.md)
+- [ ] **0086** [Two pieces of music](prompts/0086-music.md)
 - [ ] **0087** [Ambience](prompts/0087-ambience.md) - needs 0084, 0085
 - [ ] **0088** [Juice: shake, hit stop, damage numbers](prompts/0088-juice.md)
 - [ ] **0089** [Tooltips](prompts/0089-tooltips.md)
@@ -551,7 +535,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [ ] **0091** [The title screen](prompts/0091-title-screen.md)
 - [ ] **0092** [The main menu and the router](prompts/0092-main-menu.md) - needs 0091
 - [ ] **0093** [Options: video](prompts/0093-options-video.md) - needs 0092
-- [ ] **0094** [Options: audio](prompts/0094-options-audio.md) - needs 0083, 0092
+- [ ] **0094** [Options: audio](prompts/0094-options-audio.md) - needs 0092
 - [ ] **0095** [Options: controls](prompts/0095-options-controls.md) - needs 0092
 - [ ] **0096** [The pause menu](prompts/0096-pause-menu.md) - needs 0092
 - [ ] **0097** [English and Portuguese](prompts/0097-i18n.md)

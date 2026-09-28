@@ -32,9 +32,10 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 75
+const GROUPS := 76
 
 const SettingsScript := preload("res://src/app/settings.gd")
+const AudioScript := preload("res://src/app/audio.gd")
 
 var passed := 0
 var failed := 0
@@ -139,6 +140,7 @@ func _run() -> void:
 	_task_0080_font()
 	_task_0081_theme()
 	_task_0082_shots()
+	_task_0083_audio()
 
 
 func _finish() -> void:
@@ -12473,3 +12475,127 @@ func _task_0082_shots() -> void:
 		% [names.size(), screens.size(), rogue.size()])
 
 	_completed += 1     # last line: an abandoned group never gets here
+## 0083 - the audio buses and the sound manager.
+func _task_0083_audio() -> void:
+	# **The buses the layout file claims to make actually exist.** Task 0080
+	# spent an afternoon on a line of `project.godot` that read back empty and
+	# silently did nothing, so a resource loaded by convention gets asked
+	# rather than trusted. The dummy audio driver still builds the whole bus
+	# graph, which is what makes this answerable with no sound card.
+	var wanted := [AudioScript.MASTER]
+	for folder in AudioScript.BUSES:
+		wanted.append(AudioScript.BUSES[folder])
+	for bus in wanted:
+		var index := AudioServer.get_bus_index(String(bus))
+		expect(index >= 0, "there is a bus called '%s'" % bus, str(index))
+
+	# **And the three children send to Master.** This is the whole mechanism
+	# behind "master at zero silences everything including music": there is
+	# one place the sound leaves by.
+	for folder in AudioScript.BUSES:
+		var bus: StringName = AudioScript.BUSES[folder]
+		var index := AudioServer.get_bus_index(String(bus))
+		if index < 0:
+			continue
+		expect(String(AudioServer.get_bus_send(index)) == String(
+			AudioScript.MASTER),
+			"and '%s' sends to Master" % bus,
+			String(AudioServer.get_bus_send(index)))
+	expect(AudioServer.get_bus_index("Nope") < 0,
+		"and a bus nobody made is not quietly there")
+
+	# **Two lists that have to agree.** Every volume the manager turns is a
+	# key `Settings` actually has, and every audio key `Settings` has is a
+	# volume something turns - which is what stops task 0093 shipping a
+	# slider that moves nothing.
+	for key in AudioScript.VOLUME_KEYS:
+		expect(SettingsScript.DEFAULTS.has(key),
+			"the '%s' volume is a setting that exists" % key)
+	for key in SettingsScript.DEFAULTS:
+		if not str(key).begins_with("audio/") or key == &"audio/muted":
+			continue
+		expect(AudioScript.VOLUME_KEYS.has(key),
+			"the '%s' setting turns a bus" % key)
+
+	# **Zero is silent, not quiet.** A bus at minus eighty decibels is still
+	# audible on headphones in a quiet room, and the done-when says silenced.
+	expect(AudioScript.is_silent(0.0, false, &"SFX"),
+		"a bus at zero is muted rather than turned down")
+	expect(not AudioScript.is_silent(0.5, false, &"SFX"),
+		"and a bus at half is not")
+	expect(AudioScript.is_silent(1.0, true, AudioScript.MASTER),
+		"the mute flag silences Master at any level")
+	expect(not AudioScript.is_silent(1.0, true, &"Music"),
+		"and does not touch Music, which is silenced by sending to Master",
+		"muting each bus would leave a fifth one somebody adds still playing")
+
+	var audio: Node = AudioScript.new()
+	root.add_child(audio)
+	audio.build()
+	expect(audio.voice_count() == AudioScript.MAX_VOICES,
+		"the pool is the size it says it is",
+		"%d against %d" % [audio.voice_count(), AudioScript.MAX_VOICES])
+
+	# **An unknown id warns once and stays silent.** The done-when, and the
+	# reason it matters: a sound asked for on every tick of a wave would
+	# otherwise put sixty identical lines a second into the log.
+	var answers: Array = []
+	for i in 6:
+		answers.append(audio.play(&"sfx/there_is_no_such_sound"))
+	expect(not answers.has(true), "an unknown id never starts anything")
+	expect(audio.warnings() == 1,
+		"and is complained about exactly once, not six times",
+		"%d warnings" % audio.warnings())
+
+	# **Twenty towers firing on one tick is one gunshot.** Twenty copies of
+	# one sound six samples apart is not twenty gunshots, it is a click and
+	# most of the headroom gone.
+	audio.add(&"sfx/test_tone", _a_tone())
+	audio.forget_counts()
+	for i in 20:
+		audio.play(&"sfx/test_tone")
+	expect(audio.started() == 1,
+		"twenty shots on one frame take one voice",
+		"%d started" % audio.started())
+	expect(audio.deduped() == 19,
+		"and the other nineteen are folded into it",
+		"%d deduped" % audio.deduped())
+
+	# The frame after, it may sound again - otherwise a gun that fires every
+	# tick would be heard once and never again.
+	audio.frame_passed()
+	expect(audio.play(&"sfx/test_tone"),
+		"and the next frame it can sound again")
+
+	# The id says which bus, so nothing is listed twice and nothing can be
+	# listed wrongly.
+	expect(audio.add(&"sfx/ok", _a_tone()), "an sfx id is a sound")
+	expect(not audio.add(&"nope/ok", _a_tone()),
+		"an id on a bus this game has not got is refused")
+	expect(not audio.add(&"noslash", _a_tone()),
+		"and so is one with no bus in front of it")
+
+	audio.stop_all()
+	audio.queue_free()
+	print("  %d buses, %d volumes, %d voices, dedupe folds 20 into 1"
+		% [wanted.size(), AudioScript.VOLUME_KEYS.size(),
+			AudioScript.MAX_VOICES])
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## A quarter second of a sine, built here because task 0084 is what brings the
+## first real WAV and this has to be testable before then.
+func _a_tone() -> AudioStreamWAV:
+	var rate := 22050
+	var samples := rate / 4
+	var bytes := PackedByteArray()
+	bytes.resize(samples * 2)
+	for i in samples:
+		bytes.encode_s16(i * 2,
+			int(sin(TAU * 440.0 * float(i) / float(rate)) * 12000.0))
+	var tone := AudioStreamWAV.new()
+	tone.format = AudioStreamWAV.FORMAT_16_BITS
+	tone.mix_rate = rate
+	tone.data = bytes
+	return tone

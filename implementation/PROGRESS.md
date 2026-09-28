@@ -6894,3 +6894,129 @@ Both unchanged - `2555959448` and `2601044827`. All three sort fixes are in
 
 `python tools/verify.py` prints PASS: 5196 asserts, 678 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+
+## 0083 - Audio buses and a sound manager - done 2026-09-28
+
+What changed: four audio buses and `Audio.play(&"sfx/shot")`. Tasks 0084 to
+0087 now only have to drop files into `assets/sfx/`, `assets/music/` and
+`assets/ambience/` - **the folder a sound lives in is the bus it plays on**,
+so nothing is listed twice and nothing can be listed wrongly. Nothing is
+visible, and five screenshots taken against the 0082 set prove it: byte for
+byte identical with the new autoload running in every scene.
+
+Files: `src/app/audio.gd` (new), `default_bus_layout.tres` (new),
+`project.godot`, `src/tools/headless_check.gd`, `src/tools/input_check.gd`.
+
+Verify: 5225 headless / 692 input / both hashes unchanged.
+
+### Four buses, not the three the task asked for
+
+`Settings.DEFAULTS` has had `audio/ambience` in it since task 0009, and task
+0087 is the ambient bed - birds and water by day, wind and groaning by night.
+A fourth bus now is four lines of a `.tres`; a fourth bus later is an options
+tab that has been shipping a slider which moves nothing.
+
+There is an assert both ways: every volume the manager turns is a key
+`Settings` has, and every `audio/` key `Settings` has turns a bus. Two lists
+that have to agree in two files are two lists that will not.
+
+### The configuration line actually does something
+
+Task 0080 lost an afternoon to `gui/theme/custom_font`, which read back empty
+and silently did nothing. So `audio/buses/default_bus_layout` was **tested
+rather than trusted**: pointed at a path that does not exist, the bus graph
+collapses to `["Master"]` alone. It is read. `headless_check` asks the
+`AudioServer` for all four buses by name anyway, so a layout that stops
+loading is a red row rather than a game that quietly has one bus.
+
+The dummy audio driver still builds the whole bus graph, which is what makes
+any of this answerable with no sound card.
+
+### Master at zero, and why the buses are a tree
+
+Music, SFX and Ambience all **send to Master**. That is the whole mechanism
+behind the done-when: one flag, one bus, everything goes quiet - rather than
+muting four buses and leaving the fifth one somebody adds in a year still
+playing. Asserted as routing (`get_bus_send` is Master for all three) and
+end to end through the real setting in `input_check`.
+
+**Zero mutes rather than turns down.** A bus at minus eighty decibels is
+quiet, not silent, and a long music loop at -80dB is still audible on
+headphones in a quiet room. `is_silent(level, muted, bus)` is pulled out as
+its own function so the rule can be asked directly by a check that has no
+`Settings` autoload to drive.
+
+### Twenty towers, one gunshot
+
+Twenty copies of one sound started six samples apart is not twenty gunshots.
+It is a click, and most of the headroom gone. So `play()` folds an id already
+asked for this frame into the first one.
+
+One thing had to move: the dedupe records the frame **on the attempt**, not
+after a voice is found. With it the other way round, a full pool turned
+twenty towers firing on one tick into twenty drops instead of one attempt and
+nineteen folded in - the same sound asked for twice in a frame is one sound
+whether or not there was room for it.
+
+Beyond the pool, sounds are **dropped rather than stealing a voice**, because
+a stolen voice is an audible cut.
+
+`MAX_VOICES` is a plain const: not a `# LEVER` in `game_data.gd`, because it
+is not a rule and must not touch the data hash, and not a `Settings` key
+either, because unlike `video/max_particles` it is not a frame budget a
+player has an opinion about.
+
+### Four things Godot does that had to be measured
+
+All four came out of one throwaway probe, which this time had a watchdog on
+it:
+
+- **`add_child()` during `_initialize()` does not run `_ready()`.** The pool
+  came back with zero voices and every sound was "dropped". `build()` is
+  public for that reason, and the class docstring says so.
+- **`get_node_or_null("/root/Settings")` errors** with "can't use absolute
+  paths from outside the active scene tree" while the tree is still starting.
+  It goes through `get_tree().root` now.
+- **`get_tree()` itself errors** with "Parameter data.tree is null" when the
+  node is not in a tree at all, so `is_inside_tree()` has to be asked first.
+- **`AudioStreamPlayer.play()` errors** unless the node is inside the tree.
+  A voice is only told to play when the tree will take it; it is still
+  allocated and still counted, because `started()` means a voice was taken
+  and whether a driver made a noise with it is the driver's business.
+
+Under the dummy driver a voice reports `playing` true and never finishes on
+its own, which is why the pool cap is asked in `input_check`, where there is
+a live tree, and the rules are asked in `headless_check`, which is
+synchronous and has a five second watchdog it cannot give up.
+
+### Both asserts bite
+
+Planted the obvious break - dedupe off - and ran both suites:
+
+- headless: `twenty shots on one frame take one voice  20 started`
+- input: `twenty shots on one frame put one voice in the air, not twenty  16
+  playing`
+
+Sixteen, because without the fold the pool fills instead. That is the
+clipping the requirement is about, and the test says so in the failure
+message.
+
+### What is deliberately not here
+
+**Nothing calls `Audio.play()` yet.** There are no sound files until task
+0084 writes `tools/gen_sfx.py`, and wiring the calls now would mean every
+verb in the game pushing a "nothing called that" warning on every tick.
+`scan()` treats a missing folder as normal rather than an error for the same
+reason: a game with no sounds yet should start in silence, not refuse to
+start.
+
+The checks use a sine built in code, because a pool with nothing to put in it
+cannot be asked how many it holds.
+
+### Hashes
+
+Both unchanged - `2555959448` and `2601044827`. Sound is not a rule, and
+`src/core/` cannot see `src/app/`.
+
+`python tools/verify.py` prints PASS: 5225 asserts, 692 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

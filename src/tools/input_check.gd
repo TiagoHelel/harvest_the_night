@@ -41,7 +41,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 39
+const CASES := 40
 
 ## The pixels two pieces of text in one row must have between them. Two is
 ## the width of the gap inside a letter at this size, so anything less reads
@@ -115,6 +115,7 @@ func _run() -> void:
 	await _case_0078_transition()
 	await _case_0081_theme()
 	await _case_0082_shots()
+	await _case_0083_audio()
 	_finish()
 
 
@@ -3974,3 +3975,109 @@ func _leading_space(text: String) -> String:
 	while n < text.length() and text[n] == " ":
 		n += 1
 	return text.substr(0, n)
+func _case_0083_audio() -> void:
+	await open_scene(MAIN_SCENE)
+
+	# **The autoload, not one built by hand.** The headless group covers the
+	# rules with an `Audio.new()`; what needs a running tree is the part where
+	# a voice really starts and really reports itself busy, because that is
+	# what the polyphony cap is counting.
+	var audio: Node = root.get_node_or_null(^"Audio")
+	expect(audio != null, "the Audio autoload is up")
+	var settings: Node = root.get_node_or_null(^"Settings")
+	expect(settings != null, "and so is Settings")
+	if audio == null or settings == null:
+		_completed += 1
+		await close_scene()
+		return
+
+	audio.stop_all()
+	audio.forget_counts()
+	await frames(2)
+	expect(audio.voices_playing() == 0, "nothing is playing to begin with",
+		"%d voices" % audio.voices_playing())
+
+	# **Twenty shots on one tick make one sound.** The done-when, asked of a
+	# live pool: not "the counter says one" but "one voice is in the air".
+	var tone := _a_tone()
+	audio.add(&"sfx/check_tone", tone)
+	for i in 20:
+		audio.play(&"sfx/check_tone")
+	expect(audio.voices_playing() == 1,
+		"twenty shots on one frame put one voice in the air, not twenty",
+		"%d playing" % audio.voices_playing())
+	expect(audio.started() == 1 and audio.deduped() == 19,
+		"counted as one started and nineteen folded in",
+		"%d started, %d deduped" % [audio.started(), audio.deduped()])
+
+	# **And the cap holds when they are all different sounds**, which the
+	# dedupe cannot help with. A night is a shot, an impact, a groan and a
+	# death all at once, many times over.
+	audio.stop_all()
+	audio.forget_counts()
+	await frames(2)
+	var many: int = audio.voice_count() * 3
+	for i in many:
+		var id := StringName("sfx/check_%d" % i)
+		audio.add(id, tone)
+		audio.play(id)
+	expect(audio.started() == audio.voice_count(),
+		"a hundred different sounds at once take the pool and no more",
+		"%d started of %d asked, cap %d"
+		% [audio.started(), many, audio.voice_count()])
+	expect(audio.dropped() == many - audio.voice_count(),
+		"and the rest are dropped rather than stealing a voice mid-sound",
+		"%d dropped" % audio.dropped())
+	expect(audio.voices_playing() <= audio.voice_count(),
+		"nothing is in the air that the pool did not hand out",
+		"%d playing" % audio.voices_playing())
+
+	# **Master at zero silences everything including music.** Through the real
+	# setting, because the done-when is about what a player does, not about
+	# what `apply_volumes` does when called by hand.
+	var master_index := AudioServer.get_bus_index("Master")
+	var music_index := AudioServer.get_bus_index("Music")
+	expect(master_index >= 0 and music_index >= 0, "both buses are there")
+	var was: float = settings.get_float(&"audio/master")
+	settings.set_value(&"audio/master", 0.0, false)
+	await frames(2)
+	expect(AudioServer.is_bus_mute(master_index),
+		"master at zero mutes the Master bus")
+	expect(String(AudioServer.get_bus_send(music_index)) == "Master",
+		"and Music sends to Master, so the music goes with it")
+	settings.set_value(&"audio/master", was, false)
+	await frames(2)
+	expect(not AudioServer.is_bus_mute(master_index),
+		"and putting it back brings the sound back")
+
+	# The mute flag takes the same route rather than muting four buses.
+	var was_muted: bool = settings.get_bool(&"audio/muted")
+	settings.set_value(&"audio/muted", true, false)
+	await frames(2)
+	expect(AudioServer.is_bus_mute(master_index),
+		"the mute flag silences Master too")
+	settings.set_value(&"audio/muted", was_muted, false)
+	await frames(2)
+	expect(not AudioServer.is_bus_mute(master_index), "and unmutes it")
+
+	audio.stop_all()
+	audio.forget_counts()
+	await close_scene()
+	_completed += 1     # last line: an abandoned case never gets here
+
+
+## A quarter second of a sine. There are no sound files until task 0084, and
+## a pool with nothing to put in it cannot be asked how many it holds.
+func _a_tone() -> AudioStreamWAV:
+	var rate := 22050
+	var samples := rate / 2
+	var bytes := PackedByteArray()
+	bytes.resize(samples * 2)
+	for i in samples:
+		bytes.encode_s16(i * 2,
+			int(sin(TAU * 440.0 * float(i) / float(rate)) * 12000.0))
+	var tone := AudioStreamWAV.new()
+	tone.format = AudioStreamWAV.FORMAT_16_BITS
+	tone.mix_rate = rate
+	tone.data = bytes
+	return tone
