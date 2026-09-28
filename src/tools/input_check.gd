@@ -41,7 +41,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 55
+const CASES := 56
 
 ## The pixels two pieces of text in one row must have between them. Two is
 ## the width of the gap inside a letter at this size, so anything less reads
@@ -76,6 +76,11 @@ func _process(delta: float) -> bool:
 
 
 func _run() -> void:
+	# **The ident is a launch thing, not a scene thing.** This file opens the
+	# title a dozen times and a second and a half of black in front of each
+	# of them would be a slower suite testing nothing. `_case_0099_ident`
+	# calls `BootIdent.forget()` and watches it happen properly.
+	BootIdent.played()
 	await _case_0011_harness()
 	await _case_0012_debug_overlay()
 	await _case_0013_world_view()
@@ -131,6 +136,7 @@ func _run() -> void:
 	await _case_0096_pause()
 	await _case_0097_language()
 	await _case_0098_access()
+	await _case_0099_ident()
 	_finish()
 
 
@@ -5660,4 +5666,46 @@ func _case_0098_access() -> void:
 	for key in A11y.KEYS:
 		settings.reset(key)
 	await frames(2)
+	_completed += 1
+func _case_0099_ident() -> void:
+	# **Once per launch**, so this is the one place that asks for it again.
+	BootIdent.forget()
+	await open_scene("res://scenes/Title.tscn")
+	await frames(2)
+	var ident: BootIdent = locate_control("BootIdent") as BootIdent
+	expect(ident != null, "the title scene has an ident on it")
+	if ident == null:
+		await close_scene()
+		BootIdent.played()
+		_completed += 1
+		return
+	expect(ident.running(), "and it is running when the game is opened")
+	expect(ident.visible, "and it is over everything")
+
+	# **Any input skips it.** Not a named action - whatever is under a hand.
+	await tap_key(KEY_Z)
+	await frames(3)
+	expect(not ident.running(), "any key at all gets past it")
+	expect(not ident.visible, "and it goes away rather than hanging about")
+
+	# And the title is behind it, working, with nothing eaten on the way.
+	var router: Node = root.get_node_or_null(^"App")
+	expect(router != null and router.here() == router.TITLE,
+		"the title is where it was",
+		router.name_of(router.here()) if router != null else "no router")
+	await tap_key(KEY_X)
+	await frames(3)
+	expect(router.here() == router.MENU,
+		"and the next key opens the menu, as it always did",
+		router.name_of(router.here()))
+	await close_scene()
+
+	# **Not again this launch.** Which is what stops it being a second and a
+	# half in front of every scene this file opens.
+	await open_scene("res://scenes/Title.tscn")
+	await frames(3)
+	ident = locate_control("BootIdent") as BootIdent
+	expect(ident != null and not ident.running(),
+		"opening the title again does not play it again")
+	await close_scene()
 	_completed += 1

@@ -1,7 +1,7 @@
 # 0099 - An icon and a boot ident
 
 - **Phase:** 7 - Shell and product
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0014, 0091
 - **Likely files:** tools/gen_icon.py, assets/icon.png
 

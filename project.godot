@@ -20,8 +20,14 @@ config/version="0.1.0"
 ; unaffected.
 run/main_scene="res://scenes/Title.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
+; **Task 0099: no engine branding anywhere.** The splash is the
+; game's own night colour with no image on it at all, and what
+; comes after it is `BootIdent` - the mark and the name, over in
+; a second and a half, skippable on any key.
 boot_splash/bg_color=Color(0.054902, 0.047059, 0.098039, 1)
 boot_splash/show_image=false
+; Drawn by `tools/gen_icon.py` at eight sizes off one 16x16 map.
+config/icon="res://assets/icon.png"
 
 [importer_defaults]
 

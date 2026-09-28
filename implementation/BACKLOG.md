@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`#####################...`  **98 / 110 done**
+`######################..`  **99 / 110 done**
 
-0 doing / 12 todo / 0 blocked across 9 phases.
+0 doing / 11 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0099 - An icon and a boot ident**. The whole of what is left is
+First up: **0100 - Exports: Windows and Web**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,23 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-12 task(s) left, the ready ones first, then what they
+11 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0099 - An icon and a boot ident
-
-Ready to pick up.  Likely files: `tools/gen_icon.py, assets/icon.png`.
-
-Something recognisable in a taskbar and on an itch page, and two seconds before the title that are not the Godot logo.
-
-- An icon generated at every size a platform asks for, readable at 16x16
-- It says farm and night in one image
-- The boot splash is replaced; no default Godot branding anywhere
-- A short ident, skippable on any input
-
-  - done when: The 16x16 icon is still recognisable
-  - done when: No Godot logo appears anywhere in a release build
 
 ### 0100 - Exports: Windows and Web
 
@@ -119,6 +105,21 @@ Adding a lever or a tech node must not delete somebody's run.
   - done when: Every golden save loads and plays
   - done when: Adding a resource to game_data does not break a save that predates it
 
+### 0107 - Store assets
+
+Ready to pick up.  Likely files: `tools/gen_marketing.py, build/store/`.
+
+The page it goes on: capsule images, screenshots, the pitch, generated from the game rather than mocked up.
+
+- Capsules at the usual sizes, from the real game and the real palette
+- Five screenshots from `shot.gd`, picked to show the loop, not five of the farm
+- The elevator pitch from section 20 of the design document, edited to fit a store page
+- An animated GIF of the reality switch
+- English and Portuguese copy
+
+  - done when: One command regenerates the whole set
+  - done when: The screenshots show a day, a night, the switch, a busy wave and the tech tree
+
 ### 0109 - The character reacts
 
 Ready to pick up.  Likely files: `src/core/player.gd, src/ui/player_view.gd`.
@@ -163,36 +164,6 @@ A build to put in front of someone, with the instrumentation to learn something 
   - done when: A session produces a readable log
   - done when: `tools/playtest.py` summarises a folder of logs into the questions that matter
 
-### 0107 - Store assets
-
-Waits on 0099.  Likely files: `tools/gen_marketing.py, build/store/`.
-
-The page it goes on: capsule images, screenshots, the pitch, generated from the game rather than mocked up.
-
-- Capsules at the usual sizes, from the real game and the real palette
-- Five screenshots from `shot.gd`, picked to show the loop, not five of the farm
-- The elevator pitch from section 20 of the design document, edited to fit a store page
-- An animated GIF of the reality switch
-- English and Portuguese copy
-
-  - done when: One command regenerates the whole set
-  - done when: The screenshots show a day, a night, the switch, a busy wave and the tech tree
-
-### 0106 - The release checklist
-
-Waits on 0105, 0099.  Likely files: `implementation/RELEASE.md`.
-
-The list you run before publishing, written once, so nothing is remembered at the wrong moment.
-
-- Every check with its command: verify, exports, save compatibility, the i18n checker, the perf budget, both builds smoke-tested
-- Version bump, changelog, and a tag
-- A known-issues section that is honest
-- A rollback plan in one paragraph
-- Run it once, end to end, and fix what it finds
-
-  - done when: Running the list top to bottom produces a publishable build
-  - done when: The journal records what the first run of it found, because it will find something
-
 ### 0108 - The devlog and a trailer clip
 
 Waits on 0107.  Likely files: `tools/devlog.py, docs/devlog/`.
@@ -207,6 +178,21 @@ The thing that gets people to look: thirty seconds that show the farm, the switc
 
   - done when: The clip is thirty seconds and needs no explanation
   - done when: The devlog is generated from `implementation/PROGRESS.md` rather than written twice
+
+### 0106 - The release checklist
+
+Waits on 0105.  Likely files: `implementation/RELEASE.md`.
+
+The list you run before publishing, written once, so nothing is remembered at the wrong moment.
+
+- Every check with its command: verify, exports, save compatibility, the i18n checker, the perf budget, both builds smoke-tested
+- Version bump, changelog, and a tag
+- A known-issues section that is honest
+- A rollback plan in one paragraph
+- Run it once, end to end, and fix what it finds
+
+  - done when: Running the list top to bottom produces a publishable build
+  - done when: The journal records what the first run of it found, because it will find something
 
 ## 0 - Foundation  (12/12)
 
@@ -320,7 +306,7 @@ The thing that gets people to look: thirty seconds that show the farm, the switc
 - [x] **0089** [Tooltips](prompts/0089-tooltips.md)
 - [x] **0090** [The log panel](prompts/0090-log-panel.md)
 
-## 7 - Shell and product  (8/11)
+## 7 - Shell and product  (9/11)
 
 - [x] **0091** [The title screen](prompts/0091-title-screen.md)
 - [x] **0092** [The main menu and the router](prompts/0092-main-menu.md)
@@ -330,7 +316,7 @@ The thing that gets people to look: thirty seconds that show the farm, the switc
 - [x] **0096** [The pause menu](prompts/0096-pause-menu.md)
 - [x] **0097** [English and Portuguese](prompts/0097-i18n.md)
 - [x] **0098** [Accessibility](prompts/0098-accessibility.md)
-- [ ] **0099** [An icon and a boot ident](prompts/0099-icon-ident.md)
+- [x] **0099** [An icon and a boot ident](prompts/0099-icon-ident.md)
 - [ ] **0100** [Exports: Windows and Web](prompts/0100-exports.md)
 - [ ] **0110** [Refusals in two languages](prompts/0110-refusals.md)
 
@@ -341,6 +327,6 @@ The thing that gets people to look: thirty seconds that show the farm, the switc
 - [ ] **0103** [Crash and error reporting](prompts/0103-error-report.md)
 - [ ] **0104** [Saves survive an update](prompts/0104-save-compat.md)
 - [ ] **0105** [A playtest build](prompts/0105-playtest-build.md) - needs 0100, 0103
-- [ ] **0106** [The release checklist](prompts/0106-release-checklist.md) - needs 0105, 0099
-- [ ] **0107** [Store assets](prompts/0107-store-assets.md) - needs 0099
+- [ ] **0106** [The release checklist](prompts/0106-release-checklist.md) - needs 0105
+- [ ] **0107** [Store assets](prompts/0107-store-assets.md)
 - [ ] **0108** [The devlog and a trailer clip](prompts/0108-devlog.md) - needs 0107

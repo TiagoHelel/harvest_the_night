@@ -188,6 +188,20 @@ def check_sfx():
                  out.strip().splitlines()[-1].strip() if out.strip() else "")
 
 
+def check_icon():
+    """One 16x16 drawing, at every size a platform asks for.
+
+    The done-when is that the sixteen is recognisable, which is answered by
+    the sixteen being the drawing: every other size is whole-number scaled
+    from it, so there is no resampling to argue about and one file to change
+    when the mark changes."""
+    if not os.path.exists(rel("tools/gen_icon.py")):
+        return skip("icon", "no icon generator yet - task 0099")
+    code, out = run([sys.executable, "tools/gen_icon.py", "--check"])
+    return check("icon", code == 0,
+                 out.strip().splitlines()[-1].strip() if out.strip() else "")
+
+
 def check_strings():
     """Every word the player reads, against the code and against the font.
 
@@ -474,6 +488,7 @@ def main():
     check_font()
     check_logo()
     check_sfx()
+    check_icon()
     check_strings()
     check_music()
     check_ambience()

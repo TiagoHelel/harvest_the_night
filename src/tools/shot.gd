@@ -110,6 +110,7 @@ func _initialize() -> void:
 	# measures it, and this is how it is looked at.
 	var speaking := ""
 	var loud := false
+	var front := false
 	var id := "latest"
 	var wanted: Array = []
 	for arg in args:
@@ -119,6 +120,8 @@ func _initialize() -> void:
 				speaking = maybe
 			elif maybe == "contrast":
 				loud = true
+			elif maybe == "title":
+				front = true
 			continue
 		if id == "latest" and not _is_scenario(arg):
 			id = arg
@@ -149,6 +152,19 @@ func _initialize() -> void:
 		UiKit.set_high_contrast(true)
 		_tongue += "-contrast"
 
+	# **The front of the game, which is not a farm.** `--title` takes
+	# two pictures of `Title.tscn` instead of the scenario set:
+	# the ident that plays before it, and the title behind that.
+	if front:
+		await _take_the_front(folder)
+		print("%d written, %d failed, into %s"
+			% [_written, _failed, folder])
+		quit(1 if _failed > 0 else 0)
+		return
+
+	# The title is photographed without its ident in front of it.
+	BootIdent.played()
+
 	seed(SPARK_SEED)
 	var main: Node = load("res://scenes/Main.tscn").instantiate()
 	root.add_child(main)
@@ -176,6 +192,46 @@ func _scenario(name: String) -> Array:
 		if str(entry[0]) == name:
 			return entry as Array
 	return []
+
+
+## The two pictures of the front of the game.
+##
+## The ident is caught **half way through its hold**, because the interesting
+## frame is the one with the mark at full brightness rather than the first or
+## the last - and it is driven by hand, a fixed number of fixed steps, so two
+## runs catch the same frame.
+func _take_the_front(folder: String) -> void:
+	BootIdent.forget()
+	var title: Node = load("res://scenes/Title.tscn").instantiate()
+	root.add_child(title)
+	await process_frame
+	await process_frame
+
+	var ident := _find(title, "BootIdent") as BootIdent
+	if ident != null:
+		var step := BootIdent.SECONDS / float(SETTLE)
+		var held := int(SETTLE * (BootIdent.IN + BootIdent.HOLD * 0.5))
+		for i in held:
+			ident._process(step)
+		await process_frame
+		await _shoot("ident", folder)
+		while ident.running():
+			ident._process(step)
+	await process_frame
+	await process_frame
+	await _shoot("title", folder)
+	root.remove_child(title)
+	title.free()
+
+
+func _find(node: Node, named: String) -> Node:
+	if node.name == named:
+		return node
+	for child in node.get_children():
+		var found := _find(child, named)
+		if found != null:
+			return found
+	return null
 
 
 ## Build one scenario, let it settle, and write the PNG.
@@ -242,6 +298,28 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 	print("  %-8s %-24s tick %5d  %-11s %s" % [name, str(entry[1]),
 		int(state["tick"]), Phases.name_of(int(state["phase"])),
 		_worth_saying(state)])
+
+
+## Open the shutter and write what is on the screen.
+##
+## Pulled out of `_take` at task 0099, because the title pictures need the
+## same three steps - wait for a drawn frame, read the viewport, write the
+## file - and a second copy of them would be a second place to get the
+## headless caveat wrong.
+func _shoot(name: String, folder: String) -> bool:
+	await RenderingServer.frame_post_draw
+	var image := root.get_texture().get_image()
+	if image == null:
+		print("  %-8s no image came back - is this running headless?" % name)
+		_failed += 1
+		return false
+	var path := folder + name + _tongue + ".png"
+	if image.save_png(ProjectSettings.globalize_path(path)) != OK:
+		print("  %-8s could not be written" % name)
+		_failed += 1
+		return false
+	_written += 1
+	return true
 
 
 ## The one line that says whether the scenario is actually showing what it

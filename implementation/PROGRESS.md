@@ -8704,3 +8704,95 @@ second and not a different tick.
 
 `python tools/verify.py` prints PASS: 6018 asserts, 918 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+## 0099 - An icon and a boot ident - done 2026-09-28
+
+What changed: the game has a mark. One sixteen by sixteen drawing, written
+out at eight sizes, pointed at by `project.godot`, and shown for a second and
+a half before the title. No engine branding anywhere.
+
+Files: `tools/gen_icon.py` (new), `src/ui/boot_ident.gd` (new),
+`assets/icon*.png` (new), `project.godot`, `scenes/Title.tscn`,
+`tools/verify.py`, `src/tools/shot.gd`, `src/tools/headless_check.gd`,
+`src/tools/input_check.gd`.
+
+Verify: 6047 headless / 926 input / both hashes unchanged.
+Shots: `implementation/shots/0099/ident.png`, `title.png`,
+and `assets/icon_16.png` itself.
+
+### Sixteen is the drawing, and everything else is it with bigger pixels
+
+The done-when is "the 16x16 icon is still recognisable", and the only way to
+be sure of that is for **sixteen to be the drawing** rather than the last
+stop on the way down from 1024. Every other size - 32, 48, 64, 128, 256, 512,
+1024 - is the same map scaled by a whole number, so nothing is resampled,
+blurred or guessed at, and there is exactly one picture to change.
+
+A check proves it rather than trusting it: every eighth pixel of the 128 is
+the 16, pixel for pixel. Making the big one anything else fails it with
+`256 differ`.
+
+Two more, because a mark can pass "it exists" and still be useless: the
+sixteen uses at least five colours, and no one of them is more than three
+fifths of it. A flat square would pass everything else.
+
+### Farm and night in one image
+
+A moon over a house with a lit window, standing on ploughed rows. The moon
+says night, the rows say farm, and the window says somebody is still in there.
+
+**The first drawing was wrong and opening the file is what said so.** It had
+a crescent and offset furrows; at sixteen pixels the crescent read as a
+bracket and the furrows read as brickwork. A five pixel disc and plain
+horizontal bands read as a moon and a field. That is the whole of what step 4
+of the runner loop is for.
+
+### The ident is the mark alone
+
+A second and a half: a quarter fading up, most of it held, the rest fading
+down. **Any input skips it** - a key, a mouse button, a pad button, not a
+named action, because somebody who has seen it once presses whatever is under
+their hand.
+
+It had the wordmark under the mark to begin with and they overlapped. They
+also said the same thing twice: the title behind it puts the name on the
+screen a second later. The mark alone is a better signature and a shorter one.
+
+### Once per launch, not once per scene
+
+A static flag rather than a timer. The title scene is opened by more than a
+player - `input_check` opens it a dozen times and `shot.py` opens it to
+photograph it - and an ident in front of every one of those would be a slower
+suite testing nothing. Both call `BootIdent.played()` at startup, which is
+also what a player gets on their second visit within one launch.
+
+`_case_0099_ident` is the one place that calls `forget()` and watches it
+happen properly: it runs, a key gets past it, the title is untouched behind
+it, and opening the title again does not play it again. Making it
+unskippable fails three cases, one of them reading `MENU` where `TITLE` was
+expected - the key fell through to the screen behind.
+
+### No Godot logo anywhere
+
+`boot_splash/show_image=false` with the game's own night colour behind it,
+no `boot_splash/image` configured at all, and `config/icon` pointing at
+`res://assets/icon.png`. Read out of `project.godot` by a check rather than
+remembered, so the day somebody opens the project in the editor and it writes
+a default back, a row goes red.
+
+### The shot tool can photograph the front
+
+`shot.py --title` takes two pictures of `Title.tscn` instead of the scenario
+set: the ident caught **half way through its hold** - driven by hand in fixed
+steps, so two runs catch the same frame - and the title behind it. The
+capture itself came out of `_take` into `_shoot()` on the way, because a
+second copy of "wait for a drawn frame, read the viewport, write the file"
+would be a second place to get the headless caveat wrong.
+
+### Hashes
+
+Both unchanged - `215410677` and `2842078959`. A picture is not a rule.
+
+`python tools/verify.py` prints PASS: 6047 asserts, 926 input cases, 0 failed,
+and a new `icon` row reading eight sizes off one drawing.
+`exports` is still the one SKIP and still wants the Godot export templates -
+task 0100 is next and is the one that needs them.

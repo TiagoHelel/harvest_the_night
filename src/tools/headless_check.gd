@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 91
+const GROUPS := 92
 
 const SettingsScript := preload("res://src/app/settings.gd")
 const AppScript := preload("res://src/app/app.gd")
@@ -41,6 +41,7 @@ const OptionsAudioScript := preload("res://src/ui/options_audio.gd")
 const ActionsScript := preload("res://src/app/input_actions.gd")
 const PauseScript := preload("res://src/ui/pause_menu.gd")
 const OptionsA11yScript := preload("res://src/ui/options_a11y.gd")
+const BootIdentScript := preload("res://src/ui/boot_ident.gd")
 const OptionsScript := preload("res://src/ui/options_screen.gd")
 const AudioScript := preload("res://src/app/audio.gd")
 const SfxScript := preload("res://src/ui/sfx.gd")
@@ -168,6 +169,7 @@ func _run() -> void:
 	_task_0096_pause()
 	_task_0097_strings()
 	_task_0098_access()
+	_task_0099_icon()
 
 
 func _finish() -> void:
@@ -14593,4 +14595,90 @@ func _task_0098_access() -> void:
 	slow.free()
 	halved.free()
 	settings.reset()
+	_completed += 1
+## 0099 - the mark in a taskbar, and the two seconds before the title.
+func _task_0099_icon() -> void:
+	# **Sixteen is the drawing.** Every other size is it with bigger pixels,
+	# which is what makes "the 16x16 is still recognisable" true by
+	# construction rather than by somebody squinting at a thumbnail.
+	var small: Texture2D = load("res://assets/icon_16.png")
+	expect(small != null, "there is a sixteen pixel icon")
+	if small == null:
+		_completed += 1
+		return
+	expect(small.get_width() == 16 and small.get_height() == 16,
+		"and it is sixteen by sixteen",
+		"%dx%d" % [small.get_width(), small.get_height()])
+
+	var sizes := [16, 32, 48, 64, 256, 512, 1024]
+	for size in sizes:
+		var one: Texture2D = load("res://assets/icon_%d.png" % size)
+		expect(one != null and one.get_width() == size
+			and one.get_height() == size,
+			"there is a %dx%d icon" % [size, size],
+			"%dx%d" % [one.get_width() if one != null else -1,
+				one.get_height() if one != null else -1])
+		expect(size % 16 == 0,
+			"and %d is a whole multiple of sixteen" % size)
+
+	var big: Texture2D = load("res://assets/icon.png")
+	expect(big != null and big.get_width() == 128,
+		"the one `project.godot` points at is 128, which is what Godot wants",
+		"%d" % (big.get_width() if big != null else -1))
+
+	# **The big one and the small one are one picture.** Every eighth pixel
+	# of the 128 is the 16, exactly - so there is no version of this where
+	# the thumbnail and the store image are two different marks.
+	var tiny := small.get_image()
+	var huge := big.get_image()
+	var drifted := 0
+	if tiny != null and huge != null:
+		for y in 16:
+			for x in 16:
+				if tiny.get_pixel(x, y) != huge.get_pixel(x * 8, y * 8):
+					drifted += 1
+	expect(drifted == 0,
+		"the 128 is the 16 with bigger pixels, pixel for pixel",
+		"%d differ" % drifted)
+
+	# **It is a picture, not a square.** A mark that is ninety per cent one
+	# colour is a mark nobody recognises, whatever it is of.
+	var seen: Dictionary = {}
+	if tiny != null:
+		for y in 16:
+			for x in 16:
+				var key := str(tiny.get_pixel(x, y))
+				seen[key] = int(seen.get(key, 0)) + 1
+	expect(seen.size() >= 5,
+		"the sixteen uses at least five colours", str(seen.size()))
+	var most := 0
+	for key in seen:
+		most = maxi(most, int(seen[key]))
+	expect(most < 16 * 16 * 3 / 5,
+		"and no one of them is more than three fifths of it",
+		"%d of 256" % most)
+
+	# **No engine branding anywhere.** Read out of `project.godot` rather
+	# than remembered: the splash has no image on it and the icon is ours.
+	var project := FileAccess.get_file_as_string("res://project.godot")
+	expect(project.contains('boot_splash/show_image=false'),
+		"the boot splash shows no image at all")
+	expect(not project.contains("boot_splash/image="),
+		"and none is configured for it to show")
+	expect(project.contains('config/icon="res://assets/icon.png"'),
+		"and the icon is the one this repository draws")
+	for named in ["godot", "Godot", "GODOT"]:
+		expect(not project.contains('icon="res://%s' % named),
+			"with nothing of the engine's left in the path")
+
+	# **The ident is short and gets out of the way.**
+	expect(BootIdentScript.SECONDS > 0.0 and BootIdentScript.SECONDS <= 3.0,
+		"the ident is over in a couple of seconds",
+		"%.2f" % BootIdentScript.SECONDS)
+	expect(BootIdentScript.IN + BootIdentScript.HOLD < 1.0,
+		"with time left at the end of it to fade out",
+		"%.2f" % (BootIdentScript.IN + BootIdentScript.HOLD))
+	expect(BootIdentScript.MARK % 16 == 0,
+		"and it draws the mark at a whole multiple of sixteen",
+		str(BootIdentScript.MARK))
 	_completed += 1
