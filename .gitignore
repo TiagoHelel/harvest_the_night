@@ -25,3 +25,4 @@ desktop.ini
 
 # Godot writes these next to .gd files; they ARE source and must be committed:
 # !*.gd.uid
+.balance-lock

@@ -1,7 +1,7 @@
 # 0068 - A balance sweep over the ten nights
 
 - **Phase:** 4 - Ten nights and progression
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0067
 - **Likely files:** tools/balance.py, implementation/BALANCE.md
 

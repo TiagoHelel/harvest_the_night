@@ -54,16 +54,22 @@ const POLICIES: Dictionary = {
 	&"economy": {
 		"note": "the farm first, the guns later",
 		"gather": [&"wood", &"stone", &"iron"],
-		"build": [&"gun_tower", &"press", &"kitchen", &"generator",
-			&"gun_tower", &"auto_crossbow"],
+		# **Two towers before anything else**, in every plan. Night two's own
+		# note in `GameData.NIGHTS` reads "the same again from two sides, so
+		# one tower is not enough", and this plan used to spend its second and
+		# third slots on a press and a kitchen and meet that night with one.
+		# It died on night two on every seed. The design was doing exactly
+		# what it says it does; the plan was not reading it.
+		"build": [&"gun_tower", &"gun_tower", &"press", &"kitchen",
+			&"generator", &"gun_tower", &"auto_crossbow"],
 		"tech": [&"sharp tools", &"full cans", &"steady hands",
 			&"a name at market"],
 	},
 	&"balanced": {
 		"note": "a bit of each, which is what a player actually does",
 		"gather": [&"wood", &"iron", &"stone"],
-		"build": [&"gun_tower", &"generator", &"auto_crossbow", &"wall",
-			&"mortar", &"wall", &"auto_crossbow"],
+		"build": [&"gun_tower", &"gun_tower", &"generator", &"auto_crossbow",
+			&"wall", &"mortar", &"wall", &"auto_crossbow"],
 		"tech": [&"true sights", &"stout timbers", &"long barrels",
 			&"sharp tools"],
 	},
@@ -75,13 +81,19 @@ static func names() -> Array:
 
 
 ## Play one seeded run of one policy, and report every night of it.
-static func play(seed_value: int, policy_name: StringName) -> Dictionary:
+##
+## `nights` stops it early. The balance sweep wants all ten; the check suite
+## wants to know that a seed plays the same way twice, and that is as true
+## over three nights as over ten - and three nights is where it fits inside
+## the suite's two-minute budget.
+static func play(seed_value: int, policy_name: StringName,
+		nights_wanted: int = GameData.MVP_NIGHTS) -> Dictionary:
 	var policy: Dictionary = POLICIES[policy_name]
 	var state := State.create(seed_value)
 	var nights: Array = []
 	var died_on := 0
 
-	for night in range(1, GameData.MVP_NIGHTS + 1):
+	for night in range(1, mini(nights_wanted, GameData.MVP_NIGHTS) + 1):
 		var spent_before := _worth_of_stock(state)
 		_a_day(state, policy)
 
@@ -128,8 +140,14 @@ static func _a_day(state: Dictionary, policy: Dictionary) -> void:
 		var spent := _one_thing(state, policy)
 		if spent <= 0:
 			break           # nothing left worth doing today
+		# **Time passes while the work happens.** An earlier version counted
+		# the ticks an action cost and then advanced the whole day in one go
+		# at the end - so every action happened at tick zero, the ore never
+		# regrew, the crops never grew, and the robot spent four hundred and
+		# sixty-eight actions waiting for a cliff that could not come back.
+		Sim.advance(state, maxi(spent, 1))
 		left -= spent
-	# The rest of the day: crops grow, the press runs, the animals fill up.
+	# The rest of the day: crops finish, the press runs, the animals fill up.
 	Sim.advance(state, maxi(left, 1))
 
 
@@ -143,10 +161,50 @@ static func _one_thing(state: Dictionary, policy: Dictionary) -> int:
 			Tech.buy(state, StringName(id))
 			return GameData.SECONDS       # a trip to the workbench
 
-	for id in (policy["build"] as Array):
-		var where := _room_for(state, Building.size_of(StringName(id)))
-		if where.x >= 0 and Building.place(state, StringName(id), where):
+	# **Mend what is hurt before building anything new.**
+	#
+	# The robot did not, and task 0068 watched its tower count go *backwards*
+	# from night seven - eight, then five, then four - as the breakers ate a
+	# line nobody was repairing. Tuning the breakers down to suit a robot
+	# that ignored the counter the game already has would have been tuning
+	# the game to the instrument, which is the one thing an instrument must
+	# not do.
+	for idx in _sorted_occupants(state):
+		var cell := Grid.cell(int(idx))
+		if Repair.max_affordable(state, cell) <= 0:
+			continue
+		var put_back := Repair.apply_all(state, cell)
+		if put_back > 0:
+			return put_back * Repair.ticks_at(state, cell)
+
+	# **The plan is a sequence, walked with a cursor.** It used to be "build
+	# the first entry you can afford", and the `walls` policy showed what is
+	# wrong with that: its plan opens with a gun tower, but a fence is always
+	# affordable, so the robot laid **eighty-nine fences in three days** and
+	# never once cut the wood for the tower it said it wanted first. Then it
+	# met night one with a maze and nothing to shoot from, and died on night
+	# one on every seed. A plan whose first line is never reached is not a
+	# plan, and a policy that cannot play its own plan measures nothing.
+	# **Ask what it costs before asking where it goes.** Looking for room
+	# walks every cell around the house, and this runs a few hundred times a
+	# day - so doing it on the days the thing could not be paid for anyway
+	# put the whole check suite over its two-minute budget. The price is a
+	# dictionary lookup; the ground is a search.
+	var want := _wants(state, policy)
+	var short := Resources.missing(state, Building.cost_of(want))
+	if short.is_empty():
+		var where := _room_for(state, want)
+		if where.x < 0:
+			_next_step(state)           # nowhere to put it: plan around it
+			return GameData.SECONDS
+		if Building.place(state, want, where):
+			_next_step(state)
 			return 2 * GameData.SECONDS   # putting a thing up takes a while
+		# Affordable, and there is room, and it still would not go up: a rule
+		# says no that no amount of work can answer. Plan around it rather
+		# than standing in front of it for the rest of the run.
+		_next_step(state)
+		return GameData.SECONDS
 
 	# **Improve what is already there.** Task 0064 made a tower a thing that
 	# grows and the robot was ignoring it entirely - buying the tree node
@@ -157,34 +215,127 @@ static func _one_thing(state: Dictionary, policy: Dictionary) -> int:
 			Building.upgrade(state, cell)
 			return 2 * GameData.SECONDS
 
+	# **Keep the stations running.** The press and the workshop are where the
+	# farm turns into the defence, and the robot ignored them completely - so
+	# it could never make oil, so a generator it built had nothing to burn, so
+	# the supply stayed at `BASE_ENERGY` for ten nights while the draw climbed
+	# to thirteen. At that point every tower reloads three times slower and
+	# seven of them are worth two. The back half of the game read as
+	# impossible and what was actually impossible was for this robot to run a
+	# press.
+	#
+	# The rule is the idle-hands one a player uses: if a station is free and
+	# something on its list can be made right now, put it on.
+	#
+	# **It goes here and not at the front of the queue.** At the front, the
+	# robot found the workshop the farm starts with and spent day one turning
+	# its whole wood pile into fence kits, met night one with nothing built
+	# and lost twelve walkers to ten breaches. Crafting is what you do when
+	# there is nothing to put up, not instead of putting something up.
+	# **And never with what the plan is saving for.** Unguarded, this clause
+	# found the workshop the farm starts with and turned all twelve of the
+	# starting wood into three fence kits - while the plan's first line was a
+	# gun tower wanting ten of that wood. The tower was never built, on any
+	# day, and every policy lost night one with nothing standing.
+	var saving_for: Dictionary = Building.cost_of(want)
+	for idx in _sorted_occupants(state):
+		var cell := Grid.cell(int(idx))
+		var on := Farm.occupant(state, cell)
+		if on.is_empty() or not Crafting.is_station(on["id"]):
+			continue
+		for recipe in Crafting.recipes_at(on["id"]):
+			if not Crafting.can_start(state, cell, StringName(recipe)):
+				continue
+			if _would_raid(saving_for, StringName(recipe)):
+				continue
+			Crafting.start(state, cell, StringName(recipe))
+			return GameData.SECONDS
+
 	# **Go and get what the next thing is short of**, rather than what is
 	# first on a list. Working the list in order meant chopping wood for
 	# ever, because there is always another tree: two hundred and nineteen
 	# wood, three iron, and no tower on night one.
-	for id in (policy["build"] as Array):
-		var short := Resources.missing(state,
-			Building.cost_of(StringName(id)))
-		if short.is_empty():
-			continue
-		for res in GameData.sorted_names(short.keys()):
-			var needed := _go_and_get(state, StringName(res))
-			if needed > 0:
-				return needed
-		# **Nothing to swing at, so wait.** The cliff has eight seams and
-		# they come back once a day; a robot that filled the gap by chopping
-		# wood it did not need finished day one with a hundred and
-		# twenty-nine wood, eight iron and no tower. Waiting for the ore is
-		# what a player does, and it is what the day is for.
-		Sim.advance(state, GameData.SECONDS)
-		return GameData.SECONDS
+	# **Plan around what cannot be dug up.** The `towers` plan asks for a
+	# mortar fourth, a mortar wants gunpowder, and gunpowder is crafted rather
+	# than gathered - so the robot stood in front of it from night three to
+	# night nine, mining iron it had no plan for. It went into night nine with
+	# three towers and **seventy-eight unspent iron**, and that looked exactly
+	# like a game whose back half is too hard. It was a robot that had stopped
+	# playing.
+	#
+	# The test is the gathering table, not the map: a seam that is empty this
+	# minute comes back tomorrow and is worth waiting for, while a thing no
+	# node on the farm yields is worth walking around for ever.
+	# **One ingredient nobody can dig makes the whole entry unreachable**, so
+	# the test is "is anything on this list impossible", not "is everything".
+	# Getting that backwards only half-fixed it: the robot dutifully mined the
+	# thirty stone and thirty-five iron a mortar also wants, and only gave up
+	# on the mortar once gunpowder was the single thing left missing. That
+	# bought back nights seven and eight and still threw away four days.
+	for res in GameData.sorted_names(short.keys()):
+		if not _can_be_gathered(StringName(res)):
+			_next_step(state)
+			return GameData.SECONDS
+	for res in GameData.sorted_names(short.keys()):
+		var needed := _go_and_get(state, StringName(res))
+		if needed > 0:
+			return needed
 
-	# Nothing on the list wants anything gettable: top up the policy's own
-	# preferences, which is what a day with nothing to do looks like.
+	# **Nothing to swing at, so work the field.** The cliff's seams come back
+	# once a day, and what a player does while they wait is farm.
+	#
+	# The robot did neither until task 0068 - it chopped wood it did not need
+	# - and the consequence was not the wood, it was the **food**: no crops
+	# meant no food meant the house could never be mended, so its roof went
+	# 25, then 5, then gone over nights six to eight while the ledger held
+	# four hundred wood.
+	#
+	# It goes here rather than at the front of the queue because a player
+	# plants when there is nothing more urgent. Putting it first was a robot
+	# that farmed all day and met night one with no tower.
+	var farmed := _work_the_field(state)
+	if farmed > 0:
+		return farmed
+
+	# Nothing the plan wants is gettable: top up the policy's own preferences,
+	# which is what a day with nothing to do looks like.
 	for res in (policy["gather"] as Array):
 		var cost := _go_and_get(state, StringName(res))
 		if cost > 0:
 			return cost
 	return 0
+
+
+## The thing the plan is up to. Once the list runs out it starts again, so a
+## policy that has finished its plan keeps growing instead of downing tools.
+static func _wants(state: Dictionary, policy: Dictionary) -> StringName:
+	var plan: Array = policy["build"]
+	var step := int(state.get("autoplay_step", 0))
+	return StringName(plan[step % plan.size()])
+
+
+static func _next_step(state: Dictionary) -> void:
+	state["autoplay_step"] = int(state.get("autoplay_step", 0)) + 1
+
+
+## Whether this recipe eats anything the next thing on the plan needs.
+static func _would_raid(saving_for: Dictionary, recipe_id: StringName) -> bool:
+	var recipe: Dictionary = GameData.RECIPES[recipe_id]
+	for res in GameData.sorted_names((recipe["inputs"] as Dictionary).keys()):
+		if saving_for.has(res):
+			return true
+	return false
+
+
+## Whether anything on the farm yields this at all, ever. Asked of the table
+## rather than of the map, so "the seams are empty today" and "no seam yields
+## gunpowder" are not the same answer.
+static func _can_be_gathered(res: StringName) -> bool:
+	for id in GameData.sorted_names(GameData.GATHERING.keys()):
+		if ((GameData.GATHERING[id] as Dictionary).get("yield", {})
+				as Dictionary).has(res):
+			return true
+	return false
 
 
 ## Work one node of the kind that yields this resource. Returns what it cost.
@@ -202,6 +353,32 @@ static func _go_and_get(state: Dictionary, res: StringName) -> int:
 
 
 # --------------------------------------------------------------- the sums
+
+## Till, sow, water or harvest one plot - whichever the field wants next.
+## Returns what it cost, or zero when the field wants nothing.
+static func _work_the_field(state: Dictionary) -> int:
+	# **Grow what the farm can use.** The seed strip starts on the first crop
+	# in the list and the robot never touched it, so it grew carrots for ten
+	# days - and `press_oil` wants corn. One line, and it is the difference
+	# between a farm that fuels the guns and a farm that is scenery.
+	if not Farm.cells_with(state, &"press").is_empty():
+		Farming.select_seed(state, &"corn")
+	for plot in _the_field(state):
+		var verb := Farming.verb_at(state, plot)
+		if verb == &"":
+			continue
+		Farming.act(state, plot)
+		return int(Interact.DEFAULT_TICKS.get(verb, GameData.SECONDS))
+	return 0
+
+
+## The soil, in a fixed order. Cached on the state because the field does not
+## move and finding it walks the whole farm.
+static func _the_field(state: Dictionary) -> Array:
+	if not state.has("autoplay_field"):
+		state["autoplay_field"] = Farm.cells_of(state, Farm.Terrain.SOIL)
+	return state["autoplay_field"]
+
 
 ## Occupant cells in a fixed order, so two runs of a seed upgrade the same
 ## tower first.
@@ -243,15 +420,100 @@ static func _towers_standing(state: Dictionary) -> int:
 	return n
 
 
-## Somewhere to put a thing, on the approach where it can do some good.
-static func _room_for(state: Dictionary, size: Vector2i) -> Vector2i:
-	for x in range(18, Grid.WIDTH - size.x):
-		for y in range(2, Grid.HEIGHT - size.y - 1):
-			var clear := true
-			for dy in size.y:
-				for dx in size.x:
-					if not Farm.buildable(state, Vector2i(x + dx, y + dy)):
-						clear = false
-			if clear:
-				return Vector2i(x, y)
-	return Vector2i(-1, -1)
+## Somewhere to put a thing: **on the approach, between the house and where
+## they come from.**
+##
+## Two wrong versions got here first, and both are worth the ink.
+##
+## The first was "the first clear cell scanning from x=18", which filled one
+## column beside the house. It looked obviously wrong and was accidentally
+## almost right, because `GameData.SPAWNS` is the east edge and the south, so
+## a column at x=18 sits across the east approach.
+##
+## The second was a ring: "put the next one where the cover is thinnest". That
+## is what a player does on a map with four approaches, and this map has two -
+## so it dutifully spread towers around the **west** side of the house, behind
+## the fight, and every policy died on night one. Spreading cover evenly over
+## ground nobody walks on is worse than piling it on ground they do.
+##
+## So the rule reads the spawn table rather than guessing from the shape of
+## the map: take the approaches in turn, and for each, build the cell that
+## minimises `2 * (distance to house) + (distance to that approach)`. The
+## house is weighted double, which is what keeps the line tight around the
+## thing being defended instead of marching out to meet them at the edge.
+static func _room_for(state: Dictionary, id: StringName) -> Vector2i:
+	# **A workshop is not a tower and does not want a tower's ground.** The
+	# `economy` plan builds a press and a kitchen early, and both were landing
+	# on the best cells of the east approach - the ones a gun tower wants -
+	# pushing its towers to the back and taking a turn of the side counter
+	# with them. Two towers at full power that should have held night two
+	# killed five of twenty. Sheds go behind the house, which is where a
+	# player puts them and why farms look the way they do.
+	var size := Building.size_of(id)
+	var guns := GameData.DEFENCES.has(id)
+	var approaches := _approaches()
+	var side: Vector2i = approaches[int(state.get("autoplay_side", 0))
+		% approaches.size()]
+	var best := Vector2i(-1, -1)
+	var best_score := 1 << 30
+	for cell in _near_the_house(state):
+		if not _clear(state, cell, size):
+			continue
+		# A tower wants to be near the house and toward the approach; a shed
+		# wants to be near the house and as far from the approach as it can.
+		var score := 2 * _house_distance(cell) 			+ (_far(cell, side) if guns else -_far(cell, side))
+		if score < best_score:
+			best_score = score
+			best = cell
+	if best.x >= 0 and guns:
+		state["autoplay_side"] = int(state.get("autoplay_side", 0)) + 1
+	return best
+
+
+## The middle of each spawn region, read off the rules' own table so that
+## moving a spawn moves the robot with it.
+static func _approaches() -> Array:
+	var out: Array = []
+	for region in GameData.SPAWNS:
+		var sum := Vector2i.ZERO
+		for entry in (region as Array):
+			sum += Vector2i(int(entry[0]), int(entry[1]))
+		out.append(sum / maxi((region as Array).size(), 1))
+	return out
+
+
+## The cells worth considering: a box around the house, in a fixed order.
+## Cached, because it does not change and walking the grid is not free.
+static func _near_the_house(state: Dictionary) -> Array:
+	if state.has("autoplay_spots"):
+		return state["autoplay_spots"]
+	var spots: Array = []
+	for x in range(maxi(HOUSE.x - REACH, 0), mini(HOUSE.x + REACH, Grid.WIDTH)):
+		for y in range(maxi(HOUSE.y - REACH, 1),
+				mini(HOUSE.y + REACH, Grid.HEIGHT - 1)):
+			spots.append(Vector2i(x, y))
+	state["autoplay_spots"] = spots
+	return spots
+
+
+static func _far(a: Vector2i, b: Vector2i) -> int:
+	return maxi(absi(a.x - b.x), absi(a.y - b.y))
+
+
+static func _house_distance(cell: Vector2i) -> int:
+	return _far(cell, HOUSE)
+
+
+static func _clear(state: Dictionary, at: Vector2i, size: Vector2i) -> bool:
+	for dy in size.y:
+		for dx in size.x:
+			if not Farm.buildable(state, at + Vector2i(dx, dy)):
+				return false
+	return true
+
+
+## The middle of the house, and how far around it the robot is willing to
+## build. Both are the instrument's own business rather than rules, so they
+## live here and not in `GameData`.
+const HOUSE := Vector2i(16, 4)
+const REACH := 9

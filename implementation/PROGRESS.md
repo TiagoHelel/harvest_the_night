@@ -5063,3 +5063,161 @@ numbers as a promise.
 
 `python tools/verify.py` prints PASS: 2494 asserts, 502 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+
+## 0068 - A balance sweep over the ten nights
+
+The written report is `implementation/BALANCE.md` and the tool is
+`tools/balance.py`. This is the part that does not belong in a report: what
+the task turned out to be about.
+
+### It was supposed to be about levers and it was mostly about the instrument
+
+The first measurement said nights 8, 9 and 10 were unwinnable by all four
+policies. Every one of those zeroes was the autoplayer rather than the game,
+and it took five separate fixes to find that out:
+
+1. **A policy could not play its own plan.** The build step took the first
+   entry it could *afford*, and a fence is always affordable - so `walls` laid
+   **89 fences in three days**, never cut the wood for the gun tower at the
+   top of its own list, and died on night 1 on every seed. A plan is a
+   sequence now, walked with a cursor.
+2. **Everything went in one pile.** `_room_for` scanned from x=18 and filled a
+   column beside the house. The obvious fix - ring the house, put the next one
+   where cover is thinnest - made it **much worse**: this map has two ways in,
+   east and south, so an even ring guards the west where nobody walks. Every
+   policy then died on night 1. It reads `GameData.SPAWNS` now and builds
+   between the house and the approaches, taking them in turn.
+3. **It stood in front of a mortar for six nights.** A mortar wants gunpowder,
+   gunpowder is crafted, the robot could not craft - so it mined toward a
+   thing it could never build and went into night 9 with three towers and
+   **78 unspent iron**. Half-fixing it was instructive: the first version
+   asked "is *nothing* here diggable" when the right question is "is
+   *anything* here impossible".
+4. **It never ran a press.** So it never made oil, so a generator had nothing
+   to burn, so supply sat at `BASE_ENERGY` for ten nights while the draw
+   climbed to 13 - a farm at 30% power, where seven towers are worth two.
+   Unguarded, the fix was worse: the robot found the workshop the farm starts
+   with and turned all twelve starting wood into fence kits on day one. It
+   crafts only when there is nothing to build, and never with a material the
+   next thing on the plan needs.
+5. **Sheds took the towers' ground.** `economy` placed its press and kitchen
+   on the best cells of the east approach, pushing its towers to the back. Two
+   towers at full power killed five of twenty on night 2. Workshops go behind
+   the house now, which is where a player puts them.
+
+After those five, and with **no game lever touched**, `towers` went from dying
+on night 8 to reaching night 10. That is the whole argument for not tuning the
+game until the instrument is trusted.
+
+### What actually moved: one lever
+
+`UNPOWERED_PERCENT`, 25 to 50. Power is the binding constraint of the whole
+game and it is close to invisible: `BASE_ENERGY` is 4, a gun tower draws 1 and
+an auto-crossbow 3, so **the third thing a player builds browns out the farm**
+- and `Power.scaled_ticks` slows *every* tower, so the fifth tower makes the
+first four worse. Two runs with identical builds, differing only in supply:
+
+| | two gun towers, night 2 |
+|---|---|
+| at 100% power | 17 killed, house 70 |
+| at 80% power | 4 killed, house 0 |
+
+A fifth of the power, three quarters of the defence. The floor at 50 leaves
+the gate where it was and gives the cliff a bottom.
+
+### The test suite caught a balance change
+
+`BASE_ENERGY` 4 -> 6 was applied, measured well, and then reverted, because
+`headless_check` went red on an assert written when the defences were
+authored: the hungriest defence must draw more than half the base supply,
+"hungry enough that two of them want a generator". At a base of 6 two
+crossbows run free, and the farm-feeds-the-guns chain stops mattering until
+night 6. That assert is a design promise and the number was quietly undoing
+it. Best evidence yet for "a new rule ships with an assert".
+
+### One dead lever, one that cannot be judged yet
+
+- **`WAVE_GAP_TICKS` was dead.** Task 0059 moved the gap onto each night's
+  record and wrote all ten out longhand, so no rule had read the global since.
+  Proven twice: grep found no reader in `src/core/`, and the sweep turned it
+  from 8 seconds to 30 - close to fourfold on the pace of every night -
+  without changing one run of eighty. It is a default now:
+  `Waves.delay_before()` falls back to it and nights 1 and 2 no longer restate
+  it, so it means "the pace of an ordinary night" and does.
+- **`money_per_night` is flat but is not called dead.** Money buys seeds and
+  shop goods, and the autoplayer sows but has never opened the shop. A lever
+  this robot cannot spend is one it cannot measure. It wants re-sweeping once
+  the robot learns to buy.
+
+### The seeds agree far more than they look like they should
+
+Seeds 6700, 6701, 6702, 6710, 6800, 9000 and 9007 over three nights each
+returned 1509 gathered and 47 killed, to the unit. Not a broken seed:
+`FARM_MAP` authors the farm and `NIGHTS` authors the waves, so neither asks
+the run's RNG anything, and what it does touch takes until the back half to
+add up. `walls` does reach 8, 9 and 8 across seeds. It matters for reading any
+of these numbers - eighty runs of eight seeds are not eighty independent
+samples of the early game - and it is written into `BALANCE.md` and into the
+assert that used to claim otherwise.
+
+### Night one does not do what it says
+
+A gun tower reaches 5 tiles, a walker crosses a tile in 20 ticks, so a walker
+is in range for 100 ticks. The tower deals 6 a second. 100 ticks is 3.3
+seconds and 3.3 x 6 is **20 - exactly one walker's hit points.** So one tower
+kills one walker per wave however many are in it: 3 of 12 killed, 9 breaches,
+house on 10 of 100. At `HOUSE_HP` 80 every policy dies on night 1.
+
+The night's note says "one tower, one side, and time to watch" and the
+walker's own table comment says "one tower holds it with room". Neither is
+true. **Nothing was applied**, because both obvious candidates failed under
+measurement: slowing the walker wrecks nights 7-8 (they linger into the next
+wave, so the crowd overlaps), and the house's hit points only decide which
+side of the cliff night 1 lands on. The honest candidates are the tower's
+`range` or `reload_ticks`, neither swept here. It wants its own pass.
+
+### The done-when is not met, and two thirds of it should not be
+
+> No night has a win rate of 100% or 0% across every policy
+
+The shipped curve is `100 83 75 75 75 75 75 58 0 0`, from
+`100 75 75 75 75 75 62 0 0 0` before.
+
+- **Night 1 is at 100% and should be.** It is the tutorial night. A tutorial
+  night that kills a quarter of players is a worse game, not a better balanced
+  one. The requirement is right about the middle of a run and wrong about its
+  opening.
+- **Nights 9 and 10 are at 0%**, and that one is a real failure - but it is
+  still the instrument's. The answer the game is built around is the
+  farm-to-oil-to-generator chain, and no policy's plan is built to fuel
+  generators; `economy`, the policy that should be, dies earliest. Night 10
+  cannot be judged until a policy plays the game's actual answer. Lowering it
+  to make this line go green would be the exact mistake the rest of this entry
+  is about.
+
+Recorded the way 0051's unachievable done-when and 0067's budget were: the
+measurement, why the target is not reachable as written, and what would reach
+it.
+
+### A note on the tools
+
+`tools/balance.py` edits `game_data.gd`, runs the sweep and puts it back in a
+`finally`. Two of them running at once both rewrite that file and neither
+notices - which happened, the numbers looked plausible, and the only reason it
+was caught was a process list. It takes a lock now and refuses to start on a
+dirty tree.
+
+`headless_check` went over its 120-second budget twice during this task: once
+from the new group playing four whole runs, and once from `_room_for`
+searching for ground before anyone asked the price. Both fixed, and the suite
+is 85s.
+
+### Hashes
+
+| | from | to | why |
+|---|---|---|---|
+| sim hash | `2646847426` | `2646847426` | **unchanged.** Worth saying out loud: the brownout floor only bites below full supply and the determinism scenario never browns out, so a lever that reshapes the back half of the game moves nothing the guard watches |
+| data hash | `1509120177` | `3910754709` | `UNPOWERED_PERCENT` 25 -> 50, and nights 1 and 2 no longer restate `gap_ticks` |
+
+`python tools/verify.py` prints PASS: 2563 asserts, 502 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 60
+const GROUPS := 61
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -124,6 +124,7 @@ func _run() -> void:
 	_task_0065_defeat()
 	_task_0066_run_end()
 	_task_0067_autoplay()
+	_task_0068_balance()
 
 
 func _finish() -> void:
@@ -9159,7 +9160,13 @@ func _task_0059_wave_data() -> void:
 	for night in range(1, GameData.MVP_NIGHTS + 1):
 		var one := Waves.night_of(night)
 		expect(not one.is_empty(), "night %d is authored" % night)
-		for field in ["note", "opening_ticks", "gap_ticks", "waves"]:
+		# `gap_ticks` is deliberately not in this list. Task 0068 found that
+		# writing it out on all ten nights left `GameData.WAVE_GAP_TICKS`
+		# with no reader in the rules at all - the sweep turned it from eight
+		# seconds to thirty and not one run of eighty changed. A night names
+		# a gap when it wants a different one; nights one and two take the
+		# house pace, and that is what makes the lever a lever.
+		for field in ["note", "opening_ticks", "waves"]:
 			expect(one.has(field),
 				"night %d declares its own %s" % [night, field], str(one))
 		expect(not Waves.note_for(night).is_empty(),
@@ -9178,9 +9185,10 @@ func _task_0059_wave_data() -> void:
 	expect(Waves.delay_before(1, 0) == int(first["opening_ticks"]),
 		"the first wave waits the night's opening",
 		str(Waves.delay_before(1, 0)))
-	expect(Waves.delay_before(1, 1) == int(first["gap_ticks"]),
-		"and the ones after it wait the night's gap",
-		str(Waves.delay_before(1, 1)))
+	expect(Waves.delay_before(1, 1)
+		== int(first.get("gap_ticks", GameData.WAVE_GAP_TICKS)),
+		"and the ones after it wait the night's gap, or the house pace when "
+		+ "the night does not name one", str(Waves.delay_before(1, 1)))
 	var own: Dictionary = {
 		"note": "a night with its own ideas",
 		"opening_ticks": 7,
@@ -9390,7 +9398,8 @@ func _task_0060_ten_nights() -> void:
 	# no extra enemies: the same crowd with less room to breathe.
 	var gaps: Array = []
 	for night in range(1, GameData.MVP_NIGHTS + 1):
-		gaps.append(int(Waves.night_of(night)["gap_ticks"]))
+		gaps.append(int((Waves.night_of(night) as Dictionary)
+			.get("gap_ticks", GameData.WAVE_GAP_TICKS)))
 	print("  gaps:    %s ticks" % str(gaps))
 	for night in range(2, GameData.MVP_NIGHTS + 1):
 		expect(int(gaps[night - 1]) <= int(gaps[night - 2]),
@@ -10584,8 +10593,11 @@ func _task_0067_autoplay() -> void:
 
 	# **The same seed is the same run.** An instrument that cannot be
 	# repeated measures nothing.
-	var once := Autoplay.play(6700, &"towers")
-	var twice := Autoplay.play(6700, &"towers")
+	# Four nights, not ten: this group played three full runs and was most of
+	# the reason the suite ran past its budget. Nothing asserted below needs
+	# the back half.
+	var once := Autoplay.play(6700, &"towers", 4)
+	var twice := Autoplay.play(6700, &"towers", 4)
 	expect(int(once["died_on"]) == int(twice["died_on"]),
 		"the same seed dies on the same night",
 		"%d against %d" % [once["died_on"], twice["died_on"]])
@@ -10595,11 +10607,29 @@ func _task_0067_autoplay() -> void:
 	expect((once["nights"] as Array).size()
 		== (twice["nights"] as Array).size(),
 		"over the same nights")
-	var other := Autoplay.play(6701, &"towers")
-	expect(int(other["killed"]) != int(once["killed"])
-		or int(other["died_on"]) != int(once["died_on"]),
-		"and another seed is another run - the test would pass on a "
-		+ "constant otherwise", str(other["killed"]))
+	# **And the pair above must not be passing on a constant.** The obvious
+	# guard is a second seed, and it does not work: task 0068 played seeds
+	# 6700, 6701, 6702, 6710, 6800, 9000 and 9007 over three nights and every
+	# one returned 1509 gathered and 47 killed, to the unit.
+	#
+	# That is not a broken seed, it is an **authored game**. `FARM_MAP` lays
+	# out the trees and the seams, `NIGHTS` lays out the waves, and neither
+	# asks the run's RNG anything. The seed only bites through the small
+	# things - which cell of a spawn region, which strike of a seam pays -
+	# and those take until the back half to add up to a different night. It
+	# is worth knowing before reading any sweep: eighty runs of eight seeds
+	# are not eighty independent samples of the early game.
+	#
+	# So the guard is a different *policy* instead, which must differ because
+	# it builds different things.
+	var other := Autoplay.play(6700, &"walls", 4)
+	expect(int(other["gathered"]) != int(once["gathered"])
+		or int(other["killed"]) != int(once["killed"]),
+		"and a different policy is a different run - the pair above would "
+		+ "pass on a constant otherwise",
+		"%d gathered and %d killed, against %d and %d"
+			% [other["gathered"], other["killed"], once["gathered"],
+				once["killed"]])
 
 	# **It reports what the task asks for, per night.**
 	for row in (once["nights"] as Array):
@@ -10629,9 +10659,104 @@ func _task_0067_autoplay() -> void:
 		"%d against 13" % iron)
 
 	# **The alarm can fire.** A detector that cannot say "no" detects nothing.
-	print("  the robot reaches night %d with the towers policy"
+	print("  the robot plays %d of the four nights it was asked for"
 		% (once["nights"] as Array).size())
 	expect((once["nights"] as Array).size() >= 4,
 		"the robot gets past the early nights", str(once["nights"].size()))
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## 0068 - the balance sweep, and the instrument it needed first.
+func _task_0068_balance() -> void:
+	# **Every policy plays its own plan, and survives the night it is taught
+	# on.** One day and one night for each, not ten: this group used to play
+	# four whole runs and took the suite past its two-minute budget on its own.
+	#
+	# The `walls` policy used to build the first thing it could *afford*
+	# rather than the first thing its plan asked for, and since a fence is
+	# always affordable it laid eighty-nine of them in three days and never
+	# cut the wood for the tower at the top of its list. A policy that cannot
+	# play its own plan measures nothing.
+	#
+	# And night one's own note promises "one tower, one side, and time to
+	# watch", so a plan that cannot live through it is a plan the game never
+	# taught. That is the floor of the curve task 0068 went looking for, and
+	# the thing that catches a lever turned too far.
+	for name in Autoplay.names():
+		var policy: Dictionary = Autoplay.POLICIES[name]
+		var state := State.create(4200)
+		Autoplay._a_day(state, policy)
+		var first: StringName = StringName((policy["build"] as Array)[0])
+		var up := 0
+		for idx in (state["occupants"] as Dictionary):
+			if ((state["occupants"] as Dictionary)[idx]
+					as Dictionary)["id"] == first:
+				up += 1
+		expect(up >= 1, "%s builds what its plan names first: %s"
+			% [name, first], "%d of them" % up)
+
+		Phases.begin_preparation(state)
+		Sim.advance(state, GameData.PREPARATION_TICKS)
+		for _t in 40000:
+			if int(state["phase"]) != Phases.NIGHT:
+				break
+			Sim.advance(state, 1)
+		print("  %-9s ends the tutorial night on %d house"
+			% [name, int(state["house_hp"])])
+		expect(int(state["house_hp"]) > 0,
+			"%s survives the tutorial night" % name,
+			"house %d" % int(state["house_hp"]))
+
+	# **And it builds on the approach.** The second wrong version of
+	# `_room_for` rang the house evenly, which is right on a map with four
+	# ways in and wrong on this one - `GameData.SPAWNS` is the east edge and
+	# the south, so an even ring puts towers behind the house. Every policy
+	# died on night one. The guard is that the first tower is nearer the
+	# spawns than the house is: it stands between them, which is the whole
+	# job.
+	var state := State.create(4200)
+	Autoplay._a_day(state, Autoplay.POLICIES[&"towers"])
+	var approach: Vector2i = (Autoplay._approaches() as Array)[0]
+	var nearest := 1 << 30
+	for idx in (state["occupants"] as Dictionary):
+		var on: Dictionary = (state["occupants"] as Dictionary)[idx]
+		if not GameData.DEFENCES.has(on["id"]):
+			continue
+		nearest = mini(nearest, Autoplay._far(Grid.cell(int(idx)), approach))
+	expect(nearest < Autoplay._far(Autoplay.HOUSE, approach),
+		"the robot builds between the house and the spawns",
+		"tower is %d from the approach, the house is %d"
+			% [nearest, Autoplay._far(Autoplay.HOUSE, approach)])
+
+	# **The gap between waves is a lever again.** Task 0059 moved the pace of
+	# a night onto the night's own record and every one of the ten declared
+	# it, so `WAVE_GAP_TICKS` had not been read by a rule since - the balance
+	# sweep turned it from one end of its range to the other and the win rate
+	# per night did not move by a single run. It is a default now, which is
+	# what it was always described as, and this is the assert that keeps it
+	# one: an ordinary night is paced by the lever, and a night that wants a
+	# different pace still overrides it.
+	var ordinary := -1
+	for n in range(1, GameData.MVP_NIGHTS + 1):
+		if not (Waves.night_of(n) as Dictionary).has("gap_ticks"):
+			ordinary = n
+			break
+	expect(ordinary > 0,
+		"at least one night takes the house pace rather than restating it")
+	if ordinary > 0:
+		expect(Waves.delay_before(ordinary, 1) == GameData.WAVE_GAP_TICKS,
+			"and that night is paced by WAVE_GAP_TICKS",
+			"%d against %d" % [Waves.delay_before(ordinary, 1),
+				GameData.WAVE_GAP_TICKS])
+	var tightened := -1
+	for n in range(1, GameData.MVP_NIGHTS + 1):
+		if (Waves.night_of(n) as Dictionary).has("gap_ticks"):
+			tightened = n
+			break
+	expect(tightened > 0 and Waves.delay_before(tightened, 1)
+		!= GameData.WAVE_GAP_TICKS,
+		"while a night that tightens the pace still overrides it",
+		"night %d" % tightened)
 
 	_completed += 1     # last line: an abandoned group never gets here

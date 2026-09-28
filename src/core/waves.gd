@@ -73,8 +73,15 @@ static func delay_before(night: int, index: int) -> int:
 	var row: Array = waves[index]
 	if row.size() > 3:
 		return int(row[3])
-	return int(one["opening_ticks"]) if index == 0 \
-		else int(one["gap_ticks"])
+	if index == 0:
+		return int(one["opening_ticks"])
+	# **`WAVE_GAP_TICKS` is the house pace**, and a night says so only when it
+	# wants a different one. Task 0059 moved the gap onto the night's record
+	# and wrote all ten of them out longhand, which left the global lever with
+	# no reader at all: task 0068's sweep turned it from one end of its range
+	# to the other and not one run of eighty changed. A lever nothing reads is
+	# a promise to a designer that the code does not keep.
+	return int(one.get("gap_ticks", GameData.WAVE_GAP_TICKS))
 
 
 ## Start a night. Called by `Phases.begin_night()`.

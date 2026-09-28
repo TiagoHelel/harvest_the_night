@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`###############.........`  **67 / 109 done**
+`###############.........`  **68 / 109 done**
 
-0 doing / 42 todo / 0 blocked across 9 phases.
+0 doing / 41 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0068 - A balance sweep over the ten nights**. The whole of what is left is
+First up: **0069 - Run statistics**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,24 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-42 task(s) left, the ready ones first, then what they
+41 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0068 - A balance sweep over the ten nights
-
-Ready to pick up.  Likely files: `tools/balance.py, implementation/BALANCE.md`.
-
-Use the autoplayer: find the nights that are trivial, the ones that are impossible, and the levers that are doing nothing.
-
-- Sweep the important levers across a range and record the win rate per night
-- A written report with the curve, the outliers and a recommendation per lever
-- Apply the recommendations and re-run
-- A lever that changes nothing across its whole range is reported as dead weight
-- The determinism hash will move: record both numbers
-
-  - done when: No night has a win rate of 100% or 0% across every policy
-  - done when: The report is in the repository and the applied changes are in game_data
 
 ### 0069 - Run statistics
 
@@ -732,7 +717,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0057** [Structures take damage and die](prompts/0057-structure-damage.md)
 - [x] **0058** [The Giant](prompts/0058-boss-giant.md)
 
-## 4 - Ten nights and progression  (9/12)
+## 4 - Ten nights and progression  (10/12)
 
 - [x] **0059** [Waves as data](prompts/0059-wave-data.md)
 - [x] **0060** [The ten nights, authored](prompts/0060-ten-nights.md)
@@ -743,7 +728,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0065** [Losing a night costs you](prompts/0065-defeat.md)
 - [x] **0066** [Night 10 and the end of the run](prompts/0066-run-end.md)
 - [x] **0067** [The autoplayer](prompts/0067-autoplayer.md)
-- [ ] **0068** [A balance sweep over the ten nights](prompts/0068-balance-sweep.md)
+- [x] **0068** [A balance sweep over the ten nights](prompts/0068-balance-sweep.md)
 - [ ] **0069** [Run statistics](prompts/0069-stats.md)
 - [ ] **0070** [Endless nights past ten](prompts/0070-endless.md)
 

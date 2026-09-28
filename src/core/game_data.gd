@@ -500,7 +500,7 @@ const BUILDINGS: Dictionary = {
 ## something needed it. Twenty-five rather than fifty, because with
 ## `BASE_ENERGY` below the farm only reaches this floor when it has been built
 ## well past its means.
-const UNPOWERED_PERCENT := 25           # LEVER: percent of full speed, 10-60
+const UNPOWERED_PERCENT := 50           # LEVER: percent of full speed, 10-60
 
 
 # =================================================================== defences
@@ -1091,6 +1091,10 @@ const ENEMIES: Dictionary = {
 ## this into a validated table and task 0060 tunes the curve - what is here is
 ## the shape, so that the first playable build of task 0027 has three waves to
 ## fight and the rest has somewhere to grow.
+## **The pace of an ordinary night**, and what a night is measured against
+## when it does not set its own. Nights one and two take it; the other eight
+## tighten it deliberately, and that tightening is the second difficulty curve
+## described under `NIGHTS`.
 const WAVE_GAP_TICKS := 15 * SECONDS    # LEVER: ticks, 8-30 seconds worth
 
 ## How long between two members of the same wave.
@@ -1157,7 +1161,6 @@ const NIGHTS: Array = [
 	{
 		"note": "the tutorial night: one tower, one side, and time to watch",
 		"opening_ticks": 0,
-		"gap_ticks": 15 * SECONDS,
 		"waves": [
 			[&"walker", 3, 0],
 			[&"walker", 4, 0],
@@ -1167,7 +1170,6 @@ const NIGHTS: Array = [
 	{
 		"note": "the same again from two sides, so one tower is not enough",
 		"opening_ticks": 0,
-		"gap_ticks": 15 * SECONDS,
 		"waves": [
 			[&"walker", 6, 0],
 			[&"walker", 6, 1],
@@ -2279,13 +2281,15 @@ static func check_nights(nights: Array) -> Array:
 			continue
 		var one: Dictionary = night
 
-		for field in ["waves", "note", "opening_ticks", "gap_ticks"]:
+		# `gap_ticks` is not in this list: a night that does not name one
+		# takes `WAVE_GAP_TICKS`, which is what that lever is for.
+		for field in ["waves", "note", "opening_ticks"]:
 			if not one.has(field):
 				errors.append("night %d has no '%s'" % [n + 1, field])
 		if not one.has("waves"):
 			continue
 		if int(one.get("opening_ticks", -1)) < 0 \
-				or int(one.get("gap_ticks", -1)) < 0:
+				or int(one.get("gap_ticks", WAVE_GAP_TICKS)) < 0:
 			errors.append("night %d waits less than no time" % [n + 1])
 
 		var waves: Array = one["waves"]
