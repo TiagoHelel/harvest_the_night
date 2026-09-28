@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3]
+[gd_scene load_steps=19 format=3]
 
 [ext_resource type="Script" path="res://src/ui/main.gd" id="1_main"]
 [ext_resource type="Script" path="res://src/ui/sim_driver.gd" id="2_driver"]
@@ -22,6 +22,7 @@
 [ext_resource type="Script" path="res://src/ui/music.gd" id="20_music"]
 [ext_resource type="Script" path="res://src/ui/ambience.gd" id="21_amb"]
 [ext_resource type="Script" path="res://src/ui/juice.gd" id="22_juice"]
+[ext_resource type="Script" path="res://src/ui/tooltip.gd" id="23_tip"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_main")
@@ -183,6 +184,17 @@ script = ExtResource("20_music")
 [node name="Ambience" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("21_amb")
+
+[node name="Tooltip" type="Control" parent="UI/Screen"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("23_tip")
 
 [node name="SimDriver" type="Node" parent="."]
 unique_name_in_owner = true

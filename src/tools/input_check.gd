@@ -41,7 +41,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 45
+const CASES := 46
 
 ## The pixels two pieces of text in one row must have between them. Two is
 ## the width of the gap inside a letter at this size, so anything less reads
@@ -121,6 +121,7 @@ func _run() -> void:
 	await _case_0086_music()
 	await _case_0087_ambience()
 	await _case_0088_juice()
+	await _case_0089_tooltips()
 	_finish()
 
 
@@ -4563,3 +4564,139 @@ func _case_0088_juice() -> void:
 	driver.running = true
 	await close_scene()
 	_completed += 1     # last line: an abandoned case never gets here
+func _case_0089_tooltips() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var tip: Tooltip = require_control("Tooltip")
+	if driver == null or tip == null:
+		expect(tip != null, "the Tooltip node is in the scene")
+		_completed += 1
+		await close_scene()
+		return
+	var state := driver.state
+
+	# **Every row in the five panels the task names carries a key**, and
+	# every key that is carried resolves to something worth reading. Walked
+	# over the live tree rather than taken on trust from the wiring.
+	# The tech tree's buttons exist whether or not its panel is up, so the
+	# count below does not need it open - and opening it would give one of
+	# them focus, which beats hover and would make the next part describe a
+	# tech node while the cursor sat on a shop row. That is the design
+	# working; it was still five minutes of wondering why wood was called
+	# "true sights".
+	Shop.open(state)
+	var inventory: InventoryPanel = require_control("InventoryPanel")
+	if inventory != null:
+		inventory.visible = true
+	await frames(6)
+	root.gui_release_focus()
+
+	# **Counted, then put away.** The inventory sits over the middle of the
+	# screen, so leaving it up meant the cursor landed on an inventory row
+	# while the test thought it was pointing at a shop one - and the wood row
+	# explained iron.
+	var described := 0
+	var mute: Array = []
+	var stack: Array = [_scene]
+	while not stack.is_empty():
+		var node: Node = stack.pop_back()
+		for child in node.get_children():
+			stack.append(child)
+		if not node.has_meta(&"describes"):
+			continue
+		described += 1
+		if Describe.of(StringName(node.get_meta(&"describes"))).is_empty():
+			mute.append("%s -> %s" % [node.name, node.get_meta(&"describes")])
+	expect(described >= 20,
+		"the panels on screen have a lot of explaining marked on them",
+		"%d marked" % described)
+	expect(mute.is_empty(),
+		"and every key on every one of them says something",
+		"%d silent: %s" % [mute.size(), str(mute.slice(0, 3))])
+	if inventory != null:
+		inventory.visible = false
+	await frames(2)
+
+	# **Hovering explains, after a pause.** The pause is the requirement, so
+	# it is asserted both ways round: nothing at once, something shortly.
+	var row: Control = require_control("sell_wood")
+	if row != null:
+		await _hover(row)
+		expect(String(tip.showing()) == "",
+			"nothing is explained the instant the cursor arrives",
+			"'%s'" % tip.showing())
+		await until(func() -> bool: return String(tip.showing()) != "",
+			"the tooltip to appear", 900)
+		var under: Control = root.gui_get_hovered_control()
+		expect(String(tip.showing()) == "resource:wood",
+			"and then the wood row explains wood",
+			"'%s'; cursor at %s, row at %s, under the cursor is %s"
+			% [tip.showing(), root.get_mouse_position(),
+				row.get_global_rect(),
+				under.name if under != null else "nothing"])
+		expect(tip.text_showing().contains("sells for"),
+			"with what it fetches in it", tip.text_showing())
+
+		# **And no pause moving to the next.** One frame is enough: a
+		# tooltip that is already up follows the cursor.
+		var other: Control = require_control("sell_stone")
+		if other != null:
+			await _hover(other)
+			await frames(2)
+			expect(String(tip.showing()) == "resource:stone",
+				"moving to the next row swaps at once, with no second wait",
+				"'%s'" % tip.showing())
+
+	# **It never leaves the screen**, asked of the panel that is actually up.
+	var screen := Rect2(Vector2.ZERO, Vector2(480.0, 270.0))
+	var box := tip.panel_rect()
+	expect(screen.encloses(box),
+		"the panel is inside the screen",
+		"%s in %s" % [box, screen])
+
+	# **Keyboard focus explains the same thing as hover.** A player on a pad
+	# or a keyboard is told what a player with a mouse is told.
+	Shop.close(state)
+	var tech: TechPanel = require_control("TechPanel")
+	if tech != null:
+		tech.open()
+	await frames(3)
+	var node_button: Control = require_control("Tech_sharp_tools")
+	if node_button != null:
+		node_button.grab_focus()
+		await until(func() -> bool:
+			return String(tip.showing()).begins_with("tech:"),
+			"the focused tech node to explain itself", 900)
+		expect(String(tip.showing()) == "tech:sharp tools",
+			"tabbing to a tech node explains that node",
+			"'%s'" % tip.showing())
+		expect(tip.text_showing().contains("costs"),
+			"with what it costs in it", tip.text_showing())
+		var focused_box := tip.panel_rect()
+		expect(screen.encloses(focused_box),
+			"and that panel is on the screen too",
+			"%s" % focused_box)
+
+	# Leave nothing for the next case: no focus, no open panel, no cursor
+	# parked over anything.
+	root.gui_release_focus()
+	if tech != null:
+		tech.close()
+	await frames(2)
+	await close_scene()
+	_completed += 1     # last line: an abandoned case never gets here
+
+
+## Put the cursor over the middle of a control.
+func _hover(control: Control) -> void:
+	# **No `Input.warp_mouse`.** The GUI is driven by the pushed event, in
+	# canvas coordinates, which is what `click_control` already does. Warping
+	# the real cursor as well put it in window coordinates - three times
+	# larger on a 1440x810 window - and made the failure message report a
+	# position nothing was ever tested at.
+	var at := control.get_global_rect().get_center()
+	var motion := InputEventMouseMotion.new()
+	motion.position = at
+	motion.global_position = at
+	root.push_input(motion)
+	await frames(2)

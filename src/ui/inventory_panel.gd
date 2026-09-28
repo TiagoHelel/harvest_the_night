@@ -149,6 +149,7 @@ func _row(line: Dictionary) -> Control:
 	var held := int(line["held"])
 	var row := HBoxContainer.new()
 	row.name = "inv_%s" % line["id"]
+	Tooltip.describes(row, StringName("resource:%s" % line["id"]))
 	row.custom_minimum_size = Vector2(190, ROW_HEIGHT)
 
 	var name_label := Label.new()

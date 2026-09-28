@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 81
+const GROUPS := 82
 
 const SettingsScript := preload("res://src/app/settings.gd")
 const AudioScript := preload("res://src/app/audio.gd")
@@ -151,6 +151,7 @@ func _run() -> void:
 	_task_0086_music()
 	_task_0087_ambience()
 	_task_0088_juice()
+	_task_0089_tooltips()
 
 
 func _finish() -> void:
@@ -13279,5 +13280,95 @@ func _task_0088_juice() -> void:
 	print("  shake capped at %.0f, %d numbers, %d types, %d bodies"
 		% [WorldScript.SHAKE_CAP, JuiceScript.MAX_NUMBERS,
 			JuiceScript.TYPE_COLOURS.size(), GameData.ENEMIES.size()])
+
+	_completed += 1     # last line: an abandoned group never gets here
+## 0089 - tooltips.
+func _task_0089_tooltips() -> void:
+	# **Everything the game can point at has words.** The list is built from
+	# `GameData` rather than typed here, so a sixth enemy or a thirteenth
+	# recipe is undescribed for exactly as long as it takes to run this.
+	var keys := Describe.every_key()
+	expect(keys.size() > 40, "there is a lot to explain",
+		"%d things" % keys.size())
+	var silent: Array = []
+	for key in keys:
+		var text := Describe.of(key)
+		if text.strip_edges().is_empty():
+			silent.append(String(key))
+		elif text.split("\n").size() < 2:
+			silent.append("%s (one line)" % key)
+	expect(silent.is_empty(),
+		"and every one of them has something to say",
+		"%d do not: %s" % [silent.size(), str(silent.slice(0, 4))])
+
+	# **The numbers come from `game_data`, never a copy.** The done-when, and
+	# the way it is asked: take the live figure out of the table and demand
+	# that the text contains it. Hardcode a cost and this fails the moment
+	# the lever beside it moves.
+	for id in GameData.sorted_names(GameData.DEFENCES.keys()):
+		var one: Dictionary = GameData.DEFENCES[id]
+		var text := Describe.defence(id)
+		expect(text.contains("%d hit points" % int(one["hp"])),
+			"the %s tooltip says its live hit points" % id,
+			"%d not in: %s" % [int(one["hp"]), text.replace("\n", " / ")])
+		if one.has("damage"):
+			expect(text.contains(str(int(one["damage"]))),
+				"and its live damage" % [], str(int(one["damage"])))
+		for res in GameData.sorted_names((one.get("cost", {})
+				as Dictionary).keys()):
+			expect(text.contains("%d %s" % [int(one["cost"][res]), res]),
+				"and every part of its live cost",
+				"%d %s not in: %s" % [int(one["cost"][res]), res,
+					text.replace("\n", " / ")])
+	for id in GameData.sorted_names(GameData.ENEMIES.keys()):
+		var one: Dictionary = GameData.ENEMIES[id]
+		var text := Describe.enemy(id)
+		expect(text.contains("%d hit points" % int(one["hp"])),
+			"the %s tooltip says its live hit points" % id)
+		expect(text.contains("worth $%d" % int(one["reward"])),
+			"and what it is live worth" % [])
+	for row in GameData.TECH_TREE:
+		var one: Dictionary = row
+		var text := Describe.tech(StringName(one["id"]))
+		expect(text.contains("costs %d tech" % int(one["cost"])),
+			"the '%s' tooltip says its live cost" % one["id"])
+		expect(text.contains(String(one["note"])),
+			"and carries its own note rather than a second copy of it")
+
+	# A time is a time. Ticks are the rules' unit and seconds are the
+	# player's, and nothing in a tooltip may be in ticks.
+	var tower := Describe.defence(&"gun_tower")
+	expect(tower.contains("s") and not tower.contains("ticks"),
+		"times are in seconds, which is the only unit a player has",
+		tower.replace("\n", " / "))
+
+	# **It never leaves the screen.** Asked of the placing rule directly, at
+	# every corner of a 480x270 screen and well past them.
+	var screen := Vector2(480.0, 270.0)
+	var panel := Vector2(90.0, 40.0)
+	for corner in [Vector2.ZERO, Vector2(479.0, 0.0), Vector2(0.0, 269.0),
+			Vector2(479.0, 269.0), Vector2(240.0, 135.0),
+			Vector2(-40.0, -40.0), Vector2(900.0, 900.0)]:
+		var at := Tooltip.place_at(corner, panel, screen)
+		expect(at.x >= 0.0 and at.y >= 0.0,
+			"from %s the panel does not go off the top or left" % corner,
+			str(at))
+		expect(at.x + panel.x <= screen.x and at.y + panel.y <= screen.y,
+			"nor off the bottom or right" % [],
+			"%s + %s against %s" % [at, panel, screen])
+
+	# And a panel bigger than the screen is pinned rather than pushed off it.
+	var huge := Tooltip.place_at(Vector2(240.0, 135.0),
+		Vector2(600.0, 400.0), screen)
+	expect(huge.x >= 0.0 and huge.y >= 0.0,
+		"a panel too big for the screen starts on the screen", str(huge))
+
+	# The delay is the first one only; see `tooltip.gd`.
+	expect(Tooltip.DELAY > 0.0 and Tooltip.DELAY <= 0.8,
+		"there is a pause before the first tooltip, and it is short",
+		str(Tooltip.DELAY))
+
+	print("  %d things described, %d defences and %d enemies by their levers"
+		% [keys.size(), GameData.DEFENCES.size(), GameData.ENEMIES.size()])
 
 	_completed += 1     # last line: an abandoned group never gets here

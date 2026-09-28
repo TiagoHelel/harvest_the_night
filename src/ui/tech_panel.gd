@@ -83,6 +83,7 @@ func _build_nodes() -> void:
 			var id: StringName = one["id"]
 			var button := Button.new()
 			button.name = "Tech_" + str(id).replace(" ", "_")
+			Tooltip.describes(button, StringName("tech:%s" % id))
 			button.focus_mode = Control.FOCUS_ALL
 			# **Clipped, and the note lives elsewhere.** A `Button` sizes
 			# itself to its text whatever `custom_minimum_size` says, so "the

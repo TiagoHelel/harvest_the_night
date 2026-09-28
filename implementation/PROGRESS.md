@@ -7611,3 +7611,116 @@ the task and the reason the hit stop is a hold rather than a slowdown.
 
 `python tools/verify.py` prints PASS: 5485 asserts, 738 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+
+## 0089 - Tooltips - done 2026-09-28
+
+What changed: fifty-eight things in the game explain themselves. Resources,
+defences, buildings, recipes, tech nodes, enemies and crops, every figure read
+out of `GameData` at the moment it is asked for. Screenshot:
+`implementation/shots/0089-tooltip.png` - a tech node reached by keyboard,
+saying what it costs, what it does and what it needs first.
+
+Files: `src/ui/describe.gd` (new), `src/ui/tooltip.gd` (new),
+`scenes/Main.tscn`, and one line each in `build_mode.gd`, `tech_panel.gd`,
+`inventory_panel.gd`, `workshop_panel.gd` and `shop_panel.gd`.
+
+Verify: 5566 headless / 748 input / both hashes unchanged.
+
+### Never a copy of a number, and a check that means it
+
+Every line of every tooltip is built from `GameData` when it is asked for.
+The done-when is "changing a lever changes the tooltip with no other edit",
+and the check asks it the only way that can be true: it takes the **live**
+figure out of the table and demands the text contain it.
+
+Hardcoding one defence's hit points as a test makes it fail eight times over,
+each naming the tooltip it read:
+
+    the auto_crossbow tooltip says its live hit points  50 not in:
+    AUTO CROSSBOW / costs 20 iron, 15 wood / 40 hit points / 5 impact
+    damage / reaches 7 tiles / fires every 0.5s / draws 3 power
+
+Costs, damage, ranges, reloads, power draws, rewards, growth times and tech
+costs are all checked that way. Times are in **seconds** and never in ticks,
+which is asserted too: ticks are the rules' unit and seconds are the only one
+a player has.
+
+### One line per row, and no describing code in any panel
+
+A control carries `set_meta(&"describes", &"defence:gun_tower")` and that is
+the whole of what a panel does. `tooltip.gd` polls what is hovered and what
+has focus, walks **up** from there - a row is three labels and the player is
+pointing at one of them - and resolves the key through `Describe`.
+
+Fifty-eight keys, and the list of them is built from `GameData` rather than
+typed, so a sixth enemy or a thirteenth recipe is undescribed for exactly as
+long as it takes to run the check.
+
+### Why not Godot's own tooltips
+
+`Control.tooltip_text` very nearly does this, and task 0081 had already themed
+`TooltipPanel` and `TooltipLabel` for it. Two of the requirements are the ones
+it cannot meet:
+
+- **No delay moving to the next thing.** Godot waits its full delay again for
+  every control, so reading a row of five structures costs two and a half
+  seconds of waiting. The delay exists to stop a tooltip flashing at somebody
+  crossing the screen; once one is up, that has already been decided.
+- **Keyboard focus shows the same tooltip.** Godot's appears for the mouse and
+  nothing else, so a player on a pad is told nothing at all.
+
+Focus beats hover, because a player using the keyboard is not using the
+mouse, and a cursor left lying over something would otherwise describe the
+wrong thing for the rest of the night.
+
+### It never leaves the screen
+
+Clamped on both axes and **flipped above the cursor rather than squashed**
+when there is no room below. `place_at` is static and takes the cursor, the
+panel and the screen, so the check walks it round all four corners of a
+480x270 screen, far outside it both ways, and past it with a panel bigger
+than the screen - which is pinned rather than pushed off.
+
+### Three of my own traps in the live case
+
+None of these were bugs in the tooltip. All three were the test being wrong
+about the game.
+
+1. **The tech panel had focus.** The case opened it to count the marked
+   controls, which gave a node focus - and focus beats hover, so the wood row
+   in the shop explained "true sights". That is the design working. The tech
+   tree's buttons exist whether or not its panel is up, so the count does not
+   need it open.
+2. **The inventory covered the shop.** Made visible for the same count, it
+   sits over the middle of the screen, so the cursor landed on an inventory
+   row while the test thought it was pointing at a shop one - the wood row
+   explained iron. Counted and then put away.
+3. **`Input.warp_mouse` lied in the diagnostic.** The GUI is driven by the
+   pushed event in canvas coordinates, which is what `click_control` already
+   does; warping the real cursor as well put it in window coordinates - three
+   times larger on a 1440x810 window - so the failure message reported a
+   position nothing had been tested at. The warp is gone.
+
+The case also left focus and an open panel behind, which failed a *later*
+case about the night still running. It tidies up after itself now.
+
+### What is deliberately not described
+
+Action buttons - repair, flare, speed, "back to the farm", the shop's buy and
+sell buttons - carry no key. The requirement names resources, structures,
+recipes, tech nodes and enemies, which are **things**; a button that does
+something is explained by its own label, and a tooltip on "1" saying "buys
+one" is noise. Said here rather than quietly counted under "every
+interactive element has one".
+
+Enemies are described and nothing hovers them yet: their entry is the tooltip
+a future wave-preview or bestiary will use, and the text is checked against
+`GameData.ENEMIES` today so it cannot rot before then.
+
+### Hashes
+
+Both unchanged - `2555959448` and `2601044827`. `Describe` is static, takes no
+state, and reads only the tables.
+
+`python tools/verify.py` prints PASS: 5566 asserts, 748 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

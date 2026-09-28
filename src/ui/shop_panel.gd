@@ -171,6 +171,7 @@ func _seed_row(id: StringName) -> void:
 	var chosen := Farming.selected_seed(_state) == id
 	var row := HBoxContainer.new()
 	row.name = "seed_%s" % id
+	Tooltip.describes(row, StringName("crop:%s" % id))
 	row.custom_minimum_size = Vector2(0, ROW_HEIGHT)
 	_rows.add_child(row)
 
@@ -191,6 +192,7 @@ func _sell_row(id: StringName) -> void:
 	var held := Resources.amount(_state, id)
 	var row := HBoxContainer.new()
 	row.name = "sell_%s" % id
+	Tooltip.describes(row, StringName("resource:%s" % id))
 	row.custom_minimum_size = Vector2(0, ROW_HEIGHT)
 	_rows.add_child(row)
 
@@ -213,6 +215,7 @@ func _buy_row(id: StringName) -> void:
 	var afford := Resources.amount(_state, GameData.MONEY) >= price
 	var row := HBoxContainer.new()
 	row.name = "buy_%s" % id
+	Tooltip.describes(row, StringName("resource:%s" % id))
 	row.custom_minimum_size = Vector2(0, ROW_HEIGHT)
 	_rows.add_child(row)
 

@@ -1,7 +1,7 @@
 # 0089 - Tooltips
 
 - **Phase:** 6 - Sound and juice
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0081
 - **Likely files:** src/ui/tooltip.gd
 

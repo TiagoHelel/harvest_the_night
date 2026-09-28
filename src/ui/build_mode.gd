@@ -199,6 +199,10 @@ func _build_palette() -> void:
 	for id in Building.catalogue(_state):
 		var row := Button.new()
 		row.name = "build_%s" % id
+		# One line, and the tooltip does the rest. The catalogue holds
+		# both sorts, so which table it came out of decides the key.
+		Tooltip.describes(row, StringName("%s:%s"
+			% ["defence" if GameData.DEFENCES.has(id) else "building", id]))
 		row.custom_minimum_size = Vector2(114, ROW_HEIGHT)
 		# **A list row**, which the theme keeps short. A default `Button`
 		# reserves about twenty pixels whatever `ROW_HEIGHT` says, and twelve

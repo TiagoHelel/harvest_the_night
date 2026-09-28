@@ -204,6 +204,7 @@ func _build(cell: Vector2i) -> void:
 		var recipe_id: StringName = id
 		var row := Button.new()
 		row.name = "make_%s" % recipe_id
+		Tooltip.describes(row, StringName("recipe:%s" % recipe_id))
 		row.text = str(recipe_id)
 		_style(row)
 		row.modulate = Color(1, 1, 1) if Crafting.can_queue(_state, cell,

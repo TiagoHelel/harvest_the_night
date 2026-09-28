@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`###################.....`  **88 / 109 done**
+`####################....`  **89 / 109 done**
 
-0 doing / 21 todo / 0 blocked across 9 phases.
+0 doing / 20 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0089 - Tooltips**. The whole of what is left is
+First up: **0090 - The log panel**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,24 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-21 task(s) left, the ready ones first, then what they
+20 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0089 - Tooltips
-
-Ready to pick up.  Likely files: `src/ui/tooltip.gd`.
-
-Every cost, stat and icon explains itself, so the game does not need a manual.
-
-- A hover tooltip on resources, structures, recipes, tech nodes and enemies
-- It shows the numbers from game_data, never a copy of them
-- A short delay before it appears and none before it moves to the next
-- It never leaves the screen edge
-- Keyboard focus shows the same tooltip as hover
-
-  - done when: Every interactive element has one
-  - done when: Changing a lever changes the tooltip with no other edit
 
 ### 0090 - The log panel
 
@@ -445,7 +430,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0081** [The UI theme](prompts/0081-theme.md)
 - [x] **0082** [Screenshots, and actually looking at them](prompts/0082-screenshots.md)
 
-## 6 - Sound and juice  (6/8)
+## 6 - Sound and juice  (7/8)
 
 - [x] **0083** [Audio buses and a sound manager](prompts/0083-audio-buses.md)
 - [x] **0084** [The sounds of the day](prompts/0084-sfx-day.md)
@@ -453,7 +438,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0086** [Two pieces of music](prompts/0086-music.md)
 - [x] **0087** [Ambience](prompts/0087-ambience.md)
 - [x] **0088** [Juice: shake, hit stop, damage numbers](prompts/0088-juice.md)
-- [ ] **0089** [Tooltips](prompts/0089-tooltips.md)
+- [x] **0089** [Tooltips](prompts/0089-tooltips.md)
 - [ ] **0090** [The log panel](prompts/0090-log-panel.md)
 
 ## 7 - Shell and product  (0/10)
