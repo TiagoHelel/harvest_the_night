@@ -7255,3 +7255,127 @@ night's watchers are all in `src/ui/`.
 
 `python tools/verify.py` prints PASS: 5380 asserts, 707 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+
+## 0086 - Two pieces of music - done 2026-09-28
+
+What changed: a warm ninety-six second loop for the farm, a cold one for the
+night built from the same motif, an urgent layer that arrives on the last
+wave, and a crossfade that is exactly as long as the switch of reality
+because it is the same number. `tools/gen_music.py` synthesises all three
+from the same primitives the sound effects use.
+
+Files: `tools/gen_music.py` (new), `assets/music/` (3 generated WAVs, new),
+`src/ui/music.gd` (new), `src/app/audio.gd`, `src/app/settings.gd`,
+`scenes/Main.tscn`, `src/ui/main.gd`, `tools/verify.py`,
+`src/tools/headless_check.gd`, `src/tools/input_check.gd`.
+
+Verify: 5406 headless / 720 input / both hashes unchanged.
+
+### The loop point is inaudible by construction, and then measured
+
+Two techniques, and between them there is no seam left to hear:
+
+- **Every sustained partial is snapped to a harmonic of the loop.** A sine at
+  146.83 Hz does not fit a whole number of times into ninety-six seconds, so
+  it comes back to the seam part-way through a cycle and steps. `snap()`
+  moves it to the nearest frequency that does fit - at most a fifth of a
+  hertz, which nothing can hear.
+- **Anything struck wraps round.** A note in the last bar whose tail runs
+  past the end is written back over the beginning rather than truncated. A
+  truncated decay is the classic way a loop clicks.
+
+Then it is measured, and the threshold was measured too rather than picked.
+A click is a discontinuity, so the join is compared against the track's own
+**ninety-ninth percentile step** - "no more abrupt than things this music
+already does". The three pieces come in at 0.60, 0.73 and 0.41. Chopping five
+thousand samples off the end of one, which is exactly the mistake the
+wrapping prevents, scores **5.9**. The threshold is 1.0, with daylight on
+both sides of it.
+
+The percentile rather than the average, because a dense mix has a big average
+step and a quiet one a small step, and the average would set a different bar
+for each piece.
+
+### One number for the crossfade, not two
+
+The done-when is that the crossfade lands *with* the switch of reality, not
+before or after it. So the length is not a number in the music: it is
+`WorldView.transition_seconds()`, which is what the screen fades on -
+`GameData.TRANSITION_SECONDS` unless the player has overridden it.
+
+`input_check` does not time either of them. It clicks the button, waits for
+**the transition** to finish, and then asks whether the music has too. With
+the fade untied and made six times too long it fails with the night's music
+at 0.21 and the farm still at 0.17 - which is precisely "the crossfade did
+not land with the transition", said in numbers.
+
+### They share a motif
+
+`MOTIF` is one list of eight scale degrees. The day plays it in a major scale
+at one note a half-beat, every fourth bar; the night plays the same list in a
+minor scale, an octave down, one note a beat, every eighth bar. Same shape,
+same farm, different hour.
+
+The check reads the generator's source and asserts the motif is one list that
+both arrangements mention, because a shared motif that has been copied into
+two lists is shared right up until somebody edits one of them.
+
+Both pieces are at the same tempo on purpose. **A crossfade between two
+tempos is a stumble**, and the one moment these two ever meet is the moment
+the player switches reality; the night is sparser instead, which reads as
+slower without fighting the day on the way past.
+
+### Two asserts that the new setting broke, and only one of them was right
+
+Adding `audio/music_in_menus` turned two existing checks red.
+
+- Task 0009's "the audio group is five settings" - now six. A counted
+  constant, and it stays: a group is an options tab, and a key arriving in
+  one without anybody drawing a control for it should be a failing row.
+- Task 0083's "every `audio/` key except `audio/muted` turns a bus" - **that
+  rule was simply wrong**, and it took a second flag to show it. It says "a
+  float turns a bus, a bool is a switch" now, which maintains itself: a new
+  volume must have a bus, a new flag is allowed to be a flag.
+
+### Decisions worth saying out loud
+
+- **Ninety-six seconds, not a round two minutes.** The loop is seamless, so
+  nobody can tell the two apart, and the difference is two more megabytes of
+  WAV in a repository whose source is two megabytes. Said here rather than
+  quietly counted as "a couple of minutes each".
+- **The music deck is not the voice pool.** Two crossfading slots and a layer
+  of their own, because a ninety-six second loop taking one of sixteen shared
+  voices and never giving it back would be a gunshot lost every time the
+  music started.
+- **The result screen keeps the night's music.** The payout is read with the
+  night still in the air; snapping to the farm the instant the last zombie
+  fell would take the weight out of having survived. The music turns over
+  when the day does, which is when the screen does.
+- **Looping is set in code, not on the import.** Godot's WAV importer has an
+  `edit/loop_mode` and `.import` files are generated - a setting that comes
+  back the next time somebody reimports. One line in `Audio._looping` cannot
+  be undone by a tool.
+- `Music.in_menu` exists and **nothing sets it yet**: tasks 0091 and 0092 are
+  the title screen and the router. The rule and its check are here now so
+  that 0091 gets a failing assert rather than silence if it forgets.
+
+The music costs thirteen seconds on every `verify` run, which is the price of
+the `--check` row rendering three minutes of audio to compare it. Worth it
+for the same reason as the sprites: a WAV nobody can regenerate is a WAV
+nobody can change.
+
+### The done-when that needs ears
+
+"The loop point is inaudible" is measured above, but a measurement is not an
+ear. `python tools/gen_music.py --preview <dir>` writes `_loop-seam.wav` -
+the join run past you six times, eight seconds either side of it - and
+`_crossfade.wav`, the farm giving way to the night over the transition's own
+length, read out of `game_data.gd`. Both went to the owner.
+
+### Hashes
+
+Both unchanged - `2555959448` and `2601044827`. Music is not a rule.
+
+`python tools/verify.py` prints PASS: 5406 asserts, 720 input cases, 0 failed,
+with a new `music` row. `exports` is still the one SKIP and still wants the
+Godot export templates.

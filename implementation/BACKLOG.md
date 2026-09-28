@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`###################.....`  **85 / 109 done**
+`###################.....`  **86 / 109 done**
 
-0 doing / 24 todo / 0 blocked across 9 phases.
+0 doing / 23 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0086 - Two pieces of music**. The whole of what is left is
+First up: **0087 - Ambience**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,24 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-24 task(s) left, the ready ones first, then what they
+23 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0086 - Two pieces of music
-
-Ready to pick up.  Likely files: `tools/gen_music.py, assets/music/`.
-
-One warm loop for the farm, one cold one for the night, and a crossfade on the reality switch.
-
-- Generated, looping cleanly, a couple of minutes each
-- The two share a motif, so the night is recognisably the same farm
-- A crossfade tied to the transition length
-- An intensity layer that comes in on the last wave of a night
-- Music is off in menus by default, and that is a setting
-
-  - done when: The loop point is inaudible
-  - done when: The crossfade lands with the transition, not before or after it
 
 ### 0087 - Ambience
 
@@ -490,12 +475,12 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0081** [The UI theme](prompts/0081-theme.md)
 - [x] **0082** [Screenshots, and actually looking at them](prompts/0082-screenshots.md)
 
-## 6 - Sound and juice  (3/8)
+## 6 - Sound and juice  (4/8)
 
 - [x] **0083** [Audio buses and a sound manager](prompts/0083-audio-buses.md)
 - [x] **0084** [The sounds of the day](prompts/0084-sfx-day.md)
 - [x] **0085** [The sounds of the night](prompts/0085-sfx-night.md)
-- [ ] **0086** [Two pieces of music](prompts/0086-music.md)
+- [x] **0086** [Two pieces of music](prompts/0086-music.md)
 - [ ] **0087** [Ambience](prompts/0087-ambience.md)
 - [ ] **0088** [Juice: shake, hit stop, damage numbers](prompts/0088-juice.md)
 - [ ] **0089** [Tooltips](prompts/0089-tooltips.md)

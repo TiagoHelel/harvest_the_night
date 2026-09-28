@@ -32,11 +32,12 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 78
+const GROUPS := 79
 
 const SettingsScript := preload("res://src/app/settings.gd")
 const AudioScript := preload("res://src/app/audio.gd")
 const SfxScript := preload("res://src/ui/sfx.gd")
+const MusicScript := preload("res://src/ui/music.gd")
 
 var passed := 0
 var failed := 0
@@ -144,6 +145,7 @@ func _run() -> void:
 	_task_0083_audio()
 	_task_0084_day_sounds()
 	_task_0085_night_sounds()
+	_task_0086_music()
 
 
 func _finish() -> void:
@@ -737,7 +739,11 @@ func _task_0009_settings() -> void:
 
 	# Groups are what an options tab is.
 	var audio: Dictionary = loaded.group(&"audio")
-	expect(audio.size() == 5, "the audio group is five settings",
+	# Six since task 0086 added `music_in_menus`. **A counted constant, kept
+	# on purpose**: a group is an options tab, and a key arriving in one
+	# without anybody drawing a control for it should be a failing row rather
+	# than a gap nobody notices until a player asks what the empty space is.
+	expect(audio.size() == 6, "the audio group is six settings",
 		str(audio.size()))
 	expect(audio.has(&"audio/master") and not audio.has(&"video/vsync"),
 		"and holds only its own")
@@ -12514,11 +12520,19 @@ func _task_0083_audio() -> void:
 	for key in AudioScript.VOLUME_KEYS:
 		expect(SettingsScript.DEFAULTS.has(key),
 			"the '%s' volume is a setting that exists" % key)
+	# **A number turns a bus; a switch is a switch.** The first version of
+	# this said "everything but `audio/muted`", and task 0086's
+	# `audio/music_in_menus` broke it - which is the right failure, but the
+	# rule was wrong rather than the setting. Typed this way it maintains
+	# itself: a new float in the audio group must have a bus to turn, and a
+	# new bool is allowed to be a flag.
 	for key in SettingsScript.DEFAULTS:
-		if not str(key).begins_with("audio/") or key == &"audio/muted":
+		if not str(key).begins_with("audio/"):
+			continue
+		if typeof(SettingsScript.DEFAULTS[key]) != TYPE_FLOAT:
 			continue
 		expect(AudioScript.VOLUME_KEYS.has(key),
-			"the '%s' setting turns a bus" % key)
+			"the '%s' volume turns a bus" % key)
 
 	# **Zero is silent, not quiet.** A bus at minus eighty decibels is still
 	# audible on headphones in a quiet room, and the done-when says silenced.
@@ -12886,3 +12900,127 @@ func _night_sound_ids() -> Array:
 	out.append(SfxScript.BREAK_SOUND)
 	out.append(SfxScript.HOUSE_SOUND)
 	return out
+## 0086 - the two pieces of music.
+func _task_0086_music() -> void:
+	for id in [MusicScript.FARM, MusicScript.NIGHT, MusicScript.INTENSITY]:
+		expect(ResourceLoader.exists("res://assets/%s.wav" % id),
+			"there is a piece called '%s'" % id)
+
+	# **The loop point is inaudible**, and measured rather than promised.
+	#
+	# A click is a discontinuity, and a discontinuity is a step much larger
+	# than the steps either side of it. So the join is compared against the
+	# track's *own* ninety-ninth percentile step: "no more abrupt than things
+	# this track already does". The three pieces come in at 0.4 to 0.7 of
+	# that. Truncating one loop's tail - the classic way to make a seam -
+	# scores 5.9, so the threshold has daylight on both sides of it.
+	for id in [MusicScript.FARM, MusicScript.NIGHT, MusicScript.INTENSITY]:
+		var seam := _loop_seam("res://assets/%s.wav" % id)
+		if seam.is_empty():
+			expect(false, "'%s' could be measured" % id)
+			continue
+		expect(float(seam["ratio"]) <= 1.0,
+			"the loop point of '%s' is no more abrupt than the music" % id,
+			"%.2f of the 99th percentile step" % seam["ratio"])
+		expect(float(seam["seconds"]) > 15.0,
+			"and '%s' is long enough not to feel like a loop" % id,
+			"%.1fs" % seam["seconds"])
+
+	# **The two pieces share a motif**, which is what makes the night
+	# recognisably the same farm. Read out of the generator, because a shared
+	# motif that has been copied into two lists is shared right up until
+	# somebody edits one of them.
+	var source := FileAccess.get_file_as_string("res://tools/gen_music.py")
+	expect(source.contains("MOTIF = ["), "the motif is one list")
+	var plays := source.count("MOTIF")
+	expect(plays >= 3,
+		"and both arrangements read it rather than keeping copies",
+		"%d mentions" % plays)
+
+	# **The crossfade is the transition's own length.** The done-when says it
+	# lands with the switch of reality, not before or after, and the only way
+	# to be sure of that is for there to be one number.
+	expect(source.contains("BPM = 75"), "the generator has one tempo")
+	var deck := AudioScript.new()
+	expect(deck != null, "the deck exists")
+	expect(is_equal_approx(AudioScript.FADE_SECONDS,
+		GameData.TRANSITION_SECONDS),
+		"the default crossfade is the transition's length",
+		"%.2f against %.2f" % [AudioScript.FADE_SECONDS,
+			GameData.TRANSITION_SECONDS])
+	deck.free()
+
+	# **What plays when**, asked of the rule rather than of a speaker.
+	expect(MusicScript.piece_for(Phases.DAY, false, false)
+		== MusicScript.FARM, "the day is the farm's music")
+	for phase in [Phases.PREPARATION, Phases.NIGHT, Phases.RESULT]:
+		expect(MusicScript.piece_for(phase, false, false) == MusicScript.NIGHT,
+			"and %s is the night's" % Phases.name_of(phase))
+	# Off in menus by default, and it is a setting.
+	expect(MusicScript.piece_for(Phases.DAY, true, false) == &"",
+		"a menu is silent by default")
+	expect(MusicScript.piece_for(Phases.DAY, true, true) == MusicScript.FARM,
+		"and plays when the setting says so")
+	expect(SettingsScript.DEFAULTS.get(&"audio/music_in_menus", true) == false,
+		"and the shipped default is off")
+
+	# **The urgent layer arrives on the last wave and not before.**
+	expect(MusicScript.layer_for(Phases.NIGHT, [1, 3]) == &"",
+		"the first of three waves is not urgent")
+	expect(MusicScript.layer_for(Phases.NIGHT, [2, 3]) == &"",
+		"nor the second")
+	expect(MusicScript.layer_for(Phases.NIGHT, [3, 3])
+		== MusicScript.INTENSITY, "the last one is")
+	expect(MusicScript.layer_for(Phases.DAY, [3, 3]) == &"",
+		"and the farm never is, whatever the wave counter says")
+	expect(MusicScript.layer_for(Phases.NIGHT, [0, 0]) == &"",
+		"a night with no waves in its table gets nothing")
+
+	print("  3 pieces, seam under the 99th percentile, layer on the last wave")
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## The step at a WAV's loop point, against the steps it already contains.
+##
+## The ninety-ninth percentile rather than the average: a dense mix has a
+## large average step and a quiet one a small one, so the average would set a
+## different bar for each piece. The percentile asks the same question of all
+## three - is the join bigger than the biggest thing this music already does?
+func _loop_seam(path: String) -> Dictionary:
+	var raw := FileAccess.get_file_as_bytes(path)
+	if raw.size() < 44:
+		return {}
+	var at := 12
+	var start := -1
+	var length := 0
+	while at + 8 <= raw.size():
+		var tag := raw.slice(at, at + 4).get_string_from_ascii()
+		var size := raw.decode_u32(at + 4)
+		if tag == "data":
+			start = at + 8
+			length = size
+			break
+		at += 8 + size + (size & 1)
+	if start < 0:
+		return {}
+
+	var count := mini(length, raw.size() - start) / 2
+	if count < 3:
+		return {}
+	# Every hundredth step is plenty to find a percentile and keeps this off
+	# the twelve-second mark - there are two million samples a piece.
+	var steps: Array = []
+	var previous := raw.decode_s16(start)
+	for i in range(1, count, 97):
+		var v := raw.decode_s16(start + i * 2)
+		steps.append(absi(v - previous))
+		previous = v
+	steps.sort()
+	var p99 := float(steps[mini(int(steps.size() * 0.99), steps.size() - 1)])
+	var join := absf(float(raw.decode_s16(start))
+		- float(raw.decode_s16(start + (count - 1) * 2)))
+	return {
+		"ratio": join / maxf(p99, 1.0),
+		"seconds": float(count) / 22050.0,
+	}

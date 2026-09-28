@@ -1,7 +1,7 @@
 # 0086 - Two pieces of music
 
 - **Phase:** 6 - Sound and juice
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0083, 0022
 - **Likely files:** tools/gen_music.py, assets/music/
 

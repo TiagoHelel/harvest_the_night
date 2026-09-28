@@ -175,6 +175,19 @@ def check_sfx():
                  out.strip().splitlines()[-1].strip() if out.strip() else "")
 
 
+def check_music():
+    """The two pieces still match the recipes they came from.
+
+    A slower row than the others - it renders three minutes of audio to
+    compare it - and worth it for the same reason as `check_sfx()`: a WAV
+    nobody can regenerate is a WAV nobody can change."""
+    if not os.path.exists(rel("tools/gen_music.py")):
+        return skip("music", "no music generator yet - task 0086")
+    code, out = run([sys.executable, "tools/gen_music.py", "--check"])
+    return check("music", code == 0, tail(out, 6) if code else
+                 out.strip().splitlines()[-1].strip() if out.strip() else "")
+
+
 def check_player_art():
     """The cut frames still match the sheet they came from.
 
@@ -420,6 +433,7 @@ def main():
     check_player_art()
     check_font()
     check_sfx()
+    check_music()
 
     if not hashes_only:
         check_script("headless_check", "src/tools/headless_check.gd",

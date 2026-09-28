@@ -68,6 +68,11 @@ const EXTENSIONS: Array = [".wav", ".ogg", ".mp3"]
 ## the same gun ask for one voice, not twenty.
 const MAX_VOICES := 16
 
+## How long a crossfade takes when nobody says. **Overridden in practice**:
+## `Music` hands it the transition's own length, so the music changes exactly
+## as the screen does.
+const FADE_SECONDS := 1.6
+
 ## How far a sound effect's pitch may wander, either way.
 ##
 ## **Repetition is the enemy of a cozy game.** Chopping one tree is twenty
@@ -136,6 +141,16 @@ var _warned: Dictionary = {}
 var _voices: Array = []
 var _frame := 0
 
+## **The music deck, which is not the voice pool.** Two slots that crossfade
+## into each other and one layer that sits over the top. Separate because a
+## ninety-six second loop taking one of sixteen shared voices - and never
+## giving it back - would be a gunshot lost every time the music started.
+var _deck: Array = []
+var _layer: AudioStreamPlayer = null
+var _playing := &""
+var _layer_id := &""
+var _fades: Array = []
+
 ## Its own generator rather than the global one, so that seeding the globals -
 ## which `src/tools/shot.gd` does to make the smoke reproducible - does not
 ## also decide what the next gunshot sounds like.
@@ -168,6 +183,21 @@ func build() -> void:
 			voice.name = "Voice%02d" % i
 			add_child(voice)
 			_voices.append(voice)
+	if _deck.is_empty():
+		for i in 2:
+			var slot := AudioStreamPlayer.new()
+			slot.name = "Music%d" % i
+			slot.bus = BUSES[&"music"]
+			slot.volume_db = linear_to_db(0.0)
+			add_child(slot)
+			_deck.append(slot)
+			_fades.append([0.0, 0.0, 0.0, 0.0])  # from, to, left, length
+		_layer = AudioStreamPlayer.new()
+		_layer.name = "MusicLayer"
+		_layer.bus = BUSES[&"music"]
+		_layer.volume_db = linear_to_db(0.0)
+		add_child(_layer)
+		_fades.append([0.0, 0.0, 0.0, 0.0])
 	scan()
 	var settings := _settings()
 	if settings != null:
@@ -178,8 +208,9 @@ func build() -> void:
 	apply_volumes()
 
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	_frame += 1
+	_advance_fades(delta)
 
 
 ## Put the ears somewhere. The camera follows the farmer, so this is the
@@ -254,6 +285,138 @@ func play(id: StringName, at: Vector2 = NOWHERE, gap: int = 1) -> bool:
 	_plays[id] = int(_plays.get(id, 0)) + 1
 	_started += 1
 	return true
+
+
+# ------------------------------------------------------------------ the music
+
+## What is playing, or `&""`. The controller asks before it decides.
+func music_playing() -> StringName:
+	return _playing
+
+
+func layer_playing() -> StringName:
+	return _layer_id
+
+
+## Start a piece, crossfading out whatever was on.
+##
+## **Asking for what is already playing does nothing**, which is what lets the
+## controller say what it wants every frame without restarting the loop sixty
+## times a second.
+func play_music(id: StringName, seconds: float = FADE_SECONDS) -> bool:
+	if id == _playing:
+		return false
+	if id != &"" and _stream_for(id) == null:
+		if not _warned.has(id):
+			_warned[id] = true
+			_warnings += 1
+			push_warning("Audio: no music called '%s'" % id)
+		return false
+
+	var free_slot := 0 if _level_of(0) <= _level_of(1) else 1
+	var busy_slot := 1 - free_slot
+	_fade_to(busy_slot, 0.0, seconds)
+	if id == &"":
+		_playing = &""
+		return true
+
+	var slot := _deck[free_slot] as AudioStreamPlayer
+	slot.stream = _looping(_stream_for(id))
+	slot.volume_db = linear_to_db(0.0)
+	if slot.is_inside_tree():
+		slot.play()
+	_fade_to(free_slot, 1.0, seconds)
+	_playing = id
+	return true
+
+
+## Bring the urgent layer in or take it out. It sits **over** the piece rather
+## than replacing it, so the last wave changes what the night sounds like
+## without stopping and starting it.
+func set_layer(id: StringName, seconds: float = FADE_SECONDS) -> bool:
+	if id == _layer_id:
+		return false
+	if id == &"":
+		_layer_id = &""
+		_fade_to(2, 0.0, seconds)
+		return true
+	if _stream_for(id) == null:
+		return false
+	if _layer != null:
+		_layer.stream = _looping(_stream_for(id))
+		_layer.volume_db = linear_to_db(0.0)
+		if _layer.is_inside_tree():
+			_layer.play()
+	_layer_id = id
+	_fade_to(2, 1.0, seconds)
+	return true
+
+
+## How loud one deck slot is, 0 to 1. The checks read it to watch a crossfade
+## happen rather than to be told that one did.
+func music_level(slot: int) -> float:
+	return _level_of(slot)
+
+
+## **Looping, set here rather than on the import.** Godot's WAV importer has
+## an `edit/loop_mode`, and an `.import` file is generated - a setting that
+## would come back the next time somebody reimported. This is a line of code
+## that cannot be undone by a tool.
+func _looping(stream: AudioStream) -> AudioStream:
+	var wav := stream as AudioStreamWAV
+	if wav != null and wav.loop_mode != AudioStreamWAV.LOOP_FORWARD:
+		wav.loop_mode = AudioStreamWAV.LOOP_FORWARD
+		wav.loop_begin = 0
+	return stream
+
+
+func _player_of(slot: int) -> AudioStreamPlayer:
+	if slot < _deck.size():
+		return _deck[slot] as AudioStreamPlayer
+	return _layer
+
+
+func _level_of(slot: int) -> float:
+	var player := _player_of(slot)
+	if player == null:
+		return 0.0
+	return db_to_linear(player.volume_db)
+
+
+## Start a fade. The record is where it came from, where it is going, how
+## much is left and how long it was - **the last of those is the one the first
+## version forgot**, and without it the curve is computed against a shrinking
+## denominator and lands early.
+func _fade_to(slot: int, target: float, seconds: float) -> void:
+	if slot >= _fades.size():
+		return
+	var length := maxf(seconds, 0.0)
+	_fades[slot] = [_level_of(slot), target, length, length]
+	if length <= 0.0:
+		_set_level(slot, target)
+
+
+func _set_level(slot: int, level: float) -> void:
+	var player := _player_of(slot)
+	if player == null:
+		return
+	player.volume_db = linear_to_db(clampf(level, 0.0, 1.0))
+	if level <= 0.0 and player.playing:
+		player.stop()
+
+
+func _advance_fades(delta: float) -> void:
+	for slot in _fades.size():
+		var fade: Array = _fades[slot]
+		var left := float(fade[2])
+		if left <= 0.0:
+			continue
+		left = maxf(left - delta, 0.0)
+		fade[2] = left
+		# Linear in amplitude, from where it started to where it is going.
+		var total := maxf(float(fade[3]), 0.0001)
+		var done := clampf(1.0 - left / total, 0.0, 1.0)
+		_set_level(slot, lerpf(float(fade[0]), float(fade[1]), done))
 
 
 ## Put a stream under an id.

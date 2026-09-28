@@ -41,7 +41,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 42
+const CASES := 43
 
 ## The pixels two pieces of text in one row must have between them. Two is
 ## the width of the gap inside a letter at this size, so anything less reads
@@ -118,6 +118,7 @@ func _run() -> void:
 	await _case_0083_audio()
 	await _case_0084_day_sounds()
 	await _case_0085_night_sounds()
+	await _case_0086_music()
 	_finish()
 
 
@@ -4270,5 +4271,100 @@ func _case_0085_night_sounds() -> void:
 
 	driver.running = true
 	audio.stop_all()
+	await close_scene()
+	_completed += 1     # last line: an abandoned case never gets here
+func _case_0086_music() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var view: WorldView = require_control("WorldView")
+	var music: Music = require_control("Music")
+	var audio: Node = root.get_node_or_null(^"Audio")
+	if driver == null or view == null or music == null or audio == null:
+		expect(music != null, "the Music node is in the scene")
+		_completed += 1
+		await close_scene()
+		return
+	var state := driver.state
+
+	# **One number, not two.** The done-when is that the crossfade lands with
+	# the switch of reality; the only way to be sure is for the length to be
+	# the transition's own, read from the view rather than typed again.
+	expect(is_equal_approx(music.fade_seconds(), view.transition_seconds()),
+		"the crossfade is exactly as long as the transition",
+		"%.2f against %.2f" % [music.fade_seconds(),
+			view.transition_seconds()])
+
+	await frames(6)
+	expect(String(audio.music_playing()) == "music/farm",
+		"the day plays the farm's music",
+		"'%s'" % audio.music_playing())
+	expect(String(audio.layer_playing()) == "",
+		"and nothing urgent is over the top of it")
+
+	# **They land together.** Both the screen and the deck are driven by the
+	# same delta, so rather than timing either of them this waits for the
+	# transition to finish and then asks whether the music has too. If the
+	# fade were longer the old piece would still be audible; if it were
+	# shorter it would have finished early and the swap would have been heard
+	# before the screen showed it.
+	await click_control("NightButton")
+	await until(func() -> bool: return int(state["phase"]) != Phases.DAY,
+		"the night to begin")
+	await frames(2)
+	expect(String(audio.music_playing()) == "music/night",
+		"switching reality asks for the night's music",
+		"'%s'" % audio.music_playing())
+	var mid_high: float = maxf(audio.music_level(0), audio.music_level(1))
+	var mid_low: float = minf(audio.music_level(0), audio.music_level(1))
+	expect(mid_high < 0.99 and mid_low > 0.0 or view.transition_seconds() <= 0.0,
+		"and part way through, both pieces are sounding at once",
+		"%.2f and %.2f" % [mid_high, mid_low])
+
+	await until(func() -> bool: return not view.is_transitioning(),
+		"the change of reality to end", 900)
+	await frames(4)
+	var high: float = maxf(audio.music_level(0), audio.music_level(1))
+	var low: float = minf(audio.music_level(0), audio.music_level(1))
+	expect(high > 0.9,
+		"when the screen has finished changing, the night's music is up",
+		"%.2f" % high)
+	expect(low < 0.1,
+		"and the farm's has gone",
+		"%.2f" % low)
+
+	# **The urgent layer arrives on the last wave, and not before.**
+	#
+	# Into the night proper first: clicking the button lands in PREPARATION,
+	# which is twenty seconds long and has no wave table yet - the first
+	# version of this asked a night that had not started and got `[0, 0]`,
+	# then set the wave index to zero and wondered why nothing was urgent.
+	expect(String(audio.layer_playing()) == "",
+		"the first wave is not the urgent one",
+		"'%s'" % audio.layer_playing())
+	Sim.advance(state, GameData.PREPARATION_TICKS + 2)
+	await frames(4)
+	expect(int(state["phase"]) == Phases.NIGHT, "the wave is actually coming",
+		Phases.name_of(int(state["phase"])))
+	var table := Waves.progress(state)
+	expect(int(table[1]) > 0, "and tonight has waves in its table",
+		str(table))
+	var wave: Dictionary = state["wave"]
+	wave["index"] = maxi(int(table[1]) - 1, 0)
+	await frames(4)
+	expect(String(audio.layer_playing()) == "music/night_intensity",
+		"the last wave brings the urgent layer in",
+		"'%s' on wave %s" % [audio.layer_playing(),
+			str(Waves.progress(state))])
+
+	# And it goes again when the night does.
+	Phases.enter_result(state, true)
+	await frames(4)
+	expect(String(audio.layer_playing()) == "",
+		"and it goes when the night is over",
+		"'%s'" % audio.layer_playing())
+	expect(String(audio.music_playing()) == "music/night",
+		"while the result screen keeps the night in the air",
+		"'%s'" % audio.music_playing())
+
 	await close_scene()
 	_completed += 1     # last line: an abandoned case never gets here

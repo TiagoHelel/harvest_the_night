@@ -62,6 +62,10 @@ const DEFAULTS := {
 	&"audio/sfx": 1.0,
 	&"audio/ambience": 0.7,
 	&"audio/muted": false,
+	# Task 0086. **False, because a title screen that starts a tune before
+	# the player has decided whether they want one is a title screen people
+	# mute.** The game itself always has music; this is only the menus.
+	&"audio/music_in_menus": false,
 
 	&"gameplay/language": "en",
 	&"gameplay/night_speed": 1,
