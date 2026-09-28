@@ -17,7 +17,15 @@ A build to put in front of someone, with the instrumentation to learn something 
 - An in-game feedback key that timestamps a note into the log
 - It is obvious it is a playtest build
 
+- **Carried over from task 0101**: watch a first-time player through
+  day one and night one and write down where they stopped. 0101 built
+  the seven lines and measured which four a player clears without
+  reading; the three that have to be read - the stall, putting a
+  defence down, and sending for the night - are what to watch.
+
 ## Done when
+- [ ] The journal names where the first-time player hesitated on day
+      one, because that is the finding task 0101 could not make
 
 - [ ] A session produces a readable log
 - [ ] `tools/playtest.py` summarises a folder of logs into the questions that matter

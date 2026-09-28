@@ -4857,11 +4857,15 @@ func _a_busy_day(seed_value: int, at_the_pond: bool) -> Dictionary:
 ##   pond ends with a full can and a day at the bench does not.
 ## - `fishing` is a line in the water, which is given up by walking away
 ##   (task 0030).
+## - `tutorial` is a record of what the player has done, and walking to the
+##   well is one of the things they can do (task 0101). A day at the pond
+##   learns the watering line and a day at the bench does not, which is the
+##   tutorial watching rather than the farm caring.
 ##
 ## **Nothing that produces anything is on that list**, which is the task.
 func _hash_of_the_farm(state: Dictionary) -> int:
 	var bare: Dictionary = state.duplicate(true)
-	for key in ["player", "intent", "water_can", "fishing"]:
+	for key in ["player", "intent", "water_can", "fishing", "tutorial"]:
 		bare.erase(key)
 	return State.hash_of(bare)
 
@@ -5198,9 +5202,44 @@ func _task_0040_shop() -> void:
 func _task_0041_tutorial() -> void:
 	# **Five lines, and seven allowed.** Short enough to read walking.
 	var steps := Tutorial.steps()
-	expect(steps.size() <= GameData.MAX_TUTORIAL_LINES,
-		"day one says no more than the task allows",
+	expect(steps.size() == 7,
+		"day one is seven lines, which is what the task allows",
 		"%d lines" % steps.size())
+	expect(steps.size() <= GameData.MAX_TUTORIAL_LINES,
+		"and no more than the table allows either",
+		"%d of %d" % [steps.size(), GameData.MAX_TUTORIAL_LINES])
+
+	# **Each appears on the thing it describes.** A line with nowhere to
+	# point is a line in a corner, which is a manual.
+	var homeless: Array = []
+	for entry in steps:
+		var one: Dictionary = entry
+		var pointing := State.create(4101)
+		for other in steps:
+			var id := StringName((other as Dictionary)["id"])
+			if id == StringName(one["id"]):
+				break
+			((pointing["tutorial"] as Dictionary)["done"] as Array).append(id)
+		if Tutorial.points_at(pointing) == Tutorial.NOWHERE:
+			homeless.append(String(one["id"]))
+	expect(homeless.is_empty(),
+		"every line has something on the farm to sit on",
+		", ".join(homeless))
+
+	# **The switch is shown, not described.** The transition is two seconds
+	# of the same farm going dark; a line that said so in words would be
+	# spending a stranger's attention on something about to happen to them.
+	var telling: Array = []
+	for entry in steps:
+		var said := I18n.t(StringName((entry as Dictionary)["line"])).to_lower()
+		for word in ["defend", "defence", "battlefield", "zombie", "horde",
+				"fortress", "tower defence", "wave"]:
+			if said.contains(word):
+				telling.append("%s says '%s'"
+					% [(entry as Dictionary)["id"], word])
+	expect(telling.is_empty(),
+		"and none of them explains the switch in words",
+		", ".join(telling))
 	expect(GameData.check_tutorial(steps).is_empty(),
 		"and the shipped lines pass their own check",
 		str(GameData.check_tutorial(steps)))
@@ -5210,6 +5249,38 @@ func _task_0041_tutorial() -> void:
 		I18n.t(StringName((entry as Dictionary)["line"])).length())
 	print("  day one: %d lines, longest %d characters"
 		% [steps.size(), longest])
+
+	# **Which lines ordinary play clears on its own.** A player who reads
+	# nothing and simply does the obvious things - chop, sow, fill the can,
+	# queue a kit, put it down - clears most of these without help. What is
+	# left over is what the lines are actually for.
+	var ordinary := State.create(4101)
+	Resources.gain(ordinary, {GameData.WOOD: 40, GameData.STONE: 40})
+	var a_plot := _a_plot(ordinary)
+	Farming.act(ordinary, a_plot)
+	Farming.act(ordinary, a_plot)
+	ordinary["water_can"] = 2
+	var a_bench := Building.anchor_of(ordinary,
+		Farm.cells_with(ordinary, &"workshop")[0])
+	Crafting.enqueue(ordinary, a_bench, &"wall_kit")
+	Sim.advance(ordinary, GameData.TUTORIAL_CHECK_TICKS + 1)
+	var cleared: Array = []
+	var still_up: Array = []
+	for entry in steps:
+		var id := StringName((entry as Dictionary)["id"])
+		if Tutorial.is_done(ordinary, id):
+			cleared.append(String(id))
+		else:
+			still_up.append(String(id))
+	print("  an hour of ordinary play clears %d of them: %s"
+		% [cleared.size(), ", ".join(cleared)])
+	print("  and leaves these to be read: %s" % ", ".join(still_up))
+	expect(cleared.size() >= 4,
+		"most of day one teaches itself by being played",
+		"%d of %d" % [cleared.size(), steps.size()])
+	expect(still_up.has("sell"),
+		"and the stall is one nothing leads you to, which is why it has a "
+		+ "line", ", ".join(still_up))
 
 	var wordy: Array = steps.duplicate(true)
 	(wordy[0] as Dictionary)["line"] = "x".repeat(200)
@@ -5229,7 +5300,8 @@ func _task_0041_tutorial() -> void:
 	var ids: Array = []
 	for entry in steps:
 		ids.append(StringName((entry as Dictionary)["id"]))
-	for wanted in [&"chop", &"plant", &"craft", &"build", &"night"]:
+	for wanted in [&"chop", &"plant", &"water", &"sell", &"craft",
+			&"build", &"night"]:
 		expect(ids.has(wanted), "day one covers %s" % wanted, str(ids))
 
 	# **It starts at the beginning and points at something.**
@@ -5346,14 +5418,18 @@ func _task_0041_tutorial() -> void:
 	# **The last line finishes when the night is sent for**, which is the one
 	# step the player cannot do by accident.
 	var sender := State.create(2303)
-	for id in [&"chop", &"plant", &"craft", &"build"]:
-		((sender["tutorial"] as Dictionary)["done"] as Array).append(id)
+	for entry in Tutorial.steps():
+		var id := StringName((entry as Dictionary)["id"])
+		if id != &"night":
+			((sender["tutorial"] as Dictionary)["done"] as Array).append(id)
 	expect(Tutorial.current(sender)["id"] == &"night",
 		"the last line is about the button", str(Tutorial.current(sender)))
 	expect(not Tutorial.is_finished(sender), "and it is not finished yet")
 	Phases.begin_preparation(sender)
+	expect(Tutorial.is_done(sender, &"night"),
+		"sending for the night finishes that line")
 	expect(Tutorial.is_finished(sender),
-		"sending for the night finishes day one")
+		"and it was the last one, so day one is taught")
 
 	_completed += 1     # last line: an abandoned group never gets here
 

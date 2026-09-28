@@ -8909,3 +8909,113 @@ Both unchanged - `215410677` and `2842078959`. A build is not a rule.
 
 `python tools/verify.py` prints PASS: 6075 asserts, 930 input cases, 0 failed,
 **19 rows and no SKIP**.
+## 0101 - Onboarding in seven lines - done 2026-09-28
+
+What changed: day one has seven lines instead of five. The two new ones are
+the stall and the water, which are the two things a stranger would otherwise
+never find, and they go where a first day actually happens rather than at the
+end of the list.
+
+Files: `src/core/game_data.gd`, `src/core/tutorial.gd`,
+`assets/locale/strings.csv`, `src/tools/headless_check.gd`,
+`implementation/prompts/0105-playtest-build.md`.
+
+Verify: 6083 headless / 930 input.
+**Sim hash 215410677 -> 4262811284** and
+**data hash 2842078959 -> 407837701**, both deliberately - below.
+Shot: `implementation/shots/0101/noon.png`.
+
+### The seven, in the order a day happens in
+
+    chop  →  plant  →  water  →  sell  →  craft  →  build  →  night
+
+Task 0041 had five and they were in a sensible order already. The two new ones
+are placed where they are *about the thing that just happened*: watering is
+about the seed put in one second ago, and the stall is about the wood in your
+hands. Putting them at the end would have made them a list rather than a day.
+
+### What ordinary play clears on its own, which is the only thing here I could measure
+
+An hour of ordinary play - chop a tree, till and sow a plot, walk past the
+water, queue a kit - clears **four of the seven** without reading a word:
+chop, plant, water, craft.
+
+**Three are left to be read: the stall, putting a defence down, and sending
+for the night.** Those three are what the lines are actually for. It is
+printed by the suite every run, so the day it changes somebody will see it.
+
+That is a measurement of the game, not of a person, and it is not what the
+task asked for. See the last section.
+
+### Two nearly-right versions of "they found the stall"
+
+The `sell` step is finished by having **more money than you started with**,
+and getting there took two wrong answers:
+
+- *"The stall is open"* cannot be seen at all. The shop stops the clock (task
+  0039), so no tick happens while it is up, and `Tutorial.tick` never sees it.
+- *"The money changed"* is true the moment the player sows their first seed,
+  because a seed costs money. The measurement above is what caught it: an hour
+  of ordinary play cleared the stall line with nobody going anywhere near the
+  stall.
+
+On day one, money going **up** can only have come out of the stall.
+
+### The switch is shown, not described
+
+Nothing in the seven says what the night does to the farm. The transition
+already shows it - two seconds of the same tiles going dark - and a line that
+said "your farm becomes the map you defend" would spend a stranger's attention
+on something the game is about to do to them anyway.
+
+There is a check for it now: no line may contain *defend*, *battlefield*,
+*zombie*, *horde*, *fortress* or *wave*. Putting that sentence on the night
+line fails it by name.
+
+### The shot found the water line pointing off the screen
+
+It pointed at the well, the well was off the bottom of the screen, and the
+bubble clamped to the edge with its arrow into the dark. The can fills at any
+water - the pond edge included, with no keypress - so it points at whichever
+is nearest and the words say water rather than naming the well. The bubble now
+sits on the pond four tiles from the farmer.
+
+Found by opening the picture, which is what step 4 is for.
+
+### The tutorial is on the "things that watch the player" list
+
+Task 0038's check says the farm does not care where the farmer stands, and it
+broke: a day at the pond now clears the watering line and a day at the bench
+does not, because the can fills by standing next to water. That is the
+tutorial doing its job, not the farm caring - so `tutorial` joins `player`,
+`intent`, `water_can` and `fishing` on the list of things that are *supposed*
+to depend on where somebody stood. Nothing that produces anything is on it.
+
+### Hashes, both of them
+
+**Data `2842078959 -> 407837701`**: `GameData.TUTORIAL` has two more rows.
+
+**Sim `215410677 -> 4262811284`**: the tutorial's `done` list is game state,
+and it now records two more things, at particular ticks, during the scenario
+the guard runs. Checked rather than assumed: `_happened` for both new steps
+only reads, `_target_for` only reads, and `tick` only appends - so the two ids
+are the whole of the change.
+
+### What this task could not do, and where it went
+
+Two of the done-whens are **"a first-time player reaches the end of night 1
+without being told anything out loud"** and **"the journal names where they
+hesitated, because that is the finding"**. Neither is something I can do: it
+needs a person at a keyboard who has not seen this game, and somebody watching
+them.
+
+Everything else is built and checked. The observation is carried into **task
+0105**, whose prompt is edited to say so - it is the task about putting a
+build in front of somebody, which is exactly when the watching happens, and it
+now names the three lines to watch: the stall, putting a defence down, and
+sending for the night.
+
+Said plainly rather than ticked: **this task's finding is still owed.**
+
+`python tools/verify.py` prints PASS: 6083 asserts, 930 input cases, 0 failed,
+19 rows, no skips.

@@ -1,7 +1,7 @@
 # 0101 - Onboarding in seven lines
 
 - **Phase:** 8 - Ship the MVP
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0041, 0097
 - **Likely files:** src/core/tutorial.gd
 

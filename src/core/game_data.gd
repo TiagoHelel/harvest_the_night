@@ -860,9 +860,21 @@ const DAILY_STOCK: Dictionary = {        # LEVER: units a day, 2-40
 ## and `assets/locale/strings.csv` holds what it says - so a rule file names
 ## a step and never speaks to a player, and the Portuguese arrives without
 ## anything in `src/core/` changing.
+## **Seven, in the order a first day happens in.** Task 0101 added the two
+## a stranger would otherwise never find - the well and the stall - and put
+## them where they are about the thing that just happened: watering is about
+## the seed you have this second put in, and the stall is about the wood in
+## your hands.
+##
+## Nothing here describes the switch of reality. The transition shows it, and
+## a line that said "your farm becomes the map you defend" would be a line
+## spending a stranger's attention on something the game is about to do to
+## them anyway. There is a check for that.
 const TUTORIAL: Array = [
 	{"id": &"chop", "line": &"TUT_CHOP"},
 	{"id": &"plant", "line": &"TUT_PLANT"},
+	{"id": &"water", "line": &"TUT_WATER"},
+	{"id": &"sell", "line": &"TUT_SELL"},
 	{"id": &"craft", "line": &"TUT_CRAFT"},
 	{"id": &"build", "line": &"TUT_BUILD"},
 	{"id": &"night", "line": &"TUT_NIGHT"},

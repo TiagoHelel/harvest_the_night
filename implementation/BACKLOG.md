@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`######################..`  **100 / 110 done**
+`######################..`  **101 / 110 done**
 
-0 doing / 10 todo / 0 blocked across 9 phases.
+0 doing / 9 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0101 - Onboarding in seven lines**. The whole of what is left is
+First up: **0102 - A performance budget**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,24 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-10 task(s) left, the ready ones first, then what they
+9 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0101 - Onboarding in seven lines
-
-Ready to pick up.  Likely files: `src/core/tutorial.gd`.
-
-A stranger reaches night 1 and understands the loop, with no more text than the design document allows.
-
-- Seven lines, total, across the whole first day
-- Each appears on the thing it describes
-- The reality switch is explained by showing it, not by describing it
-- Every line is translated
-- Watch someone play it and write down where they stopped
-
-  - done when: A first-time player reaches the end of night 1 without being told anything out loud
-  - done when: The journal names where they hesitated, because that is the finding
 
 ### 0102 - A performance budget
 
@@ -304,9 +289,9 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0100** [Exports: Windows and Web](prompts/0100-exports.md)
 - [ ] **0110** [Refusals in two languages](prompts/0110-refusals.md)
 
-## 8 - Ship the MVP  (0/8)
+## 8 - Ship the MVP  (1/8)
 
-- [ ] **0101** [Onboarding in seven lines](prompts/0101-onboarding.md)
+- [x] **0101** [Onboarding in seven lines](prompts/0101-onboarding.md)
 - [ ] **0102** [A performance budget](prompts/0102-perf-budget.md)
 - [ ] **0103** [Crash and error reporting](prompts/0103-error-report.md)
 - [ ] **0104** [Saves survive an update](prompts/0104-save-compat.md)

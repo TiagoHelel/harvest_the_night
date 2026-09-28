@@ -4,7 +4,7 @@ extends RefCounted
 ## Day one teaches itself.
 ##
 ## `design.md` does not have a tutorial level and is not getting one. What it
-## has is a first day on the same farm as every other day, with **five short
+## has is a first day on the same farm as every other day, with **seven short
 ## lines** that appear on the thing they are about and go away the moment you
 ## do it.
 ##
@@ -14,7 +14,7 @@ extends RefCounted
 ## must chop a tree before you may plant", no greyed button, no cage. A step is
 ## finished when the state says it happened, whether the player read the line
 ## or found it on their own - and a player who already knows the game will walk
-## past all five in about forty seconds without ever reading one.
+## past all seven in about forty seconds without ever reading one.
 ##
 ## That is the difference between teaching and locking, and it is also why this
 ## is safe: **removing every prompt changes nothing about what is possible.**
@@ -102,6 +102,17 @@ static func _target_for(state: Dictionary, id: StringName) -> Vector2i:
 						and Farming.crop_on(state, cell) == &"":
 					bare.append(cell)
 			return _nearest(state, bare)
+		&"water":
+			# **Whichever water is nearest**, the pond included. Pointing at
+			# the well alone put the arrow off the bottom of the screen on
+			# a farm where the pond was four tiles away - seen in the shot,
+			# not reasoned about.
+			var wet: Array = Farm.cells_with(state, &"well")
+			for found in Farm.cells_of(state, Farm.Terrain.WATER):
+				wet.append(found)
+			return _nearest(state, wet)
+		&"sell":
+			return _nearest(state, Farm.cells_with(state, &"shop"))
 		&"craft":
 			return _nearest(state, Farm.cells_with(state, &"workshop"))
 		&"build":
@@ -181,6 +192,30 @@ static func _happened(state: Dictionary, id: StringName) -> bool:
 				if Farming.crop_on(state, found) != &"":
 					return true
 			return false
+		&"water":
+			# **Carrying counts.** Walking to the well fills the can with no
+			# keypress at all, so a player who has water in hand has found
+			# the thing this line is about whether or not they have poured it
+			# on anything yet.
+			if Farming.water_carried(state) > 0:
+				return true
+			for found in Farm.cells_of(state, Farm.Terrain.SOIL):
+				if Farming.is_watered(state, found):
+					return true
+			return false
+		&"sell":
+			# **More money than you started with**, which on day one can
+			# only have come out of the stall.
+			#
+			# Two nearly-right versions came before this. "The stall is
+			# open" cannot be seen at all: the shop stops the clock (task
+			# 0039), so no tick happens while it is up. "The money
+			# changed" is true the moment the player sows their first
+			# seed, because a seed costs money - measured, by watching an
+			# hour of ordinary play clear this line with nobody going
+			# anywhere near the stall.
+			return Resources.amount(state, GameData.MONEY) \
+				> int(GameData.STARTING_RESOURCES.get(GameData.MONEY, 0))
 		&"craft":
 			if not (state["kits"] as Dictionary).is_empty():
 				return true
