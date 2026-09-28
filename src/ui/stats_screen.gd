@@ -138,7 +138,7 @@ func _label(node_name: String, at: Vector2, colour: Color) -> Label:
 	label.position = at
 	label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	label.modulate = colour
-	label.add_theme_font_size_override("font_size", 9)
+	label.add_theme_font_size_override("font_size", 8)
 	if _frame != null:
 		_frame.add_child(label)
 	else:

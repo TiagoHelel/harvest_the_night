@@ -1,0 +1,17 @@
+[remap]
+
+importer="font_data_bmfont"
+type="FontFile"
+uid="uid://bpp0erux8ui08"
+path="res://.godot/imported/harvest_hud.fnt-3f1be6b73b4e3b4ca9dda4c1a553bc32.fontdata"
+
+[deps]
+
+source_file="res://assets/fonts/harvest_hud.fnt"
+dest_files=["res://.godot/imported/harvest_hud.fnt-3f1be6b73b4e3b4ca9dda4c1a553bc32.fontdata"]
+
+[params]
+
+fallbacks=[]
+compress=true
+scaling_mode=2

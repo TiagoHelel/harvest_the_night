@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`#################.......`  **79 / 109 done**
+`##################......`  **80 / 109 done**
 
-0 doing / 30 todo / 0 blocked across 9 phases.
+0 doing / 29 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0080 - A pixel font**. The whole of what is left is
+First up: **0081 - The UI theme**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,24 +26,23 @@ which rewrites this file for you.
 
 ## What is open
 
-30 task(s) left, the ready ones first, then what they
+29 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
-### 0080 - A pixel font
+### 0081 - The UI theme
 
-Ready to pick up.  Likely files: `tools/gen_font.py, assets/fonts/`.
+Ready to pick up.  Likely files: `assets/theme.tres, src/ui/`.
 
-Type that is crisp at 480x270 and does not fight the art.
+One Theme resource every control uses, so a colour change is one edit and no screen is the odd one out.
 
-- A bitmap font generated from the same kind of ASCII maps as the sprites
-- Full Latin-1 coverage, so Portuguese accents work when 0097 arrives
-- Two sizes: HUD and heading
-- No filtering, no hinting, integer positions only
-- Numbers are tabular so a counter does not jitter
+- Every Control style in one Theme: no per-node style overrides anywhere
+- Built from the palette and the UI kit, not from Godot's defaults
+- Focus, hover and disabled states defined for everything interactive
+- A UI scale factor that works at every integer window scale
 
-  - done when: Every accented character in the Portuguese strings renders
-  - done when: A changing number does not shift the text around it
+  - done when: `grep` finds no `add_theme_*_override` left in `src/ui/`
+  - done when: Every screen looks like the same game
 
 ### 0082 - Screenshots, and actually looking at them
 
@@ -150,20 +149,6 @@ The little bubbles on the owner's sheet - !, ?, a heart, a note, an idea, a star
   - done when: A reaction appears on the tick the thing happens and clears itself
   - done when: Turning them all off leaves the determinism hash unchanged
 
-### 0081 - The UI theme
-
-Waits on 0080.  Likely files: `assets/theme.tres, src/ui/`.
-
-One Theme resource every control uses, so a colour change is one edit and no screen is the odd one out.
-
-- Every Control style in one Theme: no per-node style overrides anywhere
-- Built from the palette and the UI kit, not from Godot's defaults
-- Focus, hover and disabled states defined for everything interactive
-- A UI scale factor that works at every integer window scale
-
-  - done when: `grep` finds no `add_theme_*_override` left in `src/ui/`
-  - done when: Every screen looks like the same game
-
 ### 0084 - The sounds of the day
 
 Waits on 0083.  Likely files: `tools/gen_sfx.py, assets/sfx/`.
@@ -207,20 +192,6 @@ One warm loop for the farm, one cold one for the night, and a crossfade on the r
 
   - done when: The loop point is inaudible
   - done when: The crossfade lands with the transition, not before or after it
-
-### 0087 - Ambience
-
-Waits on 0084, 0085.  Likely files: `src/app/ambience.gd`.
-
-The bed under everything: birds and water by day, wind and distant groaning by night.
-
-- A day bed and a night bed, cross-fading with the transition
-- Positional touches: the pond is louder near the pond
-- It ducks under an important sound rather than fighting it
-- It is on its own bus so it can be turned down alone
-
-  - done when: Standing still on the farm for a minute is pleasant, not empty
-  - done when: The ambience never masks the house-damage sound
 
 ### 0089 - Tooltips
 
@@ -282,6 +253,20 @@ Every string through a translation table, with pt-BR alongside English - the ref
   - done when: The checker reports zero missing keys in both languages
   - done when: Switching language mid-game updates every visible screen
   - done when: No pt-BR string overflows its control - the checker proves it
+
+### 0087 - Ambience
+
+Waits on 0084, 0085.  Likely files: `src/app/ambience.gd`.
+
+The bed under everything: birds and water by day, wind and distant groaning by night.
+
+- A day bed and a night bed, cross-fading with the transition
+- Positional touches: the pond is louder near the pond
+- It ducks under an important sound rather than fighting it
+- It is on its own bus so it can be turned down alone
+
+  - done when: Standing still on the farm for a minute is pleasant, not empty
+  - done when: The ambience never masks the house-damage sound
 
 ### 0092 - The main menu and the router
 
@@ -562,7 +547,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0069** [Run statistics](prompts/0069-stats.md)
 - [x] **0070** [Endless nights past ten](prompts/0070-endless.md)
 
-## 5 - Art and visual direction  (9/13)
+## 5 - Art and visual direction  (10/13)
 
 - [x] **0071** [The two palettes](prompts/0071-palettes.md)
 - [x] **0072** [The farm tileset](prompts/0072-tileset.md)
@@ -574,8 +559,8 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0077** [Particles](prompts/0077-particles.md)
 - [x] **0078** [The reality transition](prompts/0078-transition.md)
 - [x] **0079** [Resource icons and the UI kit](prompts/0079-ui-kit.md)
-- [ ] **0080** [A pixel font](prompts/0080-font.md)
-- [ ] **0081** [The UI theme](prompts/0081-theme.md) - needs 0080
+- [x] **0080** [A pixel font](prompts/0080-font.md)
+- [ ] **0081** [The UI theme](prompts/0081-theme.md)
 - [ ] **0082** [Screenshots, and actually looking at them](prompts/0082-screenshots.md)
 
 ## 6 - Sound and juice  (0/8)

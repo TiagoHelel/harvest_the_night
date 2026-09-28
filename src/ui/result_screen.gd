@@ -75,7 +75,7 @@ func _ready() -> void:
 	_continue.text = "BACK TO THE FARM"
 	_continue.clip_text = true
 	_continue.custom_minimum_size = Vector2(206, 20)
-	_continue.add_theme_font_size_override("font_size", 9)
+	_continue.add_theme_font_size_override("font_size", 8)
 	_continue.focus_mode = Control.FOCUS_ALL
 	_continue.pressed.connect(_confirm)
 	column.add_child(_continue)
@@ -88,7 +88,7 @@ func _ready() -> void:
 	_play_on.text = "PLAY ON - THE NIGHTS KEEP COMING"
 	_play_on.clip_text = true
 	_play_on.custom_minimum_size = Vector2(206, 20)
-	_play_on.add_theme_font_size_override("font_size", 9)
+	_play_on.add_theme_font_size_override("font_size", 8)
 	_play_on.focus_mode = Control.FOCUS_ALL
 	_play_on.visible = false
 	_play_on.pressed.connect(_carry_on)
@@ -276,13 +276,13 @@ func _row(left: String, right: String, colour: Color) -> void:
 	var a := Label.new()
 	a.text = left
 	a.custom_minimum_size = Vector2(150, 0)
-	a.add_theme_font_size_override("font_size", 9)
+	a.add_theme_font_size_override("font_size", 8)
 	a.modulate = colour
 	row.add_child(a)
 
 	var b := Label.new()
 	b.text = right
-	b.add_theme_font_size_override("font_size", 9)
+	b.add_theme_font_size_override("font_size", 8)
 	b.modulate = colour
 	row.add_child(b)
 

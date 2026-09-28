@@ -70,7 +70,7 @@ func _ready() -> void:
 		tab.text = str(side).to_upper()
 		tab.toggle_mode = true
 		tab.custom_minimum_size = Vector2(72, 14)
-		tab.add_theme_font_size_override("font_size", 9)
+		tab.add_theme_font_size_override("font_size", 8)
 		tab.pressed.connect(func() -> void: Shop.show_tab(_state, side))
 		_tabs.add_child(tab)
 	column.add_child(_tabs)

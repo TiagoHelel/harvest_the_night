@@ -59,7 +59,7 @@ func _ready() -> void:
 	var title := Label.new()
 	title.name = "BuildTitle"
 	title.text = "BUILD"
-	title.add_theme_font_size_override("font_size", 9)
+	title.add_theme_font_size_override("font_size", 8)
 	column.add_child(title)
 
 	_rows = VBoxContainer.new()

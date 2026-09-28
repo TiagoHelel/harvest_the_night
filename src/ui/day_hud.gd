@@ -159,7 +159,7 @@ func _ready() -> void:
 	_night.text = "SWITCH TO NIGHT"
 	_night.position = Vector2(352, 248)
 	_night.size = Vector2(124, 18)
-	_night.add_theme_font_size_override("font_size", 9)
+	_night.add_theme_font_size_override("font_size", 8)
 	_night.focus_mode = Control.FOCUS_ALL          # the keyboard can reach it
 	_night.pressed.connect(_ask_for_night)
 	add_child(_night)
@@ -412,6 +412,6 @@ func _label(node_name: String, at: Vector2, colour: Color) -> Label:
 	label.position = at
 	label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	label.modulate = colour
-	label.add_theme_font_size_override("font_size", 9)
+	label.add_theme_font_size_override("font_size", 8)
 	add_child(label)
 	return label

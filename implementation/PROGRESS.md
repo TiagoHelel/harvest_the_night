@@ -6477,3 +6477,103 @@ view files swapping one `StyleBoxFlat` for another.
 
 `python tools/verify.py` prints PASS: 5062 asserts, 655 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+
+## 0080 - A pixel font - done 2026-09-28
+
+What changed: the game has its own letters. `tools/font_maps.py` draws them as
+ASCII maps, `tools/gen_font.py` turns those into two BMFont faces, and every
+label in the game wears them. Screenshot:
+`implementation/shots/0080-font.png` - a specimen above, the HUD below.
+
+Files: `tools/font_maps.py` (new), `tools/gen_font.py` (new),
+`assets/fonts/` (generated), `src/ui/ui_kit.gd`, `src/ui/main.gd`,
+`project.godot`, `tools/verify.py`, eight files in `src/ui/`,
+`src/tools/headless_check.gd`.
+
+Verify: 5096 headless / 655 input / both hashes unchanged.
+
+### Drawn, and then composed
+
+The ninety-five printable ASCII characters are drawn. **Fifty-three accented
+letters are not** - they are a base letter with a mark laid over it, which is
+what an accented letter is. Drawing fifty of them by hand would be fifty
+chances to draw the same E slightly differently, and the five marks are the
+same five for all of them.
+
+The same argument as task 0072's edge tiles and task 0074's poses, and here it
+is not even a compromise: a composed é *is* an e with an acute on it.
+
+### The cell was one row short in two places
+
+The first version was seven rows: marks on rows 0-1, capitals on 1-5,
+lowercase on whatever was left. Rendered, it was wrong twice over.
+
+- **An accent touched its letter.** With the mark ending on row 1 and the
+  letter starting on row 1, á was a single blob.
+- **Lowercase had an x-height of three.** "the quick brown fox" came out as a
+  row of squares - legible as a shape, not as words.
+
+Eight rows fixes both: the mark has row 0, row 1 is clear, capitals take 2-6
+and lowercase 3-6, and descenders have row 7. Which also makes the face eight
+pixels a line - the size twelve labels in the game already asked for.
+
+### Tabular numbers, and letters that are not
+
+Each glyph is trimmed to its ink, so `I` is one pixel wide and `M` is five.
+**Digits are the exception**: all ten take the widest digit's box, centred, so
+a counter going 9 to 10 to 99 moves nothing beside it. That is the done-when,
+and it is asserted as a fact about the font rather than by looking at a HUD:
+every digit measures the same width, `"1 wood"` and `"8 wood"` measure the
+same, **and** `MMM` is wider than `iii` - because a font where everything is
+the same width would pass the first two by accident and be a terminal.
+
+### Full Latin-1, and the assert that made me mean it
+
+I wrote "full Latin-1 coverage" and then wrote a check that walks 0x20 to 0xFF
+and counts. It found **thirty-two holes** - the fractions, the ligatures, eth,
+thorn, sharp s, the ordinals, the currency signs. None of them is in a string
+this game has, and a font with a hole in it is a font that renders a box the
+first time somebody pastes a name into it. They are drawn now and the count is
+zero.
+
+Every accented character Portuguese needs is there for task 0097, in both
+faces.
+
+### Two sizes, one design
+
+The HUD face is the maps at their drawn size and the heading face is the same
+maps at exactly twice it. A whole-number scale of a bitmap is still a bitmap;
+a second face drawn at double size would be a second font to keep in step, and
+the one thing worse than a font with no headings is two fonts that drift.
+
+**Everything in `src/ui/` was normalised to ask for 8 or 16.** Thirteen labels
+asked for 9 and one for 12, which on a bitmap font are 1.125x and 1.5x - a
+blurred bitmap, which is the one thing a pixel font must not be. All 655 input
+cases still pass, which was the thing I expected to have to fix and did not.
+
+### A line of configuration that silently did nothing
+
+`gui/theme/custom_font` in `project.godot`, with the path to the `.fnt` in it,
+**read back as an empty string**. `gui/theme/default_font_size` next to it
+took fine. I did not chase why Godot refuses a `.fnt` through that setting:
+`UiKit.theme()` builds a `Theme` and `Main` puts it on the UI root, which is
+one line of code that demonstrably works instead of one line of config that
+demonstrably does not.
+
+Found by asking a `Label` what font it had rather than by looking at a
+screenshot and deciding it looked about right - the screenshot is what said
+something was wrong, and the question is what said what.
+
+### A new row in verify
+
+`font` runs `python tools/gen_font.py --check`, so a letter painted over in an
+editor is a letter the maps no longer own, and the suite says so. Same
+argument as the `sprites` and `player art` rows.
+
+### Hashes
+
+Both unchanged - `2555959448` and `2601044827`. Maps, generated files and the
+view.
+
+`python tools/verify.py` prints PASS: 5096 asserts, 655 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 72
+const GROUPS := 73
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -136,6 +136,7 @@ func _run() -> void:
 	_task_0077_particles()
 	_task_0078_transition()
 	_task_0079_ui_kit()
+	_task_0080_font()
 
 
 func _finish() -> void:
@@ -12133,3 +12134,91 @@ func _border_matches(frame_name: String) -> void:
 	expect(border == UiKit.MARGIN,
 		"the %s's drawn border is the margin the code slices at" % frame_name,
 		"%d against %d" % [border, UiKit.MARGIN])
+
+
+## 0080 - the pixel font.
+func _task_0080_font() -> void:
+	var hud := UiKit.font()
+	var heading := UiKit.heading_font()
+	expect(hud != null, "the HUD face loads")
+	expect(heading != null, "and so does the heading face")
+	if hud == null or heading == null:
+		_completed += 1
+		return
+
+	# **Two sizes, and the second is exactly twice the first.** Anything in
+	# between is a bitmap at a fractional scale, which is a blurred bitmap.
+	expect(int(hud.get_height(UiKit.FONT_SIZE)) == UiKit.FONT_SIZE,
+		"the HUD face is drawn at the size it is asked for",
+		"%d against %d" % [int(hud.get_height(UiKit.FONT_SIZE)),
+			UiKit.FONT_SIZE])
+	expect(UiKit.HEADING_SIZE == UiKit.FONT_SIZE * 2,
+		"and the heading is exactly twice it",
+		"%d against %d" % [UiKit.HEADING_SIZE, UiKit.FONT_SIZE])
+
+	# **Every accented character Portuguese needs.** Task 0097 brings the
+	# strings; this is the font being ready for them, which is the done-when.
+	var portuguese := "áéíóúâêôãõçÁÉÍÓÚÂÊÔÃÕÇàÀ"
+	var absent := ""
+	for i in portuguese.length():
+		if not hud.has_char(portuguese.unicode_at(i)):
+			absent += portuguese[i]
+	expect(absent.is_empty(),
+		"every accented character Portuguese needs has a glyph",
+		"missing: '%s'" % absent)
+	for i in portuguese.length():
+		expect(heading.has_char(portuguese.unicode_at(i)),
+			"and the heading face has them too")
+
+	# And the rest of Latin-1, which comes free from the same five marks.
+	var gaps := 0
+	for code in range(0x20, 0x100):
+		if code >= 0x7f and code < 0xa0:
+			continue            # control codes, which nothing draws
+		if not hud.has_char(code):
+			gaps += 1
+	expect(gaps == 0, "the whole of printable Latin-1 is covered",
+		"%d characters with no glyph" % gaps)
+
+	# **A changing number does not shift the text around it.** The other
+	# done-when: every digit is the same width, so 9 becoming 10 becoming 99
+	# moves nothing. Asked of the font rather than of a screenshot.
+	var widths: Dictionary = {}
+	for digit in "0123456789":
+		widths[int(hud.get_string_size(digit, HORIZONTAL_ALIGNMENT_LEFT,
+			-1, UiKit.FONT_SIZE).x)] = true
+	expect(widths.size() == 1,
+		"every digit is the same width, so a counter is tabular",
+		"widths seen: %s" % str(widths.keys()))
+	var one := hud.get_string_size("1 wood", HORIZONTAL_ALIGNMENT_LEFT, -1,
+		UiKit.FONT_SIZE).x
+	var eight := hud.get_string_size("8 wood", HORIZONTAL_ALIGNMENT_LEFT, -1,
+		UiKit.FONT_SIZE).x
+	expect(is_equal_approx(one, eight),
+		"so '1 wood' and '8 wood' are the same width",
+		"%.1f against %.1f" % [one, eight])
+
+	# **And the letters are not.** A font where everything is the same width
+	# is a terminal, not a face - and it would pass the check above by
+	# accident.
+	var narrow := hud.get_string_size("iii", HORIZONTAL_ALIGNMENT_LEFT, -1,
+		UiKit.FONT_SIZE).x
+	var wide := hud.get_string_size("MMM", HORIZONTAL_ALIGNMENT_LEFT, -1,
+		UiKit.FONT_SIZE).x
+	expect(wide > narrow,
+		"the letters are proportional, so the tabular digits mean something",
+		"MMM %.0f against iii %.0f" % [wide, narrow])
+
+	# **The theme carries it**, which is how every label in the game gets it
+	# without any of them asking.
+	var dressed := UiKit.theme()
+	expect(dressed != null and dressed.default_font != null,
+		"the kit's theme carries the font")
+	expect(dressed != null and dressed.default_font_size == UiKit.FONT_SIZE,
+		"at its own size", str(dressed.default_font_size if dressed else -1))
+
+	print("  printable Latin-1 covered, digits %d px wide, "
+		% int(widths.keys()[0])
+		+ "MMM %.0f against iii %.0f" % [wide, narrow])
+
+	_completed += 1     # last line: an abandoned group never gets here

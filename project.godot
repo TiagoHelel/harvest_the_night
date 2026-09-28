@@ -71,6 +71,19 @@ renderer/rendering_method.mobile="gl_compatibility"
 ; Nearest neighbour everywhere. Anything else smears the art.
 textures/canvas_textures/default_texture_filter=0
 
+[gui]
+
+# **Eight, because that is the font's own size.** Task 0080 draws the game's
+# letters at eight pixels a line, and every label in `src/ui/` asks for eight
+# or sixteen and nothing in between: a bitmap font at a fractional scale is a
+# blurred bitmap font, and this is a 480x270 game.
+#
+# The font itself is **not** set here. `gui/theme/custom_font` read back empty
+# with the path in it - Godot did not take a `.fnt` through that setting - so
+# `UiKit.theme()` builds a `Theme` and `Main` puts it on the UI root, which is
+# one line of code instead of one line of config that silently does nothing.
+theme/default_font_size=8
+
 [input]
 
 ; Named actions rather than keycodes at the call site, so task 0095 can make

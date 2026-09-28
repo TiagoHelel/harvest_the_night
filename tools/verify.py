@@ -147,6 +147,19 @@ def check_sprites():
                  out.strip().splitlines()[-1].strip() if out.strip() else "")
 
 
+def check_font():
+    """The font still matches the maps it came from.
+
+    Same argument as `check_sprites()`: `tools/font_maps.py` is the source and
+    `assets/fonts/` is what falls out of it. A letter painted over in an
+    editor is a letter the maps no longer own."""
+    if not os.path.exists(rel("tools/gen_font.py")):
+        return skip("font", "no font generator yet - task 0080")
+    code, out = run([sys.executable, "tools/gen_font.py", "--check"])
+    return check("font", code == 0, tail(out, 6) if code else
+                 out.strip().splitlines()[-1].strip() if out.strip() else "")
+
+
 def check_player_art():
     """The cut frames still match the sheet they came from.
 
@@ -390,6 +403,7 @@ def main():
     check_core_is_pure()
     check_sprites()
     check_player_art()
+    check_font()
 
     if not hashes_only:
         check_script("headless_check", "src/tools/headless_check.gd",

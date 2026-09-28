@@ -58,6 +58,17 @@ var _banked_nights := -1
 func _ready() -> void:
 	print(BuildInfo.line())
 
+	# **The game's own letters, on the whole tree at once.** A theme on the
+	# root is inherited by everything under it, so no panel has to remember
+	# to ask - and the ones that want a heading override the size rather than
+	# the face, which keeps them on the same drawing.
+	# `Main` is a `Node` and has no theme of its own; the UI root Control
+	# does, and everything on screen is under it.
+	var dressed := UiKit.theme()
+	var screen := %UI.get_child(0) as Control
+	if screen != null:
+		screen.theme = dressed
+
 	_driver.start(BOOT_SEED)
 
 	_world.show_state(_driver.state)

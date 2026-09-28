@@ -60,7 +60,7 @@ func _ready() -> void:
 	_line = Label.new()
 	_line.name = "TutorialLine"
 	_line.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_line.add_theme_font_size_override("font_size", 9)
+	_line.add_theme_font_size_override("font_size", 8)
 	_line.modulate = LINE
 	add_child(_line)
 
@@ -68,7 +68,7 @@ func _ready() -> void:
 	_arrow.name = "TutorialArrow"
 	_arrow.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_arrow.text = "v"
-	_arrow.add_theme_font_size_override("font_size", 9)
+	_arrow.add_theme_font_size_override("font_size", 8)
 	_arrow.modulate = POINTER
 	add_child(_arrow)
 

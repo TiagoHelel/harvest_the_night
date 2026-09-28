@@ -130,7 +130,7 @@ func _ready() -> void:
 	_announce = _label("WaveWarning", Vector2(0, 92), WARM)
 	_announce.size = Vector2(480, 12)
 	_announce.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_announce.add_theme_font_size_override("font_size", 12)
+	_announce.add_theme_font_size_override("font_size", 16)
 	_announce.visible = false
 
 	_build_controls()
@@ -195,7 +195,7 @@ func _label(node_name: String, at: Vector2, colour: Color) -> Label:
 	label.position = at
 	label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	label.modulate = colour
-	label.add_theme_font_size_override("font_size", 9)
+	label.add_theme_font_size_override("font_size", 8)
 	add_child(label)
 	return label
 

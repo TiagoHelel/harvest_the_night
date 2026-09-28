@@ -1,0 +1,17 @@
+[remap]
+
+importer="font_data_bmfont"
+type="FontFile"
+uid="uid://cdvt63axv450r"
+path="res://.godot/imported/harvest_heading.fnt-8484da7e235c6eda023961c58f1c4f61.fontdata"
+
+[deps]
+
+source_file="res://assets/fonts/harvest_heading.fnt"
+dest_files=["res://.godot/imported/harvest_heading.fnt-8484da7e235c6eda023961c58f1c4f61.fontdata"]
+
+[params]
+
+fallbacks=[]
+compress=true
+scaling_mode=2

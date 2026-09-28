@@ -26,6 +26,13 @@ extends RefCounted
 
 const DIR := "res://sprites/ui/"
 
+## The game's own letters, drawn from ASCII maps by `tools/gen_font.py`.
+const FONT_DIR := "res://assets/fonts/"
+## Its native size. Anything asking for a different one gets a blurred bitmap,
+## so headings ask for exactly twice this and nothing asks for anything else.
+const FONT_SIZE := 8
+const HEADING_SIZE := 16
+
 ## The border of every nine-slice frame, in pixels.
 ##
 ## **Three, because that is what the drawings have.** It was five here and
@@ -76,6 +83,42 @@ static func orphan_icons() -> Array:
 			out.append(stem)
 	out.sort()
 	return out
+
+
+## The HUD face, or null before task 0080 has been run.
+static func font() -> Font:
+	return _font("hud")
+
+
+## The same letters at twice the size. **Not a second design**: a whole-number
+## scale of a bitmap is still a bitmap, and two faces drawn separately are two
+## faces to keep in step.
+static func heading_font() -> Font:
+	return _font("heading")
+
+
+## A `Theme` carrying the font, for the UI root to wear.
+##
+## **Built here rather than set in `project.godot`.** `gui/theme/custom_font`
+## read back as an empty string with the path in it - Godot did not take a
+## `.fnt` through that setting - and a line of configuration that silently
+## does nothing is worse than no line at all.
+static func theme() -> Theme:
+	var out := Theme.new()
+	out.default_font_size = FONT_SIZE
+	var face := font()
+	if face != null:
+		out.default_font = face
+	return out
+
+
+static func _font(face: String) -> Font:
+	var path := FONT_DIR + "harvest_%s.fnt" % face
+	if _cache.has(path):
+		return _cache[path]
+	var found: Font = load(path) if ResourceLoader.exists(path) else null
+	_cache[path] = found
+	return found
 
 
 # ------------------------------------------------------------------ the frames
