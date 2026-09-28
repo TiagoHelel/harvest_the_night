@@ -97,7 +97,13 @@ func show_state(state: Dictionary) -> void:
 ## Read by path rather than by name: `verify.py` parses every script on its
 ## own with no autoload registered, and `Settings.x` is a compile error there.
 func _read_settings() -> void:
-	var service := get_node_or_null("/root/Settings")
+	# **Asked of the engine, not of this node.** `get_node` with an
+	# absolute path errors from outside the active tree, which is
+	# every node a headless check builds - task 0102 found it by
+	# timing this one, and got an error log instead of a number.
+	var loop := Engine.get_main_loop() as SceneTree
+	var service: Node = loop.root.get_node_or_null(^"Settings") \
+		if loop != null and loop.root != null else null
 	if service == null or not service.has_method("get_value"):
 		return
 	var cap: Variant = service.get_value(&"video/max_particles")

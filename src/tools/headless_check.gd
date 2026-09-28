@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 93
+const GROUPS := 94
 
 const SettingsScript := preload("res://src/app/settings.gd")
 const AppScript := preload("res://src/app/app.gd")
@@ -171,6 +171,164 @@ func _run() -> void:
 	_task_0098_access()
 	_task_0099_icon()
 	_task_0100_release()
+	_task_0102_budget()
+
+
+## 0102 - the performance budget.
+func _task_0102_budget() -> void:
+	# **The tool is checked without being run**, the way task 0082 checks the
+	# screenshot table: timing night ten takes eight seconds and belongs in
+	# `tools/perf.py`, which verify already runs. What belongs *here* is
+	# whether the benchmark is still about this game - a system added to
+	# `Sim.tick` and not to the benchmark is a system nobody is timing, and
+	# the table keeps printing a full set of rows while it happens.
+	var bench := FileAccess.get_file_as_string(
+		"res://src/tools/perf_check.gd")
+	var sim := FileAccess.get_file_as_string("res://src/core/sim.gd")
+	expect(not bench.is_empty() and not sim.is_empty(),
+		"the benchmark and the sim are both there")
+	if bench.is_empty() or sim.is_empty():
+		_completed += 1
+		return
+
+	# Everything `Sim.tick()` reaches, found the way a reader would find it.
+	var ticked: Array = []
+	for line in sim.split("
+"):
+		var at := line.find(".tick(state)")
+		if at < 0:
+			continue
+		var start := at
+		while start > 0 and (line[start - 1] == "_"
+			or line[start - 1].to_lower() != line[start - 1].to_upper()):
+			start -= 1
+		var named := line.substr(start, at - start)
+		if named == "" or named == "Sim" or named.begins_with("_"):
+			continue
+		if not ticked.has(named):
+			ticked.append(named)
+	ticked.sort()
+	expect(ticked.size() >= 12,
+		"the sim ticks a dozen systems or more", str(ticked.size()))
+
+	# And everything the benchmark says it times.
+	var timed: Array = []
+	for named in PerfNames.NIGHT + PerfNames.DAY:
+		if not timed.has(String(named)):
+			timed.append(String(named))
+	timed.sort()
+
+	var untimed: Array = []
+	for named in ticked:
+		if not timed.has(named):
+			untimed.append(named)
+	expect(untimed.is_empty(),
+		"every system the sim ticks is one the benchmark times",
+		"missing: %s" % str(untimed))
+
+	# The other way round too: a name in the list that the sim no longer
+	# calls is a row measuring something the game does not do.
+	var stale: Array = []
+	for named in timed:
+		if not ticked.has(named):
+			stale.append(named)
+	expect(stale.is_empty(),
+		"and nothing is timed that the sim stopped calling",
+		"stale: %s" % str(stale))
+
+	# **Both halves of the night are named, not just the union.** A system
+	# that only runs after dark belongs in the night list or its number is
+	# measured on a state where it returns immediately.
+	for named in ["Waves", "Enemies", "Towers", "Combat"]:
+		expect(PerfNames.NIGHT.has(StringName(named)),
+			"%s is timed on a night" % named)
+	for named in ["Farming", "Gathering", "Livestock", "Crafting"]:
+		expect(PerfNames.DAY.has(StringName(named)),
+			"%s is timed on a day" % named)
+
+	# **The budget is a quarter of a tick, whatever a tick is.** The number
+	# lives in `tools/perf.py` with the other tool budgets - `BUDGET_S` in
+	# verify, `WIRE_BUDGET` in release - and not in `game_data.gd`, because
+	# it is a fact about the machine and not a lever a designer turns. What
+	# that costs is exactly this: the two numbers can drift apart, and
+	# nothing but a check notices. Change `TICK_HZ` to 60 and the budget is
+	# silently twice what a frame has.
+	var tool_text := FileAccess.get_file_as_string("res://tools/perf.py")
+	expect(not tool_text.is_empty(), "tools/perf.py is there")
+	var budget := _number_after(tool_text, "TICK_BUDGET_US = ")
+	var whole := int(round(1000000.0 / float(GameData.TICK_HZ)))
+	expect(budget > 0, "it has a per-tick budget", str(budget))
+	expect(budget * 4 <= whole,
+		"and the budget is at most a quarter of a tick",
+		"%dus of the %dus a tick at %dHz has"
+			% [budget, whole, GameData.TICK_HZ])
+
+	# A path rebuild is not per tick, so it may have a whole one - and not
+	# more, because two walls in a second is a thing players do.
+	var path_budget := _number_after(tool_text, "PATH_BUDGET_US = ")
+	expect(path_budget >= budget and path_budget <= whole,
+		"a path rebuild may have a whole tick and no more",
+		"%dus against %dus" % [path_budget, whole])
+
+	# **The recorded worst case is inside it.** Re-measuring here would need
+	# the eight seconds; the baseline is the last measurement anybody
+	# accepted, so asking whether *that* fits the budget is free and is the
+	# question the done-when asks.
+	var baseline := FileAccess.get_file_as_string(
+		"res://tools/perf_baseline.txt")
+	expect(not baseline.is_empty(), "there is a baseline to compare against")
+	var recorded := {}
+	for line in baseline.split("
+"):
+		var bits := line.strip_edges().split(" ")
+		if bits.size() == 2 and String(bits[1]).is_valid_int():
+			recorded[String(bits[0])] = int(bits[1])
+	for name_and in [["night_tick", budget], ["day_tick", budget],
+		["path_refresh", path_budget]]:
+		var key := String(name_and[0])
+		var cap := int(name_and[1])
+		expect(recorded.has(key), "the baseline records %s" % key)
+		if recorded.has(key):
+			expect(int(recorded[key]) <= cap,
+				"and %s is inside its budget" % key,
+				"%dus of %d" % [int(recorded[key]), cap])
+
+	# Every system that is timed has a row, so the table cannot quietly
+	# shrink to the cheap half.
+	var missing_rows: Array = []
+	for named in PerfNames.NIGHT:
+		if not recorded.has("night_%s" % String(named).to_lower()):
+			missing_rows.append(String(named))
+	for named in PerfNames.DAY:
+		if not recorded.has("day_%s" % String(named).to_lower()):
+			missing_rows.append(String(named))
+	expect(missing_rows.is_empty(),
+		"and every timed system has a recorded number",
+		"missing: %s" % str(missing_rows))
+
+	# **A baseline moves the way the hash moves**: on purpose, printing both
+	# numbers, so the journal can say what got slower and why.
+	expect(tool_text.contains("--accept"),
+		"moving the baseline is a deliberate command")
+	expect(tool_text.contains("the most expensive thing in"),
+		"and the report names the most expensive system")
+	var verify_text := FileAccess.get_file_as_string("res://tools/verify.py")
+	expect(verify_text.contains("def check_perf"),
+		"verify runs the benchmark")
+	_completed += 1
+
+
+## The integer that follows a marker in a file, or -1.
+func _number_after(text: String, marker: String) -> int:
+	var at := text.find(marker)
+	if at < 0:
+		return -1
+	var digits := ""
+	var i := at + marker.length()
+	while i < text.length() and text[i] >= "0" and text[i] <= "9":
+		digits += text[i]
+		i += 1
+	return -1 if digits == "" else int(digits)
 
 
 func _finish() -> void:

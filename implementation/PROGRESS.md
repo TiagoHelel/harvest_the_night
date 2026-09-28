@@ -9019,3 +9019,125 @@ Said plainly rather than ticked: **this task's finding is still owed.**
 
 `python tools/verify.py` prints PASS: 6083 asserts, 930 input cases, 0 failed,
 19 rows, no skips.
+
+## 0102 - A performance budget - done 2026-09-28
+
+A number instead of a feeling. `src/tools/perf_check.gd` plays the worst case
+the game has and prints one machine-readable line per measurement;
+`tools/perf.py` compares them against `tools/perf_baseline.txt` and against a
+budget, and `verify.py` runs it as its own row - 5.2 seconds, which is cheap
+for the thing it answers.
+
+### A budget and a baseline are two different questions
+
+The **budget** is the ceiling: a tick is 33,333us at 30Hz and the game may
+have a quarter of it. The other three quarters are the drawing, the operating
+system and whatever else the player has open. It is a property of the design
+and it does not move.
+
+The **baseline** is what this game costs today, and it moves the way the
+determinism hash does - `python tools/perf.py --accept` prints the old and the
+new number so this journal can record both. A change that doubles the cost of
+a night is still inside the budget and still something somebody should have
+decided rather than discovered.
+
+### The numbers, on this machine
+
+The worst case is night ten with 40 towers, 48 crops planted, 13 walls and the
+field as full of walkers as it gets, stopped at the busiest tick rather than a
+fixed one.
+
+    night_tick      1044us     13% of the 8333 it may have
+    day_tick          97us
+    night_towers     505us     the most expensive thing in a night
+    night_enemies    210us
+    night_traps       79us
+    day_farming       26us     the most expensive thing in a day
+    path_refresh    8390us     not per tick - per wall a player puts down
+    view_particles   461us     per frame, and thinking only
+    view_lighting      0us
+
+**The game has ten times the room it needs.** The one number worth watching is
+`path_refresh`: a whole tick's work, and a player in build mode drags fences.
+It is inside its budget because it only runs when the walls change, which is
+the entire reason `flow_version` exists - and which is why measuring it needed
+`grid_version` bumped, or the benchmark timed the early return at 1us.
+
+### Four measurement bugs, all found by reading the numbers
+
+**217 towers.** Filling the east half killed night ten before it walked ten
+tiles. A worst case with nothing left alive in it is not a worst case. Capped
+at 40, which is more than anybody builds.
+
+**Night one dressed as night ten.** Setting `state["day"]` alone gives night
+one - `Phases.begin_night` counts `nights_won`. Forty towers against the first
+wave is the easiest night in the game.
+
+**A system ticked alone goes where the game never goes.** Six hundred calls of
+`Waves.tick` with nothing else running ends the night and then keeps ending
+it, which is an error log rather than a measurement. The state is re-copied
+every 30 calls, and `state["tick"]` is advanced by hand so that systems which
+self-throttle - `Tutorial` runs one tick in fifteen - are measured truthfully
+rather than always or never.
+
+**575,555us a frame for the particles**, which is half a second. What was
+being timed was Godot printing an error: `Particles` sizes its pools in
+`_ready`, a node added to `root` during `_initialize()` never gets one, and
+every burst wrote past the end of a zero-length `PackedFloat32Array`. Calling
+`_ready()` by hand makes it 461us. **This one was a real bug in the view**,
+not only in the benchmark - `Lighting` and `Particles` both reached for
+`get_node_or_null("/root/Settings")`, which errors from outside the active
+tree. Both now ask `Engine.get_main_loop()`, the way `Audio`, `Video`,
+`Actions` and the rest already did.
+
+### The tolerance is measured, not chosen
+
+Forty per cent. Three runs of the same build moved `night_enemies` 212 -> 214
+-> 246, which is sixteen per cent of noise on an idle machine. Forty is about
+two and a half times that. A threshold tighter than the noise is a check
+people learn to re-run until it passes, which is worse than no check.
+
+Tested both ways, which is the done-when: a 4,000-iteration loop in
+`Towers.tick` moved it +17% and was correctly ignored; 40,000 moved it +182%
+and failed, and the verify row read
+
+    perf   FAIL  night_towers went from 505us to 1409 (and 1 more)
+
+**The failing line names the system**, which took a change: the list is sorted
+by how much each row grew with the whole-tick numbers put last, because
+`night_tick` goes up whenever anything under it does and naming it first names
+the symptom. The point of timing systems separately is that the failure says
+which one.
+
+### The list of systems has one home
+
+`PerfNames` (`src/tools/perf_names.gd`) holds the night and day lists, because
+`headless_check.gd` now checks them against what `Sim.tick()` actually calls -
+both ways, so a system added to the sim and not to the benchmark fails, and so
+does a name in the list the sim stopped calling. All fourteen are covered. The
+group also checks the budget against `GameData.TICK_HZ`: change the tick rate
+to 60 and the budget is silently twice what a frame has.
+
+The budget lives in `tools/perf.py` and **not** in `game_data.gd`, deliberately
+- it is a fact about the machine, not a lever a designer turns, and it sits
+with `BUDGET_S` in verify and `WIRE_BUDGET` in release. The cost of that
+choice is that two numbers can drift apart, which is exactly what the assert
+above is for.
+
+### Hashes
+
+Both unchanged: **sim `4262811284`**, **data `407837701`**. Nothing in
+`src/core/` was touched; the two view files changed only how they ask for a
+service.
+
+### One thing to watch
+
+`verify.py` now runs 297s against its `BUDGET_S = 300`, which prints
+"(OVER BUDGET)" and does not fail. `script parse` (91s), `headless_check`
+(91s) and `input_check` (71s) are the whole of it - `perf` is 5s. Left alone
+on purpose: raising the number to meet the measurement is the opposite of what
+this task is about. The next task that adds a row will push it over, and that
+is the right moment to decide whether the suite gets a fast mode by default.
+
+`python tools/verify.py` prints PASS: 6110 asserts, 930 input cases, 0 failed,
+20 rows, no skips.

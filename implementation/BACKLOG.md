@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`######################..`  **101 / 110 done**
+`######################..`  **102 / 110 done**
 
-0 doing / 9 todo / 0 blocked across 9 phases.
+0 doing / 8 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0102 - A performance budget**. The whole of what is left is
+First up: **0103 - Crash and error reporting**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,24 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-9 task(s) left, the ready ones first, then what they
+8 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0102 - A performance budget
-
-Ready to pick up.  Likely files: `tools/perf.py, src/tools/perf_check.gd`.
-
-A number, checked automatically, instead of a feeling about whether it runs well.
-
-- A budget in milliseconds per frame for the worst case: night 10, everything built, lights and particles on
-- A headless benchmark that reports tick cost, path cost and entity count
-- Wired into `verify.py`, failing when the budget is exceeded
-- A baseline file, moved deliberately the way the hash is
-- The report names the most expensive system, so a regression points at itself
-
-  - done when: The worst case is inside the budget on this machine
-  - done when: Adding a deliberately slow loop makes verify fail and name it
 
 ### 0103 - Crash and error reporting
 
@@ -289,10 +274,10 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0100** [Exports: Windows and Web](prompts/0100-exports.md)
 - [ ] **0110** [Refusals in two languages](prompts/0110-refusals.md)
 
-## 8 - Ship the MVP  (1/8)
+## 8 - Ship the MVP  (2/8)
 
 - [x] **0101** [Onboarding in seven lines](prompts/0101-onboarding.md)
-- [ ] **0102** [A performance budget](prompts/0102-perf-budget.md)
+- [x] **0102** [A performance budget](prompts/0102-perf-budget.md)
 - [ ] **0103** [Crash and error reporting](prompts/0103-error-report.md)
 - [ ] **0104** [Saves survive an update](prompts/0104-save-compat.md)
 - [ ] **0105** [A playtest build](prompts/0105-playtest-build.md) - needs 0103

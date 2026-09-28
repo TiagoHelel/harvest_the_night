@@ -188,6 +188,21 @@ def check_sfx():
                  out.strip().splitlines()[-1].strip() if out.strip() else "")
 
 
+def check_perf():
+    """The worst case, timed, against a budget and against yesterday.
+
+    Slower than most rows because it is a measurement rather than a
+    comparison - it plays night ten and times every system on it. Worth the
+    seconds: a performance regression found by a player is a performance
+    regression nobody can bisect."""
+    if not os.path.exists(rel("tools", "perf.py")):
+        return skip("perf", "no benchmark yet - task 0102")
+    code, out = run([sys.executable, "tools/perf.py"])
+    last = [l for l in out.strip().splitlines() if l.strip()]
+    return check("perf", code == 0,
+                 last[-1].strip() if last else "")
+
+
 def check_icon():
     """One 16x16 drawing, at every size a platform asks for.
 
@@ -488,6 +503,7 @@ def main():
     check_font()
     check_logo()
     check_sfx()
+    check_perf()
     check_icon()
     check_strings()
     check_music()

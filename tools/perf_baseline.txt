@@ -1,0 +1,24 @@
+# What this game costs today, in microseconds.
+# Moved with: python tools/perf.py --accept
+day_building 3
+day_crafting 4
+day_farming 26
+day_gathering 2
+day_livestock 17
+day_player 4
+day_power 4
+day_tick 97
+day_tutorial 17
+night_ability 2
+night_building 3
+night_combat 20
+night_enemies 210
+night_player 4
+night_power 7
+night_tick 1044
+night_towers 505
+night_traps 79
+night_waves 4
+path_refresh 8390
+view_lighting 0
+view_particles 461

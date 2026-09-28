@@ -1,7 +1,7 @@
 # 0102 - A performance budget
 
 - **Phase:** 8 - Ship the MVP
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0005, 0060
 - **Likely files:** tools/perf.py, src/tools/perf_check.gd
 
