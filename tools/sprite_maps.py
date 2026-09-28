@@ -26,6 +26,298 @@ ACTOR = (16, 24)
 
 SPRITES = {
 
+    # ------------------------------------------------- terrain, task 0072
+
+    # **Three more grasses, so a field is not one tile repeated.** A farm is
+    # mostly grass and the eye finds a 16-pixel grid in a flat one within a
+    # second. The specks move; the green does not, so four of these side by
+    # side still read as one meadow rather than as four patches.
+    "terrain/grass_b": dict(size=TILE, legend={
+        "g": "grass", "d": "grass_dark", "l": "grass_light",
+    }, rows=[
+        "gggggggglgggggdg",
+        "gggggggggggggggg",
+        "gdgggggggggggggg",
+        "gggggggggggglggg",
+        "ggggglgggggggggg",
+        "gggggggggggggggg",
+        "ggggggggdggggggg",
+        "gdgggggggggggglg",
+        "gggggggggggggggg",
+        "gggglggggggggggg",
+        "gggggggggdgggggg",
+        "gggggggggggggggg",
+        "gglgggggggggdggg",
+        "gggggggggggggggg",
+        "ggggggdggggggggg",
+        "ggggggggggglgggg",
+    ]),
+    "terrain/grass_c": dict(size=TILE, legend={
+        "g": "grass", "d": "grass_dark", "l": "grass_light",
+    }, rows=[
+        "gggggggggggggggg",
+        "gglggggggdgggggg",
+        "gggggggggggggggg",
+        "ggggggggggggggdg",
+        "gdgggggglggggggg",
+        "gggggggggggggggg",
+        "ggggggggggggglgg",
+        "gggggggggggggggg",
+        "ggglgggdgggggggg",
+        "gggggggggggggggg",
+        "ggggggggggggggdg",
+        "glgggggggggggggg",
+        "gggggggggggggggg",
+        "gggggdgggglggggg",
+        "gggggggggggggggg",
+        "ggggggggdggggggg",
+    ]),
+    # This one carries a flower, which is the only thing on the farm that is
+    # there for no reason at all. One tile in a few dozen: enough to notice on
+    # a second look and not enough to read as a crop somebody forgot.
+    "terrain/grass_d": dict(size=TILE, legend={
+        "g": "grass", "d": "grass_dark", "l": "grass_light",
+        "f": "gold_light", "s": "grass_dark",
+    }, rows=[
+        "gggggggggggggggg",
+        "ggggdggggggggggg",
+        "gggggggggggglggg",
+        "gggggggggggggggg",
+        "ggggggggggggggdg",
+        "gglggggggggggggg",
+        "gggggggggggggggg",
+        "ggggggggggdggggg",
+        "gggffggggggggggg",
+        "gggfsgggggggglgg",
+        "ggggsggggggggggg",
+        "gdggsggggggggggg",
+        "gggggggggggggggg",
+        "ggggggggglggggdg",
+        "gggggggggggggggg",
+        "ggggdggggggggggg",
+    ]),
+
+    # **Two more water frames.** A pond that never moves is a painted pond.
+    # The ripples shift by a pixel or two and nothing else does, so the
+    # animation reads as water rather than as a flicker.
+    "terrain/water_b": dict(size=TILE, legend={
+        "w": "water", "d": "water_dark", "l": "water_light",
+    }, rows=[
+        "wwwwwwwwwwwwwwww",
+        "wwwwwlwwwwwwwwww",
+        "wwwwwwwwwwwwdwww",
+        "wwwwwwwwwwwwwwww",
+        "wwdwwwwwwwwwwwww",
+        "wwwwwwwwwlwwwwww",
+        "wwwwwwwwwwwwwwww",
+        "wwwwwwwwwwwwwwlw",
+        "wwwwwwwdwwwwwwww",
+        "wwwwwwwwwwwwwwww",
+        "wlwwwwwwwwwwwwww",
+        "wwwwwwwwwwwdwwww",
+        "wwwwwwwwwwwwwwww",
+        "wwwwwwwlwwwwwwww",
+        "wwwdwwwwwwwwwwww",
+        "wwwwwwwwwwwwwwww",
+    ]),
+    "terrain/water_c": dict(size=TILE, legend={
+        "w": "water", "d": "water_dark", "l": "water_light",
+    }, rows=[
+        "wwwwwwwwwwwwwwww",
+        "wwwwwwwwwwwlwwww",
+        "wdwwwwwwwwwwwwww",
+        "wwwwwwwwwwwwwwww",
+        "wwwwwwwwwwwwwdww",
+        "wwwwlwwwwwwwwwww",
+        "wwwwwwwwwwwwwwww",
+        "wwwwwwwwwwdwwwww",
+        "wwwwwwwwwwwwwwww",
+        "wwlwwwwwwwwwwwww",
+        "wwwwwwwwwwwwwwlw",
+        "wwwwwwwdwwwwwwww",
+        "wwwwwwwwwwwwwwww",
+        "wwwwwwwwwwwwwwww",
+        "wwwwwlwwwwdwwwww",
+        "wwwwwwwwwwwwwwww",
+    ]),
+
+    # **The four sides of an edge, from which sixteen are built.**
+    #
+    # Autotiling normally means drawing a forty-seven tile blob set by hand.
+    # These are four, and `gen_sprites.py` composites them: a cell with grass
+    # to the north and the west gets `edge_n` and `edge_w` laid over each
+    # other, which is a corner without anyone drawing a corner. Sixteen
+    # combinations, four maps, and a fifth side is a fifth map rather than a
+    # new twenty-three.
+    #
+    # They are grass encroaching *into* the cell, so they are drawn on the
+    # soil, path, rock or floor tile that meets grass - the patch has a soft
+    # edge and the meadow does not have a hole cut in it.
+    "terrain/edge_n": dict(size=TILE, legend={
+        "g": "grass", "d": "grass_dark",
+    }, rows=[
+        "gggggggggggggggg",
+        "gggggggggggggggg",
+        "ddgd.ddg.dd.gddd",
+        "..g...d...g..d..",
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+    ]),
+    "terrain/edge_s": dict(size=TILE, legend={
+        "g": "grass", "d": "grass_dark",
+    }, rows=[
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+        "..d...g...d..g..",
+        "gdd.gddd.gg.dddg",
+        "gggggggggggggggg",
+        "gggggggggggggggg",
+    ]),
+    "terrain/edge_w": dict(size=TILE, legend={
+        "g": "grass", "d": "grass_dark",
+    }, rows=[
+        "ggd.............",
+        "ggdg............",
+        "ggd.............",
+        "ggg.............",
+        "ggdd............",
+        "ggd.............",
+        "gggg............",
+        "ggd.............",
+        "ggdg............",
+        "ggd.............",
+        "ggg.............",
+        "ggdd............",
+        "ggd.............",
+        "gggg............",
+        "ggd.............",
+        "ggdg............",
+    ]),
+    "terrain/edge_e": dict(size=TILE, legend={
+        "g": "grass", "d": "grass_dark",
+    }, rows=[
+        ".............dgg",
+        "............gdgg",
+        ".............dgg",
+        ".............ggg",
+        "............ddgg",
+        ".............dgg",
+        "............gggg",
+        ".............dgg",
+        "............gdgg",
+        ".............dgg",
+        ".............ggg",
+        "............ddgg",
+        ".............dgg",
+        "............gggg",
+        ".............dgg",
+        "............gdgg",
+    ]),
+
+    # **The shoreline**, on the water side. Pale where the water meets
+    # anything that is not water, which is what a bank looks like from above
+    # and what stops the pond reading as a hole cut in the farm.
+    "terrain/shore_n": dict(size=TILE, legend={
+        "l": "water_light", "w": "water",
+    }, rows=[
+        "llllllllllllllll",
+        "lwllwlllwlllwlll",
+        "..l...w...l...w.",
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+    ]),
+    "terrain/shore_s": dict(size=TILE, legend={
+        "l": "water_light", "w": "water",
+    }, rows=[
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+        "...w...l...w...l",
+        "lwllwlllwlllwlll",
+        "llllllllllllllll",
+    ]),
+    "terrain/shore_w": dict(size=TILE, legend={
+        "l": "water_light", "w": "water",
+    }, rows=[
+        "ll..............",
+        "llw.............",
+        "ll..............",
+        "lll.............",
+        "ll..............",
+        "llw.............",
+        "ll..............",
+        "lll.............",
+        "ll..............",
+        "llw.............",
+        "ll..............",
+        "lll.............",
+        "ll..............",
+        "llw.............",
+        "ll..............",
+        "lll.............",
+    ]),
+    "terrain/shore_e": dict(size=TILE, legend={
+        "l": "water_light", "w": "water",
+    }, rows=[
+        "..............ll",
+        ".............wll",
+        "..............ll",
+        ".............lll",
+        "..............ll",
+        ".............wll",
+        "..............ll",
+        ".............lll",
+        "..............ll",
+        ".............wll",
+        "..............ll",
+        ".............lll",
+        "..............ll",
+        ".............wll",
+        "..............ll",
+        ".............lll",
+    ]),
+
     # ------------------------------------------------------------- terrain
 
     # Grass with enough specks to stop a field of it looking like paper, and

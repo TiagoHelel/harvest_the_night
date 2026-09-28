@@ -27,6 +27,11 @@ from sprite_maps import SPRITES                   # noqa: E402
 
 OUT = os.path.join(ROOT, "sprites")
 
+# One tile, in pixels. `GameData.TILE_SIZE` is the same number on the other
+# side; `headless_check` asserts the atlas matches it rather than trusting
+# two files to agree.
+TILE_PX = 16
+
 # The palette, again, in GDScript.
 #
 # **Generated, not typed twice.** The view needs the night ramp and the game is
@@ -35,10 +40,32 @@ OUT = os.path.join(ROOT, "sprites")
 # because both copies would look plausible.
 PALETTE_GD = os.path.join(ROOT, "src", "ui", "palette_data.gd")
 
-# The terrain tiles, in `Farm.Terrain` order, packed into one strip so the
-# TileMapLayer has a single atlas rather than six textures.
-TERRAIN_ORDER = ["grass", "soil", "water", "rock", "path", "floor"]
+# The terrain atlas, as a grid of named rows.
+#
+# **One texture, and a layout the view can name rather than count.** Row 0 is
+# `Farm.Terrain` order because that is the order the terrain byte is in, and
+# everything after it is what task 0072 added - variants, animation frames and
+# the composited edges. `None` is an empty cell, which exists because an atlas
+# has to be rectangular and the rows are not all the same length.
+#
+# The edge rows are written by `edge_row()` rather than listed: sixteen tiles
+# from four maps, which is the whole reason this is not a hand-drawn blob set.
+ATLAS_ROWS = [
+    ["grass", "soil", "water", "rock", "path", "floor"],
+    ["water", "water_b", "water_c"],
+    ["grass", "grass_b", "grass_c", "grass_d"],
+]
+
+# Rows of sixteen, each composited from four side maps. The name is the prefix
+# its four maps share: `edge_n`, `edge_e`, `edge_s`, `edge_w`.
+EDGE_ROWS = ["edge", "shore"]
+
+TERRAIN_ORDER = ATLAS_ROWS[0]
 ATLAS_PATH = "terrain/atlas.png"
+
+# Which bit of an edge mask each side is. North is 1, east 2, south 4, west 8,
+# and the view builds the same number from the same four neighbours.
+EDGE_SIDES = ["n", "e", "s", "w"]
 
 
 # --------------------------------------------------------------- the renderer
@@ -72,28 +99,79 @@ def render(name, spec):
     return width, height, pixels
 
 
-def build_atlas():
-    """The six terrain tiles side by side, left to right in Terrain order."""
-    tiles = []
-    for terrain in TERRAIN_ORDER:
-        key = "terrain/" + terrain
-        if key not in SPRITES:
-            raise KeyError("the atlas wants %s and there is no map for it" % key)
-        tiles.append(render(key, SPRITES[key]))
+def tile_of(name):
+    """One terrain tile by name, as a list of RGBA rows."""
+    key = "terrain/" + name
+    if key not in SPRITES:
+        raise KeyError("the atlas wants %s and there is no map for it" % key)
+    width, height, pixels = render(key, SPRITES[key])
+    if (width, height) != (TILE_PX, TILE_PX):
+        raise ValueError("terrain/%s is %dx%d and a tile is %dx%d"
+                         % (name, width, height, TILE_PX, TILE_PX))
+    return pixels
 
-    height = tiles[0][1]
-    width = sum(t[0] for t in tiles)
-    for name, (w, h, _) in zip(TERRAIN_ORDER, tiles):
-        if h != height:
-            raise ValueError("terrain/%s is %d tall and the atlas is %d"
-                             % (name, h, height))
+
+def over(under, above):
+    """`above` laid on `under`, honouring alpha as all-or-nothing.
+
+    The palette has no partial alpha in it - a pixel is a colour or it is not
+    there - so this is a copy where the top is opaque and nothing where it is
+    not. Blending would invent colours that are not in the palette, which is
+    the one thing the whole pipeline exists to prevent.
+    """
+    return [[a if a[3] else u for u, a in zip(u_row, a_row)]
+            for u_row, a_row in zip(under, above)]
+
+
+def blank_tile():
+    return [[(0, 0, 0, 0)] * TILE_PX for _ in range(TILE_PX)]
+
+
+def edge_row(prefix):
+    """Sixteen tiles, one per combination of the four sides.
+
+    **This is the autotiling, and it is four maps rather than forty-seven.**
+    Tile `n` has the side maps whose bits are set in `n` laid over each other,
+    so a cell with grass north and west gets `edge_n` and `edge_w` together -
+    which is a corner that nobody drew. The view computes the same four bits
+    from the same four neighbours and reads the tile straight off.
+    """
+    sides = [tile_of("%s_%s" % (prefix, side)) for side in EDGE_SIDES]
+    row = []
+    for mask in range(16):
+        tile = blank_tile()
+        for bit, side in enumerate(sides):
+            if mask & (1 << bit):
+                tile = over(tile, side)
+        row.append(tile)
+    return row
+
+
+def build_atlas():
+    """The terrain atlas: a grid of tiles, row by row.
+
+    Row 0 is `Farm.Terrain` order and everything after it is a variant, an
+    animation frame or a composited edge. Short rows are padded with empty
+    tiles, because an atlas has to be a rectangle.
+    """
+    rows = []
+    for names in ATLAS_ROWS:
+        rows.append([tile_of(name) for name in names])
+    for prefix in EDGE_ROWS:
+        rows.append(edge_row(prefix))
+
+    across = max(len(row) for row in rows)
+    width = across * TILE_PX
+    height = len(rows) * TILE_PX
 
     pixels = []
-    for y in range(height):
-        row = []
-        for _w, _h, tile in tiles:
-            row.extend(tile[y])
-        pixels.append(row)
+    for row in rows:
+        padded = row + [blank_tile()] * (across - len(row))
+        for y in range(TILE_PX):
+            line = []
+            for tile in padded:
+                line.extend(tile[y])
+            pixels.append(line)
     return width, height, pixels
 
 

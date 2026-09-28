@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 64
+const GROUPS := 65
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -128,6 +128,7 @@ func _run() -> void:
 	_task_0069_stats()
 	_task_0070_endless()
 	_task_0071_palettes()
+	_task_0072_tileset()
 
 
 func _finish() -> void:
@@ -11228,3 +11229,170 @@ func _ramp_fields(tint: Color, lift: Color, saturation: float,
 		warm_keep: float, warm_edge: float) -> Dictionary:
 	return {"tint": tint, "lift": lift, "saturation": saturation,
 		"warm_keep": warm_keep, "warm_edge": warm_edge}
+
+
+## 0072 - the farm tileset, and the edges that meet each other.
+func _task_0072_tileset() -> void:
+	# **The atlas is the shape the view expects.** Two files agreeing by
+	# accident is two files that will stop agreeing.
+	var image := Image.load_from_file(
+		ProjectSettings.globalize_path("res://sprites/terrain/atlas.png"))
+	expect(image != null, "the terrain atlas loads")
+	if image == null:
+		_completed += 1
+		return
+	var size := GameData.TILE_SIZE
+	expect(image.get_width() % size == 0 and image.get_height() % size == 0,
+		"and is a whole number of tiles",
+		"%dx%d against a tile of %d"
+			% [image.get_width(), image.get_height(), size])
+	var rows := image.get_height() / size
+	expect(rows > WorldView.ROW_SHORE,
+		"and has every row the view names", "%d rows" % rows)
+	expect(image.get_width() / size >= 16,
+		"and is wide enough for sixteen edges", str(image.get_width() / size))
+
+	# **Sixteen edge tiles from four maps, and each bit on its own side.**
+	# This is the autotiling, and it is the part that would fail silently: a
+	# side map drawn a row too low still composites, still looks like a
+	# tileset, and puts grass through the middle of a path.
+	for row in [WorldView.ROW_EDGE, WorldView.ROW_SHORE]:
+		expect(_tile_pixels(image, 0, row, size) == 0,
+			"the empty mask on row %d draws nothing" % row)
+		for bit in 4:
+			var mask := 1 << bit
+			var mine := _side_pixels(image, mask, row, size, bit)
+			var opposite := _side_pixels(image, mask, row, size, (bit + 2) % 4)
+			expect(mine > 0,
+				"mask %d on row %d draws on its own side" % [mask, row],
+				str(mine))
+			expect(opposite == 0,
+				"and nothing on the far one", str(opposite))
+		# Two sides together is a corner nobody drew.
+		var corner := _tile_pixels(image, 1 | 8, row, size)
+		var north := _tile_pixels(image, 1, row, size)
+		var west := _tile_pixels(image, 8, row, size)
+		expect(corner > north and corner > west,
+			"and two of them together is more than either", str(corner))
+		expect(corner <= north + west,
+			"but never more than both, because they overlap in the corner",
+			"%d against %d" % [corner, north + west])
+
+	# **Which tile a cell shows.** Pure functions of a cell and its terrain,
+	# which is what lets them be asserted here rather than looked at.
+	expect(WorldView._base_tile(Farm.Terrain.WATER, Vector2i(3, 3))
+		== Vector2i(0, WorldView.ROW_WATER),
+		"water shows the animated tile, which has a row to itself")
+	expect(WorldView._base_tile(Farm.Terrain.SOIL, Vector2i(3, 3))
+		== Vector2i(Farm.Terrain.SOIL, WorldView.ROW_BASE),
+		"and everything else reads straight off the terrain byte")
+
+	# **Four grasses, weighted, and the same field every time.**
+	var seen := {}
+	for x in Grid.WIDTH:
+		for y in Grid.HEIGHT:
+			var which := WorldView._grass_variant(Vector2i(x, y))
+			expect(which >= 0 and which < 4,
+				"every cell picks one of the four grasses", str(which))
+			seen[which] = int(seen.get(which, 0)) + 1
+	expect(seen.size() == 4, "and all four turn up somewhere", str(seen))
+	var cells := Grid.WIDTH * Grid.HEIGHT
+	expect(int(seen[0]) * 2 > cells,
+		"the plain one is more than half of them, so a field is not confetti",
+		"%d of %d" % [int(seen[0]), cells])
+	expect(int(seen[3]) * 20 < cells,
+		"and the flower is rare", "%d of %d" % [int(seen[3]), cells])
+	expect(WorldView._grass_variant(Vector2i(5, 7))
+		== WorldView._grass_variant(Vector2i(5, 7)),
+		"and the same cell is the same grass every time")
+
+	# **The edge rules, which cannot both fire on one cell.**
+	var state := State.create(7200)
+	var bytes: PackedByteArray = state["terrain"]
+	var grass := 0
+	var water := 0
+	var patch := 0
+	for idx in Grid.CELLS:
+		var cell := Grid.cell(idx)
+		var terrain := int(bytes[idx])
+		var at := WorldView._edge_tile(bytes, cell, terrain)
+		if terrain == Farm.Terrain.GRASS:
+			expect(at.x < 0, "grass is never edged: it is the background",
+				str(at))
+			grass += 1
+			continue
+		if at.x < 0:
+			continue
+		expect(at.x >= 1 and at.x <= 15,
+			"an edge is one of the fifteen that draw something", str(at))
+		if terrain == Farm.Terrain.WATER:
+			expect(at.y == WorldView.ROW_SHORE,
+				"water draws its own bank", str(at))
+			water += 1
+		else:
+			expect(at.y == WorldView.ROW_EDGE,
+				"and a patch has grass drawn into it", str(at))
+			patch += 1
+	expect(grass > 0 and water > 0 and patch > 0,
+		"the farm has grass, water and patches, and all three were checked",
+		"%d grass, %d shore, %d edged" % [grass, water, patch])
+	print("  the farm lays %d shoreline tiles and %d grass edges"
+		% [water, patch])
+
+	# **The mask is built from the four neighbours in the generator's order.**
+	# North is bit 0, and a cell with grass only to the north must ask for
+	# tile 1 - the one the generator composited from `edge_n` alone. Getting
+	# this backwards is a tileset that looks plausible and is inside out.
+	var plain := PackedByteArray()
+	plain.resize(Grid.CELLS)
+	plain.fill(Farm.Terrain.SOIL)
+	var middle := Vector2i(5, 5)
+	plain[Grid.index(middle + Vector2i(0, -1))] = Farm.Terrain.GRASS
+	expect(WorldView._edge_tile(plain, middle, Farm.Terrain.SOIL)
+		== Vector2i(1, WorldView.ROW_EDGE),
+		"grass to the north alone asks for mask 1",
+		str(WorldView._edge_tile(plain, middle, Farm.Terrain.SOIL)))
+	plain[Grid.index(middle + Vector2i(-1, 0))] = Farm.Terrain.GRASS
+	expect(WorldView._edge_tile(plain, middle, Farm.Terrain.SOIL)
+		== Vector2i(1 | 8, WorldView.ROW_EDGE),
+		"and north-and-west asks for mask 9",
+		str(WorldView._edge_tile(plain, middle, Farm.Terrain.SOIL)))
+
+	# **The map's border is not an edge of anything.** A cell on the outside
+	# row has neighbours that do not exist, and counting them as different
+	# terrain would fringe the whole rim of the farm.
+	var corner_cell := Vector2i(0, 0)
+	var rim := WorldView._edge_tile(plain, corner_cell, Farm.Terrain.SOIL)
+	expect(rim.x < 0, "a cell in the corner of an all-soil farm has no edge",
+		str(rim))
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## How many pixels of one atlas tile are not transparent.
+func _tile_pixels(image: Image, col: int, row: int, size: int) -> int:
+	var n := 0
+	for y in size:
+		for x in size:
+			if image.get_pixel(col * size + x, row * size + y).a > 0.0:
+				n += 1
+	return n
+
+
+## How many are in one four-pixel band of it: 0 north, 1 east, 2 south,
+## 3 west, which is the bit order `EDGE_NEIGHBOURS` uses.
+func _side_pixels(image: Image, col: int, row: int, size: int,
+		side: int) -> int:
+	var n := 0
+	for y in size:
+		for x in size:
+			var inside := false
+			match side:
+				0: inside = y < 4
+				1: inside = x >= size - 4
+				2: inside = y >= size - 4
+				_: inside = x < 4
+			if inside and image.get_pixel(col * size + x,
+					row * size + y).a > 0.0:
+				n += 1
+	return n

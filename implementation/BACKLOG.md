@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`################........`  **71 / 109 done**
+`################........`  **72 / 109 done**
 
-0 doing / 38 todo / 0 blocked across 9 phases.
+0 doing / 37 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0072 - The farm tileset**. The whole of what is left is
+First up: **0073 - The player sprite**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,24 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-38 task(s) left, the ready ones first, then what they
+37 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0072 - The farm tileset
-
-Ready to pick up.  Likely files: `tools/gen_sprites.py, sprites/terrain/`.
-
-Grass, soil, water, rock, path, wooden floor and fence, with edges that meet each other properly.
-
-- Autotiling for grass to soil, grass to water and path edges
-- Water animates: two or three frames, slow
-- Soil has a tilled and a watered variant
-- Small scattered detail tiles so the field is not a flat colour
-- All of it from the ASCII maps, all regenerable
-
-  - done when: No visible seam anywhere on the farm
-  - done when: Regenerating produces byte-identical files
 
 ### 0073 - The player sprite
 
@@ -688,10 +673,10 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0069** [Run statistics](prompts/0069-stats.md)
 - [x] **0070** [Endless nights past ten](prompts/0070-endless.md)
 
-## 5 - Art and visual direction  (1/13)
+## 5 - Art and visual direction  (2/13)
 
 - [x] **0071** [The two palettes](prompts/0071-palettes.md)
-- [ ] **0072** [The farm tileset](prompts/0072-tileset.md)
+- [x] **0072** [The farm tileset](prompts/0072-tileset.md)
 - [ ] **0073** [The player sprite](prompts/0073-player-art.md)
 - [ ] **0109** [The character reacts](prompts/0109-player-emotes.md) - needs 0073
 - [ ] **0074** [Zombie sprites](prompts/0074-zombie-art.md)

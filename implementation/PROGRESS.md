@@ -5585,3 +5585,114 @@ requirement met and visible.
 
 `python tools/verify.py` prints PASS: 2922 asserts, 572 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+
+## 0072 - The farm tileset - done 2026-09-28
+
+What changed: the terrain atlas became a grid instead of a strip, and gained
+autotiled edges, a moving pond and four grasses. Screenshot:
+`implementation/shots/0072-tileset.png`.
+
+Files: `tools/sprite_maps.py`, `tools/gen_sprites.py`, `src/ui/world_view.gd`,
+`sprites/terrain/atlas.png` (generated), `src/tools/headless_check.gd`,
+`src/tools/input_check.gd`.
+
+Verify: 4415 headless / 585 input / both hashes unchanged.
+
+### Sixteen tiles from four maps
+
+Autotiling normally means a forty-seven tile blob set, drawn by hand, and the
+house rule here is that art comes from ASCII maps. Those two do not sit well
+together: forty-seven hand-written 16x16 maps is not a tileset, it is a
+second job.
+
+So the generator composites instead. There are **four** maps per family -
+`edge_n`, `edge_e`, `edge_s`, `edge_w` - and `edge_row()` lays the ones whose
+bits are set over each other for each of the sixteen combinations. A cell with
+grass to the north and the west gets the north map and the west map together,
+which is a corner that nobody drew. Adding a fifth side would be a fifth map
+rather than a new twenty-three.
+
+The view builds the same four bits from the same four neighbours in the same
+order, so the mask **is** the atlas column: no lookup table, and nothing to
+keep in step. There is an assert that bit 0 draws on the north band and
+nothing on the south, for each of the four, because a side map drawn a row too
+low still composites, still looks like a tileset, and puts grass through the
+middle of a path.
+
+### Two edge rules that cannot both fire
+
+- **Water draws its own bank** wherever it meets anything that is not water.
+- **Everything that is neither grass nor water** gets grass drawn into it
+  wherever grass is next door.
+- **Grass draws nothing.** It is the background the rest is cut out of, so
+  softening the patch and softening the meadow are the same job - and doing
+  both would be doing it twice, on twice the tiles, with the seam still in the
+  middle.
+
+The farm lays 26 shoreline tiles and 88 grass edges. The map's border is not
+an edge of anything: a neighbour off the grid counts as the same terrain, or
+the whole rim of the farm would be fringed against nothing.
+
+### The pond needed a row to itself
+
+Godot takes an animated tile's frames from the tiles to its **right** in the
+atlas, and to the right of the water in `Farm.Terrain` order is the rock. So
+the animated water lives on its own row and `_base_tile()` sends water cells
+there. The two frames after it must also not be tiles in their own right -
+creating them takes the frames back and the pond stops moving with no error
+anywhere - and there is an input assert for exactly that.
+
+Measured rather than assumed: with the clock held still, 1633 blue pixels move
+over forty frames and 47 others do. The first attempt to measure it reported
+**zero**, and the reason is worth keeping: the daylight ramp walks across the
+day, so two shots a second apart differ almost everywhere, and the first
+version compared the wrong pair and then compared them without waiting for the
+frame to be drawn.
+
+### Four grasses, weighted
+
+One tile repeated is a grid the eye finds in about a second. Four, picked off
+the cell's own coordinates, so the field is the same field on every machine
+and every run. **Weighted, not an even quarter**: the plain one takes more
+than half or a field looks like confetti, and the one with a flower in it
+turns up about one cell in thirty.
+
+The flower was painted in `flame_hot` for about a minute. Task 0071 exempts
+anything the palette drew brighter than 0.80 from the night ramp, and
+`flame_hot` is 0.843 - so every flower on the farm would have been one of "the
+only warm things at night", glowing in a field of blue grass. It is
+`gold_light` at 0.722 now, which is what the wheat is drawn in and is under
+the threshold. Caught by remembering the previous task rather than by a test,
+which is the weakest way to catch something; the 0071 assert that names
+`gold_light` as *not* exempt is what will catch it next time.
+
+### What was already done
+
+"Soil has a tilled and a watered variant" needed nothing: the plots layer has
+drawn `tilled` and `tilled_wet` off `Farming`'s watered flag since task 0013.
+Recorded here because the requirement reads like work and was not.
+
+### The done-when
+
+- **No visible seam anywhere on the farm.** Grass meets soil, path, rock and
+  floor through a fringe, and water through a bank. Two non-grass terrains
+  meeting - a path running into the stone yard - still meet on a straight
+  line, and that is deliberate rather than missed: a stone floor meeting a
+  dirt path has a crisp edge in life too, and the requirement names the three
+  transitions that do not.
+- **Regenerating produces byte-identical files.** `python tools/gen_sprites.py`
+  twice in a row: 52 files, 0 written the second time, same md5. `--check`
+  passes.
+
+### Hashes
+
+Both unchanged - `2555959448` and `2601044827`. This task is maps, a
+generated PNG and a view; a tileset that moved either guard would be art
+reaching into the rules.
+
+`python tools/verify.py` prints PASS: 4415 asserts, 585 input cases, 0 failed.
+The assert count jumps by about 1500 because the grass-variant check walks
+every cell of the farm; it costs nothing measurable and it is the only way to
+assert the distribution rather than the function.
+
+`exports` is still the one SKIP and still wants the Godot export templates.

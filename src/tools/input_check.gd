@@ -41,7 +41,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 31
+const CASES := 32
 
 var passed := 0
 var failed := 0
@@ -102,6 +102,7 @@ func _run() -> void:
 	await _case_0069_stats()
 	await _case_0070_endless()
 	await _case_0071_palettes()
+	await _case_0072_tileset()
 	_finish()
 
 
@@ -3220,6 +3221,82 @@ func _case_0071_palettes() -> void:
 	if rect != null and hud != null:
 		expect(rect.get_parent() != hud.get_parent(),
 			"and is not inside the HUD it must not touch")
+
+	await close_scene()
+	_completed += 1     # last line: an abandoned case never gets here
+
+
+## 0072 - the tileset, as the running game wires it.
+##
+## The rules of which tile goes where are asserted in `headless_check`, where
+## they are pure functions. What can only be checked here is the wiring: that
+## the edges have a layer of their own over the terrain, that the farm
+## actually gets some, and that the pond is set up to move.
+func _case_0072_tileset() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var view: WorldView = require_control("WorldView")
+	if driver == null or view == null:
+		_completed += 1
+		await close_scene()
+		return
+
+	await frames(4)
+	var terrain: TileMapLayer = view.find_child("Terrain", true, false)
+	var edges: TileMapLayer = view.find_child("TerrainEdges", true, false)
+	expect(terrain != null, "the farm has a terrain layer")
+	expect(edges != null, "and the edges have one of their own")
+	if terrain == null or edges == null:
+		await close_scene()
+		_completed += 1
+		return
+
+	# **Over the terrain, not under it.** A cell holds one tile, so an edge
+	# that shared the layer would replace the ground it is meant to soften.
+	expect(edges.get_index() > terrain.get_index(),
+		"the edges are drawn over the ground",
+		"%d against %d" % [edges.get_index(), terrain.get_index()])
+	expect(edges.tile_set == terrain.tile_set,
+		"and off the same atlas, so there is one texture and not two")
+
+	expect(terrain.get_used_cells().size() == Grid.CELLS,
+		"every cell of the farm has ground under it",
+		str(terrain.get_used_cells().size()))
+	var laid := edges.get_used_cells().size()
+	expect(laid > 0 and laid < Grid.CELLS,
+		"and some of them are edged, but not all - grass is the background",
+		str(laid))
+
+	# **The pond moves.** Three frames on one tile, which is what stops a
+	# pond being a painted pond; the durations are what stop it flickering.
+	var source: TileSetAtlasSource = terrain.tile_set.get_source(0)
+	var water := Vector2i(0, WorldView.ROW_WATER)
+	expect(source != null and source.has_tile(water), "the water is a tile")
+	if source != null and source.has_tile(water):
+		expect(source.get_tile_animation_frames_count(water) == 3,
+			"with three frames",
+			str(source.get_tile_animation_frames_count(water)))
+		expect(source.get_tile_animation_frame_duration(water, 0) > 0.25,
+			"and slow enough not to shimmer",
+			str(source.get_tile_animation_frame_duration(water, 0)))
+		# The frames come off the tiles to its right, and those must not be
+		# tiles themselves or Godot takes them back.
+		for frame in [1, 2]:
+			expect(not source.has_tile(Vector2i(frame, WorldView.ROW_WATER)),
+				"and frame %d is not a tile in its own right" % frame)
+
+	# A water cell shows the animated tile and not the still one in row 0.
+	var bytes: PackedByteArray = driver.state["terrain"]
+	var found := false
+	for idx in Grid.CELLS:
+		if int(bytes[idx]) != Farm.Terrain.WATER:
+			continue
+		found = true
+		expect(terrain.get_cell_atlas_coords(Grid.cell(idx)) == water,
+			"and the pond is drawn with it",
+			str(terrain.get_cell_atlas_coords(Grid.cell(idx))))
+		break
+	expect(found, "the farm has a pond to check")
 
 	await close_scene()
 	_completed += 1     # last line: an abandoned case never gets here

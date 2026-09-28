@@ -1,7 +1,7 @@
 # 0072 - The farm tileset
 
 - **Phase:** 5 - Art and visual direction
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0071, 0013
 - **Likely files:** tools/gen_sprites.py, sprites/terrain/
 
