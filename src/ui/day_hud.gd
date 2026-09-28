@@ -71,16 +71,19 @@ const SHOWN: Array = [
 ## How long a changed number stays lit.
 const FLASH_SECONDS := 0.45
 
+## What a flashing number is multiplied by at the top of its flash, and what
+## the dusk labels wear while the sun is going down.
+##
+## **A brightness, not a colour.** The variation says what a label *is* and
+## this says how lit it is right now, which is the one thing `modulate` is
+## actually good at. Before task 0081 the two were the same mechanism and the
+## HUD had six colour constants to keep in step.
+const LIT_TINT := Color(1.55, 1.45, 1.10)
+
 ## The keys that pick a seed, in `Farming.seeds()` order.
 const SEED_KEYS: Array = [KEY_1, KEY_2, KEY_3, KEY_4, KEY_5, KEY_6]
 
-const PICKED := Color(1.0, 0.92, 0.62)
-const BITE := Color(1.0, 0.85, 0.35)
-const SHORT := Color(0.96, 0.55, 0.36)
 
-const DIM := Color(0.62, 0.60, 0.70)
-const LIT := Color(1.0, 0.95, 0.70)
-const WARM := Color(0.95, 0.85, 0.55)
 
 var _state: Dictionary = {}
 var _day: Label
@@ -117,10 +120,10 @@ func _ready() -> void:
 	strip.size = Vector2(480, 27)   # tall enough for both rows
 	add_child(strip)
 
-	_day = _label("Day", Vector2(4, 3), WARM)
+	_day = _label("Day", Vector2(4, 3), UiKit.WARM)
 	_day.text = "DAY 1"
 
-	_money = _label("Money", Vector2(96, 3), WARM)
+	_money = _label("Money", Vector2(96, 3), UiKit.WARM)
 	_money.text = "$ 0"
 
 	# Two rows of three, right-aligned against the top-right corner, the way
@@ -129,7 +132,7 @@ func _ready() -> void:
 		for column in (SHOWN[row] as Array).size():
 			var id: StringName = SHOWN[row][column]
 			var label := _label("res_%s" % id,
-				Vector2(210 + column * 88, 3 + row * 11), DIM)
+				Vector2(210 + column * 88, 3 + row * 11), UiKit.DIM)
 			_labels[id] = label
 			_last[id] = -1
 
@@ -138,19 +141,19 @@ func _ready() -> void:
 	# The can sits under the seed strip, because the two are the same chore:
 	# what am I about to plant, and have I got water for it.
 	_water = _label("WaterCan",
-		Vector2(7, 46 + Farming.seeds().size() * 10 + 3), DIM)
+		Vector2(7, 46 + Farming.seeds().size() * 10 + 3), UiKit.DIM)
 
 	# Middle of the screen, under the farmer rather than in a corner: the
 	# player is looking at the water, not at the top bar.
-	_line = _label("FishingLine", Vector2(186, 208), BITE)
+	_line = _label("FishingLine", Vector2(186, 208), UiKit.WARM)
 	_line.visible = false
 
 	# **Bottom left, and it stays up after dark.** Supply against draw, and
 	# what that is doing to the speed of everything.
-	_power = _label("PowerLine", Vector2(4, 258), DIM)
+	_power = _label("PowerLine", Vector2(4, 258), UiKit.DIM)
 
 	# Under the power line, and up after dark for the same reason.
-	_ammo = _label("AmmoLine", Vector2(4, 248), DIM)
+	_ammo = _label("AmmoLine", Vector2(4, 248), UiKit.DIM)
 
 	# Neither of these is day chrome, so they are built after `_day_only` is
 	# collected and shown by hand on the night side of `_refresh()`.
@@ -159,7 +162,6 @@ func _ready() -> void:
 	_night.text = "SWITCH TO NIGHT"
 	_night.position = Vector2(352, 248)
 	_night.size = Vector2(124, 18)
-	_night.add_theme_font_size_override("font_size", 8)
 	_night.focus_mode = Control.FOCUS_ALL          # the keyboard can reach it
 	_night.pressed.connect(_ask_for_night)
 	add_child(_night)
@@ -170,7 +172,7 @@ func _ready() -> void:
 	# **One read-out, for the key that has nowhere else to live.** Speed and
 	# the flare are buttons on the night HUD (task 0056); skipping is not one
 	# of `design.md`'s three controls, so it stays a key and this says so.
-	_skip = _label("SkipLine", Vector2(352, 238), DIM)
+	_skip = _label("SkipLine", Vector2(352, 238), UiKit.DIM)
 
 
 ## Cycle 1x, 2x, 4x. The label follows on the next frame, off the driver.
@@ -198,12 +200,12 @@ func _build_seed_strip() -> void:
 	strip.size = Vector2(134, 13 + ids.size() * 10 + 14)
 	add_child(strip)
 
-	var heading := _label("SeedHeading", Vector2(7, 35), WARM)
+	var heading := _label("SeedHeading", Vector2(7, 35), UiKit.WARM)
 	heading.text = "# CROP    $  TIME  /DAY"
 
 	for i in ids.size():
 		var id: StringName = ids[i]
-		var row := _label("seed_%s" % id, Vector2(7, 46 + i * 10), DIM)
+		var row := _label("seed_%s" % id, Vector2(7, 46 + i * 10), UiKit.DIM)
 		row.text = "%d %-7s $%-2d %3ds  %2d" % [i + 1, str(id),
 			int((GameData.CROPS[id] as Dictionary)["seed_cost"]),
 			Farming.seconds_to_grow(id), Farming.value_per_day(id)]
@@ -287,7 +289,8 @@ func _refresh(force: bool) -> void:
 	_power.text = "POWER %d/%d" % [supply, draw] \
 		if percent >= 100 else "POWER %d/%d  everything at %d%%" \
 			% [supply, draw, percent]
-	_power.modulate = SHORT if percent < 100 else DIM
+	_power.theme_type_variation = UiKit.WARN if percent < 100 \
+		else UiKit.DIM
 
 	# **What is left to shoot**, and a warning when a kind has run dry.
 	var parts: Array = []
@@ -298,7 +301,7 @@ func _refresh(force: bool) -> void:
 		if held <= 0:
 			empty = true
 	_ammo.text = "AMMO  " + "   ".join(parts) if not parts.is_empty() 		else "AMMO  none needed"
-	_ammo.modulate = SHORT if empty else DIM
+	_ammo.theme_type_variation = UiKit.WARN if empty else UiKit.DIM
 
 	if _day_only.is_empty():
 		for child in get_children():
@@ -315,7 +318,8 @@ func _refresh(force: bool) -> void:
 	if after_dark:
 		var refused := Sim.why_not_skip(_state)
 		_skip.text = "[K] SKIP" if refused.is_empty() else "[K] " + refused
-		_skip.modulate = SHORT if not refused.is_empty() else WARM
+		_skip.theme_type_variation = UiKit.WARN \
+			if not refused.is_empty() else UiKit.WARM
 
 	if not daylight:
 		return
@@ -334,7 +338,7 @@ func _refresh(force: bool) -> void:
 		(tick / GameData.TICK_HZ) % 60,
 		"  DUSK" if Phases.is_dusk(_state) else "",
 	]
-	_day.modulate = LIT if Phases.is_dusk(_state) else WARM
+	_day.modulate = LIT_TINT if Phases.is_dusk(_state) else Color.WHITE
 	var money := Resources.amount(_state, GameData.MONEY)
 	if force or money != int(_last.get(GameData.MONEY, -1)):
 		if not force and _last.has(GameData.MONEY):
@@ -357,13 +361,15 @@ func _refresh(force: bool) -> void:
 	var carried := Farming.water_carried(_state)
 	_water.text = "WATER %d/%d" % [carried, GameData.WATER_CAN_CAPACITY] \
 		if carried > 0 else "WATER  fill at the well"
-	_water.modulate = PICKED if carried > 0 else DIM
+	_water.theme_type_variation = UiKit.WARM if carried > 0 \
+		else UiKit.DIM
 
 	# The chosen row is lit, so the strip answers "what am I about to plant"
 	# without the player having to remember which key they last pressed.
 	var chosen := Farming.selected_seed(_state)
 	for id in _seed_rows:
-		(_seed_rows[id] as Label).modulate = PICKED if id == chosen else DIM
+		(_seed_rows[id] as Label).theme_type_variation = UiKit.WARM \
+			if id == chosen else UiKit.DIM
 
 	# **The line, while there is one.** Waiting says so quietly; a bite shouts,
 	# because the window is a second and a half.
@@ -371,13 +377,13 @@ func _refresh(force: bool) -> void:
 	if _line.visible:
 		var biting := Fishing.is_biting(_state)
 		_line.text = "A BITE - PRESS SPACE" if biting else "waiting for a bite"
-		_line.modulate = BITE if biting else DIM
+		_line.theme_type_variation = UiKit.WARM if biting else UiKit.DIM
 
 	# **Past dusk the button asks.** It never presses itself: `design.md`
 	# promises the player switches reality when they want to.
 	_night.text = "NIGHT %d IS WAITING" % int(_state["day"]) \
 		if Phases.is_dusk(_state) else "SWITCH TO NIGHT"
-	_night.modulate = LIT if Phases.is_dusk(_state) else Color(1, 1, 1)
+	_night.modulate = LIT_TINT if Phases.is_dusk(_state) else Color.WHITE
 
 
 func _fade(delta: float) -> void:
@@ -390,11 +396,11 @@ func _fade(delta: float) -> void:
 		_flash[id] = left
 		var t := left / FLASH_SECONDS
 		var label: Label = _money if id == GameData.MONEY else _labels[id]
-		label.modulate = DIM.lerp(LIT, t)
+		label.modulate = Color.WHITE.lerp(LIT_TINT, t)
 	for id in done:
 		_flash.erase(id)
 		var label: Label = _money if id == GameData.MONEY else _labels[id]
-		label.modulate = WARM if id == GameData.MONEY else DIM
+		label.modulate = Color.WHITE
 
 
 ## The whole word, until task 0079 draws the icons the reference sheet has.
@@ -406,12 +412,12 @@ func _short(id: StringName) -> String:
 	return str(id)
 
 
-func _label(node_name: String, at: Vector2, colour: Color) -> Label:
+func _label(node_name: String, at: Vector2,
+		role: StringName = &"") -> Label:
 	var label := Label.new()
 	label.name = node_name
 	label.position = at
 	label.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	label.modulate = colour
-	label.add_theme_font_size_override("font_size", 8)
+	label.theme_type_variation = role
 	add_child(label)
 	return label

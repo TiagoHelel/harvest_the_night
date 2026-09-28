@@ -41,7 +41,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 37
+const CASES := 38
 
 var passed := 0
 var failed := 0
@@ -108,6 +108,7 @@ func _run() -> void:
 	await _case_0076_lighting()
 	await _case_0077_particles()
 	await _case_0078_transition()
+	await _case_0081_theme()
 	_finish()
 
 
@@ -1012,6 +1013,16 @@ func until(condition: Callable, what: String, max_frames: int = 600) -> bool:
 	_fail("timed out waiting for %s" % what)
 	return false
 
+## The colour a label is actually drawn in.
+##
+## **Not `modulate`.** Task 0081 moved every UI colour into the theme: a label
+## now says what it *is* - `theme_type_variation` - and the theme says what
+## that looks like, so `modulate` is white on almost everything and reading it
+## answers a question nobody is asking. This multiplies the two, which is what
+## reaches the screen, and it is what these cases meant all along.
+func ink(control: Control) -> Color:
+	return control.get_theme_color(&"font_color") * control.modulate
+
 
 ## Find a control by node name, anywhere under the scene. **Loud**: a name that
 ## is not there is a failed case, because that is almost always a signal that
@@ -1143,10 +1154,10 @@ func _case_0028_seeds() -> void:
 	var first: Label = require_control("seed_%s" % ids[0])
 	var second: Label = require_control("seed_%s" % ids[1])
 	await frames(2)
-	expect(first.modulate != second.modulate,
+	expect(ink(first) != ink(second),
 		"the selected crop is lit and the others are not",
-		"%s against %s" % [first.modulate, second.modulate])
-	var lit_colour := first.modulate
+		"%s against %s" % [ink(first), ink(second)])
+	var lit_colour := ink(first)
 
 	# **The number key picks**, through the real key, in the real scene.
 	expect(Farming.selected_seed(state) == StringName(ids[0]),
@@ -1159,10 +1170,10 @@ func _case_0028_seeds() -> void:
 	expect(Farming.selected_seed(state) == StringName(ids[1]),
 		"2 picks the second crop", str(Farming.selected_seed(state)))
 	await frames(2)
-	expect(second.modulate == lit_colour, "and the strip moves the light",
-		"%s" % second.modulate)
-	expect(first.modulate != lit_colour, "off the one it left", "%s"
-		% first.modulate)
+	expect(ink(second) == lit_colour, "and the strip moves the light",
+		"%s" % ink(second))
+	expect(ink(first) != lit_colour, "off the one it left", "%s"
+		% ink(first))
 
 	# **A key past the last crop changes nothing**, rather than selecting
 	# something that is not there and failing at the furrow a minute later.
@@ -1639,7 +1650,7 @@ func _case_0033_power() -> void:
 	expect(power.text.contains("%d" % Power.supply(state)),
 		"saying what the farm supplies", power.text)
 	expect(power.text.contains("/"), "against what it draws", power.text)
-	var settled := power.modulate
+	var settled := ink(power)
 
 	# **Build past the farm's means and the line says so.**
 	Resources.gain(state, {GameData.WOOD: 600, GameData.IRON: 600})
@@ -1660,8 +1671,8 @@ func _case_0033_power() -> void:
 		"%d/%d" % [Power.supply(state), Power.draw(state)])
 	expect(power.text.contains("%d%%" % Power.percent(state)),
 		"the line says what that is doing to the speed of things", power.text)
-	expect(power.modulate != settled, "and it changes colour to say so",
-		"%s then %s" % [settled, power.modulate])
+	expect(ink(power) != settled, "and it changes colour to say so",
+		"%s then %s" % [settled, ink(power)])
 
 	# **A generator puts it back.**
 	Resources.gain(state, Building.cost_of(&"generator"))
@@ -1689,8 +1700,8 @@ func _case_0033_power() -> void:
 		expect(not Power.is_short(state),
 			"and the farm is not short any more",
 			"%d/%d" % [Power.supply(state), Power.draw(state)])
-		expect(power.modulate == settled, "the line settles back", "%s"
-			% power.modulate)
+		expect(ink(power) == settled, "the line settles back", "%s"
+			% ink(power))
 
 	# **It stays up after dark**, which is when a generator running dry is the
 	# thing a player most needs to be told about.
@@ -1818,11 +1829,11 @@ func _case_0035_ammo() -> void:
 	for res in Ammo.kinds():
 		Resources.spend(state, res, Resources.amount(state, res))
 	await frames(2)
-	var warned := ammo.modulate
+	var warned := ink(ammo)
 	Resources.gain(state, {GameData.GUNPOWDER: 9, GameData.INCENDIARY: 9})
 	await frames(2)
-	expect(ammo.modulate != warned, "and a stocked one is not",
-		"%s then %s" % [warned, ammo.modulate])
+	expect(ink(ammo) != warned, "and a stocked one is not",
+		"%s then %s" % [warned, ink(ammo)])
 	expect(ammo.text.contains("9"), "with the count on it", ammo.text)
 
 	# **It stays up after dark**, which is when it is actually draining.
@@ -2820,8 +2831,9 @@ func _case_0056_night_hud() -> void:
 	state["house_hp"] = maxi(GameData.HOUSE_HP
 		* GameData.HOUSE_DANGER_PERCENT / 100 - 1, 1)
 	await frames(2)
-	expect(house_text.modulate.r > house_text.modulate.g,
-		"and a house in danger is red", str(house_text.modulate))
+	var alarmed := ink(house_text)
+	expect(alarmed.r > alarmed.g,
+		"and a house in danger is red", str(alarmed))
 	state["house_hp"] = GameData.HOUSE_HP
 
 	# **All three controls, pressed.** The done-when.
@@ -3697,3 +3709,102 @@ func _night_through_changes(driver: SimDriver, view: WorldView,
 			view.skip_transition()
 		await frames(1)
 	return State.hash_of(state)
+func _case_0081_theme() -> void:
+	await open_scene(MAIN_SCENE)
+	await frames(4)
+	if _scene == null:
+		_completed += 1
+		await close_scene()
+		return
+
+	# **Every screen in the game, asked what it is wearing.** This is the
+	# done-when a `grep` cannot answer: a screen can have no overrides left
+	# and still be the odd one out, because it sits somewhere the theme never
+	# reaches. Before this task the debug overlay was exactly that.
+	var controls: Array = []
+	_gather(_scene, controls)
+	expect(controls.size() > 40, "the tree has screens in it",
+		"%d controls" % controls.size())
+
+	# **Either of the game's two faces.** The heading is the same design at
+	# twice the size and is a second `FontFile`, so "wears the game's letters"
+	# means one of these two and not one of them alone - which is what the
+	# first version of this assert said, and the wave announcement caught it.
+	var game_font := UiKit.font()
+	var faces := [game_font, UiKit.heading_font()]
+	var wrong_font: Array = []
+	var flat_panels: Array = []
+	for node in controls:
+		var control: Control = node
+		if control is Label or control is Button:
+			if not faces.has(control.get_theme_font(&"font")):
+				wrong_font.append(str(control.name))
+		if control is PanelContainer or control is Panel:
+			if not (control.get_theme_stylebox(&"panel") is StyleBoxTexture):
+				flat_panels.append(str(control.name))
+	expect(wrong_font.is_empty(),
+		"every label and button in the game wears the game's own letters",
+		"%d do not: %s" % [wrong_font.size(), str(wrong_font.slice(0, 4))])
+	expect(flat_panels.is_empty(),
+		"and every panel is the kit's drawn frame, not a flat box of its own",
+		"%d are not: %s" % [flat_panels.size(), str(flat_panels.slice(0, 4))])
+
+	# **The overlay is in that count.** It is on a `CanvasLayer` of its own
+	# outside the UI one, which is how it stayed in Godot's grey through the
+	# five tasks that each thought they had dressed the game.
+	var readout: Control = require_control("Readout")
+	if readout != null:
+		expect(readout.get_theme_font(&"font") == game_font,
+			"the debug overlay wears it too, on its own layer")
+	var overlay_panel: Control = require_control("Panel")
+	if overlay_panel != null:
+		expect(overlay_panel.get_theme_stylebox(&"panel") is StyleBoxTexture,
+			"and its frame is the kit's quiet one")
+
+	# **Focus is a state you can see.** Requirement three of the task, and the
+	# reason the two screens that used to hide Godot's ring behind an empty
+	# box could not be left alone: a keyboard with no visible focus is a
+	# keyboard nobody can use.
+	var button: Button = require_control("NightButton")
+	if button != null:
+		expect(button.focus_mode != Control.FOCUS_NONE,
+			"the night button can take focus")
+		var ring := button.get_theme_stylebox(&"focus")
+		var normal := button.get_theme_stylebox(&"normal")
+		expect(ring is StyleBoxTexture,
+			"and its focus is a drawn ring", str(ring))
+		expect(ring != normal,
+			"which is not the same box as its resting state")
+		expect(button.get_theme_stylebox(&"disabled") != normal,
+			"and a disabled button is a different box from a live one")
+		button.grab_focus()
+		await frames(2)
+		expect(button.has_focus(), "the keyboard can land on it")
+
+	# **Each one is the size it was told to be.** The theme has to be on the
+	# tree before a screen builds against it: a Control's `size` is clamped up
+	# to the minimum when it is set and never clamped back down, so a button
+	# built before the theme landed keeps Godot's thirty-one pixels for the
+	# rest of the run. Three night controls did exactly that until `Main`
+	# moved the dressing into `_enter_tree`.
+	for named in ["RepairButton", "FlareButton", "SpeedButton"]:
+		var control: Control = require_control(named)
+		if control == null:
+			continue
+		expect(control.size.y <= 20.0,
+			"%s is the height it was given, not the theme's" % named,
+			str(control.size))
+		expect(control.get_global_rect().end.y <= 270.0,
+			"and %s is on the screen" % named,
+			str(control.get_global_rect()))
+
+	await close_scene()
+	_completed += 1     # last line: an abandoned case never gets here
+
+
+## Every Control under a node, in tree order.
+func _gather(node: Node, into: Array) -> void:
+	if node is Control:
+		into.append(node)
+	for child in node.get_children():
+		_gather(child, into)

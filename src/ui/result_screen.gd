@@ -13,9 +13,6 @@ extends Control
 ## total shown here and a total added to the ledger would be two numbers that
 ## could disagree, and the one the player believes is the one on screen.
 
-const WON := Color(0.65, 0.92, 0.55)
-const LOST := Color(0.94, 0.42, 0.38)
-const DIM := Color(0.66, 0.64, 0.74)
 
 var _state: Dictionary = {}
 var _title: Label
@@ -50,12 +47,6 @@ func _ready() -> void:
 	# `input_check` asserts the button is on screen now.
 	frame.position = Vector2(128, 30)
 	frame.custom_minimum_size = Vector2(224, 190)
-	var box := StyleBoxFlat.new()
-	box.bg_color = Color(0.07, 0.06, 0.12, 0.98)
-	box.border_color = Color(0.55, 0.48, 0.35)
-	box.set_border_width_all(1)
-	box.set_content_margin_all(8)
-	frame.add_theme_stylebox_override("panel", box)
 	add_child(frame)
 
 	var column := VBoxContainer.new()
@@ -75,7 +66,6 @@ func _ready() -> void:
 	_continue.text = "BACK TO THE FARM"
 	_continue.clip_text = true
 	_continue.custom_minimum_size = Vector2(206, 20)
-	_continue.add_theme_font_size_override("font_size", 8)
 	_continue.focus_mode = Control.FOCUS_ALL
 	_continue.pressed.connect(_confirm)
 	column.add_child(_continue)
@@ -88,7 +78,6 @@ func _ready() -> void:
 	_play_on.text = "PLAY ON - THE NIGHTS KEEP COMING"
 	_play_on.clip_text = true
 	_play_on.custom_minimum_size = Vector2(206, 20)
-	_play_on.add_theme_font_size_override("font_size", 8)
 	_play_on.focus_mode = Control.FOCUS_ALL
 	_play_on.visible = false
 	_play_on.pressed.connect(_carry_on)
@@ -183,7 +172,7 @@ func _build(payout: Dictionary) -> void:
 
 	_title.text = "NIGHT %d %s" % [int(payout["night"]),
 		"SURVIVED" if survived else "LOST"]
-	_title.modulate = WON if survived else LOST
+	_title.theme_type_variation = UiKit.GOOD if survived else UiKit.BAD
 
 	# **Four numbers on two rows, not four.** A `Label` reserves its font's
 	# line height whatever `custom_minimum_size` claims, so a row here is
@@ -192,15 +181,15 @@ func _build(payout: Dictionary) -> void:
 	# run, because "back to the farm" is the only way out of this screen.
 	# `input_check` asserts it is on screen.
 	_row("killed %d, %d got through" % [int(payout["killed"]),
-		int(payout["breaches"])], "", DIM)
+		int(payout["breaches"])], "", UiKit.DIM)
 	_row("house %d/%d, %d built still up"
 		% [int(payout["house_hp"]), GameData.HOUSE_HP,
 			int(payout.get("structures", 0))],
-		"%d untouched" % int(payout.get("intact", 0)), DIM)
+		"%d untouched" % int(payout.get("intact", 0)), UiKit.DIM)
 
 	_gap()
 	if survived:
-		_row("PAID", "", WON)
+		_row("PAID", "", UiKit.GOOD)
 		# Materials on one line and money on the next, for the same reason.
 		var goods: Array = []
 		var purse: Array = []
@@ -211,9 +200,9 @@ func _build(payout: Dictionary) -> void:
 			else:
 				goods.append("+%d %s" % [n, id])
 		if not goods.is_empty():
-			_row("  " + "  ".join(goods), "", WON)
+			_row("  " + "  ".join(goods), "", UiKit.GOOD)
 		if not purse.is_empty():
-			_row("  " + "  ".join(purse), "", WON)
+			_row("  " + "  ".join(purse), "", UiKit.GOOD)
 
 		# **What the defending was worth**, which is the half of `design.md`
 		# section 12 that changes how the next night gets built: "+ $112"
@@ -222,19 +211,19 @@ func _build(payout: Dictionary) -> void:
 		var from: Dictionary = payout.get("money_from", {})
 		var well := int(from.get("nothing touched", 0)) 			+ int(from.get("still standing", 0)) 			+ int(from.get("the house untouched", 0))
 		if well > 0:
-			_row("  for defending well", "+%d" % well, WON)
+			_row("  for defending well", "+%d" % well, UiKit.GOOD)
 	else:
-		_row("LOST", "", LOST)
+		_row("LOST", "", UiKit.BAD)
 		var lost: Dictionary = payout["lost"]
 		if lost.is_empty():
-			_row("  nothing - there was nothing to take", "", DIM)
+			_row("  nothing - there was nothing to take", "", UiKit.DIM)
 		else:
 			var taken: Array = []
 			for id in _sorted(lost):
 				taken.append("-%d %s" % [int(lost[id]), id])
-			_row("  " + "  ".join(taken), "", LOST)
+			_row("  " + "  ".join(taken), "", UiKit.BAD)
 		_gap()
-		_row("money and the farm are untouched", "", DIM)
+		_row("money and the farm are untouched", "", UiKit.DIM)
 
 ## The run summary: what the whole thing was.
 ##
@@ -243,32 +232,32 @@ func _build(payout: Dictionary) -> void:
 func _build_the_ending() -> void:
 	var run := Run.summary(_state)
 	_title.text = "THE FARM HELD"
-	_title.modulate = WON
+	_title.theme_type_variation = UiKit.GOOD
 
 	_row("%d days, %d nights, the Giant down"
-		% [int(run["days"]), int(run["nights_won"])], "", WON)
-	_row("zombies killed", str(int(run["killed"])), DIM)
-	_row("got through", str(int(run["breaches"])), DIM)
-	_row("structures lost", str(int(run["structures_lost"])), DIM)
+		% [int(run["days"]), int(run["nights_won"])], "", UiKit.GOOD)
+	_row("zombies killed", str(int(run["killed"])), UiKit.DIM)
+	_row("got through", str(int(run["breaches"])), UiKit.DIM)
+	_row("structures lost", str(int(run["structures_lost"])), UiKit.DIM)
 
 	var hauled: Array = []
 	for id in _sorted(run["gathered"] as Dictionary):
 		hauled.append("%d %s" % [int((run["gathered"] as Dictionary)[id]), id])
 	if not hauled.is_empty():
-		_row("  gathered " + "  ".join(hauled.slice(0, 4)), "", DIM)
+		_row("  gathered " + "  ".join(hauled.slice(0, 4)), "", UiKit.DIM)
 
 	_gap()
-	_row("THE BUILD THAT WON", "", WON)
+	_row("THE BUILD THAT WON", "", UiKit.GOOD)
 	var built: Array = []
 	for id in _sorted(run["build"] as Dictionary):
 		built.append("%d %s" % [int((run["build"] as Dictionary)[id]), id])
 	_row("  " + ("  ".join(built) if not built.is_empty()
-		else "nothing left standing"), "", WON)
+		else "nothing left standing"), "", UiKit.GOOD)
 	if not (run["technology"] as Array).is_empty():
-		_row("  " + ", ".join(run["technology"] as Array), "", DIM)
+		_row("  " + ", ".join(run["technology"] as Array), "", UiKit.DIM)
 
 
-func _row(left: String, right: String, colour: Color) -> void:
+func _row(left: String, right: String, role: StringName = &"") -> void:
 	var row := HBoxContainer.new()
 	row.custom_minimum_size = Vector2(206, 11)
 	_lines.add_child(row)
@@ -276,14 +265,12 @@ func _row(left: String, right: String, colour: Color) -> void:
 	var a := Label.new()
 	a.text = left
 	a.custom_minimum_size = Vector2(150, 0)
-	a.add_theme_font_size_override("font_size", 8)
-	a.modulate = colour
+	a.theme_type_variation = role
 	row.add_child(a)
 
 	var b := Label.new()
 	b.text = right
-	b.add_theme_font_size_override("font_size", 8)
-	b.modulate = colour
+	b.theme_type_variation = role
 	row.add_child(b)
 
 

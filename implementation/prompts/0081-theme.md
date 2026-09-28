@@ -1,7 +1,7 @@
 # 0081 - The UI theme
 
 - **Phase:** 5 - Art and visual direction
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0079, 0080
 - **Likely files:** assets/theme.tres, src/ui/
 

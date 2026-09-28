@@ -33,8 +33,6 @@ extends Control
 ## the lines disappear behind them.
 
 const SEEN_KEY := &"gameplay/tutorial_seen"
-const LINE := Color(1.0, 0.94, 0.72)
-const POINTER := Color(0.98, 0.86, 0.45)
 
 var _state: Dictionary = {}
 var _world: WorldView
@@ -60,16 +58,13 @@ func _ready() -> void:
 	_line = Label.new()
 	_line.name = "TutorialLine"
 	_line.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_line.add_theme_font_size_override("font_size", 8)
-	_line.modulate = LINE
 	add_child(_line)
 
 	_arrow = Label.new()
 	_arrow.name = "TutorialArrow"
 	_arrow.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_arrow.text = "v"
-	_arrow.add_theme_font_size_override("font_size", 8)
-	_arrow.modulate = POINTER
+	_arrow.theme_type_variation = UiKit.WARM
 	add_child(_arrow)
 
 

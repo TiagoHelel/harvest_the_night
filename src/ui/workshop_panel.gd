@@ -34,10 +34,6 @@ extends Control
 ## clicking a queued item calls `Crafting.cancel_at()`; both of those refuse on
 ## their own terms and this file does not second-guess them.
 
-const HEADING := Color(0.96, 0.85, 0.55)
-const DIM := Color(0.66, 0.64, 0.74)
-const SHORT := Color(0.96, 0.55, 0.36)
-const RUNNING := Color(0.75, 0.92, 0.62)
 const ROW_HEIGHT := 11
 
 var _state: Dictionary = {}
@@ -62,38 +58,29 @@ func _ready() -> void:
 	_frame.position = Vector2(336, 32)
 	_frame.custom_minimum_size = Vector2(140, 0)
 	_frame.mouse_filter = Control.MOUSE_FILTER_STOP
-	var box := StyleBoxFlat.new()
-	box.bg_color = Color(0.07, 0.06, 0.12, 0.96)
-	box.border_color = Color(0.52, 0.46, 0.34)
-	box.set_border_width_all(1)
-	box.set_content_margin_all(5)
-	_frame.add_theme_stylebox_override("panel", box)
 	add_child(_frame)
 
 	var column := VBoxContainer.new()
 	column.name = "WorkshopColumn"
-	column.add_theme_constant_override("separation", 0)
 	_frame.add_child(column)
 
-	_title = _line("WorkshopTitle", "", HEADING)
+	_title = _line("WorkshopTitle", "", UiKit.WARM)
 	column.add_child(_title)
 
-	_progress = _line("WorkshopProgress", "", RUNNING)
+	_progress = _line("WorkshopProgress", "", UiKit.GOOD)
 	column.add_child(_progress)
 
-	_away = _line("WorkshopAway", "", HEADING)
+	_away = _line("WorkshopAway", "", UiKit.WARM)
 	_away.visible = false
 	column.add_child(_away)
 
 	_queue = VBoxContainer.new()
 	_queue.name = "WorkshopQueue"
-	_queue.add_theme_constant_override("separation", 0)
 	column.add_child(_queue)
 
-	column.add_child(_line("WorkshopMakeLabel", "- MAKE", HEADING))
+	column.add_child(_line("WorkshopMakeLabel", "- MAKE", UiKit.WARM))
 	_recipes = VBoxContainer.new()
 	_recipes.name = "WorkshopRecipes"
-	_recipes.add_theme_constant_override("separation", 0)
 	column.add_child(_recipes)
 
 
@@ -142,14 +129,14 @@ func _process(_delta: float) -> void:
 	var progress := Crafting.progress_at(_state, cell)
 	if Crafting.is_stalled(_state, cell):
 		_progress.text = "waiting on materials"
-		_progress.modulate = SHORT
+		_progress.theme_type_variation = UiKit.WARN
 	elif int(progress[1]) > 0:
 		_progress.text = "%s  %.1fs" % [Crafting.making(_state, cell),
 			float(progress[0]) / float(GameData.TICK_HZ)]
-		_progress.modulate = RUNNING
+		_progress.theme_type_variation = UiKit.GOOD
 	else:
 		_progress.text = "idle"
-		_progress.modulate = DIM
+		_progress.theme_type_variation = UiKit.DIM
 
 
 ## The difference between what this bench has made and what this panel last
@@ -210,7 +197,7 @@ func _build(cell: Vector2i) -> void:
 	var room := Crafting.room_at(_state, cell)
 	if room > 0:
 		_queue.add_child(_line("WorkshopRoom", "  %d slot%s free"
-			% [room, "" if room == 1 else "s"], DIM))
+			% [room, "" if room == 1 else "s"], UiKit.DIM))
 
 	# What it can make. Clicking one puts it on the end.
 	for id in Crafting.recipes_at(station):
@@ -226,28 +213,19 @@ func _build(cell: Vector2i) -> void:
 		_recipes.add_child(row)
 
 
-## The compact button style the build palette settled on in task 0032: the
-## theme's default reserves twenty pixels and this screen is 270 tall.
+## The compact row the build palette settled on in task 0032, which is now
+## the theme's `ROW`: a default `Button` reserves twenty pixels of height and
+## this screen is 270 tall.
 func _style(row: Button) -> void:
 	row.custom_minimum_size = Vector2(130, ROW_HEIGHT)
-	row.add_theme_font_size_override("font_size", 8)
-	for style in ["normal", "hover", "pressed", "focus", "disabled"]:
-		var box := StyleBoxFlat.new()
-		box.bg_color = Color(0.12, 0.11, 0.18, 0.0 if style == "focus" else 0.8)
-		if style == "hover":
-			box.bg_color = Color(0.20, 0.19, 0.28, 0.9)
-		box.content_margin_left = 3
-		box.content_margin_right = 3
-		box.content_margin_top = 1
-		box.content_margin_bottom = 1
-		row.add_theme_stylebox_override(style, box)
+	row.theme_type_variation = UiKit.ROW
 
 
-func _line(node_name: String, text: String, colour: Color) -> Label:
+func _line(node_name: String, text: String,
+		role: StringName = &"") -> Label:
 	var label := Label.new()
 	label.name = node_name
 	label.text = text
 	label.custom_minimum_size = Vector2(130, ROW_HEIGHT)
-	label.add_theme_font_size_override("font_size", 8)
-	label.modulate = colour
+	label.theme_type_variation = role
 	return label

@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 73
+const GROUPS := 74
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -137,6 +137,7 @@ func _run() -> void:
 	_task_0078_transition()
 	_task_0079_ui_kit()
 	_task_0080_font()
+	_task_0081_theme()
 
 
 func _finish() -> void:
@@ -12222,3 +12223,150 @@ func _task_0080_font() -> void:
 		+ "MMM %.0f against iii %.0f" % [wide, narrow])
 
 	_completed += 1     # last line: an abandoned group never gets here
+## 0081 - one theme, and nothing dressing itself.
+func _task_0081_theme() -> void:
+	# **The done-when, asked of the repository.** A `grep` a person runs once
+	# is a `grep` that passes the day it is run; this one runs every time.
+	# Comments are allowed to say the words - this file does - so only code
+	# counts, which here means a line with a `.` before the call on it.
+	var offenders: Array = []
+	var folder := DirAccess.open("res://src/ui/")
+	var seen := 0
+	if folder != null:
+		for file_name in folder.get_files():
+			if not file_name.ends_with(".gd"):
+				continue
+			var text := FileAccess.get_file_as_string(
+				"res://src/ui/" + file_name)
+			seen += 1
+			for line in text.split("\n"):
+				var trimmed := line.strip_edges()
+				if trimmed.begins_with("#"):
+					continue
+				if trimmed.contains(".add_theme_") \
+						and trimmed.contains("_override("):
+					offenders.append("%s: %s" % [file_name, trimmed])
+	expect(seen >= 20, "every script in src/ui was read", "%d files" % seen)
+	expect(offenders.is_empty(),
+		"no screen overrides the theme - they name a role and it decides",
+		"%d left: %s" % [offenders.size(), str(offenders.slice(0, 3))])
+
+	var dressed := UiKit.theme()
+	expect(dressed != null, "the theme is built")
+	if dressed == null:
+		_completed += 1
+		return
+
+	# **Every colour comes off the palette.** The UI and the sprites are
+	# painted out of the same tin, so a palette change reaches both - which is
+	# the whole of "a colour change is one edit".
+	for role in UiKit.ROLES:
+		var key: StringName = UiKit.ROLES[role]
+		expect(PaletteData.COLOURS.has(key),
+			"the %s role names a palette colour" % _role_name(role), str(key))
+
+	# **And no two roles are the same colour.** Two names for one colour is a
+	# distinction the player cannot see and a name the next screen will pick
+	# at random.
+	var by_colour: Dictionary = {}
+	for role in UiKit.ROLES:
+		var shade := UiKit.colour(role).to_html()
+		expect(not by_colour.has(shade),
+			"%s is not the same colour as %s"
+			% [_role_name(role), str(by_colour.get(shade, ""))], shade)
+		by_colour[shade] = _role_name(role)
+
+	# **And every one of them can be read on a panel.** A label the colour of
+	# what is behind it is a label nobody reads, whatever the palette says.
+	var behind: Color = PaletteData.COLOURS[&"night"]
+	var dark := behind.r * 0.299 + behind.g * 0.587 + behind.b * 0.114
+	for role in UiKit.ROLES:
+		var ink := UiKit.colour(role)
+		var lit := ink.r * 0.299 + ink.g * 0.587 + ink.b * 0.114
+		expect(lit - dark > 0.2,
+			"%s can be read against a panel" % _role_name(role),
+			"%.2f against %.2f" % [lit, dark])
+
+	# **The drawn frame, not a flat box.** Five screens each had their own
+	# StyleBoxFlat in a slightly different purple before this task; a panel
+	# that is not the kit's frame is a sixth.
+	for type in [&"Panel", &"PanelContainer"]:
+		var box := dressed.get_stylebox(&"panel", type)
+		expect(box is StyleBoxTexture,
+			"a %s wears the kit's drawn frame" % type,
+			str(box))
+		expect(box != null and box.get_minimum_size().x == UiKit.PAD * 2,
+			"held off its own frame by the same padding everywhere",
+			str(box.get_minimum_size() if box else Vector2.ZERO))
+
+	# **Focus, hover and disabled, on everything interactive** - the task's
+	# third requirement. Focus especially: two screens used to hide Godot's
+	# ring behind an empty box, which is not a focus state, it is the absence
+	# of one.
+	for type in [&"Button", UiKit.ROW, UiKit.TAB]:
+		for state in ["normal", "hover", "pressed", "disabled", "focus"]:
+			expect(dressed.get_stylebox(StringName(state), type) != null,
+				"a %s has a '%s' state" % [type, state])
+	var ring := dressed.get_stylebox(&"focus", &"Button")
+	expect(ring is StyleBoxTexture,
+		"and focus is a drawn ring rather than an empty box", str(ring))
+
+	# **A button does not reserve height it was not given.** Vertical content
+	# margin is how the build palette walked off the bottom of the screen at
+	# 0032, the shop rows at 0040 and the speed control at 0055. Pinned once
+	# here instead of by hand in five files.
+	for type in [&"Button", UiKit.ROW, UiKit.TAB]:
+		for state in ["normal", "hover", "pressed", "disabled"]:
+			var box := dressed.get_stylebox(StringName(state), type)
+			if box == null:
+				continue
+			expect(box.get_minimum_size().y <= 2.0,
+				"a %s '%s' box reserves no height" % [type, state],
+				str(box.get_minimum_size()))
+
+	# **Every name a screen can ask for is a name the theme answers to.** A
+	# typo in a variation is silent - the label simply stays the default
+	# colour - so it is asked here rather than left to be noticed.
+	for named in [UiKit.DIM, UiKit.FAINT, UiKit.WARM, UiKit.MONEY,
+			UiKit.WARN, UiKit.GOOD, UiKit.BAD, UiKit.COOL, UiKit.HEADING,
+			UiKit.ROW, UiKit.TAB, UiKit.OVERLAY]:
+		expect(dressed.get_type_variation_base(named) != StringName(),
+			"%s is a variation the theme knows" % named,
+			str(dressed.get_type_variation_base(named)))
+
+	# **One scale, and it is the window's.** The project stretches a 480x270
+	# viewport by whole numbers; a second scale in here would multiply that
+	# one and put an eight pixel font at eleven and a half.
+	expect(is_equal_approx(dressed.default_base_scale, 1.0),
+		"the theme adds no scale of its own",
+		str(dressed.default_base_scale))
+	# And the reason it adds none, asserted next to the claim: if the project
+	# ever stretches by anything other than whole numbers, `SCALE := 1` stops
+	# being a decision and becomes a leftover.
+	expect(str(ProjectSettings.get_setting(
+		"display/window/stretch/mode", "")) == "viewport",
+		"because the project stretches the whole viewport",
+		str(ProjectSettings.get_setting("display/window/stretch/mode", "")))
+	expect(str(ProjectSettings.get_setting(
+		"display/window/stretch/scale_mode", "")) == "integer",
+		"by a whole number at every window size",
+		str(ProjectSettings.get_setting(
+			"display/window/stretch/scale_mode", "")))
+	expect(UiKit.HEADING_SIZE % UiKit.FONT_SIZE == 0,
+		"and the heading size is a whole multiple of the body size",
+		"%d against %d" % [UiKit.HEADING_SIZE, UiKit.FONT_SIZE])
+	for number in [UiKit.PAD, UiKit.ROW_PAD, UiKit.MARGIN]:
+		expect(number == int(number),
+			"every measurement in the theme is a whole pixel",
+			str(number))
+
+	print("  %d files with no overrides, %d roles off the palette, "
+		% [seen, UiKit.ROLES.size()]
+		+ "%d interactive types with five states each" % 3)
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## `&""` prints as nothing, which makes a failure that names it unreadable.
+func _role_name(role: StringName) -> String:
+	return "the body text" if role == &"" else str(role)

@@ -30,10 +30,6 @@ extends Control
 ## "sharing no state" is actually guarding against.
 
 ## Colours, matched to the reference sheet's night.
-const WARM := Color(0.98, 0.86, 0.55)
-const DIM := Color(0.66, 0.64, 0.76)
-const DANGER := Color(0.95, 0.35, 0.32)
-const SAFE := Color(0.45, 0.80, 0.48)
 
 ## The three controls, bottom right, in the order `design.md` draws them.
 const BUTTON_SIZE := Vector2(46, 16)
@@ -78,9 +74,9 @@ func _ready() -> void:
 	_strip.size = Vector2(480, 24)
 	add_child(_strip)
 
-	_night = _label("NightNumber", Vector2(4, 2), WARM)
-	_wave = _label("WaveCounter", Vector2(120, 2), WARM)
-	_left = _label("ZombiesLeft", Vector2(240, 2), DIM)
+	_night = _label("NightNumber", Vector2(4, 2), UiKit.WARM)
+	_wave = _label("WaveCounter", Vector2(120, 2), UiKit.WARM)
+	_left = _label("ZombiesLeft", Vector2(240, 2), UiKit.DIM)
 
 	# **The house bar, and it is the biggest thing up there.** A number is easy
 	# to miss and this is the one that ends the run.
@@ -95,12 +91,12 @@ func _ready() -> void:
 	_house_fill = ColorRect.new()
 	_house_fill.name = "HouseBar"
 	_house_fill.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_house_fill.color = SAFE
+	_house_fill.color = UiKit.colour(UiKit.GOOD)
 	_house_fill.position = Vector2(5, 15)
 	_house_fill.size = Vector2(158, 5)
 	add_child(_house_fill)
 
-	_house_text = _label("HouseNumbers", Vector2(170, 12), DIM)
+	_house_text = _label("HouseNumbers", Vector2(170, 12), UiKit.DIM)
 
 	# **The boss gets a bar of its own.** Nine nights of building are being
 	# tested by one thing, and a number in a corner is not how that should
@@ -123,14 +119,13 @@ func _ready() -> void:
 	_boss_fill.visible = false
 	add_child(_boss_fill)
 
-	_boss_name = _label("BossName", Vector2(120, 40), WARM)
+	_boss_name = _label("BossName", Vector2(120, 40), UiKit.WARM)
 	_boss_name.visible = false
 
 	# **The announcement, in the middle, where you are already looking.**
-	_announce = _label("WaveWarning", Vector2(0, 92), WARM)
+	_announce = _label("WaveWarning", Vector2(0, 92), UiKit.HEADING)
 	_announce.size = Vector2(480, 12)
 	_announce.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_announce.add_theme_font_size_override("font_size", 16)
 	_announce.visible = false
 
 	_build_controls()
@@ -165,23 +160,7 @@ func _button(node_name: String, text: String, at: Vector2) -> Button:
 	var button := Button.new()
 	button.name = node_name
 	button.text = text
-	button.add_theme_font_size_override("font_size", 8)
 	button.focus_mode = Control.FOCUS_ALL
-	# **Task 0079's kit**, so the night's buttons and the tech tree's are the
-	# same buttons. The content margins are pinned to what they were: a
-	# `StyleBoxTexture` otherwise takes its content margin from its nine-slice
-	# border, and a button that grew three pixels a side in this corner is a
-	# button over the edge of a 480x270 screen.
-	for style in UiKit.BUTTON_STATES:
-		var box := UiKit.button(style)
-		box.content_margin_left = 2
-		box.content_margin_right = 2
-		box.content_margin_top = 0
-		box.content_margin_bottom = 0
-		button.add_theme_stylebox_override(style, box)
-	var clear := StyleBoxFlat.new()
-	clear.bg_color = Color(0, 0, 0, 0)
-	button.add_theme_stylebox_override("focus", clear)
 	_bar.add_child(button)
 	button.position = at
 	button.size = BUTTON_SIZE
@@ -189,13 +168,13 @@ func _button(node_name: String, text: String, at: Vector2) -> Button:
 	return button
 
 
-func _label(node_name: String, at: Vector2, colour: Color) -> Label:
+func _label(node_name: String, at: Vector2,
+		role: StringName = &"") -> Label:
 	var label := Label.new()
 	label.name = node_name
 	label.position = at
 	label.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	label.modulate = colour
-	label.add_theme_font_size_override("font_size", 8)
+	label.theme_type_variation = role
 	add_child(label)
 	return label
 
@@ -237,13 +216,14 @@ func _refresh() -> void:
 		# Half a second on, half a second off, at full brightness. A colour
 		# change alone is a thing you can be looking away from.
 		var lit := fmod(_pulse, 1.0) < 0.5
-		_house_fill.color = DANGER if lit else DANGER.darkened(0.45)
-		_house_text.modulate = DANGER
+		var bad := UiKit.colour(UiKit.BAD)
+		_house_fill.color = bad if lit else bad.darkened(0.45)
+		_house_text.theme_type_variation = UiKit.BAD
 		_house_back.color = Color(0.32, 0.10, 0.12, 0.95) if lit \
 			else Color(0.18, 0.10, 0.12, 0.9)
 	else:
-		_house_fill.color = SAFE
-		_house_text.modulate = DIM
+		_house_fill.color = UiKit.colour(UiKit.GOOD)
+		_house_text.theme_type_variation = UiKit.DIM
 		_house_back.color = Color(0.18, 0.10, 0.12, 0.9)
 
 	# **A wave is announced before it arrives**, with the seconds on it, so
@@ -255,7 +235,11 @@ func _refresh() -> void:
 		var seconds := (coming + GameData.TICK_HZ - 1) / GameData.TICK_HZ
 		_announce.text = "WAVE %d INCOMING  %ds" % [mini(int(at[0]) + 1,
 			int(at[1])), seconds]
-		_announce.modulate = WARM if fmod(_pulse, 0.6) < 0.3 else DIM
+		# The pulse is an alpha rather than a second colour: the label is
+		# already the heading colour and blinking it to a different hue
+		# would be two things changing at once.
+		_announce.modulate = Color.WHITE if fmod(_pulse, 0.6) < 0.3 \
+			else Color(1, 1, 1, 0.5)
 
 	_refresh_boss()
 	_refresh_controls()
@@ -280,10 +264,11 @@ func _refresh_boss() -> void:
 	# **And it flashes while it is winding up**, which is the second the
 	# player has to do something about the blow.
 	if Enemies.is_winding(_state, boss):
-		_boss_name.modulate = DANGER if fmod(_pulse, 0.3) < 0.15 else WARM
+		_boss_name.theme_type_variation = UiKit.BAD \
+			if fmod(_pulse, 0.3) < 0.15 else UiKit.WARM
 		_boss_fill.color = Color(1.0, 0.72, 0.30)
 	else:
-		_boss_name.modulate = WARM
+		_boss_name.theme_type_variation = UiKit.WARM
 		_boss_fill.color = Color(0.86, 0.26, 0.30)
 
 
@@ -292,14 +277,15 @@ func _refresh_controls() -> void:
 	# mended. The button is the key: it writes the same intent.
 	var target := Player.target(_state)
 	var can_mend := Interact.verb_at(_state, target) == &"repair"
+	# **Disabled is enough.** The theme draws a disabled button in ink_soft
+	# with faint letters, so the grey the old `modulate` added was the same
+	# thing said twice.
 	_repair.disabled = not can_mend
-	_repair.modulate = Color.WHITE if can_mend else DIM
 
 	# **The flare**, with its wait on it rather than a bare "no".
 	var charge := Ability.charge_percent(_state)
 	_flare.disabled = not Ability.ready(_state)
 	_flare.text = "FLARE" if not _flare.disabled else "%d%%" % charge
-	_flare.modulate = Color.WHITE if not _flare.disabled else DIM
 
 	_speed.text = "%dx" % (driver.speed if driver != null else 1)
 

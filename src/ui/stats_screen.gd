@@ -32,9 +32,6 @@ extends Control
 ## the key is the way in and 0092's prompt has been given the line. Said out
 ## loud in the journal rather than quietly skipped.
 
-const WARM := Color(0.98, 0.86, 0.55)
-const DIM := Color(0.62, 0.60, 0.72)
-const COOL := Color(0.66, 0.78, 0.92)
 
 ## Where the two columns of numbers start. The labels live left of the first.
 const RUN_X := 196.0
@@ -72,7 +69,6 @@ func _ready() -> void:
 	var backing := Panel.new()
 	backing.name = "StatsBacking"
 	backing.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	backing.add_theme_stylebox_override("panel", UiKit.panel())
 	backing.position = Vector2(8, 22)
 	backing.size = Vector2(464, 222)
 	add_child(backing)
@@ -84,13 +80,13 @@ func _ready() -> void:
 	_frame.size = Vector2(464, 222)
 	add_child(_frame)
 
-	var heading := _label("StatsHeading", Vector2(4, 2), WARM)
+	var heading := _label("StatsHeading", Vector2(4, 2), UiKit.WARM)
 	heading.text = "RECORDS"
-	var hint := _label("StatsHint", Vector2(316, 2), DIM)
+	var hint := _label("StatsHint", Vector2(316, 2), UiKit.DIM)
 	hint.text = "R or ESC to close"
 
-	_label("StatsRunHead", Vector2(RUN_X, 18), COOL).text = "THIS RUN"
-	_label("StatsLifeHead", Vector2(LIFE_X, 18), WARM).text = "ALL RUNS"
+	_label("StatsRunHead", Vector2(RUN_X, 18), UiKit.COOL).text = "THIS RUN"
+	_label("StatsLifeHead", Vector2(LIFE_X, 18), UiKit.WARM).text = "ALL RUNS"
 
 	var rule := ColorRect.new()
 	rule.name = "StatsRule"
@@ -114,31 +110,31 @@ func _ready() -> void:
 	]:
 		var key: String = line[0]
 		var y := 34.0 + row * 14.0
-		var name_label := _label("StatsName_" + key, Vector2(4, y), DIM)
+		var name_label := _label("StatsName_" + key, Vector2(4, y), UiKit.DIM)
 		name_label.text = str(line[1])
 		_rows[key] = [
-			_label("StatsRun_" + key, Vector2(RUN_X, y), COOL),
-			_label("StatsLife_" + key, Vector2(LIFE_X, y), WARM),
+			_label("StatsRun_" + key, Vector2(RUN_X, y), UiKit.COOL),
+			_label("StatsLife_" + key, Vector2(LIFE_X, y), UiKit.WARM),
 		]
 		row += 1
 
 	# **What was killed, by kind**, on its own lines. The task asks for kills
 	# by type and a single number cannot say it; four enemy kinds and a Giant
 	# will not fit in a column two hundred pixels from the edge.
-	_label("StatsByKindHead", Vector2(4, 148), COOL).text = "BY KIND, THIS RUN"
-	_breakdown = _label("StatsByKind", Vector2(4, 162), WARM)
+	_label("StatsByKindHead", Vector2(4, 148), UiKit.COOL).text = "BY KIND, THIS RUN"
+	_breakdown = _label("StatsByKind", Vector2(4, 162), UiKit.WARM)
 	_breakdown.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_breakdown.size = Vector2(452, 40)
 	_breakdown.custom_minimum_size = Vector2(452, 40)
 
 
-func _label(node_name: String, at: Vector2, colour: Color) -> Label:
+func _label(node_name: String, at: Vector2,
+		role: StringName = &"") -> Label:
 	var label := Label.new()
 	label.name = node_name
 	label.position = at
 	label.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	label.modulate = colour
-	label.add_theme_font_size_override("font_size", 8)
+	label.theme_type_variation = role
 	if _frame != null:
 		_frame.add_child(label)
 	else:

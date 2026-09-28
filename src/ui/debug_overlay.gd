@@ -50,24 +50,18 @@ func _ready() -> void:
 	panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	panel.position = Vector2(4, 4)
 
-	# Godot's default panel is nearly transparent, which over a lit farm at
-	# night makes the numbers unreadable - and a readout you have to squint at
-	# is one nobody uses. Task 0081 owns the game's theme; this one does not
-	# want it, because the overlay should look the same whatever the theme is
-	# doing.
-	var box := StyleBoxFlat.new()
-	box.bg_color = Color(0.02, 0.02, 0.04, 0.88)
-	box.border_color = Color(0.35, 0.34, 0.45, 0.9)
-	box.set_border_width_all(1)
-	box.set_content_margin_all(4)
-	panel.add_theme_stylebox_override("panel", box)
+	# **The theme's quiet frame, not a flat box of its own.** An earlier note
+	# here argued the overlay should look the same whatever the theme does; it
+	# wears `OVERLAY` instead, which is the tooltip frame - still quieter than
+	# a game panel, still solid enough to read digits over a lit farm, and now
+	# one edit away rather than one file away. The theme has asserts on it,
+	# which is the robustness the old note actually wanted.
+	panel.theme_type_variation = UiKit.OVERLAY
 	add_child(panel)
 
 	_label = Label.new()
 	_label.name = "Readout"
 	_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_label.add_theme_font_size_override("font_size", 8)
-	_label.add_theme_color_override("font_color", Color(0.85, 0.87, 0.95))
 	panel.add_child(_label)
 
 	if driver_path != NodePath():

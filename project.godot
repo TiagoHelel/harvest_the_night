@@ -78,10 +78,14 @@ textures/canvas_textures/default_texture_filter=0
 # or sixteen and nothing in between: a bitmap font at a fractional scale is a
 # blurred bitmap font, and this is a 480x270 game.
 #
-# The font itself is **not** set here. `gui/theme/custom_font` read back empty
+# The theme itself is **not** set here. `gui/theme/custom_font` read back empty
 # with the path in it - Godot did not take a `.fnt` through that setting - so
-# `UiKit.theme()` builds a `Theme` and `Main` puts it on the UI root, which is
-# one line of code instead of one line of config that silently does nothing.
+# `UiKit.theme()` builds the whole theme and `Main` walks the tree and puts it
+# on, which is code the checks can ask questions of instead of config that
+# silently does nothing. Task 0081 has the rest of it.
+#
+# This line stays as the floor under all of that: a Control built before the
+# theme reaches it still asks for eight.
 theme/default_font_size=8
 
 [input]

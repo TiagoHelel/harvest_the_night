@@ -18,6 +18,11 @@ extends Control
 ## with a dozen things on it.
 const ROW_HEIGHT := 11
 
+## What a row that cannot be paid for is multiplied by. **An alpha rather
+## than a grey**: the theme already says what colour a row is, and a second
+## colour here would be the theme said twice and disagreed with once.
+const FADED := Color(1, 1, 1, 0.55)
+
 var _state: Dictionary = {}
 var _view: WorldView
 var _rows: VBoxContainer
@@ -44,12 +49,6 @@ func _ready() -> void:
 	frame.position = Vector2(4, 30)
 	frame.custom_minimum_size = Vector2(124, 0)
 	frame.mouse_filter = Control.MOUSE_FILTER_STOP
-	var box := StyleBoxFlat.new()
-	box.bg_color = Color(0.06, 0.05, 0.10, 0.94)
-	box.border_color = Color(0.45, 0.42, 0.55)
-	box.set_border_width_all(1)
-	box.set_content_margin_all(5)
-	frame.add_theme_stylebox_override("panel", box)
 	add_child(frame)
 
 	var column := VBoxContainer.new()
@@ -59,21 +58,15 @@ func _ready() -> void:
 	var title := Label.new()
 	title.name = "BuildTitle"
 	title.text = "BUILD"
-	title.add_theme_font_size_override("font_size", 8)
 	column.add_child(title)
 
 	_rows = VBoxContainer.new()
 	_rows.name = "BuildRows"
-	# No gap between rows. The default theme puts four pixels between children,
-	# which across a dozen entries is fifty pixels of nothing on a screen that
-	# is two hundred and seventy tall.
-	_rows.add_theme_constant_override("separation", 0)
 	column.add_child(_rows)
 
 	_reason = Label.new()
 	_reason.name = "BuildReason"
-	_reason.add_theme_font_size_override("font_size", 8)
-	_reason.modulate = Color(0.85, 0.55, 0.5)
+	_reason.theme_type_variation = UiKit.BAD
 	column.add_child(_reason)
 
 
@@ -207,32 +200,20 @@ func _build_palette() -> void:
 		var row := Button.new()
 		row.name = "build_%s" % id
 		row.custom_minimum_size = Vector2(114, ROW_HEIGHT)
-		row.add_theme_font_size_override("font_size", 8)
-		# **The theme's padding, overridden.** A default Button reserves about
-		# twenty pixels whatever `ROW_HEIGHT` says, and twelve of those is 327
-		# pixels of palette on a 270 pixel screen - which is exactly what
-		# happened when task 0032 made the four buildings placeable: the press
-		# row landed at y=294 and could not be clicked at all. There is an
-		# assert in input_check now that the whole palette is on the screen.
-		for style in ["normal", "hover", "pressed", "focus", "disabled"]:
-			var box := StyleBoxFlat.new()
-			box.bg_color = Color(0.12, 0.11, 0.18, 0.0 if style == "focus" 				else 0.8)
-			if style == "pressed":
-				box.bg_color = Color(0.32, 0.30, 0.20, 0.95)
-			elif style == "hover":
-				box.bg_color = Color(0.20, 0.19, 0.28, 0.9)
-			box.content_margin_left = 3
-			box.content_margin_right = 3
-			box.content_margin_top = 1
-			box.content_margin_bottom = 1
-			row.add_theme_stylebox_override(style, box)
+		# **A list row**, which the theme keeps short. A default `Button`
+		# reserves about twenty pixels whatever `ROW_HEIGHT` says, and twelve
+		# of those is 327 pixels of palette on a 270 pixel screen - which is
+		# what happened when task 0032 made the four buildings placeable: the
+		# press row landed at y=294 and could not be clicked at all. There is
+		# an assert in input_check that the whole palette is on screen.
+		row.theme_type_variation = UiKit.ROW
 		row.text = "%s  %s" % [id, _price_of(id)]
 		row.toggle_mode = true
 		row.button_pressed = id == Building.selected(_state)
 		# **Shown rather than hidden** when it cannot be paid for. The ghost
 		# and the reason line explain it the moment the cursor moves.
-		row.modulate = Color(1, 1, 1) if Building.affordable(_state, id) \
-			else Color(0.5, 0.48, 0.55)
+		row.modulate = Color.WHITE if Building.affordable(_state, id) \
+			else FADED
 		row.pressed.connect(func() -> void: Building.select(_state, id))
 		_rows.add_child(row)
 

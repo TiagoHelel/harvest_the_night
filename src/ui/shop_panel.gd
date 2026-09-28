@@ -40,9 +40,6 @@ func _ready() -> void:
 	frame.name = "Frame"
 	frame.position = Vector2(96, 24)
 	frame.custom_minimum_size = Vector2(288, 222)
-	# Task 0079's panel: one frame for the shop, the records screen and the
-	# tech tree, so changing a border is one edit rather than four.
-	frame.add_theme_stylebox_override("panel", UiKit.panel())
 	add_child(frame)
 
 	var column := VBoxContainer.new()
@@ -70,7 +67,7 @@ func _ready() -> void:
 		tab.text = str(side).to_upper()
 		tab.toggle_mode = true
 		tab.custom_minimum_size = Vector2(72, 14)
-		tab.add_theme_font_size_override("font_size", 8)
+		tab.theme_type_variation = UiKit.TAB
 		tab.pressed.connect(func() -> void: Shop.show_tab(_state, side))
 		_tabs.add_child(tab)
 	column.add_child(_tabs)
@@ -81,14 +78,13 @@ func _ready() -> void:
 	column.add_child(scroll)
 
 	_rows = VBoxContainer.new()
-	_rows.add_theme_constant_override("separation", 0)
 	_rows.name = "Rows"
 	scroll.add_child(_rows)
 
 	var hint := Label.new()
 	hint.name = "Hint"
 	hint.text = "esc to leave"
-	hint.modulate = Color(0.6, 0.58, 0.68)
+	hint.theme_type_variation = UiKit.DIM
 	column.add_child(hint)
 
 
@@ -164,8 +160,7 @@ func _build() -> void:
 func _heading(text: String) -> void:
 	var label := Label.new()
 	label.text = text
-	label.add_theme_font_size_override("font_size", 8)
-	label.modulate = Color(0.75, 0.68, 0.45)
+	label.theme_type_variation = UiKit.WARM
 	_rows.add_child(label)
 
 
@@ -185,8 +180,7 @@ func _seed_row(id: StringName) -> void:
 		int((GameData.CROPS[id] as Dictionary)["seed_cost"]),
 		Farming.seconds_to_grow(id), Farming.value_per_day(id)]
 	label.custom_minimum_size = Vector2(168, 0)
-	label.add_theme_font_size_override("font_size", 8)
-	label.modulate = Color(1.0, 0.92, 0.62) if chosen 		else Color(0.72, 0.70, 0.78)
+	label.theme_type_variation = UiKit.WARM if chosen else UiKit.DIM
 	row.add_child(label)
 
 	row.add_child(_button("sow_%s" % id, "sow", not chosen,
@@ -203,10 +197,9 @@ func _sell_row(id: StringName) -> void:
 	var label := Label.new()
 	label.text = "%s  x%d  @ $%d" % [id, held, Shop.sell_price(id)]
 	label.custom_minimum_size = Vector2(168, 0)
-	label.add_theme_font_size_override("font_size", 8)
 	# **Shown, not hidden**, when there is none: the list is also how a player
 	# learns what this farm produces and what it is worth.
-	label.modulate = Color(1, 1, 1) if held > 0 else Color(0.45, 0.43, 0.5)
+	label.theme_type_variation = &"" if held > 0 else UiKit.FAINT
 	row.add_child(label)
 
 	row.add_child(_button("sell_one_%s" % id, "1", held > 0,
@@ -230,9 +223,8 @@ func _buy_row(id: StringName) -> void:
 	# button that refuses for a reason the player cannot see.
 	label.text = "%s  @ $%d   %d left" % [id, price, left]
 	label.custom_minimum_size = Vector2(168, 0)
-	label.add_theme_font_size_override("font_size", 8)
-	label.modulate = Color(1, 1, 1) if afford and left > 0 \
-		else Color(0.45, 0.43, 0.5)
+	label.theme_type_variation = &"" if afford and left > 0 \
+		else UiKit.FAINT
 	row.add_child(label)
 
 	row.add_child(_button("buy_one_%s" % id, "1",
@@ -253,18 +245,5 @@ func _button(button_name: String, text: String, enabled: bool,
 	button.text = text
 	button.disabled = not enabled
 	button.custom_minimum_size = Vector2(34, ROW_HEIGHT)
-	button.add_theme_font_size_override("font_size", 8)
-	for style in ["normal", "hover", "pressed", "focus", "disabled"]:
-		var box := StyleBoxFlat.new()
-		box.bg_color = Color(0.14, 0.13, 0.20, 0.0 if style == "focus" else 0.9)
-		if style == "hover":
-			box.bg_color = Color(0.24, 0.22, 0.32, 0.95)
-		elif style == "disabled":
-			box.bg_color = Color(0.10, 0.10, 0.14, 0.7)
-		box.content_margin_left = 2
-		box.content_margin_right = 2
-		box.content_margin_top = 0
-		box.content_margin_bottom = 0
-		button.add_theme_stylebox_override(style, box)
 	button.pressed.connect(action)
 	return button

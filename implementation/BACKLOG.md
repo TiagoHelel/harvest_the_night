@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`##################......`  **80 / 109 done**
+`##################......`  **81 / 109 done**
 
-0 doing / 29 todo / 0 blocked across 9 phases.
+0 doing / 28 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0081 - The UI theme**. The whole of what is left is
+First up: **0082 - Screenshots, and actually looking at them**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,23 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-29 task(s) left, the ready ones first, then what they
+28 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0081 - The UI theme
-
-Ready to pick up.  Likely files: `assets/theme.tres, src/ui/`.
-
-One Theme resource every control uses, so a colour change is one edit and no screen is the odd one out.
-
-- Every Control style in one Theme: no per-node style overrides anywhere
-- Built from the palette and the UI kit, not from Godot's defaults
-- Focus, hover and disabled states defined for everything interactive
-- A UI scale factor that works at every integer window scale
-
-  - done when: `grep` finds no `add_theme_*_override` left in `src/ui/`
-  - done when: Every screen looks like the same game
 
 ### 0082 - Screenshots, and actually looking at them
 
@@ -89,6 +75,67 @@ Make a kill feel like a kill. Small, cheap, and entirely in the view layer.
   - done when: Hit stop does not desynchronise the simulation - prove it with the hash
   - done when: Everything here can be turned off and the game still reads
   - done when: A crowded wave does not spawn a thousand number labels
+
+### 0089 - Tooltips
+
+Ready to pick up.  Likely files: `src/ui/tooltip.gd`.
+
+Every cost, stat and icon explains itself, so the game does not need a manual.
+
+- A hover tooltip on resources, structures, recipes, tech nodes and enemies
+- It shows the numbers from game_data, never a copy of them
+- A short delay before it appears and none before it moves to the next
+- It never leaves the screen edge
+- Keyboard focus shows the same tooltip as hover
+
+  - done when: Every interactive element has one
+  - done when: Changing a lever changes the tooltip with no other edit
+
+### 0090 - The log panel
+
+Ready to pick up.  Likely files: `src/ui/log_panel.gd`.
+
+A short running account of what just happened, because at 4x speed the player will miss things.
+
+- The last few events: a wave arriving, a structure lost, a crop ready, a craft finished
+- Colour-coded by severity, with the alarming ones held longer
+- It fades when nothing is happening and never covers the farm
+- Events are emitted by core as data and formatted by the view
+- A key expands it into a scrollable history for the night
+
+  - done when: A night at 4x is followable from the log alone
+  - done when: It holds a bounded number of entries and cannot grow without limit
+
+### 0091 - The title screen
+
+Ready to pick up.  Likely files: `src/ui/title_screen.gd, scenes/Title.tscn`.
+
+The game currently boots into a farm. Make it boot into a game.
+
+- The farm at dusk behind the title, with the night creeping in - the premise, in one image
+- The logo, generated with the same tools as everything else
+- Continue, New run, Statistics, Options, Quit
+- Continue is absent, not greyed, when there is no save
+- Any key or click moves past the ident into the menu
+
+  - done when: Booting lands here and not in a run
+  - done when: The screen says what kind of game this is before a word is read
+
+### 0097 - English and Portuguese
+
+Ready to pick up.  Likely files: `src/app/i18n.gd, assets/locale/`.
+
+Every string through a translation table, with pt-BR alongside English - the reference sheet is in Portuguese and so is the audience.
+
+- No literal player-facing string left in code: keys only
+- English and pt-BR CSVs, English as the fallback
+- A checker that finds missing keys, unused keys and strings that overflow their control
+- Language is a setting and applies without a restart
+- Plurals and number formatting handled, not concatenated
+
+  - done when: The checker reports zero missing keys in both languages
+  - done when: Switching language mid-game updates every visible screen
+  - done when: No pt-BR string overflows its control - the checker proves it
 
 ### 0102 - A performance budget
 
@@ -193,81 +240,6 @@ One warm loop for the farm, one cold one for the night, and a crossfade on the r
   - done when: The loop point is inaudible
   - done when: The crossfade lands with the transition, not before or after it
 
-### 0089 - Tooltips
-
-Waits on 0081.  Likely files: `src/ui/tooltip.gd`.
-
-Every cost, stat and icon explains itself, so the game does not need a manual.
-
-- A hover tooltip on resources, structures, recipes, tech nodes and enemies
-- It shows the numbers from game_data, never a copy of them
-- A short delay before it appears and none before it moves to the next
-- It never leaves the screen edge
-- Keyboard focus shows the same tooltip as hover
-
-  - done when: Every interactive element has one
-  - done when: Changing a lever changes the tooltip with no other edit
-
-### 0090 - The log panel
-
-Waits on 0081.  Likely files: `src/ui/log_panel.gd`.
-
-A short running account of what just happened, because at 4x speed the player will miss things.
-
-- The last few events: a wave arriving, a structure lost, a crop ready, a craft finished
-- Colour-coded by severity, with the alarming ones held longer
-- It fades when nothing is happening and never covers the farm
-- Events are emitted by core as data and formatted by the view
-- A key expands it into a scrollable history for the night
-
-  - done when: A night at 4x is followable from the log alone
-  - done when: It holds a bounded number of entries and cannot grow without limit
-
-### 0091 - The title screen
-
-Waits on 0081.  Likely files: `src/ui/title_screen.gd, scenes/Title.tscn`.
-
-The game currently boots into a farm. Make it boot into a game.
-
-- The farm at dusk behind the title, with the night creeping in - the premise, in one image
-- The logo, generated with the same tools as everything else
-- Continue, New run, Statistics, Options, Quit
-- Continue is absent, not greyed, when there is no save
-- Any key or click moves past the ident into the menu
-
-  - done when: Booting lands here and not in a run
-  - done when: The screen says what kind of game this is before a word is read
-
-### 0097 - English and Portuguese
-
-Waits on 0081.  Likely files: `src/app/i18n.gd, assets/locale/`.
-
-Every string through a translation table, with pt-BR alongside English - the reference sheet is in Portuguese and so is the audience.
-
-- No literal player-facing string left in code: keys only
-- English and pt-BR CSVs, English as the fallback
-- A checker that finds missing keys, unused keys and strings that overflow their control
-- Language is a setting and applies without a restart
-- Plurals and number formatting handled, not concatenated
-
-  - done when: The checker reports zero missing keys in both languages
-  - done when: Switching language mid-game updates every visible screen
-  - done when: No pt-BR string overflows its control - the checker proves it
-
-### 0087 - Ambience
-
-Waits on 0084, 0085.  Likely files: `src/app/ambience.gd`.
-
-The bed under everything: birds and water by day, wind and distant groaning by night.
-
-- A day bed and a night bed, cross-fading with the transition
-- Positional touches: the pond is louder near the pond
-- It ducks under an important sound rather than fighting it
-- It is on its own bus so it can be turned down alone
-
-  - done when: Standing still on the farm for a minute is pleasant, not empty
-  - done when: The ambience never masks the house-damage sound
-
 ### 0092 - The main menu and the router
 
 Waits on 0091.  Likely files: `src/app/app.gd, src/ui/main_menu.gd`.
@@ -311,6 +283,20 @@ A stranger reaches night 1 and understands the loop, with no more text than the 
 
   - done when: A first-time player reaches the end of night 1 without being told anything out loud
   - done when: The journal names where they hesitated, because that is the finding
+
+### 0087 - Ambience
+
+Waits on 0084, 0085.  Likely files: `src/app/ambience.gd`.
+
+The bed under everything: birds and water by day, wind and distant groaning by night.
+
+- A day bed and a night bed, cross-fading with the transition
+- Positional touches: the pond is louder near the pond
+- It ducks under an important sound rather than fighting it
+- It is on its own bus so it can be turned down alone
+
+  - done when: Standing still on the farm for a minute is pleasant, not empty
+  - done when: The ambience never masks the house-damage sound
 
 ### 0093 - Options: video
 
@@ -547,7 +533,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0069** [Run statistics](prompts/0069-stats.md)
 - [x] **0070** [Endless nights past ten](prompts/0070-endless.md)
 
-## 5 - Art and visual direction  (10/13)
+## 5 - Art and visual direction  (11/13)
 
 - [x] **0071** [The two palettes](prompts/0071-palettes.md)
 - [x] **0072** [The farm tileset](prompts/0072-tileset.md)
@@ -560,7 +546,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0078** [The reality transition](prompts/0078-transition.md)
 - [x] **0079** [Resource icons and the UI kit](prompts/0079-ui-kit.md)
 - [x] **0080** [A pixel font](prompts/0080-font.md)
-- [ ] **0081** [The UI theme](prompts/0081-theme.md)
+- [x] **0081** [The UI theme](prompts/0081-theme.md)
 - [ ] **0082** [Screenshots, and actually looking at them](prompts/0082-screenshots.md)
 
 ## 6 - Sound and juice  (0/8)
@@ -571,18 +557,18 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [ ] **0086** [Two pieces of music](prompts/0086-music.md) - needs 0083
 - [ ] **0087** [Ambience](prompts/0087-ambience.md) - needs 0084, 0085
 - [ ] **0088** [Juice: shake, hit stop, damage numbers](prompts/0088-juice.md)
-- [ ] **0089** [Tooltips](prompts/0089-tooltips.md) - needs 0081
-- [ ] **0090** [The log panel](prompts/0090-log-panel.md) - needs 0081
+- [ ] **0089** [Tooltips](prompts/0089-tooltips.md)
+- [ ] **0090** [The log panel](prompts/0090-log-panel.md)
 
 ## 7 - Shell and product  (0/10)
 
-- [ ] **0091** [The title screen](prompts/0091-title-screen.md) - needs 0081
+- [ ] **0091** [The title screen](prompts/0091-title-screen.md)
 - [ ] **0092** [The main menu and the router](prompts/0092-main-menu.md) - needs 0091
 - [ ] **0093** [Options: video](prompts/0093-options-video.md) - needs 0092
 - [ ] **0094** [Options: audio](prompts/0094-options-audio.md) - needs 0083, 0092
 - [ ] **0095** [Options: controls](prompts/0095-options-controls.md) - needs 0092
 - [ ] **0096** [The pause menu](prompts/0096-pause-menu.md) - needs 0092
-- [ ] **0097** [English and Portuguese](prompts/0097-i18n.md) - needs 0081
+- [ ] **0097** [English and Portuguese](prompts/0097-i18n.md)
 - [ ] **0098** [Accessibility](prompts/0098-accessibility.md) - needs 0093, 0097
 - [ ] **0099** [An icon and a boot ident](prompts/0099-icon-ident.md) - needs 0091
 - [ ] **0100** [Exports: Windows and Web](prompts/0100-exports.md) - needs 0092

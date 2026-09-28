@@ -28,11 +28,11 @@ SPRITES = {
 
     # ---------------------------------------------------- the UI kit, 0079
 
-    # **Nine-slice, and the margin is five.** Every one of these is sixteen by
-    # sixteen with a five pixel border and a middle that repeats, so one
+    # **Nine-slice, and the margin is three.** Every one of these is sixteen
+    # by sixteen with a three pixel border and a middle that repeats, so one
     # drawing stretches to a tooltip, a shop panel or the whole tech tree.
-    # `UiKit.MARGIN` is the same five on the other side; `headless_check`
-    # asserts the two agree rather than trusting them to.
+    # `UiKit.MARGIN` is the same three on the other side; `headless_check`
+    # reads the drawing and counts rather than trusting them to agree.
 
     "ui/panel": dict(size=TILE, legend={
         "k": "ink", "s": "ink_soft", "n": "night", "l": "night_light",
@@ -167,6 +167,37 @@ SPRITES = {
         "kllllllllllllllk",
         "kllllllllllllllk",
         "kkkkkkkkkkkkkkkk",
+    ]),
+
+    # **The ring the keyboard leaves behind.** Godot draws `focus` on top of
+    # whichever state box a button is already wearing, so this one is a ring
+    # and nothing else: transparent in the middle, inset one pixel so the
+    # button keeps its own ink edge underneath.
+    #
+    # It is bone rather than gold because pressed is already gold, and a focus
+    # a player cannot tell from a press is not a focus. The two other places
+    # that wanted this before task 0081 overrode `focus` with an empty box to
+    # hide Godot's grey dashed default - an empty box is not a focus state
+    # either, it is the absence of one.
+    "ui/button_focus": dict(size=TILE, legend={
+        "l": "bone",
+    }, rows=[
+        "................",
+        ".llllllllllllll.",
+        ".l............l.",
+        ".l............l.",
+        ".l............l.",
+        ".l............l.",
+        ".l............l.",
+        ".l............l.",
+        ".l............l.",
+        ".l............l.",
+        ".l............l.",
+        ".l............l.",
+        ".l............l.",
+        ".l............l.",
+        ".llllllllllllll.",
+        "................",
     ]),
 
     # A tab is a panel with its bottom edge open, so it reads as joined to

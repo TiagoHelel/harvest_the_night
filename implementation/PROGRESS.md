@@ -6577,3 +6577,148 @@ view.
 
 `python tools/verify.py` prints PASS: 5096 asserts, 655 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+
+## 0081 - The UI theme - done 2026-09-28
+
+What changed: one `Theme`, built from the palette and the UI kit, worn by
+every Control in the game. **Fifty-three `add_theme_*_override` calls across
+twelve screens are gone** and nothing replaced them one by one: a screen now
+says *what a thing is* and the theme says what that looks like. Screenshot:
+`implementation/shots/0081-theme.png` - the market, the tech tree, the
+records, the inventory, the build palette and the night's result, side by
+side.
+
+Files: `src/ui/ui_kit.gd`, `src/ui/main.gd`, ten screens in `src/ui/`,
+`tools/sprite_maps.py`, `sprites/ui/button_focus.png` (generated),
+`project.godot`, `src/tools/headless_check.gd`, `src/tools/input_check.gd`.
+
+Verify: 5177 headless / 671 input / both hashes unchanged.
+
+### What the overrides were actually hiding
+
+The grep found fifty-three. Reading them found the reason the task exists:
+
+- **Five hand-rolled `StyleBoxFlat` panels** in five files, in five nearly
+  identical purples - `0.06,0.05,0.10`, `0.07,0.06,0.12` three times over,
+  `0.02,0.02,0.04` - with four different border colours and content margins
+  of four, five, five, six and eight. Task 0079 drew one panel and only two
+  screens ever used it.
+- **`const DIM` in five files with four different values.** `WARM` in four
+  files with two. That is not a palette, it is a habit.
+- **Thirty of the fifty-three asked for font size eight**, which task 0080
+  had already made the default. They were no-ops and had been for a task.
+- **`LINE_FONT := 9`** in the inventory panel, which 0080's sweep missed
+  because it was behind a constant. Four labels at 1.125x - a blurred bitmap
+  font, the one thing this art pipeline exists to prevent.
+
+### The rule that replaced them
+
+**A variation says what a thing is; `modulate` says how lit it is right now.**
+
+`UiKit.ROLES` is nine names, each pointing at a colour in
+`PaletteData.COLOURS`, so the UI and the sprites come out of the same tin. A
+label asks for `UiKit.DIM` and never for a `Color`. What is left for
+`modulate` is the handful of places where something is genuinely brighter
+this frame than last: a number flashing after it changed, the day label at
+dusk, a wave announcement pulsing. Those are multipliers now - `LIT_TINT`,
+or an alpha - and not a second colour to keep in step with the first.
+
+Three roles turned out to be saying the same thing twice and stopped:
+
+- A **locked tech node is already `disabled`**, so the theme was drawing it
+  in the dull frame with faint letters, and the `modulate` on top multiplied
+  that by a dim colour again. Twelve nodes you could barely see. Owned is now
+  the same disabled button with green letters - the only difference that
+  needed saying.
+- **The repair and flare buttons** set `disabled` and then greyed themselves
+  as well. The theme's disabled state does it.
+- The **tech tree's backing** was a flat `ColorRect` of its own purple, which
+  made it the one full-screen panel in the game without a brass edge. It is
+  the kit's `Panel` now, the same one the records screen wears.
+
+### The theme has to be on before anything is built against it
+
+`input_check` failed on three night controls being thirty-one pixels tall.
+The theme was right - it resolved to a minimum of forty-six by eight - but
+the buttons were built in `NightHud._ready()`, and **children `_ready()`
+before their parent**, so at that moment there was no theme and Godot's
+default minimum was sixty-three by thirty-one. `size` is clamped *up* to the
+minimum when it is set and **never clamped back down**, so the buttons kept
+thirty-one for the rest of the run.
+
+`Main` dresses the tree in `_enter_tree` now, which runs the other way round,
+and again in `_ready` for the debug overlay - it builds its panel in its own
+`_ready`, on a `CanvasLayer` of its own with no Control above it, which is
+how it stayed in Godot's grey through five tasks that each thought they had
+dressed the game.
+
+### Focus is a state, not the absence of one
+
+Two screens hid Godot's grey dashed ring behind an empty box. An empty box is
+not a focus state, and the night button has `FOCUS_ALL` on it, so a keyboard
+had nowhere to be. `ui/button_focus` is a new ASCII map: a bone ring, inset
+one pixel, transparent in the middle so it draws over whichever state the
+button is already wearing. Bone rather than gold because pressed is gold, and
+a focus you cannot tell from a press is not a focus.
+
+### Two things the screenshot said and no assert could
+
+- **The tab you were on looked like the switched-off one.** A `Button` draws
+  its pressed letters in ink, which is right on a gold press and wrong on a
+  tab. The `Tab` variation names its own four font colours now.
+- The tech tree's twelve nodes were the near-invisible ones described above.
+
+Both were found by looking at a contact sheet of six screens together, which
+is the only way to answer "do they look like the same game" - and both were
+wrong in a way every assert I had written was happy with.
+
+### What the checks ask now
+
+- **The done-when, asked of the repository**: `headless_check` reads every
+  file in `src/ui/`, skips comments, and fails on any `.add_theme_*_override(`
+  left. A `grep` a person runs once passes the day it is run. Planted one to
+  be sure it bites; it named the file and the line.
+- Every role names a colour that exists in the palette, no two roles are the
+  same colour, and every one can be read against a panel (measured, against
+  `night`).
+- Every interactive type has all five states including focus and disabled,
+  and **none of their boxes reserves vertical height** - the bug that put the
+  build palette off the bottom at 0032, the shop rows at 0040 and the speed
+  control at 0055, pinned once here instead of by hand in five files.
+- `input_check` walks the live tree and asks every Label, Button and Panel in
+  the game what it is wearing. That first assert failed: it demanded the HUD
+  face and the wave announcement wears the heading face, which is a second
+  `FontFile` by design. Widened to "either of the game's two faces", which is
+  what it meant.
+
+### The scale factor is the window's
+
+`SCALE` is one and the theme adds none. The project stretches a 480x270
+viewport with `scale_mode="integer"`, so the whole screen is already
+multiplied by a whole number at every window size; a second scale inside the
+theme would multiply that one and put an eight pixel font at eleven and a
+half. Asserted, and **so is the project setting that justifies it** - if that
+ever becomes fractional, `SCALE := 1` stops being a decision and becomes a
+leftover.
+
+### Judgement calls, said out loud
+
+- `debug_overlay.gd` carried a note arguing it should keep its own look
+  whatever the theme did, explicitly deferring the call to this task. It
+  wears the `Overlay` variation - the kit's quiet tooltip frame - which is
+  still visibly not a game panel, and the robustness the note wanted now
+  comes from the theme having asserts on it rather than from a second copy of
+  the colours.
+- **The day HUD is still unframed.** Task 0079 said so and nothing changed:
+  it is labels drawn straight onto the world with no panel to swap, and
+  giving it one is a redesign, not a theme.
+- The light colours in `lighting.gd`, `transition.gd` and `world_view.gd` are
+  left alone. They are light, not chrome - the theme is a thing for Controls.
+
+### Hashes
+
+Both unchanged - `2555959448` and `2601044827`. A theme, an ASCII map and
+twelve view files.
+
+`python tools/verify.py` prints PASS: 5177 asserts, 671 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

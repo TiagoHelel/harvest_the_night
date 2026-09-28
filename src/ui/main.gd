@@ -36,6 +36,10 @@ var _profile: Dictionary = {}
 ## night that changes it is the night that triggers a save.
 var _banked_nights := -1
 
+## The one `Theme` every screen in the game wears. Built in `_enter_tree` and
+## put on again in `_ready`; see both for why it is twice.
+var _dressed: Theme
+
 @onready var _world: WorldView = %WorldView
 @onready var _shop: ShopPanel = %ShopPanel
 @onready var _hud: DayHud = %DayHud
@@ -55,19 +59,32 @@ var _banked_nights := -1
 @onready var _debug: CanvasLayer = %DebugOverlay
 
 
+## **The theme goes on before anything is built against it**, which is why
+## this is `_enter_tree` and not `_ready`.
+##
+## `_enter_tree` runs on a parent before its children; `_ready` runs on
+## children before their parent. A screen that builds a `Button` in its own
+## `_ready` with no theme yet gets Godot's default minimum size - sixty-three
+## by thirty-one - and `size` is clamped *up* to it. When the theme lands a
+## moment later the minimum drops to forty-six by eight, but a Control's
+## `size` is never clamped back down, so the button stays thirty-one pixels
+## tall for the rest of the run. That is three controls hanging off the
+## bottom of a 270 pixel screen, and `input_check` caught all three.
+func _enter_tree() -> void:
+	_dressed = UiKit.theme()
+	UiKit.dress(self, _dressed)
+
+
 func _ready() -> void:
 	print(BuildInfo.line())
 
-	# **The game's own letters, on the whole tree at once.** A theme on the
-	# root is inherited by everything under it, so no panel has to remember
-	# to ask - and the ones that want a heading override the size rather than
-	# the face, which keeps them on the same drawing.
-	# `Main` is a `Node` and has no theme of its own; the UI root Control
-	# does, and everything on screen is under it.
-	var dressed := UiKit.theme()
-	var screen := %UI.get_child(0) as Control
-	if screen != null:
-		screen.theme = dressed
+	# **Again, for what the first pass could not see.** The debug overlay
+	# builds its panel in its own `_ready`, on a `CanvasLayer` of its own with
+	# no Control above it, so it did not exist during `_enter_tree` and
+	# nothing would ever have inherited a theme to it. Same theme object, so
+	# every screen in the game is wearing one `Theme` and not two copies of
+	# one.
+	UiKit.dress(self, _dressed)
 
 	_driver.start(BOOT_SEED)
 

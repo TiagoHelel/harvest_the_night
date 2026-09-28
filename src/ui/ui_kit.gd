@@ -18,6 +18,30 @@ extends RefCounted
 ## in the art and `MARGIN` here agree, because two numbers that have to match
 ## and live in different files are two numbers that will not.
 ##
+## ## One theme, and no screen dresses itself
+##
+## `theme()` builds the whole of it - every font, colour, frame and gap the
+## game uses - and `dress()` puts it on. **Nothing in `src/ui/` calls
+## `add_theme_*_override`**: task 0081 took the last of them out and
+## `headless_check` reads the source files and fails if one comes back. An
+## override is a colour one screen has and the other eleven do not, which is
+## how this game ended up with four different values of `DIM` and five
+## hand-rolled panel backgrounds that were all nearly the same purple.
+##
+## A screen says *what a thing is* - `label.theme_type_variation = UiKit.DIM`
+## - and the theme says what that looks like. `modulate` is left for how lit a
+## thing is **right now**, which is the one job it is actually good at: a
+## flash decaying back to its own colour.
+##
+## ## The scale factor is the window's
+##
+## `SCALE` is one and has to be. The project stretches a 480x270 viewport with
+## an integer scale mode, so the whole screen - world, HUD and letters
+## together - is already multiplied by a whole number at every window size. A
+## second scale inside the theme would multiply that one and put an eight
+## pixel font at eleven and a half, which is the blurred bitmap the whole art
+## pipeline exists to avoid.
+##
 ## ## Nothing here is a rule
 ##
 ## `src/ui/` draws and owns no rules, and this is the drawing half of the
@@ -42,8 +66,9 @@ const HEADING_SIZE := 16
 ## that will not, so that check stays.
 const MARGIN := 3
 
-## The four a button can be in. Godot's own names, so wiring one up is
-## `add_theme_stylebox_override(state, UiKit.button(state))`.
+## The four a button can be in, in Godot's own names, because `theme()` hands
+## each one straight to `Theme.set_stylebox`. Nothing outside this file wires
+## a button up any more: it is a `Button`, and the theme knows what that is.
 const BUTTON_STATES := ["normal", "hover", "pressed", "disabled"]
 
 ## Loaded once each. A panel asking for its background every frame would
@@ -97,19 +122,288 @@ static func heading_font() -> Font:
 	return _font("heading")
 
 
-## A `Theme` carrying the font, for the UI root to wear.
+## The theme's own scale. **One, and it has to be** - see the note at the top
+## of this file. It is named rather than written as a bare 1 so that the next
+## person who wants a bigger UI finds the reason before they find the number.
+const SCALE := 1.0
+
+## How far a panel holds its contents off its own frame, on top of the three
+## pixel border. Five on every panel in the game, because five on one and
+## eight on another is exactly what "no screen is the odd one out" rules out.
+const PAD := 5
+
+## What a list row holds its text off its own edges. Tighter than `PAD`: a row
+## is eleven pixels tall and five a side would leave one for the letters.
+const ROW_PAD := 3
+
+## **The colours the UI is allowed to be, and where each one comes from.**
+##
+## Every value is a name in `PaletteData.COLOURS`, so the UI and the sprites
+## are painted out of the same tin and a palette change reaches both. Before
+## task 0081 these lived as `const DIM := Color(...)` in ten different files
+## with four different values of `DIM`, which is not a palette, it is a habit.
+##
+## The key is the theme type variation a screen asks for. `&""` is the plain
+## `Label` every screen gets without asking for anything.
+const ROLES := {
+	&"": &"bone",                   # body text: warm off-white, not white
+	&"Dim": &"bone_dark",           # secondary - a label beside a number
+	&"Faint": &"stone",             # none held, locked, unavailable
+	&"Warm": &"gold_light",         # a heading, or the thing being pointed at
+	&"Money": &"gold",              # brass, like the coins on the sheet
+	&"Warn": &"flame",              # short of something, but not yet losing
+	&"Good": &"grass_light",        # owned, safe, survived
+	&"Bad": &"roof_light",          # a zombie on the house, a night lost
+	&"Cool": &"moon",               # the records screen's quiet blue
+}
+
+## The names a screen uses, so a typo is a parse error rather than a label
+## that quietly stays the wrong colour.
+const DIM := &"Dim"
+const FAINT := &"Faint"
+const WARM := &"Warm"
+const MONEY := &"Money"
+const WARN := &"Warn"
+const GOOD := &"Good"
+const BAD := &"Bad"
+const COOL := &"Cool"
+
+## The heading face, which is the same design at twice the size. Its own
+## variation rather than one more role, because it changes the size as well as
+## the colour.
+const HEADING := &"Heading"
+
+## A list row: a button with no frame until it is pointed at. The panels are
+## full of them, and a drawn sixteen pixel frame around an eleven pixel row
+## would be a frame with no room left for the row.
+const ROW := &"Row"
+
+## The frame the debug read-out wears - the quiet one, because a developer
+## overlay that competes with the game is an overlay in the way.
+const OVERLAY := &"Overlay"
+
+## A shop tab: the panel with its bottom edge open, so it reads as joined to
+## the list underneath it.
+const TAB := &"Tab"
+
+## A button for something already bought. It is a `disabled` button - there is
+## nothing left to press - with green letters, so "you have this" and "you
+## cannot afford this" are not the same grey.
+const OWNED := &"Owned"
+
+
+## A colour by the name a screen knows it as, straight off the palette.
+##
+## An unknown name comes back as the body text colour rather than as magenta
+## or as a crash: a typo should make a label look ordinary, not make the
+## screen it is on disappear.
+static func colour(role: StringName = &"") -> Color:
+	var key: StringName = ROLES.get(role, ROLES[&""])
+	return PaletteData.COLOURS.get(key, Color.WHITE)
+
+
+## The whole theme: every font, colour, frame and gap the game uses.
 ##
 ## **Built here rather than set in `project.godot`.** `gui/theme/custom_font`
-## read back as an empty string with the path in it - Godot did not take a
-## `.fnt` through that setting - and a line of configuration that silently
-## does nothing is worse than no line at all.
+## read back as an empty string with the path still in it - Godot did not take
+## a `.fnt` through that setting - and a line of configuration that silently
+## does nothing is worse than no line at all. This is code, so
+## `headless_check` can ask it questions.
 static func theme() -> Theme:
 	var out := Theme.new()
+	out.default_base_scale = SCALE
 	out.default_font_size = FONT_SIZE
 	var face := font()
 	if face != null:
 		out.default_font = face
+
+	_dress_text(out)
+	_dress_frames(out)
+	_dress_buttons(out)
+	_dress_gaps(out)
 	return out
+
+
+## Puts the theme on a tree, and says how many islands it dressed.
+##
+## Walks it and dresses **every Control with no Control above it** - the root
+## of each `CanvasLayer`, and anything hung straight off a `Node2D`. A theme
+## is inherited by a Control's descendants, so one per island is enough, and a
+## row built later inherits it the moment it is added.
+##
+## Done by walking rather than by hand because the debug overlay is on its own
+## `CanvasLayer` outside the UI one, and a screen that has to remember to ask
+## for the theme is a screen that will one day forget. Task 0091's title
+## screen and 0092's router arrive dressed without touching this.
+static func dress(root: Node, wearing: Theme = null) -> int:
+	return _dress(root, wearing if wearing != null else theme(), false)
+
+
+static func _dress(node: Node, wearing: Theme, under_control: bool) -> int:
+	var count := 0
+	var control := node as Control
+	if control != null and not under_control:
+		control.theme = wearing
+		count += 1
+	var inside := under_control or control != null
+	for child in node.get_children():
+		count += _dress(child, wearing, inside)
+	return count
+
+
+# ------------------------------------------------------------------ the parts
+
+static func _dress_text(out: Theme) -> void:
+	# The plain Label first, then one variation per role. A screen names the
+	# role and never the colour, which is what makes a palette change one edit
+	# instead of forty.
+	out.set_color(&"font_color", &"Label", colour())
+	for role in ROLES:
+		if role == &"":
+			continue
+		out.set_type_variation(role, &"Label")
+		out.set_color(&"font_color", role, colour(role))
+
+	out.set_type_variation(HEADING, &"Label")
+	out.set_color(&"font_color", HEADING, colour(WARM))
+	out.set_font_size(&"font_size", HEADING, HEADING_SIZE)
+	var big := heading_font()
+	if big != null:
+		out.set_font(&"font", HEADING, big)
+
+	# Godot draws tooltips through these two types and nothing else, so a
+	# tooltip not named here would be the one control still wearing the
+	# engine's grey.
+	out.set_stylebox(&"panel", &"TooltipPanel", tooltip())
+	out.set_color(&"font_color", &"TooltipLabel", colour())
+
+
+static func _dress_frames(out: Theme) -> void:
+	for type in [&"Panel", &"PanelContainer"]:
+		out.set_stylebox(&"panel", type, _padded(panel(), PAD, PAD))
+	out.set_type_variation(OVERLAY, &"PanelContainer")
+	out.set_stylebox(&"panel", OVERLAY, _padded(tooltip(), PAD - 1, PAD - 1))
+
+
+static func _dress_buttons(out: Theme) -> void:
+	# **Three pixels across, none down.** A `Button` computes its minimum
+	# height from its content margins, so a vertical margin here is a control
+	# that ignores the size it was given - the bug that put the build palette
+	# off the bottom of the screen at 0032, the shop rows at 0040, the speed
+	# control at 0055 and the tech tree's third column off the side at 0061.
+	# Every one of those screens had pinned this by hand; now it is pinned
+	# once.
+	for state in BUTTON_STATES:
+		out.set_stylebox(StringName(state), &"Button",
+			_padded(button(state), ROW_PAD, 0))
+	# **Focus is a state, not the absence of one.** Two screens used to hide
+	# Godot's grey dashed ring behind an empty box, which leaves a keyboard
+	# with no way to say where it is. `ui/button_focus` is a ring, drawn over
+	# whichever state the button is already in.
+	out.set_stylebox(&"focus", &"Button", _frame("button_focus"))
+	out.set_color(&"font_color", &"Button", colour())
+	out.set_color(&"font_hover_color", &"Button", colour(WARM))
+	out.set_color(&"font_focus_color", &"Button", colour())
+	# Pressed is gold, so its letters are ink. Bone on gold is the one pair in
+	# this palette that cannot be read at eight pixels.
+	out.set_color(&"font_pressed_color", &"Button",
+		PaletteData.COLOURS[&"ink"])
+	out.set_color(&"font_disabled_color", &"Button", colour(FAINT))
+
+	# **A list row has no frame until it is pointed at.** Flat boxes rather
+	# than drawings: a row's hover is one flat colour, and an ASCII map of
+	# sixteen by sixteen pixels all the same would be a drawing pretending to
+	# be a number.
+	out.set_type_variation(ROW, &"Button")
+	out.set_stylebox(&"normal", ROW, _flat(_wash(&"night", 0.80)))
+	out.set_stylebox(&"hover", ROW, _flat(_wash(&"night_light", 0.90)))
+	out.set_stylebox(&"pressed", ROW, _flat(_wash(&"gold_dark", 0.95)))
+	out.set_stylebox(&"disabled", ROW, _flat(_wash(&"ink", 0.70)))
+	out.set_stylebox(&"focus", ROW, _frame("button_focus"))
+	out.set_color(&"font_color", ROW, colour())
+	out.set_color(&"font_hover_color", ROW, colour(WARM))
+	out.set_color(&"font_pressed_color", ROW, colour(WARM))
+	out.set_color(&"font_disabled_color", ROW, colour(FAINT))
+
+	# **A variation only has to say what differs.** Everything `Owned` does
+	# not name falls through to `Button`, so this is one colour rather than a
+	# second set of four frames to keep in step.
+	out.set_type_variation(OWNED, &"Button")
+	out.set_color(&"font_disabled_color", OWNED, colour(GOOD))
+
+	# **A tab is the same frame in every state**, because a tab does not press
+	# in - it is either the page you are on or it is not, and the letters say
+	# which. The colours are the reason this is not just `Button`: a `Button`
+	# draws its pressed letters in ink, which is right on a gold press and
+	# wrong on a tab, where it made the tab you were *on* the one that looked
+	# switched off.
+	out.set_type_variation(TAB, &"Button")
+	for state in BUTTON_STATES:
+		out.set_stylebox(StringName(state), TAB, _padded(tab(), ROW_PAD, 0))
+	out.set_stylebox(&"focus", TAB, _frame("button_focus"))
+	out.set_color(&"font_color", TAB, colour(DIM))
+	out.set_color(&"font_hover_color", TAB, colour())
+	out.set_color(&"font_pressed_color", TAB, colour(WARM))
+	out.set_color(&"font_disabled_color", TAB, colour(FAINT))
+
+	# The two the settings screen wants at task 0086. Named now because the
+	# kit drew them at 0079, and a piece of art nothing can reach is a piece
+	# of art nobody will remember to wire up.
+	out.set_stylebox(&"slider", &"HSlider", slider_track())
+	var grab := slider_grab()
+	if grab != null:
+		out.set_icon(&"grabber", &"HSlider", grab)
+		out.set_icon(&"grabber_highlight", &"HSlider", grab)
+	var on := checkbox(true)
+	var off := checkbox(false)
+	if on != null and off != null:
+		out.set_icon(&"checked", &"CheckBox", on)
+		out.set_icon(&"unchecked", &"CheckBox", off)
+
+
+static func _dress_gaps(out: Theme) -> void:
+	# **No gap between rows.** Godot's default puts four pixels between a
+	# container's children, which down a list of a dozen is fifty pixels of
+	# nothing on a screen two hundred and seventy tall. Eight screens set this
+	# to zero one container at a time; now the game does it once.
+	for type in [&"BoxContainer", &"VBoxContainer", &"HBoxContainer"]:
+		out.set_constant(&"separation", type, 0)
+	for side in [&"margin_left", &"margin_right", &"margin_top",
+			&"margin_bottom"]:
+		out.set_constant(side, &"MarginContainer", PAD)
+
+
+## A palette colour at less than full opacity, for a fill that sits over the
+## game rather than over a panel.
+static func _wash(key: StringName, alpha: float) -> Color:
+	var found: Color = PaletteData.COLOURS.get(key, Color.WHITE)
+	return Color(found.r, found.g, found.b, alpha)
+
+
+static func _flat(fill: Color) -> StyleBox:
+	var box := StyleBoxFlat.new()
+	box.bg_color = fill
+	box.content_margin_left = ROW_PAD
+	box.content_margin_right = ROW_PAD
+	box.content_margin_top = 1
+	box.content_margin_bottom = 1
+	return box
+
+
+## The same frame with its padding pinned.
+##
+## **A `StyleBoxTexture` otherwise takes its content margin from its own
+## nine-slice border**, so every panel in the game would hold its contents
+## exactly three pixels off the edge whether that suited it or not, and a
+## button would grow by however wide its frame happened to be drawn. Task
+## 0079 found this the hard way, when a button pushed the tech tree's third
+## column off a four hundred and eighty pixel screen.
+static func _padded(box: StyleBox, across: int, down: int) -> StyleBox:
+	box.content_margin_left = across
+	box.content_margin_right = across
+	box.content_margin_top = down
+	box.content_margin_bottom = down
+	return box
 
 
 static func _font(face: String) -> Font:

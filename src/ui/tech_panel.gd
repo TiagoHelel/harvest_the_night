@@ -19,10 +19,6 @@ extends Control
 ## `Screen` and `MOUSE_FILTER_IGNORE` across the whole of it, and a button in
 ## that corner is not hit-testable. Panels that are clicked go after it.
 
-const WARM := Color(0.98, 0.86, 0.55)
-const DIM := Color(0.62, 0.60, 0.72)
-const OWNED := Color(0.55, 0.85, 0.58)
-const LOCKED := Color(0.50, 0.44, 0.48)
 
 ## A node's button. Four across, three down, and the whole tree on one screen.
 const NODE_SIZE := Vector2(148, 30)
@@ -41,13 +37,17 @@ func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	set_anchors_preset(Control.PRESET_FULL_RECT)
 
-	var shade := ColorRect.new()
-	shade.name = "TechShade"
-	shade.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	shade.color = Color(0.03, 0.02, 0.06, 0.88)
-	shade.position = Vector2.ZERO
-	shade.size = Vector2(480, 270)
-	add_child(shade)
+	# **The kit's frame, the same one the records screen wears.** This was a
+	# flat `ColorRect` of its own purple, which made the tech tree the one
+	# full-screen panel in the game that was not brass-edged - the "odd one
+	# out" task 0081 names, and the reason the screen read as an overlay
+	# rather than as a place.
+	var backing := Panel.new()
+	backing.name = "TechBacking"
+	backing.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	backing.position = Vector2(8, 22)
+	backing.size = Vector2(464, 222)
+	add_child(backing)
 
 	_frame = Control.new()
 	_frame.name = "TechFrame"
@@ -56,15 +56,15 @@ func _ready() -> void:
 	_frame.size = Vector2(464, 216)
 	add_child(_frame)
 
-	var heading := _label("TechHeading", Vector2(8, 4), WARM)
+	var heading := _label("TechHeading", Vector2(8, 4), UiKit.WARM)
 	heading.text = "TECHNOLOGY"
-	_held = _label("TechHeld", Vector2(120, 4), WARM)
-	_reason = _label("TechReason", Vector2(8, 186), DIM)
+	_held = _label("TechHeld", Vector2(120, 4), UiKit.WARM)
+	_reason = _label("TechReason", Vector2(8, 186), UiKit.DIM)
 	# **What the node under the cursor does**, on its own line where there is
 	# room for a sentence. The buttons are too narrow for one.
-	_note = _label("TechNote", Vector2(8, 172), WARM)
+	_note = _label("TechNote", Vector2(8, 172), UiKit.WARM)
 
-	var hint := _label("TechHint", Vector2(300, 4), DIM)
+	var hint := _label("TechHint", Vector2(300, 4), UiKit.DIM)
 	hint.text = "T or ESC to close"
 
 	_build_nodes()
@@ -75,7 +75,7 @@ func _build_nodes() -> void:
 	for column in branches.size():
 		var branch: StringName = branches[column]
 		var at := Vector2(6 + column * 152.0, 22.0)
-		var title := _label("TechBranch_" + str(branch), at, WARM)
+		var title := _label("TechBranch_" + str(branch), at, UiKit.WARM)
 		title.text = str(branch).to_upper()
 		var row := 0
 		for entry in Tech.nodes_of(branch):
@@ -83,7 +83,6 @@ func _build_nodes() -> void:
 			var id: StringName = one["id"]
 			var button := Button.new()
 			button.name = "Tech_" + str(id).replace(" ", "_")
-			button.add_theme_font_size_override("font_size", 8)
 			button.focus_mode = Control.FOCUS_ALL
 			# **Clipped, and the note lives elsewhere.** A `Button` sizes
 			# itself to its text whatever `custom_minimum_size` says, so "the
@@ -94,28 +93,6 @@ func _build_nodes() -> void:
 			# asserts every node is on the screen now.
 			button.clip_text = true
 			button.autowrap_mode = TextServer.AUTOWRAP_OFF
-			# **The kit's four states, not four colours typed here.** Task
-			# 0079 made one set of frames so that the tech tree, the shop and
-			# both HUDs are recognisably the same game; this is the tree's
-			# half of that.
-			#
-			# The content margins are pinned to what they were. A
-			# `StyleBoxTexture` otherwise takes its content margin from its
-			# nine-slice border, which is five - and a button that grew four
-			# pixels on each side would push the third column off a four
-			# hundred and eighty pixel screen, which is the family of bug this
-			# file already carries five comments about.
-			for style in UiKit.BUTTON_STATES:
-				var box := UiKit.button(style)
-				box.content_margin_left = 3
-				box.content_margin_right = 3
-				box.content_margin_top = 0
-				box.content_margin_bottom = 0
-				button.add_theme_stylebox_override(style, box)
-			# Focus is drawn by the node behind it, so it stays invisible.
-			var clear := StyleBoxFlat.new()
-			clear.bg_color = Color(0, 0, 0, 0)
-			button.add_theme_stylebox_override("focus", clear)
 			_frame.add_child(button)
 			button.position = at + Vector2(0, 14 + row * 34.0)
 			button.size = NODE_SIZE
@@ -125,13 +102,13 @@ func _build_nodes() -> void:
 			row += 1
 
 
-func _label(node_name: String, at: Vector2, colour: Color) -> Label:
+func _label(node_name: String, at: Vector2,
+		role: StringName = &"") -> Label:
 	var label := Label.new()
 	label.name = node_name
 	label.position = at
 	label.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	label.modulate = colour
-	label.add_theme_font_size_override("font_size", 8)
+	label.theme_type_variation = role
 	_frame.add_child(label) if _frame != null else add_child(label)
 	return label
 
@@ -212,12 +189,13 @@ func _refresh() -> void:
 		button.disabled = mine or not refused.is_empty()
 		button.tooltip_text = str(one["note"]) if mine or refused.is_empty() \
 			else "%s - %s" % [str(one["note"]), refused]
-		if mine:
-			button.modulate = OWNED
-		elif refused.is_empty():
-			button.modulate = Color.WHITE
-		else:
-			button.modulate = LOCKED
+		# **Disabled says it once.** A locked node is already `disabled`, so
+		# the theme is drawing it in the dull frame with faint letters; the
+		# `modulate` that used to be here multiplied that by a dim colour
+		# again and made an unlit button almost invisible. Owned is the same
+		# disabled button with green letters, which is the only difference
+		# that needs saying.
+		button.theme_type_variation = UiKit.OWNED if mine else &""
 
 
 func _whole_tree() -> int:
