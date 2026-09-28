@@ -1,7 +1,7 @@
 # 0100 - Exports: Windows and Web
 
 - **Phase:** 7 - Shell and product
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0005, 0092
 - **Likely files:** export_presets.cfg, tools/release.py
 

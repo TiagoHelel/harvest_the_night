@@ -41,7 +41,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 56
+const CASES := 57
 
 ## The pixels two pieces of text in one row must have between them. Two is
 ## the width of the gap inside a letter at this size, so anything less reads
@@ -137,6 +137,7 @@ func _run() -> void:
 	await _case_0097_language()
 	await _case_0098_access()
 	await _case_0099_ident()
+	await _case_0100_version()
 	_finish()
 
 
@@ -5707,5 +5708,24 @@ func _case_0099_ident() -> void:
 	ident = locate_control("BootIdent") as BootIdent
 	expect(ident != null and not ident.running(),
 		"opening the title again does not play it again")
+	await close_scene()
+	_completed += 1
+func _case_0100_version() -> void:
+	await open_scene("res://scenes/Title.tscn")
+	await frames(4)
+	var label: Label = require_control("Version")
+	expect(label != null and label.visible,
+		"the title says which build it is")
+	if label == null:
+		await close_scene()
+		_completed += 1
+		return
+	expect(label.text.contains(BuildInfo.VERSION),
+		"with the version in it", label.text)
+	expect(label.text.contains(BuildInfo.BUILT),
+		"and the date it was built", label.text)
+	expect(label.get_global_rect().end.x <= float(root.get_visible_rect().size.x),
+		"and it is on the screen rather than off the right of it",
+		str(label.get_global_rect()))
 	await close_scene()
 	_completed += 1

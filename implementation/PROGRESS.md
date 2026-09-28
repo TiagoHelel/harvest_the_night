@@ -8796,3 +8796,116 @@ Both unchanged - `215410677` and `2842078959`. A picture is not a rule.
 and a new `icon` row reading eight sizes off one drawing.
 `exports` is still the one SKIP and still wants the Godot export templates -
 task 0100 is next and is the one that needs them.
+## 0100 - Exports: Windows and Web - done 2026-09-28
+
+What changed: `python tools/release.py` builds both, checks what went into
+them, boots one of them and prints what the other weighs on the wire. The
+title screen says which build it is. **`verify.py` has no SKIP left in it for
+the first time in a hundred tasks** - the export templates are installed, so
+the `exports` row runs.
+
+Files: `tools/release.py` (new), `export_presets.cfg`, `scenes/Title.tscn`,
+`src/ui/title_screen.gd`, `src/core/build_info.gd`,
+`assets/locale/strings.csv`, `src/tools/headless_check.gd`,
+`src/tools/input_check.gd`.
+
+Verify: 6075 headless / 930 input / both hashes unchanged, 19 rows, 0 skipped.
+Shot: `implementation/shots/0100/title.png`.
+
+### The templates were the blocker, and they were asked about
+
+They are a separate 1.28 GB download and nothing could be built without them.
+Everything that did not need them was built first - the tool, the filters,
+the checks, the version on the title - and then the question was put rather
+than answered unilaterally: the owner said to fetch them. They are the
+official 4.7.2-stable `.tpz` from the Godot release page, unpacked into
+`%APPDATA%/Godot/export_templates/4.7.2.stable/`.
+
+The `exports` row in `verify.py` now costs 13 seconds and the whole suite
+comes in at 284 of its 300 second budget, so it stays in the gate rather than
+moving to the release tool.
+
+### The pack is where this goes wrong, and it went wrong
+
+The task says so and it was right, twice over.
+
+**Once in the config**, which is the cheap half: `release.py --check` reads
+every preset and fails when one of them stops excluding a folder. Taking
+`implementation/*` off the Windows preset - and leaving it on the Web one -
+is caught by name.
+
+**Once in the pack itself**, which is the half that cannot be fooled: the
+names are read back out of the `.pck` directory after the export. 716 files,
+171 of them rules, no `src/tools/`, no `.py`, no `.md`.
+
+And the first version of that reader **was wrong and passed anyway.** Godot
+moved the pack directory to the end of the file in 4.4; reading it from after
+the header gave a count of nought, and a pack with no files in it passes
+every check about what is *not* in it. It printed "nothing of the repository
+in it" over an empty read. `pack_is_clean` refuses an empty pack now, which
+is the general lesson: a check that can pass by finding nothing has to say so.
+
+### The budget was measured, not picked
+
+The first `WIRE_BUDGET` here was eight megabytes, chosen because ten seconds
+of a typical connection is about that. The first build came out at **12.01 MB
+gzipped**, and 9.61 of those twelve are `index.wasm` - the Godot engine, not
+this game. A stock 4.7 web export cannot be smaller without building the
+engine from source with modules stripped.
+
+So there are two budgets and the comments say which is which:
+
+- `WIRE_BUDGET` is 13 MB: the engine floor plus room to grow. It catches a
+  disaster and not much else.
+- `PACK_BUDGET` is 3.5 MB on `index.pck` gzipped - **the half this repository
+  owns**, currently 2.31 MB. That is the one with teeth, and the one that
+  bites the day somebody checks in a forty megabyte WAV.
+
+Both are printed every build, over and under.
+
+### Two builds, one game
+
+The done-when is "the two builds produce the same determinism hash", and the
+honest way to answer it is not to run one of them: a Web build cannot be
+driven from a command line at all, so running the Windows one would prove a
+thing about the Windows one.
+
+What is checkable, exactly, is that both packs carry the same rules and the
+same tables - and the pack format stores an MD5 per file, so it is a
+comparison rather than an argument. 716 files each, every one identical,
+including all 171 under `src/`. Same rules and same data on the same engine
+version is the same hash.
+
+The Windows build is also **booted** before it is called a build: 400 frames
+of the real exported binary with no window, loading the pack, running every
+autoload and building the title scene, exiting zero with nothing on stderr.
+Not a full night - the autoplayer is excluded from the pack on purpose - but
+the difference between "the file was written" and "the file runs".
+
+### The click, the mark, and the date
+
+`html/focus_canvas_on_start` was already on; what is new is a `head_include`
+that focuses the canvas again on the first `pointerdown`, because a web build
+that is running and cannot hear the keyboard is the commonest way one looks
+broken. Audio on a first gesture is Godot's own web driver and was not
+changed - said plainly because it was not tested in a browser here.
+
+Task 0099's mark goes on the window and on the browser tab, at 256 and 512.
+
+`release.py` stamps the build date into `BuildInfo.BUILT` on the way out, and
+the title screen shows `v0.1.0 prototype - built 2026-09-28` in the corner -
+on the title rather than in the debug overlay, because the person who needs
+it is a stranger sending a screenshot of something going wrong.
+
+**It was there and unreadable at first.** `Faint` is the colour for a thing
+you cannot have, not for a thing you have to squint at, and the label was
+narrower than its own line so the text overhung its own left edge. Wider, and
+`Dim`, and the string table now has a width on the key so the checker guards
+it in both languages.
+
+### Hashes
+
+Both unchanged - `215410677` and `2842078959`. A build is not a rule.
+
+`python tools/verify.py` prints PASS: 6075 asserts, 930 input cases, 0 failed,
+**19 rows and no SKIP**.

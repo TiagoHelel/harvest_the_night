@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 92
+const GROUPS := 93
 
 const SettingsScript := preload("res://src/app/settings.gd")
 const AppScript := preload("res://src/app/app.gd")
@@ -170,6 +170,7 @@ func _run() -> void:
 	_task_0097_strings()
 	_task_0098_access()
 	_task_0099_icon()
+	_task_0100_release()
 
 
 func _finish() -> void:
@@ -14681,4 +14682,91 @@ func _task_0099_icon() -> void:
 	expect(BootIdentScript.MARK % 16 == 0,
 		"and it draws the mark at a whole multiple of sixteen",
 		str(BootIdentScript.MARK))
+	_completed += 1
+## 0100 - two builds, and the config that decides what is in them.
+##
+## **What can be checked without the export templates installed**, which is
+## most of it: an export filter is a string in a config file nobody reads, and
+## the day somebody adds a folder it ships quietly. The half that needs a
+## build - reading the names back out of the pack - is
+## `tools/release.py`'s, and it runs on the machine that has the templates.
+func _task_0100_release() -> void:
+	var presets := FileAccess.get_file_as_string("res://export_presets.cfg")
+	expect(presets.contains('platform="Windows Desktop"'),
+		"there is a Windows preset")
+	expect(presets.contains('platform="Web"'), "and a Web one")
+	expect(presets.contains('export_path="build/windows/'),
+		"and they write into build/")
+	expect(presets.contains('export_path="build/web/index.html"'),
+		"the web one as index.html, which is what a host wants")
+
+	# **The four folders the task names.** Every one of them is large, sits
+	# beside the game in this repository, and would ship without anybody
+	# noticing.
+	var filters: Array = []
+	for line in presets.split("
+"):
+		if line.begins_with("exclude_filter="):
+			filters.append(line)
+	expect(filters.size() == 2, "both presets have an exclude filter",
+		str(filters.size()))
+	for folder in ["implementation", "tools", "docs", "build"]:
+		var missing := 0
+		for one in filters:
+			if not String(one).contains("%s/*" % folder):
+				missing += 1
+		expect(missing == 0,
+			"every preset excludes %s/" % folder,
+			"%d of %d do not" % [missing, filters.size()])
+	for pattern in ["*.md", "*.py", "src/tools/*"]:
+		var absent := 0
+		for one in filters:
+			if not String(one).contains(pattern):
+				absent += 1
+		expect(absent == 0, "and %s with them" % pattern,
+			"%d of %d do not" % [absent, filters.size()])
+
+	# The same four, named in the tool that checks the pack afterwards.
+	var release := FileAccess.get_file_as_string("res://tools/release.py")
+	for folder in ["implementation/", "tools/", "docs/", "build/"]:
+		expect(release.contains('"%s"' % folder),
+			"and `release.py` refuses %s in a pack" % folder)
+	expect(release.contains("WIRE_BUDGET"),
+		"there is a budget for what the web build weighs")
+	expect(release.contains("PACK_BUDGET"),
+		"and a tighter one for the half this repository owns")
+	expect(release.contains("gzip"),
+		"and both are measured gzipped, which is what crosses a wire")
+	expect(release.contains("--quit-after"),
+		"the build is booted before it is called a build")
+	expect(release.contains("shutil.rmtree"),
+		"and the folder is cleared first, so nothing stale is weighed")
+
+	# **The web build takes the click.** Focus on start is Godot's, and the
+	# head include is the belt to that brace - a web build that is running
+	# and cannot hear the keyboard is the commonest way one looks broken.
+	expect(presets.contains("html/focus_canvas_on_start=true"),
+		"the canvas takes focus when the game starts")
+	expect(presets.contains("pointerdown"),
+		"and again on the first click, whatever the browser did first")
+
+	# The mark from task 0099 goes on both.
+	expect(presets.contains('application/icon="res://assets/icon.png"'),
+		"the window wears the icon")
+	expect(presets.contains("progressive_web_app/icon_512x512="
+		+ '"res://assets/icon_512.png"'),
+		"and so does the browser tab")
+
+	# **Who this build is.** Stamped by `release.py` on the way out and shown
+	# on the title screen, so a screenshot of something going wrong says
+	# which build it came from.
+	expect(BuildInfo.VERSION.split(".").size() == 3,
+		"the version is three numbers", BuildInfo.VERSION)
+	var when := BuildInfo.BUILT.split("-")
+	expect(when.size() == 3 and String(when[0]).is_valid_int()
+		and String(when[1]).is_valid_int() and String(when[2]).is_valid_int(),
+		"and the build date is a date", BuildInfo.BUILT)
+	expect(BuildInfo.line().contains(BuildInfo.VERSION)
+		and BuildInfo.line().contains(BuildInfo.BUILT),
+		"and the one-line version says both", BuildInfo.line())
 	_completed += 1

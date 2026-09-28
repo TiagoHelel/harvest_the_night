@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`######################..`  **99 / 110 done**
+`######################..`  **100 / 110 done**
 
-0 doing / 11 todo / 0 blocked across 9 phases.
+0 doing / 10 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0100 - Exports: Windows and Web**. The whole of what is left is
+First up: **0101 - Onboarding in seven lines**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,25 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-11 task(s) left, the ready ones first, then what they
+10 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0100 - Exports: Windows and Web
-
-Ready to pick up.  Likely files: `export_presets.cfg, tools/release.py`.
-
-Two builds anyone can run, from one command, with the Web one small enough that a stranger will wait for it.
-
-- `python tools/release.py` builds both and writes them into `build/`
-- The Web build excludes `implementation/`, `tools/`, `docs/` and previous builds from the pack - check, because this is where that goes wrong
-- A wire-size budget for the Web build, gzipped, and the build fails when it is exceeded
-- The Web build takes focus and audio correctly on first click
-- The version and the build date are baked in and shown on the title screen
-
-  - done when: Both builds run a full night on a machine without Godot installed
-  - done when: The Web build is inside its budget and the number is printed
-  - done when: The two builds produce the same determinism hash
 
 ### 0101 - Onboarding in seven lines
 
@@ -151,7 +135,7 @@ The last English sentences in `src/core/`: the lines that say why a thing cannot
 
 ### 0105 - A playtest build
 
-Waits on 0100, 0103.  Likely files: `tools/playtest.py`.
+Waits on 0103.  Likely files: `tools/playtest.py`.
 
 A build to put in front of someone, with the instrumentation to learn something from it.
 
@@ -306,7 +290,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0089** [Tooltips](prompts/0089-tooltips.md)
 - [x] **0090** [The log panel](prompts/0090-log-panel.md)
 
-## 7 - Shell and product  (9/11)
+## 7 - Shell and product  (10/11)
 
 - [x] **0091** [The title screen](prompts/0091-title-screen.md)
 - [x] **0092** [The main menu and the router](prompts/0092-main-menu.md)
@@ -317,7 +301,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0097** [English and Portuguese](prompts/0097-i18n.md)
 - [x] **0098** [Accessibility](prompts/0098-accessibility.md)
 - [x] **0099** [An icon and a boot ident](prompts/0099-icon-ident.md)
-- [ ] **0100** [Exports: Windows and Web](prompts/0100-exports.md)
+- [x] **0100** [Exports: Windows and Web](prompts/0100-exports.md)
 - [ ] **0110** [Refusals in two languages](prompts/0110-refusals.md)
 
 ## 8 - Ship the MVP  (0/8)
@@ -326,7 +310,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [ ] **0102** [A performance budget](prompts/0102-perf-budget.md)
 - [ ] **0103** [Crash and error reporting](prompts/0103-error-report.md)
 - [ ] **0104** [Saves survive an update](prompts/0104-save-compat.md)
-- [ ] **0105** [A playtest build](prompts/0105-playtest-build.md) - needs 0100, 0103
+- [ ] **0105** [A playtest build](prompts/0105-playtest-build.md) - needs 0103
 - [ ] **0106** [The release checklist](prompts/0106-release-checklist.md) - needs 0105
 - [ ] **0107** [Store assets](prompts/0107-store-assets.md)
 - [ ] **0108** [The devlog and a trailer clip](prompts/0108-devlog.md) - needs 0107

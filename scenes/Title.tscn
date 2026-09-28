@@ -86,3 +86,12 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("90_ident")
+
+[node name="Version" type="Label" parent="UI/Screen"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 236.0
+offset_top = 258.0
+offset_right = 476.0
+offset_bottom = 268.0
+horizontal_alignment = 2

@@ -305,6 +305,7 @@ TECH_STOUT_TIMBERS,0,stout timbers,madeira reforçada
 TECH_SUMMARY,0,"%d of %d nodes, %d points spent - the ten nights pay %d at best and the whole tree costs %d","%d de %d nós, %d pontos gastos - as dez noites rendem %d no máximo e a árvore toda custa %d"
 TECH_TITLE,0,TECHNOLOGY,TECNOLOGIA
 TECH_TRUE_SIGHTS,0,true sights,mira certeira
+TITLE_BUILD,240,v%s %s - built %s,v%s %s - de %s
 TITLE_CONTINUE,140,CONTINUE,CONTINUAR
 TITLE_NEW,140,NEW RUN,NOVA PARTIDA
 TITLE_OPTIONS,140,OPTIONS,OPÇÕES

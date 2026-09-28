@@ -10,7 +10,7 @@ extends RefCounted
 const GAME_NAME := "HARVEST THE NIGHT"
 const VERSION := "0.1.0"
 const STAGE := "prototype"
-const BUILT := "2026-09-27"
+const BUILT := "2026-09-28"
 
 
 ## "v0.1.0 prototype", for a corner of the screen.

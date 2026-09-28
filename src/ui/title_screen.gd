@@ -73,6 +73,7 @@ var _from := 0
 var _world: WorldView
 var _logo: TextureRect
 var _ident: Label
+var _version: Label
 var _menu: VBoxContainer
 var _stats: StatsScreen
 var _options: OptionsScreen
@@ -88,22 +89,40 @@ func _ready() -> void:
 	_stats = get_node_or_null(^"UI/Screen/StatsScreen") as StatsScreen
 
 	_options = get_node_or_null(^"UI/Screen/OptionsScreen") as OptionsScreen
+	_version = get_node_or_null(^"UI/Screen/Version") as Label
 	_router = get_node_or_null(^"/root/App")
 	if _router != null and not _router.state_changed.is_connected(_went):
 		_router.state_changed.connect(_went)
 
 	_begin_backdrop()
 	_build_menu()
+	_wear_version()
 	if _router != null:
 		_router.reset(_router.TITLE)
 	_wear(_router.here() if _router != null else 0)
 
 
 ## Say it all again in whatever language is up now.
+## Which build this is, in the corner.
+##
+## **On the title rather than in the debug overlay**, because the overlay is
+## a developer key and the person who needs this is a stranger sending a
+## screenshot of something going wrong. Task 0100 stamps the date on the way
+## out of `tools/release.py`, so what is written here is the build that was
+## made rather than the day somebody edited a constant.
+func _wear_version() -> void:
+	if _version == null:
+		return
+	_version.text = I18n.f(&"TITLE_BUILD",
+		[BuildInfo.VERSION, BuildInfo.STAGE, BuildInfo.BUILT])
+	_version.theme_type_variation = UiKit.DIM
+
+
 func relabel() -> void:
 	if _menu == null:
 		return
 	_build_menu()
+	_wear_version()
 	if _ident != null:
 		_ident.text = I18n.t(&"TITLE_PRESS_ANY")
 
