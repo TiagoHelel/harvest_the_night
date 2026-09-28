@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`####################....`  **93 / 109 done**
+`#####################...`  **94 / 109 done**
 
-0 doing / 16 todo / 0 blocked across 9 phases.
+0 doing / 15 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0094 - Options: audio**. The whole of what is left is
+First up: **0095 - Options: controls**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,23 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-16 task(s) left, the ready ones first, then what they
+15 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0094 - Options: audio
-
-Ready to pick up.  Likely files: `src/ui/options_audio.gd`.
-
-Master, music, effects and ambience, with a test sound on each.
-
-- Four sliders, each writing to its bus through Settings
-- A test sound on release, on the bus being adjusted
-- A mute toggle that is separate from a zero slider
-- Values persist and apply on boot
-
-  - done when: Each slider affects only its own bus
-  - done when: Muting and unmuting restores the previous levels
 
 ### 0095 - Options: controls
 
@@ -381,12 +367,12 @@ The thing that gets people to look: thirty seconds that show the farm, the switc
 - [x] **0089** [Tooltips](prompts/0089-tooltips.md)
 - [x] **0090** [The log panel](prompts/0090-log-panel.md)
 
-## 7 - Shell and product  (3/10)
+## 7 - Shell and product  (4/10)
 
 - [x] **0091** [The title screen](prompts/0091-title-screen.md)
 - [x] **0092** [The main menu and the router](prompts/0092-main-menu.md)
 - [x] **0093** [Options: video](prompts/0093-options-video.md)
-- [ ] **0094** [Options: audio](prompts/0094-options-audio.md)
+- [x] **0094** [Options: audio](prompts/0094-options-audio.md)
 - [ ] **0095** [Options: controls](prompts/0095-options-controls.md)
 - [ ] **0096** [The pause menu](prompts/0096-pause-menu.md)
 - [ ] **0097** [English and Portuguese](prompts/0097-i18n.md)

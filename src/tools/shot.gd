@@ -71,7 +71,8 @@ const SCENARIOS: Array = [
 	["wave", "a wave mid-fight", ""],
 	["result", "the night's result", "ResultScreen"],
 	["tech", "the tech tree", "TechPanel"],
-	["options", "the video tab", "OptionsScreen"],
+	["options_video", "the video tab", "OptionsScreen:video"],
+	["options_audio", "the audio tab", "OptionsScreen:audio"],
 ]
 
 var _written := 0
@@ -169,7 +170,8 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"wave": _set_wave(state)
 		"result": _set_result(state)
 		"tech": _set_tech(state)
-		"options": _set_options(state)
+		"options_video": _set_options_video(state)
+		"options_audio": _set_options_audio(state)
 
 	_walk_to(state, _standing_at)
 	main.get_node("%WorldView").look_at_cell(Player.cell(state))
@@ -243,12 +245,19 @@ func _result_lines(state: Dictionary) -> int:
 
 ## Bring one screen up and put the others away, so a picture has one subject.
 func _only_showing(main: Node, wanted: String) -> void:
+	# **A screen, optionally with a tab.** `"OptionsScreen:audio"` is the
+	# options frame open on its audio tab - which is the only way to
+	# photograph the second of three tabs that all live in one screen.
+	var want_screen := wanted.get_slice(":", 0)
+	var want_tab := wanted.get_slice(":", 1) if wanted.contains(":") else ""
 	for named in ["ShopPanel", "TechPanel", "StatsScreen", "InventoryPanel",
 			"WorkshopPanel", "ResultScreen", "OptionsScreen"]:
 		var screen: Control = main.get_node_or_null("%" + named)
 		if screen == null:
 			continue
-		screen.visible = named == wanted
+		screen.visible = named == want_screen
+		if screen.visible and want_tab != "":
+			screen.show_tab(StringName(want_tab))
 
 
 # ---------------------------------------------------------------- the farms
@@ -264,9 +273,13 @@ func _only_showing(main: Node, wanted: String) -> void:
 ## where the soil is; asking it is shorter than either guess and cannot go
 ## stale when the map moves.
 ## The farm at noon with the options over it, for looking at a settings tab
-## rather than at the farm. Task 0093 added it; 0094 and 0095 draw their own
-## tabs into the same frame.
-func _set_options(state: Dictionary) -> void:
+## rather than at the farm. One per tab, because they are one screen and only
+## one of them is on it at a time.
+func _set_options_video(state: Dictionary) -> void:
+	_set_noon(state)
+
+
+func _set_options_audio(state: Dictionary) -> void:
 	_set_noon(state)
 
 

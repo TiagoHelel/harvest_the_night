@@ -79,6 +79,11 @@ MUSIC_PEAK = 0.34
 ## say that this is the last wave.
 INTENSITY_PEAK = 0.44
 
+## The sting the options screen auditions the music level with. Louder than
+## the music, because it is heard on its own rather than under a game, and a
+## test sound that is hard to hear is a test sound that answers nothing.
+STING_PEAK = 0.50
+
 ## **The motif, as scale degrees.** One list, played by both pieces; see the
 ## module docstring. Zero is the root, seven is the octave.
 MOTIF = [0, 2, 4, 2, 7, 4, 2, 0]
@@ -297,11 +302,38 @@ def intensity():
     return track
 
 
-## The three files, and what each may peak at.
+def sting():
+    """**The sound the music slider makes**, added by task 0094.
+
+    Three notes off the motif in the day's voice, rising, over a second - long
+    enough to hear a level on and short enough to press four times in a row
+    without waiting for it.
+
+    It is a piece rather than an effect because a test sound has to play on
+    the bus it is testing, and the bus a sound plays on is the folder it lives
+    in. Nothing else in `assets/music/` is under nineteen seconds.
+
+    It does not loop, and nothing asks it to: the loop-seam check names the
+    three pieces that do.
+    """
+    gap = int(RATE * 0.15)
+    length = gap * 2 + int(RATE * 0.85)
+    track = [0.0] * length
+    for i, degree in enumerate(MOTIF[:3]):
+        note = pluck(hz_of(MAJOR, degree, 0), 700, 300.0)
+        at = i * gap
+        for k, v in enumerate(note):
+            if at + k < length:
+                track[at + k] += v * 0.85
+    return track
+
+
+## The four files, and what each may peak at.
 PIECES = [
     ("farm", farm, MUSIC_PEAK),
     ("night", night, MUSIC_PEAK),
     ("night_intensity", intensity, INTENSITY_PEAK),
+    ("sting", sting, STING_PEAK),
 ]
 
 
@@ -391,8 +423,8 @@ def preview(folder):
             out.append(made["night"][(i - lead) % len(made["night"])])
     io.open(os.path.join(folder, "_crossfade.wav"), "wb").write(
         sfx.wav_bytes(out))
-    print("  preview: 3 pieces, 6 passes over the loop seam, and a "
-          "%.1fs crossfade, in %s" % (seconds, folder))
+    print("  preview: %d pieces, 6 passes over the loop seam, and a "
+          "%.1fs crossfade, in %s" % (len(made), seconds, folder))
 
 
 def _transition_seconds():

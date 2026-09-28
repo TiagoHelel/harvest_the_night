@@ -223,17 +223,13 @@ SPRITES = {
         "kgnnnnnnnnnnnngk",
     ]),
 
-    "ui/slider_track": dict(size=(16, 8), legend={
-        "k": "ink", "s": "ink_soft", "n": "night", "g": "gold_dark",
+    "ui/slider_track": dict(size=(16, 4), legend={
+        "k": "ink", "s": "ink_soft",
     }, rows=[
-        "................",
-        "................",
-        "kkkkkkkkkkkkkkkk",
-        "ksnnnnnnnnnnnnsk",
-        "ksnnnnnnnnnnnnsk",
-        "kkkkkkkkkkkkkkkk",
-        "................",
-        "................",
+        "ssssssssssssssss",
+        "skkkkkkkkkkkkkks",
+        "skkkkkkkkkkkkkks",
+        "ssssssssssssssss",
     ]),
 
     "ui/slider_grab": dict(size=(8, 8), legend={

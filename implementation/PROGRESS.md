@@ -8143,3 +8143,106 @@ Both unchanged - `215410677` and `2601044827`. A window is not a rule.
 
 `python tools/verify.py` prints PASS: 5725 asserts, 821 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+## 0094 - Options: audio - done 2026-09-28
+
+What changed: the audio tab. Four levels, a mute, and a sound on each of them
+so a number means something. `Audio` already owned the whole mechanism since
+task 0083 - the four keys, which bus each turns, zero meaning silence rather
+than eighty decibels down, re-applying on every change - and what was missing
+was somewhere to turn them.
+
+Files: `src/ui/options_audio.gd` (new), `src/ui/options_screen.gd`,
+`src/app/audio.gd`, `src/ui/ui_kit.gd`, `src/ui/music.gd`,
+`tools/gen_music.py`, `tools/sprite_maps.py`, `sprites/ui/slider_track.png`,
+`assets/music/sting.wav`, `src/tools/shot.gd`,
+`src/tools/headless_check.gd`, `src/tools/input_check.gd`.
+
+Verify: 5769 headless / 837 input / both hashes unchanged.
+Shots: `implementation/shots/0094/options_audio.png`.
+
+### A test sound has to be on the bus it is testing
+
+That is the requirement, and it has a consequence nobody would guess: a
+sound's bus is the folder it lives in, so the music level can only be
+auditioned by something in `assets/music/` - and everything in there was at
+least nineteen seconds long. **So `gen_music.py` now makes a fourth piece**,
+`sting`: three notes of the shared motif in the day's voice, 1.15 seconds,
+peaking a little above the music because it is heard on its own rather than
+under a game.
+
+It does not loop and nothing asks it to - the loop-seam check names the three
+pieces that do. Its seam measures 0.00 anyway, because it starts and ends in
+silence.
+
+Master is the one exception and cannot be otherwise: nothing plays on Master,
+everything sends to it. Its test is a sound passing through it, which is also
+what a player is asking about when they move that slider. The check asserts
+that rather than pretending otherwise.
+
+### Mute is a state over the levels, not a write to them
+
+The two done-whens are one design decision. A zero slider is a level and comes
+back as zero; mute is a state on top of whatever the levels are and comes back
+to them. So the sliders stay live while muted and the numbers stay on the
+screen - faint rather than gone, because they are still what the game will
+sound like the moment it comes back.
+
+Planting the classic wrong version - mute writes the four levels to zero -
+fails four input cases, including "the master bus comes back", which it does
+not: a master at zero is silent whether or not anybody unmuted it.
+
+### The first slider in the game, and what it showed
+
+Task 0086 drew slider art and named it in the kit. Nothing had put one on a
+screen until now, and two things were wrong the moment one appeared:
+
+**The filled part of the track was Godot's default grey** - measured at
+(118, 116, 131), a colour in no palette this game has - drawn over the top of
+the trough and hiding it completely. So a slider at seven tenths was a short
+grey bar with nothing after it to be seven tenths *of*. `grabber_area` is now
+gold and `grabber_area_highlight` brighter gold.
+
+**And the trough never drew at all.** Godot draws it at the stylebox's own
+height rather than the control's; the art was eight pixels tall with two blank
+rows at the top and two at the bottom, and those four rows were the entire
+thing. The map is four rows now with nothing transparent in it, and its fill
+was `night` - which is the colour of the panel it sits on - so that is `ink`
+inside an `ink_soft` edge.
+
+Both were found by opening the picture, and neither is the kind of thing a
+suite catches.
+
+### `Audio` finds `Settings` the way `Video` does
+
+`apply_volumes()` is the function with the first done-when in it, and a check
+could not drive it: `Audio._settings()` guarded on `is_inside_tree()`, which
+is false for anything a `SceneTree` check builds - so it silently read the
+shipped defaults and every assert about it would have been vacuous. It asks
+`Engine.get_main_loop()` now, the same as task 0093's `Video`.
+
+That had a consequence worth writing down. Two earlier groups build an
+`AudioScript` and abandon it, and an abandoned deck is now **subscribed to
+`Settings.changed`** - so it re-applies the volumes behind the next group's
+back, and the 0089 one is permanently ducked, because a duck decays in
+`_process` and a loose node never gets a frame. `queue_free()` does not help:
+it is deferred and nothing inside `_initialize()` reaches a frame. Both are
+removed from the tree and freed outright now.
+
+### One screenshot scenario per options tab
+
+Task 0093's `options` scenario has become `options_video` and `options_audio`,
+because three tabs in one screen cannot be photographed by making the screen
+visible - only one of them is on it at a time. A scenario's screen may now
+name a tab after a colon, and `shot.gd` opens it.
+
+The count in the 0082 group is seven, and 0095 will make it eight. Still a
+counted constant, for the same reason as before.
+
+### Hashes
+
+Both unchanged - `215410677` and `2601044827`. A volume is not a rule.
+
+`python tools/verify.py` prints PASS: 5769 asserts, 837 input cases, 0 failed.
+The sprite digest moved to `b72c23ef96f5` with the new slider trough, and the
+music row now reads four pieces rather than three.
+`exports` is still the one SKIP and still wants the Godot export templates.

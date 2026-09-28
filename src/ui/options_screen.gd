@@ -69,12 +69,16 @@ func _ready() -> void:
 	_empty.theme_type_variation = UiKit.DIM
 	_room.add_child(_empty)
 
-	# **Task 0093's tab registers itself here.** The frame knows the names
-	# in `TABS` and nothing about what any of them does, which is what makes
-	# 0094 and 0095 one line each.
+	# **The tabs register themselves here.** The frame knows the names in
+	# `TABS` and nothing about what any of them does, which is what made 0094
+	# three lines - and leaves 0095 the same.
 	var video := OptionsVideo.new()
 	video.name = "OptionsVideo"
 	register(&"video", video)
+
+	var audio := OptionsAudio.new()
+	audio.name = "OptionsAudio"
+	register(&"audio", audio)
 
 	var back := Button.new()
 	back.name = "OptionsBack"

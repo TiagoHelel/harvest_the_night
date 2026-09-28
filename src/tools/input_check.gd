@@ -41,7 +41,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 50
+const CASES := 51
 
 ## The pixels two pieces of text in one row must have between them. Two is
 ## the width of the gap inside a letter at this size, so anything less reads
@@ -126,6 +126,7 @@ func _run() -> void:
 	await _case_0091_title()
 	await _case_0092_router()
 	await _case_0093_video()
+	await _case_0094_audio()
 	_finish()
 
 
@@ -4922,8 +4923,8 @@ func _case_0092_router() -> void:
 	expect(frame != null and frame.visible, "and the frame is up")
 	var options: OptionsScreen = frame as OptionsScreen
 	if options != null:
-		expect(options.tabs() == [&"video"],
-			"with the one tab task 0093 registered - 0094 and 0095 add theirs",
+		expect(options.tabs() == [&"video", &"audio"],
+			"with the tabs tasks 0093 and 0094 registered, in TABS order",
 			str(options.tabs()))
 
 	await click_control("OptionsBack")
@@ -5009,7 +5010,7 @@ func _case_0093_video() -> void:
 	await frames(4)
 	var frame: OptionsScreen = require_control("OptionsScreen") as OptionsScreen
 	expect(frame != null and frame.tabs().has(&"video"),
-		"the options screen has a video tab now",
+		"the options screen has a video tab",
 		str(frame.tabs()) if frame != null else "no frame")
 	var tab: OptionsVideo = locate_control("OptionsVideo") as OptionsVideo
 	expect(tab != null and tab.visible,
@@ -5088,6 +5089,108 @@ func _case_0093_video() -> void:
 	settings.set_value(&"video/size", was_size)
 	settings.set_value(&"video/max_fps", was_cap)
 	settings.set_value(&"video/integer_scaling", was_crisp)
+	await frames(2)
+	await close_scene()
+	_completed += 1
+func _case_0094_audio() -> void:
+	await open_scene("res://scenes/Title.tscn")
+	var audio: Node = root.get_node_or_null(^"Audio")
+	var settings: Node = root.get_node_or_null(^"Settings")
+	if audio == null or settings == null:
+		expect(audio != null, "the audio autoload is up")
+		expect(settings != null, "and the settings autoload with it")
+		await close_scene()
+		_completed += 1
+		return
+
+	var was: Dictionary = {}
+	for key in [&"audio/master", &"audio/music", &"audio/sfx",
+			&"audio/ambience"]:
+		was[key] = float(settings.get_float(key))
+	var was_muted: bool = settings.get_bool(&"audio/muted")
+
+	await frames(4)
+	await tap_key(KEY_X)
+	await frames(3)
+	await click_control("Menu_options")
+	await frames(4)
+	var frame: OptionsScreen = require_control("OptionsScreen") as OptionsScreen
+	expect(frame != null and frame.tabs() == [&"video", &"audio"],
+		"the strip has both tabs, in the order the frame names them",
+		str(frame.tabs()) if frame != null else "no frame")
+
+	await click_control("OptionsTab_audio")
+	await frames(4)
+	var tab: OptionsAudio = locate_control("OptionsAudio") as OptionsAudio
+	expect(tab != null and tab.visible, "the audio tab opens")
+	if tab == null:
+		await close_scene()
+		_completed += 1
+		return
+
+	# **A slider writes its own key and nothing else.** Clicking the middle
+	# of one is a press and a release, which is what `drag_ended` wants.
+	var others: Array = [&"audio/master", &"audio/sfx", &"audio/ambience"]
+	var untouched: Dictionary = {}
+	for key in others:
+		untouched[key] = float(settings.get_float(key))
+	audio.forget_counts()
+	await click_control("AudioLevel_music")
+	await frames(3)
+	expect(is_equal_approx(settings.get_float(&"audio/music"), 0.5),
+		"the middle of the music slider is half",
+		"%.2f" % settings.get_float(&"audio/music"))
+	var moved: Array = []
+	for key in others:
+		if not is_equal_approx(settings.get_float(key), float(untouched[key])):
+			moved.append(String(key))
+	expect(moved.is_empty(), "and the other three do not move",
+		", ".join(moved))
+	expect(is_equal_approx(tab.level_shown(&"audio/music"), 0.5),
+		"the slider shows it", "%.2f" % tab.level_shown(&"audio/music"))
+	expect(tab.value_shown(&"audio/music") == "50%",
+		"and so does the number beside it", tab.value_shown(&"audio/music"))
+
+	# **Letting go plays that slider's own bus.** Counted rather than read
+	# off `last_played()`: the ambience puts a bird in the air on its own
+	# schedule, and a check that asked what was most recent would be a check
+	# that failed on a Tuesday.
+	var want: StringName = audio.TEST_SOUNDS[&"audio/music"]
+	expect(audio.plays_of(want) == 1,
+		"letting go of it plays the music test sound, once",
+		"%d of %s" % [audio.plays_of(want), want])
+
+	audio.forget_counts()
+	await click_control("AudioLevel_ambience")
+	await frames(3)
+	want = audio.TEST_SOUNDS[&"audio/ambience"]
+	expect(audio.plays_of(want) == 1,
+		"and the ambience slider plays the ambience one",
+		"%d of %s" % [audio.plays_of(want), want])
+
+	# **Mute is a state over the levels.** The done-when, through the button.
+	var master := AudioServer.get_bus_index("Master")
+	await click_control("AudioMute")
+	await frames(3)
+	expect(settings.get_bool(&"audio/muted"), "the mute button mutes")
+	expect(AudioServer.is_bus_mute(master), "and the master bus with it")
+	expect(tab.mute_showing(), "and the button says so")
+	expect(is_equal_approx(settings.get_float(&"audio/music"), 0.5),
+		"while every level is left exactly where it was",
+		"%.2f" % settings.get_float(&"audio/music"))
+	expect(is_equal_approx(tab.level_shown(&"audio/music"), 0.5),
+		"including on the screen, which does not drop to nought")
+
+	await click_control("AudioMute")
+	await frames(3)
+	expect(not settings.get_bool(&"audio/muted"), "and unmuting unmutes")
+	expect(not AudioServer.is_bus_mute(master), "the master bus comes back")
+	expect(is_equal_approx(settings.get_float(&"audio/music"), 0.5),
+		"with the levels it left", "%.2f" % settings.get_float(&"audio/music"))
+
+	for key in was:
+		settings.set_value(key, float(was[key]))
+	settings.set_value(&"audio/muted", was_muted)
 	await frames(2)
 	await close_scene()
 	_completed += 1

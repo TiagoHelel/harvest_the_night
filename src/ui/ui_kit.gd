@@ -360,6 +360,16 @@ static func _dress_buttons(out: Theme) -> void:
 	# kit drew them at 0079, and a piece of art nothing can reach is a piece
 	# of art nobody will remember to wire up.
 	out.set_stylebox(&"slider", &"HSlider", slider_track())
+	# **The filled part of the track, which Godot draws over the top of it.**
+	# Left alone it is the default engine grey - measured at (118, 116, 131),
+	# a colour that is in no palette this game has - and it hid the trough
+	# completely, so a slider at seven tenths was a short grey bar with
+	# nothing after it to be seven tenths *of*. Task 0094 put the first
+	# slider on a screen and that is how it was found.
+	out.set_stylebox(&"grabber_area", &"HSlider",
+		_bar(_wash(&"gold_dark", 0.95)))
+	out.set_stylebox(&"grabber_area_highlight", &"HSlider",
+		_bar(_wash(&"gold", 0.95)))
 	var grab := slider_grab()
 	if grab != null:
 		out.set_icon(&"grabber", &"HSlider", grab)
@@ -390,6 +400,14 @@ static func _dress_gaps(out: Theme) -> void:
 static func _wash(key: StringName, alpha: float) -> Color:
 	var found: Color = PaletteData.COLOURS.get(key, Color.WHITE)
 	return Color(found.r, found.g, found.b, alpha)
+
+
+## A flat box with no margins at all, for something drawn inside a track
+## rather than round a piece of text.
+static func _bar(fill: Color) -> StyleBox:
+	var box := StyleBoxFlat.new()
+	box.bg_color = fill
+	return box
 
 
 static func _flat(fill: Color) -> StyleBox:
@@ -451,8 +469,15 @@ static func button(state: String) -> StyleBox:
 
 
 ## The rail a slider runs along, and the thing that runs along it.
+## The empty part of a slider.
+##
+## **One pixel of margin, not three.** Godot draws this at the stylebox's own
+## height rather than the control's, and it is four pixels tall - so a margin
+## of two at the top and two at the bottom is the entire thing, and the middle
+## it would stretch is nothing at all. Measured at task 0094, which put the
+## first slider in the game on a screen.
 static func slider_track() -> StyleBox:
-	return _frame("slider_track", 2, 2)
+	return _frame("slider_track", 1, 1, 1)
 
 
 static func slider_grab() -> Texture2D:
@@ -468,7 +493,7 @@ static func checkbox(ticked: bool) -> Texture2D:
 ## `bottom` and `top` default to `MARGIN` and are given only where a frame is
 ## deliberately open on one side.
 static func _frame(name: String, bottom: int = MARGIN,
-		top: int = MARGIN) -> StyleBox:
+		top: int = MARGIN, across: int = MARGIN) -> StyleBox:
 	var texture := _texture(name)
 	if texture == null:
 		# **A flat box rather than nothing.** A missing frame should look
@@ -480,8 +505,8 @@ static func _frame(name: String, bottom: int = MARGIN,
 		return flat
 	var box := StyleBoxTexture.new()
 	box.texture = texture
-	box.texture_margin_left = MARGIN
-	box.texture_margin_right = MARGIN
+	box.texture_margin_left = across
+	box.texture_margin_right = across
 	box.texture_margin_top = top
 	box.texture_margin_bottom = bottom
 	return box

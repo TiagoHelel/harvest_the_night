@@ -32,11 +32,12 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 86
+const GROUPS := 87
 
 const SettingsScript := preload("res://src/app/settings.gd")
 const AppScript := preload("res://src/app/app.gd")
 const VideoScript := preload("res://src/app/video.gd")
+const OptionsAudioScript := preload("res://src/ui/options_audio.gd")
 const OptionsScript := preload("res://src/ui/options_screen.gd")
 const AudioScript := preload("res://src/app/audio.gd")
 const SfxScript := preload("res://src/ui/sfx.gd")
@@ -159,6 +160,7 @@ func _run() -> void:
 	_task_0091_title()
 	_task_0092_router()
 	_task_0093_video()
+	_task_0094_audio()
 
 
 func _finish() -> void:
@@ -12425,14 +12427,15 @@ func _task_0082_shots() -> void:
 			names.append(parts[1])
 			screens.append(parts[5])
 
-	# **Six since task 0093 added `options`.** A counted constant, kept on
-	# purpose for the same reason the audio group counts its settings: a
-	# scenario arriving without anybody deciding to add one should be a
-	# failing row rather than an extra picture nobody looks at.
-	expect(names.size() == 6,
-		"the five scenarios task 0082 names, and the options tab",
+	# **Seven: task 0082's five, and one per options tab.** A counted
+	# constant, kept on purpose for the same reason the audio group counts
+	# its settings: a scenario arriving without anybody deciding to add one
+	# should be a failing row rather than an extra picture nobody looks at.
+	expect(names.size() == 7,
+		"the five scenarios task 0082 names, and one per options tab",
 		"%d: %s" % [names.size(), str(names)])
-	for wanted in ["noon", "dusk", "wave", "result", "tech", "options"]:
+	for wanted in ["noon", "dusk", "wave", "result", "tech",
+			"options_video", "options_audio"]:
 		expect(names.has(wanted), "there is a '%s' scenario" % wanted)
 
 	# Every one has a builder, so a scenario added to the table and not
@@ -12448,8 +12451,12 @@ func _task_0082_shots() -> void:
 	for named in screens:
 		if named == "":
 			continue
-		expect(scene.contains("name=\"%s\"" % named),
-			"the '%s' screen the tool asks for is in Main.tscn" % named)
+		# Since task 0094 a scenario may name a tab as well as a screen -
+		# `OptionsScreen:audio` - because the three options tabs are one
+		# screen and only one of them is on it at a time.
+		var node := String(named).get_slice(":", 0)
+		expect(scene.contains("name=\"%s\"" % node),
+			"the '%s' screen the tool asks for is in Main.tscn" % node)
 
 	# A scenario is a seed and a script; if it ever reaches for a clock, two
 	# runs stop giving the same picture and the tool is worth nothing.
@@ -12610,7 +12617,8 @@ func _task_0083_audio() -> void:
 		"and so is one with no bus in front of it")
 
 	audio.stop_all()
-	audio.queue_free()
+	root.remove_child(audio)
+	audio.free()            # not queue_free: nothing here reaches a frame
 	print("  %d buses, %d volumes, %d voices, dedupe folds 20 into 1"
 		% [wanted.size(), AudioScript.VOLUME_KEYS.size(),
 			AudioScript.MAX_VOICES])
@@ -13145,6 +13153,9 @@ func _task_0087_ambience() -> void:
 	expect(AmbienceScript.GAP_HIGH > AmbienceScript.GAP_LOW * 2.0,
 		"the gap between touches varies widely rather than ticking",
 		"%.1f to %.1f" % [AmbienceScript.GAP_LOW, AmbienceScript.GAP_HIGH])
+
+	root.remove_child(deck)
+	deck.free()             # ducked for ever otherwise; see task 0094
 
 	print("  2 beds, %d touches, bed %.2f ducks to %.3f under an alarm of %.2f"
 		% [AmbienceScript.DAY_TOUCHES.size()
@@ -13870,3 +13881,146 @@ func _task_0093_video() -> void:
 	video.free()
 	restarted.free()
 	_completed += 1
+## 0094 - the audio tab: four levels, a mute, and a sound on each.
+##
+## The levels themselves were `Audio`'s since task 0083. What is new is a way
+## to turn them, a sound that says what turning them did, and the rule that
+## mute is a state over the levels rather than a write to them.
+func _task_0094_audio() -> void:
+	# **The two tables agree.** A level with no test sound is a slider that
+	# says nothing when it is let go, which is the whole point of the task.
+	expect(AudioScript.TEST_SOUNDS.size() == AudioScript.VOLUME_KEYS.size(),
+		"every level has a sound to audition it with",
+		"%d against %d" % [AudioScript.TEST_SOUNDS.size(),
+			AudioScript.VOLUME_KEYS.size()])
+	for key in AudioScript.VOLUME_KEYS:
+		expect(AudioScript.TEST_SOUNDS.has(key), "'%s' has one" % key)
+
+	for key in AudioScript.TEST_SOUNDS:
+		var id: StringName = AudioScript.TEST_SOUNDS[key]
+		expect(ResourceLoader.exists("res://assets/%s.wav" % id),
+			"the '%s' test sound is a file that exists" % key, String(id))
+		var folder := String(id).get_slice("/", 0)
+		var bus: StringName = AudioScript.BUSES.get(StringName(folder), &"")
+		if key == &"audio/master":
+			# **Nothing plays on Master**; everything sends to it. So the
+			# master test is a sound passing through it - which is also what
+			# a player is asking about when they move that slider.
+			var index := AudioServer.get_bus_index(String(bus))
+			expect(index >= 0 and String(AudioServer.get_bus_send(index))
+				== String(AudioScript.MASTER),
+				"and the master test sound passes through Master",
+				String(bus))
+		else:
+			expect(bus == AudioScript.VOLUME_KEYS[key],
+				"and the '%s' test sound is on the bus that key turns" % key,
+				"%s against %s" % [bus, AudioScript.VOLUME_KEYS[key]])
+
+	# **Why `music/sting` had to be written.** A test sound plays on the bus
+	# its folder names, and every other thing in `assets/music/` is long
+	# enough to be a piece of music rather than a blip.
+	var sting: AudioStream = load("res://assets/%s.wav" % MusicScript.STING)
+	expect(sting != null and sting.get_length() < 3.0,
+		"the music sting is short enough to press twice in a row",
+		"%.2fs" % (sting.get_length() if sting != null else -1.0))
+	for other in [MusicScript.FARM, MusicScript.NIGHT, MusicScript.INTENSITY]:
+		var piece: AudioStream = load("res://assets/%s.wav" % other)
+		expect(piece != null and piece.get_length() > 15.0,
+			"and '%s', which it stands in for, is not" % other,
+			"%.1fs" % (piece.get_length() if piece != null else -1.0))
+
+	var settings: Node = root.get_node_or_null(^"Settings")
+	expect(settings != null, "the settings autoload is under root")
+	if settings == null:
+		_completed += 1
+		return
+	var deck: Node = AudioScript.new()
+	settings.reset()
+	deck.apply_volumes()
+
+	# **Each slider affects only its own bus**, which is the first done-when,
+	# read off the audio server rather than off the code that wrote to it.
+	for key in [&"audio/master", &"audio/music", &"audio/sfx",
+			&"audio/ambience"]:
+		var before := _bus_states()
+		settings.set_value(key, 0.3)
+		deck.apply_volumes()
+		var after := _bus_states()
+		var turned: StringName = AudioScript.VOLUME_KEYS[key]
+		var strayed: Array = []
+		for bus in after:
+			if bus != turned and String(after[bus]) != String(before[bus]):
+				strayed.append(String(bus))
+		expect(strayed.is_empty(),
+			"moving '%s' moves only its own bus" % key, ", ".join(strayed))
+		expect(String(after[turned]) != String(before[turned]),
+			"and does move that one",
+			"%s -> %s" % [before[turned], after[turned]])
+		settings.reset(key)
+		deck.apply_volumes()
+
+	# **Muting and unmuting restores the previous levels**, which is the
+	# second done-when. Mute is a state over the levels, not a write to them.
+	settings.set_value(&"audio/master", 0.6)
+	settings.set_value(&"audio/music", 0.45)
+	deck.apply_volumes()
+	var before_mute := _bus_states()
+	settings.set_value(&"audio/muted", true)
+	deck.apply_volumes()
+	expect(AudioServer.is_bus_mute(AudioServer.get_bus_index(
+		String(AudioScript.MASTER))), "muting mutes Master")
+	expect(is_equal_approx(settings.get_float(&"audio/master"), 0.6)
+		and is_equal_approx(settings.get_float(&"audio/music"), 0.45),
+		"and does not touch a single level on the way",
+		"%.2f/%.2f" % [settings.get_float(&"audio/master"),
+			settings.get_float(&"audio/music")])
+	settings.set_value(&"audio/muted", false)
+	deck.apply_volumes()
+	expect(_bus_states() == before_mute,
+		"and unmuting puts every bus back exactly where it was",
+		"%s against %s" % [str(_bus_states()), str(before_mute)])
+
+	# **Mute is not a zero slider**, which is why they are two controls. The
+	# same silence, and one of them remembers.
+	expect(AudioScript.is_silent(0.0, false, AudioScript.MASTER),
+		"a master at zero is silent")
+	expect(AudioScript.is_silent(0.6, true, AudioScript.MASTER),
+		"and so is a muted master at six tenths")
+	expect(not AudioScript.is_silent(0.6, false, AudioScript.MASTER),
+		"while the same six tenths unmuted is not - which is the whole "
+		+ "difference between the two")
+
+	# The screen's own arithmetic: the four it draws are the four there are.
+	expect(OptionsAudioScript.KEYS.size() == AudioScript.VOLUME_KEYS.size(),
+		"the tab draws a slider for every level and no more",
+		"%d against %d" % [OptionsAudioScript.KEYS.size(),
+			AudioScript.VOLUME_KEYS.size()])
+	for key in OptionsAudioScript.KEYS:
+		expect(AudioScript.VOLUME_KEYS.has(key),
+			"and '%s' is one of them" % key)
+		expect(OptionsAudioScript.LABELS.has(key),
+			"with something to call it on the screen")
+
+	settings.reset()
+	deck.apply_volumes()
+	deck.free()
+	_completed += 1
+
+
+## Every bus as one comparable string: its level and whether it is muted.
+##
+## Both halves matter. `apply_volumes` writes zero decibels on a muted bus, so
+## a check that only read the level would call a muted Master and a full one
+## the same thing.
+func _bus_states() -> Dictionary:
+	var out: Dictionary = {}
+	var buses: Array = [AudioScript.MASTER]
+	for folder in AudioScript.BUSES:
+		buses.append(AudioScript.BUSES[folder])
+	for bus in buses:
+		var index := AudioServer.get_bus_index(String(bus))
+		if index < 0:
+			continue
+		out[bus] = "%.3f/%s" % [AudioServer.get_bus_volume_db(index),
+			str(AudioServer.is_bus_mute(index))]
+	return out

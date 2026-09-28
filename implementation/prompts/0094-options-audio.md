@@ -1,7 +1,7 @@
 # 0094 - Options: audio
 
 - **Phase:** 7 - Shell and product
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0083, 0092
 - **Likely files:** src/ui/options_audio.gd
 

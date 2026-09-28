@@ -31,6 +31,11 @@ const FARM := &"music/farm"
 const NIGHT := &"music/night"
 const INTENSITY := &"music/night_intensity"
 
+## Task 0094: a second of it, for auditioning the music level. Not
+## something `piece_for` ever returns - the options screen plays it by
+## hand, and it is named here so there is one spelling of it.
+const STING := &"music/sting"
+
 ## Whether a menu is up. **Nothing sets this yet**: task 0091 is the title
 ## screen and 0092 the router, and they are what will. The rule is here now
 ## because task 0086 asks for it, and it is asserted now so that 0091 gets a

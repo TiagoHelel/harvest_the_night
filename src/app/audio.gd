@@ -52,6 +52,23 @@ const VOLUME_KEYS := {
 	&"audio/ambience": &"Ambience",
 }
 
+## Settings key -> the sound that auditions it, added by task 0094.
+##
+## **On the bus being adjusted**, which is the requirement: a sound's bus is
+## the folder it lives in, so a music level can only be auditioned by
+## something in `assets/music/` - and everything else in there is at least
+## nineteen seconds long, which is why `music/sting` exists.
+##
+## Master is the exception and cannot be otherwise: nothing plays on Master
+## directly, everything sends to it. Its test is a sound passing through it,
+## which is also what a player is asking about when they move that slider.
+const TEST_SOUNDS := {
+	&"audio/master": &"sfx/collect",
+	&"audio/music": &"music/sting",
+	&"audio/sfx": &"sfx/shot_gun",
+	&"audio/ambience": &"ambience/bird_trill",
+}
+
 const ROOT := "res://assets/"
 
 ## What a sound can be written as. Godot imports all three; which one a task
@@ -730,18 +747,20 @@ func _free_voice() -> AudioStreamPlayer:
 ## a bare `Settings.get_float(...)` is an undeclared identifier there and the
 ## parse row goes red for a file that is perfectly correct at runtime.
 func _settings() -> Node:
-	# `get_tree()` itself errors with "Parameter data.tree is null" when the
-	# node is not in a tree, so the cheap question goes first.
-	if not is_inside_tree():
-		return null
-	var tree := get_tree()
-	if tree == null or tree.root == null:
+	# **Asked of the engine rather than of this node**, changed at task 0094.
+	# `get_tree()` errors with "Parameter data.tree is null" on a node that is
+	# not in a tree, and the guard that used to avoid that also made a deck
+	# built by hand unable to see `Settings` at all - so `apply_volumes()`, the
+	# function with the done-when in it, silently read the shipped defaults
+	# whenever a check drove it. The main loop is there either way.
+	var loop := Engine.get_main_loop() as SceneTree
+	if loop == null or loop.root == null:
 		return null
 	# **Through the root rather than as an absolute path.** `get_node_or_null`
 	# with "/root/Settings" errors with "can't use absolute paths from outside
 	# the active scene tree" while the tree is still starting - which is
 	# exactly when a headless check builds one of these by hand.
-	return tree.root.get_node_or_null(^"Settings")
+	return loop.root.get_node_or_null(^"Settings")
 
 
 func _float_setting(key: StringName) -> float:
