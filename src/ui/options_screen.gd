@@ -80,6 +80,10 @@ func _ready() -> void:
 	audio.name = "OptionsAudio"
 	register(&"audio", audio)
 
+	var controls := OptionsControls.new()
+	controls.name = "OptionsControls"
+	register(&"controls", controls)
+
 	var back := Button.new()
 	back.name = "OptionsBack"
 	back.text = "BACK"

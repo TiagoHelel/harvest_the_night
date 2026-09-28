@@ -80,8 +80,14 @@ const FLASH_SECONDS := 0.45
 ## HUD had six colour constants to keep in step.
 const LIT_TINT := Color(1.55, 1.45, 1.10)
 
-## The keys that pick a seed, in `Farming.seeds()` order.
-const SEED_KEYS: Array = [KEY_1, KEY_2, KEY_3, KEY_4, KEY_5, KEY_6]
+## The actions that pick a seed, in `Farming.seeds()` order.
+##
+## **Six slots, not one per crop.** That was the objection when these were
+## raw number keys - a `plant_crop_4` in `project.godot` every time somebody
+## adds a dictionary entry - and it is answered by binding the *position*
+## rather than the crop. A hotbar has six slots however many things exist.
+const SEED_ACTIONS: Array = [&"slot_1", &"slot_2", &"slot_3", &"slot_4",
+	&"slot_5", &"slot_6"]
 
 
 
@@ -253,19 +259,16 @@ func _process(delta: float) -> void:
 		_ask_for_night()
 
 
-## **The number keys are read as keys, not as actions.** One action per crop
-## would put a `plant_crop_4` in `project.godot` every time somebody adds a
-## dictionary entry, which is the opposite of what this task is for. Task 0095
-## rebinds the named actions; these stay positional, the way a hotbar is.
+## Pick a seed by its place in the row.
 func _unhandled_input(event: InputEvent) -> void:
 	if _state.is_empty() or int(_state["phase"]) != Phases.DAY:
 		return
-	var key := event as InputEventKey
-	if key == null or not key.pressed or key.echo:
+	for slot in SEED_ACTIONS.size():
+		if not event.is_action_pressed(SEED_ACTIONS[slot]):
+			continue
+		if Farming.select_seed_at(_state, slot):
+			get_viewport().set_input_as_handled()
 		return
-	var slot := SEED_KEYS.find(key.keycode)
-	if slot >= 0 and Farming.select_seed_at(_state, slot):
-		get_viewport().set_input_as_handled()
 
 
 ## Ask the rules to start the night. **The HUD does not change the phase**: it

@@ -73,6 +73,7 @@ const SCENARIOS: Array = [
 	["tech", "the tech tree", "TechPanel"],
 	["options_video", "the video tab", "OptionsScreen:video"],
 	["options_audio", "the audio tab", "OptionsScreen:audio"],
+	["options_controls", "the controls tab", "OptionsScreen:controls"],
 ]
 
 var _written := 0
@@ -172,6 +173,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"tech": _set_tech(state)
 		"options_video": _set_options_video(state)
 		"options_audio": _set_options_audio(state)
+		"options_controls": _set_options_controls(state)
 
 	_walk_to(state, _standing_at)
 	main.get_node("%WorldView").look_at_cell(Player.cell(state))
@@ -280,6 +282,10 @@ func _set_options_video(state: Dictionary) -> void:
 
 
 func _set_options_audio(state: Dictionary) -> void:
+	_set_noon(state)
+
+
+func _set_options_controls(state: Dictionary) -> void:
 	_set_noon(state)
 
 

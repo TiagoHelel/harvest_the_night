@@ -32,12 +32,13 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 87
+const GROUPS := 88
 
 const SettingsScript := preload("res://src/app/settings.gd")
 const AppScript := preload("res://src/app/app.gd")
 const VideoScript := preload("res://src/app/video.gd")
 const OptionsAudioScript := preload("res://src/ui/options_audio.gd")
+const ActionsScript := preload("res://src/app/input_actions.gd")
 const OptionsScript := preload("res://src/ui/options_screen.gd")
 const AudioScript := preload("res://src/app/audio.gd")
 const SfxScript := preload("res://src/ui/sfx.gd")
@@ -161,6 +162,7 @@ func _run() -> void:
 	_task_0092_router()
 	_task_0093_video()
 	_task_0094_audio()
+	_task_0095_controls()
 
 
 func _finish() -> void:
@@ -2746,9 +2748,9 @@ func _task_0028_crops() -> void:
 	# is whatever the table turned out to hold.
 	expect(Farming.seeds().size() == GameData.CROPS.size(),
 		"the seed list is the crop table, not a copy of it")
-	expect(DayHud.SEED_KEYS.size() > GameData.CROPS.size(),
-		"and there is a spare number key for the next one",
-		str(DayHud.SEED_KEYS.size()))
+	expect(DayHud.SEED_ACTIONS.size() > GameData.CROPS.size(),
+		"and there is a spare hotbar slot for the next one",
+		str(DayHud.SEED_ACTIONS.size()))
 	expect(GameData.check_crops(GameData.CROPS).is_empty(),
 		"the shipped table passes its own balance check",
 		str(GameData.check_crops(GameData.CROPS)))
@@ -12431,11 +12433,11 @@ func _task_0082_shots() -> void:
 	# constant, kept on purpose for the same reason the audio group counts
 	# its settings: a scenario arriving without anybody deciding to add one
 	# should be a failing row rather than an extra picture nobody looks at.
-	expect(names.size() == 7,
+	expect(names.size() == 8,
 		"the five scenarios task 0082 names, and one per options tab",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech",
-			"options_video", "options_audio"]:
+			"options_video", "options_audio", "options_controls"]:
 		expect(names.has(wanted), "there is a '%s' scenario" % wanted)
 
 	# Every one has a builder, so a scenario added to the table and not
@@ -13686,7 +13688,7 @@ func _task_0092_router() -> void:
 	# script alone - but a screen naming another screen's node is what this
 	# task exists to remove.
 	var allowed := ["/root/App", "/root/Settings", "/root/Audio",
-		"/root/Video"]
+		"/root/Video", "/root/Actions"]
 	var reaching: Array = []
 	var folder := DirAccess.open("res://src/ui/")
 	if folder != null:
@@ -14024,3 +14026,195 @@ func _bus_states() -> Dictionary:
 		out[bus] = "%.3f/%s" % [AudioServer.get_bus_volume_db(index),
 			str(AudioServer.is_bus_mute(index))]
 	return out
+## 0095 - every key is a named action, and a screen to move it.
+func _task_0095_controls() -> void:
+	# **The done-when, as a check rather than as a shell command.** Nothing in
+	# `src/ui/` may name a key or a mouse button; they are all actions now,
+	# and the two files that did are `build_mode.gd` and `day_hud.gd`.
+	var raw: Array = []
+	var folder := DirAccess.open("res://src/ui/")
+	if folder != null:
+		for file_name in folder.get_files():
+			if not file_name.ends_with(".gd"):
+				continue
+			var text := FileAccess.get_file_as_string(
+				"res://src/ui/" + file_name)
+			var line_number := 0
+			for line in text.split("\n"):
+				line_number += 1
+				var trimmed := line.strip_edges()
+				if trimmed.begins_with("#"):
+					continue
+				for mark in ["KEY_", "MOUSE_BUTTON_"]:
+					if trimmed.contains(mark):
+						raw.append("%s:%d" % [file_name, line_number])
+	expect(raw.is_empty(),
+		"no screen names a raw key or mouse button any more",
+		"%d: %s" % [raw.size(), str(raw.slice(0, 4))])
+
+	# **The list and the input map agree**, read out of `project.godot` rather
+	# than typed here - a third list is a third place to forget.
+	var project := FileAccess.get_file_as_string("res://project.godot")
+	var mapped: Array = []
+	var inside := false
+	for line in project.split("\n"):
+		var trimmed := line.strip_edges()
+		if trimmed.begins_with("["):
+			inside = trimmed == "[input]"
+			continue
+		if inside and trimmed.ends_with("={"):
+			mapped.append(trimmed.substr(0, trimmed.length() - 2))
+	expect(mapped.size() > 20, "the input map has the actions in it",
+		str(mapped.size()))
+	for entry in ActionsScript.ACTIONS:
+		expect(mapped.has(String(entry[0])),
+			"'%s' is in project.godot" % entry[0])
+	for named in mapped:
+		# The developer overlay is deliberately not rebindable.
+		if named == "debug_overlay":
+			continue
+		expect(ActionsScript.names().has(StringName(named)),
+			"and '%s' is on the rebind screen" % named)
+
+	# The nine the task names, with "move" being four of them.
+	for wanted in [&"move_up", &"move_down", &"move_left", &"move_right",
+			&"interact", &"build", &"cancel", &"inventory", &"ability",
+			&"speed", &"night", &"pause"]:
+		expect(ActionsScript.names().has(wanted),
+			"'%s' is a named action" % wanted)
+	for slot in DayHud.SEED_ACTIONS:
+		expect(ActionsScript.names().has(StringName(slot)),
+			"and so is the hotbar's '%s'" % slot)
+
+	# **Mouse buttons are bindings, not a special case**: same storage, same
+	# clash rule, and only the label knows the difference.
+	var click := InputEventMouseButton.new()
+	click.button_index = MOUSE_BUTTON_RIGHT
+	var letter := InputEventKey.new()
+	letter.keycode = KEY_G
+	expect(ActionsScript.as_text(click) == "mouse:2",
+		"a mouse button is written as one", ActionsScript.as_text(click))
+	expect(ActionsScript.as_text(letter) == "key:%d" % KEY_G,
+		"and a key as one", ActionsScript.as_text(letter))
+	for original in [click, letter]:
+		var back := ActionsScript.from_text(ActionsScript.as_text(original))
+		expect(back != null and ActionsScript.same_event(back, original),
+			"and both survive the settings file",
+			ActionsScript.as_text(original))
+	expect(ActionsScript.from_text("nonsense") == null,
+		"a config somebody edited badly reads as nothing")
+	expect(ActionsScript.label_of(click) == "RIGHT CLICK",
+		"a mouse button has a name a player would use",
+		ActionsScript.label_of(click))
+
+	# **Not every key is a binding.** A modifier on its own can never be
+	# pressed alone, so binding to one is binding to nothing.
+	expect(ActionsScript.is_bindable(letter), "a letter can be bound")
+	expect(ActionsScript.is_bindable(click), "and so can a mouse button")
+	var modifier := InputEventKey.new()
+	modifier.keycode = KEY_SHIFT
+	expect(not ActionsScript.is_bindable(modifier),
+		"a modifier on its own cannot")
+
+	var settings: Node = root.get_node_or_null(^"Settings")
+	var actions: Node = root.get_node_or_null(^"Actions")
+	expect(settings != null and actions != null,
+		"the settings and actions autoloads are under root")
+	if settings == null or actions == null:
+		_completed += 1
+		return
+	settings.reset(ActionsScript.KEY)
+	actions.apply()
+
+	expect(actions.text_of(&"cancel") != ActionsScript.NOTHING,
+		"an action says what it is on", actions.text_of(&"cancel"))
+	expect(not actions.rebound(&"interact"),
+		"and nothing is rebound before anybody rebinds anything")
+
+	# **A clash is refused with the clash named.** The whole requirement:
+	# "already BUILD MODE" is an answer a player can act on.
+	var b := InputEventKey.new()
+	b.keycode = KEY_B          # what `build` ships on
+	expect(actions.clash_of(&"interact", b) == &"build",
+		"the key BUILD MODE is on clashes with it",
+		String(actions.clash_of(&"interact", b)))
+	var refused: Dictionary = actions.bind(&"interact", b)
+	expect(not bool(refused["ok"]), "so the rebind is refused")
+	expect(String(refused["why"]).contains("BUILD MODE"),
+		"and says which one it clashed with", String(refused["why"]))
+	expect(not actions.rebound(&"interact"),
+		"with nothing written on the way out")
+
+	# **An action does not clash with itself**: pressing the key something is
+	# already on is a player checking rather than a mistake.
+	expect(actions.clash_of(&"build", b) == &"",
+		"and the action already on that key does not clash with itself")
+
+	# A free key is taken, and the input map moves with it.
+	var g := InputEventKey.new()
+	g.keycode = KEY_G
+	var taken: Dictionary = actions.bind(&"interact", g)
+	expect(bool(taken["ok"]), "a free key is taken",
+		String(taken.get("why", "")))
+	expect(InputMap.action_has_event("interact", g),
+		"and the input map has it at once - which is all 'works immediately' "
+		+ "can mean, there being nothing else to wait for")
+	expect(actions.rebound(&"interact"), "the row knows it has been moved")
+	expect(actions.text_of(&"interact") == "G",
+		"and says what it is on now", actions.text_of(&"interact"))
+
+	# **A mouse button, the same way.** Not a special case anywhere.
+	var right := InputEventMouseButton.new()
+	right.button_index = MOUSE_BUTTON_RIGHT
+	var moused: Dictionary = actions.bind(&"ability", right)
+	expect(not bool(moused["ok"]),
+		"the right button is already SELL, so it is refused too",
+		String(moused.get("why", "")))
+	var free_click := InputEventMouseButton.new()
+	free_click.button_index = MOUSE_BUTTON_WHEEL_UP
+	moused = actions.bind(&"ability", free_click)
+	expect(bool(moused["ok"]), "a free mouse button is taken like a key",
+		String(moused.get("why", "")))
+	expect(actions.text_of(&"ability") == "WHEEL UP",
+		"and reads as one", actions.text_of(&"ability"))
+
+	# **And after a restart.** Written to disk, read back by a second
+	# `Settings`, and applied by a second `Actions` onto a fresh input map.
+	var restarted: Node = SettingsScript.new()
+	restarted.load_from_disk()
+	var saved: Dictionary = restarted.get_dict(ActionsScript.KEY)
+	expect(String(saved.get("interact", "")) == "key:%d" % KEY_G,
+		"the binding is on the disk", str(saved.get("interact", "")))
+	expect(String(saved.get("ability", "")) == "mouse:%d"
+		% MOUSE_BUTTON_WHEEL_UP,
+		"and so is the mouse one", str(saved.get("ability", "")))
+	InputMap.action_erase_events("interact")
+	var second: Node = ActionsScript.new()
+	second.apply()
+	expect(InputMap.action_has_event("interact", g),
+		"and a fresh boot puts it back on the key the player chose")
+	second.free()
+	restarted.free()
+
+	# **Reset, per binding and for all**, which is the other requirement.
+	actions.reset(&"interact")
+	expect(not actions.rebound(&"interact"), "one binding goes back")
+	expect(InputMap.action_has_event("interact",
+		ActionsScript.from_text("key:%d" % KEY_SPACE)),
+		"onto the key the game shipped with",
+		actions.text_of(&"interact"))
+	expect(actions.rebound(&"ability"), "and leaves the others alone")
+	actions.reset_all()
+	expect(not actions.rebound(&"ability"), "reset all takes the rest")
+	expect(settings.get_dict(ActionsScript.KEY).is_empty(),
+		"and the settings file has nothing left in it",
+		str(settings.get_dict(ActionsScript.KEY)))
+	for entry in ActionsScript.ACTIONS:
+		expect(actions.text_of(entry[0]) == actions.shipped_text(entry[0]),
+			"'%s' is back on what it shipped with" % entry[0],
+			"%s against %s" % [actions.text_of(entry[0]),
+				actions.shipped_text(entry[0])])
+
+	settings.reset()
+	actions.apply()
+	_completed += 1

@@ -8246,3 +8246,111 @@ Both unchanged - `215410677` and `2601044827`. A volume is not a rule.
 The sprite digest moved to `b72c23ef96f5` with the new slider trough, and the
 music row now reads four pieces rather than three.
 `exports` is still the one SKIP and still wants the Godot export templates.
+## 0095 - Options: controls - done 2026-09-28
+
+What changed: every key and every mouse button the game reads is a named
+action, `Actions` rewrites the input map from `controls/bindings` at boot, and
+the controls tab moves them. Twenty-five bindings, a clash that is refused by
+name, and reset per row and for all.
+
+Files: `src/app/input_actions.gd` (new), `src/ui/options_controls.gd` (new),
+`project.godot`, `src/ui/build_mode.gd`, `src/ui/day_hud.gd`,
+`src/ui/options_screen.gd`, `src/ui/ui_kit.gd`, `src/tools/shot.gd`,
+`src/tools/headless_check.gd`, `src/tools/input_check.gd`.
+
+Verify: 5899 headless / 862 input / both hashes unchanged.
+Shots: `implementation/shots/0095/options_controls.png`.
+
+### The defaults are the input map, not a second copy of it
+
+A table of shipped bindings in `input_actions.gd` would be a second place to
+edit and a second place to be wrong. So the first `apply()` **photographs
+`InputMap`** before touching anything, and that photograph is what reset puts
+back. `project.godot` stays the one place a default is written, and a check
+reads its `[input]` section and fails if the two lists ever disagree.
+
+Only the changes are saved. A binding that is not in `controls/bindings` is
+the shipped one, so "reset this row" is an erase rather than a second table of
+values to keep in step.
+
+### Ten new actions, and the objection they answer
+
+`pause` was missing and task 0096 needs it. The three mouse buttons in
+`build_mode.gd` became `place`, `remove` and `upgrade` - **mouse bindings are
+not a special case**: same storage, same clash rule, rebound by clicking, and
+the only thing that knows the difference is `label_of()`.
+
+The six number keys in `day_hud.gd` had an explicit note saying they stayed
+raw on purpose - one action per crop would put a `plant_crop_4` in
+`project.godot` every time somebody added a dictionary entry. That objection
+is right and it is answered by binding **the position rather than the crop**:
+`slot_1` to `slot_6` is a hotbar, and a hotbar has six slots however many
+things exist. The note is rewritten to say so.
+
+`debug_overlay` is deliberately not on the rebind screen, and the check that
+compares the two lists skips it by name rather than by accident.
+
+### The done-when is a check, not a shell command
+
+"`grep` finds no raw keycode left in `src/ui/`" is now a group in
+`headless_check` that walks the folder and fails with the file and line.
+Putting a `KEY_9` back in `day_hud.gd` fails it with `day_hud.gd:266`.
+
+### BACK has to get out of a rebind without closing the screen
+
+The rebind listener is `_input` rather than `_unhandled_input`, because the
+options frame also listens for BACK - and a screen that closes itself when you
+cancel a rebind is a screen you cannot cancel a rebind on. Changing it to
+`_unhandled_input` fails three input cases, one of them reading `MENU` where
+`OPTIONS` was expected: the frame went back through itself.
+
+### Three things the checks found
+
+**A function that moves a key has to land it.** `bind()` wrote the setting and
+trusted `Settings.changed` to re-apply - and in a check, where the autoload's
+`_ready` never runs, nothing was listening, so six asserts failed with the
+input map still on the old key. `bind()`, `reset()` and `reset_all()` call
+`apply()` themselves now. `apply()` starts from the photograph every time, so
+doing it twice costs a rebuild of twenty-five actions and changes nothing.
+
+**And the screen has to follow the settings.** Found by a probe: rebinding
+from anywhere other than this tab left every row showing the key it had just
+taken away. The same hook the video and audio tabs grew.
+
+**A scroll bar had never been dressed.** There have been three
+`ScrollContainer`s in the game since task 0040 and every one had Godot's
+default grey slab down its side - the same default grey the slider had at
+0094, found the same way, by putting one on a screen and looking at it. A thin
+dark groove with a gold grabber now, which reaches the log and the shop too.
+
+### A picture I misread, and the assert I wrote instead
+
+The first controls shot looked like the message line and RESET ALL had been
+laid out off the bottom of the screen. They had not: both are hidden until
+something is rebound, so there was nothing to see. Measured before believing
+it - the frame is 216 pixels tall at y=26 and everything is inside 270.
+
+The assert that came out of it is aimed at the real failure rather than the
+imagined one: **every part of the footer is inside the viewport**, which is
+what stops the next task's extra bindings pushing the buttons off the bottom
+as the list grows. It fails at a 400 pixel list and passes at this one.
+`ROOM` is 130 rather than 146 so the frame stays the height it was designed
+at, which is a tidy rather than a fix.
+
+### What "works immediately, and after a restart" really covers
+
+Immediately is real and end to end: the input case rebinds RECORDS onto G,
+opens a run, presses G and watches the records screen open - and presses R,
+which used to do it, and watches nothing happen. After a restart is two
+halves: `headless_check` writes a binding, builds a second `Settings`, reads
+it off the disk and applies it with a second `Actions` onto an erased input
+map; `input_check` erases the map inside a live game and rebuilds it. Neither
+is a second process. Said out loud rather than quietly counted.
+
+### Hashes
+
+Both unchanged - `215410677` and `2601044827`. Which key does a thing is not
+which thing is done.
+
+`python tools/verify.py` prints PASS: 5899 asserts, 862 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

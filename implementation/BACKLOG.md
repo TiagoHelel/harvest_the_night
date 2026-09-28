@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`#####################...`  **94 / 109 done**
+`#####################...`  **95 / 109 done**
 
-0 doing / 15 todo / 0 blocked across 9 phases.
+0 doing / 14 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0095 - Options: controls**. The whole of what is left is
+First up: **0096 - The pause menu**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,24 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-15 task(s) left, the ready ones first, then what they
+14 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0095 - Options: controls
-
-Ready to pick up.  Likely files: `src/ui/options_controls.gd, src/app/input_actions.gd`.
-
-Named actions instead of hardcoded keys, and a screen to rebind them.
-
-- Every key the game reads is a named action: move, interact, build, cancel, inventory, ability, speed, night, pause
-- A rebind screen that detects a conflict and refuses it with the clash named
-- Reset to defaults, per binding and for all
-- Bindings persist through Settings
-- Mouse bindings are included, not a special case
-
-  - done when: `grep` finds no raw keycode left in `src/ui/`
-  - done when: A rebound key works immediately and after a restart
 
 ### 0096 - The pause menu
 
@@ -367,13 +352,13 @@ The thing that gets people to look: thirty seconds that show the farm, the switc
 - [x] **0089** [Tooltips](prompts/0089-tooltips.md)
 - [x] **0090** [The log panel](prompts/0090-log-panel.md)
 
-## 7 - Shell and product  (4/10)
+## 7 - Shell and product  (5/10)
 
 - [x] **0091** [The title screen](prompts/0091-title-screen.md)
 - [x] **0092** [The main menu and the router](prompts/0092-main-menu.md)
 - [x] **0093** [Options: video](prompts/0093-options-video.md)
 - [x] **0094** [Options: audio](prompts/0094-options-audio.md)
-- [ ] **0095** [Options: controls](prompts/0095-options-controls.md)
+- [x] **0095** [Options: controls](prompts/0095-options-controls.md)
 - [ ] **0096** [The pause menu](prompts/0096-pause-menu.md)
 - [ ] **0097** [English and Portuguese](prompts/0097-i18n.md)
 - [ ] **0098** [Accessibility](prompts/0098-accessibility.md) - needs 0097

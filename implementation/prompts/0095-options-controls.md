@@ -1,7 +1,7 @@
 # 0095 - Options: controls
 
 - **Phase:** 7 - Shell and product
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0009, 0092
 - **Likely files:** src/ui/options_controls.gd, src/app/input_actions.gd
 

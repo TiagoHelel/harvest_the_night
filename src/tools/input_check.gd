@@ -41,7 +41,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 51
+const CASES := 52
 
 ## The pixels two pieces of text in one row must have between them. Two is
 ## the width of the gap inside a letter at this size, so anything less reads
@@ -127,6 +127,7 @@ func _run() -> void:
 	await _case_0092_router()
 	await _case_0093_video()
 	await _case_0094_audio()
+	await _case_0095_controls()
 	_finish()
 
 
@@ -4923,8 +4924,8 @@ func _case_0092_router() -> void:
 	expect(frame != null and frame.visible, "and the frame is up")
 	var options: OptionsScreen = frame as OptionsScreen
 	if options != null:
-		expect(options.tabs() == [&"video", &"audio"],
-			"with the tabs tasks 0093 and 0094 registered, in TABS order",
+		expect(options.tabs() == [&"video", &"audio", &"controls"],
+			"with the three tabs tasks 0093 to 0095 registered, in TABS order",
 			str(options.tabs()))
 
 	await click_control("OptionsBack")
@@ -5115,8 +5116,9 @@ func _case_0094_audio() -> void:
 	await click_control("Menu_options")
 	await frames(4)
 	var frame: OptionsScreen = require_control("OptionsScreen") as OptionsScreen
-	expect(frame != null and frame.tabs() == [&"video", &"audio"],
-		"the strip has both tabs, in the order the frame names them",
+	expect(frame != null
+		and frame.tabs() == [&"video", &"audio", &"controls"],
+		"the strip has all three tabs, in the order the frame names them",
 		str(frame.tabs()) if frame != null else "no frame")
 
 	await click_control("OptionsTab_audio")
@@ -5194,3 +5196,149 @@ func _case_0094_audio() -> void:
 	await frames(2)
 	await close_scene()
 	_completed += 1
+func _case_0095_controls() -> void:
+	await open_scene("res://scenes/Title.tscn")
+	var actions: Node = root.get_node_or_null(^"Actions")
+	var settings: Node = root.get_node_or_null(^"Settings")
+	if actions == null or settings == null:
+		expect(actions != null, "the actions autoload is up")
+		await close_scene()
+		_completed += 1
+		return
+	actions.reset_all()
+
+	await frames(4)
+	await tap_key(KEY_X)
+	await frames(3)
+	await click_control("Menu_options")
+	await frames(4)
+	await click_control("OptionsTab_controls")
+	await frames(4)
+	var tab: OptionsControls = locate_control(
+		"OptionsControls") as OptionsControls
+	expect(tab != null and tab.visible, "the controls tab opens")
+	if tab == null:
+		await close_scene()
+		_completed += 1
+		return
+	expect(not tab.reset_all_showing(),
+		"with nothing to reset, so nothing offering to")
+	expect(tab.binding_shown(&"move_up") == "W / UP",
+		"and MOVE UP on both keys the game ships it with",
+		tab.binding_shown(&"move_up"))
+
+	# **Pressing the button is a mode, and it says so.**
+	await click_control("Bind_move_up")
+	await frames(2)
+	expect(tab.waiting_for() == &"move_up", "clicking a binding waits for one",
+		String(tab.waiting_for()))
+	expect(tab.binding_shown(&"move_up") == "PRESS A KEY",
+		"and the row says it is waiting", tab.binding_shown(&"move_up"))
+
+	# **A clash is refused with the clash named**, through the screen.
+	await tap_key(KEY_B)
+	await frames(3)
+	expect(tab.waiting_for() == &"", "a key ends the wait")
+	expect(tab.message_shown().contains("BUILD MODE"),
+		"and a taken key is refused by name", tab.message_shown())
+	expect(tab.binding_shown(&"move_up") == "W / UP",
+		"with the old binding still on the row",
+		tab.binding_shown(&"move_up"))
+
+	# **BACK gets out of a rebind without closing the screen**, which is why
+	# the tab listens before the options frame does.
+	var router: Node = root.get_node_or_null(^"App")
+	await click_control("Bind_move_up")
+	await frames(2)
+	await tap_key(KEY_ESCAPE)
+	await frames(3)
+	expect(tab.waiting_for() == &"", "BACK ends the wait")
+	expect(router != null and router.here() == router.OPTIONS,
+		"and leaves the options screen up rather than going back through it",
+		router.name_of(router.here()) if router != null else "no router")
+	expect(tab.binding_shown(&"move_up") == "W / UP", "binding nothing")
+
+	# A free key is taken, and the row offers to put it back.
+	await click_control("Bind_move_up")
+	await frames(2)
+	await tap_key(KEY_G)
+	await frames(3)
+	expect(tab.binding_shown(&"move_up") == "G",
+		"a free key is taken", tab.binding_shown(&"move_up"))
+	expect(tab.reset_showing(&"move_up"),
+		"and the row that moved offers to go back")
+	expect(not tab.reset_showing(&"move_down"),
+		"while a row that did not does not - absent, not greyed")
+	expect(tab.reset_all_showing(), "and RESET ALL is there now")
+
+	# **And it is somewhere a player can see it.** The list is a scrolling one
+	# inside a frame that grows to fit, so a scroll given the whole height
+	# does not overflow the frame - it makes the frame taller, and pushes the
+	# message line and this button off the bottom of a 270 pixel screen. So
+	# the question is the viewport, not the panel. A picture cannot answer it
+	# either, because neither part is visible until something is rebound.
+	var screen := Rect2(Vector2.ZERO, Vector2(get_viewport_size()))
+	for named in ["OptionsFrame", "ControlsResetAll", "ControlsMessage",
+			"OptionsBack"]:
+		var part := require_control(named) as Control
+		expect(part != null and screen.encloses(part.get_global_rect()),
+			"'%s' is on the screen, not off the bottom of it" % named,
+			"%s in %s" % [str(part.get_global_rect()) if part != null
+				else "?", str(screen)])
+
+	await click_control("Reset_move_up")
+	await frames(3)
+	expect(tab.binding_shown(&"move_up") == "W / UP", "and it goes back",
+		tab.binding_shown(&"move_up"))
+	expect(not tab.reset_all_showing(), "with nothing left to reset")
+	await close_scene()
+
+	# **A rebound key works immediately**, which is the done-when - and the
+	# only honest way to answer it is to press the new key at the game and
+	# watch the game do the thing.
+	actions.bind(&"stats", _key_event(KEY_G))
+	await open_scene(MAIN_SCENE)
+	router = root.get_node_or_null(^"App")
+	await frames(6)
+	await tap_key(KEY_G)
+	await frames(4)
+	expect(router.here() == router.STATS,
+		"the key the player chose opens the records",
+		router.name_of(router.here()))
+	await tap_key(KEY_G)
+	await frames(4)
+	expect(router.here() == router.RUN, "and closes them again")
+	await tap_key(KEY_R)
+	await frames(4)
+	expect(router.here() == router.RUN,
+		"while the key it used to be on now does nothing",
+		router.name_of(router.here()))
+
+	# And after the input map is built again, which is the other half.
+	InputMap.action_erase_events("stats")
+	actions.apply()
+	await tap_key(KEY_G)
+	await frames(4)
+	expect(router.here() == router.STATS,
+		"and it still does after a fresh boot of the input map",
+		router.name_of(router.here()))
+	await tap_key(KEY_G)
+	await frames(4)
+
+	actions.reset_all()
+	await frames(2)
+	await close_scene()
+	_completed += 1
+
+
+## The size the game is drawn at, off the viewport rather than typed here.
+func get_viewport_size() -> Vector2i:
+	return root.get_visible_rect().size
+
+
+## One key as an event. Here rather than in `Actions`, because this file is
+## parsed on its own and may not name the autoload's script.
+func _key_event(code: int) -> InputEventKey:
+	var key := InputEventKey.new()
+	key.keycode = code
+	return key

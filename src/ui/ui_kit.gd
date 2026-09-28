@@ -374,6 +374,19 @@ static func _dress_buttons(out: Theme) -> void:
 	if grab != null:
 		out.set_icon(&"grabber", &"HSlider", grab)
 		out.set_icon(&"grabber_highlight", &"HSlider", grab)
+	# **A scroll bar, which nothing had ever dressed.** There have been three
+	# `ScrollContainer`s in the game since task 0040 and every one of them
+	# had Godot's default grey slab down its side - found the same way the
+	# slider was, by putting one on a screen and looking at it. A thin dark
+	# groove with a gold grabber, the same vocabulary as everything else.
+	for bar in [&"VScrollBar", &"HScrollBar"]:
+		out.set_stylebox(&"scroll", bar, _groove(2))
+		out.set_stylebox(&"scroll_focus", bar, _groove(2))
+		for state in ["grabber", "grabber_highlight", "grabber_pressed"]:
+			out.set_stylebox(StringName(state), bar,
+				_bar(_wash(&"gold_dark" if state == "grabber" else "gold",
+					0.95)))
+
 	var on := checkbox(true)
 	var off := checkbox(false)
 	if on != null and off != null:
@@ -400,6 +413,18 @@ static func _dress_gaps(out: Theme) -> void:
 static func _wash(key: StringName, alpha: float) -> Color:
 	var found: Color = PaletteData.COLOURS.get(key, Color.WHITE)
 	return Color(found.r, found.g, found.b, alpha)
+
+
+## The empty half of a track: dark, with a quiet edge. `across` is how wide
+## it makes whatever asks for its minimum size.
+static func _groove(across: int) -> StyleBox:
+	var box := StyleBoxFlat.new()
+	box.bg_color = _wash(&"ink", 0.9)
+	box.set_border_width_all(1)
+	box.border_color = _wash(&"ink_soft", 0.85)
+	box.content_margin_left = across
+	box.content_margin_right = across
+	return box
 
 
 ## A flat box with no margins at all, for something drawn inside a track

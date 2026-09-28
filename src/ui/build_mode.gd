@@ -164,21 +164,22 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 		return
 
-	if not visible or not (event is InputEventMouseButton):
-		return
-	var click: InputEventMouseButton = event
-	if not click.pressed:
+	if not visible:
 		return
 
+	# **Three named actions, not three mouse buttons.** They still ship as
+	# left, right and middle - that is what `project.godot` binds them to -
+	# but since task 0095 a player can move them, and a mouse button is a
+	# binding like any other rather than a special case.
 	var intent: Dictionary = _state["intent"]
-	if click.button_index == MOUSE_BUTTON_LEFT:
+	if event.is_action_pressed(&"place"):
 		intent["build_place"] = true
 		get_viewport().set_input_as_handled()
-	elif click.button_index == MOUSE_BUTTON_RIGHT:
+	elif event.is_action_pressed(&"remove"):
 		# **Right click sells**, and only in build mode: a stray right click
 		# while farming should not take a tower down.
 		intent["build_sell"] = true
-	elif click.button_index == MOUSE_BUTTON_MIDDLE:
+	elif event.is_action_pressed(&"upgrade"):
 		# **Middle click upgrades**, so the three things you can do to a cell
 		# in build mode are three buttons rather than three modes.
 		intent["build_upgrade"] = true
