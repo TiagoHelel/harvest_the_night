@@ -7020,3 +7020,130 @@ Both unchanged - `2555959448` and `2601044827`. Sound is not a rule, and
 
 `python tools/verify.py` prints PASS: 5225 asserts, 692 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+
+## 0084 - The sounds of the day - done 2026-09-28
+
+What changed: thirteen day sounds, synthesised from recipes in
+`tools/gen_sfx.py`, and `src/ui/sfx.gd` to notice when the day makes one.
+Chop, mine, till, plant, water, harvest, collect, craft, trade, sell, cast,
+reel and the bite. Nothing is licensed, recorded or hand-edited; every one is
+a dozen lines of arithmetic and a `--check` row that fails if a file stops
+matching its recipe.
+
+Files: `tools/gen_sfx.py` (new), `assets/sfx/` (13 generated WAVs, new),
+`src/ui/sfx.gd` (new), `src/app/audio.gd`, `scenes/Main.tscn`,
+`src/ui/main.gd`, `tools/verify.py`, `src/tools/headless_check.gd`,
+`src/tools/input_check.gd`.
+
+Verify: 5305 headless / 699 input / both hashes unchanged.
+
+### The invariant that makes a finished verb visible from outside
+
+`src/core/` does not know sound exists, so the view has to work out when a
+verb finished by looking at the state - the same discipline as the sparks in
+`particles.gd`.
+
+A working verb lives in `state["player"]["action"]` as
+`{verb, cell, left, total}`. `left` falls by one every tick and
+`state["tick"]` rises by one, so **`left + tick` is the tick the cycle is due
+to finish on, and it does not move while the cycle runs.** That answers both
+awkward questions exactly:
+
+- The due tick jumping forward means a cycle finished and the verb went round
+  again, which is what chopping a tree is, twenty times over.
+- An action that vanished **finished** if the clock had reached its due tick
+  and was **interrupted** if it had not.
+
+The first thing I wrote was "the action disappeared and `left` was small, so
+call it finished", which is a fudge that comes apart at four times speed.
+This is arithmetic. `input_check` starts a swing, walks away part way and
+asserts silence; with the due-tick test taken out it fails with
+`1 started, last 'sfx/chop'`.
+
+Watering is the exception and is named as one: it is on `Interact.INSTANT`,
+so it never creates an action at all - a held key has to water a whole row as
+the player walks it. `Sfx` counts watered plots instead. The check asserts
+that **water is the only instant day verb**, so a second one arriving in a
+year fails rather than going quietly silent.
+
+### Deterministic, and not by accident
+
+`random` is not used anywhere in the generator. Every grain of noise comes
+from a sixteen-line congruential generator seeded per sound, because the
+contract is byte-identical output on any machine and any Python, and
+`random`'s stream is a promise CPython makes rather than one the language
+does. Same reasoning as the run's own RNG.
+
+The WAV header is written by hand for the same reason: `wave` would do it and
+would also be free to change its padding between versions, which would fail
+`--check` for a sound nobody touched.
+
+### Cozy and soft, with one exception, measured
+
+Every sound is under half a second and peaks at 0.55 - well below full scale,
+so several at once plus the night's louder half still have room. The bite
+peaks at 0.85.
+
+The bite is the only day sound with a **window** behind it: miss it and the
+fish is gone. So it is allowed to be the loudest and the longest, and it
+rises rather than falls, because a rising figure reads as a question and a
+falling one as a full stop.
+
+**I wrote "and the brightest" first, then measured, and it is not.** `till`
+reads 0.69 on a spectral measure and the bite 0.49, because broadband noise
+measures bright and a crude centroid cannot tell "noisy" from "high". The
+assert says loudest and longest, which is true, and says out loud in a
+comment why it does not say brightest. What it does assert about the shape is
+that the bite **rises**: 1017 Hz in its first half against 1306 Hz in its
+second, measured by zero crossings off the file.
+
+All of that is measured off the WAVs the generator wrote, read as bytes,
+because Godot imports these to QOA and QOA is lossy - the question is what
+the recipe produced.
+
+### The pitch wanders six per cent
+
+Chopping one tree is twenty swings and a player hears the same three hundred
+milliseconds twenty times a minute. Identical every time it stops being wood
+and becomes a sample, so `Audio` gives every **SFX** voice a pitch a little
+either side of one. Six per cent is enough that no two are the same and small
+enough that none sounds wrong; past about a tenth the low notes start reading
+as a different axe.
+
+Only the SFX bus. Music and ambience are long and tonal, and a loop that came
+back a semitone out would be the most noticeable thing in the game.
+
+It draws from its **own** generator rather than the global one, so that
+seeding the globals - which `src/tools/shot.gd` does to make the smoke
+reproducible - does not also decide what the next swing sounds like.
+
+`tools/gen_sfx.py` reads `PITCH_JITTER` out of `audio.gd` rather than keeping
+a copy, so the minute of chopping it renders is the minute the game plays.
+
+### A flake I introduced and then removed
+
+`verify.py` failed `input_check` once with one case down, and three runs on
+its own all passed. The mechanism was real and mine: task 0083's audio case
+cleared the voice pool and then let two frames pass before measuring it, and
+this task put an `Sfx` node in the scene that can make a noise in those two
+frames. The clear now happens with nothing between it and the measurement.
+
+A test that fails once in a while for a reason that has nothing to do with it
+is worse than one that fails every time.
+
+### The done-when I cannot check
+
+"Chopping a tree for a full minute does not become annoying - **go and
+check**" needs ears. `python tools/gen_sfx.py --preview <dir>` renders sixty
+seconds of chopping at the rate the game plays it with the jitter the game
+applies, plus a copy of each sound, and that went to the owner to listen to.
+Said here rather than ticked off on a measurement that cannot answer it: peak
+and length say a sound is not harsh, they do not say it is not tiresome.
+
+### Hashes
+
+Both unchanged - `2555959448` and `2601044827`. Sound is not a rule.
+
+`python tools/verify.py` prints PASS: 5305 asserts, 699 input cases, 0 failed,
+with a new `sfx` row. `exports` is still the one SKIP and still wants the
+Godot export templates.

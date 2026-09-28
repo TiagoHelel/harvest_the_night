@@ -41,7 +41,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 40
+const CASES := 41
 
 ## The pixels two pieces of text in one row must have between them. Two is
 ## the width of the gap inside a letter at this size, so anything less reads
@@ -116,6 +116,7 @@ func _run() -> void:
 	await _case_0081_theme()
 	await _case_0082_shots()
 	await _case_0083_audio()
+	await _case_0084_day_sounds()
 	_finish()
 
 
@@ -3991,9 +3992,14 @@ func _case_0083_audio() -> void:
 		await close_scene()
 		return
 
+	# **Cleared with no frame in between.** Task 0084 put an `Sfx` node in the
+	# scene that watches the day and plays things; a frame between clearing
+	# the pool and measuring it is a frame in which the farm can make a noise
+	# of its own, and this case would fail once in a while for a reason that
+	# has nothing to do with it. Nothing else runs between these lines.
+	await frames(2)
 	audio.stop_all()
 	audio.forget_counts()
-	await frames(2)
 	expect(audio.voices_playing() == 0, "nothing is playing to begin with",
 		"%d voices" % audio.voices_playing())
 
@@ -4013,9 +4019,9 @@ func _case_0083_audio() -> void:
 	# **And the cap holds when they are all different sounds**, which the
 	# dedupe cannot help with. A night is a shot, an impact, a groan and a
 	# death all at once, many times over.
+	await frames(2)
 	audio.stop_all()
 	audio.forget_counts()
-	await frames(2)
 	var many: int = audio.voice_count() * 3
 	for i in many:
 		var id := StringName("sfx/check_%d" % i)
@@ -4081,3 +4087,98 @@ func _a_tone() -> AudioStreamWAV:
 	tone.mix_rate = rate
 	tone.data = bytes
 	return tone
+func _case_0084_day_sounds() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var audio: Node = root.get_node_or_null(^"Audio")
+	if driver == null or audio == null:
+		expect(audio != null, "the Audio autoload is up for the day sounds")
+		_completed += 1
+		await close_scene()
+		return
+	var state := driver.state
+
+	# Stand beside a tree, the same way case 0015 does.
+	var tree := Vector2i(-1, -1)
+	var beside := Vector2i(-1, -1)
+	for candidate in Farm.cells_with(state, &"tree"):
+		var spot := _walkable_neighbour(state, candidate as Vector2i)
+		if spot != Vector2i(-1, -1):
+			tree = candidate
+			beside = spot
+			break
+	expect(beside != Vector2i(-1, -1), "there is a tree to stand beside")
+	if beside == Vector2i(-1, -1):
+		_completed += 1
+		await close_scene()
+		return
+
+	# **The clock is driven by hand.** A chop is three seconds of simulated
+	# time and this suite runs its frames as fast as the loop goes, so waiting
+	# for the driver would be thousands of frames. Advancing two ticks a frame
+	# keeps `Sfx` sampling the cycle many times over, which is the thing being
+	# tested - it works the finish out from two consecutive samples.
+	driver.running = false
+	await frames(2)
+	var who: Dictionary = state["player"]
+	who["pos"] = [beside.x * Player.SUBTILE + Player.SUBTILE / 2,
+		beside.y * Player.SUBTILE + Player.SUBTILE / 2]
+	who["facing"] = _facing_from(beside, tree)
+	await frames(2)
+	expect(Interact.verb_at(state, tree) == &"chop", "and it offers chopping")
+
+	audio.stop_all()
+	audio.forget_counts()
+	await press_key(KEY_SPACE, true)
+	await frames(2)
+
+	# **A whole cycle makes a chop.** `Sfx` has no event to listen to: it works
+	# out that a cycle finished from `left + tick`, which is the tick the cycle
+	# is due on and does not move while it runs.
+	var heard := false
+	for i in 80:
+		Sim.advance(state, 2)
+		await frames(1)
+		if String(audio.last_played()) == "sfx/chop":
+			heard = true
+			break
+	expect(heard, "chopping a tree makes a chopping sound",
+		"last was '%s' after %d ticks"
+		% [audio.last_played(), int(state["tick"])])
+	await press_key(KEY_SPACE, false)
+	await frames(2)
+
+	# **Walking away part way makes nothing.** An action that vanished with
+	# ticks still on it was interrupted, and the arithmetic knows the
+	# difference - without it, giving up on half a tree would sound exactly
+	# like felling one.
+	await press_key(KEY_SPACE, true)
+	await frames(2)
+	Sim.advance(state, 4)
+	await frames(2)
+	var action: Dictionary = who["action"]
+	expect(not action.is_empty(), "a fresh swing is under way", str(action))
+	var due := int(state["tick"]) + int(action.get("left", 0))
+	expect(int(state["tick"]) < due - 10,
+		"and it is nowhere near done",
+		"tick %d, due %d" % [int(state["tick"]), due])
+	await press_key(KEY_SPACE, false)
+
+	audio.stop_all()
+	audio.forget_counts()
+	await press_key(KEY_W, true)
+	for i in 10:
+		Sim.advance(state, 2)
+		await frames(1)
+	await press_key(KEY_W, false)
+	await frames(2)
+	expect((who["action"] as Dictionary).is_empty(),
+		"walking away gives the swing up", str(who["action"]))
+	expect(audio.started() == 0,
+		"and an abandoned swing makes no sound at all",
+		"%d started, last '%s'" % [audio.started(), audio.last_played()])
+
+	driver.running = true
+	audio.stop_all()
+	await close_scene()
+	_completed += 1     # last line: an abandoned case never gets here

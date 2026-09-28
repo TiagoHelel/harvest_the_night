@@ -160,6 +160,21 @@ def check_font():
                  out.strip().splitlines()[-1].strip() if out.strip() else "")
 
 
+def check_sfx():
+    """Every sound still matches the recipe it came from.
+
+    Same argument as `check_sprites()` and `check_font()`: `tools/gen_sfx.py`
+    is the source and `assets/sfx/` is what falls out of it. A WAV somebody
+    dropped in from elsewhere is a sound nobody can regenerate, change or
+    balance - and the whole point of synthesising them is that they are all
+    one edit away."""
+    if not os.path.exists(rel("tools/gen_sfx.py")):
+        return skip("sfx", "no sound generator yet - task 0084")
+    code, out = run([sys.executable, "tools/gen_sfx.py", "--check"])
+    return check("sfx", code == 0, tail(out, 6) if code else
+                 out.strip().splitlines()[-1].strip() if out.strip() else "")
+
+
 def check_player_art():
     """The cut frames still match the sheet they came from.
 
@@ -404,6 +419,7 @@ def main():
     check_sprites()
     check_player_art()
     check_font()
+    check_sfx()
 
     if not hashes_only:
         check_script("headless_check", "src/tools/headless_check.gd",

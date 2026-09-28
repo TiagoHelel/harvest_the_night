@@ -68,6 +68,30 @@ const EXTENSIONS: Array = [".wav", ".ogg", ".mp3"]
 ## the same gun ask for one voice, not twenty.
 const MAX_VOICES := 16
 
+## How far a sound effect's pitch may wander, either way.
+##
+## **Repetition is the enemy of a cozy game.** Chopping one tree is twenty
+## swings and a player will hear the same three hundred milliseconds twenty
+## times in a minute; identical every time, it stops being wood and starts
+## being a sample. Six per cent is enough that no two are the same and small
+## enough that none of them sounds wrong - past about a tenth the low notes
+## start reading as a different axe.
+##
+## **Only the SFX bus.** Music and ambience are long and tonal, and a loop
+## that came back a semitone out would be the most noticeable thing in the
+## game. `tools/gen_sfx.py` reads this number out of this file rather than
+## keeping its own copy, so the minute of chopping it renders for a person to
+## listen to is the minute the game actually plays.
+const PITCH_JITTER := 0.06
+
+## Drawn from the global RNG, never the run's.
+##
+## A pitch is not a rule. `src/core/` owns one seeded stream and everything
+## that touches it moves the determinism hash, so a sound that drew from it
+## would make two players with different volume settings play different games.
+## Same argument as the sparks in `particles.gd`.
+const PITCH_SEED := 84084
+
 ## At or below this a bus is **muted** rather than turned down. A bus at
 ## minus eighty decibels is quiet; the done-when says silent, and those are
 ## different things - a long music loop at -80dB is still audible on
@@ -89,6 +113,13 @@ var _warned: Dictionary = {}
 var _voices: Array = []
 var _frame := 0
 
+## Its own generator rather than the global one, so that seeding the globals -
+## which `src/tools/shot.gd` does to make the smoke reproducible - does not
+## also decide what the next gunshot sounds like.
+var _pitch := RandomNumberGenerator.new()
+
+var _last_played := &""
+
 var _started := 0
 var _deduped := 0
 var _dropped := 0
@@ -104,6 +135,7 @@ func _ready() -> void:
 ## Separate from `_ready()` so a check can drive it by hand, and safe to call
 ## twice - the second call rebuilds nothing it already has.
 func build() -> void:
+	_pitch.seed = PITCH_SEED
 	if _voices.is_empty():
 		for i in MAX_VOICES:
 			var voice := AudioStreamPlayer.new()
@@ -170,8 +202,10 @@ func play(id: StringName) -> bool:
 		_dropped += 1
 		return false
 
-	voice.bus = _bus_for(id)
+	var bus := _bus_for(id)
+	voice.bus = bus
 	voice.stream = stream
+	voice.pitch_scale = _jitter(bus)
 	# **Told to play only when the tree will take it.** `AudioStreamPlayer`
 	# errors with "playback can only happen when a node is inside the scene
 	# tree" while the tree is still starting, which is exactly when a headless
@@ -181,6 +215,7 @@ func play(id: StringName) -> bool:
 	# whether a driver made a noise with it is the driver's business.
 	if voice.is_inside_tree():
 		voice.play()
+	_last_played = id
 	_started += 1
 	return true
 
@@ -307,6 +342,16 @@ func voice_count() -> int:
 	return _voices.size()
 
 
+## The last id that actually took a voice.
+##
+## For checks that need to know *which* sound happened rather than that one
+## did - "chopping made a chop" is a different claim from "chopping made a
+## noise", and on a farm with a dozen things ticking it is the only one worth
+## asserting.
+func last_played() -> StringName:
+	return _last_played
+
+
 func known_ids() -> Array:
 	return GameData.sorted_names(_streams.keys())
 
@@ -349,6 +394,14 @@ func _bus_for(id: StringName) -> StringName:
 	if parts.size() != 2 or parts[1] == "":
 		return &""
 	return BUSES.get(StringName(parts[0]), &"")
+
+
+## A pitch a little either side of one, for an effect; exactly one for
+## anything long and tonal.
+func _jitter(bus: StringName) -> float:
+	if bus != BUSES[&"sfx"]:
+		return 1.0
+	return 1.0 + PITCH_JITTER * (_pitch.randf() * 2.0 - 1.0)
 
 
 func _free_voice() -> AudioStreamPlayer:

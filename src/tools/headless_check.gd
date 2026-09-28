@@ -32,10 +32,11 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 76
+const GROUPS := 77
 
 const SettingsScript := preload("res://src/app/settings.gd")
 const AudioScript := preload("res://src/app/audio.gd")
+const SfxScript := preload("res://src/ui/sfx.gd")
 
 var passed := 0
 var failed := 0
@@ -141,6 +142,7 @@ func _run() -> void:
 	_task_0081_theme()
 	_task_0082_shots()
 	_task_0083_audio()
+	_task_0084_day_sounds()
 
 
 func _finish() -> void:
@@ -12599,3 +12601,167 @@ func _a_tone() -> AudioStreamWAV:
 	tone.mix_rate = rate
 	tone.data = bytes
 	return tone
+## 0084 - the sounds of the day.
+func _task_0084_day_sounds() -> void:
+	# **Every id the day can ask for is a file that is there.** A sound the
+	# game reaches for and does not have is one warning in the log and then
+	# silence for the rest of the run, which is the quietest possible bug.
+	var wanted: Array = []
+	for verb in SfxScript.VERB_SOUNDS:
+		wanted.append(SfxScript.VERB_SOUNDS[verb])
+	wanted.append(SfxScript.WATER_SOUND)
+	wanted.append(SfxScript.BITE_SOUND)
+	wanted.append(SfxScript.SELL_SOUND)
+	for id in wanted:
+		var path := "res://assets/%s.wav" % id
+		expect(ResourceLoader.exists(path),
+			"the day has a sound for '%s'" % id, path)
+
+	# **And every day verb is either given a sound or knowingly silent.**
+	# `Interact.DAY_ONLY` is the list the rules keep; this is what stops a
+	# twelfth verb arriving in a year and making no noise that anybody
+	# notices until a player asks why.
+	for verb in Interact.DAY_ONLY:
+		# **An instant verb has no action to watch.** Watering completes on
+		# the tick it starts, because a held key has to water a whole row as
+		# the player walks it, so `Sfx` spots it by counting watered plots
+		# instead. Naming the exception rather than excusing the whole rule:
+		# a second instant verb arriving in a year fails this and gets
+		# somebody to look at how it is meant to be heard.
+		if Interact.is_instant(verb):
+			expect(verb == &"water",
+				"the only instant day verb is the one Sfx watches by hand",
+				str(verb))
+			continue
+		expect(SfxScript.VERB_SOUNDS.has(verb),
+			"the '%s' verb has a sound" % verb)
+
+	# Nothing else is in the folder: a WAV that no id reaches is a WAV
+	# somebody meant to wire up and did not.
+	var heard: Dictionary = {}
+	for id in wanted:
+		heard[String(id).get_file()] = true
+	var folder := DirAccess.open("res://assets/sfx/")
+	expect(folder != null, "assets/sfx exists")
+	if folder != null:
+		for file_name in folder.get_files():
+			if not file_name.ends_with(".wav"):
+				continue
+			expect(heard.has(file_name.get_basename()),
+				"'%s' is a sound something asks for" % file_name)
+
+	# **Cozy, soft and short**, measured off the files the generator wrote
+	# rather than taken on trust. The source WAVs are read directly because
+	# Godot imports these to QOA, which is lossy - what is asserted here is
+	# what `tools/gen_sfx.py` produced.
+	var loudest := 0.0
+	var longest := 0.0
+	var bite_peak := 0.0
+	var bite_seconds := 0.0
+	for id in wanted:
+		var sound := _wav_facts("res://assets/%s.wav" % id)
+		if sound.is_empty():
+			continue
+		expect(sound["peak"] <= 1.0,
+			"'%s' does not clip" % id, "%.3f" % sound["peak"])
+		expect(sound["seconds"] < 0.6,
+			"'%s' is short - the day plays these hundreds of times" % id,
+			"%.3fs" % sound["seconds"])
+		if id == SfxScript.BITE_SOUND:
+			bite_peak = sound["peak"]
+			bite_seconds = sound["seconds"]
+			continue
+		expect(sound["peak"] <= 0.6,
+			"'%s' is furniture and stays quiet" % id,
+			"%.3f" % sound["peak"])
+		loudest = maxf(loudest, sound["peak"])
+		longest = maxf(longest, sound["seconds"])
+
+	# **The bite is the one that has to be noticed.** It is the only day sound
+	# with a window behind it - miss it and the fish is gone - so it is
+	# allowed to be the loudest and the longest, and this says that it is.
+	#
+	# It is **not** asserted to be the brightest, which was the first thing
+	# written here and is false: `till` and `reel` measure brighter because
+	# they are broadband noise, and a crude spectral measure cannot tell
+	# "noisy" from "high". Asserting it would have been a guess dressed as a
+	# fact.
+	expect(bite_peak > loudest,
+		"the bite is louder than any other day sound",
+		"%.2f against %.2f" % [bite_peak, loudest])
+	expect(bite_seconds > longest,
+		"and longer than any of them",
+		"%.3fs against %.3fs" % [bite_seconds, longest])
+
+	# **And it rises.** A rising figure reads as a question and a falling one
+	# as a full stop; the bite is asking the player to do something. Measured
+	# as the rough pitch of its second half against its first.
+	var bite := _wav_facts("res://assets/%s.wav" % SfxScript.BITE_SOUND)
+	if not bite.is_empty():
+		expect(float(bite["late_hz"]) > float(bite["early_hz"]) * 1.1,
+			"and it rises rather than falls",
+			"%.0fHz then %.0fHz" % [bite["early_hz"], bite["late_hz"]])
+
+	# The jitter that stops a minute of chopping becoming one sample heard
+	# twenty times. Small enough to be wood, big enough to be different.
+	expect(AudioScript.PITCH_JITTER > 0.0 and AudioScript.PITCH_JITTER < 0.12,
+		"the pitch wanders a little and not a lot",
+		str(AudioScript.PITCH_JITTER))
+
+	print("  %d day sounds, bite peaks %.2f against %.2f, %.0f-%.0fHz"
+		% [wanted.size(), bite_peak, loudest,
+			bite.get("early_hz", 0.0), bite.get("late_hz", 0.0)])
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## Length, peak and the rough pitch of each half of a 16-bit mono WAV.
+##
+## Parsed here rather than through `AudioStreamWAV` because Godot's importer
+## compresses these to QOA, which is lossy: the question is what the generator
+## wrote, and the only way to ask it is to read the bytes.
+func _wav_facts(path: String) -> Dictionary:
+	var raw := FileAccess.get_file_as_bytes(path)
+	if raw.size() < 44:
+		return {}
+	# Walk the chunks rather than assuming the data starts at byte 44 - it
+	# does here, and a file that grows a chunk one day should still measure.
+	var at := 12
+	var start := -1
+	var length := 0
+	while at + 8 <= raw.size():
+		var tag := raw.slice(at, at + 4).get_string_from_ascii()
+		var size := raw.decode_u32(at + 4)
+		if tag == "data":
+			start = at + 8
+			length = size
+			break
+		at += 8 + size + (size & 1)
+	if start < 0:
+		return {}
+
+	var count := mini(length, raw.size() - start) / 2
+	if count <= 0:
+		return {}
+	var peak := 0.0
+	var crossings_early := 0
+	var crossings_late := 0
+	var half := count / 2
+	var previous := 0
+	for i in count:
+		var v := raw.decode_s16(start + i * 2)
+		peak = maxf(peak, absf(float(v) / 32768.0))
+		if i > 0 and (v >= 0) != (previous >= 0):
+			if i < half:
+				crossings_early += 1
+			else:
+				crossings_late += 1
+		previous = v
+	var rate := 22050.0
+	return {
+		"seconds": float(count) / rate,
+		"peak": peak,
+		"early_hz": float(crossings_early) / maxf(float(half), 1.0) * rate / 2.0,
+		"late_hz": float(crossings_late)
+			/ maxf(float(count - half), 1.0) * rate / 2.0,
+	}

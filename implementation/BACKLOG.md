@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`##################......`  **83 / 109 done**
+`##################......`  **84 / 109 done**
 
-0 doing / 26 todo / 0 blocked across 9 phases.
+0 doing / 25 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0084 - The sounds of the day**. The whole of what is left is
+First up: **0085 - The sounds of the night**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,23 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-26 task(s) left, the ready ones first, then what they
+25 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0084 - The sounds of the day
-
-Ready to pick up.  Likely files: `tools/gen_sfx.py, assets/sfx/`.
-
-Chop, mine, till, plant, water, the fishing splash and the bite, the craft, the sale - generated, not licensed.
-
-- `tools/gen_sfx.py` synthesises every effect to WAV and is deterministic
-- Every day verb has a sound and a small random pitch so repetition does not grate
-- Cozy, soft, short: the day is the calm half
-- The bite is the most attention-grabbing sound of the day, because it is the only one with a window
-
-  - done when: Chopping a tree for a full minute does not become annoying - go and check
-  - done when: Regenerating produces byte-identical files
 
 ### 0085 - The sounds of the night
 
@@ -212,7 +198,7 @@ The little bubbles on the owner's sheet - !, ?, a heart, a note, an idea, a star
 
 ### 0087 - Ambience
 
-Waits on 0084, 0085.  Likely files: `src/app/ambience.gd`.
+Waits on 0085.  Likely files: `src/app/ambience.gd`.
 
 The bed under everything: birds and water by day, wind and distant groaning by night.
 
@@ -519,13 +505,13 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0081** [The UI theme](prompts/0081-theme.md)
 - [x] **0082** [Screenshots, and actually looking at them](prompts/0082-screenshots.md)
 
-## 6 - Sound and juice  (1/8)
+## 6 - Sound and juice  (2/8)
 
 - [x] **0083** [Audio buses and a sound manager](prompts/0083-audio-buses.md)
-- [ ] **0084** [The sounds of the day](prompts/0084-sfx-day.md)
+- [x] **0084** [The sounds of the day](prompts/0084-sfx-day.md)
 - [ ] **0085** [The sounds of the night](prompts/0085-sfx-night.md)
 - [ ] **0086** [Two pieces of music](prompts/0086-music.md)
-- [ ] **0087** [Ambience](prompts/0087-ambience.md) - needs 0084, 0085
+- [ ] **0087** [Ambience](prompts/0087-ambience.md) - needs 0085
 - [ ] **0088** [Juice: shake, hit stop, damage numbers](prompts/0088-juice.md)
 - [ ] **0089** [Tooltips](prompts/0089-tooltips.md)
 - [ ] **0090** [The log panel](prompts/0090-log-panel.md)
