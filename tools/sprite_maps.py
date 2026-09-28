@@ -26,6 +26,573 @@ ACTOR = (16, 24)
 
 SPRITES = {
 
+    # ---------------------------------------------------- the UI kit, 0079
+
+    # **Nine-slice, and the margin is five.** Every one of these is sixteen by
+    # sixteen with a five pixel border and a middle that repeats, so one
+    # drawing stretches to a tooltip, a shop panel or the whole tech tree.
+    # `UiKit.MARGIN` is the same five on the other side; `headless_check`
+    # asserts the two agree rather than trusting them to.
+
+    "ui/panel": dict(size=TILE, legend={
+        "k": "ink", "s": "ink_soft", "n": "night", "l": "night_light",
+        "g": "gold_dark",
+    }, rows=[
+        "kkkkkkkkkkkkkkkk",
+        "kggggggggggggggk",
+        "kgllllllllllllgk",
+        "kglnnnnnnnnnnlgk",
+        "kglnnnnnnnnnnlgk",
+        "kglnnnnnnnnnnlgk",
+        "kglnnnnnnnnnnlgk",
+        "kglnnnnnnnnnnlgk",
+        "kglnnnnnnnnnnlgk",
+        "kglnnnnnnnnnnlgk",
+        "kglnnnnnnnnnnlgk",
+        "kglnnnnnnnnnnlgk",
+        "kglnnnnnnnnnnlgk",
+        "kgllllllllllllgk",
+        "kggggggggggggggk",
+        "kkkkkkkkkkkkkkkk",
+    ]),
+
+    # The tooltip is the panel without the brass: quieter, because it appears
+    # under the cursor and should not compete with what it is describing.
+    "ui/tooltip": dict(size=TILE, legend={
+        "k": "ink", "s": "ink_soft", "n": "night", "l": "night_light",
+    }, rows=[
+        "kkkkkkkkkkkkkkkk",
+        "kssssssssssssssk",
+        "kslllllllllllssk",
+        "kslnnnnnnnnnlssk",
+        "kslnnnnnnnnnlssk",
+        "kslnnnnnnnnnlssk",
+        "kslnnnnnnnnnlssk",
+        "kslnnnnnnnnnlssk",
+        "kslnnnnnnnnnlssk",
+        "kslnnnnnnnnnlssk",
+        "kslnnnnnnnnnlssk",
+        "kslnnnnnnnnnlssk",
+        "kslnnnnnnnnnlssk",
+        "kssssssssssssssk",
+        "kssssssssssssssk",
+        "kkkkkkkkkkkkkkkk",
+    ]),
+
+    # **Four states, and they differ in value before they differ in hue.** A
+    # player picks a button out at a glance by how light it is; a hover that
+    # was only a different colour would be invisible to a good fraction of
+    # people and to anybody on a bad screen.
+    "ui/button_normal": dict(size=TILE, legend={
+        "k": "ink", "s": "ink_soft", "n": "night_light", "l": "stone_dark",
+    }, rows=[
+        "kkkkkkkkkkkkkkkk",
+        "kllllllllllllllk",
+        "kllnnnnnnnnnnssk",
+        "kllnnnnnnnnnnssk",
+        "kllnnnnnnnnnnssk",
+        "kllnnnnnnnnnnssk",
+        "kllnnnnnnnnnnssk",
+        "kllnnnnnnnnnnssk",
+        "kllnnnnnnnnnnssk",
+        "kllnnnnnnnnnnssk",
+        "kllnnnnnnnnnnssk",
+        "kllnnnnnnnnnnssk",
+        "kllnnnnnnnnnnssk",
+        "kssssssssssssssk",
+        "kssssssssssssssk",
+        "kkkkkkkkkkkkkkkk",
+    ]),
+
+    "ui/button_hover": dict(size=TILE, legend={
+        "k": "ink", "s": "stone_dark", "n": "stone", "l": "stone_light",
+    }, rows=[
+        "kkkkkkkkkkkkkkkk",
+        "kllllllllllllllk",
+        "kllnnnnnnnnnnssk",
+        "kllnnnnnnnnnnssk",
+        "kllnnnnnnnnnnssk",
+        "kllnnnnnnnnnnssk",
+        "kllnnnnnnnnnnssk",
+        "kllnnnnnnnnnnssk",
+        "kllnnnnnnnnnnssk",
+        "kllnnnnnnnnnnssk",
+        "kllnnnnnnnnnnssk",
+        "kllnnnnnnnnnnssk",
+        "kllnnnnnnnnnnssk",
+        "kssssssssssssssk",
+        "kssssssssssssssk",
+        "kkkkkkkkkkkkkkkk",
+    ]),
+
+    # Pressed is the same button lit from below instead of above, which is
+    # what a pushed-in thing looks like.
+    "ui/button_pressed": dict(size=TILE, legend={
+        "k": "ink", "s": "gold_dark", "n": "gold", "l": "gold_light",
+    }, rows=[
+        "kkkkkkkkkkkkkkkk",
+        "kssssssssssssssk",
+        "kssnnnnnnnnnnllk",
+        "kssnnnnnnnnnnllk",
+        "kssnnnnnnnnnnllk",
+        "kssnnnnnnnnnnllk",
+        "kssnnnnnnnnnnllk",
+        "kssnnnnnnnnnnllk",
+        "kssnnnnnnnnnnllk",
+        "kssnnnnnnnnnnllk",
+        "kssnnnnnnnnnnllk",
+        "kssnnnnnnnnnnllk",
+        "kssnnnnnnnnnnllk",
+        "kllllllllllllllk",
+        "kllllllllllllllk",
+        "kkkkkkkkkkkkkkkk",
+    ]),
+
+    "ui/button_disabled": dict(size=TILE, legend={
+        "k": "ink", "s": "ink_soft", "n": "ink_soft", "l": "night_light",
+    }, rows=[
+        "kkkkkkkkkkkkkkkk",
+        "kllllllllllllllk",
+        "kllnnnnnnnnnnllk",
+        "kllnnnnnnnnnnllk",
+        "kllnnnnnnnnnnllk",
+        "kllnnnnnnnnnnllk",
+        "kllnnnnnnnnnnllk",
+        "kllnnnnnnnnnnllk",
+        "kllnnnnnnnnnnllk",
+        "kllnnnnnnnnnnllk",
+        "kllnnnnnnnnnnllk",
+        "kllnnnnnnnnnnllk",
+        "kllnnnnnnnnnnllk",
+        "kllllllllllllllk",
+        "kllllllllllllllk",
+        "kkkkkkkkkkkkkkkk",
+    ]),
+
+    # A tab is a panel with its bottom edge open, so it reads as joined to
+    # whatever is under it.
+    "ui/tab": dict(size=TILE, legend={
+        "k": "ink", "g": "gold_dark", "n": "night", "l": "night_light",
+    }, rows=[
+        "kkkkkkkkkkkkkkkk",
+        "kggggggggggggggk",
+        "kgllllllllllllgk",
+        "kglnnnnnnnnnnlgk",
+        "kglnnnnnnnnnnlgk",
+        "kglnnnnnnnnnnlgk",
+        "kglnnnnnnnnnnlgk",
+        "kglnnnnnnnnnnlgk",
+        "kglnnnnnnnnnnlgk",
+        "kglnnnnnnnnnnlgk",
+        "kglnnnnnnnnnnlgk",
+        "kglnnnnnnnnnnlgk",
+        "kglnnnnnnnnnnlgk",
+        "kglnnnnnnnnnnlgk",
+        "kglnnnnnnnnnnlgk",
+        "kgnnnnnnnnnnnngk",
+    ]),
+
+    "ui/slider_track": dict(size=(16, 8), legend={
+        "k": "ink", "s": "ink_soft", "n": "night", "g": "gold_dark",
+    }, rows=[
+        "................",
+        "................",
+        "kkkkkkkkkkkkkkkk",
+        "ksnnnnnnnnnnnnsk",
+        "ksnnnnnnnnnnnnsk",
+        "kkkkkkkkkkkkkkkk",
+        "................",
+        "................",
+    ]),
+
+    "ui/slider_grab": dict(size=(8, 8), legend={
+        "k": "ink", "g": "gold", "d": "gold_dark", "l": "gold_light",
+    }, rows=[
+        "..kkkk..",
+        ".klllgk.",
+        "klggggdk",
+        "klggggdk",
+        "klggggdk",
+        "klggggdk",
+        ".kdddgk.",
+        "..kkkk..",
+    ]),
+
+    "ui/checkbox_off": dict(size=(12, 12), legend={
+        "k": "ink", "s": "ink_soft", "n": "night",
+    }, rows=[
+        "kkkkkkkkkkkk",
+        "ksssssssssnk",
+        "ksnnnnnnnnnk",
+        "ksnnnnnnnnnk",
+        "ksnnnnnnnnnk",
+        "ksnnnnnnnnnk",
+        "ksnnnnnnnnnk",
+        "ksnnnnnnnnnk",
+        "ksnnnnnnnnnk",
+        "ksnnnnnnnnnk",
+        "ksnnnnnnnnnk",
+        "kkkkkkkkkkkk",
+    ]),
+
+    "ui/checkbox_on": dict(size=(12, 12), legend={
+        "k": "ink", "s": "ink_soft", "n": "night", "g": "gold_light",
+    }, rows=[
+        "kkkkkkkkkkkk",
+        "ksssssssssnk",
+        "ksnnnnnnngnk",
+        "ksnnnnnnggnk",
+        "ksnnnnnggnnk",
+        "ksngnnggnnnk",
+        "ksnggggnnnnk",
+        "ksnnggnnnnnk",
+        "ksnnnnnnnnnk",
+        "ksnnnnnnnnnk",
+        "ksnnnnnnnnnk",
+        "kkkkkkkkkkkk",
+    ]),
+
+    # ------------------------------------------------ resource icons, 0079
+
+    # **Told apart at sixteen pixels without their labels**, which is the only
+    # test task 0079 sets for these. So each one is a different *shape* before
+    # it is a different colour: the log lies down, the stalk stands up, the
+    # coin stack is round and layered, the bolt is a zigzag. Two brown things
+    # of the same outline would be two brown things whatever colour they were.
+
+    "ui/icon_wood": dict(size=TILE, legend={
+        "k": "ink", "w": "wood", "d": "wood_dark", "l": "wood_light",
+    }, rows=[
+        "................",
+        "................",
+        "....kkkk........",
+        "...kwwwwk.......",
+        "..kwdwwdwk......",
+        "..kwdkkdwk......",
+        "..kwwddwwk......",
+        "...kwwwwkkkkk...",
+        "...kkkkwwwwwwk..",
+        "...kwwwwddwwdk..",
+        "..kwdwwkkdwwdk..",
+        "..kwdkkddwwwdk..",
+        "..kwwddwwwwwdk..",
+        "...kwwwkkkkkkk..",
+        "....kkkk........",
+        "................",
+    ]),
+
+    "ui/icon_stone": dict(size=TILE, legend={
+        "k": "ink", "i": "stone", "s": "stone_dark", "l": "stone_light",
+    }, rows=[
+        "................",
+        "................",
+        "......kkkk......",
+        ".....klllik.....",
+        "....kliiiiik....",
+        "...kliiiiiiik...",
+        "..kliiiiiiiiik..",
+        "..kiiiiiissiik..",
+        "..kiiissssssik..",
+        "..kissssssssik..",
+        "...ksssssssik...",
+        "....kkkkkkkk....",
+        "................",
+        "................",
+        "................",
+        "................",
+    ]),
+
+    # A cast bar. Flat top, angled sides: nothing else here is a trapezoid.
+    "ui/icon_iron": dict(size=TILE, legend={
+        "k": "ink", "i": "stone", "s": "stone_dark", "l": "stone_light",
+    }, rows=[
+        "................",
+        "................",
+        "................",
+        "....kkkkkkkk....",
+        "...klllllllik...",
+        "...kliiiiiiik...",
+        "..kkiiiiiiiikk..",
+        ".kliiiiiiiiiiik.",
+        ".kiiiiiiiiiissk.",
+        ".kissssssssssik.",
+        ".ksssssssssssik.",
+        ".kkkkkkkkkkkkkk.",
+        "................",
+        "................",
+        "................",
+        "................",
+    ]),
+
+    # A loaf. Round-topped and cut, so it is not the rock.
+    "ui/icon_food": dict(size=TILE, legend={
+        "k": "ink", "c": "roof", "e": "roof_dark", "l": "roof_light",
+        "g": "gold_light", "d": "gold_dark",
+    }, rows=[
+        "................",
+        "................",
+        "................",
+        "....kkkkkk......",
+        "...klggggdk.....",
+        "..klgdggggdk....",
+        "..kggggdgggk....",
+        "..kgdgggggdk....",
+        ".kkkkkkkkkkkk...",
+        ".klcccccccccdk..",
+        ".kceccccccccek..",
+        ".kceecccccceek..",
+        ".kkeeeeeeeeekk..",
+        "..kkkkkkkkkkk...",
+        "................",
+        "................",
+    ]),
+
+    "ui/icon_fish": dict(size=TILE, legend={
+        "k": "ink", "w": "water", "d": "water_dark", "l": "water_light",
+        "b": "bone", "o": "ink",
+    }, rows=[
+        "................",
+        "................",
+        "..........kk....",
+        ".....kkkkklwk...",
+        "...kkwwwwwwlwk..",
+        "..klwwwwwwwwwk..",
+        ".kbowwwwwwwwwk..",
+        ".kwwwwwwwwwwlk..",
+        ".kbowwwwwwwwwk..",
+        "..klwwwwwwwwwk..",
+        "...kkddddddlwk..",
+        ".....kkkkkldk...",
+        "..........kk....",
+        "................",
+        "................",
+        "................",
+    ]),
+
+    "ui/icon_oil": dict(size=TILE, legend={
+        "k": "ink", "w": "wood", "d": "wood_dark", "i": "stone",
+        "s": "ink_soft",
+    }, rows=[
+        "................",
+        "................",
+        "....kkkkkkk.....",
+        "...kwwwwwwwk....",
+        "...kiiiiiiik....",
+        "..kwwwwwwwwwk...",
+        "..kwwsssssswk...",
+        "..kwssssssssk...",
+        "..kwssssssssk...",
+        "..kwwsssssswk...",
+        "..kiiiiiiiiik...",
+        "...kwwwwwwwk....",
+        "....kkkkkkk.....",
+        "................",
+        "................",
+        "................",
+    ]),
+
+    # Standing, with grain on a stalk. The only tall thin gold thing.
+    "ui/icon_wheat": dict(size=TILE, legend={
+        "k": "ink", "g": "gold", "d": "gold_dark", "l": "gold_light",
+        "e": "leaf",
+    }, rows=[
+        "................",
+        ".......kk.......",
+        "......klgk......",
+        ".....kglgdk.....",
+        "....kglkgldk....",
+        "....kglkgldk....",
+        "...kglkkkgldk...",
+        "...kglkgkgldk...",
+        "....kglkgldk....",
+        "....kglkgldk....",
+        ".....kglgdk.....",
+        "......kgdk......",
+        "......keek......",
+        ".....kekek......",
+        "......kkk.......",
+        "................",
+    ]),
+
+    # A cob in its husk: fat, vertical, and green at the sides.
+    "ui/icon_corn": dict(size=TILE, legend={
+        "k": "ink", "g": "gold", "d": "gold_dark", "l": "gold_light",
+        "e": "leaf", "f": "leaf_dark",
+    }, rows=[
+        "................",
+        "......kk........",
+        ".....kelk.......",
+        "....kekglk......",
+        "...kekglglk.....",
+        "...kekglglk.....",
+        "..kfekglglkek...",
+        "..kfekglglkek...",
+        "..kfekglglkek...",
+        "..kfekglglkek...",
+        "...kfkglglkek...",
+        "....kkglgkfk....",
+        ".....kgdkfk.....",
+        "......kkk.......",
+        "................",
+        "................",
+    ]),
+
+    "ui/icon_carrot": dict(size=TILE, legend={
+        "k": "ink", "o": "flame", "d": "gold_dark", "e": "leaf",
+        "f": "leaf_dark",
+    }, rows=[
+        "................",
+        "....k.kek.k.....",
+        "....kekekek.....",
+        "....kfekefk.....",
+        ".....kfefk......",
+        "......kek.......",
+        ".....kooook.....",
+        ".....kooook.....",
+        "......koook.....",
+        "......kooodk....",
+        ".......kood.....",
+        ".......kodk.....",
+        "........kdk.....",
+        "........kk......",
+        "................",
+        "................",
+    ]),
+
+    "ui/icon_meat": dict(size=TILE, legend={
+        "k": "ink", "r": "blood", "b": "bone", "n": "bone_dark",
+        "l": "roof_light",
+    }, rows=[
+        "................",
+        "................",
+        "...kk......kk...",
+        "..kbbk....kbbk..",
+        "..kbnbkkkkbnbk..",
+        "...kbnnnnnnbk...",
+        "....kkkbbkkk....",
+        "...kkrrrrrrkk...",
+        "..krllrrrrrrk...",
+        "..krrrrrrrrrk...",
+        "..krrrrrrrrk....",
+        "...krrrrrrk.....",
+        "....kkkkkk......",
+        "................",
+        "................",
+        "................",
+    ]),
+
+    # A keg with a fuse. Dark, banded, and the only thing with a spark on it.
+    "ui/icon_gunpowder": dict(size=TILE, legend={
+        "k": "ink", "s": "ink_soft", "w": "wood_dark", "f": "flame_hot",
+        "o": "flame",
+    }, rows=[
+        "................",
+        "...........f....",
+        "..........fof...",
+        "..........kf....",
+        ".....kkkkkk.....",
+        "....kwwwwwwk....",
+        "...ksssssssk....",
+        "...kwwwwwwwk....",
+        "...ksssssssk....",
+        "...ksssssssk....",
+        "...kwwwwwwwk....",
+        "...ksssssssk....",
+        "....kwwwwwk.....",
+        ".....kkkkk......",
+        "................",
+        "................",
+    ]),
+
+    # A bottle with a rag alight. Nothing else is a bottle.
+    "ui/icon_incendiary": dict(size=TILE, legend={
+        "k": "ink", "g": "leaf", "d": "leaf_dark", "f": "flame_hot",
+        "o": "flame", "b": "bone",
+    }, rows=[
+        "................",
+        "......ff........",
+        ".....fof........",
+        "......f.........",
+        "......kk........",
+        "......kbk.......",
+        ".....kkbkk......",
+        "....kgggggk.....",
+        "...kgggdgggk....",
+        "...kgggdgggk....",
+        "...kgggdgggk....",
+        "...kdggdgggk....",
+        "...kddddddk.....",
+        "....kkkkkk......",
+        "................",
+        "................",
+    ]),
+
+    "ui/icon_money": dict(size=TILE, legend={
+        "k": "ink", "g": "gold", "d": "gold_dark", "l": "gold_light",
+    }, rows=[
+        "................",
+        "................",
+        "....kkkkkk......",
+        "...klllgggk.....",
+        "..klggkgggdk....",
+        "..kgggkggggk....",
+        "..kdgggggggk....",
+        "...kkkkkkkk.....",
+        "..kkkkkkkkkk....",
+        ".klllgggggggk...",
+        ".kggkgggggggk...",
+        ".kdggggggggdk...",
+        ".kddddddddddk...",
+        "..kkkkkkkkkk....",
+        "................",
+        "................",
+    ]),
+
+    # A bolt. The only zigzag in the set.
+    "ui/icon_energy": dict(size=TILE, legend={
+        "k": "ink", "f": "flame_hot", "o": "flame", "b": "water_dark",
+    }, rows=[
+        "................",
+        "........kk......",
+        ".......kfk......",
+        "......kffk......",
+        ".....kfffk......",
+        "....kfffkk......",
+        "...kffffk.......",
+        "...kfffffkkk....",
+        "...kkkfffffk....",
+        "......kfffk.....",
+        ".....kfffk......",
+        "....kfffk.......",
+        "....kffk........",
+        "....kfk.........",
+        ".....k..........",
+        "................",
+    ]),
+
+    # A cog. The only round thing with teeth.
+    "ui/icon_tech": dict(size=TILE, legend={
+        "k": "ink", "i": "stone", "l": "stone_light", "s": "stone_dark",
+        "b": "water_light",
+    }, rows=[
+        "................",
+        "....k.kkk.k.....",
+        "....kkiiikk.....",
+        "...kkiiiiikk....",
+        "..kkiillliikk...",
+        "..kiiilbliiik...",
+        "kkiiilbbbliikk..",
+        "kiiiilbkbliiik..",
+        "kiiiilbbbliiik..",
+        "kkiiiilblliikk..",
+        "..kiiillliiik...",
+        "..kkiiisssikk...",
+        "...kkisssikk....",
+        "....kksssk......",
+        "....k.kkk.k.....",
+        "................",
+    ]),
+
     # ---------------------------------------------- buildings, task 0075
 
     # **The house is the landmark**, which task 0075 asks for in as many

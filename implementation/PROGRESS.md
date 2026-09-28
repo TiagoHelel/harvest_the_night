@@ -6387,3 +6387,93 @@ the group asserts in words.
 
 `python tools/verify.py` prints PASS: 4976 asserts, 655 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+
+## 0079 - Resource icons and the UI kit - done 2026-09-28
+
+What changed: fifteen resource icons and a UI kit - nine-slice panel, tooltip,
+tab, a button in four states, slider and checkbox - all from ASCII maps, and a
+`UiKit` that hands them out. Screenshot:
+`implementation/shots/0079-ui-kit.png`, the icon row above and the kit below.
+
+Files: `tools/sprite_maps.py`, `src/ui/ui_kit.gd` (new), `sprites/ui/`
+(generated, 26 files), `src/ui/tech_panel.gd`, `src/ui/night_hud.gd`,
+`src/ui/shop_panel.gd`, `src/ui/stats_screen.gd`,
+`src/tools/headless_check.gd`.
+
+Verify: 5062 headless / 655 input / both hashes unchanged.
+
+### Shape before colour
+
+The only test task 0079 sets for an icon is that it is told apart at native
+resolution without its label, so each one is a different **shape** first: the
+log pile is two circles, the stalk stands up, the bolt is a zigzag, the cog is
+the only round thing with teeth, the ingot is the only trapezoid. Two brown
+things of the same outline are two brown things whatever colour they are.
+
+Two pairs needed a second go after looking at the row:
+
+- **Wood read as a crate.** A bordered rectangle with rings in it is a chest;
+  two log ends seen from the end of the pile is a woodpile.
+- **Food and money were both gold discs.** Different shapes - a loaf with cuts
+  against two stacked coins - and at sixteen pixels that was not enough. Food
+  is a pie with a red crust now, which separates them by hue as well.
+
+The machine cannot say whether two drawings *read* differently, but it can say
+whether they **are** different: the check fingerprints every icon and fails if
+two are the same pixels, which is what catches one copied and not finished.
+
+### Every resource has one, and no icon is orphaned
+
+Asked of the game rather than of a person looking at a folder.
+`UiKit.missing_icons()` walks `GameData.RESOURCES` and `orphan_icons()` walks
+the directory, and the check fails on either. A sixteenth resource added in a
+year fails it the same day, which is the point.
+
+Fifteen resources, fifteen icons.
+
+### Two numbers that had to match, and did not
+
+Every frame is sixteen by sixteen with a border and a middle that repeats.
+`UiKit.MARGIN` said five and the drawings had three - which slices a frame
+four pixels into its own middle.
+
+It was caught on the first run by the check that **reads `panel.png` and
+counts the border**, rather than by looking at a screenshot and wondering why
+the corners were soft. That check now runs over the panel, the tooltip, the
+tab and the button, because the buttons had a two-pixel border and the others
+three, and a kit whose pieces disagree about their own edges is not a kit.
+They are all three now.
+
+### Which screens use it, and which do not
+
+- **The tech tree**: all twelve node buttons, in four states.
+- **The night HUD**: its three buttons, the same four states.
+- **The shop**: its frame.
+- **The records screen**: its panel.
+
+**Not the day HUD.** It has no frame to swap - it is labels and a bar drawn
+straight onto the screen with no panel behind them - so there is nothing for
+the kit to serve without redesigning it, and redesigning the day HUD is not
+this task. Said here rather than quietly counted as done: task 0079 names the
+day HUD and this does not reach it.
+
+The buttons' **content margins are pinned** where they were. A
+`StyleBoxTexture` otherwise takes its content margin from its nine-slice
+border, and a button that grew three pixels a side would push the tech tree's
+third column off a four-hundred-and-eighty pixel screen - which is the family
+of bug `tech_panel.gd` already carries five comments about.
+
+### The states differ in value, not only in hue
+
+A hover that is only a different colour is invisible to a good fraction of
+people and to anybody on a bad screen. Normal is dark, hover is grey, pressed
+is gold - and the check measures the middle pixel of each and fails if two are
+within a tenth of each other in brightness.
+
+### Hashes
+
+Both unchanged - `2555959448` and `2601044827`. Maps, generated PNGs and four
+view files swapping one `StyleBoxFlat` for another.
+
+`python tools/verify.py` prints PASS: 5062 asserts, 655 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

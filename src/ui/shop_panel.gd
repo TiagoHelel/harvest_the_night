@@ -40,12 +40,9 @@ func _ready() -> void:
 	frame.name = "Frame"
 	frame.position = Vector2(96, 24)
 	frame.custom_minimum_size = Vector2(288, 222)
-	var box := StyleBoxFlat.new()
-	box.bg_color = Color(0.06, 0.05, 0.10, 0.96)
-	box.border_color = Color(0.55, 0.45, 0.30)
-	box.set_border_width_all(1)
-	box.set_content_margin_all(6)
-	frame.add_theme_stylebox_override("panel", box)
+	# Task 0079's panel: one frame for the shop, the records screen and the
+	# tech tree, so changing a border is one edit rather than four.
+	frame.add_theme_stylebox_override("panel", UiKit.panel())
 	add_child(frame)
 
 	var column := VBoxContainer.new()

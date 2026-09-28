@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`#################.......`  **78 / 109 done**
+`#################.......`  **79 / 109 done**
 
-0 doing / 31 todo / 0 blocked across 9 phases.
+0 doing / 30 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0079 - Resource icons and the UI kit**. The whole of what is left is
+First up: **0080 - A pixel font**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,24 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-31 task(s) left, the ready ones first, then what they
+30 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0079 - Resource icons and the UI kit
-
-Ready to pick up.  Likely files: `tools/gen_sprites.py, sprites/ui/`.
-
-The bottom half of the reference sheet: an icon per resource, and the panels, frames and buttons they sit in.
-
-- One 16x16 icon per resource, in the reference sheet's style
-- Nine-slice panel, button in its four states, tab, slider, checkbox, tooltip frame
-- Icons are told apart at native resolution without their labels
-- The same kit serves the day HUD, the night HUD, the shop and the tech tree
-- All generated, all regenerable
-
-  - done when: Every resource in game_data has an icon and no icon is orphaned
-  - done when: The icon set laid out in a row is recognisable against the reference sheet
 
 ### 0080 - A pixel font
 
@@ -167,7 +152,7 @@ The little bubbles on the owner's sheet - !, ?, a heart, a note, an idea, a star
 
 ### 0081 - The UI theme
 
-Waits on 0079, 0080.  Likely files: `assets/theme.tres, src/ui/`.
+Waits on 0080.  Likely files: `assets/theme.tres, src/ui/`.
 
 One Theme resource every control uses, so a colour change is one edit and no screen is the odd one out.
 
@@ -577,7 +562,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0069** [Run statistics](prompts/0069-stats.md)
 - [x] **0070** [Endless nights past ten](prompts/0070-endless.md)
 
-## 5 - Art and visual direction  (8/13)
+## 5 - Art and visual direction  (9/13)
 
 - [x] **0071** [The two palettes](prompts/0071-palettes.md)
 - [x] **0072** [The farm tileset](prompts/0072-tileset.md)
@@ -588,9 +573,9 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0076** [Night lighting](prompts/0076-lighting.md)
 - [x] **0077** [Particles](prompts/0077-particles.md)
 - [x] **0078** [The reality transition](prompts/0078-transition.md)
-- [ ] **0079** [Resource icons and the UI kit](prompts/0079-ui-kit.md)
+- [x] **0079** [Resource icons and the UI kit](prompts/0079-ui-kit.md)
 - [ ] **0080** [A pixel font](prompts/0080-font.md)
-- [ ] **0081** [The UI theme](prompts/0081-theme.md) - needs 0079, 0080
+- [ ] **0081** [The UI theme](prompts/0081-theme.md) - needs 0080
 - [ ] **0082** [Screenshots, and actually looking at them](prompts/0082-screenshots.md)
 
 ## 6 - Sound and juice  (0/8)

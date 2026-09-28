@@ -167,20 +167,21 @@ func _button(node_name: String, text: String, at: Vector2) -> Button:
 	button.text = text
 	button.add_theme_font_size_override("font_size", 8)
 	button.focus_mode = Control.FOCUS_ALL
-	for style in ["normal", "hover", "pressed", "focus", "disabled"]:
-		var box := StyleBoxFlat.new()
-		box.bg_color = Color(0.10, 0.09, 0.16, 0.0 if style == "focus" else 0.9)
-		if style == "pressed":
-			box.bg_color = Color(0.34, 0.31, 0.20, 0.96)
-		elif style == "hover":
-			box.bg_color = Color(0.20, 0.19, 0.30, 0.95)
-		box.border_color = Color(0.45, 0.40, 0.30, 0.8)
-		box.set_border_width_all(1)
+	# **Task 0079's kit**, so the night's buttons and the tech tree's are the
+	# same buttons. The content margins are pinned to what they were: a
+	# `StyleBoxTexture` otherwise takes its content margin from its nine-slice
+	# border, and a button that grew three pixels a side in this corner is a
+	# button over the edge of a 480x270 screen.
+	for style in UiKit.BUTTON_STATES:
+		var box := UiKit.button(style)
 		box.content_margin_left = 2
 		box.content_margin_right = 2
 		box.content_margin_top = 0
 		box.content_margin_bottom = 0
 		button.add_theme_stylebox_override(style, box)
+	var clear := StyleBoxFlat.new()
+	clear.bg_color = Color(0, 0, 0, 0)
+	button.add_theme_stylebox_override("focus", clear)
 	_bar.add_child(button)
 	button.position = at
 	button.size = BUTTON_SIZE

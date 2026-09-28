@@ -67,10 +67,12 @@ func _ready() -> void:
 	# screen is bare labels, and on the same shade the farm and the wave
 	# counter came through the numbers. Rows of digits need something solid
 	# under them.
-	var backing := ColorRect.new()
+	# Task 0079's panel, so this screen is framed like the rest of the game
+	# rather than in a colour picked for it alone.
+	var backing := Panel.new()
 	backing.name = "StatsBacking"
 	backing.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	backing.color = Color(0.07, 0.06, 0.11, 0.98)
+	backing.add_theme_stylebox_override("panel", UiKit.panel())
 	backing.position = Vector2(8, 22)
 	backing.size = Vector2(464, 222)
 	add_child(backing)

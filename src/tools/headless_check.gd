@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 71
+const GROUPS := 72
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -135,6 +135,7 @@ func _run() -> void:
 	_task_0076_lighting()
 	_task_0077_particles()
 	_task_0078_transition()
+	_task_0079_ui_kit()
 
 
 func _finish() -> void:
@@ -12028,3 +12029,107 @@ func _is_farm_occupant(id: StringName) -> bool:
 				as Dictionary)["id"]) == id:
 			return true
 	return false
+
+
+## 0079 - the icons and the UI kit.
+func _task_0079_ui_kit() -> void:
+	# **Every resource has an icon and no icon is orphaned.** The done-when,
+	# asked of the game rather than of a person looking at a folder - a
+	# sixteenth resource added in a year's time fails this the same day.
+	var missing := UiKit.missing_icons()
+	expect(missing.is_empty(),
+		"every resource in game_data has an icon",
+		"missing: %s" % str(missing))
+	var orphans := UiKit.orphan_icons()
+	expect(orphans.is_empty(),
+		"and no icon belongs to a resource that no longer exists",
+		"orphaned: %s" % str(orphans))
+	print("  %d resources, %d icons, none missing and none orphaned"
+		% [GameData.RESOURCES.size(), GameData.RESOURCES.size()])
+
+	# **Told apart without their labels.** A machine cannot say whether two
+	# drawings read differently, but it can say whether they *are* different -
+	# two icons with the same pixels are two icons somebody copied and forgot
+	# to finish.
+	var seen: Dictionary = {}
+	for id in GameData.RESOURCES:
+		var image := Image.load_from_file(ProjectSettings.globalize_path(
+			"res://sprites/ui/icon_%s.png" % id))
+		expect(image != null, "the %s icon loads" % id)
+		if image == null:
+			continue
+		expect(image.get_width() == GameData.TILE_SIZE
+			and image.get_height() == GameData.TILE_SIZE,
+			"and is one tile square, like the task asks",
+			"%dx%d" % [image.get_width(), image.get_height()])
+		var lit := 0
+		for y in image.get_height():
+			for x in image.get_width():
+				if image.get_pixel(x, y).a > 0.0:
+					lit += 1
+		expect(lit > 24, "and has something drawn on it", "%d pixels" % lit)
+		var fingerprint := image.get_data().hex_encode()
+		expect(not seen.has(fingerprint),
+			"and is not a copy of the %s icon" % str(seen.get(fingerprint, "")))
+		seen[fingerprint] = str(id)
+
+	# **The kit is a kit.** Every piece the task names exists and comes back
+	# as a real frame rather than the fallback flat box.
+	for state in UiKit.BUTTON_STATES:
+		expect(UiKit.button(state) is StyleBoxTexture,
+			"the button has a drawn '%s' state" % state)
+	for name in ["panel", "tooltip", "tab", "slider_track"]:
+		expect(ResourceLoader.exists("res://sprites/ui/%s.png" % name),
+			"the kit has a %s" % name)
+	expect(UiKit.panel() is StyleBoxTexture, "the panel is a drawn frame")
+	expect(UiKit.tooltip() is StyleBoxTexture, "and so is the tooltip")
+	expect(UiKit.slider_grab() != null, "the slider has something to drag")
+	expect(UiKit.checkbox(true) != null and UiKit.checkbox(false) != null,
+		"and a checkbox has both of its states")
+
+	# **The nine-slice margin in the code and the border in the art agree.**
+	# Two numbers that have to match and live in different files are two
+	# numbers that will not, so this reads the drawing and counts.
+	for frame_name in ["panel", "tooltip", "button_normal", "tab"]:
+		_border_matches(frame_name)
+	# **A button's states differ in value, not only in hue.** A hover that is
+	# only a different colour is invisible to a good fraction of people and to
+	# anybody on a bad screen.
+	var brightness: Array = []
+	for state in ["normal", "hover", "pressed"]:
+		var art := Image.load_from_file(ProjectSettings.globalize_path(
+			"res://sprites/ui/button_%s.png" % state))
+		if art == null:
+			continue
+		var lit := art.get_pixel(art.get_width() / 2, art.get_height() / 2)
+		brightness.append(lit.r * 0.299 + lit.g * 0.587 + lit.b * 0.114)
+	expect(brightness.size() == 3, "three button states were measured")
+	if brightness.size() == 3:
+		expect(absf(brightness[0] - brightness[1]) > 0.1,
+			"hover is a different lightness from normal",
+			"%.2f against %.2f" % [brightness[0], brightness[1]])
+		expect(absf(brightness[0] - brightness[2]) > 0.1,
+			"and so is pressed",
+			"%.2f against %.2f" % [brightness[0], brightness[2]])
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## The border a frame actually has, counted off the drawing, against the
+## margin the code slices it at.
+func _border_matches(frame_name: String) -> void:
+	var art := Image.load_from_file(ProjectSettings.globalize_path(
+		"res://sprites/ui/%s.png" % frame_name))
+	expect(art != null, "the %s drawing loads" % frame_name)
+	if art == null:
+		return
+	var row := art.get_height() / 2
+	var middle := art.get_pixel(art.get_width() / 2, row)
+	var border := 0
+	for x in art.get_width():
+		if art.get_pixel(x, row).is_equal_approx(middle):
+			break
+		border += 1
+	expect(border == UiKit.MARGIN,
+		"the %s's drawn border is the margin the code slices at" % frame_name,
+		"%d against %d" % [border, UiKit.MARGIN])

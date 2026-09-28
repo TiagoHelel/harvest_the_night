@@ -1,7 +1,7 @@
 # 0079 - Resource icons and the UI kit
 
 - **Phase:** 5 - Art and visual direction
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0071, 0021
 - **Likely files:** tools/gen_sprites.py, sprites/ui/
 

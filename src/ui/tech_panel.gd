@@ -94,21 +94,28 @@ func _build_nodes() -> void:
 			# asserts every node is on the screen now.
 			button.clip_text = true
 			button.autowrap_mode = TextServer.AUTOWRAP_OFF
-			for style in ["normal", "hover", "pressed", "focus", "disabled"]:
-				var box := StyleBoxFlat.new()
-				box.bg_color = Color(0.10, 0.09, 0.16,
-					0.0 if style == "focus" else 0.92)
-				if style == "pressed":
-					box.bg_color = Color(0.34, 0.31, 0.20, 0.96)
-				elif style == "hover":
-					box.bg_color = Color(0.20, 0.19, 0.30, 0.95)
-				box.border_color = Color(0.42, 0.37, 0.30, 0.75)
-				box.set_border_width_all(1)
+			# **The kit's four states, not four colours typed here.** Task
+			# 0079 made one set of frames so that the tech tree, the shop and
+			# both HUDs are recognisably the same game; this is the tree's
+			# half of that.
+			#
+			# The content margins are pinned to what they were. A
+			# `StyleBoxTexture` otherwise takes its content margin from its
+			# nine-slice border, which is five - and a button that grew four
+			# pixels on each side would push the third column off a four
+			# hundred and eighty pixel screen, which is the family of bug this
+			# file already carries five comments about.
+			for style in UiKit.BUTTON_STATES:
+				var box := UiKit.button(style)
 				box.content_margin_left = 3
 				box.content_margin_right = 3
 				box.content_margin_top = 0
 				box.content_margin_bottom = 0
 				button.add_theme_stylebox_override(style, box)
+			# Focus is drawn by the node behind it, so it stays invisible.
+			var clear := StyleBoxFlat.new()
+			clear.bg_color = Color(0, 0, 0, 0)
+			button.add_theme_stylebox_override("focus", clear)
 			_frame.add_child(button)
 			button.position = at + Vector2(0, 14 + row * 34.0)
 			button.size = NODE_SIZE
