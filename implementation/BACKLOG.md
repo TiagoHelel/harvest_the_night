@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`####################....`  **91 / 109 done**
+`####################....`  **92 / 109 done**
 
-0 doing / 18 todo / 0 blocked across 9 phases.
+0 doing / 17 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0092 - The main menu and the router**. The whole of what is left is
+First up: **0093 - Options: video**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,24 +26,67 @@ which rewrites this file for you.
 
 ## What is open
 
-18 task(s) left, the ready ones first, then what they
+17 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
-### 0092 - The main menu and the router
+### 0093 - Options: video
 
-Ready to pick up.  Likely files: `src/app/app.gd, src/ui/main_menu.gd`.
+Ready to pick up.  Likely files: `src/ui/options_video.gd`.
 
-One router that owns which screen is up, so screens stop knowing about each other.
+Resolution, window mode and scaling, done properly for a pixel art game.
 
-- An `App` autoload with `goto(state)` and a `state_changed` signal
-- States: BOOT, TITLE, MENU, RUN, TECH, STATS, OPTIONS, SUMMARY
-- A back stack, so Options returns to whoever opened it
-- No `get_node('/root/...')` reaching across screens
-- The run becomes one state rather than the root scene
+- A resolution list built from the monitor, marking the integer multiples of 480x270
+- Windowed, borderless and exclusive fullscreen
+- Integer scaling on by default, with a toggle and a warning about what turning it off does
+- VSync and an FPS cap
+- Applied immediately with a revert countdown, so a bad mode cannot strand the player
 
-  - done when: Options from the title and from the pause menu both return correctly
-  - done when: `input_check` still drives a full night after the refactor
+  - done when: Every listed mode applies and survives a restart
+  - done when: Picking an impossible mode reverts on its own within ten seconds
+
+### 0094 - Options: audio
+
+Ready to pick up.  Likely files: `src/ui/options_audio.gd`.
+
+Master, music, effects and ambience, with a test sound on each.
+
+- Four sliders, each writing to its bus through Settings
+- A test sound on release, on the bus being adjusted
+- A mute toggle that is separate from a zero slider
+- Values persist and apply on boot
+
+  - done when: Each slider affects only its own bus
+  - done when: Muting and unmuting restores the previous levels
+
+### 0095 - Options: controls
+
+Ready to pick up.  Likely files: `src/ui/options_controls.gd, src/app/input_actions.gd`.
+
+Named actions instead of hardcoded keys, and a screen to rebind them.
+
+- Every key the game reads is a named action: move, interact, build, cancel, inventory, ability, speed, night, pause
+- A rebind screen that detects a conflict and refuses it with the clash named
+- Reset to defaults, per binding and for all
+- Bindings persist through Settings
+- Mouse bindings are included, not a special case
+
+  - done when: `grep` finds no raw keycode left in `src/ui/`
+  - done when: A rebound key works immediately and after a restart
+
+### 0096 - The pause menu
+
+Ready to pick up.  Likely files: `src/ui/pause_menu.gd`.
+
+Escape stops the world, and pausing mid-night is safe.
+
+- Pause stops the tick accumulator: no ticks run and none are banked to run later
+- Resume, Options, Save and quit, Abandon run
+- Pausing mid-night and resuming produces an identical night
+- Abandon asks twice and says what will be lost
+
+  - done when: A paused night resumed gives the same hash as an unpaused one
+  - done when: Pausing for five minutes does not fast-forward on resume
 
 ### 0097 - English and Portuguese
 
@@ -74,6 +117,22 @@ Something recognisable in a taskbar and on an itch page, and two seconds before 
 
   - done when: The 16x16 icon is still recognisable
   - done when: No Godot logo appears anywhere in a release build
+
+### 0100 - Exports: Windows and Web
+
+Ready to pick up.  Likely files: `export_presets.cfg, tools/release.py`.
+
+Two builds anyone can run, from one command, with the Web one small enough that a stranger will wait for it.
+
+- `python tools/release.py` builds both and writes them into `build/`
+- The Web build excludes `implementation/`, `tools/`, `docs/` and previous builds from the pack - check, because this is where that goes wrong
+- A wire-size budget for the Web build, gzipped, and the build fails when it is exceeded
+- The Web build takes focus and audio correctly on first click
+- The version and the build date are baked in and shown on the title screen
+
+  - done when: Both builds run a full night on a machine without Godot installed
+  - done when: The Web build is inside its budget and the number is printed
+  - done when: The two builds produce the same determinism hash
 
 ### 0102 - A performance budget
 
@@ -134,110 +193,6 @@ The little bubbles on the owner's sheet - !, ?, a heart, a note, an idea, a star
   - done when: A reaction appears on the tick the thing happens and clears itself
   - done when: Turning them all off leaves the determinism hash unchanged
 
-### 0093 - Options: video
-
-Waits on 0092.  Likely files: `src/ui/options_video.gd`.
-
-Resolution, window mode and scaling, done properly for a pixel art game.
-
-- A resolution list built from the monitor, marking the integer multiples of 480x270
-- Windowed, borderless and exclusive fullscreen
-- Integer scaling on by default, with a toggle and a warning about what turning it off does
-- VSync and an FPS cap
-- Applied immediately with a revert countdown, so a bad mode cannot strand the player
-
-  - done when: Every listed mode applies and survives a restart
-  - done when: Picking an impossible mode reverts on its own within ten seconds
-
-### 0094 - Options: audio
-
-Waits on 0092.  Likely files: `src/ui/options_audio.gd`.
-
-Master, music, effects and ambience, with a test sound on each.
-
-- Four sliders, each writing to its bus through Settings
-- A test sound on release, on the bus being adjusted
-- A mute toggle that is separate from a zero slider
-- Values persist and apply on boot
-
-  - done when: Each slider affects only its own bus
-  - done when: Muting and unmuting restores the previous levels
-
-### 0095 - Options: controls
-
-Waits on 0092.  Likely files: `src/ui/options_controls.gd, src/app/input_actions.gd`.
-
-Named actions instead of hardcoded keys, and a screen to rebind them.
-
-- Every key the game reads is a named action: move, interact, build, cancel, inventory, ability, speed, night, pause
-- A rebind screen that detects a conflict and refuses it with the clash named
-- Reset to defaults, per binding and for all
-- Bindings persist through Settings
-- Mouse bindings are included, not a special case
-
-  - done when: `grep` finds no raw keycode left in `src/ui/`
-  - done when: A rebound key works immediately and after a restart
-
-### 0096 - The pause menu
-
-Waits on 0092.  Likely files: `src/ui/pause_menu.gd`.
-
-Escape stops the world, and pausing mid-night is safe.
-
-- Pause stops the tick accumulator: no ticks run and none are banked to run later
-- Resume, Options, Save and quit, Abandon run
-- Pausing mid-night and resuming produces an identical night
-- Abandon asks twice and says what will be lost
-
-  - done when: A paused night resumed gives the same hash as an unpaused one
-  - done when: Pausing for five minutes does not fast-forward on resume
-
-### 0100 - Exports: Windows and Web
-
-Waits on 0092.  Likely files: `export_presets.cfg, tools/release.py`.
-
-Two builds anyone can run, from one command, with the Web one small enough that a stranger will wait for it.
-
-- `python tools/release.py` builds both and writes them into `build/`
-- The Web build excludes `implementation/`, `tools/`, `docs/` and previous builds from the pack - check, because this is where that goes wrong
-- A wire-size budget for the Web build, gzipped, and the build fails when it is exceeded
-- The Web build takes focus and audio correctly on first click
-- The version and the build date are baked in and shown on the title screen
-
-  - done when: Both builds run a full night on a machine without Godot installed
-  - done when: The Web build is inside its budget and the number is printed
-  - done when: The two builds produce the same determinism hash
-
-### 0101 - Onboarding in seven lines
-
-Waits on 0097.  Likely files: `src/core/tutorial.gd`.
-
-A stranger reaches night 1 and understands the loop, with no more text than the design document allows.
-
-- Seven lines, total, across the whole first day
-- Each appears on the thing it describes
-- The reality switch is explained by showing it, not by describing it
-- Every line is translated
-- Watch someone play it and write down where they stopped
-
-  - done when: A first-time player reaches the end of night 1 without being told anything out loud
-  - done when: The journal names where they hesitated, because that is the finding
-
-### 0107 - Store assets
-
-Waits on 0099.  Likely files: `tools/gen_marketing.py, build/store/`.
-
-The page it goes on: capsule images, screenshots, the pitch, generated from the game rather than mocked up.
-
-- Capsules at the usual sizes, from the real game and the real palette
-- Five screenshots from `shot.gd`, picked to show the loop, not five of the farm
-- The elevator pitch from section 20 of the design document, edited to fit a store page
-- An animated GIF of the reality switch
-- English and Portuguese copy
-
-  - done when: One command regenerates the whole set
-  - done when: The screenshots show a day, a night, the switch, a busy wave and the tech tree
-
 ### 0098 - Accessibility
 
 Waits on 0093, 0097.  Likely files: `src/app/a11y.gd, src/ui/options_a11y.gd`.
@@ -254,6 +209,21 @@ The cheap things that decide whether a lot of people can play it at all.
   - done when: The slow speed option does not change the determinism hash
   - done when: The game is playable start to finish with shake and flashing off
 
+### 0101 - Onboarding in seven lines
+
+Waits on 0097.  Likely files: `src/core/tutorial.gd`.
+
+A stranger reaches night 1 and understands the loop, with no more text than the design document allows.
+
+- Seven lines, total, across the whole first day
+- Each appears on the thing it describes
+- The reality switch is explained by showing it, not by describing it
+- Every line is translated
+- Watch someone play it and write down where they stopped
+
+  - done when: A first-time player reaches the end of night 1 without being told anything out loud
+  - done when: The journal names where they hesitated, because that is the finding
+
 ### 0105 - A playtest build
 
 Waits on 0100, 0103.  Likely files: `tools/playtest.py`.
@@ -269,20 +239,20 @@ A build to put in front of someone, with the instrumentation to learn something 
   - done when: A session produces a readable log
   - done when: `tools/playtest.py` summarises a folder of logs into the questions that matter
 
-### 0108 - The devlog and a trailer clip
+### 0107 - Store assets
 
-Waits on 0107.  Likely files: `tools/devlog.py, docs/devlog/`.
+Waits on 0099.  Likely files: `tools/gen_marketing.py, build/store/`.
 
-The thing that gets people to look: thirty seconds that show the farm, the switch and the horde.
+The page it goes on: capsule images, screenshots, the pitch, generated from the game rather than mocked up.
 
-- A scripted capture: a day of farming, the transition, a night holding, a wall falling
-- It is captured from a seeded run, so it can be captured again
-- A devlog page from the journal: what the loop was meant to be and what it turned out to be
-- Honest about what is not in the MVP
-- Both in English and Portuguese
+- Capsules at the usual sizes, from the real game and the real palette
+- Five screenshots from `shot.gd`, picked to show the loop, not five of the farm
+- The elevator pitch from section 20 of the design document, edited to fit a store page
+- An animated GIF of the reality switch
+- English and Portuguese copy
 
-  - done when: The clip is thirty seconds and needs no explanation
-  - done when: The devlog is generated from `implementation/PROGRESS.md` rather than written twice
+  - done when: One command regenerates the whole set
+  - done when: The screenshots show a day, a night, the switch, a busy wave and the tech tree
 
 ### 0106 - The release checklist
 
@@ -298,6 +268,21 @@ The list you run before publishing, written once, so nothing is remembered at th
 
   - done when: Running the list top to bottom produces a publishable build
   - done when: The journal records what the first run of it found, because it will find something
+
+### 0108 - The devlog and a trailer clip
+
+Waits on 0107.  Likely files: `tools/devlog.py, docs/devlog/`.
+
+The thing that gets people to look: thirty seconds that show the farm, the switch and the horde.
+
+- A scripted capture: a day of farming, the transition, a night holding, a wall falling
+- It is captured from a seeded run, so it can be captured again
+- A devlog page from the journal: what the loop was meant to be and what it turned out to be
+- Honest about what is not in the MVP
+- Both in English and Portuguese
+
+  - done when: The clip is thirty seconds and needs no explanation
+  - done when: The devlog is generated from `implementation/PROGRESS.md` rather than written twice
 
 ## 0 - Foundation  (12/12)
 
@@ -411,18 +396,18 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0089** [Tooltips](prompts/0089-tooltips.md)
 - [x] **0090** [The log panel](prompts/0090-log-panel.md)
 
-## 7 - Shell and product  (1/10)
+## 7 - Shell and product  (2/10)
 
 - [x] **0091** [The title screen](prompts/0091-title-screen.md)
-- [ ] **0092** [The main menu and the router](prompts/0092-main-menu.md)
-- [ ] **0093** [Options: video](prompts/0093-options-video.md) - needs 0092
-- [ ] **0094** [Options: audio](prompts/0094-options-audio.md) - needs 0092
-- [ ] **0095** [Options: controls](prompts/0095-options-controls.md) - needs 0092
-- [ ] **0096** [The pause menu](prompts/0096-pause-menu.md) - needs 0092
+- [x] **0092** [The main menu and the router](prompts/0092-main-menu.md)
+- [ ] **0093** [Options: video](prompts/0093-options-video.md)
+- [ ] **0094** [Options: audio](prompts/0094-options-audio.md)
+- [ ] **0095** [Options: controls](prompts/0095-options-controls.md)
+- [ ] **0096** [The pause menu](prompts/0096-pause-menu.md)
 - [ ] **0097** [English and Portuguese](prompts/0097-i18n.md)
 - [ ] **0098** [Accessibility](prompts/0098-accessibility.md) - needs 0093, 0097
 - [ ] **0099** [An icon and a boot ident](prompts/0099-icon-ident.md)
-- [ ] **0100** [Exports: Windows and Web](prompts/0100-exports.md) - needs 0092
+- [ ] **0100** [Exports: Windows and Web](prompts/0100-exports.md)
 
 ## 8 - Ship the MVP  (0/8)
 

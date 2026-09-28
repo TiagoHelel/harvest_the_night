@@ -40,6 +40,9 @@ var _banked_nights := -1
 ## put on again in `_ready`; see both for why it is twice.
 var _dressed: Theme
 
+## The router. By path, because it is an autoload: see `app.gd`.
+var _router: Node
+
 @onready var _world: WorldView = %WorldView
 @onready var _shop: ShopPanel = %ShopPanel
 @onready var _hud: DayHud = %DayHud
@@ -59,6 +62,7 @@ var _dressed: Theme
 @onready var _ambience: Ambience = %Ambience
 @onready var _juice: Juice = %Juice
 @onready var _log: LogPanel = %LogPanel
+@onready var _options: OptionsScreen = %OptionsScreen
 @onready var _player_view: PlayerView = %WorldView/Occupants/PlayerView
 @onready var _driver: SimDriver = %SimDriver
 @onready var _debug: CanvasLayer = %DebugOverlay
@@ -98,6 +102,36 @@ func _ready() -> void:
 	# describe their own.
 	if is_instance_valid(_debug) and _debug.has_method("watch"):
 		_debug.watch(_driver)
+
+	# **The run is a state of the router, not the root of the world.** It
+	# says so on the way in, and from here on `App` decides which of the
+	# run's panels is up - the keys ask it, the title menu asks it, and
+	# neither of them knows the other exists.
+	_router = get_node_or_null(^"/root/App")
+	if _router != null:
+		if not _router.state_changed.is_connected(_went):
+			_router.state_changed.connect(_went)
+		_router.reset(_router.RUN)
+
+
+## Show whichever of the run's overlays the router says is up.
+func _went(_to: int, _from: int) -> void:
+	if _router == null:
+		return
+	var at: int = _router.here()
+	var tech_up: bool = at == _router.TECH
+	var stats_up: bool = at == _router.STATS
+	var options_up: bool = at == _router.OPTIONS
+	if tech_up != _tech.is_open():
+		_tech.open() if tech_up else _tech.close()
+	if _stats != null and stats_up != _stats.is_open():
+		if stats_up:
+			_stats.show_profile(_profile)
+			_stats.open()
+		else:
+			_stats.close()
+	if _options != null:
+		_options.visible = options_up
 
 
 ## Start a run on `seed_value` and hand the new state to every screen.

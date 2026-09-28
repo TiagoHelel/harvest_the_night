@@ -174,10 +174,20 @@ func close() -> void:
 func _process(_delta: float) -> void:
 	if _state.is_empty():
 		return
-	if Input.is_action_just_pressed(&"stats"):
-		close() if visible else open()
-	if visible and Input.is_action_just_pressed(&"cancel"):
-		close()
+	# **The key asks the router, and so does the menu entry.** Task 0092:
+	# there is one way in and one way out, so a player who opened this from
+	# the title menu and a player who pressed R mid-night leave it by the
+	# same door. `Main` is what actually opens and closes it, because `App`
+	# owns which screen is up and this one does not.
+	var router := get_node_or_null(^"/root/App")
+	if router != null:
+		if Input.is_action_just_pressed(&"stats"):
+			if visible:
+				router.back()
+			else:
+				router.goto(router.STATS)
+		if visible and Input.is_action_just_pressed(&"cancel"):
+			router.back()
 	if not visible:
 		return
 

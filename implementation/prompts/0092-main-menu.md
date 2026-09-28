@@ -1,7 +1,7 @@
 # 0092 - The main menu and the router
 
 - **Phase:** 7 - Shell and product
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0091, 0010
 - **Likely files:** src/app/app.gd, src/ui/main_menu.gd
 

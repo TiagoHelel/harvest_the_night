@@ -21,14 +21,17 @@ extends Node
 ## whether it is broken or they are. So `SHOWN_WHEN` decides every entry the
 ## same way, and an entry whose screen does not exist yet is simply not there.
 ##
-## **Options is in that state today.** The options screens are tasks 0093 to
-## 0095 and the router that would open them is 0092; until one of those
-## exists there is nothing behind the button, so it is absent rather than
-## inert. Task 0092's prompt has been given the line that puts it back. Said
-## out loud in the journal rather than quietly counted as done.
-
-## The two things the screen can be.
-enum { IDENT, MENU }
+## Continue is still decided that way. **Options came back at task 0092**,
+## when the router and the frame it opens were built; the three screens that
+## fill that frame are 0093 to 0095, and the frame shows the tabs that exist
+## and no more - the same rule again, one level down.
+##
+## ## The router owns which screen is up
+##
+## This screen asks `App` and listens to it rather than changing scenes
+## itself. `TITLE` is the ident, `MENU` is the menu, and `OPTIONS` is over the
+## top of either - so Back from the options screen comes here without the
+## options screen having heard of this one.
 
 ## The seed the backdrop farm grows from. Written down, like every other seed
 ## in this project, so the title screen looks the same every boot.
@@ -64,7 +67,6 @@ const ENTRIES: Array = [
 
 signal chose(which: StringName)
 
-var _phase := IDENT
 var _state: Dictionary = {}
 var _from := 0
 
@@ -73,6 +75,8 @@ var _logo: TextureRect
 var _ident: Label
 var _menu: VBoxContainer
 var _stats: StatsScreen
+var _options: OptionsScreen
+var _router: Node
 
 
 func _ready() -> void:
@@ -83,9 +87,16 @@ func _ready() -> void:
 	_menu = get_node_or_null(^"UI/Screen/Menu") as VBoxContainer
 	_stats = get_node_or_null(^"UI/Screen/StatsScreen") as StatsScreen
 
+	_options = get_node_or_null(^"UI/Screen/OptionsScreen") as OptionsScreen
+	_router = get_node_or_null(^"/root/App")
+	if _router != null and not _router.state_changed.is_connected(_went):
+		_router.state_changed.connect(_went)
+
 	_begin_backdrop()
 	_build_menu()
-	_show_ident()
+	if _router != null:
+		_router.reset(_router.TITLE)
+	_wear(_router.here() if _router != null else 0)
 
 
 func _begin_backdrop() -> void:
@@ -139,29 +150,46 @@ func _process(_delta: float) -> void:
 
 # --------------------------------------------------------------- the two views
 
-func _show_ident() -> void:
-	_phase = IDENT
-	if _menu != null:
-		_menu.visible = false
+func _went(_to: int, _from: int) -> void:
+	_wear(_router.here() if _router != null else 0)
+
+
+## Show whatever the router says is up. One function, so there is no way for
+## two of these screens to be on at once.
+func _wear(state: int) -> void:
+	if _router == null:
+		return
+	# Typed by hand: `_router` is an untyped `Node` - it is an autoload and
+	# naming its class here would be the very parse error the path lookup
+	# exists to avoid - so everything it hands back is a Variant.
+	var menu_up: bool = state == _router.MENU
+	var options_up: bool = state == _router.OPTIONS
+	var stats_up: bool = state == _router.STATS
 	if _ident != null:
-		_ident.visible = true
+		_ident.visible = state == _router.TITLE
 		_ident.text = "PRESS ANY KEY"
-
-
-func _show_menu() -> void:
-	_phase = MENU
-	if _ident != null:
-		_ident.visible = false
 	if _menu != null:
-		_menu.visible = true
-		for child in _menu.get_children():
-			if child is Button and not (child as Button).disabled:
-				(child as Button).grab_focus()
-				break
+		_menu.visible = menu_up
+		if menu_up:
+			_focus_menu()
+	if _options != null:
+		_options.visible = options_up
+	if _stats != null:
+		_stats.visible = stats_up
+		if stats_up:
+			_stats.show_state(_state)
+			_stats.show_profile(Save.read_profile())
+
+
+func _focus_menu() -> void:
+	for child in _menu.get_children():
+		if child is Button and not (child as Button).disabled:
+			(child as Button).grab_focus()
+			return
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if _phase != IDENT:
+	if _router == null or _router.here() != _router.TITLE:
 		return
 	# **Any key or click.** Not a named action: a player who has just started
 	# the game has not learned any of them, and "press any key" has to be
@@ -171,7 +199,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	var clicked := event is InputEventMouseButton and event.is_pressed()
 	var padded := event is InputEventJoypadButton and event.is_pressed()
 	if pressed or clicked or padded:
-		_show_menu()
+		_router.goto(_router.MENU)
 		get_viewport().set_input_as_handled()
 
 
@@ -183,9 +211,10 @@ static func is_shown(which: StringName, has_run: bool) -> bool:
 		&"continue":
 			return has_run
 		&"options":
-			# Tasks 0093 to 0095 build the screens and 0092 the router that
-			# opens them. Nothing yet, so nothing shown.
-			return false
+			# Task 0092 built the router and the frame, so there is somewhere
+			# to go. The three screens that fill it are 0093 to 0095, and
+			# `OptionsScreen` shows what has been registered and no more.
+			return true
 	return true
 
 
@@ -209,49 +238,43 @@ func _build_menu() -> void:
 		_menu.add_child(button)
 
 
+## **Nothing here changes a scene or opens a panel.** Every entry says where
+## it wants to go and the router does the rest, which is the whole of "screens
+## stop knowing about each other".
 func _pick(which: StringName) -> void:
 	chose.emit(which)
+	if _router == null:
+		return
 	match which:
 		&"new":
 			Save.delete_run()
-			get_tree().change_scene_to_file("res://scenes/Main.tscn")
+			_router.goto(_router.RUN)
 		&"continue":
 			# The run on disk is picked up by `Main`; task 0096 is what saves
 			# one mid-night, and until then this is the same door as new.
-			get_tree().change_scene_to_file("res://scenes/Main.tscn")
+			_router.goto(_router.RUN)
 		&"stats":
-			_show_stats()
+			_router.goto(_router.STATS)
+		&"options":
+			_router.goto(_router.OPTIONS)
 		&"quit":
 			get_tree().quit()
 
 
-func _show_stats() -> void:
-	if _stats == null:
-		return
-	_stats.show_state(_state)
-	_stats.show_profile(Save.read_profile())
-	_stats.visible = true
-	if _menu != null:
-		_menu.visible = false
-
-
 func _input(event: InputEvent) -> void:
-	# The records screen closes itself on its own key; this puts the menu
-	# back when it does.
-	if _stats != null and not _stats.visible and _phase == MENU \
-			and _menu != null and not _menu.visible:
-		_menu.visible = true
-	if event.is_action_pressed(&"cancel") and _stats != null \
-			and _stats.visible:
-		_stats.visible = false
-		if _menu != null:
-			_menu.visible = true
+	# The records screen has its own key to close; this is the other way out,
+	# and both end at the same place because both go through the router.
+	if _router == null or not event.is_action_pressed(&"cancel"):
+		return
+	if _router.here() == _router.STATS or _router.here() == _router.OPTIONS:
+		_router.back()
+		get_viewport().set_input_as_handled()
 
 
 # ------------------------------------------------------------- for the checks
 
 func phase() -> int:
-	return _phase
+	return _router.here() if _router != null else 0
 
 
 func menu_entries() -> Array:

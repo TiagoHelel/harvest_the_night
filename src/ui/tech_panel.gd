@@ -142,10 +142,19 @@ func _process(_delta: float) -> void:
 	# **Never during a wave.** The rules refuse a purchase after dark anyway;
 	# this is so the panel is not sitting open over a night it cannot act on.
 	if visible and int(_state["phase"]) != Phases.DAY:
-		close()
+		var shut := get_node_or_null(^"/root/App")
+		if shut != null:
+			shut.back()
+		else:
+			close()
 		return
-	if Input.is_action_just_pressed(&"tech"):
-		close() if visible else open()
+	# Through the router, for the reason `stats_screen.gd` gives.
+	var router := get_node_or_null(^"/root/App")
+	if router != null and Input.is_action_just_pressed(&"tech"):
+		if visible:
+			router.back()
+		else:
+			router.goto(router.TECH)
 	if visible and Input.is_action_just_pressed(&"cancel"):
 		close()
 	if not visible:

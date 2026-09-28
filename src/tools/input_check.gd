@@ -41,7 +41,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 48
+const CASES := 49
 
 ## The pixels two pieces of text in one row must have between them. Two is
 ## the width of the gap inside a letter at this size, so anything less reads
@@ -124,6 +124,7 @@ func _run() -> void:
 	await _case_0089_tooltips()
 	await _case_0090_log()
 	await _case_0091_title()
+	await _case_0092_router()
 	_finish()
 
 
@@ -4830,8 +4831,14 @@ func _case_0091_title() -> void:
 		await close_scene()
 		return
 
+	var router: Node = root.get_node_or_null(^"App")
+	expect(router != null, "the router is up")
+	if router == null:
+		_completed += 1
+		await close_scene()
+		return
 	await frames(6)
-	expect(title.phase() == TitleScreen.IDENT,
+	expect(title.phase() == router.TITLE,
 		"it opens on the ident, not the menu", str(title.phase()))
 	var menu: Control = require_control("Menu")
 	expect(menu != null and not menu.visible,
@@ -4849,7 +4856,7 @@ func _case_0091_title() -> void:
 	# just started the game has not learned any of them.
 	await tap_key(KEY_X)
 	await frames(3)
-	expect(title.phase() == TitleScreen.MENU,
+	expect(title.phase() == router.MENU,
 		"any key at all opens the menu", str(title.phase()))
 	expect(menu != null and menu.visible, "and the menu is up")
 
@@ -4872,10 +4879,9 @@ func _case_0091_title() -> void:
 		expect(button.get_global_rect().end.y <= 270.0,
 			"and is on the screen", str(button.get_global_rect()))
 
-	# Options is not on it yet, and that is the same rule rather than an
-	# oversight; task 0092 puts it back.
-	expect(not entries.has("options"),
-		"Options is absent while nothing can open it", str(entries))
+	# Options is on it since task 0092 built the router and the frame.
+	expect(entries.has("options"),
+		"Options is on the menu now that something opens it", str(entries))
 
 	# The night really does come in behind the menu, which is the premise.
 	var was := title.backdrop_tick()
@@ -4885,6 +4891,96 @@ func _case_0091_title() -> void:
 	expect(title.backdrop_tick() > was,
 		"and the farm behind it is running",
 		"%d against %d" % [title.backdrop_tick(), was])
+
+	await close_scene()
+	_completed += 1     # last line: an abandoned case never gets here
+func _case_0092_router() -> void:
+	# **From the title first.** Options opened from the title menu comes back
+	# to the title menu - one half of the done-when.
+	await open_scene("res://scenes/Title.tscn")
+	var router: Node = root.get_node_or_null(^"App")
+	var title: TitleScreen = _scene as TitleScreen
+	if router == null or title == null:
+		expect(router != null, "the router autoload is up")
+		_completed += 1
+		await close_scene()
+		return
+
+	await frames(4)
+	await tap_key(KEY_X)
+	await frames(3)
+	expect(router.here() == router.MENU, "the title is on its menu",
+		router.name_of(router.here()))
+
+	await click_control("Menu_options")
+	await frames(4)
+	expect(router.here() == router.OPTIONS,
+		"the Options entry opens the options screen",
+		router.name_of(router.here()))
+	var frame: Control = require_control("OptionsScreen")
+	expect(frame != null and frame.visible, "and the frame is up")
+	var options: OptionsScreen = frame as OptionsScreen
+	if options != null:
+		expect(options.tabs().is_empty(),
+			"with no tabs yet - tasks 0093 to 0095 register them",
+			str(options.tabs()))
+
+	await click_control("OptionsBack")
+	await frames(4)
+	expect(router.here() == router.MENU,
+		"and Back returns to the menu that opened it",
+		router.name_of(router.here()))
+	expect(frame != null and not frame.visible, "with the frame put away")
+
+	# **The records screen is reachable from the menu.** Carried over from
+	# task 0069, which built it when there was no menu to put it on.
+	await click_control("Menu_stats")
+	await frames(4)
+	expect(router.here() == router.STATS,
+		"the menu opens the records screen",
+		router.name_of(router.here()))
+	var records: Control = require_control("StatsScreen")
+	expect(records != null and records.visible, "and it is up")
+	await tap_key(KEY_ESCAPE)
+	await frames(4)
+	expect(router.here() == router.MENU, "and closes back to the menu",
+		router.name_of(router.here()))
+	await close_scene()
+
+	# **And from a run, which is the other half.** The same screen, the same
+	# Back, a different place to come back to - and neither screen knows the
+	# other exists.
+	await open_scene(MAIN_SCENE)
+	router = root.get_node_or_null(^"App")
+	await frames(6)
+	expect(router.here() == router.RUN, "a run says it is a run",
+		router.name_of(router.here()))
+
+	# **R still opens the records mid-night.** Task 0092 asks for the key to
+	# keep working, and it goes through the router now, so the key and the
+	# menu entry are the same door.
+	await tap_key(KEY_R)
+	await frames(4)
+	expect(router.here() == router.STATS,
+		"R opens the records inside a run",
+		router.name_of(router.here()))
+	var in_run: Control = require_control("StatsScreen")
+	expect(in_run != null and in_run.visible, "and it is on the screen")
+	await tap_key(KEY_R)
+	await frames(4)
+	expect(router.here() == router.RUN,
+		"and R again puts it away, back to the run",
+		router.name_of(router.here()))
+	expect(in_run != null and not in_run.visible, "with the panel gone")
+
+	# The tech tree, the same way.
+	await tap_key(KEY_T)
+	await frames(4)
+	expect(router.here() == router.TECH, "T opens the tech tree",
+		router.name_of(router.here()))
+	await tap_key(KEY_T)
+	await frames(4)
+	expect(router.here() == router.RUN, "and closes it")
 
 	await close_scene()
 	_completed += 1     # last line: an abandoned case never gets here

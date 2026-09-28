@@ -51,6 +51,9 @@ texture={
 ; they are nodes, they touch the disk, and they are not deterministic.
 Settings="*res://src/app/settings.gd"
 Audio="*res://src/app/audio.gd"
+; Task 0092: which screen is up, and how to get back. Registered after
+; the services it may want to ask about, and before any scene runs.
+App="*res://src/app/app.gd"
 
 [audio]
 

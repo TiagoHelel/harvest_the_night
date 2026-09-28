@@ -7917,3 +7917,99 @@ backdrop state and touches nothing the game's own run holds.
 `python tools/verify.py` prints PASS: 5653 asserts, 783 input cases, 0 failed,
 with a new `logo` row. `exports` is still the one SKIP and still wants the
 Godot export templates.
+
+## 0092 - The main menu and the router - done 2026-09-28
+
+What changed: one place decides which screen is up. `App` is an autoload with
+eight states, a back stack and a `state_changed` signal; the title, the run,
+the tech tree, the records screen and the new options frame all ask it and
+listen to it, and none of them knows the others exist.
+
+Files: `src/app/app.gd` (new), `src/ui/options_screen.gd` (new),
+`src/ui/title_screen.gd`, `src/ui/main.gd`, `src/ui/stats_screen.gd`,
+`src/ui/tech_panel.gd`, `scenes/Title.tscn`, `scenes/Main.tscn`,
+`project.godot`, `src/tools/headless_check.gd`, `src/tools/input_check.gd`.
+
+Verify: 5691 headless / 802 input / both hashes unchanged.
+
+### Two sorts of state, and the bug that taught me the difference
+
+`TITLE`, `MENU` and `RUN` are whole scenes; `TECH`, `STATS`, `OPTIONS` and
+`SUMMARY` sit over whichever one is up. Going to a scene **clears the stack**,
+because there is no going back from a run into a title screen that no longer
+exists. Going to an overlay **pushes**, which is the whole of "Options returns
+to whoever opened it".
+
+**The title's ident and its menu are two states of one scene**, and the first
+version did not know that: the router reloaded `Title.tscn` the moment a key
+moved from one to the other, so the screen came back and the key looked like
+it had done nothing. `reset()` records the scene the state it is given lives
+in, and `goto` only changes scene when the path actually differs.
+
+That was found by `input_check` failing with `any key at all opens the menu 1`
+- the state it was still in.
+
+### Testing a router with no tree
+
+Every decision in `app.gd` is arithmetic on an integer and an array, so
+`headless_check` drives the whole machine without building a game: opens
+Options from the menu and from a run and checks it comes back to each, stacks
+the records screen over the options screen over a run and unwinds it one step
+at a time, starts a run from inside Options and checks the stack is *gone*,
+and pushes past the cap to check it refuses.
+
+The one thing that needs a tree - actually changing the scene - is guarded and
+counted, so a check can watch the router decide and read `last_scene()` back
+while a player gets the scene.
+
+Then `input_check` does the same two journeys through the real screens, which
+is where "Options from the title and from the pause menu both return
+correctly" is really answered - the pause menu is task 0096, so the run
+stands in for it, and it is the same property either way. Making `back()`
+always go to the title instead of popping fails five asserts.
+
+### One door, whichever way you came
+
+The records screen was reachable only by pressing R inside a run, because
+task 0069 built it when there was no menu to put it on. Both the key and the
+new menu entry now go through `App.goto(App.STATS)`, and `Main` is what opens
+and closes the panel - so there is one way in and one way out, and a player
+who opened it from the title leaves it by the same door as a player who
+pressed R mid-night. The same for the tech tree and T.
+
+### `/root/` is not banned; reaching across screens is
+
+The requirement says no `get_node("/root/...")` between screens, and there is
+now a check that walks every file in `src/ui/` and fails on one - with three
+exceptions named in the check itself: `App`, `Settings` and `Audio`. Those are
+**autoloads**, and they have to be reached by path, because `verify.py` parses
+every script on its own with no autoloads registered and naming one is a parse
+error for a file that is perfectly correct at runtime. An autoload is a
+service; a screen is not.
+
+### The options screen is a seam, and it is nearly empty on purpose
+
+Task 0091 hid Options because nothing could open it. This is what opens it,
+so it is back on the menu - and the frame it opens is a heading, a tab strip
+and a Back that works. `register()` is where tasks 0093 (video), 0094 (audio)
+and 0095 (controls) each put their screen, and the strip shows the tabs that
+exist and no more: **absent, not greyed**, the same rule one level down.
+
+With none registered it says "nothing to set yet" rather than showing three
+tabs that open nothing. That is thin, and it is the honest amount of options
+screen that belongs to a task about routing.
+
+### What SUMMARY does not do yet
+
+It is in the enum because the task lists it, and nothing drives it. The result
+screen still decides for itself from the phase, which is machinery that works
+and that three input cases depend on; rewiring it to the router would be churn
+with no behaviour behind it. Said out loud rather than quietly counted - the
+state is there for task 0096's pause menu and whatever comes after to use.
+
+### Hashes
+
+Both unchanged - `215410677` and `2601044827`. A router is not a rule.
+
+`python tools/verify.py` prints PASS: 5691 asserts, 802 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

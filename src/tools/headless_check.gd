@@ -32,9 +32,11 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 84
+const GROUPS := 85
 
 const SettingsScript := preload("res://src/app/settings.gd")
+const AppScript := preload("res://src/app/app.gd")
+const OptionsScript := preload("res://src/ui/options_screen.gd")
 const AudioScript := preload("res://src/app/audio.gd")
 const SfxScript := preload("res://src/ui/sfx.gd")
 const MusicScript := preload("res://src/ui/music.gd")
@@ -154,6 +156,7 @@ func _run() -> void:
 	_task_0089_tooltips()
 	_task_0090_log()
 	_task_0091_title()
+	_task_0092_router()
 
 
 func _finish() -> void:
@@ -13531,13 +13534,13 @@ func _task_0091_title() -> void:
 		expect(TitleScreen.is_shown(always, true),
 			"save or no save" % [])
 
-	# **Options is hidden for the same reason and not a different one.**
-	# Nothing opens it until task 0092's router, so it is absent rather than
-	# inert - and this assert is what will fail the day somebody adds the
-	# screen and forgets to put the entry back.
-	expect(not TitleScreen.is_shown(&"options", true),
-		"Options is absent while nothing can open it - task 0092 puts it "
-		+ "back")
+	# **Options came back at task 0092**, which built the router and the
+	# frame it opens. This assert was the other way round for one task and
+	# is the reason the entry was not quietly forgotten.
+	expect(TitleScreen.is_shown(&"options", true),
+		"Options is there now that there is somewhere for it to go")
+	expect(TitleScreen.is_shown(&"options", false),
+		"whether or not there is a save, which is a different question")
 	var listed: Array = []
 	for entry in TitleScreen.ENTRIES:
 		listed.append(String((entry as Array)[0]))
@@ -13557,5 +13560,139 @@ func _task_0091_title() -> void:
 	print("  boots into Title.tscn, logo %dx%d, %d menu entries"
 		% [logo.get_width() if logo else 0,
 			logo.get_height() if logo else 0, listed.size()])
+
+	_completed += 1     # last line: an abandoned group never gets here
+## 0092 - the router.
+func _task_0092_router() -> void:
+	# **Every state the task names exists.** Read off the router rather than
+	# typed here, so a tenth state is in the list or it is not.
+	for wanted in ["BOOT", "TITLE", "MENU", "RUN", "TECH", "STATS",
+			"OPTIONS", "SUMMARY"]:
+		var found := false
+		for state in AppScript.STATES:
+			if String(AppScript.NAMES[state]) == wanted:
+				found = true
+		expect(found, "the router has a %s state" % wanted)
+	expect(AppScript.STATES.size() == 8,
+		"and eight of them, which is the list the task gives",
+		str(AppScript.STATES.size()))
+
+	# **The whole machine, with no tree.** Changing a scene is the one thing
+	# that needs one, and that is guarded and counted, so a check can watch
+	# the router decide and read what it decided.
+	var router: Node = AppScript.new()
+	router.reset(router.TITLE)
+	expect(router.here() == router.TITLE, "it starts where it was told to")
+	expect(router.depth() == 0, "with nothing behind it")
+	expect(router.scene_changes() == 0,
+		"and without reloading the scene it is already on",
+		str(router.scene_changes()))
+
+	# The ident and the menu share a scene, so moving between them is not a
+	# change of scene. This is what the first version got wrong: the title
+	# reloaded itself the moment a key was pressed.
+	expect(router.goto(router.MENU), "a key moves to the menu")
+	expect(router.here() == router.MENU, "and it is there")
+	expect(router.scene_changes() == 0,
+		"without reloading the title, which they share",
+		str(router.scene_changes()))
+
+	# **Options returns to whoever opened it.** The done-when, twice, from
+	# two different places.
+	expect(router.goto(router.OPTIONS), "options opens from the menu")
+	expect(router.depth() == 1, "with one thing behind it",
+		str(router.depth()))
+	expect(router.back(), "and backs out")
+	expect(router.here() == router.MENU,
+		"to the menu that opened it", router.name_of(router.here()))
+
+	router.reset(router.RUN)
+	expect(router.goto(router.OPTIONS), "options opens from a run too")
+	expect(router.back() and router.here() == router.RUN,
+		"and backs out to the run that opened it",
+		router.name_of(router.here()))
+
+	# Stacked: the records screen over the options screen over a run comes
+	# back one at a time and in order.
+	router.reset(router.RUN)
+	router.goto(router.OPTIONS)
+	router.goto(router.STATS)
+	expect(router.depth() == 2, "two deep", str(router.depth()))
+	router.back()
+	expect(router.here() == router.OPTIONS,
+		"back is one step, not all of them", router.name_of(router.here()))
+	router.back()
+	expect(router.here() == router.RUN, "and then the run")
+	expect(not router.back(), "and there is no back from the bottom")
+
+	# **A change of scene forgets the way back**, because the screen that
+	# opened the overlay no longer exists.
+	router.reset(router.MENU)
+	router.goto(router.OPTIONS)
+	expect(router.goto(router.RUN), "a run starts from the options screen")
+	expect(router.depth() == 0,
+		"and there is nothing to go back to - that title screen is gone",
+		str(router.depth()))
+	expect(router.scene_changes() == 1,
+		"which did change the scene, once",
+		str(router.scene_changes()))
+	expect(router.last_scene() == "res://scenes/Main.tscn",
+		"to the run", router.last_scene())
+
+	# It refuses to grow without limit, and says so rather than going quiet.
+	router.reset(router.RUN)
+	for i in AppScript.MAX_DEPTH + 4:
+		router.goto(router.OPTIONS if i % 2 == 0 else router.STATS)
+	expect(router.depth() <= AppScript.MAX_DEPTH,
+		"the stack cannot grow past its cap",
+		"%d of %d" % [router.depth(), AppScript.MAX_DEPTH])
+
+	# Asking for where it already is does nothing at all, so a screen may say
+	# what it wants every frame.
+	router.reset(router.RUN)
+	expect(not router.goto(router.RUN), "going where it already is is a no-op")
+	expect(router.depth() == 0, "and pushes nothing")
+	router.free()
+
+	# **The options frame is a seam, and the tabs that exist are the tabs it
+	# shows.** Same rule as the title menu's, one level down; tasks 0093 to
+	# 0095 are what register them.
+	expect(OptionsScript.TABS.size() == 3,
+		"there is room for video, audio and controls",
+		str(OptionsScript.TABS))
+	for wanted in [&"video", &"audio", &"controls"]:
+		expect(OptionsScript.TABS.has(wanted),
+			"'%s' has a place on the strip" % wanted)
+
+	# **No screen reaches across to another.** The autoloads are still
+	# reached by path - they have to be, because `verify.py` parses each
+	# script alone - but a screen naming another screen's node is what this
+	# task exists to remove.
+	var allowed := ["/root/App", "/root/Settings", "/root/Audio"]
+	var reaching: Array = []
+	var folder := DirAccess.open("res://src/ui/")
+	if folder != null:
+		for file_name in folder.get_files():
+			if not file_name.ends_with(".gd"):
+				continue
+			var text := FileAccess.get_file_as_string(
+				"res://src/ui/" + file_name)
+			for line in text.split("\n"):
+				var trimmed := line.strip_edges()
+				if trimmed.begins_with("#") or not trimmed.contains("/root/"):
+					continue
+				var fine := false
+				for one in allowed:
+					if trimmed.contains(one):
+						fine = true
+				if not fine:
+					reaching.append("%s: %s" % [file_name, trimmed])
+	expect(reaching.is_empty(),
+		"no screen reaches across the tree to another screen",
+		"%d: %s" % [reaching.size(), str(reaching.slice(0, 3))])
+
+	print("  %d states, stack capped at %d, %d option tabs to come"
+		% [AppScript.STATES.size(), AppScript.MAX_DEPTH,
+			OptionsScript.TABS.size()])
 
 	_completed += 1     # last line: an abandoned group never gets here
