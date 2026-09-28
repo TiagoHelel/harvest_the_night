@@ -48,7 +48,7 @@ func _ready() -> void:
 
 	var title := Label.new()
 	title.name = "Title"
-	title.text = "MARKET"
+	title.text = I18n.t(&"SHOP_TITLE")
 	column.add_child(title)
 
 	_money = Label.new()
@@ -83,7 +83,7 @@ func _ready() -> void:
 
 	var hint := Label.new()
 	hint.name = "Hint"
-	hint.text = "esc to leave"
+	hint.text = I18n.t(&"SHOP_HINT")
 	hint.theme_type_variation = UiKit.DIM
 	column.add_child(hint)
 
@@ -137,29 +137,30 @@ func _build() -> void:
 	_built_for = Resources.amount(_state, GameData.MONEY) \
 		+ Shop.value_of_stock(_state) * 1000 \
 		+ _shelf_signature() * 100000
-	_money.text = "$ %d" % Resources.amount(_state, GameData.MONEY)
+	_money.text = I18n.f(&"SHOP_MONEY",
+		[Resources.amount(_state, GameData.MONEY)])
 
 	for child in _rows.get_children():
 		child.queue_free()
 
 	if Shop.tab(_state) == Shop.SELL:
-		_heading("SELL")
+		_heading(&"SHOP_SELL")
 		for id in Shop.sellable():
 			_sell_row(id)
 		return
 
-	_heading("BUY")
+	_heading(&"SHOP_BUY")
 	for id in Shop.buyable():
 		_buy_row(id)
 
-	_heading("SEEDS")
+	_heading(&"SHOP_SEEDS")
 	for id in Farming.seeds():
 		_seed_row(id)
 
 
-func _heading(text: String) -> void:
+func _heading(key: StringName) -> void:
 	var label := Label.new()
-	label.text = text
+	label.text = I18n.t(key)
 	label.theme_type_variation = UiKit.WARM
 	_rows.add_child(label)
 
@@ -177,14 +178,14 @@ func _seed_row(id: StringName) -> void:
 
 	var label := Label.new()
 	label.name = "seed_label_%s" % id
-	label.text = "%s  $%d  %ds  $%d a day" % [id,
+	label.text = I18n.f(&"SHOP_SEED_ROW", [Names.of(id),
 		int((GameData.CROPS[id] as Dictionary)["seed_cost"]),
-		Farming.seconds_to_grow(id), Farming.value_per_day(id)]
+		Farming.seconds_to_grow(id), Farming.value_per_day(id)])
 	label.custom_minimum_size = Vector2(168, 0)
 	label.theme_type_variation = UiKit.WARM if chosen else UiKit.DIM
 	row.add_child(label)
 
-	row.add_child(_button("sow_%s" % id, "sow", not chosen,
+	row.add_child(_button("sow_%s" % id, I18n.t(&"SHOP_SOW"), not chosen,
 		func() -> void: Farming.select_seed(_state, id)))
 
 
@@ -197,16 +198,17 @@ func _sell_row(id: StringName) -> void:
 	_rows.add_child(row)
 
 	var label := Label.new()
-	label.text = "%s  x%d  @ $%d" % [id, held, Shop.sell_price(id)]
+	label.text = I18n.f(&"SHOP_SELL_ROW",
+		[Names.of(id), held, Shop.sell_price(id)])
 	label.custom_minimum_size = Vector2(168, 0)
 	# **Shown, not hidden**, when there is none: the list is also how a player
 	# learns what this farm produces and what it is worth.
 	label.theme_type_variation = &"" if held > 0 else UiKit.FAINT
 	row.add_child(label)
 
-	row.add_child(_button("sell_one_%s" % id, "1", held > 0,
+	row.add_child(_button("sell_one_%s" % id, I18n.t(&"SHOP_ONE"), held > 0,
 		func() -> void: Shop.sell(_state, id, 1)))
-	row.add_child(_button("sell_all_%s" % id, "all", held > 0,
+	row.add_child(_button("sell_all_%s" % id, I18n.t(&"SHOP_ALL"), held > 0,
 		func() -> void: Shop.sell_all(_state, id)))
 
 
@@ -224,16 +226,16 @@ func _buy_row(id: StringName) -> void:
 	label.name = "buy_label_%s" % id
 	# **What is left is on the label.** A price with no stock beside it is a
 	# button that refuses for a reason the player cannot see.
-	label.text = "%s  @ $%d   %d left" % [id, price, left]
+	label.text = I18n.f(&"SHOP_BUY_ROW", [Names.of(id), price, left])
 	label.custom_minimum_size = Vector2(168, 0)
 	label.theme_type_variation = &"" if afford and left > 0 \
 		else UiKit.FAINT
 	row.add_child(label)
 
-	row.add_child(_button("buy_one_%s" % id, "1",
+	row.add_child(_button("buy_one_%s" % id, I18n.t(&"SHOP_ONE"),
 		Shop.can_buy(_state, id, 1),
 		func() -> void: Shop.buy(_state, id, 1)))
-	row.add_child(_button("buy_five_%s" % id, "5",
+	row.add_child(_button("buy_five_%s" % id, I18n.t(&"SHOP_FIVE"),
 		Shop.can_buy(_state, id, 5),
 		func() -> void: Shop.buy(_state, id, 5)))
 

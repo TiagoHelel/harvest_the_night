@@ -35,51 +35,51 @@ const KEY := &"controls/bindings"
 ## Every rebindable action: its name, what to call it, and the group it is
 ## shown under. **In screen order.**
 const ACTIONS: Array = [
-	[&"move_up", "MOVE UP", "MOVING"],
-	[&"move_down", "MOVE DOWN", "MOVING"],
-	[&"move_left", "MOVE LEFT", "MOVING"],
-	[&"move_right", "MOVE RIGHT", "MOVING"],
+	[&"move_up", &"ACT_MOVE_UP", &"ACT_GROUP_MOVING"],
+	[&"move_down", &"ACT_MOVE_DOWN", &"ACT_GROUP_MOVING"],
+	[&"move_left", &"ACT_MOVE_LEFT", &"ACT_GROUP_MOVING"],
+	[&"move_right", &"ACT_MOVE_RIGHT", &"ACT_GROUP_MOVING"],
 
-	[&"interact", "INTERACT", "FARM"],
-	[&"inventory", "INVENTORY", "FARM"],
-	[&"slot_1", "SEED 1", "FARM"],
-	[&"slot_2", "SEED 2", "FARM"],
-	[&"slot_3", "SEED 3", "FARM"],
-	[&"slot_4", "SEED 4", "FARM"],
-	[&"slot_5", "SEED 5", "FARM"],
-	[&"slot_6", "SEED 6", "FARM"],
+	[&"interact", &"ACT_INTERACT", &"ACT_GROUP_FARM"],
+	[&"inventory", &"ACT_INVENTORY", &"ACT_GROUP_FARM"],
+	[&"slot_1", &"ACT_SLOT_1", &"ACT_GROUP_FARM"],
+	[&"slot_2", &"ACT_SLOT_2", &"ACT_GROUP_FARM"],
+	[&"slot_3", &"ACT_SLOT_3", &"ACT_GROUP_FARM"],
+	[&"slot_4", &"ACT_SLOT_4", &"ACT_GROUP_FARM"],
+	[&"slot_5", &"ACT_SLOT_5", &"ACT_GROUP_FARM"],
+	[&"slot_6", &"ACT_SLOT_6", &"ACT_GROUP_FARM"],
 
-	[&"build", "BUILD MODE", "BUILD"],
-	[&"place", "PLACE", "BUILD"],
-	[&"remove", "SELL", "BUILD"],
-	[&"upgrade", "UPGRADE", "BUILD"],
+	[&"build", &"ACT_BUILD", &"ACT_GROUP_BUILD"],
+	[&"place", &"ACT_PLACE", &"ACT_GROUP_BUILD"],
+	[&"remove", &"ACT_REMOVE", &"ACT_GROUP_BUILD"],
+	[&"upgrade", &"ACT_UPGRADE", &"ACT_GROUP_BUILD"],
 
-	[&"night", "START THE NIGHT", "NIGHT"],
-	[&"ability", "ABILITY", "NIGHT"],
-	[&"speed", "SPEED", "NIGHT"],
-	[&"skip_night", "SKIP THE NIGHT", "NIGHT"],
+	[&"night", &"ACT_NIGHT", &"ACT_GROUP_NIGHT"],
+	[&"ability", &"ACT_ABILITY", &"ACT_GROUP_NIGHT"],
+	[&"speed", &"ACT_SPEED", &"ACT_GROUP_NIGHT"],
+	[&"skip_night", &"ACT_SKIP_NIGHT", &"ACT_GROUP_NIGHT"],
 
-	[&"pause", "PAUSE", "SCREENS"],
-	[&"cancel", "BACK", "SCREENS"],
-	[&"tech", "TECH TREE", "SCREENS"],
-	[&"stats", "RECORDS", "SCREENS"],
-	[&"log", "LOG", "SCREENS"],
+	[&"pause", &"ACT_PAUSE", &"ACT_GROUP_SCREENS"],
+	[&"cancel", &"ACT_CANCEL", &"ACT_GROUP_SCREENS"],
+	[&"tech", &"ACT_TECH", &"ACT_GROUP_SCREENS"],
+	[&"stats", &"ACT_STATS", &"ACT_GROUP_SCREENS"],
+	[&"log", &"ACT_LOG", &"ACT_GROUP_SCREENS"],
 ]
 
 ## What a mouse button is called. Godot's own `as_text()` says "Left Mouse
 ## Button (Left Mouse Button)" in places, which is not a thing to put on a
 ## screen eight pixels tall.
 const MOUSE_NAMES: Dictionary = {
-	MOUSE_BUTTON_LEFT: "LEFT CLICK",
-	MOUSE_BUTTON_RIGHT: "RIGHT CLICK",
-	MOUSE_BUTTON_MIDDLE: "MIDDLE CLICK",
-	MOUSE_BUTTON_WHEEL_UP: "WHEEL UP",
-	MOUSE_BUTTON_WHEEL_DOWN: "WHEEL DOWN",
+	MOUSE_BUTTON_LEFT: &"ACT_MOUSE_LEFT",
+	MOUSE_BUTTON_RIGHT: &"ACT_MOUSE_RIGHT",
+	MOUSE_BUTTON_MIDDLE: &"ACT_MOUSE_MIDDLE",
+	MOUSE_BUTTON_WHEEL_UP: &"ACT_MOUSE_WHEEL_UP",
+	MOUSE_BUTTON_WHEEL_DOWN: &"ACT_MOUSE_WHEEL_DOWN",
 }
 
 ## What a binding with no event at all shows as. It cannot happen through the
 ## screen - a rebind always takes an event - but a hand-edited config can.
-const NOTHING := "-"
+const NOTHING := &"CTL_NOTHING"
 
 ## action -> the events `project.godot` shipped it with.
 var _shipped: Dictionary = {}
@@ -108,15 +108,17 @@ static func names() -> Array:
 static func label_for(action: StringName) -> String:
 	for entry in ACTIONS:
 		if entry[0] == action:
-			return String(entry[1])
+			return I18n.t(entry[1])
 	return String(action).to_upper()
 
 
-static func group_for(action: StringName) -> String:
+## The group's own key, so a screen can put a heading on it in whatever
+## language is up.
+static func group_for(action: StringName) -> StringName:
 	for entry in ACTIONS:
 		if entry[0] == action:
-			return String(entry[2])
-	return ""
+			return entry[2]
+	return &""
 
 
 ## The groups, in screen order, without repeats.
@@ -134,13 +136,16 @@ static func groups() -> Array:
 static func label_of(event: InputEvent) -> String:
 	var button := event as InputEventMouseButton
 	if button != null:
-		return String(MOUSE_NAMES.get(button.button_index,
-			"MOUSE %d" % button.button_index))
+		if MOUSE_NAMES.has(button.button_index):
+			return I18n.t(MOUSE_NAMES[button.button_index])
+		return I18n.f(&"ACT_MOUSE_OTHER", [button.button_index])
 	var key := event as InputEventKey
 	if key != null:
 		var code := key.keycode if key.keycode != 0 else key.physical_keycode
+		# **Not translated.** A key is called whatever is printed on it, and
+		# the keyboard in front of the player says Q whatever the menu says.
 		return OS.get_keycode_string(code).to_upper()
-	return NOTHING
+	return I18n.t(NOTHING)
 
 
 ## How an event is written in the settings file.
@@ -215,7 +220,7 @@ func text_of(action: StringName) -> String:
 	var bits: Array = []
 	for event in events_of(action):
 		bits.append(label_of(event))
-	return " / ".join(bits) if not bits.is_empty() else NOTHING
+	return " / ".join(bits) if not bits.is_empty() else I18n.t(NOTHING)
 
 
 ## Whether this action has been moved off what the game shipped with.
@@ -244,16 +249,18 @@ func clash_of(action: StringName, event: InputEvent) -> StringName:
 ## the screen prints, and it names the clash rather than saying no.
 func bind(action: StringName, event: InputEvent) -> Dictionary:
 	if not InputMap.has_action(String(action)):
-		return {"ok": false, "clash": &"", "why": "NO SUCH ACTION"}
+		return {"ok": false, "clash": &"", "why": I18n.t(&"CTL_NO_ACTION")}
 	if event == null or not is_bindable(event):
-		return {"ok": false, "clash": &"", "why": "THAT KEY CANNOT BE BOUND"}
+		return {"ok": false, "clash": &"",
+			"why": I18n.t(&"CTL_UNBINDABLE")}
 	var clash := clash_of(action, event)
 	if clash != &"":
 		return {"ok": false, "clash": clash,
-			"why": "ALREADY %s" % label_for(clash)}
+			"why": I18n.f(&"CTL_CLASH", [label_for(clash)])}
 	var settings := _settings()
 	if settings == null:
-		return {"ok": false, "clash": &"", "why": "NO SETTINGS"}
+		return {"ok": false, "clash": &"",
+			"why": I18n.t(&"CTL_NO_SETTINGS")}
 	var saved := _saved().duplicate()
 	saved[String(action)] = as_text(event)
 	settings.set_value(KEY, saved)
@@ -327,7 +334,7 @@ func shipped_text(action: StringName) -> String:
 	var bits: Array = []
 	for event in _shipped.get(String(action), []):
 		bits.append(label_of(event))
-	return " / ".join(bits) if not bits.is_empty() else NOTHING
+	return " / ".join(bits) if not bits.is_empty() else I18n.t(NOTHING)
 
 
 # ----------------------------------------------------------------- privately

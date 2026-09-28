@@ -856,16 +856,16 @@ const DAILY_STOCK: Dictionary = {        # LEVER: units a day, 2-40
 ## `src/ui/` draws it over the cell it is about. Nothing here locks anything:
 ## a player who ignores all five reaches exactly the same night.
 ##
-## Task 0097 translates these; until then they are English like everything
-## else, and they are the only player-facing prose in `game_data.gd`.
+## **Task 0097 took the words out.** What is left is the key of the line,
+## and `assets/locale/strings.csv` holds what it says - so a rule file names
+## a step and never speaks to a player, and the Portuguese arrives without
+## anything in `src/core/` changing.
 const TUTORIAL: Array = [
-	{"id": &"chop", "line": "Wood is in the trees. Stand at one and hold SPACE."},
-	{"id": &"plant", "line": "Soil takes a seed. SPACE turns it, SPACE sows it."},
-	{"id": &"craft", "line": "The workshop turns what you gathered into walls."},
-	{"id": &"build", "line": "B shows what can go on the farm. Put it between "
-		+ "the house and the dark."},
-	{"id": &"night", "line": "The night comes when you send for it, and not "
-		+ "before. N, or the button."},
+	{"id": &"chop", "line": &"TUT_CHOP"},
+	{"id": &"plant", "line": &"TUT_PLANT"},
+	{"id": &"craft", "line": &"TUT_CRAFT"},
+	{"id": &"build", "line": &"TUT_BUILD"},
+	{"id": &"night", "line": &"TUT_NIGHT"},
 ]
 
 
@@ -2278,7 +2278,10 @@ static func check_tutorial(steps: Array) -> Array:
 		if seen.has(id):
 			errors.append("tutorial step '%s' appears twice" % id)
 		seen[id] = true
-		var line: String = step["line"]
+		# The key, not the words: how long the words are is
+		# `tools/i18n_check.py`'s question now, in every language rather than
+		# in one, and it measures them in the font rather than counting them.
+		var line: String = String(step["line"])
 		if line.strip_edges().is_empty():
 			errors.append("tutorial step '%s' says nothing" % id)
 		if line.length() > MAX_TUTORIAL_LINE_LENGTH:

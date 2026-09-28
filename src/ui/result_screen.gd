@@ -63,7 +63,7 @@ func _ready() -> void:
 
 	_continue = Button.new()
 	_continue.name = "ContinueButton"
-	_continue.text = "BACK TO THE FARM"
+	_continue.text = I18n.t(&"RES_BACK_TO_FARM")
 	_continue.clip_text = true
 	_continue.custom_minimum_size = Vector2(206, 20)
 	_continue.focus_mode = Control.FOCUS_ALL
@@ -75,7 +75,7 @@ func _ready() -> void:
 	# worth playing, and this is the switch that asks for it.
 	_play_on = Button.new()
 	_play_on.name = "PlayOnButton"
-	_play_on.text = "PLAY ON - THE NIGHTS KEEP COMING"
+	_play_on.text = I18n.t(&"RES_PLAY_ON")
 	_play_on.clip_text = true
 	_play_on.custom_minimum_size = Vector2(206, 20)
 	_play_on.focus_mode = Control.FOCUS_ALL
@@ -155,7 +155,7 @@ func _build(payout: Dictionary) -> void:
 	for child in _lines.get_children():
 		child.queue_free()
 	if payout.is_empty():
-		_title.text = "NIGHT OVER"
+		_title.text = I18n.t(&"RES_NIGHT_OVER")
 		return
 
 	var survived := bool(payout["survived"])
@@ -165,13 +165,13 @@ func _build(payout: Dictionary) -> void:
 	# the same four lines they have read nine times.
 	if _state != null and not _state.is_empty() and Run.is_over(_state):
 		_build_the_ending()
-		_continue.text = "A NEW FARM, A NEW TEN NIGHTS"
+		_continue.text = I18n.t(&"RES_NEW_FARM")
 		_play_on.visible = true
 		return
 	_play_on.visible = false
 
-	_title.text = "NIGHT %d %s" % [int(payout["night"]),
-		"SURVIVED" if survived else "LOST"]
+	_title.text = I18n.f(&"RES_NIGHT", [int(payout["night"]),
+		I18n.t(&"RES_SURVIVED" if survived else &"RES_WAS_LOST")])
 	_title.theme_type_variation = UiKit.GOOD if survived else UiKit.BAD
 
 	# **Four numbers on two rows, not four.** A `Label` reserves its font's
@@ -180,21 +180,22 @@ func _build(payout: Dictionary) -> void:
 	# than the screen, and the button goes off the bottom - which ends the
 	# run, because "back to the farm" is the only way out of this screen.
 	# `input_check` asserts it is on screen.
-	_row("killed %d, %d got through" % [int(payout["killed"]),
-		int(payout["breaches"])], "", UiKit.DIM)
+	_row(I18n.f(&"RES_KILLED", [int(payout["killed"]),
+		int(payout["breaches"])]), "", UiKit.DIM)
 	# **Shorter than it reads.** The font's digits are tabular and six pixels
 	# wide, so "house 100/100, 19 built still up" is a hundred and seventy
 	# pixels in a column a hundred and fifty wide - it overran and collided
 	# with the count beside it. Counting the characters is not the same as
 	# measuring the string.
-	_row("house %d/%d, %d still up"
-		% [int(payout["house_hp"]), GameData.HOUSE_HP,
-			int(payout.get("structures", 0))],
-		"%d untouched" % int(payout.get("intact", 0)), UiKit.DIM)
+	_row(I18n.f(&"RES_HOUSE",
+		[int(payout["house_hp"]), GameData.HOUSE_HP,
+			int(payout.get("structures", 0))]),
+		I18n.f(&"RES_UNTOUCHED", [int(payout.get("intact", 0))]),
+		UiKit.DIM)
 
 	_gap()
 	if survived:
-		_row("PAID", "", UiKit.GOOD)
+		_row(I18n.t(&"RES_PAID"), "", UiKit.GOOD)
 		# Materials on one line and money on the next, for the same reason.
 		var goods: Array = []
 		var purse: Array = []
@@ -203,11 +204,11 @@ func _build(payout: Dictionary) -> void:
 			if id == GameData.MONEY or id == GameData.TECH:
 				purse.append("+%d %s" % [n, id])
 			else:
-				goods.append("+%d %s" % [n, id])
+				goods.append(I18n.f(&"RES_GAINED", [n, Names.of(id)]))
 		if not goods.is_empty():
-			_row("  " + "  ".join(goods), "", UiKit.GOOD)
+			_row(I18n.f(&"RES_INDENT", ["  ".join(goods)]), "", UiKit.GOOD)
 		if not purse.is_empty():
-			_row("  " + "  ".join(purse), "", UiKit.GOOD)
+			_row(I18n.f(&"RES_INDENT", ["  ".join(purse)]), "", UiKit.GOOD)
 
 		# **What the defending was worth**, which is the half of `design.md`
 		# section 12 that changes how the next night gets built: "+ $112"
@@ -216,19 +217,21 @@ func _build(payout: Dictionary) -> void:
 		var from: Dictionary = payout.get("money_from", {})
 		var well := int(from.get("nothing touched", 0)) 			+ int(from.get("still standing", 0)) 			+ int(from.get("the house untouched", 0))
 		if well > 0:
-			_row("  for defending well", "+%d" % well, UiKit.GOOD)
+			_row(I18n.t(&"RES_DEFENDING_WELL"),
+				I18n.f(&"RES_PLUS", [well]), UiKit.GOOD)
 	else:
-		_row("LOST", "", UiKit.BAD)
+		_row(I18n.t(&"RES_LOST"), "", UiKit.BAD)
 		var lost: Dictionary = payout["lost"]
 		if lost.is_empty():
-			_row("  nothing - there was nothing to take", "", UiKit.DIM)
+			_row(I18n.t(&"RES_NOTHING_TO_TAKE"), "", UiKit.DIM)
 		else:
 			var taken: Array = []
 			for id in _sorted(lost):
-				taken.append("-%d %s" % [int(lost[id]), id])
-			_row("  " + "  ".join(taken), "", UiKit.BAD)
+				taken.append(I18n.f(&"RES_TAKEN",
+					[int(lost[id]), Names.of(id)]))
+			_row(I18n.f(&"RES_INDENT", ["  ".join(taken)]), "", UiKit.BAD)
 		_gap()
-		_row("money and the farm are untouched", "", UiKit.DIM)
+		_row(I18n.t(&"RES_UNTOUCHED_ALL"), "", UiKit.DIM)
 
 ## The run summary: what the whole thing was.
 ##
@@ -236,30 +239,38 @@ func _build(payout: Dictionary) -> void:
 ## the state. There is no second ledger here to disagree with the first.
 func _build_the_ending() -> void:
 	var run := Run.summary(_state)
-	_title.text = "THE FARM HELD"
+	_title.text = I18n.t(&"RES_FARM_HELD")
 	_title.theme_type_variation = UiKit.GOOD
 
-	_row("%d days, %d nights, the Giant down"
-		% [int(run["days"]), int(run["nights_won"])], "", UiKit.GOOD)
-	_row("zombies killed", str(int(run["killed"])), UiKit.DIM)
-	_row("got through", str(int(run["breaches"])), UiKit.DIM)
-	_row("structures lost", str(int(run["structures_lost"])), UiKit.DIM)
+	_row(I18n.f(&"RES_RUN_LINE",
+		[int(run["days"]), int(run["nights_won"])]), "",
+		UiKit.GOOD)
+	_row(I18n.t(&"RES_ZOMBIES"), str(int(run["killed"])), UiKit.DIM)
+	_row(I18n.t(&"RES_GOT_THROUGH"), str(int(run["breaches"])),
+		UiKit.DIM)
+	_row(I18n.t(&"RES_STRUCTURES_LOST"),
+		str(int(run["structures_lost"])), UiKit.DIM)
 
 	var hauled: Array = []
 	for id in _sorted(run["gathered"] as Dictionary):
-		hauled.append("%d %s" % [int((run["gathered"] as Dictionary)[id]), id])
+		hauled.append(I18n.f(&"RES_COUNTED",
+			[int((run["gathered"] as Dictionary)[id]), Names.of(id)]))
 	if not hauled.is_empty():
-		_row("  gathered " + "  ".join(hauled.slice(0, 4)), "", UiKit.DIM)
+		_row(I18n.f(&"RES_GATHERED", ["  ".join(hauled.slice(0, 4))]),
+			"", UiKit.DIM)
 
 	_gap()
-	_row("THE BUILD THAT WON", "", UiKit.GOOD)
+	_row(I18n.t(&"RES_BUILD_WON"), "", UiKit.GOOD)
 	var built: Array = []
 	for id in _sorted(run["build"] as Dictionary):
-		built.append("%d %s" % [int((run["build"] as Dictionary)[id]), id])
-	_row("  " + ("  ".join(built) if not built.is_empty()
-		else "nothing left standing"), "", UiKit.GOOD)
+		built.append(I18n.f(&"RES_COUNTED",
+			[int((run["build"] as Dictionary)[id]), Names.of(id)]))
+	_row(I18n.f(&"RES_INDENT", ["  ".join(built) if not built.is_empty()
+		else I18n.t(&"RES_NOTHING_STANDING")]), "",
+		UiKit.GOOD)
 	if not (run["technology"] as Array).is_empty():
-		_row("  " + ", ".join(run["technology"] as Array), "", UiKit.DIM)
+		_row(I18n.f(&"RES_INDENT", [", ".join(_named(
+			run["technology"] as Array))]), "", UiKit.DIM)
 
 
 func _row(left: String, right: String, role: StringName = &"") -> void:
@@ -278,6 +289,14 @@ func _row(left: String, right: String, role: StringName = &"") -> void:
 	b.text = right
 	b.theme_type_variation = role
 	row.add_child(b)
+
+
+## A list of ids as a list of names.
+func _named(ids: Array) -> Array:
+	var out: Array = []
+	for id in ids:
+		out.append(Names.of(StringName(id)))
+	return out
 
 
 func _gap() -> void:

@@ -100,7 +100,7 @@ func _process(_delta: float) -> void:
 		return
 
 	_showing = StringName(step["id"])
-	_line.text = str(step["line"])
+	_line.text = I18n.t(StringName(step["line"]))
 	visible = true
 	_place(Tutorial.points_at(_state))
 

@@ -1,0 +1,322 @@
+key,width,en,pt_BR
+ACT_ABILITY,112,ABILITY,HABILIDADE
+ACT_BUILD,112,BUILD MODE,MODO OBRA
+ACT_CANCEL,112,BACK,VOLTAR
+ACT_GROUP_BUILD,112,BUILD,CONSTRUIR
+ACT_GROUP_FARM,112,FARM,FAZENDA
+ACT_GROUP_MOVING,112,MOVING,ANDAR
+ACT_GROUP_NIGHT,112,NIGHT,NOITE
+ACT_GROUP_SCREENS,112,SCREENS,TELAS
+ACT_INTERACT,112,INTERACT,USAR
+ACT_INVENTORY,112,INVENTORY,MOCHILA
+ACT_LOG,112,LOG,DIÁRIO
+ACT_MOUSE_LEFT,104,LEFT CLICK,BOTÃO ESQUERDO
+ACT_MOUSE_MIDDLE,104,MIDDLE CLICK,BOTÃO DO MEIO
+ACT_MOUSE_OTHER,104,MOUSE %d,MOUSE %d
+ACT_MOUSE_RIGHT,104,RIGHT CLICK,BOTÃO DIREITO
+ACT_MOUSE_WHEEL_DOWN,104,WHEEL DOWN,RODA PRA BAIXO
+ACT_MOUSE_WHEEL_UP,104,WHEEL UP,RODA PRA CIMA
+ACT_MOVE_DOWN,112,MOVE DOWN,PARA BAIXO
+ACT_MOVE_LEFT,112,MOVE LEFT,PARA A ESQUERDA
+ACT_MOVE_RIGHT,112,MOVE RIGHT,PARA A DIREITA
+ACT_MOVE_UP,112,MOVE UP,PARA CIMA
+ACT_NIGHT,112,START THE NIGHT,COMEÇAR A NOITE
+ACT_PAUSE,112,PAUSE,PAUSA
+ACT_PLACE,112,PLACE,COLOCAR
+ACT_REMOVE,112,SELL,VENDER
+ACT_SKIP_NIGHT,112,SKIP THE NIGHT,PULAR A NOITE
+ACT_SLOT_1,112,SEED 1,SEMENTE 1
+ACT_SLOT_2,112,SEED 2,SEMENTE 2
+ACT_SLOT_3,112,SEED 3,SEMENTE 3
+ACT_SLOT_4,112,SEED 4,SEMENTE 4
+ACT_SLOT_5,112,SEED 5,SEMENTE 5
+ACT_SLOT_6,112,SEED 6,SEMENTE 6
+ACT_SPEED,112,SPEED,VELOCIDADE
+ACT_STATS,112,RECORDS,REGISTROS
+ACT_TECH,112,TECH TREE,TECNOLOGIA
+ACT_UPGRADE,112,UPGRADE,MELHORAR
+AUD_AMBIENCE,76,AMBIENCE,AMBIENTE
+AUD_MASTER,76,MASTER,GERAL
+AUD_MUSIC,76,MUSIC,MÚSICA
+AUD_MUTE,76,MUTE,MUDO
+AUD_NOTE_MUTED,0,muted - the levels below are kept,mudo - os níveis abaixo ficam guardados
+AUD_NOTE_TRY,0,let go of a slider to hear it,solte um controle para ouvir
+AUD_SFX,76,EFFECTS,EFEITOS
+BLD_GENERATOR,0,generator,gerador
+BLD_KITCHEN,0,kitchen,cozinha
+BLD_PRESS,0,press,prensa
+BLD_WORKSHOP,0,workshop,oficina
+BUILD_BANKED,0,(%d ready),(%d prontos)
+BUILD_TITLE,0,BUILD,OBRAS
+CTL_ASKING,232,PRESS A KEY - BACK TO CANCEL,APERTE UMA TECLA - VOLTAR CANCELA
+CTL_CLASH,232,ALREADY %s,JÁ É %s
+CTL_NOTHING,104,-,-
+CTL_NO_ACTION,232,NO SUCH ACTION,ESSA AÇÃO NÃO EXISTE
+CTL_NO_SETTINGS,232,NOTHING TO SAVE IT IN,NADA ONDE GUARDAR ISSO
+CTL_RESET_ALL,72,RESET ALL,TUDO PADRÃO
+CTL_RESET_ONE,12,X,X
+CTL_UNBINDABLE,232,THAT KEY CANNOT BE BOUND,ESSA TECLA NÃO PODE SER USADA
+CTL_WAITING,104,PRESS A KEY,APERTE UMA TECLA
+DEF_AUTO_CROSSBOW,0,auto crossbow,besta automática
+DEF_BARRICADE,0,barricade,barricada
+DEF_FENCE,0,fence,cerca
+DEF_FLAME_TOWER,0,flame tower,torre de fogo
+DEF_GUN_TOWER,0,gun tower,torre de tiro
+DEF_MINE,0,mine,mina
+DEF_MORTAR,0,mortar,morteiro
+DEF_WALL,0,wall,muro
+DESC_AFTER,0,after %s,depois de %s
+DESC_AMMO,0,loaded into towers,carregada nas torres
+DESC_AMOUNT,0,%d %s,%d %s
+DESC_ARMOUR,0,shrugs off %d a hit,ignora %d por golpe
+DESC_AT_THE,0,at the %s,na %s
+DESC_BLOCKS,0,things walk round it if they can,eles desviam disso se der
+DESC_COSTS,0,costs %s,custa %s
+DESC_DAMAGE,0,%d %s damage,%d de dano %s
+DESC_DRAWS,0,draws %d power,consome %d de energia
+DESC_EATS_WALLS,0,chews through walls,come os muros
+DESC_FREE,0,free,de graça
+DESC_FROM,0,from %s,de %s
+DESC_GROWS_IN,0,grows in %s,cresce em %s
+DESC_HITS_FOR,0,hits for %d,bate %d
+DESC_HP,0,%d hit points,%d de vida
+DESC_MAKES,0,makes %s,faz %s
+DESC_NOT_FOR_SALE,0,not for sale,não se vende
+DESC_ONE_SHOT,0,goes off once,explode uma vez só
+DESC_PASSES_WALLS,0,runs straight past walls,passa direto pelos muros
+DESC_RANGE,0,reaches %d tiles,alcança %d ladrilhos
+DESC_RELOAD,0,fires every %s,atira a cada %s
+DESC_SEED_COST,0,seed costs $%d,a semente custa $%d
+DESC_SELLS_FOR,0,sells for $%d,vende por $%d
+DESC_SUPPLIES,0,supplies %d power,fornece %d de energia
+DESC_TAKES,0,takes %s,leva %s
+DESC_TECH_COST,0,costs %d tech,custa %d de tecnologia
+DESC_TILE_EVERY,0,a tile every %s,um ladrilho a cada %s
+DESC_WINDS_UP,0,winds up before it swings,toma impulso antes de bater
+DESC_WORTH,0,worth $%d,vale $%d
+DHUD_AMMO,0,AMMO  %s,MUNIÇÃO  %s
+DHUD_AMMO_NONE,0,AMMO  none needed,MUNIÇÃO  nenhuma precisa
+DHUD_AMMO_ONE,0,%s %d,%s %d
+DHUD_BITE,0,A BITE - PRESS SPACE,FISGOU - APERTE ESPAÇO
+DHUD_DAY,0,DAY %d   %d:%02d%s,DIA %d   %d:%02d%s
+DHUD_DAY_FIRST,0,DAY 1,DIA 1
+DHUD_DUSK,0,  DUSK,  ANOITECER
+DHUD_HELD,0,%s %d,%s %d
+DHUD_MONEY,0,$ %d,$ %d
+DHUD_MONEY_FIRST,0,$ 0,$ 0
+DHUD_NIGHT_WAITING,0,NIGHT %d IS WAITING,A NOITE %d ESPERA
+DHUD_POWER,0,POWER %d/%d,ENERGIA %d/%d
+DHUD_POWER_SHORT,0,POWER %d/%d  everything at %d%%,ENERGIA %d/%d  tudo a %d%%
+DHUD_SEED_HEADING,168,# CROP    $  TIME  /DAY,# PLANTA  $  TEMPO /DIA
+DHUD_SEED_ROW,168,%d %-7s $%-2d %3ds  %2d,%d %-7s $%-2d %3ds  %2d
+DHUD_SKIP,0,[K] SKIP,[K] PULAR
+DHUD_SKIP_NO,0,[K] %s,[K] %s
+DHUD_TO_NIGHT,0,SWITCH TO NIGHT,VIRAR A NOITE
+DHUD_WAITING,0,waiting for a bite,esperando fisgar
+DHUD_WATER,0,WATER %d/%d,ÁGUA %d/%d
+DHUD_WATER_EMPTY,0,WATER  fill at the well,ÁGUA  encha no poço
+DMG_EXPLOSIVE,0,explosive,explosivo
+DMG_FIRE,0,fire,fogo
+DMG_IMPACT,0,impact,impacto
+ENEMY_BREAKER,0,breaker,quebrador
+ENEMY_BREAKER.other,0,breakers,quebradores
+ENEMY_GIANT,0,giant,gigante
+ENEMY_GIANT.other,0,giants,gigantes
+ENEMY_RUNNER,0,runner,corredor
+ENEMY_RUNNER.other,0,runners,corredores
+ENEMY_TANK,0,tank,brutamontes
+ENEMY_TANK.other,0,tanks,brutamontes
+ENEMY_WALKER,0,walker,andarilho
+ENEMY_WALKER.other,0,walkers,andarilhos
+GAME_LANGUAGE,86,LANGUAGE,IDIOMA
+INV_TITLE,0,WHAT YOU HAVE,O QUE VOCÊ TEM
+INV_WORTH,0,all of it sells for  $%d,tudo isso vale  $%d
+ITEM_CARROT,0,carrot,cenoura
+ITEM_CORN,0,corn,milho
+ITEM_ENERGY,0,energy,energia
+ITEM_FISH,0,fish,peixe
+ITEM_FOOD,0,food,comida
+ITEM_GUNPOWDER,0,gunpowder,pólvora
+ITEM_INCENDIARY,0,incendiary,incendiária
+ITEM_IRON,0,iron,ferro
+ITEM_MEAT,0,meat,carne
+ITEM_MONEY,0,money,dinheiro
+ITEM_OIL,0,oil,óleo
+ITEM_STONE,0,stone,pedra
+ITEM_TECH,0,tech,tecnologia
+ITEM_WHEAT,0,wheat,trigo
+ITEM_WOOD,0,wood,madeira
+LOG_BOSS,0,the giant is coming,o gigante está vindo
+LOG_CRAFT_DONE,0,%s finished,%s ficou pronto
+LOG_CROP_READY,0,%s is ready,%s está pronto
+LOG_HOUSE_HIT,0,the house is hit - %d left,a casa foi atingida - %d de vida
+LOG_NIGHT_BEGAN,0,night %d begins,a noite %d começa
+LOG_NIGHT_LOST,0,night %d lost,noite %d perdida
+LOG_NIGHT_WON,0,night %d survived,noite %d vencida
+LOG_STRUCTURE_LOST,0,%s destroyed,%s destruído
+LOG_TITLE,0,WHAT HAPPENED,O QUE ACONTECEU
+LOG_WAVE_BEGAN,0,wave %d of %d: %s,onda %d de %d: %s
+NHUD_BOSS,0,%s  %d/%d,%s  %d/%d
+NHUD_FLARE,46,FLARE,SINAL
+NHUD_FLARE_CHARGE,46,%d%%,%d%%
+NHUD_HOUSE,120,HOUSE %d/%d,CASA %d/%d
+NHUD_INCOMING,0,WAVE %d INCOMING  %ds,ONDA %d CHEGANDO  %ds
+NHUD_LEFT,110,%d LEFT,FALTAM %d
+NHUD_NIGHT,110,NIGHT %d,NOITE %d
+NHUD_REPAIR,46,REPAIR,REPARAR
+NHUD_SPEED,40,%dx,%dx
+NHUD_WAVE,110,WAVE %d/%d,ONDA %d/%d
+OPT_BACK,0,BACK,VOLTAR
+OPT_EMPTY,0,nothing to set yet,nada para ajustar ainda
+OPT_OFF,40,OFF,NÃO
+OPT_ON,40,ON,SIM
+OPT_TAB_AUDIO,72,AUDIO,ÁUDIO
+OPT_TAB_CONTROLS,72,CONTROLS,CONTROLES
+OPT_TAB_GAME,72,GAME,JOGO
+OPT_TAB_VIDEO,72,VIDEO,VÍDEO
+OPT_TITLE,0,OPTIONS,OPÇÕES
+PAUSE_ABANDON,148,ABANDON RUN,ABANDONAR
+PAUSE_ABANDON_SURE,148,"YES, ABANDON IT","SIM, ABANDONAR"
+PAUSE_LOST,0,"DAY %d, %d NIGHTS SURVIVED, %d BUILT - ALL OF IT GOES","DIA %d, %d NOITES VENCIDAS, %d CONSTRUÍDOS - TUDO ISSO SOME"
+PAUSE_LOST_EMPTY,0,"THIS RUN GOES, AND IT DOES NOT COME BACK","ESTA PARTIDA SOME, E NÃO VOLTA"
+PAUSE_OPTIONS,148,OPTIONS,OPÇÕES
+PAUSE_RESUME,148,RESUME,CONTINUAR
+PAUSE_SAVE,148,SAVE AND QUIT,SALVAR E SAIR
+PAUSE_TITLE,148,PAUSED,PAUSADO
+REC_BARRICADE_KIT,0,barricade kit,kit de barricada
+REC_COOK_FISH,0,cook fish,assar peixe
+REC_COOK_MEAL,0,cook meal,cozinhar refeição
+REC_COOK_ROAST,0,cook roast,fazer assado
+REC_FENCE_KIT,0,fence kit,kit de cerca
+REC_MAKE_GUNPOWDER,0,make gunpowder,fazer pólvora
+REC_MAKE_INCENDIARY,0,make incendiary,fazer incendiária
+REC_MINE_KIT,0,mine kit,kit de mina
+REC_PRESS_FISH_OIL,0,press fish oil,prensar óleo de peixe
+REC_PRESS_OIL,0,press oil,prensar óleo
+REC_WALL_KIT,0,wall kit,kit de muro
+RES_BACK_TO_FARM,0,BACK TO THE FARM,VOLTAR PARA A FAZENDA
+RES_BUILD_WON,0,THE BUILD THAT WON,O QUE SEGUROU A NOITE
+RES_COUNTED,0,%d %s,%d %s
+RES_DEFENDING_WELL,0,  for defending well,  por defender bem
+RES_FARM_HELD,0,THE FARM HELD,A FAZENDA AGUENTOU
+RES_GAINED,0,+%d %s,+%d %s
+RES_GATHERED,0,  gathered %s,  colhido %s
+RES_GOT_THROUGH,0,got through,passaram
+RES_HOUSE,0,"house %d/%d, %d still up","casa %d/%d, %d de pé"
+RES_INDENT,0,  %s,  %s
+RES_KILLED,0,"killed %d, %d got through","mortos %d, passaram %d"
+RES_LOST,0,LOST,PERDIDO
+RES_NEW_FARM,0,"A NEW FARM, A NEW TEN NIGHTS","UMA FAZENDA NOVA, DEZ NOITES NOVAS"
+RES_NIGHT,0,NIGHT %d %s,NOITE %d %s
+RES_NIGHT_OVER,0,NIGHT OVER,FIM DA NOITE
+RES_NOTHING_STANDING,0,nothing left standing,nada de pé
+RES_NOTHING_TO_TAKE,0,  nothing - there was nothing to take,  nada - não havia o que levar
+RES_PAID,0,PAID,PAGO
+RES_PLAY_ON,0,PLAY ON - THE NIGHTS KEEP COMING,SEGUIR - AS NOITES NÃO PARAM
+RES_PLUS,0,+%d,+%d
+RES_RUN_LINE,0,"%d days, %d nights, the Giant down","%d dias, %d noites, o Gigante no chão"
+RES_STRUCTURES_LOST,0,structures lost,estruturas perdidas
+RES_SURVIVED,0,SURVIVED,VENCIDA
+RES_TAKEN,0,-%d %s,-%d %s
+RES_UNTOUCHED,0,%d untouched,%d intactos
+RES_UNTOUCHED_ALL,0,money and the farm are untouched,o dinheiro e a fazenda estão intactos
+RES_WAS_LOST,0,LOST,PERDIDA
+RES_ZOMBIES,0,zombies killed,zumbis mortos
+SHOP_ALL,0,all,tudo
+SHOP_BUY,0,BUY,COMPRAR
+SHOP_BUY_ROW,0,%s  @ $%d   %d left,%s  @ $%d   %d restam
+SHOP_FIVE,0,5,5
+SHOP_HINT,0,esc to leave,esc para sair
+SHOP_MONEY,0,$ %d,$ %d
+SHOP_ONE,0,1,1
+SHOP_SEEDS,0,SEEDS,SEMENTES
+SHOP_SEED_ROW,0,%s  $%d  %ds  $%d a day,%s  $%d  %ds  $%d por dia
+SHOP_SELL,0,SELL,VENDER
+SHOP_SELL_ROW,0,%s  x%d  @ $%d,%s  x%d  @ $%d
+SHOP_SOW,0,sow,plantar
+SHOP_TITLE,0,MARKET,MERCADO
+STATION_WORKBENCH,0,workbench,bancada
+STATS_ALL_RUNS,0,ALL RUNS,TODAS
+STATS_BEST_NIGHT,0,best night reached,melhor noite alcançada
+STATS_BUILT,0,structures built,estruturas erguidas
+STATS_BY_KIND,0,"BY KIND, THIS RUN","POR TIPO, ESTA PARTIDA"
+STATS_BY_KIND_ONE,0,%s %d,%s %d
+STATS_GATHERED,0,resources gathered,recursos colhidos
+STATS_HINT,0,R or ESC to close,R ou ESC para fechar
+STATS_KILLED,0,zombies killed,zumbis mortos
+STATS_LOST,0,structures lost,estruturas perdidas
+STATS_NIGHTS,0,nights survived,noites vencidas
+STATS_NONE,0,-,-
+STATS_NOTHING,0,nothing yet,nada ainda
+STATS_RUNS,0,runs started / won,partidas / vencidas
+STATS_RUNS_PAIR,0,%d / %d,%d / %d
+STATS_THIS_RUN,0,THIS RUN,ESTA PARTIDA
+STATS_TITLE,0,RECORDS,REGISTROS
+TECHNOTE_A_FULL_LARDER,0,mending costs two fifths less,consertar custa dois quintos a menos
+TECHNOTE_A_NAME_AT_MARKET,0,everything you sell fetches a quarter more,tudo que você vende rende um quarto a mais
+TECHNOTE_A_SECOND_FLARE,0,the flare comes back in a little over half the time,o sinalizador volta em pouco mais da metade do tempo
+TECHNOTE_A_STANDING_ORDER,0,towers cost a quarter less to build,as torres custam um quarto a menos
+TECHNOTE_FULL_CANS,0,the watering can holds four more,o regador leva quatro a mais
+TECHNOTE_LONG_BARRELS,0,every tower reaches one tile further,toda torre alcança um ladrilho a mais
+TECHNOTE_OILED_WORKS,0,every tower reloads a fifth sooner,toda torre recarrega um quinto mais rápido
+TECHNOTE_SHARP_TOOLS,0,chopping and mining go half again as fast,cortar e minerar rendem metade a mais
+TECHNOTE_SPARE_STAKES,0,three more barricades a night,mais três barricadas por noite
+TECHNOTE_STEADY_HANDS,0,"the workshop, press and kitchen work a third faster","a oficina, a prensa e a cozinha trabalham um terço mais rápido"
+TECHNOTE_STOUT_TIMBERS,0,the house takes forty more before it falls,a casa aguenta quarenta a mais antes de cair
+TECHNOTE_TRUE_SIGHTS,0,every tower hits a fifth harder,toda torre bate um quinto mais forte
+TECH_A_FULL_LARDER,0,a full larder,despensa cheia
+TECH_A_NAME_AT_MARKET,0,a name at market,nome na feira
+TECH_A_SECOND_FLARE,0,a second flare,um segundo sinalizador
+TECH_A_STANDING_ORDER,0,a standing order,encomenda fixa
+TECH_BRANCH_DEFENCE,0,DEFENCE,DEFESA
+TECH_BRANCH_PRODUCTION,0,PRODUCTION,PRODUÇÃO
+TECH_BRANCH_SURVIVAL,0,SURVIVAL,SOBREVIVÊNCIA
+TECH_FULL_CANS,0,full cans,regadores cheios
+TECH_HELD,0,%d points,%d pontos
+TECH_HINT,0,T or ESC to close,T ou ESC para fechar
+TECH_LONG_BARRELS,0,long barrels,canos longos
+TECH_NODE,0,%s   %d,%s   %d
+TECH_NOTE,0,%s - %s,%s - %s
+TECH_OILED_WORKS,0,oiled works,engrenagem azeitada
+TECH_REFUSED,0,%s - %s,%s - %s
+TECH_SHARP_TOOLS,0,sharp tools,ferramentas afiadas
+TECH_SPARE_STAKES,0,spare stakes,estacas de reserva
+TECH_STEADY_HANDS,0,steady hands,mãos firmes
+TECH_STOUT_TIMBERS,0,stout timbers,madeira reforçada
+TECH_SUMMARY,0,"%d of %d nodes, %d points spent - the ten nights pay %d at best and the whole tree costs %d","%d de %d nós, %d pontos gastos - as dez noites rendem %d no máximo e a árvore toda custa %d"
+TECH_TITLE,0,TECHNOLOGY,TECNOLOGIA
+TECH_TRUE_SIGHTS,0,true sights,mira certeira
+TITLE_CONTINUE,140,CONTINUE,CONTINUAR
+TITLE_NEW,140,NEW RUN,NOVA PARTIDA
+TITLE_OPTIONS,140,OPTIONS,OPÇÕES
+TITLE_PRESS_ANY,0,PRESS ANY KEY,APERTE QUALQUER TECLA
+TITLE_QUIT,140,QUIT,SAIR
+TITLE_STATS,140,STATISTICS,ESTATÍSTICAS
+TUT_BUILD,0,B shows what can go on the farm. Put it between the house and the dark.,B mostra o que cabe na fazenda. Ponha entre a casa e o escuro.
+TUT_CHOP,0,Wood is in the trees. Stand at one and hold SPACE.,A madeira está nas árvores. Fique numa e segure ESPAÇO.
+TUT_CRAFT,0,The workshop turns what you gathered into walls.,A oficina vira o que você colheu em muros.
+TUT_NIGHT,0,"The night comes when you send for it, and not before. N, or the button.","A noite vem quando você chamar, e não antes. N, ou o botão."
+TUT_PLANT,0,"Soil takes a seed. SPACE turns it, SPACE sows it.","A terra aceita semente. ESPAÇO revolve, ESPAÇO planta."
+VID_CAP,86,FPS CAP,LIMITE FPS
+VID_CAP_OFF,42,OFF,SEM
+VID_COUNTDOWN,230,KEEP THIS? BACK IN %ds,MANTER ASSIM? VOLTA EM %ds
+VID_CRISP,86,SQUARE PIXELS,PIXEL QUADRADO
+VID_KEEP,56,KEEP,MANTER
+VID_LEGEND,0,"the xN sizes are whole multiples of 480x270 - square pixels, no crawling","os tamanhos xN são múltiplos inteiros de 480x270 - pixel quadrado, sem tremer"
+VID_MODE_BORDERLESS,74,BORDERLESS,SEM BORDA
+VID_MODE_FULLSCREEN,74,FULLSCREEN,TELA CHEIA
+VID_MODE_WINDOWED,74,WINDOWED,JANELA
+VID_SIZE,86,SIZE,TAMANHO
+VID_VSYNC,86,VSYNC,VSYNC
+VID_WARNING,0,off: pixels stop being square and the art crawls when the camera moves,desligado: os pixels deixam de ser quadrados e a arte treme quando a câmera anda
+VID_WINDOW,86,WINDOW,JANELA
+WORK_AWAY,0,while you were away:  %s,enquanto você estava fora:  %s
+WORK_AWAY_ONE,0,%d %s,%d %s
+WORK_IDLE,0,idle,parada
+WORK_MAKE,0,- MAKE,- FAZER
+WORK_MAKING,0,%s  %.1fs,%s  %.1fs
+WORK_QUEUED,0,%d. %s,%d. %s
+WORK_QUEUED_RUNNING,0,%d. %s  (running),%d. %s  (fazendo)
+WORK_ROOM,0,  %d slot free,  %d lugar livre
+WORK_ROOM.other,0,  %d slots free,  %d lugares livres
+WORK_STALLED,0,waiting on materials,faltam materiais

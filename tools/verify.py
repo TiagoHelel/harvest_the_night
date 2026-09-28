@@ -188,6 +188,21 @@ def check_sfx():
                  out.strip().splitlines()[-1].strip() if out.strip() else "")
 
 
+def check_strings():
+    """Every word the player reads, against the code and against the font.
+
+    Four questions no amount of reading answers: a key the code asks for and
+    the table has not got, a row nothing uses, a language with a cell missing,
+    and - the one that matters most here - a Portuguese line wider than the
+    control that draws it. `tools/i18n_check.py` measures that in the game's
+    own glyph widths."""
+    if not os.path.exists(rel("tools/i18n_check.py")):
+        return skip("strings", "no translation table yet - task 0097")
+    code, out = run([sys.executable, "tools/i18n_check.py"])
+    return check("strings", code == 0,
+                 out.strip().splitlines()[-1].strip() if out.strip() else "")
+
+
 def check_music():
     """The two pieces still match the recipes they came from.
 
@@ -459,6 +474,7 @@ def main():
     check_font()
     check_logo()
     check_sfx()
+    check_strings()
     check_music()
     check_ambience()
 

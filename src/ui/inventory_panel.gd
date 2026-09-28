@@ -60,7 +60,7 @@ func _ready() -> void:
 	column.name = "InventoryColumn"
 	frame.add_child(column)
 
-	var title := _line("InventoryTitle", "WHAT YOU HAVE", UiKit.WARM)
+	var title := _line("InventoryTitle", I18n.t(&"INV_TITLE"), UiKit.WARM)
 	column.add_child(title)
 
 	_rows = VBoxContainer.new()
@@ -141,7 +141,7 @@ func _build() -> void:
 			_rows.add_child(_row(line as Dictionary))
 
 	var worth := Inventory.worth(_state)
-	_total.text = "all of it sells for  $%d" % worth
+	_total.text = I18n.f(&"INV_WORTH", [worth])
 
 
 ## One resource: what it is, how much, and what it fetches each.

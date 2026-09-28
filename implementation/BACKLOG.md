@@ -1,6 +1,6 @@
 # Backlog - HARVEST THE NIGHT
 
-`#####################...`  **96 / 109 done**
+`#####################...`  **97 / 110 done**
 
 0 doing / 13 todo / 0 blocked across 9 phases.
 
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0097 - English and Portuguese**. The whole of what is left is
+First up: **0098 - Accessibility**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -30,21 +30,21 @@ which rewrites this file for you.
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
-### 0097 - English and Portuguese
+### 0098 - Accessibility
 
-Ready to pick up.  Likely files: `src/app/i18n.gd, assets/locale/`.
+Ready to pick up.  Likely files: `src/app/a11y.gd, src/ui/options_a11y.gd`.
 
-Every string through a translation table, with pt-BR alongside English - the reference sheet is in Portuguese and so is the audience.
+The cheap things that decide whether a lot of people can play it at all.
 
-- No literal player-facing string left in code: keys only
-- English and pt-BR CSVs, English as the fallback
-- A checker that finds missing keys, unused keys and strings that overflow their control
-- Language is a setting and applies without a restart
-- Plurals and number formatting handled, not concatenated
+- Screen shake, flashing and particle density each separately reducible
+- A larger UI scale and a high-contrast HUD option
+- Colour-blind safe damage types: shape and icon, never colour alone
+- Hold-to-act as an alternative to repeated pressing
+- A slower game speed option that scales the tick budget, not the rules
 
-  - done when: The checker reports zero missing keys in both languages
-  - done when: Switching language mid-game updates every visible screen
-  - done when: No pt-BR string overflows its control - the checker proves it
+  - done when: Every damage type is identifiable in greyscale
+  - done when: The slow speed option does not change the determinism hash
+  - done when: The game is playable start to finish with shake and flashing off
 
 ### 0099 - An icon and a boot ident
 
@@ -75,6 +75,21 @@ Two builds anyone can run, from one command, with the Web one small enough that 
   - done when: Both builds run a full night on a machine without Godot installed
   - done when: The Web build is inside its budget and the number is printed
   - done when: The two builds produce the same determinism hash
+
+### 0101 - Onboarding in seven lines
+
+Ready to pick up.  Likely files: `src/core/tutorial.gd`.
+
+A stranger reaches night 1 and understands the loop, with no more text than the design document allows.
+
+- Seven lines, total, across the whole first day
+- Each appears on the thing it describes
+- The reality switch is explained by showing it, not by describing it
+- Every line is translated
+- Watch someone play it and write down where they stopped
+
+  - done when: A first-time player reaches the end of night 1 without being told anything out loud
+  - done when: The journal names where they hesitated, because that is the finding
 
 ### 0102 - A performance budget
 
@@ -135,36 +150,19 @@ The little bubbles on the owner's sheet - !, ?, a heart, a note, an idea, a star
   - done when: A reaction appears on the tick the thing happens and clears itself
   - done when: Turning them all off leaves the determinism hash unchanged
 
-### 0098 - Accessibility
+### 0110 - Refusals in two languages
 
-Waits on 0097.  Likely files: `src/app/a11y.gd, src/ui/options_a11y.gd`.
+Ready to pick up.  Likely files: `src/core/building.gd, src/core/sim.gd, src/core/tech.gd`.
 
-The cheap things that decide whether a lot of people can play it at all.
+The last English sentences in `src/core/`: the lines that say why a thing cannot be built, bought or skipped.
 
-- Screen shake, flashing and particle density each separately reducible
-- A larger UI scale and a high-contrast HUD option
-- Colour-blind safe damage types: shape and icon, never colour alone
-- Hold-to-act as an alternative to repeated pressing
-- A slower game speed option that scales the tick budget, not the rules
+- `why_not_*` returns a key and its arguments rather than a sentence
+- The words live in `assets/locale/strings.csv` like every other line
+- The ids in a refusal - what is short, what is needed - are named by `Names.of` rather than printed raw
+- `tools/i18n_check.py` covers them, widths and all
 
-  - done when: Every damage type is identifiable in greyscale
-  - done when: The slow speed option does not change the determinism hash
-  - done when: The game is playable start to finish with shake and flashing off
-
-### 0101 - Onboarding in seven lines
-
-Waits on 0097.  Likely files: `src/core/tutorial.gd`.
-
-A stranger reaches night 1 and understands the loop, with no more text than the design document allows.
-
-- Seven lines, total, across the whole first day
-- Each appears on the thing it describes
-- The reality switch is explained by showing it, not by describing it
-- Every line is translated
-- Watch someone play it and write down where they stopped
-
-  - done when: A first-time player reaches the end of night 1 without being told anything out loud
-  - done when: The journal names where they hesitated, because that is the finding
+  - done when: `grep` finds no player-facing sentence left in `src/core/`
+  - done when: Every refusal reads in Portuguese, and the checker proves it fits
 
 ### 0105 - A playtest build
 
@@ -338,7 +336,7 @@ The thing that gets people to look: thirty seconds that show the farm, the switc
 - [x] **0089** [Tooltips](prompts/0089-tooltips.md)
 - [x] **0090** [The log panel](prompts/0090-log-panel.md)
 
-## 7 - Shell and product  (6/10)
+## 7 - Shell and product  (7/11)
 
 - [x] **0091** [The title screen](prompts/0091-title-screen.md)
 - [x] **0092** [The main menu and the router](prompts/0092-main-menu.md)
@@ -346,14 +344,15 @@ The thing that gets people to look: thirty seconds that show the farm, the switc
 - [x] **0094** [Options: audio](prompts/0094-options-audio.md)
 - [x] **0095** [Options: controls](prompts/0095-options-controls.md)
 - [x] **0096** [The pause menu](prompts/0096-pause-menu.md)
-- [ ] **0097** [English and Portuguese](prompts/0097-i18n.md)
-- [ ] **0098** [Accessibility](prompts/0098-accessibility.md) - needs 0097
+- [x] **0097** [English and Portuguese](prompts/0097-i18n.md)
+- [ ] **0098** [Accessibility](prompts/0098-accessibility.md)
 - [ ] **0099** [An icon and a boot ident](prompts/0099-icon-ident.md)
 - [ ] **0100** [Exports: Windows and Web](prompts/0100-exports.md)
+- [ ] **0110** [Refusals in two languages](prompts/0110-refusals.md)
 
 ## 8 - Ship the MVP  (0/8)
 
-- [ ] **0101** [Onboarding in seven lines](prompts/0101-onboarding.md) - needs 0097
+- [ ] **0101** [Onboarding in seven lines](prompts/0101-onboarding.md)
 - [ ] **0102** [A performance budget](prompts/0102-perf-budget.md)
 - [ ] **0103** [Crash and error reporting](prompts/0103-error-report.md)
 - [ ] **0104** [Saves survive an update](prompts/0104-save-compat.md)

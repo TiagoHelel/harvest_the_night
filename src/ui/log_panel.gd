@@ -106,7 +106,7 @@ func _ready() -> void:
 	_panel.add_child(column)
 	var title := Label.new()
 	title.name = "LogTitle"
-	title.text = "WHAT HAPPENED"
+	title.text = I18n.t(&"LOG_TITLE")
 	title.theme_type_variation = UiKit.WARM
 	column.add_child(title)
 
@@ -233,36 +233,40 @@ static func line_for(event: Dictionary) -> String:
 	var kind := StringName(event.get("kind", &""))
 	match kind:
 		&"night_began":
-			return "night %d begins" % int(event.get("night", 0))
+			return I18n.f(&"LOG_NIGHT_BEGAN", [int(event.get("night", 0))])
 		&"wave_began":
-			return "wave %d of %d: %d %s" % [int(event.get("wave", 0)),
-				int(event.get("waves", 0)), int(event.get("count", 0)),
-				_plural(event)]
+			return I18n.f(&"LOG_WAVE_BEGAN", [int(event.get("wave", 0)),
+				int(event.get("waves", 0)), _how_many(event)])
 		&"boss_arrived":
-			return "the giant is coming"
+			return I18n.t(&"LOG_BOSS")
 		&"structure_lost":
-			return "%s destroyed" % String(event.get("id", "")).replace(
-				"_", " ")
+			return I18n.f(&"LOG_STRUCTURE_LOST",
+				[Names.of(StringName(event.get("id", &"")))])
 		&"house_hit":
-			return "the house is hit - %d left" % int(event.get("left", 0))
+			return I18n.f(&"LOG_HOUSE_HIT", [int(event.get("left", 0))])
 		&"crop_ready":
-			return "%s is ready" % event.get("crop", "")
+			return I18n.f(&"LOG_CROP_READY",
+				[Names.of(StringName(event.get("crop", &"")))])
 		&"craft_done":
-			return "%s finished" % String(event.get("recipe", "")).replace(
-				"_", " ")
+			return I18n.f(&"LOG_CRAFT_DONE",
+				[Names.of(StringName(event.get("recipe", &"")))])
 		&"night_won":
-			return "night %d survived" % int(event.get("night", 0))
+			return I18n.f(&"LOG_NIGHT_WON", [int(event.get("night", 0))])
 		&"night_lost":
-			return "night %d lost" % int(event.get("night", 0))
+			return I18n.f(&"LOG_NIGHT_LOST", [int(event.get("night", 0))])
 	return ""
 
 
-## "1 walker" or "6 walkers", because "6 walker" is the sort of thing that
-## makes a game read as unfinished.
-static func _plural(event: Dictionary) -> String:
+## "1 walker" or "6 walkers".
+##
+## **Two rows in the table, not an `s` on the end.** English makes a plural by
+## adding one letter and Portuguese does not always make one at all - "6
+## brutamontes" is the same word as one of them - so the count picks a line
+## rather than editing it.
+static func _how_many(event: Dictionary) -> String:
 	var many := int(event.get("count", 0))
-	var what := String(event.get("enemy", ""))
-	return what if many == 1 else what + "s"
+	return "%d %s" % [many, I18n.plural(
+		Names.key_of(StringName(event.get("enemy", &""))), many)]
 
 
 ## Ticks into the night as minutes and seconds.

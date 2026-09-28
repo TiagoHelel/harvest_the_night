@@ -57,7 +57,7 @@ func _ready() -> void:
 
 	var title := Label.new()
 	title.name = "BuildTitle"
-	title.text = "BUILD"
+	title.text = I18n.t(&"BUILD_TITLE")
 	column.add_child(title)
 
 	_rows = VBoxContainer.new()
@@ -226,7 +226,7 @@ func _build_palette() -> void:
 func _price_of(id: StringName) -> String:
 	var banked := Crafting.kits(_state, id)
 	if banked > 0:
-		return "(%d ready)" % banked
+		return I18n.f(&"BUILD_BANKED", [banked])
 	var parts: Array = []
 	var cost := Building.cost_of(id)
 	# **Through `sorted_names`, not `Array.sort()`.** These keys are resource

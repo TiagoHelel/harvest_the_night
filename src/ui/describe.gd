@@ -74,16 +74,17 @@ static func every_key() -> Array:
 static func resource(id: StringName) -> String:
 	if not GameData.RESOURCES.has(id):
 		return ""
-	var lines: Array = [String(id).to_upper()]
+	var lines: Array = [Names.of(id).to_upper()]
 	if GameData.SELL_PRICE.has(id):
-		lines.append("sells for $%d" % int(GameData.SELL_PRICE[id]))
+		lines.append(I18n.f(&"DESC_SELLS_FOR",
+			[int(GameData.SELL_PRICE[id])]))
 	else:
 		# **Said rather than left blank.** "Not for sale" is a different
 		# thing from "worth nothing", and a player who cannot tell which
 		# will try to sell it.
-		lines.append("not for sale")
+		lines.append(I18n.t(&"DESC_NOT_FOR_SALE"))
 	if Ammo.kinds().has(id):
-		lines.append("loaded into towers")
+		lines.append(I18n.t(&"DESC_AMMO"))
 	return "\n".join(lines)
 
 
@@ -92,22 +93,24 @@ static func defence(id: StringName) -> String:
 	if entry == null:
 		return ""
 	var one: Dictionary = entry
-	var lines: Array = [String(id).to_upper().replace("_", " ")]
+	var lines: Array = [Names.of(id).to_upper()]
 	lines.append(_costs(one.get("cost", {}) as Dictionary))
-	lines.append("%d hit points" % int(one.get("hp", 0)))
+	lines.append(I18n.f(&"DESC_HP", [int(one.get("hp", 0))]))
 	if one.has("damage"):
-		lines.append("%d %s damage" % [int(one["damage"]),
-			String(one.get("damage_type", GameData.DAMAGE_IMPACT))])
+		lines.append(I18n.f(&"DESC_DAMAGE", [int(one["damage"]),
+			Names.of(StringName(one.get("damage_type",
+				GameData.DAMAGE_IMPACT)))]))
 	if one.has("range"):
-		lines.append("reaches %d tiles" % int(one["range"]))
+		lines.append(I18n.f(&"DESC_RANGE", [int(one["range"])]))
 	if int(one.get("reload_ticks", 0)) > 0:
-		lines.append("fires every %s" % _seconds(int(one["reload_ticks"])))
+		lines.append(I18n.f(&"DESC_RELOAD",
+			[_seconds(int(one["reload_ticks"]))]))
 	if int(one.get("energy_draw", 0)) > 0:
-		lines.append("draws %d power" % int(one["energy_draw"]))
+		lines.append(I18n.f(&"DESC_DRAWS", [int(one["energy_draw"])]))
 	if int(one.get("path_cost", 0)) > 0:
-		lines.append("things walk round it if they can")
+		lines.append(I18n.t(&"DESC_BLOCKS"))
 	if bool(one.get("one_shot", false)):
-		lines.append("goes off once")
+		lines.append(I18n.t(&"DESC_ONE_SHOT"))
 	return "\n".join(lines)
 
 
@@ -116,16 +119,17 @@ static func building(id: StringName) -> String:
 	if entry == null:
 		return ""
 	var one: Dictionary = entry
-	var lines: Array = [String(id).to_upper().replace("_", " ")]
+	var lines: Array = [Names.of(id).to_upper()]
 	lines.append(_costs(one.get("cost", {}) as Dictionary))
-	lines.append("%d hit points" % int(one.get("hp", 0)))
+	lines.append(I18n.f(&"DESC_HP", [int(one.get("hp", 0))]))
 	if int(one.get("energy_supply", 0)) > 0:
-		lines.append("supplies %d power" % int(one["energy_supply"]))
+		lines.append(I18n.f(&"DESC_SUPPLIES",
+			[int(one["energy_supply"])]))
 	if int(one.get("energy_draw", 0)) > 0:
-		lines.append("draws %d power" % int(one["energy_draw"]))
+		lines.append(I18n.f(&"DESC_DRAWS", [int(one["energy_draw"])]))
 	var makes := _recipes_at(id)
 	if not makes.is_empty():
-		lines.append("makes %s" % ", ".join(makes))
+		lines.append(I18n.f(&"DESC_MAKES", [", ".join(makes)]))
 	return "\n".join(lines)
 
 
@@ -134,12 +138,15 @@ static func recipe(id: StringName) -> String:
 	if entry == null:
 		return ""
 	var one: Dictionary = entry
-	var lines: Array = [String(id).to_upper().replace("_", " ")]
-	lines.append("from %s" % _costs(one.get("inputs", {}) as Dictionary))
-	lines.append("makes %s" % _amounts(one.get("output", {}) as Dictionary))
-	lines.append("takes %s" % _seconds(int(one.get("ticks", 0))))
-	lines.append("at the %s" % String(one.get("station", &"")).replace(
-		"_", " "))
+	var lines: Array = [Names.of(id).to_upper()]
+	lines.append(I18n.f(&"DESC_FROM",
+		[_costs(one.get("inputs", {}) as Dictionary)]))
+	lines.append(I18n.f(&"DESC_MAKES",
+		[_amounts(one.get("output", {}) as Dictionary)]))
+	lines.append(I18n.f(&"DESC_TAKES",
+		[_seconds(int(one.get("ticks", 0)))]))
+	lines.append(I18n.f(&"DESC_AT_THE",
+		[Names.of(StringName(one.get("station", &"")))]))
 	return "\n".join(lines)
 
 
@@ -147,12 +154,12 @@ static func tech(id: StringName) -> String:
 	var one := Tech.node(id)
 	if one.is_empty():
 		return ""
-	var lines: Array = [String(id).to_upper()]
-	lines.append("costs %d tech" % int(one.get("cost", 0)))
-	lines.append(String(one.get("note", "")))
+	var lines: Array = [Names.of(id).to_upper()]
+	lines.append(I18n.f(&"DESC_TECH_COST", [int(one.get("cost", 0))]))
+	lines.append(Names.note_of(id))
 	var needs: Array = one.get("needs", []) as Array
 	if not needs.is_empty():
-		lines.append("after %s" % ", ".join(needs))
+		lines.append(I18n.f(&"DESC_AFTER", [_named(needs)]))
 	return "\n".join(lines)
 
 
@@ -161,20 +168,21 @@ static func enemy(id: StringName) -> String:
 	if entry == null:
 		return ""
 	var one: Dictionary = entry
-	var lines: Array = [String(id).to_upper()]
-	lines.append("%d hit points" % int(one.get("hp", 0)))
-	lines.append("hits for %d" % int(one.get("damage", 0)))
-	lines.append("a tile every %s" % _seconds(int(one.get(
-		"ticks_per_tile", 0))))
+	var lines: Array = [Names.of(id).to_upper()]
+	lines.append(I18n.f(&"DESC_HP", [int(one.get("hp", 0))]))
+	lines.append(I18n.f(&"DESC_HITS_FOR",
+		[int(one.get("damage", 0))]))
+	lines.append(I18n.f(&"DESC_TILE_EVERY", [_seconds(int(one.get(
+		"ticks_per_tile", 0)))]))
 	if int(one.get("armour", 0)) > 0:
-		lines.append("shrugs off %d a hit" % int(one["armour"]))
+		lines.append(I18n.f(&"DESC_ARMOUR", [int(one["armour"])]))
 	if bool(one.get("targets_structures", false)):
-		lines.append("chews through walls")
+		lines.append(I18n.t(&"DESC_EATS_WALLS"))
 	if bool(one.get("ignores_structures", false)):
-		lines.append("runs straight past walls")
+		lines.append(I18n.t(&"DESC_PASSES_WALLS"))
 	if bool(one.get("is_boss", false)):
-		lines.append("winds up before it swings")
-	lines.append("worth $%d" % int(one.get("reward", 0)))
+		lines.append(I18n.t(&"DESC_WINDS_UP"))
+	lines.append(I18n.f(&"DESC_WORTH", [int(one.get("reward", 0))]))
 	return "\n".join(lines)
 
 
@@ -183,26 +191,39 @@ static func crop(id: StringName) -> String:
 	if entry == null:
 		return ""
 	var one: Dictionary = entry
-	var lines: Array = [String(id).to_upper()]
-	lines.append("seed costs $%d" % int(one.get("seed_cost", 0)))
-	lines.append("grows in %s" % _seconds(int(one.get("growth_ticks", 0))))
-	lines.append("sells for $%d" % int(GameData.SELL_PRICE.get(id, 0)))
+	var lines: Array = [Names.of(id).to_upper()]
+	lines.append(I18n.f(&"DESC_SEED_COST",
+		[int(one.get("seed_cost", 0))]))
+	lines.append(I18n.f(&"DESC_GROWS_IN",
+		[_seconds(int(one.get("growth_ticks", 0)))]))
+	lines.append(I18n.f(&"DESC_SELLS_FOR",
+		[int(GameData.SELL_PRICE.get(id, 0))]))
 	return "\n".join(lines)
 
 
 # ------------------------------------------------------------------ the parts
 
 ## A cost, as "4 wood, 2 iron". Sorted, so it reads the same every time.
+## A list of ids as a list of names, so "after sharp tools" reads as
+## "depois de ferramentas afiadas" rather than as an id.
+static func _named(ids: Array) -> String:
+	var parts: Array = []
+	for id in ids:
+		parts.append(Names.of(StringName(id)))
+	return ", ".join(parts)
+
+
 static func _costs(cost: Dictionary) -> String:
 	if cost.is_empty():
-		return "free"
-	return "costs %s" % _amounts(cost)
+		return I18n.t(&"DESC_FREE")
+	return I18n.f(&"DESC_COSTS", [_amounts(cost)])
 
 
 static func _amounts(amounts: Dictionary) -> String:
 	var parts: Array = []
 	for id in GameData.sorted_names(amounts.keys()):
-		parts.append("%d %s" % [int(amounts[id]), id])
+		parts.append(I18n.f(&"DESC_AMOUNT",
+			[int(amounts[id]), Names.of(id)]))
 	return ", ".join(parts)
 
 
@@ -217,5 +238,5 @@ static func _recipes_at(station: StringName) -> Array:
 	var out: Array = []
 	for id in GameData.sorted_names(GameData.RECIPES.keys()):
 		if (GameData.RECIPES[id] as Dictionary).get("station", &"") == station:
-			out.append(String(id).replace("_", " "))
+			out.append(Names.of(id))
 	return out

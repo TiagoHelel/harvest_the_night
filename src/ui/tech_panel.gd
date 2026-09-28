@@ -57,7 +57,7 @@ func _ready() -> void:
 	add_child(_frame)
 
 	var heading := _label("TechHeading", Vector2(8, 4), UiKit.WARM)
-	heading.text = "TECHNOLOGY"
+	heading.text = I18n.t(&"TECH_TITLE")
 	_held = _label("TechHeld", Vector2(120, 4), UiKit.WARM)
 	_reason = _label("TechReason", Vector2(8, 186), UiKit.DIM)
 	# **What the node under the cursor does**, on its own line where there is
@@ -65,7 +65,7 @@ func _ready() -> void:
 	_note = _label("TechNote", Vector2(8, 172), UiKit.WARM)
 
 	var hint := _label("TechHint", Vector2(300, 4), UiKit.DIM)
-	hint.text = "T or ESC to close"
+	hint.text = I18n.t(&"TECH_HINT")
 
 	_build_nodes()
 
@@ -76,7 +76,7 @@ func _build_nodes() -> void:
 		var branch: StringName = branches[column]
 		var at := Vector2(6 + column * 152.0, 22.0)
 		var title := _label("TechBranch_" + str(branch), at, UiKit.WARM)
-		title.text = str(branch).to_upper()
+		title.text = Names.of(branch)
 		var row := 0
 		for entry in Tech.nodes_of(branch):
 			var one: Dictionary = entry
@@ -174,31 +174,32 @@ func _show_the_note() -> void:
 	for id in _buttons:
 		var button: Button = _buttons[id]
 		if button.get_global_rect().has_point(get_global_mouse_position()):
-			_note.text = "%s - %s" % [str(id),
-				str(Tech.node(StringName(id))["note"])]
+			_note.text = I18n.f(&"TECH_NOTE", [Names.of(StringName(id)),
+				Names.note_of(StringName(id))])
 			return
 	_note.text = ""
 
 
 func _refresh() -> void:
-	_held.text = "%d points" % Tech.held(_state)
+	_held.text = I18n.f(&"TECH_HELD", [Tech.held(_state)])
 	var spent := 0
 	for id in Tech.owned(_state):
 		spent += int(Tech.node(StringName(id))["cost"])
-	_reason.text = ("%d of %d nodes, %d points spent - the ten nights pay "
-		+ "%d at best and the whole tree costs %d") % [
-			Tech.owned(_state).size(), Tech.tree().size(), spent,
-			Tech.total_available(), _whole_tree()]
+	_reason.text = I18n.f(&"TECH_SUMMARY", [
+		Tech.owned(_state).size(), Tech.tree().size(), spent,
+		Tech.total_available(), _whole_tree()])
 
 	for id in _buttons:
 		var one := Tech.node(StringName(id))
 		var button: Button = _buttons[id]
 		var mine := Tech.owns(_state, StringName(id))
 		var refused := Tech.why_not_buy(_state, StringName(id))
-		button.text = "%s   %d" % [str(id), int(one["cost"])]
+		button.text = I18n.f(&"TECH_NODE",
+			[Names.of(StringName(id)), int(one["cost"])])
 		button.disabled = mine or not refused.is_empty()
-		button.tooltip_text = str(one["note"]) if mine or refused.is_empty() \
-			else "%s - %s" % [str(one["note"]), refused]
+		var note := Names.note_of(StringName(id))
+		button.tooltip_text = note if mine or refused.is_empty() \
+			else I18n.f(&"TECH_REFUSED", [note, refused])
 		# **Disabled says it once.** A locked node is already `disabled`, so
 		# the theme is drawing it in the dull frame with faint letters; the
 		# `modulate` that used to be here multiplied that by a dim colour

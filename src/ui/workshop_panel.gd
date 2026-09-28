@@ -78,7 +78,8 @@ func _ready() -> void:
 	_queue.name = "WorkshopQueue"
 	column.add_child(_queue)
 
-	column.add_child(_line("WorkshopMakeLabel", "- MAKE", UiKit.WARM))
+	column.add_child(_line("WorkshopMakeLabel", I18n.t(&"WORK_MAKE"),
+		UiKit.WARM))
 	_recipes = VBoxContainer.new()
 	_recipes.name = "WorkshopRecipes"
 	column.add_child(_recipes)
@@ -128,14 +129,15 @@ func _process(_delta: float) -> void:
 	# moved when the queue changed would be a timer that stood still.
 	var progress := Crafting.progress_at(_state, cell)
 	if Crafting.is_stalled(_state, cell):
-		_progress.text = "waiting on materials"
+		_progress.text = I18n.t(&"WORK_STALLED")
 		_progress.theme_type_variation = UiKit.WARN
 	elif int(progress[1]) > 0:
-		_progress.text = "%s  %.1fs" % [Crafting.making(_state, cell),
-			float(progress[0]) / float(GameData.TICK_HZ)]
+		_progress.text = I18n.f(&"WORK_MAKING",
+			[Names.of(Crafting.making(_state, cell)),
+			float(progress[0]) / float(GameData.TICK_HZ)])
 		_progress.theme_type_variation = UiKit.GOOD
 	else:
-		_progress.text = "idle"
+		_progress.text = I18n.t(&"WORK_IDLE")
 		_progress.theme_type_variation = UiKit.DIM
 
 
@@ -158,10 +160,10 @@ func _what_happened(cell: Vector2i) -> String:
 	for id in GameData.sorted_names(made.keys()):
 		var since := int(made[id]) - int(seen.get(id, 0))
 		if since > 0:
-			parts.append("%d %s" % [since, id])
+			parts.append(I18n.f(&"WORK_AWAY_ONE", [since, Names.of(id)]))
 	if parts.is_empty():
 		return ""
-	return "while you were away:  " + ", ".join(parts)
+	return I18n.f(&"WORK_AWAY", [", ".join(parts)])
 
 
 func _signature(cell: Vector2i) -> String:
@@ -187,8 +189,8 @@ func _build(cell: Vector2i) -> void:
 		var slot := i
 		var row := Button.new()
 		row.name = "queued_%d" % slot
-		row.text = "%d. %s%s" % [slot + 1, lined_up[slot],
-			"  (running)" if slot == 0 else ""]
+		row.text = I18n.f(&"WORK_QUEUED_RUNNING" if slot == 0
+			else &"WORK_QUEUED", [slot + 1, Names.of(lined_up[slot])])
 		_style(row)
 		row.pressed.connect(func() -> void:
 			Crafting.cancel_at(_state, cell, slot))
@@ -196,8 +198,8 @@ func _build(cell: Vector2i) -> void:
 
 	var room := Crafting.room_at(_state, cell)
 	if room > 0:
-		_queue.add_child(_line("WorkshopRoom", "  %d slot%s free"
-			% [room, "" if room == 1 else "s"], UiKit.DIM))
+		_queue.add_child(_line("WorkshopRoom",
+			I18n.plural(&"WORK_ROOM", room, [room]), UiKit.DIM))
 
 	# What it can make. Clicking one puts it on the end.
 	for id in Crafting.recipes_at(station):

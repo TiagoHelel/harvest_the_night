@@ -18,16 +18,12 @@ extends Control
 ## name is a setting people flip at random to see which they prefer, and this
 ## one has a right answer.
 
-## Shown when square pixels are off.
-const WARNING := ("off: pixels stop being square and the art crawls"
-	+ " when the camera moves")
-
-## Shown when they are on, as the key to the marks on the size buttons.
+## Shown when square pixels are off, and when they are on.
 ##
-## **It does not name the multiples**, because how many there are comes off
-## the monitor: a 1080p screen offers up to x4 and a 1440p one up to x5.
-const LEGEND := ("the xN sizes are whole multiples of 480x270 -"
-	+ " square pixels, no crawling")
+## The legend does not name the multiples, because how many there are comes
+## off the monitor: a 1080p screen offers up to x4 and a 1440p one up to x5.
+const WARNING := &"VID_WARNING"
+const LEGEND := &"VID_LEGEND"
 
 var _video: Node
 var _settings: Node
@@ -55,10 +51,12 @@ func _ready() -> void:
 	column.set_anchors_preset(Control.PRESET_FULL_RECT)
 	add_child(column)
 
-	_modes = _row(column, "WINDOW", HBoxContainer.new()) as HBoxContainer
-	_sizes = _row(column, "SIZE", HFlowContainer.new()) as HFlowContainer
+	_modes = _row(column, &"VID_WINDOW", "WINDOW",
+		HBoxContainer.new()) as HBoxContainer
+	_sizes = _row(column, &"VID_SIZE", "SIZE",
+		HFlowContainer.new()) as HFlowContainer
 
-	_crisp = _switch(column, "SQUARE PIXELS", "VideoCrisp", _toggle_crisp)
+	_crisp = _switch(column, &"VID_CRISP", "VideoCrisp", _toggle_crisp)
 
 	_note = Label.new()
 	_note.name = "VideoNote"
@@ -66,8 +64,9 @@ func _ready() -> void:
 	_note.custom_minimum_size = Vector2(330, 16)
 	column.add_child(_note)
 
-	_vsync = _switch(column, "VSYNC", "VideoVsync", _toggle_vsync)
-	_caps = _row(column, "FPS CAP", HBoxContainer.new()) as HBoxContainer
+	_vsync = _switch(column, &"VID_VSYNC", "VideoVsync", _toggle_vsync)
+	_caps = _row(column, &"VID_CAP", "FPSCAP",
+		HBoxContainer.new()) as HBoxContainer
 
 	var keeping := HBoxContainer.new()
 	keeping.name = "VideoKeepRow"
@@ -80,7 +79,7 @@ func _ready() -> void:
 	keeping.add_child(_countdown)
 	_keep = Button.new()
 	_keep.name = "VideoKeep"
-	_keep.text = "KEEP"
+	_keep.text = I18n.t(&"VID_KEEP")
 	_keep.custom_minimum_size = Vector2(56, 14)
 	_keep.focus_mode = Control.FOCUS_ALL
 	_keep.pressed.connect(_keep_it)
@@ -89,15 +88,15 @@ func _ready() -> void:
 	_fill()
 
 
-func _row(column: VBoxContainer, title: String, holder: Container) -> Container:
+func _row(column: VBoxContainer, title: StringName, bare: String,
+		holder: Container) -> Container:
 	var row := HBoxContainer.new()
-	var bare := title.replace(" ", "")
 	row.name = "Video%sRow" % bare
 	row.theme_type_variation = UiKit.SPACED
 	column.add_child(row)
 	var label := Label.new()
-	label.text = title
-	label.custom_minimum_size = Vector2(76, 0)
+	label.text = I18n.t(title)
+	label.custom_minimum_size = Vector2(86, 0)
 	label.theme_type_variation = UiKit.DIM
 	row.add_child(label)
 	holder.name = "Video%sChoices" % bare
@@ -107,15 +106,15 @@ func _row(column: VBoxContainer, title: String, holder: Container) -> Container:
 	return holder
 
 
-func _switch(column: VBoxContainer, title: String, called: String,
+func _switch(column: VBoxContainer, title: StringName, called: String,
 		when: Callable) -> Button:
 	var row := HBoxContainer.new()
 	row.name = "%sRow" % called
 	row.theme_type_variation = UiKit.SPACED
 	column.add_child(row)
 	var label := Label.new()
-	label.text = title
-	label.custom_minimum_size = Vector2(76, 0)
+	label.text = I18n.t(title)
+	label.custom_minimum_size = Vector2(86, 0)
 	label.theme_type_variation = UiKit.DIM
 	row.add_child(label)
 	var button := Button.new()
@@ -135,8 +134,8 @@ func _process(_delta: float) -> void:
 	_keep.visible = waiting
 	_countdown.visible = waiting
 	if waiting:
-		_countdown.text = "KEEP THIS? BACK IN %ds" \
-			% int(ceil(float(_video.seconds_left())))
+		_countdown.text = I18n.f(&"VID_COUNTDOWN",
+			[int(ceil(float(_video.seconds_left())))])
 
 
 # -------------------------------------------------------------- the choices
@@ -148,12 +147,14 @@ func _fill() -> void:
 	_fill_sizes()
 	_fill_caps()
 	_crisp.button_pressed = bool(_settings.get_bool(&"video/integer_scaling"))
-	_crisp.text = "ON" if _crisp.button_pressed else "OFF"
-	_note.text = LEGEND if _crisp.button_pressed else WARNING
+	_crisp.text = I18n.t(&"OPT_ON") if _crisp.button_pressed \
+		else I18n.t(&"OPT_OFF")
+	_note.text = I18n.t(LEGEND if _crisp.button_pressed else WARNING)
 	_note.theme_type_variation = UiKit.DIM if _crisp.button_pressed \
 		else UiKit.WARN
 	_vsync.button_pressed = bool(_settings.get_bool(&"video/vsync"))
-	_vsync.text = "ON" if _vsync.button_pressed else "OFF"
+	_vsync.text = I18n.t(&"OPT_ON") if _vsync.button_pressed \
+		else I18n.t(&"OPT_OFF")
 	_keep.visible = false
 	_countdown.visible = false
 
@@ -164,7 +165,7 @@ func _fill_modes() -> void:
 	for mode in [_video.WINDOWED, _video.BORDERLESS, _video.FULLSCREEN]:
 		var button := Button.new()
 		button.name = "VideoMode_%d" % int(mode)
-		button.text = String(_video.MODE_NAMES[mode])
+		button.text = I18n.t(_video.MODE_NAMES[mode])
 		button.toggle_mode = true
 		button.button_pressed = int(mode) == now
 		button.theme_type_variation = UiKit.TAB
@@ -202,7 +203,8 @@ func _fill_caps() -> void:
 	for cap in _video.FPS_CAPS:
 		var button := Button.new()
 		button.name = "VideoCap_%d" % int(cap)
-		button.text = "OFF" if int(cap) == 0 else str(int(cap))
+		button.text = I18n.t(&"VID_CAP_OFF") if int(cap) == 0 \
+			else str(int(cap))
 		button.toggle_mode = true
 		button.button_pressed = int(cap) == now
 		button.theme_type_variation = UiKit.TAB
@@ -279,7 +281,29 @@ func marked_sizes() -> int:
 
 
 func warning_showing() -> bool:
-	return _note != null and _note.visible and _note.text == WARNING
+	return _note != null and _note.visible \
+		and _note.text == I18n.t(WARNING)
+
+
+## Say it all again in whatever language is up now.
+func relabel() -> void:
+	if _note == null:
+		return
+	_relabel_row("VideoWINDOWRow", &"VID_WINDOW")
+	_relabel_row("VideoSIZERow", &"VID_SIZE")
+	_relabel_row("VideoFPSCAPRow", &"VID_CAP")
+	_relabel_row("VideoCrispRow", &"VID_CRISP")
+	_relabel_row("VideoVsyncRow", &"VID_VSYNC")
+	_keep.text = I18n.t(&"VID_KEEP")
+	_fill()
+
+
+## The label at the left of one row, which is built once and would otherwise
+## keep whatever language it was born in.
+func _relabel_row(named: String, key: StringName) -> void:
+	var row := get_node_or_null(NodePath("VideoColumn/%s" % named))
+	if row != null and row.get_child_count() > 0:
+		(row.get_child(0) as Label).text = I18n.t(key)
 
 
 func countdown_showing() -> bool:

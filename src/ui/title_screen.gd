@@ -58,11 +58,11 @@ const VISITORS := 5
 
 ## The menu, in order. Each is an id, its words, and whether it is shown.
 const ENTRIES: Array = [
-	[&"continue", "CONTINUE"],
-	[&"new", "NEW RUN"],
-	[&"stats", "STATISTICS"],
-	[&"options", "OPTIONS"],
-	[&"quit", "QUIT"],
+	[&"continue", &"TITLE_CONTINUE"],
+	[&"new", &"TITLE_NEW"],
+	[&"stats", &"TITLE_STATS"],
+	[&"options", &"TITLE_OPTIONS"],
+	[&"quit", &"TITLE_QUIT"],
 ]
 
 signal chose(which: StringName)
@@ -97,6 +97,15 @@ func _ready() -> void:
 	if _router != null:
 		_router.reset(_router.TITLE)
 	_wear(_router.here() if _router != null else 0)
+
+
+## Say it all again in whatever language is up now.
+func relabel() -> void:
+	if _menu == null:
+		return
+	_build_menu()
+	if _ident != null:
+		_ident.text = I18n.t(&"TITLE_PRESS_ANY")
 
 
 func _begin_backdrop() -> void:
@@ -167,7 +176,7 @@ func _wear(state: int) -> void:
 	var stats_up: bool = state == _router.STATS
 	if _ident != null:
 		_ident.visible = state == _router.TITLE
-		_ident.text = "PRESS ANY KEY"
+		_ident.text = I18n.t(&"TITLE_PRESS_ANY")
 	if _menu != null:
 		_menu.visible = menu_up
 		if menu_up:
@@ -231,7 +240,7 @@ func _build_menu() -> void:
 			continue
 		var button := Button.new()
 		button.name = "Menu_%s" % which
-		button.text = str(entry[1])
+		button.text = I18n.t(entry[1])
 		button.custom_minimum_size = Vector2(140, 16)
 		button.focus_mode = Control.FOCUS_ALL
 		button.pressed.connect(_pick.bind(which))

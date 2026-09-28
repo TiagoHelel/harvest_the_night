@@ -41,7 +41,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 53
+const CASES := 54
 
 ## The pixels two pieces of text in one row must have between them. Two is
 ## the width of the gap inside a letter at this size, so anything less reads
@@ -129,6 +129,7 @@ func _run() -> void:
 	await _case_0094_audio()
 	await _case_0095_controls()
 	await _case_0096_pause()
+	await _case_0097_language()
 	_finish()
 
 
@@ -2002,7 +2003,7 @@ func _case_0037_queue() -> void:
 	var progress: Label = require_control("WorkshopProgress")
 	expect(progress != null, "there is a progress line")
 	if progress != null:
-		expect(progress.text.contains("barricade_kit"),
+		expect(progress.text.contains("barricade kit"),
 			"naming what is being made", progress.text)
 		expect(progress.text.contains("s"), "and how long is left", progress.text)
 		var shown := progress.text
@@ -2095,7 +2096,7 @@ func _case_0038_away() -> void:
 	expect(back != null and back.visible,
 		"and coming back says what happened", back.text if back else "")
 	if back != null:
-		expect(back.text.contains("barricade_kit"),
+		expect(back.text.contains("barricade kit"),
 			"naming what was made", back.text)
 		expect(back.text.contains("2"), "and how many", back.text)
 
@@ -4925,8 +4926,8 @@ func _case_0092_router() -> void:
 	expect(frame != null and frame.visible, "and the frame is up")
 	var options: OptionsScreen = frame as OptionsScreen
 	if options != null:
-		expect(options.tabs() == [&"video", &"audio", &"controls"],
-			"with the three tabs tasks 0093 to 0095 registered, in TABS order",
+		expect(options.tabs() == [&"game", &"video", &"audio", &"controls"],
+			"with the four tabs tasks 0093 to 0097 registered, in TABS order",
 			str(options.tabs()))
 
 	await click_control("OptionsBack")
@@ -5011,12 +5012,14 @@ func _case_0093_video() -> void:
 	await click_control("Menu_options")
 	await frames(4)
 	var frame: OptionsScreen = require_control("OptionsScreen") as OptionsScreen
+	await click_control("OptionsTab_video")
+	await frames(3)
 	expect(frame != null and frame.tabs().has(&"video"),
 		"the options screen has a video tab",
 		str(frame.tabs()) if frame != null else "no frame")
 	var tab: OptionsVideo = locate_control("OptionsVideo") as OptionsVideo
 	expect(tab != null and tab.visible,
-		"and it is the one showing, being the only one registered")
+		"and clicking it brings it up")
 	if tab == null:
 		await close_scene()
 		_completed += 1
@@ -5117,9 +5120,9 @@ func _case_0094_audio() -> void:
 	await click_control("Menu_options")
 	await frames(4)
 	var frame: OptionsScreen = require_control("OptionsScreen") as OptionsScreen
-	expect(frame != null
-		and frame.tabs() == [&"video", &"audio", &"controls"],
-		"the strip has all three tabs, in the order the frame names them",
+	expect(frame != null and frame.tabs() == [&"game", &"video", &"audio",
+			&"controls"],
+		"the strip has all four tabs, in the order the frame names them",
 		str(frame.tabs()) if frame != null else "no frame")
 
 	await click_control("OptionsTab_audio")
@@ -5488,4 +5491,80 @@ func _case_0096_pause() -> void:
 	expect(not Save.has_run(), "and the save goes with it")
 	await close_scene()
 	Save.delete_run()
+	_completed += 1
+func _case_0097_language() -> void:
+	await open_scene("res://scenes/Title.tscn")
+	var settings: Node = root.get_node_or_null(^"Settings")
+	if settings == null:
+		expect(false, "the settings autoload is up")
+		await close_scene()
+		_completed += 1
+		return
+	settings.set_value(&"gameplay/language", "en")
+	await frames(3)
+
+	await tap_key(KEY_X)
+	await frames(3)
+	var new_run: Button = require_control("Menu_new")
+	expect(new_run != null and new_run.text == "NEW RUN",
+		"the title is in English", new_run.text if new_run else "")
+
+	await click_control("Menu_options")
+	await frames(4)
+	var tab: OptionsGame = locate_control("OptionsGame") as OptionsGame
+	expect(tab != null and tab.visible, "the game tab opens first")
+	if tab == null:
+		await close_scene()
+		_completed += 1
+		return
+	expect(tab.choices() == I18n.LOCALES.size(),
+		"with one button per language", str(tab.choices()))
+	expect(tab.language_shown() == "en", "and English on",
+		tab.language_shown())
+
+	# **Switching language updates every visible screen**, which is the
+	# done-when. Not a restart, not a reload: `Locale` walks the tree and
+	# asks everything that can relabel to do it.
+	await click_control("Language_pt_BR")
+	await frames(4)
+	expect(String(settings.get_string(&"gameplay/language")) == "pt_BR",
+		"picking Portuguese writes the setting",
+		String(settings.get_string(&"gameplay/language")))
+	expect(I18n.locale() == "pt_BR", "and the table follows", I18n.locale())
+	expect(tab.language_shown() == "pt_BR", "and the tab says so",
+		tab.language_shown())
+
+	var back: Button = require_control("OptionsBack")
+	expect(back != null and back.text == "VOLTAR",
+		"the button that was BACK is VOLTAR now",
+		back.text if back else "")
+	var title: Label = require_control("OptionsTitle")
+	expect(title != null and title.text == "OPÇÕES",
+		"and the heading with it", title.text if title else "")
+
+	# **A screen that was not open when the language changed**, which is the
+	# other half of "every visible screen": the menu underneath.
+	await click_control("OptionsBack")
+	await frames(4)
+	new_run = require_control("Menu_new")
+	expect(new_run != null and new_run.text == "NOVA PARTIDA",
+		"the menu behind it came back in Portuguese too",
+		new_run.text if new_run else "")
+
+	# And the run's own screens, which were never on screen at all.
+	settings.set_value(&"gameplay/language", "pt_BR")
+	await close_scene()
+	await open_scene(MAIN_SCENE)
+	await frames(6)
+	var night_button: Button = require_control("NightButton")
+	expect(night_button != null and night_button.text == "VIRAR A NOITE",
+		"a run built in Portuguese is in Portuguese",
+		night_button.text if night_button else "")
+
+	settings.set_value(&"gameplay/language", "en")
+	await frames(4)
+	expect(night_button != null and night_button.text == "SWITCH TO NIGHT",
+		"and back again without reloading anything",
+		night_button.text if night_button else "")
+	await close_scene()
 	_completed += 1

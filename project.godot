@@ -61,6 +61,11 @@ Video="*res://src/app/video.gd"
 ; Task 0095: rewrites the input map from `controls/bindings`, so every
 ; key in the game is a named action a player can move.
 Actions="*res://src/app/input_actions.gd"
+; Task 0097: loads the string table and relabels the screens when
+; the language changes. Named `Locale` because the class it
+; carries is called `I18n`, and an autoload may not share a
+; global class name.
+Locale="*res://src/app/i18n.gd"
 
 [audio]
 

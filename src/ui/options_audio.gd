@@ -31,10 +31,10 @@ const KEYS: Array = [&"audio/master", &"audio/music", &"audio/sfx",
 ## What each is called on the screen. `audio/sfx` is "EFFECTS" because that is
 ## what the task calls it and what a player would.
 const LABELS: Dictionary = {
-	&"audio/master": "MASTER",
-	&"audio/music": "MUSIC",
-	&"audio/sfx": "EFFECTS",
-	&"audio/ambience": "AMBIENCE",
+	&"audio/master": &"AUD_MASTER",
+	&"audio/music": &"AUD_MUSIC",
+	&"audio/sfx": &"AUD_SFX",
+	&"audio/ambience": &"AUD_AMBIENCE",
 }
 
 ## Twenty notches across. Fine enough to find a level, coarse enough that a
@@ -71,7 +71,7 @@ func _ready() -> void:
 	muting.theme_type_variation = UiKit.SPACED
 	column.add_child(muting)
 	var label := Label.new()
-	label.text = "MUTE"
+	label.text = I18n.t(&"AUD_MUTE")
 	label.custom_minimum_size = Vector2(76, 0)
 	label.theme_type_variation = UiKit.DIM
 	muting.add_child(label)
@@ -101,7 +101,7 @@ func _build_row(column: VBoxContainer, key: StringName) -> void:
 	column.add_child(row)
 
 	var label := Label.new()
-	label.text = String(LABELS[key])
+	label.text = I18n.t(LABELS[key])
 	label.custom_minimum_size = Vector2(76, 0)
 	label.theme_type_variation = UiKit.DIM
 	row.add_child(label)
@@ -147,9 +147,8 @@ func _fill() -> void:
 		# still what the game will sound like the moment it comes back.
 		readout.theme_type_variation = UiKit.FAINT if muted else UiKit.DIM
 	_mute.button_pressed = muted
-	_mute.text = "ON" if muted else "OFF"
-	_note.text = "muted - the levels below are kept" if muted \
-		else "let go of a slider to hear it"
+	_mute.text = I18n.t(&"OPT_ON") if muted else I18n.t(&"OPT_OFF")
+	_note.text = I18n.t(&"AUD_NOTE_MUTED" if muted else &"AUD_NOTE_TRY")
 
 
 func _on_setting(key: StringName) -> void:
@@ -202,3 +201,15 @@ func value_shown(key: StringName) -> String:
 
 func mute_showing() -> bool:
 	return _mute != null and _mute.button_pressed
+
+
+## Say it all again in whatever language is up now.
+func relabel() -> void:
+	if _mute == null:
+		return
+	for key in KEYS:
+		var row := _sliders[key].get_parent() as HBoxContainer
+		(row.get_child(0) as Label).text = I18n.t(LABELS[key])
+	var muting := _mute.get_parent() as HBoxContainer
+	(muting.get_child(0) as Label).text = I18n.t(&"AUD_MUTE")
+	_fill()

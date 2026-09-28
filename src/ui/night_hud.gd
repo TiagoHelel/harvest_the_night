@@ -140,11 +140,14 @@ func _build_controls() -> void:
 	_bar.size = Vector2(146, 18)
 	add_child(_bar)
 
-	_repair = _button("RepairButton", "REPAIR", Vector2(0, 1))
+	_repair = _button("RepairButton", I18n.t(&"NHUD_REPAIR"),
+		Vector2(0, 1))
 	_repair.pressed.connect(_do_repair)
-	_flare = _button("FlareButton", "FLARE", Vector2(50, 1))
+	_flare = _button("FlareButton", I18n.t(&"NHUD_FLARE"),
+		Vector2(50, 1))
 	_flare.pressed.connect(_do_flare)
-	_speed = _button("SpeedButton", "1x", Vector2(100, 1))
+	_speed = _button("SpeedButton", I18n.f(&"NHUD_SPEED", [1]),
+		Vector2(100, 1))
 	_speed.pressed.connect(_do_speed)
 
 
@@ -197,11 +200,11 @@ func _process(delta: float) -> void:
 
 
 func _refresh() -> void:
-	_night.text = "NIGHT %d" % int(_state["night"])
+	_night.text = I18n.f(&"NHUD_NIGHT", [int(_state["night"])])
 
 	var at: Array = Waves.progress(_state)
-	_wave.text = "WAVE %d/%d" % [int(at[0]), int(at[1])]
-	_left.text = "%d LEFT" % Waves.remaining(_state)
+	_wave.text = I18n.f(&"NHUD_WAVE", [int(at[0]), int(at[1])])
+	_left.text = I18n.f(&"NHUD_LEFT", [Waves.remaining(_state)])
 
 	# **The house bar.** Width is the fraction, colour is the warning, and the
 	# pulse is what makes it impossible to look past.
@@ -209,7 +212,7 @@ func _refresh() -> void:
 	var full := maxi(GameData.HOUSE_HP, 1)
 	var share := clampf(float(hp) / float(full), 0.0, 1.0)
 	_house_fill.size = Vector2(maxf(158.0 * share, 0.0), 5.0)
-	_house_text.text = "HOUSE %d/%d" % [hp, full]
+	_house_text.text = I18n.f(&"NHUD_HOUSE", [hp, full])
 
 	var in_danger := hp * 100 / full < GameData.HOUSE_DANGER_PERCENT
 	if in_danger:
@@ -233,8 +236,8 @@ func _refresh() -> void:
 	_announce.visible = warn
 	if warn:
 		var seconds := (coming + GameData.TICK_HZ - 1) / GameData.TICK_HZ
-		_announce.text = "WAVE %d INCOMING  %ds" % [mini(int(at[0]) + 1,
-			int(at[1])), seconds]
+		_announce.text = I18n.f(&"NHUD_INCOMING", [mini(int(at[0]) + 1,
+			int(at[1])), seconds])
 		# The pulse is an alpha rather than a second colour: the label is
 		# already the heading colour and blinking it to a different hue
 		# would be two things changing at once.
@@ -259,8 +262,8 @@ func _refresh_boss() -> void:
 	var full := maxi(int((GameData.ENEMIES[kind] as Dictionary)["hp"]), 1)
 	var share := clampf(float(int(one.get("hp", 0))) / float(full), 0.0, 1.0)
 	_boss_fill.size = Vector2(maxf(238.0 * share, 0.0), 7.0)
-	_boss_name.text = "%s  %d/%d" % [str(kind).to_upper(),
-		int(one.get("hp", 0)), full]
+	_boss_name.text = I18n.f(&"NHUD_BOSS", [Names.of(kind).to_upper(),
+		int(one.get("hp", 0)), full])
 	# **And it flashes while it is winding up**, which is the second the
 	# player has to do something about the blow.
 	if Enemies.is_winding(_state, boss):
@@ -285,9 +288,11 @@ func _refresh_controls() -> void:
 	# **The flare**, with its wait on it rather than a bare "no".
 	var charge := Ability.charge_percent(_state)
 	_flare.disabled = not Ability.ready(_state)
-	_flare.text = "FLARE" if not _flare.disabled else "%d%%" % charge
+	_flare.text = I18n.t(&"NHUD_FLARE") if not _flare.disabled \
+		else I18n.f(&"NHUD_FLARE_CHARGE", [charge])
 
-	_speed.text = "%dx" % (driver.speed if driver != null else 1)
+	_speed.text = I18n.f(&"NHUD_SPEED",
+		[driver.speed if driver != null else 1])
 
 
 # --------------------------------------------------------------- the presses

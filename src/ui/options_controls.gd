@@ -76,7 +76,7 @@ func _ready() -> void:
 	footer.add_child(_message)
 	_reset_all = Button.new()
 	_reset_all.name = "ControlsResetAll"
-	_reset_all.text = "RESET ALL"
+	_reset_all.text = I18n.t(&"CTL_RESET_ALL")
 	_reset_all.custom_minimum_size = Vector2(72, 12)
 	_reset_all.focus_mode = Control.FOCUS_ALL
 	_reset_all.pressed.connect(_reset_everything)
@@ -93,14 +93,15 @@ func _build() -> void:
 	if _actions == null:
 		return
 
-	var group := ""
+	var group := &""
 	for action in _actions.names():
-		var belongs: String = _actions.group_for(action)
+		var belongs: StringName = _actions.group_for(action)
 		if belongs != group:
 			group = belongs
 			var heading := Label.new()
-			heading.name = "ControlsGroup_%s" % group.replace(" ", "")
-			heading.text = group
+			heading.name = "ControlsGroup_%s" % String(group).replace(
+				"ACT_GROUP_", "")
+			heading.text = I18n.t(group)
 			heading.custom_minimum_size = Vector2(0, ROW)
 			heading.theme_type_variation = UiKit.DIM
 			_rows.add_child(heading)
@@ -133,7 +134,7 @@ func _row_for(action: StringName) -> HBoxContainer:
 	# twenty-five rows is a column of noise.
 	var undo := Button.new()
 	undo.name = "Reset_%s" % action
-	undo.text = "X"
+	undo.text = I18n.t(&"CTL_RESET_ONE")
 	undo.custom_minimum_size = Vector2(12, ROW)
 	undo.focus_mode = Control.FOCUS_ALL
 	undo.pressed.connect(_reset_one.bind(action))
@@ -149,7 +150,7 @@ func _refresh() -> void:
 	var any := false
 	for action in _bind_buttons:
 		var button: Button = _bind_buttons[action]
-		button.text = "PRESS A KEY" if action == _waiting \
+		button.text = I18n.t(&"CTL_WAITING") if action == _waiting \
 			else String(_actions.text_of(action))
 		var moved: bool = _actions.rebound(action)
 		any = any or moved
@@ -177,7 +178,7 @@ func _message_says(words: String) -> void:
 func _start_waiting(action: StringName) -> void:
 	_waiting = action
 	_message_says("")
-	_message.text = "PRESS A KEY OR A MOUSE BUTTON - BACK TO KEEP IT"
+	_message.text = I18n.t(&"CTL_ASKING")
 	_message.theme_type_variation = UiKit.DIM
 	_refresh()
 
@@ -216,7 +217,7 @@ func _input(event: InputEvent) -> void:
 	if bool(done.get("ok", false)):
 		_message_says("")
 	else:
-		_message_says(String(done.get("why", "NO")))
+		_message_says(String(done.get("why", I18n.t(&"CTL_NO_ACTION"))))
 	_refresh()
 
 
@@ -258,3 +259,11 @@ func reset_showing(action: StringName) -> bool:
 
 func reset_all_showing() -> bool:
 	return _reset_all != null and _reset_all.visible
+
+
+## Say it all again in whatever language is up now.
+func relabel() -> void:
+	if _reset_all == null:
+		return
+	_reset_all.text = I18n.t(&"CTL_RESET_ALL")
+	_build()

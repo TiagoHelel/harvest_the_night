@@ -8454,3 +8454,138 @@ known rather than believed.
 
 `python tools/verify.py` prints PASS: 5933 asserts, 895 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+## 0097 - English and Portuguese - done 2026-09-28
+
+What changed: every word a player reads now comes out of a table. 321 keys in
+two languages, 22 screens converted, a checker that measures the Portuguese in
+the game's own font, a LANGUAGE row on a new GAME tab, and a language that
+changes without a restart.
+
+Files: `src/app/i18n.gd` (new), `src/ui/names.gd` (new),
+`src/ui/options_game.gd` (new), `assets/locale/strings.csv` (new),
+`tools/i18n_check.py` (new), every screen in `src/ui/`,
+`src/app/input_actions.gd`, `src/app/video.gd`, `src/core/game_data.gd`,
+`project.godot`, `tools/verify.py`, `src/tools/shot.gd`,
+`src/tools/headless_check.gd`, `src/tools/input_check.gd`.
+
+Verify: 5959 headless / 907 input / sim hash unchanged,
+**data hash 2601044827 -> 2842078959** (below).
+Shots: `implementation/shots/0097/noon-pt_BR.png`,
+`options_controls-pt_BR.png`.
+
+### One file with two columns, not two files
+
+The task asks for "English and pt-BR CSVs". It is one CSV with a column each,
+and that is better for a reason worth writing down: **a key present in one
+file and missing from the other is invisible, and an empty cell in a row is
+not.** The `width` column has the same argument - it belongs to the key rather
+than to a language, and two files would have to keep two copies of it in step.
+
+    key,width,en,pt_BR
+
+`width` is how many **pixels** the control that draws the key gives it, and it
+is the whole of the third done-when.
+
+### The overflow check is the one that could not be done by eye
+
+`tools/i18n_check.py` measures every line in the game's own glyph widths - the
+same `gen_font.measure()` the `.fnt` is written from - and fails on one that
+does not fit. It earned its keep immediately: **TUDO AO PADRÃO is 79 pixels in
+a 72 pixel button** and **PIXEL QUADRADO is 81 in a 76 pixel column.** One got
+shorter and one got a wider column. Neither would have been noticed until
+somebody played in Portuguese.
+
+It asks four other things nothing else can: a key the code uses and the table
+has not got, a row nothing uses, a language with an empty cell, and - thrown
+in because it cost nothing - the two languages using the same format
+specifiers, so a line cannot silently lose its number.
+
+### The keys are symbols, and `I18n` is static
+
+`MENU_ABANDON`, not `"ABANDON RUN"`. English-as-key is how gettext works and
+it is tempting; it collapses two English strings that happen to match, and
+"BUILD" the verb and "BUILD" the noun are different words in Portuguese.
+
+`I18n` is a `class_name` with static functions **and** the script behind the
+`Locale` autoload. `verify.py` parses every script alone with no autoloads, so
+`Audio` and the rest have to be found by path - and a path lookup at every
+label would be absurd. A static class is nameable at parse time, so a screen
+writes `I18n.t(&"HUD_DAY")` and nothing has to be found first. The node exists
+only to hear `Settings.changed`.
+
+### Nothing is concatenated, and plurals are rows
+
+Every line is one row with its slots in it, so the translator decides the word
+order. The one that proves it: `"  %d slot%s free" % [room, "" if room == 1
+else "s"]` became two rows, because Portuguese does not make a plural by
+adding a letter - and **"6 brutamontes" is the same word as one of them.**
+`I18n.plural` picks a row; the bare key is the singular and `.other` is the
+plural, so a word that does not change is written once.
+
+Numbers are grouped the way each language groups them: 1,234,567 and
+1.234.567.
+
+### `Names` is where the ids become words
+
+`src/core/` says `&"wheat"` and never says "wheat". Before this the id *was*
+the name - screens printed `String(id).replace("_", " ")` and got "gun tower",
+which is a translation system that works in exactly one language.
+
+Every key in `Names` is a literal, and the shortcut `&"ITEM_%s" % id.to_upper()`
+is deliberately not taken: the checker finds keys by reading the source, and a
+key assembled at runtime is a key it cannot see - so a missing Portuguese name
+would be found by a player instead. A check walks every table in `GameData`
+and fails on an id nobody has named.
+
+### The tutorial left `src/core/`
+
+`game_data.gd` had a note on it saying task 0097 would translate the five
+tutorial lines. It holds their **keys** now and none of their words, so a rule
+file names a step and never speaks to a player.
+
+**That is what moved the data hash**, deliberately: `2601044827 ->
+2842078959`. The table it digests changed, because the value of `line` changed
+from a sentence to a key. No rule moved with it - the sim hash is untouched.
+
+The tech notes are the one place two copies remain, and on purpose: a note is
+authored next to the lever it describes, which is where a designer wants it.
+What is new is a check that the table's English **is** that note, so the two
+cannot drift.
+
+### Switching language mid-game
+
+`Locale` hears the setting change, loads the other column and walks the tree
+calling `relabel()` on everything that has one. A convention rather than a
+signal, because the list of what needs redoing belongs next to the code that
+does it - and it returns a count, so a check can say a screen was reached.
+
+Boot does **not** relabel: every screen is built after the autoload and reads
+the table as it builds. The first version did, and walking a half-built tree
+reached the pause menu before its `_ready` had run - a null, found by
+`shot.py --pt_BR` rather than by the suite.
+
+`shot.py --pt_BR` is new and is how the Portuguese was actually looked at. It
+found the seed strip still in English on a Portuguese farm: it is built once,
+so unlike the rest of the HUD it does not come back on its own.
+
+### What is not done, and why it is task 0110
+
+`src/core/` still answers "why not" in English sentences - twenty-seven of
+them across `building.gd`, `sim.gd`, `farm.gd` and `tech.gd`: "in the water",
+"on the house", "short 4 wood". Translating them needs the answer to change
+shape, from a sentence to a key and its arguments, and the arguments are ids
+that the *screen* has to name. That is five functions and the thirty-odd
+asserts that read their text, which is a task rather than a corner of one.
+
+**Task 0110 is in the backlog for it.** Everything a player reads on a screen
+is translated; what is left is what a player reads when the game says no.
+
+### Hashes
+
+Sim hash unchanged at `215410677` - words are not rules. Data hash
+**`2601044827` -> `2842078959`**, deliberately, because the tutorial table now
+holds keys.
+
+`python tools/verify.py` prints PASS: 5959 asserts, 907 input cases, 0 failed,
+and a new `strings` row reading 321 keys in 2 languages, all of them fit.
+`exports` is still the one SKIP and still wants the Godot export templates.

@@ -91,6 +91,9 @@ var _failed := 0
 ## something.
 var _standing_at := Vector2i.ZERO
 
+## Put on the end of a picture's name when it is not in English.
+var _tongue := ""
+
 
 func _initialize() -> void:
 	var args := OS.get_cmdline_user_args()
@@ -100,10 +103,18 @@ func _initialize() -> void:
 		quit()
 		return
 
+	# **A language is a flag, not a scenario.** `--pt_BR` takes the same
+	# pictures in the other language, which is the only way to see that a
+	# translation fits the control it is in - task 0097 added a check that
+	# measures it, and this is how it is looked at.
+	var speaking := ""
 	var id := "latest"
 	var wanted: Array = []
 	for arg in args:
 		if arg.begins_with("--"):
+			var maybe := arg.substr(2)
+			if I18n.LOCALES.has(maybe):
+				speaking = maybe
 			continue
 		if id == "latest" and not _is_scenario(arg):
 			id = arg
@@ -125,6 +136,9 @@ func _initialize() -> void:
 	# made three of the five pictures differ between runs, by about seven
 	# hundredths of one per cent of their pixels, all of it around the
 	# chimneys. Found by diffing two runs rather than by reading the code.
+	if speaking != "":
+		_tongue = "-" + speaking
+
 	seed(SPARK_SEED)
 	var main: Node = load("res://scenes/Main.tscn").instantiate()
 	root.add_child(main)
@@ -162,6 +176,13 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 	# the one before it. Same seed each time, so the farm is the same farm.
 	seed(SPARK_SEED)
 	main.begin_run(SEED)
+	# **After the run is built, not before.** The `Locale` autoload sets the
+	# language from `Settings` in its own `_ready`, which happens somewhere
+	# in the middle of all this - so the language is put on again here, where
+	# nothing can come along afterwards and put it back.
+	if _tongue != "":
+		I18n.use(_tongue.substr(1))
+		I18n.relabel(main)
 	var driver = main.get_node("%SimDriver")
 	var state: Dictionary = driver.state
 	_standing_at = Player.cell(state)
@@ -200,7 +221,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		print("  %-8s no image came back - is this running headless?" % name)
 		_failed += 1
 		return
-	var path := folder + name + ".png"
+	var path := folder + name + _tongue + ".png"
 	var wrote := image.save_png(ProjectSettings.globalize_path(path))
 	if wrote != OK:
 		print("  %-8s could not be written" % name)

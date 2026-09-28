@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 89
+const GROUPS := 90
 
 const SettingsScript := preload("res://src/app/settings.gd")
 const AppScript := preload("res://src/app/app.gd")
@@ -165,6 +165,7 @@ func _run() -> void:
 	_task_0094_audio()
 	_task_0095_controls()
 	_task_0096_pause()
+	_task_0097_strings()
 
 
 func _finish() -> void:
@@ -5200,7 +5201,8 @@ func _task_0041_tutorial() -> void:
 		str(GameData.check_tutorial(steps)))
 	var longest := 0
 	for entry in steps:
-		longest = maxi(longest, (entry as Dictionary)["line"].length())
+		longest = maxi(longest,
+		I18n.t(StringName((entry as Dictionary)["line"])).length())
 	print("  day one: %d lines, longest %d characters"
 		% [steps.size(), longest])
 
@@ -13681,10 +13683,10 @@ func _task_0092_router() -> void:
 	# **The options frame is a seam, and the tabs that exist are the tabs it
 	# shows.** Same rule as the title menu's, one level down; tasks 0093 to
 	# 0095 are what register them.
-	expect(OptionsScript.TABS.size() == 3,
-		"there is room for video, audio and controls",
+	expect(OptionsScript.TABS.size() == 4,
+		"there is room for the game, video, audio and controls",
 		str(OptionsScript.TABS))
-	for wanted in [&"video", &"audio", &"controls"]:
+	for wanted in [&"game", &"video", &"audio", &"controls"]:
 		expect(OptionsScript.TABS.has(wanted),
 			"'%s' has a place on the strip" % wanted)
 
@@ -14354,4 +14356,117 @@ func _task_0096_pause() -> void:
 	carried.free()
 	later.free()
 
+	_completed += 1
+## 0097 - every word the player reads, in two languages.
+func _task_0097_strings() -> void:
+	expect(I18n.load_all() >= 2, "the table has both languages",
+		str(I18n.load_all()))
+	expect(I18n.LOCALES.has("en") and I18n.LOCALES.has("pt_BR"),
+		"and the screen offers both", str(I18n.LOCALES))
+	expect(I18n.FALLBACK == "en",
+		"with English underneath, key by key", I18n.FALLBACK)
+	expect(I18n.keys().size() > 250,
+		"and there are a lot of them", str(I18n.keys().size()))
+
+	# **A key nobody has is not a blank label.** A screen with a gap on it
+	# says nothing; a screen saying HUD_DAY says which row is missing.
+	I18n.use("en")
+	I18n.forget_missing()
+	expect(I18n.t(&"NOT_A_REAL_KEY") == "NOT_A_REAL_KEY",
+		"a missing key reads as its own name")
+	expect(I18n.missing().has("NOT_A_REAL_KEY"),
+		"and is remembered, so a check can ask what was asked for")
+	I18n.forget_missing()
+
+	# **Both languages, key by key.**
+	expect(I18n.t(&"PAUSE_SAVE") == "SAVE AND QUIT", "English is English",
+		I18n.t(&"PAUSE_SAVE"))
+	I18n.use("pt_BR")
+	expect(I18n.locale() == "pt_BR", "and the language changes")
+	expect(I18n.t(&"PAUSE_SAVE") == "SALVAR E SAIR", "Portuguese is not",
+		I18n.t(&"PAUSE_SAVE"))
+	expect(I18n.t(&"PAUSE_SAVE") != I18n.t(&"PAUSE_RESUME"),
+		"and two keys are two lines")
+
+	# A language nobody has falls back rather than emptying the screen.
+	var was := I18n.revision()
+	I18n.use("kl_ingon")
+	expect(I18n.locale() == "en",
+		"a language the game does not have falls back to the one it does",
+		I18n.locale())
+	expect(I18n.revision() > was, "and the revision moves when it changes")
+
+	# **Nothing is concatenated.** Every line is one row with its slots in
+	# it, so the translator decides the word order.
+	I18n.use("pt_BR")
+	expect(I18n.f(&"LOG_NIGHT_BEGAN", [3]) == "a noite 3 começa",
+		"a line puts its number where Portuguese puts it",
+		I18n.f(&"LOG_NIGHT_BEGAN", [3]))
+
+	# **Plurals are rows, not an s on the end.** "brutamontes" is the same
+	# word twice over, which no amount of suffixing produces.
+	expect(I18n.plural(&"ENEMY_WALKER", 1) == "andarilho",
+		"one of them", I18n.plural(&"ENEMY_WALKER", 1))
+	expect(I18n.plural(&"ENEMY_WALKER", 6) == "andarilhos",
+		"six of them", I18n.plural(&"ENEMY_WALKER", 6))
+	expect(I18n.plural(&"ENEMY_TANK", 1) == I18n.plural(&"ENEMY_TANK", 6),
+		"and a word that does not change does not change",
+		I18n.plural(&"ENEMY_TANK", 6))
+
+	# **Numbers are grouped the way the language groups them.**
+	expect(I18n.number(1234567) == "1.234.567",
+		"Portuguese groups thousands with a full stop", I18n.number(1234567))
+	I18n.use("en")
+	expect(I18n.number(1234567) == "1,234,567",
+		"and English with a comma", I18n.number(1234567))
+	expect(I18n.number(-42) == "-42", "a small negative is left alone",
+		I18n.number(-42))
+
+	# **Every id the game has is a name somebody wrote.** A thing added to a
+	# table and not named here shows as its own id, which is what this
+	# catches - and the check that finds it is this one rather than a player.
+	var unnamed: Array = []
+	for id in GameData.RESOURCES:
+		if not Names.KEYS.has(id):
+			unnamed.append(String(id))
+	for table in [GameData.DEFENCES, GameData.BUILDINGS, GameData.RECIPES,
+			GameData.ENEMIES, GameData.CROPS]:
+		for id in (table as Dictionary):
+			if not Names.KEYS.has(id):
+				unnamed.append(String(id))
+	for row in GameData.TECH_TREE:
+		var id: StringName = (row as Dictionary)["id"]
+		if not Names.KEYS.has(id) or not Names.NOTES.has(id):
+			unnamed.append(String(id))
+	expect(unnamed.is_empty(), "everything in the game has a name",
+		", ".join(unnamed))
+
+	# **And the note beside the lever is the note in the table.** The tech
+	# notes are authored next to the numbers they describe, which is where a
+	# designer wants them; this is what stops the two drifting apart.
+	var drifted: Array = []
+	for row in GameData.TECH_TREE:
+		var one: Dictionary = row
+		var id: StringName = one["id"]
+		if Names.note_of(id) != String(one.get("note", "")):
+			drifted.append("%s: %s against %s"
+				% [id, Names.note_of(id), one.get("note", "")])
+	expect(drifted.is_empty(),
+		"every tech note reads the same in the table as on the node",
+		", ".join(drifted))
+
+	# **The words reach the screens.** `relabel()` is the convention, and a
+	# screen that has one is a screen that comes back in the new language.
+	var frame: Node = OptionsScript.new()
+	expect(frame.has_method(&"relabel"), "the options frame can relabel")
+	frame.free()
+	var menu: Node = PauseScript.new()
+	expect(menu.has_method(&"relabel"), "and so can the pause menu")
+	menu.free()
+
+	expect(SettingsScript.DEFAULTS.has(&"gameplay/language"),
+		"the language is a setting")
+	expect(String(SettingsScript.DEFAULTS[&"gameplay/language"]) == "en",
+		"and it ships in English",
+		str(SettingsScript.DEFAULTS[&"gameplay/language"]))
 	_completed += 1

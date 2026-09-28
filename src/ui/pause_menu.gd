@@ -24,12 +24,12 @@ extends Control
 ## and only then offers to do it. A confirmation that says "are you sure?"
 ## and nothing else is a confirmation people learn to press twice.
 
-## What the menu offers, in order: the name, and what it says.
+## What the menu offers, in order: the name, and the line that names it.
 const ENTRIES: Array = [
-	[&"resume", "RESUME"],
-	[&"options", "OPTIONS"],
-	[&"save", "SAVE AND QUIT"],
-	[&"abandon", "ABANDON RUN"],
+	[&"resume", &"PAUSE_RESUME"],
+	[&"options", &"PAUSE_OPTIONS"],
+	[&"save", &"PAUSE_SAVE"],
+	[&"abandon", &"PAUSE_ABANDON"],
 ]
 
 ## Emitted for whoever is listening; `Main` does the saving, because a screen
@@ -39,6 +39,7 @@ signal chose(which: StringName)
 var _state: Dictionary = {}
 
 var _frame: PanelContainer
+var _title: Label
 var _menu: VBoxContainer
 var _cost: Label
 
@@ -69,11 +70,11 @@ func _ready() -> void:
 	column.theme_type_variation = UiKit.SPACED
 	_frame.add_child(column)
 
-	var title := Label.new()
-	title.name = "PauseTitle"
-	title.text = "PAUSED"
-	title.theme_type_variation = UiKit.HEADING
-	column.add_child(title)
+	_title = Label.new()
+	_title.name = "PauseTitle"
+	_title.text = I18n.t(&"PAUSE_TITLE")
+	_title.theme_type_variation = UiKit.HEADING
+	column.add_child(_title)
 
 	_menu = VBoxContainer.new()
 	_menu.name = "PauseMenuList"
@@ -110,27 +111,28 @@ func _build() -> void:
 		_menu.add_child(button)
 	_cost.visible = _asking
 	_cost.text = _what_is_lost() if _asking else ""
+	_title.text = I18n.t(&"PAUSE_TITLE")
 
 
 func _label_for(which: StringName) -> String:
 	if which == &"abandon" and _asking:
-		return "YES, ABANDON IT"
+		return I18n.t(&"PAUSE_ABANDON_SURE")
 	for entry in ENTRIES:
 		if entry[0] == which:
-			return String(entry[1])
+			return I18n.t(entry[1])
 	return String(which).to_upper()
 
 
 ## What the second press is about to take, in the player's own units.
 func _what_is_lost() -> String:
 	if _state.is_empty():
-		return "THIS RUN GOES, AND IT DOES NOT COME BACK"
+		return I18n.t(&"PAUSE_LOST_EMPTY")
 	var summary := Run.summary(_state)
 	var standing := 0
 	for kind in summary["build"]:
 		standing += int((summary["build"] as Dictionary)[kind])
-	return "DAY %d, %d NIGHTS SURVIVED, %d BUILT - ALL OF IT GOES" % [
-		int(summary["days"]), int(summary["nights_won"]), standing]
+	return I18n.f(&"PAUSE_LOST", [int(summary["days"]),
+		int(summary["nights_won"]), standing])
 
 
 # ----------------------------------------------------------------- the clicks
@@ -196,6 +198,13 @@ func set_open(open: bool) -> void:
 
 func is_open() -> bool:
 	return visible
+
+
+## Say it all again in whatever language is up now.
+func relabel() -> void:
+	if _menu == null:
+		return
+	_build()
 
 
 # ------------------------------------------------------------ for the checks

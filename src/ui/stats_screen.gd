@@ -81,12 +81,14 @@ func _ready() -> void:
 	add_child(_frame)
 
 	var heading := _label("StatsHeading", Vector2(4, 2), UiKit.WARM)
-	heading.text = "RECORDS"
+	heading.text = I18n.t(&"STATS_TITLE")
 	var hint := _label("StatsHint", Vector2(316, 2), UiKit.DIM)
-	hint.text = "R or ESC to close"
+	hint.text = I18n.t(&"STATS_HINT")
 
-	_label("StatsRunHead", Vector2(RUN_X, 18), UiKit.COOL).text = "THIS RUN"
-	_label("StatsLifeHead", Vector2(LIFE_X, 18), UiKit.WARM).text = "ALL RUNS"
+	_label("StatsRunHead", Vector2(RUN_X, 18), UiKit.COOL).text = \
+		I18n.t(&"STATS_THIS_RUN")
+	_label("StatsLifeHead", Vector2(LIFE_X, 18), UiKit.WARM).text = \
+		I18n.t(&"STATS_ALL_RUNS")
 
 	var rule := ColorRect.new()
 	rule.name = "StatsRule"
@@ -100,18 +102,18 @@ func _ready() -> void:
 	# only mean anything across runs.
 	var row := 0
 	for line in [
-		["nights", "nights survived"],
-		["killed", "zombies killed"],
-		["gathered", "resources gathered"],
-		["built", "structures built"],
-		["lost", "structures lost"],
-		["best_night", "best night reached"],
-		["runs", "runs started / won"],
+		["nights", &"STATS_NIGHTS"],
+		["killed", &"STATS_KILLED"],
+		["gathered", &"STATS_GATHERED"],
+		["built", &"STATS_BUILT"],
+		["lost", &"STATS_LOST"],
+		["best_night", &"STATS_BEST_NIGHT"],
+		["runs", &"STATS_RUNS"],
 	]:
 		var key: String = line[0]
 		var y := 34.0 + row * 14.0
 		var name_label := _label("StatsName_" + key, Vector2(4, y), UiKit.DIM)
-		name_label.text = str(line[1])
+		name_label.text = I18n.t(line[1])
 		_rows[key] = [
 			_label("StatsRun_" + key, Vector2(RUN_X, y), UiKit.COOL),
 			_label("StatsLife_" + key, Vector2(LIFE_X, y), UiKit.WARM),
@@ -121,7 +123,8 @@ func _ready() -> void:
 	# **What was killed, by kind**, on its own lines. The task asks for kills
 	# by type and a single number cannot say it; four enemy kinds and a Giant
 	# will not fit in a column two hundred pixels from the edge.
-	_label("StatsByKindHead", Vector2(4, 148), UiKit.COOL).text = "BY KIND, THIS RUN"
+	_label("StatsByKindHead", Vector2(4, 148), UiKit.COOL).text = \
+		I18n.t(&"STATS_BY_KIND")
 	_breakdown = _label("StatsByKind", Vector2(4, 162), UiKit.WARM)
 	_breakdown.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_breakdown.size = Vector2(452, 40)
@@ -212,7 +215,8 @@ func _refresh(run: Dictionary) -> void:
 	_write("built", str(run["built"]), str(life["built"]))
 	_write("lost", str(run["lost"]), str(life["lost"]))
 	_write("best_night", str(run["best_night"]), str(life["best_night"]))
-	_write("runs", "-", "%d / %d" % [life["runs_started"], life["runs_won"]])
+	_write("runs", I18n.t(&"STATS_NONE"), I18n.f(&"STATS_RUNS_PAIR",
+		[life["runs_started"], life["runs_won"]]))
 	_breakdown.text = _by_kind(run["killed_by_kind"])
 
 
@@ -226,10 +230,11 @@ func _write(key: String, run_text: String, life_text: String) -> void:
 ## between frames.
 func _by_kind(by_kind: Dictionary) -> String:
 	if by_kind.is_empty():
-		return "nothing yet"
+		return I18n.t(&"STATS_NOTHING")
 	var parts: Array = []
 	for kind in GameData.sorted_names(by_kind.keys()):
-		parts.append("%s %d" % [str(kind), int(by_kind[kind])])
+		parts.append(I18n.f(&"STATS_BY_KIND_ONE",
+			[Names.of(kind), int(by_kind[kind])]))
 	return ", ".join(parts)
 
 

@@ -127,10 +127,10 @@ func _ready() -> void:
 	add_child(strip)
 
 	_day = _label("Day", Vector2(4, 3), UiKit.WARM)
-	_day.text = "DAY 1"
+	_day.text = I18n.t(&"DHUD_DAY_FIRST")
 
 	_money = _label("Money", Vector2(96, 3), UiKit.WARM)
-	_money.text = "$ 0"
+	_money.text = I18n.t(&"DHUD_MONEY_FIRST")
 
 	# Two rows of three, right-aligned against the top-right corner, the way
 	# section 14 of the design document lays them out.
@@ -165,7 +165,7 @@ func _ready() -> void:
 	# collected and shown by hand on the night side of `_refresh()`.
 	_night = Button.new()
 	_night.name = "NightButton"
-	_night.text = "SWITCH TO NIGHT"
+	_night.text = I18n.t(&"DHUD_TO_NIGHT")
 	_night.position = Vector2(352, 248)
 	_night.size = Vector2(124, 18)
 	_night.focus_mode = Control.FOCUS_ALL          # the keyboard can reach it
@@ -207,14 +207,14 @@ func _build_seed_strip() -> void:
 	add_child(strip)
 
 	var heading := _label("SeedHeading", Vector2(7, 35), UiKit.WARM)
-	heading.text = "# CROP    $  TIME  /DAY"
+	heading.text = I18n.t(&"DHUD_SEED_HEADING")
 
 	for i in ids.size():
 		var id: StringName = ids[i]
 		var row := _label("seed_%s" % id, Vector2(7, 46 + i * 10), UiKit.DIM)
-		row.text = "%d %-7s $%-2d %3ds  %2d" % [i + 1, str(id),
+		row.text = I18n.f(&"DHUD_SEED_ROW", [i + 1, Names.of(id),
 			int((GameData.CROPS[id] as Dictionary)["seed_cost"]),
-			Farming.seconds_to_grow(id), Farming.value_per_day(id)]
+			Farming.seconds_to_grow(id), Farming.value_per_day(id)])
 		_seed_rows[id] = row
 
 
@@ -289,9 +289,9 @@ func _refresh(force: bool) -> void:
 	var supply := Power.supply(_state)
 	var draw := Power.draw(_state)
 	var percent := Power.percent(_state)
-	_power.text = "POWER %d/%d" % [supply, draw] \
-		if percent >= 100 else "POWER %d/%d  everything at %d%%" \
-			% [supply, draw, percent]
+	_power.text = I18n.f(&"DHUD_POWER", [supply, draw]) \
+		if percent >= 100 \
+		else I18n.f(&"DHUD_POWER_SHORT", [supply, draw, percent])
 	_power.theme_type_variation = UiKit.WARN if percent < 100 \
 		else UiKit.DIM
 
@@ -300,10 +300,11 @@ func _refresh(force: bool) -> void:
 	var empty := false
 	for res in Ammo.kinds():
 		var held := Resources.amount(_state, res)
-		parts.append("%s %d" % [res, held])
+		parts.append(I18n.f(&"DHUD_AMMO_ONE", [Names.of(res), held]))
 		if held <= 0:
 			empty = true
-	_ammo.text = "AMMO  " + "   ".join(parts) if not parts.is_empty() 		else "AMMO  none needed"
+	_ammo.text = I18n.f(&"DHUD_AMMO", ["   ".join(parts)]) \
+		if not parts.is_empty() else I18n.t(&"DHUD_AMMO_NONE")
 	_ammo.theme_type_variation = UiKit.WARN if empty else UiKit.DIM
 
 	if _day_only.is_empty():
@@ -320,7 +321,8 @@ func _refresh(force: bool) -> void:
 	_skip.visible = after_dark
 	if after_dark:
 		var refused := Sim.why_not_skip(_state)
-		_skip.text = "[K] SKIP" if refused.is_empty() else "[K] " + refused
+		_skip.text = I18n.t(&"DHUD_SKIP") if refused.is_empty() \
+			else I18n.f(&"DHUD_SKIP_NO", [refused])
 		_skip.theme_type_variation = UiKit.WARN \
 			if not refused.is_empty() else UiKit.WARM
 
@@ -335,19 +337,19 @@ func _refresh(force: bool) -> void:
 	# session had been running rather than how much of today is left, which is
 	# the one thing it is for.
 	var tick := int(_state["day_tick"])
-	_day.text = "DAY %d   %d:%02d%s" % [
+	_day.text = I18n.f(&"DHUD_DAY", [
 		int(_state["day"]),
 		tick / (GameData.TICK_HZ * 60),
 		(tick / GameData.TICK_HZ) % 60,
-		"  DUSK" if Phases.is_dusk(_state) else "",
-	]
+		I18n.t(&"DHUD_DUSK") if Phases.is_dusk(_state) else "",
+	])
 	_day.modulate = LIT_TINT if Phases.is_dusk(_state) else Color.WHITE
 	var money := Resources.amount(_state, GameData.MONEY)
 	if force or money != int(_last.get(GameData.MONEY, -1)):
 		if not force and _last.has(GameData.MONEY):
 			_flash[GameData.MONEY] = FLASH_SECONDS
 		_last[GameData.MONEY] = money
-		_money.text = "$ %d" % money
+		_money.text = I18n.f(&"DHUD_MONEY", [money])
 
 	for id in _labels:
 		var held := Resources.amount(_state, id)
@@ -356,14 +358,16 @@ func _refresh(force: bool) -> void:
 		if not force and int(_last[id]) >= 0:
 			_flash[id] = FLASH_SECONDS
 		_last[id] = held
-		(_labels[id] as Label).text = "%s %d" % [_short(id), held]
+		(_labels[id] as Label).text = I18n.f(&"DHUD_HELD",
+			[_short(id), held])
 
 	# **The can, and where to fill it when it is empty.** A number on its own
 	# would leave a player who has never found the well holding an empty can
 	# with no idea why.
 	var carried := Farming.water_carried(_state)
-	_water.text = "WATER %d/%d" % [carried, GameData.WATER_CAN_CAPACITY] \
-		if carried > 0 else "WATER  fill at the well"
+	_water.text = I18n.f(&"DHUD_WATER",
+		[carried, GameData.WATER_CAN_CAPACITY]) \
+		if carried > 0 else I18n.t(&"DHUD_WATER_EMPTY")
 	_water.theme_type_variation = UiKit.WARM if carried > 0 \
 		else UiKit.DIM
 
@@ -379,14 +383,37 @@ func _refresh(force: bool) -> void:
 	_line.visible = daylight and Fishing.is_casting(_state)
 	if _line.visible:
 		var biting := Fishing.is_biting(_state)
-		_line.text = "A BITE - PRESS SPACE" if biting else "waiting for a bite"
+		_line.text = I18n.t(&"DHUD_BITE") if biting \
+			else I18n.t(&"DHUD_WAITING")
 		_line.theme_type_variation = UiKit.WARM if biting else UiKit.DIM
 
 	# **Past dusk the button asks.** It never presses itself: `design.md`
 	# promises the player switches reality when they want to.
-	_night.text = "NIGHT %d IS WAITING" % int(_state["day"]) \
-		if Phases.is_dusk(_state) else "SWITCH TO NIGHT"
+	_night.text = I18n.f(&"DHUD_NIGHT_WAITING", [int(_state["day"])]) \
+		if Phases.is_dusk(_state) else I18n.t(&"DHUD_TO_NIGHT")
 	_night.modulate = LIT_TINT if Phases.is_dusk(_state) else Color.WHITE
+
+
+## Say it all again in whatever language is up now.
+##
+## The strip of seeds and its heading are built once, so unlike everything
+## else on this HUD they do not come back on their own.
+func relabel() -> void:
+	if _state.is_empty():
+		return
+	var heading := get_node_or_null(^"SeedHeading") as Label
+	if heading != null:
+		heading.text = I18n.t(&"DHUD_SEED_HEADING")
+	var ids := Farming.seeds()
+	for i in ids.size():
+		var id: StringName = ids[i]
+		if not _seed_rows.has(id):
+			continue
+		(_seed_rows[id] as Label).text = I18n.f(&"DHUD_SEED_ROW",
+			[i + 1, Names.of(id),
+			int((GameData.CROPS[id] as Dictionary)["seed_cost"]),
+			Farming.seconds_to_grow(id), Farming.value_per_day(id)])
+	show_state(_state)
 
 
 func _fade(delta: float) -> void:
@@ -412,7 +439,7 @@ func _fade(delta: float) -> void:
 ## "STO" and "IRO" - which is not shorthand, it is a puzzle. At font size 9 the
 ## longest of these is forty pixels and the bar is four hundred and eighty.
 func _short(id: StringName) -> String:
-	return str(id)
+	return Names.of(id)
 
 
 func _label(node_name: String, at: Vector2,

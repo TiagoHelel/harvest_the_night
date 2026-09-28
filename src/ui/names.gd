@@ -1,0 +1,148 @@
+class_name Names
+extends RefCounted
+
+## What the things in the game are called, in whatever language is up.
+##
+## **The rules hold ids and this holds names.** `src/core/` says `&"wheat"`
+## and never says "wheat", which is what lets a Portuguese player harvest
+## trigo off the same tile - and what keeps a rule from depending on a
+## setting. Before task 0097 the id *was* the name: a screen printed
+## `String(id).replace("_", " ")` and got "gun tower", which is a translation
+## system that only works in one language.
+##
+## ## Every key is a literal here
+##
+## The obvious shortcut is `&"ITEM_%s" % id.to_upper()`, and it is wrong for
+## one reason: `tools/i18n_check.py` finds keys by reading the source, and a
+## key that is assembled at runtime is a key it cannot see - so a missing
+## Portuguese name would be found by a player rather than by the check. One
+## table, one line per thing, every key written out.
+
+## Data id -> the key that names it.
+const KEYS: Dictionary = {
+	# ---- what a farm produces and a shop buys
+	&"wood": &"ITEM_WOOD",
+	&"stone": &"ITEM_STONE",
+	&"iron": &"ITEM_IRON",
+	&"food": &"ITEM_FOOD",
+	&"fish": &"ITEM_FISH",
+	&"oil": &"ITEM_OIL",
+	&"wheat": &"ITEM_WHEAT",
+	&"corn": &"ITEM_CORN",
+	&"carrot": &"ITEM_CARROT",
+	&"meat": &"ITEM_MEAT",
+	&"gunpowder": &"ITEM_GUNPOWDER",
+	&"incendiary": &"ITEM_INCENDIARY",
+	&"money": &"ITEM_MONEY",
+	&"energy": &"ITEM_ENERGY",
+	&"tech": &"ITEM_TECH",
+
+	# ---- what a night is held off with
+	&"gun_tower": &"DEF_GUN_TOWER",
+	&"flame_tower": &"DEF_FLAME_TOWER",
+	&"mortar": &"DEF_MORTAR",
+	&"auto_crossbow": &"DEF_AUTO_CROSSBOW",
+	&"mine": &"DEF_MINE",
+	&"fence": &"DEF_FENCE",
+	&"wall": &"DEF_WALL",
+	&"barricade": &"DEF_BARRICADE",
+
+	# ---- what a day builds
+	&"workshop": &"BLD_WORKSHOP",
+	&"press": &"BLD_PRESS",
+	&"kitchen": &"BLD_KITCHEN",
+	&"generator": &"BLD_GENERATOR",
+
+	# ---- what those make
+	&"barricade_kit": &"REC_BARRICADE_KIT",
+	&"fence_kit": &"REC_FENCE_KIT",
+	&"mine_kit": &"REC_MINE_KIT",
+	&"wall_kit": &"REC_WALL_KIT",
+	&"press_oil": &"REC_PRESS_OIL",
+	&"press_fish_oil": &"REC_PRESS_FISH_OIL",
+	&"make_incendiary": &"REC_MAKE_INCENDIARY",
+	&"make_gunpowder": &"REC_MAKE_GUNPOWDER",
+	&"cook_meal": &"REC_COOK_MEAL",
+	&"cook_fish": &"REC_COOK_FISH",
+	&"cook_roast": &"REC_COOK_ROAST",
+
+	# ---- what comes out of the dark. **Plural pairs**, so `I18n.plural`
+	# takes these keys and adds `.one` or `.other` itself.
+	&"walker": &"ENEMY_WALKER",
+	&"runner": &"ENEMY_RUNNER",
+	&"tank": &"ENEMY_TANK",
+	&"breaker": &"ENEMY_BREAKER",
+	&"giant": &"ENEMY_GIANT",
+
+	# ---- what the tech tree buys
+	&"sharp tools": &"TECH_SHARP_TOOLS",
+	&"full cans": &"TECH_FULL_CANS",
+	&"steady hands": &"TECH_STEADY_HANDS",
+	&"a name at market": &"TECH_A_NAME_AT_MARKET",
+	&"true sights": &"TECH_TRUE_SIGHTS",
+	&"long barrels": &"TECH_LONG_BARRELS",
+	&"oiled works": &"TECH_OILED_WORKS",
+	&"a standing order": &"TECH_A_STANDING_ORDER",
+	&"stout timbers": &"TECH_STOUT_TIMBERS",
+	&"a full larder": &"TECH_A_FULL_LARDER",
+	&"spare stakes": &"TECH_SPARE_STAKES",
+	&"a second flare": &"TECH_A_SECOND_FLARE",
+
+	# ---- the branches of it
+	&"production": &"TECH_BRANCH_PRODUCTION",
+	&"defence": &"TECH_BRANCH_DEFENCE",
+	&"survival": &"TECH_BRANCH_SURVIVAL",
+
+	# ---- what a hit is made of
+	&"impact": &"DMG_IMPACT",
+	&"fire": &"DMG_FIRE",
+	&"explosive": &"DMG_EXPLOSIVE",
+
+	# ---- where a recipe is made
+	&"workbench": &"STATION_WORKBENCH",
+}
+
+## And what each tech node promises, which is a sentence rather than a name.
+const NOTES: Dictionary = {
+	&"sharp tools": &"TECHNOTE_SHARP_TOOLS",
+	&"full cans": &"TECHNOTE_FULL_CANS",
+	&"steady hands": &"TECHNOTE_STEADY_HANDS",
+	&"a name at market": &"TECHNOTE_A_NAME_AT_MARKET",
+	&"true sights": &"TECHNOTE_TRUE_SIGHTS",
+	&"long barrels": &"TECHNOTE_LONG_BARRELS",
+	&"oiled works": &"TECHNOTE_OILED_WORKS",
+	&"a standing order": &"TECHNOTE_A_STANDING_ORDER",
+	&"stout timbers": &"TECHNOTE_STOUT_TIMBERS",
+	&"a full larder": &"TECHNOTE_A_FULL_LARDER",
+	&"spare stakes": &"TECHNOTE_SPARE_STAKES",
+	&"a second flare": &"TECHNOTE_A_SECOND_FLARE",
+}
+
+
+## What this thing is called.
+##
+## **An id with no name reads as itself**, spaced out rather than
+## underscored, which is what every screen used to do for everything - so a
+## thing added to a table and not named here still appears, and still looks
+## like something somebody forgot.
+static func of(id: StringName) -> String:
+	if KEYS.has(id):
+		return I18n.t(KEYS[id])
+	return String(id).replace("_", " ")
+
+
+## The key rather than the words, for a plural or a count.
+static func key_of(id: StringName) -> StringName:
+	return KEYS.get(id, StringName(String(id).to_upper()))
+
+
+## What a tech node promises.
+static func note_of(id: StringName) -> String:
+	return I18n.t(NOTES[id]) if NOTES.has(id) else ""
+
+
+## Every id this knows a name for, sorted. For the checks.
+static func known() -> Array:
+	var out: Array = KEYS.keys()
+	out.sort()
+	return out

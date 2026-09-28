@@ -20,7 +20,17 @@ extends Control
 
 ## What the strip can hold, in the order the tabs belong in. A task that
 ## builds one registers under its own name.
-const TABS: Array = [&"video", &"audio", &"controls"]
+const TABS: Array = [&"game", &"video", &"audio", &"controls"]
+
+## What each is called on the strip. Not the tab's own name upper-cased:
+## "CONTROLS" is "CONTROLES" in Portuguese and an upper-cased `controls` is
+## not.
+const TAB_NAMES: Dictionary = {
+	&"game": &"OPT_TAB_GAME",
+	&"video": &"OPT_TAB_VIDEO",
+	&"audio": &"OPT_TAB_AUDIO",
+	&"controls": &"OPT_TAB_CONTROLS",
+}
 
 var _tabs: Dictionary = {}
 var _open := &""
@@ -49,7 +59,7 @@ func _ready() -> void:
 
 	var title := Label.new()
 	title.name = "OptionsTitle"
-	title.text = "OPTIONS"
+	title.text = I18n.t(&"OPT_TITLE")
 	title.theme_type_variation = UiKit.HEADING
 	column.add_child(title)
 
@@ -65,13 +75,17 @@ func _ready() -> void:
 
 	_empty = Label.new()
 	_empty.name = "OptionsEmpty"
-	_empty.text = "nothing to set yet"
+	_empty.text = I18n.t(&"OPT_EMPTY")
 	_empty.theme_type_variation = UiKit.DIM
 	_room.add_child(_empty)
 
 	# **The tabs register themselves here.** The frame knows the names in
 	# `TABS` and nothing about what any of them does, which is what made 0094
 	# three lines - and leaves 0095 the same.
+	var game := OptionsGame.new()
+	game.name = "OptionsGame"
+	register(&"game", game)
+
 	var video := OptionsVideo.new()
 	video.name = "OptionsVideo"
 	register(&"video", video)
@@ -86,7 +100,7 @@ func _ready() -> void:
 
 	var back := Button.new()
 	back.name = "OptionsBack"
-	back.text = "BACK"
+	back.text = I18n.t(&"OPT_BACK")
 	back.custom_minimum_size = Vector2(80, 16)
 	back.focus_mode = Control.FOCUS_ALL
 	back.pressed.connect(_go_back)
@@ -133,6 +147,18 @@ func tabs() -> Array:
 	return out
 
 
+## Say it all again in whatever language is up now.
+func relabel() -> void:
+	if _frame == null:
+		return
+	(_frame.get_node(^"OptionsColumn/OptionsTitle") as Label).text = \
+		I18n.t(&"OPT_TITLE")
+	(_frame.get_node(^"OptionsColumn/OptionsBack") as Button).text = \
+		I18n.t(&"OPT_BACK")
+	_empty.text = I18n.t(&"OPT_EMPTY")
+	_rebuild_strip()
+
+
 func _rebuild_strip() -> void:
 	for child in _strip.get_children():
 		_strip.remove_child(child)
@@ -140,7 +166,7 @@ func _rebuild_strip() -> void:
 	for which in tabs():
 		var tab := Button.new()
 		tab.name = "OptionsTab_%s" % which
-		tab.text = String(which).to_upper()
+		tab.text = I18n.t(TAB_NAMES.get(which, &"OPT_TAB_GAME"))
 		tab.toggle_mode = true
 		tab.button_pressed = which == _open
 		tab.theme_type_variation = UiKit.TAB

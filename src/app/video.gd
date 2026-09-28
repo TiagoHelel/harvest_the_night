@@ -48,9 +48,9 @@ const BORDERLESS := 1
 const FULLSCREEN := 2
 
 const MODE_NAMES: Dictionary = {
-	WINDOWED: "WINDOWED",
-	BORDERLESS: "BORDERLESS",
-	FULLSCREEN: "FULLSCREEN",
+	WINDOWED: &"VID_MODE_WINDOWED",
+	BORDERLESS: &"VID_MODE_BORDERLESS",
+	FULLSCREEN: &"VID_MODE_FULLSCREEN",
 }
 
 ## The frame caps the screen offers. Zero is uncapped.

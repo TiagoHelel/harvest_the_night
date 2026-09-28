@@ -381,6 +381,27 @@ TASKS = [
               "The screenshots show a day, a night, the switch, a busy wave and "
               "the tech tree"]),
 
+    # Added while doing 0097: the screens are all keys now, and the rules
+    # still answer "why not" in English sentences. Doing it needs the answer
+    # to change shape - a key and its arguments rather than a sentence - and
+    # that is a refactor of five functions and the thirty-odd asserts that
+    # read them, which is a task rather than a corner of one.
+    dict(id=110, phase=P7, title="Refusals in two languages",
+         slug="refusals", deps=[97],
+         files="src/core/building.gd, src/core/sim.gd, src/core/tech.gd",
+         goal="The last English sentences in `src/core/`: the lines that say "
+              "why a thing cannot be built, bought or skipped.",
+         req=["`why_not_*` returns a key and its arguments rather than a "
+              "sentence",
+              "The words live in `assets/locale/strings.csv` like every other "
+              "line",
+              "The ids in a refusal - what is short, what is needed - are "
+              "named by `Names.of` rather than printed raw",
+              "`tools/i18n_check.py` covers them, widths and all"],
+         dod=["`grep` finds no player-facing sentence left in `src/core/`",
+              "Every refusal reads in Portuguese, and the checker proves it "
+              "fits"]),
+
     dict(id=108, phase=P8, title="The devlog and a trailer clip",
          slug="devlog", deps=[82, 107],
          files="tools/devlog.py, docs/devlog/",
