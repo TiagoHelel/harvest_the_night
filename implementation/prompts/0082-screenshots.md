@@ -1,7 +1,7 @@
 # 0082 - Screenshots, and actually looking at them
 
 - **Phase:** 5 - Art and visual direction
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0005, 0078
 - **Likely files:** src/tools/shot.gd, implementation/shots/
 

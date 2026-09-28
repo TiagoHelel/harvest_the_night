@@ -150,8 +150,10 @@ func _occupant_line(state: Dictionary) -> String:
 	for idx in (state["occupants"] as Dictionary):
 		var id: StringName = (state["occupants"][idx] as Dictionary)["id"]
 		counts[id] = int(counts.get(id, 0)) + 1
-	var keys: Array = counts.keys()
-	keys.sort()
+	# Occupant ids are StringNames, and `Array.sort()` puts those in pointer
+	# order rather than alphabetical - a tally that reshuffles itself between
+	# two runs of the same farm. `sorted_names` is the one to use.
+	var keys: Array = GameData.sorted_names(counts.keys())
 	var parts: Array = []
 	for id in keys:
 		parts.append("%s %d" % [id, counts[id]])

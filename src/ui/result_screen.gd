@@ -182,7 +182,12 @@ func _build(payout: Dictionary) -> void:
 	# `input_check` asserts it is on screen.
 	_row("killed %d, %d got through" % [int(payout["killed"]),
 		int(payout["breaches"])], "", UiKit.DIM)
-	_row("house %d/%d, %d built still up"
+	# **Shorter than it reads.** The font's digits are tabular and six pixels
+	# wide, so "house 100/100, 19 built still up" is a hundred and seventy
+	# pixels in a column a hundred and fifty wide - it overran and collided
+	# with the count beside it. Counting the characters is not the same as
+	# measuring the string.
+	_row("house %d/%d, %d still up"
 		% [int(payout["house_hp"]), GameData.HOUSE_HP,
 			int(payout.get("structures", 0))],
 		"%d untouched" % int(payout.get("intact", 0)), UiKit.DIM)
@@ -259,6 +264,7 @@ func _build_the_ending() -> void:
 
 func _row(left: String, right: String, role: StringName = &"") -> void:
 	var row := HBoxContainer.new()
+	row.theme_type_variation = UiKit.SPACED
 	row.custom_minimum_size = Vector2(206, 11)
 	_lines.add_child(row)
 
@@ -280,7 +286,19 @@ func _gap() -> void:
 	_lines.add_child(spacer)
 
 
+## The keys of a dictionary, in an order that is the same on every machine.
+##
+## **`Array.sort()` does not sort StringNames alphabetically.** It compares
+## them by their interned pointer, so `[&"money", &"tech"]` comes back in
+## whatever order those two names were first created in - which differs
+## between two runs of the same game. The reward line printed "+4 tech +182
+## money" on one run and "+182 money +4 tech" on the next, from an identical
+## night, and only a byte comparison of two screenshots would ever have shown
+## it: within one process the order is stable, so no test that runs once can
+## catch it.
+##
+## `src/core/` has known this all along - every one of its key walks goes
+## through `sorted_names` and the four that do not carry a comment saying the
+## keys are integers. This file rolled its own and got it wrong.
 func _sorted(d: Dictionary) -> Array:
-	var keys: Array = d.keys()
-	keys.sort()
-	return keys
+	return GameData.sorted_names(d.keys())

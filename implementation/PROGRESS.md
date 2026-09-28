@@ -6722,3 +6722,175 @@ twelve view files.
 
 `python tools/verify.py` prints PASS: 5177 asserts, 671 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+
+## 0082 - Screenshots, and actually looking at them - done 2026-09-28
+
+What changed: `python tools/shot.py 0082` puts the game in five known states
+and photographs them into `implementation/shots/0082/`. **Two runs in two
+processes now produce five byte-identical PNGs**, which took three bugs to
+get to. Screenshot: `implementation/shots/0082-contact-sheet.png`, all five
+at once.
+
+Files: `src/tools/shot.gd` (new), `tools/shot.py` (new), `src/ui/main.gd`,
+`src/ui/result_screen.gd`, `src/ui/build_mode.gd`, `src/ui/debug_overlay.gd`,
+`src/ui/world_view.gd`, `src/ui/lighting.gd`, `src/ui/ui_kit.gd`,
+`implementation/prompts/00-RUNNER-LOOP.md`, `CLAUDE.md`,
+`src/tools/headless_check.gd`, `src/tools/input_check.gd`.
+
+Verify: 5196 headless / 678 input / both hashes unchanged.
+
+### Headless is not possible, and the failure is worse than a failure
+
+The task asks for headless and Godot cannot do it. Measured, before writing
+anything:
+
+- `--headless` selects the **dummy** rendering backend.
+  `Viewport.get_texture().get_image()` returns null out of
+  `dummy/storage/texture_storage.h`.
+- `RenderingServer.frame_post_draw` **never fires at all**, so the obvious
+  script hangs for ever rather than failing. My first probe sat there until
+  the tool timed out at four minutes.
+
+So `tools/shot.py` opens a real window four thousand pixels off the left of
+the screen and closes it when the last picture is written. Nothing to click
+and nothing to look at, which is the part of "headless" the task wanted. Said
+here rather than quietly marked done.
+
+### Three bugs between "a seed and a script" and the same picture twice
+
+The requirement is that two runs give the same picture. I built it, ran it
+twice, and **three of five differed**. Each round was: diff the two PNGs, look
+at where the pixels are, fix, measure again.
+
+1. **The two warm-up frames ran unseeded.** Godot randomises the global RNG at
+   startup; `particles.gd` draws from it deliberately, since a spark is not a
+   rule and must not touch the run's stream. I seeded per scenario - but the
+   scene was instantiated and stepped twice *before* that, and the smoke those
+   frames put in the air survived into the first picture. 0.07% of pixels, all
+   of them round the chimneys, which is what the diff image said before I had
+   any theory. Seeding before the scene is built fixed three of the five.
+
+2. **`Array.sort()` does not order StringNames alphabetically.** It compares
+   their interned pointers. The result screen printed an identical night's
+   reward as `+4 tech +182 money` on one run and `+182 money +4 tech` on the
+   next. `src/core/` has known this all along - every key walk goes through
+   `GameData.sorted_names` and the four bare sorts each say in a comment that
+   their keys are integers - but three places in `src/ui/` had rolled their
+   own: the result screen, the build palette's price line and the debug
+   overlay's tally. All three fixed.
+
+   **Only a byte comparison across two processes could have found this.**
+   Within one process the order is stable, so a test that runs once passes.
+
+3. The camera, which is not a bug but cost three attempts. See below.
+
+Now five of five, identical.
+
+### `--fixed-fps` is what makes the view reproducible
+
+The simulation was never the problem: a seed, a script and `Sim.advance` do
+not touch a clock. The **view** advances on `delta`, which is real seconds.
+Measured: without the flag the first four frames are 0.0347, 0.0398, 0.0309,
+0.0302; with `--fixed-fps 60` every frame is 0.016667 from the first. That is
+the whole reason the wrapper exists.
+
+### Looking at the pictures is the point, and it found things
+
+Every one of these came from opening a file, not from a failing assert:
+
+- The first **wave** scenario photographed an empty battlefield. Eight towers
+  had killed all fourteen zombies in the nine seconds before the shutter. The
+  tool prints how many are still coming now, so it cannot happen quietly.
+- The **result** screen was a title and a button with nothing between them -
+  `Phases.enter_result` had been called without a night to itemise.
+  `Sim.skip_night` plays one, and task 0078 proved it lands where watching
+  lands.
+- The **tech** tree said "0 of 12 nodes" over nine unspent points, because the
+  ids have spaces in them and `&"sharp_tools"` bought nothing and said
+  nothing.
+- The result screen printed **"still up19 untouched"** - two labels with no
+  gap. Mine, from 0081: the theme sets container separation to zero, and the
+  font's tabular six-pixel digits make "house 100/100, 19 built still up" a
+  hundred and seventy pixels in a column a hundred and fifty wide. Counting
+  the characters is not the same as measuring the string.
+
+And one thing that looked like a bug and was not: `POWER 4/16 everything at
+50%` read convincingly as `everything at EON` at 480x270. **Zoom before
+concluding.** That is now in the runner loop.
+
+### Three attempts at pointing the camera
+
+The farm shots kept photographing a lawn with the field just off the left
+edge.
+
+1. Sowed a fixed block at (6,6) and let the camera follow the farmer, who
+   starts at (17,7). Wrong end of the map.
+2. Sowed around the farmer instead. Nothing was sown at all - tilling is only
+   offered on the farm's own soil, and the farmer starts on grass.
+   `Interact.verb_at` knows where the soil is, so the scenario asks it.
+3. Sowed the real field and pointed the camera at it. `Main._process` calls
+   `look_at_cell(Player.cell(state))` **every frame**, so the camera was back
+   on the farmer before the first settle frame.
+
+The farmer walks to the picture now, through the same `intent["move"]` the
+keyboard writes, ticked by hand so it costs no wall clock. That is not a
+workaround: the camera follows the farmer because the game says it should, and
+a player who wants to look at the field walks there.
+
+A fourth miss belongs here too: the tool reported "0 crops up" over a field
+full of them, because `_crops_up` asked `Farm.cells_with(state, &"plot")` and
+plots live in `state["plots"]`, not in `occupants`. **A measurement wrong in
+the direction that makes you distrust working code** is worse than no
+measurement.
+
+### The asserts, and the two that did not bite
+
+- `headless_check` reads `src/tools/shot.gd` and checks the scenario table is
+  still true about the game: five scenarios, each with a builder, each named
+  screen present in `Main.tscn`, and no clock read anywhere in the file.
+- It also asserts `sorted_names` is alphabetical, and that **no screen sorts
+  dictionary keys without saying its keys are integers** - the opt-out
+  `src/core/` already uses. Three lines in `src/ui/` had to be annotated;
+  three others were the bug.
+- `input_check` asks every horizontal row in four screens whether two labels'
+  text runs together.
+
+That last one took three goes and is the lesson of the task:
+
+1. First version asked whether the two rects **intersected**. Planted the bug,
+   ran it: passed. Two labels printed as "up19 untouched" are *adjacent*, and
+   `Rect2.intersects` is false for touching rectangles. It measures the ink
+   now - where one string's last pixel is and where the next one's first is.
+2. Second version still passed with the bug planted, because the case **lost**
+   the night, and "house 0/100, 0 still up" is nowhere near the edge of its
+   column. The case defends the farm and survives now.
+3. The guard against that going vacuous again asked for a row at least 150px
+   wide and failed at 146 - which is the *fixed* string nearly filling its
+   column. Only the buggy string was ever 150. Measured, then set to 120.
+
+A test that cannot fail on the bug it was written for is worth less than no
+test, because it also claims the area is covered.
+
+### The runner loop
+
+Step 4 now says to run `python tools/shot.py <id>` and **open the files**, with
+three examples of what the suite has cheerfully passed: the wrong tab
+highlighted, twelve tech nodes too dark to read, and two labels printed on top
+of each other. It also says to zoom before concluding something is wrong.
+`CLAUDE.md` gained the same command.
+
+### One refactor
+
+`Main._ready`'s run wiring is `Main.begin_run(seed)` now - a dozen
+`show_state` calls that three things want: boot, this tool, and task 0092's
+router. `SimDriver.start` replaces the state dictionary rather than emptying
+it, so a screen still holding the old one draws a game that has stopped
+advancing.
+
+### Hashes
+
+Both unchanged - `2555959448` and `2601044827`. All three sort fixes are in
+`src/ui/`; the simulation never had the bug.
+
+`python tools/verify.py` prints PASS: 5196 asserts, 678 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

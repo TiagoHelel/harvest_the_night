@@ -38,6 +38,10 @@ current scope".
 - Tabs, `snake_case`, `##` doc comments on public functions.
 - Art comes from ASCII maps in `tools/gen_sprites.py`, sound from
   `tools/gen_sfx.py`. Do not hand-author PNGs or WAVs.
+- Changed something visible? `python tools/shot.py <task-id>` puts the game in
+  five known states and photographs them into `implementation/shots/<id>/`.
+  **Open the files.** The suite has passed with the wrong tab highlighted and
+  with two labels printed on top of each other.
 - Do not create a new top-level directory without saying why in the journal.
 
 ## Backlog commands

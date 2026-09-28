@@ -135,7 +135,9 @@ func _draw() -> void:
 	var tile := float(GameData.TILE_SIZE)
 	var occupants: Dictionary = _state["occupants"]
 	var keys: Array = occupants.keys()
-	keys.sort()                         # a fixed order, as everything is here
+	# A fixed order, as everything here is. These are cell indices, so they
+	# are integers and sort as integers - names would need `sorted_names`.
+	keys.sort()
 
 	# **One light per building, not one per tile.** The house is nine
 	# occupants and the kitchen four, so lighting each cell stacked nine

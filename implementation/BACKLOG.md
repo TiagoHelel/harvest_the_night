@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`##################......`  **81 / 109 done**
+`##################......`  **82 / 109 done**
 
-0 doing / 28 todo / 0 blocked across 9 phases.
+0 doing / 27 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0082 - Screenshots, and actually looking at them**. The whole of what is left is
+First up: **0083 - Audio buses and a sound manager**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,23 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-28 task(s) left, the ready ones first, then what they
+27 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0082 - Screenshots, and actually looking at them
-
-Ready to pick up.  Likely files: `src/tools/shot.gd, implementation/shots/`.
-
-A command that puts the game in a known state and takes the picture, so a visual change can be checked instead of hoped for.
-
-- `shot.gd` takes named scenarios: farm at noon, farm at dusk, a wave mid-fight, the result screen, the tech tree
-- It runs headless and writes PNGs under `implementation/shots/<id>/`
-- The scenario is built from a seed and a scripted state, so two runs give the same picture
-- The runner loop is updated to say: after a visual task, take the shots and look at them
-
-  - done when: One command produces the whole set
-  - done when: The set is recognisably the game on the reference sheet
 
 ### 0083 - Audio buses and a sound manager
 
@@ -374,7 +360,7 @@ Two builds anyone can run, from one command, with the Web one small enough that 
 
 ### 0107 - Store assets
 
-Waits on 0082, 0099.  Likely files: `tools/gen_marketing.py, build/store/`.
+Waits on 0099.  Likely files: `tools/gen_marketing.py, build/store/`.
 
 The page it goes on: capsule images, screenshots, the pitch, generated from the game rather than mocked up.
 
@@ -420,7 +406,7 @@ A build to put in front of someone, with the instrumentation to learn something 
 
 ### 0108 - The devlog and a trailer clip
 
-Waits on 0082, 0107.  Likely files: `tools/devlog.py, docs/devlog/`.
+Waits on 0107.  Likely files: `tools/devlog.py, docs/devlog/`.
 
 The thing that gets people to look: thirty seconds that show the farm, the switch and the horde.
 
@@ -533,7 +519,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0069** [Run statistics](prompts/0069-stats.md)
 - [x] **0070** [Endless nights past ten](prompts/0070-endless.md)
 
-## 5 - Art and visual direction  (11/13)
+## 5 - Art and visual direction  (12/13)
 
 - [x] **0071** [The two palettes](prompts/0071-palettes.md)
 - [x] **0072** [The farm tileset](prompts/0072-tileset.md)
@@ -547,7 +533,7 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0079** [Resource icons and the UI kit](prompts/0079-ui-kit.md)
 - [x] **0080** [A pixel font](prompts/0080-font.md)
 - [x] **0081** [The UI theme](prompts/0081-theme.md)
-- [ ] **0082** [Screenshots, and actually looking at them](prompts/0082-screenshots.md)
+- [x] **0082** [Screenshots, and actually looking at them](prompts/0082-screenshots.md)
 
 ## 6 - Sound and juice  (0/8)
 
@@ -581,5 +567,5 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [ ] **0104** [Saves survive an update](prompts/0104-save-compat.md)
 - [ ] **0105** [A playtest build](prompts/0105-playtest-build.md) - needs 0100, 0103
 - [ ] **0106** [The release checklist](prompts/0106-release-checklist.md) - needs 0105, 0099
-- [ ] **0107** [Store assets](prompts/0107-store-assets.md) - needs 0082, 0099
-- [ ] **0108** [The devlog and a trailer clip](prompts/0108-devlog.md) - needs 0082, 0107
+- [ ] **0107** [Store assets](prompts/0107-store-assets.md) - needs 0099
+- [ ] **0108** [The devlog and a trailer clip](prompts/0108-devlog.md) - needs 0107

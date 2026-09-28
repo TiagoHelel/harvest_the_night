@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 74
+const GROUPS := 75
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -138,6 +138,7 @@ func _run() -> void:
 	_task_0079_ui_kit()
 	_task_0080_font()
 	_task_0081_theme()
+	_task_0082_shots()
 
 
 func _finish() -> void:
@@ -12370,3 +12371,105 @@ func _task_0081_theme() -> void:
 ## `&""` prints as nothing, which makes a failure that names it unreadable.
 func _role_name(role: StringName) -> String:
 	return "the body text" if role == &"" else str(role)
+## 0082 - the screenshots.
+func _task_0082_shots() -> void:
+	# **The tool is checked without being run.** Taking the pictures needs a
+	# renderer, which `--headless` does not have - so what can be asked here
+	# is whether the table the tool reads is still true about the game, and
+	# that is the half that rots. A scenario naming a screen somebody renamed
+	# is a tool that prints five successes and photographs the wrong thing.
+	var source := FileAccess.get_file_as_string("res://src/tools/shot.gd")
+	expect(not source.is_empty(), "src/tools/shot.gd is there")
+	if source.is_empty():
+		_completed += 1
+		return
+
+	var names: Array = []
+	var screens: Array = []
+	var reading := false
+	for line in source.split("\n"):
+		var trimmed := line.strip_edges()
+		if trimmed.begins_with("const SCENARIOS"):
+			reading = true
+			continue
+		if not reading:
+			continue
+		if trimmed.begins_with("]"):
+			break
+		var parts := trimmed.split("\"")
+		if parts.size() >= 6:
+			names.append(parts[1])
+			screens.append(parts[5])
+
+	expect(names.size() == 5,
+		"the five scenarios the task names are all there",
+		"%d: %s" % [names.size(), str(names)])
+	for wanted in ["noon", "dusk", "wave", "result", "tech"]:
+		expect(names.has(wanted), "there is a '%s' scenario" % wanted)
+
+	# Every one has a builder, so a scenario added to the table and not
+	# written is a failure rather than a picture of the default farm.
+	for name in names:
+		expect(source.contains("func _set_%s(" % name),
+			"the '%s' scenario has something that builds it" % name)
+
+	# **Every screen it brings up still exists.** Read out of the scene file
+	# rather than out of a list here, because a list here is a third place to
+	# forget.
+	var scene := FileAccess.get_file_as_string("res://scenes/Main.tscn")
+	for named in screens:
+		if named == "":
+			continue
+		expect(scene.contains("name=\"%s\"" % named),
+			"the '%s' screen the tool asks for is in Main.tscn" % named)
+
+	# A scenario is a seed and a script; if it ever reaches for a clock, two
+	# runs stop giving the same picture and the tool is worth nothing.
+	for forbidden in ["Time.get_ticks", "Time.get_unix", "randomize()"]:
+		expect(not source.contains(forbidden),
+			"the tool does not read a clock (%s)" % forbidden)
+
+	# **`Array.sort()` does not order StringNames alphabetically.** It
+	# compares their interned pointers, so the same dictionary comes out in a
+	# different order in a different process. Two runs of the shot tool
+	# printed an identical night's reward as "+4 tech +182 money" and "+182
+	# money +4 tech", and the build palette priced a fence both ways round.
+	#
+	# Stated here as a property of the helper rather than of Godot: what the
+	# game needs is that `sorted_names` is alphabetical, whatever `sort()`
+	# does underneath.
+	expect(GameData.sorted_names([&"wood", &"apple", &"money"])
+		== [&"apple", &"money", &"wood"],
+		"sorted_names puts names in alphabetical order",
+		str(GameData.sorted_names([&"wood", &"apple", &"money"])))
+
+	# And nothing in the view may go round it. `src/core/` has always used
+	# `sorted_names`, and its four bare sorts each say in a comment that the
+	# keys are integers; the view had three that did not, and all three were
+	# wrong. A line may opt out the same way core does, by saying so.
+	var rogue: Array = []
+	var ui := DirAccess.open("res://src/ui/")
+	if ui != null:
+		for file_name in ui.get_files():
+			if not file_name.ends_with(".gd"):
+				continue
+			var text := FileAccess.get_file_as_string(
+				"res://src/ui/" + file_name)
+			var lines := text.split("\n")
+			for i in lines.size():
+				if not lines[i].strip_edges().begins_with("keys.sort()"):
+					continue
+				var said_why := false
+				for back in range(maxi(i - 4, 0), i + 1):
+					if lines[back].contains("integer"):
+						said_why = true
+				if not said_why:
+					rogue.append("%s:%d" % [file_name, i + 1])
+	expect(rogue.is_empty(),
+		"no screen sorts dictionary keys without saying they are integers",
+		"%d: %s" % [rogue.size(), str(rogue)])
+
+	print("  %d scenarios, %d screens, all present; %d rogue sorts"
+		% [names.size(), screens.size(), rogue.size()])
+
+	_completed += 1     # last line: an abandoned group never gets here

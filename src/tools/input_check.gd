@@ -41,7 +41,12 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 38
+const CASES := 39
+
+## The pixels two pieces of text in one row must have between them. Two is
+## the width of the gap inside a letter at this size, so anything less reads
+## as one word.
+const MIN_INK_GAP := 2.0
 
 var passed := 0
 var failed := 0
@@ -109,6 +114,7 @@ func _run() -> void:
 	await _case_0077_particles()
 	await _case_0078_transition()
 	await _case_0081_theme()
+	await _case_0082_shots()
 	_finish()
 
 
@@ -3808,3 +3814,163 @@ func _gather(node: Node, into: Array) -> void:
 		into.append(node)
 	for child in node.get_children():
 		_gather(child, into)
+func _case_0082_shots() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	if driver == null:
+		_completed += 1
+		await close_scene()
+		return
+	var state := driver.state
+
+	# **No two labels in a row may run together.** The result screen printed
+	# "still up19 untouched" for a task and a half with 5177 asserts passing
+	# over it, because the left column's text was wider than the column and
+	# the containers have no separation. Found by looking at task 0082's
+	# result shot; asserted here so the next one is found by the suite.
+	#
+	# **The farm is defended and the night is survived on purpose.** The
+	# first version of this lost the night, which prints "house 0/100, 0
+	# still up" - twenty-three characters in a column a hundred and fifty
+	# wide, nowhere near the edge. It passed with the bug planted, twice.
+	# Long strings need a long night behind them.
+	Resources.gain(state, {GameData.WOOD: 900, GameData.IRON: 900,
+		GameData.STONE: 900, GameData.OIL: 200, GameData.GUNPOWDER: 120,
+		GameData.INCENDIARY: 60})
+	var here := Player.cell(state)
+	var put := 0
+	for y in range(here.y - 2, here.y + 6):
+		for x in range(here.x + 3, here.x + 13):
+			if put >= 12:
+				break
+			var id: StringName = &"gun_tower" if put % 2 else &"auto_crossbow"
+			if Building.place(state, id, Vector2i(x, y)):
+				put += 1
+		if put >= 12:
+			break
+	expect(put >= 8, "the farm has something defending it", "%d up" % put)
+	Phases.begin_preparation(state)
+	Sim.advance(state, GameData.PREPARATION_TICKS + 1)
+	Sim.skip_night(state)
+	await frames(6)
+	expect(int(state["phase"]) == Phases.RESULT, "the result screen is up",
+		Phases.name_of(int(state["phase"])))
+
+	var result: Control = require_control("ResultScreen")
+	if result != null:
+		# **The case cannot be allowed to go vacuous.** If no row is anywhere
+		# near its column's edge, the crowding check is asking a question
+		# with no stakes and would keep passing through a rewrite of the
+		# panel. This says so out loud rather than letting it rot quietly.
+		# A hundred and twenty is four fifths of the hundred-and-fifty pixel
+		# column. The widest row is a hundred and forty-six, which is the
+		# fixed string nearly filling it - so an overrun really is three
+		# characters away and the check below has something to catch. The
+		# first threshold here was a hundred and fifty and failed, because
+		# only the *buggy* string was ever that wide.
+		expect(_widest_row(result) >= 120.0,
+			"a row nearly fills its column, so the check below has stakes",
+			"widest is %.0fpx" % _widest_row(result))
+		var collisions := _crowded_rows(result)
+		expect(collisions.is_empty(),
+			"no two labels in a row have their text run together",
+			"%d: %s" % [collisions.size(), str(collisions.slice(0, 3))])
+
+	# And the same question of every other screen that lays out in rows, so
+	# this is a rule about the game rather than about one panel.
+	for named in ["InventoryPanel", "ShopPanel", "WorkshopPanel"]:
+		var screen: Control = require_control(named)
+		if screen == null:
+			continue
+		screen.visible = true
+		await frames(4)
+		var found := _crowded_rows(screen)
+		expect(found.is_empty(),
+			"and none on the %s either" % named,
+			"%d: %s" % [found.size(), str(found.slice(0, 3))])
+
+	await close_scene()
+	_completed += 1     # last line: an abandoned case never gets here
+
+
+## The widest run of text in any row under this node.
+func _widest_row(root: Control) -> float:
+	var widest := 0.0
+	var stack: Array = [root]
+	while not stack.is_empty():
+		var node: Node = stack.pop_back()
+		for child in node.get_children():
+			stack.append(child)
+		var label := node as Label
+		if label == null or not label.is_visible_in_tree():
+			continue
+		if not (label.get_parent() is HBoxContainer):
+			continue
+		widest = maxf(widest, _ink_width(label, label.text))
+	return widest
+
+
+## Pairs of labels in one row whose text runs together.
+##
+## **Not an overlap.** The first version of this asked whether the two rects
+## intersected, planted the bug it was written for, and passed: two labels
+## printed as "still up19 untouched" are *adjacent*, not overlapping, and
+## `Rect2.intersects` is false for touching rectangles. A test that cannot
+## fail on the bug it was written for is worth less than no test, because it
+## also says the area is covered.
+##
+## What it asks now is where the **ink** ends and where the next ink begins.
+## A label is at least as wide as its column, so the gap between two rects
+## says nothing; the gap between the last pixel of one string and the first
+## pixel of the next is the thing a reader sees. Leading spaces count as
+## space, because several rows pad inside the string rather than with a
+## separation.
+##
+## Only horizontal containers, which promise to lay their children out along
+## a line. A label deliberately drawn over a `ColorRect` is not this.
+func _crowded_rows(root: Control) -> Array:
+	var out: Array = []
+	var stack: Array = [root]
+	while not stack.is_empty():
+		var node: Node = stack.pop_back()
+		for child in node.get_children():
+			stack.append(child)
+		if not (node is HBoxContainer):
+			continue
+		var previous: Label = null
+		for child in node.get_children():
+			var label := child as Label
+			if label == null or not label.is_visible_in_tree():
+				continue
+			if label.text.strip_edges() == "":
+				continue
+			if previous != null:
+				var gap := _ink_gap(previous, label)
+				if gap < MIN_INK_GAP:
+					out.append("%s meets %s with %.0fpx"
+						% [previous.name, label.name, gap])
+			previous = label
+	return out
+
+
+## Pixels between the last ink of one label and the first ink of the next.
+func _ink_gap(left: Label, right: Label) -> float:
+	var ends := left.get_global_rect().position.x + _ink_width(left, left.text)
+	var starts := right.get_global_rect().position.x \
+		+ _ink_width(right, _leading_space(right.text))
+	return starts - ends
+
+
+func _ink_width(label: Label, text: String) -> float:
+	var face := label.get_theme_font(&"font")
+	if face == null or text == "":
+		return 0.0
+	return face.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1,
+		label.get_theme_font_size(&"font_size")).x
+
+
+func _leading_space(text: String) -> String:
+	var n := 0
+	while n < text.length() and text[n] == " ":
+		n += 1
+	return text.substr(0, n)

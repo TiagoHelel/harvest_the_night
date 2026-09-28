@@ -86,7 +86,26 @@ func _ready() -> void:
 	# one.
 	UiKit.dress(self, _dressed)
 
-	_driver.start(BOOT_SEED)
+	begin_run(BOOT_SEED)
+
+	# The overlay is handed its driver rather than going looking for one: a
+	# screen owns its simulation, and two on screen at once would still each
+	# describe their own.
+	if is_instance_valid(_debug) and _debug.has_method("watch"):
+		_debug.watch(_driver)
+
+
+## Start a run on `seed_value` and hand the new state to every screen.
+##
+## **A method rather than a block inside `_ready`** because three things want
+## it: boot, `src/tools/shot.gd`, which restarts on its own seed to build a
+## scenario, and task 0092's router, which has to be able to begin a run from
+## the menu. `SimDriver.start` replaces the state dictionary rather than
+## emptying it, so a screen still holding the old one would draw a game that
+## has stopped advancing - which is the failure this exists to make
+## impossible to forget.
+func begin_run(seed_value: int) -> void:
+	_driver.start(seed_value)
 
 	_world.show_state(_driver.state)
 	_player_view.show_state(_driver.state)
@@ -117,12 +136,6 @@ func _ready() -> void:
 	_stats.show_profile(_profile)
 
 	_world.look_at_cell(Player.cell(_driver.state))
-
-	# The overlay is handed its driver rather than going looking for one: a
-	# screen owns its simulation, and two on screen at once would still each
-	# describe their own.
-	if is_instance_valid(_debug) and _debug.has_method("watch"):
-		_debug.watch(_driver)
 
 
 ## **The only place keys become game input.**

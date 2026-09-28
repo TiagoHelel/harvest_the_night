@@ -224,8 +224,11 @@ func _price_of(id: StringName) -> String:
 		return "(%d ready)" % banked
 	var parts: Array = []
 	var cost := Building.cost_of(id)
-	var keys: Array = cost.keys()
-	keys.sort()
-	for res in keys:
+	# **Through `sorted_names`, not `Array.sort()`.** These keys are resource
+	# names, and `sort()` orders StringNames by their interned pointer - so
+	# the price of a fence read "5 wood 3 iron" on one run and "3 iron 5
+	# wood" on the next. See `result_screen._sorted`, where the same mistake
+	# was caught by comparing two screenshots byte for byte.
+	for res in GameData.sorted_names(cost.keys()):
 		parts.append("%d%s" % [cost[res], str(res).substr(0, 1)])
 	return " ".join(parts)

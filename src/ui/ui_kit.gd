@@ -186,6 +186,16 @@ const OVERLAY := &"Overlay"
 ## the list underneath it.
 const TAB := &"Tab"
 
+## A container that keeps a gap between its children.
+##
+## **For two columns on one line, where the left one can grow.** The game's
+## containers are gapless because a list of a dozen rows with four pixels
+## between each is fifty pixels of nothing on a 270 pixel screen - but a
+## label beside a value is not a list, and when the label ran past its column
+## the two ran into each other and printed "still up19 untouched". Found by
+## looking at task 0082's result shot.
+const SPACED := &"Spaced"
+
 ## A button for something already bought. It is a `disabled` button - there is
 ## nothing left to press - with green letters, so "you have this" and "you
 ## cannot afford this" are not the same grey.
@@ -368,6 +378,8 @@ static func _dress_gaps(out: Theme) -> void:
 	# to zero one container at a time; now the game does it once.
 	for type in [&"BoxContainer", &"VBoxContainer", &"HBoxContainer"]:
 		out.set_constant(&"separation", type, 0)
+	out.set_type_variation(SPACED, &"HBoxContainer")
+	out.set_constant(&"separation", SPACED, ROW_PAD)
 	for side in [&"margin_left", &"margin_right", &"margin_top",
 			&"margin_bottom"]:
 		out.set_constant(side, &"MarginContainer", PAD)

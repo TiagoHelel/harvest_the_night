@@ -733,6 +733,7 @@ func _refresh() -> void:
 	var occupants: Dictionary = _state["occupants"]
 	# Sorted, so that two runs build the same tree in the same order. Nothing
 	# depends on it yet; the day something here draws from the RNG, it will.
+	# Cell indices, so these are integers and sort as integers.
 	var keys: Array = occupants.keys()
 	keys.sort()
 	for idx in keys:
@@ -831,6 +832,7 @@ func _refresh_plots() -> void:
 
 	var size := float(GameData.TILE_SIZE)
 	var plots: Dictionary = _state["plots"]
+	# Cell indices, so these are integers and sort as integers.
 	var keys: Array = plots.keys()
 	keys.sort()
 	for idx in keys:

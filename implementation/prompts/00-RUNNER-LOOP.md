@@ -104,14 +104,36 @@ About the two hashes:
   something in `src/ui/` is writing to the state; a task that was not a balance
   pass moving the data hash means a number was changed in passing.
 
-If the task changed anything visible, capture the screenshots and **actually
-look at them** (once task 0082 exists):
+If the task changed anything visible, take the screenshots:
 
 ```bash
-"C:/Users/PC GAMER DA FAMILIA/Documents/Godot/Godot_v4.7.2-stable_win64_console.exe" --path . --script res://src/tools/shot.gd -- ./implementation/shots/0042
+python tools/shot.py 0042
 ```
 
-Before 0082 exists, run the game and look at it.
+That writes `implementation/shots/0042/` - the farm at noon, the same farm at
+dusk, a wave mid-fight, the night's result and the tech tree - each built from
+a fixed seed and a scripted state, so the only thing that can have changed
+between two runs is the thing you changed. `python tools/shot.py --list` says
+what there is and `python tools/shot.py 0042 wave tech` takes two of them.
+
+**Then open them and actually look**, one at a time, at full size. This is not
+a formality and it is not covered by the suite:
+
+- Task 0081 passed 5177 asserts with the tab you were on drawn as the
+  switched-off one and twelve tech nodes too dark to read.
+- The first run of the shot tool itself photographed an empty battlefield,
+  because the towers had killed every zombie before the shutter.
+- The result screen printed "still up19 untouched" for a task and a half, and
+  the suite was perfectly happy.
+
+If something in the picture looks wrong, **zoom in before deciding it is
+wrong** - at 480x270 an eight pixel `%` read convincingly as `N` and cost a
+detour. And if you find yourself writing "looks right" without having opened
+the file, you have not done this step.
+
+A picture worth keeping goes in the journal by name. The rest can be
+overwritten by the next task: the folder is per task id for exactly that
+reason.
 
 ## Step 5 - close it out
 
