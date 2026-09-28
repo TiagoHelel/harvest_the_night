@@ -11,6 +11,12 @@ One router that owns which screen is up, so screens stop knowing about each othe
 
 ## Requirements
 
+- **Put OPTIONS back on the title menu.** Task 0091 shows every entry that
+  has somewhere to go and hides the ones that do not - which is why Continue
+  is absent without a save. Options was hidden by the same rule because
+  nothing existed to open; `TitleScreen.is_shown` is where it goes back, and
+  the router here is what it opens.
+
 - An `App` autoload with `goto(state)` and a `state_changed` signal
 - States: BOOT, TITLE, MENU, RUN, TECH, STATS, OPTIONS, SUMMARY
 - A back stack, so Options returns to whoever opened it

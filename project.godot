@@ -13,7 +13,12 @@ config_version=5
 config/name="HARVEST THE NIGHT"
 config/description="A cozy farming game where your farm is also your fortress. By day, plant, fish, mine and produce. When you choose, switch reality: the same farm becomes the map you defend against the horde."
 config/version="0.1.0"
-run/main_scene="res://scenes/Main.tscn"
+; **The game boots into a game, not into a farm.** Task 0091: the title
+; screen puts the premise on the screen before a word is read, and
+; `scenes/Main.tscn` is what it opens. Every tool that wants the game
+; itself - the shot tool, input_check - loads Main.tscn by path and is
+; unaffected.
+run/main_scene="res://scenes/Title.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 boot_splash/bg_color=Color(0.054902, 0.047059, 0.098039, 1)
 boot_splash/show_image=false

@@ -41,7 +41,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 47
+const CASES := 48
 
 ## The pixels two pieces of text in one row must have between them. Two is
 ## the width of the gap inside a letter at this size, so anything less reads
@@ -123,6 +123,7 @@ func _run() -> void:
 	await _case_0088_juice()
 	await _case_0089_tooltips()
 	await _case_0090_log()
+	await _case_0091_title()
 	_finish()
 
 
@@ -4816,5 +4817,74 @@ func _case_0090_log() -> void:
 	expect(not panel.is_expanded(), "and the same key puts it away")
 
 	driver.running = true
+	await close_scene()
+	_completed += 1     # last line: an abandoned case never gets here
+func _case_0091_title() -> void:
+	# **The whole point of this one is that it is not `MAIN_SCENE`.** Every
+	# other case opens the game; this opens what the game opens.
+	await open_scene("res://scenes/Title.tscn")
+	var title: TitleScreen = _scene as TitleScreen
+	expect(title != null, "the title screen is what boots")
+	if title == null:
+		_completed += 1
+		await close_scene()
+		return
+
+	await frames(6)
+	expect(title.phase() == TitleScreen.IDENT,
+		"it opens on the ident, not the menu", str(title.phase()))
+	var menu: Control = require_control("Menu")
+	expect(menu != null and not menu.visible,
+		"and the menu is not up yet")
+
+	# **The farm is behind it, and it is the real farm.**
+	var view: WorldView = require_control("WorldView")
+	expect(view != null, "there is a world behind the title")
+	expect(title.backdrop_tick() >= GameData.DUSK_AT_TICK,
+		"and it starts at dusk rather than at breakfast",
+		"tick %d against dusk at %d"
+		% [title.backdrop_tick(), GameData.DUSK_AT_TICK])
+
+	# **Any key moves past the ident.** Not a named action - a player who has
+	# just started the game has not learned any of them.
+	await tap_key(KEY_X)
+	await frames(3)
+	expect(title.phase() == TitleScreen.MENU,
+		"any key at all opens the menu", str(title.phase()))
+	expect(menu != null and menu.visible, "and the menu is up")
+
+	# **Continue is absent, not greyed.** Whether it is there at all depends
+	# on whether there is a run on disk, so this asserts the pair rather than
+	# one of them: whatever `Save.has_run()` says, the menu agrees, and the
+	# entry is never present-but-dead.
+	var entries := title.menu_entries()
+	expect(entries.has("new") and entries.has("quit"),
+		"the menu has the entries that always work", str(entries))
+	expect(entries.has("continue") == Save.has_run(),
+		"Continue is there exactly when there is a run to continue",
+		"%s with has_run %s" % [str(entries), str(Save.has_run())])
+	for named in entries:
+		var button: Button = require_control("Menu_%s" % named)
+		if button == null:
+			continue
+		expect(not button.disabled,
+			"'%s' is a live button rather than a greyed one" % named)
+		expect(button.get_global_rect().end.y <= 270.0,
+			"and is on the screen", str(button.get_global_rect()))
+
+	# Options is not on it yet, and that is the same rule rather than an
+	# oversight; task 0092 puts it back.
+	expect(not entries.has("options"),
+		"Options is absent while nothing can open it", str(entries))
+
+	# The night really does come in behind the menu, which is the premise.
+	var was := title.backdrop_tick()
+	await until(func() -> bool:
+		return title.backdrop_tick() > was + GameData.SECONDS,
+		"the backdrop to creep on", 600)
+	expect(title.backdrop_tick() > was,
+		"and the farm behind it is running",
+		"%d against %d" % [title.backdrop_tick(), was])
+
 	await close_scene()
 	_completed += 1     # last line: an abandoned case never gets here

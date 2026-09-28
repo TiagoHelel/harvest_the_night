@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 83
+const GROUPS := 84
 
 const SettingsScript := preload("res://src/app/settings.gd")
 const AudioScript := preload("res://src/app/audio.gd")
@@ -153,6 +153,7 @@ func _run() -> void:
 	_task_0088_juice()
 	_task_0089_tooltips()
 	_task_0090_log()
+	_task_0091_title()
 
 
 func _finish() -> void:
@@ -13469,5 +13470,92 @@ func _task_0090_log() -> void:
 
 	print("  %d kinds, all with words and a colour, capped at %d"
 		% [Events.KINDS.size(), Events.CAP])
+
+	_completed += 1     # last line: an abandoned group never gets here
+## 0091 - the title screen.
+func _task_0091_title() -> void:
+	# **The game boots into a game.** The done-when, asked of the one line
+	# that decides it.
+	expect(str(ProjectSettings.get_setting("application/run/main_scene", ""))
+		== "res://scenes/Title.tscn",
+		"booting lands on the title screen and not in a run",
+		str(ProjectSettings.get_setting("application/run/main_scene", "")))
+	expect(ResourceLoader.exists("res://scenes/Title.tscn"),
+		"and that scene is there")
+	expect(ResourceLoader.exists("res://scenes/Main.tscn"),
+		"with the run behind it")
+
+	# **The logo is generated, and from the game's own letters.** A wordmark
+	# that had been drawn separately would drift from the font the first time
+	# either moved; this cannot, and the `logo` row in verify is what says so.
+	expect(ResourceLoader.exists("res://assets/logo.png"),
+		"there is a logo")
+	var logo := Image.load_from_file(ProjectSettings.globalize_path(
+		"res://assets/logo.png"))
+	expect(logo != null, "and it loads")
+	if logo != null:
+		expect(logo.get_width() <= 480 and logo.get_height() <= 140,
+			"and fits on a 480x270 screen with a menu under it",
+			"%dx%d" % [logo.get_width(), logo.get_height()])
+		# Every colour in it is a palette colour, like everything else drawn
+		# in this game.
+		var strangers: Array = []
+		for y in logo.get_height():
+			for x in logo.get_width():
+				var px := logo.get_pixel(x, y)
+				if px.a <= 0.0:
+					continue
+				var known := false
+				for name in PaletteData.COLOURS:
+					var one: Color = PaletteData.COLOURS[name]
+					if is_equal_approx(px.r, one.r) \
+							and is_equal_approx(px.g, one.g) \
+							and is_equal_approx(px.b, one.b):
+						known = true
+						break
+				if not known and not strangers.has(px.to_html(false)):
+					strangers.append(px.to_html(false))
+		expect(strangers.is_empty(),
+			"and every colour in it is off the palette",
+			str(strangers.slice(0, 4)))
+
+	# **Continue is absent, not greyed, when there is no save.** The
+	# requirement, asked of the rule that decides it.
+	expect(not TitleScreen.is_shown(&"continue", false),
+		"with no save there is no Continue at all")
+	expect(TitleScreen.is_shown(&"continue", true),
+		"and with one there is")
+	for always in [&"new", &"stats", &"quit"]:
+		expect(TitleScreen.is_shown(always, false),
+			"'%s' is always there" % always)
+		expect(TitleScreen.is_shown(always, true),
+			"save or no save" % [])
+
+	# **Options is hidden for the same reason and not a different one.**
+	# Nothing opens it until task 0092's router, so it is absent rather than
+	# inert - and this assert is what will fail the day somebody adds the
+	# screen and forgets to put the entry back.
+	expect(not TitleScreen.is_shown(&"options", true),
+		"Options is absent while nothing can open it - task 0092 puts it "
+		+ "back")
+	var listed: Array = []
+	for entry in TitleScreen.ENTRIES:
+		listed.append(String((entry as Array)[0]))
+	for wanted in ["continue", "new", "stats", "options", "quit"]:
+		expect(listed.has(wanted),
+			"'%s' is in the menu table whether or not it is shown" % wanted)
+
+	# It creeps into the night rather than sitting in daylight: the premise
+	# is two realities on the same tiles, and a title screen that never gets
+	# dark shows one of them.
+	expect(TitleScreen.DUSK_FOR < TitleScreen.CREEP_UNTIL,
+		"the backdrop reaches night before it starts over",
+		"%d against %d" % [TitleScreen.DUSK_FOR, TitleScreen.CREEP_UNTIL])
+	expect(TitleScreen.VISITORS > 0,
+		"and something walks in when it does")
+
+	print("  boots into Title.tscn, logo %dx%d, %d menu entries"
+		% [logo.get_width() if logo else 0,
+			logo.get_height() if logo else 0, listed.size()])
 
 	_completed += 1     # last line: an abandoned group never gets here

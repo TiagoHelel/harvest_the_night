@@ -7830,3 +7830,90 @@ Sim `2555959448` -> `215410677`, deliberate, for the reason above. Data
 
 `python tools/verify.py` prints PASS: 5630 asserts, 764 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+
+## 0091 - The title screen - done 2026-09-28
+
+What changed: the game boots into a game. The farm at dusk behind the
+wordmark, the light going cold, and walkers coming in across the same tiles
+the crops are growing on. Screenshots: `implementation/shots/0091-ident.png`
+and `0091-menu.png`.
+
+Files: `src/ui/title_screen.gd` (new), `scenes/Title.tscn` (new),
+`tools/gen_logo.py` (new), `assets/logo.png` (generated), `project.godot`,
+`tools/verify.py`, `implementation/prompts/0092-main-menu.md`,
+`src/tools/headless_check.gd`, `src/tools/input_check.gd`.
+
+Verify: 5653 headless / 783 input / both hashes unchanged.
+
+### The backdrop is the farm, not a picture of one
+
+`Title.tscn` instantiates the same `World.tscn` the game runs, with a
+scripted state sat at dusk and creeping on. Task 0071's light ramp does the
+rest, and `Relight` is found by name, so the title gets the game's own sky
+for free.
+
+**The first version held it at dusk and never got dark**, which is a green
+field in slightly warm light: a farming game, and only half the premise.
+What says what this game is is the light going *cold* on the same tiles with
+something walking in from the fence. It asks for the night the way a player
+does - by writing `intent["begin_night"]`, not by setting the phase - and
+five walkers arrive once it is dark. Then it goes back to dusk and does it
+again, because the one thing a title screen must not do is end.
+
+That was found by looking at the first screenshot. Nothing would have failed.
+
+### The logo is the game's own letters
+
+The obvious reading of "generated with the same tools" is an ASCII map in
+`sprite_maps.py`, and a wordmark two hundred and fifty pixels wide is eight
+thousand characters of hand-drawing - which is the exact thing
+`tools/font_maps.py` exists to stop. So `tools/gen_logo.py` composes it out
+of the font at **four times size**, which is task 0080's heading argument
+again: a whole-number scale of a bitmap is still a bitmap.
+
+The moon is drawn there because a circle is not a letter. It was over the T
+of HARVEST at first - you could read the word, but you could see it had been
+asked to share - so the canvas makes room for it on the right instead.
+
+A logo that is the game's own type cannot drift away from the game's look,
+which a separately drawn one would the first time the font moved. There is a
+`logo` row in verify that regenerates and compares, and a check that every
+colour in it is off the palette.
+
+### Absent, not greyed - and the rule generalises
+
+Task 0091 says Continue is absent rather than greyed when there is no save,
+and the reason is good for more than Continue: a greyed button is a promise
+the game is not keeping, and a player cannot tell whether it is broken or
+they are. So `TitleScreen.is_shown` decides every entry the same way.
+
+**Options is in that state today and I am saying so rather than shipping a
+dead button.** The options screens are tasks 0093 to 0095 and the router that
+would open them is 0092; nothing exists to open, so the entry is absent by
+the same rule that hides Continue. `implementation/prompts/0092-main-menu.md`
+has been given a requirement that puts it back, and `headless_check` asserts
+it is hidden *for that reason* - so the day somebody builds the screen and
+forgets the entry, the suite says so.
+
+Continue, New run, Statistics and Quit all work. Statistics opens the records
+screen that already existed, handed the profile off disk.
+
+### Booting somewhere else did not break anything
+
+`run/main_scene` is `Title.tscn` now. Every tool that wants the game itself -
+`shot.gd`, `input_check` - loads `Main.tscn` by path and was unaffected, which
+is worth writing down because it was the thing most likely to go wrong and
+did not.
+
+The new input case is the only one in the suite that opens something other
+than `MAIN_SCENE`: it boots what a player boots, presses a key that is not a
+named action, and reads the menu back.
+
+### Hashes
+
+Both unchanged - `215410677` and `2601044827`. A title screen runs its own
+backdrop state and touches nothing the game's own run holds.
+
+`python tools/verify.py` prints PASS: 5653 asserts, 783 input cases, 0 failed,
+with a new `logo` row. `exports` is still the one SKIP and still wants the
+Godot export templates.

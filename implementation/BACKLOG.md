@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`####################....`  **90 / 109 done**
+`####################....`  **91 / 109 done**
 
-0 doing / 19 todo / 0 blocked across 9 phases.
+0 doing / 18 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0091 - The title screen**. The whole of what is left is
+First up: **0092 - The main menu and the router**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,24 +26,24 @@ which rewrites this file for you.
 
 ## What is open
 
-19 task(s) left, the ready ones first, then what they
+18 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
-### 0091 - The title screen
+### 0092 - The main menu and the router
 
-Ready to pick up.  Likely files: `src/ui/title_screen.gd, scenes/Title.tscn`.
+Ready to pick up.  Likely files: `src/app/app.gd, src/ui/main_menu.gd`.
 
-The game currently boots into a farm. Make it boot into a game.
+One router that owns which screen is up, so screens stop knowing about each other.
 
-- The farm at dusk behind the title, with the night creeping in - the premise, in one image
-- The logo, generated with the same tools as everything else
-- Continue, New run, Statistics, Options, Quit
-- Continue is absent, not greyed, when there is no save
-- Any key or click moves past the ident into the menu
+- An `App` autoload with `goto(state)` and a `state_changed` signal
+- States: BOOT, TITLE, MENU, RUN, TECH, STATS, OPTIONS, SUMMARY
+- A back stack, so Options returns to whoever opened it
+- No `get_node('/root/...')` reaching across screens
+- The run becomes one state rather than the root scene
 
-  - done when: Booting lands here and not in a run
-  - done when: The screen says what kind of game this is before a word is read
+  - done when: Options from the title and from the pause menu both return correctly
+  - done when: `input_check` still drives a full night after the refactor
 
 ### 0097 - English and Portuguese
 
@@ -60,6 +60,20 @@ Every string through a translation table, with pt-BR alongside English - the ref
   - done when: The checker reports zero missing keys in both languages
   - done when: Switching language mid-game updates every visible screen
   - done when: No pt-BR string overflows its control - the checker proves it
+
+### 0099 - An icon and a boot ident
+
+Ready to pick up.  Likely files: `tools/gen_icon.py, assets/icon.png`.
+
+Something recognisable in a taskbar and on an itch page, and two seconds before the title that are not the Godot logo.
+
+- An icon generated at every size a platform asks for, readable at 16x16
+- It says farm and night in one image
+- The boot splash is replaced; no default Godot branding anywhere
+- A short ident, skippable on any input
+
+  - done when: The 16x16 icon is still recognisable
+  - done when: No Godot logo appears anywhere in a release build
 
 ### 0102 - A performance budget
 
@@ -119,50 +133,6 @@ The little bubbles on the owner's sheet - !, ?, a heart, a note, an idea, a star
 
   - done when: A reaction appears on the tick the thing happens and clears itself
   - done when: Turning them all off leaves the determinism hash unchanged
-
-### 0092 - The main menu and the router
-
-Waits on 0091.  Likely files: `src/app/app.gd, src/ui/main_menu.gd`.
-
-One router that owns which screen is up, so screens stop knowing about each other.
-
-- An `App` autoload with `goto(state)` and a `state_changed` signal
-- States: BOOT, TITLE, MENU, RUN, TECH, STATS, OPTIONS, SUMMARY
-- A back stack, so Options returns to whoever opened it
-- No `get_node('/root/...')` reaching across screens
-- The run becomes one state rather than the root scene
-
-  - done when: Options from the title and from the pause menu both return correctly
-  - done when: `input_check` still drives a full night after the refactor
-
-### 0099 - An icon and a boot ident
-
-Waits on 0091.  Likely files: `tools/gen_icon.py, assets/icon.png`.
-
-Something recognisable in a taskbar and on an itch page, and two seconds before the title that are not the Godot logo.
-
-- An icon generated at every size a platform asks for, readable at 16x16
-- It says farm and night in one image
-- The boot splash is replaced; no default Godot branding anywhere
-- A short ident, skippable on any input
-
-  - done when: The 16x16 icon is still recognisable
-  - done when: No Godot logo appears anywhere in a release build
-
-### 0101 - Onboarding in seven lines
-
-Waits on 0097.  Likely files: `src/core/tutorial.gd`.
-
-A stranger reaches night 1 and understands the loop, with no more text than the design document allows.
-
-- Seven lines, total, across the whole first day
-- Each appears on the thing it describes
-- The reality switch is explained by showing it, not by describing it
-- Every line is translated
-- Watch someone play it and write down where they stopped
-
-  - done when: A first-time player reaches the end of night 1 without being told anything out loud
-  - done when: The journal names where they hesitated, because that is the finding
 
 ### 0093 - Options: video
 
@@ -237,6 +207,21 @@ Two builds anyone can run, from one command, with the Web one small enough that 
   - done when: Both builds run a full night on a machine without Godot installed
   - done when: The Web build is inside its budget and the number is printed
   - done when: The two builds produce the same determinism hash
+
+### 0101 - Onboarding in seven lines
+
+Waits on 0097.  Likely files: `src/core/tutorial.gd`.
+
+A stranger reaches night 1 and understands the loop, with no more text than the design document allows.
+
+- Seven lines, total, across the whole first day
+- Each appears on the thing it describes
+- The reality switch is explained by showing it, not by describing it
+- Every line is translated
+- Watch someone play it and write down where they stopped
+
+  - done when: A first-time player reaches the end of night 1 without being told anything out loud
+  - done when: The journal names where they hesitated, because that is the finding
 
 ### 0107 - Store assets
 
@@ -426,17 +411,17 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0089** [Tooltips](prompts/0089-tooltips.md)
 - [x] **0090** [The log panel](prompts/0090-log-panel.md)
 
-## 7 - Shell and product  (0/10)
+## 7 - Shell and product  (1/10)
 
-- [ ] **0091** [The title screen](prompts/0091-title-screen.md)
-- [ ] **0092** [The main menu and the router](prompts/0092-main-menu.md) - needs 0091
+- [x] **0091** [The title screen](prompts/0091-title-screen.md)
+- [ ] **0092** [The main menu and the router](prompts/0092-main-menu.md)
 - [ ] **0093** [Options: video](prompts/0093-options-video.md) - needs 0092
 - [ ] **0094** [Options: audio](prompts/0094-options-audio.md) - needs 0092
 - [ ] **0095** [Options: controls](prompts/0095-options-controls.md) - needs 0092
 - [ ] **0096** [The pause menu](prompts/0096-pause-menu.md) - needs 0092
 - [ ] **0097** [English and Portuguese](prompts/0097-i18n.md)
 - [ ] **0098** [Accessibility](prompts/0098-accessibility.md) - needs 0093, 0097
-- [ ] **0099** [An icon and a boot ident](prompts/0099-icon-ident.md) - needs 0091
+- [ ] **0099** [An icon and a boot ident](prompts/0099-icon-ident.md)
 - [ ] **0100** [Exports: Windows and Web](prompts/0100-exports.md) - needs 0092
 
 ## 8 - Ship the MVP  (0/8)

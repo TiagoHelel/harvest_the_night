@@ -1,7 +1,7 @@
 # 0091 - The title screen
 
 - **Phase:** 7 - Shell and product
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0081, 0006
 - **Likely files:** src/ui/title_screen.gd, scenes/Title.tscn
 

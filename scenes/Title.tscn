@@ -1,0 +1,64 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://src/ui/title_screen.gd" id="1_title"]
+[ext_resource type="PackedScene" path="res://scenes/World.tscn" id="2_world"]
+[ext_resource type="Script" path="res://src/ui/relight.gd" id="3_relight"]
+[ext_resource type="Script" path="res://src/ui/stats_screen.gd" id="4_stats"]
+[ext_resource type="Texture2D" path="res://assets/logo.png" id="5_logo"]
+
+[node name="Title" type="Node"]
+script = ExtResource("1_title")
+
+[node name="WorldView" parent="." instance=ExtResource("2_world")]
+unique_name_in_owner = true
+
+[node name="Relight" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_relight")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Screen" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Logo" type="TextureRect" parent="UI/Screen"]
+layout_mode = 0
+offset_left = 115.0
+offset_top = 22.0
+offset_right = 365.0
+offset_bottom = 112.0
+mouse_filter = 2
+texture = ExtResource("5_logo")
+
+[node name="Ident" type="Label" parent="UI/Screen"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 236.0
+offset_right = 480.0
+offset_bottom = 248.0
+mouse_filter = 2
+horizontal_alignment = 1
+
+[node name="Menu" type="VBoxContainer" parent="UI/Screen"]
+layout_mode = 0
+offset_left = 170.0
+offset_top = 140.0
+offset_right = 310.0
+offset_bottom = 240.0
+
+[node name="StatsScreen" type="Control" parent="UI/Screen"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("4_stats")

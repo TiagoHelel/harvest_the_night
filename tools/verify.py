@@ -160,6 +160,19 @@ def check_font():
                  out.strip().splitlines()[-1].strip() if out.strip() else "")
 
 
+def check_logo():
+    """The logo still matches the letters it was composed from.
+
+    It is the game's own type at four times size, so a change to the font is
+    a change to the wordmark - which is the point, and which only stays true
+    if regenerating is checked."""
+    if not os.path.exists(rel("tools/gen_logo.py")):
+        return skip("logo", "no logo generator yet - task 0091")
+    code, out = run([sys.executable, "tools/gen_logo.py", "--check"])
+    return check("logo", code == 0, tail(out, 6) if code else
+                 out.strip().splitlines()[-1].strip() if out.strip() else "")
+
+
 def check_sfx():
     """Every sound still matches the recipe it came from.
 
@@ -444,6 +457,7 @@ def main():
     check_sprites()
     check_player_art()
     check_font()
+    check_logo()
     check_sfx()
     check_music()
     check_ambience()
