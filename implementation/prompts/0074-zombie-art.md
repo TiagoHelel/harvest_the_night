@@ -1,7 +1,7 @@
 # 0074 - Zombie sprites
 
 - **Phase:** 5 - Art and visual direction
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0071, 0050, 0051, 0052
 - **Likely files:** tools/gen_sprites.py, sprites/enemies/
 

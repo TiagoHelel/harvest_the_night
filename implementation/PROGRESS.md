@@ -5838,3 +5838,120 @@ and only re-cutting needs it.
 
 `python tools/verify.py` prints PASS: 4804 asserts, 596 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+
+## 0074 - Zombie sprites - done 2026-09-28
+
+What changed: five enemies drawn as ASCII maps, a rim light derived from the
+drawing rather than written into it, three more poses each derived from the
+first, and a view that picks between them off the state.
+
+Files: `tools/sprite_maps.py`, `tools/gen_sprites.py`, `src/ui/world_view.gd`,
+`sprites/enemies/` (generated), `src/tools/headless_check.gd`,
+`src/tools/input_check.gd`.
+
+Verify: 4853 headless / 607 input / both hashes unchanged.
+
+### The silhouette test
+
+`implementation/shots/0074-silhouettes.png` - the five in colour above, the
+same five in black below.
+
+Upright and average, thrown forward, wide with no neck, lopsided with a slab,
+and then something twice the size. **It is also an assert**, not only a
+picture: each sprite is squashed into a 16x16 grid of "is anything drawn
+here", which is a shape with its size and colour taken away, and every pair
+has to differ in at least sixteen of the two hundred and fifty-six cells.
+
+The closest pair is the Giant and the tank at 32 cells, which is right - they
+are both wide and bulky, and what tells them apart is size. That is a separate
+assert: the Giant is wider and taller than all four of the others.
+
+The bar is deliberately low. Two zombies *should* both read as people, and a
+bar high enough to force them apart would be a bar demanding five unrelated
+animals.
+
+### The rim light, and why it is derived
+
+One line of `moon` down the right of each body. The trick is an agreement with
+task 0071: the night ramp exempts anything the palette drew brighter than
+0.80, and `moon` is 0.849 - so the rim keeps its own colour after dark while
+the body goes blue with everything else. There is an assert that the rim's
+brightness is above `NIGHT_WARM_KEEP`, because if somebody turns that
+threshold up the enemies stop reading against the night and nothing else would
+say so.
+
+**It is applied by `gen_sprites.py`, not written into the maps**, and the first
+attempt is why. I put an `m` at the end of each row of ASCII. A row of ASCII
+does not know where the body is: the mark landed outside the figure where the
+row was narrow and *inside* it where the row had a gap in the middle. The
+walker wore a glowing stripe down its stomach and a second one hovering beside
+its arm. The rightmost lit pixel of a row is a fact about the drawing and the
+machine can find it every time.
+
+### Three poses derived from one
+
+The task wants a walk, an attack and a death for each of five, plus the
+Giant's telegraph. Drawn by hand that is sixteen more maps, and sixteen maps
+drawn to a deadline are sixteen mediocre maps. So:
+
+- **walk_b** is the sprite a pixel higher - a bob rather than a stride.
+  Universal, which matters: it works on the runner, which leans, and on the
+  Giant, which is not shaped like a person. A leg-swap by mirroring the lower
+  third would have broken both.
+- **attack** is the top two thirds shifted along, reaching. Two pixels was
+  invisible at three times zoom; four is a lean you can see.
+- **death** is the sprite rotated flat. This is the one that looks deliberate
+  rather than cheap - a body on the ground reads immediately.
+
+**These are derivations and this is me saying so.** A hand-drawn stride reads
+better than a bob and a hand-drawn slump better than a rotation. What they buy
+is five enemies that all animate, consistently, from one drawing each, and if
+the art ever matters more than that the maps are where to put the work and
+nothing else has to change. The same argument as task 0072's edge tiles, which
+are sixteen composited from four.
+
+### The death nothing plays
+
+`Combat._kill()` removes the entity on the tick it dies, so there is no moment
+to draw a death in. The corpse is task 0077's - `Combat` has said so in a
+comment since it was written - and `enemies/*_death.png` is waiting for it.
+Written down here and asserted, rather than left as five files nobody looks
+at.
+
+### Two things that were quietly wrong
+
+1. **Four of the five were purple blocks.** `_texture_for()` tested whether
+   the whole name was a key of `GameData.ENEMIES`, and `_pose_of()` asks it
+   for `walker_walk_b` and `giant_telegraph`. Neither is a kind, so every pose
+   but the standing one fell through to the props directory and from there to
+   the flat block that means "nobody drew this". The kind is the part before
+   the first underscore.
+2. **Enemies were drawn with their shins in the ground.** The view offset them
+   half a tile back and up, which is right for a 16x16 sprite and wrong for a
+   24x32 one. They are bottom-centred on their cell now, the same rule the
+   player uses.
+
+### A bug in my own screenshot tooling, twice
+
+`var state := driver.state` taken before `Main._ready()` has run holds the
+*empty* dictionary that `start()` then replaces - so every call on it fails
+quietly on a missing key. That is why task 0072's night screenshot came out as
+a day: `Phases.begin_preparation()` was erroring on a stale reference and the
+shot was taken in daylight. The reference has to be taken after the frames.
+
+### On scale
+
+The enemies are 24x32 and the Giant 40x52, against the farmer's 44. That is a
+deliberate consequence of task 0073: a 16x16 zombie beside a 44 pixel farmer
+reads as a dog. **It does leave the rest of the farm looking small** - the
+cow and the chickens are still one tile - and that is a real inconsistency
+this task did not create and does not fix. Task 0075 is the building art and
+is the place to decide whether the props follow.
+
+### Hashes
+
+Both unchanged - `2555959448` and `2601044827`. Art and a view; a zombie that
+moved either guard would be a drawing reaching into the rules.
+
+`python tools/verify.py` prints PASS: 4853 asserts, 607 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

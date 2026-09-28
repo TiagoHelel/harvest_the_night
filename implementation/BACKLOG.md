@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`################........`  **73 / 109 done**
+`################........`  **74 / 109 done**
 
-0 doing / 36 todo / 0 blocked across 9 phases.
+0 doing / 35 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0074 - Zombie sprites**. The whole of what is left is
+First up: **0075 - Buildings and towers**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,24 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-36 task(s) left, the ready ones first, then what they
+35 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0074 - Zombie sprites
-
-Ready to pick up.  Likely files: `tools/gen_sprites.py, sprites/enemies/`.
-
-Four enemies that are told apart at a glance in a dark field at 480x270, which is the only test that matters.
-
-- Basic, runner, tank and breaker, distinct in silhouette before colour
-- Walk, attack and death for each
-- The Giant, larger, with its telegraph as a distinct pose
-- A rim light so they read against the night ramp
-- Silhouette test: all five in black at 100% zoom must still be distinguishable
-
-  - done when: The silhouette test passes - put the image in the journal
-  - done when: A screenshot of a mixed wave is readable at native resolution
 
 ### 0075 - Buildings and towers
 
@@ -183,7 +168,7 @@ The little bubbles on the owner's sheet - !, ?, a heart, a note, an idea, a star
 
 ### 0077 - Particles
 
-Waits on 0074, 0075.  Likely files: `src/ui/particles.gd`.
+Waits on 0075.  Likely files: `src/ui/particles.gd`.
 
 Fire, smoke, sparks, dust and the small amount of blood the design document allows - the difference between a hit and a hit that felt like one.
 
@@ -653,16 +638,16 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0069** [Run statistics](prompts/0069-stats.md)
 - [x] **0070** [Endless nights past ten](prompts/0070-endless.md)
 
-## 5 - Art and visual direction  (3/13)
+## 5 - Art and visual direction  (4/13)
 
 - [x] **0071** [The two palettes](prompts/0071-palettes.md)
 - [x] **0072** [The farm tileset](prompts/0072-tileset.md)
 - [x] **0073** [The player sprite](prompts/0073-player-art.md)
 - [ ] **0109** [The character reacts](prompts/0109-player-emotes.md)
-- [ ] **0074** [Zombie sprites](prompts/0074-zombie-art.md)
+- [x] **0074** [Zombie sprites](prompts/0074-zombie-art.md)
 - [ ] **0075** [Buildings and towers](prompts/0075-building-art.md)
 - [ ] **0076** [Night lighting](prompts/0076-lighting.md)
-- [ ] **0077** [Particles](prompts/0077-particles.md) - needs 0074, 0075
+- [ ] **0077** [Particles](prompts/0077-particles.md) - needs 0075
 - [ ] **0078** [The reality transition](prompts/0078-transition.md) - needs 0076
 - [ ] **0079** [Resource icons and the UI kit](prompts/0079-ui-kit.md)
 - [ ] **0080** [A pixel font](prompts/0080-font.md)

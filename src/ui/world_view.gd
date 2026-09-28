@@ -746,17 +746,23 @@ func _refresh_actors() -> void:
 	for i in ids.size():
 		var one := Entities.get_one(_state, int(ids[i]))
 		var sprite: Sprite2D = _actor_sprites[i]
-		sprite.texture = _texture_for(StringName(one["kind"]))
+		sprite.texture = _texture_for(_pose_of(one))
 		# **A hit reads at a glance.** The rules say how long something stays
 		# lit; the view only turns that into white. Task 0088 adds the shake
 		# and the numbers on top.
 		sprite.modulate = Color(2.4, 2.2, 2.2) if int(one.get("hurt", 0)) > 0 \
 			else Color(1, 1, 1)
+		# **Anchored at the feet, not at a tile corner.** An enemy is no
+		# longer one tile - a walker is 24x32 and the Giant 40x52 - so the
+		# old "half a tile back and up" drew them with their shins in the
+		# ground and their heads in the next row. Bottom-centre on the cell
+		# they occupy is the same rule the player uses, and it is what makes
+		# a zombie stand on the tile the rules say it is on.
+		var art_size := sprite.texture.get_size() if sprite.texture != null 			else Vector2(GameData.TILE_SIZE, GameData.TILE_SIZE)
 		sprite.position = Vector2(
-			floorf(float(one["pos"][0]) * scale_factor
-				- float(GameData.TILE_SIZE) * 0.5),
+			floorf(float(one["pos"][0]) * scale_factor - art_size.x * 0.5),
 			floorf(float(one["pos"][1]) * scale_factor
-				- float(GameData.TILE_SIZE) * 0.5))
+				+ float(GameData.TILE_SIZE) * 0.5 - art_size.y))
 
 
 ## Shots in the air. Two pixels of bright, which at this resolution is enough
@@ -867,6 +873,15 @@ const EDGE_NEIGHBOURS: Array = [
 	Vector2i(0, -1), Vector2i(1, 0), Vector2i(0, 1), Vector2i(-1, 0),
 ]
 const PROP_DIR := "res://sprites/props/"
+## The enemies have their own directory, and are looked in first for anything
+## `GameData.ENEMIES` knows about - a prop and a zombie could otherwise share
+## a name and the prop would win by being looked up first.
+const ENEMY_DIR := "res://sprites/enemies/"
+
+## How many ticks a walk frame lasts. Cosmetic, so it is here and not in
+## `game_data`: a purely visual number in the data hash would mean a
+## balance-neutral tweak failed the guard.
+const ENEMY_WALK_TICKS := 6
 const CROP_DIR := "res://sprites/crops/"
 
 
@@ -928,6 +943,20 @@ func _texture_for(id: StringName) -> Texture2D:
 	if _textures.has(id):
 		return _textures[id]
 
+	# **The kind is the part before the first underscore.** `_pose_of()` asks
+	# for `walker_walk_b` and `giant_telegraph`, and neither is a key of
+	# `GameData.ENEMIES` - so testing the whole name sent every pose but the
+	# standing one to the prop directory, and from there to the flat purple
+	# block that means "nobody drew this". Four of them were standing in the
+	# wave screenshot before this line was right.
+	if GameData.ENEMIES.has(StringName(str(id).split("_")[0])):
+		var mine := ENEMY_DIR + str(id) + ".png"
+		if ResourceLoader.exists(mine):
+			var art: Texture2D = load(mine)
+			if art != null:
+				_textures[id] = art
+				return art
+
 	var path := PROP_DIR + str(id) + ".png"
 	if ResourceLoader.exists(path):
 		var drawn: Texture2D = load(path)
@@ -946,6 +975,29 @@ func _texture_for(id: StringName) -> Texture2D:
 			return _texture_for(StringName(without_row.substr(0, cut)))
 
 	return _flat_block(id)
+
+
+## Which drawing an enemy is showing.
+##
+## **Off the state, not off a guess.** `winding_at` is the rules' own word for
+## "this one is about to hit something", and it is what the telegraph and the
+## attack pose hang on. The walk alternates on the tick, so two zombies that
+## arrived together do not shamble in lockstep - the id is mixed in, which
+## costs nothing and is what stops a wave looking like a chorus line.
+##
+## There is art for a death and nothing plays it. `Combat._kill()` removes the
+## entity on the tick it dies, so there is no moment to draw it in; the corpse
+## it leaves is task 0077's, and `enemies/*_death.png` is waiting for it.
+func _pose_of(one: Dictionary) -> StringName:
+	var kind: StringName = one["kind"]
+	if int(one.get("winding_at", -1)) >= 0:
+		var telegraph := StringName("%s_telegraph" % kind)
+		if ResourceLoader.exists(ENEMY_DIR + str(telegraph) + ".png"):
+			return telegraph
+		return StringName("%s_attack" % kind)
+	var beat := (int(_state["tick"]) / ENEMY_WALK_TICKS
+		+ int(one.get("id", 0))) % 2
+	return kind if beat == 0 else StringName("%s_walk_b" % kind)
 
 
 ## How battered a structure looks, as a tint.

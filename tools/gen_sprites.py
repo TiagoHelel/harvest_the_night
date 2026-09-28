@@ -68,6 +68,97 @@ ATLAS_PATH = "terrain/atlas.png"
 EDGE_SIDES = ["n", "e", "s", "w"]
 
 
+# **The rim light, derived rather than drawn.** Task 0074 wants the enemies to
+# read against task 0071's night ramp, and what does it is one line of a colour
+# the ramp exempts: `moon` is 0.849 bright and the exemption starts at 0.80, so
+# the rim keeps its own colour after dark while the body goes blue with
+# everything else.
+#
+# It is applied here instead of being written into the maps because placing it
+# by hand is wrong by default. The first attempt put an `m` at the end of each
+# row of ASCII, and a row of ASCII does not know where the body is: the mark
+# landed outside the figure where the row was narrow and *inside* it where the
+# row had a gap, so the walker wore a glowing stripe down its stomach and a
+# second one hovering beside its arm. The rightmost lit pixel of a row is a
+# fact about the drawing, and the machine can find it every time.
+RIM_COLOUR = "moon"
+RIM = ["enemies/walker", "enemies/runner", "enemies/tank",
+       "enemies/breaker", "enemies/giant"]
+
+
+def rimmed(pixels, colour):
+    """The same sprite with the right-hand edge of every row lit."""
+    lit = palette.rgba(colour)
+    out = []
+    for row in pixels:
+        row = list(row)
+        for x in range(len(row) - 1, -1, -1):
+            if row[x][3]:
+                row[x] = lit
+                break
+        out.append(row)
+    return out
+
+
+# **The other poses, derived from the drawn one.**
+#
+# Task 0074 wants a walk, an attack and a death for each of five enemies, and
+# a telegraph for the Giant. Drawn by hand that is sixteen more ASCII maps,
+# and sixteen maps drawn to a deadline are sixteen mediocre maps. These three
+# are derived instead, the way the rim light above is and the way task 0072's
+# edge tiles are composited from four sides rather than drawn as forty-seven.
+#
+# **They are derivations and the journal says so.** A hand-drawn stride reads
+# better than a bob and a hand-drawn slump better than a rotation; what these
+# buy is five enemies that all animate, consistently, today, from one drawing
+# each. If the art ever matters more than that, the maps are where to put the
+# work and nothing else has to change.
+#
+#   walk_b     the whole sprite a pixel higher - a bob rather than a stride.
+#              Universal: it works on the runner, which leans, and on the
+#              Giant, which is not shaped like a person at all. A leg-swap by
+#              mirroring the lower third would have broken both.
+#   attack     the top two thirds shifted along, which reads as reaching for
+#              the thing in front of it. Two pixels was invisible on a sheet
+#              at three times zoom; four is a lean you can see.
+#   death      rotated flat. A body on the ground, and the one derivation
+#              that looks deliberate rather than cheap.
+DERIVED = ["walker", "runner", "tank", "breaker", "giant"]
+
+
+def _blank_row(width):
+    return [(0, 0, 0, 0)] * width
+
+
+def bobbed(pixels):
+    """A pixel higher, for the second frame of a walk."""
+    return pixels[1:] + [_blank_row(len(pixels[0]))]
+
+
+def lunging(pixels, by=4):
+    """The top two thirds shifted along, reaching."""
+    cut = (len(pixels) * 2) // 3
+    out = []
+    for y, row in enumerate(pixels):
+        if y >= cut:
+            out.append(list(row))
+            continue
+        out.append([(0, 0, 0, 0)] * by + list(row[:-by]))
+    return out
+
+
+def fallen(pixels):
+    """Rotated flat and dropped to the bottom of its own canvas."""
+    height = len(pixels)
+    width = len(pixels[0])
+    # Quarter turn: the new row y is the old column, read bottom to top.
+    turned = [[pixels[height - 1 - x][y] for x in range(height)]
+              for y in range(width)]
+    out = [_blank_row(height) for _ in range(height - width)]         if height > width else []
+    out.extend(turned)
+    return out[-height:] if len(out) > height else out
+
+
 # --------------------------------------------------------------- the renderer
 
 def render(name, spec):
@@ -96,6 +187,8 @@ def render(name, spec):
             out.append((0, 0, 0, 0) if colour is None
                        else palette.rgba(colour))
         pixels.append(out)
+    if name in RIM:
+        pixels = rimmed(pixels, RIM_COLOUR)
     return width, height, pixels
 
 
@@ -256,6 +349,24 @@ def palette_gd():
     return "\n".join(lines).encode("utf-8")
 
 
+def derived_sprites():
+    """{name: (w, h, pixels)} for every pose that is not drawn by hand."""
+    out = {}
+    for kind in DERIVED:
+        key = "enemies/" + kind
+        width, height, pixels = render(key, SPRITES[key])
+        out["enemies/%s_walk_b" % kind] = (width, height, bobbed(pixels))
+        out["enemies/%s_attack" % kind] = (width, height, lunging(pixels))
+        flat = fallen(pixels)
+        out["enemies/%s_death" % kind] = (height, len(flat), flat)
+    # **The Giant's telegraph is its own pose**, which the task asks for by
+    # name: a bigger reach than an attack, so the second before it swings
+    # looks different from the swing.
+    width, height, pixels = render("enemies/giant", SPRITES["enemies/giant"])
+    out["enemies/giant_telegraph"] = (width, height, lunging(pixels, 5))
+    return out
+
+
 def write(path, data):
     """Write only when the bytes changed, so an unchanged sprite keeps its
     modification time and Godot does not re-import the world every run."""
@@ -277,6 +388,8 @@ def everything():
     out = {}
     for name, spec in sorted(SPRITES.items()):
         w, h, pixels = render(name, spec)
+        out[name + ".png"] = png_bytes(w, h, pixels)
+    for name, (w, h, pixels) in sorted(derived_sprites().items()):
         out[name + ".png"] = png_bytes(w, h, pixels)
     w, h, pixels = build_atlas()
     out[ATLAS_PATH] = png_bytes(w, h, pixels)

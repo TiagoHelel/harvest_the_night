@@ -41,7 +41,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 33
+const CASES := 34
 
 var passed := 0
 var failed := 0
@@ -104,6 +104,7 @@ func _run() -> void:
 	await _case_0071_palettes()
 	await _case_0072_tileset()
 	await _case_0073_player_art()
+	await _case_0074_zombie_art()
 	_finish()
 
 
@@ -3392,6 +3393,82 @@ func _case_0073_player_art() -> void:
 		"the chop to end")
 	expect(not str(view.playing()).begins_with("chop"),
 		"and stops when the work does", str(view.playing()))
+
+	await close_scene()
+	_completed += 1     # last line: an abandoned case never gets here
+
+
+## 0074 - a mixed wave, drawn.
+##
+## The shapes are asserted in `headless_check`, where they are pixels. What
+## can only be checked here is that the running game finds them: a pose whose
+## file the view cannot resolve falls back to a flat purple block, which looks
+## like a bug and is one, and four of the five were doing exactly that before
+## `_texture_for()` learned that `walker_walk_b` belongs to a walker.
+func _case_0074_zombie_art() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var view: WorldView = require_control("WorldView")
+	if driver == null or view == null:
+		_completed += 1
+		await close_scene()
+		return
+
+	var state := driver.state
+	Phases.begin_preparation(state)
+	Sim.advance(state, GameData.PREPARATION_TICKS)
+	await frames(3)
+
+	var kinds := GameData.sorted_names(GameData.ENEMIES.keys())
+	for kind in kinds:
+		expect(Enemies.spawn(state, StringName(kind), 0) > 0,
+			"a %s walks out of the dark" % kind)
+	await frames(6)
+
+	# **Every one of them is drawn from its own art.** The flat block the view
+	# falls back to is generated at runtime and has no `resource_path`, which
+	# is how a fallback is told from a file.
+	var actors: Node2D = view.find_child("Actors", true, false)
+	expect(actors != null, "the actors are on their own layer")
+	var drawn := 0
+	var fallen_back := 0
+	if actors != null:
+		for child in actors.get_children():
+			var sprite := child as Sprite2D
+			if sprite == null or sprite.texture == null:
+				continue
+			if str(sprite.texture.resource_path).contains("/enemies/"):
+				drawn += 1
+			elif str(sprite.texture.resource_path) == "":
+				fallen_back += 1
+	expect(drawn >= kinds.size(),
+		"every enemy on the field is drawn from the enemy art",
+		"%d drawn, %d on the fallback block" % [drawn, fallen_back])
+	expect(fallen_back == 0, "and none of them is a purple block",
+		str(fallen_back))
+
+	# **The pose follows the rules.** `winding_at` is the rules' own word for
+	# "about to hit something", and the Giant has a telegraph of its own.
+	var ids := Entities.ids(state)
+	var giant_id := 0
+	for id in ids:
+		var one := Entities.get_one(state, int(id))
+		if StringName(one["kind"]) == &"giant":
+			giant_id = int(id)
+			break
+	expect(giant_id > 0, "the Giant is on the field")
+	if giant_id > 0:
+		var one := Entities.get_one(state, giant_id)
+		# Either frame of the two-frame walk. The first version of this
+		# asked for `giant` on the nose and got `giant_walk_b`, because the
+		# walk alternates on the tick and the tick does not stop for a test.
+		var walking := str(view._pose_of(one))
+		expect(walking == "giant" or walking == "giant_walk_b",
+			"a Giant that is walking is drawn walking", walking)
+		one["winding_at"] = Grid.index(Player.cell(state))
+		expect(str(view._pose_of(one)) == "giant_telegraph",
+			"and one that is winding up is drawn winding up",
+			str(view._pose_of(one)))
 
 	await close_scene()
 	_completed += 1     # last line: an abandoned case never gets here

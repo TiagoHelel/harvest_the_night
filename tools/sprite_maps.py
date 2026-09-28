@@ -25,6 +25,243 @@ ACTOR = (16, 24)
 
 
 SPRITES = {
+    # ------------------------------------------------- enemies, task 0074
+
+    # **Told apart in black before they are told apart in colour.** Task 0074
+    # has one test that matters - five silhouettes at 100% zoom in a dark
+    # field - so these are shapes first. The walker is upright and average,
+    # the runner is thrown forward and thin, the tank is wide with no neck,
+    # the breaker carries a slab on one side, and the Giant is none of those
+    # and twice the size.
+    #
+    # `m` is the rim light and it is `moon` on purpose. Task 0071's night ramp
+    # exempts anything the palette drew brighter than 0.80 from the tint, and
+    # `moon` is 0.849 - so this one line keeps its own colour after dark while
+    # the body goes blue with everything else.
+    #
+    # **It replaces the outline on the lit side rather than sitting outside
+    # it.** The first version drew it one pixel clear of the body, which at
+    # 100% zoom is not a rim light, it is a glowing stick walking next to a
+    # zombie.
+    "enemies/walker": dict(size=(24, 32), legend={
+        "k": "ink", "r": "rot", "d": "rot_dark",         "o": "bone", "b": "blood", "s": "soil_dark",
+    }, rows=[
+        "........................",
+        "........kkkkkk..........",
+        ".......krrrrrr..........",
+        "......krrrrrrrr.........",
+        "......krokrrokr.........",
+        "......krrrrrrrr.........",
+        "......krroooorr.........",
+        ".......kkrrrrk..........",
+        "........kkrrk...........",
+        ".....kkkksssskk.........",
+        "....ksssssssssss........",
+        "...krsssbssssssss.......",
+        "...krsssssssssssr.......",
+        "...krssssssssssss.......",
+        "...krrsssssssssss.......",
+        "..kkrkssssssssssk.......",
+        "..krrk.kssssssk.kr......",
+        "..krrk.kdddddk..kr......",
+        "..kkkk.kdddddk..kk......",
+        ".......kdddddk..........",
+        ".......kddkddk..........",
+        ".......kdk.kdk..........",
+        ".......kdk.kdk..........",
+        ".......kdk.kdk..........",
+        ".......kdk.kdk..........",
+        "......kkdk.kdkk.........",
+        "......krdk.kdrk.........",
+        "......kkkk.kkkk.........",
+        "........................",
+        "........................",
+        "........................",
+        "........................",
+    ]),
+
+    # **Thrown forward, and the only thing on the farm that leans.** The head
+    # is out past the front foot, which is what a sprint looks like from the
+    # side and what nothing else here does.
+    "enemies/runner": dict(size=(24, 32), legend={
+        "k": "ink", "r": "rot", "d": "rot_dark",
+        "o": "bone", "b": "blood", "s": "soil_dark",
+    }, rows=[
+        "........................",
+        "........................",
+        "........................",
+        "........................",
+        "........................",
+        "...............kkkkk....",
+        "..............krrrrrk...",
+        "..............krokrok...",
+        "..............krrrrrk...",
+        "..............kroooork..",
+        "...........kkkkkrrrkk...",
+        "........kkkkssssskkk....",
+        "....kkkkksssssssssk.....",
+        "..kkrrkssssssbsssssk....",
+        "..krrkksssssssssssk.....",
+        "..kkkkkkssssssssssk.....",
+        "......kkkdddddddddk.....",
+        ".........kdddddddk......",
+        ".........kdddddkk.......",
+        "........kkddddk.........",
+        ".......kkdddkk..........",
+        "......kkdddk............",
+        ".....kkdddk.............",
+        ".....kdddk..............",
+        "....kkddk......kkkk.....",
+        "....kddk......kkddkk....",
+        "...kkddk.....kkdddddk...",
+        "...krrk......kddddddk...",
+        "...kkkk......kkddddkk...",
+        "..............kkkkkk....",
+        "........................",
+        "........................",
+    ]),
+
+    # **No neck, and shoulders twice a walker's.** Wide is the whole shape: at
+    # a glance it is a door rather than a person.
+    "enemies/tank": dict(size=(24, 32), legend={
+        "k": "ink", "r": "rot", "d": "rot_dark",         "o": "bone", "b": "blood", "s": "soil_dark",
+    }, rows=[
+        "........................",
+        "........................",
+        "........kkkkkk..........",
+        ".......krrrrrr..........",
+        ".......krokrok..........",
+        ".......krrrrrr..........",
+        "......kkrooook..........",
+        "...kkkkkrrrrkkkkk.......",
+        "..ksssssssssssssss......",
+        ".kssssssssssssssssss....",
+        ".krsssbsssssssssssss....",
+        "krrsssssssssssssssss....",
+        "krrssssssssssssssssr....",
+        "krrsssssbsssssssssss....",
+        "krrssssssssssssssssr....",
+        "krrksssssssssssssskr....",
+        "kkrkkssssssssssskkkr....",
+        ".krrk.kdddddddddk.kr....",
+        ".krrk.kdddddddddk.kr....",
+        ".kkkk.kddddkddddk..kk...",
+        "......kdddk.kdddk.......",
+        "......kdddk.kdddk.......",
+        "......kdddk.kdddk.......",
+        ".....kkdddk.kdddkk......",
+        ".....krddrk.krddrk......",
+        ".....kkkkkk.kkkkkk......",
+        "........................",
+        "........................",
+        "........................",
+        "........................",
+        "........................",
+        "........................",
+    ]),
+
+    # **It carries the thing it breaks your wall with.** The slab is held out
+    # on one side and joined to the body by an arm, so the silhouette is
+    # lopsided - which none of the others are. The first version drew it as a
+    # block floating clear of the shoulder.
+    "enemies/breaker": dict(size=(24, 32), legend={
+        "k": "ink", "r": "rot", "d": "rot_dark",         "o": "bone", "b": "blood", "s": "soil_dark",
+        "t": "stone", "u": "stone_dark",
+    }, rows=[
+        "........................",
+        "........................",
+        "........kkkkk...........",
+        ".......krrrrr...........",
+        "......krrrrrrr..........",
+        "......krokrrok..........",
+        "......krrrrrrr..........",
+        "......kroooork..........",
+        ".......kkrrrk...........",
+        "kkkk...kkssskk..........",
+        "kuutkkksssssssk.........",
+        "kuutkrsssbsssss.........",
+        "kuutkrssssssssss........",
+        "kuutkrrsssssssss........",
+        "kuutkkrsssssssssr.......",
+        "kuutk.ksssssssssk.......",
+        "kkkkk.kkssssssskk.......",
+        "......kkdddddddk........",
+        "......kdddddddk.........",
+        "......kdddddddk.........",
+        "......kddddkddk.........",
+        "......kdddk.kdk.........",
+        "......kdddk.kdk.........",
+        ".....kkdddk.kdkk........",
+        ".....krddrk.krdk........",
+        ".....kkkkkk.kkkk........",
+        "........................",
+        "........................",
+        "........................",
+        "........................",
+        "........................",
+        "........................",
+    ]),
+
+    # **The Giant.** Twice the size, hunched, with arms that reach the ground
+    # and a head sunk between them. Nothing else on the farm is this shape and
+    # nothing else is this big, which is the whole of its silhouette test.
+    "enemies/giant": dict(size=(40, 52), legend={
+        "k": "ink", "r": "rot", "d": "rot_dark",         "o": "bone", "b": "blood", "s": "soil_dark",
+    }, rows=[
+        "........................................",
+        "........................................",
+        "..............kkkkkkkkk.................",
+        "............kkrrrrrrrrrk................",
+        "...........krrrrrrrrrrrr................",
+        "...........krrrrrrrrrrrrr...............",
+        "...........krokkrrrrkkokr...............",
+        "...........krrrrrrrrrrrrr...............",
+        "...........krroooooooorrr...............",
+        "...........kkrokokokokrrk...............",
+        "............kkrrrrrrrrkk................",
+        "..........kkkkkkrrrrkkkkkk..............",
+        ".......kkkkssssssssssssssskkk...........",
+        "....kkkkssssssssssssssssssssssk.........",
+        "...kssssssssssbssssssssssssssss.........",
+        "..krssssssssssssssssssssssssssss........",
+        "..krrsssssssssssssssssssssssssss........",
+        "..krrssssssssssssssssssssssssssr........",
+        "..krrsssssssssbbssssssssssssssss........",
+        "..krrssssssssssssssssssssssssssr........",
+        "..krrkssssssssssssssssssssssssrk........",
+        "..krrkkssssssssssssssssssssssskr........",
+        "..krrk.kkssssssssssssssssssskkkr........",
+        "..krrk...kkddddddddddddddkk...kr........",
+        "..krrk.....kdddddddddddddk....kr........",
+        "..krrk.....kdddddddddddddk....kr........",
+        "..krrk.....kdddddddddddddk....kr........",
+        "..kkrk.....kddddddkdddddddk...kr........",
+        "...krk.....kdddddk.kdddddk....kr........",
+        "...krk.....kdddddk.kdddddk....kr........",
+        "...kkkk....kdddddk.kdddddk...kkk........",
+        "....krrk...kdddddk.kdddddk..krrk........",
+        "....kkkkk..kdddddk.kdddddk..kkkk........",
+        ".....krrk..kdddddk.kdddddk..krrk........",
+        ".....kkkk..kdddddk.kdddddk..kkkk........",
+        "...........kdddddk.kdddddk..............",
+        "...........kdddddk.kdddddk..............",
+        "...........kdddddk.kdddddk..............",
+        "..........kkdddddk.kdddddkk.............",
+        "..........krddddrk.krddddrk.............",
+        "..........kkkkkkkk.kkkkkkkk.............",
+        "........................................",
+        "........................................",
+        "........................................",
+        "........................................",
+        "........................................",
+        "........................................",
+        "........................................",
+        "........................................",
+        "........................................",
+        "........................................",
+        "........................................",
+    ]),
+
 
     # **The shadow under the farmer**, because without one a character floats.
     # Drawn flat and wide, the shape a body casts at noon from above, and laid

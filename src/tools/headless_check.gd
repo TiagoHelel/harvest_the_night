@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 66
+const GROUPS := 67
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -130,6 +130,7 @@ func _run() -> void:
 	_task_0071_palettes()
 	_task_0072_tileset()
 	_task_0073_player_art()
+	_task_0074_zombie_art()
 
 
 func _finish() -> void:
@@ -11517,3 +11518,155 @@ func _task_0073_player_art() -> void:
 		"and it is one of the two the diagonal is made of", str(held))
 
 	_completed += 1     # last line: an abandoned group never gets here
+
+
+## 0074 - the enemies, and the silhouette test.
+func _task_0074_zombie_art() -> void:
+	var kinds := GameData.sorted_names(GameData.ENEMIES.keys())
+	expect(kinds.size() == 5, "five enemies to draw", str(kinds.size()))
+
+	# **Every kind has every pose.** The walk is two frames, the attack is
+	# one, and the death is one - drawn or derived, but present.
+	var masks := {}
+	for kind in kinds:
+		for suffix in ["", "_walk_b", "_attack", "_death"]:
+			var path := "res://sprites/enemies/%s%s.png" % [kind, suffix]
+			expect(ResourceLoader.exists(path), "there is art at %s" % path)
+		var image := Image.load_from_file(ProjectSettings.globalize_path(
+			"res://sprites/enemies/%s.png" % kind))
+		expect(image != null, "%s loads" % kind)
+		if image != null:
+			masks[kind] = _silhouette(image)
+	expect(ResourceLoader.exists("res://sprites/enemies/giant_telegraph.png"),
+		"and the Giant has a telegraph of its own, which the task asks for")
+
+	# **The silhouette test, and it is the only test task 0074 says matters.**
+	# Each sprite is squashed into a sixteen by sixteen grid of "is anything
+	# drawn here", which is what a shape looks like once size and colour are
+	# taken away, and every pair has to differ in enough cells.
+	#
+	# Sixteen of two hundred and fifty-six is the bar. It is low on purpose:
+	# two zombies *should* both read as people, and a bar high enough to force
+	# them apart would be a bar demanding five unrelated animals.
+	var floor_cells := 16
+	var closest := 999
+	var closest_pair := ""
+	for i in kinds.size():
+		for j in range(i + 1, kinds.size()):
+			var a: Array = masks[kinds[i]]
+			var b: Array = masks[kinds[j]]
+			var differ := 0
+			for cell in a.size():
+				if bool(a[cell]) != bool(b[cell]):
+					differ += 1
+			if differ < closest:
+				closest = differ
+				closest_pair = "%s and %s" % [kinds[i], kinds[j]]
+			expect(differ >= floor_cells,
+				"%s and %s are different shapes in black"
+					% [kinds[i], kinds[j]],
+				"%d of 256 cells differ" % differ)
+	print("  the closest two silhouettes are %s, differing in %d of 256 cells"
+		% [closest_pair, closest])
+
+	# **The Giant is the biggest thing on the field**, which is most of how it
+	# is told apart at a glance.
+	var giant := Image.load_from_file(ProjectSettings.globalize_path(
+		"res://sprites/enemies/giant.png"))
+	expect(giant != null, "the Giant loads")
+	if giant != null:
+		for kind in kinds:
+			if kind == &"giant":
+				continue
+			var other := Image.load_from_file(ProjectSettings.globalize_path(
+				"res://sprites/enemies/%s.png" % kind))
+			expect(other != null and giant.get_height() > other.get_height()
+				and giant.get_width() > other.get_width(),
+				"and is bigger than the %s" % kind,
+				"%dx%d against %dx%d" % [giant.get_width(),
+					giant.get_height(), other.get_width(),
+					other.get_height()])
+
+	# **The rim light is a colour the night ramp leaves alone.** That is the
+	# whole trick, and it is an agreement between two tasks: 0071 exempts
+	# anything the palette drew brighter than `NIGHT_WARM_KEEP`, and this is
+	# what makes one line of pixels keep its colour after dark. If somebody
+	# turns that threshold up, the enemies stop reading against the night and
+	# nothing else would say so.
+	var rim: Color = PaletteData.COLOURS[&"moon"]
+	var brightness := rim.r * 0.299 + rim.g * 0.587 + rim.b * 0.114
+	expect(brightness > PaletteData.NIGHT_WARM_KEEP,
+		"the rim light survives the night ramp",
+		"%.3f against %.3f" % [brightness, PaletteData.NIGHT_WARM_KEEP])
+
+	# And it is actually on them: the last lit pixel of a row, on every row
+	# that has one.
+	for kind in kinds:
+		var image := Image.load_from_file(ProjectSettings.globalize_path(
+			"res://sprites/enemies/%s.png" % kind))
+		if image == null:
+			continue
+		var rows := 0
+		var lit := 0
+		for y in image.get_height():
+			var last := -1
+			for x in image.get_width():
+				if image.get_pixel(x, y).a > 0.0:
+					last = x
+			if last < 0:
+				continue
+			rows += 1
+			if image.get_pixel(last, y).is_equal_approx(rim):
+				lit += 1
+		expect(rows > 0 and lit == rows,
+			"every drawn row of the %s ends in the rim colour" % kind,
+			"%d of %d" % [lit, rows])
+
+	# **A death that nothing plays yet.** Said out loud rather than left as a
+	# file nobody looks at: `Combat._kill()` removes the entity on the tick it
+	# dies, so there is no moment to draw it in. The corpse is task 0077's and
+	# the art is waiting for it.
+	expect(ResourceLoader.exists("res://sprites/enemies/walker_death.png"),
+		"the death art exists, for task 0077 to play")
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## A sprite squashed into a 16x16 grid of "is anything drawn here".
+##
+## Scaled from its own bounding box, so this compares *shape* and not size -
+## the Giant being four times a walker is a different test, above.
+func _silhouette(image: Image) -> Array:
+	var left := image.get_width()
+	var right := -1
+	var top := image.get_height()
+	var bottom := -1
+	for y in image.get_height():
+		for x in image.get_width():
+			if image.get_pixel(x, y).a <= 0.0:
+				continue
+			left = mini(left, x)
+			right = maxi(right, x)
+			top = mini(top, y)
+			bottom = maxi(bottom, y)
+	var out: Array = []
+	out.resize(256)
+	out.fill(false)
+	if right < left or bottom < top:
+		return out
+	var wide := right - left + 1
+	var tall := bottom - top + 1
+	for cy in 16:
+		for cx in 16:
+			var any := false
+			for sy in range(cy * tall / 16, maxi((cy + 1) * tall / 16,
+					cy * tall / 16 + 1)):
+				for sx in range(cx * wide / 16, maxi((cx + 1) * wide / 16,
+						cx * wide / 16 + 1)):
+					if image.get_pixel(left + sx, top + sy).a > 0.0:
+						any = true
+						break
+				if any:
+					break
+			out[cy * 16 + cx] = any
+	return out
