@@ -32,13 +32,15 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 80
+const GROUPS := 81
 
 const SettingsScript := preload("res://src/app/settings.gd")
 const AudioScript := preload("res://src/app/audio.gd")
 const SfxScript := preload("res://src/ui/sfx.gd")
 const MusicScript := preload("res://src/ui/music.gd")
 const AmbienceScript := preload("res://src/ui/ambience.gd")
+const JuiceScript := preload("res://src/ui/juice.gd")
+const WorldScript := preload("res://src/ui/world_view.gd")
 
 var passed := 0
 var failed := 0
@@ -148,6 +150,7 @@ func _run() -> void:
 	_task_0085_night_sounds()
 	_task_0086_music()
 	_task_0087_ambience()
+	_task_0088_juice()
 
 
 func _finish() -> void:
@@ -13135,5 +13138,146 @@ func _task_0087_ambience() -> void:
 		% [AmbienceScript.DAY_TOUCHES.size()
 			+ AmbienceScript.NIGHT_TOUCHES.size(),
 			loudest_bed, ducked, alarm.get("peak", 0.0)])
+
+	_completed += 1     # last line: an abandoned group never gets here
+## 0088 - shake, hit stop, damage numbers.
+func _task_0088_juice() -> void:
+	# **Hit stop may not touch the tick rate.** The requirement in so many
+	# words, and the one thing that would quietly break every promise the
+	# determinism guard makes. Asked of the source, because the way this goes
+	# wrong is somebody reaching for the easy lever a year from now.
+	#
+	# **Comments do not count**, which this got wrong first time: both files
+	# explain in prose that they do not touch `Engine.time_scale`, and the
+	# check read the explanation as the offence. Task 0081's override check
+	# learned the same lesson and skips comments the same way.
+	for file_name in ["src/ui/juice.gd", "src/ui/sim_driver.gd"]:
+		var text := FileAccess.get_file_as_string("res://" + file_name)
+		var offences: Array = []
+		for line in text.split("
+"):
+			var trimmed := line.strip_edges()
+			if trimmed.begins_with("#") or trimmed.is_empty():
+				continue
+			if trimmed.contains("time_scale") or trimmed.contains("TICK_HZ ="):
+				offences.append(trimmed)
+		expect(offences.is_empty(),
+			"%s changes neither the engine's speed nor the tick rate"
+			% file_name,
+			str(offences.slice(0, 2)))
+
+	# **Everything here can be turned off.** Three switches, and the shake is
+	# a dial rather than a flag because some people want less of it rather
+	# than none.
+	expect(SettingsScript.DEFAULTS.has(&"a11y/screen_shake"),
+		"the shake can be turned down")
+	expect(SettingsScript.DEFAULTS.get(&"a11y/hit_stop", null) == true,
+		"hit stop is a switch, and on by default")
+	expect(SettingsScript.DEFAULTS.get(&"video/damage_numbers", null) == true,
+		"and so are the damage numbers")
+
+	# **A cap on the shake**, so nothing can shake the farm to pieces. Six
+	# pixels of a two-hundred-and-seventy pixel screen.
+	expect(WorldScript.SHAKE_CAP > 0.0 and WorldScript.SHAKE_CAP <= 10.0,
+		"the shake is capped at something small",
+		str(WorldScript.SHAKE_CAP))
+	expect(JuiceScript.SHAKE_HOUSE > WorldScript.SHAKE_CAP,
+		"and the house asks for more than the cap, so the cap is the thing "
+		+ "that decides",
+		"%.1f against %.1f" % [JuiceScript.SHAKE_HOUSE,
+			WorldScript.SHAKE_CAP])
+
+	# **A crowded wave does not spawn a thousand labels.** The pool is fixed
+	# and small, and hits on one thing are gathered before any of them is
+	# shown.
+	expect(JuiceScript.MAX_NUMBERS > 0 and JuiceScript.MAX_NUMBERS <= 48,
+		"the number pool is small and fixed",
+		str(JuiceScript.MAX_NUMBERS))
+	expect(JuiceScript.BATCH_SECONDS > 0.0,
+		"and several hits on one thing are gathered into one number",
+		str(JuiceScript.BATCH_SECONDS))
+
+	# **Colour-coded by damage type**, out of the palette like everything
+	# else with a colour in this game, and every type the rules can deal has
+	# one.
+	for type in GameData.DAMAGE_TYPES:
+		expect(JuiceScript.TYPE_COLOURS.has(type),
+			"'%s' damage has a colour" % type)
+	var seen: Dictionary = {}
+	for type in GameData.sorted_names(JuiceScript.TYPE_COLOURS.keys()):
+		var name: StringName = JuiceScript.TYPE_COLOURS[type]
+		expect(PaletteData.COLOURS.has(name),
+			"the '%s' colour is a palette colour" % type, str(name))
+		expect(not seen.has(name),
+			"and is not the same as %s's" % str(seen.get(name, "")), str(name))
+		seen[name] = str(type)
+
+	# **A squash on death needs something to squash.** Task 0077 drew a
+	# fallen pose for every enemy and nothing has ever played it; this is
+	# what plays it, so this is where it gets checked.
+	for kind in GameData.sorted_names(GameData.ENEMIES.keys()):
+		expect(ResourceLoader.exists("res://sprites/enemies/%s_death.png"
+			% kind), "the %s has a body to leave behind" % kind)
+
+	# Hit stop is short. A hold long enough to notice as a pause is a hold
+	# that reads as the game having crashed.
+	expect(JuiceScript.HIT_STOP_SECONDS > 0.0
+		and JuiceScript.HIT_STOP_SECONDS < 0.15,
+		"a hold is a few frames, not a stutter",
+		"%.3fs" % JuiceScript.HIT_STOP_SECONDS)
+
+	# **The batching, asked of the two halves that do it.** Two hits on one
+	# thing inside the window are one entry and then one number that reads
+	# the sum - not two numbers, and not one number that lost half the
+	# damage.
+	var pool: Juice = JuiceScript.new()
+	pool.arm()
+	pool.gather(7, 2, Vector2.ZERO, GameData.DAMAGE_IMPACT)
+	pool.gather(7, 3, Vector2.ZERO, GameData.DAMAGE_IMPACT)
+	expect(pool.waiting_to_show() == 1,
+		"two hits on one thing are gathered into one",
+		"%d waiting" % pool.waiting_to_show())
+	pool.gather(8, 4, Vector2.ZERO, GameData.DAMAGE_IMPACT)
+	expect(pool.waiting_to_show() == 2,
+		"and two hits on two things are not",
+		"%d waiting" % pool.waiting_to_show())
+	pool.ripen(JuiceScript.BATCH_SECONDS + 0.01)
+	expect(pool.numbers_showing() == 2,
+		"which come out as two numbers",
+		"%d showing" % pool.numbers_showing())
+	expect(pool.shown_total() == 9,
+		"reading five and four, with nothing dropped on the way",
+		"%d" % pool.shown_total())
+
+	# **The louder type wins.** A zombie shot and then blown up in the same
+	# fifth of a second was blown up.
+	var mixed: Juice = JuiceScript.new()
+	mixed.arm()
+	mixed.gather(1, 2, Vector2.ZERO, GameData.DAMAGE_IMPACT)
+	mixed.gather(1, 2, Vector2.ZERO, GameData.DAMAGE_EXPLOSIVE)
+	mixed.gather(1, 2, Vector2.ZERO, GameData.DAMAGE_IMPACT)
+	mixed.ripen(JuiceScript.BATCH_SECONDS + 0.01)
+	expect(mixed.numbers_showing() == 1 and mixed.shown_total() == 6,
+		"three mixed hits are one number of six",
+		"%d showing, %d total"
+		% [mixed.numbers_showing(), mixed.shown_total()])
+
+	# And the pool cannot be made to overflow, however much is thrown at it.
+	var many: Juice = JuiceScript.new()
+	many.arm()
+	for i in JuiceScript.MAX_NUMBERS * 5:
+		many.gather(i, 1, Vector2.ZERO, GameData.DAMAGE_IMPACT)
+	many.ripen(JuiceScript.BATCH_SECONDS + 0.01)
+	expect(many.numbers_showing() == JuiceScript.MAX_NUMBERS,
+		"a hundred and twenty hits fill the pool and no more",
+		"%d showing, cap %d"
+		% [many.numbers_showing(), JuiceScript.MAX_NUMBERS])
+	pool.free()
+	mixed.free()
+	many.free()
+
+	print("  shake capped at %.0f, %d numbers, %d types, %d bodies"
+		% [WorldScript.SHAKE_CAP, JuiceScript.MAX_NUMBERS,
+			JuiceScript.TYPE_COLOURS.size(), GameData.ENEMIES.size()])
 
 	_completed += 1     # last line: an abandoned group never gets here

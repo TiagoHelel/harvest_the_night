@@ -56,6 +56,10 @@ const DEFAULTS := {
 	# with a hole in it. `a11y/particle_density` turns the tap down;
 	# this is the ceiling, which is a different thing.
 	&"video/max_particles": 420,
+	# Task 0088. Floating damage numbers. On, because they are most of how
+	# a player learns what a tower is worth - and a switch, because they
+	# are also the busiest thing on a crowded screen.
+	&"video/damage_numbers": true,
 
 	&"audio/master": 1.0,
 	&"audio/music": 0.8,
@@ -76,6 +80,11 @@ const DEFAULTS := {
 	&"gameplay/tutorial_seen": false,
 
 	&"a11y/screen_shake": 1.0,
+	# Task 0088. A few frames of stopped world on a big hit. Its own key
+	# rather than sharing `screen_shake`: they are different complaints -
+	# one is motion, the other is the game not answering the keyboard for
+	# a sixteenth of a second.
+	&"a11y/hit_stop": true,
 	&"a11y/flashing": true,
 	&"a11y/particle_density": 1.0,
 	&"a11y/ui_scale": 1.0,

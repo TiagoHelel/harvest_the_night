@@ -335,11 +335,20 @@ func _watch_structures() -> void:
 	for idx in keys:
 		var id := StringName((occupants[idx] as Dictionary)["id"])
 		if GameData.DEFENCES.has(id):
-			now[idx] = true
+			now[idx] = bool((GameData.DEFENCES[id] as Dictionary)
+				.get("one_shot", false))
 	if not _standing.is_empty():
 		for gone in _standing:
-			if not now.has(gone):
-				_ask_at(BREAK_SOUND, _cell_middle(Grid.cell(int(gone))), 1)
+			if now.has(gone):
+				continue
+			# **A mine that went off is not a wall that broke.** Task 0085
+			# watched every defence vanish and sounded all of them as timber
+			# - so the mine's own blast, which it drew a sound for, never
+			# played once. A `one_shot` defence leaving the board is the one
+			# going off; anything else leaving it has been knocked down.
+			var was_a_trap := bool(_standing[gone])
+			_ask_at(TOWER_SOUNDS[&"mine"] if was_a_trap else BREAK_SOUND,
+				_cell_middle(Grid.cell(int(gone))), 1)
 	_standing = now
 
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3]
+[gd_scene load_steps=18 format=3]
 
 [ext_resource type="Script" path="res://src/ui/main.gd" id="1_main"]
 [ext_resource type="Script" path="res://src/ui/sim_driver.gd" id="2_driver"]
@@ -21,6 +21,7 @@
 [ext_resource type="Script" path="res://src/ui/sfx.gd" id="19_sfx"]
 [ext_resource type="Script" path="res://src/ui/music.gd" id="20_music"]
 [ext_resource type="Script" path="res://src/ui/ambience.gd" id="21_amb"]
+[ext_resource type="Script" path="res://src/ui/juice.gd" id="22_juice"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_main")
@@ -42,6 +43,10 @@ unique_name_in_owner = true
 [node name="Lighting" type="Node2D" parent="Lights"]
 unique_name_in_owner = true
 script = ExtResource("16_lights")
+
+[node name="Juice" type="Node2D" parent="Lights"]
+unique_name_in_owner = true
+script = ExtResource("22_juice")
 
 [node name="Transition" type="Node2D" parent="Lights"]
 unique_name_in_owner = true

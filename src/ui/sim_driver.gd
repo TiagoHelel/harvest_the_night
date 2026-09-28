@@ -49,6 +49,20 @@ var peak_usec := 0
 
 var _accumulator := 0.0
 
+## Seconds of hit stop left to serve.
+##
+## **Held, not slowed.** `TICK_HZ` is never touched and neither is
+## `Engine.time_scale`: the ticks that were going to run still run, at the
+## same fixed rate, a fraction of a second later. What a hold costs is real
+## time, and the simulation does not measure itself in real time - which is
+## why task 0088 can prove with the determinism hash that hit stop changes
+## nothing at all about the game.
+##
+## The accumulator is deliberately **not** advanced while held, for the same
+## reason pausing does not bank time: coming out of a hold and immediately
+## running four ticks to catch up would undo the whole point of stopping.
+var _hold := 0.0
+
 
 ## Set the speed, snapped to one the table offers, and remember it.
 func set_speed(value: int) -> void:
@@ -95,6 +109,11 @@ func start(seed_value: int) -> void:
 func _process(delta: float) -> void:
 	if not running or state.is_empty():
 		return
+	if _hold > 0.0:
+		_hold = maxf(_hold - delta, 0.0)
+		last_ticks = 0
+		last_usec = 0
+		return
 	var owed: Array = Sim.ticks_for(_accumulator, delta)
 	_accumulator = owed[1]
 	var ticks: int = int(owed[0]) * maxi(speed, 1)
@@ -107,6 +126,18 @@ func _process(delta: float) -> void:
 	last_usec = Time.get_ticks_usec() - started
 	peak_usec = maxi(peak_usec, last_usec)
 	ticked.emit(state)
+
+
+## Stop the world for a moment. Asking again while one is running keeps the
+## longer of the two rather than adding them up, so a mortar landing on six
+## zombies is one held beat and not six.
+func hold(seconds: float) -> void:
+	_hold = maxf(_hold, seconds)
+
+
+## True while the world is stopped, which is what the checks watch.
+func holding() -> bool:
+	return _hold > 0.0
 
 
 ## Microseconds per tick on the last frame, which is the number that has to

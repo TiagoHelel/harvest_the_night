@@ -51,6 +51,10 @@ const SEED := 82082082
 ## that nothing can quietly come to depend on the two being the same.
 const SPARK_SEED := 4820
 
+## Ticks to run on each of those frames, so the world is alive while the view
+## is watching it. Two, which over thirty frames is two seconds of game.
+const STIR_TICKS := 2
+
 ## Frames to let the view settle after the state is scripted, before the
 ## shutter. Enough for a panel to lay itself out and for particles to have
 ## something in the air.
@@ -170,6 +174,16 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 	_only_showing(main, str(entry[2]))
 
 	for i in SETTLE:
+		# **The game has to be running while the shutter is open.** The view
+		# notices things by comparing this frame with the last one - damage
+		# numbers, corpses, muzzle flashes, sparks - so a scenario that does
+		# all its work in one `Sim.advance` and then holds still gives them
+		# nothing to have noticed. Task 0088's wave came back with a battle
+		# in it and not one damage number, because every blow had landed
+		# before `Juice` had a first frame to compare against.
+		#
+		# A fixed number of ticks a frame, so two runs still tick identically.
+		Sim.advance(state, STIR_TICKS)
 		await process_frame
 	await RenderingServer.frame_post_draw
 

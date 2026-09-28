@@ -7486,3 +7486,128 @@ Both unchanged - `2555959448` and `2601044827`.
 `python tools/verify.py` prints PASS: 5455 asserts, 728 input cases, 0 failed,
 with a new `ambience` row. `exports` is still the one SKIP and still wants the
 Godot export templates.
+
+## 0088 - Juice: shake, hit stop, damage numbers - done 2026-09-28
+
+What changed: a kill feels like a kill. The camera shakes, the world stops for
+four frames on a big hit, damage floats up in the colour of what dealt it, and
+a body flattens where it fell. `src/ui/juice.gd` watches and decides; nothing
+about it reaches the rules. Screenshots: `implementation/shots/0088/`.
+
+Files: `src/ui/juice.gd` (new), `src/ui/world_view.gd`, `src/ui/sim_driver.gd`,
+`src/ui/sfx.gd`, `src/app/settings.gd`, `scenes/Main.tscn`, `src/ui/main.gd`,
+`src/tools/shot.gd`, `src/tools/headless_check.gd`,
+`src/tools/input_check.gd`.
+
+Verify: 5485 headless / 738 input / **both hashes unchanged**, which is the
+done-when.
+
+### Hit stop, and why the hash proves it is safe
+
+A hold does not touch `TICK_HZ` and does not touch `Engine.time_scale`. It
+stops `SimDriver` for a sixteenth of a second, and the ticks that were going
+to run still run, at the same fixed rate, a moment later. **The simulation
+does not measure itself in real time**, so a run that was held and a run that
+was not reach the same state at the same tick.
+
+`input_check` says exactly that: a control state advanced four hundred ticks,
+and a live run held for four tenths of a second half way through and then
+advanced to the same four hundred. Same hash. It also asserts that no tick
+runs while the hold is on, so the test cannot pass by the hold doing nothing.
+
+There is a source check too, because the way this goes wrong is somebody
+reaching for `time_scale` in a year. **It failed first time on my own
+comments** - both files explain in prose that they do not touch it, and the
+check read the explanation as the offence. It skips comments now, which is
+what task 0081's override check already knew.
+
+### Where the damage type comes from
+
+Exactly, and without asking the rules for anything new - which matters,
+because "none of it touches the hash" and a new key on an entity is a moved
+hash.
+
+A shot in flight is in `state["projectiles"]` and **carries its own `type` and
+`target`**; when one disappears it has landed, so the damage its target takes
+that frame is that type. A flame tower has no projectile, but its victims are
+in `state["burning"]`. A mine has neither and is spotted by a `one_shot`
+defence that is no longer there. Three signals, all already kept, nothing
+guessed.
+
+### A bug in task 0085 that this task's watching exposed
+
+The same signal that types explosive damage is the one that should have
+sounded a mine. Task 0085 watched every defence vanish and sounded all of
+them as breaking timber - so the mine's own blast, which it had a sound
+drawn for, **never played once**. A `one_shot` defence leaving the board is
+the one going off; anything else leaving it has been knocked down.
+
+### Two things the screenshots said and no assert could
+
+The wave shot came back with a battle in it and **not one damage number**.
+Not a bug in the juice: `shot.gd` did all its work in one `Sim.advance` and
+then held still for thirty frames, and the view notices things by comparing
+this frame with the last one. Every blow had landed before `Juice` had a
+first frame to compare against. The shot tool runs two ticks on each settle
+frame now, which is a fixed number, so two runs still tick identically.
+
+Then every corpse came back as a **solid white rectangle**. The death art has
+not one white pixel in it, so nothing was being drawn but a box. I did not
+chase that through the renderer: corpses go on the screen the way every other
+picture in this game does, as a `Sprite2D` with a texture and a scale.
+`particles.gd` is the hint - it is on the same layer and draws only
+rectangles, so no code in this project was drawing a texture in `_draw`
+there.
+
+**A known limitation, said out loud:** where four zombies stand together their
+numbers still pile up into one pale blob. Per-entity batching, a hard cap of
+twenty-four and a deterministic sideways nudge by entity id all help and none
+of them solves it, because two numbers in the same place at the same moment
+is what floating damage numbers do. It is legible when the crowd is not
+shoulder to shoulder, which is most of a night.
+
+### Batching, and a test that proved nothing twice
+
+"Batched when many land at once" turned out to be the hardest thing here to
+test honestly.
+
+The first live test hit one zombie three times and asserted one number. It
+passed - **and it passed with the batching removed**, because three hits in
+one frame are one drop in hit points, so there is nothing to batch. The
+second version waited on `waiting_to_show() == 0`, which is true before the
+hits have been noticed as well as after they have come out, so it returned at
+once and measured an empty screen.
+
+The answer was that at any frame rate a suite actually runs at, hits in a row
+land in the same frame - a live test **cannot** tell gathering from not
+gathering. `gather` and `ripen` are public now, with a comment saying why,
+and `headless_check` drives them directly: two hits on one thing are one
+entry and then one number reading five; two hits on two things are two.
+Removed, it fails with `3 showing, 6 total`.
+
+And one more of my own traps: the live case called `driver.start()` instead
+of `Main.begin_run()`, which replaces the state dictionary and leaves every
+screen watching the old one. That is the exact failure `begin_run` was pulled
+out of `_ready` at task 0082 to prevent, and I walked into it in a test.
+
+### Everything can be turned off
+
+- `a11y/screen_shake` is a dial. At zero the camera does not move **at all**,
+  not less - which is what somebody prone to motion sickness needs it to
+  mean, and what `input_check` asserts.
+- `a11y/hit_stop` is its own switch rather than sharing the shake's: they are
+  different complaints. One is motion, the other is the game not answering
+  the keyboard for a sixteenth of a second.
+- `video/damage_numbers` turns the numbers off, and nothing is left waiting.
+
+The shake is capped at six pixels of a two-hundred-and-seventy pixel screen.
+The house asks for nine, so the cap is the thing that decides - asserted, so
+that a bigger number somewhere cannot quietly become the ceiling.
+
+### Hashes
+
+Both unchanged - `2555959448` and `2601044827`. That is the whole point of
+the task and the reason the hit stop is a hold rather than a slowdown.
+
+`python tools/verify.py` prints PASS: 5485 asserts, 738 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

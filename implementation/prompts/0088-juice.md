@@ -1,7 +1,7 @@
 # 0088 - Juice: shake, hit stop, damage numbers
 
 - **Phase:** 6 - Sound and juice
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0026, 0077
 - **Likely files:** src/ui/juice.gd
 

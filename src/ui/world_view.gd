@@ -40,6 +40,15 @@ extends Node2D
 ## row 0 and row 17 are the tree line and the far water, a decorative border
 ## rather than anywhere the player goes. A camera that drifted up and down over
 ## eighteen pixels would be motion sickness in exchange for nothing.
+## **A cap, so nothing can shake the screen to pieces.** Six pixels is a
+## fortieth of a 270-pixel screen: enough to feel, small enough that the farm
+## never stops being readable. A mortar landing on eight zombies asks for far
+## more than this and gets six.
+const SHAKE_CAP := 6.0
+
+## How fast a shake dies away, as a fraction of itself a second.
+const SHAKE_DECAY := 9.0
+
 const WORLD_SIZE := Vector2i(
 	GameData.GRID_WIDTH * GameData.TILE_SIZE,
 	GameData.GRID_HEIGHT * GameData.TILE_SIZE)
@@ -89,6 +98,12 @@ const UNKNOWN_COLOUR := Color8(220, 60, 200)
 ## not fail a guard that watches balance. `video/transition_seconds` overrides
 ## it for a player who has seen the moment enough times.
 var _transition_seconds := GameData.TRANSITION_SECONDS
+
+## How hard the camera is shaking, in pixels, and how fast that dies away.
+## Its own generator, so that seeding the globals for a screenshot does not
+## decide which way the screen jumps.
+var _shake := 0.0
+var _shake_rng := RandomNumberGenerator.new()
 
 @onready var _terrain: TileMapLayer = $Terrain
 ## The edges, on their own layer over the terrain. A cell can only hold one
@@ -229,6 +244,7 @@ func mark_dirty() -> void:
 func _process(delta: float) -> void:
 	if _state.is_empty():
 		return
+	_shake_camera(delta)
 	_light_for_phase(delta)
 	# **Not rebuilt every frame.** Godot's Dictionary hash is cheap and exact
 	# enough to notice a placement or a removal; the determinism hash is a
@@ -606,6 +622,57 @@ func _draw_highlight() -> void:
 
 
 ## Keep the camera on a cell, clamped to the farm and locked vertically.
+## Shake the camera by this much, in pixels.
+##
+## **The camera and not the world.** `Camera2D.offset` moves what is drawn
+## without moving where the camera *is*, so `Main` can keep pointing it at
+## the farmer every frame - and the UI, which is on its own `CanvasLayer`,
+## does not move at all. A HUD that shook with the screen would be a HUD you
+## could not read at the moment you most needed to.
+##
+## Asking again keeps the bigger of the two: six zombies dying together is
+## one shake, not six added up into a screen nobody can look at.
+func shake(pixels: float) -> void:
+	_shake = maxf(_shake, pixels)
+
+
+func shake_amount() -> float:
+	return _shake
+
+
+## A new offset every frame while it lasts, dying away exponentially.
+##
+## **Scaled by `a11y/screen_shake` and gone entirely at zero.** A player who
+## has turned it off gets a camera that never moves - not a smaller shake -
+## which is what the setting promises and what somebody prone to motion
+## sickness needs it to mean.
+func _shake_camera(delta: float) -> void:
+	if _shake <= 0.0:
+		if _camera != null and _camera.offset != Vector2.ZERO:
+			_camera.offset = Vector2.ZERO
+		return
+	_shake = maxf(_shake - _shake * SHAKE_DECAY * delta, 0.0)
+	if _shake < 0.05:
+		_shake = 0.0
+	var scale := _shake_setting()
+	if _camera == null:
+		return
+	if scale <= 0.0:
+		_camera.offset = Vector2.ZERO
+		return
+	var amount := minf(_shake, SHAKE_CAP) * scale
+	_camera.offset = Vector2(
+		_shake_rng.randf_range(-amount, amount),
+		_shake_rng.randf_range(-amount, amount)).round()
+
+
+func _shake_setting() -> float:
+	var service := get_node_or_null(^"/root/Settings")
+	if service == null:
+		return 1.0
+	return clampf(float(service.get_float(&"a11y/screen_shake")), 0.0, 2.0)
+
+
 func look_at_cell(cell: Vector2i) -> void:
 	_camera.position.x = float(cell.x * GameData.TILE_SIZE + GameData.TILE_SIZE / 2)
 	_camera.position.y = float(WORLD_SIZE.y) * 0.5

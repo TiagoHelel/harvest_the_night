@@ -41,7 +41,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 44
+const CASES := 45
 
 ## The pixels two pieces of text in one row must have between them. Two is
 ## the width of the gap inside a letter at this size, so anything less reads
@@ -120,6 +120,7 @@ func _run() -> void:
 	await _case_0085_night_sounds()
 	await _case_0086_music()
 	await _case_0087_ambience()
+	await _case_0088_juice()
 	_finish()
 
 
@@ -4437,5 +4438,128 @@ func _case_0087_ambience() -> void:
 		"%.2f" % audio.duck_gain())
 
 	audio.stop_all()
+	await close_scene()
+	_completed += 1     # last line: an abandoned case never gets here
+func _case_0088_juice() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var view: WorldView = require_control("WorldView")
+	var juice: Juice = require_control("Juice")
+	var settings: Node = root.get_node_or_null(^"Settings")
+	if driver == null or view == null or juice == null or settings == null:
+		expect(juice != null, "the Juice node is in the scene")
+		_completed += 1
+		await close_scene()
+		return
+
+	# **Hit stop does not desynchronise the simulation - proved with the
+	# hash.** The done-when in so many words.
+	#
+	# A hold stops the driver for a fraction of a second. It does not touch
+	# the tick rate, so the ticks that were going to run still run, at the
+	# same rate, a moment later - and the simulation counts in ticks and not
+	# in seconds. So a run that was held part way and a run that was not
+	# reach the same state at the same tick, and the state hash is exactly
+	# the thing that says so.
+	var control := State.create(880088)
+	Sim.advance(control, 400)
+	var expected := State.hash_of(control)
+
+	# **`begin_run`, not `driver.start`.** `SimDriver.start` replaces the state
+	# dictionary, and every screen is still holding the old one until
+	# somebody hands them the new one - which is the whole reason task 0082
+	# pulled `begin_run` out of `Main._ready`. Calling `start` here left
+	# `Juice` watching a farm that nothing was happening on, and the damage
+	# numbers never appeared because there was no damage where it was
+	# looking.
+	_scene.begin_run(880088)
+	await frames(2)
+	var held := driver.state
+	Sim.advance(held, 200)
+	driver.hold(0.4)
+	expect(driver.holding(), "the world is stopped")
+	var at_hold := int(held["tick"])
+	await frames(6)
+	expect(int(held["tick"]) == at_hold,
+		"and no tick runs while it is",
+		"%d against %d" % [int(held["tick"]), at_hold])
+	await until(func() -> bool: return not driver.holding(),
+		"the hold to end", 900)
+	Sim.advance(held, 400 - int(held["tick"]))
+	expect(int(held["tick"]) == 400, "both runs reach the same tick",
+		str(int(held["tick"])))
+	expect(State.hash_of(held) == expected,
+		"a run that was held hashes the same as one that was not",
+		"%d against %d" % [State.hash_of(held), expected])
+
+	# **A crowded wave does not spawn a thousand labels.** Sixty zombies all
+	# hurt at once, and the pool is the pool.
+	driver.running = false
+	await frames(2)
+	Phases.begin_preparation(held)
+	Sim.advance(held, GameData.PREPARATION_TICKS + 1)
+	await frames(2)
+	for i in 60:
+		Enemies.spawn(held, &"walker", i % GameData.SPAWNS.size())
+	await frames(3)
+	var crowd := Entities.count(held)
+	expect(crowd >= 50, "there is a crowd to hurt", "%d" % crowd)
+	for id in Entities.ids(held):
+		Combat.hit(held, int(id), 3, GameData.DAMAGE_IMPACT)
+	# Past the gathering window, so everything that is going to show has.
+	await frames(4)
+	await until(func() -> bool: return juice.waiting_to_show() == 0,
+		"the gathered hits to come out", 600)
+	expect(juice.numbers_showing() <= Juice.MAX_NUMBERS,
+		"sixty hurt zombies do not make sixty labels",
+		"%d showing, cap %d" % [juice.numbers_showing(), Juice.MAX_NUMBERS])
+
+	# The batching itself is asked in `headless_check`, where `gather` and
+	# `ripen` can be driven directly. At the frame rate this suite runs at,
+	# three hits in a row land in the same frame and become one drop in hit
+	# points - so a live test cannot tell gathering from not gathering, and
+	# the one written here first passed with the gathering removed.
+
+	# **Turned off, the game still reads.** The shake first: zero means the
+	# camera does not move at all, not that it moves less.
+	var was_shake: float = settings.get_float(&"a11y/screen_shake")
+	settings.set_value(&"a11y/screen_shake", 0.0, false)
+	view.shake(40.0)
+	await frames(4)
+	var camera: Camera2D = view.get_node("Camera")
+	expect(camera.offset == Vector2.ZERO,
+		"with the shake off the camera does not move at all",
+		str(camera.offset))
+
+	# And with it on, it moves - but never past the cap.
+	settings.set_value(&"a11y/screen_shake", 1.0, false)
+	view.shake(80.0)
+	var moved := false
+	var worst := 0.0
+	for i in 12:
+		await frames(1)
+		worst = maxf(worst, maxf(absf(camera.offset.x), absf(camera.offset.y)))
+		if camera.offset != Vector2.ZERO:
+			moved = true
+	expect(moved, "with it on, the camera does move")
+	expect(worst <= WorldView.SHAKE_CAP + 0.001,
+		"and never further than the cap, whatever is asked for",
+		"%.1f against %.1f" % [worst, WorldView.SHAKE_CAP])
+	settings.set_value(&"a11y/screen_shake", was_shake, false)
+
+	# The numbers, off.
+	var was_numbers: bool = settings.get_bool(&"video/damage_numbers")
+	settings.set_value(&"video/damage_numbers", false, false)
+	await frames(3)
+	for id in Entities.ids(held):
+		Combat.hit(held, int(id), 3, GameData.DAMAGE_IMPACT)
+	await frames(30)
+	expect(juice.numbers_showing() == 0 and juice.waiting_to_show() == 0,
+		"with the numbers off, none appear at all",
+		"%d showing, %d waiting"
+		% [juice.numbers_showing(), juice.waiting_to_show()])
+	settings.set_value(&"video/damage_numbers", was_numbers, false)
+
+	driver.running = true
 	await close_scene()
 	_completed += 1     # last line: an abandoned case never gets here

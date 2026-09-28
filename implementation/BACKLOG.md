@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`###################.....`  **87 / 109 done**
+`###################.....`  **88 / 109 done**
 
-0 doing / 22 todo / 0 blocked across 9 phases.
+0 doing / 21 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0088 - Juice: shake, hit stop, damage numbers**. The whole of what is left is
+First up: **0089 - Tooltips**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,25 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-22 task(s) left, the ready ones first, then what they
+21 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0088 - Juice: shake, hit stop, damage numbers
-
-Ready to pick up.  Likely files: `src/ui/juice.gd`.
-
-Make a kill feel like a kill. Small, cheap, and entirely in the view layer.
-
-- Screen shake scaled to the event, with a cap and a setting to disable it
-- A few frames of hit stop on a big hit, implemented without touching the tick rate
-- Floating damage numbers, colour-coded by damage type, batched when many land at once
-- A flash on a hit entity and a squash on death
-- None of it is in core and none of it touches the hash
-
-  - done when: Hit stop does not desynchronise the simulation - prove it with the hash
-  - done when: Everything here can be turned off and the game still reads
-  - done when: A crowded wave does not spawn a thousand number labels
 
 ### 0089 - Tooltips
 
@@ -461,14 +445,14 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0081** [The UI theme](prompts/0081-theme.md)
 - [x] **0082** [Screenshots, and actually looking at them](prompts/0082-screenshots.md)
 
-## 6 - Sound and juice  (5/8)
+## 6 - Sound and juice  (6/8)
 
 - [x] **0083** [Audio buses and a sound manager](prompts/0083-audio-buses.md)
 - [x] **0084** [The sounds of the day](prompts/0084-sfx-day.md)
 - [x] **0085** [The sounds of the night](prompts/0085-sfx-night.md)
 - [x] **0086** [Two pieces of music](prompts/0086-music.md)
 - [x] **0087** [Ambience](prompts/0087-ambience.md)
-- [ ] **0088** [Juice: shake, hit stop, damage numbers](prompts/0088-juice.md)
+- [x] **0088** [Juice: shake, hit stop, damage numbers](prompts/0088-juice.md)
 - [ ] **0089** [Tooltips](prompts/0089-tooltips.md)
 - [ ] **0090** [The log panel](prompts/0090-log-panel.md)
 
