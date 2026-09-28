@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://src/ui/tutorial_prompt.gd" id="11_tutorial"]
 [ext_resource type="Script" path="res://src/ui/stats_screen.gd" id="14_stats"]
 [ext_resource type="Script" path="res://src/ui/relight.gd" id="15_relight"]
+[ext_resource type="Script" path="res://src/ui/lighting.gd" id="16_lights"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_main")
@@ -25,6 +26,13 @@ unique_name_in_owner = true
 [node name="Relight" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
 script = ExtResource("15_relight")
+
+[node name="Lights" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+
+[node name="Lighting" type="Node2D" parent="Lights"]
+unique_name_in_owner = true
+script = ExtResource("16_lights")
 
 [node name="UI" type="CanvasLayer" parent="."]
 unique_name_in_owner = true

@@ -41,7 +41,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 34
+const CASES := 35
 
 var passed := 0
 var failed := 0
@@ -105,6 +105,7 @@ func _run() -> void:
 	await _case_0072_tileset()
 	await _case_0073_player_art()
 	await _case_0074_zombie_art()
+	await _case_0076_lighting()
 	_finish()
 
 
@@ -3472,3 +3473,79 @@ func _case_0074_zombie_art() -> void:
 
 	await close_scene()
 	_completed += 1     # last line: an abandoned case never gets here
+
+
+## 0076 - the lights, and the promise that they are only lights.
+func _case_0076_lighting() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var lights: Lighting = require_control("Lighting")
+	if driver == null or lights == null:
+		_completed += 1
+		await close_scene()
+		return
+
+	var state := driver.state
+	await frames(4)
+
+	# **Over the night ramp, under the HUD.** A light under the ramp is a
+	# light the ramp tints blue, and a light over the HUD is a health bar
+	# nobody can read.
+	var layer := lights.get_parent() as CanvasLayer
+	var relight: Relight = require_control("Relight")
+	var ui: CanvasLayer = locate_control("UI") as CanvasLayer
+	expect(layer != null, "the lights have a layer of their own")
+	if layer != null and relight != null:
+		expect(layer.get_index() > relight.get_index(),
+			"drawn after the night ramp",
+			"%d against %d" % [layer.get_index(), relight.get_index()])
+	if layer != null and ui != null:
+		expect(layer.get_index() < ui.get_index(),
+			"and before the HUD",
+			"%d against %d" % [layer.get_index(), ui.get_index()])
+
+	# **Turning lighting off changes nothing about the outcome of a night.**
+	# Task 0076's own done-when, and the way to ask it is the state hash: run
+	# the same night from the same seed twice, once lit and once not.
+	var lit_hash: int = await _night_with_lights(driver, lights, Lighting.FULL)
+	var dark_hash: int = await _night_with_lights(driver, lights, Lighting.OFF)
+	expect(lit_hash == dark_hash,
+		"a night played with the lights off comes out identical",
+		"%d against %d" % [lit_hash, dark_hash])
+	var steady_hash: int = await _night_with_lights(driver, lights, Lighting.STEADY)
+	expect(steady_hash == lit_hash,
+		"and so does one played on the middle setting", str(steady_hash))
+
+	# The dial exists and holds what it is given.
+	lights.set_quality(Lighting.OFF)
+	expect(lights.quality() == Lighting.OFF, "the quality dial turns off")
+	lights.set_quality(99)
+	expect(lights.quality() == Lighting.FULL,
+		"and cannot be turned past the top", str(lights.quality()))
+
+	await close_scene()
+	_completed += 1     # last line: an abandoned case never gets here
+
+
+## Play the opening of a night at one quality and hand back the state hash.
+##
+## The simulation is advanced by hand rather than waited for, so this measures
+## the rules and not the frame rate - and the lights are given frames to draw
+## in between, which is the whole point: if drawing them touched anything,
+## this is where it would show.
+func _night_with_lights(driver: SimDriver, lights: Lighting,
+		level: int) -> int:
+	driver.start(760076)
+	var state := driver.state
+	lights.set_quality(level)
+	Resources.gain(state, {GameData.WOOD: 400, GameData.IRON: 400,
+		GameData.STONE: 400})
+	var at := Player.cell(state)
+	for i in 4:
+		Building.place(state, &"gun_tower", Vector2i(at.x + 2 + i * 2, at.y + 1))
+	Phases.begin_preparation(state)
+	Sim.advance(state, GameData.PREPARATION_TICKS)
+	for chunk in 20:
+		Sim.advance(state, 30)
+		await frames(1)
+	return State.hash_of(state)

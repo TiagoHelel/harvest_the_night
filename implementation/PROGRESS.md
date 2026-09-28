@@ -6069,3 +6069,104 @@ rules.
 
 `python tools/verify.py` prints PASS: 4920 asserts, 607 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+
+## 0076 - Night lighting - done 2026-09-28
+
+What changed: a `Lights` layer over the night ramp that draws a warm pool for
+everything that is burning - the house, the stove, a running generator, a gun
+that has just fired, a zombie that is on fire. Screenshot:
+`implementation/shots/0076-lights-on-off.png`, the same night lit above and
+unlit below.
+
+Files: `src/ui/lighting.gd` (new), `scenes/Main.tscn`, `src/ui/main.gd`,
+`src/ui/world_view.gd`, `src/app/settings.gd`,
+`src/tools/headless_check.gd`, `src/tools/input_check.gd`.
+
+Verify: 4936 headless / 614 input / both hashes unchanged.
+
+### Over the ramp, not under it - and the first version was under it
+
+Task 0071's night is a **screen-space pass**: the farm is drawn, then a shader
+tints it, drains it and lifts it toward purple. A light drawn into the world
+therefore gets tinted blue afterwards, which is the one thing a fire must not
+be.
+
+The first version put them there anyway, on a reasoning I liked: 0071 already
+exempts anything brighter than `NIGHT_WARM_KEEP` from the tint, so a bright
+light would exempt itself. **That is true of the core of a fire and false of
+its halo**, and the halo is most of what a light is. The pool around the
+farmhouse came out as a small yellow dot with a blue-grey smear round it.
+Raising the strength until the pool cleared the threshold only moved the dot's
+edge outward, which is a different bad picture.
+
+So the lights are their own `CanvasLayer` after the relight and before the
+HUD. That costs one thing - the layer is not carried by the camera, so world
+positions go through `get_canvas_transform()` by hand - and buys the half of
+the reference sheet this task exists to reproduce.
+
+**They are additive sprites rather than `PointLight2D`.** A `PointLight2D`
+lights canvas items *under* it, which is exactly the place this task found out
+not to be.
+
+### One light per building, not one per tile
+
+The farmhouse is nine occupants and the kitchen four. Lighting each cell drew
+nine glows on the same spot and additive blending turned the house into a
+white star on the first screenshot. A light belongs to the thing; its middle
+is the average of the cells it stands on.
+
+### The moon is the lift, and that is deliberate
+
+"The moon gives a soft global fill so the farm is never unreadable" is already
+what `NIGHT_LIFT` does - it raises the whole farm off black toward blue, which
+is what moonlight is. Adding a second global light would be the same effect
+twice with two numbers to keep in step. Asserted here rather than left
+implicit: the lift is non-zero on all three channels and leans blue.
+
+### Frame time
+
+Measured with vsync off, because with it on the numbers are the monitor's and
+not the game's - the first attempt reported 32.5 ms against 31.8 ms and both
+were just 30Hz.
+
+On a board of **38 simultaneously lit buildings**: 2.07 ms a frame with the
+lights and 1.13 ms without. **0.94 ms**, which is six per cent of a sixty
+frame budget for more lights than a real farm will ever have on at once. The
+first measurement used a board of gun towers and found nothing, because a gun
+tower is dark until it fires - it measured the cheap case and would have
+called it the expensive one.
+
+### The dial, and the one that already existed
+
+`video/lights`: 0 off, 1 steady, 2 full. And `a11y/flashing` - which was in
+the settings already - drops it to `STEADY`, because a player who has turned
+that off has said they do not want light that moves, and `STEADY` is these
+lights without the wobble. One setting doing what it says rather than two
+meaning the same.
+
+### Light is cosmetic, and that is asserted rather than asserted-to
+
+Task 0076 asks that turning lighting off changes nothing about the outcome of
+a night. `input_check` plays the opening of the same night from the same seed
+three times - full, off, steady - advancing the rules by hand and giving the
+lights frames to draw in between, and compares `State.hash_of()`. All three
+are identical.
+
+### An assert that was right about the wrong version
+
+I wrote "every light is brighter than `NIGHT_WARM_KEEP`", which was the
+correct test while the lights were *under* the ramp and relying on its
+exemption. Once they moved above it, brightness bought nothing - and two of
+the five were under the line with no ill effect at all, which is how it was
+found. What still has to be true is that a light is warm against a blue field,
+and that is what it asks now.
+
+### Hashes
+
+Both unchanged - `2555959448` and `2601044827`. A layer that draws over the
+farm and reads the state without writing to it. The flicker is a wall clock
+and can only be a wall clock: a tick-driven one would be a cosmetic number
+inside the determinism hash.
+
+`python tools/verify.py` prints PASS: 4936 asserts, 614 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

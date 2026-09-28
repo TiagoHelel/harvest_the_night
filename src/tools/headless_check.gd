@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 68
+const GROUPS := 69
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -132,6 +132,7 @@ func _run() -> void:
 	_task_0073_player_art()
 	_task_0074_zombie_art()
 	_task_0075_building_art()
+	_task_0076_lighting()
 
 
 func _finish() -> void:
@@ -11839,3 +11840,67 @@ func _top_row(image: Image) -> String:
 		if any:
 			return line
 	return ""
+
+
+## 0076 - night lighting.
+func _task_0076_lighting() -> void:
+	# **Every light is warmer than the night it sits on.**
+	#
+	# The first version of this asserted that each was brighter than
+	# `NIGHT_WARM_KEEP`, which was the right test for the first version of
+	# the *lights* - they were drawn under the night ramp and relied on its
+	# exemption to stay warm. They are drawn over it now, so brightness
+	# buys nothing and two of the five were under the line with no ill
+	# effect. What still has to be true is that a light is warm against a
+	# blue field, and that is what this asks.
+	var night: Color = PaletteData.NIGHT_TINT
+	var coldest := night.r - night.b
+	var lamps := {
+		"house": Lighting.HOUSE_COLOUR,
+		"stove": Lighting.STOVE_COLOUR,
+		"generator": Lighting.GENERATOR_COLOUR,
+		"muzzle": Lighting.MUZZLE_COLOUR,
+		"burning": Lighting.BURNING_COLOUR,
+	}
+	for name in GameData.sorted_names(lamps.keys()):
+		var lit: Color = lamps[name]
+		expect(lit.r - lit.b > coldest,
+			"the %s light is warmer than the night it sits on" % name,
+			"%.2f against %.2f" % [lit.r - lit.b, coldest])
+		expect(maxf(lit.r, maxf(lit.g, lit.b)) >= 0.7,
+			"and bright enough to be a light", str(lit))
+
+	# **The moon is the global fill**, and it is task 0071's lift rather than
+	# a light of its own: a farm lit only where something is burning is a
+	# farm nobody can walk across. Asserted here because this is the task
+	# that promises the farm is never unreadable.
+	var lift: Color = PaletteData.NIGHT_LIFT
+	expect(lift.r > 0.0 and lift.g > 0.0 and lift.b > 0.0,
+		"the night lifts everywhere, so nothing is ever pure black",
+		str(lift))
+	expect(lift.b > lift.r,
+		"and it lifts towards moonlight rather than towards grey", str(lift))
+
+	# **Three settings, and a default that draws something.**
+	expect(Lighting.OFF < Lighting.STEADY and Lighting.STEADY < Lighting.FULL,
+		"the quality dial has three positions in order")
+	var defaults: Dictionary = load("res://src/app/settings.gd").new().DEFAULTS
+	expect(defaults.has(&"video/lights"),
+		"and the setting is one a player can find", str(defaults.keys().size()))
+	expect(int(defaults[&"video/lights"]) == Lighting.FULL,
+		"and starts turned on", str(defaults.get(&"video/lights")))
+
+	# **A light per lit thing, not per tile.** The bound on the work: the
+	# house is nine occupants and must not be nine lights, which is what it
+	# was on the first run - additive blending turned the farmhouse into a
+	# white star.
+	var radii := [Lighting.HOUSE_RADIUS, Lighting.STOVE_RADIUS,
+		Lighting.GENERATOR_RADIUS, Lighting.MUZZLE_RADIUS,
+		Lighting.BURNING_RADIUS]
+	for radius in radii:
+		expect(float(radius) > 0.5 and float(radius) < 8.0,
+			"a light reaches a sensible number of tiles", str(radius))
+	expect(Lighting.HOUSE_RADIUS > Lighting.BURNING_RADIUS,
+		"and the house throws more light than a burning zombie")
+
+	_completed += 1     # last line: an abandoned group never gets here

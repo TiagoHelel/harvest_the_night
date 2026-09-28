@@ -1,7 +1,7 @@
 # 0076 - Night lighting
 
 - **Phase:** 5 - Art and visual direction
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0071, 0022
 - **Likely files:** src/ui/lighting.gd
 

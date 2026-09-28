@@ -47,6 +47,10 @@ const DEFAULTS := {
 	&"video/integer_scaling": true,
 	&"video/vsync": true,
 	&"video/max_fps": 0,                # 0 is uncapped
+	# Task 0076: 0 off, 1 steady, 2 full. Lights are the thing most
+	# likely to cost frames on a weak machine, and the honest answer to
+	# that is a dial rather than a cleverer shader.
+	&"video/lights": 2,
 
 	&"audio/master": 1.0,
 	&"audio/music": 0.8,
