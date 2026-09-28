@@ -709,17 +709,26 @@ def _audio_number(name):
     raise SystemExit("gen_sfx: audio.gd has no %s any more" % name)
 
 
-def pitch_jitter():
-    """`Audio.PITCH_JITTER`, read out of the GDScript rather than copied.
+def gd_number(relative_path, name):
+    """A `const` out of a GDScript file, by name.
 
-    Two numbers that have to match and live in different files are two numbers
-    that will not.
+    **Two numbers that have to match and live in different files are two
+    numbers that will not.** Every generator that needs to know something the
+    game already decided - the pitch jitter, the distance falloff, the
+    transition's length, how long the bed waits between birds - reads it from
+    where it lives rather than keeping a copy. One reader, so there is one
+    place for that habit to break.
     """
-    path = os.path.join(ROOT, "src", "app", "audio.gd")
+    path = os.path.join(ROOT, *relative_path.split("/"))
     for line in io.open(path, encoding="utf-8"):
-        if line.startswith("const PITCH_JITTER"):
+        if line.startswith("const %s " % name) or \
+                line.startswith("const %s:" % name):
             return float(line.split(":=")[1].split("#")[0].strip())
-    raise SystemExit("gen_sfx: audio.gd has no PITCH_JITTER any more")
+    raise SystemExit("%s has no %s any more" % (relative_path, name))
+
+
+def pitch_jitter():
+    return gd_number("src/app/audio.gd", "PITCH_JITTER")
 
 
 def main():

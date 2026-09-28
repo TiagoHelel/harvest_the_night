@@ -188,6 +188,18 @@ def check_music():
                  out.strip().splitlines()[-1].strip() if out.strip() else "")
 
 
+def check_ambience():
+    """The bed still matches the recipes it came from.
+
+    Third generator, third folder, third bus - `gen_sfx` owns `assets/sfx`,
+    `gen_music` owns `assets/music`, and this owns `assets/ambience`."""
+    if not os.path.exists(rel("tools/gen_ambience.py")):
+        return skip("ambience", "no ambience generator yet - task 0087")
+    code, out = run([sys.executable, "tools/gen_ambience.py", "--check"])
+    return check("ambience", code == 0, tail(out, 6) if code else
+                 out.strip().splitlines()[-1].strip() if out.strip() else "")
+
+
 def check_player_art():
     """The cut frames still match the sheet they came from.
 
@@ -434,6 +446,7 @@ def main():
     check_font()
     check_sfx()
     check_music()
+    check_ambience()
 
     if not hashes_only:
         check_script("headless_check", "src/tools/headless_check.gd",

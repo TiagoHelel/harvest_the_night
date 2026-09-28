@@ -68,6 +68,32 @@ const EXTENSIONS: Array = [".wav", ".ogg", ".mp3"]
 ## the same gun ask for one voice, not twenty.
 const MAX_VOICES := 16
 
+## The five long players, and which bus each sits on. The order is the
+## order of the indices below.
+const SLOT_BUSES := {
+	&"MusicA": &"music",
+	&"MusicB": &"music",
+	&"MusicLayer": &"music",
+	&"BedA": &"ambience",
+	&"BedB": &"ambience",
+}
+
+const MUSIC_A := 0
+const MUSIC_B := 1
+const MUSIC_LAYER := 2
+const BED_A := 3
+const BED_B := 4
+
+## How far the ambience drops when something important happens, and how long
+## it takes to come back.
+##
+## **A quarter, not silence.** The bed going away entirely is as noticeable as
+## the bed being too loud, and the point of ducking is to get out of the way
+## rather than to vanish. Down instantly and back over `DUCK_SECONDS`, which
+## is what a compressor does and what ears expect.
+const DUCK_TO := 0.25
+const DUCK_SECONDS := 1.8
+
 ## How long a crossfade takes when nobody says. **Overridden in practice**:
 ## `Music` hands it the transition's own length, so the music changes exactly
 ## as the screen does.
@@ -141,15 +167,25 @@ var _warned: Dictionary = {}
 var _voices: Array = []
 var _frame := 0
 
-## **The music deck, which is not the voice pool.** Two slots that crossfade
-## into each other and one layer that sits over the top. Separate because a
-## ninety-six second loop taking one of sixteen shared voices - and never
-## giving it back - would be a gunshot lost every time the music started.
-var _deck: Array = []
-var _layer: AudioStreamPlayer = null
+## **The decks, which are not the voice pool.** Five players that hold
+## something long: two that crossfade the music into each other, one layer
+## over the top of it, and two more that do the same for the ambient bed.
+##
+## Separate from the pool because a ninety-six second loop taking one of
+## sixteen shared voices - and never giving it back - would be a gunshot lost
+## every time the music started. In declaration order, which is what the
+## indices below name.
+var _slots: Array = []
+var _fades: Array = []
+
+## What each crossfading pair is currently on.
 var _playing := &""
 var _layer_id := &""
-var _fades: Array = []
+var _bed_id := &""
+
+## How much of a duck is left, and how long it was. See `duck()`.
+var _duck_left := 0.0
+var _duck_length := 0.0
 
 ## Its own generator rather than the global one, so that seeding the globals -
 ## which `src/tools/shot.gd` does to make the smoke reproducible - does not
@@ -183,21 +219,15 @@ func build() -> void:
 			voice.name = "Voice%02d" % i
 			add_child(voice)
 			_voices.append(voice)
-	if _deck.is_empty():
-		for i in 2:
+	if _slots.is_empty():
+		for named in SLOT_BUSES:
 			var slot := AudioStreamPlayer.new()
-			slot.name = "Music%d" % i
-			slot.bus = BUSES[&"music"]
+			slot.name = String(named)
+			slot.bus = BUSES[SLOT_BUSES[named]]
 			slot.volume_db = linear_to_db(0.0)
 			add_child(slot)
-			_deck.append(slot)
+			_slots.append(slot)
 			_fades.append([0.0, 0.0, 0.0, 0.0])  # from, to, left, length
-		_layer = AudioStreamPlayer.new()
-		_layer.name = "MusicLayer"
-		_layer.bus = BUSES[&"music"]
-		_layer.volume_db = linear_to_db(0.0)
-		add_child(_layer)
-		_fades.append([0.0, 0.0, 0.0, 0.0])
 	scan()
 	var settings := _settings()
 	if settings != null:
@@ -211,6 +241,9 @@ func build() -> void:
 func _process(delta: float) -> void:
 	_frame += 1
 	_advance_fades(delta)
+	if _duck_left > 0.0:
+		_duck_left = maxf(_duck_left - delta, 0.0)
+		apply_volumes()
 
 
 ## Put the ears somewhere. The camera follows the farmer, so this is the
@@ -306,27 +339,49 @@ func layer_playing() -> StringName:
 func play_music(id: StringName, seconds: float = FADE_SECONDS) -> bool:
 	if id == _playing:
 		return false
+	if not _crossfade(MUSIC_A, MUSIC_B, id, seconds):
+		return false
+	_playing = id
+	return true
+
+
+## The same for the ambient bed, which crossfades on the same cue.
+func play_bed(id: StringName, seconds: float = FADE_SECONDS) -> bool:
+	if id == _bed_id:
+		return false
+	if not _crossfade(BED_A, BED_B, id, seconds):
+		return false
+	_bed_id = id
+	return true
+
+
+func bed_playing() -> StringName:
+	return _bed_id
+
+
+## Fade whichever of a pair is up out, and the named piece in.
+##
+## One function for the music and the bed, because they are the same problem:
+## two players and one of them is winning.
+func _crossfade(a: int, b: int, id: StringName, seconds: float) -> bool:
 	if id != &"" and _stream_for(id) == null:
 		if not _warned.has(id):
 			_warned[id] = true
 			_warnings += 1
-			push_warning("Audio: no music called '%s'" % id)
+			push_warning("Audio: nothing long called '%s'" % id)
 		return false
 
-	var free_slot := 0 if _level_of(0) <= _level_of(1) else 1
-	var busy_slot := 1 - free_slot
-	_fade_to(busy_slot, 0.0, seconds)
+	var free_slot := a if _level_of(a) <= _level_of(b) else b
+	_fade_to(a if free_slot == b else b, 0.0, seconds)
 	if id == &"":
-		_playing = &""
 		return true
 
-	var slot := _deck[free_slot] as AudioStreamPlayer
+	var slot := _slots[free_slot] as AudioStreamPlayer
 	slot.stream = _looping(_stream_for(id))
 	slot.volume_db = linear_to_db(0.0)
 	if slot.is_inside_tree():
 		slot.play()
 	_fade_to(free_slot, 1.0, seconds)
-	_playing = id
 	return true
 
 
@@ -338,17 +393,17 @@ func set_layer(id: StringName, seconds: float = FADE_SECONDS) -> bool:
 		return false
 	if id == &"":
 		_layer_id = &""
-		_fade_to(2, 0.0, seconds)
+		_fade_to(MUSIC_LAYER, 0.0, seconds)
 		return true
 	if _stream_for(id) == null:
 		return false
-	if _layer != null:
-		_layer.stream = _looping(_stream_for(id))
-		_layer.volume_db = linear_to_db(0.0)
-		if _layer.is_inside_tree():
-			_layer.play()
+	var layer := _slots[MUSIC_LAYER] as AudioStreamPlayer
+	layer.stream = _looping(_stream_for(id))
+	layer.volume_db = linear_to_db(0.0)
+	if layer.is_inside_tree():
+		layer.play()
 	_layer_id = id
-	_fade_to(2, 1.0, seconds)
+	_fade_to(MUSIC_LAYER, 1.0, seconds)
 	return true
 
 
@@ -371,9 +426,9 @@ func _looping(stream: AudioStream) -> AudioStream:
 
 
 func _player_of(slot: int) -> AudioStreamPlayer:
-	if slot < _deck.size():
-		return _deck[slot] as AudioStreamPlayer
-	return _layer
+	if slot < 0 or slot >= _slots.size():
+		return null
+	return _slots[slot] as AudioStreamPlayer
 
 
 func _level_of(slot: int) -> float:
@@ -502,6 +557,8 @@ func apply_volumes() -> void:
 				% bus + "default_bus_layout.tres still there?")
 			continue
 		var level := _float_setting(key)
+		if bus == BUSES[&"ambience"]:
+			level *= duck_gain()
 		var silent := is_silent(level, muted, bus)
 		AudioServer.set_bus_mute(index, silent)
 		AudioServer.set_bus_volume_db(index,
@@ -526,6 +583,31 @@ static func loudness(ears: Vector2, at: Vector2) -> float:
 		return FAR_FLOOR
 	var across := (distance - NEAR) / (EARSHOT - NEAR)
 	return 1.0 - (1.0 - FAR_FLOOR) * across
+
+
+## Get the ambience out of the way of something that matters.
+##
+## **The house being hit must never be masked by birdsong**, which is a
+## done-when and not a matter of taste. Called by the view when it plays one
+## of the sounds that mean something; the bed drops to `DUCK_TO` at once and
+## comes back over `DUCK_SECONDS`.
+##
+## On the **bus**, so everything ambient ducks together and nothing has to
+## remember to. A second duck while one is running extends it rather than
+## restarting it, so a house taking three hits does not pump.
+func duck(seconds: float = DUCK_SECONDS) -> void:
+	_duck_left = maxf(_duck_left, seconds)
+	_duck_length = maxf(_duck_length, maxf(seconds, 0.001))
+	apply_volumes()
+
+
+## How far down the bed is right now, 1.0 being all the way up.
+func duck_gain() -> float:
+	if _duck_left <= 0.0:
+		return 1.0
+	# Down at once and back gradually: `_duck_left` counts towards zero, so
+	# this is DUCK_TO when the duck begins and 1.0 when it has run out.
+	return lerpf(1.0, DUCK_TO, _duck_left / maxf(_duck_length, 0.001))
 
 
 ## Whether a bus should be silent, given its level and the mute flag.

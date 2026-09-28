@@ -418,6 +418,21 @@ func _ask(id: StringName) -> void:
 	_ask_at(id, _where_the_player_is(), 1)
 
 
+## The sounds that get the ambience out of their way.
+##
+## **The house is the whole reason ducking exists** - the done-when says the
+## bed may never mask it. The Giant's roar is here too because it is meant to
+## arrive over everything, and a wall going because it is the moment a player
+## has to look up.
+const DUCKS: Array = [HOUSE_SOUND, BREAK_SOUND]
+
+
 func _ask_at(id: StringName, at: Vector2, gap: int) -> void:
-	if _audio != null:
-		_audio.play(id, at, gap)
+	if _audio == null:
+		return
+	if _audio.play(id, at, gap) and _ducks(id):
+		_audio.duck()
+
+
+func _ducks(id: StringName) -> bool:
+	return DUCKS.has(id) or id == ENEMY_SOUNDS[&"giant"]

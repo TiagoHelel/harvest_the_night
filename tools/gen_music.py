@@ -396,11 +396,7 @@ def preview(folder):
 
 
 def _transition_seconds():
-    path = os.path.join(ROOT, "src", "core", "game_data.gd")
-    for line in io.open(path, encoding="utf-8"):
-        if line.startswith("const TRANSITION_SECONDS"):
-            return float(line.split(":=")[1].split("#")[0].strip())
-    raise SystemExit("gen_music: game_data.gd has no TRANSITION_SECONDS")
+    return sfx.gd_number("src/core/game_data.gd", "TRANSITION_SECONDS")
 
 
 def main():

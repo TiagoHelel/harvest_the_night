@@ -32,12 +32,13 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 79
+const GROUPS := 80
 
 const SettingsScript := preload("res://src/app/settings.gd")
 const AudioScript := preload("res://src/app/audio.gd")
 const SfxScript := preload("res://src/ui/sfx.gd")
 const MusicScript := preload("res://src/ui/music.gd")
+const AmbienceScript := preload("res://src/ui/ambience.gd")
 
 var passed := 0
 var failed := 0
@@ -146,6 +147,7 @@ func _run() -> void:
 	_task_0084_day_sounds()
 	_task_0085_night_sounds()
 	_task_0086_music()
+	_task_0087_ambience()
 
 
 func _finish() -> void:
@@ -13024,3 +13026,114 @@ func _loop_seam(path: String) -> Dictionary:
 		"ratio": join / maxf(p99, 1.0),
 		"seconds": float(count) / 22050.0,
 	}
+## 0087 - the bed under everything.
+func _task_0087_ambience() -> void:
+	# Every id the bed can ask for is a file that is there, and every file is
+	# asked for by something.
+	var wanted: Array = [AmbienceScript.DAY_BED, AmbienceScript.NIGHT_BED]
+	wanted += AmbienceScript.DAY_TOUCHES
+	wanted += AmbienceScript.NIGHT_TOUCHES
+	var heard: Dictionary = {}
+	for id in wanted:
+		expect(ResourceLoader.exists("res://assets/%s.wav" % id),
+			"there is an ambience file for '%s'" % id)
+		heard[String(id).get_file()] = true
+	var folder := DirAccess.open("res://assets/ambience/")
+	expect(folder != null, "assets/ambience exists")
+	if folder != null:
+		for file_name in folder.get_files():
+			if not file_name.ends_with(".wav"):
+				continue
+			expect(heard.has(file_name.get_basename()),
+				"'%s' is a sound something asks for" % file_name)
+
+	# **A day bed and a night bed**, and nothing shared between the two lists
+	# - a cricket by daylight would be the sort of mistake nobody reports and
+	# everybody notices.
+	expect(AmbienceScript.bed_for(Phases.DAY) == AmbienceScript.DAY_BED,
+		"the day has its own bed")
+	for phase in [Phases.PREPARATION, Phases.NIGHT, Phases.RESULT]:
+		expect(AmbienceScript.bed_for(phase) == AmbienceScript.NIGHT_BED,
+			"and %s has the night's" % Phases.name_of(phase))
+	for id in AmbienceScript.DAY_TOUCHES:
+		expect(not AmbienceScript.NIGHT_TOUCHES.has(id),
+			"'%s' belongs to one half of the day only" % id)
+
+	# **The beds loop.** Measured the way task 0086 measures music, because
+	# the bed runs for four minutes at a time and a seam in it would be the
+	# most repeated sound in the game.
+	for id in [AmbienceScript.DAY_BED, AmbienceScript.NIGHT_BED]:
+		var seam := _loop_seam("res://assets/%s.wav" % id)
+		expect(not seam.is_empty(), "'%s' could be measured" % id)
+		if seam.is_empty():
+			continue
+		expect(float(seam["ratio"]) <= 1.0,
+			"the loop point of '%s' is no more abrupt than the bed" % id,
+			"%.2f of the 99th percentile step" % seam["ratio"])
+
+	# **The bed is the quietest thing in the game**, because it is the only
+	# one that never stops.
+	var loudest_bed := 0.0
+	for id in [AmbienceScript.DAY_BED, AmbienceScript.NIGHT_BED]:
+		var one := _wav_facts("res://assets/%s.wav" % id)
+		if not one.is_empty():
+			loudest_bed = maxf(loudest_bed, float(one["peak"]))
+	var alarm := _wav_facts("res://assets/%s.wav" % SfxScript.HOUSE_SOUND)
+	expect(loudest_bed > 0.0 and loudest_bed < 0.3,
+		"the bed is quiet even before anything ducks it",
+		"%.2f" % loudest_bed)
+
+	# **It never masks the house-damage sound.** The done-when, and the whole
+	# reason `Audio.duck` exists. Asked as headroom: the bed at its loudest,
+	# ducked, against the alarm at its peak.
+	expect(AudioScript.DUCK_TO > 0.0 and AudioScript.DUCK_TO < 0.5,
+		"ducking gets out of the way without the bed vanishing",
+		str(AudioScript.DUCK_TO))
+	var ducked := loudest_bed * AudioScript.DUCK_TO
+	expect(float(alarm.get("peak", 0.0)) > ducked * 8.0,
+		"the house being hit is far above the ducked bed",
+		"%.3f against %.3f" % [alarm.get("peak", 0.0), ducked])
+	expect(SfxScript.DUCKS.has(SfxScript.HOUSE_SOUND),
+		"and the house is on the list of things that duck it")
+
+	# The duck itself: down at once, back by the end, and never below its
+	# floor.
+	var deck: Node = AudioScript.new()
+	root.add_child(deck)
+	deck.build()
+	expect(is_equal_approx(deck.duck_gain(), 1.0),
+		"the bed is all the way up when nothing is happening",
+		"%.2f" % deck.duck_gain())
+	deck.duck(1.0)
+	expect(deck.duck_gain() < 0.5,
+		"and drops the moment something ducks it",
+		"%.2f" % deck.duck_gain())
+	expect(deck.duck_gain() >= AudioScript.DUCK_TO - 0.001,
+		"but never further than the floor",
+		"%.2f against %.2f" % [deck.duck_gain(), AudioScript.DUCK_TO])
+	deck.queue_free()
+
+	# **Positional touches**: the pond is louder near the pond. The rule is
+	# already asserted in task 0085; what this says is that the bed uses it -
+	# that water and birds have somewhere to come from and a breeze does not.
+	for id in AmbienceScript.AT_THE_POND + AmbienceScript.AT_THE_TREES:
+		expect(AmbienceScript.DAY_TOUCHES.has(id)
+			or AmbienceScript.NIGHT_TOUCHES.has(id),
+			"'%s' is a touch that gets played" % id)
+	var near: float = AudioScript.loudness(Vector2.ZERO, Vector2(40.0, 0.0))
+	var away: float = AudioScript.loudness(Vector2.ZERO, Vector2(400.0, 0.0))
+	expect(near > away,
+		"a lap of the pond is louder from the bank than from the gate",
+		"%.2f against %.2f" % [near, away])
+
+	# The gap between touches is wide, because a fixed one is a metronome.
+	expect(AmbienceScript.GAP_HIGH > AmbienceScript.GAP_LOW * 2.0,
+		"the gap between touches varies widely rather than ticking",
+		"%.1f to %.1f" % [AmbienceScript.GAP_LOW, AmbienceScript.GAP_HIGH])
+
+	print("  2 beds, %d touches, bed %.2f ducks to %.3f under an alarm of %.2f"
+		% [AmbienceScript.DAY_TOUCHES.size()
+			+ AmbienceScript.NIGHT_TOUCHES.size(),
+			loudest_bed, ducked, alarm.get("peak", 0.0)])
+
+	_completed += 1     # last line: an abandoned group never gets here

@@ -7379,3 +7379,110 @@ Both unchanged - `2555959448` and `2601044827`. Music is not a rule.
 `python tools/verify.py` prints PASS: 5406 asserts, 720 input cases, 0 failed,
 with a new `music` row. `exports` is still the one SKIP and still wants the
 Godot export templates.
+
+## 0087 - Ambience - done 2026-09-28
+
+What changed: a bed under everything. Two sixteen-second loops that crossfade
+with the sky, nine one-shots fired at intervals between four and eleven
+seconds, and `Audio.duck()` to get the whole Ambience bus out of the way when
+something matters.
+
+Files: `tools/gen_ambience.py` (new), `assets/ambience/` (11 generated WAVs,
+new), `src/ui/ambience.gd` (new), `src/app/audio.gd`, `src/ui/sfx.gd`,
+`scenes/Main.tscn`, `src/ui/main.gd`, `tools/verify.py`, `tools/gen_sfx.py`,
+`tools/gen_music.py`, `src/tools/headless_check.gd`,
+`src/tools/input_check.gd`.
+
+Verify: 5455 headless / 728 input / both hashes unchanged.
+
+### Two short beds, not two more long loops
+
+The obvious build was two more ninety-six second pieces like task 0086's, and
+it would have cost **eight more megabytes and still been a loop**.
+
+A bed of filtered noise can be sixteen seconds and nobody will ever notice,
+because there is no tune in it to recognise. What makes a farm sound alive is
+the bird that calls now and then - and a bird baked into a sixteen-second
+loop is the one thing a player *would* notice. So the beds are short and
+continuous, and everything with a shape to it is a one-shot fired at gaps the
+controller picks. Eleven files, 1.7 MB, and the touches never repeat.
+
+**And the positional requirement fell out for nothing.** A lap of water is
+played at the pond's own cell and goes through the same falloff a gunshot
+does, so it is louder when you are standing next to the pond. Birds come from
+the nearest tree; something groaning comes from the far edge of the farm. No
+new machinery at all - task 0085 had already built it.
+
+### Looping noise
+
+`gen_music` loops a pad by snapping its partials to harmonics of the loop.
+Noise has no partials to snap, so the answer is the older one: render a
+little more than a loop's worth and **fold the overhang back over the
+beginning**, so the end is already becoming the start by the time it gets
+there. Measured the way 0086 measures music - the join against the track's
+own ninety-ninth percentile step - the beds come in at **0.05 and 0.39**
+against a threshold of 1.0.
+
+### Ducking, and the done-when it exists for
+
+"The ambience never masks the house-damage sound" is not a matter of taste,
+so it is not left to one. `Audio.duck()` drops the **bus**, so everything
+ambient gets out of the way together and nothing has to remember to; `Sfx`
+calls it on the house, on a wall going and on the Giant's roar.
+
+A quarter rather than silence: the bed vanishing is as noticeable as the bed
+being too loud, and the point is to get out of the way rather than to
+disappear. Down at once and back over 1.8 seconds, and a second hit while the
+first is still ducking **extends** it rather than restarting, so a house
+taking three blows does not pump.
+
+The headroom is asserted rather than assumed: the bed peaks at 0.22, ducks to
+**0.055**, and the alarm peaks at **0.95**. Seventeen times, measured off the
+files. `input_check` then walks the whole chain - hit the house, and the
+Ambience bus is really quieter in decibels. Disconnected, it fails with
+`-3.1dB against -3.1dB`, which is the bus not moving at all.
+
+### It lives in `src/ui/` and the prompt said `src/app/`
+
+The prompt's likely file was `src/app/ambience.gd`. This reads the phase, the
+terrain and where the farmer is standing - which is game state, and
+`src/app/` is services: nodes, disk, the audio server. `Music` and `Sfx` are
+in `src/ui/` for exactly that reason and this is their third sibling.
+
+What *is* in `src/app/` is the part that belongs there: `Audio.duck()`, which
+knows about buses and nothing about farms.
+
+### One reader for numbers that live in GDScript
+
+Three generators now need to know things the game has already decided - the
+pitch jitter, the distance falloff, the transition's length, how long the bed
+waits between birds. Each had started reading them out of the GDScript by
+hand, which was about to be the fourth copy of the same eight lines.
+
+`gen_sfx.gd_number(path, name)` is that reader, and `gen_music` was moved onto
+it in passing. Two numbers that have to match and live in different files are
+two numbers that will not, and now there is one place for that habit to
+break rather than three.
+
+### The deck grew a second pair
+
+`Audio` had two crossfading music slots and a layer. It has five named slots
+now - `MUSIC_A`, `MUSIC_B`, `MUSIC_LAYER`, `BED_A`, `BED_B` - and one
+`_crossfade(a, b, id, seconds)` that the music and the bed both use, because
+they are the same problem: two players, and one of them is winning.
+
+### The done-when that needs ears
+
+"Standing still on the farm for a minute is pleasant, not empty" has no
+measurement that answers it. `python tools/gen_ambience.py --preview <dir>`
+renders exactly that minute, by day and by night: the bed looped, with
+touches at the same gaps the game picks and the same falloff applied, from
+the sort of distances the farm puts them at. Both went to the owner.
+
+### Hashes
+
+Both unchanged - `2555959448` and `2601044827`.
+
+`python tools/verify.py` prints PASS: 5455 asserts, 728 input cases, 0 failed,
+with a new `ambience` row. `exports` is still the one SKIP and still wants the
+Godot export templates.

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3]
+[gd_scene load_steps=17 format=3]
 
 [ext_resource type="Script" path="res://src/ui/main.gd" id="1_main"]
 [ext_resource type="Script" path="res://src/ui/sim_driver.gd" id="2_driver"]
@@ -20,6 +20,7 @@
 [ext_resource type="Script" path="res://src/ui/transition.gd" id="18_trans"]
 [ext_resource type="Script" path="res://src/ui/sfx.gd" id="19_sfx"]
 [ext_resource type="Script" path="res://src/ui/music.gd" id="20_music"]
+[ext_resource type="Script" path="res://src/ui/ambience.gd" id="21_amb"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_main")
@@ -173,6 +174,10 @@ script = ExtResource("19_sfx")
 [node name="Music" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("20_music")
+
+[node name="Ambience" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("21_amb")
 
 [node name="SimDriver" type="Node" parent="."]
 unique_name_in_owner = true

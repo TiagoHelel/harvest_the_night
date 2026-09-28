@@ -1,7 +1,7 @@
 # 0087 - Ambience
 
 - **Phase:** 6 - Sound and juice
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0084, 0085
 - **Likely files:** src/app/ambience.gd
 

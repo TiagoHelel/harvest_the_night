@@ -41,7 +41,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 43
+const CASES := 44
 
 ## The pixels two pieces of text in one row must have between them. Two is
 ## the width of the gap inside a letter at this size, so anything less reads
@@ -119,6 +119,7 @@ func _run() -> void:
 	await _case_0084_day_sounds()
 	await _case_0085_night_sounds()
 	await _case_0086_music()
+	await _case_0087_ambience()
 	_finish()
 
 
@@ -4366,5 +4367,75 @@ func _case_0086_music() -> void:
 		"while the result screen keeps the night in the air",
 		"'%s'" % audio.music_playing())
 
+	await close_scene()
+	_completed += 1     # last line: an abandoned case never gets here
+func _case_0087_ambience() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var view: WorldView = require_control("WorldView")
+	var bed: Ambience = require_control("Ambience")
+	var audio: Node = root.get_node_or_null(^"Audio")
+	if driver == null or view == null or bed == null or audio == null:
+		expect(bed != null, "the Ambience node is in the scene")
+		_completed += 1
+		await close_scene()
+		return
+	var state := driver.state
+
+	await frames(6)
+	expect(String(audio.bed_playing()) == "ambience/day_bed",
+		"the day has birds under it",
+		"'%s'" % audio.bed_playing())
+
+	# **The bed turns over with the sky**, on the same cue the music does.
+	await click_control("NightButton")
+	await until(func() -> bool: return int(state["phase"]) != Phases.DAY,
+		"the night to begin")
+	await frames(2)
+	expect(String(audio.bed_playing()) == "ambience/night_bed",
+		"and switching reality asks for the night's",
+		"'%s'" % audio.bed_playing())
+	await until(func() -> bool: return not view.is_transitioning(),
+		"the change of reality to end", 900)
+	await frames(4)
+
+	# **It is on its own bus**, which is what lets it be turned down alone.
+	var ambience_bus := AudioServer.get_bus_index("Ambience")
+	var music_bus := AudioServer.get_bus_index("Music")
+	expect(ambience_bus >= 0 and ambience_bus != music_bus,
+		"the bed has a bus of its own",
+		"%d against %d" % [ambience_bus, music_bus])
+
+	# **It ducks under the house being hit.** The done-when says the bed may
+	# never mask it; this is the whole chain - `Sfx` notices the damage,
+	# `Audio.duck` drops the bus, and the bus is measurably quieter.
+	audio.stop_all()
+	audio.forget_counts()
+	await frames(2)
+	var resting := AudioServer.get_bus_volume_db(ambience_bus)
+	expect(is_equal_approx(audio.duck_gain(), 1.0),
+		"nothing is ducking the bed to begin with",
+		"%.2f" % audio.duck_gain())
+
+	state["house_hp"] = int(state["house_hp"]) - 10
+	await frames(3)
+	expect(audio.plays_of(&"sfx/house_hit") >= 1,
+		"the house takes a hit", "last '%s'" % audio.last_played())
+	expect(audio.duck_gain() < 1.0,
+		"and the bed gets out of the way of it",
+		"%.2f" % audio.duck_gain())
+	var ducked := AudioServer.get_bus_volume_db(ambience_bus)
+	expect(ducked < resting - 3.0,
+		"the ambience bus is measurably quieter while the alarm sounds",
+		"%.1fdB against %.1fdB" % [ducked, resting])
+
+	# A second hit while the first is still ducking extends it rather than
+	# starting over, so a house taking three blows does not pump.
+	state["house_hp"] = int(state["house_hp"]) - 10
+	await frames(3)
+	expect(audio.duck_gain() < 1.0, "a second hit keeps it out of the way",
+		"%.2f" % audio.duck_gain())
+
+	audio.stop_all()
 	await close_scene()
 	_completed += 1     # last line: an abandoned case never gets here
