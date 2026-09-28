@@ -41,7 +41,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 28
+const CASES := 29
 
 var passed := 0
 var failed := 0
@@ -99,6 +99,7 @@ func _run() -> void:
 	await _case_0055_speed()
 	await _case_0056_night_hud()
 	await _case_0063_tech_tree()
+	await _case_0069_stats()
 	_finish()
 
 
@@ -2963,6 +2964,81 @@ func _case_0063_tech_tree() -> void:
 	await tap_key(KEY_T)
 	await frames(3)
 	expect(not panel.is_open(), "and will not open after dark")
+
+	await close_scene()
+	_completed += 1     # last line: an abandoned case never gets here
+
+
+## 0069 - the records screen, opened and read.
+func _case_0069_stats() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var screen: StatsScreen = require_control("StatsScreen")
+	if driver == null or screen == null:
+		_completed += 1
+		await close_scene()
+		return
+
+	var state := driver.state
+	await frames(2)
+	expect(not screen.is_open(), "the records start closed")
+
+	await tap_key(KEY_R)
+	await until(func() -> bool: return screen.is_open(), "the records to open")
+	expect(screen.is_open(), "R opens them")
+
+	# **Everything on it is on the screen.** The sixth of this family: a
+	# `Label` sizes itself to its text whatever `custom_minimum_size` says,
+	# and a row of numbers that runs off a 480x270 screen is a row nobody can
+	# read. Tasks 0032, 0040, 0055, 0061 and 0063 are the other five.
+	await frames(2)
+	for row in ["nights", "killed", "gathered", "built", "lost", "best_night",
+			"runs"]:
+		for side in ["StatsName_", "StatsRun_", "StatsLife_"]:
+			var label: Control = locate_control(side + row) as Control
+			expect(label != null, "the records draw %s%s" % [side, row])
+			if label == null:
+				continue
+			var box := label.get_global_rect()
+			expect(box.position.x >= 0.0 and box.position.y >= 0.0
+				and box.end.x <= 480.0 and box.end.y <= 270.0,
+				"and %s%s is on the screen" % [side, row], str(box))
+
+	# **It shows what the run has done.** Kill three and the number is three.
+	var run_killed: Label = locate_control("StatsRun_killed") as Label
+	expect(run_killed != null, "there is a kill count")
+	Phases.begin_preparation(state)
+	Sim.advance(state, GameData.PREPARATION_TICKS)
+	var down := 0
+	for _i in 3:
+		var id := Enemies.spawn(state, &"walker", 0)
+		if id > 0:
+			Combat.hit(state, id, 9999)
+			down += 1
+	await until(func() -> bool:
+		return run_killed != null and run_killed.text == str(down),
+		"the kill count to catch up")
+	expect(run_killed.text == str(down),
+		"the screen shows what the run has killed", run_killed.text)
+
+	# **It is read-only, so a wave does not take it away.** The tech tree
+	# shuts itself at dusk because it cannot be spent after dark; there is
+	# nothing here for a night to invalidate.
+	expect(int(state["phase"]) == Phases.NIGHT, "it is night")
+	expect(screen.is_open(), "and the records stay up through it")
+
+	await tap_key(KEY_ESCAPE)
+	await until(func() -> bool: return not screen.is_open(),
+		"the records to close")
+	expect(not screen.is_open(), "ESC closes them")
+	await tap_key(KEY_R)
+	await until(func() -> bool: return screen.is_open(),
+		"the records to open after dark")
+	expect(screen.is_open(), "and R opens them again, night or not")
+	await tap_key(KEY_R)
+	await until(func() -> bool: return not screen.is_open(),
+		"the records to toggle shut")
+	expect(not screen.is_open(), "and R closes them")
 
 	await close_scene()
 	_completed += 1     # last line: an abandoned case never gets here

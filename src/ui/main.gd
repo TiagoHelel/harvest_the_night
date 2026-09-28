@@ -29,6 +29,13 @@ const BOOT_SEED := 20260927
 ## last frame cannot race with anything.
 var _was_down: Dictionary = {}
 
+## What survives a run. Read on boot, banked at the end of every night.
+var _profile: Dictionary = {}
+
+## How many nights had been won the last time the profile was written. The
+## night that changes it is the night that triggers a save.
+var _banked_nights := -1
+
 @onready var _world: WorldView = %WorldView
 @onready var _shop: ShopPanel = %ShopPanel
 @onready var _hud: DayHud = %DayHud
@@ -39,6 +46,7 @@ var _was_down: Dictionary = {}
 @onready var _inventory: InventoryPanel = %InventoryPanel
 @onready var _workshop: WorkshopPanel = %WorkshopPanel
 @onready var _tutorial: TutorialPrompt = %TutorialPrompt
+@onready var _stats: StatsScreen = %StatsScreen
 @onready var _player_view: PlayerView = %WorldView/Occupants/PlayerView
 @onready var _driver: SimDriver = %SimDriver
 @onready var _debug: CanvasLayer = %DebugOverlay
@@ -65,6 +73,15 @@ func _ready() -> void:
 	_inventory.show_state(_driver.state)
 	_workshop.show_state(_driver.state)
 	_tutorial.show_state(_driver.state, _world)
+
+	# **The profile, and a run counted the moment it starts.** `runs_started`
+	# is the one lifetime number that cannot be folded out of a state: by the
+	# time there is a state to read, the run has already begun.
+	_profile = Stats.begin_run(Save.read_profile())
+	Save.write_profile(_profile)
+	_stats.show_state(_driver.state)
+	_stats.show_profile(_profile)
+
 	_world.look_at_cell(Player.cell(_driver.state))
 
 	# The overlay is handed its driver rather than going looking for one: a
@@ -98,12 +115,33 @@ func _process(_delta: float) -> void:
 	if _just_pressed(&"cancel"):
 		intent["cancel"] = true
 
+	_bank_if_a_night_ended()
+
 	# Build mode owns the cursor while it is up: two frames pointing at two
 	# different cells is two different games.
 	_world.highlight(Vector2i(-1, -1)
 		if Shop.is_open(_driver.state) or Building.is_active(_driver.state)
 		else _target_cell())
 	_world.look_at_cell(Player.cell(_driver.state))
+
+
+## Fold this run's numbers into the profile and write both files, once per
+## night survived.
+##
+## **This is what "written with the profile, not at the end of a run" means.**
+## A player who crashes on night nine should lose the night, not the run, and
+## a run's statistics only exist on a state that a crash takes with it.
+## `Stats.fold()` banks what it has already counted, so a night that has been
+## folded in is not counted again when `Run.record()` closes the run out.
+func _bank_if_a_night_ended() -> void:
+	var won := Phases.nights_won(_driver.state)
+	if won == _banked_nights:
+		return
+	_banked_nights = won
+	_profile = Stats.fold(_profile, _driver.state)
+	Save.write_profile(_profile)
+	Save.write_run(_driver.state)
+	_stats.show_profile(_profile)
 
 
 ## True on the frame an action goes from up to down, whenever that frame is.

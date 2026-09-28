@@ -1,7 +1,7 @@
 # 0069 - Run statistics
 
 - **Phase:** 4 - Ten nights and progression
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0066, 0010
 - **Likely files:** src/core/stats.gd, src/ui/stats_screen.gd
 

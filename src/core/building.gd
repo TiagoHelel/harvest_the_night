@@ -387,6 +387,11 @@ static func place(state: Dictionary, id: StringName, cell: Vector2i) -> bool:
 	# was chewed through still used one of tonight's five.
 	var tally: Dictionary = (state["build"] as Dictionary)["placed_tonight"]
 	tally[id] = int(tally.get(id, 0)) + 1
+	# **And the run's tally beside the night's**, for the reason
+	# `Combat._kill()` gives: `placed_tonight` is cleared every morning
+	# because it exists to cap barricades, so nothing knew how many walls a
+	# run had ever built until task 0069 asked.
+	Stats.built(state, id)
 
 	var cells := footprint(id, cell)
 	if cells.size() > 1:

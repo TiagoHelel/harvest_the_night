@@ -5221,3 +5221,111 @@ is 85s.
 
 `python tools/verify.py` prints PASS: 2563 asserts, 502 input cases, 0 failed.
 `exports` is still the one SKIP and still wants the Godot export templates.
+
+## 0069 - Run statistics - done 2026-09-27
+
+What changed: a new `src/core/stats.gd` that answers what the player did this
+run and across every run, a `RECORDS` screen on **R** that puts the two side
+by side, and an autosave at the end of every night so the lifetime numbers
+survive a crash. Screenshot: `implementation/shots/0069-records.png`.
+
+Files: `src/core/stats.gd` (new), `src/ui/stats_screen.gd` (new),
+`src/core/state.gd`, `src/core/building.gd`, `src/core/run.gd`,
+`src/ui/main.gd`, `scenes/Main.tscn`, `project.godot`,
+`implementation/prompts/0092-main-menu.md`.
+
+Verify: 2592 headless / 553 input / sim hash moved, see below.
+
+### It reads; it does not keep a second ledger
+
+Almost every number the task asks for was already being counted by whoever
+does the thing. `Combat._kill()` has counted kills by kind since task 0066 -
+its comment already said "the statistics of task 0069 hang off the same line"
+- `Resources` keeps `gained`, `Run` keeps the rubble, `Phases` keeps the
+nights won. `Stats.of_run()` reads those rather than counting them again. A
+statistics module with its own tallies would be a second opinion about the
+same facts, and the two would disagree the first time somebody touched one.
+
+**One tally was genuinely missing**: how many things a run has built.
+`Building` counts `placed_tonight`, but it clears that every morning because
+it exists to cap barricades, so nothing knew how many walls a run had put up.
+That is the only counter this task added, and it hangs off the same line in
+`Building.place()` that already counts the night's.
+
+### Banking, which is what "written with the profile" means
+
+The requirement is that the lifetime numbers are written with the profile and
+not at the end of a run - a player who crashes on night nine should lose the
+night, not the run. So `main.gd` folds and writes at the end of every night.
+
+The obvious hazard is double counting: fold the same run in ten times and a
+run that built five walls has built fifty. `Stats.fold()` keeps a ledger of
+what it has already banked on the state itself, under `stats.banked`, and adds
+only the difference. Folding twice in a row adds nothing the second time,
+which is what makes it safe to call from a save. The ledger lives on the state
+rather than in the profile because it is a fact about *this run*, and it has
+to survive a save and reload with it - otherwise the night after a reload is
+banked a second time. There is an assert for exactly that.
+
+`Run.record()` now folds through the same door rather than writing lifetime
+numbers of its own, so closing out a run that was banked every night adds
+nothing again.
+
+### Two things the task asked for that I could not do as written
+
+- **"Reachable from the main menu."** There is no main menu: it is task 0092,
+  and `main.gd`'s own header has said since task 0056 that 0091 and 0092 come
+  later. So the way in is R, the same as the tech tree's T, and **0092's
+  prompt has been edited** to carry the requirement - it already listed STATS
+  as one of the router's states, and now it says the entry belongs there and
+  that the key keeps working. Written down rather than quietly dropped.
+- **"Quitting mid-run and returning keeps the run's numbers."** Nothing in the
+  game called `Save.write_run()` at all before this task - task 0010 built the
+  serialisation and only `headless_check` had ever used it. The night-end
+  autosave above is the first real writer. The done-when is asserted as a
+  save-and-reload round trip rather than by quitting a window.
+
+### The screen
+
+Two columns, `THIS RUN` and `ALL RUNS`, because the comparison is the feature:
+a lifetime column barely larger than the run column is a player on their
+second night, and one that dwarfs it is a player with a history. Kills by kind
+get their own line at the bottom, since five enemy kinds will not fit in a
+column.
+
+It is **read-only, so it does not shut itself at dusk.** The tech tree does,
+because it cannot be spent after dark; there is nothing here for a wave to
+invalidate, and a player who wants to know how many runners they have killed
+should be able to look while the runners are arriving.
+
+It needed its own backing rectangle, which the tech tree does not. The tree
+draws on a 0.88 shade and reads perfectly well because every node is a
+`Button` with a filled stylebox behind its text; this screen is bare labels,
+and on the same shade the farm and the wave counter came through the numbers.
+Found by looking at the screenshot, which is the reason step 4 says to.
+
+`input_check` asserts all twenty-one row labels are inside 480x270 - the sixth
+member of that family after 0032, 0040, 0055, 0061 and 0063.
+
+### Two asserts I wrote wrong
+
+Both assumed a named cell would take a wall. `(20, 9)` did not, so the wall
+never went up and the assert that followed was measuring a building that did
+not exist - and it failed loudly rather than passing, which is the good
+outcome. The test asks `Building.can_place()` where a wall fits now instead of
+naming coordinates.
+
+### Hashes
+
+| | from | to | why |
+|---|---|---|---|
+| sim hash | `2646847426` | `2555959448` | **deliberate, and structural rather than behavioural.** `State.hash_of()` folds the whole state dictionary, so adopting a module moves it - every previous `_adopt` did the same. The only call on the sim path is `Stats.built()`, which writes two counters that nothing reads back; `grep -rn 'Stats\.' src/core/` is three lines and none of them is a decision |
+| data hash | `3910754709` | `3910754709` | unchanged: no lever moved |
+
+`python tools/verify.py` prints PASS: 2592 asserts, 553 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.
+
+Notes for next time: `runs_started` now climbs during `input_check`, because
+every case opens `Main.tscn` and every boot counts a run. That is correct
+behaviour and harmless, but it does mean the profile in `user://` is not a
+clean-room number on a development machine.

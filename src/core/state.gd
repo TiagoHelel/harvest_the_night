@@ -60,6 +60,7 @@ static func create(seed_value: int) -> Dictionary:
 	_adopt(state, Repair.initial(), "Repair")
 	_adopt(state, Tech.initial(), "Tech")
 	_adopt(state, Run.initial(), "Run")
+	_adopt(state, Stats.initial(), "Stats")
 	return state
 
 

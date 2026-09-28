@@ -147,10 +147,15 @@ static func go_endless(state: Dictionary) -> bool:
 ##
 ## **The profile is the thing that survives a run**, so this is where a win
 ## stops being a fact about a `State` and becomes a fact about the player.
-## Task 0069 fills in the rest of it; this writes the three lines the end of a
-## run knows.
+## The lifetime tallies are `Stats`'; this writes the three lines only the end
+## of a run knows.
 static func record(state: Dictionary, profile: Dictionary) -> Dictionary:
-	var out := profile.duplicate(true)
+	# **The lifetime totals go through `Stats`**, which is the only thing that
+	# adds to them, and which banks what it has already counted. A run that
+	# has been folded in at the end of every night - which is what task 0069
+	# wants, so that a crash costs a night rather than a run - is not counted
+	# a second time here.
+	var out := Stats.fold(profile, state)
 	out["runs_won"] = int(out.get("runs_won", 0)) + (1 if is_over(state) else 0)
 	out["best_night"] = maxi(int(out.get("best_night", 0)),
 		Phases.nights_won(state))

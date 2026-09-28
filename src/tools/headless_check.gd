@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 61
+const GROUPS := 62
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -125,6 +125,7 @@ func _run() -> void:
 	_task_0066_run_end()
 	_task_0067_autoplay()
 	_task_0068_balance()
+	_task_0069_stats()
 
 
 func _finish() -> void:
@@ -10760,3 +10761,151 @@ func _task_0068_balance() -> void:
 		"night %d" % tightened)
 
 	_completed += 1     # last line: an abandoned group never gets here
+
+
+## 0069 - run statistics, this run and every run.
+func _task_0069_stats() -> void:
+	var state := State.create(6900)
+
+	# **Killing ten zombies increments by exactly ten.** The done-when, and
+	# the reason the counter hangs off `Combat._kill()` rather than off
+	# anything that might fire twice for one corpse.
+	Phases.begin_preparation(state)
+	Sim.advance(state, GameData.PREPARATION_TICKS)
+	var before := int(Stats.of_run(state)["killed"])
+	var killed := 0
+	for _i in 10:
+		var id := Enemies.spawn(state, &"walker", 0)
+		if id <= 0:
+			continue
+		Combat.hit(state, id, 9999)
+		killed += 1
+	expect(killed == 10, "ten walkers were spawned and hit", str(killed))
+	expect(int(Stats.of_run(state)["killed"]) == before + 10,
+		"killing ten increments the run by exactly ten",
+		"%d against %d" % [int(Stats.of_run(state)["killed"]), before + 10])
+	expect(int((Stats.of_run(state)["killed_by_kind"]
+		as Dictionary).get(&"walker", 0)) >= 10,
+		"and by kind as well as in total",
+		str(Stats.of_run(state)["killed_by_kind"]))
+
+	# **What went up is counted too**, which nothing kept before: `Building`
+	# clears `placed_tonight` every morning because it is there to cap
+	# barricades.
+	var yard := State.create(6901)
+	var was := int(Stats.of_run(yard)["built"])
+	Resources.gain(yard, {GameData.STONE: 100, GameData.WOOD: 100,
+		GameData.IRON: 100})
+	var up := 0
+	for x in range(20, 26):
+		if Building.place(yard, &"wall", Vector2i(x, 8)):
+			up += 1
+	expect(up > 0, "some walls went up", str(up))
+	expect(int(Stats.of_run(yard)["built"]) == was + up,
+		"a run counts what it built", "%d against %d"
+			% [int(Stats.of_run(yard)["built"]), was + up])
+	expect(int((Stats.of_run(yard)["built_by_kind"]
+		as Dictionary).get(&"wall", 0)) == up,
+		"and by kind", str(Stats.of_run(yard)["built_by_kind"]))
+
+	# **Folding twice adds nothing the second time.** This is the whole of
+	# "written with the profile, not at the end of a run": the game banks at
+	# the end of every night, and a number that grew each time it was written
+	# would make a long run look like ten.
+	var profile := Save.default_profile()
+	profile = Stats.fold(profile, yard)
+	var once := int(Stats.lifetime(profile)["built"])
+	profile = Stats.fold(profile, yard)
+	profile = Stats.fold(profile, yard)
+	expect(int(Stats.lifetime(profile)["built"]) == once,
+		"folding the same run again adds nothing",
+		"%d against %d" % [int(Stats.lifetime(profile)["built"]), once])
+	expect(once == up, "and the first fold added what the run had built",
+		"%d against %d" % [once, up])
+
+	# But more work after a fold *is* banked. **Ask the farm where a wall can
+	# go rather than naming a cell**: the first version picked (20, 9) out of
+	# the air, nothing went up there, and the assert that followed was
+	# measuring a wall that did not exist.
+	var spare := _somewhere_for_a_wall(yard)
+	expect(spare.x >= 0, "there is somewhere else to put a wall")
+	expect(Building.place(yard, &"wall", spare), "and it goes up", str(spare))
+	profile = Stats.fold(profile, yard)
+	expect(int(Stats.lifetime(profile)["built"]) == once + 1,
+		"while a wall built after the fold is counted once",
+		str(Stats.lifetime(profile)["built"]))
+
+	# **A second run adds to the first.** Lifetime is lifetime.
+	var second := State.create(6902)
+	Resources.gain(second, {GameData.STONE: 100})
+	expect(Building.place(second, &"wall", _somewhere_for_a_wall(second)),
+		"the second run builds a wall")
+	var both := Stats.fold(profile, second)
+	expect(int(Stats.lifetime(both)["built"]) == once + 2,
+		"a second run adds to the total rather than replacing it",
+		str(Stats.lifetime(both)["built"]))
+
+	# **Quitting mid-run and returning keeps the run's numbers.** The other
+	# done-when. The run's tallies live on the state, so this is really a
+	# question about whether they survive `var_to_bytes` - and the banking
+	# ledger has to survive with them, or the night after the reload would be
+	# counted a second time.
+	Save.delete_run()
+	expect(Save.write_run(yard), "the run writes")
+	var reloaded := Save.read_run()
+	expect(not reloaded.is_empty(), "and reads back")
+	if not reloaded.is_empty():
+		var there := Stats.of_run(yard)
+		var back := Stats.of_run(reloaded)
+		for field in Stats.FIELDS:
+			expect(str(back[field]) == str(there[field]),
+				"a reloaded run keeps its %s" % field,
+				"%s against %s" % [str(back[field]), str(there[field])])
+		var after := Stats.fold(profile, reloaded)
+		expect(int(Stats.lifetime(after)["built"])
+			== int(Stats.lifetime(profile)["built"]),
+			"and does not bank what it had already banked before the quit",
+			str(Stats.lifetime(after)["built"]))
+	Save.delete_run()
+
+	# **A fresh profile answers zeroes, not nothing**, so the screen has
+	# something to draw on a first launch.
+	var fresh := Stats.lifetime(Save.default_profile())
+	for field in Stats.FIELDS:
+		expect(str(fresh[field]) == "0" or (fresh[field] is Dictionary
+			and (fresh[field] as Dictionary).is_empty()),
+			"a profile that has never played answers zero for %s" % field,
+			str(fresh[field]))
+
+	# **`Run.record()` does not double-count a banked run.** It folds through
+	# the same door, which is the only reason that is true.
+	var closed := Run.record(yard, profile)
+	expect(int(Stats.lifetime(closed)["built"])
+		== int(Stats.lifetime(profile)["built"]),
+		"closing a run that was banked every night adds nothing again",
+		str(Stats.lifetime(closed)["built"]))
+	expect(int(closed["runs_started"]) == int(profile["runs_started"]),
+		"and closing a run does not start one")
+
+	# **Starting a run counts it.** The one lifetime number that cannot be
+	# read off a state.
+	var begun := Stats.begin_run(Save.default_profile())
+	expect(int(begun["runs_started"]) == 1, "starting a run counts it",
+		str(begun["runs_started"]))
+
+	print("  a run that built %d and killed %d; the profile holds %d built "
+		% [int(Stats.of_run(yard)["built"]), int(Stats.of_run(state)["killed"]),
+			int(Stats.lifetime(profile)["built"])]
+		+ "over %d run(s)" % int(profile.get("runs_started", 0)))
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## A cell on the open right-hand side that will take a wall, or (-1, -1).
+func _somewhere_for_a_wall(state: Dictionary) -> Vector2i:
+	for x in range(19, Grid.WIDTH - 1):
+		for y in range(2, Grid.HEIGHT - 1):
+			var cell := Vector2i(x, y)
+			if Building.can_place(state, &"wall", cell):
+				return cell
+	return Vector2i(-1, -1)
