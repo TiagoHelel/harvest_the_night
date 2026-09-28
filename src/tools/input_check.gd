@@ -41,7 +41,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 30
+const CASES := 31
 
 var passed := 0
 var failed := 0
@@ -101,6 +101,7 @@ func _run() -> void:
 	await _case_0063_tech_tree()
 	await _case_0069_stats()
 	await _case_0070_endless()
+	await _case_0071_palettes()
 	_finish()
 
 
@@ -3102,6 +3103,123 @@ func _case_0070_endless() -> void:
 	expect(Waves.size_of(next_night, int(driver.state["seed"])) > 0,
 		"and it has something to send",
 		str(Waves.summary_of(next_night, int(driver.state["seed"]))))
+
+	await close_scene()
+	_completed += 1     # last line: an abandoned case never gets here
+
+
+## 0071 - the same farm, lit twice.
+func _case_0071_palettes() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var view: WorldView = require_control("WorldView")
+	var relight: Relight = require_control("Relight")
+	if driver == null or view == null or relight == null:
+		_completed += 1
+		await close_scene()
+		return
+
+	var state := driver.state
+	await frames(10)
+
+	# **By day the shader is doing almost nothing**, which is the point: the
+	# farm was drawn under this light and daylight exempts nothing.
+	var by_day := relight.settings()
+	expect(not by_day.is_empty(), "the relight layer has settings")
+	expect(float(by_day["warm_keep"]) >= 0.99,
+		"by day nothing is exempt from the light", str(by_day["warm_keep"]))
+	expect(float(by_day["saturation"]) >= PaletteData.DAWN_SATURATION,
+		"and the colour is left alone", str(by_day["saturation"]))
+
+	# **The whole ramp goes over, not just the tint.** This is what a
+	# `CanvasModulate` on its own could not do, and the whole of task 0071.
+	await click_control("NightButton")
+	await until(func() -> bool: return int(state["phase"]) != Phases.DAY,
+		"the night to begin")
+
+	# **Let the view notice the phase before skipping the fade.** `until()`
+	# can return on the frame the phase changed and before `WorldView` has
+	# processed it - and a `skip_transition()` in that gap is undone on the
+	# next frame, because the view then sees a change it has not started a
+	# fade for yet and starts one. Measured: the ramp sat at 1.9% of the way
+	# into the night with the tint already reported as the night's.
+	await frames(4)
+	view.skip_transition()
+	await until(func() -> bool:
+		return not view.is_transitioning(), "the fade to land")
+	await frames(2)
+
+	var by_night := relight.settings()
+	expect(float(by_night["saturation"])
+		< float(by_day["saturation"]) - 0.05,
+		"after dark the colour is drained",
+		"%s against %s" % [str(by_night["saturation"]),
+			str(by_day["saturation"])])
+	var lift: Vector3 = by_night["lift"]
+	expect(lift.z > lift.x and lift.z > lift.y,
+		"and lifted towards purple, which a multiply cannot do", str(lift))
+	expect(float(by_night["warm_keep"]) < 0.99,
+		"and the warm things are exempt from it",
+		str(by_night["warm_keep"]))
+
+	# **The tint the shader is given is the tint the light is on.** The
+	# shader divides it back out to find what the palette painted, so a pair
+	# that drifted apart would be a night that quietly stopped exempting
+	# anything.
+	var light: CanvasModulate = view.find_child("Light", true, false)
+	var tint: Vector3 = by_night["tint"]
+	expect(light != null
+		and absf(tint.x - light.color.r) < 0.01
+		and absf(tint.y - light.color.g) < 0.01
+		and absf(tint.z - light.color.b) < 0.01,
+		"the shader is told the same tint the light is wearing",
+		"%s against %s" % [str(tint), str(light.color if light else null)])
+
+	# **Nothing but the light changed.** The done-when, and the point of the
+	# whole design.
+	#
+	# The first version asked whether the occupant count and the wood were the
+	# same six frames later. **That is the wrong question**: a night
+	# legitimately takes structures apart, so it asserted that nothing happens
+	# during a night, which is false by design - and it only caught the
+	# relight by accident anyway.
+	#
+	# It was rewritten after `verify.py` reported one failed input case that
+	# four later runs did not reproduce. Which assert failed was never
+	# captured, so **this is not a diagnosis** - the old assert may or may not
+	# have been the one. It was replaced because it was measuring the weather
+	# and not the claim, and the version below cannot depend on timing at all,
+	# which closes that door whether or not it was the open one.
+	#
+	# The claim is that **relighting the farm changes nothing about the
+	# farm**, so this relights it, hard, and asks the state hash. No `await`
+	# between the two readings, so the tick cannot move underneath the
+	# question and there is nothing left for the answer to depend on.
+	var before := State.hash_of(state)
+	relight.apply(Color(0.1, 0.1, 0.9), Color(0.5, 0.0, 0.5), 0.1, 0.1, 0.3)
+	relight.apply(Color(1.9, 1.9, 0.2), Color(0.0, 0.4, 0.0), 1.0, 0.2, 0.01)
+	expect(State.hash_of(state) == before,
+		"relighting the farm changes nothing about the farm",
+		"%d against %d" % [State.hash_of(state), before])
+	# Put it back, so the rest of the case sees the light the phase asks for.
+	view.skip_transition()
+
+	# And the game was running the whole time it was being relit.
+	var tick_before := int(state["tick"])
+	await frames(6)
+	expect(int(state["tick"]) > tick_before,
+		"while the game carries on running underneath it",
+		"%d against %d" % [int(state["tick"]), tick_before])
+
+	# **The HUD is not relit.** It sits above the layer on purpose: a health
+	# bar that went purple after dark is a health bar nobody can read at the
+	# moment it matters.
+	var rect: Control = relight.find_child("RelightRect", true, false)
+	var hud: Control = locate_control("NightHud") as Control
+	expect(rect != null, "the relight draws over the world")
+	if rect != null and hud != null:
+		expect(rect.get_parent() != hud.get_parent(),
+			"and is not inside the HUD it must not touch")
 
 	await close_scene()
 	_completed += 1     # last line: an abandoned case never gets here

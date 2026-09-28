@@ -52,21 +52,42 @@ const COLOURS := {
 const DAWN_TINT := Color(0.920, 0.900, 1.020)
 const DAWN_LIFT := Color(0.020, 0.020, 0.050)
 const DAWN_SATURATION := 0.920
+## Anything the palette drew brighter than this keeps
+## its own colour: firelight, a lit window, the moon.
+const DAWN_WARM_KEEP := 1.000
+## How wide that threshold is, so a flame has no hard
+## outline where the exemption stops.
+const DAWN_WARM_EDGE := 0.060
 
 ## The day ramp: what the same pixels look like by day.
 const DAY_TINT := Color(1.020, 1.000, 0.960)
 const DAY_LIFT := Color(0.000, 0.000, 0.000)
 const DAY_SATURATION := 1.000
+## Anything the palette drew brighter than this keeps
+## its own colour: firelight, a lit window, the moon.
+const DAY_WARM_KEEP := 1.000
+## How wide that threshold is, so a flame has no hard
+## outline where the exemption stops.
+const DAY_WARM_EDGE := 0.060
 
 ## The dusk ramp: what the same pixels look like after dark.
 const DUSK_TINT := Color(1.060, 0.880, 0.800)
 const DUSK_LIFT := Color(0.050, 0.020, 0.000)
 const DUSK_SATURATION := 0.950
+## Anything the palette drew brighter than this keeps
+## its own colour: firelight, a lit window, the moon.
+const DUSK_WARM_KEEP := 0.920
+## How wide that threshold is, so a flame has no hard
+## outline where the exemption stops.
+const DUSK_WARM_EDGE := 0.060
 
 ## The night ramp: what the same pixels look like after dark.
-const NIGHT_TINT := Color(0.340, 0.360, 0.900)
-const NIGHT_LIFT := Color(0.060, 0.050, 0.140)
-const NIGHT_SATURATION := 0.720
-## Anything brighter than this keeps its own colour:
-## firelight, a lit window, the moon.
+const NIGHT_TINT := Color(0.300, 0.350, 0.800)
+const NIGHT_LIFT := Color(0.040, 0.030, 0.120)
+const NIGHT_SATURATION := 0.760
+## Anything the palette drew brighter than this keeps
+## its own colour: firelight, a lit window, the moon.
 const NIGHT_WARM_KEEP := 0.800
+## How wide that threshold is, so a flame has no hard
+## outline where the exemption stops.
+const NIGHT_WARM_EDGE := 0.060

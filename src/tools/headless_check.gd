@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 63
+const GROUPS := 64
 
 const SettingsScript := preload("res://src/app/settings.gd")
 
@@ -127,6 +127,7 @@ func _run() -> void:
 	_task_0068_balance()
 	_task_0069_stats()
 	_task_0070_endless()
+	_task_0071_palettes()
 
 
 func _finish() -> void:
@@ -11114,3 +11115,116 @@ func _task_0070_endless() -> void:
 		"a run that has not been beaten cannot carry on past ten")
 
 	_completed += 1     # last line: an abandoned group never gets here
+
+
+## 0071 - the two palettes: one set of sprites, lit twice.
+func _task_0071_palettes() -> void:
+	# **One palette, and about the size the task asks for.** A tileset drawn
+	# against one green and a character against another look like two games
+	# stapled together.
+	var colours: Dictionary = PaletteData.COLOURS
+	expect(colours.size() >= 24 and colours.size() <= 48,
+		"the palette is around the size design asks for", str(colours.size()))
+
+	# **Four ramps, and each is the whole record.** A lerp between two of them
+	# must not have to ask which fields exist.
+	var ramps := {
+		"day": _ramp_fields(PaletteData.DAY_TINT, PaletteData.DAY_LIFT,
+			PaletteData.DAY_SATURATION, PaletteData.DAY_WARM_KEEP,
+			PaletteData.DAY_WARM_EDGE),
+		"dawn": _ramp_fields(PaletteData.DAWN_TINT, PaletteData.DAWN_LIFT,
+			PaletteData.DAWN_SATURATION, PaletteData.DAWN_WARM_KEEP,
+			PaletteData.DAWN_WARM_EDGE),
+		"dusk": _ramp_fields(PaletteData.DUSK_TINT, PaletteData.DUSK_LIFT,
+			PaletteData.DUSK_SATURATION, PaletteData.DUSK_WARM_KEEP,
+			PaletteData.DUSK_WARM_EDGE),
+		"night": _ramp_fields(PaletteData.NIGHT_TINT, PaletteData.NIGHT_LIFT,
+			PaletteData.NIGHT_SATURATION, PaletteData.NIGHT_WARM_KEEP,
+			PaletteData.NIGHT_WARM_EDGE),
+	}
+	for name in GameData.sorted_names(ramps.keys()):
+		var ramp: Dictionary = ramps[name]
+		for field in ["tint", "lift", "saturation", "warm_keep", "warm_edge"]:
+			expect(ramp.has(field), "the %s ramp declares its %s"
+				% [name, field], str(ramp.keys()))
+		expect(float(ramp["saturation"]) > 0.0
+			and float(ramp["saturation"]) <= 1.0,
+			"and its saturation is a fraction", str(ramp["saturation"]))
+
+	# **The night is another world, not a dim afternoon.** Blue must run well
+	# ahead of green, and the whole thing must be darker and drained.
+	var night: Color = PaletteData.NIGHT_TINT
+	var day: Color = PaletteData.DAY_TINT
+	expect(night.b - night.g > 0.30,
+		"the night tint pushes blue far past green",
+		"%.2f" % (night.b - night.g))
+	expect(night.r < day.r * 0.5 and night.g < day.g * 0.5,
+		"and takes most of the warmth out", str(night))
+	expect(PaletteData.NIGHT_SATURATION < PaletteData.DAY_SATURATION,
+		"the night is drained of colour and the day is not",
+		"%.2f against %.2f" % [PaletteData.NIGHT_SATURATION,
+			PaletteData.DAY_SATURATION])
+
+	# **The lift is what a multiply cannot do.** The reference sheet's night
+	# is purple, and purple is not less of anything the farm is painted in.
+	var lift: Color = PaletteData.NIGHT_LIFT
+	expect(lift.b > lift.r and lift.b > lift.g,
+		"the night lifts towards purple rather than towards grey", str(lift))
+	expect(PaletteData.DAY_LIFT.is_equal_approx(Color(0, 0, 0)),
+		"and the day lifts nothing", str(PaletteData.DAY_LIFT))
+
+	# **Fire, lamps and the moon are the only warm things at night**, and the
+	# threshold is where it is on purpose. Sorted by brightness the palette
+	# runs bone, moon, flame_hot, and then *gold_light*, which is wheat - so a
+	# threshold low enough to exempt the orange body of a flame also exempts a
+	# cornfield, and the sheet's night corn is dark. This asserts the
+	# threshold lands in that gap, because the next person to turn the dial
+	# will not know the gap is there.
+	var keep := PaletteData.NIGHT_WARM_KEEP
+	var lit := ["bone", "flame_hot", "moon"]
+	for name in lit:
+		expect(_luma(colours[StringName(name)]) > keep,
+			"%s keeps its own colour after dark" % name,
+			"%.3f against %.3f" % [_luma(colours[StringName(name)]), keep])
+	for name in ["gold_light", "grass_light", "water_light", "roof_light",
+			"soil_light", "wood_light", "stone_light", "flame"]:
+		expect(_luma(colours[StringName(name)]) < keep,
+			"and %s is lit by the night like everything else" % name,
+			"%.3f against %.3f" % [_luma(colours[StringName(name)]), keep])
+	print("  the night exempts %s; the brightest thing it does not is "
+		% ", ".join(lit) + "gold_light at %.3f against a threshold of %.3f"
+			% [_luma(colours[&"gold_light"]), keep])
+
+	# **The exemption has an edge**, so a flame has no hard outline where it
+	# stops, and the edge is narrower than the gap it sits in.
+	var gap := _luma(colours[&"flame_hot"]) - _luma(colours[&"gold_light"])
+	expect(PaletteData.NIGHT_WARM_EDGE * 2.0 < gap,
+		"and the edge of it fits inside that gap",
+		"%.3f against %.3f" % [PaletteData.NIGHT_WARM_EDGE * 2.0, gap])
+
+	# **The shader exists and takes what the layer sets.** A uniform renamed
+	# on one side of that pair is a night that silently stops happening.
+	var shader: Shader = load("res://src/ui/relight.gdshader")
+	expect(shader != null, "the relight shader loads")
+	if shader != null:
+		var code := shader.code
+		for uniform in ["tint", "lift", "saturation", "warm_keep",
+				"warm_edge"]:
+			expect(code.contains("uniform") and code.contains(uniform),
+				"and takes a '%s'" % uniform)
+		expect(code.contains("hint_screen_texture"),
+			"and reads the frame under it")
+
+	_completed += 1     # last line: an abandoned group never gets here
+
+
+## Rec. 601 luma, the same weights `relight.gdshader` uses to decide what is
+## bright enough to be left alone.
+func _luma(c: Color) -> float:
+	return c.r * 0.299 + c.g * 0.587 + c.b * 0.114
+
+
+func _ramp_fields(tint: Color, lift: Color, saturation: float,
+		warm_keep: float, warm_edge: float) -> Dictionary:
+	return {"tint": tint, "lift": lift, "saturation": saturation,
+		"warm_keep": warm_keep, "warm_edge": warm_edge}

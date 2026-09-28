@@ -164,11 +164,16 @@ def palette_gd():
                      % (ramp_name.upper(), lift[0], lift[1], lift[2]))
         lines.append("const %s_SATURATION := %.3f"
                      % (ramp_name.upper(), ramp["saturation"]))
-        if "warm_keep" in ramp:
-            lines.append("## Anything brighter than this keeps its own colour:")
-            lines.append("## firelight, a lit window, the moon.")
-            lines.append("const %s_WARM_KEEP := %.3f"
-                         % (ramp_name.upper(), ramp["warm_keep"]))
+        # Every ramp declares one now, so the four are the same record and a
+        # lerp between two of them does not have to ask which fields exist.
+        lines.append("## Anything the palette drew brighter than this keeps")
+        lines.append("## its own colour: firelight, a lit window, the moon.")
+        lines.append("const %s_WARM_KEEP := %.3f"
+                     % (ramp_name.upper(), ramp.get("warm_keep", 1.0)))
+        lines.append("## How wide that threshold is, so a flame has no hard")
+        lines.append("## outline where the exemption stops.")
+        lines.append("const %s_WARM_EDGE := %.3f"
+                     % (ramp_name.upper(), ramp.get("warm_edge", 0.06)))
         lines.append("")
     return "\n".join(lines).encode("utf-8")
 

@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`###############.........`  **70 / 109 done**
+`################........`  **71 / 109 done**
 
-0 doing / 39 todo / 0 blocked across 9 phases.
+0 doing / 38 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0071 - The two palettes**. The whole of what is left is
+First up: **0072 - The farm tileset**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,24 +26,105 @@ which rewrites this file for you.
 
 ## What is open
 
-39 task(s) left, the ready ones first, then what they
+38 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
-### 0071 - The two palettes
+### 0072 - The farm tileset
 
-Ready to pick up.  Likely files: `tools/gen_sprites.py, src/ui/palette.gd`.
+Ready to pick up.  Likely files: `tools/gen_sprites.py, sprites/terrain/`.
 
-Section 18: warm and cozy by day, blue and purple by night, from one set of sprites. The reference sheet is the target.
+Grass, soil, water, rock, path, wooden floor and fence, with edges that meet each other properly.
 
-- One base palette, around 32 colours, sampled from `docs/reference-sheet.png`
-- A day ramp and a night ramp, applied as a shader or a modulate, never as a second set of PNGs
-- The night ramp keeps the farm recognisable: same shapes, different light
-- Fire, lamps and the moon are the only warm things at night
-- Both ramps are data and can be tuned without regenerating sprites
+- Autotiling for grass to soil, grass to water and path edges
+- Water animates: two or three frames, slow
+- Soil has a tilled and a watered variant
+- Small scattered detail tiles so the field is not a flat colour
+- All of it from the ASCII maps, all regenerable
 
-  - done when: Switching reality changes nothing but the light, and the farm is instantly recognisable - the whole point of the design document
-  - done when: A screenshot of each sits next to the reference sheet and holds up
+  - done when: No visible seam anywhere on the farm
+  - done when: Regenerating produces byte-identical files
+
+### 0073 - The player sprite
+
+Ready to pick up.  Likely files: `tools/cut_sheet.py, sprites/actors/, src/ui/player_view.gd`.
+
+Somebody worth watching walk around: four directions, walking, and the work verbs - cut from the sheet the owner drew rather than generated from an ASCII map.
+
+- **The art already exists**: `docs/sprites_sem_fundo.png`, 1536x1024 RGBA, with idle, walk, chop, mine, hoe, water, fish, plant, carry and a row of reactions
+- **Decide the size first, and write the answer in the journal.** The sheet is a painted image, not pixel art: 82,714 distinct colours and no blocky native resolution, with frames about 100x170. The game is 480x270 on 16px tiles, where a character is 16x24. Those cannot both be true. The three ways out are (a) downscale to 16x24 and lose the drawing, (b) render the player larger than a tile - 32x48 over the 16px grid, which is what Stardew does - or (c) raise the whole game to 32px tiles and 960x540. (b) is the cheapest and changes no other art
+- A cutting tool in `tools/`, not by hand: the frames are not on a clean grid and have a soft glow between them, so the cut is code with the offsets as data and is re-runnable when the sheet is redrawn
+- The glow keyed out, so a frame has hard alpha and no halo over the grass
+- Every verb the game has maps to a row: chop, mine, till, plant, water, fish, craft, and idle and walk in four facings
+- The animation is driven by the core state's action, not by the view guessing
+- Frame counts and speeds are data
+- A shadow, because without one the character floats
+
+  - done when: Every verb in the game has an animation and none plays the wrong one
+  - done when: Walking diagonally picks a facing and stays with it
+  - done when: Re-running the cutting tool on the same sheet produces byte-identical PNGs
+  - done when: The chosen size is stated in the journal with the reason
+
+### 0074 - Zombie sprites
+
+Ready to pick up.  Likely files: `tools/gen_sprites.py, sprites/enemies/`.
+
+Four enemies that are told apart at a glance in a dark field at 480x270, which is the only test that matters.
+
+- Basic, runner, tank and breaker, distinct in silhouette before colour
+- Walk, attack and death for each
+- The Giant, larger, with its telegraph as a distinct pose
+- A rim light so they read against the night ramp
+- Silhouette test: all five in black at 100% zoom must still be distinguishable
+
+  - done when: The silhouette test passes - put the image in the journal
+  - done when: A screenshot of a mixed wave is readable at native resolution
+
+### 0075 - Buildings and towers
+
+Ready to pick up.  Likely files: `tools/gen_sprites.py, sprites/buildings/`.
+
+The house, the workshop, the press, the generator, the shop, and every tower at its three levels.
+
+- Each tower reads as its function: the reference sheet's shapes are the brief
+- Three visible levels per tower, recognisably the same tower
+- Damaged and destroyed states for everything that can be hit
+- Firing frames for the towers that fire
+- The house is the landmark: the biggest, warmest thing on the farm, by day and by night
+
+  - done when: A level 1 and a level 3 tower are told apart instantly
+  - done when: A damaged wall reads as damaged without a health bar
+
+### 0076 - Night lighting
+
+Ready to pick up.  Likely files: `src/ui/lighting.gd`.
+
+The half of the reference sheet that sells the whole idea: the same farm, lit by the moon and by what is burning.
+
+- A CanvasModulate for the night ramp and real 2D lights on top
+- Lit: house windows, braziers, tower muzzle flashes, fires, the mortar's blast
+- Light is cosmetic: it never changes a rule or the hash
+- A quality setting, because lights are what will cost frames
+- The moon gives a soft global fill so the farm is never unreadable
+
+  - done when: The night screenshot sits next to the reference sheet and holds up
+  - done when: Turning lighting off changes nothing about the outcome of a night
+  - done when: Frame time on a full board stays inside the budget with lights on
+
+### 0079 - Resource icons and the UI kit
+
+Ready to pick up.  Likely files: `tools/gen_sprites.py, sprites/ui/`.
+
+The bottom half of the reference sheet: an icon per resource, and the panels, frames and buttons they sit in.
+
+- One 16x16 icon per resource, in the reference sheet's style
+- Nine-slice panel, button in its four states, tab, slider, checkbox, tooltip frame
+- Icons are told apart at native resolution without their labels
+- The same kit serves the day HUD, the night HUD, the shop and the tech tree
+- All generated, all regenerable
+
+  - done when: Every resource in game_data has an icon and no icon is orphaned
+  - done when: The icon set laid out in a row is recognisable against the reference sheet
 
 ### 0080 - A pixel font
 
@@ -120,101 +201,49 @@ Adding a lever or a tech node must not delete somebody's run.
   - done when: Every golden save loads and plays
   - done when: Adding a resource to game_data does not break a save that predates it
 
-### 0072 - The farm tileset
+### 0077 - Particles
 
-Waits on 0071.  Likely files: `tools/gen_sprites.py, sprites/terrain/`.
+Waits on 0074, 0075.  Likely files: `src/ui/particles.gd`.
 
-Grass, soil, water, rock, path, wooden floor and fence, with edges that meet each other properly.
+Fire, smoke, sparks, dust and the small amount of blood the design document allows - the difference between a hit and a hit that felt like one.
 
-- Autotiling for grass to soil, grass to water and path edges
-- Water animates: two or three frames, slow
-- Soil has a tilled and a watered variant
-- Small scattered detail tiles so the field is not a flat colour
-- All of it from the ASCII maps, all regenerable
+- Muzzle flash, impact spark, explosion, burning, smoke from the chimney and from wreckage, dust when something falls
+- Pixel particles on the shared palette, not soft gradients
+- A hard cap on live particles, and the cap is a setting
+- Particles are view only: never in the state, never in the hash
+- Blood is restrained, as section 18 asks
 
-  - done when: No visible seam anywhere on the farm
-  - done when: Regenerating produces byte-identical files
+  - done when: A busy wave stays inside the frame budget with particles on
+  - done when: Turning them off does not change the outcome of a night
 
-### 0073 - The player sprite
+### 0078 - The reality transition
 
-Waits on 0071.  Likely files: `tools/cut_sheet.py, sprites/actors/, src/ui/player_view.gd`.
+Waits on 0076.  Likely files: `src/ui/transition.gd`.
 
-Somebody worth watching walk around: four directions, walking, and the work verbs - cut from the sheet the owner drew rather than generated from an ASCII map.
+The moment the game is named after. Two seconds that say: same farm, different world.
 
-- **The art already exists**: `docs/sprites_sem_fundo.png`, 1536x1024 RGBA, with idle, walk, chop, mine, hoe, water, fish, plant, carry and a row of reactions
-- **Decide the size first, and write the answer in the journal.** The sheet is a painted image, not pixel art: 82,714 distinct colours and no blocky native resolution, with frames about 100x170. The game is 480x270 on 16px tiles, where a character is 16x24. Those cannot both be true. The three ways out are (a) downscale to 16x24 and lose the drawing, (b) render the player larger than a tile - 32x48 over the 16px grid, which is what Stardew does - or (c) raise the whole game to 32px tiles and 960x540. (b) is the cheapest and changes no other art
-- A cutting tool in `tools/`, not by hand: the frames are not on a clean grid and have a soft glow between them, so the cut is code with the offsets as data and is re-runnable when the sheet is redrawn
-- The glow keyed out, so a frame has hard alpha and no halo over the grass
-- Every verb the game has maps to a row: chop, mine, till, plant, water, fish, craft, and idle and walk in four facings
-- The animation is driven by the core state's action, not by the view guessing
-- Frame counts and speeds are data
-- A shadow, because without one the character floats
+- The light drains from warm to cold across the whole farm at once
+- Day actors leave and night structures wake during it
+- It is skippable, and it never blocks the simulation
+- It plays in both directions, and coming back to the farm in the morning is the reward half
+- Length is a lever and a setting
 
-  - done when: Every verb in the game has an animation and none plays the wrong one
-  - done when: Walking diagonally picks a facing and stays with it
-  - done when: Re-running the cutting tool on the same sheet produces byte-identical PNGs
-  - done when: The chosen size is stated in the journal with the reason
+  - done when: It is the clip you would put first in a trailer - say in the journal whether it is yet
+  - done when: Skipping it lands in exactly the same state as watching it
 
-### 0074 - Zombie sprites
+### 0081 - The UI theme
 
-Waits on 0071.  Likely files: `tools/gen_sprites.py, sprites/enemies/`.
+Waits on 0079, 0080.  Likely files: `assets/theme.tres, src/ui/`.
 
-Four enemies that are told apart at a glance in a dark field at 480x270, which is the only test that matters.
+One Theme resource every control uses, so a colour change is one edit and no screen is the odd one out.
 
-- Basic, runner, tank and breaker, distinct in silhouette before colour
-- Walk, attack and death for each
-- The Giant, larger, with its telegraph as a distinct pose
-- A rim light so they read against the night ramp
-- Silhouette test: all five in black at 100% zoom must still be distinguishable
+- Every Control style in one Theme: no per-node style overrides anywhere
+- Built from the palette and the UI kit, not from Godot's defaults
+- Focus, hover and disabled states defined for everything interactive
+- A UI scale factor that works at every integer window scale
 
-  - done when: The silhouette test passes - put the image in the journal
-  - done when: A screenshot of a mixed wave is readable at native resolution
-
-### 0075 - Buildings and towers
-
-Waits on 0071.  Likely files: `tools/gen_sprites.py, sprites/buildings/`.
-
-The house, the workshop, the press, the generator, the shop, and every tower at its three levels.
-
-- Each tower reads as its function: the reference sheet's shapes are the brief
-- Three visible levels per tower, recognisably the same tower
-- Damaged and destroyed states for everything that can be hit
-- Firing frames for the towers that fire
-- The house is the landmark: the biggest, warmest thing on the farm, by day and by night
-
-  - done when: A level 1 and a level 3 tower are told apart instantly
-  - done when: A damaged wall reads as damaged without a health bar
-
-### 0076 - Night lighting
-
-Waits on 0071.  Likely files: `src/ui/lighting.gd`.
-
-The half of the reference sheet that sells the whole idea: the same farm, lit by the moon and by what is burning.
-
-- A CanvasModulate for the night ramp and real 2D lights on top
-- Lit: house windows, braziers, tower muzzle flashes, fires, the mortar's blast
-- Light is cosmetic: it never changes a rule or the hash
-- A quality setting, because lights are what will cost frames
-- The moon gives a soft global fill so the farm is never unreadable
-
-  - done when: The night screenshot sits next to the reference sheet and holds up
-  - done when: Turning lighting off changes nothing about the outcome of a night
-  - done when: Frame time on a full board stays inside the budget with lights on
-
-### 0079 - Resource icons and the UI kit
-
-Waits on 0071.  Likely files: `tools/gen_sprites.py, sprites/ui/`.
-
-The bottom half of the reference sheet: an icon per resource, and the panels, frames and buttons they sit in.
-
-- One 16x16 icon per resource, in the reference sheet's style
-- Nine-slice panel, button in its four states, tab, slider, checkbox, tooltip frame
-- Icons are told apart at native resolution without their labels
-- The same kit serves the day HUD, the night HUD, the shop and the tech tree
-- All generated, all regenerable
-
-  - done when: Every resource in game_data has an icon and no icon is orphaned
-  - done when: The icon set laid out in a row is recognisable against the reference sheet
+  - done when: `grep` finds no `add_theme_*_override` left in `src/ui/`
+  - done when: Every screen looks like the same game
 
 ### 0084 - The sounds of the day
 
@@ -260,64 +289,6 @@ One warm loop for the farm, one cold one for the night, and a crossfade on the r
   - done when: The loop point is inaudible
   - done when: The crossfade lands with the transition, not before or after it
 
-### 0077 - Particles
-
-Waits on 0074, 0075.  Likely files: `src/ui/particles.gd`.
-
-Fire, smoke, sparks, dust and the small amount of blood the design document allows - the difference between a hit and a hit that felt like one.
-
-- Muzzle flash, impact spark, explosion, burning, smoke from the chimney and from wreckage, dust when something falls
-- Pixel particles on the shared palette, not soft gradients
-- A hard cap on live particles, and the cap is a setting
-- Particles are view only: never in the state, never in the hash
-- Blood is restrained, as section 18 asks
-
-  - done when: A busy wave stays inside the frame budget with particles on
-  - done when: Turning them off does not change the outcome of a night
-
-### 0078 - The reality transition
-
-Waits on 0076.  Likely files: `src/ui/transition.gd`.
-
-The moment the game is named after. Two seconds that say: same farm, different world.
-
-- The light drains from warm to cold across the whole farm at once
-- Day actors leave and night structures wake during it
-- It is skippable, and it never blocks the simulation
-- It plays in both directions, and coming back to the farm in the morning is the reward half
-- Length is a lever and a setting
-
-  - done when: It is the clip you would put first in a trailer - say in the journal whether it is yet
-  - done when: Skipping it lands in exactly the same state as watching it
-
-### 0081 - The UI theme
-
-Waits on 0079, 0080.  Likely files: `assets/theme.tres, src/ui/`.
-
-One Theme resource every control uses, so a colour change is one edit and no screen is the odd one out.
-
-- Every Control style in one Theme: no per-node style overrides anywhere
-- Built from the palette and the UI kit, not from Godot's defaults
-- Focus, hover and disabled states defined for everything interactive
-- A UI scale factor that works at every integer window scale
-
-  - done when: `grep` finds no `add_theme_*_override` left in `src/ui/`
-  - done when: Every screen looks like the same game
-
-### 0087 - Ambience
-
-Waits on 0084, 0085.  Likely files: `src/app/ambience.gd`.
-
-The bed under everything: birds and water by day, wind and distant groaning by night.
-
-- A day bed and a night bed, cross-fading with the transition
-- Positional touches: the pond is louder near the pond
-- It ducks under an important sound rather than fighting it
-- It is on its own bus so it can be turned down alone
-
-  - done when: Standing still on the farm for a minute is pleasant, not empty
-  - done when: The ambience never masks the house-damage sound
-
 ### 0109 - The character reacts
 
 Waits on 0073.  Likely files: `src/core/player.gd, src/ui/player_view.gd`.
@@ -346,6 +317,20 @@ A command that puts the game in a known state and takes the picture, so a visual
 
   - done when: One command produces the whole set
   - done when: The set is recognisably the game on the reference sheet
+
+### 0087 - Ambience
+
+Waits on 0084, 0085.  Likely files: `src/app/ambience.gd`.
+
+The bed under everything: birds and water by day, wind and distant groaning by night.
+
+- A day bed and a night bed, cross-fading with the transition
+- Positional touches: the pond is louder near the pond
+- It ducks under an important sound rather than fighting it
+- It is on its own bus so it can be turned down alone
+
+  - done when: Standing still on the farm for a minute is pleasant, not empty
+  - done when: The ambience never masks the house-damage sound
 
 ### 0088 - Juice: shake, hit stop, damage numbers
 
@@ -703,18 +688,18 @@ The list you run before publishing, written once, so nothing is remembered at th
 - [x] **0069** [Run statistics](prompts/0069-stats.md)
 - [x] **0070** [Endless nights past ten](prompts/0070-endless.md)
 
-## 5 - Art and visual direction  (0/13)
+## 5 - Art and visual direction  (1/13)
 
-- [ ] **0071** [The two palettes](prompts/0071-palettes.md)
-- [ ] **0072** [The farm tileset](prompts/0072-tileset.md) - needs 0071
-- [ ] **0073** [The player sprite](prompts/0073-player-art.md) - needs 0071
+- [x] **0071** [The two palettes](prompts/0071-palettes.md)
+- [ ] **0072** [The farm tileset](prompts/0072-tileset.md)
+- [ ] **0073** [The player sprite](prompts/0073-player-art.md)
 - [ ] **0109** [The character reacts](prompts/0109-player-emotes.md) - needs 0073
-- [ ] **0074** [Zombie sprites](prompts/0074-zombie-art.md) - needs 0071
-- [ ] **0075** [Buildings and towers](prompts/0075-building-art.md) - needs 0071
-- [ ] **0076** [Night lighting](prompts/0076-lighting.md) - needs 0071
+- [ ] **0074** [Zombie sprites](prompts/0074-zombie-art.md)
+- [ ] **0075** [Buildings and towers](prompts/0075-building-art.md)
+- [ ] **0076** [Night lighting](prompts/0076-lighting.md)
 - [ ] **0077** [Particles](prompts/0077-particles.md) - needs 0074, 0075
 - [ ] **0078** [The reality transition](prompts/0078-transition.md) - needs 0076
-- [ ] **0079** [Resource icons and the UI kit](prompts/0079-ui-kit.md) - needs 0071
+- [ ] **0079** [Resource icons and the UI kit](prompts/0079-ui-kit.md)
 - [ ] **0080** [A pixel font](prompts/0080-font.md)
 - [ ] **0081** [The UI theme](prompts/0081-theme.md) - needs 0079, 0080
 - [ ] **0082** [Screenshots, and actually looking at them](prompts/0082-screenshots.md) - needs 0078

@@ -1,7 +1,7 @@
 # 0071 - The two palettes
 
 - **Phase:** 5 - Art and visual direction
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0014, 0022
 - **Likely files:** tools/gen_sprites.py, src/ui/palette.gd
 

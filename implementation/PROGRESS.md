@@ -5446,3 +5446,142 @@ Notes: `tools/nights.py` takes `[how many nights] [seed]` now. Night 11 sends
 292 with three. Whether any of that is *winnable* is not known - task 0068
 recorded that no autoplayer policy has yet beaten night ten, and endless
 inherits that open question rather than answering it.
+
+## 0071 - The two palettes - done 2026-09-27
+
+What changed: a relight shader on its own layer between the world and the HUD,
+so the night ramp can do the three things a `CanvasModulate` cannot - lift,
+drain and exempt. Screenshots: `implementation/shots/0071-day.png`,
+`0071-night.png`, and `0071-against-the-sheet.png`, which is both of them
+under the two halves of the reference sheet.
+
+Files: `src/ui/relight.gdshader` (new), `src/ui/relight.gd` (new),
+`src/ui/world_view.gd`, `scenes/Main.tscn`, `tools/palette.py`,
+`tools/gen_sprites.py`, `src/ui/palette_data.gd` (generated),
+`src/tools/headless_check.gd`, `src/tools/input_check.gd`.
+
+Verify: 2922 headless / 572 input / **both hashes unchanged**, which for a
+view-layer task is the result to want and is asserted rather than hoped for.
+
+### What was already there, and what was not
+
+The palette and the four ramps existed - sampled from the sheet, thirty-seven
+colours, day/dawn/dusk/night. What did not exist was anything **reading** them:
+`_TINT` went onto a `CanvasModulate` and `_LIFT`, `_SATURATION` and
+`NIGHT_WARM_KEEP` had no reader in the game at all. The same declared-and-never-
+read shape as `path_cost`, `ignores_structures`, `telegraph_ticks` and the rest
+of that list, and the reason is the same: a multiply cannot apply any of them.
+
+A multiply can only take light away. The sheet's night is *lifted* towards
+purple - and purple is not less of anything a farm is painted in - and it is
+*drained*, which is most of what makes moonlight read as moonlight rather than
+as a blue bulb pointed at an afternoon.
+
+### Dividing the tint back out
+
+The warm exemption needs the colour a pixel had **before** the tint, and a
+screen-space pass can only see the screen after it. So the shader is handed
+the `CanvasModulate`'s colour and divides it out again. That is exact for
+anything the multiply did not clip, which is everything: the tint is
+per-channel and never zero.
+
+Keeping the tint on the modulate rather than folding it into the shader also
+meant the rest of the game - and five existing input asserts - carry on
+reading `light.color` to know what the light is doing.
+
+### Wheat is brighter than fire
+
+The requirement is "fire, lamps and the moon are the only warm things at
+night", and the threshold is a brightness. Sorted by brightness the palette
+runs `bone` 0.880, `moon` 0.849, `flame_hot` 0.843 - and then **`gold_light`
+at 0.722, which is wheat**, ahead of `flame` at 0.679.
+
+So a threshold low enough to exempt the orange body of a flame also exempts a
+cornfield, and the sheet's night corn is dark. **A screen-space pass cannot
+tell a fire pixel from a wheat pixel when they are nearly the same colour**;
+it can only ask how bright a thing is.
+
+0.80 with a narrow edge lands in the gap: the hot core of a flame, the moon
+and bone-white keep their colour, and the orange around that core is tinted
+with everything else - which still reads as fire, because the core inside it
+does not. The actual glow is task 0076's, which puts real lights where the
+fires are and is the only thing that can tell them apart. There is an assert
+naming every colour on each side of that threshold, because the next person to
+turn the dial will not know the gap is there.
+
+### Two things the screenshots caught
+
+1. **Dawn was being lit as one-third night.** The first version worked out how
+   far into the night the light was by measuring how much more blue than green
+   its tint was. That is true of the night ramp and it is *also* true of dawn,
+   because dawn is a cool light - so a farm at seven in the morning was drained
+   to 90% and lifted towards purple, measured at 0.28 of the way into the
+   night on the first screenshot taken. The ramp is computed from the phase and
+   the hour now, which is the same question `_daylight_now()` was already
+   answering for the tint, and is both simpler and correct.
+2. **The first night tuning was flat.** Lift (0.10, 0.07, 0.20) and saturation
+   0.62 produced one mid-purple with the grass, the paths and the jetty all at
+   the same value. The sheet's night is not washed out, it is dark with deep
+   shadows - so the lift came down until black was nearly black again and the
+   saturation came up until grass was recognisably grass.
+
+### Against the sheet, honestly
+
+The two realities hold up: same farm, same shapes, warm to cool, and the white
+things stay moonlit white so the farmer and the chickens are still findable.
+
+What does **not** yet match is worth naming rather than glossing. The sheet's
+night has deep black between bright pools of firelight, and mine is evenly lit
+because there are no lights in it yet - that contrast is task 0076. The
+sheet's day is goldener than mine because the sheet has a tileset of paths and
+orchards and mine is mostly grass - that is tasks 0072 to 0075. **Neither gap
+is a gap in the ramp**, which is the thing this task owns.
+
+The night ramp is deliberately a shade darker than a night with no lights in
+it wants to be. Every light 0076 hangs on a window or a brazier *adds*
+brightness, and a global ramp tuned to read well on its own would be washed
+out the moment they arrive.
+
+### One flaky input case, and what I did not learn from it
+
+`verify.py` reported one failed input case after this was otherwise finished,
+and four later runs did not reproduce it. **Which assert failed was never
+captured**, so there is no diagnosis here - only a decision.
+
+The suspect assert was mine and was wrong on its own terms: it asked whether
+the occupant count and the wood were unchanged six frames later, which asserts
+that *nothing happens during a night*. A night takes structures apart; that is
+what a night is for. It was also only catching the relight by accident.
+
+It is replaced by the claim it was meant to make - **relighting the farm
+changes nothing about the farm** - asked directly: read `State.hash_of()`,
+relight hard twice with absurd values, read it again, with no `await` between
+the readings so the tick cannot move underneath the question. That cannot
+depend on timing at all, which closes the door whether or not it was the open
+one. Four clean runs since, which is evidence and not proof, and is written
+here as the former.
+
+### A race in a test, not in the game
+
+`view.skip_transition()` called on the same frame the phase changed is undone
+on the next one: the view has not noticed the change yet, so it then starts a
+fade it thinks is new. The ramp sat at 1.9% of the way into the night while
+the tint was already being reported as the night's. The case waits for the
+view to notice and then skips. Not a game bug - nobody can click faster than
+the one frame it takes `_light_for_phase` to see a phase - but a test that
+would have failed one run in three.
+
+### Hashes
+
+| | from | to | why |
+|---|---|---|---|
+| sim hash | `2555959448` | `2555959448` | unchanged. A relight that moved it would be `src/ui/` writing to the state, which is the thing the guard is for |
+| data hash | `2601044827` | `2601044827` | unchanged. The ramps are in `src/ui/palette_data.gd`, not in `GameData`, because they are how the farm is *lit* and not what it is made of |
+
+Both ramps are data in `tools/palette.py` and regenerate into
+`palette_data.gd` without touching a sprite - `python tools/gen_sprites.py`
+reported 38 of 39 files unchanged on every tuning pass, which is the
+requirement met and visible.
+
+`python tools/verify.py` prints PASS: 2922 asserts, 572 input cases, 0 failed.
+`exports` is still the one SKIP and still wants the Godot export templates.

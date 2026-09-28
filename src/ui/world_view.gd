@@ -134,6 +134,9 @@ var _light: CanvasModulate
 var _lit_for := -1                  # the phase the fade is heading towards
 var _fade := 1.0                    # 0 at the start of a change, 1 when done
 var _fade_from := Color.WHITE       # where the fade started
+## The rest of the ramp. A sibling layer, so it can sit over the whole world
+## and under the whole HUD; null when the view is opened on its own.
+var _relight: Relight
 
 
 func _ready() -> void:
@@ -155,6 +158,13 @@ func _ready() -> void:
 	# negative z_index inside the sorted layer. Negative z inside a Y-sorted
 	# parent put it behind the TileMapLayer, so the frame was drawn under the
 	# grass and nothing appeared on screen at all.
+	# **Found, not made.** The relight layer is a sibling in `Main.tscn`
+	# rather than a child here, because it must sit above the whole world and
+	# below the whole HUD - which is a fact about the scene, not about the
+	# view. A `WorldView` opened on its own simply has no relight and draws in
+	# the palette's own colours, which is what a sprite check wants anyway.
+	_relight = get_tree().root.find_child("Relight", true, false) as Relight
+
 	_light = CanvasModulate.new()
 	_light.name = "Light"
 	_light.color = PaletteData.DAY_TINT
@@ -252,6 +262,7 @@ func _light_for_phase(delta: float) -> void:
 	if _fade >= 1.0:
 		# Settled, so it follows the sun rather than sitting on one colour.
 		_light.color = target
+		_wear(_ramp_now())
 		return
 
 	# **From where it started, not from where it is.** Lerping the current
@@ -260,6 +271,7 @@ func _light_for_phase(delta: float) -> void:
 	# `is_transitioning()` true long after the fade looked over.
 	_fade = minf(_fade + delta / TRANSITION_SECONDS, 1.0)
 	_light.color = _fade_from.lerp(target, _fade)
+	_wear(_blend(_ramp_of(_fade_from), _ramp_now(), _fade))
 
 
 ## The colour of the daylight right now: cool at dawn, plain at noon, warm at
@@ -286,6 +298,99 @@ func _daylight_now() -> Color:
 			clampf(through / 0.5, 0.0, 1.0))
 	return PaletteData.DAY_TINT.lerp(PaletteData.DUSK_TINT,
 		clampf((through - 0.5) / 0.5, 0.0, 1.0))
+
+
+## What the light is made of right now: the tint, and the three things a
+## multiply cannot do.
+##
+## **The ramp is computed, not deduced from the tint.** The first version
+## worked out how far into the night the light was by looking at how much more
+## blue than green its tint was - which is true of the night ramp and *also*
+## true of dawn, because dawn is a cool light. So a farm at seven in the
+## morning was being drained to 90% saturation and lifted towards purple, on
+## the strength of a colour that meant "early" rather than "dark". Measured at
+## 0.28 of the way into the night, at dawn, on the first screenshot taken.
+##
+## Asking the phase and the hour is both simpler and correct, and it is the
+## same question `_daylight_now()` was already answering for the tint.
+func _ramp_now() -> Dictionary:
+	if _state.is_empty() or int(_state.get("phase", Phases.DAY)) != Phases.DAY:
+		return _night_ramp()
+	var through := float(Phases.day_percent(_state)) / 100.0
+	if through <= 0.5:
+		return _blend(_dawn_ramp(), _day_ramp(),
+			clampf(through / 0.5, 0.0, 1.0))
+	return _blend(_day_ramp(), _dusk_ramp(),
+		clampf((through - 0.5) / 0.5, 0.0, 1.0))
+
+
+## The ramp a given tint belongs to, for the far end of a fade. Only ever
+## asked about a colour the light was actually on, which is one of the four.
+func _ramp_of(tint: Color) -> Dictionary:
+	for ramp in [_night_ramp(), _dawn_ramp(), _day_ramp(), _dusk_ramp()]:
+		if (ramp["tint"] as Color).is_equal_approx(tint):
+			return ramp
+	# Mid-fade when something interrupted: the day is the safe answer, since
+	# the only thing this changes is one frame of a transition.
+	var out := _day_ramp()
+	out["tint"] = tint
+	return out
+
+
+static func _day_ramp() -> Dictionary:
+	return {"tint": PaletteData.DAY_TINT, "lift": PaletteData.DAY_LIFT,
+		"saturation": PaletteData.DAY_SATURATION,
+		"warm_keep": PaletteData.DAY_WARM_KEEP,
+		"warm_edge": PaletteData.DAY_WARM_EDGE}
+
+
+static func _dawn_ramp() -> Dictionary:
+	return {"tint": PaletteData.DAWN_TINT, "lift": PaletteData.DAWN_LIFT,
+		"saturation": PaletteData.DAWN_SATURATION,
+		"warm_keep": PaletteData.DAWN_WARM_KEEP,
+		"warm_edge": PaletteData.DAWN_WARM_EDGE}
+
+
+static func _dusk_ramp() -> Dictionary:
+	return {"tint": PaletteData.DUSK_TINT, "lift": PaletteData.DUSK_LIFT,
+		"saturation": PaletteData.DUSK_SATURATION,
+		"warm_keep": PaletteData.DUSK_WARM_KEEP,
+		"warm_edge": PaletteData.DUSK_WARM_EDGE}
+
+
+static func _night_ramp() -> Dictionary:
+	return {"tint": PaletteData.NIGHT_TINT, "lift": PaletteData.NIGHT_LIFT,
+		"saturation": PaletteData.NIGHT_SATURATION,
+		"warm_keep": PaletteData.NIGHT_WARM_KEEP,
+		"warm_edge": PaletteData.NIGHT_WARM_EDGE}
+
+
+## One ramp on the way to another. Every field travels together, so a light
+## halfway between the day and the night is halfway in all four of them.
+static func _blend(from: Dictionary, to: Dictionary, t: float) -> Dictionary:
+	var at := clampf(t, 0.0, 1.0)
+	return {
+		"tint": (from["tint"] as Color).lerp(to["tint"], at),
+		"lift": (from["lift"] as Color).lerp(to["lift"], at),
+		"saturation": lerpf(from["saturation"], to["saturation"], at),
+		"warm_keep": lerpf(from["warm_keep"], to["warm_keep"], at),
+		"warm_edge": lerpf(from["warm_edge"], to["warm_edge"], at),
+	}
+
+
+## Put a ramp on. The tint goes on the `CanvasModulate`, which the rest of the
+## game reads; the other three go to the shader, which is the only thing that
+## can apply them.
+func _wear(ramp: Dictionary) -> void:
+	if _relight == null:
+		return
+	_relight.apply(_light.color, ramp["lift"], ramp["saturation"],
+		ramp["warm_keep"], ramp["warm_edge"])
+
+
+## The ramp the light is heading for, for `input_check` to read back.
+func ramp_target() -> Dictionary:
+	return _ramp_now()
 
 
 ## Cut the fade short. The simulation was never waiting for it, so this changes
