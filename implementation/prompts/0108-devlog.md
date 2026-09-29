@@ -1,7 +1,7 @@
 # 0108 - The devlog and a trailer clip
 
 - **Phase:** 8 - Ship the MVP
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0082, 0107
 - **Likely files:** tools/devlog.py, docs/devlog/
 

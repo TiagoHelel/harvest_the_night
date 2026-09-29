@@ -9880,3 +9880,123 @@ a string and the string table is not in either hash.
 
 `python tools/verify.py` prints PASS: 6308 asserts, 978 input cases, 0 failed,
 22 rows, no skips, 227 seconds.
+
+## 0108 - The devlog and a trailer clip - done 2026-09-29
+
+Thirty seconds of the game out of one seed, and a devlog page generated from
+this file. `python tools/devlog.py` does both.
+
+### Four beats and one cut
+
+    the day      8s   a farm being worked
+    the switch   5s   the light going over
+    the night   12s   the horde arriving and the towers answering
+    the fall     5s   the fence coming down
+
+Three hundred pictures at ten a second, three sim ticks under each, which is
+thirty ticks a second - **the speed the game is actually played at**, and
+`headless_check` asserts that arithmetic. A trailer running at double speed
+is a trailer lying about what the game feels like.
+
+**There is one cut.** `PREPARATION_TICKS` is twenty seconds, two thirds of
+the whole clip, and a trailer that spent it watching a farmer stand still is
+a trailer nobody finishes. The cut is between the light going over and the
+first wave, which is where a viewer expects one.
+
+### The tool says whether the beats actually happened
+
+A wall falling is not something a capture can promise - it depends on where
+the horde walks and what it chews through. So it checks and prints, and the
+first run said:
+
+    the fall    NOTHING CAME DOWN - the fourth beat is missing
+
+Which was the point of writing it that way. Three hundred frames had been
+captured and nothing in them was the fourth beat.
+
+### The night beat was thirty seconds of an empty meadow
+
+Two things wrong, and `_set_wave` had already learned both at task 0082 - its
+comment says so, and I did not read it until after.
+
+**The camera followed the farmer**, who had spent the day beat walking west
+into the field. So the night was a dark empty meadow with a fight happening
+off the right of the screen. The night frames point the camera at the defence
+line now.
+
+**And the wave was dead four seconds in.** Eight towers clear what the table
+sends before anything interesting happens. Sixty walk in by hand, which is
+what it takes for the fence to be under enough pressure to come down - and
+the fourth beat is that happening, with `fence destroyed` in the log panel
+where a viewer can read it.
+
+### The page is generated, and the first version quietly described four
+fifths of the project
+
+The done-when is that the devlog comes out of `implementation/PROGRESS.md`
+rather than being written twice. It does: the task list, the dates, **every
+recorded move of either determinism hash**, and the findings - which are the
+journal's own sub-headings, picked out by the words this journal uses when
+something did not work.
+
+The first run reported **87 entries and 2 hash moves**. There are 109 and 26.
+
+The journal is nine thousand lines written over a hundred and ten tasks and
+it does not have one voice. Twenty-two entries were written before the
+`- done <date>` suffix became a habit, and a hash move is written five ways:
+`Sim`, `Sim hash`, `Data`, `Data hash`, `data hash`, in backticks and out of
+them. A parser that knows only the most recent shape reports a smaller,
+tidier project than the one that exists - and nothing about the page looked
+wrong.
+
+So the tool now counts the journal's entries against **the backlog's finished
+tasks**, from a different file, and refuses to write a page when the two
+disagree:
+
+    FAIL  the backlog says 107 tasks are done and the journal gives up 87
+          a page that quietly describes part of the project is worse than no
+          page. Widen the parser or fix the entry.
+
+Every task from 0001 to 0107 has an entry, checked, with no gaps.
+
+### The English page had a Portuguese pitch in it
+
+`design.md` is Portuguese - it is the original document - so an English
+devlog quoting section 20 verbatim was an English page with a Portuguese
+pitch in the middle. The English page takes its pitch from `docs/STORE.md`,
+where task 0107 put a person's translation of it. Found by reading the page.
+
+### A GIF, because there is no encoder on this machine
+
+`ffmpeg` is not installed and this tool does not install things. So the same
+three hundred frames produce two outputs: `docs/devlog/the-trailer.gif`,
+which a page can show on its own, and the numbered PNGs - and the tool prints
+the one `ffmpeg` line that turns them into an `.mp4`. Saying which half is
+missing and how to finish it is better than quietly producing the second best
+thing.
+
+**3.45 MB, down from 5.12.** A frame of this game has three and a half
+thousand distinct colours in it - the light ramp and the lamps blend - so
+every frame was carrying its own palette. One shared table of 128 colours for
+all three hundred, no dither, and the banding was looked for in a night frame
+pulled back out of the finished GIF rather than assumed away. Measured:
+256 colours is 3.93 MB, 128 is 3.45, 64 is 2.95. 128 is where the saving
+stops being worth risking a banded sky.
+
+It is committed rather than generated on demand, because a devlog page
+without its clip is not a devlog page.
+
+### What is deliberately not generated
+
+The two paragraphs of opinion at the top, which are in
+`docs/devlog/preamble.md` in both languages where a person can edit them. A
+devlog with no opinion in it is a changelog, and nobody reads a changelog for
+fun.
+
+### Hashes
+
+Both unchanged: **sim `1961000123`**, **data `407837701`**. Nothing outside
+`src/tools/` and `tools/` was touched.
+
+`python tools/verify.py` prints PASS: 6324 asserts, 978 input cases, 0 failed,
+23 rows, no skips, 235 seconds.

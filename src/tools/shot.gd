@@ -122,6 +122,7 @@ func _initialize() -> void:
 	var loud := false
 	var front := false
 	var strip := false
+	var reel := false
 	var id := "latest"
 	var wanted: Array = []
 	for arg in args:
@@ -133,6 +134,10 @@ func _initialize() -> void:
 				loud = true
 			elif maybe == "title":
 				front = true
+			elif maybe == "trailer":
+				# **Thirty seconds, task 0108.** Four beats out of one
+				# seeded run; `tools/devlog.py` turns them into a clip.
+				reel = true
 			elif maybe == "switch":
 				# **The moment the game is named after, as frames.**
 				# Task 0107 turns them into a GIF; nothing else in this
@@ -177,6 +182,13 @@ func _initialize() -> void:
 	# **The front of the game, which is not a farm.** `--title` takes
 	# two pictures of `Title.tscn` instead of the scenario set:
 	# the ident that plays before it, and the title behind that.
+	if reel:
+		await _take_the_trailer(folder)
+		print("%d written, %d failed, into %s"
+			% [_written, _failed, folder])
+		quit(1 if _failed > 0 else 0)
+		return
+
 	if strip:
 		await _take_the_switch(folder)
 		print("%d written, %d failed, into %s"
@@ -221,6 +233,156 @@ func _scenario(name: String) -> Array:
 		if str(entry[0]) == name:
 			return entry as Array
 	return []
+
+
+## The trailer: how long it is, and how many pictures a second of it has.
+##
+## **Thirty seconds at ten a second.** Ten is enough for a farm and a horde to
+## read as moving and few enough that three hundred frames is a file somebody
+## can put on a page. The game runs at 30Hz, so three ticks a picture makes
+## the clip play at the speed the game is actually played at - which is the
+## only honest speed for a trailer.
+const TRAILER_SECONDS := 30
+const TRAILER_FPS := 10
+const TRAILER_TICKS_PER_FRAME := 3
+
+## And the four beats, in pictures. They add up to `TRAILER_SECONDS * FPS`.
+##
+## `design.md` asks the trailer to answer one question - what kind of game is
+## this - and the answer is the four things in this list, in this order. A day
+## that went on for fifteen seconds would be a farming game with a surprise at
+## the end; five seconds of farm and twenty-five of shooting would be a tower
+## defence that lied about the other half.
+const BEAT_DAY := 80        # the farm being worked
+const BEAT_SWITCH := 50     # the light going over
+const BEAT_NIGHT := 120     # the horde arriving and the towers answering
+const BEAT_FALL := 50       # something coming down
+
+## How many walk in for the night beat.
+##
+## **More than the table sends**, for the reason task 0082 wrote down about
+## the wave picture: eight towers clear a normal wave in four seconds and the
+## shutter gets an empty field. A trailer needs the fence to be under enough
+## pressure to come down, and the fourth beat is that happening.
+const HORDE := 60
+
+
+## Thirty seconds of the game, from one seed.
+##
+## ## Four beats and one cut
+##
+## Day, switch, night, and something falling. There is **one cut**, and it is
+## the twenty seconds of preparation between sending for the night and the
+## night arriving: `GameData.PREPARATION_TICKS` is two thirds of the whole
+## clip, and a trailer that spent it watching a farmer stand still would be a
+## trailer nobody finished. The cut is between the light going over and the
+## first wave, which is where a viewer expects one anyway.
+##
+## ## It says whether the beats actually happened
+##
+## A wall falling is not something a capture can promise - it depends on
+## where the horde walks and what it chews through. So the tool **checks**,
+## and prints what it found rather than writing three hundred frames and
+## leaving somebody to notice that the fourth beat is thirty towers shooting
+## at nothing.
+func _take_the_trailer(folder: String) -> void:
+	seed(SPARK_SEED)
+	var main: Node = load("res://scenes/Main.tscn").instantiate()
+	root.add_child(main)
+	await process_frame
+	await process_frame
+
+	main.begin_run(SEED)
+	var driver = main.get_node("%SimDriver")
+	var state: Dictionary = driver.state
+	_a_defended_farm(state)
+	Sim.advance(state, maxi(GameData.DUSK_AT_TICK - 30 * GameData.SECONDS
+		- int(state["tick"]), 1))
+
+	_standing_at = Player.cell(state)
+	for _i in SETTLE:
+		await process_frame
+
+	var shot := 0
+
+	# ------------------------------------------------- a day of farming
+	for i in BEAT_DAY:
+		_work_the_farm(state, i)
+		shot = await _reel_frame(state, shot, folder)
+
+	# ------------------------------------------------- send for the night
+	(state["intent"] as Dictionary)["begin_night"] = true
+	for _i in BEAT_SWITCH:
+		shot = await _reel_frame(state, shot, folder)
+
+	# **The cut.** The rest of the preparation, off camera.
+	while int(state["phase"]) == Phases.PREPARATION:
+		Sim.advance(state, 30)
+
+	# ------------------------------------------------- a night holding
+	#
+	# **A horde spawned by hand, and the camera on the fence.** The first
+	# version watched the farmer, who had spent the day beat walking west
+	# into the field - so the night was thirty seconds of an empty meadow
+	# with a fight happening off the right of the screen, and the wave the
+	# table sends was dead four seconds in. `_set_wave` learned the same
+	# thing at task 0082 and its comment says so.
+	for i in HORDE:
+		Enemies.spawn(state, &"walker" if i % 3 else &"runner",
+			i % GameData.SPAWNS.size())
+	var standing_before := Farm.cells_with(state, &"fence").size()
+	for _i in BEAT_NIGHT:
+		shot = await _reel_frame(state, shot, folder, _the_defence_line(state))
+
+	# ------------------------------------------------- and something falls
+	for _i in BEAT_FALL:
+		shot = await _reel_frame(state, shot, folder, _the_defence_line(state))
+
+	# What actually happened, said out loud.
+	var lost := standing_before - Farm.cells_with(state, &"fence").size()
+	var walkers := Entities.count(state)
+	print("  the day     %d frames of a farm being worked" % BEAT_DAY)
+	print("  the switch  %d frames of the light going over" % BEAT_SWITCH)
+	print("  the night   %d frames, %d still walking at the end"
+		% [BEAT_NIGHT + BEAT_FALL, walkers])
+	if lost > 0:
+		print("  the fall    %d of the fence came down" % lost)
+	else:
+		print("  the fall    NOTHING CAME DOWN - the fourth beat is missing")
+		_failed += 1
+	print("  %d seconds at %d a second" % [TRAILER_SECONDS, TRAILER_FPS])
+
+	root.remove_child(main)
+	main.free()
+
+
+## One picture, and the ticks that go under it.
+##
+## `look_at` is where the camera goes; `(-1, -1)` follows the farmer, which is
+## what the day beat wants and what the night beat very much does not.
+func _reel_frame(state: Dictionary, shot: int, folder: String,
+		look_at: Vector2i = Vector2i(-1, -1)) -> int:
+	for _f in TRAILER_TICKS_PER_FRAME:
+		Sim.advance(state, 1)
+		await process_frame
+	_standing_at = look_at if look_at.x >= 0 else Player.cell(state)
+	await _shoot("trailer-%03d" % shot, folder)
+	return shot + 1
+
+
+## What the farmer is doing during the first beat.
+##
+## **Walking west into the field and working whatever is under them.**
+## `interact_held` is a level rather than an edge - task 0056's note - so
+## holding it down is a farmer who tills, sows and waters their way along a
+## row, which is what a day looks like from outside.
+func _work_the_farm(state: Dictionary, frame: int) -> void:
+	var intent: Dictionary = state["intent"]
+	var move: Array = intent["move"]
+	move[0] = -1 if frame < BEAT_DAY / 2 else 0
+	move[1] = 0
+	intent["interact_held"] = frame >= BEAT_DAY / 2
+	intent["interact"] = frame == BEAT_DAY / 2
 
 
 ## How many pictures the switch is captured as. What ends up in the GIF.

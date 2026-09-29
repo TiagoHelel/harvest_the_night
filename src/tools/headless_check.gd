@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 99
+const GROUPS := 100
 
 const SettingsScript := preload("res://src/app/settings.gd")
 const AppScript := preload("res://src/app/app.gd")
@@ -177,6 +177,7 @@ func _run() -> void:
 	_task_0105_playtest()
 	_task_0106_release()
 	_task_0107_store()
+	_task_0108_devlog()
 
 
 ## 0102 - the performance budget.
@@ -1209,6 +1210,76 @@ func _task_0107_store() -> void:
 		"and scales it by whole pixels rather than smoothing it")
 	expect(not maker.contains("HTTPRequest"),
 		"and the store tool sends nothing anywhere either")
+	_completed += 1
+
+
+## 0108 - the devlog and the trailer clip.
+func _task_0108_devlog() -> void:
+	var shot := FileAccess.get_file_as_string("res://src/tools/shot.gd")
+	expect(shot.contains("_take_the_trailer"),
+		"the shot tool can shoot a trailer")
+
+	# **The four beats add up to the length it claims.** Three numbers in one
+	# file that have to agree with each other, and a fourth in a different
+	# file that has to agree with all of them.
+	var fps := _number_after(shot, "const TRAILER_FPS := ")
+	var seconds := _number_after(shot, "const TRAILER_SECONDS := ")
+	var beats := _number_after(shot, "const BEAT_DAY := ") \
+		+ _number_after(shot, "const BEAT_SWITCH := ") \
+		+ _number_after(shot, "const BEAT_NIGHT := ") \
+		+ _number_after(shot, "const BEAT_FALL := ")
+	expect(fps > 0 and seconds > 0, "the trailer has a length and a rate",
+		"%d seconds at %d" % [seconds, fps])
+	expect(beats == fps * seconds,
+		"and the four beats add up to it",
+		"%d pictures against %d" % [beats, fps * seconds])
+	expect(seconds == 30, "it is thirty seconds, which is the done-when",
+		str(seconds))
+
+	var tool_text := FileAccess.get_file_as_string("res://tools/devlog.py")
+	expect(_number_after(tool_text, "FPS = ") == fps,
+		"the assembler plays it at the rate it was shot at",
+		"%d against %d" % [_number_after(tool_text, "FPS = "), fps])
+	expect(_number_after(tool_text, "SECONDS = ") == seconds,
+		"and says the same length")
+
+	# **The clip plays at the speed the game is played at.** Three ticks a
+	# picture at ten pictures a second is thirty ticks a second, which is
+	# `TICK_HZ`. A trailer running at double speed is a trailer lying about
+	# what the game feels like.
+	var per := _number_after(shot, "const TRAILER_TICKS_PER_FRAME := ")
+	expect(per * fps == GameData.TICK_HZ,
+		"and it plays at the speed the game runs at",
+		"%d ticks a second against %d" % [per * fps, GameData.TICK_HZ])
+
+	# ------------------------------------------------------------ the page
+
+	for name in ["res://docs/devlog/index.md", "res://docs/devlog/index.pt_BR.md",
+		"res://docs/devlog/preamble.md"]:
+		expect(FileAccess.file_exists(name),
+			"%s is there" % String(name).get_file())
+	var page := FileAccess.get_file_as_string("res://docs/devlog/index.md")
+	expect(page.contains("the-trailer.gif"), "the page shows the clip")
+	expect(page.contains("What went wrong"),
+		"and says what went wrong, which is what a devlog is for")
+	expect(page.contains("What is not in it"),
+		"and what is not in the game")
+	expect(page.contains("Generated from implementation/PROGRESS.md"),
+		"and says where it came from, so nobody edits it by hand")
+
+	# **Generated, not written twice.** The page has to carry the journal's
+	# own entries; a page that stopped doing that would be a second hand
+	# account nobody updates.
+	var journal := FileAccess.get_file_as_string(
+		"res://implementation/PROGRESS.md")
+	var carried := 0
+	for id in ["0002", "0027", "0066", "0090", "0104"]:
+		if page.contains("| %s |" % id):
+			carried += 1
+	expect(carried == 5,
+		"and every task in it comes from the journal", str(carried))
+	expect(journal.contains("0104 - Saves survive an update"),
+		"which is the file the entries are in")
 	_completed += 1
 
 

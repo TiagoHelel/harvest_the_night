@@ -231,6 +231,23 @@ def check_store():
     return check("store", code == 0, last[-1].strip() if last else "")
 
 
+def check_devlog():
+    """The devlog page, regenerated from the journal.
+
+    Not the clip: capturing thirty seconds of the game is a minute and a
+    half, and that is `python tools/devlog.py`. What this catches is the
+    page falling behind the journal it comes out of - and, because the tool
+    counts the journal's entries against the backlog's finished tasks, a
+    parser that has stopped recognising how somebody writes an entry."""
+    if not os.path.exists(rel("tools", "devlog.py")):
+        return skip("devlog", "no devlog yet - task 0108")
+    code, out = run([sys.executable, "tools/devlog.py", "--check"])
+    said = [l for l in out.splitlines() if l.strip().startswith("journal")]
+    if code != 0:
+        return check("devlog", False, tail(out, 3))
+    return check("devlog", True, said[-1].strip() if said else "")
+
+
 def check_icon():
     """One 16x16 drawing, at every size a platform asks for.
 
@@ -538,6 +555,7 @@ def main():
     check_icon()
     check_playtest()
     check_store()
+    check_devlog()
     check_strings()
     check_music()
     check_ambience()
