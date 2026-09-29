@@ -101,6 +101,29 @@ FRAMES = {
     "carry": [(3, 8), (3, 9)],
 }
 
+# The reaction row, band 5, cut by **where it is** rather than by which
+# frame the finder counted.
+#
+# **Because the finder drops the exclamation mark.** A bubble is a glyph
+# beside the farmer rather than part of them, and `!` is a twelve pixel run
+# of its own - narrower than anything the column pass is willing to call a
+# frame, so it vanished and the pose came out as a farmer with nothing over
+# their head. Checked across the whole sheet: it is the only run this
+# happens to, which is why it is fixed here with a box rather than by
+# loosening a rule that is right everywhere else.
+#
+# The x ranges are the opaque runs, farmer and bubble together. Task 0109
+# uses four of them; the star and the lightbulb further along the same row
+# are drawn touching their neighbours and are **not cut**, because nothing
+# asks for them yet and a frame nobody loads is a frame nobody notices has
+# gone wrong.
+REACTION_FRAMES = {
+    "react_bang": (5, 921, 1020),       # !  a bite, and the night arriving
+    "react_question": (5, 1049, 1149),  # ?  something of yours came down
+    "react_note": (5, 1180, 1293),      # a note - a crop came ready nearby
+    "react_heart": (5, 1339, 1461),     # a heart - unused, cut for later
+}
+
 # The pose every measurement is taken from. Its height sets the scale for all
 # of them, so it has to be one the farmer is standing straight up in.
 REFERENCE = (1, 0)
@@ -205,6 +228,24 @@ def _feet_centre(frame):
     return (min(xs) + max(xs)) // 2
 
 
+def _one_frame(sheet, box, band, scale):
+    """One frame off the sheet: cropped tight, scaled, stood on its feet."""
+    from PIL import Image
+    frame = _tight(sheet, box, band)
+    feet = _feet_centre(frame)
+    wide = max(1, int(round(frame.width * scale)))
+    tall = max(1, int(round(frame.height * scale)))
+    small = frame.resize((wide, tall), Image.LANCZOS)
+    # **Hard alpha again after the resize.** Downscaling blends the edge back
+    # into a halo, and a halo over the grass is the thing the keying was for.
+    small.putalpha(small.getchannel("A").point(
+        lambda v: 255 if v > 128 else 0))
+    canvas = Image.new("RGBA", CANVAS, (0, 0, 0, 0))
+    at = (FEET[0] - int(round(feet * scale)), FEET[1] - tall)
+    canvas.alpha_composite(small, _clamped(at, small.size))
+    return _png(canvas)
+
+
 def cut(report=False):
     """Every frame, as {name: [PNG bytes, ...]}."""
     from PIL import Image
@@ -218,25 +259,15 @@ def cut(report=False):
 
     used = set()
     out = {}
+    for name in sorted(REACTION_FRAMES):
+        band, x0, x1 = REACTION_FRAMES[name]
+        out[name] = [_one_frame(sheet, (x0, x1), bands[band][0], scale)]
     for name in sorted(FRAMES):
         pngs = []
         for (band, index) in FRAMES[name]:
             used.add((band, index))
-            frame = _tight(sheet, bands[band][1][index], bands[band][0])
-            feet = _feet_centre(frame)
-            wide = max(1, int(round(frame.width * scale)))
-            tall = max(1, int(round(frame.height * scale)))
-            small = frame.resize((wide, tall), Image.LANCZOS)
-            # **Hard alpha again after the resize.** Downscaling blends the
-            # edge back into a halo, and a halo over the grass is the thing
-            # the keying was for.
-            small.putalpha(small.getchannel("A").point(
-                lambda v: 255 if v > 128 else 0))
-
-            canvas = Image.new("RGBA", CANVAS, (0, 0, 0, 0))
-            at = (FEET[0] - int(round(feet * scale)), FEET[1] - tall)
-            canvas.alpha_composite(small, _clamped(at, small.size))
-            pngs.append(_png(canvas))
+            pngs.append(_one_frame(sheet, bands[band][1][index],
+                                   bands[band][0], scale))
         out[name] = pngs
 
     if report:

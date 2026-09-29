@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`########################`  **108 / 110 done**
+`########################`  **109 / 110 done**
 
-0 doing / 2 todo / 0 blocked across 9 phases.
+0 doing / 1 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0109 - The character reacts**. The whole of what is left is
+First up: **0110 - Refusals in two languages**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,24 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-2 task(s) left, the ready ones first, then what they
+1 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0109 - The character reacts
-
-Ready to pick up.  Likely files: `src/core/player.gd, src/ui/player_view.gd`.
-
-The little bubbles on the owner's sheet - !, ?, a heart, a note, an idea, a star - used for the two or three moments the game already has and nothing more.
-
-- The sheet's reaction row is cut with the rest of task 0073 and is available as named frames
-- A reaction is a fact in the state with a lifetime, not a thing the view invents, so the autoplayer and a replay see the same ones
-- Used only where the game already has a moment: a bite on the line, a crop coming ready nearby, a structure destroyed, the night arriving. Four at most
-- Never during a wave except for damage - a farmer with a music note over their head while the house burns is the wrong game
-- It is decoration: removing every reaction changes nothing about what is possible, and there is an assert for that
-
-  - done when: A reaction appears on the tick the thing happens and clears itself
-  - done when: Turning them all off leaves the determinism hash unchanged
 
 ### 0110 - Refusals in two languages
 
@@ -144,12 +129,12 @@ The last English sentences in `src/core/`: the lines that say why a thing cannot
 - [x] **0069** [Run statistics](prompts/0069-stats.md)
 - [x] **0070** [Endless nights past ten](prompts/0070-endless.md)
 
-## 5 - Art and visual direction  (12/13)
+## 5 - Art and visual direction  (13/13)
 
 - [x] **0071** [The two palettes](prompts/0071-palettes.md)
 - [x] **0072** [The farm tileset](prompts/0072-tileset.md)
 - [x] **0073** [The player sprite](prompts/0073-player-art.md)
-- [ ] **0109** [The character reacts](prompts/0109-player-emotes.md)
+- [x] **0109** [The character reacts](prompts/0109-player-emotes.md)
 - [x] **0074** [Zombie sprites](prompts/0074-zombie-art.md)
 - [x] **0075** [Buildings and towers](prompts/0075-building-art.md)
 - [x] **0076** [Night lighting](prompts/0076-lighting.md)

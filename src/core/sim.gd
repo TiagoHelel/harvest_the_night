@@ -33,6 +33,18 @@ static func tick(state: Dictionary) -> void:
 		Phases.RESULT:
 			_tick_result(state)
 
+	# **Task 0109, after whichever phase ran.** A bubble is about something
+	# that has already happened, so it is raised at the bottom of the tick
+	# and never in the middle of one: a reaction to a crop that comes ready
+	# later in the same tick would be a frame early, and nobody would ever
+	# work out why.
+	#
+	# It writes one key, `state["reaction"]`, which `State.hash_of` does not
+	# look at. Nothing else in `src/core/` reads it and `headless_check`
+	# greps to keep that so - which is what lets a fact about the view live
+	# in the state without being part of the game.
+	Reactions.tick(state)
+
 
 ## The payout, on screen. **Nothing else moves**: the farm waits while it is
 ## read, which is the one moment in the game that it does.

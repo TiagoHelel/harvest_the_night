@@ -116,6 +116,26 @@ static func frame_at(pose_data: Dictionary, seconds: float) -> int:
 	return int(floorf(maxf(seconds, 0.0) / each)) % frames
 
 
+## Which drawing a reaction asks for, or `&""`.
+##
+## **Only over an idle pose.** A farmer mid-swing with a music note over
+## their head is two things happening at once and reads as neither; a farmer
+## who has stopped and looked up is the beat this is for. So a reaction waits
+## for the work to finish, and if the bubble runs out first it is simply not
+## shown - which is right, because the moment it was about has passed.
+##
+## All four drawings face the viewer, so this turns the farmer south for as
+## long as it lasts. That is a choice and not an accident: it reads as
+## looking up, and the alternative - showing the bubble only when they
+## already happen to face south - is a feature that works a quarter of the
+## time.
+static func reaction_pose(name: StringName, kind: StringName) -> StringName:
+	if kind == &"" or not String(name).begins_with("idle_"):
+		return &""
+	var wanted := StringName("react_%s" % kind)
+	return wanted if PlayerFrames.COUNT.has(wanted) else &""
+
+
 ## The texture path for one frame.
 static func texture_path(name: StringName, frame: int) -> String:
 	return "%s%s_%d.png" % [DIR, name, frame]

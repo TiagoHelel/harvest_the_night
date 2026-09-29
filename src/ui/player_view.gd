@@ -93,6 +93,19 @@ func _animate(delta: float) -> void:
 	var pose := PlayerArt.pose(Player.facing(_state), _is_moving(),
 		_verb())
 	var name: StringName = pose["name"]
+
+	# **Task 0109.** The rules say which bubble and for how long; this only
+	# draws it. Nothing here decides when one appears, which is what lets a
+	# replay and a screenshot show the same one.
+	var reacting := PlayerArt.reaction_pose(name, Reactions.now(_state))
+	if reacting != &"":
+		name = reacting
+		pose = pose.duplicate()
+		pose["name"] = name
+		pose["frames"] = int(PlayerFrames.COUNT.get(name, 1))
+		# The drawings face the viewer, so a mirrored one would be a farmer
+		# whose bubble sits on the wrong shoulder.
+		pose["flip"] = false
 	if name != _playing:
 		# **From the start.** A chop that inherited the walk's clock would
 		# begin halfway through the swing, which is the one frame of it that

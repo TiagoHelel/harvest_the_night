@@ -1307,6 +1307,24 @@ const NIGHTS: Array = [
 ## `video/transition_seconds` lets a player move it as well.
 const TRANSITION_SECONDS := 1.6         # LEVER: seconds, 0.4-4.0
 
+## Task 0109: the little bubble over the farmer's head.
+##
+## **Off is a supported state.** The done-when is that turning every reaction
+## off changes nothing, and the only way to mean that is for somebody to be
+## able to do it - so this is a switch and not a comment. With it off,
+## `Reactions.tick()` counts the current one down and raises no more.
+const REACTIONS_ON := true              # LEVER: on or off
+
+## How long a bubble stays up. A second and a half: long enough to be read at
+## four times speed, short enough that two things happening in a row are two
+## bubbles rather than one that never leaves.
+const REACTION_TICKS := 45              # LEVER: ticks, 20-120
+
+## How close a crop has to come ready for the farmer to notice, in tiles of
+## walking. A crop on the far side of the farm is not something somebody
+## standing at the pond can see.
+const REACTION_NEAR := 6                # LEVER: tiles, 3-12
+
 ## How many nights the MVP has. Past this, `Endless` generates them.
 const MVP_NIGHTS := 10
 

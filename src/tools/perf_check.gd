@@ -234,6 +234,7 @@ func _tick_one(state: Dictionary, named: StringName) -> void:
 		&"Livestock": Livestock.tick(state)
 		&"Tutorial": Tutorial.tick(state)
 		&"Crafting": Crafting.tick(state)
+		&"Reactions": Reactions.tick(state)
 		_: push_error("perf_check: no system called '%s'" % named)
 
 

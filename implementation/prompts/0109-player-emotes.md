@@ -1,7 +1,7 @@
 # 0109 - The character reacts
 
 - **Phase:** 5 - Art and visual direction
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0073
 - **Likely files:** src/core/player.gd, src/ui/player_view.gd
 

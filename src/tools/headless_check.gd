@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 100
+const GROUPS := 101
 
 const SettingsScript := preload("res://src/app/settings.gd")
 const AppScript := preload("res://src/app/app.gd")
@@ -178,6 +178,7 @@ func _run() -> void:
 	_task_0106_release()
 	_task_0107_store()
 	_task_0108_devlog()
+	_task_0109_reactions()
 
 
 ## 0102 - the performance budget.
@@ -1281,6 +1282,243 @@ func _task_0108_devlog() -> void:
 	expect(journal.contains("0104 - Saves survive an update"),
 		"which is the file the entries are in")
 	_completed += 1
+
+
+## 0109 - the character reacts.
+func _task_0109_reactions() -> void:
+	# **It is decoration, and this is the assert that says so.** Nothing in
+	# `src/core/` may read the key except the module that writes it - which
+	# is what makes it safe for `State.hash_of` to skip it, and what makes
+	# "removing every reaction changes nothing about what is possible" a
+	# fact rather than an intention.
+	var readers: Array = []
+	for name in DirAccess.get_files_at("res://src/core"):
+		if not String(name).ends_with(".gd"):
+			continue
+		if String(name) == "reactions.gd" or String(name) == "state.gd":
+			continue
+		var source := _code_lines_of("res://src/core/".path_join(String(name)))
+		if source.contains("\"reaction\"") or source.contains("Reactions."):
+			# `sim.gd` is allowed the one line that ticks it.
+			if String(name) == "sim.gd" \
+					and source.count("Reactions.") == 1 \
+					and not source.contains("\"reaction\""):
+				continue
+			readers.append(String(name))
+	expect(readers.is_empty(),
+		"nothing in the rules reads the reaction", str(readers))
+
+	# And the hash does not look at it.
+	expect(State.NOT_THE_GAME.has("reaction"),
+		"the determinism hash skips the reaction")
+
+	# ---------------------------------- turning them off changes no number
+
+	# **The done-when, measured both ways.** The same scenario with every
+	# reaction on and with every one off has to come out at the same hash -
+	# which it does by construction, and construction is exactly the sort of
+	# thing that stops being true when somebody adds a fifth reaction that
+	# spends a random number.
+	var loud := State.create(109101)
+	var quiet := State.create(109101)
+	Resources.gain(loud, {GameData.WOOD: 600, GameData.STONE: 600})
+	Resources.gain(quiet, {GameData.WOOD: 600, GameData.STONE: 600})
+	# Sown next to the farmer, so that reactions actually happen in the
+	# loud one - **without this the comparison below passes by proving
+	# nothing**, which is how it passed the first time the exclusion was
+	# taken out to watch it fail.
+	var plots := Farm.cells_of(loud, Farm.Terrain.SOIL)
+	_stand_the_farmer(loud, plots[0])
+	_stand_the_farmer(quiet, plots[0])
+	for found in plots:
+		if Grid.manhattan(found, plots[0]) > 4:
+			continue
+		for one in [loud, quiet]:
+			Farming.select_seed(one, StringName(Farming.seeds()[0]))
+			Farming.act(one, found)
+			Farming.act(one, found)
+	var bubbles := 0
+	for _i in 4000:
+		Sim.advance(loud, 1)
+		if Reactions.now(loud) != &"":
+			bubbles += 1
+	for _i in 4000:
+		(quiet["reaction"] as Dictionary)["kind"] = &""
+		(quiet["reaction"] as Dictionary)["left"] = 0
+		Sim.advance(quiet, 1)
+		(quiet["reaction"] as Dictionary)["kind"] = &""
+		(quiet["reaction"] as Dictionary)["left"] = 0
+	expect(bubbles > 0,
+		"the run with reactions on actually had some", str(bubbles))
+	expect(State.hash_of(loud) == State.hash_of(quiet),
+		"a run with reactions and one without hash the same",
+		"%d against %d" % [State.hash_of(loud), State.hash_of(quiet)])
+	expect(Resources.amount(loud, GameData.WOOD)
+		== Resources.amount(quiet, GameData.WOOD),
+		"and have the same wood in them")
+
+	# ------------------------------------- one appears, and clears itself
+
+	var state := State.create(109102)
+	expect(Reactions.now(state) == &"",
+		"a new farm has nothing over the farmer's head")
+	Reactions.show(state, &"note")
+	expect(Reactions.now(state) == &"note", "one can be put up")
+	expect(Reactions.left(state) == GameData.REACTION_TICKS,
+		"with the lifetime the lever says", str(Reactions.left(state)))
+	Sim.advance(state, GameData.REACTION_TICKS - 1)
+	expect(Reactions.now(state) == &"note", "it lasts as long as it says")
+	Sim.advance(state, 2)
+	expect(Reactions.now(state) == &"",
+		"and then clears itself with nobody asking")
+
+	# **Damage outranks pleasure.** Two things on one tick is one bubble.
+	Reactions.show(state, &"note")
+	Reactions.show(state, &"question")
+	expect(Reactions.now(state) == &"question",
+		"something coming down beats a crop coming ready")
+	Reactions.show(state, &"note")
+	expect(Reactions.now(state) == &"question",
+		"and is not interrupted by one")
+
+	# A kind with no drawing is refused rather than shown as a gap.
+	var before := Reactions.now(state)
+	Reactions.show(state, &"trumpet")
+	expect(Reactions.now(state) == before,
+		"a kind nothing can draw is refused")
+	for kind in Reactions.KINDS:
+		expect(FileAccess.file_exists("res://sprites/actors/react_%s_0.png"
+			% String(kind)), "every kind has a drawing: %s" % String(kind))
+		expect(PlayerFrames.COUNT.has(StringName("react_%s" % String(kind))),
+			"and the view knows about it: %s" % String(kind))
+	expect(Reactions.KINDS.size() <= 4,
+		"four at most, which is the requirement",
+		str(Reactions.KINDS.size()))
+
+	# ------------------------------------- the four moments, each for real
+
+	# A bite on the line. The farmer has to be stood at the water or the
+	# line is given up on the first tick - which is `Fishing`'s rule and not
+	# this one's.
+	var fishing := State.create(109103)
+	var cast_at := Vector2i(-1, -1)
+	var stand := Vector2i(-1, -1)
+	for cell in Farm.cells_of(fishing, Farm.Terrain.WATER):
+		for step in [Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT,
+			Vector2i.RIGHT]:
+			var beside: Vector2i = cell + step
+			if Grid.in_bounds(beside) \
+					and Farm.terrain_at(fishing, beside) != Farm.Terrain.WATER:
+				cast_at = cell
+				stand = beside
+				break
+		if cast_at.x >= 0:
+			break
+	_stand_the_farmer(fishing, stand)
+	expect(Fishing.begin(fishing, cast_at), "a line goes in the water")
+	var bit := false
+	for _i in 3000:
+		Sim.advance(fishing, 1)
+		if Reactions.now(fishing) == &"bang":
+			bit = true
+			break
+		if not Fishing.is_casting(fishing):
+			break
+	expect(bit, "a bite on the line puts a ! up")
+
+	# A crop coming ready near enough to see.
+	var field := State.create(109104)
+	var soil := Farm.cells_of(field, Farm.Terrain.SOIL)
+	_stand_the_farmer(field, soil[0])
+	var near := Player.cell(field)
+	for found in soil:
+		if Grid.manhattan(found, near) > 4:
+			continue
+		Farming.select_seed(field, StringName(Farming.seeds()[0]))
+		Farming.act(field, found)
+		Farming.act(field, found)
+	var noted := false
+	for _i in 12000:
+		Sim.advance(field, 1)
+		if Reactions.now(field) == &"note":
+			noted = true
+			break
+		if int(field["phase"]) != Phases.DAY:
+			break
+	expect(noted, "a crop coming ready nearby puts a note up")
+
+	# **And a far one does not.** Without this the check above passes for a
+	# reaction that fires on every crop on the farm, which is the version
+	# the requirement says no to.
+	var far := State.create(109104)
+	var far_soil := Farm.cells_of(far, Farm.Terrain.SOIL)
+	_stand_the_farmer(far, far_soil[0])
+	var home := Player.cell(far)
+	var sown_far := 0
+	for found in far_soil:
+		if Grid.manhattan(found, home) <= GameData.REACTION_NEAR + 2:
+			continue
+		Farming.select_seed(far, StringName(Farming.seeds()[0]))
+		Farming.act(far, found)
+		Farming.act(far, found)
+		sown_far += 1
+	var far_noted := false
+	for _i in 12000:
+		Sim.advance(far, 1)
+		if Reactions.now(far) == &"note":
+			far_noted = true
+			break
+		if int(far["phase"]) != Phases.DAY:
+			break
+	expect(sown_far > 0, "there is a crop on the far side of the farm",
+		str(sown_far))
+	expect(not far_noted,
+		"and one coming ready over there does not")
+
+	# The night arriving, and something coming down during it.
+	var night := State.create(109105)
+	Resources.gain(night, {GameData.WOOD: 900, GameData.STONE: 900})
+	for y in range(3, 14):
+		Building.place(night, &"fence", Vector2i(30, y))
+	Phases.begin_preparation(night)
+	var announced := false
+	for _i in 2000:
+		Sim.advance(night, 1)
+		if int(night["phase"]) == Phases.NIGHT \
+				and Reactions.now(night) == &"bang":
+			announced = true
+			break
+	expect(announced, "the night arriving puts a ! up")
+
+	for i in 40:
+		Enemies.spawn(night, &"walker", i % GameData.SPAWNS.size())
+	var mourned := false
+	var wrong_one := &""
+	for _i in 6000:
+		Sim.advance(night, 1)
+		var up := Reactions.now(night)
+		if up == &"question":
+			mourned = true
+			break
+		# **Nothing during a wave except damage.** A music note while the
+		# house burns is the wrong game, and this is where that is checked
+		# rather than promised.
+		if up == &"note" or up == &"heart":
+			wrong_one = up
+			break
+		if int(night["phase"]) != Phases.NIGHT:
+			break
+	expect(mourned, "something of yours coming down puts a ? up")
+	expect(wrong_one == &"",
+		"and nothing cheerful happens during a wave", String(wrong_one))
+	_completed += 1
+
+
+## Put the farmer on a tile, for a check that needs them somewhere.
+func _stand_the_farmer(state: Dictionary, cell: Vector2i) -> void:
+	var mine: Dictionary = state["player"]
+	mine["pos"] = [cell.x * Player.SUBTILE + Player.SUBTILE / 2,
+		cell.y * Player.SUBTILE + Player.SUBTILE / 2]
 
 
 func _finish() -> void:
@@ -13624,11 +13862,12 @@ func _task_0082_shots() -> void:
 			names.append(parts[1])
 			screens.append(parts[5])
 
-	# **Seven: task 0082's five, and one per options tab.** A counted
-	# constant, kept on purpose for the same reason the audio group counts
-	# its settings: a scenario arriving without anybody deciding to add one
-	# should be a failing row rather than an extra picture nobody looks at.
-	expect(names.size() == 10,
+	# **Eleven: task 0082's five, one per options tab, the pause menu, and
+	# task 0109's reaction.** A counted constant, kept on purpose for the
+	# same reason the audio group counts its settings: a scenario arriving
+	# without anybody deciding to add one should be a failing row rather
+	# than an extra picture nobody looks at.
+	expect(names.size() == 11,
 		"the five scenarios task 0082 names, and one per options tab",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",

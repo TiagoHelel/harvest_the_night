@@ -10000,3 +10000,109 @@ Both unchanged: **sim `1961000123`**, **data `407837701`**. Nothing outside
 
 `python tools/verify.py` prints PASS: 6324 asserts, 978 input cases, 0 failed,
 23 rows, no skips, 235 seconds.
+
+## 0109 - The character reacts - done 2026-09-29
+
+Four bubbles over the farmer's head, for four moments the game already had.
+`src/core/reactions.gd` decides which and for how long, `src/ui/player_view.gd`
+draws it, and **both determinism hashes are unchanged**.
+
+    a bite on the line              !
+    a crop coming ready nearby      a note
+    something of yours coming down  ?
+    the night arriving              !
+
+### It is a fact in the state and it is still decoration
+
+Those sound like opposites. It is **in the state** so that the autoplayer, a
+replay and a screenshot see the same bubble on the same tick - a view that
+invented them frame to frame would show a different one whenever the frame
+rate moved, which is the bug task 0090 wrote the event log to avoid. It is
+**decoration** because nothing reads it.
+
+The done-when is that turning every reaction off leaves the determinism hash
+unchanged, and the honest way to get that is not to be careful - it is for
+the hash never to have looked. `State.NOT_THE_GAME` is a list of keys
+`hash_of` skips, and it has exactly one thing in it.
+
+That is a load-bearing exclusion, so it is guarded: `headless_check` greps
+`src/core/` and fails if anything outside `reactions.gd` so much as mentions
+the key, with one allowance for the single line in `sim.gd` that ticks it.
+Planting a read of it in `farm.gd` fails that row.
+
+And the pair of runs is compared directly - one with reactions, one with them
+cleared every tick - which has to come out at the same hash and the same
+wood. **That assert passed for nothing the first time.** With the exclusion
+taken out to watch it fail, it still passed, because the scenario never
+raised a reaction at all. It now sows a field next to the farmer and counts
+the bubbles, and asserts there was at least one before comparing anything.
+
+### The exclamation mark was not on the sheet, as far as the cutter knew
+
+Task 0073's cutter finds frames by looking for runs of opaque columns. A
+bubble is a glyph **beside** the farmer rather than part of them, and `!` is
+a twelve pixel run of its own - narrower than anything the column pass will
+call a frame. So it was dropped, and the pose came out as a farmer with
+nothing over their head.
+
+Checked across the whole sheet before touching anything: it is the only run
+this happens to. So the reaction row is cut by explicit x ranges, which is
+the same kind of data the module already holds - "what the tool cannot know
+is which pose is which" - rather than by loosening a rule that is right in
+every other band.
+
+The heart is cut and unused. The star and the lightbulb further along that
+row are drawn touching their neighbours and are **not cut**, because nothing
+asks for them and a frame nobody loads is a frame nobody notices has broken.
+
+### Two things the pictures decided
+
+**The farmer turns to face you.** All four drawings face the viewer, so a
+reaction over an idle pose turns them south for a second and a half. The
+alternative was showing the bubble only when they already faced south, which
+is a feature that works a quarter of the time. It reads as looking up, which
+is what the moment is.
+
+**And it only happens over an idle pose.** A farmer mid-swing with a music
+note over their head is two things at once and reads as neither, so a bubble
+waits for the work to finish - and if it runs out first it is simply not
+shown, because the moment it was about has passed.
+
+### The screenshot came back with no bubble in it
+
+`shot.gd` settles thirty frames of the running game before the shutter, so
+the view has something to have noticed - task 0088's lesson. A reaction lasts
+forty-five ticks, which is less than that, so it came and went during the
+settle and the picture was a farmer standing in a field.
+
+Which is the feature working. There is a `_just_before_the_shutter()` step
+now for anything shorter than the settle, and
+`implementation/shots/0109/react.png` has the note in it.
+
+### Task 0102's rule caught me
+
+Adding `Reactions.tick()` to `Sim.tick()` failed this immediately:
+
+    FAIL  every system the sim ticks is one the benchmark times
+          missing: ["Reactions"]
+
+Which is exactly what that check was written for at task 0102 and the first
+time it has fired on a real omission. `PerfNames` has it now, in both lists,
+and the baseline moved: **`night_reactions` 7us, `day_reactions` 5us**
+against a night tick of 1050. `night_tick` 1044 -> 1050 and a handful of
+one-microsecond wobbles, all inside the noise the tolerance was measured
+for.
+
+### Hashes
+
+Both unchanged: **sim `1961000123`**, **data `407837701`**.
+
+The reaction levers are in `game_data.gd` with `# LEVER` on them as the house
+rules ask, and they are **not** in `GameData.digest()`, which is the balance
+hash: how long a bubble stays up is not a number that changes how the game
+plays, and putting it in the balance guard would mean a designer could not
+shorten it without moving a number that is supposed to mean "the balance
+changed".
+
+`python tools/verify.py` prints PASS: 6363 asserts, 978 input cases, 0 failed,
+23 rows, no skips, 237 seconds.

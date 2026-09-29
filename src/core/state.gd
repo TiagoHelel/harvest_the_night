@@ -35,7 +35,7 @@ const VERSION := 1
 ## it was taken away. Both are mended by looking at a new game.
 const TABLES: Array = [
 	"ability", "build", "gained", "held", "intent", "player", "power",
-	"selected_recipe", "stall", "stats", "tutorial", "wave",
+	"reaction", "selected_recipe", "stall", "stats", "tutorial", "wave",
 ]
 
 ## And the ones whose keys come from playing.
@@ -96,6 +96,7 @@ static func create(seed_value: int) -> Dictionary:
 	_adopt(state, Run.initial(), "Run")
 	_adopt(state, Stats.initial(), "Stats")
 	_adopt(state, Events.initial(), "Events")
+	_adopt(state, Reactions.initial(), "Reactions")
 	return state
 
 
@@ -206,8 +207,33 @@ static func _sorted(from: Dictionary) -> Array:
 	return keys
 
 
+## The keys the hash does not look at.
+##
+## **One, and it is task 0109's bubble.** A reaction is a fact in the state so
+## that the autoplayer and a replay see the same one at the same tick, and it
+## is decoration: nothing reads it, nothing branches on it, and turning every
+## one of them off has to leave this number where it was. The honest way to
+## get that is not to be careful about it - it is for the hash never to have
+## looked.
+##
+## Adding to this list is how a view-layer fact gets to live in the state
+## without being part of the game, and it is not a thing to do lightly:
+## `headless_check` asserts that nothing in `src/core/` outside
+## `reactions.gd` so much as mentions the key.
+const NOT_THE_GAME: Array = ["reaction"]
+
+
 static func hash_of(state: Dictionary) -> int:
-	return _fold(_FNV_OFFSET, state)
+	var mine: Dictionary = state
+	for key in NOT_THE_GAME:
+		if state.has(key):
+			# Copied only when there is something to leave out, because this
+			# runs every few hundred ticks inside the determinism guard.
+			mine = state.duplicate(false)
+			break
+	for key in NOT_THE_GAME:
+		mine.erase(key)
+	return _fold(_FNV_OFFSET, mine)
 
 
 static func _fold(h: int, value: Variant) -> int:

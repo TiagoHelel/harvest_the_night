@@ -40,7 +40,7 @@ is the sort of thing this list exists to say out loud.
 
 ## What it turned out to be
 
-110 tasks over 4 days,  to 2026-09-29. One at a time, each one finished and checked before the next was started.
+111 tasks over 4 days,  to 2026-09-29. One at a time, each one finished and checked before the next was started.
 
 | # | What was built | Finished |
 |---|---|---|
@@ -154,6 +154,7 @@ is the sort of thing this list exists to say out loud.
 | 0106 | The release checklist | 2026-09-28 |
 | 0107 | Store assets | 2026-09-28 |
 | 0108 | The devlog and a trailer clip | 2026-09-29 |
+| 0109 | The character reacts | 2026-09-29 |
 
 ## Every time the game changed underneath itself
 

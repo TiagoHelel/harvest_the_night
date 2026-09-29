@@ -76,6 +76,7 @@ const SCENARIOS: Array = [
 	["options_video", "the video tab", "OptionsScreen:video"],
 	["options_audio", "the audio tab", "OptionsScreen:audio"],
 	["options_controls", "the controls tab", "OptionsScreen:controls"],
+	["react", "a crop came ready nearby", ""],
 ]
 
 var _written := 0
@@ -609,6 +610,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"options_video": _set_options_video(state)
 		"options_audio": _set_options_audio(state)
 		"options_controls": _set_options_controls(state)
+		"react": _set_react(state)
 
 	_walk_to(state, _standing_at)
 	main.get_node("%WorldView").look_at_cell(Player.cell(state))
@@ -626,6 +628,8 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		# A fixed number of ticks a frame, so two runs still tick identically.
 		Sim.advance(state, STIR_TICKS)
 		await process_frame
+	_just_before_the_shutter(state, name)
+	await process_frame
 	await RenderingServer.frame_post_draw
 
 	var image := root.get_texture().get_image()
@@ -718,6 +722,34 @@ func _only_showing(main: Node, wanted: String) -> void:
 		screen.visible = named == want_screen
 		if screen.visible and want_tab != "":
 			screen.show_tab(StringName(want_tab))
+
+
+## The last thing before the picture is taken.
+##
+## **For anything that does not last as long as the settle.** The settle runs
+## thirty frames of the game so that the view has something to have noticed -
+## damage numbers, sparks - and task 0109's bubble is up for forty-five ticks,
+## which is less than that. So the scenario that is about a bubble puts it up
+## here, after the stirring and before the shutter.
+##
+## Found by taking the picture: the farmer stood there with nothing over their
+## head, because the reaction had come and gone during the settle. Which is
+## also the feature working - it is meant to be a beat and not a badge.
+func _just_before_the_shutter(state: Dictionary, name: String) -> void:
+	match name:
+		"react": Reactions.show(state, &"note")
+
+
+## The farmer noticing something, task 0109.
+##
+## **Put up by hand rather than waited for.** The moment is real - a crop
+## coming ready within sight - but waiting for one would mean a picture that
+## depends on which tick the shutter falls on, and the whole point of these
+## is that two runs produce the same file.
+func _set_react(state: Dictionary) -> void:
+	_a_sown_field(state)
+	Sim.advance(state, 4 * GameData.SECONDS)
+	_standing_at = Player.cell(state)
 
 
 # ---------------------------------------------------------------- the farms

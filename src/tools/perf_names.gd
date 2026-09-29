@@ -13,11 +13,11 @@ class_name PerfNames
 ## Every system `Sim.tick()` calls during a night, in call order.
 const NIGHT: Array = [
 	&"Power", &"Waves", &"Ability", &"Enemies", &"Traps", &"Towers",
-	&"Combat", &"Building", &"Player",
+	&"Combat", &"Building", &"Player", &"Reactions",
 ]
 
 ## And during a day.
 const DAY: Array = [
 	&"Power", &"Building", &"Farming", &"Gathering", &"Livestock",
-	&"Tutorial", &"Crafting", &"Player",
+	&"Tutorial", &"Crafting", &"Player", &"Reactions",
 ]
