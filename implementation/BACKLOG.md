@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`#######################.`  **105 / 110 done**
+`#######################.`  **106 / 110 done**
 
-0 doing / 5 todo / 0 blocked across 9 phases.
+0 doing / 4 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0106 - The release checklist**. The whole of what is left is
+First up: **0107 - Store assets**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,24 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-5 task(s) left, the ready ones first, then what they
+4 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0106 - The release checklist
-
-Ready to pick up.  Likely files: `implementation/RELEASE.md`.
-
-The list you run before publishing, written once, so nothing is remembered at the wrong moment.
-
-- Every check with its command: verify, exports, save compatibility, the i18n checker, the perf budget, both builds smoke-tested
-- Version bump, changelog, and a tag
-- A known-issues section that is honest
-- A rollback plan in one paragraph
-- Run it once, end to end, and fix what it finds
-
-  - done when: Running the list top to bottom produces a publishable build
-  - done when: The journal records what the first run of it found, because it will find something
 
 ### 0107 - Store assets
 
@@ -230,13 +215,13 @@ The thing that gets people to look: thirty seconds that show the farm, the switc
 - [x] **0100** [Exports: Windows and Web](prompts/0100-exports.md)
 - [ ] **0110** [Refusals in two languages](prompts/0110-refusals.md)
 
-## 8 - Ship the MVP  (5/8)
+## 8 - Ship the MVP  (6/8)
 
 - [x] **0101** [Onboarding in seven lines](prompts/0101-onboarding.md)
 - [x] **0102** [A performance budget](prompts/0102-perf-budget.md)
 - [x] **0103** [Crash and error reporting](prompts/0103-error-report.md)
 - [x] **0104** [Saves survive an update](prompts/0104-save-compat.md)
 - [x] **0105** [A playtest build](prompts/0105-playtest-build.md)
-- [ ] **0106** [The release checklist](prompts/0106-release-checklist.md)
+- [x] **0106** [The release checklist](prompts/0106-release-checklist.md)
 - [ ] **0107** [Store assets](prompts/0107-store-assets.md)
 - [ ] **0108** [The devlog and a trailer clip](prompts/0108-devlog.md) - needs 0107

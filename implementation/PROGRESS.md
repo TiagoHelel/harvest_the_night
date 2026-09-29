@@ -9637,3 +9637,140 @@ task.
 
 `python tools/verify.py` prints PASS: 6261 asserts, 978 input cases, 0 failed,
 21 rows, no skips.
+
+## 0106 - The release checklist - done 2026-09-28
+
+`implementation/RELEASE.md` is the list, `CHANGELOG.md` is what it writes
+into, and the done-when said running it once would find something. It found
+three things, one of them a bug a player could have paid six tech points for.
+
+### The suite's own clock: it got faster, and the number did not move
+
+Carried from task 0103 and named in this prompt: `verify.py` was **322
+seconds against its own `BUDGET_S = 300`**, and the prompt was explicit that
+raising the budget to meet the measurement without saying so is the wrong
+answer.
+
+It is 226 now, and the budget is still 300.
+
+`script parse` was ninety-five of those seconds and almost none of it was
+compiling anything: it ran `--check-only --script` once per file, which is a
+whole Godot process per script, ninety-eight times. `src/tools/parse_check.gd`
+does the same work in one process by loading every `.gd` through
+`ResourceLoader`, in **6.8 seconds**.
+
+Two things had to be found out by trying rather than by reading:
+
+- **A failed parse comes back as a `GDScript` with nothing in it**, not as
+  `null`. A script that compiled knows what it extends; one that did not
+  knows nothing and cannot be instantiated. That predicate was checked
+  against all hundred scripts before it was trusted - every real one passes,
+  including the `class_name`-and-static-functions files nobody instantiates.
+- **`CACHE_MODE_IGNORE` takes the engine down.** It re-runs a script's static
+  initialisers on every load, and doing that to a hundred scripts inside one
+  process ended in an internal error and a C++ backtrace. The default cache
+  is right anyway: a fresh process starts empty, so each script is parsed
+  once, and a dependency that will not parse fails whatever needed it.
+
+Proven against three planted errors - a syntax error, a bad declaration and a
+type error - and the row names the file. It names the files that depend on it
+too, with a line saying so, because the list is always longer than the
+mistake.
+
+### What the first run found: two tech nodes that did nothing
+
+**This is the one that matters.** While writing the known-issues section I
+went to check a sentence I had written into `docs/PLAYTEST.md` at task 0105 -
+"the tech tree past the first two rows, some of it is not wired up" - which
+I had guessed at. An honest known-issues list cannot contain guesses, so I
+checked it: every `gives` key in `TECH_TREE`, against everything in `src/`
+that reads it.
+
+    nodes: 12, effect keys: 12, distinct: 12
+    effects nothing outside game_data reads: ['craft_percent', 'sell_percent']
+
+**"Steady hands"** costs four points and says *the workshop, press and
+kitchen work a third faster*. **"A name at market"** costs six - the most
+expensive node in the production branch - and says *everything you sell
+fetches a quarter more*. Both were in the tree with a sentence about what
+they do, and nothing anywhere read either of them. A player could spend ten
+points on two placebos.
+
+Both are wired now: the craft tech comes off the recipe before the brownout
+is applied to what is left, and `Shop.paid_for()` is one function so that
+selling one and selling all cannot disagree. **Neither hash moved** - with no
+tech owned the multiplier is exactly 100/100, which is the arithmetic the
+determinism guard does.
+
+And the general rule is a check, so it cannot happen to a thirteenth node:
+**every key in every node's `gives` is read by something in `src/core/`**, and
+every node has a sentence saying what it does. Planted the placebos back to
+watch it fail:
+
+    FAIL  every tech node's effect is read by something
+          ["steady hands gives craft_percent, which nothing reads",
+           "a name at market gives sell_percent, which nothing reads"]
+    FAIL  steady hands actually makes the workshop faster  179 ticks against 179
+    FAIL  a name at market actually pays more  80 against 80
+
+The two "actually" asserts are there because a rule about what the source
+mentions is not a rule about what the game does. One of them would pass if
+the effect were read and then multiplied by one.
+
+### And two things in `release.py` itself
+
+Both from running step 7, which is the playtest build.
+
+**The boot check only ever looked at `build/windows`.** So `--playtest` - the
+one build that goes to somebody who is not you - was the only build nothing
+ever started. It boots whatever Windows build was made now.
+
+**The last line said the wrong folder.** `RELEASED build/windows and
+build/web`, printed verbatim after a run that wrote `build/playtest`. It
+names what it actually built.
+
+### Step 8 is the one step not run
+
+The list ends with a tag and a push. I did not make the tag. `v0.1.0` asserts
+that 0.1.0 is the thing that went out, and nothing is going out today - the
+store page is task 0107 and the trailer is 0109. A tag claiming a release
+that did not happen is worse than no tag, and the changelog says
+`unreleased` for the same reason.
+
+Everything above it ran for real: the suite, the goldens, the version and the
+changelog, both shipping builds, the packs, the byte-for-byte comparison of
+the two, the size budget, the boot, and the playtest build with its note
+beside it.
+
+    RELEASED  build/web, build/windows
+    total on the wire   12.04 MB     budget 13.00 MB
+
+**Step 6 is a human step** and is written as one: five minutes with each
+build, by hand, with six things to do in order. Nothing automates "does it
+feel like it works", and a checklist that pretended otherwise would be a
+checklist somebody skips.
+
+### The known-issues section names five things and one of them is owed
+
+Written to be read by somebody deciding whether to publish, so it says the
+awkward one first: **nobody has watched a first-time player through day one**,
+which task 0101 could not do, task 0105 built the build and the reader for,
+and which is an hour of somebody's time that has not been spent. The other
+four are the twenty-seven English strings still in `src/core/` (task 0110),
+the web build's size being a gzipped number, the tech tree being checked
+rather than balanced, and endless mode being unplayed.
+
+The rollback paragraph is short because the game is a folder with no server
+behind it - and it ends on the one thing a player would actually notice:
+somebody who opens the newer build and then goes back will find their run
+**refused rather than eaten**, with the save still on disk, because task
+0104's migrations only run forward.
+
+### Hashes
+
+Both unchanged: **sim `1961000123`**, **data `407837701`**. The two tech
+fixes change what a player with those nodes gets and change nothing for a
+player without them, which is what the guard scenario is.
+
+`python tools/verify.py` prints PASS: 6290 asserts, 978 input cases, 0 failed,
+21 rows, no skips, **226 seconds against a budget of 300**.

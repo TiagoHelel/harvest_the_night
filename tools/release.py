@@ -295,6 +295,7 @@ def main():
     stamp(when)
     print("  stamped    %s" % when)
 
+    built = []
     for name, platform, path, _exclude in presets():
         if (name == PLAYTEST_PRESET) != playtest:
             continue
@@ -305,6 +306,7 @@ def main():
         if code != 0 or not os.path.exists(dest):
             print("  FAIL  %s: %s" % (name, out.strip()[-300:]))
             return 1
+        built.append((name, path))
         print("  built      %-16s %s" % (name, path))
         if name == PLAYTEST_PRESET:
             note = os.path.join(ROOT, "docs", "PLAYTEST.md")
@@ -335,17 +337,25 @@ def main():
     # scene and the backdrop farm behind it, and exits. It is not a full
     # night - the autoplayer is excluded from the pack on purpose - but it is
     # the difference between "the file was written" and "the file runs".
-    exe = os.path.join(BUILD, "windows", "HarvestTheNight.exe")
-    if os.path.exists(exe):
+    #
+    # **Whichever Windows build was made**, not `build/windows` by name. The
+    # first version looked there and nowhere else, so `--playtest` - the one
+    # build that goes to somebody who is not you - was the only one nothing
+    # ever started. Found by running this list top to bottom, which is what
+    # a list is for.
+    for made in built:
+        exe = os.path.join(ROOT, *made[1].split("/"))
+        if not exe.endswith(".exe") or not os.path.exists(exe):
+            continue
         code, out = run([exe, "--headless", "--quit-after", "400"],
                         timeout=180)
         noisy = [l for l in out.splitlines()
                  if "ERROR" in l or "SCRIPT ERROR" in l]
         if code != 0 or noisy:
-            print("  FAIL  the windows build did not boot cleanly: %s"
-                  % (noisy[0] if noisy else "exit %d" % code))
+            print("  FAIL  %s did not boot cleanly: %s"
+                  % (made[0], noisy[0] if noisy else "exit %d" % code))
             return 1
-        print("  boots      %-16s 400 frames, no errors" % "Windows Desktop")
+        print("  boots      %-16s 400 frames, no errors" % made[0])
 
     # **The two builds are the same game, file by file.** The determinism
     # hash is a property of the rules and the tables, and both of these
@@ -405,8 +415,13 @@ def main():
                   % human(pack - PACK_BUDGET))
             return 1
 
+    if not built:
+        print("")
+        print("FAIL  no preset matched, so nothing was built")
+        return 1
     print("")
-    print("RELEASED  build/windows and build/web")
+    print("RELEASED  %s" % ", ".join(
+        sorted(set(os.path.dirname(p) for _n, p in built))))
     return 0
 
 

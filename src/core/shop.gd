@@ -129,6 +129,20 @@ static func sell_price(id: StringName) -> int:
 	return int(GameData.SELL_PRICE.get(id, 0))
 
 
+## What a sale actually pays: the stall's price, and whatever the tech tree
+## has to say about it.
+##
+## **`sell_percent` was declared and read by nothing.** "A name at market"
+## costs six points - the most expensive node in the production branch - and
+## says everything you sell fetches a quarter more. It did not, until task
+## 0106's checklist checked every node's effect against what reads it. One
+## function rather than two call sites, so selling one and selling all cannot
+## disagree about the price.
+static func paid_for(state: Dictionary, id: StringName, n: int) -> int:
+	return sell_price(id) * n \
+		* Tech.bonus(state, "sell_percent", 100) / 100
+
+
 ## What the stall charges. Always more than it pays, at every price, rounded up
 ## so that the markup cannot vanish on a cheap item - `headless_check` asserts
 ## the inequality for every sellable thing.
@@ -162,7 +176,7 @@ static func sell(state: Dictionary, id: StringName, n: int) -> int:
 		return 0
 	if not Resources.spend(state, id, n):
 		return 0
-	var paid := sell_price(id) * n
+	var paid := paid_for(state, id, n)
 	Resources.add(state, GameData.MONEY, paid)
 	return paid
 
@@ -204,5 +218,5 @@ static func can_buy(state: Dictionary, id: StringName, n: int = 1) -> bool:
 static func value_of_stock(state: Dictionary) -> int:
 	var total := 0
 	for id in sellable():
-		total += sell_price(id) * Resources.amount(state, id)
+		total += paid_for(state, id, Resources.amount(state, id))
 	return total

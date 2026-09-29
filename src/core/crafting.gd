@@ -323,7 +323,16 @@ static func _begin_front(state: Dictionary, at: Dictionary) -> void:
 		return
 	# The batch is costed when it starts. A brown-out half way through does not
 	# lengthen work already committed - the corn is in the hopper.
-	var ticks := maxi(Power.scaled_ticks(state, int(recipe["ticks"])), 1)
+	# **`craft_percent` was declared and read by nothing.** "Steady hands"
+	# costs four points and says the workshop, press and kitchen work a
+	# third faster; until task 0106's release checklist went looking for
+	# claims it could not back up, it did nothing at all. The tech comes
+	# off the recipe and the brownout is applied to what is left, which is
+	# the order the two happen in: a faster bench still runs slow on a
+	# short supply.
+	var base := int(recipe["ticks"]) * 100 \
+		/ maxi(Tech.bonus(state, "craft_percent", 100), 1)
+	var ticks := maxi(Power.scaled_ticks(state, base), 1)
 	at["left"] = ticks
 	at["total"] = ticks
 

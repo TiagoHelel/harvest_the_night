@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 97
+const GROUPS := 98
 
 const SettingsScript := preload("res://src/app/settings.gd")
 const AppScript := preload("res://src/app/app.gd")
@@ -175,6 +175,7 @@ func _run() -> void:
 	_task_0103_crash()
 	_task_0104_saves()
 	_task_0105_playtest()
+	_task_0106_release()
 
 
 ## 0102 - the performance budget.
@@ -1007,6 +1008,127 @@ func _empty_the_playtest_folder() -> void:
 		return
 	for name in at.get_files():
 		at.remove(name)
+
+
+## 0106 - the release checklist.
+func _task_0106_release() -> void:
+	# **Every tech node does what it says.** The release checklist's first
+	# run found two that did not: `craft_percent` and `sell_percent` were
+	# written into `TECH_TREE` with a sentence each about what they do, and
+	# nothing anywhere read either of them. A player could spend four points
+	# on "steady hands" and six on "a name at market" - the most expensive
+	# node in its branch - and get a placebo.
+	#
+	# The general rule, so it cannot happen again to a thirteenth node: an
+	# effect nobody reads is a promise the game does not keep.
+	var unread: Array = []
+	for one in GameData.TECH_TREE:
+		var node: Dictionary = one
+		var gives: Dictionary = node.get("gives", {})
+		var keys: Array = []
+		for key in gives:
+			keys.append(str(key))
+		keys.sort()
+		for key in keys:
+			if _no_core_code_reads(String(key)):
+				unread.append("%s gives %s, which nothing reads"
+					% [String(node.get("id", &"?")), String(key)])
+	expect(unread.is_empty(),
+		"every tech node's effect is read by something", str(unread))
+
+	# And each node says what it does, in a sentence somebody wrote.
+	for one in GameData.TECH_TREE:
+		var node: Dictionary = one
+		expect(String(node.get("note", "")).length() > 8,
+			"%s says what it does" % String(node.get("id", &"?")),
+			String(node.get("note", "")))
+
+	# ----------------------------------------- the two that were placebos
+
+	# **Measured, not assumed to be wired now.** The fix is a line in two
+	# files; whether it does anything is a different question, and it is the
+	# question the last twelve hours of this task were about.
+	var slow := State.create(106001)
+	Resources.gain(slow, {GameData.WOOD: 600, GameData.STONE: 600,
+		GameData.IRON: 300})
+	var bench := Building.anchor_of(slow,
+		Farm.cells_with(slow, &"workshop")[0])
+	Crafting.enqueue(slow, bench, &"barricade_kit")
+	Sim.advance(slow, 1)
+	var slow_left := _ticks_left_at(slow, bench)
+
+	var quick := State.create(106001)
+	Resources.gain(quick, {GameData.WOOD: 600, GameData.STONE: 600,
+		GameData.IRON: 300})
+	(quick["tech_owned"] as Array).append(&"steady hands")
+	Crafting.enqueue(quick, bench, &"barricade_kit")
+	Sim.advance(quick, 1)
+	var quick_left := _ticks_left_at(quick, bench)
+	expect(slow_left > 0 and quick_left > 0,
+		"a craft is running in both", "%d and %d" % [slow_left, quick_left])
+	expect(quick_left < slow_left,
+		"steady hands actually makes the workshop faster",
+		"%d ticks against %d" % [quick_left, slow_left])
+
+	var plain := State.create(106002)
+	var market := State.create(106002)
+	(market["tech_owned"] as Array).append(&"a name at market")
+	Resources.gain(plain, {GameData.WOOD: 40})
+	Resources.gain(market, {GameData.WOOD: 40})
+	var plain_paid := Shop.paid_for(plain, GameData.WOOD, 40)
+	var market_paid := Shop.paid_for(market, GameData.WOOD, 40)
+	expect(plain_paid > 0, "wood sells for something", str(plain_paid))
+	expect(market_paid > plain_paid,
+		"a name at market actually pays more",
+		"%d against %d" % [market_paid, plain_paid])
+
+	# **And nobody who owns nothing is affected**, which is the half that
+	# would let this change the determinism guard by accident.
+	expect(Shop.paid_for(plain, GameData.WOOD, 40)
+		== Shop.sell_price(GameData.WOOD) * 40,
+		"and a player with no tech is paid exactly the stall's price")
+
+	# ------------------------------------------------------ the checklist
+
+	expect(FileAccess.file_exists("res://implementation/RELEASE.md"),
+		"there is a release checklist")
+	var list_text := FileAccess.get_file_as_string(
+		"res://implementation/RELEASE.md")
+	for command in ["tools/verify.py", "tools/release.py", "tools/perf.py",
+		"tools/i18n_check.py", "tools/playtest.py"]:
+		expect(list_text.contains(command),
+			"and it names %s" % command)
+	for heading in ["Known issues", "Rollback", "The version"]:
+		expect(list_text.contains(heading),
+			"and it has a '%s' section" % heading)
+
+	# **The changelog has this version in it.** A version bump with no line
+	# about what changed is a tag nobody can read afterwards.
+	expect(FileAccess.file_exists("res://CHANGELOG.md"),
+		"there is a changelog")
+	var log_text := FileAccess.get_file_as_string("res://CHANGELOG.md")
+	expect(log_text.contains(BuildInfo.VERSION),
+		"with a section for the version this build is",
+		BuildInfo.VERSION)
+	_completed += 1
+
+
+## How many ticks the craft at `where` has left, or 0.
+func _ticks_left_at(state: Dictionary, where: Vector2i) -> int:
+	var benches: Dictionary = state["crafting"]
+	var at: Dictionary = benches.get(Grid.index(where), {})
+	return int(at.get("left", 0))
+
+
+## Nothing in `src/core/` outside the table itself reads this name.
+func _no_core_code_reads(needle: String) -> bool:
+	for name in DirAccess.get_files_at("res://src/core"):
+		if not String(name).ends_with(".gd") or String(name) == "game_data.gd":
+			continue
+		if _code_lines_of("res://src/core/".path_join(String(name))) \
+				.contains(needle):
+			return false
+	return true
 
 
 func _finish() -> void:

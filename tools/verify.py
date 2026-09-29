@@ -330,34 +330,37 @@ def check_core_is_pure():
 
 
 def check_scripts_parse():
-    """Every .gd in the project, parsed.
+    """Every .gd in the project, parsed, in one Godot process.
 
     `--import` does NOT do this: it imports resources and exits 0 with a script
-    full of parse errors sitting next to it - measured, not assumed. Only
-    `--check-only --script` actually compiles one, and it exits 1 when it
-    cannot. Catching a parse error here means the tool scripts below never get
-    the chance to half-run, which is the failure mode that hangs a loop."""
+    full of parse errors sitting next to it - measured, not assumed. Catching a
+    parse error here means the tool scripts below never get the chance to
+    half-run, which is the failure mode that hangs a loop.
+
+    **This used to be `--check-only --script` once per file**, which is one
+    whole Godot process per script: ninety-eight of them, ninety-five seconds,
+    almost none of it compiling anything. `src/tools/parse_check.gd` does the
+    same work in one process in eight, and task 0106 checked it against three
+    planted errors - a syntax error, a bad declaration and a type error -
+    before the loop was taken out. That is eighty-seven seconds off a suite
+    that was twenty-two over its own budget."""
     if not os.path.exists(rel("project.godot")) or not os.path.exists(GODOT):
         return skip("script parse", "no project yet")
-    bad = []
-    count = 0
-    for dirpath, dirnames, filenames in os.walk(ROOT):
-        dirnames[:] = [d for d in dirnames
-                       if d not in (".godot", ".git", "build", "__pycache__")]
-        for f in sorted(filenames):
-            if not f.endswith(".gd"):
-                continue
-            res = "res://" + os.path.relpath(
-                os.path.join(dirpath, f), ROOT).replace("\\", "/")
-            count += 1
-            code, out = godot(["--headless", "--check-only", "--script", res],
-                              timeout=60)
-            if code != 0:
-                first = next((l for l in out.splitlines()
-                              if "Error" in l or "error" in l), "")
-                bad.append("%s %s" % (res, first.strip()[:160]))
-    return check("script parse", not bad,
-                 ("%d scripts" % count) if not bad else "; ".join(bad)[:400])
+    if not os.path.exists(rel("src", "tools", "parse_check.gd")):
+        return skip("script parse", "no parse check yet - task 0106")
+    code, out = godot(["--headless", "--script",
+                       "res://src/tools/parse_check.gd"], timeout=180)
+    verdict = next((l for l in out.splitlines()
+                    if l.startswith("PARSED ")), "")
+    if code == 0:
+        return check("script parse", True, verdict.strip())
+    # Only the named files: the tool also prints a sentence explaining that
+    # the list is longer than the mistake, and that sentence contains the
+    # same words the filter is looking for.
+    bad = [l.strip() for l in out.splitlines()
+           if l.strip().startswith("res://")]
+    return check("script parse", False,
+                 "; ".join(bad)[:400] if bad else tail(out, 4))
 
 
 # A Godot tool script that errors before its final quit() does not exit: the

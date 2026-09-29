@@ -1,7 +1,7 @@
 # 0106 - The release checklist
 
 - **Phase:** 8 - Ship the MVP
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0105, 0099
 - **Likely files:** implementation/RELEASE.md
 
