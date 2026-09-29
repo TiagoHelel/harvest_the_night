@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 96
+const GROUPS := 97
 
 const SettingsScript := preload("res://src/app/settings.gd")
 const AppScript := preload("res://src/app/app.gd")
@@ -174,6 +174,7 @@ func _run() -> void:
 	_task_0102_budget()
 	_task_0103_crash()
 	_task_0104_saves()
+	_task_0105_playtest()
 
 
 ## 0102 - the performance budget.
@@ -428,8 +429,13 @@ func _task_0103_crash() -> void:
 	# **Nowhere for a name to get in.** The other half of the promise: the
 	# game has no text field anywhere, so the run is numbers and there is
 	# nothing to leak even if the scrubber were wrong.
+	# **The code, not the prose**, for the same reason the `Save.` grep
+	# above reads code: task 0105's `playtest.gd` explains in its own doc
+	# comment why the note key leaves a number instead of opening a
+	# `LineEdit`, and a check that fails on the sentence stating the rule
+	# teaches people to stop stating it. A comment cannot draw a text box.
 	for widget in ["LineEdit", "TextEdit", "CodeEdit"]:
-		expect(_nothing_in_src_says(widget),
+		expect(_no_code_in_src_says(widget),
 			"the game never asks anybody to type: no %s" % widget)
 	expect(text.contains("WHAT IS IN IT") and text.contains("WHAT IS NOT"),
 		"and the report says what is in it and what is not")
@@ -488,6 +494,19 @@ func _task_0103_crash() -> void:
 	_clear_crash_folder()
 	Save.delete_run()
 	_completed += 1
+
+
+## Nothing under `src/` **runs** this. Comments are allowed to name it, and
+## have to be: the rule is worth writing down where it is kept.
+func _no_code_in_src_says(needle: String) -> bool:
+	for folder in ["res://src/core", "res://src/app", "res://src/ui"]:
+		for name in DirAccess.get_files_at(folder):
+			if not String(name).ends_with(".gd"):
+				continue
+			if _code_lines_of(String(folder).path_join(String(name))) \
+					.contains(needle):
+				return false
+	return true
 
 
 ## Nothing under `src/` mentions this, comments included - a commented-out
@@ -828,6 +847,166 @@ func _payload_of(path: String) -> Dictionary:
 		return {}
 	var value: Variant = bytes_to_var(raw.slice(16))
 	return value if value is Dictionary else {}
+
+
+## 0105 - the playtest build.
+func _task_0105_playtest() -> void:
+	# **Off is the default and off means nothing happens.** A shipping build
+	# carries this code; it must not open a file, make a folder or write a
+	# line because somebody started a run.
+	Playtest.force(false)
+	expect(not Playtest.is_on(), "a normal build is not a playtest build")
+	var state := State.create(105001)
+	expect(Playtest.begin(state) == "",
+		"and starting a run in one writes no session")
+	expect(Playtest.note() == 0, "and the note key does nothing")
+	expect(not Playtest.running(), "because there is no session to be in")
+
+	# ------------------------------------------------------- and on is on
+
+	Playtest.force(true)
+	_empty_the_playtest_folder()
+	expect(Playtest.is_on(), "a playtest build says it is one")
+
+	var path := Playtest.begin(state)
+	expect(path != "", "starting a run opens a session log", path)
+	expect(path.begins_with(Playtest.DIR),
+		"under user://playtest/", path)
+	expect(Playtest.running(), "and the session is open")
+
+	# Play it: a day, the night sent for, the night fought.
+	Resources.gain(state, {GameData.WOOD: 400, GameData.STONE: 400,
+		GameData.MONEY: 300})
+	for _i in 30:
+		Sim.advance(state, 30)
+		Playtest.watch(state)
+	# **Somewhere a wall actually fits.** The first version named one cell
+	# and the log came back with nothing built in it - which was the check
+	# proving nothing rather than the game failing to count.
+	var put_down := 0
+	for y in range(3, Grid.HEIGHT - 3):
+		if put_down >= 2:
+			break
+		if Building.place(state, &"wall", Vector2i(20, y)):
+			put_down += 1
+	expect(put_down > 0, "a wall goes down, so there is something to count")
+	Phases.begin_preparation(state)
+	for _i in 20:
+		Sim.advance(state, 30)
+		Playtest.watch(state)
+	var marked := Playtest.note()
+	expect(marked == 1, "the note key leaves the first marker", str(marked))
+	expect(Playtest.note() == 2, "and the next one is the second")
+	for _i in 200:
+		Sim.advance(state, 30)
+		Playtest.watch(state)
+		if int(state["phase"]) != Phases.NIGHT \
+				and int(state["nights_won"]) > 0:
+			break
+
+	var log_text := FileAccess.get_file_as_string(path)
+	expect(log_text != "", "the session log has something in it")
+
+	# **Readable, which is the done-when.** Not "a file exists" - a person
+	# has to be able to open it and see what happened, so the check reads
+	# the things a person would look for.
+	expect(log_text.contains("HARVEST THE NIGHT - playtest log"),
+		"it says what it is")
+	expect(log_text.contains("seed    %d" % int(state["seed"])),
+		"which run it was")
+	expect(log_text.contains(BuildInfo.VERSION), "and which build")
+	expect(log_text.contains("day 1 began"), "how far the days got")
+	expect(log_text.contains("night 1 began"), "that a night happened")
+	expect(log_text.contains("NOTE 1") and log_text.contains("NOTE 2"),
+		"and where the tester put their markers")
+	expect(log_text.contains("sent nowhere"),
+		"and it says out loud that nothing was sent")
+
+	# The four things the task asks a session to record.
+	expect(log_text.contains("wave 1 of"), "the waves are in it")
+	Playtest.run_ended(state, "the check stopped it")
+	log_text = FileAccess.get_file_as_string(path)
+	expect(log_text.contains("the run ended: the check stopped it"),
+		"where the run ended is in it")
+	expect(log_text.contains("reached night"), "how far it got")
+	expect(log_text.contains("wall x%d" % put_down),
+		"and what they built, counted by kind",
+		"looking for wall x%d" % put_down)
+	expect(not Playtest.running(), "and the session is closed")
+
+	# **A clock on every line**, which is what makes "time per day" a
+	# question this can answer at all.
+	var timed := 0
+	for line in log_text.split("\n"):
+		if line.length() > 7 and line.substr(3, 1) == ":":
+			timed += 1
+	expect(timed >= 8, "every line has the time on it", str(timed))
+
+	# ------------------------------------------- a second run is a second log
+
+	# **Back to back, with nothing in between.** The stamp is one per second,
+	# so two `begin`s separated by a night's play land in different seconds
+	# and the check passes whether or not there is a counter - which is what
+	# the first version of this did. Two in a row cannot.
+	var first := Playtest.begin(State.create(105002))
+	var second := Playtest.begin(State.create(105003))
+	expect(first != "" and second != "" and first != second,
+		"two runs in the same second are two sessions",
+		"%s and %s" % [first, second])
+	Playtest.end_session("the check stopped it")
+	expect(Playtest.sessions().size() >= 3,
+		"and the folder keeps every one of them",
+		str(Playtest.sessions().size()))
+
+	# ------------------------------------------------- nothing is ever sent
+
+	# The same grep task 0103 wrote, over the file that logs how somebody
+	# played. If anything ever wanted to phone home it would be this.
+	var source := _code_lines_of("res://src/app/playtest.gd")
+	for way in ["HTTPRequest", "HTTPClient", "WebSocketPeer", "OS.execute"]:
+		expect(not source.contains(way),
+			"nothing in playtest.gd can %s" % way)
+
+	# **And no text box, still.** The note key leaves a number rather than
+	# asking for a sentence, which is what keeps task 0103's promise true by
+	# construction: there is nowhere in this game for a name to get in.
+	expect(not source.contains("LineEdit"),
+		"the note key does not open a text box")
+
+	# ------------------------------------------ the build says it is one
+
+	expect(FileAccess.file_exists("res://docs/PLAYTEST.md"),
+		"there is a note for the tester")
+	var note_text := FileAccess.get_file_as_string("res://docs/PLAYTEST.md")
+	expect(note_text.contains(OS.get_keycode_string(Playtest.NOTE_KEY)),
+		"and it names the key that leaves a note")
+	for heading in ["What to try", "What to ignore", "What to report"]:
+		expect(note_text.contains(heading),
+			"and it says '%s'" % heading.to_lower())
+
+	var presets := FileAccess.get_file_as_string("res://export_presets.cfg")
+	expect(presets.contains('custom_features="%s"' % Playtest.FLAG),
+		"an export preset turns the flag on")
+	expect(presets.contains('name="Windows Playtest"'),
+		"and it is its own build rather than a switch in the shipping one")
+	var release := _code_lines_of("res://tools/release.py")
+	expect(release.contains("PLAYTEST_PRESET"),
+		"and release.py knows to leave it out unless it is asked for")
+
+	_empty_the_playtest_folder()
+	Playtest.force(false)
+	_completed += 1
+
+
+## Leave `user://playtest/` as it was found: empty.
+func _empty_the_playtest_folder() -> void:
+	if not DirAccess.dir_exists_absolute(Playtest.DIR):
+		return
+	var at := DirAccess.open(Playtest.DIR)
+	if at == null:
+		return
+	for name in at.get_files():
+		at.remove(name)
 
 
 func _finish() -> void:
@@ -15441,7 +15620,11 @@ func _task_0100_release() -> void:
 "):
 		if line.begins_with("exclude_filter="):
 			filters.append(line)
-	expect(filters.size() == 2, "both presets have an exclude filter",
+	# **Three since task 0105**: Windows, Web, and the same Windows build
+	# with the playtest feature on it. Counted rather than "one or more",
+	# for the reason the audio group counts its settings - a preset arriving
+	# without anybody deciding to add one is a build nobody meant to ship.
+	expect(filters.size() == 3, "every preset has an exclude filter",
 		str(filters.size()))
 	for folder in ["implementation", "tools", "docs", "build"]:
 		var missing := 0

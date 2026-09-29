@@ -1,6 +1,7 @@
-[gd_scene load_steps=21 format=3]
+[gd_scene load_steps=22 format=3]
 
 [ext_resource type="Script" path="res://src/ui/main.gd" id="1_main"]
+[ext_resource type="Script" path="res://src/ui/playtest_badge.gd" id="19_playtest"]
 [ext_resource type="Script" path="res://src/ui/sim_driver.gd" id="2_driver"]
 [ext_resource type="Script" path="res://src/ui/debug_overlay.gd" id="3_debug"]
 [ext_resource type="PackedScene" path="res://scenes/World.tscn" id="4_world"]
@@ -239,3 +240,14 @@ script = ExtResource("2_driver")
 [node name="DebugOverlay" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
 script = ExtResource("3_debug")
+
+[node name="PlaytestBadge" type="Control" parent="UI/Screen"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("19_playtest")

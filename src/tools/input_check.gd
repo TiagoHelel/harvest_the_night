@@ -41,7 +41,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 59
+const CASES := 60
 
 ## The pixels two pieces of text in one row must have between them. Two is
 ## the width of the gap inside a letter at this size, so anything less reads
@@ -140,6 +140,7 @@ func _run() -> void:
 	await _case_0100_version()
 	await _case_0103_crash()
 	await _case_0104_saves()
+	await _case_0105_playtest()
 	_finish()
 
 
@@ -341,6 +342,127 @@ func _case_0104_saves() -> void:
 
 	Save.delete_run()
 	_completed += 1
+
+
+## 0105 - the playtest badge and the key that leaves a note.
+func _case_0105_playtest() -> void:
+	_forget_any_loaded_scene()
+
+	# **Off first.** The badge is in the run scene of every build, including
+	# the one people will buy, and in that one it has to be nothing at all.
+	Playtest.force(false)
+	await open_scene(MAIN_SCENE)
+	await frames(4)
+	var badge: PlaytestBadge = locate_control("PlaytestBadge") as PlaytestBadge
+	expect(badge != null, "the run scene has the badge on it")
+	expect(badge == null or not badge.visible,
+		"and in a normal build it is not drawn")
+	await tap_key(KEY_F1)
+	await frames(2)
+	expect(not Playtest.running(),
+		"and the note key does nothing, because there is no session")
+	await close_scene()
+
+	# ---------------------------------------------------------- and on
+
+	Playtest.force(true)
+	_forget_any_loaded_scene()
+	await open_scene(MAIN_SCENE)
+	await frames(6)
+	badge = locate_control("PlaytestBadge") as PlaytestBadge
+	expect(badge != null and badge.visible,
+		"a playtest build says so on the screen")
+	if badge == null:
+		Playtest.force(false)
+		await close_scene()
+		_completed += 1
+		return
+
+	expect(Playtest.running(),
+		"and opening a run opens a session log", Playtest.path())
+	expect(badge.says().contains(OS.get_keycode_string(Playtest.NOTE_KEY)),
+		"the badge names the key that leaves a note", badge.says())
+
+	# **The key, pressed the way a tester presses it.** Not the function
+	# called directly: what is being checked is that the key reaches this
+	# node at all, past a run that is also listening for keys.
+	var path := Playtest.path()
+	await tap_key(KEY_F1)
+	await frames(3)
+	expect(Playtest.notes() == 1, "pressing it leaves a marker",
+		str(Playtest.notes()))
+	expect(badge.says().contains("1"),
+		"and the badge says so, so the tester knows it took",
+		badge.says())
+
+	await tap_key(KEY_F1)
+	await frames(3)
+	expect(Playtest.notes() == 2, "and again is the second one",
+		str(Playtest.notes()))
+
+	var log_text := FileAccess.get_file_as_string(path)
+	expect(log_text.contains("NOTE 1") and log_text.contains("NOTE 2"),
+		"both are in the file rather than only on the screen")
+
+	# **And then it gets out of the way.** It sits over the day HUD's clock
+	# and the night HUD's wave counter, which is only acceptable because it
+	# is not there for long - so how long is the thing to check, and a
+	# picture cannot show twelve seconds passing.
+	badge._process(PlaytestBadge.SHOWN_FOR + 1.0)
+	expect(not badge.visible,
+		"the badge goes away, so the HUD it sits over comes back")
+	expect(Playtest.running(),
+		"and the session carries on without it on the screen")
+	badge.leave_a_note()
+	expect(badge.visible, "a note brings it back to say so")
+	badge._process(PlaytestBadge.SAID_FOR + 1.0)
+	expect(not badge.visible, "and it goes again")
+
+	# **It does not eat the game's own keys.** A tester who cannot play
+	# because the badge swallowed a keystroke is a wasted evening.
+	var driver: SimDriver = _scene.get_node("%SimDriver")
+	var before := int(driver.state["tick"])
+	await tap_key(KEY_B)
+	await frames(3)
+	expect(int(driver.state["tick"]) > before, "and the run carries on")
+
+	await close_scene()
+
+	# **And the title says so permanently**, which is the half the badge
+	# gave up when it started going away. It is the first screen a tester
+	# sees and the one they will be looking at when they wonder which build
+	# they have.
+	_forget_any_loaded_scene()
+	await open_scene("res://scenes/Title.tscn")
+	await frames(3)
+	var version: Label = locate_control("Version") as Label
+	expect(version != null and version.text.contains(
+		I18n.t(&"PLAYTEST_TITLE")),
+		"the title screen says which build this is",
+		version.text if version != null else "")
+	expect(version != null and version.text.contains(BuildInfo.BUILT),
+		"and still says when it was built",
+		version.text if version != null else "")
+	expect(version == null or version.get_global_rect().end.x
+		<= float(root.get_visible_rect().size.x),
+		"with both lines on the screen rather than off the right of it",
+		str(version.get_global_rect()) if version != null else "")
+	await close_scene()
+
+	Playtest.force(false)
+	_empty_the_playtest_folder()
+	_completed += 1
+
+
+## Leave `user://playtest/` as it was found.
+func _empty_the_playtest_folder() -> void:
+	if not DirAccess.dir_exists_absolute(Playtest.DIR):
+		return
+	var at := DirAccess.open(Playtest.DIR)
+	if at == null:
+		return
+	for name in at.get_files():
+		at.remove(name)
 
 
 func _finish() -> void:
@@ -3786,9 +3908,19 @@ func _case_0076_lighting() -> void:
 ## the rules and not the frame rate - and the lights are given frames to draw
 ## in between, which is the whole point: if drawing them touched anything,
 ## this is where it would show.
+##
+## **The driver is stopped, which it was not until task 0105.** It is a live
+## node: left running, it advances the state on its own during every awaited
+## frame, by however many ticks the wall clock says have gone by. So the two
+## runs being compared got the hand-driven ticks *plus* a different number of
+## timed ones each, and the case passed when the two happened to match. It
+## did match, for twenty-eight tasks, until a node added to the run scene
+## moved the frame time enough to stop it matching. A determinism check that
+## can fail on frame timing is worse than no determinism check.
 func _night_with_lights(driver: SimDriver, lights: Lighting,
 		level: int) -> int:
 	driver.start(760076)
+	driver.running = false
 	var state := driver.state
 	lights.set_quality(level)
 	Resources.gain(state, {GameData.WOOD: 400, GameData.IRON: 400,
@@ -3865,6 +3997,8 @@ func _case_0077_particles() -> void:
 func _night_with_particles(driver: SimDriver, bits: Particles,
 		density: float) -> int:
 	driver.start(770077)
+	# Stopped, for the reason written out over `_night_with_lights`.
+	driver.running = false
 	var state := driver.state
 	bits.set_density(density)
 	Resources.gain(state, {GameData.WOOD: 400, GameData.IRON: 400})

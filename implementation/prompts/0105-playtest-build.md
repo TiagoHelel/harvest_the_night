@@ -1,7 +1,7 @@
 # 0105 - A playtest build
 
 - **Phase:** 8 - Ship the MVP
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0100, 0103
 - **Likely files:** tools/playtest.py
 

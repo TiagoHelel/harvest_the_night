@@ -134,6 +134,20 @@ func _wear_version() -> void:
 	_version.text = I18n.f(&"TITLE_BUILD",
 		[BuildInfo.VERSION, BuildInfo.STAGE, BuildInfo.BUILT])
 	_version.theme_type_variation = UiKit.DIM
+	# **Task 0105, and on this line rather than a new one.** A tester needs
+	# to know which build they have before they report the missing content
+	# as a bug; the corner that already says which build this is is where
+	# they will look. Loud rather than dim, because it is the one thing on
+	# the screen that is not true of the game anybody else will play.
+	# **Its own line.** On the same one it ran off the right of the screen
+	# and "built 2026-09-28" came out as "built 2026" - the label is 240
+	# wide and `TITLE_BUILD` already uses most of it. The box is two lines
+	# tall now and the shipping build simply leaves the first one empty.
+	if Playtest.is_on():
+		_version.text = "%s%s%s" % [I18n.t(&"PLAYTEST_TITLE"), "
+",
+			_version.text]
+		_version.theme_type_variation = UiKit.WARN
 
 
 func relabel() -> void:

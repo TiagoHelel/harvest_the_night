@@ -115,6 +115,15 @@ def presets():
     return out
 
 
+## The preset that is the same build with the playtest feature on it.
+##
+## **Not built by default, and not shippable.** It writes session logs about
+## whoever is holding it, which is fine for somebody who agreed to test and
+## is not fine for a stranger who bought it. `--playtest` builds this one and
+## nothing else; every other run of this tool builds everything but.
+PLAYTEST_PRESET = "Windows Playtest"
+
+
 def filters_are_sane():
     """Every preset excludes the four folders, before anything is exported.
 
@@ -233,6 +242,7 @@ def human(n):
 def main():
     args = sys.argv[1:]
     only_check = "--check" in args
+    playtest = "--playtest" in args
 
     print("")
     print("HARVEST THE NIGHT - release")
@@ -244,6 +254,11 @@ def main():
             print("  FAIL  " + line)
         return 1
     print("  filters    every preset excludes %s" % ", ".join(FORBIDDEN))
+    if playtest:
+        print("  flavour    %s, and nothing else" % PLAYTEST_PRESET)
+    else:
+        print("  flavour    the shipping builds, without %s"
+              % PLAYTEST_PRESET)
 
     if only_check:
         print("")
@@ -281,6 +296,8 @@ def main():
     print("  stamped    %s" % when)
 
     for name, platform, path, _exclude in presets():
+        if (name == PLAYTEST_PRESET) != playtest:
+            continue
         dest = os.path.join(ROOT, *path.split("/"))
         os.makedirs(os.path.dirname(dest), exist_ok=True)
         code, out = run([GODOT, "--headless", "--path", ROOT,
@@ -289,6 +306,17 @@ def main():
             print("  FAIL  %s: %s" % (name, out.strip()[-300:]))
             return 1
         print("  built      %-16s %s" % (name, path))
+        if name == PLAYTEST_PRESET:
+            note = os.path.join(ROOT, "docs", "PLAYTEST.md")
+            beside = os.path.join(os.path.dirname(dest), "READ ME FIRST.md")
+            if os.path.exists(note):
+                import shutil
+                shutil.copyfile(note, beside)
+                print("  note       %s" % os.path.basename(beside))
+            else:
+                print("  FAIL  docs/PLAYTEST.md is missing, so the tester"
+                      " would get a build and no instructions")
+                return 1
 
         pack = dest if dest.endswith(".pck") else \
             os.path.splitext(dest)[0] + ".pck"

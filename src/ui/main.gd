@@ -66,6 +66,7 @@ var _router: Node
 @onready var _options: OptionsScreen = %OptionsScreen
 @onready var _player_view: PlayerView = %WorldView/Occupants/PlayerView
 @onready var _driver: SimDriver = %SimDriver
+@onready var _playtest: PlaytestBadge = %PlaytestBadge
 @onready var _debug: CanvasLayer = %DebugOverlay
 
 
@@ -191,6 +192,8 @@ func _hand_out() -> void:
 	# advancing - the same failure, one layer down.
 	Crash.watch(_driver.state)
 	_crumb = 0.0
+	# Task 0105: a new dictionary is a new run, which is a new session log.
+	_playtest.show_state(_driver.state)
 
 	_world.show_state(_driver.state)
 	_player_view.show_state(_driver.state)
@@ -357,3 +360,8 @@ func _drop_a_crumb(delta: float) -> void:
 func _left_on_purpose() -> void:
 	Crash.forget()
 	Crash.clear_mark()
+	# **Which way they left is the finding.** A run that was abandoned and a
+	# run that was lost are two different answers to "where did it end", and
+	# a log that recorded them the same way would be a log that could not
+	# tell you whether the night was too hard or the day was too dull.
+	Playtest.run_ended(_driver.state, "the player left from the pause menu")

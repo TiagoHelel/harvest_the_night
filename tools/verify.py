@@ -203,6 +203,19 @@ def check_perf():
                  last[-1].strip() if last else "")
 
 
+def check_playtest():
+    """The log reader, against a log in the shape the game writes.
+
+    Cheap - no Godot, no export - and it guards the one thing that rots
+    here: a summariser reading a format the game stopped writing reports
+    zeroes, and zeroes read like a finding."""
+    if not os.path.exists(rel("tools", "playtest.py")):
+        return skip("playtest", "no playtest build yet - task 0105")
+    code, out = run([sys.executable, "tools/playtest.py", "--self-check"])
+    last = [l for l in out.strip().splitlines() if l.strip()]
+    return check("playtest", code == 0, last[-1].strip() if last else "")
+
+
 def check_icon():
     """One 16x16 drawing, at every size a platform asks for.
 
@@ -505,6 +518,7 @@ def main():
     check_sfx()
     check_perf()
     check_icon()
+    check_playtest()
     check_strings()
     check_music()
     check_ambience()

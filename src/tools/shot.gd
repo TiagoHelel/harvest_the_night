@@ -132,6 +132,11 @@ func _initialize() -> void:
 				loud = true
 			elif maybe == "title":
 				front = true
+			elif maybe == "playtest":
+				# **Task 0105's build, photographed.** The badge and the
+				# watermark only exist when the flag is on, so this is the
+				# only way to look at either.
+				Playtest.force(true)
 			continue
 		if id == "latest" and not _is_scenario(arg):
 			id = arg
