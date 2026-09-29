@@ -157,30 +157,32 @@ static func upgrade_needs(state: Dictionary, cell: Vector2i) -> StringName:
 	return StringName((steps[level - 1] as Dictionary)["needs"])
 
 
-## Why this cell cannot be upgraded, in words. Empty when it can.
-static func why_not_upgrade(state: Dictionary, cell: Vector2i) -> String:
+## Why this cell cannot be upgraded. An empty Array when it can.
+##
+## **A key and its arguments, not a sentence.** Task 0110: the rules say what
+## is wrong and `src/ui/names.gd` says it in whatever language is up. The ids
+## in it go in raw - `&"gun_tower"`, not "gun tower" - because the view is
+## the half that knows what a player calls things.
+static func why_not_upgrade(state: Dictionary, cell: Vector2i) -> Array:
 	var on := Farm.occupant(state, cell)
 	if on.is_empty():
-		return "nothing there"
+		return [&"WHY_NOTHING_THERE"]
 	if _levels_of(StringName(on["id"])).is_empty():
-		return "a %s does not upgrade" % on["id"]
+		return [&"WHY_NO_UPGRADE", StringName(on["id"])]
 	if level_at(state, cell) >= GameData.TOP_TOWER_LEVEL:
-		return "already automatic"
+		return [&"WHY_TOP_LEVEL"]
 	# **Not while they are coming.** The same rule the tech tree follows: an
 	# upgrade is a decision made before the night, not a button pressed
 	# during it.
 	if int(state["phase"]) == Phases.NIGHT:
-		return "not while they are coming"
+		return [&"WHY_MID_NIGHT"]
 	var needs := upgrade_needs(state, cell)
 	if needs != &"" and not Tech.owns(state, needs):
-		return "needs %s from the tree" % needs
+		return [&"WHY_NEEDS_TECH", needs]
 	if not Resources.can_afford(state, upgrade_cost(state, cell)):
-		var short := Resources.missing(state, upgrade_cost(state, cell))
-		var parts: Array = []
-		for res in GameData.sorted_names(short.keys()):
-			parts.append("%d %s" % [short[res], res])
-		return "short " + ", ".join(parts)
-	return ""
+		return [&"WHY_SHORT",
+			Resources.missing(state, upgrade_cost(state, cell))]
+	return []
 
 
 static func can_upgrade(state: Dictionary, cell: Vector2i) -> bool:
@@ -308,22 +310,22 @@ static func can_place(state: Dictionary, id: StringName, cell: Vector2i) -> bool
 	return why_not(state, id, cell).is_empty()
 
 
-## Why it will not go there, in words, for the red ghost and the tooltip.
-## Empty when it will.
-static func why_not(state: Dictionary, id: StringName, cell: Vector2i) -> String:
+## Why it will not go there, for the red ghost and the tooltip. An empty
+## Array when it will. See `why_not_upgrade` for the shape.
+static func why_not(state: Dictionary, id: StringName, cell: Vector2i) -> Array:
 	if not is_placeable(id):
-		return "nothing selected"
+		return [&"WHY_NOTHING_SELECTED"]
 	if not allowed_in_phase(state, id):
-		return "not at night"
+		return [&"WHY_NOT_AT_NIGHT"]
 	# **The allowance, before the money.** Being told "you have used your five"
 	# is a different sentence from "you are short two wood", and the first one
 	# is the one that is true.
 	if Traps.is_trap(id) and Traps.room_for(state, id) <= 0:
-		return "%d armed is all the farm will take" % int(
-			(entry_of(id) as Dictionary).get("armed_limit", 0))
+		return [&"WHY_TRAP_LIMIT",
+			int((entry_of(id) as Dictionary).get("armed_limit", 0))]
 	if left_tonight(state, id) <= 0:
-		return "%d a night, and that was the last" % int(
-			(entry_of(id) as Dictionary).get("per_night_limit", 0))
+		return [&"WHY_NIGHT_LIMIT",
+			int((entry_of(id) as Dictionary).get("per_night_limit", 0))]
 	# **Every cell it would cover**, not only the one under the cursor. A press
 	# hanging half off the farm is the bug this stops.
 	for at in footprint(id, cell):
@@ -331,13 +333,8 @@ static func why_not(state: Dictionary, id: StringName, cell: Vector2i) -> String
 		if not terrain_reason.is_empty():
 			return terrain_reason
 	if not affordable(state, id):
-		var short := Resources.missing(state, cost_of(id))
-		var parts: Array = []
-		var keys := GameData.sorted_names(short.keys())
-		for res in keys:
-			parts.append("%d %s" % [short[res], res])
-		return "short " + ", ".join(parts)
-	return ""
+		return [&"WHY_SHORT", Resources.missing(state, cost_of(id))]
+	return []
 
 
 ## What selling the thing on this cell would give back. Empty when there is

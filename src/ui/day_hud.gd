@@ -322,7 +322,7 @@ func _refresh(force: bool) -> void:
 	if after_dark:
 		var refused := Sim.why_not_skip(_state)
 		_skip.text = I18n.t(&"DHUD_SKIP") if refused.is_empty() \
-			else I18n.f(&"DHUD_SKIP_NO", [refused])
+			else I18n.f(&"DHUD_SKIP_NO", [Names.refusal(refused)])
 		_skip.theme_type_variation = UiKit.WARN \
 			if not refused.is_empty() else UiKit.WARM
 

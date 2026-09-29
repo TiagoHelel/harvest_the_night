@@ -77,6 +77,7 @@ const SCENARIOS: Array = [
 	["options_audio", "the audio tab", "OptionsScreen:audio"],
 	["options_controls", "the controls tab", "OptionsScreen:controls"],
 	["react", "a crop came ready nearby", ""],
+	["refused", "build mode, over something built", ""],
 ]
 
 var _written := 0
@@ -611,6 +612,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"options_audio": _set_options_audio(state)
 		"options_controls": _set_options_controls(state)
 		"react": _set_react(state)
+		"refused": _set_refused(state)
 
 	_walk_to(state, _standing_at)
 	main.get_node("%WorldView").look_at_cell(Player.cell(state))
@@ -628,7 +630,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		# A fixed number of ticks a frame, so two runs still tick identically.
 		Sim.advance(state, STIR_TICKS)
 		await process_frame
-	_just_before_the_shutter(state, name)
+	_just_before_the_shutter(main, state, name)
 	await process_frame
 	await RenderingServer.frame_post_draw
 
@@ -735,9 +737,44 @@ func _only_showing(main: Node, wanted: String) -> void:
 ## Found by taking the picture: the farmer stood there with nothing over their
 ## head, because the reaction had come and gone during the settle. Which is
 ## also the feature working - it is meant to be a beat and not a badge.
-func _just_before_the_shutter(state: Dictionary, name: String) -> void:
+func _just_before_the_shutter(main: Node, state: Dictionary,
+		name: String) -> void:
 	match name:
-		"react": Reactions.show(state, &"note")
+		"react":
+			Reactions.show(state, &"note")
+		"refused":
+			# **Pointed by hand, because there is no mouse.** `BuildMode`
+			# takes its cell from the pointer every frame, so a scripted
+			# state with `build_cell` set has it overwritten before the
+			# shutter - which is how the first picture came back with an
+			# empty panel and no ghost.
+			var mode: Node = main.get_node_or_null("%BuildMode")
+			var view: Node = main.get_node_or_null("%WorldView")
+			if mode == null or view == null:
+				return
+			# **The longest refusal there is**, not the shortest. "in the
+			# water" fits anything; "there is a workshop there already"
+			# is the one that finds out whether the panel wraps.
+			var taken: Vector2i = Farm.cells_with(state, &"workshop")[0]
+			mode.set("_pointer", view.cell_to_screen(taken))
+			mode.call("_follow_cursor")
+
+
+## Build mode with the ghost somewhere it will not go, task 0110.
+##
+## **The one place a refusal is drawn.** The rules hand back a key and the
+## panel says it, and the panel is 124 pixels wide - so this is the picture
+## that answers whether "there is a wall there already" fits, in both
+## languages, which no width column can.
+func _set_refused(state: Dictionary) -> void:
+	_a_sown_field(state)
+	Resources.gain(state, {GameData.WOOD: 200, GameData.STONE: 200})
+	var build: Dictionary = state["build"]
+	build["active"] = true
+	build["selected"] = &"wall"
+	var taken: Vector2i = Farm.cells_with(state, &"workshop")[0]
+	(state["intent"] as Dictionary)["build_cell"] = [taken.x, taken.y]
+	_standing_at = taken
 
 
 ## The farmer noticing something, task 0109.

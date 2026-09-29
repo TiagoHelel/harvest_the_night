@@ -151,22 +151,22 @@ static func buildable(state: Dictionary, cell: Vector2i) -> bool:
 	return is_empty(state, cell)
 
 
-## Why not, in words, for the ghost that turns red under the cursor.
-## Empty when it is buildable.
-static func why_not_buildable(state: Dictionary, cell: Vector2i) -> String:
+## Why not, for the ghost that turns red under the cursor. An empty Array
+## when it is buildable. A key and its arguments - see `Building.why_not`.
+static func why_not_buildable(state: Dictionary, cell: Vector2i) -> Array:
 	var t := terrain_at(state, cell)
 	if t < 0:
-		return "off the farm"
+		return [&"WHY_OFF_THE_FARM"]
 	if t == Terrain.WATER:
-		return "in the water"
+		return [&"WHY_IN_THE_WATER"]
 	if t == Terrain.ROCK:
-		return "on the rock face"
+		return [&"WHY_ON_THE_ROCK"]
 	var on := occupant(state, cell)
 	if not on.is_empty():
 		if on["id"] == &"house":
-			return "on the house"
-		return "already occupied by a %s" % on["id"]
-	return ""
+			return [&"WHY_ON_THE_HOUSE"]
+		return [&"WHY_OCCUPIED", StringName(on["id"])]
+	return []
 
 
 ## Whether a person or a zombie can stand here.

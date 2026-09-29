@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 101
+const GROUPS := 102
 
 const SettingsScript := preload("res://src/app/settings.gd")
 const AppScript := preload("res://src/app/app.gd")
@@ -179,6 +179,7 @@ func _run() -> void:
 	_task_0107_store()
 	_task_0108_devlog()
 	_task_0109_reactions()
+	_task_0110_refusals()
 
 
 ## 0102 - the performance budget.
@@ -1521,6 +1522,161 @@ func _stand_the_farmer(state: Dictionary, cell: Vector2i) -> void:
 		cell.y * Player.SUBTILE + Player.SUBTILE / 2]
 
 
+## 0110 - refusals in two languages.
+func _task_0110_refusals() -> void:
+	# **Every refusal is a key, and the key is in the table.** The rules hand
+	# back `[key, argument, ...]`; if a key were missing from
+	# `assets/locale/strings.csv` the player would get the key itself on the
+	# screen, which is better than a blank label and still a bug.
+	var table := FileAccess.get_file_as_string(
+		"res://assets/locale/strings.csv")
+	var keys: Array = []
+	for name in ["building.gd", "farm.gd", "sim.gd", "tech.gd"]:
+		var source := FileAccess.get_file_as_string(
+			"res://src/core/".path_join(name))
+		# **From one, not from nought.** `split()` hands back everything
+		# before the first match as its first element, and treating that as
+		# a key made the whole file into one - the failure printed a
+		# paragraph of doc comment with `WHY_` glued to the front of it.
+		var pieces := source.split("&\"WHY_")
+		for i in range(1, pieces.size()):
+			var key := "WHY_" + String(pieces[i]).get_slice("\"", 0)
+			if key.length() > 4 and not keys.has(key):
+				keys.append(key)
+	keys.sort()
+	expect(keys.size() >= 20,
+		"the rules hand out a refusal key rather than a sentence",
+		str(keys.size()))
+	var absent: Array = []
+	for key in keys:
+		if not table.contains("%s," % key):
+			absent.append(key)
+	expect(absent.is_empty(),
+		"and every one of them is in the string table", str(absent))
+
+	# ------------------------------------------ no sentences left in the rules
+
+	# **The done-when, as a grep.** A player-facing sentence in `src/core/` is
+	# a line that cannot be translated, and after this task there are none.
+	#
+	# Three strings are left and are **not** player-facing: `Waves.note_for`
+	# and `Waves.summary_of` are for `tools/nights.py` and this journal, and
+	# `Endless._note` is what a generated night calls itself in the same
+	# place. No screen reads any of them - which is checked below rather than
+	# asserted in a comment, because that is the sort of thing that stops
+	# being true.
+	var sentences: Array = []
+	for name in DirAccess.get_files_at("res://src/core"):
+		if not String(name).ends_with(".gd"):
+			continue
+		if String(name) == "game_data.gd" or String(name) == "build_info.gd":
+			continue
+		var source := _code_lines_of("res://src/core/".path_join(String(name)))
+		for line in source.split("\n"):
+			var trimmed := String(line).strip_edges()
+			# **`return "` and `return ["` both.** A sentence smuggled into
+			# the first slot of a refusal is the shape this task was about,
+			# and the first version of this grep looked only at the bare
+			# one - so planting `return ["already yours, friend"]` walked
+			# straight past it.
+			var at := -1
+			if trimmed.begins_with("return \""):
+				at = 8
+			elif trimmed.begins_with("return [\""):
+				at = 9
+			if at < 0:
+				continue
+			var said := trimmed.substr(at)
+			said = said.get_slice("\"", 0)
+			# A word with a space in it is a sentence; `""` and a format
+			# fragment are not.
+			if said.contains(" ") and not ALLOWED_IN_RULES.has(said):
+				sentences.append("%s: %s" % [String(name), said])
+	expect(sentences.is_empty(),
+		"no player-facing sentence is left in the rules", str(sentences))
+
+	# And the three that are allowed really are read by nothing on a screen.
+	for name in DirAccess.get_files_at("res://src/ui"):
+		if not String(name).ends_with(".gd"):
+			continue
+		var view := _code_lines_of("res://src/ui/".path_join(String(name)))
+		expect(not view.contains("Waves.note_for")
+			and not view.contains("summary_of"),
+			"no screen shows a developer note: %s" % String(name))
+
+	# ---------------------------------------------- and each one still refuses
+
+	# **The key, not the words.** Which is the whole point: a check that
+	# compares English breaks when somebody edits the English.
+	var state := State.create(110001)
+	var pond: Vector2i = Farm.cells_of(state, Farm.Terrain.WATER)[0]
+	expect(_refused(Farm.why_not_buildable(state, pond))
+		== &"WHY_IN_THE_WATER", "the pond refuses by key")
+	expect(_refused(Building.why_not(state, &"wall", pond))
+		== &"WHY_IN_THE_WATER",
+		"and a wall over it is refused for the same reason")
+
+	# **The arguments come through as ids, not as words.** A rule that
+	# printed "gun tower" would be a rule that had learned English.
+	var house: Vector2i = Farm.cells_with(state, &"house")[0]
+	var beside := Vector2i(house.x, house.y + 2)
+	Resources.gain(state, {GameData.WOOD: 200, GameData.STONE: 200})
+	if Building.place(state, &"wall", beside):
+		var over := Farm.why_not_buildable(state, beside)
+		expect(_refused(over) == &"WHY_OCCUPIED",
+			"a taken cell says it is taken")
+		expect(over.size() == 2 and over[1] is StringName,
+			"and names what is on it as an id", str(over))
+		expect(Names.refusal(over).contains(Names.of(&"wall")),
+			"which the view turns into what a player calls it",
+			Names.refusal(over))
+
+	# A short purse names the resources, sorted, as a pile and not a sentence.
+	var broke := State.create(110002)
+	var short := Building.why_not(broke, &"gun_tower",
+		_any_buildable(broke))
+	expect(_refused(short) == &"WHY_SHORT",
+		"an empty purse says what is short", str(short))
+	expect(short.size() == 2 and short[1] is Dictionary,
+		"as a pile of resources rather than a sentence", str(short))
+	var said := Names.refusal(short)
+	expect(said != "" and not said.contains("WHY_"),
+		"and the view says it in words", said)
+
+	# ------------------------------------------------- and in both languages
+
+	# The one thing a width checker cannot answer: that the road from the
+	# rule to the label carries the language with it.
+	var was := I18n.locale()
+	I18n.use("en")
+	var english := Names.refusal([&"WHY_IN_THE_WATER"])
+	I18n.use("pt_BR")
+	var portuguese := Names.refusal([&"WHY_IN_THE_WATER"])
+	I18n.use(was)
+	expect(english != "" and portuguese != "",
+		"a refusal reads in both languages",
+		"%s / %s" % [english, portuguese])
+	expect(english != portuguese,
+		"and they are not the same words with a flag on them",
+		"%s / %s" % [english, portuguese])
+	expect(Names.refusal([]).is_empty(),
+		"and no refusal is no words at all")
+	_completed += 1
+
+
+## The three sentences `src/core/` is allowed to keep, and why.
+##
+## All three are developer-facing: `tools/nights.py` and this project's
+## journal read them and no screen does. Named one by one rather than
+## excused by a folder, so that a fourth cannot join them quietly.
+const ALLOWED_IN_RULES: Array = [
+	"night %d: nothing authored",
+	"past the ten: the Giant is back, and it brought the night",
+	"past the ten: %d Giants, which is the question answered",
+	"past the ten: night %d, and more of everything that hurt",
+]
+
+
 func _finish() -> void:
 	if _finished:
 		return
@@ -1535,6 +1691,16 @@ func _finish() -> void:
 
 ## One assertion. A failure prints the values, because "false" on its own has
 ## never once been enough to fix anything.
+## The key out of a refusal, or `&""` when there was none.
+##
+## Task 0110: `why_not_*` hands back `[key, argument, ...]` rather than a
+## sentence, so a check asserts **which refusal** rather than which words.
+## Before this they compared English, which meant rewording a message broke
+## checks that had nothing to do with the wording.
+func _refused(reason: Array) -> StringName:
+	return &"" if reason.is_empty() else StringName(reason[0])
+
+
 func expect(ok: bool, what: String, detail: String = "") -> void:
 	if ok:
 		passed += 1
@@ -1968,8 +2134,8 @@ func _task_0008_farm() -> void:
 	# Water and rock refuse to be built on, and say why.
 	var pond: Vector2i = Farm.cells_of(state, Farm.Terrain.WATER)[0]
 	expect(not Farm.buildable(state, pond), "nothing is built in the pond")
-	expect(Farm.why_not_buildable(state, pond) == "in the water",
-		"and it says why", Farm.why_not_buildable(state, pond))
+	expect(_refused(Farm.why_not_buildable(state, pond)) == &"WHY_IN_THE_WATER",
+		"and it says why", str(Farm.why_not_buildable(state, pond)))
 	expect(not Farm.walkable(state, pond), "and nobody walks into it")
 
 	var cliff: Vector2i = Farm.cells_of(state, Farm.Terrain.ROCK)[0]
@@ -1978,8 +2144,8 @@ func _task_0008_farm() -> void:
 	# **The house is never buildable and never removable.**
 	var house: Vector2i = Farm.cells_with(state, &"house")[0]
 	expect(not Farm.buildable(state, house), "nothing is built on the house")
-	expect(Farm.why_not_buildable(state, house) == "on the house",
-		"and it says so", Farm.why_not_buildable(state, house))
+	expect(_refused(Farm.why_not_buildable(state, house)) == &"WHY_ON_THE_HOUSE",
+		"and it says so", str(Farm.why_not_buildable(state, house)))
 	expect(not Farm.remove(state, house), "and the house cannot be removed")
 	expect(Farm.cells_with(state, &"house").size() == 9, "it is still there")
 
@@ -3081,12 +3247,12 @@ func _task_0023_building() -> void:
 	var pond: Vector2i = Farm.cells_of(state, Farm.Terrain.WATER)[0]
 	var cliff: Vector2i = Farm.cells_of(state, Farm.Terrain.ROCK)[0]
 	var house: Vector2i = Farm.cells_with(state, &"house")[0]
-	expect(Building.why_not(state, &"wall", pond) == "in the water",
-		"not in the pond", Building.why_not(state, &"wall", pond))
-	expect(Building.why_not(state, &"wall", cliff) == "on the rock face",
-		"not on the cliff", Building.why_not(state, &"wall", cliff))
-	expect(Building.why_not(state, &"wall", house) == "on the house",
-		"not on the house", Building.why_not(state, &"wall", house))
+	expect(_refused(Building.why_not(state, &"wall", pond)) == &"WHY_IN_THE_WATER",
+		"not in the pond", str(Building.why_not(state, &"wall", pond)))
+	expect(_refused(Building.why_not(state, &"wall", cliff)) == &"WHY_ON_THE_ROCK",
+		"not on the cliff", str(Building.why_not(state, &"wall", cliff)))
+	expect(_refused(Building.why_not(state, &"wall", house)) == &"WHY_ON_THE_HOUSE",
+		"not on the house", str(Building.why_not(state, &"wall", house)))
 	expect(not Building.place(state, &"wall", pond), "and placing is refused")
 
 	# On grass it goes, and the cost comes out of the ledger.
@@ -3172,8 +3338,9 @@ func _task_0023_building() -> void:
 		"a wall cannot go up mid-wave")
 	expect(Building.allowed_in_phase(nightly, &"barricade"),
 		"but a barricade can")
-	expect(Building.why_not(nightly, &"wall", _any_buildable(nightly))
-		== "not at night", "and it says why")
+	expect(_refused(Building.why_not(nightly, &"wall",
+		_any_buildable(nightly))) == &"WHY_NOT_AT_NIGHT",
+		"and it says why")
 
 	# A barricade expires rather than quietly becoming a wall.
 	var quick := _any_buildable(nightly)
@@ -7853,11 +8020,11 @@ func _task_0047_barricades() -> void:
 	expect(down == limit, "exactly the limit go down, however many are tried",
 		str(down))
 	expect(Building.left_tonight(night, &"barricade") == 0, "and then none")
-	expect(Building.why_not(night, &"barricade",
-		_room_for(night, Vector2i(1, 1))).contains("night"),
+	expect(_refused(Building.why_not(night, &"barricade",
+		_room_for(night, Vector2i(1, 1)))) == &"WHY_NIGHT_LIMIT",
 		"and the reason says so rather than blaming the wood",
-		Building.why_not(night, &"barricade",
-			_room_for(night, Vector2i(1, 1))))
+		str(Building.why_not(night, &"barricade",
+			_room_for(night, Vector2i(1, 1)))))
 
 	# **Used is used**, even if it came down again.
 	var placed := Farm.cells_with(night, &"barricade")
@@ -8228,10 +8395,11 @@ func _task_0048_traps() -> void:
 	expect(Traps.room_for(field, &"mine") == 0, "with room for no more")
 	expect(Resources.can_afford(field, mine["cost"]),
 		"and it is the limit talking, not the money")
-	expect(Building.why_not(field, &"mine",
-		_room_for(field, Vector2i(1, 1))).contains("armed"),
+	expect(_refused(Building.why_not(field, &"mine",
+		_room_for(field, Vector2i(1, 1)))) == &"WHY_TRAP_LIMIT",
 		"so the reason says which limit it is",
-		Building.why_not(field, &"mine", _room_for(field, Vector2i(1, 1))))
+		str(Building.why_not(field, &"mine",
+			_room_for(field, Vector2i(1, 1)))))
 
 	# One spent is one to make again, which is the loop the limit creates.
 	Farm.remove(field, Farm.cells_with(field, &"mine")[0])
@@ -9888,14 +10056,14 @@ func _task_0055_speed() -> void:
 	var hurt := _fresh_night(3701)
 	expect(Sim.can_skip(hurt), "a healthy house may skip the night")
 	expect(Sim.why_not_skip(hurt).is_empty(), "with no reason not to",
-		Sim.why_not_skip(hurt))
+		str(Sim.why_not_skip(hurt)))
 	hurt["house_hp"] = GameData.HOUSE_HP 		* GameData.SKIP_MIN_HOUSE_PERCENT / 100 - 1
 	expect(not Sim.can_skip(hurt),
 		"a house under the line may not - that night is the game",
 		str(hurt["house_hp"]))
-	expect(Sim.why_not_skip(hurt).contains("watching"),
+	expect(_refused(Sim.why_not_skip(hurt)) == &"WHY_HOUSE_LOW",
 		"and the button says why rather than just refusing",
-		Sim.why_not_skip(hurt))
+		str(Sim.why_not_skip(hurt)))
 	expect(Sim.skip_night(hurt) == 0, "so nothing is skipped")
 	var was := State.hash_of(hurt)
 	Sim.skip_night(hurt)
@@ -9905,7 +10073,7 @@ func _task_0055_speed() -> void:
 	# Nor by day: there is nothing to skip.
 	var noon := State.create(3702)
 	expect(not Sim.can_skip(noon), "there is no night to skip at noon")
-	expect(Sim.why_not_skip(noon) == "only at night", Sim.why_not_skip(noon))
+	expect(_refused(Sim.why_not_skip(noon)) == &"WHY_ONLY_AT_NIGHT", str(Sim.why_not_skip(noon)))
 
 	# **Watched and skipped from one state end identically.** The done-when,
 	# and what the prompt calls the test of the whole tick design.
@@ -11384,31 +11552,31 @@ func _task_0063_tech_tree() -> void:
 	var day := _a_day_with_points(6300, 20)
 	var first: StringName = Tech.nodes_of(&"defence")[0]["id"]
 	var second: StringName = Tech.nodes_of(&"defence")[1]["id"]
-	expect(Tech.why_not_buy(day, second).contains("needs"),
+	expect(_refused(Tech.why_not_buy(day, second)) == &"WHY_NEEDS_NODE",
 		"a node whose prerequisite is unbought says so",
-		Tech.why_not_buy(day, second))
+		str(Tech.why_not_buy(day, second)))
 	expect(not Tech.buy(day, second), "and will not be bought")
 	var before := Tech.held(day)
 	expect(Tech.buy(day, first), "the first of a branch goes straight in")
 	expect(Tech.owns(day, first), "and is owned", str(Tech.owned(day)))
 	expect(Tech.held(day) == before - int(Tech.node(first)["cost"]),
 		"for exactly its price", str(Tech.held(day)))
-	expect(Tech.why_not_buy(day, first).contains("already"),
-		"and will not be bought twice", Tech.why_not_buy(day, first))
+	expect(_refused(Tech.why_not_buy(day, first)) == &"WHY_ALREADY_YOURS",
+		"and will not be bought twice", str(Tech.why_not_buy(day, first)))
 	expect(Tech.buy(day, second), "now the second will go in")
 
 	var poor := _a_day_with_points(6301, 1)
-	expect(Tech.why_not_buy(poor, first).contains("costs"),
+	expect(_refused(Tech.why_not_buy(poor, first)) == &"WHY_COSTS",
 		"and a node you cannot afford says the price",
-		Tech.why_not_buy(poor, first))
+		str(Tech.why_not_buy(poor, first)))
 
 	# **Never during a wave.** The requirement.
 	var night := _a_day_with_points(6302, 20)
 	Phases.begin_preparation(night)
 	Sim.advance(night, GameData.PREPARATION_TICKS)
 	expect(int(night["phase"]) == Phases.NIGHT, "it is night")
-	expect(Tech.why_not_buy(night, first).contains("after dark"),
-		"the tree is shut after dark", Tech.why_not_buy(night, first))
+	expect(_refused(Tech.why_not_buy(night, first)) == &"WHY_AFTER_DARK",
+		"the tree is shut after dark", str(Tech.why_not_buy(night, first)))
 	expect(not Tech.buy(night, first), "and nothing is bought")
 	expect(Tech.refund(night, first) == 0, "nor sold back")
 
@@ -11517,9 +11685,9 @@ func _task_0064_tower_levels() -> void:
 	var cell: Vector2i = _line_of_towers(farm, &"gun_tower", 1)[0]
 	expect(Building.level_at(farm, cell) == 1, "a new tower is level one",
 		str(Building.level_at(farm, cell)))
-	expect(Building.why_not_upgrade(farm, cell).contains("tree"),
+	expect(_refused(Building.why_not_upgrade(farm, cell)) == &"WHY_NEEDS_TECH",
 		"and cannot be upgraded until the tree allows it",
-		Building.why_not_upgrade(farm, cell))
+		str(Building.why_not_upgrade(farm, cell)))
 	expect(not Building.upgrade(farm, cell), "so it is refused")
 
 	# **The tree is a daytime thing** (task 0063), so the node was bought
@@ -11529,7 +11697,7 @@ func _task_0064_tower_levels() -> void:
 	expect(Tech.buy(farm, &"true sights"), "the tree node is bought")
 	farm["phase"] = Phases.PREPARATION
 	expect(Building.can_upgrade(farm, cell), "and now it can be upgraded",
-		Building.why_not_upgrade(farm, cell))
+		str(Building.why_not_upgrade(farm, cell)))
 	var bill := Building.upgrade_cost(farm, cell)
 	var purse: Dictionary = {}
 	for res in GameData.sorted_names(bill.keys()):
@@ -11544,9 +11712,9 @@ func _task_0064_tower_levels() -> void:
 			str(Resources.amount(farm, res)))
 
 	# **Level three changes behaviour, not only numbers.**
-	expect(Building.why_not_upgrade(farm, cell).contains("tree"),
+	expect(_refused(Building.why_not_upgrade(farm, cell)) == &"WHY_NEEDS_TECH",
 		"level three wants its own node first",
-		Building.why_not_upgrade(farm, cell))
+		str(Building.why_not_upgrade(farm, cell)))
 	farm["phase"] = Phases.DAY
 	expect(Tech.buy(farm, &"long barrels") and Tech.buy(farm, &"oiled works"),
 		"which is deeper in the same branch")
@@ -11554,9 +11722,9 @@ func _task_0064_tower_levels() -> void:
 	expect(Building.upgrade(farm, cell), "and then it goes to three")
 	expect(Building.level_at(farm, cell) == GameData.TOP_TOWER_LEVEL,
 		"the top level", str(Building.level_at(farm, cell)))
-	expect(Building.why_not_upgrade(farm, cell).contains("automatic"),
+	expect(_refused(Building.why_not_upgrade(farm, cell)) == &"WHY_TOP_LEVEL",
 		"and there is nowhere further to go",
-		Building.why_not_upgrade(farm, cell))
+		str(Building.why_not_upgrade(farm, cell)))
 
 	var plain: Dictionary = GameData.DEFENCES[&"gun_tower"]
 	var top := Building.entry_at(farm, cell)
@@ -11614,9 +11782,9 @@ func _task_0064_tower_levels() -> void:
 	var night := _a_prep_with_tech(6403, [&"true sights"])
 	var after_dark: Vector2i = _line_of_towers(night, &"gun_tower", 1)[0]
 	_night_falls(night)
-	expect(Building.why_not_upgrade(night, after_dark).contains("coming"),
+	expect(_refused(Building.why_not_upgrade(night, after_dark)) == &"WHY_MID_NIGHT",
 		"the forge is shut once they are walking in",
-		Building.why_not_upgrade(night, after_dark))
+		str(Building.why_not_upgrade(night, after_dark)))
 	expect(not Building.upgrade(night, after_dark), "and nothing is upgraded")
 
 	# **The tree's discount is read at last.**
@@ -13862,12 +14030,12 @@ func _task_0082_shots() -> void:
 			names.append(parts[1])
 			screens.append(parts[5])
 
-	# **Eleven: task 0082's five, one per options tab, the pause menu, and
-	# task 0109's reaction.** A counted constant, kept on purpose for the
+	# **Twelve: task 0082's five, one per options tab, the pause menu,
+	# task 0109's reaction and task 0110's refusal.** A counted constant, kept on purpose for the
 	# same reason the audio group counts its settings: a scenario arriving
 	# without anybody deciding to add one should be a failing row rather
 	# than an extra picture nobody looks at.
-	expect(names.size() == 11,
+	expect(names.size() == 12,
 		"the five scenarios task 0082 names, and one per options tab",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",

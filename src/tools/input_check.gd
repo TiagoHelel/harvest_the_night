@@ -1180,15 +1180,39 @@ func _case_0023_build_mode() -> void:
 
 	var pond: Vector2i = Farm.cells_of(state, Farm.Terrain.WATER)[0]
 	await _point_at(view, pond)
-	expect(reason.text == "in the water", "over the pond it says why not",
-		reason.text)
+	# **The table's words, not a sentence written here.** Task 0110: the
+	# rules hand back a key and `Names.refusal()` says it, so what this
+	# checks is the whole road - rule, key, table, label - rather than one
+	# spelling of one message.
+	expect(reason.text == I18n.t(&"WHY_IN_THE_WATER"),
+		"over the pond it says why not", reason.text)
 	expect(not view.ghost_is_ok(), "and framed red, because it does not fit")
 
 	# Over something already built, it refuses for a different reason.
 	var taken: Vector2i = Farm.cells_with(state, &"house")[0]
 	await _point_at(view, taken)
 	expect(not view.ghost_is_ok(), "over the house it refuses too")
-	expect(reason.text == "on the house", "naming the house", reason.text)
+	expect(reason.text == I18n.t(&"WHY_ON_THE_HOUSE"),
+		"naming the house", reason.text)
+
+	# **And it reads in Portuguese**, which is the done-when of task 0110 and
+	# the one thing a checker of widths cannot answer: the string table can
+	# be complete and the refusal still arrive in English, if anything on the
+	# road between the rule and the label is a sentence somebody wrote in
+	# GDScript.
+	var was := I18n.locale()
+	I18n.use("pt_BR")
+	I18n.relabel(_scene)
+	await _point_at(view, pond)
+	await frames(2)
+	expect(reason.text == I18n.t(&"WHY_IN_THE_WATER"),
+		"the refusal is in Portuguese when Portuguese is up", reason.text)
+	expect(reason.text != "in the water",
+		"and is not the English one with a flag on it", reason.text)
+	I18n.use(was)
+	I18n.relabel(_scene)
+	await _point_at(view, taken)
+	await frames(2)
 
 	# **A click places it.** Through the same intent the rules read.
 	await _point_at(view, grass)
@@ -3088,7 +3112,11 @@ func _case_0055_speed() -> void:
 	state["house_hp"] = 1
 	await frames(2)
 	expect(int(state["phase"]) == Phases.NIGHT, "another night")
-	expect(skip_line.text.contains("watching"),
+	# **The key's words, not a word.** This looked for "watching", which task
+	# 0110 shortened out of the sentence while moving it into the string
+	# table - a check that breaks when somebody edits copy is a check about
+	# the copy, and this one is about the button refusing.
+	expect(skip_line.text.contains(I18n.t(&"WHY_HOUSE_LOW") % 1),
 		"with the house nearly gone the line says why rather than offering",
 		skip_line.text)
 	var night_tick := int(state["night_tick"])

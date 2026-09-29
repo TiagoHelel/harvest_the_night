@@ -10106,3 +10106,105 @@ changed".
 
 `python tools/verify.py` prints PASS: 6363 asserts, 978 input cases, 0 failed,
 23 rows, no skips, 237 seconds.
+
+## 0110 - Refusals in two languages - done 2026-09-29
+
+The last English sentences in `src/core/`. Twenty-one refusals across four
+functions now hand back **a key and its arguments** instead of a sentence, and
+`Names.refusal()` says them in whatever language is up.
+
+    Building.why_not()          ->  [&"WHY_OCCUPIED", &"workshop"]
+    Farm.why_not_buildable()    ->  [&"WHY_IN_THE_WATER"]
+    Tech.why_not_buy()          ->  [&"WHY_COSTS", 6, 2]
+    Sim.why_not_skip()          ->  [&"WHY_HOUSE_LOW", 45]
+
+An `Array` rather than a Dictionary or a pair, because **every caller already
+asked `.is_empty()`** - `can_place`, `can_upgrade`, `can_buy`, `can_skip` and
+three screens - and an empty Array is falsy in exactly the same place a
+sentence was. Twenty-one returns changed and not one caller's condition did.
+
+### Three arguments rules, and no fourth
+
+`Names.refusal()` is the one place a refusal becomes words:
+
+- a **`StringName`** is an id and goes through `Names.of()`, so a player is
+  told "workshop" and, in Portuguese, "oficina" - never `workshop` with an
+  underscore in it
+- a **`Dictionary`** is a pile of resources and comes out as "3 wood, 2
+  stone", sorted, so two runs read the same
+- anything else is a number and is printed
+
+The rules never learn a word of either language. That is the whole point: the
+half that knows what a player calls a thing is the half with the screen in
+it.
+
+### Three sentences stay, and are named one by one
+
+`Waves.summary_of()`, `Waves.note_for()` and `Endless._note()` are still
+English, and should be: they are read by `tools/nights.py` and by this
+journal, and by no screen at all. The check does not excuse them by folder -
+it lists them by their exact text, so a fourth cannot join them quietly - and
+it also greps `src/ui/` to confirm no screen has started showing one.
+
+### The checks stopped being about the copy
+
+Every assert that touched a refusal compared **English**:
+
+    expect(Sim.why_not_skip(noon) == "only at night", ...)
+    expect(Tech.why_not_buy(day, first).contains("already"), ...)
+
+So rewording a message broke checks that had nothing to do with the wording -
+which is exactly what happened when I shortened `WHY_HOUSE_LOW` to fit its
+label: an input case looking for the word "watching" went red. They assert the
+key now, through a `_refused()` helper, and the input case asserts
+`I18n.t(&"WHY_IN_THE_WATER")` rather than the words - so what it proves is the
+whole road, rule to key to table to label, instead of one spelling.
+
+And it proves it **in Portuguese**, which is the done-when and the one thing a
+width checker cannot answer: the table can be complete and a refusal still
+arrive in English, if anything between the rule and the label is a sentence
+somebody wrote in GDScript. The case switches the language, points at the
+pond, and fails if the label did not change.
+
+### Two things the pictures decided
+
+**The reason label never wrapped.** It is 114 pixels wide in a 124 pixel
+panel, and "already occupied by a gun tower" is 155 - so the end of most
+refusals had been running off the side of the frame since the panel was
+built. It wraps to two lines now, and the new keys have a width of 228 so
+`i18n_check` holds them to it.
+
+**And `WHY_HOUSE_LOW` did not fit even then.** 257 pixels in English against
+the 228 it has. Shortened to "the house is at %d%% - watch this one", which
+is better copy as well as a shorter one.
+
+`implementation/shots/0110/refused.png` and `-pt_BR` are the picture that
+answers it: "there is a workshop there already" over two lines, and "já tem
+oficina aí" on one.
+
+### A grep that missed the shape it was written for
+
+The done-when is that `grep` finds no player-facing sentence left in
+`src/core/`, so the check greps for one. The first version looked for
+`return "` - and a sentence smuggled into the first slot of a refusal,
+`return ["already yours, friend"]`, walked straight past it. Which is the
+only shape this task could plausibly regress into. It looks for both now,
+and the plant fails it.
+
+### One thing this task did not do
+
+The build palette lists `auto_crossbow`, `flame_tower` and `gun_tower` with
+their underscores in, in both languages. That is an id printed raw on a
+screen - but it is a palette label and not a refusal, so it is outside this
+task's requirement and outside its done-when. Written down here rather than
+fixed quietly or left unsaid: it is the next thing anybody looking at
+localisation should pick up.
+
+### Hashes
+
+Both unchanged: **sim `1961000123`**, **data `407837701`**. A refusal is
+computed and returned; none of it is ever stored in the state, so changing
+what it is made of changes nothing the guard can see.
+
+`python tools/verify.py` prints PASS: 6417 asserts, 980 input cases, 0 failed,
+23 rows, no skips, 235 seconds.

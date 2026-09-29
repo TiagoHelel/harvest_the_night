@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`########################`  **109 / 110 done**
+`########################`  **110 / 110 done**
 
-0 doing / 1 todo / 0 blocked across 9 phases.
+0 doing / 0 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,32 +17,11 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0110 - Refusals in two languages**. The whole of what is left is
-spelled out under *What is open* below, ready ones first.
+Nothing is open: every task below is ticked.
 
 The boxes below are **generated** from the `Status:` line inside each
 prompt file. Do not tick them by hand: use `python tools/task.py done 0042`,
 which rewrites this file for you.
-
-## What is open
-
-1 task(s) left, the ready ones first, then what they
-unlock. Generated from `tools/backlog/part*.py` together
-with the prompt files, so the two cannot disagree.
-
-### 0110 - Refusals in two languages
-
-Ready to pick up.  Likely files: `src/core/building.gd, src/core/sim.gd, src/core/tech.gd`.
-
-The last English sentences in `src/core/`: the lines that say why a thing cannot be built, bought or skipped.
-
-- `why_not_*` returns a key and its arguments rather than a sentence
-- The words live in `assets/locale/strings.csv` like every other line
-- The ids in a refusal - what is short, what is needed - are named by `Names.of` rather than printed raw
-- `tools/i18n_check.py` covers them, widths and all
-
-  - done when: `grep` finds no player-facing sentence left in `src/core/`
-  - done when: Every refusal reads in Portuguese, and the checker proves it fits
 
 ## 0 - Foundation  (12/12)
 
@@ -156,7 +135,7 @@ The last English sentences in `src/core/`: the lines that say why a thing cannot
 - [x] **0089** [Tooltips](prompts/0089-tooltips.md)
 - [x] **0090** [The log panel](prompts/0090-log-panel.md)
 
-## 7 - Shell and product  (10/11)
+## 7 - Shell and product  (11/11)
 
 - [x] **0091** [The title screen](prompts/0091-title-screen.md)
 - [x] **0092** [The main menu and the router](prompts/0092-main-menu.md)
@@ -168,7 +147,7 @@ The last English sentences in `src/core/`: the lines that say why a thing cannot
 - [x] **0098** [Accessibility](prompts/0098-accessibility.md)
 - [x] **0099** [An icon and a boot ident](prompts/0099-icon-ident.md)
 - [x] **0100** [Exports: Windows and Web](prompts/0100-exports.md)
-- [ ] **0110** [Refusals in two languages](prompts/0110-refusals.md)
+- [x] **0110** [Refusals in two languages](prompts/0110-refusals.md)
 
 ## 8 - Ship the MVP  (8/8)
 

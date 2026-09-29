@@ -162,15 +162,15 @@ static func can_skip(state: Dictionary) -> bool:
 	return why_not_skip(state).is_empty()
 
 
-## Why it may not be skipped, in words, for the button's tooltip. Empty when
-## it may.
-static func why_not_skip(state: Dictionary) -> String:
+## Why it may not be skipped, for the button's tooltip. An empty Array when
+## it may. A key and its arguments - see `Building.why_not`.
+static func why_not_skip(state: Dictionary) -> Array:
 	if int(state["phase"]) != Phases.NIGHT:
-		return "only at night"
+		return [&"WHY_ONLY_AT_NIGHT"]
 	var left := int(state["house_hp"]) * 100 / maxi(GameData.HOUSE_HP, 1)
 	if left < GameData.SKIP_MIN_HOUSE_PERCENT:
-		return "the house is at %d%% - this one is worth watching" % left
-	return ""
+		return [&"WHY_HOUSE_LOW", left]
+	return []
 
 
 ## Run the rest of the night now.

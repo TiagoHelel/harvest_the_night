@@ -131,6 +131,42 @@ static func of(id: StringName) -> String:
 	return String(id).replace("_", " ")
 
 
+## A refusal from the rules, as a sentence.
+##
+## Task 0110: `Building.why_not()`, `Farm.why_not_buildable()`,
+## `Tech.why_not_buy()` and `Sim.why_not_skip()` all hand back
+## `[key, argument, ...]` rather than English, and this is the one place that
+## turns one into words. An empty Array is not a refusal and comes back as
+## "".
+##
+## **Three rules for the arguments, and no fourth.** A `StringName` is an id
+## and goes through `of()`, so a player is told "gun tower" and never
+## `gun_tower`. A `Dictionary` is a pile of resources - `{wood: 3}` - and
+## comes out as "3 wood, 2 stone", sorted so two runs read the same. Anything
+## else is a number and is printed.
+static func refusal(reason: Array) -> String:
+	if reason.is_empty():
+		return ""
+	var key := StringName(reason[0])
+	var args: Array = []
+	for i in range(1, reason.size()):
+		args.append(_said(reason[i]))
+	return I18n.f(key, args) if args.size() > 0 else I18n.t(key)
+
+
+## One argument of a refusal, in words.
+static func _said(arg: Variant) -> Variant:
+	if arg is StringName:
+		return of(arg as StringName)
+	if arg is Dictionary:
+		var parts := PackedStringArray()
+		for id in GameData.sorted_names((arg as Dictionary).keys()):
+			parts.append("%d %s" % [int((arg as Dictionary)[id]),
+				of(StringName(id))])
+		return ", ".join(parts)
+	return arg
+
+
 ## The key rather than the words, for a plural or a count.
 static func key_of(id: StringName) -> StringName:
 	return KEYS.get(id, StringName(String(id).to_upper()))

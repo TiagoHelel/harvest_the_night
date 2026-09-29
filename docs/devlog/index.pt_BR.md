@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-111 tarefas em 4 dias, de  a 2026-09-29. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+112 tarefas em 4 dias, de  a 2026-09-29. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -154,6 +154,7 @@ voz alta.
 | 0107 | Store assets | 2026-09-28 |
 | 0108 | The devlog and a trailer clip | 2026-09-29 |
 | 0109 | The character reacts | 2026-09-29 |
+| 0110 | Refusals in two languages | 2026-09-29 |
 
 ## Toda vez que o jogo mudou por baixo
 

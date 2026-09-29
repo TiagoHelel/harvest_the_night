@@ -97,25 +97,25 @@ static func owned(state: Dictionary) -> Array:
 	return state["tech_owned"]
 
 
-## Why this node cannot be bought, in words, for the tooltip. Empty when it
-## can.
-static func why_not_buy(state: Dictionary, id: StringName) -> String:
+## Why this node cannot be bought, for the tooltip. An empty Array when it
+## can. A key and its arguments - see `Building.why_not`.
+static func why_not_buy(state: Dictionary, id: StringName) -> Array:
 	var one := node(id)
 	if one.is_empty():
-		return "no such thing"
+		return [&"WHY_NO_SUCH_NODE"]
 	if owns(state, id):
-		return "already yours"
+		return [&"WHY_ALREADY_YOURS"]
 	# **Never during a wave.** The requirement, and the reason for it: a tree
 	# a player can re-cut while the crowd is walking in is not a decision
 	# made before the night, it is a menu they pause in.
 	if int(state["phase"]) != Phases.DAY:
-		return "the workshop is shut after dark"
+		return [&"WHY_AFTER_DARK"]
 	for needed in (one["needs"] as Array):
 		if not owns(state, StringName(needed)):
-			return "needs %s first" % needed
+			return [&"WHY_NEEDS_NODE", StringName(needed)]
 	if held(state) < int(one["cost"]):
-		return "costs %d, and you have %d" % [int(one["cost"]), held(state)]
-	return ""
+		return [&"WHY_COSTS", int(one["cost"]), held(state)]
+	return []
 
 
 static func can_buy(state: Dictionary, id: StringName) -> bool:

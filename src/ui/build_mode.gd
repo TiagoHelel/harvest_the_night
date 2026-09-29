@@ -75,6 +75,11 @@ func _ready() -> void:
 	_reason = Label.new()
 	_reason.name = "BuildReason"
 	_reason.theme_type_variation = UiKit.BAD
+	# **It wraps now.** The panel is 124 wide and "already occupied by a gun
+	# tower" is not, so before task 0110 the end of most refusals was off the
+	# side of the frame. Two lines of it is the room there is.
+	_reason.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_reason.custom_minimum_size = Vector2(114, 20)
 	column.add_child(_reason)
 
 
@@ -144,7 +149,7 @@ func _follow_cursor() -> void:
 
 	var reason := Building.why_not(_state, id, cell)
 	_view.show_ghost(cell, id, reason.is_empty())
-	_reason.text = reason
+	_reason.text = Names.refusal(reason)
 
 	# **What the zombies would do about it.** Only for a thing that actually
 	# blocks the way, and only where it could go: previewing a route around a

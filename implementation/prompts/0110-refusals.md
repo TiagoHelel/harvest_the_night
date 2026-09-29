@@ -1,7 +1,7 @@
 # 0110 - Refusals in two languages
 
 - **Phase:** 7 - Shell and product
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0097
 - **Likely files:** src/core/building.gd, src/core/sim.gd, src/core/tech.gd
 
