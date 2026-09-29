@@ -289,7 +289,19 @@ def main():
     # verify, because the gate exports into here too.
     if os.path.isdir(BUILD):
         import shutil
-        shutil.rmtree(BUILD)
+        # **Everything but the store set.** `build/` is cleared because the
+        # web export writes beside `index.html` and yesterday's pack would
+        # be weighed with today's - but task 0107 puts the capsules and the
+        # GIF in `build/store`, and a release quietly eating an hour of
+        # somebody's marketing is not what that line is for.
+        for name in sorted(os.listdir(BUILD)):
+            if name == "store":
+                continue
+            where = os.path.join(BUILD, name)
+            if os.path.isdir(where):
+                shutil.rmtree(where)
+            else:
+                os.remove(where)
 
     when = today()
     stamp(when)

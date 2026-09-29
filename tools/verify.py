@@ -216,6 +216,21 @@ def check_playtest():
     return check("playtest", code == 0, last[-1].strip() if last else "")
 
 
+def check_store():
+    """The store copy against the design document, and the set's inputs.
+
+    Not the pictures: making those means running the game five times and is
+    a minute and a half, which is `python tools/gen_marketing.py`. What rots
+    here is the words - the pitch is the game's own description of itself
+    and it lives in `design.md`, and a page that drifted from it would be a
+    page describing a game somebody decided not to make."""
+    if not os.path.exists(rel("tools", "gen_marketing.py")):
+        return skip("store", "no store assets yet - task 0107")
+    code, out = run([sys.executable, "tools/gen_marketing.py", "--check"])
+    last = [l for l in out.strip().splitlines() if l.strip()]
+    return check("store", code == 0, last[-1].strip() if last else "")
+
+
 def check_icon():
     """One 16x16 drawing, at every size a platform asks for.
 
@@ -522,6 +537,7 @@ def main():
     check_perf()
     check_icon()
     check_playtest()
+    check_store()
     check_strings()
     check_music()
     check_ambience()

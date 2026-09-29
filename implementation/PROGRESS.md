@@ -9774,3 +9774,109 @@ player without them, which is what the guard scenario is.
 
 `python tools/verify.py` prints PASS: 6290 asserts, 978 input cases, 0 failed,
 21 rows, no skips, **226 seconds against a budget of 300**.
+
+## 0107 - Store assets - done 2026-09-28
+
+`python tools/gen_marketing.py` makes the whole set: five screenshots, five
+capsules, an animated GIF of the switch and the copy in both languages, into
+`build/store/`. Everything in it comes out of the real build, `assets/logo.png`
+and `tools/palette.py` - the same three sources the game is made of.
+
+### The switch is the one thing worth animating, so the shot tool learned to
+
+`shot.gd` photographed states. The reality switch is a **change**, and the
+frame where the light is half over - day on the left of the sweep, night on
+the right, the towers waking as it passes - is the single most useful picture
+this game has. `--switch` captures it as a numbered strip, which
+`gen_marketing.py` turns into a 28-frame GIF with a beat at each end so a
+loop reads as day-then-night rather than as a light flickering.
+
+**The first strip was twenty-four frames of a farm that never got dark.** The
+transition runs on `delta` for `TRANSITION_SECONDS`, which at `--fixed-fps 60`
+is ninety-six engine frames, and one picture per frame caught the first
+quarter of it. The step is worked out from the constants now:
+
+    var over := int(round(GameData.TRANSITION_SECONDS * float(FIXED_FPS)))
+    var step := maxi(int(ceil(float(over) * 1.1 / float(SWITCH_FRAMES))), 1)
+
+Which puts a second pair of numbers in two files - `FIXED_FPS` in `shot.gd`
+and in `tools/shot.py` - so `headless_check` asserts they agree, and asserts
+the arithmetic reaches the end of the fade.
+
+### Five screenshots, and none of them is a sixth of the farm
+
+The done-when names them and the reason is worth keeping: a store page has
+four seconds of somebody's scrolling, and four pictures of a field say
+"farming game" and stop.
+
+    01-day      noon.png         the farm at noon
+    02-switch   switch-14.png    the light half way over
+    03-night    switch-27.png    the same tiles, after dark
+    04-wave     wave.png         a wave mid-fight
+    05-tech     tech.png         what the days pay for
+
+Two of the five come out of the switch strip, which is the argument for
+capturing it: the frame in the middle and the frame at the end are a better
+"before and after" than any two scenarios built separately could be.
+
+### The capsules took two looks to stop being wrong
+
+**The first header was a close-up of four tiles and a hat.** The scale loop
+pushed the zoom as high as it would go before cropping, so a 460x215 capsule
+was 48% of the frame's width. The rule is the smallest whole scale that
+covers the target now - never a fractional one, because a smoothed pixel game
+on a store page is a lie about what the build looks like.
+
+**The second had the night HUD's health bar clipped across the top edge**,
+which reads as a mistake rather than as a game. The crop starts below the HUD
+rows.
+
+Both were found by opening the file, and neither would have been found any
+other way.
+
+### And the store screenshot found a bug in the game
+
+`screenshot-05-tech.png` came back with its footer running off the right of
+the screen:
+
+    2 of 12 nodes, 4 points spent - the ten nights pay 40 at best and the whole tree costs
+
+469 pixels of text from x=8 on a 480 pixel screen, and 475 in Portuguese.
+**It had been like that since task 0081** and no check could have caught it,
+because `TECH_SUMMARY` had `width` 0 in the string table - which is the column
+that says "do not measure this one".
+
+The sentence is shorter and the key has a width now, so `i18n_check` enforces
+it in both languages from here on. That is the actual fix: the text was
+wrong, but the reason it stayed wrong for twenty-six tasks is that it was
+exempt.
+
+### The copy is a person's, and the pitch is the design document's
+
+`docs/STORE.md` is version-controlled and written in both languages; the
+generator copies it into the set rather than producing it. The Portuguese
+pitch is **section 20 of `design.md` verbatim**, and both the `store` row and
+`headless_check` fail if the two drift apart - a page that stopped matching
+the pitch would be a page describing a game somebody decided not to make.
+
+The English is a translation of it plus an "about this game" section, and it
+says what is *not* in the game as plainly as what is: nothing online, not a
+roguelike, about an hour long.
+
+### Two small things on the way
+
+`release.py` cleared the whole of `build/` before exporting, which would have
+eaten `build/store` - an hour of somebody's marketing - the first time the two
+were run in the wrong order. It clears everything but that folder now.
+
+And `gen_marketing.py --keep` reuses the pictures already captured, because
+capturing is a minute and a half and laying out a capsule takes a dozen
+tries.
+
+### Hashes
+
+Both unchanged: **sim `1961000123`**, **data `407837701`**. `TECH_SUMMARY` is
+a string and the string table is not in either hash.
+
+`python tools/verify.py` prints PASS: 6308 asserts, 978 input cases, 0 failed,
+22 rows, no skips, 227 seconds.

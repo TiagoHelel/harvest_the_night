@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 98
+const GROUPS := 99
 
 const SettingsScript := preload("res://src/app/settings.gd")
 const AppScript := preload("res://src/app/app.gd")
@@ -176,6 +176,7 @@ func _run() -> void:
 	_task_0104_saves()
 	_task_0105_playtest()
 	_task_0106_release()
+	_task_0107_store()
 
 
 ## 0102 - the performance budget.
@@ -1129,6 +1130,86 @@ func _no_core_code_reads(needle: String) -> bool:
 				.contains(needle):
 			return false
 	return true
+
+
+## 0107 - the store assets.
+func _task_0107_store() -> void:
+	var shot := FileAccess.get_file_as_string("res://src/tools/shot.gd")
+	expect(shot.contains("_take_the_switch"),
+		"the shot tool can photograph the switch")
+	expect(shot.contains("SWITCH_FRAMES"),
+		"and it does it as a numbered strip")
+
+	# **Two numbers in two files that have to agree.** `shot.gd` works out
+	# how many engine frames the fade lasts from `TRANSITION_SECONDS` times
+	# the frame rate, and the frame rate is a flag `tools/shot.py` passes.
+	# Get them out of step and the strip catches part of the fade - which is
+	# exactly what the first capture did, twenty-four frames of a farm that
+	# never got dark.
+	var here := _number_after(shot, "const FIXED_FPS := ")
+	var there := _number_after(
+		FileAccess.get_file_as_string("res://tools/shot.py"), "FIXED_FPS = ")
+	expect(here > 0 and here == there,
+		"the shot tool and its wrapper agree on the frame rate",
+		"%d against %d" % [here, there])
+
+	# The strip has to cover the whole fade with something to spare, which
+	# is arithmetic anybody can do and nobody does.
+	var frames := _number_after(shot, "const SWITCH_FRAMES := ")
+	var over := int(round(GameData.TRANSITION_SECONDS * float(here)))
+	expect(frames >= 12,
+		"there are enough frames for an animation", str(frames))
+	expect(int(ceil(float(over) * 1.1 / float(frames))) * frames >= over,
+		"and the strip reaches the end of the fade",
+		"%d frames over %d" % [frames, over])
+
+	# ------------------------------------------------------------ the copy
+
+	expect(FileAccess.file_exists("res://docs/STORE.md"),
+		"there is store copy in the repository")
+	var copy := FileAccess.get_file_as_string("res://docs/STORE.md")
+	for heading in ["## English", "## Portugues"]:
+		expect(copy.contains(heading), "and it has a '%s' section" % heading)
+
+	# **The pitch is the design document's, not a rewrite of it.** The
+	# generator checks this too and fails the `store` row; it is here as
+	# well because this is the check somebody runs while they are editing,
+	# and a page that drifted from the pitch is a page about a different
+	# game.
+	var design := FileAccess.get_file_as_string("res://design.md")
+	var after := design.get_slice("# 20. Elevator Pitch", 1)
+	expect(after != design and after != "",
+		"design.md still has an elevator pitch in it")
+	var quoted := 0
+	var adrift: Array = []
+	for line in after.split("\n"):
+		var trimmed := String(line).strip_edges()
+		if trimmed.begins_with("#"):
+			break
+		if not trimmed.begins_with(">"):
+			continue
+		trimmed = trimmed.substr(1).strip_edges().replace("**", "")
+		if trimmed == "":
+			continue
+		quoted += 1
+		if not copy.contains(trimmed):
+			adrift.append(trimmed.substr(0, 40))
+	expect(quoted >= 4, "and it is more than a sentence", str(quoted))
+	expect(adrift.is_empty(),
+		"every line of it is in the store copy", str(adrift))
+
+	# ---------------------------------------------- and the five are five
+
+	var maker := FileAccess.get_file_as_string("res://tools/gen_marketing.py")
+	for wanted in ["noon.png", "switch-14.png", "switch-27.png", "wave.png",
+		"tech.png"]:
+		expect(maker.contains(wanted),
+			"the set takes its %s from the game" % wanted)
+	expect(maker.contains("NEAREST"),
+		"and scales it by whole pixels rather than smoothing it")
+	expect(not maker.contains("HTTPRequest"),
+		"and the store tool sends nothing anywhere either")
+	_completed += 1
 
 
 func _finish() -> void:

@@ -121,6 +121,7 @@ func _initialize() -> void:
 	var speaking := ""
 	var loud := false
 	var front := false
+	var strip := false
 	var id := "latest"
 	var wanted: Array = []
 	for arg in args:
@@ -132,6 +133,11 @@ func _initialize() -> void:
 				loud = true
 			elif maybe == "title":
 				front = true
+			elif maybe == "switch":
+				# **The moment the game is named after, as frames.**
+				# Task 0107 turns them into a GIF; nothing else in this
+				# tool writes more than one picture of one thing.
+				strip = true
 			elif maybe == "playtest":
 				# **Task 0105's build, photographed.** The badge and the
 				# watermark only exist when the flag is on, so this is the
@@ -171,6 +177,13 @@ func _initialize() -> void:
 	# **The front of the game, which is not a farm.** `--title` takes
 	# two pictures of `Title.tscn` instead of the scenario set:
 	# the ident that plays before it, and the title behind that.
+	if strip:
+		await _take_the_switch(folder)
+		print("%d written, %d failed, into %s"
+			% [_written, _failed, folder])
+		quit(1 if _failed > 0 else 0)
+		return
+
 	if front:
 		await _take_the_front(folder)
 		print("%d written, %d failed, into %s"
@@ -208,6 +221,77 @@ func _scenario(name: String) -> Array:
 		if str(entry[0]) == name:
 			return entry as Array
 	return []
+
+
+## How many pictures the switch is captured as. What ends up in the GIF.
+const SWITCH_FRAMES := 24
+
+## The frame rate `tools/shot.py` passes as `--fixed-fps`.
+##
+## **Two numbers in two files that have to agree**, so `headless_check`
+## asserts they do. The transition runs on `delta`, so how many engine frames
+## it lasts is this times `GameData.TRANSITION_SECONDS` - which is how the
+## step below is worked out rather than guessed. The first version guessed
+## one engine frame per picture and caught the first quarter of the fade:
+## twenty-four brightening frames of a farm that never got dark.
+const FIXED_FPS := 60
+
+## And how many of them are the farm before anything happens, so the GIF has
+## somewhere to start rather than opening mid-fade.
+const SWITCH_LEAD := 4
+
+
+## The reality switch, frame by frame.
+##
+## **The one thing in this tool that photographs a change rather than a
+## state.** Everything else builds a scripted moment and takes one picture;
+## this builds the moment before, asks for the night the way a player does,
+## and then takes a picture every frame while the light goes over.
+##
+## The simulation is advanced by hand a fixed amount per frame, so the strip
+## is the same strip every time. `WorldView` runs its fade on `delta`, which
+## `--fixed-fps` makes a fixed number - which is the whole reason this tool
+## passes that flag.
+func _take_the_switch(folder: String) -> void:
+	seed(SPARK_SEED)
+	var main: Node = load("res://scenes/Main.tscn").instantiate()
+	root.add_child(main)
+	await process_frame
+	await process_frame
+
+	main.begin_run(SEED)
+	var driver = main.get_node("%SimDriver")
+	var state: Dictionary = driver.state
+	_a_defended_farm(state)
+	_standing_at = Player.cell(state)
+
+	# Dusk, with the night not yet asked for.
+	Sim.advance(state, maxi(GameData.DUSK_AT_TICK - int(state["tick"]), 1))
+	for _i in SETTLE:
+		await process_frame
+	for i in SWITCH_LEAD:
+		await _shoot("switch-%02d" % i, folder)
+		await process_frame
+
+	# **Asked for the way a player asks**, by writing the intent, so the
+	# phase machine and the light and the theatre all start together.
+	(state["intent"] as Dictionary)["begin_night"] = true
+
+	# **The whole fade, spread over the pictures there are.** A tenth past
+	# the end, so the strip settles on the night rather than stopping while
+	# the light is still moving.
+	var over := int(round(GameData.TRANSITION_SECONDS * float(FIXED_FPS)))
+	var step := maxi(int(ceil(float(over) * 1.1 / float(SWITCH_FRAMES))), 1)
+	for i in SWITCH_FRAMES:
+		for _f in step:
+			# One tick a frame is twice speed, which is a farm that is doing
+			# something while the light goes over rather than a still.
+			Sim.advance(state, 1)
+			await process_frame
+		await _shoot("switch-%02d" % (SWITCH_LEAD + i), folder)
+
+	root.remove_child(main)
+	main.free()
 
 
 ## The two pictures of the front of the game.

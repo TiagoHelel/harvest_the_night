@@ -1,7 +1,7 @@
 # 0107 - Store assets
 
 - **Phase:** 8 - Ship the MVP
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0082, 0099
 - **Likely files:** tools/gen_marketing.py, build/store/
 

@@ -322,7 +322,7 @@ TECH_SHARP_TOOLS,0,sharp tools,ferramentas afiadas
 TECH_SPARE_STAKES,0,spare stakes,estacas de reserva
 TECH_STEADY_HANDS,0,steady hands,mãos firmes
 TECH_STOUT_TIMBERS,0,stout timbers,madeira reforçada
-TECH_SUMMARY,0,"%d of %d nodes, %d points spent - the ten nights pay %d at best and the whole tree costs %d","%d de %d nós, %d pontos gastos - as dez noites rendem %d no máximo e a árvore toda custa %d"
+TECH_SUMMARY,464,"%d of %d nodes, %d spent - ten nights pay %d at best, the tree costs %d","%d de %d nós, %d gastos - dez noites rendem %d, a árvore custa %d"
 TECH_TITLE,0,TECHNOLOGY,TECNOLOGIA
 TECH_TRUE_SIGHTS,0,true sights,mira certeira
 TITLE_BUILD,240,v%s %s - built %s,v%s %s - de %s

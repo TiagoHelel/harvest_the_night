@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`#######################.`  **106 / 110 done**
+`#######################.`  **107 / 110 done**
 
-0 doing / 4 todo / 0 blocked across 9 phases.
+0 doing / 3 todo / 0 blocked across 9 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0107 - Store assets**. The whole of what is left is
+First up: **0108 - The devlog and a trailer clip**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,24 +26,24 @@ which rewrites this file for you.
 
 ## What is open
 
-4 task(s) left, the ready ones first, then what they
+3 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
-### 0107 - Store assets
+### 0108 - The devlog and a trailer clip
 
-Ready to pick up.  Likely files: `tools/gen_marketing.py, build/store/`.
+Ready to pick up.  Likely files: `tools/devlog.py, docs/devlog/`.
 
-The page it goes on: capsule images, screenshots, the pitch, generated from the game rather than mocked up.
+The thing that gets people to look: thirty seconds that show the farm, the switch and the horde.
 
-- Capsules at the usual sizes, from the real game and the real palette
-- Five screenshots from `shot.gd`, picked to show the loop, not five of the farm
-- The elevator pitch from section 20 of the design document, edited to fit a store page
-- An animated GIF of the reality switch
-- English and Portuguese copy
+- A scripted capture: a day of farming, the transition, a night holding, a wall falling
+- It is captured from a seeded run, so it can be captured again
+- A devlog page from the journal: what the loop was meant to be and what it turned out to be
+- Honest about what is not in the MVP
+- Both in English and Portuguese
 
-  - done when: One command regenerates the whole set
-  - done when: The screenshots show a day, a night, the switch, a busy wave and the tech tree
+  - done when: The clip is thirty seconds and needs no explanation
+  - done when: The devlog is generated from `implementation/PROGRESS.md` rather than written twice
 
 ### 0109 - The character reacts
 
@@ -73,21 +73,6 @@ The last English sentences in `src/core/`: the lines that say why a thing cannot
 
   - done when: `grep` finds no player-facing sentence left in `src/core/`
   - done when: Every refusal reads in Portuguese, and the checker proves it fits
-
-### 0108 - The devlog and a trailer clip
-
-Waits on 0107.  Likely files: `tools/devlog.py, docs/devlog/`.
-
-The thing that gets people to look: thirty seconds that show the farm, the switch and the horde.
-
-- A scripted capture: a day of farming, the transition, a night holding, a wall falling
-- It is captured from a seeded run, so it can be captured again
-- A devlog page from the journal: what the loop was meant to be and what it turned out to be
-- Honest about what is not in the MVP
-- Both in English and Portuguese
-
-  - done when: The clip is thirty seconds and needs no explanation
-  - done when: The devlog is generated from `implementation/PROGRESS.md` rather than written twice
 
 ## 0 - Foundation  (12/12)
 
@@ -215,7 +200,7 @@ The thing that gets people to look: thirty seconds that show the farm, the switc
 - [x] **0100** [Exports: Windows and Web](prompts/0100-exports.md)
 - [ ] **0110** [Refusals in two languages](prompts/0110-refusals.md)
 
-## 8 - Ship the MVP  (6/8)
+## 8 - Ship the MVP  (7/8)
 
 - [x] **0101** [Onboarding in seven lines](prompts/0101-onboarding.md)
 - [x] **0102** [A performance budget](prompts/0102-perf-budget.md)
@@ -223,5 +208,5 @@ The thing that gets people to look: thirty seconds that show the farm, the switc
 - [x] **0104** [Saves survive an update](prompts/0104-save-compat.md)
 - [x] **0105** [A playtest build](prompts/0105-playtest-build.md)
 - [x] **0106** [The release checklist](prompts/0106-release-checklist.md)
-- [ ] **0107** [Store assets](prompts/0107-store-assets.md)
-- [ ] **0108** [The devlog and a trailer clip](prompts/0108-devlog.md) - needs 0107
+- [x] **0107** [Store assets](prompts/0107-store-assets.md)
+- [ ] **0108** [The devlog and a trailer clip](prompts/0108-devlog.md)
