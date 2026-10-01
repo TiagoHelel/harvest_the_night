@@ -1,5 +1,13 @@
 # implementation/ - the build backlog
 
+## Sprite production backlog
+
+The game implementation queue is complete (110 tasks). The new visual overhaul
+has a separate plan and 20-task queue in [sprites/README.md](sprites/README.md).
+Use `sprites/prompts/00-RUNNER-LOOP.md` for sprite production and
+`python implementation/sprites/task.py` for its statuses. The original completed
+prompts and their status index remain the history of the game build.
+
 108 tasks that take **HARVEST THE NIGHT** from an empty repository to a shipped
 MVP: a cozy farm by day, a tower defence on the same tiles by night, ten nights,
 a boss, and a store page.

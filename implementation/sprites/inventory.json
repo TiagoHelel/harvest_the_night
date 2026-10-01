@@ -1,0 +1,1969 @@
+{
+  "captured_date": "2026-10-01",
+  "purpose": "pre-production sprite baseline",
+  "total": 217,
+  "counts_by_family": {
+    "actors": 48,
+    "buildings": 70,
+    "crops": 14,
+    "enemies": 21,
+    "props": 17,
+    "terrain": 20,
+    "ui": 27
+  },
+  "assets": [
+    {
+      "path": "sprites/actors/carry_0.png",
+      "width": 48,
+      "height": 52,
+      "owner": "tools/cut_sheet.py",
+      "bytes": 2795,
+      "sha256": "27452ed5a719b4dbbe01fca179bfe40e8f7623454857434a619df66c2b79f9d8",
+      "rgba_sha256": "d8384113971612006cbd06af8dda5e59f3fbda75fc5643c3808149740345f7a9"
+    },
+    {
+      "path": "sprites/actors/carry_1.png",
+      "width": 48,
+      "height": 52,
+      "owner": "tools/cut_sheet.py",
+      "bytes": 2809,
+      "sha256": "70575c587950ed621484aeafe0258a1cfd2cb501b21396c0a9354e8efa3b47b9",
+      "rgba_sha256": "4f6aaaa368679158ea813503ccf193f3b01ac1fffcbedf78a82629e9c3bc479c"
+    },
+    {
+      "path": "sprites/actors/chop_0.png",
+      "width": 48,
+      "height": 52,
+      "owner": "tools/cut_sheet.py",
+      "bytes": 2640,
+      "sha256": "57f8f9b29a1fb9f598dc92865f1df095f28524e183e253cc29f95fd607604f40",
+      "rgba_sha256": "a5179f2b86c1e33ffe62ddf41fa5d03a2ce6471815e3529c8db20112208bef02"
+    },
+    {
+      "path": "sprites/actors/chop_1.png",
+      "width": 48,
+      "height": 52,
+      "owner": "tools/cut_sheet.py",
+      "bytes": 2848,
+      "sha256": "e720f21ea7716e1b47faa39950ecc29fa12082d36bcc2b2f3b99e49b667cbe4f",
+      "rgba_sha256": "90291782d161fa2a7bf03d9b2c180ae01ca57cc68321fdd7033c9d1ef32c9d69"
+    },
+    {
+      "path": "sprites/actors/chop_2.png",
+      "width": 48,
+      "height": 52,
+      "owner": "tools/cut_sheet.py",
+      "bytes": 3167,
+      "sha256": "46c9db8f5abea411a215d75f717845fcb4b6dbc717b3f9c199bc816cab519df9",
+      "rgba_sha256": "96a60864e2d0fb0b9752d3bf22ab7a3fce4ce0170be125ab443eaf07131a4476"
+    },
+    {
+      "path": "sprites/actors/chop_3.png",
+      "width": 48,
+      "height": 52,
+      "owner": "tools/cut_sheet.py",
+      "bytes": 2825,
+      "sha256": "13488a9886e13d5a62f2929041afbfe573fb78ce89e663214643d267116bac16",
+      "rgba_sha256": "5653e14863e90088d9fd6edec78c4a056cde29ada8999f80cbb948282825c574"
+    },
+    {
+      "path": "sprites/actors/craft_0.png",
+      "width": 48,
+      "height": 52,
+      "owner": "tools/cut_sheet.py",
+      "bytes": 2640,
+      "sha256": "8bb55b96f5747ac1993533c39ec394a6d650f56cddb9ca5e35240acccede29aa",
+      "rgba_sha256": "800535e07115dac90db96c303e6d9d73c37c54f1eb37759f07056e6c0ef66d7c"
+    },
+    {
+      "path": "sprites/actors/fish_0.png",
+      "width": 48,
+      "height": 52,
+      "owner": "tools/cut_sheet.py",
+      "bytes": 2985,
+      "sha256": "2ca1726b2a48f3b25b87ddee297ce50d5cfb3f083ed339a66ca1da6b7e6af3b1",
+      "rgba_sha256": "771a9b2fe2bd344772dbe5812976aeb9629a724a15f2592f1b9388d9bd0bace8"
+    },
+    {
+      "path": "sprites/actors/harvest_0.png",
+      "width": 48,
+      "height": 52,
+      "owner": "tools/cut_sheet.py",
+      "bytes": 2705,
+      "sha256": "fd5eddd94f4c4ce314487771b8aef72c294563c729ac050046da25ea5e40fb99",
+      "rgba_sha256": "47188ce761b387fb361941f23506a3d2389df52f1da5a48415629f95727e91c3"
+    },
+    {
+      "path": "sprites/actors/idle_north_0.png",
+      "width": 48,
+      "height": 52,
+      "owner": "tools/cut_sheet.py",
+      "bytes": 2913,
+      "sha256": "9f52412578e5fc79872bb326fae2606a9ec61d862e73a560f99b12c0522ba56a",
+      "rgba_sha256": "df5b7b5635136023d79947cec7456eb587405067aa1558fc0ce67b8b1201599d"
+    },
+    {
+      "path": "sprites/actors/idle_north_1.png",
+      "width": 48,
+      "height": 52,
+      "owner": "tools/cut_sheet.py",
+      "bytes": 2815,
+      "sha256": "7d637eb935b9bd0edbd09a8dced460c8dbb2f9c75e0cc095649b73e67a339a19",
+      "rgba_sha256": "b6923b584d6ae2e94f550c7407edfc7bc83e759b9e2821070bc93974a80a02da"
+    },
+    {
+      "path": "sprites/actors/idle_north_2.png",
+      "width": 48,
+      "height": 52,
+      "owner": "tools/cut_sheet.py",
+      "bytes": 2817,
+      "sha256": "6f9f6b28a50c7aecc255343279eac8a300504f1de83fa7008218af5d498a5cde",
+      "rgba_sha256": "292a8c9a39f51116bd40470658c01e6137681a09a7a1112584a1a918b204f4f3"
+    },
+    {
+      "path": "sprites/actors/idle_south_0.png",
+      "width": 48,
+      "height": 52,
+      "owner": "tools/cut_sheet.py",
+      "bytes": 2923,
+      "sha256": "ccce33f4e51b646dc3a38f343de73ad4223fddf39721e47ecf6302bad5946616",
+      "rgba_sha256": "821fff507e2fef8c1a0d080b32e8193d6bf3a32a0126c22f17a0fbf60f12b3aa"
+    },
+    {
+      "path": "sprites/actors/idle_south_1.png",
+      "width": 48,
+      "height": 52,
+      "owner": "tools/cut_sheet.py",
+      "bytes": 2894,
+      "sha256": "cbe4aec9c3cc7438bce54ffa59d78f8b36ebbac1530e6879c343659fb016846d",
+      "rgba_sha256": "752b417b460095f25c9130a2cf96aa6cbe6e846c5200cc4468db67c1b51413da"
+    },
+    {
+      "path": "sprites/actors/idle_south_2.png",
+      "width": 48,
+      "height": 52,
+      "owner": "tools/cut_sheet.py",
+      "bytes": 2957,
+      "sha256": "6b4936c75441602b864640310089db729960a37514000e86e0e9bad828d4f448",
+      "rgba_sha256": "b42a2b8d92a8175700a427054a7bb9bc609f3bdcaeef222f08297a2698f5134b"
+    },
+    {
+      "path": "sprites/actors/idle_west_0.png",
+      "width": 48,
+      "height": 52,
+      "owner": "tools/cut_sheet.py",
+      "bytes": 2453,
+      "sha256": "34884b39feb0aa58706bb69324d8bac7a3ac7349626b45e8c474c744ead3ade0",
+      "rgba_sha256": "7a8835ef1ca0779254acd45c15f4251cd3f41d388849ed65780eb621c9da251c"
+    },
+    {
+      "path": "sprites/actors/idle_west_1.png",
+      "width": 48,
+      "height": 52,
+      "owner": "tools/cut_sheet.py",
+      "bytes": 2457,
+      "sha256": "5b6f76f1da469c67e8e0c241821154cb19ea6674c4bb0cbcd9cea41fb686c3ce",
+      "rgba_sha256": "425a39ca502ed45ca13abd2fb394d9f0ab493508155700858b22afde47704263"
+    },
+    {
+      "path": "sprites/actors/idle_west_2.png",
+      "width": 48,
+      "height": 52,
+      "owner": "tools/cut_sheet.py",
+      "bytes": 2572,
+      "sha256": "df0980944657f0ebebccbca5e91729aa9c7b3385a2769206e446874a3c284898",
+      "rgba_sha256": "1f9b69efc95fcc912d6af56d01e89d04eb79bc9693022714e73e38d6daf31666"
+    },
+    {
+      "path": "sprites/actors/mine_0.png",
+      "width": 48,
+      "height": 52,
+      "owner": "tools/cut_sheet.py",
+      "bytes": 2635,
+      "sha256": "9754660614851f22214d4caea2a6e615317e33b072a0f5ba6d36f7072c74c549",
+      "rgba_sha256": "b4c8cdcc256fb539b13e1dae96d381755bd5833901337f35aaef588e2d565b85"
+    },
+    {
+      "path": "sprites/actors/mine_1.png",
+      "width": 48,
+      "height": 52,
+      "owner": "tools/cut_sheet.py",
+      "bytes": 2876,
+      "sha256": "37d9dbc320f3074fa26b1b6f580d8c820ecab9e3c20d1cca7d2433671d6f7e7a",
+      "rgba_sha256": "088efd1e02c3bca5a09b024fddaba5e53a012e383b5b3a033ac3336769512b0b"
+    },
+    {
+      "path": "sprites/actors/placeholder.png",
+      "width": 16,
+      "height": 24,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 172,
+      "sha256": "1153f267b77fb1f8b21c9194bb51f7c49b4976a5658eaef540a85c29c733ef9c",
+      "rgba_sha256": "e39cf0df74ceed9031f38634f201bad5905f7627abaf0f7fcb1a3da5911ce2d3"
+    },
+    {
+      "path": "sprites/actors/plant_0.png",
+      "width": 48,
+      "height": 52,
+      "owner": "tools/cut_sheet.py",
+      "bytes": 3156,
+      "sha256": "564c885e24b7dc4141a901c0e8f7541c370a015dcf9d77fc05b0164b9b51cac6",
+      "rgba_sha256": "670434fc184bfbb5f5ed67a0bba7da73baa9669ffd9e0580dd963784b905cbde"
+    },
+    {
+      "path": "sprites/actors/plant_1.png",
+      "width": 48,
+      "height": 52,
+      "owner": "tools/cut_sheet.py",
+      "bytes": 2760,
+      "sha256": "d94631092cc3f189eeddf7ac3dd36080d64829837361a3ba60bf111cb10e6bb7",
+      "rgba_sha256": "44fcdb5f9fa1da371e98ffa676a76025b30ff20f3d2ae60504aff1894c597b46"
+    },
+    {
+      "path": "sprites/actors/plant_2.png",
+      "width": 48,
+      "height": 52,
+      "owner": "tools/cut_sheet.py",
+      "bytes": 2948,
+      "sha256": "4ca2b73ae8edb830c41905acb7cc27709778d5905f10301c1181f8551eb0f8ee",
+      "rgba_sha256": "b3e1ee8eff8a42d1348d49fb92440495a94434837827ced662cf5f9f26b70049"
+    },
+    {
+      "path": "sprites/actors/react_bang_0.png",
+      "width": 48,
+      "height": 52,
+      "owner": "tools/cut_sheet.py",
+      "bytes": 2481,
+      "sha256": "91182e4c12e84dd329ca1ebe4f25a1ba660b58af14047d6c8d6fa31aeb832a62",
+      "rgba_sha256": "a624931f7286a8c6f6ede4190371f241f8cee0fef70f93120d413280857bb472"
+    },
+    {
+      "path": "sprites/actors/react_heart_0.png",
+      "width": 48,
+      "height": 52,
+      "owner": "tools/cut_sheet.py",
+      "bytes": 2693,
+      "sha256": "cbfcebc72c81d7f60c49d1c11e0fe89ee16250e0cbaacd3b098c3673148b6e3c",
+      "rgba_sha256": "ee2dee242f9b6b2f212a46829fcb18a9ee37b9bb3a8ddb88edce869fd88cbc02"
+    },
+    {
+      "path": "sprites/actors/react_note_0.png",
+      "width": 48,
+      "height": 52,
+      "owner": "tools/cut_sheet.py",
+      "bytes": 2521,
+      "sha256": "6ab0461c739e142bc8fcb38573036977af07e2fe05533d3ecf1297916bd3f020",
+      "rgba_sha256": "5e8ad39bd229fa4cb7659203b97e048ea6a67b1a2e35e56d0bed83efc45d8608"
+    },
+    {
+      "path": "sprites/actors/react_question_0.png",
+      "width": 48,
+      "height": 52,
+      "owner": "tools/cut_sheet.py",
+      "bytes": 2487,
+      "sha256": "f343c88a8bbb9167730b127eb4e3a49c871e8aad052c1447b8dee17fd7b49869",
+      "rgba_sha256": "47485de94b29da39e2859ad4d6b52b2f94cd00f6c735b607e62c3b6e00858c76"
+    },
+    {
+      "path": "sprites/actors/shadow.png",
+      "width": 20,
+      "height": 8,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 103,
+      "sha256": "4f92941c1fc8e584e9ccfb60bb3819f72054cf0c0509c8aa45d5b804ba5deec7",
+      "rgba_sha256": "95e30e7d377aac324225b625cbd6989e3fa02f932962984370855f029fbe1244"
+    },
+    {
+      "path": "sprites/actors/till_0.png",
+      "width": 48,
+      "height": 52,
+      "owner": "tools/cut_sheet.py",
+      "bytes": 3065,
+      "sha256": "fc8c5439f637b3c6a0fa0349c891eb764d32cb85910b678d40355a3cca27c53a",
+      "rgba_sha256": "8084a886266ef8cafe4177bae488f036a74422b9ef41c71887cca1ac913abd59"
+    },
+    {
+      "path": "sprites/actors/till_1.png",
+      "width": 48,
+      "height": 52,
+      "owner": "tools/cut_sheet.py",
+      "bytes": 2907,
+      "sha256": "75b78804d60cde163bdfa9a5281c30a0c9de2c411f7815b571d7ce250f6785d3",
+      "rgba_sha256": "55978a34c590a922044801ff82232799fb888dff934c81d7c759ba126ca7074c"
+    },
+    {
+      "path": "sprites/actors/till_2.png",
+      "width": 48,
+      "height": 52,
+      "owner": "tools/cut_sheet.py",
+      "bytes": 2680,
+      "sha256": "32750efb799cc370aa28dcd32862d4b4e83a171682b8fa142787a7880f175c29",
+      "rgba_sha256": "fd3db05a03d152f7008608beeb413aae5daeb9afd30fc2eb05cd9ee3a38ec704"
+    },
+    {
+      "path": "sprites/actors/walk_north_0.png",
+      "width": 48,
+      "height": 52,
+      "owner": "tools/cut_sheet.py",
+      "bytes": 2763,
+      "sha256": "219af78b3c46ffa6d6440a09739c88e557436c23f7b9c65aa781bac0ec5e625f",
+      "rgba_sha256": "3882c97975820a028f460c6ed99425279ce1d0982d95bfa596587b9851fdb03c"
+    },
+    {
+      "path": "sprites/actors/walk_north_1.png",
+      "width": 48,
+      "height": 52,
+      "owner": "tools/cut_sheet.py",
+      "bytes": 2600,
+      "sha256": "488415ce2428ee767eeac710b3fdb70b99d76b93e4ab7945a6d94f286a665271",
+      "rgba_sha256": "b17336770197f6d2580c16b33fabc4b9dfb1643409dd5ecf298d3d0a6a7108a3"
+    },
+    {
+      "path": "sprites/actors/walk_north_2.png",
+      "width": 48,
+      "height": 52,
+      "owner": "tools/cut_sheet.py",
+      "bytes": 2774,
+      "sha256": "ae734b5ff3cdc174c149da3c92c30ad220271919f064a62f13f8efd32110b494",
+      "rgba_sha256": "8f2b71ca394fd920645b885dcf59bc4ec9654033ab8c4e41906a6da87f6474de"
+    },
+    {
+      "path": "sprites/actors/walk_north_3.png",
+      "width": 48,
+      "height": 52,
+      "owner": "tools/cut_sheet.py",
+      "bytes": 2770,
+      "sha256": "35c8ff7a7dac78ba7dd822cb65713da3ea2962abc6cfd21f46943ec183787c81",
+      "rgba_sha256": "eb4e34474e10846494227aa2deaa780972015fcc4b0dc9ffa79e6126d8d6af47"
+    },
+    {
+      "path": "sprites/actors/walk_south_0.png",
+      "width": 48,
+      "height": 52,
+      "owner": "tools/cut_sheet.py",
+      "bytes": 2600,
+      "sha256": "08a487dcd6b559cb1cef1887b8d3c9430bd2094243600294bd9dd48342c8a4a9",
+      "rgba_sha256": "babe57c80e580fcfd4fbc024e3811ba2e239540151da4d06b2862e591aa8d1b8"
+    },
+    {
+      "path": "sprites/actors/walk_south_1.png",
+      "width": 48,
+      "height": 52,
+      "owner": "tools/cut_sheet.py",
+      "bytes": 2680,
+      "sha256": "437ecb1d423f5547b754db2b12f5f8a95bc8ce65621da7e6d90689ca2729b5cc",
+      "rgba_sha256": "4cb36f5cf6b2c217a2c5f3565109045c931697abb8258aa08def7bb74b6b9339"
+    },
+    {
+      "path": "sprites/actors/walk_south_2.png",
+      "width": 48,
+      "height": 52,
+      "owner": "tools/cut_sheet.py",
+      "bytes": 2743,
+      "sha256": "bb60d86d2fcc16a313ffe0465254147f0f9cd01952d81651f2cead5b6c77e4c1",
+      "rgba_sha256": "60153e459fcc36182cb6ea1b57f725ab4d2f5e0ad913d67b228102de8a923eb8"
+    },
+    {
+      "path": "sprites/actors/walk_south_3.png",
+      "width": 48,
+      "height": 52,
+      "owner": "tools/cut_sheet.py",
+      "bytes": 2616,
+      "sha256": "bda4f783ddd527928bd5d530ce0ef3f0e791ae707c1b53f8e25cb21bb584709c",
+      "rgba_sha256": "2c8f38d8d56deb5af349ff0a6205e3df7d79c3b8d65815d42e92e1c5e3daf378"
+    },
+    {
+      "path": "sprites/actors/walk_west_0.png",
+      "width": 48,
+      "height": 52,
+      "owner": "tools/cut_sheet.py",
+      "bytes": 2566,
+      "sha256": "b9346e32d3bc02c8ffd3d8c7bba21763cf7f9aa18c0a3ed5eb953b88b33de9e2",
+      "rgba_sha256": "ec1efa073341838684becd57d31a05031c1e7f5b88686fa2adca15e025ecb5a4"
+    },
+    {
+      "path": "sprites/actors/walk_west_1.png",
+      "width": 48,
+      "height": 52,
+      "owner": "tools/cut_sheet.py",
+      "bytes": 2641,
+      "sha256": "1fe59cb69437a9fb1d4cab2d4571c130d2de4c88edfa6974b2cbb8abdac64fa7",
+      "rgba_sha256": "c05f68fbd3aba44f511c148e8e850959e9acb999dd30980320db9ed1a06d8c85"
+    },
+    {
+      "path": "sprites/actors/walk_west_2.png",
+      "width": 48,
+      "height": 52,
+      "owner": "tools/cut_sheet.py",
+      "bytes": 2567,
+      "sha256": "1a9ec539125c5b18c51a6e107397917c82ed1161d97fc7841b148589765d1172",
+      "rgba_sha256": "cefeda52adceed943f21f2287a20250c6550f752c38173619ea8680c97461111"
+    },
+    {
+      "path": "sprites/actors/walk_west_3.png",
+      "width": 48,
+      "height": 52,
+      "owner": "tools/cut_sheet.py",
+      "bytes": 2682,
+      "sha256": "29ad3096164a30f53260b71a571aa5c4fa44a4233db13eca189109c583d73a23",
+      "rgba_sha256": "b739443d969b9c447516da5250bd466b98d9b191d274bf1b59a0751ebfa782d1"
+    },
+    {
+      "path": "sprites/actors/water_0.png",
+      "width": 48,
+      "height": 52,
+      "owner": "tools/cut_sheet.py",
+      "bytes": 3371,
+      "sha256": "02058de1865094de4b30949908cba847ae8f40390267646a184381926963104f",
+      "rgba_sha256": "ec6adef4ac4dd5b5f43dbc03752d5e5d53f1f7d7a1478cc92e173a833e1cee37"
+    },
+    {
+      "path": "sprites/actors/water_1.png",
+      "width": 48,
+      "height": 52,
+      "owner": "tools/cut_sheet.py",
+      "bytes": 3185,
+      "sha256": "92c7a8a2c4f69fc7763f281dba3cd038eb2a9bfd0d6a39405704a2d9a48871bd",
+      "rgba_sha256": "88cef26b101986e2d6fa6da0dba8fda2f1464eae7ec2f2d3224d942c2f8a63e9"
+    },
+    {
+      "path": "sprites/actors/water_2.png",
+      "width": 48,
+      "height": 52,
+      "owner": "tools/cut_sheet.py",
+      "bytes": 2997,
+      "sha256": "dde656d2856dff805ee4c74d09a6c85f5aa3f70037d37ef65123c915b0518f03",
+      "rgba_sha256": "5c1a71298ad2ac6a5e1e9d667257d2236bb9975350b8d7cd57dfb7b86a8f34c4"
+    },
+    {
+      "path": "sprites/actors/water_3.png",
+      "width": 48,
+      "height": 52,
+      "owner": "tools/cut_sheet.py",
+      "bytes": 3179,
+      "sha256": "5fec8716ffb75d7d70e92ea652ab15f4b11bf1a76fc22da4320fca10267b45be",
+      "rgba_sha256": "52a5bdb653c6755d3c683ef4b315a18752545bb7d1edc03783c5baf32790317c"
+    },
+    {
+      "path": "sprites/buildings/auto_crossbow.png",
+      "width": 16,
+      "height": 32,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 236,
+      "sha256": "27ad8b9d71f7fcbcee4e9faa6885ed1d8ddd4b922306217e946ddc73e3b953fc",
+      "rgba_sha256": "e72f5f9207999d27b4530e6edfb961b99ff7419626b4935e458bc28be8dfc112"
+    },
+    {
+      "path": "sprites/buildings/auto_crossbow_2.png",
+      "width": 16,
+      "height": 38,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 241,
+      "sha256": "56becc3c995688160f3d0a8246ab72de987e0efe602974e6ab613fd59646b725",
+      "rgba_sha256": "d19762cf3fcb65bfa84685450799d5d59697b0a5873fbdd4c6f953b0ae97b31b"
+    },
+    {
+      "path": "sprites/buildings/auto_crossbow_2_fire.png",
+      "width": 16,
+      "height": 38,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 257,
+      "sha256": "74e0bd8fb2fbd046d879a654d84ea1007e2c49466b0e3eeabfe65333fe4755ae",
+      "rgba_sha256": "8ef492b573854697e10d1f7eb3cc7944ac63092bf07826ccb8935cfdc12fa7ab"
+    },
+    {
+      "path": "sprites/buildings/auto_crossbow_2_hurt.png",
+      "width": 16,
+      "height": 38,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 280,
+      "sha256": "e3f0ce718c9f96bd9c9db2b83f437281accf9365e668cc23aee38d831be49fb9",
+      "rgba_sha256": "0ca39f29caedb1ed93fc1c0762e15cc222384d2b7529f335f92346a56ea2320c"
+    },
+    {
+      "path": "sprites/buildings/auto_crossbow_3.png",
+      "width": 16,
+      "height": 44,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 244,
+      "sha256": "e5a5b336298870318fa8f6d48ff6d7c174e14ca4e1c9c161cb6158653c980b51",
+      "rgba_sha256": "67671da004cf77b618572f242b8b6c55a8b848819d73cb693f4e7683f7a9c860"
+    },
+    {
+      "path": "sprites/buildings/auto_crossbow_3_fire.png",
+      "width": 16,
+      "height": 44,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 260,
+      "sha256": "8b7dc1756ddbb2b98939603dff0c179bbcc9d31f18c304771b13e1020c479e5a",
+      "rgba_sha256": "201c81ff791090d08093e2a1dc8e53713ae742268d7ded7ac42dcb270c1ec92f"
+    },
+    {
+      "path": "sprites/buildings/auto_crossbow_3_hurt.png",
+      "width": 16,
+      "height": 44,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 283,
+      "sha256": "a4cc9bd62d5c79177c71b8a677fbba46dd331a5678c9208b893d4b49e43f2bb1",
+      "rgba_sha256": "4ff479b93c3ba0731539215ce5b1075fb336fcff9aa83bd3d5bc56c8bec97ef3"
+    },
+    {
+      "path": "sprites/buildings/auto_crossbow_fire.png",
+      "width": 16,
+      "height": 32,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 252,
+      "sha256": "7c0839c1b185857631b142a5dc347c48c2c969a7bb78450b4a150602c0b41e07",
+      "rgba_sha256": "ba044dbb9403cb14af6c3202a88187713cf6a66c4dda350a4e2fa89ed7a00a8a"
+    },
+    {
+      "path": "sprites/buildings/auto_crossbow_hurt.png",
+      "width": 16,
+      "height": 32,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 272,
+      "sha256": "76bddcb4d9aa206256c7476bab288e75888d8edb2337ac80a50b6c3ff7b12878",
+      "rgba_sha256": "e157cc716dbc845a031030c8c38cd45bd4542621fa8de13c524ce5072a010734"
+    },
+    {
+      "path": "sprites/buildings/auto_crossbow_wreck.png",
+      "width": 16,
+      "height": 32,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 150,
+      "sha256": "f4ca6ed0159c1fe640230ec0990ee6107ea886137ee74f6a0db6cdc2daf5527e",
+      "rgba_sha256": "cc47f1de292c97f9e4e2734b506e02e49de4242079271279f0e6032e4ba01b30"
+    },
+    {
+      "path": "sprites/buildings/barricade.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 150,
+      "sha256": "946ba29d69c23e9b24f229bc02968695280f20b40c7ac4edf0bffedaee885dbb",
+      "rgba_sha256": "1359ac0c5474db4254c2b72fea8ddbff43e4334e158650981e90f952ccea90c7"
+    },
+    {
+      "path": "sprites/buildings/barricade_hurt.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 183,
+      "sha256": "b2aa3c500b83188ff52536bae3f25c520afddd9fbce6ea855826e9a9e52d2fa4",
+      "rgba_sha256": "ca8304e2acf194bd140f5d5ebdeec6742f1322248abd54ee5d3e352297d57c3a"
+    },
+    {
+      "path": "sprites/buildings/barricade_wreck.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 119,
+      "sha256": "950896dd0c5c399cb35c286a42883b45c4c8846b7fce3c027a353ae288c7afb5",
+      "rgba_sha256": "2fc48de374d4e94b613ef7c9b71b2c0d147a1ce4a2c64c6e723be2aa407fa0b6"
+    },
+    {
+      "path": "sprites/buildings/fence.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 135,
+      "sha256": "c14e498231c6ebfef1302ab4724bb62ca78b61c700f632cb60e0b4125fc43a66",
+      "rgba_sha256": "de0acb07c3bdf9fc7fd8920180e6fcf2d3336fbb0a7e6aaa19f2f25f82073597"
+    },
+    {
+      "path": "sprites/buildings/fence_hurt.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 162,
+      "sha256": "b034edd945bd1a5de50b91cd2623ec74f2ac5daf4b366f7376d965ceb2b3e164",
+      "rgba_sha256": "240036ebf4c94acc7050458ba74483ebf55dc88fa686643884d1e64ca5d2c2e1"
+    },
+    {
+      "path": "sprites/buildings/fence_wreck.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 100,
+      "sha256": "97d229524cd33b7dff2a9a0890ea829652e06e628110fc1a80198cea91a3b9c4",
+      "rgba_sha256": "773ea44165ae594ef97ff8818763ec0827bceadaddc6e04af16ad6a5c5204b42"
+    },
+    {
+      "path": "sprites/buildings/flame_tower.png",
+      "width": 16,
+      "height": 32,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 229,
+      "sha256": "0502dd1d1af4b0bfc184cebaffe6258c9b2c958d611c732b45b3acd501d3dd3d",
+      "rgba_sha256": "5b0ec091741a902ec2dc1852d7d13bb68cc2dd30ad4c7601ac19dbb83b110088"
+    },
+    {
+      "path": "sprites/buildings/flame_tower_2.png",
+      "width": 16,
+      "height": 38,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 234,
+      "sha256": "2c0797ae84bc1ab7bdf57da3f30ad28c98c5072a46091bf4ee6511b7802fb407",
+      "rgba_sha256": "40db7d15c16d17f4c7ffacb33733ff6538f72280df1ea3946dfdf567d970d452"
+    },
+    {
+      "path": "sprites/buildings/flame_tower_2_fire.png",
+      "width": 16,
+      "height": 38,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 238,
+      "sha256": "8261a4a2ead6488143480ee99ca6c54e1791a5fc4b1735efc6e175e311bc4315",
+      "rgba_sha256": "fb00a4c543db7c90fe153f501cfeacadca73d3dc2adbef4f8b7f25e5515a0f0b"
+    },
+    {
+      "path": "sprites/buildings/flame_tower_2_hurt.png",
+      "width": 16,
+      "height": 38,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 273,
+      "sha256": "f93f675bd6a9ce83f499bdd935da2148f41cec46ffaf9ff677ec11a6df652b18",
+      "rgba_sha256": "2c41e1aba6045f859427666c99be763c09e04c6feeb237e90c1d1ed6048b093a"
+    },
+    {
+      "path": "sprites/buildings/flame_tower_3.png",
+      "width": 16,
+      "height": 44,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 237,
+      "sha256": "b1942d2c39dae99dc8de47c721f80187e63f96f71a1a92fc738fb553d379b110",
+      "rgba_sha256": "38a787cd91fe6f70b8163045a31eb1d0618c75d9a9ab797fdc24f3167138b6c0"
+    },
+    {
+      "path": "sprites/buildings/flame_tower_3_fire.png",
+      "width": 16,
+      "height": 44,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 241,
+      "sha256": "4226baa4df19ec4c07b3a196f86c7b77558eee4370e5f717c50eec4330faaa27",
+      "rgba_sha256": "48756b3fb6d5de686ca52ea532e20821894fe93f97656051b127457a84fd2c02"
+    },
+    {
+      "path": "sprites/buildings/flame_tower_3_hurt.png",
+      "width": 16,
+      "height": 44,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 277,
+      "sha256": "dee3e962fadb0102f48d2b35a09c03cf36b79764ee91796cec54e4b2879bb4ba",
+      "rgba_sha256": "253d3a4ed4727315c05e35dc0f82bd2035a6c4cf9834b2d570e9e402f0ecb62c"
+    },
+    {
+      "path": "sprites/buildings/flame_tower_fire.png",
+      "width": 16,
+      "height": 32,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 233,
+      "sha256": "f84333ff29e60c7a4649768049e51e0f57cf8fd316a2fdc2ce79631123ed3cb4",
+      "rgba_sha256": "d36fe4f6f27e3c0a6b92f2114a8ab9babf31c53fa523e5543a16b684e0d9a7b6"
+    },
+    {
+      "path": "sprites/buildings/flame_tower_hurt.png",
+      "width": 16,
+      "height": 32,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 275,
+      "sha256": "c4ec64a5dbf797dd846dc172d943a00ae30695f13ba8c863c8ffb139b88f1db5",
+      "rgba_sha256": "9c662a4f2f5a76f92f890fd2034a7cd9100a149b2e22013543e8b472788da22b"
+    },
+    {
+      "path": "sprites/buildings/flame_tower_wreck.png",
+      "width": 16,
+      "height": 32,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 150,
+      "sha256": "f4ca6ed0159c1fe640230ec0990ee6107ea886137ee74f6a0db6cdc2daf5527e",
+      "rgba_sha256": "cc47f1de292c97f9e4e2734b506e02e49de4242079271279f0e6032e4ba01b30"
+    },
+    {
+      "path": "sprites/buildings/gun_tower.png",
+      "width": 16,
+      "height": 32,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 217,
+      "sha256": "bb1f05ba2858dc961ff44cfeee107958ce38526d82e8d92daeafce385e7f1388",
+      "rgba_sha256": "7ec7b833d2dfcd8928cb6b3ea6a9e5cd29c254121f94e0186c9b46b968dc3d6b"
+    },
+    {
+      "path": "sprites/buildings/gun_tower_2.png",
+      "width": 16,
+      "height": 38,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 222,
+      "sha256": "b60ba3a251b3c92b2137382b83afe570d3ae671f9edb51a80403744ca29fdfc5",
+      "rgba_sha256": "d9ac9d1651866c11ea48ec6727a8d24507e25406103ca270eb5e2a283e149ef3"
+    },
+    {
+      "path": "sprites/buildings/gun_tower_2_fire.png",
+      "width": 16,
+      "height": 38,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 238,
+      "sha256": "fb75f92f8073898aac3bf5d15b27e32a6c160da0a5d719cb541cbe71aed25c51",
+      "rgba_sha256": "8a9baaae3bc545e7541e9847543d5afdec8c9b3bc99ba721a65c4aaa0db1b3e7"
+    },
+    {
+      "path": "sprites/buildings/gun_tower_2_hurt.png",
+      "width": 16,
+      "height": 38,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 273,
+      "sha256": "995ee4bce2d1bdd0fbbee3d88d0189459f54556282fa87aa2982c91b68f2cce4",
+      "rgba_sha256": "88186675950ce6899824655313919047f4c9fa4f931b0bfdc9cf53b80d451819"
+    },
+    {
+      "path": "sprites/buildings/gun_tower_3.png",
+      "width": 16,
+      "height": 44,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 225,
+      "sha256": "f6b0f19d34364692c399189f48a573390985f9406133339702c7c5c46990dc0c",
+      "rgba_sha256": "b94c13274a473551f3d69ac732028dbe6c53b17385b91d33d26568b83c758598"
+    },
+    {
+      "path": "sprites/buildings/gun_tower_3_fire.png",
+      "width": 16,
+      "height": 44,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 241,
+      "sha256": "a9fc09f6ef301bf0f1c36c9301a2fe40f7eb37dccd08560e159705e613ac8ebf",
+      "rgba_sha256": "844d876d1cd7a30dd76f4f9e03e3d8c98cd4a90c7ab556ed3a31bdf30c3b3f2f"
+    },
+    {
+      "path": "sprites/buildings/gun_tower_3_hurt.png",
+      "width": 16,
+      "height": 44,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 280,
+      "sha256": "f67600807d8188effae38c8a5a4d40efea2aca2ef5f73eb36ee1584b51b4b28d",
+      "rgba_sha256": "ce5abdde17be7dfd92a7a5014d57facd52da1afb35f43534bbdd096699f97e34"
+    },
+    {
+      "path": "sprites/buildings/gun_tower_fire.png",
+      "width": 16,
+      "height": 32,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 233,
+      "sha256": "b3855176a0cafc8d5fd57fc43481159e44fbf6e792ef3287a3eba769da2d0aec",
+      "rgba_sha256": "b3f1fad0bbbed88b492608aff3d222548b98ff31faeda6f13b6da4323f8a9f6d"
+    },
+    {
+      "path": "sprites/buildings/gun_tower_hurt.png",
+      "width": 16,
+      "height": 32,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 273,
+      "sha256": "b608ffc24beefd911edf1574d5e11f5f0f26686e7ec834e660a3935bf9b140c8",
+      "rgba_sha256": "71a4e7a50f3099e5e0839d94d5664917aec673336703fa793f8165f58a697858"
+    },
+    {
+      "path": "sprites/buildings/gun_tower_wreck.png",
+      "width": 16,
+      "height": 32,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 150,
+      "sha256": "f4ca6ed0159c1fe640230ec0990ee6107ea886137ee74f6a0db6cdc2daf5527e",
+      "rgba_sha256": "cc47f1de292c97f9e4e2734b506e02e49de4242079271279f0e6032e4ba01b30"
+    },
+    {
+      "path": "sprites/buildings/house.png",
+      "width": 48,
+      "height": 48,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 414,
+      "sha256": "a609dec86c97c84dc4f9420fc879aabce9b63757f4e1c7b086a2f09444c40d3b",
+      "rgba_sha256": "6270249db40de35db2d122c23392cf368d6b184523ec5386e7694996a3fcd257"
+    },
+    {
+      "path": "sprites/buildings/house_0_0.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 129,
+      "sha256": "8ced4e17422b8d1a1bd5402a706b685e7a84015b98b730cbd70470d077fc1d3b",
+      "rgba_sha256": "1c6ee3bfac6cc161b619663b75a1995ac0fb1d017a20c2a005dcacf9bc182558"
+    },
+    {
+      "path": "sprites/buildings/house_0_1.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 161,
+      "sha256": "f7f05c527a89b7d580f5121827fd30e7c8bb4a1fc58a34afd618b9721431b556",
+      "rgba_sha256": "b40ece3440bf2613220cd1b9140573392730e69ce257edbbc03f58e5676f0437"
+    },
+    {
+      "path": "sprites/buildings/house_0_2.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 138,
+      "sha256": "40697b3d0cce6955e8425c43a73b11f1bd10c562b8680eba9674b030847434b3",
+      "rgba_sha256": "90ca2512436caa966e646e64a3c7eef6de5780943db8e38d925cc82cfeb44f43"
+    },
+    {
+      "path": "sprites/buildings/house_1_0.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 137,
+      "sha256": "cccdd24be55baae4fff8de856462ccd653489f53a88ae4501f6bd7588b32c67f",
+      "rgba_sha256": "add5a19b61e0ee930e73f51b0dc6071d9c3598b1aa697c00e5815397353f1ecd"
+    },
+    {
+      "path": "sprites/buildings/house_1_1.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 164,
+      "sha256": "940ed5308d499e6fd1198d37382d6a89a84737771aeac8459b19029290093db3",
+      "rgba_sha256": "749866c3b12b9ebfc23a84dc45d69abd6e9c343e7f885e29e914f0640d076069"
+    },
+    {
+      "path": "sprites/buildings/house_1_2.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 152,
+      "sha256": "d54841952cca4b3e61eb926f86122bc9bccf9864bc6baea62ea6663b7c99f58b",
+      "rgba_sha256": "cc39711d414093d80c33a2babd71de59c065bb6a777a637026155aef0fd57230"
+    },
+    {
+      "path": "sprites/buildings/house_2_0.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 128,
+      "sha256": "7630001839afa76b89b76891dd0a7ba17748736da94612d32da3457bab871fde",
+      "rgba_sha256": "05e89c07381619f49bb64a942f00aca154bbddc4b37a51dff41568a18bacae8a"
+    },
+    {
+      "path": "sprites/buildings/house_2_1.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 148,
+      "sha256": "c74c6d6a2385542d2f8582bfadbc423f1732ebb1db3d90375708293d9c88c803",
+      "rgba_sha256": "ae5337115b657648d56c59d4ab7366e166953a3d2f01fb453c1fbf32b457f4ec"
+    },
+    {
+      "path": "sprites/buildings/house_2_2.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 132,
+      "sha256": "23ff68d956b1d7dd4bde3b968715daa9be7cb7b374bb95f5195ea1979fb6effa",
+      "rgba_sha256": "0216cf2e20064544a0c3734341859a6da9638430ba97e2f08e6e8f634e9d78f5"
+    },
+    {
+      "path": "sprites/buildings/kitchen.png",
+      "width": 32,
+      "height": 32,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 268,
+      "sha256": "a4cd559aa456ae76aa11f83e0dc9de9dd42f718ef6610879dda254f8af33c71c",
+      "rgba_sha256": "4a4fd56e1f0132079d2a3d2a03f65c40acd631d788d5d18809001a310c5c5183"
+    },
+    {
+      "path": "sprites/buildings/kitchen_0_0.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 161,
+      "sha256": "204fc9d63a9252377e7a73aa6e625dd78b388c634928e9861eaf472c07034239",
+      "rgba_sha256": "6e3f7d5b5533a418aa1424ff6c3a412971602103ad94246f5f4d7bdb33524100"
+    },
+    {
+      "path": "sprites/buildings/kitchen_0_1.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 165,
+      "sha256": "436031a060dd73e730ed2e9977b3304116adbdbd98cef9c6c896517e3c0a245b",
+      "rgba_sha256": "6cfb042047db86e4f99c9b93a76b9357de7ff0c80e9ee2611ddee0df42bd0402"
+    },
+    {
+      "path": "sprites/buildings/kitchen_1_0.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 133,
+      "sha256": "989c845265acedd93e26a50d29069f1cf4c5cdbaaffb2ed9f7c97130350b54c7",
+      "rgba_sha256": "bdb53665a3d58ecc68655ab1a3890484d666973078fdd13d9dce693cc69c16cb"
+    },
+    {
+      "path": "sprites/buildings/kitchen_1_1.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 142,
+      "sha256": "f93565208562795e1852456aa13df93916dd8bc74f358e3b7dbb1c05a85b1044",
+      "rgba_sha256": "b32e9f2e6862ecbd340b682c7e88498157fde001bf883342d77b885af94bc05e"
+    },
+    {
+      "path": "sprites/buildings/mine.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 133,
+      "sha256": "ffae093a01d4b2829ff1a2f07cf2d2b7da0f900fc51e46d1e7b70751d07f3030",
+      "rgba_sha256": "bdf3e0d3e1a713ba461078267df21b53623aea13ffda8331b83a0719b496da2f"
+    },
+    {
+      "path": "sprites/buildings/mortar.png",
+      "width": 16,
+      "height": 32,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 189,
+      "sha256": "d93b484197585f9e4562f91ac6e673e8ce135c88ce4be281732cf459a7130058",
+      "rgba_sha256": "554cc5086a86336dbb4c1a8ba9aff07aabe7b223514131cf478032f4d79176d2"
+    },
+    {
+      "path": "sprites/buildings/mortar_2.png",
+      "width": 16,
+      "height": 36,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 195,
+      "sha256": "ee70b7fcf4b5563723cfd04be3b02aa63c59d78c91d0732e5b2d72b934ca78e8",
+      "rgba_sha256": "48557ca2b43770f390dedbf4cd5f4948de1ef45211f0926fce2d9463919d5d7a"
+    },
+    {
+      "path": "sprites/buildings/mortar_2_fire.png",
+      "width": 16,
+      "height": 36,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 213,
+      "sha256": "816cfcba2ec00db862a5a95aea3f8b40565198c3f7434adc254f7951910478fa",
+      "rgba_sha256": "b9a4b476ac544cfb1b2505a008da029f726259ffb1bda740844a048211613ad1"
+    },
+    {
+      "path": "sprites/buildings/mortar_2_hurt.png",
+      "width": 16,
+      "height": 36,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 257,
+      "sha256": "2dd68da0ff11ccc44f5db5075df49b9dfadc5c178cc24b7f162e914f724967ee",
+      "rgba_sha256": "8979dc28b8cae504dc5eab29b86ab76dd5fcaf58d9b1db9bc31d5d882d943b75"
+    },
+    {
+      "path": "sprites/buildings/mortar_3.png",
+      "width": 16,
+      "height": 40,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 197,
+      "sha256": "d5948ba6ae8e5010300a72872cd365f206688bc562ed470fbc3fd6c671ac36f5",
+      "rgba_sha256": "5d58de86dda2697a1146b2e0bd71d1ae3521e8db92e1d993b48bdd9e2b9f6fc1"
+    },
+    {
+      "path": "sprites/buildings/mortar_3_fire.png",
+      "width": 16,
+      "height": 40,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 215,
+      "sha256": "2557ea1d542f990c6bcb24e3ba7dca311b729511bba546d2ae4155b68dd3b577",
+      "rgba_sha256": "a08b90e788aaf30234dcd4298be823ff01eae10dc94251e48eba657f4a0a9d29"
+    },
+    {
+      "path": "sprites/buildings/mortar_3_hurt.png",
+      "width": 16,
+      "height": 40,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 264,
+      "sha256": "6ab3ba3e3c64c78a677c00ac4c2c7eab06d8b52569c3512de4e147d1e7531dcd",
+      "rgba_sha256": "5fc1f96d9f995d78864177121d1e891c9c79e50ed31006b75c1ea53971f3efcc"
+    },
+    {
+      "path": "sprites/buildings/mortar_fire.png",
+      "width": 16,
+      "height": 32,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 208,
+      "sha256": "e31b48321dadf34a648fce8d973909f135c97df6449281fcde65baf329872b2a",
+      "rgba_sha256": "db7006a0f627f833d970b7f667a2f8365047931cc89a1af9690a7b027e566ac4"
+    },
+    {
+      "path": "sprites/buildings/mortar_hurt.png",
+      "width": 16,
+      "height": 32,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 229,
+      "sha256": "75f782acb7468a2cd65f349c9da7cc792e0340ec25cb8d9203d55dc430f9963d",
+      "rgba_sha256": "3365bc52b437f57efb5a2b8b35b6c3778ad388159d5e15b2416d213ecca64ba6"
+    },
+    {
+      "path": "sprites/buildings/mortar_wreck.png",
+      "width": 16,
+      "height": 32,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 159,
+      "sha256": "c11d7f3a90ad997785871765d0e825dbdb877c7dc9ddd6f475386591faf2ada6",
+      "rgba_sha256": "3c23337d8b21a6361cc5e44c98a9499cd7483c12af7008f7831646212e9ca8d2"
+    },
+    {
+      "path": "sprites/buildings/wall.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 139,
+      "sha256": "a68b56f8bfcfb4d314d448e85173d65f1d43f680940d8fa5e4e36474751643e3",
+      "rgba_sha256": "831c77c2552d967b22229ec042d2e1e55687f420307f731c0b60fc0ee294a9df"
+    },
+    {
+      "path": "sprites/buildings/wall_hurt.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 217,
+      "sha256": "e692b7b23ccc93fcbd736211c86360c22e0ae8f5945e41a982a110bebbaac36d",
+      "rgba_sha256": "22c2cbc690d08c0804abdd9a76b54d7bba19b0d310edecc11d265a3606153be5"
+    },
+    {
+      "path": "sprites/buildings/wall_wreck.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 124,
+      "sha256": "568b30806529aa49b2fc32bb62f9d1e9ae2300d172975ce92822bd8c9e9a22a7",
+      "rgba_sha256": "048cd24397b2dca25693300eddb1cfcd260842f3e101b3ceb4d73371df7cc366"
+    },
+    {
+      "path": "sprites/buildings/workshop.png",
+      "width": 32,
+      "height": 32,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 257,
+      "sha256": "08bf9e1de3ba5d94aa4445efd45196d3e10775583eb7da20a4093420046dfbba",
+      "rgba_sha256": "453b3b44c8b7341fad62a9053765c99211c876e365d141e26336d0eb4abbefc7"
+    },
+    {
+      "path": "sprites/buildings/workshop_0_0.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 171,
+      "sha256": "f59056c7916b336257c0b8c1e2767732f0d5c8fc5fc555332d4c240554ad4ffe",
+      "rgba_sha256": "1f823567a4d85bcd4b2102928b19e947cb5be1b0051756a44edf785bb55556f6"
+    },
+    {
+      "path": "sprites/buildings/workshop_0_1.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 141,
+      "sha256": "f4fa371052f3ebde9dc1fc19fa0f3deebaf7873c7b564c19be9618042b53d033",
+      "rgba_sha256": "8cab06d867ecd6834554241ddb9a5c61da3a2eb87c5571685a14655a50ff3783"
+    },
+    {
+      "path": "sprites/buildings/workshop_1_0.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 140,
+      "sha256": "ced56981c7368492dc7a93a36c72deef3cbc2ca0ad5ea8b104c83456aabf09c4",
+      "rgba_sha256": "7e7c72a5a8df901d5f750da90bcf6f3390377026df6c2d5fbbe0547a0e437fd7"
+    },
+    {
+      "path": "sprites/buildings/workshop_1_1.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 142,
+      "sha256": "f0c21f2edfc01347a7425ceb04e7b6b2db56d4754c7a9d6d6c76fa2eb016936b",
+      "rgba_sha256": "e6b7723c361b643697f465043a04a1519e912244bfe6379a6a16eb94fd4df4de"
+    },
+    {
+      "path": "sprites/crops/carrot_0.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 87,
+      "sha256": "f38fd0caa764c4c48461a93ead575d4db2d7acfcdd192131ebdeb1b9b470aebb",
+      "rgba_sha256": "2cf8d48bfd2d6e145cf3b422c35a12a2a39975a3de78cd98f641b01ec39ae196"
+    },
+    {
+      "path": "sprites/crops/carrot_1.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 96,
+      "sha256": "bc0f4ba1f8dbee601eacdf935e69a015d376f06bcfa4fec525474c3170820017",
+      "rgba_sha256": "d3a5a400795e7607b574f82302ca499c295690a8fe674d7de1885a18c46ae227"
+    },
+    {
+      "path": "sprites/crops/carrot_2.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 115,
+      "sha256": "b193bd0d9ad66e2fc07e5c708695d80c1eb585cf8f7810bebc8cf73f813735c9",
+      "rgba_sha256": "2a5acc4714d49b4c0f190d6888e43229388cbe574b9cab23b7d3077f28629ede"
+    },
+    {
+      "path": "sprites/crops/carrot_3.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 126,
+      "sha256": "44f73008824fe4077635911cc88f6b7faa1e03838eefafda10c894cded2bcca8",
+      "rgba_sha256": "3102fa774151b6d68c44e1a4c0b99365ffc77aeacceb06f7260cac2acb818ac0"
+    },
+    {
+      "path": "sprites/crops/corn_0.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 92,
+      "sha256": "263585a0654e8ee2eab88fabf80ba83c7e0344268933f547a1f9948f6a760b1b",
+      "rgba_sha256": "c399d40ddbb786d54e358b0512885771514aedcf3e1ceae510083db1f6ad7178"
+    },
+    {
+      "path": "sprites/crops/corn_1.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 97,
+      "sha256": "909605107c756302aac84be259b85b7e7b6549c21a654ab54849449b7c0e3023",
+      "rgba_sha256": "53cd2170b57f79356366e9db7ca430e1c2edfd7de923270195b4e107bf441fef"
+    },
+    {
+      "path": "sprites/crops/corn_2.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 124,
+      "sha256": "7085eda09af1e60c8fe3ba49e72660292c24be1da7d3a42f52f95568bf1f15d7",
+      "rgba_sha256": "d0f6fe9aba8824d5519ecf3d00c64db4f9169136cdc361d73244752990b479b5"
+    },
+    {
+      "path": "sprites/crops/corn_3.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 146,
+      "sha256": "5eff6fb7ca304417e312f06e04e34e234a3e5f183c61b4fc3c9d7f5a60ef1208",
+      "rgba_sha256": "0726ea6f11d5b7ba0b77bd66d22aad27c75b20906d659f8ce0038989b9704195"
+    },
+    {
+      "path": "sprites/crops/tilled.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 101,
+      "sha256": "d861a1729cf3215ff74dc8e424442cd4769ea403c39c04f9a0e62c444aacce84",
+      "rgba_sha256": "f0d46517e7ec80e2cd778bf573966df00092f4fbad32a7500729dd8db32b3a5b"
+    },
+    {
+      "path": "sprites/crops/tilled_wet.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 101,
+      "sha256": "0fc88778e7308374ae036fe6672bdfc3dcd8af8d6725ccd6bbf94367044e5a05",
+      "rgba_sha256": "23c221ab8b3d45882072c5150349953d6b70bc809cdfc9b12d64e3b59ad93503"
+    },
+    {
+      "path": "sprites/crops/wheat_0.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 93,
+      "sha256": "bf18a3dab70cb0e06e512cbfc422844f9a5e904900536f83f79f557dbb7a7d2a",
+      "rgba_sha256": "cd9295f3cde258096fb7d44506c63a66a1ee6c664f2de2ecf822f7f80313630a"
+    },
+    {
+      "path": "sprites/crops/wheat_1.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 96,
+      "sha256": "fca542d8bf360ba13194342306d28789c59b16aed8a0fb62f6ac47fe54c85eb0",
+      "rgba_sha256": "65006b56dd81baa22ac912471a9b21b66f487fae497820711e17ebdb0f7e1f23"
+    },
+    {
+      "path": "sprites/crops/wheat_2.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 111,
+      "sha256": "e72078e6b8d9770105897f0e7833cc88164941982d004b22295990496ef54d65",
+      "rgba_sha256": "1f08e90ee9918f7cbef8920479fc6f03a19f6c39b4609b5a1643e75a7d647623"
+    },
+    {
+      "path": "sprites/crops/wheat_3.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 128,
+      "sha256": "c8dc116278878a1b8f4735416f79b61c1305c37e46bcc5520c72fb8e07a057b0",
+      "rgba_sha256": "2d700da9dd76ca70ea5aa8d631201b57e244478c53609172b62b070bf018bb28"
+    },
+    {
+      "path": "sprites/enemies/breaker.png",
+      "width": 24,
+      "height": 32,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 248,
+      "sha256": "ded409fc794dfe2ba6b118f815cdb21ef005ac63ff1fe1c5196ba0ba301db2d7",
+      "rgba_sha256": "cdcd0ed8da3da91604d272d32dc0cb8ee54fed3f9fb7e188a2fe68a5c458aa68"
+    },
+    {
+      "path": "sprites/enemies/breaker_attack.png",
+      "width": 24,
+      "height": 32,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 253,
+      "sha256": "494d5f21e47b336e46219365da3a2518a95d6beb4d5ecbceda42fcda429f760a",
+      "rgba_sha256": "03263bee16a17e2b77e12a4bdb9df42acf97c7645630868c4f182bc15e1e3599"
+    },
+    {
+      "path": "sprites/enemies/breaker_death.png",
+      "width": 32,
+      "height": 32,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 257,
+      "sha256": "3a722a986031f5df179a96385fdea2f4ab6cd1c23ad3555701ec58bd2b695074",
+      "rgba_sha256": "600fae0265e709c4dff3a933887e1a1e9ebd871c6889dcfa366c768c787f86be"
+    },
+    {
+      "path": "sprites/enemies/breaker_walk_b.png",
+      "width": 24,
+      "height": 32,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 248,
+      "sha256": "cb47a518d91d6ee0ea8b87c4b1f45c860060915cddc3ea7278dbea4e8057fede",
+      "rgba_sha256": "b6933f66af03a3add319101a388403326ba9d2df0df59f2786a4d350e241d990"
+    },
+    {
+      "path": "sprites/enemies/giant.png",
+      "width": 40,
+      "height": 52,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 351,
+      "sha256": "c31cd92b3321b095fd6aa0cc60b6ac07b0764d1fb1b784bc539134e95a076d83",
+      "rgba_sha256": "47e947248bdb5f7534b0e912609b4745c1bf08437d58df9089fbdae893b6848b"
+    },
+    {
+      "path": "sprites/enemies/giant_attack.png",
+      "width": 40,
+      "height": 52,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 349,
+      "sha256": "e27933d79215484a4afab0008c4994cf2b5238529b61fbdb08d1feddba06f3d4",
+      "rgba_sha256": "6a69c6dadb10bd7680ee079b1775ab09f1228c7395c3704feffb9b1abae1f1c4"
+    },
+    {
+      "path": "sprites/enemies/giant_death.png",
+      "width": 52,
+      "height": 52,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 364,
+      "sha256": "9f1f2a5d51aa52a6b5321458e9bdecd362a8dbb7f736f54bd1b02ac7f5356427",
+      "rgba_sha256": "39e63ff8a6fa6c00ac3cbe84f480fba03f9d0326149b2076ec19cf573fbc2e3f"
+    },
+    {
+      "path": "sprites/enemies/giant_telegraph.png",
+      "width": 40,
+      "height": 52,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 349,
+      "sha256": "eb7863aa633a1957b2023fe6081d4d571d4bd3871e30fbfd56bded6de9a064b0",
+      "rgba_sha256": "cbe31f014feb24f3f7378c6109bdbbb200f95a09e11c77100c3550f5b391a4a6"
+    },
+    {
+      "path": "sprites/enemies/giant_walk_b.png",
+      "width": 40,
+      "height": 52,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 352,
+      "sha256": "dea0abdc3474cf755266ca95d49aa0d8177eee43d6be0f394716828b445464c2",
+      "rgba_sha256": "6b90360558c20c552a6e1db7c4e54800231434356d5be046d03cdb262bc36fce"
+    },
+    {
+      "path": "sprites/enemies/runner.png",
+      "width": 24,
+      "height": 32,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 249,
+      "sha256": "510a9e92bacd415845664321187ed1edf1018551529a63e6b137af18aa7cf32d",
+      "rgba_sha256": "1b5d9ce48553cfa4d2dce3e78847327613a7df0f429bb87b222eee8e8167573f"
+    },
+    {
+      "path": "sprites/enemies/runner_attack.png",
+      "width": 24,
+      "height": 32,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 240,
+      "sha256": "fd99ee15f8cee924083ad69330f1102a277e1fa963dd86acd67978d198d4c2a4",
+      "rgba_sha256": "d309201e46bcb0ffb76d96b33eba2eda1de8e103ca69ce5c2cd270fd577dfcf7"
+    },
+    {
+      "path": "sprites/enemies/runner_death.png",
+      "width": 32,
+      "height": 32,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 301,
+      "sha256": "74bb1b0c2bb1b9fae880cde7aff748fd160aca7dc628e1f73a751f39a96fda96",
+      "rgba_sha256": "f5c6f1512d9e699ceecb6444629f6929fd12bdf3e2c338b2234da8ac71d38e6f"
+    },
+    {
+      "path": "sprites/enemies/runner_walk_b.png",
+      "width": 24,
+      "height": 32,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 248,
+      "sha256": "6e06065ab940a4441b8c437a8ec59b8cad43d4e8ac9d4056ea8f8a783e415e0b",
+      "rgba_sha256": "a36b6b5a967025748f0b037f97d19adff991120fabb2cb96187331b80e764504"
+    },
+    {
+      "path": "sprites/enemies/tank.png",
+      "width": 24,
+      "height": 32,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 234,
+      "sha256": "90ffa0409d6e38411f11f8b011bc0436ed4bb940533527c9dc9015025b634ad1",
+      "rgba_sha256": "c042b513badc1e33920d8090061cde0e246a79b65064c2471883d4ccb4b8dc07"
+    },
+    {
+      "path": "sprites/enemies/tank_attack.png",
+      "width": 24,
+      "height": 32,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 236,
+      "sha256": "205bb1f6cd6df4b010aec58e3942875b1d9c0aaf0688e053569300a3c95631be",
+      "rgba_sha256": "f9d3552385a5d872c799b9cec05a02303cfffc42077150f40863a349fd39dbdb"
+    },
+    {
+      "path": "sprites/enemies/tank_death.png",
+      "width": 32,
+      "height": 32,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 260,
+      "sha256": "f6c0048f7af9e7ef51648fa745d7916519d58df28aba1e3da9ec15383afdfac3",
+      "rgba_sha256": "711a6cd23df72cfd5fb103681deb2046eca24b8935038ea6c64be4f9378c3e92"
+    },
+    {
+      "path": "sprites/enemies/tank_walk_b.png",
+      "width": 24,
+      "height": 32,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 234,
+      "sha256": "ba5be1222bbbb68321ac1f61baa7ffdaacb7b8d912284b20103a9f6bf2733d7e",
+      "rgba_sha256": "baa03ec908e017de2d081094a21281f5862e26ef0d4ba4b0fea6e6a96c7b8178"
+    },
+    {
+      "path": "sprites/enemies/walker.png",
+      "width": 24,
+      "height": 32,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 242,
+      "sha256": "3fcdb79b95192e8bb953081c4e2aba385040acaaaadafb37c7caeb3136486b54",
+      "rgba_sha256": "146d8c8a1e046af8f6168254f95f193ec84185125cb6df48d1d731a71185b692"
+    },
+    {
+      "path": "sprites/enemies/walker_attack.png",
+      "width": 24,
+      "height": 32,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 244,
+      "sha256": "86793c0604a86ad5001730b6c73740d7724934345dfdfbac7b42221f3007280b",
+      "rgba_sha256": "d5e94b4a371d212bf4b055c0ba21496e7e24d7deb55e5224dc0fd33bda31b4f4"
+    },
+    {
+      "path": "sprites/enemies/walker_death.png",
+      "width": 32,
+      "height": 32,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 256,
+      "sha256": "8c5bea6f48c3b15103d85c7ef4c98b4392c12e3774cd42b19c85e79424cac302",
+      "rgba_sha256": "0ae291db96169f270157c519047a3862d1b8992783448ebe4c1b5669c321396f"
+    },
+    {
+      "path": "sprites/enemies/walker_walk_b.png",
+      "width": 24,
+      "height": 32,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 244,
+      "sha256": "95b1aa9175e628d743cea85e987799997e2efdc36670d418a68e3f32085a23b9",
+      "rgba_sha256": "7885a93e6f2f9491be021be24761e3cd6b662f89b4f81d557d5d992a2d5a72d2"
+    },
+    {
+      "path": "sprites/props/chicken.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 149,
+      "sha256": "647160e061b26abcfec1572d3a674a36e0033f5f55284c41927b800b7d0b265e",
+      "rgba_sha256": "9efb12961949578424c334da93e5d51382aeb5c933193aadbc8596ae833c284c"
+    },
+    {
+      "path": "sprites/props/cow.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 170,
+      "sha256": "632208d2654658f98a0eac8227502147709692854e7a14321a37d5c923cdeee3",
+      "rgba_sha256": "f8f3f86b597184334123631cfb1af22680cb3d0060f20c64a30565b7395c95ad"
+    },
+    {
+      "path": "sprites/props/generator_0_0.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 160,
+      "sha256": "deedb7005f74bf14d398b4fd181d2711fa2af67679d816746b38e8d5921aa05f",
+      "rgba_sha256": "3f22eeb04c20d03f9c4e58004dc524e909816054f606ddde461a49e206db086a"
+    },
+    {
+      "path": "sprites/props/generator_0_1.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 175,
+      "sha256": "3655cf4d35dba8791fe86dcf30ef044ba98d7e3b32791eebc23070ae4502df82",
+      "rgba_sha256": "c73031cf11fd52b789ec9ae7d7f2bb15156ff6c18f2d788e91e2794ecdb52f54"
+    },
+    {
+      "path": "sprites/props/generator_1_0.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 137,
+      "sha256": "cfb5b143d9dbbc48cf7b8c36e86963a22b94bd9ed14549d0ed21b9f0667d9f3b",
+      "rgba_sha256": "af885f5d92f763c1895ecb8511e25ffacef16d6feee79cee10d2f1730ab38146"
+    },
+    {
+      "path": "sprites/props/generator_1_1.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 196,
+      "sha256": "4b3384941e23570b2611e6d775dfeb36aef75e3dca092c840435b294f7447de1",
+      "rgba_sha256": "954f4986eeb7b9ec36e6f8bd9b6503b731495d112e5d796ae0442d2c265df788"
+    },
+    {
+      "path": "sprites/props/ore.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 191,
+      "sha256": "1c505a27e9dcc4c4b748256674ffd35fa14d37b52e47b9f9a2e2e573c655bca5",
+      "rgba_sha256": "7fe8c32a0c2126320b4ca80c37a184cda8b01040d02202e81bf30740f0f1947c"
+    },
+    {
+      "path": "sprites/props/press_0_0.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 119,
+      "sha256": "00e9ccf41bc1c797f4197599d50c8315204abdd647fd1b20c549a5dc9fe95790",
+      "rgba_sha256": "a41b20ecd222ffd9bddc9359f5d81ad24fed984b440ab59f54b162584b22353d"
+    },
+    {
+      "path": "sprites/props/press_0_1.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 163,
+      "sha256": "0a65d7a849906c8b0a3772467752040b7f114cb3592d0f2555cecb542f0dbce0",
+      "rgba_sha256": "919bd695a1303f0e6362952c82bb45c239676f63356381638bb205305a28b53e"
+    },
+    {
+      "path": "sprites/props/press_1_0.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 154,
+      "sha256": "988de5fb510575a6c37922aaa4313f8b01313fd68c397c50557699df46f62f10",
+      "rgba_sha256": "5f9991d81830133929e108fb2288407c8fb4a16a21f9511df2d334981154f61a"
+    },
+    {
+      "path": "sprites/props/press_1_1.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 186,
+      "sha256": "bbe31ea5eb3dbb47d64be5ab59258f3336090bc53ad78757d636aba24c8aa9a4",
+      "rgba_sha256": "0f97945332da3ccf572e5b1d51c9e882f5d8450be2f38c89fb3a678c95e9d646"
+    },
+    {
+      "path": "sprites/props/rock.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 155,
+      "sha256": "47a918ae88e4d1e0e1d7e4949ef122ceefb4a3eb07c6093ff94ddf3e33102dcb",
+      "rgba_sha256": "f0afc5f7a1959f44ee4bb763b0d915710c02944ae0bb42e60922bfae0f72041b"
+    },
+    {
+      "path": "sprites/props/seam.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 121,
+      "sha256": "dd9ec66c0f50e418232f0845af1711ba48d7365720bc96689c5884e1a90176c2",
+      "rgba_sha256": "c1f48ac36f5d053be1ad7f620e458732dcc92e9db1832a207e217d221a3f7ec3"
+    },
+    {
+      "path": "sprites/props/shop.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 155,
+      "sha256": "502d3a627792d8922f5dd613cef6958583b883287f1fd8bd3eed27ff7bd9df81",
+      "rgba_sha256": "317386d09a12042a6ed8aa12471e1cea445361efb94c53a6b70b14f5621c0ac6"
+    },
+    {
+      "path": "sprites/props/stump.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 123,
+      "sha256": "90c72e13e965ba1e3ec1a1ec1f264779e32079d35c2277fb62497a41f33c3cf7",
+      "rgba_sha256": "32a8edb5ff9af6ef03ca5eeb7fd0db5762b51529d39235f531a66277d34584b4"
+    },
+    {
+      "path": "sprites/props/tree.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 206,
+      "sha256": "59b278838b6e545667f1285322c3ef229adf119b5d1a2b3d79d1220f81f4edb3",
+      "rgba_sha256": "93e6669c7a6ad993a5fcc87d7caa739a1ea4836071ff366c816f96be692ac79f"
+    },
+    {
+      "path": "sprites/props/well.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 202,
+      "sha256": "1aa087d1afe714c249b162efe8715d178a7a689dc0470535ccb70cd889da1fcd",
+      "rgba_sha256": "a36d9895c184e84526c95d233de6c5832e2dce336cb05292165f337f736a00cb"
+    },
+    {
+      "path": "sprites/terrain/atlas.png",
+      "width": 256,
+      "height": 80,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 1456,
+      "sha256": "5810c77706a03c828e09e13a0dcfb3dc636eb39daa1ea839741aeb38af29a3de",
+      "rgba_sha256": "7b8807ebfaf522d8a43fe67ea46f0c782f06de0a1eadd060b0a879f61780a83e"
+    },
+    {
+      "path": "sprites/terrain/edge_e.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 107,
+      "sha256": "b33336169aae4d69b20ce4485654306be710efa3221a2eada5e4f0faa38d9ea0",
+      "rgba_sha256": "25e061533f9db76e5678b774062535d62b3b422d72142a7965bf6dbb19b0a795"
+    },
+    {
+      "path": "sprites/terrain/edge_n.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 115,
+      "sha256": "77fcff4a58c99e84f2604c0fc746e4e4c9ab16a4003b7a97a78960a161d72c20",
+      "rgba_sha256": "7bfc568a6b0acc598cffa4bf583484eb8adc5cd29e5654050df4968a9df883d6"
+    },
+    {
+      "path": "sprites/terrain/edge_s.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 109,
+      "sha256": "fd2ce1cbb78d89f48af289ad34b941dc9a1caa403dedd317102234b9bc531e9a",
+      "rgba_sha256": "6251a0f47b6979ac37cb28486f469a40c69561bd5dfbdc736b0d54077009de34"
+    },
+    {
+      "path": "sprites/terrain/edge_w.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 106,
+      "sha256": "c595b391745af47d62af1e755d1bcd90fa6e1efef0b6beb2276a77a6d6b51863",
+      "rgba_sha256": "94f0046d9788bb46f99a0cdee1ecadfe4db3866fba69fd8bc017d3b5f4c9971d"
+    },
+    {
+      "path": "sprites/terrain/floor.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 125,
+      "sha256": "03080011bb8ac0fbc57d1cf737e38c1ca5552129cbf437b3423420fa0bf4d865",
+      "rgba_sha256": "111f289523a4c86132477ab7cb8344783760702fa383d5a7f76e56d4542b3b88"
+    },
+    {
+      "path": "sprites/terrain/grass.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 134,
+      "sha256": "353bdc4bfe1d4f85400c749f157011844d4be89afb820bb15c72be3a5a24be1b",
+      "rgba_sha256": "3596ed5632d856463c215465bd8be2846ca1c460207ea5fd035d845e9d92fee8"
+    },
+    {
+      "path": "sprites/terrain/grass_b.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 143,
+      "sha256": "bd51d4cc528d5d0b7493f0b661e480d7565e3cb5bc9a95c3bde0b36e0ea54195",
+      "rgba_sha256": "1eabe9fdce956d10b28838fefe4021b9e3780d8c0a515fa6ce63e0cfc43e4d0a"
+    },
+    {
+      "path": "sprites/terrain/grass_c.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 130,
+      "sha256": "93106f930b7cc2b1349b43f9ac02fb3017aa2cc79199613314914c380936cd06",
+      "rgba_sha256": "e5ce05cc07f270703dd7d4df184121eea6807db428605a8cc40f9b957039eaed"
+    },
+    {
+      "path": "sprites/terrain/grass_d.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 140,
+      "sha256": "f50261930316aaacfcd29f17d77cf04d62ec370745225571fd942f5728d3239e",
+      "rgba_sha256": "960b2b744d3773704493a64aae5fc7bc9431179030ad646c34872095e5b0d2e5"
+    },
+    {
+      "path": "sprites/terrain/path.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 133,
+      "sha256": "d78aea8c443d965e0ba587623b764f0f1adb616c5794d1678b3f0fcd7ea511d1",
+      "rgba_sha256": "b10412115786036e48386cdd5f2d9a72e50919ff8a2c3b340b7b09c8e6d8002e"
+    },
+    {
+      "path": "sprites/terrain/rock.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 139,
+      "sha256": "9e66365ed244f55ecece32932c1ff001e992cbff676e1a62c4ddaf3b27369253",
+      "rgba_sha256": "9bbd59bd4420386c131a7a2f55ca527b7af76b0a14078b93a6b8b30875088b5a"
+    },
+    {
+      "path": "sprites/terrain/shore_e.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 99,
+      "sha256": "524b4c088b3fbfd0fbd000a05a8b1f9f91c2e09759d6f14fa3c76df45c9ba471",
+      "rgba_sha256": "594850318daa594c9bdf425239e0aade3068b9f0916ee4a99222824442c4ee57"
+    },
+    {
+      "path": "sprites/terrain/shore_n.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 102,
+      "sha256": "c0a0a82830cfc840ce050515415e7967df259ad7ab312536ae1f1e46d46cf4a9",
+      "rgba_sha256": "250467deb59dd24004c0cd1172c4d4f701e0fb040d1969c202e542fee0377463"
+    },
+    {
+      "path": "sprites/terrain/shore_s.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 100,
+      "sha256": "74157e5dd5808a2df1ebf486d263cce497beaa1b63b6b01d895eb9c8760a9786",
+      "rgba_sha256": "c14c1bd92ee0a30a2db856f8cce786bfd13e2d181e3336328c1c64c7c319e2c3"
+    },
+    {
+      "path": "sprites/terrain/shore_w.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 97,
+      "sha256": "5910216b7c766096e78fdfd7338bea7e35596fdcfc9ef89a9be6b38a7cf932df",
+      "rgba_sha256": "1a8700f272d72a85aa37563e53dda597f0a4a0790b9298e32b3503c12376b1cd"
+    },
+    {
+      "path": "sprites/terrain/soil.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 99,
+      "sha256": "7a82fd40a65d2425a919e6dfed2c1ed7a01d8eaeb233e9ce18ab193e43fdf936",
+      "rgba_sha256": "bdb7aee160b186cffdb2eedaee6954d5ac0add0343f0d953eb9e91ddb1e40481"
+    },
+    {
+      "path": "sprites/terrain/water.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 130,
+      "sha256": "2f4cd68249cdac187beebb34e314a868ea3f24da258ecdae2be23f5f9f03078e",
+      "rgba_sha256": "97cc850efff6e4b3e542fe423ea97d1976a635719607a4f3584d47a8ff81ae61"
+    },
+    {
+      "path": "sprites/terrain/water_b.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 131,
+      "sha256": "d94447833d2ab3ab5f172007197f1d382e30f5dc40b9a278f452eb6f54243804",
+      "rgba_sha256": "8653e25ecbd48febd1272b26786be85984b90310d7e782723130a34a750c1673"
+    },
+    {
+      "path": "sprites/terrain/water_c.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 125,
+      "sha256": "66e57da4165f810d75d3a4b93476fee8ec14709dd9cc511c9bb193d0932199f5",
+      "rgba_sha256": "361318decc6804a4f3d4d3c3828a538b2288e96f5b08dfee1a114da933eba19b"
+    },
+    {
+      "path": "sprites/ui/button_disabled.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 102,
+      "sha256": "fddbe985468ae73e7f27696433f42553b56593cc1a489cbaeb080728d30d7faa",
+      "rgba_sha256": "958468b104e4df440f4b1221508dc0f9847c55a2806c2274fe3e1068e4e6c970"
+    },
+    {
+      "path": "sprites/ui/button_focus.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 92,
+      "sha256": "c157c5feff7a52eda69a67e4809a3967add4e0f6a5896b77fbd24e6bc60dd6d4",
+      "rgba_sha256": "c68756eef6bea93586d2830e0d838437077661d783a811ec6701577829770aed"
+    },
+    {
+      "path": "sprites/ui/button_hover.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 108,
+      "sha256": "38703a73aae75e64c20ac1fbf0225b12a21e57c8766809f8d510f491e118b10b",
+      "rgba_sha256": "05b5d9e43b176f454f7b84a0347fc6ea470c392ecfa3be9ddbbdb15619b4282a"
+    },
+    {
+      "path": "sprites/ui/button_normal.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 107,
+      "sha256": "405a90381b09ade4dc73aa37e84fa9e758275003db3b6d64b2021039bbe21b30",
+      "rgba_sha256": "4d3ff20cd632887fc7639b8071a8d768a295a3c14c01b2da12e02ed14ec80055"
+    },
+    {
+      "path": "sprites/ui/button_pressed.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 108,
+      "sha256": "3eaaaab42dcc7eeccb8138f183b8d2e233eb4746c279c4c7bc63e004a5b34bc6",
+      "rgba_sha256": "97959be5a713c4049c55e5fd707756b7ddcf1dc33ba49caa3b5d4256f6402a4f"
+    },
+    {
+      "path": "sprites/ui/checkbox_off.png",
+      "width": 12,
+      "height": 12,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 96,
+      "sha256": "c0db73898edc6bcb84e348ec8890b0356ce710ec3fd8757924817541a15171c1",
+      "rgba_sha256": "1c74e2bdedb8570359c2f5108c323b579f66a4c68f4a0899d174c42d7e96f524"
+    },
+    {
+      "path": "sprites/ui/checkbox_on.png",
+      "width": 12,
+      "height": 12,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 125,
+      "sha256": "1ecaeacbedd294836b9df4ec17029d322368459994a7dc37cb8631c3252d1aad",
+      "rgba_sha256": "e6ef4c752d30e08dbfec76389c3a7525dddd5c18133403353603c1288d3789ea"
+    },
+    {
+      "path": "sprites/ui/icon_carrot.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 145,
+      "sha256": "077e4230403815ffa5d7e07dcc81a897e9569ad07bfbb628351bbb1317a71440",
+      "rgba_sha256": "553180d7212a6151563600cb3e062fd10350f409bfa6807040e22cb26d4fb8df"
+    },
+    {
+      "path": "sprites/ui/icon_corn.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 145,
+      "sha256": "68c111684752c8bce9fa42877e7830097ccd3e0db3be8513ae3bd1419128328b",
+      "rgba_sha256": "5f6048c1056dcc892264a9ececff9b02abd0c805e3009b5ef2888011d88b3bdb"
+    },
+    {
+      "path": "sprites/ui/icon_energy.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 127,
+      "sha256": "1e31c40662b74bd20324a354d245db90033c60f2d331a102e407323be20e5195",
+      "rgba_sha256": "abe6eebb88525745e15ff26491284c509ddc1878cf45ad867a29a1caad107ca0"
+    },
+    {
+      "path": "sprites/ui/icon_fish.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 146,
+      "sha256": "d8560e0b236a9bcf42b376546944709293ac292b9485e091e6371cbb5fcb59a0",
+      "rgba_sha256": "ab66cf49756445d484dadeb0390562b53021ed9b32a95b48353fb062fa308457"
+    },
+    {
+      "path": "sprites/ui/icon_food.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 160,
+      "sha256": "8dfb6c194191ecec6f7971f1f18fd8e590201e5a3d2e214726aa4dcf824163f8",
+      "rgba_sha256": "27872906a4c5891905411569203f65d1021a5ec6c8b23e8749fffefceef721f9"
+    },
+    {
+      "path": "sprites/ui/icon_gunpowder.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 130,
+      "sha256": "502b6691ea78303352ac0d9fc459b7419e9864ca277ee69a677549ca2a1bef84",
+      "rgba_sha256": "4feb2380c2117c9b2f2430df686c8fdfa1bcc26cc00393682ae026f019a7ffba"
+    },
+    {
+      "path": "sprites/ui/icon_incendiary.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 144,
+      "sha256": "19f6830dea97f4ce299680d3becf8233576f3443c0e1577c68f3daf09fd31872",
+      "rgba_sha256": "7696eb34287d44b38c6826ef82fc96711ee5d027f8a52ae0446f2859255908d6"
+    },
+    {
+      "path": "sprites/ui/icon_iron.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 137,
+      "sha256": "5cb901a01f7eeb2ae1f7c6043a6f3aaa800382c33fbeb428bb5d22ce4c3696b5",
+      "rgba_sha256": "60f13dc19d2c8ee60901d42103e3a21b54d18ed6ebf86be12101403be9e9ba00"
+    },
+    {
+      "path": "sprites/ui/icon_meat.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 153,
+      "sha256": "fa991499b2ed74a10f382cec8f13dcc76d09e3b8c58c805f9fa21cd40acb6d01",
+      "rgba_sha256": "172bfa95dd9f763c80d103000b807badf563b482e1496f74b96a6b118b4f3d12"
+    },
+    {
+      "path": "sprites/ui/icon_money.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 152,
+      "sha256": "5df56d8a7c61e176302a8efca10e1fd2b08df991700102b90ac7db1097000db6",
+      "rgba_sha256": "d92c3fb8b4b6ded19bf9981f3a42c5bdb43e4acab916d90a8e07b6529e14ab8a"
+    },
+    {
+      "path": "sprites/ui/icon_oil.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 130,
+      "sha256": "fcce4f36276a9ba278b5150fb656741384aacd1810f9da2936eda5114d9fe21c",
+      "rgba_sha256": "42d1fb8fb8f92a0ef43cdca5f962738495a6298eb5622004f02cf66a45b376dc"
+    },
+    {
+      "path": "sprites/ui/icon_stone.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 139,
+      "sha256": "fff176955adbe2e206e26bf187adc46afa6fb9017c3174a732312cbaa1787caa",
+      "rgba_sha256": "9e7a3d7fc3c716f767a7aac0ba763c2da7bd1bc4f246b4e0ac542641daaed946"
+    },
+    {
+      "path": "sprites/ui/icon_tech.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 176,
+      "sha256": "9f0b0fac38135be21c59375f24e485d181de4a10e3e7a0bc0bb428e625718758",
+      "rgba_sha256": "5161e48959fda43db3d71c905528467c849900fbb5a16aae71ffe18e47eb21f0"
+    },
+    {
+      "path": "sprites/ui/icon_wheat.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 150,
+      "sha256": "2a6dee0ccfa26f384913b3643b7a67c68c02d3f6e7e9f480331181af7d1c0e4b",
+      "rgba_sha256": "1b1b3d8f76a87a8026e821a6f9aa17764e97a1217f34026f34bae80430d5b223"
+    },
+    {
+      "path": "sprites/ui/icon_wood.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 159,
+      "sha256": "e234358620dcf0a9a557a5745df86d5d3c561f7311b1346a4312e13e12c13680",
+      "rgba_sha256": "eec6dd31424c5717da8f48e6d3e849e1de577891ec16ba00a46112e4d2d0938e"
+    },
+    {
+      "path": "sprites/ui/panel.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 109,
+      "sha256": "86573b1105bb79bf2a6f92a25933d7744d958a4e2877d9f4fea3b1b5167dc8c6",
+      "rgba_sha256": "00660c1d1098854425ab05e7398dbbcf2e4c2bf32d5fbbbc652d6c2cdf718b5b"
+    },
+    {
+      "path": "sprites/ui/slider_grab.png",
+      "width": 8,
+      "height": 8,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 112,
+      "sha256": "8e98d5a7b3082362d7cc3b520709331e624062465378b015f8ad08c908340125",
+      "rgba_sha256": "de5d660700039354934f806f1a7058e771896481fa7c29d0e6da969df9221eef"
+    },
+    {
+      "path": "sprites/ui/slider_track.png",
+      "width": 16,
+      "height": 4,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 84,
+      "sha256": "137be461b280f75aeee2fb5f712d9068c727e3c91d79fa45f70b8065d07f7dee",
+      "rgba_sha256": "41dad3ce9a37ab2b18e7b3a6ac03916d2309d2b8d4b570d92eac3f267507821c"
+    },
+    {
+      "path": "sprites/ui/tab.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 107,
+      "sha256": "cfbc7b96bdc3d939ba580eae89af4d437d5f6f4e0e4ab9c309cb27f128b67446",
+      "rgba_sha256": "29056c42af6eeab97daf6bccab2245617e2c6cf58d9c486b6a30be1a0c4594fc"
+    },
+    {
+      "path": "sprites/ui/tooltip.png",
+      "width": 16,
+      "height": 16,
+      "owner": "tools/gen_sprites.py",
+      "bytes": 109,
+      "sha256": "2194cf980c2564e996ae0288a9ff3b5dece7fe4b84c98f549f1aac9e95f3a1ca",
+      "rgba_sha256": "0d4524a6c6cd28fa54313716d422a1afad5f4fc8aa133c6ac9e5e329076eff5a"
+    }
+  ]
+}

@@ -1,0 +1,195 @@
+{
+  "date": "2026-10-01",
+  "records": [
+    {
+      "task": "0001",
+      "asset": "farmer",
+      "tool": "built-in ImageGen",
+      "revision": 1,
+      "decision": "accepted identity/style source",
+      "source": "assets/art_source/masters/farmer.png",
+      "source_sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4",
+      "source_dimensions": [
+        1310,
+        1201
+      ],
+      "source_mode": "RGBA",
+      "prompt": "implementation/sprites/generation/0001-player.prompt.txt",
+      "prompt_sha256": "ea7ac44958f920236750c92f6d196cb6b493eca1983bac380b1d8d637cf28511",
+      "transparent_background": true,
+      "inputs": [
+        {
+          "path": "docs/sprites_sem_fundo.png",
+          "role": "owner identity reference",
+          "sha256": "9fe4e672988613dbb54cf7ef197149d4b7f61f69e190dc32f04f4c3ec9103b0a"
+        }
+      ],
+      "runtime_outputs": []
+    },
+    {
+      "task": "0001",
+      "asset": "house",
+      "tool": "built-in ImageGen",
+      "revision": 1,
+      "decision": "accepted identity/style source",
+      "source": "assets/art_source/masters/house.png",
+      "source_sha256": "26d2646bf9328eae0eeb699193a11f46e6f92cd487d2369dea27b4295bdab81f",
+      "source_dimensions": [
+        1254,
+        1254
+      ],
+      "source_mode": "RGBA",
+      "prompt": "implementation/sprites/generation/0001-house.prompt.txt",
+      "prompt_sha256": "96953b29cc38cf2238fdc241c118d0880bc8f97cac461fd8e554d14d23e1e71a",
+      "transparent_background": true,
+      "inputs": [
+        {
+          "path": "docs/reference-sheet.png",
+          "role": "architecture/material reference",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c"
+        },
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "accepted pixel-language reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        }
+      ],
+      "runtime_outputs": []
+    },
+    {
+      "task": "0001",
+      "asset": "tree",
+      "tool": "built-in ImageGen",
+      "revision": 1,
+      "decision": "accepted identity/style source",
+      "source": "assets/art_source/masters/tree.png",
+      "source_sha256": "a9b0f2880631364cf6ceb0dc7795cc132de6d1205b18e4b70434f67ecc7ec3f9",
+      "source_dimensions": [
+        1024,
+        1536
+      ],
+      "source_mode": "RGBA",
+      "prompt": "implementation/sprites/generation/0001-tree.prompt.txt",
+      "prompt_sha256": "b700fd2647fdae93f6f20f16076f415af341cc0279905da4229fcf961f3207bb",
+      "transparent_background": true,
+      "inputs": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "style reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/masters/house.png",
+          "role": "style/camera reference",
+          "sha256": "26d2646bf9328eae0eeb699193a11f46e6f92cd487d2369dea27b4295bdab81f"
+        }
+      ],
+      "runtime_outputs": []
+    },
+    {
+      "task": "0001",
+      "asset": "walker",
+      "tool": "built-in ImageGen",
+      "revision": 1,
+      "decision": "accepted identity/style source",
+      "source": "assets/art_source/masters/walker.png",
+      "source_sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
+      "source_dimensions": [
+        1086,
+        1448
+      ],
+      "source_mode": "RGBA",
+      "prompt": "implementation/sprites/generation/0001-walker.prompt.txt",
+      "prompt_sha256": "a37705c1e7b4c7612b8e7aa87d67244a59a1a1c174a43d8cdfb16cf540a00807",
+      "transparent_background": true,
+      "inputs": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "style/body-scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/masters/tree.png",
+          "role": "world style reference",
+          "sha256": "a9b0f2880631364cf6ceb0dc7795cc132de6d1205b18e4b70434f67ecc7ec3f9"
+        },
+        {
+          "path": "assets/art_source/masters/house.png",
+          "role": "world style reference",
+          "sha256": "26d2646bf9328eae0eeb699193a11f46e6f92cd487d2369dea27b4295bdab81f"
+        }
+      ],
+      "runtime_outputs": []
+    },
+    {
+      "task": "0001",
+      "asset": "style-day",
+      "tool": "built-in ImageGen",
+      "revision": 1,
+      "decision": "accepted identity/style source",
+      "source": "assets/art_source/masters/style-day.png",
+      "source_sha256": "148b5e004b9ed8f4adb1a90a65887e8aa959647b4eccef64e1bad7f17ef0ce09",
+      "source_dimensions": [
+        1672,
+        941
+      ],
+      "source_mode": "RGB",
+      "prompt": "implementation/sprites/generation/0001-board.prompt.txt",
+      "prompt_sha256": "17543723505d67e5885153d69e1f9db4ca0527ee81c556660418139144bdbbdc",
+      "transparent_background": false,
+      "inputs": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "accepted identity reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/masters/house.png",
+          "role": "accepted identity reference",
+          "sha256": "26d2646bf9328eae0eeb699193a11f46e6f92cd487d2369dea27b4295bdab81f"
+        },
+        {
+          "path": "assets/art_source/masters/tree.png",
+          "role": "accepted identity reference",
+          "sha256": "a9b0f2880631364cf6ceb0dc7795cc132de6d1205b18e4b70434f67ecc7ec3f9"
+        },
+        {
+          "path": "assets/art_source/masters/walker.png",
+          "role": "accepted identity reference",
+          "sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5"
+        },
+        {
+          "path": "implementation/sprites/reviews/0001/scale-grid-3x.png",
+          "role": "measured native-size relationship guide",
+          "sha256": "834e2c7183a5f50e3fa6be10b1aa3258d946c91e08ee9375577e921ac4778207"
+        }
+      ],
+      "runtime_outputs": []
+    },
+    {
+      "task": "0001",
+      "asset": "style-night",
+      "tool": "built-in ImageGen",
+      "revision": 1,
+      "decision": "accepted identity/style source",
+      "source": "assets/art_source/masters/style-night.png",
+      "source_sha256": "850d7ee8738f0f1faa3e827e6c5ba71d48c203df16b5d4fa0db736471ca0b6c4",
+      "source_dimensions": [
+        1672,
+        941
+      ],
+      "source_mode": "RGB",
+      "prompt": "implementation/sprites/generation/0001-night.prompt.txt",
+      "prompt_sha256": "846a21727782583437435747f3c3ba41b9cf0edecb2ec6a764e154f3c1ea8834",
+      "transparent_background": false,
+      "inputs": [
+        {
+          "path": "assets/art_source/masters/style-day.png",
+          "role": "lighting-only edit target",
+          "sha256": "148b5e004b9ed8f4adb1a90a65887e8aa959647b4eccef64e1bad7f17ef0ce09"
+        }
+      ],
+      "runtime_outputs": []
+    }
+  ]
+}

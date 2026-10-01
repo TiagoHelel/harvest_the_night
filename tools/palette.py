@@ -70,6 +70,16 @@ COLOURS = {
     "bone":         (0xe8, 0xe0, 0xcf),
     "bone_dark":    (0xb8, 0xae, 0x9a),
 
+    # Sprite-loop 0001: the farmer's face and blue overalls need their own
+    # short ramps. Keep existing material colours unchanged; these are shared
+    # art colours, not simulation/balance data.
+    "skin_dark":    (0xb5, 0x6b, 0x4b),
+    "skin":         (0xe4, 0x9b, 0x68),
+    "skin_light":   (0xf3, 0xc5, 0x8d),
+    "cloth_dark":   (0x20, 0x38, 0x59),
+    "cloth":        (0x31, 0x5a, 0x8c),
+    "cloth_light":  (0x4e, 0x7f, 0xb1),
+
     # Night sky and the shadows under it.
     "night":        (0x1a, 0x18, 0x30),
     "night_light":  (0x2e, 0x2a, 0x4e),

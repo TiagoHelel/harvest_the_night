@@ -1,0 +1,8 @@
+Use case: stylized-concept.
+Asset type: HARVEST THE NIGHT walker zombie identity master, one isolated sprite source.
+Input images: accepted farmer is the style and body-scale reference; accepted tree/house establish the same world camera/material language. Do not copy the farmer costume.
+Primary request: ONE ordinary walker zombie, south-facing three-quarter neutral shamble pose, uneven hunched shoulders, slack slightly extended arms, torn muted plum work shirt, worn brown trousers, bare or broken work boots. Thin-to-medium slouched body, no armor, weapon, accessories or cartoon giant head.
+Camera/style: orthographic three-quarter top-down with same visible hat/shoulder-plane perspective as farmer; clean chunky pixel clusters, crisp colored dark-plum contours and 3-shade ramps. Slightly eerie but compatible with a cozy farm, restrained gore.
+Scale contract: intended native 32x40 canvas, visible body about 29 pixels tall, narrower than future tank; stable feet at (16,36). Render as enlarged pixel sprite with enough transparent margin. Full body and hands must be unclipped.
+Palette: rot skin #355038/#557652, ink #241f2e, subdued plum clothing and earth trousers, small selective pale eye highlights; no all-white rim or baked glow. Neutral upper-left daylight; actual night is runtime lighting.
+Backdrop: genuine alpha transparency, no floor/ground shadow, scenery, blood puddle, labels, text or watermark. Exactly one zombie.

@@ -1,0 +1,8 @@
+Use case: stylized-concept.
+Asset type: HARVEST THE NIGHT full tree identity master, one isolated sprite source.
+Input images: accepted farmer and house are style references; match their pixel clusters, camera and neutral upper-left daylight.
+Primary request: ONE lush compact deciduous farm tree. Broad full canopy in readable rounded lobes, a warm visible trunk and a few roots. Strong contrast between lit upper-left leaf clusters and shaded lower canopy, natural irregular silhouette. No fruit or decorations.
+Camera: orthographic three-quarter top-down on a rectangular grid, matching the farmhouse. Trunk ground contact is central; no diamond platform.
+Scale contract: intended native 32x48 canvas, canopy/body around 30 pixels wide and 42 high; ground pivot (16,44). Render enlarged crisp pixel clusters so the simple mass survives native reduction. Entire canopy unclipped with a transparent rim.
+Palette: leaf #1d4024/#2e5e34/#46804a with restrained yellow-green highlights matching warm grass; trunk #6b4a2c/#8c6239/#a87c4e, colored dark-plum contour #241f2e. Use clusters instead of random 1-pixel leaf speckle.
+Backdrop: genuine alpha transparency. No ground patch, grass, separate cast shadow, glow, sky, border, text, label or watermark. Exactly one tree.

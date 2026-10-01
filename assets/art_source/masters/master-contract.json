@@ -1,0 +1,108 @@
+{
+  "date": "2026-10-01",
+  "status": "accepted identity and native-scale references; playable validation belongs to 0003",
+  "runtime_import": "task 0002",
+  "masters": [
+    {
+      "id": "farmer",
+      "source": "assets/art_source/masters/farmer.png",
+      "source_sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4",
+      "crop_xyxy": [
+        365,
+        190,
+        942,
+        1044
+      ],
+      "content_wh": [
+        20,
+        30
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "prompt": "implementation/sprites/generation/0001-player.prompt.txt",
+      "role": "identity master and native scale reference; not a runtime asset"
+    },
+    {
+      "id": "house",
+      "source": "assets/art_source/masters/house.png",
+      "source_sha256": "26d2646bf9328eae0eeb699193a11f46e6f92cd487d2369dea27b4295bdab81f",
+      "crop_xyxy": [
+        148,
+        165,
+        1156,
+        1163
+      ],
+      "content_wh": [
+        56,
+        55
+      ],
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "pivot_xy": [
+        32,
+        60
+      ],
+      "prompt": "implementation/sprites/generation/0001-house.prompt.txt",
+      "role": "identity master and native scale reference; not a runtime asset"
+    },
+    {
+      "id": "tree",
+      "source": "assets/art_source/masters/tree.png",
+      "source_sha256": "a9b0f2880631364cf6ceb0dc7795cc132de6d1205b18e4b70434f67ecc7ec3f9",
+      "crop_xyxy": [
+        35,
+        220,
+        997,
+        1355
+      ],
+      "content_wh": [
+        36,
+        42
+      ],
+      "canvas_wh": [
+        40,
+        48
+      ],
+      "pivot_xy": [
+        20,
+        44
+      ],
+      "prompt": "implementation/sprites/generation/0001-tree.prompt.txt",
+      "role": "identity master and native scale reference; not a runtime asset"
+    },
+    {
+      "id": "walker",
+      "source": "assets/art_source/masters/walker.png",
+      "source_sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
+      "crop_xyxy": [
+        293,
+        192,
+        886,
+        1278
+      ],
+      "content_wh": [
+        16,
+        29
+      ],
+      "canvas_wh": [
+        32,
+        40
+      ],
+      "pivot_xy": [
+        16,
+        36
+      ],
+      "prompt": "implementation/sprites/generation/0001-walker.prompt.txt",
+      "role": "identity master and native scale reference; not a runtime asset"
+    }
+  ],
+  "palette": "tools/palette.py:COLOURS (42 colors)"
+}

@@ -1,0 +1,9 @@
+Use case: style-transfer / stylized-concept.
+Asset type: HARVEST THE NIGHT player identity master, one isolated sprite source.
+Input images: the owner's character sheet is an identity reference only. Preserve its straw hat with brown band, dark hair, youthful friendly face, white short sleeves, blue overalls and brown work boots. Transform that identity into the new game's consistent true pixel-art language.
+Primary request: ONE south-facing neutral idle farmer, empty hands, full body, centered. Do not reproduce the sheet or any additional poses.
+Style: deliberate chunky pixel clusters, crisp stepped contours, colored dark-plum outlines, 3 shade ramps per material, warm highlights from upper left. Cozy 16-bit farm-game sprite, orthographic three-quarter top-down, slightly visible top of hat and shoulders. No smooth painted shading or vector shapes.
+Scale contract: intended visible body 30 pixels high, around 22 pixels wide on a native 48x48 canvas, feet at (24,44). Show this as an enlarged pixel sprite with clearly visible square pixel clusters. Leave generous real transparent margins for tool/pose clearance. Full hat and both boots must be unclipped.
+Palette cues: ink #241f2e, timber #8c6239/#a87c4e, straw #c49646/#d6ba60, blue work cloth muted indigo, skin warm pale peach, bone #e8e0cf. Use limited coherent ramps, no random dithering.
+Backdrop: genuine alpha transparency, no ground tile, shadow, halo, scenery, text, label or watermark.
+Keep a recognizable person at native scale rather than adding illustrative facial details. Exactly one character.

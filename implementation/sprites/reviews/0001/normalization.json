@@ -1,0 +1,699 @@
+{
+  "date": "2026-10-01",
+  "encoding_only_count": 99,
+  "changes": [
+    {
+      "path": "sprites/buildings/auto_crossbow.png",
+      "old_sha256": "27ad8b9d71f7fcbcee4e9faa6885ed1d8ddd4b922306217e946ddc73e3b953fc",
+      "new_sha256": "0e1f545f5166c2ff742c9c87636f09561a73f8f19bbf016ebc00c9a7986b9edd",
+      "rgba_sha256": "e72f5f9207999d27b4530e6edfb961b99ff7419626b4935e458bc28be8dfc112",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/buildings/flame_tower.png",
+      "old_sha256": "0502dd1d1af4b0bfc184cebaffe6258c9b2c958d611c732b45b3acd501d3dd3d",
+      "new_sha256": "fc6baac5940cb6acd030a00007747fc76c96d502f0ae3846e260dd789b0712dd",
+      "rgba_sha256": "5b0ec091741a902ec2dc1852d7d13bb68cc2dd30ad4c7601ac19dbb83b110088",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/buildings/gun_tower.png",
+      "old_sha256": "bb1f05ba2858dc961ff44cfeee107958ce38526d82e8d92daeafce385e7f1388",
+      "new_sha256": "255893adecaca4795bba30f6d0c3a4bad277cb1be824ac882440b95d9fcc3630",
+      "rgba_sha256": "7ec7b833d2dfcd8928cb6b3ea6a9e5cd29c254121f94e0186c9b46b968dc3d6b",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/buildings/mine.png",
+      "old_sha256": "ffae093a01d4b2829ff1a2f07cf2d2b7da0f900fc51e46d1e7b70751d07f3030",
+      "new_sha256": "c71cf544cb7b02c2fa96d263cc62db72b02f1b0ef6d9056900f76f0f44a2a14e",
+      "rgba_sha256": "bdf3e0d3e1a713ba461078267df21b53623aea13ffda8331b83a0719b496da2f",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/buildings/mortar.png",
+      "old_sha256": "d93b484197585f9e4562f91ac6e673e8ce135c88ce4be281732cf459a7130058",
+      "new_sha256": "b8dbc977436aac2506f512c06ce3646cfeeeaa6409b5969b2cd31aa7bd8e3206",
+      "rgba_sha256": "554cc5086a86336dbb4c1a8ba9aff07aabe7b223514131cf478032f4d79176d2",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/buildings/wall.png",
+      "old_sha256": "a68b56f8bfcfb4d314d448e85173d65f1d43f680940d8fa5e4e36474751643e3",
+      "new_sha256": "5ac71781e1265ead2efb25d2f0548b5f202897d866e64c74cfc968115abbb4e3",
+      "rgba_sha256": "831c77c2552d967b22229ec042d2e1e55687f420307f731c0b60fc0ee294a9df",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/props/press_1_1.png",
+      "old_sha256": "bbe31ea5eb3dbb47d64be5ab59258f3336090bc53ad78757d636aba24c8aa9a4",
+      "new_sha256": "4ce97456e9540e6793e6e5dce917c12138937739e3791c4e102fddcbdb454812",
+      "rgba_sha256": "0f97945332da3ccf572e5b1d51c9e882f5d8450be2f38c89fb3a678c95e9d646",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/terrain/grass_b.png",
+      "old_sha256": "bd51d4cc528d5d0b7493f0b661e480d7565e3cb5bc9a95c3bde0b36e0ea54195",
+      "new_sha256": "0e88709c84ff151bb371fb1e393ce1b2619954c2565b5d153f8a17b99e30a1d6",
+      "rgba_sha256": "1eabe9fdce956d10b28838fefe4021b9e3780d8c0a515fa6ce63e0cfc43e4d0a",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/terrain/path.png",
+      "old_sha256": "d78aea8c443d965e0ba587623b764f0f1adb616c5794d1678b3f0fcd7ea511d1",
+      "new_sha256": "d0a5002cb63a02e9bc9a34e75b1e190e21285c9348518892145ac184ece6ea38",
+      "rgba_sha256": "b10412115786036e48386cdd5f2d9a72e50919ff8a2c3b340b7b09c8e6d8002e",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/terrain/soil.png",
+      "old_sha256": "7a82fd40a65d2425a919e6dfed2c1ed7a01d8eaeb233e9ce18ab193e43fdf936",
+      "new_sha256": "3ebbe722ec268cba637a901f1b8e31778dd119e2754f686da51ce9c7710e662e",
+      "rgba_sha256": "bdb7aee160b186cffdb2eedaee6954d5ac0add0343f0d953eb9e91ddb1e40481",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/terrain/water.png",
+      "old_sha256": "2f4cd68249cdac187beebb34e314a868ea3f24da258ecdae2be23f5f9f03078e",
+      "new_sha256": "765f56acbdfa4b25fe66b9d12b7b917b3e4f29cc1489f33037cc58ff7e7a695b",
+      "rgba_sha256": "97cc850efff6e4b3e542fe423ea97d1976a635719607a4f3584d47a8ff81ae61",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/ui/button_disabled.png",
+      "old_sha256": "fddbe985468ae73e7f27696433f42553b56593cc1a489cbaeb080728d30d7faa",
+      "new_sha256": "b7753d2614e9a33ada9a8b1e342c4c7d9f3e3577ae7292c6e1f8c584679c17b3",
+      "rgba_sha256": "958468b104e4df440f4b1221508dc0f9847c55a2806c2274fe3e1068e4e6c970",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/ui/button_hover.png",
+      "old_sha256": "38703a73aae75e64c20ac1fbf0225b12a21e57c8766809f8d510f491e118b10b",
+      "new_sha256": "67d0f3112e216f29fabc74344a22bde4c1fb3e424183335280bbdddfe7fe3307",
+      "rgba_sha256": "05b5d9e43b176f454f7b84a0347fc6ea470c392ecfa3be9ddbbdb15619b4282a",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/ui/button_normal.png",
+      "old_sha256": "405a90381b09ade4dc73aa37e84fa9e758275003db3b6d64b2021039bbe21b30",
+      "new_sha256": "b27641b70b7dac754f4fe972d1a384202b04f8cfe22d1a7055f63e98c5e1a7f9",
+      "rgba_sha256": "4d3ff20cd632887fc7639b8071a8d768a295a3c14c01b2da12e02ed14ec80055",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/ui/button_pressed.png",
+      "old_sha256": "3eaaaab42dcc7eeccb8138f183b8d2e233eb4746c279c4c7bc63e004a5b34bc6",
+      "new_sha256": "420442db8d2097beaab27016f66e6c5fb9441717249f90857f994f59ecd44c5b",
+      "rgba_sha256": "97959be5a713c4049c55e5fd707756b7ddcf1dc33ba49caa3b5d4256f6402a4f",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/ui/checkbox_off.png",
+      "old_sha256": "c0db73898edc6bcb84e348ec8890b0356ce710ec3fd8757924817541a15171c1",
+      "new_sha256": "7cc95fdede7af92dcb8f9e68e53d63b32d3a1313ef8680cef3b5a502f38532d0",
+      "rgba_sha256": "1c74e2bdedb8570359c2f5108c323b579f66a4c68f4a0899d174c42d7e96f524",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/ui/checkbox_on.png",
+      "old_sha256": "1ecaeacbedd294836b9df4ec17029d322368459994a7dc37cb8631c3252d1aad",
+      "new_sha256": "1b96343eee0dcb487192b0cd7237cc78cd49c7d9622d93d7b342bc9977053288",
+      "rgba_sha256": "e6ef4c752d30e08dbfec76389c3a7525dddd5c18133403353603c1288d3789ea",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/ui/icon_wood.png",
+      "old_sha256": "e234358620dcf0a9a557a5745df86d5d3c561f7311b1346a4312e13e12c13680",
+      "new_sha256": "24d04d5edc9028ce6af542e43595604d247561662744de338a3c270e8e37adc9",
+      "rgba_sha256": "eec6dd31424c5717da8f48e6d3e849e1de577891ec16ba00a46112e4d2d0938e",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/ui/panel.png",
+      "old_sha256": "86573b1105bb79bf2a6f92a25933d7744d958a4e2877d9f4fea3b1b5167dc8c6",
+      "new_sha256": "bb5f7ab3eda7f7212e6747ce20f2a82bf20c59b62135c8805f3b14af078a07e5",
+      "rgba_sha256": "00660c1d1098854425ab05e7398dbbcf2e4c2bf32d5fbbbc652d6c2cdf718b5b",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/ui/slider_track.png",
+      "old_sha256": "137be461b280f75aeee2fb5f712d9068c727e3c91d79fa45f70b8065d07f7dee",
+      "new_sha256": "e9c0be12295a96953254b1379b17e1326f5d95429b2923ac93da24679bafb01b",
+      "rgba_sha256": "41dad3ce9a37ab2b18e7b3a6ac03916d2309d2b8d4b570d92eac3f267507821c",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/ui/tooltip.png",
+      "old_sha256": "2194cf980c2564e996ae0288a9ff3b5dece7fe4b84c98f549f1aac9e95f3a1ca",
+      "new_sha256": "9be82a482e1cdd4dda5a13934428b33258e0980fd900042b33e4cd19808eca39",
+      "rgba_sha256": "0d4524a6c6cd28fa54313716d422a1afad5f4fc8aa133c6ac9e5e329076eff5a",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/buildings/auto_crossbow_2.png",
+      "old_sha256": "56becc3c995688160f3d0a8246ab72de987e0efe602974e6ab613fd59646b725",
+      "new_sha256": "06494658abb466bd78ab655a639061e195248c48cc8d4a3eb2ea4eb08eb62296",
+      "rgba_sha256": "d19762cf3fcb65bfa84685450799d5d59697b0a5873fbdd4c6f953b0ae97b31b",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/buildings/auto_crossbow_2_fire.png",
+      "old_sha256": "74e0bd8fb2fbd046d879a654d84ea1007e2c49466b0e3eeabfe65333fe4755ae",
+      "new_sha256": "a71923418968bfe56966da603ff3e0fb321b6d52c6e803be3cf70feeadaf4b63",
+      "rgba_sha256": "8ef492b573854697e10d1f7eb3cc7944ac63092bf07826ccb8935cfdc12fa7ab",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/buildings/auto_crossbow_2_hurt.png",
+      "old_sha256": "e3f0ce718c9f96bd9c9db2b83f437281accf9365e668cc23aee38d831be49fb9",
+      "new_sha256": "f2bd2f4ef10c6716d81b98437463c0a6157b018785431df65223b46ac7111a34",
+      "rgba_sha256": "0ca39f29caedb1ed93fc1c0762e15cc222384d2b7529f335f92346a56ea2320c",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/buildings/auto_crossbow_3.png",
+      "old_sha256": "e5a5b336298870318fa8f6d48ff6d7c174e14ca4e1c9c161cb6158653c980b51",
+      "new_sha256": "f01479db06ca1065d23db3f3d3628cde9ba0def4b0cc29ea17607a7336d96a67",
+      "rgba_sha256": "67671da004cf77b618572f242b8b6c55a8b848819d73cb693f4e7683f7a9c860",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/buildings/auto_crossbow_3_fire.png",
+      "old_sha256": "8b7dc1756ddbb2b98939603dff0c179bbcc9d31f18c304771b13e1020c479e5a",
+      "new_sha256": "c3b496dc924abfdd2a156605b3a8d0db226eb53542f5516bc4e2e21b3b441bc7",
+      "rgba_sha256": "201c81ff791090d08093e2a1dc8e53713ae742268d7ded7ac42dcb270c1ec92f",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/buildings/auto_crossbow_fire.png",
+      "old_sha256": "7c0839c1b185857631b142a5dc347c48c2c969a7bb78450b4a150602c0b41e07",
+      "new_sha256": "729297b8e3f2807a02a8aee20a0f5145c273347d2290ab4c8b683d9ae15a402e",
+      "rgba_sha256": "ba044dbb9403cb14af6c3202a88187713cf6a66c4dda350a4e2fa89ed7a00a8a",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/buildings/auto_crossbow_wreck.png",
+      "old_sha256": "f4ca6ed0159c1fe640230ec0990ee6107ea886137ee74f6a0db6cdc2daf5527e",
+      "new_sha256": "c44f87f4225ebb49aa35fa41908fce72f49e3f6eecc35b2bbcd33ff828f58ba3",
+      "rgba_sha256": "cc47f1de292c97f9e4e2734b506e02e49de4242079271279f0e6032e4ba01b30",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/buildings/flame_tower_2.png",
+      "old_sha256": "2c0797ae84bc1ab7bdf57da3f30ad28c98c5072a46091bf4ee6511b7802fb407",
+      "new_sha256": "51e7bbfc90c8acd851f97bf4cb420b52753ef1b1e5dcb1bf2b3355f60ff2827b",
+      "rgba_sha256": "40db7d15c16d17f4c7ffacb33733ff6538f72280df1ea3946dfdf567d970d452",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/buildings/flame_tower_2_fire.png",
+      "old_sha256": "8261a4a2ead6488143480ee99ca6c54e1791a5fc4b1735efc6e175e311bc4315",
+      "new_sha256": "b1426dbbbd01faab2701d5177ad2e5fd9b1b3d218cb73e4a00e783c60e521689",
+      "rgba_sha256": "fb00a4c543db7c90fe153f501cfeacadca73d3dc2adbef4f8b7f25e5515a0f0b",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/buildings/flame_tower_2_hurt.png",
+      "old_sha256": "f93f675bd6a9ce83f499bdd935da2148f41cec46ffaf9ff677ec11a6df652b18",
+      "new_sha256": "fc814ac037a4440fc8833b1d9232b84a443c19587e8fd8f98e110d4b6f7eb2a8",
+      "rgba_sha256": "2c41e1aba6045f859427666c99be763c09e04c6feeb237e90c1d1ed6048b093a",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/buildings/flame_tower_3.png",
+      "old_sha256": "b1942d2c39dae99dc8de47c721f80187e63f96f71a1a92fc738fb553d379b110",
+      "new_sha256": "b6cfcc0c3e88781efb5a1048161cbd0deee69d6430fe0ce187b18ee7dd08a68e",
+      "rgba_sha256": "38a787cd91fe6f70b8163045a31eb1d0618c75d9a9ab797fdc24f3167138b6c0",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/buildings/flame_tower_3_fire.png",
+      "old_sha256": "4226baa4df19ec4c07b3a196f86c7b77558eee4370e5f717c50eec4330faaa27",
+      "new_sha256": "8d6c2fcf8f58f63a94654d77414025a34dc8940c16a4b3f112cc25161d9af140",
+      "rgba_sha256": "48756b3fb6d5de686ca52ea532e20821894fe93f97656051b127457a84fd2c02",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/buildings/flame_tower_fire.png",
+      "old_sha256": "f84333ff29e60c7a4649768049e51e0f57cf8fd316a2fdc2ce79631123ed3cb4",
+      "new_sha256": "c50d52c10d8b8d004f0f6a2817e5b3492ce0b07ed91049ea21eed3a53ac07619",
+      "rgba_sha256": "d36fe4f6f27e3c0a6b92f2114a8ab9babf31c53fa523e5543a16b684e0d9a7b6",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/buildings/flame_tower_wreck.png",
+      "old_sha256": "f4ca6ed0159c1fe640230ec0990ee6107ea886137ee74f6a0db6cdc2daf5527e",
+      "new_sha256": "c44f87f4225ebb49aa35fa41908fce72f49e3f6eecc35b2bbcd33ff828f58ba3",
+      "rgba_sha256": "cc47f1de292c97f9e4e2734b506e02e49de4242079271279f0e6032e4ba01b30",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/buildings/gun_tower_2.png",
+      "old_sha256": "b60ba3a251b3c92b2137382b83afe570d3ae671f9edb51a80403744ca29fdfc5",
+      "new_sha256": "04163e722d52384e6942edee50063ae051fe342a52c5bdcb1bfd10f9619e882b",
+      "rgba_sha256": "d9ac9d1651866c11ea48ec6727a8d24507e25406103ca270eb5e2a283e149ef3",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/buildings/gun_tower_2_fire.png",
+      "old_sha256": "fb75f92f8073898aac3bf5d15b27e32a6c160da0a5d719cb541cbe71aed25c51",
+      "new_sha256": "7d059460f5009928a1ee94dbf9e06c5167b652d9cc9ed721c76a275095752ca0",
+      "rgba_sha256": "8a9baaae3bc545e7541e9847543d5afdec8c9b3bc99ba721a65c4aaa0db1b3e7",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/buildings/gun_tower_3.png",
+      "old_sha256": "f6b0f19d34364692c399189f48a573390985f9406133339702c7c5c46990dc0c",
+      "new_sha256": "9a51ebafa95a65d0deb96bead94957b0f56b4e4716ee14e6fc9196fa7ea2d750",
+      "rgba_sha256": "b94c13274a473551f3d69ac732028dbe6c53b17385b91d33d26568b83c758598",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/buildings/gun_tower_3_fire.png",
+      "old_sha256": "a9fc09f6ef301bf0f1c36c9301a2fe40f7eb37dccd08560e159705e613ac8ebf",
+      "new_sha256": "bf54f4632470546eaa91369b29a301ab0dfd3c226f0aa4b2de22e941a7bcbdd6",
+      "rgba_sha256": "844d876d1cd7a30dd76f4f9e03e3d8c98cd4a90c7ab556ed3a31bdf30c3b3f2f",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/buildings/gun_tower_fire.png",
+      "old_sha256": "b3855176a0cafc8d5fd57fc43481159e44fbf6e792ef3287a3eba769da2d0aec",
+      "new_sha256": "299def45a7c2c24cb08a428154b8222a2c44b3bfa281db9fc12ccf93da8bbee1",
+      "rgba_sha256": "b3f1fad0bbbed88b492608aff3d222548b98ff31faeda6f13b6da4323f8a9f6d",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/buildings/gun_tower_wreck.png",
+      "old_sha256": "f4ca6ed0159c1fe640230ec0990ee6107ea886137ee74f6a0db6cdc2daf5527e",
+      "new_sha256": "c44f87f4225ebb49aa35fa41908fce72f49e3f6eecc35b2bbcd33ff828f58ba3",
+      "rgba_sha256": "cc47f1de292c97f9e4e2734b506e02e49de4242079271279f0e6032e4ba01b30",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/buildings/mortar_2.png",
+      "old_sha256": "ee70b7fcf4b5563723cfd04be3b02aa63c59d78c91d0732e5b2d72b934ca78e8",
+      "new_sha256": "ed7f2dd2b5ab99bd4dbc24a045ca6e49cca88b718700d61fb9779f7a44f96b68",
+      "rgba_sha256": "48557ca2b43770f390dedbf4cd5f4948de1ef45211f0926fce2d9463919d5d7a",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/buildings/mortar_2_fire.png",
+      "old_sha256": "816cfcba2ec00db862a5a95aea3f8b40565198c3f7434adc254f7951910478fa",
+      "new_sha256": "6ead09e21ecf6b20febf437c8e7c4a483083071596c323da1be99d4b1cfcf0c0",
+      "rgba_sha256": "b9a4b476ac544cfb1b2505a008da029f726259ffb1bda740844a048211613ad1",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/buildings/mortar_3.png",
+      "old_sha256": "d5948ba6ae8e5010300a72872cd365f206688bc562ed470fbc3fd6c671ac36f5",
+      "new_sha256": "c59741a6146792c05bf70d508eb5fe0c22e4a751f8fe25210969900bf005a1e6",
+      "rgba_sha256": "5d58de86dda2697a1146b2e0bd71d1ae3521e8db92e1d993b48bdd9e2b9f6fc1",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/buildings/mortar_3_fire.png",
+      "old_sha256": "2557ea1d542f990c6bcb24e3ba7dca311b729511bba546d2ae4155b68dd3b577",
+      "new_sha256": "f218c7ba1541c4d669b107e1ec0f4c78c6afe5e51163dda196531be54cad6805",
+      "rgba_sha256": "a08b90e788aaf30234dcd4298be823ff01eae10dc94251e48eba657f4a0a9d29",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/buildings/mortar_fire.png",
+      "old_sha256": "e31b48321dadf34a648fce8d973909f135c97df6449281fcde65baf329872b2a",
+      "new_sha256": "57605a10ee5c33d0b37a4b4df927f3c14cd702e68dc70a42a13af408e636d70d",
+      "rgba_sha256": "db7006a0f627f833d970b7f667a2f8365047931cc89a1af9690a7b027e566ac4",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/buildings/mortar_wreck.png",
+      "old_sha256": "c11d7f3a90ad997785871765d0e825dbdb877c7dc9ddd6f475386591faf2ada6",
+      "new_sha256": "22f49df9f0015bc2913149cab0eca288de93a670b6083a77360881fcc0bc60e1",
+      "rgba_sha256": "3c23337d8b21a6361cc5e44c98a9499cd7483c12af7008f7831646212e9ca8d2",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/terrain/atlas.png",
+      "old_sha256": "5810c77706a03c828e09e13a0dcfb3dc636eb39daa1ea839741aeb38af29a3de",
+      "new_sha256": "d46b44d6cc8ddd7b29733d895599a7b74a42d6b434a0d16fc61517e2c4c1b686",
+      "rgba_sha256": "7b8807ebfaf522d8a43fe67ea46f0c782f06de0a1eadd060b0a879f61780a83e",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/actors/carry_0.png",
+      "old_sha256": "27452ed5a719b4dbbe01fca179bfe40e8f7623454857434a619df66c2b79f9d8",
+      "new_sha256": "4bd057cf1c420f9025b784a666eb0d23cfe0d6bbc5bbdfad409844081371d5e8",
+      "rgba_sha256": "d8384113971612006cbd06af8dda5e59f3fbda75fc5643c3808149740345f7a9",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/actors/carry_1.png",
+      "old_sha256": "70575c587950ed621484aeafe0258a1cfd2cb501b21396c0a9354e8efa3b47b9",
+      "new_sha256": "f12a00bde9a23cc5a73cd5ee9ed65ae3ba748b53358cd9e9ab3bff6ac06c0c57",
+      "rgba_sha256": "4f6aaaa368679158ea813503ccf193f3b01ac1fffcbedf78a82629e9c3bc479c",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/actors/chop_0.png",
+      "old_sha256": "57f8f9b29a1fb9f598dc92865f1df095f28524e183e253cc29f95fd607604f40",
+      "new_sha256": "dc3b13139d865b67ad3bd112e725f0d7d9e4b48bea60ad75a12c7db629d22877",
+      "rgba_sha256": "a5179f2b86c1e33ffe62ddf41fa5d03a2ce6471815e3529c8db20112208bef02",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/actors/chop_1.png",
+      "old_sha256": "e720f21ea7716e1b47faa39950ecc29fa12082d36bcc2b2f3b99e49b667cbe4f",
+      "new_sha256": "50163b8d8d12ef2f9c0d2ac77dea0e9a2f0f304016c71bf51c751b8d48819b89",
+      "rgba_sha256": "90291782d161fa2a7bf03d9b2c180ae01ca57cc68321fdd7033c9d1ef32c9d69",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/actors/chop_2.png",
+      "old_sha256": "46c9db8f5abea411a215d75f717845fcb4b6dbc717b3f9c199bc816cab519df9",
+      "new_sha256": "9c9a6a6697343a484158b3f416fb24ef6fc27b386c94d258976c4f951706215a",
+      "rgba_sha256": "96a60864e2d0fb0b9752d3bf22ab7a3fce4ce0170be125ab443eaf07131a4476",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/actors/chop_3.png",
+      "old_sha256": "13488a9886e13d5a62f2929041afbfe573fb78ce89e663214643d267116bac16",
+      "new_sha256": "7e8dbea9951be9066401ef95a6c3585a48502790fbf6a5b15d942301964badf4",
+      "rgba_sha256": "5653e14863e90088d9fd6edec78c4a056cde29ada8999f80cbb948282825c574",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/actors/craft_0.png",
+      "old_sha256": "8bb55b96f5747ac1993533c39ec394a6d650f56cddb9ca5e35240acccede29aa",
+      "new_sha256": "b08bed37089f361c352b288ef2ccbb80f563d51f77f987bc8f34b98eef1553e6",
+      "rgba_sha256": "800535e07115dac90db96c303e6d9d73c37c54f1eb37759f07056e6c0ef66d7c",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/actors/fish_0.png",
+      "old_sha256": "2ca1726b2a48f3b25b87ddee297ce50d5cfb3f083ed339a66ca1da6b7e6af3b1",
+      "new_sha256": "d46fc1c33296bbe7cdfe86307c6199c2bc449a8a2615c5d9b3e70d81f3c798ff",
+      "rgba_sha256": "771a9b2fe2bd344772dbe5812976aeb9629a724a15f2592f1b9388d9bd0bace8",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/actors/harvest_0.png",
+      "old_sha256": "fd5eddd94f4c4ce314487771b8aef72c294563c729ac050046da25ea5e40fb99",
+      "new_sha256": "ceb8675c754aaee0cb99aa3b4599a4b5f72adb204f8b738965e733d2de7d3860",
+      "rgba_sha256": "47188ce761b387fb361941f23506a3d2389df52f1da5a48415629f95727e91c3",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/actors/idle_north_0.png",
+      "old_sha256": "9f52412578e5fc79872bb326fae2606a9ec61d862e73a560f99b12c0522ba56a",
+      "new_sha256": "b653ecaa916b6ca7d4acd7a4694740d80f0b0d6706c3d1bea779494fc64aeb80",
+      "rgba_sha256": "df5b7b5635136023d79947cec7456eb587405067aa1558fc0ce67b8b1201599d",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/actors/idle_north_1.png",
+      "old_sha256": "7d637eb935b9bd0edbd09a8dced460c8dbb2f9c75e0cc095649b73e67a339a19",
+      "new_sha256": "97fd96e8aac9c0fded6954bfa49e27c668293808866464c683c3c2fdbe25bf96",
+      "rgba_sha256": "b6923b584d6ae2e94f550c7407edfc7bc83e759b9e2821070bc93974a80a02da",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/actors/idle_north_2.png",
+      "old_sha256": "6f9f6b28a50c7aecc255343279eac8a300504f1de83fa7008218af5d498a5cde",
+      "new_sha256": "5e63a040575252a1c6a723455ec9f8fa1b458547eafe9de32b82f2cbc034e179",
+      "rgba_sha256": "292a8c9a39f51116bd40470658c01e6137681a09a7a1112584a1a918b204f4f3",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/actors/idle_south_0.png",
+      "old_sha256": "ccce33f4e51b646dc3a38f343de73ad4223fddf39721e47ecf6302bad5946616",
+      "new_sha256": "40ea5ed70037ce10a82a414fb66e28ac8138270fc5cbcf99dfd19efb2597857a",
+      "rgba_sha256": "821fff507e2fef8c1a0d080b32e8193d6bf3a32a0126c22f17a0fbf60f12b3aa",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/actors/idle_south_1.png",
+      "old_sha256": "cbe4aec9c3cc7438bce54ffa59d78f8b36ebbac1530e6879c343659fb016846d",
+      "new_sha256": "ec1d91e4a8b486803a2f7e6a3b8460b5960a4ee75f717b52add758a944fdc95f",
+      "rgba_sha256": "752b417b460095f25c9130a2cf96aa6cbe6e846c5200cc4468db67c1b51413da",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/actors/idle_south_2.png",
+      "old_sha256": "6b4936c75441602b864640310089db729960a37514000e86e0e9bad828d4f448",
+      "new_sha256": "da2ba4a8c5229c151a87eadc4159600779895317a4ebb23f364288d597914782",
+      "rgba_sha256": "b42a2b8d92a8175700a427054a7bb9bc609f3bdcaeef222f08297a2698f5134b",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/actors/idle_west_0.png",
+      "old_sha256": "34884b39feb0aa58706bb69324d8bac7a3ac7349626b45e8c474c744ead3ade0",
+      "new_sha256": "0f862054b791f20a1d52938f22733afb22dd6c712d6949e059a84a1c2ea48dee",
+      "rgba_sha256": "7a8835ef1ca0779254acd45c15f4251cd3f41d388849ed65780eb621c9da251c",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/actors/idle_west_1.png",
+      "old_sha256": "5b6f76f1da469c67e8e0c241821154cb19ea6674c4bb0cbcd9cea41fb686c3ce",
+      "new_sha256": "aacf285de58d687e29d47e787073f7d60090fcf0c1170cf6b97ff4cdca8c5a14",
+      "rgba_sha256": "425a39ca502ed45ca13abd2fb394d9f0ab493508155700858b22afde47704263",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/actors/idle_west_2.png",
+      "old_sha256": "df0980944657f0ebebccbca5e91729aa9c7b3385a2769206e446874a3c284898",
+      "new_sha256": "0bc980bc32787e792dae188c82ee7610d53b71142699b1cf7e77852431b06f5d",
+      "rgba_sha256": "1f9b69efc95fcc912d6af56d01e89d04eb79bc9693022714e73e38d6daf31666",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/actors/mine_0.png",
+      "old_sha256": "9754660614851f22214d4caea2a6e615317e33b072a0f5ba6d36f7072c74c549",
+      "new_sha256": "1267f6bfcf775e620d6a5ec2a30432615c277fee63f4e18471fd3a717cd3d0df",
+      "rgba_sha256": "b4c8cdcc256fb539b13e1dae96d381755bd5833901337f35aaef588e2d565b85",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/actors/mine_1.png",
+      "old_sha256": "37d9dbc320f3074fa26b1b6f580d8c820ecab9e3c20d1cca7d2433671d6f7e7a",
+      "new_sha256": "476a822f21ea4fea63f73918692a1b31a80349edc20de3d42e3053e56dc1c707",
+      "rgba_sha256": "088efd1e02c3bca5a09b024fddaba5e53a012e383b5b3a033ac3336769512b0b",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/actors/plant_0.png",
+      "old_sha256": "564c885e24b7dc4141a901c0e8f7541c370a015dcf9d77fc05b0164b9b51cac6",
+      "new_sha256": "80d4a76eb536c6f129b149decfd4f1cad5027c2734b809281467220f5b083f4d",
+      "rgba_sha256": "670434fc184bfbb5f5ed67a0bba7da73baa9669ffd9e0580dd963784b905cbde",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/actors/plant_1.png",
+      "old_sha256": "d94631092cc3f189eeddf7ac3dd36080d64829837361a3ba60bf111cb10e6bb7",
+      "new_sha256": "99b1f67cb02d1a458948c2ca31424668ac9aa208185d8f783ee7ec8705e03678",
+      "rgba_sha256": "44fcdb5f9fa1da371e98ffa676a76025b30ff20f3d2ae60504aff1894c597b46",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/actors/plant_2.png",
+      "old_sha256": "4ca2b73ae8edb830c41905acb7cc27709778d5905f10301c1181f8551eb0f8ee",
+      "new_sha256": "af46cca5256c025883dfdaed53f6f3a7a9b0eb3deadf110d0af657edb548200f",
+      "rgba_sha256": "b3e1ee8eff8a42d1348d49fb92440495a94434837827ced662cf5f9f26b70049",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/actors/react_bang_0.png",
+      "old_sha256": "91182e4c12e84dd329ca1ebe4f25a1ba660b58af14047d6c8d6fa31aeb832a62",
+      "new_sha256": "9d5570f26460288a613f88dc9355e62ece6bad3ee891f1c033643144097e28f0",
+      "rgba_sha256": "a624931f7286a8c6f6ede4190371f241f8cee0fef70f93120d413280857bb472",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/actors/react_heart_0.png",
+      "old_sha256": "cbfcebc72c81d7f60c49d1c11e0fe89ee16250e0cbaacd3b098c3673148b6e3c",
+      "new_sha256": "438c055defb24a41d54aefcb99edfaca66951b598e60f20a560c239d2a2cba86",
+      "rgba_sha256": "ee2dee242f9b6b2f212a46829fcb18a9ee37b9bb3a8ddb88edce869fd88cbc02",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/actors/react_note_0.png",
+      "old_sha256": "6ab0461c739e142bc8fcb38573036977af07e2fe05533d3ecf1297916bd3f020",
+      "new_sha256": "9e3d13c0a711f37243747b0145ab86eb26c6152f13e2838754618a48d97ccc31",
+      "rgba_sha256": "5e8ad39bd229fa4cb7659203b97e048ea6a67b1a2e35e56d0bed83efc45d8608",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/actors/react_question_0.png",
+      "old_sha256": "f343c88a8bbb9167730b127eb4e3a49c871e8aad052c1447b8dee17fd7b49869",
+      "new_sha256": "5a0e6e05c91627866cc08de7376ec89639434c8e86dbefd2876e3279e7de825f",
+      "rgba_sha256": "47485de94b29da39e2859ad4d6b52b2f94cd00f6c735b607e62c3b6e00858c76",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/actors/till_0.png",
+      "old_sha256": "fc8c5439f637b3c6a0fa0349c891eb764d32cb85910b678d40355a3cca27c53a",
+      "new_sha256": "f91c91e13c67037c08b36eaba7d1a22359a6144da43a84ca49d10a804c4acbb5",
+      "rgba_sha256": "8084a886266ef8cafe4177bae488f036a74422b9ef41c71887cca1ac913abd59",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/actors/till_1.png",
+      "old_sha256": "75b78804d60cde163bdfa9a5281c30a0c9de2c411f7815b571d7ce250f6785d3",
+      "new_sha256": "cd08fff99f78e9d0786f42218439ace49010354cc071a47fb004343e7f1c9e7e",
+      "rgba_sha256": "55978a34c590a922044801ff82232799fb888dff934c81d7c759ba126ca7074c",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/actors/till_2.png",
+      "old_sha256": "32750efb799cc370aa28dcd32862d4b4e83a171682b8fa142787a7880f175c29",
+      "new_sha256": "c82211973f6d188278457d2dc7063bd372ee6c96d580d43af376101d948d6deb",
+      "rgba_sha256": "fd3db05a03d152f7008608beeb413aae5daeb9afd30fc2eb05cd9ee3a38ec704",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/actors/walk_north_0.png",
+      "old_sha256": "219af78b3c46ffa6d6440a09739c88e557436c23f7b9c65aa781bac0ec5e625f",
+      "new_sha256": "2e158c4f0b2f8ae003148208365b5358f289d64971934dc5eddb9eba11916c67",
+      "rgba_sha256": "3882c97975820a028f460c6ed99425279ce1d0982d95bfa596587b9851fdb03c",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/actors/walk_north_1.png",
+      "old_sha256": "488415ce2428ee767eeac710b3fdb70b99d76b93e4ab7945a6d94f286a665271",
+      "new_sha256": "7400c860ea2d570c05dc5ab6e9adb72df30e2fafe87ef701898fea614a6179b4",
+      "rgba_sha256": "b17336770197f6d2580c16b33fabc4b9dfb1643409dd5ecf298d3d0a6a7108a3",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/actors/walk_north_2.png",
+      "old_sha256": "ae734b5ff3cdc174c149da3c92c30ad220271919f064a62f13f8efd32110b494",
+      "new_sha256": "df98851749c2498d3a7a9cb0f0838d4bf1e7784f2400787ca04d80cc5628501f",
+      "rgba_sha256": "8f2b71ca394fd920645b885dcf59bc4ec9654033ab8c4e41906a6da87f6474de",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/actors/walk_north_3.png",
+      "old_sha256": "35c8ff7a7dac78ba7dd822cb65713da3ea2962abc6cfd21f46943ec183787c81",
+      "new_sha256": "6826321144b0281e207f82b13935dd3e2739833599be98c17ac522b407f138e0",
+      "rgba_sha256": "eb4e34474e10846494227aa2deaa780972015fcc4b0dc9ffa79e6126d8d6af47",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/actors/walk_south_0.png",
+      "old_sha256": "08a487dcd6b559cb1cef1887b8d3c9430bd2094243600294bd9dd48342c8a4a9",
+      "new_sha256": "141f0d9d6e4ec8c440e5874b1a949ba516296dc8f162ff2743e6b4d310ea6e56",
+      "rgba_sha256": "babe57c80e580fcfd4fbc024e3811ba2e239540151da4d06b2862e591aa8d1b8",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/actors/walk_south_1.png",
+      "old_sha256": "437ecb1d423f5547b754db2b12f5f8a95bc8ce65621da7e6d90689ca2729b5cc",
+      "new_sha256": "4dc0cad220d83ddf59fe8e0484d0ceac046879428f7bc2c54f7fcb7769a7f13c",
+      "rgba_sha256": "4cb36f5cf6b2c217a2c5f3565109045c931697abb8258aa08def7bb74b6b9339",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/actors/walk_south_2.png",
+      "old_sha256": "bb60d86d2fcc16a313ffe0465254147f0f9cd01952d81651f2cead5b6c77e4c1",
+      "new_sha256": "78c8eb2b79797ac32c65c352ff2f0b576d3b770fe7a9af562ab9b3f1f3c9dba2",
+      "rgba_sha256": "60153e459fcc36182cb6ea1b57f725ab4d2f5e0ad913d67b228102de8a923eb8",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/actors/walk_south_3.png",
+      "old_sha256": "bda4f783ddd527928bd5d530ce0ef3f0e791ae707c1b53f8e25cb21bb584709c",
+      "new_sha256": "29d139019cdd0978b3fcf66e3653f11851b3de4cfc3899bbd60df30ee58e5c79",
+      "rgba_sha256": "2c8f38d8d56deb5af349ff0a6205e3df7d79c3b8d65815d42e92e1c5e3daf378",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/actors/walk_west_0.png",
+      "old_sha256": "b9346e32d3bc02c8ffd3d8c7bba21763cf7f9aa18c0a3ed5eb953b88b33de9e2",
+      "new_sha256": "eda07a898647d8d59ec5e990a6ed9119f7c2e03bc22ba01b282b43da5d3a291d",
+      "rgba_sha256": "ec1efa073341838684becd57d31a05031c1e7f5b88686fa2adca15e025ecb5a4",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/actors/walk_west_1.png",
+      "old_sha256": "1fe59cb69437a9fb1d4cab2d4571c130d2de4c88edfa6974b2cbb8abdac64fa7",
+      "new_sha256": "058a3ac21858f0d747f21d99a59da6101f45a83cb6f429b8e1aa4b0c94adf8f5",
+      "rgba_sha256": "c05f68fbd3aba44f511c148e8e850959e9acb999dd30980320db9ed1a06d8c85",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/actors/walk_west_2.png",
+      "old_sha256": "1a9ec539125c5b18c51a6e107397917c82ed1161d97fc7841b148589765d1172",
+      "new_sha256": "bc8bb44a467e24990051ab115a7a8d95da19fa945fc2335fdd2ed19ff43527ca",
+      "rgba_sha256": "cefeda52adceed943f21f2287a20250c6550f752c38173619ea8680c97461111",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/actors/walk_west_3.png",
+      "old_sha256": "29ad3096164a30f53260b71a571aa5c4fa44a4233db13eca189109c583d73a23",
+      "new_sha256": "c316f0a1da6e1049d31f7e050444e6c5d805a4c13158805770acdd5000d098d4",
+      "rgba_sha256": "b739443d969b9c447516da5250bd466b98d9b191d274bf1b59a0751ebfa782d1",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/actors/water_0.png",
+      "old_sha256": "02058de1865094de4b30949908cba847ae8f40390267646a184381926963104f",
+      "new_sha256": "861d4db9e6ffe9b93c3bfc5066d247e4019efe9c2d726784a913e5e8c6f910fd",
+      "rgba_sha256": "ec6adef4ac4dd5b5f43dbc03752d5e5d53f1f7d7a1478cc92e173a833e1cee37",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/actors/water_1.png",
+      "old_sha256": "92c7a8a2c4f69fc7763f281dba3cd038eb2a9bfd0d6a39405704a2d9a48871bd",
+      "new_sha256": "1df0e25a26edcfa3992ad664151113ab81257afb725348d18b2089673dc7511e",
+      "rgba_sha256": "88cef26b101986e2d6fa6da0dba8fda2f1464eae7ec2f2d3224d942c2f8a63e9",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/actors/water_2.png",
+      "old_sha256": "dde656d2856dff805ee4c74d09a6c85f5aa3f70037d37ef65123c915b0518f03",
+      "new_sha256": "df1f6e243715d95b79028028a19be2c130c5e7a03f373688d43947200fe337bc",
+      "rgba_sha256": "5c1a71298ad2ac6a5e1e9d667257d2236bb9975350b8d7cd57dfb7b86a8f34c4",
+      "pixels_identical": true
+    },
+    {
+      "path": "sprites/actors/water_3.png",
+      "old_sha256": "5fec8716ffb75d7d70e92ea652ab15f4b11bf1a76fc22da4320fca10267b45be",
+      "new_sha256": "e9c645b053d4626e900b261ba19ed3b335668d8094232fa109c47d8d872a2a87",
+      "rgba_sha256": "52a5bdb653c6755d3c683ef4b315a18752545bb7d1edc03783c5baf32790317c",
+      "pixels_identical": true
+    },
+    {
+      "path": "assets/fonts/harvest_hud.png",
+      "old_sha256": "296e5ebee00e4ad084a9af484794100c3363c9599526e66871aa4b06f19b4f38",
+      "new_sha256": "9c0ebd0941322c38425f84380b62a43c02ffa36c238543953add2a30842ce55d",
+      "rgba_sha256": "e7ab8f33f0ce0bde493c49dea823c7caba4b0a6304efd0bf0e43158488b40e4e",
+      "pixels_identical": true
+    },
+    {
+      "path": "assets/fonts/harvest_heading.png",
+      "old_sha256": "f47b55cd13e5407a64607ed602b4f9d5d52b7a9c0e6dc82f6739efbef06a01fe",
+      "new_sha256": "462df22684c9ae47bcef3d54067aba33240d8cd84fba1bb8797b243ff303fee4",
+      "rgba_sha256": "33006423652a707f5982fb93f155994c3dc1ab787cf0e151d60802467a84c07f",
+      "pixels_identical": true
+    },
+    {
+      "path": "assets/logo.png",
+      "old_sha256": "92de14396304c08ab8523f2bdd47d8f713abdb86e341d3cc655907536d1b091e",
+      "new_sha256": "ab84fadda81b20e7ff2012001335c1ae984ec02d2809074161ffefc179de8cfe",
+      "rgba_sha256": "8255509ea95d34abe81014694f50e8755593bdeab47ea533d9447dd1a1ca990e",
+      "pixels_identical": true
+    },
+    {
+      "path": "assets/icon_48.png",
+      "old_sha256": "3fc63f251eb1fb2b2cda2af8a7e6447d1561aa4329d8f163de010bd9a0f0c99c",
+      "new_sha256": "2554ba88096b4fec27fd0c3807b8fae0ba2d926aca235ba4ef54533786c2c243",
+      "rgba_sha256": "5fcb5ff2ff3411d25fb62ab67b25d825b4fa53345e1c4d3d267ae51e635ce31f",
+      "pixels_identical": true
+    },
+    {
+      "path": "assets/icon_64.png",
+      "old_sha256": "7b75aff3d4f1314dd014940bcaa403d30e72d22de982e6815e001a3003d0be8d",
+      "new_sha256": "6bbeee82974c87f44a26427d9512780bce43978a06369e5b3eb4a148963b0a4f",
+      "rgba_sha256": "f95c3b7a0acb64b3e72ef4b1283bddbdca09544a4e7c47965cf5ce6114f2e7be",
+      "pixels_identical": true
+    }
+  ]
+}

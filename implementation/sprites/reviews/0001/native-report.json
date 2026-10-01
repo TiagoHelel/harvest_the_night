@@ -1,0 +1,78 @@
+[
+  {
+    "id": "farmer",
+    "canvas_wh": [
+      48,
+      48
+    ],
+    "bbox_xyxy": [
+      14,
+      14,
+      34,
+      44
+    ],
+    "pivot_xy": [
+      24,
+      44
+    ],
+    "colors": 27,
+    "sha256": "3978ffdb22e1b6d1b74426f4807df54fdf15be5a8b2eea91c4eaa239d2eb5bc9"
+  },
+  {
+    "id": "house",
+    "canvas_wh": [
+      64,
+      64
+    ],
+    "bbox_xyxy": [
+      4,
+      5,
+      60,
+      60
+    ],
+    "pivot_xy": [
+      32,
+      60
+    ],
+    "colors": 24,
+    "sha256": "b920dae833c251de5b1598e6255c7d0a506ceef66313aeae4de8f7d094e9317b"
+  },
+  {
+    "id": "tree",
+    "canvas_wh": [
+      40,
+      48
+    ],
+    "bbox_xyxy": [
+      2,
+      2,
+      38,
+      44
+    ],
+    "pivot_xy": [
+      20,
+      44
+    ],
+    "colors": 18,
+    "sha256": "f617f07274a98b22fc29cf37b8b39ce85f3739aff9087c5062048abb472d9425"
+  },
+  {
+    "id": "walker",
+    "canvas_wh": [
+      32,
+      40
+    ],
+    "bbox_xyxy": [
+      8,
+      7,
+      24,
+      36
+    ],
+    "pivot_xy": [
+      16,
+      36
+    ],
+    "colors": 18,
+    "sha256": "d46dd91c4a380876cc97da04cd62c50632ff620d8b81da55ac7fb70c921a03ee"
+  }
+]

@@ -1,0 +1,6 @@
+Use case: lighting-weather.
+Asset type: same-farm night lighting study for HARVEST THE NIGHT.
+Input image: the accepted neutral-day farm study is the edit target.
+Change ONLY the lighting: cool blue/violet night, deep readable colored shadows, a small warm amber pool from the farmhouse windows. Preserve every object position, silhouette, scale, pixel cluster, roof, water edge, path and camera framing exactly.
+Grass and dirt must separate in value, tree silhouette must remain clear, walker readable through subdued cool rim highlights, farmer's white shirt and pale face must NOT glow. Window light is localized, not a full-screen orange wash. Keep a dark cozy-but-tense farm atmosphere.
+Do not add moon graphics, torches, particles, new enemies, structures, UI or objects. Do not redesign any identity or rearrange the scene. No text, labels, watermark or smooth photographic bloom. Same scene, same farm, night lighting only.

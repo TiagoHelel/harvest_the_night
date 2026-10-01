@@ -1,0 +1,9 @@
+Use case: stylized-concept.
+Asset type: HARVEST THE NIGHT farmhouse identity master, one isolated sprite source.
+Input images: image 1 is the farm reference sheet for architecture/materials only; image 2 is the accepted farmer master for pixel language and scale. Do not reproduce either composition.
+Primary request: ONE complete compact farmhouse, warm timber front facade, terracotta gabled roof, centered front door, two small windows, a side window and modest chimney. House is the farm landmark.
+Camera: orthographic three-quarter TOP-DOWN on a rectangular grid; roof visible and front facade visible; front horizontal lines stay horizontal. No diamond isometric footprint.
+Style: match the farmer's clean deliberate pixel clusters and crisp stepped dark-plum/color outlines. Readable roof tiles in grouped rows, 3-shade wood beams and warm stone foundation. Upper-left daylight. Cozy detailed 16-bit game art, no smooth painted gradients or tiny noisy texture.
+Scale contract: intended native 64x64 canvas, visible building about 56x56 pixels, existing 48x48 logical base, bottom ground pivot (32,60). Full roof overhang and chimney fit inside generous transparent margins. This is an enlarged sprite source, not a tiny raster output requirement.
+Materials: roof #8a2f2a/#b0423a/#c9635a, wood #6b4a2c/#8c6239/#a87c4e, stone #52505c/#6e6c78/#8c8a96, warm window interior, ink #241f2e. Distinguish roof, facade and ground-contact plane.
+Backdrop: genuine transparency. No lawn, diamond base platform, cast ground shadow, surrounding objects, fence, NPC, sign, lettering, glow, labels or watermark. Neutral day art; runtime supplies night light. Exactly one complete building.
