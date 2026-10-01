@@ -105,3 +105,65 @@ existing byte checks; it does not claim new art is already shown in gameplay.
 
 Queue after completion: 1 done, 19 todo, 0 doing, 0 blocked. Next task is 0002,
 the raster source pipeline. This invocation stops after 0001, per the runner.
+
+## 0002 — Raster source ownership and deterministic importer — done 2026-10-01
+
+Added `tools/import_art.py`, `tools/art_ownership.py`, the manifest/schema and
+ownership registry under `assets/art_source/`. Every one of the 217 runtime PNGs
+has a single writer/checker: 156 ASCII, 43 owner-sheet, 18 raster. Both legacy
+generators exclude migrated outputs in their write and check paths. Raster tiles
+are routed into the existing atlas builder rather than read from stale ASCII.
+Palette synchronization and unmigrated byte checks remain active. Full verify
+now includes a strict raster-source/output/metadata check.
+
+Imported the four accepted ImageGen masters from 0001 without new generation or
+revisions. Their original SHA-256 values, prompt hashes and reference hashes
+remain unchanged and are checked by the importer. Manifest recipes contain
+measured crop/cell bounds, common nearest scale, alpha threshold, shared palette,
+canvas, ground pivot, timing and output SHA-256. Generated `src/ui/raster_art.gd`
+supplies view metadata, consumed by player/world code instead of copied sizes.
+Explicit source approval is required when source/reference pixels change; an
+offline rebuild updates recipe output hashes, while --check never writes.
+
+Outputs: actors/idle_south_{0,1,2}; buildings/house and all nine house slices;
+props/tree; enemies/walker plus walk_b/attack/death. The house partitions retain
+all 64x64 pixels (columns 24/16/24, rows 28/16/20); offsets place them over the
+unchanged 48x48 footprint. Farmer canvas 48x48/pivot 24,44; tree 40x48/20,44;
+walker 32x40/16,36. Original source sheets, core, balance, saves and hash baseline
+files were not changed.
+
+Provisional motion is declared in recipes: the south idle is a static master
+hold across three filenames pending authored 0004 frames. Walker's existing
+procedural bob/reach/fall now derive from its new raster master, pending authored
+0015 strips/death playback. This task completes source import, not those later
+animation families. Other player facings/work/reactions remain legacy until
+0004–0006. 0003 handles shared ground sorting, house grouping, shadows/lamps,
+ghosts and deliberate occlusion/map-boundary showcases.
+
+Rebuild/fault QA: `tools/check_art_pipeline.py` passed 19 integration probes:
+two memory and two disk builds are byte-identical/zero writes; legacy writers
+preserve all 18 migrated files; source changes/missing sources, raster corruption/
+missing runtime frame, corruption in both legacy owners, bad crops/pivots/palette,
+duplicate owner/output, animation gaps/canvas drift, missing/cyclic derivatives
+are rejected. Every deliberate corruption was restored. Nine slices reconstruct
+the exact full-house RGBA. Evidence: `reviews/0002/fault-probes.json`.
+
+Verify: fast PASS (23 passed, exports intentionally skipped, 0 failed, 147s);
+final full PASS (24 passed, 0 skipped/failed, 165s), 102 scripts parsed,
+6510 headless assertions, 980 input cases, performance and Windows/Web exports.
+Sim hash `1961000123`, data hash `407837701`, both unchanged. Logs:
+`reviews/0002/verify-fast.log`, `reviews/0002/verify-full.log`.
+
+Visual QA: 5 written/0 failed captures in
+`implementation/shots/sprites/0002/{noon,dusk,wave,result,tech}.png`, all opened
+at 480x270 and nearest 3x. Opened the owner's sheet, style reference, previous
+baseline, source-alpha contact, and new 18-output contact at native/3x. House
+roof/facade reconstruct without seams, full trees have readable trunks, walkers
+remain visible at night, and UI remains readable. Raster colors/alpha pass;
+legacy enemies retain their old rim check while raster walker is checked for
+shared-palette material contrast. `reviews/0002/REVIEW.md` records passed gates
+and specific later-task checks without claiming unfinished integration.
+
+Queue after completion: 2 done, 18 todo, 0 doing, 0 blocked. Next is 0003,
+the playable pilot. One task completed in this cycle; the user's active /goal
+continues with the next invocation until the entire art backlog is verified.

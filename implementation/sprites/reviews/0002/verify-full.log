@@ -1,0 +1,32 @@
+
+HARVEST THE NIGHT - verify
+  godot: found
+
+  python tooling               PASS   0.1s
+  backlog index                PASS   0.1s
+  godot import                 PASS   4.6s
+  script parse                 PASS   4.5s  PARSED 102 scripts, 0 failed
+  core is pure                 PASS   0.0s
+  sprites                      PASS   0.2s  OK    156 sprites match their maps
+  player art                   PASS   0.4s  OK    43 player frames match the sheet
+  raster art                   PASS   0.9s  OK: 18 raster outputs, metadata verified, 0 written
+  font                         PASS   0.1s  OK    4 font files match the maps
+  logo                         PASS   0.1s  OK    the logo matches the font it is made of
+  sfx                          PASS   0.5s  OK    27 sounds match their recipes (13 day, 14 night)
+  perf                         PASS   3.6s  OK    a night tick is 682us of the 8333 it may have (8%), a path rebuild 4902us of 33333
+  icon                         PASS   0.4s  OK    8 icon sizes match the one drawing
+  playtest                     PASS   0.1s  OK    the reader reads what the game writes
+  store                        PASS   0.1s  CHECKED  the parts that need no capture
+  devlog                       PASS   0.2s  journal    112 entries against 110 done, 26 hash moves, 50 findings
+  strings                      PASS   0.1s  OK    385 keys in 2 languages, all of them fit
+  music                        PASS   9.7s  OK    4 pieces match their recipes
+  ambience                     PASS   1.6s  OK    11 ambience files match their recipes (2 beds, 9 touches)
+  headless_check               PASS  55.3s  6510 asserts, 0 failed
+  sim hash                     PASS   1.6s  1961000123 unchanged
+  data hash                    PASS   0.0s  407837701 unchanged
+  input_check                  PASS  64.3s  980 cases, 0 failed
+  exports                      PASS  16.7s
+
+  24 passed, 0 skipped, 0 failed in 165s
+
+PASS

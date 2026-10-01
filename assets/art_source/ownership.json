@@ -1,0 +1,873 @@
+{
+  "version": 1,
+  "outputs": [
+    {
+      "output": "sprites/actors/carry_0.png",
+      "owner": "player_sheet"
+    },
+    {
+      "output": "sprites/actors/carry_1.png",
+      "owner": "player_sheet"
+    },
+    {
+      "output": "sprites/actors/chop_0.png",
+      "owner": "player_sheet"
+    },
+    {
+      "output": "sprites/actors/chop_1.png",
+      "owner": "player_sheet"
+    },
+    {
+      "output": "sprites/actors/chop_2.png",
+      "owner": "player_sheet"
+    },
+    {
+      "output": "sprites/actors/chop_3.png",
+      "owner": "player_sheet"
+    },
+    {
+      "output": "sprites/actors/craft_0.png",
+      "owner": "player_sheet"
+    },
+    {
+      "output": "sprites/actors/fish_0.png",
+      "owner": "player_sheet"
+    },
+    {
+      "output": "sprites/actors/harvest_0.png",
+      "owner": "player_sheet"
+    },
+    {
+      "output": "sprites/actors/idle_north_0.png",
+      "owner": "player_sheet"
+    },
+    {
+      "output": "sprites/actors/idle_north_1.png",
+      "owner": "player_sheet"
+    },
+    {
+      "output": "sprites/actors/idle_north_2.png",
+      "owner": "player_sheet"
+    },
+    {
+      "output": "sprites/actors/idle_south_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/idle_south_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/idle_south_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/idle_west_0.png",
+      "owner": "player_sheet"
+    },
+    {
+      "output": "sprites/actors/idle_west_1.png",
+      "owner": "player_sheet"
+    },
+    {
+      "output": "sprites/actors/idle_west_2.png",
+      "owner": "player_sheet"
+    },
+    {
+      "output": "sprites/actors/mine_0.png",
+      "owner": "player_sheet"
+    },
+    {
+      "output": "sprites/actors/mine_1.png",
+      "owner": "player_sheet"
+    },
+    {
+      "output": "sprites/actors/placeholder.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/actors/plant_0.png",
+      "owner": "player_sheet"
+    },
+    {
+      "output": "sprites/actors/plant_1.png",
+      "owner": "player_sheet"
+    },
+    {
+      "output": "sprites/actors/plant_2.png",
+      "owner": "player_sheet"
+    },
+    {
+      "output": "sprites/actors/react_bang_0.png",
+      "owner": "player_sheet"
+    },
+    {
+      "output": "sprites/actors/react_heart_0.png",
+      "owner": "player_sheet"
+    },
+    {
+      "output": "sprites/actors/react_note_0.png",
+      "owner": "player_sheet"
+    },
+    {
+      "output": "sprites/actors/react_question_0.png",
+      "owner": "player_sheet"
+    },
+    {
+      "output": "sprites/actors/shadow.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/actors/till_0.png",
+      "owner": "player_sheet"
+    },
+    {
+      "output": "sprites/actors/till_1.png",
+      "owner": "player_sheet"
+    },
+    {
+      "output": "sprites/actors/till_2.png",
+      "owner": "player_sheet"
+    },
+    {
+      "output": "sprites/actors/walk_north_0.png",
+      "owner": "player_sheet"
+    },
+    {
+      "output": "sprites/actors/walk_north_1.png",
+      "owner": "player_sheet"
+    },
+    {
+      "output": "sprites/actors/walk_north_2.png",
+      "owner": "player_sheet"
+    },
+    {
+      "output": "sprites/actors/walk_north_3.png",
+      "owner": "player_sheet"
+    },
+    {
+      "output": "sprites/actors/walk_south_0.png",
+      "owner": "player_sheet"
+    },
+    {
+      "output": "sprites/actors/walk_south_1.png",
+      "owner": "player_sheet"
+    },
+    {
+      "output": "sprites/actors/walk_south_2.png",
+      "owner": "player_sheet"
+    },
+    {
+      "output": "sprites/actors/walk_south_3.png",
+      "owner": "player_sheet"
+    },
+    {
+      "output": "sprites/actors/walk_west_0.png",
+      "owner": "player_sheet"
+    },
+    {
+      "output": "sprites/actors/walk_west_1.png",
+      "owner": "player_sheet"
+    },
+    {
+      "output": "sprites/actors/walk_west_2.png",
+      "owner": "player_sheet"
+    },
+    {
+      "output": "sprites/actors/walk_west_3.png",
+      "owner": "player_sheet"
+    },
+    {
+      "output": "sprites/actors/water_0.png",
+      "owner": "player_sheet"
+    },
+    {
+      "output": "sprites/actors/water_1.png",
+      "owner": "player_sheet"
+    },
+    {
+      "output": "sprites/actors/water_2.png",
+      "owner": "player_sheet"
+    },
+    {
+      "output": "sprites/actors/water_3.png",
+      "owner": "player_sheet"
+    },
+    {
+      "output": "sprites/buildings/auto_crossbow.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/auto_crossbow_2.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/auto_crossbow_2_fire.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/auto_crossbow_2_hurt.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/auto_crossbow_3.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/auto_crossbow_3_fire.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/auto_crossbow_3_hurt.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/auto_crossbow_fire.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/auto_crossbow_hurt.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/auto_crossbow_wreck.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/barricade.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/barricade_hurt.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/barricade_wreck.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/fence.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/fence_hurt.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/fence_wreck.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/flame_tower.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/flame_tower_2.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/flame_tower_2_fire.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/flame_tower_2_hurt.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/flame_tower_3.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/flame_tower_3_fire.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/flame_tower_3_hurt.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/flame_tower_fire.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/flame_tower_hurt.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/flame_tower_wreck.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/gun_tower.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/gun_tower_2.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/gun_tower_2_fire.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/gun_tower_2_hurt.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/gun_tower_3.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/gun_tower_3_fire.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/gun_tower_3_hurt.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/gun_tower_fire.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/gun_tower_hurt.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/gun_tower_wreck.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/house.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/house_0_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/house_0_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/house_0_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/house_1_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/house_1_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/house_1_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/house_2_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/house_2_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/house_2_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/kitchen.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/kitchen_0_0.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/kitchen_0_1.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/kitchen_1_0.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/kitchen_1_1.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/mine.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/mortar.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/mortar_2.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/mortar_2_fire.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/mortar_2_hurt.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/mortar_3.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/mortar_3_fire.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/mortar_3_hurt.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/mortar_fire.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/mortar_hurt.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/mortar_wreck.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/wall.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/wall_hurt.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/wall_wreck.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/workshop.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/workshop_0_0.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/workshop_0_1.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/workshop_1_0.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/buildings/workshop_1_1.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/crops/carrot_0.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/crops/carrot_1.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/crops/carrot_2.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/crops/carrot_3.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/crops/corn_0.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/crops/corn_1.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/crops/corn_2.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/crops/corn_3.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/crops/tilled.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/crops/tilled_wet.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/crops/wheat_0.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/crops/wheat_1.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/crops/wheat_2.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/crops/wheat_3.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/enemies/breaker.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/enemies/breaker_attack.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/enemies/breaker_death.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/enemies/breaker_walk_b.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/enemies/giant.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/enemies/giant_attack.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/enemies/giant_death.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/enemies/giant_telegraph.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/enemies/giant_walk_b.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/enemies/runner.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/enemies/runner_attack.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/enemies/runner_death.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/enemies/runner_walk_b.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/enemies/tank.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/enemies/tank_attack.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/enemies/tank_death.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/enemies/tank_walk_b.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/enemies/walker.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/walker_attack.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/walker_death.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/walker_walk_b.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/chicken.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/props/cow.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/props/generator_0_0.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/props/generator_0_1.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/props/generator_1_0.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/props/generator_1_1.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/props/ore.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/props/press_0_0.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/props/press_0_1.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/props/press_1_0.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/props/press_1_1.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/props/rock.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/props/seam.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/props/shop.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/props/stump.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/props/tree.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/well.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/terrain/atlas.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/terrain/edge_e.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/terrain/edge_n.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/terrain/edge_s.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/terrain/edge_w.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/terrain/floor.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/terrain/grass.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/terrain/grass_b.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/terrain/grass_c.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/terrain/grass_d.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/terrain/path.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/terrain/rock.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/terrain/shore_e.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/terrain/shore_n.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/terrain/shore_s.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/terrain/shore_w.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/terrain/soil.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/terrain/water.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/terrain/water_b.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/terrain/water_c.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/ui/button_disabled.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/ui/button_focus.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/ui/button_hover.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/ui/button_normal.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/ui/button_pressed.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/ui/checkbox_off.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/ui/checkbox_on.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/ui/icon_carrot.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/ui/icon_corn.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/ui/icon_energy.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/ui/icon_fish.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/ui/icon_food.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/ui/icon_gunpowder.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/ui/icon_incendiary.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/ui/icon_iron.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/ui/icon_meat.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/ui/icon_money.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/ui/icon_oil.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/ui/icon_stone.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/ui/icon_tech.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/ui/icon_wheat.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/ui/icon_wood.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/ui/panel.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/ui/slider_grab.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/ui/slider_track.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/ui/tab.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/ui/tooltip.png",
+      "owner": "ascii"
+    }
+  ]
+}

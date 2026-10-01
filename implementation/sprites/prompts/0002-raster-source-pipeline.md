@@ -1,6 +1,6 @@
 # 0002 - Raster source ownership and deterministic importer
 
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0001
 - **Likely files:** tools/gen_sprites.py; tools/cut_sheet.py; tools/verify.py; assets/art_source/manifest.json; tools/import_art.py (new)
 - **Generation briefs:** Use approved 0001 masters; no new generation required

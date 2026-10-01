@@ -1,8 +1,9 @@
 # Reproducible raster pipeline
 
-This is the production design. The raster importer, manifest and visual test
-scenes described here are **future deliverables** of tasks 0002 and 0003;
-they do not already exist merely because they are named here.
+The importer/manifest/ownership registry ship in task 0002. Rebuild with
+`python tools/import_art.py`; validate with `python tools/import_art.py --check`.
+`assets/art_source/README.md` documents the implemented recipe and migration
+commands. Playable depth/occlusion showcases remain the task 0003 deliverable.
 
 ## Ownership
 

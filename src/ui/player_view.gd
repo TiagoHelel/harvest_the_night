@@ -116,15 +116,18 @@ func _animate(delta: float) -> void:
 		_elapsed += delta
 
 	var frame := PlayerArt.frame_at(pose, _elapsed)
-	var texture := _texture(PlayerArt.texture_path(name, frame))
+	var path := PlayerArt.texture_path(name, frame)
+	var texture := _texture(path)
 	if texture != null:
 		_sprite.texture = texture
 	_sprite.flip_h = bool(pose["flip"])
 	# Flipping a sprite mirrors it about its offset, so the offset has to be
 	# mirrored too or the farmer steps a canvas-width sideways when they turn.
-	_sprite.offset.x = (float(PlayerFrames.FEET.x)
-		- float(PlayerFrames.CANVAS.x)) if bool(pose["flip"]) \
-		else -float(PlayerFrames.FEET.x)
+	var metadata: Dictionary = RasterArt.FRAMES.get(path, {})
+	var feet: Vector2i = metadata.get("pivot", PlayerFrames.FEET)
+	var canvas: Vector2i = metadata.get("canvas", PlayerFrames.CANVAS)
+	_sprite.offset = Vector2(float(feet.x - canvas.x) if bool(pose["flip"])
+		else -float(feet.x), -float(feet.y))
 
 
 ## What the rules say the player is doing, or nothing.

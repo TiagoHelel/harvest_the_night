@@ -23,6 +23,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "tools"))
 
 import palette                                    # noqa: E402
+import art_ownership                              # noqa: E402
 from sprite_maps import SPRITES                   # noqa: E402
 
 OUT = os.path.join(ROOT, "sprites")
@@ -349,6 +350,16 @@ def render(name, spec):
 def tile_of(name):
     """One terrain tile by name, as a list of RGBA rows."""
     key = "terrain/" + name
+    if art_ownership.registry().get("sprites/" + key + ".png") == "raster":
+        from import_art import load_manifest, build
+        files, _ = build(load_manifest())
+        from PIL import Image
+        import io
+        with Image.open(io.BytesIO(files["sprites/" + key + ".png"])) as image:
+            if image.size != (TILE_PX, TILE_PX):
+                raise ValueError("Raster terrain must remain 16x16: " + key)
+            pixels = list(image.convert("RGBA").getdata())
+            return [pixels[y * TILE_PX:(y + 1) * TILE_PX] for y in range(TILE_PX)]
     if key not in SPRITES:
         raise KeyError("the atlas wants %s and there is no map for it" % key)
     width, height, pixels = render(key, SPRITES[key])
@@ -577,7 +588,7 @@ def write(path, data):
 
 # ----------------------------------------------------------------- the driver
 
-def everything():
+def everything(dispatch=True):
     """Every output file, as {path: bytes}."""
     out = {}
     for name, spec in sorted(SPRITES.items()):
@@ -587,7 +598,7 @@ def everything():
         out[name + ".png"] = png_bytes(w, h, pixels)
     w, h, pixels = build_atlas()
     out[ATLAS_PATH] = png_bytes(w, h, pixels)
-    return out
+    return art_ownership.owned(out, "ascii") if dispatch else out
 
 
 def palette_target():

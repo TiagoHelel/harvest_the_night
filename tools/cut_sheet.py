@@ -43,6 +43,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "tools"))
 
 import gen_sprites                                  # noqa: E402
+import art_ownership                                # noqa: E402
 
 SHEET = os.path.join(ROOT, "docs", "sprites_sem_fundo.png")
 OUT = os.path.join(ROOT, "sprites", "actors")
@@ -361,7 +362,7 @@ def main():
         return 1
 
     frames = cut(report="--report" in args)
-    files = paths(frames)
+    files = art_ownership.owned(paths(frames), "player_sheet", "sprites/actors")
     generated = frames_gd(frames)
 
     if "--check" in args:

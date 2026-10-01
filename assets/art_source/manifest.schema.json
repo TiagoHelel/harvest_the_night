@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Harvest the Night accepted raster recipes",
+  "type": "object",
+  "required": ["version", "recipe", "assets"],
+  "properties": {
+    "version": {"const": 1},
+    "recipe": {"const": "nearest-palette-alpha-v1"},
+    "assets": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "owner", "output", "output_sha256", "canvas_wh", "pivot_xy", "palette", "animation", "frame", "seconds", "loop", "prompt", "prompt_sha256", "references"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "owner": {"const": "raster"},
+          "output": {"type": "string", "pattern": "^sprites/.+\\.png$"},
+          "output_sha256": {"$ref": "#/$defs/hash"},
+          "canvas_wh": {"$ref": "#/$defs/pair"},
+          "pivot_xy": {"$ref": "#/$defs/pair"},
+          "palette": {"const": "tools/palette.py:COLOURS"},
+          "animation": {"type": "string", "minLength": 1},
+          "frame": {"type": "integer", "minimum": 0},
+          "seconds": {"type": "number", "exclusiveMinimum": 0},
+          "loop": {"type": "boolean"},
+          "source": {"type": "string"},
+          "source_sha256": {"$ref": "#/$defs/hash"},
+          "crop_xywh": {"$ref": "#/$defs/rect"},
+          "content_scale": {"type": "number", "exclusiveMinimum": 0},
+          "content_anchor_xy": {"$ref": "#/$defs/pair"},
+          "alpha_threshold": {"type": "integer", "minimum": 1, "maximum": 255},
+          "sheet_cell_xywh": {"$ref": "#/$defs/rect"},
+          "gutter_xy": {"$ref": "#/$defs/pair"},
+          "cell_offset_xy": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"type": "integer"}},
+          "prompt": {"type": "string"},
+          "prompt_sha256": {"$ref": "#/$defs/hash"},
+          "references": {"type": "array", "items": {"type": "object", "required": ["path", "sha256", "role"], "properties": {"path": {"type": "string"}, "sha256": {"$ref": "#/$defs/hash"}, "role": {"type": "string"}}}},
+          "input": {"type": "string"},
+          "operation": {"enum": ["copy", "slice", "legacy_bob", "legacy_lunge", "legacy_fall"]},
+          "slice_xywh": {"$ref": "#/$defs/rect"}
+        },
+        "oneOf": [
+          {"required": ["source", "source_sha256", "crop_xywh", "content_scale", "alpha_threshold"], "not": {"required": ["input"]}},
+          {"required": ["input", "operation"], "not": {"required": ["source"]}}
+        ]
+      }
+    }
+  },
+  "$defs": {
+    "hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "pair": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"type": "integer", "minimum": 0}},
+    "rect": {"type": "array", "minItems": 4, "maxItems": 4, "items": {"type": "integer", "minimum": 0}}
+  }
+}

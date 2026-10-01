@@ -13111,6 +13111,14 @@ func _task_0073_player_art() -> void:
 			var path := PlayerArt.texture_path(StringName(name), i)
 			expect(ResourceLoader.exists(path),
 				"the cut produced %s" % path)
+			var metadata: Dictionary = RasterArt.FRAMES.get(path, {})
+			var image := Image.load_from_file(ProjectSettings.globalize_path(path))
+			var canvas: Vector2i = metadata.get("canvas", PlayerFrames.CANVAS)
+			var pivot: Vector2i = metadata.get("pivot", PlayerFrames.FEET)
+			expect(image != null and image.get_size() == canvas,
+				"every player frame matches its owner's canvas", path)
+			expect(pivot.x >= 0 and pivot.x <= canvas.x and pivot.y > canvas.y / 2
+				and pivot.y <= canvas.y, "every player frame has a valid foot pivot", path)
 			counted += 1
 	print("  %d player frames on a %s canvas, feet at %s"
 		% [counted, str(PlayerFrames.CANVAS), str(PlayerFrames.FEET)])
@@ -13242,6 +13250,29 @@ func _task_0074_zombie_art() -> void:
 		var image := Image.load_from_file(ProjectSettings.globalize_path(
 			"res://sprites/enemies/%s.png" % kind))
 		if image == null:
+			continue
+		var path := "res://sprites/enemies/%s.png" % kind
+		if RasterArt.FRAMES.has(path):
+			# Raster masters use colored outlines, not the old artificial white
+			# stripe. Verify their palette and material contrast instead.
+			var low := 1.0
+			var high := 0.0
+			var colors := {}
+			var unknown := 0
+			for y in image.get_height():
+				for x in image.get_width():
+					var color := image.get_pixel(x, y)
+					if color.a == 0.0:
+						continue
+					var value := color.r * 0.299 + color.g * 0.587 + color.b * 0.114
+					low = minf(low, value)
+					high = maxf(high, value)
+					colors[color] = true
+					if not PaletteData.COLOURS.values().has(color):
+						unknown += 1
+			expect(unknown == 0 and colors.size() >= 3 and high - low >= 0.25,
+				"raster %s has palette material contrast" % kind,
+				"%d colors, %d unknown, contrast %.3f" % [colors.size(), unknown, high - low])
 			continue
 		var rows := 0
 		var lit := 0

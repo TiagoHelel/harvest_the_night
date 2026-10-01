@@ -816,6 +816,10 @@ func _refresh() -> void:
 		# goes. Anything exactly a tile tall lands where it always did.
 		var art_high := sprite.texture.get_height() if sprite.texture != null 			else GameData.TILE_SIZE
 		sprite.position = Vector2(cell) * float(GameData.TILE_SIZE) 			+ Vector2(0.0, float(GameData.TILE_SIZE - art_high))
+		var metadata: Dictionary = RasterArt.FRAMES.get(sprite.texture.resource_path, {})
+		if not metadata.is_empty():
+			sprite.position = Vector2(cell) * float(GameData.TILE_SIZE) \
+				+ Vector2(metadata["cell_offset"])
 		_occupants.add_child(sprite)
 		_sprites.append(sprite)
 		# **One pip a level, above the tower.** The art for a Torre II does
@@ -873,6 +877,10 @@ func _refresh_actors() -> void:
 			floorf(float(one["pos"][0]) * scale_factor - art_size.x * 0.5),
 			floorf(float(one["pos"][1]) * scale_factor
 				+ float(GameData.TILE_SIZE) * 0.5 - art_size.y))
+		var metadata: Dictionary = RasterArt.FRAMES.get(sprite.texture.resource_path, {})
+		if not metadata.is_empty():
+			var pivot: Vector2i = metadata["pivot"]
+			sprite.position += art_size - Vector2(pivot) - Vector2(art_size.x * 0.5, 0)
 
 
 ## Shots in the air. Two pixels of bright, which at this resolution is enough

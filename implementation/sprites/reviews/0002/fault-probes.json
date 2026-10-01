@@ -1,0 +1,25 @@
+{
+  "tests": [
+    "Two in-memory rebuilds are byte-identical",
+    "Two on-disk rebuilds change zero bytes",
+    "Legacy writers cannot overwrite any of 18 migrated files",
+    "Changed accepted source is rejected",
+    "Missing accepted source is rejected",
+    "Tampered migrated output is rejected",
+    "Missing runtime frame is rejected",
+    "Tampered unmigrated ASCII output is still rejected",
+    "Tampered unmigrated player output is still rejected",
+    "Duplicate manifest output rejected",
+    "Invalid crop rejected",
+    "Out-of-range pivot rejected",
+    "Unknown palette rejected",
+    "Missing animation frame rejected",
+    "Per-frame canvas drift rejected",
+    "Missing derived input rejected",
+    "Derivation cycle rejected",
+    "Duplicate output owner rejected",
+    "House's nine slices reconstruct the full roof without lost pixels"
+  ],
+  "count": 19,
+  "restored": true
+}

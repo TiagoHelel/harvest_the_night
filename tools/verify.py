@@ -160,6 +160,12 @@ def check_font():
                  out.strip().splitlines()[-1].strip() if out.strip() else "")
 
 
+def check_raster_art():
+    """Accepted raster sources, ownership, frames and generated view metadata."""
+    code, out = run([sys.executable, "tools/import_art.py", "--check"])
+    return check("raster art", code == 0, tail(out, 4))
+
+
 def check_logo():
     """The logo still matches the letters it was composed from.
 
@@ -548,6 +554,7 @@ def main():
     check_core_is_pure()
     check_sprites()
     check_player_art()
+    check_raster_art()
     check_font()
     check_logo()
     check_sfx()

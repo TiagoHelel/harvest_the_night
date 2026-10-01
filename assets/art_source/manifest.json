@@ -1,0 +1,853 @@
+{
+  "version": 1,
+  "recipe": "nearest-palette-alpha-v1",
+  "assets": [
+    {
+      "id": "actors/idle_south_0",
+      "owner": "raster",
+      "source": "assets/art_source/masters/farmer.png",
+      "source_sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4",
+      "crop_xywh": [
+        365,
+        190,
+        577,
+        854
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        1310,
+        1201
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.0351288056206089,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "idle_south",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true,
+      "output": "sprites/actors/idle_south_0.png",
+      "output_sha256": "3978ffdb22e1b6d1b74426f4807df54fdf15be5a8b2eea91c4eaa239d2eb5bc9",
+      "prompt": "implementation/sprites/generation/0001-player.prompt.txt",
+      "prompt_sha256": "ea7ac44958f920236750c92f6d196cb6b493eca1983bac380b1d8d637cf28511",
+      "references": [
+        {
+          "path": "docs/sprites_sem_fundo.png",
+          "role": "owner identity reference",
+          "sha256": "9fe4e672988613dbb54cf7ef197149d4b7f61f69e190dc32f04f4c3ec9103b0a"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0001",
+      "provisional": "Static pilot hold; task 0004 supplies three authored idle frames."
+    },
+    {
+      "id": "buildings/house",
+      "owner": "raster",
+      "source": "assets/art_source/masters/house.png",
+      "source_sha256": "26d2646bf9328eae0eeb699193a11f46e6f92cd487d2369dea27b4295bdab81f",
+      "crop_xywh": [
+        148,
+        165,
+        1008,
+        998
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "pivot_xy": [
+        32,
+        60
+      ],
+      "content_scale": 0.05511022044088176,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/house",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true,
+      "output": "sprites/buildings/house.png",
+      "output_sha256": "b920dae833c251de5b1598e6255c7d0a506ceef66313aeae4de8f7d094e9317b",
+      "prompt": "implementation/sprites/generation/0001-house.prompt.txt",
+      "prompt_sha256": "96953b29cc38cf2238fdc241c118d0880bc8f97cac461fd8e554d14d23e1e71a",
+      "references": [
+        {
+          "path": "docs/reference-sheet.png",
+          "role": "architecture/material reference",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c"
+        },
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "accepted pixel-language reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0001",
+      "cell_offset_xy": [
+        -8,
+        -12
+      ]
+    },
+    {
+      "id": "props/tree",
+      "owner": "raster",
+      "source": "assets/art_source/masters/tree.png",
+      "source_sha256": "a9b0f2880631364cf6ceb0dc7795cc132de6d1205b18e4b70434f67ecc7ec3f9",
+      "crop_xywh": [
+        35,
+        220,
+        962,
+        1135
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        40,
+        48
+      ],
+      "pivot_xy": [
+        20,
+        44
+      ],
+      "content_scale": 0.03700440528634361,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/tree",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true,
+      "output": "sprites/props/tree.png",
+      "output_sha256": "f617f07274a98b22fc29cf37b8b39ce85f3739aff9087c5062048abb472d9425",
+      "prompt": "implementation/sprites/generation/0001-tree.prompt.txt",
+      "prompt_sha256": "b700fd2647fdae93f6f20f16076f415af341cc0279905da4229fcf961f3207bb",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "style reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/masters/house.png",
+          "role": "style/camera reference",
+          "sha256": "26d2646bf9328eae0eeb699193a11f46e6f92cd487d2369dea27b4295bdab81f"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0001",
+      "cell_offset_xy": [
+        -12,
+        -28
+      ]
+    },
+    {
+      "id": "enemies/walker",
+      "owner": "raster",
+      "source": "assets/art_source/masters/walker.png",
+      "source_sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
+      "crop_xywh": [
+        293,
+        192,
+        593,
+        1086
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        1086,
+        1448
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        40
+      ],
+      "pivot_xy": [
+        16,
+        36
+      ],
+      "content_scale": 0.026703499079189688,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/walker",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true,
+      "output": "sprites/enemies/walker.png",
+      "output_sha256": "d46dd91c4a380876cc97da04cd62c50632ff620d8b81da55ac7fb70c921a03ee",
+      "prompt": "implementation/sprites/generation/0001-walker.prompt.txt",
+      "prompt_sha256": "a37705c1e7b4c7612b8e7aa87d67244a59a1a1c174a43d8cdfb16cf540a00807",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "style/body-scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/masters/tree.png",
+          "role": "world style reference",
+          "sha256": "a9b0f2880631364cf6ceb0dc7795cc132de6d1205b18e4b70434f67ecc7ec3f9"
+        },
+        {
+          "path": "assets/art_source/masters/house.png",
+          "role": "world style reference",
+          "sha256": "26d2646bf9328eae0eeb699193a11f46e6f92cd487d2369dea27b4295bdab81f"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0001"
+    },
+    {
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "prompt": "implementation/sprites/generation/0001-player.prompt.txt",
+      "prompt_sha256": "ea7ac44958f920236750c92f6d196cb6b493eca1983bac380b1d8d637cf28511",
+      "references": [
+        {
+          "path": "docs/sprites_sem_fundo.png",
+          "role": "owner identity reference",
+          "sha256": "9fe4e672988613dbb54cf7ef197149d4b7f61f69e190dc32f04f4c3ec9103b0a"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0001",
+      "id": "actors/idle_south_1",
+      "input": "actors/idle_south_0",
+      "operation": "copy",
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "animation": "idle_south",
+      "frame": 1,
+      "output": "sprites/actors/idle_south_1.png",
+      "output_sha256": "3978ffdb22e1b6d1b74426f4807df54fdf15be5a8b2eea91c4eaa239d2eb5bc9",
+      "provisional": "Static pilot hold; authored animation in task 0004."
+    },
+    {
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "prompt": "implementation/sprites/generation/0001-player.prompt.txt",
+      "prompt_sha256": "ea7ac44958f920236750c92f6d196cb6b493eca1983bac380b1d8d637cf28511",
+      "references": [
+        {
+          "path": "docs/sprites_sem_fundo.png",
+          "role": "owner identity reference",
+          "sha256": "9fe4e672988613dbb54cf7ef197149d4b7f61f69e190dc32f04f4c3ec9103b0a"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0001",
+      "id": "actors/idle_south_2",
+      "input": "actors/idle_south_0",
+      "operation": "copy",
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "animation": "idle_south",
+      "frame": 2,
+      "output": "sprites/actors/idle_south_2.png",
+      "output_sha256": "3978ffdb22e1b6d1b74426f4807df54fdf15be5a8b2eea91c4eaa239d2eb5bc9",
+      "provisional": "Static pilot hold; authored animation in task 0004."
+    },
+    {
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "prompt": "implementation/sprites/generation/0001-house.prompt.txt",
+      "prompt_sha256": "96953b29cc38cf2238fdc241c118d0880bc8f97cac461fd8e554d14d23e1e71a",
+      "references": [
+        {
+          "path": "docs/reference-sheet.png",
+          "role": "architecture/material reference",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c"
+        },
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "accepted pixel-language reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0001",
+      "id": "buildings/house_0_0",
+      "input": "buildings/house",
+      "operation": "slice",
+      "canvas_wh": [
+        24,
+        28
+      ],
+      "pivot_xy": [
+        12,
+        28
+      ],
+      "animation": "buildings/house_0_0",
+      "frame": 0,
+      "output": "sprites/buildings/house_0_0.png",
+      "output_sha256": "2f14168302941f3e8c681e1aed347e68672a4ffee078ffef6bcd9e1c37eea8a9",
+      "slice_xywh": [
+        0,
+        0,
+        24,
+        28
+      ],
+      "cell_offset_xy": [
+        -8,
+        -12
+      ]
+    },
+    {
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "prompt": "implementation/sprites/generation/0001-house.prompt.txt",
+      "prompt_sha256": "96953b29cc38cf2238fdc241c118d0880bc8f97cac461fd8e554d14d23e1e71a",
+      "references": [
+        {
+          "path": "docs/reference-sheet.png",
+          "role": "architecture/material reference",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c"
+        },
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "accepted pixel-language reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0001",
+      "id": "buildings/house_0_1",
+      "input": "buildings/house",
+      "operation": "slice",
+      "canvas_wh": [
+        24,
+        16
+      ],
+      "pivot_xy": [
+        12,
+        16
+      ],
+      "animation": "buildings/house_0_1",
+      "frame": 0,
+      "output": "sprites/buildings/house_0_1.png",
+      "output_sha256": "ef5f13d0b0cca815daa372d30cd580cbcfa27f29230b82357c78e9ebfaa70615",
+      "slice_xywh": [
+        0,
+        28,
+        24,
+        16
+      ],
+      "cell_offset_xy": [
+        -8,
+        0
+      ]
+    },
+    {
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "prompt": "implementation/sprites/generation/0001-house.prompt.txt",
+      "prompt_sha256": "96953b29cc38cf2238fdc241c118d0880bc8f97cac461fd8e554d14d23e1e71a",
+      "references": [
+        {
+          "path": "docs/reference-sheet.png",
+          "role": "architecture/material reference",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c"
+        },
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "accepted pixel-language reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0001",
+      "id": "buildings/house_0_2",
+      "input": "buildings/house",
+      "operation": "slice",
+      "canvas_wh": [
+        24,
+        20
+      ],
+      "pivot_xy": [
+        12,
+        20
+      ],
+      "animation": "buildings/house_0_2",
+      "frame": 0,
+      "output": "sprites/buildings/house_0_2.png",
+      "output_sha256": "e288485c6efcfde188c7f2a6f4346f451132849e48ad9b6d883397991d3f86e6",
+      "slice_xywh": [
+        0,
+        44,
+        24,
+        20
+      ],
+      "cell_offset_xy": [
+        -8,
+        0
+      ]
+    },
+    {
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "prompt": "implementation/sprites/generation/0001-house.prompt.txt",
+      "prompt_sha256": "96953b29cc38cf2238fdc241c118d0880bc8f97cac461fd8e554d14d23e1e71a",
+      "references": [
+        {
+          "path": "docs/reference-sheet.png",
+          "role": "architecture/material reference",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c"
+        },
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "accepted pixel-language reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0001",
+      "id": "buildings/house_1_0",
+      "input": "buildings/house",
+      "operation": "slice",
+      "canvas_wh": [
+        16,
+        28
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "animation": "buildings/house_1_0",
+      "frame": 0,
+      "output": "sprites/buildings/house_1_0.png",
+      "output_sha256": "58008d7929d8709347d9311e33001b2ce7cfad70c6a038dbc831b7cd553f8244",
+      "slice_xywh": [
+        24,
+        0,
+        16,
+        28
+      ],
+      "cell_offset_xy": [
+        0,
+        -12
+      ]
+    },
+    {
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "prompt": "implementation/sprites/generation/0001-house.prompt.txt",
+      "prompt_sha256": "96953b29cc38cf2238fdc241c118d0880bc8f97cac461fd8e554d14d23e1e71a",
+      "references": [
+        {
+          "path": "docs/reference-sheet.png",
+          "role": "architecture/material reference",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c"
+        },
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "accepted pixel-language reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0001",
+      "id": "buildings/house_1_1",
+      "input": "buildings/house",
+      "operation": "slice",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        16
+      ],
+      "animation": "buildings/house_1_1",
+      "frame": 0,
+      "output": "sprites/buildings/house_1_1.png",
+      "output_sha256": "066f4544411ff55b53cdae753a20f31edd46a6e9627ef5fd2781a6b639ba5300",
+      "slice_xywh": [
+        24,
+        28,
+        16,
+        16
+      ],
+      "cell_offset_xy": [
+        0,
+        0
+      ]
+    },
+    {
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "prompt": "implementation/sprites/generation/0001-house.prompt.txt",
+      "prompt_sha256": "96953b29cc38cf2238fdc241c118d0880bc8f97cac461fd8e554d14d23e1e71a",
+      "references": [
+        {
+          "path": "docs/reference-sheet.png",
+          "role": "architecture/material reference",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c"
+        },
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "accepted pixel-language reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0001",
+      "id": "buildings/house_1_2",
+      "input": "buildings/house",
+      "operation": "slice",
+      "canvas_wh": [
+        16,
+        20
+      ],
+      "pivot_xy": [
+        8,
+        20
+      ],
+      "animation": "buildings/house_1_2",
+      "frame": 0,
+      "output": "sprites/buildings/house_1_2.png",
+      "output_sha256": "45bc5b6af2fb6f0ac9c29116b18c34bcc1af10055ec7ddab2255cf3460ae2e07",
+      "slice_xywh": [
+        24,
+        44,
+        16,
+        20
+      ],
+      "cell_offset_xy": [
+        0,
+        0
+      ]
+    },
+    {
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "prompt": "implementation/sprites/generation/0001-house.prompt.txt",
+      "prompt_sha256": "96953b29cc38cf2238fdc241c118d0880bc8f97cac461fd8e554d14d23e1e71a",
+      "references": [
+        {
+          "path": "docs/reference-sheet.png",
+          "role": "architecture/material reference",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c"
+        },
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "accepted pixel-language reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0001",
+      "id": "buildings/house_2_0",
+      "input": "buildings/house",
+      "operation": "slice",
+      "canvas_wh": [
+        24,
+        28
+      ],
+      "pivot_xy": [
+        12,
+        28
+      ],
+      "animation": "buildings/house_2_0",
+      "frame": 0,
+      "output": "sprites/buildings/house_2_0.png",
+      "output_sha256": "4fe7ca145e4a2ea04d9b5b2b803f8c5136df408e22fe0c7db2395ca92956a203",
+      "slice_xywh": [
+        40,
+        0,
+        24,
+        28
+      ],
+      "cell_offset_xy": [
+        0,
+        -12
+      ]
+    },
+    {
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "prompt": "implementation/sprites/generation/0001-house.prompt.txt",
+      "prompt_sha256": "96953b29cc38cf2238fdc241c118d0880bc8f97cac461fd8e554d14d23e1e71a",
+      "references": [
+        {
+          "path": "docs/reference-sheet.png",
+          "role": "architecture/material reference",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c"
+        },
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "accepted pixel-language reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0001",
+      "id": "buildings/house_2_1",
+      "input": "buildings/house",
+      "operation": "slice",
+      "canvas_wh": [
+        24,
+        16
+      ],
+      "pivot_xy": [
+        12,
+        16
+      ],
+      "animation": "buildings/house_2_1",
+      "frame": 0,
+      "output": "sprites/buildings/house_2_1.png",
+      "output_sha256": "b492ca133c313b9104846a74840c47ccf32d6fa07019ca0a9746336e9d3a6d0b",
+      "slice_xywh": [
+        40,
+        28,
+        24,
+        16
+      ],
+      "cell_offset_xy": [
+        0,
+        0
+      ]
+    },
+    {
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "prompt": "implementation/sprites/generation/0001-house.prompt.txt",
+      "prompt_sha256": "96953b29cc38cf2238fdc241c118d0880bc8f97cac461fd8e554d14d23e1e71a",
+      "references": [
+        {
+          "path": "docs/reference-sheet.png",
+          "role": "architecture/material reference",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c"
+        },
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "accepted pixel-language reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0001",
+      "id": "buildings/house_2_2",
+      "input": "buildings/house",
+      "operation": "slice",
+      "canvas_wh": [
+        24,
+        20
+      ],
+      "pivot_xy": [
+        12,
+        20
+      ],
+      "animation": "buildings/house_2_2",
+      "frame": 0,
+      "output": "sprites/buildings/house_2_2.png",
+      "output_sha256": "c6469d0d0538699bc8e561762fa9276a898a8ff2e7dafecb66bbbe922e99f5f7",
+      "slice_xywh": [
+        40,
+        44,
+        24,
+        20
+      ],
+      "cell_offset_xy": [
+        0,
+        0
+      ]
+    },
+    {
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "prompt": "implementation/sprites/generation/0001-walker.prompt.txt",
+      "prompt_sha256": "a37705c1e7b4c7612b8e7aa87d67244a59a1a1c174a43d8cdfb16cf540a00807",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "style/body-scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/masters/tree.png",
+          "role": "world style reference",
+          "sha256": "a9b0f2880631364cf6ceb0dc7795cc132de6d1205b18e4b70434f67ecc7ec3f9"
+        },
+        {
+          "path": "assets/art_source/masters/house.png",
+          "role": "world style reference",
+          "sha256": "26d2646bf9328eae0eeb699193a11f46e6f92cd487d2369dea27b4295bdab81f"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0001",
+      "id": "enemies/walker_walk_b",
+      "input": "enemies/walker",
+      "operation": "legacy_bob",
+      "canvas_wh": [
+        32,
+        40
+      ],
+      "pivot_xy": [
+        16,
+        36
+      ],
+      "animation": "enemies/walker_walk_b",
+      "frame": 0,
+      "output": "sprites/enemies/walker_walk_b.png",
+      "output_sha256": "50d167979439be2b3141d7284e8b2c04aa9ff7bc8af177501a1494e60aa480cd",
+      "provisional": "Legacy procedural motion from new master; authored strips/death playback in task 0015."
+    },
+    {
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "prompt": "implementation/sprites/generation/0001-walker.prompt.txt",
+      "prompt_sha256": "a37705c1e7b4c7612b8e7aa87d67244a59a1a1c174a43d8cdfb16cf540a00807",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "style/body-scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/masters/tree.png",
+          "role": "world style reference",
+          "sha256": "a9b0f2880631364cf6ceb0dc7795cc132de6d1205b18e4b70434f67ecc7ec3f9"
+        },
+        {
+          "path": "assets/art_source/masters/house.png",
+          "role": "world style reference",
+          "sha256": "26d2646bf9328eae0eeb699193a11f46e6f92cd487d2369dea27b4295bdab81f"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0001",
+      "id": "enemies/walker_attack",
+      "input": "enemies/walker",
+      "operation": "legacy_lunge",
+      "canvas_wh": [
+        32,
+        40
+      ],
+      "pivot_xy": [
+        16,
+        36
+      ],
+      "animation": "enemies/walker_attack",
+      "frame": 0,
+      "output": "sprites/enemies/walker_attack.png",
+      "output_sha256": "9491627c3b72b6f79b9e798db29c283c8768965efa70c4b2f329618ea47076af",
+      "provisional": "Legacy procedural motion from new master; authored strips/death playback in task 0015."
+    },
+    {
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "prompt": "implementation/sprites/generation/0001-walker.prompt.txt",
+      "prompt_sha256": "a37705c1e7b4c7612b8e7aa87d67244a59a1a1c174a43d8cdfb16cf540a00807",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "style/body-scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/masters/tree.png",
+          "role": "world style reference",
+          "sha256": "a9b0f2880631364cf6ceb0dc7795cc132de6d1205b18e4b70434f67ecc7ec3f9"
+        },
+        {
+          "path": "assets/art_source/masters/house.png",
+          "role": "world style reference",
+          "sha256": "26d2646bf9328eae0eeb699193a11f46e6f92cd487d2369dea27b4295bdab81f"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0001",
+      "id": "enemies/walker_death",
+      "input": "enemies/walker",
+      "operation": "legacy_fall",
+      "canvas_wh": [
+        40,
+        40
+      ],
+      "pivot_xy": [
+        20,
+        36
+      ],
+      "animation": "enemies/walker_death",
+      "frame": 0,
+      "output": "sprites/enemies/walker_death.png",
+      "output_sha256": "66fbe788d80f2a45af9de795b602e4d27aef4b3d4e9d0239d38654fe7cb5d0e9",
+      "provisional": "Legacy procedural motion from new master; authored strips/death playback in task 0015."
+    }
+  ]
+}
