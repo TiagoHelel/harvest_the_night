@@ -2011,6 +2011,3518 @@
       "generation_task": "0004",
       "revision": 2,
       "approval": "Native/3x strip review before runtime promotion"
+    },
+    {
+      "id": "actors/chop_0",
+      "owner": "raster",
+      "source": "assets/art_source/player/chop.png",
+      "source_sha256": "a9e8f337065eea10a39559d98625ec6b9e3a57d35181fb626997c6f7af1c31a1",
+      "crop_xywh": [
+        120,
+        69,
+        373,
+        576
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        516,
+        724
+      ],
+      "gutter_xy": [
+        23,
+        69
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.06,
+      "content_anchor_xy": [
+        10,
+        35
+      ],
+      "feet_source_xy": [
+        294,
+        645
+      ],
+      "body_reference_height": 500,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "chop",
+      "frame": 0,
+      "seconds": 0.09,
+      "loop": false,
+      "output": "sprites/actors/chop_0.png",
+      "output_sha256": "2dc47aa70b98feabe753a4c56cad978e01f337432ae16d109cf9bb869e91ee51",
+      "prompt": "implementation/sprites/generation/0005-chop.prompt.txt",
+      "prompt_sha256": "a9c7a4427425772263302d0bf3bd266ba7b2b794392bbcbeeb678a2f9ddbcdbf",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_west.png",
+          "role": "accepted west silhouette/clothing reference",
+          "sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0005",
+      "revision": 0,
+      "approval": "Reviewed native/3x four-phase silhouette, tool clearance and boot contact"
+    },
+    {
+      "id": "actors/chop_1",
+      "owner": "raster",
+      "source": "assets/art_source/player/chop.png",
+      "source_sha256": "a9e8f337065eea10a39559d98625ec6b9e3a57d35181fb626997c6f7af1c31a1",
+      "crop_xywh": [
+        540,
+        147,
+        460,
+        498
+      ],
+      "sheet_cell_xywh": [
+        516,
+        0,
+        523,
+        724
+      ],
+      "gutter_xy": [
+        24,
+        79
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.06,
+      "content_anchor_xy": [
+        20,
+        30
+      ],
+      "feet_source_xy": [
+        875,
+        645
+      ],
+      "body_reference_height": 500,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "chop",
+      "frame": 1,
+      "seconds": 0.09,
+      "loop": false,
+      "output": "sprites/actors/chop_1.png",
+      "output_sha256": "2ea6ef356533a27ea14fe7e5a92d14a8e8eef55fab2b2ac4acbec8cfa75c9f99",
+      "prompt": "implementation/sprites/generation/0005-chop.prompt.txt",
+      "prompt_sha256": "a9c7a4427425772263302d0bf3bd266ba7b2b794392bbcbeeb678a2f9ddbcdbf",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_west.png",
+          "role": "accepted west silhouette/clothing reference",
+          "sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0005",
+      "revision": 0,
+      "approval": "Reviewed native/3x four-phase silhouette, tool clearance and boot contact"
+    },
+    {
+      "id": "actors/chop_2",
+      "owner": "raster",
+      "source": "assets/art_source/player/chop.png",
+      "source_sha256": "a9e8f337065eea10a39559d98625ec6b9e3a57d35181fb626997c6f7af1c31a1",
+      "crop_xywh": [
+        1078,
+        146,
+        499,
+        499
+      ],
+      "sheet_cell_xywh": [
+        1039,
+        0,
+        617,
+        724
+      ],
+      "gutter_xy": [
+        39,
+        79
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.06,
+      "content_anchor_xy": [
+        22,
+        30
+      ],
+      "feet_source_xy": [
+        1446,
+        645
+      ],
+      "body_reference_height": 500,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "chop",
+      "frame": 2,
+      "seconds": 0.09,
+      "loop": false,
+      "output": "sprites/actors/chop_2.png",
+      "output_sha256": "c73e5297b40318df9b6fab4489b5cfce8988298ce957a3bf99874c103c557d3b",
+      "prompt": "implementation/sprites/generation/0005-chop.prompt.txt",
+      "prompt_sha256": "a9c7a4427425772263302d0bf3bd266ba7b2b794392bbcbeeb678a2f9ddbcdbf",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_west.png",
+          "role": "accepted west silhouette/clothing reference",
+          "sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0005",
+      "revision": 0,
+      "approval": "Reviewed native/3x four-phase silhouette, tool clearance and boot contact"
+    },
+    {
+      "id": "actors/chop_3",
+      "owner": "raster",
+      "source": "assets/art_source/player/chop.png",
+      "source_sha256": "a9e8f337065eea10a39559d98625ec6b9e3a57d35181fb626997c6f7af1c31a1",
+      "crop_xywh": [
+        1736,
+        145,
+        388,
+        500
+      ],
+      "sheet_cell_xywh": [
+        1656,
+        0,
+        516,
+        724
+      ],
+      "gutter_xy": [
+        48,
+        79
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.06,
+      "content_anchor_xy": [
+        10,
+        30
+      ],
+      "feet_source_xy": [
+        1910,
+        645
+      ],
+      "body_reference_height": 500,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "chop",
+      "frame": 3,
+      "seconds": 0.09,
+      "loop": false,
+      "output": "sprites/actors/chop_3.png",
+      "output_sha256": "ba78a6e34251638bd7b70d68e6ba0205c73cbb9fdf68713aae9f7471cbd57fb0",
+      "prompt": "implementation/sprites/generation/0005-chop.prompt.txt",
+      "prompt_sha256": "a9c7a4427425772263302d0bf3bd266ba7b2b794392bbcbeeb678a2f9ddbcdbf",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_west.png",
+          "role": "accepted west silhouette/clothing reference",
+          "sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0005",
+      "revision": 0,
+      "approval": "Reviewed native/3x four-phase silhouette, tool clearance and boot contact"
+    },
+    {
+      "id": "actors/mine_0",
+      "owner": "raster",
+      "source": "assets/art_source/player/mine.png",
+      "source_sha256": "0d95e238f1bc5aff89c1cf090fcaa5b458870d44236a941815fbd4f23be29a2f",
+      "crop_xywh": [
+        75,
+        52,
+        417,
+        606
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        542,
+        724
+      ],
+      "gutter_xy": [
+        50,
+        52
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.058823529411764705,
+      "content_anchor_xy": [
+        12,
+        36
+      ],
+      "feet_source_xy": [
+        277,
+        658
+      ],
+      "body_reference_height": 510,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "mine",
+      "frame": 0,
+      "seconds": 0.09,
+      "loop": false,
+      "output": "sprites/actors/mine_0.png",
+      "output_sha256": "2c4203f2db9699c410a4184a27e6b6768c9ef4c700fc92d6bb2f9aabb9f998da",
+      "prompt": "implementation/sprites/generation/0005-mine.prompt.txt",
+      "prompt_sha256": "703dbeb7ea3d176d5afea93f4f2e56c7d8f5037deb47de11073b9cc6d9eae665",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_west.png",
+          "role": "accepted west silhouette/clothing reference",
+          "sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0005",
+      "revision": 0,
+      "approval": "Reviewed native/3x four-phase silhouette, tool clearance and boot contact"
+    },
+    {
+      "id": "actors/mine_1",
+      "owner": "raster",
+      "source": "assets/art_source/player/mine.png",
+      "source_sha256": "0d95e238f1bc5aff89c1cf090fcaa5b458870d44236a941815fbd4f23be29a2f",
+      "crop_xywh": [
+        592,
+        172,
+        448,
+        503
+      ],
+      "sheet_cell_xywh": [
+        542,
+        0,
+        520,
+        724
+      ],
+      "gutter_xy": [
+        22,
+        49
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.058823529411764705,
+      "content_anchor_xy": [
+        18,
+        29
+      ],
+      "feet_source_xy": [
+        898,
+        658
+      ],
+      "body_reference_height": 510,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "mine",
+      "frame": 1,
+      "seconds": 0.09,
+      "loop": false,
+      "output": "sprites/actors/mine_1.png",
+      "output_sha256": "6034999f9c4c2479383ab8b71426098f0d7ba862ebc35aa67aefb4aac41b2c41",
+      "prompt": "implementation/sprites/generation/0005-mine.prompt.txt",
+      "prompt_sha256": "703dbeb7ea3d176d5afea93f4f2e56c7d8f5037deb47de11073b9cc6d9eae665",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_west.png",
+          "role": "accepted west silhouette/clothing reference",
+          "sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0005",
+      "revision": 0,
+      "approval": "Reviewed native/3x four-phase silhouette, tool clearance and boot contact"
+    },
+    {
+      "id": "actors/mine_2",
+      "owner": "raster",
+      "source": "assets/art_source/player/mine.png",
+      "source_sha256": "0d95e238f1bc5aff89c1cf090fcaa5b458870d44236a941815fbd4f23be29a2f",
+      "crop_xywh": [
+        1084,
+        166,
+        524,
+        492
+      ],
+      "sheet_cell_xywh": [
+        1062,
+        0,
+        610,
+        724
+      ],
+      "gutter_xy": [
+        22,
+        66
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.058823529411764705,
+      "content_anchor_xy": [
+        22,
+        29
+      ],
+      "feet_source_xy": [
+        1463,
+        658
+      ],
+      "body_reference_height": 510,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "mine",
+      "frame": 2,
+      "seconds": 0.09,
+      "loop": false,
+      "output": "sprites/actors/mine_2.png",
+      "output_sha256": "24fa4eed6f5f31518d5c3178c75ecff412a29959ca9613d49faf4ef687ee0687",
+      "prompt": "implementation/sprites/generation/0005-mine.prompt.txt",
+      "prompt_sha256": "703dbeb7ea3d176d5afea93f4f2e56c7d8f5037deb47de11073b9cc6d9eae665",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_west.png",
+          "role": "accepted west silhouette/clothing reference",
+          "sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0005",
+      "revision": 0,
+      "approval": "Reviewed native/3x four-phase silhouette, tool clearance and boot contact"
+    },
+    {
+      "id": "actors/mine_3",
+      "owner": "raster",
+      "source": "assets/art_source/player/mine.png",
+      "source_sha256": "0d95e238f1bc5aff89c1cf090fcaa5b458870d44236a941815fbd4f23be29a2f",
+      "crop_xywh": [
+        1736,
+        52,
+        405,
+        606
+      ],
+      "sheet_cell_xywh": [
+        1672,
+        0,
+        500,
+        724
+      ],
+      "gutter_xy": [
+        31,
+        52
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.058823529411764705,
+      "content_anchor_xy": [
+        12,
+        36
+      ],
+      "feet_source_xy": [
+        1948,
+        658
+      ],
+      "body_reference_height": 510,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "mine",
+      "frame": 3,
+      "seconds": 0.09,
+      "loop": false,
+      "output": "sprites/actors/mine_3.png",
+      "output_sha256": "a40cfb1349c13dca340dd2601e7bb43c1edff95076bc5594a9f722e27300a26a",
+      "prompt": "implementation/sprites/generation/0005-mine.prompt.txt",
+      "prompt_sha256": "703dbeb7ea3d176d5afea93f4f2e56c7d8f5037deb47de11073b9cc6d9eae665",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_west.png",
+          "role": "accepted west silhouette/clothing reference",
+          "sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0005",
+      "revision": 0,
+      "approval": "Reviewed native/3x four-phase silhouette, tool clearance and boot contact"
+    },
+    {
+      "id": "actors/till_0",
+      "owner": "raster",
+      "source": "assets/art_source/player/till.png",
+      "source_sha256": "81d9240acc8ccb00a67c406b01e12af7640d4f8027c3e44f3a811df3bd36adeb",
+      "crop_xywh": [
+        39,
+        131,
+        490,
+        490
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        570,
+        724
+      ],
+      "gutter_xy": [
+        39,
+        103
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.06109979633401222,
+      "content_anchor_xy": [
+        22,
+        30
+      ],
+      "feet_source_xy": [
+        393,
+        621
+      ],
+      "body_reference_height": 491,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "till",
+      "frame": 0,
+      "seconds": 0.09,
+      "loop": false,
+      "output": "sprites/actors/till_0.png",
+      "output_sha256": "66603839e11646059701e4d4cf5baf518eea137750ebbfce795ff911239b1a11",
+      "prompt": "implementation/sprites/generation/0005-till.prompt.txt",
+      "prompt_sha256": "0d5eb23d568c940e13b87be6f53bf5face8a493c0e05349bdc023ec6339e0c3e",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_west.png",
+          "role": "accepted west silhouette/clothing reference",
+          "sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0005",
+      "revision": 0,
+      "approval": "Reviewed native/3x four-phase silhouette, tool clearance and boot contact"
+    },
+    {
+      "id": "actors/till_1",
+      "owner": "raster",
+      "source": "assets/art_source/player/till.png",
+      "source_sha256": "81d9240acc8ccb00a67c406b01e12af7640d4f8027c3e44f3a811df3bd36adeb",
+      "crop_xywh": [
+        611,
+        160,
+        407,
+        462
+      ],
+      "sheet_cell_xywh": [
+        570,
+        0,
+        518,
+        724
+      ],
+      "gutter_xy": [
+        41,
+        102
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.06109979633401222,
+      "content_anchor_xy": [
+        18,
+        28
+      ],
+      "feet_source_xy": [
+        907,
+        622
+      ],
+      "body_reference_height": 491,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "till",
+      "frame": 1,
+      "seconds": 0.09,
+      "loop": false,
+      "output": "sprites/actors/till_1.png",
+      "output_sha256": "f7ade8652858e3bc6dafaeb8ca27cf6ccb7fb2fa152ef29449d5eb679a24a5d1",
+      "prompt": "implementation/sprites/generation/0005-till.prompt.txt",
+      "prompt_sha256": "0d5eb23d568c940e13b87be6f53bf5face8a493c0e05349bdc023ec6339e0c3e",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_west.png",
+          "role": "accepted west silhouette/clothing reference",
+          "sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0005",
+      "revision": 0,
+      "approval": "Reviewed native/3x four-phase silhouette, tool clearance and boot contact"
+    },
+    {
+      "id": "actors/till_2",
+      "owner": "raster",
+      "source": "assets/art_source/player/till.png",
+      "source_sha256": "81d9240acc8ccb00a67c406b01e12af7640d4f8027c3e44f3a811df3bd36adeb",
+      "crop_xywh": [
+        1159,
+        160,
+        407,
+        462
+      ],
+      "sheet_cell_xywh": [
+        1088,
+        0,
+        521,
+        724
+      ],
+      "gutter_xy": [
+        43,
+        102
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.06109979633401222,
+      "content_anchor_xy": [
+        18,
+        28
+      ],
+      "feet_source_xy": [
+        1454,
+        622
+      ],
+      "body_reference_height": 491,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "till",
+      "frame": 2,
+      "seconds": 0.09,
+      "loop": false,
+      "output": "sprites/actors/till_2.png",
+      "output_sha256": "2efe0cbc5cecdcbd3710b86547f32ffa84b99617d51a081a536303f716a7679c",
+      "prompt": "implementation/sprites/generation/0005-till.prompt.txt",
+      "prompt_sha256": "0d5eb23d568c940e13b87be6f53bf5face8a493c0e05349bdc023ec6339e0c3e",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_west.png",
+          "role": "accepted west silhouette/clothing reference",
+          "sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0005",
+      "revision": 0,
+      "approval": "Reviewed native/3x four-phase silhouette, tool clearance and boot contact"
+    },
+    {
+      "id": "actors/till_3",
+      "owner": "raster",
+      "source": "assets/art_source/player/till.png",
+      "source_sha256": "81d9240acc8ccb00a67c406b01e12af7640d4f8027c3e44f3a811df3bd36adeb",
+      "crop_xywh": [
+        1653,
+        131,
+        465,
+        491
+      ],
+      "sheet_cell_xywh": [
+        1609,
+        0,
+        563,
+        724
+      ],
+      "gutter_xy": [
+        44,
+        102
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.06109979633401222,
+      "content_anchor_xy": [
+        21,
+        30
+      ],
+      "feet_source_xy": [
+        1993,
+        622
+      ],
+      "body_reference_height": 491,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "till",
+      "frame": 3,
+      "seconds": 0.09,
+      "loop": false,
+      "output": "sprites/actors/till_3.png",
+      "output_sha256": "724803dafdef8af631699b8e36a2494940e053707ae3d0696514edb87d4b74d4",
+      "prompt": "implementation/sprites/generation/0005-till.prompt.txt",
+      "prompt_sha256": "0d5eb23d568c940e13b87be6f53bf5face8a493c0e05349bdc023ec6339e0c3e",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_west.png",
+          "role": "accepted west silhouette/clothing reference",
+          "sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0005",
+      "revision": 0,
+      "approval": "Reviewed native/3x four-phase silhouette, tool clearance and boot contact"
+    },
+    {
+      "id": "actors/plant_0",
+      "owner": "raster",
+      "source": "assets/art_source/player/plant.png",
+      "source_sha256": "f679e7e435d3b5240f465f5f5117da379de4fd2e5518e92458466bca0168438f",
+      "crop_xywh": [
+        167,
+        107,
+        371,
+        533
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        589,
+        724
+      ],
+      "gutter_xy": [
+        51,
+        84
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.05628517823639775,
+      "content_anchor_xy": [
+        10,
+        30
+      ],
+      "feet_source_xy": [
+        353,
+        640
+      ],
+      "body_reference_height": 533,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "plant",
+      "frame": 0,
+      "seconds": 0.09,
+      "loop": false,
+      "output": "sprites/actors/plant_0.png",
+      "output_sha256": "fd429faacd4acac6d00c5a963d14ffa801591ea3320f43172cc349970a21b2fe",
+      "prompt": "implementation/sprites/generation/0005-plant.prompt.txt",
+      "prompt_sha256": "c54126e9dd1be7d1c55e65a57a0cb6c0a7396ac0d1e20ed822012e1d958cb912",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_west.png",
+          "role": "accepted west silhouette/clothing reference",
+          "sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0005",
+      "revision": 0,
+      "approval": "Reviewed native/3x four-phase silhouette, tool clearance and boot contact"
+    },
+    {
+      "id": "actors/plant_1",
+      "owner": "raster",
+      "source": "assets/art_source/player/plant.png",
+      "source_sha256": "f679e7e435d3b5240f465f5f5117da379de4fd2e5518e92458466bca0168438f",
+      "crop_xywh": [
+        640,
+        135,
+        381,
+        505
+      ],
+      "sheet_cell_xywh": [
+        589,
+        0,
+        491,
+        724
+      ],
+      "gutter_xy": [
+        51,
+        84
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.05628517823639775,
+      "content_anchor_xy": [
+        15,
+        28
+      ],
+      "feet_source_xy": [
+        904,
+        640
+      ],
+      "body_reference_height": 533,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "plant",
+      "frame": 1,
+      "seconds": 0.09,
+      "loop": false,
+      "output": "sprites/actors/plant_1.png",
+      "output_sha256": "5192c7ca1284ee1055899e5b765ff394ae45e3f152c4f03fb2094b32c8e514e2",
+      "prompt": "implementation/sprites/generation/0005-plant.prompt.txt",
+      "prompt_sha256": "c54126e9dd1be7d1c55e65a57a0cb6c0a7396ac0d1e20ed822012e1d958cb912",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_west.png",
+          "role": "accepted west silhouette/clothing reference",
+          "sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0005",
+      "revision": 0,
+      "approval": "Reviewed native/3x four-phase silhouette, tool clearance and boot contact"
+    },
+    {
+      "id": "actors/plant_2",
+      "owner": "raster",
+      "source": "assets/art_source/player/plant.png",
+      "source_sha256": "f679e7e435d3b5240f465f5f5117da379de4fd2e5518e92458466bca0168438f",
+      "crop_xywh": [
+        1140,
+        135,
+        381,
+        505
+      ],
+      "sheet_cell_xywh": [
+        1080,
+        0,
+        517,
+        724
+      ],
+      "gutter_xy": [
+        60,
+        84
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.05628517823639775,
+      "content_anchor_xy": [
+        15,
+        28
+      ],
+      "feet_source_xy": [
+        1404,
+        640
+      ],
+      "body_reference_height": 533,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "plant",
+      "frame": 2,
+      "seconds": 0.09,
+      "loop": false,
+      "output": "sprites/actors/plant_2.png",
+      "output_sha256": "5e65133d93fc9522d13b124af7e74b4d5ff0c622e53865e1be700f542b7aaf77",
+      "prompt": "implementation/sprites/generation/0005-plant.prompt.txt",
+      "prompt_sha256": "c54126e9dd1be7d1c55e65a57a0cb6c0a7396ac0d1e20ed822012e1d958cb912",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_west.png",
+          "role": "accepted west silhouette/clothing reference",
+          "sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0005",
+      "revision": 0,
+      "approval": "Reviewed native/3x four-phase silhouette, tool clearance and boot contact"
+    },
+    {
+      "id": "actors/plant_3",
+      "owner": "raster",
+      "source": "assets/art_source/player/plant.png",
+      "source_sha256": "f679e7e435d3b5240f465f5f5117da379de4fd2e5518e92458466bca0168438f",
+      "crop_xywh": [
+        1674,
+        107,
+        372,
+        533
+      ],
+      "sheet_cell_xywh": [
+        1597,
+        0,
+        575,
+        724
+      ],
+      "gutter_xy": [
+        77,
+        84
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.05628517823639775,
+      "content_anchor_xy": [
+        10,
+        30
+      ],
+      "feet_source_xy": [
+        1860,
+        640
+      ],
+      "body_reference_height": 533,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "plant",
+      "frame": 3,
+      "seconds": 0.09,
+      "loop": false,
+      "output": "sprites/actors/plant_3.png",
+      "output_sha256": "dcaf20cbaa0f4c9448b6c97e506e12296f5ab3141e859b9e2dd69bb610c18d22",
+      "prompt": "implementation/sprites/generation/0005-plant.prompt.txt",
+      "prompt_sha256": "c54126e9dd1be7d1c55e65a57a0cb6c0a7396ac0d1e20ed822012e1d958cb912",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_west.png",
+          "role": "accepted west silhouette/clothing reference",
+          "sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0005",
+      "revision": 0,
+      "approval": "Reviewed native/3x four-phase silhouette, tool clearance and boot contact"
+    },
+    {
+      "id": "actors/water_0",
+      "owner": "raster",
+      "source": "assets/art_source/player/water.png",
+      "source_sha256": "0630be3bf0f17264b7ccc27397da79b4b825d0de118df65443456496725af5be",
+      "crop_xywh": [
+        112,
+        89,
+        393,
+        554
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        566,
+        724
+      ],
+      "gutter_xy": [
+        61,
+        81
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.05415162454873646,
+      "content_anchor_xy": [
+        11,
+        30
+      ],
+      "feet_source_xy": [
+        322,
+        643
+      ],
+      "body_reference_height": 554,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "water",
+      "frame": 0,
+      "seconds": 0.09,
+      "loop": false,
+      "output": "sprites/actors/water_0.png",
+      "output_sha256": "f21a7106865e5a043153d9cac5cb19a033175b4749f3081faa7622e0841d3464",
+      "prompt": "implementation/sprites/generation/0005-water.prompt.txt",
+      "prompt_sha256": "8c4da35c6b22c1c112befe6236c4f2cc5f1517d9fcd5daf7100810d514ec5505",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_west.png",
+          "role": "accepted west silhouette/clothing reference",
+          "sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0005",
+      "revision": 0,
+      "approval": "Reviewed native/3x four-phase silhouette, tool clearance and boot contact"
+    },
+    {
+      "id": "actors/water_1",
+      "owner": "raster",
+      "source": "assets/art_source/player/water.png",
+      "source_sha256": "0630be3bf0f17264b7ccc27397da79b4b825d0de118df65443456496725af5be",
+      "crop_xywh": [
+        627,
+        89,
+        429,
+        554
+      ],
+      "sheet_cell_xywh": [
+        566,
+        0,
+        531,
+        724
+      ],
+      "gutter_xy": [
+        41,
+        81
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.05415162454873646,
+      "content_anchor_xy": [
+        14,
+        30
+      ],
+      "feet_source_xy": [
+        893,
+        643
+      ],
+      "body_reference_height": 554,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "water",
+      "frame": 1,
+      "seconds": 0.09,
+      "loop": false,
+      "output": "sprites/actors/water_1.png",
+      "output_sha256": "9806eae9a678cad7266fbe5c5b5755f5f96b86c3611b46524d7ef1bd9be73b94",
+      "prompt": "implementation/sprites/generation/0005-water.prompt.txt",
+      "prompt_sha256": "8c4da35c6b22c1c112befe6236c4f2cc5f1517d9fcd5daf7100810d514ec5505",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_west.png",
+          "role": "accepted west silhouette/clothing reference",
+          "sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0005",
+      "revision": 0,
+      "approval": "Reviewed native/3x four-phase silhouette, tool clearance and boot contact"
+    },
+    {
+      "id": "actors/water_2",
+      "owner": "raster",
+      "source": "assets/art_source/player/water.png",
+      "source_sha256": "0630be3bf0f17264b7ccc27397da79b4b825d0de118df65443456496725af5be",
+      "crop_xywh": [
+        1138,
+        89,
+        461,
+        560
+      ],
+      "sheet_cell_xywh": [
+        1097,
+        0,
+        571,
+        724
+      ],
+      "gutter_xy": [
+        41,
+        75
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.05415162454873646,
+      "content_anchor_xy": [
+        16,
+        30
+      ],
+      "feet_source_xy": [
+        1440,
+        643
+      ],
+      "body_reference_height": 554,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "water",
+      "frame": 2,
+      "seconds": 0.09,
+      "loop": false,
+      "output": "sprites/actors/water_2.png",
+      "output_sha256": "bfc84c6995c55b3c73ce92b73776274078e6c6058ce7f59a57f88df4a0db3abd",
+      "prompt": "implementation/sprites/generation/0005-water.prompt.txt",
+      "prompt_sha256": "8c4da35c6b22c1c112befe6236c4f2cc5f1517d9fcd5daf7100810d514ec5505",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_west.png",
+          "role": "accepted west silhouette/clothing reference",
+          "sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0005",
+      "revision": 0,
+      "approval": "Reviewed native/3x four-phase silhouette, tool clearance and boot contact"
+    },
+    {
+      "id": "actors/water_3",
+      "owner": "raster",
+      "source": "assets/art_source/player/water.png",
+      "source_sha256": "0630be3bf0f17264b7ccc27397da79b4b825d0de118df65443456496725af5be",
+      "crop_xywh": [
+        1737,
+        89,
+        381,
+        554
+      ],
+      "sheet_cell_xywh": [
+        1668,
+        0,
+        504,
+        724
+      ],
+      "gutter_xy": [
+        54,
+        81
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.05415162454873646,
+      "content_anchor_xy": [
+        11,
+        30
+      ],
+      "feet_source_xy": [
+        1942,
+        643
+      ],
+      "body_reference_height": 554,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "water",
+      "frame": 3,
+      "seconds": 0.09,
+      "loop": false,
+      "output": "sprites/actors/water_3.png",
+      "output_sha256": "447cc62bf75c954e510b3161336c7ceef53481a9fcf14503508dc2b20ff3e16e",
+      "prompt": "implementation/sprites/generation/0005-water.prompt.txt",
+      "prompt_sha256": "8c4da35c6b22c1c112befe6236c4f2cc5f1517d9fcd5daf7100810d514ec5505",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_west.png",
+          "role": "accepted west silhouette/clothing reference",
+          "sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0005",
+      "revision": 0,
+      "approval": "Reviewed native/3x four-phase silhouette, tool clearance and boot contact"
+    },
+    {
+      "id": "actors/fish_0",
+      "owner": "raster",
+      "source": "assets/art_source/player/fish.png",
+      "source_sha256": "771aa2af6048cb16106f1e993912733040dbac6ab383a66d2b543cd7199a5451",
+      "crop_xywh": [
+        119,
+        176,
+        323,
+        451
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        536,
+        727
+      ],
+      "gutter_xy": [
+        94,
+        100
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.075,
+      "content_anchor_xy": [
+        9,
+        34
+      ],
+      "feet_source_xy": [
+        244,
+        627
+      ],
+      "body_reference_height": 400,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "fish",
+      "frame": 0,
+      "seconds": 0.09,
+      "loop": false,
+      "output": "sprites/actors/fish_0.png",
+      "output_sha256": "5211f8537a10e70ce003524112c17897bd33cd9d2248c4d29f02c8848b432703",
+      "prompt": "implementation/sprites/generation/0005-fish-r2.prompt.txt",
+      "prompt_sha256": "ec081130ca81ab296b2f7e617e91d5659f6fdcb6862d16d741141d7e5fedb81b",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_west.png",
+          "role": "accepted west silhouette/clothing reference",
+          "sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5"
+        },
+        {
+          "path": "assets/art_source/player/candidates/fish-r0.png",
+          "role": "preserved rejected edit target, revision 0",
+          "sha256": "4b813699aa46b62142535674aca3616abfde5a9595c5e008ed1f93d104d9fd44"
+        },
+        {
+          "path": "implementation/sprites/generation/0005-fish.prompt.txt",
+          "role": "earlier complete prompt in compact-rod revision chain",
+          "sha256": "cdb4a835a2d8b4368ddc6b476f0df50afd14971016c61c2085c8dfe0c0f8d011"
+        },
+        {
+          "path": "assets/art_source/player/candidates/fish-r1.png",
+          "role": "preserved rejected edit target, revision 1",
+          "sha256": "63b6ae4b068bd726f912da3d0ce4ee3d747e681ecf80a35cf7e9ada2f7a12de7"
+        },
+        {
+          "path": "implementation/sprites/generation/0005-fish-r1.prompt.txt",
+          "role": "earlier complete prompt in compact-rod revision chain",
+          "sha256": "2497460ae19ac358fbfbe1339199b838603810411876c95e677e8f6425528ddf"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0005",
+      "revision": 2,
+      "approval": "Reviewed native/3x four-phase silhouette, tool clearance and boot contact"
+    },
+    {
+      "id": "actors/fish_1",
+      "owner": "raster",
+      "source": "assets/art_source/player/fish.png",
+      "source_sha256": "771aa2af6048cb16106f1e993912733040dbac6ab383a66d2b543cd7199a5451",
+      "crop_xywh": [
+        630,
+        211,
+        389,
+        416
+      ],
+      "sheet_cell_xywh": [
+        536,
+        0,
+        609,
+        727
+      ],
+      "gutter_xy": [
+        94,
+        100
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.075,
+      "content_anchor_xy": [
+        21,
+        31
+      ],
+      "feet_source_xy": [
+        908,
+        627
+      ],
+      "body_reference_height": 400,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "fish",
+      "frame": 1,
+      "seconds": 0.09,
+      "loop": false,
+      "output": "sprites/actors/fish_1.png",
+      "output_sha256": "873ae571befaf243cc63636b9067dc9aab55925a5767e160f672d7344f759071",
+      "prompt": "implementation/sprites/generation/0005-fish-r2.prompt.txt",
+      "prompt_sha256": "ec081130ca81ab296b2f7e617e91d5659f6fdcb6862d16d741141d7e5fedb81b",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_west.png",
+          "role": "accepted west silhouette/clothing reference",
+          "sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5"
+        },
+        {
+          "path": "assets/art_source/player/candidates/fish-r0.png",
+          "role": "preserved rejected edit target, revision 0",
+          "sha256": "4b813699aa46b62142535674aca3616abfde5a9595c5e008ed1f93d104d9fd44"
+        },
+        {
+          "path": "implementation/sprites/generation/0005-fish.prompt.txt",
+          "role": "earlier complete prompt in compact-rod revision chain",
+          "sha256": "cdb4a835a2d8b4368ddc6b476f0df50afd14971016c61c2085c8dfe0c0f8d011"
+        },
+        {
+          "path": "assets/art_source/player/candidates/fish-r1.png",
+          "role": "preserved rejected edit target, revision 1",
+          "sha256": "63b6ae4b068bd726f912da3d0ce4ee3d747e681ecf80a35cf7e9ada2f7a12de7"
+        },
+        {
+          "path": "implementation/sprites/generation/0005-fish-r1.prompt.txt",
+          "role": "earlier complete prompt in compact-rod revision chain",
+          "sha256": "2497460ae19ac358fbfbe1339199b838603810411876c95e677e8f6425528ddf"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0005",
+      "revision": 2,
+      "approval": "Reviewed native/3x four-phase silhouette, tool clearance and boot contact"
+    },
+    {
+      "id": "actors/fish_2",
+      "owner": "raster",
+      "source": "assets/art_source/player/fish.png",
+      "source_sha256": "771aa2af6048cb16106f1e993912733040dbac6ab383a66d2b543cd7199a5451",
+      "crop_xywh": [
+        1272,
+        226,
+        323,
+        401
+      ],
+      "sheet_cell_xywh": [
+        1145,
+        0,
+        523,
+        727
+      ],
+      "gutter_xy": [
+        73,
+        100
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.075,
+      "content_anchor_xy": [
+        15,
+        30
+      ],
+      "feet_source_xy": [
+        1469,
+        627
+      ],
+      "body_reference_height": 400,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "fish",
+      "frame": 2,
+      "seconds": 0.09,
+      "loop": false,
+      "output": "sprites/actors/fish_2.png",
+      "output_sha256": "275f84425c68c1e676da9ead90b7223395047fd1e9ea63e71d2a3b891bfd866b",
+      "prompt": "implementation/sprites/generation/0005-fish-r2.prompt.txt",
+      "prompt_sha256": "ec081130ca81ab296b2f7e617e91d5659f6fdcb6862d16d741141d7e5fedb81b",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_west.png",
+          "role": "accepted west silhouette/clothing reference",
+          "sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5"
+        },
+        {
+          "path": "assets/art_source/player/candidates/fish-r0.png",
+          "role": "preserved rejected edit target, revision 0",
+          "sha256": "4b813699aa46b62142535674aca3616abfde5a9595c5e008ed1f93d104d9fd44"
+        },
+        {
+          "path": "implementation/sprites/generation/0005-fish.prompt.txt",
+          "role": "earlier complete prompt in compact-rod revision chain",
+          "sha256": "cdb4a835a2d8b4368ddc6b476f0df50afd14971016c61c2085c8dfe0c0f8d011"
+        },
+        {
+          "path": "assets/art_source/player/candidates/fish-r1.png",
+          "role": "preserved rejected edit target, revision 1",
+          "sha256": "63b6ae4b068bd726f912da3d0ce4ee3d747e681ecf80a35cf7e9ada2f7a12de7"
+        },
+        {
+          "path": "implementation/sprites/generation/0005-fish-r1.prompt.txt",
+          "role": "earlier complete prompt in compact-rod revision chain",
+          "sha256": "2497460ae19ac358fbfbe1339199b838603810411876c95e677e8f6425528ddf"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0005",
+      "revision": 2,
+      "approval": "Reviewed native/3x four-phase silhouette, tool clearance and boot contact"
+    },
+    {
+      "id": "actors/fish_3",
+      "owner": "raster",
+      "source": "assets/art_source/player/fish.png",
+      "source_sha256": "771aa2af6048cb16106f1e993912733040dbac6ab383a66d2b543cd7199a5451",
+      "crop_xywh": [
+        1742,
+        227,
+        316,
+        400
+      ],
+      "sheet_cell_xywh": [
+        1668,
+        0,
+        495,
+        727
+      ],
+      "gutter_xy": [
+        74,
+        100
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.075,
+      "content_anchor_xy": [
+        15,
+        30
+      ],
+      "feet_source_xy": [
+        1936,
+        627
+      ],
+      "body_reference_height": 400,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "fish",
+      "frame": 3,
+      "seconds": 0.09,
+      "loop": false,
+      "output": "sprites/actors/fish_3.png",
+      "output_sha256": "bedff6292a2eb4940ea14e3fc90a0b33bbd599cc2cd7300cb2d9d11e417893d8",
+      "prompt": "implementation/sprites/generation/0005-fish-r2.prompt.txt",
+      "prompt_sha256": "ec081130ca81ab296b2f7e617e91d5659f6fdcb6862d16d741141d7e5fedb81b",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_west.png",
+          "role": "accepted west silhouette/clothing reference",
+          "sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5"
+        },
+        {
+          "path": "assets/art_source/player/candidates/fish-r0.png",
+          "role": "preserved rejected edit target, revision 0",
+          "sha256": "4b813699aa46b62142535674aca3616abfde5a9595c5e008ed1f93d104d9fd44"
+        },
+        {
+          "path": "implementation/sprites/generation/0005-fish.prompt.txt",
+          "role": "earlier complete prompt in compact-rod revision chain",
+          "sha256": "cdb4a835a2d8b4368ddc6b476f0df50afd14971016c61c2085c8dfe0c0f8d011"
+        },
+        {
+          "path": "assets/art_source/player/candidates/fish-r1.png",
+          "role": "preserved rejected edit target, revision 1",
+          "sha256": "63b6ae4b068bd726f912da3d0ce4ee3d747e681ecf80a35cf7e9ada2f7a12de7"
+        },
+        {
+          "path": "implementation/sprites/generation/0005-fish-r1.prompt.txt",
+          "role": "earlier complete prompt in compact-rod revision chain",
+          "sha256": "2497460ae19ac358fbfbe1339199b838603810411876c95e677e8f6425528ddf"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0005",
+      "revision": 2,
+      "approval": "Reviewed native/3x four-phase silhouette, tool clearance and boot contact"
+    },
+    {
+      "id": "actors/reel_0",
+      "owner": "raster",
+      "source": "assets/art_source/player/reel.png",
+      "source_sha256": "e54358cc065be47cf4d30b2784d63f62486eb65a5275b53d30cf3a7dde3d6b2e",
+      "crop_xywh": [
+        67,
+        128,
+        507,
+        477
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        593,
+        724
+      ],
+      "gutter_xy": [
+        19,
+        119
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.06289308176100629,
+      "content_anchor_xy": [
+        22,
+        30
+      ],
+      "feet_source_xy": [
+        419,
+        605
+      ],
+      "body_reference_height": 477,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "reel",
+      "frame": 0,
+      "seconds": 0.09,
+      "loop": false,
+      "output": "sprites/actors/reel_0.png",
+      "output_sha256": "790d167239bd187bd855de770bf3cb47873b5eafff51c71f1d95dffb1250b86c",
+      "prompt": "implementation/sprites/generation/0005-reel.prompt.txt",
+      "prompt_sha256": "0a60fbdb85f61d14e68fcc5145c2401e947671164e8783de9003631fe7255be8",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_west.png",
+          "role": "accepted west silhouette/clothing reference",
+          "sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0005",
+      "revision": 0,
+      "approval": "Reviewed native/3x four-phase silhouette, tool clearance and boot contact"
+    },
+    {
+      "id": "actors/reel_1",
+      "owner": "raster",
+      "source": "assets/art_source/player/reel.png",
+      "source_sha256": "e54358cc065be47cf4d30b2784d63f62486eb65a5275b53d30cf3a7dde3d6b2e",
+      "crop_xywh": [
+        612,
+        124,
+        464,
+        481
+      ],
+      "sheet_cell_xywh": [
+        593,
+        0,
+        494,
+        724
+      ],
+      "gutter_xy": [
+        11,
+        119
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.06289308176100629,
+      "content_anchor_xy": [
+        19,
+        30
+      ],
+      "feet_source_xy": [
+        918,
+        605
+      ],
+      "body_reference_height": 477,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "reel",
+      "frame": 1,
+      "seconds": 0.09,
+      "loop": false,
+      "output": "sprites/actors/reel_1.png",
+      "output_sha256": "c39ed7f3ec5b42b9c67525a3978d2653f6a14d1410a770aecebca62b9a3c01e2",
+      "prompt": "implementation/sprites/generation/0005-reel.prompt.txt",
+      "prompt_sha256": "0a60fbdb85f61d14e68fcc5145c2401e947671164e8783de9003631fe7255be8",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_west.png",
+          "role": "accepted west silhouette/clothing reference",
+          "sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0005",
+      "revision": 0,
+      "approval": "Reviewed native/3x four-phase silhouette, tool clearance and boot contact"
+    },
+    {
+      "id": "actors/reel_2",
+      "owner": "raster",
+      "source": "assets/art_source/player/reel.png",
+      "source_sha256": "e54358cc065be47cf4d30b2784d63f62486eb65a5275b53d30cf3a7dde3d6b2e",
+      "crop_xywh": [
+        1099,
+        128,
+        519,
+        477
+      ],
+      "sheet_cell_xywh": [
+        1087,
+        0,
+        549,
+        724
+      ],
+      "gutter_xy": [
+        12,
+        119
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.06289308176100629,
+      "content_anchor_xy": [
+        23,
+        30
+      ],
+      "feet_source_xy": [
+        1461,
+        605
+      ],
+      "body_reference_height": 477,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "reel",
+      "frame": 2,
+      "seconds": 0.09,
+      "loop": false,
+      "output": "sprites/actors/reel_2.png",
+      "output_sha256": "6ef65486f97a41f130ab274bcf5bd5f198e7917ab78e55666dd6f53999e02957",
+      "prompt": "implementation/sprites/generation/0005-reel.prompt.txt",
+      "prompt_sha256": "0a60fbdb85f61d14e68fcc5145c2401e947671164e8783de9003631fe7255be8",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_west.png",
+          "role": "accepted west silhouette/clothing reference",
+          "sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0005",
+      "revision": 0,
+      "approval": "Reviewed native/3x four-phase silhouette, tool clearance and boot contact"
+    },
+    {
+      "id": "actors/reel_3",
+      "owner": "raster",
+      "source": "assets/art_source/player/reel.png",
+      "source_sha256": "e54358cc065be47cf4d30b2784d63f62486eb65a5275b53d30cf3a7dde3d6b2e",
+      "crop_xywh": [
+        1655,
+        127,
+        461,
+        478
+      ],
+      "sheet_cell_xywh": [
+        1636,
+        0,
+        536,
+        724
+      ],
+      "gutter_xy": [
+        19,
+        119
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.06289308176100629,
+      "content_anchor_xy": [
+        20,
+        30
+      ],
+      "feet_source_xy": [
+        1966,
+        605
+      ],
+      "body_reference_height": 477,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "reel",
+      "frame": 3,
+      "seconds": 0.09,
+      "loop": false,
+      "output": "sprites/actors/reel_3.png",
+      "output_sha256": "5cdd725014228a64e4a79cb4901d325a406ba4491711b233ea1b4b942cee8c4f",
+      "prompt": "implementation/sprites/generation/0005-reel.prompt.txt",
+      "prompt_sha256": "0a60fbdb85f61d14e68fcc5145c2401e947671164e8783de9003631fe7255be8",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_west.png",
+          "role": "accepted west silhouette/clothing reference",
+          "sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0005",
+      "revision": 0,
+      "approval": "Reviewed native/3x four-phase silhouette, tool clearance and boot contact"
+    },
+    {
+      "id": "actors/harvest_0",
+      "owner": "raster",
+      "source": "assets/art_source/player/harvest.png",
+      "source_sha256": "c68daa632960f22f0346c4c92e70e5ebd18cee33fefae9987cbd923cc2a28f9b",
+      "crop_xywh": [
+        136,
+        112,
+        345,
+        523
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        543,
+        724
+      ],
+      "gutter_xy": [
+        62,
+        89
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.05660377358490566,
+      "content_anchor_xy": [
+        10,
+        30
+      ],
+      "feet_source_xy": [
+        308,
+        635
+      ],
+      "body_reference_height": 530,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "harvest",
+      "frame": 0,
+      "seconds": 0.09,
+      "loop": false,
+      "output": "sprites/actors/harvest_0.png",
+      "output_sha256": "0d8d76ee2b73d77563e379f1545817fc38aa9d61ca424365ea2536ddc1628097",
+      "prompt": "implementation/sprites/generation/0005-harvest.prompt.txt",
+      "prompt_sha256": "f18cc992c3329a78d9b9be2e9d36e9e43c1957aae78f7d618682e9a3478f67c3",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_west.png",
+          "role": "accepted west silhouette/clothing reference",
+          "sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0005",
+      "revision": 0,
+      "approval": "Reviewed native/3x four-phase silhouette, tool clearance and boot contact"
+    },
+    {
+      "id": "actors/harvest_1",
+      "owner": "raster",
+      "source": "assets/art_source/player/harvest.png",
+      "source_sha256": "c68daa632960f22f0346c4c92e70e5ebd18cee33fefae9987cbd923cc2a28f9b",
+      "crop_xywh": [
+        606,
+        186,
+        393,
+        458
+      ],
+      "sheet_cell_xywh": [
+        543,
+        0,
+        522,
+        724
+      ],
+      "gutter_xy": [
+        63,
+        80
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.05660377358490566,
+      "content_anchor_xy": [
+        17,
+        26
+      ],
+      "feet_source_xy": [
+        914,
+        644
+      ],
+      "body_reference_height": 530,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "harvest",
+      "frame": 1,
+      "seconds": 0.09,
+      "loop": false,
+      "output": "sprites/actors/harvest_1.png",
+      "output_sha256": "8f4c2fcead7a7d50fa7c5f9c15c9fd06a37e666a5885a239ef1856efb23a1952",
+      "prompt": "implementation/sprites/generation/0005-harvest.prompt.txt",
+      "prompt_sha256": "f18cc992c3329a78d9b9be2e9d36e9e43c1957aae78f7d618682e9a3478f67c3",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_west.png",
+          "role": "accepted west silhouette/clothing reference",
+          "sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0005",
+      "revision": 0,
+      "approval": "Reviewed native/3x four-phase silhouette, tool clearance and boot contact"
+    },
+    {
+      "id": "actors/harvest_2",
+      "owner": "raster",
+      "source": "assets/art_source/player/harvest.png",
+      "source_sha256": "c68daa632960f22f0346c4c92e70e5ebd18cee33fefae9987cbd923cc2a28f9b",
+      "crop_xywh": [
+        1132,
+        110,
+        384,
+        525
+      ],
+      "sheet_cell_xywh": [
+        1065,
+        0,
+        550,
+        724
+      ],
+      "gutter_xy": [
+        67,
+        89
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.05660377358490566,
+      "content_anchor_xy": [
+        12,
+        30
+      ],
+      "feet_source_xy": [
+        1344,
+        635
+      ],
+      "body_reference_height": 530,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "harvest",
+      "frame": 2,
+      "seconds": 0.09,
+      "loop": false,
+      "output": "sprites/actors/harvest_2.png",
+      "output_sha256": "87c5fb6eac7e23ee8e9c7b88f5db9abb8c9c8970b93d2d66abeaedc9765bf180",
+      "prompt": "implementation/sprites/generation/0005-harvest.prompt.txt",
+      "prompt_sha256": "f18cc992c3329a78d9b9be2e9d36e9e43c1957aae78f7d618682e9a3478f67c3",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_west.png",
+          "role": "accepted west silhouette/clothing reference",
+          "sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0005",
+      "revision": 0,
+      "approval": "Reviewed native/3x four-phase silhouette, tool clearance and boot contact"
+    },
+    {
+      "id": "actors/harvest_3",
+      "owner": "raster",
+      "source": "assets/art_source/player/harvest.png",
+      "source_sha256": "c68daa632960f22f0346c4c92e70e5ebd18cee33fefae9987cbd923cc2a28f9b",
+      "crop_xywh": [
+        1714,
+        105,
+        360,
+        530
+      ],
+      "sheet_cell_xywh": [
+        1615,
+        0,
+        557,
+        724
+      ],
+      "gutter_xy": [
+        98,
+        89
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.05660377358490566,
+      "content_anchor_xy": [
+        10,
+        30
+      ],
+      "feet_source_xy": [
+        1898,
+        635
+      ],
+      "body_reference_height": 530,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "harvest",
+      "frame": 3,
+      "seconds": 0.09,
+      "loop": false,
+      "output": "sprites/actors/harvest_3.png",
+      "output_sha256": "e10630c854c8d1306a09cc450815b0548a4358e53d21d6a8d77f091044dc04f3",
+      "prompt": "implementation/sprites/generation/0005-harvest.prompt.txt",
+      "prompt_sha256": "f18cc992c3329a78d9b9be2e9d36e9e43c1957aae78f7d618682e9a3478f67c3",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_west.png",
+          "role": "accepted west silhouette/clothing reference",
+          "sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0005",
+      "revision": 0,
+      "approval": "Reviewed native/3x four-phase silhouette, tool clearance and boot contact"
+    },
+    {
+      "id": "actors/carry_0",
+      "owner": "raster",
+      "source": "assets/art_source/player/carry.png",
+      "source_sha256": "ee467474a800b53b60d8cbd2bed2d8cb58274131879b2d51ca635ee312695d0a",
+      "crop_xywh": [
+        156,
+        108,
+        345,
+        523
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        577,
+        724
+      ],
+      "gutter_xy": [
+        76,
+        93
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.05725190839694656,
+      "content_anchor_xy": [
+        10,
+        30
+      ],
+      "feet_source_xy": [
+        322,
+        631
+      ],
+      "body_reference_height": 524,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "carry",
+      "frame": 0,
+      "seconds": 0.09,
+      "loop": false,
+      "output": "sprites/actors/carry_0.png",
+      "output_sha256": "c9de9622e2fa13e0787a226bf1dfa037157a232deee9da4d7965a92ac0f64f10",
+      "prompt": "implementation/sprites/generation/0005-carry.prompt.txt",
+      "prompt_sha256": "428d93cd4562bbdb17d13fcdd48c1b7bdcf4c829f8938075043c90bccccc2817",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_west.png",
+          "role": "accepted west silhouette/clothing reference",
+          "sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0005",
+      "revision": 0,
+      "approval": "Reviewed native/3x four-phase silhouette, tool clearance and boot contact"
+    },
+    {
+      "id": "actors/carry_1",
+      "owner": "raster",
+      "source": "assets/art_source/player/carry.png",
+      "source_sha256": "ee467474a800b53b60d8cbd2bed2d8cb58274131879b2d51ca635ee312695d0a",
+      "crop_xywh": [
+        654,
+        107,
+        346,
+        524
+      ],
+      "sheet_cell_xywh": [
+        577,
+        0,
+        525,
+        724
+      ],
+      "gutter_xy": [
+        77,
+        93
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.05725190839694656,
+      "content_anchor_xy": [
+        12,
+        30
+      ],
+      "feet_source_xy": [
+        868,
+        631
+      ],
+      "body_reference_height": 524,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "carry",
+      "frame": 1,
+      "seconds": 0.09,
+      "loop": false,
+      "output": "sprites/actors/carry_1.png",
+      "output_sha256": "d06e42ac6ddcb32fe3361249c32cb263337a3b8b95eb7a86e9e3476709da56ab",
+      "prompt": "implementation/sprites/generation/0005-carry.prompt.txt",
+      "prompt_sha256": "428d93cd4562bbdb17d13fcdd48c1b7bdcf4c829f8938075043c90bccccc2817",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_west.png",
+          "role": "accepted west silhouette/clothing reference",
+          "sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0005",
+      "revision": 0,
+      "approval": "Reviewed native/3x four-phase silhouette, tool clearance and boot contact"
+    },
+    {
+      "id": "actors/carry_2",
+      "owner": "raster",
+      "source": "assets/art_source/player/carry.png",
+      "source_sha256": "ee467474a800b53b60d8cbd2bed2d8cb58274131879b2d51ca635ee312695d0a",
+      "crop_xywh": [
+        1204,
+        107,
+        355,
+        524
+      ],
+      "sheet_cell_xywh": [
+        1102,
+        0,
+        515,
+        724
+      ],
+      "gutter_xy": [
+        58,
+        93
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.05725190839694656,
+      "content_anchor_xy": [
+        9,
+        30
+      ],
+      "feet_source_xy": [
+        1364,
+        631
+      ],
+      "body_reference_height": 524,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "carry",
+      "frame": 2,
+      "seconds": 0.09,
+      "loop": false,
+      "output": "sprites/actors/carry_2.png",
+      "output_sha256": "8e6a062a6e7321546ce11066ca097c64cd2bffd03b54399cc0a882b5eb56ef07",
+      "prompt": "implementation/sprites/generation/0005-carry.prompt.txt",
+      "prompt_sha256": "428d93cd4562bbdb17d13fcdd48c1b7bdcf4c829f8938075043c90bccccc2817",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_west.png",
+          "role": "accepted west silhouette/clothing reference",
+          "sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0005",
+      "revision": 0,
+      "approval": "Reviewed native/3x four-phase silhouette, tool clearance and boot contact"
+    },
+    {
+      "id": "actors/carry_3",
+      "owner": "raster",
+      "source": "assets/art_source/player/carry.png",
+      "source_sha256": "ee467474a800b53b60d8cbd2bed2d8cb58274131879b2d51ca635ee312695d0a",
+      "crop_xywh": [
+        1675,
+        107,
+        346,
+        524
+      ],
+      "sheet_cell_xywh": [
+        1617,
+        0,
+        555,
+        724
+      ],
+      "gutter_xy": [
+        58,
+        93
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.05725190839694656,
+      "content_anchor_xy": [
+        10,
+        30
+      ],
+      "feet_source_xy": [
+        1848,
+        631
+      ],
+      "body_reference_height": 524,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "carry",
+      "frame": 3,
+      "seconds": 0.09,
+      "loop": false,
+      "output": "sprites/actors/carry_3.png",
+      "output_sha256": "426b3402047b4089da6a6e2312e7c503f14195a5fefe07b18169f2e92026f381",
+      "prompt": "implementation/sprites/generation/0005-carry.prompt.txt",
+      "prompt_sha256": "428d93cd4562bbdb17d13fcdd48c1b7bdcf4c829f8938075043c90bccccc2817",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_west.png",
+          "role": "accepted west silhouette/clothing reference",
+          "sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0005",
+      "revision": 0,
+      "approval": "Reviewed native/3x four-phase silhouette, tool clearance and boot contact"
+    },
+    {
+      "id": "actors/craft_0",
+      "owner": "raster",
+      "source": "assets/art_source/player/craft.png",
+      "source_sha256": "dfd18f36feeede515949517009edb966dce862cdbdb23764abd576521b6e9d76",
+      "crop_xywh": [
+        91,
+        83,
+        380,
+        568
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        540,
+        724
+      ],
+      "gutter_xy": [
+        69,
+        73
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.05253940455341506,
+      "content_anchor_xy": [
+        10,
+        30
+      ],
+      "feet_source_xy": [
+        278,
+        651
+      ],
+      "body_reference_height": 571,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "craft",
+      "frame": 0,
+      "seconds": 0.09,
+      "loop": false,
+      "output": "sprites/actors/craft_0.png",
+      "output_sha256": "89653b28d9d41bb4da4d5964f0a8149b4fdc4850a7850f1a8d8f8e75a1c664ba",
+      "prompt": "implementation/sprites/generation/0005-craft.prompt.txt",
+      "prompt_sha256": "f8ad7368c10f21762e643b44418f487947959d353a79002219c07f9d311f9db8",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_west.png",
+          "role": "accepted west silhouette/clothing reference",
+          "sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0005",
+      "revision": 0,
+      "approval": "Reviewed native/3x four-phase silhouette, tool clearance and boot contact"
+    },
+    {
+      "id": "actors/craft_1",
+      "owner": "raster",
+      "source": "assets/art_source/player/craft.png",
+      "source_sha256": "dfd18f36feeede515949517009edb966dce862cdbdb23764abd576521b6e9d76",
+      "crop_xywh": [
+        609,
+        82,
+        396,
+        569
+      ],
+      "sheet_cell_xywh": [
+        540,
+        0,
+        543,
+        724
+      ],
+      "gutter_xy": [
+        69,
+        73
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.05253940455341506,
+      "content_anchor_xy": [
+        12,
+        30
+      ],
+      "feet_source_xy": [
+        833,
+        651
+      ],
+      "body_reference_height": 571,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "craft",
+      "frame": 1,
+      "seconds": 0.09,
+      "loop": false,
+      "output": "sprites/actors/craft_1.png",
+      "output_sha256": "bb56728ad565501b615089284be2ebeca17f93dee37ecede8567537f92d812f5",
+      "prompt": "implementation/sprites/generation/0005-craft.prompt.txt",
+      "prompt_sha256": "f8ad7368c10f21762e643b44418f487947959d353a79002219c07f9d311f9db8",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_west.png",
+          "role": "accepted west silhouette/clothing reference",
+          "sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0005",
+      "revision": 0,
+      "approval": "Reviewed native/3x four-phase silhouette, tool clearance and boot contact"
+    },
+    {
+      "id": "actors/craft_2",
+      "owner": "raster",
+      "source": "assets/art_source/player/craft.png",
+      "source_sha256": "dfd18f36feeede515949517009edb966dce862cdbdb23764abd576521b6e9d76",
+      "crop_xywh": [
+        1161,
+        83,
+        381,
+        568
+      ],
+      "sheet_cell_xywh": [
+        1083,
+        0,
+        540,
+        724
+      ],
+      "gutter_xy": [
+        78,
+        73
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.05253940455341506,
+      "content_anchor_xy": [
+        10,
+        30
+      ],
+      "feet_source_xy": [
+        1359,
+        651
+      ],
+      "body_reference_height": 571,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "craft",
+      "frame": 2,
+      "seconds": 0.09,
+      "loop": false,
+      "output": "sprites/actors/craft_2.png",
+      "output_sha256": "2c9638f8f853ed60db81a7e20078502c349b5a7a90c1a6b5a11807b57b1ffc29",
+      "prompt": "implementation/sprites/generation/0005-craft.prompt.txt",
+      "prompt_sha256": "f8ad7368c10f21762e643b44418f487947959d353a79002219c07f9d311f9db8",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_west.png",
+          "role": "accepted west silhouette/clothing reference",
+          "sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0005",
+      "revision": 0,
+      "approval": "Reviewed native/3x four-phase silhouette, tool clearance and boot contact"
+    },
+    {
+      "id": "actors/craft_3",
+      "owner": "raster",
+      "source": "assets/art_source/player/craft.png",
+      "source_sha256": "dfd18f36feeede515949517009edb966dce862cdbdb23764abd576521b6e9d76",
+      "crop_xywh": [
+        1704,
+        80,
+        375,
+        571
+      ],
+      "sheet_cell_xywh": [
+        1623,
+        0,
+        549,
+        724
+      ],
+      "gutter_xy": [
+        81,
+        73
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.05253940455341506,
+      "content_anchor_xy": [
+        9,
+        30
+      ],
+      "feet_source_xy": [
+        1883,
+        651
+      ],
+      "body_reference_height": 571,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "craft",
+      "frame": 3,
+      "seconds": 0.09,
+      "loop": false,
+      "output": "sprites/actors/craft_3.png",
+      "output_sha256": "9cd2f2150f553cb6068995257ffab9bb96a3f0d9d26b22127d45e7369c61eb05",
+      "prompt": "implementation/sprites/generation/0005-craft.prompt.txt",
+      "prompt_sha256": "f8ad7368c10f21762e643b44418f487947959d353a79002219c07f9d311f9db8",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_west.png",
+          "role": "accepted west silhouette/clothing reference",
+          "sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0005",
+      "revision": 0,
+      "approval": "Reviewed native/3x four-phase silhouette, tool clearance and boot contact"
+    },
+    {
+      "id": "actors/trade_0",
+      "owner": "raster",
+      "source": "assets/art_source/player/trade.png",
+      "source_sha256": "3d2b4381fa8d726bc0fd2dffead64ad917113ebe2638427336847656cb7a88c7",
+      "crop_xywh": [
+        100,
+        101,
+        352,
+        555
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        520,
+        724
+      ],
+      "gutter_xy": [
+        68,
+        68
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.05385996409335727,
+      "content_anchor_xy": [
+        9,
+        30
+      ],
+      "feet_source_xy": [
+        272,
+        656
+      ],
+      "body_reference_height": 557,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "trade",
+      "frame": 0,
+      "seconds": 0.09,
+      "loop": false,
+      "output": "sprites/actors/trade_0.png",
+      "output_sha256": "58fd1eaa6e686237a39fae3871afaa04585ad5155b95422e823fe3a50bf19cba",
+      "prompt": "implementation/sprites/generation/0005-trade.prompt.txt",
+      "prompt_sha256": "2f96cab741447cd03b748b0809e4d95a783a645f9828659e6251b2680bb5e527",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_west.png",
+          "role": "accepted west silhouette/clothing reference",
+          "sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0005",
+      "revision": 0,
+      "approval": "Reviewed native/3x four-phase silhouette, tool clearance and boot contact"
+    },
+    {
+      "id": "actors/trade_1",
+      "owner": "raster",
+      "source": "assets/art_source/player/trade.png",
+      "source_sha256": "3d2b4381fa8d726bc0fd2dffead64ad917113ebe2638427336847656cb7a88c7",
+      "crop_xywh": [
+        588,
+        97,
+        410,
+        559
+      ],
+      "sheet_cell_xywh": [
+        520,
+        0,
+        548,
+        724
+      ],
+      "gutter_xy": [
+        68,
+        68
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.05385996409335727,
+      "content_anchor_xy": [
+        12,
+        30
+      ],
+      "feet_source_xy": [
+        818,
+        656
+      ],
+      "body_reference_height": 557,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "trade",
+      "frame": 1,
+      "seconds": 0.09,
+      "loop": false,
+      "output": "sprites/actors/trade_1.png",
+      "output_sha256": "ae065fc079e06f2106e53744b8e906b09d1400a74175a72ce425d363309336a7",
+      "prompt": "implementation/sprites/generation/0005-trade.prompt.txt",
+      "prompt_sha256": "2f96cab741447cd03b748b0809e4d95a783a645f9828659e6251b2680bb5e527",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_west.png",
+          "role": "accepted west silhouette/clothing reference",
+          "sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0005",
+      "revision": 0,
+      "approval": "Reviewed native/3x four-phase silhouette, tool clearance and boot contact"
+    },
+    {
+      "id": "actors/trade_2",
+      "owner": "raster",
+      "source": "assets/art_source/player/trade.png",
+      "source_sha256": "3d2b4381fa8d726bc0fd2dffead64ad917113ebe2638427336847656cb7a88c7",
+      "crop_xywh": [
+        1138,
+        99,
+        402,
+        557
+      ],
+      "sheet_cell_xywh": [
+        1068,
+        0,
+        566,
+        724
+      ],
+      "gutter_xy": [
+        70,
+        68
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.05385996409335727,
+      "content_anchor_xy": [
+        12,
+        30
+      ],
+      "feet_source_xy": [
+        1359,
+        656
+      ],
+      "body_reference_height": 557,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "trade",
+      "frame": 2,
+      "seconds": 0.09,
+      "loop": false,
+      "output": "sprites/actors/trade_2.png",
+      "output_sha256": "160f2b5c7401b399df42297144d1bb5626055b8c4dc945d01fcadc09c13e5ac1",
+      "prompt": "implementation/sprites/generation/0005-trade.prompt.txt",
+      "prompt_sha256": "2f96cab741447cd03b748b0809e4d95a783a645f9828659e6251b2680bb5e527",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_west.png",
+          "role": "accepted west silhouette/clothing reference",
+          "sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0005",
+      "revision": 0,
+      "approval": "Reviewed native/3x four-phase silhouette, tool clearance and boot contact"
+    },
+    {
+      "id": "actors/trade_3",
+      "owner": "raster",
+      "source": "assets/art_source/player/trade.png",
+      "source_sha256": "3d2b4381fa8d726bc0fd2dffead64ad917113ebe2638427336847656cb7a88c7",
+      "crop_xywh": [
+        1728,
+        99,
+        353,
+        557
+      ],
+      "sheet_cell_xywh": [
+        1634,
+        0,
+        538,
+        724
+      ],
+      "gutter_xy": [
+        91,
+        68
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.05385996409335727,
+      "content_anchor_xy": [
+        9,
+        30
+      ],
+      "feet_source_xy": [
+        1900,
+        656
+      ],
+      "body_reference_height": 557,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "trade",
+      "frame": 3,
+      "seconds": 0.09,
+      "loop": false,
+      "output": "sprites/actors/trade_3.png",
+      "output_sha256": "d20b8ebdfa104f1f2304c6985d93ea8d52fb8c39a1f2607411c1353c0012efaf",
+      "prompt": "implementation/sprites/generation/0005-trade.prompt.txt",
+      "prompt_sha256": "2f96cab741447cd03b748b0809e4d95a783a645f9828659e6251b2680bb5e527",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_west.png",
+          "role": "accepted west silhouette/clothing reference",
+          "sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0005",
+      "revision": 0,
+      "approval": "Reviewed native/3x four-phase silhouette, tool clearance and boot contact"
+    },
+    {
+      "id": "actors/collect_0",
+      "owner": "raster",
+      "source": "assets/art_source/player/collect.png",
+      "source_sha256": "055e45207f67ecf0d1966c94851a53e2dd18806065bf7d79910cb4ed5062cc20",
+      "crop_xywh": [
+        128,
+        99,
+        357,
+        541
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        558,
+        724
+      ],
+      "gutter_xy": [
+        73,
+        84
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.055350553505535055,
+      "content_anchor_xy": [
+        9,
+        30
+      ],
+      "feet_source_xy": [
+        294,
+        640
+      ],
+      "body_reference_height": 542,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "collect",
+      "frame": 0,
+      "seconds": 0.09,
+      "loop": false,
+      "output": "sprites/actors/collect_0.png",
+      "output_sha256": "dbf935f484ac9beba502e0e7608fc1bb3600aad08c609e7c019237e831d71055",
+      "prompt": "implementation/sprites/generation/0005-collect.prompt.txt",
+      "prompt_sha256": "ad32e8cfecc074f94ce497a5cfb40e034e018369f5abc715152341f1c5560786",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_west.png",
+          "role": "accepted west silhouette/clothing reference",
+          "sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0005",
+      "revision": 0,
+      "approval": "Reviewed native/3x four-phase silhouette, tool clearance and boot contact"
+    },
+    {
+      "id": "actors/collect_1",
+      "owner": "raster",
+      "source": "assets/art_source/player/collect.png",
+      "source_sha256": "055e45207f67ecf0d1966c94851a53e2dd18806065bf7d79910cb4ed5062cc20",
+      "crop_xywh": [
+        631,
+        154,
+        387,
+        486
+      ],
+      "sheet_cell_xywh": [
+        558,
+        0,
+        547,
+        724
+      ],
+      "gutter_xy": [
+        73,
+        84
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.055350553505535055,
+      "content_anchor_xy": [
+        15,
+        27
+      ],
+      "feet_source_xy": [
+        898,
+        640
+      ],
+      "body_reference_height": 542,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "collect",
+      "frame": 1,
+      "seconds": 0.09,
+      "loop": false,
+      "output": "sprites/actors/collect_1.png",
+      "output_sha256": "7796c13988b68b84f5750c38a9788799c5fb52542458e51d2b699c7dea8b2241",
+      "prompt": "implementation/sprites/generation/0005-collect.prompt.txt",
+      "prompt_sha256": "ad32e8cfecc074f94ce497a5cfb40e034e018369f5abc715152341f1c5560786",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_west.png",
+          "role": "accepted west silhouette/clothing reference",
+          "sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0005",
+      "revision": 0,
+      "approval": "Reviewed native/3x four-phase silhouette, tool clearance and boot contact"
+    },
+    {
+      "id": "actors/collect_2",
+      "owner": "raster",
+      "source": "assets/art_source/player/collect.png",
+      "source_sha256": "055e45207f67ecf0d1966c94851a53e2dd18806065bf7d79910cb4ed5062cc20",
+      "crop_xywh": [
+        1192,
+        98,
+        355,
+        542
+      ],
+      "sheet_cell_xywh": [
+        1105,
+        0,
+        536,
+        724
+      ],
+      "gutter_xy": [
+        87,
+        84
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.055350553505535055,
+      "content_anchor_xy": [
+        10,
+        30
+      ],
+      "feet_source_xy": [
+        1374,
+        640
+      ],
+      "body_reference_height": 542,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "collect",
+      "frame": 2,
+      "seconds": 0.09,
+      "loop": false,
+      "output": "sprites/actors/collect_2.png",
+      "output_sha256": "34ed7e14f399191c35d8869f1d3118f123c4f2d8d3d1a7ce5ba1373701d38e67",
+      "prompt": "implementation/sprites/generation/0005-collect.prompt.txt",
+      "prompt_sha256": "ad32e8cfecc074f94ce497a5cfb40e034e018369f5abc715152341f1c5560786",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_west.png",
+          "role": "accepted west silhouette/clothing reference",
+          "sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0005",
+      "revision": 0,
+      "approval": "Reviewed native/3x four-phase silhouette, tool clearance and boot contact"
+    },
+    {
+      "id": "actors/collect_3",
+      "owner": "raster",
+      "source": "assets/art_source/player/collect.png",
+      "source_sha256": "055e45207f67ecf0d1966c94851a53e2dd18806065bf7d79910cb4ed5062cc20",
+      "crop_xywh": [
+        1735,
+        98,
+        354,
+        542
+      ],
+      "sheet_cell_xywh": [
+        1641,
+        0,
+        531,
+        724
+      ],
+      "gutter_xy": [
+        83,
+        84
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.055350553505535055,
+      "content_anchor_xy": [
+        10,
+        30
+      ],
+      "feet_source_xy": [
+        1917,
+        640
+      ],
+      "body_reference_height": 542,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "collect",
+      "frame": 3,
+      "seconds": 0.09,
+      "loop": false,
+      "output": "sprites/actors/collect_3.png",
+      "output_sha256": "d09cf5983e1911dd2dfa72530af21d09c008a9565bf359e19acbfe7c6d3b8888",
+      "prompt": "implementation/sprites/generation/0005-collect.prompt.txt",
+      "prompt_sha256": "ad32e8cfecc074f94ce497a5cfb40e034e018369f5abc715152341f1c5560786",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_west.png",
+          "role": "accepted west silhouette/clothing reference",
+          "sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0005",
+      "revision": 0,
+      "approval": "Reviewed native/3x four-phase silhouette, tool clearance and boot contact"
+    },
+    {
+      "id": "actors/repair_0",
+      "owner": "raster",
+      "source": "assets/art_source/player/repair.png",
+      "source_sha256": "ed0545d9288dbed674615b54774c1f3246279b1928f71534113602b5a000165a",
+      "crop_xywh": [
+        104,
+        120,
+        390,
+        509
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        568,
+        724
+      ],
+      "gutter_xy": [
+        74,
+        95
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.05893909626719057,
+      "content_anchor_xy": [
+        15,
+        30
+      ],
+      "feet_source_xy": [
+        356,
+        629
+      ],
+      "body_reference_height": 509,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "repair",
+      "frame": 0,
+      "seconds": 0.09,
+      "loop": false,
+      "output": "sprites/actors/repair_0.png",
+      "output_sha256": "5ab7c1bd1c72264b24539420ea5a358fb593143c016142886db3c081c366bb87",
+      "prompt": "implementation/sprites/generation/0005-repair.prompt.txt",
+      "prompt_sha256": "cd6248d56d71c842a58c4e2baa616a6fb9e194e27162e2effc2ce0d3cee796ea",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_west.png",
+          "role": "accepted west silhouette/clothing reference",
+          "sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0005",
+      "revision": 0,
+      "approval": "Reviewed native/3x four-phase silhouette, tool clearance and boot contact"
+    },
+    {
+      "id": "actors/repair_1",
+      "owner": "raster",
+      "source": "assets/art_source/player/repair.png",
+      "source_sha256": "ed0545d9288dbed674615b54774c1f3246279b1928f71534113602b5a000165a",
+      "crop_xywh": [
+        642,
+        121,
+        365,
+        508
+      ],
+      "sheet_cell_xywh": [
+        568,
+        0,
+        513,
+        724
+      ],
+      "gutter_xy": [
+        74,
+        95
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.05893909626719057,
+      "content_anchor_xy": [
+        15,
+        30
+      ],
+      "feet_source_xy": [
+        889,
+        629
+      ],
+      "body_reference_height": 509,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "repair",
+      "frame": 1,
+      "seconds": 0.09,
+      "loop": false,
+      "output": "sprites/actors/repair_1.png",
+      "output_sha256": "1ea6d8a5e23be861cefa116320615989f6d5e4b64a458e0c78b753e496821325",
+      "prompt": "implementation/sprites/generation/0005-repair.prompt.txt",
+      "prompt_sha256": "cd6248d56d71c842a58c4e2baa616a6fb9e194e27162e2effc2ce0d3cee796ea",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_west.png",
+          "role": "accepted west silhouette/clothing reference",
+          "sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0005",
+      "revision": 0,
+      "approval": "Reviewed native/3x four-phase silhouette, tool clearance and boot contact"
+    },
+    {
+      "id": "actors/repair_2",
+      "owner": "raster",
+      "source": "assets/art_source/player/repair.png",
+      "source_sha256": "ed0545d9288dbed674615b54774c1f3246279b1928f71534113602b5a000165a",
+      "crop_xywh": [
+        1155,
+        121,
+        361,
+        508
+      ],
+      "sheet_cell_xywh": [
+        1081,
+        0,
+        497,
+        724
+      ],
+      "gutter_xy": [
+        62,
+        95
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.05893909626719057,
+      "content_anchor_xy": [
+        14,
+        30
+      ],
+      "feet_source_xy": [
+        1399,
+        629
+      ],
+      "body_reference_height": 509,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "repair",
+      "frame": 2,
+      "seconds": 0.09,
+      "loop": false,
+      "output": "sprites/actors/repair_2.png",
+      "output_sha256": "5113baebd21b78dc1f7376566a246efed22bdf8663945f335615cb5c126db74f",
+      "prompt": "implementation/sprites/generation/0005-repair.prompt.txt",
+      "prompt_sha256": "cd6248d56d71c842a58c4e2baa616a6fb9e194e27162e2effc2ce0d3cee796ea",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_west.png",
+          "role": "accepted west silhouette/clothing reference",
+          "sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0005",
+      "revision": 0,
+      "approval": "Reviewed native/3x four-phase silhouette, tool clearance and boot contact"
+    },
+    {
+      "id": "actors/repair_3",
+      "owner": "raster",
+      "source": "assets/art_source/player/repair.png",
+      "source_sha256": "ed0545d9288dbed674615b54774c1f3246279b1928f71534113602b5a000165a",
+      "crop_xywh": [
+        1640,
+        120,
+        370,
+        509
+      ],
+      "sheet_cell_xywh": [
+        1578,
+        0,
+        594,
+        724
+      ],
+      "gutter_xy": [
+        62,
+        95
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.05893909626719057,
+      "content_anchor_xy": [
+        15,
+        30
+      ],
+      "feet_source_xy": [
+        1888,
+        629
+      ],
+      "body_reference_height": 509,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "repair",
+      "frame": 3,
+      "seconds": 0.09,
+      "loop": false,
+      "output": "sprites/actors/repair_3.png",
+      "output_sha256": "5d0168f688df7826a71dfda0d804efa3c41dff4608f5e615fea8daf26ce1a0b7",
+      "prompt": "implementation/sprites/generation/0005-repair.prompt.txt",
+      "prompt_sha256": "cd6248d56d71c842a58c4e2baa616a6fb9e194e27162e2effc2ce0d3cee796ea",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_west.png",
+          "role": "accepted west silhouette/clothing reference",
+          "sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0005",
+      "revision": 0,
+      "approval": "Reviewed native/3x four-phase silhouette, tool clearance and boot contact"
     }
   ]
 }

@@ -1,0 +1,1131 @@
+{
+  "date": "2026-10-01",
+  "canvas_wh": [
+    48,
+    48
+  ],
+  "pivot_xy": [
+    24,
+    44
+  ],
+  "animations": [
+    {
+      "name": "chop",
+      "source": "assets/art_source/player/chop.png",
+      "source_sha256": "a9e8f337065eea10a39559d98625ec6b9e3a57d35181fb626997c6f7af1c31a1",
+      "source_wh": [
+        2172,
+        724
+      ],
+      "content_scale": 0.06,
+      "poses": [
+        {
+          "crop_xywh": [
+            120,
+            69,
+            373,
+            576
+          ],
+          "feet_source_xy": [
+            294,
+            645
+          ],
+          "hat_source_y": 146,
+          "body_height": 499,
+          "content_anchor_xy": [
+            10,
+            35
+          ]
+        },
+        {
+          "crop_xywh": [
+            540,
+            147,
+            460,
+            498
+          ],
+          "feet_source_xy": [
+            875,
+            645
+          ],
+          "hat_source_y": 156,
+          "body_height": 489,
+          "content_anchor_xy": [
+            20,
+            30
+          ]
+        },
+        {
+          "crop_xywh": [
+            1078,
+            146,
+            499,
+            499
+          ],
+          "feet_source_xy": [
+            1446,
+            645
+          ],
+          "hat_source_y": 156,
+          "body_height": 489,
+          "content_anchor_xy": [
+            22,
+            30
+          ]
+        },
+        {
+          "crop_xywh": [
+            1736,
+            145,
+            388,
+            500
+          ],
+          "feet_source_xy": [
+            1910,
+            645
+          ],
+          "hat_source_y": 145,
+          "body_height": 500,
+          "content_anchor_xy": [
+            10,
+            30
+          ]
+        }
+      ],
+      "unique_native": 4,
+      "errors": []
+    },
+    {
+      "name": "mine",
+      "source": "assets/art_source/player/mine.png",
+      "source_sha256": "0d95e238f1bc5aff89c1cf090fcaa5b458870d44236a941815fbd4f23be29a2f",
+      "source_wh": [
+        2172,
+        724
+      ],
+      "content_scale": 0.058823529411764705,
+      "poses": [
+        {
+          "crop_xywh": [
+            75,
+            52,
+            417,
+            606
+          ],
+          "feet_source_xy": [
+            277,
+            658
+          ],
+          "hat_source_y": 146,
+          "body_height": 512,
+          "content_anchor_xy": [
+            12,
+            36
+          ]
+        },
+        {
+          "crop_xywh": [
+            592,
+            172,
+            448,
+            503
+          ],
+          "feet_source_xy": [
+            898,
+            658
+          ],
+          "hat_source_y": 182,
+          "body_height": 476,
+          "content_anchor_xy": [
+            18,
+            29
+          ]
+        },
+        {
+          "crop_xywh": [
+            1084,
+            166,
+            524,
+            492
+          ],
+          "feet_source_xy": [
+            1463,
+            658
+          ],
+          "hat_source_y": 175,
+          "body_height": 483,
+          "content_anchor_xy": [
+            22,
+            29
+          ]
+        },
+        {
+          "crop_xywh": [
+            1736,
+            52,
+            405,
+            606
+          ],
+          "feet_source_xy": [
+            1948,
+            658
+          ],
+          "hat_source_y": 148,
+          "body_height": 510,
+          "content_anchor_xy": [
+            12,
+            36
+          ]
+        }
+      ],
+      "unique_native": 4,
+      "errors": []
+    },
+    {
+      "name": "till",
+      "source": "assets/art_source/player/till.png",
+      "source_sha256": "81d9240acc8ccb00a67c406b01e12af7640d4f8027c3e44f3a811df3bd36adeb",
+      "source_wh": [
+        2172,
+        724
+      ],
+      "content_scale": 0.06109979633401222,
+      "poses": [
+        {
+          "crop_xywh": [
+            39,
+            131,
+            490,
+            490
+          ],
+          "feet_source_xy": [
+            393,
+            621
+          ],
+          "hat_source_y": 131,
+          "body_height": 490,
+          "content_anchor_xy": [
+            22,
+            30
+          ]
+        },
+        {
+          "crop_xywh": [
+            611,
+            160,
+            407,
+            462
+          ],
+          "feet_source_xy": [
+            907,
+            622
+          ],
+          "hat_source_y": 172,
+          "body_height": 450,
+          "content_anchor_xy": [
+            18,
+            28
+          ]
+        },
+        {
+          "crop_xywh": [
+            1159,
+            160,
+            407,
+            462
+          ],
+          "feet_source_xy": [
+            1454,
+            622
+          ],
+          "hat_source_y": 172,
+          "body_height": 450,
+          "content_anchor_xy": [
+            18,
+            28
+          ]
+        },
+        {
+          "crop_xywh": [
+            1653,
+            131,
+            465,
+            491
+          ],
+          "feet_source_xy": [
+            1993,
+            622
+          ],
+          "hat_source_y": 131,
+          "body_height": 491,
+          "content_anchor_xy": [
+            21,
+            30
+          ]
+        }
+      ],
+      "unique_native": 4,
+      "errors": []
+    },
+    {
+      "name": "plant",
+      "source": "assets/art_source/player/plant.png",
+      "source_sha256": "f679e7e435d3b5240f465f5f5117da379de4fd2e5518e92458466bca0168438f",
+      "source_wh": [
+        2172,
+        724
+      ],
+      "content_scale": 0.05628517823639775,
+      "poses": [
+        {
+          "crop_xywh": [
+            167,
+            107,
+            371,
+            533
+          ],
+          "feet_source_xy": [
+            353,
+            640
+          ],
+          "hat_source_y": 107,
+          "body_height": 533,
+          "content_anchor_xy": [
+            10,
+            30
+          ]
+        },
+        {
+          "crop_xywh": [
+            640,
+            135,
+            381,
+            505
+          ],
+          "feet_source_xy": [
+            904,
+            640
+          ],
+          "hat_source_y": 144,
+          "body_height": 496,
+          "content_anchor_xy": [
+            15,
+            28
+          ]
+        },
+        {
+          "crop_xywh": [
+            1140,
+            135,
+            381,
+            505
+          ],
+          "feet_source_xy": [
+            1404,
+            640
+          ],
+          "hat_source_y": 144,
+          "body_height": 496,
+          "content_anchor_xy": [
+            15,
+            28
+          ]
+        },
+        {
+          "crop_xywh": [
+            1674,
+            107,
+            372,
+            533
+          ],
+          "feet_source_xy": [
+            1860,
+            640
+          ],
+          "hat_source_y": 107,
+          "body_height": 533,
+          "content_anchor_xy": [
+            10,
+            30
+          ]
+        }
+      ],
+      "unique_native": 4,
+      "errors": []
+    },
+    {
+      "name": "water",
+      "source": "assets/art_source/player/water.png",
+      "source_sha256": "0630be3bf0f17264b7ccc27397da79b4b825d0de118df65443456496725af5be",
+      "source_wh": [
+        2172,
+        724
+      ],
+      "content_scale": 0.05415162454873646,
+      "poses": [
+        {
+          "crop_xywh": [
+            112,
+            89,
+            393,
+            554
+          ],
+          "feet_source_xy": [
+            322,
+            643
+          ],
+          "hat_source_y": 89,
+          "body_height": 554,
+          "content_anchor_xy": [
+            11,
+            30
+          ]
+        },
+        {
+          "crop_xywh": [
+            627,
+            89,
+            429,
+            554
+          ],
+          "feet_source_xy": [
+            893,
+            643
+          ],
+          "hat_source_y": 89,
+          "body_height": 554,
+          "content_anchor_xy": [
+            14,
+            30
+          ]
+        },
+        {
+          "crop_xywh": [
+            1138,
+            89,
+            461,
+            560
+          ],
+          "feet_source_xy": [
+            1440,
+            643
+          ],
+          "hat_source_y": 89,
+          "body_height": 554,
+          "content_anchor_xy": [
+            16,
+            30
+          ]
+        },
+        {
+          "crop_xywh": [
+            1737,
+            89,
+            381,
+            554
+          ],
+          "feet_source_xy": [
+            1942,
+            643
+          ],
+          "hat_source_y": 89,
+          "body_height": 554,
+          "content_anchor_xy": [
+            11,
+            30
+          ]
+        }
+      ],
+      "unique_native": 4,
+      "errors": []
+    },
+    {
+      "name": "fish",
+      "source": "assets/art_source/player/fish.png",
+      "source_sha256": "771aa2af6048cb16106f1e993912733040dbac6ab383a66d2b543cd7199a5451",
+      "source_wh": [
+        2163,
+        727
+      ],
+      "content_scale": 0.075,
+      "poses": [
+        {
+          "crop_xywh": [
+            119,
+            176,
+            323,
+            451
+          ],
+          "feet_source_xy": [
+            244,
+            627
+          ],
+          "hat_source_y": 216,
+          "body_height": 411,
+          "content_anchor_xy": [
+            9,
+            34
+          ]
+        },
+        {
+          "crop_xywh": [
+            630,
+            211,
+            389,
+            416
+          ],
+          "feet_source_xy": [
+            908,
+            627
+          ],
+          "hat_source_y": 227,
+          "body_height": 400,
+          "content_anchor_xy": [
+            21,
+            31
+          ]
+        },
+        {
+          "crop_xywh": [
+            1272,
+            226,
+            323,
+            401
+          ],
+          "feet_source_xy": [
+            1469,
+            627
+          ],
+          "hat_source_y": 226,
+          "body_height": 401,
+          "content_anchor_xy": [
+            15,
+            30
+          ]
+        },
+        {
+          "crop_xywh": [
+            1742,
+            227,
+            316,
+            400
+          ],
+          "feet_source_xy": [
+            1936,
+            627
+          ],
+          "hat_source_y": 227,
+          "body_height": 400,
+          "content_anchor_xy": [
+            15,
+            30
+          ]
+        }
+      ],
+      "unique_native": 4,
+      "errors": []
+    },
+    {
+      "name": "reel",
+      "source": "assets/art_source/player/reel.png",
+      "source_sha256": "e54358cc065be47cf4d30b2784d63f62486eb65a5275b53d30cf3a7dde3d6b2e",
+      "source_wh": [
+        2172,
+        724
+      ],
+      "content_scale": 0.06289308176100629,
+      "poses": [
+        {
+          "crop_xywh": [
+            67,
+            128,
+            507,
+            477
+          ],
+          "feet_source_xy": [
+            419,
+            605
+          ],
+          "hat_source_y": 128,
+          "body_height": 477,
+          "content_anchor_xy": [
+            22,
+            30
+          ]
+        },
+        {
+          "crop_xywh": [
+            612,
+            124,
+            464,
+            481
+          ],
+          "feet_source_xy": [
+            918,
+            605
+          ],
+          "hat_source_y": 124,
+          "body_height": 481,
+          "content_anchor_xy": [
+            19,
+            30
+          ]
+        },
+        {
+          "crop_xywh": [
+            1099,
+            128,
+            519,
+            477
+          ],
+          "feet_source_xy": [
+            1461,
+            605
+          ],
+          "hat_source_y": 128,
+          "body_height": 477,
+          "content_anchor_xy": [
+            23,
+            30
+          ]
+        },
+        {
+          "crop_xywh": [
+            1655,
+            127,
+            461,
+            478
+          ],
+          "feet_source_xy": [
+            1966,
+            605
+          ],
+          "hat_source_y": 128,
+          "body_height": 477,
+          "content_anchor_xy": [
+            20,
+            30
+          ]
+        }
+      ],
+      "unique_native": 4,
+      "errors": []
+    },
+    {
+      "name": "harvest",
+      "source": "assets/art_source/player/harvest.png",
+      "source_sha256": "c68daa632960f22f0346c4c92e70e5ebd18cee33fefae9987cbd923cc2a28f9b",
+      "source_wh": [
+        2172,
+        724
+      ],
+      "content_scale": 0.05660377358490566,
+      "poses": [
+        {
+          "crop_xywh": [
+            136,
+            112,
+            345,
+            523
+          ],
+          "feet_source_xy": [
+            308,
+            635
+          ],
+          "hat_source_y": 112,
+          "body_height": 523,
+          "content_anchor_xy": [
+            10,
+            30
+          ]
+        },
+        {
+          "crop_xywh": [
+            606,
+            186,
+            393,
+            458
+          ],
+          "feet_source_xy": [
+            914,
+            644
+          ],
+          "hat_source_y": 220,
+          "body_height": 424,
+          "content_anchor_xy": [
+            17,
+            26
+          ]
+        },
+        {
+          "crop_xywh": [
+            1132,
+            110,
+            384,
+            525
+          ],
+          "feet_source_xy": [
+            1344,
+            635
+          ],
+          "hat_source_y": 110,
+          "body_height": 525,
+          "content_anchor_xy": [
+            12,
+            30
+          ]
+        },
+        {
+          "crop_xywh": [
+            1714,
+            105,
+            360,
+            530
+          ],
+          "feet_source_xy": [
+            1898,
+            635
+          ],
+          "hat_source_y": 105,
+          "body_height": 530,
+          "content_anchor_xy": [
+            10,
+            30
+          ]
+        }
+      ],
+      "unique_native": 4,
+      "errors": []
+    },
+    {
+      "name": "carry",
+      "source": "assets/art_source/player/carry.png",
+      "source_sha256": "ee467474a800b53b60d8cbd2bed2d8cb58274131879b2d51ca635ee312695d0a",
+      "source_wh": [
+        2172,
+        724
+      ],
+      "content_scale": 0.05725190839694656,
+      "poses": [
+        {
+          "crop_xywh": [
+            156,
+            108,
+            345,
+            523
+          ],
+          "feet_source_xy": [
+            322,
+            631
+          ],
+          "hat_source_y": 108,
+          "body_height": 523,
+          "content_anchor_xy": [
+            10,
+            30
+          ]
+        },
+        {
+          "crop_xywh": [
+            654,
+            107,
+            346,
+            524
+          ],
+          "feet_source_xy": [
+            868,
+            631
+          ],
+          "hat_source_y": 107,
+          "body_height": 524,
+          "content_anchor_xy": [
+            12,
+            30
+          ]
+        },
+        {
+          "crop_xywh": [
+            1204,
+            107,
+            355,
+            524
+          ],
+          "feet_source_xy": [
+            1364,
+            631
+          ],
+          "hat_source_y": 107,
+          "body_height": 524,
+          "content_anchor_xy": [
+            9,
+            30
+          ]
+        },
+        {
+          "crop_xywh": [
+            1675,
+            107,
+            346,
+            524
+          ],
+          "feet_source_xy": [
+            1848,
+            631
+          ],
+          "hat_source_y": 107,
+          "body_height": 524,
+          "content_anchor_xy": [
+            10,
+            30
+          ]
+        }
+      ],
+      "unique_native": 4,
+      "errors": []
+    },
+    {
+      "name": "craft",
+      "source": "assets/art_source/player/craft.png",
+      "source_sha256": "dfd18f36feeede515949517009edb966dce862cdbdb23764abd576521b6e9d76",
+      "source_wh": [
+        2172,
+        724
+      ],
+      "content_scale": 0.05253940455341506,
+      "poses": [
+        {
+          "crop_xywh": [
+            91,
+            83,
+            380,
+            568
+          ],
+          "feet_source_xy": [
+            278,
+            651
+          ],
+          "hat_source_y": 83,
+          "body_height": 568,
+          "content_anchor_xy": [
+            10,
+            30
+          ]
+        },
+        {
+          "crop_xywh": [
+            609,
+            82,
+            396,
+            569
+          ],
+          "feet_source_xy": [
+            833,
+            651
+          ],
+          "hat_source_y": 82,
+          "body_height": 569,
+          "content_anchor_xy": [
+            12,
+            30
+          ]
+        },
+        {
+          "crop_xywh": [
+            1161,
+            83,
+            381,
+            568
+          ],
+          "feet_source_xy": [
+            1359,
+            651
+          ],
+          "hat_source_y": 83,
+          "body_height": 568,
+          "content_anchor_xy": [
+            10,
+            30
+          ]
+        },
+        {
+          "crop_xywh": [
+            1704,
+            80,
+            375,
+            571
+          ],
+          "feet_source_xy": [
+            1883,
+            651
+          ],
+          "hat_source_y": 80,
+          "body_height": 571,
+          "content_anchor_xy": [
+            9,
+            30
+          ]
+        }
+      ],
+      "unique_native": 4,
+      "errors": []
+    },
+    {
+      "name": "trade",
+      "source": "assets/art_source/player/trade.png",
+      "source_sha256": "3d2b4381fa8d726bc0fd2dffead64ad917113ebe2638427336847656cb7a88c7",
+      "source_wh": [
+        2172,
+        724
+      ],
+      "content_scale": 0.05385996409335727,
+      "poses": [
+        {
+          "crop_xywh": [
+            100,
+            101,
+            352,
+            555
+          ],
+          "feet_source_xy": [
+            272,
+            656
+          ],
+          "hat_source_y": 101,
+          "body_height": 555,
+          "content_anchor_xy": [
+            9,
+            30
+          ]
+        },
+        {
+          "crop_xywh": [
+            588,
+            97,
+            410,
+            559
+          ],
+          "feet_source_xy": [
+            818,
+            656
+          ],
+          "hat_source_y": 97,
+          "body_height": 559,
+          "content_anchor_xy": [
+            12,
+            30
+          ]
+        },
+        {
+          "crop_xywh": [
+            1138,
+            99,
+            402,
+            557
+          ],
+          "feet_source_xy": [
+            1359,
+            656
+          ],
+          "hat_source_y": 99,
+          "body_height": 557,
+          "content_anchor_xy": [
+            12,
+            30
+          ]
+        },
+        {
+          "crop_xywh": [
+            1728,
+            99,
+            353,
+            557
+          ],
+          "feet_source_xy": [
+            1900,
+            656
+          ],
+          "hat_source_y": 99,
+          "body_height": 557,
+          "content_anchor_xy": [
+            9,
+            30
+          ]
+        }
+      ],
+      "unique_native": 4,
+      "errors": []
+    },
+    {
+      "name": "collect",
+      "source": "assets/art_source/player/collect.png",
+      "source_sha256": "055e45207f67ecf0d1966c94851a53e2dd18806065bf7d79910cb4ed5062cc20",
+      "source_wh": [
+        2172,
+        724
+      ],
+      "content_scale": 0.055350553505535055,
+      "poses": [
+        {
+          "crop_xywh": [
+            128,
+            99,
+            357,
+            541
+          ],
+          "feet_source_xy": [
+            294,
+            640
+          ],
+          "hat_source_y": 99,
+          "body_height": 541,
+          "content_anchor_xy": [
+            9,
+            30
+          ]
+        },
+        {
+          "crop_xywh": [
+            631,
+            154,
+            387,
+            486
+          ],
+          "feet_source_xy": [
+            898,
+            640
+          ],
+          "hat_source_y": 167,
+          "body_height": 473,
+          "content_anchor_xy": [
+            15,
+            27
+          ]
+        },
+        {
+          "crop_xywh": [
+            1192,
+            98,
+            355,
+            542
+          ],
+          "feet_source_xy": [
+            1374,
+            640
+          ],
+          "hat_source_y": 98,
+          "body_height": 542,
+          "content_anchor_xy": [
+            10,
+            30
+          ]
+        },
+        {
+          "crop_xywh": [
+            1735,
+            98,
+            354,
+            542
+          ],
+          "feet_source_xy": [
+            1917,
+            640
+          ],
+          "hat_source_y": 98,
+          "body_height": 542,
+          "content_anchor_xy": [
+            10,
+            30
+          ]
+        }
+      ],
+      "unique_native": 4,
+      "errors": []
+    },
+    {
+      "name": "repair",
+      "source": "assets/art_source/player/repair.png",
+      "source_sha256": "ed0545d9288dbed674615b54774c1f3246279b1928f71534113602b5a000165a",
+      "source_wh": [
+        2172,
+        724
+      ],
+      "content_scale": 0.05893909626719057,
+      "poses": [
+        {
+          "crop_xywh": [
+            104,
+            120,
+            390,
+            509
+          ],
+          "feet_source_xy": [
+            356,
+            629
+          ],
+          "hat_source_y": 120,
+          "body_height": 509,
+          "content_anchor_xy": [
+            15,
+            30
+          ]
+        },
+        {
+          "crop_xywh": [
+            642,
+            121,
+            365,
+            508
+          ],
+          "feet_source_xy": [
+            889,
+            629
+          ],
+          "hat_source_y": 131,
+          "body_height": 498,
+          "content_anchor_xy": [
+            15,
+            30
+          ]
+        },
+        {
+          "crop_xywh": [
+            1155,
+            121,
+            361,
+            508
+          ],
+          "feet_source_xy": [
+            1399,
+            629
+          ],
+          "hat_source_y": 131,
+          "body_height": 498,
+          "content_anchor_xy": [
+            14,
+            30
+          ]
+        },
+        {
+          "crop_xywh": [
+            1640,
+            120,
+            370,
+            509
+          ],
+          "feet_source_xy": [
+            1888,
+            629
+          ],
+          "hat_source_y": 120,
+          "body_height": 509,
+          "content_anchor_xy": [
+            15,
+            30
+          ]
+        }
+      ],
+      "unique_native": 4,
+      "errors": []
+    }
+  ]
+}

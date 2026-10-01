@@ -1,0 +1,11 @@
+Use case: stylized-concept
+Asset type: production raster work-animation source for HARVEST THE NIGHT.
+Input images: Image 1 is the approved farmer identity master; Image 2 is the approved idle_west strip for exact side-view face, hat, clothes, body scale and feet. Both are references, not edit targets.
+Style/medium: coherent crisp pixel art with deliberate clusters and colored outlines, simple readable tools. Preserve straw hat with brown band, dark hair, cream rolled sleeves, blue bib overalls, brown boots and warm skin. Orthographic three-quarter top-down camera, facing WEST (left).
+Composition: exactly FOUR complete sequential poses in ONE horizontal row, left to right. Equal-size square cells with generous actual transparent gutters and outer margins. No other figures or rows. Boots stay planted at the same baseline and horizontal body center within each cell. Same body/hat size throughout; do not center the combined character+tool bounds or resize a pose to fill its cell.
+Runtime contract: every pose will be reduced to a 48x48 native canvas with body about 20x30 and feet at (24,44). Tools may extend about 16 pixels left and 12 above the hat within that canvas. Keep tool proportions compact enough to fit, without shrinking the farmer. Complete unclipped tool, simple one- or two-color readable metal head and wood handle.
+Lighting/mood: neutral warm daytime, upper-left highlights, darker underside; no baked glow, contact effect, ground, crop, tree, rock, station or shadow.
+Scene/backdrop: genuine transparency including gutters, no checkerboard drawing. No text, labels, borders, watermark or UI. No blur, smooth painting, random speckle, duplicated hands/tools or extra limbs.
+
+Primary request: Action CARRY: carry a small warm wooden CRATE at waist/chest, never a crate the size of the farmer. Poses 0 steady crate in both hands; 1 slight leftward body weight lean/arms adjusting crate; 2 small reverse weight lean, crate held securely; 3 upright recovery holding crate level. Both boots remain planted, distinct balance/arm poses without changing body size. Crate no lettering; no background.
+The last pose recovers to the first to form a believable four-frame work cycle.

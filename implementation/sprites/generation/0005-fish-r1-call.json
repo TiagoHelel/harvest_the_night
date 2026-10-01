@@ -1,0 +1,14 @@
+{
+  "id": "fish-r1",
+  "tool": "built-in ImageGen",
+  "transparent_background": true,
+  "returned_file": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-b3182703-4ad7-498c-9a39-dcd1fba6e170.png",
+  "source": "assets/art_source/player/candidates/fish-r1.png",
+  "prompt_text": "Use case: identity-preserve. Asset type: transparent four-frame pixel-art farmer fishing/cast strip for a Godot game.\nInput image 1 is the EDIT TARGET: the rejected fishing strip. Image 2 is the approved farmer identity reference; image 3 is the accepted west idle body/outline reference.\nChange only the fishing equipment geometry in the target strip: shorten the rod and its visible line in ALL four poses. Preserve the four ordered poses, hat, clothing, face, character dimensions, frame layout, feet and body silhouette. The rod plus line must never extend more than 0.65 of the farmer's standing hat-to-boot height to the left of the center between the boots. Total rod-plus-line height above the boot baseline must remain below 1.35 times the standing farmer height. In frame 1 (second pose), keep a forward cast with the compact rod bent forward; in frame 2 (third pose), show its low follow-through with the same compact rod and a short nearby bobber. Leave the rod identifiable, with a wooden handle, dark gray reel and red-white bobber. Use compact pixel clusters, one short line arc, no detached swish trails. Keep generous transparent gaps between all four frames and transparent outer margins. No background, ground, shadow, text, labels, grid, target, duplicate figures or fifth frame. Full clear pixel silhouette with upper-left highlights. Do not shrink the farmer to accommodate the fishing rod.",
+  "references": [
+    "assets/art_source/player/candidates/fish-r0.png",
+    "assets/art_source/masters/farmer.png",
+    "assets/art_source/player/idle_west.png"
+  ],
+  "decision": "Rejected: follow-through rod still needs 27px to the left of the foot anchor; only 24px available. Other poses fit; request second targeted revision of frame 2."
+}

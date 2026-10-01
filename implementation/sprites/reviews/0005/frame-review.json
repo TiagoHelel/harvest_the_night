@@ -1,0 +1,622 @@
+{
+  "animations": [
+    {
+      "name": "chop",
+      "unique_frames": 4,
+      "standing_reference_height": 30,
+      "canvas": [
+        48,
+        48
+      ],
+      "feet": [
+        24,
+        44
+      ],
+      "native_boxes": [
+        [
+          14,
+          9,
+          36,
+          44
+        ],
+        [
+          4,
+          14,
+          32,
+          44
+        ],
+        [
+          2,
+          14,
+          32,
+          44
+        ],
+        [
+          14,
+          14,
+          37,
+          44
+        ]
+      ]
+    },
+    {
+      "name": "mine",
+      "unique_frames": 4,
+      "standing_reference_height": 30,
+      "canvas": [
+        48,
+        48
+      ],
+      "feet": [
+        24,
+        44
+      ],
+      "native_boxes": [
+        [
+          12,
+          8,
+          37,
+          44
+        ],
+        [
+          6,
+          15,
+          32,
+          45
+        ],
+        [
+          2,
+          15,
+          33,
+          44
+        ],
+        [
+          12,
+          8,
+          36,
+          44
+        ]
+      ]
+    },
+    {
+      "name": "till",
+      "unique_frames": 4,
+      "standing_reference_height": 30,
+      "canvas": [
+        48,
+        48
+      ],
+      "feet": [
+        24,
+        44
+      ],
+      "native_boxes": [
+        [
+          2,
+          14,
+          32,
+          44
+        ],
+        [
+          6,
+          16,
+          31,
+          44
+        ],
+        [
+          6,
+          16,
+          31,
+          44
+        ],
+        [
+          3,
+          14,
+          31,
+          44
+        ]
+      ]
+    },
+    {
+      "name": "plant",
+      "unique_frames": 4,
+      "standing_reference_height": 30,
+      "canvas": [
+        48,
+        48
+      ],
+      "feet": [
+        24,
+        44
+      ],
+      "native_boxes": [
+        [
+          14,
+          14,
+          35,
+          44
+        ],
+        [
+          9,
+          16,
+          30,
+          44
+        ],
+        [
+          9,
+          16,
+          30,
+          44
+        ],
+        [
+          14,
+          14,
+          35,
+          44
+        ]
+      ]
+    },
+    {
+      "name": "water",
+      "unique_frames": 4,
+      "standing_reference_height": 30,
+      "canvas": [
+        48,
+        48
+      ],
+      "feet": [
+        24,
+        44
+      ],
+      "native_boxes": [
+        [
+          13,
+          14,
+          34,
+          44
+        ],
+        [
+          10,
+          14,
+          33,
+          44
+        ],
+        [
+          8,
+          14,
+          33,
+          44
+        ],
+        [
+          13,
+          14,
+          34,
+          44
+        ]
+      ]
+    },
+    {
+      "name": "fish",
+      "unique_frames": 4,
+      "standing_reference_height": 30,
+      "canvas": [
+        48,
+        48
+      ],
+      "feet": [
+        24,
+        44
+      ],
+      "native_boxes": [
+        [
+          15,
+          10,
+          39,
+          44
+        ],
+        [
+          3,
+          13,
+          32,
+          44
+        ],
+        [
+          9,
+          14,
+          33,
+          44
+        ],
+        [
+          9,
+          14,
+          33,
+          44
+        ]
+      ]
+    },
+    {
+      "name": "reel",
+      "unique_frames": 4,
+      "standing_reference_height": 30,
+      "canvas": [
+        48,
+        48
+      ],
+      "feet": [
+        24,
+        44
+      ],
+      "native_boxes": [
+        [
+          2,
+          14,
+          34,
+          44
+        ],
+        [
+          5,
+          14,
+          34,
+          44
+        ],
+        [
+          1,
+          14,
+          34,
+          44
+        ],
+        [
+          4,
+          14,
+          33,
+          44
+        ]
+      ]
+    },
+    {
+      "name": "harvest",
+      "unique_frames": 4,
+      "standing_reference_height": 30,
+      "canvas": [
+        48,
+        48
+      ],
+      "feet": [
+        24,
+        44
+      ],
+      "native_boxes": [
+        [
+          14,
+          14,
+          34,
+          44
+        ],
+        [
+          7,
+          18,
+          29,
+          44
+        ],
+        [
+          12,
+          14,
+          34,
+          44
+        ],
+        [
+          14,
+          14,
+          34,
+          44
+        ]
+      ]
+    },
+    {
+      "name": "carry",
+      "unique_frames": 4,
+      "standing_reference_height": 30,
+      "canvas": [
+        48,
+        48
+      ],
+      "feet": [
+        24,
+        44
+      ],
+      "native_boxes": [
+        [
+          14,
+          14,
+          34,
+          44
+        ],
+        [
+          12,
+          14,
+          32,
+          44
+        ],
+        [
+          15,
+          14,
+          35,
+          44
+        ],
+        [
+          14,
+          14,
+          34,
+          44
+        ]
+      ]
+    },
+    {
+      "name": "craft",
+      "unique_frames": 4,
+      "standing_reference_height": 30,
+      "canvas": [
+        48,
+        48
+      ],
+      "feet": [
+        24,
+        44
+      ],
+      "native_boxes": [
+        [
+          14,
+          14,
+          34,
+          44
+        ],
+        [
+          12,
+          14,
+          33,
+          44
+        ],
+        [
+          14,
+          14,
+          34,
+          44
+        ],
+        [
+          15,
+          14,
+          35,
+          44
+        ]
+      ]
+    },
+    {
+      "name": "trade",
+      "unique_frames": 4,
+      "standing_reference_height": 30,
+      "canvas": [
+        48,
+        48
+      ],
+      "feet": [
+        24,
+        44
+      ],
+      "native_boxes": [
+        [
+          15,
+          14,
+          34,
+          44
+        ],
+        [
+          12,
+          14,
+          34,
+          44
+        ],
+        [
+          12,
+          14,
+          34,
+          44
+        ],
+        [
+          15,
+          14,
+          34,
+          44
+        ]
+      ]
+    },
+    {
+      "name": "collect",
+      "unique_frames": 4,
+      "standing_reference_height": 30,
+      "canvas": [
+        48,
+        48
+      ],
+      "feet": [
+        24,
+        44
+      ],
+      "native_boxes": [
+        [
+          15,
+          14,
+          35,
+          44
+        ],
+        [
+          9,
+          17,
+          30,
+          44
+        ],
+        [
+          14,
+          14,
+          34,
+          44
+        ],
+        [
+          14,
+          14,
+          34,
+          44
+        ]
+      ]
+    },
+    {
+      "name": "repair",
+      "unique_frames": 4,
+      "standing_reference_height": 30,
+      "canvas": [
+        48,
+        48
+      ],
+      "feet": [
+        24,
+        44
+      ],
+      "native_boxes": [
+        [
+          9,
+          14,
+          32,
+          44
+        ],
+        [
+          9,
+          14,
+          31,
+          44
+        ],
+        [
+          10,
+          14,
+          31,
+          44
+        ],
+        [
+          9,
+          14,
+          31,
+          44
+        ]
+      ]
+    }
+  ],
+  "captures": [
+    "implementation/shots/sprites/0005/dusk.png",
+    "implementation/shots/sprites/0005/noon.png",
+    "implementation/shots/sprites/0005/result.png",
+    "implementation/shots/sprites/0005/tech.png",
+    "implementation/shots/sprites/0005/wave.png",
+    "implementation/shots/sprites/0005/work/work_carry_facing1_frame0.png",
+    "implementation/shots/sprites/0005/work/work_carry_facing1_frame1.png",
+    "implementation/shots/sprites/0005/work/work_carry_facing1_frame2.png",
+    "implementation/shots/sprites/0005/work/work_carry_facing1_frame3.png",
+    "implementation/shots/sprites/0005/work/work_carry_facing3_frame0.png",
+    "implementation/shots/sprites/0005/work/work_carry_facing3_frame1.png",
+    "implementation/shots/sprites/0005/work/work_carry_facing3_frame2.png",
+    "implementation/shots/sprites/0005/work/work_carry_facing3_frame3.png",
+    "implementation/shots/sprites/0005/work/work_chop_facing1_frame0.png",
+    "implementation/shots/sprites/0005/work/work_chop_facing1_frame1.png",
+    "implementation/shots/sprites/0005/work/work_chop_facing1_frame2.png",
+    "implementation/shots/sprites/0005/work/work_chop_facing1_frame3.png",
+    "implementation/shots/sprites/0005/work/work_chop_facing3_frame0.png",
+    "implementation/shots/sprites/0005/work/work_chop_facing3_frame1.png",
+    "implementation/shots/sprites/0005/work/work_chop_facing3_frame2.png",
+    "implementation/shots/sprites/0005/work/work_chop_facing3_frame3.png",
+    "implementation/shots/sprites/0005/work/work_collect_facing1_frame0.png",
+    "implementation/shots/sprites/0005/work/work_collect_facing1_frame1.png",
+    "implementation/shots/sprites/0005/work/work_collect_facing1_frame2.png",
+    "implementation/shots/sprites/0005/work/work_collect_facing1_frame3.png",
+    "implementation/shots/sprites/0005/work/work_collect_facing3_frame0.png",
+    "implementation/shots/sprites/0005/work/work_collect_facing3_frame1.png",
+    "implementation/shots/sprites/0005/work/work_collect_facing3_frame2.png",
+    "implementation/shots/sprites/0005/work/work_collect_facing3_frame3.png",
+    "implementation/shots/sprites/0005/work/work_craft_facing1_frame0.png",
+    "implementation/shots/sprites/0005/work/work_craft_facing1_frame1.png",
+    "implementation/shots/sprites/0005/work/work_craft_facing1_frame2.png",
+    "implementation/shots/sprites/0005/work/work_craft_facing1_frame3.png",
+    "implementation/shots/sprites/0005/work/work_craft_facing3_frame0.png",
+    "implementation/shots/sprites/0005/work/work_craft_facing3_frame1.png",
+    "implementation/shots/sprites/0005/work/work_craft_facing3_frame2.png",
+    "implementation/shots/sprites/0005/work/work_craft_facing3_frame3.png",
+    "implementation/shots/sprites/0005/work/work_fish_facing1_frame0.png",
+    "implementation/shots/sprites/0005/work/work_fish_facing1_frame1.png",
+    "implementation/shots/sprites/0005/work/work_fish_facing1_frame2.png",
+    "implementation/shots/sprites/0005/work/work_fish_facing1_frame3.png",
+    "implementation/shots/sprites/0005/work/work_fish_facing3_frame0.png",
+    "implementation/shots/sprites/0005/work/work_fish_facing3_frame1.png",
+    "implementation/shots/sprites/0005/work/work_fish_facing3_frame2.png",
+    "implementation/shots/sprites/0005/work/work_fish_facing3_frame3.png",
+    "implementation/shots/sprites/0005/work/work_harvest_facing1_frame0.png",
+    "implementation/shots/sprites/0005/work/work_harvest_facing1_frame1.png",
+    "implementation/shots/sprites/0005/work/work_harvest_facing1_frame2.png",
+    "implementation/shots/sprites/0005/work/work_harvest_facing1_frame3.png",
+    "implementation/shots/sprites/0005/work/work_harvest_facing3_frame0.png",
+    "implementation/shots/sprites/0005/work/work_harvest_facing3_frame1.png",
+    "implementation/shots/sprites/0005/work/work_harvest_facing3_frame2.png",
+    "implementation/shots/sprites/0005/work/work_harvest_facing3_frame3.png",
+    "implementation/shots/sprites/0005/work/work_mine_facing1_frame0.png",
+    "implementation/shots/sprites/0005/work/work_mine_facing1_frame1.png",
+    "implementation/shots/sprites/0005/work/work_mine_facing1_frame2.png",
+    "implementation/shots/sprites/0005/work/work_mine_facing1_frame3.png",
+    "implementation/shots/sprites/0005/work/work_mine_facing3_frame0.png",
+    "implementation/shots/sprites/0005/work/work_mine_facing3_frame1.png",
+    "implementation/shots/sprites/0005/work/work_mine_facing3_frame2.png",
+    "implementation/shots/sprites/0005/work/work_mine_facing3_frame3.png",
+    "implementation/shots/sprites/0005/work/work_plant_facing1_frame0.png",
+    "implementation/shots/sprites/0005/work/work_plant_facing1_frame1.png",
+    "implementation/shots/sprites/0005/work/work_plant_facing1_frame2.png",
+    "implementation/shots/sprites/0005/work/work_plant_facing1_frame3.png",
+    "implementation/shots/sprites/0005/work/work_plant_facing3_frame0.png",
+    "implementation/shots/sprites/0005/work/work_plant_facing3_frame1.png",
+    "implementation/shots/sprites/0005/work/work_plant_facing3_frame2.png",
+    "implementation/shots/sprites/0005/work/work_plant_facing3_frame3.png",
+    "implementation/shots/sprites/0005/work/work_reel_facing1_frame0.png",
+    "implementation/shots/sprites/0005/work/work_reel_facing1_frame1.png",
+    "implementation/shots/sprites/0005/work/work_reel_facing1_frame2.png",
+    "implementation/shots/sprites/0005/work/work_reel_facing1_frame3.png",
+    "implementation/shots/sprites/0005/work/work_reel_facing3_frame0.png",
+    "implementation/shots/sprites/0005/work/work_reel_facing3_frame1.png",
+    "implementation/shots/sprites/0005/work/work_reel_facing3_frame2.png",
+    "implementation/shots/sprites/0005/work/work_reel_facing3_frame3.png",
+    "implementation/shots/sprites/0005/work/work_repair_facing1_frame0.png",
+    "implementation/shots/sprites/0005/work/work_repair_facing1_frame1.png",
+    "implementation/shots/sprites/0005/work/work_repair_facing1_frame2.png",
+    "implementation/shots/sprites/0005/work/work_repair_facing1_frame3.png",
+    "implementation/shots/sprites/0005/work/work_repair_facing3_frame0.png",
+    "implementation/shots/sprites/0005/work/work_repair_facing3_frame1.png",
+    "implementation/shots/sprites/0005/work/work_repair_facing3_frame2.png",
+    "implementation/shots/sprites/0005/work/work_repair_facing3_frame3.png",
+    "implementation/shots/sprites/0005/work/work_till_facing1_frame0.png",
+    "implementation/shots/sprites/0005/work/work_till_facing1_frame1.png",
+    "implementation/shots/sprites/0005/work/work_till_facing1_frame2.png",
+    "implementation/shots/sprites/0005/work/work_till_facing1_frame3.png",
+    "implementation/shots/sprites/0005/work/work_till_facing3_frame0.png",
+    "implementation/shots/sprites/0005/work/work_till_facing3_frame1.png",
+    "implementation/shots/sprites/0005/work/work_till_facing3_frame2.png",
+    "implementation/shots/sprites/0005/work/work_till_facing3_frame3.png",
+    "implementation/shots/sprites/0005/work/work_trade_facing1_frame0.png",
+    "implementation/shots/sprites/0005/work/work_trade_facing1_frame1.png",
+    "implementation/shots/sprites/0005/work/work_trade_facing1_frame2.png",
+    "implementation/shots/sprites/0005/work/work_trade_facing1_frame3.png",
+    "implementation/shots/sprites/0005/work/work_trade_facing3_frame0.png",
+    "implementation/shots/sprites/0005/work/work_trade_facing3_frame1.png",
+    "implementation/shots/sprites/0005/work/work_trade_facing3_frame2.png",
+    "implementation/shots/sprites/0005/work/work_trade_facing3_frame3.png",
+    "implementation/shots/sprites/0005/work/work_water_facing1_frame0.png",
+    "implementation/shots/sprites/0005/work/work_water_facing1_frame1.png",
+    "implementation/shots/sprites/0005/work/work_water_facing1_frame2.png",
+    "implementation/shots/sprites/0005/work/work_water_facing1_frame3.png",
+    "implementation/shots/sprites/0005/work/work_water_facing3_frame0.png",
+    "implementation/shots/sprites/0005/work/work_water_facing3_frame1.png",
+    "implementation/shots/sprites/0005/work/work_water_facing3_frame2.png",
+    "implementation/shots/sprites/0005/work/work_water_facing3_frame3.png"
+  ]
+}

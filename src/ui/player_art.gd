@@ -13,10 +13,8 @@ extends RefCounted
 ##
 ## There is no east-facing set on the sheet, and there does not need to be:
 ## `flip` mirrors the west frames. The verbs are drawn side-on too, so a
-## farmer tilling while facing north is drawn side-on. That is the sheet the
-## owner drew rather than a decision made here, and it is the ordinary
-## compromise - there is no north-facing swing of an axe in the reference
-## either.
+## farmer tilling while facing north is drawn side-on. Task 0005 deliberately
+## authors thirteen west work strips; it does not claim north/south work art.
 ##
 ## ## The speeds are data
 ##
@@ -50,12 +48,8 @@ const SECONDS := {
 
 ## Every verb the rules have, and the drawing it plays.
 ##
-## **All of them are named, including the ones that borrow.** A verb missing
-## from here falls back to standing still, which is indistinguishable from a
-## verb somebody forgot - so the borrowings are written down: `reel` is the
-## same cast as `fish`, `collect` is the same lift as `harvest`, and `trade`
-## and `repair` use the one empty-handed working pose the sheet has. If the
-## sheet grows a pose for any of them, the change is one line here.
+## Each core verb has its own authored four-frame strip. Carry is a separate
+## view cue for a nearby station finishing production, not a new core verb.
 const VERBS := {
 	&"chop": &"chop",
 	&"mine": &"mine",
@@ -64,12 +58,14 @@ const VERBS := {
 	&"harvest": &"harvest",
 	&"water": &"water",
 	&"fish": &"fish",
-	&"reel": &"fish",
-	&"collect": &"harvest",
+	&"reel": &"reel",
+	&"collect": &"collect",
 	&"craft": &"craft",
-	&"trade": &"craft",
-	&"repair": &"craft",
+	&"trade": &"trade",
+	&"repair": &"repair",
 }
+
+const COSMETIC := {&"carry": &"carry"}
 
 ## The facings, in `Player`'s enum order, as the suffix the sheet has art for
 ## and whether that art has to be mirrored.
@@ -92,6 +88,8 @@ static func pose(facing: int, moving: bool, verb: StringName) -> Dictionary:
 	var name: StringName = &""
 	if verb != &"" and VERBS.has(verb):
 		name = VERBS[verb]
+	elif COSMETIC.has(verb):
+		name = COSMETIC[verb]
 	elif moving:
 		name = StringName("walk_%s" % side[0])
 	else:

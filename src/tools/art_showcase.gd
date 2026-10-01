@@ -55,6 +55,11 @@ func _run() -> void:
 	player["facing"] = Player.SOUTH
 	player["action"] = {}
 	var actor := Entities.get_one(_state, enemy)
+	if args.has("--work"):
+		await _work_cycles()
+		print("PLAYER WORK: %d checks, %d failed" % [_checks, _failed])
+		quit(1 if _failed > 0 else 0)
+		return
 	if args.has("--locomotion"):
 		await _locomotion()
 		print("PLAYER SHOWCASE: %d checks, %d failed" % [_checks, _failed])
@@ -216,6 +221,215 @@ func _locomotion() -> void:
 func _set_contact(who: Dictionary, pixels: Vector2i) -> void:
 	var scale := Player.SUBTILE / GameData.TILE_SIZE
 	who["pos"] = [pixels.x * scale, (pixels.y - GameData.TILE_SIZE / 2) * scale]
+
+
+## Real interaction fixtures for every existing verb, with production carry.
+func _work_fixture(verb: StringName, facing: int) -> Vector2i:
+	_state = State.create(5005)
+	_state["tick"] = GameData.DUSK_AT_TICK / 2
+	for key in ["occupants", "plots", "entities", "livestock", "crafting", "produced"]:
+		(_state[key] as Dictionary).clear()
+	Resources.gain(_state, {GameData.MONEY: 1000, GameData.WOOD: 100,
+		GameData.STONE: 100, GameData.IRON: 100, GameData.FOOD: 100})
+	var at := Vector2i(14, 9)
+	var idx := Grid.index(at)
+	var terrain: PackedByteArray = _state["terrain"]
+	terrain.fill(Farm.Terrain.GRASS)
+	var on: Dictionary = _state["occupants"]
+	var crop: StringName = Farming.seeds()[0]
+	match verb:
+		&"chop":
+			on[idx] = {"id": &"tree"}
+		&"mine":
+			on[idx] = {"id": &"rock"}
+		&"till", &"plant", &"water", &"harvest":
+			terrain[idx] = Farm.Terrain.SOIL
+			if verb != &"till":
+				var plot := Farming.EMPTY_PLOT.duplicate()
+				if verb != &"plant":
+					plot["crop"] = crop
+				if verb == &"harvest":
+					plot["growth"] = int(GameData.CROPS[crop]["growth_ticks"])
+				_state["plots"][idx] = plot
+			_state["selected_seed"] = crop
+			_state["water_can"] = GameData.WATER_CAN_CAPACITY
+		&"fish", &"reel":
+			terrain[idx] = Farm.Terrain.WATER
+		&"collect":
+			on[idx] = {"id": &"cow"}
+			_state["livestock"][idx] = {"ready": 1, "left": 100}
+		&"craft", &"carry":
+			on[idx] = {"id": &"workshop", "hp": int(GameData.BUILDINGS[&"workshop"]["hp"])}
+		&"trade":
+			on[idx] = {"id": &"shop"}
+		&"repair":
+			on[idx] = {"id": &"fence", "hp": int(GameData.DEFENCES[&"fence"]["hp"]) - 10}
+	_state["terrain"] = terrain
+	var here: Vector2i = at - Player.FACING_STEPS[facing]
+	_state["player"]["pos"] = [here.x * Player.SUBTILE + Player.SUBTILE / 2,
+		here.y * Player.SUBTILE + Player.SUBTILE / 2]
+	_state["player"]["facing"] = facing
+	if verb == &"reel":
+		Fishing.begin(_state, at)
+		_state["fishing"]["stage"] = Fishing.BITING
+		_state["fishing"]["left"] = 100
+	var view: PlayerView = _world.get_node("Occupants/PlayerView")
+	_world.show_state(_state)
+	view.show_state(_state)
+	return at
+
+
+func _work_tick(view: PlayerView, whole_sim: bool = false) -> void:
+	var before := var_to_bytes(_state)
+	view.before_tick(_state)
+	expect(var_to_bytes(_state) == before, "Pre-tick work observer cannot change any state/save field")
+	if whole_sim:
+		Sim.tick(_state)
+	else:
+		Player.tick(_state)
+	before = var_to_bytes(_state)
+	view.after_tick(_state)
+	expect(var_to_bytes(_state) == before, "Post-tick work observer cannot change any state/save field")
+
+
+func _work_frame(view: PlayerView, verb: StringName, frame: int, facing: int, delta: float) -> void:
+	var before := var_to_bytes(_state)
+	view._process(delta)
+	var body: Sprite2D = view.get_node("Body")
+	expect(var_to_bytes(_state) == before, "Work rendering leaves complete isolated state unchanged")
+	expect(view.playing() == verb, "Actual PlayerView plays its own %s work strip" % verb)
+	expect(body.texture != null and body.texture.resource_path == PlayerArt.texture_path(verb, frame),
+		"Actual work completion clock selects %s authored frame %d" % [verb, frame])
+	expect(view.flipped() == (facing == Player.EAST), "Work east mirrors west, with consistent handedness")
+	expect(body.offset == Vector2(-24, -44) and body.texture.get_size() == Vector2(48, 48),
+		"Tools share the fixed player canvas and feet")
+	expect(view.position == ArtPlacement.contact(_state["player"]["pos"]),
+		"Work never shifts the logical ground contact")
+
+
+func _work_cycles() -> void:
+	var view: PlayerView = _world.get_node("Occupants/PlayerView")
+	view.set_process(false)
+	var verbs := PlayerArt.known_verbs()
+	expect(verbs == GameData.sorted_names(Interact.DEFAULT_TICKS.keys()), "Every core verb has a work binding")
+	for facing in [Player.WEST, Player.EAST]:
+		for verb in verbs:
+			var at := _work_fixture(verb, facing)
+			expect(Interact.verb_at(_state, at) == verb, "Real target offers %s" % verb)
+			expect(PlayerFrames.COUNT[verb] == 4, "Each verb has four authored frames without aliases")
+			for side in [Player.SOUTH, Player.NORTH]:
+				expect(PlayerArt.pose(side, false, verb)["name"] == verb,
+					"North/south work intentionally uses reviewed side-on art")
+			var total := Interact.ticks_for(_state, at, verb)
+			var instant := [&"water", &"reel", &"trade"].has(verb)
+			_state["intent"]["interact"] = true
+			_work_tick(view)
+			await _settle()
+			if not instant:
+				expect(Player.is_busy(_state), "Timed verb enters the existing core action")
+				_work_frame(view, verb, 0, facing, 0.0)
+				await _shoot("work_%s_facing%d_frame0" % [verb, facing], "%s / anticipation / %d ticks" % [verb, total])
+				for _i in total - 1:
+					_work_tick(view)
+				_work_frame(view, verb, 1, facing, 0.0)
+			else:
+				expect(not Player.is_busy(_state), "One-tick/instant verb finishes without a retained core action")
+				_work_frame(view, verb, 1, facing, 0.0)
+			await _shoot("work_%s_facing%d_frame1" % [verb, facing], "%s / contact on core completion" % verb)
+			var each := 0.09 if instant else minf(0.09, float(total) / GameData.TICK_HZ / 4.0)
+			for frame in [2, 3]:
+				_work_frame(view, verb, frame, facing, each)
+				await _shoot("work_%s_facing%d_frame%d" % [verb, facing, frame], "%s / cosmetic follow-through or recovery" % verb)
+			if instant:
+				_work_frame(view, verb, 0, facing, each)
+				await _shoot("work_%s_facing%d_frame0" % [verb, facing], "%s / returned ready pose" % verb)
+			# Cancel consumes the pending return as well as an active repeated job.
+			_state["intent"]["cancel"] = true
+			_work_tick(view)
+			view._process(0.0)
+			expect(String(view.playing()).begins_with("idle_"), "%s cancel never leaves a tool stuck" % verb)
+			_state["intent"]["move"] = [1, 0]
+			_work_tick(view)
+			view._process(0.0)
+			expect(view.playing() == &"walk_west" and view.flipped(), "%s returns immediately to core-resolved walking" % verb)
+			# Interrupt before the timed payload, not only after a finished cycle.
+			if not instant:
+				for walk_away in [false, true]:
+					_work_fixture(verb, facing)
+					_state["intent"]["interact"] = true
+					_work_tick(view)
+					view._process(0.0)
+					if walk_away:
+						_state["intent"]["move"] = [1, 0]
+					else:
+						_state["intent"]["cancel"] = true
+					_work_tick(view)
+					view._process(0.09)
+					expect(not Player.is_busy(_state), "%s mid-work interruption cancels the real core job" % verb)
+					expect(String(view.playing()).begins_with("walk_" if walk_away else "idle_"),
+						"Mid-work interruption immediately removes the tool pose")
+					_state["intent"]["move"] = [0, 0]
+					for _i in total + 2:
+						_work_tick(view)
+					view._process(1.0)
+					expect(String(view.playing()).begins_with("idle_"), "Cancelled work cannot reappear from a delayed cue")
+		# A delivery actually run by Crafting.tick triggers the independent carry strip.
+		var station := _work_fixture(&"carry", facing)
+		expect(Crafting.start_at(_state, station), "Carry fixture starts a payable real station job")
+		var job := Crafting.job(_state, station)
+		job["left"] = 1
+		_work_tick(view, true)
+		expect(not Crafting.produced_at(_state, station).is_empty(), "Core production delivers before carrying is shown")
+		await _settle()
+		for frame in 4:
+			_work_frame(view, &"carry", frame, facing, 0.0 if frame == 0 else 0.09)
+			await _shoot("work_carry_facing%d_frame%d" % [facing, frame], "Nearby completed production / cosmetic carry %d" % frame)
+		view._process(0.09001)
+		expect(String(view.playing()).begins_with("idle_"), "Carrying expires without adding a core action")
+	# Catch-up ticks use the same Sim.tick sequence and expose short events.
+	for verb in [&"water", &"reel", &"trade"]:
+		_work_fixture(verb, Player.WEST)
+		_state["intent"]["interact"] = true
+		var expected := _state.duplicate(true)
+		Sim.advance(expected, 4)
+		var driver := SimDriver.new()
+		driver.state = _state
+		driver.speed = 4
+		driver.stepping.connect(view.before_tick)
+		driver.stepped.connect(view.after_tick)
+		driver._process(1.01 / GameData.TICK_HZ / driver._slowness())
+		expect(driver.last_ticks == 4 and var_to_bytes(_state) == var_to_bytes(expected),
+			"4x work observers preserve the exact Sim.advance state and tick count")
+		_work_frame(view, verb, 1, Player.WEST, 0.0)
+		driver.free()
+	# Repeating three-tick repair must show all phases at normal rendering speed.
+	var repair_at := _work_fixture(&"repair", Player.WEST)
+	_state["intent"]["interact"] = true
+	var seen := {}
+	for video_frame in 60:
+		if video_frame % 2 == 0:
+			_work_tick(view)
+		view._process(1.0 / 60.0)
+		var body: Sprite2D = view.get_node("Body")
+		if view.playing() == &"repair":
+			seen[body.texture.resource_path] = true
+	expect(seen.size() == 4, "Fast repeated repair visibly uses all four frames at 60FPS")
+	expect(int(Farm.occupant(_state, repair_at)["hp"]) == int(GameData.DEFENCES[&"fence"]["hp"]),
+		"Animated repeated repair still restores exactly the unchanged core HP")
+	# Repair remains available at night; other work does not persist through dusk.
+	_work_fixture(&"repair", Player.WEST)
+	_state["phase"] = Phases.NIGHT
+	_state["intent"]["interact"] = true
+	for _i in GameData.REPAIR_TICKS_PER_HP:
+		_work_tick(view)
+	_work_frame(view, &"repair", 1, Player.WEST, 0.0)
+	_work_fixture(&"chop", Player.WEST)
+	_state["intent"]["interact"] = true
+	_work_tick(view)
+	_state["phase"] = Phases.PREPARATION
+	_work_tick(view)
+	view._process(0.0)
+	expect(String(view.playing()).begins_with("idle_"), "Dusk ends daylight work without leaving a tool")
 
 
 func _settle() -> void:

@@ -75,11 +75,14 @@ def main():
         if any(e["animation"] == "walk_south" for e in data["assets"]):
             corrupt(ROOT / "sprites/actors/walk_south_2.png", "tools/import_art.py", missing=True)
             passed("Missing authored locomotion frame cannot fall back to idle")
+        if any(e["animation"] == "repair" for e in data["assets"]):
+            corrupt(ROOT / "sprites/actors/repair_3.png", "tools/import_art.py", missing=True)
+            passed("Missing authored work recovery is rejected without borrowing another verb")
         corrupt(import_art.PLAYER_METADATA, "tools/import_art.py")
         passed("Tampered player count/canvas/pivot metadata is rejected")
         corrupt(ROOT / "sprites/terrain/grass.png", "tools/gen_sprites.py")
         passed("Tampered unmigrated ASCII output is still rejected")
-        corrupt(ROOT / "sprites/actors/chop_0.png", "tools/cut_sheet.py")
+        corrupt(ROOT / "sprites/actors/react_bang_0.png", "tools/cut_sheet.py")
         passed("Tampered unmigrated player output is still rejected")
 
         def invalid_manifest(name, mutate):

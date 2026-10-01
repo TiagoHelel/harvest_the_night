@@ -88,6 +88,8 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	print(BuildInfo.line())
+	_driver.stepping.connect(_player_view.before_tick)
+	_driver.stepped.connect(_player_view.after_tick)
 
 	# **Again, for what the first pass could not see.** The debug overlay
 	# builds its panel in its own `_ready`, on a `CanvasLayer` of its own with

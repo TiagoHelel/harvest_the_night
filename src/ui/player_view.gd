@@ -26,8 +26,9 @@ extends Node2D
 ## ## The animation is the state's, not the view's
 ##
 ## Which drawing plays is `PlayerArt.pose()` off `Player.facing()` and the
-## action verb. The only thing this file owns is *how far through* the
-## animation we are, which is a wall clock and cannot affect anything.
+## action verb. PlayerWork observes core completion for tool contact and uses
+## a view clock only for the expiring return; idle/walk use their authored
+## durations. Neither clock can affect gameplay.
 
 ## The shadow, which is what stops the farmer floating. Generated from an
 ## ASCII map like the rest of the terrain; the softness is this modulate
@@ -47,6 +48,7 @@ var _state: Dictionary = {}
 var _elapsed := 0.0
 var _playing: StringName = &""
 var _textures: Dictionary = {}      # path -> Texture2D, loaded once
+var _work := PlayerWork.new()
 
 
 func _ready() -> void:
@@ -69,7 +71,18 @@ func _ready() -> void:
 
 
 func show_state(state: Dictionary) -> void:
+	if not is_same(state, _state):
+		_work.reset()
+		_playing = &""
 	_state = state
+
+
+func before_tick(state: Dictionary) -> void:
+	_work.before_tick(state)
+
+
+func after_tick(state: Dictionary) -> void:
+	_work.after_tick(state)
 
 
 func _process(delta: float) -> void:
@@ -86,8 +99,9 @@ func _process(delta: float) -> void:
 
 ## Pick the drawing, advance the clock, and show the frame.
 func _animate(delta: float) -> void:
-	var pose := PlayerArt.pose(Player.facing(_state), _is_moving(),
-		_verb())
+	var pose := _work.pose(_state, delta)
+	if pose.is_empty():
+		pose = PlayerArt.pose(Player.facing(_state), _is_moving(), _verb())
 	var name: StringName = pose["name"]
 	if int(pose["frames"]) < 1:
 		_sprite.texture = null
@@ -114,7 +128,7 @@ func _animate(delta: float) -> void:
 	else:
 		_elapsed += delta
 
-	var frame := PlayerArt.frame_at(pose, _elapsed)
+	var frame := int(pose["frame"]) if pose.has("frame") else PlayerArt.frame_at(pose, _elapsed)
 	var path := PlayerArt.texture_path(name, frame)
 	var texture := _texture(path)
 	_sprite.texture = texture

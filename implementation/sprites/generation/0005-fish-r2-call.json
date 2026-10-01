@@ -1,0 +1,12 @@
+{
+  "id": "fish-r2",
+  "tool": "built-in ImageGen",
+  "transparent_background": true,
+  "returned_file": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-2a452793-a431-4ee5-85d0-09c2dc2555a7.png",
+  "source": "assets/art_source/player/fish.png",
+  "prompt_text": "Use case: precise-object-edit. Transparent four-frame pixel-art fishing animation strip.\nImage 1 is the EDIT TARGET. Change ONLY the rod and line of the THIRD figure from the left (follow-through pose). Preserve every pixel and position of the farmers, and preserve the equipment of figures 1, 2 and 4. In figure 3 shorten the near-horizontal rod by 35 percent: move its tip and bobber toward the farmer's left hand, keeping the wooden rod slope and reel. The leftmost bobber pixel must be no farther left than the left edge of this figure's hat; the leftmost rod pixel must be no farther left than that hat edge too. Keep a short line to the red-white bobber just underneath the rod tip. No extra line arcs. This is necessary to fit a 48px canvas with a 30px farmer. Keep all four figures, transparent gutters and transparent outer margins unchanged. Do not crop, shrink, move or redraw any farmer. No extra figures, background, text, grid or shadows.",
+  "references": [
+    "assets/art_source/player/candidates/fish-r1.png"
+  ],
+  "decision": "Accepted: four distinct native frames; body scale, boot anchor, alpha, side silhouette and tool clearance reviewed on light/dark/checker backgrounds."
+}

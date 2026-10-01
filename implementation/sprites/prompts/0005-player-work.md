@@ -1,6 +1,6 @@
 # 0005 - Player farming, gathering and production actions
 
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0004
 - **Likely files:** assets/art_source/player/; sprites/actors/; src/ui/player_art.gd; src/ui/player_frames.gd; src/ui/player_view.gd
 - **Generation briefs:** PLAYER_WORK

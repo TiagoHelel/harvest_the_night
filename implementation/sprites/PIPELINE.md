@@ -174,3 +174,21 @@ The screenshot path uses a real rendering backend; `--headless` cannot provide
 the necessary viewport image here. Prefer the existing offscreen wrapper with
 fixed FPS and seeds. Runtime smoke tests and screenshots should not write over
 the player's saves/settings; continue using the existing tool isolation.
+
+Task 0005 adds complete authored work and real interaction playback:
+
+```powershell
+python tools/show_art.py --work --check
+python tools/show_art.py --work --out=implementation/shots/sprites/<task-id>/work
+python implementation/sprites/reviews/0005/build_review.py
+```
+
+Its fixtures invoke unchanged Player.tick for every verb and actual Sim.tick
+for production/catch-up. Complete serialized state is compared before/after
+every work observer and render, rather than relying only on the sim hash (which
+excludes some view fields). Every four-frame strip is shown for west/east;
+normal and mid-work cancel/walk, dusk, night repair, three-tick repeated repair,
+instant gestures at 4x and station-delivery carry are checked. Source/native
+QA covers all thirteen strips on light/dark/checker backgrounds. Manifest
+`content_anchor_xy` is a measured native coordinate within the reduced crop,
+distinct from its full bounds: a long/raised tool must not move or shrink the farmer.

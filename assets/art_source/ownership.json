@@ -3,39 +3,99 @@
   "outputs": [
     {
       "output": "sprites/actors/carry_0.png",
-      "owner": "player_sheet"
+      "owner": "raster"
     },
     {
       "output": "sprites/actors/carry_1.png",
-      "owner": "player_sheet"
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/carry_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/carry_3.png",
+      "owner": "raster"
     },
     {
       "output": "sprites/actors/chop_0.png",
-      "owner": "player_sheet"
+      "owner": "raster"
     },
     {
       "output": "sprites/actors/chop_1.png",
-      "owner": "player_sheet"
+      "owner": "raster"
     },
     {
       "output": "sprites/actors/chop_2.png",
-      "owner": "player_sheet"
+      "owner": "raster"
     },
     {
       "output": "sprites/actors/chop_3.png",
-      "owner": "player_sheet"
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/collect_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/collect_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/collect_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/collect_3.png",
+      "owner": "raster"
     },
     {
       "output": "sprites/actors/craft_0.png",
-      "owner": "player_sheet"
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/craft_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/craft_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/craft_3.png",
+      "owner": "raster"
     },
     {
       "output": "sprites/actors/fish_0.png",
-      "owner": "player_sheet"
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/fish_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/fish_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/fish_3.png",
+      "owner": "raster"
     },
     {
       "output": "sprites/actors/harvest_0.png",
-      "owner": "player_sheet"
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/harvest_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/harvest_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/harvest_3.png",
+      "owner": "raster"
     },
     {
       "output": "sprites/actors/idle_north_0.png",
@@ -75,11 +135,19 @@
     },
     {
       "output": "sprites/actors/mine_0.png",
-      "owner": "player_sheet"
+      "owner": "raster"
     },
     {
       "output": "sprites/actors/mine_1.png",
-      "owner": "player_sheet"
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/mine_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/mine_3.png",
+      "owner": "raster"
     },
     {
       "output": "sprites/actors/placeholder.png",
@@ -87,15 +155,19 @@
     },
     {
       "output": "sprites/actors/plant_0.png",
-      "owner": "player_sheet"
+      "owner": "raster"
     },
     {
       "output": "sprites/actors/plant_1.png",
-      "owner": "player_sheet"
+      "owner": "raster"
     },
     {
       "output": "sprites/actors/plant_2.png",
-      "owner": "player_sheet"
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/plant_3.png",
+      "owner": "raster"
     },
     {
       "output": "sprites/actors/react_bang_0.png",
@@ -114,20 +186,72 @@
       "owner": "player_sheet"
     },
     {
+      "output": "sprites/actors/reel_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/reel_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/reel_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/reel_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/repair_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/repair_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/repair_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/repair_3.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/actors/shadow.png",
       "owner": "ascii"
     },
     {
       "output": "sprites/actors/till_0.png",
-      "owner": "player_sheet"
+      "owner": "raster"
     },
     {
       "output": "sprites/actors/till_1.png",
-      "owner": "player_sheet"
+      "owner": "raster"
     },
     {
       "output": "sprites/actors/till_2.png",
-      "owner": "player_sheet"
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/till_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/trade_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/trade_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/trade_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/trade_3.png",
+      "owner": "raster"
     },
     {
       "output": "sprites/actors/walk_north_0.png",
@@ -179,19 +303,19 @@
     },
     {
       "output": "sprites/actors/water_0.png",
-      "owner": "player_sheet"
+      "owner": "raster"
     },
     {
       "output": "sprites/actors/water_1.png",
-      "owner": "player_sheet"
+      "owner": "raster"
     },
     {
       "output": "sprites/actors/water_2.png",
-      "owner": "player_sheet"
+      "owner": "raster"
     },
     {
       "output": "sprites/actors/water_3.png",
-      "owner": "player_sheet"
+      "owner": "raster"
     },
     {
       "output": "sprites/buildings/auto_crossbow.png",

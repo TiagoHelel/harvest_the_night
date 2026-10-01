@@ -296,3 +296,76 @@ criteria PASS and later-task follow-ups are in `reviews/0004/REVIEW.md`.
 Queue after completion: 4 done, 16 todo, zero doing/blocked. Next is 0005,
 authored farming/gathering/production actions. One task completed this cycle;
 the user's active /goal continues automatically toward the remaining backlog.
+
+## 0005 — Authored farming, gathering and production actions — done 2026-10-01
+
+Generated and integrated 13 separate four-frame work strips: chop, mine, till,
+plant, water, fish, reel, harvest, carry, craft, trade, collect and repair.
+All 52 native frames are distinct. West is authored and east mirrored;
+north/south deliberately use side-on work, not claimed four-direction sources.
+No verb aliases or one-frame craft placeholders remain. The original farmer
+identity master, approved locomotion and owner's sheet remain intact.
+
+Built-in ImageGen made 15 calls: 13 accepted sources and two rejected fishing
+candidates retained for provenance. The original rod and first revision did
+not fit the common canvas; the second targeted revision shortened the third
+pose enough to fit. No action exceeded the three-revision cap. Sources are
+`assets/art_source/player/{animation}.png`; rejected fishing attempts are in
+`player/candidates/fish-r{0,1}.png`. Exact prompts, tool-returned file paths,
+reference paths, decisions and source SHA-256 values are recorded in
+`generation/0005-generations.json` and 15 individual call/prompt files. Saved
+source copies match the actual tool files. No API/CLI fallback was used.
+
+Frozen measured crops/boot anchors: `reviews/0005/measured-contract.json`.
+One common scale per strip gives a 30 px standing recovery body, allowing
+natural crouches without per-frame stretching. All outputs use 48x48, feet
+(24,44), nearest reduction, alpha threshold 128 and the existing shared
+palette. Tools remain inside the canvas without shrinking the farmer or
+centering on tool bounds. Manifest provenance and deterministic cuts replace
+21 old work PNGs and add 31; totals are now 88 raster / four legacy reaction /
+156 ASCII, or 248 exclusively owned runtime PNGs.
+
+PlayerArt binds all twelve core verbs to matching four-frame metadata.
+View-only PlayerWork observes unchanged ticks through SimDriver signals:
+anticipation while timed work is active, contact at its actual completion,
+finite recovery, and shortened phases for existing three-tick repeated repair.
+Instant water/reel/trade begin at contact. Nearby actual station delivery can
+show carry as a cosmetic cue, without a new verb, crate or inventory rule.
+Walking, idle, cancellation, replacement actions and dusk clear stale poses;
+repair works at night. Core timers, balance, saves and hash baselines are intact.
+
+Meaningful fixture coverage drives actual Player.tick/Sim.tick and PlayerView:
+all frames/facings, complete serialized state unchanged by observers/rendering,
+mid-work cancellation for every timed verb, real production delivery, repeated
+three-tick repair, and 4x SimDriver equivalence with Sim.advance. Headless work
+passes 3749 checks; real rendering passes 3957 with 104 work captures. Fault
+suite passes 22 ownership/rebuild probes, including missing repair frame,
+byte-identical deterministic rebuilds and protection from legacy writers;
+all deliberate corruption is restored.
+
+Full verification PASS: 27 passed, zero skipped/failed in 195 s; 105 scripts,
+6609 headless assertions, 980 input cases, performance and Windows/Web exports.
+Placement and locomotion remain 476 / 468 checks, zero failed. Raster check:
+88 outputs, metadata verified, zero writes. Sim hash `1961000123`, data hash
+`407837701`, both unchanged. Logs and fault report are saved in
+`reviews/0005/{verify-full,work-check,work-capture,captures,fault-check}.log`
+and `fault-probes.json`.
+
+All 109 actual captures (five base plus 104 work) were opened at native and
+nearest 3x on `reviews/0005/captures-00` through `captures-27`; final zoom pages
+were inspected at original 2880x1728 resolution. Capture files are in
+`implementation/shots/sprites/0005/` and its `work/` folder. All 13 raw alpha
+pages, 12 native/3x alpha sheets and 16 native/3x west/east phase sheets were
+opened: readable gestures/tools, stable identity/feet, clean transparency,
+distinct cast/reel and craft/repair, no source clipping. `work-{0,1}.gif` uses
+the committed pixels at fixed 90 ms for contact preview, not gameplay timing.
+
+Detailed criteria PASS: `reviews/0005/REVIEW.md`. Existing tree canopies and
+the workshop naturally obscure part of tools/hands/crate on the occluded side;
+exposed-side captures show complete gestures. Preserve frozen ground sorting
+and repeat overlaps in tree/station tasks 0009/0012. Ground noise and night
+bloom remain 0007/0019 follow-ups; four legacy reactions belong to 0006.
+
+Queue after completion: 5 done, 15 todo, zero doing/blocked. Next is 0006,
+player reactions and ground shadow. One task completed this cycle; the user's
+active /goal continues automatically toward the remaining art backlog.

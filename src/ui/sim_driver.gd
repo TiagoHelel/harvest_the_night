@@ -15,6 +15,11 @@ extends Node
 ## redraws per tick would redraw eight times on a frame catching up.
 signal ticked(state: Dictionary)
 
+## Read-only work observers bracket the same fixed ticks. This keeps instant
+## gestures observable at 4x/catch-up without making every view redraw per tick.
+signal stepping(state: Dictionary)
+signal stepped(state: Dictionary)
+
 ## The game. Empty until `start()`.
 var state: Dictionary = {}
 
@@ -166,7 +171,10 @@ func _process(delta: float) -> void:
 		last_usec = 0
 		return
 	var started := Time.get_ticks_usec()
-	Sim.advance(state, ticks)
+	for _i in ticks:
+		stepping.emit(state)
+		Sim.tick(state)
+		stepped.emit(state)
 	last_usec = Time.get_ticks_usec() - started
 	peak_usec = maxi(peak_usec, last_usec)
 	ticked.emit(state)

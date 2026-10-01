@@ -178,6 +178,12 @@ def check_player_showcase():
     return check("player locomotion", code == 0, verdict)
 
 
+def check_player_work():
+    code, out = run([sys.executable, "tools/show_art.py", "--work", "--check"])
+    verdict = next((line for line in out.splitlines() if line.startswith("PLAYER WORK:")), tail(out, 4))
+    return check("player work", code == 0, verdict)
+
+
 def check_logo():
     """The logo still matches the letters it was composed from.
 
@@ -569,6 +575,7 @@ def main():
     check_raster_art()
     check_art_showcase()
     check_player_showcase()
+    check_player_work()
     check_font()
     check_logo()
     check_sfx()

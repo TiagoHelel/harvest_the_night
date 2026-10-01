@@ -1,0 +1,215 @@
+{
+  "date": "2026-10-01",
+  "attempts": [
+    {
+      "id": "carry",
+      "tool": "built-in ImageGen",
+      "transparent_background": true,
+      "returned_file": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-887de699-7714-491f-9cbe-be03729a22af.png",
+      "source": "assets/art_source/player/carry.png",
+      "prompt_text": "Use case: stylized-concept\nAsset type: production raster work-animation source for HARVEST THE NIGHT.\nInput images: Image 1 is the approved farmer identity master; Image 2 is the approved idle_west strip for exact side-view face, hat, clothes, body scale and feet. Both are references, not edit targets.\nStyle/medium: coherent crisp pixel art with deliberate clusters and colored outlines, simple readable tools. Preserve straw hat with brown band, dark hair, cream rolled sleeves, blue bib overalls, brown boots and warm skin. Orthographic three-quarter top-down camera, facing WEST (left).\nComposition: exactly FOUR complete sequential poses in ONE horizontal row, left to right. Equal-size square cells with generous actual transparent gutters and outer margins. No other figures or rows. Boots stay planted at the same baseline and horizontal body center within each cell. Same body/hat size throughout; do not center the combined character+tool bounds or resize a pose to fill its cell.\nRuntime contract: every pose will be reduced to a 48x48 native canvas with body about 20x30 and feet at (24,44). Tools may extend about 16 pixels left and 12 above the hat within that canvas. Keep tool proportions compact enough to fit, without shrinking the farmer. Complete unclipped tool, simple one- or two-color readable metal head and wood handle.\nLighting/mood: neutral warm daytime, upper-left highlights, darker underside; no baked glow, contact effect, ground, crop, tree, rock, station or shadow.\nScene/backdrop: genuine transparency including gutters, no checkerboard drawing. No text, labels, borders, watermark or UI. No blur, smooth painting, random speckle, duplicated hands/tools or extra limbs.\n\nPrimary request: Action CARRY: carry a small warm wooden CRATE at waist/chest, never a crate the size of the farmer. Poses 0 steady crate in both hands; 1 slight leftward body weight lean/arms adjusting crate; 2 small reverse weight lean, crate held securely; 3 upright recovery holding crate level. Both boots remain planted, distinct balance/arm poses without changing body size. Crate no lettering; no background.\nThe last pose recovers to the first to form a believable four-frame work cycle.",
+      "references": [
+        "assets/art_source/masters/farmer.png",
+        "assets/art_source/player/idle_west.png"
+      ],
+      "decision": "Accepted: four distinct native frames; body scale, boot anchor, alpha, side silhouette and tool clearance reviewed on light/dark/checker backgrounds.",
+      "source_sha256": "ee467474a800b53b60d8cbd2bed2d8cb58274131879b2d51ca635ee312695d0a"
+    },
+    {
+      "id": "chop",
+      "tool": "built-in ImageGen",
+      "transparent_background": true,
+      "returned_file": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-04647537-1509-4cbd-82c7-b89b87393704.png",
+      "source": "assets/art_source/player/chop.png",
+      "prompt_text": "Use case: stylized-concept\nAsset type: production raster work-animation source for HARVEST THE NIGHT.\nInput images: Image 1 is the approved farmer identity master; Image 2 is the approved idle_west strip for exact side-view face, hat, clothes, body scale and feet. Both are references, not edit targets.\nStyle/medium: coherent crisp pixel art with deliberate clusters and colored outlines, simple readable tools. Preserve straw hat with brown band, dark hair, cream rolled sleeves, blue bib overalls, brown boots and warm skin. Orthographic three-quarter top-down camera, facing WEST (left).\nComposition: exactly FOUR complete sequential poses in ONE horizontal row, left to right. Equal-size square cells with generous actual transparent gutters and outer margins. No other figures or rows. Boots stay planted at the same baseline and horizontal body center within each cell. Same body/hat size throughout; do not center the combined character+tool bounds or resize a pose to fill its cell.\nRuntime contract: every pose will be reduced to a 48x48 native canvas with body about 20x30 and feet at (24,44). Tools may extend about 16 pixels left and 12 above the hat within that canvas. Keep tool proportions compact enough to fit, without shrinking the farmer. Complete unclipped tool, simple one- or two-color readable metal head and wood handle.\nLighting/mood: neutral warm daytime, upper-left highlights, darker underside; no baked glow, contact effect, ground, crop, tree, rock, station or shadow.\nScene/backdrop: genuine transparency including gutters, no checkerboard drawing. No text, labels, borders, watermark or UI. No blur, smooth painting, random speckle, duplicated hands/tools or extra limbs.\n\nPrimary request: Action CHOP: two-handed compact wood-handled AXE with a broad single silver wedge blade. Exactly four ordered poses: 0 anticipation holding axe raised diagonally above/behind head; 1 contact swinging blade down toward an imaginary tree to the LEFT at waist height; 2 follow-through with blade slightly below the contact and arms extended left; 3 upright recovery drawing axe back toward chest. Blade stays attached to ONE handle and hands grip the handle. Both boots remain planted. No tree or impact particles.\nThe last pose recovers to the first to form a believable four-frame work cycle.",
+      "references": [
+        "assets/art_source/masters/farmer.png",
+        "assets/art_source/player/idle_west.png"
+      ],
+      "decision": "Accepted: four distinct native frames; body scale, boot anchor, alpha, side silhouette and tool clearance reviewed on light/dark/checker backgrounds.",
+      "source_sha256": "a9e8f337065eea10a39559d98625ec6b9e3a57d35181fb626997c6f7af1c31a1"
+    },
+    {
+      "id": "collect",
+      "tool": "built-in ImageGen",
+      "transparent_background": true,
+      "returned_file": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-f2058934-3a2c-4b0c-b905-286a211eb27e.png",
+      "source": "assets/art_source/player/collect.png",
+      "prompt_text": "Use case: stylized-concept\nAsset type: production raster work-animation source for HARVEST THE NIGHT.\nInput images: Image 1 is the approved farmer identity master; Image 2 is the approved idle_west strip for exact side-view face, hat, clothes, body scale and feet. Both are references, not edit targets.\nStyle/medium: coherent crisp pixel art with deliberate clusters and colored outlines, simple readable tools. Preserve straw hat with brown band, dark hair, cream rolled sleeves, blue bib overalls, brown boots and warm skin. Orthographic three-quarter top-down camera, facing WEST (left).\nComposition: exactly FOUR complete sequential poses in ONE horizontal row, left to right. Equal-size square cells with generous actual transparent gutters and outer margins. No other figures or rows. Boots stay planted at the same baseline and horizontal body center within each cell. Same body/hat size throughout; do not center the combined character+tool bounds or resize a pose to fill its cell.\nRuntime contract: every pose will be reduced to a 48x48 native canvas with body about 20x30 and feet at (24,44). Tools may extend about 16 pixels left and 12 above the hat within that canvas. Keep tool proportions compact enough to fit, without shrinking the farmer. Complete unclipped tool, simple one- or two-color readable metal head and wood handle.\nLighting/mood: neutral warm daytime, upper-left highlights, darker underside; no baked glow, contact effect, ground, crop, tree, rock, station or shadow.\nScene/backdrop: genuine transparency including gutters, no checkerboard drawing. No text, labels, borders, watermark or UI. No blur, smooth painting, random speckle, duplicated hands/tools or extra limbs.\n\nPrimary request: Action COLLECT livestock produce: pick up a small light-cream MILK PAIL with curved handle, distinct from watering can (no spout). Poses 0 upright hands ready low left; 1 knees bend slightly and hand reaches LOW LEFT for pail handle; 2 lift visible cream/light-gray pail to waist; 3 upright recovery holding pail at waist. Planted boots, hat unchanged; no cow/chicken/egg scenery or milk splash.\nThe last pose recovers to the first to form a believable four-frame work cycle.",
+      "references": [
+        "assets/art_source/masters/farmer.png",
+        "assets/art_source/player/idle_west.png"
+      ],
+      "decision": "Accepted: four distinct native frames; body scale, boot anchor, alpha, side silhouette and tool clearance reviewed on light/dark/checker backgrounds.",
+      "source_sha256": "055e45207f67ecf0d1966c94851a53e2dd18806065bf7d79910cb4ed5062cc20"
+    },
+    {
+      "id": "craft",
+      "tool": "built-in ImageGen",
+      "transparent_background": true,
+      "returned_file": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-7016a814-e787-4681-930f-bddc04acf711.png",
+      "source": "assets/art_source/player/craft.png",
+      "prompt_text": "Use case: stylized-concept\nAsset type: production raster work-animation source for HARVEST THE NIGHT.\nInput images: Image 1 is the approved farmer identity master; Image 2 is the approved idle_west strip for exact side-view face, hat, clothes, body scale and feet. Both are references, not edit targets.\nStyle/medium: coherent crisp pixel art with deliberate clusters and colored outlines, simple readable tools. Preserve straw hat with brown band, dark hair, cream rolled sleeves, blue bib overalls, brown boots and warm skin. Orthographic three-quarter top-down camera, facing WEST (left).\nComposition: exactly FOUR complete sequential poses in ONE horizontal row, left to right. Equal-size square cells with generous actual transparent gutters and outer margins. No other figures or rows. Boots stay planted at the same baseline and horizontal body center within each cell. Same body/hat size throughout; do not center the combined character+tool bounds or resize a pose to fill its cell.\nRuntime contract: every pose will be reduced to a 48x48 native canvas with body about 20x30 and feet at (24,44). Tools may extend about 16 pixels left and 12 above the hat within that canvas. Keep tool proportions compact enough to fit, without shrinking the farmer. Complete unclipped tool, simple one- or two-color readable metal head and wood handle.\nLighting/mood: neutral warm daytime, upper-left highlights, darker underside; no baked glow, contact effect, ground, crop, tree, rock, station or shadow.\nScene/backdrop: genuine transparency including gutters, no checkerboard drawing. No text, labels, borders, watermark or UI. No blur, smooth painting, random speckle, duplicated hands/tools or extra limbs.\n\nPrimary request: Action CRAFT: deliberate empty-hand production assembly, NO hammer to confuse with repair. Poses 0 hands poised at waist left; 1 near hand reaches left to press/turn an imaginary station control while far hand steadies a tiny wood part; 2 both hands shift/assemble small wood part at waist; 3 upright recovery inspecting that compact part near chest. Same body/hat/feet, all four purposeful distinct poses. No machine/workbench baked in.\nThe last pose recovers to the first to form a believable four-frame work cycle.",
+      "references": [
+        "assets/art_source/masters/farmer.png",
+        "assets/art_source/player/idle_west.png"
+      ],
+      "decision": "Accepted: four distinct native frames; body scale, boot anchor, alpha, side silhouette and tool clearance reviewed on light/dark/checker backgrounds.",
+      "source_sha256": "dfd18f36feeede515949517009edb966dce862cdbdb23764abd576521b6e9d76"
+    },
+    {
+      "id": "fish",
+      "tool": "built-in ImageGen",
+      "transparent_background": true,
+      "returned_file": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-6c043df8-35d5-4546-b3d0-c5634f4e8755.png",
+      "source": "assets/art_source/player/candidates/fish-r0.png",
+      "prompt_text": "Use case: stylized-concept\nAsset type: production raster work-animation source for HARVEST THE NIGHT.\nInput images: Image 1 is the approved farmer identity master; Image 2 is the approved idle_west strip for exact side-view face, hat, clothes, body scale and feet. Both are references, not edit targets.\nStyle/medium: coherent crisp pixel art with deliberate clusters and colored outlines, simple readable tools. Preserve straw hat with brown band, dark hair, cream rolled sleeves, blue bib overalls, brown boots and warm skin. Orthographic three-quarter top-down camera, facing WEST (left).\nComposition: exactly FOUR complete sequential poses in ONE horizontal row, left to right. Equal-size square cells with generous actual transparent gutters and outer margins. No other figures or rows. Boots stay planted at the same baseline and horizontal body center within each cell. Same body/hat size throughout; do not center the combined character+tool bounds or resize a pose to fill its cell.\nRuntime contract: every pose will be reduced to a 48x48 native canvas with body about 20x30 and feet at (24,44). Tools may extend about 16 pixels left and 12 above the hat within that canvas. Keep tool proportions compact enough to fit, without shrinking the farmer. Complete unclipped tool, simple one- or two-color readable metal head and wood handle.\nLighting/mood: neutral warm daytime, upper-left highlights, darker underside; no baked glow, contact effect, ground, crop, tree, rock, station or shadow.\nScene/backdrop: genuine transparency including gutters, no checkerboard drawing. No text, labels, borders, watermark or UI. No blur, smooth painting, random speckle, duplicated hands/tools or extra limbs.\n\nPrimary request: Action FISH CAST: slender compact brown FISHING ROD with visible fine silver line attached to its TIP and small bobber. Poses 0 rod drawn back high behind shoulder; 1 cast thrusts rod forward LEFT diagonally; 2 rod extended left with short arcing line/bobber forward; 3 upright ready hold with rod angled left/up and line descending from its tip. Rod/line/bobber wholly inside each cell and compact enough for runtime canvas; no water/fish/scenery.\nThe last pose recovers to the first to form a believable four-frame work cycle.",
+      "references": [
+        "assets/art_source/masters/farmer.png",
+        "assets/art_source/player/idle_west.png"
+      ],
+      "decision": "Rejected: cast frames 1 and 2 exceed the 48x48 canvas at the approved 30px farmer body scale; preserve candidate for a compact-rod revision.",
+      "source_sha256": "4b813699aa46b62142535674aca3616abfde5a9595c5e008ed1f93d104d9fd44"
+    },
+    {
+      "id": "fish-r1",
+      "tool": "built-in ImageGen",
+      "transparent_background": true,
+      "returned_file": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-b3182703-4ad7-498c-9a39-dcd1fba6e170.png",
+      "source": "assets/art_source/player/candidates/fish-r1.png",
+      "prompt_text": "Use case: identity-preserve. Asset type: transparent four-frame pixel-art farmer fishing/cast strip for a Godot game.\nInput image 1 is the EDIT TARGET: the rejected fishing strip. Image 2 is the approved farmer identity reference; image 3 is the accepted west idle body/outline reference.\nChange only the fishing equipment geometry in the target strip: shorten the rod and its visible line in ALL four poses. Preserve the four ordered poses, hat, clothing, face, character dimensions, frame layout, feet and body silhouette. The rod plus line must never extend more than 0.65 of the farmer's standing hat-to-boot height to the left of the center between the boots. Total rod-plus-line height above the boot baseline must remain below 1.35 times the standing farmer height. In frame 1 (second pose), keep a forward cast with the compact rod bent forward; in frame 2 (third pose), show its low follow-through with the same compact rod and a short nearby bobber. Leave the rod identifiable, with a wooden handle, dark gray reel and red-white bobber. Use compact pixel clusters, one short line arc, no detached swish trails. Keep generous transparent gaps between all four frames and transparent outer margins. No background, ground, shadow, text, labels, grid, target, duplicate figures or fifth frame. Full clear pixel silhouette with upper-left highlights. Do not shrink the farmer to accommodate the fishing rod.",
+      "references": [
+        "assets/art_source/player/candidates/fish-r0.png",
+        "assets/art_source/masters/farmer.png",
+        "assets/art_source/player/idle_west.png"
+      ],
+      "decision": "Rejected: follow-through rod still needs 27px to the left of the foot anchor; only 24px available. Other poses fit; request second targeted revision of frame 2.",
+      "source_sha256": "63b6ae4b068bd726f912da3d0ce4ee3d747e681ecf80a35cf7e9ada2f7a12de7"
+    },
+    {
+      "id": "fish-r2",
+      "tool": "built-in ImageGen",
+      "transparent_background": true,
+      "returned_file": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-2a452793-a431-4ee5-85d0-09c2dc2555a7.png",
+      "source": "assets/art_source/player/fish.png",
+      "prompt_text": "Use case: precise-object-edit. Transparent four-frame pixel-art fishing animation strip.\nImage 1 is the EDIT TARGET. Change ONLY the rod and line of the THIRD figure from the left (follow-through pose). Preserve every pixel and position of the farmers, and preserve the equipment of figures 1, 2 and 4. In figure 3 shorten the near-horizontal rod by 35 percent: move its tip and bobber toward the farmer's left hand, keeping the wooden rod slope and reel. The leftmost bobber pixel must be no farther left than the left edge of this figure's hat; the leftmost rod pixel must be no farther left than that hat edge too. Keep a short line to the red-white bobber just underneath the rod tip. No extra line arcs. This is necessary to fit a 48px canvas with a 30px farmer. Keep all four figures, transparent gutters and transparent outer margins unchanged. Do not crop, shrink, move or redraw any farmer. No extra figures, background, text, grid or shadows.",
+      "references": [
+        "assets/art_source/player/candidates/fish-r1.png"
+      ],
+      "decision": "Accepted: four distinct native frames; body scale, boot anchor, alpha, side silhouette and tool clearance reviewed on light/dark/checker backgrounds.",
+      "source_sha256": "771aa2af6048cb16106f1e993912733040dbac6ab383a66d2b543cd7199a5451"
+    },
+    {
+      "id": "harvest",
+      "tool": "built-in ImageGen",
+      "transparent_background": true,
+      "returned_file": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-a6515db9-3ee6-419d-a8f4-73c297bafee1.png",
+      "source": "assets/art_source/player/harvest.png",
+      "prompt_text": "Use case: stylized-concept\nAsset type: production raster work-animation source for HARVEST THE NIGHT.\nInput images: Image 1 is the approved farmer identity master; Image 2 is the approved idle_west strip for exact side-view face, hat, clothes, body scale and feet. Both are references, not edit targets.\nStyle/medium: coherent crisp pixel art with deliberate clusters and colored outlines, simple readable tools. Preserve straw hat with brown band, dark hair, cream rolled sleeves, blue bib overalls, brown boots and warm skin. Orthographic three-quarter top-down camera, facing WEST (left).\nComposition: exactly FOUR complete sequential poses in ONE horizontal row, left to right. Equal-size square cells with generous actual transparent gutters and outer margins. No other figures or rows. Boots stay planted at the same baseline and horizontal body center within each cell. Same body/hat size throughout; do not center the combined character+tool bounds or resize a pose to fill its cell.\nRuntime contract: every pose will be reduced to a 48x48 native canvas with body about 20x30 and feet at (24,44). Tools may extend about 16 pixels left and 12 above the hat within that canvas. Keep tool proportions compact enough to fit, without shrinking the farmer. Complete unclipped tool, simple one- or two-color readable metal head and wood handle.\nLighting/mood: neutral warm daytime, upper-left highlights, darker underside; no baked glow, contact effect, ground, crop, tree, rock, station or shadow.\nScene/backdrop: genuine transparency including gutters, no checkerboard drawing. No text, labels, borders, watermark or UI. No blur, smooth painting, random speckle, duplicated hands/tools or extra limbs.\n\nPrimary request: Action HARVEST: gather a compact GOLDEN WHEAT BUNDLE, not green seed planting. Poses 0 upright hands ready low left; 1 slight knee bend reaching low left to grab bundle; 2 hands lift visible golden wheat sheaf from low left to waist; 3 upright recovery holding small sheaf across chest. Feet fixed, crouch natural, straw hat same size. No rooted crop/soil or scenery.\nThe last pose recovers to the first to form a believable four-frame work cycle.",
+      "references": [
+        "assets/art_source/masters/farmer.png",
+        "assets/art_source/player/idle_west.png"
+      ],
+      "decision": "Accepted: four distinct native frames; body scale, boot anchor, alpha, side silhouette and tool clearance reviewed on light/dark/checker backgrounds.",
+      "source_sha256": "c68daa632960f22f0346c4c92e70e5ebd18cee33fefae9987cbd923cc2a28f9b"
+    },
+    {
+      "id": "mine",
+      "tool": "built-in ImageGen",
+      "transparent_background": true,
+      "returned_file": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-b605c99e-e76c-4aa5-8902-0adb59939d20.png",
+      "source": "assets/art_source/player/mine.png",
+      "prompt_text": "Use case: stylized-concept\nAsset type: production raster work-animation source for HARVEST THE NIGHT.\nInput images: Image 1 is the approved farmer identity master; Image 2 is the approved idle_west strip for exact side-view face, hat, clothes, body scale and feet. Both are references, not edit targets.\nStyle/medium: coherent crisp pixel art with deliberate clusters and colored outlines, simple readable tools. Preserve straw hat with brown band, dark hair, cream rolled sleeves, blue bib overalls, brown boots and warm skin. Orthographic three-quarter top-down camera, facing WEST (left).\nComposition: exactly FOUR complete sequential poses in ONE horizontal row, left to right. Equal-size square cells with generous actual transparent gutters and outer margins. No other figures or rows. Boots stay planted at the same baseline and horizontal body center within each cell. Same body/hat size throughout; do not center the combined character+tool bounds or resize a pose to fill its cell.\nRuntime contract: every pose will be reduced to a 48x48 native canvas with body about 20x30 and feet at (24,44). Tools may extend about 16 pixels left and 12 above the hat within that canvas. Keep tool proportions compact enough to fit, without shrinking the farmer. Complete unclipped tool, simple one- or two-color readable metal head and wood handle.\nLighting/mood: neutral warm daytime, upper-left highlights, darker underside; no baked glow, contact effect, ground, crop, tree, rock, station or shadow.\nScene/backdrop: genuine transparency including gutters, no checkerboard drawing. No text, labels, borders, watermark or UI. No blur, smooth painting, random speckle, duplicated hands/tools or extra limbs.\n\nPrimary request: Action MINE: two-handed compact PICKAXE with a narrow curved pointed silver metal head, clearly distinguishable from axe. Poses 0 raised pick diagonally behind head; 1 pointed tip strikes imaginary rock LEFT and LOW near the boot baseline; 2 low follow-through arms stretched left; 3 upright recovery lifting pick to ready stance. One continuous handle and head, planted boots, no rock or particles.\nThe last pose recovers to the first to form a believable four-frame work cycle.",
+      "references": [
+        "assets/art_source/masters/farmer.png",
+        "assets/art_source/player/idle_west.png"
+      ],
+      "decision": "Accepted: four distinct native frames; body scale, boot anchor, alpha, side silhouette and tool clearance reviewed on light/dark/checker backgrounds.",
+      "source_sha256": "0d95e238f1bc5aff89c1cf090fcaa5b458870d44236a941815fbd4f23be29a2f"
+    },
+    {
+      "id": "plant",
+      "tool": "built-in ImageGen",
+      "transparent_background": true,
+      "returned_file": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-3320937a-078e-4f86-b710-3035efa44fd4.png",
+      "source": "assets/art_source/player/plant.png",
+      "prompt_text": "Use case: stylized-concept\nAsset type: production raster work-animation source for HARVEST THE NIGHT.\nInput images: Image 1 is the approved farmer identity master; Image 2 is the approved idle_west strip for exact side-view face, hat, clothes, body scale and feet. Both are references, not edit targets.\nStyle/medium: coherent crisp pixel art with deliberate clusters and colored outlines, simple readable tools. Preserve straw hat with brown band, dark hair, cream rolled sleeves, blue bib overalls, brown boots and warm skin. Orthographic three-quarter top-down camera, facing WEST (left).\nComposition: exactly FOUR complete sequential poses in ONE horizontal row, left to right. Equal-size square cells with generous actual transparent gutters and outer margins. No other figures or rows. Boots stay planted at the same baseline and horizontal body center within each cell. Same body/hat size throughout; do not center the combined character+tool bounds or resize a pose to fill its cell.\nRuntime contract: every pose will be reduced to a 48x48 native canvas with body about 20x30 and feet at (24,44). Tools may extend about 16 pixels left and 12 above the hat within that canvas. Keep tool proportions compact enough to fit, without shrinking the farmer. Complete unclipped tool, simple one- or two-color readable metal head and wood handle.\nLighting/mood: neutral warm daytime, upper-left highlights, darker underside; no baked glow, contact effect, ground, crop, tree, rock, station or shadow.\nScene/backdrop: genuine transparency including gutters, no checkerboard drawing. No text, labels, borders, watermark or UI. No blur, smooth painting, random speckle, duplicated hands/tools or extra limbs.\n\nPrimary request: Action PLANT: bare seed-hand motion, NO large bag or tool. Poses 0 upright anticipation cupping a few small gold seeds near waist; 1 knees bend slightly and near hand reaches LOW LEFT to sow; 2 same planted feet as fingertips release a tiny seed cluster toward ground left; 3 upright recovery withdrawing hands toward waist. Stable hat/head size, natural crouch only; do not resize crouching farmer. No sprout/soil.\nThe last pose recovers to the first to form a believable four-frame work cycle.",
+      "references": [
+        "assets/art_source/masters/farmer.png",
+        "assets/art_source/player/idle_west.png"
+      ],
+      "decision": "Accepted: four distinct native frames; body scale, boot anchor, alpha, side silhouette and tool clearance reviewed on light/dark/checker backgrounds.",
+      "source_sha256": "f679e7e435d3b5240f465f5f5117da379de4fd2e5518e92458466bca0168438f"
+    },
+    {
+      "id": "reel",
+      "tool": "built-in ImageGen",
+      "transparent_background": true,
+      "returned_file": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-5d1c70c8-d7d0-4f4b-a849-1381608b6e6b.png",
+      "source": "assets/art_source/player/reel.png",
+      "prompt_text": "Use case: stylized-concept\nAsset type: production raster work-animation source for HARVEST THE NIGHT.\nInput images: Image 1 is the approved farmer identity master; Image 2 is the approved idle_west strip for exact side-view face, hat, clothes, body scale and feet. Both are references, not edit targets.\nStyle/medium: coherent crisp pixel art with deliberate clusters and colored outlines, simple readable tools. Preserve straw hat with brown band, dark hair, cream rolled sleeves, blue bib overalls, brown boots and warm skin. Orthographic three-quarter top-down camera, facing WEST (left).\nComposition: exactly FOUR complete sequential poses in ONE horizontal row, left to right. Equal-size square cells with generous actual transparent gutters and outer margins. No other figures or rows. Boots stay planted at the same baseline and horizontal body center within each cell. Same body/hat size throughout; do not center the combined character+tool bounds or resize a pose to fill its cell.\nRuntime contract: every pose will be reduced to a 48x48 native canvas with body about 20x30 and feet at (24,44). Tools may extend about 16 pixels left and 12 above the hat within that canvas. Keep tool proportions compact enough to fit, without shrinking the farmer. Complete unclipped tool, simple one- or two-color readable metal head and wood handle.\nLighting/mood: neutral warm daytime, upper-left highlights, darker underside; no baked glow, contact effect, ground, crop, tree, rock, station or shadow.\nScene/backdrop: genuine transparency including gutters, no checkerboard drawing. No text, labels, borders, watermark or UI. No blur, smooth painting, random speckle, duplicated hands/tools or extra limbs.\n\nPrimary request: Action REEL, distinct from cast: fishing rod stays angled LEFT, with small dark reel visible at the hand grip; do not swing the rod overhead. Poses 0 ready with taut compact line from tip; 1 near hand turns reel while far hand holds rod grip; 2 elbow pulls toward body and rod bends slightly under tension, line reels inward; 3 upright recovery with rod relaxed slightly left and hand back at reel. Plant boots; rod/line wholly inside cell; no fish/water.\nThe last pose recovers to the first to form a believable four-frame work cycle.",
+      "references": [
+        "assets/art_source/masters/farmer.png",
+        "assets/art_source/player/idle_west.png"
+      ],
+      "decision": "Accepted: four distinct native frames; body scale, boot anchor, alpha, side silhouette and tool clearance reviewed on light/dark/checker backgrounds.",
+      "source_sha256": "e54358cc065be47cf4d30b2784d63f62486eb65a5275b53d30cf3a7dde3d6b2e"
+    },
+    {
+      "id": "repair",
+      "tool": "built-in ImageGen",
+      "transparent_background": true,
+      "returned_file": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-64676306-da2d-4ec4-a71e-4e691733801b.png",
+      "source": "assets/art_source/player/repair.png",
+      "prompt_text": "Use case: stylized-concept\nAsset type: production raster work-animation source for HARVEST THE NIGHT.\nInput images: Image 1 is the approved farmer identity master; Image 2 is the approved idle_west strip for exact side-view face, hat, clothes, body scale and feet. Both are references, not edit targets.\nStyle/medium: coherent crisp pixel art with deliberate clusters and colored outlines, simple readable tools. Preserve straw hat with brown band, dark hair, cream rolled sleeves, blue bib overalls, brown boots and warm skin. Orthographic three-quarter top-down camera, facing WEST (left).\nComposition: exactly FOUR complete sequential poses in ONE horizontal row, left to right. Equal-size square cells with generous actual transparent gutters and outer margins. No other figures or rows. Boots stay planted at the same baseline and horizontal body center within each cell. Same body/hat size throughout; do not center the combined character+tool bounds or resize a pose to fill its cell.\nRuntime contract: every pose will be reduced to a 48x48 native canvas with body about 20x30 and feet at (24,44). Tools may extend about 16 pixels left and 12 above the hat within that canvas. Keep tool proportions compact enough to fit, without shrinking the farmer. Complete unclipped tool, simple one- or two-color readable metal head and wood handle.\nLighting/mood: neutral warm daytime, upper-left highlights, darker underside; no baked glow, contact effect, ground, crop, tree, rock, station or shadow.\nScene/backdrop: genuine transparency including gutters, no checkerboard drawing. No text, labels, borders, watermark or UI. No blur, smooth painting, random speckle, duplicated hands/tools or extra limbs.\n\nPrimary request: Action REPAIR: compact short wooden-handled gray HAMMER, clearly not axe/pick, use one near hand. Poses 0 hammer raised at chest left and far hand extended to steady imaginary work; 1 hammer strikes DOWN at a work point LEFT at waist height; 2 hammer follows through lower while far hand braces; 3 upright recovery retracts hammer to chest. Feet planted, same tool silhouette, no wall/building/workbench, no sparks.\nThe last pose recovers to the first to form a believable four-frame work cycle.",
+      "references": [
+        "assets/art_source/masters/farmer.png",
+        "assets/art_source/player/idle_west.png"
+      ],
+      "decision": "Accepted: four distinct native frames; body scale, boot anchor, alpha, side silhouette and tool clearance reviewed on light/dark/checker backgrounds.",
+      "source_sha256": "ed0545d9288dbed674615b54774c1f3246279b1928f71534113602b5a000165a"
+    },
+    {
+      "id": "till",
+      "tool": "built-in ImageGen",
+      "transparent_background": true,
+      "returned_file": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-a8ffb88e-d575-4482-937c-6ff2bbcb6794.png",
+      "source": "assets/art_source/player/till.png",
+      "prompt_text": "Use case: stylized-concept\nAsset type: production raster work-animation source for HARVEST THE NIGHT.\nInput images: Image 1 is the approved farmer identity master; Image 2 is the approved idle_west strip for exact side-view face, hat, clothes, body scale and feet. Both are references, not edit targets.\nStyle/medium: coherent crisp pixel art with deliberate clusters and colored outlines, simple readable tools. Preserve straw hat with brown band, dark hair, cream rolled sleeves, blue bib overalls, brown boots and warm skin. Orthographic three-quarter top-down camera, facing WEST (left).\nComposition: exactly FOUR complete sequential poses in ONE horizontal row, left to right. Equal-size square cells with generous actual transparent gutters and outer margins. No other figures or rows. Boots stay planted at the same baseline and horizontal body center within each cell. Same body/hat size throughout; do not center the combined character+tool bounds or resize a pose to fill its cell.\nRuntime contract: every pose will be reduced to a 48x48 native canvas with body about 20x30 and feet at (24,44). Tools may extend about 16 pixels left and 12 above the hat within that canvas. Keep tool proportions compact enough to fit, without shrinking the farmer. Complete unclipped tool, simple one- or two-color readable metal head and wood handle.\nLighting/mood: neutral warm daytime, upper-left highlights, darker underside; no baked glow, contact effect, ground, crop, tree, rock, station or shadow.\nScene/backdrop: genuine transparency including gutters, no checkerboard drawing. No text, labels, borders, watermark or UI. No blur, smooth painting, random speckle, duplicated hands/tools or extra limbs.\n\nPrimary request: Action TILL: two-handed wooden-handled HOE with a small flat rectangular gray blade bent perpendicular to handle. Poses 0 hoe lifted forward left; 1 blade pushes into imaginary soil left near ground; 2 hands pull hoe back toward boots, clearly raking; 3 upright recovery raising it to ready. Plant both boots; no actual soil patch or plant.\nThe last pose recovers to the first to form a believable four-frame work cycle.",
+      "references": [
+        "assets/art_source/masters/farmer.png",
+        "assets/art_source/player/idle_west.png"
+      ],
+      "decision": "Accepted: four distinct native frames; body scale, boot anchor, alpha, side silhouette and tool clearance reviewed on light/dark/checker backgrounds.",
+      "source_sha256": "81d9240acc8ccb00a67c406b01e12af7640d4f8027c3e44f3a811df3bd36adeb"
+    },
+    {
+      "id": "trade",
+      "tool": "built-in ImageGen",
+      "transparent_background": true,
+      "returned_file": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-486b8785-de88-4b82-a317-4be4478c285c.png",
+      "source": "assets/art_source/player/trade.png",
+      "prompt_text": "Use case: stylized-concept\nAsset type: production raster work-animation source for HARVEST THE NIGHT.\nInput images: Image 1 is the approved farmer identity master; Image 2 is the approved idle_west strip for exact side-view face, hat, clothes, body scale and feet. Both are references, not edit targets.\nStyle/medium: coherent crisp pixel art with deliberate clusters and colored outlines, simple readable tools. Preserve straw hat with brown band, dark hair, cream rolled sleeves, blue bib overalls, brown boots and warm skin. Orthographic three-quarter top-down camera, facing WEST (left).\nComposition: exactly FOUR complete sequential poses in ONE horizontal row, left to right. Equal-size square cells with generous actual transparent gutters and outer margins. No other figures or rows. Boots stay planted at the same baseline and horizontal body center within each cell. Same body/hat size throughout; do not center the combined character+tool bounds or resize a pose to fill its cell.\nRuntime contract: every pose will be reduced to a 48x48 native canvas with body about 20x30 and feet at (24,44). Tools may extend about 16 pixels left and 12 above the hat within that canvas. Keep tool proportions compact enough to fit, without shrinking the farmer. Complete unclipped tool, simple one- or two-color readable metal head and wood handle.\nLighting/mood: neutral warm daytime, upper-left highlights, darker underside; no baked glow, contact effect, ground, crop, tree, rock, station or shadow.\nScene/backdrop: genuine transparency including gutters, no checkerboard drawing. No text, labels, borders, watermark or UI. No blur, smooth painting, random speckle, duplicated hands/tools or extra limbs.\n\nPrimary request: Action TRADE: compact round GOLD COIN held between fingers, visible enough after reduction, distinct from crafting. Poses 0 hand withdraws coin toward waist; 1 near arm offers coin LEFT at chest height; 2 open palm shows coin outward left as transaction beat; 3 upright recovery hand retracts, coin close to waist. Plant boots. No NPC/stall/sign/text.\nThe last pose recovers to the first to form a believable four-frame work cycle.",
+      "references": [
+        "assets/art_source/masters/farmer.png",
+        "assets/art_source/player/idle_west.png"
+      ],
+      "decision": "Accepted: four distinct native frames; body scale, boot anchor, alpha, side silhouette and tool clearance reviewed on light/dark/checker backgrounds.",
+      "source_sha256": "3d2b4381fa8d726bc0fd2dffead64ad917113ebe2638427336847656cb7a88c7"
+    },
+    {
+      "id": "water",
+      "tool": "built-in ImageGen",
+      "transparent_background": true,
+      "returned_file": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-48acfd92-dea5-4158-b092-511e5cc1485d.png",
+      "source": "assets/art_source/player/water.png",
+      "prompt_text": "Use case: stylized-concept\nAsset type: production raster work-animation source for HARVEST THE NIGHT.\nInput images: Image 1 is the approved farmer identity master; Image 2 is the approved idle_west strip for exact side-view face, hat, clothes, body scale and feet. Both are references, not edit targets.\nStyle/medium: coherent crisp pixel art with deliberate clusters and colored outlines, simple readable tools. Preserve straw hat with brown band, dark hair, cream rolled sleeves, blue bib overalls, brown boots and warm skin. Orthographic three-quarter top-down camera, facing WEST (left).\nComposition: exactly FOUR complete sequential poses in ONE horizontal row, left to right. Equal-size square cells with generous actual transparent gutters and outer margins. No other figures or rows. Boots stay planted at the same baseline and horizontal body center within each cell. Same body/hat size throughout; do not center the combined character+tool bounds or resize a pose to fill its cell.\nRuntime contract: every pose will be reduced to a 48x48 native canvas with body about 20x30 and feet at (24,44). Tools may extend about 16 pixels left and 12 above the hat within that canvas. Keep tool proportions compact enough to fit, without shrinking the farmer. Complete unclipped tool, simple one- or two-color readable metal head and wood handle.\nLighting/mood: neutral warm daytime, upper-left highlights, darker underside; no baked glow, contact effect, ground, crop, tree, rock, station or shadow.\nScene/backdrop: genuine transparency including gutters, no checkerboard drawing. No text, labels, borders, watermark or UI. No blur, smooth painting, random speckle, duplicated hands/tools or extra limbs.\n\nPrimary request: Action WATER: compact gray-blue WATERING CAN with loop handle and long left-pointing spout, held in both hands. Poses 0 can level at waist; 1 tip can down left, two small blue water drops at spout; 2 stronger tilt with short readable blue drop stream ending above ground to left; 3 can returns level in upright recovery. Same can geometry throughout; plant boots; no bucket/soil.\nThe last pose recovers to the first to form a believable four-frame work cycle.",
+      "references": [
+        "assets/art_source/masters/farmer.png",
+        "assets/art_source/player/idle_west.png"
+      ],
+      "decision": "Accepted: four distinct native frames; body scale, boot anchor, alpha, side silhouette and tool clearance reviewed on light/dark/checker backgrounds.",
+      "source_sha256": "0630be3bf0f17264b7ccc27397da79b4b825d0de118df65443456496725af5be"
+    }
+  ]
+}

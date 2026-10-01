@@ -15,10 +15,14 @@ Task 0004 replaces the pilot south idle and migrates the remaining locomotion
 frames with six authored strips in `player/`: south/north/west idle (three each)
 and walk (four each). East mirrors west. All 21 frames are distinct native
 cuts on 48x48 with feet at (24,44), 30 px visible height and 20–22 px width.
-The registry now assigns 36 outputs to raster, 25 to the owner-sheet cutter
-and 156 to ASCII. Work/reaction families remain for 0005–0006.
+Task 0005 migrates work to thirteen four-frame strips: chop, mine, till,
+plant, water, fish, reel, harvest, carry, craft, trade, collect and repair.
+All core verbs have separate art; carry illustrates an existing nearby station
+delivery. West is authored, east mirrors west, north/south work uses side art.
+The registry now assigns 88 outputs to raster, four reaction frames to the
+owner-sheet cutter and 156 to ASCII. Reactions remain for task 0006.
 
-`ownership.json` registers all 217 PNGs with exactly one writer/checker: ASCII,
+`ownership.json` registers all 248 PNGs with exactly one writer/checker: ASCII,
 owner-sheet cutter, or raster importer. `manifest.json` describes every raster
 output; `manifest.schema.json` documents its structure. `tools/import_art.py`
 validates the structure plus actual image bounds, provenance, animation coverage,
@@ -83,3 +87,21 @@ are in `implementation/sprites/reviews/0004/measured-contract.json`. Rebuild
 QA with that folder's `build_review.py`; it never edits source/runtime pixels.
 Use `python tools/show_art.py --locomotion --check` for state/facing/frame loops
 and add `--out=implementation/shots/sprites/<task-id>/locomotion` for captures.
+
+Task 0005 prompts/provenance are in `generation/0005-*` under the sprite
+implementation folder. Fifteen built-in calls produced thirteen accepted strips
+and two preserved rejected fishing candidates. `reviews/0005/measured-contract.json`
+freezes actual source crops, standing body reference and boot source coordinates.
+Each strip uses one body-based scale; `content_anchor_xy` places the boots,
+independent of the full tool/line bounds. Do not scale the farmer down to fit a tool.
+All 52 work outputs are distinct; canvas/pivot remain 48x48/(24,44).
+
+`PlayerWork` observes the unchanged simulation ticks through read-only driver
+signals. Timed actions hold anticipation, show contact on completion and expire
+through follow-through/recovery. Return frames shorten for the existing fast
+repair cadence. Water/reel/trade start at contact and finish in the ready pose;
+movement/cancel remove every pending tool cue. No core/save timer was added.
+`python tools/show_art.py --work --check` covers real verbs, both side facings,
+completion, interruption, three-tick repeat repair, nearby delivery and exact
+4x Sim.advance equivalence. Add an output directory for real-render captures.
+`reviews/0005/build_review.py` composes native/3x alpha, phases and capture pages.

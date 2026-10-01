@@ -65,6 +65,16 @@ limbs without changing canvas, contact, grid or collision. One measured scale
 per strip applies to every frame; no pose is individually resized. Twenty-five
 owner-sheet work/reaction frames remain at the pilot scale for 0005–0006.
 
+Task 0005 accepts thirteen west work strips with four distinct frames each.
+East mirrors west; north/south work intentionally uses the west side-on art.
+No work verb borrows another gesture. The farmer's standing reference remains
+30 px on 48x48 with feet (24,44); crouches bend naturally without per-pose resizing.
+Tools, droplets and lines fit the common canvas. Source boot coordinates and
+native anchors are measured separately from the complete silhouette bounds;
+two rejected fishing candidates preserve the compact-rod revision history.
+Carry is a brief visual response to a nearby real production delivery, not an
+added carrying mechanic. Four original reaction poses remain for task 0006.
+
 The four transparent identity masters and neutral-day/night scene studies live
 in `assets/art_source/masters/`. The studies establish materials and lighting;
 their illustrative object sizes are not authoritative runtime measurements.
@@ -102,6 +112,15 @@ sheet. Start with idle (3 frames) and walk (4 frames) for south/north/west;
 east may mirror west if tool handedness remains coherent. Work cycles normally
 use 4 frames: anticipation, contact, follow-through, recovery. Match existing
 state-driven action timing; cosmetic durations live in the view layer.
+
+Work anticipation holds while the existing action timer runs; contact starts
+on its completion tick. Follow-through and recovery expire in the view. Their
+maximum duration is 90 ms per frame, shortened to one quarter of a work cycle
+for fast repeating repair. Instant water/reel/trade begin at contact, continue
+through follow-through/recovery and return to ready. A movement/cancel removes
+the cue immediately. At accelerated/catch-up speeds the render may sample fewer
+frames than the simulation runs; observers still see every fixed tick and do
+not change the core rates, durations, payloads or state.
 
 Single-shot deaths finish and expire rather than looping forever. Enemy death
 art requires view playback because the core removes the enemy immediately.
