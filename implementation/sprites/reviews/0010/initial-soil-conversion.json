@@ -1,0 +1,60 @@
+{
+  "id": "tilled_wet",
+  "tool": "built-in ImageGen",
+  "revision": 0,
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-66f0a394-3246-4185-ae2e-2ded9f3332a1.png",
+  "source": "assets/art_source/crops/candidates/tilled_wet-r0.png",
+  "source_sha256": "9eefdaa50a729463d491094e771e3232e37698dd4e1cf67cc78ba7b896b141d7",
+  "source_wh": [
+    1254,
+    1254
+  ],
+  "source_alpha_range": [
+    255,
+    255
+  ],
+  "references": [
+    "assets/art_source/crops/tilled.png"
+  ],
+  "prompt_text": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm\nthat becomes a fortress against zombies at night.\nPrimary request: crops/tilled_wet, one opaque seamless tilled-earth tile.\nInput images: Image 1: approved dry tilled soil, EDIT TARGET; change only soil moisture value/color, preserve exactly the furrow geometry, spacing and camera.\nStyle/medium: coherent hand-crafted pixel art with deliberate pixel clusters,\ncolored outlines, restrained texture, readable material planes and clean forms.\nComposition/framing: orthographic three-quarter top-down view on a rectangular\ngrid; match the approved master camera and scale. Final native canvas is\n16x16 pixels with contact pivot 8,16; this is a downstream import\ntarget, so the generated source must remain simple enough to survive reduction.\nLighting/mood: neutral warm daytime, highlights from upper left, darker underside;\nruntime supplies dusk/night lighting. Keep emission in separate localized forms.\nColor palette: match the approved project palette and master, warm timber and\nterracotta, layered greens, cool water, violet/blue shadows; limited ramps.\nScene/backdrop: fully opaque tilled earth filling every image pixel edge to edge. No baked ground shadow for actors.\nConstraints: complete unclipped object, consistent perspective and scale, clear\nground contact, generous tool/weapon clearance, no labels, text, watermark or UI.\nAvoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,\nrandom pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,\nnew gameplay objects, tiny details that disappear at native size.\n\nCROP supporting-soil brief:\nDry/wet tilled soil are separate opaque assets.\n\nExact soil contract:\nA SINGLE fully opaque seamless orthographic top-down material swatch, not a perspective block or patch floating on a background. Four quiet horizontal joined furrows cross the whole image at equal intervals, repeating top-to-bottom and left-to-right at tile boundaries. Subdued broad pixel clusters, two or three brown planes, no high contrast black border or random noise. Final 16x16 tile under foliage must remain recognizable as dark cool damp earth; visibly darker than the accepted dry master, preserving all four original furrows, without blue water puddles or sparkles. No plant, seed, roots, pebbles, grass, farm object, label, border, bevel or transparency. Do not draw a checkerboard. Crop family contract: dry/wet tilled soil are separate opaque assets; the plants will be composited over this material at runtime.",
+  "measured_recipes": [
+    {
+      "id": "crops/tilled_wet",
+      "source": "assets/art_source/crops/tilled_wet.png",
+      "crop_xywh": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        16
+      ],
+      "content_scale": 0.012759170653907496,
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "soil_dark",
+        "soil",
+        "soil_light",
+        "ink_soft",
+        "ink"
+      ]
+    }
+  ],
+  "decision": "Initial four-color soil palette conversion failed: native dry/wet brightness differed by 16.97. Adding the existing shared ink shadow to both material subsets preserved raw dark channels and passed the unchanged 20-point contrast guard. No ImageGen correction was needed or executed."
+}

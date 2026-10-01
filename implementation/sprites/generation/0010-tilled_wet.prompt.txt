@@ -1,0 +1,27 @@
+Use case: stylized-concept
+Asset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm
+that becomes a fortress against zombies at night.
+Primary request: crops/tilled_wet, one opaque seamless tilled-earth tile.
+Input images: Image 1: approved dry tilled soil, EDIT TARGET; change only soil moisture value/color, preserve exactly the furrow geometry, spacing and camera.
+Style/medium: coherent hand-crafted pixel art with deliberate pixel clusters,
+colored outlines, restrained texture, readable material planes and clean forms.
+Composition/framing: orthographic three-quarter top-down view on a rectangular
+grid; match the approved master camera and scale. Final native canvas is
+16x16 pixels with contact pivot 8,16; this is a downstream import
+target, so the generated source must remain simple enough to survive reduction.
+Lighting/mood: neutral warm daytime, highlights from upper left, darker underside;
+runtime supplies dusk/night lighting. Keep emission in separate localized forms.
+Color palette: match the approved project palette and master, warm timber and
+terracotta, layered greens, cool water, violet/blue shadows; limited ramps.
+Scene/backdrop: fully opaque tilled earth filling every image pixel edge to edge. No baked ground shadow for actors.
+Constraints: complete unclipped object, consistent perspective and scale, clear
+ground contact, generous tool/weapon clearance, no labels, text, watermark or UI.
+Avoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,
+random pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,
+new gameplay objects, tiny details that disappear at native size.
+
+CROP supporting-soil brief:
+Dry/wet tilled soil are separate opaque assets.
+
+Exact soil contract:
+A SINGLE fully opaque seamless orthographic top-down material swatch, not a perspective block or patch floating on a background. Four quiet horizontal joined furrows cross the whole image at equal intervals, repeating top-to-bottom and left-to-right at tile boundaries. Subdued broad pixel clusters, two or three brown planes, no high contrast black border or random noise. Final 16x16 tile under foliage must remain recognizable as dark cool damp earth; visibly darker than the accepted dry master, preserving all four original furrows, without blue water puddles or sparkles. No plant, seed, roots, pebbles, grass, farm object, label, border, bevel or transparency. Do not draw a checkerboard. Crop family contract: dry/wet tilled soil are separate opaque assets; the plants will be composited over this material at runtime.

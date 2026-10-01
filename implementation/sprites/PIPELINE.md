@@ -303,3 +303,31 @@ farm render under Main's actual day/dusk/night shader. Real pixel comparisons
 confirm farmer occlusion behind both trees and every farmer pixel preserved in
 front. The comparison locates sprites by logical-cell metadata, which survives
 Godot's temporary node names during redraws.
+
+## Crop growth and soil moisture (0010)
+
+Three independent four-stage sources own `wheat/corn/carrot_0..3`. Measure the
+actual alpha gutters rather than assuming equal source quarters. Each species
+shares one source reduction scale across all four stages; source plants are
+never fitted independently into their runtime cells. Wheat/carrot canvases are
+16x16 with (8,14) contact; all corn stages use 16x24 with (8,22) contact.
+The mature corn extends four native pixels above its logical cell, with side
+margins. The existing ground layer, row order and single-cell gameplay remain.
+Soil is an opaque 16x16 tile with (8,16) contact. WorldView calls ArtPlacement
+for both drawings, so watering and changing stages preserve their ground point.
+
+```powershell
+python tools/check_crop_art.py
+python tools/show_art.py --crops --check
+python tools/show_art.py --crops --out=implementation/shots/sprites/<task-id>/crops
+python implementation/sprites/reviews/0010/build_review.py
+```
+
+The source check verifies all fourteen exact outputs, progressive native body
+heights, unclipped binary alpha, required pivots and exposed wet material under
+every stage. Dry/wet average RGB brightness must differ by at least 20.
+The Godot showcase checks real Farming.stage/tick/_water/_harvest, exact harvest
+yields/can consumption, existing walkability and serialized-state equality
+around every redraw. Capture mode also compares actual dry/wet viewport pixels
+under each mature crop in dawn/day/dusk/night lighting. Soil and foliage retain
+different manifest offsets without gaining occupants, collision or shadow nodes.

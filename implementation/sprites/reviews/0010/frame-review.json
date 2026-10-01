@@ -1,0 +1,174 @@
+{
+  "captures": [
+    {
+      "path": "implementation/shots/sprites/0010/crops/dense_light0.png",
+      "sha256": "8ac1b4856edba236d00207006b8b0803680555c6520d2f31ffa2752bd24a9846"
+    },
+    {
+      "path": "implementation/shots/sprites/0010/crops/dense_light1.png",
+      "sha256": "7b5cf79ab15b0ae1e10b634d8be34b1d06ed2a912c77419e80154d1a7de42577"
+    },
+    {
+      "path": "implementation/shots/sprites/0010/crops/dense_light2.png",
+      "sha256": "5a2927ac90aa7622be019bb1b8bd598ead822e016ba6217321eef8c6fbeaf946"
+    },
+    {
+      "path": "implementation/shots/sprites/0010/crops/dense_light3.png",
+      "sha256": "23c85ff175f22cc15d7a6df476915a9ede3a263ac3ad52ef09717728b8627b10"
+    },
+    {
+      "path": "implementation/shots/sprites/0010/crops/farm_light0.png",
+      "sha256": "1d74375261e4b35459158f7b187c1efee94bc3475f1c10bd6e2169e220ed05d9"
+    },
+    {
+      "path": "implementation/shots/sprites/0010/crops/farm_light1.png",
+      "sha256": "c2aff9cee7d0d9a7cb76a0ffa91adddf1e0e46a2c7fae34a88e1554820c915e2"
+    },
+    {
+      "path": "implementation/shots/sprites/0010/crops/farm_light2.png",
+      "sha256": "9332b14e15eddb227677cefcbf1efb02a233ecd8baf230583cf1c4d565946c37"
+    },
+    {
+      "path": "implementation/shots/sprites/0010/crops/farm_light3.png",
+      "sha256": "13ebbbad3c14f4df406b73ff1ec28976bfbcf7b1685c73885012357f327e455e"
+    },
+    {
+      "path": "implementation/shots/sprites/0010/crops/grown_light0.png",
+      "sha256": "d2242de744fd4166a198e0d80d6268f985835d72b508e12597ab4e9d1c309137"
+    },
+    {
+      "path": "implementation/shots/sprites/0010/crops/grown_light1.png",
+      "sha256": "fff2af21403e196ed6d0ef49883a5aa3c0b602fc7ad34d5354569f52c41453d3"
+    },
+    {
+      "path": "implementation/shots/sprites/0010/crops/grown_light2.png",
+      "sha256": "045e87e8d04962158a274d4b72d979ad6c170809f1d9125acc81a3c7658baff2"
+    },
+    {
+      "path": "implementation/shots/sprites/0010/crops/grown_light3.png",
+      "sha256": "3af7d94c32383e43357d3f97755d5cccbb096158978c3e63e13080594adc39ee"
+    },
+    {
+      "path": "implementation/shots/sprites/0010/crops/harvested_light0.png",
+      "sha256": "5005ea876b7b0821a1ab1b4df165c4c49d10519ccb535679c645139af300d75a"
+    },
+    {
+      "path": "implementation/shots/sprites/0010/crops/harvested_light1.png",
+      "sha256": "02728cfcf50387602125770e830526cfd5e34a019090940ecdab4a3d4d416f77"
+    },
+    {
+      "path": "implementation/shots/sprites/0010/crops/harvested_light2.png",
+      "sha256": "dad3af8f67edae13da48fc02bfb1d17f3cbd25a24f6a5c9e69bae543e2a4c692"
+    },
+    {
+      "path": "implementation/shots/sprites/0010/crops/harvested_light3.png",
+      "sha256": "4f119644b9cedb77823392f2004eb07ad4cdcda9d48c58219cb7328dcc431985"
+    },
+    {
+      "path": "implementation/shots/sprites/0010/crops/matrix_light0.png",
+      "sha256": "e7fe24cbfddb0db69ee7813addb3858181ae7cae85e0692d097b31ba96d7d1ad"
+    },
+    {
+      "path": "implementation/shots/sprites/0010/crops/matrix_light1.png",
+      "sha256": "27acb932274fd99c31b12a6fd66dd0ba7d08b2ca680228fd7a3d61210b728ae4"
+    },
+    {
+      "path": "implementation/shots/sprites/0010/crops/matrix_light2.png",
+      "sha256": "ba0c926a2559c583197c34413953bbbc1da7d3a7deba700f3d50273a8898ee21"
+    },
+    {
+      "path": "implementation/shots/sprites/0010/crops/matrix_light3.png",
+      "sha256": "e9f6a3693367294c0d96c61aa4d15f1c71d3a042fd1e2721a6c0fc9021a268db"
+    },
+    {
+      "path": "implementation/shots/sprites/0010/crops/moisture_light0_carrot.png",
+      "sha256": "e0fb28e3bf66fcfdcbec83d62724bd423c405a90203dd8924fed494c45aba7c4"
+    },
+    {
+      "path": "implementation/shots/sprites/0010/crops/moisture_light0_corn.png",
+      "sha256": "913125f0d5585a9158bebebe09145e5a86d1a014b80a3c55310a26dd32f869d3"
+    },
+    {
+      "path": "implementation/shots/sprites/0010/crops/moisture_light0_wheat.png",
+      "sha256": "395aa65e70dcdb51e2e659f525ad51f55efd739c9d9243f6a855c59215fe8ae5"
+    },
+    {
+      "path": "implementation/shots/sprites/0010/crops/moisture_light1_carrot.png",
+      "sha256": "59305661ee7e0ab4a8cf0403c9ebe2631e4695a18cbca1ad8b675e07cca9a7b9"
+    },
+    {
+      "path": "implementation/shots/sprites/0010/crops/moisture_light1_corn.png",
+      "sha256": "23b3cf241d10be83035b70a6ce0f501192d1abb9ffd3532bf3105bcdaec4ee72"
+    },
+    {
+      "path": "implementation/shots/sprites/0010/crops/moisture_light1_wheat.png",
+      "sha256": "56da2ca36f5bc3519b9ef352cc62906fba969f78e6a4cdee37fd9d0772f2b07e"
+    },
+    {
+      "path": "implementation/shots/sprites/0010/crops/moisture_light2_carrot.png",
+      "sha256": "17feaa441b87f7b3ccd7e5539724c579cdcd7f51265f88b01867b7aa9bed63e6"
+    },
+    {
+      "path": "implementation/shots/sprites/0010/crops/moisture_light2_corn.png",
+      "sha256": "a5d48dcaee44a83b453b2b557a3247a1dc37de63e34662a21278e0537aea6263"
+    },
+    {
+      "path": "implementation/shots/sprites/0010/crops/moisture_light2_wheat.png",
+      "sha256": "261ebf2090a068b6226115b2b6c313073b194a7a9d3bf442e9e91bcd76586c73"
+    },
+    {
+      "path": "implementation/shots/sprites/0010/crops/moisture_light3_carrot.png",
+      "sha256": "8d8929871a57db465648161bac235ea3b71190f3583f204bed346c2c67ebcad5"
+    },
+    {
+      "path": "implementation/shots/sprites/0010/crops/moisture_light3_corn.png",
+      "sha256": "c77cc5536369a046b3a07de53eaf34b3fb76c416f4dd4f0814cbb2c383d8f0e5"
+    },
+    {
+      "path": "implementation/shots/sprites/0010/crops/moisture_light3_wheat.png",
+      "sha256": "99f5cc1d9212f02f8ccc53e453cb08260ed4765ef9efc086ec930497e8cbb795"
+    },
+    {
+      "path": "implementation/shots/sprites/0010/crops/watered_light0.png",
+      "sha256": "fd48c49512dcbe188fd01919794f6866d4459bfe8fe5830fc84aaafab5a5ebaf"
+    },
+    {
+      "path": "implementation/shots/sprites/0010/crops/watered_light1.png",
+      "sha256": "d5a3d84b3446db25625b07d8c9b9ee3f0c87de496f37c974268287ca98c361c1"
+    },
+    {
+      "path": "implementation/shots/sprites/0010/crops/watered_light2.png",
+      "sha256": "9974e791a17b5ee1f8112c9563d66738eceda2d1b499c642d17d8d25d3c41cb2"
+    },
+    {
+      "path": "implementation/shots/sprites/0010/crops/watered_light3.png",
+      "sha256": "acfc29414016271e259707c20c4fa438ea8c0d98fa9999577c4df24c2420c8c1"
+    },
+    {
+      "path": "implementation/shots/sprites/0010/dusk.png",
+      "sha256": "292c941ef498fb74ed8476e6a0d507554ed06ff3ca7631d61263b30d43c4ef0c"
+    },
+    {
+      "path": "implementation/shots/sprites/0010/noon.png",
+      "sha256": "61d2b47304861b2571151a9c5a1e770c22b33886fbf2e128c95687eeac94d844"
+    },
+    {
+      "path": "implementation/shots/sprites/0010/result.png",
+      "sha256": "dd2f3ec4132ffa7b68826217d44445ca935645a576a1f35e41a2bd74f50c83c1"
+    },
+    {
+      "path": "implementation/shots/sprites/0010/tech.png",
+      "sha256": "4a23b0d96b072962c2426291a3d4a22b4dc6c10e1552bda4b5d47533a6dc2a1c"
+    },
+    {
+      "path": "implementation/shots/sprites/0010/wave.png",
+      "sha256": "984c8578050a63bbd9d65a9426a738bc144853dd357d2698d0ccd6e5e5f16370"
+    }
+  ],
+  "capture_pages": 11,
+  "native_size": [
+    480,
+    270
+  ],
+  "nearest_scale": 3
+}

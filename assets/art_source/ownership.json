@@ -599,59 +599,59 @@
     },
     {
       "output": "sprites/crops/carrot_0.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/crops/carrot_1.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/crops/carrot_2.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/crops/carrot_3.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/crops/corn_0.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/crops/corn_1.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/crops/corn_2.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/crops/corn_3.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/crops/tilled.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/crops/tilled_wet.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/crops/wheat_0.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/crops/wheat_1.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/crops/wheat_2.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/crops/wheat_3.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/enemies/breaker.png",

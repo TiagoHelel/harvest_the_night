@@ -7848,6 +7848,794 @@
       "generation_task": "0009",
       "revision": 0,
       "variant_of": "props/tree"
+    },
+    {
+      "id": "crops/carrot_0",
+      "source": "assets/art_source/crops/carrot.png",
+      "crop_xywh": [
+        195,
+        534,
+        201,
+        73
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        500,
+        724
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "content_scale": 0.023952095808383235,
+      "alpha_threshold": 128,
+      "owner": "raster",
+      "source_sha256": "6d085cca53da6e4fc819da3158634877b1896801170be7cfe40b64305646a94d",
+      "output": "sprites/crops/carrot_0.png",
+      "output_sha256": "7fc85705617ef3902dd32129495d4ed0ff24a945189ba1a667300ebb3b925dd4",
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "crops/carrot",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "prompt": "implementation/sprites/generation/0010-carrot.prompt.txt",
+      "prompt_sha256": "647768d2257301faf768cdb74c13a791f36694bc3090cbba1e2c27e46fef0298",
+      "references": [
+        {
+          "path": "assets/art_source/masters/style-day.png",
+          "sha256": "148b5e004b9ed8f4adb1a90a65887e8aa959647b4eccef64e1bad7f17ef0ce09",
+          "role": "reference/edit target as indexed explicitly in exact saved prompt"
+        },
+        {
+          "path": "docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "reference/edit target as indexed explicitly in exact saved prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0010",
+      "revision": 0
+    },
+    {
+      "id": "crops/carrot_1",
+      "source": "assets/art_source/crops/carrot.png",
+      "crop_xywh": [
+        660,
+        435,
+        286,
+        171
+      ],
+      "sheet_cell_xywh": [
+        500,
+        0,
+        550,
+        724
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "content_scale": 0.023952095808383235,
+      "alpha_threshold": 128,
+      "owner": "raster",
+      "source_sha256": "6d085cca53da6e4fc819da3158634877b1896801170be7cfe40b64305646a94d",
+      "output": "sprites/crops/carrot_1.png",
+      "output_sha256": "75ef0bb6151c0b111a2d679efeff63b8fa451bc7fb0ed19e1d7d0b9377335754",
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "crops/carrot",
+      "frame": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "prompt": "implementation/sprites/generation/0010-carrot.prompt.txt",
+      "prompt_sha256": "647768d2257301faf768cdb74c13a791f36694bc3090cbba1e2c27e46fef0298",
+      "references": [
+        {
+          "path": "assets/art_source/masters/style-day.png",
+          "sha256": "148b5e004b9ed8f4adb1a90a65887e8aa959647b4eccef64e1bad7f17ef0ce09",
+          "role": "reference/edit target as indexed explicitly in exact saved prompt"
+        },
+        {
+          "path": "docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "reference/edit target as indexed explicitly in exact saved prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0010",
+      "revision": 0
+    },
+    {
+      "id": "crops/carrot_2",
+      "source": "assets/art_source/crops/carrot.png",
+      "crop_xywh": [
+        1094,
+        343,
+        419,
+        263
+      ],
+      "sheet_cell_xywh": [
+        1050,
+        0,
+        490,
+        724
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "content_scale": 0.023952095808383235,
+      "alpha_threshold": 128,
+      "owner": "raster",
+      "source_sha256": "6d085cca53da6e4fc819da3158634877b1896801170be7cfe40b64305646a94d",
+      "output": "sprites/crops/carrot_2.png",
+      "output_sha256": "6f00db999cf9382b602e4e66c2409cc67f2c068521e29d31c29ccb9505228482",
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "crops/carrot",
+      "frame": 2,
+      "seconds": 0.55,
+      "loop": false,
+      "prompt": "implementation/sprites/generation/0010-carrot.prompt.txt",
+      "prompt_sha256": "647768d2257301faf768cdb74c13a791f36694bc3090cbba1e2c27e46fef0298",
+      "references": [
+        {
+          "path": "assets/art_source/masters/style-day.png",
+          "sha256": "148b5e004b9ed8f4adb1a90a65887e8aa959647b4eccef64e1bad7f17ef0ce09",
+          "role": "reference/edit target as indexed explicitly in exact saved prompt"
+        },
+        {
+          "path": "docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "reference/edit target as indexed explicitly in exact saved prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0010",
+      "revision": 0
+    },
+    {
+      "id": "crops/carrot_3",
+      "source": "assets/art_source/crops/carrot.png",
+      "crop_xywh": [
+        1567,
+        225,
+        501,
+        382
+      ],
+      "sheet_cell_xywh": [
+        1540,
+        0,
+        632,
+        724
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "content_scale": 0.023952095808383235,
+      "alpha_threshold": 128,
+      "owner": "raster",
+      "source_sha256": "6d085cca53da6e4fc819da3158634877b1896801170be7cfe40b64305646a94d",
+      "output": "sprites/crops/carrot_3.png",
+      "output_sha256": "dc4f21b5b12d2dcc7d5e676a49418d10e9e8df9b53cf067f9423012270632cc9",
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "crops/carrot",
+      "frame": 3,
+      "seconds": 0.55,
+      "loop": false,
+      "prompt": "implementation/sprites/generation/0010-carrot.prompt.txt",
+      "prompt_sha256": "647768d2257301faf768cdb74c13a791f36694bc3090cbba1e2c27e46fef0298",
+      "references": [
+        {
+          "path": "assets/art_source/masters/style-day.png",
+          "sha256": "148b5e004b9ed8f4adb1a90a65887e8aa959647b4eccef64e1bad7f17ef0ce09",
+          "role": "reference/edit target as indexed explicitly in exact saved prompt"
+        },
+        {
+          "path": "docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "reference/edit target as indexed explicitly in exact saved prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0010",
+      "revision": 0
+    },
+    {
+      "id": "crops/corn_0",
+      "source": "assets/art_source/crops/corn.png",
+      "crop_xywh": [
+        156,
+        696,
+        165,
+        81
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        450,
+        793
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        16,
+        24
+      ],
+      "pivot_xy": [
+        8,
+        22
+      ],
+      "content_scale": 0.02706359945872801,
+      "alpha_threshold": 128,
+      "owner": "raster",
+      "source_sha256": "56735130d8c9f10a49e464f3d0f8518c961156a013f1cfb414b52a19ff21ba00",
+      "output": "sprites/crops/corn_0.png",
+      "output_sha256": "bc1d09430134f62b6283140c35adaabaa08ed1e4535c03aa9ba79356e3b0d21d",
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "crops/corn",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "prompt": "implementation/sprites/generation/0010-corn.prompt.txt",
+      "prompt_sha256": "d880f85bb0ced4c6139f3a9dcbb7ba7ba50844c5e3ea6b530edeceaf8c932290",
+      "references": [
+        {
+          "path": "assets/art_source/masters/style-day.png",
+          "sha256": "148b5e004b9ed8f4adb1a90a65887e8aa959647b4eccef64e1bad7f17ef0ce09",
+          "role": "reference/edit target as indexed explicitly in exact saved prompt"
+        },
+        {
+          "path": "docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "reference/edit target as indexed explicitly in exact saved prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0010",
+      "revision": 0
+    },
+    {
+      "id": "crops/corn_1",
+      "source": "assets/art_source/crops/corn.png",
+      "crop_xywh": [
+        526,
+        608,
+        300,
+        163
+      ],
+      "sheet_cell_xywh": [
+        450,
+        0,
+        420,
+        793
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        16,
+        24
+      ],
+      "pivot_xy": [
+        8,
+        22
+      ],
+      "content_scale": 0.02706359945872801,
+      "alpha_threshold": 128,
+      "owner": "raster",
+      "source_sha256": "56735130d8c9f10a49e464f3d0f8518c961156a013f1cfb414b52a19ff21ba00",
+      "output": "sprites/crops/corn_1.png",
+      "output_sha256": "72e5d8453e707871f9e68e7ce45d178061d92ddd236101e7ce0c347acba90dce",
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "crops/corn",
+      "frame": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "prompt": "implementation/sprites/generation/0010-corn.prompt.txt",
+      "prompt_sha256": "d880f85bb0ced4c6139f3a9dcbb7ba7ba50844c5e3ea6b530edeceaf8c932290",
+      "references": [
+        {
+          "path": "assets/art_source/masters/style-day.png",
+          "sha256": "148b5e004b9ed8f4adb1a90a65887e8aa959647b4eccef64e1bad7f17ef0ce09",
+          "role": "reference/edit target as indexed explicitly in exact saved prompt"
+        },
+        {
+          "path": "docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "reference/edit target as indexed explicitly in exact saved prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0010",
+      "revision": 0
+    },
+    {
+      "id": "crops/corn_2",
+      "source": "assets/art_source/crops/corn.png",
+      "crop_xywh": [
+        928,
+        310,
+        381,
+        461
+      ],
+      "sheet_cell_xywh": [
+        870,
+        0,
+        530,
+        793
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        16,
+        24
+      ],
+      "pivot_xy": [
+        8,
+        22
+      ],
+      "content_scale": 0.02706359945872801,
+      "alpha_threshold": 128,
+      "owner": "raster",
+      "source_sha256": "56735130d8c9f10a49e464f3d0f8518c961156a013f1cfb414b52a19ff21ba00",
+      "output": "sprites/crops/corn_2.png",
+      "output_sha256": "6ea12d15ff523fdc3b1fcc4d86425eaae6667c9cafc839e929eeeff985d06a26",
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "crops/corn",
+      "frame": 2,
+      "seconds": 0.55,
+      "loop": false,
+      "prompt": "implementation/sprites/generation/0010-corn.prompt.txt",
+      "prompt_sha256": "d880f85bb0ced4c6139f3a9dcbb7ba7ba50844c5e3ea6b530edeceaf8c932290",
+      "references": [
+        {
+          "path": "assets/art_source/masters/style-day.png",
+          "sha256": "148b5e004b9ed8f4adb1a90a65887e8aa959647b4eccef64e1bad7f17ef0ce09",
+          "role": "reference/edit target as indexed explicitly in exact saved prompt"
+        },
+        {
+          "path": "docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "reference/edit target as indexed explicitly in exact saved prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0010",
+      "revision": 0
+    },
+    {
+      "id": "crops/corn_3",
+      "source": "assets/art_source/crops/corn.png",
+      "crop_xywh": [
+        1474,
+        32,
+        425,
+        739
+      ],
+      "sheet_cell_xywh": [
+        1400,
+        0,
+        583,
+        793
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        16,
+        24
+      ],
+      "pivot_xy": [
+        8,
+        22
+      ],
+      "content_scale": 0.02706359945872801,
+      "alpha_threshold": 128,
+      "owner": "raster",
+      "source_sha256": "56735130d8c9f10a49e464f3d0f8518c961156a013f1cfb414b52a19ff21ba00",
+      "output": "sprites/crops/corn_3.png",
+      "output_sha256": "60d71616a2b337c2a5591edd9c99a4bc4aec8a408da5af63ac9f7dee63d4f6af",
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "crops/corn",
+      "frame": 3,
+      "seconds": 0.55,
+      "loop": false,
+      "prompt": "implementation/sprites/generation/0010-corn.prompt.txt",
+      "prompt_sha256": "d880f85bb0ced4c6139f3a9dcbb7ba7ba50844c5e3ea6b530edeceaf8c932290",
+      "references": [
+        {
+          "path": "assets/art_source/masters/style-day.png",
+          "sha256": "148b5e004b9ed8f4adb1a90a65887e8aa959647b4eccef64e1bad7f17ef0ce09",
+          "role": "reference/edit target as indexed explicitly in exact saved prompt"
+        },
+        {
+          "path": "docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "reference/edit target as indexed explicitly in exact saved prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0010",
+      "revision": 0
+    },
+    {
+      "id": "crops/tilled",
+      "source": "assets/art_source/crops/tilled.png",
+      "crop_xywh": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        16
+      ],
+      "content_scale": 0.012759170653907496,
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "soil_dark",
+        "soil",
+        "soil_light",
+        "ink_soft",
+        "ink"
+      ],
+      "owner": "raster",
+      "source_sha256": "059b4694178aa87883540b3b648831918f8f650caeaf2fb953bc2338c6e5b4e3",
+      "output": "sprites/crops/tilled.png",
+      "output_sha256": "6ebcb96545a85493925d913004de5539037b3592d192d9dc609d9686127779af",
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "crops/tilled",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "prompt": "implementation/sprites/generation/0010-tilled.prompt.txt",
+      "prompt_sha256": "e90820278421d9cf236354763e14be571bf772414fd77a6d4d10fc4610481322",
+      "references": [
+        {
+          "path": "assets/art_source/terrain/soil.png",
+          "sha256": "66b14e30ca51158206c29c56c34908b0ee696d9c088f640f9d54897d9d1df754",
+          "role": "reference/edit target as indexed explicitly in exact saved prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0010",
+      "revision": 0
+    },
+    {
+      "id": "crops/tilled_wet",
+      "source": "assets/art_source/crops/tilled_wet.png",
+      "crop_xywh": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        16
+      ],
+      "content_scale": 0.012759170653907496,
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "soil_dark",
+        "soil",
+        "soil_light",
+        "ink_soft",
+        "ink"
+      ],
+      "owner": "raster",
+      "source_sha256": "9eefdaa50a729463d491094e771e3232e37698dd4e1cf67cc78ba7b896b141d7",
+      "output": "sprites/crops/tilled_wet.png",
+      "output_sha256": "f3be498c9b31064979a3ce8295221572ad75464256e4f6bb932456a28f49e73c",
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "crops/tilled_wet",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "prompt": "implementation/sprites/generation/0010-tilled_wet.prompt.txt",
+      "prompt_sha256": "5596c6aae7f6d35438ad3862cd3f243535cadb85e7cda404e25a6c421e974e75",
+      "references": [
+        {
+          "path": "assets/art_source/crops/tilled.png",
+          "sha256": "059b4694178aa87883540b3b648831918f8f650caeaf2fb953bc2338c6e5b4e3",
+          "role": "reference/edit target as indexed explicitly in exact saved prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0010",
+      "revision": 0
+    },
+    {
+      "id": "crops/wheat_0",
+      "source": "assets/art_source/crops/wheat.png",
+      "crop_xywh": [
+        137,
+        639,
+        222,
+        98
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        480,
+        793
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "content_scale": 0.019801980198019802,
+      "alpha_threshold": 128,
+      "owner": "raster",
+      "source_sha256": "fe1ecbccbcd3c078942fc3ea6fefcc87ecacbf4c40b99422702903a4961751b0",
+      "output": "sprites/crops/wheat_0.png",
+      "output_sha256": "1e8b1b3224504e82ff525eb9ff70c14b342dfb1bb4ca8930e114cf02de3890d2",
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "crops/wheat",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "prompt": "implementation/sprites/generation/0010-wheat.prompt.txt",
+      "prompt_sha256": "074a0a8427823c038492de5990ac27ef06c0f3ab48787ecee69141e0307aae8e",
+      "references": [
+        {
+          "path": "assets/art_source/masters/style-day.png",
+          "sha256": "148b5e004b9ed8f4adb1a90a65887e8aa959647b4eccef64e1bad7f17ef0ce09",
+          "role": "reference/edit target as indexed explicitly in exact saved prompt"
+        },
+        {
+          "path": "docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "reference/edit target as indexed explicitly in exact saved prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0010",
+      "revision": 0
+    },
+    {
+      "id": "crops/wheat_1",
+      "source": "assets/art_source/crops/wheat.png",
+      "crop_xywh": [
+        621,
+        526,
+        222,
+        208
+      ],
+      "sheet_cell_xywh": [
+        480,
+        0,
+        490,
+        793
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "content_scale": 0.019801980198019802,
+      "alpha_threshold": 128,
+      "owner": "raster",
+      "source_sha256": "fe1ecbccbcd3c078942fc3ea6fefcc87ecacbf4c40b99422702903a4961751b0",
+      "output": "sprites/crops/wheat_1.png",
+      "output_sha256": "53225ec3ef5d8a26c575a3b06c8093e01a21e833b10545a0982f3c89c5ee0b63",
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "crops/wheat",
+      "frame": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "prompt": "implementation/sprites/generation/0010-wheat.prompt.txt",
+      "prompt_sha256": "074a0a8427823c038492de5990ac27ef06c0f3ab48787ecee69141e0307aae8e",
+      "references": [
+        {
+          "path": "assets/art_source/masters/style-day.png",
+          "sha256": "148b5e004b9ed8f4adb1a90a65887e8aa959647b4eccef64e1bad7f17ef0ce09",
+          "role": "reference/edit target as indexed explicitly in exact saved prompt"
+        },
+        {
+          "path": "docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "reference/edit target as indexed explicitly in exact saved prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0010",
+      "revision": 0
+    },
+    {
+      "id": "crops/wheat_2",
+      "source": "assets/art_source/crops/wheat.png",
+      "crop_xywh": [
+        994,
+        336,
+        396,
+        398
+      ],
+      "sheet_cell_xywh": [
+        970,
+        0,
+        470,
+        793
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "content_scale": 0.019801980198019802,
+      "alpha_threshold": 128,
+      "owner": "raster",
+      "source_sha256": "fe1ecbccbcd3c078942fc3ea6fefcc87ecacbf4c40b99422702903a4961751b0",
+      "output": "sprites/crops/wheat_2.png",
+      "output_sha256": "22f264c4edb6310a1e7ef4db0e0d6da2fa442af3249ac8904f49af1ab5385671",
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "crops/wheat",
+      "frame": 2,
+      "seconds": 0.55,
+      "loop": false,
+      "prompt": "implementation/sprites/generation/0010-wheat.prompt.txt",
+      "prompt_sha256": "074a0a8427823c038492de5990ac27ef06c0f3ab48787ecee69141e0307aae8e",
+      "references": [
+        {
+          "path": "assets/art_source/masters/style-day.png",
+          "sha256": "148b5e004b9ed8f4adb1a90a65887e8aa959647b4eccef64e1bad7f17ef0ce09",
+          "role": "reference/edit target as indexed explicitly in exact saved prompt"
+        },
+        {
+          "path": "docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "reference/edit target as indexed explicitly in exact saved prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0010",
+      "revision": 0
+    },
+    {
+      "id": "crops/wheat_3",
+      "source": "assets/art_source/crops/wheat.png",
+      "crop_xywh": [
+        1480,
+        128,
+        430,
+        606
+      ],
+      "sheet_cell_xywh": [
+        1440,
+        0,
+        543,
+        793
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "content_scale": 0.019801980198019802,
+      "alpha_threshold": 128,
+      "owner": "raster",
+      "source_sha256": "fe1ecbccbcd3c078942fc3ea6fefcc87ecacbf4c40b99422702903a4961751b0",
+      "output": "sprites/crops/wheat_3.png",
+      "output_sha256": "5081e30c016bbf5813aa0270ddd08c7892404548da40b629d263cd6f3f70cbd0",
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "crops/wheat",
+      "frame": 3,
+      "seconds": 0.55,
+      "loop": false,
+      "prompt": "implementation/sprites/generation/0010-wheat.prompt.txt",
+      "prompt_sha256": "074a0a8427823c038492de5990ac27ef06c0f3ab48787ecee69141e0307aae8e",
+      "references": [
+        {
+          "path": "assets/art_source/masters/style-day.png",
+          "sha256": "148b5e004b9ed8f4adb1a90a65887e8aa959647b4eccef64e1bad7f17ef0ce09",
+          "role": "reference/edit target as indexed explicitly in exact saved prompt"
+        },
+        {
+          "path": "docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "reference/edit target as indexed explicitly in exact saved prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0010",
+      "revision": 0
     }
   ]
 }

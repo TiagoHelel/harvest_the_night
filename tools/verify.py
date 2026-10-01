@@ -218,6 +218,16 @@ def check_prop_showcase():
     return check("prop overlap/gathering", code == 0, verdict)
 
 
+def check_crop_art():
+    code, out = run([sys.executable, "tools/check_crop_art.py"])
+    return check("crop sources/moisture", code == 0, next((s for s in out.splitlines() if s.startswith("OK:")), tail(out, 4)))
+
+
+def check_crop_showcase():
+    code, out = run([sys.executable, "tools/show_art.py", "--crops", "--check"])
+    return check("crop placement/growth", code == 0, next((s for s in out.splitlines() if s.startswith("CROP SHOWCASE:")), tail(out, 4)))
+
+
 def check_logo():
     """The logo still matches the letters it was composed from.
 
@@ -616,6 +626,8 @@ def main():
     check_water_showcase()
     check_prop_art()
     check_prop_showcase()
+    check_crop_art()
+    check_crop_showcase()
     check_font()
     check_logo()
     check_sfx()

@@ -186,3 +186,18 @@ The cow has a long cream body with dark patches, muzzle and short legs; the
 smaller hen has compact feathers, comb and beak. Preserve normal silhouettes,
 transparent margins, shared upper-left light and stable feet. Static variation
 is cosmetic and selected by cell; tree/animal movement remains optional.
+
+Task 0010 gives each species four progressively larger authored stages on the
+same native scale. Planted kernels remain small; sprouts never fill a mature
+canvas. Wheat ripens into a slim golden head cluster; corn has the tallest
+upright stalk, broad separated leaves, cobs and tassel; carrot stays low with
+feathery foliage and visible orange shoulders. The growth frame is selected by
+existing Farming.stage, with no decorative sway in this task.
+
+Keep dry/wet soil as the same joined furrow material with a clearly darker wet
+shadow ramp. Both must remain visible beneath foliage. Wheat/carrot contacts
+are (8,14) on 16x16; every corn stage uses (8,22) on 16x24, allowing a four-pixel
+upper overhang while preserving side margins and neighboring row visibility.
+Plants remain on the existing walkable ground layer beneath actors. Their
+distinct ready shapes must survive the production night shader; shared night
+palette/emission unification remains task 0019.

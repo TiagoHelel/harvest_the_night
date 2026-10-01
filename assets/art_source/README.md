@@ -180,3 +180,20 @@ exact output bytes, distinct same-scale variations, clean alpha and contacts.
 regrowth, livestock collection and one-cell placement. Real-render mode adds
 pixel comparisons of behind/front tree occlusion. The native/3x QA helper is
 `implementation/sprites/reviews/0009/build_review.py`.
+
+Task 0010 replaces every existing crop stage and both tilled-soil materials with
+five immutable sources in `crops/`: wheat, corn and carrot four-stage strips,
+dry earth and an edit of that same earth for moisture. The twelve plant cuts
+use measured transparent gutters and one fixed reduction scale per species.
+Wheat/carrot use 16x16/(8,14); corn uses 16x24/(8,22) in all four stages.
+Soils use 16x16/(8,16), filling the logical cell. Ground-layer placement reads
+these separate pivots through ArtPlacement, keeping plants beneath actors.
+
+Exact prompts, returned files and all five generation records are saved under
+`implementation/sprites/generation/0010-*`. Both soil materials use the same
+approved brown/shadow palette subset; adding the existing ink color preserved
+the wet source's dark channels after an initial conversion failed the unchanged
+20-point contrast guard. This was a deterministic import correction, with zero
+additional ImageGen calls. The duplicate candidate records that conversion.
+The accepted sources remain byte-for-byte identical to the actual tool returns.
+Ownership is 144 raster / 116 ASCII / zero player-sheet, 260 runtime PNGs.

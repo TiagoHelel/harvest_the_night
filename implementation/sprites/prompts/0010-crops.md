@@ -1,6 +1,6 @@
 # 0010 - Three crops, four stages and watered soil
 
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0008
 - **Likely files:** assets/art_source/crops/; sprites/crops/; src/ui/world_view.gd
 - **Generation briefs:** CROP

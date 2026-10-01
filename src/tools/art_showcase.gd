@@ -30,7 +30,7 @@ func _run() -> void:
 		if arg.begins_with("--out="):
 			_folder = "res://" + arg.substr(6).trim_suffix("/") + "/"
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(_folder))
-	if args.has("--terrain") or args.has("--water") or args.has("--props"):
+	if args.has("--terrain") or args.has("--water") or args.has("--props") or args.has("--crops"):
 		# Use Main's real relighting pipeline for all three material light states.
 		var relight := Relight.new()
 		relight.name = "Relight"
@@ -61,6 +61,11 @@ func _run() -> void:
 	player["facing"] = Player.SOUTH
 	player["action"] = {}
 	var actor := Entities.get_one(_state, enemy)
+	if args.has("--crops"):
+		await _crops_family()
+		print("CROP SHOWCASE: %d checks, %d failed" % [_checks, _failed])
+		quit(1 if _failed > 0 else 0)
+		return
 	if args.has("--props"):
 		await _props_family()
 		print("PROP SHOWCASE: %d checks, %d failed" % [_checks, _failed])
@@ -157,6 +162,135 @@ func _run() -> void:
 	await _contacts()
 	print("ART SHOWCASE: %d checks, %d failed" % [_checks, _failed])
 	quit(1 if _failed > 0 else 0)
+
+
+## All actual growth stages and moisture cues in the production ground layer.
+func _crops_fixture(lighting: int) -> void:
+	_water_fixture(Farm.Terrain.GRASS, 2 if lighting == 3 else (1 if lighting == 2 else 0))
+	_state["regrowing"].clear()
+	if lighting == 0:
+		_state["day_tick"] = 0
+	_state["player"]["action"] = {}
+	_state["player"]["facing"] = Player.SOUTH
+
+
+func _crops_put(kind: StringName, stage: int, wet: bool, cell: Vector2i) -> void:
+	var needed := int(GameData.CROPS[kind]["growth_ticks"])
+	_state["terrain"][Grid.index(cell)] = Farm.Terrain.SOIL
+	_state["plots"][Grid.index(cell)] = {
+		"crop": kind, "growth": ceili(float(stage * needed) / 3.0),
+		"watered": wet, "soak": 0}
+	expect(Farming.stage(_state, cell) == stage, "Every fixture selects the actual core growth stage")
+
+
+func _crops_check() -> void:
+	var counts := {}
+	for sprite in _world._plot_sprites:
+		var idx: int = sprite.get_meta("plot_cell")
+		var cell := Grid.cell(idx)
+		var art: String = sprite.get_meta("plot_art")
+		var path := WorldView.CROP_DIR + art + ".png"
+		expect(sprite.texture.resource_path == path and RasterArt.FRAMES.has(path), "Every crop and soil uses its required source without fallback")
+		expect(sprite.position == Vector2(cell * 16 + Vector2i(8,16)), "Water and growth never shift a crop's logical ground contact")
+		expect(sprite.offset == -Vector2(RasterArt.FRAMES[path]["pivot"]), "Tall corn and soil use their exact separate source pivots")
+		expect(sprite.get_parent() == _world._plots, "Walkable crop art stays on the ground layer below actors")
+		counts[idx] = int(counts.get(idx, 0)) + 1
+	for idx in _state["plots"]:
+		var cell := Grid.cell(int(idx))
+		expect(int(counts.get(idx,0)) == (1 if Farming.crop_on(_state,cell) == &"" else 2), "Harvest removes only crop art and leaves one soil drawing")
+		expect(Farm.is_empty(_state,cell), "Crop canopy adds no occupant or blocked interactive cell")
+
+
+func _crops_moisture_pixels(view: PlayerView, cell: Vector2i, lighting: int) -> void:
+	if not _capture:
+		return
+	var idx := Grid.index(cell)
+	await RenderingServer.frame_post_draw
+	var dry := root.get_texture().get_image()
+	var before := var_to_bytes(_state)
+	var can_original: int = _state["water_can"]
+	_state["water_can"] = Farming.can_capacity(_state)
+	var can_before: int = _state["water_can"]
+	Farming._water(_state,cell)
+	expect(Farming.is_watered(_state,cell) and int(_state["water_can"]) == can_before - 1, "Actual water spends exactly one can unit")
+	await _reaction_settle(view)
+	_crops_check()
+	await RenderingServer.frame_post_draw
+	var wet := root.get_texture().get_image()
+	var transform := _world.get_global_transform_with_canvas()
+	var changed := 0
+	for y in 16:
+		for x in 16:
+			var pixel := Vector2i(transform * Vector2(cell * 16 + Vector2i(x,y)))
+			if Rect2i(Vector2i.ZERO,dry.get_size()).has_point(pixel) and dry.get_pixelv(pixel) != wet.get_pixelv(pixel):
+				changed += 1
+	expect(changed >= 50, "Actual wet soil remains visible beneath mature foliage under every light ramp")
+	await _shoot("moisture_light%d_%s" % [lighting,Farming.crop_on(_state,cell)], "Actual dry -> watered crop: %d changed soil pixels under mature foliage" % changed)
+	# Restore only the fixture's intentional watering; rendering itself is guarded.
+	_state["plots"][idx]["watered"] = false
+	_state["water_can"] = can_original
+	expect(var_to_bytes(_state) == before, "Restoring intentional fixture watering preserves every state/save field")
+	expect(Farming.stage(_state,cell) == 3, "Water leaves maturity and source frame selection unchanged")
+	await _reaction_settle(view)
+
+
+func _crops_family() -> void:
+	var view: PlayerView = _world.get_node("Occupants/PlayerView")
+	view.set_process(false)
+	_world.set_process(false)
+	for lighting in 4:
+		_crops_fixture(lighting)
+		var kinds := Farming.seeds()
+		for row in kinds.size():
+			for stage in 4:
+				for moisture in 2:
+					_crops_put(kinds[row],stage,moisture == 1,Vector2i(9+stage*4+moisture,5+row*4))
+		await _reaction_settle(view)
+		_world.look_at_cell(Vector2i(18,9))
+		await process_frame
+		_crops_check()
+		await _shoot("matrix_light%d" % lighting, "Three species / four stages / dry + wet, dawn/day/dusk/night %d" % lighting)
+		for row in kinds.size():
+			await _crops_moisture_pixels(view,Vector2i(21,5+row*4),lighting)
+		await _shoot("watered_light%d" % lighting, "Real watering preserves all crop anchors and stage art")
+		# Adjacent beds expose the actual tall-corn overlap and neighboring cells.
+		_crops_fixture(lighting)
+		for row in kinds.size():
+			for y in range(5,9):
+				for x in range(8+row*7,13+row*7):
+					_crops_put(kinds[row],3,(x+y)%2 == 0,Vector2i(x,y))
+		_set_contact(_state["player"],Vector2i(248,160))
+		Entities.spawn(_state,&"walker",Vector2i(17,7))
+		await _reaction_settle(view)
+		_crops_check()
+		await _shoot("dense_light%d" % lighting, "Dense ready beds: grounded corn, visible soil and walkable neighboring cells")
+		for row in kinds.size():
+			var cell := Vector2i(9+row*7,8)
+			var kind: StringName = kinds[row]
+			var before := Resources.amount(_state,kind)
+			Farming._harvest(_state,cell)
+			expect(Resources.amount(_state,kind) == before + int(GameData.CROPS[kind]["yield"]), "Actual harvest preserves the exact production yield")
+		await _reaction_settle(view)
+		_crops_check()
+		await _shoot("harvested_light%d" % lighting, "Actual harvest clears the plant, resets water and leaves aligned dry furrows")
+		# Actual growth from planted through every stage, without changing rates.
+		_crops_fixture(lighting)
+		for row in kinds.size():
+			var kind: StringName = kinds[row]
+			var cell := Vector2i(12+row*5,9)
+			_crops_put(kind,0,false,cell)
+			for tick in int(GameData.CROPS[kind]["growth_ticks"]):
+				Farming.tick(_state)
+			expect(Farming.is_ready(_state,cell), "Unchanged actual Farming.tick reaches the ready stage")
+		await _reaction_settle(view)
+		_crops_check()
+		await _shoot("grown_light%d" % lighting, "Real farming growth reaches ready art, without changing growth balance")
+		_state = State.create(1010)
+		_state["phase"] = Phases.NIGHT if lighting == 3 else Phases.DAY
+		_state["day_tick"] = [0,GameData.DAY_TICKS/2,GameData.DAY_TICKS-1,0][lighting]
+		await _reaction_settle(view)
+		_crops_check()
+		await _shoot("farm_light%d" % lighting, "Unchanged production farm crops, dawn/day/dusk/night %d" % lighting)
 
 
 ## Source-owned prop species and real harvest/occlusion fixtures.

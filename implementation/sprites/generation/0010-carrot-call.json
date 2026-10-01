@@ -1,0 +1,144 @@
+{
+  "id": "carrot",
+  "tool": "built-in ImageGen",
+  "revision": 0,
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-a4cc4aa1-4d7f-42c7-ba7f-f2c347620750.png",
+  "source": "assets/art_source/crops/carrot.png",
+  "source_sha256": "6d085cca53da6e4fc819da3158634877b1896801170be7cfe40b64305646a94d",
+  "source_wh": [
+    2172,
+    724
+  ],
+  "source_alpha_range": [
+    0,
+    255
+  ],
+  "references": [
+    "assets/art_source/masters/style-day.png",
+    "docs/reference-sheet.png"
+  ],
+  "prompt_text": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm\nthat becomes a fortress against zombies at night.\nPrimary request: carrot growth source, crops/carrot_0 through carrot_3, exactly four stages.\nInput images: Image 1: approved neutral-day farm, material/camera reference only; Image 2: repository reference sheet, species/material reference only. Neither is an edit target.\nStyle/medium: coherent hand-crafted pixel art with deliberate pixel clusters,\ncolored outlines, restrained texture, readable material planes and clean forms.\nComposition/framing: orthographic three-quarter top-down view on a rectangular\ngrid; match the approved master camera and scale. Final native canvas is\n16x16 pixels with contact pivot 8,14; this is a downstream import\ntarget, so the generated source must remain simple enough to survive reduction.\nLighting/mood: neutral warm daytime, highlights from upper left, darker underside;\nruntime supplies dusk/night lighting. Keep emission in separate localized forms.\nColor palette: match the approved project palette and master, warm timber and\nterracotta, layered greens, cool water, violet/blue shadows; limited ramps.\nScene/backdrop: genuinely transparent background outside the four plant silhouettes. No baked ground shadow for actors.\nConstraints: complete unclipped object, consistent perspective and scale, clear\nground contact, generous tool/weapon clearance, no labels, text, watermark or UI.\nAvoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,\nrandom pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,\nnew gameplay objects, tiny details that disappear at native size.\n\nCROP brief:\nCreate one carrot growth-stage strip with exactly four ordered stages:\nplanted seed indication, small sprout, growing plant, mature ready-to-harvest.\nSame ground anchor and native scale in every frame. Wheat: golden grain heads;\ncorn: broad leaves, upright stalk and clear cobs; carrot: feathery green tops\nwith small orange shoulder at maturity. Transparent background, no baked soil.\nTarget 16x16; mature corn may extend to 16x24 under the approved anchor contract.\nKeep neighboring crop rows readable. No random unrelated plants or mature\nplant duplicated four times. Dry/wet tilled soil are separate opaque assets.\n\nExact asset and strip contract:\nOne horizontal row of EXACTLY FOUR non-overlapping equal-width source cells, ordered stage 0,1,2,3 from LEFT to RIGHT. Each cell has the same bottom-center ground contact and the same source pixel scale; early plants are naturally much smaller, never enlarged to fill a cell. Generous transparent gutters and margins; no labels, lines, boxes, soil, ground shadow, grass or background. One coherent carrot species under neutral upper-left daylight. Final crop canvases are 16x16 with pivot (8,14); mature visible height about 10 pixels, keep native side margins so adjacent 16px cells remain readable. Stage 0: three tiny orange-brown planted seeds on the baseline, no leaves, about 4x2 native pixels. Stage 1: two low delicate divided green leaves, about 5x4. Stage 2: a fuller compact feathery green top with several divided branches, about 8x7, no visible orange shoulder yet. Stage 3: a low fan of feathery green tops with TWO small ripe orange carrot shoulders visible just above the ground baseline, about 10x10. No complete uprooted carrot, dirt mound or round tomato fruit; roots remain underground. All four contacts lie on ONE shared horizontal baseline. Keep the complete plants unclipped and centered independently in equal source cells. This is growth progression, not four identical mature plants or a walk animation.",
+  "measured_recipes": [
+    {
+      "id": "crops/carrot_0",
+      "source": "assets/art_source/crops/carrot.png",
+      "crop_xywh": [
+        195,
+        534,
+        201,
+        73
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        500,
+        724
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "content_scale": 0.023952095808383235,
+      "alpha_threshold": 128
+    },
+    {
+      "id": "crops/carrot_1",
+      "source": "assets/art_source/crops/carrot.png",
+      "crop_xywh": [
+        660,
+        435,
+        286,
+        171
+      ],
+      "sheet_cell_xywh": [
+        500,
+        0,
+        550,
+        724
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "content_scale": 0.023952095808383235,
+      "alpha_threshold": 128
+    },
+    {
+      "id": "crops/carrot_2",
+      "source": "assets/art_source/crops/carrot.png",
+      "crop_xywh": [
+        1094,
+        343,
+        419,
+        263
+      ],
+      "sheet_cell_xywh": [
+        1050,
+        0,
+        490,
+        724
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "content_scale": 0.023952095808383235,
+      "alpha_threshold": 128
+    },
+    {
+      "id": "crops/carrot_3",
+      "source": "assets/art_source/crops/carrot.png",
+      "crop_xywh": [
+        1567,
+        225,
+        501,
+        382
+      ],
+      "sheet_cell_xywh": [
+        1540,
+        0,
+        632,
+        724
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "content_scale": 0.023952095808383235,
+      "alpha_threshold": 128
+    }
+  ],
+  "decision": "Accepted after all twelve native/nearest3x growth stages on light/dark/checker, dry/wet repeat materials, 41 actual Godot captures in four light states, dense-bed grounding, real watering/harvest/growth and unchanged simulation/data guards."
+}

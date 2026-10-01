@@ -615,3 +615,72 @@ playback is 0016, as clarified to the user.
 Queue after completion: 9 done, 11 todo, zero doing/blocked. Next: 0010,
 three crops, four stages and watered soil. Exactly one sprite task completed
 this cycle; the active /goal continues automatically toward the remaining backlog.
+
+## 2026-10-01 — 0010 Three crops, four stages and watered soil
+
+Completed all twelve wheat/corn/carrot stages and both tilled-soil materials
+with five built-in ImageGen calls, zero targeted revisions/rejected masters.
+Accepted immutable sources: `assets/art_source/crops/{wheat,corn,carrot,tilled,tilled_wet}.png`.
+Exact BASE + CROP prompts, tool-return paths, references and decisions are in
+`generation/0010-*.prompt.txt`, individual call records and `0010-generations.json`.
+Source SHA256 prefixes: wheat fe1ecbccbcd3c078; corn 56735130d8c9f10a;
+carrot 6d085cca53da6e4f; tilled 059b4694178aa878;
+tilled_wet 9eefdaa50a729463d. Full raw/runtime hashes and measured recipes:
+`reviews/0010/measured-contract.json` and `runtime-delta.json`.
+
+Each growth family has four measured source cuts sharing one reduction scale,
+not independent frame fitting. Unequal source spacing is handled by measured
+transparent gutters. Wheat/carrot use 16x16/(8,14), corn 16x24/(8,22) in every
+stage, soils 16x16/(8,16). Native heights progress 2/4/8/12 for wheat,
+2/4/11/20 for corn and 2/4/6/9 for carrot. The four-pixel mature corn overhang
+preserves side margins and the existing walkable ground layer beneath actors.
+WorldView now reads the separate crop/soil pivots through ArtPlacement and
+keeps logical-cell metadata for real rendering checks. All names are preserved.
+
+The initial four-color soil conversion failed the unchanged native moisture
+contrast guard (16.97 average RGB difference). Adding the existing ink shadow
+to both identical material subsets preserved the raw wet channels, giving a
+28.40-point difference and passing the 20-point requirement. No further
+generation was called. The byte-exact
+duplicate `crops/candidates/tilled_wet-r0.png` and
+`reviews/0010/initial-soil-conversion.json` preserve this conversion evidence.
+No palette-table, source painting or runtime painting changes were needed.
+
+Exactly fourteen existing crop PNGs change; the other 246 PNGs remain identical
+to `18b4b3e`. Ownership is 144 raster / 116 ASCII / zero player-sheet, 260 PNGs.
+Core/FARM_MAP, collision, footprints, growth rates, yields, balance, saves,
+determinism guards, palette, owner's original sheet, PlayerFrames, props and
+terrain remain unchanged. Crop sway is not part of these static growth frames.
+
+Actual Farming.stage/tick/_water/_harvest checks preserve source selection,
+contacts, walkability, exact can use/harvest yield and serialized state around
+every redraw. Headless crop showcase: 6,224 checks, zero failed. Actual renderer:
+9,248 checks, zero failed, including twelve mature dry-to-wet pixel comparisons
+across dawn/day/dusk/night. Carrot/corn/wheat show 151/113/159 changed actual
+viewport pixels per light mode; offline wet exposure is 151..251 native pixels
+across all stages. Mature plants remain grounded after watering and harvest.
+
+Full verify PASS: 35 passed, zero skipped/failed in 236s; Godot 4.7.1 at the
+user's supplied path. All 105 scripts parse; 6,609 headless assertions,
+980 input cases, performance and Windows/Web exports pass. Simulation
+`1961000123` and data `407837701` remain unchanged; the 144-output raster source
+check writes zero files. Fault/rebuild suite: 53 probes PASS, all deliberate
+corruption restored. New probes cover missing mature corn/wet soil, corrupted
+corn source and per-stage scale/pivot drift. Logs are saved in `reviews/0010/`.
+
+Opened all 41 actual Godot captures at native size and exact nearest 3x through
+`captures-00..10` and split 3x columns, with originals in
+`implementation/shots/sprites/0010/` and `crops/`. Also inspected the 3x4
+growth matrix over dry/wet soil on light/dark/checker backgrounds, all five raw
+source alpha comparisons, 8x8 repeat-material patches and 0009/0010
+noon/dusk/wave comparisons. Gates PASS: label-free mature species recognition,
+progressive growth, unclipped alpha, anchored tall corn, readable neighboring
+beds, visible moisture beneath mature foliage, real watering/harvest/maturity
+and four production light states. Details/capture hashes: `reviews/0010/REVIEW.md`
+and `frame-review.json`. The full production farm view clips its northern row;
+dedicated fixtures show every required plant completely. Shared final lighting
+refinement remains 0019, enemies 0015 and Giant/death playback 0016.
+
+Queue after completion: 10 done, 10 todo, zero doing/blocked. Next: 0011,
+farmhouse visual landmark. Exactly one sprite task completed this cycle;
+the active /goal continues automatically toward the remaining backlog.

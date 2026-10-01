@@ -1,0 +1,144 @@
+{
+  "id": "wheat",
+  "tool": "built-in ImageGen",
+  "revision": 0,
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-5a3bb066-641e-4c67-bd28-32e266bacc50.png",
+  "source": "assets/art_source/crops/wheat.png",
+  "source_sha256": "fe1ecbccbcd3c078942fc3ea6fefcc87ecacbf4c40b99422702903a4961751b0",
+  "source_wh": [
+    1983,
+    793
+  ],
+  "source_alpha_range": [
+    0,
+    255
+  ],
+  "references": [
+    "assets/art_source/masters/style-day.png",
+    "docs/reference-sheet.png"
+  ],
+  "prompt_text": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm\nthat becomes a fortress against zombies at night.\nPrimary request: wheat growth source, crops/wheat_0 through wheat_3, exactly four stages.\nInput images: Image 1: approved neutral-day farm, material/camera reference only; Image 2: repository reference sheet, species/material reference only. Neither is an edit target.\nStyle/medium: coherent hand-crafted pixel art with deliberate pixel clusters,\ncolored outlines, restrained texture, readable material planes and clean forms.\nComposition/framing: orthographic three-quarter top-down view on a rectangular\ngrid; match the approved master camera and scale. Final native canvas is\n16x16 pixels with contact pivot 8,14; this is a downstream import\ntarget, so the generated source must remain simple enough to survive reduction.\nLighting/mood: neutral warm daytime, highlights from upper left, darker underside;\nruntime supplies dusk/night lighting. Keep emission in separate localized forms.\nColor palette: match the approved project palette and master, warm timber and\nterracotta, layered greens, cool water, violet/blue shadows; limited ramps.\nScene/backdrop: genuinely transparent background outside the four plant silhouettes. No baked ground shadow for actors.\nConstraints: complete unclipped object, consistent perspective and scale, clear\nground contact, generous tool/weapon clearance, no labels, text, watermark or UI.\nAvoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,\nrandom pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,\nnew gameplay objects, tiny details that disappear at native size.\n\nCROP brief:\nCreate one wheat growth-stage strip with exactly four ordered stages:\nplanted seed indication, small sprout, growing plant, mature ready-to-harvest.\nSame ground anchor and native scale in every frame. Wheat: golden grain heads;\ncorn: broad leaves, upright stalk and clear cobs; carrot: feathery green tops\nwith small orange shoulder at maturity. Transparent background, no baked soil.\nTarget 16x16; mature corn may extend to 16x24 under the approved anchor contract.\nKeep neighboring crop rows readable. No random unrelated plants or mature\nplant duplicated four times. Dry/wet tilled soil are separate opaque assets.\n\nExact asset and strip contract:\nOne horizontal row of EXACTLY FOUR non-overlapping equal-width source cells, ordered stage 0,1,2,3 from LEFT to RIGHT. Each cell has the same bottom-center ground contact and the same source pixel scale; early plants are naturally much smaller, never enlarged to fill a cell. Generous transparent gutters and margins; no labels, lines, boxes, soil, ground shadow, grass or background. One coherent wheat species under neutral upper-left daylight. Final crop canvases are 16x16 with pivot (8,14); mature visible height about 12 pixels, keep native side margins so adjacent 16px cells remain readable. Stage 0: three small warm tan planted kernels on the baseline, no leaves, about 5x2 native pixels. Stage 1: two short thin green shoots, about 5x4. Stage 2: three taller green blades with tiny immature green heads, about 8x8. Stage 3: three slender stalks bearing distinct ripe golden wheat ears, about 10x12, green lower leaves and clearly warm golden upper grain clusters. The ripe ears are narrow pointed grain heads, not corn cobs. All four contacts lie on ONE shared horizontal baseline. Keep the complete plants unclipped and centered independently in equal source cells. This is growth progression, not four identical mature plants or a walk animation.",
+  "measured_recipes": [
+    {
+      "id": "crops/wheat_0",
+      "source": "assets/art_source/crops/wheat.png",
+      "crop_xywh": [
+        137,
+        639,
+        222,
+        98
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        480,
+        793
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "content_scale": 0.019801980198019802,
+      "alpha_threshold": 128
+    },
+    {
+      "id": "crops/wheat_1",
+      "source": "assets/art_source/crops/wheat.png",
+      "crop_xywh": [
+        621,
+        526,
+        222,
+        208
+      ],
+      "sheet_cell_xywh": [
+        480,
+        0,
+        490,
+        793
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "content_scale": 0.019801980198019802,
+      "alpha_threshold": 128
+    },
+    {
+      "id": "crops/wheat_2",
+      "source": "assets/art_source/crops/wheat.png",
+      "crop_xywh": [
+        994,
+        336,
+        396,
+        398
+      ],
+      "sheet_cell_xywh": [
+        970,
+        0,
+        470,
+        793
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "content_scale": 0.019801980198019802,
+      "alpha_threshold": 128
+    },
+    {
+      "id": "crops/wheat_3",
+      "source": "assets/art_source/crops/wheat.png",
+      "crop_xywh": [
+        1480,
+        128,
+        430,
+        606
+      ],
+      "sheet_cell_xywh": [
+        1440,
+        0,
+        543,
+        793
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "content_scale": 0.019801980198019802,
+      "alpha_threshold": 128
+    }
+  ],
+  "decision": "Accepted after all twelve native/nearest3x growth stages on light/dark/checker, dry/wet repeat materials, 41 actual Godot captures in four light states, dense-bed grounding, real watering/harvest/growth and unchanged simulation/data guards."
+}

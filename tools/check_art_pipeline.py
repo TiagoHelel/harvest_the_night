@@ -195,6 +195,17 @@ def main():
             variant = next(i for i,e in enumerate(data["assets"]) if e["id"] == "props/rock_b")
             invalid_manifest("Prop variant scale drift rejected", lambda d: d["assets"][variant].update(content_scale=0.001))
 
+        crop = next((i for i,e in enumerate(data["assets"]) if e["id"] == "crops/corn_3"), None)
+        if crop is not None:
+            corrupt(ROOT/data["assets"][crop]["source"], "tools/import_art.py")
+            passed("Changed accepted crop strip rejected")
+            corrupt(ROOT/"sprites/crops/corn_3.png", "tools/check_crop_art.py", missing=True)
+            passed("Missing mature corn rejected without soil fallback")
+            corrupt(ROOT/"sprites/crops/tilled_wet.png", "tools/check_crop_art.py", missing=True)
+            passed("Missing watered soil rejected")
+            invalid_manifest("Crop per-stage scale drift rejected", lambda d: d["assets"][crop].update(content_scale=0.001))
+            invalid_manifest("Crop per-stage ground pivot drift rejected", lambda d: d["assets"][crop].update(pivot_xy=[8,14]))
+
         original_owners = art_ownership.REGISTRY.read_bytes()
         try:
             owners = json.loads(original_owners)

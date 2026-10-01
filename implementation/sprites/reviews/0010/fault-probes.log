@@ -1,0 +1,54 @@
+PASS: Two in-memory rebuilds are byte-identical
+PASS: Two on-disk rebuilds change zero bytes
+PASS: Legacy writers cannot overwrite any of 144 migrated files
+PASS: Changed accepted source is rejected
+PASS: Missing accepted source is rejected
+PASS: Tampered migrated output is rejected
+PASS: Missing runtime frame is rejected
+PASS: Missing authored locomotion frame cannot fall back to idle
+PASS: Missing authored work recovery is rejected without borrowing another verb
+PASS: Tampered player count/canvas/pivot metadata is rejected
+PASS: Tampered unmigrated ASCII output is still rejected
+PASS: Atlas builder rejects changed accepted terrain source
+PASS: Atlas builder rejects missing accepted terrain source without old ASCII fallback
+PASS: Terrain checker rejects tampered migrated tile
+PASS: Terrain checker rejects tampered composite atlas
+PASS: Terrain seam mismatch rejected
+PASS: Transparent terrain hole rejected
+PASS: Fully migrated player has zero legacy writes and strict merged metadata checks
+PASS: Missing authored reaction is rejected without silently hiding the bubble
+PASS: Missing shared contact shadow is rejected
+PASS: Duplicate manifest output rejected
+PASS: Invalid crop rejected
+PASS: Out-of-range pivot rejected
+PASS: Unknown palette rejected
+PASS: Unknown material subset color rejected
+PASS: Empty material palette subset rejected
+PASS: Missing animation frame rejected
+PASS: Per-frame canvas drift rejected
+PASS: Out-of-canvas reaction glyph rejected
+PASS: Reaction crop cannot erase body pixels
+PASS: Reaction crop cannot omit glyph pixels
+PASS: Missing derived input rejected
+PASS: Derivation cycle rejected
+PASS: Atlas rejects a missing water loop without old ASCII fallback
+PASS: Standalone transition checker rejects a tampered water phase
+PASS: Standalone transition checker rejects a tampered derived corner
+PASS: Invalid non-quarter rotation rejected
+PASS: Clipped source endpoint cap rejected
+PASS: Swimming bank pixel rejected
+PASS: Mismatched corner contact color rejected
+PASS: Missing accepted livestock master rejected
+PASS: Missing required prop variation rejected without base fallback
+PASS: Standalone prop checker rejects changed native mineral art
+PASS: Prop clipping rejected
+PASS: Detached prop pixel rejected
+PASS: Prop variant scale drift rejected
+PASS: Changed accepted crop strip rejected
+PASS: Missing mature corn rejected without soil fallback
+PASS: Missing watered soil rejected
+PASS: Crop per-stage scale drift rejected
+PASS: Crop per-stage ground pivot drift rejected
+PASS: Duplicate output owner rejected
+PASS: House's nine slices reconstruct the full roof without lost pixels
+OK: 53 fault/rebuild probes; all deliberate corruption restored

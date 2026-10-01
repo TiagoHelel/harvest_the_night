@@ -972,7 +972,6 @@ func _refresh_plots() -> void:
 	if _state.is_empty() or _plots == null:
 		return
 
-	var size := float(GameData.TILE_SIZE)
 	var plots: Dictionary = _state["plots"]
 	# Cell indices, so these are integers and sort as integers.
 	var keys: Array = plots.keys()
@@ -986,24 +985,26 @@ func _refresh_plots() -> void:
 		# once it has sprouted is a chore with no feedback, and the player would
 		# be back to counting which tiles they had done.
 		_plot_sprite("tilled_wet" if bool(here["watered"]) else "tilled",
-			cell, size)
+			cell)
 
 		var crop: StringName = here["crop"]
 		if crop != &"":
 			_plot_sprite("%s_%d" % [crop, Farming.stage(_state, cell)],
-				cell, size)
+				cell)
 
 
 ## One sprite on one plot. Two of them stack on a watered tile with something
 ## growing in it, which is why this is a function rather than a block.
-func _plot_sprite(art: String, cell: Vector2i, size: float) -> void:
+func _plot_sprite(art: String, cell: Vector2i) -> void:
 	var texture := _crop_texture(art)
 	if texture == null:
 		return
 	var sprite := Sprite2D.new()
 	sprite.texture = texture
 	sprite.centered = false
-	sprite.position = Vector2(cell) * size
+	ArtPlacement.place(sprite, cell)
+	sprite.set_meta("plot_cell", Grid.index(cell))
+	sprite.set_meta("plot_art", art)
 	_plots.add_child(sprite)
 	_plot_sprites.append(sprite)
 

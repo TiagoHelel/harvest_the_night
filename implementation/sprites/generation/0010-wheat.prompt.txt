@@ -1,0 +1,34 @@
+Use case: stylized-concept
+Asset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm
+that becomes a fortress against zombies at night.
+Primary request: wheat growth source, crops/wheat_0 through wheat_3, exactly four stages.
+Input images: Image 1: approved neutral-day farm, material/camera reference only; Image 2: repository reference sheet, species/material reference only. Neither is an edit target.
+Style/medium: coherent hand-crafted pixel art with deliberate pixel clusters,
+colored outlines, restrained texture, readable material planes and clean forms.
+Composition/framing: orthographic three-quarter top-down view on a rectangular
+grid; match the approved master camera and scale. Final native canvas is
+16x16 pixels with contact pivot 8,14; this is a downstream import
+target, so the generated source must remain simple enough to survive reduction.
+Lighting/mood: neutral warm daytime, highlights from upper left, darker underside;
+runtime supplies dusk/night lighting. Keep emission in separate localized forms.
+Color palette: match the approved project palette and master, warm timber and
+terracotta, layered greens, cool water, violet/blue shadows; limited ramps.
+Scene/backdrop: genuinely transparent background outside the four plant silhouettes. No baked ground shadow for actors.
+Constraints: complete unclipped object, consistent perspective and scale, clear
+ground contact, generous tool/weapon clearance, no labels, text, watermark or UI.
+Avoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,
+random pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,
+new gameplay objects, tiny details that disappear at native size.
+
+CROP brief:
+Create one wheat growth-stage strip with exactly four ordered stages:
+planted seed indication, small sprout, growing plant, mature ready-to-harvest.
+Same ground anchor and native scale in every frame. Wheat: golden grain heads;
+corn: broad leaves, upright stalk and clear cobs; carrot: feathery green tops
+with small orange shoulder at maturity. Transparent background, no baked soil.
+Target 16x16; mature corn may extend to 16x24 under the approved anchor contract.
+Keep neighboring crop rows readable. No random unrelated plants or mature
+plant duplicated four times. Dry/wet tilled soil are separate opaque assets.
+
+Exact asset and strip contract:
+One horizontal row of EXACTLY FOUR non-overlapping equal-width source cells, ordered stage 0,1,2,3 from LEFT to RIGHT. Each cell has the same bottom-center ground contact and the same source pixel scale; early plants are naturally much smaller, never enlarged to fill a cell. Generous transparent gutters and margins; no labels, lines, boxes, soil, ground shadow, grass or background. One coherent wheat species under neutral upper-left daylight. Final crop canvases are 16x16 with pivot (8,14); mature visible height about 12 pixels, keep native side margins so adjacent 16px cells remain readable. Stage 0: three small warm tan planted kernels on the baseline, no leaves, about 5x2 native pixels. Stage 1: two short thin green shoots, about 5x4. Stage 2: three taller green blades with tiny immature green heads, about 8x8. Stage 3: three slender stalks bearing distinct ripe golden wheat ears, about 10x12, green lower leaves and clearly warm golden upper grain clusters. The ripe ears are narrow pointed grain heads, not corn cobs. All four contacts lie on ONE shared horizontal baseline. Keep the complete plants unclipped and centered independently in equal source cells. This is growth progression, not four identical mature plants or a walk animation.

@@ -1,0 +1,13 @@
+{
+  "dry_brightness": 81.0625,
+  "wet_brightness": 52.662760416666664,
+  "difference": 28.399739583333336,
+  "required_difference": 20,
+  "palette_keys": [
+    "soil_dark",
+    "soil",
+    "soil_light",
+    "ink_soft",
+    "ink"
+  ]
+}

@@ -1,0 +1,559 @@
+{
+  "date": "2026-10-01",
+  "attempts": [
+    {
+      "id": "carrot",
+      "tool": "built-in ImageGen",
+      "revision": 0,
+      "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-a4cc4aa1-4d7f-42c7-ba7f-f2c347620750.png",
+      "source": "assets/art_source/crops/carrot.png",
+      "source_sha256": "6d085cca53da6e4fc819da3158634877b1896801170be7cfe40b64305646a94d",
+      "source_wh": [
+        2172,
+        724
+      ],
+      "source_alpha_range": [
+        0,
+        255
+      ],
+      "references": [
+        "assets/art_source/masters/style-day.png",
+        "docs/reference-sheet.png"
+      ],
+      "prompt_text": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm\nthat becomes a fortress against zombies at night.\nPrimary request: carrot growth source, crops/carrot_0 through carrot_3, exactly four stages.\nInput images: Image 1: approved neutral-day farm, material/camera reference only; Image 2: repository reference sheet, species/material reference only. Neither is an edit target.\nStyle/medium: coherent hand-crafted pixel art with deliberate pixel clusters,\ncolored outlines, restrained texture, readable material planes and clean forms.\nComposition/framing: orthographic three-quarter top-down view on a rectangular\ngrid; match the approved master camera and scale. Final native canvas is\n16x16 pixels with contact pivot 8,14; this is a downstream import\ntarget, so the generated source must remain simple enough to survive reduction.\nLighting/mood: neutral warm daytime, highlights from upper left, darker underside;\nruntime supplies dusk/night lighting. Keep emission in separate localized forms.\nColor palette: match the approved project palette and master, warm timber and\nterracotta, layered greens, cool water, violet/blue shadows; limited ramps.\nScene/backdrop: genuinely transparent background outside the four plant silhouettes. No baked ground shadow for actors.\nConstraints: complete unclipped object, consistent perspective and scale, clear\nground contact, generous tool/weapon clearance, no labels, text, watermark or UI.\nAvoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,\nrandom pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,\nnew gameplay objects, tiny details that disappear at native size.\n\nCROP brief:\nCreate one carrot growth-stage strip with exactly four ordered stages:\nplanted seed indication, small sprout, growing plant, mature ready-to-harvest.\nSame ground anchor and native scale in every frame. Wheat: golden grain heads;\ncorn: broad leaves, upright stalk and clear cobs; carrot: feathery green tops\nwith small orange shoulder at maturity. Transparent background, no baked soil.\nTarget 16x16; mature corn may extend to 16x24 under the approved anchor contract.\nKeep neighboring crop rows readable. No random unrelated plants or mature\nplant duplicated four times. Dry/wet tilled soil are separate opaque assets.\n\nExact asset and strip contract:\nOne horizontal row of EXACTLY FOUR non-overlapping equal-width source cells, ordered stage 0,1,2,3 from LEFT to RIGHT. Each cell has the same bottom-center ground contact and the same source pixel scale; early plants are naturally much smaller, never enlarged to fill a cell. Generous transparent gutters and margins; no labels, lines, boxes, soil, ground shadow, grass or background. One coherent carrot species under neutral upper-left daylight. Final crop canvases are 16x16 with pivot (8,14); mature visible height about 10 pixels, keep native side margins so adjacent 16px cells remain readable. Stage 0: three tiny orange-brown planted seeds on the baseline, no leaves, about 4x2 native pixels. Stage 1: two low delicate divided green leaves, about 5x4. Stage 2: a fuller compact feathery green top with several divided branches, about 8x7, no visible orange shoulder yet. Stage 3: a low fan of feathery green tops with TWO small ripe orange carrot shoulders visible just above the ground baseline, about 10x10. No complete uprooted carrot, dirt mound or round tomato fruit; roots remain underground. All four contacts lie on ONE shared horizontal baseline. Keep the complete plants unclipped and centered independently in equal source cells. This is growth progression, not four identical mature plants or a walk animation.",
+      "measured_recipes": [
+        {
+          "id": "crops/carrot_0",
+          "source": "assets/art_source/crops/carrot.png",
+          "crop_xywh": [
+            195,
+            534,
+            201,
+            73
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            500,
+            724
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            16,
+            16
+          ],
+          "pivot_xy": [
+            8,
+            14
+          ],
+          "content_scale": 0.023952095808383235,
+          "alpha_threshold": 128
+        },
+        {
+          "id": "crops/carrot_1",
+          "source": "assets/art_source/crops/carrot.png",
+          "crop_xywh": [
+            660,
+            435,
+            286,
+            171
+          ],
+          "sheet_cell_xywh": [
+            500,
+            0,
+            550,
+            724
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            16,
+            16
+          ],
+          "pivot_xy": [
+            8,
+            14
+          ],
+          "content_scale": 0.023952095808383235,
+          "alpha_threshold": 128
+        },
+        {
+          "id": "crops/carrot_2",
+          "source": "assets/art_source/crops/carrot.png",
+          "crop_xywh": [
+            1094,
+            343,
+            419,
+            263
+          ],
+          "sheet_cell_xywh": [
+            1050,
+            0,
+            490,
+            724
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            16,
+            16
+          ],
+          "pivot_xy": [
+            8,
+            14
+          ],
+          "content_scale": 0.023952095808383235,
+          "alpha_threshold": 128
+        },
+        {
+          "id": "crops/carrot_3",
+          "source": "assets/art_source/crops/carrot.png",
+          "crop_xywh": [
+            1567,
+            225,
+            501,
+            382
+          ],
+          "sheet_cell_xywh": [
+            1540,
+            0,
+            632,
+            724
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            16,
+            16
+          ],
+          "pivot_xy": [
+            8,
+            14
+          ],
+          "content_scale": 0.023952095808383235,
+          "alpha_threshold": 128
+        }
+      ],
+      "decision": "Accepted after all twelve native/nearest3x growth stages on light/dark/checker, dry/wet repeat materials, 41 actual Godot captures in four light states, dense-bed grounding, real watering/harvest/growth and unchanged simulation/data guards."
+    },
+    {
+      "id": "corn",
+      "tool": "built-in ImageGen",
+      "revision": 0,
+      "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-7a04c7aa-f07d-4673-a494-8fd1f51c6d14.png",
+      "source": "assets/art_source/crops/corn.png",
+      "source_sha256": "56735130d8c9f10a49e464f3d0f8518c961156a013f1cfb414b52a19ff21ba00",
+      "source_wh": [
+        1983,
+        793
+      ],
+      "source_alpha_range": [
+        0,
+        255
+      ],
+      "references": [
+        "assets/art_source/masters/style-day.png",
+        "docs/reference-sheet.png"
+      ],
+      "prompt_text": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm\nthat becomes a fortress against zombies at night.\nPrimary request: corn growth source, crops/corn_0 through corn_3, exactly four stages.\nInput images: Image 1: approved neutral-day farm, material/camera reference only; Image 2: repository reference sheet, species/material reference only. Neither is an edit target.\nStyle/medium: coherent hand-crafted pixel art with deliberate pixel clusters,\ncolored outlines, restrained texture, readable material planes and clean forms.\nComposition/framing: orthographic three-quarter top-down view on a rectangular\ngrid; match the approved master camera and scale. Final native canvas is\n16x24 pixels with contact pivot 8,22; this is a downstream import\ntarget, so the generated source must remain simple enough to survive reduction.\nLighting/mood: neutral warm daytime, highlights from upper left, darker underside;\nruntime supplies dusk/night lighting. Keep emission in separate localized forms.\nColor palette: match the approved project palette and master, warm timber and\nterracotta, layered greens, cool water, violet/blue shadows; limited ramps.\nScene/backdrop: genuinely transparent background outside the four plant silhouettes. No baked ground shadow for actors.\nConstraints: complete unclipped object, consistent perspective and scale, clear\nground contact, generous tool/weapon clearance, no labels, text, watermark or UI.\nAvoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,\nrandom pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,\nnew gameplay objects, tiny details that disappear at native size.\n\nCROP brief:\nCreate one corn growth-stage strip with exactly four ordered stages:\nplanted seed indication, small sprout, growing plant, mature ready-to-harvest.\nSame ground anchor and native scale in every frame. Wheat: golden grain heads;\ncorn: broad leaves, upright stalk and clear cobs; carrot: feathery green tops\nwith small orange shoulder at maturity. Transparent background, no baked soil.\nTarget 16x16; mature corn may extend to 16x24 under the approved anchor contract.\nKeep neighboring crop rows readable. No random unrelated plants or mature\nplant duplicated four times. Dry/wet tilled soil are separate opaque assets.\n\nExact asset and strip contract:\nOne horizontal row of EXACTLY FOUR non-overlapping equal-width source cells, ordered stage 0,1,2,3 from LEFT to RIGHT. Each cell has the same bottom-center ground contact and the same source pixel scale; early plants are naturally much smaller, never enlarged to fill a cell. Generous transparent gutters and margins; no labels, lines, boxes, soil, ground shadow, grass or background. One coherent corn species under neutral upper-left daylight. Final crop canvases are 16x24 with pivot (8,22); mature visible height about 20 pixels, keep native side margins so adjacent 16px cells remain readable. Stage 0: two small pale gold planted kernels on the baseline, no leaves, about 4x2 native pixels. Stage 1: one short shoot with TWO broad folded leaves, about 6x5. Stage 2: upright green stalk with four broad alternating lance leaves, about 10x12, no yellow cobs yet. Stage 3: one taller upright stalk, six broad leaves, two readable yellow cobs attached to the central stem and a small ochre tassel, about 12x20. Keep clear spaces between leaves, not a bush or sunflower. Both cobs must survive reduction. All four contacts lie on ONE shared horizontal baseline. Keep the complete plants unclipped and centered independently in equal source cells. This is growth progression, not four identical mature plants or a walk animation.",
+      "measured_recipes": [
+        {
+          "id": "crops/corn_0",
+          "source": "assets/art_source/crops/corn.png",
+          "crop_xywh": [
+            156,
+            696,
+            165,
+            81
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            450,
+            793
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            16,
+            24
+          ],
+          "pivot_xy": [
+            8,
+            22
+          ],
+          "content_scale": 0.02706359945872801,
+          "alpha_threshold": 128
+        },
+        {
+          "id": "crops/corn_1",
+          "source": "assets/art_source/crops/corn.png",
+          "crop_xywh": [
+            526,
+            608,
+            300,
+            163
+          ],
+          "sheet_cell_xywh": [
+            450,
+            0,
+            420,
+            793
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            16,
+            24
+          ],
+          "pivot_xy": [
+            8,
+            22
+          ],
+          "content_scale": 0.02706359945872801,
+          "alpha_threshold": 128
+        },
+        {
+          "id": "crops/corn_2",
+          "source": "assets/art_source/crops/corn.png",
+          "crop_xywh": [
+            928,
+            310,
+            381,
+            461
+          ],
+          "sheet_cell_xywh": [
+            870,
+            0,
+            530,
+            793
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            16,
+            24
+          ],
+          "pivot_xy": [
+            8,
+            22
+          ],
+          "content_scale": 0.02706359945872801,
+          "alpha_threshold": 128
+        },
+        {
+          "id": "crops/corn_3",
+          "source": "assets/art_source/crops/corn.png",
+          "crop_xywh": [
+            1474,
+            32,
+            425,
+            739
+          ],
+          "sheet_cell_xywh": [
+            1400,
+            0,
+            583,
+            793
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            16,
+            24
+          ],
+          "pivot_xy": [
+            8,
+            22
+          ],
+          "content_scale": 0.02706359945872801,
+          "alpha_threshold": 128
+        }
+      ],
+      "decision": "Accepted after all twelve native/nearest3x growth stages on light/dark/checker, dry/wet repeat materials, 41 actual Godot captures in four light states, dense-bed grounding, real watering/harvest/growth and unchanged simulation/data guards."
+    },
+    {
+      "id": "tilled",
+      "tool": "built-in ImageGen",
+      "revision": 0,
+      "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-dbca6387-2486-4c6c-aeb8-1eeb465ffdd6.png",
+      "source": "assets/art_source/crops/tilled.png",
+      "source_sha256": "059b4694178aa87883540b3b648831918f8f650caeaf2fb953bc2338c6e5b4e3",
+      "source_wh": [
+        1254,
+        1254
+      ],
+      "source_alpha_range": [
+        255,
+        255
+      ],
+      "references": [
+        "assets/art_source/terrain/soil.png"
+      ],
+      "prompt_text": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm\nthat becomes a fortress against zombies at night.\nPrimary request: crops/tilled, one opaque seamless tilled-earth tile.\nInput images: Image 1: accepted plain soil tile, material/color reference only; make a new tilled version.\nStyle/medium: coherent hand-crafted pixel art with deliberate pixel clusters,\ncolored outlines, restrained texture, readable material planes and clean forms.\nComposition/framing: orthographic three-quarter top-down view on a rectangular\ngrid; match the approved master camera and scale. Final native canvas is\n16x16 pixels with contact pivot 8,16; this is a downstream import\ntarget, so the generated source must remain simple enough to survive reduction.\nLighting/mood: neutral warm daytime, highlights from upper left, darker underside;\nruntime supplies dusk/night lighting. Keep emission in separate localized forms.\nColor palette: match the approved project palette and master, warm timber and\nterracotta, layered greens, cool water, violet/blue shadows; limited ramps.\nScene/backdrop: fully opaque tilled earth filling every image pixel edge to edge. No baked ground shadow for actors.\nConstraints: complete unclipped object, consistent perspective and scale, clear\nground contact, generous tool/weapon clearance, no labels, text, watermark or UI.\nAvoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,\nrandom pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,\nnew gameplay objects, tiny details that disappear at native size.\n\nCROP supporting-soil brief:\nDry/wet tilled soil are separate opaque assets.\n\nExact soil contract:\nA SINGLE fully opaque seamless orthographic top-down material swatch, not a perspective block or patch floating on a background. Four quiet horizontal joined furrows cross the whole image at equal intervals, repeating top-to-bottom and left-to-right at tile boundaries. Subdued broad pixel clusters, two or three brown planes, no high contrast black border or random noise. Final 16x16 tile under foliage must remain recognizable as dry medium warm brown earth with darker furrow channels, slightly lighter ridge tops. It must contrast with accepted plain soil while staying below crop silhouettes in visual priority. No plant, seed, roots, pebbles, grass, farm object, label, border, bevel or transparency. Do not draw a checkerboard. Crop family contract: dry/wet tilled soil are separate opaque assets; the plants will be composited over this material at runtime.",
+      "measured_recipes": [
+        {
+          "id": "crops/tilled",
+          "source": "assets/art_source/crops/tilled.png",
+          "crop_xywh": [
+            0,
+            0,
+            1254,
+            1254
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            1254,
+            1254
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            16,
+            16
+          ],
+          "pivot_xy": [
+            8,
+            16
+          ],
+          "content_scale": 0.012759170653907496,
+          "alpha_threshold": 128,
+          "palette_keys": [
+            "soil_dark",
+            "soil",
+            "soil_light",
+            "ink_soft",
+            "ink"
+          ]
+        }
+      ],
+      "decision": "Accepted after all twelve native/nearest3x growth stages on light/dark/checker, dry/wet repeat materials, 41 actual Godot captures in four light states, dense-bed grounding, real watering/harvest/growth and unchanged simulation/data guards."
+    },
+    {
+      "id": "tilled_wet",
+      "tool": "built-in ImageGen",
+      "revision": 0,
+      "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-66f0a394-3246-4185-ae2e-2ded9f3332a1.png",
+      "source": "assets/art_source/crops/tilled_wet.png",
+      "source_sha256": "9eefdaa50a729463d491094e771e3232e37698dd4e1cf67cc78ba7b896b141d7",
+      "source_wh": [
+        1254,
+        1254
+      ],
+      "source_alpha_range": [
+        255,
+        255
+      ],
+      "references": [
+        "assets/art_source/crops/tilled.png"
+      ],
+      "prompt_text": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm\nthat becomes a fortress against zombies at night.\nPrimary request: crops/tilled_wet, one opaque seamless tilled-earth tile.\nInput images: Image 1: approved dry tilled soil, EDIT TARGET; change only soil moisture value/color, preserve exactly the furrow geometry, spacing and camera.\nStyle/medium: coherent hand-crafted pixel art with deliberate pixel clusters,\ncolored outlines, restrained texture, readable material planes and clean forms.\nComposition/framing: orthographic three-quarter top-down view on a rectangular\ngrid; match the approved master camera and scale. Final native canvas is\n16x16 pixels with contact pivot 8,16; this is a downstream import\ntarget, so the generated source must remain simple enough to survive reduction.\nLighting/mood: neutral warm daytime, highlights from upper left, darker underside;\nruntime supplies dusk/night lighting. Keep emission in separate localized forms.\nColor palette: match the approved project palette and master, warm timber and\nterracotta, layered greens, cool water, violet/blue shadows; limited ramps.\nScene/backdrop: fully opaque tilled earth filling every image pixel edge to edge. No baked ground shadow for actors.\nConstraints: complete unclipped object, consistent perspective and scale, clear\nground contact, generous tool/weapon clearance, no labels, text, watermark or UI.\nAvoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,\nrandom pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,\nnew gameplay objects, tiny details that disappear at native size.\n\nCROP supporting-soil brief:\nDry/wet tilled soil are separate opaque assets.\n\nExact soil contract:\nA SINGLE fully opaque seamless orthographic top-down material swatch, not a perspective block or patch floating on a background. Four quiet horizontal joined furrows cross the whole image at equal intervals, repeating top-to-bottom and left-to-right at tile boundaries. Subdued broad pixel clusters, two or three brown planes, no high contrast black border or random noise. Final 16x16 tile under foliage must remain recognizable as dark cool damp earth; visibly darker than the accepted dry master, preserving all four original furrows, without blue water puddles or sparkles. No plant, seed, roots, pebbles, grass, farm object, label, border, bevel or transparency. Do not draw a checkerboard. Crop family contract: dry/wet tilled soil are separate opaque assets; the plants will be composited over this material at runtime.",
+      "measured_recipes": [
+        {
+          "id": "crops/tilled_wet",
+          "source": "assets/art_source/crops/tilled_wet.png",
+          "crop_xywh": [
+            0,
+            0,
+            1254,
+            1254
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            1254,
+            1254
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            16,
+            16
+          ],
+          "pivot_xy": [
+            8,
+            16
+          ],
+          "content_scale": 0.012759170653907496,
+          "alpha_threshold": 128,
+          "palette_keys": [
+            "soil_dark",
+            "soil",
+            "soil_light",
+            "ink_soft",
+            "ink"
+          ]
+        }
+      ],
+      "decision": "Accepted after all twelve native/nearest3x growth stages on light/dark/checker, dry/wet repeat materials, 41 actual Godot captures in four light states, dense-bed grounding, real watering/harvest/growth and unchanged simulation/data guards."
+    },
+    {
+      "id": "wheat",
+      "tool": "built-in ImageGen",
+      "revision": 0,
+      "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-5a3bb066-641e-4c67-bd28-32e266bacc50.png",
+      "source": "assets/art_source/crops/wheat.png",
+      "source_sha256": "fe1ecbccbcd3c078942fc3ea6fefcc87ecacbf4c40b99422702903a4961751b0",
+      "source_wh": [
+        1983,
+        793
+      ],
+      "source_alpha_range": [
+        0,
+        255
+      ],
+      "references": [
+        "assets/art_source/masters/style-day.png",
+        "docs/reference-sheet.png"
+      ],
+      "prompt_text": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm\nthat becomes a fortress against zombies at night.\nPrimary request: wheat growth source, crops/wheat_0 through wheat_3, exactly four stages.\nInput images: Image 1: approved neutral-day farm, material/camera reference only; Image 2: repository reference sheet, species/material reference only. Neither is an edit target.\nStyle/medium: coherent hand-crafted pixel art with deliberate pixel clusters,\ncolored outlines, restrained texture, readable material planes and clean forms.\nComposition/framing: orthographic three-quarter top-down view on a rectangular\ngrid; match the approved master camera and scale. Final native canvas is\n16x16 pixels with contact pivot 8,14; this is a downstream import\ntarget, so the generated source must remain simple enough to survive reduction.\nLighting/mood: neutral warm daytime, highlights from upper left, darker underside;\nruntime supplies dusk/night lighting. Keep emission in separate localized forms.\nColor palette: match the approved project palette and master, warm timber and\nterracotta, layered greens, cool water, violet/blue shadows; limited ramps.\nScene/backdrop: genuinely transparent background outside the four plant silhouettes. No baked ground shadow for actors.\nConstraints: complete unclipped object, consistent perspective and scale, clear\nground contact, generous tool/weapon clearance, no labels, text, watermark or UI.\nAvoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,\nrandom pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,\nnew gameplay objects, tiny details that disappear at native size.\n\nCROP brief:\nCreate one wheat growth-stage strip with exactly four ordered stages:\nplanted seed indication, small sprout, growing plant, mature ready-to-harvest.\nSame ground anchor and native scale in every frame. Wheat: golden grain heads;\ncorn: broad leaves, upright stalk and clear cobs; carrot: feathery green tops\nwith small orange shoulder at maturity. Transparent background, no baked soil.\nTarget 16x16; mature corn may extend to 16x24 under the approved anchor contract.\nKeep neighboring crop rows readable. No random unrelated plants or mature\nplant duplicated four times. Dry/wet tilled soil are separate opaque assets.\n\nExact asset and strip contract:\nOne horizontal row of EXACTLY FOUR non-overlapping equal-width source cells, ordered stage 0,1,2,3 from LEFT to RIGHT. Each cell has the same bottom-center ground contact and the same source pixel scale; early plants are naturally much smaller, never enlarged to fill a cell. Generous transparent gutters and margins; no labels, lines, boxes, soil, ground shadow, grass or background. One coherent wheat species under neutral upper-left daylight. Final crop canvases are 16x16 with pivot (8,14); mature visible height about 12 pixels, keep native side margins so adjacent 16px cells remain readable. Stage 0: three small warm tan planted kernels on the baseline, no leaves, about 5x2 native pixels. Stage 1: two short thin green shoots, about 5x4. Stage 2: three taller green blades with tiny immature green heads, about 8x8. Stage 3: three slender stalks bearing distinct ripe golden wheat ears, about 10x12, green lower leaves and clearly warm golden upper grain clusters. The ripe ears are narrow pointed grain heads, not corn cobs. All four contacts lie on ONE shared horizontal baseline. Keep the complete plants unclipped and centered independently in equal source cells. This is growth progression, not four identical mature plants or a walk animation.",
+      "measured_recipes": [
+        {
+          "id": "crops/wheat_0",
+          "source": "assets/art_source/crops/wheat.png",
+          "crop_xywh": [
+            137,
+            639,
+            222,
+            98
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            480,
+            793
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            16,
+            16
+          ],
+          "pivot_xy": [
+            8,
+            14
+          ],
+          "content_scale": 0.019801980198019802,
+          "alpha_threshold": 128
+        },
+        {
+          "id": "crops/wheat_1",
+          "source": "assets/art_source/crops/wheat.png",
+          "crop_xywh": [
+            621,
+            526,
+            222,
+            208
+          ],
+          "sheet_cell_xywh": [
+            480,
+            0,
+            490,
+            793
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            16,
+            16
+          ],
+          "pivot_xy": [
+            8,
+            14
+          ],
+          "content_scale": 0.019801980198019802,
+          "alpha_threshold": 128
+        },
+        {
+          "id": "crops/wheat_2",
+          "source": "assets/art_source/crops/wheat.png",
+          "crop_xywh": [
+            994,
+            336,
+            396,
+            398
+          ],
+          "sheet_cell_xywh": [
+            970,
+            0,
+            470,
+            793
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            16,
+            16
+          ],
+          "pivot_xy": [
+            8,
+            14
+          ],
+          "content_scale": 0.019801980198019802,
+          "alpha_threshold": 128
+        },
+        {
+          "id": "crops/wheat_3",
+          "source": "assets/art_source/crops/wheat.png",
+          "crop_xywh": [
+            1480,
+            128,
+            430,
+            606
+          ],
+          "sheet_cell_xywh": [
+            1440,
+            0,
+            543,
+            793
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            16,
+            16
+          ],
+          "pivot_xy": [
+            8,
+            14
+          ],
+          "content_scale": 0.019801980198019802,
+          "alpha_threshold": 128
+        }
+      ],
+      "decision": "Accepted after all twelve native/nearest3x growth stages on light/dark/checker, dry/wet repeat materials, 41 actual Godot captures in four light states, dense-bed grounding, real watering/harvest/growth and unchanged simulation/data guards."
+    }
+  ],
+  "targeted_imagegen_revisions": 0,
+  "soil_conversion_evidence": "implementation/sprites/reviews/0010/initial-soil-conversion.json"
+}
