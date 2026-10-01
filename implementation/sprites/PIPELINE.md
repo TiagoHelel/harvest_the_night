@@ -3,7 +3,8 @@
 The importer/manifest/ownership registry ship in task 0002. Rebuild with
 `python tools/import_art.py`; validate with `python tools/import_art.py --check`.
 `assets/art_source/README.md` documents the implemented recipe and migration
-commands. Playable depth/occlusion showcases remain the task 0003 deliverable.
+commands. Task 0003 adds playable depth/occlusion fixtures and the shared
+`ArtPlacement` view helper; `verify.py` runs its isolated headless checks.
 
 ## Ownership
 
@@ -96,6 +97,17 @@ retain a documented slice scheme that supports roof overhang and correct sort.
 Keep placement previews, interaction highlight, shadow and light positions in
 agreement. Shadows are separate from the neutral sprite's color ramp.
 
+`ArtPlacement.place` puts a standing sprite node at the logical footprint's
+bottom center, with texture offset equal to the negative manifest pivot.
+Player/enemy subtile positions share `ArtPlacement.contact`. Actors have nested
+y-sorting enabled. The full house renders once at its 3x3 ground anchor; nine
+strictly owned slices remain compatibility outputs rather than simultaneous
+drawings. Existing multi-cell fixtures use their full texture when available.
+House `light_xy` and `smoke_xy` are native source-canvas points; generated
+metadata and `ArtPlacement.emission` keep window glow/chimney smoke aligned.
+Build outlines use the selected family's logical footprint and redraw when
+the family changes in the same cell. They do not cover the cosmetic overhang.
+
 Larger crop canopies need a deliberate layer/order decision. Use existing
 occupancy and state for anchor calculations; do not change the map to hide
 render errors. Replace assumptions in player frame checks with real new metadata
@@ -117,6 +129,22 @@ Add new showcase/screenshot scenarios for silhouettes, every tower level and
 damage state, all crop stages, actor directions, work cycles, building occlusion
 and UI icon display. Existing five screenshots do not cover all those states.
 Capture animation sequences/contact sheets as well as stills.
+
+Task 0003's fixtures read isolated fixed state without simulation ticks or
+player save writes. They cover both actors crossing house/tree in 18 frames,
+house/tower previews, four map/camera corners, all crop stages, tower levels and
+damage/fire states, plus actual actor frame and landmark silhouette sheets:
+
+```powershell
+python tools/show_art.py --check
+python tools/show_art.py --out=implementation/shots/sprites/<task-id>/showcase
+python implementation/sprites/reviews/0003/build_review.py
+```
+
+The review helper builds native/nearest-3x contact pages from task 0003 captures.
+Later family tasks can reuse the showcase's output directory option and extend
+fixtures for their specific states. Contact sheets show existing committed
+frames; they do not prove a provisional animation has authored motion.
 
 The screenshot path uses a real rendering backend; `--headless` cannot provide
 the necessary viewport image here. Prefer the existing offscreen wrapper with

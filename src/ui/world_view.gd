@@ -140,6 +140,7 @@ var _ghost: Sprite2D
 var _ghost_frame: Node2D
 var _ghost_cell := Vector2i(-1, -1)
 var _ghost_ok := false
+var _ghost_id: StringName = &""
 
 ## The night: everything alive that is not the player, and everything in the
 ## air. Redrawn every frame rather than on a dirty flag - at night this is the
@@ -204,6 +205,7 @@ func _ready() -> void:
 
 	_actors = Node2D.new()
 	_actors.name = "Actors"
+	_actors.y_sort_enabled = true
 	_occupants.add_child(_actors)
 
 	_shots = Node2D.new()
@@ -525,12 +527,13 @@ func show_ghost(cell: Vector2i, id: StringName, ok: bool) -> void:
 		return
 	var size := float(GameData.TILE_SIZE)
 	_ghost.texture = _texture_for(id)
-	_ghost.position = Vector2(cell) * size
+	ArtPlacement.place(_ghost, cell, Vector2i(3, 3) if id == &"house" else Building.size_of(id))
 	_ghost.visible = true
-	if cell == _ghost_cell and ok == _ghost_ok:
+	if cell == _ghost_cell and ok == _ghost_ok and id == _ghost_id:
 		return
 	_ghost_cell = cell
 	_ghost_ok = ok
+	_ghost_id = id
 	if _highlight != null:
 		_highlight.queue_redraw()
 
@@ -545,6 +548,10 @@ func ghost_cell() -> Vector2i:
 	return _ghost_cell if _ghost != null and _ghost.visible else Vector2i(-1, -1)
 
 
+func ghost_footprint() -> Vector2i:
+	return Vector2i(3, 3) if _ghost_id == &"house" else Building.size_of(_ghost_id)
+
+
 func hide_ghost() -> void:
 	if _ghost == null or not _ghost.visible:
 		return
@@ -555,6 +562,8 @@ func hide_ghost() -> void:
 
 
 func _draw_highlight() -> void:
+	if _state.is_empty():
+		return
 	# **The route a wall would leave**, dotted so it reads as a prediction
 	# rather than as something on the farm.
 	if not _preview.is_empty():
@@ -607,7 +616,8 @@ func _draw_highlight() -> void:
 	# The build frame first, so that a ghost and an interact target on the same
 	# cell both show and the build one is on top.
 	if _ghost != null and _ghost.visible and Grid.in_bounds(_ghost_cell):
-		var ghost_rect := Rect2(Vector2(_ghost_cell) * size, Vector2(size, size))
+		var footprint := ghost_footprint()
+		var ghost_rect := Rect2(Vector2(_ghost_cell) * size, Vector2(footprint) * size)
 		var colour := Color(0.45, 0.95, 0.45, 0.95) if _ghost_ok \
 			else Color(0.95, 0.35, 0.35, 0.95)
 		_highlight.draw_rect(ghost_rect, colour, false, 1.0)
@@ -807,19 +817,38 @@ func _refresh() -> void:
 		var on: Dictionary = occupants[idx]
 		var id: StringName = on["id"]
 		var cell := Grid.cell(idx)
+		var anchor := cell
+		var anchored: Variant = on.get("anchor", null)
+		if anchored != null:
+			anchor = Vector2i(int(anchored[0]), int(anchored[1]))
+		elif _fixture_corner.has(id):
+			anchor = _fixture_corner[id]
+		var footprint := Vector2i(3, 3) if id == &"house" else Building.size_of(id)
+		var whole := _texture_for(_worn(id, on))
+		var grouped := footprint != Vector2i.ONE and (RasterArt.FRAMES.has(whole.resource_path)
+			or (whole.get_width() >= footprint.x * GameData.TILE_SIZE
+			and whole.get_height() >= footprint.y * GameData.TILE_SIZE))
+		if grouped and cell != anchor:
+			continue
 		var sprite := Sprite2D.new()
-		sprite.texture = _texture_for(_art_for(on, cell))
-		sprite.centered = false
-		# **Bottom-aligned onto the cell.** A tower is taller than its tile
-		# since task 0075 - a level three gun tower is forty pixels on a
-		# sixteen pixel footprint - and the extra belongs above, where a roof
-		# goes. Anything exactly a tile tall lands where it always did.
-		var art_high := sprite.texture.get_height() if sprite.texture != null 			else GameData.TILE_SIZE
-		sprite.position = Vector2(cell) * float(GameData.TILE_SIZE) 			+ Vector2(0.0, float(GameData.TILE_SIZE - art_high))
-		var metadata: Dictionary = RasterArt.FRAMES.get(sprite.texture.resource_path, {})
-		if not metadata.is_empty():
-			sprite.position = Vector2(cell) * float(GameData.TILE_SIZE) \
-				+ Vector2(metadata["cell_offset"])
+		sprite.name = "Prop_%d" % idx
+		sprite.texture = whole if grouped else _texture_for(_art_for(on, cell))
+		ArtPlacement.place(sprite, anchor if grouped else cell, footprint if grouped else Vector2i.ONE)
+		var logical_cells: Array = []
+		if grouped:
+			for y in footprint.y:
+				for x in footprint.x:
+					logical_cells.append(Grid.index(anchor + Vector2i(x, y)))
+		else:
+			logical_cells.append(idx)
+		sprite.set_meta("logical_cells", logical_cells)
+		if id == &"tree":
+			var shadow := Sprite2D.new()
+			shadow.texture = load(PlayerView.SHADOW)
+			shadow.position.y = -1.0
+			shadow.modulate.a = PlayerView.SHADOW_ALPHA
+			shadow.show_behind_parent = true
+			sprite.add_child(shadow)
 		_occupants.add_child(sprite)
 		_sprites.append(sprite)
 		# **One pip a level, above the tower.** The art for a Torre II does
@@ -849,6 +878,13 @@ func _refresh_actors() -> void:
 	# could plausibly cost something.
 	while _actor_sprites.size() < ids.size():
 		var sprite := Sprite2D.new()
+		var shadow := Sprite2D.new()
+		shadow.name = "Shadow"
+		shadow.texture = load(PlayerView.SHADOW)
+		shadow.position.y = -1.0
+		shadow.modulate.a = PlayerView.SHADOW_ALPHA
+		shadow.show_behind_parent = true
+		sprite.add_child(shadow)
 		sprite.centered = false
 		_actors.add_child(sprite)
 		_actor_sprites.append(sprite)
@@ -872,15 +908,10 @@ func _refresh_actors() -> void:
 		# ground and their heads in the next row. Bottom-centre on the cell
 		# they occupy is the same rule the player uses, and it is what makes
 		# a zombie stand on the tile the rules say it is on.
-		var art_size := sprite.texture.get_size() if sprite.texture != null 			else Vector2(GameData.TILE_SIZE, GameData.TILE_SIZE)
-		sprite.position = Vector2(
-			floorf(float(one["pos"][0]) * scale_factor - art_size.x * 0.5),
-			floorf(float(one["pos"][1]) * scale_factor
-				+ float(GameData.TILE_SIZE) * 0.5 - art_size.y))
+		sprite.position = ArtPlacement.contact(one["pos"])
 		var metadata: Dictionary = RasterArt.FRAMES.get(sprite.texture.resource_path, {})
-		if not metadata.is_empty():
-			var pivot: Vector2i = metadata["pivot"]
-			sprite.position += art_size - Vector2(pivot) - Vector2(art_size.x * 0.5, 0)
+		sprite.offset = -Vector2(metadata.get("pivot",
+			Vector2i(sprite.texture.get_width() / 2, sprite.texture.get_height())))
 
 
 ## Shots in the air. Two pixels of bright, which at this resolution is enough
@@ -1156,7 +1187,7 @@ func _find_fixture_corners() -> void:
 	var occupants: Dictionary = _state["occupants"]
 	for idx in occupants:
 		var id: StringName = (occupants[idx] as Dictionary)["id"]
-		if not Farm.FIXTURES.has(id):
+		if not Farm.FIXTURES.has(id) and Building.size_of(id) == Vector2i.ONE:
 			continue
 		var cell := Grid.cell(int(idx))
 		if not _fixture_corner.has(id):

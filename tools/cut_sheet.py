@@ -70,10 +70,15 @@ JOIN_PX = 8
 #
 # The canvas is wider than the character so that a raised axe or a cast line
 # has somewhere to be without the farmer shrinking to make room.
-BODY_HEIGHT = 44
-CANVAS = (48, 52)
+BODY_HEIGHT = 30
+CANVAS = (48, 48)
 # Where the feet sit on that canvas. Low, and in the middle.
-FEET = (24, 50)
+FEET = (24, 44)
+
+# Sprite task 0003's playable pilot freezes the accepted 30px body and 48x48
+# canvas. Unmigrated owner-sheet poses use that same common scale/pivot during
+# migration, avoiding a 44px farmer whenever the new 30px idle turns or works.
+# This only recuts the preserved source; authored replacement strips follow.
 
 # Which pose is which. The only part of this file a person has to read the
 # sheet to write, and the reason the rest can be code.
@@ -396,8 +401,8 @@ def main():
     if not os.path.exists(FRAMES_GD)             or io.open(FRAMES_GD, "rb").read() != generated:
         io.open(FRAMES_GD, "wb").write(generated)
         written += 1
-    print("player: %d frames, %d written, %d unchanged"
-          % (len(files), written, len(files) - written))
+    print("player: %d frames + metadata, %d files written, %d unchanged"
+          % (len(files), written, len(files) + 1 - written))
     return 0
 
 

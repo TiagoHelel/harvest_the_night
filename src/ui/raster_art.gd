@@ -6,7 +6,7 @@ const FRAMES := {
 	"res://sprites/actors/idle_south_0.png": {"canvas": Vector2i(48, 48), "pivot": Vector2i(24, 44), "cell_offset": Vector2i(0, 0), "seconds": 0.55, "loop": true},
 	"res://sprites/actors/idle_south_1.png": {"canvas": Vector2i(48, 48), "pivot": Vector2i(24, 44), "cell_offset": Vector2i(0, 0), "seconds": 0.55, "loop": true},
 	"res://sprites/actors/idle_south_2.png": {"canvas": Vector2i(48, 48), "pivot": Vector2i(24, 44), "cell_offset": Vector2i(0, 0), "seconds": 0.55, "loop": true},
-	"res://sprites/buildings/house.png": {"canvas": Vector2i(64, 64), "pivot": Vector2i(32, 60), "cell_offset": Vector2i(-8, -12), "seconds": 0.55, "loop": true},
+	"res://sprites/buildings/house.png": {"canvas": Vector2i(64, 64), "pivot": Vector2i(32, 60), "cell_offset": Vector2i(-8, -12), "seconds": 0.55, "loop": true, "light": Vector2i(32, 43), "smoke": Vector2i(49, 14)},
 	"res://sprites/buildings/house_0_0.png": {"canvas": Vector2i(24, 28), "pivot": Vector2i(12, 28), "cell_offset": Vector2i(-8, -12), "seconds": 0.55, "loop": true},
 	"res://sprites/buildings/house_0_1.png": {"canvas": Vector2i(24, 16), "pivot": Vector2i(12, 16), "cell_offset": Vector2i(-8, 0), "seconds": 0.55, "loop": true},
 	"res://sprites/buildings/house_0_2.png": {"canvas": Vector2i(24, 20), "pivot": Vector2i(12, 20), "cell_offset": Vector2i(-8, 0), "seconds": 0.55, "loop": true},

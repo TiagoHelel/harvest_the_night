@@ -6,11 +6,11 @@ extends RefCounted
 ## this file and the sheet disagree.
 
 ## The canvas every frame is drawn on, and where the feet sit on it.
-## The character is about 44 pixels tall on it - two tiles wide and
+## The character is about 30 pixels tall on it - two tiles wide and
 ## three tall over an unchanged 16 pixel grid, which is task 0073's
 ## answer to a painted sheet meeting a pixel-art game.
-const CANVAS := Vector2i(48, 52)
-const FEET := Vector2i(24, 50)
+const CANVAS := Vector2i(48, 48)
+const FEET := Vector2i(24, 44)
 
 ## How many frames each animation has.
 const COUNT := {

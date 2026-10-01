@@ -14,7 +14,7 @@ day art. Use clustered highlights and colored outlines, with darker outlines
 on underside/contact areas. Avoid uniform black boxes, random one-pixel noise,
 smooth painted gradients, blur and enlarged single-pixel placeholders.
 
-## Scale contract — accepted for source previews in 0001; playable validation in 0003
+## Scale contract — accepted source previews in 0001 and playable pilot in 0003
 
 Keep 16x16 terrain cells, 40x18 world and 480x270 viewport with nearest filtering
 and integer scaling. Do not raise the game resolution to accommodate generated
@@ -49,8 +49,14 @@ without clipping or distortion. The 16 px logical footprint remains unchanged.
 Exact accepted crops, native sizes, contact pivots and source hashes are in
 `assets/art_source/masters/master-contract.json`. All animations of each
 family must reuse its accepted body scale and canvas rather than refitting each
-pose independently. These are reviewed source proportions; occlusion and
-playability are still validated by the integration pilot in task 0003.
+pose independently. Task 0003 accepts these proportions in the actual 480x270
+farm, including farmer/walker overlap with both landmarks. The remaining 43
+owner-sheet player poses are recut to the same 30 px body reference, 48x48
+canvas and (24,44) contact while authored strips replace them in 0004–0006.
+The house ground pivot is (32,60); its visual starts at (-8,-12) relative to
+the unchanged 3x3 footprint. Trees and actors sort by ground contact. These
+accepted canvases/pivots apply to future families; animation must not grow the
+body or shift the planted feet to fill individual frame bounds.
 
 The four transparent identity masters and neutral-day/night scene studies live
 in `assets/art_source/masters/`. The studies establish materials and lighting;

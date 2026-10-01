@@ -7,7 +7,8 @@ with the accepted master as a reference instead of repainting these files.
 
 Task 0002 imports the four isolated masters into 18 runtime files: the farmer's
 south idle, full house and all nine overhang-aware slices, tree, and walker with
-its transitional legacy poses. Task 0003 validates playable pivots/depth sorting.
+its transitional legacy poses. Task 0003 validates playable pivots/depth sorting
+and recuts the 43 unmigrated player frames to the accepted 30 px body scale.
 Never overwrite `sprites/` with the large raw images.
 
 `ownership.json` registers all 217 PNGs with exactly one writer/checker: ASCII,
@@ -26,7 +27,8 @@ python tools/check_art_pipeline.py   # fault probes; run outside concurrent buil
 ```
 
 The importer produces `src/ui/raster_art.gd` from the recipes, including each
-file's canvas, pivot, cell offset and animation timing. Rebuilds only write
+file's canvas, pivot, cell offset, optional native lamp/chimney points and
+animation timing. Rebuilds only write
 changed bytes. Changing an accepted raw source first requires explicit approval
 of its new source/reference hashes in the manifest; generation does not silently
 approve an edited source. Recipe/palette changes update output hashes on rebuild.
@@ -34,8 +36,11 @@ approve an edited source. Recipe/palette changes update output hashes on rebuild
 
 House slices partition the full 64x64 master into columns 24/16/24 and rows
 28/16/20. Generated offsets reconstruct it at (-8,-12) relative to its existing
-48x48 footprint; no roof pixels are discarded. Task 0003 consolidates its sort
-anchor. The three south idle files currently hold the same static master until
+48x48 footprint; no roof pixels are discarded. Task 0003 draws the full house
+once at its ground anchor; slices remain checked compatibility outputs. Its
+window/chimney points are (32,43)/(49,14) on the 64x64 source canvas. Shared
+`ArtPlacement` consumes these points and ground pivots in the view layer.
+The three south idle files currently hold the same static master until
 0004 authors the idle/walk family. Walker bob/reach/fall preserve the explicitly
 documented old procedural motion using the new source; 0015 replaces them with
 authored motion. These provisional recipes are not claimed as new animation.

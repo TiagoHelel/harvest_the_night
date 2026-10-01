@@ -1,0 +1,33 @@
+
+HARVEST THE NIGHT - verify
+  godot: found
+
+  python tooling               PASS   0.1s
+  backlog index                PASS   0.1s
+  godot import                 PASS   4.7s
+  script parse                 PASS   4.2s  PARSED 104 scripts, 0 failed
+  core is pure                 PASS   0.0s
+  sprites                      PASS   0.2s  OK    156 sprites match their maps
+  player art                   PASS   0.4s  OK    43 player frames match the sheet
+  raster art                   PASS   0.8s  OK: 18 raster outputs, metadata verified, 0 written
+  art placement                PASS   1.1s  ART SHOWCASE: 441 checks, 0 failed
+  font                         PASS   0.1s  OK    4 font files match the maps
+  logo                         PASS   0.1s  OK    the logo matches the font it is made of
+  sfx                          PASS   0.4s  OK    27 sounds match their recipes (13 day, 14 night)
+  perf                         PASS   3.0s  OK    a night tick is 557us of the 8333 it may have (7%), a path rebuild 4288us of 33333
+  icon                         PASS   0.3s  OK    8 icon sizes match the one drawing
+  playtest                     PASS   0.1s  OK    the reader reads what the game writes
+  store                        PASS   0.1s  CHECKED  the parts that need no capture
+  devlog                       PASS   0.2s  journal    112 entries against 110 done, 26 hash moves, 50 findings
+  strings                      PASS   0.1s  OK    385 keys in 2 languages, all of them fit
+  music                        PASS   9.6s  OK    4 pieces match their recipes
+  ambience                     PASS   1.6s  OK    11 ambience files match their recipes (2 beds, 9 touches)
+  headless_check               PASS  55.6s  6511 asserts, 0 failed
+  sim hash                     PASS   1.7s  1961000123 unchanged
+  data hash                    PASS   0.0s  407837701 unchanged
+  input_check                  PASS  64.2s  980 cases, 0 failed
+  exports                      SKIP   0.0s  --fast
+
+  24 passed, 1 skipped, 0 failed in 149s
+
+PASS

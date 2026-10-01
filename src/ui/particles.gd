@@ -271,12 +271,22 @@ func _watch(delta: float) -> void:
 	_smoke_due = 0.35
 	var occupants: Dictionary = _state["occupants"]
 	var standing: Dictionary = {}
+	var chimneys: Dictionary = {}
 	for idx in occupants:
 		var on: Dictionary = occupants[idx]
 		var id: StringName = on["id"]
 		standing[int(idx)] = id
 		var at := (Vector2(Grid.cell(int(idx))) + Vector2(0.5, 0.4)) * tile
 		if id == &"kitchen" or id == &"workshop" or id == &"house":
+			var anchor: Array = on.get("anchor", [Grid.cell(int(idx)).x, Grid.cell(int(idx)).y])
+			if id == &"house":
+				var corner := Farm.house_centre(_state) - Vector2i.ONE
+				anchor = [corner.x, corner.y]
+			var name := "%s@%s" % [id, str(anchor)]
+			if chimneys.has(name):
+				continue
+			chimneys[name] = true
+			at = ArtPlacement.emission(id, Vector2(anchor[0], anchor[1]) * tile, &"smoke", at)
 			_burst(at, 1, &"smoke", SMOKE, 8.0)
 		elif _is_wrecked(on):
 			_burst(at, 1, &"smoke", SMOKE, 10.0)

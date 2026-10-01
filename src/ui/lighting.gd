@@ -159,15 +159,18 @@ func _draw() -> void:
 		var key: Variant = on.get("anchor", null)
 		var name := "%s@%s" % [id, str(key) if key != null else str(id)] 			if id == &"house" else "%s@%s" % [id, str(key if key != null
 				else Grid.cell(int(idx)))]
-		var box: Array = middles.get(name, [id, Vector2.ZERO, 0])
+		var box: Array = middles.get(name, [id, Vector2.ZERO, 0, Vector2(Grid.cell(int(idx)))])
 		box[1] = (box[1] as Vector2) + Vector2(Grid.cell(int(idx)))
 		box[2] = int(box[2]) + 1
+		box[3] = Vector2(minf((box[3] as Vector2).x, Grid.cell(int(idx)).x),
+			minf((box[3] as Vector2).y, Grid.cell(int(idx)).y))
 		middles[name] = box
 
 	for name in GameData.sorted_names(middles.keys()):
 		var box: Array = middles[name]
 		var id: StringName = box[0]
 		var at := ((box[1] as Vector2) / float(box[2]) + Vector2(0.5, 0.5)) 			* tile
+		at = ArtPlacement.emission(id, (box[3] as Vector2) * tile, &"light", at)
 		match id:
 			&"house":
 				_glow_at(at, HOUSE_RADIUS * tile, HOUSE_COLOUR, 0.60)

@@ -1,6 +1,6 @@
 # 0003 - Playable pilot, pivots and depth sorting
 
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0002
 - **Likely files:** src/ui/world_view.gd; src/ui/player_view.gd; scenes/World.tscn; src/tools/shot.gd; new visual showcase scene/tool
 - **Generation briefs:** Use 0001 masters

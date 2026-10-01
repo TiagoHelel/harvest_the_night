@@ -670,7 +670,7 @@ func _case_0013_world_view() -> void:
 	# Only the sprites: the layer also holds the highlight and the player, who
 	# live here so that walking behind a tree puts them behind the tree.
 	expect(drawn != null and _sprites_in(drawn) == occupants.size(),
-		"one sprite per occupant, no more and no fewer",
+		"each logical occupant is covered once, including grouped buildings",
 		"%d drawn, %d on the farm"
 		% [_sprites_in(drawn) if drawn else -1, occupants.size()])
 
@@ -886,11 +886,14 @@ func _any_buildable(state: Dictionary) -> Vector2i:
 ## Occupant sprites only. The layer also holds the player and, since task
 ## 0023, the build ghost - which is a Sprite2D and is nobody's occupant.
 func _sprites_in(node: Node) -> int:
-	var n := 0
+	var cells := {}
 	for child in node.get_children():
-		if child is Sprite2D and child.name != "Ghost":
-			n += 1
-	return n
+		if child is Sprite2D and child.has_meta("logical_cells"):
+			for idx in child.get_meta("logical_cells"):
+				if cells.has(idx):
+					return -1
+				cells[idx] = true
+	return cells.size()
 
 
 ## 0020 - the stall, through the real panel: open it, sell something, leave.

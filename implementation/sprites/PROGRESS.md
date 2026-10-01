@@ -167,3 +167,69 @@ and specific later-task checks without claiming unfinished integration.
 Queue after completion: 2 done, 18 todo, 0 doing, 0 blocked. Next is 0003,
 the playable pilot. One task completed in this cycle; the user's active /goal
 continues with the next invocation until the entire art backlog is verified.
+
+## 0003 — Playable pilot, ground pivots and depth sorting — done 2026-10-01
+
+Integrated farmer, house, tree and walker through shared `ArtPlacement` and
+manifest-generated metadata. Standing node origins use ground contact, textures
+offset by their source pivots, and nested Actors participate in the parent's
+y-sort. The full house draws once at its existing 3x3 anchor; checked nine-slice
+compatibility outputs remain preserved. Other multi-cell fixtures use whole
+textures where available. Logical occupant coverage is checked without requiring
+one visual node per cell. Tree/walker shadows align with the same contact.
+
+House window/chimney points (32,43)/(49,14) are stored on its native 64x64
+source canvas and emitted into `raster_art.gd`. Lighting and particles consume
+the same placement recipe; one house emits chimney smoke once. Previews use
+the selected family's logical footprint and redraw when the family changes at
+the same cell. This fixes the visually discovered house-to-tower case where a
+one-cell tower retained the house's cached 3x3 outline.
+
+The playable pilot exposed a 44-to-30 px farmer size jump whenever the accepted
+south idle turned or worked. Recuts of all 43 unmigrated owner-sheet frames now
+use one 30 px body reference, 48x48 canvas and (24,44) feet, matching the pilot.
+The original `docs/sprites_sem_fundo.png` remains unchanged. Authored idle/walk,
+work and reaction families remain 0004–0006 deliverables; provisional static
+south idle and procedural walker motion are not claimed as authored animation.
+
+No new ImageGen calls, prompts or source revisions were required by this
+integration task. Reused `assets/art_source/masters/{farmer,house,tree,walker}.png`
+and their original 0001 prompts/reference roles. All raw source, prompt and
+reference SHA-256 values remain unchanged and pass strict provenance checks.
+Recipes retain 18 raster-owned outputs; the 43 recuts retain owner-sheet
+ownership and exact-byte checks. Core/rules, balance, saves and hash baselines
+were not modified.
+
+Added deterministic view-only `src/tools/art_showcase.gd` / `tools/show_art.py`:
+18 overlap frames swapping farmer/walker across house/tree; house/tower previews;
+four map/camera edges; three crop families x four stages; four tower families x
+three levels in whole/damaged/firing states; all 46 player frames, four walker
+states and both landmarks on native contact/silhouette pages. Fixtures use
+isolated state with no simulation ticks, assert that rendering leaves it
+unchanged, and do not write player saves/settings. Full verify now includes
+445 placement/coverage checks. Real rendering passes 507 checks and saves
+31 showcase PNGs; base captures save five PNGs with zero failures.
+
+Visual review: all 36 captures opened on native/nearest-3x pages in
+`reviews/0003/captures-00` through `captures-08`, plus individual key overlaps,
+frame sheets, boundaries and noon/dusk/wave. Farmer/walker correctly pass behind
+and in front of both landmarks; no duplicated house or roof slice seam; ghost
+feet/outline align with their unchanged build cells. Source pixels stay intact
+at map limits; the fixed viewport naturally clips decorative top/bottom
+overhang rather than moving the camera or changing collision. Accepted body
+scale/canvases/pivots are frozen in `ART_DIRECTION.md`. Detailed gates and
+later-task legacy-art/night-light follow-ups are in `reviews/0003/REVIEW.md`.
+
+Verification: iterative fast PASS (24 passed, 1 intentional export skip,
+0 failed, 149s). Final full after the preview-outline correction PASS:
+25 passed, 0 skipped/failed, 170s; 104 scripts parsed, 6511 headless assertions,
+980 input cases, performance and Windows/Web exports. Sim hash `1961000123`,
+data hash `407837701`, both unchanged. Evidence: `reviews/0003/verify-full.log`,
+`showcase-check.log`, `showcase-capture.log`, `captures.log` and native/3x pages.
+Actual captures: `implementation/shots/sprites/0003/{noon,dusk,wave,result,tech}.png`
+and its `showcase/` folder. QA composition uses nearest resizing only, with no
+creative edits to runtime images.
+
+Queue after completion: 3 done, 17 todo, 0 doing, 0 blocked. Next is 0004,
+authored farmer idle/walk. One task completed this cycle; the user's active
+/goal continues automatically toward the remaining art backlog.

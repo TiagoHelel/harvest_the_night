@@ -15,9 +15,8 @@ extends Node2D
 ##
 ## ## Two tiles wide and three tall
 ##
-## Task 0073's size decision, in one line: the farmer is drawn on a 48x52
-## canvas over an unchanged 16 pixel grid. The reasoning is written at the top
-## of `tools/cut_sheet.py`, where the canvas is set, and in the journal.
+## Sprite task 0003's pilot: 30px body on a 48x48 canvas over the unchanged
+## 16px grid. Legacy poses use the same scale during the authored migration.
 ##
 ## **The node sits at the feet and the sprite is offset up and left**, rather
 ## than the node sitting at the sprite's corner, because y-sorting uses the
@@ -77,13 +76,10 @@ func _process(delta: float) -> void:
 	if _state.is_empty():
 		return
 	var sub := Player.position(_state)
-	var scale_factor := float(GameData.TILE_SIZE) / float(Player.SUBTILE)
 
 	# Floored to whole pixels. A sprite on a half pixel has a shimmering edge,
 	# which is the one thing integer scaling was set up to avoid.
-	position = Vector2(
-		floorf(float(sub.x) * scale_factor),
-		floorf(float(sub.y) * scale_factor))
+	position = ArtPlacement.contact([sub.x, sub.y])
 
 	_animate(delta)
 

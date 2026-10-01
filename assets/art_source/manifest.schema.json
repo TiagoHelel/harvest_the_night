@@ -31,6 +31,8 @@
           "alpha_threshold": {"type": "integer", "minimum": 1, "maximum": 255},
           "sheet_cell_xywh": {"$ref": "#/$defs/rect"},
           "gutter_xy": {"$ref": "#/$defs/pair"},
+          "light_xy": {"$ref": "#/$defs/pair"},
+          "smoke_xy": {"$ref": "#/$defs/pair"},
           "cell_offset_xy": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"type": "integer"}},
           "prompt": {"type": "string"},
           "prompt_sha256": {"$ref": "#/$defs/hash"},

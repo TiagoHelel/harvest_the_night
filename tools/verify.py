@@ -166,6 +166,12 @@ def check_raster_art():
     return check("raster art", code == 0, tail(out, 4))
 
 
+def check_art_showcase():
+    code, out = run([sys.executable, "tools/show_art.py", "--check"])
+    verdict = next((line for line in out.splitlines() if line.startswith("ART SHOWCASE:")), tail(out, 4))
+    return check("art placement", code == 0, verdict)
+
+
 def check_logo():
     """The logo still matches the letters it was composed from.
 
@@ -555,6 +561,7 @@ def main():
     check_sprites()
     check_player_art()
     check_raster_art()
+    check_art_showcase()
     check_font()
     check_logo()
     check_sfx()
