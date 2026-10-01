@@ -3,57 +3,6 @@
   "recipe": "nearest-palette-alpha-v1",
   "assets": [
     {
-      "id": "actors/idle_south_0",
-      "owner": "raster",
-      "source": "assets/art_source/masters/farmer.png",
-      "source_sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4",
-      "crop_xywh": [
-        365,
-        190,
-        577,
-        854
-      ],
-      "sheet_cell_xywh": [
-        0,
-        0,
-        1310,
-        1201
-      ],
-      "gutter_xy": [
-        0,
-        0
-      ],
-      "canvas_wh": [
-        48,
-        48
-      ],
-      "pivot_xy": [
-        24,
-        44
-      ],
-      "content_scale": 0.0351288056206089,
-      "alpha_threshold": 128,
-      "palette": "tools/palette.py:COLOURS",
-      "animation": "idle_south",
-      "frame": 0,
-      "seconds": 0.55,
-      "loop": true,
-      "output": "sprites/actors/idle_south_0.png",
-      "output_sha256": "3978ffdb22e1b6d1b74426f4807df54fdf15be5a8b2eea91c4eaa239d2eb5bc9",
-      "prompt": "implementation/sprites/generation/0001-player.prompt.txt",
-      "prompt_sha256": "ea7ac44958f920236750c92f6d196cb6b493eca1983bac380b1d8d637cf28511",
-      "references": [
-        {
-          "path": "docs/sprites_sem_fundo.png",
-          "role": "owner identity reference",
-          "sha256": "9fe4e672988613dbb54cf7ef197149d4b7f61f69e190dc32f04f4c3ec9103b0a"
-        }
-      ],
-      "tool": "built-in ImageGen",
-      "generation_task": "0001",
-      "provisional": "Static pilot hold; task 0004 supplies three authored idle frames."
-    },
-    {
       "id": "buildings/house",
       "owner": "raster",
       "source": "assets/art_source/masters/house.png",
@@ -238,72 +187,6 @@
       ],
       "tool": "built-in ImageGen",
       "generation_task": "0001"
-    },
-    {
-      "owner": "raster",
-      "palette": "tools/palette.py:COLOURS",
-      "seconds": 0.55,
-      "loop": true,
-      "prompt": "implementation/sprites/generation/0001-player.prompt.txt",
-      "prompt_sha256": "ea7ac44958f920236750c92f6d196cb6b493eca1983bac380b1d8d637cf28511",
-      "references": [
-        {
-          "path": "docs/sprites_sem_fundo.png",
-          "role": "owner identity reference",
-          "sha256": "9fe4e672988613dbb54cf7ef197149d4b7f61f69e190dc32f04f4c3ec9103b0a"
-        }
-      ],
-      "tool": "built-in ImageGen",
-      "generation_task": "0001",
-      "id": "actors/idle_south_1",
-      "input": "actors/idle_south_0",
-      "operation": "copy",
-      "canvas_wh": [
-        48,
-        48
-      ],
-      "pivot_xy": [
-        24,
-        44
-      ],
-      "animation": "idle_south",
-      "frame": 1,
-      "output": "sprites/actors/idle_south_1.png",
-      "output_sha256": "3978ffdb22e1b6d1b74426f4807df54fdf15be5a8b2eea91c4eaa239d2eb5bc9",
-      "provisional": "Static pilot hold; authored animation in task 0004."
-    },
-    {
-      "owner": "raster",
-      "palette": "tools/palette.py:COLOURS",
-      "seconds": 0.55,
-      "loop": true,
-      "prompt": "implementation/sprites/generation/0001-player.prompt.txt",
-      "prompt_sha256": "ea7ac44958f920236750c92f6d196cb6b493eca1983bac380b1d8d637cf28511",
-      "references": [
-        {
-          "path": "docs/sprites_sem_fundo.png",
-          "role": "owner identity reference",
-          "sha256": "9fe4e672988613dbb54cf7ef197149d4b7f61f69e190dc32f04f4c3ec9103b0a"
-        }
-      ],
-      "tool": "built-in ImageGen",
-      "generation_task": "0001",
-      "id": "actors/idle_south_2",
-      "input": "actors/idle_south_0",
-      "operation": "copy",
-      "canvas_wh": [
-        48,
-        48
-      ],
-      "pivot_xy": [
-        24,
-        44
-      ],
-      "animation": "idle_south",
-      "frame": 2,
-      "output": "sprites/actors/idle_south_2.png",
-      "output_sha256": "3978ffdb22e1b6d1b74426f4807df54fdf15be5a8b2eea91c4eaa239d2eb5bc9",
-      "provisional": "Static pilot hold; authored animation in task 0004."
     },
     {
       "owner": "raster",
@@ -856,6 +739,1278 @@
       "output": "sprites/enemies/walker_death.png",
       "output_sha256": "66fbe788d80f2a45af9de795b602e4d27aef4b3d4e9d0239d38654fe7cb5d0e9",
       "provisional": "Legacy procedural motion from new master; authored strips/death playback in task 0015."
+    },
+    {
+      "id": "actors/idle_south_0",
+      "owner": "raster",
+      "source": "assets/art_source/player/idle_south.png",
+      "source_sha256": "49de04f2e849b42f984ba145cf54505616ed055a242b6e6363f90d3dfe5ea7b2",
+      "crop_xywh": [
+        197,
+        120,
+        395,
+        569
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        705,
+        774
+      ],
+      "gutter_xy": [
+        113,
+        85
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.05272407732864675,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "idle_south",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true,
+      "output": "sprites/actors/idle_south_0.png",
+      "output_sha256": "e51133786b3a84ee97bef2d50b007687ea6909f9fc9d2ea70b9ed8e8bb15dd80",
+      "prompt": "implementation/sprites/generation/0004-idle_south.prompt.txt",
+      "prompt_sha256": "a9a216c7cd6f45500ee90da07f2063072eb2edf19ff732be6dbf8ce9b704384d",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body-scale master",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0004",
+      "revision": 0,
+      "approval": "Native/3x strip review before runtime promotion"
+    },
+    {
+      "id": "actors/idle_south_1",
+      "owner": "raster",
+      "source": "assets/art_source/player/idle_south.png",
+      "source_sha256": "49de04f2e849b42f984ba145cf54505616ed055a242b6e6363f90d3dfe5ea7b2",
+      "crop_xywh": [
+        818,
+        125,
+        396,
+        564
+      ],
+      "sheet_cell_xywh": [
+        705,
+        0,
+        622,
+        774
+      ],
+      "gutter_xy": [
+        113,
+        85
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.05272407732864675,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "idle_south",
+      "frame": 1,
+      "seconds": 0.55,
+      "loop": true,
+      "output": "sprites/actors/idle_south_1.png",
+      "output_sha256": "f1e261dc53f094bd3f9b4fd47efbbcde25d5ba8ee28a5a59ec0e1bafd1f5cb7a",
+      "prompt": "implementation/sprites/generation/0004-idle_south.prompt.txt",
+      "prompt_sha256": "a9a216c7cd6f45500ee90da07f2063072eb2edf19ff732be6dbf8ce9b704384d",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body-scale master",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0004",
+      "revision": 0,
+      "approval": "Native/3x strip review before runtime promotion"
+    },
+    {
+      "id": "actors/idle_south_2",
+      "owner": "raster",
+      "source": "assets/art_source/player/idle_south.png",
+      "source_sha256": "49de04f2e849b42f984ba145cf54505616ed055a242b6e6363f90d3dfe5ea7b2",
+      "crop_xywh": [
+        1440,
+        120,
+        396,
+        569
+      ],
+      "sheet_cell_xywh": [
+        1327,
+        0,
+        705,
+        774
+      ],
+      "gutter_xy": [
+        113,
+        85
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.05272407732864675,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "idle_south",
+      "frame": 2,
+      "seconds": 0.55,
+      "loop": true,
+      "output": "sprites/actors/idle_south_2.png",
+      "output_sha256": "a574f5d15c2292bce746569dc68e5a2e2f419c917bec49b3fa1669d137c0f26d",
+      "prompt": "implementation/sprites/generation/0004-idle_south.prompt.txt",
+      "prompt_sha256": "a9a216c7cd6f45500ee90da07f2063072eb2edf19ff732be6dbf8ce9b704384d",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body-scale master",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0004",
+      "revision": 0,
+      "approval": "Native/3x strip review before runtime promotion"
+    },
+    {
+      "id": "actors/walk_south_0",
+      "owner": "raster",
+      "source": "assets/art_source/player/walk_south.png",
+      "source_sha256": "c5e566a03fd5bf3ae61571e48f6a348e2658acca48c1b6f7eae91b54f62ea3c4",
+      "crop_xywh": [
+        87,
+        111,
+        361,
+        530
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        543,
+        724
+      ],
+      "gutter_xy": [
+        87,
+        83
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.056818181818181816,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "walk_south",
+      "frame": 0,
+      "seconds": 0.13,
+      "loop": true,
+      "output": "sprites/actors/walk_south_0.png",
+      "output_sha256": "66da8a9f1882c8c4aeb1018c8322297a1323cbd1b6c52c6bd3cb5037b91b7077",
+      "prompt": "implementation/sprites/generation/0004-walk_south-r1.prompt.txt",
+      "prompt_sha256": "658860b48c2b1bc79efc6d352802f3448c6cfa520adc5fe7fece29c66f2db8e0",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body-scale master",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/candidates/walk_south-r0.png",
+          "role": "edit target for accepted revision",
+          "sha256": "39c0c250ea74222a8c7b8e1c4004a4152ec864524a224ae3f6b75af00321a377"
+        },
+        {
+          "path": "implementation/sprites/generation/0004-walk_south.prompt.txt",
+          "role": "original complete strip prompt",
+          "sha256": "cf5c237ba19ed8512926e600402b219e5f794c31ac041c43e7299d92a28ed8ac"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0004",
+      "revision": 1,
+      "approval": "Native/3x strip review before runtime promotion"
+    },
+    {
+      "id": "actors/walk_south_1",
+      "owner": "raster",
+      "source": "assets/art_source/player/walk_south.png",
+      "source_sha256": "c5e566a03fd5bf3ae61571e48f6a348e2658acca48c1b6f7eae91b54f62ea3c4",
+      "crop_xywh": [
+        639,
+        111,
+        360,
+        526
+      ],
+      "sheet_cell_xywh": [
+        543,
+        0,
+        543,
+        724
+      ],
+      "gutter_xy": [
+        87,
+        87
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.056818181818181816,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "walk_south",
+      "frame": 1,
+      "seconds": 0.13,
+      "loop": true,
+      "output": "sprites/actors/walk_south_1.png",
+      "output_sha256": "632681cb45eff18ac588fa87c7bc353cd426247149776a852989c15c2b4154ea",
+      "prompt": "implementation/sprites/generation/0004-walk_south-r1.prompt.txt",
+      "prompt_sha256": "658860b48c2b1bc79efc6d352802f3448c6cfa520adc5fe7fece29c66f2db8e0",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body-scale master",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/candidates/walk_south-r0.png",
+          "role": "edit target for accepted revision",
+          "sha256": "39c0c250ea74222a8c7b8e1c4004a4152ec864524a224ae3f6b75af00321a377"
+        },
+        {
+          "path": "implementation/sprites/generation/0004-walk_south.prompt.txt",
+          "role": "original complete strip prompt",
+          "sha256": "cf5c237ba19ed8512926e600402b219e5f794c31ac041c43e7299d92a28ed8ac"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0004",
+      "revision": 1,
+      "approval": "Native/3x strip review before runtime promotion"
+    },
+    {
+      "id": "actors/walk_south_2",
+      "owner": "raster",
+      "source": "assets/art_source/player/walk_south.png",
+      "source_sha256": "c5e566a03fd5bf3ae61571e48f6a348e2658acca48c1b6f7eae91b54f62ea3c4",
+      "crop_xywh": [
+        1173,
+        111,
+        360,
+        530
+      ],
+      "sheet_cell_xywh": [
+        1086,
+        0,
+        543,
+        724
+      ],
+      "gutter_xy": [
+        87,
+        83
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.056818181818181816,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "walk_south",
+      "frame": 2,
+      "seconds": 0.13,
+      "loop": true,
+      "output": "sprites/actors/walk_south_2.png",
+      "output_sha256": "a12a3246059856c159f52bb89529a566771b32f33c570e82fd15811fffc34302",
+      "prompt": "implementation/sprites/generation/0004-walk_south-r1.prompt.txt",
+      "prompt_sha256": "658860b48c2b1bc79efc6d352802f3448c6cfa520adc5fe7fece29c66f2db8e0",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body-scale master",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/candidates/walk_south-r0.png",
+          "role": "edit target for accepted revision",
+          "sha256": "39c0c250ea74222a8c7b8e1c4004a4152ec864524a224ae3f6b75af00321a377"
+        },
+        {
+          "path": "implementation/sprites/generation/0004-walk_south.prompt.txt",
+          "role": "original complete strip prompt",
+          "sha256": "cf5c237ba19ed8512926e600402b219e5f794c31ac041c43e7299d92a28ed8ac"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0004",
+      "revision": 1,
+      "approval": "Native/3x strip review before runtime promotion"
+    },
+    {
+      "id": "actors/walk_south_3",
+      "owner": "raster",
+      "source": "assets/art_source/player/walk_south.png",
+      "source_sha256": "c5e566a03fd5bf3ae61571e48f6a348e2658acca48c1b6f7eae91b54f62ea3c4",
+      "crop_xywh": [
+        1725,
+        111,
+        360,
+        526
+      ],
+      "sheet_cell_xywh": [
+        1629,
+        0,
+        543,
+        724
+      ],
+      "gutter_xy": [
+        87,
+        87
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.056818181818181816,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "walk_south",
+      "frame": 3,
+      "seconds": 0.13,
+      "loop": true,
+      "output": "sprites/actors/walk_south_3.png",
+      "output_sha256": "5c01f4f74f8de12202505a3cbaa9db103ec152af415d05b6a1ac560712a2589e",
+      "prompt": "implementation/sprites/generation/0004-walk_south-r1.prompt.txt",
+      "prompt_sha256": "658860b48c2b1bc79efc6d352802f3448c6cfa520adc5fe7fece29c66f2db8e0",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body-scale master",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/candidates/walk_south-r0.png",
+          "role": "edit target for accepted revision",
+          "sha256": "39c0c250ea74222a8c7b8e1c4004a4152ec864524a224ae3f6b75af00321a377"
+        },
+        {
+          "path": "implementation/sprites/generation/0004-walk_south.prompt.txt",
+          "role": "original complete strip prompt",
+          "sha256": "cf5c237ba19ed8512926e600402b219e5f794c31ac041c43e7299d92a28ed8ac"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0004",
+      "revision": 1,
+      "approval": "Native/3x strip review before runtime promotion"
+    },
+    {
+      "id": "actors/idle_north_0",
+      "owner": "raster",
+      "source": "assets/art_source/player/idle_north.png",
+      "source_sha256": "6de9c2f2df1bc0a0a0631769c15dfc21a6514017e38e63b375b194d2aac38800",
+      "crop_xywh": [
+        318,
+        83,
+        404,
+        575
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        802,
+        724
+      ],
+      "gutter_xy": [
+        80,
+        66
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.052083333333333336,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "idle_north",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true,
+      "output": "sprites/actors/idle_north_0.png",
+      "output_sha256": "ca55cfbe772bfe0e4fa66f1a9cdcdbc0cf08a2c45dcc3eaa10cc7a9eaaed0c6c",
+      "prompt": "implementation/sprites/generation/0004-idle_north.prompt.txt",
+      "prompt_sha256": "789c3d1a76ecaf73605d356ea3550570fc9dfb1a04a0052ee8eb3dbacfa76e78",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body-scale master",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0004",
+      "revision": 0,
+      "approval": "Native/3x strip review before runtime promotion"
+    },
+    {
+      "id": "actors/idle_north_1",
+      "owner": "raster",
+      "source": "assets/art_source/player/idle_north.png",
+      "source_sha256": "6de9c2f2df1bc0a0a0631769c15dfc21a6514017e38e63b375b194d2aac38800",
+      "crop_xywh": [
+        883,
+        82,
+        405,
+        576
+      ],
+      "sheet_cell_xywh": [
+        802,
+        0,
+        567,
+        724
+      ],
+      "gutter_xy": [
+        81,
+        66
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.052083333333333336,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "idle_north",
+      "frame": 1,
+      "seconds": 0.55,
+      "loop": true,
+      "output": "sprites/actors/idle_north_1.png",
+      "output_sha256": "031789fe57adb88f48c500e5c8b935d8f5d54bb10ade77d9a025068b5568c1f8",
+      "prompt": "implementation/sprites/generation/0004-idle_north.prompt.txt",
+      "prompt_sha256": "789c3d1a76ecaf73605d356ea3550570fc9dfb1a04a0052ee8eb3dbacfa76e78",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body-scale master",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0004",
+      "revision": 0,
+      "approval": "Native/3x strip review before runtime promotion"
+    },
+    {
+      "id": "actors/idle_north_2",
+      "owner": "raster",
+      "source": "assets/art_source/player/idle_north.png",
+      "source_sha256": "6de9c2f2df1bc0a0a0631769c15dfc21a6514017e38e63b375b194d2aac38800",
+      "crop_xywh": [
+        1450,
+        82,
+        405,
+        576
+      ],
+      "sheet_cell_xywh": [
+        1369,
+        0,
+        803,
+        724
+      ],
+      "gutter_xy": [
+        81,
+        66
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.052083333333333336,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "idle_north",
+      "frame": 2,
+      "seconds": 0.55,
+      "loop": true,
+      "output": "sprites/actors/idle_north_2.png",
+      "output_sha256": "ccf61bc2df6e0a1998264e2ea5761312069a3ef6f3da7f8fa39eb9bbf7b35b21",
+      "prompt": "implementation/sprites/generation/0004-idle_north.prompt.txt",
+      "prompt_sha256": "789c3d1a76ecaf73605d356ea3550570fc9dfb1a04a0052ee8eb3dbacfa76e78",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body-scale master",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0004",
+      "revision": 0,
+      "approval": "Native/3x strip review before runtime promotion"
+    },
+    {
+      "id": "actors/walk_north_0",
+      "owner": "raster",
+      "source": "assets/art_source/player/walk_north.png",
+      "source_sha256": "9a0a1429d754062e81bd1165a644ba0f3d593b814433ac8159da57d766e43a47",
+      "crop_xywh": [
+        130,
+        114,
+        360,
+        505
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        551,
+        756
+      ],
+      "gutter_xy": [
+        61,
+        114
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.05928853754940711,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "walk_north",
+      "frame": 0,
+      "seconds": 0.13,
+      "loop": true,
+      "output": "sprites/actors/walk_north_0.png",
+      "output_sha256": "a1c39a20f20643083a130f908342092dea290a9de7590b3a5cef2a30989cf6d3",
+      "prompt": "implementation/sprites/generation/0004-walk_north-r1.prompt.txt",
+      "prompt_sha256": "599a850fb68f7dba77a76422dc5d72f62a572c2153cc5867e607d0b1cfd929d5",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body-scale master",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/candidates/walk_north-r0.png",
+          "role": "edit target for accepted revision",
+          "sha256": "b26e9ff8b1d35ef6bad7fe664ad2cbb51b41518c865a34f8bd19853d92d78445"
+        },
+        {
+          "path": "implementation/sprites/generation/0004-walk_north.prompt.txt",
+          "role": "original complete strip prompt",
+          "sha256": "f20b8b9241ea7dbc4568af135e49d9c8d75ce12f9c6e228fc71413ff2116948f"
+        },
+        {
+          "path": "assets/art_source/player/idle_north.png",
+          "role": "accepted back-view clothing reference",
+          "sha256": "6de9c2f2df1bc0a0a0631769c15dfc21a6514017e38e63b375b194d2aac38800"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0004",
+      "revision": 1,
+      "approval": "Native/3x strip review before runtime promotion"
+    },
+    {
+      "id": "actors/walk_north_1",
+      "owner": "raster",
+      "source": "assets/art_source/player/walk_north.png",
+      "source_sha256": "9a0a1429d754062e81bd1165a644ba0f3d593b814433ac8159da57d766e43a47",
+      "crop_xywh": [
+        612,
+        114,
+        360,
+        506
+      ],
+      "sheet_cell_xywh": [
+        551,
+        0,
+        488,
+        756
+      ],
+      "gutter_xy": [
+        61,
+        114
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.05928853754940711,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "walk_north",
+      "frame": 1,
+      "seconds": 0.13,
+      "loop": true,
+      "output": "sprites/actors/walk_north_1.png",
+      "output_sha256": "6d8e14fb06e319711ecdd29e1277f56e19d6a3d6bcdd2bc5b1599519378dd274",
+      "prompt": "implementation/sprites/generation/0004-walk_north-r1.prompt.txt",
+      "prompt_sha256": "599a850fb68f7dba77a76422dc5d72f62a572c2153cc5867e607d0b1cfd929d5",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body-scale master",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/candidates/walk_north-r0.png",
+          "role": "edit target for accepted revision",
+          "sha256": "b26e9ff8b1d35ef6bad7fe664ad2cbb51b41518c865a34f8bd19853d92d78445"
+        },
+        {
+          "path": "implementation/sprites/generation/0004-walk_north.prompt.txt",
+          "role": "original complete strip prompt",
+          "sha256": "f20b8b9241ea7dbc4568af135e49d9c8d75ce12f9c6e228fc71413ff2116948f"
+        },
+        {
+          "path": "assets/art_source/player/idle_north.png",
+          "role": "accepted back-view clothing reference",
+          "sha256": "6de9c2f2df1bc0a0a0631769c15dfc21a6514017e38e63b375b194d2aac38800"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0004",
+      "revision": 1,
+      "approval": "Native/3x strip review before runtime promotion"
+    },
+    {
+      "id": "actors/walk_north_2",
+      "owner": "raster",
+      "source": "assets/art_source/player/walk_north.png",
+      "source_sha256": "9a0a1429d754062e81bd1165a644ba0f3d593b814433ac8159da57d766e43a47",
+      "crop_xywh": [
+        1106,
+        114,
+        360,
+        507
+      ],
+      "sheet_cell_xywh": [
+        1039,
+        0,
+        489,
+        756
+      ],
+      "gutter_xy": [
+        62,
+        114
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.05928853754940711,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "walk_north",
+      "frame": 2,
+      "seconds": 0.13,
+      "loop": true,
+      "output": "sprites/actors/walk_north_2.png",
+      "output_sha256": "7d249f42fabf46ca14beca1f4b9674a639c3a23da067305ae902ee17c2f4e902",
+      "prompt": "implementation/sprites/generation/0004-walk_north-r1.prompt.txt",
+      "prompt_sha256": "599a850fb68f7dba77a76422dc5d72f62a572c2153cc5867e607d0b1cfd929d5",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body-scale master",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/candidates/walk_north-r0.png",
+          "role": "edit target for accepted revision",
+          "sha256": "b26e9ff8b1d35ef6bad7fe664ad2cbb51b41518c865a34f8bd19853d92d78445"
+        },
+        {
+          "path": "implementation/sprites/generation/0004-walk_north.prompt.txt",
+          "role": "original complete strip prompt",
+          "sha256": "f20b8b9241ea7dbc4568af135e49d9c8d75ce12f9c6e228fc71413ff2116948f"
+        },
+        {
+          "path": "assets/art_source/player/idle_north.png",
+          "role": "accepted back-view clothing reference",
+          "sha256": "6de9c2f2df1bc0a0a0631769c15dfc21a6514017e38e63b375b194d2aac38800"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0004",
+      "revision": 1,
+      "approval": "Native/3x strip review before runtime promotion"
+    },
+    {
+      "id": "actors/walk_north_3",
+      "owner": "raster",
+      "source": "assets/art_source/player/walk_north.png",
+      "source_sha256": "9a0a1429d754062e81bd1165a644ba0f3d593b814433ac8159da57d766e43a47",
+      "crop_xywh": [
+        1590,
+        113,
+        359,
+        506
+      ],
+      "sheet_cell_xywh": [
+        1528,
+        0,
+        551,
+        756
+      ],
+      "gutter_xy": [
+        62,
+        113
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.05928853754940711,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "walk_north",
+      "frame": 3,
+      "seconds": 0.13,
+      "loop": true,
+      "output": "sprites/actors/walk_north_3.png",
+      "output_sha256": "3b32ba8b8a8dbd92c8f923be92e7e168cd576c3fb03bb8757d20b048a9aae932",
+      "prompt": "implementation/sprites/generation/0004-walk_north-r1.prompt.txt",
+      "prompt_sha256": "599a850fb68f7dba77a76422dc5d72f62a572c2153cc5867e607d0b1cfd929d5",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body-scale master",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/candidates/walk_north-r0.png",
+          "role": "edit target for accepted revision",
+          "sha256": "b26e9ff8b1d35ef6bad7fe664ad2cbb51b41518c865a34f8bd19853d92d78445"
+        },
+        {
+          "path": "implementation/sprites/generation/0004-walk_north.prompt.txt",
+          "role": "original complete strip prompt",
+          "sha256": "f20b8b9241ea7dbc4568af135e49d9c8d75ce12f9c6e228fc71413ff2116948f"
+        },
+        {
+          "path": "assets/art_source/player/idle_north.png",
+          "role": "accepted back-view clothing reference",
+          "sha256": "6de9c2f2df1bc0a0a0631769c15dfc21a6514017e38e63b375b194d2aac38800"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0004",
+      "revision": 1,
+      "approval": "Native/3x strip review before runtime promotion"
+    },
+    {
+      "id": "actors/idle_west_0",
+      "owner": "raster",
+      "source": "assets/art_source/player/idle_west.png",
+      "source_sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5",
+      "crop_xywh": [
+        208,
+        93,
+        383,
+        572
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        739,
+        724
+      ],
+      "gutter_xy": [
+        148,
+        59
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.05244755244755245,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "idle_west",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true,
+      "output": "sprites/actors/idle_west_0.png",
+      "output_sha256": "804c8951ee291ec625f8b1fe1587f6ab78580b084c05b641eb2c727c1fccf824",
+      "prompt": "implementation/sprites/generation/0004-idle_west.prompt.txt",
+      "prompt_sha256": "26de6c3327cfa037b2b764f25c7b980cbc6b2ea9a995143725449114c26780ea",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body-scale master",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0004",
+      "revision": 0,
+      "approval": "Native/3x strip review before runtime promotion"
+    },
+    {
+      "id": "actors/idle_west_1",
+      "owner": "raster",
+      "source": "assets/art_source/player/idle_west.png",
+      "source_sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5",
+      "crop_xywh": [
+        887,
+        93,
+        382,
+        572
+      ],
+      "sheet_cell_xywh": [
+        739,
+        0,
+        679,
+        724
+      ],
+      "gutter_xy": [
+        148,
+        59
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.05244755244755245,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "idle_west",
+      "frame": 1,
+      "seconds": 0.55,
+      "loop": true,
+      "output": "sprites/actors/idle_west_1.png",
+      "output_sha256": "831b1be9a2039920b86711bb4113b94830c6c7943e2d35a91bc04b0baf125809",
+      "prompt": "implementation/sprites/generation/0004-idle_west.prompt.txt",
+      "prompt_sha256": "26de6c3327cfa037b2b764f25c7b980cbc6b2ea9a995143725449114c26780ea",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body-scale master",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0004",
+      "revision": 0,
+      "approval": "Native/3x strip review before runtime promotion"
+    },
+    {
+      "id": "actors/idle_west_2",
+      "owner": "raster",
+      "source": "assets/art_source/player/idle_west.png",
+      "source_sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5",
+      "crop_xywh": [
+        1567,
+        93,
+        381,
+        572
+      ],
+      "sheet_cell_xywh": [
+        1418,
+        0,
+        754,
+        724
+      ],
+      "gutter_xy": [
+        149,
+        59
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.05244755244755245,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "idle_west",
+      "frame": 2,
+      "seconds": 0.55,
+      "loop": true,
+      "output": "sprites/actors/idle_west_2.png",
+      "output_sha256": "64eee3826c4634dc552221175e8a2ef8679641e9743f11b62616166d21e51d53",
+      "prompt": "implementation/sprites/generation/0004-idle_west.prompt.txt",
+      "prompt_sha256": "26de6c3327cfa037b2b764f25c7b980cbc6b2ea9a995143725449114c26780ea",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body-scale master",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0004",
+      "revision": 0,
+      "approval": "Native/3x strip review before runtime promotion"
+    },
+    {
+      "id": "actors/walk_west_0",
+      "owner": "raster",
+      "source": "assets/art_source/player/walk_west.png",
+      "source_sha256": "74433ffa7aca64de1e9ee1bf4e54ab73557293ed8fb16068f3423f046a8fa6bf",
+      "crop_xywh": [
+        114,
+        112,
+        394,
+        521
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        557,
+        724
+      ],
+      "gutter_xy": [
+        49,
+        91
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.05687203791469194,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "walk_west",
+      "frame": 0,
+      "seconds": 0.13,
+      "loop": true,
+      "output": "sprites/actors/walk_west_0.png",
+      "output_sha256": "5381c3ab5762dc21e525b71f8d8c98934d2c67839fe253da056a269e2d40cc4a",
+      "prompt": "implementation/sprites/generation/0004-walk_west-r2.prompt.txt",
+      "prompt_sha256": "01ba23e80f6c78d2feafc8ba28933a8335cda02a0ee2a574a66c7b2e05b15c08",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body-scale master",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/candidates/walk_west-r1.png",
+          "role": "edit target for accepted revision",
+          "sha256": "879ee785ceb8709b75ed302b49ada22d57166ebef5406931062265b6d75f059f"
+        },
+        {
+          "path": "implementation/sprites/generation/0004-walk_west.prompt.txt",
+          "role": "original complete strip prompt",
+          "sha256": "4e1e7fe1b2a9d55f5086d75d49eeb4cee5ba66eebd204e2ea77149a1da558127"
+        },
+        {
+          "path": "assets/art_source/player/candidates/walk_west-r0.png",
+          "role": "preserved first candidate in revision chain",
+          "sha256": "2c61036c0ae35132a988ff95992262fe6adc17d3c6fa82b02e2901faacaa3f29"
+        },
+        {
+          "path": "implementation/sprites/generation/0004-walk_west-r1.prompt.txt",
+          "role": "first targeted revision prompt",
+          "sha256": "659cb16d1b5294ea5836a5a505de20f79c92b1643a047acc00d166638f5e01b0"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0004",
+      "revision": 2,
+      "approval": "Native/3x strip review before runtime promotion"
+    },
+    {
+      "id": "actors/walk_west_1",
+      "owner": "raster",
+      "source": "assets/art_source/player/walk_west.png",
+      "source_sha256": "74433ffa7aca64de1e9ee1bf4e54ab73557293ed8fb16068f3423f046a8fa6bf",
+      "crop_xywh": [
+        606,
+        112,
+        394,
+        531
+      ],
+      "sheet_cell_xywh": [
+        557,
+        0,
+        516,
+        724
+      ],
+      "gutter_xy": [
+        49,
+        81
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.05687203791469194,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "walk_west",
+      "frame": 1,
+      "seconds": 0.13,
+      "loop": true,
+      "output": "sprites/actors/walk_west_1.png",
+      "output_sha256": "dff0e6ad36a69086975f22d87501614fae909fa232ace2d2f0f8cf8b4809cbb3",
+      "prompt": "implementation/sprites/generation/0004-walk_west-r2.prompt.txt",
+      "prompt_sha256": "01ba23e80f6c78d2feafc8ba28933a8335cda02a0ee2a574a66c7b2e05b15c08",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body-scale master",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/candidates/walk_west-r1.png",
+          "role": "edit target for accepted revision",
+          "sha256": "879ee785ceb8709b75ed302b49ada22d57166ebef5406931062265b6d75f059f"
+        },
+        {
+          "path": "implementation/sprites/generation/0004-walk_west.prompt.txt",
+          "role": "original complete strip prompt",
+          "sha256": "4e1e7fe1b2a9d55f5086d75d49eeb4cee5ba66eebd204e2ea77149a1da558127"
+        },
+        {
+          "path": "assets/art_source/player/candidates/walk_west-r0.png",
+          "role": "preserved first candidate in revision chain",
+          "sha256": "2c61036c0ae35132a988ff95992262fe6adc17d3c6fa82b02e2901faacaa3f29"
+        },
+        {
+          "path": "implementation/sprites/generation/0004-walk_west-r1.prompt.txt",
+          "role": "first targeted revision prompt",
+          "sha256": "659cb16d1b5294ea5836a5a505de20f79c92b1643a047acc00d166638f5e01b0"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0004",
+      "revision": 2,
+      "approval": "Native/3x strip review before runtime promotion"
+    },
+    {
+      "id": "actors/walk_west_2",
+      "owner": "raster",
+      "source": "assets/art_source/player/walk_west.png",
+      "source_sha256": "74433ffa7aca64de1e9ee1bf4e54ab73557293ed8fb16068f3423f046a8fa6bf",
+      "crop_xywh": [
+        1146,
+        112,
+        391,
+        525
+      ],
+      "sheet_cell_xywh": [
+        1073,
+        0,
+        518,
+        724
+      ],
+      "gutter_xy": [
+        54,
+        87
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.05687203791469194,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "walk_west",
+      "frame": 2,
+      "seconds": 0.13,
+      "loop": true,
+      "output": "sprites/actors/walk_west_2.png",
+      "output_sha256": "e84177f9aa56ac84e660faefbc5fa3f6d7e7a82a42fa891bc6ceb578ab492585",
+      "prompt": "implementation/sprites/generation/0004-walk_west-r2.prompt.txt",
+      "prompt_sha256": "01ba23e80f6c78d2feafc8ba28933a8335cda02a0ee2a574a66c7b2e05b15c08",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body-scale master",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/candidates/walk_west-r1.png",
+          "role": "edit target for accepted revision",
+          "sha256": "879ee785ceb8709b75ed302b49ada22d57166ebef5406931062265b6d75f059f"
+        },
+        {
+          "path": "implementation/sprites/generation/0004-walk_west.prompt.txt",
+          "role": "original complete strip prompt",
+          "sha256": "4e1e7fe1b2a9d55f5086d75d49eeb4cee5ba66eebd204e2ea77149a1da558127"
+        },
+        {
+          "path": "assets/art_source/player/candidates/walk_west-r0.png",
+          "role": "preserved first candidate in revision chain",
+          "sha256": "2c61036c0ae35132a988ff95992262fe6adc17d3c6fa82b02e2901faacaa3f29"
+        },
+        {
+          "path": "implementation/sprites/generation/0004-walk_west-r1.prompt.txt",
+          "role": "first targeted revision prompt",
+          "sha256": "659cb16d1b5294ea5836a5a505de20f79c92b1643a047acc00d166638f5e01b0"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0004",
+      "revision": 2,
+      "approval": "Native/3x strip review before runtime promotion"
+    },
+    {
+      "id": "actors/walk_west_3",
+      "owner": "raster",
+      "source": "assets/art_source/player/walk_west.png",
+      "source_sha256": "74433ffa7aca64de1e9ee1bf4e54ab73557293ed8fb16068f3423f046a8fa6bf",
+      "crop_xywh": [
+        1646,
+        112,
+        389,
+        530
+      ],
+      "sheet_cell_xywh": [
+        1591,
+        0,
+        581,
+        724
+      ],
+      "gutter_xy": [
+        55,
+        82
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.05687203791469194,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "walk_west",
+      "frame": 3,
+      "seconds": 0.13,
+      "loop": true,
+      "output": "sprites/actors/walk_west_3.png",
+      "output_sha256": "129fca613b7198e9cff6c103ce7e159f9fe9c6ab2827b94a83038b4016edd4cf",
+      "prompt": "implementation/sprites/generation/0004-walk_west-r2.prompt.txt",
+      "prompt_sha256": "01ba23e80f6c78d2feafc8ba28933a8335cda02a0ee2a574a66c7b2e05b15c08",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body-scale master",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/candidates/walk_west-r1.png",
+          "role": "edit target for accepted revision",
+          "sha256": "879ee785ceb8709b75ed302b49ada22d57166ebef5406931062265b6d75f059f"
+        },
+        {
+          "path": "implementation/sprites/generation/0004-walk_west.prompt.txt",
+          "role": "original complete strip prompt",
+          "sha256": "4e1e7fe1b2a9d55f5086d75d49eeb4cee5ba66eebd204e2ea77149a1da558127"
+        },
+        {
+          "path": "assets/art_source/player/candidates/walk_west-r0.png",
+          "role": "preserved first candidate in revision chain",
+          "sha256": "2c61036c0ae35132a988ff95992262fe6adc17d3c6fa82b02e2901faacaa3f29"
+        },
+        {
+          "path": "implementation/sprites/generation/0004-walk_west-r1.prompt.txt",
+          "role": "first targeted revision prompt",
+          "sha256": "659cb16d1b5294ea5836a5a505de20f79c92b1643a047acc00d166638f5e01b0"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0004",
+      "revision": 2,
+      "approval": "Native/3x strip review before runtime promotion"
     }
   ]
 }

@@ -1,0 +1,22 @@
+PASS: Two in-memory rebuilds are byte-identical
+PASS: Two on-disk rebuilds change zero bytes
+PASS: Legacy writers cannot overwrite any of 36 migrated files
+PASS: Changed accepted source is rejected
+PASS: Missing accepted source is rejected
+PASS: Tampered migrated output is rejected
+PASS: Missing runtime frame is rejected
+PASS: Missing authored locomotion frame cannot fall back to idle
+PASS: Tampered player count/canvas/pivot metadata is rejected
+PASS: Tampered unmigrated ASCII output is still rejected
+PASS: Tampered unmigrated player output is still rejected
+PASS: Duplicate manifest output rejected
+PASS: Invalid crop rejected
+PASS: Out-of-range pivot rejected
+PASS: Unknown palette rejected
+PASS: Missing animation frame rejected
+PASS: Per-frame canvas drift rejected
+PASS: Missing derived input rejected
+PASS: Derivation cycle rejected
+PASS: Duplicate output owner rejected
+PASS: House's nine slices reconstruct the full roof without lost pixels
+OK: 21 fault/rebuild probes; all deliberate corruption restored

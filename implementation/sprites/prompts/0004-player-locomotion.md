@@ -1,6 +1,6 @@
 # 0004 - Player idle and walking in every direction
 
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0003
 - **Likely files:** assets/art_source/player/; sprites/actors/; src/ui/player_frames.gd; src/ui/player_art.gd; src/ui/player_view.gd; tools/cut_sheet.py
 - **Generation briefs:** PLAYER_MASTER, PLAYER_STRIP

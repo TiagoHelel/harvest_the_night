@@ -1,0 +1,6 @@
+Use case: precise-object-edit
+Asset type: four-frame production pixel-art walk_south strip.
+Input images: Image 1 is the EDIT TARGET, the existing four-frame strip. Image 2 is the accepted identity reference only.
+Primary request: Correct ONLY the third figure's leg phase in Image 1. Keep all four figures, all hats, upper bodies, arms, clothes, palette, scale, their spacing and transparent background unchanged.
+Exact edit: in the third figure (third from left), put the boot on the LEFT side of the IMAGE DOWN and extended slightly forward at the shared bottom foot-contact baseline. Lift/bend the boot on the RIGHT side of that third figure UP and BACK by a clear amount, so the third figure's legs are the OPPOSITE of the first figure's legs. Keep blue trouser legs anatomically connected to hips. The first figure has its image-right boot down and image-left boot lifted; preserve that. Do not duplicate that leg phase in the third figure.
+The resulting order must be right boot down/contact, passing, left boot down/contact, opposite passing. Keep exactly four whole characters in one horizontal strip, equal frame size, same body/hat dimensions. No extra character, no cropping, no text, no shadow or background. Preserve actual alpha transparency. This is a targeted leg pose correction, not a character redesign.

@@ -1,0 +1,7 @@
+Use case: precise-object-edit
+Asset type: four-frame walk_north pixel-art animation strip.
+Input images: Image 1 is the EDIT TARGET, a four-frame back-view walking strip. Image 2 is the accepted BACK-VIEW idle farmer reference. Match its back-facing clothing, not the front bib of a south-facing character.
+Primary request: Correct the back clothing on ALL FOUR figures in Image 1 and the passing legs of its second and fourth figures. Keep the four figures in one row, same hats, back hair, identity, palette, body scale, upper-left light, cell spacing, contact baseline and alpha transparency.
+Back clothing correction: no gold FRONT strap buttons and no FRONT bib pocket should appear on the character's back. Use cream shirt across the upper back with plain blue shoulder straps running down into the blue overall waist, as a worker viewed from behind. Keep both arms and brown boots.
+Gait correction: frame 0 (first) stays image-left boot DOWN and image-right boot lifted. Frame 2 (third) stays image-right boot DOWN and image-left boot lifted. Frame 1 (second) must be a PASSING pose: legs much closer together beneath the hips, knees passing, heel slightly raised, short stride. Frame 3 (fourth) is the opposite passing pose, also short stride. Do not repeat the extended contact stance in passing frames. Keep ground-foot baseline and body/hat size constant.
+Do not turn around to show the face. No extra figure, tools, text, ground shadow, background, decorative symbols or panel borders. The edited strip contains exactly four complete north-facing frames.

@@ -58,6 +58,13 @@ the unchanged 3x3 footprint. Trees and actors sort by ground contact. These
 accepted canvases/pivots apply to future families; animation must not grow the
 body or shift the planted feet to fill individual frame bounds.
 
+Task 0004 accepts authored idle/walk for south/north/west, with east mirroring
+west. Their visible height stays 30 px; width is 20–22 px across directions
+and strides versus the static pilot's 20 px. This allows the hat and extended
+limbs without changing canvas, contact, grid or collision. One measured scale
+per strip applies to every frame; no pose is individually resized. Twenty-five
+owner-sheet work/reaction frames remain at the pilot scale for 0005–0006.
+
 The four transparent identity masters and neutral-day/night scene studies live
 in `assets/art_source/masters/`. The studies establish materials and lighting;
 their illustrative object sizes are not authoritative runtime measurements.

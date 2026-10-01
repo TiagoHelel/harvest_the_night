@@ -4,6 +4,7 @@ Run outside a concurrent verify/import/editor build. The finally blocks restore
 all touched files byte for byte, including on an assertion failure.
 """
 import copy
+import argparse
 import json
 from pathlib import Path
 import subprocess
@@ -23,6 +24,9 @@ def run(script, *args):
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--out", default="implementation/sprites/reviews/0002/fault-probes.json")
+    args = parser.parse_args()
     data = import_art.load_manifest()
     results = []
     def passed(name):
@@ -35,6 +39,7 @@ def main():
     saved = {ROOT / path: (ROOT / path).read_bytes() for path in files}
     saved[import_art.MANIFEST] = import_art.MANIFEST.read_bytes()
     saved[import_art.METADATA] = import_art.METADATA.read_bytes()
+    saved[import_art.PLAYER_METADATA] = import_art.PLAYER_METADATA.read_bytes()
     try:
         for _ in range(2):
             code, output = run("tools/import_art.py")
@@ -45,7 +50,7 @@ def main():
             code, output = run(script)
             assert code == 0, output
         assert all(path.read_bytes() == content for path, content in saved.items())
-        passed("Legacy writers cannot overwrite any of 18 migrated files")
+        passed("Legacy writers cannot overwrite any of %d migrated files" % len(files))
 
         def corrupt(path, script, missing=False):
             original = path.read_bytes()
@@ -67,6 +72,11 @@ def main():
         passed("Tampered migrated output is rejected")
         corrupt(ROOT / data["assets"][0]["output"], "tools/import_art.py", missing=True)
         passed("Missing runtime frame is rejected")
+        if any(e["animation"] == "walk_south" for e in data["assets"]):
+            corrupt(ROOT / "sprites/actors/walk_south_2.png", "tools/import_art.py", missing=True)
+            passed("Missing authored locomotion frame cannot fall back to idle")
+        corrupt(import_art.PLAYER_METADATA, "tools/import_art.py")
+        passed("Tampered player count/canvas/pivot metadata is rejected")
         corrupt(ROOT / "sprites/terrain/grass.png", "tools/gen_sprites.py")
         passed("Tampered unmigrated ASCII output is still rejected")
         corrupt(ROOT / "sprites/actors/chop_0.png", "tools/cut_sheet.py")
@@ -92,8 +102,9 @@ def main():
         invalid_manifest("Unknown palette rejected", lambda d: d["assets"][0].update(palette="other palette"))
         invalid_manifest("Missing animation frame rejected", lambda d: d["assets"][0].update(frame=5))
         invalid_manifest("Per-frame canvas drift rejected", lambda d: d["assets"][0].update(canvas_wh=[49,48]))
-        invalid_manifest("Missing derived input rejected", lambda d: d["assets"][-1].update(input="missing"))
-        invalid_manifest("Derivation cycle rejected", lambda d: d["assets"][-1].update(input=d["assets"][-1]["id"]))
+        derived = next(i for i, entry in enumerate(data["assets"]) if "input" in entry)
+        invalid_manifest("Missing derived input rejected", lambda d: d["assets"][derived].update(input="missing"))
+        invalid_manifest("Derivation cycle rejected", lambda d: d["assets"][derived].update(input=d["assets"][derived]["id"]))
 
         original_owners = art_ownership.REGISTRY.read_bytes()
         try:
@@ -128,7 +139,8 @@ def main():
     code, output = run("tools/import_art.py", "--check")
     assert code == 0, output
     report = dict(tests=results, count=len(results), restored=True)
-    destination = ROOT / "implementation/sprites/reviews/0002/fault-probes.json"
+    destination = art_ownership.project_path(args.out, "implementation")
+    destination.parent.mkdir(parents=True, exist_ok=True)
     destination.write_text(json.dumps(report, indent=2)+"\n", encoding="utf-8", newline="\n")
     print("OK: %d fault/rebuild probes; all deliberate corruption restored" % len(results))
 

@@ -172,6 +172,12 @@ def check_art_showcase():
     return check("art placement", code == 0, verdict)
 
 
+def check_player_showcase():
+    code, out = run([sys.executable, "tools/show_art.py", "--locomotion", "--check"])
+    verdict = next((line for line in out.splitlines() if line.startswith("PLAYER SHOWCASE:")), tail(out, 4))
+    return check("player locomotion", code == 0, verdict)
+
+
 def check_logo():
     """The logo still matches the letters it was composed from.
 
@@ -562,6 +568,7 @@ def main():
     check_player_art()
     check_raster_art()
     check_art_showcase()
+    check_player_showcase()
     check_font()
     check_logo()
     check_sfx()

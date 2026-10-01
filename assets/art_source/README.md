@@ -11,6 +11,13 @@ its transitional legacy poses. Task 0003 validates playable pivots/depth sorting
 and recuts the 43 unmigrated player frames to the accepted 30 px body scale.
 Never overwrite `sprites/` with the large raw images.
 
+Task 0004 replaces the pilot south idle and migrates the remaining locomotion
+frames with six authored strips in `player/`: south/north/west idle (three each)
+and walk (four each). East mirrors west. All 21 frames are distinct native
+cuts on 48x48 with feet at (24,44), 30 px visible height and 20–22 px width.
+The registry now assigns 36 outputs to raster, 25 to the owner-sheet cutter
+and 156 to ASCII. Work/reaction families remain for 0005–0006.
+
 `ownership.json` registers all 217 PNGs with exactly one writer/checker: ASCII,
 owner-sheet cutter, or raster importer. `manifest.json` describes every raster
 output; `manifest.schema.json` documents its structure. `tools/import_art.py`
@@ -22,13 +29,15 @@ masters retain their task-0001 hashes. Prompt/reference hashes are checked too.
 python tools/import_art.py           # offline deterministic rebuild + output hashes
 python tools/import_art.py --check   # sources, outputs, ownership and view metadata
 python tools/gen_sprites.py          # remaining ASCII sprites, atlas and palette sync
-python tools/cut_sheet.py            # remaining owner-sheet animations/count table
+python tools/cut_sheet.py            # remaining owner-sheet animation PNGs
 python tools/check_art_pipeline.py   # fault probes; run outside concurrent builds
 ```
 
 The importer produces `src/ui/raster_art.gd` from the recipes, including each
 file's canvas, pivot, cell offset, optional native lamp/chimney points and
-animation timing. Rebuilds only write
+animation timing. It also owns `src/ui/player_frames.gd`, merging raster recipes
+with the remaining sheet counts into strict COUNT/CANVAS/FEET/SECONDS metadata.
+The cutter checks that same canonical table but never writes it. Rebuilds only write
 changed bytes. Changing an accepted raw source first requires explicit approval
 of its new source/reference hashes in the manifest; generation does not silently
 approve an edited source. Recipe/palette changes update output hashes on rebuild.
@@ -40,8 +49,7 @@ House slices partition the full 64x64 master into columns 24/16/24 and rows
 once at its ground anchor; slices remain checked compatibility outputs. Its
 window/chimney points are (32,43)/(49,14) on the 64x64 source canvas. Shared
 `ArtPlacement` consumes these points and ground pivots in the view layer.
-The three south idle files currently hold the same static master until
-0004 authors the idle/walk family. Walker bob/reach/fall preserve the explicitly
+Farmer idle/walk now use authored frames. Walker bob/reach/fall preserve the explicitly
 documented old procedural motion using the new source; 0015 replaces them with
 authored motion. These provisional recipes are not claimed as new animation.
 
@@ -66,3 +74,12 @@ This does nearest reduction, fixed-canvas placement, binary alpha and mapping
 to `tools/palette.py`. It writes review images only; it does not replace runtime
 assets or implement the production importer. The original owner sheet in
 `docs/sprites_sem_fundo.png` remains unchanged.
+
+Task 0004's exact prompts and ImageGen attempts are in
+`implementation/sprites/generation/0004-*`; `0004-generations.json` records
+actual returned files, source SHA-256 and accepted/rejected reasons. Preserved
+rejected strips live in `player/candidates/`. Native alpha/crop measurements
+are in `implementation/sprites/reviews/0004/measured-contract.json`. Rebuild
+QA with that folder's `build_review.py`; it never edits source/runtime pixels.
+Use `python tools/show_art.py --locomotion --check` for state/facing/frame loops
+and add `--out=implementation/shots/sprites/<task-id>/locomotion` for captures.

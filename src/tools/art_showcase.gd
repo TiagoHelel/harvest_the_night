@@ -1,6 +1,7 @@
 extends SceneTree
 
-## Deterministic view-only fixtures. No simulation ticks or player save writes.
+## Deterministic isolated fixtures, never writing player saves.
+## Locomotion mode drives unchanged Player.tick; rendering cannot mutate state.
 ## tools/show_art.py supplies the real renderer and fixed FPS for PNG capture.
 var _world: WorldView
 var _state: Dictionary
@@ -54,6 +55,11 @@ func _run() -> void:
 	player["facing"] = Player.SOUTH
 	player["action"] = {}
 	var actor := Entities.get_one(_state, enemy)
+	if args.has("--locomotion"):
+		await _locomotion()
+		print("PLAYER SHOWCASE: %d checks, %d failed" % [_checks, _failed])
+		quit(1 if _failed > 0 else 0)
+		return
 	# Traverse the overlap in both directions, swapping farmer/enemy subjects.
 	for subject in 2:
 		for step in 9:
@@ -126,6 +132,85 @@ func _add_house(corner: Vector2i) -> void:
 	for y in 3:
 		for x in 3:
 			(_state["occupants"] as Dictionary)[Grid.index(corner + Vector2i(x, y))] = {"id": &"house"}
+
+
+## The actual PlayerView clock/flip/frame binding, plus core-resolved diagonal facing.
+func _locomotion() -> void:
+	(_state["entities"] as Dictionary).clear()
+	var view: PlayerView = _world.get_node("Occupants/PlayerView")
+	view.set_process(false)
+	var body: Sprite2D = view.get_node("Body")
+	var player: Dictionary = _state["player"]
+	for facing in [Player.SOUTH, Player.WEST, Player.NORTH, Player.EAST]:
+		for moving in [false, true]:
+			_set_contact(player, Vector2i(248, 208))
+			var step: Vector2i = Player.FACING_STEPS[facing]
+			_state["intent"]["move"] = [step.x, step.y]
+			Player.tick(_state)
+			expect(Player.facing(_state) == facing, "Core movement resolves the cardinal facing")
+			if not moving:
+				_state["intent"]["move"] = [0, 0]
+			var pose := PlayerArt.pose(facing, moving, &"")
+			var count := int(pose["frames"])
+			var each := float(pose["seconds"])
+			var expected_name: StringName = StringName("%s_%s" % [
+				"walk" if moving else "idle", PlayerArt.FACINGS[facing][0]])
+			expect(pose["name"] == expected_name and count == (4 if moving else 3),
+				"Each facing selects its complete authored idle/walk family")
+			expect(PlayerFrames.SECONDS.has(expected_name), "Timing comes from the accepted strip")
+			await _settle()
+			var fixed_contact := ArtPlacement.contact(player["pos"])
+			for phase in count * 2:
+				if moving and phase > 0:
+					Player.tick(_state)
+				var before := State.hash_of(_state)
+				view._process(0.0 if phase == 0 else each)
+				expect(State.hash_of(_state) == before, "Drawing the player never changes core state")
+				expect(view.playing() == expected_name, "No locomotion family silently falls back to idle")
+				expect(view.flipped() == (facing == Player.EAST), "Only east mirrors the accepted west")
+				expect(body.texture != null and body.texture.resource_path ==
+					PlayerArt.texture_path(expected_name, phase % count),
+					"Actual view clock selects each authored frame, including loop wrap")
+				expect(body.offset == Vector2(-24, -44), "A turn or mirror cannot move the foot pivot")
+				expect(view.position == ArtPlacement.contact(player["pos"]),
+					"Visible ground origin agrees with unchanged core position")
+				if not moving:
+					expect(view.position == fixed_contact, "Idle feet stay planted across both loops")
+				var metadata: Dictionary = RasterArt.FRAMES.get(body.texture.resource_path, {})
+				expect(metadata.get("canvas") == Vector2i(48, 48)
+					and metadata.get("pivot") == Vector2i(24, 44), "Every frame uses accepted source geometry")
+				if phase < count:
+					await _shoot("%s_facing%d_%02d" % ["walk" if moving else "idle", facing, phase],
+						"%s / facing %d / authored frame %d" % [expected_name, facing, phase])
+	# Vertical wins a diagonal tie in core; release retains the resulting facing.
+	for move in [Vector2i(-1, -1), Vector2i(1, -1), Vector2i(-1, 1), Vector2i(1, 1)]:
+		_set_contact(player, Vector2i(248, 208))
+		_state["intent"]["move"] = [move.x, move.y]
+		var previous := Player.position(_state)
+		Player.tick(_state)
+		var expected := Player.NORTH if move.y < 0 else Player.SOUTH
+		var after := Player.position(_state)
+		expect(signi(after.x - previous.x) == move.x and signi(after.y - previous.y) == move.y,
+			"Diagonal movement advances both axes using actual core rules")
+		view._process(0.13)
+		expect(Player.facing(_state) == expected and view.playing() ==
+			StringName("walk_%s" % PlayerArt.FACINGS[expected][0]), "Diagonal direction binds to core-facing art")
+		await _shoot("diagonal_%d_%d" % [move.x, move.y], "Diagonal %s: core facing, shared feet" % str(move))
+		_state["intent"]["move"] = [0, 0]
+		view._process(0.0)
+		expect(view.playing() == StringName("idle_%s" % PlayerArt.FACINGS[expected][0]),
+			"Releasing diagonal input retains facing and enters authored idle")
+	# Direction changes without recreating the view, including east -> west.
+	for facing in [Player.EAST, Player.WEST, Player.NORTH, Player.SOUTH]:
+		var step: Vector2i = Player.FACING_STEPS[facing]
+		_state["intent"]["move"] = [step.x, step.y]
+		Player.tick(_state)
+		view._process(0.13)
+		expect(view.playing() == StringName("walk_%s" % PlayerArt.FACINGS[facing][0])
+			and view.flipped() == (facing == Player.EAST), "Immediate direction changes show the correct art")
+		expect(view.position == ArtPlacement.contact(player["pos"]) and body.offset == Vector2(-24, -44),
+			"Turning never adds an artificial canvas-width displacement")
+		await _shoot("turn_%d" % facing, "Direction change / facing %d / no contact jump" % facing)
 
 
 func _set_contact(who: Dictionary, pixels: Vector2i) -> void:

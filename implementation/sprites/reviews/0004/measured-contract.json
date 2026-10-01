@@ -1,0 +1,211 @@
+{
+  "date": "2026-10-01",
+  "canvas_wh": [
+    48,
+    48
+  ],
+  "pivot_xy": [
+    24,
+    44
+  ],
+  "animations": [
+    {
+      "name": "idle_south",
+      "source": "assets/art_source/player/idle_south.png",
+      "source_sha256": "49de04f2e849b42f984ba145cf54505616ed055a242b6e6363f90d3dfe5ea7b2",
+      "source_wh": [
+        2032,
+        774
+      ],
+      "content_scale": 0.05272407732864675,
+      "crop_xywh": [
+        [
+          197,
+          120,
+          395,
+          569
+        ],
+        [
+          818,
+          125,
+          396,
+          564
+        ],
+        [
+          1440,
+          120,
+          396,
+          569
+        ]
+      ]
+    },
+    {
+      "name": "walk_south",
+      "source": "assets/art_source/player/walk_south.png",
+      "source_sha256": "c5e566a03fd5bf3ae61571e48f6a348e2658acca48c1b6f7eae91b54f62ea3c4",
+      "source_wh": [
+        2172,
+        724
+      ],
+      "content_scale": 0.056818181818181816,
+      "crop_xywh": [
+        [
+          87,
+          111,
+          361,
+          530
+        ],
+        [
+          639,
+          111,
+          360,
+          526
+        ],
+        [
+          1173,
+          111,
+          360,
+          530
+        ],
+        [
+          1725,
+          111,
+          360,
+          526
+        ]
+      ]
+    },
+    {
+      "name": "idle_north",
+      "source": "assets/art_source/player/idle_north.png",
+      "source_sha256": "6de9c2f2df1bc0a0a0631769c15dfc21a6514017e38e63b375b194d2aac38800",
+      "source_wh": [
+        2172,
+        724
+      ],
+      "content_scale": 0.052083333333333336,
+      "crop_xywh": [
+        [
+          318,
+          83,
+          404,
+          575
+        ],
+        [
+          883,
+          82,
+          405,
+          576
+        ],
+        [
+          1450,
+          82,
+          405,
+          576
+        ]
+      ]
+    },
+    {
+      "name": "walk_north",
+      "source": "assets/art_source/player/walk_north.png",
+      "source_sha256": "9a0a1429d754062e81bd1165a644ba0f3d593b814433ac8159da57d766e43a47",
+      "source_wh": [
+        2079,
+        756
+      ],
+      "content_scale": 0.05928853754940711,
+      "crop_xywh": [
+        [
+          130,
+          114,
+          360,
+          505
+        ],
+        [
+          612,
+          114,
+          360,
+          506
+        ],
+        [
+          1106,
+          114,
+          360,
+          507
+        ],
+        [
+          1590,
+          113,
+          359,
+          506
+        ]
+      ]
+    },
+    {
+      "name": "idle_west",
+      "source": "assets/art_source/player/idle_west.png",
+      "source_sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5",
+      "source_wh": [
+        2172,
+        724
+      ],
+      "content_scale": 0.05244755244755245,
+      "crop_xywh": [
+        [
+          208,
+          93,
+          383,
+          572
+        ],
+        [
+          887,
+          93,
+          382,
+          572
+        ],
+        [
+          1567,
+          93,
+          381,
+          572
+        ]
+      ]
+    },
+    {
+      "name": "walk_west",
+      "source": "assets/art_source/player/walk_west.png",
+      "source_sha256": "74433ffa7aca64de1e9ee1bf4e54ab73557293ed8fb16068f3423f046a8fa6bf",
+      "source_wh": [
+        2172,
+        724
+      ],
+      "content_scale": 0.05687203791469194,
+      "crop_xywh": [
+        [
+          114,
+          112,
+          394,
+          521
+        ],
+        [
+          606,
+          112,
+          394,
+          531
+        ],
+        [
+          1146,
+          112,
+          391,
+          525
+        ],
+        [
+          1646,
+          112,
+          389,
+          530
+        ]
+      ]
+    }
+  ]
+}

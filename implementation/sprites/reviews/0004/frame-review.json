@@ -1,0 +1,131 @@
+{
+  "animations": [
+    {
+      "name": "idle_south",
+      "native_unique_frames": 3,
+      "ground_y": 44,
+      "body_wh": [
+        [
+          21,
+          30
+        ],
+        [
+          21,
+          30
+        ],
+        [
+          21,
+          30
+        ]
+      ]
+    },
+    {
+      "name": "walk_south",
+      "native_unique_frames": 4,
+      "ground_y": 44,
+      "body_wh": [
+        [
+          21,
+          30
+        ],
+        [
+          20,
+          30
+        ],
+        [
+          20,
+          30
+        ],
+        [
+          20,
+          30
+        ]
+      ]
+    },
+    {
+      "name": "idle_north",
+      "native_unique_frames": 3,
+      "ground_y": 44,
+      "body_wh": [
+        [
+          21,
+          30
+        ],
+        [
+          21,
+          30
+        ],
+        [
+          21,
+          30
+        ]
+      ]
+    },
+    {
+      "name": "walk_north",
+      "native_unique_frames": 4,
+      "ground_y": 44,
+      "body_wh": [
+        [
+          21,
+          30
+        ],
+        [
+          21,
+          30
+        ],
+        [
+          21,
+          30
+        ],
+        [
+          21,
+          30
+        ]
+      ]
+    },
+    {
+      "name": "idle_west",
+      "native_unique_frames": 3,
+      "ground_y": 44,
+      "body_wh": [
+        [
+          20,
+          30
+        ],
+        [
+          20,
+          30
+        ],
+        [
+          20,
+          30
+        ]
+      ]
+    },
+    {
+      "name": "walk_west",
+      "native_unique_frames": 4,
+      "ground_y": 44,
+      "body_wh": [
+        [
+          22,
+          30
+        ],
+        [
+          22,
+          30
+        ],
+        [
+          22,
+          30
+        ],
+        [
+          22,
+          30
+        ]
+      ]
+    }
+  ],
+  "captures": 41
+}

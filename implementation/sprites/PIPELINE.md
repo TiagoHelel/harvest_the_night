@@ -30,6 +30,12 @@ must consume accepted tiles, and `palette_data.gd` must still match the palette.
 Removing one stale comparison without a new exact-source comparison is not a
 valid migration. Cover a migrated asset and an unmigrated asset in verification.
 
+Task 0004 makes the raster importer the single writer of `player_frames.gd`.
+It merges remaining legacy animation counts with raster manifest counts,
+canvases, pivots and durations. `cut_sheet.py --check` validates the same table;
+normal cutter runs only write legacy-owned PNGs. A player animation may not
+mix source owners or drift from the shared 48x48 canvas/(24,44) ground pivot.
+
 ## Manifest contract
 
 Task 0002 creates a schema and validator. Each asset/frame should record:
@@ -145,6 +151,24 @@ The review helper builds native/nearest-3x contact pages from task 0003 captures
 Later family tasks can reuse the showcase's output directory option and extend
 fixtures for their specific states. Contact sheets show existing committed
 frames; they do not prove a provisional animation has authored motion.
+
+Task 0004 extends that scene with authored locomotion playback:
+
+```powershell
+python tools/show_art.py --locomotion --check
+python tools/show_art.py --locomotion --out=implementation/shots/sprites/<task-id>/locomotion
+python implementation/sprites/reviews/0004/build_review.py
+python tools/check_art_pipeline.py --out=implementation/sprites/reviews/<task-id>/fault-probes.json
+```
+
+The locomotion fixture uses unchanged `Player.tick` on an isolated intent to
+exercise real facing/diagonal resolution, then asserts that rendering cannot
+mutate that state. It never writes saves. Two complete loops check every idle
+and walk frame in all four directions, ground offsets and mirrored east;
+release/turn scenarios check the transition back to idle and contact stability.
+The real backend saves 36 viewport images. QA helper pages compose these and
+the five farm shots at native size and nearest 3x; phase GIFs show the actual
+committed frame bytes at the manifest's idle/walk durations.
 
 The screenshot path uses a real rendering backend; `--headless` cannot provide
 the necessary viewport image here. Prefer the existing offscreen wrapper with

@@ -1,0 +1,6 @@
+Use case: precise-object-edit
+Asset type: four-frame west-facing pixel-art walk animation.
+Input image: Image 1 is the EDIT TARGET containing four figures.
+Primary request: Correct ONLY the THIRD figure's arms/legs to the opposite stride phase of the FIRST figure. Keep all four heads/hats/torso heights, identity, clothing, palette, pixel style, transparent background and strip spacing unchanged.
+Exact pose: the third figure still faces LEFT. Its NEAR arm (the large exposed hand visible in front of the torso) must swing BACK toward the RIGHT beside/behind the hip; the FAR arm swings forward toward the LEFT and is partly occluded by the torso. Its NEAR leg goes BACK toward the RIGHT and the FAR leg goes FORWARD toward the LEFT. Keep blue trouser legs attached naturally to hips, two brown boots, both completely visible. Make the forward boot touch the common foot baseline and the trailing boot heel lifted. This must read as a visibly different arm/leg phase from the first figure, whose large foreground hand swings left and near leg extends left.
+Preserve first, second and fourth figures. Exactly four whole equal-scale figures in one horizontal strip. No front/back-facing head, extra hands or boots, held items, text, panel borders, ground or shadow. Keep actual alpha transparency. Last-to-first forms a four-phase gait.

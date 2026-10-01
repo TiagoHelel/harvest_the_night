@@ -89,6 +89,9 @@ func _animate(delta: float) -> void:
 	var pose := PlayerArt.pose(Player.facing(_state), _is_moving(),
 		_verb())
 	var name: StringName = pose["name"]
+	if int(pose["frames"]) < 1:
+		_sprite.texture = null
+		return
 
 	# **Task 0109.** The rules say which bubble and for how long; this only
 	# draws it. Nothing here decides when one appears, which is what lets a
@@ -114,8 +117,7 @@ func _animate(delta: float) -> void:
 	var frame := PlayerArt.frame_at(pose, _elapsed)
 	var path := PlayerArt.texture_path(name, frame)
 	var texture := _texture(path)
-	if texture != null:
-		_sprite.texture = texture
+	_sprite.texture = texture
 	_sprite.flip_h = bool(pose["flip"])
 	# Flipping a sprite mirrors it about its offset, so the offset has to be
 	# mirrored too or the farmer steps a canvas-width sideways when they turn.
@@ -148,7 +150,7 @@ func _texture(path: String) -> Texture2D:
 		return _textures[path]
 	var texture: Texture2D = load(path) if ResourceLoader.exists(path) else null
 	if texture == null:
-		push_error("no player frame at %s - run: python tools/cut_sheet.py"
+		push_error("no player frame at %s - rebuild its registered source owner"
 			% path)
 	_textures[path] = texture
 	return texture

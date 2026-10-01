@@ -1,0 +1,9 @@
+Use case: precise-object-edit
+Asset type: four-frame west-facing game walk strip, targeted phase correction.
+Input image 1 is the EDIT TARGET. Preserve the entire strip except the THIRD character's limbs.
+Critical correction in the THIRD character, which still looks LEFT:
+- The LARGE foreground arm growing out of the cream sleeve on the RIGHT SIDE of the image must now swing FORWARD across the front of the BLUE BIB toward the LEFT. Its forearm runs diagonally from the image-right elbow at the waist to an open hand extended LEFT in front of the chest/waist. Make this visibly different from the first figure's arm, which hangs backward on the image-right side.
+- Hide most of the smaller far arm BEHIND the torso toward image-right; remove the isolated forward hand currently on the LEFT SIDE of the third figure.
+- Switch which leg leads. The FAR leg stretches toward LEFT with a DARKER, slightly smaller far brown boot; the NEAR leg trails toward RIGHT with a LIGHTER, wider near brown boot. Keep natural blue trouser attachment and two boots, no extra limb. The forward left-side boot touches the shared bottom baseline, trailing right-side heel is raised.
+Do not copy the first character's limb pose into the third. This is an alternating side walk: contact, passing, opposite contact, opposite passing.
+Keep exactly four complete characters in their current spacing; leave first, second and fourth unchanged. Preserve every head/hat/body dimension, face, colors, clothing identity and crisp pixel style. No new tools, text, borders, ground shadows, backdrop. Preserve actual transparency.

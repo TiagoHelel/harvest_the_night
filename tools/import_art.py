@@ -18,6 +18,7 @@ import palette
 ROOT = art_ownership.ROOT
 MANIFEST = ROOT / "assets/art_source/manifest.json"
 METADATA = ROOT / "src/ui/raster_art.gd"
+PLAYER_METADATA = ROOT / "src/ui/player_frames.gd"
 VERSION = 1
 
 
@@ -264,6 +265,8 @@ def main():
                 bad.append(entry["output"] + " recipe/output hash changed")
             entry["output_sha256"] = sha(content)
         files[METADATA.relative_to(ROOT).as_posix()] = metadata(data)
+        import cut_sheet
+        files[PLAYER_METADATA.relative_to(ROOT).as_posix()] = cut_sheet.frames_gd(cut_sheet.cut(), data)
         written = 0
         for path, content in files.items():
             full = ROOT / path

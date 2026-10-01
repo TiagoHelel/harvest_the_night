@@ -39,15 +39,15 @@
     },
     {
       "output": "sprites/actors/idle_north_0.png",
-      "owner": "player_sheet"
+      "owner": "raster"
     },
     {
       "output": "sprites/actors/idle_north_1.png",
-      "owner": "player_sheet"
+      "owner": "raster"
     },
     {
       "output": "sprites/actors/idle_north_2.png",
-      "owner": "player_sheet"
+      "owner": "raster"
     },
     {
       "output": "sprites/actors/idle_south_0.png",
@@ -63,15 +63,15 @@
     },
     {
       "output": "sprites/actors/idle_west_0.png",
-      "owner": "player_sheet"
+      "owner": "raster"
     },
     {
       "output": "sprites/actors/idle_west_1.png",
-      "owner": "player_sheet"
+      "owner": "raster"
     },
     {
       "output": "sprites/actors/idle_west_2.png",
-      "owner": "player_sheet"
+      "owner": "raster"
     },
     {
       "output": "sprites/actors/mine_0.png",
@@ -131,51 +131,51 @@
     },
     {
       "output": "sprites/actors/walk_north_0.png",
-      "owner": "player_sheet"
+      "owner": "raster"
     },
     {
       "output": "sprites/actors/walk_north_1.png",
-      "owner": "player_sheet"
+      "owner": "raster"
     },
     {
       "output": "sprites/actors/walk_north_2.png",
-      "owner": "player_sheet"
+      "owner": "raster"
     },
     {
       "output": "sprites/actors/walk_north_3.png",
-      "owner": "player_sheet"
+      "owner": "raster"
     },
     {
       "output": "sprites/actors/walk_south_0.png",
-      "owner": "player_sheet"
+      "owner": "raster"
     },
     {
       "output": "sprites/actors/walk_south_1.png",
-      "owner": "player_sheet"
+      "owner": "raster"
     },
     {
       "output": "sprites/actors/walk_south_2.png",
-      "owner": "player_sheet"
+      "owner": "raster"
     },
     {
       "output": "sprites/actors/walk_south_3.png",
-      "owner": "player_sheet"
+      "owner": "raster"
     },
     {
       "output": "sprites/actors/walk_west_0.png",
-      "owner": "player_sheet"
+      "owner": "raster"
     },
     {
       "output": "sprites/actors/walk_west_1.png",
-      "owner": "player_sheet"
+      "owner": "raster"
     },
     {
       "output": "sprites/actors/walk_west_2.png",
-      "owner": "player_sheet"
+      "owner": "raster"
     },
     {
       "output": "sprites/actors/walk_west_3.png",
-      "owner": "player_sheet"
+      "owner": "raster"
     },
     {
       "output": "sprites/actors/water_0.png",

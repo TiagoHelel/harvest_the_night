@@ -233,3 +233,66 @@ creative edits to runtime images.
 Queue after completion: 3 done, 17 todo, 0 doing, 0 blocked. Next is 0004,
 authored farmer idle/walk. One task completed this cycle; the user's active
 /goal continues automatically toward the remaining art backlog.
+
+## 0004 — Authored farmer idle and walking — done 2026-10-01
+
+Generated and integrated six complete strips using built-in ImageGen with the
+accepted farmer master: south/north/west idle x3 and walk x4. East mirrors west.
+Ten calls total: six accepted strips and four preserved rejected candidates;
+south/north walk needed one targeted revision each, west walk two, idle none.
+South correction alternates leading boots; north removes front-bib artifacts
+and fixes passing legs; west separates opposing arm/boot strides. No API/CLI
+fallback or code-drawn sprite generation was used.
+
+Raw sources: `assets/art_source/player/{idle,walk}_{south,north,west}.png`,
+candidates in its `candidates/` directory. Exact prompts and recorded returned
+files/source SHA-256/decisions: `generation/0004-generations.json` and ten
+`0004-*.prompt.txt` files. Every repo source copy matches its actual tool file
+byte for byte. Manifest provenance checks source, prompt and reference hashes;
+all original 0001 masters, owner sheet and original source prompts are intact.
+
+Measured real source alpha/crops in `reviews/0004/measured-contract.json`;
+one common scale per strip, nearest reduction, thresholded alpha and unchanged
+shared palette. All 21 native frames are distinct on 48x48 with feet (24,44)
+and visible height 30 px. Width 20–22 px allows direction/stride versus the
+20 px static pilot. No individual frame stretch or simulation footprint change.
+Replaced three provisional south-idle frames and transferred the remaining
+18 locomotion outputs from sheet ownership: totals now 36 raster / 25 sheet /
+156 ASCII, still 217 exclusively owned PNGs.
+
+The raster importer now singly writes PlayerFrames COUNT/CANVAS/FEET/SECONDS
+from merged remaining sheet/raster recipes; the cutter checks that canonical
+table but only writes legacy PNGs. PlayerArt reads authored timing metadata;
+missing counts report an error rather than becoming idle, and PlayerView
+clears a missing texture instead of retaining stale content. All existing
+verb bindings and remaining reaction/work paths stay covered.
+
+Extended the isolated Godot art showcase with actual PlayerView playback:
+two complete loops per idle/walk/facing, source path/frame order and offsets,
+mirrored east, unchanged Player.tick diagonal/facing resolution, release to
+idle and turn transitions. Rendering cannot mutate fixture state; no player
+save/settings writes. Headless locomotion: 468 checks, zero failed; real-render
+locomotion: 540 checks, zero failed, 36 PNGs. Existing placement suite: 445
+checks, zero failed. Fault suite: 21 probes passed and restored, including
+missing authored walk frame, corrupt player metadata, both deterministic
+rebuilds and protection of every raster file from legacy writers.
+
+Full verification PASS: 26 passed, zero skipped/failed in 174s; 104 scripts,
+6511 headless assertions, 980 input cases, performance and Windows/Web exports.
+Sim hash `1961000123`, data hash `407837701`, both unchanged. Core, balance,
+saves and expected hashes were not modified. Logs and fault report are in
+`reviews/0004/{verify-full,showcase-check,showcase-capture,captures,fault-probes}.log`
+and `fault-probes.json`.
+
+Actual captures: five noon/dusk/wave/result/tech PNGs in
+`implementation/shots/sprites/0004/`, plus 36 in `locomotion/`. All 41 opened
+at native and nearest 3x on `reviews/0004/captures-00` through `captures-10`.
+Native/3x alpha light/dark/checker contacts and all seven four-direction phase
+pages inspected: readable identity, alternating stride, no text/tool mirror
+issue, steady feet/body/hat and coherent loop wrap. `idle.gif`/`walk.gif` and
+3x previews use the actual committed frames and manifest timing. Detailed
+criteria PASS and later-task follow-ups are in `reviews/0004/REVIEW.md`.
+
+Queue after completion: 4 done, 16 todo, zero doing/blocked. Next is 0005,
+authored farming/gathering/production actions. One task completed this cycle;
+the user's active /goal continues automatically toward the remaining backlog.
