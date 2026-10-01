@@ -1,0 +1,15 @@
+Use case: stylized-concept
+Asset type: transparent raster terrain corner overlay for HARVEST THE NIGHT.
+Primary request: ONE north-west rounded earth-bank CORNER cap, terrain/shore_corner_nw, for a pixel-art farm pond.
+Input images: Image 1 accepted north shoreline master, a material/color reference only. Create a new corner source; it is not a full straight edge.
+Style/medium: hand-crafted top-down pixel-art material with clean joined clusters and restrained texture.
+Composition/framing: complete square transparent canvas, final native16x16 with pivot8,16. A very small quarter-circle bank cap touches the TOP LEFT corner. Most of the canvas stays empty.
+Lighting/mood: neutral daytime flat material, no cast shadow, no specular lighting, no gradient. Runtime handles dusk/night.
+Color palette: corner's green core #46804a, warm earth rim #a87c4e, optional subdued dark wet-earth edge #5c422a; match accepted bank endpoint. No white foam or luminous cyan.
+Scene/backdrop: genuine transparency everywhere outside the tiny cap.
+Constraints: no scenery, text, watermark, labels, UI, perspective block, jetty, water backing, stones, detached pixels or full border.
+Avoid: smooth painting, blur, noise, flowers, zooming the cap, filling the canvas or creating full straight shoreline strips.
+
+WATER brief: one named stationary bank corner NORTH-WEST. Warm earth, short grass core, coherent water contact. True transparent outside the corner. No shore sliding or swimming bank pixels.
+
+Exact contract: the small cap occupies about 12.5% of the full square width and height, just TWO final native pixels. Its geometry is a quarter-circle anchored at the very TOP LEFT: one green core at the corner, warm brown extending only a little to the right and below, ending rounded toward the transparent bottom-right. The incoming edge profiles along TOP and LEFT must be identical: first native pixel green, next native pixel warm brown, then transparency for all remaining14 pixels. Do NOT make an L across the full edges. Keep the rest of the16x16 square transparent and empty. It will be rotated clockwise for NE/SE/SW. This cap joins two accepted straight bank segments meeting a diagonal land tile.

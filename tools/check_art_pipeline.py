@@ -138,6 +138,8 @@ def main():
         invalid_manifest("Invalid crop rejected", lambda d: d["assets"][0].update(crop_xywh=[0,0,999999,2]))
         invalid_manifest("Out-of-range pivot rejected", lambda d: d["assets"][0].update(pivot_xy=[500,500]))
         invalid_manifest("Unknown palette rejected", lambda d: d["assets"][0].update(palette="other palette"))
+        invalid_manifest("Unknown material subset color rejected", lambda d: d["assets"][0].update(palette_keys=["invented color"]))
+        invalid_manifest("Empty material palette subset rejected", lambda d: d["assets"][0].update(palette_keys=[]))
         invalid_manifest("Missing animation frame rejected", lambda d: d["assets"][0].update(frame=5))
         invalid_manifest("Per-frame canvas drift rejected", lambda d: d["assets"][0].update(canvas_wh=[49,48]))
         reaction = next((i for i, e in enumerate(data["assets"]) if "bubble_xywh" in e), None)
@@ -148,6 +150,29 @@ def main():
         derived = next(i for i, entry in enumerate(data["assets"]) if "input" in entry)
         invalid_manifest("Missing derived input rejected", lambda d: d["assets"][derived].update(input="missing"))
         invalid_manifest("Derivation cycle rejected", lambda d: d["assets"][derived].update(input=d["assets"][derived]["id"]))
+        water = next((i for i,e in enumerate(data["assets"]) if e["id"] == "terrain/water"), None)
+        if water is not None:
+            corrupt(ROOT / data["assets"][water]["source"], "tools/gen_sprites.py", missing=True)
+            passed("Atlas rejects a missing water loop without old ASCII fallback")
+            corrupt(ROOT / "sprites/terrain/water_b.png", "tools/check_terrain_art.py")
+            passed("Standalone transition checker rejects a tampered water phase")
+            corrupt(ROOT / "sprites/terrain/shore_corner_ne.png", "tools/check_terrain_art.py")
+            passed("Standalone transition checker rejects a tampered derived corner")
+            rotation = next(i for i,e in enumerate(data["assets"]) if e.get("operation") == "rotate")
+            invalid_manifest("Invalid non-quarter rotation rejected", lambda d: d["assets"][rotation].update(quarter_turns=4))
+            cap = next(i for i,e in enumerate(data["assets"]) if e.get("operation") == "slice_canvas")
+            invalid_manifest("Clipped source endpoint cap rejected", lambda d: d["assets"][cap].update(paste_xy=[16,16]))
+            from check_terrain_art import validate_side, validate_corner
+            for label, validator, image in [
+                    ("Swimming bank pixel rejected", lambda im: validate_side(im,"deliberate fault"), images["terrain/shore_n"].copy()),
+                    ("Mismatched corner contact color rejected", lambda im: validate_corner(im,images["terrain/shore_n"],"deliberate fault"), images["terrain/shore_corner_nw"].copy())]:
+                image.putpixel((0,8) if label.startswith("Swimming") else (0,0), (36,31,46,255))
+                try:
+                    validator(image)
+                except ValueError:
+                    passed(label)
+                else:
+                    raise AssertionError(label)
 
         original_owners = art_ownership.REGISTRY.read_bytes()
         try:

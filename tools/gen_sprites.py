@@ -68,6 +68,11 @@ ATLAS_PATH = "terrain/atlas.png"
 # and the view builds the same number from the same four neighbours.
 EDGE_SIDES = ["n", "e", "s", "w"]
 
+# Corner caps occupy unused row-zero cells. Existing rows/enum/masks and the
+# 256x80 atlas stay intact; only view-owned diagonal joins use these slots.
+CORNER_ORDER = ["nw", "ne", "se", "sw"]
+CORNER_START = {"edge": 6, "shore": 10}
+
 
 # **The rim light, derived rather than drawn.** Task 0074 wants the enemies to
 # read against task 0071's night ramp, and what does it is one line of a colour
@@ -421,6 +426,11 @@ def build_atlas():
         rows.append([tile_of(name, raster) for name in names])
     for prefix in EDGE_ROWS:
         rows.append(edge_row(prefix, raster))
+    for prefix, start in CORNER_START.items():
+        for index, corner in enumerate(CORNER_ORDER):
+            while len(rows[0]) <= start + index:
+                rows[0].append(blank_tile())
+            rows[0][start + index] = tile_of(prefix + "_corner_" + corner, raster)
 
     across = max(len(row) for row in rows)
     width = across * TILE_PX

@@ -1,0 +1,15 @@
+Use case: stylized-concept
+Asset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm that becomes a fortress against zombies at night.
+Primary request: terrain/water, terrain/water_b, terrain/water_c: exactly one three-frame subtle water loop.
+Input images: Image 1 approved neutral-day style reference; Image 2 accepted quiet grass source for relative contrast only. Neither is an edit target. Create new water art.
+Style/medium: coherent hand-crafted pixel art with deliberate pixel clusters, colored outlines, restrained texture, readable material planes and clean forms.
+Composition/framing: orthographic three-quarter top-down view on a rectangular grid. Each final native canvas is 16x16 pixels with contact pivot 8,16; this is a downstream import target, so the generated source must remain simple enough to survive reduction.
+Lighting/mood: neutral warm daytime, runtime supplies dusk/night lighting. Water is flat top-view material rather than a perspective block.
+Color palette: base cool muted blue #3a6ea5, ripple #5a8cc0, sparse shadow #2b5480. Avoid teal, green, white and fluorescent colors. Match the water's calm relative contrast to the accepted grass.
+Scene/backdrop: fully opaque edge-to-edge water in ALL three cells; no transparent gutters.
+Constraints: no labels, text, watermark, UI, scenery, shoreline, islands, borders, grid lines or baked jetty.
+Avoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients, random pixel speckle, thick black boxes, diamond isometric tiles, new gameplay objects, tiny details that disappear at native size.
+
+WATER brief: Produce one three-frame water loop. Water is cool blue with restrained bright horizontal ripple clusters, fully opaque within water tiles; subtle slow motion. Opposite borders match within and across all frames. No shore sliding between frames, foam noise, diagonal island perspective or baked jetty.
+
+STRIP contract: exactly THREE equal SQUARE cells in ONE horizontal strip, ordered initial ripple, ripple shifted slightly RIGHT, ripple softly receding to initial position. Same blue base everywhere. Edge-to-edge cells with no gutter, labels or separator. Keep broad calm areas: at least 94% flat blue base in each cell. Only TWO short low-contrast joined horizontal ripple clusters per cell, each about 2-3 final native pixels long and one pixel thick, well inside the central area. Place one around upper-left interior and one around lower-right interior. Ripples move at most ONE native pixel, no vertical movement. All four outer borders of every cell are completely uniform base blue, with a calm margin at least TWO native pixels wide, so every water frame tiles perfectly with every other. No per-frame size/color drift. This is a material loop source, not a collage of different designs.

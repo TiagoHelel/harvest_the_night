@@ -1,6 +1,6 @@
 # 0008 - Water motion, banks and connected terrain edges
 
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0007
 - **Likely files:** sprites/terrain/water*; sprites/terrain/edge_*; sprites/terrain/shore_*; tools/gen_sprites.py; src/ui/world_view.gd
 - **Generation briefs:** WATER

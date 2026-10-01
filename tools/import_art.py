@@ -93,6 +93,10 @@ def load_manifest(path=MANIFEST):
                 raise ValueError("Bubble crop belongs only to a reaction: " + ident)
         if entry["palette"] != "tools/palette.py:COLOURS":
             raise ValueError("Unknown palette: " + ident)
+        if "palette_keys" in entry:
+            keys = entry["palette_keys"]
+            if not isinstance(keys, list) or not keys or any(not isinstance(k, str) or k not in palette.COLOURS for k in keys) or len(set(keys)) != len(keys):
+                raise ValueError("Invalid material palette subset: " + ident)
         if type(entry["frame"]) is not int or entry["frame"] < 0 \
                 or type(entry["loop"]) is not bool \
                 or type(entry["seconds"]) not in (int, float) \
@@ -120,8 +124,12 @@ def load_manifest(path=MANIFEST):
                 raise ValueError("Invalid scale: " + ident)
             if type(entry["alpha_threshold"]) is not int or not 1 <= entry["alpha_threshold"] <= 255:
                 raise ValueError("Invalid alpha threshold: " + ident)
-        elif "input" not in entry or entry.get("operation") not in {"copy", "slice", "legacy_bob", "legacy_lunge", "legacy_fall"}:
+        elif "input" not in entry or entry.get("operation") not in {"copy", "slice", "slice_canvas", "rotate", "legacy_bob", "legacy_lunge", "legacy_fall"}:
             raise ValueError("Missing source/valid derivation: " + ident)
+        if entry.get("operation") == "rotate" and (type(entry.get("quarter_turns")) is not int or entry["quarter_turns"] not in (1, 2, 3)):
+            raise ValueError("Invalid clockwise quarter-turns: " + ident)
+        if entry.get("operation") == "slice_canvas":
+            integers(entry.get("paste_xy"), 2, "slice canvas placement")
         key = entry["animation"]
         animations.setdefault(key, []).append(entry)
     if outputs != {p for p, owner in owners.items() if owner == "raster"}:
@@ -145,7 +153,11 @@ def render_source(entry):
         scale = entry["content_scale"]
         size = tuple(max(1, round(n * scale)) for n in crop.size)
         crop = crop.resize(size, Image.Resampling.NEAREST)
-    colors, cache, reduced = tuple(palette.COLOURS.values()), {}, []
+    # A declared material uses a subset of the one project palette, never a
+    # separate color table. This keeps small grass/earth/water shapes from
+    # accidentally borrowing nearby enemy or cloth colors during reduction.
+    keys = entry.get("palette_keys", list(palette.COLOURS))
+    colors, cache, reduced = tuple(palette.COLOURS[k] for k in keys), {}, []
     for r, g, b, a in samples(crop):
         if a < entry["alpha_threshold"]:
             reduced.append((0, 0, 0, 0))
@@ -211,6 +223,18 @@ def build(data):
                 image = parent.copy()
             elif operation == "slice":
                 image = parent.crop(rect(entry["slice_xywh"], parent.size, "slice"))
+            elif operation == "slice_canvas":
+                piece = parent.crop(rect(entry["slice_xywh"], parent.size, "slice"))
+                position = integers(entry["paste_xy"], 2, "slice canvas placement")
+                if any(position[i] + piece.size[i] > entry["canvas_wh"][i] for i in range(2)):
+                    raise ValueError("Derived slice clips canvas: " + ident)
+                image = Image.new("RGBA", tuple(entry["canvas_wh"]))
+                image.alpha_composite(piece, tuple(position))
+            elif operation == "rotate":
+                turns = entry["quarter_turns"]
+                image = parent.transpose({1: Image.Transpose.ROTATE_270,
+                                          2: Image.Transpose.ROTATE_180,
+                                          3: Image.Transpose.ROTATE_90}[turns])
             else:
                 # Transitional legacy motion, explicitly identified; authored strips
                 # replace these in task 0015. They derive from the NEW raster master.

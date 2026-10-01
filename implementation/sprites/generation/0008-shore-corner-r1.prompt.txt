@@ -1,0 +1,7 @@
+Use case: precise-object-edit
+Asset type: transparent pixel-art pond bank corner overlay.
+Input images: Image 1 EDIT TARGET, tiny north-west bank cap; Image 2 accepted straight bank material/color reference.
+Primary request: correct ONLY the material colors of the little cap. Preserve its existing location, shape, size, and full transparent square canvas.
+Failure at native16x16: the cap's green maps to #557652 rather than the straight bank's #46804a; its left-side earth maps to #7a5838 rather than the required #a87c4e on BOTH sides.
+Correction: use absolutely flat uniform #46804a GREEN in the little top-left core. Use absolutely flat uniform #a87c4e warm BROWN everywhere in the cap's surrounding earth, both its top/right and left/bottom limbs, with no darker brown planes or directional shading. Those two flat colors and true transparency are sufficient. No gradient, texture, shadows, lighting variation, dark outline or blue contact in this tiny cap.
+Preserve the exact existing small quarter-circle geometry near the top-left, the existing transparent space, image dimensions and neutral top-down camera. Do NOT enlarge or reposition the cap, add full side strips, scene, labels, glow, objects or detached pixels. It will be cropped/measured and rotated into the other three orientations; opposite incoming profiles must have exactly the same two colors.

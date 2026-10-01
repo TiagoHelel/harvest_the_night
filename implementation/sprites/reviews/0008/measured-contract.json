@@ -1,0 +1,1280 @@
+{
+  "contracts": [
+    {
+      "recipe": {
+        "id": "terrain/water",
+        "source": "assets/art_source/terrain/water-loop.png",
+        "crop_xywh": [
+          0,
+          0,
+          724,
+          724
+        ],
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          16
+        ],
+        "content_anchor_xy": [
+          8,
+          16
+        ],
+        "content_scale": 0.022099447513812154,
+        "alpha_threshold": 128,
+        "palette_keys": [
+          "water_dark",
+          "water",
+          "water_light",
+          "cloth"
+        ],
+        "owner": "raster",
+        "output": "sprites/terrain/water.png",
+        "source_sha256": "a77b6a3c52605aa03814b4784cc166bd56e58334b6e894006ebc32e2a37405f1",
+        "output_sha256": "0adcf6c3e136bae507188e883ade51f6780dd7a2918ba66cb1bbb3858a9bc2a2",
+        "palette": "tools/palette.py:COLOURS",
+        "animation": "terrain_water",
+        "frame": 0,
+        "seconds": 0.55,
+        "loop": true,
+        "prompt": "implementation/sprites/generation/0008-water.prompt.txt",
+        "prompt_sha256": "c40faa882a0649523f954bcf8ad5ef402b03fcee6317babe807f079508a85531",
+        "references": [
+          {
+            "path": "assets/art_source/masters/style-day.png",
+            "sha256": "148b5e004b9ed8f4adb1a90a65887e8aa959647b4eccef64e1bad7f17ef0ce09",
+            "role": "reference/edit target; exact role in the preserved prompt"
+          },
+          {
+            "path": "assets/art_source/terrain/grass.png",
+            "sha256": "f9084889428db5aed278e6893118995da00a6e1f0895ee9346cd6a64600b39d6",
+            "role": "reference/edit target; exact role in the preserved prompt"
+          }
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          2172,
+          724
+        ],
+        "gutter_xy": [
+          0,
+          0
+        ],
+        "tool": "built-in ImageGen",
+        "generation_task": "0008",
+        "revision": 0
+      },
+      "native_bbox": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "native_alpha_range": [
+        255,
+        255
+      ],
+      "native_color_count": 4,
+      "native_rgba_sha256": "a81b600bdea65683dc38fb2cce60eed601c10d2eca49ae158479fd0cbda383eb",
+      "output_png_sha256": "0adcf6c3e136bae507188e883ade51f6780dd7a2918ba66cb1bbb3858a9bc2a2",
+      "source_wh": [
+        2172,
+        724
+      ],
+      "source_alpha_range": [
+        255,
+        255
+      ],
+      "source_sha256": "a77b6a3c52605aa03814b4784cc166bd56e58334b6e894006ebc32e2a37405f1",
+      "base_coverage": 0.98046875
+    },
+    {
+      "recipe": {
+        "id": "terrain/water_b",
+        "source": "assets/art_source/terrain/water-loop.png",
+        "crop_xywh": [
+          724,
+          0,
+          724,
+          724
+        ],
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          16
+        ],
+        "content_anchor_xy": [
+          8,
+          16
+        ],
+        "content_scale": 0.022099447513812154,
+        "alpha_threshold": 128,
+        "palette_keys": [
+          "water_dark",
+          "water",
+          "water_light",
+          "cloth"
+        ],
+        "owner": "raster",
+        "output": "sprites/terrain/water_b.png",
+        "source_sha256": "a77b6a3c52605aa03814b4784cc166bd56e58334b6e894006ebc32e2a37405f1",
+        "output_sha256": "e4be453788104b64c02cb13f66baa2c79691813732b91b6cbb03b13e890b9b0b",
+        "palette": "tools/palette.py:COLOURS",
+        "animation": "terrain_water",
+        "frame": 1,
+        "seconds": 0.55,
+        "loop": true,
+        "prompt": "implementation/sprites/generation/0008-water.prompt.txt",
+        "prompt_sha256": "c40faa882a0649523f954bcf8ad5ef402b03fcee6317babe807f079508a85531",
+        "references": [
+          {
+            "path": "assets/art_source/masters/style-day.png",
+            "sha256": "148b5e004b9ed8f4adb1a90a65887e8aa959647b4eccef64e1bad7f17ef0ce09",
+            "role": "reference/edit target; exact role in the preserved prompt"
+          },
+          {
+            "path": "assets/art_source/terrain/grass.png",
+            "sha256": "f9084889428db5aed278e6893118995da00a6e1f0895ee9346cd6a64600b39d6",
+            "role": "reference/edit target; exact role in the preserved prompt"
+          }
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          2172,
+          724
+        ],
+        "gutter_xy": [
+          0,
+          0
+        ],
+        "tool": "built-in ImageGen",
+        "generation_task": "0008",
+        "revision": 0
+      },
+      "native_bbox": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "native_alpha_range": [
+        255,
+        255
+      ],
+      "native_color_count": 4,
+      "native_rgba_sha256": "6c705d44fede923e914cab36cc6eab9725e25f511fe4b47be60446b558240285",
+      "output_png_sha256": "e4be453788104b64c02cb13f66baa2c79691813732b91b6cbb03b13e890b9b0b",
+      "source_wh": [
+        2172,
+        724
+      ],
+      "source_alpha_range": [
+        255,
+        255
+      ],
+      "source_sha256": "a77b6a3c52605aa03814b4784cc166bd56e58334b6e894006ebc32e2a37405f1",
+      "base_coverage": 0.984375
+    },
+    {
+      "recipe": {
+        "id": "terrain/water_c",
+        "source": "assets/art_source/terrain/water-loop.png",
+        "crop_xywh": [
+          1448,
+          0,
+          724,
+          724
+        ],
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          16
+        ],
+        "content_anchor_xy": [
+          8,
+          16
+        ],
+        "content_scale": 0.022099447513812154,
+        "alpha_threshold": 128,
+        "palette_keys": [
+          "water_dark",
+          "water",
+          "water_light",
+          "cloth"
+        ],
+        "owner": "raster",
+        "output": "sprites/terrain/water_c.png",
+        "source_sha256": "a77b6a3c52605aa03814b4784cc166bd56e58334b6e894006ebc32e2a37405f1",
+        "output_sha256": "dd3b41a21c7edc867af6b8fd63a691cd73469b7cf0512d31b34892d4d1e31b6d",
+        "palette": "tools/palette.py:COLOURS",
+        "animation": "terrain_water",
+        "frame": 2,
+        "seconds": 0.55,
+        "loop": true,
+        "prompt": "implementation/sprites/generation/0008-water.prompt.txt",
+        "prompt_sha256": "c40faa882a0649523f954bcf8ad5ef402b03fcee6317babe807f079508a85531",
+        "references": [
+          {
+            "path": "assets/art_source/masters/style-day.png",
+            "sha256": "148b5e004b9ed8f4adb1a90a65887e8aa959647b4eccef64e1bad7f17ef0ce09",
+            "role": "reference/edit target; exact role in the preserved prompt"
+          },
+          {
+            "path": "assets/art_source/terrain/grass.png",
+            "sha256": "f9084889428db5aed278e6893118995da00a6e1f0895ee9346cd6a64600b39d6",
+            "role": "reference/edit target; exact role in the preserved prompt"
+          }
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          2172,
+          724
+        ],
+        "gutter_xy": [
+          0,
+          0
+        ],
+        "tool": "built-in ImageGen",
+        "generation_task": "0008",
+        "revision": 0
+      },
+      "native_bbox": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "native_alpha_range": [
+        255,
+        255
+      ],
+      "native_color_count": 3,
+      "native_rgba_sha256": "32dcb7a84860d3d09a92ac19b02bfdb59b786780fc997fcda934944e31bf2b7f",
+      "output_png_sha256": "dd3b41a21c7edc867af6b8fd63a691cd73469b7cf0512d31b34892d4d1e31b6d",
+      "source_wh": [
+        2172,
+        724
+      ],
+      "source_alpha_range": [
+        255,
+        255
+      ],
+      "source_sha256": "a77b6a3c52605aa03814b4784cc166bd56e58334b6e894006ebc32e2a37405f1",
+      "base_coverage": 0.98046875
+    },
+    {
+      "recipe": {
+        "id": "terrain/edge_n",
+        "source": "assets/art_source/terrain/edge-n.png",
+        "crop_xywh": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          16
+        ],
+        "content_anchor_xy": [
+          8,
+          16
+        ],
+        "content_scale": 0.012759170653907496,
+        "alpha_threshold": 128,
+        "owner": "raster",
+        "output": "sprites/terrain/edge_n.png",
+        "source_sha256": "44914576c7532adeeb7c5a6df66385840e461e54937416d50e92e0f6b60eca4c",
+        "output_sha256": "e305eb77e123cec529ec7788500e0618ed4d7acf27c297a2131aae4081496f71",
+        "palette": "tools/palette.py:COLOURS",
+        "animation": "terrain_edge_n",
+        "frame": 0,
+        "seconds": 0.55,
+        "loop": false,
+        "prompt": "implementation/sprites/generation/0008-edge.prompt.txt",
+        "prompt_sha256": "c0c6c8926f9cdc5f2d328d0d63be2e243f4a4480aa8ccb89e7b21046fb6cfa51",
+        "references": [
+          {
+            "path": "assets/art_source/terrain/grass.png",
+            "sha256": "f9084889428db5aed278e6893118995da00a6e1f0895ee9346cd6a64600b39d6",
+            "role": "reference/edit target; exact role in the preserved prompt"
+          },
+          {
+            "path": "assets/art_source/masters/style-day.png",
+            "sha256": "148b5e004b9ed8f4adb1a90a65887e8aa959647b4eccef64e1bad7f17ef0ce09",
+            "role": "reference/edit target; exact role in the preserved prompt"
+          }
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "gutter_xy": [
+          0,
+          0
+        ],
+        "tool": "built-in ImageGen",
+        "generation_task": "0008",
+        "revision": 0
+      },
+      "native_bbox": [
+        0,
+        0,
+        16,
+        2
+      ],
+      "native_alpha_range": [
+        0,
+        255
+      ],
+      "native_color_count": 3,
+      "native_rgba_sha256": "c52b482f7fa1bb82f62486128694a4fb57a810c08dc2f5d9351a22df531590bb",
+      "output_png_sha256": "e305eb77e123cec529ec7788500e0618ed4d7acf27c297a2131aae4081496f71",
+      "source_wh": [
+        1254,
+        1254
+      ],
+      "source_alpha_range": [
+        0,
+        255
+      ],
+      "source_sha256": "44914576c7532adeeb7c5a6df66385840e461e54937416d50e92e0f6b60eca4c"
+    },
+    {
+      "recipe": {
+        "id": "terrain/shore_n",
+        "source": "assets/art_source/terrain/shore-n.png",
+        "crop_xywh": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          16
+        ],
+        "content_anchor_xy": [
+          8,
+          16
+        ],
+        "content_scale": 0.012759170653907496,
+        "alpha_threshold": 128,
+        "owner": "raster",
+        "output": "sprites/terrain/shore_n.png",
+        "source_sha256": "20542d78c3e88ef97e7f710287d5a9031a4e649ebbc79b7ac90af35f0faa7868",
+        "output_sha256": "4d786185077013771aad1aaa9df172d29aaae7b5752d8bab09bfa6dbf0d6689a",
+        "palette": "tools/palette.py:COLOURS",
+        "animation": "terrain_shore_n",
+        "frame": 0,
+        "seconds": 0.55,
+        "loop": false,
+        "prompt": "implementation/sprites/generation/0008-shore-r1.prompt.txt",
+        "prompt_sha256": "a77dcfb573144359345f64012b3e7a5aefc0b98aeb13294e462bf8a7a904200b",
+        "references": [
+          {
+            "path": "assets/art_source/terrain/candidates/shore-n-r0.png",
+            "sha256": "de8d6e3b26de122f0f50a580dd878588c707039f6faec9b5367a04cfa2e1b575",
+            "role": "reference/edit target; exact role in the preserved prompt"
+          },
+          {
+            "path": "assets/art_source/terrain/grass.png",
+            "sha256": "f9084889428db5aed278e6893118995da00a6e1f0895ee9346cd6a64600b39d6",
+            "role": "reference/edit target; exact role in the preserved prompt"
+          },
+          {
+            "path": "implementation/sprites/generation/0008-shore.prompt.txt",
+            "sha256": "4a91237e19915fb89ed2a582fe80f29b4c84c0401f9a8d439ec76a1f03f09878",
+            "role": "original full brief in revision chain"
+          }
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "gutter_xy": [
+          0,
+          0
+        ],
+        "tool": "built-in ImageGen",
+        "generation_task": "0008",
+        "revision": 1
+      },
+      "native_bbox": [
+        0,
+        0,
+        16,
+        3
+      ],
+      "native_alpha_range": [
+        0,
+        255
+      ],
+      "native_color_count": 9,
+      "native_rgba_sha256": "0b4002793e4d07477879499c37aeb45955cf536beae6135577c7f6ed71875356",
+      "output_png_sha256": "4d786185077013771aad1aaa9df172d29aaae7b5752d8bab09bfa6dbf0d6689a",
+      "source_wh": [
+        1254,
+        1254
+      ],
+      "source_alpha_range": [
+        0,
+        255
+      ],
+      "source_sha256": "20542d78c3e88ef97e7f710287d5a9031a4e649ebbc79b7ac90af35f0faa7868"
+    },
+    {
+      "recipe": {
+        "id": "terrain/shore_corner_nw",
+        "source": "assets/art_source/terrain/shore-corner-nw.png",
+        "crop_xywh": [
+          14,
+          14,
+          720,
+          720
+        ],
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          16
+        ],
+        "content_anchor_xy": [
+          8,
+          16
+        ],
+        "content_scale": 0.022222222222222223,
+        "alpha_threshold": 128,
+        "palette_keys": [
+          "leaf_light",
+          "wood_light"
+        ],
+        "owner": "raster",
+        "output": "sprites/terrain/shore_corner_nw.png",
+        "source_sha256": "ba3bf79e8c14620c4fb065d763999230d9b70aff00f85d514ec6b84ab0855da6",
+        "output_sha256": "180f1ba9802a9f2e42630c20e598cda80ad122f0629a781cfeb48941f231dd50",
+        "palette": "tools/palette.py:COLOURS",
+        "animation": "terrain_shore_corner_nw",
+        "frame": 0,
+        "seconds": 0.55,
+        "loop": false,
+        "prompt": "implementation/sprites/generation/0008-shore-corner-r1.prompt.txt",
+        "prompt_sha256": "1532368e09743007dc79950fe14cb73e99e1a4f98c95a5d71975152a436dfbf0",
+        "references": [
+          {
+            "path": "assets/art_source/terrain/candidates/shore-corner-nw-r0.png",
+            "sha256": "faae306271c832c809dc84dba4a85c976002b3278ee4dd128e1d0037732ecfbf",
+            "role": "reference/edit target; exact role in the preserved prompt"
+          },
+          {
+            "path": "assets/art_source/terrain/shore-n.png",
+            "sha256": "20542d78c3e88ef97e7f710287d5a9031a4e649ebbc79b7ac90af35f0faa7868",
+            "role": "reference/edit target; exact role in the preserved prompt"
+          },
+          {
+            "path": "implementation/sprites/generation/0008-shore-corner.prompt.txt",
+            "sha256": "eae58a1a8b5bc78aa9bdabfc960ac1c4166c46a1a5c3a5446bb9a14caffc6c40",
+            "role": "original full brief in revision chain"
+          }
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "gutter_xy": [
+          0,
+          0
+        ],
+        "tool": "built-in ImageGen",
+        "generation_task": "0008",
+        "revision": 1
+      },
+      "native_bbox": [
+        0,
+        0,
+        2,
+        2
+      ],
+      "native_alpha_range": [
+        0,
+        255
+      ],
+      "native_color_count": 3,
+      "native_rgba_sha256": "d87960a273a44e78b30bcabd8e71f4d8630b8d27874976e9d01a39b25812f7c4",
+      "output_png_sha256": "180f1ba9802a9f2e42630c20e598cda80ad122f0629a781cfeb48941f231dd50",
+      "source_wh": [
+        1254,
+        1254
+      ],
+      "source_alpha_range": [
+        0,
+        255
+      ],
+      "source_sha256": "ba3bf79e8c14620c4fb065d763999230d9b70aff00f85d514ec6b84ab0855da6"
+    },
+    {
+      "recipe": {
+        "owner": "raster",
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          16
+        ],
+        "palette": "tools/palette.py:COLOURS",
+        "seconds": 0.55,
+        "loop": false,
+        "prompt": "implementation/sprites/generation/0008-edge.prompt.txt",
+        "prompt_sha256": "c0c6c8926f9cdc5f2d328d0d63be2e243f4a4480aa8ccb89e7b21046fb6cfa51",
+        "references": [
+          {
+            "path": "assets/art_source/terrain/grass.png",
+            "sha256": "f9084889428db5aed278e6893118995da00a6e1f0895ee9346cd6a64600b39d6",
+            "role": "reference/edit target; exact role in the preserved prompt"
+          },
+          {
+            "path": "assets/art_source/masters/style-day.png",
+            "sha256": "148b5e004b9ed8f4adb1a90a65887e8aa959647b4eccef64e1bad7f17ef0ce09",
+            "role": "reference/edit target; exact role in the preserved prompt"
+          }
+        ],
+        "generation_task": "0008",
+        "id": "terrain/edge_e",
+        "input": "terrain/edge_n",
+        "operation": "rotate",
+        "quarter_turns": 1,
+        "animation": "terrain_edge_e",
+        "frame": 0,
+        "output": "sprites/terrain/edge_e.png",
+        "output_sha256": "ae65cbf68979346b98e2045fa25c42928116c10aed69c2046da16bfcf1ed9b37"
+      },
+      "native_bbox": [
+        14,
+        0,
+        16,
+        16
+      ],
+      "native_alpha_range": [
+        0,
+        255
+      ],
+      "native_color_count": 3,
+      "native_rgba_sha256": "6f26c0bf3daa8ce107b434c46ff0d1ef67bc82c2ac18829eb8dba6373b8b21a2",
+      "output_png_sha256": "ae65cbf68979346b98e2045fa25c42928116c10aed69c2046da16bfcf1ed9b37"
+    },
+    {
+      "recipe": {
+        "owner": "raster",
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          16
+        ],
+        "palette": "tools/palette.py:COLOURS",
+        "seconds": 0.55,
+        "loop": false,
+        "prompt": "implementation/sprites/generation/0008-edge.prompt.txt",
+        "prompt_sha256": "c0c6c8926f9cdc5f2d328d0d63be2e243f4a4480aa8ccb89e7b21046fb6cfa51",
+        "references": [
+          {
+            "path": "assets/art_source/terrain/grass.png",
+            "sha256": "f9084889428db5aed278e6893118995da00a6e1f0895ee9346cd6a64600b39d6",
+            "role": "reference/edit target; exact role in the preserved prompt"
+          },
+          {
+            "path": "assets/art_source/masters/style-day.png",
+            "sha256": "148b5e004b9ed8f4adb1a90a65887e8aa959647b4eccef64e1bad7f17ef0ce09",
+            "role": "reference/edit target; exact role in the preserved prompt"
+          }
+        ],
+        "generation_task": "0008",
+        "id": "terrain/edge_s",
+        "input": "terrain/edge_n",
+        "operation": "rotate",
+        "quarter_turns": 2,
+        "animation": "terrain_edge_s",
+        "frame": 0,
+        "output": "sprites/terrain/edge_s.png",
+        "output_sha256": "672dad4ee2c3733014c13060389a306a695d2414819139a3dc8c44d53730ff6e"
+      },
+      "native_bbox": [
+        0,
+        14,
+        16,
+        16
+      ],
+      "native_alpha_range": [
+        0,
+        255
+      ],
+      "native_color_count": 3,
+      "native_rgba_sha256": "715d984587daad8a65a4ede793ad4f2d666c97057f6bf96604e9f33b9fefa183",
+      "output_png_sha256": "672dad4ee2c3733014c13060389a306a695d2414819139a3dc8c44d53730ff6e"
+    },
+    {
+      "recipe": {
+        "owner": "raster",
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          16
+        ],
+        "palette": "tools/palette.py:COLOURS",
+        "seconds": 0.55,
+        "loop": false,
+        "prompt": "implementation/sprites/generation/0008-edge.prompt.txt",
+        "prompt_sha256": "c0c6c8926f9cdc5f2d328d0d63be2e243f4a4480aa8ccb89e7b21046fb6cfa51",
+        "references": [
+          {
+            "path": "assets/art_source/terrain/grass.png",
+            "sha256": "f9084889428db5aed278e6893118995da00a6e1f0895ee9346cd6a64600b39d6",
+            "role": "reference/edit target; exact role in the preserved prompt"
+          },
+          {
+            "path": "assets/art_source/masters/style-day.png",
+            "sha256": "148b5e004b9ed8f4adb1a90a65887e8aa959647b4eccef64e1bad7f17ef0ce09",
+            "role": "reference/edit target; exact role in the preserved prompt"
+          }
+        ],
+        "generation_task": "0008",
+        "id": "terrain/edge_w",
+        "input": "terrain/edge_n",
+        "operation": "rotate",
+        "quarter_turns": 3,
+        "animation": "terrain_edge_w",
+        "frame": 0,
+        "output": "sprites/terrain/edge_w.png",
+        "output_sha256": "59ffcc929daa2515313732065b869ad20fd8bc90ca2ccb5bd7d734b9ec30d780"
+      },
+      "native_bbox": [
+        0,
+        0,
+        2,
+        16
+      ],
+      "native_alpha_range": [
+        0,
+        255
+      ],
+      "native_color_count": 3,
+      "native_rgba_sha256": "35ddd5455fdea5ea8dc6ff0f7c48a1d5e969d9197f3019705543d91f0b6acba4",
+      "output_png_sha256": "59ffcc929daa2515313732065b869ad20fd8bc90ca2ccb5bd7d734b9ec30d780"
+    },
+    {
+      "recipe": {
+        "owner": "raster",
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          16
+        ],
+        "palette": "tools/palette.py:COLOURS",
+        "seconds": 0.55,
+        "loop": false,
+        "prompt": "implementation/sprites/generation/0008-shore-r1.prompt.txt",
+        "prompt_sha256": "a77dcfb573144359345f64012b3e7a5aefc0b98aeb13294e462bf8a7a904200b",
+        "references": [
+          {
+            "path": "assets/art_source/terrain/candidates/shore-n-r0.png",
+            "sha256": "de8d6e3b26de122f0f50a580dd878588c707039f6faec9b5367a04cfa2e1b575",
+            "role": "reference/edit target; exact role in the preserved prompt"
+          },
+          {
+            "path": "assets/art_source/terrain/grass.png",
+            "sha256": "f9084889428db5aed278e6893118995da00a6e1f0895ee9346cd6a64600b39d6",
+            "role": "reference/edit target; exact role in the preserved prompt"
+          },
+          {
+            "path": "implementation/sprites/generation/0008-shore.prompt.txt",
+            "sha256": "4a91237e19915fb89ed2a582fe80f29b4c84c0401f9a8d439ec76a1f03f09878",
+            "role": "original full brief in revision chain"
+          }
+        ],
+        "generation_task": "0008",
+        "id": "terrain/shore_e",
+        "input": "terrain/shore_n",
+        "operation": "rotate",
+        "quarter_turns": 1,
+        "animation": "terrain_shore_e",
+        "frame": 0,
+        "output": "sprites/terrain/shore_e.png",
+        "output_sha256": "2729e63339c9c30cf0f323c4eaf13f33d12511207f34c08696f3893e559d7117"
+      },
+      "native_bbox": [
+        13,
+        0,
+        16,
+        16
+      ],
+      "native_alpha_range": [
+        0,
+        255
+      ],
+      "native_color_count": 9,
+      "native_rgba_sha256": "7a50923858a2f568f499f719cdf3048076a8af94524170649cc7980f266a8af3",
+      "output_png_sha256": "2729e63339c9c30cf0f323c4eaf13f33d12511207f34c08696f3893e559d7117"
+    },
+    {
+      "recipe": {
+        "owner": "raster",
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          16
+        ],
+        "palette": "tools/palette.py:COLOURS",
+        "seconds": 0.55,
+        "loop": false,
+        "prompt": "implementation/sprites/generation/0008-shore-r1.prompt.txt",
+        "prompt_sha256": "a77dcfb573144359345f64012b3e7a5aefc0b98aeb13294e462bf8a7a904200b",
+        "references": [
+          {
+            "path": "assets/art_source/terrain/candidates/shore-n-r0.png",
+            "sha256": "de8d6e3b26de122f0f50a580dd878588c707039f6faec9b5367a04cfa2e1b575",
+            "role": "reference/edit target; exact role in the preserved prompt"
+          },
+          {
+            "path": "assets/art_source/terrain/grass.png",
+            "sha256": "f9084889428db5aed278e6893118995da00a6e1f0895ee9346cd6a64600b39d6",
+            "role": "reference/edit target; exact role in the preserved prompt"
+          },
+          {
+            "path": "implementation/sprites/generation/0008-shore.prompt.txt",
+            "sha256": "4a91237e19915fb89ed2a582fe80f29b4c84c0401f9a8d439ec76a1f03f09878",
+            "role": "original full brief in revision chain"
+          }
+        ],
+        "generation_task": "0008",
+        "id": "terrain/shore_s",
+        "input": "terrain/shore_n",
+        "operation": "rotate",
+        "quarter_turns": 2,
+        "animation": "terrain_shore_s",
+        "frame": 0,
+        "output": "sprites/terrain/shore_s.png",
+        "output_sha256": "3cbcd4f327dddb1967a0e372f6590c09cb5f79b8ee708a208d14fce5cb83ae1b"
+      },
+      "native_bbox": [
+        0,
+        13,
+        16,
+        16
+      ],
+      "native_alpha_range": [
+        0,
+        255
+      ],
+      "native_color_count": 9,
+      "native_rgba_sha256": "e104259c307ebc4a9e6cbb7b3dc963d9751aa83dcdb9aabfa1a0ebe365726aba",
+      "output_png_sha256": "3cbcd4f327dddb1967a0e372f6590c09cb5f79b8ee708a208d14fce5cb83ae1b"
+    },
+    {
+      "recipe": {
+        "owner": "raster",
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          16
+        ],
+        "palette": "tools/palette.py:COLOURS",
+        "seconds": 0.55,
+        "loop": false,
+        "prompt": "implementation/sprites/generation/0008-shore-r1.prompt.txt",
+        "prompt_sha256": "a77dcfb573144359345f64012b3e7a5aefc0b98aeb13294e462bf8a7a904200b",
+        "references": [
+          {
+            "path": "assets/art_source/terrain/candidates/shore-n-r0.png",
+            "sha256": "de8d6e3b26de122f0f50a580dd878588c707039f6faec9b5367a04cfa2e1b575",
+            "role": "reference/edit target; exact role in the preserved prompt"
+          },
+          {
+            "path": "assets/art_source/terrain/grass.png",
+            "sha256": "f9084889428db5aed278e6893118995da00a6e1f0895ee9346cd6a64600b39d6",
+            "role": "reference/edit target; exact role in the preserved prompt"
+          },
+          {
+            "path": "implementation/sprites/generation/0008-shore.prompt.txt",
+            "sha256": "4a91237e19915fb89ed2a582fe80f29b4c84c0401f9a8d439ec76a1f03f09878",
+            "role": "original full brief in revision chain"
+          }
+        ],
+        "generation_task": "0008",
+        "id": "terrain/shore_w",
+        "input": "terrain/shore_n",
+        "operation": "rotate",
+        "quarter_turns": 3,
+        "animation": "terrain_shore_w",
+        "frame": 0,
+        "output": "sprites/terrain/shore_w.png",
+        "output_sha256": "4deeee7f40117f8475ed861ff80e04297bf955eaf0807def7667dc0d20419d5d"
+      },
+      "native_bbox": [
+        0,
+        0,
+        3,
+        16
+      ],
+      "native_alpha_range": [
+        0,
+        255
+      ],
+      "native_color_count": 9,
+      "native_rgba_sha256": "ca1a023d5479cd6bde0b89bb548e39f5922f23d9e40c958ebf20e07ed410c6bd",
+      "output_png_sha256": "4deeee7f40117f8475ed861ff80e04297bf955eaf0807def7667dc0d20419d5d"
+    },
+    {
+      "recipe": {
+        "owner": "raster",
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          16
+        ],
+        "palette": "tools/palette.py:COLOURS",
+        "seconds": 0.55,
+        "loop": false,
+        "prompt": "implementation/sprites/generation/0008-edge.prompt.txt",
+        "prompt_sha256": "c0c6c8926f9cdc5f2d328d0d63be2e243f4a4480aa8ccb89e7b21046fb6cfa51",
+        "references": [
+          {
+            "path": "assets/art_source/terrain/grass.png",
+            "sha256": "f9084889428db5aed278e6893118995da00a6e1f0895ee9346cd6a64600b39d6",
+            "role": "reference/edit target; exact role in the preserved prompt"
+          },
+          {
+            "path": "assets/art_source/masters/style-day.png",
+            "sha256": "148b5e004b9ed8f4adb1a90a65887e8aa959647b4eccef64e1bad7f17ef0ce09",
+            "role": "reference/edit target; exact role in the preserved prompt"
+          }
+        ],
+        "generation_task": "0008",
+        "id": "terrain/edge_corner_nw",
+        "input": "terrain/edge_n",
+        "operation": "slice_canvas",
+        "slice_xywh": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "paste_xy": [
+          0,
+          0
+        ],
+        "animation": "terrain_edge_corner_nw",
+        "frame": 0,
+        "output": "sprites/terrain/edge_corner_nw.png",
+        "output_sha256": "1728c049cbefd0f0b062a5a466e513a231a5cd1839792e9cf8081e439fea04a6"
+      },
+      "native_bbox": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "native_alpha_range": [
+        0,
+        255
+      ],
+      "native_color_count": 2,
+      "native_rgba_sha256": "422cf60558c0c88813ef61b7f373de2a9e63ade62131beb9ae6f3e75c430e1e0",
+      "output_png_sha256": "1728c049cbefd0f0b062a5a466e513a231a5cd1839792e9cf8081e439fea04a6"
+    },
+    {
+      "recipe": {
+        "owner": "raster",
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          16
+        ],
+        "palette": "tools/palette.py:COLOURS",
+        "seconds": 0.55,
+        "loop": false,
+        "prompt": "implementation/sprites/generation/0008-edge.prompt.txt",
+        "prompt_sha256": "c0c6c8926f9cdc5f2d328d0d63be2e243f4a4480aa8ccb89e7b21046fb6cfa51",
+        "references": [
+          {
+            "path": "assets/art_source/terrain/grass.png",
+            "sha256": "f9084889428db5aed278e6893118995da00a6e1f0895ee9346cd6a64600b39d6",
+            "role": "reference/edit target; exact role in the preserved prompt"
+          },
+          {
+            "path": "assets/art_source/masters/style-day.png",
+            "sha256": "148b5e004b9ed8f4adb1a90a65887e8aa959647b4eccef64e1bad7f17ef0ce09",
+            "role": "reference/edit target; exact role in the preserved prompt"
+          }
+        ],
+        "generation_task": "0008",
+        "id": "terrain/edge_corner_ne",
+        "input": "terrain/edge_corner_nw",
+        "operation": "rotate",
+        "quarter_turns": 1,
+        "animation": "terrain_edge_corner_ne",
+        "frame": 0,
+        "output": "sprites/terrain/edge_corner_ne.png",
+        "output_sha256": "5763bfb8a4b69e05a043020110af0aff831fe3d4274d2b2635d2284d37a07ce1"
+      },
+      "native_bbox": [
+        15,
+        0,
+        16,
+        1
+      ],
+      "native_alpha_range": [
+        0,
+        255
+      ],
+      "native_color_count": 2,
+      "native_rgba_sha256": "2ef34eaa1a4144909d94632b581712d2c171ad3f7e95e25665f6cc27b66ecff9",
+      "output_png_sha256": "5763bfb8a4b69e05a043020110af0aff831fe3d4274d2b2635d2284d37a07ce1"
+    },
+    {
+      "recipe": {
+        "owner": "raster",
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          16
+        ],
+        "palette": "tools/palette.py:COLOURS",
+        "seconds": 0.55,
+        "loop": false,
+        "prompt": "implementation/sprites/generation/0008-edge.prompt.txt",
+        "prompt_sha256": "c0c6c8926f9cdc5f2d328d0d63be2e243f4a4480aa8ccb89e7b21046fb6cfa51",
+        "references": [
+          {
+            "path": "assets/art_source/terrain/grass.png",
+            "sha256": "f9084889428db5aed278e6893118995da00a6e1f0895ee9346cd6a64600b39d6",
+            "role": "reference/edit target; exact role in the preserved prompt"
+          },
+          {
+            "path": "assets/art_source/masters/style-day.png",
+            "sha256": "148b5e004b9ed8f4adb1a90a65887e8aa959647b4eccef64e1bad7f17ef0ce09",
+            "role": "reference/edit target; exact role in the preserved prompt"
+          }
+        ],
+        "generation_task": "0008",
+        "id": "terrain/edge_corner_se",
+        "input": "terrain/edge_corner_nw",
+        "operation": "rotate",
+        "quarter_turns": 2,
+        "animation": "terrain_edge_corner_se",
+        "frame": 0,
+        "output": "sprites/terrain/edge_corner_se.png",
+        "output_sha256": "e5cb16ec01e9c58c07cb1b31a51a71d22c0ca0cba8a03f5c6baf64d71d6f43c6"
+      },
+      "native_bbox": [
+        15,
+        15,
+        16,
+        16
+      ],
+      "native_alpha_range": [
+        0,
+        255
+      ],
+      "native_color_count": 2,
+      "native_rgba_sha256": "e774a34fcb0c0ba86d39eff7112d9f5b2c3064abbbfff8f3cc241413b72bd8e5",
+      "output_png_sha256": "e5cb16ec01e9c58c07cb1b31a51a71d22c0ca0cba8a03f5c6baf64d71d6f43c6"
+    },
+    {
+      "recipe": {
+        "owner": "raster",
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          16
+        ],
+        "palette": "tools/palette.py:COLOURS",
+        "seconds": 0.55,
+        "loop": false,
+        "prompt": "implementation/sprites/generation/0008-edge.prompt.txt",
+        "prompt_sha256": "c0c6c8926f9cdc5f2d328d0d63be2e243f4a4480aa8ccb89e7b21046fb6cfa51",
+        "references": [
+          {
+            "path": "assets/art_source/terrain/grass.png",
+            "sha256": "f9084889428db5aed278e6893118995da00a6e1f0895ee9346cd6a64600b39d6",
+            "role": "reference/edit target; exact role in the preserved prompt"
+          },
+          {
+            "path": "assets/art_source/masters/style-day.png",
+            "sha256": "148b5e004b9ed8f4adb1a90a65887e8aa959647b4eccef64e1bad7f17ef0ce09",
+            "role": "reference/edit target; exact role in the preserved prompt"
+          }
+        ],
+        "generation_task": "0008",
+        "id": "terrain/edge_corner_sw",
+        "input": "terrain/edge_corner_nw",
+        "operation": "rotate",
+        "quarter_turns": 3,
+        "animation": "terrain_edge_corner_sw",
+        "frame": 0,
+        "output": "sprites/terrain/edge_corner_sw.png",
+        "output_sha256": "9a3804226ee23dab0f2ce3f4e6f9dc805711740d856df185fdcbdeb3cf6d3741"
+      },
+      "native_bbox": [
+        0,
+        15,
+        1,
+        16
+      ],
+      "native_alpha_range": [
+        0,
+        255
+      ],
+      "native_color_count": 2,
+      "native_rgba_sha256": "ba4a5fc70aa5b79f6389ace21ea931043fdf3c48ce49c4d458933a6a8a9a5a25",
+      "output_png_sha256": "9a3804226ee23dab0f2ce3f4e6f9dc805711740d856df185fdcbdeb3cf6d3741"
+    },
+    {
+      "recipe": {
+        "owner": "raster",
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          16
+        ],
+        "palette": "tools/palette.py:COLOURS",
+        "seconds": 0.55,
+        "loop": false,
+        "prompt": "implementation/sprites/generation/0008-shore-corner-r1.prompt.txt",
+        "prompt_sha256": "1532368e09743007dc79950fe14cb73e99e1a4f98c95a5d71975152a436dfbf0",
+        "references": [
+          {
+            "path": "assets/art_source/terrain/candidates/shore-corner-nw-r0.png",
+            "sha256": "faae306271c832c809dc84dba4a85c976002b3278ee4dd128e1d0037732ecfbf",
+            "role": "reference/edit target; exact role in the preserved prompt"
+          },
+          {
+            "path": "assets/art_source/terrain/shore-n.png",
+            "sha256": "20542d78c3e88ef97e7f710287d5a9031a4e649ebbc79b7ac90af35f0faa7868",
+            "role": "reference/edit target; exact role in the preserved prompt"
+          },
+          {
+            "path": "implementation/sprites/generation/0008-shore-corner.prompt.txt",
+            "sha256": "eae58a1a8b5bc78aa9bdabfc960ac1c4166c46a1a5c3a5446bb9a14caffc6c40",
+            "role": "original full brief in revision chain"
+          }
+        ],
+        "generation_task": "0008",
+        "id": "terrain/shore_corner_ne",
+        "input": "terrain/shore_corner_nw",
+        "operation": "rotate",
+        "quarter_turns": 1,
+        "animation": "terrain_shore_corner_ne",
+        "frame": 0,
+        "output": "sprites/terrain/shore_corner_ne.png",
+        "output_sha256": "e49a44d44d46f5a9083bff5802c6128c7ae8df8d8e2f628fc33b3282abc7c9d6"
+      },
+      "native_bbox": [
+        14,
+        0,
+        16,
+        2
+      ],
+      "native_alpha_range": [
+        0,
+        255
+      ],
+      "native_color_count": 3,
+      "native_rgba_sha256": "1cf4db9efcdeefc0c0aef35b40abf9c35ee8ec051b0224d5a27d0e60076d20a3",
+      "output_png_sha256": "e49a44d44d46f5a9083bff5802c6128c7ae8df8d8e2f628fc33b3282abc7c9d6"
+    },
+    {
+      "recipe": {
+        "owner": "raster",
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          16
+        ],
+        "palette": "tools/palette.py:COLOURS",
+        "seconds": 0.55,
+        "loop": false,
+        "prompt": "implementation/sprites/generation/0008-shore-corner-r1.prompt.txt",
+        "prompt_sha256": "1532368e09743007dc79950fe14cb73e99e1a4f98c95a5d71975152a436dfbf0",
+        "references": [
+          {
+            "path": "assets/art_source/terrain/candidates/shore-corner-nw-r0.png",
+            "sha256": "faae306271c832c809dc84dba4a85c976002b3278ee4dd128e1d0037732ecfbf",
+            "role": "reference/edit target; exact role in the preserved prompt"
+          },
+          {
+            "path": "assets/art_source/terrain/shore-n.png",
+            "sha256": "20542d78c3e88ef97e7f710287d5a9031a4e649ebbc79b7ac90af35f0faa7868",
+            "role": "reference/edit target; exact role in the preserved prompt"
+          },
+          {
+            "path": "implementation/sprites/generation/0008-shore-corner.prompt.txt",
+            "sha256": "eae58a1a8b5bc78aa9bdabfc960ac1c4166c46a1a5c3a5446bb9a14caffc6c40",
+            "role": "original full brief in revision chain"
+          }
+        ],
+        "generation_task": "0008",
+        "id": "terrain/shore_corner_se",
+        "input": "terrain/shore_corner_nw",
+        "operation": "rotate",
+        "quarter_turns": 2,
+        "animation": "terrain_shore_corner_se",
+        "frame": 0,
+        "output": "sprites/terrain/shore_corner_se.png",
+        "output_sha256": "f8832cc1c40693fee77317864e6e3a08cb5341a0b60b1c54700e38719a2dc764"
+      },
+      "native_bbox": [
+        14,
+        14,
+        16,
+        16
+      ],
+      "native_alpha_range": [
+        0,
+        255
+      ],
+      "native_color_count": 3,
+      "native_rgba_sha256": "881b627484cc3c33482967218447039d79cac5ad81c8a65605e583f7937f0383",
+      "output_png_sha256": "f8832cc1c40693fee77317864e6e3a08cb5341a0b60b1c54700e38719a2dc764"
+    },
+    {
+      "recipe": {
+        "owner": "raster",
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          16
+        ],
+        "palette": "tools/palette.py:COLOURS",
+        "seconds": 0.55,
+        "loop": false,
+        "prompt": "implementation/sprites/generation/0008-shore-corner-r1.prompt.txt",
+        "prompt_sha256": "1532368e09743007dc79950fe14cb73e99e1a4f98c95a5d71975152a436dfbf0",
+        "references": [
+          {
+            "path": "assets/art_source/terrain/candidates/shore-corner-nw-r0.png",
+            "sha256": "faae306271c832c809dc84dba4a85c976002b3278ee4dd128e1d0037732ecfbf",
+            "role": "reference/edit target; exact role in the preserved prompt"
+          },
+          {
+            "path": "assets/art_source/terrain/shore-n.png",
+            "sha256": "20542d78c3e88ef97e7f710287d5a9031a4e649ebbc79b7ac90af35f0faa7868",
+            "role": "reference/edit target; exact role in the preserved prompt"
+          },
+          {
+            "path": "implementation/sprites/generation/0008-shore-corner.prompt.txt",
+            "sha256": "eae58a1a8b5bc78aa9bdabfc960ac1c4166c46a1a5c3a5446bb9a14caffc6c40",
+            "role": "original full brief in revision chain"
+          }
+        ],
+        "generation_task": "0008",
+        "id": "terrain/shore_corner_sw",
+        "input": "terrain/shore_corner_nw",
+        "operation": "rotate",
+        "quarter_turns": 3,
+        "animation": "terrain_shore_corner_sw",
+        "frame": 0,
+        "output": "sprites/terrain/shore_corner_sw.png",
+        "output_sha256": "4c2946e14e84fa1412b4c0742c0e815f543005e247a93e0818fb0544bd282f70"
+      },
+      "native_bbox": [
+        0,
+        14,
+        2,
+        16
+      ],
+      "native_alpha_range": [
+        0,
+        255
+      ],
+      "native_color_count": 3,
+      "native_rgba_sha256": "a4f54a62354e8db4a406049213cf1f162834fc39c6b8de75f9cdb0d7bf6dde94",
+      "output_png_sha256": "4c2946e14e84fa1412b4c0742c0e815f543005e247a93e0818fb0544bd282f70"
+    }
+  ],
+  "ownership_counts": {
+    "raster": 120,
+    "ascii": 136
+  },
+  "runtime_png_count": 256,
+  "atlas_wh": [
+    256,
+    80
+  ],
+  "water_seconds": 0.55,
+  "cardinal_bits": {
+    "n": 1,
+    "e": 2,
+    "s": 4,
+    "w": 8
+  },
+  "corner_order": [
+    "nw",
+    "ne",
+    "se",
+    "sw"
+  ]
+}

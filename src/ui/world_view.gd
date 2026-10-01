@@ -109,6 +109,8 @@ var _shake_rng := RandomNumberGenerator.new()
 ## The edges, on their own layer over the terrain. A cell can only hold one
 ## tile, and an edge has to be able to sit on top of the tile it softens.
 var _edges: TileMapLayer
+## Independent caps allow simultaneous diagonal joins on one cell.
+var _corners: Array[TileMapLayer] = []
 @onready var _occupants: Node2D = $Occupants
 @onready var _camera: Camera2D = $Camera
 
@@ -168,6 +170,13 @@ func _ready() -> void:
 	_edges.tile_set = _terrain.tile_set
 	add_child(_edges)
 	move_child(_edges, 1)           # directly over the terrain
+	for corner in 4:
+		var layer := TileMapLayer.new()
+		layer.name = "TerrainCorner%d" % corner
+		layer.tile_set = _terrain.tile_set
+		add_child(layer)
+		move_child(layer, 2 + corner)
+		_corners.append(layer)
 
 	# Camera limits are the farm's edges, so panning can never show a gap or a
 	# repeated column - the engine does the clamping and no arithmetic here can
@@ -720,6 +729,8 @@ func _draw_terrain() -> void:
 	_terrain.clear()
 	if _edges != null:
 		_edges.clear()
+	for layer in _corners:
+		layer.clear()
 	var bytes: PackedByteArray = _state["terrain"]
 	for idx in Grid.CELLS:
 		var cell := Grid.cell(idx)
@@ -731,6 +742,11 @@ func _draw_terrain() -> void:
 		var at := _edge_tile(bytes, cell, int(bytes[idx]))
 		if at.x >= 0:
 			_edges.set_cell(cell, 0, at)
+		var corners := _corner_mask(bytes, cell, int(bytes[idx]))
+		var start := CORNER_SHORE_START if int(bytes[idx]) == Farm.Terrain.WATER else CORNER_EDGE_START
+		for corner in 4:
+			if corners & (1 << corner):
+				_corners[corner].set_cell(cell, 0, Vector2i(start + corner, ROW_BASE))
 
 
 ## The tile a cell of this terrain shows.
@@ -796,6 +812,27 @@ static func _edge_tile(bytes: PackedByteArray, cell: Vector2i,
 		if edged:
 			mask |= 1 << bit
 	return Vector2i(-1, -1) if mask == 0 else Vector2i(mask, row)
+
+
+## A diagonal cap fills only an exposed elbow: neither adjoining cardinal
+## side can already draw an edge. It reads terrain without changing any state.
+static func _corner_mask(bytes: PackedByteArray, cell: Vector2i, terrain: int) -> int:
+	if terrain == Farm.Terrain.GRASS:
+		return 0
+	var at := _edge_tile(bytes, cell, terrain)
+	var cardinal := maxi(0, at.x)
+	var mask := 0
+	for corner in 4:
+		if cardinal & CORNER_CARDINALS[corner]:
+			continue
+		var diagonal: Vector2i = cell + CORNER_NEIGHBOURS[corner]
+		if not Grid.in_bounds(diagonal):
+			continue
+		var theirs := int(bytes[Grid.index(diagonal)])
+		var touches := theirs != Farm.Terrain.WATER if terrain == Farm.Terrain.WATER else theirs == Farm.Terrain.GRASS
+		if touches:
+			mask |= 1 << corner
+	return mask
 
 
 func _refresh() -> void:
@@ -1009,6 +1046,11 @@ const ROW_GRASS := 2
 const ROW_EDGE := 3
 ## Sixteen composited shorelines, on the water side.
 const ROW_SHORE := 4
+## Unused row-zero slots hold clockwise NW/NE/SE/SW caps, from raw recipes.
+const CORNER_EDGE_START := 6
+const CORNER_SHORE_START := 10
+const CORNER_NEIGHBOURS: Array = [Vector2i(-1, -1), Vector2i(1, -1), Vector2i(1, 1), Vector2i(-1, 1)]
+const CORNER_CARDINALS: Array = [9, 3, 6, 12]
 
 ## How long one frame of the water lasts. Slow on purpose - a pond that
 ## shimmers is a pond that pulls the eye away from the thing being built on
@@ -1052,6 +1094,9 @@ func _build_terrain_tileset() -> TileSet:
 		source.create_tile(Vector2i(t, ROW_BASE))
 	for variant in 4:
 		source.create_tile(Vector2i(variant, ROW_GRASS))
+	for corner in 4:
+		source.create_tile(Vector2i(CORNER_EDGE_START + corner, ROW_BASE))
+		source.create_tile(Vector2i(CORNER_SHORE_START + corner, ROW_BASE))
 	for mask in range(1, 16):
 		source.create_tile(Vector2i(mask, ROW_EDGE))
 		source.create_tile(Vector2i(mask, ROW_SHORE))

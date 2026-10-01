@@ -167,3 +167,11 @@ Record pass/fail and a concrete reason for each criterion. A visually poor
 result is not done because the scripts passed. Allow at most three targeted
 generation revisions per asset in one task; if still wrong, keep the existing
 runtime art and record the specific unresolved cause before blocking the task.
+
+Task 0008's accepted water is a quiet flat blue field with two restrained
+horizontal ripple clusters: 98.0-98.4% native base coverage, one-pixel horizontal
+motion and a dim returning phase at 550 ms per frame. Keep the outer two native
+pixels calm in every phase. Banks are static, narrow green/earth bands with
+matching endpoint colors; grass fringes remain one row with a small attached
+tuft. Corner caps continue these exact profiles. Timber planks must stay readable
+across water without foam, bright borders or moving bank pixels.

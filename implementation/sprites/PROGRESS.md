@@ -486,3 +486,69 @@ station/crop/forest overlaps and broad night bloom remain later-family tasks.
 Queue after completion: 7 done, 13 todo, zero doing/blocked. Next is 0008,
 water/edges. One sprite task completed this cycle; the active /goal remains
 in progress and continues automatically toward the remaining backlog.
+
+## 0008 — Quiet water motion and connected banks/grass edges — 2026-10-01
+
+Completed three water frames, eight static cardinal sides and eight corner
+caps with built-in ImageGen sources. Six returned files yielded four accepted
+masters and two preserved rejected bank/corner candidates. One revision per
+bank/corner corrected native endpoint colors. A separate tiny grass-cap call
+returned no image; its recorded resolution cuts the exact one-pixel endpoint
+from the accepted fringe. No creative code painting or external API fallback.
+Exact prompts, actual returned paths, references and revision decisions are
+in `generation/0008-*` / `0008-generations.json`.
+
+Accepted masters in `assets/art_source/terrain/`: water-loop.png (source hash
+prefix a77b6a3c52605aa0), edge-n.png (44914576c7532ade), shore-n.png
+(20542d78c3e88ef9), shore-corner-nw.png (ba3bf79e8c14620c). Three equal
+724-square water crops share one scale; sides reduce full 1254-square sources;
+the bank cap uses measured (14,14,720,720). All native canvases/pivots remain
+16x16/(8,16). Optional named subsets select the existing palette's cool blues
+and matching green/earth contacts. Native water base coverage is 98.0-98.4%;
+all three phases are distinct, opaque and have identical calm borders.
+
+Added validated clockwise quarter-turn and bounded slice_canvas derivations.
+All 19 raster outputs and every atlas byte match their source rebuilds. Atlas
+stays 256x80 with existing rows and N1/E2/S4/W8 masks; eight caps use previously
+empty row-zero slots 6-13. WorldView's four corner layers fill only qualifying
+exposed diagonal joins, without changing cardinal selection or any map rule.
+Banks remain static while three production water phases run at 550 ms each.
+
+Ownership: 120 raster / 136 ASCII / zero player-sheet = 256 runtime PNGs.
+Against 97eb240, 12 existing PNGs changed and eight caps were added; the other
+236 PNGs, core/FARM_MAP, terrain enum, footprints/walkability/collision, balance,
+saves, original owner sheet, palette and PlayerFrames metadata are unchanged.
+Complete source/native hashes, recipe geometry and scope are recorded in
+`reviews/0008/measured-contract.json` and `runtime-delta.json`.
+
+Water fixtures exhaust 512 cardinal/diagonal/family combinations and map
+boundaries with full serialized-state comparisons. Headless: 2201 checks,
+zero failed; real renderer: 2288 checks, zero failed. All 16 masks over
+soil/path/floor/rock, shore phases, both families' corners, compound joins,
+jetty and unchanged farm use Main's day/dusk/night Relight. Frozen phase
+captures use a private TileSet; an actual automatic playback check restores
+the production TileSet and records A/B/C/A/B/C/A/B over 3.8 seconds, three
+unique phases and unchanged state (`water/automatic-loop.json`).
+
+Full verification PASS: 31 passed, zero skipped/failed in 211s using the user's
+Godot 4.7.1, including 105 scripts, 6609 headless assertions, 980 input cases,
+performance and Windows/Web exports. Sim `1961000123` and data `407837701`
+unchanged; raster check writes zero outputs. Fault/rebuild suite: 42 probes
+PASS, every deliberate corruption restored. New probes guard palette subsets,
+water-source availability, output/cap bytes, rotations, clipped slices, detached
+bank pixels and corner profiles. Logs and every visual criterion are in
+`reviews/0008/REVIEW.md` and its evidence folder.
+
+Opened all 50 actual 480x270 Godot captures at native/nearest-3x through
+`captures-00` to `captures-12`; original 3x pages are 2880x1728. Captures are
+under `implementation/shots/sprites/0008/` and `water/`. Also inspected accepted
+source alpha on light/dark/checker, native masks/sides/caps, atlas, all three
+8x8 repeated water patches and 0007/0008 noon/dusk/wave before-after sheets.
+Visual gates PASS: calm subtle water, matching banks, no gaps/popping/swimming
+pixels, joined convex/concave/compound contacts, readable timber jetty in all
+three lights and stable farm geometry. Crops, stations, forest overlap and broad
+night bloom remain scheduled later-family work.
+
+Queue after completion: 8 done, 12 todo, zero doing/blocked. Next is 0009,
+trees, rocks, resources and livestock. Exactly one sprite task completed this cycle; the active /goal continues
+automatically toward the remaining backlog.

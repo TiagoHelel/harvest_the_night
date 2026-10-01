@@ -30,7 +30,7 @@ func _run() -> void:
 		if arg.begins_with("--out="):
 			_folder = "res://" + arg.substr(6).trim_suffix("/") + "/"
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(_folder))
-	if args.has("--terrain"):
+	if args.has("--terrain") or args.has("--water"):
 		# Use Main's real relighting pipeline for all three material light states.
 		var relight := Relight.new()
 		relight.name = "Relight"
@@ -61,6 +61,11 @@ func _run() -> void:
 	player["facing"] = Player.SOUTH
 	player["action"] = {}
 	var actor := Entities.get_one(_state, enemy)
+	if args.has("--water"):
+		await _water_edges()
+		print("WATER SHOWCASE: %d checks, %d failed" % [_checks, _failed])
+		quit(1 if _failed > 0 else 0)
+		return
 	if args.has("--terrain"):
 		await _terrain_materials()
 		print("TERRAIN SHOWCASE: %d checks, %d failed" % [_checks, _failed])
@@ -203,6 +208,223 @@ func _terrain_materials() -> void:
 		expect(var_to_bytes(_state["terrain"]) == farm_before and var_to_bytes(_state) == before,
 			"Full farm keeps its authoritative terrain, occupants, positions and save fields")
 		await _shoot("farm_light%d" % lighting, "Unchanged FARM_MAP / day-dusk-night %d" % lighting)
+
+
+## Exhaustive cardinal/diagonal masks plus real shader and automatic pond motion.
+func _water_fixture(base: int, lighting: int) -> void:
+	_state = State.create(8008)
+	for key in ["occupants", "plots", "entities", "livestock", "crafting", "produced"]:
+		(_state[key] as Dictionary).clear()
+	_state["terrain"].fill(base)
+	_state["phase"] = Phases.NIGHT if lighting == 2 else Phases.DAY
+	_state["day_tick"] = GameData.DAY_TICKS - 1 if lighting == 1 else GameData.DAY_TICKS / 2
+	_state["tick"] = GameData.DUSK_AT_TICK / 2
+	_set_contact(_state["player"], Vector2i(24, 24))
+
+
+func _water_cards(diagonal: bool) -> void:
+	var bytes: PackedByteArray = _state["terrain"]
+	for mask in 16:
+		var center := Vector2i(10 + (mask % 4) * 6, 4 + (mask / 4) * 3)
+		for bit in 4:
+			var step: Vector2i = WorldView.CORNER_NEIGHBOURS[bit] if diagonal else WorldView.EDGE_NEIGHBOURS[bit]
+			if mask & (1 << bit):
+				bytes[Grid.index(center + step)] = Farm.Terrain.GRASS
+	_state["terrain"] = bytes
+
+
+func _water_phase(phase: int, preview: TileSet) -> void:
+	_world._terrain.tile_set = preview
+	for idx in Grid.CELLS:
+		if int(_state["terrain"][idx]) == Farm.Terrain.WATER:
+			_world._terrain.set_cell(Grid.cell(idx), 0, Vector2i(phase, WorldView.ROW_WATER))
+
+
+func _water_check_cards(diagonal: bool, base: int) -> void:
+	var bytes: PackedByteArray = _state["terrain"]
+	for mask in 16:
+		var center := Vector2i(10 + (mask % 4) * 6, 4 + (mask / 4) * 3)
+		if diagonal:
+			expect(WorldView._corner_mask(bytes, center, base) == mask, "All sixteen diagonal corner combinations select exact cap bits")
+			expect(_world._edges.get_cell_source_id(center) == -1, "Diagonal-only join does not invent a cardinal edge")
+			for bit in 4:
+				var layer: TileMapLayer = _world._corners[bit]
+				var wanted := Vector2i((WorldView.CORNER_SHORE_START if base == Farm.Terrain.WATER else WorldView.CORNER_EDGE_START) + bit, 0)
+				expect(layer.get_cell_atlas_coords(center) == wanted if mask & (1 << bit) else layer.get_cell_source_id(center) == -1,
+					"Actual corner layers render exactly the requested diagonal caps")
+		else:
+			var wanted := Vector2i(mask, WorldView.ROW_SHORE if base == Farm.Terrain.WATER else WorldView.ROW_EDGE)
+			expect(_world._edges.get_cell_atlas_coords(center) == wanted if mask else _world._edges.get_cell_source_id(center) == -1,
+				"Actual edge layer shows cardinal mask zero through fifteen")
+			# All diagonals remain base material, so none may draw a cap.
+			expect(WorldView._corner_mask(bytes, center, base) == 0, "Cardinal card has no false diagonal cap")
+
+
+func _water_compound() -> void:
+	# Contiguous concave/convex turns, narrow channels, a T join and diagonal
+	# contacts, alongside a wooden jetty. Fixture coordinates only.
+	var rows := [
+		"ggggggggggwwwwwwwwww",
+		"gggwwwwgggwwggwwwwww",
+		"ggwwggwgggwwggwwwwww",
+		"ggwgggggggwwwwwwwwww",
+		"ggwwggwgggwwwwwwwggw",
+		"gggwwwwgggwwwwwwggww",
+		"ggggggggggwwwwwggwww",
+		"ggggggffffwwwwwwwwww",
+		"ggggggffffwwwwwwwwww",
+		"ggggggffffwwwwwwwwww",
+	]
+	var bytes: PackedByteArray = _state["terrain"]
+	for y in rows.size():
+		for x in rows[y].length():
+			var material := Farm.Terrain.WATER
+			if rows[y][x] == "g":
+				material = Farm.Terrain.GRASS
+			elif rows[y][x] == "f":
+				material = Farm.Terrain.FLOOR
+			bytes[Grid.index(Vector2i(10 + x, 4 + y))] = material
+	_state["terrain"] = bytes
+
+
+func _water_edges() -> void:
+	var view: PlayerView = _world.get_node("Occupants/PlayerView")
+	view.set_process(false)
+	_world.set_process(false)
+	view.visible = false
+	expect(_world._relight != null, "Water uses Main's actual day/dusk/night shader")
+	var production := _world._terrain.tile_set
+	var source: TileSetAtlasSource = production.get_source(0)
+	var origin := Vector2i(0, WorldView.ROW_WATER)
+	expect(source.get_tile_animation_frames_count(origin) == 3, "Production pond uses the three accepted phases")
+	for frame in 3:
+		expect(is_equal_approx(source.get_tile_animation_frame_duration(origin, frame), 0.55), "Production water timing remains 550ms per phase")
+	for corner in 4:
+		expect(source.has_tile(Vector2i(WorldView.CORNER_EDGE_START + corner, 0)) and source.has_tile(Vector2i(WorldView.CORNER_SHORE_START + corner, 0)),
+			"Production atlas registers every source-owned grass and bank cap")
+	# A private fixture copy freezes exact atlas phases for comparable captures.
+	# Production retains normal automatic animation; edges stay static.
+	var preview: TileSet = production.duplicate(true)
+	var frozen: TileSetAtlasSource = preview.get_source(0)
+	frozen.set_tile_animation_frames_count(origin, 1)
+	frozen.create_tile(Vector2i(1, WorldView.ROW_WATER))
+	frozen.create_tile(Vector2i(2, WorldView.ROW_WATER))
+	# Exhaust every 4-cardinal x 4-diagonal case for both material families.
+	for base in [Farm.Terrain.SOIL, Farm.Terrain.WATER]:
+		for cardinal in 16:
+			for diagonal in 16:
+				_water_fixture(base, 0)
+				var cell := Vector2i(20, 9)
+				for bit in 4:
+					if cardinal & (1 << bit):
+						_state["terrain"][Grid.index(cell + WorldView.EDGE_NEIGHBOURS[bit])] = Farm.Terrain.GRASS
+					if diagonal & (1 << bit):
+						_state["terrain"][Grid.index(cell + WorldView.CORNER_NEIGHBOURS[bit])] = Farm.Terrain.GRASS
+				var before := var_to_bytes(_state)
+				var expected := 0
+				for bit in 4:
+					if diagonal & (1 << bit) and not (cardinal & WorldView.CORNER_CARDINALS[bit]):
+						expected |= 1 << bit
+				expect(WorldView._corner_mask(_state["terrain"], cell, base) == expected, "Cardinal joins suppress only their adjoining diagonal caps")
+				expect(var_to_bytes(_state) == before, "Corner selection cannot mutate any state/save field")
+		_water_fixture(base, 0)
+		for cell in [Vector2i(0, 0), Vector2i(39, 0), Vector2i(0, 17), Vector2i(39, 17)]:
+			expect(WorldView._corner_mask(_state["terrain"], cell, base) == 0, "Map boundaries do not invent caps outside the unchanged grid")
+	for lighting in 3:
+		for base in [Farm.Terrain.SOIL, Farm.Terrain.PATH, Farm.Terrain.FLOOR, Farm.Terrain.ROCK]:
+			_water_fixture(base, lighting)
+			_water_cards(false)
+			var before := var_to_bytes(_state)
+			await _reaction_settle(view)
+			_world.look_at_cell(Vector2i(20, 9))
+			_water_check_cards(false, base)
+			await _shoot("edges_material%d_light%d" % [base, lighting], "N1 E2 S4 W8 / masks 0-15 row-major / material%d / light%d" % [base, lighting])
+			expect(var_to_bytes(_state) == before, "Land transition fixture cannot change simulation or save fields")
+		_water_fixture(Farm.Terrain.WATER, lighting)
+		_water_cards(false)
+		var before := var_to_bytes(_state)
+		await _reaction_settle(view)
+		_world.look_at_cell(Vector2i(20, 9))
+		_water_check_cards(false, Farm.Terrain.WATER)
+		var edges_before := _world._edges.get_used_cells()
+		for frame in 3:
+			_water_phase(frame, preview)
+			await _shoot("shore_masks_light%d_phase%d" % [lighting, frame], "Banks / masks0-15 row-major / phase%d / light%d" % [frame, lighting])
+			expect(_world._edges.get_used_cells() == edges_before and var_to_bytes(_state) == before, "Water phase cannot move shore cells or mutate simulation")
+		for base in [Farm.Terrain.SOIL, Farm.Terrain.WATER]:
+			_water_fixture(base, lighting)
+			_water_cards(true)
+			before = var_to_bytes(_state)
+			await _reaction_settle(view)
+			_world.look_at_cell(Vector2i(20, 9))
+			if base == Farm.Terrain.WATER:
+				_water_phase(0, preview)
+			_water_check_cards(true, base)
+			await _shoot("corners_material%d_light%d" % [base, lighting], "NW1 NE2 SE4 SW8 / diagonal masks0-15 / light%d" % lighting)
+			expect(var_to_bytes(_state) == before, "Diagonal cap rendering cannot change serialized state")
+		_water_fixture(Farm.Terrain.WATER, lighting)
+		_water_compound()
+		before = var_to_bytes(_state)
+		await _reaction_settle(view)
+		_world.look_at_cell(Vector2i(20, 9))
+		var edges := _world._edges.get_used_cells()
+		var caps := []
+		for layer in _world._corners:
+			caps.append(layer.get_used_cells())
+		for frame in 3:
+			_water_phase(frame, preview)
+			await _shoot("compound_light%d_phase%d" % [lighting, frame], "Joined convex/concave banks, channels, diagonal contacts, timber jetty / phase%d / light%d" % [frame, lighting])
+			expect(_world._edges.get_used_cells() == edges and var_to_bytes(_state) == before, "Compound banks stay fixed while the water alone moves")
+			for bit in 4:
+				expect(_world._corners[bit].get_used_cells() == caps[bit], "Compound corner pixels do not swim between water frames")
+		_world._terrain.tile_set = production
+		_state = State.create(8008)
+		_state["phase"] = Phases.NIGHT if lighting == 2 else Phases.DAY
+		_state["day_tick"] = GameData.DAY_TICKS - 1 if lighting == 1 else GameData.DAY_TICKS / 2
+		before = var_to_bytes(_state)
+		view.visible = true
+		await _reaction_settle(view)
+		await _shoot("farm_light%d" % lighting, "Unchanged FARM_MAP / actual jetty / light%d" % lighting)
+		expect(var_to_bytes(_state) == before, "Water rendering preserves the real farm's full serialized state")
+		view.visible = false
+	await _water_automatic(view, production)
+	view.visible = true
+
+
+func _water_automatic(view: PlayerView, production: TileSet) -> void:
+	_world._terrain.tile_set = production
+	_water_fixture(Farm.Terrain.WATER, 0)
+	var before := var_to_bytes(_state)
+	await _reaction_settle(view)
+	_world.look_at_cell(Vector2i(20, 9))
+	expect(_world._terrain.tile_set == production, "Automatic playback restores untouched production TileSet")
+	if not _capture:
+		return
+	_caption.text = "Actual automatic water loop / three550ms phases / stationary camera and state"
+	var seen := {}
+	var trace := []
+	var previous := -1
+	var until := Time.get_ticks_msec() + 3800
+	while Time.get_ticks_msec() < until:
+		await process_frame
+		await RenderingServer.frame_post_draw
+		var image := root.get_texture().get_image()
+		var point: Vector2 = _world._terrain.get_global_transform_with_canvas() * Vector2(20 * 16, 9 * 16)
+		var patch := image.get_region(Rect2i(Vector2i(point), Vector2i(16,16)))
+		var signature := hash(patch.get_data())
+		if signature == previous:
+			continue
+		previous = signature
+		seen[signature] = true
+		trace.append(signature)
+		if trace.size() <= 6:
+			expect(image.save_png(_folder + "automatic_loop_%02d.png" % (trace.size()-1)) == OK, "Actual animated viewport phase saved")
+	expect(seen.size() == 3 and trace.size() >= 6, "Actual renderer shows three distinct pond phases through two loops")
+	if trace.size() >= 6:
+		expect(trace[0] == trace[3] and trace[1] == trace[4] and trace[2] == trace[5], "Real automatic water phase order closes without a direction jump")
+	expect(var_to_bytes(_state) == before, "Automatic pond motion cannot modify simulation/save fields")
+	var file := FileAccess.open(_folder + "automatic-loop.json", FileAccess.WRITE)
+	file.store_string(JSON.stringify({"unique_rendered_phases":seen.size(),"phase_trace":trace,"seconds":3.8,"serialized_state_unchanged":var_to_bytes(_state)==before}, "\t"))
 
 
 func _add_house(corner: Vector2i) -> void:

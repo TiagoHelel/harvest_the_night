@@ -1,0 +1,13 @@
+{
+  "id": "edge-corner",
+  "tool": "built-in ImageGen",
+  "revision": 0,
+  "prompt_text": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm that becomes a fortress against zombies at night.\nPrimary request: terrain/edge_corner_nw, ONE tiny north-west grass corner overlay for a diagonal grass-to-soil/path join. New isolated material source.\nInput images: Image 1 accepted north grass-fringe reference; Image 2 accepted quiet grass color reference. No edit target.\nStyle/medium: coherent hand-crafted pixel art, deliberate solid joined clusters, restrained texture and clean forms.\nComposition/framing: orthographic TOP-DOWN square material canvas. Final native canvas 16x16, pivot8,16. Full square source stays almost completely empty.\nLighting/mood: flat neutral daytime grass, no directional highlights or baked shadows. This corner is rotated to all four orientations downstream.\nColor palette: ONE flat grass green #6a9646, matching the first row of the accepted grass fringe.\nScene/backdrop: genuinely transparent outside the tiny corner. No painted checkerboard or background.\nConstraints: no labels, text, watermark, UI, ground scenery, soil backing, border, other object or diagonal isometric block.\nAvoid: smooth painting, gradients, blur, outlines, texture noise, detached pixels, flowers, enlarging the object.\n\nWATER/TRANSITION brief: one named grass fringe CORNER, NORTH-WEST. It fills only the little inside elbow where GRASS touches by the NW diagonal while the two orthogonal neighbors are soil/path. No disconnected or swimming pixels.\n\nExact native contract: a tiny solid green pixel-art corner cap anchored exactly at the TOP LEFT of the full square canvas, touching both outer boundaries. Width and height only ONE to TWO final native pixels, about 6-10% of source canvas. It must connect to the accepted ONE-pixel-thick grass edges: each incoming straight boundary is green at only its first pixel. Prefer a minimal one-pixel corner cap; the entire remaining canvas is true transparency. Do NOT draw full horizontal/vertical grass strips, an L border along the whole canvas, or a centered grass patch. The canvas must not zoom/crop around the tiny green cap.",
+  "references": [
+    "assets/art_source/terrain/edge-n.png",
+    "assets/art_source/terrain/grass.png"
+  ],
+  "result": "No returned image: output moderation_blocked, category other",
+  "request_id": "1dce3a0d-6c6c-48a1-b0e6-3d21c8134dc3",
+  "resolution": "Use a deterministic one-pixel endpoint slice of the accepted raster grass-fringe master, exactly matching its native incoming profile; no invented painting or runtime fallback."
+}

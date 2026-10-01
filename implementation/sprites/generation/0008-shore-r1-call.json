@@ -1,0 +1,13 @@
+{
+  "id": "shore-r1",
+  "tool": "built-in ImageGen",
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-c668bde9-a362-4267-9717-68e7df344f89.png",
+  "source": "assets/art_source/terrain/shore-n.png",
+  "references": [
+    "assets/art_source/terrain/candidates/shore-n-r0.png",
+    "assets/art_source/terrain/grass.png"
+  ],
+  "prompt_text": "Use case: precise-object-edit\nAsset type: production raster north-bank overlay for HARVEST THE NIGHT.\nInput images: Image 1 EDIT TARGET, rejected north-bank candidate; Image 2 accepted grass color/material reference only.\nPrimary request: correct ONLY the nonmatching left/right endpoint profile of this static narrow north-bank overlay.\nFailure measured after nearest reduction to 16x16 and project palette: the left and right bank endpoints differ in one native color, leaving a repeated join seam.\nCorrection: make the leftmost and rightmost QUARTER of the canvas identical, calm horizontal layer bands with precisely the same thickness and colors: top grass #6a9646, next warm earth #96704a/#7a5838, bottom restrained contact #2b5480. No dots, tufts, varying depth or texture in either end quarter. Continue each layer flat to both outer boundaries. Keep the center's existing shallow shoreline character, but join it continuously to those calm end bands.\nPreserve the original full square canvas and narrow band at the very TOP, its total depth about three native pixels, camera, muted palette, genuine transparency below the edge, and flat top-down material. Do not center/enlarge the band, add scenery, water below it, labels, foam, glow, shadow, white/checkerboard pixels or detached speckles. No changes to bank placement or animation; it stays static. This edge will rotate into all four cardinal orientations and must connect without gaps. Native target remains 16x16, pivot 8,16.",
+  "revision": 1,
+  "decision": "Accepted after measured source alpha, native/3x masks and caps, repeated water patches, all 50 actual day/dusk/night captures and two real-render water loops; source-owned geometry and static contacts pass."
+}

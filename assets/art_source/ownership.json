@@ -810,20 +810,36 @@
       "owner": "ascii"
     },
     {
+      "output": "sprites/terrain/edge_corner_ne.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/terrain/edge_corner_nw.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/terrain/edge_corner_se.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/terrain/edge_corner_sw.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/terrain/edge_e.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/terrain/edge_n.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/terrain/edge_s.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/terrain/edge_w.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/terrain/floor.png",
@@ -854,20 +870,36 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/terrain/shore_corner_ne.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/terrain/shore_corner_nw.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/terrain/shore_corner_se.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/terrain/shore_corner_sw.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/terrain/shore_e.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/terrain/shore_n.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/terrain/shore_s.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/terrain/shore_w.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/terrain/soil.png",
@@ -875,15 +907,15 @@
     },
     {
       "output": "sprites/terrain/water.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/terrain/water_b.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/terrain/water_c.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/ui/button_disabled.png",

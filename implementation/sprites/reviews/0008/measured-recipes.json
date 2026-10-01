@@ -1,0 +1,168 @@
+[
+  {
+    "id": "terrain/water",
+    "source": "assets/art_source/terrain/water-loop.png",
+    "crop_xywh": [
+      0,
+      0,
+      724,
+      724
+    ],
+    "canvas_wh": [
+      16,
+      16
+    ],
+    "pivot_xy": [
+      8,
+      16
+    ],
+    "content_anchor_xy": [
+      8,
+      16
+    ],
+    "content_scale": 0.022099447513812154,
+    "alpha_threshold": 128,
+    "palette_keys": [
+      "water_dark",
+      "water",
+      "water_light",
+      "cloth"
+    ]
+  },
+  {
+    "id": "terrain/water_b",
+    "source": "assets/art_source/terrain/water-loop.png",
+    "crop_xywh": [
+      724,
+      0,
+      724,
+      724
+    ],
+    "canvas_wh": [
+      16,
+      16
+    ],
+    "pivot_xy": [
+      8,
+      16
+    ],
+    "content_anchor_xy": [
+      8,
+      16
+    ],
+    "content_scale": 0.022099447513812154,
+    "alpha_threshold": 128,
+    "palette_keys": [
+      "water_dark",
+      "water",
+      "water_light",
+      "cloth"
+    ]
+  },
+  {
+    "id": "terrain/water_c",
+    "source": "assets/art_source/terrain/water-loop.png",
+    "crop_xywh": [
+      1448,
+      0,
+      724,
+      724
+    ],
+    "canvas_wh": [
+      16,
+      16
+    ],
+    "pivot_xy": [
+      8,
+      16
+    ],
+    "content_anchor_xy": [
+      8,
+      16
+    ],
+    "content_scale": 0.022099447513812154,
+    "alpha_threshold": 128,
+    "palette_keys": [
+      "water_dark",
+      "water",
+      "water_light",
+      "cloth"
+    ]
+  },
+  {
+    "id": "terrain/edge_n",
+    "source": "assets/art_source/terrain/edge-n.png",
+    "crop_xywh": [
+      0,
+      0,
+      1254,
+      1254
+    ],
+    "canvas_wh": [
+      16,
+      16
+    ],
+    "pivot_xy": [
+      8,
+      16
+    ],
+    "content_anchor_xy": [
+      8,
+      16
+    ],
+    "content_scale": 0.012759170653907496,
+    "alpha_threshold": 128
+  },
+  {
+    "id": "terrain/shore_n",
+    "source": "assets/art_source/terrain/shore-n.png",
+    "crop_xywh": [
+      0,
+      0,
+      1254,
+      1254
+    ],
+    "canvas_wh": [
+      16,
+      16
+    ],
+    "pivot_xy": [
+      8,
+      16
+    ],
+    "content_anchor_xy": [
+      8,
+      16
+    ],
+    "content_scale": 0.012759170653907496,
+    "alpha_threshold": 128
+  },
+  {
+    "id": "terrain/shore_corner_nw",
+    "source": "assets/art_source/terrain/shore-corner-nw.png",
+    "crop_xywh": [
+      14,
+      14,
+      720,
+      720
+    ],
+    "canvas_wh": [
+      16,
+      16
+    ],
+    "pivot_xy": [
+      8,
+      16
+    ],
+    "content_anchor_xy": [
+      8,
+      16
+    ],
+    "content_scale": 0.022222222222222223,
+    "alpha_threshold": 128,
+    "palette_keys": [
+      "leaf_light",
+      "wood_light"
+    ]
+  }
+]

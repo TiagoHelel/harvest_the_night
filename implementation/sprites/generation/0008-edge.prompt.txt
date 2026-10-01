@@ -1,0 +1,15 @@
+Use case: stylized-concept
+Asset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm that becomes a fortress against zombies at night.
+Primary request: terrain/edge_n, one narrow NORTH-facing grass-to-soil/path transition overlay. This is a new isolated tile overlay.
+Input images: Image 1 accepted grass material reference; Image 2 approved neutral-day world style reference. These are references, not edit targets.
+Style/medium: hand-crafted pixel art with deliberate joined pixel clusters, colored material planes, restrained texture and clean forms.
+Composition/framing: orthographic top-down rectangular tile, full square source canvas corresponding to final 16x16 pixels, pivot 8,16. No perspective block.
+Lighting/mood: neutral warm daytime material. Flat top-view grass with no directional specular shading; this edge will be rotated clockwise for east/south/west, so no cast shadows.
+Color palette: accepted grass green #6a9646 with extremely sparse #4e7a35 grass tuft tips. The top boundary and left/right endpoints are flat #6a9646.
+Scene/backdrop: TRUE TRANSPARENT outside a narrow grass band touching the TOP of the canvas.
+Constraints: no labels, text, watermark, UI, scenery, ground shadow, objects or underlying soil/path.
+Avoid: smooth painting, blur, gradients, noisy grass blades, flowers, thick outlines, diamond isometric tiles and tiny details.
+
+WATER/TRANSITION brief: Produce ONE named grass fringe edge, NORTH N=1; runtime rotates the same accepted flat material for E=2/S=4/W=8 and composites all 16 cardinal masks. Warm farm earth is the underlying separate material, not baked here. True transparency outside the overlay; no shore sliding or swimming pixels.
+
+Exact native contract: The full top TWO pixel rows, about 12.5% of the square height, are an uninterrupted narrow band of flat #6a9646 grass running edge-to-edge. Two or three small joined tufts protrude down by only ONE extra native pixel near the CENTER half of this band; no disconnected speckles. Left/right end quarters have exactly the same two-pixel thickness, no tufts there, so neighboring segments connect. Everything below the 3-pixel depth (81.25% of canvas) is genuinely transparent. The overlay canvas must remain square with most of it empty; do not zoom the band or center it vertically. No dirt backing, no bottom border, no white/checkerboard drawn into the image.

@@ -1,0 +1,210 @@
+{
+  "captures": [
+    {
+      "path": "implementation/shots/sprites/0008/water/automatic_loop_00.png",
+      "sha256": "bec848bbef3ab93b238f59dd38c36647e78de44aa23585a600fed3ea45e9b7cf"
+    },
+    {
+      "path": "implementation/shots/sprites/0008/water/automatic_loop_01.png",
+      "sha256": "9869147da9db6a23e1b3d98c0774e1f0b9ba859c6035abfa7a05b75dcfc827a4"
+    },
+    {
+      "path": "implementation/shots/sprites/0008/water/automatic_loop_02.png",
+      "sha256": "399c9fcf6609c22b80c875ae0f2a44ee35b75003eb86aa4d711d22c940f0b238"
+    },
+    {
+      "path": "implementation/shots/sprites/0008/water/automatic_loop_03.png",
+      "sha256": "bec848bbef3ab93b238f59dd38c36647e78de44aa23585a600fed3ea45e9b7cf"
+    },
+    {
+      "path": "implementation/shots/sprites/0008/water/automatic_loop_04.png",
+      "sha256": "9869147da9db6a23e1b3d98c0774e1f0b9ba859c6035abfa7a05b75dcfc827a4"
+    },
+    {
+      "path": "implementation/shots/sprites/0008/water/automatic_loop_05.png",
+      "sha256": "399c9fcf6609c22b80c875ae0f2a44ee35b75003eb86aa4d711d22c940f0b238"
+    },
+    {
+      "path": "implementation/shots/sprites/0008/water/compound_light0_phase0.png",
+      "sha256": "33237106be2b6cad929aeb4c919eafc5ee14199143dca0e6116ad380bfd45077"
+    },
+    {
+      "path": "implementation/shots/sprites/0008/water/compound_light0_phase1.png",
+      "sha256": "251aaead8fae04aac6aa8da86bb6571f558e2b15534b317521d4c96bcf82ca93"
+    },
+    {
+      "path": "implementation/shots/sprites/0008/water/compound_light0_phase2.png",
+      "sha256": "44b9553b1d1c7c1956ca97e37ad461d381c8203f8f5296976007262ea4f535d7"
+    },
+    {
+      "path": "implementation/shots/sprites/0008/water/compound_light1_phase0.png",
+      "sha256": "98c12a48bacf2a47c7e2b0bb62a24e8a7e36c8f48c0b4f4e0a5c50a528832a67"
+    },
+    {
+      "path": "implementation/shots/sprites/0008/water/compound_light1_phase1.png",
+      "sha256": "a199ff716d607165c202d8281b25ae3e4d3f8bd38c5e69f490715f4d938fdcc3"
+    },
+    {
+      "path": "implementation/shots/sprites/0008/water/compound_light1_phase2.png",
+      "sha256": "59d08c11f0501235d8c533e9b439678086494cf16ea7c3b3b17d10e6da514f7e"
+    },
+    {
+      "path": "implementation/shots/sprites/0008/water/compound_light2_phase0.png",
+      "sha256": "1beae69ce9659f3d698bb89c32889871a6212f0b33b7fb13a9eec9997d4f98a0"
+    },
+    {
+      "path": "implementation/shots/sprites/0008/water/compound_light2_phase1.png",
+      "sha256": "c89c3a6674ec3a00a357e3f05a599eb67c0e8c9af58dedc8487b5a3ec43d8da2"
+    },
+    {
+      "path": "implementation/shots/sprites/0008/water/compound_light2_phase2.png",
+      "sha256": "e0b0ef7482fbbf880580119edd2ee368fd8eae42e607090883e7cf2012e60c52"
+    },
+    {
+      "path": "implementation/shots/sprites/0008/water/corners_material1_light0.png",
+      "sha256": "cd678fb478035196629b1be671fba781d5160d14ef5953333fe489101e0eb8f8"
+    },
+    {
+      "path": "implementation/shots/sprites/0008/water/corners_material1_light1.png",
+      "sha256": "c39d57e7bb60afd916db2e5c9b503407ce2bd1ef77a30498eee055e80fd06d4d"
+    },
+    {
+      "path": "implementation/shots/sprites/0008/water/corners_material1_light2.png",
+      "sha256": "53e15c00d3e686976af10cdb09344c4b05da6137bd9ed9e4a5f680d6ffb13459"
+    },
+    {
+      "path": "implementation/shots/sprites/0008/water/corners_material2_light0.png",
+      "sha256": "8939cd436cd3c91b2cd2e2117119f31d7b0ee57bff8232c0ad15ec6c114cc5d8"
+    },
+    {
+      "path": "implementation/shots/sprites/0008/water/corners_material2_light1.png",
+      "sha256": "614cbf5afb0f380bef54709e96af92d440fe9ef832969cbabd0e9ee94814c238"
+    },
+    {
+      "path": "implementation/shots/sprites/0008/water/corners_material2_light2.png",
+      "sha256": "54da8c68f3ed334ee0f9630b23b7e979a3faab08afa49a304881597e18eb509a"
+    },
+    {
+      "path": "implementation/shots/sprites/0008/water/edges_material1_light0.png",
+      "sha256": "a98442a4e6b28e4bbc23cc6fd50fdf5d75822e60d357df639916fbf93867966a"
+    },
+    {
+      "path": "implementation/shots/sprites/0008/water/edges_material1_light1.png",
+      "sha256": "112898328730362a431ec97d859f1a5b5c39e0a1aa12058e37c1129cab40e5ca"
+    },
+    {
+      "path": "implementation/shots/sprites/0008/water/edges_material1_light2.png",
+      "sha256": "51eb8013a8e86befbb4c2a932df1205da7083058db98424ef9abb97000b43fa9"
+    },
+    {
+      "path": "implementation/shots/sprites/0008/water/edges_material3_light0.png",
+      "sha256": "0ef69f6a1df17212d3bfa9b862d63c20d99c3da57597ac5023e1b53411b3aa2a"
+    },
+    {
+      "path": "implementation/shots/sprites/0008/water/edges_material3_light1.png",
+      "sha256": "00380fe0d4b9e07770332a13aa8c9a4004e29edabbe88f3af37f056a6b832416"
+    },
+    {
+      "path": "implementation/shots/sprites/0008/water/edges_material3_light2.png",
+      "sha256": "60b5ca0846bf0895806eb9c23989812e9474c27f23a3e9ab36eb86b247f7788d"
+    },
+    {
+      "path": "implementation/shots/sprites/0008/water/edges_material4_light0.png",
+      "sha256": "35148d7339e95cee4aabc2816f8089339e8b7b510a29df84b8f4d7596b4141b8"
+    },
+    {
+      "path": "implementation/shots/sprites/0008/water/edges_material4_light1.png",
+      "sha256": "a37b52472f1184de99cb06b1d411dfc1dbe3fcb1d181713320792b46aae411d0"
+    },
+    {
+      "path": "implementation/shots/sprites/0008/water/edges_material4_light2.png",
+      "sha256": "88d3988fca15c5a961672efde1788bff8b68dd98e57886fd3b39bffe8a506c21"
+    },
+    {
+      "path": "implementation/shots/sprites/0008/water/edges_material5_light0.png",
+      "sha256": "67604fdee4d791e69932613f1b157d57d24b8e83248f6893a04ecd78ada632e8"
+    },
+    {
+      "path": "implementation/shots/sprites/0008/water/edges_material5_light1.png",
+      "sha256": "3f2176cb553c46081de93d9884745a77f3e51ef0a9cf157aca1494cd17b32eac"
+    },
+    {
+      "path": "implementation/shots/sprites/0008/water/edges_material5_light2.png",
+      "sha256": "b411adbc38e7eb0f60c150845b5862a899631f5558f0c86c53b698db6b3ed8f1"
+    },
+    {
+      "path": "implementation/shots/sprites/0008/water/farm_light0.png",
+      "sha256": "59507c6b45527d3ac1448133c8ad8f9d37b6f610305fc79f4953bc2b4918adcb"
+    },
+    {
+      "path": "implementation/shots/sprites/0008/water/farm_light1.png",
+      "sha256": "ff572ae81f5019a7ae626617735b686a6403c016beb3bf681026fbdb5b2d09b6"
+    },
+    {
+      "path": "implementation/shots/sprites/0008/water/farm_light2.png",
+      "sha256": "bf9f394facb4304e1b9d1e17e9db143c136439dbca8d4b872b7f2f679ea689d4"
+    },
+    {
+      "path": "implementation/shots/sprites/0008/water/shore_masks_light0_phase0.png",
+      "sha256": "3f79c1c2029fb5594035ef40c7f89252b4975bdaabe3beac174b0e5b3bf8e040"
+    },
+    {
+      "path": "implementation/shots/sprites/0008/water/shore_masks_light0_phase1.png",
+      "sha256": "5bb54936fae4cb34fb13f14542d76d2be00e00a582463dd84b3207a0346d6528"
+    },
+    {
+      "path": "implementation/shots/sprites/0008/water/shore_masks_light0_phase2.png",
+      "sha256": "0658cc69d5f036e344cac9c3075dac17d428885edc73aeb32751623b8d90f1ff"
+    },
+    {
+      "path": "implementation/shots/sprites/0008/water/shore_masks_light1_phase0.png",
+      "sha256": "ce0a8be44dca59346770ce9851fbcb0a72224ae853d362bfeb6a2893a3ee1462"
+    },
+    {
+      "path": "implementation/shots/sprites/0008/water/shore_masks_light1_phase1.png",
+      "sha256": "450c619bf3d4f8edb91d1aa70b69443c231a696efc65082f8831a3cd20912902"
+    },
+    {
+      "path": "implementation/shots/sprites/0008/water/shore_masks_light1_phase2.png",
+      "sha256": "7e3154cf4201d5b1f61ac528148416fc5561f99510946adaef25109f5c8efd97"
+    },
+    {
+      "path": "implementation/shots/sprites/0008/water/shore_masks_light2_phase0.png",
+      "sha256": "74be7f205f676bd46ca33a54eba98cfd51569e1a05f6d9feb55671459be7b283"
+    },
+    {
+      "path": "implementation/shots/sprites/0008/water/shore_masks_light2_phase1.png",
+      "sha256": "dd2c7157fba8f12d6e91f2560bc308538e25fa8283dc2de529e2a483bf2ce64e"
+    },
+    {
+      "path": "implementation/shots/sprites/0008/water/shore_masks_light2_phase2.png",
+      "sha256": "6eeb05e13bcc710baee8d498585cef36b129484fa29a202ff97cece0facbf085"
+    },
+    {
+      "path": "implementation/shots/sprites/0008/dusk.png",
+      "sha256": "869c536333d086945fddd667148542ef443e2dc138231c3446d6b8a42d573f8c"
+    },
+    {
+      "path": "implementation/shots/sprites/0008/noon.png",
+      "sha256": "e0ef267de15321873acc2f5a9a3cbc1153f976384aa30dec78dd721b42cccbbf"
+    },
+    {
+      "path": "implementation/shots/sprites/0008/result.png",
+      "sha256": "c39dfc043b71473dbdde4fac86cc6487b18053a9616dc840855e54e22664bb13"
+    },
+    {
+      "path": "implementation/shots/sprites/0008/tech.png",
+      "sha256": "5e0e474ead92fba0437ef53035927dc2331a1eaa41aeff70c180f5941dc4ccec"
+    },
+    {
+      "path": "implementation/shots/sprites/0008/wave.png",
+      "sha256": "eaba001c2603dd390d16b4eebfb85f3b298febfb7a8197799ecc9e77a7f85200"
+    }
+  ],
+  "capture_pages": 13,
+  "native_size": [
+    480,
+    270
+  ],
+  "nearest_scale": 3
+}

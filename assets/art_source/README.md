@@ -140,3 +140,26 @@ proves full native opacity, exact opposing/mixed grass borders, accepted tile
 bytes and all 80 atlas cells. Existing water and both edge rows remain unchanged
 until task 0008. `tools/show_art.py --terrain --check` covers production material
 selection and native actors under Main's day/dusk/night relighting pipeline.
+
+Task 0008 completes water and transitions with four accepted masters:
+`terrain/water-loop.png`, `edge-n.png`, `shore-n.png` and `shore-corner-nw.png`.
+Six returned ImageGen files include two preserved rejected bank/corner candidates;
+exact prompts, references, revisions and returned-file hashes are in
+`implementation/sprites/generation/0008-*`. A separate tiny grass-cap generation
+returned no image. Its recorded resolution cuts the exact one-pixel endpoint of
+the accepted grass fringe onto the native canvas; it invents no replacement art.
+
+The three water crops share one 724-square scale, 16x16 canvas and (8,16) pivot.
+Sides and corner caps use explicit clockwise quarter-turn recipes. The optional
+`palette_keys` selects named colors from the existing project palette; water's
+four approved cool blues preserve the dim returning phase. No palette was added.
+`slice_canvas` validates its crop and placement and refuses clipping. Sources,
+native PNGs, all atlas cells, side seams and corner contacts are checked exactly.
+The unchanged 256x80 atlas places eight corner caps in previously empty row-zero
+slots 6-13. Ownership is 120 raster / 136 ASCII / zero player-sheet, 256 PNGs.
+
+`tools/show_art.py --water --check` covers all 16 cardinal masks, all diagonal
+combinations, compound joins and production animation metadata without changing
+serialized state. Real-render capture mode also measures two automatic water
+loops with the original production TileSet. Review details and measured hashes
+are in `implementation/sprites/reviews/0008/REVIEW.md`.

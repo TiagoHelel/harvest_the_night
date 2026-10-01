@@ -240,3 +240,33 @@ weighted grass selection under day/dusk/night with the real Relight shader,
 farmer/walker feet and unchanged farm. Complete serialized state is compared
 before/after rendering. Uniform maps belong only to these fixtures. No terrain
 enum, weighted selector, FARM_MAP, walkability, collision or core rule changes.
+
+Task 0008 adds three source-authored water phases and static transitions. The
+2172x724 opaque strip has three equal 724-square crops and one common scale;
+the two-pixel calm margin and exact cross-frame borders prevent tile seams.
+North grass/bank sources reduce from their full 1254-square canvases. The bank
+corner uses measured crop (14,14,720,720), retaining its two-pixel endpoint.
+`palette_keys` optionally restricts nearest mapping to named members of the
+one unchanged COLOURS table. It does not create another palette.
+
+Only fixed clockwise quarter turns (1,2,3) and bounded `slice_canvas` placement
+were added as derivations. A grass corner is the accepted fringe's exact native
+endpoint pixel; no cap is painted in code. Rotated sides/caps are byte-exact.
+Atlas rows, size, enum and N1/E2/S4/W8 masks remain unchanged. Eight caps use
+previously empty row-zero slots 6-13. Four view-only layers add diagonal caps
+only when neither adjacent cardinal edge already fills that contact.
+
+```powershell
+python tools/check_terrain_art.py
+python tools/show_art.py --water --check
+python tools/show_art.py --water --out=implementation/shots/sprites/<task-id>/water
+python implementation/sprites/reviews/0008/build_review.py
+```
+
+Fixtures exhaust 512 cardinal/diagonal/family combinations, map boundaries,
+day/dusk/night lighting, soil/path/floor/rock contacts, compound joins and the
+unchanged farm. Deterministic phase captures freeze only a private TileSet copy.
+The automatic-loop test restores the actual production TileSet and observes
+three distinct rendered phases returning twice, with complete serialized state
+unchanged. Static banks share no animation. Source/native/atlas bytes, side
+connectivity and corner endpoint profiles are guarded by the source checker.

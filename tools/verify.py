@@ -201,6 +201,12 @@ def check_terrain_showcase():
     return check("terrain lighting", code == 0, verdict)
 
 
+def check_water_showcase():
+    code, out = run([sys.executable, "tools/show_art.py", "--water", "--check"])
+    verdict = next((line for line in out.splitlines() if line.startswith("WATER SHOWCASE:")), tail(out, 4))
+    return check("water edges/corners", code == 0, verdict)
+
+
 def check_logo():
     """The logo still matches the letters it was composed from.
 
@@ -596,6 +602,7 @@ def main():
     check_player_reactions()
     check_terrain_art()
     check_terrain_showcase()
+    check_water_showcase()
     check_font()
     check_logo()
     check_sfx()
