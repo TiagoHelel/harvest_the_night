@@ -470,7 +470,15 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/buildings/house_0_0_hurt.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/buildings/house_0_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/house_0_1_hurt.png",
       "owner": "raster"
     },
     {
@@ -478,7 +486,15 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/buildings/house_0_2_hurt.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/buildings/house_1_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/house_1_0_hurt.png",
       "owner": "raster"
     },
     {
@@ -486,7 +502,15 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/buildings/house_1_1_hurt.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/buildings/house_1_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/house_1_2_hurt.png",
       "owner": "raster"
     },
     {
@@ -494,11 +518,27 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/buildings/house_2_0_hurt.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/buildings/house_2_1.png",
       "owner": "raster"
     },
     {
+      "output": "sprites/buildings/house_2_1_hurt.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/buildings/house_2_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/house_2_2_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/house_hurt.png",
       "owner": "raster"
     },
     {

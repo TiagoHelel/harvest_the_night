@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "window_count": 5,
+  "glass_count": 5,
+  "deliberate_window": [
+    99,
+    99
+  ],
+  "rejection": "Window lamp outside its glass region: buildings/house"
+}

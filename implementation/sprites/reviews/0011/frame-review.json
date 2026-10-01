@@ -1,0 +1,206 @@
+{
+  "captures": [
+    {
+      "path": "implementation/shots/sprites/0011/house/bounds_0_0_0.png",
+      "sha256": "8366356838e33fb4eb1bb5a58864d96149611e98c51619b19b5d56b3dc5e40f1"
+    },
+    {
+      "path": "implementation/shots/sprites/0011/house/bounds_0_0_15.png",
+      "sha256": "d4c6553ccbc76b65a2393c8190524541126cac03631ed724706eb038ea8f198a"
+    },
+    {
+      "path": "implementation/shots/sprites/0011/house/bounds_0_37_0.png",
+      "sha256": "626ce9a432aec76ce7bcc5b55a1f67eab59dadb292796bf8678aa353eccd906c"
+    },
+    {
+      "path": "implementation/shots/sprites/0011/house/bounds_0_37_15.png",
+      "sha256": "f8fbfd61434d014d556278332b11ceaef72427f66ebc2affa391b821ff51d52f"
+    },
+    {
+      "path": "implementation/shots/sprites/0011/house/bounds_1_0_0.png",
+      "sha256": "aa59c31d92d9dfccb9f1be40cc61f79466ac9b49562a19ef0edbb9eb38960795"
+    },
+    {
+      "path": "implementation/shots/sprites/0011/house/bounds_1_0_15.png",
+      "sha256": "031c851af5b4d7132022887d45e3c346cec901ddc9cc7c1c437934354a82629b"
+    },
+    {
+      "path": "implementation/shots/sprites/0011/house/bounds_1_37_0.png",
+      "sha256": "5904ec5d45a6fe931ae3ddcc78c07981de08f3723e61f4452d2f6c07d0a93c18"
+    },
+    {
+      "path": "implementation/shots/sprites/0011/house/bounds_1_37_15.png",
+      "sha256": "873108181276faa7113dd2e599190d3643b8b7a1210b67aacde19ba6298be333"
+    },
+    {
+      "path": "implementation/shots/sprites/0011/house/ghost_light0.png",
+      "sha256": "787545aab63ea384986bfa3c1ea47d6a1778abb4f16ae181d1ce3a70b5ec52ce"
+    },
+    {
+      "path": "implementation/shots/sprites/0011/house/ghost_light1.png",
+      "sha256": "977836fcce1e84133fb14defc062eac1f917b72fa273976f049f5274f2c33be3"
+    },
+    {
+      "path": "implementation/shots/sprites/0011/house/ghost_light2.png",
+      "sha256": "dfddf30cbd2fce8196c7cec4da847e4f1f43ce6821482ca15aa827e19c86f4b3"
+    },
+    {
+      "path": "implementation/shots/sprites/0011/house/ghost_light3.png",
+      "sha256": "ccfb55f89972defd4635e3ce3ec8851b3cad284466a1830a121524e5dcf12943"
+    },
+    {
+      "path": "implementation/shots/sprites/0011/house/overlap_0_light1_subject0_front0.png",
+      "sha256": "86bb9c7af2d85f699a0faa232cbd421f4d7395fe43b0e9b6cea280e5db902c36"
+    },
+    {
+      "path": "implementation/shots/sprites/0011/house/overlap_0_light1_subject0_front1.png",
+      "sha256": "4040b62f01e1a0680cf1074c56ec20447a4b24e8c13252aeb24ca339c9e9b0f5"
+    },
+    {
+      "path": "implementation/shots/sprites/0011/house/overlap_0_light1_subject1_front0.png",
+      "sha256": "6ee6657ed5310cad19d40e52e43bc9ef081d6ddf61116e0bb0ce78a0944ef137"
+    },
+    {
+      "path": "implementation/shots/sprites/0011/house/overlap_0_light1_subject1_front1.png",
+      "sha256": "c4b2e87a2b2045103014bc83504a585d24881256f2f4396da870cdd1427daa17"
+    },
+    {
+      "path": "implementation/shots/sprites/0011/house/overlap_0_light3_subject0_front0.png",
+      "sha256": "9d16a6b42a047dea90cd7eb581d7e780175c6e143aff275443a48462003ea9c9"
+    },
+    {
+      "path": "implementation/shots/sprites/0011/house/overlap_0_light3_subject0_front1.png",
+      "sha256": "46c3db808201202ff4a4053678753f9e047a313665ae7df2a643ccf47235ebbc"
+    },
+    {
+      "path": "implementation/shots/sprites/0011/house/overlap_0_light3_subject1_front0.png",
+      "sha256": "e6ca91977a5f31f8a663d02b36297a5ec02c7f6669df1c1ae9265cae7379b4e7"
+    },
+    {
+      "path": "implementation/shots/sprites/0011/house/overlap_0_light3_subject1_front1.png",
+      "sha256": "0965c44ef33a27b43fc602bb53b80fcbc13f372e2ceae98aa0f4b81eb350dd3b"
+    },
+    {
+      "path": "implementation/shots/sprites/0011/house/overlap_1_light1_subject0_front0.png",
+      "sha256": "28964bf06ff08dcbb08f56d7645f961377fc82ec324226eb53540b2356df63d3"
+    },
+    {
+      "path": "implementation/shots/sprites/0011/house/overlap_1_light1_subject0_front1.png",
+      "sha256": "16cd3e964b3fe50d63be7069e6fbb9e0733d2837d4628f85e3c34e12b75716bf"
+    },
+    {
+      "path": "implementation/shots/sprites/0011/house/overlap_1_light1_subject1_front0.png",
+      "sha256": "7093f3aed54fb00c03c252021445aa6cc1a61b3588d94bf8047dffdc598f4ba3"
+    },
+    {
+      "path": "implementation/shots/sprites/0011/house/overlap_1_light1_subject1_front1.png",
+      "sha256": "4f0d5463492e0ce6f1a6de634f5177d88ca7697bb3e4420d8b362c6aaddb87a0"
+    },
+    {
+      "path": "implementation/shots/sprites/0011/house/overlap_1_light3_subject0_front0.png",
+      "sha256": "4a33b92d086c5e5769c0a8e80950938b2f343860e4bfd77efa480c7bdf8a7108"
+    },
+    {
+      "path": "implementation/shots/sprites/0011/house/overlap_1_light3_subject0_front1.png",
+      "sha256": "85c2decad661dcb88441fc62a9dbaa28df617cd971ab91a435f21dfe69a8540d"
+    },
+    {
+      "path": "implementation/shots/sprites/0011/house/overlap_1_light3_subject1_front0.png",
+      "sha256": "104fd07d74aa2737ff641f48318ab66eef7d197258baa1f935a39089677a74c1"
+    },
+    {
+      "path": "implementation/shots/sprites/0011/house/overlap_1_light3_subject1_front1.png",
+      "sha256": "a1a7f8871160961daf0d16894a0bf244d9e37de52bf1b1e8b5d22c5c83893cba"
+    },
+    {
+      "path": "implementation/shots/sprites/0011/house/state_0_light0.png",
+      "sha256": "f4772e47ff76bf33b02236e3f6f917a4da329eed03c32c580d1195710fd1b096"
+    },
+    {
+      "path": "implementation/shots/sprites/0011/house/state_0_light1.png",
+      "sha256": "25c46e280abd014249169a5d63c1f64619e6dca5e1ae8c869f8207bdf52d7a8c"
+    },
+    {
+      "path": "implementation/shots/sprites/0011/house/state_0_light2.png",
+      "sha256": "ad34b16299148b0b397cfd86a69cafe1fdc406b26c482c3836c1bda7f00beb37"
+    },
+    {
+      "path": "implementation/shots/sprites/0011/house/state_0_light3.png",
+      "sha256": "bc80daaba85234f34980e1be53d4a16232c70849b6a81fad0f66cebe5be05f13"
+    },
+    {
+      "path": "implementation/shots/sprites/0011/house/state_0_quality0.png",
+      "sha256": "b5c17ef41904f3f14c1705c15b7ae57d4e6d63bae9ba5f48eba83d67316441ed"
+    },
+    {
+      "path": "implementation/shots/sprites/0011/house/state_0_quality2.png",
+      "sha256": "f11a3a9bfab7f129e0a1f732f2e3e78592a5571c20d9ff32b5bbcd554539995f"
+    },
+    {
+      "path": "implementation/shots/sprites/0011/house/state_1_light0.png",
+      "sha256": "ba3d504387fbb99353b9286e1f849bf9c510548aed28e4bb0e8a7b768448c568"
+    },
+    {
+      "path": "implementation/shots/sprites/0011/house/state_1_light1.png",
+      "sha256": "a9842805d269357a41686eed167da2f2dfb3e0fb59276e4436c168bb0e088f26"
+    },
+    {
+      "path": "implementation/shots/sprites/0011/house/state_1_light2.png",
+      "sha256": "d7e100e928ee5e5c2c27afc308bb08b9fdaf649767830a93550f970dee15b735"
+    },
+    {
+      "path": "implementation/shots/sprites/0011/house/state_1_light3.png",
+      "sha256": "16dd766d0fd59f89638e58fea64d3e830c20f170a0cc502199a8b987221749a3"
+    },
+    {
+      "path": "implementation/shots/sprites/0011/house/state_1_quality0.png",
+      "sha256": "cecd855f0a508382f3b707c050b5a915cd8a557902dee1dbbf47c0fab9c87d74"
+    },
+    {
+      "path": "implementation/shots/sprites/0011/house/state_1_quality2.png",
+      "sha256": "66f6da0197a0fcdb35671c53d4e4ba9af0de7cf47cb01c41ea2d2efb919a79eb"
+    },
+    {
+      "path": "implementation/shots/sprites/0011/house/threshold_0_hp74.png",
+      "sha256": "013092e09879200085f942502067e1005588b85e6b78f7d54ee6d13edcc4f7a3"
+    },
+    {
+      "path": "implementation/shots/sprites/0011/house/threshold_0_hp75.png",
+      "sha256": "d474db1cf02444a254bc501a55e8fd85c655b198819cb1e353a34bb23085c38c"
+    },
+    {
+      "path": "implementation/shots/sprites/0011/house/threshold_1_hp104.png",
+      "sha256": "e7ceba7d30f7da20568f57ecfd57fdcf230578df936421c8ba702ad65f9a0db0"
+    },
+    {
+      "path": "implementation/shots/sprites/0011/house/threshold_1_hp105.png",
+      "sha256": "200465231de3a2d6802d5f14e3977d86f60f880ff776d4b348f480e268a34b41"
+    },
+    {
+      "path": "implementation/shots/sprites/0011/dusk.png",
+      "sha256": "a18f5e6af5251df0fd7e7692c17e0af4de69bacfa4179be510c4bc1540fee28c"
+    },
+    {
+      "path": "implementation/shots/sprites/0011/noon.png",
+      "sha256": "c9dc243fb2fbe8fb7cd36b9f0930797ebe984cff2486eb7cba1977531ef1cf44"
+    },
+    {
+      "path": "implementation/shots/sprites/0011/result.png",
+      "sha256": "fb874349471b0a85371e96415f6e9a302fcf1cb5ef531e44626ba7996331583f"
+    },
+    {
+      "path": "implementation/shots/sprites/0011/tech.png",
+      "sha256": "1c366f4a56ae4e0fb1f2f005084e339ed64dcc2f67810181f3e86ec7be94e658"
+    },
+    {
+      "path": "implementation/shots/sprites/0011/wave.png",
+      "sha256": "07e9538d5b50b15ca5b378d1405d7e086738fb94ead5476d1ea47a853ebdaa67"
+    }
+  ],
+  "capture_pages": 13,
+  "native_size": [
+    480,
+    270
+  ],
+  "nearest_scale": 3
+}

@@ -201,3 +201,12 @@ upper overhang while preserving side margins and neighboring row visibility.
 Plants remain on the existing walkable ground layer beneath actors. Their
 distinct ready shapes must survive the production night shader; shared night
 palette/emission unification remains task 0019.
+
+Task 0011 refines the full farmhouse into one terracotta/timber landmark.
+Its whole and independently authored damaged states share the 64x64 canvas,
+(32,60) contact and one source reduction scale over the unchanged 3x3 logical
+footprint. Roof loss concentrates on the left slope with exposed rafters and
+local facade wear. Keep the right chimney, front steps and five warm panes
+recognizable in both states. Native visible bounds are 56x55, larger than the
+30px farmer and 42/43px trees. Five localized night glows follow the actual
+glass rather than lighting the center of the entire roof.

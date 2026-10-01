@@ -88,3 +88,11 @@ python tools/shot.py sprites/0003 noon dusk wave
 Current visual baseline: `implementation/shots/sprites/baseline/`.
 Production screenshots use `implementation/shots/sprites/<task-id>/` so the
 existing screenshot tool can be reused. Do not overwrite the baseline.
+
+The latest farmhouse family (0011) has independent whole/damaged raw sources,
+HP-aware view selection and five aligned glass lamps. Source contracts, exact
+ImageGen prompts, native/nearest review pages, tests and production captures
+are in `generation/0011-*`, `reviews/0011/` and `shots/sprites/0011/` (the last
+path is under `implementation/`). Other farm buildings follow in 0012.
+The four normal enemies and authored walk/attack/death strips are planned in
+0015; Giant wind-up and view-owned death playback follow in 0016.

@@ -1,0 +1,35 @@
+
+HARVEST THE NIGHT - performance
+
+                               now  baseline
+  day_building                   2         3
+  day_crafting                   2         4
+  day_farming                   18        26
+  day_gathering                  1         2
+  day_livestock                 10        17
+  day_player                     3         4
+  day_power                      2         4
+  day_reactions                  3         5
+  day_tick                      64       101
+  day_tutorial                  11        17
+  night_ability                  1         2
+  night_building                 2         3
+  night_combat                  12        20
+  night_enemies                118       211
+  night_player                   3         4
+  night_power                    4         8
+  night_reactions                5         7
+  night_tick                   653      1050
+  night_towers                 292       506
+  night_traps                   46        80
+  night_waves                    2         4
+  path_refresh                4657      8364
+  view_lighting                  0         0
+  view_particles               300       460
+
+  the farm: 48 crops, 40 towers, 13 walls, 14 zombies
+
+  the most expensive thing in a night is night_towers, at 292us
+  the most expensive thing in a day is day_farming, at 18us
+
+OK    a night tick is 653us of the 8333 it may have (8%), a path rebuild 4657us of 33333

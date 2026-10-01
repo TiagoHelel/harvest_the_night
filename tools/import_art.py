@@ -91,6 +91,15 @@ def load_manifest(path=MANIFEST):
             rect(entry["bubble_xywh"], canvas, "reaction bubble")
             if not entry["animation"].startswith("react_"):
                 raise ValueError("Bubble crop belongs only to a reaction: " + ident)
+        if "windows_xy" in entry or "window_rects_xywh" in entry:
+            points, boxes = entry.get("windows_xy"), entry.get("window_rects_xywh")
+            if not isinstance(points, list) or not isinstance(boxes, list) or not 1 <= len(points) <= 8 or len(points) != len(boxes):
+                raise ValueError("Invalid window emission regions: " + ident)
+            for point, box in zip(points, boxes):
+                x, y = integers(point, 2, "window point")
+                x0, y0, x1, y1 = rect(box, canvas, "window glass")
+                if not x0 <= x < x1 or not y0 <= y < y1:
+                    raise ValueError("Window lamp outside its glass region: " + ident)
         if entry["palette"] != "tools/palette.py:COLOURS":
             raise ValueError("Unknown palette: " + ident)
         if "palette_keys" in entry:
@@ -289,6 +298,9 @@ def metadata(data):
                 if any(point[i] > entry["canvas_wh"][i] for i in range(2)):
                     raise ValueError("Emission point outside canvas")
                 lines[-1] = lines[-1][:-2] + ', "%s": Vector2i(%d, %d)},' % (field, *point)
+        if "windows_xy" in entry:
+            points = ", ".join("Vector2i(%d, %d)" % tuple(p) for p in entry["windows_xy"])
+            lines[-1] = lines[-1][:-2] + ', "windows": [%s]},' % points
         if "bubble_xywh" in entry:
             x, y, w, h = entry["bubble_xywh"]
             lines[-1] = lines[-1][:-2] + ', "bubble": Rect2i(%d, %d, %d, %d)},' % (x, y, w, h)

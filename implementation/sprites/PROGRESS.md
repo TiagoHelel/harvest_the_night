@@ -684,3 +684,66 @@ refinement remains 0019, enemies 0015 and Giant/death playback 0016.
 Queue after completion: 10 done, 10 todo, zero doing/blocked. Next: 0011,
 farmhouse visual landmark. Exactly one sprite task completed this cycle;
 the active /goal continues automatically toward the remaining backlog.
+
+## 2026-10-01 - 0011 farmhouse as the visual landmark
+
+Completed the full farmhouse family with two built-in ImageGen edits and zero
+targeted revisions: refined whole terracotta/timber house and independently
+authored local roof/facade damage. Raw sources are byte-identical tool returns
+in `assets/art_source/buildings/house/{whole,hurt}.png`. SHA-256:
+`1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435` and
+`0ddfbbb4ed2f219f5a716417c78cf3d619bbe7b19b38379dcb4e3f36de101017`.
+Exact prompts, reference roles, original tool paths, initial/final measurements
+and accepted decisions are saved in `generation/0011-*`.
+
+Both states share one measured union crop and source scale, 64x64 canvas,
+(32,60) ground pivot and (-8,-12) cell offset. Visible bounds are 56x55,
+larger than farmer/props. Damage exposes left-slope rafters and local facade
+wear, with 148 changed native roof-region pixels. Common central entrance
+contact is stable; the independent hurt tread adds only one right edge pixel.
+All eighteen compatibility slices exactly reconstruct both complete drawings;
+WorldView still draws one roof over nine unchanged occupied/blocking cells.
+
+House HP is separate from occupants. WorldView now observes the existing 75%
+wear threshold and Phases.house_full, refreshing whole/hurt automatically
+without a logical occupancy change. Boundary fixtures verify 75/74 out of 100,
+105/104 out of researched 140, zero HP and restoration. Five validated glass
+lamps and the chimney smoke point use the same source offset in both states.
+Lighting draws five local warm pools over Main's night ramp, honoring existing
+off/steady/full and flashing controls. The roof ridge is not washed out.
+
+Full verify PASS: 37 passed, zero skipped/failed in 220s with the supplied
+Godot 4.7.1. All 105 scripts parse; 6,610 headless assertions, 980 input cases,
+performance and Windows/Web exports pass. Simulation `1961000123` and data
+`407837701` are unchanged. The 154-output raster check writes zero files.
+Fault/rebuild run: 61 PASS with all deliberate corruption restored, plus one
+count-preserving out-of-canvas lamp probe PASS (62 combined). Future full
+fault runs include all 62 probes. Evidence logs are in `reviews/0011/`.
+
+The first complete run found the previous single broad house-light assertion
+and a noisy 34359us path-refresh measurement. The assertion now checks five
+physical local panes and their combined warm area; no check, budget or
+baseline was disabled. Isolated measurement passed at 4657us; final complete
+verify passed at 4546us with night tick 607us. Initial/retry logs are preserved.
+
+Opened all 49 actual Godot captures at native size and exact nearest 3x through
+`reviews/0011/captures-00..12` and split 3x columns. Originals are in
+`implementation/shots/sprites/0011/` and `house/`. Reviewed both raw alpha
+comparisons, native/3x whole/hurt on light/dark/checker backgrounds, relative
+grounded scale and emission-point overlay. Dedicated showcase: 1,059 headless
+checks and 1,193 actual renderer checks, zero failed. Actual pixel comparisons
+confirm whole/hurt farmer/walker depth and five window lights without state
+writes. Gates PASS: coherent larger roof, localized damage, recognizable
+materials, anchored steps, four production light states, ghosts and existing
+camera/map boundary clips. Full review/capture hashes: `reviews/0011/REVIEW.md`
+and `frame-review.json`.
+
+Scope audit against `a42b530`: ten existing house PNGs changed, ten hurt house
+PNGs added, all other 250 runtime PNGs byte-identical. Core, map, collision,
+save formats, palette, guards, original owner sheet/pilot masters, props,
+terrain and crops are preserved. Ownership: 154 raster + 116 ASCII outputs.
+Final shared lighting remains 0019, normal enemies 0015 and Giant/deaths 0016.
+
+Queue after completion: 11 done, 9 todo, zero doing/blocked. Next: 0012,
+other farm buildings. Exactly one sprite task completed this cycle;
+the active /goal continues automatically toward the remaining backlog.

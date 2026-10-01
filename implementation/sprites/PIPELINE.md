@@ -331,3 +331,33 @@ yields/can consumption, existing walkability and serialized-state equality
 around every redraw. Capture mode also compares actual dry/wet viewport pixels
 under each mature crop in dawn/day/dusk/night lighting. Soil and foliage retain
 different manifest offsets without gaining occupants, collision or shadow nodes.
+
+## Farmhouse damage and lamps (0011)
+
+Two independent accepted raw masters in `assets/art_source/buildings/house/`
+own `house` and `house_hurt`. Both use the same measured crop/scale and 64x64
+canvas, (32,60) pivot and (-8,-12) corner offset. Eighteen compatibility slices
+reconstruct the two full drawings exactly; the view still groups the nine
+unchanged occupied cells into one house. Original pilot masters are preserved.
+
+House HP lives in `state.house_hp`, outside occupants. WorldView refreshes on
+its existing 75% wear threshold and uses Phases.house_full for researched HP
+upgrades. No render operation changes HP, collision, rules or save fields.
+Window metadata contains five validated glass regions/points. ArtPlacement
+maps them through the same corner offset; Lighting draws one local glow per
+pane over Main's night ramp, respecting off/steady/full and flashing settings.
+The smoke point (51,12) uses the same source transform in both states.
+
+```powershell
+python tools/check_house_art.py
+python tools/show_art.py --house --check
+python tools/show_art.py --house --out=implementation/shots/sprites/<task-id>/house
+python implementation/sprites/reviews/0011/build_review.py
+```
+
+Source checks cover all twenty outputs, eighteen slice reconstructions,
+localized native roof damage, readable glass and shared entrance contact.
+The showcase checks HP-only refresh and upgrades, four production light
+states, both actor subjects behind/in front, previews and camera bounds.
+Capture mode compares actual occlusion pixels and off/steady window glows;
+full serialized state stays identical around all rendering/lighting checks.

@@ -228,6 +228,16 @@ def check_crop_showcase():
     return check("crop placement/growth", code == 0, next((s for s in out.splitlines() if s.startswith("CROP SHOWCASE:")), tail(out, 4)))
 
 
+def check_house_art():
+    code, out = run([sys.executable, "tools/check_house_art.py"])
+    return check("house sources/windows", code == 0, tail(out, 4))
+
+
+def check_house_showcase():
+    code, out = run([sys.executable, "tools/show_art.py", "--house", "--check"])
+    return check("house HP/lighting", code == 0, next((s for s in out.splitlines() if s.startswith("HOUSE SHOWCASE:")), tail(out, 4)))
+
+
 def check_logo():
     """The logo still matches the letters it was composed from.
 
@@ -628,6 +638,8 @@ def main():
     check_prop_showcase()
     check_crop_art()
     check_crop_showcase()
+    check_house_art()
+    check_house_showcase()
     check_font()
     check_logo()
     check_sfx()

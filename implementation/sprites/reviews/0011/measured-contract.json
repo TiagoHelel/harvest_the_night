@@ -1,0 +1,1061 @@
+[
+  {
+    "id": "buildings/house",
+    "source": "assets/art_source/buildings/house/whole.png",
+    "crop_xywh": [
+      114,
+      134,
+      1082,
+      1053
+    ],
+    "sheet_cell_xywh": [
+      0,
+      0,
+      1254,
+      1254
+    ],
+    "gutter_xy": [
+      0,
+      0
+    ],
+    "canvas_wh": [
+      64,
+      64
+    ],
+    "pivot_xy": [
+      32,
+      60
+    ],
+    "content_scale": 0.05180388529139685,
+    "alpha_threshold": 128,
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "prompt": "implementation/sprites/generation/0011-house.prompt.txt",
+    "prompt_sha256": "e4fa27bf5fcc270590e2297cf291dee0763ca4de623795590ccd5c51a41c1e12",
+    "references": [
+      {
+        "path": "assets/art_source/masters/house.png",
+        "sha256": "26d2646bf9328eae0eeb699193a11f46e6f92cd487d2369dea27b4295bdab81f",
+        "role": "edit target/reference as indexed in exact saved prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "edit target/reference as indexed in exact saved prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0011",
+    "revision": 0,
+    "source_sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+    "output": "sprites/buildings/house.png",
+    "animation": "buildings/house",
+    "cell_offset_xy": [
+      -8,
+      -12
+    ],
+    "light_xy": [
+      19,
+      45
+    ],
+    "smoke_xy": [
+      51,
+      12
+    ],
+    "windows_xy": [
+      [
+        32,
+        33
+      ],
+      [
+        19,
+        45
+      ],
+      [
+        41,
+        45
+      ],
+      [
+        30,
+        45
+      ],
+      [
+        52,
+        46
+      ]
+    ],
+    "window_rects_xywh": [
+      [
+        31,
+        32,
+        3,
+        3
+      ],
+      [
+        18,
+        44,
+        3,
+        3
+      ],
+      [
+        40,
+        44,
+        3,
+        3
+      ],
+      [
+        29,
+        43,
+        3,
+        4
+      ],
+      [
+        52,
+        44,
+        2,
+        4
+      ]
+    ],
+    "output_sha256": "34afcc26fed1df120b23916aac39ef7798fe14ad7c1ccc73f856afe346e46b5b"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "prompt": "implementation/sprites/generation/0011-house.prompt.txt",
+    "prompt_sha256": "e4fa27bf5fcc270590e2297cf291dee0763ca4de623795590ccd5c51a41c1e12",
+    "references": [
+      {
+        "path": "assets/art_source/masters/house.png",
+        "sha256": "26d2646bf9328eae0eeb699193a11f46e6f92cd487d2369dea27b4295bdab81f",
+        "role": "edit target/reference as indexed in exact saved prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "edit target/reference as indexed in exact saved prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0011",
+    "revision": 0,
+    "id": "buildings/house_0_0",
+    "input": "buildings/house",
+    "operation": "slice",
+    "canvas_wh": [
+      24,
+      28
+    ],
+    "pivot_xy": [
+      12,
+      28
+    ],
+    "animation": "buildings/house_0_0",
+    "output": "sprites/buildings/house_0_0.png",
+    "output_sha256": "70ab14dbcb383f0ecf5df8160f0f970b11c8f972ed1c8b39470a573481140bf3",
+    "slice_xywh": [
+      0,
+      0,
+      24,
+      28
+    ],
+    "cell_offset_xy": [
+      -8,
+      -12
+    ]
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "prompt": "implementation/sprites/generation/0011-house.prompt.txt",
+    "prompt_sha256": "e4fa27bf5fcc270590e2297cf291dee0763ca4de623795590ccd5c51a41c1e12",
+    "references": [
+      {
+        "path": "assets/art_source/masters/house.png",
+        "sha256": "26d2646bf9328eae0eeb699193a11f46e6f92cd487d2369dea27b4295bdab81f",
+        "role": "edit target/reference as indexed in exact saved prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "edit target/reference as indexed in exact saved prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0011",
+    "revision": 0,
+    "id": "buildings/house_0_1",
+    "input": "buildings/house",
+    "operation": "slice",
+    "canvas_wh": [
+      24,
+      16
+    ],
+    "pivot_xy": [
+      12,
+      16
+    ],
+    "animation": "buildings/house_0_1",
+    "output": "sprites/buildings/house_0_1.png",
+    "output_sha256": "eb8c491c1d1e87d7aefba9ab59fea644202b09ac3c91c4f577ab67d8eff24bd7",
+    "slice_xywh": [
+      0,
+      28,
+      24,
+      16
+    ],
+    "cell_offset_xy": [
+      -8,
+      0
+    ]
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "prompt": "implementation/sprites/generation/0011-house.prompt.txt",
+    "prompt_sha256": "e4fa27bf5fcc270590e2297cf291dee0763ca4de623795590ccd5c51a41c1e12",
+    "references": [
+      {
+        "path": "assets/art_source/masters/house.png",
+        "sha256": "26d2646bf9328eae0eeb699193a11f46e6f92cd487d2369dea27b4295bdab81f",
+        "role": "edit target/reference as indexed in exact saved prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "edit target/reference as indexed in exact saved prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0011",
+    "revision": 0,
+    "id": "buildings/house_0_2",
+    "input": "buildings/house",
+    "operation": "slice",
+    "canvas_wh": [
+      24,
+      20
+    ],
+    "pivot_xy": [
+      12,
+      20
+    ],
+    "animation": "buildings/house_0_2",
+    "output": "sprites/buildings/house_0_2.png",
+    "output_sha256": "df5a562e0199afbaea49a6630c8bd425ff53fd8d6dfffe168b66596e00670be3",
+    "slice_xywh": [
+      0,
+      44,
+      24,
+      20
+    ],
+    "cell_offset_xy": [
+      -8,
+      0
+    ]
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "prompt": "implementation/sprites/generation/0011-house.prompt.txt",
+    "prompt_sha256": "e4fa27bf5fcc270590e2297cf291dee0763ca4de623795590ccd5c51a41c1e12",
+    "references": [
+      {
+        "path": "assets/art_source/masters/house.png",
+        "sha256": "26d2646bf9328eae0eeb699193a11f46e6f92cd487d2369dea27b4295bdab81f",
+        "role": "edit target/reference as indexed in exact saved prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "edit target/reference as indexed in exact saved prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0011",
+    "revision": 0,
+    "id": "buildings/house_1_0",
+    "input": "buildings/house",
+    "operation": "slice",
+    "canvas_wh": [
+      16,
+      28
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "animation": "buildings/house_1_0",
+    "output": "sprites/buildings/house_1_0.png",
+    "output_sha256": "1ee506aab38818ae617e41d048f7aee89c353d5e421523f326c0f228330a4c38",
+    "slice_xywh": [
+      24,
+      0,
+      16,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ]
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "prompt": "implementation/sprites/generation/0011-house.prompt.txt",
+    "prompt_sha256": "e4fa27bf5fcc270590e2297cf291dee0763ca4de623795590ccd5c51a41c1e12",
+    "references": [
+      {
+        "path": "assets/art_source/masters/house.png",
+        "sha256": "26d2646bf9328eae0eeb699193a11f46e6f92cd487d2369dea27b4295bdab81f",
+        "role": "edit target/reference as indexed in exact saved prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "edit target/reference as indexed in exact saved prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0011",
+    "revision": 0,
+    "id": "buildings/house_1_1",
+    "input": "buildings/house",
+    "operation": "slice",
+    "canvas_wh": [
+      16,
+      16
+    ],
+    "pivot_xy": [
+      8,
+      16
+    ],
+    "animation": "buildings/house_1_1",
+    "output": "sprites/buildings/house_1_1.png",
+    "output_sha256": "b471a605e5ce88c33e434dc94de96d00825b2722bbf1c3fb324bb9d85cee0f3e",
+    "slice_xywh": [
+      24,
+      28,
+      16,
+      16
+    ],
+    "cell_offset_xy": [
+      0,
+      0
+    ]
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "prompt": "implementation/sprites/generation/0011-house.prompt.txt",
+    "prompt_sha256": "e4fa27bf5fcc270590e2297cf291dee0763ca4de623795590ccd5c51a41c1e12",
+    "references": [
+      {
+        "path": "assets/art_source/masters/house.png",
+        "sha256": "26d2646bf9328eae0eeb699193a11f46e6f92cd487d2369dea27b4295bdab81f",
+        "role": "edit target/reference as indexed in exact saved prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "edit target/reference as indexed in exact saved prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0011",
+    "revision": 0,
+    "id": "buildings/house_1_2",
+    "input": "buildings/house",
+    "operation": "slice",
+    "canvas_wh": [
+      16,
+      20
+    ],
+    "pivot_xy": [
+      8,
+      20
+    ],
+    "animation": "buildings/house_1_2",
+    "output": "sprites/buildings/house_1_2.png",
+    "output_sha256": "df0c73302e6753a2788aaa51c7c3f55ab230d8f1fd10b318038fa9b02fbae831",
+    "slice_xywh": [
+      24,
+      44,
+      16,
+      20
+    ],
+    "cell_offset_xy": [
+      0,
+      0
+    ]
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "prompt": "implementation/sprites/generation/0011-house.prompt.txt",
+    "prompt_sha256": "e4fa27bf5fcc270590e2297cf291dee0763ca4de623795590ccd5c51a41c1e12",
+    "references": [
+      {
+        "path": "assets/art_source/masters/house.png",
+        "sha256": "26d2646bf9328eae0eeb699193a11f46e6f92cd487d2369dea27b4295bdab81f",
+        "role": "edit target/reference as indexed in exact saved prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "edit target/reference as indexed in exact saved prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0011",
+    "revision": 0,
+    "id": "buildings/house_2_0",
+    "input": "buildings/house",
+    "operation": "slice",
+    "canvas_wh": [
+      24,
+      28
+    ],
+    "pivot_xy": [
+      12,
+      28
+    ],
+    "animation": "buildings/house_2_0",
+    "output": "sprites/buildings/house_2_0.png",
+    "output_sha256": "143a9ed97e8660836df09f5b57efbeee8b844027bd4789c32dc626958728db96",
+    "slice_xywh": [
+      40,
+      0,
+      24,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ]
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "prompt": "implementation/sprites/generation/0011-house.prompt.txt",
+    "prompt_sha256": "e4fa27bf5fcc270590e2297cf291dee0763ca4de623795590ccd5c51a41c1e12",
+    "references": [
+      {
+        "path": "assets/art_source/masters/house.png",
+        "sha256": "26d2646bf9328eae0eeb699193a11f46e6f92cd487d2369dea27b4295bdab81f",
+        "role": "edit target/reference as indexed in exact saved prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "edit target/reference as indexed in exact saved prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0011",
+    "revision": 0,
+    "id": "buildings/house_2_1",
+    "input": "buildings/house",
+    "operation": "slice",
+    "canvas_wh": [
+      24,
+      16
+    ],
+    "pivot_xy": [
+      12,
+      16
+    ],
+    "animation": "buildings/house_2_1",
+    "output": "sprites/buildings/house_2_1.png",
+    "output_sha256": "5c715a354aad4f68f25344a09e16701605913916445b7557f5f1488a9588bf4a",
+    "slice_xywh": [
+      40,
+      28,
+      24,
+      16
+    ],
+    "cell_offset_xy": [
+      0,
+      0
+    ]
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "prompt": "implementation/sprites/generation/0011-house.prompt.txt",
+    "prompt_sha256": "e4fa27bf5fcc270590e2297cf291dee0763ca4de623795590ccd5c51a41c1e12",
+    "references": [
+      {
+        "path": "assets/art_source/masters/house.png",
+        "sha256": "26d2646bf9328eae0eeb699193a11f46e6f92cd487d2369dea27b4295bdab81f",
+        "role": "edit target/reference as indexed in exact saved prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "edit target/reference as indexed in exact saved prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0011",
+    "revision": 0,
+    "id": "buildings/house_2_2",
+    "input": "buildings/house",
+    "operation": "slice",
+    "canvas_wh": [
+      24,
+      20
+    ],
+    "pivot_xy": [
+      12,
+      20
+    ],
+    "animation": "buildings/house_2_2",
+    "output": "sprites/buildings/house_2_2.png",
+    "output_sha256": "34e930dc97637bc28f4835295ed38807e5d64824b67b88b3bbd1a0d7815dc3f2",
+    "slice_xywh": [
+      40,
+      44,
+      24,
+      20
+    ],
+    "cell_offset_xy": [
+      0,
+      0
+    ]
+  },
+  {
+    "id": "buildings/house_hurt",
+    "source": "assets/art_source/buildings/house/hurt.png",
+    "crop_xywh": [
+      114,
+      134,
+      1082,
+      1053
+    ],
+    "sheet_cell_xywh": [
+      0,
+      0,
+      1254,
+      1254
+    ],
+    "gutter_xy": [
+      0,
+      0
+    ],
+    "canvas_wh": [
+      64,
+      64
+    ],
+    "pivot_xy": [
+      32,
+      60
+    ],
+    "content_scale": 0.05180388529139685,
+    "alpha_threshold": 128,
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "prompt": "implementation/sprites/generation/0011-house_hurt.prompt.txt",
+    "prompt_sha256": "f4453dc60b7c9b24b0985cb4378e3da8c97491fa7a2ee8f08a2075c7b7e67ef8",
+    "references": [
+      {
+        "path": "assets/art_source/buildings/house/whole.png",
+        "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+        "role": "edit target/reference as indexed in exact saved prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0011",
+    "revision": 0,
+    "source_sha256": "0ddfbbb4ed2f219f5a716417c78cf3d619bbe7b19b38379dcb4e3f36de101017",
+    "output": "sprites/buildings/house_hurt.png",
+    "animation": "buildings/house_hurt",
+    "cell_offset_xy": [
+      -8,
+      -12
+    ],
+    "light_xy": [
+      19,
+      45
+    ],
+    "smoke_xy": [
+      51,
+      12
+    ],
+    "windows_xy": [
+      [
+        32,
+        33
+      ],
+      [
+        19,
+        45
+      ],
+      [
+        41,
+        45
+      ],
+      [
+        30,
+        45
+      ],
+      [
+        52,
+        46
+      ]
+    ],
+    "window_rects_xywh": [
+      [
+        31,
+        32,
+        3,
+        3
+      ],
+      [
+        18,
+        44,
+        3,
+        3
+      ],
+      [
+        40,
+        44,
+        3,
+        3
+      ],
+      [
+        29,
+        43,
+        3,
+        4
+      ],
+      [
+        52,
+        44,
+        2,
+        4
+      ]
+    ],
+    "variant_of": "buildings/house",
+    "output_sha256": "d4124c9c1e5cd9cd68741364f03628feb6c3cc59f586bfa14ce04e833e994f1b"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "prompt": "implementation/sprites/generation/0011-house_hurt.prompt.txt",
+    "prompt_sha256": "f4453dc60b7c9b24b0985cb4378e3da8c97491fa7a2ee8f08a2075c7b7e67ef8",
+    "references": [
+      {
+        "path": "assets/art_source/buildings/house/whole.png",
+        "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+        "role": "edit target/reference as indexed in exact saved prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0011",
+    "revision": 0,
+    "id": "buildings/house_0_0_hurt",
+    "input": "buildings/house_hurt",
+    "operation": "slice",
+    "canvas_wh": [
+      24,
+      28
+    ],
+    "pivot_xy": [
+      12,
+      28
+    ],
+    "animation": "buildings/house_0_0_hurt",
+    "output": "sprites/buildings/house_0_0_hurt.png",
+    "output_sha256": "b9ab6a01fbeb22a0294ed30648e06d944f94ed33afa01969ca34102a0c6a66e0",
+    "slice_xywh": [
+      0,
+      0,
+      24,
+      28
+    ],
+    "cell_offset_xy": [
+      -8,
+      -12
+    ]
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "prompt": "implementation/sprites/generation/0011-house_hurt.prompt.txt",
+    "prompt_sha256": "f4453dc60b7c9b24b0985cb4378e3da8c97491fa7a2ee8f08a2075c7b7e67ef8",
+    "references": [
+      {
+        "path": "assets/art_source/buildings/house/whole.png",
+        "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+        "role": "edit target/reference as indexed in exact saved prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0011",
+    "revision": 0,
+    "id": "buildings/house_0_1_hurt",
+    "input": "buildings/house_hurt",
+    "operation": "slice",
+    "canvas_wh": [
+      24,
+      16
+    ],
+    "pivot_xy": [
+      12,
+      16
+    ],
+    "animation": "buildings/house_0_1_hurt",
+    "output": "sprites/buildings/house_0_1_hurt.png",
+    "output_sha256": "69841b9ecde5c122a52e7a46fd69a72a47fb9e51689efa2099c353d527f5a51c",
+    "slice_xywh": [
+      0,
+      28,
+      24,
+      16
+    ],
+    "cell_offset_xy": [
+      -8,
+      0
+    ]
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "prompt": "implementation/sprites/generation/0011-house_hurt.prompt.txt",
+    "prompt_sha256": "f4453dc60b7c9b24b0985cb4378e3da8c97491fa7a2ee8f08a2075c7b7e67ef8",
+    "references": [
+      {
+        "path": "assets/art_source/buildings/house/whole.png",
+        "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+        "role": "edit target/reference as indexed in exact saved prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0011",
+    "revision": 0,
+    "id": "buildings/house_0_2_hurt",
+    "input": "buildings/house_hurt",
+    "operation": "slice",
+    "canvas_wh": [
+      24,
+      20
+    ],
+    "pivot_xy": [
+      12,
+      20
+    ],
+    "animation": "buildings/house_0_2_hurt",
+    "output": "sprites/buildings/house_0_2_hurt.png",
+    "output_sha256": "5f92d021a408527f3027c336514973feceb6fcdb2458dcdf4b6af9f9449ea44f",
+    "slice_xywh": [
+      0,
+      44,
+      24,
+      20
+    ],
+    "cell_offset_xy": [
+      -8,
+      0
+    ]
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "prompt": "implementation/sprites/generation/0011-house_hurt.prompt.txt",
+    "prompt_sha256": "f4453dc60b7c9b24b0985cb4378e3da8c97491fa7a2ee8f08a2075c7b7e67ef8",
+    "references": [
+      {
+        "path": "assets/art_source/buildings/house/whole.png",
+        "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+        "role": "edit target/reference as indexed in exact saved prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0011",
+    "revision": 0,
+    "id": "buildings/house_1_0_hurt",
+    "input": "buildings/house_hurt",
+    "operation": "slice",
+    "canvas_wh": [
+      16,
+      28
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "animation": "buildings/house_1_0_hurt",
+    "output": "sprites/buildings/house_1_0_hurt.png",
+    "output_sha256": "6adcc6b0a19133e33eb714d41b20626cddce1babf0ca36cd38ee59d91087c245",
+    "slice_xywh": [
+      24,
+      0,
+      16,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ]
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "prompt": "implementation/sprites/generation/0011-house_hurt.prompt.txt",
+    "prompt_sha256": "f4453dc60b7c9b24b0985cb4378e3da8c97491fa7a2ee8f08a2075c7b7e67ef8",
+    "references": [
+      {
+        "path": "assets/art_source/buildings/house/whole.png",
+        "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+        "role": "edit target/reference as indexed in exact saved prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0011",
+    "revision": 0,
+    "id": "buildings/house_1_1_hurt",
+    "input": "buildings/house_hurt",
+    "operation": "slice",
+    "canvas_wh": [
+      16,
+      16
+    ],
+    "pivot_xy": [
+      8,
+      16
+    ],
+    "animation": "buildings/house_1_1_hurt",
+    "output": "sprites/buildings/house_1_1_hurt.png",
+    "output_sha256": "e4242366c5ae754fbb55a0595ff44186a77b410d0f8864902cd409a72af64faa",
+    "slice_xywh": [
+      24,
+      28,
+      16,
+      16
+    ],
+    "cell_offset_xy": [
+      0,
+      0
+    ]
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "prompt": "implementation/sprites/generation/0011-house_hurt.prompt.txt",
+    "prompt_sha256": "f4453dc60b7c9b24b0985cb4378e3da8c97491fa7a2ee8f08a2075c7b7e67ef8",
+    "references": [
+      {
+        "path": "assets/art_source/buildings/house/whole.png",
+        "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+        "role": "edit target/reference as indexed in exact saved prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0011",
+    "revision": 0,
+    "id": "buildings/house_1_2_hurt",
+    "input": "buildings/house_hurt",
+    "operation": "slice",
+    "canvas_wh": [
+      16,
+      20
+    ],
+    "pivot_xy": [
+      8,
+      20
+    ],
+    "animation": "buildings/house_1_2_hurt",
+    "output": "sprites/buildings/house_1_2_hurt.png",
+    "output_sha256": "65d163b6108465e0522615fae9243ac3dc51143fcec19ac6d0126572c2c5ce86",
+    "slice_xywh": [
+      24,
+      44,
+      16,
+      20
+    ],
+    "cell_offset_xy": [
+      0,
+      0
+    ]
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "prompt": "implementation/sprites/generation/0011-house_hurt.prompt.txt",
+    "prompt_sha256": "f4453dc60b7c9b24b0985cb4378e3da8c97491fa7a2ee8f08a2075c7b7e67ef8",
+    "references": [
+      {
+        "path": "assets/art_source/buildings/house/whole.png",
+        "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+        "role": "edit target/reference as indexed in exact saved prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0011",
+    "revision": 0,
+    "id": "buildings/house_2_0_hurt",
+    "input": "buildings/house_hurt",
+    "operation": "slice",
+    "canvas_wh": [
+      24,
+      28
+    ],
+    "pivot_xy": [
+      12,
+      28
+    ],
+    "animation": "buildings/house_2_0_hurt",
+    "output": "sprites/buildings/house_2_0_hurt.png",
+    "output_sha256": "e7407b06a88620829b5c23612404d9cdcc282df9d60f5f717b32fae72133a843",
+    "slice_xywh": [
+      40,
+      0,
+      24,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ]
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "prompt": "implementation/sprites/generation/0011-house_hurt.prompt.txt",
+    "prompt_sha256": "f4453dc60b7c9b24b0985cb4378e3da8c97491fa7a2ee8f08a2075c7b7e67ef8",
+    "references": [
+      {
+        "path": "assets/art_source/buildings/house/whole.png",
+        "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+        "role": "edit target/reference as indexed in exact saved prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0011",
+    "revision": 0,
+    "id": "buildings/house_2_1_hurt",
+    "input": "buildings/house_hurt",
+    "operation": "slice",
+    "canvas_wh": [
+      24,
+      16
+    ],
+    "pivot_xy": [
+      12,
+      16
+    ],
+    "animation": "buildings/house_2_1_hurt",
+    "output": "sprites/buildings/house_2_1_hurt.png",
+    "output_sha256": "d017447d45ae3e3fae2f3c5d3da0cc67f088f682a0b4bf36b312fc392f9f0c17",
+    "slice_xywh": [
+      40,
+      28,
+      24,
+      16
+    ],
+    "cell_offset_xy": [
+      0,
+      0
+    ]
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "prompt": "implementation/sprites/generation/0011-house_hurt.prompt.txt",
+    "prompt_sha256": "f4453dc60b7c9b24b0985cb4378e3da8c97491fa7a2ee8f08a2075c7b7e67ef8",
+    "references": [
+      {
+        "path": "assets/art_source/buildings/house/whole.png",
+        "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+        "role": "edit target/reference as indexed in exact saved prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0011",
+    "revision": 0,
+    "id": "buildings/house_2_2_hurt",
+    "input": "buildings/house_hurt",
+    "operation": "slice",
+    "canvas_wh": [
+      24,
+      20
+    ],
+    "pivot_xy": [
+      12,
+      20
+    ],
+    "animation": "buildings/house_2_2_hurt",
+    "output": "sprites/buildings/house_2_2_hurt.png",
+    "output_sha256": "29ac74d80122365e926b79e0daaccdcb2a692f3dd57650aa832c3b705a1f6132",
+    "slice_xywh": [
+      40,
+      44,
+      24,
+      20
+    ],
+    "cell_offset_xy": [
+      0,
+      0
+    ]
+  }
+]

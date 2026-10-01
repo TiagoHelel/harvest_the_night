@@ -206,6 +206,29 @@ def main():
             invalid_manifest("Crop per-stage scale drift rejected", lambda d: d["assets"][crop].update(content_scale=0.001))
             invalid_manifest("Crop per-stage ground pivot drift rejected", lambda d: d["assets"][crop].update(pivot_xy=[8,14]))
 
+        house = next((i for i,e in enumerate(data["assets"]) if e["id"] == "buildings/house"), None)
+        hurt = next((i for i,e in enumerate(data["assets"]) if e["id"] == "buildings/house_hurt"), None)
+        if house is not None and hurt is not None:
+            corrupt(ROOT/data["assets"][hurt]["source"], "tools/import_art.py", missing=True)
+            passed("Missing independently authored house damage source rejected")
+            corrupt(ROOT/"sprites/buildings/house_hurt.png", "tools/check_house_art.py", missing=True)
+            passed("Missing low-HP house drawing rejected")
+            corrupt(ROOT/"sprites/buildings/house_0_0_hurt.png", "tools/check_house_art.py")
+            passed("Changed damaged roof compatibility slice rejected")
+            invalid_manifest("House state scale drift rejected", lambda d: d["assets"][hurt].update(content_scale=0.001))
+            invalid_manifest("Unequal house lamp/glass counts rejected", lambda d: d["assets"][house].update(windows_xy=[[99,99]]))
+            invalid_manifest("Out-of-canvas house lamp rejected", lambda d: d["assets"][house]["windows_xy"].__setitem__(0,[99,99]))
+            invalid_manifest("Missing house glass planes rejected", lambda d: d["assets"][house].pop("window_rects_xywh"))
+            invalid_manifest("Empty house lamp family rejected", lambda d: d["assets"][house].update(windows_xy=[],window_rects_xywh=[]))
+            from PIL import Image
+            assembled_hurt=Image.new("RGBA",(64,64))
+            for e in data["assets"]:
+                if e.get("input")=="buildings/house_hurt":
+                    x,y,w,h=e["slice_xywh"]
+                    assembled_hurt.paste(images[e["id"]],(x,y))
+            assert assembled_hurt.tobytes()==images["buildings/house_hurt"].tobytes()
+            passed("Nine hurt compatibility slices reconstruct the entire authored damaged roof")
+
         original_owners = art_ownership.REGISTRY.read_bytes()
         try:
             owners = json.loads(original_owners)

@@ -13556,18 +13556,19 @@ func _task_0076_lighting() -> void:
 	expect(int(defaults[&"video/lights"]) == Lighting.FULL,
 		"and starts turned on", str(defaults.get(&"video/lights")))
 
-	# **A light per lit thing, not per tile.** The bound on the work: the
-	# house is nine occupants and must not be nine lights, which is what it
-	# was on the first run - additive blending turned the farmhouse into a
-	# white star.
+	# Sources belong to authored emitting planes, not occupied tiles.
+	# The refined farmhouse has five local glass lamps across one drawing.
 	var radii := [Lighting.HOUSE_RADIUS, Lighting.STOVE_RADIUS,
 		Lighting.GENERATOR_RADIUS, Lighting.MUZZLE_RADIUS,
 		Lighting.BURNING_RADIUS]
 	for radius in radii:
 		expect(float(radius) > 0.5 and float(radius) < 8.0,
 			"a light reaches a sensible number of tiles", str(radius))
-	expect(Lighting.HOUSE_RADIUS > Lighting.BURNING_RADIUS,
-		"and the house throws more light than a burning zombie")
+	var windows := ArtPlacement.emissions(&"house", Vector2.ZERO, &"windows", Vector2.ZERO)
+	expect(windows.size() == 5 and Lighting.HOUSE_RADIUS < Lighting.BURNING_RADIUS,
+		"five localized glass lamps preserve roof color instead of flooding nine cells")
+	expect(windows.size() * Lighting.HOUSE_RADIUS * Lighting.HOUSE_RADIUS > Lighting.BURNING_RADIUS * Lighting.BURNING_RADIUS,
+		"the grouped farmhouse still covers more warm area than one burning zombie")
 
 	_completed += 1     # last line: an abandoned group never gets here
 

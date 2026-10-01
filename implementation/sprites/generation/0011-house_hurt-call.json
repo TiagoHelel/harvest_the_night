@@ -1,0 +1,87 @@
+{
+  "id": "house_hurt",
+  "tool": "built-in ImageGen",
+  "revision": 0,
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-378fdd37-9f52-494b-9c5a-e76a2d7df508.png",
+  "source": "assets/art_source/buildings/house/hurt.png",
+  "source_sha256": "0ddfbbb4ed2f219f5a716417c78cf3d619bbe7b19b38379dcb4e3f36de101017",
+  "source_wh": [
+    1254,
+    1254
+  ],
+  "source_alpha_range": [
+    0,
+    255
+  ],
+  "prompt_text": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm\nthat becomes a fortress against zombies at night.\nPrimary request: refine the accepted farmhouse, buildings/house_hurt, one hurt state.\nInput images: Image 1: accepted farmhouse, EDIT TARGET and architecture/camera/scale identity. Preserve exactly the whole master framing, dimensions, ground baseline, chimney and five window/door-pane positions.\nStyle/medium: coherent hand-crafted pixel art with deliberate pixel clusters,\ncolored outlines, restrained texture, readable material planes and clean forms.\nComposition/framing: orthographic three-quarter top-down view on a rectangular\ngrid; match the approved master camera and scale. Final native canvas is\n64x64 pixels with contact pivot 32,60; this is a downstream import\ntarget, so the generated source must remain simple enough to survive reduction.\nLighting/mood: neutral warm daytime, highlights from upper left, darker underside;\nruntime supplies dusk/night lighting. Keep emission in separate localized forms.\nColor palette: match the approved project palette and master, warm timber and\nterracotta, layered greens, cool water, violet/blue shadows; limited ramps.\nScene/backdrop: genuinely transparent background outside this single complete house. No baked ground shadow for actors.\nConstraints: complete unclipped object, consistent perspective and scale, clear\nground contact, generous tool/weapon clearance, no labels, text, watermark or UI.\nAvoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,\nrandom pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,\nnew gameplay objects, tiny details that disappear at native size.\n\nHOUSE brief:\nCreate the farm's main house: compact warm timber farmhouse, terracotta gabled\nroof, readable roof tile clusters, front door, small windows and chimney.\nMatch the accepted pilot. Target 64x64 over an existing 48x48 logical footprint;\noverhanging roof is visual only. One coherent orthographic three-quarter\nbuilding, no diamond base tile, courtyard, ground, fence or extra structure.\nNeutral day art. Keep window planes available for separate runtime amber glow.\nState hurt: damage preserves the identity and depicts structural wear,\nnot evenly distributed holes or a second unrelated house.\n\nExact state/edit contract:\nChange only structural damage. Same house silhouette, framing, source pixel scale, roof ridge, chimney position and untouched five glass centers as the edit target. Clearly damaged but standing: a single localized missing terracotta tile cluster on the left lower roof exposes dark rafters, one cracked/slightly splintered facade beam near the left front corner, a few adjacent chipped foundation stones and one small cracked front glass pane that keeps its warm center. Damage must read at 64x64 without random scattered holes, uniform black polka dots, red damage overlay, floating rubble, extra smoke/flames or a second unrelated house. Do not collapse, move or shrink the house, change the doorway/steps/roof perimeter, dim all windows or alter camera/lighting. Preserve true transparency and complete margins. Use broad connected damage cues, about 8x6 native pixels for the roof opening and 5x7 for facade wear; no many tiny cracks that vanish at reduction.",
+  "references": [
+    "assets/art_source/buildings/house/whole.png"
+  ],
+  "measured_recipe": {
+    "id": "buildings/house_hurt",
+    "source": "assets/art_source/buildings/house/hurt.png",
+    "crop_xywh": [
+      114,
+      134,
+      1082,
+      1053
+    ],
+    "sheet_cell_xywh": [
+      0,
+      0,
+      1254,
+      1254
+    ],
+    "gutter_xy": [
+      0,
+      0
+    ],
+    "canvas_wh": [
+      64,
+      64
+    ],
+    "pivot_xy": [
+      32,
+      60
+    ],
+    "content_scale": 0.05180388529139685,
+    "alpha_threshold": 128
+  },
+  "native_bbox": [
+    4,
+    5,
+    60,
+    60
+  ],
+  "decision": "Accepted after two-state native/nearest3x alpha/background/scale review, 49 actual Godot captures, all four production light states, full/hurt farmer/walker occlusion pixels, five physical window glows, automatic HP-only threshold/upgrade refresh, ghosts/camera bounds and unchanged simulation/data guards.",
+  "initial_measured_recipe": {
+    "id": "buildings/house_hurt",
+    "source": "assets/art_source/buildings/house/hurt.png",
+    "crop_xywh": [
+      114,
+      134,
+      1082,
+      1053
+    ],
+    "sheet_cell_xywh": [
+      0,
+      0,
+      1254,
+      1254
+    ],
+    "gutter_xy": [
+      0,
+      0
+    ],
+    "canvas_wh": [
+      64,
+      64
+    ],
+    "pivot_xy": [
+      32,
+      60
+    ],
+    "content_scale": 0.05180388529139685,
+    "alpha_threshold": 128
+  }
+}

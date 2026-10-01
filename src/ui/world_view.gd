@@ -260,7 +260,9 @@ func _process(delta: float) -> void:
 	# **Not rebuilt every frame.** Godot's Dictionary hash is cheap and exact
 	# enough to notice a placement or a removal; the determinism hash is a
 	# different thing for a different job and is not used here.
-	var signature: int = (_state["occupants"] as Dictionary).hash()
+	# House HP lives outside the occupants table; crossing the existing wear
+	# threshold must refresh its drawing even when all nine cells are unchanged.
+	var signature: int = [(_state["occupants"] as Dictionary).hash(), _house_hurt()].hash()
 	if signature != _last_signature:
 		_last_signature = signature
 		_dirty = true
@@ -1204,6 +1206,8 @@ func _just_fired(on: Dictionary) -> bool:
 ## Whether it has taken enough to show it. The same threshold the tint uses,
 ## so the art and the colour agree about when something looks battered.
 func _is_hurt(on: Dictionary) -> bool:
+	if on["id"] == &"house":
+		return _house_hurt()
 	var entry: Variant = Building.entry_of(StringName(on["id"]))
 	if entry == null:
 		return false
@@ -1211,6 +1215,10 @@ func _is_hurt(on: Dictionary) -> bool:
 	if full <= 0:
 		return false
 	return float(int(on.get("hp", full))) / float(full) < WOUNDED_AT
+
+
+func _house_hurt() -> bool:
+	return not _state.is_empty() and float(int(_state["house_hp"])) / float(maxi(Phases.house_full(_state), 1)) < WOUNDED_AT
 
 
 ## Whether there is art by that name, **remembered**.

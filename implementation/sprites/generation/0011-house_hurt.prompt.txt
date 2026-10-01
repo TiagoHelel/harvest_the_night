@@ -1,0 +1,34 @@
+Use case: stylized-concept
+Asset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm
+that becomes a fortress against zombies at night.
+Primary request: refine the accepted farmhouse, buildings/house_hurt, one hurt state.
+Input images: Image 1: accepted farmhouse, EDIT TARGET and architecture/camera/scale identity. Preserve exactly the whole master framing, dimensions, ground baseline, chimney and five window/door-pane positions.
+Style/medium: coherent hand-crafted pixel art with deliberate pixel clusters,
+colored outlines, restrained texture, readable material planes and clean forms.
+Composition/framing: orthographic three-quarter top-down view on a rectangular
+grid; match the approved master camera and scale. Final native canvas is
+64x64 pixels with contact pivot 32,60; this is a downstream import
+target, so the generated source must remain simple enough to survive reduction.
+Lighting/mood: neutral warm daytime, highlights from upper left, darker underside;
+runtime supplies dusk/night lighting. Keep emission in separate localized forms.
+Color palette: match the approved project palette and master, warm timber and
+terracotta, layered greens, cool water, violet/blue shadows; limited ramps.
+Scene/backdrop: genuinely transparent background outside this single complete house. No baked ground shadow for actors.
+Constraints: complete unclipped object, consistent perspective and scale, clear
+ground contact, generous tool/weapon clearance, no labels, text, watermark or UI.
+Avoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,
+random pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,
+new gameplay objects, tiny details that disappear at native size.
+
+HOUSE brief:
+Create the farm's main house: compact warm timber farmhouse, terracotta gabled
+roof, readable roof tile clusters, front door, small windows and chimney.
+Match the accepted pilot. Target 64x64 over an existing 48x48 logical footprint;
+overhanging roof is visual only. One coherent orthographic three-quarter
+building, no diamond base tile, courtyard, ground, fence or extra structure.
+Neutral day art. Keep window planes available for separate runtime amber glow.
+State hurt: damage preserves the identity and depicts structural wear,
+not evenly distributed holes or a second unrelated house.
+
+Exact state/edit contract:
+Change only structural damage. Same house silhouette, framing, source pixel scale, roof ridge, chimney position and untouched five glass centers as the edit target. Clearly damaged but standing: a single localized missing terracotta tile cluster on the left lower roof exposes dark rafters, one cracked/slightly splintered facade beam near the left front corner, a few adjacent chipped foundation stones and one small cracked front glass pane that keeps its warm center. Damage must read at 64x64 without random scattered holes, uniform black polka dots, red damage overlay, floating rubble, extra smoke/flames or a second unrelated house. Do not collapse, move or shrink the house, change the doorway/steps/roof perimeter, dim all windows or alter camera/lighting. Preserve true transparency and complete margins. Use broad connected damage cues, about 8x6 native pixels for the roof opening and 5x7 for facade wear; no many tiny cracks that vanish at reduction.

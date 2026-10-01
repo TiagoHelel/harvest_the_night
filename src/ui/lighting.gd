@@ -52,7 +52,7 @@ const GLOW_SIZE := 64
 ## Sources, in tiles of radius. Cosmetic, so they live here rather than in
 ## `game_data`: a purely visual number in the data hash would mean a
 ## balance-neutral tweak failed the guard.
-const HOUSE_RADIUS := 3.4
+const HOUSE_RADIUS := 0.9
 const STOVE_RADIUS := 2.2
 const GENERATOR_RADIUS := 1.6
 const MUZZLE_RADIUS := 2.0
@@ -145,11 +145,8 @@ func _draw() -> void:
 	# are integers and sort as integers - names would need `sorted_names`.
 	keys.sort()
 
-	# **One light per building, not one per tile.** The house is nine
-	# occupants and the kitchen four, so lighting each cell stacked nine
-	# glows on top of each other and additive blending turned the farmhouse
-	# into a white star. A light belongs to the thing, and the thing's middle
-	# is the average of the cells it stands on.
+	# Group once per building. The farmhouse emits only at measured glass
+	# panes; its nine occupied cells never duplicate those light sources.
 	var middles: Dictionary = {}
 	for idx in keys:
 		var on: Dictionary = occupants[idx]
@@ -173,7 +170,8 @@ func _draw() -> void:
 		at = ArtPlacement.emission(id, (box[3] as Vector2) * tile, &"light", at)
 		match id:
 			&"house":
-				_glow_at(at, HOUSE_RADIUS * tile, HOUSE_COLOUR, 0.60)
+				for window in ArtPlacement.emissions(id, (box[3] as Vector2) * tile, &"windows", at):
+					_glow_at(window, HOUSE_RADIUS * tile, HOUSE_COLOUR, 0.26)
 			&"kitchen":
 				_glow_at(at, STOVE_RADIUS * tile, STOVE_COLOUR, 0.70)
 			&"generator":

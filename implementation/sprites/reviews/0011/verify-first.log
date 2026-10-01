@@ -1,0 +1,47 @@
+
+HARVEST THE NIGHT - verify
+  godot: found
+
+  python tooling               PASS   0.1s
+  backlog index                PASS   0.1s
+  godot import                 PASS  10.2s
+  script parse                 PASS   9.9s  PARSED 105 scripts, 0 failed
+  core is pure                 PASS   0.0s
+  sprites                      PASS   6.8s  OK    116 sprites match their maps
+  player art                   PASS   1.0s  OK    0 player frames match the sheet
+  raster art                   PASS  10.7s  OK: 154 raster outputs, metadata verified, 0 written
+  art placement                PASS   1.6s  ART SHOWCASE: 476 checks, 0 failed
+  player locomotion            PASS   1.4s  PLAYER SHOWCASE: 468 checks, 0 failed
+  player work                  PASS   2.0s  PLAYER WORK: 3749 checks, 0 failed
+  player reactions             PASS   1.9s  PLAYER REACTIONS: 690 checks, 0 failed
+  terrain sources/atlas        PASS   9.9s  OK: 8 seamless materials; 3 distinct water phases; 8 static sides; 8 exact corner caps; 21 raster atlas cells; all 80 cells source-exact
+  terrain lighting             PASS   1.6s  TERRAIN SHOWCASE: 19609 checks, 0 failed
+  water edges/corners          PASS   2.3s  WATER SHOWCASE: 2201 checks, 0 failed
+  prop sources/variants        PASS   5.0s  OK: 11 source-owned props; 4 distinct same-scale variants; clean silhouettes and exact ground pivots
+  prop overlap/gathering       PASS   1.6s  PROP SHOWCASE: 8535 checks, 0 failed
+  crop sources/moisture        PASS   5.9s  OK: 14 source-exact crop/soil outputs; progressive stages; grounded tall corn; wet cue exposed under every stage
+  crop placement/growth        PASS   1.7s  CROP SHOWCASE: 6224 checks, 0 failed
+  house sources/windows        PASS   5.8s  OK: 2 independent source-owned house states; 18 exact roof slices; 5 readable glass lamps; shared scale/door contact; 148 roof damage pixels
+  house HP/lighting            PASS   1.6s  HOUSE SHOWCASE: 1059 checks, 0 failed
+  font                         PASS   0.1s  OK    4 font files match the maps
+  logo                         PASS   0.1s  OK    the logo matches the font it is made of
+  sfx                          PASS   0.5s  OK    27 sounds match their recipes (13 day, 14 night)
+  perf                         FAIL   5.6s  FAIL  path_refresh is 34359us and the budget is 33333 (and 1 more)
+  icon                         PASS   0.5s  OK    8 icon sizes match the one drawing
+  playtest                     PASS   0.1s  OK    the reader reads what the game writes
+  store                        PASS   0.1s  CHECKED  the parts that need no capture
+  devlog                       PASS   0.2s  journal    112 entries against 110 done, 26 hash moves, 50 findings
+  strings                      PASS   0.1s  OK    385 keys in 2 languages, all of them fit
+  music                        PASS  12.1s  OK    4 pieces match their recipes
+  ambience                     PASS   1.9s  OK    11 ambience files match their recipes (2 beds, 9 touches)
+  headless_check               FAIL  67.4s  6609 asserts, 1 failed
+  sim hash                     PASS   1.7s  1961000123 unchanged
+  data hash                    PASS   0.0s  407837701 unchanged
+  input_check                  PASS  64.7s  980 cases, 0 failed
+  exports                      PASS  18.1s
+
+  35 passed, 0 skipped, 2 failed in 254s
+
+FAIL
+  perf: FAIL  path_refresh is 34359us and the budget is 33333 (and 1 more)
+  headless_check: 6609 asserts, 1 failed

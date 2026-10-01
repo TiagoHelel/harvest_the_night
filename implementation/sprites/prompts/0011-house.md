@@ -1,6 +1,6 @@
 # 0011 - Farmhouse as the visual landmark
 
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0003, 0009
 - **Likely files:** assets/art_source/buildings/house/; sprites/buildings/house*; src/ui/world_view.gd; src/ui/lighting.gd
 - **Generation briefs:** HOUSE

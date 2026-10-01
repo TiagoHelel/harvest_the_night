@@ -1,0 +1,34 @@
+Use case: stylized-concept
+Asset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm
+that becomes a fortress against zombies at night.
+Primary request: refine the accepted farmhouse, buildings/house, one whole state.
+Input images: Image 1: accepted farmhouse, EDIT TARGET and architecture/camera/scale identity. Image 2: repository reference sheet, material/style reference only.
+Style/medium: coherent hand-crafted pixel art with deliberate pixel clusters,
+colored outlines, restrained texture, readable material planes and clean forms.
+Composition/framing: orthographic three-quarter top-down view on a rectangular
+grid; match the approved master camera and scale. Final native canvas is
+64x64 pixels with contact pivot 32,60; this is a downstream import
+target, so the generated source must remain simple enough to survive reduction.
+Lighting/mood: neutral warm daytime, highlights from upper left, darker underside;
+runtime supplies dusk/night lighting. Keep emission in separate localized forms.
+Color palette: match the approved project palette and master, warm timber and
+terracotta, layered greens, cool water, violet/blue shadows; limited ramps.
+Scene/backdrop: genuinely transparent background outside this single complete house. No baked ground shadow for actors.
+Constraints: complete unclipped object, consistent perspective and scale, clear
+ground contact, generous tool/weapon clearance, no labels, text, watermark or UI.
+Avoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,
+random pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,
+new gameplay objects, tiny details that disappear at native size.
+
+HOUSE brief:
+Create the farm's main house: compact warm timber farmhouse, terracotta gabled
+roof, readable roof tile clusters, front door, small windows and chimney.
+Match the accepted pilot. Target 64x64 over an existing 48x48 logical footprint;
+overhanging roof is visual only. One coherent orthographic three-quarter
+building, no diamond base tile, courtyard, ground, fence or extra structure.
+Neutral day art. Keep window planes available for separate runtime amber glow.
+State whole: damage preserves the identity and depicts structural wear,
+not evenly distributed holes or a second unrelated house.
+
+Exact state/edit contract:
+Preserve this exact compact farmhouse design and silhouette: one front gable, terracotta roof, right gray chimney, timber facade, central door, two front windows, one gable window, one right-wall window and the small glazed door pane. Keep the same source canvas dimensions, object framing, outer margins and stair ground baseline; this is an edit, not another larger house. Refine the roof into calmer broad joined red tile clusters and clear three-plane shading that survive a 56x55 native body, simplifying tiny speckles and redundant one-pixel tile seams. Retain the facade beams, large simple window frames and short entrance steps. Warm pale gold panes without baked bloom; window glass remains visibly separated by dark timber mullions. No new windows, balcony, decorations, smoke, ground patch or shadows. Neutral upper-left daylight, matching existing cozy pixel art, crisp simple colored edges.

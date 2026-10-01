@@ -10,6 +10,7 @@ var _failed := 0
 var _capture := false
 var _folder := "res://implementation/shots/sprites/0003/showcase/"
 var _caption: Label
+var _house_lighting: Lighting
 
 
 func _initialize() -> void:
@@ -30,7 +31,7 @@ func _run() -> void:
 		if arg.begins_with("--out="):
 			_folder = "res://" + arg.substr(6).trim_suffix("/") + "/"
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(_folder))
-	if args.has("--terrain") or args.has("--water") or args.has("--props") or args.has("--crops"):
+	if args.has("--terrain") or args.has("--water") or args.has("--props") or args.has("--crops") or args.has("--house"):
 		# Use Main's real relighting pipeline for all three material light states.
 		var relight := Relight.new()
 		relight.name = "Relight"
@@ -40,6 +41,7 @@ func _run() -> void:
 	root.add_child(_world)
 	await process_frame
 	var overlay := CanvasLayer.new()
+	overlay.layer = 3
 	root.add_child(overlay)
 	_caption = Label.new()
 	_caption.position = Vector2(8, 8)
@@ -61,6 +63,18 @@ func _run() -> void:
 	player["facing"] = Player.SOUTH
 	player["action"] = {}
 	var actor := Entities.get_one(_state, enemy)
+	if args.has("--house"):
+		var lamps := CanvasLayer.new()
+		lamps.layer = 2
+		root.add_child(lamps)
+		_house_lighting = Lighting.new()
+		lamps.add_child(_house_lighting)
+		_house_lighting.set_quality(Lighting.STEADY)
+		_house_lighting.set_process(false)
+		await _house_family()
+		print("HOUSE SHOWCASE: %d checks, %d failed" % [_checks, _failed])
+		quit(1 if _failed > 0 else 0)
+		return
 	if args.has("--crops"):
 		await _crops_family()
 		print("CROP SHOWCASE: %d checks, %d failed" % [_checks, _failed])
@@ -162,6 +176,171 @@ func _run() -> void:
 	await _contacts()
 	print("ART SHOWCASE: %d checks, %d failed" % [_checks, _failed])
 	quit(1 if _failed > 0 else 0)
+
+
+## Independent full/hurt farmhouse states through the production view and lights.
+func _house_sprite() -> Sprite2D:
+	for node in _world.get_node("Occupants").get_children():
+		if node is Sprite2D and node.get_meta("logical_cells", []).size() == 9:
+			return node
+	return null
+
+
+func _house_check(corner: Vector2i = Vector2i(20, 6)) -> void:
+	var sprite := _house_sprite()
+	expect(sprite != null, "Exactly one grouped farmhouse drawing exists")
+	if sprite == null:
+		return
+	var wanted := "house_hurt" if float(_state["house_hp"]) / Phases.house_full(_state) < 0.75 else "house"
+	expect(sprite.texture.resource_path == WorldView.BUILDING_DIR + wanted + ".png", "House art reads the separate HP field, including upgrades")
+	expect(sprite.position == Vector2(corner * 16 + Vector2i(24, 48)) and sprite.offset == Vector2(-32, -60), "Damage preserves roof, entrance and source ground anchor")
+	expect(sprite.modulate == Color.WHITE, "Authored damaged facade retains readable source colors")
+	var found := 0
+	for node in _world.get_node("Occupants").get_children():
+		if node is Sprite2D and node.get_meta("logical_cells", []).size() == 9:
+			found += 1
+	expect(found == 1, "Nine compatibility slices are never drawn as nine roofs")
+	for y in 3:
+		for x in 3:
+			var cell := corner + Vector2i(x, y)
+			expect(Farm.occupant(_state, cell).get("id") == &"house" and not Farm.is_empty(_state, cell), "All nine original footprint cells remain blocked")
+	expect(Farm.is_empty(_state, corner + Vector2i(3, 2)), "Roof overhang adds no logical blocking cell")
+	var windows := ArtPlacement.emissions(&"house", Vector2(corner * 16), &"windows", Vector2.ZERO)
+	expect(windows.size() == 5, "One grouped house emits exactly five physical window lights")
+	var local := [Vector2(32, 33), Vector2(19, 45), Vector2(41, 45), Vector2(30, 45), Vector2(52, 46)]
+	for i in windows.size():
+		expect(windows[i] == Vector2(corner * 16) + Vector2(-8, -12) + local[i], "Each glow uses its measured glass plane")
+	expect(ArtPlacement.emission(&"house", Vector2(corner * 16), &"smoke", Vector2.ZERO) == Vector2(corner * 16) + Vector2(43, 0), "Chimney smoke shares the authored whole/hurt roof opening")
+
+
+func _house_settle(view: PlayerView) -> void:
+	var before := var_to_bytes(_state)
+	_house_lighting.show_state(_state)
+	_house_lighting.queue_redraw()
+	await _reaction_settle(view)
+	expect(var_to_bytes(_state) == before, "House/lamp presentation cannot change HP, occupancy, RNG or saves")
+
+
+func _house_overlap(body: Sprite2D, behind: bool) -> void:
+	if not _capture:
+		return
+	var house := _house_sprite()
+	var before := var_to_bytes(_state)
+	await RenderingServer.frame_post_draw
+	var covered := root.get_texture().get_image()
+	house.hide()
+	await process_frame
+	await RenderingServer.frame_post_draw
+	var open := root.get_texture().get_image()
+	var source := body.texture.get_image()
+	var transform := body.get_global_transform_with_canvas()
+	var changed := 0
+	for y in source.get_height():
+		for x in source.get_width():
+			if source.get_pixel(x, y).a < 0.99:
+				continue
+			var point := Vector2i(transform * (body.offset + Vector2(x, y)))
+			if Rect2i(Vector2i.ZERO, covered.get_size()).has_point(point) and covered.get_pixelv(point) != open.get_pixelv(point):
+				changed += 1
+	expect(changed > 10 if behind else changed == 0, "Actual whole/hurt facade hides actors behind and preserves all their pixels in front")
+	house.show()
+	await process_frame
+	expect(var_to_bytes(_state) == before, "Occlusion sampling never changes simulation state")
+
+
+func _house_lamp_pixels() -> void:
+	if not _capture:
+		return
+	var before := var_to_bytes(_state)
+	_house_lighting.set_quality(Lighting.OFF)
+	await process_frame
+	await RenderingServer.frame_post_draw
+	var dark := root.get_texture().get_image()
+	_house_lighting.set_quality(Lighting.STEADY)
+	await process_frame
+	await RenderingServer.frame_post_draw
+	var lit := root.get_texture().get_image()
+	var transform := root.get_canvas_transform()
+	for window in ArtPlacement.emissions(&"house", Vector2(320, 96), &"windows", Vector2.ZERO):
+		var point := Vector2i(transform * window)
+		expect(lit.get_pixelv(point).r > dark.get_pixelv(point).r + 0.05, "Each physical window receives a visible local warm pool")
+	var outside := Vector2i(transform * Vector2(344, 90))
+	expect(lit.get_pixelv(outside) == dark.get_pixelv(outside), "House lights do not bleach the terracotta roof ridge")
+	expect(var_to_bytes(_state) == before, "Light quality cannot alter the night's rules")
+
+
+func _house_family() -> void:
+	var view: PlayerView = _world.get_node("Occupants/PlayerView")
+	view.set_process(false)
+	_world.set_process(false)
+	expect(_world._relight != null, "House fixtures use the actual Main relighting pipeline")
+	for lighting in 4:
+		for hurt in 2:
+			_reaction_fixture(Phases.NIGHT if lighting == 3 else Phases.DAY, lighting == 2)
+			if lighting == 0:
+				_state["day_tick"] = 0
+			_state["house_hp"] = Phases.house_full(_state) / 5 if hurt else Phases.house_full(_state)
+			await _house_settle(view)
+			_world.look_at_cell(Vector2i(20, 9))
+			await process_frame
+			_house_check()
+			await _shoot("state_%d_light%d" % [hurt, lighting], "Whole/hurt farmhouse; dawn/day/dusk/night %d; five source-owned windows" % lighting)
+			if lighting == 3:
+				await _house_lamp_pixels()
+				for quality in [Lighting.OFF, Lighting.FULL]:
+					_house_lighting.set_quality(quality)
+					await _shoot("state_%d_quality%d" % [hurt, quality], "Night farmhouse: quality %d; same HP and anchored lamps" % quality)
+				_house_lighting.set_quality(Lighting.STEADY)
+			if lighting in [1, 3]:
+				var enemy := Entities.get_one(_state, Entities.ids(_state)[0])
+				for subject in 2:
+					for front in 2:
+						var at := Vector2i(344, 150 if front else 138)
+						_set_contact(_state["player"], at if subject == 0 else Vector2i(296, 160))
+						_set_contact(enemy, at if subject == 1 else Vector2i(400, 180))
+						await _house_settle(view)
+						_house_check()
+						var body: Sprite2D = view.get_node("Body") if subject == 0 else _world.get_node("Occupants/Actors").get_child(0)
+						await _house_overlap(body, not bool(front))
+						await _shoot("overlap_%d_light%d_subject%d_front%d" % [hurt, lighting, subject, front], "Farmer/walker %d behind/front %d; whole/hurt %d; light %d" % [subject, front, hurt, lighting])
+	# Only HP changes: no occupant dictionary change or explicit show_state.
+	_reaction_fixture()
+	await _house_settle(view)
+	var occupant_hash: int = _state["occupants"].hash()
+	for upgraded in 2:
+		_state["tech_owned"] = [&"stout timbers"] if upgraded else []
+		var full := Phases.house_full(_state)
+		for hp in [full, full * 3 / 4, full * 3 / 4 - 1, 1, 0, full]:
+			_state["house_hp"] = hp
+			var before := var_to_bytes(_state)
+			_world._process(0.0)
+			await process_frame
+			_house_check()
+			expect(var_to_bytes(_state) == before and _state["occupants"].hash() == occupant_hash, "HP threshold refreshes without a core/occupancy write")
+			if hp == full * 3 / 4 or hp == full * 3 / 4 - 1:
+				await _shoot("threshold_%d_hp%d" % [upgraded, hp], "Automatic HP-only refresh; upgraded %d; HP %d/%d" % [upgraded, hp, full])
+	for lighting in 4:
+		_reaction_fixture(Phases.NIGHT if lighting == 3 else Phases.DAY, lighting == 2)
+		if lighting == 0:
+			_state["day_tick"] = 0
+		await _house_settle(view)
+		_world.show_ghost(Vector2i(14, 10), &"house", true)
+		var ghost: Sprite2D = _world.find_child("Ghost", true, false)
+		expect(ghost.position == Vector2(248, 208) and ghost.offset == Vector2(-32, -60) and _world.ghost_footprint() == Vector2i(3, 3), "House preview keeps the whole roof over its original nine-cell footprint")
+		await _shoot("ghost_light%d" % lighting, "Full farmhouse preview; unchanged 3x3 footprint; light %d" % lighting)
+		_world.hide_ghost()
+	for hurt in 2:
+		for corner in [Vector2i(0, 0), Vector2i(37, 0), Vector2i(0, 15), Vector2i(37, 15)]:
+			_reaction_fixture()
+			_state["occupants"].clear()
+			_add_house(corner)
+			_state["house_cell"] = [corner.x + 1, corner.y + 1]
+			_state["house_hp"] = 1 if hurt else Phases.house_full(_state)
+			await _house_settle(view)
+			_world.look_at_cell(corner)
+			await process_frame
+			_house_check(corner)
+			await _shoot("bounds_%d_%d_%d" % [hurt, corner.x, corner.y], "Map/camera boundary: one coherent whole/hurt roof and nine logical cells")
 
 
 ## All actual growth stages and moisture cues in the production ground layer.
@@ -1324,7 +1503,7 @@ func _check_placement() -> void:
 	expect(body.offset == Vector2(-24, -44), "Pilot farmer is the accepted 30px source at its ground pivot")
 	var light := ArtPlacement.emission(&"house", Vector2(320, 96), &"light", Vector2.ZERO)
 	var smoke := ArtPlacement.emission(&"house", Vector2(320, 96), &"smoke", Vector2.ZERO)
-	expect(light == Vector2(344, 127) and smoke == Vector2(361, 98), "Lamp/chimney anchor follows the same full house drawing")
+	expect(light == Vector2(331, 129) and smoke == Vector2(363, 96), "Lamp/chimney anchor follows the same full house drawing")
 
 
 func _shoot(name: String, caption: String) -> void:
