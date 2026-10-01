@@ -543,23 +543,31 @@
     },
     {
       "output": "sprites/buildings/kitchen.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/buildings/kitchen_0_0.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/buildings/kitchen_0_1.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/buildings/kitchen_1_0.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/buildings/kitchen_1_1.png",
-      "owner": "ascii"
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/kitchen_active.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/kitchen_hurt.png",
+      "owner": "raster"
     },
     {
       "output": "sprites/buildings/mine.png",
@@ -619,23 +627,31 @@
     },
     {
       "output": "sprites/buildings/workshop.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/buildings/workshop_0_0.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/buildings/workshop_0_1.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/buildings/workshop_1_0.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/buildings/workshop_1_1.png",
-      "owner": "ascii"
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/workshop_active.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/workshop_hurt.png",
+      "owner": "raster"
     },
     {
       "output": "sprites/crops/carrot_0.png",
@@ -786,20 +802,32 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/props/generator.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/props/generator_0_0.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/props/generator_0_1.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/props/generator_1_0.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/props/generator_1_1.png",
-      "owner": "ascii"
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/generator_active.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/generator_hurt.png",
+      "owner": "raster"
     },
     {
       "output": "sprites/props/ore.png",
@@ -810,20 +838,32 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/props/press.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/props/press_0_0.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/props/press_0_1.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/props/press_1_0.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/props/press_1_1.png",
-      "owner": "ascii"
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/press_active.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/press_hurt.png",
+      "owner": "raster"
     },
     {
       "output": "sprites/props/rock.png",
@@ -843,7 +883,7 @@
     },
     {
       "output": "sprites/props/shop.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/props/stump.png",
@@ -859,7 +899,7 @@
     },
     {
       "output": "sprites/props/well.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/terrain/atlas.png",

@@ -1,0 +1,64 @@
+{
+  "id": "press",
+  "kind": "master",
+  "tool": "built-in ImageGen",
+  "revision": 0,
+  "returned_file": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-491071bc-4b48-461e-b769-604c1106ccc6.png",
+  "source": "assets/art_source/buildings/press/master.png",
+  "source_sha256": "5b3d8ed220093484e2ebecc3da1c87fa678dc430ab83c84cd5a4ae0860457882",
+  "source_wh": [
+    1254,
+    1254
+  ],
+  "source_alpha_range": [
+    0,
+    255
+  ],
+  "prompt": "implementation/sprites/generation/0012-press-master.prompt.txt",
+  "prompt_sha256": "f1869c8346278c16322c255167dee5887615c841927b5ec6266464bbb40c683e",
+  "references": [
+    "assets/art_source/buildings/house/whole.png",
+    "docs/reference-sheet.png"
+  ],
+  "measured_recipes": [
+    {
+      "id": "props/press",
+      "source": "assets/art_source/buildings/press/master.png",
+      "crop_xywh": [
+        220,
+        165,
+        978,
+        945
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.03680981595092025,
+      "alpha_threshold": 128
+    }
+  ],
+  "source_bounds": [
+    [
+      220,
+      165,
+      1198,
+      1110
+    ]
+  ],
+  "decision": "Accepted: source alpha, native palette/scale/contact, identity and actual Godot states reviewed. Master-only records establish identity; state strips own final production frames."
+}

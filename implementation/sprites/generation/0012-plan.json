@@ -1,0 +1,128 @@
+[
+  {
+    "id": "workshop",
+    "folder": "buildings",
+    "canvas_wh": [
+      48,
+      48
+    ],
+    "pivot_xy": [
+      24,
+      44
+    ],
+    "body_wh": [
+      40,
+      38
+    ],
+    "prompt": "implementation/sprites/generation/0012-workshop-master.prompt.txt",
+    "references": [
+      "assets/art_source/buildings/house/whole.png",
+      "docs/reference-sheet.png"
+    ]
+  },
+  {
+    "id": "kitchen",
+    "folder": "buildings",
+    "canvas_wh": [
+      48,
+      48
+    ],
+    "pivot_xy": [
+      24,
+      44
+    ],
+    "body_wh": [
+      40,
+      38
+    ],
+    "prompt": "implementation/sprites/generation/0012-kitchen-master.prompt.txt",
+    "references": [
+      "assets/art_source/buildings/house/whole.png",
+      "docs/reference-sheet.png"
+    ]
+  },
+  {
+    "id": "press",
+    "folder": "props",
+    "canvas_wh": [
+      48,
+      48
+    ],
+    "pivot_xy": [
+      24,
+      44
+    ],
+    "body_wh": [
+      36,
+      40
+    ],
+    "prompt": "implementation/sprites/generation/0012-press-master.prompt.txt",
+    "references": [
+      "assets/art_source/buildings/house/whole.png",
+      "docs/reference-sheet.png"
+    ]
+  },
+  {
+    "id": "generator",
+    "folder": "props",
+    "canvas_wh": [
+      48,
+      48
+    ],
+    "pivot_xy": [
+      24,
+      44
+    ],
+    "body_wh": [
+      42,
+      30
+    ],
+    "prompt": "implementation/sprites/generation/0012-generator-master.prompt.txt",
+    "references": [
+      "assets/art_source/buildings/house/whole.png",
+      "docs/reference-sheet.png"
+    ]
+  },
+  {
+    "id": "shop",
+    "folder": "props",
+    "canvas_wh": [
+      32,
+      40
+    ],
+    "pivot_xy": [
+      16,
+      36
+    ],
+    "body_wh": [
+      28,
+      32
+    ],
+    "prompt": "implementation/sprites/generation/0012-shop-master.prompt.txt",
+    "references": [
+      "assets/art_source/buildings/house/whole.png",
+      "docs/reference-sheet.png"
+    ]
+  },
+  {
+    "id": "well",
+    "folder": "props",
+    "canvas_wh": [
+      24,
+      32
+    ],
+    "pivot_xy": [
+      12,
+      30
+    ],
+    "body_wh": [
+      20,
+      26
+    ],
+    "prompt": "implementation/sprites/generation/0012-well-master.prompt.txt",
+    "references": [
+      "assets/art_source/buildings/house/whole.png",
+      "docs/reference-sheet.png"
+    ]
+  }
+]

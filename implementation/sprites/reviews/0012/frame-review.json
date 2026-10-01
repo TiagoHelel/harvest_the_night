@@ -1,0 +1,222 @@
+{
+  "captures": [
+    {
+      "path": "implementation/shots/sprites/0012/stations/activity_only_start.png",
+      "sha256": "d6f561d0554a7be8c1ca1833c3c4edbf6936fb05f9d43731237865d3611a465d"
+    },
+    {
+      "path": "implementation/shots/sprites/0012/stations/activity_only_stop.png",
+      "sha256": "9f49ee88cf842bc7bf1bbe0d0da3fbebaa2d520da46822be5a637fc4536696f5"
+    },
+    {
+      "path": "implementation/shots/sprites/0012/stations/family_0_light0.png",
+      "sha256": "1d6b50b0cdd97ae36262c59ea1f420847b08f4026cb05baa94ec8a956e5fcec5"
+    },
+    {
+      "path": "implementation/shots/sprites/0012/stations/family_0_light1.png",
+      "sha256": "c6c5a5659333e2480c0b0d64636c8b46f65dc8f352ed7bffdb2a7fd089ea2a97"
+    },
+    {
+      "path": "implementation/shots/sprites/0012/stations/family_0_light2.png",
+      "sha256": "4340c1ba8cbc36846cb9e445189d6be8b15ccb6ec276cc8d298c7a3bae0b04d7"
+    },
+    {
+      "path": "implementation/shots/sprites/0012/stations/family_0_light3.png",
+      "sha256": "fa77686f6c0fb88c67518dc53a88a9a7d777db732f4d94bc7ac6d4f0d891e4a0"
+    },
+    {
+      "path": "implementation/shots/sprites/0012/stations/family_1_light0.png",
+      "sha256": "b4bbb8a58219e85119d3bd0f053164f15703addfdf35dde6e0fc86676fa0c88b"
+    },
+    {
+      "path": "implementation/shots/sprites/0012/stations/family_1_light1.png",
+      "sha256": "c0a75fb25a502f82653e911afdd53ab6ba17c2f7fb877cb43b0442825e80658f"
+    },
+    {
+      "path": "implementation/shots/sprites/0012/stations/family_1_light2.png",
+      "sha256": "809947181a152051dbe2bc33dfde5876f1a424d7467ca46c6d8e9e75357bbf65"
+    },
+    {
+      "path": "implementation/shots/sprites/0012/stations/family_1_light3.png",
+      "sha256": "73957a7b7dffa4e32e5618552d4abf9e4c24ea4d66a32da5e8e8df4f0102e90a"
+    },
+    {
+      "path": "implementation/shots/sprites/0012/stations/family_2_light0.png",
+      "sha256": "ffc926d2f2cb8934e68ae0b65a92487574f5efcea4f2afbcc9fe273137c91de3"
+    },
+    {
+      "path": "implementation/shots/sprites/0012/stations/family_2_light1.png",
+      "sha256": "64c5f92bd83d7ccd1bd076656a2f7cc1ec7bb87aee2c2510a08f6ddf30da0df0"
+    },
+    {
+      "path": "implementation/shots/sprites/0012/stations/family_2_light2.png",
+      "sha256": "1713f118fdc6f46faeb692353290430f53cfc9c2ed7c4ed5ef55d3adb06ce0c7"
+    },
+    {
+      "path": "implementation/shots/sprites/0012/stations/family_2_light3.png",
+      "sha256": "ca52c0310d89c8e911afdb8bb1e01d6c055bf5cc25a160cea1968530fc0b33d8"
+    },
+    {
+      "path": "implementation/shots/sprites/0012/stations/ghost_generator.png",
+      "sha256": "249e2be1b3f8a729612124880da7dfeedb31f9c33b772b7c10317d2d768c14f5"
+    },
+    {
+      "path": "implementation/shots/sprites/0012/stations/ghost_kitchen.png",
+      "sha256": "6f617fa97fc61b293fbd7b52faa93ea5edf7a55e37817f96168803b42d3a4a08"
+    },
+    {
+      "path": "implementation/shots/sprites/0012/stations/ghost_press.png",
+      "sha256": "6f8fa010f5f0537fb4915c4e1cbfab586514923d459e8e6838c6c99fc6d75018"
+    },
+    {
+      "path": "implementation/shots/sprites/0012/stations/ghost_shop.png",
+      "sha256": "83a87a221778cacc10a726113e41930b157638083ce56bff1facb9f5f28083b2"
+    },
+    {
+      "path": "implementation/shots/sprites/0012/stations/ghost_well.png",
+      "sha256": "363c81a6267eb8f80c7f9e09eed2683fd63e4e8de2019c53741a306494acd0f6"
+    },
+    {
+      "path": "implementation/shots/sprites/0012/stations/ghost_workshop.png",
+      "sha256": "601b7f990629968ba2e6d18eedbf96f8711e638c6ff35be057c805cdc6de7286"
+    },
+    {
+      "path": "implementation/shots/sprites/0012/stations/independent_jobs.png",
+      "sha256": "fed89a86121bc1a7c908c24933529d4aa18a860c192e63a87d0659b7d4ce1516"
+    },
+    {
+      "path": "implementation/shots/sprites/0012/stations/overlap_generator_subject0_front0.png",
+      "sha256": "296eda995ec362cc6d61bb9311aa57ff30203b64a25fb6ebb7fcb3e4a2bcb4e9"
+    },
+    {
+      "path": "implementation/shots/sprites/0012/stations/overlap_generator_subject0_front1.png",
+      "sha256": "67859612b1f6fbcb33161ef909b6ec27a8ac5edbb3a1a818f93057a3dba9396f"
+    },
+    {
+      "path": "implementation/shots/sprites/0012/stations/overlap_generator_subject1_front0.png",
+      "sha256": "4d2c5066f300351c3486bc384518a63c663d8ed678a2ae4148574293d397e2f2"
+    },
+    {
+      "path": "implementation/shots/sprites/0012/stations/overlap_generator_subject1_front1.png",
+      "sha256": "3b1b6aa2beb02d21bd99027ab3efd8d28aef5b575d114aa7e140f5bb41233c1a"
+    },
+    {
+      "path": "implementation/shots/sprites/0012/stations/overlap_kitchen_subject0_front0.png",
+      "sha256": "9dad2861f8c5c2d36c1d876f92a6b6a239499c6036641ae4fb26cb9d0dc89530"
+    },
+    {
+      "path": "implementation/shots/sprites/0012/stations/overlap_kitchen_subject0_front1.png",
+      "sha256": "dcc499e6c611714e0eb46ba4d9e298e30f6871b49778af06e303cc5d9a0f9930"
+    },
+    {
+      "path": "implementation/shots/sprites/0012/stations/overlap_kitchen_subject1_front0.png",
+      "sha256": "257aee4bd98a99dea2a92d3cd8d3fb5dbac5501dcfd400f50b1ee630e879d028"
+    },
+    {
+      "path": "implementation/shots/sprites/0012/stations/overlap_kitchen_subject1_front1.png",
+      "sha256": "dab42d253ff36833c676974e9f21fd158d13fd1f9bf244d87293ba8225320a78"
+    },
+    {
+      "path": "implementation/shots/sprites/0012/stations/overlap_press_subject0_front0.png",
+      "sha256": "ac11c294e1b99da2b8baa5c6a2afb5b5582915da0d9840aae9fbaff981060b98"
+    },
+    {
+      "path": "implementation/shots/sprites/0012/stations/overlap_press_subject0_front1.png",
+      "sha256": "8315b8ab83ec461217fb5b5dd2016749f8bed5ebe92c4e186dc60f60fdd602b9"
+    },
+    {
+      "path": "implementation/shots/sprites/0012/stations/overlap_press_subject1_front0.png",
+      "sha256": "66505223e6d7791162afff49552c621f0a38d182b99a399062ba3273e9c2476b"
+    },
+    {
+      "path": "implementation/shots/sprites/0012/stations/overlap_press_subject1_front1.png",
+      "sha256": "d2e0b238fa38bda16fbf3e5dc9b4eb5ee921869b4a0c74932b9a1621eef6f897"
+    },
+    {
+      "path": "implementation/shots/sprites/0012/stations/overlap_shop_subject0_front0.png",
+      "sha256": "332e495fcde22378d2dbcb433f12a2d3954db30b33db96e0976b8537bdef2b77"
+    },
+    {
+      "path": "implementation/shots/sprites/0012/stations/overlap_shop_subject0_front1.png",
+      "sha256": "49b6a8998f610ae2528ed3e7b94e1da3abe6edead93ffa32a65805a9a335f005"
+    },
+    {
+      "path": "implementation/shots/sprites/0012/stations/overlap_shop_subject1_front0.png",
+      "sha256": "48142aac9ab2958df899595746ea6985fb79ebce21c8f2b1f5d83a28157bef2c"
+    },
+    {
+      "path": "implementation/shots/sprites/0012/stations/overlap_shop_subject1_front1.png",
+      "sha256": "e094f8ff9b91036ce42cbbae20cffaf554e61141a1f8c74a28f541fed0ae0d80"
+    },
+    {
+      "path": "implementation/shots/sprites/0012/stations/overlap_well_subject0_front0.png",
+      "sha256": "12eb84d3cc470e263a64dff32b469478df777e0876b8cd8a9b4ce2959dbeabee"
+    },
+    {
+      "path": "implementation/shots/sprites/0012/stations/overlap_well_subject0_front1.png",
+      "sha256": "12678a5be36d7c2d55a217f5a2fb98dc60b38e14e3a3c5fb8532ae379dd4ce17"
+    },
+    {
+      "path": "implementation/shots/sprites/0012/stations/overlap_well_subject1_front0.png",
+      "sha256": "782f4c3110b6c9037e25eaf0486e3acb7e7375972a610a93ff513458c0886579"
+    },
+    {
+      "path": "implementation/shots/sprites/0012/stations/overlap_well_subject1_front1.png",
+      "sha256": "c610e87f442069b311b1019e847b53413852604fc16a7dac6b1d1cb171d57d6f"
+    },
+    {
+      "path": "implementation/shots/sprites/0012/stations/overlap_workshop_subject0_front0.png",
+      "sha256": "0016b859faa398cd8f4f05ccf0f0597568ff59403f33428defa8eb206cc4885e"
+    },
+    {
+      "path": "implementation/shots/sprites/0012/stations/overlap_workshop_subject0_front1.png",
+      "sha256": "8f0765413a1bc320a030e320fdf425de1f4a539952fa866760153ea92e7776f2"
+    },
+    {
+      "path": "implementation/shots/sprites/0012/stations/overlap_workshop_subject1_front0.png",
+      "sha256": "d69e40880172a8e06f5f8aee8c9c7694ae0d4926fb03306250dc5f0b46dfce91"
+    },
+    {
+      "path": "implementation/shots/sprites/0012/stations/overlap_workshop_subject1_front1.png",
+      "sha256": "65480171bd4b70bcb71df8a387c5141948acc9210640d267fce67a5ed63a23bc"
+    },
+    {
+      "path": "implementation/shots/sprites/0012/stations/stalled_light1.png",
+      "sha256": "bae2c8e9402dee55c87e7aedac381fdb1bde97db139b3dff6d909975d0a4c665"
+    },
+    {
+      "path": "implementation/shots/sprites/0012/stations/stalled_light3.png",
+      "sha256": "d8cfc81f71cc96c35749b8beb618383f4e7220918e1183d32a226ea2bf004ef2"
+    },
+    {
+      "path": "implementation/shots/sprites/0012/stations/working_hurt_light3.png",
+      "sha256": "1eb9ac524ddfbd2e409742fb3a6071dc74e0dd39ed78941f8155689c12eb0cb1"
+    },
+    {
+      "path": "implementation/shots/sprites/0012/dusk.png",
+      "sha256": "56a629c3a0e8a8c91e65b9db5734efa78c766d698b1844d2f6e54f67f5cf7448"
+    },
+    {
+      "path": "implementation/shots/sprites/0012/noon.png",
+      "sha256": "ee20b02153596fd8c1b506f07e3cd90608c87b224d22625876737b8244350c06"
+    },
+    {
+      "path": "implementation/shots/sprites/0012/result.png",
+      "sha256": "3a2765214454dd3223074ef114e27da70fe8e61fba0b28ecab3c1925f589063d"
+    },
+    {
+      "path": "implementation/shots/sprites/0012/tech.png",
+      "sha256": "c80cd683841f52adba9f58a4419172e5e1e3d36561a63fe4887105dbc691020c"
+    },
+    {
+      "path": "implementation/shots/sprites/0012/wave.png",
+      "sha256": "03839aa34391f4984a523f7eb68e4caf906f4f4dcf3dcfb33d470b3a6699f545"
+    }
+  ],
+  "capture_pages": 14,
+  "native_size": [
+    480,
+    270
+  ],
+  "nearest_scale": 3
+}

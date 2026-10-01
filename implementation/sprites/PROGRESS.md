@@ -747,3 +747,79 @@ Final shared lighting remains 0019, normal enemies 0015 and Giant/deaths 0016.
 Queue after completion: 11 done, 9 todo, zero doing/blocked. Next: 0012,
 other farm buildings. Exactly one sprite task completed this cycle;
 the active /goal continues automatically toward the remaining backlog.
+
+## 2026-10-01 - 0012 full farm stations and authored activity
+
+Completed workshop, kitchen, press, generator, shop and well with ten built-in
+ImageGen calls and zero targeted image revisions. Six identity masters establish
+function/materials; four independent three-state strips own idle/active/hurt
+production drawings. Raw files are exact tool returns in
+`assets/art_source/buildings/{workshop,kitchen,press,generator,shop,well}/`.
+Exact prompts, reference roles, returned paths, measured cuts and revision-zero
+acceptance decisions are retained in `generation/0012-*`. All ten raw-source
+and prompt SHA-256 values, plus every native output hash, are recorded in
+`reviews/0012/scope-and-sources.json`. No creative source pixels were painted.
+
+Four production stations share 48x48/(24,44); shop is 32x40/(16,36), well
+24x32/(12,30). Each production strip uses one fixed reduction scale and a
+measured lower-base contact, so a moving lever does not shift the ground point.
+Fourteen full state/fixture PNGs and sixteen exact idle compatibility quarters
+are source-owned. The full press/generator now draw once over the original
+2x2 anchor, instead of repeating miniatures. Shop and well retain one cell.
+Workshop tools/bench/furnace, kitchen oven/cookware, press screw/lever, low
+metal generator, awning counter and stone-rim bucket well remain recognizable.
+
+WorldView caches station sprites and reads existing paid Crafting jobs or
+Power fuel every 120ms. Queue-only start/cancel swaps their authored textures
+without reallocating occupants or changing core state. Stalled jobs stay idle;
+below-75%-HP wear takes priority. This supplies authored working poses, not a
+continuous multi-frame mechanical loop. Existing bounded furnace/exhaust
+effects read the same activity, including damaged running stations. Measured
+light/chimney points stay on opaque source pixels in every applicable pose.
+Original craft/repair/trade/water targets, collision and logical cells remain.
+
+Final full verify PASS: 39 passed, zero skipped/failed in 287s with the user's
+Godot 4.7.1. All 105 scripts parse; 6,610 rule assertions, 982 input cases,
+performance and Windows/Web exports pass. Simulation `1961000123` and data
+`407837701` are unchanged. The 184-output raster check writes zero files.
+Headless station showcase: 3,804 checks, zero failed. Actual renderer: 3,956
+checks, zero failed, including all six farmer/walker depth crossings and three
+physical off/steady lamp comparisons in both working and damaged-working
+night states. Fault/rebuild suite: 68 PASS with all deliberate corruption
+restored, plus one in-memory damaged-exhaust guard probe PASS (69 combined).
+
+An initial full verify passed all 39 checks in 247s. A repeat and an isolated
+input run exposed the existing transition helper mixing 720 manual ticks with
+automatic wall-clock ticks, yielding different watched/skipped hashes. The
+fixture now disables/restores automatic processing only during its comparison,
+resets through Main so views share the new dictionary, and asserts exactly
+720 ticks in both runs. The original hash assertion remains. Verify now reports
+the actual failed assertion alongside the count. No runtime/core rule changed.
+Initial, failed, isolated and final logs are preserved in `reviews/0012/`.
+Existing I18n relabel diagnostics in the isolated log are recorded for UI task
+0018; this task does not modify localization.
+
+Opened all 53 actual Godot captures at native 480x270 and exact nearest 3x via
+`reviews/0012/captures-00..13` and split columns. Originals are in
+`implementation/shots/sprites/0012/` and `stations/`. Coverage includes all
+four light states, idle/active/hurt, two independent workshops, real stalled
+queues, six ghosts, twenty-four actor depth crossings, queue-only updates,
+damaged running night equipment and five standard game views. Also reviewed
+all native state sheets over light/dark/checker, ten raw alpha comparisons,
+six identity previews, farmhouse/farmer relative scale and source emission
+overlay. Gates PASS: label-free function, shared materials/perspective, clean
+alpha, stable contacts, recognizable damage, correct previews/interactions,
+natural depth and localized real working light. Full decisions and capture
+hashes are in `reviews/0012/REVIEW.md` and `frame-review.json`.
+
+Audit against `b9f0298`: 20 existing runtime PNGs changed, ten new full-state
+PNGs added, all other 250 runtime PNGs byte-identical. All 229 protected
+baseline files and unrelated manifest entries are preserved, including core,
+map/save rules, original owner/pilot and previous accepted sources, palette,
+PlayerFrames and hash guards. Ownership is 184 raster / 96 ASCII / zero
+player-sheet, 280 PNGs. Zombie masters/motion remain 0015, Giant/death playback
+0016, shared final atmosphere 0019.
+
+Queue after completion: 12 done, 8 todo, zero doing/blocked. Next: 0013,
+tower families at three authored levels. Exactly one sprite task completed
+this cycle; the active /goal continues automatically toward the backlog.

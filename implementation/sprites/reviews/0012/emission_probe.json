@@ -1,0 +1,6 @@
+{
+  "test": "Damaged exhaust outside authored pixels rejected",
+  "passed": true,
+  "message": "Station exhaust leaves its source in this state: props/generator_hurt",
+  "disk_assets_modified": false
+}

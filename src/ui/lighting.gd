@@ -172,7 +172,7 @@ func _draw() -> void:
 			&"house":
 				for window in ArtPlacement.emissions(id, (box[3] as Vector2) * tile, &"windows", at):
 					_glow_at(window, HOUSE_RADIUS * tile, HOUSE_COLOUR, 0.26)
-			&"kitchen":
+			&"kitchen", &"workshop":
 				_glow_at(at, STOVE_RADIUS * tile, STOVE_COLOUR, 0.70)
 			&"generator":
 				_glow_at(at, GENERATOR_RADIUS * tile, GENERATOR_COLOUR, 0.45)
@@ -195,10 +195,12 @@ func _draw() -> void:
 ## Whether this cell is part of something that is currently lit.
 func _lights_up(id: StringName, on: Dictionary, cell: Vector2i) -> bool:
 	match id:
-		&"house", &"kitchen":
+		&"house":
 			return true
+		&"kitchen", &"workshop":
+			return WorldView.station_running(_state, id, Building.anchor_of(_state, cell))
 		&"generator":
-			return Power.is_running(_state, cell)
+			return WorldView.station_running(_state, id, Building.anchor_of(_state, cell))
 		_:
 			return _firing(on)
 

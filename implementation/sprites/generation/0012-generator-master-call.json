@@ -1,0 +1,64 @@
+{
+  "id": "generator",
+  "kind": "master",
+  "tool": "built-in ImageGen",
+  "revision": 0,
+  "returned_file": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-af19a5ab-8292-4556-a409-c0742867d5d8.png",
+  "source": "assets/art_source/buildings/generator/master.png",
+  "source_sha256": "8e830dbf49216a398bfe4fe02026f5ed8d1ea4e11f5e7a03a989ddf08e8bc298",
+  "source_wh": [
+    1484,
+    1060
+  ],
+  "source_alpha_range": [
+    0,
+    255
+  ],
+  "prompt": "implementation/sprites/generation/0012-generator-master.prompt.txt",
+  "prompt_sha256": "bcd7e95faf51105a70cced344f7b9e40f8cca6540d20abf848a3bfce774a488c",
+  "references": [
+    "assets/art_source/buildings/house/whole.png",
+    "docs/reference-sheet.png"
+  ],
+  "measured_recipes": [
+    {
+      "id": "props/generator",
+      "source": "assets/art_source/buildings/generator/master.png",
+      "crop_xywh": [
+        191,
+        138,
+        1175,
+        786
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        1484,
+        1060
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.03574468085106383,
+      "alpha_threshold": 128
+    }
+  ],
+  "source_bounds": [
+    [
+      191,
+      138,
+      1366,
+      924
+    ]
+  ],
+  "decision": "Accepted: source alpha, native palette/scale/contact, identity and actual Godot states reviewed. Master-only records establish identity; state strips own final production frames."
+}

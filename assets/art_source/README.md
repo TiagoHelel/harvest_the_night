@@ -197,3 +197,19 @@ the wet source's dark channels after an initial conversion failed the unchanged
 additional ImageGen calls. The duplicate candidate records that conversion.
 The accepted sources remain byte-for-byte identical to the actual tool returns.
 Ownership is 144 raster / 116 ASCII / zero player-sheet, 260 runtime PNGs.
+
+Task 0012 adds six farm-station identity masters and four three-state strips in
+`buildings/{workshop,kitchen,press,generator,shop,well}/`. Full workshop, kitchen,
+press and generator idle/active/hurt share 48x48/(24,44); shop and well use
+32x40/(16,36) and 24x32/(12,30). Sixteen exact idle quarters preserve old file
+contracts without drawing repeated fragments in the view. Ten byte-identical
+ImageGen returns and exact prompt/reference hashes are recorded in
+`implementation/sprites/generation/0012-*`; native conversion uses measured
+alpha bounds, fixed family scales, nearest sampling and the existing palette.
+
+`tools/check_station_art.py` validates all thirty outputs and actual emission
+pixels. `tools/show_art.py --stations --check` exercises real job/fuel/HP states
+and original footprints. Final native/3x capture and source preservation
+evidence is in `implementation/sprites/reviews/0012/`. The runtime holds an
+authored working pose during paid activity; no continuous mechanical loop is
+claimed. Ownership is now 184 raster / 96 ASCII / zero player-sheet, 280 PNGs.

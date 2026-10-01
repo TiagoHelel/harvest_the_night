@@ -210,3 +210,21 @@ local facade wear. Keep the right chimney, front steps and five warm panes
 recognizable in both states. Native visible bounds are 56x55, larger than the
 30px farmer and 42/43px trees. Five localized night glows follow the actual
 glass rather than lighting the center of the entire roof.
+
+Task 0012 extends those materials to six recognizable farm stations. Workshop
+shows its tools/bench and right furnace; kitchen has cookware and a broad
+front oven; press is an open timber screw/lever machine; generator is a low
+metal engine with flywheel, exhaust and blue indicator. Shop has a blue/cream
+awning and open counter; well has a round stone rim, timber hoist and bucket.
+The four production stations use 48x48/(24,44), shop 32x40/(16,36), well
+24x32/(12,30). They remain subordinate to the 64x64 farmhouse landmark.
+
+Independent idle/active/hurt drawings share one source reduction scale per
+production family. Existing paid-job/fuel state selects an authored working
+pose; this is bounded state feedback, not a continuous multi-frame loop.
+Structural damage takes precedence over that pose. Real working furnace
+glows/exhaust can still communicate activity on a damaged station. Idle and
+stalled jobs must never acquire active art, smoke or a false working glow.
+Keep native glow/exhaust points on the actual accepted furnace/indicator and
+chimney pixels. Full station drawings replace repeated quarter miniatures,
+while compatibility quarters remain exact slices of their complete idle form.

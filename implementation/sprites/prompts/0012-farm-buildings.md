@@ -1,6 +1,6 @@
 # 0012 - Workshop, kitchen, press, generator, shop and well
 
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0011
 - **Likely files:** assets/art_source/buildings/; sprites/buildings/workshop*,kitchen*; sprites/props/press*,generator*,shop.png,well.png; src/ui/world_view.gd
 - **Generation briefs:** PRODUCTION_BUILDING, SHOP_WELL

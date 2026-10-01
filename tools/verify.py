@@ -238,6 +238,16 @@ def check_house_showcase():
     return check("house HP/lighting", code == 0, next((s for s in out.splitlines() if s.startswith("HOUSE SHOWCASE:")), tail(out, 4)))
 
 
+def check_station_art():
+    code, out = run([sys.executable, "tools/check_station_art.py"])
+    return check("station sources/quarters", code == 0, tail(out, 4))
+
+
+def check_station_showcase():
+    code, out = run([sys.executable, "tools/show_art.py", "--stations", "--check"])
+    return check("station activity/placement", code == 0, next((s for s in out.splitlines() if s.startswith("STATION SHOWCASE:")), tail(out, 4)))
+
+
 def check_logo():
     """The logo still matches the letters it was composed from.
 
@@ -496,6 +506,10 @@ def check_script(name, script, missing_note, args=(), pattern=None):
     if pattern:
         m = re.search(pattern, out)
         detail = m.group(0) if m else tail(out, 4)
+        if code != 0:
+            faults = [line.strip() for line in out.splitlines() if line.lstrip().startswith("FAIL ")]
+            if faults:
+                detail += "; " + "; ".join(faults[-3:])
     else:
         detail = "" if code == 0 else tail(out)
     return check(name, code == 0, detail)
@@ -640,6 +654,8 @@ def main():
     check_crop_showcase()
     check_house_art()
     check_house_showcase()
+    check_station_art()
+    check_station_showcase()
     check_font()
     check_logo()
     check_sfx()

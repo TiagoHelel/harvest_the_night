@@ -1,0 +1,26 @@
+Use case: stylized-concept
+Asset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm
+that becomes a fortress against zombies at night.
+Primary request: Exactly three authored states of the accepted workshop in one horizontal strip.
+Input images: Image 1 is the accepted workshop identity master and precise geometry reference. Image 2 is the accepted farmhouse material/camera style reference.
+Style/medium: coherent hand-crafted pixel art with deliberate pixel clusters,
+colored outlines, restrained texture, readable material planes and clean forms.
+Composition/framing: orthographic three-quarter top-down view on a rectangular
+grid; match the approved master camera and scale. Final native canvas is
+48x48 pixels with contact pivot 24,44; this is a downstream import
+target, so the generated source must remain simple enough to survive reduction.
+Lighting/mood: neutral warm daytime, highlights from upper left, darker underside;
+runtime supplies dusk/night lighting. Keep emission in separate localized forms.
+Color palette: match the approved project palette and master, warm timber and
+terracotta, layered greens, cool water, violet/blue shadows; limited ramps.
+Scene/backdrop: true transparent background. No baked ground shadow for actors.
+Constraints: complete unclipped object, consistent perspective and scale, clear
+ground contact, generous tool/weapon clearance, no labels, text, watermark or UI.
+Avoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,
+random pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,
+new gameplay objects, tiny details that disappear at native size.
+
+Family: workshop, production building over an unchanged 32x32 logical footprint.
+Exactly THREE complete objects of the SAME master in equal-size cells in one horizontal strip, left to right: IDLE, ACTIVE, HURT. Wide transparent image, large empty gutters (at least 8 percent of a cell width) and outer margin. Same camera, visible dimensions, base geometry, ground-contact baseline, and center within every cell. No labels, borders, separators, shadows, smoke or extra objects. Preserve identity rather than redesigning the master.
+Frame 1 IDLE: faithfully repeat the accepted master with dark inactive furnace/oven/indicator; no oil pouring, no motion marks. Frame 2 ACTIVE: light only the stone furnace opening with a small amber fire, move the tabletop hammer slightly into its working pose; do not move the bench or hanging tools. Frame 3 HURT: a few broken tiles on one roof corner and a split bench-facing board, while both support posts and the furnace remain standing. This is localized structural wear, not a collapsed wreck, different building, uniformly peppered holes or a different scale. Hurt opening/indicator remains inactive.
+Critical invariants: all fixed structural edges and the planted base match between IDLE and ACTIVE; only the listed working parts change. HURT retains the same base and structural identity. Generate fresh authored state art referenced from the master, never multiple different stations in a strip. Simple broad clusters suitable for the same native canvas/contact contract.

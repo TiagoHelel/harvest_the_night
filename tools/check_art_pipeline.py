@@ -229,6 +229,19 @@ def main():
             assert assembled_hurt.tobytes()==images["buildings/house_hurt"].tobytes()
             passed("Nine hurt compatibility slices reconstruct the entire authored damaged roof")
 
+        station = next((i for i,e in enumerate(data["assets"]) if e["id"] == "props/press_active"), None)
+        if station is not None:
+            corrupt(ROOT/data["assets"][station]["source"], "tools/import_art.py", missing=True)
+            passed("Missing authored production state strip rejected")
+            corrupt(ROOT/"sprites/props/generator.png", "tools/check_station_art.py", missing=True)
+            passed("Missing full generator rejected without repeated quarter fallback")
+            corrupt(ROOT/"sprites/props/press_1_1.png", "tools/check_station_art.py")
+            passed("Stale quarter-based press pixels rejected")
+            corrupt(ROOT/"sprites/buildings/kitchen_active.png", "tools/check_station_art.py", missing=True)
+            passed("Missing working kitchen source-owned drawing rejected")
+            invalid_manifest("Production state scale drift rejected", lambda d: d["assets"][station].update(content_scale=0.001))
+            invalid_manifest("Production state contact drift rejected", lambda d: d["assets"][station].update(pivot_xy=[24,40]))
+
         original_owners = art_ownership.REGISTRY.read_bytes()
         try:
             owners = json.loads(original_owners)

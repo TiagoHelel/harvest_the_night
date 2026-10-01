@@ -123,6 +123,10 @@ var _textures: Dictionary = {}
 ## also destroying the player, who lives in the same y-sorted layer in order to
 ## sort against the trees.
 var _sprites: Array[Node] = []
+## Existing production jobs drive a bounded cached-sprite update. This never
+## allocates occupant nodes or adds a timer to simulation state.
+var _stations: Array[Sprite2D] = []
+var _station_due := 0.0
 
 ## A frame around the cell the player would act on, drawn over the terrain and
 ## under everything standing on it. Task 0023 reuses it for the build ghost.
@@ -276,6 +280,7 @@ func _process(delta: float) -> void:
 		_refresh_plots()
 
 	_refresh_actors()
+	_refresh_stations(delta)
 	if _shots != null:
 		_shots.queue_redraw()
 
@@ -841,6 +846,7 @@ func _refresh() -> void:
 	for sprite in _sprites:
 		sprite.queue_free()
 	_sprites.clear()
+	_stations.clear()
 	_find_fixture_corners()
 	if _state.is_empty():
 		return
@@ -862,7 +868,7 @@ func _refresh() -> void:
 		elif _fixture_corner.has(id):
 			anchor = _fixture_corner[id]
 		var footprint := Vector2i(3, 3) if id == &"house" else Building.size_of(id)
-		var whole := _texture_for(_worn(id, on))
+		var whole := _texture_for(_station_art(id, on, anchor))
 		var grouped := footprint != Vector2i.ONE and (RasterArt.FRAMES.has(whole.resource_path)
 			or (whole.get_width() >= footprint.x * GameData.TILE_SIZE
 			and whole.get_height() >= footprint.y * GameData.TILE_SIZE))
@@ -880,6 +886,10 @@ func _refresh() -> void:
 		else:
 			logical_cells.append(idx)
 		sprite.set_meta("logical_cells", logical_cells)
+		if id in [&"workshop", &"kitchen", &"press", &"generator"]:
+			sprite.set_meta("station_id", id)
+			sprite.set_meta("station_anchor", anchor)
+			_stations.append(sprite)
 		if id == &"tree":
 			var shadow := Sprite2D.new()
 			shadow.texture = load(PlayerView.SHADOW)
@@ -1165,9 +1175,43 @@ static func _prop_variant(id: StringName, cell: Vector2i) -> StringName:
 	return PROP_VARIANTS[id][1 if absi(h) % 32 >= 24 else 0]
 
 
-## The same thing, at the level it has been paid up to and in the state it is
-## in. **The level first**: a Torre III that has been chewed is still a Torre
-## III, and `gen_sprites` makes a `_hurt` of every level for exactly that.
+## Read actual running work/fuel; a queued front job waiting on materials is idle.
+static func station_running(state: Dictionary, id: StringName, anchor: Vector2i) -> bool:
+	if id == &"generator":
+		return Power.is_running(state, anchor)
+	if id not in [&"workshop", &"kitchen", &"press"]:
+		return false
+	return Crafting.busy(state, anchor) and not Crafting.is_stalled(state, anchor) \
+		and int(Crafting.progress_at(state, anchor)[0]) > 0
+
+
+func _station_art(id: StringName, on: Dictionary, anchor: Vector2i) -> StringName:
+	var worn := _worn(id, on)
+	# Structural wear stays legible while a damaged station is still working.
+	# Real furnace/exhaust effects can still report activity independently.
+	if worn != id or not station_running(_state, id, anchor):
+		return worn
+	var active := StringName("%s_active" % id)
+	return active if _exists(active) else worn
+
+
+func _refresh_stations(delta: float) -> void:
+	_station_due -= delta
+	if _station_due > 0.0:
+		return
+	_station_due = 0.12
+	for sprite in _stations:
+		var anchor: Vector2i = sprite.get_meta("station_anchor")
+		var on := Farm.occupant(_state, anchor)
+		if on.is_empty():
+			continue
+		var texture := _texture_for(_station_art(sprite.get_meta("station_id"), on, anchor))
+		if sprite.texture != texture:
+			sprite.texture = texture
+
+
+## The same thing at its paid level and existing wear threshold. A damaged
+## upgraded tower remains that level; every level owns its matching hurt art.
 func _worn(name: StringName, on: Dictionary) -> StringName:
 	var level := maxi(int(on.get("level", 1)), 1)
 	var full := StringName("%s_%d" % [name, level]) if level > 1 else name

@@ -1,0 +1,148 @@
+{
+  "id": "generator",
+  "kind": "states",
+  "tool": "built-in ImageGen",
+  "revision": 0,
+  "returned_file": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-9052693e-aa73-419d-82fd-4850dcbdb5be.png",
+  "source": "assets/art_source/buildings/generator/states.png",
+  "source_sha256": "5962ec85d3b13b94c7612ffe43625f6fb4227e712f35a016a2852a88f507ecb4",
+  "source_wh": [
+    2048,
+    768
+  ],
+  "source_alpha_range": [
+    0,
+    254
+  ],
+  "prompt": "implementation/sprites/generation/0012-generator-states.prompt.txt",
+  "prompt_sha256": "711fc4461140efb0701092269ffa25d50dbf0e624cf6afaba270cf3ae6709aa0",
+  "references": [
+    "assets/art_source/buildings/generator/master.png",
+    "assets/art_source/buildings/house/whole.png"
+  ],
+  "measured_recipes": [
+    {
+      "id": "props/generator",
+      "source": "assets/art_source/buildings/generator/states.png",
+      "crop_xywh": [
+        21,
+        147,
+        673,
+        479
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        698,
+        768
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.06240713224368499,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        20,
+        30
+      ]
+    },
+    {
+      "id": "props/generator_active",
+      "source": "assets/art_source/buildings/generator/states.png",
+      "crop_xywh": [
+        703,
+        147,
+        660,
+        479
+      ],
+      "sheet_cell_xywh": [
+        698,
+        0,
+        670,
+        768
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.06240713224368499,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        20,
+        30
+      ]
+    },
+    {
+      "id": "props/generator_hurt",
+      "source": "assets/art_source/buildings/generator/states.png",
+      "crop_xywh": [
+        1373,
+        147,
+        670,
+        479
+      ],
+      "sheet_cell_xywh": [
+        1368,
+        0,
+        680,
+        768
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.06240713224368499,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        20,
+        30
+      ]
+    }
+  ],
+  "source_bounds": [
+    [
+      21,
+      147,
+      694,
+      626
+    ],
+    [
+      5,
+      147,
+      665,
+      626
+    ],
+    [
+      5,
+      147,
+      675,
+      626
+    ]
+  ],
+  "decision": "Accepted: source alpha, native palette/scale/contact, identity and actual Godot states reviewed. Master-only records establish identity; state strips own final production frames."
+}

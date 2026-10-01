@@ -361,3 +361,40 @@ The showcase checks HP-only refresh and upgrades, four production light
 states, both actor subjects behind/in front, previews and camera bounds.
 Capture mode compares actual occlusion pixels and off/steady window glows;
 full serialized state stays identical around all rendering/lighting checks.
+
+## Full farm stations and real activity (0012)
+
+Six immutable identity masters and four independent idle/active/hurt strips
+live in `assets/art_source/buildings/{workshop,kitchen,press,generator,shop,well}`.
+The ten exact built-in ImageGen prompts/returns are recorded in `generation/0012-*`.
+The measured transparent gutters determine three disjoint state cuts. Use one
+fixed source scale and the measured lower-base contact per family; moving
+levers must not shift the ground point or force per-frame fitting. The four
+production canvases are 48x48/(24,44), shop 32x40/(16,36), well 24x32/(12,30).
+Fourteen complete frames and sixteen exact idle quarters are raster-owned.
+Ownership after this migration is 184 raster / 96 ASCII / zero player-sheet.
+
+WorldView draws each full 2x2 station once and caches its Sprite2D. Every 120ms
+the view reads existing Crafting.busy/is_stalled/progress_at or Power.is_running
+and changes only its texture. No nodes, simulation fields or job timers are
+added. The existing below-75%-HP hurt state has priority. Building.anchor_of
+resolves real interaction/fuel cells; shop and well remain one cell. Lighting
+and the existing bounded smoke pool read that same activity. Source-owned
+light/smoke metadata is measured on actual opaque active pixels; the source
+checker rejects points outside the drawing or on an inactive indicator.
+
+```powershell
+python tools/check_station_art.py
+python tools/show_art.py --stations --check
+python tools/show_art.py --stations --out=implementation/shots/sprites/<task-id>/stations
+python implementation/sprites/reviews/0012/build_review.py
+python implementation/sprites/reviews/0012/audit.py
+```
+
+The checker proves distinct authored states, common scale/canvas/contact,
+binary alpha, exact runtime bytes and reconstruction of all four idle drawings
+from compatibility quarters. The showcase covers four production light states,
+real paid/stalled jobs, queue-only cache updates, independent stations, HP
+thresholds, previews, map edges and both farmer/walker depth orders. Capture
+mode compares actual occlusion and active off/steady lamp pixels while proving
+serialized state unchanged. No continuous mechanical animation was introduced.

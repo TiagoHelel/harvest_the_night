@@ -4100,7 +4100,11 @@ func _case_0078_transition() -> void:
 ## only difference between the two runs is what the view was doing.
 func _night_through_changes(driver: SimDriver, view: WorldView,
 		skip: bool) -> int:
-	driver.start(780078)
+	# Fixed manual ticks must not also receive wall-clock ticks between frames.
+	# Use Main's reset so every view observes this same fresh state dictionary.
+	var processing := driver.is_processing()
+	driver.set_process(false)
+	_scene.begin_run(780078)
 	var state := driver.state
 	Resources.gain(state, {GameData.WOOD: 400, GameData.IRON: 400})
 	var at := Player.cell(state)
@@ -4112,7 +4116,10 @@ func _night_through_changes(driver: SimDriver, view: WorldView,
 		if skip:
 			view.skip_transition()
 		await frames(1)
-	return State.hash_of(state)
+	expect(int(state["tick"])==720, "Transition comparison advances exactly its 720 manual ticks", str(state["tick"]))
+	var result := State.hash_of(state)
+	driver.set_process(processing)
+	return result
 func _case_0081_theme() -> void:
 	await open_scene(MAIN_SCENE)
 	await frames(4)

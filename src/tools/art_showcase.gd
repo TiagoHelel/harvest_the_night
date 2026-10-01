@@ -31,7 +31,7 @@ func _run() -> void:
 		if arg.begins_with("--out="):
 			_folder = "res://" + arg.substr(6).trim_suffix("/") + "/"
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(_folder))
-	if args.has("--terrain") or args.has("--water") or args.has("--props") or args.has("--crops") or args.has("--house"):
+	if args.has("--terrain") or args.has("--water") or args.has("--props") or args.has("--crops") or args.has("--house") or args.has("--stations"):
 		# Use Main's real relighting pipeline for all three material light states.
 		var relight := Relight.new()
 		relight.name = "Relight"
@@ -63,7 +63,7 @@ func _run() -> void:
 	player["facing"] = Player.SOUTH
 	player["action"] = {}
 	var actor := Entities.get_one(_state, enemy)
-	if args.has("--house"):
+	if args.has("--house") or args.has("--stations"):
 		var lamps := CanvasLayer.new()
 		lamps.layer = 2
 		root.add_child(lamps)
@@ -71,8 +71,12 @@ func _run() -> void:
 		lamps.add_child(_house_lighting)
 		_house_lighting.set_quality(Lighting.STEADY)
 		_house_lighting.set_process(false)
-		await _house_family()
-		print("HOUSE SHOWCASE: %d checks, %d failed" % [_checks, _failed])
+		if args.has("--stations"):
+			await _station_family()
+			print("STATION SHOWCASE: %d checks, %d failed" % [_checks, _failed])
+		else:
+			await _house_family()
+			print("HOUSE SHOWCASE: %d checks, %d failed" % [_checks, _failed])
 		quit(1 if _failed > 0 else 0)
 		return
 	if args.has("--crops"):
@@ -176,6 +180,267 @@ func _run() -> void:
 	await _contacts()
 	print("ART SHOWCASE: %d checks, %d failed" % [_checks, _failed])
 	quit(1 if _failed > 0 else 0)
+
+
+const STATIONS := [&"workshop", &"kitchen", &"press", &"generator", &"shop", &"well"]
+const STATION_CORNERS := [Vector2i(12,7),Vector2i(20,7),Vector2i(28,7),Vector2i(12,12),Vector2i(20,12),Vector2i(28,12)]
+
+
+func _station_fixture(lighting: int = 1, kind: int = 0) -> void:
+	_crops_fixture(lighting)
+	for id in GameData.RESOURCES:
+		Resources.add(_state, id, 1000)
+	# Build through the real footprint/anchor API in this isolated fixture.
+	var phase: int = _state["phase"]
+	_state["phase"] = Phases.DAY
+	for i in STATIONS.size():
+		if i < 4:
+			expect(Building.place(_state, STATIONS[i], STATION_CORNERS[i]), "Real station placement retains its existing cost and 2x2 anchor")
+		else:
+			expect(Farm.restore(_state, STATION_CORNERS[i], {"id":STATIONS[i]}), "Shop/well remains one original fixture cell")
+		if kind == 2 and i < 4:
+			Farm.damage(_state, STATION_CORNERS[i], int(GameData.BUILDINGS[STATIONS[i]]["hp"]) * 3 / 4)
+	if kind == 1:
+		_station_start()
+	_state["phase"] = phase
+	_set_contact(_state["player"], Vector2i(344,248))
+	_state["player"]["facing"] = Player.SOUTH
+	_state["player"]["action"] = {}
+
+
+func _station_start() -> void:
+	for i in 3:
+		expect(Crafting.start_at(_state, STATION_CORNERS[i]), "Real paid job starts on the existing station anchor")
+	Power.tick(_state)
+
+
+func _station_sprite(i: int) -> Sprite2D:
+	var idx := Grid.index(STATION_CORNERS[i])
+	for node in _world.get_node("Occupants").get_children():
+		if node is Sprite2D and idx in node.get_meta("logical_cells", []):
+			return node
+	return null
+
+
+func _station_check() -> void:
+	var total := 0
+	for node in _world.get_node("Occupants").get_children():
+		if node is Sprite2D and node.has_meta("logical_cells"):
+			total += 1
+	expect(total == 6, "All six full stations draw once, never as repeated quarter miniatures")
+	for i in STATIONS.size():
+		var id: StringName = STATIONS[i]
+		var corner: Vector2i = STATION_CORNERS[i]
+		var sprite := _station_sprite(i)
+		expect(sprite != null, "Full station has a real drawing at its unchanged logical anchor")
+		if sprite == null:
+			continue
+		var size := Building.size_of(id)
+		var on := Farm.occupant(_state, corner)
+		var running := WorldView.station_running(_state,id,corner)
+		var hurt := i < 4 and float(on.get("hp",1))/float(GameData.BUILDINGS[id]["hp"]) < 0.75
+		var suffix := "_hurt" if hurt else ("_active" if running else "")
+		var folder := WorldView.BUILDING_DIR if i < 2 else WorldView.PROP_DIR
+		expect(sprite.texture.resource_path == folder+String(id)+suffix+".png", "Activity and wear select distinct authored states from existing core data")
+		expect(sprite.position == Vector2(corner*16+Vector2i(size.x*8,size.y*16)), "Each station sorts at its original footprint bottom center")
+		var pivot := Vector2(24,44) if i < 4 else (Vector2(16,36) if i == 4 else Vector2(12,30))
+		expect(sprite.offset == -pivot and sprite.modulate == Color.WHITE, "All states preserve contact and readable material colors")
+		expect(sprite.get_meta("logical_cells").size() == size.x*size.y, "Full drawing retains exactly the existing blocked cells")
+		for y in size.y:
+			for x in size.x:
+				var cell := corner+Vector2i(x,y)
+				expect(Farm.occupant(_state,cell).get("id") == id and not Farm.walkable(_state,cell), "Cosmetic station never changes footprint occupancy")
+				if i < 4:
+					expect(Building.anchor_of(_state,cell) == corner, "Every quarter still targets the same real production anchor")
+		expect(Farm.walkable(_state,corner+Vector2i(size.x,0)), "Station overhang never adds blocking cells")
+		if int(_state["phase"]) == Phases.DAY:
+			if i < 3:
+				expect(Interact.verb_at(_state,corner) == (&"repair" if hurt else &"craft"), "Existing station interaction target still offers the correct real verb")
+			elif i == 4:
+				expect(Interact.verb_at(_state,corner) == &"trade", "Shop counter remains the original trade target")
+			elif i == 5:
+				expect(Farming.is_water_source(_state,corner) and not Farming.is_water_source(_state,corner+Vector2i.RIGHT), "Well source remains one logical cell")
+		if i in [0,1,3]:
+			expect(_house_lighting._lights_up(id,on,corner) == running, "Idle/stalled station does not emit a working furnace/engine glow")
+
+
+func _station_overlap(prop: Sprite2D, body: Sprite2D, behind: bool) -> void:
+	if not _capture:
+		return
+	var before := var_to_bytes(_state)
+	await RenderingServer.frame_post_draw
+	var covered := root.get_texture().get_image()
+	prop.hide()
+	await process_frame
+	await RenderingServer.frame_post_draw
+	var open := root.get_texture().get_image()
+	var source := body.texture.get_image()
+	var transform := body.get_global_transform_with_canvas()
+	var changed := 0
+	for y in source.get_height():
+		for x in source.get_width():
+			if source.get_pixel(x,y).a < 0.99:
+				continue
+			var point := Vector2i(transform*(body.offset+Vector2(x,y)))
+			if Rect2i(Vector2i.ZERO,covered.get_size()).has_point(point) and covered.get_pixelv(point)!=open.get_pixelv(point):
+				changed += 1
+	expect(changed > 8 if behind else changed == 0, "Actual station masks actors behind and preserves their pixels in front")
+	prop.show()
+	await process_frame
+	expect(var_to_bytes(_state) == before, "Station occlusion sampling is read-only")
+
+
+func _station_lamp_pixels() -> void:
+	if not _capture:
+		return
+	var before := var_to_bytes(_state)
+	_house_lighting.set_quality(Lighting.OFF)
+	await process_frame
+	await RenderingServer.frame_post_draw
+	var dark := root.get_texture().get_image()
+	_house_lighting.set_quality(Lighting.STEADY)
+	await process_frame
+	await RenderingServer.frame_post_draw
+	var lit := root.get_texture().get_image()
+	var transform := root.get_canvas_transform()
+	for i in [0,1,3]:
+		var lamp := ArtPlacement.emission(STATIONS[i],Vector2(STATION_CORNERS[i]*16),&"light",Vector2.ZERO)
+		var point := Vector2i(transform*lamp)
+		expect(lit.get_pixelv(point).r > dark.get_pixelv(point).r+0.05, "Actual active furnace/engine receives light at its authored source pixel")
+	expect(var_to_bytes(_state)==before, "Station light quality cannot change jobs, fuel or HP")
+
+
+func _station_family() -> void:
+	var view: PlayerView = _world.get_node("Occupants/PlayerView")
+	view.set_process(false)
+	_world.set_process(false)
+	for lighting in 4:
+		for kind in 3:
+			_station_fixture(lighting,kind)
+			await _house_settle(view)
+			_world.look_at_cell(Vector2i(20,9))
+			await process_frame
+			_station_check()
+			await _shoot("family_%d_light%d"%[kind,lighting],"Six stations: idle/active/hurt %d; dawn/day/dusk/night %d"%[kind,lighting])
+			if lighting == 3 and kind == 1:
+				await _station_lamp_pixels()
+	# Both actual actor types cross every fixture in the real nested sort layer.
+	for i in STATIONS.size():
+		_station_fixture()
+		var enemy_id := Entities.spawn(_state,&"walker",Vector2i(34,14))
+		var enemy := Entities.get_one(_state,enemy_id)
+		await _house_settle(view)
+		var contact: Vector2i = Vector2i(_station_sprite(i).position)
+		for subject in 2:
+			for front in 2:
+				var at := contact+Vector2i(0,6 if front else -6)
+				_set_contact(_state["player"],at if subject==0 else Vector2i(544,248))
+				_set_contact(enemy,at if subject==1 else Vector2i(544,248))
+				await _house_settle(view)
+				_station_check()
+				var body: Sprite2D = view.get_node("Body") if subject==0 else _world.get_node("Occupants/Actors").get_child(0)
+				await _station_overlap(_station_sprite(i),body,not bool(front))
+				await _shoot("overlap_%s_subject%d_front%d"%[STATIONS[i],subject,front],"%s: farmer/walker %d behind/front %d"%[STATIONS[i],subject,front])
+		_station_fixture()
+		await _house_settle(view)
+		var cell := Vector2i(24,14)
+		_world.show_ghost(cell,STATIONS[i],true)
+		var ghost: Sprite2D = _world.find_child("Ghost",true,false)
+		var size := Building.size_of(STATIONS[i])
+		expect(_world.ghost_footprint()==size and ghost.position==Vector2(cell*16+Vector2i(size.x*8,size.y*16)), "Station preview covers its original logical footprint once")
+		expect(ghost.offset==_station_sprite(i).offset, "Preview and actual placed station share the source-owned ground pivot")
+		await _shoot("ghost_%s"%STATIONS[i],"Full %s preview; original fixture footprint"%STATIONS[i])
+		_world.hide_ghost()
+	# Outside occupancy hashing: only real queue/power changes, no refresh hint.
+	_station_fixture()
+	await _house_settle(view)
+	var identities: Array = _world._stations.duplicate()
+	var occupancy: int = _state["occupants"].hash()
+	_station_start()
+	var before := var_to_bytes(_state)
+	_world._process(0.13)
+	await process_frame
+	_station_check()
+	expect(_state["occupants"].hash()==occupancy and var_to_bytes(_state)==before and identities==_world._stations, "Queue-only activity updates cached sprites without allocating occupants or mutating core")
+	await _shoot("activity_only_start","Real queue/engine change: active sprites update without an occupancy rebuild")
+	for i in 3:
+		Crafting.cancel_all(_state,STATION_CORNERS[i])
+	_state["power"]["burning"].clear()
+	before=var_to_bytes(_state)
+	_world._process(0.13)
+	await process_frame
+	_station_check()
+	expect(var_to_bytes(_state)==before and identities==_world._stations, "Cancellation/fuel-off returns to idle on the bounded view update")
+	await _shoot("activity_only_stop","Cancelled real jobs and stopped engine return to idle")
+	# A second station of the same kind owns a separate job and ground anchor.
+	var second := Vector2i(34,7)
+	expect(Building.place(_state,&"workshop",second), "A second real workshop can be placed without merging fixtures")
+	expect(Crafting.start_at(_state,second), "Second workshop owns an independent real job")
+	await _house_settle(view)
+	var workshops := 0
+	for sprite in _world._stations:
+		if sprite.get_meta("station_id") == &"workshop":
+			workshops+=1
+			var active: bool = sprite.get_meta("station_anchor") == second
+			expect(sprite.texture.resource_path == WorldView.BUILDING_DIR+("workshop_active.png" if active else "workshop.png"), "Only the workshop with the real running job shows activity")
+	expect(workshops==2,"Two independent 2x2 anchors draw as two whole workshops")
+	await _shoot("independent_jobs","Two workshops: one idle, one working at its own existing anchor")
+	# Real damage, exact wear threshold, and repair only refresh presentation.
+	_station_fixture(1,1)
+	await _house_settle(view)
+	for i in 4:
+		var on := Farm.occupant(_state,STATION_CORNERS[i])
+		var full: int = GameData.BUILDINGS[STATIONS[i]]["hp"]
+		Farm.damage(_state,STATION_CORNERS[i],full/4)
+		before=var_to_bytes(_state)
+		_world._process(0.13)
+		await process_frame
+		expect(_station_sprite(i).texture.resource_path.ends_with("_active.png"), "Exactly 75 percent HP keeps the active undamaged station")
+		Farm.damage(_state,STATION_CORNERS[i],1)
+		before=var_to_bytes(_state)
+		_world._process(0.13)
+		await process_frame
+		expect(_station_sprite(i).texture.resource_path.ends_with("_hurt.png") and WorldView.station_running(_state,STATIONS[i],STATION_CORNERS[i]), "Below the existing wear threshold, damage remains visible without cancelling a real job")
+		expect(var_to_bytes(_state)==before,"HP-only refresh cannot alter damage, fuel or job timers")
+		on["hp"]=full
+		before=var_to_bytes(_state)
+		_world._process(0.13)
+		await process_frame
+		expect(_station_sprite(i).texture.resource_path.ends_with("_active.png") and var_to_bytes(_state)==before,"Restored HP returns the same running station to its active source")
+	for lighting in [1,3]:
+		_station_fixture(lighting)
+		for id in GameData.RESOURCES:
+			_state["held"][id]=0
+		for i in 3:
+			expect(Crafting.enqueue(_state,STATION_CORNERS[i],Crafting.selected_at(_state,STATIONS[i])), "Unpaid real front job can be queued")
+			expect(Crafting.is_stalled(_state,STATION_CORNERS[i]), "Fixture is truly stalled in core")
+		Power.tick(_state)
+		await _house_settle(view)
+		_station_check()
+		await _shoot("stalled_light%d"%lighting,"Queued without materials/fuel: inactive art and no false working glow")
+	_station_fixture(3,1)
+	for i in 4:
+		Farm.damage(_state,STATION_CORNERS[i],int(GameData.BUILDINGS[STATIONS[i]]["hp"])*3/4)
+	await _house_settle(view)
+	_station_check()
+	await _shoot("working_hurt_light3","Damaged real running jobs: structural wear stays visible, physical lights still work")
+	await _station_lamp_pixels()
+	# Every valid map corner is checked for the same fixed placement contract.
+	for i in STATIONS.size():
+		var size := Building.size_of(STATIONS[i])
+		for corner in [Vector2i.ZERO,Vector2i(40-size.x,0),Vector2i(0,18-size.y),Vector2i(40-size.x,18-size.y)]:
+			_station_fixture()
+			_state["occupants"].clear()
+			for y in size.y:
+				for x in size.x:
+					Farm.restore(_state,corner+Vector2i(x,y),{"id":STATIONS[i],"anchor":[corner.x,corner.y],"hp":999})
+			await _house_settle(view)
+			var drawn := 0
+			for node in _world.get_node("Occupants").get_children():
+				if node is Sprite2D and node.has_meta("logical_cells"):
+					drawn+=1
+					expect(node.position==Vector2(corner*16+Vector2i(size.x*8,size.y*16)), "Map boundary keeps station at its unchanged full footprint contact")
+			expect(drawn==1,"Map boundary never duplicates a station quarter")
 
 
 ## Independent full/hurt farmhouse states through the production view and lights.

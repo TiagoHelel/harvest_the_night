@@ -1,0 +1,148 @@
+{
+  "id": "workshop",
+  "kind": "states",
+  "tool": "built-in ImageGen",
+  "revision": 0,
+  "returned_file": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-13a2a2d9-77d9-44de-a654-dcab24be951e.png",
+  "source": "assets/art_source/buildings/workshop/states.png",
+  "source_sha256": "1187fa7bdf73abb2ff47cc77ae15ae37a38a4fa4617de894eaa8ac88b69249b4",
+  "source_wh": [
+    2172,
+    724
+  ],
+  "source_alpha_range": [
+    0,
+    255
+  ],
+  "prompt": "implementation/sprites/generation/0012-workshop-states.prompt.txt",
+  "prompt_sha256": "94fde2b631c94bc4320deaa8339998f7332bf3da467c38f2922bb4940d0e1eed",
+  "references": [
+    "assets/art_source/buildings/workshop/master.png",
+    "assets/art_source/buildings/house/whole.png"
+  ],
+  "measured_recipes": [
+    {
+      "id": "buildings/workshop",
+      "source": "assets/art_source/buildings/workshop/states.png",
+      "crop_xywh": [
+        38,
+        80,
+        690,
+        553
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        733,
+        724
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.057971014492753624,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        21,
+        32
+      ]
+    },
+    {
+      "id": "buildings/workshop_active",
+      "source": "assets/art_source/buildings/workshop/states.png",
+      "crop_xywh": [
+        738,
+        80,
+        683,
+        553
+      ],
+      "sheet_cell_xywh": [
+        733,
+        0,
+        701,
+        724
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.057971014492753624,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        20,
+        32
+      ]
+    },
+    {
+      "id": "buildings/workshop_hurt",
+      "source": "assets/art_source/buildings/workshop/states.png",
+      "crop_xywh": [
+        1447,
+        80,
+        687,
+        553
+      ],
+      "sheet_cell_xywh": [
+        1434,
+        0,
+        738,
+        724
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.057971014492753624,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        20,
+        32
+      ]
+    }
+  ],
+  "source_bounds": [
+    [
+      38,
+      80,
+      728,
+      633
+    ],
+    [
+      5,
+      80,
+      688,
+      633
+    ],
+    [
+      13,
+      80,
+      700,
+      633
+    ]
+  ],
+  "decision": "Accepted: source alpha, native palette/scale/contact, identity and actual Godot states reviewed. Master-only records establish identity; state strips own final production frames."
+}

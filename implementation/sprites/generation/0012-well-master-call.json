@@ -1,0 +1,64 @@
+{
+  "id": "well",
+  "kind": "master",
+  "tool": "built-in ImageGen",
+  "revision": 0,
+  "returned_file": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-e878ab83-4096-49a9-b91d-4ec7ad95416a.png",
+  "source": "assets/art_source/buildings/well/master.png",
+  "source_sha256": "815a533c2dfb7677c6372fb8c7e11585bd6d7a86cf92836c8b9e03a2aa5bccfe",
+  "source_wh": [
+    1086,
+    1448
+  ],
+  "source_alpha_range": [
+    0,
+    255
+  ],
+  "prompt": "implementation/sprites/generation/0012-well-master.prompt.txt",
+  "prompt_sha256": "17dc3d55b87c0b52d2a8c480c7760a962fee6cb4a74e1ae3b8083e443cd51576",
+  "references": [
+    "assets/art_source/buildings/house/whole.png",
+    "docs/reference-sheet.png"
+  ],
+  "measured_recipes": [
+    {
+      "id": "props/well",
+      "source": "assets/art_source/buildings/well/master.png",
+      "crop_xywh": [
+        203,
+        367,
+        690,
+        845
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        1086,
+        1448
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        24,
+        32
+      ],
+      "pivot_xy": [
+        12,
+        30
+      ],
+      "content_scale": 0.028985507246376812,
+      "alpha_threshold": 128
+    }
+  ],
+  "source_bounds": [
+    [
+      203,
+      367,
+      893,
+      1212
+    ]
+  ],
+  "decision": "Accepted: source alpha, native palette/scale/contact, identity and actual Godot states reviewed. Master-only records establish identity; state strips own final production frames."
+}

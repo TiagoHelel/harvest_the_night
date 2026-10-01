@@ -1,0 +1,64 @@
+{
+  "id": "shop",
+  "kind": "master",
+  "tool": "built-in ImageGen",
+  "revision": 0,
+  "returned_file": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-81c89fcc-ee3f-4d2f-bfde-39aab802969a.png",
+  "source": "assets/art_source/buildings/shop/master.png",
+  "source_sha256": "baf5ffdec4456354ce0284920a4334a149cd9f03bcc4df1c8b66c8dfb5774132",
+  "source_wh": [
+    1122,
+    1402
+  ],
+  "source_alpha_range": [
+    0,
+    255
+  ],
+  "prompt": "implementation/sprites/generation/0012-shop-master.prompt.txt",
+  "prompt_sha256": "faf7bd14c492a0b67c984efbf5f9001e1d821c13923a487ae2ef4d854441fd31",
+  "references": [
+    "assets/art_source/buildings/house/whole.png",
+    "docs/reference-sheet.png"
+  ],
+  "measured_recipes": [
+    {
+      "id": "props/shop",
+      "source": "assets/art_source/buildings/shop/master.png",
+      "crop_xywh": [
+        114,
+        267,
+        893,
+        917
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        1122,
+        1402
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        40
+      ],
+      "pivot_xy": [
+        16,
+        36
+      ],
+      "content_scale": 0.03135498320268757,
+      "alpha_threshold": 128
+    }
+  ],
+  "source_bounds": [
+    [
+      114,
+      267,
+      1007,
+      1184
+    ]
+  ],
+  "decision": "Accepted: source alpha, native palette/scale/contact, identity and actual Godot states reviewed. Master-only records establish identity; state strips own final production frames."
+}

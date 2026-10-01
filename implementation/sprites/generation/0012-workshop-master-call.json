@@ -1,0 +1,64 @@
+{
+  "id": "workshop",
+  "kind": "master",
+  "tool": "built-in ImageGen",
+  "revision": 0,
+  "returned_file": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-29d9af7b-6f49-4e0e-975c-0151286baf7f.png",
+  "source": "assets/art_source/buildings/workshop/master.png",
+  "source_sha256": "a01f19a85505eecd654fa15f9a9ae829e549ef4c99620c452b242dbd4b204e9c",
+  "source_wh": [
+    1312,
+    1199
+  ],
+  "source_alpha_range": [
+    0,
+    255
+  ],
+  "prompt": "implementation/sprites/generation/0012-workshop-master.prompt.txt",
+  "prompt_sha256": "040c2152ccea5ad3d229efaa79d6c6a9bc4a9b63e890831ff65bd1b331a2c2c6",
+  "references": [
+    "assets/art_source/buildings/house/whole.png",
+    "docs/reference-sheet.png"
+  ],
+  "measured_recipes": [
+    {
+      "id": "buildings/workshop",
+      "source": "assets/art_source/buildings/workshop/master.png",
+      "crop_xywh": [
+        110,
+        164,
+        1128,
+        902
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        1312,
+        1199
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.03546099290780142,
+      "alpha_threshold": 128
+    }
+  ],
+  "source_bounds": [
+    [
+      110,
+      164,
+      1238,
+      1066
+    ]
+  ],
+  "decision": "Accepted: source alpha, native palette/scale/contact, identity and actual Godot states reviewed. Master-only records establish identity; state strips own final production frames."
+}

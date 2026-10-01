@@ -1,0 +1,148 @@
+{
+  "id": "kitchen",
+  "kind": "states",
+  "tool": "built-in ImageGen",
+  "revision": 0,
+  "returned_file": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-d61cd1e9-6cd2-4d11-a84e-e3285686fabf.png",
+  "source": "assets/art_source/buildings/kitchen/states.png",
+  "source_sha256": "e58737928e05cf0bb250c43b2c4425627636f52dfccd9c5413e35cc3a2a8d62d",
+  "source_wh": [
+    2172,
+    724
+  ],
+  "source_alpha_range": [
+    0,
+    255
+  ],
+  "prompt": "implementation/sprites/generation/0012-kitchen-states.prompt.txt",
+  "prompt_sha256": "68e269bcde9ac0ddb9fde0497ea78fce7317619171754afae17b065e8d091749",
+  "references": [
+    "assets/art_source/buildings/kitchen/master.png",
+    "assets/art_source/buildings/house/whole.png"
+  ],
+  "measured_recipes": [
+    {
+      "id": "buildings/kitchen",
+      "source": "assets/art_source/buildings/kitchen/states.png",
+      "crop_xywh": [
+        31,
+        80,
+        671,
+        574
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        729,
+        724
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.05961251862891207,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        20,
+        34
+      ]
+    },
+    {
+      "id": "buildings/kitchen_active",
+      "source": "assets/art_source/buildings/kitchen/states.png",
+      "crop_xywh": [
+        757,
+        76,
+        667,
+        577
+      ],
+      "sheet_cell_xywh": [
+        729,
+        0,
+        722,
+        724
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.05961251862891207,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        20,
+        34
+      ]
+    },
+    {
+      "id": "buildings/kitchen_hurt",
+      "source": "assets/art_source/buildings/kitchen/states.png",
+      "crop_xywh": [
+        1478,
+        77,
+        670,
+        577
+      ],
+      "sheet_cell_xywh": [
+        1451,
+        0,
+        721,
+        724
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.05961251862891207,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        20,
+        34
+      ]
+    }
+  ],
+  "source_bounds": [
+    [
+      31,
+      80,
+      702,
+      654
+    ],
+    [
+      28,
+      76,
+      695,
+      653
+    ],
+    [
+      27,
+      77,
+      697,
+      654
+    ]
+  ],
+  "decision": "Accepted: source alpha, native palette/scale/contact, identity and actual Godot states reviewed. Master-only records establish identity; state strips own final production frames."
+}
