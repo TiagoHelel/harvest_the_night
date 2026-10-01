@@ -19,8 +19,10 @@ Task 0005 migrates work to thirteen four-frame strips: chop, mine, till,
 plant, water, fish, reel, harvest, carry, craft, trade, collect and repair.
 All core verbs have separate art; carry illustrates an existing nearby station
 delivery. West is authored, east mirrors west, north/south work uses side art.
-The registry now assigns 88 outputs to raster, four reaction frames to the
-owner-sheet cutter and 156 to ASCII. Reactions remain for task 0006.
+Task 0006 replaces the final four reaction frames with authored south poses
+and distinct bang/question/note/heart glyphs, plus a separate compact shadow.
+The registry now assigns 93 outputs to raster, zero to the owner-sheet cutter
+and 155 to ASCII. All 77 player pose frames have accepted raster ownership.
 
 `ownership.json` registers all 248 PNGs with exactly one writer/checker: ASCII,
 owner-sheet cutter, or raster importer. `manifest.json` describes every raster
@@ -33,7 +35,7 @@ masters retain their task-0001 hashes. Prompt/reference hashes are checked too.
 python tools/import_art.py           # offline deterministic rebuild + output hashes
 python tools/import_art.py --check   # sources, outputs, ownership and view metadata
 python tools/gen_sprites.py          # remaining ASCII sprites, atlas and palette sync
-python tools/cut_sheet.py            # remaining owner-sheet animation PNGs
+python tools/cut_sheet.py            # zero legacy writes; merged metadata still checked
 python tools/check_art_pipeline.py   # fault probes; run outside concurrent builds
 ```
 
@@ -105,3 +107,21 @@ movement/cancel remove every pending tool cue. No core/save timer was added.
 completion, interruption, three-tick repeat repair, nearby delivery and exact
 4x Sim.advance equivalence. Add an output directory for real-render captures.
 `reviews/0005/build_review.py` composes native/3x alpha, phases and capture pages.
+
+Task 0006 sources are `player/react_{bang,question,note,heart}.png` and
+`player/shadow.png`. Six built-in calls produced five accepted sources; one
+preserved exclamation candidate needed a targeted wider/straighter glyph with
+a separated dot. Exact prompts and returned-file/source hashes are in
+`implementation/sprites/generation/0006-*`. Body scale remains 30 px, feet
+(24,44), canvas 48x48. The shadow is 20x8 with an 18x3 visible silhouette,
+uniform palette color and binary alpha; the view supplies transparency.
+
+Measured `bubble_xywh` crops cover every symbol pixel and zero body pixels.
+The body shader masks that rectangle while a separate region sprite draws
+the same source pixels exactly once, clamped to viewport margins without
+moving the farmer. Reaction selection, idle-only suppression and lifetime
+remain the existing core rules. `python tools/show_art.py --reactions --check`
+checks state selection, suppression, lighting, anchors, four map corners and
+shared shadow consumers. Add an output folder for captures and real-render
+pixel equivalence of all four split reactions, plus localized shadow contrast.
+`reviews/0006/build_review.py` composes actual captures at native/nearest-3x.

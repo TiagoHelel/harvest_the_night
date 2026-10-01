@@ -55,6 +55,11 @@ func _run() -> void:
 	player["facing"] = Player.SOUTH
 	player["action"] = {}
 	var actor := Entities.get_one(_state, enemy)
+	if args.has("--reactions"):
+		await _reactions()
+		print("PLAYER REACTIONS: %d checks, %d failed" % [_checks, _failed])
+		quit(1 if _failed > 0 else 0)
+		return
 	if args.has("--work"):
 		await _work_cycles()
 		print("PLAYER WORK: %d checks, %d failed" % [_checks, _failed])
@@ -430,6 +435,223 @@ func _work_cycles() -> void:
 	_work_tick(view)
 	view._process(0.0)
 	expect(String(view.playing()).begins_with("idle_"), "Dusk ends daylight work without leaving a tool")
+
+
+## Existing reaction rules and actual PlayerView, including viewport limits.
+func _reaction_fixture(phase: int = Phases.DAY, late_day: bool = false) -> void:
+	_state = State.create(6006)
+	for key in ["occupants", "plots", "entities", "livestock", "crafting", "produced"]:
+		(_state[key] as Dictionary).clear()
+	var terrain: PackedByteArray = _state["terrain"]
+	terrain.fill(Farm.Terrain.GRASS)
+	_state["terrain"] = terrain
+	_state["phase"] = phase
+	_state["tick"] = GameData.DUSK_AT_TICK / 2
+	_state["day_tick"] = GameData.DAY_TICKS - 1 if late_day else GameData.DAY_TICKS / 2
+	_state["house_cell"] = [21, 7]
+	_add_house(Vector2i(20, 6))
+	_state["occupants"][Grid.index(Vector2i(12, 9))] = {"id": &"tree"}
+	Entities.spawn(_state, &"walker", Vector2i(20, 11))
+	_set_contact(_state["player"], Vector2i(296, 160))
+
+
+func _reaction_settle(view: PlayerView) -> void:
+	var before := var_to_bytes(_state)
+	_world.show_state(_state)
+	view.show_state(_state)
+	_world._process(5.0)
+	await process_frame
+	await process_frame
+	view._process(0.0)
+	expect(var_to_bytes(_state) == before, "Reaction world/view rendering cannot mutate any state/save field")
+
+
+func _reaction_check(view: PlayerView, kind: StringName) -> void:
+	var before := var_to_bytes(_state)
+	view._process(0.2)
+	var body: Sprite2D = view.get_node("Body")
+	var bubble: Sprite2D = view.get_node("ReactionBubble")
+	var shadow: Sprite2D = view.get_node("Shadow")
+	var name := StringName("react_%s" % kind)
+	expect(var_to_bytes(_state) == before, "Held reaction cannot update state or its lifetime")
+	expect(view.playing() == name and not view.flipped(), "All reactions keep their south pose without mirroring")
+	expect(body.texture != null and body.texture.resource_path == PlayerArt.texture_path(name, 0),
+		"Each existing reaction uses its own source-owned frame")
+	expect(body.offset == Vector2(-24, -44) and body.texture.get_size() == Vector2(48, 48),
+		"Reaction body preserves the common canvas and planted feet")
+	expect(view.position == ArtPlacement.contact(_state["player"]["pos"]), "Bubble clamping never moves the farmer")
+	var metadata: Dictionary = RasterArt.FRAMES[body.texture.resource_path]
+	expect(bubble.visible and bubble.texture == body.texture and bubble.region_rect == Rect2(metadata["bubble"]),
+		"One separate glyph draws the exact source-owned crop")
+	expect(body.material is ShaderMaterial and (body.material as ShaderMaterial).get_shader_parameter("bubble_box")
+		== Vector4(bubble.region_rect.position.x, bubble.region_rect.position.y,
+			bubble.region_rect.size.x, bubble.region_rect.size.y), "Body masks only its duplicate source glyph")
+	var canvas_transform := bubble.get_global_transform_with_canvas()
+	var first := canvas_transform * Vector2.ZERO
+	var last := canvas_transform * bubble.region_rect.size
+	var safe := view.get_viewport_rect().grow(-1.99)
+	expect(safe.has_point(first) and safe.has_point(last), "Entire bubble stays inside viewport with a two-pixel margin")
+	expect(shadow.texture.resource_path == PlayerView.SHADOW and shadow.texture.get_size() == Vector2(20, 8)
+		and shadow.position == Vector2(0, -1) and is_equal_approx(shadow.modulate.a, PlayerView.SHADOW_ALPHA),
+		"Single shared shadow retains contact and view-owned transparency")
+	expect(view.get_children().filter(func(child): return child.name == "Shadow").size() == 1,
+		"Reaction never adds a second shadow")
+
+
+func _reactions() -> void:
+	var view: PlayerView = _world.get_node("Occupants/PlayerView")
+	view.set_process(false)
+	_world.set_process(false)
+	# Each symbol under day/dusk/night; all initial facings select south art.
+	for lighting in 3:
+		for kind in Reactions.KINDS:
+			for facing in (range(4) if lighting == 0 else [Player.SOUTH]):
+				_reaction_fixture(Phases.NIGHT if lighting == 2 else Phases.DAY, lighting == 1)
+				_state["player"]["facing"] = facing
+				Reactions.show(_state, kind)
+				await _reaction_settle(view)
+				_reaction_check(view, kind)
+				await _shoot("reaction_%s_light%d_facing%d" % [kind, lighting, facing],
+					"%s / day-dusk-night %d / idle facing %d" % [kind, lighting, facing])
+	# Actual crop-ready event, rather than a view inventing a note.
+	_reaction_fixture()
+	var cell := Vector2i(17, 9)
+	var crop: StringName = Farming.seeds()[0]
+	_state["terrain"][Grid.index(cell)] = Farm.Terrain.SOIL
+	var plot := Farming.EMPTY_PLOT.duplicate()
+	plot["crop"] = crop
+	plot["growth"] = int(GameData.CROPS[crop]["growth_ticks"]) - 1
+	_state["plots"][Grid.index(cell)] = plot
+	Farming.tick(_state)
+	Reactions.tick(_state)
+	expect(Reactions.now(_state) == &"note", "Actual nearby crop completion selects the existing note")
+	await _reaction_settle(view)
+	_reaction_check(view, &"note")
+	await _shoot("event_crop_ready", "Actual crop_ready -> note; stable feet and shadow")
+	# Actual fishing wait -> bite, using the existing core timer and selection.
+	_reaction_fixture()
+	var water := Vector2i(19, 9)
+	_state["terrain"][Grid.index(water)] = Farm.Terrain.WATER
+	expect(Fishing.begin(_state, water), "Existing fishing cast begins in isolated pond")
+	_state["fishing"]["left"] = 1
+	Fishing.tick(_state, Player.cell(_state))
+	Reactions.tick(_state)
+	expect(Fishing.is_biting(_state) and Reactions.now(_state) == &"bang", "Actual bite selects the existing bang")
+	await _reaction_settle(view)
+	_reaction_check(view, &"bang")
+	await _shoot("event_fishing_bite", "Actual fishing bite -> bang, only after work ends")
+	# Existing night transition and damage/destruction priority.
+	_reaction_fixture()
+	expect(Phases.begin_preparation(_state) and Phases.begin_night(_state), "Existing phase transitions begin night")
+	Reactions.tick(_state)
+	expect(Reactions.now(_state) == &"bang", "Night boundary selects the existing bang")
+	await _reaction_settle(view)
+	_reaction_check(view, &"bang")
+	await _shoot("event_night_began", "Actual night_began -> bang under night lighting")
+	var fence := Vector2i(17, 9)
+	_state["occupants"][Grid.index(fence)] = {"id": &"fence", "hp": 1}
+	_state["tick"] = int(_state["tick"]) + 1
+	# The event tick must not precede the reader's existing seen watermark.
+	expect(Farm.damage(_state, fence, 1) == 1, "Actual damage destroys the isolated fence")
+	Reactions.tick(_state)
+	expect(Reactions.now(_state) == &"question", "Destruction reaction outranks the night bang")
+	await _reaction_settle(view)
+	_reaction_check(view, &"question")
+	await _shoot("event_structure_lost", "Actual fence destruction -> question; no new reaction rule")
+	# Walking and every core verb suppress bubbles, including view return cues.
+	for verb in PlayerArt.known_verbs():
+		for kind in Reactions.KINDS:
+			_work_fixture(verb, Player.WEST)
+			_state["intent"]["interact"] = true
+			_work_tick(view)
+			Reactions.show(_state, kind)
+			await _reaction_settle(view)
+			var body: Sprite2D = view.get_node("Body")
+			expect(view.playing() == verb and not view.get_node("ReactionBubble").visible
+				and body.material == null, "Reaction never obscures active/returning %s work" % verb)
+			if kind == &"question":
+				await _shoot("suppressed_work_%s" % verb, "Reaction waits: %s tool pose remains unobscured" % verb)
+	_reaction_fixture()
+	Reactions.show(_state, &"note")
+	await _reaction_settle(view)
+	_state["intent"]["move"] = [1, 0]
+	Player.tick(_state)
+	view._process(0.0)
+	expect(view.playing() == &"walk_west" and view.flipped() and not view.get_node("ReactionBubble").visible,
+		"Walking hides the reaction without changing the state's remaining lifetime")
+	await _shoot("suppressed_walk", "Moving east: authored walk, no reaction layer")
+	_state["intent"]["move"] = [0, 0]
+	view._process(0.0)
+	expect(view.playing() == &"react_note", "Stopping shows the still-active existing reaction")
+	for _i in GameData.REACTION_TICKS:
+		Reactions.tick(_state)
+	view._process(0.0)
+	expect(Reactions.now(_state) == &"" and view.playing() == &"idle_west"
+		and not view.get_node("ReactionBubble").visible, "Expiry removes bubble and body mask and restores idle")
+	await _shoot("expired_reaction", "Existing reaction lifetime expires to normal authored idle")
+	# Four symbols at all map/camera corners: glyph alone can be clamped.
+	_caption.position = Vector2(120, 128)
+	for corner in [Vector2i(0, 0), Vector2i(39, 0), Vector2i(0, 17), Vector2i(39, 17)]:
+		for kind in Reactions.KINDS:
+			_reaction_fixture()
+			_set_contact(_state["player"], Vector2i(corner.x * 16 + 8, corner.y * 16 + 16))
+			Reactions.show(_state, kind)
+			_world.look_at_cell(corner)
+			await _reaction_settle(view)
+			_reaction_check(view, kind)
+			await _shoot("bounds_%d_%d_%s" % [corner.x, corner.y, kind],
+				"Map corner %s / %s / glyph clamped, feet unchanged" % [str(corner), kind])
+	_caption.position = Vector2(8, 8)
+	# Shared prop/enemy shadow consumers retain exactly one source-owned shadow.
+	_reaction_fixture()
+	_world.look_at_cell(Vector2i(18, 9))
+	await _reaction_settle(view)
+	for actor in _world.get_node("Occupants/Actors").get_children():
+		var shadow: Sprite2D = actor.get_node("Shadow")
+		expect(shadow.texture.resource_path == PlayerView.SHADOW and shadow.position == Vector2(0, -1),
+			"Shared enemy shadow uses unchanged ground placement")
+	for prop in _world.get_node("Occupants").get_children():
+		if prop is Sprite2D and prop.texture != null and prop.texture.resource_path.ends_with("/tree.png"):
+			expect(prop.get_child_count() == 1 and prop.get_child(0).texture.resource_path == PlayerView.SHADOW,
+				"Tree has one separate shared contact shadow")
+	await _shoot("shared_shadows", "Farmer, tree and walker share one compact contact-shadow source")
+	# On the real renderer, split body/glyph must equal the original combined PNG.
+	if _capture:
+		for kind in Reactions.KINDS:
+			_reaction_fixture()
+			Reactions.show(_state, kind)
+			await _reaction_settle(view)
+			var body: Sprite2D = view.get_node("Body")
+			var bubble: Sprite2D = view.get_node("ReactionBubble")
+			await process_frame
+			await RenderingServer.frame_post_draw
+			var split := root.get_texture().get_image()
+			body.material = null
+			bubble.visible = false
+			await process_frame
+			await RenderingServer.frame_post_draw
+			var combined := root.get_texture().get_image()
+			expect(split.get_data() == combined.get_data(), "Split %s glyph equals combined source: no double glyph/halo/body alteration" % kind)
+			view._process(0.0)
+			await _shoot("split_equals_source_%s" % kind, "Renderer: %s body+glyph equals combined committed PNG" % kind)
+		_reaction_fixture()
+		await _reaction_settle(view)
+		var shadow: Sprite2D = view.get_node("Shadow")
+		await process_frame
+		await RenderingServer.frame_post_draw
+		var grounded := root.get_texture().get_image()
+		shadow.visible = false
+		await process_frame
+		await RenderingServer.frame_post_draw
+		var floating := root.get_texture().get_image()
+		var changed := 0
+		for y in grounded.get_height():
+			for x in grounded.get_width():
+				if grounded.get_pixel(x, y) != floating.get_pixel(x, y):
+					changed += 1
+		expect(changed >= 5 and changed <= 54, "New shadow changes a small readable ground contact, without a painted halo")
+		shadow.visible = true
+		await _shoot("shadow_contact", "Compact separate shadow: %d ground pixels changed, stable boots" % changed)
 
 
 func _settle() -> void:

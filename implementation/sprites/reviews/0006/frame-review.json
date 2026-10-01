@@ -1,0 +1,438 @@
+{
+  "assets": [
+    {
+      "id": "actors/react_bang_0",
+      "name": "react_bang",
+      "source": "assets/art_source/player/react_bang.png",
+      "source_sha256": "1816b172af20646cb483fce897a7435a05761d97cd08393b3aa7df105608e4cf",
+      "source_wh": [
+        1310,
+        1200
+      ],
+      "crop_xywh": [
+        375,
+        197,
+        590,
+        899
+      ],
+      "body_box_xyxy": [
+        375,
+        275,
+        935,
+        1096
+      ],
+      "body_reference_height": 821,
+      "feet_source_xy": [
+        655.5,
+        1096
+      ],
+      "content_scale": 0.03654080389768575,
+      "content_anchor_xy": [
+        10,
+        33
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "alpha_threshold": 128,
+      "components": [
+        {
+          "pixels": 283842,
+          "box_xyxy": [
+            375,
+            275,
+            935,
+            1096
+          ]
+        },
+        {
+          "pixels": 11197,
+          "box_xyxy": [
+            880,
+            197,
+            965,
+            339
+          ]
+        },
+        {
+          "pixels": 5180,
+          "box_xyxy": [
+            882,
+            351,
+            962,
+            427
+          ]
+        }
+      ],
+      "bubble_xywh": [
+        33,
+        11,
+        3,
+        8
+      ],
+      "native_bounds_xyxy": [
+        14,
+        11,
+        36,
+        44
+      ],
+      "native_sha256": "e28c8c3b59ad438779b9bc028014ea645b2ee8d7ff2841a7d4cb10ce83ad8665"
+    },
+    {
+      "id": "actors/react_question_0",
+      "name": "react_question",
+      "source": "assets/art_source/player/react_question.png",
+      "source_sha256": "766164181a7ae2110598a17a00ebf6ad346fddd05b360c83c3b9e61c8da10974",
+      "source_wh": [
+        1211,
+        1299
+      ],
+      "crop_xywh": [
+        326,
+        288,
+        644,
+        934
+      ],
+      "body_box_xyxy": [
+        326,
+        384,
+        905,
+        1222
+      ],
+      "body_reference_height": 838,
+      "feet_source_xy": [
+        617.0,
+        1222
+      ],
+      "content_scale": 0.03579952267303103,
+      "content_anchor_xy": [
+        10,
+        33
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "alpha_threshold": 128,
+      "components": [
+        {
+          "pixels": 297409,
+          "box_xyxy": [
+            326,
+            384,
+            905,
+            1222
+          ]
+        },
+        {
+          "pixels": 18443,
+          "box_xyxy": [
+            825,
+            288,
+            970,
+            497
+          ]
+        }
+      ],
+      "bubble_xywh": [
+        32,
+        11,
+        5,
+        7
+      ],
+      "native_bounds_xyxy": [
+        14,
+        11,
+        37,
+        44
+      ],
+      "native_sha256": "567c81989c9f8a09e28ff4c3fb9711ba27a937d158ec0349a170044638235e1f"
+    },
+    {
+      "id": "actors/react_note_0",
+      "name": "react_note",
+      "source": "assets/art_source/player/react_note.png",
+      "source_sha256": "e2eedfacc8cdfc297ebe1f685f700512eb2b38c73326ae5966570923e39e9a7e",
+      "source_wh": [
+        1309,
+        1201
+      ],
+      "crop_xywh": [
+        368,
+        172,
+        704,
+        900
+      ],
+      "body_box_xyxy": [
+        368,
+        252,
+        939,
+        1072
+      ],
+      "body_reference_height": 820,
+      "feet_source_xy": [
+        653.5,
+        1072
+      ],
+      "content_scale": 0.036585365853658534,
+      "content_anchor_xy": [
+        10,
+        33
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "alpha_threshold": 128,
+      "components": [
+        {
+          "pixels": 287216,
+          "box_xyxy": [
+            368,
+            252,
+            939,
+            1072
+          ]
+        },
+        {
+          "pixels": 17198,
+          "box_xyxy": [
+            910,
+            172,
+            1072,
+            378
+          ]
+        }
+      ],
+      "bubble_xywh": [
+        34,
+        11,
+        6,
+        8
+      ],
+      "native_bounds_xyxy": [
+        14,
+        11,
+        40,
+        44
+      ],
+      "native_sha256": "5f18244b0df030230fd021fb696f8fa211013e9ca78dce4becbd6a44c0c0c1e0"
+    },
+    {
+      "id": "actors/react_heart_0",
+      "name": "react_heart",
+      "source": "assets/art_source/player/react_heart.png",
+      "source_sha256": "b81869e4e8ae930ca510335e4cb737e9f85a3cb3fb6c6097b1074f0dad6946a9",
+      "source_wh": [
+        1236,
+        1273
+      ],
+      "crop_xywh": [
+        317,
+        229,
+        682,
+        940
+      ],
+      "body_box_xyxy": [
+        317,
+        305,
+        924,
+        1169
+      ],
+      "body_reference_height": 864,
+      "feet_source_xy": [
+        620.5,
+        1169
+      ],
+      "content_scale": 0.034722222222222224,
+      "content_anchor_xy": [
+        11,
+        33
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "alpha_threshold": 128,
+      "components": [
+        {
+          "pixels": 323398,
+          "box_xyxy": [
+            317,
+            305,
+            924,
+            1169
+          ]
+        },
+        {
+          "pixels": 18632,
+          "box_xyxy": [
+            826,
+            229,
+            999,
+            388
+          ]
+        }
+      ],
+      "bubble_xywh": [
+        31,
+        11,
+        6,
+        6
+      ],
+      "native_bounds_xyxy": [
+        13,
+        11,
+        37,
+        44
+      ],
+      "native_sha256": "f1186622d5f3ffc4f53bfb6e11a9ee2aea96a08de2faedda109e40a3103e2a4d"
+    },
+    {
+      "id": "actors/shadow",
+      "name": "shadow",
+      "source": "assets/art_source/player/shadow.png",
+      "source_sha256": "fc43ec54ed74bc71f7058ad0bf5b472e38e3597b3bc8af6dac51044356f2d39f",
+      "source_wh": [
+        1983,
+        793
+      ],
+      "crop_xywh": [
+        414,
+        317,
+        1155,
+        175
+      ],
+      "body_box_xyxy": [
+        414,
+        317,
+        1569,
+        492
+      ],
+      "body_reference_height": 175,
+      "feet_source_xy": null,
+      "content_scale": 0.015584415584415584,
+      "content_anchor_xy": [
+        9,
+        1
+      ],
+      "canvas_wh": [
+        20,
+        8
+      ],
+      "pivot_xy": [
+        10,
+        4
+      ],
+      "alpha_threshold": 128,
+      "components": [
+        {
+          "pixels": 163169,
+          "box_xyxy": [
+            414,
+            317,
+            1569,
+            492
+          ]
+        }
+      ],
+      "native_bounds_xyxy": [
+        1,
+        3,
+        19,
+        6
+      ],
+      "native_sha256": "0378b32c2a9bed7529f0552e126c7e05ea17d071fd682633086bd931fac2dcc4"
+    }
+  ],
+  "captures": [
+    "implementation/shots/sprites/0006/reactions/bounds_0_0_bang.png",
+    "implementation/shots/sprites/0006/reactions/bounds_0_0_heart.png",
+    "implementation/shots/sprites/0006/reactions/bounds_0_0_note.png",
+    "implementation/shots/sprites/0006/reactions/bounds_0_0_question.png",
+    "implementation/shots/sprites/0006/reactions/bounds_0_17_bang.png",
+    "implementation/shots/sprites/0006/reactions/bounds_0_17_heart.png",
+    "implementation/shots/sprites/0006/reactions/bounds_0_17_note.png",
+    "implementation/shots/sprites/0006/reactions/bounds_0_17_question.png",
+    "implementation/shots/sprites/0006/reactions/bounds_39_0_bang.png",
+    "implementation/shots/sprites/0006/reactions/bounds_39_0_heart.png",
+    "implementation/shots/sprites/0006/reactions/bounds_39_0_note.png",
+    "implementation/shots/sprites/0006/reactions/bounds_39_0_question.png",
+    "implementation/shots/sprites/0006/reactions/bounds_39_17_bang.png",
+    "implementation/shots/sprites/0006/reactions/bounds_39_17_heart.png",
+    "implementation/shots/sprites/0006/reactions/bounds_39_17_note.png",
+    "implementation/shots/sprites/0006/reactions/bounds_39_17_question.png",
+    "implementation/shots/sprites/0006/reactions/event_crop_ready.png",
+    "implementation/shots/sprites/0006/reactions/event_fishing_bite.png",
+    "implementation/shots/sprites/0006/reactions/event_night_began.png",
+    "implementation/shots/sprites/0006/reactions/event_structure_lost.png",
+    "implementation/shots/sprites/0006/reactions/expired_reaction.png",
+    "implementation/shots/sprites/0006/reactions/reaction_bang_light0_facing0.png",
+    "implementation/shots/sprites/0006/reactions/reaction_bang_light0_facing1.png",
+    "implementation/shots/sprites/0006/reactions/reaction_bang_light0_facing2.png",
+    "implementation/shots/sprites/0006/reactions/reaction_bang_light0_facing3.png",
+    "implementation/shots/sprites/0006/reactions/reaction_bang_light1_facing0.png",
+    "implementation/shots/sprites/0006/reactions/reaction_bang_light2_facing0.png",
+    "implementation/shots/sprites/0006/reactions/reaction_heart_light0_facing0.png",
+    "implementation/shots/sprites/0006/reactions/reaction_heart_light0_facing1.png",
+    "implementation/shots/sprites/0006/reactions/reaction_heart_light0_facing2.png",
+    "implementation/shots/sprites/0006/reactions/reaction_heart_light0_facing3.png",
+    "implementation/shots/sprites/0006/reactions/reaction_heart_light1_facing0.png",
+    "implementation/shots/sprites/0006/reactions/reaction_heart_light2_facing0.png",
+    "implementation/shots/sprites/0006/reactions/reaction_note_light0_facing0.png",
+    "implementation/shots/sprites/0006/reactions/reaction_note_light0_facing1.png",
+    "implementation/shots/sprites/0006/reactions/reaction_note_light0_facing2.png",
+    "implementation/shots/sprites/0006/reactions/reaction_note_light0_facing3.png",
+    "implementation/shots/sprites/0006/reactions/reaction_note_light1_facing0.png",
+    "implementation/shots/sprites/0006/reactions/reaction_note_light2_facing0.png",
+    "implementation/shots/sprites/0006/reactions/reaction_question_light0_facing0.png",
+    "implementation/shots/sprites/0006/reactions/reaction_question_light0_facing1.png",
+    "implementation/shots/sprites/0006/reactions/reaction_question_light0_facing2.png",
+    "implementation/shots/sprites/0006/reactions/reaction_question_light0_facing3.png",
+    "implementation/shots/sprites/0006/reactions/reaction_question_light1_facing0.png",
+    "implementation/shots/sprites/0006/reactions/reaction_question_light2_facing0.png",
+    "implementation/shots/sprites/0006/reactions/shadow_contact.png",
+    "implementation/shots/sprites/0006/reactions/shared_shadows.png",
+    "implementation/shots/sprites/0006/reactions/split_equals_source_bang.png",
+    "implementation/shots/sprites/0006/reactions/split_equals_source_heart.png",
+    "implementation/shots/sprites/0006/reactions/split_equals_source_note.png",
+    "implementation/shots/sprites/0006/reactions/split_equals_source_question.png",
+    "implementation/shots/sprites/0006/reactions/suppressed_walk.png",
+    "implementation/shots/sprites/0006/reactions/suppressed_work_chop.png",
+    "implementation/shots/sprites/0006/reactions/suppressed_work_collect.png",
+    "implementation/shots/sprites/0006/reactions/suppressed_work_craft.png",
+    "implementation/shots/sprites/0006/reactions/suppressed_work_fish.png",
+    "implementation/shots/sprites/0006/reactions/suppressed_work_harvest.png",
+    "implementation/shots/sprites/0006/reactions/suppressed_work_mine.png",
+    "implementation/shots/sprites/0006/reactions/suppressed_work_plant.png",
+    "implementation/shots/sprites/0006/reactions/suppressed_work_reel.png",
+    "implementation/shots/sprites/0006/reactions/suppressed_work_repair.png",
+    "implementation/shots/sprites/0006/reactions/suppressed_work_till.png",
+    "implementation/shots/sprites/0006/reactions/suppressed_work_trade.png",
+    "implementation/shots/sprites/0006/reactions/suppressed_work_water.png",
+    "implementation/shots/sprites/0006/dusk.png",
+    "implementation/shots/sprites/0006/noon.png",
+    "implementation/shots/sprites/0006/react.png",
+    "implementation/shots/sprites/0006/result.png",
+    "implementation/shots/sprites/0006/tech.png",
+    "implementation/shots/sprites/0006/wave.png"
+  ],
+  "capture_pages": 18
+}

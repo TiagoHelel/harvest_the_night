@@ -171,19 +171,19 @@
     },
     {
       "output": "sprites/actors/react_bang_0.png",
-      "owner": "player_sheet"
+      "owner": "raster"
     },
     {
       "output": "sprites/actors/react_heart_0.png",
-      "owner": "player_sheet"
+      "owner": "raster"
     },
     {
       "output": "sprites/actors/react_note_0.png",
-      "owner": "player_sheet"
+      "owner": "raster"
     },
     {
       "output": "sprites/actors/react_question_0.png",
-      "owner": "player_sheet"
+      "owner": "raster"
     },
     {
       "output": "sprites/actors/reel_0.png",
@@ -219,7 +219,7 @@
     },
     {
       "output": "sprites/actors/shadow.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/actors/till_0.png",

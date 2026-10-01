@@ -1,0 +1,8 @@
+Use case: stylized-concept
+Asset type: isolated production raster ground-shadow source for HARVEST THE NIGHT.
+Primary request: ONE compact horizontal oval contact shadow, a flat stepped pixel silhouette in a single uniform very dark violet/brown color. It grounds the approved straw-hat farmer's planted boots. The farmer reference is for scale and perspective ONLY: do not draw the farmer or boots. This is the separate shadow asset, not a scene or character edit.
+Input images: Image 1 is the approved farmer identity master, showing the body and boots whose contact this shadow supports. Image 2 is the approved idle_south strip, showing the planted stance. Both are scale/style references only.
+Style/medium: crisp restrained pixel art, hard binary silhouette with simple stepped edges. Flat orthographic ground-plane oval about four times as wide as high, symmetric left/right and front/back. The downstream native canvas is 20x8; the visible shadow should be about 18x4, centered at (10,4). This is a downstream import target, so keep the source simple enough to reduce cleanly.
+Composition: exactly one complete detached oval silhouette centered with generous true transparent outer margins. No interior holes, duplicate shadow, border, extra part or colored highlight.
+Scene/backdrop: actual transparent alpha outside the oval. Single uniform solid dark interior, no softer fringe, gradient, feathering, glow, painted halo, checkerboard, vignette, ground texture or background. Runtime modulate supplies partial transparency; do not paint a second shadow into any character.
+Avoid: character, boots, object, cast-light direction, long diagonal shape, perspective volume, smooth painting, blurry edges, text, labels, watermark or UI.

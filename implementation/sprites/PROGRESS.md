@@ -369,3 +369,64 @@ bloom remain 0007/0019 follow-ups; four legacy reactions belong to 0006.
 Queue after completion: 5 done, 15 todo, zero doing/blocked. Next is 0006,
 player reactions and ground shadow. One task completed this cycle; the user's
 active /goal continues automatically toward the remaining art backlog.
+
+## 0006 — Authored player reactions and contact shadow — done 2026-10-01
+
+Generated and integrated bang, question, note and heart plus the shared ground
+shadow. All 77 player pose frames are now raster-owned. Built-in ImageGen made
+six actual calls: five accepted sources and one rejected initial bang; one
+targeted revision separated its straight stem and dot for native readability.
+No asset exceeded the three-revision cap. Raw sources are
+`assets/art_source/player/react_{bang,question,note,heart}.png` and `shadow.png`;
+the rejected source is preserved in `player/candidates/react_bang-r0.png`.
+Exact prompts, actual tool files, reference roles, decisions and source hashes
+are in `generation/0006-generations.json` and six individual call/prompt files.
+Saved source copies match the returned tool files byte-for-byte. Approved
+masters, locomotion/work sources and the owner's sheet were preserved.
+
+Measured crops and boot anchors in `reviews/0006/measured-contract.json` give
+30px reaction bodies on 48x48 canvases, feet (24,44), nearest reduction, shared
+palette and binary alpha at 128. Actual glyph sizes are bang 3x8, question 5x7,
+note 6x8 and heart 6x6. Shadow uses its existing 20x8 canvas with an 18x3 visible
+one-color ellipse, one source-proportional uniform reduction, existing opacity
+0.42 and placement (0,-1). Raster ownership totals 93 raster / zero legacy
+player-sheet / 155 ASCII = 248 runtime PNGs. Zero legacy player writes still
+retain strict merged count/canvas/feet checks; shadow is explicitly ground art.
+
+PlayerView draws the existing selected reaction with a source-owned glyph
+region and body discard mask. Only the glyph clamps to a two-pixel viewport
+margin; body feet, camera, scale and sorting are unchanged. Existing core
+selection/priority/45-tick lifetime and idle-only behavior remain. All twelve
+work verbs, recovery and walking hide the glyph and reset the mask. Actual
+Farming.tick, Fishing.tick, Phases.begin_night and Farm.damage drive crop-ready,
+bite, night and destruction captures. Heart uses the available existing kind
+without a new automatic trigger. No new player hurt rule was added.
+
+Headless reactions: 690 checks, zero failed. Real rendering: 828 checks, zero
+failed with 64 fixture captures. Four real pixel comparisons prove split
+body/glyph rendering equals the committed combined PNG; visible/hidden shadow
+comparison changes 23 exposed ground pixels with stable boots. Full serialized
+state remains unchanged by rendering. Fault suite: 27 fault/rebuild probes,
+all intentional corruption restored and deterministic rebuilds byte-identical.
+
+Full verification PASS: 28 passed, zero skipped/failed in 177s; 105 scripts,
+6609 headless assertions, 980 input cases, performance and Windows/Web exports.
+Placement/locomotion/work remain 476 / 468 / 3749 checks, zero failed. Raster
+check: 93 outputs, metadata verified, zero writes. Sim hash `1961000123` and
+data hash `407837701`, both unchanged. Logs and detailed criteria PASS are in
+`reviews/0006/REVIEW.md` and that folder's verification/fault/capture logs.
+
+All 70 actual Godot captures (64 fixtures plus six Main scenarios) were opened
+at native and nearest 3x through `reviews/0006/captures-00` to `captures-17`;
+3x pages were inspected at original 2880x1728 resolution. Captures are in
+`implementation/shots/sprites/0006/` and `reactions/`. Five final source alpha
+pages and all six native/3x alpha sheets were reviewed after the bang revision.
+Criteria PASS: consistent identity/feet, clean alpha, distinct symbols under
+day/dusk/night lighting, no duplicate glyph/halo/shadow, work unobscured and
+complete corner glyphs. Existing body clipping at extreme map boundaries is
+unchanged; viewport tests do not claim a new HUD exclusion region. Ground noise,
+night bloom and tree/station overlaps remain later-family follow-ups.
+
+Queue after completion: 6 done, 14 todo, zero doing/blocked. Next is 0007,
+terrain. One task completed this cycle; the user's active /goal continues
+automatically toward the remaining art backlog.

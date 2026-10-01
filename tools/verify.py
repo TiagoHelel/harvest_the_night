@@ -184,6 +184,12 @@ def check_player_work():
     return check("player work", code == 0, verdict)
 
 
+def check_player_reactions():
+    code, out = run([sys.executable, "tools/show_art.py", "--reactions", "--check"])
+    verdict = next((line for line in out.splitlines() if line.startswith("PLAYER REACTIONS:")), tail(out, 4))
+    return check("player reactions", code == 0, verdict)
+
+
 def check_logo():
     """The logo still matches the letters it was composed from.
 
@@ -576,6 +582,7 @@ def main():
     check_art_showcase()
     check_player_showcase()
     check_player_work()
+    check_player_reactions()
     check_font()
     check_logo()
     check_sfx()

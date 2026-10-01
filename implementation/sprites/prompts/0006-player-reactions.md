@@ -1,6 +1,6 @@
 # 0006 - Player reactions and ground shadow
 
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0005
 - **Likely files:** sprites/actors/react_*; sprites/actors/shadow.png; src/ui/player_art.gd; src/ui/player_view.gd
 - **Generation briefs:** PLAYER_REACTION

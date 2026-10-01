@@ -323,7 +323,9 @@ def frames_gd(frames, raster=None):
             if any(owner != "player_sheet" for owner in registered):
                 raise ValueError("Animation split between player owners: " + name)
             counts[name] = len(source_frames)
-    player = [e for e in raster["assets"] if e["output"].startswith("sprites/actors/")]
+    # The shared ground shadow lives with actors but is not a player pose.
+    player = [e for e in raster["assets"] if e["output"].startswith("sprites/actors/")
+              and e["output"] != "sprites/actors/shadow.png"]
     canvas, feet = (tuple(player[0]["canvas_wh"]), tuple(player[0]["pivot_xy"])) if player else (CANVAS, FEET)
     if canvas != CANVAS or feet != FEET:
         raise ValueError("Raster and remaining player-sheet canvas/pivots disagree")

@@ -30,10 +30,10 @@ extends Node2D
 ## a view clock only for the expiring return; idle/walk use their authored
 ## durations. Neither clock can affect gameplay.
 
-## The shadow, which is what stops the farmer floating. Generated from an
-## ASCII map like the rest of the terrain; the softness is this modulate
-## rather than the pixels, because the palette has no partial alpha in it.
+## Separately authored contact shadow, never painted into body/reaction art.
+## Binary source pixels use the shared palette; modulate supplies transparency.
 const SHADOW := "res://sprites/actors/shadow.png"
+const BUBBLE_MASK := preload("res://src/ui/player_bubble.gdshader")
 ## Strong enough to read on grass and weak enough not to look like a hole.
 ## Measured rather than picked: at 0.30 the shadow changed 47 pixels of the
 ## screen and was invisible in a screenshot at three times magnification.
@@ -41,6 +41,8 @@ const SHADOW_ALPHA := 0.42
 
 var _sprite: Sprite2D
 var _shadow: Sprite2D
+var _bubble: Sprite2D
+var _bubble_material: ShaderMaterial
 var _state: Dictionary = {}
 
 ## Seconds into the current animation, and which one that was. Reset when the
@@ -68,6 +70,14 @@ func _ready() -> void:
 	_sprite.offset = Vector2(-float(PlayerFrames.FEET.x),
 		-float(PlayerFrames.FEET.y))
 	add_child(_sprite)
+	_bubble_material = ShaderMaterial.new()
+	_bubble_material.shader = BUBBLE_MASK
+	_bubble = Sprite2D.new()
+	_bubble.name = "ReactionBubble"
+	_bubble.centered = false
+	_bubble.region_enabled = true
+	_bubble.visible = false
+	add_child(_bubble)
 
 
 func show_state(state: Dictionary) -> void:
@@ -99,6 +109,8 @@ func _process(delta: float) -> void:
 
 ## Pick the drawing, advance the clock, and show the frame.
 func _animate(delta: float) -> void:
+	_bubble.visible = false
+	_sprite.material = null
 	var pose := _work.pose(_state, delta)
 	if pose.is_empty():
 		pose = PlayerArt.pose(Player.facing(_state), _is_moving(), _verb())
@@ -116,6 +128,7 @@ func _animate(delta: float) -> void:
 		pose = pose.duplicate()
 		pose["name"] = name
 		pose["frames"] = int(PlayerFrames.COUNT.get(name, 1))
+		pose["seconds"] = float(PlayerFrames.SECONDS.get(name, 0.2))
 		# The drawings face the viewer, so a mirrored one would be a farmer
 		# whose bubble sits on the wrong shoulder.
 		pose["flip"] = false
@@ -140,6 +153,34 @@ func _animate(delta: float) -> void:
 	var canvas: Vector2i = metadata.get("canvas", PlayerFrames.CANVAS)
 	_sprite.offset = Vector2(float(feet.x - canvas.x) if bool(pose["flip"])
 		else -float(feet.x), -float(feet.y))
+	if reacting != &"" and texture != null:
+		_show_bubble(texture, metadata)
+
+
+## The existing reaction selects the pose; only its glyph can move to stay
+## within the viewport. The body keeps its ground anchor, scale and sorting.
+func _show_bubble(texture: Texture2D, metadata: Dictionary) -> void:
+	if not metadata.has("bubble"):
+		push_error("Missing source-owned reaction bubble crop")
+		return
+	var box: Rect2i = metadata["bubble"]
+	_sprite.material = _bubble_material
+	_bubble_material.set_shader_parameter("bubble_box",
+		Vector4(box.position.x, box.position.y, box.size.x, box.size.y))
+	_bubble.texture = texture
+	_bubble.region_rect = Rect2(box)
+	_bubble.position = _sprite.offset + Vector2(box.position)
+	# Work in actual viewport pixels, including integer stretch/camera zoom.
+	var transform := get_global_transform_with_canvas()
+	var top_left := transform * _bubble.position
+	var bottom_right := transform * (_bubble.position + Vector2(box.size))
+	var safe := get_viewport_rect().grow(-2.0)
+	var shift := Vector2(
+		maxf(safe.position.x - top_left.x, 0.0) - maxf(bottom_right.x - safe.end.x, 0.0),
+		maxf(safe.position.y - top_left.y, 0.0) - maxf(bottom_right.y - safe.end.y, 0.0))
+	_bubble.position += transform.affine_inverse() * (top_left + shift) \
+		- transform.affine_inverse() * top_left
+	_bubble.visible = true
 
 
 ## What the rules say the player is doing, or nothing.

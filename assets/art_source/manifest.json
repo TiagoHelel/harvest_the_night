@@ -5523,6 +5523,367 @@
       "generation_task": "0005",
       "revision": 0,
       "approval": "Reviewed native/3x four-phase silhouette, tool clearance and boot contact"
+    },
+    {
+      "id": "actors/react_bang_0",
+      "source": "assets/art_source/player/react_bang.png",
+      "source_sha256": "1816b172af20646cb483fce897a7435a05761d97cd08393b3aa7df105608e4cf",
+      "crop_xywh": [
+        375,
+        197,
+        590,
+        899
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.03654080389768575,
+      "content_anchor_xy": [
+        10,
+        33
+      ],
+      "body_reference_height": 821,
+      "feet_source_xy": [
+        655.5,
+        1096
+      ],
+      "alpha_threshold": 128,
+      "owner": "raster",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        1310,
+        1200
+      ],
+      "gutter_xy": [
+        345,
+        104
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "react_bang",
+      "frame": 0,
+      "seconds": 0.2,
+      "loop": false,
+      "output": "sprites/actors/react_bang_0.png",
+      "output_sha256": "e28c8c3b59ad438779b9bc028014ea645b2ee8d7ff2841a7d4cb10ce83ad8665",
+      "prompt": "implementation/sprites/generation/0006-react_bang-r1.prompt.txt",
+      "prompt_sha256": "32086396d0e3f7441cd770dd092a78155248e9d7322c4e43f58ebc4c2405a7fe",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_south.png",
+          "role": "accepted south idle/feet reference",
+          "sha256": "49de04f2e849b42f984ba145cf54505616ed055a242b6e6363f90d3dfe5ea7b2"
+        },
+        {
+          "path": "assets/art_source/player/candidates/react_bang-r0.png",
+          "role": "rejected thin-symbol edit target",
+          "sha256": "708919397cf069e58f8c7ab36bb59a4d70f1969755b08d35fa924249d16fecb5"
+        },
+        {
+          "path": "implementation/sprites/generation/0006-react_bang.prompt.txt",
+          "role": "original full prompt in exclamation revision chain",
+          "sha256": "70f7eae9ca467ef8b5c4e3bc56b3b24d550385db6cbd153f0d833ed384be8ae9"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0006",
+      "revision": 1,
+      "approval": "Reviewed native/3x alpha, stable body/feet and distinct symbol; runtime gate recorded in review",
+      "bubble_xywh": [
+        33,
+        11,
+        3,
+        8
+      ]
+    },
+    {
+      "id": "actors/react_question_0",
+      "source": "assets/art_source/player/react_question.png",
+      "source_sha256": "766164181a7ae2110598a17a00ebf6ad346fddd05b360c83c3b9e61c8da10974",
+      "crop_xywh": [
+        326,
+        288,
+        644,
+        934
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.03579952267303103,
+      "content_anchor_xy": [
+        10,
+        33
+      ],
+      "body_reference_height": 838,
+      "feet_source_xy": [
+        617.0,
+        1222
+      ],
+      "alpha_threshold": 128,
+      "owner": "raster",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        1211,
+        1299
+      ],
+      "gutter_xy": [
+        241,
+        77
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "react_question",
+      "frame": 0,
+      "seconds": 0.2,
+      "loop": false,
+      "output": "sprites/actors/react_question_0.png",
+      "output_sha256": "567c81989c9f8a09e28ff4c3fb9711ba27a937d158ec0349a170044638235e1f",
+      "prompt": "implementation/sprites/generation/0006-react_question.prompt.txt",
+      "prompt_sha256": "a868eb89a08d6099d14cd4dca80f234db72a49a2e2a69827a0537c8665283d00",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_south.png",
+          "role": "accepted south idle/feet reference",
+          "sha256": "49de04f2e849b42f984ba145cf54505616ed055a242b6e6363f90d3dfe5ea7b2"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0006",
+      "revision": 0,
+      "approval": "Reviewed native/3x alpha, stable body/feet and distinct symbol; runtime gate recorded in review",
+      "bubble_xywh": [
+        32,
+        11,
+        5,
+        7
+      ]
+    },
+    {
+      "id": "actors/react_note_0",
+      "source": "assets/art_source/player/react_note.png",
+      "source_sha256": "e2eedfacc8cdfc297ebe1f685f700512eb2b38c73326ae5966570923e39e9a7e",
+      "crop_xywh": [
+        368,
+        172,
+        704,
+        900
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.036585365853658534,
+      "content_anchor_xy": [
+        10,
+        33
+      ],
+      "body_reference_height": 820,
+      "feet_source_xy": [
+        653.5,
+        1072
+      ],
+      "alpha_threshold": 128,
+      "owner": "raster",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        1309,
+        1201
+      ],
+      "gutter_xy": [
+        237,
+        129
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "react_note",
+      "frame": 0,
+      "seconds": 0.2,
+      "loop": false,
+      "output": "sprites/actors/react_note_0.png",
+      "output_sha256": "5f18244b0df030230fd021fb696f8fa211013e9ca78dce4becbd6a44c0c0c1e0",
+      "prompt": "implementation/sprites/generation/0006-react_note.prompt.txt",
+      "prompt_sha256": "14f7c43a031147108ff770d0bfb64a22a0181cf6b6fc6b627c957334117f2717",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_south.png",
+          "role": "accepted south idle/feet reference",
+          "sha256": "49de04f2e849b42f984ba145cf54505616ed055a242b6e6363f90d3dfe5ea7b2"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0006",
+      "revision": 0,
+      "approval": "Reviewed native/3x alpha, stable body/feet and distinct symbol; runtime gate recorded in review",
+      "bubble_xywh": [
+        34,
+        11,
+        6,
+        8
+      ]
+    },
+    {
+      "id": "actors/react_heart_0",
+      "source": "assets/art_source/player/react_heart.png",
+      "source_sha256": "b81869e4e8ae930ca510335e4cb737e9f85a3cb3fb6c6097b1074f0dad6946a9",
+      "crop_xywh": [
+        317,
+        229,
+        682,
+        940
+      ],
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "pivot_xy": [
+        24,
+        44
+      ],
+      "content_scale": 0.034722222222222224,
+      "content_anchor_xy": [
+        11,
+        33
+      ],
+      "body_reference_height": 864,
+      "feet_source_xy": [
+        620.5,
+        1169
+      ],
+      "alpha_threshold": 128,
+      "owner": "raster",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        1236,
+        1273
+      ],
+      "gutter_xy": [
+        237,
+        104
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "react_heart",
+      "frame": 0,
+      "seconds": 0.2,
+      "loop": false,
+      "output": "sprites/actors/react_heart_0.png",
+      "output_sha256": "f1186622d5f3ffc4f53bfb6e11a9ee2aea96a08de2faedda109e40a3103e2a4d",
+      "prompt": "implementation/sprites/generation/0006-react_heart.prompt.txt",
+      "prompt_sha256": "2490662f64216dbb03eaaa535cd2ecf4f22e8b9c7f9835c1704f0ee5c336a618",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_south.png",
+          "role": "accepted south idle/feet reference",
+          "sha256": "49de04f2e849b42f984ba145cf54505616ed055a242b6e6363f90d3dfe5ea7b2"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0006",
+      "revision": 0,
+      "approval": "Reviewed native/3x alpha, stable body/feet and distinct symbol; runtime gate recorded in review",
+      "bubble_xywh": [
+        31,
+        11,
+        6,
+        6
+      ]
+    },
+    {
+      "id": "actors/shadow",
+      "source": "assets/art_source/player/shadow.png",
+      "source_sha256": "fc43ec54ed74bc71f7058ad0bf5b472e38e3597b3bc8af6dac51044356f2d39f",
+      "crop_xywh": [
+        414,
+        317,
+        1155,
+        175
+      ],
+      "canvas_wh": [
+        20,
+        8
+      ],
+      "pivot_xy": [
+        10,
+        4
+      ],
+      "content_scale": 0.015584415584415584,
+      "content_anchor_xy": [
+        9,
+        1
+      ],
+      "body_reference_height": 175,
+      "feet_source_xy": null,
+      "alpha_threshold": 128,
+      "owner": "raster",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        1983,
+        793
+      ],
+      "gutter_xy": [
+        414,
+        301
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "shadow",
+      "frame": 0,
+      "seconds": 0.2,
+      "loop": false,
+      "output": "sprites/actors/shadow.png",
+      "output_sha256": "0378b32c2a9bed7529f0552e126c7e05ea17d071fd682633086bd931fac2dcc4",
+      "prompt": "implementation/sprites/generation/0006-shadow.prompt.txt",
+      "prompt_sha256": "dead4516c7a38a2775dc7f6c1c150d7340ec6b63e007a38c77a1c8578a4a5b6b",
+      "references": [
+        {
+          "path": "assets/art_source/masters/farmer.png",
+          "role": "approved identity and body scale reference",
+          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+        },
+        {
+          "path": "assets/art_source/player/idle_south.png",
+          "role": "accepted south idle/feet reference",
+          "sha256": "49de04f2e849b42f984ba145cf54505616ed055a242b6e6363f90d3dfe5ea7b2"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0006",
+      "revision": 0,
+      "approval": "Reviewed native/3x alpha, stable body/feet and distinct symbol; runtime gate recorded in review"
     }
   ]
 }

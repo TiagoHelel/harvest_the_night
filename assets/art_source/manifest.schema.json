@@ -28,6 +28,7 @@
           "crop_xywh": {"$ref": "#/$defs/rect"},
           "content_scale": {"type": "number", "exclusiveMinimum": 0},
           "content_anchor_xy": {"$ref": "#/$defs/pair"},
+          "bubble_xywh": {"$ref": "#/$defs/rect"},
           "alpha_threshold": {"type": "integer", "minimum": 1, "maximum": 255},
           "sheet_cell_xywh": {"$ref": "#/$defs/rect"},
           "gutter_xy": {"$ref": "#/$defs/pair"},

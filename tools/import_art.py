@@ -87,6 +87,10 @@ def load_manifest(path=MANIFEST):
         pivot = integers(entry["pivot_xy"], 2, "pivot")
         if any(pivot[i] > canvas[i] for i in range(2)):
             raise ValueError("Out-of-range pivot: " + ident)
+        if "bubble_xywh" in entry:
+            rect(entry["bubble_xywh"], canvas, "reaction bubble")
+            if not entry["animation"].startswith("react_"):
+                raise ValueError("Bubble crop belongs only to a reaction: " + ident)
         if entry["palette"] != "tools/palette.py:COLOURS":
             raise ValueError("Unknown palette: " + ident)
         if type(entry["frame"]) is not int or entry["frame"] < 0 \
@@ -160,6 +164,33 @@ def render_source(entry):
     return canvas
 
 
+def validate_bubble(image, box, ident):
+    """A separable glyph crop covers all glyph pixels and no body pixel."""
+    pixels = image.load()
+    remaining = {(x, y) for y in range(image.height) for x in range(image.width) if pixels[x, y][3]}
+    parts = []
+    while remaining:
+        seed = remaining.pop()
+        active, part = [seed], {seed}
+        while active:
+            x, y = active.pop()
+            for ny in range(y - 1, y + 2):
+                for nx in range(x - 1, x + 2):
+                    if (nx, ny) in remaining:
+                        remaining.remove((nx, ny))
+                        active.append((nx, ny))
+                        part.add((nx, ny))
+        parts.append(part)
+    if len(parts) < 2:
+        raise ValueError("Reaction body and glyph are not separate: " + ident)
+    parts.sort(key=len, reverse=True)
+    inside = lambda p: box[0] <= p[0] < box[2] and box[1] <= p[1] < box[3]
+    if any(inside(p) for p in parts[0]):
+        raise ValueError("Reaction crop hides body pixels: " + ident)
+    if any(not inside(p) for part in parts[1:] for p in part):
+        raise ValueError("Reaction crop omits glyph pixels: " + ident)
+
+
 def build(data):
     by_id = {e["id"]: e for e in data["assets"]}
     images, active = {}, set()
@@ -194,6 +225,9 @@ def build(data):
         opaque = [p for p in samples(image) if p[3]]
         if not opaque or any(p[3] != 255 or p[:3] not in palette.COLOURS.values() for p in opaque):
             raise ValueError("Empty frame, nonbinary alpha or unknown color: " + ident)
+        if "bubble_xywh" in entry:
+            box = rect(entry["bubble_xywh"], image.size, "reaction bubble")
+            validate_bubble(image, box, ident)
         images[ident] = image
         active.remove(ident)
         return image
@@ -219,6 +253,9 @@ def metadata(data):
                 if any(point[i] > entry["canvas_wh"][i] for i in range(2)):
                     raise ValueError("Emission point outside canvas")
                 lines[-1] = lines[-1][:-2] + ', "%s": Vector2i(%d, %d)},' % (field, *point)
+        if "bubble_xywh" in entry:
+            x, y, w, h = entry["bubble_xywh"]
+            lines[-1] = lines[-1][:-2] + ', "bubble": Rect2i(%d, %d, %d, %d)},' % (x, y, w, h)
     lines.extend(["}", ""])
     return "\n".join(lines).encode("utf-8")
 

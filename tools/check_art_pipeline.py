@@ -82,8 +82,19 @@ def main():
         passed("Tampered player count/canvas/pivot metadata is rejected")
         corrupt(ROOT / "sprites/terrain/grass.png", "tools/gen_sprites.py")
         passed("Tampered unmigrated ASCII output is still rejected")
-        corrupt(ROOT / "sprites/actors/react_bang_0.png", "tools/cut_sheet.py")
-        passed("Tampered unmigrated player output is still rejected")
+        legacy_player = next((p for p, owner in art_ownership.registry().items() if owner == "player_sheet"), None)
+        if legacy_player:
+            corrupt(ROOT / legacy_player, "tools/cut_sheet.py")
+            passed("Tampered unmigrated player output is still rejected")
+        else:
+            code, output = run("tools/cut_sheet.py", "--check")
+            assert code == 0 and "0 player frames" in output, output
+            passed("Fully migrated player has zero legacy writes and strict merged metadata checks")
+        if any(e["animation"] == "react_bang" for e in data["assets"]):
+            corrupt(ROOT / "sprites/actors/react_bang_0.png", "tools/import_art.py", missing=True)
+            passed("Missing authored reaction is rejected without silently hiding the bubble")
+            corrupt(ROOT / "sprites/actors/shadow.png", "tools/import_art.py", missing=True)
+            passed("Missing shared contact shadow is rejected")
 
         def invalid_manifest(name, mutate):
             candidate = copy.deepcopy(data)
@@ -105,6 +116,11 @@ def main():
         invalid_manifest("Unknown palette rejected", lambda d: d["assets"][0].update(palette="other palette"))
         invalid_manifest("Missing animation frame rejected", lambda d: d["assets"][0].update(frame=5))
         invalid_manifest("Per-frame canvas drift rejected", lambda d: d["assets"][0].update(canvas_wh=[49,48]))
+        reaction = next((i for i, e in enumerate(data["assets"]) if "bubble_xywh" in e), None)
+        if reaction is not None:
+            invalid_manifest("Out-of-canvas reaction glyph rejected", lambda d: d["assets"][reaction].update(bubble_xywh=[47,0,3,2]))
+            invalid_manifest("Reaction crop cannot erase body pixels", lambda d: d["assets"][reaction].update(bubble_xywh=[0,0,48,48]))
+            invalid_manifest("Reaction crop cannot omit glyph pixels", lambda d: d["assets"][reaction].update(bubble_xywh=[0,0,1,1]))
         derived = next(i for i, entry in enumerate(data["assets"]) if "input" in entry)
         invalid_manifest("Missing derived input rejected", lambda d: d["assets"][derived].update(input="missing"))
         invalid_manifest("Derivation cycle rejected", lambda d: d["assets"][derived].update(input=d["assets"][derived]["id"]))

@@ -75,6 +75,23 @@ two rejected fishing candidates preserve the compact-rod revision history.
 Carry is a brief visual response to a nearby real production delivery, not an
 added carrying mechanic. Four original reaction poses remain for task 0006.
 
+Task 0006 accepts four single south-facing reaction poses matching the same
+30 px standing body, 48x48 canvas and feet (24,44). Bang, question, note and
+heart remain the four existing kinds; heart is available art without adding
+a gameplay trigger. Compact warm symbols float above/right of the crown.
+Reaction selection and duration still belong to Reactions; the view suppresses
+them during movement, work and work recovery. Source-owned glyph crops are
+drawn separately only to keep them inside the viewport. The body's feet and
+depth sorting do not change; its duplicate glyph is masked rather than drawn
+twice. At a map edge the body can retain its existing natural viewport clip,
+while the complete glyph stays inside a two-pixel margin.
+
+The separate shared contact shadow uses 20x8 with a measured 18x3 opaque
+silhouette, one palette color and binary alpha. It is intentionally shallow
+under the 20–22 px farmer body, not stretched to the prompt's approximate 4 px
+height. Existing 0.42 modulate, centered placement and -1 px ground offset stay
+unchanged for player, trees and enemies. No body source contains a second shadow.
+
 The four transparent identity masters and neutral-day/night scene studies live
 in `assets/art_source/masters/`. The studies establish materials and lighting;
 their illustrative object sizes are not authoritative runtime measurements.

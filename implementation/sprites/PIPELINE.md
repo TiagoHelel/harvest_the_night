@@ -192,3 +192,28 @@ instant gestures at 4x and station-delivery carry are checked. Source/native
 QA covers all thirteen strips on light/dark/checker backgrounds. Manifest
 `content_anchor_xy` is a measured native coordinate within the reduced crop,
 distinct from its full bounds: a long/raised tool must not move or shrink the farmer.
+
+Task 0006 completes player-sheet migration and adds reaction/shadow fixtures:
+
+```powershell
+python tools/show_art.py --reactions --check
+python tools/show_art.py --reactions --out=implementation/shots/sprites/<task-id>/reactions
+python implementation/sprites/reviews/0006/build_review.py
+```
+
+Each reaction remains one held source-owned frame on the common player canvas.
+The manifest's optional `bubble_xywh` is a native rectangle covering all separate
+glyph pixels and no body pixels. The importer checks connected alpha components
+and emits that crop in RasterArt; invalid/empty/body-erasing crops fail. A body
+mask plus separate Sprite2D region uses the same committed PNG rather than
+inventing a second symbol or resized body. Real-render fixtures compare all four
+split reactions pixel-for-pixel with their combined PNGs when unclamped, and
+exercise the glyph's viewport margin at four corners without moving the feet.
+
+Fixtures also drive actual crop, fishing-bite, night and destruction selection,
+the existing lifetime, all initial facings, day/dusk/night lighting, walking and
+every verb's active/return cue suppression. Complete serialized state remains
+unchanged by the view. Player/tree/enemy shadow uses stay covered; real-render
+comparison measures its small ground contact against a shadow-hidden control.
+The owner-sheet cutter now writes zero frames and still validates merged player
+metadata. The shared `actors/shadow.png` is ground art, not a PlayerFrames pose.

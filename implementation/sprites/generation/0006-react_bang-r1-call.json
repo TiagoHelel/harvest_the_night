@@ -1,0 +1,15 @@
+{
+  "id": "react_bang-r1",
+  "date": "2026-10-01",
+  "tool": "built-in ImageGen",
+  "transparent_background": true,
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-b3666185-daa1-4a2c-9233-f6fa3099e4f6.png",
+  "source": "assets/art_source/player/react_bang.png",
+  "prompt_text": "Use case: precise-object-edit\nAsset type: production raster player reaction source for HARVEST THE NIGHT.\nPrimary request: Edit Image 1. Change ONLY the floating exclamation mark. Keep every farmer pixel, body height, face, hat, clothes, planted boots and source composition unchanged. The native preview reduced the old mark to a very thin stroke with its dark edge connecting the dot; it must read unmistakably as an exclamation, distinct from a question mark.\nInput images: Image 1 is the current react_bang candidate and edit target. Image 2 is the approved farmer identity master, a reference only. Image 3 is the approved idle_south strip, a body/feet reference only.\nCorrection: replace the existing mark with a clean STRAIGHT vertical warm-cream/gold rectangular stem and a SEPARATE square dot below. Slightly widen the mark and increase its height; the downstream symbol should be about 5x10 native pixels when the farmer remains 30 pixels tall. The stem is vertical with a flat lower end, not curved, zigzagged or a hook. Leave a REAL transparent gap at least two downstream native pixels high between stem and dot, including their dark outlines; no dark bridge or decorative connector. Keep a simple thin dark violet/brown outline so the bright interior remains at least two native pixels wide. Place it above/right of the crown, centered about 13 native pixels right of the farmer's boot center. Keep it wholly within the same downstream 48x48 canvas with feet (24,44), never overlapping hat/face or shrinking the farmer.\nScene/backdrop: preserve genuine alpha outside farmer and symbol. No speech balloon, glow, shadow, ground, checkerboard, text, extra figure, prop or other change.",
+  "references": [
+    "assets/art_source/player/candidates/react_bang-r0.png",
+    "assets/art_source/masters/farmer.png",
+    "assets/art_source/player/idle_south.png"
+  ],
+  "decision": "Accepted: stable 30px farmer, planted feet (24,44), clean source/native alpha, distinct floating symbol at native and nearest 3x, existing reaction selection/lifetime and idle-only suppression, day/dusk/night review and complete viewport-edge glyphs passed. Renderer split equals the committed combined PNG pixel-for-pixel."
+}
