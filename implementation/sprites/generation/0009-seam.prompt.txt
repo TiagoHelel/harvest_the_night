@@ -1,0 +1,31 @@
+Use case: stylized-concept
+Asset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm
+that becomes a fortress against zombies at night.
+Primary request: props/seam, one distinct natural resource master.
+Input images: Image 1: approved neutral-day scene for material/camera reference only. Image 2: accepted quiet natural rock terrain for gray palette/material contrast only. Neither is an edit target.
+Style/medium: coherent hand-crafted pixel art with deliberate pixel clusters,
+colored outlines, restrained texture, readable material planes and clean forms.
+Composition/framing: orthographic three-quarter top-down view on a rectangular
+grid; match the approved master camera and scale. Final native canvas is
+16x16 pixels with contact pivot 8,14; this is a downstream import
+target, so the generated source must remain simple enough to survive reduction.
+Lighting/mood: neutral warm daytime, highlights from upper left, darker underside;
+runtime supplies dusk/night lighting. Keep emission in separate localized forms.
+Color palette: match the approved project palette and master, warm timber and
+terracotta, layered greens, cool water, violet/blue shadows; limited ramps.
+Scene/backdrop: genuinely transparent background for this isolated sprite. No baked ground shadow for actors.
+Constraints: complete unclipped object, consistent perspective and scale, clear
+ground contact, generous tool/weapon clearance, no labels, text, watermark or UI.
+Avoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,
+random pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,
+new gameplay objects, tiny details that disappear at native size.
+
+RESOURCE_PROP brief:
+Create stone seam, compact natural resource prop with
+recognizable material. Boulder has two or three readable angular masses. Stone
+seam is natural layered rock; iron ore has restrained metallic mineral clusters.
+Target 16x16 with stable ground contact and silhouette distinct from
+tilled soil. No floating rock, gem fantasy crystal, grass base or background.
+
+Exact asset contract:
+A low naturally layered STONE SEAM embedded in the rock face: one wider flat irregular outcrop with TWO broad horizontal gray strata and a stepped low contour. About 14x12 visible native pixels. No square brick/tile framing, masonry, golden flecks, mound or fantasy crystal. The strata, not tiny surface grain, distinguish it from loose boulders. Native canvas 16x16, contact (8,14); complete isolated centered object with clear two-pixel empty margin where possible. Restrained gray stone #52505c/#6e6c78/#8c8a96, colored dark underside outline #241f2e. Upper-left neutral light. Genuinely transparent outside the silhouette, no baked shadow, backdrop, ground plate, grass or other objects. Broad deliberate joined pixel clusters, no texture noise.

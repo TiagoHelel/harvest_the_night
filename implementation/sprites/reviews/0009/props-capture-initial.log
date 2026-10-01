@@ -1,0 +1,44 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+OpenGL API 3.3.0 Core Profile Context 22.20.27.09.230330 - Compatibility - Using Device: ATI Technologies Inc. - AMD Radeon (TM) Graphics
+
+PROP SHOWCASE: 8631 checks, 0 failed
+ERROR: Node not found: "Occupants/Prop_375" (relative to "/root/WorldView").
+   at: get_node (scene/main/node.cpp:1975)
+   GDScript backtrace (most recent call first):
+       [0] _props_overlap_pixels (res://src/tools/art_showcase.gd:219)
+       [1] _props_family (res://src/tools/art_showcase.gd:347)
+       [2] _reaction_settle (res://src/tools/art_showcase.gd:959)
+SCRIPT ERROR: Cannot call method 'hide' on a null value.
+   at: _props_overlap_pixels (res://src/tools/art_showcase.gd:223)
+   GDScript backtrace (most recent call first):
+       [0] _props_overlap_pixels (res://src/tools/art_showcase.gd:223)
+ERROR: Node not found: "Occupants/Prop_375" (relative to "/root/WorldView").
+   at: get_node (scene/main/node.cpp:1975)
+   GDScript backtrace (most recent call first):
+       [0] _props_overlap_pixels (res://src/tools/art_showcase.gd:219)
+       [1] _props_family (res://src/tools/art_showcase.gd:347)
+       [2] _reaction_settle (res://src/tools/art_showcase.gd:959)
+SCRIPT ERROR: Cannot call method 'hide' on a null value.
+   at: _props_overlap_pixels (res://src/tools/art_showcase.gd:223)
+   GDScript backtrace (most recent call first):
+       [0] _props_overlap_pixels (res://src/tools/art_showcase.gd:223)
+ERROR: Node not found: "Occupants/Prop_377" (relative to "/root/WorldView").
+   at: get_node (scene/main/node.cpp:1975)
+   GDScript backtrace (most recent call first):
+       [0] _props_overlap_pixels (res://src/tools/art_showcase.gd:219)
+       [1] _props_family (res://src/tools/art_showcase.gd:347)
+       [2] _reaction_settle (res://src/tools/art_showcase.gd:959)
+SCRIPT ERROR: Cannot call method 'hide' on a null value.
+   at: _props_overlap_pixels (res://src/tools/art_showcase.gd:223)
+   GDScript backtrace (most recent call first):
+       [0] _props_overlap_pixels (res://src/tools/art_showcase.gd:223)
+ERROR: Node not found: "Occupants/Prop_377" (relative to "/root/WorldView").
+   at: get_node (scene/main/node.cpp:1975)
+   GDScript backtrace (most recent call first):
+       [0] _props_overlap_pixels (res://src/tools/art_showcase.gd:219)
+       [1] _props_family (res://src/tools/art_showcase.gd:347)
+       [2] _reaction_settle (res://src/tools/art_showcase.gd:959)
+SCRIPT ERROR: Cannot call method 'hide' on a null value.
+   at: _props_overlap_pixels (res://src/tools/art_showcase.gd:223)
+   GDScript backtrace (most recent call first):
+       [0] _props_overlap_pixels (res://src/tools/art_showcase.gd:223)

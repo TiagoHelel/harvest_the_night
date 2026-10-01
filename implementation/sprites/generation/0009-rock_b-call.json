@@ -1,0 +1,48 @@
+{
+  "id": "rock_b",
+  "tool": "built-in ImageGen",
+  "revision": 0,
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-e85e52b5-889e-4077-9adb-885284bf0025.png",
+  "source": "assets/art_source/props/rock_b.png",
+  "source_sha256": "1fa07696f592a1ef51059e2f15b14cbef0603083ff4e4e1e32b42c6a208313b9",
+  "references": [
+    "assets/art_source/props/rock.png",
+    "assets/art_source/masters/style-day.png"
+  ],
+  "prompt_text": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm\nthat becomes a fortress against zombies at night.\nPrimary request: props/rock_b, second controlled visual variation of the same resource.\nInput images: Image 1: accepted rock master, EDIT TARGET; Image 2: approved neutral-day style reference. Preserve the existing material, camera and lighting.\nStyle/medium: coherent hand-crafted pixel art with deliberate pixel clusters,\ncolored outlines, restrained texture, readable material planes and clean forms.\nComposition/framing: orthographic three-quarter top-down view on a rectangular\ngrid; match the approved master camera and scale. Final native canvas is\n16x16 pixels with contact pivot 8,14; this is a downstream import\ntarget, so the generated source must remain simple enough to survive reduction.\nLighting/mood: neutral warm daytime, highlights from upper left, darker underside;\nruntime supplies dusk/night lighting. Keep emission in separate localized forms.\nColor palette: match the approved project palette and master, warm timber and\nterracotta, layered greens, cool water, violet/blue shadows; limited ramps.\nScene/backdrop: genuinely transparent background for this isolated sprite. No baked ground shadow for actors.\nConstraints: complete unclipped object, consistent perspective and scale, clear\nground contact, generous tool/weapon clearance, no labels, text, watermark or UI.\nAvoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,\nrandom pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,\nnew gameplay objects, tiny details that disappear at native size.\n\nRESOURCE_PROP brief:\nCreate stone boulder, compact natural resource prop with\nrecognizable material. Boulder has two or three readable angular masses. Stone\nseam is natural layered rock; iron ore has restrained metallic mineral clusters.\nTarget 16x16 with stable ground contact and silhouette distinct from\ntilled soil. No floating rock, gem fantasy crystal, grass base or background.\n\nExact asset contract:\nChange only the contour and arrangement of the same identifying masses/strata/veins into a second asymmetrical shape. Keep the species/material and the same body size, ground baseline, camera, upper-left light, limited palette, transparent canvas and broad readable clusters. A loose low BOULDER: two joined rounded angular gray masses, a broad light upper-left face and darker lower-right plane. About 14x11 visible native pixels. Asymmetric rounded contour; no horizontal stratification, mineral vein or loose scattered pebbles. Native canvas 16x16, contact (8,14); complete isolated centered object with clear two-pixel empty margin where possible. Restrained gray stone #52505c/#6e6c78/#8c8a96, colored dark underside outline #241f2e. Upper-left neutral light. Genuinely transparent outside the silhouette, no baked shadow, backdrop, ground plate, grass or other objects. Broad deliberate joined pixel clusters, no texture noise. Do not mirror lighting, zoom, shrink or add ground; no new resource type.",
+  "decision": "Accepted after native/nearest3x source-alpha and all actual prop/farm captures, resource silhouettes, harvest/regrowth/collection, density, and real behind/in-front pixel comparisons.",
+  "source_wh": [
+    1374,
+    1145
+  ],
+  "source_alpha_range": [
+    0,
+    255
+  ],
+  "measured_recipe": {
+    "id": "props/rock_b",
+    "source": "assets/art_source/props/rock_b.png",
+    "crop_xywh": [
+      361,
+      354,
+      661,
+      500
+    ],
+    "canvas_wh": [
+      16,
+      16
+    ],
+    "pivot_xy": [
+      8,
+      14
+    ],
+    "content_scale": 0.0206794682422452,
+    "alpha_threshold": 128
+  },
+  "native_bbox": [
+    1,
+    4,
+    15,
+    14
+  ]
+}

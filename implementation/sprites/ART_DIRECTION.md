@@ -175,3 +175,14 @@ pixels calm in every phase. Banks are static, narrow green/earth bands with
 matching endpoint colors; grass fringes remain one row with a small attached
 tuft. Corner caps continue these exact profiles. Timber planks must stay readable
 across water without foam, bright borders or moving bank pixels.
+
+Task 0009 keeps the pilot's broad full-canopy tree and introduces a rounder
+second crown on the same scale/ground pivot. The canopy's measured visible
+height varies by one native pixel (42/43) while its source reduction scale stays
+identical. Stumps match its warm bark, roots and a single readable cut ring.
+Loose stone has rounded angular masses; stone seams are lower layered shelves;
+iron has joined restrained ochre mineral veins. These cues survive 16px output.
+The cow has a long cream body with dark patches, muzzle and short legs; the
+smaller hen has compact feathers, comb and beak. Preserve normal silhouettes,
+transparent margins, shared upper-left light and stable feet. Static variation
+is cosmetic and selected by cell; tree/animal movement remains optional.

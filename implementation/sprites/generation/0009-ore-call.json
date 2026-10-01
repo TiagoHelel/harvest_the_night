@@ -1,0 +1,48 @@
+{
+  "id": "ore",
+  "tool": "built-in ImageGen",
+  "revision": 0,
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-2737d01c-6e0c-47e7-b9a5-190dae08d5d5.png",
+  "source": "assets/art_source/props/ore.png",
+  "source_sha256": "732ce8cae8c1641fdc0c78e25ffbc2554b4e0a112a098eb13791fb5e6a989609",
+  "references": [
+    "assets/art_source/masters/style-day.png",
+    "assets/art_source/terrain/rock.png"
+  ],
+  "prompt_text": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm\nthat becomes a fortress against zombies at night.\nPrimary request: props/ore, one distinct natural resource master.\nInput images: Image 1: approved neutral-day scene for material/camera reference only. Image 2: accepted quiet natural rock terrain for gray palette/material contrast only. Neither is an edit target.\nStyle/medium: coherent hand-crafted pixel art with deliberate pixel clusters,\ncolored outlines, restrained texture, readable material planes and clean forms.\nComposition/framing: orthographic three-quarter top-down view on a rectangular\ngrid; match the approved master camera and scale. Final native canvas is\n16x16 pixels with contact pivot 8,14; this is a downstream import\ntarget, so the generated source must remain simple enough to survive reduction.\nLighting/mood: neutral warm daytime, highlights from upper left, darker underside;\nruntime supplies dusk/night lighting. Keep emission in separate localized forms.\nColor palette: match the approved project palette and master, warm timber and\nterracotta, layered greens, cool water, violet/blue shadows; limited ramps.\nScene/backdrop: genuinely transparent background for this isolated sprite. No baked ground shadow for actors.\nConstraints: complete unclipped object, consistent perspective and scale, clear\nground contact, generous tool/weapon clearance, no labels, text, watermark or UI.\nAvoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,\nrandom pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,\nnew gameplay objects, tiny details that disappear at native size.\n\nRESOURCE_PROP brief:\nCreate iron ore, compact natural resource prop with\nrecognizable material. Boulder has two or three readable angular masses. Stone\nseam is natural layered rock; iron ore has restrained metallic mineral clusters.\nTarget 16x16 with stable ground contact and silhouette distinct from\ntilled soil. No floating rock, gem fantasy crystal, grass base or background.\n\nExact asset contract:\nA compact IRON ORE node: a dark angular gray host rock with exactly TWO chunky restrained ochre metallic mineral veins on its visible front/top planes, clearly readable after native reduction. About 14x12 visible native pixels. Mineral colors #a8742c/#c49646/#d6ba60 against stone #52505c/#6e6c78/#8c8a96. No luminous gold glow, gem crystal spikes, white glitter, scattered tiny dots or horizontal stone strata. The warm joined mineral clusters distinguish iron from stone without a label. Native canvas 16x16, contact (8,14); complete isolated centered object with clear two-pixel empty margin where possible. Restrained gray stone #52505c/#6e6c78/#8c8a96, colored dark underside outline #241f2e. Upper-left neutral light. Genuinely transparent outside the silhouette, no baked shadow, backdrop, ground plate, grass or other objects. Broad deliberate joined pixel clusters, no texture noise.",
+  "decision": "Accepted after native/nearest3x source-alpha and all actual prop/farm captures, resource silhouettes, harvest/regrowth/collection, density, and real behind/in-front pixel comparisons.",
+  "source_wh": [
+    1254,
+    1254
+  ],
+  "source_alpha_range": [
+    0,
+    255
+  ],
+  "measured_recipe": {
+    "id": "props/ore",
+    "source": "assets/art_source/props/ore.png",
+    "crop_xywh": [
+      273,
+      371,
+      747,
+      600
+    ],
+    "canvas_wh": [
+      16,
+      16
+    ],
+    "pivot_xy": [
+      8,
+      14
+    ],
+    "content_scale": 0.018741633199464525,
+    "alpha_threshold": 128
+  },
+  "native_bbox": [
+    1,
+    3,
+    15,
+    14
+  ]
+}

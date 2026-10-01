@@ -1,0 +1,48 @@
+{
+  "id": "chicken",
+  "tool": "built-in ImageGen",
+  "revision": 0,
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-cb725c80-82d4-456f-8114-1b1a7107b92a.png",
+  "source": "assets/art_source/props/chicken.png",
+  "source_sha256": "fdf30e750796f0d12a16f6b7b09584e5b6b72f4079a3861e4c54b34076ec09bc",
+  "references": [
+    "assets/art_source/masters/style-day.png",
+    "docs/reference-sheet.png"
+  ],
+  "prompt_text": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm\nthat becomes a fortress against zombies at night.\nPrimary request: props/chicken, one recognizable standing farm hen.\nInput images: Image 1: approved neutral-day scene for material/camera reference only. Image 2: repository reference sheet for existing chicken's species only; not an edit target.\nStyle/medium: coherent hand-crafted pixel art with deliberate pixel clusters,\ncolored outlines, restrained texture, readable material planes and clean forms.\nComposition/framing: orthographic three-quarter top-down view on a rectangular\ngrid; match the approved master camera and scale. Final native canvas is\n24x24 pixels with contact pivot 12,22; this is a downstream import\ntarget, so the generated source must remain simple enough to survive reduction.\nLighting/mood: neutral warm daytime, highlights from upper left, darker underside;\nruntime supplies dusk/night lighting. Keep emission in separate localized forms.\nColor palette: match the approved project palette and master, warm timber and\nterracotta, layered greens, cool water, violet/blue shadows; limited ramps.\nScene/backdrop: genuinely transparent background for this isolated sprite. No baked ground shadow for actors.\nConstraints: complete unclipped object, consistent perspective and scale, clear\nground contact, generous tool/weapon clearance, no labels, text, watermark or UI.\nAvoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,\nrandom pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,\nnew gameplay objects, tiny details that disappear at native size.\n\nANIMAL brief:\nCreate chicken in the same three-quarter farm style. Compact recognizable\nbody on a 24x24 target canvas, stable feet. Cow has clear muzzle, horns/ears and\nappropriate light/dark markings; chicken has compact feathers, beak and comb.\nDo not inflate into a mascot or add accessories. A short idle strip, if requested,\nchanges head posture subtly while body scale and contact remain identical.\n\nExact asset contract:\nOne compact cream-white hen, three-quarter top-down camera, head facing LEFT. Visible body about 12x12 native pixels including thin ochre legs, on a 24x24 canvas with contact (12,22): much smaller than the cow. Rounded feathers, a clear tiny ochre beak, red comb and wattle, one dark eye, simple raised fan tail and TWO ordinary thin legs on the same baseline. Broad off-white feather clusters with a light brown underside; colored dark outline. No rooster's long tail, wing pose, egg, chick, accessories, big mascot head, grass, ground shadow or backdrop. Complete isolated centered hen on true transparent alpha, neutral upper-left daylight. These identifying forms must survive 12x12 reduction.",
+  "decision": "Accepted after native/nearest3x source-alpha and all actual prop/farm captures, resource silhouettes, harvest/regrowth/collection, density, and real behind/in-front pixel comparisons.",
+  "source_wh": [
+    1254,
+    1254
+  ],
+  "source_alpha_range": [
+    0,
+    255
+  ],
+  "measured_recipe": {
+    "id": "props/chicken",
+    "source": "assets/art_source/props/chicken.png",
+    "crop_xywh": [
+      433,
+      514,
+      415,
+      472
+    ],
+    "canvas_wh": [
+      24,
+      24
+    ],
+    "pivot_xy": [
+      12,
+      22
+    ],
+    "content_scale": 0.025423728813559324,
+    "alpha_threshold": 128
+  },
+  "native_bbox": [
+    7,
+    10,
+    18,
+    22
+  ]
+}

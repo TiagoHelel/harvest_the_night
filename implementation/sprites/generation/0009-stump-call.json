@@ -1,0 +1,48 @@
+{
+  "id": "stump",
+  "tool": "built-in ImageGen",
+  "revision": 0,
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-8ab9448b-4fe1-4e8a-82fe-f1d24b146a90.png",
+  "source": "assets/art_source/props/stump.png",
+  "source_sha256": "04b155a793e485b04dfa3ee1102d9244589c0c9e5ef12183be8f8091d498a10e",
+  "references": [
+    "assets/art_source/masters/tree.png",
+    "assets/art_source/masters/style-day.png"
+  ],
+  "prompt_text": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm\nthat becomes a fortress against zombies at night.\nPrimary request: props/stump, one low cut stump matching the approved tree trunk; create a new isolated object.\nInput images: Image 1: approved full tree, reference for exact bark species/root color and trunk width only; Image 2: neutral-day scene for camera/material reference. Neither is an edit target.\nStyle/medium: coherent hand-crafted pixel art with deliberate pixel clusters,\ncolored outlines, restrained texture, readable material planes and clean forms.\nComposition/framing: orthographic three-quarter top-down view on a rectangular\ngrid; match the approved master camera and scale. Final native canvas is\n16x16 pixels with contact pivot 8,14; this is a downstream import\ntarget, so the generated source must remain simple enough to survive reduction.\nLighting/mood: neutral warm daytime, highlights from upper left, darker underside;\nruntime supplies dusk/night lighting. Keep emission in separate localized forms.\nColor palette: match the approved project palette and master, warm timber and\nterracotta, layered greens, cool water, violet/blue shadows; limited ramps.\nScene/backdrop: genuinely transparent background for this isolated sprite. No baked ground shadow for actors.\nConstraints: complete unclipped object, consistent perspective and scale, clear\nground contact, generous tool/weapon clearance, no labels, text, watermark or UI.\nAvoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,\nrandom pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,\nnew gameplay objects, tiny details that disappear at native size.\n\nTREE brief:\nCreate a cut stump, broad lush canopy with distinct shaded lower lobes,\nsunlit upper-left clusters and a visible warm trunk. Full tree target 40x48,\nvisible body 36x42, trunk contact (20,44), as accepted in task 0001. Stump must match\nthe same trunk species/width and show the cut surface. No ground tile, grass\npatch or painted drop shadow. Variants retain the same contact and scale.\n\nExact asset contract:\nOne low cut stump with the same ochre/brown trunk bark and four compact splayed roots as the tree. Cut the trunk below its branching fork, showing an elliptical pale warm wood top with ONE broad curved ring and one short dark notch, no detailed tiny rings. Downstream visible bounds about 14x10 native pixels, fitting a 16x16 canvas with contact (8,14). Trunk thickness should match the approved tree's lower trunk, about 5 native pixels, with roots spanning about 14 pixels. Full object centered, no leaves, axe, logs, detached chips, ground, shadow or grass. Its roots rest on one common baseline.",
+  "decision": "Accepted after native/nearest3x source-alpha and all actual prop/farm captures, resource silhouettes, harvest/regrowth/collection, density, and real behind/in-front pixel comparisons.",
+  "source_wh": [
+    1254,
+    1254
+  ],
+  "source_alpha_range": [
+    0,
+    255
+  ],
+  "measured_recipe": {
+    "id": "props/stump",
+    "source": "assets/art_source/props/stump.png",
+    "crop_xywh": [
+      269,
+      510,
+      751,
+      445
+    ],
+    "canvas_wh": [
+      16,
+      16
+    ],
+    "pivot_xy": [
+      8,
+      14
+    ],
+    "content_scale": 0.018641810918774968,
+    "alpha_threshold": 128
+  },
+  "native_bbox": [
+    1,
+    6,
+    15,
+    14
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "id": "seam",
+  "tool": "built-in ImageGen",
+  "revision": 0,
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-23a1907e-0880-44de-b1d0-7601fadc6a24.png",
+  "source": "assets/art_source/props/seam.png",
+  "source_sha256": "7e92de1560eb2f23a5fd3c4ebdac3d9574324d66a95d205f6273fb385fcde940",
+  "references": [
+    "assets/art_source/masters/style-day.png",
+    "assets/art_source/terrain/rock.png"
+  ],
+  "prompt_text": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm\nthat becomes a fortress against zombies at night.\nPrimary request: props/seam, one distinct natural resource master.\nInput images: Image 1: approved neutral-day scene for material/camera reference only. Image 2: accepted quiet natural rock terrain for gray palette/material contrast only. Neither is an edit target.\nStyle/medium: coherent hand-crafted pixel art with deliberate pixel clusters,\ncolored outlines, restrained texture, readable material planes and clean forms.\nComposition/framing: orthographic three-quarter top-down view on a rectangular\ngrid; match the approved master camera and scale. Final native canvas is\n16x16 pixels with contact pivot 8,14; this is a downstream import\ntarget, so the generated source must remain simple enough to survive reduction.\nLighting/mood: neutral warm daytime, highlights from upper left, darker underside;\nruntime supplies dusk/night lighting. Keep emission in separate localized forms.\nColor palette: match the approved project palette and master, warm timber and\nterracotta, layered greens, cool water, violet/blue shadows; limited ramps.\nScene/backdrop: genuinely transparent background for this isolated sprite. No baked ground shadow for actors.\nConstraints: complete unclipped object, consistent perspective and scale, clear\nground contact, generous tool/weapon clearance, no labels, text, watermark or UI.\nAvoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,\nrandom pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,\nnew gameplay objects, tiny details that disappear at native size.\n\nRESOURCE_PROP brief:\nCreate stone seam, compact natural resource prop with\nrecognizable material. Boulder has two or three readable angular masses. Stone\nseam is natural layered rock; iron ore has restrained metallic mineral clusters.\nTarget 16x16 with stable ground contact and silhouette distinct from\ntilled soil. No floating rock, gem fantasy crystal, grass base or background.\n\nExact asset contract:\nA low naturally layered STONE SEAM embedded in the rock face: one wider flat irregular outcrop with TWO broad horizontal gray strata and a stepped low contour. About 14x12 visible native pixels. No square brick/tile framing, masonry, golden flecks, mound or fantasy crystal. The strata, not tiny surface grain, distinguish it from loose boulders. Native canvas 16x16, contact (8,14); complete isolated centered object with clear two-pixel empty margin where possible. Restrained gray stone #52505c/#6e6c78/#8c8a96, colored dark underside outline #241f2e. Upper-left neutral light. Genuinely transparent outside the silhouette, no baked shadow, backdrop, ground plate, grass or other objects. Broad deliberate joined pixel clusters, no texture noise.",
+  "decision": "Accepted after native/nearest3x source-alpha and all actual prop/farm captures, resource silhouettes, harvest/regrowth/collection, density, and real behind/in-front pixel comparisons.",
+  "source_wh": [
+    1254,
+    1254
+  ],
+  "source_alpha_range": [
+    0,
+    255
+  ],
+  "measured_recipe": {
+    "id": "props/seam",
+    "source": "assets/art_source/props/seam.png",
+    "crop_xywh": [
+      174,
+      420,
+      924,
+      527
+    ],
+    "canvas_wh": [
+      16,
+      16
+    ],
+    "pivot_xy": [
+      8,
+      14
+    ],
+    "content_scale": 0.013671875,
+    "alpha_threshold": 128
+  },
+  "native_bbox": [
+    1,
+    6,
+    15,
+    14
+  ],
+  "initial_measured_recipe": {
+    "id": "props/seam",
+    "source": "assets/art_source/props/seam.png",
+    "crop_xywh": [
+      174,
+      420,
+      924,
+      527
+    ],
+    "canvas_wh": [
+      16,
+      16
+    ],
+    "pivot_xy": [
+      8,
+      14
+    ],
+    "content_scale": 0.015151515151515152,
+    "alpha_threshold": 128
+  }
+}

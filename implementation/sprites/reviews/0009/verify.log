@@ -1,0 +1,41 @@
+
+HARVEST THE NIGHT - verify
+  godot: found
+
+  python tooling               PASS   0.1s
+  backlog index                PASS   0.1s
+  godot import                 PASS   7.4s
+  script parse                 PASS   5.1s  PARSED 105 scripts, 0 failed
+  core is pure                 PASS   0.0s
+  sprites                      PASS   4.4s  OK    130 sprites match their maps
+  player art                   PASS   0.8s  OK    0 player frames match the sheet
+  raster art                   PASS   9.2s  OK: 130 raster outputs, metadata verified, 0 written
+  art placement                PASS   1.5s  ART SHOWCASE: 476 checks, 0 failed
+  player locomotion            PASS   1.3s  PLAYER SHOWCASE: 468 checks, 0 failed
+  player work                  PASS   1.9s  PLAYER WORK: 3749 checks, 0 failed
+  player reactions             PASS   1.7s  PLAYER REACTIONS: 690 checks, 0 failed
+  terrain sources/atlas        PASS   8.3s  OK: 8 seamless materials; 3 distinct water phases; 8 static sides; 8 exact corner caps; 21 raster atlas cells; all 80 cells source-exact
+  terrain lighting             PASS   1.5s  TERRAIN SHOWCASE: 19609 checks, 0 failed
+  water edges/corners          PASS   2.0s  WATER SHOWCASE: 2201 checks, 0 failed
+  prop sources/variants        PASS   4.2s  OK: 11 source-owned props; 4 distinct same-scale variants; clean silhouettes and exact ground pivots
+  prop overlap/gathering       PASS   1.5s  PROP SHOWCASE: 8535 checks, 0 failed
+  font                         PASS   0.1s  OK    4 font files match the maps
+  logo                         PASS   0.1s  OK    the logo matches the font it is made of
+  sfx                          PASS   0.4s  OK    27 sounds match their recipes (13 day, 14 night)
+  perf                         PASS   3.3s  OK    a night tick is 595us of the 8333 it may have (7%), a path rebuild 5013us of 33333
+  icon                         PASS   0.4s  OK    8 icon sizes match the one drawing
+  playtest                     PASS   0.1s  OK    the reader reads what the game writes
+  store                        PASS   0.1s  CHECKED  the parts that need no capture
+  devlog                       PASS   0.2s  journal    112 entries against 110 done, 26 hash moves, 50 findings
+  strings                      PASS   0.1s  OK    385 keys in 2 languages, all of them fit
+  music                        PASS  10.3s  OK    4 pieces match their recipes
+  ambience                     PASS   1.7s  OK    11 ambience files match their recipes (2 beds, 9 touches)
+  headless_check               PASS  62.2s  6609 asserts, 0 failed
+  sim hash                     PASS   1.9s  1961000123 unchanged
+  data hash                    PASS   0.0s  407837701 unchanged
+  input_check                  PASS  64.7s  980 cases, 0 failed
+  exports                      PASS  18.0s
+
+  33 passed, 0 skipped, 0 failed in 215s
+
+PASS

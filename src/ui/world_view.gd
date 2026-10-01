@@ -1140,11 +1140,26 @@ func _art_for(on: Dictionary, cell: Vector2i) -> StringName:
 		var corner: Vector2i = _fixture_corner[id]
 		at = [corner.x, corner.y]
 	if at == null:
-		return _worn(id, on)
+		return _prop_variant(id, cell) if PROP_VARIANTS.has(id) else _worn(id, on)
 
 	var pair: Array = at
 	return _worn(StringName("%s_%d_%d" % [id, cell.x - int(pair[0]),
 		cell.y - int(pair[1])]), on)
+
+
+## Cosmetic source-owned shapes selected by cell, stable through harvesting
+## and regrowth. No simulation RNG, tick, occupancy or resource changes.
+const PROP_VARIANTS := {
+	&"tree": [&"tree", &"tree_b"], &"rock": [&"rock", &"rock_b"],
+	&"seam": [&"seam", &"seam_b"], &"ore": [&"ore", &"ore_b"],
+}
+
+
+static func _prop_variant(id: StringName, cell: Vector2i) -> StringName:
+	if not PROP_VARIANTS.has(id):
+		return id
+	var h := (cell.x * 73856093) ^ (cell.y * 19349663)
+	return PROP_VARIANTS[id][1 if absi(h) % 32 >= 24 else 0]
 
 
 ## The same thing, at the level it has been paid up to and in the state it is

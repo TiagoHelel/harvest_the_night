@@ -7284,6 +7284,570 @@
       "frame": 0,
       "output": "sprites/terrain/shore_corner_sw.png",
       "output_sha256": "4c2946e14e84fa1412b4c0742c0e815f543005e247a93e0818fb0544bd282f70"
+    },
+    {
+      "id": "props/chicken",
+      "source": "assets/art_source/props/chicken.png",
+      "crop_xywh": [
+        433,
+        514,
+        415,
+        472
+      ],
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "content_scale": 0.025423728813559324,
+      "alpha_threshold": 128,
+      "owner": "raster",
+      "source_sha256": "fdf30e750796f0d12a16f6b7b09584e5b6b72f4079a3861e4c54b34076ec09bc",
+      "output": "sprites/props/chicken.png",
+      "output_sha256": "54ca6dc6b42be5bfdbb195f2c47d78bf2c4ef6d6722788fbf4ae02355b4480e8",
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/chicken",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "prompt": "implementation/sprites/generation/0009-chicken.prompt.txt",
+      "prompt_sha256": "f9a48ab512202852be7a11b1705922ed5dcf7d65b4522ceba802b866d75cc99f",
+      "references": [
+        {
+          "path": "assets/art_source/masters/style-day.png",
+          "sha256": "148b5e004b9ed8f4adb1a90a65887e8aa959647b4eccef64e1bad7f17ef0ce09",
+          "role": "edit target/style/material reference; exact indexed role in preserved prompt"
+        },
+        {
+          "path": "docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "edit target/style/material reference; exact indexed role in preserved prompt"
+        }
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0009",
+      "revision": 0
+    },
+    {
+      "id": "props/cow",
+      "source": "assets/art_source/props/cow.png",
+      "crop_xywh": [
+        120,
+        240,
+        1176,
+        709
+      ],
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "content_scale": 0.01870748299319728,
+      "alpha_threshold": 128,
+      "owner": "raster",
+      "source_sha256": "a22e639050fefdce2d3ffde6e82cc4e88ba527e8f91e78c12a0f237d2dda70c4",
+      "output": "sprites/props/cow.png",
+      "output_sha256": "f6a2990f7b7d9f95acbf0927eae35fcb451b50b2c92c439a339e498b4f663374",
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/cow",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "prompt": "implementation/sprites/generation/0009-cow.prompt.txt",
+      "prompt_sha256": "ceade8994f2dceebea15dc49d733070bc2588bd61e88b01fd7a772379fe942e7",
+      "references": [
+        {
+          "path": "assets/art_source/masters/style-day.png",
+          "sha256": "148b5e004b9ed8f4adb1a90a65887e8aa959647b4eccef64e1bad7f17ef0ce09",
+          "role": "edit target/style/material reference; exact indexed role in preserved prompt"
+        },
+        {
+          "path": "docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "edit target/style/material reference; exact indexed role in preserved prompt"
+        }
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        1402,
+        1122
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0009",
+      "revision": 0
+    },
+    {
+      "id": "props/ore",
+      "source": "assets/art_source/props/ore.png",
+      "crop_xywh": [
+        273,
+        371,
+        747,
+        600
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "content_scale": 0.018741633199464525,
+      "alpha_threshold": 128,
+      "owner": "raster",
+      "source_sha256": "732ce8cae8c1641fdc0c78e25ffbc2554b4e0a112a098eb13791fb5e6a989609",
+      "output": "sprites/props/ore.png",
+      "output_sha256": "abe01f81c58dfbb004aabe5a3b1fbf8f20013aff7559959e305b19941afe5d8e",
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/ore",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "prompt": "implementation/sprites/generation/0009-ore.prompt.txt",
+      "prompt_sha256": "0561407b574eb53183a4cf9b438d6a92758424ea9f02982bb4b5d9fdf1efe45f",
+      "references": [
+        {
+          "path": "assets/art_source/masters/style-day.png",
+          "sha256": "148b5e004b9ed8f4adb1a90a65887e8aa959647b4eccef64e1bad7f17ef0ce09",
+          "role": "edit target/style/material reference; exact indexed role in preserved prompt"
+        },
+        {
+          "path": "assets/art_source/terrain/rock.png",
+          "sha256": "46c3c7f4d4d5bae38b98a47622c42cb6b7104950e370724a03303471c3ddec11",
+          "role": "edit target/style/material reference; exact indexed role in preserved prompt"
+        }
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0009",
+      "revision": 0
+    },
+    {
+      "id": "props/ore_b",
+      "source": "assets/art_source/props/ore_b.png",
+      "crop_xywh": [
+        276,
+        397,
+        727,
+        558
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "content_scale": 0.018741633199464525,
+      "alpha_threshold": 128,
+      "owner": "raster",
+      "source_sha256": "06ee39306995017ec320a8f89dadd61ce64295e5d9ec8967051bd1e277ce8edf",
+      "output": "sprites/props/ore_b.png",
+      "output_sha256": "063b932a485f579187492c37b5f546be73f11bc4169600678fe2c064f728f79d",
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/ore_b",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "prompt": "implementation/sprites/generation/0009-ore_b.prompt.txt",
+      "prompt_sha256": "5d944bebc5db981744517ad0344adb6fc5cbce8935fdb7dd7746752917e4cf47",
+      "references": [
+        {
+          "path": "assets/art_source/props/ore.png",
+          "sha256": "732ce8cae8c1641fdc0c78e25ffbc2554b4e0a112a098eb13791fb5e6a989609",
+          "role": "edit target/style/material reference; exact indexed role in preserved prompt"
+        },
+        {
+          "path": "assets/art_source/masters/style-day.png",
+          "sha256": "148b5e004b9ed8f4adb1a90a65887e8aa959647b4eccef64e1bad7f17ef0ce09",
+          "role": "edit target/style/material reference; exact indexed role in preserved prompt"
+        }
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0009",
+      "revision": 0,
+      "variant_of": "props/ore"
+    },
+    {
+      "id": "props/rock",
+      "source": "assets/art_source/props/rock.png",
+      "crop_xywh": [
+        358,
+        358,
+        677,
+        499
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "content_scale": 0.0206794682422452,
+      "alpha_threshold": 128,
+      "owner": "raster",
+      "source_sha256": "d31268fcb2c20f9f47597d6019219b57d28ef262e4d45a47c2d2f05656c6920c",
+      "output": "sprites/props/rock.png",
+      "output_sha256": "2e9d0c2f94fae2594180778c6ab9c97802a2451efc713dd7d97cb1c85a0f3bf4",
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/rock",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "prompt": "implementation/sprites/generation/0009-rock.prompt.txt",
+      "prompt_sha256": "e202e892eb01f0008cd3683aca41a7472bc2feebaee41655753dddb8935bda37",
+      "references": [
+        {
+          "path": "assets/art_source/masters/style-day.png",
+          "sha256": "148b5e004b9ed8f4adb1a90a65887e8aa959647b4eccef64e1bad7f17ef0ce09",
+          "role": "edit target/style/material reference; exact indexed role in preserved prompt"
+        },
+        {
+          "path": "assets/art_source/terrain/rock.png",
+          "sha256": "46c3c7f4d4d5bae38b98a47622c42cb6b7104950e370724a03303471c3ddec11",
+          "role": "edit target/style/material reference; exact indexed role in preserved prompt"
+        }
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        1374,
+        1145
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0009",
+      "revision": 0
+    },
+    {
+      "id": "props/rock_b",
+      "source": "assets/art_source/props/rock_b.png",
+      "crop_xywh": [
+        361,
+        354,
+        661,
+        500
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "content_scale": 0.0206794682422452,
+      "alpha_threshold": 128,
+      "owner": "raster",
+      "source_sha256": "1fa07696f592a1ef51059e2f15b14cbef0603083ff4e4e1e32b42c6a208313b9",
+      "output": "sprites/props/rock_b.png",
+      "output_sha256": "cb32e7cd15c39980dde7be381366b30d51e3f0a5576c29b822c7f3db05971e16",
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/rock_b",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "prompt": "implementation/sprites/generation/0009-rock_b.prompt.txt",
+      "prompt_sha256": "349522e1df21dd9e7d1dbc3fc1170bfbd9ee335647319028bbd8cd1c6efb69ef",
+      "references": [
+        {
+          "path": "assets/art_source/props/rock.png",
+          "sha256": "d31268fcb2c20f9f47597d6019219b57d28ef262e4d45a47c2d2f05656c6920c",
+          "role": "edit target/style/material reference; exact indexed role in preserved prompt"
+        },
+        {
+          "path": "assets/art_source/masters/style-day.png",
+          "sha256": "148b5e004b9ed8f4adb1a90a65887e8aa959647b4eccef64e1bad7f17ef0ce09",
+          "role": "edit target/style/material reference; exact indexed role in preserved prompt"
+        }
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        1374,
+        1145
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0009",
+      "revision": 0,
+      "variant_of": "props/rock"
+    },
+    {
+      "id": "props/seam",
+      "source": "assets/art_source/props/seam.png",
+      "crop_xywh": [
+        174,
+        420,
+        924,
+        527
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "content_scale": 0.013671875,
+      "alpha_threshold": 128,
+      "owner": "raster",
+      "source_sha256": "7e92de1560eb2f23a5fd3c4ebdac3d9574324d66a95d205f6273fb385fcde940",
+      "output": "sprites/props/seam.png",
+      "output_sha256": "c47420d873606a1469a6ea1bc82a3dd8ef5185b60625ed99e3dce809224818c9",
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/seam",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "prompt": "implementation/sprites/generation/0009-seam.prompt.txt",
+      "prompt_sha256": "f49e51cc84c2893619a8023df9ce1ba8d9433c0b43f21abdaaf3a912d7ad0654",
+      "references": [
+        {
+          "path": "assets/art_source/masters/style-day.png",
+          "sha256": "148b5e004b9ed8f4adb1a90a65887e8aa959647b4eccef64e1bad7f17ef0ce09",
+          "role": "edit target/style/material reference; exact indexed role in preserved prompt"
+        },
+        {
+          "path": "assets/art_source/terrain/rock.png",
+          "sha256": "46c3c7f4d4d5bae38b98a47622c42cb6b7104950e370724a03303471c3ddec11",
+          "role": "edit target/style/material reference; exact indexed role in preserved prompt"
+        }
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0009",
+      "revision": 0
+    },
+    {
+      "id": "props/seam_b",
+      "source": "assets/art_source/props/seam_b.png",
+      "crop_xywh": [
+        136,
+        435,
+        1024,
+        548
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "content_scale": 0.013671875,
+      "alpha_threshold": 128,
+      "owner": "raster",
+      "source_sha256": "5a83f0de1842a9bed331987bb7c6e7d37898bd98fa22fde7ad899dd5dd966bb9",
+      "output": "sprites/props/seam_b.png",
+      "output_sha256": "eb96153bde91e9fd384503745415e796486534a58dcd144fe5d09eb06e6c2ad8",
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/seam_b",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "prompt": "implementation/sprites/generation/0009-seam_b.prompt.txt",
+      "prompt_sha256": "5f20919202e3f2750983edfe50589bcef9b891ac69bdeb1dffde64c00536ca5f",
+      "references": [
+        {
+          "path": "assets/art_source/props/seam.png",
+          "sha256": "7e92de1560eb2f23a5fd3c4ebdac3d9574324d66a95d205f6273fb385fcde940",
+          "role": "edit target/style/material reference; exact indexed role in preserved prompt"
+        },
+        {
+          "path": "assets/art_source/masters/style-day.png",
+          "sha256": "148b5e004b9ed8f4adb1a90a65887e8aa959647b4eccef64e1bad7f17ef0ce09",
+          "role": "edit target/style/material reference; exact indexed role in preserved prompt"
+        }
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0009",
+      "revision": 0,
+      "variant_of": "props/seam"
+    },
+    {
+      "id": "props/stump",
+      "source": "assets/art_source/props/stump.png",
+      "crop_xywh": [
+        269,
+        510,
+        751,
+        445
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "content_scale": 0.018641810918774968,
+      "alpha_threshold": 128,
+      "owner": "raster",
+      "source_sha256": "04b155a793e485b04dfa3ee1102d9244589c0c9e5ef12183be8f8091d498a10e",
+      "output": "sprites/props/stump.png",
+      "output_sha256": "93d4e1ba9fe3de4d84be3bf6313fc724d0c9e6fe852628c603fa23c6c31f9455",
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/stump",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "prompt": "implementation/sprites/generation/0009-stump.prompt.txt",
+      "prompt_sha256": "f78faedee30f7609fa45fe67c03da8feacf2acbc961625b91c92c6a07de76717",
+      "references": [
+        {
+          "path": "assets/art_source/masters/tree.png",
+          "sha256": "a9b0f2880631364cf6ceb0dc7795cc132de6d1205b18e4b70434f67ecc7ec3f9",
+          "role": "edit target/style/material reference; exact indexed role in preserved prompt"
+        },
+        {
+          "path": "assets/art_source/masters/style-day.png",
+          "sha256": "148b5e004b9ed8f4adb1a90a65887e8aa959647b4eccef64e1bad7f17ef0ce09",
+          "role": "edit target/style/material reference; exact indexed role in preserved prompt"
+        }
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0009",
+      "revision": 0
+    },
+    {
+      "id": "props/tree_b",
+      "source": "assets/art_source/props/tree_b.png",
+      "crop_xywh": [
+        26,
+        202,
+        980,
+        1153
+      ],
+      "canvas_wh": [
+        40,
+        48
+      ],
+      "pivot_xy": [
+        20,
+        44
+      ],
+      "content_scale": 0.03700440528634361,
+      "alpha_threshold": 128,
+      "owner": "raster",
+      "source_sha256": "e7b4138f147769e67cbf4ab86b2dcfc04393b2f16a2062147ceb38eaa8986215",
+      "output": "sprites/props/tree_b.png",
+      "output_sha256": "9db2fcc63ee78043ab78f62ead5b9252aab39f93caa5d51152408d79f9354776",
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/tree_b",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "prompt": "implementation/sprites/generation/0009-tree_b.prompt.txt",
+      "prompt_sha256": "8b419455d84fb839e4e2ee58344bec4aa4027b7bc263e0af2f9fcad1bd373409",
+      "references": [
+        {
+          "path": "assets/art_source/masters/tree.png",
+          "sha256": "a9b0f2880631364cf6ceb0dc7795cc132de6d1205b18e4b70434f67ecc7ec3f9",
+          "role": "edit target/style/material reference; exact indexed role in preserved prompt"
+        },
+        {
+          "path": "assets/art_source/masters/style-day.png",
+          "sha256": "148b5e004b9ed8f4adb1a90a65887e8aa959647b4eccef64e1bad7f17ef0ce09",
+          "role": "edit target/style/material reference; exact indexed role in preserved prompt"
+        }
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0009",
+      "revision": 0,
+      "variant_of": "props/tree"
     }
   ]
 }

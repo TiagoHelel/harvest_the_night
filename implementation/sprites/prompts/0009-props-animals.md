@@ -1,6 +1,6 @@
 # 0009 - Trees, rocks, resources and livestock
 
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0008
 - **Likely files:** assets/art_source/props/; sprites/props/tree.png,stump.png,rock.png,seam.png,ore.png,cow.png,chicken.png; src/ui/world_view.gd
 - **Generation briefs:** TREE, RESOURCE_PROP, ANIMAL

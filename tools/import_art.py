@@ -134,6 +134,18 @@ def load_manifest(path=MANIFEST):
         animations.setdefault(key, []).append(entry)
     if outputs != {p for p, owner in owners.items() if owner == "raster"}:
         raise ValueError("Manifest does not cover every raster-owned output")
+    by_id = {e["id"]:e for e in data["assets"]}
+    for entry in data["assets"]:
+        if "variant_of" not in entry:
+            continue
+        parent_id = entry["variant_of"]
+        if not isinstance(parent_id, str) or parent_id == entry["id"] or parent_id not in by_id:
+            raise ValueError("Missing/invalid variation master: " + entry["id"])
+        parent = by_id[parent_id]
+        if "source" not in entry or "source" not in parent or "variant_of" in parent:
+            raise ValueError("Variation requires independent raw source and direct master: " + entry["id"])
+        if any(entry.get(field) != parent.get(field) for field in ("canvas_wh", "pivot_xy", "content_scale", "palette_keys")):
+            raise ValueError("Variation scale/canvas/contact/palette drift: " + entry["id"])
     for name, frames in animations.items():
         indices = sorted(e["frame"] for e in frames)
         if indices != list(range(len(frames))):

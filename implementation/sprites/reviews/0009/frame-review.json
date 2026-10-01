@@ -1,0 +1,222 @@
+{
+  "captures": [
+    {
+      "path": "implementation/shots/sprites/0009/props/animals_collected_light0.png",
+      "sha256": "73959ea2b8fed0cbf495f767521539436fa80bf454442567e015122cf50a2e90"
+    },
+    {
+      "path": "implementation/shots/sprites/0009/props/animals_collected_light1.png",
+      "sha256": "da35f6b1c3d209423680bccb699734e5d8eba66a7aa657a98de9478e6fa0755c"
+    },
+    {
+      "path": "implementation/shots/sprites/0009/props/animals_collected_light2.png",
+      "sha256": "fa363d17c83bbdd135649444a01ad7abbf6bbfc23469be0ff8c9e9dcc39a3826"
+    },
+    {
+      "path": "implementation/shots/sprites/0009/props/animals_ready_light0.png",
+      "sha256": "27ae874fdfaeed8bc8149132ec2aa2256cebfe93f995f9ebfc9caacc3c8a2283"
+    },
+    {
+      "path": "implementation/shots/sprites/0009/props/animals_ready_light1.png",
+      "sha256": "544ab7cc4824a12c3ccab765f313aaf3a515044b4b30be91117643331d6166e3"
+    },
+    {
+      "path": "implementation/shots/sprites/0009/props/animals_ready_light2.png",
+      "sha256": "69e17b76f93cacbdbc4b6dd0c6b6532227ccba8b18643be215a3946cd22bf8c2"
+    },
+    {
+      "path": "implementation/shots/sprites/0009/props/catalog_light0.png",
+      "sha256": "507003807a6ea77b8b6b43d3427f8643c55faa8253b51b4375b129db3538574f"
+    },
+    {
+      "path": "implementation/shots/sprites/0009/props/catalog_light1.png",
+      "sha256": "97849150f0fa936b00d8859ddf81fc6c3e750028262fe557c0cfdc010aa1bec8"
+    },
+    {
+      "path": "implementation/shots/sprites/0009/props/catalog_light2.png",
+      "sha256": "1fc6302134fe4825a5ef2f5c0374674c6caece22b2761a76d667bf45f7a9dc43"
+    },
+    {
+      "path": "implementation/shots/sprites/0009/props/cleared_light0.png",
+      "sha256": "cdc2287ff72e74fad463e6622ef5e7a6119f1ced668c21cf5e61a36c15541cac"
+    },
+    {
+      "path": "implementation/shots/sprites/0009/props/cleared_light1.png",
+      "sha256": "655c4cb2d27fb35b0546dfd065bdd7363a7bb2d5deaf3c76d2eb8b3fb082b99b"
+    },
+    {
+      "path": "implementation/shots/sprites/0009/props/cleared_light2.png",
+      "sha256": "186adc83c2d69a09be1137b195019b9d2fcae68bb37d1dbec381c4ead0d94ea4"
+    },
+    {
+      "path": "implementation/shots/sprites/0009/props/farm_light0.png",
+      "sha256": "e75799bde33e15ed92358d18c1530e305015a052a2db4da2c2bfa26506307c7a"
+    },
+    {
+      "path": "implementation/shots/sprites/0009/props/farm_light1.png",
+      "sha256": "d8a6b9b93a8b6106aa3b4b840301ed29ef7c0d4680e4a81e4f064087d57fde5a"
+    },
+    {
+      "path": "implementation/shots/sprites/0009/props/farm_light2.png",
+      "sha256": "f436f003cffceb61d7fca80f7dcd956bbcf3223f88afe125fb16964ada03282a"
+    },
+    {
+      "path": "implementation/shots/sprites/0009/props/forest_light0.png",
+      "sha256": "60901b8aa6705e779fb2928d6253a66f7e5b7cd7cd0017b958f97a245c99a03f"
+    },
+    {
+      "path": "implementation/shots/sprites/0009/props/forest_light1.png",
+      "sha256": "cbf7a19324dd68b72677b27f61be3c4c34944d9411ee2cc1e6b1359c0684e5c1"
+    },
+    {
+      "path": "implementation/shots/sprites/0009/props/forest_light2.png",
+      "sha256": "5ff649065acd8f33301d0e8972d9210e4c7f26708f1b75ae2f528b12c1cd24c0"
+    },
+    {
+      "path": "implementation/shots/sprites/0009/props/overlap_light0_variant0_step0.png",
+      "sha256": "7e2549ab972abbf6d1ffb798a1ff6cb27baaad153a07a10264e37dd72faa27e9"
+    },
+    {
+      "path": "implementation/shots/sprites/0009/props/overlap_light0_variant0_step1.png",
+      "sha256": "d108a0464127853058ebcd88196d257435e50749d21c27c77dbdaebb1a4848fb"
+    },
+    {
+      "path": "implementation/shots/sprites/0009/props/overlap_light0_variant0_step2.png",
+      "sha256": "7b0fcf1eaeab693af1a7018bebc563c4249d8d508882adca7ddb27200300d41d"
+    },
+    {
+      "path": "implementation/shots/sprites/0009/props/overlap_light0_variant0_step3.png",
+      "sha256": "56b17a8f221ba5ceaef0ac0ef7e256b4fb808dac218339c0b423e30ef836072f"
+    },
+    {
+      "path": "implementation/shots/sprites/0009/props/overlap_light0_variant1_step0.png",
+      "sha256": "616186f363e4e410001dee361239e19643845056bd9b87bb308d93ed815e139a"
+    },
+    {
+      "path": "implementation/shots/sprites/0009/props/overlap_light0_variant1_step1.png",
+      "sha256": "cae652d2526ad0f3cff71a0222d3855a1c3b2753399d1405a4b7a98d502a3ccd"
+    },
+    {
+      "path": "implementation/shots/sprites/0009/props/overlap_light0_variant1_step2.png",
+      "sha256": "f41db7bd27c196f07acdfad8b5b671a49a4e7477a027662ba4aa95f6d63b5909"
+    },
+    {
+      "path": "implementation/shots/sprites/0009/props/overlap_light0_variant1_step3.png",
+      "sha256": "fc6c324c2e4b0151a49045308be27104ce7b3aa978a5100eaa708df8e7a0b16e"
+    },
+    {
+      "path": "implementation/shots/sprites/0009/props/overlap_light1_variant0_step0.png",
+      "sha256": "5b83e94ea7b4d97ccdb493d4140dfb3eb87d1eeae9d7348acb46b48b4be1aabf"
+    },
+    {
+      "path": "implementation/shots/sprites/0009/props/overlap_light1_variant0_step1.png",
+      "sha256": "fedd4e867dbd9c8c9b47fac71181f64b5b6d63480532036d7abaa3c8aefc0fb6"
+    },
+    {
+      "path": "implementation/shots/sprites/0009/props/overlap_light1_variant0_step2.png",
+      "sha256": "3a7c5fc6baa7921d55c7ea0d236c72a7f50c551be51d7cfa7805b4f11d733b0d"
+    },
+    {
+      "path": "implementation/shots/sprites/0009/props/overlap_light1_variant0_step3.png",
+      "sha256": "1bde129906947f9fe39d82fc55bfac146cc65ec44b47cb899b04f80bd1e03065"
+    },
+    {
+      "path": "implementation/shots/sprites/0009/props/overlap_light1_variant1_step0.png",
+      "sha256": "06806b6350673d2024f874478a3e29763370b74a900278d1df9dc5bb896b56b5"
+    },
+    {
+      "path": "implementation/shots/sprites/0009/props/overlap_light1_variant1_step1.png",
+      "sha256": "4b7511d6f773ae2960c121b6ceb372445c5dbcc29447ef71445aae5da9062746"
+    },
+    {
+      "path": "implementation/shots/sprites/0009/props/overlap_light1_variant1_step2.png",
+      "sha256": "f9fcafc43bab840d6b9ea26880aa6794321d9634695f486487104d60965bdf74"
+    },
+    {
+      "path": "implementation/shots/sprites/0009/props/overlap_light1_variant1_step3.png",
+      "sha256": "f86dbd05fa94d96855ca34350b7896476d3a30da70a86cb91a703c51b65531f0"
+    },
+    {
+      "path": "implementation/shots/sprites/0009/props/overlap_light2_variant0_step0.png",
+      "sha256": "acecb8434426b51917cf2713cc70ce2b9c4cd28ef16f51d00cd8d8834af86a40"
+    },
+    {
+      "path": "implementation/shots/sprites/0009/props/overlap_light2_variant0_step1.png",
+      "sha256": "8ca9f6828f13542c3e879171020b66963b4fb3de8412d1839788649c23832c8a"
+    },
+    {
+      "path": "implementation/shots/sprites/0009/props/overlap_light2_variant0_step2.png",
+      "sha256": "a390cb306253ee0e52caa1effaecce7c9b26c19f397e77bb010388061eccc76c"
+    },
+    {
+      "path": "implementation/shots/sprites/0009/props/overlap_light2_variant0_step3.png",
+      "sha256": "f86876cb3aae7b75bde55c9a2f0e166d41668c9240d4f511ffa064cf5a360621"
+    },
+    {
+      "path": "implementation/shots/sprites/0009/props/overlap_light2_variant1_step0.png",
+      "sha256": "38d847be0fa0c3d0ba392dc4f56d948ffcb2d1219d1d0e6bb300347eabcd5281"
+    },
+    {
+      "path": "implementation/shots/sprites/0009/props/overlap_light2_variant1_step1.png",
+      "sha256": "06df9f63da3c8bcb23f766eb95282ad47a7942ff7b8c994c32a87811dca10e59"
+    },
+    {
+      "path": "implementation/shots/sprites/0009/props/overlap_light2_variant1_step2.png",
+      "sha256": "9351fde2a6bc1a99170feeaf4a9bd32e37707a21bcc1188c1b703d60d0e9b533"
+    },
+    {
+      "path": "implementation/shots/sprites/0009/props/overlap_light2_variant1_step3.png",
+      "sha256": "f34838425c85b33c77aeb98b0e3878e79d716609bc089e89bbfe0138442332a8"
+    },
+    {
+      "path": "implementation/shots/sprites/0009/props/partial_light0.png",
+      "sha256": "1de232b1d321c05a3a9d190f45f9648d946452ab69058ad0e0f61f03fb0da75b"
+    },
+    {
+      "path": "implementation/shots/sprites/0009/props/partial_light1.png",
+      "sha256": "3484b8a5fffbadae36e44b7224853725217764b0a77f63a3d320281f9ec5f397"
+    },
+    {
+      "path": "implementation/shots/sprites/0009/props/partial_light2.png",
+      "sha256": "a10f1272f86bd8ad3de7fac9e43eec0ad459017ff2981bdae7581262fcf2fc9f"
+    },
+    {
+      "path": "implementation/shots/sprites/0009/props/regrown_light0.png",
+      "sha256": "ad5ee3fdd727523ec848550feac82aabfc4e47871b39f4fba81799b7cf0e92ed"
+    },
+    {
+      "path": "implementation/shots/sprites/0009/props/regrown_light1.png",
+      "sha256": "742813f8a2b86a36361e72ead815e22c2fae2b44df328fb365c20b007e870508"
+    },
+    {
+      "path": "implementation/shots/sprites/0009/props/regrown_light2.png",
+      "sha256": "59cc438857cf4c221099d6ff26a35b3be26462988d3b94e4f548854dfb4305e0"
+    },
+    {
+      "path": "implementation/shots/sprites/0009/dusk.png",
+      "sha256": "bf6899c4814eff643586e1b604fb670edaa1fea66add3951dcc419547dd95c6a"
+    },
+    {
+      "path": "implementation/shots/sprites/0009/noon.png",
+      "sha256": "700b71aec0fc17fe58d627a840c36cb9a529f3d5d245deac293420971c6197d9"
+    },
+    {
+      "path": "implementation/shots/sprites/0009/result.png",
+      "sha256": "dd2f3ec4132ffa7b68826217d44445ca935645a576a1f35e41a2bd74f50c83c1"
+    },
+    {
+      "path": "implementation/shots/sprites/0009/tech.png",
+      "sha256": "1c366f4a56ae4e0fb1f2f005084e339ed64dcc2f67810181f3e86ec7be94e658"
+    },
+    {
+      "path": "implementation/shots/sprites/0009/wave.png",
+      "sha256": "ae7549ff9e70622e62d07e223674ba23c56cd060c802912c44ca931dffc20634"
+    }
+  ],
+  "capture_pages": 14,
+  "native_size": [
+    480,
+    270
+  ],
+  "nearest_scale": 3
+}

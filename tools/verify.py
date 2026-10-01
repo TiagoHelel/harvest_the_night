@@ -207,6 +207,17 @@ def check_water_showcase():
     return check("water edges/corners", code == 0, verdict)
 
 
+def check_prop_art():
+    code, out = run([sys.executable, "tools/check_prop_art.py"])
+    return check("prop sources/variants", code == 0, tail(out, 4))
+
+
+def check_prop_showcase():
+    code, out = run([sys.executable, "tools/show_art.py", "--props", "--check"])
+    verdict = next((line for line in out.splitlines() if line.startswith("PROP SHOWCASE:")), tail(out, 4))
+    return check("prop overlap/gathering", code == 0, verdict)
+
+
 def check_logo():
     """The logo still matches the letters it was composed from.
 
@@ -603,6 +614,8 @@ def main():
     check_terrain_art()
     check_terrain_showcase()
     check_water_showcase()
+    check_prop_art()
+    check_prop_showcase()
     check_font()
     check_logo()
     check_sfx()

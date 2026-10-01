@@ -163,3 +163,20 @@ combinations, compound joins and production animation metadata without changing
 serialized state. Real-render capture mode also measures two automatic water
 loops with the original production TileSet. Review details and measured hashes
 are in `implementation/sprites/reviews/0008/REVIEW.md`.
+
+Task 0009 preserves the accepted pilot tree and adds ten raw prop sources in
+`props/`: a second canopy, matching cut stump, two loose boulders, two layered
+stone seams, two iron nodes, cow and hen. Exact built-in prompts/returned files
+and hashes are under `implementation/sprites/generation/0009-*`. Static contour
+variants share one scale per material; no source or runtime pixels are painted.
+Trees retain 40x48/(20,44); resources/stumps use 16x16/(8,14), animals 24x24/(12,22).
+
+WorldView chooses tree/rock/seam/ore variants with a fixed cell hash. The base
+appears on 547 of 720 cells and the alternate on 173; selection survives redraw,
+harvest and regrowth without consuming simulation RNG. Animals and trees remain
+static in this task. `tools/check_prop_art.py` requires all eleven sources,
+exact output bytes, distinct same-scale variations, clean alpha and contacts.
+`tools/show_art.py --props --check` exercises actual harvesting, resource
+regrowth, livestock collection and one-cell placement. Real-render mode adds
+pixel comparisons of behind/front tree occlusion. The native/3x QA helper is
+`implementation/sprites/reviews/0009/build_review.py`.

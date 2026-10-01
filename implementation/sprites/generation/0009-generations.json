@@ -1,0 +1,525 @@
+{
+  "date": "2026-10-01",
+  "attempts": [
+    {
+      "id": "chicken",
+      "tool": "built-in ImageGen",
+      "revision": 0,
+      "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-cb725c80-82d4-456f-8114-1b1a7107b92a.png",
+      "source": "assets/art_source/props/chicken.png",
+      "source_sha256": "fdf30e750796f0d12a16f6b7b09584e5b6b72f4079a3861e4c54b34076ec09bc",
+      "references": [
+        "assets/art_source/masters/style-day.png",
+        "docs/reference-sheet.png"
+      ],
+      "prompt_text": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm\nthat becomes a fortress against zombies at night.\nPrimary request: props/chicken, one recognizable standing farm hen.\nInput images: Image 1: approved neutral-day scene for material/camera reference only. Image 2: repository reference sheet for existing chicken's species only; not an edit target.\nStyle/medium: coherent hand-crafted pixel art with deliberate pixel clusters,\ncolored outlines, restrained texture, readable material planes and clean forms.\nComposition/framing: orthographic three-quarter top-down view on a rectangular\ngrid; match the approved master camera and scale. Final native canvas is\n24x24 pixels with contact pivot 12,22; this is a downstream import\ntarget, so the generated source must remain simple enough to survive reduction.\nLighting/mood: neutral warm daytime, highlights from upper left, darker underside;\nruntime supplies dusk/night lighting. Keep emission in separate localized forms.\nColor palette: match the approved project palette and master, warm timber and\nterracotta, layered greens, cool water, violet/blue shadows; limited ramps.\nScene/backdrop: genuinely transparent background for this isolated sprite. No baked ground shadow for actors.\nConstraints: complete unclipped object, consistent perspective and scale, clear\nground contact, generous tool/weapon clearance, no labels, text, watermark or UI.\nAvoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,\nrandom pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,\nnew gameplay objects, tiny details that disappear at native size.\n\nANIMAL brief:\nCreate chicken in the same three-quarter farm style. Compact recognizable\nbody on a 24x24 target canvas, stable feet. Cow has clear muzzle, horns/ears and\nappropriate light/dark markings; chicken has compact feathers, beak and comb.\nDo not inflate into a mascot or add accessories. A short idle strip, if requested,\nchanges head posture subtly while body scale and contact remain identical.\n\nExact asset contract:\nOne compact cream-white hen, three-quarter top-down camera, head facing LEFT. Visible body about 12x12 native pixels including thin ochre legs, on a 24x24 canvas with contact (12,22): much smaller than the cow. Rounded feathers, a clear tiny ochre beak, red comb and wattle, one dark eye, simple raised fan tail and TWO ordinary thin legs on the same baseline. Broad off-white feather clusters with a light brown underside; colored dark outline. No rooster's long tail, wing pose, egg, chick, accessories, big mascot head, grass, ground shadow or backdrop. Complete isolated centered hen on true transparent alpha, neutral upper-left daylight. These identifying forms must survive 12x12 reduction.",
+      "decision": "Accepted after native/nearest3x source-alpha and all actual prop/farm captures, resource silhouettes, harvest/regrowth/collection, density, and real behind/in-front pixel comparisons.",
+      "source_wh": [
+        1254,
+        1254
+      ],
+      "source_alpha_range": [
+        0,
+        255
+      ],
+      "measured_recipe": {
+        "id": "props/chicken",
+        "source": "assets/art_source/props/chicken.png",
+        "crop_xywh": [
+          433,
+          514,
+          415,
+          472
+        ],
+        "canvas_wh": [
+          24,
+          24
+        ],
+        "pivot_xy": [
+          12,
+          22
+        ],
+        "content_scale": 0.025423728813559324,
+        "alpha_threshold": 128
+      },
+      "native_bbox": [
+        7,
+        10,
+        18,
+        22
+      ]
+    },
+    {
+      "id": "cow",
+      "tool": "built-in ImageGen",
+      "revision": 0,
+      "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-5e132564-11ab-4096-8d4b-c5f623785ed4.png",
+      "source": "assets/art_source/props/cow.png",
+      "source_sha256": "a22e639050fefdce2d3ffde6e82cc4e88ba527e8f91e78c12a0f237d2dda70c4",
+      "references": [
+        "assets/art_source/masters/style-day.png",
+        "docs/reference-sheet.png"
+      ],
+      "prompt_text": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm\nthat becomes a fortress against zombies at night.\nPrimary request: props/cow, one recognizable standing farm cow.\nInput images: Image 1: approved neutral-day scene for material/camera reference only. Image 2: repository reference sheet for the existing cow's species/markings only; not an edit target.\nStyle/medium: coherent hand-crafted pixel art with deliberate pixel clusters,\ncolored outlines, restrained texture, readable material planes and clean forms.\nComposition/framing: orthographic three-quarter top-down view on a rectangular\ngrid; match the approved master camera and scale. Final native canvas is\n24x24 pixels with contact pivot 12,22; this is a downstream import\ntarget, so the generated source must remain simple enough to survive reduction.\nLighting/mood: neutral warm daytime, highlights from upper left, darker underside;\nruntime supplies dusk/night lighting. Keep emission in separate localized forms.\nColor palette: match the approved project palette and master, warm timber and\nterracotta, layered greens, cool water, violet/blue shadows; limited ramps.\nScene/backdrop: genuinely transparent background for this isolated sprite. No baked ground shadow for actors.\nConstraints: complete unclipped object, consistent perspective and scale, clear\nground contact, generous tool/weapon clearance, no labels, text, watermark or UI.\nAvoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,\nrandom pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,\nnew gameplay objects, tiny details that disappear at native size.\n\nANIMAL brief:\nCreate cow in the same three-quarter farm style. Compact recognizable\nbody on a 24x24 target canvas, stable feet. Cow has clear muzzle, horns/ears and\nappropriate light/dark markings; chicken has compact feathers, beak and comb.\nDo not inflate into a mascot or add accessories. A short idle strip, if requested,\nchanges head posture subtly while body scale and contact remain identical.\n\nExact asset contract:\nOne compact realistic farm cow, side-on three-quarter top-down camera, head facing LEFT; body length about 22 native pixels and height about 17-18 including hooves on a 24x24 target canvas, contact (12,22). Cream-white stocky horizontal torso with TWO broad dark brown/near-black patches, small clear muzzle, two short horns/ears, four ordinary short legs (far legs visible only partly), compact udder and one tail. Broad grouped shading. Neutral upper-left daylight, colored outlines, no glow or baked ground shadow. Keep normal cattle proportions: long body, small head, no huge mascot eyes, accessories, bell, collar, grass or backdrop. Hooves share one baseline; all parts unclipped. Isolated centered complete cow on true transparent alpha.",
+      "decision": "Accepted after native/nearest3x source-alpha and all actual prop/farm captures, resource silhouettes, harvest/regrowth/collection, density, and real behind/in-front pixel comparisons.",
+      "source_wh": [
+        1402,
+        1122
+      ],
+      "source_alpha_range": [
+        0,
+        255
+      ],
+      "measured_recipe": {
+        "id": "props/cow",
+        "source": "assets/art_source/props/cow.png",
+        "crop_xywh": [
+          120,
+          240,
+          1176,
+          709
+        ],
+        "canvas_wh": [
+          24,
+          24
+        ],
+        "pivot_xy": [
+          12,
+          22
+        ],
+        "content_scale": 0.01870748299319728,
+        "alpha_threshold": 128
+      },
+      "native_bbox": [
+        1,
+        9,
+        23,
+        22
+      ]
+    },
+    {
+      "id": "ore",
+      "tool": "built-in ImageGen",
+      "revision": 0,
+      "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-2737d01c-6e0c-47e7-b9a5-190dae08d5d5.png",
+      "source": "assets/art_source/props/ore.png",
+      "source_sha256": "732ce8cae8c1641fdc0c78e25ffbc2554b4e0a112a098eb13791fb5e6a989609",
+      "references": [
+        "assets/art_source/masters/style-day.png",
+        "assets/art_source/terrain/rock.png"
+      ],
+      "prompt_text": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm\nthat becomes a fortress against zombies at night.\nPrimary request: props/ore, one distinct natural resource master.\nInput images: Image 1: approved neutral-day scene for material/camera reference only. Image 2: accepted quiet natural rock terrain for gray palette/material contrast only. Neither is an edit target.\nStyle/medium: coherent hand-crafted pixel art with deliberate pixel clusters,\ncolored outlines, restrained texture, readable material planes and clean forms.\nComposition/framing: orthographic three-quarter top-down view on a rectangular\ngrid; match the approved master camera and scale. Final native canvas is\n16x16 pixels with contact pivot 8,14; this is a downstream import\ntarget, so the generated source must remain simple enough to survive reduction.\nLighting/mood: neutral warm daytime, highlights from upper left, darker underside;\nruntime supplies dusk/night lighting. Keep emission in separate localized forms.\nColor palette: match the approved project palette and master, warm timber and\nterracotta, layered greens, cool water, violet/blue shadows; limited ramps.\nScene/backdrop: genuinely transparent background for this isolated sprite. No baked ground shadow for actors.\nConstraints: complete unclipped object, consistent perspective and scale, clear\nground contact, generous tool/weapon clearance, no labels, text, watermark or UI.\nAvoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,\nrandom pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,\nnew gameplay objects, tiny details that disappear at native size.\n\nRESOURCE_PROP brief:\nCreate iron ore, compact natural resource prop with\nrecognizable material. Boulder has two or three readable angular masses. Stone\nseam is natural layered rock; iron ore has restrained metallic mineral clusters.\nTarget 16x16 with stable ground contact and silhouette distinct from\ntilled soil. No floating rock, gem fantasy crystal, grass base or background.\n\nExact asset contract:\nA compact IRON ORE node: a dark angular gray host rock with exactly TWO chunky restrained ochre metallic mineral veins on its visible front/top planes, clearly readable after native reduction. About 14x12 visible native pixels. Mineral colors #a8742c/#c49646/#d6ba60 against stone #52505c/#6e6c78/#8c8a96. No luminous gold glow, gem crystal spikes, white glitter, scattered tiny dots or horizontal stone strata. The warm joined mineral clusters distinguish iron from stone without a label. Native canvas 16x16, contact (8,14); complete isolated centered object with clear two-pixel empty margin where possible. Restrained gray stone #52505c/#6e6c78/#8c8a96, colored dark underside outline #241f2e. Upper-left neutral light. Genuinely transparent outside the silhouette, no baked shadow, backdrop, ground plate, grass or other objects. Broad deliberate joined pixel clusters, no texture noise.",
+      "decision": "Accepted after native/nearest3x source-alpha and all actual prop/farm captures, resource silhouettes, harvest/regrowth/collection, density, and real behind/in-front pixel comparisons.",
+      "source_wh": [
+        1254,
+        1254
+      ],
+      "source_alpha_range": [
+        0,
+        255
+      ],
+      "measured_recipe": {
+        "id": "props/ore",
+        "source": "assets/art_source/props/ore.png",
+        "crop_xywh": [
+          273,
+          371,
+          747,
+          600
+        ],
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          14
+        ],
+        "content_scale": 0.018741633199464525,
+        "alpha_threshold": 128
+      },
+      "native_bbox": [
+        1,
+        3,
+        15,
+        14
+      ]
+    },
+    {
+      "id": "ore_b",
+      "tool": "built-in ImageGen",
+      "revision": 0,
+      "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-8b67b780-9649-497f-a331-35a25a8b2b22.png",
+      "source": "assets/art_source/props/ore_b.png",
+      "source_sha256": "06ee39306995017ec320a8f89dadd61ce64295e5d9ec8967051bd1e277ce8edf",
+      "references": [
+        "assets/art_source/props/ore.png",
+        "assets/art_source/masters/style-day.png"
+      ],
+      "prompt_text": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm\nthat becomes a fortress against zombies at night.\nPrimary request: props/ore_b, second controlled visual variation of the same resource.\nInput images: Image 1: accepted ore master, EDIT TARGET; Image 2: approved neutral-day style reference. Preserve the existing material, camera and lighting.\nStyle/medium: coherent hand-crafted pixel art with deliberate pixel clusters,\ncolored outlines, restrained texture, readable material planes and clean forms.\nComposition/framing: orthographic three-quarter top-down view on a rectangular\ngrid; match the approved master camera and scale. Final native canvas is\n16x16 pixels with contact pivot 8,14; this is a downstream import\ntarget, so the generated source must remain simple enough to survive reduction.\nLighting/mood: neutral warm daytime, highlights from upper left, darker underside;\nruntime supplies dusk/night lighting. Keep emission in separate localized forms.\nColor palette: match the approved project palette and master, warm timber and\nterracotta, layered greens, cool water, violet/blue shadows; limited ramps.\nScene/backdrop: genuinely transparent background for this isolated sprite. No baked ground shadow for actors.\nConstraints: complete unclipped object, consistent perspective and scale, clear\nground contact, generous tool/weapon clearance, no labels, text, watermark or UI.\nAvoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,\nrandom pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,\nnew gameplay objects, tiny details that disappear at native size.\n\nRESOURCE_PROP brief:\nCreate iron ore, compact natural resource prop with\nrecognizable material. Boulder has two or three readable angular masses. Stone\nseam is natural layered rock; iron ore has restrained metallic mineral clusters.\nTarget 16x16 with stable ground contact and silhouette distinct from\ntilled soil. No floating rock, gem fantasy crystal, grass base or background.\n\nExact asset contract:\nChange only the contour and arrangement of the same identifying masses/strata/veins into a second asymmetrical shape. Keep the species/material and the same body size, ground baseline, camera, upper-left light, limited palette, transparent canvas and broad readable clusters. A compact IRON ORE node: a dark angular gray host rock with exactly TWO chunky restrained ochre metallic mineral veins on its visible front/top planes, clearly readable after native reduction. About 14x12 visible native pixels. Mineral colors #a8742c/#c49646/#d6ba60 against stone #52505c/#6e6c78/#8c8a96. No luminous gold glow, gem crystal spikes, white glitter, scattered tiny dots or horizontal stone strata. The warm joined mineral clusters distinguish iron from stone without a label. Native canvas 16x16, contact (8,14); complete isolated centered object with clear two-pixel empty margin where possible. Restrained gray stone #52505c/#6e6c78/#8c8a96, colored dark underside outline #241f2e. Upper-left neutral light. Genuinely transparent outside the silhouette, no baked shadow, backdrop, ground plate, grass or other objects. Broad deliberate joined pixel clusters, no texture noise. Do not mirror lighting, zoom, shrink or add ground; no new resource type.",
+      "decision": "Accepted after native/nearest3x source-alpha and all actual prop/farm captures, resource silhouettes, harvest/regrowth/collection, density, and real behind/in-front pixel comparisons.",
+      "source_wh": [
+        1254,
+        1254
+      ],
+      "source_alpha_range": [
+        0,
+        255
+      ],
+      "measured_recipe": {
+        "id": "props/ore_b",
+        "source": "assets/art_source/props/ore_b.png",
+        "crop_xywh": [
+          276,
+          397,
+          727,
+          558
+        ],
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          14
+        ],
+        "content_scale": 0.018741633199464525,
+        "alpha_threshold": 128
+      },
+      "native_bbox": [
+        1,
+        4,
+        15,
+        14
+      ]
+    },
+    {
+      "id": "rock",
+      "tool": "built-in ImageGen",
+      "revision": 0,
+      "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-c843ab0c-ca22-4f5f-96bf-5c06eec22d69.png",
+      "source": "assets/art_source/props/rock.png",
+      "source_sha256": "d31268fcb2c20f9f47597d6019219b57d28ef262e4d45a47c2d2f05656c6920c",
+      "references": [
+        "assets/art_source/masters/style-day.png",
+        "assets/art_source/terrain/rock.png"
+      ],
+      "prompt_text": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm\nthat becomes a fortress against zombies at night.\nPrimary request: props/rock, one distinct natural resource master.\nInput images: Image 1: approved neutral-day scene for material/camera reference only. Image 2: accepted quiet natural rock terrain for gray palette/material contrast only. Neither is an edit target.\nStyle/medium: coherent hand-crafted pixel art with deliberate pixel clusters,\ncolored outlines, restrained texture, readable material planes and clean forms.\nComposition/framing: orthographic three-quarter top-down view on a rectangular\ngrid; match the approved master camera and scale. Final native canvas is\n16x16 pixels with contact pivot 8,14; this is a downstream import\ntarget, so the generated source must remain simple enough to survive reduction.\nLighting/mood: neutral warm daytime, highlights from upper left, darker underside;\nruntime supplies dusk/night lighting. Keep emission in separate localized forms.\nColor palette: match the approved project palette and master, warm timber and\nterracotta, layered greens, cool water, violet/blue shadows; limited ramps.\nScene/backdrop: genuinely transparent background for this isolated sprite. No baked ground shadow for actors.\nConstraints: complete unclipped object, consistent perspective and scale, clear\nground contact, generous tool/weapon clearance, no labels, text, watermark or UI.\nAvoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,\nrandom pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,\nnew gameplay objects, tiny details that disappear at native size.\n\nRESOURCE_PROP brief:\nCreate stone boulder, compact natural resource prop with\nrecognizable material. Boulder has two or three readable angular masses. Stone\nseam is natural layered rock; iron ore has restrained metallic mineral clusters.\nTarget 16x16 with stable ground contact and silhouette distinct from\ntilled soil. No floating rock, gem fantasy crystal, grass base or background.\n\nExact asset contract:\nA loose low BOULDER: two joined rounded angular gray masses, a broad light upper-left face and darker lower-right plane. About 14x11 visible native pixels. Asymmetric rounded contour; no horizontal stratification, mineral vein or loose scattered pebbles. Native canvas 16x16, contact (8,14); complete isolated centered object with clear two-pixel empty margin where possible. Restrained gray stone #52505c/#6e6c78/#8c8a96, colored dark underside outline #241f2e. Upper-left neutral light. Genuinely transparent outside the silhouette, no baked shadow, backdrop, ground plate, grass or other objects. Broad deliberate joined pixel clusters, no texture noise.",
+      "decision": "Accepted after native/nearest3x source-alpha and all actual prop/farm captures, resource silhouettes, harvest/regrowth/collection, density, and real behind/in-front pixel comparisons.",
+      "source_wh": [
+        1374,
+        1145
+      ],
+      "source_alpha_range": [
+        0,
+        255
+      ],
+      "measured_recipe": {
+        "id": "props/rock",
+        "source": "assets/art_source/props/rock.png",
+        "crop_xywh": [
+          358,
+          358,
+          677,
+          499
+        ],
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          14
+        ],
+        "content_scale": 0.0206794682422452,
+        "alpha_threshold": 128
+      },
+      "native_bbox": [
+        1,
+        4,
+        15,
+        14
+      ]
+    },
+    {
+      "id": "rock_b",
+      "tool": "built-in ImageGen",
+      "revision": 0,
+      "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-e85e52b5-889e-4077-9adb-885284bf0025.png",
+      "source": "assets/art_source/props/rock_b.png",
+      "source_sha256": "1fa07696f592a1ef51059e2f15b14cbef0603083ff4e4e1e32b42c6a208313b9",
+      "references": [
+        "assets/art_source/props/rock.png",
+        "assets/art_source/masters/style-day.png"
+      ],
+      "prompt_text": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm\nthat becomes a fortress against zombies at night.\nPrimary request: props/rock_b, second controlled visual variation of the same resource.\nInput images: Image 1: accepted rock master, EDIT TARGET; Image 2: approved neutral-day style reference. Preserve the existing material, camera and lighting.\nStyle/medium: coherent hand-crafted pixel art with deliberate pixel clusters,\ncolored outlines, restrained texture, readable material planes and clean forms.\nComposition/framing: orthographic three-quarter top-down view on a rectangular\ngrid; match the approved master camera and scale. Final native canvas is\n16x16 pixels with contact pivot 8,14; this is a downstream import\ntarget, so the generated source must remain simple enough to survive reduction.\nLighting/mood: neutral warm daytime, highlights from upper left, darker underside;\nruntime supplies dusk/night lighting. Keep emission in separate localized forms.\nColor palette: match the approved project palette and master, warm timber and\nterracotta, layered greens, cool water, violet/blue shadows; limited ramps.\nScene/backdrop: genuinely transparent background for this isolated sprite. No baked ground shadow for actors.\nConstraints: complete unclipped object, consistent perspective and scale, clear\nground contact, generous tool/weapon clearance, no labels, text, watermark or UI.\nAvoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,\nrandom pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,\nnew gameplay objects, tiny details that disappear at native size.\n\nRESOURCE_PROP brief:\nCreate stone boulder, compact natural resource prop with\nrecognizable material. Boulder has two or three readable angular masses. Stone\nseam is natural layered rock; iron ore has restrained metallic mineral clusters.\nTarget 16x16 with stable ground contact and silhouette distinct from\ntilled soil. No floating rock, gem fantasy crystal, grass base or background.\n\nExact asset contract:\nChange only the contour and arrangement of the same identifying masses/strata/veins into a second asymmetrical shape. Keep the species/material and the same body size, ground baseline, camera, upper-left light, limited palette, transparent canvas and broad readable clusters. A loose low BOULDER: two joined rounded angular gray masses, a broad light upper-left face and darker lower-right plane. About 14x11 visible native pixels. Asymmetric rounded contour; no horizontal stratification, mineral vein or loose scattered pebbles. Native canvas 16x16, contact (8,14); complete isolated centered object with clear two-pixel empty margin where possible. Restrained gray stone #52505c/#6e6c78/#8c8a96, colored dark underside outline #241f2e. Upper-left neutral light. Genuinely transparent outside the silhouette, no baked shadow, backdrop, ground plate, grass or other objects. Broad deliberate joined pixel clusters, no texture noise. Do not mirror lighting, zoom, shrink or add ground; no new resource type.",
+      "decision": "Accepted after native/nearest3x source-alpha and all actual prop/farm captures, resource silhouettes, harvest/regrowth/collection, density, and real behind/in-front pixel comparisons.",
+      "source_wh": [
+        1374,
+        1145
+      ],
+      "source_alpha_range": [
+        0,
+        255
+      ],
+      "measured_recipe": {
+        "id": "props/rock_b",
+        "source": "assets/art_source/props/rock_b.png",
+        "crop_xywh": [
+          361,
+          354,
+          661,
+          500
+        ],
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          14
+        ],
+        "content_scale": 0.0206794682422452,
+        "alpha_threshold": 128
+      },
+      "native_bbox": [
+        1,
+        4,
+        15,
+        14
+      ]
+    },
+    {
+      "id": "seam",
+      "tool": "built-in ImageGen",
+      "revision": 0,
+      "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-23a1907e-0880-44de-b1d0-7601fadc6a24.png",
+      "source": "assets/art_source/props/seam.png",
+      "source_sha256": "7e92de1560eb2f23a5fd3c4ebdac3d9574324d66a95d205f6273fb385fcde940",
+      "references": [
+        "assets/art_source/masters/style-day.png",
+        "assets/art_source/terrain/rock.png"
+      ],
+      "prompt_text": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm\nthat becomes a fortress against zombies at night.\nPrimary request: props/seam, one distinct natural resource master.\nInput images: Image 1: approved neutral-day scene for material/camera reference only. Image 2: accepted quiet natural rock terrain for gray palette/material contrast only. Neither is an edit target.\nStyle/medium: coherent hand-crafted pixel art with deliberate pixel clusters,\ncolored outlines, restrained texture, readable material planes and clean forms.\nComposition/framing: orthographic three-quarter top-down view on a rectangular\ngrid; match the approved master camera and scale. Final native canvas is\n16x16 pixels with contact pivot 8,14; this is a downstream import\ntarget, so the generated source must remain simple enough to survive reduction.\nLighting/mood: neutral warm daytime, highlights from upper left, darker underside;\nruntime supplies dusk/night lighting. Keep emission in separate localized forms.\nColor palette: match the approved project palette and master, warm timber and\nterracotta, layered greens, cool water, violet/blue shadows; limited ramps.\nScene/backdrop: genuinely transparent background for this isolated sprite. No baked ground shadow for actors.\nConstraints: complete unclipped object, consistent perspective and scale, clear\nground contact, generous tool/weapon clearance, no labels, text, watermark or UI.\nAvoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,\nrandom pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,\nnew gameplay objects, tiny details that disappear at native size.\n\nRESOURCE_PROP brief:\nCreate stone seam, compact natural resource prop with\nrecognizable material. Boulder has two or three readable angular masses. Stone\nseam is natural layered rock; iron ore has restrained metallic mineral clusters.\nTarget 16x16 with stable ground contact and silhouette distinct from\ntilled soil. No floating rock, gem fantasy crystal, grass base or background.\n\nExact asset contract:\nA low naturally layered STONE SEAM embedded in the rock face: one wider flat irregular outcrop with TWO broad horizontal gray strata and a stepped low contour. About 14x12 visible native pixels. No square brick/tile framing, masonry, golden flecks, mound or fantasy crystal. The strata, not tiny surface grain, distinguish it from loose boulders. Native canvas 16x16, contact (8,14); complete isolated centered object with clear two-pixel empty margin where possible. Restrained gray stone #52505c/#6e6c78/#8c8a96, colored dark underside outline #241f2e. Upper-left neutral light. Genuinely transparent outside the silhouette, no baked shadow, backdrop, ground plate, grass or other objects. Broad deliberate joined pixel clusters, no texture noise.",
+      "decision": "Accepted after native/nearest3x source-alpha and all actual prop/farm captures, resource silhouettes, harvest/regrowth/collection, density, and real behind/in-front pixel comparisons.",
+      "source_wh": [
+        1254,
+        1254
+      ],
+      "source_alpha_range": [
+        0,
+        255
+      ],
+      "measured_recipe": {
+        "id": "props/seam",
+        "source": "assets/art_source/props/seam.png",
+        "crop_xywh": [
+          174,
+          420,
+          924,
+          527
+        ],
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          14
+        ],
+        "content_scale": 0.013671875,
+        "alpha_threshold": 128
+      },
+      "native_bbox": [
+        1,
+        6,
+        15,
+        14
+      ],
+      "initial_measured_recipe": {
+        "id": "props/seam",
+        "source": "assets/art_source/props/seam.png",
+        "crop_xywh": [
+          174,
+          420,
+          924,
+          527
+        ],
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          14
+        ],
+        "content_scale": 0.015151515151515152,
+        "alpha_threshold": 128
+      }
+    },
+    {
+      "id": "seam_b",
+      "tool": "built-in ImageGen",
+      "revision": 0,
+      "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-f317aad6-890f-4569-8122-7b1bd845f339.png",
+      "source": "assets/art_source/props/seam_b.png",
+      "source_sha256": "5a83f0de1842a9bed331987bb7c6e7d37898bd98fa22fde7ad899dd5dd966bb9",
+      "references": [
+        "assets/art_source/props/seam.png",
+        "assets/art_source/masters/style-day.png"
+      ],
+      "prompt_text": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm\nthat becomes a fortress against zombies at night.\nPrimary request: props/seam_b, second controlled visual variation of the same resource.\nInput images: Image 1: accepted seam master, EDIT TARGET; Image 2: approved neutral-day style reference. Preserve the existing material, camera and lighting.\nStyle/medium: coherent hand-crafted pixel art with deliberate pixel clusters,\ncolored outlines, restrained texture, readable material planes and clean forms.\nComposition/framing: orthographic three-quarter top-down view on a rectangular\ngrid; match the approved master camera and scale. Final native canvas is\n16x16 pixels with contact pivot 8,14; this is a downstream import\ntarget, so the generated source must remain simple enough to survive reduction.\nLighting/mood: neutral warm daytime, highlights from upper left, darker underside;\nruntime supplies dusk/night lighting. Keep emission in separate localized forms.\nColor palette: match the approved project palette and master, warm timber and\nterracotta, layered greens, cool water, violet/blue shadows; limited ramps.\nScene/backdrop: genuinely transparent background for this isolated sprite. No baked ground shadow for actors.\nConstraints: complete unclipped object, consistent perspective and scale, clear\nground contact, generous tool/weapon clearance, no labels, text, watermark or UI.\nAvoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,\nrandom pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,\nnew gameplay objects, tiny details that disappear at native size.\n\nRESOURCE_PROP brief:\nCreate stone seam, compact natural resource prop with\nrecognizable material. Boulder has two or three readable angular masses. Stone\nseam is natural layered rock; iron ore has restrained metallic mineral clusters.\nTarget 16x16 with stable ground contact and silhouette distinct from\ntilled soil. No floating rock, gem fantasy crystal, grass base or background.\n\nExact asset contract:\nChange only the contour and arrangement of the same identifying masses/strata/veins into a second asymmetrical shape. Keep the species/material and the same body size, ground baseline, camera, upper-left light, limited palette, transparent canvas and broad readable clusters. A low naturally layered STONE SEAM embedded in the rock face: one wider flat irregular outcrop with TWO broad horizontal gray strata and a stepped low contour. About 14x12 visible native pixels. No square brick/tile framing, masonry, golden flecks, mound or fantasy crystal. The strata, not tiny surface grain, distinguish it from loose boulders. Native canvas 16x16, contact (8,14); complete isolated centered object with clear two-pixel empty margin where possible. Restrained gray stone #52505c/#6e6c78/#8c8a96, colored dark underside outline #241f2e. Upper-left neutral light. Genuinely transparent outside the silhouette, no baked shadow, backdrop, ground plate, grass or other objects. Broad deliberate joined pixel clusters, no texture noise. Do not mirror lighting, zoom, shrink or add ground; no new resource type.",
+      "decision": "Accepted after native/nearest3x source-alpha and all actual prop/farm captures, resource silhouettes, harvest/regrowth/collection, density, and real behind/in-front pixel comparisons.",
+      "source_wh": [
+        1254,
+        1254
+      ],
+      "source_alpha_range": [
+        0,
+        255
+      ],
+      "measured_recipe": {
+        "id": "props/seam_b",
+        "source": "assets/art_source/props/seam_b.png",
+        "crop_xywh": [
+          136,
+          435,
+          1024,
+          548
+        ],
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          14
+        ],
+        "content_scale": 0.013671875,
+        "alpha_threshold": 128
+      },
+      "native_bbox": [
+        0,
+        6,
+        16,
+        14
+      ],
+      "initial_measured_recipe": {
+        "id": "props/seam_b",
+        "source": "assets/art_source/props/seam_b.png",
+        "crop_xywh": [
+          136,
+          435,
+          1024,
+          548
+        ],
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          14
+        ],
+        "content_scale": 0.015151515151515152,
+        "alpha_threshold": 128
+      }
+    },
+    {
+      "id": "stump",
+      "tool": "built-in ImageGen",
+      "revision": 0,
+      "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-8ab9448b-4fe1-4e8a-82fe-f1d24b146a90.png",
+      "source": "assets/art_source/props/stump.png",
+      "source_sha256": "04b155a793e485b04dfa3ee1102d9244589c0c9e5ef12183be8f8091d498a10e",
+      "references": [
+        "assets/art_source/masters/tree.png",
+        "assets/art_source/masters/style-day.png"
+      ],
+      "prompt_text": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm\nthat becomes a fortress against zombies at night.\nPrimary request: props/stump, one low cut stump matching the approved tree trunk; create a new isolated object.\nInput images: Image 1: approved full tree, reference for exact bark species/root color and trunk width only; Image 2: neutral-day scene for camera/material reference. Neither is an edit target.\nStyle/medium: coherent hand-crafted pixel art with deliberate pixel clusters,\ncolored outlines, restrained texture, readable material planes and clean forms.\nComposition/framing: orthographic three-quarter top-down view on a rectangular\ngrid; match the approved master camera and scale. Final native canvas is\n16x16 pixels with contact pivot 8,14; this is a downstream import\ntarget, so the generated source must remain simple enough to survive reduction.\nLighting/mood: neutral warm daytime, highlights from upper left, darker underside;\nruntime supplies dusk/night lighting. Keep emission in separate localized forms.\nColor palette: match the approved project palette and master, warm timber and\nterracotta, layered greens, cool water, violet/blue shadows; limited ramps.\nScene/backdrop: genuinely transparent background for this isolated sprite. No baked ground shadow for actors.\nConstraints: complete unclipped object, consistent perspective and scale, clear\nground contact, generous tool/weapon clearance, no labels, text, watermark or UI.\nAvoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,\nrandom pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,\nnew gameplay objects, tiny details that disappear at native size.\n\nTREE brief:\nCreate a cut stump, broad lush canopy with distinct shaded lower lobes,\nsunlit upper-left clusters and a visible warm trunk. Full tree target 40x48,\nvisible body 36x42, trunk contact (20,44), as accepted in task 0001. Stump must match\nthe same trunk species/width and show the cut surface. No ground tile, grass\npatch or painted drop shadow. Variants retain the same contact and scale.\n\nExact asset contract:\nOne low cut stump with the same ochre/brown trunk bark and four compact splayed roots as the tree. Cut the trunk below its branching fork, showing an elliptical pale warm wood top with ONE broad curved ring and one short dark notch, no detailed tiny rings. Downstream visible bounds about 14x10 native pixels, fitting a 16x16 canvas with contact (8,14). Trunk thickness should match the approved tree's lower trunk, about 5 native pixels, with roots spanning about 14 pixels. Full object centered, no leaves, axe, logs, detached chips, ground, shadow or grass. Its roots rest on one common baseline.",
+      "decision": "Accepted after native/nearest3x source-alpha and all actual prop/farm captures, resource silhouettes, harvest/regrowth/collection, density, and real behind/in-front pixel comparisons.",
+      "source_wh": [
+        1254,
+        1254
+      ],
+      "source_alpha_range": [
+        0,
+        255
+      ],
+      "measured_recipe": {
+        "id": "props/stump",
+        "source": "assets/art_source/props/stump.png",
+        "crop_xywh": [
+          269,
+          510,
+          751,
+          445
+        ],
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          14
+        ],
+        "content_scale": 0.018641810918774968,
+        "alpha_threshold": 128
+      },
+      "native_bbox": [
+        1,
+        6,
+        15,
+        14
+      ]
+    },
+    {
+      "id": "tree_b",
+      "tool": "built-in ImageGen",
+      "revision": 0,
+      "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-2b3ca9cb-d0a5-4863-9f05-6956c36d9fe1.png",
+      "source": "assets/art_source/props/tree_b.png",
+      "source_sha256": "e7b4138f147769e67cbf4ab86b2dcfc04393b2f16a2062147ceb38eaa8986215",
+      "references": [
+        "assets/art_source/masters/tree.png",
+        "assets/art_source/masters/style-day.png"
+      ],
+      "prompt_text": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm\nthat becomes a fortress against zombies at night.\nPrimary request: props/tree_b, a second full-canopy variation of the approved tree; edit Image 1.\nInput images: Image 1: approved full tree, EDIT TARGET and identity/scale master; Image 2: neutral-day scene, style reference only.\nStyle/medium: coherent hand-crafted pixel art with deliberate pixel clusters,\ncolored outlines, restrained texture, readable material planes and clean forms.\nComposition/framing: orthographic three-quarter top-down view on a rectangular\ngrid; match the approved master camera and scale. Final native canvas is\n40x48 pixels with contact pivot 20,44; this is a downstream import\ntarget, so the generated source must remain simple enough to survive reduction.\nLighting/mood: neutral warm daytime, highlights from upper left, darker underside;\nruntime supplies dusk/night lighting. Keep emission in separate localized forms.\nColor palette: match the approved project palette and master, warm timber and\nterracotta, layered greens, cool water, violet/blue shadows; limited ramps.\nScene/backdrop: genuinely transparent background for this isolated sprite. No baked ground shadow for actors.\nConstraints: complete unclipped object, consistent perspective and scale, clear\nground contact, generous tool/weapon clearance, no labels, text, watermark or UI.\nAvoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,\nrandom pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,\nnew gameplay objects, tiny details that disappear at native size.\n\nTREE brief:\nCreate a full tree variation, broad lush canopy with distinct shaded lower lobes,\nsunlit upper-left clusters and a visible warm trunk. Full tree target 40x48,\nvisible body 36x42, trunk contact (20,44), as accepted in task 0001. Stump must match\nthe same trunk species/width and show the cut surface. No ground tile, grass\npatch or painted drop shadow. Variants retain the same contact and scale.\n\nExact asset contract:\nChange only the broad canopy lobe arrangement into a slightly rounder, asymmetrical crown with two grouped upper-left highlights. Preserve the same deciduous species, original warm branching trunk and roots, trunk width, exact root contact and object scale. Same broad lush green canopy and 36x42 native visible body, 40x48 canvas, contact (20,44). Keep all bark/root pixels below the lowest leaves unchanged. Neutral upper-left daylight, darker lower-right foliage. Preserve true alpha; remove no roots, add no ground shadow, grass, fruit or flowers. Keep the complete tree, camera, original canvas size and margin; do not zoom or add another tree. The different crown must remain visible after reduction to 36x42 pixels; avoid microleaf noise.",
+      "decision": "Accepted after native/nearest3x source-alpha and all actual prop/farm captures, resource silhouettes, harvest/regrowth/collection, density, and real behind/in-front pixel comparisons.",
+      "source_wh": [
+        1024,
+        1536
+      ],
+      "source_alpha_range": [
+        0,
+        254
+      ],
+      "measured_recipe": {
+        "id": "props/tree_b",
+        "source": "assets/art_source/props/tree_b.png",
+        "crop_xywh": [
+          26,
+          202,
+          980,
+          1153
+        ],
+        "canvas_wh": [
+          40,
+          48
+        ],
+        "pivot_xy": [
+          20,
+          44
+        ],
+        "content_scale": 0.03700440528634361,
+        "alpha_threshold": 128
+      },
+      "native_bbox": [
+        2,
+        1,
+        38,
+        44
+      ]
+    }
+  ]
+}

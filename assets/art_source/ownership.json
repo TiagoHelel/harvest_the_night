@@ -739,11 +739,11 @@
     },
     {
       "output": "sprites/props/chicken.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/props/cow.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/props/generator_0_0.png",
@@ -763,7 +763,11 @@
     },
     {
       "output": "sprites/props/ore.png",
-      "owner": "ascii"
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/ore_b.png",
+      "owner": "raster"
     },
     {
       "output": "sprites/props/press_0_0.png",
@@ -783,11 +787,19 @@
     },
     {
       "output": "sprites/props/rock.png",
-      "owner": "ascii"
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/rock_b.png",
+      "owner": "raster"
     },
     {
       "output": "sprites/props/seam.png",
-      "owner": "ascii"
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/seam_b.png",
+      "owner": "raster"
     },
     {
       "output": "sprites/props/shop.png",
@@ -795,10 +807,14 @@
     },
     {
       "output": "sprites/props/stump.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/props/tree.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/tree_b.png",
       "owner": "raster"
     },
     {

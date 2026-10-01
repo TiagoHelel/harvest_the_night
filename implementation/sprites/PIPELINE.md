@@ -270,3 +270,36 @@ The automatic-loop test restores the actual production TileSet and observes
 three distinct rendered phases returning twice, with complete serialized state
 unchanged. Static banks share no animation. Source/native/atlas bytes, side
 connectivity and corner endpoint profiles are guarded by the source checker.
+
+Task 0009 migrates stump/rock/seam/ore/cow/chicken and adds controlled tree,
+boulder, stone-seam and iron variants. The accepted pilot tree remains exactly
+unchanged. New sources are independent material/species masters, with variants
+referencing their accepted parents. Each static material pair shares one scale;
+measured source bounds determine placement without stretching or clipping.
+The tree variation uses the pilot's exact reduction scale, canvas and contact.
+Each alternate has an explicit `variant_of` pointing to its direct master.
+The importer rejects missing/cyclic parents, non-source parents and differences
+in scale, canvas, pivot or palette. A deliberate scale-drift probe exposed the
+missing cross-master guard; the final fault suite exercises its rejection.
+
+```powershell
+python tools/check_prop_art.py
+python tools/show_art.py --props --check
+python tools/show_art.py --props --out=implementation/shots/sprites/<task-id>/props
+python implementation/sprites/reviews/0009/build_review.py
+```
+
+Every prop remains one logical cell. Manifest pivots drive native ground
+placement and depth sorting; tree shadows stay separate. WorldView uses only
+cell coordinates for static shape choices. It never consumes RNG or changes
+resource readiness, collision, footprint or removal. No decorative tree/animal
+animation was added. All required variation files fail offline checks if missing.
+
+The showcase compares complete serialized state around every render, checks
+all 720 cells for each variation family, then exercises real Gathering.strike,
+Gathering.tick and Livestock.collect. Partial nodes, stumps, removed boulders,
+regrown deposits, ready/collected animals, dense canopy overlap and the unchanged
+farm render under Main's actual day/dusk/night shader. Real pixel comparisons
+confirm farmer occlusion behind both trees and every farmer pixel preserved in
+front. The comparison locates sprites by logical-cell metadata, which survives
+Godot's temporary node names during redraws.

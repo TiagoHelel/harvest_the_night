@@ -1,0 +1,31 @@
+Use case: stylized-concept
+Asset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm
+that becomes a fortress against zombies at night.
+Primary request: props/tree_b, a second full-canopy variation of the approved tree; edit Image 1.
+Input images: Image 1: approved full tree, EDIT TARGET and identity/scale master; Image 2: neutral-day scene, style reference only.
+Style/medium: coherent hand-crafted pixel art with deliberate pixel clusters,
+colored outlines, restrained texture, readable material planes and clean forms.
+Composition/framing: orthographic three-quarter top-down view on a rectangular
+grid; match the approved master camera and scale. Final native canvas is
+40x48 pixels with contact pivot 20,44; this is a downstream import
+target, so the generated source must remain simple enough to survive reduction.
+Lighting/mood: neutral warm daytime, highlights from upper left, darker underside;
+runtime supplies dusk/night lighting. Keep emission in separate localized forms.
+Color palette: match the approved project palette and master, warm timber and
+terracotta, layered greens, cool water, violet/blue shadows; limited ramps.
+Scene/backdrop: genuinely transparent background for this isolated sprite. No baked ground shadow for actors.
+Constraints: complete unclipped object, consistent perspective and scale, clear
+ground contact, generous tool/weapon clearance, no labels, text, watermark or UI.
+Avoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,
+random pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,
+new gameplay objects, tiny details that disappear at native size.
+
+TREE brief:
+Create a full tree variation, broad lush canopy with distinct shaded lower lobes,
+sunlit upper-left clusters and a visible warm trunk. Full tree target 40x48,
+visible body 36x42, trunk contact (20,44), as accepted in task 0001. Stump must match
+the same trunk species/width and show the cut surface. No ground tile, grass
+patch or painted drop shadow. Variants retain the same contact and scale.
+
+Exact asset contract:
+Change only the broad canopy lobe arrangement into a slightly rounder, asymmetrical crown with two grouped upper-left highlights. Preserve the same deciduous species, original warm branching trunk and roots, trunk width, exact root contact and object scale. Same broad lush green canopy and 36x42 native visible body, 40x48 canvas, contact (20,44). Keep all bark/root pixels below the lowest leaves unchanged. Neutral upper-left daylight, darker lower-right foliage. Preserve true alpha; remove no roots, add no ground shadow, grass, fruit or flowers. Keep the complete tree, camera, original canvas size and margin; do not zoom or add another tree. The different crown must remain visible after reduction to 36x42 pixels; avoid microleaf noise.

@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-01",
+  "task": "0009",
+  "baseline": "9cddbfd",
+  "preserved_tree": "assets/art_source/masters/tree.png",
+  "generated": [
+    "tree_b",
+    "stump",
+    "rock",
+    "rock_b",
+    "seam",
+    "seam_b",
+    "ore",
+    "ore_b",
+    "cow",
+    "chicken"
+  ],
+  "variants": "tree/rock/seam/ore: fixed cell hash only; no simulation RNG",
+  "no_decorative_animation": true
+}

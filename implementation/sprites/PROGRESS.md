@@ -552,3 +552,66 @@ night bloom remain scheduled later-family work.
 Queue after completion: 8 done, 12 todo, zero doing/blocked. Next is 0009,
 trees, rocks, resources and livestock. Exactly one sprite task completed this cycle; the active /goal continues
 automatically toward the remaining backlog.
+
+## 2026-10-01 — 0009 Trees, rocks, resources and livestock
+
+Completed the static prop family with ten built-in ImageGen calls, zero targeted
+revisions/rejected masters. Immutable accepted sources:
+`assets/art_source/props/{tree_b,stump,rock,rock_b,seam,seam_b,ore,ore_b,cow,chicken}.png`.
+Exact BASE + TREE/RESOURCE_PROP/ANIMAL prompts, returned files, reference hashes,
+raw alpha and decisions are in `generation/0009-*.prompt.txt`, individual call
+records and `0009-generations.json`. No painted runtime silhouettes or fallback
+generation. Source SHA256 prefixes: tree_b e7b4138f147769e6; stump
+04b155a793e485b0; rock d31268fcb2c20f9f; rock_b 1fa07696f592a1ef;
+seam 7e92de1560eb2f23; seam_b 5a83f0de1842a9be; ore 732ce8cae8c1641f;
+ore_b 06ee39306995017e; cow a22e639050fefdce; chicken fdf30e750796f0d1.
+Full source/runtime hashes and measured recipes: `reviews/0009/measured-contract.json`
+and `runtime-delta.json`.
+
+Six placeholders migrate to raster ownership; four new independent source-owned
+variations share their direct master's scale/canvas/pivot/palette through an
+explicit `variant_of` guard. Pilot tree/source and all terrain remain unchanged;
+native tree alternative is 36x43 versus original 36x42 at exactly the same
+42/1135 scale and (20,44) contact. Stump/resources use 16x16/(8,14), animals
+24x24/(12,22). Both seam recipes share the reduced family scale after checking
+the wider initial candidate's margin. No per-variant fitting or clipped pixels.
+Ownership: 130 raster / 130 ASCII / zero player-sheet, 260 PNGs. Exact scope:
+six changed and four added PNGs; other 250 PNGs, original owner sheet, palette,
+PlayerFrames, core/FARM_MAP, collisions/footprints, balance, saves and guards
+remain unchanged.
+
+WorldView chooses tree/boulder/stone-seam/iron shapes by cell only, consuming no
+simulation RNG. All 720 cells select 547 base / 173 alternate per family.
+Decorative tree/animal animation was optional and remains static. Actual
+Gathering.strike/tick and Livestock.collect fixtures check partial strikes,
+exact final yield, tree-to-stump removal, permanent boulder removal, real
+regrowth and production readiness/collection. Every redraw compares complete
+serialized state. Headless prop fixtures: 8535 checks, zero failed; actual
+renderer: 8643 checks, zero failed, including four farmer behind/in-front pixel
+comparisons against both tree variants. Shadows remain compact and separate.
+
+Full verify PASS: 33 passed, zero skipped/failed in 215s, Godot 4.7.1 at the
+user's supplied path; 105 scripts, 6609 headless assertions, 980 input cases,
+performance and Windows/Web exports. Sim `1961000123`, data `407837701`
+unchanged; raster source check writes zero files. Fault/rebuild suite: 48 probes
+PASS, all deliberate corruption restored. A scale-drift probe exposed a missing
+cross-master guard, fixed through `variant_of`; actual-render lookup now uses
+logical-cell metadata instead of temporary node names. Initial and final
+diagnostic logs are preserved in `reviews/0009/`.
+
+Opened all 53 actual Godot captures at native and original nearest-3x through
+`captures-00`–`captures-13`, originals in `implementation/shots/sprites/0009/`
+and `props/`. Also inspected all eleven native props on light/dark/checker,
+all raw source alpha and 0008/0009 noon/dusk/wave comparisons. Visual gates PASS:
+pilot-matching tree species/scale, matching warm stump, label-free distinguishable
+mineral silhouettes, recognizable native cow/hen, clean unclipped alpha,
+ground contacts, foreground/background occlusion, dense mixed canopy overlap,
+harvest/regrowth removal and Main day/dusk/night integration. Complete criteria,
+capture hashes and scope: `reviews/0009/REVIEW.md` and `frame-review.json`.
+Later crops/buildings/defences, broad night bloom/palette and enemies remain their
+scheduled tasks; authored zombie walk/attack/death is 0015 and Giant/death
+playback is 0016, as clarified to the user.
+
+Queue after completion: 9 done, 11 todo, zero doing/blocked. Next: 0010,
+three crops, four stages and watered soil. Exactly one sprite task completed
+this cycle; the active /goal continues automatically toward the remaining backlog.

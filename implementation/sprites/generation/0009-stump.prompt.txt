@@ -1,0 +1,31 @@
+Use case: stylized-concept
+Asset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm
+that becomes a fortress against zombies at night.
+Primary request: props/stump, one low cut stump matching the approved tree trunk; create a new isolated object.
+Input images: Image 1: approved full tree, reference for exact bark species/root color and trunk width only; Image 2: neutral-day scene for camera/material reference. Neither is an edit target.
+Style/medium: coherent hand-crafted pixel art with deliberate pixel clusters,
+colored outlines, restrained texture, readable material planes and clean forms.
+Composition/framing: orthographic three-quarter top-down view on a rectangular
+grid; match the approved master camera and scale. Final native canvas is
+16x16 pixels with contact pivot 8,14; this is a downstream import
+target, so the generated source must remain simple enough to survive reduction.
+Lighting/mood: neutral warm daytime, highlights from upper left, darker underside;
+runtime supplies dusk/night lighting. Keep emission in separate localized forms.
+Color palette: match the approved project palette and master, warm timber and
+terracotta, layered greens, cool water, violet/blue shadows; limited ramps.
+Scene/backdrop: genuinely transparent background for this isolated sprite. No baked ground shadow for actors.
+Constraints: complete unclipped object, consistent perspective and scale, clear
+ground contact, generous tool/weapon clearance, no labels, text, watermark or UI.
+Avoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,
+random pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,
+new gameplay objects, tiny details that disappear at native size.
+
+TREE brief:
+Create a cut stump, broad lush canopy with distinct shaded lower lobes,
+sunlit upper-left clusters and a visible warm trunk. Full tree target 40x48,
+visible body 36x42, trunk contact (20,44), as accepted in task 0001. Stump must match
+the same trunk species/width and show the cut surface. No ground tile, grass
+patch or painted drop shadow. Variants retain the same contact and scale.
+
+Exact asset contract:
+One low cut stump with the same ochre/brown trunk bark and four compact splayed roots as the tree. Cut the trunk below its branching fork, showing an elliptical pale warm wood top with ONE broad curved ring and one short dark notch, no detailed tiny rings. Downstream visible bounds about 14x10 native pixels, fitting a 16x16 canvas with contact (8,14). Trunk thickness should match the approved tree's lower trunk, about 5 native pixels, with roots spanning about 14 pixels. Full object centered, no leaves, axe, logs, detached chips, ground, shadow or grass. Its roots rest on one common baseline.

@@ -1,0 +1,48 @@
+{
+  "id": "cow",
+  "tool": "built-in ImageGen",
+  "revision": 0,
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-5e132564-11ab-4096-8d4b-c5f623785ed4.png",
+  "source": "assets/art_source/props/cow.png",
+  "source_sha256": "a22e639050fefdce2d3ffde6e82cc4e88ba527e8f91e78c12a0f237d2dda70c4",
+  "references": [
+    "assets/art_source/masters/style-day.png",
+    "docs/reference-sheet.png"
+  ],
+  "prompt_text": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm\nthat becomes a fortress against zombies at night.\nPrimary request: props/cow, one recognizable standing farm cow.\nInput images: Image 1: approved neutral-day scene for material/camera reference only. Image 2: repository reference sheet for the existing cow's species/markings only; not an edit target.\nStyle/medium: coherent hand-crafted pixel art with deliberate pixel clusters,\ncolored outlines, restrained texture, readable material planes and clean forms.\nComposition/framing: orthographic three-quarter top-down view on a rectangular\ngrid; match the approved master camera and scale. Final native canvas is\n24x24 pixels with contact pivot 12,22; this is a downstream import\ntarget, so the generated source must remain simple enough to survive reduction.\nLighting/mood: neutral warm daytime, highlights from upper left, darker underside;\nruntime supplies dusk/night lighting. Keep emission in separate localized forms.\nColor palette: match the approved project palette and master, warm timber and\nterracotta, layered greens, cool water, violet/blue shadows; limited ramps.\nScene/backdrop: genuinely transparent background for this isolated sprite. No baked ground shadow for actors.\nConstraints: complete unclipped object, consistent perspective and scale, clear\nground contact, generous tool/weapon clearance, no labels, text, watermark or UI.\nAvoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,\nrandom pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,\nnew gameplay objects, tiny details that disappear at native size.\n\nANIMAL brief:\nCreate cow in the same three-quarter farm style. Compact recognizable\nbody on a 24x24 target canvas, stable feet. Cow has clear muzzle, horns/ears and\nappropriate light/dark markings; chicken has compact feathers, beak and comb.\nDo not inflate into a mascot or add accessories. A short idle strip, if requested,\nchanges head posture subtly while body scale and contact remain identical.\n\nExact asset contract:\nOne compact realistic farm cow, side-on three-quarter top-down camera, head facing LEFT; body length about 22 native pixels and height about 17-18 including hooves on a 24x24 target canvas, contact (12,22). Cream-white stocky horizontal torso with TWO broad dark brown/near-black patches, small clear muzzle, two short horns/ears, four ordinary short legs (far legs visible only partly), compact udder and one tail. Broad grouped shading. Neutral upper-left daylight, colored outlines, no glow or baked ground shadow. Keep normal cattle proportions: long body, small head, no huge mascot eyes, accessories, bell, collar, grass or backdrop. Hooves share one baseline; all parts unclipped. Isolated centered complete cow on true transparent alpha.",
+  "decision": "Accepted after native/nearest3x source-alpha and all actual prop/farm captures, resource silhouettes, harvest/regrowth/collection, density, and real behind/in-front pixel comparisons.",
+  "source_wh": [
+    1402,
+    1122
+  ],
+  "source_alpha_range": [
+    0,
+    255
+  ],
+  "measured_recipe": {
+    "id": "props/cow",
+    "source": "assets/art_source/props/cow.png",
+    "crop_xywh": [
+      120,
+      240,
+      1176,
+      709
+    ],
+    "canvas_wh": [
+      24,
+      24
+    ],
+    "pivot_xy": [
+      12,
+      22
+    ],
+    "content_scale": 0.01870748299319728,
+    "alpha_threshold": 128
+  },
+  "native_bbox": [
+    1,
+    9,
+    23,
+    22
+  ]
+}

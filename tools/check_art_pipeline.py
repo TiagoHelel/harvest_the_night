@@ -174,6 +174,27 @@ def main():
                 else:
                     raise AssertionError(label)
 
+        prop = next((i for i,e in enumerate(data["assets"]) if e["id"] == "props/cow"), None)
+        if prop is not None:
+            corrupt(ROOT / data["assets"][prop]["source"], "tools/import_art.py", missing=True)
+            passed("Missing accepted livestock master rejected")
+            corrupt(ROOT / "sprites/props/tree_b.png", "tools/check_prop_art.py", missing=True)
+            passed("Missing required prop variation rejected without base fallback")
+            corrupt(ROOT / "sprites/props/ore.png", "tools/check_prop_art.py")
+            passed("Standalone prop checker rejects changed native mineral art")
+            from check_prop_art import validate_shape
+            for label, point in [("Prop clipping rejected", (0,7)), ("Detached prop pixel rejected", (1,1))]:
+                image = images["props/cow"].copy()
+                image.putpixel(point, (36,31,46,255))
+                try:
+                    validate_shape(image, "deliberate fault", [24,24], [12,22])
+                except ValueError:
+                    passed(label)
+                else:
+                    raise AssertionError(label)
+            variant = next(i for i,e in enumerate(data["assets"]) if e["id"] == "props/rock_b")
+            invalid_manifest("Prop variant scale drift rejected", lambda d: d["assets"][variant].update(content_scale=0.001))
+
         original_owners = art_ownership.REGISTRY.read_bytes()
         try:
             owners = json.loads(original_owners)

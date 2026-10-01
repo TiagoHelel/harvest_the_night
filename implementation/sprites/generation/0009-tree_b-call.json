@@ -1,0 +1,48 @@
+{
+  "id": "tree_b",
+  "tool": "built-in ImageGen",
+  "revision": 0,
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-2b3ca9cb-d0a5-4863-9f05-6956c36d9fe1.png",
+  "source": "assets/art_source/props/tree_b.png",
+  "source_sha256": "e7b4138f147769e67cbf4ab86b2dcfc04393b2f16a2062147ceb38eaa8986215",
+  "references": [
+    "assets/art_source/masters/tree.png",
+    "assets/art_source/masters/style-day.png"
+  ],
+  "prompt_text": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm\nthat becomes a fortress against zombies at night.\nPrimary request: props/tree_b, a second full-canopy variation of the approved tree; edit Image 1.\nInput images: Image 1: approved full tree, EDIT TARGET and identity/scale master; Image 2: neutral-day scene, style reference only.\nStyle/medium: coherent hand-crafted pixel art with deliberate pixel clusters,\ncolored outlines, restrained texture, readable material planes and clean forms.\nComposition/framing: orthographic three-quarter top-down view on a rectangular\ngrid; match the approved master camera and scale. Final native canvas is\n40x48 pixels with contact pivot 20,44; this is a downstream import\ntarget, so the generated source must remain simple enough to survive reduction.\nLighting/mood: neutral warm daytime, highlights from upper left, darker underside;\nruntime supplies dusk/night lighting. Keep emission in separate localized forms.\nColor palette: match the approved project palette and master, warm timber and\nterracotta, layered greens, cool water, violet/blue shadows; limited ramps.\nScene/backdrop: genuinely transparent background for this isolated sprite. No baked ground shadow for actors.\nConstraints: complete unclipped object, consistent perspective and scale, clear\nground contact, generous tool/weapon clearance, no labels, text, watermark or UI.\nAvoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,\nrandom pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,\nnew gameplay objects, tiny details that disappear at native size.\n\nTREE brief:\nCreate a full tree variation, broad lush canopy with distinct shaded lower lobes,\nsunlit upper-left clusters and a visible warm trunk. Full tree target 40x48,\nvisible body 36x42, trunk contact (20,44), as accepted in task 0001. Stump must match\nthe same trunk species/width and show the cut surface. No ground tile, grass\npatch or painted drop shadow. Variants retain the same contact and scale.\n\nExact asset contract:\nChange only the broad canopy lobe arrangement into a slightly rounder, asymmetrical crown with two grouped upper-left highlights. Preserve the same deciduous species, original warm branching trunk and roots, trunk width, exact root contact and object scale. Same broad lush green canopy and 36x42 native visible body, 40x48 canvas, contact (20,44). Keep all bark/root pixels below the lowest leaves unchanged. Neutral upper-left daylight, darker lower-right foliage. Preserve true alpha; remove no roots, add no ground shadow, grass, fruit or flowers. Keep the complete tree, camera, original canvas size and margin; do not zoom or add another tree. The different crown must remain visible after reduction to 36x42 pixels; avoid microleaf noise.",
+  "decision": "Accepted after native/nearest3x source-alpha and all actual prop/farm captures, resource silhouettes, harvest/regrowth/collection, density, and real behind/in-front pixel comparisons.",
+  "source_wh": [
+    1024,
+    1536
+  ],
+  "source_alpha_range": [
+    0,
+    254
+  ],
+  "measured_recipe": {
+    "id": "props/tree_b",
+    "source": "assets/art_source/props/tree_b.png",
+    "crop_xywh": [
+      26,
+      202,
+      980,
+      1153
+    ],
+    "canvas_wh": [
+      40,
+      48
+    ],
+    "pivot_xy": [
+      20,
+      44
+    ],
+    "content_scale": 0.03700440528634361,
+    "alpha_threshold": 128
+  },
+  "native_bbox": [
+    2,
+    1,
+    38,
+    44
+  ]
+}

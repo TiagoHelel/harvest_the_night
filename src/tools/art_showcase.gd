@@ -30,7 +30,7 @@ func _run() -> void:
 		if arg.begins_with("--out="):
 			_folder = "res://" + arg.substr(6).trim_suffix("/") + "/"
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(_folder))
-	if args.has("--terrain") or args.has("--water"):
+	if args.has("--terrain") or args.has("--water") or args.has("--props"):
 		# Use Main's real relighting pipeline for all three material light states.
 		var relight := Relight.new()
 		relight.name = "Relight"
@@ -61,6 +61,11 @@ func _run() -> void:
 	player["facing"] = Player.SOUTH
 	player["action"] = {}
 	var actor := Entities.get_one(_state, enemy)
+	if args.has("--props"):
+		await _props_family()
+		print("PROP SHOWCASE: %d checks, %d failed" % [_checks, _failed])
+		quit(1 if _failed > 0 else 0)
+		return
 	if args.has("--water"):
 		await _water_edges()
 		print("WATER SHOWCASE: %d checks, %d failed" % [_checks, _failed])
@@ -152,6 +157,212 @@ func _run() -> void:
 	await _contacts()
 	print("ART SHOWCASE: %d checks, %d failed" % [_checks, _failed])
 	quit(1 if _failed > 0 else 0)
+
+
+## Source-owned prop species and real harvest/occlusion fixtures.
+func _props_fixture(lighting: int) -> void:
+	_water_fixture(Farm.Terrain.GRASS, lighting)
+	_state["regrowing"].clear()
+	_set_contact(_state["player"], Vector2i(296, 192))
+	_state["player"]["facing"] = Player.SOUTH
+	_state["player"]["action"] = {}
+
+
+func _props_cell(id: StringName, variant: int, near: Vector2i) -> Vector2i:
+	for dx in [0, -1, 1, -2, 2, -3, 3]:
+		var cell := near + Vector2i(dx, 0)
+		if WorldView._prop_variant(id, cell) == WorldView.PROP_VARIANTS[id][variant]:
+			return cell
+	expect(false, "Fixture finds both controlled prop variants")
+	return near
+
+
+func _props_put(id: StringName, cell: Vector2i) -> void:
+	expect(Farm.restore(_state, cell, {"id": id}), "Fixture uses one unchanged logical prop cell")
+	if id in [&"ore", &"seam"]:
+		_state["terrain"][Grid.index(cell)] = Farm.Terrain.ROCK
+
+
+func _props_check() -> void:
+	var seen := {}
+	for node in _world.get_node("Occupants").get_children():
+		if not (node is Sprite2D and node.has_meta("logical_cells")):
+			continue
+		var cells: Array = node.get_meta("logical_cells")
+		if cells.size() != 1:
+			continue
+		var cell := Grid.cell(int(cells[0]))
+		var on := Farm.occupant(_state, cell)
+		var id: StringName = on["id"]
+		if not id in [&"tree", &"stump", &"rock", &"seam", &"ore", &"cow", &"chicken"]:
+			continue
+		var chosen := WorldView._prop_variant(id, cell)
+		var path := WorldView.PROP_DIR + str(chosen) + ".png"
+		expect(node.texture.resource_path == path and RasterArt.FRAMES.has(path), "Every prop selects its required accepted source, with no flat fallback")
+		expect(node.position == Vector2(cell * 16 + Vector2i(8, 16)), "Props sort at the unchanged one-cell ground contact")
+		expect(node.offset == -Vector2(RasterArt.FRAMES[path]["pivot"]), "Prop view uses its species/material source pivot")
+		expect(not seen.has(cells[0]), "Visual overhang never creates another logical collision cell")
+		seen[cells[0]] = true
+		if id == &"tree":
+			expect(node.get_child_count() == 1 and node.get_child(0).texture.resource_path == PlayerView.SHADOW,
+				"Each tree retains one separate compact ground shadow")
+	var wanted := 0
+	for on in _state["occupants"].values():
+		if on["id"] in [&"tree", &"stump", &"rock", &"seam", &"ore", &"cow", &"chicken"]:
+			wanted += 1
+	expect(seen.size() == wanted, "Removed props leave no stale drawing; every current prop has exactly one drawing")
+
+
+func _props_overlap_pixels(view: PlayerView, tree_cell: Vector2i, behind: bool) -> void:
+	if not _capture:
+		return
+	var tree_sprite: Sprite2D
+	for node in _world.get_node("Occupants").get_children():
+		if node is Sprite2D and node.get_meta("logical_cells", []) == [Grid.index(tree_cell)]:
+			tree_sprite = node
+			break
+	expect(tree_sprite != null, "Occlusion comparison locates the actual drawn logical tree cell")
+	if tree_sprite == null:
+		return
+	var before := var_to_bytes(_state)
+	await RenderingServer.frame_post_draw
+	var covered := root.get_texture().get_image()
+	tree_sprite.hide()
+	await process_frame
+	await RenderingServer.frame_post_draw
+	var open := root.get_texture().get_image()
+	var body: Sprite2D = view.get_node("Body")
+	var source := body.texture.get_image()
+	var transform := body.get_global_transform_with_canvas()
+	var changed := 0
+	for y in source.get_height():
+		for x in source.get_width():
+			if source.get_pixel(x, y).a < 0.99:
+				continue
+			var pixel := Vector2i(transform * (body.offset + Vector2(x, y)))
+			if Rect2i(Vector2i.ZERO, covered.get_size()).has_point(pixel) and covered.get_pixelv(pixel) != open.get_pixelv(pixel):
+				changed += 1
+	expect(changed > 10 if behind else changed == 0, "Actual tree pixels occlude the farmer behind and preserve every farmer pixel in front")
+	tree_sprite.show()
+	await process_frame
+	expect(var_to_bytes(_state) == before, "Pixel occlusion comparison cannot change any simulation/save field")
+
+
+func _props_family() -> void:
+	var view: PlayerView = _world.get_node("Occupants/PlayerView")
+	view.set_process(false)
+	_world.set_process(false)
+	expect(_world._relight != null, "Props use Main's actual day/dusk/night shader")
+	var choice_counts := {}
+	var state_before := var_to_bytes(_state)
+	for id in WorldView.PROP_VARIANTS:
+		var choices := [0, 0]
+		for idx in Grid.CELLS:
+			var cell := Grid.cell(idx)
+			var selected := WorldView._prop_variant(id, cell)
+			expect(selected in WorldView.PROP_VARIANTS[id], "Every map cell selects an authored material/species variant")
+			expect(selected == WorldView._prop_variant(id, cell), "Cell selection stays stable across redraws and ticks")
+			choices[1 if str(selected).ends_with("_b") else 0] += 1
+		expect(choices[0] > choices[1] and choices[1] > 0, "Controlled shape variation keeps the base most common")
+		choice_counts[str(id)] = choices
+	expect(var_to_bytes(_state) == state_before, "Exhaustive decorative choices consume no simulation RNG and write no state")
+	for lighting in 3:
+		_props_fixture(lighting)
+		for variant in 2:
+			_props_put(&"tree", _props_cell(&"tree", variant, Vector2i(12 + variant * 7, 6)))
+			for row in 3:
+				var id: StringName = [&"rock", &"seam", &"ore"][row]
+				_props_put(id, _props_cell(id, variant, Vector2i(11 + row * 7 + variant * 3, 12)))
+		_props_put(&"stump", Vector2i(21, 8))
+		_props_put(&"cow", Vector2i(27, 7))
+		_props_put(&"chicken", Vector2i(31, 7))
+		Entities.spawn(_state, &"walker", Vector2i(29, 10))
+		await _reaction_settle(view)
+		_world.look_at_cell(Vector2i(20, 9))
+		await process_frame
+		_props_check()
+		await _shoot("catalog_light%d" % lighting, "All prop species / both controlled variants / light %d" % lighting)
+		# Production gathering: partial swings, final removal and actual regrowth.
+		var targets := {}
+		for idx in _state["occupants"]:
+			var id: StringName = _state["occupants"][idx]["id"]
+			if Gathering.is_node(id):
+				targets[idx] = id
+				for _hit in int(GameData.GATHERING[id]["hits"]) - 1:
+					expect(Gathering.strike(_state, Grid.cell(idx)).is_empty(), "Partial gathering gives no yield and keeps its prop")
+		await _reaction_settle(view)
+		_props_check()
+		await _shoot("partial_light%d" % lighting, "Partial work: same anchored props, no invented damage state")
+		for idx in targets:
+			var id: StringName = targets[idx]
+			expect(Gathering.strike(_state, Grid.cell(idx)) == GameData.GATHERING[id]["yield"], "Final real gathering swing preserves the exact resource yield")
+			var on := Farm.occupant(_state, Grid.cell(idx))
+			expect(on.get("id", &"") == (&"stump" if id == &"tree" else &""), "Felled trees leave matching stumps; mined nodes disappear")
+		await _reaction_settle(view)
+		_props_check()
+		await _shoot("cleared_light%d" % lighting, "Actual harvest removal: roots/stumps remain, loose rocks clear permanently")
+		for _tick in int(GameData.GATHERING[&"tree"]["regrow_ticks"]):
+			Gathering.tick(_state)
+		for idx in targets:
+			var id: StringName = targets[idx]
+			expect(Farm.occupant(_state, Grid.cell(idx)).get("id", &"") == (&"" if id == &"rock" else id), "Existing regrowth restores the same cell-selected art; loose boulders remain removed")
+		await _reaction_settle(view)
+		_props_check()
+		await _shoot("regrown_light%d" % lighting, "Real regrowth: identical canopy/resource choices at original ground contacts")
+		# Existing livestock ready/collection changes only production state.
+		Livestock.tick(_state)
+		for cell in [Vector2i(27, 7), Vector2i(31, 7)]:
+			_state["livestock"][Grid.index(cell)]["left"] = 1
+		Livestock.tick(_state)
+		await _reaction_settle(view)
+		_props_check()
+		await _shoot("animals_ready_light%d" % lighting, "Native cow/hen remain recognizable when production is ready")
+		for cell in [Vector2i(27, 7), Vector2i(31, 7)]:
+			var id: StringName = Farm.occupant(_state, cell)["id"]
+			expect(Livestock.collect(_state, cell) == GameData.LIVESTOCK[id]["produces"], "Actual livestock collection preserves its product and yield")
+			expect(Livestock.ready_at(_state, cell) == 0, "Collection resets readiness without removing the animal")
+		await _reaction_settle(view)
+		_props_check()
+		await _shoot("animals_collected_light%d" % lighting, "Same grounded species after actual livestock collection")
+		# Dense broad canopies on original one-cell footprints.
+		_props_fixture(lighting)
+		for y in [6, 8, 10]:
+			for x in [10, 12, 14, 16, 18]:
+				_props_put(&"tree", Vector2i(x, y))
+		_set_contact(_state["player"], Vector2i(248, 192))
+		await _reaction_settle(view)
+		_props_check()
+		await _shoot("forest_light%d" % lighting, "Dense mixed canopies: unchanged footprint, visible foreground farmer")
+		# Both tree variants with farmer/walker crossing behind and in front.
+		for subject in 2:
+			_props_fixture(lighting)
+			var left := _props_cell(&"tree", subject, Vector2i(15, 9))
+			var right := _props_cell(&"tree", 1 - subject, Vector2i(25, 9))
+			_props_put(&"tree", left)
+			_props_put(&"tree", right)
+			var enemy := Entities.spawn(_state, &"walker", right)
+			var actor := Entities.get_one(_state, enemy)
+			for step in 4:
+				var dy: int = [-24, -8, 8, 24][step]
+				_set_contact(_state["player"], Vector2i(left.x * 16 + 8, 160 + dy))
+				_set_contact(actor, Vector2i(right.x * 16 + 8, 160 + dy))
+				view._elapsed = 0.0
+				await _reaction_settle(view)
+				_props_check()
+				expect(view.position.y == 160 + dy, "Canopies never move farmer contact or sorting origin")
+				if lighting == 0 and step in [1, 2]:
+					await _props_overlap_pixels(view, left, step == 1)
+				await _shoot("overlap_light%d_variant%d_step%d" % [lighting, subject, step], "Farmer / walker and both full canopies: behind -> front %d" % dy)
+		_state = State.create(9009)
+		_state["phase"] = Phases.NIGHT if lighting == 2 else Phases.DAY
+		_state["day_tick"] = GameData.DAY_TICKS - 1 if lighting == 1 else GameData.DAY_TICKS / 2
+		var farm_before := var_to_bytes(_state)
+		await _reaction_settle(view)
+		_props_check()
+		expect(var_to_bytes(_state) == farm_before, "Full farm props preserve map/occupancy, resources, RNG and every save field")
+		await _shoot("farm_light%d" % lighting, "Production farm density / resources / livestock, light %d" % lighting)
+	var file := FileAccess.open(_folder + "selection.json", FileAccess.WRITE)
+	file.store_string(JSON.stringify(choice_counts, "\t") + "\n")
 
 
 ## Uniform repeated materials plus the production weighted grass selector.
@@ -964,7 +1175,7 @@ func _check_placement() -> void:
 				house_count += 1
 				expect(node.position == Vector2(344, 144), "House node sorts at facade ground contact")
 				expect(node.offset == Vector2(-32, -60), "House roof overhang retains its accepted source pivot")
-			if node.texture.resource_path.ends_with("/tree.png"):
+			if node.texture.resource_path.get_file() in ["tree.png", "tree_b.png"]:
 				expect(node.position == Vector2(200, 160), "Tree sorts by trunk contact, not canopy top")
 				expect(node.offset == Vector2(-20, -44), "Tree uses source-owned pivot")
 	expect(drawn.size() == (_state["occupants"] as Dictionary).size() and house_count == 1,
