@@ -827,31 +827,31 @@
     },
     {
       "output": "sprites/terrain/floor.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/terrain/grass.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/terrain/grass_b.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/terrain/grass_c.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/terrain/grass_d.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/terrain/path.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/terrain/rock.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/terrain/shore_e.png",
@@ -871,7 +871,7 @@
     },
     {
       "output": "sprites/terrain/soil.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/terrain/water.png",

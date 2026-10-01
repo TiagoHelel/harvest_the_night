@@ -1,0 +1,13 @@
+{
+  "id": "path-r1",
+  "date": "2026-10-01",
+  "tool": "built-in ImageGen",
+  "transparent_background": false,
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-8a614ed4-3b6c-4e00-9ca4-f37e73fc07cc.png",
+  "source": "assets/art_source/terrain/path.png",
+  "prompt_text": "Use case: precise-object-edit\nAsset type: production seamless terrain/path pixel tile, downstream exactly 16x16.\nInput image: the provided image is the edit target, the first generated compacted dirt path candidate.\nPrimary request: change ONLY the texture density. Remove all scattered squares and both large diagonal scuff clusters. Leave an almost uniformly calm #96704A warm brown ground, with JUST ONE faint two-cell joined compacted mark of #7A5838, and optionally one tiny #B68A59 highlight attached to it. At least 98 percent flat base, only 2 or 3 of the final 256 native cells differ. Use a coarse enlarged 16x16 lattice, not fine detail. All four outer edges have the same flat base color. Preserve fully opaque edge-to-edge square, top-down flat material, neutral daylight and low contrast. No outline, border, vignette, perspective, scattered dots or gradient. It should repeat quietly under a farmer without a visible repeated diagonal motif.",
+  "references": [
+    "assets/art_source/terrain/candidates/path-r0.png"
+  ],
+  "decision": "Accepted after native/3x repeated patches, exact borders, raw alpha and day/dusk/night Godot actor/farm review."
+}

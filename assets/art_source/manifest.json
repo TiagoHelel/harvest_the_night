@@ -5884,6 +5884,494 @@
       "generation_task": "0006",
       "revision": 0,
       "approval": "Reviewed native/3x alpha, stable body/feet and distinct symbol; runtime gate recorded in review"
+    },
+    {
+      "id": "terrain/grass",
+      "source": "assets/art_source/terrain/grass.png",
+      "source_sha256": "f9084889428db5aed278e6893118995da00a6e1f0895ee9346cd6a64600b39d6",
+      "crop_xywh": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        16
+      ],
+      "content_scale": 0.012759170653907496,
+      "content_anchor_xy": [
+        8,
+        16
+      ],
+      "alpha_threshold": 128,
+      "owner": "raster",
+      "output": "sprites/terrain/grass.png",
+      "output_sha256": "4d1d187493ab8275082ea8aed39ab884e50384b9bb35cc750276ffbd3b54fc3e",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "terrain_grass",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "prompt": "implementation/sprites/generation/0007-grass.prompt.txt",
+      "prompt_sha256": "db0de86d46c00d0c6e2ae705bdb2912d37a0c46aa7ee7c4197113b659ea0cf8d",
+      "references": [
+        {
+          "path": "assets/art_source/masters/style-day.png",
+          "role": "generation reference or original edit target; roles in exact prompt",
+          "sha256": "148b5e004b9ed8f4adb1a90a65887e8aa959647b4eccef64e1bad7f17ef0ce09"
+        },
+        {
+          "path": "docs/reference-sheet.png",
+          "role": "generation reference or original edit target; roles in exact prompt",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0007",
+      "revision": 0,
+      "approval": "Native/3x tiling reviewed; runtime evidence in implementation/sprites/reviews/0007/REVIEW.md"
+    },
+    {
+      "id": "terrain/grass_b",
+      "source": "assets/art_source/terrain/grass_b.png",
+      "source_sha256": "cfd24bb952e47581974d3c4a26f583e361c05826c0d971da7a62db3ad27669a6",
+      "crop_xywh": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        16
+      ],
+      "content_scale": 0.012759170653907496,
+      "content_anchor_xy": [
+        8,
+        16
+      ],
+      "alpha_threshold": 128,
+      "owner": "raster",
+      "output": "sprites/terrain/grass_b.png",
+      "output_sha256": "e65b863607c80fc98446bfd54f5db7879dc2c22284c3b01f96a8343ea038d4cd",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "terrain_grass_b",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "prompt": "implementation/sprites/generation/0007-grass_b.prompt.txt",
+      "prompt_sha256": "c652de5362720e592be8f0cccaee4c0c2818f887524f22a5e57fc76096520f6d",
+      "references": [
+        {
+          "path": "assets/art_source/terrain/grass.png",
+          "role": "generation reference or original edit target; roles in exact prompt",
+          "sha256": "f9084889428db5aed278e6893118995da00a6e1f0895ee9346cd6a64600b39d6"
+        },
+        {
+          "path": "assets/art_source/masters/style-day.png",
+          "role": "generation reference or original edit target; roles in exact prompt",
+          "sha256": "148b5e004b9ed8f4adb1a90a65887e8aa959647b4eccef64e1bad7f17ef0ce09"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0007",
+      "revision": 0,
+      "approval": "Native/3x tiling reviewed; runtime evidence in implementation/sprites/reviews/0007/REVIEW.md"
+    },
+    {
+      "id": "terrain/grass_c",
+      "source": "assets/art_source/terrain/grass_c.png",
+      "source_sha256": "d854a3fba84668d19c56fa50b691c8f06d68d23af1fca70ac232f25233f03a8a",
+      "crop_xywh": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        16
+      ],
+      "content_scale": 0.012759170653907496,
+      "content_anchor_xy": [
+        8,
+        16
+      ],
+      "alpha_threshold": 128,
+      "owner": "raster",
+      "output": "sprites/terrain/grass_c.png",
+      "output_sha256": "6bebf9ccc1902f7352b47dd8f8f06ebcfd4f44f23d6c76dbc84516ff214f66b8",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "terrain_grass_c",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "prompt": "implementation/sprites/generation/0007-grass_c.prompt.txt",
+      "prompt_sha256": "d2c15618b26bf0c2305ae1252e82c739de5e4695d782480be2cc805ed7757777",
+      "references": [
+        {
+          "path": "assets/art_source/terrain/grass.png",
+          "role": "generation reference or original edit target; roles in exact prompt",
+          "sha256": "f9084889428db5aed278e6893118995da00a6e1f0895ee9346cd6a64600b39d6"
+        },
+        {
+          "path": "assets/art_source/masters/style-day.png",
+          "role": "generation reference or original edit target; roles in exact prompt",
+          "sha256": "148b5e004b9ed8f4adb1a90a65887e8aa959647b4eccef64e1bad7f17ef0ce09"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0007",
+      "revision": 0,
+      "approval": "Native/3x tiling reviewed; runtime evidence in implementation/sprites/reviews/0007/REVIEW.md"
+    },
+    {
+      "id": "terrain/grass_d",
+      "source": "assets/art_source/terrain/grass_d.png",
+      "source_sha256": "597b415b6712308fa1ab8455d5c3d898c0cba01fd2d75eaf08a8d03108ac4658",
+      "crop_xywh": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        16
+      ],
+      "content_scale": 0.012759170653907496,
+      "content_anchor_xy": [
+        8,
+        16
+      ],
+      "alpha_threshold": 128,
+      "owner": "raster",
+      "output": "sprites/terrain/grass_d.png",
+      "output_sha256": "9219456f2ef872c74713287178a95d6eacaf864019a7e3c3c9b48ba2d6ed61f2",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "terrain_grass_d",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "prompt": "implementation/sprites/generation/0007-grass_d.prompt.txt",
+      "prompt_sha256": "6bc792ab8585710229db4d17b5db54dd835b8f075b404cd512a4bc71572bf2bb",
+      "references": [
+        {
+          "path": "assets/art_source/terrain/grass.png",
+          "role": "generation reference or original edit target; roles in exact prompt",
+          "sha256": "f9084889428db5aed278e6893118995da00a6e1f0895ee9346cd6a64600b39d6"
+        },
+        {
+          "path": "assets/art_source/masters/style-day.png",
+          "role": "generation reference or original edit target; roles in exact prompt",
+          "sha256": "148b5e004b9ed8f4adb1a90a65887e8aa959647b4eccef64e1bad7f17ef0ce09"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0007",
+      "revision": 0,
+      "approval": "Native/3x tiling reviewed; runtime evidence in implementation/sprites/reviews/0007/REVIEW.md"
+    },
+    {
+      "id": "terrain/soil",
+      "source": "assets/art_source/terrain/soil.png",
+      "source_sha256": "66b14e30ca51158206c29c56c34908b0ee696d9c088f640f9d54897d9d1df754",
+      "crop_xywh": [
+        46,
+        0,
+        1152,
+        1152
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        16
+      ],
+      "content_scale": 0.013888888888888888,
+      "content_anchor_xy": [
+        8,
+        16
+      ],
+      "alpha_threshold": 128,
+      "owner": "raster",
+      "output": "sprites/terrain/soil.png",
+      "output_sha256": "7f2a394dee9d4801c32da75bc1ddec0522c035936d450a48bff2f3894cc79d4e",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "gutter_xy": [
+        46,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "terrain_soil",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "prompt": "implementation/sprites/generation/0007-soil-r1.prompt.txt",
+      "prompt_sha256": "72c1024e156b5a6a4893e6af8947c65a4de3220e9b66e1e59353910834d6ce9d",
+      "references": [
+        {
+          "path": "assets/art_source/terrain/candidates/soil-r0.png",
+          "role": "generation reference or original edit target; roles in exact prompt",
+          "sha256": "f5e42f23de312c24f63bdb7717b9a1dc751df6ceeb6bf2d46f46db4441483a1c"
+        },
+        {
+          "path": "implementation/sprites/generation/0007-soil.prompt.txt",
+          "role": "original full production brief in revision chain",
+          "sha256": "1ec67a36dc0b319f85c4631dd8da6637de2355c0fc9f1e6be013561aa6a751d4"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0007",
+      "revision": 1,
+      "approval": "Native/3x tiling reviewed; runtime evidence in implementation/sprites/reviews/0007/REVIEW.md"
+    },
+    {
+      "id": "terrain/path",
+      "source": "assets/art_source/terrain/path.png",
+      "source_sha256": "aa46572715df423dd98f736340cd7e0e3ea72c16b5377afaab887f1068824ca0",
+      "crop_xywh": [
+        46,
+        46,
+        1152,
+        1152
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        16
+      ],
+      "content_scale": 0.013888888888888888,
+      "content_anchor_xy": [
+        8,
+        16
+      ],
+      "alpha_threshold": 128,
+      "owner": "raster",
+      "output": "sprites/terrain/path.png",
+      "output_sha256": "bd3031d7f35f0b3b89a7dd0d9c55676aa80c4c6b0b43a9e1ab6ee58dbb83001d",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "gutter_xy": [
+        46,
+        46
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "terrain_path",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "prompt": "implementation/sprites/generation/0007-path-r1.prompt.txt",
+      "prompt_sha256": "1691d10567ce7eec1e337bd0c5ccd1338e695654d469736ab324364c603945db",
+      "references": [
+        {
+          "path": "assets/art_source/terrain/candidates/path-r0.png",
+          "role": "generation reference or original edit target; roles in exact prompt",
+          "sha256": "5302f4c9cf39155758466432da76e7537332257c7f551299a2207c1668423558"
+        },
+        {
+          "path": "implementation/sprites/generation/0007-path.prompt.txt",
+          "role": "original full production brief in revision chain",
+          "sha256": "4536f589a11605e71a665ee06e1f3023853ca8ad123e571a145da0954909bb88"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0007",
+      "revision": 1,
+      "approval": "Native/3x tiling reviewed; runtime evidence in implementation/sprites/reviews/0007/REVIEW.md"
+    },
+    {
+      "id": "terrain/floor",
+      "source": "assets/art_source/terrain/floor.png",
+      "source_sha256": "d7c1b998f4007529a3913c616e31ee69d4fc0c1600edcd7cdf091c16bb9dad2d",
+      "crop_xywh": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        16
+      ],
+      "content_scale": 0.012759170653907496,
+      "content_anchor_xy": [
+        8,
+        16
+      ],
+      "alpha_threshold": 128,
+      "owner": "raster",
+      "output": "sprites/terrain/floor.png",
+      "output_sha256": "c0f3bbf8b3b77b1bb24feae99b55666698f9ec37e578b470c8819b9217f6eb8d",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "terrain_floor",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "prompt": "implementation/sprites/generation/0007-floor-r1.prompt.txt",
+      "prompt_sha256": "cd07bfd29ba24b4fb02713f3909c2f4b65b352c349720924d1fddd533f045907",
+      "references": [
+        {
+          "path": "assets/art_source/terrain/candidates/floor-r0.png",
+          "role": "generation reference or original edit target; roles in exact prompt",
+          "sha256": "c1152ca46fa7ed0232a434be84961e18fb4af95e4940d3508e9621e64eeede06"
+        },
+        {
+          "path": "implementation/sprites/generation/0007-floor.prompt.txt",
+          "role": "original full production brief in revision chain",
+          "sha256": "4323b580b3434400730098b1cd723da96cd77c6a3079147bec418468b54eb681"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0007",
+      "revision": 1,
+      "approval": "Native/3x tiling reviewed; runtime evidence in implementation/sprites/reviews/0007/REVIEW.md"
+    },
+    {
+      "id": "terrain/rock",
+      "source": "assets/art_source/terrain/rock.png",
+      "source_sha256": "46c3c7f4d4d5bae38b98a47622c42cb6b7104950e370724a03303471c3ddec11",
+      "crop_xywh": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        16
+      ],
+      "content_scale": 0.012759170653907496,
+      "content_anchor_xy": [
+        8,
+        16
+      ],
+      "alpha_threshold": 128,
+      "owner": "raster",
+      "output": "sprites/terrain/rock.png",
+      "output_sha256": "6ebc2fbb298286967c154f3bb1018e54549ebcc7898551cae3194b7ba62f852b",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "terrain_rock",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "prompt": "implementation/sprites/generation/0007-rock-r1.prompt.txt",
+      "prompt_sha256": "bc3c7a17c41b80e2a41574284968760db5032caeca4a357b6cce62631b9a5fdc",
+      "references": [
+        {
+          "path": "assets/art_source/terrain/candidates/rock-r0.png",
+          "role": "generation reference or original edit target; roles in exact prompt",
+          "sha256": "cb512b76f9391373e4f4bbefd0cc8dd5d4e28d1c4436ba6861fb7d712bd19a3a"
+        },
+        {
+          "path": "implementation/sprites/generation/0007-rock.prompt.txt",
+          "role": "original full production brief in revision chain",
+          "sha256": "7e63a740cf270f6f1d8988c87bca89f9224f520397591d7c7270d1e3a654f2af"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0007",
+      "revision": 1,
+      "approval": "Native/3x tiling reviewed; runtime evidence in implementation/sprites/reviews/0007/REVIEW.md"
     }
   ]
 }

@@ -1,0 +1,14 @@
+{
+  "id": "soil",
+  "date": "2026-10-01",
+  "tool": "built-in ImageGen",
+  "transparent_background": false,
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-cbf0e275-8b64-40d8-bd23-aff69ee1450d.png",
+  "source": "assets/art_source/terrain/candidates/soil-r0.png",
+  "prompt_text": "Use case: stylized-concept\nAsset type: production raster terrain tile source for HARVEST THE NIGHT, a cozy farm that becomes a fortress against zombies at night.\nInput images: Image 1 is the approved neutral-day material/style study, a visual reference only. Do not copy its buildings, actors or dense ground detail. Image 2 is the reference sheet, also a style reference only, not an edit target.\nStyle/medium: hand-crafted low-contrast pixel art with deliberate flat pixel clusters, restrained texture and readable materials. Render as a clearly visible coarse 16 by 16 pixel lattice enlarged to fill the whole square source; no fine subpixel detail.\nComposition/framing: ONE fully opaque square material tile filling the image edge to edge, direct top-down surface on a rectangular grid. Final native output is exactly 16x16, contact pivot (8,16); this is a downstream reduction target. No diamond/isometric block or tile shown in perspective. No contact shadow.\nLighting/mood: neutral daytime, very subtle upper-left material highlights; runtime supplies dusk/night lighting.\nConstraints: opposite edges join seamlessly when repeated, no frame, border, vignette, central emblem, labels, text, watermark or UI. Calm open areas, no random speckles, dots, flowers, objects, cast shadows, blur, gradients, smooth painting or 3D render. All texture must survive nearest reduction to 16x16.\nPrimary request: soil ground, asset terrain/soil. ONE quiet earthy brown bare ground tile. Dominant flat #7A5838 warm soil, with at most two small irregular joined dark clod clusters #5C422A and a tiny #96704A dry rim. At least 88% calm base. This is unplanted bare soil, NOT furrowed crop rows or a planted garden; tilled/wet crop beds are separate assets. Every point of the outermost 1/16 on all four sides uses the dominant base color for exact seamless repeats. Surface color and grouped detail should distinguish it from green lawn and lighter compacted paths while keeping actor outlines prominent. No random pebbles everywhere, stripes, border, pit, crack web, leaves or props.",
+  "references": [
+    "assets/art_source/masters/style-day.png",
+    "docs/reference-sheet.png"
+  ],
+  "decision": "Rejected: native has 16% scattered contrasting pixels and one mismatched horizontal opposite-border pixel; targeted texture simplification required."
+}

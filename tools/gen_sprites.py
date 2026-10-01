@@ -347,19 +347,23 @@ def render(name, spec):
     return width, height, pixels
 
 
-def tile_of(name):
+def tile_of(name, raster=None):
     """One terrain tile by name, as a list of RGBA rows."""
     key = "terrain/" + name
     if art_ownership.registry().get("sprites/" + key + ".png") == "raster":
         from import_art import load_manifest, build
-        files, _ = build(load_manifest())
-        from PIL import Image
-        import io
-        with Image.open(io.BytesIO(files["sprites/" + key + ".png"])) as image:
-            if image.size != (TILE_PX, TILE_PX):
-                raise ValueError("Raster terrain must remain 16x16: " + key)
-            pixels = list(image.convert("RGBA").getdata())
-            return [pixels[y * TILE_PX:(y + 1) * TILE_PX] for y in range(TILE_PX)]
+        # Local to this atlas build: reuse validated sources, never stale globals
+        # or runtime PNGs. Each new invocation rechecks manifest/source hashes.
+        if raster is None:
+            raster = {}
+        if "images" not in raster:
+            raster["images"] = build(load_manifest())[1]
+        image = raster["images"][key]
+        if image.size != (TILE_PX, TILE_PX):
+            raise ValueError("Raster terrain must remain 16x16: " + key)
+        from import_art import samples
+        pixels = list(samples(image.convert("RGBA")))
+        return [pixels[y * TILE_PX:(y + 1) * TILE_PX] for y in range(TILE_PX)]
     if key not in SPRITES:
         raise KeyError("the atlas wants %s and there is no map for it" % key)
     width, height, pixels = render(key, SPRITES[key])
@@ -385,7 +389,7 @@ def blank_tile():
     return [[(0, 0, 0, 0)] * TILE_PX for _ in range(TILE_PX)]
 
 
-def edge_row(prefix):
+def edge_row(prefix, raster=None):
     """Sixteen tiles, one per combination of the four sides.
 
     **This is the autotiling, and it is four maps rather than forty-seven.**
@@ -394,7 +398,7 @@ def edge_row(prefix):
     which is a corner that nobody drew. The view computes the same four bits
     from the same four neighbours and reads the tile straight off.
     """
-    sides = [tile_of("%s_%s" % (prefix, side)) for side in EDGE_SIDES]
+    sides = [tile_of("%s_%s" % (prefix, side), raster) for side in EDGE_SIDES]
     row = []
     for mask in range(16):
         tile = blank_tile()
@@ -412,11 +416,11 @@ def build_atlas():
     animation frame or a composited edge. Short rows are padded with empty
     tiles, because an atlas has to be a rectangle.
     """
-    rows = []
+    rows, raster = [], {}
     for names in ATLAS_ROWS:
-        rows.append([tile_of(name) for name in names])
+        rows.append([tile_of(name, raster) for name in names])
     for prefix in EDGE_ROWS:
-        rows.append(edge_row(prefix))
+        rows.append(edge_row(prefix, raster))
 
     across = max(len(row) for row in rows)
     width = across * TILE_PX

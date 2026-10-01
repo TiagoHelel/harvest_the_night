@@ -80,8 +80,32 @@ def main():
             passed("Missing authored work recovery is rejected without borrowing another verb")
         corrupt(import_art.PLAYER_METADATA, "tools/import_art.py")
         passed("Tampered player count/canvas/pivot metadata is rejected")
-        corrupt(ROOT / "sprites/terrain/grass.png", "tools/gen_sprites.py")
+        unmigrated = next(p for p, owner in sorted(art_ownership.registry().items())
+                          if owner == "ascii" and p != "sprites/terrain/atlas.png")
+        corrupt(ROOT / unmigrated, "tools/gen_sprites.py")
         passed("Tampered unmigrated ASCII output is still rejected")
+        terrain = next((e for e in data["assets"] if e["id"] == "terrain/grass"), None)
+        if terrain:
+            corrupt(ROOT / terrain["source"], "tools/gen_sprites.py")
+            passed("Atlas builder rejects changed accepted terrain source")
+            corrupt(ROOT / terrain["source"], "tools/gen_sprites.py", missing=True)
+            passed("Atlas builder rejects missing accepted terrain source without old ASCII fallback")
+            corrupt(ROOT / terrain["output"], "tools/check_terrain_art.py")
+            passed("Terrain checker rejects tampered migrated tile")
+            corrupt(ROOT / "sprites/terrain/atlas.png", "tools/check_terrain_art.py")
+            passed("Terrain checker rejects tampered composite atlas")
+            from check_terrain_art import validate_tile
+            for name, position, color in [
+                    ("Terrain seam mismatch rejected", (0, 5), (0, 0, 0, 255)),
+                    ("Transparent terrain hole rejected", (7, 7), (0, 0, 0, 0))]:
+                broken = images["terrain/grass"].copy()
+                broken.putpixel(position, color)
+                try:
+                    validate_tile(broken, "deliberate fault")
+                except ValueError:
+                    passed(name)
+                else:
+                    raise AssertionError(name)
         legacy_player = next((p for p, owner in art_ownership.registry().items() if owner == "player_sheet"), None)
         if legacy_player:
             corrupt(ROOT / legacy_player, "tools/cut_sheet.py")

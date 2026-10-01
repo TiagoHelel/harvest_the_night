@@ -1,0 +1,14 @@
+{
+  "id": "rock",
+  "date": "2026-10-01",
+  "tool": "built-in ImageGen",
+  "transparent_background": false,
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-728f15a7-6766-4423-8957-d17bff51559b.png",
+  "source": "assets/art_source/terrain/candidates/rock-r0.png",
+  "prompt_text": "Use case: stylized-concept\nAsset type: production raster terrain tile source for HARVEST THE NIGHT, a cozy farm that becomes a fortress against zombies at night.\nInput images: Image 1 is the approved neutral-day material/style study, a visual reference only. Do not copy its buildings, actors or dense ground detail. Image 2 is the reference sheet, also a style reference only, not an edit target.\nStyle/medium: hand-crafted low-contrast pixel art with deliberate flat pixel clusters, restrained texture and readable materials. Render as a clearly visible coarse 16 by 16 pixel lattice enlarged to fill the whole square source; no fine subpixel detail.\nComposition/framing: ONE fully opaque square material tile filling the image edge to edge, direct top-down surface on a rectangular grid. Final native output is exactly 16x16, contact pivot (8,16); this is a downstream reduction target. No diamond/isometric block or tile shown in perspective. No contact shadow.\nLighting/mood: neutral daytime, very subtle upper-left material highlights; runtime supplies dusk/night lighting.\nConstraints: opposite edges join seamlessly when repeated, no frame, border, vignette, central emblem, labels, text, watermark or UI. Calm open areas, no random speckles, dots, flowers, objects, cast shadows, blur, gradients, smooth painting or 3D render. All texture must survive nearest reduction to 16x16.\nPrimary request: terrain/rock, quiet natural gray rocky ground replacing an artificial brick pattern. A flat opaque rocky terrain surface in muted #6E6C78. Two or three subdued irregular angular rock planes with #52505C shadows and at most a couple #8C8A96 highlight cells, formed of broad joined coarse pixel clusters. Most of the surface stays the main gray. Place all texture inside the tile; the outer two coarse rows and columns on all sides are exactly flat #6E6C78 so seams are invisible when repeated. This is terrain under actors, not an isolated boulder or floating rock prop. No brickwork, mortar joints, rectangles, masonry courses, cobblestone grid, white crack web, random dots, heavy lines, bevel, perspective or border. Only three gray colors, gentle contrast, true 16x16 coarse enlarged pixel lattice, calm gaps.",
+  "references": [
+    "assets/art_source/masters/style-day.png",
+    "docs/reference-sheet.png"
+  ],
+  "decision": "Rejected: native repeated patch had distracting numerous angular marks, only 77 percent calm ground."
+}

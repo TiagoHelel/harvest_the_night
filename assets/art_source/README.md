@@ -125,3 +125,18 @@ checks state selection, suppression, lighting, anchors, four map corners and
 shared shadow consumers. Add an output folder for captures and real-render
 pixel equivalence of all four split reactions, plus localized shadow contrast.
 `reviews/0006/build_review.py` composes actual captures at native/nearest-3x.
+
+Task 0007 adds `terrain/{grass,grass_b,grass_c,grass_d,soil,path,floor,rock}.png`.
+Twelve built-in calls produced eight accepted opaque sources and four preserved
+rejected candidates. Exact prompts, reference roles, actual returned files and
+hashes are under `implementation/sprites/generation/0007-*`. Ground stays 16x16
+with pivot (8,16). Soil/path use measured 1152-square sampling crops so their
+small connected source marks survive nearest reduction. All other tiles reduce
+their full 1254-square source. No pixels are repainted or manually seam-repaired.
+
+The atlas writer consumes these source recipes with a cache local to one build;
+it revalidates source hashes on every invocation. `tools/check_terrain_art.py`
+proves full native opacity, exact opposing/mixed grass borders, accepted tile
+bytes and all 80 atlas cells. Existing water and both edge rows remain unchanged
+until task 0008. `tools/show_art.py --terrain --check` covers production material
+selection and native actors under Main's day/dusk/night relighting pipeline.

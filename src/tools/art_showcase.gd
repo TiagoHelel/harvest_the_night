@@ -30,6 +30,12 @@ func _run() -> void:
 		if arg.begins_with("--out="):
 			_folder = "res://" + arg.substr(6).trim_suffix("/") + "/"
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(_folder))
+	if args.has("--terrain"):
+		# Use Main's real relighting pipeline for all three material light states.
+		var relight := Relight.new()
+		relight.name = "Relight"
+		relight.layer = 1
+		root.add_child(relight)
 	_world = load("res://scenes/World.tscn").instantiate()
 	root.add_child(_world)
 	await process_frame
@@ -55,6 +61,11 @@ func _run() -> void:
 	player["facing"] = Player.SOUTH
 	player["action"] = {}
 	var actor := Entities.get_one(_state, enemy)
+	if args.has("--terrain"):
+		await _terrain_materials()
+		print("TERRAIN SHOWCASE: %d checks, %d failed" % [_checks, _failed])
+		quit(1 if _failed > 0 else 0)
+		return
 	if args.has("--reactions"):
 		await _reactions()
 		print("PLAYER REACTIONS: %d checks, %d failed" % [_checks, _failed])
@@ -136,6 +147,62 @@ func _run() -> void:
 	await _contacts()
 	print("ART SHOWCASE: %d checks, %d failed" % [_checks, _failed])
 	quit(1 if _failed > 0 else 0)
+
+
+## Uniform repeated materials plus the production weighted grass selector.
+## Fixture-only maps; the authoritative FARM_MAP and walkability never change.
+func _terrain_materials() -> void:
+	var view: PlayerView = _world.get_node("Occupants/PlayerView")
+	view.set_process(false)
+	_world.set_process(false)
+	expect(_world._relight != null, "Terrain fixtures use the same relight shader as Main")
+	var names := ["grass", "grass_b", "grass_c", "grass_d", "soil", "path", "floor", "rock", "grass_mixed"]
+	var kinds := [Farm.Terrain.GRASS, Farm.Terrain.GRASS, Farm.Terrain.GRASS, Farm.Terrain.GRASS,
+		Farm.Terrain.SOIL, Farm.Terrain.PATH, Farm.Terrain.FLOOR, Farm.Terrain.ROCK, Farm.Terrain.GRASS]
+	for lighting in 3:
+		for material in names.size():
+			_state = State.create(7007)
+			for key in ["occupants", "plots", "entities", "livestock", "crafting", "produced"]:
+				(_state[key] as Dictionary).clear()
+			var terrain: PackedByteArray = _state["terrain"]
+			terrain.fill(kinds[material])
+			_state["terrain"] = terrain
+			_state["phase"] = Phases.NIGHT if lighting == 2 else Phases.DAY
+			_state["day_tick"] = GameData.DAY_TICKS - 1 if lighting == 1 else GameData.DAY_TICKS / 2
+			_state["tick"] = GameData.DUSK_AT_TICK / 2
+			_state["player"]["facing"] = Player.SOUTH
+			_set_contact(_state["player"], Vector2i(296, 176))
+			var enemy := Entities.spawn(_state, &"walker", Vector2i(21, 10))
+			_set_contact(Entities.get_one(_state, enemy), Vector2i(344, 176))
+			var before := var_to_bytes(_state)
+			await _reaction_settle(view)
+			_world.look_at_cell(Vector2i(20, 9))
+			var tiles: TileMapLayer = _world.get_node("Terrain")
+			# Pure grass variants use the same actual atlas cells as production.
+			if material < 4:
+				for idx in Grid.CELLS:
+					tiles.set_cell(Grid.cell(idx), 0, Vector2i(material, WorldView.ROW_GRASS))
+			for idx in Grid.CELLS:
+				var cell := Grid.cell(idx)
+				var wanted := Vector2i(material, WorldView.ROW_GRASS) if material < 4 else WorldView._base_tile(kinds[material], cell)
+				expect(tiles.get_cell_atlas_coords(cell) == wanted, "Every fixture cell selects its accepted material/grass variant")
+			var source: TileSetAtlasSource = tiles.tile_set.get_source(0)
+			expect(source.texture.resource_path == WorldView.TERRAIN_ATLAS, "World draws the committed source-owned atlas")
+			expect(source.texture.get_size() == Vector2(256, 80), "Native terrain atlas row shape is unchanged")
+			expect(view.position == Vector2(296, 176), "Terrain art cannot move farmer feet")
+			expect(view.get_node("Body").offset == Vector2(-24, -44), "Farmer retains the accepted body pivot")
+			expect(var_to_bytes(_state) == before, "Material/lighting view changes cannot alter any serialized state")
+			await _shoot("material_%s_light%d" % [names[material], lighting], "%s / day-dusk-night %d / native tiles and actors" % [names[material], lighting])
+		# The unmodified farm, including paths, rocky ground and the wooden dock.
+		_state = State.create(7007)
+		var farm_before := var_to_bytes(_state["terrain"])
+		_state["phase"] = Phases.NIGHT if lighting == 2 else Phases.DAY
+		_state["day_tick"] = GameData.DAY_TICKS - 1 if lighting == 1 else GameData.DAY_TICKS / 2
+		var before := var_to_bytes(_state)
+		await _reaction_settle(view)
+		expect(var_to_bytes(_state["terrain"]) == farm_before and var_to_bytes(_state) == before,
+			"Full farm keeps its authoritative terrain, occupants, positions and save fields")
+		await _shoot("farm_light%d" % lighting, "Unchanged FARM_MAP / day-dusk-night %d" % lighting)
 
 
 func _add_house(corner: Vector2i) -> void:

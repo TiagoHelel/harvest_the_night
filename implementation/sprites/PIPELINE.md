@@ -217,3 +217,26 @@ unchanged by the view. Player/tree/enemy shadow uses stay covered; real-render
 comparison measures its small ground contact against a shadow-hidden control.
 The owner-sheet cutter now writes zero frames and still validates merged player
 metadata. The shared `actors/shadow.png` is ground art, not a PlayerFrames pose.
+
+Task 0007 migrates the eight existing ground materials: four grass choices,
+soil, path, floor and rock. Sources are fully opaque and runtime tiles stay
+16x16. `gen_sprites.build_atlas()` reads validated raster recipes once per
+invocation, rather than using old ASCII maps or cached runtime PNGs for migrated
+cells. Its cache is local to a build so missing/changed sources always fail on
+the next invocation. Atlas remains 256x80: terrain enum row, three water frames,
+four grass choices, sixteen grass-edge masks and sixteen shore masks.
+
+```powershell
+python tools/check_terrain_art.py
+python tools/show_art.py --terrain --check
+python tools/show_art.py --terrain --out=implementation/shots/sprites/<task-id>/terrain
+python implementation/sprites/reviews/0007/build_review.py
+```
+
+The terrain source checker compares all eight runtime tiles and all atlas bytes
+against source rebuilds, verifies opacity, opposing borders and shared borders
+between every grass choice. Fixtures render all eight materials plus the actual
+weighted grass selection under day/dusk/night with the real Relight shader,
+farmer/walker feet and unchanged farm. Complete serialized state is compared
+before/after rendering. Uniform maps belong only to these fixtures. No terrain
+enum, weighted selector, FARM_MAP, walkability, collision or core rule changes.

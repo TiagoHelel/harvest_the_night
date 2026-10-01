@@ -1,0 +1,6 @@
+Use case: precise-object-edit
+Asset type: corrected fully opaque terrain/soil source for HARVEST THE NIGHT.
+Input image: Image 1 is the soil candidate and sole edit target.
+Primary request: Change ONLY the surface texture to remove the distracting scattered speckles. The native 16x16 preview has 16% scattered contrasting dots and one mismatched opposite-border pixel. It must become a calm bare soil tile.
+Correction: make at least 96% of the full square a completely flat solid #7A5838 brown. Keep just ONE tiny connected irregular clod mark a little left of center: at most THREE pixels on an imagined 16x16 lattice, #5C422A shadow with optionally ONE #96704A adjacent light pixel. Remove ALL other disconnected dot texture, fine grain and gradients. Every point in the outermost 1/8 of the image on all sides must be exactly the same #7A5838 flat fill as the calm interior; no perimeter outline or visible border stripe.
+Preserve: ONE square opaque edge-to-edge dirt material, top-down view, original earth identity and source framing, no prop or crop, no ground shadow. Downstream 16x16, pivot (8,16), genuine opacity across the whole square. Do not add text, label, watermark, checkerboard, framing, holes, furrows or new forms. Opposite edges must match exactly.

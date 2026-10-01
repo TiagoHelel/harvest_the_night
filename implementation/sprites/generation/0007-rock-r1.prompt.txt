@@ -1,0 +1,4 @@
+Use case: precise-object-edit
+Asset type: terrain/rock natural rocky ground, native 16x16.
+Input image: edit target is the generated gray rocky terrain.
+Primary request: change ONLY texture density. Erase the numerous scattered angular patches. Keep flat muted #6E6C78 gray on at least 95 percent of the tile, with just TWO small joined angular rock flecks, each occupying about 3 of the final 256 coarse pixels. Each small fleck has two #52505C shadow cells and one attached #8C8A96 highlight cell. Space them asymmetrically in the interior; all four outermost two coarse rows/columns are exactly base gray. True coarse 16x16 pixel lattice filling the square edge to edge, fully opaque. Preserve natural gray material and neutral daytime. No mortar, brick pattern, regular tile lines, connected crack web, random noise, detached dots, perspective, isolated boulders, outline or gradients. Must repeat quietly under actors without creating a conspicuous diagonal glyph.

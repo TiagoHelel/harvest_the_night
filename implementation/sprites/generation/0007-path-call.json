@@ -1,0 +1,14 @@
+{
+  "id": "path",
+  "date": "2026-10-01",
+  "tool": "built-in ImageGen",
+  "transparent_background": false,
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-d0ea1e6c-74dc-426b-83da-e2b5094b3532.png",
+  "source": "assets/art_source/terrain/candidates/path-r0.png",
+  "prompt_text": "Use case: stylized-concept\nAsset type: production raster terrain tile source for HARVEST THE NIGHT, a cozy farm that becomes a fortress against zombies at night.\nInput images: Image 1 is the approved neutral-day material/style study, a visual reference only. Do not copy its buildings, actors or dense ground detail. Image 2 is the reference sheet, also a style reference only, not an edit target.\nStyle/medium: hand-crafted low-contrast pixel art with deliberate flat pixel clusters, restrained texture and readable materials. Render as a clearly visible coarse 16 by 16 pixel lattice enlarged to fill the whole square source; no fine subpixel detail.\nComposition/framing: ONE fully opaque square material tile filling the image edge to edge, direct top-down surface on a rectangular grid. Final native output is exactly 16x16, contact pivot (8,16); this is a downstream reduction target. No diamond/isometric block or tile shown in perspective. No contact shadow.\nLighting/mood: neutral daytime, very subtle upper-left material highlights; runtime supplies dusk/night lighting.\nConstraints: opposite edges join seamlessly when repeated, no frame, border, vignette, central emblem, labels, text, watermark or UI. Calm open areas, no random speckles, dots, flowers, objects, cast shadows, blur, gradients, smooth painting or 3D render. All texture must survive nearest reduction to 16x16.\nPrimary request: terrain/path, a quiet warm compacted dirt walking path, lighter than brown cultivated soil. Main flat color #96704A occupies at least 90 percent of the tile. One or two tiny connected worn clusters of #7A5838, with barely one tiny #B68A59 highlight. Render only a few interior coarse lattice cells of texture. The outer two native pixel rows and columns are exactly the flat main color on every side for invisible square joins. No paving stones, tile grid, furrows, gravel dots or spots. Flat ground with no outer outline. Must remain visually calm below actors.",
+  "references": [
+    "assets/art_source/masters/style-day.png",
+    "docs/reference-sheet.png"
+  ],
+  "decision": "Rejected: repeated patch had conspicuous diagonal scuffs and scattered squares despite seamless borders."
+}

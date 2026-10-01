@@ -1,0 +1,14 @@
+{
+  "id": "floor",
+  "date": "2026-10-01",
+  "tool": "built-in ImageGen",
+  "transparent_background": false,
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-a19fa8fe-fb18-4737-9f38-433100b15d44.png",
+  "source": "assets/art_source/terrain/candidates/floor-r0.png",
+  "prompt_text": "Use case: stylized-concept\nAsset type: production raster terrain tile source for HARVEST THE NIGHT, a cozy farm that becomes a fortress against zombies at night.\nInput images: Image 1 is the approved neutral-day material/style study, a visual reference only. Do not copy its buildings, actors or dense ground detail. Image 2 is the reference sheet, also a style reference only, not an edit target.\nStyle/medium: hand-crafted low-contrast pixel art with deliberate flat pixel clusters, restrained texture and readable materials. Render as a clearly visible coarse 16 by 16 pixel lattice enlarged to fill the whole square source; no fine subpixel detail.\nComposition/framing: ONE fully opaque square material tile filling the image edge to edge, direct top-down surface on a rectangular grid. Final native output is exactly 16x16, contact pivot (8,16); this is a downstream reduction target. No diamond/isometric block or tile shown in perspective. No contact shadow.\nLighting/mood: neutral daytime, very subtle upper-left material highlights; runtime supplies dusk/night lighting.\nConstraints: opposite edges join seamlessly when repeated, no frame, border, vignette, central emblem, labels, text, watermark or UI. Calm open areas, no random speckles, dots, flowers, objects, cast shadows, blur, gradients, smooth painting or 3D render. All texture must survive nearest reduction to 16x16.\nPrimary request: terrain/floor, warm horizontal timber planks for the existing farm dock. Main #8C6239, soft wood shadow #6B4A2C and restrained grain highlight #A87C4E. A fully opaque flat top-down wood surface, not a pile or box. Coarse 16 by 16 cells with TWO thin horizontal plank joins across the full width, identical left and right edge patterns at the same height. Top and bottom rows are the same #8C6239. Boards continue continuously when tiles repeat sideways. One subtle short grain run per board at most. No vertical mortar joints, checkerboard, nails, heavy black outline, bevel framing or border around the square. Low contrast and little variation; clear timber material rather than brick masonry. No diagonal perspective.",
+  "references": [
+    "assets/art_source/masters/style-day.png",
+    "docs/reference-sheet.png"
+  ],
+  "decision": "Rejected: nearest reduction lost thin plank joins; overly busy grain and opposite border mismatches."
+}

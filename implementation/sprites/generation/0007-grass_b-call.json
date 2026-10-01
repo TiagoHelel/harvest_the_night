@@ -1,0 +1,14 @@
+{
+  "id": "grass_b",
+  "date": "2026-10-01",
+  "tool": "built-in ImageGen",
+  "transparent_background": false,
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-8faed1f3-9368-467b-b683-5e4762d5d590.png",
+  "source": "assets/art_source/terrain/grass_b.png",
+  "prompt_text": "Use case: stylized-concept\nAsset type: production raster terrain tile source for HARVEST THE NIGHT, a cozy farm that becomes a fortress against zombies at night.\nInput images: Image 1 is the native-approved grass base source, a material identity and boundary-color reference only. Image 2 is the approved neutral-day style study, a visual reference only. Do not copy buildings, actors or dense ground texture. Neither image is an edit target.\nStyle/medium: hand-crafted low-contrast pixel art with deliberate flat pixel clusters, restrained texture and readable materials. Render as a clearly visible coarse 16 by 16 pixel lattice enlarged to fill the whole square source; no fine subpixel detail.\nComposition/framing: ONE fully opaque square material tile filling the image edge to edge, direct top-down surface on a rectangular grid. Final native output is exactly 16x16, contact pivot (8,16); this is a downstream reduction target. No diamond/isometric block or tile shown in perspective. No contact shadow.\nLighting/mood: neutral daytime, very subtle upper-left material highlights; runtime supplies dusk/night lighting.\nConstraints: opposite edges join seamlessly when repeated, no frame, border, vignette, central emblem, labels, text, watermark or UI. Calm open areas, no random speckles, dots, flowers, objects, cast shadows, blur, gradients, smooth painting or 3D render. All texture must survive nearest reduction to 16x16.\nPrimary request: ONE different quiet grass variant, terrain/grass_b. Match the grass master's dominant #6A9646 olive lawn and exactly its outer-edge color. At least 90% calm base green, including the entire outermost 1/16 on all four sides. Place just TWO sparse asymmetric joined small blade/leaf clusters in DIFFERENT locations than the master: one near the upper-right interior, one near lower-left. Tiny cluster shadows #4E7A35, at most two coarse highlight pixels #8AB659. No disconnected checker of dots, large tufts, flowers, stones, patches of different soil, frame or dark perimeter. Preserve material brightness and density so the four variants mix without visible squares.",
+  "references": [
+    "assets/art_source/terrain/grass.png",
+    "assets/art_source/masters/style-day.png"
+  ],
+  "decision": "Accepted after native/3x repeated patches, exact borders, raw alpha and day/dusk/night Godot actor/farm review."
+}

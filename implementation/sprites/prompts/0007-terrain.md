@@ -1,13 +1,13 @@
 # 0007 - Quiet ground, paths and natural rock terrain
 
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0003
 - **Likely files:** assets/art_source/terrain/; sprites/terrain/; tools/gen_sprites.py; src/ui/world_view.gd
 - **Generation briefs:** TERRAIN
 
 ## Goal and requirements
 
-Replace grass and its four variants, soil, path, floor and rock terrain. Reduce repetitive speckles and brick-like rock pattern. Keep 16 px exact tiles, terrain enum order and atlas row contract or migrate generator and view together. Do not alter FARM_MAP or use decorative variants to change walkability. Keep low contrast under actors.
+Replace the four existing grass tiles (`grass`, `grass_b`, `grass_c`, `grass_d`), soil, path, floor and rock terrain. These are four grass choices total in the generator/view contract, not four extra choices beyond the base. Reduce repetitive speckles and brick-like rock pattern. Keep 16 px exact tiles, terrain enum order and atlas row contract or migrate generator and view together. Do not alter FARM_MAP or use decorative variants to change walkability. Keep low contrast under actors.
 
 ## Generation procedure
 

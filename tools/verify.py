@@ -190,6 +190,17 @@ def check_player_reactions():
     return check("player reactions", code == 0, verdict)
 
 
+def check_terrain_art():
+    code, out = run([sys.executable, "tools/check_terrain_art.py"])
+    return check("terrain sources/atlas", code == 0, tail(out, 4))
+
+
+def check_terrain_showcase():
+    code, out = run([sys.executable, "tools/show_art.py", "--terrain", "--check"])
+    verdict = next((line for line in out.splitlines() if line.startswith("TERRAIN SHOWCASE:")), tail(out, 4))
+    return check("terrain lighting", code == 0, verdict)
+
+
 def check_logo():
     """The logo still matches the letters it was composed from.
 
@@ -583,6 +594,8 @@ def main():
     check_player_showcase()
     check_player_work()
     check_player_reactions()
+    check_terrain_art()
+    check_terrain_showcase()
     check_font()
     check_logo()
     check_sfx()

@@ -430,3 +430,59 @@ night bloom and tree/station overlaps remain later-family follow-ups.
 Queue after completion: 6 done, 14 todo, zero doing/blocked. Next is 0007,
 terrain. One task completed this cycle; the user's active /goal continues
 automatically toward the remaining art backlog.
+
+## 0007 — Quiet ground, paths and natural rock terrain — 2026-10-01
+
+Completed the existing eight ground tiles with built-in ImageGen: grass,
+grass_b, grass_c, grass_d, soil, path, floor and rock. Clarified the ambiguous
+grass wording against the actual generator/view contract: four choices total,
+not a fifth invented variant. Raw sources are in `assets/art_source/terrain/`;
+twelve actual calls produced eight accepted sources and four rejected originals
+preserved in `candidates/`. Each soil/path/floor/rock revision simplified excess
+texture or repaired source-authored joins. Exact prompts and call/reference/
+returned-file provenance are `generation/0007-*` and `0007-generations.json`.
+
+All accepted sources are 1254-square, alpha 255. Runtime remains 16x16 with
+pivot (8,16). Measured 1152-square soil/path crops preserve small joined marks
+under nearest reduction; other materials use their complete sources. No painted
+seam repair, stretching or palette additions. Source/native SHA-256 values are
+in `reviews/0007/measured-contract.json`, the manifest and individual call records.
+
+Moved eight owners to raster and rebuilt the same 256x80 atlas from accepted
+source recipes. The atlas builder reuses one validated source build locally per
+invocation, with no stale global/runtime cache. All nine migrated atlas cells,
+all 80 total cells and every native tile are checked against source rebuilds.
+Opposing borders and all mixed grass borders match exactly. Ownership now:
+101 raster / 147 ASCII / zero player-sheet, 248 runtime PNGs total. Against
+b116b6c only eight tiles plus atlas changed; other 239 PNGs, core, FARM_MAP,
+terrain enum, selector, walkability, collision, balance, owner sheet and save
+formats are unchanged (`runtime-delta.json`).
+
+Added `--terrain` Godot fixtures using Main's real Relight shader: all materials
+and the production weighted grass mix in day/dusk/night with farmer/walker, plus
+the unchanged farm. Complete serialized state and every tile/body/feet binding
+are checked. Headless: 19609 checks, zero failed; real renderer: 19669 checks,
+zero failed, 30 fixture captures. Added source/atlas and material-lighting rows
+to verify. Fault/rebuild suite: 33 probes PASS, corruption restored; two builds
+identical and legacy writers preserve 101 migrated outputs. New probes cover
+terrain source changes/missing files, tile/atlas tampering, seams and alpha holes.
+
+Full verification PASS: 30 passed, zero skipped/failed in 194s, including 105
+scripts, 6609 headless assertions, 980 input cases, performance and Windows/Web
+exports. Sim `1961000123` and data `407837701` unchanged. Raster rebuild/check:
+101 outputs and metadata verified, zero further writes. Logs, hashes and all
+criterion results are in `reviews/0007/REVIEW.md` and that folder's evidence.
+
+Opened all eight repeated 8x8 material patches plus mixed grass at native/3x,
+accepted source alpha, native-material/atlas sheets, and all 35 actual Godot
+captures at native/nearest-3x through `captures-00` to `captures-08`. Original
+3x pages are 2880x1728. Captures are under `implementation/shots/sprites/0007/`
+and `terrain/`; `before-after{,-3x}.png` compares 0006/0007 noon/dusk/wave.
+Visual gates PASS: quieter field, no tile seams/frame, natural sparse rock
+instead of brickwork, continuous horizontal dock planks, distinguishable
+materials and clear native actors under all three lights. Water/banks/edge art,
+station/crop/forest overlaps and broad night bloom remain later-family tasks.
+
+Queue after completion: 7 done, 13 todo, zero doing/blocked. Next is 0008,
+water/edges. One sprite task completed this cycle; the active /goal remains
+in progress and continues automatically toward the remaining backlog.

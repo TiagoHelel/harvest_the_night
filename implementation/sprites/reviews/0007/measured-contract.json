@@ -1,0 +1,548 @@
+{
+  "assets": [
+    {
+      "id": "terrain/grass",
+      "name": "grass",
+      "source": "assets/art_source/terrain/grass.png",
+      "source_sha256": "f9084889428db5aed278e6893118995da00a6e1f0895ee9346cd6a64600b39d6",
+      "source_wh": [
+        1254,
+        1254
+      ],
+      "crop_xywh": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "content_scale": 0.012759170653907496,
+      "content_anchor_xy": [
+        8,
+        16
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        16
+      ],
+      "alpha_threshold": 128,
+      "native_sha256": "4d1d187493ab8275082ea8aed39ab884e50384b9bb35cc750276ffbd3b54fc3e",
+      "native_colors": [
+        {
+          "rgba": [
+            106,
+            150,
+            70,
+            255
+          ],
+          "pixels": 240
+        },
+        {
+          "rgba": [
+            78,
+            122,
+            53,
+            255
+          ],
+          "pixels": 12
+        },
+        {
+          "rgba": [
+            138,
+            182,
+            89,
+            255
+          ],
+          "pixels": 4
+        }
+      ],
+      "raw_alpha_range": [
+        255,
+        255
+      ],
+      "opposite_border_mismatches_xy": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "terrain/grass_b",
+      "name": "grass_b",
+      "source": "assets/art_source/terrain/grass_b.png",
+      "source_sha256": "cfd24bb952e47581974d3c4a26f583e361c05826c0d971da7a62db3ad27669a6",
+      "source_wh": [
+        1254,
+        1254
+      ],
+      "crop_xywh": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "content_scale": 0.012759170653907496,
+      "content_anchor_xy": [
+        8,
+        16
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        16
+      ],
+      "alpha_threshold": 128,
+      "native_sha256": "e65b863607c80fc98446bfd54f5db7879dc2c22284c3b01f96a8343ea038d4cd",
+      "native_colors": [
+        {
+          "rgba": [
+            106,
+            150,
+            70,
+            255
+          ],
+          "pixels": 251
+        },
+        {
+          "rgba": [
+            78,
+            122,
+            53,
+            255
+          ],
+          "pixels": 5
+        }
+      ],
+      "raw_alpha_range": [
+        255,
+        255
+      ],
+      "opposite_border_mismatches_xy": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "terrain/grass_c",
+      "name": "grass_c",
+      "source": "assets/art_source/terrain/grass_c.png",
+      "source_sha256": "d854a3fba84668d19c56fa50b691c8f06d68d23af1fca70ac232f25233f03a8a",
+      "source_wh": [
+        1254,
+        1254
+      ],
+      "crop_xywh": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "content_scale": 0.012759170653907496,
+      "content_anchor_xy": [
+        8,
+        16
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        16
+      ],
+      "alpha_threshold": 128,
+      "native_sha256": "6bebf9ccc1902f7352b47dd8f8f06ebcfd4f44f23d6c76dbc84516ff214f66b8",
+      "native_colors": [
+        {
+          "rgba": [
+            106,
+            150,
+            70,
+            255
+          ],
+          "pixels": 251
+        },
+        {
+          "rgba": [
+            78,
+            122,
+            53,
+            255
+          ],
+          "pixels": 4
+        },
+        {
+          "rgba": [
+            138,
+            182,
+            89,
+            255
+          ],
+          "pixels": 1
+        }
+      ],
+      "raw_alpha_range": [
+        255,
+        255
+      ],
+      "opposite_border_mismatches_xy": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "terrain/grass_d",
+      "name": "grass_d",
+      "source": "assets/art_source/terrain/grass_d.png",
+      "source_sha256": "597b415b6712308fa1ab8455d5c3d898c0cba01fd2d75eaf08a8d03108ac4658",
+      "source_wh": [
+        1254,
+        1254
+      ],
+      "crop_xywh": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "content_scale": 0.012759170653907496,
+      "content_anchor_xy": [
+        8,
+        16
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        16
+      ],
+      "alpha_threshold": 128,
+      "native_sha256": "9219456f2ef872c74713287178a95d6eacaf864019a7e3c3c9b48ba2d6ed61f2",
+      "native_colors": [
+        {
+          "rgba": [
+            106,
+            150,
+            70,
+            255
+          ],
+          "pixels": 249
+        },
+        {
+          "rgba": [
+            78,
+            122,
+            53,
+            255
+          ],
+          "pixels": 5
+        },
+        {
+          "rgba": [
+            138,
+            182,
+            89,
+            255
+          ],
+          "pixels": 2
+        }
+      ],
+      "raw_alpha_range": [
+        255,
+        255
+      ],
+      "opposite_border_mismatches_xy": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "terrain/soil",
+      "name": "soil",
+      "source": "assets/art_source/terrain/soil.png",
+      "source_sha256": "66b14e30ca51158206c29c56c34908b0ee696d9c088f640f9d54897d9d1df754",
+      "source_wh": [
+        1254,
+        1254
+      ],
+      "crop_xywh": [
+        46,
+        0,
+        1152,
+        1152
+      ],
+      "content_scale": 0.013888888888888888,
+      "content_anchor_xy": [
+        8,
+        16
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        16
+      ],
+      "alpha_threshold": 128,
+      "native_sha256": "7f2a394dee9d4801c32da75bc1ddec0522c035936d450a48bff2f3894cc79d4e",
+      "native_colors": [
+        {
+          "rgba": [
+            122,
+            88,
+            56,
+            255
+          ],
+          "pixels": 253
+        },
+        {
+          "rgba": [
+            107,
+            74,
+            44,
+            255
+          ],
+          "pixels": 1
+        },
+        {
+          "rgba": [
+            150,
+            112,
+            74,
+            255
+          ],
+          "pixels": 1
+        },
+        {
+          "rgba": [
+            92,
+            66,
+            42,
+            255
+          ],
+          "pixels": 1
+        }
+      ],
+      "raw_alpha_range": [
+        255,
+        255
+      ],
+      "opposite_border_mismatches_xy": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "terrain/path",
+      "name": "path",
+      "source": "assets/art_source/terrain/path.png",
+      "source_sha256": "aa46572715df423dd98f736340cd7e0e3ea72c16b5377afaab887f1068824ca0",
+      "source_wh": [
+        1254,
+        1254
+      ],
+      "crop_xywh": [
+        46,
+        46,
+        1152,
+        1152
+      ],
+      "content_scale": 0.013888888888888888,
+      "content_anchor_xy": [
+        8,
+        16
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        16
+      ],
+      "alpha_threshold": 128,
+      "native_sha256": "bd3031d7f35f0b3b89a7dd0d9c55676aa80c4c6b0b43a9e1ab6ee58dbb83001d",
+      "native_colors": [
+        {
+          "rgba": [
+            150,
+            112,
+            74,
+            255
+          ],
+          "pixels": 254
+        },
+        {
+          "rgba": [
+            122,
+            88,
+            56,
+            255
+          ],
+          "pixels": 1
+        },
+        {
+          "rgba": [
+            168,
+            124,
+            78,
+            255
+          ],
+          "pixels": 1
+        }
+      ],
+      "raw_alpha_range": [
+        255,
+        255
+      ],
+      "opposite_border_mismatches_xy": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "terrain/floor",
+      "name": "floor",
+      "source": "assets/art_source/terrain/floor.png",
+      "source_sha256": "d7c1b998f4007529a3913c616e31ee69d4fc0c1600edcd7cdf091c16bb9dad2d",
+      "source_wh": [
+        1254,
+        1254
+      ],
+      "crop_xywh": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "content_scale": 0.012759170653907496,
+      "content_anchor_xy": [
+        8,
+        16
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        16
+      ],
+      "alpha_threshold": 128,
+      "native_sha256": "c0f3bbf8b3b77b1bb24feae99b55666698f9ec37e578b470c8819b9217f6eb8d",
+      "native_colors": [
+        {
+          "rgba": [
+            140,
+            98,
+            57,
+            255
+          ],
+          "pixels": 220
+        },
+        {
+          "rgba": [
+            107,
+            74,
+            44,
+            255
+          ],
+          "pixels": 32
+        },
+        {
+          "rgba": [
+            168,
+            124,
+            78,
+            255
+          ],
+          "pixels": 4
+        }
+      ],
+      "raw_alpha_range": [
+        255,
+        255
+      ],
+      "opposite_border_mismatches_xy": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "terrain/rock",
+      "name": "rock",
+      "source": "assets/art_source/terrain/rock.png",
+      "source_sha256": "46c3c7f4d4d5bae38b98a47622c42cb6b7104950e370724a03303471c3ddec11",
+      "source_wh": [
+        1254,
+        1254
+      ],
+      "crop_xywh": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "content_scale": 0.012759170653907496,
+      "content_anchor_xy": [
+        8,
+        16
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        16
+      ],
+      "alpha_threshold": 128,
+      "native_sha256": "6ebc2fbb298286967c154f3bb1018e54549ebcc7898551cae3194b7ba62f852b",
+      "native_colors": [
+        {
+          "rgba": [
+            110,
+            108,
+            120,
+            255
+          ],
+          "pixels": 252
+        },
+        {
+          "rgba": [
+            82,
+            80,
+            92,
+            255
+          ],
+          "pixels": 3
+        },
+        {
+          "rgba": [
+            140,
+            138,
+            150,
+            255
+          ],
+          "pixels": 1
+        }
+      ],
+      "raw_alpha_range": [
+        255,
+        255
+      ],
+      "opposite_border_mismatches_xy": [
+        0,
+        0
+      ]
+    }
+  ]
+}

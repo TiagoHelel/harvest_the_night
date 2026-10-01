@@ -100,6 +100,16 @@ The scene studies are references, never a background replacement for the farm.
 Future terrain should be quieter than the study's textured grass so actors and
 interactive shapes remain prominent at 480x270.
 
+Task 0007 accepts the four existing grass choices and soil/path/floor/rock at
+16x16. Grass keeps the weighted distribution and shared olive boundary color,
+with only 2.0-6.2 percent interior clustered texture. Soil/path stay dark/light
+brown, with 1.2/0.8 percent joined surface marks. Horizontal timber plank joins
+survive reduction and continue across adjacent dock tiles. Natural gray rock
+has sparse irregular flecks, replacing the old rectangular masonry. These
+materials deliberately stay calm below actors; no decorative flower or extra
+walkability variant is introduced. Exact measurements and runtime lighting
+reviews are in `reviews/0007/`. Water and transitions remain task 0008.
+
 The shared palette now has 42 colors: the original 36 unchanged, plus three
 skin colors and three cloth-blue colors. This keeps the farmer's identity after
 palette mapping while preserving existing world colors and light ramps.

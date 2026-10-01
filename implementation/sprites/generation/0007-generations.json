@@ -1,0 +1,181 @@
+{
+  "date": "2026-10-01",
+  "attempts": [
+    {
+      "id": "floor",
+      "date": "2026-10-01",
+      "tool": "built-in ImageGen",
+      "transparent_background": false,
+      "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-a19fa8fe-fb18-4737-9f38-433100b15d44.png",
+      "source": "assets/art_source/terrain/candidates/floor-r0.png",
+      "prompt_text": "Use case: stylized-concept\nAsset type: production raster terrain tile source for HARVEST THE NIGHT, a cozy farm that becomes a fortress against zombies at night.\nInput images: Image 1 is the approved neutral-day material/style study, a visual reference only. Do not copy its buildings, actors or dense ground detail. Image 2 is the reference sheet, also a style reference only, not an edit target.\nStyle/medium: hand-crafted low-contrast pixel art with deliberate flat pixel clusters, restrained texture and readable materials. Render as a clearly visible coarse 16 by 16 pixel lattice enlarged to fill the whole square source; no fine subpixel detail.\nComposition/framing: ONE fully opaque square material tile filling the image edge to edge, direct top-down surface on a rectangular grid. Final native output is exactly 16x16, contact pivot (8,16); this is a downstream reduction target. No diamond/isometric block or tile shown in perspective. No contact shadow.\nLighting/mood: neutral daytime, very subtle upper-left material highlights; runtime supplies dusk/night lighting.\nConstraints: opposite edges join seamlessly when repeated, no frame, border, vignette, central emblem, labels, text, watermark or UI. Calm open areas, no random speckles, dots, flowers, objects, cast shadows, blur, gradients, smooth painting or 3D render. All texture must survive nearest reduction to 16x16.\nPrimary request: terrain/floor, warm horizontal timber planks for the existing farm dock. Main #8C6239, soft wood shadow #6B4A2C and restrained grain highlight #A87C4E. A fully opaque flat top-down wood surface, not a pile or box. Coarse 16 by 16 cells with TWO thin horizontal plank joins across the full width, identical left and right edge patterns at the same height. Top and bottom rows are the same #8C6239. Boards continue continuously when tiles repeat sideways. One subtle short grain run per board at most. No vertical mortar joints, checkerboard, nails, heavy black outline, bevel framing or border around the square. Low contrast and little variation; clear timber material rather than brick masonry. No diagonal perspective.",
+      "references": [
+        "assets/art_source/masters/style-day.png",
+        "docs/reference-sheet.png"
+      ],
+      "decision": "Rejected: nearest reduction lost thin plank joins; overly busy grain and opposite border mismatches.",
+      "source_sha256": "c1152ca46fa7ed0232a434be84961e18fb4af95e4940d3508e9621e64eeede06"
+    },
+    {
+      "id": "floor-r1",
+      "date": "2026-10-01",
+      "tool": "built-in ImageGen",
+      "transparent_background": false,
+      "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-1b2d799a-f0c7-4e82-a39e-b9ca271ba303.png",
+      "source": "assets/art_source/terrain/floor.png",
+      "prompt_text": "Use case: precise-object-edit\nAsset type: terrain/floor opaque seamless timber tile, final exactly 16x16 pixels.\nInput image: edit target is the generated timber candidate.\nPrimary request: simplify only this wooden surface to a TRUE coarse 16 by 16 block lattice enlarged across the whole square. Delete all of the many fine grain marks. Fill the tile with flat #8C6239 brown. Keep TWO horizontal plank joins, but make each join EXACTLY ONE of the sixteen coarse lattice rows tall, so nearest reduction cannot miss them. Place these dark #6B4A2C join rows at coarse rows 5 and 11, spanning the entire width. There are 16 coarse rows total. Rows 0 and 15 must both be identical flat #8C6239 across the entire width; the leftmost and rightmost columns have exactly identical colors at every corresponding row. Add just two short connected interior grain runs, each two coarse pixels long in #A87C4E, not touching edges. No other details. Absolutely no fine noise, scattered pixels, nails, frame or perspective. Three calm horizontal boards must still read at 16 pixels, repeated tiles connect continuously, fully opaque, neutral daytime.",
+      "references": [
+        "assets/art_source/terrain/candidates/floor-r0.png"
+      ],
+      "decision": "Accepted after native/3x repeated patches, exact borders, raw alpha and day/dusk/night Godot actor/farm review.",
+      "source_sha256": "d7c1b998f4007529a3913c616e31ee69d4fc0c1600edcd7cdf091c16bb9dad2d"
+    },
+    {
+      "id": "grass",
+      "date": "2026-10-01",
+      "tool": "built-in ImageGen",
+      "transparent_background": false,
+      "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-1e43e803-7b4e-4b97-92e4-b548b804cc0c.png",
+      "source": "assets/art_source/terrain/grass.png",
+      "prompt_text": "Use case: stylized-concept\nAsset type: production raster terrain tile source for HARVEST THE NIGHT, a cozy farm that becomes a fortress against zombies at night.\nInput images: Image 1 is the approved neutral-day material/style study, a visual reference only. Do not copy its buildings, actors or dense ground detail. Image 2 is the reference sheet, also a style reference only, not an edit target.\nStyle/medium: hand-crafted low-contrast pixel art with deliberate flat pixel clusters, restrained texture and readable materials. Render as a clearly visible coarse 16 by 16 pixel lattice enlarged to fill the whole square source; no fine subpixel detail.\nComposition/framing: ONE fully opaque square material tile filling the image edge to edge, direct top-down surface on a rectangular grid. Final native output is exactly 16x16, contact pivot (8,16); this is a downstream reduction target. No diamond/isometric block or tile shown in perspective. No contact shadow.\nLighting/mood: neutral daytime, very subtle upper-left material highlights; runtime supplies dusk/night lighting.\nConstraints: opposite edges join seamlessly when repeated, no frame, border, vignette, central emblem, labels, text, watermark or UI. Calm open areas, no random speckles, dots, flowers, objects, cast shadows, blur, gradients, smooth painting or 3D render. All texture must survive nearest reduction to 16x16.\nPrimary request: grass base, asset terrain/grass. A quiet medium warm olive-green lawn surface with just two or three tiny joined blade/leaf clusters and at least 88% calm flat ground. Ground's main color is #6A9646; sparse cluster shadows #4E7A35 and tiny gentle highlights #8AB659. The base is by far the dominant color, including every point on the outermost 1/16 of the tile on all four sides so opposite edges join perfectly. Do not outline the tile or darken its corners. Clusters occupy only a few coarse lattice cells, are asymmetrically placed, and never form a grid of disconnected dots. This is the plain tile for most of the farm and must let a 30px farmer read clearly.",
+      "references": [
+        "assets/art_source/masters/style-day.png",
+        "docs/reference-sheet.png"
+      ],
+      "decision": "Accepted after native/3x repeated patches, exact borders, raw alpha and day/dusk/night Godot actor/farm review.",
+      "source_sha256": "f9084889428db5aed278e6893118995da00a6e1f0895ee9346cd6a64600b39d6"
+    },
+    {
+      "id": "grass_b",
+      "date": "2026-10-01",
+      "tool": "built-in ImageGen",
+      "transparent_background": false,
+      "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-8faed1f3-9368-467b-b683-5e4762d5d590.png",
+      "source": "assets/art_source/terrain/grass_b.png",
+      "prompt_text": "Use case: stylized-concept\nAsset type: production raster terrain tile source for HARVEST THE NIGHT, a cozy farm that becomes a fortress against zombies at night.\nInput images: Image 1 is the native-approved grass base source, a material identity and boundary-color reference only. Image 2 is the approved neutral-day style study, a visual reference only. Do not copy buildings, actors or dense ground texture. Neither image is an edit target.\nStyle/medium: hand-crafted low-contrast pixel art with deliberate flat pixel clusters, restrained texture and readable materials. Render as a clearly visible coarse 16 by 16 pixel lattice enlarged to fill the whole square source; no fine subpixel detail.\nComposition/framing: ONE fully opaque square material tile filling the image edge to edge, direct top-down surface on a rectangular grid. Final native output is exactly 16x16, contact pivot (8,16); this is a downstream reduction target. No diamond/isometric block or tile shown in perspective. No contact shadow.\nLighting/mood: neutral daytime, very subtle upper-left material highlights; runtime supplies dusk/night lighting.\nConstraints: opposite edges join seamlessly when repeated, no frame, border, vignette, central emblem, labels, text, watermark or UI. Calm open areas, no random speckles, dots, flowers, objects, cast shadows, blur, gradients, smooth painting or 3D render. All texture must survive nearest reduction to 16x16.\nPrimary request: ONE different quiet grass variant, terrain/grass_b. Match the grass master's dominant #6A9646 olive lawn and exactly its outer-edge color. At least 90% calm base green, including the entire outermost 1/16 on all four sides. Place just TWO sparse asymmetric joined small blade/leaf clusters in DIFFERENT locations than the master: one near the upper-right interior, one near lower-left. Tiny cluster shadows #4E7A35, at most two coarse highlight pixels #8AB659. No disconnected checker of dots, large tufts, flowers, stones, patches of different soil, frame or dark perimeter. Preserve material brightness and density so the four variants mix without visible squares.",
+      "references": [
+        "assets/art_source/terrain/grass.png",
+        "assets/art_source/masters/style-day.png"
+      ],
+      "decision": "Accepted after native/3x repeated patches, exact borders, raw alpha and day/dusk/night Godot actor/farm review.",
+      "source_sha256": "cfd24bb952e47581974d3c4a26f583e361c05826c0d971da7a62db3ad27669a6"
+    },
+    {
+      "id": "grass_c",
+      "date": "2026-10-01",
+      "tool": "built-in ImageGen",
+      "transparent_background": false,
+      "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-654e7fcf-2786-445e-810b-319043ba5257.png",
+      "source": "assets/art_source/terrain/grass_c.png",
+      "prompt_text": "Use case: stylized-concept\nAsset type: production raster terrain tile source for HARVEST THE NIGHT, a cozy farm that becomes a fortress against zombies at night.\nInput images: Image 1 is the native-approved grass base source, a material identity and boundary-color reference only. Image 2 is the approved neutral-day style study, a visual reference only. Do not copy buildings, actors or dense ground texture. Neither image is an edit target.\nStyle/medium: hand-crafted low-contrast pixel art with deliberate flat pixel clusters, restrained texture and readable materials. Render as a clearly visible coarse 16 by 16 pixel lattice enlarged to fill the whole square source; no fine subpixel detail.\nComposition/framing: ONE fully opaque square material tile filling the image edge to edge, direct top-down surface on a rectangular grid. Final native output is exactly 16x16, contact pivot (8,16); this is a downstream reduction target. No diamond/isometric block or tile shown in perspective. No contact shadow.\nLighting/mood: neutral daytime, very subtle upper-left material highlights; runtime supplies dusk/night lighting.\nConstraints: opposite edges join seamlessly when repeated, no frame, border, vignette, central emblem, labels, text, watermark or UI. Calm open areas, no random speckles, dots, flowers, objects, cast shadows, blur, gradients, smooth painting or 3D render. All texture must survive nearest reduction to 16x16.\nPrimary request: ONE different quiet grass variant, terrain/grass_c. Match the grass master's dominant #6A9646 olive lawn and exactly its outer-edge color. At least 91% calm base green, including the entire outermost 1/16 on all four sides. Use just ONE small softly grouped asymmetric joined grass-blade cluster a little left/below the center, with sparse #4E7A35 shadow and one or two coarse #8AB659 highlight pixels. Keep the whole cluster under six downstream 16x16 pixel cells total; no tall grass object or strongly outlined tuft. This variation must be plainly different from the reference's three-cluster layout, but have the same quiet material brightness and seamless boundaries. No dots everywhere, flowers, stones, soil, frame or perimeter line.",
+      "references": [
+        "assets/art_source/terrain/grass.png",
+        "assets/art_source/masters/style-day.png"
+      ],
+      "decision": "Accepted after native/3x repeated patches, exact borders, raw alpha and day/dusk/night Godot actor/farm review.",
+      "source_sha256": "d854a3fba84668d19c56fa50b691c8f06d68d23af1fca70ac232f25233f03a8a"
+    },
+    {
+      "id": "grass_d",
+      "date": "2026-10-01",
+      "tool": "built-in ImageGen",
+      "transparent_background": false,
+      "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-60df8f93-89a9-4955-af98-3c79b5832709.png",
+      "source": "assets/art_source/terrain/grass_d.png",
+      "prompt_text": "Use case: stylized-concept\nAsset type: production raster terrain tile source for HARVEST THE NIGHT, a cozy farm that becomes a fortress against zombies at night.\nInput images: Image 1 is the native-approved grass base source, a material identity and boundary-color reference only. Image 2 is the approved neutral-day style study, a visual reference only. Do not copy buildings, actors or dense ground texture. Neither image is an edit target.\nStyle/medium: hand-crafted low-contrast pixel art with deliberate flat pixel clusters, restrained texture and readable materials. Render as a clearly visible coarse 16 by 16 pixel lattice enlarged to fill the whole square source; no fine subpixel detail.\nComposition/framing: ONE fully opaque square material tile filling the image edge to edge, direct top-down surface on a rectangular grid. Final native output is exactly 16x16, contact pivot (8,16); this is a downstream reduction target. No diamond/isometric block or tile shown in perspective. No contact shadow.\nLighting/mood: neutral daytime, very subtle upper-left material highlights; runtime supplies dusk/night lighting.\nConstraints: opposite edges join seamlessly when repeated, no frame, border, vignette, central emblem, labels, text, watermark or UI. Calm open areas, no random speckles, dots, flowers, objects, cast shadows, blur, gradients, smooth painting or 3D render. All texture must survive nearest reduction to 16x16.\nPrimary request: ONE different rare quiet grass variant, terrain/grass_d. Match the grass master's dominant #6A9646 olive lawn and exactly its outer-edge color. At least 90% calm base green, including the entire outermost 1/16 on all four sides. Just ONE compact low clover-like joined leaf cluster in the right/lower interior, shaped differently from the master's tall blade clusters, plus ONE tiny two-cell subtle blade mark in the upper-left interior. Use sparse #4E7A35 shadows and #8AB659 highlights. No bright flower, crop, separate prop or centerpiece. Same quiet material brightness and seamless boundaries; no disconnected dotted noise, frame or dark perimeter.",
+      "references": [
+        "assets/art_source/terrain/grass.png",
+        "assets/art_source/masters/style-day.png"
+      ],
+      "decision": "Accepted after native/3x repeated patches, exact borders, raw alpha and day/dusk/night Godot actor/farm review.",
+      "source_sha256": "597b415b6712308fa1ab8455d5c3d898c0cba01fd2d75eaf08a8d03108ac4658"
+    },
+    {
+      "id": "path",
+      "date": "2026-10-01",
+      "tool": "built-in ImageGen",
+      "transparent_background": false,
+      "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-d0ea1e6c-74dc-426b-83da-e2b5094b3532.png",
+      "source": "assets/art_source/terrain/candidates/path-r0.png",
+      "prompt_text": "Use case: stylized-concept\nAsset type: production raster terrain tile source for HARVEST THE NIGHT, a cozy farm that becomes a fortress against zombies at night.\nInput images: Image 1 is the approved neutral-day material/style study, a visual reference only. Do not copy its buildings, actors or dense ground detail. Image 2 is the reference sheet, also a style reference only, not an edit target.\nStyle/medium: hand-crafted low-contrast pixel art with deliberate flat pixel clusters, restrained texture and readable materials. Render as a clearly visible coarse 16 by 16 pixel lattice enlarged to fill the whole square source; no fine subpixel detail.\nComposition/framing: ONE fully opaque square material tile filling the image edge to edge, direct top-down surface on a rectangular grid. Final native output is exactly 16x16, contact pivot (8,16); this is a downstream reduction target. No diamond/isometric block or tile shown in perspective. No contact shadow.\nLighting/mood: neutral daytime, very subtle upper-left material highlights; runtime supplies dusk/night lighting.\nConstraints: opposite edges join seamlessly when repeated, no frame, border, vignette, central emblem, labels, text, watermark or UI. Calm open areas, no random speckles, dots, flowers, objects, cast shadows, blur, gradients, smooth painting or 3D render. All texture must survive nearest reduction to 16x16.\nPrimary request: terrain/path, a quiet warm compacted dirt walking path, lighter than brown cultivated soil. Main flat color #96704A occupies at least 90 percent of the tile. One or two tiny connected worn clusters of #7A5838, with barely one tiny #B68A59 highlight. Render only a few interior coarse lattice cells of texture. The outer two native pixel rows and columns are exactly the flat main color on every side for invisible square joins. No paving stones, tile grid, furrows, gravel dots or spots. Flat ground with no outer outline. Must remain visually calm below actors.",
+      "references": [
+        "assets/art_source/masters/style-day.png",
+        "docs/reference-sheet.png"
+      ],
+      "decision": "Rejected: repeated patch had conspicuous diagonal scuffs and scattered squares despite seamless borders.",
+      "source_sha256": "5302f4c9cf39155758466432da76e7537332257c7f551299a2207c1668423558"
+    },
+    {
+      "id": "path-r1",
+      "date": "2026-10-01",
+      "tool": "built-in ImageGen",
+      "transparent_background": false,
+      "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-8a614ed4-3b6c-4e00-9ca4-f37e73fc07cc.png",
+      "source": "assets/art_source/terrain/path.png",
+      "prompt_text": "Use case: precise-object-edit\nAsset type: production seamless terrain/path pixel tile, downstream exactly 16x16.\nInput image: the provided image is the edit target, the first generated compacted dirt path candidate.\nPrimary request: change ONLY the texture density. Remove all scattered squares and both large diagonal scuff clusters. Leave an almost uniformly calm #96704A warm brown ground, with JUST ONE faint two-cell joined compacted mark of #7A5838, and optionally one tiny #B68A59 highlight attached to it. At least 98 percent flat base, only 2 or 3 of the final 256 native cells differ. Use a coarse enlarged 16x16 lattice, not fine detail. All four outer edges have the same flat base color. Preserve fully opaque edge-to-edge square, top-down flat material, neutral daylight and low contrast. No outline, border, vignette, perspective, scattered dots or gradient. It should repeat quietly under a farmer without a visible repeated diagonal motif.",
+      "references": [
+        "assets/art_source/terrain/candidates/path-r0.png"
+      ],
+      "decision": "Accepted after native/3x repeated patches, exact borders, raw alpha and day/dusk/night Godot actor/farm review.",
+      "source_sha256": "aa46572715df423dd98f736340cd7e0e3ea72c16b5377afaab887f1068824ca0"
+    },
+    {
+      "id": "rock",
+      "date": "2026-10-01",
+      "tool": "built-in ImageGen",
+      "transparent_background": false,
+      "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-728f15a7-6766-4423-8957-d17bff51559b.png",
+      "source": "assets/art_source/terrain/candidates/rock-r0.png",
+      "prompt_text": "Use case: stylized-concept\nAsset type: production raster terrain tile source for HARVEST THE NIGHT, a cozy farm that becomes a fortress against zombies at night.\nInput images: Image 1 is the approved neutral-day material/style study, a visual reference only. Do not copy its buildings, actors or dense ground detail. Image 2 is the reference sheet, also a style reference only, not an edit target.\nStyle/medium: hand-crafted low-contrast pixel art with deliberate flat pixel clusters, restrained texture and readable materials. Render as a clearly visible coarse 16 by 16 pixel lattice enlarged to fill the whole square source; no fine subpixel detail.\nComposition/framing: ONE fully opaque square material tile filling the image edge to edge, direct top-down surface on a rectangular grid. Final native output is exactly 16x16, contact pivot (8,16); this is a downstream reduction target. No diamond/isometric block or tile shown in perspective. No contact shadow.\nLighting/mood: neutral daytime, very subtle upper-left material highlights; runtime supplies dusk/night lighting.\nConstraints: opposite edges join seamlessly when repeated, no frame, border, vignette, central emblem, labels, text, watermark or UI. Calm open areas, no random speckles, dots, flowers, objects, cast shadows, blur, gradients, smooth painting or 3D render. All texture must survive nearest reduction to 16x16.\nPrimary request: terrain/rock, quiet natural gray rocky ground replacing an artificial brick pattern. A flat opaque rocky terrain surface in muted #6E6C78. Two or three subdued irregular angular rock planes with #52505C shadows and at most a couple #8C8A96 highlight cells, formed of broad joined coarse pixel clusters. Most of the surface stays the main gray. Place all texture inside the tile; the outer two coarse rows and columns on all sides are exactly flat #6E6C78 so seams are invisible when repeated. This is terrain under actors, not an isolated boulder or floating rock prop. No brickwork, mortar joints, rectangles, masonry courses, cobblestone grid, white crack web, random dots, heavy lines, bevel, perspective or border. Only three gray colors, gentle contrast, true 16x16 coarse enlarged pixel lattice, calm gaps.",
+      "references": [
+        "assets/art_source/masters/style-day.png",
+        "docs/reference-sheet.png"
+      ],
+      "decision": "Rejected: native repeated patch had distracting numerous angular marks, only 77 percent calm ground.",
+      "source_sha256": "cb512b76f9391373e4f4bbefd0cc8dd5d4e28d1c4436ba6861fb7d712bd19a3a"
+    },
+    {
+      "id": "rock-r1",
+      "date": "2026-10-01",
+      "tool": "built-in ImageGen",
+      "transparent_background": false,
+      "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-85134d25-a780-4e29-8377-8dafe7490195.png",
+      "source": "assets/art_source/terrain/rock.png",
+      "prompt_text": "Use case: precise-object-edit\nAsset type: terrain/rock natural rocky ground, native 16x16.\nInput image: edit target is the generated gray rocky terrain.\nPrimary request: change ONLY texture density. Erase the numerous scattered angular patches. Keep flat muted #6E6C78 gray on at least 95 percent of the tile, with just TWO small joined angular rock flecks, each occupying about 3 of the final 256 coarse pixels. Each small fleck has two #52505C shadow cells and one attached #8C8A96 highlight cell. Space them asymmetrically in the interior; all four outermost two coarse rows/columns are exactly base gray. True coarse 16x16 pixel lattice filling the square edge to edge, fully opaque. Preserve natural gray material and neutral daytime. No mortar, brick pattern, regular tile lines, connected crack web, random noise, detached dots, perspective, isolated boulders, outline or gradients. Must repeat quietly under actors without creating a conspicuous diagonal glyph.",
+      "references": [
+        "assets/art_source/terrain/candidates/rock-r0.png"
+      ],
+      "decision": "Accepted after native/3x repeated patches, exact borders, raw alpha and day/dusk/night Godot actor/farm review.",
+      "source_sha256": "46c3c7f4d4d5bae38b98a47622c42cb6b7104950e370724a03303471c3ddec11"
+    },
+    {
+      "id": "soil",
+      "date": "2026-10-01",
+      "tool": "built-in ImageGen",
+      "transparent_background": false,
+      "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-cbf0e275-8b64-40d8-bd23-aff69ee1450d.png",
+      "source": "assets/art_source/terrain/candidates/soil-r0.png",
+      "prompt_text": "Use case: stylized-concept\nAsset type: production raster terrain tile source for HARVEST THE NIGHT, a cozy farm that becomes a fortress against zombies at night.\nInput images: Image 1 is the approved neutral-day material/style study, a visual reference only. Do not copy its buildings, actors or dense ground detail. Image 2 is the reference sheet, also a style reference only, not an edit target.\nStyle/medium: hand-crafted low-contrast pixel art with deliberate flat pixel clusters, restrained texture and readable materials. Render as a clearly visible coarse 16 by 16 pixel lattice enlarged to fill the whole square source; no fine subpixel detail.\nComposition/framing: ONE fully opaque square material tile filling the image edge to edge, direct top-down surface on a rectangular grid. Final native output is exactly 16x16, contact pivot (8,16); this is a downstream reduction target. No diamond/isometric block or tile shown in perspective. No contact shadow.\nLighting/mood: neutral daytime, very subtle upper-left material highlights; runtime supplies dusk/night lighting.\nConstraints: opposite edges join seamlessly when repeated, no frame, border, vignette, central emblem, labels, text, watermark or UI. Calm open areas, no random speckles, dots, flowers, objects, cast shadows, blur, gradients, smooth painting or 3D render. All texture must survive nearest reduction to 16x16.\nPrimary request: soil ground, asset terrain/soil. ONE quiet earthy brown bare ground tile. Dominant flat #7A5838 warm soil, with at most two small irregular joined dark clod clusters #5C422A and a tiny #96704A dry rim. At least 88% calm base. This is unplanted bare soil, NOT furrowed crop rows or a planted garden; tilled/wet crop beds are separate assets. Every point of the outermost 1/16 on all four sides uses the dominant base color for exact seamless repeats. Surface color and grouped detail should distinguish it from green lawn and lighter compacted paths while keeping actor outlines prominent. No random pebbles everywhere, stripes, border, pit, crack web, leaves or props.",
+      "references": [
+        "assets/art_source/masters/style-day.png",
+        "docs/reference-sheet.png"
+      ],
+      "decision": "Rejected: native has 16% scattered contrasting pixels and one mismatched horizontal opposite-border pixel; targeted texture simplification required.",
+      "source_sha256": "f5e42f23de312c24f63bdb7717b9a1dc751df6ceeb6bf2d46f46db4441483a1c"
+    },
+    {
+      "id": "soil-r1",
+      "date": "2026-10-01",
+      "tool": "built-in ImageGen",
+      "transparent_background": false,
+      "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-6fe53e56-a54f-4c93-ad0e-45d3b3f19033.png",
+      "source": "assets/art_source/terrain/soil.png",
+      "prompt_text": "Use case: precise-object-edit\nAsset type: corrected fully opaque terrain/soil source for HARVEST THE NIGHT.\nInput image: Image 1 is the soil candidate and sole edit target.\nPrimary request: Change ONLY the surface texture to remove the distracting scattered speckles. The native 16x16 preview has 16% scattered contrasting dots and one mismatched opposite-border pixel. It must become a calm bare soil tile.\nCorrection: make at least 96% of the full square a completely flat solid #7A5838 brown. Keep just ONE tiny connected irregular clod mark a little left of center: at most THREE pixels on an imagined 16x16 lattice, #5C422A shadow with optionally ONE #96704A adjacent light pixel. Remove ALL other disconnected dot texture, fine grain and gradients. Every point in the outermost 1/8 of the image on all sides must be exactly the same #7A5838 flat fill as the calm interior; no perimeter outline or visible border stripe.\nPreserve: ONE square opaque edge-to-edge dirt material, top-down view, original earth identity and source framing, no prop or crop, no ground shadow. Downstream 16x16, pivot (8,16), genuine opacity across the whole square. Do not add text, label, watermark, checkerboard, framing, holes, furrows or new forms. Opposite edges must match exactly.",
+      "references": [
+        "assets/art_source/terrain/candidates/soil-r0.png"
+      ],
+      "decision": "Accepted after native/3x repeated patches, exact borders, raw alpha and day/dusk/night Godot actor/farm review.",
+      "source_sha256": "66b14e30ca51158206c29c56c34908b0ee696d9c088f640f9d54897d9d1df754"
+    }
+  ]
+}

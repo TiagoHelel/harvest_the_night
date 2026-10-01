@@ -96,4 +96,12 @@ const FRAMES := {
 	"res://sprites/enemies/walker_death.png": {"canvas": Vector2i(40, 40), "pivot": Vector2i(20, 36), "cell_offset": Vector2i(0, 0), "seconds": 0.55, "loop": true},
 	"res://sprites/enemies/walker_walk_b.png": {"canvas": Vector2i(32, 40), "pivot": Vector2i(16, 36), "cell_offset": Vector2i(0, 0), "seconds": 0.55, "loop": true},
 	"res://sprites/props/tree.png": {"canvas": Vector2i(40, 48), "pivot": Vector2i(20, 44), "cell_offset": Vector2i(-12, -28), "seconds": 0.55, "loop": true},
+	"res://sprites/terrain/floor.png": {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 16), "cell_offset": Vector2i(0, 0), "seconds": 0.55, "loop": false},
+	"res://sprites/terrain/grass.png": {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 16), "cell_offset": Vector2i(0, 0), "seconds": 0.55, "loop": false},
+	"res://sprites/terrain/grass_b.png": {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 16), "cell_offset": Vector2i(0, 0), "seconds": 0.55, "loop": false},
+	"res://sprites/terrain/grass_c.png": {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 16), "cell_offset": Vector2i(0, 0), "seconds": 0.55, "loop": false},
+	"res://sprites/terrain/grass_d.png": {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 16), "cell_offset": Vector2i(0, 0), "seconds": 0.55, "loop": false},
+	"res://sprites/terrain/path.png": {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 16), "cell_offset": Vector2i(0, 0), "seconds": 0.55, "loop": false},
+	"res://sprites/terrain/rock.png": {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 16), "cell_offset": Vector2i(0, 0), "seconds": 0.55, "loop": false},
+	"res://sprites/terrain/soil.png": {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 16), "cell_offset": Vector2i(0, 0), "seconds": 0.55, "loop": false},
 }
