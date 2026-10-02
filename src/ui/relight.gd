@@ -17,8 +17,8 @@ extends CanvasLayer
 ##
 ## ## Where it sits, and why that needed no renumbering
 ##
-## Between `WorldView` and `UI` in `Main.tscn`. Both this and `UI` are on
-## `CanvasLayer` 1 and ties are broken by tree order, so the world is relit and
+## Between `WorldView` and `UI` in `Main.tscn`. Relight is on layer 1,
+## semantic emissions/lamps on 2, and UI on 3, so the world is relit and
 ## the HUD is not - which is what you want: a health bar that went purple
 ## after dark would be a health bar nobody can read at the moment it matters.
 ##

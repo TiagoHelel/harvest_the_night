@@ -630,6 +630,11 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		# A fixed number of ticks a frame, so two runs still tick identically.
 		Sim.advance(state, STIR_TICKS)
 		await process_frame
+	# Standard stills show a settled reality, not an arbitrary 0.5s of fade.
+	# The --switch sequence remains responsible for photographing the change.
+	var view := main.get_node("%WorldView") as WorldView
+	view.skip_transition()
+	view._light_for_phase(0.0)
 	_just_before_the_shutter(main, state, name)
 	await process_frame
 	await RenderingServer.frame_post_draw

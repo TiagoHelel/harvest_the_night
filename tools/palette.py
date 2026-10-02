@@ -99,8 +99,8 @@ TRANSPARENT = None
 
 # **Day**: the sprites as drawn, warm and a little brighter than neutral.
 # **Night**: the same pixels pushed towards the blue of `night`, with the warm
-# end held back so that fire, lamps and the moon stay the only warm things on
-# screen - which is what `design.md` section 18 asks for.
+# fire/window cores supplied by semantic emission layers above the ramp.
+# Material brightness alone never makes clothes, skin or crops emissive.
 #
 # Applied by task 0071 as a shader, so it costs nothing per sprite and can be
 # tuned without regenerating a single PNG.
@@ -133,8 +133,8 @@ RAMPS = {
         "tint":       (1.06, 0.88, 0.80),
         "lift":       (0.05, 0.02, 0.00),
         "saturation": 0.95,
-        # A little warm already, so the first embers read before dark.
-        "warm_keep":  0.92,
+        # Evening warmth comes from the tint, not a material exemption.
+        "warm_keep":  1.00,
         "warm_edge":  0.06,
     },
     "night": {
@@ -161,29 +161,15 @@ RAMPS = {
         # tuned to read well on its own would be washed out the moment they
         # arrive. The sheet's night is dark with bright things in it, and this
         # is the dark half of that.
-        "tint":       (0.30, 0.35, 0.80),
-        "lift":       (0.04, 0.03, 0.12),
+        "tint":       (0.36, 0.40, 0.82),
+        "lift":       (0.04, 0.035, 0.105),
         "saturation": 0.76,
-        # **Anything the palette drew brighter than this keeps its own
-        # colour**, and the number is where it is because of what is either
-        # side of it. Sorted by brightness the palette goes: bone 0.880, moon
-        # 0.849, flame_hot 0.843, then gold_light 0.722 - which is *wheat*.
-        #
-        # So a threshold low enough to exempt the orange body of a flame
-        # (0.679) also exempts a cornfield, and the reference sheet's night
-        # half is quite clear that the corn is dark. A screen-space pass
-        # cannot tell a fire pixel from a wheat pixel when they are nearly the
-        # same colour; it can only ask how bright a thing is.
-        #
-        # 0.80 with a narrow edge lands on exactly the three that are lit
-        # rather than merely pale: the hot core of a flame, the moon, and
-        # bone-white. The orange around that core is tinted with everything
-        # else, which still reads as fire because the core inside it does not.
-        # **The glow itself is task 0076's**, which puts real lights where the
-        # fires actually are - the one thing that can tell them apart.
-        "warm_keep":  0.80,
-        # How wide that threshold is. Narrow, so the exemption lands between
-        # flame_hot and gold_light rather than smearing across both.
+        # Disable the legacy global brightness exemption. Actual crops,
+        # hats and skin share bone/flame_hot with lamps, so colour cannot
+        # identify an emitter. Only semantic fire forms/sparks and measured
+        # glass cores preserve warm pixels above the ambient shader.
+        "warm_keep":  1.00,
+        # Retained for the shared ramp/transition interface; inactive at 1.
         "warm_edge":  0.06,
     },
 }

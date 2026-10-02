@@ -1,0 +1,338 @@
+[
+  {
+    "capture": "implementation/shots/sprites/0019/atmosphere/farm_dawn.png",
+    "review": "implementation/sprites/reviews/0019/captures-00.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/atmosphere/farm_day.png",
+    "review": "implementation/sprites/reviews/0019/captures-01.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/atmosphere/farm_dusk.png",
+    "review": "implementation/sprites/reviews/0019/captures-02.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/atmosphere/farm_night.png",
+    "review": "implementation/sprites/reviews/0019/captures-03.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/atmosphere/farm_night_lights_off.png",
+    "review": "implementation/sprites/reviews/0019/captures-04.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/atmosphere/material_emission_day.png",
+    "review": "implementation/sprites/reviews/0019/captures-05.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/atmosphere/material_emission_night.png",
+    "review": "implementation/sprites/reviews/0019/captures-06.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/atmosphere/palette_day.png",
+    "review": "implementation/sprites/reviews/0019/captures-07.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/atmosphere/palette_night.png",
+    "review": "implementation/sprites/reviews/0019/captures-08.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/atmosphere/quality_0.png",
+    "review": "implementation/sprites/reviews/0019/captures-09.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/atmosphere/quality_1.png",
+    "review": "implementation/sprites/reviews/0019/captures-10.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/atmosphere/quality_2.png",
+    "review": "implementation/sprites/reviews/0019/captures-11.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/atmosphere/reduced_flashing_density.png",
+    "review": "implementation/sprites/reviews/0019/captures-12.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/atmosphere/skip_transition_night.png",
+    "review": "implementation/sprites/reviews/0019/captures-13.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/atmosphere/transition_dawn_00.png",
+    "review": "implementation/sprites/reviews/0019/captures-14.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/atmosphere/transition_dawn_01.png",
+    "review": "implementation/sprites/reviews/0019/captures-15.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/atmosphere/transition_dawn_02.png",
+    "review": "implementation/sprites/reviews/0019/captures-16.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/atmosphere/transition_dawn_03.png",
+    "review": "implementation/sprites/reviews/0019/captures-17.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/atmosphere/transition_dawn_04.png",
+    "review": "implementation/sprites/reviews/0019/captures-18.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/atmosphere/transition_night_00.png",
+    "review": "implementation/sprites/reviews/0019/captures-19.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/atmosphere/transition_night_01.png",
+    "review": "implementation/sprites/reviews/0019/captures-20.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/atmosphere/transition_night_02.png",
+    "review": "implementation/sprites/reviews/0019/captures-21.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/atmosphere/transition_night_03.png",
+    "review": "implementation/sprites/reviews/0019/captures-22.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/atmosphere/transition_night_04.png",
+    "review": "implementation/sprites/reviews/0019/captures-23.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/atmosphere/transition_reversed.png",
+    "review": "implementation/sprites/reviews/0019/captures-24.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/atmosphere/window_cores_off.png",
+    "review": "implementation/sprites/reviews/0019/captures-25.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/atmosphere/window_cores_steady.png",
+    "review": "implementation/sprites/reviews/0019/captures-26.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/dusk-contrast.png",
+    "review": "implementation/sprites/reviews/0019/captures-34.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/dusk-pt_BR-contrast.png",
+    "review": "implementation/sprites/reviews/0019/captures-35.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/dusk-pt_BR.png",
+    "review": "implementation/sprites/reviews/0019/captures-36.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/dusk.png",
+    "review": "implementation/sprites/reviews/0019/captures-37.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/a11y_off.png",
+    "review": "implementation/sprites/reviews/0019/captures-38.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/a11y_reset.png",
+    "review": "implementation/sprites/reviews/0019/captures-39.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/a11y_steady_half.png",
+    "review": "implementation/sprites/reviews/0019/captures-40.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/busy_burning.png",
+    "review": "implementation/sprites/reviews/0019/captures-41.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/busy_flare.png",
+    "review": "implementation/sprites/reviews/0019/captures-42.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/busy_ignition.png",
+    "review": "implementation/sprites/reviews/0019/captures-43.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/chimney_0.png",
+    "review": "implementation/sprites/reviews/0019/captures-44.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/chimney_1.png",
+    "review": "implementation/sprites/reviews/0019/captures-45.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/deaths_0.png",
+    "review": "implementation/sprites/reviews/0019/captures-46.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/deaths_1.png",
+    "review": "implementation/sprites/reviews/0019/captures-47.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/deaths_2.png",
+    "review": "implementation/sprites/reviews/0019/captures-48.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/deaths_3.png",
+    "review": "implementation/sprites/reviews/0019/captures-49.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/deaths_expired.png",
+    "review": "implementation/sprites/reviews/0019/captures-50.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/gallery_0_0.png",
+    "review": "implementation/sprites/reviews/0019/captures-51.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/gallery_0_1.png",
+    "review": "implementation/sprites/reviews/0019/captures-52.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/gallery_0_2.png",
+    "review": "implementation/sprites/reviews/0019/captures-53.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/gallery_0_3.png",
+    "review": "implementation/sprites/reviews/0019/captures-54.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/gallery_0_expired.png",
+    "review": "implementation/sprites/reviews/0019/captures-55.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/gallery_1_0.png",
+    "review": "implementation/sprites/reviews/0019/captures-56.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/gallery_1_1.png",
+    "review": "implementation/sprites/reviews/0019/captures-57.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/gallery_1_2.png",
+    "review": "implementation/sprites/reviews/0019/captures-58.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/gallery_1_3.png",
+    "review": "implementation/sprites/reviews/0019/captures-59.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/gallery_1_expired.png",
+    "review": "implementation/sprites/reviews/0019/captures-60.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/towers_after0.png",
+    "review": "implementation/sprites/reviews/0019/captures-61.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/towers_after1.png",
+    "review": "implementation/sprites/reviews/0019/captures-62.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/towers_after2.png",
+    "review": "implementation/sprites/reviews/0019/captures-63.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/towers_contact.png",
+    "review": "implementation/sprites/reviews/0019/captures-64.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/work_chop_contact.png",
+    "review": "implementation/sprites/reviews/0019/captures-65.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/work_chop_peak.png",
+    "review": "implementation/sprites/reviews/0019/captures-66.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/work_fish_contact.png",
+    "review": "implementation/sprites/reviews/0019/captures-67.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/work_fish_peak.png",
+    "review": "implementation/sprites/reviews/0019/captures-68.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/work_harvest_contact.png",
+    "review": "implementation/sprites/reviews/0019/captures-69.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/work_harvest_peak.png",
+    "review": "implementation/sprites/reviews/0019/captures-70.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/work_mine_contact.png",
+    "review": "implementation/sprites/reviews/0019/captures-71.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/work_mine_peak.png",
+    "review": "implementation/sprites/reviews/0019/captures-72.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/work_water_contact.png",
+    "review": "implementation/sprites/reviews/0019/captures-73.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/work_water_peak.png",
+    "review": "implementation/sprites/reviews/0019/captures-74.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/noon-contrast.png",
+    "review": "implementation/sprites/reviews/0019/captures-75.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/noon-pt_BR-contrast.png",
+    "review": "implementation/sprites/reviews/0019/captures-76.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/noon-pt_BR.png",
+    "review": "implementation/sprites/reviews/0019/captures-77.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/noon.png",
+    "review": "implementation/sprites/reviews/0019/captures-78.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/result-contrast.png",
+    "review": "implementation/sprites/reviews/0019/captures-79.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/result-pt_BR-contrast.png",
+    "review": "implementation/sprites/reviews/0019/captures-80.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/result-pt_BR.png",
+    "review": "implementation/sprites/reviews/0019/captures-81.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/result.png",
+    "review": "implementation/sprites/reviews/0019/captures-82.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/tech-contrast.png",
+    "review": "implementation/sprites/reviews/0019/captures-83.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/tech-pt_BR-contrast.png",
+    "review": "implementation/sprites/reviews/0019/captures-84.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/tech-pt_BR.png",
+    "review": "implementation/sprites/reviews/0019/captures-85.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/tech.png",
+    "review": "implementation/sprites/reviews/0019/captures-86.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/wave-contrast.png",
+    "review": "implementation/sprites/reviews/0019/captures-87.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/wave-pt_BR-contrast.png",
+    "review": "implementation/sprites/reviews/0019/captures-88.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/wave-pt_BR.png",
+    "review": "implementation/sprites/reviews/0019/captures-89.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/wave.png",
+    "review": "implementation/sprites/reviews/0019/captures-90.png"
+  }
+]

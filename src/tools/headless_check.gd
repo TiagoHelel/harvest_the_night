@@ -12813,27 +12813,15 @@ func _task_0071_palettes() -> void:
 	expect(PaletteData.DAY_LIFT.is_equal_approx(Color(0, 0, 0)),
 		"and the day lifts nothing", str(PaletteData.DAY_LIFT))
 
-	# **Fire, lamps and the moon are the only warm things at night**, and the
-	# threshold is where it is on purpose. Sorted by brightness the palette
-	# runs bone, moon, flame_hot, and then *gold_light*, which is wheat - so a
-	# threshold low enough to exempt the orange body of a flame also exempts a
-	# cornfield, and the sheet's night corn is dark. This asserts the
-	# threshold lands in that gap, because the next person to turn the dial
-	# will not know the gap is there.
+	# Source crops/cloth share the lamp palette. Every non-emitting material
+	# follows ambient night; semantic fire layers preserve only actual emitters.
 	var keep := PaletteData.NIGHT_WARM_KEEP
-	var lit := ["bone", "flame_hot", "moon"]
-	for name in lit:
-		expect(_luma(colours[StringName(name)]) > keep,
-			"%s keeps its own colour after dark" % name,
-			"%.3f against %.3f" % [_luma(colours[StringName(name)]), keep])
-	for name in ["gold_light", "grass_light", "water_light", "roof_light",
-			"soil_light", "wood_light", "stone_light", "flame"]:
-		expect(_luma(colours[StringName(name)]) < keep,
-			"and %s is lit by the night like everything else" % name,
-			"%.3f against %.3f" % [_luma(colours[StringName(name)]), keep])
-	print("  the night exempts %s; the brightest thing it does not is "
-		% ", ".join(lit) + "gold_light at %.3f against a threshold of %.3f"
-			% [_luma(colours[&"gold_light"]), keep])
+	expect(keep>=0.999,"Ambient night never exempts a material by brightness")
+	for name in GameData.sorted_names(colours.keys()):
+		expect(_luma(colours[StringName(name)])<keep,
+			"Every non-emitting palette material follows night light: "+str(name))
+	expect(PixelEffects.WARM_FAMILIES==[&"muzzle",&"flame",&"flare"],
+		"Only actual fire/flash families preserve their authored warm pixels")
 
 	# **The exemption has an edge**, so a flame has no hard outline where it
 	# stops, and the edge is narrower than the gap it sits in.
@@ -12862,6 +12850,13 @@ func _task_0071_palettes() -> void:
 ## bright enough to be left alone.
 func _luma(c: Color) -> float:
 	return c.r * 0.299 + c.g * 0.587 + c.b * 0.114
+
+
+## Ambient-only night transform; actual renderer probes check its output too.
+func _ambient_night(c: Color) -> Color:
+	var tinted := c * PaletteData.NIGHT_TINT
+	var grey := _luma(tinted)
+	return Color(grey,grey,grey).lerp(tinted,PaletteData.NIGHT_SATURATION) + PaletteData.NIGHT_LIFT
 
 
 func _ramp_fields(tint: Color, lift: Color, saturation: float,
@@ -13235,17 +13230,15 @@ func _task_0074_zombie_art() -> void:
 				"visible %dx%d against %dx%d" % [giant_size.x,
 					giant_size.y, other_size.x, other_size.y])
 
-	# **The rim light is a colour the night ramp leaves alone.** That is the
-	# whole trick, and it is an agreement between two tasks: 0071 exempts
-	# anything the palette drew brighter than `NIGHT_WARM_KEEP`, and this is
-	# what makes one line of pixels keep its colour after dark. If somebody
-	# turns that threshold up, the enemies stop reading against the night and
-	# nothing else would say so.
+	# Pale outlines follow ambient night like the rest of the body. They must
+	# remain cool and readable against grass without becoming light sources.
 	var rim: Color = PaletteData.COLOURS[&"moon"]
-	var brightness := rim.r * 0.299 + rim.g * 0.587 + rim.b * 0.114
-	expect(brightness > PaletteData.NIGHT_WARM_KEEP,
-		"the rim light survives the night ramp",
-		"%.3f against %.3f" % [brightness, PaletteData.NIGHT_WARM_KEEP])
+	var rim_night := _ambient_night(rim)
+	var grass_night := _ambient_night(PaletteData.COLOURS[&"grass"])
+	expect(rim_night.b > rim_night.r and rim_night.b > rim_night.g
+		and _luma(rim_night) - _luma(grass_night) > 0.1,
+		"ambient enemy highlights stay cool and distinct from night grass",
+		"%.3f contrast" % (_luma(rim_night)-_luma(grass_night)))
 
 	# And it is actually on them: the last lit pixel of a row, on every row
 	# that has one.
@@ -13431,14 +13424,25 @@ func _task_0075_building_art() -> void:
 		expect(firing.get_data() != quiet.get_data()
 			and RasterArt.FRAMES[WorldView.BUILDING_DIR + str(id) + "_fire.png"].has("muzzle"),
 			"authored weapon action has a distinct frame and a measured outlet")
-		expect(_brightest(firing) > PaletteData.NIGHT_WARM_KEEP,
-			"and the flash is bright enough to survive the night ramp",
-			"%.3f" % _brightest(firing))
+		var host := Node2D.new()
+		root.add_child(host)
+		var warm := Node2D.new()
+		host.add_child(warm)
+		var forms := PixelEffects.new()
+		forms.ground_parent = host
+		forms.warm_parent = warm
+		var family: StringName = &"flame" if id == &"flame_tower" else &"muzzle"
+		forms.emit(family, Vector2(32,48))
+		forms.advance(0.0, host)
+		expect(forms.sprites.size() == 1
+			and forms.sprites[0].get_parent() == warm
+			and forms.sprites[0].texture.resource_path == PixelEffects.path_for(family,0),
+			"actual tower fire uses the semantic warm layer and authored effect")
+		forms.release()
+		host.free()
 
-	# **The house is the landmark.** Biggest, and warm after dark: its windows
-	# are painted in a colour task 0071 exempts from the night tint, which is
-	# what "the warmest thing on the farm, by day and by night" comes to in
-	# pixels.
+	# The house is the landmark. Glass source coordinates position the small
+	# warm cores above relighting; bright roof/cloth pixels are never exempt.
 	var house_area := 0
 	for corner_x in 3:
 		for corner_y in 3:
@@ -13462,9 +13466,8 @@ func _task_0075_building_art() -> void:
 				% [corner_x, corner_y]))
 			if tile != null:
 				warm = maxf(warm, _brightest(tile))
-	expect(warm > PaletteData.NIGHT_WARM_KEEP,
-		"and its windows stay lit after dark", "%.3f against %.3f"
-			% [warm, PaletteData.NIGHT_WARM_KEEP])
+	expect(warm > 0.8,
+		"and its measured glass has bright source pixels for localized night lamps", "%.3f" % warm)
 
 	print("  the house is %d pixels of building; the biggest defence is %d"
 		% [house_area, biggest])
@@ -13596,20 +13599,12 @@ func _task_0077_particles() -> void:
 		expect(PaletteData.COLOURS.has(StringName(name)),
 			"a particle is drawn in '%s', which is on the palette" % name)
 
-	# **The hot ones survive the night and the cold ones do not**, which is
-	# what makes a spark read as fire and smoke read as smoke. Task 0071's
-	# threshold decides both, and this is the assert that notices if it moves.
-	# Only the **spark** clears it, and that is the palette's own design
-	# rather than an accident: task 0071 found that the one warm colour
-	# above the line is `flame_hot`, because `flame` sits below wheat. So a
-	# spark is the hot core and stays orange, and an ember is the orange
-	# around it and dims - which is what an ember at a distance does. An
-	# assert that demanded otherwise would be an assert demanding the palette
-	# be repainted to suit it.
+	# Semantic hot sparks stay warm; smoke/dust and subdued embers remain
+	# under the ambient ramp. Sharing a colour never exempts a crop or shirt.
 	var keep := PaletteData.NIGHT_WARM_KEEP
 	var spark: Color = PaletteData.COLOURS[StringName(Particles.SPARK)]
-	expect(spark.r * 0.299 + spark.g * 0.587 + spark.b * 0.114 > keep,
-		"a spark stays warm after dark, because it is the hot core")
+	expect(spark.r > spark.b*1.25 and spark.g>spark.b,
+		"A semantic hot spark has a warm authored core independent of ambient threshold")
 	for name in [Particles.EMBER, Particles.SMOKE, Particles.DUST]:
 		var dim: Color = PaletteData.COLOURS[StringName(name)]
 		expect(dim.r * 0.299 + dim.g * 0.587 + dim.b * 0.114 < keep,

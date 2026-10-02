@@ -314,3 +314,16 @@ use a gold tab underline for selection, a lighter hover field, quieter disabled
 fields/ticks/grips and the existing open white keyboard-focus ring. Sliders
 use the same eight-pixel grip family in normal/highlight/disabled states.
 No text is baked into PNGs. All completed world/actor/effect sprites stay exact.
+
+Task 0019 tunes presentation using all accepted sprites unchanged. Every
+non-emitting material follows ambient light, including white clothing, ripe
+crops and enemy highlights. Bright source pixels alone must not emit light.
+Actual muzzle/flame/flare forms and hot sparks preserve their warm colours on
+a camera-following layer above relighting. Five two-pixel house glass cores
+use measured source coordinates; their subdued halos do not bleach the roof.
+Night tint (0.36,0.40,0.82), violet lift (0.04,0.035,0.105) and saturation 0.76
+keep paths, enemy shapes and contact shadows visible at 480x270. All source
+palette colours and completed PNGs remain exact; no baked night duplicates.
+Review settled endpoints as well as both fades. Phase reversal must continue
+from the currently displayed ramp, with a modest tower pulse and day animals
+identified by their actual logical-cell metadata. Preserve grid/resolution.

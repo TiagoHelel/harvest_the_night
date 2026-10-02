@@ -613,3 +613,40 @@ The full localized dusk label and large balances must remain separated.
 The full verifier includes both source and UI-display gates. Real standard,
 tech/result/pause/options/title captures supplement the fixture; visual review
 still decides legibility, state contrast and material identity.
+
+## Shared atmosphere (0019)
+
+This task needs no new generation: existing reference/study images and accepted
+families supply the evidence. All 468 runtime PNGs, 447 raster manifest entries,
+raw sources, prior submitted prompts and 42 COLOURS values remain unchanged.
+Only RAMPS and view integration change. Regenerate palette_data.gd through
+gen_sprites.py; it must agree with tools/palette.py without rewriting images.
+
+Every game ramp sets warm_keep=1.0. The shader disables the complete brightness
+exemption at that value, including its soft edge. Actual fire families use the
+existing 24-slot pool on an Emissions CanvasLayer (2), follow_viewport_enabled,
+with the parent world transform; smoke/impacts remain ambient and dust/splash
+stay below actors. Procedural hot sparks share this layer. Lamps are layer 2,
+relight is layer 1, and UI is layer 3. Five measured house windows receive
+two-pixel normal-blend cores separate from additive halos. Lights off removes
+cores; reduced flashing preserves the existing steady/fading controls.
+
+WorldView remembers the displayed ramp and animal fade when a transition reverses. Transition
+uses sprite logical_cells metadata to find the existing animals and towers;
+it never edits occupancy. Standard shot.gd captures settle the view ramp after
+the existing simulation settling, without extra simulation ticks. --switch
+still captures the full fade separately.
+
+```powershell
+python tools/show_art.py --atmosphere --check
+python tools/show_art.py --atmosphere --out=implementation/shots/sprites/0019/atmosphere
+python implementation/sprites/reviews/0019/build_review.py
+python implementation/sprites/reviews/0019/audit.py
+```
+
+The fixture pairs four phases on one fixed farm, probes all 42 actual-renderer
+material colours, checks all five window cores and seven effect families,
+both transitions, interrupted reversal, lights off/steady/full, reduced motion
+and skipped transition. It restores settings without persistence and compares
+complete core/save bytes around each observer. Full verify includes the
+headless atmosphere gate; actual captures remain required for shader evidence.

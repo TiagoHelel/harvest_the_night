@@ -1,0 +1,296 @@
+[
+	{
+		"day": "912b31ff",
+		"day_luma": 0.290909814849496,
+		"name": "blood",
+		"night": "381d42ff",
+		"night_luma": 0.16192549277097
+	},
+	{
+		"day": "ede0c7ff",
+		"day_luma": 0.882498046219349,
+		"name": "bone",
+		"night": "6164b3ff",
+		"night_luma": 0.423956870675087
+	},
+	{
+		"day": "bcae94ff",
+		"day_luma": 0.687145116686821,
+		"name": "bone_dark",
+		"night": "4e508dff",
+		"night_luma": 0.338650993406773
+	},
+	{
+		"day": "325a86ff",
+		"day_luma": 0.325709813252091,
+		"name": "cloth",
+		"night": "212e7cff",
+		"night_luma": 0.200019612520933
+	},
+	{
+		"day": "213855ff",
+		"day_luma": 0.205603925913572,
+		"name": "cloth_dark",
+		"night": "192058ff",
+		"night_luma": 0.142317652948201
+	},
+	{
+		"day": "507faaff",
+		"day_luma": 0.462152946829796,
+		"name": "cloth_light",
+		"night": "2d3d96ff",
+		"night_luma": 0.260243141740561
+	},
+	{
+		"day": "f7a03aff",
+		"day_luma": 0.683862758845091,
+		"name": "flame",
+		"night": "5d4a51ff",
+		"night_luma": 0.31560393255949
+	},
+	{
+		"day": "fbd975ff",
+		"day_luma": 0.846141182243824,
+		"name": "flame_hot",
+		"night": "63607cff",
+		"night_luma": 0.39250588876009
+	},
+	{
+		"day": "c89643ff",
+		"day_luma": 0.609756882607937,
+		"name": "gold",
+		"night": "4f4655ff",
+		"night_luma": 0.291768639862537
+	},
+	{
+		"day": "ab742aff",
+		"day_luma": 0.48630981194973,
+		"name": "gold_dark",
+		"night": "443842ff",
+		"night_luma": 0.238149026468396
+	},
+	{
+		"day": "daba5cff",
+		"day_luma": 0.724909816920757,
+		"name": "gold_light",
+		"night": "575469ff",
+		"night_luma": 0.342317656457424
+	},
+	{
+		"day": "6c9643ff",
+		"day_luma": 0.501882370322943,
+		"name": "grass",
+		"night": "344353ff",
+		"night_luma": 0.252309814229608
+	},
+	{
+		"day": "507a33ff",
+		"day_luma": 0.397443141669035,
+		"name": "grass_dark",
+		"night": "2a3846ff",
+		"night_luma": 0.209450984507799
+	},
+	{
+		"day": "8db655ff",
+		"day_luma": 0.622286293625832,
+		"name": "grass_light",
+		"night": "405062ff",
+		"night_luma": 0.303011776447296
+	},
+	{
+		"day": "251f2cff",
+		"day_luma": 0.134415688790381,
+		"name": "ink",
+		"night": "18163bff",
+		"night_luma": 0.105160786345601
+	},
+	{
+		"day": "3b3342ff",
+		"day_luma": 0.216086278229952,
+		"name": "ink_soft",
+		"night": "201e4cff",
+		"night_luma": 0.140556866593659
+	},
+	{
+		"day": "2f5e32ff",
+		"day_luma": 0.293847064957023,
+		"name": "leaf",
+		"night": "1e2d43ff",
+		"night_luma": 0.168717651374638
+	},
+	{
+		"day": "1e4023ff",
+		"day_luma": 0.19814902921766,
+		"name": "leaf_dark",
+		"night": "172236ff",
+		"night_luma": 0.129376475550234
+	},
+	{
+		"day": "478047ff",
+		"day_luma": 0.409643160134554,
+		"name": "leaf_light",
+		"night": "283a54ff",
+		"night_luma": 0.217968631058931
+	},
+	{
+		"day": "d3d6f5ff",
+		"day_luma": 0.849556871712208,
+		"name": "moon",
+		"night": "5a61d1ff",
+		"night_luma": 0.422254909992218
+	},
+	{
+		"day": "1a182eff",
+		"day_luma": 0.106298041179776,
+		"name": "night",
+		"night": "14133cff",
+		"night_luma": 0.0940117674022913
+	},
+	{
+		"day": "2f2a4bff",
+		"day_luma": 0.185321574181318,
+		"name": "night_light",
+		"night": "1c1b51ff",
+		"night_luma": 0.131196080610156
+	},
+	{
+		"day": "b34238ff",
+		"day_luma": 0.386850994348526,
+		"name": "roof",
+		"night": "442749ff",
+		"night_luma": 0.20214510704577
+	},
+	{
+		"day": "8d2f28ff",
+		"day_luma": 0.291403932467103,
+		"name": "roof_dark",
+		"night": "371e3cff",
+		"night_luma": 0.160372549988329
+	},
+	{
+		"day": "cd6356ff",
+		"day_luma": 0.506713734000921,
+		"name": "roof_light",
+		"night": "4e3460ff",
+		"night_luma": 0.254078437283635
+	},
+	{
+		"day": "57764fff",
+		"day_luma": 0.408960789740086,
+		"name": "rot",
+		"night": "2c3758ff",
+		"night_luma": 0.217541180104017
+	},
+	{
+		"day": "365036ff",
+		"day_luma": 0.271615693733096,
+		"name": "rot_dark",
+		"night": "202845ff",
+		"night_luma": 0.160447065860033
+	},
+	{
+		"day": "e99b64ff",
+		"day_luma": 0.674713741481304,
+		"name": "skin",
+		"night": "59496cff",
+		"night_luma": 0.320682363629341
+	},
+	{
+		"day": "b86b48ff",
+		"day_luma": 0.494247068077326,
+		"name": "skin_dark",
+		"night": "483656ff",
+		"night_luma": 0.24717647691071
+	},
+	{
+		"day": "f8c587ff",
+		"day_luma": 0.804631384193897,
+		"name": "skin_light",
+		"night": "615987ff",
+		"night_luma": 0.378964716494083
+	},
+	{
+		"day": "7c5836ff",
+		"day_luma": 0.372109809845686,
+		"name": "soil",
+		"night": "352d47ff",
+		"night_luma": 0.197474514633417
+	},
+	{
+		"day": "5e4228ff",
+		"day_luma": 0.280031383961439,
+		"name": "soil_dark",
+		"night": "2a243cff",
+		"night_luma": 0.158941181898117
+	},
+	{
+		"day": "997047ff",
+		"day_luma": 0.468960795074701,
+		"name": "soil_light",
+		"night": "3f3755ff",
+		"night_luma": 0.23847843375802
+	},
+	{
+		"day": "706c73ff",
+		"day_luma": 0.43134902369976,
+		"name": "stone",
+		"night": "343571ff",
+		"night_luma": 0.233494120329618
+	},
+	{
+		"day": "545058ff",
+		"day_luma": 0.321992167472839,
+		"name": "stone_dark",
+		"night": "292a5dff",
+		"night_luma": 0.186333338826895
+	},
+	{
+		"day": "8f8a90ff",
+		"day_luma": 0.549721595466137,
+		"name": "stone_light",
+		"night": "3f4287ff",
+		"night_luma": 0.286152952864766
+	},
+	{
+		"day": "3b6e9eff",
+		"day_luma": 0.393031377866864,
+		"name": "water",
+		"night": "25368dff",
+		"night_luma": 0.230725496441126
+	},
+	{
+		"day": "2c547bff",
+		"day_luma": 0.29994510550797,
+		"name": "water_dark",
+		"night": "1f2b73ff",
+		"night_luma": 0.18674510128051
+	},
+	{
+		"day": "5c8cb8ff",
+		"day_luma": 0.512407863289118,
+		"name": "water_light",
+		"night": "3142a1ff",
+		"night_luma": 0.281360796287656
+	},
+	{
+		"day": "8f6237ff",
+		"day_luma": 0.417854914069176,
+		"name": "wood",
+		"night": "3b3149ff",
+		"night_luma": 0.214611768513918
+	},
+	{
+		"day": "6d4a2aff",
+		"day_luma": 0.316929420977831,
+		"name": "wood_dark",
+		"night": "2f273eff",
+		"night_luma": 0.172603926181793
+	},
+	{
+		"day": "ab7c4bff",
+		"day_luma": 0.519478439122438,
+		"name": "wood_light",
+		"night": "453c58ff",
+		"night_luma": 0.258364711537957
+	}
+]

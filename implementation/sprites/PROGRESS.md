@@ -1254,3 +1254,57 @@ Unrelated previously generated imports are excluded from this task's commit.
 Queue after completion: 18 done, 2 todo, zero doing/blocked. Next: 0019 atmosphere,
 using accepted sprites. Exactly one task closes this cycle; the longer goal
 remains active through 0019 and 0020.
+
+## 0019 — Shared palette and day/night atmosphere — 2026-10-02
+
+Completed the atmosphere integration using accepted art and the existing reference
+study. Zero new ImageGen calls, revisions or masters; every completed sprite is
+preserved. Audit against `303f38b` proves 1,312 protected files, all 468 runtime
+PNGs, all 447 raster entries, previous source/prompt records and 42 palette colours
+unchanged. Only day/night ramp parameters and view presentation change; project
+resolution, core, save formats, balance, grid and collision remain unchanged.
+
+Night now uses blue/violet tint (.36,.40,.82), lift (.04,.035,.105) and saturation
+.76. Game ramps disable the complete brightness exemption, so pale cloth/crops
+receive ambient light instead of glowing. Actual muzzle/flame/flare and hot sparks
+use an Emissions layer above relight through the existing 24-slot/420-limit pool.
+Smoke/impacts remain ambient and ground effects remain below actors. Five measured
+window cores retain localized amber light in normal blend beside the existing
+small additive halos. UI sits above these layers. Generated palette data agrees
+with tools/palette.py; all image reproduction gates write zero files.
+
+Transition now identifies source-owned pivot sprites through logical_cells;
+three daytime animals fade and eight towers wake with a restrained 1.45 pulse.
+Interrupted reversal preserves the displayed ramp and animal opacity. Standard
+photographs settle ambient light without advancing additional simulation ticks.
+The new atmosphere fixture restores settings without persistence, never writes a
+profile and checks complete state bytes around observers. Actual capture review
+caught stale manually refreshed transition observers; final captures refresh lamps
+and animal presentation after every phase step.
+
+Final full verify: 52 passed, zero skipped/failed in 405s on Godot 4.7.1, 115 scripts
+parse, 6,646 rule assertions, 982 input cases and Windows/Web exports pass. Sim
+`1961000123` and data `407837701` remain unchanged. The 300s soft duration target
+is exceeded without a failed gate. Night tick 544us/8,333us and path rebuild
+4,183us/33,333us pass. Atmosphere has 198 headless / 300 actual-renderer checks;
+effects have 2,997 / 3,156; all pass. At 100 burning actors, CPU view p95 is 532us
+against 16,000us with unchanged pool budgets; this does not measure GPU cost.
+
+Reviewed 84 actual 480x270 captures at native and nearest 3x: 27 atmosphere,
+37 effects and 20 standard scenes in English/pt-BR and both themes. Paired final
+farm scenes hold map and actor positions fixed. Material/emission/window probes,
+both transitions, reversal, quality 0/1/2, lights off, reduced flashing/density and
+skip transition pass. Following observer refresh, 52 previously reviewed frames
+are pixel-identical; all 12 changed frames were reopened plus all 20 new standards.
+Before diagnostics and initial failed verification logs remain as evidence.
+
+Evidence: `implementation/shots/sprites/0019/{atmosphere,effects}` and standard
+scene PNGs; `reviews/0019/REVIEW.md`, capture index, observer pixel comparison,
+palette measurements, scope/source hashes and `verify-complete.log`. Five old
+brightness-exemption assertions were replaced with actual material/emitter checks;
+no gate or hash guard was disabled. Existing alpha, frame ownership and contacts
+remain unchanged. Pre-existing untranslated Portuguese result/tech labels are
+recorded in review, outside this atmosphere task.
+
+Queue after completion: 19 done, 1 todo, zero doing/blocked. Next: 0020 final audit.
+Exactly one task closes this cycle; the longer goal remains active through 0020.

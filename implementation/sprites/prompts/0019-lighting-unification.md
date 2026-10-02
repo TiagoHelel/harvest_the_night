@@ -1,6 +1,6 @@
 # 0019 - Final shared palette and day/night atmosphere
 
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0006, 0008, 0009, 0010, 0012, 0017, 0018
 - **Likely files:** tools/palette.py; src/ui/palette_data.gd; src/ui/relight.gdshader; src/ui/relight.gd; src/ui/lighting.gd; src/ui/transition.gd
 - **Generation briefs:** LIGHTING_STUDY (only if a reference study is needed)

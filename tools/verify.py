@@ -303,6 +303,11 @@ def check_ui_art_showcase():
     return check("UI display/states", code == 0, next((s for s in out.splitlines() if s.startswith("UI ART SHOWCASE:")), tail(out, 4)))
 
 
+def check_atmosphere_showcase():
+    code, out = run([sys.executable, "tools/show_art.py", "--atmosphere", "--check"])
+    return check("atmosphere/emission", code == 0, next((s for s in out.splitlines() if s.startswith("ATMOSPHERE SHOWCASE:")), tail(out, 4)))
+
+
 def check_effect_showcase():
     code, out = run([sys.executable, "tools/show_art.py", "--effects", "--check"])
     return check("effect contacts/a11y", code == 0, next((s for s in out.splitlines() if s.startswith("EFFECT SHOWCASE:")), tail(out, 4)))
@@ -728,6 +733,7 @@ def main():
     check_effect_showcase()
     check_ui_art()
     check_ui_art_showcase()
+    check_atmosphere_showcase()
     check_font()
     check_logo()
     check_sfx()

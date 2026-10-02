@@ -3568,8 +3568,8 @@ func _case_0071_palettes() -> void:
 	var lift: Vector3 = by_night["lift"]
 	expect(lift.z > lift.x and lift.z > lift.y,
 		"and lifted towards purple, which a multiply cannot do", str(lift))
-	expect(float(by_night["warm_keep"]) < 0.99,
-		"and the warm things are exempt from it",
+	expect(float(by_night["warm_keep"]) >= 0.999,
+		"and pale materials are never mistaken for semantic fire sources",
 		str(by_night["warm_keep"]))
 
 	# **The tint the shader is given is the tint the light is on.** The

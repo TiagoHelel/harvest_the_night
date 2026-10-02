@@ -189,6 +189,9 @@ var _light: CanvasModulate
 var _lit_for := -1                  # the phase the fade is heading towards
 var _fade := 1.0                    # 0 at the start of a change, 1 when done
 var _fade_from := Color.WHITE       # where the fade started
+var _fade_ramp: Dictionary = {}
+var _worn_ramp: Dictionary = {}
+var _fade_nightness := 0.0
 ## The rest of the ramp. A sibling layer, so it can sit over the whole world
 ## and under the whole HUD; null when the view is opened on its own.
 var _relight: Relight
@@ -370,11 +373,13 @@ func _light_for_phase(delta: float) -> void:
 	var target: Color = _daylight_now() if wants_day 		else PaletteData.NIGHT_TINT
 
 	if phase != _lit_for:
+		_fade_nightness = visual_nightness()
 		# Only a change between the two realities is worth a fade; DAY to DAY
 		# after a result screen is not a transition, it is the same light.
 		var was_day := _lit_for == Phases.DAY or _lit_for == -1
 		_fade = 1.0 if was_day == wants_day else 0.0
 		_fade_from = _light.color
+		_fade_ramp = _worn_ramp.duplicate() if not _worn_ramp.is_empty() else _ramp_of(_fade_from)
 		_lit_for = phase
 
 	if _fade >= 1.0:
@@ -389,7 +394,7 @@ func _light_for_phase(delta: float) -> void:
 	# `is_transitioning()` true long after the fade looked over.
 	_fade = minf(_fade + delta / maxf(_transition_seconds, 0.05), 1.0)
 	_light.color = _fade_from.lerp(target, _fade)
-	_wear(_blend(_ramp_of(_fade_from), _ramp_now(), _fade))
+	_wear(_blend(_fade_ramp, _ramp_now(), _fade))
 
 
 ## The colour of the daylight right now: cool at dawn, plain at noon, warm at
@@ -500,6 +505,7 @@ static func _blend(from: Dictionary, to: Dictionary, t: float) -> Dictionary:
 ## game reads; the other three go to the shader, which is the only thing that
 ## can apply them.
 func _wear(ramp: Dictionary) -> void:
+	_worn_ramp = ramp.duplicate()
 	if _relight == null:
 		return
 	_relight.apply(_light.color, ramp["lift"], ramp["saturation"],
@@ -532,6 +538,12 @@ func transition_progress() -> float:
 ## The morning is the reward half and does not look the same.
 func going_dark() -> bool:
 	return _lit_for != Phases.DAY
+
+
+## Actor fading follows the same displayed light, even after a reversal.
+func visual_nightness() -> float:
+	var target := 0.0 if _lit_for in [-1, Phases.DAY] else 1.0
+	return lerpf(_fade_nightness, target, transition_progress())
 
 
 ## The length, read once, by path - `verify.py` parses every script on its own

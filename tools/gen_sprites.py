@@ -516,8 +516,8 @@ def palette_gd():
                      % (ramp_name.upper(), ramp["saturation"]))
         # Every ramp declares one now, so the four are the same record and a
         # lerp between two of them does not have to ask which fields exist.
-        lines.append("## Anything the palette drew brighter than this keeps")
-        lines.append("## its own colour: firelight, a lit window, the moon.")
+        lines.append("## Legacy brightness threshold; 1 disables all material exemptions.")
+        lines.append("## Actual fire/window cores use semantic emission layers.")
         lines.append("const %s_WARM_KEEP := %.3f"
                      % (ramp_name.upper(), ramp.get("warm_keep", 1.0)))
         lines.append("## How wide that threshold is, so a flame has no hard")

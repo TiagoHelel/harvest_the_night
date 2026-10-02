@@ -105,24 +105,20 @@ func _find_day_actors() -> void:
 	var world := _view.find_child("Occupants", true, false)
 	if world == null:
 		return
-	# The farm's occupant sprites are drawn at their cell, so the cell is how
-	# one is recognised. Cheap, and only redone when the farm changes shape.
-	var wanted: Dictionary = {}
-	var waking: Dictionary = {}
-	for idx in occupants:
-		var id: StringName = (occupants[idx] as Dictionary)["id"]
-		var at := Vector2(Grid.cell(int(idx))) * float(GameData.TILE_SIZE)
-		if DAY_ONLY.has(id):
-			wanted[at] = true
-		elif WAKES.has(id):
-			waking[at.x] = true
+	# Source-owned drawings sit at ground pivots. Their logical-cell metadata
+	# identifies the occupant, including a grouped station and taller animals.
 	for child in world.get_children():
 		var sprite := child as Sprite2D
 		if sprite == null:
 			continue
-		if wanted.has(sprite.position):
+		var cells: Array = sprite.get_meta("logical_cells",[])
+		if cells.is_empty():
+			continue
+		var on: Dictionary = occupants.get(int(cells[0]),{})
+		var id: StringName = on.get("id",&"")
+		if DAY_ONLY.has(id):
 			_day_actors.append(sprite)
-		elif waking.has(sprite.position.x):
+		elif WAKES.has(id):
 			_wakers.append(sprite)
 
 
@@ -149,7 +145,7 @@ func _dress_the_actors() -> void:
 		var tower := sprite as Sprite2D
 		if tower == null:
 			continue
-		var lit := 1.0 + flare * 1.4
+		var lit := 1.0 + flare * 0.45
 		tower.modulate = Color(lit, lit * 0.94, lit * 0.78)
 
 
@@ -165,10 +161,7 @@ func _actors_are_alive() -> bool:
 
 ## How far into the night the world is, counting the change itself.
 func _nightness() -> float:
-	var through := _view.transition_progress()
-	if _view.going_dark():
-		return through
-	return 1.0 - through
+	return _view.visual_nightness()
 
 
 # -------------------------------------------------------------- the sweep

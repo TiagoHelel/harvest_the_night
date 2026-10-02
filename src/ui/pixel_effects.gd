@@ -9,6 +9,7 @@ const COUNTS := {&"muzzle":3, &"impact":3, &"flame":4, &"smoke":4,
 	&"dust":3, &"splash":4, &"flare":4}
 const OPACITY := {&"muzzle":1.0, &"impact":0.85, &"flame":1.0,
 	&"smoke":0.6, &"dust":0.8, &"splash":1.0, &"flare":1.0}
+const WARM_FAMILIES := [&"muzzle", &"flame", &"flare"]
 
 var limit := MAX_FORMS
 var density := 1.0
@@ -16,6 +17,7 @@ var motion := true
 var records: Array[Dictionary] = []
 var sprites: Array[Sprite2D] = []
 var ground_parent: Node2D
+var warm_parent: Node2D
 var _textures: Dictionary = {}
 var _credit := 0.0
 var _tick := -1
@@ -44,6 +46,7 @@ func release() -> void:
 			sprite.queue_free()
 	sprites.clear()
 	ground_parent = null
+	warm_parent = null
 
 
 func set_density(value: float) -> void:
@@ -104,7 +107,10 @@ func advance(delta: float, parent: Node2D) -> void:
 		var record := records[i]
 		var family: StringName = record["family"]
 		var ground := ground_parent if is_instance_valid(ground_parent) else null
-		var target := ground if ground!=null and family in [&"dust",&"splash"] else parent
+		var warm := warm_parent if is_instance_valid(warm_parent) else null
+		var target := warm if warm!=null and family in WARM_FAMILIES else ground if ground!=null and family in [&"dust",&"splash"] else parent
+		if warm!=null:
+			warm.transform = parent.get_global_transform()
 		if sprite.get_parent()!=target:
 			sprite.reparent(target,false)
 		var phase := int(floorf((float(record["age"]) + 0.000001) / seconds(family))) if motion else 0

@@ -13,9 +13,9 @@ shader_type canvas_item;
 //   * **saturation** - moonlight is not a coloured bulb pointed at a bright
 //     afternoon. Pulling the colour out is most of what makes it read as
 //     night rather than as a blue filter.
-//   * **warm_keep** - fire, a lit window and the moon are the only warm
-//     things after dark, and a tint that dims them along with the grass
-//     leaves a night that is evenly blue and dead.
+//   * **warm_keep** - retained threshold interface for explicit diagnostic
+//     ramps. All game ramps use 1.0: cloth/crops follow ambient light, while
+//     semantic fire forms and measured window cores are drawn above it.
 //
 // The last one needs the colour the pixel had *before* the tint, and all this
 // pass can see is the screen after it. So it divides the tint back out. That
@@ -32,7 +32,7 @@ uniform vec3 lift = vec3(0.0);
 // 1.0 leaves the palette alone; below that walks it towards grey.
 uniform float saturation = 1.0;
 // Anything the palette drew brighter than this keeps its own colour. At 1.0
-// nothing is exempt, which is what daylight wants.
+// nothing is exempt, including the soft edge. This applies to all game ramps.
 uniform float warm_keep = 1.0;
 // How wide the edge of that threshold is, so a flame does not have a hard
 // outline where the exemption stops.
@@ -55,8 +55,11 @@ void fragment() {
 	// **Judged on the original.** A flame is only obviously a flame before
 	// the night tint has been through it; after, it is as dim as the grass.
 	float bright = dot(raw, LUMA);
-	float keep = smoothstep(warm_keep - warm_edge, warm_keep + warm_edge,
-		bright);
+	// A threshold of one disables the exemption, including its soft edge.
+	// Semantic fire forms/sparks are drawn above this pass; cloth and crops
+	// can share those source colours without becoming emissive themselves.
+	float keep = warm_keep < 0.999 ? smoothstep(warm_keep - warm_edge,
+		warm_keep + warm_edge, bright) : 0.0;
 	relit = mix(relit, raw, keep);
 
 	COLOR = vec4(clamp(relit, vec3(0.0), vec3(1.0)), 1.0);

@@ -1,0 +1,258 @@
+[
+  {
+    "capture": "implementation/shots/sprites/0019/atmosphere/farm_dawn.png",
+    "pixel_identical": true
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/atmosphere/farm_day.png",
+    "pixel_identical": true
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/atmosphere/farm_dusk.png",
+    "pixel_identical": true
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/atmosphere/farm_night.png",
+    "pixel_identical": true
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/atmosphere/farm_night_lights_off.png",
+    "pixel_identical": true
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/atmosphere/material_emission_day.png",
+    "pixel_identical": true
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/atmosphere/material_emission_night.png",
+    "pixel_identical": true
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/atmosphere/palette_day.png",
+    "pixel_identical": true
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/atmosphere/palette_night.png",
+    "pixel_identical": true
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/atmosphere/quality_0.png",
+    "pixel_identical": true
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/atmosphere/quality_1.png",
+    "pixel_identical": true
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/atmosphere/quality_2.png",
+    "pixel_identical": true
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/atmosphere/reduced_flashing_density.png",
+    "pixel_identical": true
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/atmosphere/skip_transition_night.png",
+    "pixel_identical": false
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/atmosphere/transition_dawn_00.png",
+    "pixel_identical": false
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/atmosphere/transition_dawn_01.png",
+    "pixel_identical": false
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/atmosphere/transition_dawn_02.png",
+    "pixel_identical": false
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/atmosphere/transition_dawn_03.png",
+    "pixel_identical": false
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/atmosphere/transition_dawn_04.png",
+    "pixel_identical": false
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/atmosphere/transition_night_00.png",
+    "pixel_identical": false
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/atmosphere/transition_night_01.png",
+    "pixel_identical": false
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/atmosphere/transition_night_02.png",
+    "pixel_identical": false
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/atmosphere/transition_night_03.png",
+    "pixel_identical": false
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/atmosphere/transition_night_04.png",
+    "pixel_identical": false
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/atmosphere/transition_reversed.png",
+    "pixel_identical": false
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/atmosphere/window_cores_off.png",
+    "pixel_identical": true
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/atmosphere/window_cores_steady.png",
+    "pixel_identical": true
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/a11y_off.png",
+    "pixel_identical": true
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/a11y_reset.png",
+    "pixel_identical": true
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/a11y_steady_half.png",
+    "pixel_identical": true
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/busy_burning.png",
+    "pixel_identical": true
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/busy_flare.png",
+    "pixel_identical": true
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/busy_ignition.png",
+    "pixel_identical": true
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/chimney_0.png",
+    "pixel_identical": true
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/chimney_1.png",
+    "pixel_identical": true
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/deaths_0.png",
+    "pixel_identical": true
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/deaths_1.png",
+    "pixel_identical": true
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/deaths_2.png",
+    "pixel_identical": true
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/deaths_3.png",
+    "pixel_identical": true
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/deaths_expired.png",
+    "pixel_identical": true
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/gallery_0_0.png",
+    "pixel_identical": true
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/gallery_0_1.png",
+    "pixel_identical": true
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/gallery_0_2.png",
+    "pixel_identical": true
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/gallery_0_3.png",
+    "pixel_identical": true
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/gallery_0_expired.png",
+    "pixel_identical": true
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/gallery_1_0.png",
+    "pixel_identical": true
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/gallery_1_1.png",
+    "pixel_identical": true
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/gallery_1_2.png",
+    "pixel_identical": true
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/gallery_1_3.png",
+    "pixel_identical": true
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/gallery_1_expired.png",
+    "pixel_identical": true
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/towers_after0.png",
+    "pixel_identical": true
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/towers_after1.png",
+    "pixel_identical": true
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/towers_after2.png",
+    "pixel_identical": true
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/towers_contact.png",
+    "pixel_identical": true
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/work_chop_contact.png",
+    "pixel_identical": true
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/work_chop_peak.png",
+    "pixel_identical": true
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/work_fish_contact.png",
+    "pixel_identical": true
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/work_fish_peak.png",
+    "pixel_identical": true
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/work_harvest_contact.png",
+    "pixel_identical": true
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/work_harvest_peak.png",
+    "pixel_identical": true
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/work_mine_contact.png",
+    "pixel_identical": true
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/work_mine_peak.png",
+    "pixel_identical": true
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/work_water_contact.png",
+    "pixel_identical": true
+  },
+  {
+    "capture": "implementation/shots/sprites/0019/effects/work_water_peak.png",
+    "pixel_identical": true
+  }
+]

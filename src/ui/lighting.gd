@@ -71,6 +71,8 @@ var _state: Dictionary = {}
 var _glow: Texture2D
 var _quality := FULL
 var _flicker := 0.0
+var _window_cores: Array[Vector2] = []
+var _cores: Node2D
 
 
 func _ready() -> void:
@@ -78,6 +80,14 @@ func _ready() -> void:
 	(material as CanvasItemMaterial).blend_mode = \
 		CanvasItemMaterial.BLEND_MODE_ADD
 	_glow = _build_glow()
+	# Tiny opaque amber cores occupy the measured glass, while the existing
+	# additive pools stay subdued. Pale cloth is never a light source.
+	_cores = Node2D.new()
+	_cores.name = "WindowCores"
+	_cores.material = CanvasItemMaterial.new()
+	(_cores.material as CanvasItemMaterial).blend_mode = CanvasItemMaterial.BLEND_MODE_MIX
+	add_child(_cores)
+	_cores.draw.connect(_draw_window_cores)
 	_read_quality()
 	var service := get_node_or_null(^"/root/Settings")
 	if service != null and not service.changed.is_connected(_on_setting):
@@ -142,6 +152,9 @@ func _process(delta: float) -> void:
 
 
 func _draw() -> void:
+	_window_cores.clear()
+	if is_instance_valid(_cores):
+		_cores.queue_redraw()
 	if _state.is_empty() or _quality == OFF or _glow == null:
 		return
 	# Daylight needs no lamps. `PREPARATION` counts as night for the same
@@ -182,6 +195,7 @@ func _draw() -> void:
 		match id:
 			&"house":
 				for window in ArtPlacement.emissions(id, (box[3] as Vector2) * tile, &"windows", at):
+					_window_cores.append(get_viewport().get_canvas_transform()*window)
 					_glow_at(window, HOUSE_RADIUS * tile, HOUSE_COLOUR, 0.26)
 			&"kitchen", &"workshop":
 				_glow_at(at, STOVE_RADIUS * tile, STOVE_COLOUR, 0.70)
@@ -199,6 +213,12 @@ func _draw() -> void:
 	# thing is redrawn rather than cached.
 	for where in burning_lights():
 		_glow_at(where, BURNING_RADIUS * tile, BURNING_COLOUR, 0.22)
+
+
+## A two-pixel glass core, not a brightness exemption over the roof or farm.
+func _draw_window_cores() -> void:
+	for at in _window_cores:
+		_cores.draw_rect(Rect2(at.floor()-Vector2.ONE,Vector2(2,2)),PaletteData.COLOURS[&"flame_hot"],true)
 
 
 ## Nearby burning actors share a subdued halo; every actor still keeps its

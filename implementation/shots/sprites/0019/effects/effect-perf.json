@@ -1,0 +1,10 @@
+{
+	"actors": 100,
+	"budget_us": 16000,
+	"includes_gpu": false,
+	"raster_slots": 24,
+	"samples": 240,
+	"shared_limit": 420,
+	"state_bytes_unchanged": true,
+	"view_update_p95_us": 532
+}

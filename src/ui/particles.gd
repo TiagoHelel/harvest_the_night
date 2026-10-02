@@ -9,18 +9,12 @@ extends Node2D
 ## three densities and compares `State.hash_of()`, which is task 0077's own
 ## done-when.
 ##
-## ## Drawn in the world, unlike task 0076's lights
+## ## Ambient materials and actual emitters
 ##
-## The lights had to go *over* the night ramp, because a glow is mostly halo
-## and a halo is dim by nature - the ramp tinted it blue and there was no
-## brightness to exempt. A particle is the opposite: one or two pixels, and
-## the bright ones are drawn in `flame_hot` and `flame`, which are above task
-## 0071's `NIGHT_WARM_KEEP`. So a spark exempts itself and stays orange while
-## smoke, drawn in `stone_dark`, goes blue with the rest of the farm - which
-## is what smoke at night should do.
-##
-## Same rule, opposite answer, for a reason that is about the art and not
-## about the code.
+## Smoke, dust, splash and impacts follow the world's ambient ramp. Actual
+## muzzle/flame/flare forms and hot sparks use a camera-following layer above
+## it. The existing source colours also occur in straw hats and ripe crops,
+## so brightness alone must never decide which objects emit warm light.
 ##
 ## ## The view notices; the rules do not tell it
 ##
@@ -66,6 +60,7 @@ var _density := 1.0
 var _motion := true
 var _forms := PixelEffects.new()
 var _burn_cursor := 0
+var _warm: Node2D
 
 # The pool. Parallel arrays rather than an array of dictionaries: a hundred
 # small dictionaries allocated and freed every second is the one place this
@@ -90,6 +85,18 @@ func _ready() -> void:
 	z_index = 15                # over the farm, under task 0076's lights
 	z_as_relative = false
 	_resize(DEFAULT_CAP)
+	# Only semantic fire forms and hot sparks bypass the ambient ramp.
+	# Follow the camera through the canvas, preserving the same world pivots.
+	var emission_layer := CanvasLayer.new()
+	emission_layer.name = "Emissions"
+	emission_layer.layer = 2
+	emission_layer.follow_viewport_enabled = true
+	add_child(emission_layer)
+	_warm = Node2D.new()
+	_warm.name = "WarmEffects"
+	emission_layer.add_child(_warm)
+	_warm.draw.connect(_draw_sparks)
+	_forms.warm_parent = _warm
 	var world := get_parent() as WorldView
 	if world != null:
 		_forms.ground_parent = world._ground_traps
@@ -222,6 +229,9 @@ func _process(delta: float) -> void:
 	_advance(delta)
 	_forms.advance(delta, self)
 	_watch(delta)
+	if is_instance_valid(_warm):
+		_warm.transform = get_global_transform()
+		_warm.queue_redraw()
 	queue_redraw()
 
 
@@ -248,6 +258,8 @@ func _draw() -> void:
 	for i in _left.size():
 		if _left[i] <= 0.0:
 			continue
+		if is_instance_valid(_warm) and _tint[i].is_equal_approx(PaletteData.COLOURS[&"flame_hot"]):
+			continue
 		# **Fading is alpha, not a smaller palette.** The colour stays what it
 		# was drawn as, so a spark is `flame_hot` for as long as it is
 		# anything at all - which is what keeps it exempt from the night ramp
@@ -256,6 +268,17 @@ func _draw() -> void:
 		lit.a = clampf(_left[i] / maxf(_span[i], 0.01), 0.0, 1.0)
 		var wide := float(_size[i])
 		draw_rect(Rect2(floorf(_x[i]), floorf(_y[i]), wide, wide), lit, true)
+
+
+## Hot procedural cores share the authored forms' semantic emission layer.
+func _draw_sparks() -> void:
+	for i in _left.size():
+		if _left[i]<=0.0 or not _tint[i].is_equal_approx(PaletteData.COLOURS[&"flame_hot"]):
+			continue
+		var lit: Color = _tint[i]
+		lit.a = clampf(_left[i]/maxf(_span[i],0.01),0.0,1.0)
+		var wide := float(_size[i])
+		_warm.draw_rect(Rect2(floorf(_x[i]),floorf(_y[i]),wide,wide),lit,true)
 
 
 # ------------------------------------------------------------------ noticing
