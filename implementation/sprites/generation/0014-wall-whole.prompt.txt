@@ -1,0 +1,38 @@
+Use case: stylized-concept
+Asset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm
+that becomes a fortress against zombies at night.
+Primary request: wall/whole: a four-module construction source sheet.
+Input images: Image 1: material/camera style reference
+Style/medium: coherent hand-crafted pixel art with deliberate pixel clusters,
+colored outlines, restrained texture, readable material planes and clean forms.
+Composition/framing: orthographic three-quarter top-down view on a rectangular
+grid; match the approved master camera and scale. Final native canvas is
+16x32 pixels with contact pivot 8,28; this is a downstream import
+target, so the generated source must remain simple enough to survive reduction.
+Lighting/mood: neutral warm daytime, highlights from upper left, darker underside;
+runtime supplies dusk/night lighting. Keep emission in separate localized forms.
+Color palette: match the approved project palette and master, warm timber and
+terracotta, layered greens, cool water, violet/blue shadows; limited ramps.
+Scene/backdrop: true transparent background for every module. No baked ground shadow for actors.
+Constraints: complete unclipped object, consistent perspective and scale, clear
+ground contact, generous tool/weapon clearance, no labels, text, watermark or UI.
+Avoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,
+random pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,
+new gameplay objects, tiny details that disappear at native size.
+
+Create solid low gray stone masonry with a broad capped stone pier, three readable courses and darker violet joints in whole
+state, orientation/join modular horizontal/vertical/post/ruin pieces. Target
+16x32, logical cell base remains 16x16. Neighboring
+segments align in height and spacing, including perpendicular turns. Fence has
+clear posts/rails, wall solid masonry, barricade piled timber, mine small low
+mechanical disc. Broken state has a visible structural gap. No letters, skull
+label, blood puddle, separate ground base or extra blocked cells.
+
+Generate exactly FOUR separate modules in a clearly separated 2x2 source sheet.
+No labels, no tile outlines, no ground, no baked cast shadow. Leave wide transparent gutters.
+TOP LEFT: a SINGLE isolated capped central pier/post, no rails or connecting arms.
+TOP RIGHT: one horizontal east-west span viewed straight along the rectangular screen X axis, with exposed vertical front face and shallow top, no perspective diagonal. Rails/masonry reach the two cut ends; no tall endpoint posts. Its native physical width is 16 units and construction height 12 units.
+BOTTOM LEFT: one north-south span viewed along the rectangular screen Y axis, a narrow straight corridor with a continuous visible top and side. No perspective diagonal and no tall endpoint posts. Its native ground length is 16 units, construction height 12 units, overall projected silhouette about 28 units tall and 5-6 units wide.
+BOTTOM RIGHT: the same material collapsed into a low heap of broken construction, about 14 units wide and 4 units high, completely lying down.
+Same physical scale in all four modules: the single post is 5-6 units wide and 12 units tall; the horizontal span is 16 units wide; the vertical span is taller only because its ground length extends away from camera. Do not enlarge the post or heap to fill their sheet cells.
+These are authored components of 16x16 logical cells. Downstream deterministic cuts and composition will join the approved post and the cardinal halves of the approved spans into isolated/end/corner/T/cross shapes. Keep clean broad edges and continuous bridge surfaces. All artwork must survive reduction to these tiny sizes.

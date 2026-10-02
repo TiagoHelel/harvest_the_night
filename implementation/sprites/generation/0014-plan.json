@@ -1,0 +1,205 @@
+[
+  {
+    "id": "wall",
+    "kind": "whole",
+    "prompt": "implementation/sprites/generation/0014-wall-whole.prompt.txt",
+    "references": [
+      "assets/art_source/defences/gun_tower/master.png",
+      "docs/reference-sheet.png"
+    ],
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "modules": [
+      "post",
+      "horizontal",
+      "vertical",
+      "wreck"
+    ],
+    "revision_layout": {
+      "3": "grid"
+    }
+  },
+  {
+    "id": "wall",
+    "kind": "hurt",
+    "prompt": "implementation/sprites/generation/0014-wall-hurt.prompt.txt",
+    "references": [
+      "assets/art_source/defences/wall/whole-r2.png",
+      "docs/reference-sheet.png"
+    ],
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "modules": [
+      "post",
+      "horizontal",
+      "vertical",
+      "wreck"
+    ],
+    "layout": "row",
+    "revision_layout": {
+      "1": "grid"
+    },
+    "revision_references": {
+      "1": [
+        "assets/art_source/defences/wall/whole-r3.png",
+        "docs/reference-sheet.png"
+      ]
+    }
+  },
+  {
+    "id": "fence",
+    "kind": "whole",
+    "prompt": "implementation/sprites/generation/0014-fence-whole.prompt.txt",
+    "references": [
+      "assets/art_source/defences/gun_tower/master.png",
+      "docs/reference-sheet.png"
+    ],
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "modules": [
+      "post",
+      "horizontal",
+      "vertical",
+      "wreck"
+    ],
+    "layout": "row",
+    "revision_layout": {
+      "3": "grid"
+    }
+  },
+  {
+    "id": "fence",
+    "kind": "hurt",
+    "prompt": "implementation/sprites/generation/0014-fence-hurt.prompt.txt",
+    "references": [
+      "assets/art_source/defences/fence/whole-r2.png",
+      "docs/reference-sheet.png"
+    ],
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "modules": [
+      "post",
+      "horizontal",
+      "vertical",
+      "wreck"
+    ],
+    "layout": "row",
+    "revision_layout": {
+      "1": "grid"
+    },
+    "revision_references": {
+      "1": [
+        "assets/art_source/defences/fence/whole-r3.png",
+        "docs/reference-sheet.png"
+      ]
+    }
+  },
+  {
+    "id": "barricade",
+    "kind": "master",
+    "prompt": "implementation/sprites/generation/0014-barricade-master.prompt.txt",
+    "references": [
+      "assets/art_source/defences/gun_tower/master.png",
+      "docs/reference-sheet.png"
+    ],
+    "canvas_wh": [
+      16,
+      24
+    ],
+    "pivot_xy": [
+      8,
+      20
+    ],
+    "modules": [
+      "master"
+    ]
+  },
+  {
+    "id": "barricade",
+    "kind": "states",
+    "prompt": "implementation/sprites/generation/0014-barricade-states.prompt.txt",
+    "references": [
+      "assets/art_source/defences/barricade/master.png",
+      "docs/reference-sheet.png"
+    ],
+    "canvas_wh": [
+      16,
+      24
+    ],
+    "pivot_xy": [
+      8,
+      20
+    ],
+    "modules": [
+      "whole",
+      "hurt",
+      "wreck"
+    ]
+  },
+  {
+    "id": "mine",
+    "kind": "master",
+    "prompt": "implementation/sprites/generation/0014-mine-master.prompt.txt",
+    "references": [
+      "assets/art_source/defences/gun_tower/master.png",
+      "docs/reference-sheet.png"
+    ],
+    "canvas_wh": [
+      16,
+      16
+    ],
+    "pivot_xy": [
+      8,
+      14
+    ],
+    "modules": [
+      "master"
+    ]
+  },
+  {
+    "id": "mine",
+    "kind": "states",
+    "prompt": "implementation/sprites/generation/0014-mine-states.prompt.txt",
+    "references": [
+      "assets/art_source/defences/mine/master.png",
+      "docs/reference-sheet.png"
+    ],
+    "canvas_wh": [
+      16,
+      16
+    ],
+    "pivot_xy": [
+      8,
+      14
+    ],
+    "modules": [
+      "armed",
+      "triggered",
+      "spent"
+    ]
+  }
+]

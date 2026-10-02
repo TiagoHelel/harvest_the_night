@@ -1,0 +1,97 @@
+{
+  "id": "wall",
+  "kind": "whole",
+  "revision": 0,
+  "tool": "built-in ImageGen",
+  "returned_file": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-64b4087c-698c-4d7a-bfb7-764bf3407e70.png",
+  "source": "assets/art_source/defences/wall/whole.png",
+  "source_sha256": "22420fef68686131090acd7ef313a43be6d9ddcbe379ee8a2a2248ee2bf70cf1",
+  "source_wh": [
+    1247,
+    1261
+  ],
+  "source_alpha_range": [
+    0,
+    255
+  ],
+  "prompt": "implementation/sprites/generation/0014-wall-whole.prompt.txt",
+  "prompt_sha256": "bfbe566ed233903f4c668fef76b62a62bb358daa783271eaa5f5c4914b026538",
+  "references": [
+    "assets/art_source/defences/gun_tower/master.png",
+    "docs/reference-sheet.png"
+  ],
+  "reference_hashes": {
+    "assets/art_source/defences/gun_tower/master.png": "86d51327390ec01329d9f110b2c539e01924dbdd21348d1f6dcfad25cbbbce13",
+    "docs/reference-sheet.png": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c"
+  },
+  "tool_arguments": {
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\defences\\gun_tower\\master.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png"
+    ]
+  },
+  "measurements": [
+    {
+      "role": "post",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        494,
+        608
+      ],
+      "crop_xywh": [
+        189,
+        174,
+        232,
+        378
+      ]
+    },
+    {
+      "role": "horizontal",
+      "sheet_cell_xywh": [
+        494,
+        0,
+        753,
+        608
+      ],
+      "crop_xywh": [
+        568,
+        279,
+        576,
+        233
+      ]
+    },
+    {
+      "role": "vertical",
+      "sheet_cell_xywh": [
+        0,
+        608,
+        459,
+        653
+      ],
+      "crop_xywh": [
+        188,
+        665,
+        210,
+        505
+      ]
+    },
+    {
+      "role": "wreck",
+      "sheet_cell_xywh": [
+        459,
+        608,
+        788,
+        653
+      ],
+      "crop_xywh": [
+        520,
+        948,
+        635,
+        203
+      ]
+    }
+  ],
+  "decision": "Rejected: vertical span has only 14 native pixels at horizontal span scale instead of the required 24; rubble is wider than the 16-pixel logical cell. Revision requests a horizontal row with explicit common physical proportions."
+}

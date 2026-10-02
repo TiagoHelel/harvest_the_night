@@ -5,3 +5,5 @@
 *.exe binary
 *.wasm binary
 *.pck binary
+# Submitted prompts are hashed as bytes; retain their exact saved newlines.
+implementation/sprites/generation/0014-*.prompt.txt -text whitespace=cr-at-eol

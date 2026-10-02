@@ -444,3 +444,43 @@ real destruction, loaded rubble, morning cleanup and mixed defenses at night.
 It compares off/steady glow at actual source points and serialized state around
 rendering. Source and runtime gates are integrated into full verify. Run fault
 probes separately from any import/editor/verify process; always restore bytes.
+
+## Authored connected barriers and ground traps (0014)
+
+Keep all sixteen ImageGen returns and exact prompt/reference hashes. Eight raw
+sheets contribute selected modules, rather than accepting every module of each
+sheet. Whole-r3 provides taller post/front profiles; whole-r2 provides narrow
+vertical projection and low rubble. Hurt-r1 contributes readable broken posts
+and front spans; initial hurt contributes the matching vertical break. Four
+unused early candidates retain explicit rejection reasons. Trap masters remain
+identity references and their state strips own the three runtime drawings.
+
+One fixed scale per material applies across whole/hurt/wreck cuts. `compose`
+derivations contain 1..5 source-owned parts, each with a validated parent,
+slice and placement. Alpha composition adds no colors, holes, growth or painted
+pixels. A source post is the primary parent and last component. N1/E2/S4/W8
+selects all sixteen occupied-neighbor masks, whole and hurt, on 16x32/(8,28)
+canvases. Narrow north/south projections meet at 16-pixel cell intervals.
+Existing mixed wall/fence neighbors connect; unrelated structures do not.
+
+Barricade whole/hurt/wreck uses 16x24/(8,20); armed/triggered/spent mine uses
+16x16/(8,14). Low ruins stay outside occupancy. Mines sit above plots and below
+actors. The existing fixed-tick view observers compare actual mine disappearance
+with Traps.sprung, sale intent, current structure_lost receipts and new rubble.
+Old rubble under rearmed mines does not suppress a real trigger. Ambiguous
+external removals produce no guessed location. At most six view-owned cues show
+triggered for 0.16s then spent for 0.24s; rearm, load, morning and expiry prune
+them. No new core/save fields or gameplay timing are introduced.
+
+```powershell
+python tools/check_barrier_art.py
+python tools/show_art.py --barriers --check
+python tools/show_art.py --barriers --out=implementation/shots/sprites/<task-id>/barriers
+python implementation/sprites/reviews/0014/build_review.py
+python implementation/sprites/reviews/0014/audit.py
+```
+
+Full verify includes source and real-state gates. Capture mode checks actual
+farmer/barrier occlusion and mine/actor/crop pixels, all joins under day/dusk/night,
+legal previews, route restoration, loaded ruins and identical 4x simulation bytes.
+Run the fault suite in isolation from import/editor/verify and restore all bytes.

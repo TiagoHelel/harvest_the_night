@@ -1,0 +1,97 @@
+{
+  "id": "wall",
+  "kind": "whole-r1",
+  "revision": 1,
+  "tool": "built-in ImageGen",
+  "returned_file": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-da10c95b-fbd2-475c-a73b-18c8a3315c15.png",
+  "source": "assets/art_source/defences/wall/whole-r1.png",
+  "source_sha256": "6ad1a65d57ead5870aadb68864a0441f96f4aef83197ca5fa4a932f4df429ac6",
+  "source_wh": [
+    1983,
+    793
+  ],
+  "source_alpha_range": [
+    0,
+    255
+  ],
+  "prompt": "implementation/sprites/generation/0014-wall-whole-r1.prompt.txt",
+  "prompt_sha256": "3fee545a7f773336b7e9c555ea4ca0da012c6dede0513e568bb2d617484a893b",
+  "references": [
+    "assets/art_source/defences/wall/whole.png",
+    "docs/reference-sheet.png"
+  ],
+  "reference_hashes": {
+    "assets/art_source/defences/wall/whole.png": "22420fef68686131090acd7ef313a43be6d9ddcbe379ee8a2a2248ee2bf70cf1",
+    "docs/reference-sheet.png": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c"
+  },
+  "tool_arguments": {
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\defences\\wall\\whole.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png"
+    ]
+  },
+  "measurements": [
+    {
+      "role": "post",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        348,
+        793
+      ],
+      "crop_xywh": [
+        79,
+        358,
+        225,
+        365
+      ]
+    },
+    {
+      "role": "horizontal",
+      "sheet_cell_xywh": [
+        348,
+        0,
+        635,
+        793
+      ],
+      "crop_xywh": [
+        392,
+        489,
+        532,
+        218
+      ]
+    },
+    {
+      "role": "vertical",
+      "sheet_cell_xywh": [
+        983,
+        0,
+        301,
+        793
+      ],
+      "crop_xywh": [
+        1042,
+        73,
+        194,
+        636
+      ]
+    },
+    {
+      "role": "wreck",
+      "sheet_cell_xywh": [
+        1284,
+        0,
+        699,
+        793
+      ],
+      "crop_xywh": [
+        1333,
+        513,
+        600,
+        196
+      ]
+    }
+  ],
+  "decision": "Rejected: vertical span still only 19 native pixels at 16-pixel horizontal scale; rubble remains wider than the horizontal span. Targeted revision increases longitudinal cap stones and removes outer rubble stones."
+}

@@ -1,0 +1,91 @@
+PASS: Two in-memory rebuilds are byte-identical
+PASS: Two on-disk rebuilds change zero bytes
+PASS: Legacy writers cannot overwrite any of 316 migrated files
+PASS: Changed accepted source is rejected
+PASS: Missing accepted source is rejected
+PASS: Tampered migrated output is rejected
+PASS: Missing runtime frame is rejected
+PASS: Missing authored locomotion frame cannot fall back to idle
+PASS: Missing authored work recovery is rejected without borrowing another verb
+PASS: Tampered player count/canvas/pivot metadata is rejected
+PASS: Tampered unmigrated ASCII output is still rejected
+PASS: Atlas builder rejects changed accepted terrain source
+PASS: Atlas builder rejects missing accepted terrain source without old ASCII fallback
+PASS: Terrain checker rejects tampered migrated tile
+PASS: Terrain checker rejects tampered composite atlas
+PASS: Terrain seam mismatch rejected
+PASS: Transparent terrain hole rejected
+PASS: Fully migrated player has zero legacy writes and strict merged metadata checks
+PASS: Missing authored reaction is rejected without silently hiding the bubble
+PASS: Missing shared contact shadow is rejected
+PASS: Duplicate manifest output rejected
+PASS: Invalid crop rejected
+PASS: Out-of-range pivot rejected
+PASS: Unknown palette rejected
+PASS: Unknown material subset color rejected
+PASS: Empty material palette subset rejected
+PASS: Missing animation frame rejected
+PASS: Per-frame canvas drift rejected
+PASS: Out-of-canvas reaction glyph rejected
+PASS: Reaction crop cannot erase body pixels
+PASS: Reaction crop cannot omit glyph pixels
+PASS: Missing derived input rejected
+PASS: Derivation cycle rejected
+PASS: Atlas rejects a missing water loop without old ASCII fallback
+PASS: Standalone transition checker rejects a tampered water phase
+PASS: Standalone transition checker rejects a tampered derived corner
+PASS: Invalid non-quarter rotation rejected
+PASS: Clipped source endpoint cap rejected
+PASS: Swimming bank pixel rejected
+PASS: Mismatched corner contact color rejected
+PASS: Missing accepted livestock master rejected
+PASS: Missing required prop variation rejected without base fallback
+PASS: Standalone prop checker rejects changed native mineral art
+PASS: Prop clipping rejected
+PASS: Detached prop pixel rejected
+PASS: Prop variant scale drift rejected
+PASS: Changed accepted crop strip rejected
+PASS: Missing mature corn rejected without soil fallback
+PASS: Missing watered soil rejected
+PASS: Crop per-stage scale drift rejected
+PASS: Crop per-stage ground pivot drift rejected
+PASS: Missing independently authored house damage source rejected
+PASS: Missing low-HP house drawing rejected
+PASS: Changed damaged roof compatibility slice rejected
+PASS: House state scale drift rejected
+PASS: Unequal house lamp/glass counts rejected
+PASS: Out-of-canvas house lamp rejected
+PASS: Missing house glass planes rejected
+PASS: Empty house lamp family rejected
+PASS: Nine hurt compatibility slices reconstruct the entire authored damaged roof
+PASS: Missing authored production state strip rejected
+PASS: Missing full generator rejected without repeated quarter fallback
+PASS: Stale quarter-based press pixels rejected
+PASS: Missing working kitchen source-owned drawing rejected
+PASS: Production state scale drift rejected
+PASS: Production state contact drift rejected
+PASS: Missing authored tower level/state source rejected without legacy fallback
+PASS: Missing levelled firing tower rejected
+PASS: Missing levelled tower wreck rejected
+PASS: Out-of-canvas tower muzzle rejected
+PASS: Malformed tower muzzle list rejected
+PASS: Duplicate tower barrels rejected
+PASS: Transparent tower muzzle rejected
+PASS: Tower state scale drift rejected
+PASS: Tower state pivot drift rejected
+PASS: Legacy derivations are disabled only for complete tower families
+PASS: Missing accepted barrier wear module rejected
+PASS: Missing barrier junction rejected without isolated-post fallback
+PASS: Missing authored triggered mine rejected
+PASS: Empty component list rejected
+PASS: Too many barrier components rejected
+PASS: Malformed barrier component rejected
+PASS: Missing composed parent rejected
+PASS: Composed derivation cycle rejected
+PASS: Out-of-parent component slice rejected
+PASS: Negative component placement rejected
+PASS: Clipped component placement rejected
+PASS: Legacy barrier wear disabled only for a complete join family
+PASS: Duplicate output owner rejected
+PASS: House's nine slices reconstruct the full roof without lost pixels
+OK: 90 fault/rebuild probes; all deliberate corruption restored

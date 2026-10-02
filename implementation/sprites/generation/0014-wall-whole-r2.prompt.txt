@@ -1,0 +1,32 @@
+Use case: stylized-concept
+Asset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm
+that becomes a fortress against zombies at night.
+Primary request: wall/whole: a four-module construction source sheet.
+Input images: Image 1: material/camera style reference
+Style/medium: coherent hand-crafted pixel art with deliberate pixel clusters,
+colored outlines, restrained texture, readable material planes and clean forms.
+Composition/framing: orthographic three-quarter top-down view on a rectangular
+grid; match the approved master camera and scale. Final native canvas is
+16x32 pixels with contact pivot 8,28; this is a downstream import
+target, so the generated source must remain simple enough to survive reduction.
+Lighting/mood: neutral warm daytime, highlights from upper left, darker underside;
+runtime supplies dusk/night lighting. Keep emission in separate localized forms.
+Color palette: match the approved project palette and master, warm timber and
+terracotta, layered greens, cool water, violet/blue shadows; limited ramps.
+Scene/backdrop: true transparent background for every module. No baked ground shadow for actors.
+Constraints: complete unclipped object, consistent perspective and scale, clear
+ground contact, generous tool/weapon clearance, no labels, text, watermark or UI.
+Avoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,
+random pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,
+new gameplay objects, tiny details that disappear at native size.
+
+Create solid low gray stone masonry with a broad capped stone pier, three readable courses and darker violet joints in whole
+state, orientation/join modular horizontal/vertical/post/ruin pieces. Target
+16x32, logical cell base remains 16x16. Neighboring
+segments align in height and spacing, including perpendicular turns. Fence has
+clear posts/rails, wall solid masonry, barricade piled timber, mine small low
+mechanical disc. Broken state has a visible structural gap. No letters, skull
+label, blood puddle, separate ground base or extra blocked cells.
+
+Generate exactly FOUR separate modules in ONE HORIZONTAL ROW, ordered left to right: isolated stone pier, east-west span, north-south span, collapsed stone rubble. Transparent generous gutters, no labels or ground. Revise only the vertical span length and heap width of the reference sheet, keep the same stone colors, pixel clusters, cap shapes and camera. Measure every module against one shared physical pixel lattice: east-west span is exactly 16 native units wide and 8 units high; isolated pier is 6 units wide and 10 units high; north-south span is 5 units wide and 24 units high (16 ground length PLUS 8 construction height); rubble is 14 units wide and 5 units high. The north-south span must be much taller than the east-west span is wide (24 versus 16), and about THREE TIMES as tall as the east-west span. Arrange the row around the tall narrow vertical span: do not independently enlarge the horizontal span or heap to fill their cell. All four objects can be small within a large source canvas; shared physical scale matters more than filling the space. Horizontal span has flat cut ends without posts; vertical span has no tall posts. A straight screen-X stone wall and a straight screen-Y stone wall, no isometric diagonal. Keep thick readable courses; no baked ground shadow. Downstream composition slices these authored pieces into all sixteen occupancy masks, with the central pier covering intersections.
+CRITICAL targeted correction: north-south column must be AT LEAST 1.65 TIMES the total WIDTH of the horizontal wall. Add more longitudinal cap stones until this long vertical strip is clearly taller than the horizontal wall is wide. The heap must be ONLY THREE QUARTERS of the width of the horizontal wall: remove outermost rubble stones, keep a compact heap. Preserve the post and east-west wall exactly. All four modules stay in one row with huge transparent gutters. If using a 2000-pixel-wide source, horizontal span about 450 pixels wide, vertical about 750 pixels tall and pile about 330 pixels wide. These measurements are proportions, not labels to draw.

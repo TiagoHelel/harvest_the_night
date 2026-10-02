@@ -1,0 +1,32 @@
+Use case: stylized-concept
+Asset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm
+that becomes a fortress against zombies at night.
+Primary request: fence/whole: a four-module construction source sheet.
+Input images: Image 1: material/camera style reference
+Style/medium: coherent hand-crafted pixel art with deliberate pixel clusters,
+colored outlines, restrained texture, readable material planes and clean forms.
+Composition/framing: orthographic three-quarter top-down view on a rectangular
+grid; match the approved master camera and scale. Final native canvas is
+16x32 pixels with contact pivot 8,28; this is a downstream import
+target, so the generated source must remain simple enough to survive reduction.
+Lighting/mood: neutral warm daytime, highlights from upper left, darker underside;
+runtime supplies dusk/night lighting. Keep emission in separate localized forms.
+Color palette: match the approved project palette and master, warm timber and
+terracotta, layered greens, cool water, violet/blue shadows; limited ramps.
+Scene/backdrop: true transparent background for every module. No baked ground shadow for actors.
+Constraints: complete unclipped object, consistent perspective and scale, clear
+ground contact, generous tool/weapon clearance, no labels, text, watermark or UI.
+Avoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,
+random pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,
+new gameplay objects, tiny details that disappear at native size.
+
+Create warm timber fence with square capped posts and two substantial horizontal rails, iron fastenings and open gaps in whole
+state, orientation/join modular horizontal/vertical/post/ruin pieces. Target
+16x32, logical cell base remains 16x16. Neighboring
+segments align in height and spacing, including perpendicular turns. Fence has
+clear posts/rails, wall solid masonry, barricade piled timber, mine small low
+mechanical disc. Broken state has a visible structural gap. No letters, skull
+label, blood puddle, separate ground base or extra blocked cells.
+
+Generate exactly FOUR separate construction modules in ONE horizontal row with wide transparent gutters: single capped timber post; one horizontal east-west span with TWO broad horizontal timber rails and NO endpoint posts; one tall narrow north-south span with longitudinal timber rails and NO endpoint posts; low collapsed heap of snapped timber. Shared physical pixel scale throughout: horizontal span 16 units wide, 8 units high; isolated post 5 units wide, 12 units high; north-south span 4 units wide, 24 units high (16 ground length plus 8 construction height); heap 14 units wide, 4 units high. CRITICAL: vertical span must be at least 1.5 times as tall as the horizontal span is wide, and heap must be smaller than horizontal span. No module enlarged to fill its cell. These are cuttable modular sprites: central post plus cardinal half-spans form all sixteen neighbor masks. Screen X/Y axes, no diagonal isometric grid. Warm wood and restrained dark iron fastenings, clear empty gap between rails, clean stepped silhouette, no ground, shadows, labels or light.
+Targeted correction to Image 1: replace the third module only. It must be a NORTH-SOUTH fence rail corridor receding along the screen Y axis, not two upright vertical posts standing side by side. Draw one very long narrow lengthwise timber beam seen mostly from above, running away from the camera, its near short supporting end having only a small front face. A train-track-like TOP VIEW of a narrow rail, 24 native units long and 4 units wide, no tall uprights. Keep a true shared pixel scale so it is 1.5 times taller than the horizontal panel is wide. Also remove the two upright endpoint posts from the second module: keep just two uninterrupted east-west rails and their small end cut faces. Keep central master post and collapsed heap material. All four modules in one row, no labels, ground, shadows or extra objects.

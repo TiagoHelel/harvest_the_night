@@ -234,3 +234,30 @@ Actual-render captures and native/3x/source audits are in
 only during the current session: old saves store rubble family alone, so loaded
 rubble uses the family's L1 wreck without inventing a save field. Ownership
 is now 232 raster / 56 ASCII / zero player-sheet, 288 runtime PNGs.
+
+Task 0014 retains sixteen exact ImageGen returns in
+`defences/{wall,fence,barricade,mine}/`. Wall/fence share one fixed physical
+reduction scale per material. Eight sheets supply selected modules: whole-r3
+posts/front spans, whole-r2 narrow north/south projections and low wrecks,
+hurt-r1 posts/front spans and initial hurt vertical breaks. Selection is partial;
+four older low-post/front candidates remain rejected with their original reasons.
+Two trap identity masters are references; two three-state strips own runtime art.
+All exact prompts, references, return hashes and selected roles are retained in
+`implementation/sprites/generation/0014-*` and `reviews/0014/scope-and-sources.json`.
+
+Twelve source-owned modules produce 64 whole/hurt cardinal masks through bounded
+cuts and alpha composition only. Each joined cell uses 16x32/(8,28), offset
+(0,-12); posts are layered last at the same ground contact. The north/south
+projection is narrow rather than a rotated front panel. Two low wall/fence wrecks,
+three 16x24/(8,20) barricades and three 16x16/(8,14) mine states complete 84 outputs.
+Ten existing runtime files migrate and 74 files are added; 278 unrelated PNGs
+remain byte-identical. Ownership is 316 raster / 46 ASCII / zero player-sheet,
+362 runtime PNGs. Remaining legacy recipes stay guarded.
+
+`tools/check_barrier_art.py` checks all joins, source bytes, shared scales,
+contacts, wear and stone/wood seams. The real Godot barrier showcase exercises
+paid placement, neighbor removal, route previews, damage, passable ruins,
+morning cleanup, mine layering and actual fixed-tick consumption. Mine feedback
+is a short view-owned triggered/spent cue derived from existing sprung counts;
+sale/destruction do not invent a detonation and no entity survives merely to draw
+it. Save, collision and simulation dictionaries retain their original formats.

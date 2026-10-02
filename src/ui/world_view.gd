@@ -165,6 +165,20 @@ var _tower_version := -1
 var _wrecks: Node2D
 var _wreck_sprites: Dictionary = {}
 var _wreck_signature := -1
+## A mine has no surviving core entity after detonation. Observe only actual
+## consumption, excluding sales/destruction, and keep its short cue in the view.
+const MINE_TRIGGER_SECONDS := 0.16
+const MINE_SPENT_SECONDS := 0.24
+const MINE_CUE_CAP := 6
+var _ground_traps: Node2D
+var _mine_before: Dictionary = {}
+var _mine_sprung_before := 0
+var _mine_selling := -1
+var _mine_cues: Dictionary = {}
+var _mine_tick_before := -1
+var _mine_losses_before: Dictionary = {}
+var _mine_grid_version := -1
+var _mine_cells: Array = []
 
 ## The light. One node, two colours, and whatever is between them right now.
 var _light: CanvasModulate
@@ -253,6 +267,10 @@ func _ready() -> void:
 	_wrecks.name = "TowerWrecks"
 	add_child(_wrecks)
 	move_child(_wrecks, _occupants.get_index())
+	_ground_traps = Node2D.new()
+	_ground_traps.name = "GroundTraps"
+	add_child(_ground_traps)
+	move_child(_ground_traps, _occupants.get_index())
 
 
 ## Point the view at a game. Called by whatever screen owns the simulation.
@@ -264,6 +282,11 @@ func show_state(state: Dictionary) -> void:
 		_tower_history.clear()
 		_tower_version = -1
 		_wreck_signature = -1
+		_mine_before.clear()
+		_mine_losses_before.clear()
+		_mine_grid_version = -1
+		_mine_cells.clear()
+		_clear_mine_cues()
 	_state = state
 	_remember_towers(state)
 	_dirty = true
@@ -271,6 +294,7 @@ func show_state(state: Dictionary) -> void:
 	_refresh()
 	_refresh_plots()
 	_refresh_wrecks()
+	_process_mine_cues(0.0)
 
 
 ## Redraw the occupants next frame. Called by anything that knows it changed
@@ -306,6 +330,7 @@ func _process(delta: float) -> void:
 	_refresh_stations(delta)
 	_remember_towers(_state)
 	_refresh_wrecks()
+	_process_mine_cues(delta)
 	if _shots != null:
 		# Skipping a night does not emit per-tick observer signals.
 		var alive: Dictionary = {}
@@ -574,7 +599,7 @@ func show_ghost(cell: Vector2i, id: StringName, ok: bool) -> void:
 	if _ghost == null:
 		return
 	var size := float(GameData.TILE_SIZE)
-	_ghost.texture = _texture_for(id)
+	_ghost.texture = _texture_for(_barrier_name({"id": id}, cell) if connected_barrier(id) else id)
 	ArtPlacement.place(_ghost, cell, Vector2i(3, 3) if id == &"house" else Building.size_of(id))
 	_ghost.visible = true
 	if cell == _ghost_cell and ok == _ghost_ok and id == _ghost_id:
@@ -929,7 +954,11 @@ func _refresh() -> void:
 			shadow.modulate.a = PlayerView.SHADOW_ALPHA
 			shadow.show_behind_parent = true
 			sprite.add_child(shadow)
-		_occupants.add_child(sprite)
+		# Pressure discs lie under boots, never paint over an actor's legs.
+		if id == &"mine":
+			_ground_traps.add_child(sprite)
+		else:
+			_occupants.add_child(sprite)
 		_sprites.append(sprite)
 		# Complete authored levels communicate their reinforcement themselves.
 		var pips := 0 if authored_tower(id) else maxi(int(on.get("level", 1)) - 1, 0)
@@ -1024,6 +1053,18 @@ func before_tick(state: Dictionary) -> void:
 	if not is_same(_state, state):
 		return
 	_observing_tick = true
+	_mine_before.clear()
+	if int(state["grid_version"]) != _mine_grid_version:
+		_mine_grid_version = int(state["grid_version"])
+		_mine_cells = Farm.cells_with(state, &"mine")
+	for cell in _mine_cells:
+		_mine_before[Grid.index(cell)] = Farm.rubble_at(state, cell)
+	_mine_sprung_before = Traps.sprung(state)
+	_mine_tick_before = int(state["tick"])
+	_mine_losses_before = {} if _mine_before.is_empty() else _mine_losses(state)
+	var intent: Dictionary = state["intent"]
+	var sell_at: Array = intent.get("build_cell", [-1, -1])
+	_mine_selling = Grid.index(Vector2i(int(sell_at[0]), int(sell_at[1]))) if bool(intent.get("build_sell", false)) and not bool(intent.get("build_upgrade", false)) else -1
 	_remember_towers(state)
 	_shot_before.clear()
 	for shot in (state["projectiles"] as Array):
@@ -1034,6 +1075,7 @@ func after_tick(state: Dictionary) -> void:
 	if not is_same(_state, state) or not _observing_tick:
 		return
 	_observing_tick = false
+	_observe_mines(state)
 	var alive: Dictionary = {}
 	var barrels: Dictionary = {}
 	var per := float(GameData.TILE_SIZE) / float(Player.SUBTILE)
@@ -1066,6 +1108,76 @@ func after_tick(state: Dictionary) -> void:
 			_shot_origins.erase(id)
 	_shot_before.clear()
 	_remember_towers(state)
+
+
+func _observe_mines(state: Dictionary) -> void:
+	var consumed := maxi(Traps.sprung(state) - _mine_sprung_before, 0)
+	var losses: Dictionary = {} if consumed <= 0 else _mine_losses(state)
+	var keys := _mine_before.keys()
+	# Occupancy indices are integer cell keys, so numeric ordering is stable.
+	keys.sort()
+	var candidates: Array = []
+	for idx in keys:
+		var cell := Grid.cell(int(idx))
+		# Old rubble survives a rearm. The existing structure_lost receipt,
+		# rather than that old ground mark, distinguishes new destruction.
+		var prior := int(_mine_losses_before.get(idx, 0)) if int(state["tick"]) == _mine_tick_before else 0
+		if idx == _mine_selling or not Farm.occupant(state, cell).is_empty() or int(losses.get(idx, 0)) > prior:
+			continue
+		if Farm.rubble_at(state, cell) == &"mine" and _mine_before[idx] != &"mine":
+			continue
+		candidates.append(idx)
+	# If an outside/unobserved removal makes the count ambiguous, do not
+	# invent which disc exploded. Normal core consumption has an exact match.
+	if candidates.size() != consumed:
+		candidates.clear()
+	for idx in candidates:
+		var cell := Grid.cell(int(idx))
+		if _mine_cues.size() >= MINE_CUE_CAP and not _mine_cues.has(idx):
+			var oldest: int = _mine_cues.keys()[0]
+			(_mine_cues[oldest]["sprite"] as Sprite2D).queue_free()
+			_mine_cues.erase(oldest)
+		if _mine_cues.has(idx):
+			(_mine_cues[idx]["sprite"] as Sprite2D).queue_free()
+		var sprite := Sprite2D.new()
+		sprite.name = "TriggeredMine_%d" % idx
+		sprite.texture = _texture_for(&"mine_triggered")
+		_ground_traps.add_child(sprite)
+		ArtPlacement.place(sprite, cell)
+		_mine_cues[idx] = {"sprite": sprite, "left": MINE_TRIGGER_SECONDS + MINE_SPENT_SECONDS}
+	_mine_before.clear()
+	_mine_losses_before.clear()
+
+
+func _mine_losses(state: Dictionary) -> Dictionary:
+	var losses: Dictionary = {}
+	for event in Events.recent(state):
+		if event["kind"] != &"structure_lost" or int(event["tick"]) != int(state["tick"]) or event.get("id", &"") != &"mine":
+			continue
+		var pair: Array = event["cell"]
+		var idx := Grid.index(Vector2i(int(pair[0]), int(pair[1])))
+		losses[idx] = int(losses.get(idx, 0)) + 1
+	return losses
+
+
+func _process_mine_cues(delta: float) -> void:
+	for idx in _mine_cues.keys():
+		var cue: Dictionary = _mine_cues[idx]
+		cue["left"] = float(cue["left"]) - maxf(delta, 0.0)
+		var sprite: Sprite2D = cue["sprite"]
+		var cell := Grid.cell(int(idx))
+		if float(cue["left"]) <= 0.0 or int(_state["phase"]) == Phases.DAY or not Farm.occupant(_state, cell).is_empty():
+			sprite.hide()
+			sprite.queue_free()
+			_mine_cues.erase(idx)
+			continue
+		sprite.texture = _texture_for(&"mine_triggered" if float(cue["left"]) > MINE_SPENT_SECONDS else &"mine_spent")
+
+
+func _clear_mine_cues() -> void:
+	for cue in _mine_cues.values():
+		(cue["sprite"] as Sprite2D).queue_free()
+	_mine_cues.clear()
 
 
 ## Only the visual launch is displaced; the offset fades along the real flight.
@@ -1112,7 +1224,7 @@ func _refresh_wrecks() -> void:
 	var visible: Dictionary = {}
 	for cell in Farm.rubble_cells(_state):
 		var id := Farm.rubble_at(_state, cell)
-		if not authored_tower(id) or not Farm.occupant(_state, cell).is_empty():
+		if (not authored_tower(id) and id not in [&"wall", &"fence", &"barricade", &"mine"]) or not Farm.occupant(_state, cell).is_empty():
 			continue
 		var idx := Grid.index(cell)
 		visible[idx] = true
@@ -1124,7 +1236,8 @@ func _refresh_wrecks() -> void:
 			sprite.name = "Wreck_%d" % idx
 			_wrecks.add_child(sprite)
 			_wreck_sprites[idx] = sprite
-		sprite.texture = _texture_for(tower_name(remembered, "_wreck"))
+		var wreck_name := tower_name(remembered, "_wreck") if authored_tower(id) else StringName(str(id) + "_wreck")
+		sprite.texture = _texture_for(&"mine_spent" if id == &"mine" else wreck_name)
 		ArtPlacement.place(sprite, cell)
 	for idx in _wreck_sprites.keys():
 		if not visible.has(idx):
@@ -1299,6 +1412,8 @@ func _build_terrain_tileset() -> TileSet:
 ## shows up.
 func _art_for(on: Dictionary, cell: Vector2i) -> StringName:
 	var id: StringName = on["id"]
+	if connected_barrier(id):
+		return _barrier_name(on, cell)
 
 	# **The house has nine tiles and no anchor.** `FARM_MAP` lays it down a
 	# cell at a time, so every one of them asks for the same drawing and the
@@ -1315,6 +1430,27 @@ func _art_for(on: Dictionary, cell: Vector2i) -> StringName:
 	var pair: Array = at
 	return _worn(StringName("%s_%d_%d" % [id, cell.x - int(pair[0]),
 		cell.y - int(pair[1])]), on)
+
+
+static func connected_barrier(id: StringName) -> bool:
+	return bool((RasterArt.FRAMES.get(BUILDING_DIR + str(id) + ".png", {}) as Dictionary).get("connected", false))
+
+
+## The same N1/E2/S4/W8 order as terrain. No empty-cell decorative posts;
+## adjacent stone/wood barriers meet while unrelated structures stay separate.
+static func barrier_mask(state: Dictionary, cell: Vector2i) -> int:
+	var mask := 0
+	for bit in EDGE_NEIGHBOURS.size():
+		var at: Vector2i = cell + EDGE_NEIGHBOURS[bit]
+		if Grid.in_bounds(at) and Farm.occupant(state, at).get("id", &"") in [&"wall", &"fence"]:
+			mask |= 1 << bit
+	return mask
+
+
+func _barrier_name(on: Dictionary, cell: Vector2i) -> StringName:
+	var mask := barrier_mask(_state, cell)
+	var id := str(on["id"]) + ("_join_%d" % mask if mask else "")
+	return StringName(id + ("_hurt" if _is_hurt(on) else ""))
 
 
 ## Cosmetic source-owned shapes selected by cell, stable through harvesting

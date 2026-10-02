@@ -1,0 +1,100 @@
+{
+  "id": "fence",
+  "kind": "hurt",
+  "revision": 0,
+  "tool": "built-in ImageGen",
+  "returned_file": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-06613c79-9a91-4cb4-8d86-3c7ddb929458.png",
+  "source": "assets/art_source/defences/fence/hurt.png",
+  "source_sha256": "1243288d9892178b8ecdae0d1b67e6e8a5ca38731df5aac598caa8eb13e26e08",
+  "source_wh": [
+    2172,
+    724
+  ],
+  "source_alpha_range": [
+    0,
+    255
+  ],
+  "prompt": "implementation/sprites/generation/0014-fence-hurt.prompt.txt",
+  "prompt_sha256": "bdbe18371eb3f6127c61526797ab378b3083f192a74937d55e8ed5b79b39aca3",
+  "references": [
+    "assets/art_source/defences/fence/whole-r2.png",
+    "docs/reference-sheet.png"
+  ],
+  "reference_hashes": {
+    "assets/art_source/defences/fence/whole-r2.png": "f2adb2c9cfa940b8509583d4937936a225327bbb3cfad7c9f9eddc4eacf51df7",
+    "docs/reference-sheet.png": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c"
+  },
+  "tool_arguments": {
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\defences\\fence\\whole-r2.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png"
+    ]
+  },
+  "measurements": [
+    {
+      "role": "post",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        396,
+        724
+      ],
+      "crop_xywh": [
+        178,
+        252,
+        128,
+        362
+      ]
+    },
+    {
+      "role": "horizontal",
+      "sheet_cell_xywh": [
+        396,
+        0,
+        780,
+        724
+      ],
+      "crop_xywh": [
+        486,
+        356,
+        598,
+        236
+      ]
+    },
+    {
+      "role": "vertical",
+      "sheet_cell_xywh": [
+        1176,
+        0,
+        296,
+        724
+      ],
+      "crop_xywh": [
+        1268,
+        48,
+        150,
+        618
+      ]
+    },
+    {
+      "role": "wreck",
+      "sheet_cell_xywh": [
+        1472,
+        0,
+        700,
+        724
+      ],
+      "crop_xywh": [
+        1527,
+        385,
+        520,
+        253
+      ]
+    }
+  ],
+  "decision": "Accepted vertical wear module only: a broad authored stone/wood break remains readable in the narrow projection. Post/horizontal are superseded by hurt-r1 because their reduction was too low to distinguish at native size.",
+  "selected_runtime_roles": [
+    "vertical"
+  ]
+}

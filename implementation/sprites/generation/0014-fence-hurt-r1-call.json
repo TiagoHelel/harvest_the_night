@@ -1,0 +1,101 @@
+{
+  "id": "fence",
+  "kind": "hurt-r1",
+  "revision": 1,
+  "tool": "built-in ImageGen",
+  "returned_file": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-274932a2-942f-4088-a9ba-a0b6c68aaf5e.png",
+  "source": "assets/art_source/defences/fence/hurt-r1.png",
+  "source_sha256": "cb79edca1060c85ca1baaff122c9ebffd2a30548596c5d6840831019a2b55727",
+  "source_wh": [
+    1024,
+    1536
+  ],
+  "source_alpha_range": [
+    0,
+    254
+  ],
+  "prompt": "implementation/sprites/generation/0014-fence-hurt-r1.prompt.txt",
+  "prompt_sha256": "e25408d1b0e0c67ced53d681f35fc556c9a0e5bb2e5b23e6d02458e795bc7066",
+  "references": [
+    "assets/art_source/defences/fence/whole-r3.png",
+    "docs/reference-sheet.png"
+  ],
+  "reference_hashes": {
+    "assets/art_source/defences/fence/whole-r3.png": "0e9fa00c7eda620054e7840caf6e13975531e6f943f211a34aed247a3f89ddd7",
+    "docs/reference-sheet.png": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c"
+  },
+  "tool_arguments": {
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\defences\\fence\\whole-r3.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png"
+    ]
+  },
+  "measurements": [
+    {
+      "role": "post",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        334,
+        658
+      ],
+      "crop_xywh": [
+        129,
+        132,
+        137,
+        466
+      ]
+    },
+    {
+      "role": "horizontal",
+      "sheet_cell_xywh": [
+        334,
+        0,
+        690,
+        658
+      ],
+      "crop_xywh": [
+        402,
+        260,
+        572,
+        307
+      ]
+    },
+    {
+      "role": "vertical",
+      "sheet_cell_xywh": [
+        0,
+        658,
+        337,
+        878
+      ],
+      "crop_xywh": [
+        108,
+        719,
+        202,
+        716
+      ]
+    },
+    {
+      "role": "wreck",
+      "sheet_cell_xywh": [
+        337,
+        658,
+        687,
+        878
+      ],
+      "crop_xywh": [
+        365,
+        1141,
+        621,
+        305
+      ]
+    }
+  ],
+  "decision": "Accepted post and horizontal wear modules only: chipped upper post and broken rail/masonry section survive the shared reduction and are not hidden under the center post. Vertical/wreck unused in favor of the matching older projections.",
+  "selected_runtime_roles": [
+    "horizontal",
+    "post"
+  ]
+}

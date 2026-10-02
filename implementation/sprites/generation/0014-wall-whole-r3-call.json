@@ -1,0 +1,101 @@
+{
+  "id": "wall",
+  "kind": "whole-r3",
+  "revision": 3,
+  "tool": "built-in ImageGen",
+  "returned_file": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-1e83fe67-252c-437a-b49d-2dc4431a1fe6.png",
+  "source": "assets/art_source/defences/wall/whole-r3.png",
+  "source_sha256": "98bb946042365835d3ddeeecb57e2d25e44861c4864028b8b8c4dae45ba85ea3",
+  "source_wh": [
+    1024,
+    1536
+  ],
+  "source_alpha_range": [
+    0,
+    254
+  ],
+  "prompt": "implementation/sprites/generation/0014-wall-whole-r3.prompt.txt",
+  "prompt_sha256": "275426c956521eb1c08f64154e4d3e143e680118317866e71a17c4d60d135ef4",
+  "references": [
+    "assets/art_source/defences/wall/whole.png",
+    "docs/reference-sheet.png"
+  ],
+  "reference_hashes": {
+    "assets/art_source/defences/wall/whole.png": "22420fef68686131090acd7ef313a43be6d9ddcbe379ee8a2a2248ee2bf70cf1",
+    "docs/reference-sheet.png": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c"
+  },
+  "tool_arguments": {
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\defences\\wall\\whole.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png"
+    ]
+  },
+  "measurements": [
+    {
+      "role": "post",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        367,
+        713
+      ],
+      "crop_xywh": [
+        107,
+        135,
+        208,
+        534
+      ]
+    },
+    {
+      "role": "horizontal",
+      "sheet_cell_xywh": [
+        367,
+        0,
+        657,
+        713
+      ],
+      "crop_xywh": [
+        419,
+        377,
+        549,
+        275
+      ]
+    },
+    {
+      "role": "vertical",
+      "sheet_cell_xywh": [
+        0,
+        713,
+        360,
+        823
+      ],
+      "crop_xywh": [
+        88,
+        758,
+        231,
+        649
+      ]
+    },
+    {
+      "role": "wreck",
+      "sheet_cell_xywh": [
+        360,
+        713,
+        664,
+        823
+      ],
+      "crop_xywh": [
+        402,
+        1179,
+        596,
+        232
+      ]
+    }
+  ],
+  "decision": "Accepted post and horizontal modules only: taller planted posts and coherent front construction. Vertical/wreck unused; whole-r2 retains the narrow north/south projection and low pile at the same physical scale.",
+  "selected_runtime_roles": [
+    "horizontal",
+    "post"
+  ]
+}

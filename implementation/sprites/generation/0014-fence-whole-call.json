@@ -1,0 +1,97 @@
+{
+  "id": "fence",
+  "kind": "whole",
+  "revision": 0,
+  "tool": "built-in ImageGen",
+  "returned_file": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-d62046a0-54ae-4b86-b9f5-a9337e7d8d9f.png",
+  "source": "assets/art_source/defences/fence/whole.png",
+  "source_sha256": "c69548009c08f258da16341d5c6fbf04d419b833f9ef4fc9adc7cf10cf2c247a",
+  "source_wh": [
+    2172,
+    724
+  ],
+  "source_alpha_range": [
+    0,
+    255
+  ],
+  "prompt": "implementation/sprites/generation/0014-fence-whole.prompt.txt",
+  "prompt_sha256": "0eed78aa8614cce9b5e233e7e67bbdd3b0b9579ed4e3598c290b876809c3f768",
+  "references": [
+    "assets/art_source/defences/gun_tower/master.png",
+    "docs/reference-sheet.png"
+  ],
+  "reference_hashes": {
+    "assets/art_source/defences/gun_tower/master.png": "86d51327390ec01329d9f110b2c539e01924dbdd21348d1f6dcfad25cbbbce13",
+    "docs/reference-sheet.png": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c"
+  },
+  "tool_arguments": {
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\defences\\gun_tower\\master.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png"
+    ]
+  },
+  "measurements": [
+    {
+      "role": "post",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        421,
+        724
+      ],
+      "crop_xywh": [
+        184,
+        252,
+        119,
+        361
+      ]
+    },
+    {
+      "role": "horizontal",
+      "sheet_cell_xywh": [
+        421,
+        0,
+        726,
+        724
+      ],
+      "crop_xywh": [
+        540,
+        351,
+        508,
+        236
+      ]
+    },
+    {
+      "role": "vertical",
+      "sheet_cell_xywh": [
+        1147,
+        0,
+        351,
+        724
+      ],
+      "crop_xywh": [
+        1246,
+        95,
+        161,
+        514
+      ]
+    },
+    {
+      "role": "wreck",
+      "sheet_cell_xywh": [
+        1498,
+        0,
+        674,
+        724
+      ],
+      "crop_xywh": [
+        1590,
+        370,
+        504,
+        248
+      ]
+    }
+  ],
+  "decision": "Rejected: North-south piece depicts a pair of upright posts instead of longitudinal rails and is too short at the common horizontal span scale."
+}

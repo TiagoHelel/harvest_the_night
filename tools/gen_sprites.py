@@ -536,10 +536,26 @@ def migrated_towers():
         for level in range(1, LEVELS + 1) for suffix in ("", "_hurt", "_fire", "_wreck"))}
 
 
+def migrated_barriers():
+    """No hole/ruin fallback once every occupied-neighbor join has an owner."""
+    owners = art_ownership.registry()
+    complete = {"buildings/" + family for family in ("wall", "fence") if all(
+        owners.get("sprites/buildings/" + family + ("_join_%d" % mask if mask else "") + state + ".png") == "raster"
+        for mask in range(16) for state in ("", "_hurt")) and
+        owners.get("sprites/buildings/" + family + "_wreck.png") == "raster"}
+    if all(owners.get("sprites/buildings/barricade" + suffix + ".png") == "raster"
+           for suffix in ("", "_hurt", "_wreck")):
+        complete.add("buildings/barricade")
+    if all(owners.get("sprites/buildings/mine" + suffix + ".png") == "raster"
+           for suffix in ("", "_triggered", "_spent")):
+        complete.add("buildings/mine")
+    return complete
+
+
 def derived_sprites():
     """{name: (w, h, pixels)} for every pose that is not drawn by hand."""
     out = {}
-    migrated = migrated_towers()
+    migrated = migrated_towers() | migrated_barriers()
 
     # Buildings, cut into the tiles the view asks for.
     for key, (name, cols, rows) in sorted(SLICED.items()):
@@ -620,7 +636,7 @@ def write(path, data):
 def everything(dispatch=True):
     """Every output file, as {path: bytes}."""
     out = {}
-    migrated = migrated_towers()
+    migrated = migrated_towers() | migrated_barriers()
     for name, spec in sorted(SPRITES.items()):
         if name in migrated:
             continue

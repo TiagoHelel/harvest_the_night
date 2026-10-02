@@ -1,0 +1,6838 @@
+[
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-wall-whole-r3.prompt.txt",
+    "prompt_sha256": "275426c956521eb1c08f64154e4d3e143e680118317866e71a17c4d60d135ef4",
+    "references": [
+      {
+        "path": "assets/art_source/defences/wall/whole.png",
+        "sha256": "22420fef68686131090acd7ef313a43be6d9ddcbe379ee8a2a2248ee2bf70cf1",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 3,
+    "id": "buildings/modules/wall_post",
+    "output": "sprites/buildings/modules/wall_post.png",
+    "animation": "buildings/modules/wall_post",
+    "source": "assets/art_source/defences/wall/whole-r3.png",
+    "source_sha256": "98bb946042365835d3ddeeecb57e2d25e44861c4864028b8b8c4dae45ba85ea3",
+    "crop_xywh": [
+      107,
+      135,
+      208,
+      534
+    ],
+    "sheet_cell_xywh": [
+      0,
+      0,
+      367,
+      713
+    ],
+    "gutter_xy": [
+      0,
+      0
+    ],
+    "alpha_threshold": 128,
+    "content_scale": 0.028622540250447227,
+    "content_anchor_xy": [
+      3,
+      23
+    ],
+    "output_sha256": "294c1acc604fb29411c5a670d9ca14626eb5aee29fa34c5f0d0bba66a47b7789",
+    "barrier_family": "wall",
+    "barrier_state": "whole",
+    "module": "post"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-wall-whole-r3.prompt.txt",
+    "prompt_sha256": "275426c956521eb1c08f64154e4d3e143e680118317866e71a17c4d60d135ef4",
+    "references": [
+      {
+        "path": "assets/art_source/defences/wall/whole.png",
+        "sha256": "22420fef68686131090acd7ef313a43be6d9ddcbe379ee8a2a2248ee2bf70cf1",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 3,
+    "id": "buildings/modules/wall_horizontal",
+    "output": "sprites/buildings/modules/wall_horizontal.png",
+    "animation": "buildings/modules/wall_horizontal",
+    "source": "assets/art_source/defences/wall/whole-r3.png",
+    "source_sha256": "98bb946042365835d3ddeeecb57e2d25e44861c4864028b8b8c4dae45ba85ea3",
+    "crop_xywh": [
+      419,
+      377,
+      549,
+      275
+    ],
+    "sheet_cell_xywh": [
+      367,
+      0,
+      657,
+      713
+    ],
+    "gutter_xy": [
+      0,
+      0
+    ],
+    "alpha_threshold": 128,
+    "content_scale": 0.028622540250447227,
+    "content_anchor_xy": [
+      8,
+      16
+    ],
+    "output_sha256": "dc3f03ec5b0a08768a485b46b86ad17e8c58e158fc1aea87dfcde1fba373e0f3",
+    "barrier_family": "wall",
+    "barrier_state": "whole",
+    "module": "horizontal"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-wall-whole-r2.prompt.txt",
+    "prompt_sha256": "f22de47b35e4d3c3230813377998543046b287076592b06dc9764e5fb90a2783",
+    "references": [
+      {
+        "path": "assets/art_source/defences/wall/whole.png",
+        "sha256": "22420fef68686131090acd7ef313a43be6d9ddcbe379ee8a2a2248ee2bf70cf1",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 2,
+    "id": "buildings/modules/wall_vertical",
+    "output": "sprites/buildings/modules/wall_vertical.png",
+    "animation": "buildings/modules/wall_vertical",
+    "source": "assets/art_source/defences/wall/whole-r2.png",
+    "source_sha256": "93926678e72f136ee17b2fe607fa79a7f51c31d114efe304022958cfcb7fcf0c",
+    "crop_xywh": [
+      1078,
+      73,
+      155,
+      660
+    ],
+    "sheet_cell_xywh": [
+      988,
+      0,
+      338,
+      793
+    ],
+    "gutter_xy": [
+      0,
+      0
+    ],
+    "alpha_threshold": 128,
+    "content_scale": 0.028622540250447227,
+    "content_anchor_xy": [
+      2,
+      19
+    ],
+    "output_sha256": "cf26fea10ebd75c1a82d4e87c9e26952c2f4f4c09c717633c7f81c82bd2bdc77",
+    "barrier_family": "wall",
+    "barrier_state": "whole",
+    "module": "vertical"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-wall-whole-r3.prompt.txt",
+    "prompt_sha256": "275426c956521eb1c08f64154e4d3e143e680118317866e71a17c4d60d135ef4",
+    "references": [
+      {
+        "path": "assets/art_source/defences/wall/whole.png",
+        "sha256": "22420fef68686131090acd7ef313a43be6d9ddcbe379ee8a2a2248ee2bf70cf1",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 3,
+    "id": "buildings/wall",
+    "output": "sprites/buildings/wall.png",
+    "animation": "buildings/wall",
+    "input": "buildings/modules/wall_post",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/wall_post",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "wall",
+    "barrier_state": "whole",
+    "join_mask": 0,
+    "output_sha256": "294c1acc604fb29411c5a670d9ca14626eb5aee29fa34c5f0d0bba66a47b7789"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-wall-whole-r3.prompt.txt",
+    "prompt_sha256": "275426c956521eb1c08f64154e4d3e143e680118317866e71a17c4d60d135ef4",
+    "references": [
+      {
+        "path": "assets/art_source/defences/wall/whole.png",
+        "sha256": "22420fef68686131090acd7ef313a43be6d9ddcbe379ee8a2a2248ee2bf70cf1",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 3,
+    "id": "buildings/wall_join_1",
+    "output": "sprites/buildings/wall_join_1.png",
+    "animation": "buildings/wall_join_1",
+    "input": "buildings/modules/wall_post",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/wall_vertical",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_post",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "wall",
+    "barrier_state": "whole",
+    "join_mask": 1,
+    "output_sha256": "b99e1aa9701543293821e5b05bf3b316180b987d294c98e1f183681877443467"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-wall-whole-r3.prompt.txt",
+    "prompt_sha256": "275426c956521eb1c08f64154e4d3e143e680118317866e71a17c4d60d135ef4",
+    "references": [
+      {
+        "path": "assets/art_source/defences/wall/whole.png",
+        "sha256": "22420fef68686131090acd7ef313a43be6d9ddcbe379ee8a2a2248ee2bf70cf1",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 3,
+    "id": "buildings/wall_join_2",
+    "output": "sprites/buildings/wall_join_2.png",
+    "animation": "buildings/wall_join_2",
+    "input": "buildings/modules/wall_post",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/wall_horizontal",
+        "slice_xywh": [
+          8,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          8,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_post",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "wall",
+    "barrier_state": "whole",
+    "join_mask": 2,
+    "output_sha256": "6340b96f2eb882dd67a557c57f03fde894af7d8f491bb98d0ab428fb11d25404"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-wall-whole-r3.prompt.txt",
+    "prompt_sha256": "275426c956521eb1c08f64154e4d3e143e680118317866e71a17c4d60d135ef4",
+    "references": [
+      {
+        "path": "assets/art_source/defences/wall/whole.png",
+        "sha256": "22420fef68686131090acd7ef313a43be6d9ddcbe379ee8a2a2248ee2bf70cf1",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 3,
+    "id": "buildings/wall_join_3",
+    "output": "sprites/buildings/wall_join_3.png",
+    "animation": "buildings/wall_join_3",
+    "input": "buildings/modules/wall_post",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/wall_vertical",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_horizontal",
+        "slice_xywh": [
+          8,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          8,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_post",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "wall",
+    "barrier_state": "whole",
+    "join_mask": 3,
+    "output_sha256": "8c99881c9c7ca461b5d366c8dd54bd350b2ee17a3a864356cc8a9ab239b3fbb7"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-wall-whole-r3.prompt.txt",
+    "prompt_sha256": "275426c956521eb1c08f64154e4d3e143e680118317866e71a17c4d60d135ef4",
+    "references": [
+      {
+        "path": "assets/art_source/defences/wall/whole.png",
+        "sha256": "22420fef68686131090acd7ef313a43be6d9ddcbe379ee8a2a2248ee2bf70cf1",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 3,
+    "id": "buildings/wall_join_4",
+    "output": "sprites/buildings/wall_join_4.png",
+    "animation": "buildings/wall_join_4",
+    "input": "buildings/modules/wall_post",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/wall_vertical",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          8
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_post",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "wall",
+    "barrier_state": "whole",
+    "join_mask": 4,
+    "output_sha256": "03595c39675a570b242e60c8e8a791d5541e9d551134ca2a1bb9298f0176e6bb"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-wall-whole-r3.prompt.txt",
+    "prompt_sha256": "275426c956521eb1c08f64154e4d3e143e680118317866e71a17c4d60d135ef4",
+    "references": [
+      {
+        "path": "assets/art_source/defences/wall/whole.png",
+        "sha256": "22420fef68686131090acd7ef313a43be6d9ddcbe379ee8a2a2248ee2bf70cf1",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 3,
+    "id": "buildings/wall_join_5",
+    "output": "sprites/buildings/wall_join_5.png",
+    "animation": "buildings/wall_join_5",
+    "input": "buildings/modules/wall_post",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/wall_vertical",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_vertical",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          8
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_post",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "wall",
+    "barrier_state": "whole",
+    "join_mask": 5,
+    "output_sha256": "87fccb8757ba611a0cb99e4b77919159ee1ce8dda9ac0b826dc53626d044d02a"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-wall-whole-r3.prompt.txt",
+    "prompt_sha256": "275426c956521eb1c08f64154e4d3e143e680118317866e71a17c4d60d135ef4",
+    "references": [
+      {
+        "path": "assets/art_source/defences/wall/whole.png",
+        "sha256": "22420fef68686131090acd7ef313a43be6d9ddcbe379ee8a2a2248ee2bf70cf1",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 3,
+    "id": "buildings/wall_join_6",
+    "output": "sprites/buildings/wall_join_6.png",
+    "animation": "buildings/wall_join_6",
+    "input": "buildings/modules/wall_post",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/wall_horizontal",
+        "slice_xywh": [
+          8,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          8,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_vertical",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          8
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_post",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "wall",
+    "barrier_state": "whole",
+    "join_mask": 6,
+    "output_sha256": "7084b296746e7d64c5b5aa12cfb72e22e7d4ca7c2cb0a51e82c1763a2c1fe957"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-wall-whole-r3.prompt.txt",
+    "prompt_sha256": "275426c956521eb1c08f64154e4d3e143e680118317866e71a17c4d60d135ef4",
+    "references": [
+      {
+        "path": "assets/art_source/defences/wall/whole.png",
+        "sha256": "22420fef68686131090acd7ef313a43be6d9ddcbe379ee8a2a2248ee2bf70cf1",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 3,
+    "id": "buildings/wall_join_7",
+    "output": "sprites/buildings/wall_join_7.png",
+    "animation": "buildings/wall_join_7",
+    "input": "buildings/modules/wall_post",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/wall_vertical",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_horizontal",
+        "slice_xywh": [
+          8,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          8,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_vertical",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          8
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_post",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "wall",
+    "barrier_state": "whole",
+    "join_mask": 7,
+    "output_sha256": "21e5d079b131cb79b3d7f17a100e47a7fb1440c3d09b89441d880e876bff27b1"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-wall-whole-r3.prompt.txt",
+    "prompt_sha256": "275426c956521eb1c08f64154e4d3e143e680118317866e71a17c4d60d135ef4",
+    "references": [
+      {
+        "path": "assets/art_source/defences/wall/whole.png",
+        "sha256": "22420fef68686131090acd7ef313a43be6d9ddcbe379ee8a2a2248ee2bf70cf1",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 3,
+    "id": "buildings/wall_join_8",
+    "output": "sprites/buildings/wall_join_8.png",
+    "animation": "buildings/wall_join_8",
+    "input": "buildings/modules/wall_post",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/wall_horizontal",
+        "slice_xywh": [
+          0,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_post",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "wall",
+    "barrier_state": "whole",
+    "join_mask": 8,
+    "output_sha256": "3ad49de62d9a7883c5c4f5c9251546ce02ba2bff99b6a774a4df733180dc914d"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-wall-whole-r3.prompt.txt",
+    "prompt_sha256": "275426c956521eb1c08f64154e4d3e143e680118317866e71a17c4d60d135ef4",
+    "references": [
+      {
+        "path": "assets/art_source/defences/wall/whole.png",
+        "sha256": "22420fef68686131090acd7ef313a43be6d9ddcbe379ee8a2a2248ee2bf70cf1",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 3,
+    "id": "buildings/wall_join_9",
+    "output": "sprites/buildings/wall_join_9.png",
+    "animation": "buildings/wall_join_9",
+    "input": "buildings/modules/wall_post",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/wall_vertical",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_horizontal",
+        "slice_xywh": [
+          0,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_post",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "wall",
+    "barrier_state": "whole",
+    "join_mask": 9,
+    "output_sha256": "91301dad72183ea7957cd4523b4da408fc0f072e2eac96e7787ab1eb6e2655f4"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-wall-whole-r3.prompt.txt",
+    "prompt_sha256": "275426c956521eb1c08f64154e4d3e143e680118317866e71a17c4d60d135ef4",
+    "references": [
+      {
+        "path": "assets/art_source/defences/wall/whole.png",
+        "sha256": "22420fef68686131090acd7ef313a43be6d9ddcbe379ee8a2a2248ee2bf70cf1",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 3,
+    "id": "buildings/wall_join_10",
+    "output": "sprites/buildings/wall_join_10.png",
+    "animation": "buildings/wall_join_10",
+    "input": "buildings/modules/wall_post",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/wall_horizontal",
+        "slice_xywh": [
+          0,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_horizontal",
+        "slice_xywh": [
+          8,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          8,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_post",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "wall",
+    "barrier_state": "whole",
+    "join_mask": 10,
+    "output_sha256": "6dac5663faf1ca9c197cb4d91b6ee8dd44d8a255feb0b9ba662bb80c8fbf3586"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-wall-whole-r3.prompt.txt",
+    "prompt_sha256": "275426c956521eb1c08f64154e4d3e143e680118317866e71a17c4d60d135ef4",
+    "references": [
+      {
+        "path": "assets/art_source/defences/wall/whole.png",
+        "sha256": "22420fef68686131090acd7ef313a43be6d9ddcbe379ee8a2a2248ee2bf70cf1",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 3,
+    "id": "buildings/wall_join_11",
+    "output": "sprites/buildings/wall_join_11.png",
+    "animation": "buildings/wall_join_11",
+    "input": "buildings/modules/wall_post",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/wall_vertical",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_horizontal",
+        "slice_xywh": [
+          0,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_horizontal",
+        "slice_xywh": [
+          8,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          8,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_post",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "wall",
+    "barrier_state": "whole",
+    "join_mask": 11,
+    "output_sha256": "e106c724963451307f5698c10b499d7234eeea50471137216ee6272d59a1cf0a"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-wall-whole-r3.prompt.txt",
+    "prompt_sha256": "275426c956521eb1c08f64154e4d3e143e680118317866e71a17c4d60d135ef4",
+    "references": [
+      {
+        "path": "assets/art_source/defences/wall/whole.png",
+        "sha256": "22420fef68686131090acd7ef313a43be6d9ddcbe379ee8a2a2248ee2bf70cf1",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 3,
+    "id": "buildings/wall_join_12",
+    "output": "sprites/buildings/wall_join_12.png",
+    "animation": "buildings/wall_join_12",
+    "input": "buildings/modules/wall_post",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/wall_horizontal",
+        "slice_xywh": [
+          0,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_vertical",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          8
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_post",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "wall",
+    "barrier_state": "whole",
+    "join_mask": 12,
+    "output_sha256": "70111686b6c395bedd90da66e79b610dc5908018f910fb6f05d83aeba20dac63"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-wall-whole-r3.prompt.txt",
+    "prompt_sha256": "275426c956521eb1c08f64154e4d3e143e680118317866e71a17c4d60d135ef4",
+    "references": [
+      {
+        "path": "assets/art_source/defences/wall/whole.png",
+        "sha256": "22420fef68686131090acd7ef313a43be6d9ddcbe379ee8a2a2248ee2bf70cf1",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 3,
+    "id": "buildings/wall_join_13",
+    "output": "sprites/buildings/wall_join_13.png",
+    "animation": "buildings/wall_join_13",
+    "input": "buildings/modules/wall_post",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/wall_vertical",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_horizontal",
+        "slice_xywh": [
+          0,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_vertical",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          8
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_post",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "wall",
+    "barrier_state": "whole",
+    "join_mask": 13,
+    "output_sha256": "ed67bda0e6489f1e39589ccb5873d5493e6c825fc354bc7533549f3a176317c0"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-wall-whole-r3.prompt.txt",
+    "prompt_sha256": "275426c956521eb1c08f64154e4d3e143e680118317866e71a17c4d60d135ef4",
+    "references": [
+      {
+        "path": "assets/art_source/defences/wall/whole.png",
+        "sha256": "22420fef68686131090acd7ef313a43be6d9ddcbe379ee8a2a2248ee2bf70cf1",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 3,
+    "id": "buildings/wall_join_14",
+    "output": "sprites/buildings/wall_join_14.png",
+    "animation": "buildings/wall_join_14",
+    "input": "buildings/modules/wall_post",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/wall_horizontal",
+        "slice_xywh": [
+          0,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_horizontal",
+        "slice_xywh": [
+          8,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          8,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_vertical",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          8
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_post",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "wall",
+    "barrier_state": "whole",
+    "join_mask": 14,
+    "output_sha256": "d4cf0b57085eb4ecb2dfb660b94ff533cff836d3a9560625d751ea9cdcb31784"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-wall-whole-r3.prompt.txt",
+    "prompt_sha256": "275426c956521eb1c08f64154e4d3e143e680118317866e71a17c4d60d135ef4",
+    "references": [
+      {
+        "path": "assets/art_source/defences/wall/whole.png",
+        "sha256": "22420fef68686131090acd7ef313a43be6d9ddcbe379ee8a2a2248ee2bf70cf1",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 3,
+    "id": "buildings/wall_join_15",
+    "output": "sprites/buildings/wall_join_15.png",
+    "animation": "buildings/wall_join_15",
+    "input": "buildings/modules/wall_post",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/wall_vertical",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_horizontal",
+        "slice_xywh": [
+          0,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_horizontal",
+        "slice_xywh": [
+          8,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          8,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_vertical",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          8
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_post",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "wall",
+    "barrier_state": "whole",
+    "join_mask": 15,
+    "output_sha256": "d8bec446a8d60a32a7ce4a88fdb7ed2eb5067353e2b5f34a7753bce7d7a74910"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-wall-hurt-r1.prompt.txt",
+    "prompt_sha256": "09031ed5acbd9f51b4b8688a192a6d317d1e6a799bcbaddf49f81479fe0a29d1",
+    "references": [
+      {
+        "path": "assets/art_source/defences/wall/whole-r3.png",
+        "sha256": "98bb946042365835d3ddeeecb57e2d25e44861c4864028b8b8c4dae45ba85ea3",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 1,
+    "id": "buildings/modules/wall_post_hurt",
+    "output": "sprites/buildings/modules/wall_post_hurt.png",
+    "animation": "buildings/modules/wall_post_hurt",
+    "source": "assets/art_source/defences/wall/hurt-r1.png",
+    "source_sha256": "96232d45f621e77bfe6ccaf38a20c654b3099d5abd7934e37d69d03064279fc2",
+    "crop_xywh": [
+      109,
+      133,
+      208,
+      535
+    ],
+    "sheet_cell_xywh": [
+      0,
+      0,
+      367,
+      706
+    ],
+    "gutter_xy": [
+      0,
+      0
+    ],
+    "alpha_threshold": 128,
+    "content_scale": 0.028622540250447227,
+    "content_anchor_xy": [
+      3,
+      23
+    ],
+    "output_sha256": "1c98d3053d63dde2550f39ec6428cae33f2e2f4edbeab6b5e55d145aebf38e4f",
+    "barrier_family": "wall",
+    "barrier_state": "hurt",
+    "module": "post"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-wall-hurt-r1.prompt.txt",
+    "prompt_sha256": "09031ed5acbd9f51b4b8688a192a6d317d1e6a799bcbaddf49f81479fe0a29d1",
+    "references": [
+      {
+        "path": "assets/art_source/defences/wall/whole-r3.png",
+        "sha256": "98bb946042365835d3ddeeecb57e2d25e44861c4864028b8b8c4dae45ba85ea3",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 1,
+    "id": "buildings/modules/wall_horizontal_hurt",
+    "output": "sprites/buildings/modules/wall_horizontal_hurt.png",
+    "animation": "buildings/modules/wall_horizontal_hurt",
+    "source": "assets/art_source/defences/wall/hurt-r1.png",
+    "source_sha256": "96232d45f621e77bfe6ccaf38a20c654b3099d5abd7934e37d69d03064279fc2",
+    "crop_xywh": [
+      418,
+      376,
+      559,
+      280
+    ],
+    "sheet_cell_xywh": [
+      367,
+      0,
+      657,
+      706
+    ],
+    "gutter_xy": [
+      0,
+      0
+    ],
+    "alpha_threshold": 128,
+    "content_scale": 0.028622540250447227,
+    "content_anchor_xy": [
+      8,
+      16
+    ],
+    "output_sha256": "f9bf15321c298b390e38e1d83d22e28a65505fcc9ceb44ee19987256a340c9fc",
+    "barrier_family": "wall",
+    "barrier_state": "hurt",
+    "module": "horizontal"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-wall-hurt.prompt.txt",
+    "prompt_sha256": "e44882da378c7ae868add134d85e24a1afc8dc6b18f2d4061799df200fcb6c89",
+    "references": [
+      {
+        "path": "assets/art_source/defences/wall/whole-r2.png",
+        "sha256": "93926678e72f136ee17b2fe607fa79a7f51c31d114efe304022958cfcb7fcf0c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 0,
+    "id": "buildings/modules/wall_vertical_hurt",
+    "output": "sprites/buildings/modules/wall_vertical_hurt.png",
+    "animation": "buildings/modules/wall_vertical_hurt",
+    "source": "assets/art_source/defences/wall/hurt.png",
+    "source_sha256": "fb13f45257b1176b595c11c0cd20e2e37748a020082dfbdd4c33628e80521e3d",
+    "crop_xywh": [
+      1078,
+      71,
+      159,
+      664
+    ],
+    "sheet_cell_xywh": [
+      989,
+      0,
+      340,
+      793
+    ],
+    "gutter_xy": [
+      0,
+      0
+    ],
+    "alpha_threshold": 128,
+    "content_scale": 0.028622540250447227,
+    "content_anchor_xy": [
+      2,
+      19
+    ],
+    "output_sha256": "6d0fe154340afb6dc9109dbcce6314bdc4e085ff4e4affcfe416b7caf85ba2cc",
+    "barrier_family": "wall",
+    "barrier_state": "hurt",
+    "module": "vertical"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-wall-hurt-r1.prompt.txt",
+    "prompt_sha256": "09031ed5acbd9f51b4b8688a192a6d317d1e6a799bcbaddf49f81479fe0a29d1",
+    "references": [
+      {
+        "path": "assets/art_source/defences/wall/whole-r3.png",
+        "sha256": "98bb946042365835d3ddeeecb57e2d25e44861c4864028b8b8c4dae45ba85ea3",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 1,
+    "id": "buildings/wall_hurt",
+    "output": "sprites/buildings/wall_hurt.png",
+    "animation": "buildings/wall_hurt",
+    "input": "buildings/modules/wall_post_hurt",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/wall_post_hurt",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "wall",
+    "barrier_state": "hurt",
+    "join_mask": 0,
+    "output_sha256": "1c98d3053d63dde2550f39ec6428cae33f2e2f4edbeab6b5e55d145aebf38e4f"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-wall-hurt-r1.prompt.txt",
+    "prompt_sha256": "09031ed5acbd9f51b4b8688a192a6d317d1e6a799bcbaddf49f81479fe0a29d1",
+    "references": [
+      {
+        "path": "assets/art_source/defences/wall/whole-r3.png",
+        "sha256": "98bb946042365835d3ddeeecb57e2d25e44861c4864028b8b8c4dae45ba85ea3",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 1,
+    "id": "buildings/wall_join_1_hurt",
+    "output": "sprites/buildings/wall_join_1_hurt.png",
+    "animation": "buildings/wall_join_1_hurt",
+    "input": "buildings/modules/wall_post_hurt",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/wall_vertical_hurt",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_post_hurt",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "wall",
+    "barrier_state": "hurt",
+    "join_mask": 1,
+    "output_sha256": "8a8017055efe3799c02d1ad68cfe8ee7ee95e20f5d2e6dd845ab7e6073072906"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-wall-hurt-r1.prompt.txt",
+    "prompt_sha256": "09031ed5acbd9f51b4b8688a192a6d317d1e6a799bcbaddf49f81479fe0a29d1",
+    "references": [
+      {
+        "path": "assets/art_source/defences/wall/whole-r3.png",
+        "sha256": "98bb946042365835d3ddeeecb57e2d25e44861c4864028b8b8c4dae45ba85ea3",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 1,
+    "id": "buildings/wall_join_2_hurt",
+    "output": "sprites/buildings/wall_join_2_hurt.png",
+    "animation": "buildings/wall_join_2_hurt",
+    "input": "buildings/modules/wall_post_hurt",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/wall_horizontal_hurt",
+        "slice_xywh": [
+          8,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          8,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_post_hurt",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "wall",
+    "barrier_state": "hurt",
+    "join_mask": 2,
+    "output_sha256": "351b98bc9d8d56b25c06763c53e2519745249b34df37f45c5822609e94b2be4e"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-wall-hurt-r1.prompt.txt",
+    "prompt_sha256": "09031ed5acbd9f51b4b8688a192a6d317d1e6a799bcbaddf49f81479fe0a29d1",
+    "references": [
+      {
+        "path": "assets/art_source/defences/wall/whole-r3.png",
+        "sha256": "98bb946042365835d3ddeeecb57e2d25e44861c4864028b8b8c4dae45ba85ea3",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 1,
+    "id": "buildings/wall_join_3_hurt",
+    "output": "sprites/buildings/wall_join_3_hurt.png",
+    "animation": "buildings/wall_join_3_hurt",
+    "input": "buildings/modules/wall_post_hurt",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/wall_vertical_hurt",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_horizontal_hurt",
+        "slice_xywh": [
+          8,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          8,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_post_hurt",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "wall",
+    "barrier_state": "hurt",
+    "join_mask": 3,
+    "output_sha256": "7bafa698f217ebf8bd62556c8050ad553ef3ff6959de9dad8121c94cfbfb822b"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-wall-hurt-r1.prompt.txt",
+    "prompt_sha256": "09031ed5acbd9f51b4b8688a192a6d317d1e6a799bcbaddf49f81479fe0a29d1",
+    "references": [
+      {
+        "path": "assets/art_source/defences/wall/whole-r3.png",
+        "sha256": "98bb946042365835d3ddeeecb57e2d25e44861c4864028b8b8c4dae45ba85ea3",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 1,
+    "id": "buildings/wall_join_4_hurt",
+    "output": "sprites/buildings/wall_join_4_hurt.png",
+    "animation": "buildings/wall_join_4_hurt",
+    "input": "buildings/modules/wall_post_hurt",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/wall_vertical_hurt",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          8
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_post_hurt",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "wall",
+    "barrier_state": "hurt",
+    "join_mask": 4,
+    "output_sha256": "139abfa25ceeb656e4ce65f8fc95fa08be7c1dd252ea66fd2cff9e902755c4c7"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-wall-hurt-r1.prompt.txt",
+    "prompt_sha256": "09031ed5acbd9f51b4b8688a192a6d317d1e6a799bcbaddf49f81479fe0a29d1",
+    "references": [
+      {
+        "path": "assets/art_source/defences/wall/whole-r3.png",
+        "sha256": "98bb946042365835d3ddeeecb57e2d25e44861c4864028b8b8c4dae45ba85ea3",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 1,
+    "id": "buildings/wall_join_5_hurt",
+    "output": "sprites/buildings/wall_join_5_hurt.png",
+    "animation": "buildings/wall_join_5_hurt",
+    "input": "buildings/modules/wall_post_hurt",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/wall_vertical_hurt",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_vertical_hurt",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          8
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_post_hurt",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "wall",
+    "barrier_state": "hurt",
+    "join_mask": 5,
+    "output_sha256": "21284428d5d5bae2727b40496c0a03b284dca2b2bece7b47e9c3f83bf9432821"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-wall-hurt-r1.prompt.txt",
+    "prompt_sha256": "09031ed5acbd9f51b4b8688a192a6d317d1e6a799bcbaddf49f81479fe0a29d1",
+    "references": [
+      {
+        "path": "assets/art_source/defences/wall/whole-r3.png",
+        "sha256": "98bb946042365835d3ddeeecb57e2d25e44861c4864028b8b8c4dae45ba85ea3",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 1,
+    "id": "buildings/wall_join_6_hurt",
+    "output": "sprites/buildings/wall_join_6_hurt.png",
+    "animation": "buildings/wall_join_6_hurt",
+    "input": "buildings/modules/wall_post_hurt",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/wall_horizontal_hurt",
+        "slice_xywh": [
+          8,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          8,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_vertical_hurt",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          8
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_post_hurt",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "wall",
+    "barrier_state": "hurt",
+    "join_mask": 6,
+    "output_sha256": "8076ea9f99645b01dbb5e14581abb4b1ccd4ea75a281d76d52bd0abe87bfee89"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-wall-hurt-r1.prompt.txt",
+    "prompt_sha256": "09031ed5acbd9f51b4b8688a192a6d317d1e6a799bcbaddf49f81479fe0a29d1",
+    "references": [
+      {
+        "path": "assets/art_source/defences/wall/whole-r3.png",
+        "sha256": "98bb946042365835d3ddeeecb57e2d25e44861c4864028b8b8c4dae45ba85ea3",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 1,
+    "id": "buildings/wall_join_7_hurt",
+    "output": "sprites/buildings/wall_join_7_hurt.png",
+    "animation": "buildings/wall_join_7_hurt",
+    "input": "buildings/modules/wall_post_hurt",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/wall_vertical_hurt",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_horizontal_hurt",
+        "slice_xywh": [
+          8,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          8,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_vertical_hurt",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          8
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_post_hurt",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "wall",
+    "barrier_state": "hurt",
+    "join_mask": 7,
+    "output_sha256": "0812d29a617a63b799e5a5ff7cbf47994fe4720611d9fb224882edfb3ba8956c"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-wall-hurt-r1.prompt.txt",
+    "prompt_sha256": "09031ed5acbd9f51b4b8688a192a6d317d1e6a799bcbaddf49f81479fe0a29d1",
+    "references": [
+      {
+        "path": "assets/art_source/defences/wall/whole-r3.png",
+        "sha256": "98bb946042365835d3ddeeecb57e2d25e44861c4864028b8b8c4dae45ba85ea3",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 1,
+    "id": "buildings/wall_join_8_hurt",
+    "output": "sprites/buildings/wall_join_8_hurt.png",
+    "animation": "buildings/wall_join_8_hurt",
+    "input": "buildings/modules/wall_post_hurt",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/wall_horizontal_hurt",
+        "slice_xywh": [
+          0,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_post_hurt",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "wall",
+    "barrier_state": "hurt",
+    "join_mask": 8,
+    "output_sha256": "e0d7d19baf0ecb1cfc63f3f851181a66b55020ee7e0b218237a49c136dcf41e5"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-wall-hurt-r1.prompt.txt",
+    "prompt_sha256": "09031ed5acbd9f51b4b8688a192a6d317d1e6a799bcbaddf49f81479fe0a29d1",
+    "references": [
+      {
+        "path": "assets/art_source/defences/wall/whole-r3.png",
+        "sha256": "98bb946042365835d3ddeeecb57e2d25e44861c4864028b8b8c4dae45ba85ea3",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 1,
+    "id": "buildings/wall_join_9_hurt",
+    "output": "sprites/buildings/wall_join_9_hurt.png",
+    "animation": "buildings/wall_join_9_hurt",
+    "input": "buildings/modules/wall_post_hurt",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/wall_vertical_hurt",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_horizontal_hurt",
+        "slice_xywh": [
+          0,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_post_hurt",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "wall",
+    "barrier_state": "hurt",
+    "join_mask": 9,
+    "output_sha256": "529f295d9a127305e78d6d80fa98e76c132fe5028e264290a3c2b208ce9ef4dc"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-wall-hurt-r1.prompt.txt",
+    "prompt_sha256": "09031ed5acbd9f51b4b8688a192a6d317d1e6a799bcbaddf49f81479fe0a29d1",
+    "references": [
+      {
+        "path": "assets/art_source/defences/wall/whole-r3.png",
+        "sha256": "98bb946042365835d3ddeeecb57e2d25e44861c4864028b8b8c4dae45ba85ea3",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 1,
+    "id": "buildings/wall_join_10_hurt",
+    "output": "sprites/buildings/wall_join_10_hurt.png",
+    "animation": "buildings/wall_join_10_hurt",
+    "input": "buildings/modules/wall_post_hurt",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/wall_horizontal_hurt",
+        "slice_xywh": [
+          0,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_horizontal_hurt",
+        "slice_xywh": [
+          8,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          8,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_post_hurt",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "wall",
+    "barrier_state": "hurt",
+    "join_mask": 10,
+    "output_sha256": "094bd85793cf76d2058b493442cc43073edff139c1f6f5afe38d510c28e0b819"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-wall-hurt-r1.prompt.txt",
+    "prompt_sha256": "09031ed5acbd9f51b4b8688a192a6d317d1e6a799bcbaddf49f81479fe0a29d1",
+    "references": [
+      {
+        "path": "assets/art_source/defences/wall/whole-r3.png",
+        "sha256": "98bb946042365835d3ddeeecb57e2d25e44861c4864028b8b8c4dae45ba85ea3",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 1,
+    "id": "buildings/wall_join_11_hurt",
+    "output": "sprites/buildings/wall_join_11_hurt.png",
+    "animation": "buildings/wall_join_11_hurt",
+    "input": "buildings/modules/wall_post_hurt",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/wall_vertical_hurt",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_horizontal_hurt",
+        "slice_xywh": [
+          0,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_horizontal_hurt",
+        "slice_xywh": [
+          8,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          8,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_post_hurt",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "wall",
+    "barrier_state": "hurt",
+    "join_mask": 11,
+    "output_sha256": "7acea5dfca372b6fbabc25118c0e2d8bd31d3bcbcab2716cdbb473de12e7c384"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-wall-hurt-r1.prompt.txt",
+    "prompt_sha256": "09031ed5acbd9f51b4b8688a192a6d317d1e6a799bcbaddf49f81479fe0a29d1",
+    "references": [
+      {
+        "path": "assets/art_source/defences/wall/whole-r3.png",
+        "sha256": "98bb946042365835d3ddeeecb57e2d25e44861c4864028b8b8c4dae45ba85ea3",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 1,
+    "id": "buildings/wall_join_12_hurt",
+    "output": "sprites/buildings/wall_join_12_hurt.png",
+    "animation": "buildings/wall_join_12_hurt",
+    "input": "buildings/modules/wall_post_hurt",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/wall_horizontal_hurt",
+        "slice_xywh": [
+          0,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_vertical_hurt",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          8
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_post_hurt",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "wall",
+    "barrier_state": "hurt",
+    "join_mask": 12,
+    "output_sha256": "b6503432ad074d37712320835427dd42bc883fb2794f2fece1fdb0d4cf663c76"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-wall-hurt-r1.prompt.txt",
+    "prompt_sha256": "09031ed5acbd9f51b4b8688a192a6d317d1e6a799bcbaddf49f81479fe0a29d1",
+    "references": [
+      {
+        "path": "assets/art_source/defences/wall/whole-r3.png",
+        "sha256": "98bb946042365835d3ddeeecb57e2d25e44861c4864028b8b8c4dae45ba85ea3",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 1,
+    "id": "buildings/wall_join_13_hurt",
+    "output": "sprites/buildings/wall_join_13_hurt.png",
+    "animation": "buildings/wall_join_13_hurt",
+    "input": "buildings/modules/wall_post_hurt",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/wall_vertical_hurt",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_horizontal_hurt",
+        "slice_xywh": [
+          0,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_vertical_hurt",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          8
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_post_hurt",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "wall",
+    "barrier_state": "hurt",
+    "join_mask": 13,
+    "output_sha256": "9e730ad223abefa83cdb7a4a1024adcf452d86fdc2b06e983140475eb4e67b1a"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-wall-hurt-r1.prompt.txt",
+    "prompt_sha256": "09031ed5acbd9f51b4b8688a192a6d317d1e6a799bcbaddf49f81479fe0a29d1",
+    "references": [
+      {
+        "path": "assets/art_source/defences/wall/whole-r3.png",
+        "sha256": "98bb946042365835d3ddeeecb57e2d25e44861c4864028b8b8c4dae45ba85ea3",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 1,
+    "id": "buildings/wall_join_14_hurt",
+    "output": "sprites/buildings/wall_join_14_hurt.png",
+    "animation": "buildings/wall_join_14_hurt",
+    "input": "buildings/modules/wall_post_hurt",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/wall_horizontal_hurt",
+        "slice_xywh": [
+          0,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_horizontal_hurt",
+        "slice_xywh": [
+          8,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          8,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_vertical_hurt",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          8
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_post_hurt",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "wall",
+    "barrier_state": "hurt",
+    "join_mask": 14,
+    "output_sha256": "de953b35b7823e796a05361740a649eb1cbd139890757e4ca9d9fdd4efdab151"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-wall-hurt-r1.prompt.txt",
+    "prompt_sha256": "09031ed5acbd9f51b4b8688a192a6d317d1e6a799bcbaddf49f81479fe0a29d1",
+    "references": [
+      {
+        "path": "assets/art_source/defences/wall/whole-r3.png",
+        "sha256": "98bb946042365835d3ddeeecb57e2d25e44861c4864028b8b8c4dae45ba85ea3",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 1,
+    "id": "buildings/wall_join_15_hurt",
+    "output": "sprites/buildings/wall_join_15_hurt.png",
+    "animation": "buildings/wall_join_15_hurt",
+    "input": "buildings/modules/wall_post_hurt",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/wall_vertical_hurt",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_horizontal_hurt",
+        "slice_xywh": [
+          0,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_horizontal_hurt",
+        "slice_xywh": [
+          8,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          8,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_vertical_hurt",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          8
+        ]
+      },
+      {
+        "input": "buildings/modules/wall_post_hurt",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "wall",
+    "barrier_state": "hurt",
+    "join_mask": 15,
+    "output_sha256": "356dfc05ba09be4e4a3cff56855863b77c8366acd566e6f7f8994ea96f54b2ce"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-wall-whole-r2.prompt.txt",
+    "prompt_sha256": "f22de47b35e4d3c3230813377998543046b287076592b06dc9764e5fb90a2783",
+    "references": [
+      {
+        "path": "assets/art_source/defences/wall/whole.png",
+        "sha256": "22420fef68686131090acd7ef313a43be6d9ddcbe379ee8a2a2248ee2bf70cf1",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 2,
+    "id": "buildings/wall_wreck",
+    "output": "sprites/buildings/wall_wreck.png",
+    "animation": "buildings/wall_wreck",
+    "source": "assets/art_source/defences/wall/whole-r2.png",
+    "source_sha256": "93926678e72f136ee17b2fe607fa79a7f51c31d114efe304022958cfcb7fcf0c",
+    "crop_xywh": [
+      1420,
+      535,
+      485,
+      187
+    ],
+    "sheet_cell_xywh": [
+      1326,
+      0,
+      657,
+      793
+    ],
+    "gutter_xy": [
+      0,
+      0
+    ],
+    "alpha_threshold": 128,
+    "content_scale": 0.028622540250447227,
+    "content_anchor_xy": [
+      7,
+      5
+    ],
+    "output_sha256": "73a2e497ff621f0e4c0fe8c9ffcef5b1e8f700270a0003511206899ffc450905",
+    "barrier_family": "wall",
+    "barrier_state": "wreck"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-fence-whole-r3.prompt.txt",
+    "prompt_sha256": "81d332c35f8ab8cb641ce7bc4c81b426c47a23c233679e92ecd25bd4449494be",
+    "references": [
+      {
+        "path": "assets/art_source/defences/fence/whole.png",
+        "sha256": "c69548009c08f258da16341d5c6fbf04d419b833f9ef4fc9adc7cf10cf2c247a",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 3,
+    "id": "buildings/modules/fence_post",
+    "output": "sprites/buildings/modules/fence_post.png",
+    "animation": "buildings/modules/fence_post",
+    "source": "assets/art_source/defences/fence/whole-r3.png",
+    "source_sha256": "0e9fa00c7eda620054e7840caf6e13975531e6f943f211a34aed247a3f89ddd7",
+    "crop_xywh": [
+      127,
+      148,
+      133,
+      454
+    ],
+    "sheet_cell_xywh": [
+      0,
+      0,
+      331,
+      650
+    ],
+    "gutter_xy": [
+      0,
+      0
+    ],
+    "alpha_threshold": 128,
+    "content_scale": 0.027972027972027972,
+    "content_anchor_xy": [
+      2,
+      21
+    ],
+    "output_sha256": "6813a5126a4c5e7b43dfee07a7122b9cbf58031cbfa03a363fc31eb8167d69e0",
+    "barrier_family": "fence",
+    "barrier_state": "whole",
+    "module": "post"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-fence-whole-r3.prompt.txt",
+    "prompt_sha256": "81d332c35f8ab8cb641ce7bc4c81b426c47a23c233679e92ecd25bd4449494be",
+    "references": [
+      {
+        "path": "assets/art_source/defences/fence/whole.png",
+        "sha256": "c69548009c08f258da16341d5c6fbf04d419b833f9ef4fc9adc7cf10cf2c247a",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 3,
+    "id": "buildings/modules/fence_horizontal",
+    "output": "sprites/buildings/modules/fence_horizontal.png",
+    "animation": "buildings/modules/fence_horizontal",
+    "source": "assets/art_source/defences/fence/whole-r3.png",
+    "source_sha256": "0e9fa00c7eda620054e7840caf6e13975531e6f943f211a34aed247a3f89ddd7",
+    "crop_xywh": [
+      403,
+      271,
+      562,
+      284
+    ],
+    "sheet_cell_xywh": [
+      331,
+      0,
+      693,
+      650
+    ],
+    "gutter_xy": [
+      0,
+      0
+    ],
+    "alpha_threshold": 128,
+    "content_scale": 0.027972027972027972,
+    "content_anchor_xy": [
+      8,
+      16
+    ],
+    "output_sha256": "92bec3b66b822c5dea25c267eb8ac791e73e9a93bf360d5486a2afc76e5459be",
+    "barrier_family": "fence",
+    "barrier_state": "whole",
+    "module": "horizontal"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-fence-whole-r2.prompt.txt",
+    "prompt_sha256": "4df3c5479fa4cb65e43595d0ed85378b86e9452f3813af2cfb4e4130ce9295c2",
+    "references": [
+      {
+        "path": "assets/art_source/defences/fence/whole.png",
+        "sha256": "c69548009c08f258da16341d5c6fbf04d419b833f9ef4fc9adc7cf10cf2c247a",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 2,
+    "id": "buildings/modules/fence_vertical",
+    "output": "sprites/buildings/modules/fence_vertical.png",
+    "animation": "buildings/modules/fence_vertical",
+    "source": "assets/art_source/defences/fence/whole-r2.png",
+    "source_sha256": "f2adb2c9cfa940b8509583d4937936a225327bbb3cfad7c9f9eddc4eacf51df7",
+    "crop_xywh": [
+      1266,
+      51,
+      115,
+      617
+    ],
+    "sheet_cell_xywh": [
+      1177,
+      0,
+      281,
+      724
+    ],
+    "gutter_xy": [
+      0,
+      0
+    ],
+    "alpha_threshold": 128,
+    "content_scale": 0.027972027972027972,
+    "content_anchor_xy": [
+      1,
+      17
+    ],
+    "output_sha256": "f7d10a1df7c617631d51451a0c203df5c04d1f459bb65399c741fcf42bf6c97e",
+    "barrier_family": "fence",
+    "barrier_state": "whole",
+    "module": "vertical"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-fence-whole-r3.prompt.txt",
+    "prompt_sha256": "81d332c35f8ab8cb641ce7bc4c81b426c47a23c233679e92ecd25bd4449494be",
+    "references": [
+      {
+        "path": "assets/art_source/defences/fence/whole.png",
+        "sha256": "c69548009c08f258da16341d5c6fbf04d419b833f9ef4fc9adc7cf10cf2c247a",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 3,
+    "id": "buildings/fence",
+    "output": "sprites/buildings/fence.png",
+    "animation": "buildings/fence",
+    "input": "buildings/modules/fence_post",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/fence_post",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "fence",
+    "barrier_state": "whole",
+    "join_mask": 0,
+    "output_sha256": "6813a5126a4c5e7b43dfee07a7122b9cbf58031cbfa03a363fc31eb8167d69e0"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-fence-whole-r3.prompt.txt",
+    "prompt_sha256": "81d332c35f8ab8cb641ce7bc4c81b426c47a23c233679e92ecd25bd4449494be",
+    "references": [
+      {
+        "path": "assets/art_source/defences/fence/whole.png",
+        "sha256": "c69548009c08f258da16341d5c6fbf04d419b833f9ef4fc9adc7cf10cf2c247a",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 3,
+    "id": "buildings/fence_join_1",
+    "output": "sprites/buildings/fence_join_1.png",
+    "animation": "buildings/fence_join_1",
+    "input": "buildings/modules/fence_post",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/fence_vertical",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_post",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "fence",
+    "barrier_state": "whole",
+    "join_mask": 1,
+    "output_sha256": "dbeb402f02ea7a0ea8963abc5c15c80d1bb7785785ad843b3d36c147f44d13d0"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-fence-whole-r3.prompt.txt",
+    "prompt_sha256": "81d332c35f8ab8cb641ce7bc4c81b426c47a23c233679e92ecd25bd4449494be",
+    "references": [
+      {
+        "path": "assets/art_source/defences/fence/whole.png",
+        "sha256": "c69548009c08f258da16341d5c6fbf04d419b833f9ef4fc9adc7cf10cf2c247a",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 3,
+    "id": "buildings/fence_join_2",
+    "output": "sprites/buildings/fence_join_2.png",
+    "animation": "buildings/fence_join_2",
+    "input": "buildings/modules/fence_post",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/fence_horizontal",
+        "slice_xywh": [
+          8,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          8,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_post",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "fence",
+    "barrier_state": "whole",
+    "join_mask": 2,
+    "output_sha256": "ee7856cc11ca7f75bd6e796499f02125c54d7974b61ac1d58bbab63a3bbbcc53"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-fence-whole-r3.prompt.txt",
+    "prompt_sha256": "81d332c35f8ab8cb641ce7bc4c81b426c47a23c233679e92ecd25bd4449494be",
+    "references": [
+      {
+        "path": "assets/art_source/defences/fence/whole.png",
+        "sha256": "c69548009c08f258da16341d5c6fbf04d419b833f9ef4fc9adc7cf10cf2c247a",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 3,
+    "id": "buildings/fence_join_3",
+    "output": "sprites/buildings/fence_join_3.png",
+    "animation": "buildings/fence_join_3",
+    "input": "buildings/modules/fence_post",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/fence_vertical",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_horizontal",
+        "slice_xywh": [
+          8,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          8,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_post",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "fence",
+    "barrier_state": "whole",
+    "join_mask": 3,
+    "output_sha256": "4db7ba50c2d03bcfd1334e1bbbbb226cbbdbd43b899be85fae7fa878444a3c45"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-fence-whole-r3.prompt.txt",
+    "prompt_sha256": "81d332c35f8ab8cb641ce7bc4c81b426c47a23c233679e92ecd25bd4449494be",
+    "references": [
+      {
+        "path": "assets/art_source/defences/fence/whole.png",
+        "sha256": "c69548009c08f258da16341d5c6fbf04d419b833f9ef4fc9adc7cf10cf2c247a",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 3,
+    "id": "buildings/fence_join_4",
+    "output": "sprites/buildings/fence_join_4.png",
+    "animation": "buildings/fence_join_4",
+    "input": "buildings/modules/fence_post",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/fence_vertical",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          8
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_post",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "fence",
+    "barrier_state": "whole",
+    "join_mask": 4,
+    "output_sha256": "5a3d86115ecaf30a85e9a009bcd9321fdbf40058b2123cfd8186c1e84cab89a8"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-fence-whole-r3.prompt.txt",
+    "prompt_sha256": "81d332c35f8ab8cb641ce7bc4c81b426c47a23c233679e92ecd25bd4449494be",
+    "references": [
+      {
+        "path": "assets/art_source/defences/fence/whole.png",
+        "sha256": "c69548009c08f258da16341d5c6fbf04d419b833f9ef4fc9adc7cf10cf2c247a",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 3,
+    "id": "buildings/fence_join_5",
+    "output": "sprites/buildings/fence_join_5.png",
+    "animation": "buildings/fence_join_5",
+    "input": "buildings/modules/fence_post",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/fence_vertical",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_vertical",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          8
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_post",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "fence",
+    "barrier_state": "whole",
+    "join_mask": 5,
+    "output_sha256": "acb5f30e0c0e2e39e5a9621729202b203d07583a47e236d177b60b4c87656333"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-fence-whole-r3.prompt.txt",
+    "prompt_sha256": "81d332c35f8ab8cb641ce7bc4c81b426c47a23c233679e92ecd25bd4449494be",
+    "references": [
+      {
+        "path": "assets/art_source/defences/fence/whole.png",
+        "sha256": "c69548009c08f258da16341d5c6fbf04d419b833f9ef4fc9adc7cf10cf2c247a",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 3,
+    "id": "buildings/fence_join_6",
+    "output": "sprites/buildings/fence_join_6.png",
+    "animation": "buildings/fence_join_6",
+    "input": "buildings/modules/fence_post",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/fence_horizontal",
+        "slice_xywh": [
+          8,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          8,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_vertical",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          8
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_post",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "fence",
+    "barrier_state": "whole",
+    "join_mask": 6,
+    "output_sha256": "8b9013d3dc1c5fe00a18c370d3aea47353c6da29798413565b0a138f7f5a3dcf"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-fence-whole-r3.prompt.txt",
+    "prompt_sha256": "81d332c35f8ab8cb641ce7bc4c81b426c47a23c233679e92ecd25bd4449494be",
+    "references": [
+      {
+        "path": "assets/art_source/defences/fence/whole.png",
+        "sha256": "c69548009c08f258da16341d5c6fbf04d419b833f9ef4fc9adc7cf10cf2c247a",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 3,
+    "id": "buildings/fence_join_7",
+    "output": "sprites/buildings/fence_join_7.png",
+    "animation": "buildings/fence_join_7",
+    "input": "buildings/modules/fence_post",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/fence_vertical",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_horizontal",
+        "slice_xywh": [
+          8,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          8,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_vertical",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          8
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_post",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "fence",
+    "barrier_state": "whole",
+    "join_mask": 7,
+    "output_sha256": "fc01e6634a52ae5e11e3ebab4785dffc2ee5f0fd39c655affffdd1d39672b64d"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-fence-whole-r3.prompt.txt",
+    "prompt_sha256": "81d332c35f8ab8cb641ce7bc4c81b426c47a23c233679e92ecd25bd4449494be",
+    "references": [
+      {
+        "path": "assets/art_source/defences/fence/whole.png",
+        "sha256": "c69548009c08f258da16341d5c6fbf04d419b833f9ef4fc9adc7cf10cf2c247a",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 3,
+    "id": "buildings/fence_join_8",
+    "output": "sprites/buildings/fence_join_8.png",
+    "animation": "buildings/fence_join_8",
+    "input": "buildings/modules/fence_post",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/fence_horizontal",
+        "slice_xywh": [
+          0,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_post",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "fence",
+    "barrier_state": "whole",
+    "join_mask": 8,
+    "output_sha256": "b283bc4d361b1cd4230d771fee54cbea1b24ea67d0243fa2993794b51a80dcdc"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-fence-whole-r3.prompt.txt",
+    "prompt_sha256": "81d332c35f8ab8cb641ce7bc4c81b426c47a23c233679e92ecd25bd4449494be",
+    "references": [
+      {
+        "path": "assets/art_source/defences/fence/whole.png",
+        "sha256": "c69548009c08f258da16341d5c6fbf04d419b833f9ef4fc9adc7cf10cf2c247a",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 3,
+    "id": "buildings/fence_join_9",
+    "output": "sprites/buildings/fence_join_9.png",
+    "animation": "buildings/fence_join_9",
+    "input": "buildings/modules/fence_post",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/fence_vertical",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_horizontal",
+        "slice_xywh": [
+          0,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_post",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "fence",
+    "barrier_state": "whole",
+    "join_mask": 9,
+    "output_sha256": "c81326d1974c2d2089261035b7f6a0b3b9986231b31fe3a1e9d28a04fd86e33d"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-fence-whole-r3.prompt.txt",
+    "prompt_sha256": "81d332c35f8ab8cb641ce7bc4c81b426c47a23c233679e92ecd25bd4449494be",
+    "references": [
+      {
+        "path": "assets/art_source/defences/fence/whole.png",
+        "sha256": "c69548009c08f258da16341d5c6fbf04d419b833f9ef4fc9adc7cf10cf2c247a",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 3,
+    "id": "buildings/fence_join_10",
+    "output": "sprites/buildings/fence_join_10.png",
+    "animation": "buildings/fence_join_10",
+    "input": "buildings/modules/fence_post",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/fence_horizontal",
+        "slice_xywh": [
+          0,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_horizontal",
+        "slice_xywh": [
+          8,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          8,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_post",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "fence",
+    "barrier_state": "whole",
+    "join_mask": 10,
+    "output_sha256": "1a1832401fa01aed66fd795b5c75fccd9139f4999e42c8a23358bce6662e161e"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-fence-whole-r3.prompt.txt",
+    "prompt_sha256": "81d332c35f8ab8cb641ce7bc4c81b426c47a23c233679e92ecd25bd4449494be",
+    "references": [
+      {
+        "path": "assets/art_source/defences/fence/whole.png",
+        "sha256": "c69548009c08f258da16341d5c6fbf04d419b833f9ef4fc9adc7cf10cf2c247a",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 3,
+    "id": "buildings/fence_join_11",
+    "output": "sprites/buildings/fence_join_11.png",
+    "animation": "buildings/fence_join_11",
+    "input": "buildings/modules/fence_post",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/fence_vertical",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_horizontal",
+        "slice_xywh": [
+          0,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_horizontal",
+        "slice_xywh": [
+          8,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          8,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_post",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "fence",
+    "barrier_state": "whole",
+    "join_mask": 11,
+    "output_sha256": "a25121eb44958546837419e07650c202539ea75783db8f828aa5ec97236f5f99"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-fence-whole-r3.prompt.txt",
+    "prompt_sha256": "81d332c35f8ab8cb641ce7bc4c81b426c47a23c233679e92ecd25bd4449494be",
+    "references": [
+      {
+        "path": "assets/art_source/defences/fence/whole.png",
+        "sha256": "c69548009c08f258da16341d5c6fbf04d419b833f9ef4fc9adc7cf10cf2c247a",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 3,
+    "id": "buildings/fence_join_12",
+    "output": "sprites/buildings/fence_join_12.png",
+    "animation": "buildings/fence_join_12",
+    "input": "buildings/modules/fence_post",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/fence_horizontal",
+        "slice_xywh": [
+          0,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_vertical",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          8
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_post",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "fence",
+    "barrier_state": "whole",
+    "join_mask": 12,
+    "output_sha256": "1eae69f225399adedb5e035c6d9c9401943d6359e96bbfb9195269af74a1835e"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-fence-whole-r3.prompt.txt",
+    "prompt_sha256": "81d332c35f8ab8cb641ce7bc4c81b426c47a23c233679e92ecd25bd4449494be",
+    "references": [
+      {
+        "path": "assets/art_source/defences/fence/whole.png",
+        "sha256": "c69548009c08f258da16341d5c6fbf04d419b833f9ef4fc9adc7cf10cf2c247a",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 3,
+    "id": "buildings/fence_join_13",
+    "output": "sprites/buildings/fence_join_13.png",
+    "animation": "buildings/fence_join_13",
+    "input": "buildings/modules/fence_post",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/fence_vertical",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_horizontal",
+        "slice_xywh": [
+          0,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_vertical",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          8
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_post",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "fence",
+    "barrier_state": "whole",
+    "join_mask": 13,
+    "output_sha256": "f941f463b8dedd4afa71d886cd6885d75906ec4aa2a38971d34d59773343f95a"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-fence-whole-r3.prompt.txt",
+    "prompt_sha256": "81d332c35f8ab8cb641ce7bc4c81b426c47a23c233679e92ecd25bd4449494be",
+    "references": [
+      {
+        "path": "assets/art_source/defences/fence/whole.png",
+        "sha256": "c69548009c08f258da16341d5c6fbf04d419b833f9ef4fc9adc7cf10cf2c247a",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 3,
+    "id": "buildings/fence_join_14",
+    "output": "sprites/buildings/fence_join_14.png",
+    "animation": "buildings/fence_join_14",
+    "input": "buildings/modules/fence_post",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/fence_horizontal",
+        "slice_xywh": [
+          0,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_horizontal",
+        "slice_xywh": [
+          8,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          8,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_vertical",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          8
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_post",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "fence",
+    "barrier_state": "whole",
+    "join_mask": 14,
+    "output_sha256": "4c4ba38912586b1cd0bd9bfc8925ae8e0b23120e54c0dda82b8bf1c345cf0e7a"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-fence-whole-r3.prompt.txt",
+    "prompt_sha256": "81d332c35f8ab8cb641ce7bc4c81b426c47a23c233679e92ecd25bd4449494be",
+    "references": [
+      {
+        "path": "assets/art_source/defences/fence/whole.png",
+        "sha256": "c69548009c08f258da16341d5c6fbf04d419b833f9ef4fc9adc7cf10cf2c247a",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 3,
+    "id": "buildings/fence_join_15",
+    "output": "sprites/buildings/fence_join_15.png",
+    "animation": "buildings/fence_join_15",
+    "input": "buildings/modules/fence_post",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/fence_vertical",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_horizontal",
+        "slice_xywh": [
+          0,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_horizontal",
+        "slice_xywh": [
+          8,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          8,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_vertical",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          8
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_post",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "fence",
+    "barrier_state": "whole",
+    "join_mask": 15,
+    "output_sha256": "907053949a57d815ea371502ffac64ec3d5c9be2dc9102a1243684fe8ef1e1c2"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-fence-hurt-r1.prompt.txt",
+    "prompt_sha256": "e25408d1b0e0c67ced53d681f35fc556c9a0e5bb2e5b23e6d02458e795bc7066",
+    "references": [
+      {
+        "path": "assets/art_source/defences/fence/whole-r3.png",
+        "sha256": "0e9fa00c7eda620054e7840caf6e13975531e6f943f211a34aed247a3f89ddd7",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 1,
+    "id": "buildings/modules/fence_post_hurt",
+    "output": "sprites/buildings/modules/fence_post_hurt.png",
+    "animation": "buildings/modules/fence_post_hurt",
+    "source": "assets/art_source/defences/fence/hurt-r1.png",
+    "source_sha256": "cb79edca1060c85ca1baaff122c9ebffd2a30548596c5d6840831019a2b55727",
+    "crop_xywh": [
+      129,
+      132,
+      137,
+      466
+    ],
+    "sheet_cell_xywh": [
+      0,
+      0,
+      334,
+      658
+    ],
+    "gutter_xy": [
+      0,
+      0
+    ],
+    "alpha_threshold": 128,
+    "content_scale": 0.027972027972027972,
+    "content_anchor_xy": [
+      2,
+      21
+    ],
+    "output_sha256": "43c5bfe158dd2d2a7d56042bb8b1dc3b3f0b13012a98ec630aa0085a0a680d2e",
+    "barrier_family": "fence",
+    "barrier_state": "hurt",
+    "module": "post"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-fence-hurt-r1.prompt.txt",
+    "prompt_sha256": "e25408d1b0e0c67ced53d681f35fc556c9a0e5bb2e5b23e6d02458e795bc7066",
+    "references": [
+      {
+        "path": "assets/art_source/defences/fence/whole-r3.png",
+        "sha256": "0e9fa00c7eda620054e7840caf6e13975531e6f943f211a34aed247a3f89ddd7",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 1,
+    "id": "buildings/modules/fence_horizontal_hurt",
+    "output": "sprites/buildings/modules/fence_horizontal_hurt.png",
+    "animation": "buildings/modules/fence_horizontal_hurt",
+    "source": "assets/art_source/defences/fence/hurt-r1.png",
+    "source_sha256": "cb79edca1060c85ca1baaff122c9ebffd2a30548596c5d6840831019a2b55727",
+    "crop_xywh": [
+      402,
+      260,
+      572,
+      307
+    ],
+    "sheet_cell_xywh": [
+      334,
+      0,
+      690,
+      658
+    ],
+    "gutter_xy": [
+      0,
+      0
+    ],
+    "alpha_threshold": 128,
+    "content_scale": 0.027972027972027972,
+    "content_anchor_xy": [
+      8,
+      17
+    ],
+    "output_sha256": "510effa996094e53943edd2677faafacc768ef810be59b6a67fafa26475d4097",
+    "barrier_family": "fence",
+    "barrier_state": "hurt",
+    "module": "horizontal"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-fence-hurt.prompt.txt",
+    "prompt_sha256": "bdbe18371eb3f6127c61526797ab378b3083f192a74937d55e8ed5b79b39aca3",
+    "references": [
+      {
+        "path": "assets/art_source/defences/fence/whole-r2.png",
+        "sha256": "f2adb2c9cfa940b8509583d4937936a225327bbb3cfad7c9f9eddc4eacf51df7",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 0,
+    "id": "buildings/modules/fence_vertical_hurt",
+    "output": "sprites/buildings/modules/fence_vertical_hurt.png",
+    "animation": "buildings/modules/fence_vertical_hurt",
+    "source": "assets/art_source/defences/fence/hurt.png",
+    "source_sha256": "1243288d9892178b8ecdae0d1b67e6e8a5ca38731df5aac598caa8eb13e26e08",
+    "crop_xywh": [
+      1268,
+      48,
+      150,
+      618
+    ],
+    "sheet_cell_xywh": [
+      1176,
+      0,
+      296,
+      724
+    ],
+    "gutter_xy": [
+      0,
+      0
+    ],
+    "alpha_threshold": 128,
+    "content_scale": 0.027972027972027972,
+    "content_anchor_xy": [
+      2,
+      17
+    ],
+    "output_sha256": "89825c7a44d5d701edf890a93263d19073cbcad1ac23cb782505660e024a6cdc",
+    "barrier_family": "fence",
+    "barrier_state": "hurt",
+    "module": "vertical"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-fence-hurt-r1.prompt.txt",
+    "prompt_sha256": "e25408d1b0e0c67ced53d681f35fc556c9a0e5bb2e5b23e6d02458e795bc7066",
+    "references": [
+      {
+        "path": "assets/art_source/defences/fence/whole-r3.png",
+        "sha256": "0e9fa00c7eda620054e7840caf6e13975531e6f943f211a34aed247a3f89ddd7",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 1,
+    "id": "buildings/fence_hurt",
+    "output": "sprites/buildings/fence_hurt.png",
+    "animation": "buildings/fence_hurt",
+    "input": "buildings/modules/fence_post_hurt",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/fence_post_hurt",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "fence",
+    "barrier_state": "hurt",
+    "join_mask": 0,
+    "output_sha256": "43c5bfe158dd2d2a7d56042bb8b1dc3b3f0b13012a98ec630aa0085a0a680d2e"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-fence-hurt-r1.prompt.txt",
+    "prompt_sha256": "e25408d1b0e0c67ced53d681f35fc556c9a0e5bb2e5b23e6d02458e795bc7066",
+    "references": [
+      {
+        "path": "assets/art_source/defences/fence/whole-r3.png",
+        "sha256": "0e9fa00c7eda620054e7840caf6e13975531e6f943f211a34aed247a3f89ddd7",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 1,
+    "id": "buildings/fence_join_1_hurt",
+    "output": "sprites/buildings/fence_join_1_hurt.png",
+    "animation": "buildings/fence_join_1_hurt",
+    "input": "buildings/modules/fence_post_hurt",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/fence_vertical_hurt",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_post_hurt",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "fence",
+    "barrier_state": "hurt",
+    "join_mask": 1,
+    "output_sha256": "4e926fb38fc9cad6180de149f9488bdac616e9b07d2754b25ea15c82111aa84c"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-fence-hurt-r1.prompt.txt",
+    "prompt_sha256": "e25408d1b0e0c67ced53d681f35fc556c9a0e5bb2e5b23e6d02458e795bc7066",
+    "references": [
+      {
+        "path": "assets/art_source/defences/fence/whole-r3.png",
+        "sha256": "0e9fa00c7eda620054e7840caf6e13975531e6f943f211a34aed247a3f89ddd7",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 1,
+    "id": "buildings/fence_join_2_hurt",
+    "output": "sprites/buildings/fence_join_2_hurt.png",
+    "animation": "buildings/fence_join_2_hurt",
+    "input": "buildings/modules/fence_post_hurt",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/fence_horizontal_hurt",
+        "slice_xywh": [
+          8,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          8,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_post_hurt",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "fence",
+    "barrier_state": "hurt",
+    "join_mask": 2,
+    "output_sha256": "ac12d3645411f84812725c1f07b1096d52245217a398419ca48a1be8cc0327f7"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-fence-hurt-r1.prompt.txt",
+    "prompt_sha256": "e25408d1b0e0c67ced53d681f35fc556c9a0e5bb2e5b23e6d02458e795bc7066",
+    "references": [
+      {
+        "path": "assets/art_source/defences/fence/whole-r3.png",
+        "sha256": "0e9fa00c7eda620054e7840caf6e13975531e6f943f211a34aed247a3f89ddd7",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 1,
+    "id": "buildings/fence_join_3_hurt",
+    "output": "sprites/buildings/fence_join_3_hurt.png",
+    "animation": "buildings/fence_join_3_hurt",
+    "input": "buildings/modules/fence_post_hurt",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/fence_vertical_hurt",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_horizontal_hurt",
+        "slice_xywh": [
+          8,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          8,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_post_hurt",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "fence",
+    "barrier_state": "hurt",
+    "join_mask": 3,
+    "output_sha256": "beb487227019178e8981412ef32d37b067f48b44b9b796ae9ac5a56edd8fe928"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-fence-hurt-r1.prompt.txt",
+    "prompt_sha256": "e25408d1b0e0c67ced53d681f35fc556c9a0e5bb2e5b23e6d02458e795bc7066",
+    "references": [
+      {
+        "path": "assets/art_source/defences/fence/whole-r3.png",
+        "sha256": "0e9fa00c7eda620054e7840caf6e13975531e6f943f211a34aed247a3f89ddd7",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 1,
+    "id": "buildings/fence_join_4_hurt",
+    "output": "sprites/buildings/fence_join_4_hurt.png",
+    "animation": "buildings/fence_join_4_hurt",
+    "input": "buildings/modules/fence_post_hurt",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/fence_vertical_hurt",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          8
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_post_hurt",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "fence",
+    "barrier_state": "hurt",
+    "join_mask": 4,
+    "output_sha256": "b9988afab7782383fb23f4d0e7378d1617f9456b2fbf3415c865e8d68b2ea70f"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-fence-hurt-r1.prompt.txt",
+    "prompt_sha256": "e25408d1b0e0c67ced53d681f35fc556c9a0e5bb2e5b23e6d02458e795bc7066",
+    "references": [
+      {
+        "path": "assets/art_source/defences/fence/whole-r3.png",
+        "sha256": "0e9fa00c7eda620054e7840caf6e13975531e6f943f211a34aed247a3f89ddd7",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 1,
+    "id": "buildings/fence_join_5_hurt",
+    "output": "sprites/buildings/fence_join_5_hurt.png",
+    "animation": "buildings/fence_join_5_hurt",
+    "input": "buildings/modules/fence_post_hurt",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/fence_vertical_hurt",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_vertical_hurt",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          8
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_post_hurt",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "fence",
+    "barrier_state": "hurt",
+    "join_mask": 5,
+    "output_sha256": "8af65d47a9ab9b8c4777f6fd112b91f32229b02cb43a6a7dec2a928febfa0ff7"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-fence-hurt-r1.prompt.txt",
+    "prompt_sha256": "e25408d1b0e0c67ced53d681f35fc556c9a0e5bb2e5b23e6d02458e795bc7066",
+    "references": [
+      {
+        "path": "assets/art_source/defences/fence/whole-r3.png",
+        "sha256": "0e9fa00c7eda620054e7840caf6e13975531e6f943f211a34aed247a3f89ddd7",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 1,
+    "id": "buildings/fence_join_6_hurt",
+    "output": "sprites/buildings/fence_join_6_hurt.png",
+    "animation": "buildings/fence_join_6_hurt",
+    "input": "buildings/modules/fence_post_hurt",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/fence_horizontal_hurt",
+        "slice_xywh": [
+          8,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          8,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_vertical_hurt",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          8
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_post_hurt",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "fence",
+    "barrier_state": "hurt",
+    "join_mask": 6,
+    "output_sha256": "2d6f59247c7bd2cd6511753aa3c04294feb9b4169b0ddf60e4233f63802e61f3"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-fence-hurt-r1.prompt.txt",
+    "prompt_sha256": "e25408d1b0e0c67ced53d681f35fc556c9a0e5bb2e5b23e6d02458e795bc7066",
+    "references": [
+      {
+        "path": "assets/art_source/defences/fence/whole-r3.png",
+        "sha256": "0e9fa00c7eda620054e7840caf6e13975531e6f943f211a34aed247a3f89ddd7",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 1,
+    "id": "buildings/fence_join_7_hurt",
+    "output": "sprites/buildings/fence_join_7_hurt.png",
+    "animation": "buildings/fence_join_7_hurt",
+    "input": "buildings/modules/fence_post_hurt",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/fence_vertical_hurt",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_horizontal_hurt",
+        "slice_xywh": [
+          8,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          8,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_vertical_hurt",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          8
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_post_hurt",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "fence",
+    "barrier_state": "hurt",
+    "join_mask": 7,
+    "output_sha256": "e7dd5aa34e242027343f41985abd30b255ddb9520b819dbb0962a9c07a89e582"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-fence-hurt-r1.prompt.txt",
+    "prompt_sha256": "e25408d1b0e0c67ced53d681f35fc556c9a0e5bb2e5b23e6d02458e795bc7066",
+    "references": [
+      {
+        "path": "assets/art_source/defences/fence/whole-r3.png",
+        "sha256": "0e9fa00c7eda620054e7840caf6e13975531e6f943f211a34aed247a3f89ddd7",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 1,
+    "id": "buildings/fence_join_8_hurt",
+    "output": "sprites/buildings/fence_join_8_hurt.png",
+    "animation": "buildings/fence_join_8_hurt",
+    "input": "buildings/modules/fence_post_hurt",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/fence_horizontal_hurt",
+        "slice_xywh": [
+          0,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_post_hurt",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "fence",
+    "barrier_state": "hurt",
+    "join_mask": 8,
+    "output_sha256": "6454f77560f5422209641a11c60192b33ad7466b0dec6bd904bf20860d48dc20"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-fence-hurt-r1.prompt.txt",
+    "prompt_sha256": "e25408d1b0e0c67ced53d681f35fc556c9a0e5bb2e5b23e6d02458e795bc7066",
+    "references": [
+      {
+        "path": "assets/art_source/defences/fence/whole-r3.png",
+        "sha256": "0e9fa00c7eda620054e7840caf6e13975531e6f943f211a34aed247a3f89ddd7",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 1,
+    "id": "buildings/fence_join_9_hurt",
+    "output": "sprites/buildings/fence_join_9_hurt.png",
+    "animation": "buildings/fence_join_9_hurt",
+    "input": "buildings/modules/fence_post_hurt",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/fence_vertical_hurt",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_horizontal_hurt",
+        "slice_xywh": [
+          0,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_post_hurt",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "fence",
+    "barrier_state": "hurt",
+    "join_mask": 9,
+    "output_sha256": "6c31d74b6153144541fb47c5eddf2554f4726ca33eb60a26613507124c01378d"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-fence-hurt-r1.prompt.txt",
+    "prompt_sha256": "e25408d1b0e0c67ced53d681f35fc556c9a0e5bb2e5b23e6d02458e795bc7066",
+    "references": [
+      {
+        "path": "assets/art_source/defences/fence/whole-r3.png",
+        "sha256": "0e9fa00c7eda620054e7840caf6e13975531e6f943f211a34aed247a3f89ddd7",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 1,
+    "id": "buildings/fence_join_10_hurt",
+    "output": "sprites/buildings/fence_join_10_hurt.png",
+    "animation": "buildings/fence_join_10_hurt",
+    "input": "buildings/modules/fence_post_hurt",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/fence_horizontal_hurt",
+        "slice_xywh": [
+          0,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_horizontal_hurt",
+        "slice_xywh": [
+          8,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          8,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_post_hurt",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "fence",
+    "barrier_state": "hurt",
+    "join_mask": 10,
+    "output_sha256": "f4fe7a2d7c1995f61a17aef20c4f47d96bf058c55f3798034e0965ac5f409433"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-fence-hurt-r1.prompt.txt",
+    "prompt_sha256": "e25408d1b0e0c67ced53d681f35fc556c9a0e5bb2e5b23e6d02458e795bc7066",
+    "references": [
+      {
+        "path": "assets/art_source/defences/fence/whole-r3.png",
+        "sha256": "0e9fa00c7eda620054e7840caf6e13975531e6f943f211a34aed247a3f89ddd7",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 1,
+    "id": "buildings/fence_join_11_hurt",
+    "output": "sprites/buildings/fence_join_11_hurt.png",
+    "animation": "buildings/fence_join_11_hurt",
+    "input": "buildings/modules/fence_post_hurt",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/fence_vertical_hurt",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_horizontal_hurt",
+        "slice_xywh": [
+          0,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_horizontal_hurt",
+        "slice_xywh": [
+          8,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          8,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_post_hurt",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "fence",
+    "barrier_state": "hurt",
+    "join_mask": 11,
+    "output_sha256": "e8d1da202705476b3a6f54c4c1dbf746ae7e902945e948b3b7d201f28bbc2de6"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-fence-hurt-r1.prompt.txt",
+    "prompt_sha256": "e25408d1b0e0c67ced53d681f35fc556c9a0e5bb2e5b23e6d02458e795bc7066",
+    "references": [
+      {
+        "path": "assets/art_source/defences/fence/whole-r3.png",
+        "sha256": "0e9fa00c7eda620054e7840caf6e13975531e6f943f211a34aed247a3f89ddd7",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 1,
+    "id": "buildings/fence_join_12_hurt",
+    "output": "sprites/buildings/fence_join_12_hurt.png",
+    "animation": "buildings/fence_join_12_hurt",
+    "input": "buildings/modules/fence_post_hurt",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/fence_horizontal_hurt",
+        "slice_xywh": [
+          0,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_vertical_hurt",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          8
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_post_hurt",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "fence",
+    "barrier_state": "hurt",
+    "join_mask": 12,
+    "output_sha256": "b73c382bbc5eeb9f08048233d5deb043059f2a0210f1008312df739f6562121b"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-fence-hurt-r1.prompt.txt",
+    "prompt_sha256": "e25408d1b0e0c67ced53d681f35fc556c9a0e5bb2e5b23e6d02458e795bc7066",
+    "references": [
+      {
+        "path": "assets/art_source/defences/fence/whole-r3.png",
+        "sha256": "0e9fa00c7eda620054e7840caf6e13975531e6f943f211a34aed247a3f89ddd7",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 1,
+    "id": "buildings/fence_join_13_hurt",
+    "output": "sprites/buildings/fence_join_13_hurt.png",
+    "animation": "buildings/fence_join_13_hurt",
+    "input": "buildings/modules/fence_post_hurt",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/fence_vertical_hurt",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_horizontal_hurt",
+        "slice_xywh": [
+          0,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_vertical_hurt",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          8
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_post_hurt",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "fence",
+    "barrier_state": "hurt",
+    "join_mask": 13,
+    "output_sha256": "27d59e76a293ae4e7b8238f6bb621751acc7aa6ca6c9cd5da299ca5d2b8accd6"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-fence-hurt-r1.prompt.txt",
+    "prompt_sha256": "e25408d1b0e0c67ced53d681f35fc556c9a0e5bb2e5b23e6d02458e795bc7066",
+    "references": [
+      {
+        "path": "assets/art_source/defences/fence/whole-r3.png",
+        "sha256": "0e9fa00c7eda620054e7840caf6e13975531e6f943f211a34aed247a3f89ddd7",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 1,
+    "id": "buildings/fence_join_14_hurt",
+    "output": "sprites/buildings/fence_join_14_hurt.png",
+    "animation": "buildings/fence_join_14_hurt",
+    "input": "buildings/modules/fence_post_hurt",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/fence_horizontal_hurt",
+        "slice_xywh": [
+          0,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_horizontal_hurt",
+        "slice_xywh": [
+          8,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          8,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_vertical_hurt",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          8
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_post_hurt",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "fence",
+    "barrier_state": "hurt",
+    "join_mask": 14,
+    "output_sha256": "7e8959714faaee074c17d6636a81df1cb3f2d540e43909157b1eb09bf4fadb4e"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-fence-hurt-r1.prompt.txt",
+    "prompt_sha256": "e25408d1b0e0c67ced53d681f35fc556c9a0e5bb2e5b23e6d02458e795bc7066",
+    "references": [
+      {
+        "path": "assets/art_source/defences/fence/whole-r3.png",
+        "sha256": "0e9fa00c7eda620054e7840caf6e13975531e6f943f211a34aed247a3f89ddd7",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 1,
+    "id": "buildings/fence_join_15_hurt",
+    "output": "sprites/buildings/fence_join_15_hurt.png",
+    "animation": "buildings/fence_join_15_hurt",
+    "input": "buildings/modules/fence_post_hurt",
+    "operation": "compose",
+    "parts": [
+      {
+        "input": "buildings/modules/fence_vertical_hurt",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_horizontal_hurt",
+        "slice_xywh": [
+          0,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_horizontal_hurt",
+        "slice_xywh": [
+          8,
+          0,
+          8,
+          32
+        ],
+        "paste_xy": [
+          8,
+          0
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_vertical_hurt",
+        "slice_xywh": [
+          0,
+          8,
+          16,
+          20
+        ],
+        "paste_xy": [
+          0,
+          8
+        ]
+      },
+      {
+        "input": "buildings/modules/fence_post_hurt",
+        "slice_xywh": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "paste_xy": [
+          0,
+          0
+        ]
+      }
+    ],
+    "barrier_family": "fence",
+    "barrier_state": "hurt",
+    "join_mask": 15,
+    "output_sha256": "19af3ccfb7294006e28cdf75332e265eb968721756bd41065da45a3b223c6949"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      32
+    ],
+    "pivot_xy": [
+      8,
+      28
+    ],
+    "cell_offset_xy": [
+      0,
+      -12
+    ],
+    "prompt": "implementation/sprites/generation/0014-fence-whole-r2.prompt.txt",
+    "prompt_sha256": "4df3c5479fa4cb65e43595d0ed85378b86e9452f3813af2cfb4e4130ce9295c2",
+    "references": [
+      {
+        "path": "assets/art_source/defences/fence/whole.png",
+        "sha256": "c69548009c08f258da16341d5c6fbf04d419b833f9ef4fc9adc7cf10cf2c247a",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 2,
+    "id": "buildings/fence_wreck",
+    "output": "sprites/buildings/fence_wreck.png",
+    "animation": "buildings/fence_wreck",
+    "source": "assets/art_source/defences/fence/whole-r2.png",
+    "source_sha256": "f2adb2c9cfa940b8509583d4937936a225327bbb3cfad7c9f9eddc4eacf51df7",
+    "crop_xywh": [
+      1535,
+      381,
+      511,
+      254
+    ],
+    "sheet_cell_xywh": [
+      1458,
+      0,
+      714,
+      724
+    ],
+    "gutter_xy": [
+      0,
+      0
+    ],
+    "alpha_threshold": 128,
+    "content_scale": 0.027972027972027972,
+    "content_anchor_xy": [
+      7,
+      7
+    ],
+    "output_sha256": "67bb7143ec656123dfbd619f2667589148ce03c093fafe90792f6e5e4f414070",
+    "barrier_family": "fence",
+    "barrier_state": "wreck"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      24
+    ],
+    "pivot_xy": [
+      8,
+      20
+    ],
+    "cell_offset_xy": [
+      0,
+      -4
+    ],
+    "prompt": "implementation/sprites/generation/0014-barricade-states.prompt.txt",
+    "prompt_sha256": "34449a24bf3e647fe32ea5c7f2230a56c8660e138cdda2eb309d39acad34cdb7",
+    "references": [
+      {
+        "path": "assets/art_source/defences/barricade/master.png",
+        "sha256": "9b905960bd0854d51506479011b6e85c18c89816d00a4343053882c77f92ac4f",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 0,
+    "id": "buildings/barricade",
+    "output": "sprites/buildings/barricade.png",
+    "animation": "buildings/barricade",
+    "source": "assets/art_source/defences/barricade/states.png",
+    "source_sha256": "81c2e301689be20f4c56308c775ca2cc00869226143d1d396fd7f666a4d3a80f",
+    "crop_xywh": [
+      63,
+      158,
+      664,
+      452
+    ],
+    "sheet_cell_xywh": [
+      0,
+      0,
+      753,
+      724
+    ],
+    "gutter_xy": [
+      0,
+      0
+    ],
+    "alpha_threshold": 128,
+    "content_scale": 0.020833333333333332,
+    "content_anchor_xy": [
+      7,
+      9
+    ],
+    "output_sha256": "e99ee6cb46d0f0ac182a1eace7703c5f04e0d8fd25f44dc8901261707b0a8839",
+    "barrier_family": "barricade",
+    "barrier_state": "whole"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      24
+    ],
+    "pivot_xy": [
+      8,
+      20
+    ],
+    "cell_offset_xy": [
+      0,
+      -4
+    ],
+    "prompt": "implementation/sprites/generation/0014-barricade-states.prompt.txt",
+    "prompt_sha256": "34449a24bf3e647fe32ea5c7f2230a56c8660e138cdda2eb309d39acad34cdb7",
+    "references": [
+      {
+        "path": "assets/art_source/defences/barricade/master.png",
+        "sha256": "9b905960bd0854d51506479011b6e85c18c89816d00a4343053882c77f92ac4f",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 0,
+    "id": "buildings/barricade_hurt",
+    "output": "sprites/buildings/barricade_hurt.png",
+    "animation": "buildings/barricade_hurt",
+    "source": "assets/art_source/defences/barricade/states.png",
+    "source_sha256": "81c2e301689be20f4c56308c775ca2cc00869226143d1d396fd7f666a4d3a80f",
+    "crop_xywh": [
+      780,
+      164,
+      672,
+      448
+    ],
+    "sheet_cell_xywh": [
+      753,
+      0,
+      708,
+      724
+    ],
+    "gutter_xy": [
+      0,
+      0
+    ],
+    "alpha_threshold": 128,
+    "content_scale": 0.020833333333333332,
+    "content_anchor_xy": [
+      7,
+      9
+    ],
+    "output_sha256": "156db8aa98daaa7cf461ac01636cf1e01f85344f54885f73b57c8f1f86d718a7",
+    "barrier_family": "barricade",
+    "barrier_state": "hurt"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      24
+    ],
+    "pivot_xy": [
+      8,
+      20
+    ],
+    "cell_offset_xy": [
+      0,
+      -4
+    ],
+    "prompt": "implementation/sprites/generation/0014-barricade-states.prompt.txt",
+    "prompt_sha256": "34449a24bf3e647fe32ea5c7f2230a56c8660e138cdda2eb309d39acad34cdb7",
+    "references": [
+      {
+        "path": "assets/art_source/defences/barricade/master.png",
+        "sha256": "9b905960bd0854d51506479011b6e85c18c89816d00a4343053882c77f92ac4f",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 0,
+    "id": "buildings/barricade_wreck",
+    "output": "sprites/buildings/barricade_wreck.png",
+    "animation": "buildings/barricade_wreck",
+    "source": "assets/art_source/defences/barricade/states.png",
+    "source_sha256": "81c2e301689be20f4c56308c775ca2cc00869226143d1d396fd7f666a4d3a80f",
+    "crop_xywh": [
+      1471,
+      327,
+      670,
+      298
+    ],
+    "sheet_cell_xywh": [
+      1461,
+      0,
+      711,
+      724
+    ],
+    "gutter_xy": [
+      0,
+      0
+    ],
+    "alpha_threshold": 128,
+    "content_scale": 0.020833333333333332,
+    "content_anchor_xy": [
+      7,
+      6
+    ],
+    "output_sha256": "7be52b535f3bdd137c8afc6c1b43d16aa4d7ec57467f3dae13139645a699386e",
+    "barrier_family": "barricade",
+    "barrier_state": "wreck"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      16
+    ],
+    "pivot_xy": [
+      8,
+      14
+    ],
+    "cell_offset_xy": [
+      0,
+      2
+    ],
+    "prompt": "implementation/sprites/generation/0014-mine-states.prompt.txt",
+    "prompt_sha256": "49d482dcda148e7e53179572c729d2c1b7bc4697b16cfd587a3118208f733805",
+    "references": [
+      {
+        "path": "assets/art_source/defences/mine/master.png",
+        "sha256": "873a3f1d5fc3aced6dc8721ba754ec0f3aa7426fa59c56dfa6e08e5810223486",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 0,
+    "id": "buildings/mine",
+    "output": "sprites/buildings/mine.png",
+    "animation": "buildings/mine",
+    "source": "assets/art_source/defences/mine/states.png",
+    "source_sha256": "aa99a9f3ee6300b0e0aa1137c5b07da21f4ff8aa6652bdd6f40db9d21ea2f44a",
+    "crop_xywh": [
+      148,
+      209,
+      479,
+      335
+    ],
+    "sheet_cell_xywh": [
+      0,
+      0,
+      729,
+      724
+    ],
+    "gutter_xy": [
+      0,
+      0
+    ],
+    "alpha_threshold": 128,
+    "content_scale": 0.02414486921529175,
+    "content_anchor_xy": [
+      6,
+      8
+    ],
+    "output_sha256": "b9fa9c7cacd19ec0afb921ff40630cf4b8924e56ad28cb9bd6e758f8fdddff27",
+    "barrier_family": "mine",
+    "barrier_state": "armed"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      16
+    ],
+    "pivot_xy": [
+      8,
+      14
+    ],
+    "cell_offset_xy": [
+      0,
+      2
+    ],
+    "prompt": "implementation/sprites/generation/0014-mine-states.prompt.txt",
+    "prompt_sha256": "49d482dcda148e7e53179572c729d2c1b7bc4697b16cfd587a3118208f733805",
+    "references": [
+      {
+        "path": "assets/art_source/defences/mine/master.png",
+        "sha256": "873a3f1d5fc3aced6dc8721ba754ec0f3aa7426fa59c56dfa6e08e5810223486",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 0,
+    "id": "buildings/mine_triggered",
+    "output": "sprites/buildings/mine_triggered.png",
+    "animation": "buildings/mine_triggered",
+    "source": "assets/art_source/defences/mine/states.png",
+    "source_sha256": "aa99a9f3ee6300b0e0aa1137c5b07da21f4ff8aa6652bdd6f40db9d21ea2f44a",
+    "crop_xywh": [
+      831,
+      169,
+      496,
+      387
+    ],
+    "sheet_cell_xywh": [
+      729,
+      0,
+      700,
+      724
+    ],
+    "gutter_xy": [
+      0,
+      0
+    ],
+    "alpha_threshold": 128,
+    "content_scale": 0.02414486921529175,
+    "content_anchor_xy": [
+      6,
+      9
+    ],
+    "output_sha256": "d09033cffe6e7b6df0ba08c9024dfee2b16513c39db8dd9060422f435203846d",
+    "barrier_family": "mine",
+    "barrier_state": "triggered"
+  },
+  {
+    "owner": "raster",
+    "palette": "tools/palette.py:COLOURS",
+    "seconds": 0.55,
+    "loop": true,
+    "frame": 0,
+    "canvas_wh": [
+      16,
+      16
+    ],
+    "pivot_xy": [
+      8,
+      14
+    ],
+    "cell_offset_xy": [
+      0,
+      2
+    ],
+    "prompt": "implementation/sprites/generation/0014-mine-states.prompt.txt",
+    "prompt_sha256": "49d482dcda148e7e53179572c729d2c1b7bc4697b16cfd587a3118208f733805",
+    "references": [
+      {
+        "path": "assets/art_source/defences/mine/master.png",
+        "sha256": "873a3f1d5fc3aced6dc8721ba754ec0f3aa7426fa59c56dfa6e08e5810223486",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "Source master / farm material-camera reference as indexed in exact prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0014",
+    "revision": 0,
+    "id": "buildings/mine_spent",
+    "output": "sprites/buildings/mine_spent.png",
+    "animation": "buildings/mine_spent",
+    "source": "assets/art_source/defences/mine/states.png",
+    "source_sha256": "aa99a9f3ee6300b0e0aa1137c5b07da21f4ff8aa6652bdd6f40db9d21ea2f44a",
+    "crop_xywh": [
+      1532,
+      234,
+      497,
+      335
+    ],
+    "sheet_cell_xywh": [
+      1429,
+      0,
+      743,
+      724
+    ],
+    "gutter_xy": [
+      0,
+      0
+    ],
+    "alpha_threshold": 128,
+    "content_scale": 0.02414486921529175,
+    "content_anchor_xy": [
+      6,
+      8
+    ],
+    "output_sha256": "33d1aad8c927e8c120a582488078156004a289e62c2f771dadc510f128f590d4",
+    "barrier_family": "mine",
+    "barrier_state": "spent"
+  }
+]

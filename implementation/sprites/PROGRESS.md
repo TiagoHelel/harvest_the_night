@@ -914,3 +914,90 @@ Queue after completion: 13 done, 7 todo, zero doing/blocked. Next: 0014,
 barriers and mine. Normal zombie sprites/animation remain 0015, Giant/death
 0016, UI 0018 and shared final atmosphere 0019. Exactly one sprite task
 completed this cycle; the active /goal continues automatically toward the backlog.
+
+## 2026-10-01 - 0014 completed: connected barriers, barricades and mine
+
+Generated sixteen immutable raw returns through built-in ImageGen in
+`assets/art_source/defences/{wall,fence,barricade,mine}/`. All exact prompts,
+reference hashes, tool arguments, return paths, measured alpha cuts and final
+decisions are retained in `generation/0014-*`. Four early candidates remain
+rejected. Eight sheet selections are partial: whole-r3 post/front, whole-r2
+north/south projection and low wreck, hurt-r1 post/front, initial hurt vertical
+break. Two trap masters are identity references; two three-state strips own
+runtime art. Whole wall/fence used exactly three targeted revisions each and
+hurt one each; trap sources used none. No creative source pixels were painted
+with Python; it performed measured cuts, fixed nearest/palette/alpha conversion,
+source-owned composition and review layout only.
+
+Twelve authored modules compose all 64 cardinal whole/hurt masks on 16x32
+canvases, pivot (8,28), cell offset (0,-12). Every material shares one scale
+across its selected whole/hurt/wreck modules. Bounded parts preserve their
+source pixels and alpha-over; the contact post is last. Taller posts/front
+profiles read as masonry or iron-banded timber, with narrow north/south
+projection. Broken posts, displaced stone and snapped rails survive native
+reduction; whole/hurt alpha shapes differ for every mask. Native height follows
+the measured return, not the ideal 12/28-pixel initial brief. Two low barrier
+wrecks, three 16x24/(8,20) barricades and three 16x16/(8,14) mine states complete
+84 outputs. Ten old PNGs migrate and 74 are added. Complete families disable
+old ASCII hole/wreck recipes; all 46 remaining ASCII sprites stay guarded.
+
+WorldView selects neighbors from existing occupancy, including mixed material
+joins and legal stationary-pointer previews. Empty/unrelated cells acquire no
+decorative post. Actual damage chooses source wear; passable Farm rubble draws
+at the destroyed cell in the bounded ground pool, including loaded saves and
+morning cleanup. Mines sit above plots and beneath actors. Existing fixed-tick
+observers compare real consumption/sprung counts with sell intent, current
+structure_lost receipts and new rubble. Old rubble under a rearmed mine does
+not suppress a real trigger; ambiguous external removal produces no guessed
+location. Up to six view-owned cues show triggered for 0.16s, spent for 0.24s,
+then expire. Rearm/load/morning clear cues. No core entity survives merely to
+draw feedback; no gameplay, placement, collision, save format or RNG changed.
+
+Full verify PASS: 43 passed, zero skipped/failed in 281s with the user's Godot
+4.7.1. All 107 scripts parse; 6,610 rule assertions, 982 input cases,
+performance and Windows/Web exports pass. Simulation `1961000123` and data
+`407837701` remain unchanged. Raster check proves 316 outputs and zero writes.
+Source checker validates all 84 exact outputs, 64 masks, alpha-shape wear,
+shared scale/contact, low ruins and at least two actual mixed-material seam
+pixels/rows. Headless barrier showcase: 3,275 checks; actual renderer: 3,353
+checks. Fixtures cover 256 neighbor combinations, all map corners, real paid
+placement/damage, route restoration, farmer depth, crop/mine/actor overlap,
+real 4x tick batches, sale/destruction/upgrade distinctions, old receipts,
+same-count replacement, seven-trigger overflow and complete cue expiry.
+
+Pipeline suite: 90 fault/rebuild probes PASS, including twelve new missing
+barrier/mine source/output, invalid component/cycle/bounds and incomplete
+migration probes. All deliberate corruptions restored; final source check
+passes. The initial full run found two legacy alpha-count assumptions and an
+undocumented integer-key sort. Authored barrier assertions now require distinct
+same-canvas standing construction and a low collapsed pile; the legacy branch
+and all rule/hash/input checks remain. The new assertion then required an
+explicit bool annotation. Both iterations are retained in `verify-initial.log`
+and `verify-parse-fix.log`; final `verify.log` passes. Exact submitted CRLF
+prompts are protected by scoped Git attributes. Staging audit verifies all
+118 hashed source/prompt/reference/runtime blobs without newline conversion.
+
+Opened all 42 actual native captures and exact nearest 3x review pages
+`reviews/0014/captures-00..20{,-3x}.png`. Originals are in
+`implementation/shots/sprites/0014/` and `barriers/`: all joins/states under
+day/dusk/night, four previews, predicted route, loaded ruins, mine outcome
+sequence/exclusions/4x/crop layering, farmer depth, mixed night perimeter and
+the five required standard views. Also opened all native/enlarged material
+sheets on light/dark/checker, source modules/trap silhouettes, twenty selected
+raw cuts and two identity masters. Visual gates PASS: function/material/camera,
+joined occupancy, structural damage/collapse, clean alpha, grounded contacts,
+stable footprint/route and correct actor depth. Details and every final SHA-256
+are in `reviews/0014/REVIEW.md`, `frame-review.json` and `scope-and-sources.json`.
+
+Audit against `4567753`: all 278 unrelated runtime PNGs, 293 protected baseline
+files and all 232 previous manifest entries are intact, including core/map/save,
+owner/player/pilot art, prior accepted sources, palette and hash guards.
+Ownership is 316 raster / 46 ASCII / zero player-sheet, 362 runtime PNGs.
+The fifteen unrelated pre-existing untracked files remain outside this commit.
+These are authored join/damage/outcome poses with a short one-shot mine cue;
+no continuous barrier animation is claimed. Normal enemy masters/motion follow
+in 0015, Giant/death playback in 0016 and shared final atmosphere in 0019.
+
+Queue after completion: 14 done, 6 todo, zero doing/blocked. Next: 0015,
+walker/runner/tank/breaker sprites and motion. Exactly one sprite task completed
+this cycle; the active /goal continues automatically toward the backlog.

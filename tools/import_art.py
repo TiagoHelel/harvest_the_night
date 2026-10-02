@@ -148,12 +148,21 @@ def load_manifest(path=MANIFEST):
                 raise ValueError("Invalid scale: " + ident)
             if type(entry["alpha_threshold"]) is not int or not 1 <= entry["alpha_threshold"] <= 255:
                 raise ValueError("Invalid alpha threshold: " + ident)
-        elif "input" not in entry or entry.get("operation") not in {"copy", "slice", "slice_canvas", "rotate", "legacy_bob", "legacy_lunge", "legacy_fall"}:
+        elif "input" not in entry or entry.get("operation") not in {"copy", "slice", "slice_canvas", "compose", "rotate", "legacy_bob", "legacy_lunge", "legacy_fall"}:
             raise ValueError("Missing source/valid derivation: " + ident)
         if entry.get("operation") == "rotate" and (type(entry.get("quarter_turns")) is not int or entry["quarter_turns"] not in (1, 2, 3)):
             raise ValueError("Invalid clockwise quarter-turns: " + ident)
         if entry.get("operation") == "slice_canvas":
             integers(entry.get("paste_xy"), 2, "slice canvas placement")
+        if entry.get("operation") == "compose":
+            parts = entry.get("parts")
+            if not isinstance(parts, list) or not 1 <= len(parts) <= 5:
+                raise ValueError("Invalid authored component list: " + ident)
+            for part in parts:
+                if not isinstance(part, dict) or not isinstance(part.get("input"), str):
+                    raise ValueError("Invalid component input: " + ident)
+                integers(part.get("slice_xywh"), 4, "component slice")
+                integers(part.get("paste_xy"), 2, "component placement")
         key = entry["animation"]
         animations.setdefault(key, []).append(entry)
     if outputs != {p for p, owner in owners.items() if owner == "raster"}:
@@ -266,6 +275,18 @@ def build(data):
                     raise ValueError("Derived slice clips canvas: " + ident)
                 image = Image.new("RGBA", tuple(entry["canvas_wh"]))
                 image.alpha_composite(piece, tuple(position))
+            elif operation == "compose":
+                # Join measured source-owned modules, exactly as terrain edges
+                # join their authored side pieces. No colors, holes or growth
+                # are invented here; every opaque pixel comes from a parent.
+                image = Image.new("RGBA", tuple(entry["canvas_wh"]))
+                for part in entry["parts"]:
+                    component = resolve(part["input"])
+                    piece = component.crop(rect(part["slice_xywh"], component.size, "component slice"))
+                    position = integers(part["paste_xy"], 2, "component placement")
+                    if any(position[i] + piece.size[i] > image.size[i] for i in range(2)):
+                        raise ValueError("Component clips canvas: " + ident)
+                    image.alpha_composite(piece, tuple(position))
             elif operation == "rotate":
                 turns = entry["quarter_turns"]
                 image = parent.transpose({1: Image.Transpose.ROTATE_270,
@@ -324,6 +345,11 @@ def metadata(data):
             lines[-1] = lines[-1][:-2] + ', "muzzles": [%s]},' % points
         if entry.get("generation_task") == "0013":
             lines[-1] = lines[-1][:-2] + ', "tower": true},'
+        if "join_mask" in entry:
+            mask = entry["join_mask"]
+            if type(mask) is not int or not 0 <= mask < 16:
+                raise ValueError("Invalid barrier neighbor mask")
+            lines[-1] = lines[-1][:-2] + ', "connected": true, "join_mask": %d},' % mask
         if "bubble_xywh" in entry:
             x, y, w, h = entry["bubble_xywh"]
             lines[-1] = lines[-1][:-2] + ', "bubble": Rect2i(%d, %d, %d, %d)},' % (x, y, w, h)

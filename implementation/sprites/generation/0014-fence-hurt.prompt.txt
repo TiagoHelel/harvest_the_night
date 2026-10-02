@@ -1,0 +1,32 @@
+Use case: stylized-concept
+Asset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm
+that becomes a fortress against zombies at night.
+Primary request: fence/hurt: a four-module construction source sheet.
+Input images: Image 1: exact accepted construction master; preserve physical proportions
+Style/medium: coherent hand-crafted pixel art with deliberate pixel clusters,
+colored outlines, restrained texture, readable material planes and clean forms.
+Composition/framing: orthographic three-quarter top-down view on a rectangular
+grid; match the approved master camera and scale. Final native canvas is
+16x32 pixels with contact pivot 8,28; this is a downstream import
+target, so the generated source must remain simple enough to survive reduction.
+Lighting/mood: neutral warm daytime, highlights from upper left, darker underside;
+runtime supplies dusk/night lighting. Keep emission in separate localized forms.
+Color palette: match the approved project palette and master, warm timber and
+terracotta, layered greens, cool water, violet/blue shadows; limited ramps.
+Scene/backdrop: true transparent background for every module. No baked ground shadow for actors.
+Constraints: complete unclipped object, consistent perspective and scale, clear
+ground contact, generous tool/weapon clearance, no labels, text, watermark or UI.
+Avoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,
+random pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,
+new gameplay objects, tiny details that disappear at native size.
+
+Create warm timber fence with square capped posts and two substantial horizontal rails, iron fastenings and open gaps in whole
+state, orientation/join modular horizontal/vertical/post/ruin pieces. Target
+16x32, logical cell base remains 16x16. Neighboring
+segments align in height and spacing, including perpendicular turns. Fence has
+clear posts/rails, wall solid masonry, barricade piled timber, mine small low
+mechanical disc. Broken state has a visible structural gap. No letters, skull
+label, blood puddle, separate ground base or extra blocked cells.
+
+
+Generate exactly FOUR modules in ONE horizontal row, matching Image 1 layout, camera and shared physical scale: isolated post; horizontal span; long narrow north-south span; collapsed rubble. Keep the master proportions, especially the long north-south span. No labels, ground or shadows. Author structural wear: a split post cap and visibly splintered shaft; lower horizontal rail snapped through its middle and upper rail bent; lengthwise beam broken through its middle; same collapsed timber. Keep outer beam cut ends intact. Whole versus hurt must be recognizable at 16 native pixels without colored tint or health bars. No random pinholes, fire, extra posts, independent per-module enlargement or new construction design. Same complete source canvas dimensions and planted lower contact baseline as master. The vertical span must retain its long length; do not shorten it because a rail is broken.

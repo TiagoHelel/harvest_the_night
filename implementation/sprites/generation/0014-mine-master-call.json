@@ -1,0 +1,53 @@
+{
+  "id": "mine",
+  "kind": "master",
+  "revision": 0,
+  "tool": "built-in ImageGen",
+  "returned_file": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-c48b03af-06b1-450c-9882-145aaa217703.png",
+  "source": "assets/art_source/defences/mine/master.png",
+  "source_sha256": "873a3f1d5fc3aced6dc8721ba754ec0f3aa7426fa59c56dfa6e08e5810223486",
+  "source_wh": [
+    1536,
+    1024
+  ],
+  "source_alpha_range": [
+    0,
+    254
+  ],
+  "prompt": "implementation/sprites/generation/0014-mine-master.prompt.txt",
+  "prompt_sha256": "ecb607b361feeed101c05a991c5cf0d67fa3ef699e4d457db71536338cc861a2",
+  "references": [
+    "assets/art_source/defences/gun_tower/master.png",
+    "docs/reference-sheet.png"
+  ],
+  "reference_hashes": {
+    "assets/art_source/defences/gun_tower/master.png": "86d51327390ec01329d9f110b2c539e01924dbdd21348d1f6dcfad25cbbbce13",
+    "docs/reference-sheet.png": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c"
+  },
+  "tool_arguments": {
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\defences\\gun_tower\\master.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png"
+    ]
+  },
+  "measurements": [
+    {
+      "role": "master",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        1536,
+        1024
+      ],
+      "crop_xywh": [
+        537,
+        340,
+        472,
+        328
+      ]
+    }
+  ],
+  "decision": "Accepted immutable identity reference: materials/camera and transparent alpha reviewed; the state sheet owns runtime pixels.",
+  "selected_runtime_roles": []
+}

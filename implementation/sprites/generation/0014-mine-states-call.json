@@ -1,0 +1,87 @@
+{
+  "id": "mine",
+  "kind": "states",
+  "revision": 0,
+  "tool": "built-in ImageGen",
+  "returned_file": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-94b80f02-3b19-4f95-a730-94c71b412e5e.png",
+  "source": "assets/art_source/defences/mine/states.png",
+  "source_sha256": "aa99a9f3ee6300b0e0aa1137c5b07da21f4ff8aa6652bdd6f40db9d21ea2f44a",
+  "source_wh": [
+    2172,
+    724
+  ],
+  "source_alpha_range": [
+    0,
+    255
+  ],
+  "prompt": "implementation/sprites/generation/0014-mine-states.prompt.txt",
+  "prompt_sha256": "49d482dcda148e7e53179572c729d2c1b7bc4697b16cfd587a3118208f733805",
+  "references": [
+    "assets/art_source/defences/mine/master.png",
+    "docs/reference-sheet.png"
+  ],
+  "reference_hashes": {
+    "assets/art_source/defences/mine/master.png": "873a3f1d5fc3aced6dc8721ba754ec0f3aa7426fa59c56dfa6e08e5810223486",
+    "docs/reference-sheet.png": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c"
+  },
+  "tool_arguments": {
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\defences\\mine\\master.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png"
+    ]
+  },
+  "measurements": [
+    {
+      "role": "armed",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        729,
+        724
+      ],
+      "crop_xywh": [
+        148,
+        209,
+        479,
+        335
+      ]
+    },
+    {
+      "role": "triggered",
+      "sheet_cell_xywh": [
+        729,
+        0,
+        700,
+        724
+      ],
+      "crop_xywh": [
+        831,
+        169,
+        496,
+        387
+      ]
+    },
+    {
+      "role": "spent",
+      "sheet_cell_xywh": [
+        1429,
+        0,
+        743,
+        724
+      ],
+      "crop_xywh": [
+        1532,
+        234,
+        497,
+        335
+      ]
+    }
+  ],
+  "decision": "Accepted three-state strip: native/3x whole/triggered/spent or whole/hurt/wreck drawings, shared scale/contact and actual Godot outcomes reviewed.",
+  "selected_runtime_roles": [
+    "mine",
+    "mine_spent",
+    "mine_triggered"
+  ]
+}

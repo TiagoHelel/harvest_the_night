@@ -269,6 +269,35 @@ def main():
             finally:
                 art_ownership.registry = original_registry
 
+        barrier = next((i for i,e in enumerate(data['assets']) if e['id'] == 'buildings/wall_join_15'), None)
+        if barrier is not None:
+            module = next(e for e in data['assets'] if e['id'] == 'buildings/modules/fence_post_hurt')
+            corrupt(ROOT/module['source'], 'tools/import_art.py', missing=True)
+            passed('Missing accepted barrier wear module rejected')
+            corrupt(ROOT/'sprites/buildings/wall_join_15.png', 'tools/check_barrier_art.py', missing=True)
+            passed('Missing barrier junction rejected without isolated-post fallback')
+            corrupt(ROOT/'sprites/buildings/mine_triggered.png', 'tools/check_barrier_art.py', missing=True)
+            passed('Missing authored triggered mine rejected')
+            invalid_manifest('Empty component list rejected', lambda d: d['assets'][barrier].update(parts=[]))
+            invalid_manifest('Too many barrier components rejected', lambda d: d['assets'][barrier].update(parts=d['assets'][barrier]['parts']*2))
+            invalid_manifest('Malformed barrier component rejected', lambda d: d['assets'][barrier]['parts'].__setitem__(0, 3))
+            invalid_manifest('Missing composed parent rejected', lambda d: d['assets'][barrier]['parts'][0].update(input='missing'))
+            invalid_manifest('Composed derivation cycle rejected', lambda d: d['assets'][barrier]['parts'][0].update(input=d['assets'][barrier]['id']))
+            invalid_manifest('Out-of-parent component slice rejected', lambda d: d['assets'][barrier]['parts'][0].update(slice_xywh=[0,0,17,32]))
+            invalid_manifest('Negative component placement rejected', lambda d: d['assets'][barrier]['parts'][0].update(paste_xy=[-1,0]))
+            invalid_manifest('Clipped component placement rejected', lambda d: d['assets'][barrier]['parts'][0].update(paste_xy=[16,32]))
+            import gen_sprites
+            original_registry = art_ownership.registry
+            owners_copy = original_registry().copy()
+            owners_copy['sprites/buildings/wall_join_15_hurt.png'] = 'ascii'
+            try:
+                art_ownership.registry = lambda: owners_copy
+                assert gen_sprites.migrated_barriers() == {'buildings/fence','buildings/barricade','buildings/mine'}
+                assert 'buildings/wall_hurt' in gen_sprites.derived_sprites()
+                passed('Legacy barrier wear disabled only for a complete join family')
+            finally:
+                art_ownership.registry = original_registry
+
         original_owners = art_ownership.REGISTRY.read_bytes()
         try:
             owners = json.loads(original_owners)

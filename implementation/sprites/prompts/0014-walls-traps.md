@@ -1,6 +1,6 @@
 # 0014 - Connected defences, barricades and mine
 
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0013
 - **Likely files:** sprites/buildings/wall*,fence*,barricade*,mine*; src/ui/world_view.gd; assets/art_source/defences/
 - **Generation briefs:** WALL_TRAP

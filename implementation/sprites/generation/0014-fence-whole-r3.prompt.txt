@@ -1,0 +1,12 @@
+Use case: stylized-concept
+Asset type: production pixel-art barrier MODULE source, HARVEST THE NIGHT.
+Image 1: approved material/camera master only; revise its module physical proportions. Image 2: farm style reference.
+True transparent background, no ground, shadows, labels, borders or glow. Orthographic three-quarter top-down on a rectangular grid, neutral upper-left daytime light, clustered pixel highlights and violet contact outlines. No isometric diagonal.
+Produce a TALL PORTRAIT source sheet, approximately 1024x1536, with FOUR small separated modules in a 2x2 grid. Keep plenty of unused transparent space; do not fill each grid cell. The pixel-art source units are enlarged uniformly, about 24 source pixels per future native pixel. All modules use this SAME scale.
+Material: two thick timber rails with an obvious transparent gap, dark iron fasteners, no endpoint uprights.
+
+TOP LEFT: isolated central pier/post, exactly FOUR units wide and FOURTEEN units tall (about 96x336 source pixels).
+TOP RIGHT: horizontal screen-X wall/fence panel, SIXTEEN units wide and TWELVE units tall (about 384x288 source pixels). A short tall panel: its height is THREE QUARTERS of its width, NOT a long thin railing. NO tall endpoint uprights. Full broad material planes; cut ends.
+BOTTOM LEFT: north-south screen-Y panel, FOUR units wide and TWENTY-EIGHT units tall (about 96x672 source pixels). Long low construction recedes into depth; this is NOT an upright pole.
+BOTTOM RIGHT: compact low collapsed heap, FOURTEEN units wide and FIVE units tall (about 336x120 source pixels).
+No tiny module independently enlarged, no extra props. These physical proportions matter: the short horizontal panel must be visibly TALLER than in the reference; it needs enough front face to read as a defence beside a 30-unit farmer. Downstream a central post and bounded cardinal halves create corners, ends and junctions. Keep consistent scale, upper-left lighting, clean binary-looking stepped alpha and simple material clusters.

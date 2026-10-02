@@ -13381,9 +13381,9 @@ func _task_0075_building_art() -> void:
 		expect(first["pivot"] == Vector2i(16, 44) and last["pivot"] == first["pivot"]
 			and first.has("muzzle") and last.has("muzzle"), "same %s contact with authored weapon positions" % id)
 
-	# **A damaged wall reads as damaged without a health bar.** The other
-	# done-when: the art has holes in it, so the wall is visibly missing
-	# pieces rather than merely tinted.
+	# Authored broken construction can expose an angled brace or loose stone;
+	# its alpha count need not shrink like the old punched-hole recipe. Check
+	# distinct standing art and low collapsed height for migrated barriers.
 	for id in [&"wall", &"fence", &"barricade", &"gun_tower"]:
 		var whole := _building_art(id)
 		var hurt := _building_art(StringName("%s_hurt" % id))
@@ -13393,9 +13393,15 @@ func _task_0075_building_art() -> void:
 			continue
 		var before := _lit_pixels(whole)
 		var after := _lit_pixels(hurt)
+		var authored_barrier: bool = WorldView.connected_barrier(id) or (id == &"barricade"
+			and RasterArt.FRAMES.has(WorldView.BUILDING_DIR + str(id) + ".png"))
 		if WorldView.authored_tower(id):
 			expect(whole.get_data() != hurt.get_data(), "authored structural damage changes the actual drawing")
 			expect(after * 10 >= before * 6, "damaged tower retains its standing mechanism")
+		elif authored_barrier:
+			expect(whole.get_size() == hurt.get_size() and whole.get_data() != hurt.get_data(),
+				"authored barrier damage changes construction on the same canvas")
+			expect(after * 10 >= before * 6, "damaged barrier retains its standing construction")
 		else:
 			expect(after < before, "and it is visibly missing pieces",
 				"%d pixels against %d" % [after, before])
@@ -13403,8 +13409,14 @@ func _task_0075_building_art() -> void:
 				"enough to read as damaged, not so much as to be rubble",
 				"%d of %d" % [after, before])
 		var wreck := _building_art(StringName("%s_wreck" % id))
-		expect(wreck != null and _lit_pixels(wreck) < after,
-			"and there is less of it again when it comes down")
+		if authored_barrier:
+			expect(wreck != null and wreck.get_data() != hurt.get_data()
+				and wreck.get_used_rect().size.y <= 8
+				and wreck.get_used_rect().size.y < hurt.get_used_rect().size.y,
+				"authored collapsed barrier is a distinct low ground pile")
+		else:
+			expect(wreck != null and _lit_pixels(wreck) < after,
+				"and there is less of it again when it comes down")
 
 	# **The towers that fire have a frame where they are firing.**
 	for id in towers:

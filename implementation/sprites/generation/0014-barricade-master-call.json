@@ -1,0 +1,53 @@
+{
+  "id": "barricade",
+  "kind": "master",
+  "revision": 0,
+  "tool": "built-in ImageGen",
+  "returned_file": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-5a3aa71f-0aa4-40d2-9907-83087c1b121e.png",
+  "source": "assets/art_source/defences/barricade/master.png",
+  "source_sha256": "9b905960bd0854d51506479011b6e85c18c89816d00a4343053882c77f92ac4f",
+  "source_wh": [
+    1355,
+    1161
+  ],
+  "source_alpha_range": [
+    0,
+    255
+  ],
+  "prompt": "implementation/sprites/generation/0014-barricade-master.prompt.txt",
+  "prompt_sha256": "1a84352a76c332890344d06c964a4c1351488b5f6e1d87925c14093ff5c7ee94",
+  "references": [
+    "assets/art_source/defences/gun_tower/master.png",
+    "docs/reference-sheet.png"
+  ],
+  "reference_hashes": {
+    "assets/art_source/defences/gun_tower/master.png": "86d51327390ec01329d9f110b2c539e01924dbdd21348d1f6dcfad25cbbbce13",
+    "docs/reference-sheet.png": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c"
+  },
+  "tool_arguments": {
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\defences\\gun_tower\\master.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png"
+    ]
+  },
+  "measurements": [
+    {
+      "role": "master",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        1355,
+        1161
+      ],
+      "crop_xywh": [
+        166,
+        249,
+        1136,
+        829
+      ]
+    }
+  ],
+  "decision": "Accepted immutable identity reference: materials/camera and transparent alpha reviewed; the state sheet owns runtime pixels.",
+  "selected_runtime_roles": []
+}

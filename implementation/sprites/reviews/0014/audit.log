@@ -1,0 +1,2 @@
+PASS: 16 exact ImageGen returns/prompts/references; 8 partial module sources, 2 identity masters, 2 state strips, 4 retained rejections; 10 changed + 74 added PNGs; 278 other PNGs and 293 protected files unchanged; 42 reviewed captures; owners 316 raster / 46 ASCII
+PASS: 118 hashed source/prompt/reference/runtime blobs are byte-exact in Git staging

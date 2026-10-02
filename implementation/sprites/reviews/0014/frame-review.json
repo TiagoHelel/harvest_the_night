@@ -1,0 +1,506 @@
+[
+  {
+    "path": "implementation/shots/sprites/0014/barriers/barricade_0.png",
+    "sha256": "fc44f5a705b04cb511d011c76c0c4f4a04c1cb5e201276d88e909e1da25285ee",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0014/barriers/barricade_1.png",
+    "sha256": "9cb26dbe6d454d3f919f064ea883d5b07a2023de838f3dad6438427328137dfb",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0014/barriers/barricade_2.png",
+    "sha256": "fa97911bd13f7635277a3e5fe91bd880ac89a4bb048b7d5fc68bdc65a164ca8e",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0014/barriers/depth_behind.png",
+    "sha256": "dc18aa48af047fc6b9d17e02c708c92adc9fe0112f819dc7db3ab56d5b8c5536",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0014/barriers/depth_front.png",
+    "sha256": "bbaf6fd3f84da4984af5fc7b31e52e76c6800acc42f71b87f2021fa6a3890aa6",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0014/barriers/fence_0_hurt.png",
+    "sha256": "972935ae31c10a717deaf18c3ababc8f0c2bb87a439e14c585f2f5ca4788e20b",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0014/barriers/fence_0_whole.png",
+    "sha256": "87ddc108bcd3714ee12af69505f222dcd3eaa38c529f13b4036e18a3e30ba8ae",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0014/barriers/fence_0_wreck.png",
+    "sha256": "4355874798144361c5b108ca25dbdfaecd3cfe160233c37cac2d4088fedbd46c",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0014/barriers/fence_1_hurt.png",
+    "sha256": "f35d422d1a24bf246eb3e4b44285fe5c4d7b463774c808d23296804274e0b9eb",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0014/barriers/fence_1_whole.png",
+    "sha256": "7899a41534647977ada3cd01e5cb23cd385c1920493221732f86e6e4d402ee31",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0014/barriers/fence_1_wreck.png",
+    "sha256": "e21bc83e60e3d79bac5d2fd9ef0e040d6d79dd4caf1839612623b55719df13d9",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0014/barriers/fence_2_hurt.png",
+    "sha256": "3fcd70a7a9899ec0587adb8be8838c9bc06bc04f4e8fc22ad55ccbbaf4adf4ba",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0014/barriers/fence_2_whole.png",
+    "sha256": "9eefc6ec0fd2cb7402b7a5add7104337bc6815505984588c9653e28cc046937c",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0014/barriers/fence_2_wreck.png",
+    "sha256": "7dd78d5044c420ba40bd3a5527da7fc9d78e6dcb220a0d09a5ab66b0404ccacc",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0014/barriers/ghost_barricade.png",
+    "sha256": "02be7a28f55e43a2616523bbc77321a2e547ceab916aaa16f78816fe6280e7ab",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0014/barriers/ghost_fence.png",
+    "sha256": "c4b9b752171bfbb459923d518a9fb03f831c96e7c89bed042782a446fdf8dc47",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0014/barriers/ghost_mine.png",
+    "sha256": "745feecd5b72cc5957f102413f6e31671a4ff0b9f54154fb38f8ad2f1dcac10e",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0014/barriers/ghost_wall.png",
+    "sha256": "d4c2dd9ccd18e619b9c8c6ecc8b2c9df07e081cad5797d1d93d5409390a9d558",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0014/barriers/loaded_ruins.png",
+    "sha256": "b240d3093bd9292880b3c197e9eda0c23f41516836cf430b1d34d58ee13be454",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0014/barriers/mine_4x.png",
+    "sha256": "832e99585096f5e8b041d5b7ec699739a10dfd362445f00e5ac463ce045a57ba",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0014/barriers/mine_armed.png",
+    "sha256": "5afee2894e8d74ff143e84b805bbedf2fee03a98d3ce4a143ea0a01574e9b368",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0014/barriers/mine_crop_actor.png",
+    "sha256": "634b2a8c95d32833f3b954d82723c6fc7088a454f831bc05559c7c0b2eaf8f52",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0014/barriers/mine_exclusions.png",
+    "sha256": "690353b8ffd3021893cfed04d7e77929f44b74c783efbefbfe44dbeb6f53b321",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0014/barriers/mine_expired.png",
+    "sha256": "296887211ff8d684c44d632f3d6ddcf9be91645f1402f3d3034fddc8e7631881",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0014/barriers/mine_spent.png",
+    "sha256": "8f7029ad872bcd582dac3396f0f2ded23d84c25219cb5c0bbcd36f71e452dcf9",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0014/barriers/mine_triggered.png",
+    "sha256": "c29293d7cd4006f8e5d65fad3bf14e2dfc3ae982e5eb7307a73c9baa375f11d7",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0014/barriers/mixed_perimeter_night.png",
+    "sha256": "78d1c5b61a1240900a3afb5e42c4cef3a23d4a5502d0557cdff066a58fb4115d",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0014/barriers/route_preview.png",
+    "sha256": "0eb9fe633f259817628d5ac42afb1f3595c5d7375e56eee77bd2fd4c558fcf56",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0014/barriers/wall_0_hurt.png",
+    "sha256": "b5f2cda3f2ac8511b12b9665b380a5195ca82920614046d24c7bd67f6fa6da67",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0014/barriers/wall_0_whole.png",
+    "sha256": "fc6ac9ec3ebfda8447377f7613c270888ae8ce8aaaecad9ea563736942efe8db",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0014/barriers/wall_0_wreck.png",
+    "sha256": "4c242a3916e61d45739aac4e06468b769de43e1db1f5358cbcd5ae68d0571f3d",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0014/barriers/wall_1_hurt.png",
+    "sha256": "e9890da1837b056f9db23257585f9962ce523b56af63212ea61bedc1eb9c8ed3",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0014/barriers/wall_1_whole.png",
+    "sha256": "ec047cb57fd961fee0e1ea10457f36392edf12dc596ce3c197de95bbcf8a507f",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0014/barriers/wall_1_wreck.png",
+    "sha256": "a5793cd5088691eaf18112290d5030b56b7e1534ffa4df86cfd88da9cdaa864e",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0014/barriers/wall_2_hurt.png",
+    "sha256": "32b0c9556f78260b2ea5de6850947970c670f019cb4352479e737428c30418bd",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0014/barriers/wall_2_whole.png",
+    "sha256": "04f16c2a9fecbbf0d4c5031df310667a9111f45e46bffdeb36dce983fdd6d5a9",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0014/barriers/wall_2_wreck.png",
+    "sha256": "8686119f0243044e20a13c8666e4b45cf6f5e9abf5251ba390d31c553be57f97",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0014/dusk.png",
+    "sha256": "56a629c3a0e8a8c91e65b9db5734efa78c766d698b1844d2f6e54f67f5cf7448",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0014/noon.png",
+    "sha256": "ee20b02153596fd8c1b506f07e3cd90608c87b224d22625876737b8244350c06",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0014/result.png",
+    "sha256": "ee05e6bf53a56f7a0fe7444c0819a720ad4fa664237b4b5b4096cdee4cc57fe7",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0014/tech.png",
+    "sha256": "c80cd683841f52adba9f58a4419172e5e1e3d36561a63fe4887105dbc691020c",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0014/wave.png",
+    "sha256": "b4604915d5caf75c590cd546efd3fd61bc5d1b45f29f7a326cb8fd25ca60233d",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  }
+]

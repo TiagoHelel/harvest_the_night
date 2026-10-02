@@ -246,3 +246,24 @@ opaque fire pose. Local glow/sparks and the visual launch use that same point.
 Wear changes braces/armor/mechanisms; wrecks collapse onto the ground. Existing
 fire-over-wear priority remains. These are authored event/state poses, not a
 continuous recoil animation. Final atmosphere tuning remains task 0019.
+
+Task 0014 connects grey masonry and iron-banded timber from actual occupied
+neighbors. Taller posts establish ground contacts; front spans show joined
+stone courses or two timber rails. North/south spans use the narrow top/side
+projection and overlap only the connected cells. Each material shares one
+physical scale across all selected raw modules and damage states. All sixteen
+cardinal masks share 16x32/(8,28), with no post in an unoccupied neighbor.
+
+Broken states chip posts, expose a displaced stone and snap the far-side rail;
+the center post must not conceal the entire break. Ruins are low piles on the
+actual destroyed cells and never create decorative blocking. Barricades remain
+rough timber braces on 16x24/(8,20). The 16x16/(8,14) mine is a low steel disc
+with a restrained red pressure plate, a short source-authored trigger spark
+and a split spent casing. Plot foliage may coexist under the disc by the
+original placement rules; every actor's boots remain above it. Source alpha
+conversion removes low-opacity edge haze, not creative source features.
+
+These are authored join/damage/outcome states. Mines have a short one-shot
+presentation cue; no continuous barrier or trap animation is claimed. The
+normal enemy family remains 0015, Giant/death playback 0016 and common final
+night atmosphere 0019.

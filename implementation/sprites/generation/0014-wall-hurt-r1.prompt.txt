@@ -1,0 +1,14 @@
+Use case: stylized-concept
+Asset type: production pixel-art barrier MODULE source, HARVEST THE NIGHT.
+Image 1: exact construction master; preserve its geometry and source canvas dimensions. Image 2: farm style reference.
+True transparent background, no ground, shadows, labels, borders or glow. Orthographic three-quarter top-down on a rectangular grid, neutral upper-left daytime light, clustered pixel highlights and violet contact outlines. No isometric diagonal.
+Produce a TALL PORTRAIT source sheet, approximately 1024x1536, with FOUR small separated modules in a 2x2 grid. Keep plenty of unused transparent space; do not fill each grid cell. The pixel-art source units are enlarged uniformly, about 24 source pixels per future native pixel. All modules use this SAME scale.
+Material: broad stone caps and three full-depth solid masonry courses, no tiny bead-like stones.
+
+TOP LEFT: isolated central pier/post, exactly FOUR units wide and FOURTEEN units tall (about 96x336 source pixels).
+TOP RIGHT: horizontal screen-X wall/fence panel, SIXTEEN units wide and TWELVE units tall (about 384x288 source pixels). A short tall panel: its height is THREE QUARTERS of its width, NOT a long thin railing. NO tall endpoint uprights. Full broad material planes; cut ends.
+BOTTOM LEFT: north-south screen-Y panel, FOUR units wide and TWENTY-EIGHT units tall (about 96x672 source pixels). Long low construction recedes into depth; this is NOT an upright pole.
+BOTTOM RIGHT: compact low collapsed heap, FOURTEEN units wide and FIVE units tall (about 336x120 source pixels).
+No tiny module independently enlarged, no extra props. These physical proportions matter: the short horizontal panel must be visibly TALLER than in the reference; it needs enough front face to read as a defence beside a 30-unit farmer. Downstream a central post and bounded cardinal halves create corners, ends and junctions. Keep consistent scale, upper-left lighting, clean binary-looking stepped alpha and simple material clusters.
+
+Create STRUCTURALLY HURT versions of these four exact modules in the SAME 2x2 portrait layout and physical size. Keep raw pixel scale and placements unchanged. Post must have a large missing side chunk and broken cap, not just a hairline crack. Horizontal panel has a substantial jagged break BETWEEN the middle junction and the right cut end, roughly three-quarters along its length, so a central post will not hide the break. Keep both outer cut ends intact. Break a broad side masonry chunk, expose a jagged lower course, tilt one cap block. Vertical module broken through the middle. Low wreck unchanged. No new construction, perspective, ground or labels.

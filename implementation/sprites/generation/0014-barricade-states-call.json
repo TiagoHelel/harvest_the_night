@@ -1,0 +1,87 @@
+{
+  "id": "barricade",
+  "kind": "states",
+  "revision": 0,
+  "tool": "built-in ImageGen",
+  "returned_file": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-73481d60-ba85-4663-8f4c-30e1394b321c.png",
+  "source": "assets/art_source/defences/barricade/states.png",
+  "source_sha256": "81c2e301689be20f4c56308c775ca2cc00869226143d1d396fd7f666a4d3a80f",
+  "source_wh": [
+    2172,
+    724
+  ],
+  "source_alpha_range": [
+    0,
+    255
+  ],
+  "prompt": "implementation/sprites/generation/0014-barricade-states.prompt.txt",
+  "prompt_sha256": "34449a24bf3e647fe32ea5c7f2230a56c8660e138cdda2eb309d39acad34cdb7",
+  "references": [
+    "assets/art_source/defences/barricade/master.png",
+    "docs/reference-sheet.png"
+  ],
+  "reference_hashes": {
+    "assets/art_source/defences/barricade/master.png": "9b905960bd0854d51506479011b6e85c18c89816d00a4343053882c77f92ac4f",
+    "docs/reference-sheet.png": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c"
+  },
+  "tool_arguments": {
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\defences\\barricade\\master.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png"
+    ]
+  },
+  "measurements": [
+    {
+      "role": "whole",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        753,
+        724
+      ],
+      "crop_xywh": [
+        63,
+        158,
+        664,
+        452
+      ]
+    },
+    {
+      "role": "hurt",
+      "sheet_cell_xywh": [
+        753,
+        0,
+        708,
+        724
+      ],
+      "crop_xywh": [
+        780,
+        164,
+        672,
+        448
+      ]
+    },
+    {
+      "role": "wreck",
+      "sheet_cell_xywh": [
+        1461,
+        0,
+        711,
+        724
+      ],
+      "crop_xywh": [
+        1471,
+        327,
+        670,
+        298
+      ]
+    }
+  ],
+  "decision": "Accepted three-state strip: native/3x whole/triggered/spent or whole/hurt/wreck drawings, shared scale/contact and actual Godot outcomes reviewed.",
+  "selected_runtime_roles": [
+    "barricade",
+    "barricade_hurt",
+    "barricade_wreck"
+  ]
+}

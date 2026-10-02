@@ -1,0 +1,102 @@
+{
+  "id": "fence",
+  "kind": "whole-r2",
+  "revision": 2,
+  "tool": "built-in ImageGen",
+  "returned_file": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-b01c3d72-4b9b-472f-b095-c8d9f53f4576.png",
+  "source": "assets/art_source/defences/fence/whole-r2.png",
+  "source_sha256": "f2adb2c9cfa940b8509583d4937936a225327bbb3cfad7c9f9eddc4eacf51df7",
+  "source_wh": [
+    2172,
+    724
+  ],
+  "source_alpha_range": [
+    0,
+    255
+  ],
+  "prompt": "implementation/sprites/generation/0014-fence-whole-r2.prompt.txt",
+  "prompt_sha256": "4df3c5479fa4cb65e43595d0ed85378b86e9452f3813af2cfb4e4130ce9295c2",
+  "references": [
+    "assets/art_source/defences/fence/whole.png",
+    "docs/reference-sheet.png"
+  ],
+  "reference_hashes": {
+    "assets/art_source/defences/fence/whole.png": "c69548009c08f258da16341d5c6fbf04d419b833f9ef4fc9adc7cf10cf2c247a",
+    "docs/reference-sheet.png": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c"
+  },
+  "tool_arguments": {
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\defences\\fence\\whole.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png"
+    ]
+  },
+  "measurements": [
+    {
+      "role": "post",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        398,
+        724
+      ],
+      "crop_xywh": [
+        183,
+        250,
+        123,
+        366
+      ]
+    },
+    {
+      "role": "horizontal",
+      "sheet_cell_xywh": [
+        398,
+        0,
+        779,
+        724
+      ],
+      "crop_xywh": [
+        490,
+        364,
+        598,
+        226
+      ]
+    },
+    {
+      "role": "vertical",
+      "sheet_cell_xywh": [
+        1177,
+        0,
+        281,
+        724
+      ],
+      "crop_xywh": [
+        1266,
+        51,
+        115,
+        617
+      ]
+    },
+    {
+      "role": "wreck",
+      "sheet_cell_xywh": [
+        1458,
+        0,
+        714,
+        724
+      ],
+      "crop_xywh": [
+        1535,
+        381,
+        511,
+        254
+      ]
+    }
+  ],
+  "decision": "Accepted vertical and low wreck modules only. Post/horizontal remain rejected: insufficient height at the shared reduction scale. Earlier full-family rejection is retained separately; this selection is explicitly partial.",
+  "prior_review_decision": "Rejected native/runtime review: horizontal panel reduces to only 6-7 pixels high and reads too low beside the farmer. Final whole-source revision requests 16x12 panels and 14-pixel posts on a portrait sheet.",
+  "selected_runtime_roles": [
+    "fence_wreck",
+    "vertical"
+  ]
+}
