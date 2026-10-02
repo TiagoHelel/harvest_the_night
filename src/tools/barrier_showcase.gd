@@ -197,7 +197,7 @@ func _masks_and_borders() -> void:
 		var before := var_to_bytes(_state)
 		expect(WorldView.barrier_mask(_state, center) == expected, "Empty/mixed/unrelated neighbor connectivity")
 		expect(var_to_bytes(_state) == before, "Mask query cannot change occupancy/pathing/save")
-	var corners: Array[Vector2i] = [Vector2i.ZERO, Vector2i(39, 0), Vector2i(0, 17), Vector2i(39, 17)]
+	var corners: Array[Vector2i] = [Vector2i.ZERO, Vector2i(Grid.WIDTH - 1, 0), Vector2i(0, Grid.HEIGHT - 1), Vector2i(Grid.WIDTH - 1, Grid.HEIGHT - 1)]
 	for i in corners.size():
 		var at := corners[i]
 		(_state["occupants"] as Dictionary).clear()

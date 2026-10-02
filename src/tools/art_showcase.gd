@@ -1245,7 +1245,6 @@ func _locomotion() -> void:
 				_state["intent"]["move"] = [0, 0]
 			var pose := PlayerArt.pose(facing, moving, &"")
 			var count := int(pose["frames"])
-			var each := float(pose["seconds"])
 			var expected_name: StringName = StringName("%s_%s" % [
 				"walk" if moving else "idle", PlayerArt.FACINGS[facing][0]])
 			expect(pose["name"] == expected_name and count == (4 if moving else 3),
@@ -1257,7 +1256,7 @@ func _locomotion() -> void:
 				if moving and phase > 0:
 					Player.tick(_state)
 				var before := State.hash_of(_state)
-				view._process(0.0 if phase == 0 else each)
+				view._process(0.0 if phase == 0 else PlayerArt.frame_seconds(pose, (phase - 1) % count) + 0.0001)
 				expect(State.hash_of(_state) == before, "Drawing the player never changes core state")
 				expect(view.playing() == expected_name, "No locomotion family silently falls back to idle")
 				expect(view.flipped() == (facing == Player.EAST), "Only east mirrors the accepted west")

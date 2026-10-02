@@ -10208,3 +10208,38 @@ what it is made of changes nothing the guard can see.
 
 `python tools/verify.py` prints PASS: 6417 asserts, 980 input cases, 0 failed,
 23 rows, no skips, 235 seconds.
+
+## 2026-10-02 — Follow-up: larger farm, smooth camera and idle life
+
+The user explicitly confirmed 25% more area: 40x18 -> 45x20, 720 -> 900 cells.
+Original map coordinates and its first 720 cells are unchanged; new meadow and
+shore extend east/south and east spawns move to column 44. State version 1 -> 2
+has a tested save migration for terrain, indexed run tables, regrowth/fuel and
+live targets, preserving player/building coordinates and rebuilding caches.
+
+Camera tracking now follows subtile position on both axes with delta-time
+smoothing, bounded zoom and correct inverse picking/light scaling. Wheel or
+=/- changes zoom (0.875x through 2x); 0 resets. These are rebindable actions.
+Existing tree/animal textures gain canopy sway, hen pecks and cow head/tail
+motion, with fixed ground anchors and pause-aware visual time. Farmer blinking
+holds eyes open for 3.2s and closes for 0.1s. Three frontal idle frames replace
+the one-eye wink; a black-eyed first candidate was rejected and superseded.
+
+The larger spawn distance exposed an enemy stuck behind distant impassable
+structures. When no house route exists, the existing hunt field now approaches
+a reachable structure before chewing. Real-HP giant escape and ordinary combat
+checks pass. Related fixture updates and native review are documented in
+implementation/reviews/world-visibility/REVIEW.md.
+
+This map/version change intentionally moves sim 1961000123 -> 3960053733 and data
+407837701 -> 3913993875. Subsequent visual revisions keep those hashes unchanged.
+Full tools/verify.py: 53 passed, zero skipped/failed, 6,998 assertions and 985 input
+cases, Windows/Web/playtest exports successful. Runtime tick 595us/8,333us;
+path rebuild 5,601us/33,333us. Total 465s exceeds the soft 300s suite target.
+
+Evidence includes 274 native motion/zoom captures (669 renderer checks), a
+121-check headless visibility fixture, timed native GIFs, nearest contact pages,
+source provenance and five Main captures under implementation/shots/world-visibility/.
+Only three runtime PNGs changed; other sprite families and 480x270 resolution
+are preserved. Ambient animals stay in their gameplay cells; fractional zoom
+retains nearest-neighbor pixel-size variation. No push or automation is started.

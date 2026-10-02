@@ -82,8 +82,11 @@ can be compared directly across each strip.
 
 ## What animation is actually supplied
 
-Trees, animals, banks and crop stages are static forms. Water and farmer motion
-loop; timed work uses real anticipation/contact followed by short cosmetic
+The October 2 follow-up adds canopy sway, hen pecking and cow head/tail movement
+from the existing tree/animal textures, plus a brief farmer blink. Animals keep
+their gameplay cells; this is ambient motion, not roaming. Banks and crop stages
+remain static. See [native follow-up evidence](../reviews/world-visibility/REVIEW.md).
+Water and farmer motion loop; timed work uses real anticipation/contact followed by short cosmetic
 recovery. Instant water/reel/trade start at contact and return to ready.
 North/south work deliberately uses the accepted side-on gesture, with west
 authored and east mirrored. No four-direction work sheet is claimed.

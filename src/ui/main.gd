@@ -241,6 +241,7 @@ func _process(_delta: float) -> void:
 	if _driver.state.is_empty():
 		return
 	_drop_a_crumb(_delta)
+	_world.ambient_running = _driver.running and not _driver.holding()
 	var intent: Dictionary = _driver.state["intent"]
 	var move: Array = intent["move"]
 	move[0] = int(Input.get_axis(&"move_left", &"move_right"))
@@ -263,7 +264,22 @@ func _process(_delta: float) -> void:
 	_world.highlight(Vector2i(-1, -1)
 		if Shop.is_open(_driver.state) or Building.is_active(_driver.state)
 		else _target_cell())
-	_world.look_at_cell(Player.cell(_driver.state))
+	_world.follow_player(Player.position(_driver.state), _delta)
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if _driver == null or _driver.state.is_empty() or not _driver.running:
+		return
+	if _router != null and _router.here() != _router.RUN:
+		return
+	for action in [&"zoom_in", &"zoom_out", &"zoom_reset"]:
+		if event.is_action_pressed(action):
+			if action == &"zoom_reset":
+				_world.reset_zoom()
+			else:
+				_world.change_zoom(1 if action == &"zoom_in" else -1)
+			get_viewport().set_input_as_handled()
+			return
 
 
 ## Fold this run's numbers into the profile and write both files, once per

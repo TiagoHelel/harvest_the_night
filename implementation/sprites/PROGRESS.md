@@ -1416,3 +1416,37 @@ budget exceeded, successful exit. Core: 6,646 assertions and 982 input cases;
 Windows/Web/playtest exports pass. Sim 1961000123 and data 407837701 unchanged.
 Only this correction's files are staged. Prior unrelated capture imports remain
 excluded; no push or automation is started.
+
+## 2026-10-02 — Follow-up: farmer eyes and ambient movement
+
+The user requested a larger map, camera zoom/smoothing and movement in trees and
+animals, then rejected a frontal idle correction because the eyes appeared
+solid black. Reverted that candidate and used built-in ImageGen for one targeted
+revision with visible ivory whites/brown pupils and both eyes reopening.
+Only actors/idle_south_0..2 change; all other runtime PNGs remain byte-identical.
+The original source is retained. Idle playback holds open eyes for 3.2 seconds,
+closes for 0.1, then reopens for 0.16, rather than holding a wink.
+
+Source: assets/art_source/player/idle_south-eyes-v3.png, SHA-256
+5d529f6f66d47edcec1150eaf876539cf408a1aa49bac7b2b65ce3baeaefc381.
+Prompt/call: generation/visibility-idle-eyes-v3.prompt.txt and -call.json.
+Original idle/walk references, exact three cuts, common scale 30/564, 48x48
+canvas and original foot pivot are recorded. Rejected v2 source is retained in
+implementation/reviews/world-visibility/rejected/ and is not in the manifest.
+
+Existing tree, cow and hen sources gain small shader-driven idle motion without
+new sheets: canopy sway, pecking, head/tail movement. The clock pauses with the
+run and leaves the simulation untouched; animals do not roam. Viewed actual
+480x270 day/night sequences, blink phases, zoom/camera films, native/nearest
+contact comparisons and Main noon/dusk/wave/result/tech captures. Native facial
+detail and night contrast remain limited by the existing viewport.
+
+Full verify-final.log: 53 passed, zero skipped/failed, 465 seconds; 6,998 core
+assertions, 985 input cases and all exports pass. Soft 300s suite target exceeded;
+runtime performance passes. Sim 3960053733 and data 3913993875 are the intentional
+new map/version baselines, recorded in implementation/PROGRESS.md; the visual
+edits preserve them. Actual motion capture passes 669 checks; headless camera,
+zoom, picking, state purity and pause guards pass 121. Scope audit proves original
+map cells and all except three runtime PNGs preserved. Evidence and reproduction
+scripts are in implementation/reviews/world-visibility/; five HUD captures in
+implementation/shots/world-visibility/. The original sprite queue remains 20 done.

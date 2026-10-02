@@ -26,6 +26,7 @@ extends RefCounted
 ## hash means a balance-neutral tweak fails the guard.
 
 const DIR := "res://sprites/actors/"
+const BLINK_SECONDS := [3.2, 0.1, 0.16]
 
 ## Seconds a frame lasts, per animation. A swing is quick, a stand is slow.
 const SECONDS := {
@@ -109,9 +110,20 @@ static func pose(facing: int, moving: bool, verb: StringName) -> Dictionary:
 
 ## Which frame of that pose, at this many seconds in. Loops.
 static func frame_at(pose_data: Dictionary, seconds: float) -> int:
+	# The closed-eye drawing is a brief blink, not one third of idle time.
+	# Preserve the authored poses; leave the eyes open between blinks.
+	if pose_data.get("name", &"") in [&"idle_south", &"idle_west"]:
+		var phase := fposmod(maxf(seconds, 0.0), BLINK_SECONDS[0] + BLINK_SECONDS[1] + BLINK_SECONDS[2])
+		return 0 if phase < BLINK_SECONDS[0] else (1 if phase < BLINK_SECONDS[0] + BLINK_SECONDS[1] else 2)
 	var frames := maxi(int(pose_data["frames"]), 1)
 	var each := maxf(float(pose_data["seconds"]), 0.01)
 	return int(floorf(maxf(seconds, 0.0) / each)) % frames
+
+
+static func frame_seconds(pose_data: Dictionary, frame: int) -> float:
+	if pose_data.get("name", &"") in [&"idle_south", &"idle_west"]:
+		return float(BLINK_SECONDS[frame % BLINK_SECONDS.size()])
+	return float(pose_data["seconds"])
 
 
 ## Which drawing a reaction asks for, or `&""`.

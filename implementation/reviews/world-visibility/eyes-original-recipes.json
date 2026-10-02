@@ -1,0 +1,158 @@
+[
+  {
+    "id": "actors/idle_south_0",
+    "owner": "raster",
+    "source": "assets/art_source/player/idle_south.png",
+    "source_sha256": "49de04f2e849b42f984ba145cf54505616ed055a242b6e6363f90d3dfe5ea7b2",
+    "crop_xywh": [
+      197,
+      120,
+      395,
+      569
+    ],
+    "sheet_cell_xywh": [
+      0,
+      0,
+      705,
+      774
+    ],
+    "gutter_xy": [
+      113,
+      85
+    ],
+    "canvas_wh": [
+      48,
+      48
+    ],
+    "pivot_xy": [
+      24,
+      44
+    ],
+    "content_scale": 0.05272407732864675,
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "animation": "idle_south",
+    "frame": 0,
+    "seconds": 0.55,
+    "loop": true,
+    "output": "sprites/actors/idle_south_0.png",
+    "output_sha256": "e51133786b3a84ee97bef2d50b007687ea6909f9fc9d2ea70b9ed8e8bb15dd80",
+    "prompt": "implementation/sprites/generation/0004-idle_south.prompt.txt",
+    "prompt_sha256": "a9a216c7cd6f45500ee90da07f2063072eb2edf19ff732be6dbf8ce9b704384d",
+    "references": [
+      {
+        "path": "assets/art_source/masters/farmer.png",
+        "role": "approved identity and body-scale master",
+        "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0004",
+    "revision": 0,
+    "approval": "Native/3x strip review before runtime promotion"
+  },
+  {
+    "id": "actors/idle_south_1",
+    "owner": "raster",
+    "source": "assets/art_source/player/idle_south.png",
+    "source_sha256": "49de04f2e849b42f984ba145cf54505616ed055a242b6e6363f90d3dfe5ea7b2",
+    "crop_xywh": [
+      818,
+      125,
+      396,
+      564
+    ],
+    "sheet_cell_xywh": [
+      705,
+      0,
+      622,
+      774
+    ],
+    "gutter_xy": [
+      113,
+      85
+    ],
+    "canvas_wh": [
+      48,
+      48
+    ],
+    "pivot_xy": [
+      24,
+      44
+    ],
+    "content_scale": 0.05272407732864675,
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "animation": "idle_south",
+    "frame": 1,
+    "seconds": 0.55,
+    "loop": true,
+    "output": "sprites/actors/idle_south_1.png",
+    "output_sha256": "f1e261dc53f094bd3f9b4fd47efbbcde25d5ba8ee28a5a59ec0e1bafd1f5cb7a",
+    "prompt": "implementation/sprites/generation/0004-idle_south.prompt.txt",
+    "prompt_sha256": "a9a216c7cd6f45500ee90da07f2063072eb2edf19ff732be6dbf8ce9b704384d",
+    "references": [
+      {
+        "path": "assets/art_source/masters/farmer.png",
+        "role": "approved identity and body-scale master",
+        "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0004",
+    "revision": 0,
+    "approval": "Native/3x strip review before runtime promotion"
+  },
+  {
+    "id": "actors/idle_south_2",
+    "owner": "raster",
+    "source": "assets/art_source/player/idle_south.png",
+    "source_sha256": "49de04f2e849b42f984ba145cf54505616ed055a242b6e6363f90d3dfe5ea7b2",
+    "crop_xywh": [
+      1440,
+      120,
+      396,
+      569
+    ],
+    "sheet_cell_xywh": [
+      1327,
+      0,
+      705,
+      774
+    ],
+    "gutter_xy": [
+      113,
+      85
+    ],
+    "canvas_wh": [
+      48,
+      48
+    ],
+    "pivot_xy": [
+      24,
+      44
+    ],
+    "content_scale": 0.05272407732864675,
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "animation": "idle_south",
+    "frame": 2,
+    "seconds": 0.55,
+    "loop": true,
+    "output": "sprites/actors/idle_south_2.png",
+    "output_sha256": "a574f5d15c2292bce746569dc68e5a2e2f419c917bec49b3fa1669d137c0f26d",
+    "prompt": "implementation/sprites/generation/0004-idle_south.prompt.txt",
+    "prompt_sha256": "a9a216c7cd6f45500ee90da07f2063072eb2edf19ff732be6dbf8ce9b704384d",
+    "references": [
+      {
+        "path": "assets/art_source/masters/farmer.png",
+        "role": "approved identity and body-scale master",
+        "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0004",
+    "revision": 0,
+    "approval": "Native/3x strip review before runtime promotion"
+  }
+]

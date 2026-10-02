@@ -1,0 +1,9 @@
+Use case: precise-object-edit.
+Edit target: first supplied image, the three-frame front-facing farmer idle strip.
+Supporting identity reference: second supplied image, the walking farmer.
+Correct ONLY the eyes on this idle strip. Preserve identical hat, hair, face silhouette, clothes, hands, pose, boots, size, spacing, baseline, and transparent background. Three separate full-body figures in one row.
+The game reduces each figure to only 30 pixels tall. Each OPEN eye must survive that reduction as a clear tiny two-tone eye: an ivory white area at least as wide as the brown pupil, with the dark-brown pupil on the inner side. Both eyes the same height, only TWO logical pixels tall, each TWO logical pixels wide, separated by skin. Think a simple readable 2 by 2 pixel eye, one white column plus one brown pupil column, no black outline below. Avoid tall white streaks, completely black eyes, sockets, eyewear, winks, extra eyebrows, highlights too tiny to survive reduction.
+Frame 1: both eyes naturally open, friendly neutral expression.
+Frame 2: both eyes closed simultaneously for a brief blink.
+Frame 3: both eyes naturally open exactly like frame 1; no one-eye wink.
+The source is enlarged pixel art: make broad crisp pixel blocks that remain legible at thirty pixels tall, no blur. Keep every other part identical.

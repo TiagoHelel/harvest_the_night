@@ -64,23 +64,23 @@
     {
       "id": "actors/idle_south_0",
       "owner": "raster",
-      "source": "assets/art_source/player/idle_south.png",
-      "source_sha256": "49de04f2e849b42f984ba145cf54505616ed055a242b6e6363f90d3dfe5ea7b2",
+      "source": "assets/art_source/player/idle_south-eyes-v3.png",
+      "source_sha256": "5d529f6f66d47edcec1150eaf876539cf408a1aa49bac7b2b65ce3baeaefc381",
       "crop_xywh": [
-        197,
-        120,
+        198,
+        119,
         395,
-        569
+        564
       ],
       "sheet_cell_xywh": [
         0,
         0,
-        705,
-        774
+        706,
+        773
       ],
       "gutter_xy": [
-        113,
-        85
+        0,
+        0
       ],
       "canvas_wh": [
         48,
@@ -90,7 +90,7 @@
         24,
         44
       ],
-      "content_scale": 0.05272407732864675,
+      "content_scale": 0.05319148936170213,
       "alpha_threshold": 128,
       "palette": "tools/palette.py:COLOURS",
       "animation": "idle_south",
@@ -98,41 +98,41 @@
       "seconds": 0.55,
       "loop": true,
       "output": "sprites/actors/idle_south_0.png",
-      "output_sha256": "e51133786b3a84ee97bef2d50b007687ea6909f9fc9d2ea70b9ed8e8bb15dd80",
-      "prompt": "implementation/sprites/generation/0004-idle_south.prompt.txt",
-      "prompt_sha256": "a9a216c7cd6f45500ee90da07f2063072eb2edf19ff732be6dbf8ce9b704384d",
+      "output_sha256": "822ca40f70b1122f9a35d2d7b65006779d0127f1657edd0db40d633c0263f6a8",
+      "prompt": "implementation/sprites/generation/visibility-idle-eyes-v3.prompt.txt",
+      "prompt_sha256": "7dbf35ef5d5b327fed0f6c059001c568d8f8fb5fb1a3da439ce96fee14e9b07e",
       "references": [
         {
-          "path": "assets/art_source/masters/farmer.png",
-          "role": "approved identity and body-scale master",
-          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+          "path": "assets/art_source/player/idle_south.png",
+          "role": "Original idle strip edit target",
+          "sha256": "49de04f2e849b42f984ba145cf54505616ed055a242b6e6363f90d3dfe5ea7b2"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "0004",
-      "revision": 0,
+      "revision": 1,
       "approval": "Native/3x strip review before runtime promotion"
     },
     {
       "id": "actors/idle_south_1",
       "owner": "raster",
-      "source": "assets/art_source/player/idle_south.png",
-      "source_sha256": "49de04f2e849b42f984ba145cf54505616ed055a242b6e6363f90d3dfe5ea7b2",
+      "source": "assets/art_source/player/idle_south-eyes-v3.png",
+      "source_sha256": "5d529f6f66d47edcec1150eaf876539cf408a1aa49bac7b2b65ce3baeaefc381",
       "crop_xywh": [
-        818,
-        125,
-        396,
-        564
+        819,
+        122,
+        394,
+        561
       ],
       "sheet_cell_xywh": [
-        705,
+        706,
         0,
-        622,
-        774
+        621,
+        773
       ],
       "gutter_xy": [
-        113,
-        85
+        0,
+        0
       ],
       "canvas_wh": [
         48,
@@ -142,7 +142,7 @@
         24,
         44
       ],
-      "content_scale": 0.05272407732864675,
+      "content_scale": 0.05319148936170213,
       "alpha_threshold": 128,
       "palette": "tools/palette.py:COLOURS",
       "animation": "idle_south",
@@ -150,41 +150,41 @@
       "seconds": 0.55,
       "loop": true,
       "output": "sprites/actors/idle_south_1.png",
-      "output_sha256": "f1e261dc53f094bd3f9b4fd47efbbcde25d5ba8ee28a5a59ec0e1bafd1f5cb7a",
-      "prompt": "implementation/sprites/generation/0004-idle_south.prompt.txt",
-      "prompt_sha256": "a9a216c7cd6f45500ee90da07f2063072eb2edf19ff732be6dbf8ce9b704384d",
+      "output_sha256": "8dcca8cb52e22bf389a3eb6012306f41de59065b33c396644241659123293106",
+      "prompt": "implementation/sprites/generation/visibility-idle-eyes-v3.prompt.txt",
+      "prompt_sha256": "7dbf35ef5d5b327fed0f6c059001c568d8f8fb5fb1a3da439ce96fee14e9b07e",
       "references": [
         {
-          "path": "assets/art_source/masters/farmer.png",
-          "role": "approved identity and body-scale master",
-          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+          "path": "assets/art_source/player/idle_south.png",
+          "role": "Original idle strip edit target",
+          "sha256": "49de04f2e849b42f984ba145cf54505616ed055a242b6e6363f90d3dfe5ea7b2"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "0004",
-      "revision": 0,
+      "revision": 1,
       "approval": "Native/3x strip review before runtime promotion"
     },
     {
       "id": "actors/idle_south_2",
       "owner": "raster",
-      "source": "assets/art_source/player/idle_south.png",
-      "source_sha256": "49de04f2e849b42f984ba145cf54505616ed055a242b6e6363f90d3dfe5ea7b2",
+      "source": "assets/art_source/player/idle_south-eyes-v3.png",
+      "source_sha256": "5d529f6f66d47edcec1150eaf876539cf408a1aa49bac7b2b65ce3baeaefc381",
       "crop_xywh": [
-        1440,
-        120,
-        396,
-        569
+        1441,
+        119,
+        395,
+        564
       ],
       "sheet_cell_xywh": [
         1327,
         0,
-        705,
-        774
+        706,
+        773
       ],
       "gutter_xy": [
-        113,
-        85
+        0,
+        0
       ],
       "canvas_wh": [
         48,
@@ -194,7 +194,7 @@
         24,
         44
       ],
-      "content_scale": 0.05272407732864675,
+      "content_scale": 0.05319148936170213,
       "alpha_threshold": 128,
       "palette": "tools/palette.py:COLOURS",
       "animation": "idle_south",
@@ -202,19 +202,19 @@
       "seconds": 0.55,
       "loop": true,
       "output": "sprites/actors/idle_south_2.png",
-      "output_sha256": "a574f5d15c2292bce746569dc68e5a2e2f419c917bec49b3fa1669d137c0f26d",
-      "prompt": "implementation/sprites/generation/0004-idle_south.prompt.txt",
-      "prompt_sha256": "a9a216c7cd6f45500ee90da07f2063072eb2edf19ff732be6dbf8ce9b704384d",
+      "output_sha256": "c6cf1e24b51b42df7d703dba94ecac2090a0600fed605c629a6dd8e3a116a69e",
+      "prompt": "implementation/sprites/generation/visibility-idle-eyes-v3.prompt.txt",
+      "prompt_sha256": "7dbf35ef5d5b327fed0f6c059001c568d8f8fb5fb1a3da439ce96fee14e9b07e",
       "references": [
         {
-          "path": "assets/art_source/masters/farmer.png",
-          "role": "approved identity and body-scale master",
-          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+          "path": "assets/art_source/player/idle_south.png",
+          "role": "Original idle strip edit target",
+          "sha256": "49de04f2e849b42f984ba145cf54505616ed055a242b6e6363f90d3dfe5ea7b2"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "0004",
-      "revision": 0,
+      "revision": 1,
       "approval": "Native/3x strip review before runtime promotion"
     },
     {

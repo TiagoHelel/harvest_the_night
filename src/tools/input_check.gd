@@ -686,6 +686,7 @@ func _case_0013_world_view() -> void:
 	expect(State.hash_of(driver.state) == before,
 		"panning the camera did not move the determinism hash")
 	driver.running = true
+	view.look_at_cell(Player.cell(driver.state))
 
 	# **A click on a cell goes where the camera put it.** This is why
 	# cell_to_screen exists at all: without it every click case would be wrong
@@ -702,12 +703,24 @@ func _case_0013_world_view() -> void:
 		"so a fixed cell is somewhere else on screen afterwards")
 
 	# Screen and cell are each other's inverse, wherever the camera is.
+	var zoom_before := cam_probe.zoom.x
+	await tap_key(KEY_EQUAL)
+	await until(func(): return cam_probe.zoom.x == 1.25, "zoom-in settles")
+	expect(cam_probe.zoom.x > zoom_before, "The zoom-in binding enlarges the world")
+	await click_at(Vector2(240, 125), MOUSE_BUTTON_WHEEL_DOWN)
+	await until(func(): return cam_probe.zoom.x == zoom_before, "wheel zoom-out settles")
+	expect(absf(cam_probe.zoom.x - zoom_before) < 0.02, "Mouse wheel zooms back out through the real input path")
+	await tap_key(KEY_EQUAL)
+	await until(func(): return cam_probe.zoom.x == 1.25, "second zoom-in settles")
 	for cell in [Vector2i(20, 9), Vector2i(25, 4), Vector2i(30, 12)]:
 		expect(view.screen_to_cell(view.cell_to_screen(cell)) == cell,
 			"cell %s survives a round trip through the screen" % cell,
 			str(view.screen_to_cell(view.cell_to_screen(cell))))
 	expect(view.screen_to_cell(Vector2(-500, -500)) == Vector2i(-1, -1),
 		"and a position off the farm is not a cell")
+	await tap_key(KEY_0)
+	await until(func(): return cam_probe.zoom == Vector2.ONE, "zoom reset settles")
+	expect(cam_probe.zoom == Vector2.ONE, "Zero restores the default zoom")
 
 	# **The camera is clamped**, so panning past either end shows the farm
 	# rather than a gap. Godot does the clamping; this checks it was asked to.

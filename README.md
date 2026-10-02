@@ -63,6 +63,11 @@ From the repository root, with Godot set in your environment:
 "$GODOT" --path .
 ```
 
+Use the mouse wheel or `=` / `-` to zoom and `0` to return to the default view.
+These bindings can be changed in Controls. The camera follows the farmer
+smoothly on both axes. Existing 40x18 saves are migrated to the 45x20 farm
+without moving their buildings or losing crops, inventory or job progress.
+
 ---
 
 ## The shape of the thing
@@ -71,7 +76,7 @@ From the repository root, with Godot set in your environment:
 |---|---|
 | Engine | Godot 4.7, `gl_compatibility` so the Web export works |
 | Resolution | 480x270 base, 16px tiles, integer scaling only |
-| The farm | one 40x18 grid, and it is the entire world |
+| The farm | one 45x20 grid (900 cells), and it is the entire world |
 | Simulation | one fixed 30Hz `Sim.tick(state)` for day growth and night combat alike |
 | Pathing | a flow field from the house, not A* per zombie |
 | Language | English throughout; pt-BR is a translation file at task 0097 |

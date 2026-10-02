@@ -174,6 +174,10 @@ static func _walk(state: Dictionary, id: int) -> void:
 		next = Pathing.step_hunt(state, here)
 	if next == here:
 		next = Pathing.step_from(state, here)
+	if next == here and Pathing.distance(state, here) == Pathing.UNREACHABLE:
+		# A sealed row of towers can be several cells away. Approach it before
+		# chewing; checking only adjacent structures strands distant spawns.
+		next = Pathing.step_hunt(state, here)
 	if next == here:
 		# **Nowhere to go means chew.** A wall that sealed the farm used to
 		# make the whole wave stand still for ever - a player who walled
@@ -244,8 +248,8 @@ static func _swung_at_the_house(state: Dictionary, id: int,
 ##
 ## Looks at the four neighbours and bites whichever structure is nearest the
 ## house - the one actually in the way, rather than whatever happens to be
-## first in reading order. With nothing adjacent at all it simply waits, which
-## only happens when a zombie is walled into a pocket it never walked into.
+## first in reading order. Distant reachable structures are approached through
+## the hunt field first; with no target or path at all the zombie waits.
 static func _chew(state: Dictionary, id: int, data: Dictionary,
 		here: Vector2i) -> void:
 	var best := Vector2i(-1, -1)

@@ -1,0 +1,158 @@
+[
+  {
+    "id": "actors/idle_south_0",
+    "owner": "raster",
+    "source": "assets/art_source/player/idle_south-eyes-v3.png",
+    "source_sha256": "5d529f6f66d47edcec1150eaf876539cf408a1aa49bac7b2b65ce3baeaefc381",
+    "crop_xywh": [
+      198,
+      119,
+      395,
+      564
+    ],
+    "sheet_cell_xywh": [
+      0,
+      0,
+      706,
+      773
+    ],
+    "gutter_xy": [
+      0,
+      0
+    ],
+    "canvas_wh": [
+      48,
+      48
+    ],
+    "pivot_xy": [
+      24,
+      44
+    ],
+    "content_scale": 0.05319148936170213,
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "animation": "idle_south",
+    "frame": 0,
+    "seconds": 0.55,
+    "loop": true,
+    "output": "sprites/actors/idle_south_0.png",
+    "output_sha256": "822ca40f70b1122f9a35d2d7b65006779d0127f1657edd0db40d633c0263f6a8",
+    "prompt": "implementation/sprites/generation/visibility-idle-eyes-v3.prompt.txt",
+    "prompt_sha256": "7dbf35ef5d5b327fed0f6c059001c568d8f8fb5fb1a3da439ce96fee14e9b07e",
+    "references": [
+      {
+        "path": "assets/art_source/player/idle_south.png",
+        "role": "Original idle strip edit target",
+        "sha256": "49de04f2e849b42f984ba145cf54505616ed055a242b6e6363f90d3dfe5ea7b2"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0004",
+    "revision": 1,
+    "approval": "Native/3x strip review before runtime promotion"
+  },
+  {
+    "id": "actors/idle_south_1",
+    "owner": "raster",
+    "source": "assets/art_source/player/idle_south-eyes-v3.png",
+    "source_sha256": "5d529f6f66d47edcec1150eaf876539cf408a1aa49bac7b2b65ce3baeaefc381",
+    "crop_xywh": [
+      819,
+      122,
+      394,
+      561
+    ],
+    "sheet_cell_xywh": [
+      706,
+      0,
+      621,
+      773
+    ],
+    "gutter_xy": [
+      0,
+      0
+    ],
+    "canvas_wh": [
+      48,
+      48
+    ],
+    "pivot_xy": [
+      24,
+      44
+    ],
+    "content_scale": 0.05319148936170213,
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "animation": "idle_south",
+    "frame": 1,
+    "seconds": 0.55,
+    "loop": true,
+    "output": "sprites/actors/idle_south_1.png",
+    "output_sha256": "8dcca8cb52e22bf389a3eb6012306f41de59065b33c396644241659123293106",
+    "prompt": "implementation/sprites/generation/visibility-idle-eyes-v3.prompt.txt",
+    "prompt_sha256": "7dbf35ef5d5b327fed0f6c059001c568d8f8fb5fb1a3da439ce96fee14e9b07e",
+    "references": [
+      {
+        "path": "assets/art_source/player/idle_south.png",
+        "role": "Original idle strip edit target",
+        "sha256": "49de04f2e849b42f984ba145cf54505616ed055a242b6e6363f90d3dfe5ea7b2"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0004",
+    "revision": 1,
+    "approval": "Native/3x strip review before runtime promotion"
+  },
+  {
+    "id": "actors/idle_south_2",
+    "owner": "raster",
+    "source": "assets/art_source/player/idle_south-eyes-v3.png",
+    "source_sha256": "5d529f6f66d47edcec1150eaf876539cf408a1aa49bac7b2b65ce3baeaefc381",
+    "crop_xywh": [
+      1441,
+      119,
+      395,
+      564
+    ],
+    "sheet_cell_xywh": [
+      1327,
+      0,
+      706,
+      773
+    ],
+    "gutter_xy": [
+      0,
+      0
+    ],
+    "canvas_wh": [
+      48,
+      48
+    ],
+    "pivot_xy": [
+      24,
+      44
+    ],
+    "content_scale": 0.05319148936170213,
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "animation": "idle_south",
+    "frame": 2,
+    "seconds": 0.55,
+    "loop": true,
+    "output": "sprites/actors/idle_south_2.png",
+    "output_sha256": "c6cf1e24b51b42df7d703dba94ecac2090a0600fed605c629a6dd8e3a116a69e",
+    "prompt": "implementation/sprites/generation/visibility-idle-eyes-v3.prompt.txt",
+    "prompt_sha256": "7dbf35ef5d5b327fed0f6c059001c568d8f8fb5fb1a3da439ce96fee14e9b07e",
+    "references": [
+      {
+        "path": "assets/art_source/player/idle_south.png",
+        "role": "Original idle strip edit target",
+        "sha256": "49de04f2e849b42f984ba145cf54505616ed055a242b6e6363f90d3dfe5ea7b2"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0004",
+    "revision": 1,
+    "approval": "Native/3x strip review before runtime promotion"
+  }
+]

@@ -32,14 +32,6 @@ extends Node2D
 ## table below - deliberately visible, so "nobody has drawn the house" looks
 ## like a placeholder rather than like a design choice. Task 0075 draws them.
 
-## The farm is 640x288 pixels and the viewport is 480x270, so there are 160
-## pixels of horizontal pan and 18 of vertical.
-##
-## **Vertically the camera is locked to the middle**, which crops nine pixels
-## off the top and the bottom. That is deliberate and the map is drawn for it:
-## row 0 and row 17 are the tree line and the far water, a decorative border
-## rather than anywhere the player goes. A camera that drifted up and down over
-## eighteen pixels would be motion sickness in exchange for nothing.
 ## **A cap, so nothing can shake the screen to pieces.** Six pixels is a
 ## fortieth of a 270-pixel screen: enough to feel, small enough that the farm
 ## never stops being readable. A mortar landing on eight zombies asks for far
@@ -48,6 +40,11 @@ const SHAKE_CAP := 6.0
 
 ## How fast a shake dies away, as a fraction of itself a second.
 const SHAKE_DECAY := 9.0
+## Follow continuous coordinates on both axes. Picking uses the same transform.
+const CAMERA_RESPONSE := 10.0
+const ZOOM_LEVELS := [0.875, 1.0, 1.25, 1.5, 2.0]
+var _zoom_index := 1
+var _zoom_target := 1.0
 
 const WORLD_SIZE := Vector2i(
 	GameData.GRID_WIDTH * GameData.TILE_SIZE,
@@ -126,6 +123,10 @@ var _sprites: Array[Node] = []
 ## Existing production jobs drive a bounded cached-sprite update. This never
 ## allocates occupant nodes or adds a timer to simulation state.
 var _stations: Array[Sprite2D] = []
+const AMBIENT_MOTION := preload("res://src/ui/ambient_motion.gdshader")
+var _ambient_materials: Array[ShaderMaterial] = []
+var _ambient_time := 0.0
+var ambient_running := true
 var _station_due := 0.0
 
 ## A frame around the cell the player would act on, drawn over the terrain and
@@ -220,7 +221,7 @@ func _ready() -> void:
 	_camera.limit_top = 0
 	_camera.limit_right = WORLD_SIZE.x
 	_camera.limit_bottom = WORLD_SIZE.y
-	_camera.position_smoothing_enabled = false      # pixel art: no half pixels
+	_camera.position_smoothing_enabled = false # Smoothed once in follow_player.
 	_camera.ignore_rotation = true
 	_camera.make_current()
 	_camera.position = Vector2(WORLD_SIZE) * 0.5
@@ -343,6 +344,7 @@ func _process(delta: float) -> void:
 		_refresh_plots()
 
 	_refresh_actors()
+	_refresh_ambient(delta)
 	_refresh_deaths(delta)
 	_enemy_warning.queue_redraw()
 	_refresh_stations(delta)
@@ -795,8 +797,38 @@ func _shake_setting() -> float:
 
 
 func look_at_cell(cell: Vector2i) -> void:
-	_camera.position.x = float(cell.x * GameData.TILE_SIZE + GameData.TILE_SIZE / 2)
-	_camera.position.y = float(WORLD_SIZE.y) * 0.5
+	_camera.position = _camera_bounds((Vector2(cell) + Vector2.ONE * 0.5) * GameData.TILE_SIZE)
+	_camera.force_update_scroll()
+
+
+## Follow subtile motion rather than jumping a whole tile at cell boundaries.
+func follow_player(subtile: Vector2i, delta: float) -> void:
+	var weight := 1.0 - exp(-CAMERA_RESPONSE * maxf(delta, 0.0))
+	var zoom_value := lerpf(_camera.zoom.x, _zoom_target, weight)
+	if absf(zoom_value - _zoom_target) < 0.001:
+		zoom_value = _zoom_target
+	_camera.zoom = Vector2.ONE * zoom_value
+	var target := Vector2(subtile) * (float(GameData.TILE_SIZE) / Player.SUBTILE)
+	_camera.position = _camera_bounds(_camera.position.lerp(_camera_bounds(target), weight))
+	_camera.force_update_scroll()
+
+
+func _camera_bounds(point: Vector2) -> Vector2:
+	var half := get_viewport_rect().size / (_camera.zoom * 2.0)
+	var world := Vector2(WORLD_SIZE)
+	return Vector2(world.x * 0.5 if half.x * 2.0 >= world.x else clampf(point.x, half.x, world.x - half.x),
+		world.y * 0.5 if half.y * 2.0 >= world.y else clampf(point.y, half.y, world.y - half.y))
+
+
+## Wheel and keyboard share these bounded, view-only zoom steps.
+func change_zoom(steps: int) -> void:
+	_zoom_index = clampi(_zoom_index + steps, 0, ZOOM_LEVELS.size() - 1)
+	_zoom_target = float(ZOOM_LEVELS[_zoom_index])
+
+
+func reset_zoom() -> void:
+	_zoom_index = 1
+	_zoom_target = 1.0
 
 
 ## Where a farm cell is on screen, in viewport pixels.
@@ -942,6 +974,7 @@ func _refresh() -> void:
 		sprite.queue_free()
 	_sprites.clear()
 	_stations.clear()
+	_ambient_materials.clear()
 	_find_fixture_corners()
 	if _state.is_empty():
 		return
@@ -981,6 +1014,14 @@ func _refresh() -> void:
 		else:
 			logical_cells.append(idx)
 		sprite.set_meta("logical_cells", logical_cells)
+		if id in [&"tree", &"chicken", &"cow"]:
+			var motion := ShaderMaterial.new()
+			motion.shader = AMBIENT_MOTION
+			motion.set_shader_parameter("species", 0 if id == &"tree" else (1 if id == &"chicken" else 2))
+			motion.set_shader_parameter("phase", float((cell.x * 37 + cell.y * 19) % 101) * 0.13)
+			motion.set_shader_parameter("motion_time", _ambient_time)
+			sprite.material = motion
+			_ambient_materials.append(motion)
 		if id in [&"workshop", &"kitchen", &"press", &"generator"]:
 			sprite.set_meta("station_id", id)
 			sprite.set_meta("station_anchor", anchor)
@@ -1009,10 +1050,16 @@ func _refresh() -> void:
 			_sprites.append(mark)
 
 
-## Everything alive that is not the player.
-##
-## Placeholder blocks until task 0074 draws the zombies. They are in the
-## y-sorted layer, so one walking past a tree goes behind it.
+## World-owned cosmetic time freezes with pause; no clocks enter saved state.
+func _refresh_ambient(delta: float) -> void:
+	if not ambient_running:
+		return
+	_ambient_time += maxf(delta, 0.0)
+	for material in _ambient_materials:
+		material.set_shader_parameter("motion_time", _ambient_time)
+
+
+## Enemy sprites share the y-sorted layer with the player and trees.
 func _refresh_actors() -> void:
 	if _actors == null:
 		return

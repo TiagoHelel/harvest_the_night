@@ -1,0 +1,21 @@
+{
+  "original_grid": [
+    40,
+    18
+  ],
+  "new_grid": [
+    45,
+    20
+  ],
+  "area_increase_percent": 25,
+  "original_720_cells_unchanged": true,
+  "modified_runtime_pngs": [
+    "sprites/actors/idle_south_0.png",
+    "sprites/actors/idle_south_1.png",
+    "sprites/actors/idle_south_2.png"
+  ],
+  "sources": {
+    "assets/art_source/player/idle_south.png": "49de04f2e849b42f984ba145cf54505616ed055a242b6e6363f90d3dfe5ea7b2",
+    "assets/art_source/player/idle_south-eyes-v3.png": "5d529f6f66d47edcec1150eaf876539cf408a1aa49bac7b2b65ce3baeaefc381"
+  }
+}

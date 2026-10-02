@@ -307,13 +307,67 @@ static func _migrate(payload: Dictionary, from_version: int) -> Dictionary:
 ## to fill in new keys - `State.reconcile()` does that for every load - only
 ## the things filling in cannot express.
 ##
-## **Empty, and that is the honest answer.** The state has been version 1 for
-## the whole of this project. The driver under it is not empty, and is
-## checked against a table `headless_check` supplies, because the moment
-## there is a real migration is the worst moment to find out the machinery
-## that runs them was never exercised.
+## Version 2 widens the farm. Cell indices need remapping, while coordinates,
+## inventories, jobs and live entities remain at the same world positions.
 static func migrations() -> Dictionary:
-	return {}
+	return {1: _expand_farm_v1}
+
+
+static func _expanded_index(index: int) -> int:
+	return index if index < 0 else (index / 40) * Grid.WIDTH + index % 40
+
+
+static func _expanded_table(table: Dictionary) -> Dictionary:
+	var result: Dictionary = {}
+	var keys := table.keys()
+	keys.sort()
+	for key in keys:
+		result[_expanded_index(int(key))] = table[key]
+	return result
+
+
+## Extend old saves without moving a building or resurrecting harvested trees.
+static func _expand_farm_v1(previous: Dictionary) -> Dictionary:
+	var state := previous.duplicate(true)
+	var terrain: PackedByteArray = state.get("terrain", PackedByteArray())
+	if terrain.size() == Grid.CELLS:
+		state["version"] = 2
+		return state
+	if terrain.size() != 40 * 18:
+		return {}
+	var farm := Farm.initial()
+	var expanded: PackedByteArray = farm["terrain"]
+	for old_index in terrain.size():
+		expanded[_expanded_index(old_index)] = terrain[old_index]
+	state["terrain"] = expanded
+	for key in ["occupants", "rubble", "plots", "crafting", "livestock", "repair_debt", "produced"]:
+		if state.has(key):
+			state[key] = _expanded_table(state[key])
+	var occupants: Dictionary = state.get("occupants", {})
+	for idx in farm["occupants"]:
+		var cell := Grid.cell(int(idx))
+		if cell.x >= 40 or cell.y >= 18:
+			occupants[idx] = farm["occupants"][idx]
+	state["occupants"] = occupants
+	for entry in state.get("regrowing", []):
+		entry[Gathering.PENDING_CELL] = _expanded_index(int(entry[Gathering.PENDING_CELL]))
+	for entity in state.get("entities", {}).values():
+		for key in ["chewing", "winding_at"]:
+			if entity.has(key):
+				entity[key] = _expanded_index(int(entity[key]))
+	if state.has("power"):
+		var power: Dictionary = state["power"]
+		power["burning"] = _expanded_table(power.get("burning", {}))
+		power["plants"] = []
+		power["for_version"] = -1
+	for key in Pathing.initial():
+		state[key] = Pathing.initial()[key]
+	for key in ["tower", "livestock"]:
+		state[key + "_cells"] = []
+		state[key + "_version"] = -1
+	state["grid_version"] = int(state.get("grid_version", 0)) + 1
+	state["version"] = 2
+	return state
 
 
 ## And the same for the file format.

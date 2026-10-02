@@ -172,6 +172,11 @@ def check_art_showcase():
     return check("art placement", code == 0, verdict)
 
 
+def check_visibility_showcase():
+    code, out = run([sys.executable, "tools/show_art.py", "--visibility", "--check"])
+    return check("camera/zoom/ambient", code == 0, next((s for s in out.splitlines() if s.startswith("VISIBILITY SHOWCASE:")), tail(out, 4)))
+
+
 def check_player_showcase():
     code, out = run([sys.executable, "tools/show_art.py", "--locomotion", "--check"])
     verdict = next((line for line in out.splitlines() if line.startswith("PLAYER SHOWCASE:")), tail(out, 4))
@@ -707,6 +712,7 @@ def main():
     check_player_art()
     check_raster_art()
     check_art_showcase()
+    check_visibility_showcase()
     check_player_showcase()
     check_player_work()
     check_player_reactions()

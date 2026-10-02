@@ -92,8 +92,8 @@ const TERRAIN_COST: Array = [
 ## rather than trusting.
 const WIDEST_STEP := 32
 
-const GRID_WIDTH := 40
-const GRID_HEIGHT := 18
+const GRID_WIDTH := 45
+const GRID_HEIGHT := 20
 const TILE_SIZE := 16
 
 ## What the farmhouse can take before the night is lost.
@@ -1398,8 +1398,8 @@ const ENDLESS: Dictionary = {
 ## to choose where a wall goes disappears with it.
 const SPAWNS: Array = [
 	# 0 - the east edge, down the open right-hand side.
-	[[39, 4], [39, 5], [39, 6], [39, 7], [39, 8], [39, 9],
-	 [39, 10], [39, 11], [39, 12], [39, 13]],
+	[[44, 4], [44, 5], [44, 6], [44, 7], [44, 8], [44, 9],
+	 [44, 10], [44, 11], [44, 12], [44, 13]],
 	# 1 - the south, along the bottom of the open ground.
 	[[26, 14], [28, 14], [30, 14], [32, 14], [34, 14],
 	 [24, 13], [36, 13]],
@@ -1593,7 +1593,8 @@ const DEFEAT_KEEPS_TECH := true
 
 # ====================================================================== the map
 
-## The farm, as one 40x18 picture.
+## The farm, as one 45x20 picture: 900 cells, 25% above the original 720.
+## Existing coordinates stay fixed; new meadow extends east and shore south.
 ##
 ## **The whole world is this map**, by day and by night alike: `design.md`
 ## pillar 1 is that there is one farm and it is everything, and pillar 2 is that
@@ -1612,24 +1613,26 @@ const DEFEAT_KEEPS_TECH := true
 ## `validate()` checks the shape, so a row typed one character short is a red
 ## line rather than a farm that is subtly wrong down one edge.
 const FARM_MAP: Array = [
-	"TTT.TTTT....TTT..TT.....TT....TT..TTT.TT",
-	"....................S######o........T...",
-	"T..ssssss......ppp..S######o...........T",
-	"...ssssss.....pHHHp.S######o...........T",
-	"...ssssss......HHH..S######o....r.......",
-	"T..ssssss......HHH..S######o...........T",
-	"...ssssss.....ppppp.#####ooo............",
-	"T.........w............................T",
-	"..ssssss....WW.p....r.....r............T",
-	"..ssssss....WW.p...$$............T.T...T",
-	"..ssssss.......p...............rTT.TT..T",
-	"T.......c...c..p.................TT.T..T",
-	".....r.....C...p....T.........TT.TT.TT..",
-	"T.........=====p......T.........TT.T...T",
-	"..~~~~~~~~=====.........................",
-	".~~~~~~~~~~~~~~~~~..............TT......",
-	"~~~~~~~~~~~~~~~~~~~~~~~....TT...........",
-	"~~~~~~~~~~~~~~~~~~~~~~~~~~..TTT...TTTTTT",
+	"TTT.TTTT....TTT..TT.....TT....TT..TTT.TTT.TT.",
+	"....................S######o........T.......T",
+	"T..ssssss......ppp..S######o...........T.....",
+	"...ssssss.....pHHHp.S######o...........T.....",
+	"...ssssss......HHH..S######o....r............",
+	"T..ssssss......HHH..S######o...........T.....",
+	"...ssssss.....ppppp.#####ooo.................",
+	"T.........w............................T.....",
+	"..ssssss....WW.p....r.....r............T.....",
+	"..ssssss....WW.p...$$............T.T...T.....",
+	"..ssssss.......p...............rTT.TT..T.....",
+	"T.......c...c..p.................TT.T..T.....",
+	".....r.....C...p....T.........TT.TT.TT.......",
+	"T.........=====p......T.........TT.T...T.....",
+	"..~~~~~~~~=====..............................",
+	".~~~~~~~~~~~~~~~~~..............TT...........",
+	"~~~~~~~~~~~~~~~~~~~~~~~....TT................",
+	"~~~~~~~~~~~~~~~~~~~~~~~~~~..TTT...TTTTTT.....",
+	"~~~~~~~~~~~~~~~~~~~~~~~~~~~..................",
+	"~~~~~~~~~~~~~~~~~~~~~~~~~~~~...TT...TT..TTTTT",
 ]
 
 ## What each character means: the terrain under it, and what is standing on it.

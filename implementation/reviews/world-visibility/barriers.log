@@ -1,0 +1,24 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+BARRIER SHOWCASE: 3275 checks, 3 failed
+ERROR: Map corners never connect to out-of-bounds cells
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://src/tools/barrier_showcase.gd:25)
+       [1] _masks_and_borders (res://src/tools/barrier_showcase.gd:207)
+       [2] _run (res://src/tools/barrier_showcase.gd:95)
+       [3] _settle (res://src/tools/barrier_showcase.gd:159)
+ERROR: Map corners never connect to out-of-bounds cells
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://src/tools/barrier_showcase.gd:25)
+       [1] _masks_and_borders (res://src/tools/barrier_showcase.gd:207)
+       [2] _run (res://src/tools/barrier_showcase.gd:95)
+       [3] _settle (res://src/tools/barrier_showcase.gd:159)
+ERROR: Map corners never connect to out-of-bounds cells
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://src/tools/barrier_showcase.gd:25)
+       [1] _masks_and_borders (res://src/tools/barrier_showcase.gd:207)
+       [2] _run (res://src/tools/barrier_showcase.gd:95)
+       [3] _settle (res://src/tools/barrier_showcase.gd:159)

@@ -1,0 +1,22 @@
+{
+  "id": "farmer-idle-south",
+  "revision": 2,
+  "tool": "built-in ImageGen",
+  "returned_file": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-e8130f2e-78af-4c75-a0c5-d08489256d68.png",
+  "source": "assets/art_source/player/idle_south-eyes-v3.png",
+  "source_sha256": "5d529f6f66d47edcec1150eaf876539cf408a1aa49bac7b2b65ce3baeaefc381",
+  "source_wh": [
+    2033,
+    773
+  ],
+  "tool_arguments": {
+    "prompt": "Use case: precise-object-edit.\nEdit target: first supplied image, the three-frame front-facing farmer idle strip.\nSupporting identity reference: second supplied image, the walking farmer.\nCorrect ONLY the eyes on this idle strip. Preserve identical hat, hair, face silhouette, clothes, hands, pose, boots, size, spacing, baseline, and transparent background. Three separate full-body figures in one row.\nThe game reduces each figure to only 30 pixels tall. Each OPEN eye must survive that reduction as a clear tiny two-tone eye: an ivory white area at least as wide as the brown pupil, with the dark-brown pupil on the inner side. Both eyes the same height, only TWO logical pixels tall, each TWO logical pixels wide, separated by skin. Think a simple readable 2 by 2 pixel eye, one white column plus one brown pupil column, no black outline below. Avoid tall white streaks, completely black eyes, sockets, eyewear, winks, extra eyebrows, highlights too tiny to survive reduction.\nFrame 1: both eyes naturally open, friendly neutral expression.\nFrame 2: both eyes closed simultaneously for a brief blink.\nFrame 3: both eyes naturally open exactly like frame 1; no one-eye wink.\nThe source is enlarged pixel art: make broad crisp pixel blocks that remain legible at thirty pixels tall, no blur. Keep every other part identical.",
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player/idle_south.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player/walk_south.png"
+    ],
+    "transparent_background": true
+  },
+  "reason": "Restore visible ivory eye whites and replace one-eye wink with both eyes reopened. Previous v2 candidate was rejected by user for black eyes.",
+  "native_height": 30
+}

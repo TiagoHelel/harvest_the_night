@@ -275,6 +275,7 @@ func _firing(on: Dictionary) -> bool:
 func _glow_at(at: Vector2, radius: float, colour: Color,
 		strength: float) -> void:
 	var screen := get_viewport().get_canvas_transform() * at
+	radius *= get_viewport().get_canvas_transform().get_scale().x
 	var lit := colour
 	lit.a = strength
 	if _quality == FULL:
