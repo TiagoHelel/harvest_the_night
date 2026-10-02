@@ -25,6 +25,11 @@ func expect(ok: bool, message: String) -> void:
 
 func _run() -> void:
 	await _setup()
+	if OS.get_cmdline_user_args().has("--walk-loop"):
+		await _walk_loop()
+		print("ENEMY WALK LOOP: %d checks, %d failed" % [_checks, _failed])
+		quit(1 if _failed > 0 else 0)
+		return
 	await _identities()
 	await _walks(false)
 	await _walks(true)
@@ -34,6 +39,21 @@ func _run() -> void:
 	await _death_sources()
 	print("ENEMY SHOWCASE: %d checks, %d failed" % [_checks, _failed])
 	quit(1 if _failed > 0 else 0)
+
+
+## Consecutive real core ticks, suitable for a 30 Hz native playback review.
+## Sparse stills can prove pose coverage while missing an unconvincing gait.
+func _walk_loop() -> void:
+	for night in [false, true]:
+		_state = _blank(night)
+		var id := Entities.spawn(_state, &"walker", Vector2i(11, 9))
+		await _settle()
+		for t in 60:
+			_step()
+			await _settle()
+			var one := Entities.get_one(_state, id)
+			expect(str(_world._pose_of(one)).begins_with("walker_walk_"), "Walking retains a walk pose every observed tick")
+			await _shoot("loop_%s_%03d" % ["night" if night else "day", t], "Walker / actual movement / 30 simulation ticks per second")
 
 
 func _setup() -> void:

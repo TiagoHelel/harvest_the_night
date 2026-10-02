@@ -64,6 +64,14 @@ inspect source alpha, silhouettes, animation contact sheets and all family
 states. Use extra showcase scenarios from 0003 where the base captures do not
 cover a required state. Fix failed visual criteria even when verification passes.
 
+For animation changes, also inspect consecutive actual renderer frames at the
+normal 1x simulation cadence and native viewport size, during both day and
+night. Save a playback clip or equivalent timed sequence with its original
+captures. Distinct drawings and sparse pose-coverage stills alone do not prove
+readable motion. Check weight transfer, planted/lifted feet and loop continuity;
+record remaining sliding or ambiguous limb poses rather than approving them
+solely because the frame-count and simulation guards pass.
+
 ## 5. Close, journal and commit
 
 Mark `done` only when every selected task criterion and verification pass.

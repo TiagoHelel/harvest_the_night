@@ -21457,19 +21457,19 @@
     {
       "id": "enemies/walker_walk_0",
       "owner": "raster",
-      "source": "assets/art_source/enemies/walker/walk.png",
-      "source_sha256": "0315ab049760b069c3b7c9c2e02f041e7fb3af1afc69c4506b0893c5cbaa6030",
+      "source": "assets/art_source/enemies/walker/walk-v2.png",
+      "source_sha256": "58a56d3e7189e61fe2e57ec812f6f3fa27a2bc3a95d894673cf16f806ee12c5d",
       "crop_xywh": [
-        87,
-        26,
-        408,
-        668
+        73,
+        121,
+        411,
+        638
       ],
       "sheet_cell_xywh": [
         0,
         0,
-        560,
-        720
+        516,
+        836
       ],
       "gutter_xy": [
         0,
@@ -21483,9 +21483,9 @@
         32,
         44
       ],
-      "content_scale": 0.043219076005961254,
+      "content_scale": 0.04496124031007752,
       "content_anchor_xy": [
-        5,
+        9,
         29
       ],
       "alpha_threshold": 128,
@@ -21495,54 +21495,49 @@
       "seconds": 0.125,
       "loop": true,
       "output": "sprites/enemies/walker_walk_0.png",
-      "prompt": "implementation/sprites/generation/0015-walker-walk.prompt.txt",
-      "prompt_sha256": "91673651a40240ff0278e2914de5e923650ec24fda6d42d1a4d61dcf575c364c",
+      "prompt": "implementation/sprites/generation/walker-walk-fix.prompt.txt",
+      "prompt_sha256": "3a544e9064563c8b33b5da653a04c4fe893d2afe7c8a50e3b72408afc784e62c",
       "references": [
         {
           "path": "assets/art_source/enemies/walker/master.png",
           "sha256": "c9cbd7ae7fb219c00809ecc11e478696567a56287afc488b9eb38352e65fcde1",
-          "role": "As indexed in exact submitted prompt"
-        },
-        {
-          "path": "assets/art_source/masters/walker.png",
-          "sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
-          "role": "As indexed in exact submitted prompt"
+          "role": "Identity reference"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "0015",
-      "revision": 0,
+      "revision": 1,
       "enemy_family": "walker",
       "enemy_motion": "walk",
       "enemy_master_id": "enemies/walker",
       "scale_reference": {
         "role": "tallest standing pose",
-        "raw_height": 671,
+        "raw_height": 645,
         "native_height": 29
       },
-      "ground_measurement": "lowest two native alpha rows",
+      "ground_measurement": "shared strip baseline; fixed centered body anchor",
       "cell_offset_xy": [
         -24,
         -28
       ],
-      "output_sha256": "ecc650b818231414e190297a3ff09f1514194ea78c7b506923c96cd1d2643d81"
+      "output_sha256": "48a68c09e6971c05cc191dcbe1ef56027ed8b31acdc7ef935d34a839ac2af4dc"
     },
     {
       "id": "enemies/walker_walk_1",
       "owner": "raster",
-      "source": "assets/art_source/enemies/walker/walk.png",
-      "source_sha256": "0315ab049760b069c3b7c9c2e02f041e7fb3af1afc69c4506b0893c5cbaa6030",
+      "source": "assets/art_source/enemies/walker/walk-v2.png",
+      "source_sha256": "58a56d3e7189e61fe2e57ec812f6f3fa27a2bc3a95d894673cf16f806ee12c5d",
       "crop_xywh": [
-        625,
-        25,
-        422,
-        670
+        548,
+        114,
+        369,
+        645
       ],
       "sheet_cell_xywh": [
-        560,
+        516,
         0,
-        542,
-        720
+        445,
+        836
       ],
       "gutter_xy": [
         0,
@@ -21556,7 +21551,7 @@
         32,
         44
       ],
-      "content_scale": 0.043219076005961254,
+      "content_scale": 0.04496124031007752,
       "content_anchor_xy": [
         8,
         29
@@ -21568,55 +21563,50 @@
       "seconds": 0.125,
       "loop": true,
       "output": "sprites/enemies/walker_walk_1.png",
-      "prompt": "implementation/sprites/generation/0015-walker-walk.prompt.txt",
-      "prompt_sha256": "91673651a40240ff0278e2914de5e923650ec24fda6d42d1a4d61dcf575c364c",
+      "prompt": "implementation/sprites/generation/walker-walk-fix.prompt.txt",
+      "prompt_sha256": "3a544e9064563c8b33b5da653a04c4fe893d2afe7c8a50e3b72408afc784e62c",
       "references": [
         {
           "path": "assets/art_source/enemies/walker/master.png",
           "sha256": "c9cbd7ae7fb219c00809ecc11e478696567a56287afc488b9eb38352e65fcde1",
-          "role": "As indexed in exact submitted prompt"
-        },
-        {
-          "path": "assets/art_source/masters/walker.png",
-          "sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
-          "role": "As indexed in exact submitted prompt"
+          "role": "Identity reference"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "0015",
-      "revision": 0,
+      "revision": 1,
       "enemy_family": "walker",
       "enemy_motion": "walk",
       "enemy_master_id": "enemies/walker",
       "scale_reference": {
         "role": "tallest standing pose",
-        "raw_height": 671,
+        "raw_height": 645,
         "native_height": 29
       },
-      "ground_measurement": "lowest two native alpha rows",
+      "ground_measurement": "shared strip baseline; fixed centered body anchor",
       "cell_offset_xy": [
         -24,
         -28
       ],
       "variant_of": "enemies/walker_walk_0",
-      "output_sha256": "cb06b713d39eaf4a2ce3531f32238a7bb40baa650da162559191e54ed30a17cf"
+      "output_sha256": "762fc410aec3e49297cc580aac73bd40cf8fdb2ff9a2cb97c549be0274fdf1cf"
     },
     {
       "id": "enemies/walker_walk_2",
       "owner": "raster",
-      "source": "assets/art_source/enemies/walker/walk.png",
-      "source_sha256": "0315ab049760b069c3b7c9c2e02f041e7fb3af1afc69c4506b0893c5cbaa6030",
+      "source": "assets/art_source/enemies/walker/walk-v2.png",
+      "source_sha256": "58a56d3e7189e61fe2e57ec812f6f3fa27a2bc3a95d894673cf16f806ee12c5d",
       "crop_xywh": [
-        1158,
-        24,
-        435,
-        671
+        1005,
+        122,
+        417,
+        630
       ],
       "sheet_cell_xywh": [
-        1102,
+        961,
         0,
-        546,
-        720
+        498,
+        836
       ],
       "gutter_xy": [
         0,
@@ -21630,10 +21620,10 @@
         32,
         44
       ],
-      "content_scale": 0.043219076005961254,
+      "content_scale": 0.04496124031007752,
       "content_anchor_xy": [
-        7,
-        29
+        9,
+        28
       ],
       "alpha_threshold": 128,
       "palette": "tools/palette.py:COLOURS",
@@ -21642,55 +21632,50 @@
       "seconds": 0.125,
       "loop": true,
       "output": "sprites/enemies/walker_walk_2.png",
-      "prompt": "implementation/sprites/generation/0015-walker-walk.prompt.txt",
-      "prompt_sha256": "91673651a40240ff0278e2914de5e923650ec24fda6d42d1a4d61dcf575c364c",
+      "prompt": "implementation/sprites/generation/walker-walk-fix.prompt.txt",
+      "prompt_sha256": "3a544e9064563c8b33b5da653a04c4fe893d2afe7c8a50e3b72408afc784e62c",
       "references": [
         {
           "path": "assets/art_source/enemies/walker/master.png",
           "sha256": "c9cbd7ae7fb219c00809ecc11e478696567a56287afc488b9eb38352e65fcde1",
-          "role": "As indexed in exact submitted prompt"
-        },
-        {
-          "path": "assets/art_source/masters/walker.png",
-          "sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
-          "role": "As indexed in exact submitted prompt"
+          "role": "Identity reference"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "0015",
-      "revision": 0,
+      "revision": 1,
       "enemy_family": "walker",
       "enemy_motion": "walk",
       "enemy_master_id": "enemies/walker",
       "scale_reference": {
         "role": "tallest standing pose",
-        "raw_height": 671,
+        "raw_height": 645,
         "native_height": 29
       },
-      "ground_measurement": "lowest two native alpha rows",
+      "ground_measurement": "shared strip baseline; fixed centered body anchor",
       "cell_offset_xy": [
         -24,
         -28
       ],
       "variant_of": "enemies/walker_walk_0",
-      "output_sha256": "fd1695b7025e85d80be12478d5001521aede8324a2771bf67d1c4cc507e3e117"
+      "output_sha256": "19d719e2b628673507cc9ae056b0cff3b9fe8afbe6ac603d4bf2e8d1f933e529"
     },
     {
       "id": "enemies/walker_walk_3",
       "owner": "raster",
-      "source": "assets/art_source/enemies/walker/walk.png",
-      "source_sha256": "0315ab049760b069c3b7c9c2e02f041e7fb3af1afc69c4506b0893c5cbaa6030",
+      "source": "assets/art_source/enemies/walker/walk-v2.png",
+      "source_sha256": "58a56d3e7189e61fe2e57ec812f6f3fa27a2bc3a95d894673cf16f806ee12c5d",
       "crop_xywh": [
-        1703,
-        24,
-        419,
-        666
+        1496,
+        116,
+        356,
+        644
       ],
       "sheet_cell_xywh": [
-        1648,
+        1459,
         0,
-        536,
-        720
+        421,
+        836
       ],
       "gutter_xy": [
         0,
@@ -21704,9 +21689,9 @@
         32,
         44
       ],
-      "content_scale": 0.043219076005961254,
+      "content_scale": 0.04496124031007752,
       "content_anchor_xy": [
-        9,
+        8,
         29
       ],
       "alpha_threshold": 128,
@@ -21716,38 +21701,33 @@
       "seconds": 0.125,
       "loop": true,
       "output": "sprites/enemies/walker_walk_3.png",
-      "prompt": "implementation/sprites/generation/0015-walker-walk.prompt.txt",
-      "prompt_sha256": "91673651a40240ff0278e2914de5e923650ec24fda6d42d1a4d61dcf575c364c",
+      "prompt": "implementation/sprites/generation/walker-walk-fix.prompt.txt",
+      "prompt_sha256": "3a544e9064563c8b33b5da653a04c4fe893d2afe7c8a50e3b72408afc784e62c",
       "references": [
         {
           "path": "assets/art_source/enemies/walker/master.png",
           "sha256": "c9cbd7ae7fb219c00809ecc11e478696567a56287afc488b9eb38352e65fcde1",
-          "role": "As indexed in exact submitted prompt"
-        },
-        {
-          "path": "assets/art_source/masters/walker.png",
-          "sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
-          "role": "As indexed in exact submitted prompt"
+          "role": "Identity reference"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "0015",
-      "revision": 0,
+      "revision": 1,
       "enemy_family": "walker",
       "enemy_motion": "walk",
       "enemy_master_id": "enemies/walker",
       "scale_reference": {
         "role": "tallest standing pose",
-        "raw_height": 671,
+        "raw_height": 645,
         "native_height": 29
       },
-      "ground_measurement": "lowest two native alpha rows",
+      "ground_measurement": "shared strip baseline; fixed centered body anchor",
       "cell_offset_xy": [
         -24,
         -28
       ],
       "variant_of": "enemies/walker_walk_0",
-      "output_sha256": "b47fbc52582b9f8921fd9ea22985ee983588c5f55afee440b33956544d13143d"
+      "output_sha256": "29e6f72b51849d7ebf051375995b42498b3cec5753809699e2026c36e22bae63"
     },
     {
       "id": "enemies/walker_attack_0",
@@ -22306,7 +22286,7 @@
         -24,
         -28
       ],
-      "output_sha256": "fd1695b7025e85d80be12478d5001521aede8324a2771bf67d1c4cc507e3e117",
+      "output_sha256": "19d719e2b628673507cc9ae056b0cff3b9fe8afbe6ac603d4bf2e8d1f933e529",
       "input": "enemies/walker_walk_2",
       "operation": "copy",
       "alias_of": "enemies/walker_walk_2"

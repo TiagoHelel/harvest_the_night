@@ -1,0 +1,22 @@
+{
+  "id": "walker",
+  "kind": "walk",
+  "revision": 1,
+  "tool": "built-in ImageGen",
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-f3572054-b564-4615-af5a-4089d0e5b83f.png",
+  "source": "assets/art_source/enemies/walker/walk-v2.png",
+  "source_sha256": "58a56d3e7189e61fe2e57ec812f6f3fa27a2bc3a95d894673cf16f806ee12c5d",
+  "source_wh": [
+    1880,
+    836
+  ],
+  "tool_arguments": {
+    "prompt": "Use case: identity-preserve. Asset type: four-frame production pixel-art zombie WALK LOOP, one horizontal transparent strip. The attached image is the identity reference ONLY: preserve the same shaggy brown hair, olive zombie skin, torn muted plum shirt, brown trousers, pale eyes, long dangling arms and hunched thin body. Preserve three-quarter top-down camera facing screen-left toward viewer, neutral upper-left illumination. Make the movement far clearer at a native body height of ONLY 29 pixels: large simple solid color clusters, very little speckled texture, thick readable legs and separated boot silhouettes. Exactly FOUR full-body figures, equally sized, evenly spaced in four cells with generous empty transparent gutters. All figures face the same screen-left direction. This is an actual alternating-leg cycle, NOT four similar idle poses: frame 0 NEAR leg extends strongly forward screen-left, FAR leg back screen-right; frame 1 NEAR leg bears weight under hip, FAR knee lifted and bent forward; frame 2 FAR leg extends strongly forward screen-left, NEAR leg back screen-right; frame 3 FAR leg bears weight under hip, NEAR knee lifted and bent forward. In frames 0 and 2 show a conspicuous wide inverted-V between the legs; in frames 1 and 3 show a clear lifted foot and narrow support stance. Distinguish near and far legs with stable lighter/darker trousers shading so swapping the leading leg is readable. Counter-swing arms noticeably. Torso dips slightly on passing poses and rises on contacts. Keep the head size and identity constant, hips aligned at the same relative cell x coordinate, SAME pixel scale throughout, shared floor baseline, no foot clipping. The loop 0-1-2-3-0 must read as weight transfer and stepping rather than trembling or sliding. Pixel clusters must survive reduction to 29 pixels in height. No outlines made of noisy scattered pixels. True transparent background, no ground line, shadow, scenery, text, labels, panels, weapons, dust, blood or checkerboard.",
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/enemies/walker/master.png"
+    ],
+    "transparent_background": true
+  },
+  "reason": "User reports zombies appear to slide. Target only the common walker's gait; preserve original source, master, attack/death and other families.",
+  "native_height": 29
+}

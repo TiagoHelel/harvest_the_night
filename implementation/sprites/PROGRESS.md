@@ -1384,3 +1384,35 @@ Queue after completion: 20 done, zero todo/doing/blocked. This closes exactly ta
 0020 and completes the longer requested sprite-production goal. Only this task's
 files are staged; unrelated prior capture imports remain excluded. No push,
 publication, unattended driver or automation is started.
+
+## 2026-10-02 — Follow-up: common walker gait
+
+The user reported that zombies did not convincingly look like they were walking.
+Distinct pose drawings and sparse captures had been insufficient to approve
+continuous motion. Replaced only the common walker's four walk frames and exact
+frame-2 compatibility alias with one built-in ImageGen revision. Existing
+masters, original sources, other families, attacks/deaths, project resolution,
+view cadence and core are preserved. The queue remains 20 done.
+
+New source: assets/art_source/enemies/walker/walk-v2.png, SHA-256
+58a56d3e7189e61fe2e57ec812f6f3fa27a2bc3a95d894673cf16f806ee12c5d.
+Exact prompt/call: generation/walker-walk-fix.prompt.txt and
+walker-walk-fix-call.json. Four source-owned poses share scale 29/645 and
+ground pivot (32,44); importer changes exactly five runtime PNGs. Contact
+poses now have a wider stance and passing poses have visibly lifted boots.
+Near/far leg identity remains subtle and night lighting still reduces contrast.
+No new gait approval is claimed for runner/tank/breaker/giant.
+
+New --walk-loop showcase captures 60 consecutive core ticks in daytime and
+nighttime, before and after, 1,572 checks / zero failures per pass. Native GIFs,
+all-tick filmstrips and reproduction scripts are in reviews/walker-walk-fix/;
+actual 480x270 captures are in implementation/shots/sprites/walker-walk-fix/.
+Reviewed native whole-view examples, source comparison and all consecutive
+replacement frames. Updated runner visual gate to require timed native motion
+review, including weight transfer and foot contact.
+
+Full verify.log: 52 passed, zero skipped/failed, 472 seconds, soft 300-second
+budget exceeded, successful exit. Core: 6,646 assertions and 982 input cases;
+Windows/Web/playtest exports pass. Sim 1961000123 and data 407837701 unchanged.
+Only this correction's files are staged. Prior unrelated capture imports remain
+excluded; no push or automation is started.
