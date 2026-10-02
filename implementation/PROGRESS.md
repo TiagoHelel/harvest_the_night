@@ -10320,3 +10320,26 @@ complete input suite passes. Full verify and Windows/Web/playtest exports:
 and 8,481us/path rebuild. Native/Main Portuguese captures are actually opened.
 No new top-level folder, backlog status change, publishing, push or automation.
 Unrelated project serialization and prior untracked imports stay outside the commit.
+
+
+## 2026-10-02 — Follow-up: anchored hearth flame tips
+
+The user found the hearth looked like it was dancing. Replace the periodic
+whole-fire horizontal/vertical warp with small independent variations of tongue
+height. Sampling never moves horizontally; the lower three rows remain anchored.
+No sprites, core rules or furniture positions change. Pause, steady-light
+accessibility and source colors remain intact.
+
+The native renderer check adds a fixed-base assertion and passes 294 checks.
+An optional --fire-loop capture records 24 native 480x270 frames over three
+seconds. Playback comparison finds moving tips in 23 of 24 samples, zero changed
+base pixels and zero changes outside the firebox. Actual captures are opened;
+a shared-palette GIF and reproducible encoder are saved with the evidence in
+implementation/house-polish/fire-fix/. A fresh Main/Portuguese capture is in
+implementation/shots/hearth-fix/. The completed backlog statuses stay unchanged.
+
+Final full verification: 54 passed, zero skipped/failed in 462s (soft 300s target
+exceeded); 7,581 core assertions, 996 input cases and Windows/Web/playtest exports
+pass. Runtime budgets pass (521us/night tick, 6,980us/path rebuild). Sim 1270427719
+and data 8148086 stay unchanged. Evidence/log: implementation/house-polish/fire-fix/.
+No new top-level directory, new art generation, push or automation.

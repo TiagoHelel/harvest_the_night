@@ -5,6 +5,10 @@ shader_type canvas_item;
 uniform float flame_time = 0.0;
 varying vec4 sprite_tint;
 
+float tip_noise(float column, float beat) {
+	return fract(sin(column * 127.1 + beat * 311.7) * 43758.5453);
+}
+
 void vertex() {
 	sprite_tint = COLOR;
 }
@@ -13,10 +17,18 @@ void fragment() {
 	vec2 pixel = UV / TEXTURE_PIXEL_SIZE;
 	vec4 source = texture(TEXTURE, UV);
 	if (pixel.x >= 17.0 && pixel.x < 31.0 && pixel.y >= 43.0 && pixel.y < 53.0) {
-		float sway = sin(flame_time * 6.0 + pixel.y * 0.58) * 1.15;
-		float rise = sin(flame_time * 8.5 + pixel.x * 0.37) * 1.7;
-		vec2 at = clamp(pixel + vec2(sway, rise), vec2(17.5, 43.5), vec2(30.5, 52.5));
-		source = texture(TEXTURE, at * TEXTURE_PIXEL_SIZE);
+		// Grow individual tongues from a fixed hot base. Columns never slide
+		// sideways; independent irregular tips replace the old whole-fire sway.
+		if (pixel.y < 50.0) {
+			float column = floor(pixel.x / 2.0);
+			float beat = flame_time * 4.0 + column * 0.43;
+			float weight = smoothstep(0.0, 1.0, fract(beat));
+			float height = mix(tip_noise(column, floor(beat)),
+				tip_noise(column, floor(beat) + 1.0), weight);
+			float stretch = 0.80 + height * 0.38;
+			float y = 50.0 - (50.0 - pixel.y) / stretch;
+			source = texture(TEXTURE, vec2(pixel.x, clamp(y, 43.5, 49.5)) * TEXTURE_PIXEL_SIZE);
+		}
 	}
 	COLOR = sprite_tint * source;
 }

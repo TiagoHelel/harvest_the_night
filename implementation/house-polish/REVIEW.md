@@ -66,3 +66,28 @@ python tools/verify.py
 
 This user follow-up leaves the completed backlog statuses unchanged. No new
 top-level directory, external publishing, push or scheduled work is needed.
+
+## Follow-up: anchored fire instead of sideways sway
+
+The user found the previous whole-fire distortion looked like dancing. The
+shader now keeps horizontal coordinates and the lower three firebox rows fixed.
+Separate two-pixel tongues vary height by small independent, smoothly blended
+irregular values. The body stays steady while tips grow upward and recede; there
+is no periodic left/right displacement. No new sprites or core changes.
+
+The renderer check additionally verifies zero changed pixels in the fixed hot
+base. Final native inspection passes 294 checks. The `--fire-loop` option exports
+24 real gameplay frames at eight sampled times per second to `fire-fix/`.
+`fire-fix/encode_playback.py` encodes those native captures with one shared GIF
+palette, avoiding preview color flicker. The four-frame enlarged inspection sheet
+is opened; the full room is also captured at native 480x270 with Portuguese UI.
+Pause, steady-light accessibility, masonry/source color preservation, and
+read-only rendering checks still pass. Full verification is recorded separately
+in `fire-fix/verify-pass.log`.
+
+Final follow-up suite: **54 passed, zero skipped/failed**, including 7,581 core
+assertions, 996 input cases and Windows/Web/playtest exports. Sim 1270427719 and
+data 8148086 remain unchanged. Full duration is 462 seconds (over the soft
+300-second suite target); runtime checks pass at 521µs/night tick and
+6,980µs/path rebuild. Playback checks all 24 native frames: 23 changing tip
+samples, zero base drift and zero changes outside the flame.

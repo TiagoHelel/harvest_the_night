@@ -1537,3 +1537,19 @@ and 996 input cases pass. Intentional furniture data 3247244688 → 8148086;
 sim remains 1270427719. Saved indoor positions obstructed by new furniture repair
 to free floor without changing the farm return point. Full logs/native captures
 and review are in implementation/house-polish/. The production queue stays 20 done.
+
+
+## 2026-10-02 — Follow-up: hearth tips without sideways sway
+
+The hearth keeps its existing source sprite. A UI-only shader change removes
+whole-fire oscillation and fixes the lower three rows while individual tips vary
+height independently. Native review passes 294 checks; a 24-frame playback has
+23 changing tip samples with zero base or masonry drift. Evidence, a native GIF
+and the reproducible capture encoder are in implementation/house-polish/fire-fix/.
+Pause and steady-light accessibility remain supported; no sprite regeneration
+or backlog status change is required.
+
+Full verify/export: 54 passed, zero skipped/failed; 7,581 core assertions and 996
+input cases pass. Sim 1270427719 and data 8148086 remain unchanged. Full log is
+implementation/house-polish/fire-fix/verify-pass.log. Native viewport and existing
+source artwork are preserved.

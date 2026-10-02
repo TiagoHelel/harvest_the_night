@@ -1,0 +1,4 @@
+24 native 480x270 samples over 3 seconds.
+Changing tip samples: 23/24 (relative to initial sample).
+Changed base pixels: 0.
+Changed pixels outside firebox: 0.

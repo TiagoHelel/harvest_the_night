@@ -252,11 +252,14 @@ func _check_furniture_art() -> void:
 		var changed := 0
 		var masonry_changed := 0
 		var source_changed := 0
+		var base_changed := 0
 		var original: Image = load("res://sprites/interior/fireplace.png").get_image()
 		for y in 64:
 			for x in 48:
 				if first.get_pixel(240 + x, 54 + y) != second.get_pixel(240 + x, 54 + y):
 					changed += 1
+					if Rect2i(17, 50, 14, 3).has_point(Vector2i(x, y)):
+						base_changed += 1
 					if not Rect2i(17, 43, 14, 10).has_point(Vector2i(x, y)):
 						masonry_changed += 1
 				if original.get_pixel(x, y).a == 1.0 and not Rect2i(17, 43, 14, 10).has_point(Vector2i(x, y)):
@@ -265,6 +268,15 @@ func _check_furniture_art() -> void:
 		expect(changed >= 8, "Fire changes visibly inside the rendered firebox")
 		expect(masonry_changed == 0, "Masonry, plants and grate stay perfectly still")
 		expect(source_changed == 0, "Static hearth pixels keep the exact original source colors")
+		expect(base_changed == 0, "The hot flame base stays anchored while individual tips flicker")
+		if OS.get_cmdline_user_args().has("--fire-loop"):
+			for frame in 24:
+				_house._flame.set_shader_parameter("flame_time", float(frame) / 8.0)
+				await process_frame
+				await RenderingServer.frame_post_draw
+				var picture := root.get_texture().get_image()
+				if picture.save_png(_out + "flame_%02d.png" % frame) != OK:
+					push_error("Cannot save native hearth playback frame")
 	_house.ambient_running = true
 	settings.set_value(&"a11y/flashing", previous)
 	expect(var_to_bytes(_state) == before, "Hearth and lamp never write simulation state")
