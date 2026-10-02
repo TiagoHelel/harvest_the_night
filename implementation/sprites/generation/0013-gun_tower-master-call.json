@@ -1,0 +1,85 @@
+{
+  "id": "gun_tower",
+  "kind": "master",
+  "tool": "built-in ImageGen",
+  "revision": 0,
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-9b7c0289-1121-4781-b11b-bcfb157068b8.png",
+  "source": "assets/art_source/defences/gun_tower/master.png",
+  "source_sha256": "86d51327390ec01329d9f110b2c539e01924dbdd21348d1f6dcfad25cbbbce13",
+  "source_wh": [
+    1024,
+    1536
+  ],
+  "source_alpha_range": [
+    0,
+    254
+  ],
+  "prompt": "implementation/sprites/generation/0013-gun_tower-master.prompt.txt",
+  "prompt_sha256": "b3de539deeadf7b19737b97b023191d2b3d2fbdd8860e845bb6f735418060f06",
+  "references": [
+    "docs/reference-sheet.png",
+    "assets/art_source/buildings/house/whole.png"
+  ],
+  "measured_recipes": [
+    {
+      "id": "buildings/gun_tower",
+      "source": "assets/art_source/defences/gun_tower/master.png",
+      "crop_xywh": [
+        218,
+        369,
+        692,
+        946
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.0306553911205074,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        9,
+        29
+      ]
+    }
+  ],
+  "source_bounds": [
+    [
+      218,
+      369,
+      910,
+      1315
+    ]
+  ],
+  "source_contacts": [
+    [
+      518.0,
+      1315
+    ]
+  ],
+  "decision": "Accepted: source alpha, native/3x identity, construction, source-owned contact and actual Godot states reviewed. Masters are immutable identity references; selected level sheets own the four runtime states.",
+  "reference_hashes": {
+    "docs/reference-sheet.png": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+    "assets/art_source/buildings/house/whole.png": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435"
+  },
+  "tool_arguments": {
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\buildings\\house\\whole.png"
+    ]
+  }
+}

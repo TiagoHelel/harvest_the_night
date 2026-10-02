@@ -1,0 +1,217 @@
+{
+  "id": "gun_tower",
+  "kind": "level-2-r2",
+  "tool": "built-in ImageGen",
+  "revision": 2,
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-7a333262-697b-47fa-9d17-e5f1997db9f3.png",
+  "source": "assets/art_source/defences/gun_tower/level-2-r2.png",
+  "source_sha256": "681e3bf85aa33690b4ec66d26e9cf680144fd4838eb5cd76abe0bafb7836fc70",
+  "source_wh": [
+    1254,
+    1254
+  ],
+  "source_alpha_range": [
+    0,
+    255
+  ],
+  "prompt": "implementation/sprites/generation/0013-gun_tower-level-2-r2.prompt.txt",
+  "prompt_sha256": "f176d8b65bf40b7ee12f0f074faf04486eb5e6b5e99473e0292bae8a747a35be",
+  "references": [
+    "assets/art_source/defences/gun_tower/master.png",
+    "assets/art_source/buildings/house/whole.png"
+  ],
+  "measured_recipes": [
+    {
+      "id": "buildings/gun_tower_2",
+      "source": "assets/art_source/defences/gun_tower/level-2-r2.png",
+      "crop_xywh": [
+        139,
+        110,
+        394,
+        497
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        630,
+        641
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.05263157894736842,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        10,
+        26
+      ]
+    },
+    {
+      "id": "buildings/gun_tower_2_hurt",
+      "source": "assets/art_source/defences/gun_tower/level-2-r2.png",
+      "crop_xywh": [
+        727,
+        105,
+        391,
+        502
+      ],
+      "sheet_cell_xywh": [
+        630,
+        0,
+        624,
+        641
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.05263157894736842,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        10,
+        26
+      ]
+    },
+    {
+      "id": "buildings/gun_tower_2_fire",
+      "source": "assets/art_source/defences/gun_tower/level-2-r2.png",
+      "crop_xywh": [
+        139,
+        676,
+        467,
+        528
+      ],
+      "sheet_cell_xywh": [
+        0,
+        641,
+        657,
+        613
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.05263157894736842,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        10,
+        28
+      ]
+    },
+    {
+      "id": "buildings/gun_tower_2_wreck",
+      "source": "assets/art_source/defences/gun_tower/level-2-r2.png",
+      "crop_xywh": [
+        709,
+        858,
+        458,
+        346
+      ],
+      "sheet_cell_xywh": [
+        657,
+        641,
+        597,
+        613
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.05263157894736842,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        12,
+        18
+      ]
+    }
+  ],
+  "decision": "Accepted: source alpha, native/3x identity, construction, source-owned contact and actual Godot states reviewed. Masters are immutable identity references; selected level sheets own the four runtime states.",
+  "source_bounds": [
+    [
+      139,
+      110,
+      533,
+      607
+    ],
+    [
+      97,
+      105,
+      488,
+      607
+    ],
+    [
+      139,
+      35,
+      606,
+      563
+    ],
+    [
+      52,
+      217,
+      510,
+      563
+    ]
+  ],
+  "source_contacts": [
+    [
+      320.5,
+      607
+    ],
+    [
+      279.0,
+      607
+    ],
+    [
+      321.0,
+      563
+    ],
+    [
+      279.5,
+      563
+    ]
+  ],
+  "reference_hashes": {
+    "assets/art_source/defences/gun_tower/master.png": "86d51327390ec01329d9f110b2c539e01924dbdd21348d1f6dcfad25cbbbce13",
+    "assets/art_source/buildings/house/whole.png": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435"
+  },
+  "tool_arguments": {
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\defences\\gun_tower\\master.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\buildings\\house\\whole.png"
+    ]
+  }
+}

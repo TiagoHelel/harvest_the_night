@@ -213,3 +213,24 @@ and original footprints. Final native/3x capture and source preservation
 evidence is in `implementation/sprites/reviews/0012/`. The runtime holds an
 authored working pose during paid activity; no continuous mechanical loop is
 claimed. Ownership is now 184 raster / 96 ASCII / zero player-sheet, 280 PNGs.
+
+Task 0013 adds four immutable tower identity masters and twelve selected
+2x2 whole/hurt/fire/wreck sheets in `defences/{gun_tower,flame_tower,mortar,auto_crossbow}`.
+Six rejected candidates remain with exact prompts and explicit reasons; all
+22 raw files are byte-identical built-in ImageGen returns. Generation records
+are `implementation/sprites/generation/0013-*`. Measured cuts may share only
+a fully transparent gutter row/column; opaque state pixels never overlap.
+Nearest reduction, one fixed scale per level, alpha threshold 128, the existing
+palette and measured lower-base contacts produce 48 reproducible 32x48 PNGs.
+All levels use pivot (16,44), cell offset (-8,-28), and authored opaque weapon
+outlets. L3 gun has two distinct barrel points. Existing 40 tower PNGs migrate,
+eight levelled wrecks are added, and all 240 unrelated runtime PNGs stay intact.
+
+`tools/check_tower_art.py` validates the complete replacement and exact bytes.
+`tools/show_art.py --towers --check` exercises real placement/upgrades, damage,
+firing, particles, launch observers, 4x simulation batches and rubble lifecycle.
+Actual-render captures and native/3x/source audits are in
+`implementation/sprites/reviews/0013/`. The view remembers destroyed levels
+only during the current session: old saves store rubble family alone, so loaded
+rubble uses the family's L1 wreck without inventing a save field. Ownership
+is now 232 raster / 56 ASCII / zero player-sheet, 288 runtime PNGs.

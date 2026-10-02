@@ -1,0 +1,217 @@
+{
+  "id": "auto_crossbow",
+  "kind": "level-3",
+  "tool": "built-in ImageGen",
+  "revision": 0,
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-9fc61981-86f6-4be6-a977-9118de492648.png",
+  "source": "assets/art_source/defences/auto_crossbow/level-3.png",
+  "source_sha256": "b0cbc3215b5c2038ac131c121f57fc8b395a21c6876b280a9f696e91d7bd4dea",
+  "source_wh": [
+    1254,
+    1254
+  ],
+  "source_alpha_range": [
+    0,
+    255
+  ],
+  "prompt": "implementation/sprites/generation/0013-auto_crossbow-level-3.prompt.txt",
+  "prompt_sha256": "630dd0c8de8c601dbf070b85e3106ca4039ef35e7ff2c78576fd26902ae0d403",
+  "references": [
+    "assets/art_source/defences/auto_crossbow/master.png",
+    "assets/art_source/buildings/house/whole.png"
+  ],
+  "measured_recipes": [
+    {
+      "id": "buildings/auto_crossbow_3",
+      "source": "assets/art_source/defences/auto_crossbow/level-3.png",
+      "crop_xywh": [
+        125,
+        113,
+        492,
+        512
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        681,
+        652
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.048859934853420196,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        9,
+        25
+      ]
+    },
+    {
+      "id": "buildings/auto_crossbow_3_hurt",
+      "source": "assets/art_source/defences/auto_crossbow/level-3.png",
+      "crop_xywh": [
+        744,
+        113,
+        492,
+        515
+      ],
+      "sheet_cell_xywh": [
+        680,
+        0,
+        574,
+        652
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.048859934853420196,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        10,
+        25
+      ]
+    },
+    {
+      "id": "buildings/auto_crossbow_3_fire",
+      "source": "assets/art_source/defences/auto_crossbow/level-3.png",
+      "crop_xywh": [
+        125,
+        675,
+        496,
+        550
+      ],
+      "sheet_cell_xywh": [
+        0,
+        651,
+        677,
+        603
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.048859934853420196,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        9,
+        27
+      ]
+    },
+    {
+      "id": "buildings/auto_crossbow_3_wreck",
+      "source": "assets/art_source/defences/auto_crossbow/level-3.png",
+      "crop_xywh": [
+        732,
+        865,
+        452,
+        358
+      ],
+      "sheet_cell_xywh": [
+        676,
+        651,
+        578,
+        603
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.048859934853420196,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        11,
+        17
+      ]
+    }
+  ],
+  "decision": "Accepted: source alpha, native/3x identity, construction, source-owned contact and actual Godot states reviewed. Masters are immutable identity references; selected level sheets own the four runtime states.",
+  "source_bounds": [
+    [
+      125,
+      113,
+      617,
+      625
+    ],
+    [
+      64,
+      113,
+      556,
+      628
+    ],
+    [
+      125,
+      24,
+      621,
+      574
+    ],
+    [
+      56,
+      214,
+      508,
+      572
+    ]
+  ],
+  "source_contacts": [
+    [
+      313.5,
+      625
+    ],
+    [
+      259.5,
+      628
+    ],
+    [
+      314.0,
+      574
+    ],
+    [
+      287.5,
+      572
+    ]
+  ],
+  "reference_hashes": {
+    "assets/art_source/defences/auto_crossbow/master.png": "998d9e1ffbae6e74c6eb2624dc3c73a0c0acc3177e5e933dc143b308889dec3a",
+    "assets/art_source/buildings/house/whole.png": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435"
+  },
+  "tool_arguments": {
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\defences\\auto_crossbow\\master.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\buildings\\house\\whole.png"
+    ]
+  }
+}

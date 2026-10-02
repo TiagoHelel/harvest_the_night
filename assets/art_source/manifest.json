@@ -10941,6 +10941,3798 @@
         -14
       ],
       "output_sha256": "3b75100a5ebee92069d2e42111d2ab804db51ee1a71750d7dc4c98e5dc453655"
+    },
+    {
+      "id": "buildings/gun_tower",
+      "source": "assets/art_source/defences/gun_tower/level-1-r2.png",
+      "crop_xywh": [
+        70,
+        94,
+        448,
+        592
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        580,
+        693
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.04291845493562232,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        8,
+        25
+      ],
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "frame": 0,
+      "prompt": "implementation/sprites/generation/0013-gun_tower-level-1-r2.prompt.txt",
+      "prompt_sha256": "5e1202a9a28bc574b5e977450bcc54d4c5f013629ac231d440ee1485dca09749",
+      "references": [
+        {
+          "path": "assets/art_source/defences/gun_tower/master.png",
+          "sha256": "86d51327390ec01329d9f110b2c539e01924dbdd21348d1f6dcfad25cbbbce13",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        },
+        {
+          "path": "assets/art_source/buildings/house/whole.png",
+          "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0013",
+      "revision": 2,
+      "source_sha256": "bd5738bdbfde1167ea30d0c06fecdf6693d15bc35e406df3680a1a8e572b0af4",
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "gun_tower",
+      "tower_level": 1,
+      "output": "sprites/buildings/gun_tower.png",
+      "animation": "buildings/gun_tower",
+      "muzzle_xy": [
+        26,
+        20
+      ],
+      "muzzles_xy": [
+        [
+          26,
+          20
+        ]
+      ],
+      "muzzle_region_xywh": [
+        24,
+        18,
+        5,
+        5
+      ],
+      "output_sha256": "8bb08e6ffbf0ed0f209d19035c0e904df8c93266ebf099542d1bbf080c1d6a8d"
+    },
+    {
+      "id": "buildings/gun_tower_hurt",
+      "source": "assets/art_source/defences/gun_tower/level-1-r2.png",
+      "crop_xywh": [
+        642,
+        95,
+        427,
+        591
+      ],
+      "sheet_cell_xywh": [
+        580,
+        0,
+        571,
+        693
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.04291845493562232,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        9,
+        25
+      ],
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "frame": 0,
+      "prompt": "implementation/sprites/generation/0013-gun_tower-level-1-r2.prompt.txt",
+      "prompt_sha256": "5e1202a9a28bc574b5e977450bcc54d4c5f013629ac231d440ee1485dca09749",
+      "references": [
+        {
+          "path": "assets/art_source/defences/gun_tower/master.png",
+          "sha256": "86d51327390ec01329d9f110b2c539e01924dbdd21348d1f6dcfad25cbbbce13",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        },
+        {
+          "path": "assets/art_source/buildings/house/whole.png",
+          "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0013",
+      "revision": 2,
+      "source_sha256": "bd5738bdbfde1167ea30d0c06fecdf6693d15bc35e406df3680a1a8e572b0af4",
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "gun_tower",
+      "tower_level": 1,
+      "output": "sprites/buildings/gun_tower_hurt.png",
+      "animation": "buildings/gun_tower_hurt",
+      "variant_of": "buildings/gun_tower",
+      "muzzle_xy": [
+        24,
+        20
+      ],
+      "muzzles_xy": [
+        [
+          24,
+          20
+        ]
+      ],
+      "muzzle_region_xywh": [
+        22,
+        18,
+        5,
+        5
+      ],
+      "output_sha256": "e808902a460de800d0a8c41f4719cdab046af28bbec9361c2f876dde7c4ac9b0"
+    },
+    {
+      "id": "buildings/gun_tower_fire",
+      "source": "assets/art_source/defences/gun_tower/level-1-r2.png",
+      "crop_xywh": [
+        68,
+        700,
+        546,
+        634
+      ],
+      "sheet_cell_xywh": [
+        0,
+        693,
+        623,
+        674
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.04291845493562232,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        8,
+        27
+      ],
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "frame": 0,
+      "prompt": "implementation/sprites/generation/0013-gun_tower-level-1-r2.prompt.txt",
+      "prompt_sha256": "5e1202a9a28bc574b5e977450bcc54d4c5f013629ac231d440ee1485dca09749",
+      "references": [
+        {
+          "path": "assets/art_source/defences/gun_tower/master.png",
+          "sha256": "86d51327390ec01329d9f110b2c539e01924dbdd21348d1f6dcfad25cbbbce13",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        },
+        {
+          "path": "assets/art_source/buildings/house/whole.png",
+          "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0013",
+      "revision": 2,
+      "source_sha256": "bd5738bdbfde1167ea30d0c06fecdf6693d15bc35e406df3680a1a8e572b0af4",
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "gun_tower",
+      "tower_level": 1,
+      "output": "sprites/buildings/gun_tower_fire.png",
+      "animation": "buildings/gun_tower_fire",
+      "variant_of": "buildings/gun_tower",
+      "muzzle_xy": [
+        26,
+        20
+      ],
+      "muzzles_xy": [
+        [
+          26,
+          20
+        ]
+      ],
+      "muzzle_region_xywh": [
+        24,
+        18,
+        5,
+        5
+      ],
+      "output_sha256": "a17f2510c192f81dbd6828d46b124cf93ad8ba4c2e9477cc734dc18a16c91e0b"
+    },
+    {
+      "id": "buildings/gun_tower_wreck",
+      "source": "assets/art_source/defences/gun_tower/level-1-r2.png",
+      "crop_xywh": [
+        632,
+        960,
+        458,
+        378
+      ],
+      "sheet_cell_xywh": [
+        623,
+        693,
+        528,
+        674
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.04291845493562232,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        10,
+        16
+      ],
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "frame": 0,
+      "prompt": "implementation/sprites/generation/0013-gun_tower-level-1-r2.prompt.txt",
+      "prompt_sha256": "5e1202a9a28bc574b5e977450bcc54d4c5f013629ac231d440ee1485dca09749",
+      "references": [
+        {
+          "path": "assets/art_source/defences/gun_tower/master.png",
+          "sha256": "86d51327390ec01329d9f110b2c539e01924dbdd21348d1f6dcfad25cbbbce13",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        },
+        {
+          "path": "assets/art_source/buildings/house/whole.png",
+          "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0013",
+      "revision": 2,
+      "source_sha256": "bd5738bdbfde1167ea30d0c06fecdf6693d15bc35e406df3680a1a8e572b0af4",
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "gun_tower",
+      "tower_level": 1,
+      "output": "sprites/buildings/gun_tower_wreck.png",
+      "animation": "buildings/gun_tower_wreck",
+      "variant_of": "buildings/gun_tower",
+      "output_sha256": "a7dbe1adb2589a2439c8d396947daa4f71e7702bc293f23c72a9ef3e98a676d9"
+    },
+    {
+      "id": "buildings/gun_tower_2",
+      "source": "assets/art_source/defences/gun_tower/level-2-r2.png",
+      "crop_xywh": [
+        139,
+        110,
+        394,
+        497
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        630,
+        641
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.05263157894736842,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        10,
+        26
+      ],
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "frame": 0,
+      "prompt": "implementation/sprites/generation/0013-gun_tower-level-2-r2.prompt.txt",
+      "prompt_sha256": "f176d8b65bf40b7ee12f0f074faf04486eb5e6b5e99473e0292bae8a747a35be",
+      "references": [
+        {
+          "path": "assets/art_source/defences/gun_tower/master.png",
+          "sha256": "86d51327390ec01329d9f110b2c539e01924dbdd21348d1f6dcfad25cbbbce13",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        },
+        {
+          "path": "assets/art_source/buildings/house/whole.png",
+          "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0013",
+      "revision": 2,
+      "source_sha256": "681e3bf85aa33690b4ec66d26e9cf680144fd4838eb5cd76abe0bafb7836fc70",
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "gun_tower",
+      "tower_level": 2,
+      "output": "sprites/buildings/gun_tower_2.png",
+      "animation": "buildings/gun_tower_2",
+      "muzzle_xy": [
+        26,
+        19
+      ],
+      "muzzles_xy": [
+        [
+          26,
+          19
+        ]
+      ],
+      "muzzle_region_xywh": [
+        24,
+        17,
+        5,
+        5
+      ],
+      "output_sha256": "f133d98f50bffc6f31e26598a9e91b7444d037d2d9cd0940fc2c7cc7ae5c830c"
+    },
+    {
+      "id": "buildings/gun_tower_2_hurt",
+      "source": "assets/art_source/defences/gun_tower/level-2-r2.png",
+      "crop_xywh": [
+        727,
+        105,
+        391,
+        502
+      ],
+      "sheet_cell_xywh": [
+        630,
+        0,
+        624,
+        641
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.05263157894736842,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        10,
+        26
+      ],
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "frame": 0,
+      "prompt": "implementation/sprites/generation/0013-gun_tower-level-2-r2.prompt.txt",
+      "prompt_sha256": "f176d8b65bf40b7ee12f0f074faf04486eb5e6b5e99473e0292bae8a747a35be",
+      "references": [
+        {
+          "path": "assets/art_source/defences/gun_tower/master.png",
+          "sha256": "86d51327390ec01329d9f110b2c539e01924dbdd21348d1f6dcfad25cbbbce13",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        },
+        {
+          "path": "assets/art_source/buildings/house/whole.png",
+          "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0013",
+      "revision": 2,
+      "source_sha256": "681e3bf85aa33690b4ec66d26e9cf680144fd4838eb5cd76abe0bafb7836fc70",
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "gun_tower",
+      "tower_level": 2,
+      "output": "sprites/buildings/gun_tower_2_hurt.png",
+      "animation": "buildings/gun_tower_2_hurt",
+      "variant_of": "buildings/gun_tower_2",
+      "muzzle_xy": [
+        26,
+        19
+      ],
+      "muzzles_xy": [
+        [
+          26,
+          19
+        ]
+      ],
+      "muzzle_region_xywh": [
+        24,
+        17,
+        5,
+        5
+      ],
+      "output_sha256": "43e838ccf34d0d4744f5a44ec1d9c7620ed8d9711b39305669b05a3655d32c81"
+    },
+    {
+      "id": "buildings/gun_tower_2_fire",
+      "source": "assets/art_source/defences/gun_tower/level-2-r2.png",
+      "crop_xywh": [
+        139,
+        676,
+        467,
+        528
+      ],
+      "sheet_cell_xywh": [
+        0,
+        641,
+        657,
+        613
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.05263157894736842,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        10,
+        28
+      ],
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "frame": 0,
+      "prompt": "implementation/sprites/generation/0013-gun_tower-level-2-r2.prompt.txt",
+      "prompt_sha256": "f176d8b65bf40b7ee12f0f074faf04486eb5e6b5e99473e0292bae8a747a35be",
+      "references": [
+        {
+          "path": "assets/art_source/defences/gun_tower/master.png",
+          "sha256": "86d51327390ec01329d9f110b2c539e01924dbdd21348d1f6dcfad25cbbbce13",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        },
+        {
+          "path": "assets/art_source/buildings/house/whole.png",
+          "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0013",
+      "revision": 2,
+      "source_sha256": "681e3bf85aa33690b4ec66d26e9cf680144fd4838eb5cd76abe0bafb7836fc70",
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "gun_tower",
+      "tower_level": 2,
+      "output": "sprites/buildings/gun_tower_2_fire.png",
+      "animation": "buildings/gun_tower_2_fire",
+      "variant_of": "buildings/gun_tower_2",
+      "muzzle_xy": [
+        26,
+        19
+      ],
+      "muzzles_xy": [
+        [
+          26,
+          19
+        ]
+      ],
+      "muzzle_region_xywh": [
+        24,
+        17,
+        5,
+        5
+      ],
+      "output_sha256": "c90da1426474ad661c54edbba5ebb332cb6862b66cb384cd0b3d5befc41691f0"
+    },
+    {
+      "id": "buildings/gun_tower_2_wreck",
+      "source": "assets/art_source/defences/gun_tower/level-2-r2.png",
+      "crop_xywh": [
+        709,
+        858,
+        458,
+        346
+      ],
+      "sheet_cell_xywh": [
+        657,
+        641,
+        597,
+        613
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.05263157894736842,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        12,
+        18
+      ],
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "frame": 0,
+      "prompt": "implementation/sprites/generation/0013-gun_tower-level-2-r2.prompt.txt",
+      "prompt_sha256": "f176d8b65bf40b7ee12f0f074faf04486eb5e6b5e99473e0292bae8a747a35be",
+      "references": [
+        {
+          "path": "assets/art_source/defences/gun_tower/master.png",
+          "sha256": "86d51327390ec01329d9f110b2c539e01924dbdd21348d1f6dcfad25cbbbce13",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        },
+        {
+          "path": "assets/art_source/buildings/house/whole.png",
+          "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0013",
+      "revision": 2,
+      "source_sha256": "681e3bf85aa33690b4ec66d26e9cf680144fd4838eb5cd76abe0bafb7836fc70",
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "gun_tower",
+      "tower_level": 2,
+      "output": "sprites/buildings/gun_tower_2_wreck.png",
+      "animation": "buildings/gun_tower_2_wreck",
+      "variant_of": "buildings/gun_tower_2",
+      "output_sha256": "fc3db332751093305ee36486d837b3d03e3c8ac4d89a70b0b2307363fbfc2199"
+    },
+    {
+      "id": "buildings/gun_tower_3",
+      "source": "assets/art_source/defences/gun_tower/level-3.png",
+      "crop_xywh": [
+        97,
+        86,
+        466,
+        559
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        623,
+        667
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.05067567567567568,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        11,
+        28
+      ],
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "frame": 0,
+      "prompt": "implementation/sprites/generation/0013-gun_tower-level-3.prompt.txt",
+      "prompt_sha256": "050b62821d6471bd070d48f41a00fb6b2b7650ad05a3153e4df69c7c7ef65fcb",
+      "references": [
+        {
+          "path": "assets/art_source/defences/gun_tower/master.png",
+          "sha256": "86d51327390ec01329d9f110b2c539e01924dbdd21348d1f6dcfad25cbbbce13",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        },
+        {
+          "path": "assets/art_source/buildings/house/whole.png",
+          "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0013",
+      "revision": 0,
+      "source_sha256": "8ae73e8523abdf59976d032ff71b8a4e89fc6f2e05df382e669cee028b0cb954",
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "gun_tower",
+      "tower_level": 3,
+      "output": "sprites/buildings/gun_tower_3.png",
+      "animation": "buildings/gun_tower_3",
+      "muzzle_xy": [
+        27,
+        19
+      ],
+      "muzzles_xy": [
+        [
+          27,
+          19
+        ],
+        [
+          27,
+          21
+        ]
+      ],
+      "muzzle_region_xywh": [
+        25,
+        17,
+        5,
+        5
+      ],
+      "output_sha256": "558fd793e557e930ec8558f9cf7d40bd0ca25b3984cc1dee5c8ab5da4dcae177"
+    },
+    {
+      "id": "buildings/gun_tower_3_hurt",
+      "source": "assets/art_source/defences/gun_tower/level-3.png",
+      "crop_xywh": [
+        684,
+        86,
+        467,
+        559
+      ],
+      "sheet_cell_xywh": [
+        623,
+        0,
+        631,
+        667
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.05067567567567568,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        11,
+        28
+      ],
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "frame": 0,
+      "prompt": "implementation/sprites/generation/0013-gun_tower-level-3.prompt.txt",
+      "prompt_sha256": "050b62821d6471bd070d48f41a00fb6b2b7650ad05a3153e4df69c7c7ef65fcb",
+      "references": [
+        {
+          "path": "assets/art_source/defences/gun_tower/master.png",
+          "sha256": "86d51327390ec01329d9f110b2c539e01924dbdd21348d1f6dcfad25cbbbce13",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        },
+        {
+          "path": "assets/art_source/buildings/house/whole.png",
+          "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0013",
+      "revision": 0,
+      "source_sha256": "8ae73e8523abdf59976d032ff71b8a4e89fc6f2e05df382e669cee028b0cb954",
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "gun_tower",
+      "tower_level": 3,
+      "output": "sprites/buildings/gun_tower_3_hurt.png",
+      "animation": "buildings/gun_tower_3_hurt",
+      "variant_of": "buildings/gun_tower_3",
+      "muzzle_xy": [
+        27,
+        19
+      ],
+      "muzzles_xy": [
+        [
+          27,
+          19
+        ],
+        [
+          27,
+          21
+        ]
+      ],
+      "muzzle_region_xywh": [
+        25,
+        17,
+        5,
+        5
+      ],
+      "output_sha256": "5b2fc9da334c59007b5d7825fcafc5a76581ab7393b3dce17c227037a6b00f6f"
+    },
+    {
+      "id": "buildings/gun_tower_3_fire",
+      "source": "assets/art_source/defences/gun_tower/level-3.png",
+      "crop_xywh": [
+        97,
+        689,
+        512,
+        545
+      ],
+      "sheet_cell_xywh": [
+        0,
+        667,
+        646,
+        587
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.05067567567567568,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        11,
+        28
+      ],
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "frame": 0,
+      "prompt": "implementation/sprites/generation/0013-gun_tower-level-3.prompt.txt",
+      "prompt_sha256": "050b62821d6471bd070d48f41a00fb6b2b7650ad05a3153e4df69c7c7ef65fcb",
+      "references": [
+        {
+          "path": "assets/art_source/defences/gun_tower/master.png",
+          "sha256": "86d51327390ec01329d9f110b2c539e01924dbdd21348d1f6dcfad25cbbbce13",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        },
+        {
+          "path": "assets/art_source/buildings/house/whole.png",
+          "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0013",
+      "revision": 0,
+      "source_sha256": "8ae73e8523abdf59976d032ff71b8a4e89fc6f2e05df382e669cee028b0cb954",
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "gun_tower",
+      "tower_level": 3,
+      "output": "sprites/buildings/gun_tower_3_fire.png",
+      "animation": "buildings/gun_tower_3_fire",
+      "variant_of": "buildings/gun_tower_3",
+      "muzzle_xy": [
+        26,
+        18
+      ],
+      "muzzles_xy": [
+        [
+          26,
+          18
+        ],
+        [
+          26,
+          21
+        ]
+      ],
+      "muzzle_region_xywh": [
+        24,
+        16,
+        5,
+        5
+      ],
+      "output_sha256": "a2fa985e062c75f458ee4ee1a0b1f0d142876d4ba4cb552a5b2907c17f881e85"
+    },
+    {
+      "id": "buildings/gun_tower_3_wreck",
+      "source": "assets/art_source/defences/gun_tower/level-3.png",
+      "crop_xywh": [
+        684,
+        883,
+        516,
+        342
+      ],
+      "sheet_cell_xywh": [
+        646,
+        667,
+        608,
+        587
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.05067567567567568,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        12,
+        17
+      ],
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "frame": 0,
+      "prompt": "implementation/sprites/generation/0013-gun_tower-level-3.prompt.txt",
+      "prompt_sha256": "050b62821d6471bd070d48f41a00fb6b2b7650ad05a3153e4df69c7c7ef65fcb",
+      "references": [
+        {
+          "path": "assets/art_source/defences/gun_tower/master.png",
+          "sha256": "86d51327390ec01329d9f110b2c539e01924dbdd21348d1f6dcfad25cbbbce13",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        },
+        {
+          "path": "assets/art_source/buildings/house/whole.png",
+          "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0013",
+      "revision": 0,
+      "source_sha256": "8ae73e8523abdf59976d032ff71b8a4e89fc6f2e05df382e669cee028b0cb954",
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "gun_tower",
+      "tower_level": 3,
+      "output": "sprites/buildings/gun_tower_3_wreck.png",
+      "animation": "buildings/gun_tower_3_wreck",
+      "variant_of": "buildings/gun_tower_3",
+      "output_sha256": "8a515438349c3d5b788853722c1a719c7cd000836fab1d34aaca900d64df63ac"
+    },
+    {
+      "id": "buildings/flame_tower",
+      "source": "assets/art_source/defences/flame_tower/level-1-r1.png",
+      "crop_xywh": [
+        57,
+        225,
+        417,
+        506
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        507,
+        819
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.04940711462450593,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        9,
+        25
+      ],
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "frame": 0,
+      "prompt": "implementation/sprites/generation/0013-flame_tower-level-1-r1.prompt.txt",
+      "prompt_sha256": "1222f6236f5e0efbd69f29214f414cdb9d11716624899b3568f67b5dd3313d57",
+      "references": [
+        {
+          "path": "assets/art_source/defences/flame_tower/master.png",
+          "sha256": "ea5c3c83392acf99ab5f24704372ce201c504d9315e3120aa1f17225579bda35",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        },
+        {
+          "path": "assets/art_source/buildings/house/whole.png",
+          "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0013",
+      "revision": 1,
+      "source_sha256": "5245bfbaa2000537d01e27ac892140d99903876bd805aa20a1399c352be064d3",
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "flame_tower",
+      "tower_level": 1,
+      "output": "sprites/buildings/flame_tower.png",
+      "animation": "buildings/flame_tower",
+      "muzzle_xy": [
+        26,
+        21
+      ],
+      "muzzles_xy": [
+        [
+          26,
+          21
+        ]
+      ],
+      "muzzle_region_xywh": [
+        24,
+        19,
+        5,
+        5
+      ],
+      "output_sha256": "47ae4a5ac86fbd32ba922f11c930c5f73d850a40bb65e9e57e4e38d5ffc2b933"
+    },
+    {
+      "id": "buildings/flame_tower_hurt",
+      "source": "assets/art_source/defences/flame_tower/level-1-r1.png",
+      "crop_xywh": [
+        541,
+        225,
+        417,
+        512
+      ],
+      "sheet_cell_xywh": [
+        507,
+        0,
+        517,
+        819
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.04940711462450593,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        10,
+        25
+      ],
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "frame": 0,
+      "prompt": "implementation/sprites/generation/0013-flame_tower-level-1-r1.prompt.txt",
+      "prompt_sha256": "1222f6236f5e0efbd69f29214f414cdb9d11716624899b3568f67b5dd3313d57",
+      "references": [
+        {
+          "path": "assets/art_source/defences/flame_tower/master.png",
+          "sha256": "ea5c3c83392acf99ab5f24704372ce201c504d9315e3120aa1f17225579bda35",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        },
+        {
+          "path": "assets/art_source/buildings/house/whole.png",
+          "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0013",
+      "revision": 1,
+      "source_sha256": "5245bfbaa2000537d01e27ac892140d99903876bd805aa20a1399c352be064d3",
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "flame_tower",
+      "tower_level": 1,
+      "output": "sprites/buildings/flame_tower_hurt.png",
+      "animation": "buildings/flame_tower_hurt",
+      "variant_of": "buildings/flame_tower",
+      "muzzle_xy": [
+        26,
+        21
+      ],
+      "muzzles_xy": [
+        [
+          26,
+          21
+        ]
+      ],
+      "muzzle_region_xywh": [
+        24,
+        19,
+        5,
+        5
+      ],
+      "output_sha256": "88574026480394052895cc1bb1a44c93ffc02dfe61333091c0ff038b42d8af6d"
+    },
+    {
+      "id": "buildings/flame_tower_fire",
+      "source": "assets/art_source/defences/flame_tower/level-1-r1.png",
+      "crop_xywh": [
+        57,
+        901,
+        465,
+        503
+      ],
+      "sheet_cell_xywh": [
+        0,
+        819,
+        531,
+        717
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.04940711462450593,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        9,
+        25
+      ],
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "frame": 0,
+      "prompt": "implementation/sprites/generation/0013-flame_tower-level-1-r1.prompt.txt",
+      "prompt_sha256": "1222f6236f5e0efbd69f29214f414cdb9d11716624899b3568f67b5dd3313d57",
+      "references": [
+        {
+          "path": "assets/art_source/defences/flame_tower/master.png",
+          "sha256": "ea5c3c83392acf99ab5f24704372ce201c504d9315e3120aa1f17225579bda35",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        },
+        {
+          "path": "assets/art_source/buildings/house/whole.png",
+          "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0013",
+      "revision": 1,
+      "source_sha256": "5245bfbaa2000537d01e27ac892140d99903876bd805aa20a1399c352be064d3",
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "flame_tower",
+      "tower_level": 1,
+      "output": "sprites/buildings/flame_tower_fire.png",
+      "animation": "buildings/flame_tower_fire",
+      "variant_of": "buildings/flame_tower",
+      "muzzle_xy": [
+        26,
+        21
+      ],
+      "muzzles_xy": [
+        [
+          26,
+          21
+        ]
+      ],
+      "muzzle_region_xywh": [
+        24,
+        19,
+        5,
+        5
+      ],
+      "output_sha256": "79edbf092f8d717c4b2afbbe3e6bc7f02f4a6d09f23ec5e488f0a7b7c2d06d76"
+    },
+    {
+      "id": "buildings/flame_tower_wreck",
+      "source": "assets/art_source/defences/flame_tower/level-1-r1.png",
+      "crop_xywh": [
+        541,
+        1054,
+        429,
+        310
+      ],
+      "sheet_cell_xywh": [
+        531,
+        819,
+        493,
+        717
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.04940711462450593,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        11,
+        15
+      ],
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "frame": 0,
+      "prompt": "implementation/sprites/generation/0013-flame_tower-level-1-r1.prompt.txt",
+      "prompt_sha256": "1222f6236f5e0efbd69f29214f414cdb9d11716624899b3568f67b5dd3313d57",
+      "references": [
+        {
+          "path": "assets/art_source/defences/flame_tower/master.png",
+          "sha256": "ea5c3c83392acf99ab5f24704372ce201c504d9315e3120aa1f17225579bda35",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        },
+        {
+          "path": "assets/art_source/buildings/house/whole.png",
+          "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0013",
+      "revision": 1,
+      "source_sha256": "5245bfbaa2000537d01e27ac892140d99903876bd805aa20a1399c352be064d3",
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "flame_tower",
+      "tower_level": 1,
+      "output": "sprites/buildings/flame_tower_wreck.png",
+      "animation": "buildings/flame_tower_wreck",
+      "variant_of": "buildings/flame_tower",
+      "output_sha256": "3569b3b7b2a7fddd4769a25bb6de8cfb68d061706826f7c1024d2ae23d3d28d8"
+    },
+    {
+      "id": "buildings/flame_tower_2",
+      "source": "assets/art_source/defences/flame_tower/level-2.png",
+      "crop_xywh": [
+        95,
+        117,
+        456,
+        507
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        629,
+        644
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.048859934853420196,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        11,
+        25
+      ],
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "frame": 0,
+      "prompt": "implementation/sprites/generation/0013-flame_tower-level-2.prompt.txt",
+      "prompt_sha256": "bf81619f7e1c57994bc61adc9164736c94c64fff6960015f486655e4ea080ea3",
+      "references": [
+        {
+          "path": "assets/art_source/defences/flame_tower/master.png",
+          "sha256": "ea5c3c83392acf99ab5f24704372ce201c504d9315e3120aa1f17225579bda35",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        },
+        {
+          "path": "assets/art_source/buildings/house/whole.png",
+          "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0013",
+      "revision": 0,
+      "source_sha256": "89fff997347eb02a6c5efabf850b481ee7bcec939c1eaf2ec488ed39836f5af6",
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "flame_tower",
+      "tower_level": 2,
+      "output": "sprites/buildings/flame_tower_2.png",
+      "animation": "buildings/flame_tower_2",
+      "muzzle_xy": [
+        25,
+        22
+      ],
+      "muzzles_xy": [
+        [
+          25,
+          22
+        ]
+      ],
+      "muzzle_region_xywh": [
+        23,
+        20,
+        5,
+        5
+      ],
+      "output_sha256": "4f5a583f0dcc03b74eef95d80e530dcf4d3176e6c2be0fb90a83dd0a1681aed4"
+    },
+    {
+      "id": "buildings/flame_tower_2_hurt",
+      "source": "assets/art_source/defences/flame_tower/level-2.png",
+      "crop_xywh": [
+        708,
+        134,
+        429,
+        490
+      ],
+      "sheet_cell_xywh": [
+        629,
+        0,
+        625,
+        644
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.048859934853420196,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        10,
+        24
+      ],
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "frame": 0,
+      "prompt": "implementation/sprites/generation/0013-flame_tower-level-2.prompt.txt",
+      "prompt_sha256": "bf81619f7e1c57994bc61adc9164736c94c64fff6960015f486655e4ea080ea3",
+      "references": [
+        {
+          "path": "assets/art_source/defences/flame_tower/master.png",
+          "sha256": "ea5c3c83392acf99ab5f24704372ce201c504d9315e3120aa1f17225579bda35",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        },
+        {
+          "path": "assets/art_source/buildings/house/whole.png",
+          "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0013",
+      "revision": 0,
+      "source_sha256": "89fff997347eb02a6c5efabf850b481ee7bcec939c1eaf2ec488ed39836f5af6",
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "flame_tower",
+      "tower_level": 2,
+      "output": "sprites/buildings/flame_tower_2_hurt.png",
+      "animation": "buildings/flame_tower_2_hurt",
+      "variant_of": "buildings/flame_tower_2",
+      "muzzle_xy": [
+        25,
+        22
+      ],
+      "muzzles_xy": [
+        [
+          25,
+          22
+        ]
+      ],
+      "muzzle_region_xywh": [
+        23,
+        20,
+        5,
+        5
+      ],
+      "output_sha256": "f1f540925f8ae22f7e1e6a26e77f5880b3e5dc3021efa5df38905d1d9d7418cf"
+    },
+    {
+      "id": "buildings/flame_tower_2_fire",
+      "source": "assets/art_source/defences/flame_tower/level-2.png",
+      "crop_xywh": [
+        95,
+        665,
+        522,
+        528
+      ],
+      "sheet_cell_xywh": [
+        0,
+        644,
+        660,
+        610
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.048859934853420196,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        11,
+        26
+      ],
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "frame": 0,
+      "prompt": "implementation/sprites/generation/0013-flame_tower-level-2.prompt.txt",
+      "prompt_sha256": "bf81619f7e1c57994bc61adc9164736c94c64fff6960015f486655e4ea080ea3",
+      "references": [
+        {
+          "path": "assets/art_source/defences/flame_tower/master.png",
+          "sha256": "ea5c3c83392acf99ab5f24704372ce201c504d9315e3120aa1f17225579bda35",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        },
+        {
+          "path": "assets/art_source/buildings/house/whole.png",
+          "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0013",
+      "revision": 0,
+      "source_sha256": "89fff997347eb02a6c5efabf850b481ee7bcec939c1eaf2ec488ed39836f5af6",
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "flame_tower",
+      "tower_level": 2,
+      "output": "sprites/buildings/flame_tower_2_fire.png",
+      "animation": "buildings/flame_tower_2_fire",
+      "variant_of": "buildings/flame_tower_2",
+      "muzzle_xy": [
+        26,
+        21
+      ],
+      "muzzles_xy": [
+        [
+          26,
+          21
+        ]
+      ],
+      "muzzle_region_xywh": [
+        24,
+        19,
+        5,
+        5
+      ],
+      "output_sha256": "3aa7eff0b2553fe9aad785b85f903100bd330e364720bc88680d0820ce95cba7"
+    },
+    {
+      "id": "buildings/flame_tower_2_wreck",
+      "source": "assets/art_source/defences/flame_tower/level-2.png",
+      "crop_xywh": [
+        704,
+        834,
+        472,
+        339
+      ],
+      "sheet_cell_xywh": [
+        660,
+        644,
+        594,
+        610
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.048859934853420196,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        11,
+        17
+      ],
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "frame": 0,
+      "prompt": "implementation/sprites/generation/0013-flame_tower-level-2.prompt.txt",
+      "prompt_sha256": "bf81619f7e1c57994bc61adc9164736c94c64fff6960015f486655e4ea080ea3",
+      "references": [
+        {
+          "path": "assets/art_source/defences/flame_tower/master.png",
+          "sha256": "ea5c3c83392acf99ab5f24704372ce201c504d9315e3120aa1f17225579bda35",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        },
+        {
+          "path": "assets/art_source/buildings/house/whole.png",
+          "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0013",
+      "revision": 0,
+      "source_sha256": "89fff997347eb02a6c5efabf850b481ee7bcec939c1eaf2ec488ed39836f5af6",
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "flame_tower",
+      "tower_level": 2,
+      "output": "sprites/buildings/flame_tower_2_wreck.png",
+      "animation": "buildings/flame_tower_2_wreck",
+      "variant_of": "buildings/flame_tower_2",
+      "output_sha256": "d2650de7a9abf6dcab5604c9baa75e06795268d2c494a021b333cf8b5046a27a"
+    },
+    {
+      "id": "buildings/flame_tower_3",
+      "source": "assets/art_source/defences/flame_tower/level-3.png",
+      "crop_xywh": [
+        81,
+        100,
+        507,
+        527
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        630,
+        664
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.04120879120879121,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        9,
+        22
+      ],
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "frame": 0,
+      "prompt": "implementation/sprites/generation/0013-flame_tower-level-3.prompt.txt",
+      "prompt_sha256": "51ad8d8ad014e7971985d919f53afb9d11dfae6a5f956dd719ab9fbe8535c0ed",
+      "references": [
+        {
+          "path": "assets/art_source/defences/flame_tower/master.png",
+          "sha256": "ea5c3c83392acf99ab5f24704372ce201c504d9315e3120aa1f17225579bda35",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        },
+        {
+          "path": "assets/art_source/buildings/house/whole.png",
+          "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0013",
+      "revision": 0,
+      "source_sha256": "55be9f319c37fd5c0c438d366cec11704b1fbd5fb7f4d260856d7c50250f95d8",
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "flame_tower",
+      "tower_level": 3,
+      "output": "sprites/buildings/flame_tower_3.png",
+      "animation": "buildings/flame_tower_3",
+      "muzzle_xy": [
+        25,
+        25
+      ],
+      "muzzles_xy": [
+        [
+          25,
+          25
+        ]
+      ],
+      "muzzle_region_xywh": [
+        23,
+        23,
+        5,
+        5
+      ],
+      "output_sha256": "1efe42559a37aa5df1ecc92ed4d2e7e81c69d043d0ed42e552acddaea254be94"
+    },
+    {
+      "id": "buildings/flame_tower_3_hurt",
+      "source": "assets/art_source/defences/flame_tower/level-3.png",
+      "crop_xywh": [
+        671,
+        112,
+        482,
+        515
+      ],
+      "sheet_cell_xywh": [
+        629,
+        0,
+        625,
+        664
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.04120879120879121,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        9,
+        21
+      ],
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "frame": 0,
+      "prompt": "implementation/sprites/generation/0013-flame_tower-level-3.prompt.txt",
+      "prompt_sha256": "51ad8d8ad014e7971985d919f53afb9d11dfae6a5f956dd719ab9fbe8535c0ed",
+      "references": [
+        {
+          "path": "assets/art_source/defences/flame_tower/master.png",
+          "sha256": "ea5c3c83392acf99ab5f24704372ce201c504d9315e3120aa1f17225579bda35",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        },
+        {
+          "path": "assets/art_source/buildings/house/whole.png",
+          "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0013",
+      "revision": 0,
+      "source_sha256": "55be9f319c37fd5c0c438d366cec11704b1fbd5fb7f4d260856d7c50250f95d8",
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "flame_tower",
+      "tower_level": 3,
+      "output": "sprites/buildings/flame_tower_3_hurt.png",
+      "animation": "buildings/flame_tower_3_hurt",
+      "variant_of": "buildings/flame_tower_3",
+      "muzzle_xy": [
+        25,
+        25
+      ],
+      "muzzles_xy": [
+        [
+          25,
+          25
+        ]
+      ],
+      "muzzle_region_xywh": [
+        23,
+        23,
+        5,
+        5
+      ],
+      "output_sha256": "be4c3e85ee025e901f15d37264c80c695cd7c0b2e8d8a4f060d37d5ab4bd14a5"
+    },
+    {
+      "id": "buildings/flame_tower_3_fire",
+      "source": "assets/art_source/defences/flame_tower/level-3.png",
+      "crop_xywh": [
+        83,
+        700,
+        587,
+        511
+      ],
+      "sheet_cell_xywh": [
+        0,
+        663,
+        671,
+        591
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.04120879120879121,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        9,
+        21
+      ],
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "frame": 0,
+      "prompt": "implementation/sprites/generation/0013-flame_tower-level-3.prompt.txt",
+      "prompt_sha256": "51ad8d8ad014e7971985d919f53afb9d11dfae6a5f956dd719ab9fbe8535c0ed",
+      "references": [
+        {
+          "path": "assets/art_source/defences/flame_tower/master.png",
+          "sha256": "ea5c3c83392acf99ab5f24704372ce201c504d9315e3120aa1f17225579bda35",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        },
+        {
+          "path": "assets/art_source/buildings/house/whole.png",
+          "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0013",
+      "revision": 0,
+      "source_sha256": "55be9f319c37fd5c0c438d366cec11704b1fbd5fb7f4d260856d7c50250f95d8",
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "flame_tower",
+      "tower_level": 3,
+      "output": "sprites/buildings/flame_tower_3_fire.png",
+      "animation": "buildings/flame_tower_3_fire",
+      "variant_of": "buildings/flame_tower_3",
+      "muzzle_xy": [
+        25,
+        25
+      ],
+      "muzzles_xy": [
+        [
+          25,
+          25
+        ]
+      ],
+      "muzzle_region_xywh": [
+        23,
+        23,
+        5,
+        5
+      ],
+      "output_sha256": "d379d6abf677689dfc7a179d25beea1e3300f4b6b033af5535e724d870a199d4"
+    },
+    {
+      "id": "buildings/flame_tower_3_wreck",
+      "source": "assets/art_source/defences/flame_tower/level-3.png",
+      "crop_xywh": [
+        671,
+        883,
+        503,
+        323
+      ],
+      "sheet_cell_xywh": [
+        670,
+        663,
+        584,
+        591
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.04120879120879121,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        10,
+        13
+      ],
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "frame": 0,
+      "prompt": "implementation/sprites/generation/0013-flame_tower-level-3.prompt.txt",
+      "prompt_sha256": "51ad8d8ad014e7971985d919f53afb9d11dfae6a5f956dd719ab9fbe8535c0ed",
+      "references": [
+        {
+          "path": "assets/art_source/defences/flame_tower/master.png",
+          "sha256": "ea5c3c83392acf99ab5f24704372ce201c504d9315e3120aa1f17225579bda35",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        },
+        {
+          "path": "assets/art_source/buildings/house/whole.png",
+          "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0013",
+      "revision": 0,
+      "source_sha256": "55be9f319c37fd5c0c438d366cec11704b1fbd5fb7f4d260856d7c50250f95d8",
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "flame_tower",
+      "tower_level": 3,
+      "output": "sprites/buildings/flame_tower_3_wreck.png",
+      "animation": "buildings/flame_tower_3_wreck",
+      "variant_of": "buildings/flame_tower_3",
+      "output_sha256": "8a9ba919ad36f7e248bfc01fca363899b17a4a3584b844ab2119d8e12e045886"
+    },
+    {
+      "id": "buildings/mortar",
+      "source": "assets/art_source/defences/mortar/level-1.png",
+      "crop_xywh": [
+        112,
+        189,
+        459,
+        442
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        618,
+        661
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.04524886877828054,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        10,
+        20
+      ],
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "frame": 0,
+      "prompt": "implementation/sprites/generation/0013-mortar-level-1.prompt.txt",
+      "prompt_sha256": "6577bb8ead5d8a635fca9740db808dd7ba0279b46a12f1486e31c78cee7c844b",
+      "references": [
+        {
+          "path": "assets/art_source/defences/mortar/master.png",
+          "sha256": "0cd5056e0f44dc9d5ad02902a8e158cca0478452a136c0d0b5a57cfb55dca74f",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        },
+        {
+          "path": "assets/art_source/buildings/house/whole.png",
+          "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0013",
+      "revision": 0,
+      "source_sha256": "9870fd4f33840cf5064e807756d0aaf1321ddf30a151b80803c902891ba5fdf0",
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "mortar",
+      "tower_level": 1,
+      "output": "sprites/buildings/mortar.png",
+      "animation": "buildings/mortar",
+      "muzzle_xy": [
+        21,
+        27
+      ],
+      "muzzles_xy": [
+        [
+          21,
+          27
+        ]
+      ],
+      "muzzle_region_xywh": [
+        19,
+        25,
+        5,
+        5
+      ],
+      "output_sha256": "be87c0ec7487b14ade3c06ca9be29946030c87f00040bb42b912b16860d4ea18"
+    },
+    {
+      "id": "buildings/mortar_hurt",
+      "source": "assets/art_source/defences/mortar/level-1.png",
+      "crop_xywh": [
+        664,
+        189,
+        459,
+        445
+      ],
+      "sheet_cell_xywh": [
+        617,
+        0,
+        637,
+        661
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.04524886877828054,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        10,
+        20
+      ],
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "frame": 0,
+      "prompt": "implementation/sprites/generation/0013-mortar-level-1.prompt.txt",
+      "prompt_sha256": "6577bb8ead5d8a635fca9740db808dd7ba0279b46a12f1486e31c78cee7c844b",
+      "references": [
+        {
+          "path": "assets/art_source/defences/mortar/master.png",
+          "sha256": "0cd5056e0f44dc9d5ad02902a8e158cca0478452a136c0d0b5a57cfb55dca74f",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        },
+        {
+          "path": "assets/art_source/buildings/house/whole.png",
+          "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0013",
+      "revision": 0,
+      "source_sha256": "9870fd4f33840cf5064e807756d0aaf1321ddf30a151b80803c902891ba5fdf0",
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "mortar",
+      "tower_level": 1,
+      "output": "sprites/buildings/mortar_hurt.png",
+      "animation": "buildings/mortar_hurt",
+      "variant_of": "buildings/mortar",
+      "muzzle_xy": [
+        21,
+        27
+      ],
+      "muzzles_xy": [
+        [
+          21,
+          27
+        ]
+      ],
+      "muzzle_region_xywh": [
+        19,
+        25,
+        5,
+        5
+      ],
+      "output_sha256": "c78d08fb4ea9e458c7644ed59e3a3184848cb2a2338e63a9c52b9c6e43968316"
+    },
+    {
+      "id": "buildings/mortar_fire",
+      "source": "assets/art_source/defences/mortar/level-1.png",
+      "crop_xywh": [
+        111,
+        686,
+        488,
+        497
+      ],
+      "sheet_cell_xywh": [
+        0,
+        660,
+        631,
+        594
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.04524886877828054,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        10,
+        22
+      ],
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "frame": 0,
+      "prompt": "implementation/sprites/generation/0013-mortar-level-1.prompt.txt",
+      "prompt_sha256": "6577bb8ead5d8a635fca9740db808dd7ba0279b46a12f1486e31c78cee7c844b",
+      "references": [
+        {
+          "path": "assets/art_source/defences/mortar/master.png",
+          "sha256": "0cd5056e0f44dc9d5ad02902a8e158cca0478452a136c0d0b5a57cfb55dca74f",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        },
+        {
+          "path": "assets/art_source/buildings/house/whole.png",
+          "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0013",
+      "revision": 0,
+      "source_sha256": "9870fd4f33840cf5064e807756d0aaf1321ddf30a151b80803c902891ba5fdf0",
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "mortar",
+      "tower_level": 1,
+      "output": "sprites/buildings/mortar_fire.png",
+      "animation": "buildings/mortar_fire",
+      "variant_of": "buildings/mortar",
+      "muzzle_xy": [
+        22,
+        26
+      ],
+      "muzzles_xy": [
+        [
+          22,
+          26
+        ]
+      ],
+      "muzzle_region_xywh": [
+        20,
+        24,
+        5,
+        5
+      ],
+      "output_sha256": "46b5d3cfea80597e5d7bb0f2d3b4987113ccf7d5b749b733e788fbef75a98412"
+    },
+    {
+      "id": "buildings/mortar_wreck",
+      "source": "assets/art_source/defences/mortar/level-1.png",
+      "crop_xywh": [
+        661,
+        838,
+        496,
+        340
+      ],
+      "sheet_cell_xywh": [
+        630,
+        660,
+        624,
+        594
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.04524886877828054,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        11,
+        15
+      ],
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "frame": 0,
+      "prompt": "implementation/sprites/generation/0013-mortar-level-1.prompt.txt",
+      "prompt_sha256": "6577bb8ead5d8a635fca9740db808dd7ba0279b46a12f1486e31c78cee7c844b",
+      "references": [
+        {
+          "path": "assets/art_source/defences/mortar/master.png",
+          "sha256": "0cd5056e0f44dc9d5ad02902a8e158cca0478452a136c0d0b5a57cfb55dca74f",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        },
+        {
+          "path": "assets/art_source/buildings/house/whole.png",
+          "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0013",
+      "revision": 0,
+      "source_sha256": "9870fd4f33840cf5064e807756d0aaf1321ddf30a151b80803c902891ba5fdf0",
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "mortar",
+      "tower_level": 1,
+      "output": "sprites/buildings/mortar_wreck.png",
+      "animation": "buildings/mortar_wreck",
+      "variant_of": "buildings/mortar",
+      "output_sha256": "7ce5c0f7486212849f8a943f84a7ff65229b6019c59917737429d61c8d719011"
+    },
+    {
+      "id": "buildings/mortar_2",
+      "source": "assets/art_source/defences/mortar/level-2.png",
+      "crop_xywh": [
+        106,
+        141,
+        491,
+        478
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        631,
+        634
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.0502092050209205,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        12,
+        24
+      ],
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "frame": 0,
+      "prompt": "implementation/sprites/generation/0013-mortar-level-2.prompt.txt",
+      "prompt_sha256": "d74a193fdc9a3930c1a315834d21215ffb4eaf33cfa31b8108c3653e2d4b9bf0",
+      "references": [
+        {
+          "path": "assets/art_source/defences/mortar/master.png",
+          "sha256": "0cd5056e0f44dc9d5ad02902a8e158cca0478452a136c0d0b5a57cfb55dca74f",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        },
+        {
+          "path": "assets/art_source/buildings/house/whole.png",
+          "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0013",
+      "revision": 0,
+      "source_sha256": "ff074311eeab4ac363ecfa5881a96caa045e051d6fbdf579df30c09494c3cba9",
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "mortar",
+      "tower_level": 2,
+      "output": "sprites/buildings/mortar_2.png",
+      "animation": "buildings/mortar_2",
+      "muzzle_xy": [
+        23,
+        24
+      ],
+      "muzzles_xy": [
+        [
+          23,
+          24
+        ]
+      ],
+      "muzzle_region_xywh": [
+        21,
+        22,
+        5,
+        5
+      ],
+      "output_sha256": "0c3a32f4a1e739a5c42094b4048ee54d5ab7557a0ac997807207878b16656b5c"
+    },
+    {
+      "id": "buildings/mortar_2_hurt",
+      "source": "assets/art_source/defences/mortar/level-2.png",
+      "crop_xywh": [
+        664,
+        159,
+        486,
+        460
+      ],
+      "sheet_cell_xywh": [
+        630,
+        0,
+        624,
+        634
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.0502092050209205,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        12,
+        23
+      ],
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "frame": 0,
+      "prompt": "implementation/sprites/generation/0013-mortar-level-2.prompt.txt",
+      "prompt_sha256": "d74a193fdc9a3930c1a315834d21215ffb4eaf33cfa31b8108c3653e2d4b9bf0",
+      "references": [
+        {
+          "path": "assets/art_source/defences/mortar/master.png",
+          "sha256": "0cd5056e0f44dc9d5ad02902a8e158cca0478452a136c0d0b5a57cfb55dca74f",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        },
+        {
+          "path": "assets/art_source/buildings/house/whole.png",
+          "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0013",
+      "revision": 0,
+      "source_sha256": "ff074311eeab4ac363ecfa5881a96caa045e051d6fbdf579df30c09494c3cba9",
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "mortar",
+      "tower_level": 2,
+      "output": "sprites/buildings/mortar_2_hurt.png",
+      "animation": "buildings/mortar_2_hurt",
+      "variant_of": "buildings/mortar_2",
+      "muzzle_xy": [
+        23,
+        24
+      ],
+      "muzzles_xy": [
+        [
+          23,
+          24
+        ]
+      ],
+      "muzzle_region_xywh": [
+        21,
+        22,
+        5,
+        5
+      ],
+      "output_sha256": "833ffef4d9735923535cc48911ab4d3c32491717737a84fc2280773bccf6d1d2"
+    },
+    {
+      "id": "buildings/mortar_2_fire",
+      "source": "assets/art_source/defences/mortar/level-2.png",
+      "crop_xywh": [
+        106,
+        647,
+        520,
+        542
+      ],
+      "sheet_cell_xywh": [
+        0,
+        633,
+        650,
+        621
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.0502092050209205,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        12,
+        27
+      ],
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "frame": 0,
+      "prompt": "implementation/sprites/generation/0013-mortar-level-2.prompt.txt",
+      "prompt_sha256": "d74a193fdc9a3930c1a315834d21215ffb4eaf33cfa31b8108c3653e2d4b9bf0",
+      "references": [
+        {
+          "path": "assets/art_source/defences/mortar/master.png",
+          "sha256": "0cd5056e0f44dc9d5ad02902a8e158cca0478452a136c0d0b5a57cfb55dca74f",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        },
+        {
+          "path": "assets/art_source/buildings/house/whole.png",
+          "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0013",
+      "revision": 0,
+      "source_sha256": "ff074311eeab4ac363ecfa5881a96caa045e051d6fbdf579df30c09494c3cba9",
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "mortar",
+      "tower_level": 2,
+      "output": "sprites/buildings/mortar_2_fire.png",
+      "animation": "buildings/mortar_2_fire",
+      "variant_of": "buildings/mortar_2",
+      "muzzle_xy": [
+        23,
+        22
+      ],
+      "muzzles_xy": [
+        [
+          23,
+          22
+        ]
+      ],
+      "muzzle_region_xywh": [
+        21,
+        20,
+        5,
+        5
+      ],
+      "output_sha256": "be1264190a77208d0c707af04740b005322cf94aef989d7984e82d67c926fb92"
+    },
+    {
+      "id": "buildings/mortar_2_wreck",
+      "source": "assets/art_source/defences/mortar/level-2.png",
+      "crop_xywh": [
+        672,
+        835,
+        494,
+        355
+      ],
+      "sheet_cell_xywh": [
+        649,
+        633,
+        605,
+        621
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.0502092050209205,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        13,
+        18
+      ],
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "frame": 0,
+      "prompt": "implementation/sprites/generation/0013-mortar-level-2.prompt.txt",
+      "prompt_sha256": "d74a193fdc9a3930c1a315834d21215ffb4eaf33cfa31b8108c3653e2d4b9bf0",
+      "references": [
+        {
+          "path": "assets/art_source/defences/mortar/master.png",
+          "sha256": "0cd5056e0f44dc9d5ad02902a8e158cca0478452a136c0d0b5a57cfb55dca74f",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        },
+        {
+          "path": "assets/art_source/buildings/house/whole.png",
+          "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0013",
+      "revision": 0,
+      "source_sha256": "ff074311eeab4ac363ecfa5881a96caa045e051d6fbdf579df30c09494c3cba9",
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "mortar",
+      "tower_level": 2,
+      "output": "sprites/buildings/mortar_2_wreck.png",
+      "animation": "buildings/mortar_2_wreck",
+      "variant_of": "buildings/mortar_2",
+      "output_sha256": "d0f7e87b1a45960a290c5501892c14b9a57fbb1dafa11500e7b58de70e32b170"
+    },
+    {
+      "id": "buildings/mortar_3",
+      "source": "assets/art_source/defences/mortar/level-3.png",
+      "crop_xywh": [
+        69,
+        114,
+        498,
+        500
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        633,
+        646
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.05454545454545454,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        14,
+        27
+      ],
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "frame": 0,
+      "prompt": "implementation/sprites/generation/0013-mortar-level-3.prompt.txt",
+      "prompt_sha256": "8be85eb11a4322d3a85f58e8090816bae7239032da62c2781a455bcd9e47b614",
+      "references": [
+        {
+          "path": "assets/art_source/defences/mortar/master.png",
+          "sha256": "0cd5056e0f44dc9d5ad02902a8e158cca0478452a136c0d0b5a57cfb55dca74f",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        },
+        {
+          "path": "assets/art_source/buildings/house/whole.png",
+          "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0013",
+      "revision": 0,
+      "source_sha256": "0b132a775f558cea165387c75e7cf9a71341b5018f5e83cd7e4b2d49d1d4bd12",
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "mortar",
+      "tower_level": 3,
+      "output": "sprites/buildings/mortar_3.png",
+      "animation": "buildings/mortar_3",
+      "muzzle_xy": [
+        22,
+        23
+      ],
+      "muzzles_xy": [
+        [
+          22,
+          23
+        ]
+      ],
+      "muzzle_region_xywh": [
+        20,
+        21,
+        5,
+        5
+      ],
+      "output_sha256": "77be5d3c2deeef082c127fc25c57c41cbe25539ee46d032d354f50d8cacbf843"
+    },
+    {
+      "id": "buildings/mortar_3_hurt",
+      "source": "assets/art_source/defences/mortar/level-3.png",
+      "crop_xywh": [
+        697,
+        114,
+        493,
+        500
+      ],
+      "sheet_cell_xywh": [
+        632,
+        0,
+        622,
+        646
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.05454545454545454,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        13,
+        27
+      ],
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "frame": 0,
+      "prompt": "implementation/sprites/generation/0013-mortar-level-3.prompt.txt",
+      "prompt_sha256": "8be85eb11a4322d3a85f58e8090816bae7239032da62c2781a455bcd9e47b614",
+      "references": [
+        {
+          "path": "assets/art_source/defences/mortar/master.png",
+          "sha256": "0cd5056e0f44dc9d5ad02902a8e158cca0478452a136c0d0b5a57cfb55dca74f",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        },
+        {
+          "path": "assets/art_source/buildings/house/whole.png",
+          "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0013",
+      "revision": 0,
+      "source_sha256": "0b132a775f558cea165387c75e7cf9a71341b5018f5e83cd7e4b2d49d1d4bd12",
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "mortar",
+      "tower_level": 3,
+      "output": "sprites/buildings/mortar_3_hurt.png",
+      "animation": "buildings/mortar_3_hurt",
+      "variant_of": "buildings/mortar_3",
+      "muzzle_xy": [
+        22,
+        23
+      ],
+      "muzzles_xy": [
+        [
+          22,
+          23
+        ]
+      ],
+      "muzzle_region_xywh": [
+        20,
+        21,
+        5,
+        5
+      ],
+      "output_sha256": "575c9b3347cbf13702772211b25c2d095b7d1a17d807421085490344f8545f7d"
+    },
+    {
+      "id": "buildings/mortar_3_fire",
+      "source": "assets/art_source/defences/mortar/level-3.png",
+      "crop_xywh": [
+        69,
+        677,
+        515,
+        536
+      ],
+      "sheet_cell_xywh": [
+        0,
+        645,
+        634,
+        609
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.05454545454545454,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        14,
+        29
+      ],
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "frame": 0,
+      "prompt": "implementation/sprites/generation/0013-mortar-level-3.prompt.txt",
+      "prompt_sha256": "8be85eb11a4322d3a85f58e8090816bae7239032da62c2781a455bcd9e47b614",
+      "references": [
+        {
+          "path": "assets/art_source/defences/mortar/master.png",
+          "sha256": "0cd5056e0f44dc9d5ad02902a8e158cca0478452a136c0d0b5a57cfb55dca74f",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        },
+        {
+          "path": "assets/art_source/buildings/house/whole.png",
+          "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0013",
+      "revision": 0,
+      "source_sha256": "0b132a775f558cea165387c75e7cf9a71341b5018f5e83cd7e4b2d49d1d4bd12",
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "mortar",
+      "tower_level": 3,
+      "output": "sprites/buildings/mortar_3_fire.png",
+      "animation": "buildings/mortar_3_fire",
+      "variant_of": "buildings/mortar_3",
+      "muzzle_xy": [
+        23,
+        21
+      ],
+      "muzzles_xy": [
+        [
+          23,
+          21
+        ]
+      ],
+      "muzzle_region_xywh": [
+        21,
+        19,
+        5,
+        5
+      ],
+      "output_sha256": "1b47c07f07195768205a3f6f18f1811f55239216bcb5bd71f3f8491946676dd8"
+    },
+    {
+      "id": "buildings/mortar_3_wreck",
+      "source": "assets/art_source/defences/mortar/level-3.png",
+      "crop_xywh": [
+        682,
+        803,
+        512,
+        407
+      ],
+      "sheet_cell_xywh": [
+        633,
+        645,
+        621,
+        609
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.05454545454545454,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        13,
+        22
+      ],
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "frame": 0,
+      "prompt": "implementation/sprites/generation/0013-mortar-level-3.prompt.txt",
+      "prompt_sha256": "8be85eb11a4322d3a85f58e8090816bae7239032da62c2781a455bcd9e47b614",
+      "references": [
+        {
+          "path": "assets/art_source/defences/mortar/master.png",
+          "sha256": "0cd5056e0f44dc9d5ad02902a8e158cca0478452a136c0d0b5a57cfb55dca74f",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        },
+        {
+          "path": "assets/art_source/buildings/house/whole.png",
+          "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0013",
+      "revision": 0,
+      "source_sha256": "0b132a775f558cea165387c75e7cf9a71341b5018f5e83cd7e4b2d49d1d4bd12",
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "mortar",
+      "tower_level": 3,
+      "output": "sprites/buildings/mortar_3_wreck.png",
+      "animation": "buildings/mortar_3_wreck",
+      "variant_of": "buildings/mortar_3",
+      "output_sha256": "d827eead804020a371d8f47beda02828154b0138c78b05913dbbe7da0401497c"
+    },
+    {
+      "id": "buildings/auto_crossbow",
+      "source": "assets/art_source/defences/auto_crossbow/level-1-r1.png",
+      "crop_xywh": [
+        126,
+        74,
+        459,
+        546
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        662,
+        658
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.05217391304347826,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        10,
+        28
+      ],
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "frame": 0,
+      "prompt": "implementation/sprites/generation/0013-auto_crossbow-level-1-r1.prompt.txt",
+      "prompt_sha256": "cf5d9702a77a10d0d76319c8e9a817f8257f7b0344cd871cfdd4fde99ed85a6b",
+      "references": [
+        {
+          "path": "assets/art_source/defences/auto_crossbow/master.png",
+          "sha256": "998d9e1ffbae6e74c6eb2624dc3c73a0c0acc3177e5e933dc143b308889dec3a",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        },
+        {
+          "path": "assets/art_source/buildings/house/whole.png",
+          "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0013",
+      "revision": 1,
+      "source_sha256": "956aaad82df55fe2ea2fb2e60a23c209e1f244c3f4370f8af3a4b30ab380db62",
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "auto_crossbow",
+      "tower_level": 1,
+      "output": "sprites/buildings/auto_crossbow.png",
+      "animation": "buildings/auto_crossbow",
+      "muzzle_xy": [
+        25,
+        18
+      ],
+      "muzzles_xy": [
+        [
+          25,
+          18
+        ]
+      ],
+      "muzzle_region_xywh": [
+        23,
+        16,
+        5,
+        5
+      ],
+      "output_sha256": "431d1b53e11b54d99dc6663cb8399fec7b5ce08863b45594a247f5e6611c6b20"
+    },
+    {
+      "id": "buildings/auto_crossbow_hurt",
+      "source": "assets/art_source/defences/auto_crossbow/level-1-r1.png",
+      "crop_xywh": [
+        738,
+        82,
+        454,
+        545
+      ],
+      "sheet_cell_xywh": [
+        661,
+        0,
+        593,
+        658
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.05217391304347826,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        10,
+        28
+      ],
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "frame": 0,
+      "prompt": "implementation/sprites/generation/0013-auto_crossbow-level-1-r1.prompt.txt",
+      "prompt_sha256": "cf5d9702a77a10d0d76319c8e9a817f8257f7b0344cd871cfdd4fde99ed85a6b",
+      "references": [
+        {
+          "path": "assets/art_source/defences/auto_crossbow/master.png",
+          "sha256": "998d9e1ffbae6e74c6eb2624dc3c73a0c0acc3177e5e933dc143b308889dec3a",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        },
+        {
+          "path": "assets/art_source/buildings/house/whole.png",
+          "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0013",
+      "revision": 1,
+      "source_sha256": "956aaad82df55fe2ea2fb2e60a23c209e1f244c3f4370f8af3a4b30ab380db62",
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "auto_crossbow",
+      "tower_level": 1,
+      "output": "sprites/buildings/auto_crossbow_hurt.png",
+      "animation": "buildings/auto_crossbow_hurt",
+      "variant_of": "buildings/auto_crossbow",
+      "muzzle_xy": [
+        25,
+        18
+      ],
+      "muzzles_xy": [
+        [
+          25,
+          18
+        ]
+      ],
+      "muzzle_region_xywh": [
+        23,
+        16,
+        5,
+        5
+      ],
+      "output_sha256": "516c4dd258267a13bc05a8805f4fc3b5f5b55d2c1833b419afea0ae558d2d75b"
+    },
+    {
+      "id": "buildings/auto_crossbow_fire",
+      "source": "assets/art_source/defences/auto_crossbow/level-1-r1.png",
+      "crop_xywh": [
+        126,
+        687,
+        471,
+        541
+      ],
+      "sheet_cell_xywh": [
+        0,
+        657,
+        668,
+        597
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.05217391304347826,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        10,
+        28
+      ],
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "frame": 0,
+      "prompt": "implementation/sprites/generation/0013-auto_crossbow-level-1-r1.prompt.txt",
+      "prompt_sha256": "cf5d9702a77a10d0d76319c8e9a817f8257f7b0344cd871cfdd4fde99ed85a6b",
+      "references": [
+        {
+          "path": "assets/art_source/defences/auto_crossbow/master.png",
+          "sha256": "998d9e1ffbae6e74c6eb2624dc3c73a0c0acc3177e5e933dc143b308889dec3a",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        },
+        {
+          "path": "assets/art_source/buildings/house/whole.png",
+          "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0013",
+      "revision": 1,
+      "source_sha256": "956aaad82df55fe2ea2fb2e60a23c209e1f244c3f4370f8af3a4b30ab380db62",
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "auto_crossbow",
+      "tower_level": 1,
+      "output": "sprites/buildings/auto_crossbow_fire.png",
+      "animation": "buildings/auto_crossbow_fire",
+      "variant_of": "buildings/auto_crossbow",
+      "muzzle_xy": [
+        24,
+        19
+      ],
+      "muzzles_xy": [
+        [
+          24,
+          19
+        ]
+      ],
+      "muzzle_region_xywh": [
+        22,
+        17,
+        5,
+        5
+      ],
+      "output_sha256": "7bbfb9a0aa88412a03b69e0eb7df591fd984d5849f130214bf65164e912c2b97"
+    },
+    {
+      "id": "buildings/auto_crossbow_wreck",
+      "source": "assets/art_source/defences/auto_crossbow/level-1-r1.png",
+      "crop_xywh": [
+        738,
+        842,
+        468,
+        355
+      ],
+      "sheet_cell_xywh": [
+        667,
+        657,
+        587,
+        597
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.05217391304347826,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        12,
+        19
+      ],
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "frame": 0,
+      "prompt": "implementation/sprites/generation/0013-auto_crossbow-level-1-r1.prompt.txt",
+      "prompt_sha256": "cf5d9702a77a10d0d76319c8e9a817f8257f7b0344cd871cfdd4fde99ed85a6b",
+      "references": [
+        {
+          "path": "assets/art_source/defences/auto_crossbow/master.png",
+          "sha256": "998d9e1ffbae6e74c6eb2624dc3c73a0c0acc3177e5e933dc143b308889dec3a",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        },
+        {
+          "path": "assets/art_source/buildings/house/whole.png",
+          "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0013",
+      "revision": 1,
+      "source_sha256": "956aaad82df55fe2ea2fb2e60a23c209e1f244c3f4370f8af3a4b30ab380db62",
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "auto_crossbow",
+      "tower_level": 1,
+      "output": "sprites/buildings/auto_crossbow_wreck.png",
+      "animation": "buildings/auto_crossbow_wreck",
+      "variant_of": "buildings/auto_crossbow",
+      "output_sha256": "602f62d9612f8ee143828ecbbbbbd8e2f7b3c23555acce393755412591239ca0"
+    },
+    {
+      "id": "buildings/auto_crossbow_2",
+      "source": "assets/art_source/defences/auto_crossbow/level-2.png",
+      "crop_xywh": [
+        113,
+        84,
+        506,
+        545
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        664,
+        654
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.0473186119873817,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        10,
+        26
+      ],
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "frame": 0,
+      "prompt": "implementation/sprites/generation/0013-auto_crossbow-level-2.prompt.txt",
+      "prompt_sha256": "162889fecfafbf405ed223d741703b4a6386a517860d2c677edbac73871393cc",
+      "references": [
+        {
+          "path": "assets/art_source/defences/auto_crossbow/master.png",
+          "sha256": "998d9e1ffbae6e74c6eb2624dc3c73a0c0acc3177e5e933dc143b308889dec3a",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        },
+        {
+          "path": "assets/art_source/buildings/house/whole.png",
+          "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0013",
+      "revision": 0,
+      "source_sha256": "2f5dd111248f91b27acc1a00019898310468844e92aced23e63825ce2489b1cb",
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "auto_crossbow",
+      "tower_level": 2,
+      "output": "sprites/buildings/auto_crossbow_2.png",
+      "animation": "buildings/auto_crossbow_2",
+      "muzzle_xy": [
+        25,
+        20
+      ],
+      "muzzles_xy": [
+        [
+          25,
+          20
+        ]
+      ],
+      "muzzle_region_xywh": [
+        23,
+        18,
+        5,
+        5
+      ],
+      "output_sha256": "afee775f61cba6cebb1d5d9afaa33b0dc6568413e0da4b62d592fdb799b9d173"
+    },
+    {
+      "id": "buildings/auto_crossbow_2_hurt",
+      "source": "assets/art_source/defences/auto_crossbow/level-2.png",
+      "crop_xywh": [
+        708,
+        85,
+        510,
+        544
+      ],
+      "sheet_cell_xywh": [
+        663,
+        0,
+        591,
+        654
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.0473186119873817,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        10,
+        26
+      ],
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "frame": 0,
+      "prompt": "implementation/sprites/generation/0013-auto_crossbow-level-2.prompt.txt",
+      "prompt_sha256": "162889fecfafbf405ed223d741703b4a6386a517860d2c677edbac73871393cc",
+      "references": [
+        {
+          "path": "assets/art_source/defences/auto_crossbow/master.png",
+          "sha256": "998d9e1ffbae6e74c6eb2624dc3c73a0c0acc3177e5e933dc143b308889dec3a",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        },
+        {
+          "path": "assets/art_source/buildings/house/whole.png",
+          "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0013",
+      "revision": 0,
+      "source_sha256": "2f5dd111248f91b27acc1a00019898310468844e92aced23e63825ce2489b1cb",
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "auto_crossbow",
+      "tower_level": 2,
+      "output": "sprites/buildings/auto_crossbow_2_hurt.png",
+      "animation": "buildings/auto_crossbow_2_hurt",
+      "variant_of": "buildings/auto_crossbow_2",
+      "muzzle_xy": [
+        25,
+        20
+      ],
+      "muzzles_xy": [
+        [
+          25,
+          20
+        ]
+      ],
+      "muzzle_region_xywh": [
+        23,
+        18,
+        5,
+        5
+      ],
+      "output_sha256": "1aa1fddbd62c907cc6559844ea94764a802cbff179fde4c100d9f807df817ff3"
+    },
+    {
+      "id": "buildings/auto_crossbow_2_fire",
+      "source": "assets/art_source/defences/auto_crossbow/level-2.png",
+      "crop_xywh": [
+        112,
+        678,
+        520,
+        532
+      ],
+      "sheet_cell_xywh": [
+        0,
+        653,
+        670,
+        601
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.0473186119873817,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        10,
+        25
+      ],
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "frame": 0,
+      "prompt": "implementation/sprites/generation/0013-auto_crossbow-level-2.prompt.txt",
+      "prompt_sha256": "162889fecfafbf405ed223d741703b4a6386a517860d2c677edbac73871393cc",
+      "references": [
+        {
+          "path": "assets/art_source/defences/auto_crossbow/master.png",
+          "sha256": "998d9e1ffbae6e74c6eb2624dc3c73a0c0acc3177e5e933dc143b308889dec3a",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        },
+        {
+          "path": "assets/art_source/buildings/house/whole.png",
+          "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0013",
+      "revision": 0,
+      "source_sha256": "2f5dd111248f91b27acc1a00019898310468844e92aced23e63825ce2489b1cb",
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "auto_crossbow",
+      "tower_level": 2,
+      "output": "sprites/buildings/auto_crossbow_2_fire.png",
+      "animation": "buildings/auto_crossbow_2_fire",
+      "variant_of": "buildings/auto_crossbow_2",
+      "muzzle_xy": [
+        26,
+        21
+      ],
+      "muzzles_xy": [
+        [
+          26,
+          21
+        ]
+      ],
+      "muzzle_region_xywh": [
+        24,
+        19,
+        5,
+        5
+      ],
+      "output_sha256": "07a8fe91ff31f5f53b8dfcd51d3d8740fffe8a96678cdde7c57986de61c71d3e"
+    },
+    {
+      "id": "buildings/auto_crossbow_2_wreck",
+      "source": "assets/art_source/defences/auto_crossbow/level-2.png",
+      "crop_xywh": [
+        706,
+        841,
+        496,
+        367
+      ],
+      "sheet_cell_xywh": [
+        669,
+        653,
+        585,
+        601
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.0473186119873817,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        12,
+        17
+      ],
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "frame": 0,
+      "prompt": "implementation/sprites/generation/0013-auto_crossbow-level-2.prompt.txt",
+      "prompt_sha256": "162889fecfafbf405ed223d741703b4a6386a517860d2c677edbac73871393cc",
+      "references": [
+        {
+          "path": "assets/art_source/defences/auto_crossbow/master.png",
+          "sha256": "998d9e1ffbae6e74c6eb2624dc3c73a0c0acc3177e5e933dc143b308889dec3a",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        },
+        {
+          "path": "assets/art_source/buildings/house/whole.png",
+          "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0013",
+      "revision": 0,
+      "source_sha256": "2f5dd111248f91b27acc1a00019898310468844e92aced23e63825ce2489b1cb",
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "auto_crossbow",
+      "tower_level": 2,
+      "output": "sprites/buildings/auto_crossbow_2_wreck.png",
+      "animation": "buildings/auto_crossbow_2_wreck",
+      "variant_of": "buildings/auto_crossbow_2",
+      "output_sha256": "4335c61a64fe4cd12bc0c42c5921dda50ee26c9f0cd85680a5722f94e1d8cc00"
+    },
+    {
+      "id": "buildings/auto_crossbow_3",
+      "source": "assets/art_source/defences/auto_crossbow/level-3.png",
+      "crop_xywh": [
+        125,
+        113,
+        492,
+        512
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        681,
+        652
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.048859934853420196,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        9,
+        25
+      ],
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "frame": 0,
+      "prompt": "implementation/sprites/generation/0013-auto_crossbow-level-3.prompt.txt",
+      "prompt_sha256": "630dd0c8de8c601dbf070b85e3106ca4039ef35e7ff2c78576fd26902ae0d403",
+      "references": [
+        {
+          "path": "assets/art_source/defences/auto_crossbow/master.png",
+          "sha256": "998d9e1ffbae6e74c6eb2624dc3c73a0c0acc3177e5e933dc143b308889dec3a",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        },
+        {
+          "path": "assets/art_source/buildings/house/whole.png",
+          "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0013",
+      "revision": 0,
+      "source_sha256": "b0cbc3215b5c2038ac131c121f57fc8b395a21c6876b280a9f696e91d7bd4dea",
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "auto_crossbow",
+      "tower_level": 3,
+      "output": "sprites/buildings/auto_crossbow_3.png",
+      "animation": "buildings/auto_crossbow_3",
+      "muzzle_xy": [
+        26,
+        21
+      ],
+      "muzzles_xy": [
+        [
+          26,
+          21
+        ]
+      ],
+      "muzzle_region_xywh": [
+        24,
+        19,
+        5,
+        5
+      ],
+      "output_sha256": "4e789a407c511de327d6b4dbb51b89cbcdea7e488218a6938bee80d0fb66b03f"
+    },
+    {
+      "id": "buildings/auto_crossbow_3_hurt",
+      "source": "assets/art_source/defences/auto_crossbow/level-3.png",
+      "crop_xywh": [
+        744,
+        113,
+        492,
+        515
+      ],
+      "sheet_cell_xywh": [
+        680,
+        0,
+        574,
+        652
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.048859934853420196,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        10,
+        25
+      ],
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "frame": 0,
+      "prompt": "implementation/sprites/generation/0013-auto_crossbow-level-3.prompt.txt",
+      "prompt_sha256": "630dd0c8de8c601dbf070b85e3106ca4039ef35e7ff2c78576fd26902ae0d403",
+      "references": [
+        {
+          "path": "assets/art_source/defences/auto_crossbow/master.png",
+          "sha256": "998d9e1ffbae6e74c6eb2624dc3c73a0c0acc3177e5e933dc143b308889dec3a",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        },
+        {
+          "path": "assets/art_source/buildings/house/whole.png",
+          "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0013",
+      "revision": 0,
+      "source_sha256": "b0cbc3215b5c2038ac131c121f57fc8b395a21c6876b280a9f696e91d7bd4dea",
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "auto_crossbow",
+      "tower_level": 3,
+      "output": "sprites/buildings/auto_crossbow_3_hurt.png",
+      "animation": "buildings/auto_crossbow_3_hurt",
+      "variant_of": "buildings/auto_crossbow_3",
+      "muzzle_xy": [
+        25,
+        21
+      ],
+      "muzzles_xy": [
+        [
+          25,
+          21
+        ]
+      ],
+      "muzzle_region_xywh": [
+        23,
+        19,
+        5,
+        5
+      ],
+      "output_sha256": "81fba822f43d101950f488f3c9547b3eb1a778f8bb1a7db93286aa9364a86d3b"
+    },
+    {
+      "id": "buildings/auto_crossbow_3_fire",
+      "source": "assets/art_source/defences/auto_crossbow/level-3.png",
+      "crop_xywh": [
+        125,
+        675,
+        496,
+        550
+      ],
+      "sheet_cell_xywh": [
+        0,
+        651,
+        677,
+        603
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.048859934853420196,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        9,
+        27
+      ],
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "frame": 0,
+      "prompt": "implementation/sprites/generation/0013-auto_crossbow-level-3.prompt.txt",
+      "prompt_sha256": "630dd0c8de8c601dbf070b85e3106ca4039ef35e7ff2c78576fd26902ae0d403",
+      "references": [
+        {
+          "path": "assets/art_source/defences/auto_crossbow/master.png",
+          "sha256": "998d9e1ffbae6e74c6eb2624dc3c73a0c0acc3177e5e933dc143b308889dec3a",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        },
+        {
+          "path": "assets/art_source/buildings/house/whole.png",
+          "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0013",
+      "revision": 0,
+      "source_sha256": "b0cbc3215b5c2038ac131c121f57fc8b395a21c6876b280a9f696e91d7bd4dea",
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "auto_crossbow",
+      "tower_level": 3,
+      "output": "sprites/buildings/auto_crossbow_3_fire.png",
+      "animation": "buildings/auto_crossbow_3_fire",
+      "variant_of": "buildings/auto_crossbow_3",
+      "muzzle_xy": [
+        25,
+        22
+      ],
+      "muzzles_xy": [
+        [
+          25,
+          22
+        ]
+      ],
+      "muzzle_region_xywh": [
+        23,
+        20,
+        5,
+        5
+      ],
+      "output_sha256": "0dbec747e548ce4fc424592e15ca1af66bab2f4a706c92adb6b9835b5d7a2bb4"
+    },
+    {
+      "id": "buildings/auto_crossbow_3_wreck",
+      "source": "assets/art_source/defences/auto_crossbow/level-3.png",
+      "crop_xywh": [
+        732,
+        865,
+        452,
+        358
+      ],
+      "sheet_cell_xywh": [
+        676,
+        651,
+        578,
+        603
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.048859934853420196,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        11,
+        17
+      ],
+      "owner": "raster",
+      "palette": "tools/palette.py:COLOURS",
+      "seconds": 0.55,
+      "loop": true,
+      "frame": 0,
+      "prompt": "implementation/sprites/generation/0013-auto_crossbow-level-3.prompt.txt",
+      "prompt_sha256": "630dd0c8de8c601dbf070b85e3106ca4039ef35e7ff2c78576fd26902ae0d403",
+      "references": [
+        {
+          "path": "assets/art_source/defences/auto_crossbow/master.png",
+          "sha256": "998d9e1ffbae6e74c6eb2624dc3c73a0c0acc3177e5e933dc143b308889dec3a",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        },
+        {
+          "path": "assets/art_source/buildings/house/whole.png",
+          "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+          "role": "Identity master / camera-material reference as indexed in exact prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0013",
+      "revision": 0,
+      "source_sha256": "b0cbc3215b5c2038ac131c121f57fc8b395a21c6876b280a9f696e91d7bd4dea",
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "auto_crossbow",
+      "tower_level": 3,
+      "output": "sprites/buildings/auto_crossbow_3_wreck.png",
+      "animation": "buildings/auto_crossbow_3_wreck",
+      "variant_of": "buildings/auto_crossbow_3",
+      "output_sha256": "865de62cd237bc1b5fa3336ed5b7e26f2eeb39f499f73797307162dc481c4c88"
     }
   ]
 }

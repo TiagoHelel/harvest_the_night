@@ -156,7 +156,7 @@ func _draw() -> void:
 		var key: Variant = on.get("anchor", null)
 		var name := "%s@%s" % [id, str(key) if key != null else str(id)] 			if id == &"house" else "%s@%s" % [id, str(key if key != null
 				else Grid.cell(int(idx)))]
-		var box: Array = middles.get(name, [id, Vector2.ZERO, 0, Vector2(Grid.cell(int(idx)))])
+		var box: Array = middles.get(name, [id, Vector2.ZERO, 0, Vector2(Grid.cell(int(idx))), on])
 		box[1] = (box[1] as Vector2) + Vector2(Grid.cell(int(idx)))
 		box[2] = int(box[2]) + 1
 		box[3] = Vector2(minf((box[3] as Vector2).x, Grid.cell(int(idx)).x),
@@ -177,7 +177,12 @@ func _draw() -> void:
 			&"generator":
 				_glow_at(at, GENERATOR_RADIUS * tile, GENERATOR_COLOUR, 0.45)
 			_:
-				_glow_at(at, MUZZLE_RADIUS * tile, MUZZLE_COLOUR, 0.95)
+				if WorldView.authored_tower(id):
+					var colour := Color(0.72, 0.88, 1.0) if id == &"auto_crossbow" else MUZZLE_COLOUR
+					for muzzle in WorldView.tower_muzzles(box[4], Vector2i(box[3])):
+						_glow_at(muzzle, 0.8 * tile, colour, 0.45)
+				else:
+					_glow_at(at, MUZZLE_RADIUS * tile, MUZZLE_COLOUR, 0.95)
 
 	# **What is on fire.** The one light that moves, and the reason the whole
 	# thing is redrawn rather than cached.
@@ -209,14 +214,7 @@ func _lights_up(id: StringName, on: Dictionary, cell: Vector2i) -> bool:
 ## `WorldView` asks to choose the muzzle-flash drawing, so the light and the
 ## picture are lit by the same tick.
 func _firing(on: Dictionary) -> bool:
-	var left := int(on.get("reload", 0))
-	if left <= 0:
-		return false
-	var entry: Variant = Building.entry_of(StringName(on["id"]))
-	if entry == null:
-		return false
-	var whole := int((entry as Dictionary).get("reload_ticks", 0))
-	return whole > 0 and left * 100 >= whole * WorldView.FLASH_PERCENT
+	return WorldView.just_fired(on)
 
 
 ## `at` is in world pixels. This layer is not carried by the camera, so the

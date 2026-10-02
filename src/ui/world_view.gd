@@ -155,6 +155,16 @@ var _ghost_id: StringName = &""
 var _actors: Node2D
 var _actor_sprites: Array[Node] = []
 var _shots: Node2D
+## Only presentation remembers launch points and the level of destroyed towers.
+## Both caches are bounded by current projectiles / standing or rubble cells.
+var _shot_before: Dictionary = {}
+var _shot_origins: Dictionary = {}
+var _observing_tick := false
+var _tower_history: Dictionary = {}
+var _tower_version := -1
+var _wrecks: Node2D
+var _wreck_sprites: Dictionary = {}
+var _wreck_signature := -1
 
 ## The light. One node, two colours, and whatever is between them right now.
 var _light: CanvasModulate
@@ -239,15 +249,28 @@ func _ready() -> void:
 	_highlight.draw.connect(_draw_highlight)
 	add_child(_highlight)
 	move_child(_highlight, 1)       # after Terrain, before Occupants
+	_wrecks = Node2D.new()
+	_wrecks.name = "TowerWrecks"
+	add_child(_wrecks)
+	move_child(_wrecks, _occupants.get_index())
 
 
 ## Point the view at a game. Called by whatever screen owns the simulation.
 func show_state(state: Dictionary) -> void:
+	if not is_same(_state, state):
+		_shot_before.clear()
+		_shot_origins.clear()
+		_observing_tick = false
+		_tower_history.clear()
+		_tower_version = -1
+		_wreck_signature = -1
 	_state = state
+	_remember_towers(state)
 	_dirty = true
 	_draw_terrain()
 	_refresh()
 	_refresh_plots()
+	_refresh_wrecks()
 
 
 ## Redraw the occupants next frame. Called by anything that knows it changed
@@ -281,7 +304,16 @@ func _process(delta: float) -> void:
 
 	_refresh_actors()
 	_refresh_stations(delta)
+	_remember_towers(_state)
+	_refresh_wrecks()
 	if _shots != null:
+		# Skipping a night does not emit per-tick observer signals.
+		var alive: Dictionary = {}
+		for shot in (_state["projectiles"] as Array):
+			alive[int(shot["id"])] = true
+		for id in _shot_origins.keys():
+			if not alive.has(id):
+				_shot_origins.erase(id)
 		_shots.queue_redraw()
 
 
@@ -899,12 +931,9 @@ func _refresh() -> void:
 			sprite.add_child(shadow)
 		_occupants.add_child(sprite)
 		_sprites.append(sprite)
-		# **One pip a level, above the tower.** The art for a Torre II does
-		# not exist yet and this does not wait for it: a player has to be
-		# able to tell at a glance which of their towers they have paid to
-		# improve, and a row of small bright squares is legible at sixteen
-		# pixels in a way that a recoloured sprite is not.
-		for pip in maxi(int(on.get("level", 1)) - 1, 0):
+		# Complete authored levels communicate their reinforcement themselves.
+		var pips := 0 if authored_tower(id) else maxi(int(on.get("level", 1)) - 1, 0)
+		for pip in pips:
 			var mark := ColorRect.new()
 			mark.color = Color(1.0, 0.86, 0.42, 0.95)
 			mark.position = Vector2(cell) * float(GameData.TILE_SIZE) 				+ Vector2(2.0 + pip * 4.0, 1.0)
@@ -967,13 +996,141 @@ func _refresh_actors() -> void:
 func _draw_shots() -> void:
 	if _state.is_empty():
 		return
-	var scale_factor := float(GameData.TILE_SIZE) / float(Player.SUBTILE)
 	for shot in (_state["projectiles"] as Array):
-		var at := Vector2(
-			floorf(float(shot["pos"][0]) * scale_factor),
-			floorf(float(shot["pos"][1]) * scale_factor))
+		var at := shot_position(shot)
 		_shots.draw_rect(Rect2(at - Vector2.ONE, Vector2(2, 2)),
 			PaletteData.COLOURS[&"flame_hot"])
+
+
+static func authored_tower(id: StringName) -> bool:
+	return bool((RasterArt.FRAMES.get(BUILDING_DIR + str(id) + ".png", {}) as Dictionary).get("tower", false))
+
+
+static func tower_name(on: Dictionary, suffix: String = "") -> StringName:
+	var level := maxi(int(on.get("level", 1)), 1)
+	return StringName(str(on["id"]) + ("_%d" % level if level > 1 else "") + suffix)
+
+
+static func tower_muzzles(on: Dictionary, cell: Vector2i) -> Array[Vector2]:
+	var tile := float(GameData.TILE_SIZE)
+	var fallback := (Vector2(cell) + Vector2(0.8, -0.2)) * tile
+	return ArtPlacement.emissions(tower_name(on, "_fire"), Vector2(cell) * tile,
+		&"muzzles", fallback, &"muzzle")
+
+
+## Every fixed tick is observed, including several ticks between rendered frames.
+## A newborn core shot still sits at its exact logical firing-cell center.
+func before_tick(state: Dictionary) -> void:
+	if not is_same(_state, state):
+		return
+	_observing_tick = true
+	_remember_towers(state)
+	_shot_before.clear()
+	for shot in (state["projectiles"] as Array):
+		_shot_before[int(shot["id"])] = true
+
+
+func after_tick(state: Dictionary) -> void:
+	if not is_same(_state, state) or not _observing_tick:
+		return
+	_observing_tick = false
+	var alive: Dictionary = {}
+	var barrels: Dictionary = {}
+	var per := float(GameData.TILE_SIZE) / float(Player.SUBTILE)
+	for shot in (state["projectiles"] as Array):
+		var id := int(shot["id"])
+		alive[id] = true
+		var at := Vector2(float(shot["pos"][0]), float(shot["pos"][1])) * per
+		if _shot_origins.has(id):
+			var known: Dictionary = _shot_origins[id]
+			known["travel"] = float(known["travel"]) + at.distance_to(known["last"])
+			known["last"] = at
+		elif not _shot_before.has(id):
+			var cell := Vector2i(int(shot["pos"][0]) / Player.SUBTILE,
+				int(shot["pos"][1]) / Player.SUBTILE)
+			var on := Farm.occupant(state, cell)
+			if on.is_empty():
+				on = _tower_history.get(Grid.index(cell), {})
+			if on.is_empty() or on["id"] != shot["from"] or not authored_tower(on["id"]):
+				continue
+			var points := tower_muzzles(on, cell)
+			var ordinal := int(barrels.get(Grid.index(cell), 0))
+			barrels[Grid.index(cell)] = ordinal + 1
+			var target := Entities.position(state, int(shot["target"]))
+			var destination := Vector2(target) * per
+			_shot_origins[id] = {"start": at, "muzzle": points[ordinal % points.size()],
+				"last": at, "travel": 0.0, "distance": maxf(at.distance_to(destination), 1.0),
+				"left": maxi(int(shot.get("left", 0)), 1)}
+	for id in _shot_origins.keys():
+		if not alive.has(id):
+			_shot_origins.erase(id)
+	_shot_before.clear()
+	_remember_towers(state)
+
+
+## Only the visual launch is displaced; the offset fades along the real flight.
+## Mature shots loaded from a save have no guessed launch and use core positions.
+func shot_position(shot: Dictionary) -> Vector2:
+	var per := float(GameData.TILE_SIZE) / float(Player.SUBTILE)
+	var at := Vector2(float(shot["pos"][0]), float(shot["pos"][1])) * per
+	var known: Dictionary = _shot_origins.get(int(shot["id"]), {})
+	if not known.is_empty():
+		var remaining := clampf(1.0 - float(known["travel"]) / float(known["distance"]), 0.0, 1.0)
+		if StringName(shot.get("aim", GameData.AIM_GUIDED)) == GameData.AIM_BALLISTIC:
+			remaining = clampf(float(shot["left"]) / float(known["left"]), 0.0, 1.0)
+		at += (known["muzzle"] as Vector2 - known["start"] as Vector2) * remaining
+	return Vector2(floorf(at.x), floorf(at.y))
+
+
+func _remember_towers(state: Dictionary) -> void:
+	# Morning removes rubble without changing the occupancy version.
+	var version: int = [int(state.get("grid_version", 0)), (state.get("rubble", {}) as Dictionary).hash()].hash()
+	if version == _tower_version:
+		return
+	_tower_version = version
+	var occupants: Dictionary = state["occupants"]
+	var rubble: Dictionary = state.get("rubble", {})
+	for idx in _tower_history.keys():
+		var on: Dictionary = occupants.get(idx, {})
+		if on.is_empty() and StringName(rubble.get(idx, &"")) == StringName(_tower_history[idx]["id"]):
+			continue
+		_tower_history.erase(idx)
+	for idx in occupants:
+		var on: Dictionary = occupants[idx]
+		if authored_tower(on["id"]):
+			_tower_history[idx] = {"id": on["id"], "level": maxi(int(on.get("level", 1)), 1)}
+
+
+func _refresh_wrecks() -> void:
+	if _wrecks == null or _state.is_empty():
+		return
+	var signature: int = [(_state.get("rubble", {}) as Dictionary).hash(),
+		int(_state.get("grid_version", 0)), _tower_history.hash()].hash()
+	if signature == _wreck_signature:
+		return
+	_wreck_signature = signature
+	var visible: Dictionary = {}
+	for cell in Farm.rubble_cells(_state):
+		var id := Farm.rubble_at(_state, cell)
+		if not authored_tower(id) or not Farm.occupant(_state, cell).is_empty():
+			continue
+		var idx := Grid.index(cell)
+		visible[idx] = true
+		# The save format stores only the family. A fresh view honestly uses L1.
+		var remembered: Dictionary = _tower_history.get(idx, {"id": id, "level": 1})
+		var sprite: Sprite2D = _wreck_sprites.get(idx)
+		if sprite == null:
+			sprite = Sprite2D.new()
+			sprite.name = "Wreck_%d" % idx
+			_wrecks.add_child(sprite)
+			_wreck_sprites[idx] = sprite
+		sprite.texture = _texture_for(tower_name(remembered, "_wreck"))
+		ArtPlacement.place(sprite, cell)
+	for idx in _wreck_sprites.keys():
+		if not visible.has(idx):
+			(_wreck_sprites[idx] as Sprite2D).hide()
+			(_wreck_sprites[idx] as Sprite2D).queue_free()
+			_wreck_sprites.erase(idx)
 
 
 ## Turned earth, and the crop on it at whatever stage it has reached.
@@ -1237,13 +1394,26 @@ func _worn(name: StringName, on: Dictionary) -> StringName:
 ## which means the flash lands on the tick the shot did and the view is not
 ## guessing from a projectile it can see.
 func _just_fired(on: Dictionary) -> bool:
+	return just_fired(on)
+
+
+## Read the same level overlay as Building without a cell lookup or state write.
+static func levelled_stat(on: Dictionary, key: String, missing: int = 0) -> int:
+	var entry: Variant = Building.entry_of(StringName(on["id"]))
+	if entry == null:
+		return missing
+	var value := int((entry as Dictionary).get(key, missing))
+	var steps: Array = GameData.TOWER_LEVELS.get(StringName(on["id"]), [])
+	for step in steps.slice(0, maxi(int(on.get("level", 1)) - 1, 0)):
+		value = int((step["gives"] as Dictionary).get(key, value))
+	return value
+
+
+static func just_fired(on: Dictionary) -> bool:
 	var left := int(on.get("reload", 0))
 	if left <= 0:
 		return false
-	var entry: Variant = Building.entry_of(StringName(on["id"]))
-	if entry == null:
-		return false
-	var whole := int((entry as Dictionary).get("reload_ticks", 0))
+	var whole := levelled_stat(on, "reload_ticks")
 	return whole > 0 and left * 100 >= whole * FLASH_PERCENT
 
 
@@ -1252,10 +1422,7 @@ func _just_fired(on: Dictionary) -> bool:
 func _is_hurt(on: Dictionary) -> bool:
 	if on["id"] == &"house":
 		return _house_hurt()
-	var entry: Variant = Building.entry_of(StringName(on["id"]))
-	if entry == null:
-		return false
-	var full := int((entry as Dictionary).get("hp", 0))
+	var full := levelled_stat(on, "hp")
 	if full <= 0:
 		return false
 	return float(int(on.get("hp", full))) / float(full) < WOUNDED_AT

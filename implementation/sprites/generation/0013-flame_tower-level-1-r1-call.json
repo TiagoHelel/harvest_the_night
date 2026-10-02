@@ -1,0 +1,217 @@
+{
+  "id": "flame_tower",
+  "kind": "level-1-r1",
+  "tool": "built-in ImageGen",
+  "revision": 1,
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-33819a02-8955-4c58-9760-c43875bd20a8.png",
+  "source": "assets/art_source/defences/flame_tower/level-1-r1.png",
+  "source_sha256": "5245bfbaa2000537d01e27ac892140d99903876bd805aa20a1399c352be064d3",
+  "source_wh": [
+    1024,
+    1536
+  ],
+  "source_alpha_range": [
+    0,
+    254
+  ],
+  "prompt": "implementation/sprites/generation/0013-flame_tower-level-1-r1.prompt.txt",
+  "prompt_sha256": "1222f6236f5e0efbd69f29214f414cdb9d11716624899b3568f67b5dd3313d57",
+  "references": [
+    "assets/art_source/defences/flame_tower/master.png",
+    "assets/art_source/buildings/house/whole.png"
+  ],
+  "measured_recipes": [
+    {
+      "id": "buildings/flame_tower",
+      "source": "assets/art_source/defences/flame_tower/level-1-r1.png",
+      "crop_xywh": [
+        57,
+        225,
+        417,
+        506
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        507,
+        819
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.04940711462450593,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        9,
+        25
+      ]
+    },
+    {
+      "id": "buildings/flame_tower_hurt",
+      "source": "assets/art_source/defences/flame_tower/level-1-r1.png",
+      "crop_xywh": [
+        541,
+        225,
+        417,
+        512
+      ],
+      "sheet_cell_xywh": [
+        507,
+        0,
+        517,
+        819
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.04940711462450593,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        10,
+        25
+      ]
+    },
+    {
+      "id": "buildings/flame_tower_fire",
+      "source": "assets/art_source/defences/flame_tower/level-1-r1.png",
+      "crop_xywh": [
+        57,
+        901,
+        465,
+        503
+      ],
+      "sheet_cell_xywh": [
+        0,
+        819,
+        531,
+        717
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.04940711462450593,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        9,
+        25
+      ]
+    },
+    {
+      "id": "buildings/flame_tower_wreck",
+      "source": "assets/art_source/defences/flame_tower/level-1-r1.png",
+      "crop_xywh": [
+        541,
+        1054,
+        429,
+        310
+      ],
+      "sheet_cell_xywh": [
+        531,
+        819,
+        493,
+        717
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.04940711462450593,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        11,
+        15
+      ]
+    }
+  ],
+  "decision": "Accepted: source alpha, native/3x identity, construction, source-owned contact and actual Godot states reviewed. Masters are immutable identity references; selected level sheets own the four runtime states.",
+  "source_bounds": [
+    [
+      57,
+      225,
+      474,
+      731
+    ],
+    [
+      34,
+      225,
+      451,
+      737
+    ],
+    [
+      57,
+      82,
+      522,
+      585
+    ],
+    [
+      10,
+      235,
+      439,
+      545
+    ]
+  ],
+  "source_contacts": [
+    [
+      248.0,
+      731
+    ],
+    [
+      233.0,
+      737
+    ],
+    [
+      248.0,
+      585
+    ],
+    [
+      224.5,
+      545
+    ]
+  ],
+  "reference_hashes": {
+    "assets/art_source/defences/flame_tower/master.png": "ea5c3c83392acf99ab5f24704372ce201c504d9315e3120aa1f17225579bda35",
+    "assets/art_source/buildings/house/whole.png": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435"
+  },
+  "tool_arguments": {
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\defences\\flame_tower\\master.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\buildings\\house\\whole.png"
+    ]
+  }
+}

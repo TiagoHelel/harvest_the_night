@@ -100,6 +100,21 @@ def load_manifest(path=MANIFEST):
                 x0, y0, x1, y1 = rect(box, canvas, "window glass")
                 if not x0 <= x < x1 or not y0 <= y < y1:
                     raise ValueError("Window lamp outside its glass region: " + ident)
+        if "muzzle_xy" in entry or "muzzles_xy" in entry:
+            point = integers(entry.get("muzzle_xy"), 2, "muzzle point")
+            points = entry.get("muzzles_xy")
+            if not isinstance(points, list) or not 1 <= len(points) <= 2 or points[0] != point:
+                raise ValueError("Invalid authored muzzle list: " + ident)
+            for value in points:
+                value = integers(value, 2, "muzzle point")
+                if any(value[i] >= canvas[i] for i in range(2)):
+                    raise ValueError("Muzzle outside canvas: " + ident)
+            if len({tuple(p) for p in points}) != len(points):
+                raise ValueError("Duplicate authored muzzle: " + ident)
+            if "muzzle_region_xywh" in entry:
+                x0, y0, x1, y1 = rect(entry["muzzle_region_xywh"], canvas, "muzzle region")
+                if not x0 <= point[0] < x1 or not y0 <= point[1] < y1:
+                    raise ValueError("Muzzle outside its authored weapon region: " + ident)
         if entry["palette"] != "tools/palette.py:COLOURS":
             raise ValueError("Unknown palette: " + ident)
         if "palette_keys" in entry:
@@ -273,6 +288,9 @@ def build(data):
         if "bubble_xywh" in entry:
             box = rect(entry["bubble_xywh"], image.size, "reaction bubble")
             validate_bubble(image, box, ident)
+        for point in entry.get("muzzles_xy", []):
+            if image.getpixel(tuple(point))[3] != 255:
+                raise ValueError("Muzzle leaves opaque weapon/flash source: " + ident)
         images[ident] = image
         active.remove(ident)
         return image
@@ -292,7 +310,7 @@ def metadata(data):
         offset = entry.get("cell_offset_xy", [0, 0])
         lines.append('\t"res://%s": {"canvas": Vector2i(%d, %d), "pivot": Vector2i(%d, %d), "cell_offset": Vector2i(%d, %d), "seconds": %s, "loop": %s},' %
                      (entry["output"], w, h, x, y, *offset, entry["seconds"], str(entry["loop"]).lower()))
-        for field in ("light", "smoke"):
+        for field in ("light", "smoke", "muzzle"):
             if field + "_xy" in entry:
                 point = integers(entry[field + "_xy"], 2, field + " point")
                 if any(point[i] > entry["canvas_wh"][i] for i in range(2)):
@@ -301,6 +319,11 @@ def metadata(data):
         if "windows_xy" in entry:
             points = ", ".join("Vector2i(%d, %d)" % tuple(p) for p in entry["windows_xy"])
             lines[-1] = lines[-1][:-2] + ', "windows": [%s]},' % points
+        if "muzzles_xy" in entry:
+            points = ", ".join("Vector2i(%d, %d)" % tuple(p) for p in entry["muzzles_xy"])
+            lines[-1] = lines[-1][:-2] + ', "muzzles": [%s]},' % points
+        if entry.get("generation_task") == "0013":
+            lines[-1] = lines[-1][:-2] + ', "tower": true},'
         if "bubble_xywh" in entry:
             x, y, w, h = entry["bubble_xywh"]
             lines[-1] = lines[-1][:-2] + ', "bubble": Rect2i(%d, %d, %d, %d)},' % (x, y, w, h)

@@ -1,0 +1,35 @@
+{
+  "id": "gun_tower",
+  "kind": "level-1",
+  "tool": "built-in ImageGen",
+  "revision": 0,
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-2cc8bd91-6e6f-4fc6-9b71-61ab9c06fbd8.png",
+  "source": "assets/art_source/defences/gun_tower/level-1.png",
+  "source_sha256": "790895b387d69236fc1be7eeaec0406cbdcd38295d45c3366dc8eacb1fba32b2",
+  "source_wh": [
+    1983,
+    793
+  ],
+  "prompt": "implementation/sprites/generation/0013-gun_tower-level-1.prompt.txt",
+  "prompt_sha256": "3e2717ef145b782503b6d082bda9fca1f76f8b2fd170bab97ab6387f5be7afea",
+  "references": [
+    "assets/art_source/defences/gun_tower/master.png",
+    "assets/art_source/buildings/house/whole.png"
+  ],
+  "decision": "Rejected: flash and wreck horizontal bounding boxes overlap; only three alpha-column groups, cannot cut four clean rectangular sources. Revision 1 requests compact attached flash and full-height gutters.",
+  "source_alpha_range": [
+    0,
+    255
+  ],
+  "reference_hashes": {
+    "assets/art_source/defences/gun_tower/master.png": "86d51327390ec01329d9f110b2c539e01924dbdd21348d1f6dcfad25cbbbce13",
+    "assets/art_source/buildings/house/whole.png": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435"
+  },
+  "tool_arguments": {
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\defences\\gun_tower\\master.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\buildings\\house\\whole.png"
+    ]
+  }
+}

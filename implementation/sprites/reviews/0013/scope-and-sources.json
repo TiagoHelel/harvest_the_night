@@ -1,0 +1,5472 @@
+{
+  "baseline": "87079a1",
+  "changed_existing_pngs": [
+    "sprites/buildings/auto_crossbow.png",
+    "sprites/buildings/auto_crossbow_2.png",
+    "sprites/buildings/auto_crossbow_2_fire.png",
+    "sprites/buildings/auto_crossbow_2_hurt.png",
+    "sprites/buildings/auto_crossbow_3.png",
+    "sprites/buildings/auto_crossbow_3_fire.png",
+    "sprites/buildings/auto_crossbow_3_hurt.png",
+    "sprites/buildings/auto_crossbow_fire.png",
+    "sprites/buildings/auto_crossbow_hurt.png",
+    "sprites/buildings/auto_crossbow_wreck.png",
+    "sprites/buildings/flame_tower.png",
+    "sprites/buildings/flame_tower_2.png",
+    "sprites/buildings/flame_tower_2_fire.png",
+    "sprites/buildings/flame_tower_2_hurt.png",
+    "sprites/buildings/flame_tower_3.png",
+    "sprites/buildings/flame_tower_3_fire.png",
+    "sprites/buildings/flame_tower_3_hurt.png",
+    "sprites/buildings/flame_tower_fire.png",
+    "sprites/buildings/flame_tower_hurt.png",
+    "sprites/buildings/flame_tower_wreck.png",
+    "sprites/buildings/gun_tower.png",
+    "sprites/buildings/gun_tower_2.png",
+    "sprites/buildings/gun_tower_2_fire.png",
+    "sprites/buildings/gun_tower_2_hurt.png",
+    "sprites/buildings/gun_tower_3.png",
+    "sprites/buildings/gun_tower_3_fire.png",
+    "sprites/buildings/gun_tower_3_hurt.png",
+    "sprites/buildings/gun_tower_fire.png",
+    "sprites/buildings/gun_tower_hurt.png",
+    "sprites/buildings/gun_tower_wreck.png",
+    "sprites/buildings/mortar.png",
+    "sprites/buildings/mortar_2.png",
+    "sprites/buildings/mortar_2_fire.png",
+    "sprites/buildings/mortar_2_hurt.png",
+    "sprites/buildings/mortar_3.png",
+    "sprites/buildings/mortar_3_fire.png",
+    "sprites/buildings/mortar_3_hurt.png",
+    "sprites/buildings/mortar_fire.png",
+    "sprites/buildings/mortar_hurt.png",
+    "sprites/buildings/mortar_wreck.png"
+  ],
+  "added_pngs": [
+    "sprites/buildings/auto_crossbow_2_wreck.png",
+    "sprites/buildings/auto_crossbow_3_wreck.png",
+    "sprites/buildings/flame_tower_2_wreck.png",
+    "sprites/buildings/flame_tower_3_wreck.png",
+    "sprites/buildings/gun_tower_2_wreck.png",
+    "sprites/buildings/gun_tower_3_wreck.png",
+    "sprites/buildings/mortar_2_wreck.png",
+    "sprites/buildings/mortar_3_wreck.png"
+  ],
+  "preserved_png_count": 240,
+  "preserved_png_sha256": {
+    "sprites/actors/carry_0.png": "c9de9622e2fa13e0787a226bf1dfa037157a232deee9da4d7965a92ac0f64f10",
+    "sprites/actors/carry_1.png": "d06e42ac6ddcb32fe3361249c32cb263337a3b8b95eb7a86e9e3476709da56ab",
+    "sprites/actors/carry_2.png": "8e6a062a6e7321546ce11066ca097c64cd2bffd03b54399cc0a882b5eb56ef07",
+    "sprites/actors/carry_3.png": "426b3402047b4089da6a6e2312e7c503f14195a5fefe07b18169f2e92026f381",
+    "sprites/actors/chop_0.png": "2dc47aa70b98feabe753a4c56cad978e01f337432ae16d109cf9bb869e91ee51",
+    "sprites/actors/chop_1.png": "2ea6ef356533a27ea14fe7e5a92d14a8e8eef55fab2b2ac4acbec8cfa75c9f99",
+    "sprites/actors/chop_2.png": "c73e5297b40318df9b6fab4489b5cfce8988298ce957a3bf99874c103c557d3b",
+    "sprites/actors/chop_3.png": "ba78a6e34251638bd7b70d68e6ba0205c73cbb9fdf68713aae9f7471cbd57fb0",
+    "sprites/actors/collect_0.png": "dbf935f484ac9beba502e0e7608fc1bb3600aad08c609e7c019237e831d71055",
+    "sprites/actors/collect_1.png": "7796c13988b68b84f5750c38a9788799c5fb52542458e51d2b699c7dea8b2241",
+    "sprites/actors/collect_2.png": "34ed7e14f399191c35d8869f1d3118f123c4f2d8d3d1a7ce5ba1373701d38e67",
+    "sprites/actors/collect_3.png": "d09cf5983e1911dd2dfa72530af21d09c008a9565bf359e19acbfe7c6d3b8888",
+    "sprites/actors/craft_0.png": "89653b28d9d41bb4da4d5964f0a8149b4fdc4850a7850f1a8d8f8e75a1c664ba",
+    "sprites/actors/craft_1.png": "bb56728ad565501b615089284be2ebeca17f93dee37ecede8567537f92d812f5",
+    "sprites/actors/craft_2.png": "2c9638f8f853ed60db81a7e20078502c349b5a7a90c1a6b5a11807b57b1ffc29",
+    "sprites/actors/craft_3.png": "9cd2f2150f553cb6068995257ffab9bb96a3f0d9d26b22127d45e7369c61eb05",
+    "sprites/actors/fish_0.png": "5211f8537a10e70ce003524112c17897bd33cd9d2248c4d29f02c8848b432703",
+    "sprites/actors/fish_1.png": "873ae571befaf243cc63636b9067dc9aab55925a5767e160f672d7344f759071",
+    "sprites/actors/fish_2.png": "275f84425c68c1e676da9ead90b7223395047fd1e9ea63e71d2a3b891bfd866b",
+    "sprites/actors/fish_3.png": "bedff6292a2eb4940ea14e3fc90a0b33bbd599cc2cd7300cb2d9d11e417893d8",
+    "sprites/actors/harvest_0.png": "0d8d76ee2b73d77563e379f1545817fc38aa9d61ca424365ea2536ddc1628097",
+    "sprites/actors/harvest_1.png": "8f4c2fcead7a7d50fa7c5f9c15c9fd06a37e666a5885a239ef1856efb23a1952",
+    "sprites/actors/harvest_2.png": "87c5fb6eac7e23ee8e9c7b88f5db9abb8c9c8970b93d2d66abeaedc9765bf180",
+    "sprites/actors/harvest_3.png": "e10630c854c8d1306a09cc450815b0548a4358e53d21d6a8d77f091044dc04f3",
+    "sprites/actors/idle_north_0.png": "ca55cfbe772bfe0e4fa66f1a9cdcdbc0cf08a2c45dcc3eaa10cc7a9eaaed0c6c",
+    "sprites/actors/idle_north_1.png": "031789fe57adb88f48c500e5c8b935d8f5d54bb10ade77d9a025068b5568c1f8",
+    "sprites/actors/idle_north_2.png": "ccf61bc2df6e0a1998264e2ea5761312069a3ef6f3da7f8fa39eb9bbf7b35b21",
+    "sprites/actors/idle_south_0.png": "e51133786b3a84ee97bef2d50b007687ea6909f9fc9d2ea70b9ed8e8bb15dd80",
+    "sprites/actors/idle_south_1.png": "f1e261dc53f094bd3f9b4fd47efbbcde25d5ba8ee28a5a59ec0e1bafd1f5cb7a",
+    "sprites/actors/idle_south_2.png": "a574f5d15c2292bce746569dc68e5a2e2f419c917bec49b3fa1669d137c0f26d",
+    "sprites/actors/idle_west_0.png": "804c8951ee291ec625f8b1fe1587f6ab78580b084c05b641eb2c727c1fccf824",
+    "sprites/actors/idle_west_1.png": "831b1be9a2039920b86711bb4113b94830c6c7943e2d35a91bc04b0baf125809",
+    "sprites/actors/idle_west_2.png": "64eee3826c4634dc552221175e8a2ef8679641e9743f11b62616166d21e51d53",
+    "sprites/actors/mine_0.png": "2c4203f2db9699c410a4184a27e6b6768c9ef4c700fc92d6bb2f9aabb9f998da",
+    "sprites/actors/mine_1.png": "6034999f9c4c2479383ab8b71426098f0d7ba862ebc35aa67aefb4aac41b2c41",
+    "sprites/actors/mine_2.png": "24fa4eed6f5f31518d5c3178c75ecff412a29959ca9613d49faf4ef687ee0687",
+    "sprites/actors/mine_3.png": "a40cfb1349c13dca340dd2601e7bb43c1edff95076bc5594a9f722e27300a26a",
+    "sprites/actors/placeholder.png": "1153f267b77fb1f8b21c9194bb51f7c49b4976a5658eaef540a85c29c733ef9c",
+    "sprites/actors/plant_0.png": "fd429faacd4acac6d00c5a963d14ffa801591ea3320f43172cc349970a21b2fe",
+    "sprites/actors/plant_1.png": "5192c7ca1284ee1055899e5b765ff394ae45e3f152c4f03fb2094b32c8e514e2",
+    "sprites/actors/plant_2.png": "5e65133d93fc9522d13b124af7e74b4d5ff0c622e53865e1be700f542b7aaf77",
+    "sprites/actors/plant_3.png": "dcaf20cbaa0f4c9448b6c97e506e12296f5ab3141e859b9e2dd69bb610c18d22",
+    "sprites/actors/react_bang_0.png": "e28c8c3b59ad438779b9bc028014ea645b2ee8d7ff2841a7d4cb10ce83ad8665",
+    "sprites/actors/react_heart_0.png": "f1186622d5f3ffc4f53bfb6e11a9ee2aea96a08de2faedda109e40a3103e2a4d",
+    "sprites/actors/react_note_0.png": "5f18244b0df030230fd021fb696f8fa211013e9ca78dce4becbd6a44c0c0c1e0",
+    "sprites/actors/react_question_0.png": "567c81989c9f8a09e28ff4c3fb9711ba27a937d158ec0349a170044638235e1f",
+    "sprites/actors/reel_0.png": "790d167239bd187bd855de770bf3cb47873b5eafff51c71f1d95dffb1250b86c",
+    "sprites/actors/reel_1.png": "c39ed7f3ec5b42b9c67525a3978d2653f6a14d1410a770aecebca62b9a3c01e2",
+    "sprites/actors/reel_2.png": "6ef65486f97a41f130ab274bcf5bd5f198e7917ab78e55666dd6f53999e02957",
+    "sprites/actors/reel_3.png": "5cdd725014228a64e4a79cb4901d325a406ba4491711b233ea1b4b942cee8c4f",
+    "sprites/actors/repair_0.png": "5ab7c1bd1c72264b24539420ea5a358fb593143c016142886db3c081c366bb87",
+    "sprites/actors/repair_1.png": "1ea6d8a5e23be861cefa116320615989f6d5e4b64a458e0c78b753e496821325",
+    "sprites/actors/repair_2.png": "5113baebd21b78dc1f7376566a246efed22bdf8663945f335615cb5c126db74f",
+    "sprites/actors/repair_3.png": "5d0168f688df7826a71dfda0d804efa3c41dff4608f5e615fea8daf26ce1a0b7",
+    "sprites/actors/shadow.png": "0378b32c2a9bed7529f0552e126c7e05ea17d071fd682633086bd931fac2dcc4",
+    "sprites/actors/till_0.png": "66603839e11646059701e4d4cf5baf518eea137750ebbfce795ff911239b1a11",
+    "sprites/actors/till_1.png": "f7ade8652858e3bc6dafaeb8ca27cf6ccb7fb2fa152ef29449d5eb679a24a5d1",
+    "sprites/actors/till_2.png": "2efe0cbc5cecdcbd3710b86547f32ffa84b99617d51a081a536303f716a7679c",
+    "sprites/actors/till_3.png": "724803dafdef8af631699b8e36a2494940e053707ae3d0696514edb87d4b74d4",
+    "sprites/actors/trade_0.png": "58fd1eaa6e686237a39fae3871afaa04585ad5155b95422e823fe3a50bf19cba",
+    "sprites/actors/trade_1.png": "ae065fc079e06f2106e53744b8e906b09d1400a74175a72ce425d363309336a7",
+    "sprites/actors/trade_2.png": "160f2b5c7401b399df42297144d1bb5626055b8c4dc945d01fcadc09c13e5ac1",
+    "sprites/actors/trade_3.png": "d20b8ebdfa104f1f2304c6985d93ea8d52fb8c39a1f2607411c1353c0012efaf",
+    "sprites/actors/walk_north_0.png": "a1c39a20f20643083a130f908342092dea290a9de7590b3a5cef2a30989cf6d3",
+    "sprites/actors/walk_north_1.png": "6d8e14fb06e319711ecdd29e1277f56e19d6a3d6bcdd2bc5b1599519378dd274",
+    "sprites/actors/walk_north_2.png": "7d249f42fabf46ca14beca1f4b9674a639c3a23da067305ae902ee17c2f4e902",
+    "sprites/actors/walk_north_3.png": "3b32ba8b8a8dbd92c8f923be92e7e168cd576c3fb03bb8757d20b048a9aae932",
+    "sprites/actors/walk_south_0.png": "66da8a9f1882c8c4aeb1018c8322297a1323cbd1b6c52c6bd3cb5037b91b7077",
+    "sprites/actors/walk_south_1.png": "632681cb45eff18ac588fa87c7bc353cd426247149776a852989c15c2b4154ea",
+    "sprites/actors/walk_south_2.png": "a12a3246059856c159f52bb89529a566771b32f33c570e82fd15811fffc34302",
+    "sprites/actors/walk_south_3.png": "5c01f4f74f8de12202505a3cbaa9db103ec152af415d05b6a1ac560712a2589e",
+    "sprites/actors/walk_west_0.png": "5381c3ab5762dc21e525b71f8d8c98934d2c67839fe253da056a269e2d40cc4a",
+    "sprites/actors/walk_west_1.png": "dff0e6ad36a69086975f22d87501614fae909fa232ace2d2f0f8cf8b4809cbb3",
+    "sprites/actors/walk_west_2.png": "e84177f9aa56ac84e660faefbc5fa3f6d7e7a82a42fa891bc6ceb578ab492585",
+    "sprites/actors/walk_west_3.png": "129fca613b7198e9cff6c103ce7e159f9fe9c6ab2827b94a83038b4016edd4cf",
+    "sprites/actors/water_0.png": "f21a7106865e5a043153d9cac5cb19a033175b4749f3081faa7622e0841d3464",
+    "sprites/actors/water_1.png": "9806eae9a678cad7266fbe5c5b5755f5f96b86c3611b46524d7ef1bd9be73b94",
+    "sprites/actors/water_2.png": "bfc84c6995c55b3c73ce92b73776274078e6c6058ce7f59a57f88df4a0db3abd",
+    "sprites/actors/water_3.png": "447cc62bf75c954e510b3161336c7ceef53481a9fcf14503508dc2b20ff3e16e",
+    "sprites/buildings/barricade.png": "946ba29d69c23e9b24f229bc02968695280f20b40c7ac4edf0bffedaee885dbb",
+    "sprites/buildings/barricade_hurt.png": "b2aa3c500b83188ff52536bae3f25c520afddd9fbce6ea855826e9a9e52d2fa4",
+    "sprites/buildings/barricade_wreck.png": "950896dd0c5c399cb35c286a42883b45c4c8846b7fce3c027a353ae288c7afb5",
+    "sprites/buildings/fence.png": "c14e498231c6ebfef1302ab4724bb62ca78b61c700f632cb60e0b4125fc43a66",
+    "sprites/buildings/fence_hurt.png": "b034edd945bd1a5de50b91cd2623ec74f2ac5daf4b366f7376d965ceb2b3e164",
+    "sprites/buildings/fence_wreck.png": "97d229524cd33b7dff2a9a0890ea829652e06e628110fc1a80198cea91a3b9c4",
+    "sprites/buildings/house.png": "34afcc26fed1df120b23916aac39ef7798fe14ad7c1ccc73f856afe346e46b5b",
+    "sprites/buildings/house_0_0.png": "70ab14dbcb383f0ecf5df8160f0f970b11c8f972ed1c8b39470a573481140bf3",
+    "sprites/buildings/house_0_0_hurt.png": "b9ab6a01fbeb22a0294ed30648e06d944f94ed33afa01969ca34102a0c6a66e0",
+    "sprites/buildings/house_0_1.png": "eb8c491c1d1e87d7aefba9ab59fea644202b09ac3c91c4f577ab67d8eff24bd7",
+    "sprites/buildings/house_0_1_hurt.png": "69841b9ecde5c122a52e7a46fd69a72a47fb9e51689efa2099c353d527f5a51c",
+    "sprites/buildings/house_0_2.png": "df5a562e0199afbaea49a6630c8bd425ff53fd8d6dfffe168b66596e00670be3",
+    "sprites/buildings/house_0_2_hurt.png": "5f92d021a408527f3027c336514973feceb6fcdb2458dcdf4b6af9f9449ea44f",
+    "sprites/buildings/house_1_0.png": "1ee506aab38818ae617e41d048f7aee89c353d5e421523f326c0f228330a4c38",
+    "sprites/buildings/house_1_0_hurt.png": "6adcc6b0a19133e33eb714d41b20626cddce1babf0ca36cd38ee59d91087c245",
+    "sprites/buildings/house_1_1.png": "b471a605e5ce88c33e434dc94de96d00825b2722bbf1c3fb324bb9d85cee0f3e",
+    "sprites/buildings/house_1_1_hurt.png": "e4242366c5ae754fbb55a0595ff44186a77b410d0f8864902cd409a72af64faa",
+    "sprites/buildings/house_1_2.png": "df0c73302e6753a2788aaa51c7c3f55ab230d8f1fd10b318038fa9b02fbae831",
+    "sprites/buildings/house_1_2_hurt.png": "65d163b6108465e0522615fae9243ac3dc51143fcec19ac6d0126572c2c5ce86",
+    "sprites/buildings/house_2_0.png": "143a9ed97e8660836df09f5b57efbeee8b844027bd4789c32dc626958728db96",
+    "sprites/buildings/house_2_0_hurt.png": "e7407b06a88620829b5c23612404d9cdcc282df9d60f5f717b32fae72133a843",
+    "sprites/buildings/house_2_1.png": "5c715a354aad4f68f25344a09e16701605913916445b7557f5f1488a9588bf4a",
+    "sprites/buildings/house_2_1_hurt.png": "d017447d45ae3e3fae2f3c5d3da0cc67f088f682a0b4bf36b312fc392f9f0c17",
+    "sprites/buildings/house_2_2.png": "34e930dc97637bc28f4835295ed38807e5d64824b67b88b3bbd1a0d7815dc3f2",
+    "sprites/buildings/house_2_2_hurt.png": "29ac74d80122365e926b79e0daaccdcb2a692f3dd57650aa832c3b705a1f6132",
+    "sprites/buildings/house_hurt.png": "d4124c9c1e5cd9cd68741364f03628feb6c3cc59f586bfa14ce04e833e994f1b",
+    "sprites/buildings/kitchen.png": "16ab377567d177b59dd07e7ce9ea7be0f493829e37d46791342048afe50e1e29",
+    "sprites/buildings/kitchen_0_0.png": "03e7e746d8098b56405726abfb99922235b5c850e26eae8cb4ab421fdffec923",
+    "sprites/buildings/kitchen_0_1.png": "a2f8e1f103a3d18d742dec598a60838bde73671f71c5a5601c17ac129116893f",
+    "sprites/buildings/kitchen_1_0.png": "bb3c114c8ec88933742ce75700e8cece3df9b69f3e3d1f71f4d5986c86bffad9",
+    "sprites/buildings/kitchen_1_1.png": "9628faf9536618591da70aca4bc64f63d911521b4d5df80435ddd8e7d69bbc85",
+    "sprites/buildings/kitchen_active.png": "8ca4107195326144704e3d63ef8278c796a03a705d0895a61a6a20c2f4b80c9e",
+    "sprites/buildings/kitchen_hurt.png": "5b43674fc195732e69874b82a1d09d903b103522d6a8319caf6d9caf92273a60",
+    "sprites/buildings/mine.png": "c71cf544cb7b02c2fa96d263cc62db72b02f1b0ef6d9056900f76f0f44a2a14e",
+    "sprites/buildings/wall.png": "5ac71781e1265ead2efb25d2f0548b5f202897d866e64c74cfc968115abbb4e3",
+    "sprites/buildings/wall_hurt.png": "e692b7b23ccc93fcbd736211c86360c22e0ae8f5945e41a982a110bebbaac36d",
+    "sprites/buildings/wall_wreck.png": "568b30806529aa49b2fc32bb62f9d1e9ae2300d172975ce92822bd8c9e9a22a7",
+    "sprites/buildings/workshop.png": "d05b4add0ad3a723a3ec84b30f146d29cf899f7b767671c8638a574463c7f6af",
+    "sprites/buildings/workshop_0_0.png": "cee0e9a8fda498c2a1ea8dfd13b27b140af97498275537fee9afe62a0736f2e8",
+    "sprites/buildings/workshop_0_1.png": "07b652b8125de83e5063073f7ce69c5b560fd1245b68899131b9f202d621bcc5",
+    "sprites/buildings/workshop_1_0.png": "d24bb3b9e739074939e5b1dc936b75367bbe3b40530859ed7d98c6f4b082cc79",
+    "sprites/buildings/workshop_1_1.png": "5502dc155226708bc12e4780fdfdbddf011fbe671bb08e752406c71129792dcc",
+    "sprites/buildings/workshop_active.png": "cacbd66456366613290297d51b907e9763d7ea6b66f2b5bdab3f0a437546c8bd",
+    "sprites/buildings/workshop_hurt.png": "623ab045dc27424bebe7816211ba3288e81d689111ff5e36e624315937f74104",
+    "sprites/crops/carrot_0.png": "7fc85705617ef3902dd32129495d4ed0ff24a945189ba1a667300ebb3b925dd4",
+    "sprites/crops/carrot_1.png": "75ef0bb6151c0b111a2d679efeff63b8fa451bc7fb0ed19e1d7d0b9377335754",
+    "sprites/crops/carrot_2.png": "6f00db999cf9382b602e4e66c2409cc67f2c068521e29d31c29ccb9505228482",
+    "sprites/crops/carrot_3.png": "dc4f21b5b12d2dcc7d5e676a49418d10e9e8df9b53cf067f9423012270632cc9",
+    "sprites/crops/corn_0.png": "bc1d09430134f62b6283140c35adaabaa08ed1e4535c03aa9ba79356e3b0d21d",
+    "sprites/crops/corn_1.png": "72e5d8453e707871f9e68e7ce45d178061d92ddd236101e7ce0c347acba90dce",
+    "sprites/crops/corn_2.png": "6ea12d15ff523fdc3b1fcc4d86425eaae6667c9cafc839e929eeeff985d06a26",
+    "sprites/crops/corn_3.png": "60d71616a2b337c2a5591edd9c99a4bc4aec8a408da5af63ac9f7dee63d4f6af",
+    "sprites/crops/tilled.png": "6ebcb96545a85493925d913004de5539037b3592d192d9dc609d9686127779af",
+    "sprites/crops/tilled_wet.png": "f3be498c9b31064979a3ce8295221572ad75464256e4f6bb932456a28f49e73c",
+    "sprites/crops/wheat_0.png": "1e8b1b3224504e82ff525eb9ff70c14b342dfb1bb4ca8930e114cf02de3890d2",
+    "sprites/crops/wheat_1.png": "53225ec3ef5d8a26c575a3b06c8093e01a21e833b10545a0982f3c89c5ee0b63",
+    "sprites/crops/wheat_2.png": "22f264c4edb6310a1e7ef4db0e0d6da2fa442af3249ac8904f49af1ab5385671",
+    "sprites/crops/wheat_3.png": "5081e30c016bbf5813aa0270ddd08c7892404548da40b629d263cd6f3f70cbd0",
+    "sprites/enemies/breaker.png": "ded409fc794dfe2ba6b118f815cdb21ef005ac63ff1fe1c5196ba0ba301db2d7",
+    "sprites/enemies/breaker_attack.png": "494d5f21e47b336e46219365da3a2518a95d6beb4d5ecbceda42fcda429f760a",
+    "sprites/enemies/breaker_death.png": "3a722a986031f5df179a96385fdea2f4ab6cd1c23ad3555701ec58bd2b695074",
+    "sprites/enemies/breaker_walk_b.png": "cb47a518d91d6ee0ea8b87c4b1f45c860060915cddc3ea7278dbea4e8057fede",
+    "sprites/enemies/giant.png": "c31cd92b3321b095fd6aa0cc60b6ac07b0764d1fb1b784bc539134e95a076d83",
+    "sprites/enemies/giant_attack.png": "e27933d79215484a4afab0008c4994cf2b5238529b61fbdb08d1feddba06f3d4",
+    "sprites/enemies/giant_death.png": "9f1f2a5d51aa52a6b5321458e9bdecd362a8dbb7f736f54bd1b02ac7f5356427",
+    "sprites/enemies/giant_telegraph.png": "eb7863aa633a1957b2023fe6081d4d571d4bd3871e30fbfd56bded6de9a064b0",
+    "sprites/enemies/giant_walk_b.png": "dea0abdc3474cf755266ca95d49aa0d8177eee43d6be0f394716828b445464c2",
+    "sprites/enemies/runner.png": "510a9e92bacd415845664321187ed1edf1018551529a63e6b137af18aa7cf32d",
+    "sprites/enemies/runner_attack.png": "fd99ee15f8cee924083ad69330f1102a277e1fa963dd86acd67978d198d4c2a4",
+    "sprites/enemies/runner_death.png": "74bb1b0c2bb1b9fae880cde7aff748fd160aca7dc628e1f73a751f39a96fda96",
+    "sprites/enemies/runner_walk_b.png": "6e06065ab940a4441b8c437a8ec59b8cad43d4e8ac9d4056ea8f8a783e415e0b",
+    "sprites/enemies/tank.png": "90ffa0409d6e38411f11f8b011bc0436ed4bb940533527c9dc9015025b634ad1",
+    "sprites/enemies/tank_attack.png": "205bb1f6cd6df4b010aec58e3942875b1d9c0aaf0688e053569300a3c95631be",
+    "sprites/enemies/tank_death.png": "f6c0048f7af9e7ef51648fa745d7916519d58df28aba1e3da9ec15383afdfac3",
+    "sprites/enemies/tank_walk_b.png": "ba5be1222bbbb68321ac1f61baa7ffdaacb7b8d912284b20103a9f6bf2733d7e",
+    "sprites/enemies/walker.png": "d46dd91c4a380876cc97da04cd62c50632ff620d8b81da55ac7fb70c921a03ee",
+    "sprites/enemies/walker_attack.png": "9491627c3b72b6f79b9e798db29c283c8768965efa70c4b2f329618ea47076af",
+    "sprites/enemies/walker_death.png": "66fbe788d80f2a45af9de795b602e4d27aef4b3d4e9d0239d38654fe7cb5d0e9",
+    "sprites/enemies/walker_walk_b.png": "50d167979439be2b3141d7284e8b2c04aa9ff7bc8af177501a1494e60aa480cd",
+    "sprites/props/chicken.png": "54ca6dc6b42be5bfdbb195f2c47d78bf2c4ef6d6722788fbf4ae02355b4480e8",
+    "sprites/props/cow.png": "f6a2990f7b7d9f95acbf0927eae35fcb451b50b2c92c439a339e498b4f663374",
+    "sprites/props/generator.png": "26eafa19dc75728704a6c72b3a9a5bbe6ca8e579b29dd905dd85afe541d8768a",
+    "sprites/props/generator_0_0.png": "5db190e132dee6ea10e83a22f123c02aa49743e644614606f26bb6ec5b06fbf3",
+    "sprites/props/generator_0_1.png": "f1a9fcb9c87932e983d6d579f45dfa14c525b785da2f0f6138514147805b5bb2",
+    "sprites/props/generator_1_0.png": "d211c87d0e4390e411785b1846da2987dfc7fabaa3d9635ac7f028c80b9de8da",
+    "sprites/props/generator_1_1.png": "f67339d3886491ea8c122d4095e559eb5937bab96ab47afa5318a5d43d45391d",
+    "sprites/props/generator_active.png": "7c8299671b3f17923f1668eaaf0fd356d460b857e4899c17ce9f6e5c3b59e8dc",
+    "sprites/props/generator_hurt.png": "becc86e85780dc984644afe3506207e75cfcaf4cb0ce8d7ea5aa09f3de39f78b",
+    "sprites/props/ore.png": "abe01f81c58dfbb004aabe5a3b1fbf8f20013aff7559959e305b19941afe5d8e",
+    "sprites/props/ore_b.png": "063b932a485f579187492c37b5f546be73f11bc4169600678fe2c064f728f79d",
+    "sprites/props/press.png": "84cda96d22125a7d207db6d05e778396941254832cb00b87c1782a9e48739481",
+    "sprites/props/press_0_0.png": "8383ad5b9837a7e8f82601b231b1aef738f4e448bdc2797d721000eb7dd78349",
+    "sprites/props/press_0_1.png": "50447886a8e8d78294fc939dc47e8ecd733957e31cd60374b115fcdc2b96f441",
+    "sprites/props/press_1_0.png": "f0f5bab630b319dcdd44ac3fd2bee7a84ae6804d3749ab2f847af0bef607730f",
+    "sprites/props/press_1_1.png": "fb39ac86bf51c6a50ec2dffb519c0ab847c607541895bff2136d09c39f1fca76",
+    "sprites/props/press_active.png": "2190d27248df8efbd156e6ce27de6d1a9d7bd1d29f91687e3f6ba74a6e5cf8dd",
+    "sprites/props/press_hurt.png": "a01f13321e48d51655e42db9aa47d564ea99c848a2add83b8047d939465a6d2f",
+    "sprites/props/rock.png": "2e9d0c2f94fae2594180778c6ab9c97802a2451efc713dd7d97cb1c85a0f3bf4",
+    "sprites/props/rock_b.png": "cb32e7cd15c39980dde7be381366b30d51e3f0a5576c29b822c7f3db05971e16",
+    "sprites/props/seam.png": "c47420d873606a1469a6ea1bc82a3dd8ef5185b60625ed99e3dce809224818c9",
+    "sprites/props/seam_b.png": "eb96153bde91e9fd384503745415e796486534a58dcd144fe5d09eb06e6c2ad8",
+    "sprites/props/shop.png": "f1e2d58430171a9e2168df5cafc3f954e3954c9618bcf72c7b2cc485cdd4e1cb",
+    "sprites/props/stump.png": "93d4e1ba9fe3de4d84be3bf6313fc724d0c9e6fe852628c603fa23c6c31f9455",
+    "sprites/props/tree.png": "f617f07274a98b22fc29cf37b8b39ce85f3739aff9087c5062048abb472d9425",
+    "sprites/props/tree_b.png": "9db2fcc63ee78043ab78f62ead5b9252aab39f93caa5d51152408d79f9354776",
+    "sprites/props/well.png": "3b75100a5ebee92069d2e42111d2ab804db51ee1a71750d7dc4c98e5dc453655",
+    "sprites/terrain/atlas.png": "b3bdb273aa78b057651dbb2b2b55a36f132e015762ce48b427d26cad93597365",
+    "sprites/terrain/edge_corner_ne.png": "5763bfb8a4b69e05a043020110af0aff831fe3d4274d2b2635d2284d37a07ce1",
+    "sprites/terrain/edge_corner_nw.png": "1728c049cbefd0f0b062a5a466e513a231a5cd1839792e9cf8081e439fea04a6",
+    "sprites/terrain/edge_corner_se.png": "e5cb16ec01e9c58c07cb1b31a51a71d22c0ca0cba8a03f5c6baf64d71d6f43c6",
+    "sprites/terrain/edge_corner_sw.png": "9a3804226ee23dab0f2ce3f4e6f9dc805711740d856df185fdcbdeb3cf6d3741",
+    "sprites/terrain/edge_e.png": "ae65cbf68979346b98e2045fa25c42928116c10aed69c2046da16bfcf1ed9b37",
+    "sprites/terrain/edge_n.png": "e305eb77e123cec529ec7788500e0618ed4d7acf27c297a2131aae4081496f71",
+    "sprites/terrain/edge_s.png": "672dad4ee2c3733014c13060389a306a695d2414819139a3dc8c44d53730ff6e",
+    "sprites/terrain/edge_w.png": "59ffcc929daa2515313732065b869ad20fd8bc90ca2ccb5bd7d734b9ec30d780",
+    "sprites/terrain/floor.png": "c0f3bbf8b3b77b1bb24feae99b55666698f9ec37e578b470c8819b9217f6eb8d",
+    "sprites/terrain/grass.png": "4d1d187493ab8275082ea8aed39ab884e50384b9bb35cc750276ffbd3b54fc3e",
+    "sprites/terrain/grass_b.png": "e65b863607c80fc98446bfd54f5db7879dc2c22284c3b01f96a8343ea038d4cd",
+    "sprites/terrain/grass_c.png": "6bebf9ccc1902f7352b47dd8f8f06ebcfd4f44f23d6c76dbc84516ff214f66b8",
+    "sprites/terrain/grass_d.png": "9219456f2ef872c74713287178a95d6eacaf864019a7e3c3c9b48ba2d6ed61f2",
+    "sprites/terrain/path.png": "bd3031d7f35f0b3b89a7dd0d9c55676aa80c4c6b0b43a9e1ab6ee58dbb83001d",
+    "sprites/terrain/rock.png": "6ebc2fbb298286967c154f3bb1018e54549ebcc7898551cae3194b7ba62f852b",
+    "sprites/terrain/shore_corner_ne.png": "e49a44d44d46f5a9083bff5802c6128c7ae8df8d8e2f628fc33b3282abc7c9d6",
+    "sprites/terrain/shore_corner_nw.png": "180f1ba9802a9f2e42630c20e598cda80ad122f0629a781cfeb48941f231dd50",
+    "sprites/terrain/shore_corner_se.png": "f8832cc1c40693fee77317864e6e3a08cb5341a0b60b1c54700e38719a2dc764",
+    "sprites/terrain/shore_corner_sw.png": "4c2946e14e84fa1412b4c0742c0e815f543005e247a93e0818fb0544bd282f70",
+    "sprites/terrain/shore_e.png": "2729e63339c9c30cf0f323c4eaf13f33d12511207f34c08696f3893e559d7117",
+    "sprites/terrain/shore_n.png": "4d786185077013771aad1aaa9df172d29aaae7b5752d8bab09bfa6dbf0d6689a",
+    "sprites/terrain/shore_s.png": "3cbcd4f327dddb1967a0e372f6590c09cb5f79b8ee708a208d14fce5cb83ae1b",
+    "sprites/terrain/shore_w.png": "4deeee7f40117f8475ed861ff80e04297bf955eaf0807def7667dc0d20419d5d",
+    "sprites/terrain/soil.png": "7f2a394dee9d4801c32da75bc1ddec0522c035936d450a48bff2f3894cc79d4e",
+    "sprites/terrain/water.png": "0adcf6c3e136bae507188e883ade51f6780dd7a2918ba66cb1bbb3858a9bc2a2",
+    "sprites/terrain/water_b.png": "e4be453788104b64c02cb13f66baa2c79691813732b91b6cbb03b13e890b9b0b",
+    "sprites/terrain/water_c.png": "dd3b41a21c7edc867af6b8fd63a691cd73469b7cf0512d31b34892d4d1e31b6d",
+    "sprites/ui/button_disabled.png": "b7753d2614e9a33ada9a8b1e342c4c7d9f3e3577ae7292c6e1f8c584679c17b3",
+    "sprites/ui/button_focus.png": "c157c5feff7a52eda69a67e4809a3967add4e0f6a5896b77fbd24e6bc60dd6d4",
+    "sprites/ui/button_hover.png": "67d0f3112e216f29fabc74344a22bde4c1fb3e424183335280bbdddfe7fe3307",
+    "sprites/ui/button_normal.png": "b27641b70b7dac754f4fe972d1a384202b04f8cfe22d1a7055f63e98c5e1a7f9",
+    "sprites/ui/button_pressed.png": "420442db8d2097beaab27016f66e6c5fb9441717249f90857f994f59ecd44c5b",
+    "sprites/ui/checkbox_off.png": "7cc95fdede7af92dcb8f9e68e53d63b32d3a1313ef8680cef3b5a502f38532d0",
+    "sprites/ui/checkbox_on.png": "1b96343eee0dcb487192b0cd7237cc78cd49c7d9622d93d7b342bc9977053288",
+    "sprites/ui/icon_carrot.png": "077e4230403815ffa5d7e07dcc81a897e9569ad07bfbb628351bbb1317a71440",
+    "sprites/ui/icon_corn.png": "68c111684752c8bce9fa42877e7830097ccd3e0db3be8513ae3bd1419128328b",
+    "sprites/ui/icon_energy.png": "1e31c40662b74bd20324a354d245db90033c60f2d331a102e407323be20e5195",
+    "sprites/ui/icon_fish.png": "d8560e0b236a9bcf42b376546944709293ac292b9485e091e6371cbb5fcb59a0",
+    "sprites/ui/icon_food.png": "8dfb6c194191ecec6f7971f1f18fd8e590201e5a3d2e214726aa4dcf824163f8",
+    "sprites/ui/icon_gunpowder.png": "502b6691ea78303352ac0d9fc459b7419e9864ca277ee69a677549ca2a1bef84",
+    "sprites/ui/icon_incendiary.png": "19f6830dea97f4ce299680d3becf8233576f3443c0e1577c68f3daf09fd31872",
+    "sprites/ui/icon_iron.png": "5cb901a01f7eeb2ae1f7c6043a6f3aaa800382c33fbeb428bb5d22ce4c3696b5",
+    "sprites/ui/icon_meat.png": "fa991499b2ed74a10f382cec8f13dcc76d09e3b8c58c805f9fa21cd40acb6d01",
+    "sprites/ui/icon_money.png": "5df56d8a7c61e176302a8efca10e1fd2b08df991700102b90ac7db1097000db6",
+    "sprites/ui/icon_oil.png": "fcce4f36276a9ba278b5150fb656741384aacd1810f9da2936eda5114d9fe21c",
+    "sprites/ui/icon_stone.png": "fff176955adbe2e206e26bf187adc46afa6fb9017c3174a732312cbaa1787caa",
+    "sprites/ui/icon_tech.png": "9f0b0fac38135be21c59375f24e485d181de4a10e3e7a0bc0bb428e625718758",
+    "sprites/ui/icon_wheat.png": "2a6dee0ccfa26f384913b3643b7a67c68c02d3f6e7e9f480331181af7d1c0e4b",
+    "sprites/ui/icon_wood.png": "24d04d5edc9028ce6af542e43595604d247561662744de338a3c270e8e37adc9",
+    "sprites/ui/panel.png": "bb5f7ab3eda7f7212e6747ce20f2a82bf20c59b62135c8805f3b14af078a07e5",
+    "sprites/ui/slider_grab.png": "8e98d5a7b3082362d7cc3b520709331e624062465378b015f8ad08c908340125",
+    "sprites/ui/slider_track.png": "e9c0be12295a96953254b1379b17e1326f5d95429b2923ac93da24679bafb01b",
+    "sprites/ui/tab.png": "cfbc7b96bdc3d939ba580eae89af4d437d5f6f4e0e4ab9c309cb27f128b67446",
+    "sprites/ui/tooltip.png": "9be82a482e1cdd4dda5a13934428b33258e0980fd900042b33e4cd19808eca39"
+  },
+  "protected_file_count": 249,
+  "protected_sha256": {
+    "assets/art_source/buildings/generator/master.png": "8e830dbf49216a398bfe4fe02026f5ed8d1ea4e11f5e7a03a989ddf08e8bc298",
+    "assets/art_source/buildings/generator/master.png.import": "0419a441ff6e0d41d2b5ccc0410c653f68b75983dcb197660dcc946ac7439dab",
+    "assets/art_source/buildings/generator/states.png": "5962ec85d3b13b94c7612ffe43625f6fb4227e712f35a016a2852a88f507ecb4",
+    "assets/art_source/buildings/generator/states.png.import": "7258688008959c2425ce00d1615c8395f27f4f943850884fb16f22c8e218f977",
+    "assets/art_source/buildings/house/hurt.png": "0ddfbbb4ed2f219f5a716417c78cf3d619bbe7b19b38379dcb4e3f36de101017",
+    "assets/art_source/buildings/house/hurt.png.import": "7c21b7f5af043966159ca35ad0c98be29a21045fb3cac258aea48752a7eaab2e",
+    "assets/art_source/buildings/house/whole.png": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+    "assets/art_source/buildings/house/whole.png.import": "57429b620d702afca14911e1392a048bc81a880ca6c1f0efc8dee73d2ecf0a03",
+    "assets/art_source/buildings/kitchen/master.png": "1ed38e9dee105f03a8084657b888b575ba9cc47ef0ef3f50bb13c8bad7a31f81",
+    "assets/art_source/buildings/kitchen/master.png.import": "22f91a9b1ba555fd110f70f4205407476c7abd488f099f1fb4b1fbbb3d91930b",
+    "assets/art_source/buildings/kitchen/states.png": "e58737928e05cf0bb250c43b2c4425627636f52dfccd9c5413e35cc3a2a8d62d",
+    "assets/art_source/buildings/kitchen/states.png.import": "54c8557c54877611a40bb9a12a127e8f24fc2e2f4ebf239de0c17f7415f34070",
+    "assets/art_source/buildings/press/master.png": "5b3d8ed220093484e2ebecc3da1c87fa678dc430ab83c84cd5a4ae0860457882",
+    "assets/art_source/buildings/press/master.png.import": "842e1cdbe20423a15108e8d626b21359cddb766e23ee0e6b1873f56ff88bf7c7",
+    "assets/art_source/buildings/press/states.png": "131056e07af2977490bb70ee164605d8cc021e906ccdb7a8d067a33adefb5283",
+    "assets/art_source/buildings/press/states.png.import": "30cad3ae7a39cbb57553bca8491395cce0be0de9d4ebe76d1c769770b1246b54",
+    "assets/art_source/buildings/shop/master.png": "baf5ffdec4456354ce0284920a4334a149cd9f03bcc4df1c8b66c8dfb5774132",
+    "assets/art_source/buildings/shop/master.png.import": "1ad9b1fef1f3dfec0d96817ef92e16488b4d0b1d49bf9b1385aefc941e7198ec",
+    "assets/art_source/buildings/well/master.png": "815a533c2dfb7677c6372fb8c7e11585bd6d7a86cf92836c8b9e03a2aa5bccfe",
+    "assets/art_source/buildings/well/master.png.import": "047032e49f200241270ff67d6382c0612457a3050d3754d65dfc0f56f98cec42",
+    "assets/art_source/buildings/workshop/master.png": "a01f19a85505eecd654fa15f9a9ae829e549ef4c99620c452b242dbd4b204e9c",
+    "assets/art_source/buildings/workshop/master.png.import": "02626307e7f7c07bd5d64cbfac13bc7b55924bb3b7974cb0b1ea27144e9aac50",
+    "assets/art_source/buildings/workshop/states.png": "1187fa7bdf73abb2ff47cc77ae15ae37a38a4fa4617de894eaa8ac88b69249b4",
+    "assets/art_source/buildings/workshop/states.png.import": "45541b643518baf40fd85d80c6a568bdd28fcd612279e6b9ce461fd292674d6e",
+    "assets/art_source/crops/candidates/tilled_wet-r0.png": "9eefdaa50a729463d491094e771e3232e37698dd4e1cf67cc78ba7b896b141d7",
+    "assets/art_source/crops/candidates/tilled_wet-r0.png.import": "c71b4e8b90e64164bfd8193084b9e1398c3666c1f757b1d9e8262e76c60c1651",
+    "assets/art_source/crops/carrot.png": "6d085cca53da6e4fc819da3158634877b1896801170be7cfe40b64305646a94d",
+    "assets/art_source/crops/carrot.png.import": "92b48a3ca1d3f8359113e74d8044195058ebc3649d33b64810eb044d62926547",
+    "assets/art_source/crops/corn.png": "56735130d8c9f10a49e464f3d0f8518c961156a013f1cfb414b52a19ff21ba00",
+    "assets/art_source/crops/corn.png.import": "9056fa4651d9bf6699fcdcb4eacf7407ff960854ff894e561616add765c5dee8",
+    "assets/art_source/crops/tilled.png": "059b4694178aa87883540b3b648831918f8f650caeaf2fb953bc2338c6e5b4e3",
+    "assets/art_source/crops/tilled.png.import": "36d918253c134ed485c0bcc492e67660fbbda67b7a82c7ef1721f84d85fbc9cf",
+    "assets/art_source/crops/tilled_wet.png": "9eefdaa50a729463d491094e771e3232e37698dd4e1cf67cc78ba7b896b141d7",
+    "assets/art_source/crops/tilled_wet.png.import": "ce67924d286fb6eca794839ce62c4bce627e0ea7b2632bfd3235dd253b390015",
+    "assets/art_source/crops/wheat.png": "fe1ecbccbcd3c078942fc3ea6fefcc87ecacbf4c40b99422702903a4961751b0",
+    "assets/art_source/crops/wheat.png.import": "7c0f5c31acfe6045efd706df18022be6943596ccb0c8f09cdc01abf1a6a10391",
+    "assets/art_source/manifest.schema.json": "8bd4a71d05837694d483af980e32fe5edd5e41141a1f644dddc76a497ce29a64",
+    "assets/art_source/masters/farmer.png": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4",
+    "assets/art_source/masters/farmer.png.import": "8925b474abac33c1384a5cfc7738a78a255350894b076e9c957e6bd9bde7daea",
+    "assets/art_source/masters/house.png": "26d2646bf9328eae0eeb699193a11f46e6f92cd487d2369dea27b4295bdab81f",
+    "assets/art_source/masters/house.png.import": "79f5f02ffa14b497b60b954e05b4912948e1f7799afcbdcf91299b0e74f729ef",
+    "assets/art_source/masters/master-contract.json": "ff658117b94135e9c40f45c12297af46fdcca13cf4018fbf8ce41a7e053c71a1",
+    "assets/art_source/masters/style-day.png": "148b5e004b9ed8f4adb1a90a65887e8aa959647b4eccef64e1bad7f17ef0ce09",
+    "assets/art_source/masters/style-day.png.import": "5c20aab336819e9a26e617a8a58c5a1dbbbb006d18f56ed688ed0b2ebe1a7bd9",
+    "assets/art_source/masters/style-night.png": "850d7ee8738f0f1faa3e827e6c5ba71d48c203df16b5d4fa0db736471ca0b6c4",
+    "assets/art_source/masters/style-night.png.import": "e731847b35ff4805a637ca265102ba3e3433d9fbd041bbf3dee9c9be4e928d4b",
+    "assets/art_source/masters/tree.png": "a9b0f2880631364cf6ceb0dc7795cc132de6d1205b18e4b70434f67ecc7ec3f9",
+    "assets/art_source/masters/tree.png.import": "1ee1d34830c71d6b94d8347ceee3aa29918685bde787579bb8481f01adb61f3d",
+    "assets/art_source/masters/walker.png": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
+    "assets/art_source/masters/walker.png.import": "cd533ef4f2aec74a0cd08acc550fbf5bf57c066350e1484aea6236ba6de67d1a",
+    "assets/art_source/player/candidates/fish-r0.png": "4b813699aa46b62142535674aca3616abfde5a9595c5e008ed1f93d104d9fd44",
+    "assets/art_source/player/candidates/fish-r0.png.import": "914155e2a7478266afd9fc0db9144ba457d837c9dec6305334744469c3f30e2a",
+    "assets/art_source/player/candidates/fish-r1.png": "63b6ae4b068bd726f912da3d0ce4ee3d747e681ecf80a35cf7e9ada2f7a12de7",
+    "assets/art_source/player/candidates/fish-r1.png.import": "6f30da0f4815a07d62637e69fddfc52e976e85b56ce2b2b9689959bb58c3321a",
+    "assets/art_source/player/candidates/react_bang-r0.png": "708919397cf069e58f8c7ab36bb59a4d70f1969755b08d35fa924249d16fecb5",
+    "assets/art_source/player/candidates/react_bang-r0.png.import": "f615ce2a50791cd998dbb384c9827d2e828e719872a525dd50be1696fc9ed5e2",
+    "assets/art_source/player/candidates/walk_north-r0.png": "b26e9ff8b1d35ef6bad7fe664ad2cbb51b41518c865a34f8bd19853d92d78445",
+    "assets/art_source/player/candidates/walk_north-r0.png.import": "6b3ad4280b5be08e9e8d8684d7cce27499bbcdfa4a38888dbbc3a8daee47f7a5",
+    "assets/art_source/player/candidates/walk_south-r0.png": "39c0c250ea74222a8c7b8e1c4004a4152ec864524a224ae3f6b75af00321a377",
+    "assets/art_source/player/candidates/walk_south-r0.png.import": "deef63eb16df59f0af72017e01f8deec310e9bf240dd0bd0fd89722963b539cd",
+    "assets/art_source/player/candidates/walk_west-r0.png": "2c61036c0ae35132a988ff95992262fe6adc17d3c6fa82b02e2901faacaa3f29",
+    "assets/art_source/player/candidates/walk_west-r0.png.import": "b1ff02cd34efe820e14d92f9be0b5984bb8eee57bb330f2300d8d208f92a6fa2",
+    "assets/art_source/player/candidates/walk_west-r1.png": "879ee785ceb8709b75ed302b49ada22d57166ebef5406931062265b6d75f059f",
+    "assets/art_source/player/candidates/walk_west-r1.png.import": "79f3fe483ac72e662949efba3eb4385a4c21362155aee716301464f2f20ebcba",
+    "assets/art_source/player/carry.png": "ee467474a800b53b60d8cbd2bed2d8cb58274131879b2d51ca635ee312695d0a",
+    "assets/art_source/player/carry.png.import": "6542bfb4dadad97fe8585e27a084e4be3a76c26107fc34c651b67017046b5565",
+    "assets/art_source/player/chop.png": "a9e8f337065eea10a39559d98625ec6b9e3a57d35181fb626997c6f7af1c31a1",
+    "assets/art_source/player/chop.png.import": "873a953443b86d900874ef4ac8ba789e77eaf533ab1ee008f38c9884c83bf149",
+    "assets/art_source/player/collect.png": "055e45207f67ecf0d1966c94851a53e2dd18806065bf7d79910cb4ed5062cc20",
+    "assets/art_source/player/collect.png.import": "900d68bd65ae93b3adcadff4142b4e5e4ba429004528d80f4650e04e66e07533",
+    "assets/art_source/player/craft.png": "dfd18f36feeede515949517009edb966dce862cdbdb23764abd576521b6e9d76",
+    "assets/art_source/player/craft.png.import": "99e9df35f35b5d8e2c5e2fb47abcc63598e4e2da3ecfa3405e37569ca9f6d626",
+    "assets/art_source/player/fish.png": "771aa2af6048cb16106f1e993912733040dbac6ab383a66d2b543cd7199a5451",
+    "assets/art_source/player/fish.png.import": "c5cde7f338b7be13fc7d6f278b49a880d4e429a9c8282e202deb04dc74bdcc48",
+    "assets/art_source/player/harvest.png": "c68daa632960f22f0346c4c92e70e5ebd18cee33fefae9987cbd923cc2a28f9b",
+    "assets/art_source/player/harvest.png.import": "86ab36a7c3324c4a79c2380024ae80e44e0166cfeb15c7fb5bba2c80109f3b9d",
+    "assets/art_source/player/idle_north.png": "6de9c2f2df1bc0a0a0631769c15dfc21a6514017e38e63b375b194d2aac38800",
+    "assets/art_source/player/idle_north.png.import": "b3e15061b533f41302891d7be30cc86a20911213eeceb5ad11bad2477d216dfa",
+    "assets/art_source/player/idle_south.png": "49de04f2e849b42f984ba145cf54505616ed055a242b6e6363f90d3dfe5ea7b2",
+    "assets/art_source/player/idle_south.png.import": "c85e6373a2b7d2fcb5d44754d44ac17812328e04e505eb3863d79e4510f3e6f4",
+    "assets/art_source/player/idle_west.png": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5",
+    "assets/art_source/player/idle_west.png.import": "02a4a3c457393949648cb76e18485250a5b902d81b3b3622e9254bdf0df34c3d",
+    "assets/art_source/player/mine.png": "0d95e238f1bc5aff89c1cf090fcaa5b458870d44236a941815fbd4f23be29a2f",
+    "assets/art_source/player/mine.png.import": "32702d6ece2cd2274e017414aa7cea81e458b9192338081624f483e1a86d9c76",
+    "assets/art_source/player/plant.png": "f679e7e435d3b5240f465f5f5117da379de4fd2e5518e92458466bca0168438f",
+    "assets/art_source/player/plant.png.import": "e8ae02984150b83753c35e791e9d17074404e76c9d21a3958ea1d70ba7f2f7d8",
+    "assets/art_source/player/react_bang.png": "1816b172af20646cb483fce897a7435a05761d97cd08393b3aa7df105608e4cf",
+    "assets/art_source/player/react_bang.png.import": "2ed9df1fe37710e7b02df7d792af257e1f6d7d817708b548eb36aa794217b999",
+    "assets/art_source/player/react_heart.png": "b81869e4e8ae930ca510335e4cb737e9f85a3cb3fb6c6097b1074f0dad6946a9",
+    "assets/art_source/player/react_heart.png.import": "0207db7ea1447ca27665f28b43f4f2bfe2628099708cd4e31f1c689265665e16",
+    "assets/art_source/player/react_note.png": "e2eedfacc8cdfc297ebe1f685f700512eb2b38c73326ae5966570923e39e9a7e",
+    "assets/art_source/player/react_note.png.import": "31513ebcb41b7829b3574d6367194c8601b03bcf4cadd8df135a9003906d339d",
+    "assets/art_source/player/react_question.png": "766164181a7ae2110598a17a00ebf6ad346fddd05b360c83c3b9e61c8da10974",
+    "assets/art_source/player/react_question.png.import": "b3568b916c8acc46aaf14d5e66cfd146b1218c372c58a99466d763bae75adfca",
+    "assets/art_source/player/reel.png": "e54358cc065be47cf4d30b2784d63f62486eb65a5275b53d30cf3a7dde3d6b2e",
+    "assets/art_source/player/reel.png.import": "96f3a75ee90b90d097e97cd5fdc8f734819dd12944a3a4533d1cc20a5f495ac8",
+    "assets/art_source/player/repair.png": "ed0545d9288dbed674615b54774c1f3246279b1928f71534113602b5a000165a",
+    "assets/art_source/player/repair.png.import": "29fadf069f9f9c85861034910fd12298f78766e425866300295173fb80d34b0e",
+    "assets/art_source/player/shadow.png": "fc43ec54ed74bc71f7058ad0bf5b472e38e3597b3bc8af6dac51044356f2d39f",
+    "assets/art_source/player/shadow.png.import": "4da5e39a1027f2728dc7e6c38828c5626640c4e8cd2162703ce4a5ff2905b43d",
+    "assets/art_source/player/till.png": "81d9240acc8ccb00a67c406b01e12af7640d4f8027c3e44f3a811df3bd36adeb",
+    "assets/art_source/player/till.png.import": "416d991c7c76eb2c0076dc8481ebf9311f2e57e70954abf90128f9d4de51a495",
+    "assets/art_source/player/trade.png": "3d2b4381fa8d726bc0fd2dffead64ad917113ebe2638427336847656cb7a88c7",
+    "assets/art_source/player/trade.png.import": "e0127d5a1250e0153c736f42515df8199f810365c8cb151c86a5a088609b3f57",
+    "assets/art_source/player/walk_north.png": "9a0a1429d754062e81bd1165a644ba0f3d593b814433ac8159da57d766e43a47",
+    "assets/art_source/player/walk_north.png.import": "9da4bc79299b55ad4e4bd5564e3d2c94ddb81108117a5315f7fa475cf47cadd0",
+    "assets/art_source/player/walk_south.png": "c5e566a03fd5bf3ae61571e48f6a348e2658acca48c1b6f7eae91b54f62ea3c4",
+    "assets/art_source/player/walk_south.png.import": "e9bb460b704720e8f3b06a0d344c579b2ec4aafe14fb8c331f7b64d63a8fa3f6",
+    "assets/art_source/player/walk_west.png": "74433ffa7aca64de1e9ee1bf4e54ab73557293ed8fb16068f3423f046a8fa6bf",
+    "assets/art_source/player/walk_west.png.import": "158f2d8e64cdcad22fdc650dcdd704b5c9332cfe9a5531cc7a1b608d6e72acaa",
+    "assets/art_source/player/water.png": "0630be3bf0f17264b7ccc27397da79b4b825d0de118df65443456496725af5be",
+    "assets/art_source/player/water.png.import": "cd7662af9b1aba8ee6a3139acd8ddacbbb64b44a1f570cca82e7e62978987edf",
+    "assets/art_source/props/chicken.png": "fdf30e750796f0d12a16f6b7b09584e5b6b72f4079a3861e4c54b34076ec09bc",
+    "assets/art_source/props/chicken.png.import": "f827987acd6a69ec12d23e0848ba4e2b5c70281b679943983ef2180ba7a0dd77",
+    "assets/art_source/props/cow.png": "a22e639050fefdce2d3ffde6e82cc4e88ba527e8f91e78c12a0f237d2dda70c4",
+    "assets/art_source/props/cow.png.import": "114b0caf6e69b1eac6ca80f62f2712e461fbb39d5499f1e6038c1280af1f9d44",
+    "assets/art_source/props/ore.png": "732ce8cae8c1641fdc0c78e25ffbc2554b4e0a112a098eb13791fb5e6a989609",
+    "assets/art_source/props/ore.png.import": "afbb92cc34087f730155991617e4d7ba7c93b6484378af180ef0e033d1c133ab",
+    "assets/art_source/props/ore_b.png": "06ee39306995017ec320a8f89dadd61ce64295e5d9ec8967051bd1e277ce8edf",
+    "assets/art_source/props/ore_b.png.import": "69b605f9aaaa6c9902c6871afc95e3a3ed2b555be80ff6cb78c42447edaab175",
+    "assets/art_source/props/rock.png": "d31268fcb2c20f9f47597d6019219b57d28ef262e4d45a47c2d2f05656c6920c",
+    "assets/art_source/props/rock.png.import": "0a5f49b9b38739fd8fb5418802a838aacd7187a530419fb6c206f36d09fb496a",
+    "assets/art_source/props/rock_b.png": "1fa07696f592a1ef51059e2f15b14cbef0603083ff4e4e1e32b42c6a208313b9",
+    "assets/art_source/props/rock_b.png.import": "5b5a4a2b0dcff2c211b443f8b1cd67851653b6077a5649633808e62619f5f57e",
+    "assets/art_source/props/seam.png": "7e92de1560eb2f23a5fd3c4ebdac3d9574324d66a95d205f6273fb385fcde940",
+    "assets/art_source/props/seam.png.import": "271d5865c428ba3c7e1358d160f6390b675264385da8907d2a1234b19b1dfe16",
+    "assets/art_source/props/seam_b.png": "5a83f0de1842a9bed331987bb7c6e7d37898bd98fa22fde7ad899dd5dd966bb9",
+    "assets/art_source/props/seam_b.png.import": "c343d67f8053ffbe5a5f51f778d08cce368765eb5b75a77390f994a0687b5dc3",
+    "assets/art_source/props/stump.png": "04b155a793e485b04dfa3ee1102d9244589c0c9e5ef12183be8f8091d498a10e",
+    "assets/art_source/props/stump.png.import": "063ed48817b354b629feeee429769984938486f15ef21c6c68d6dda212053feb",
+    "assets/art_source/props/tree_b.png": "e7b4138f147769e67cbf4ab86b2dcfc04393b2f16a2062147ceb38eaa8986215",
+    "assets/art_source/props/tree_b.png.import": "6263b5f54a158817cfc1f85a4b9447c04d01ed99a39999600f3bfe93aa423c39",
+    "assets/art_source/terrain/candidates/floor-r0.png": "c1152ca46fa7ed0232a434be84961e18fb4af95e4940d3508e9621e64eeede06",
+    "assets/art_source/terrain/candidates/floor-r0.png.import": "b2071279b5e87460348094371c2887c97e511a6155e0e3429396f7b39ad3847e",
+    "assets/art_source/terrain/candidates/path-r0.png": "5302f4c9cf39155758466432da76e7537332257c7f551299a2207c1668423558",
+    "assets/art_source/terrain/candidates/path-r0.png.import": "7a883ec6dbae39a64a6fcc9525b939d5daff7a1f234fe572ff204c9c3a45db21",
+    "assets/art_source/terrain/candidates/rock-r0.png": "cb512b76f9391373e4f4bbefd0cc8dd5d4e28d1c4436ba6861fb7d712bd19a3a",
+    "assets/art_source/terrain/candidates/rock-r0.png.import": "85bc7d90e11f6bf20e6ea68194cad1aaa7b591aed6a52bd639849f948869a16e",
+    "assets/art_source/terrain/candidates/shore-corner-nw-r0.png": "faae306271c832c809dc84dba4a85c976002b3278ee4dd128e1d0037732ecfbf",
+    "assets/art_source/terrain/candidates/shore-corner-nw-r0.png.import": "21cd4d66f3f0f360795bafb058e281cf3187dddcf8ea2d5a2ce241ddc4e7b0c4",
+    "assets/art_source/terrain/candidates/shore-n-r0.png": "de8d6e3b26de122f0f50a580dd878588c707039f6faec9b5367a04cfa2e1b575",
+    "assets/art_source/terrain/candidates/shore-n-r0.png.import": "734a73ffc63ed9b9bfea3ad7c9a2135672b65c1e161630a7d1060b3e7a45fb21",
+    "assets/art_source/terrain/candidates/soil-r0.png": "f5e42f23de312c24f63bdb7717b9a1dc751df6ceeb6bf2d46f46db4441483a1c",
+    "assets/art_source/terrain/candidates/soil-r0.png.import": "7e6f601771a30ec6c4f4e1792d6cd17e9b9eb1b1148cac81f00d62c2a2db9cea",
+    "assets/art_source/terrain/edge-n.png": "44914576c7532adeeb7c5a6df66385840e461e54937416d50e92e0f6b60eca4c",
+    "assets/art_source/terrain/edge-n.png.import": "e3870ed685fde5d7161cc7bb80844f747534e8c9886c633deec0fa94d9fe8eea",
+    "assets/art_source/terrain/floor.png": "d7c1b998f4007529a3913c616e31ee69d4fc0c1600edcd7cdf091c16bb9dad2d",
+    "assets/art_source/terrain/floor.png.import": "279df532a98e1087a1505672414e8b2856530931a6207978a401f773cb81580d",
+    "assets/art_source/terrain/grass.png": "f9084889428db5aed278e6893118995da00a6e1f0895ee9346cd6a64600b39d6",
+    "assets/art_source/terrain/grass.png.import": "d8dae63f3f251ce072ed3ff2e1628ee4513baabc0a7d18ee66c81277bb90ce6e",
+    "assets/art_source/terrain/grass_b.png": "cfd24bb952e47581974d3c4a26f583e361c05826c0d971da7a62db3ad27669a6",
+    "assets/art_source/terrain/grass_b.png.import": "a5bd57ac7940a0e3ac6599a4e19981c6f6145619ccce3dbc68205b932f927949",
+    "assets/art_source/terrain/grass_c.png": "d854a3fba84668d19c56fa50b691c8f06d68d23af1fca70ac232f25233f03a8a",
+    "assets/art_source/terrain/grass_c.png.import": "f7dd76491f2afe14437d41f6aa81229fddb3444abfc83d3395de493d310da2ba",
+    "assets/art_source/terrain/grass_d.png": "597b415b6712308fa1ab8455d5c3d898c0cba01fd2d75eaf08a8d03108ac4658",
+    "assets/art_source/terrain/grass_d.png.import": "20348be4a313831c49816fffeab01e55278868961cfd3c7eabb4625ff9eb8256",
+    "assets/art_source/terrain/path.png": "aa46572715df423dd98f736340cd7e0e3ea72c16b5377afaab887f1068824ca0",
+    "assets/art_source/terrain/path.png.import": "25c06f49959358c4b462626b1b135ca20bc7e915df859121c4b961889c0c8d9d",
+    "assets/art_source/terrain/rock.png": "46c3c7f4d4d5bae38b98a47622c42cb6b7104950e370724a03303471c3ddec11",
+    "assets/art_source/terrain/rock.png.import": "0647f7fe5d4dc20799a6df2d97207f4b3f244be57067eecac1c012c4144e141c",
+    "assets/art_source/terrain/shore-corner-nw.png": "ba3bf79e8c14620c4fb065d763999230d9b70aff00f85d514ec6b84ab0855da6",
+    "assets/art_source/terrain/shore-corner-nw.png.import": "addca43b0eb1e84889f9d8e3872a9c4cb039535f2178354902b45d63684703dc",
+    "assets/art_source/terrain/shore-n.png": "20542d78c3e88ef97e7f710287d5a9031a4e649ebbc79b7ac90af35f0faa7868",
+    "assets/art_source/terrain/shore-n.png.import": "8b326cb0da795ab59df6b22344ab66d43e3ad13eb4665aa95c3b3f8c60fdbe14",
+    "assets/art_source/terrain/soil.png": "66b14e30ca51158206c29c56c34908b0ee696d9c088f640f9d54897d9d1df754",
+    "assets/art_source/terrain/soil.png.import": "1a946543a1e24eb74c39a10107610975be6ae637445e75c2e7d0de48c1182731",
+    "assets/art_source/terrain/water-loop.png": "a77b6a3c52605aa03814b4784cc166bd56e58334b6e894006ebc32e2a37405f1",
+    "assets/art_source/terrain/water-loop.png.import": "1eae029d9348b9abbaeba2f18b5e3020c221a4fa7e8fa8ca8a549f15900ca68b",
+    "src/core/README.md": "f2a9f0ff5b73f5994f1041c915cfbaa6421b03906f5757f8da54edc9dc65c1fe",
+    "src/core/ability.gd": "47c9cea240295e44d192d6740bb2f22bd518e37b74f21613666011932ee9d0a0",
+    "src/core/ability.gd.uid": "565eff189e99400027e94c945625a30b68c0139f1b2f92eb1f0e3bd2c073dc2f",
+    "src/core/ammo.gd": "416eaf66d2190672f0a0e1b3773aa04c0e4f10c055a51686f08cdf20594f225f",
+    "src/core/ammo.gd.uid": "f69eda3b1de90936796ce68f4e2f20f59896f2b22bf84b7a6a2e28f7b013249e",
+    "src/core/build_info.gd": "580b662cf29909f9967d85fb35c48e613bce28070792fd6e3b99df11dd19e4db",
+    "src/core/build_info.gd.uid": "10b9927c3c1e5203b038cc82242e44813cadeb5c2d4905c5360f393c58142c04",
+    "src/core/building.gd": "80949d12734a25190487d3b92a64c6f11165dc7c3a1227290f655a7d40026181",
+    "src/core/building.gd.uid": "aca5cc8aa42d9cd634a800b6506ab07e4e57cb0364f64e28ac1b930ee66b8759",
+    "src/core/combat.gd": "e5bc359065b246deb176deade1b9e090e8b606c1eb7ce25f40310a4eea9db1d8",
+    "src/core/combat.gd.uid": "2763366638123164c3100723623236db1e8f9c3c5608b38777e7acaa0375483d",
+    "src/core/crafting.gd": "8bc0551336490d7792f552d8d679cd3887ff2e78577e0e5c6790227ecf557ff0",
+    "src/core/crafting.gd.uid": "66f7f83884ffa8453d08a9468601afeecaf5fda797213c492c69089754ce9421",
+    "src/core/endless.gd": "d8a9606b3ed90ef2e28c641aca1a7ceac8dcb0157adaec929464738b4cd31c87",
+    "src/core/endless.gd.uid": "a10fc7fca1fe9c9940bbe75fb07354443497563e977ee82fbbf379458ea970d3",
+    "src/core/enemies.gd": "252df45bff01bfdf87de091e2eb64aee6044a97bd0af0b3e06781765a857c2ef",
+    "src/core/enemies.gd.uid": "16fc8a08d2f9f2d44103c3d8f23ee61e496bc6778dcc780ef396f3de9511e7c9",
+    "src/core/entities.gd": "6468112ad3809094d14db7b27c85fd8b08809f2df12b304286338542976c7934",
+    "src/core/entities.gd.uid": "98e1ae0be63d0e99374e5c639b5d232cfdec300d49f968a47ed6e6f7847242fb",
+    "src/core/events.gd": "e47db854becefc5738ab76743d40005d66c91cd731780722b613a00fd7cba02e",
+    "src/core/events.gd.uid": "abe42a7513f1e435107563ab29dcbcc05d2520efad3f109391bb68ae52d845de",
+    "src/core/farm.gd": "29f422d143b009cc34886b760c2a225a5a0101349dc53a18a4d1c4dea1e500bc",
+    "src/core/farm.gd.uid": "e104df6f0e0fbcaa06850f8c316e16235c91414a3548380b1029949e64feaf21",
+    "src/core/farming.gd": "5ef26ddf60728b015daa7cedd1b871be67f74f803373fd091619af6ec953226e",
+    "src/core/farming.gd.uid": "c2d9b10c6365f3df14b400eea6b44e4c54c69fb1d235c004472efb09206a0673",
+    "src/core/fishing.gd": "3c7c6d28a7d1a1c800a37f6333117c4e6d6ec0a9a54fb5085bfb371a8a6ba2a6",
+    "src/core/fishing.gd.uid": "ef700a4245934c711fc2c72764073656916b6c783d6b8e0d83f8e54beaf95f13",
+    "src/core/game_data.gd": "13ee739af9493de57ca8445030a2297af595a70e3633aeda0551cf54cfdac84b",
+    "src/core/game_data.gd.uid": "fe22c1b0a6aed16a84d7fa97d599ba9e9e30889903252c8407254519990fabc9",
+    "src/core/gathering.gd": "59a8ba1dbf32360fb3c31f9d2b053aafc3054408afc2d5afe558d7501ec3b789",
+    "src/core/gathering.gd.uid": "124e93e4843edf086c6c8d044e21b7c966de5bcba500bb3d028a9fad470b9e1f",
+    "src/core/grid.gd": "74ebdca19c677190b3f58fed53ab6ecc61054905306471ecb676e47667ca63ae",
+    "src/core/grid.gd.uid": "c411385e65e233a67a3495e100aa88f7468c5e929f21fa8a8e2413681107609f",
+    "src/core/interact.gd": "a1fc63e1a5722467a5449ab2add3975711df301d5cdde3e8c363ef98f99f38a1",
+    "src/core/interact.gd.uid": "d9bd898f9122a3099b8b73f416bb790ea5da0a17f7447ef7f21a75040a33734a",
+    "src/core/inventory.gd": "960e232c59bc40ef72c7331222a765ce0e0243a6ee28011cac1097b1f3de04f5",
+    "src/core/inventory.gd.uid": "5073c5bbba58ea23d06e2d2dab057088eb66759602930145432f4ffc5ba790f5",
+    "src/core/livestock.gd": "93c2305e6b82a592e58aa4e375d14b00d7fd6a3bda1d40d0824c10bee20d7aa8",
+    "src/core/livestock.gd.uid": "ff1740c69d9dfd930365fc4765a970327a925bd75a0f13df544af15ca59e61c9",
+    "src/core/pathing.gd": "3522f9b010b124c1b4988d6d908f3616c5b968464bdb3e6604e11d4521aa077d",
+    "src/core/pathing.gd.uid": "e8348bb58af1368b390b799451815c21b149edd57cf2eda7589b97d7dbc17b87",
+    "src/core/phases.gd": "f353aa8a37ebb9978de159c2cb766b7eea2aa870f69a6936014abdeab4278fc1",
+    "src/core/phases.gd.uid": "72acf5261108b7f69f363ac56ef68c8eaecd312252fefc0fb76912a5fa1ffb4f",
+    "src/core/player.gd": "053ba70ddb21f04948d28baf886c67c0bdaf444594e4ea05e9035ca3e23f4d95",
+    "src/core/player.gd.uid": "4218505cf8c169fd7773f6c0e40cf7893f132a8a7662f333b3cc49462dd29cf6",
+    "src/core/power.gd": "94c4cbf343fad9e847e0361d03114f138dd129a4225c54f6c7656dc0bad7cae9",
+    "src/core/power.gd.uid": "ab7ebe8a16f1cef16055267894cc0dffe70d7046c6bd2f01baa7551988a63bad",
+    "src/core/reactions.gd": "ea2dece2e6ea9caffea2a7d50ee4a2b6ea07528b5201f06b69395ae3dbdec6aa",
+    "src/core/reactions.gd.uid": "a7e3c27f9289e5af41d4af5ea6e24f154d9f49192e78c510b237545d054d5d13",
+    "src/core/repair.gd": "49c7e2be9c20ee19674b91a638074c6dafe1b9a555bf89f82a3fc8d6cdc9f9c8",
+    "src/core/repair.gd.uid": "7cd1a105395bcd41be8adb907c550274aa1c090f6d3f1f2be85019a53999f07f",
+    "src/core/resources.gd": "abe2454a5f592cc66a89bdc27436ad1bd98eb719ecbe7b8cebe90edc26b8c050",
+    "src/core/resources.gd.uid": "778d571102072b018da4c9f363a9b337d22146670ac1ac1702918f6224233b38",
+    "src/core/rewards.gd": "7abe8656da6c6a7d3e9402b2841d239fc23ba51c68f7560408d8cad833f06bf2",
+    "src/core/rewards.gd.uid": "9d42954f24a08dd035554cebcaaa0b26c688090d99ec32782588bac1ab6624c0",
+    "src/core/rng.gd": "dfff91dd24aa6e2aaa6ff2ddbaecfc3e4c41d950ecc6c2077a99840bccd3a67d",
+    "src/core/rng.gd.uid": "3c328c764ce8540f8f0f8be66278328b17b424e382e00ea348f336e56283055d",
+    "src/core/run.gd": "c0903b7513042969b3e7a56047ef96728d8aa1413b5716ffe09dcccedef4ed50",
+    "src/core/run.gd.uid": "5e9738131702db03fa00086c85172837e4f1f28fa98850d57e698d68f2b5c82b",
+    "src/core/shop.gd": "a8d49ffe8e35665e0256c121b6d31987bac7a4cff11b98f354fe93ff5a216bde",
+    "src/core/shop.gd.uid": "84afef3625416bb1778c59cac186d77b4232af7c6d53c4d0b779c012f5d45124",
+    "src/core/sim.gd": "5b109d7d491d234722160d68b5dee3d211cbe9d15459fec15e4d324d0a4418c5",
+    "src/core/sim.gd.uid": "8dd6990ce560d06156527c78392b6251fd8655111a8879445d2feb36309fb7b8",
+    "src/core/state.gd": "68dbb24a2a95bd34357d823d7190a80da899cca7f2365be278b24f5a419e591d",
+    "src/core/state.gd.uid": "dd1fc7e1af116a64ace91f9e38b28c97d6b18f6e5d5771e0ae7a53210b918d9d",
+    "src/core/stats.gd": "370ddf0584e2a381682181609bd5c3b79dd7746977459ec61fd7f0be942a3117",
+    "src/core/stats.gd.uid": "e208eba0d9edb40fd55d51eb0c1a430cb3ee1a0b3a9b63f0c3ff2f48cf91b1e3",
+    "src/core/tech.gd": "8c347e2f2822ed0d1785d7e947ee4f343c259c0ecd72d837ff617d7c57316e2e",
+    "src/core/tech.gd.uid": "36ca703ad86dc0d9b00f5aa3b0759dadf2e71ac67460919014155f076fa2075a",
+    "src/core/towers.gd": "1a92d92303dab66bf0bab0b09889d8a6e4b3a7bfc5bce97cf2550b16c9d9652b",
+    "src/core/towers.gd.uid": "b74e9535debe693c88c62210042a85d431c471683cdeb479cd93b7f48bd81a0a",
+    "src/core/traps.gd": "59fd9278ff556d481440cfb63463f403a272a879af36b33b1957f766c746d3d4",
+    "src/core/traps.gd.uid": "423b097d6ea19b4ab1d3894361552d89999915ae5d8c8263e6ea3a7139e4d73e",
+    "src/core/tutorial.gd": "e4f866cb5cb1b3a56295ca8827a50416cddd3e2852a4a3a1d53065633058c6d7",
+    "src/core/tutorial.gd.uid": "163a67dc264637deaeca114ea4b912dca0c39e629ecd546afbe9082f2182f7ab",
+    "src/core/waves.gd": "ab8e93952d10c4d95314502e8618258d02f27d737d385f080e0d99522d0b5049",
+    "src/core/waves.gd.uid": "79260e2ad6031f1133aeb22f1d81da75c2895c698535a06881732eb17c8409a9",
+    "src/ui/player_frames.gd": "03df282d2ff8f929d9bc3b419f639e4fa10497437a46701b00f979847503f4ef",
+    "tools/determinism_data_hash.txt": "7b4597275db3fff6ee533c6c671d5ede028a66222766a6b4edf3fab690d6ced5",
+    "tools/determinism_sim_hash.txt": "c6c571e2904fdf1bd98f7f1e47fe9777ef5fc2c188641f8b9b71ae8eadf78f9d",
+    "tools/palette.py": "4190489dd5eb0b9f67e07affd02b02bb6e8ce8ab6905f94209465376e9062037"
+  },
+  "unchanged_previous_manifest_entries": true,
+  "ownership_counts": {
+    "raster": 232,
+    "ascii": 56,
+    "player-sheet": 0
+  },
+  "tool_calls": [
+    {
+      "id": "auto_crossbow",
+      "kind": "level-1",
+      "tool": "built-in ImageGen",
+      "revision": 0,
+      "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-dd01504b-a060-4162-bc46-c250eef225de.png",
+      "source": "assets/art_source/defences/auto_crossbow/level-1.png",
+      "source_sha256": "bffcc75bf94470997efff7300107c6aa65a8a06e6642f013651890487f855a75",
+      "source_wh": [
+        1254,
+        1254
+      ],
+      "source_alpha_range": [
+        0,
+        255
+      ],
+      "prompt": "implementation/sprites/generation/0013-auto_crossbow-level-1.prompt.txt",
+      "prompt_sha256": "131417c3ee5efbddbe5a3cefaae87631e015f97e157c25a10a21d01521c90455",
+      "references": [
+        "assets/art_source/defences/auto_crossbow/master.png",
+        "assets/art_source/buildings/house/whole.png"
+      ],
+      "measured_recipes": [
+        {
+          "id": "buildings/auto_crossbow",
+          "source": "assets/art_source/defences/auto_crossbow/level-1.png",
+          "crop_xywh": [
+            178,
+            174,
+            382,
+            454
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            644,
+            671
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.04746835443037975,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            7,
+            22
+          ]
+        },
+        {
+          "id": "buildings/auto_crossbow_hurt",
+          "source": "assets/art_source/defences/auto_crossbow/level-1.png",
+          "crop_xywh": [
+            726,
+            174,
+            393,
+            454
+          ],
+          "sheet_cell_xywh": [
+            643,
+            0,
+            611,
+            671
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.04746835443037975,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            8,
+            22
+          ]
+        },
+        {
+          "id": "buildings/auto_crossbow_fire",
+          "source": "assets/art_source/defences/auto_crossbow/level-1.png",
+          "crop_xywh": [
+            178,
+            713,
+            467,
+            484
+          ],
+          "sheet_cell_xywh": [
+            0,
+            670,
+            684,
+            584
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.04746835443037975,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            7,
+            23
+          ]
+        },
+        {
+          "id": "buildings/auto_crossbow_wreck",
+          "source": "assets/art_source/defences/auto_crossbow/level-1.png",
+          "crop_xywh": [
+            722,
+            945,
+            416,
+            244
+          ],
+          "sheet_cell_xywh": [
+            683,
+            670,
+            571,
+            584
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.04746835443037975,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            9,
+            12
+          ]
+        }
+      ],
+      "decision": "Rejected native clearance: long detached fired bolt shrinks whole machine relative to the body target. Revision 1 shortens the cue to a small arrowhead at the rail exit, inside the lateral bow span.",
+      "source_bounds": [
+        [
+          178,
+          174,
+          560,
+          628
+        ],
+        [
+          83,
+          174,
+          476,
+          628
+        ],
+        [
+          178,
+          43,
+          645,
+          527
+        ],
+        [
+          39,
+          275,
+          455,
+          519
+        ]
+      ],
+      "source_contacts": [
+        [
+          331.0,
+          628
+        ],
+        [
+          247.5,
+          628
+        ],
+        [
+          329.0,
+          527
+        ],
+        [
+          225.0,
+          519
+        ]
+      ],
+      "reference_hashes": {
+        "assets/art_source/defences/auto_crossbow/master.png": "998d9e1ffbae6e74c6eb2624dc3c73a0c0acc3177e5e933dc143b308889dec3a",
+        "assets/art_source/buildings/house/whole.png": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435"
+      },
+      "tool_arguments": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\defences\\auto_crossbow\\master.png",
+          "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\buildings\\house\\whole.png"
+        ]
+      }
+    },
+    {
+      "id": "auto_crossbow",
+      "kind": "level-1-r1",
+      "tool": "built-in ImageGen",
+      "revision": 1,
+      "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-717a1634-e18a-409e-bef5-ef940718aaf5.png",
+      "source": "assets/art_source/defences/auto_crossbow/level-1-r1.png",
+      "source_sha256": "956aaad82df55fe2ea2fb2e60a23c209e1f244c3f4370f8af3a4b30ab380db62",
+      "source_wh": [
+        1254,
+        1254
+      ],
+      "source_alpha_range": [
+        0,
+        255
+      ],
+      "prompt": "implementation/sprites/generation/0013-auto_crossbow-level-1-r1.prompt.txt",
+      "prompt_sha256": "cf5d9702a77a10d0d76319c8e9a817f8257f7b0344cd871cfdd4fde99ed85a6b",
+      "references": [
+        "assets/art_source/defences/auto_crossbow/master.png",
+        "assets/art_source/buildings/house/whole.png"
+      ],
+      "measured_recipes": [
+        {
+          "id": "buildings/auto_crossbow",
+          "source": "assets/art_source/defences/auto_crossbow/level-1-r1.png",
+          "crop_xywh": [
+            126,
+            74,
+            459,
+            546
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            662,
+            658
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.05217391304347826,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            10,
+            28
+          ]
+        },
+        {
+          "id": "buildings/auto_crossbow_hurt",
+          "source": "assets/art_source/defences/auto_crossbow/level-1-r1.png",
+          "crop_xywh": [
+            738,
+            82,
+            454,
+            545
+          ],
+          "sheet_cell_xywh": [
+            661,
+            0,
+            593,
+            658
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.05217391304347826,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            10,
+            28
+          ]
+        },
+        {
+          "id": "buildings/auto_crossbow_fire",
+          "source": "assets/art_source/defences/auto_crossbow/level-1-r1.png",
+          "crop_xywh": [
+            126,
+            687,
+            471,
+            541
+          ],
+          "sheet_cell_xywh": [
+            0,
+            657,
+            668,
+            597
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.05217391304347826,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            10,
+            28
+          ]
+        },
+        {
+          "id": "buildings/auto_crossbow_wreck",
+          "source": "assets/art_source/defences/auto_crossbow/level-1-r1.png",
+          "crop_xywh": [
+            738,
+            842,
+            468,
+            355
+          ],
+          "sheet_cell_xywh": [
+            667,
+            657,
+            587,
+            597
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.05217391304347826,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            12,
+            19
+          ]
+        }
+      ],
+      "decision": "Accepted: source alpha, native/3x identity, construction, source-owned contact and actual Godot states reviewed. Masters are immutable identity references; selected level sheets own the four runtime states.",
+      "source_bounds": [
+        [
+          126,
+          74,
+          585,
+          620
+        ],
+        [
+          77,
+          82,
+          531,
+          627
+        ],
+        [
+          126,
+          30,
+          597,
+          571
+        ],
+        [
+          71,
+          185,
+          539,
+          540
+        ]
+      ],
+      "source_contacts": [
+        [
+          309.5,
+          620
+        ],
+        [
+          268.5,
+          627
+        ],
+        [
+          309.5,
+          571
+        ],
+        [
+          295.0,
+          540
+        ]
+      ],
+      "reference_hashes": {
+        "assets/art_source/defences/auto_crossbow/master.png": "998d9e1ffbae6e74c6eb2624dc3c73a0c0acc3177e5e933dc143b308889dec3a",
+        "assets/art_source/buildings/house/whole.png": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435"
+      },
+      "tool_arguments": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\defences\\auto_crossbow\\master.png",
+          "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\buildings\\house\\whole.png"
+        ]
+      }
+    },
+    {
+      "id": "auto_crossbow",
+      "kind": "level-2",
+      "tool": "built-in ImageGen",
+      "revision": 0,
+      "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-f9ddd0ed-2e40-489e-bf19-3917936f7d90.png",
+      "source": "assets/art_source/defences/auto_crossbow/level-2.png",
+      "source_sha256": "2f5dd111248f91b27acc1a00019898310468844e92aced23e63825ce2489b1cb",
+      "source_wh": [
+        1254,
+        1254
+      ],
+      "source_alpha_range": [
+        0,
+        255
+      ],
+      "prompt": "implementation/sprites/generation/0013-auto_crossbow-level-2.prompt.txt",
+      "prompt_sha256": "162889fecfafbf405ed223d741703b4a6386a517860d2c677edbac73871393cc",
+      "references": [
+        "assets/art_source/defences/auto_crossbow/master.png",
+        "assets/art_source/buildings/house/whole.png"
+      ],
+      "measured_recipes": [
+        {
+          "id": "buildings/auto_crossbow_2",
+          "source": "assets/art_source/defences/auto_crossbow/level-2.png",
+          "crop_xywh": [
+            113,
+            84,
+            506,
+            545
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            664,
+            654
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.0473186119873817,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            10,
+            26
+          ]
+        },
+        {
+          "id": "buildings/auto_crossbow_2_hurt",
+          "source": "assets/art_source/defences/auto_crossbow/level-2.png",
+          "crop_xywh": [
+            708,
+            85,
+            510,
+            544
+          ],
+          "sheet_cell_xywh": [
+            663,
+            0,
+            591,
+            654
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.0473186119873817,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            10,
+            26
+          ]
+        },
+        {
+          "id": "buildings/auto_crossbow_2_fire",
+          "source": "assets/art_source/defences/auto_crossbow/level-2.png",
+          "crop_xywh": [
+            112,
+            678,
+            520,
+            532
+          ],
+          "sheet_cell_xywh": [
+            0,
+            653,
+            670,
+            601
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.0473186119873817,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            10,
+            25
+          ]
+        },
+        {
+          "id": "buildings/auto_crossbow_2_wreck",
+          "source": "assets/art_source/defences/auto_crossbow/level-2.png",
+          "crop_xywh": [
+            706,
+            841,
+            496,
+            367
+          ],
+          "sheet_cell_xywh": [
+            669,
+            653,
+            585,
+            601
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.0473186119873817,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            12,
+            17
+          ]
+        }
+      ],
+      "decision": "Accepted: source alpha, native/3x identity, construction, source-owned contact and actual Godot states reviewed. Masters are immutable identity references; selected level sheets own the four runtime states.",
+      "source_bounds": [
+        [
+          113,
+          84,
+          619,
+          629
+        ],
+        [
+          45,
+          85,
+          555,
+          629
+        ],
+        [
+          112,
+          25,
+          632,
+          557
+        ],
+        [
+          37,
+          188,
+          533,
+          555
+        ]
+      ],
+      "source_contacts": [
+        [
+          314.5,
+          629
+        ],
+        [
+          252.0,
+          629
+        ],
+        [
+          315.0,
+          557
+        ],
+        [
+          286.5,
+          555
+        ]
+      ],
+      "reference_hashes": {
+        "assets/art_source/defences/auto_crossbow/master.png": "998d9e1ffbae6e74c6eb2624dc3c73a0c0acc3177e5e933dc143b308889dec3a",
+        "assets/art_source/buildings/house/whole.png": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435"
+      },
+      "tool_arguments": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\defences\\auto_crossbow\\master.png",
+          "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\buildings\\house\\whole.png"
+        ]
+      }
+    },
+    {
+      "id": "auto_crossbow",
+      "kind": "level-3",
+      "tool": "built-in ImageGen",
+      "revision": 0,
+      "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-9fc61981-86f6-4be6-a977-9118de492648.png",
+      "source": "assets/art_source/defences/auto_crossbow/level-3.png",
+      "source_sha256": "b0cbc3215b5c2038ac131c121f57fc8b395a21c6876b280a9f696e91d7bd4dea",
+      "source_wh": [
+        1254,
+        1254
+      ],
+      "source_alpha_range": [
+        0,
+        255
+      ],
+      "prompt": "implementation/sprites/generation/0013-auto_crossbow-level-3.prompt.txt",
+      "prompt_sha256": "630dd0c8de8c601dbf070b85e3106ca4039ef35e7ff2c78576fd26902ae0d403",
+      "references": [
+        "assets/art_source/defences/auto_crossbow/master.png",
+        "assets/art_source/buildings/house/whole.png"
+      ],
+      "measured_recipes": [
+        {
+          "id": "buildings/auto_crossbow_3",
+          "source": "assets/art_source/defences/auto_crossbow/level-3.png",
+          "crop_xywh": [
+            125,
+            113,
+            492,
+            512
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            681,
+            652
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.048859934853420196,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            9,
+            25
+          ]
+        },
+        {
+          "id": "buildings/auto_crossbow_3_hurt",
+          "source": "assets/art_source/defences/auto_crossbow/level-3.png",
+          "crop_xywh": [
+            744,
+            113,
+            492,
+            515
+          ],
+          "sheet_cell_xywh": [
+            680,
+            0,
+            574,
+            652
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.048859934853420196,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            10,
+            25
+          ]
+        },
+        {
+          "id": "buildings/auto_crossbow_3_fire",
+          "source": "assets/art_source/defences/auto_crossbow/level-3.png",
+          "crop_xywh": [
+            125,
+            675,
+            496,
+            550
+          ],
+          "sheet_cell_xywh": [
+            0,
+            651,
+            677,
+            603
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.048859934853420196,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            9,
+            27
+          ]
+        },
+        {
+          "id": "buildings/auto_crossbow_3_wreck",
+          "source": "assets/art_source/defences/auto_crossbow/level-3.png",
+          "crop_xywh": [
+            732,
+            865,
+            452,
+            358
+          ],
+          "sheet_cell_xywh": [
+            676,
+            651,
+            578,
+            603
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.048859934853420196,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            11,
+            17
+          ]
+        }
+      ],
+      "decision": "Accepted: source alpha, native/3x identity, construction, source-owned contact and actual Godot states reviewed. Masters are immutable identity references; selected level sheets own the four runtime states.",
+      "source_bounds": [
+        [
+          125,
+          113,
+          617,
+          625
+        ],
+        [
+          64,
+          113,
+          556,
+          628
+        ],
+        [
+          125,
+          24,
+          621,
+          574
+        ],
+        [
+          56,
+          214,
+          508,
+          572
+        ]
+      ],
+      "source_contacts": [
+        [
+          313.5,
+          625
+        ],
+        [
+          259.5,
+          628
+        ],
+        [
+          314.0,
+          574
+        ],
+        [
+          287.5,
+          572
+        ]
+      ],
+      "reference_hashes": {
+        "assets/art_source/defences/auto_crossbow/master.png": "998d9e1ffbae6e74c6eb2624dc3c73a0c0acc3177e5e933dc143b308889dec3a",
+        "assets/art_source/buildings/house/whole.png": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435"
+      },
+      "tool_arguments": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\defences\\auto_crossbow\\master.png",
+          "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\buildings\\house\\whole.png"
+        ]
+      }
+    },
+    {
+      "id": "auto_crossbow",
+      "kind": "master",
+      "tool": "built-in ImageGen",
+      "revision": 0,
+      "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-8f9dc3d4-6e6b-4106-ab86-e7f338792fc7.png",
+      "source": "assets/art_source/defences/auto_crossbow/master.png",
+      "source_sha256": "998d9e1ffbae6e74c6eb2624dc3c73a0c0acc3177e5e933dc143b308889dec3a",
+      "source_wh": [
+        1024,
+        1536
+      ],
+      "source_alpha_range": [
+        0,
+        254
+      ],
+      "prompt": "implementation/sprites/generation/0013-auto_crossbow-master.prompt.txt",
+      "prompt_sha256": "1cdd68a0a70e6410e234914453e4d9e629c467da86d21b3a327e4cc2e5e813c7",
+      "references": [
+        "docs/reference-sheet.png",
+        "assets/art_source/buildings/house/whole.png"
+      ],
+      "measured_recipes": [
+        {
+          "id": "buildings/auto_crossbow",
+          "source": "assets/art_source/defences/auto_crossbow/master.png",
+          "crop_xywh": [
+            160,
+            339,
+            829,
+            1032
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            1024,
+            1536
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.02810077519379845,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            9,
+            29
+          ]
+        }
+      ],
+      "source_bounds": [
+        [
+          160,
+          339,
+          989,
+          1371
+        ]
+      ],
+      "source_contacts": [
+        [
+          491.0,
+          1371
+        ]
+      ],
+      "decision": "Accepted: source alpha, native/3x identity, construction, source-owned contact and actual Godot states reviewed. Masters are immutable identity references; selected level sheets own the four runtime states.",
+      "reference_hashes": {
+        "docs/reference-sheet.png": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "assets/art_source/buildings/house/whole.png": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435"
+      },
+      "tool_arguments": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+          "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\buildings\\house\\whole.png"
+        ]
+      }
+    },
+    {
+      "id": "flame_tower",
+      "kind": "level-1",
+      "tool": "built-in ImageGen",
+      "revision": 0,
+      "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-2f4d98d4-d0d3-49cd-89fe-4fb72140ccba.png",
+      "source": "assets/art_source/defences/flame_tower/level-1.png",
+      "source_sha256": "dd2f924ccf33988c74eff69a54e56c2e5523ab9bbaedc6521ec3b38ea243feaa",
+      "source_wh": [
+        1254,
+        1254
+      ],
+      "source_alpha_range": [
+        0,
+        255
+      ],
+      "prompt": "implementation/sprites/generation/0013-flame_tower-level-1.prompt.txt",
+      "prompt_sha256": "c5100c64845af022efb674239d69530320635ff73b557195565cd7af084870a5",
+      "references": [
+        "assets/art_source/defences/flame_tower/master.png",
+        "assets/art_source/buildings/house/whole.png"
+      ],
+      "measured_recipes": [
+        {
+          "id": "buildings/flame_tower",
+          "source": "assets/art_source/defences/flame_tower/level-1.png",
+          "crop_xywh": [
+            157,
+            190,
+            356,
+            426
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            622,
+            664
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.043731778425655975,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            7,
+            19
+          ]
+        },
+        {
+          "id": "buildings/flame_tower_hurt",
+          "source": "assets/art_source/defences/flame_tower/level-1.png",
+          "crop_xywh": [
+            732,
+            213,
+            355,
+            402
+          ],
+          "sheet_cell_xywh": [
+            622,
+            0,
+            632,
+            664
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.043731778425655975,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            7,
+            18
+          ]
+        },
+        {
+          "id": "buildings/flame_tower_fire",
+          "source": "assets/art_source/defences/flame_tower/level-1.png",
+          "crop_xywh": [
+            156,
+            713,
+            501,
+            465
+          ],
+          "sheet_cell_xywh": [
+            0,
+            664,
+            691,
+            590
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.043731778425655975,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            7,
+            20
+          ]
+        },
+        {
+          "id": "buildings/flame_tower_wreck",
+          "source": "assets/art_source/defences/flame_tower/level-1.png",
+          "crop_xywh": [
+            725,
+            915,
+            385,
+            264
+          ],
+          "sheet_cell_xywh": [
+            691,
+            664,
+            563,
+            590
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.043731778425655975,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            8,
+            12
+          ]
+        }
+      ],
+      "decision": "Rejected native scale: long flame forces common scale 0.04373 and a smaller intact body than intended. Revision 1 keeps geometry/framing and asks for an attached flame shorter than half the nozzle mouth diameter.",
+      "source_bounds": [
+        [
+          157,
+          190,
+          513,
+          616
+        ],
+        [
+          110,
+          213,
+          465,
+          615
+        ],
+        [
+          156,
+          49,
+          657,
+          514
+        ],
+        [
+          34,
+          251,
+          419,
+          515
+        ]
+      ],
+      "source_contacts": [
+        [
+          313.5,
+          616
+        ],
+        [
+          278.0,
+          615
+        ],
+        [
+          314.0,
+          514
+        ],
+        [
+          209.5,
+          515
+        ]
+      ],
+      "reference_hashes": {
+        "assets/art_source/defences/flame_tower/master.png": "ea5c3c83392acf99ab5f24704372ce201c504d9315e3120aa1f17225579bda35",
+        "assets/art_source/buildings/house/whole.png": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435"
+      },
+      "tool_arguments": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\defences\\flame_tower\\master.png",
+          "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\buildings\\house\\whole.png"
+        ]
+      }
+    },
+    {
+      "id": "flame_tower",
+      "kind": "level-1-r1",
+      "tool": "built-in ImageGen",
+      "revision": 1,
+      "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-33819a02-8955-4c58-9760-c43875bd20a8.png",
+      "source": "assets/art_source/defences/flame_tower/level-1-r1.png",
+      "source_sha256": "5245bfbaa2000537d01e27ac892140d99903876bd805aa20a1399c352be064d3",
+      "source_wh": [
+        1024,
+        1536
+      ],
+      "source_alpha_range": [
+        0,
+        254
+      ],
+      "prompt": "implementation/sprites/generation/0013-flame_tower-level-1-r1.prompt.txt",
+      "prompt_sha256": "1222f6236f5e0efbd69f29214f414cdb9d11716624899b3568f67b5dd3313d57",
+      "references": [
+        "assets/art_source/defences/flame_tower/master.png",
+        "assets/art_source/buildings/house/whole.png"
+      ],
+      "measured_recipes": [
+        {
+          "id": "buildings/flame_tower",
+          "source": "assets/art_source/defences/flame_tower/level-1-r1.png",
+          "crop_xywh": [
+            57,
+            225,
+            417,
+            506
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            507,
+            819
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.04940711462450593,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            9,
+            25
+          ]
+        },
+        {
+          "id": "buildings/flame_tower_hurt",
+          "source": "assets/art_source/defences/flame_tower/level-1-r1.png",
+          "crop_xywh": [
+            541,
+            225,
+            417,
+            512
+          ],
+          "sheet_cell_xywh": [
+            507,
+            0,
+            517,
+            819
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.04940711462450593,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            10,
+            25
+          ]
+        },
+        {
+          "id": "buildings/flame_tower_fire",
+          "source": "assets/art_source/defences/flame_tower/level-1-r1.png",
+          "crop_xywh": [
+            57,
+            901,
+            465,
+            503
+          ],
+          "sheet_cell_xywh": [
+            0,
+            819,
+            531,
+            717
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.04940711462450593,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            9,
+            25
+          ]
+        },
+        {
+          "id": "buildings/flame_tower_wreck",
+          "source": "assets/art_source/defences/flame_tower/level-1-r1.png",
+          "crop_xywh": [
+            541,
+            1054,
+            429,
+            310
+          ],
+          "sheet_cell_xywh": [
+            531,
+            819,
+            493,
+            717
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.04940711462450593,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            11,
+            15
+          ]
+        }
+      ],
+      "decision": "Accepted: source alpha, native/3x identity, construction, source-owned contact and actual Godot states reviewed. Masters are immutable identity references; selected level sheets own the four runtime states.",
+      "source_bounds": [
+        [
+          57,
+          225,
+          474,
+          731
+        ],
+        [
+          34,
+          225,
+          451,
+          737
+        ],
+        [
+          57,
+          82,
+          522,
+          585
+        ],
+        [
+          10,
+          235,
+          439,
+          545
+        ]
+      ],
+      "source_contacts": [
+        [
+          248.0,
+          731
+        ],
+        [
+          233.0,
+          737
+        ],
+        [
+          248.0,
+          585
+        ],
+        [
+          224.5,
+          545
+        ]
+      ],
+      "reference_hashes": {
+        "assets/art_source/defences/flame_tower/master.png": "ea5c3c83392acf99ab5f24704372ce201c504d9315e3120aa1f17225579bda35",
+        "assets/art_source/buildings/house/whole.png": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435"
+      },
+      "tool_arguments": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\defences\\flame_tower\\master.png",
+          "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\buildings\\house\\whole.png"
+        ]
+      }
+    },
+    {
+      "id": "flame_tower",
+      "kind": "level-2",
+      "tool": "built-in ImageGen",
+      "revision": 0,
+      "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-8dede019-3221-4831-a829-42a73a8b7296.png",
+      "source": "assets/art_source/defences/flame_tower/level-2.png",
+      "source_sha256": "89fff997347eb02a6c5efabf850b481ee7bcec939c1eaf2ec488ed39836f5af6",
+      "source_wh": [
+        1254,
+        1254
+      ],
+      "source_alpha_range": [
+        0,
+        255
+      ],
+      "prompt": "implementation/sprites/generation/0013-flame_tower-level-2.prompt.txt",
+      "prompt_sha256": "bf81619f7e1c57994bc61adc9164736c94c64fff6960015f486655e4ea080ea3",
+      "references": [
+        "assets/art_source/defences/flame_tower/master.png",
+        "assets/art_source/buildings/house/whole.png"
+      ],
+      "measured_recipes": [
+        {
+          "id": "buildings/flame_tower_2",
+          "source": "assets/art_source/defences/flame_tower/level-2.png",
+          "crop_xywh": [
+            95,
+            117,
+            456,
+            507
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            629,
+            644
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.048859934853420196,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            11,
+            25
+          ]
+        },
+        {
+          "id": "buildings/flame_tower_2_hurt",
+          "source": "assets/art_source/defences/flame_tower/level-2.png",
+          "crop_xywh": [
+            708,
+            134,
+            429,
+            490
+          ],
+          "sheet_cell_xywh": [
+            629,
+            0,
+            625,
+            644
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.048859934853420196,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            10,
+            24
+          ]
+        },
+        {
+          "id": "buildings/flame_tower_2_fire",
+          "source": "assets/art_source/defences/flame_tower/level-2.png",
+          "crop_xywh": [
+            95,
+            665,
+            522,
+            528
+          ],
+          "sheet_cell_xywh": [
+            0,
+            644,
+            660,
+            610
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.048859934853420196,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            11,
+            26
+          ]
+        },
+        {
+          "id": "buildings/flame_tower_2_wreck",
+          "source": "assets/art_source/defences/flame_tower/level-2.png",
+          "crop_xywh": [
+            704,
+            834,
+            472,
+            339
+          ],
+          "sheet_cell_xywh": [
+            660,
+            644,
+            594,
+            610
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.048859934853420196,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            11,
+            17
+          ]
+        }
+      ],
+      "decision": "Accepted: source alpha, native/3x identity, construction, source-owned contact and actual Godot states reviewed. Masters are immutable identity references; selected level sheets own the four runtime states.",
+      "source_bounds": [
+        [
+          95,
+          117,
+          551,
+          624
+        ],
+        [
+          79,
+          134,
+          508,
+          624
+        ],
+        [
+          95,
+          21,
+          617,
+          549
+        ],
+        [
+          44,
+          190,
+          516,
+          529
+        ]
+      ],
+      "source_contacts": [
+        [
+          310.0,
+          624
+        ],
+        [
+          293.5,
+          624
+        ],
+        [
+          310.0,
+          549
+        ],
+        [
+          273.5,
+          529
+        ]
+      ],
+      "reference_hashes": {
+        "assets/art_source/defences/flame_tower/master.png": "ea5c3c83392acf99ab5f24704372ce201c504d9315e3120aa1f17225579bda35",
+        "assets/art_source/buildings/house/whole.png": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435"
+      },
+      "tool_arguments": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\defences\\flame_tower\\master.png",
+          "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\buildings\\house\\whole.png"
+        ]
+      }
+    },
+    {
+      "id": "flame_tower",
+      "kind": "level-3",
+      "tool": "built-in ImageGen",
+      "revision": 0,
+      "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-e82b6437-6460-4bb6-b93f-521b3d6f7019.png",
+      "source": "assets/art_source/defences/flame_tower/level-3.png",
+      "source_sha256": "55be9f319c37fd5c0c438d366cec11704b1fbd5fb7f4d260856d7c50250f95d8",
+      "source_wh": [
+        1254,
+        1254
+      ],
+      "source_alpha_range": [
+        0,
+        255
+      ],
+      "prompt": "implementation/sprites/generation/0013-flame_tower-level-3.prompt.txt",
+      "prompt_sha256": "51ad8d8ad014e7971985d919f53afb9d11dfae6a5f956dd719ab9fbe8535c0ed",
+      "references": [
+        "assets/art_source/defences/flame_tower/master.png",
+        "assets/art_source/buildings/house/whole.png"
+      ],
+      "measured_recipes": [
+        {
+          "id": "buildings/flame_tower_3",
+          "source": "assets/art_source/defences/flame_tower/level-3.png",
+          "crop_xywh": [
+            81,
+            100,
+            507,
+            527
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            630,
+            664
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.04120879120879121,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            9,
+            22
+          ]
+        },
+        {
+          "id": "buildings/flame_tower_3_hurt",
+          "source": "assets/art_source/defences/flame_tower/level-3.png",
+          "crop_xywh": [
+            671,
+            112,
+            482,
+            515
+          ],
+          "sheet_cell_xywh": [
+            629,
+            0,
+            625,
+            664
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.04120879120879121,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            9,
+            21
+          ]
+        },
+        {
+          "id": "buildings/flame_tower_3_fire",
+          "source": "assets/art_source/defences/flame_tower/level-3.png",
+          "crop_xywh": [
+            83,
+            700,
+            587,
+            511
+          ],
+          "sheet_cell_xywh": [
+            0,
+            663,
+            671,
+            591
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.04120879120879121,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            9,
+            21
+          ]
+        },
+        {
+          "id": "buildings/flame_tower_3_wreck",
+          "source": "assets/art_source/defences/flame_tower/level-3.png",
+          "crop_xywh": [
+            671,
+            883,
+            503,
+            323
+          ],
+          "sheet_cell_xywh": [
+            670,
+            663,
+            584,
+            591
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.04120879120879121,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            10,
+            13
+          ]
+        }
+      ],
+      "decision": "Accepted: source alpha, native/3x identity, construction, source-owned contact and actual Godot states reviewed. Masters are immutable identity references; selected level sheets own the four runtime states.",
+      "source_bounds": [
+        [
+          81,
+          100,
+          588,
+          627
+        ],
+        [
+          42,
+          112,
+          524,
+          627
+        ],
+        [
+          83,
+          37,
+          670,
+          548
+        ],
+        [
+          1,
+          220,
+          504,
+          543
+        ]
+      ],
+      "source_contacts": [
+        [
+          305.0,
+          627
+        ],
+        [
+          266.5,
+          627
+        ],
+        [
+          306.0,
+          548
+        ],
+        [
+          247.5,
+          543
+        ]
+      ],
+      "reference_hashes": {
+        "assets/art_source/defences/flame_tower/master.png": "ea5c3c83392acf99ab5f24704372ce201c504d9315e3120aa1f17225579bda35",
+        "assets/art_source/buildings/house/whole.png": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435"
+      },
+      "tool_arguments": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\defences\\flame_tower\\master.png",
+          "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\buildings\\house\\whole.png"
+        ]
+      }
+    },
+    {
+      "id": "flame_tower",
+      "kind": "master",
+      "tool": "built-in ImageGen",
+      "revision": 0,
+      "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-9ddd6324-5cbe-47e2-89c2-5082956cf9d5.png",
+      "source": "assets/art_source/defences/flame_tower/master.png",
+      "source_sha256": "ea5c3c83392acf99ab5f24704372ce201c504d9315e3120aa1f17225579bda35",
+      "source_wh": [
+        1024,
+        1536
+      ],
+      "source_alpha_range": [
+        0,
+        254
+      ],
+      "prompt": "implementation/sprites/generation/0013-flame_tower-master.prompt.txt",
+      "prompt_sha256": "37ee1c49a31965258db2261a1125161da4cbea69535387b04ec889b22d012569",
+      "references": [
+        "docs/reference-sheet.png",
+        "assets/art_source/buildings/house/whole.png"
+      ],
+      "measured_recipes": [
+        {
+          "id": "buildings/flame_tower",
+          "source": "assets/art_source/defences/flame_tower/master.png",
+          "crop_xywh": [
+            184,
+            461,
+            737,
+            871
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            1024,
+            1536
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.02870264064293915,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            9,
+            25
+          ]
+        }
+      ],
+      "source_bounds": [
+        [
+          184,
+          461,
+          921,
+          1332
+        ]
+      ],
+      "source_contacts": [
+        [
+          501.5,
+          1332
+        ]
+      ],
+      "decision": "Accepted: source alpha, native/3x identity, construction, source-owned contact and actual Godot states reviewed. Masters are immutable identity references; selected level sheets own the four runtime states.",
+      "reference_hashes": {
+        "docs/reference-sheet.png": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "assets/art_source/buildings/house/whole.png": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435"
+      },
+      "tool_arguments": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+          "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\buildings\\house\\whole.png"
+        ]
+      }
+    },
+    {
+      "id": "gun_tower",
+      "kind": "level-1",
+      "tool": "built-in ImageGen",
+      "revision": 0,
+      "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-2cc8bd91-6e6f-4fc6-9b71-61ab9c06fbd8.png",
+      "source": "assets/art_source/defences/gun_tower/level-1.png",
+      "source_sha256": "790895b387d69236fc1be7eeaec0406cbdcd38295d45c3366dc8eacb1fba32b2",
+      "source_wh": [
+        1983,
+        793
+      ],
+      "prompt": "implementation/sprites/generation/0013-gun_tower-level-1.prompt.txt",
+      "prompt_sha256": "3e2717ef145b782503b6d082bda9fca1f76f8b2fd170bab97ab6387f5be7afea",
+      "references": [
+        "assets/art_source/defences/gun_tower/master.png",
+        "assets/art_source/buildings/house/whole.png"
+      ],
+      "decision": "Rejected: flash and wreck horizontal bounding boxes overlap; only three alpha-column groups, cannot cut four clean rectangular sources. Revision 1 requests compact attached flash and full-height gutters.",
+      "source_alpha_range": [
+        0,
+        255
+      ],
+      "reference_hashes": {
+        "assets/art_source/defences/gun_tower/master.png": "86d51327390ec01329d9f110b2c539e01924dbdd21348d1f6dcfad25cbbbce13",
+        "assets/art_source/buildings/house/whole.png": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435"
+      },
+      "tool_arguments": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\defences\\gun_tower\\master.png",
+          "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\buildings\\house\\whole.png"
+        ]
+      }
+    },
+    {
+      "id": "gun_tower",
+      "kind": "level-1-r1",
+      "tool": "built-in ImageGen",
+      "revision": 1,
+      "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-fdc2d677-88d4-40b0-857d-9104582c8553.png",
+      "source": "assets/art_source/defences/gun_tower/level-1-r1.png",
+      "source_sha256": "cfe79bc4bd75c775e718acc3dc9cc4c187082c621b8139c9de674f7711a5ab7b",
+      "source_wh": [
+        1983,
+        793
+      ],
+      "source_alpha_range": [
+        0,
+        255
+      ],
+      "prompt": "implementation/sprites/generation/0013-gun_tower-level-1-r1.prompt.txt",
+      "prompt_sha256": "0183388a245160cc009eb362b761ac8dd5b011aafc26eaafa1672438773cd2c1",
+      "references": [
+        "assets/art_source/defences/gun_tower/master.png",
+        "assets/art_source/buildings/house/whole.png"
+      ],
+      "measured_recipes": [],
+      "decision": "Rejected: reduced flash still overlaps the wreck horizontal bounds. Revision 2 switches to a compact two-by-two sheet, keeping four authored states and common scale.",
+      "reference_hashes": {
+        "assets/art_source/defences/gun_tower/master.png": "86d51327390ec01329d9f110b2c539e01924dbdd21348d1f6dcfad25cbbbce13",
+        "assets/art_source/buildings/house/whole.png": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435"
+      },
+      "tool_arguments": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\defences\\gun_tower\\master.png",
+          "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\buildings\\house\\whole.png"
+        ]
+      }
+    },
+    {
+      "id": "gun_tower",
+      "kind": "level-1-r2",
+      "tool": "built-in ImageGen",
+      "revision": 2,
+      "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-93823eda-cc2e-400a-9ed2-b6bff869f470.png",
+      "source": "assets/art_source/defences/gun_tower/level-1-r2.png",
+      "source_sha256": "bd5738bdbfde1167ea30d0c06fecdf6693d15bc35e406df3680a1a8e572b0af4",
+      "source_wh": [
+        1151,
+        1367
+      ],
+      "source_alpha_range": [
+        0,
+        255
+      ],
+      "prompt": "implementation/sprites/generation/0013-gun_tower-level-1-r2.prompt.txt",
+      "prompt_sha256": "5e1202a9a28bc574b5e977450bcc54d4c5f013629ac231d440ee1485dca09749",
+      "references": [
+        "assets/art_source/defences/gun_tower/master.png",
+        "assets/art_source/buildings/house/whole.png"
+      ],
+      "measured_recipes": [
+        {
+          "id": "buildings/gun_tower",
+          "source": "assets/art_source/defences/gun_tower/level-1-r2.png",
+          "crop_xywh": [
+            70,
+            94,
+            448,
+            592
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            580,
+            693
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.04291845493562232,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            8,
+            25
+          ]
+        },
+        {
+          "id": "buildings/gun_tower_hurt",
+          "source": "assets/art_source/defences/gun_tower/level-1-r2.png",
+          "crop_xywh": [
+            642,
+            95,
+            427,
+            591
+          ],
+          "sheet_cell_xywh": [
+            580,
+            0,
+            571,
+            693
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.04291845493562232,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            9,
+            25
+          ]
+        },
+        {
+          "id": "buildings/gun_tower_fire",
+          "source": "assets/art_source/defences/gun_tower/level-1-r2.png",
+          "crop_xywh": [
+            68,
+            700,
+            546,
+            634
+          ],
+          "sheet_cell_xywh": [
+            0,
+            693,
+            623,
+            674
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.04291845493562232,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            8,
+            27
+          ]
+        },
+        {
+          "id": "buildings/gun_tower_wreck",
+          "source": "assets/art_source/defences/gun_tower/level-1-r2.png",
+          "crop_xywh": [
+            632,
+            960,
+            458,
+            378
+          ],
+          "sheet_cell_xywh": [
+            623,
+            693,
+            528,
+            674
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.04291845493562232,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            10,
+            16
+          ]
+        }
+      ],
+      "decision": "Accepted: source alpha, native/3x identity, construction, source-owned contact and actual Godot states reviewed. Masters are immutable identity references; selected level sheets own the four runtime states.",
+      "source_bounds": [
+        [
+          70,
+          94,
+          518,
+          686
+        ],
+        [
+          62,
+          95,
+          489,
+          686
+        ],
+        [
+          68,
+          7,
+          614,
+          641
+        ],
+        [
+          9,
+          267,
+          467,
+          645
+        ]
+      ],
+      "source_contacts": [
+        [
+          264.5,
+          686
+        ],
+        [
+          263.5,
+          686
+        ],
+        [
+          264.5,
+          641
+        ],
+        [
+          236.5,
+          645
+        ]
+      ],
+      "reference_hashes": {
+        "assets/art_source/defences/gun_tower/master.png": "86d51327390ec01329d9f110b2c539e01924dbdd21348d1f6dcfad25cbbbce13",
+        "assets/art_source/buildings/house/whole.png": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435"
+      },
+      "tool_arguments": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\defences\\gun_tower\\master.png",
+          "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\buildings\\house\\whole.png"
+        ]
+      }
+    },
+    {
+      "id": "gun_tower",
+      "kind": "level-2",
+      "tool": "built-in ImageGen",
+      "revision": 0,
+      "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-2e314201-bad7-48b6-a99b-9fbe31389654.png",
+      "source": "assets/art_source/defences/gun_tower/level-2.png",
+      "source_sha256": "63b54a8ccf0088b9e3b73dd0070b200513fe5d2100b4f2aadd2b3c1065aec1f2",
+      "source_wh": [
+        1230,
+        1278
+      ],
+      "source_alpha_range": [
+        0,
+        255
+      ],
+      "prompt": "implementation/sprites/generation/0013-gun_tower-level-2.prompt.txt",
+      "prompt_sha256": "15b870d3b4168caefcb34ffae06519e77c207ed59ecf3fb9fe73279b1d567730",
+      "references": [
+        "assets/art_source/defences/gun_tower/master.png",
+        "assets/art_source/buildings/house/whole.png"
+      ],
+      "measured_recipes": [
+        {
+          "id": "buildings/gun_tower_2",
+          "source": "assets/art_source/defences/gun_tower/level-2.png",
+          "crop_xywh": [
+            112,
+            65,
+            461,
+            590
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            626,
+            661
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.04672897196261682,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            10,
+            28
+          ]
+        },
+        {
+          "id": "buildings/gun_tower_2_hurt",
+          "source": "assets/art_source/defences/gun_tower/level-2.png",
+          "crop_xywh": [
+            679,
+            67,
+            462,
+            590
+          ],
+          "sheet_cell_xywh": [
+            626,
+            0,
+            604,
+            661
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.04672897196261682,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            10,
+            28
+          ]
+        },
+        {
+          "id": "buildings/gun_tower_2_fire",
+          "source": "assets/art_source/defences/gun_tower/level-2.png",
+          "crop_xywh": [
+            102,
+            665,
+            527,
+            581
+          ],
+          "sheet_cell_xywh": [
+            0,
+            661,
+            642,
+            617
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.04672897196261682,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            10,
+            27
+          ]
+        },
+        {
+          "id": "buildings/gun_tower_2_wreck",
+          "source": "assets/art_source/defences/gun_tower/level-2.png",
+          "crop_xywh": [
+            656,
+            842,
+            503,
+            391
+          ],
+          "sheet_cell_xywh": [
+            642,
+            661,
+            588,
+            617
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.04672897196261682,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            12,
+            18
+          ]
+        }
+      ],
+      "decision": "Rejected: level 2 repeats level 1 trestle/receiver construction; larger native scale alone does not satisfy authored upgrade forms. Revision 1 replaces lower support with stone and adds angular iron receiver/elevation wheel.",
+      "source_bounds": [
+        [
+          112,
+          65,
+          573,
+          655
+        ],
+        [
+          53,
+          67,
+          515,
+          657
+        ],
+        [
+          102,
+          4,
+          629,
+          585
+        ],
+        [
+          14,
+          181,
+          517,
+          572
+        ]
+      ],
+      "source_contacts": [
+        [
+          317.0,
+          655
+        ],
+        [
+          273.0,
+          657
+        ],
+        [
+          308.0,
+          585
+        ],
+        [
+          265.5,
+          572
+        ]
+      ],
+      "reference_hashes": {
+        "assets/art_source/defences/gun_tower/master.png": "86d51327390ec01329d9f110b2c539e01924dbdd21348d1f6dcfad25cbbbce13",
+        "assets/art_source/buildings/house/whole.png": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435"
+      },
+      "tool_arguments": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\defences\\gun_tower\\master.png",
+          "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\buildings\\house\\whole.png"
+        ]
+      }
+    },
+    {
+      "id": "gun_tower",
+      "kind": "level-2-r1",
+      "tool": "built-in ImageGen",
+      "revision": 1,
+      "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-c29a81d6-0652-4e0f-ac10-cef3b9ddc72c.png",
+      "source": "assets/art_source/defences/gun_tower/level-2-r1.png",
+      "source_sha256": "cda23430381ade7b35a0e43cb22abfb514fec92e1d11ec745489a9631fef2e69",
+      "source_wh": [
+        1278,
+        1230
+      ],
+      "source_alpha_range": [
+        0,
+        255
+      ],
+      "prompt": "implementation/sprites/generation/0013-gun_tower-level-2-r1.prompt.txt",
+      "prompt_sha256": "6f513e9cbc9ab9bdee6fc218893e1b51d54a41b8031ad0db7f68e40c79c20569",
+      "references": [
+        "assets/art_source/defences/gun_tower/master.png",
+        "assets/art_source/buildings/house/whole.png"
+      ],
+      "measured_recipes": [],
+      "decision": "Rejected layout: improved stone base/iron receiver/wheel meets structural requirement, but firing cue crosses the top row baseline, so rectangular cuts include neighboring pixels. Revision 2 requests much smaller framing and full horizontal/vertical gutters.",
+      "reference_hashes": {
+        "assets/art_source/defences/gun_tower/master.png": "86d51327390ec01329d9f110b2c539e01924dbdd21348d1f6dcfad25cbbbce13",
+        "assets/art_source/buildings/house/whole.png": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435"
+      },
+      "tool_arguments": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\defences\\gun_tower\\master.png",
+          "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\buildings\\house\\whole.png"
+        ]
+      }
+    },
+    {
+      "id": "gun_tower",
+      "kind": "level-2-r2",
+      "tool": "built-in ImageGen",
+      "revision": 2,
+      "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-7a333262-697b-47fa-9d17-e5f1997db9f3.png",
+      "source": "assets/art_source/defences/gun_tower/level-2-r2.png",
+      "source_sha256": "681e3bf85aa33690b4ec66d26e9cf680144fd4838eb5cd76abe0bafb7836fc70",
+      "source_wh": [
+        1254,
+        1254
+      ],
+      "source_alpha_range": [
+        0,
+        255
+      ],
+      "prompt": "implementation/sprites/generation/0013-gun_tower-level-2-r2.prompt.txt",
+      "prompt_sha256": "f176d8b65bf40b7ee12f0f074faf04486eb5e6b5e99473e0292bae8a747a35be",
+      "references": [
+        "assets/art_source/defences/gun_tower/master.png",
+        "assets/art_source/buildings/house/whole.png"
+      ],
+      "measured_recipes": [
+        {
+          "id": "buildings/gun_tower_2",
+          "source": "assets/art_source/defences/gun_tower/level-2-r2.png",
+          "crop_xywh": [
+            139,
+            110,
+            394,
+            497
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            630,
+            641
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.05263157894736842,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            10,
+            26
+          ]
+        },
+        {
+          "id": "buildings/gun_tower_2_hurt",
+          "source": "assets/art_source/defences/gun_tower/level-2-r2.png",
+          "crop_xywh": [
+            727,
+            105,
+            391,
+            502
+          ],
+          "sheet_cell_xywh": [
+            630,
+            0,
+            624,
+            641
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.05263157894736842,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            10,
+            26
+          ]
+        },
+        {
+          "id": "buildings/gun_tower_2_fire",
+          "source": "assets/art_source/defences/gun_tower/level-2-r2.png",
+          "crop_xywh": [
+            139,
+            676,
+            467,
+            528
+          ],
+          "sheet_cell_xywh": [
+            0,
+            641,
+            657,
+            613
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.05263157894736842,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            10,
+            28
+          ]
+        },
+        {
+          "id": "buildings/gun_tower_2_wreck",
+          "source": "assets/art_source/defences/gun_tower/level-2-r2.png",
+          "crop_xywh": [
+            709,
+            858,
+            458,
+            346
+          ],
+          "sheet_cell_xywh": [
+            657,
+            641,
+            597,
+            613
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.05263157894736842,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            12,
+            18
+          ]
+        }
+      ],
+      "decision": "Accepted: source alpha, native/3x identity, construction, source-owned contact and actual Godot states reviewed. Masters are immutable identity references; selected level sheets own the four runtime states.",
+      "source_bounds": [
+        [
+          139,
+          110,
+          533,
+          607
+        ],
+        [
+          97,
+          105,
+          488,
+          607
+        ],
+        [
+          139,
+          35,
+          606,
+          563
+        ],
+        [
+          52,
+          217,
+          510,
+          563
+        ]
+      ],
+      "source_contacts": [
+        [
+          320.5,
+          607
+        ],
+        [
+          279.0,
+          607
+        ],
+        [
+          321.0,
+          563
+        ],
+        [
+          279.5,
+          563
+        ]
+      ],
+      "reference_hashes": {
+        "assets/art_source/defences/gun_tower/master.png": "86d51327390ec01329d9f110b2c539e01924dbdd21348d1f6dcfad25cbbbce13",
+        "assets/art_source/buildings/house/whole.png": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435"
+      },
+      "tool_arguments": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\defences\\gun_tower\\master.png",
+          "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\buildings\\house\\whole.png"
+        ]
+      }
+    },
+    {
+      "id": "gun_tower",
+      "kind": "level-3",
+      "tool": "built-in ImageGen",
+      "revision": 0,
+      "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-edbb87f3-4475-4b4c-ac8a-b0a5837a74c3.png",
+      "source": "assets/art_source/defences/gun_tower/level-3.png",
+      "source_sha256": "8ae73e8523abdf59976d032ff71b8a4e89fc6f2e05df382e669cee028b0cb954",
+      "source_wh": [
+        1254,
+        1254
+      ],
+      "source_alpha_range": [
+        0,
+        255
+      ],
+      "prompt": "implementation/sprites/generation/0013-gun_tower-level-3.prompt.txt",
+      "prompt_sha256": "050b62821d6471bd070d48f41a00fb6b2b7650ad05a3153e4df69c7c7ef65fcb",
+      "references": [
+        "assets/art_source/defences/gun_tower/master.png",
+        "assets/art_source/buildings/house/whole.png"
+      ],
+      "measured_recipes": [
+        {
+          "id": "buildings/gun_tower_3",
+          "source": "assets/art_source/defences/gun_tower/level-3.png",
+          "crop_xywh": [
+            97,
+            86,
+            466,
+            559
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            623,
+            667
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.05067567567567568,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            11,
+            28
+          ]
+        },
+        {
+          "id": "buildings/gun_tower_3_hurt",
+          "source": "assets/art_source/defences/gun_tower/level-3.png",
+          "crop_xywh": [
+            684,
+            86,
+            467,
+            559
+          ],
+          "sheet_cell_xywh": [
+            623,
+            0,
+            631,
+            667
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.05067567567567568,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            11,
+            28
+          ]
+        },
+        {
+          "id": "buildings/gun_tower_3_fire",
+          "source": "assets/art_source/defences/gun_tower/level-3.png",
+          "crop_xywh": [
+            97,
+            689,
+            512,
+            545
+          ],
+          "sheet_cell_xywh": [
+            0,
+            667,
+            646,
+            587
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.05067567567567568,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            11,
+            28
+          ]
+        },
+        {
+          "id": "buildings/gun_tower_3_wreck",
+          "source": "assets/art_source/defences/gun_tower/level-3.png",
+          "crop_xywh": [
+            684,
+            883,
+            516,
+            342
+          ],
+          "sheet_cell_xywh": [
+            646,
+            667,
+            608,
+            587
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.05067567567567568,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            12,
+            17
+          ]
+        }
+      ],
+      "decision": "Accepted: source alpha, native/3x identity, construction, source-owned contact and actual Godot states reviewed. Masters are immutable identity references; selected level sheets own the four runtime states.",
+      "source_bounds": [
+        [
+          97,
+          86,
+          563,
+          645
+        ],
+        [
+          61,
+          86,
+          528,
+          645
+        ],
+        [
+          97,
+          22,
+          609,
+          567
+        ],
+        [
+          38,
+          216,
+          554,
+          558
+        ]
+      ],
+      "source_contacts": [
+        [
+          313.0,
+          645
+        ],
+        [
+          278.5,
+          645
+        ],
+        [
+          313.0,
+          567
+        ],
+        [
+          277.0,
+          558
+        ]
+      ],
+      "reference_hashes": {
+        "assets/art_source/defences/gun_tower/master.png": "86d51327390ec01329d9f110b2c539e01924dbdd21348d1f6dcfad25cbbbce13",
+        "assets/art_source/buildings/house/whole.png": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435"
+      },
+      "tool_arguments": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\defences\\gun_tower\\master.png",
+          "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\buildings\\house\\whole.png"
+        ]
+      }
+    },
+    {
+      "id": "gun_tower",
+      "kind": "master",
+      "tool": "built-in ImageGen",
+      "revision": 0,
+      "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-9b7c0289-1121-4781-b11b-bcfb157068b8.png",
+      "source": "assets/art_source/defences/gun_tower/master.png",
+      "source_sha256": "86d51327390ec01329d9f110b2c539e01924dbdd21348d1f6dcfad25cbbbce13",
+      "source_wh": [
+        1024,
+        1536
+      ],
+      "source_alpha_range": [
+        0,
+        254
+      ],
+      "prompt": "implementation/sprites/generation/0013-gun_tower-master.prompt.txt",
+      "prompt_sha256": "b3de539deeadf7b19737b97b023191d2b3d2fbdd8860e845bb6f735418060f06",
+      "references": [
+        "docs/reference-sheet.png",
+        "assets/art_source/buildings/house/whole.png"
+      ],
+      "measured_recipes": [
+        {
+          "id": "buildings/gun_tower",
+          "source": "assets/art_source/defences/gun_tower/master.png",
+          "crop_xywh": [
+            218,
+            369,
+            692,
+            946
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            1024,
+            1536
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.0306553911205074,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            9,
+            29
+          ]
+        }
+      ],
+      "source_bounds": [
+        [
+          218,
+          369,
+          910,
+          1315
+        ]
+      ],
+      "source_contacts": [
+        [
+          518.0,
+          1315
+        ]
+      ],
+      "decision": "Accepted: source alpha, native/3x identity, construction, source-owned contact and actual Godot states reviewed. Masters are immutable identity references; selected level sheets own the four runtime states.",
+      "reference_hashes": {
+        "docs/reference-sheet.png": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "assets/art_source/buildings/house/whole.png": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435"
+      },
+      "tool_arguments": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+          "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\buildings\\house\\whole.png"
+        ]
+      }
+    },
+    {
+      "id": "mortar",
+      "kind": "level-1",
+      "tool": "built-in ImageGen",
+      "revision": 0,
+      "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-2df54c29-354c-4ba3-9b66-09064e06e1cd.png",
+      "source": "assets/art_source/defences/mortar/level-1.png",
+      "source_sha256": "9870fd4f33840cf5064e807756d0aaf1321ddf30a151b80803c902891ba5fdf0",
+      "source_wh": [
+        1254,
+        1254
+      ],
+      "source_alpha_range": [
+        0,
+        255
+      ],
+      "prompt": "implementation/sprites/generation/0013-mortar-level-1.prompt.txt",
+      "prompt_sha256": "6577bb8ead5d8a635fca9740db808dd7ba0279b46a12f1486e31c78cee7c844b",
+      "references": [
+        "assets/art_source/defences/mortar/master.png",
+        "assets/art_source/buildings/house/whole.png"
+      ],
+      "measured_recipes": [
+        {
+          "id": "buildings/mortar",
+          "source": "assets/art_source/defences/mortar/level-1.png",
+          "crop_xywh": [
+            112,
+            189,
+            459,
+            442
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            618,
+            661
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.04524886877828054,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            10,
+            20
+          ]
+        },
+        {
+          "id": "buildings/mortar_hurt",
+          "source": "assets/art_source/defences/mortar/level-1.png",
+          "crop_xywh": [
+            664,
+            189,
+            459,
+            445
+          ],
+          "sheet_cell_xywh": [
+            617,
+            0,
+            637,
+            661
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.04524886877828054,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            10,
+            20
+          ]
+        },
+        {
+          "id": "buildings/mortar_fire",
+          "source": "assets/art_source/defences/mortar/level-1.png",
+          "crop_xywh": [
+            111,
+            686,
+            488,
+            497
+          ],
+          "sheet_cell_xywh": [
+            0,
+            660,
+            631,
+            594
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.04524886877828054,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            10,
+            22
+          ]
+        },
+        {
+          "id": "buildings/mortar_wreck",
+          "source": "assets/art_source/defences/mortar/level-1.png",
+          "crop_xywh": [
+            661,
+            838,
+            496,
+            340
+          ],
+          "sheet_cell_xywh": [
+            630,
+            660,
+            624,
+            594
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.04524886877828054,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            11,
+            15
+          ]
+        }
+      ],
+      "decision": "Accepted: source alpha, native/3x identity, construction, source-owned contact and actual Godot states reviewed. Masters are immutable identity references; selected level sheets own the four runtime states.",
+      "source_bounds": [
+        [
+          112,
+          189,
+          571,
+          631
+        ],
+        [
+          47,
+          189,
+          506,
+          634
+        ],
+        [
+          111,
+          26,
+          599,
+          523
+        ],
+        [
+          31,
+          178,
+          527,
+          518
+        ]
+      ],
+      "source_contacts": [
+        [
+          342.0,
+          631
+        ],
+        [
+          277.5,
+          634
+        ],
+        [
+          342.0,
+          523
+        ],
+        [
+          279.5,
+          518
+        ]
+      ],
+      "reference_hashes": {
+        "assets/art_source/defences/mortar/master.png": "0cd5056e0f44dc9d5ad02902a8e158cca0478452a136c0d0b5a57cfb55dca74f",
+        "assets/art_source/buildings/house/whole.png": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435"
+      },
+      "tool_arguments": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\defences\\mortar\\master.png",
+          "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\buildings\\house\\whole.png"
+        ]
+      }
+    },
+    {
+      "id": "mortar",
+      "kind": "level-2",
+      "tool": "built-in ImageGen",
+      "revision": 0,
+      "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-7a99c979-ae6e-486b-899e-2149f964b302.png",
+      "source": "assets/art_source/defences/mortar/level-2.png",
+      "source_sha256": "ff074311eeab4ac363ecfa5881a96caa045e051d6fbdf579df30c09494c3cba9",
+      "source_wh": [
+        1254,
+        1254
+      ],
+      "source_alpha_range": [
+        0,
+        255
+      ],
+      "prompt": "implementation/sprites/generation/0013-mortar-level-2.prompt.txt",
+      "prompt_sha256": "d74a193fdc9a3930c1a315834d21215ffb4eaf33cfa31b8108c3653e2d4b9bf0",
+      "references": [
+        "assets/art_source/defences/mortar/master.png",
+        "assets/art_source/buildings/house/whole.png"
+      ],
+      "measured_recipes": [
+        {
+          "id": "buildings/mortar_2",
+          "source": "assets/art_source/defences/mortar/level-2.png",
+          "crop_xywh": [
+            106,
+            141,
+            491,
+            478
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            631,
+            634
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.0502092050209205,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            12,
+            24
+          ]
+        },
+        {
+          "id": "buildings/mortar_2_hurt",
+          "source": "assets/art_source/defences/mortar/level-2.png",
+          "crop_xywh": [
+            664,
+            159,
+            486,
+            460
+          ],
+          "sheet_cell_xywh": [
+            630,
+            0,
+            624,
+            634
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.0502092050209205,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            12,
+            23
+          ]
+        },
+        {
+          "id": "buildings/mortar_2_fire",
+          "source": "assets/art_source/defences/mortar/level-2.png",
+          "crop_xywh": [
+            106,
+            647,
+            520,
+            542
+          ],
+          "sheet_cell_xywh": [
+            0,
+            633,
+            650,
+            621
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.0502092050209205,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            12,
+            27
+          ]
+        },
+        {
+          "id": "buildings/mortar_2_wreck",
+          "source": "assets/art_source/defences/mortar/level-2.png",
+          "crop_xywh": [
+            672,
+            835,
+            494,
+            355
+          ],
+          "sheet_cell_xywh": [
+            649,
+            633,
+            605,
+            621
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.0502092050209205,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            13,
+            18
+          ]
+        }
+      ],
+      "decision": "Accepted: source alpha, native/3x identity, construction, source-owned contact and actual Godot states reviewed. Masters are immutable identity references; selected level sheets own the four runtime states.",
+      "source_bounds": [
+        [
+          106,
+          141,
+          597,
+          619
+        ],
+        [
+          34,
+          159,
+          520,
+          619
+        ],
+        [
+          106,
+          14,
+          626,
+          556
+        ],
+        [
+          23,
+          202,
+          517,
+          557
+        ]
+      ],
+      "source_contacts": [
+        [
+          352.0,
+          619
+        ],
+        [
+          279.5,
+          619
+        ],
+        [
+          352.0,
+          556
+        ],
+        [
+          284.5,
+          557
+        ]
+      ],
+      "reference_hashes": {
+        "assets/art_source/defences/mortar/master.png": "0cd5056e0f44dc9d5ad02902a8e158cca0478452a136c0d0b5a57cfb55dca74f",
+        "assets/art_source/buildings/house/whole.png": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435"
+      },
+      "tool_arguments": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\defences\\mortar\\master.png",
+          "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\buildings\\house\\whole.png"
+        ]
+      }
+    },
+    {
+      "id": "mortar",
+      "kind": "level-3",
+      "tool": "built-in ImageGen",
+      "revision": 0,
+      "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-b4875b60-14ea-4919-b82f-31dfdde47de3.png",
+      "source": "assets/art_source/defences/mortar/level-3.png",
+      "source_sha256": "0b132a775f558cea165387c75e7cf9a71341b5018f5e83cd7e4b2d49d1d4bd12",
+      "source_wh": [
+        1254,
+        1254
+      ],
+      "source_alpha_range": [
+        0,
+        255
+      ],
+      "prompt": "implementation/sprites/generation/0013-mortar-level-3.prompt.txt",
+      "prompt_sha256": "8be85eb11a4322d3a85f58e8090816bae7239032da62c2781a455bcd9e47b614",
+      "references": [
+        "assets/art_source/defences/mortar/master.png",
+        "assets/art_source/buildings/house/whole.png"
+      ],
+      "measured_recipes": [
+        {
+          "id": "buildings/mortar_3",
+          "source": "assets/art_source/defences/mortar/level-3.png",
+          "crop_xywh": [
+            69,
+            114,
+            498,
+            500
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            633,
+            646
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.05454545454545454,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            14,
+            27
+          ]
+        },
+        {
+          "id": "buildings/mortar_3_hurt",
+          "source": "assets/art_source/defences/mortar/level-3.png",
+          "crop_xywh": [
+            697,
+            114,
+            493,
+            500
+          ],
+          "sheet_cell_xywh": [
+            632,
+            0,
+            622,
+            646
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.05454545454545454,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            13,
+            27
+          ]
+        },
+        {
+          "id": "buildings/mortar_3_fire",
+          "source": "assets/art_source/defences/mortar/level-3.png",
+          "crop_xywh": [
+            69,
+            677,
+            515,
+            536
+          ],
+          "sheet_cell_xywh": [
+            0,
+            645,
+            634,
+            609
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.05454545454545454,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            14,
+            29
+          ]
+        },
+        {
+          "id": "buildings/mortar_3_wreck",
+          "source": "assets/art_source/defences/mortar/level-3.png",
+          "crop_xywh": [
+            682,
+            803,
+            512,
+            407
+          ],
+          "sheet_cell_xywh": [
+            633,
+            645,
+            621,
+            609
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.05454545454545454,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            13,
+            22
+          ]
+        }
+      ],
+      "decision": "Accepted: source alpha, native/3x identity, construction, source-owned contact and actual Godot states reviewed. Masters are immutable identity references; selected level sheets own the four runtime states.",
+      "source_bounds": [
+        [
+          69,
+          114,
+          567,
+          614
+        ],
+        [
+          65,
+          114,
+          558,
+          614
+        ],
+        [
+          69,
+          32,
+          584,
+          568
+        ],
+        [
+          49,
+          158,
+          561,
+          565
+        ]
+      ],
+      "source_contacts": [
+        [
+          320.0,
+          614
+        ],
+        [
+          311.5,
+          614
+        ],
+        [
+          318.5,
+          568
+        ],
+        [
+          286.0,
+          565
+        ]
+      ],
+      "reference_hashes": {
+        "assets/art_source/defences/mortar/master.png": "0cd5056e0f44dc9d5ad02902a8e158cca0478452a136c0d0b5a57cfb55dca74f",
+        "assets/art_source/buildings/house/whole.png": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435"
+      },
+      "tool_arguments": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\defences\\mortar\\master.png",
+          "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\buildings\\house\\whole.png"
+        ]
+      }
+    },
+    {
+      "id": "mortar",
+      "kind": "master",
+      "tool": "built-in ImageGen",
+      "revision": 0,
+      "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-7134b806-f32f-4029-b665-c2d8c99a1ad4.png",
+      "source": "assets/art_source/defences/mortar/master.png",
+      "source_sha256": "0cd5056e0f44dc9d5ad02902a8e158cca0478452a136c0d0b5a57cfb55dca74f",
+      "source_wh": [
+        1216,
+        1294
+      ],
+      "source_alpha_range": [
+        0,
+        255
+      ],
+      "prompt": "implementation/sprites/generation/0013-mortar-master.prompt.txt",
+      "prompt_sha256": "31c205175c4f282ae0c54be3e56135c3e09752e91816820b9886f42aa154a807",
+      "references": [
+        "docs/reference-sheet.png",
+        "assets/art_source/buildings/house/whole.png"
+      ],
+      "measured_recipes": [
+        {
+          "id": "buildings/mortar",
+          "source": "assets/art_source/defences/mortar/master.png",
+          "crop_xywh": [
+            176,
+            313,
+            897,
+            905
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            1216,
+            1294
+          ],
+          "gutter_xy": [
+            0,
+            0
+          ],
+          "canvas_wh": [
+            32,
+            48
+          ],
+          "pivot_xy": [
+            16,
+            44
+          ],
+          "content_scale": 0.022099447513812154,
+          "alpha_threshold": 128,
+          "content_anchor_xy": [
+            10,
+            20
+          ]
+        }
+      ],
+      "source_bounds": [
+        [
+          176,
+          313,
+          1073,
+          1218
+        ]
+      ],
+      "source_contacts": [
+        [
+          625.5,
+          1218
+        ]
+      ],
+      "decision": "Accepted: source alpha, native/3x identity, construction, source-owned contact and actual Godot states reviewed. Masters are immutable identity references; selected level sheets own the four runtime states.",
+      "reference_hashes": {
+        "docs/reference-sheet.png": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "assets/art_source/buildings/house/whole.png": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435"
+      },
+      "tool_arguments": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+          "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\buildings\\house\\whole.png"
+        ]
+      }
+    }
+  ],
+  "rejected_sources": [
+    "assets/art_source/defences/auto_crossbow/level-1.png",
+    "assets/art_source/defences/flame_tower/level-1.png",
+    "assets/art_source/defences/gun_tower/level-1.png",
+    "assets/art_source/defences/gun_tower/level-1-r1.png",
+    "assets/art_source/defences/gun_tower/level-2.png",
+    "assets/art_source/defences/gun_tower/level-2-r1.png"
+  ],
+  "frames": [
+    {
+      "id": "buildings/gun_tower",
+      "output_sha256": "8bb08e6ffbf0ed0f209d19035c0e904df8c93266ebf099542d1bbf080c1d6a8d",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "visible_bounds": [
+        8,
+        19,
+        27,
+        44
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.04291845493562232,
+      "source": "assets/art_source/defences/gun_tower/level-1-r2.png",
+      "muzzles_xy": [
+        [
+          26,
+          20
+        ]
+      ]
+    },
+    {
+      "id": "buildings/gun_tower_hurt",
+      "output_sha256": "e808902a460de800d0a8c41f4719cdab046af28bbec9361c2f876dde7c4ac9b0",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "visible_bounds": [
+        7,
+        19,
+        25,
+        44
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.04291845493562232,
+      "source": "assets/art_source/defences/gun_tower/level-1-r2.png",
+      "muzzles_xy": [
+        [
+          24,
+          20
+        ]
+      ]
+    },
+    {
+      "id": "buildings/gun_tower_fire",
+      "output_sha256": "a17f2510c192f81dbd6828d46b124cf93ad8ba4c2e9477cc734dc18a16c91e0b",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "visible_bounds": [
+        8,
+        17,
+        30,
+        44
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.04291845493562232,
+      "source": "assets/art_source/defences/gun_tower/level-1-r2.png",
+      "muzzles_xy": [
+        [
+          26,
+          20
+        ]
+      ]
+    },
+    {
+      "id": "buildings/gun_tower_wreck",
+      "output_sha256": "a7dbe1adb2589a2439c8d396947daa4f71e7702bc293f23c72a9ef3e98a676d9",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "visible_bounds": [
+        6,
+        28,
+        26,
+        44
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.04291845493562232,
+      "source": "assets/art_source/defences/gun_tower/level-1-r2.png",
+      "muzzles_xy": []
+    },
+    {
+      "id": "buildings/gun_tower_2",
+      "output_sha256": "f133d98f50bffc6f31e26598a9e91b7444d037d2d9cd0940fc2c7cc7ae5c830c",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "visible_bounds": [
+        6,
+        18,
+        27,
+        44
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.05263157894736842,
+      "source": "assets/art_source/defences/gun_tower/level-2-r2.png",
+      "muzzles_xy": [
+        [
+          26,
+          19
+        ]
+      ]
+    },
+    {
+      "id": "buildings/gun_tower_2_hurt",
+      "output_sha256": "43e838ccf34d0d4744f5a44ec1d9c7620ed8d9711b39305669b05a3655d32c81",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "visible_bounds": [
+        6,
+        18,
+        27,
+        44
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.05263157894736842,
+      "source": "assets/art_source/defences/gun_tower/level-2-r2.png",
+      "muzzles_xy": [
+        [
+          26,
+          19
+        ]
+      ]
+    },
+    {
+      "id": "buildings/gun_tower_2_fire",
+      "output_sha256": "c90da1426474ad661c54edbba5ebb332cb6862b66cb384cd0b3d5befc41691f0",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "visible_bounds": [
+        6,
+        16,
+        31,
+        44
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.05263157894736842,
+      "source": "assets/art_source/defences/gun_tower/level-2-r2.png",
+      "muzzles_xy": [
+        [
+          26,
+          19
+        ]
+      ]
+    },
+    {
+      "id": "buildings/gun_tower_2_wreck",
+      "output_sha256": "fc3db332751093305ee36486d837b3d03e3c8ac4d89a70b0b2307363fbfc2199",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "visible_bounds": [
+        4,
+        26,
+        28,
+        44
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.05263157894736842,
+      "source": "assets/art_source/defences/gun_tower/level-2-r2.png",
+      "muzzles_xy": []
+    },
+    {
+      "id": "buildings/gun_tower_3",
+      "output_sha256": "558fd793e557e930ec8558f9cf7d40bd0ca25b3984cc1dee5c8ab5da4dcae177",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "visible_bounds": [
+        5,
+        16,
+        29,
+        44
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.05067567567567568,
+      "source": "assets/art_source/defences/gun_tower/level-3.png",
+      "muzzles_xy": [
+        [
+          27,
+          19
+        ],
+        [
+          27,
+          21
+        ]
+      ]
+    },
+    {
+      "id": "buildings/gun_tower_3_hurt",
+      "output_sha256": "5b2fc9da334c59007b5d7825fcafc5a76581ab7393b3dce17c227037a6b00f6f",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "visible_bounds": [
+        5,
+        16,
+        29,
+        44
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.05067567567567568,
+      "source": "assets/art_source/defences/gun_tower/level-3.png",
+      "muzzles_xy": [
+        [
+          27,
+          19
+        ],
+        [
+          27,
+          21
+        ]
+      ]
+    },
+    {
+      "id": "buildings/gun_tower_3_fire",
+      "output_sha256": "a2fa985e062c75f458ee4ee1a0b1f0d142876d4ba4cb552a5b2907c17f881e85",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "visible_bounds": [
+        5,
+        16,
+        31,
+        44
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.05067567567567568,
+      "source": "assets/art_source/defences/gun_tower/level-3.png",
+      "muzzles_xy": [
+        [
+          26,
+          18
+        ],
+        [
+          26,
+          21
+        ]
+      ]
+    },
+    {
+      "id": "buildings/gun_tower_3_wreck",
+      "output_sha256": "8a515438349c3d5b788853722c1a719c7cd000836fab1d34aaca900d64df63ac",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "visible_bounds": [
+        4,
+        27,
+        30,
+        44
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.05067567567567568,
+      "source": "assets/art_source/defences/gun_tower/level-3.png",
+      "muzzles_xy": []
+    },
+    {
+      "id": "buildings/flame_tower",
+      "output_sha256": "47ae4a5ac86fbd32ba922f11c930c5f73d850a40bb65e9e57e4e38d5ffc2b933",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "visible_bounds": [
+        7,
+        19,
+        28,
+        44
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.04940711462450593,
+      "source": "assets/art_source/defences/flame_tower/level-1-r1.png",
+      "muzzles_xy": [
+        [
+          26,
+          21
+        ]
+      ]
+    },
+    {
+      "id": "buildings/flame_tower_hurt",
+      "output_sha256": "88574026480394052895cc1bb1a44c93ffc02dfe61333091c0ff038b42d8af6d",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "visible_bounds": [
+        6,
+        19,
+        27,
+        44
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.04940711462450593,
+      "source": "assets/art_source/defences/flame_tower/level-1-r1.png",
+      "muzzles_xy": [
+        [
+          26,
+          21
+        ]
+      ]
+    },
+    {
+      "id": "buildings/flame_tower_fire",
+      "output_sha256": "79edbf092f8d717c4b2afbbe3e6bc7f02f4a6d09f23ec5e488f0a7b7c2d06d76",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "visible_bounds": [
+        7,
+        19,
+        30,
+        44
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.04940711462450593,
+      "source": "assets/art_source/defences/flame_tower/level-1-r1.png",
+      "muzzles_xy": [
+        [
+          26,
+          21
+        ]
+      ]
+    },
+    {
+      "id": "buildings/flame_tower_wreck",
+      "output_sha256": "3569b3b7b2a7fddd4769a25bb6de8cfb68d061706826f7c1024d2ae23d3d28d8",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "visible_bounds": [
+        5,
+        29,
+        26,
+        44
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.04940711462450593,
+      "source": "assets/art_source/defences/flame_tower/level-1-r1.png",
+      "muzzles_xy": []
+    },
+    {
+      "id": "buildings/flame_tower_2",
+      "output_sha256": "4f5a583f0dcc03b74eef95d80e530dcf4d3176e6c2be0fb90a83dd0a1681aed4",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "visible_bounds": [
+        5,
+        19,
+        27,
+        44
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.048859934853420196,
+      "source": "assets/art_source/defences/flame_tower/level-2.png",
+      "muzzles_xy": [
+        [
+          25,
+          22
+        ]
+      ]
+    },
+    {
+      "id": "buildings/flame_tower_2_hurt",
+      "output_sha256": "f1f540925f8ae22f7e1e6a26e77f5880b3e5dc3021efa5df38905d1d9d7418cf",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "visible_bounds": [
+        6,
+        20,
+        27,
+        44
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.048859934853420196,
+      "source": "assets/art_source/defences/flame_tower/level-2.png",
+      "muzzles_xy": [
+        [
+          25,
+          22
+        ]
+      ]
+    },
+    {
+      "id": "buildings/flame_tower_2_fire",
+      "output_sha256": "3aa7eff0b2553fe9aad785b85f903100bd330e364720bc88680d0820ce95cba7",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "visible_bounds": [
+        5,
+        19,
+        31,
+        44
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.048859934853420196,
+      "source": "assets/art_source/defences/flame_tower/level-2.png",
+      "muzzles_xy": [
+        [
+          26,
+          21
+        ]
+      ]
+    },
+    {
+      "id": "buildings/flame_tower_2_wreck",
+      "output_sha256": "d2650de7a9abf6dcab5604c9baa75e06795268d2c494a021b333cf8b5046a27a",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "visible_bounds": [
+        5,
+        27,
+        28,
+        44
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.048859934853420196,
+      "source": "assets/art_source/defences/flame_tower/level-2.png",
+      "muzzles_xy": []
+    },
+    {
+      "id": "buildings/flame_tower_3",
+      "output_sha256": "1efe42559a37aa5df1ecc92ed4d2e7e81c69d043d0ed42e552acddaea254be94",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "visible_bounds": [
+        7,
+        22,
+        28,
+        44
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.04120879120879121,
+      "source": "assets/art_source/defences/flame_tower/level-3.png",
+      "muzzles_xy": [
+        [
+          25,
+          25
+        ]
+      ]
+    },
+    {
+      "id": "buildings/flame_tower_3_hurt",
+      "output_sha256": "be4c3e85ee025e901f15d37264c80c695cd7c0b2e8d8a4f060d37d5ab4bd14a5",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "visible_bounds": [
+        7,
+        23,
+        27,
+        44
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.04120879120879121,
+      "source": "assets/art_source/defences/flame_tower/level-3.png",
+      "muzzles_xy": [
+        [
+          25,
+          25
+        ]
+      ]
+    },
+    {
+      "id": "buildings/flame_tower_3_fire",
+      "output_sha256": "d379d6abf677689dfc7a179d25beea1e3300f4b6b033af5535e724d870a199d4",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "visible_bounds": [
+        7,
+        23,
+        31,
+        44
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.04120879120879121,
+      "source": "assets/art_source/defences/flame_tower/level-3.png",
+      "muzzles_xy": [
+        [
+          25,
+          25
+        ]
+      ]
+    },
+    {
+      "id": "buildings/flame_tower_3_wreck",
+      "output_sha256": "8a9ba919ad36f7e248bfc01fca363899b17a4a3584b844ab2119d8e12e045886",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "visible_bounds": [
+        6,
+        31,
+        27,
+        44
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.04120879120879121,
+      "source": "assets/art_source/defences/flame_tower/level-3.png",
+      "muzzles_xy": []
+    },
+    {
+      "id": "buildings/mortar",
+      "output_sha256": "be87c0ec7487b14ade3c06ca9be29946030c87f00040bb42b912b16860d4ea18",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "visible_bounds": [
+        6,
+        24,
+        27,
+        44
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.04524886877828054,
+      "source": "assets/art_source/defences/mortar/level-1.png",
+      "muzzles_xy": [
+        [
+          21,
+          27
+        ]
+      ]
+    },
+    {
+      "id": "buildings/mortar_hurt",
+      "output_sha256": "c78d08fb4ea9e458c7644ed59e3a3184848cb2a2338e63a9c52b9c6e43968316",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "visible_bounds": [
+        6,
+        24,
+        27,
+        44
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.04524886877828054,
+      "source": "assets/art_source/defences/mortar/level-1.png",
+      "muzzles_xy": [
+        [
+          21,
+          27
+        ]
+      ]
+    },
+    {
+      "id": "buildings/mortar_fire",
+      "output_sha256": "46b5d3cfea80597e5d7bb0f2d3b4987113ccf7d5b749b733e788fbef75a98412",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "visible_bounds": [
+        6,
+        22,
+        28,
+        44
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.04524886877828054,
+      "source": "assets/art_source/defences/mortar/level-1.png",
+      "muzzles_xy": [
+        [
+          22,
+          26
+        ]
+      ]
+    },
+    {
+      "id": "buildings/mortar_wreck",
+      "output_sha256": "7ce5c0f7486212849f8a943f84a7ff65229b6019c59917737429d61c8d719011",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "visible_bounds": [
+        5,
+        29,
+        27,
+        44
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.04524886877828054,
+      "source": "assets/art_source/defences/mortar/level-1.png",
+      "muzzles_xy": []
+    },
+    {
+      "id": "buildings/mortar_2",
+      "output_sha256": "0c3a32f4a1e739a5c42094b4048ee54d5ab7557a0ac997807207878b16656b5c",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "visible_bounds": [
+        4,
+        20,
+        29,
+        44
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.0502092050209205,
+      "source": "assets/art_source/defences/mortar/level-2.png",
+      "muzzles_xy": [
+        [
+          23,
+          24
+        ]
+      ]
+    },
+    {
+      "id": "buildings/mortar_2_hurt",
+      "output_sha256": "833ffef4d9735923535cc48911ab4d3c32491717737a84fc2280773bccf6d1d2",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "visible_bounds": [
+        4,
+        21,
+        28,
+        44
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.0502092050209205,
+      "source": "assets/art_source/defences/mortar/level-2.png",
+      "muzzles_xy": [
+        [
+          23,
+          24
+        ]
+      ]
+    },
+    {
+      "id": "buildings/mortar_2_fire",
+      "output_sha256": "be1264190a77208d0c707af04740b005322cf94aef989d7984e82d67c926fb92",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "visible_bounds": [
+        4,
+        17,
+        30,
+        44
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.0502092050209205,
+      "source": "assets/art_source/defences/mortar/level-2.png",
+      "muzzles_xy": [
+        [
+          23,
+          22
+        ]
+      ]
+    },
+    {
+      "id": "buildings/mortar_2_wreck",
+      "output_sha256": "d0f7e87b1a45960a290c5501892c14b9a57fbb1dafa11500e7b58de70e32b170",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "visible_bounds": [
+        3,
+        26,
+        28,
+        44
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.0502092050209205,
+      "source": "assets/art_source/defences/mortar/level-2.png",
+      "muzzles_xy": []
+    },
+    {
+      "id": "buildings/mortar_3",
+      "output_sha256": "77be5d3c2deeef082c127fc25c57c41cbe25539ee46d032d354f50d8cacbf843",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "visible_bounds": [
+        2,
+        17,
+        29,
+        44
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.05454545454545454,
+      "source": "assets/art_source/defences/mortar/level-3.png",
+      "muzzles_xy": [
+        [
+          22,
+          23
+        ]
+      ]
+    },
+    {
+      "id": "buildings/mortar_3_hurt",
+      "output_sha256": "575c9b3347cbf13702772211b25c2d095b7d1a17d807421085490344f8545f7d",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "visible_bounds": [
+        3,
+        17,
+        30,
+        44
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.05454545454545454,
+      "source": "assets/art_source/defences/mortar/level-3.png",
+      "muzzles_xy": [
+        [
+          22,
+          23
+        ]
+      ]
+    },
+    {
+      "id": "buildings/mortar_3_fire",
+      "output_sha256": "1b47c07f07195768205a3f6f18f1811f55239216bcb5bd71f3f8491946676dd8",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "visible_bounds": [
+        2,
+        15,
+        30,
+        44
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.05454545454545454,
+      "source": "assets/art_source/defences/mortar/level-3.png",
+      "muzzles_xy": [
+        [
+          23,
+          21
+        ]
+      ]
+    },
+    {
+      "id": "buildings/mortar_3_wreck",
+      "output_sha256": "d827eead804020a371d8f47beda02828154b0138c78b05913dbbe7da0401497c",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "visible_bounds": [
+        3,
+        22,
+        31,
+        44
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.05454545454545454,
+      "source": "assets/art_source/defences/mortar/level-3.png",
+      "muzzles_xy": []
+    },
+    {
+      "id": "buildings/auto_crossbow",
+      "output_sha256": "431d1b53e11b54d99dc6663cb8399fec7b5ce08863b45594a247f5e6611c6b20",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "visible_bounds": [
+        6,
+        16,
+        30,
+        44
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.05217391304347826,
+      "source": "assets/art_source/defences/auto_crossbow/level-1-r1.png",
+      "muzzles_xy": [
+        [
+          25,
+          18
+        ]
+      ]
+    },
+    {
+      "id": "buildings/auto_crossbow_hurt",
+      "output_sha256": "516c4dd258267a13bc05a8805f4fc3b5f5b55d2c1833b419afea0ae558d2d75b",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "visible_bounds": [
+        6,
+        16,
+        30,
+        44
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.05217391304347826,
+      "source": "assets/art_source/defences/auto_crossbow/level-1-r1.png",
+      "muzzles_xy": [
+        [
+          25,
+          18
+        ]
+      ]
+    },
+    {
+      "id": "buildings/auto_crossbow_fire",
+      "output_sha256": "7bbfb9a0aa88412a03b69e0eb7df591fd984d5849f130214bf65164e912c2b97",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "visible_bounds": [
+        6,
+        16,
+        31,
+        44
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.05217391304347826,
+      "source": "assets/art_source/defences/auto_crossbow/level-1-r1.png",
+      "muzzles_xy": [
+        [
+          24,
+          19
+        ]
+      ]
+    },
+    {
+      "id": "buildings/auto_crossbow_wreck",
+      "output_sha256": "602f62d9612f8ee143828ecbbbbbd8e2f7b3c23555acce393755412591239ca0",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "visible_bounds": [
+        4,
+        25,
+        28,
+        44
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.05217391304347826,
+      "source": "assets/art_source/defences/auto_crossbow/level-1-r1.png",
+      "muzzles_xy": []
+    },
+    {
+      "id": "buildings/auto_crossbow_2",
+      "output_sha256": "afee775f61cba6cebb1d5d9afaa33b0dc6568413e0da4b62d592fdb799b9d173",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "visible_bounds": [
+        6,
+        18,
+        30,
+        44
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.0473186119873817,
+      "source": "assets/art_source/defences/auto_crossbow/level-2.png",
+      "muzzles_xy": [
+        [
+          25,
+          20
+        ]
+      ]
+    },
+    {
+      "id": "buildings/auto_crossbow_2_hurt",
+      "output_sha256": "1aa1fddbd62c907cc6559844ea94764a802cbff179fde4c100d9f807df817ff3",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "visible_bounds": [
+        6,
+        18,
+        30,
+        44
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.0473186119873817,
+      "source": "assets/art_source/defences/auto_crossbow/level-2.png",
+      "muzzles_xy": [
+        [
+          25,
+          20
+        ]
+      ]
+    },
+    {
+      "id": "buildings/auto_crossbow_2_fire",
+      "output_sha256": "07a8fe91ff31f5f53b8dfcd51d3d8740fffe8a96678cdde7c57986de61c71d3e",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "visible_bounds": [
+        6,
+        19,
+        31,
+        44
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.0473186119873817,
+      "source": "assets/art_source/defences/auto_crossbow/level-2.png",
+      "muzzles_xy": [
+        [
+          26,
+          21
+        ]
+      ]
+    },
+    {
+      "id": "buildings/auto_crossbow_2_wreck",
+      "output_sha256": "4335c61a64fe4cd12bc0c42c5921dda50ee26c9f0cd85680a5722f94e1d8cc00",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "visible_bounds": [
+        4,
+        27,
+        27,
+        44
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.0473186119873817,
+      "source": "assets/art_source/defences/auto_crossbow/level-2.png",
+      "muzzles_xy": []
+    },
+    {
+      "id": "buildings/auto_crossbow_3",
+      "output_sha256": "4e789a407c511de327d6b4dbb51b89cbcdea7e488218a6938bee80d0fb66b03f",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "visible_bounds": [
+        7,
+        19,
+        31,
+        44
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.048859934853420196,
+      "source": "assets/art_source/defences/auto_crossbow/level-3.png",
+      "muzzles_xy": [
+        [
+          26,
+          21
+        ]
+      ]
+    },
+    {
+      "id": "buildings/auto_crossbow_3_hurt",
+      "output_sha256": "81fba822f43d101950f488f3c9547b3eb1a778f8bb1a7db93286aa9364a86d3b",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "visible_bounds": [
+        6,
+        19,
+        30,
+        44
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.048859934853420196,
+      "source": "assets/art_source/defences/auto_crossbow/level-3.png",
+      "muzzles_xy": [
+        [
+          25,
+          21
+        ]
+      ]
+    },
+    {
+      "id": "buildings/auto_crossbow_3_fire",
+      "output_sha256": "0dbec747e548ce4fc424592e15ca1af66bab2f4a706c92adb6b9835b5d7a2bb4",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "visible_bounds": [
+        7,
+        17,
+        31,
+        44
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.048859934853420196,
+      "source": "assets/art_source/defences/auto_crossbow/level-3.png",
+      "muzzles_xy": [
+        [
+          25,
+          22
+        ]
+      ]
+    },
+    {
+      "id": "buildings/auto_crossbow_3_wreck",
+      "output_sha256": "865de62cd237bc1b5fa3336ed5b7e26f2eeb39f499f73797307162dc481c4c88",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "visible_bounds": [
+        5,
+        27,
+        27,
+        44
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.048859934853420196,
+      "source": "assets/art_source/defences/auto_crossbow/level-3.png",
+      "muzzles_xy": []
+    }
+  ],
+  "simulation": "1961000123",
+  "data": "407837701"
+}

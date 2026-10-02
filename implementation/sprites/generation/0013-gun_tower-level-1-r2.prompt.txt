@@ -1,0 +1,38 @@
+Use case: stylized-concept
+Asset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm
+that becomes a fortress against zombies at night.
+Primary request: One compact 2 by 2 four-state sheet for LEVEL 1 gun_tower, exactly FOUR complete separately spaced copies of the same machine. Top row: WHOLE idle, HURT. Bottom row: FIRE, WRECK. All four are authored drawings at identical camera, magnification and planted-base coordinates in their respective cells..
+Input images: Image 1: accepted level 1 gun_tower identity master; retain its materials, weapon direction, construction language and family identity while applying the specified level. Image 2: accepted farmhouse, warm timber/metal palette, upper-left light and orthographic camera only.
+Style/medium: coherent hand-crafted pixel art with deliberate pixel clusters,
+colored outlines, restrained texture, readable material planes and clean forms.
+Composition/framing: orthographic three-quarter top-down view on a rectangular
+grid; match the approved master camera and scale. Final native canvas is
+32x48 pixels with contact pivot 16,44; this is a downstream import
+target, so the generated source must remain simple enough to survive reduction.
+Lighting/mood: neutral warm daytime, highlights from upper left, darker underside;
+runtime supplies dusk/night lighting. Keep emission in separate localized forms.
+Color palette: match the approved project palette and master, warm timber and
+terracotta, layered greens, cool water, violet/blue shadows; limited ramps.
+Scene/backdrop: true transparent background. No baked ground shadow for actors.
+Constraints: complete unclipped object, consistent perspective and scale, clear
+ground contact, generous tool/weapon clearance, no labels, text, watermark or UI.
+Avoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,
+random pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,
+new gameplay objects, tiny details that disappear at native size.
+
+Family contract:
+Create one gun tower, level 1,
+state the explicitly requested state(s) below, matching the approved family master. Gun: readable
+barrel on timber/metal tower. Flame: fuel tank, pipe and short nozzle. Mortar:
+low broad base and upward-tilted heavy tube. Crossbow: obvious limbs, string and
+bolt rail. Target 32x48 common canvas, stable one-cell base and pivot. Level 2
+adds reinforcement/mechanism; level 3 looks stronger through construction,
+not vertical duplication. Hurt has deliberate broken boards/metal; wreck lies
+at the same base. Fire adds a localized muzzle form at the actual weapon tip.
+Do not change camera/pivot between levels or put a permanent flame on whole art.
+
+Exact family: A compact farm gun tower: tall cross-braced timber legs on a small stone footing, a small metal turntable and one clearly visible long horizontal gun barrel pointing upper-right. No operator, roof or enclosed cabin.
+Level 1: simple timber trestle with one modest iron gun barrel.
+Native intact body target approximately [22, 29] pixels, on a 32x48 canvas; ground base centered at (16,44). Extra native space is for the weapon and its short localized firing cue. No baked ground shadows, grass, ground tile, labels, loose decorative objects, glow halos or smoke clouds. Keep a compact stable base and the upper-right weapon direction.
+
+Four-state sheet contract: Four isolated objects in a TWO ROW, TWO COLUMN square layout with large completely transparent horizontal AND vertical gutters. Every complete object including the flash stays inside its own cell, with at least 15 percent transparent side clearance. Keep an identical base center and bottom baseline in each virtual cell. WHOLE: the complete idle machine of the specified level, no flash. HURT: the same machine and base with deliberate broken support boards, exposed mechanism and local metal wear; preserve the barrel/bow identity and at least one sound planted support. FIRE: same complete WHOLE machine, with a small attached amber muzzle flash at the gun tip; level 3 shows both barrels. WRECK: a low collapsed broken version of this exact level at the same ground base, identifiable weapon parts among the broken base, no standing full machine. Wreck must stay inside the intact machine width; no scattering across gutters. Keep whole/hurt/fire body proportions and planted supports constant. The tiny firing cue must fit inside the native 32x48 clearance; never enlarge every machine to accommodate a huge flash. Native reduction must preserve a clear weapon mechanism. No checkerboard, background glow, ground tile, shadow, labels or text.

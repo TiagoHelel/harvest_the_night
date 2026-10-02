@@ -1,0 +1,36 @@
+{
+  "id": "gun_tower",
+  "kind": "level-1-r1",
+  "tool": "built-in ImageGen",
+  "revision": 1,
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-fdc2d677-88d4-40b0-857d-9104582c8553.png",
+  "source": "assets/art_source/defences/gun_tower/level-1-r1.png",
+  "source_sha256": "cfe79bc4bd75c775e718acc3dc9cc4c187082c621b8139c9de674f7711a5ab7b",
+  "source_wh": [
+    1983,
+    793
+  ],
+  "source_alpha_range": [
+    0,
+    255
+  ],
+  "prompt": "implementation/sprites/generation/0013-gun_tower-level-1-r1.prompt.txt",
+  "prompt_sha256": "0183388a245160cc009eb362b761ac8dd5b011aafc26eaafa1672438773cd2c1",
+  "references": [
+    "assets/art_source/defences/gun_tower/master.png",
+    "assets/art_source/buildings/house/whole.png"
+  ],
+  "measured_recipes": [],
+  "decision": "Rejected: reduced flash still overlaps the wreck horizontal bounds. Revision 2 switches to a compact two-by-two sheet, keeping four authored states and common scale.",
+  "reference_hashes": {
+    "assets/art_source/defences/gun_tower/master.png": "86d51327390ec01329d9f110b2c539e01924dbdd21348d1f6dcfad25cbbbce13",
+    "assets/art_source/buildings/house/whole.png": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435"
+  },
+  "tool_arguments": {
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\defences\\gun_tower\\master.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\buildings\\house\\whole.png"
+    ]
+  }
+}

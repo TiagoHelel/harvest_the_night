@@ -134,7 +134,7 @@ func _run() -> void:
 	_world.show_ghost(Vector2i(14, 10), &"gun_tower", true)
 	await _settle()
 	expect(ghost.position == Vector2(232, 176), "Tower ghost stands on the selected cell")
-	expect(ghost.offset.y == -ghost.texture.get_height(), "Legacy tower preview bottom agrees with placed tower")
+	expect(ghost.offset == Vector2(-16, -44) and ghost.texture.get_size() == Vector2(32, 48), "Authored tower preview keeps its source-owned canvas and ground pivot")
 	expect(_world.ghost_footprint() == Vector2i.ONE, "Changing family in the same cell updates the preview frame")
 	await _shoot("ghost_tower", "Tower preview: base stays on the selected cell")
 	_world.hide_ghost()

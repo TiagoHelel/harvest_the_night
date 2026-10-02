@@ -319,43 +319,51 @@
     },
     {
       "output": "sprites/buildings/auto_crossbow.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/buildings/auto_crossbow_2.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/buildings/auto_crossbow_2_fire.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/buildings/auto_crossbow_2_hurt.png",
-      "owner": "ascii"
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/auto_crossbow_2_wreck.png",
+      "owner": "raster"
     },
     {
       "output": "sprites/buildings/auto_crossbow_3.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/buildings/auto_crossbow_3_fire.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/buildings/auto_crossbow_3_hurt.png",
-      "owner": "ascii"
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/auto_crossbow_3_wreck.png",
+      "owner": "raster"
     },
     {
       "output": "sprites/buildings/auto_crossbow_fire.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/buildings/auto_crossbow_hurt.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/buildings/auto_crossbow_wreck.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/buildings/barricade.png",
@@ -383,83 +391,99 @@
     },
     {
       "output": "sprites/buildings/flame_tower.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/buildings/flame_tower_2.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/buildings/flame_tower_2_fire.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/buildings/flame_tower_2_hurt.png",
-      "owner": "ascii"
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/flame_tower_2_wreck.png",
+      "owner": "raster"
     },
     {
       "output": "sprites/buildings/flame_tower_3.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/buildings/flame_tower_3_fire.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/buildings/flame_tower_3_hurt.png",
-      "owner": "ascii"
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/flame_tower_3_wreck.png",
+      "owner": "raster"
     },
     {
       "output": "sprites/buildings/flame_tower_fire.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/buildings/flame_tower_hurt.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/buildings/flame_tower_wreck.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/buildings/gun_tower.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/buildings/gun_tower_2.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/buildings/gun_tower_2_fire.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/buildings/gun_tower_2_hurt.png",
-      "owner": "ascii"
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/gun_tower_2_wreck.png",
+      "owner": "raster"
     },
     {
       "output": "sprites/buildings/gun_tower_3.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/buildings/gun_tower_3_fire.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/buildings/gun_tower_3_hurt.png",
-      "owner": "ascii"
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/gun_tower_3_wreck.png",
+      "owner": "raster"
     },
     {
       "output": "sprites/buildings/gun_tower_fire.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/buildings/gun_tower_hurt.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/buildings/gun_tower_wreck.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/buildings/house.png",
@@ -575,43 +599,51 @@
     },
     {
       "output": "sprites/buildings/mortar.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/buildings/mortar_2.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/buildings/mortar_2_fire.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/buildings/mortar_2_hurt.png",
-      "owner": "ascii"
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/mortar_2_wreck.png",
+      "owner": "raster"
     },
     {
       "output": "sprites/buildings/mortar_3.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/buildings/mortar_3_fire.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/buildings/mortar_3_hurt.png",
-      "owner": "ascii"
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/mortar_3_wreck.png",
+      "owner": "raster"
     },
     {
       "output": "sprites/buildings/mortar_fire.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/buildings/mortar_hurt.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/buildings/mortar_wreck.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/buildings/wall.png",

@@ -1,6 +1,6 @@
 # 0013 - Four tower families at three authored levels
 
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0012
 - **Likely files:** assets/art_source/defences/; sprites/buildings/gun_tower*,flame_tower*,mortar*,auto_crossbow*; tools/gen_sprites.py; src/ui/world_view.gd; src/ui/lighting.gd
 - **Generation briefs:** TOWER

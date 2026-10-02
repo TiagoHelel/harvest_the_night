@@ -1,0 +1,85 @@
+{
+  "id": "mortar",
+  "kind": "master",
+  "tool": "built-in ImageGen",
+  "revision": 0,
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-7134b806-f32f-4029-b665-c2d8c99a1ad4.png",
+  "source": "assets/art_source/defences/mortar/master.png",
+  "source_sha256": "0cd5056e0f44dc9d5ad02902a8e158cca0478452a136c0d0b5a57cfb55dca74f",
+  "source_wh": [
+    1216,
+    1294
+  ],
+  "source_alpha_range": [
+    0,
+    255
+  ],
+  "prompt": "implementation/sprites/generation/0013-mortar-master.prompt.txt",
+  "prompt_sha256": "31c205175c4f282ae0c54be3e56135c3e09752e91816820b9886f42aa154a807",
+  "references": [
+    "docs/reference-sheet.png",
+    "assets/art_source/buildings/house/whole.png"
+  ],
+  "measured_recipes": [
+    {
+      "id": "buildings/mortar",
+      "source": "assets/art_source/defences/mortar/master.png",
+      "crop_xywh": [
+        176,
+        313,
+        897,
+        905
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        1216,
+        1294
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.022099447513812154,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        10,
+        20
+      ]
+    }
+  ],
+  "source_bounds": [
+    [
+      176,
+      313,
+      1073,
+      1218
+    ]
+  ],
+  "source_contacts": [
+    [
+      625.5,
+      1218
+    ]
+  ],
+  "decision": "Accepted: source alpha, native/3x identity, construction, source-owned contact and actual Godot states reviewed. Masters are immutable identity references; selected level sheets own the four runtime states.",
+  "reference_hashes": {
+    "docs/reference-sheet.png": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+    "assets/art_source/buildings/house/whole.png": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435"
+  },
+  "tool_arguments": {
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\buildings\\house\\whole.png"
+    ]
+  }
+}

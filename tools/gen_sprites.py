@@ -528,9 +528,18 @@ def palette_gd():
     return "\n".join(lines).encode("utf-8")
 
 
+def migrated_towers():
+    """Skip old drawings only after all three levels/four states have owners."""
+    owners = art_ownership.registry()
+    return {key for key in GROWS if all(
+        owners.get("sprites/" + key + ("_%d" % level if level > 1 else "") + suffix + ".png") == "raster"
+        for level in range(1, LEVELS + 1) for suffix in ("", "_hurt", "_fire", "_wreck"))}
+
+
 def derived_sprites():
     """{name: (w, h, pixels)} for every pose that is not drawn by hand."""
     out = {}
+    migrated = migrated_towers()
 
     # Buildings, cut into the tiles the view asks for.
     for key, (name, cols, rows) in sorted(SLICED.items()):
@@ -542,6 +551,8 @@ def derived_sprites():
 
     # Towers, at the levels the player can pay for.
     for key, band in sorted(GROWS.items()):
+        if key in migrated:
+            continue
         width, height, pixels = render(key, SPRITES[key])
         for level in range(2, LEVELS + 1):
             tall = grown(pixels, band, level)
@@ -549,6 +560,8 @@ def derived_sprites():
 
     # The frame where a tower is firing, at every level it can be.
     for key, at in sorted(FIRES.items()):
+        if key in migrated:
+            continue
         width, height, pixels = render(key, SPRITES[key])
         out[key + "_fire"] = (width, height, flashing(pixels, at))
         for level in range(2, LEVELS + 1):
@@ -561,6 +574,8 @@ def derived_sprites():
 
     # And what everything that can be hit looks like on the way down.
     for key in sorted(HURT):
+        if key in migrated:
+            continue
         width, height, pixels = render(key, SPRITES[key])
         out[key + "_hurt"] = (width, height, holed(pixels, 7, 0))
         flat = rubble(pixels)
@@ -605,7 +620,10 @@ def write(path, data):
 def everything(dispatch=True):
     """Every output file, as {path: bytes}."""
     out = {}
+    migrated = migrated_towers()
     for name, spec in sorted(SPRITES.items()):
+        if name in migrated:
+            continue
         w, h, pixels = render(name, spec)
         out[name + ".png"] = png_bytes(w, h, pixels)
     for name, (w, h, pixels) in sorted(derived_sprites().items()):

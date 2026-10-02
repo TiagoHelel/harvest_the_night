@@ -1,0 +1,350 @@
+[
+  {
+    "path": "implementation/shots/sprites/0013/dusk.png",
+    "sha256": "56a629c3a0e8a8c91e65b9db5734efa78c766d698b1844d2f6e54f67f5cf7448",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0013/noon.png",
+    "sha256": "ee20b02153596fd8c1b506f07e3cd90608c87b224d22625876737b8244350c06",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0013/result.png",
+    "sha256": "a2677f2d703ee97f2d1bc9327fd1c9b9f5c4ea87f2fde164d3767fad6c9f018c",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0013/tech.png",
+    "sha256": "c80cd683841f52adba9f58a4419172e5e1e3d36561a63fe4887105dbc691020c",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0013/towers/depth_behind.png",
+    "sha256": "2dbe17501aeeba1bd5b9604ef826d12f99a8a17f5131c9a06e25ff4ec68ed745",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0013/towers/depth_front.png",
+    "sha256": "fb31ef03ab14b4a4992b1576a91ab41576ebfedf907588ac490f64d60e53bb34",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0013/towers/ghost_auto_crossbow.png",
+    "sha256": "96fc4bf05b51f70ce5fc5a36040154e6b5bb921ced04427438859614c17fe16a",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0013/towers/ghost_flame_tower.png",
+    "sha256": "e113a3100599853b9a6408c0a80f506fda6487b1d0623f358eac71652b0c039e",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0013/towers/ghost_gun_tower.png",
+    "sha256": "34e5d61f971a8fcb0793b21b08363d99a575eb935bd0906b91b4e66cb00697b6",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0013/towers/ghost_mortar.png",
+    "sha256": "d2537724a36533c2d2e53ca4878023cb2fae4bbaed7722c2530a654866527671",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0013/towers/launch_4x.png",
+    "sha256": "abaf15cb37a04d94163d5aa8d820ebdb7cb4b66c233954c18180b1398ffe1228",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0013/towers/launch_gun_tower.png",
+    "sha256": "75fdef5eb0afa46138fd365fa6042928c9401712490fcd0915c5e9ea416f9b59",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0013/towers/launch_mortar.png",
+    "sha256": "16edfee331928a2f605650a7665a91fad05e731e42eff9fb7d2c258c2be7cfeb",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0013/towers/levels_0_fire.png",
+    "sha256": "f3b5aa91c219928816d0a2a79520be439d2d815b7133526e0da68ef17aba9553",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0013/towers/levels_0_hurt.png",
+    "sha256": "5fd51a2ddb0bab3b212e989d0d7a67a1624417d67b87ed42fcf776e9a8ac48f1",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0013/towers/levels_0_whole.png",
+    "sha256": "27ed5751fce453be3dca17b41f9e9299d682fd6f58b434ba5585ff6f477bbac9",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0013/towers/levels_0_wreck.png",
+    "sha256": "f4c6427516f74e6f4b79c08b6e6267b59f24a3e358303fef13c1b57334ac8410",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0013/towers/levels_1_fire.png",
+    "sha256": "8d2c0a9c33d9ad77f094eaf81f85d9cccc6eeadcf88a9dc5f4c9738a7d77b5dd",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0013/towers/levels_1_hurt.png",
+    "sha256": "6e6f2bf2b049658c7e9a00153e0b15db77c6f30fe88e795e0814c46f3c1ffc68",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0013/towers/levels_1_whole.png",
+    "sha256": "c41b25eb6cbb4b0342b618fb3ca4dea5e1fac001d4f890e1c0a69efd106c139f",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0013/towers/levels_1_wreck.png",
+    "sha256": "2441201c0b9df8a687d53182a8bcbba0701e8172d08fa6866bd9f87cb77d0cd3",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0013/towers/levels_2_fire.png",
+    "sha256": "3a032a0be64790e3a92da79a35adcf15599611439d26ffd759d87e70b1adebae",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0013/towers/levels_2_hurt.png",
+    "sha256": "f351a47c44108dcc28f41e280bc41e4c60a4e501b5d28395218b5f900f693c29",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0013/towers/levels_2_whole.png",
+    "sha256": "f760f9c56ef4672b3b62910f8bda72bfed7577f1afe6862b7432407c116365cb",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0013/towers/levels_2_wreck.png",
+    "sha256": "0c464e19da8b9ec3a31d99fb29df65e5de0539569815e7252cb9c4b6d04296eb",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0013/towers/loaded_rubble.png",
+    "sha256": "9f80824b472819de57e7e93e08ae119374647f15443b9c7b2515175778451c25",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0013/towers/mixed_night.png",
+    "sha256": "1f0322c8bbc5baf3f82723436e89299cefa8f99ac9bd4d72980b98af18a6e3e4",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0013/towers/outlets_night.png",
+    "sha256": "a5d077fee4694648e1be5688ecd76dbdea2f778fbe66a3a4b71497b6cdda4375",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  },
+  {
+    "path": "implementation/shots/sprites/0013/wave.png",
+    "sha256": "78c12a0a73cc27fbfa1a4bfe6654b3fc6da9f5bdccd985bda1ab58e9d35b4951",
+    "native_wh": [
+      480,
+      270
+    ],
+    "reviewed_scales": [
+      1,
+      3
+    ]
+  }
+]

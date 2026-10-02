@@ -1,0 +1,217 @@
+{
+  "id": "mortar",
+  "kind": "level-1",
+  "tool": "built-in ImageGen",
+  "revision": 0,
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-2df54c29-354c-4ba3-9b66-09064e06e1cd.png",
+  "source": "assets/art_source/defences/mortar/level-1.png",
+  "source_sha256": "9870fd4f33840cf5064e807756d0aaf1321ddf30a151b80803c902891ba5fdf0",
+  "source_wh": [
+    1254,
+    1254
+  ],
+  "source_alpha_range": [
+    0,
+    255
+  ],
+  "prompt": "implementation/sprites/generation/0013-mortar-level-1.prompt.txt",
+  "prompt_sha256": "6577bb8ead5d8a635fca9740db808dd7ba0279b46a12f1486e31c78cee7c844b",
+  "references": [
+    "assets/art_source/defences/mortar/master.png",
+    "assets/art_source/buildings/house/whole.png"
+  ],
+  "measured_recipes": [
+    {
+      "id": "buildings/mortar",
+      "source": "assets/art_source/defences/mortar/level-1.png",
+      "crop_xywh": [
+        112,
+        189,
+        459,
+        442
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        618,
+        661
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.04524886877828054,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        10,
+        20
+      ]
+    },
+    {
+      "id": "buildings/mortar_hurt",
+      "source": "assets/art_source/defences/mortar/level-1.png",
+      "crop_xywh": [
+        664,
+        189,
+        459,
+        445
+      ],
+      "sheet_cell_xywh": [
+        617,
+        0,
+        637,
+        661
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.04524886877828054,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        10,
+        20
+      ]
+    },
+    {
+      "id": "buildings/mortar_fire",
+      "source": "assets/art_source/defences/mortar/level-1.png",
+      "crop_xywh": [
+        111,
+        686,
+        488,
+        497
+      ],
+      "sheet_cell_xywh": [
+        0,
+        660,
+        631,
+        594
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.04524886877828054,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        10,
+        22
+      ]
+    },
+    {
+      "id": "buildings/mortar_wreck",
+      "source": "assets/art_source/defences/mortar/level-1.png",
+      "crop_xywh": [
+        661,
+        838,
+        496,
+        340
+      ],
+      "sheet_cell_xywh": [
+        630,
+        660,
+        624,
+        594
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.04524886877828054,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        11,
+        15
+      ]
+    }
+  ],
+  "decision": "Accepted: source alpha, native/3x identity, construction, source-owned contact and actual Godot states reviewed. Masters are immutable identity references; selected level sheets own the four runtime states.",
+  "source_bounds": [
+    [
+      112,
+      189,
+      571,
+      631
+    ],
+    [
+      47,
+      189,
+      506,
+      634
+    ],
+    [
+      111,
+      26,
+      599,
+      523
+    ],
+    [
+      31,
+      178,
+      527,
+      518
+    ]
+  ],
+  "source_contacts": [
+    [
+      342.0,
+      631
+    ],
+    [
+      277.5,
+      634
+    ],
+    [
+      342.0,
+      523
+    ],
+    [
+      279.5,
+      518
+    ]
+  ],
+  "reference_hashes": {
+    "assets/art_source/defences/mortar/master.png": "0cd5056e0f44dc9d5ad02902a8e158cca0478452a136c0d0b5a57cfb55dca74f",
+    "assets/art_source/buildings/house/whole.png": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435"
+  },
+  "tool_arguments": {
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\defences\\mortar\\master.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\buildings\\house\\whole.png"
+    ]
+  }
+}

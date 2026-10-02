@@ -1,0 +1,217 @@
+{
+  "id": "flame_tower",
+  "kind": "level-1",
+  "tool": "built-in ImageGen",
+  "revision": 0,
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-2f4d98d4-d0d3-49cd-89fe-4fb72140ccba.png",
+  "source": "assets/art_source/defences/flame_tower/level-1.png",
+  "source_sha256": "dd2f924ccf33988c74eff69a54e56c2e5523ab9bbaedc6521ec3b38ea243feaa",
+  "source_wh": [
+    1254,
+    1254
+  ],
+  "source_alpha_range": [
+    0,
+    255
+  ],
+  "prompt": "implementation/sprites/generation/0013-flame_tower-level-1.prompt.txt",
+  "prompt_sha256": "c5100c64845af022efb674239d69530320635ff73b557195565cd7af084870a5",
+  "references": [
+    "assets/art_source/defences/flame_tower/master.png",
+    "assets/art_source/buildings/house/whole.png"
+  ],
+  "measured_recipes": [
+    {
+      "id": "buildings/flame_tower",
+      "source": "assets/art_source/defences/flame_tower/level-1.png",
+      "crop_xywh": [
+        157,
+        190,
+        356,
+        426
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        622,
+        664
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.043731778425655975,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        7,
+        19
+      ]
+    },
+    {
+      "id": "buildings/flame_tower_hurt",
+      "source": "assets/art_source/defences/flame_tower/level-1.png",
+      "crop_xywh": [
+        732,
+        213,
+        355,
+        402
+      ],
+      "sheet_cell_xywh": [
+        622,
+        0,
+        632,
+        664
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.043731778425655975,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        7,
+        18
+      ]
+    },
+    {
+      "id": "buildings/flame_tower_fire",
+      "source": "assets/art_source/defences/flame_tower/level-1.png",
+      "crop_xywh": [
+        156,
+        713,
+        501,
+        465
+      ],
+      "sheet_cell_xywh": [
+        0,
+        664,
+        691,
+        590
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.043731778425655975,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        7,
+        20
+      ]
+    },
+    {
+      "id": "buildings/flame_tower_wreck",
+      "source": "assets/art_source/defences/flame_tower/level-1.png",
+      "crop_xywh": [
+        725,
+        915,
+        385,
+        264
+      ],
+      "sheet_cell_xywh": [
+        691,
+        664,
+        563,
+        590
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.043731778425655975,
+      "alpha_threshold": 128,
+      "content_anchor_xy": [
+        8,
+        12
+      ]
+    }
+  ],
+  "decision": "Rejected native scale: long flame forces common scale 0.04373 and a smaller intact body than intended. Revision 1 keeps geometry/framing and asks for an attached flame shorter than half the nozzle mouth diameter.",
+  "source_bounds": [
+    [
+      157,
+      190,
+      513,
+      616
+    ],
+    [
+      110,
+      213,
+      465,
+      615
+    ],
+    [
+      156,
+      49,
+      657,
+      514
+    ],
+    [
+      34,
+      251,
+      419,
+      515
+    ]
+  ],
+  "source_contacts": [
+    [
+      313.5,
+      616
+    ],
+    [
+      278.0,
+      615
+    ],
+    [
+      314.0,
+      514
+    ],
+    [
+      209.5,
+      515
+    ]
+  ],
+  "reference_hashes": {
+    "assets/art_source/defences/flame_tower/master.png": "ea5c3c83392acf99ab5f24704372ce201c504d9315e3120aa1f17225579bda35",
+    "assets/art_source/buildings/house/whole.png": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435"
+  },
+  "tool_arguments": {
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\defences\\flame_tower\\master.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\buildings\\house\\whole.png"
+    ]
+  }
+}

@@ -242,6 +242,33 @@ def main():
             invalid_manifest("Production state scale drift rejected", lambda d: d["assets"][station].update(content_scale=0.001))
             invalid_manifest("Production state contact drift rejected", lambda d: d["assets"][station].update(pivot_xy=[24,40]))
 
+        tower = next((i for i,e in enumerate(data["assets"]) if e["id"] == "buildings/gun_tower_3_fire"), None)
+        if tower is not None:
+            corrupt(ROOT/data["assets"][tower]["source"], "tools/import_art.py", missing=True)
+            passed("Missing authored tower level/state source rejected without legacy fallback")
+            corrupt(ROOT/"sprites/buildings/flame_tower_2_fire.png", "tools/check_tower_art.py", missing=True)
+            passed("Missing levelled firing tower rejected")
+            corrupt(ROOT/"sprites/buildings/mortar_3_wreck.png", "tools/check_tower_art.py", missing=True)
+            passed("Missing levelled tower wreck rejected")
+            invalid_manifest("Out-of-canvas tower muzzle rejected", lambda d: d["assets"][tower].update(muzzle_xy=[99,99],muzzles_xy=[[99,99]]))
+            invalid_manifest("Malformed tower muzzle list rejected", lambda d: d["assets"][tower].update(muzzles_xy=[d["assets"][tower]["muzzle_xy"],3]))
+            invalid_manifest("Duplicate tower barrels rejected", lambda d: d["assets"][tower].update(muzzles_xy=[d["assets"][tower]["muzzle_xy"]]*2))
+            invalid_manifest("Transparent tower muzzle rejected", lambda d: d["assets"][tower].update(muzzle_xy=[0,0],muzzles_xy=[[0,0]],muzzle_region_xywh=[0,0,5,5]))
+            invalid_manifest("Tower state scale drift rejected", lambda d: d["assets"][tower].update(content_scale=0.001))
+            invalid_manifest("Tower state pivot drift rejected", lambda d: d["assets"][tower].update(pivot_xy=[16,40]))
+            import gen_sprites
+            original_registry = art_ownership.registry
+            owners_copy = original_registry().copy()
+            owners_copy['sprites/buildings/gun_tower_3_wreck.png'] = 'ascii'
+            try:
+                art_ownership.registry = lambda: owners_copy
+                migrated = gen_sprites.migrated_towers()
+                assert 'buildings/gun_tower' not in migrated and len(migrated) == 3
+                assert 'buildings/gun_tower_3_fire' in gen_sprites.derived_sprites()
+                passed("Legacy derivations are disabled only for complete tower families")
+            finally:
+                art_ownership.registry = original_registry
+
         original_owners = art_ownership.REGISTRY.read_bytes()
         try:
             owners = json.loads(original_owners)

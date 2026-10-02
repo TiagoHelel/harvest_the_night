@@ -1,0 +1,22 @@
+{
+  "gun_tower": [
+    "level-1-r2",
+    "level-2-r2",
+    "level-3"
+  ],
+  "flame_tower": [
+    "level-1-r1",
+    "level-2",
+    "level-3"
+  ],
+  "mortar": [
+    "level-1",
+    "level-2",
+    "level-3"
+  ],
+  "auto_crossbow": [
+    "level-1-r1",
+    "level-2",
+    "level-3"
+  ]
+}

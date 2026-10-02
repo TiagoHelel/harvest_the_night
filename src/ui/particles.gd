@@ -91,6 +91,9 @@ func _ready() -> void:
 
 
 func show_state(state: Dictionary) -> void:
+	if not is_same(_state, state):
+		_guns_for = -1
+		_guns.clear()
 	_state = state
 
 
@@ -241,9 +244,8 @@ func _watch(delta: float) -> void:
 		var on: Variant = (_state["occupants"] as Dictionary).get(int(idx),
 			null)
 		if on != null and _firing(on as Dictionary):
-			var muzzle := (Vector2(Grid.cell(int(idx)))
-				+ Vector2(0.8, -0.2)) * tile
-			_burst(muzzle, 3, &"spark", SPARK, 55.0)
+			for muzzle in WorldView.tower_muzzles(on, Grid.cell(int(idx))):
+				_burst(muzzle, 3, &"spark", SPARK, 55.0)
 
 	for id in _seen_entities:
 		if entities.has(id):
@@ -304,18 +306,18 @@ func _watch(delta: float) -> void:
 
 ## The cells with something that shoots on them, remembered.
 ##
-## Rebuilt when the number of things on the farm changes, which is when a
-## player builds or something falls over - not sixty times a second. The same
-## trick `Power` uses for its generator list, and for the same reason.
+## Rebuilt when occupancy changes, including same-count replacements. Never
+## rescans the whole farm just because another rendered frame has elapsed.
 var _guns: Array = []
 var _guns_for := -1
 
 
 func _gun_cells() -> Array:
 	var occupants: Dictionary = _state["occupants"]
-	if occupants.size() == _guns_for:
+	var version := int(_state.get("grid_version", 0))
+	if version == _guns_for:
 		return _guns
-	_guns_for = occupants.size()
+	_guns_for = version
 	_guns = []
 	for idx in occupants:
 		var entry: Variant = Building.entry_of(
@@ -328,23 +330,13 @@ func _gun_cells() -> Array:
 ## Whether this tower fired in the last moment. The same question `WorldView`
 ## and `Lighting` ask, so the flash, the light and the sparks are one event.
 func _firing(on: Dictionary) -> bool:
-	var left := int(on.get("reload", 0))
-	if left <= 0:
-		return false
-	var entry: Variant = Building.entry_of(StringName(on["id"]))
-	if entry == null:
-		return false
-	var whole := int((entry as Dictionary).get("reload_ticks", 0))
-	return whole > 0 and left * 100 >= whole * WorldView.FLASH_PERCENT
+	return WorldView.just_fired(on)
 
 
 ## Whether it is battered enough to be smoking. The same threshold the art and
 ## the tint use, so all three agree about when something looks finished.
 func _is_wrecked(on: Dictionary) -> bool:
-	var entry: Variant = Building.entry_of(StringName(on["id"]))
-	if entry == null:
-		return false
-	var full := int((entry as Dictionary).get("hp", 0))
+	var full := WorldView.levelled_stat(on, "hp")
 	if full <= 0:
 		return false
 	return float(int(on.get("hp", full))) / float(full) < 0.4

@@ -32,11 +32,11 @@ static func emission(id: StringName, corner: Vector2, field: StringName,
 
 ## Several measured glass panes belong to one drawing, never its nine cells.
 static func emissions(id: StringName, corner: Vector2, field: StringName,
-		fallback: Vector2) -> Array[Vector2]:
+		fallback: Vector2, single_field: StringName = &"light") -> Array[Vector2]:
 	var metadata: Dictionary = RasterArt.FRAMES.get(WorldView.BUILDING_DIR + str(id) + ".png", {})
 	var points: Array[Vector2] = []
 	for point in metadata.get(field, []):
 		points.append(corner + Vector2(metadata["cell_offset"]) + Vector2(point))
 	if points.is_empty():
-		points.append(emission(id, corner, &"light", fallback))
+		points.append(emission(id, corner, single_field, fallback))
 	return points

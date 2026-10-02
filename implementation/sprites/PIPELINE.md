@@ -398,3 +398,49 @@ real paid/stalled jobs, queue-only cache updates, independent stations, HP
 thresholds, previews, map edges and both farmer/walker depth orders. Capture
 mode compares actual occlusion and active off/steady lamp pixels while proving
 serialized state unchanged. No continuous mechanical animation was introduced.
+
+## Authored tower levels, states and launch points (0013)
+
+Four identity masters establish tower materials/camera. Twelve selected raw
+2x2 sheets provide whole/hurt/fire/wreck in top-left/top-right/bottom-left/
+bottom-right order, at each of three levels. Preserve the six rejected returns
+and their reasons. Every selected cut has its own measured alpha bounds and
+ground contact; all four poses at a level share one reduction scale, common
+32x48 canvas and pivot (16,44). A shared transparent gutter pixel is allowed
+at rectangular boundaries, but never shared opaque pixels. The importer
+validates all single/multiple muzzle points, their weapon region and opaque
+source pixels. RasterArt exports those points and identifies complete towers.
+
+Only families with all 3x4 raster owners disable legacy growth/hole/flash/wreck
+recipes. Keep the other 56 legacy recipes guarded. WorldView draws authored
+upgrades without level pips, resolves damage against the original levelled HP
+and retains existing firing priority. Lighting and the bounded particle pool
+use each fire-frame outlet. Main connects read-only WorldView launch observers
+around every fixed SimDriver tick, including 4x batches. Only drawing positions
+are displaced from the source muzzle; the offset fades over real flight. Core
+positions, targeting, damage, projectile dictionaries and balance stay intact.
+Loaded mature shots have no guessed launch history. Launch caches prune when
+shots disappear, including non-observed skip-night completion.
+
+WorldView remembers the standing tower family/level and reuses a bounded
+ground-level Sprite2D pool for actual Farm rubble. Morning cleanup frees both
+sprites and remembered levels, even when grid_version does not change. A fresh
+save view has only rubble family and uses its L1 wreck; do not change save
+formats merely to retain a cosmetic level. Rebuilding on rubble hides it under
+the new occupant. Particle gun-cell caches use occupancy version so same-count
+replacement is observable.
+
+```powershell
+python tools/check_tower_art.py
+python tools/show_art.py --towers --check
+python tools/show_art.py --towers --out=implementation/shots/sprites/<task-id>/towers
+python implementation/sprites/reviews/0013/build_review.py
+python implementation/sprites/reviews/0013/audit.py
+```
+
+The actual-render showcase covers all 48 states under day/dusk/night, four
+one-cell previews, actor depth, projectile births and two-barrel L3 gun output,
+real destruction, loaded rubble, morning cleanup and mixed defenses at night.
+It compares off/steady glow at actual source points and serialized state around
+rendering. Source and runtime gates are integrated into full verify. Run fault
+probes separately from any import/editor/verify process; always restore bytes.

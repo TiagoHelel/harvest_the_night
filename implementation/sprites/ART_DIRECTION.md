@@ -228,3 +228,21 @@ stalled jobs must never acquire active art, smoke or a false working glow.
 Keep native glow/exhaust points on the actual accepted furnace/indicator and
 chimney pixels. Full station drawings replace repeated quarter miniatures,
 while compatibility quarters remain exact slices of their complete idle form.
+
+Task 0013 replaces all four tower families at three levels. Gun progresses
+from open timber trestle to a joined stone footing/heavier receiver and then
+a solid stone/iron pedestal with two separate barrels. Flame progresses from
+upright tank/pipe to a geared reinforced base and a broad horizontal copper
+tank. Mortar stays a low, upward-angled tube with increasingly heavy collar,
+brace and geared carriage. Crossbow retains curved limbs/string/rail while
+gaining an automatic feed and reinforced pedestal. Levels change construction;
+they never repeat old post bands or colored level pips.
+
+All 48 whole/hurt/fire/wreck drawings use 32x48/(16,44) over one logical cell.
+Each level shares one fixed source scale across its four independent poses.
+Fire cues stay small: two gun mouths at L3, a short flame jet, mortar mouth
+flash and released crossbow string/tiny bolt. Muzzle metadata follows the actual
+opaque fire pose. Local glow/sparks and the visual launch use that same point.
+Wear changes braces/armor/mechanisms; wrecks collapse onto the ground. Existing
+fire-over-wear priority remains. These are authored event/state poses, not a
+continuous recoil animation. Final atmosphere tuning remains task 0019.

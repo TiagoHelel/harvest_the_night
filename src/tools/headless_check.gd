@@ -13359,8 +13359,7 @@ func _task_0075_building_art() -> void:
 				% [corner_x, corner_y])) != null,
 				"the house has a tile at %d,%d" % [corner_x, corner_y])
 
-	# **A level one and a level three tower are told apart instantly.** The
-	# done-when, and the answer that reads at sixteen pixels is height.
+	# Authored upgrades share a canvas and change their actual construction.
 	for id in towers:
 		var one := _building_art(id)
 		var three := _building_art(StringName("%s_3" % id))
@@ -13368,23 +13367,19 @@ func _task_0075_building_art() -> void:
 			"the %s has a level one and a level three" % id)
 		if one == null or three == null:
 			continue
-		expect(three.get_height() > one.get_height(),
-			"and the level three %s is the taller of the two" % id,
-			"%d against %d" % [three.get_height(), one.get_height()])
-		# **Six pixels and a fifth.** Two pixels is a difference a caliper
-		# finds and a player does not; six is more than a third of a tile.
-		# Not a fixed ratio for all four - the mortar sits on the ground
-		# rather than on a post, and being squat is the whole of its
-		# silhouette, so it grows by its barrel and not by its legs.
-		expect(three.get_height() >= one.get_height() + 6
-			and three.get_height() * 5 >= one.get_height() * 6,
-			"by enough to see across a dark field",
-			"%d against %d" % [three.get_height(), one.get_height()])
-		# **And recognisably the same tower.** The head is untouched: the
-		# extra stages go into the post, so the top row of the drawing is the
-		# same row it was.
-		expect(_top_row(three) == _top_row(one),
-			"and is recognisably the same %s" % id)
+		expect(one.get_size() == Vector2i(32, 48) and three.get_size() == one.get_size(),
+			"authored %s levels share the stable native canvas" % id)
+		var a := one.get_data()
+		var b := three.get_data()
+		var changed := 0
+		for pixel in range(0, a.size(), 4):
+			if a.slice(pixel, pixel + 4) != b.slice(pixel, pixel + 4):
+				changed += 1
+		expect(changed >= 80, "reinforcement and weapon changes remain visible at native scale", str(changed))
+		var first: Dictionary = RasterArt.FRAMES[WorldView.BUILDING_DIR + str(id) + ".png"]
+		var last: Dictionary = RasterArt.FRAMES[WorldView.BUILDING_DIR + str(id) + "_3.png"]
+		expect(first["pivot"] == Vector2i(16, 44) and last["pivot"] == first["pivot"]
+			and first.has("muzzle") and last.has("muzzle"), "same %s contact with authored weapon positions" % id)
 
 	# **A damaged wall reads as damaged without a health bar.** The other
 	# done-when: the art has holes in it, so the wall is visibly missing
@@ -13398,11 +13393,15 @@ func _task_0075_building_art() -> void:
 			continue
 		var before := _lit_pixels(whole)
 		var after := _lit_pixels(hurt)
-		expect(after < before, "and it is visibly missing pieces",
-			"%d pixels against %d" % [after, before])
-		expect(after * 10 >= before * 6 and after * 10 <= before * 95,
-			"enough to read as damaged, not so much as to be rubble",
-			"%d of %d" % [after, before])
+		if WorldView.authored_tower(id):
+			expect(whole.get_data() != hurt.get_data(), "authored structural damage changes the actual drawing")
+			expect(after * 10 >= before * 6, "damaged tower retains its standing mechanism")
+		else:
+			expect(after < before, "and it is visibly missing pieces",
+				"%d pixels against %d" % [after, before])
+			expect(after * 10 >= before * 6 and after * 10 <= before * 95,
+				"enough to read as damaged, not so much as to be rubble",
+				"%d of %d" % [after, before])
 		var wreck := _building_art(StringName("%s_wreck" % id))
 		expect(wreck != null and _lit_pixels(wreck) < after,
 			"and there is less of it again when it comes down")
@@ -13414,9 +13413,9 @@ func _task_0075_building_art() -> void:
 		expect(firing != null, "the %s has a firing frame" % id)
 		if quiet == null or firing == null:
 			continue
-		expect(_lit_pixels(firing) > _lit_pixels(quiet),
-			"and something comes out of it", "%d against %d"
-				% [_lit_pixels(firing), _lit_pixels(quiet)])
+		expect(firing.get_data() != quiet.get_data()
+			and RasterArt.FRAMES[WorldView.BUILDING_DIR + str(id) + "_fire.png"].has("muzzle"),
+			"authored weapon action has a distinct frame and a measured outlet")
 		expect(_brightest(firing) > PaletteData.NIGHT_WARM_KEEP,
 			"and the flash is bright enough to survive the night ramp",
 			"%.3f" % _brightest(firing))

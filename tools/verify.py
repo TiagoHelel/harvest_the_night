@@ -248,6 +248,16 @@ def check_station_showcase():
     return check("station activity/placement", code == 0, next((s for s in out.splitlines() if s.startswith("STATION SHOWCASE:")), tail(out, 4)))
 
 
+def check_tower_art():
+    code, out = run([sys.executable, "tools/check_tower_art.py"])
+    return check("tower sources/muzzles", code == 0, tail(out, 4))
+
+
+def check_tower_showcase():
+    code, out = run([sys.executable, "tools/show_art.py", "--towers", "--check"])
+    return check("tower firing/wrecks", code == 0, next((s for s in out.splitlines() if s.startswith("TOWER SHOWCASE:")), tail(out, 4)))
+
+
 def check_logo():
     """The logo still matches the letters it was composed from.
 
@@ -656,6 +666,8 @@ def main():
     check_house_showcase()
     check_station_art()
     check_station_showcase()
+    check_tower_art()
+    check_tower_showcase()
     check_font()
     check_logo()
     check_sfx()

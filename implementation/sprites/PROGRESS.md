@@ -823,3 +823,94 @@ player-sheet, 280 PNGs. Zombie masters/motion remain 0015, Giant/death playback
 Queue after completion: 12 done, 8 todo, zero doing/blocked. Next: 0013,
 tower families at three authored levels. Exactly one sprite task completed
 this cycle; the active /goal continues automatically toward the backlog.
+
+## 2026-10-01 - 0013 completed: four authored tower families / three levels
+
+Generated four immutable identity masters and twelve selected 2x2
+whole/hurt/fire/wreck sheets through the built-in ImageGen tool. Six evaluated
+candidates remain rejected with explicit reasons; all 22 raw returns, exact
+submitted prompts, reference hashes, original returned paths and measured cuts
+are saved in `assets/art_source/defences/{gun_tower,flame_tower,mortar,auto_crossbow}`
+and `generation/0013-*`. Gun L1/L2 r2 correct overlapping cuts and insufficient
+construction change; flame L1 r1 and crossbow L1 r1 shorten oversized firing
+cues. No asset exceeded two targeted revisions. Python performed deterministic
+measurement/crop/nearest/palette/alpha conversion and review composition only;
+no creative source pixels were painted. All exact source/prompt/output SHA-256
+values are recorded in `reviews/0013/scope-and-sources.json`.
+
+All 48 runtime states share 32x48 canvas, pivot (16,44) and one-cell offset
+(-8,-28). Each level uses one fixed reduction scale across its four poses.
+State cuts can share a fully transparent gutter row/column, never opaque
+pixels. Gun evolves from timber trestle to reinforced receiver/stone footing
+and solid two-barrel pedestal; flame gains geared pipe/base and horizontal
+copper housing; mortar gains a heavy collar, brace and geared carriage while
+remaining low; crossbow gains a feed mechanism and reinforced pedestal while
+retaining curved bow limbs/string. All twelve wrecks collapse onto the ground.
+Legacy growth/hole/flash/wreck recipes are skipped only for complete migrated
+3x4 families; their old ASCII sources remain available for incomplete families.
+
+Source-owned muzzle metadata supplies 39 opaque whole/hurt/fire outlets and
+two distinct L3 gun mouths. WorldView, Lighting and the bounded particle pool
+use the authored fire pose; actual light visits all 13 firing outlets once and
+launches exactly three sparks per outlet. Main connects read-only launch
+observers around every fixed SimDriver tick, including 4x batches. Core shots
+retain their original cell-center birth and flight/damage data; only drawing
+positions start at the weapon mouth and fade toward real flight. Mature loaded
+shots acquire no guessed launch history. Presentation caches prune current
+shots, including non-observed completion, and remember only standing/rubble
+tower levels. Grid-version particle caches detect same-count replacements.
+
+Damage resolves against unchanged levelled HP; existing firing-over-wear
+priority remains. Colored legacy upgrade pips are removed from these complete
+authored towers. Real Farm.damage renders the matching remembered wreck in a
+bounded ground sprite pool, outside occupancy/collision. Morning cleanup frees
+sprites/history even without a grid-version change. Loaded saves store rubble
+family alone, so a fresh view uses that family's L1 wreck honestly, with no
+new save field. Building on old rubble hides its low drawing. This task adds
+authored state/event poses, not continuous recoil animation.
+
+Full verify PASS: 41 passed, zero skipped/failed in 282s with the user's Godot
+4.7.1. All 106 scripts parse; 6,610 rule assertions, 982 input cases,
+performance and Windows/Web exports pass. Simulation `1961000123` and data
+`407837701` are unchanged. Raster rebuild checks 232 outputs and writes zero
+files; all 56 remaining ASCII sprites match their original maps. Tower source
+checker proves 48 independent state bytes, common canvas/contact, exact cuts,
+39 opaque outlets and complete legacy migration. Headless showcase passes
+1,290 checks; final actual renderer passes 1,341 checks, including real gun/
+mortar births, both L3 gun barrels, physical farmer occlusion, actual off/steady
+glow and byte-identical 4x observed/unobserved core runs. Pipeline fault suite:
+78 PASS, including ten new tower source/state/outlet/scale/contact/incomplete-
+migration probes; all deliberate corruptions restored. Final source check and
+zero-write rebuild pass after the isolated fault suite.
+
+Opened all 29 actual native 480x270 captures and exact nearest 3x review pages
+`reviews/0013/captures-00..14{,-3x}.png`. Originals are in
+`implementation/shots/sprites/0013/` and `towers/`: all 48 states under day,
+dusk and night, four one-cell ghosts, farmer behind/front, actual gun/mortar/
+4x launch, loaded rubble, all firing outlets, mixed defenses at night and the
+five required standard game views. Also reviewed all native/enlarged family
+states on light/dark/checker, silhouettes, coordinate grids, four identity
+masters and sixteen selected raw-alpha comparisons. Final ghost captures show
+the entire preview base inside the viewport. Visual gates PASS: label-free
+function, structural level differences, palette/camera consistency, clean alpha,
+planted contacts, structural wear/collapse, correct source-mouth feedback,
+relative scale and depth. Details and final capture hashes are in
+`reviews/0013/REVIEW.md` and `frame-review.json`.
+
+Audit against `87079a1`: forty old tower PNGs changed, eight levelled wrecks
+added, all other 240 runtime PNGs byte-identical. All 249 protected baseline
+files and prior unrelated manifest entries are preserved, including core/map/
+save rules, owner's original art, prior accepted sources, PlayerFrames, palette
+and hash guards. Ownership is 232 raster / 56 ASCII / zero player-sheet,
+288 runtime PNGs. Existing art assertions now follow the explicit authored
+canvas/contact/construction and structural-wear/weapon-action contract instead
+of legacy band-growth or alpha-count assumptions; all rule/hash/input checks
+remain. Pilot ghost and ordered lamp-probe failures were corrected to actual
+source placement and order-independent outlet counts. The provenance audit
+initially required a colon after the word 'Rejected'; it now accepts the exact
+saved rejection prefix while retaining every original reason (`audit-initial.log`).
+
+Queue after completion: 13 done, 7 todo, zero doing/blocked. Next: 0014,
+barriers and mine. Normal zombie sprites/animation remain 0015, Giant/death
+0016, UI 0018 and shared final atmosphere 0019. Exactly one sprite task
+completed this cycle; the active /goal continues automatically toward the backlog.

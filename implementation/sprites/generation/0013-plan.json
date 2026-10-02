@@ -1,0 +1,162 @@
+[
+  {
+    "id": "gun_tower",
+    "canvas_wh": [
+      32,
+      48
+    ],
+    "pivot_xy": [
+      16,
+      44
+    ],
+    "cell_offset_xy": [
+      -8,
+      -28
+    ],
+    "subject": "A compact farm gun tower: tall cross-braced timber legs on a small stone footing, a small metal turntable and one clearly visible long horizontal gun barrel pointing upper-right. No operator, roof or enclosed cabin.",
+    "levels": [
+      "simple timber trestle with one modest iron gun barrel",
+      "stronger diagonal timber braces, iron corner straps and a visibly heavier gun receiver",
+      "compact reinforced stone/iron lower pedestal, stronger mechanical turntable and two parallel gun barrels; a different construction and weapon silhouette, not stacked posts"
+    ],
+    "body_wh": [
+      [
+        22,
+        29
+      ],
+      [
+        24,
+        34
+      ],
+      [
+        26,
+        39
+      ]
+    ],
+    "prompt": "implementation/sprites/generation/0013-gun_tower-master.prompt.txt",
+    "references": [
+      "docs/reference-sheet.png",
+      "assets/art_source/buildings/house/whole.png"
+    ]
+  },
+  {
+    "id": "flame_tower",
+    "canvas_wh": [
+      32,
+      48
+    ],
+    "pivot_xy": [
+      16,
+      44
+    ],
+    "cell_offset_xy": [
+      -8,
+      -28
+    ],
+    "subject": "A compact farm flamethrower tower: squat reinforced timber support, one conspicuous copper fuel tank, a clearly joined curved dark-metal pipe and short wide nozzle pointing upper-right. Idle nozzle is dark; no permanent flame.",
+    "levels": [
+      "single rounded copper tank, simple pipe and short dark nozzle on timber supports",
+      "iron-strapped copper tank, thicker visible supply pipe and reinforced nozzle mount",
+      "armored copper fuel housing, strong metal pump mechanism and a wider heavy burner nozzle on stone/iron footing"
+    ],
+    "body_wh": [
+      [
+        22,
+        25
+      ],
+      [
+        24,
+        30
+      ],
+      [
+        26,
+        35
+      ]
+    ],
+    "prompt": "implementation/sprites/generation/0013-flame_tower-master.prompt.txt",
+    "references": [
+      "docs/reference-sheet.png",
+      "assets/art_source/buildings/house/whole.png"
+    ]
+  },
+  {
+    "id": "mortar",
+    "canvas_wh": [
+      32,
+      48
+    ],
+    "pivot_xy": [
+      16,
+      44
+    ],
+    "cell_offset_xy": [
+      -8,
+      -28
+    ],
+    "subject": "A LOW, squat farm mortar: a broad small stone/timber base with a short heavy dark-metal tube tilted steeply upward toward upper-right and a clearly open round barrel mouth. It sits near the ground, not on a lookout tower.",
+    "levels": [
+      "simple broad timber carriage and one short thick upward-tilted tube",
+      "iron-strapped carriage, visible elevation wheel and heavier banded tube",
+      "compact stone/iron carriage, large elevation mechanism and broad armored mortar tube with reinforced collar; remain visibly low"
+    ],
+    "body_wh": [
+      [
+        24,
+        20
+      ],
+      [
+        26,
+        24
+      ],
+      [
+        28,
+        28
+      ]
+    ],
+    "prompt": "implementation/sprites/generation/0013-mortar-master.prompt.txt",
+    "references": [
+      "docs/reference-sheet.png",
+      "assets/art_source/buildings/house/whole.png"
+    ]
+  },
+  {
+    "id": "auto_crossbow",
+    "canvas_wh": [
+      32,
+      48
+    ],
+    "pivot_xy": [
+      16,
+      44
+    ],
+    "cell_offset_xy": [
+      -8,
+      -28
+    ],
+    "subject": "An automatic farm crossbow on a timber stand: very obvious broad wooden bow limbs, taut string, central metal bolt rail aimed upper-right and a visible small mechanical loading gear. It must read as a bow, never a gun or a roofed building.",
+    "levels": [
+      "simple timber stand, single broad wooden bow and visible bolt rail",
+      "iron-strapped braced stand, heavier bow limbs and conspicuous geared bolt feeder",
+      "reinforced compact stone/iron footing, broad laminated bow limbs and large gear-driven automatic bolt magazine; a stronger distinct bow mechanism"
+    ],
+    "body_wh": [
+      [
+        25,
+        29
+      ],
+      [
+        26,
+        34
+      ],
+      [
+        28,
+        39
+      ]
+    ],
+    "prompt": "implementation/sprites/generation/0013-auto_crossbow-master.prompt.txt",
+    "references": [
+      "docs/reference-sheet.png",
+      "assets/art_source/buildings/house/whole.png"
+    ]
+  }
+]
