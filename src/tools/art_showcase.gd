@@ -1193,10 +1193,15 @@ func _water_automatic(view: PlayerView, production: TileSet) -> void:
 	var seen := {}
 	var trace := []
 	var previous := -1
-	var until := Time.get_ticks_msec() + 3800
-	while Time.get_ticks_msec() < until:
+	# Observe six real phase changes. Wall time is only a failure bound: a
+	# loaded machine can render fewer fixed-FPS frames in the old 3.8s window.
+	var started := Time.get_ticks_msec()
+	var render_frames := 0
+	var until := started + 12000
+	while Time.get_ticks_msec() < until and trace.size() < 6:
 		await process_frame
 		await RenderingServer.frame_post_draw
+		render_frames += 1
 		var image := root.get_texture().get_image()
 		var point: Vector2 = _world._terrain.get_global_transform_with_canvas() * Vector2(20 * 16, 9 * 16)
 		var patch := image.get_region(Rect2i(Vector2i(point), Vector2i(16,16)))
@@ -1213,7 +1218,7 @@ func _water_automatic(view: PlayerView, production: TileSet) -> void:
 		expect(trace[0] == trace[3] and trace[1] == trace[4] and trace[2] == trace[5], "Real automatic water phase order closes without a direction jump")
 	expect(var_to_bytes(_state) == before, "Automatic pond motion cannot modify simulation/save fields")
 	var file := FileAccess.open(_folder + "automatic-loop.json", FileAccess.WRITE)
-	file.store_string(JSON.stringify({"unique_rendered_phases":seen.size(),"phase_trace":trace,"seconds":3.8,"serialized_state_unchanged":var_to_bytes(_state)==before}, "\t"))
+	file.store_string(JSON.stringify({"unique_rendered_phases":seen.size(),"phase_trace":trace,"elapsed_seconds":float(Time.get_ticks_msec()-started)/1000.0,"render_frames":render_frames,"timeout_seconds":12,"serialized_state_unchanged":var_to_bytes(_state)==before}, "\t"))
 
 
 func _add_house(corner: Vector2i) -> void:
@@ -1395,7 +1400,7 @@ func _work_cycles() -> void:
 	view.set_process(false)
 	var verbs := PlayerArt.known_verbs()
 	expect(verbs == GameData.sorted_names(Interact.DEFAULT_TICKS.keys()), "Every core verb has a work binding")
-	for facing in [Player.WEST, Player.EAST]:
+	for facing in [Player.SOUTH, Player.WEST, Player.NORTH, Player.EAST]:
 		for verb in verbs:
 			var at := _work_fixture(verb, facing)
 			expect(Interact.verb_at(_state, at) == verb, "Real target offers %s" % verb)

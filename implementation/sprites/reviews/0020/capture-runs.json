@@ -1,0 +1,278 @@
+[
+  {
+    "name": "placement",
+    "command": [
+      "tools/show_art.py",
+      "--out=implementation/shots/sprites/0020/placement"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "locomotion",
+    "command": [
+      "tools/show_art.py",
+      "--locomotion",
+      "--out=implementation/shots/sprites/0020/locomotion"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "work",
+    "command": [
+      "tools/show_art.py",
+      "--work",
+      "--out=implementation/shots/sprites/0020/work"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "reactions",
+    "command": [
+      "tools/show_art.py",
+      "--reactions",
+      "--out=implementation/shots/sprites/0020/reactions"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "terrain",
+    "command": [
+      "tools/show_art.py",
+      "--terrain",
+      "--out=implementation/shots/sprites/0020/terrain"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "water",
+    "command": [
+      "tools/show_art.py",
+      "--water",
+      "--out=implementation/shots/sprites/0020/water"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "props",
+    "command": [
+      "tools/show_art.py",
+      "--props",
+      "--out=implementation/shots/sprites/0020/props"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "crops",
+    "command": [
+      "tools/show_art.py",
+      "--crops",
+      "--out=implementation/shots/sprites/0020/crops"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "house",
+    "command": [
+      "tools/show_art.py",
+      "--house",
+      "--out=implementation/shots/sprites/0020/house"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "stations",
+    "command": [
+      "tools/show_art.py",
+      "--stations",
+      "--out=implementation/shots/sprites/0020/stations"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "towers",
+    "command": [
+      "tools/show_art.py",
+      "--towers",
+      "--out=implementation/shots/sprites/0020/towers"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "barriers",
+    "command": [
+      "tools/show_art.py",
+      "--barriers",
+      "--out=implementation/shots/sprites/0020/barriers"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "enemies",
+    "command": [
+      "tools/show_art.py",
+      "--enemies",
+      "--out=implementation/shots/sprites/0020/enemies"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "giant",
+    "command": [
+      "tools/show_art.py",
+      "--giant",
+      "--out=implementation/shots/sprites/0020/giant"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "effects",
+    "command": [
+      "tools/show_art.py",
+      "--effects",
+      "--out=implementation/shots/sprites/0020/effects"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "ui",
+    "command": [
+      "tools/show_art.py",
+      "--ui",
+      "--out=implementation/shots/sprites/0020/ui"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "atmosphere",
+    "command": [
+      "tools/show_art.py",
+      "--atmosphere",
+      "--out=implementation/shots/sprites/0020/atmosphere"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "standard-en",
+    "command": [
+      "tools/shot.py",
+      "sprites/0020",
+      "noon",
+      "dusk",
+      "wave",
+      "result",
+      "tech",
+      "pause",
+      "options_access",
+      "options_video",
+      "options_audio",
+      "options_controls",
+      "react",
+      "refused"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "title-en",
+    "command": [
+      "tools/shot.py",
+      "sprites/0020",
+      "--title"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "standard-pt",
+    "command": [
+      "tools/shot.py",
+      "sprites/0020",
+      "noon",
+      "dusk",
+      "wave",
+      "result",
+      "tech",
+      "pause",
+      "options_access",
+      "options_video",
+      "options_audio",
+      "options_controls",
+      "react",
+      "refused",
+      "--pt_BR"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "title-pt",
+    "command": [
+      "tools/shot.py",
+      "sprites/0020",
+      "--title",
+      "--pt_BR"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "standard-en-contrast",
+    "command": [
+      "tools/shot.py",
+      "sprites/0020",
+      "noon",
+      "dusk",
+      "wave",
+      "result",
+      "tech",
+      "pause",
+      "options_access",
+      "options_video",
+      "options_audio",
+      "options_controls",
+      "react",
+      "refused",
+      "--contrast"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "title-en-contrast",
+    "command": [
+      "tools/shot.py",
+      "sprites/0020",
+      "--title",
+      "--contrast"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "standard-pt-contrast",
+    "command": [
+      "tools/shot.py",
+      "sprites/0020",
+      "noon",
+      "dusk",
+      "wave",
+      "result",
+      "tech",
+      "pause",
+      "options_access",
+      "options_video",
+      "options_audio",
+      "options_controls",
+      "react",
+      "refused",
+      "--pt_BR",
+      "--contrast"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "title-pt-contrast",
+    "command": [
+      "tools/shot.py",
+      "sprites/0020",
+      "--title",
+      "--pt_BR",
+      "--contrast"
+    ],
+    "exit_code": 0
+  }
+]

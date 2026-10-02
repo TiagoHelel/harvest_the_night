@@ -37,7 +37,9 @@ whole feedback format. Three sentences is plenty.
 
 ## What to ignore
 
-- **Placeholder art.** All of it is drawn from text maps and it shows.
+- **Fine art polish.** Sprite families now have source-owned raster art and native
+  animations; report unreadable silhouettes, misplaced contacts or missing poses
+  at the game's 480x270 size. See `implementation/sprites/DELIVERY.md` for coverage.
 - **Sound balance.** The mix is not done.
 - **The tech tree past the first two rows.** Some of it is not wired up.
 - **Anything after night ten.** It stops.

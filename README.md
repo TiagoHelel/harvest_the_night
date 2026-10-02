@@ -15,9 +15,11 @@ intent; `docs/reference-sheet.png` is the source of truth for the look.
 
 ## Status
 
-The repository is the design document, the reference sheet and a 108-task
-backlog. **Task 0001 creates the Godot project** - until it runs, there is
-nothing here to launch.
+The Godot project is playable and the original 110-task implementation backlog
+is complete. The separate 20-task sprite queue is also complete, with
+source-owned raster art, native animations and final visual review. See
+[the art delivery catalogue](implementation/sprites/DELIVERY.md) for native sizes,
+sources, animation coverage, reproduction commands and known limits.
 
 ```bash
 python tools/task.py stats
@@ -55,7 +57,7 @@ Godot comes from `$GODOT`, defaulting to
 
 ## Running it
 
-Once task 0001 has run:
+From the repository root, with Godot set in your environment:
 
 ```bash
 "$GODOT" --path .

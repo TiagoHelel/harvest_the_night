@@ -1,0 +1,15 @@
+{
+	"elapsed_seconds": 4.409,
+	"phase_trace": [
+		2765776613,
+		2242304499,
+		2351074236,
+		2765776613,
+		2242304499,
+		2351074236
+	],
+	"render_frames": 136,
+	"serialized_state_unchanged": true,
+	"timeout_seconds": 12,
+	"unique_rendered_phases": 3
+}

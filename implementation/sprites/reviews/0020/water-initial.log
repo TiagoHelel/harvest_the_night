@@ -1,0 +1,9 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+OpenGL API 3.3.0 Core Profile Context 22.20.27.09.230330 - Compatibility - Using Device: ATI Technologies Inc. - AMD Radeon (TM) Graphics
+
+WATER SHOWCASE: 2286 checks, 1 failed
+ERROR: Actual renderer shows three distinct pond phases through two loops
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://src/tools/art_showcase.gd:24)
+       [1] _water_automatic (res://src/tools/art_showcase.gd:1211)

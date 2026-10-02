@@ -1,0 +1,14 @@
+HARVEST THE NIGHT v0.1.0 (prototype, built 2026-09-28)
+  noon     the farm at noon         tick  3781  DAY         48 crops up, 0 tech
+  dusk     the same farm at dusk    tick  6000  DAY         48 crops up, 0 tech
+  wave     a wave mid-fight         tick  2073  NIGHT       18 still coming, house 100%
+  result   the night's result       tick  3364  RESULT      11 lines of payout
+  tech     the tech tree            tick  1382  DAY         48 crops up, 2 tech
+  pause    the pause menu           tick  2073  NIGHT       18 still coming, house 100%
+  options_access the access tab           tick  3780  DAY         48 crops up, 0 tech
+  options_video the video tab            tick  3780  DAY         48 crops up, 0 tech
+  options_audio the audio tab            tick  3780  DAY         48 crops up, 0 tech
+  options_controls the controls tab         tick  3780  DAY         48 crops up, 0 tech
+  react    a crop came ready nearby tick  1395  DAY         48 crops up, 0 tech
+  refused  build mode, over something built tick  1366  DAY         48 crops up, 0 tech
+12 written, 0 failed, into res://implementation/shots/sprites/0020/

@@ -1,0 +1,1234 @@
+{
+  "reviewed": [
+    {
+      "page": "contacts-actors-00-native.png",
+      "sha256": "21f2e40a129a9551ecf5bea0f378597eef0670a0930b5c27cd8b1696c166e524",
+      "decision": "accepted",
+      "note": "Opened native and exact nearest 3x. Farmer identity, thirteen distinct gestures, reaction glyphs, body scale and fixed contacts remain consistent; unused legacy texture explicitly labelled."
+    },
+    {
+      "page": "contacts-actors-00-3x.png",
+      "sha256": "b58c0f5008a23d6bf176ad8835b799cef6587e44e2855884aead783ef1a99b3f",
+      "decision": "accepted",
+      "note": "Opened native and exact nearest 3x. Farmer identity, thirteen distinct gestures, reaction glyphs, body scale and fixed contacts remain consistent; unused legacy texture explicitly labelled."
+    },
+    {
+      "page": "contacts-actors-01-native.png",
+      "sha256": "fbe53451a20a6e128bc76bda99ffe9a37c3d2d0da6dac6f227e456cdb643609c",
+      "decision": "accepted",
+      "note": "Opened native and exact nearest 3x. Farmer identity, thirteen distinct gestures, reaction glyphs, body scale and fixed contacts remain consistent; unused legacy texture explicitly labelled."
+    },
+    {
+      "page": "contacts-actors-01-3x.png",
+      "sha256": "a42ad23eb1da035b4aeaf52ae956651e99e1a9db3dd7efa36bf24b3d1b2216b1",
+      "decision": "accepted",
+      "note": "Opened native and exact nearest 3x. Farmer identity, thirteen distinct gestures, reaction glyphs, body scale and fixed contacts remain consistent; unused legacy texture explicitly labelled."
+    },
+    {
+      "page": "contacts-actors-02-native.png",
+      "sha256": "5ba9e5d62ef909ff90739aac73fd46dfaae3655279645bd4937297b46f91d869",
+      "decision": "accepted",
+      "note": "Opened native and exact nearest 3x. Farmer identity, thirteen distinct gestures, reaction glyphs, body scale and fixed contacts remain consistent; unused legacy texture explicitly labelled."
+    },
+    {
+      "page": "contacts-actors-02-3x.png",
+      "sha256": "c85796b57cfb6cd20bc8aeafab385a65bf5dd46ea0309a980261c4bf12fb24c9",
+      "decision": "accepted",
+      "note": "Opened native and exact nearest 3x. Farmer identity, thirteen distinct gestures, reaction glyphs, body scale and fixed contacts remain consistent; unused legacy texture explicitly labelled."
+    },
+    {
+      "page": "contacts-crops-00-native.png",
+      "sha256": "9af36aff8e76c48bbadbf834c4cc2f06df4b9f9f3696c2e6fcb44886a0de8ead",
+      "decision": "accepted",
+      "note": "Opened native and nearest 3x. Progressive crop stages, distinct moisture; localized one-shot forms; breaker and Giant authored motion/deaths and compatibility aliases remain source-exact."
+    },
+    {
+      "page": "contacts-crops-00-3x.png",
+      "sha256": "0f34463e2936f3e36e8b8ac3f7e168e3e4add4c921b1d20cacfb6027877b4a1e",
+      "decision": "accepted",
+      "note": "Opened native and nearest 3x. Progressive crop stages, distinct moisture; localized one-shot forms; breaker and Giant authored motion/deaths and compatibility aliases remain source-exact."
+    },
+    {
+      "page": "contacts-effects-00-native.png",
+      "sha256": "8188a6cdaf837e03be3a191d2f6232a30e895e60154775a4a40d8f2a4fd97bb8",
+      "decision": "accepted",
+      "note": "Opened native and nearest 3x. Progressive crop stages, distinct moisture; localized one-shot forms; breaker and Giant authored motion/deaths and compatibility aliases remain source-exact."
+    },
+    {
+      "page": "contacts-effects-00-3x.png",
+      "sha256": "0aa6707ad570b2a550d9778e0c7c12cc13a0c0e4e59636080dce481f1c750472",
+      "decision": "accepted",
+      "note": "Opened native and nearest 3x. Progressive crop stages, distinct moisture; localized one-shot forms; breaker and Giant authored motion/deaths and compatibility aliases remain source-exact."
+    },
+    {
+      "page": "contacts-enemies-00-native.png",
+      "sha256": "3ae23205a699945f4cb9b09cfa70935bb96f38e95322d5f74a716c9d1b21132c",
+      "decision": "accepted",
+      "note": "Opened native and nearest 3x. Progressive crop stages, distinct moisture; localized one-shot forms; breaker and Giant authored motion/deaths and compatibility aliases remain source-exact."
+    },
+    {
+      "page": "contacts-enemies-00-3x.png",
+      "sha256": "ac4128e5d611fed681cdba0772017bbbe5a75f2a7e678972e4cb148384ffd7ad",
+      "decision": "accepted",
+      "note": "Opened native and nearest 3x. Progressive crop stages, distinct moisture; localized one-shot forms; breaker and Giant authored motion/deaths and compatibility aliases remain source-exact."
+    },
+    {
+      "page": "contacts-buildings-00-native.png",
+      "sha256": "94a78659b2687babe87b58c567fdac1f367984cefabfb8a0cb6e2cfc3ca52b44",
+      "decision": "accepted",
+      "note": "Opened native and nearest 3x. Crossbow/flame/gun construction levels and local firing/wear/wreck cues remain distinct; fence cardinal modules meet existing cells; full house and compatibility slices retain overhang and contact."
+    },
+    {
+      "page": "contacts-buildings-00-3x.png",
+      "sha256": "0487b632b4bc54172e5c26464d176fab6159b1115a1bd43626b2c452a8db8ec4",
+      "decision": "accepted",
+      "note": "Opened native and nearest 3x. Crossbow/flame/gun construction levels and local firing/wear/wreck cues remain distinct; fence cardinal modules meet existing cells; full house and compatibility slices retain overhang and contact."
+    },
+    {
+      "page": "contacts-buildings-01-native.png",
+      "sha256": "61728827aaf3438f09a76675e6a3b6dca6f81aadf133b055979b3a57ff682f4e",
+      "decision": "accepted",
+      "note": "Opened native and nearest 3x. Crossbow/flame/gun construction levels and local firing/wear/wreck cues remain distinct; fence cardinal modules meet existing cells; full house and compatibility slices retain overhang and contact."
+    },
+    {
+      "page": "contacts-buildings-01-3x.png",
+      "sha256": "d6d913f2f847cd2da89e0b7499203570492697b167f3f376be8ee8a340891847",
+      "decision": "accepted",
+      "note": "Opened native and nearest 3x. Crossbow/flame/gun construction levels and local firing/wear/wreck cues remain distinct; fence cardinal modules meet existing cells; full house and compatibility slices retain overhang and contact."
+    },
+    {
+      "page": "contacts-buildings-02-native.png",
+      "sha256": "43b89842aeb33c6dce92cfc95a08253f5d4a223fc242a02d6388cfaafd02f39c",
+      "decision": "accepted",
+      "note": "Opened native and nearest 3x. Crossbow/flame/gun construction levels and local firing/wear/wreck cues remain distinct; fence cardinal modules meet existing cells; full house and compatibility slices retain overhang and contact."
+    },
+    {
+      "page": "contacts-buildings-02-3x.png",
+      "sha256": "48e51041608125eff3e6f95eb6f9674b5a60325e231924aff883ecdc53ca7459",
+      "decision": "accepted",
+      "note": "Opened native and nearest 3x. Crossbow/flame/gun construction levels and local firing/wear/wreck cues remain distinct; fence cardinal modules meet existing cells; full house and compatibility slices retain overhang and contact."
+    },
+    {
+      "page": "contacts-buildings-03-native.png",
+      "sha256": "2527ce4591fa3687664904e45c3821f7cd38d13e7a21e543865b314cf4c829bf",
+      "decision": "accepted",
+      "note": "Opened native and nearest 3x. House damaged roof remains localized; kitchen/workshop state cues and exact quarters retain contacts; mines have clear armed/triggered/spent forms; masonry/fence modules and mortar levels/states stay distinguishable."
+    },
+    {
+      "page": "contacts-buildings-03-3x.png",
+      "sha256": "832d483a22816e4db2e56e736df27df0dbd757c69becaacc30650603252c8e54",
+      "decision": "accepted",
+      "note": "Opened native and nearest 3x. House damaged roof remains localized; kitchen/workshop state cues and exact quarters retain contacts; mines have clear armed/triggered/spent forms; masonry/fence modules and mortar levels/states stay distinguishable."
+    },
+    {
+      "page": "contacts-buildings-04-native.png",
+      "sha256": "676e637fce1db2ac0164b5b01a4d990feddfddbccc99ababc2192aae05960239",
+      "decision": "accepted",
+      "note": "Opened native and nearest 3x. House damaged roof remains localized; kitchen/workshop state cues and exact quarters retain contacts; mines have clear armed/triggered/spent forms; masonry/fence modules and mortar levels/states stay distinguishable."
+    },
+    {
+      "page": "contacts-buildings-04-3x.png",
+      "sha256": "70a3cc42344cab14ac2cd13f2d617a6da6ea740a716af56904994578444d313a",
+      "decision": "accepted",
+      "note": "Opened native and nearest 3x. House damaged roof remains localized; kitchen/workshop state cues and exact quarters retain contacts; mines have clear armed/triggered/spent forms; masonry/fence modules and mortar levels/states stay distinguishable."
+    },
+    {
+      "page": "contacts-buildings-05-native.png",
+      "sha256": "bd712aa9fed579e3df86b798cbb5caaa0daa91ce31b6cfe426d397e393a48f39",
+      "decision": "accepted",
+      "note": "Opened native and nearest 3x. House damaged roof remains localized; kitchen/workshop state cues and exact quarters retain contacts; mines have clear armed/triggered/spent forms; masonry/fence modules and mortar levels/states stay distinguishable."
+    },
+    {
+      "page": "contacts-buildings-05-3x.png",
+      "sha256": "29a55d49f9484eae89865d90edd0c1cf7f25e2f3574f617caa67e4cb15f8b3c2",
+      "decision": "accepted",
+      "note": "Opened native and nearest 3x. House damaged roof remains localized; kitchen/workshop state cues and exact quarters retain contacts; mines have clear armed/triggered/spent forms; masonry/fence modules and mortar levels/states stay distinguishable."
+    },
+    {
+      "page": "contacts-enemies-01-native.png",
+      "sha256": "8833f56804823b70750895ced8f5b595a2b79a34fa1f0aaba1acde69eaa6533c",
+      "decision": "accepted",
+      "note": "Opened native and nearest 3x: runner and tank silhouettes stay distinct through walking, attack and collapse; Giant raised-arm wind-up and body contact are consistent. Trees, cow, hen, stones, ore, shop and well remain readable at their approved canvases."
+    },
+    {
+      "page": "contacts-enemies-01-3x.png",
+      "sha256": "14cc7dded8231c27dc7c1bb43ee39b95871d64e098653fefbc43ab9ab4869860",
+      "decision": "accepted",
+      "note": "Opened native and nearest 3x: runner and tank silhouettes stay distinct through walking, attack and collapse; Giant raised-arm wind-up and body contact are consistent. Trees, cow, hen, stones, ore, shop and well remain readable at their approved canvases."
+    },
+    {
+      "page": "contacts-enemies-02-native.png",
+      "sha256": "d8b3f8200944e204b301794ddd57831d183122abf6a9e9bdbf4cf3c9805f3d97",
+      "decision": "accepted",
+      "note": "Opened native and nearest 3x: runner and tank silhouettes stay distinct through walking, attack and collapse; Giant raised-arm wind-up and body contact are consistent. Trees, cow, hen, stones, ore, shop and well remain readable at their approved canvases."
+    },
+    {
+      "page": "contacts-enemies-02-3x.png",
+      "sha256": "5835de8120c2b754f6ea0c05ed7a3ac439c71ddd6bdff8832cda754616f8bb73",
+      "decision": "accepted",
+      "note": "Opened native and nearest 3x: runner and tank silhouettes stay distinct through walking, attack and collapse; Giant raised-arm wind-up and body contact are consistent. Trees, cow, hen, stones, ore, shop and well remain readable at their approved canvases."
+    },
+    {
+      "page": "contacts-props-00-native.png",
+      "sha256": "f0b40b4c3e362e8b8f0e558f8c39b968bc045c51df8a5fbfe30af5e709547f0c",
+      "decision": "accepted",
+      "note": "Opened native and nearest 3x: runner and tank silhouettes stay distinct through walking, attack and collapse; Giant raised-arm wind-up and body contact are consistent. Trees, cow, hen, stones, ore, shop and well remain readable at their approved canvases."
+    },
+    {
+      "page": "contacts-props-00-3x.png",
+      "sha256": "da6b051ae8ddc9a9fdcd2aa52bbfc60bdc455687527101a0cac9e2a2ff95cf04",
+      "decision": "accepted",
+      "note": "Opened native and nearest 3x: runner and tank silhouettes stay distinct through walking, attack and collapse; Giant raised-arm wind-up and body contact are consistent. Trees, cow, hen, stones, ore, shop and well remain readable at their approved canvases."
+    },
+    {
+      "page": "contacts-terrain-00-native.png",
+      "sha256": "69a4f16f0b4c85e7849ea2817a31c6b987d1eb616a3ed87beebb2ed1e2cf9681",
+      "decision": "accepted",
+      "note": "Opened native and nearest 3x: grass variations retain low contrast, soil/path/floor/water have distinct materials, shore and corner overlays stay aligned to 16px cells. Atlas keeps the accepted raster cells and correctly empty unused cells."
+    },
+    {
+      "page": "contacts-terrain-00-3x.png",
+      "sha256": "d17581f31ad30b2a81bbf6122b1260fa2ecbfdfe331eda45cc2c56d1502b39a4",
+      "decision": "accepted",
+      "note": "Opened native and nearest 3x: grass variations retain low contrast, soil/path/floor/water have distinct materials, shore and corner overlays stay aligned to 16px cells. Atlas keeps the accepted raster cells and correctly empty unused cells."
+    },
+    {
+      "page": "contacts-terrain-large0-native.png",
+      "sha256": "c734a28a40763719854487f0ec5e3bb2e1e0f207a45b16b5894af8d55fec6d1b",
+      "decision": "accepted",
+      "note": "Opened native and nearest 3x: grass variations retain low contrast, soil/path/floor/water have distinct materials, shore and corner overlays stay aligned to 16px cells. Atlas keeps the accepted raster cells and correctly empty unused cells."
+    },
+    {
+      "page": "contacts-terrain-large0-3x.png",
+      "sha256": "0af7844fa11f8591ab3d452dfb678222dbe93d6d9a0f1bd7cf3ee724f69a47a6",
+      "decision": "accepted",
+      "note": "Opened native and nearest 3x: grass variations retain low contrast, soil/path/floor/water have distinct materials, shore and corner overlays stay aligned to 16px cells. Atlas keeps the accepted raster cells and correctly empty unused cells."
+    },
+    {
+      "page": "contacts-ui-00-native.png",
+      "sha256": "cf3dd5f031fcc60742cdfc81f1d22a282e6e589daca556f6b2e05157f269b32b",
+      "decision": "accepted",
+      "note": "Opened native and nearest 3x: resource silhouettes, energy/tech marks and incendiary/oil distinction remain readable; button focus, hover, pressed, disabled, checks, tab selection and slider highlight are distinct. UI frames remain intentionally code-owned."
+    },
+    {
+      "page": "contacts-ui-00-3x.png",
+      "sha256": "24c9e9aaa01ae27bf3f9dd4238433e0e6028be6b8e3c15c7399985c2448f46d9",
+      "decision": "accepted",
+      "note": "Opened native and nearest 3x: resource silhouettes, energy/tech marks and incendiary/oil distinction remain readable; button focus, hover, pressed, disabled, checks, tab selection and slider highlight are distinct. UI frames remain intentionally code-owned."
+    },
+    {
+      "page": "contacts-ui-01-native.png",
+      "sha256": "4a09628be2edd690184eff68db1cf386b034afcbf00dc09ed54a3717920ad280",
+      "decision": "accepted",
+      "note": "Opened native and nearest 3x: resource silhouettes, energy/tech marks and incendiary/oil distinction remain readable; button focus, hover, pressed, disabled, checks, tab selection and slider highlight are distinct. UI frames remain intentionally code-owned."
+    },
+    {
+      "page": "contacts-ui-01-3x.png",
+      "sha256": "3aa248bd6661755e4d9e0a5be1c5c3006dd5e2b2eb2734b3c9170b557f048b8b",
+      "decision": "accepted",
+      "note": "Opened native and nearest 3x: resource silhouettes, energy/tech marks and incendiary/oil distinction remain readable; button focus, hover, pressed, disabled, checks, tab selection and slider highlight are distinct. UI frames remain intentionally code-owned."
+    },
+    {
+      "page": "captures-effects-000.png",
+      "sha256": "c4231c8308dd42a78046b198a2b2dff6ec4d03100618e8b898feb681c6ba53e4",
+      "decision": "accepted",
+      "note": "Opened every native and nearest 3x quadrant. Dense burning waves keep body silhouettes visible beneath small local flames; deaths progressively lower to bounded corpses without hiding the player or house. Mixed moving/night waves retain thin runner, ordinary walker, broad tank and breaker distinctions and stable feet."
+    },
+    {
+      "page": "captures-effects-001.png",
+      "sha256": "edfbf1b03cc672e94bf97b23eb959b2a1006d70dd39476ef3773507a84c5886c",
+      "decision": "accepted",
+      "note": "Opened every native and nearest 3x quadrant. Dense burning waves keep body silhouettes visible beneath small local flames; deaths progressively lower to bounded corpses without hiding the player or house. Mixed moving/night waves retain thin runner, ordinary walker, broad tank and breaker distinctions and stable feet."
+    },
+    {
+      "page": "captures-enemies-000.png",
+      "sha256": "66d58475065f3623210f6317e6a5219348159566d8e9f4ac61ed160468e2d796",
+      "decision": "accepted",
+      "note": "Opened every native and nearest 3x quadrant. Dense burning waves keep body silhouettes visible beneath small local flames; deaths progressively lower to bounded corpses without hiding the player or house. Mixed moving/night waves retain thin runner, ordinary walker, broad tank and breaker distinctions and stable feet."
+    },
+    {
+      "page": "captures-water-000.png",
+      "sha256": "ba564e07b97e3be1b6ec2fb01b43360978529c3da559311b5f062a55fc393af6",
+      "decision": "accepted",
+      "note": "Opened all quadrants native and nearest 3x. Night compound channels, concave and diagonal contacts, all edge/corner masks and timber jetty have continuous bounded banks; three water phases keep bank geometry fixed. Actual farm day/dusk/night preserves readable materials and sprite feet."
+    },
+    {
+      "page": "captures-water-001.png",
+      "sha256": "96f18af613bc5939fc6acc1d6003e47cb9a63140702e2ef0722ef4f210a8d30c",
+      "decision": "accepted",
+      "note": "Opened all quadrants native and nearest 3x. Night compound channels, concave and diagonal contacts, all edge/corner masks and timber jetty have continuous bounded banks; three water phases keep bank geometry fixed. Actual farm day/dusk/night preserves readable materials and sprite feet."
+    },
+    {
+      "page": "captures-water-002.png",
+      "sha256": "a770c0cb9b14ad7271b0f9c837536d1b9aab57b055adb87ab8a61189047efe46",
+      "decision": "accepted",
+      "note": "Opened all quadrants native and nearest 3x. Night compound channels, concave and diagonal contacts, all edge/corner masks and timber jetty have continuous bounded banks; three water phases keep bank geometry fixed. Actual farm day/dusk/night preserves readable materials and sprite feet."
+    },
+    {
+      "page": "captures-water-003.png",
+      "sha256": "6f171111cfda0dacfce966d5ea9abf3887d74ba13a807342292553111e7ec936",
+      "decision": "accepted",
+      "note": "Opened all quadrants native and nearest 3x. Night compound channels, concave and diagonal contacts, all edge/corner masks and timber jetty have continuous bounded banks; three water phases keep bank geometry fixed. Actual farm day/dusk/night preserves readable materials and sprite feet."
+    },
+    {
+      "page": "captures-towers-000.png",
+      "sha256": "2244a6c6ece34ae881a709117c17ba4b172bcb6414307c5cb0da6596f6a226ac",
+      "decision": "accepted",
+      "note": "Opened every quadrant native and nearest 3x: four weapon families and all three levels retain distinct shapes, grounded bases and recognizable damage/rubble states. Real gun/mortar launches originate at muzzle; night glows are small and local, mixed defenses/player/house remain visible. Loaded-save rubble deliberately uses documented L1 art because saved rubble lacks level history."
+    },
+    {
+      "page": "captures-towers-001.png",
+      "sha256": "fbcf1f766c830cf21955c2074c094fa45b65afdf92ed621ee6cb7ad59de58aa6",
+      "decision": "accepted",
+      "note": "Opened every quadrant native and nearest 3x: four weapon families and all three levels retain distinct shapes, grounded bases and recognizable damage/rubble states. Real gun/mortar launches originate at muzzle; night glows are small and local, mixed defenses/player/house remain visible. Loaded-save rubble deliberately uses documented L1 art because saved rubble lacks level history."
+    },
+    {
+      "page": "captures-towers-002.png",
+      "sha256": "6164c6a4b3addd90aeefc3f4a3e37b9ffa5444f3cbd060695214d94f188220b8",
+      "decision": "accepted",
+      "note": "Opened every quadrant native and nearest 3x: four weapon families and all three levels retain distinct shapes, grounded bases and recognizable damage/rubble states. Real gun/mortar launches originate at muzzle; night glows are small and local, mixed defenses/player/house remain visible. Loaded-save rubble deliberately uses documented L1 art because saved rubble lacks level history."
+    },
+    {
+      "page": "captures-towers-003.png",
+      "sha256": "efecf60088819f0ebca58f99c3e601b076130c771f899e50225ec48f758338ad",
+      "decision": "accepted",
+      "note": "Opened every quadrant native and nearest 3x: four weapon families and all three levels retain distinct shapes, grounded bases and recognizable damage/rubble states. Real gun/mortar launches originate at muzzle; night glows are small and local, mixed defenses/player/house remain visible. Loaded-save rubble deliberately uses documented L1 art because saved rubble lacks level history."
+    },
+    {
+      "page": "captures-standard-000.png",
+      "sha256": "b91c394acb3bfd598b0bdb47e16cbd5e7ff1a5dd77b02719ad334ec0e8c01402",
+      "decision": "accepted",
+      "note": "Opened all native and nearest 3x quadrants for normal/high-contrast EN/PT-BR crash, accessibility, audio and video panels. Opaque panels isolate text from dense farm; labels, accents, slider grabs, selected tabs and focus outlines fit without clipping. Crash is an intentional fixture, not a new runtime failure."
+    },
+    {
+      "page": "captures-standard-001.png",
+      "sha256": "bcb9f0ca01c32d4d766c2f99e03e512278651fabe78111280a0156316dd0f9c1",
+      "decision": "accepted",
+      "note": "Opened all native and nearest 3x quadrants for normal/high-contrast EN/PT-BR crash, accessibility, audio and video panels. Opaque panels isolate text from dense farm; labels, accents, slider grabs, selected tabs and focus outlines fit without clipping. Crash is an intentional fixture, not a new runtime failure."
+    },
+    {
+      "page": "captures-standard-002.png",
+      "sha256": "33336d7f5efeea622724b4b0e11d1b8cd8ef64231ca6c3b1f4886d56399de753",
+      "decision": "accepted",
+      "note": "Opened all native and nearest 3x quadrants for normal/high-contrast EN/PT-BR crash, accessibility, audio and video panels. Opaque panels isolate text from dense farm; labels, accents, slider grabs, selected tabs and focus outlines fit without clipping. Crash is an intentional fixture, not a new runtime failure."
+    },
+    {
+      "page": "captures-standard-003.png",
+      "sha256": "11a71f0509531581578b1eaa8e18e509358e91bf0d65342ce038e4e3efb9c39b",
+      "decision": "accepted",
+      "note": "Opened all native and nearest 3x quadrants for normal/high-contrast EN/PT-BR crash, accessibility, audio and video panels. Opaque panels isolate text from dense farm; labels, accents, slider grabs, selected tabs and focus outlines fit without clipping. Crash is an intentional fixture, not a new runtime failure."
+    },
+    {
+      "page": "captures-standard-004.png",
+      "sha256": "448aae7ecd87dcbed1a77c25ee091d144f796c0d1d7a8caf9bd066f00742ef12",
+      "decision": "accepted",
+      "note": "Opened all native and nearest 3x quadrants: EN/PT-BR pause, farmer reaction, refused build/shop/workshop and high-contrast battle. Panels and focus remain readable, farmer hat/reaction stays visible, correct sprite depth near workshop roof, local night lights do not swamp HUD. Existing untranslated internal build/job identifiers are documented, outside raster scope."
+    },
+    {
+      "page": "captures-standard-005.png",
+      "sha256": "34ff8bdabd2fb3222e962e3f8cca50a92031a3583a56c3659a64a58896871e95",
+      "decision": "accepted",
+      "note": "Opened all native and nearest 3x quadrants: EN/PT-BR pause, farmer reaction, refused build/shop/workshop and high-contrast battle. Panels and focus remain readable, farmer hat/reaction stays visible, correct sprite depth near workshop roof, local night lights do not swamp HUD. Existing untranslated internal build/job identifiers are documented, outside raster scope."
+    },
+    {
+      "page": "captures-standard-006.png",
+      "sha256": "dabeb458b91b420a09b8389dfac2bee1498ed0d4fd5d59d23e3744add667cba7",
+      "decision": "accepted",
+      "note": "Opened all native and nearest 3x quadrants: EN/PT-BR pause, farmer reaction, refused build/shop/workshop and high-contrast battle. Panels and focus remain readable, farmer hat/reaction stays visible, correct sprite depth near workshop roof, local night lights do not swamp HUD. Existing untranslated internal build/job identifiers are documented, outside raster scope."
+    },
+    {
+      "page": "captures-standard-007.png",
+      "sha256": "713f14acbb0108c662754647f792c52cd12ed3e742cd8c8b7e73519ea9626add",
+      "decision": "accepted",
+      "note": "Opened all native and nearest 3x quadrants: EN/PT-BR pause, farmer reaction, refused build/shop/workshop and high-contrast battle. Panels and focus remain readable, farmer hat/reaction stays visible, correct sprite depth near workshop roof, local night lights do not swamp HUD. Existing untranslated internal build/job identifiers are documented, outside raster scope."
+    },
+    {
+      "page": "captures-crops-000.png",
+      "sha256": "34da6b2de016ca61c3c65676036821c14b5a5afe663709e642016de6b1e0076d",
+      "decision": "accepted",
+      "note": "Opened all native and nearest 3x quadrants: dense mature carrot/corn/wheat beds keep distinct low leafy, tall green and golden ear silhouettes in four lights; furrows remain visible between rows, farmer stays grounded beside corn. Real growth selects mature art and harvest leaves the correct empty dry cell."
+    },
+    {
+      "page": "captures-crops-001.png",
+      "sha256": "a1f3e3477213fe7b0572053b3a1dfbc16fa451ae23400e607c6d82e77d43949d",
+      "decision": "accepted",
+      "note": "Opened all native and nearest 3x quadrants: dense mature carrot/corn/wheat beds keep distinct low leafy, tall green and golden ear silhouettes in four lights; furrows remain visible between rows, farmer stays grounded beside corn. Real growth selects mature art and harvest leaves the correct empty dry cell."
+    },
+    {
+      "page": "captures-crops-002.png",
+      "sha256": "9b4004ddde4c8ef824be68bcad2942fddce799a3e3da34d697a770ca5c2c48a8",
+      "decision": "accepted",
+      "note": "Opened all native and nearest 3x quadrants: dense mature carrot/corn/wheat beds keep distinct low leafy, tall green and golden ear silhouettes in four lights; furrows remain visible between rows, farmer stays grounded beside corn. Real growth selects mature art and harvest leaves the correct empty dry cell."
+    },
+    {
+      "page": "captures-crops-003.png",
+      "sha256": "6b23e01fb10f9cbcbfcba1ae4f8b0f22831933930dd149265978fe0c3652430d",
+      "decision": "accepted",
+      "note": "Opened all native/nearest 3x quadrants for dusk/night harvest, four-stage species matrices and actual watering. Wet furrows remain darker under mature foliage; no plant anchor or foliage changes when watering, stage progression increases plant mass and harvesting clears only its selected cell."
+    },
+    {
+      "page": "captures-crops-004.png",
+      "sha256": "11346c4bd9bde1581ab88b840c19c7edc3f61e959911354d190315a26f2a8b70",
+      "decision": "accepted",
+      "note": "Opened all native/nearest 3x quadrants for dusk/night harvest, four-stage species matrices and actual watering. Wet furrows remain darker under mature foliage; no plant anchor or foliage changes when watering, stage progression increases plant mass and harvesting clears only its selected cell."
+    },
+    {
+      "page": "captures-crops-005.png",
+      "sha256": "8a32861b506d19f1555abd36fa9937d3c398ec9d0eee2aec5d93f6c84c8e520b",
+      "decision": "accepted",
+      "note": "Opened all native/nearest 3x quadrants for dusk/night harvest, four-stage species matrices and actual watering. Wet furrows remain darker under mature foliage; no plant anchor or foliage changes when watering, stage progression increases plant mass and harvesting clears only its selected cell."
+    },
+    {
+      "page": "captures-giant-000.png",
+      "sha256": "eb368472f1a7bb460c295a7829803de8fe32afd05c44ad30542b3ac91e62e097",
+      "decision": "accepted",
+      "note": "Opened native and exact nearest 3x. Both mirrored Giant attacks keep the foot anchor; rising windup and low slam have distinct silhouettes, warning rings follow the target and no body/tool is clipped. Blue target cells are fixture markers."
+    },
+    {
+      "page": "captures-giant-001.png",
+      "sha256": "3c1e0f177a25db045e49e8fa5ca02024be3105e330d17502ccc202f37db20a66",
+      "decision": "accepted",
+      "note": "Opened native and exact nearest 3x. Both mirrored Giant attacks keep the foot anchor; rising windup and low slam have distinct silhouettes, warning rings follow the target and no body/tool is clipped. Blue target cells are fixture markers."
+    },
+    {
+      "page": "captures-giant-002.png",
+      "sha256": "1a7fca320dfe7680c5f66baa9a7c48abb5b557cd6c2497f73a55b313b05b4f48",
+      "decision": "accepted",
+      "note": "Opened native and exact nearest 3x. Both mirrored Giant attacks keep the foot anchor; rising windup and low slam have distinct silhouettes, warning rings follow the target and no body/tool is clipped. Blue target cells are fixture markers."
+    },
+    {
+      "page": "captures-giant-003.png",
+      "sha256": "278dda09b9b45a491f579394557ee7c0b2c2a3d9a37153678f2755cc344ff496",
+      "decision": "accepted",
+      "note": "Opened native and exact nearest 3x. All five enemy identities descend into distinct grounded corpses without positional jumps. The intentionally saturated 64-removal fixture retains its bounded pool; no missing texture appears."
+    },
+    {
+      "page": "captures-giant-004.png",
+      "sha256": "c10e48014ffa8a033464fd0e806a3e83edacacc72e91edae100a9facad7404e0",
+      "decision": "accepted",
+      "note": "Opened native and exact nearest 3x. Day and night corpse frames flatten at the same ground contact; ordinary corpses expire before the longer Giant sequence, and the final expired frame is clear. Raised Giant arms remain visible behind the house roof; the target warning outlines the house."
+    },
+    {
+      "page": "captures-giant-005.png",
+      "sha256": "e7e63f5177226f75eeb6257be05a90a50af2f5a4e35c0fa33eb92abedf9d930b",
+      "decision": "accepted",
+      "note": "Opened native and exact nearest 3x. Day and night corpse frames flatten at the same ground contact; ordinary corpses expire before the longer Giant sequence, and the final expired frame is clear. Raised Giant arms remain visible behind the house roof; the target warning outlines the house."
+    },
+    {
+      "page": "captures-giant-006.png",
+      "sha256": "da551678b3b6542407cf70b3b603a8ebb2a35a8e59136d104c38d95e7cc09828",
+      "decision": "accepted",
+      "note": "Opened native and exact nearest 3x. Day and night corpse frames flatten at the same ground contact; ordinary corpses expire before the longer Giant sequence, and the final expired frame is clear. Raised Giant arms remain visible behind the house roof; the target warning outlines the house."
+    },
+    {
+      "page": "captures-giant-007.png",
+      "sha256": "f4d99cf11ac23384b19112ddeaa96a54dc05f2395f928a0eb2793e2eb43f7461",
+      "decision": "accepted",
+      "note": "Opened native and exact nearest 3x. Spent Giant leaves no permanent actor; the mixed lineup shows five silhouettes and the Giant larger than the farmer. Moving escort and Giant maintain consistent scale, contact and night lighting."
+    },
+    {
+      "page": "captures-giant-008.png",
+      "sha256": "18ac0e65fbb15d6131055b64c3dec8d4a94404cf3c0c076a2001b2b672420ce8",
+      "decision": "accepted",
+      "note": "Opened native and exact nearest 3x. Left and right moving Giant retain the same body size and ground pivot throughout the sampled cycle; escort overlaps are normal depth sorting, with no detached parts or missing frames."
+    },
+    {
+      "page": "captures-giant-009.png",
+      "sha256": "cfad80386f75b2688ab4bdad09c158dce5359cd8babc19a81948e3ba1ae78531",
+      "decision": "accepted",
+      "note": "Opened native and exact nearest 3x. Left and right moving Giant retain the same body size and ground pivot throughout the sampled cycle; escort overlaps are normal depth sorting, with no detached parts or missing frames."
+    },
+    {
+      "page": "captures-giant-010.png",
+      "sha256": "6068f9f51d2fa841899bbd42bdf3054cea1a68423bccf4a64c9a1d3ae870b2ac",
+      "decision": "accepted",
+      "note": "Opened native and exact nearest 3x. Left and right moving Giant retain the same body size and ground pivot throughout the sampled cycle; escort overlaps are normal depth sorting, with no detached parts or missing frames."
+    },
+    {
+      "page": "captures-house-000.png",
+      "sha256": "2a4a933be619d0b80bb63991d1c51bef1e9a188bfe67d7d352fe75ad5a3e6ac8",
+      "decision": "accepted",
+      "note": "Opened native and exact nearest 3x. Whole and damaged farmhouse remain one continuous roof/body at all four map/camera corners; viewport clipping is correct and does not split the nine logical cells. Day/dusk/night ghosts show the complete house and footprint. Front actors draw above the door and rear actors are occluded by the roof."
+    },
+    {
+      "page": "captures-house-001.png",
+      "sha256": "af50f22976852862ab3906f13d981a313768578301e1b73c168949db01403259",
+      "decision": "accepted",
+      "note": "Opened native and exact nearest 3x. Whole and damaged farmhouse remain one continuous roof/body at all four map/camera corners; viewport clipping is correct and does not split the nine logical cells. Day/dusk/night ghosts show the complete house and footprint. Front actors draw above the door and rear actors are occluded by the roof."
+    },
+    {
+      "page": "captures-house-002.png",
+      "sha256": "b895162e4b16696a147b786239f8ad7beca8c348d6dee83de5a2c4179de24a2c",
+      "decision": "accepted",
+      "note": "Opened native and exact nearest 3x. Whole and damaged farmhouse remain one continuous roof/body at all four map/camera corners; viewport clipping is correct and does not split the nine logical cells. Day/dusk/night ghosts show the complete house and footprint. Front actors draw above the door and rear actors are occluded by the roof."
+    },
+    {
+      "page": "captures-house-003.png",
+      "sha256": "5770a050d9807438f5f4d606818b233a9b50164368a8112b91d3bc96956065e5",
+      "decision": "accepted",
+      "note": "Opened native and exact nearest 3x. Whole and damaged farmhouse remain one continuous roof/body at all four map/camera corners; viewport clipping is correct and does not split the nine logical cells. Day/dusk/night ghosts show the complete house and footprint. Front actors draw above the door and rear actors are occluded by the roof."
+    },
+    {
+      "page": "captures-house-004.png",
+      "sha256": "f2145d1e5eedc990308a3048b594140a68fac799817365b241915de0241f7770",
+      "decision": "accepted",
+      "note": "Opened native and exact nearest 3x. Whole/damaged houses keep roof geometry while dark breaks signal damage. Farmer and walker depth order is correct in front/behind at noon and night; warm window lights stay on source-owned windows at high quality and the unlit lower-quality house remains readable."
+    },
+    {
+      "page": "captures-house-005.png",
+      "sha256": "4aa00b3e9af2a3463fdaba430f203950f091f736d80097b4de3f289739e5143a",
+      "decision": "accepted",
+      "note": "Opened native and exact nearest 3x. Whole/damaged houses keep roof geometry while dark breaks signal damage. Farmer and walker depth order is correct in front/behind at noon and night; warm window lights stay on source-owned windows at high quality and the unlit lower-quality house remains readable."
+    },
+    {
+      "page": "captures-house-006.png",
+      "sha256": "152c18941b951473fd62f97ccdef108a4753a5f8c41ae4de1d9aea0a45e716c6",
+      "decision": "accepted",
+      "note": "Opened native and exact nearest 3x. Whole/damaged houses keep roof geometry while dark breaks signal damage. Farmer and walker depth order is correct in front/behind at noon and night; warm window lights stay on source-owned windows at high quality and the unlit lower-quality house remains readable."
+    },
+    {
+      "page": "captures-house-007.png",
+      "sha256": "7785d44a2788a7041f3242fc484790b8e6a26e83e2c84fe3db54de8476391eec",
+      "decision": "accepted",
+      "note": "Opened native and exact nearest 3x. Whole/damaged houses keep roof geometry while dark breaks signal damage. Farmer and walker depth order is correct in front/behind at noon and night; warm window lights stay on source-owned windows at high quality and the unlit lower-quality house remains readable."
+    },
+    {
+      "page": "captures-house-008.png",
+      "sha256": "6934203d573e8832fa99baa422ea5adb951e57bde0126acc84528fd6f00dd4cb",
+      "decision": "accepted",
+      "note": "Opened native and exact nearest 3x. Damaged roof breaks survive dawn/day/dusk/night lighting without changing the outline. Low and high quality retain the same house/HP. Automatic HP thresholds 74/75 and 104/105 switch only the expected damaged/whole skin with unchanged position and scale."
+    },
+    {
+      "page": "captures-house-009.png",
+      "sha256": "ab7aeb0e9f506aa008fd425c13059ca5c1d2be7a852ac79bb8545c98b3b1c793",
+      "decision": "accepted",
+      "note": "Opened native and exact nearest 3x. Damaged roof breaks survive dawn/day/dusk/night lighting without changing the outline. Low and high quality retain the same house/HP. Automatic HP thresholds 74/75 and 104/105 switch only the expected damaged/whole skin with unchanged position and scale."
+    },
+    {
+      "page": "captures-house-010.png",
+      "sha256": "9279da75d5241554677fa16f57e9ab2a93bae492187c32d18b9c7d6187cda07a",
+      "decision": "accepted",
+      "note": "Opened native and exact nearest 3x. Damaged roof breaks survive dawn/day/dusk/night lighting without changing the outline. Low and high quality retain the same house/HP. Automatic HP thresholds 74/75 and 104/105 switch only the expected damaged/whole skin with unchanged position and scale."
+    },
+    {
+      "page": "captures-barriers-000.png",
+      "sha256": "e04cd1089258218595732f154e63c72669d0d3597d5818c8a366af9e76e032e6",
+      "decision": "accepted",
+      "note": "Opened native and exact nearest 3x. All sixteen fence neighbor arrangements retain their joins in whole and broken states at dusk/night; rubble is low and stays on destroyed cells. Barricade timber reads as a small one-cell object. Reloaded ruins and bounded mine cues use real family textures, with feet/crops drawing above the low plate and expired cues absent."
+    },
+    {
+      "page": "captures-barriers-001.png",
+      "sha256": "45ccc1e5ca81a00971c4cec23853fefe52b20213b30acf446c15691e7392e32b",
+      "decision": "accepted",
+      "note": "Opened native and exact nearest 3x. All sixteen fence neighbor arrangements retain their joins in whole and broken states at dusk/night; rubble is low and stays on destroyed cells. Barricade timber reads as a small one-cell object. Reloaded ruins and bounded mine cues use real family textures, with feet/crops drawing above the low plate and expired cues absent."
+    },
+    {
+      "page": "captures-barriers-002.png",
+      "sha256": "11ecece7d729e248ab25507ce5d755d67ba928d6c6066320773f3176c8a4e1c8",
+      "decision": "accepted",
+      "note": "Opened native and exact nearest 3x. All sixteen fence neighbor arrangements retain their joins in whole and broken states at dusk/night; rubble is low and stays on destroyed cells. Barricade timber reads as a small one-cell object. Reloaded ruins and bounded mine cues use real family textures, with feet/crops drawing above the low plate and expired cues absent."
+    },
+    {
+      "page": "captures-barriers-003.png",
+      "sha256": "9285aa47795e8579e234e4f52511ceeda4e6a7f77816181ad7e5db2f13f704d6",
+      "decision": "accepted",
+      "note": "Opened native and exact nearest 3x. All sixteen fence neighbor arrangements retain their joins in whole and broken states at dusk/night; rubble is low and stays on destroyed cells. Barricade timber reads as a small one-cell object. Reloaded ruins and bounded mine cues use real family textures, with feet/crops drawing above the low plate and expired cues absent."
+    },
+    {
+      "page": "captures-barriers-004.png",
+      "sha256": "117c42953d76dfd249d25efed15ab78d256d377ba46fb7f293d5755978a8b02c",
+      "decision": "accepted",
+      "note": "Native and nearest 3x: mixed stone/timber perimeter keeps deliberate openings; all stone-wall masks connect, hurt gaps remain visible and wrecks stay low with coherent night contrast."
+    },
+    {
+      "page": "captures-barriers-005.png",
+      "sha256": "7b65f7e4355776ef7aa2a41af723c2ef353d91bc96f59ed556f9ae553426382d",
+      "decision": "accepted",
+      "note": "Native and nearest 3x: mixed stone/timber perimeter keeps deliberate openings; all stone-wall masks connect, hurt gaps remain visible and wrecks stay low with coherent night contrast."
+    },
+    {
+      "page": "captures-locomotion-000.png",
+      "sha256": "a7db84f70a75fefac17fee4893a14f98a36f313b63077885d3f5f482bba71fae",
+      "decision": "accepted",
+      "note": "Native and nearest 3x: diagonal facings preserve shared foot contact; all three idle frames for south/north and mirrored west/east keep hat, overalls and body size coherent without clipping or detached pixels."
+    },
+    {
+      "page": "captures-locomotion-001.png",
+      "sha256": "92405a103ce08500ae0eea6c4740063827499a6359e7621a7f3df5ccf4dde4be",
+      "decision": "accepted",
+      "note": "Native and nearest 3x: diagonal facings preserve shared foot contact; all three idle frames for south/north and mirrored west/east keep hat, overalls and body size coherent without clipping or detached pixels."
+    },
+    {
+      "page": "captures-locomotion-002.png",
+      "sha256": "7a4aef23fc906b03f2c5ad04ee44c617cacddde6820b7e56d7bcacf481e3e6cb",
+      "decision": "accepted",
+      "note": "Native and nearest 3x: diagonal facings preserve shared foot contact; all three idle frames for south/north and mirrored west/east keep hat, overalls and body size coherent without clipping or detached pixels."
+    },
+    {
+      "page": "captures-locomotion-003.png",
+      "sha256": "c647eef645f21fdef59572f874511079053000e429578037bce78ce27794310f",
+      "decision": "accepted",
+      "note": "Native and nearest 3x: diagonal facings preserve shared foot contact; all three idle frames for south/north and mirrored west/east keep hat, overalls and body size coherent without clipping or detached pixels."
+    },
+    {
+      "page": "captures-locomotion-004.png",
+      "sha256": "c9121b94be5811172d029484cb666162571f3fa48a3e17dc1b9e71240b36dad3",
+      "decision": "accepted",
+      "note": "Native and nearest 3x: turning among all four facings keeps common ground contact; south/west/north walking frames show alternating boots and arm swing with stable hat/body proportions and no canvas clipping."
+    },
+    {
+      "page": "captures-locomotion-005.png",
+      "sha256": "5469c3b48eea129479c12b4182a90bc5594948a435d007df274af0cb7465cff4",
+      "decision": "accepted",
+      "note": "Native and nearest 3x: turning among all four facings keeps common ground contact; south/west/north walking frames show alternating boots and arm swing with stable hat/body proportions and no canvas clipping."
+    },
+    {
+      "page": "captures-locomotion-006.png",
+      "sha256": "901287980e06524f4acc96ff637d0558fd760a4b22422c4cce03359292b0e55f",
+      "decision": "accepted",
+      "note": "Native and nearest 3x: turning among all four facings keeps common ground contact; south/west/north walking frames show alternating boots and arm swing with stable hat/body proportions and no canvas clipping."
+    },
+    {
+      "page": "captures-locomotion-007.png",
+      "sha256": "1408fc3167f089c5a4667178a24b0615a99c03e9dc6d9c2cbe0949d36893d21d",
+      "decision": "accepted",
+      "note": "Native and nearest 3x: turning among all four facings keeps common ground contact; south/west/north walking frames show alternating boots and arm swing with stable hat/body proportions and no canvas clipping."
+    },
+    {
+      "page": "captures-locomotion-008.png",
+      "sha256": "358152a9bca80e4ba0e2cee4d7b6718ff1b8ef9425f538a1a19492e7872106f2",
+      "decision": "accepted",
+      "note": "Native and nearest 3x: east mirrors the four west strides cleanly, with stable hat/body size, connected boots and ground contact."
+    },
+    {
+      "page": "captures-placement-000.png",
+      "sha256": "3ba41a13d138db7108f1ea58dc897467ae197a9275f4d33fbf58fb97cb722226",
+      "decision": "accepted",
+      "note": "Native and nearest 3x: committed player/tool strips keep the same identity and grounded proportions; map-corner clipping is viewport clipping; crop stages and three tower levels remain legible and whole/hurt/fire variants retain bases; transparent house/tower previews align with the original logical footprint while allowing roof/barrel overhang."
+    },
+    {
+      "page": "captures-placement-001.png",
+      "sha256": "1b1f729fd6ba42a0cd7f81c5729933a9c28f1c6059cd77c9059579f56ed14530",
+      "decision": "accepted",
+      "note": "Native and nearest 3x: committed player/tool strips keep the same identity and grounded proportions; map-corner clipping is viewport clipping; crop stages and three tower levels remain legible and whole/hurt/fire variants retain bases; transparent house/tower previews align with the original logical footprint while allowing roof/barrel overhang."
+    },
+    {
+      "page": "captures-placement-002.png",
+      "sha256": "53b56ff64a9952852f277bb8cf3fffe7d7b0109e3f34dbad6c24752adbc0764c",
+      "decision": "accepted",
+      "note": "Native and nearest 3x: committed player/tool strips keep the same identity and grounded proportions; map-corner clipping is viewport clipping; crop stages and three tower levels remain legible and whole/hurt/fire variants retain bases; transparent house/tower previews align with the original logical footprint while allowing roof/barrel overhang."
+    },
+    {
+      "page": "captures-placement-003.png",
+      "sha256": "8e3fbb2f0976ea2cc789e2cec4840b351ecb1cf5198d5cfd07380825b5028cfd",
+      "decision": "accepted",
+      "note": "Native and nearest 3x: both subjects move from behind to in front of tree/house at successive ground offsets. Crowns and roof correctly hide rear bodies; front bodies cover trunks/facade without changing scale, contact or producing duplicate sprites."
+    },
+    {
+      "page": "captures-placement-004.png",
+      "sha256": "9e3563817392c62dd2b1af4f10503a2ff3b73ffc5a3dfb7150113ed0ef417c10",
+      "decision": "accepted",
+      "note": "Native and nearest 3x: both subjects move from behind to in front of tree/house at successive ground offsets. Crowns and roof correctly hide rear bodies; front bodies cover trunks/facade without changing scale, contact or producing duplicate sprites."
+    },
+    {
+      "page": "captures-placement-005.png",
+      "sha256": "896fbc615eedcc5d4803236eaca24b878e82209213479539f28dd24b0c8255e9",
+      "decision": "accepted",
+      "note": "Native and nearest 3x: both subjects move from behind to in front of tree/house at successive ground offsets. Crowns and roof correctly hide rear bodies; front bodies cover trunks/facade without changing scale, contact or producing duplicate sprites."
+    },
+    {
+      "page": "captures-placement-006.png",
+      "sha256": "d57b93a1219fe102abf75750a5bfff4f32aafa73e48d0048d924a8484a458f74",
+      "decision": "accepted",
+      "note": "Native and nearest 3x: both subjects move from behind to in front of tree/house at successive ground offsets. Crowns and roof correctly hide rear bodies; front bodies cover trunks/facade without changing scale, contact or producing duplicate sprites."
+    },
+    {
+      "page": "captures-placement-007.png",
+      "sha256": "7a02c53e7a1d1322e0f0afccb245e5172e66e45f00c931534a8269f6ca7fd7e5",
+      "decision": "accepted",
+      "note": "Native and nearest 3x: final front-depth samples remain coherent; binary-alpha silhouettes preserve readable hats, tools, crouches, walker death, broad tree crown and house roof, with no rectangular opaque canvas or halo."
+    },
+    {
+      "page": "captures-placement-008.png",
+      "sha256": "0a30182dc85a64f577844b2e137fff0594bccb4c35c939152ffcd3513e3bde1c",
+      "decision": "accepted",
+      "note": "Native and nearest 3x: final front-depth samples remain coherent; binary-alpha silhouettes preserve readable hats, tools, crouches, walker death, broad tree crown and house roof, with no rectangular opaque canvas or halo."
+    },
+    {
+      "page": "captures-terrain-000.png",
+      "sha256": "6ab96f00d7c7c39111c8ec543da5cba6dd16c03995f4b90a7b2e14f1d4f9eb61",
+      "decision": "accepted",
+      "note": "Native and nearest 3x: final farm retains recognizable materials across day/dusk/night; continuous timber rows have no cell gaps, grass stays sparse and lower-contrast than both actors. Night subjects remain identifiable on cool floor/ground; lamp-off farm is deliberately dim without false bright windows."
+    },
+    {
+      "page": "captures-terrain-001.png",
+      "sha256": "5d57c101da93fca6f04160223ba68083af7e953041a07b1c9d6694d2eeb2da0b",
+      "decision": "accepted",
+      "note": "Native and nearest 3x: final farm retains recognizable materials across day/dusk/night; continuous timber rows have no cell gaps, grass stays sparse and lower-contrast than both actors. Night subjects remain identifiable on cool floor/ground; lamp-off farm is deliberately dim without false bright windows."
+    },
+    {
+      "page": "captures-terrain-002.png",
+      "sha256": "bf594f2511f6b0aba9e200e3b0f537ee368cec3b0e841e89d4775d13046bf5df",
+      "decision": "accepted",
+      "note": "Native and nearest 3x: each grass choice and mixed weighted ground use restrained joined marks without hard cell seams; day/dusk/night retain both subjects. Path remains a calm earth field, distinguishable from green ground and timber, without competing bright texture."
+    },
+    {
+      "page": "captures-terrain-003.png",
+      "sha256": "051fa35d6d12ce646e12c69437aa802ace6111f5ff132b024fa8e21dde1e35a2",
+      "decision": "accepted",
+      "note": "Native and nearest 3x: each grass choice and mixed weighted ground use restrained joined marks without hard cell seams; day/dusk/night retain both subjects. Path remains a calm earth field, distinguishable from green ground and timber, without competing bright texture."
+    },
+    {
+      "page": "captures-terrain-004.png",
+      "sha256": "8b5e3cbb1a70d1884ef3115e5095158e8480f327696cf8f89c028f12017bcbba",
+      "decision": "accepted",
+      "note": "Native and nearest 3x: each grass choice and mixed weighted ground use restrained joined marks without hard cell seams; day/dusk/night retain both subjects. Path remains a calm earth field, distinguishable from green ground and timber, without competing bright texture."
+    },
+    {
+      "page": "captures-terrain-005.png",
+      "sha256": "6811190af311ebf73890556dc7c9f4c78885ff4fda800aa2167a0996fe2ca354",
+      "decision": "accepted",
+      "note": "Native and nearest 3x: each grass choice and mixed weighted ground use restrained joined marks without hard cell seams; day/dusk/night retain both subjects. Path remains a calm earth field, distinguishable from green ground and timber, without competing bright texture."
+    },
+    {
+      "page": "captures-terrain-006.png",
+      "sha256": "60e240e49ed81606831f07d0a996bbb8c2956caacd6721bd842beebbdd75d46f",
+      "decision": "accepted",
+      "note": "Native and nearest 3x: rock reads as quiet gray flecks rather than masonry; soil is the darker brown surface distinct from path. Opaque tiles repeat without seams, and both actor silhouettes remain visible in all three light states."
+    },
+    {
+      "page": "captures-terrain-007.png",
+      "sha256": "d22071ad7bbf4ac2ba0be90d4b9cab1864bbf778caaccf1cca38e889b5eecda6",
+      "decision": "accepted",
+      "note": "Native and nearest 3x: rock reads as quiet gray flecks rather than masonry; soil is the darker brown surface distinct from path. Opaque tiles repeat without seams, and both actor silhouettes remain visible in all three light states."
+    },
+    {
+      "page": "captures-props-000.png",
+      "sha256": "d3fc42179da5c12e0c933fb0a9a50b33d0a5acce0bc101027d40731fe9725e14",
+      "decision": "accepted",
+      "note": "Opened native and exact nearest 3x: both full tree crowns and warm rooted trunks, cream cow with dark patches and smaller combed hen remain grounded in ready/collected day/dusk/night views. Loose stone is rounded/angular, seams are low shelves and ore has joined ochre veins. Actual harvesting clears loose rocks/seams/ore and replaces crowns with low rooted stumps without leftover canopy/shadow; dark flat terrain remains intentionally."
+    },
+    {
+      "page": "captures-props-001.png",
+      "sha256": "e866c3989a777dad8f7d377471440e3236ea7cd7b43d8021b105e0adcf5b354f",
+      "decision": "accepted",
+      "note": "Opened native and exact nearest 3x: both full tree crowns and warm rooted trunks, cream cow with dark patches and smaller combed hen remain grounded in ready/collected day/dusk/night views. Loose stone is rounded/angular, seams are low shelves and ore has joined ochre veins. Actual harvesting clears loose rocks/seams/ore and replaces crowns with low rooted stumps without leftover canopy/shadow; dark flat terrain remains intentionally."
+    },
+    {
+      "page": "captures-props-002.png",
+      "sha256": "d872f0fd57ddc7f0537b88f796e9ef3f297110ba3e09dd1365a3d905a4c9f895",
+      "decision": "accepted",
+      "note": "Opened native and exact nearest 3x: both full tree crowns and warm rooted trunks, cream cow with dark patches and smaller combed hen remain grounded in ready/collected day/dusk/night views. Loose stone is rounded/angular, seams are low shelves and ore has joined ochre veins. Actual harvesting clears loose rocks/seams/ore and replaces crowns with low rooted stumps without leftover canopy/shadow; dark flat terrain remains intentionally."
+    },
+    {
+      "page": "captures-props-003.png",
+      "sha256": "d722c5e90dcb4d9cdb4154a6f6ed9ce5b99f1480967db8c6fee6db315ae2d3e0",
+      "decision": "accepted",
+      "note": "Opened native and exact nearest 3x: fixed farm material hierarchy remains coherent through day/dusk/night with lights off; house is the larger landmark, compact livestock stay readable near dock, both tree variants remain full crowns. Dense three-row grove has natural canopy overlap with visible foremost trunks and fully visible foreground farmer at unchanged body scale; viewport-edge clipping is natural."
+    },
+    {
+      "page": "captures-props-004.png",
+      "sha256": "5e000cee3941e9d0d0c244e278f6027986da9cf2fabf67ebd9e4eb35a2e309bd",
+      "decision": "accepted",
+      "note": "Opened all native and exact nearest 3x quadrants: night grove retains full separate canopy groups, dark trunks and visible foreground farmer. Both broad/round crowns keep their ground anchors. Farmer and walker at -24 show heads above crowns; at -8 are naturally fully occluded; at +8 and +24 cover canopy/trunk according to their feet. Day and dusk variant pairs preserve scale and do not force actors always in front."
+    },
+    {
+      "page": "captures-props-005.png",
+      "sha256": "dc38e95e02d2379c22cf9b3b5d13848c58e86f4ba4c0df9c8d453afefc694fb8",
+      "decision": "accepted",
+      "note": "Opened all native and exact nearest 3x quadrants: night grove retains full separate canopy groups, dark trunks and visible foreground farmer. Both broad/round crowns keep their ground anchors. Farmer and walker at -24 show heads above crowns; at -8 are naturally fully occluded; at +8 and +24 cover canopy/trunk according to their feet. Day and dusk variant pairs preserve scale and do not force actors always in front."
+    },
+    {
+      "page": "captures-props-006.png",
+      "sha256": "fb559ba0747821263aceb62dce697a3f6c289474653fabbf41fb46e18a1e89a2",
+      "decision": "accepted",
+      "note": "Opened all native and exact nearest 3x quadrants: night grove retains full separate canopy groups, dark trunks and visible foreground farmer. Both broad/round crowns keep their ground anchors. Farmer and walker at -24 show heads above crowns; at -8 are naturally fully occluded; at +8 and +24 cover canopy/trunk according to their feet. Day and dusk variant pairs preserve scale and do not force actors always in front."
+    },
+    {
+      "page": "captures-props-007.png",
+      "sha256": "461e65c4861e08eb28149e25219d3c8f2c9f1629cc2ea888ddb1e31dd1da4b82",
+      "decision": "accepted",
+      "note": "Opened all native and exact nearest 3x quadrants: night grove retains full separate canopy groups, dark trunks and visible foreground farmer. Both broad/round crowns keep their ground anchors. Farmer and walker at -24 show heads above crowns; at -8 are naturally fully occluded; at +8 and +24 cover canopy/trunk according to their feet. Day and dusk variant pairs preserve scale and do not force actors always in front."
+    },
+    {
+      "page": "captures-props-008.png",
+      "sha256": "419c674e7104a08c319e07d41a6c8301a81608eb2fc9234a6c1875eb36c40480",
+      "decision": "accepted",
+      "note": "Opened every native/nearest 3x quadrant: dusk and cool night keep both crown variants intact with farmer/walker occlusion at -24,-8,+8,+24 determined by feet. Partial resource work preserves the existing intact anchored forms without an invented damage drawing; completed regrowth restores original full trees, low seams and ore at the same contacts. Night is intentionally dim with lights off, without emissive crops or animal glow."
+    },
+    {
+      "page": "captures-props-009.png",
+      "sha256": "96318dd436abc3ac9b9cf610ae344666e78524c874e3715c24831b8c6d07b7ab",
+      "decision": "accepted",
+      "note": "Opened every native/nearest 3x quadrant: dusk and cool night keep both crown variants intact with farmer/walker occlusion at -24,-8,+8,+24 determined by feet. Partial resource work preserves the existing intact anchored forms without an invented damage drawing; completed regrowth restores original full trees, low seams and ore at the same contacts. Night is intentionally dim with lights off, without emissive crops or animal glow."
+    },
+    {
+      "page": "captures-props-010.png",
+      "sha256": "2d4f826b21448a7a95ae13baf7a3b9edb7cd7c547d4edc71092b8ddbd2e01ce6",
+      "decision": "accepted",
+      "note": "Opened every native/nearest 3x quadrant: dusk and cool night keep both crown variants intact with farmer/walker occlusion at -24,-8,+8,+24 determined by feet. Partial resource work preserves the existing intact anchored forms without an invented damage drawing; completed regrowth restores original full trees, low seams and ore at the same contacts. Night is intentionally dim with lights off, without emissive crops or animal glow."
+    },
+    {
+      "page": "captures-props-011.png",
+      "sha256": "0c08811f6ffd2069fcfa96d81ae002f39ec1675c7a07b81ad1e6e412ba1839eb",
+      "decision": "accepted",
+      "note": "Opened every native/nearest 3x quadrant: dusk and cool night keep both crown variants intact with farmer/walker occlusion at -24,-8,+8,+24 determined by feet. Partial resource work preserves the existing intact anchored forms without an invented damage drawing; completed regrowth restores original full trees, low seams and ore at the same contacts. Night is intentionally dim with lights off, without emissive crops or animal glow."
+    },
+    {
+      "page": "captures-stations-000.png",
+      "sha256": "baa9aea783f6b98202e2965aeb205c16939ca04e4395b8d3f7ca6c695d76d798",
+      "decision": "accepted",
+      "note": "Opened native and exact nearest 3x: all six station silhouettes stay distinct at dusk/night: workshop tools/right furnace, kitchen broad oven, open upright press/lever, low engine/exhaust, striped open shop and round hoisted well. Idle/active/hurt share contacts and scale; damaged roof/facade details remain localized. Active night furnaces have warm localized light and generator a small cool indicator; idle/hurt stay ambient. Generator/kitchen/press farmer and walker views correctly cover rear bodies and draw front bodies above bases."
+    },
+    {
+      "page": "captures-stations-001.png",
+      "sha256": "236b803ed8f58d7e1a5fbfdb1f1ce066e87a7677d2cefec7c7a05706ae9223fc",
+      "decision": "accepted",
+      "note": "Opened native and exact nearest 3x: all six station silhouettes stay distinct at dusk/night: workshop tools/right furnace, kitchen broad oven, open upright press/lever, low engine/exhaust, striped open shop and round hoisted well. Idle/active/hurt share contacts and scale; damaged roof/facade details remain localized. Active night furnaces have warm localized light and generator a small cool indicator; idle/hurt stay ambient. Generator/kitchen/press farmer and walker views correctly cover rear bodies and draw front bodies above bases."
+    },
+    {
+      "page": "captures-stations-002.png",
+      "sha256": "ae1a1d73566d732b7f340163c64a9f45ab44f7fb676a1706085cfb8f4a74039f",
+      "decision": "accepted",
+      "note": "Opened native and exact nearest 3x: all six station silhouettes stay distinct at dusk/night: workshop tools/right furnace, kitchen broad oven, open upright press/lever, low engine/exhaust, striped open shop and round hoisted well. Idle/active/hurt share contacts and scale; damaged roof/facade details remain localized. Active night furnaces have warm localized light and generator a small cool indicator; idle/hurt stay ambient. Generator/kitchen/press farmer and walker views correctly cover rear bodies and draw front bodies above bases."
+    },
+    {
+      "page": "captures-stations-003.png",
+      "sha256": "2c4deb53c80b279f8af139328777bb1ccc24fe863f6b2f54e0bff2c80dd48092",
+      "decision": "accepted",
+      "note": "Opened native and exact nearest 3x: all six station silhouettes stay distinct at dusk/night: workshop tools/right furnace, kitchen broad oven, open upright press/lever, low engine/exhaust, striped open shop and round hoisted well. Idle/active/hurt share contacts and scale; damaged roof/facade details remain localized. Active night furnaces have warm localized light and generator a small cool indicator; idle/hurt stay ambient. Generator/kitchen/press farmer and walker views correctly cover rear bodies and draw front bodies above bases."
+    },
+    {
+      "page": "captures-stations-004.png",
+      "sha256": "304f9681ad7ad31174d665ae30d1e25cd0e7e660690cc6c01a8de7595dd86c87",
+      "decision": "accepted",
+      "note": "Opened native and exact nearest 3x: remaining press/shop/well/workshop farmer and walker rear/front pairs show correct occlusion of torso/boots by roofs, awning, press barrel and stone rim; foreground bodies cover the corresponding base. Stalled night stations have no false active lamp, while running damaged stations retain broken roof/facade silhouettes with lights at actual oven/indicator locations. Shop and well keep smaller stable canvases."
+    },
+    {
+      "page": "captures-stations-005.png",
+      "sha256": "9ae2ecc99e68dfc34bf86b61b6151ca3482a97d35873328ea982b4f3412e20f3",
+      "decision": "accepted",
+      "note": "Opened native and exact nearest 3x: remaining press/shop/well/workshop farmer and walker rear/front pairs show correct occlusion of torso/boots by roofs, awning, press barrel and stone rim; foreground bodies cover the corresponding base. Stalled night stations have no false active lamp, while running damaged stations retain broken roof/facade silhouettes with lights at actual oven/indicator locations. Shop and well keep smaller stable canvases."
+    },
+    {
+      "page": "captures-stations-006.png",
+      "sha256": "ce5d37c5b9435c94023078dfb1e1f532ecbf2d0dc8ec6fe10ed0b3bc4390e00c",
+      "decision": "accepted",
+      "note": "Opened native and exact nearest 3x: remaining press/shop/well/workshop farmer and walker rear/front pairs show correct occlusion of torso/boots by roofs, awning, press barrel and stone rim; foreground bodies cover the corresponding base. Stalled night stations have no false active lamp, while running damaged stations retain broken roof/facade silhouettes with lights at actual oven/indicator locations. Shop and well keep smaller stable canvases."
+    },
+    {
+      "page": "captures-stations-007.png",
+      "sha256": "4d825ae8667890c8442a897245a3e8ae5754813ef08bf5b4ef8408bf33bf7c18",
+      "decision": "accepted",
+      "note": "Opened native and exact nearest 3x: remaining press/shop/well/workshop farmer and walker rear/front pairs show correct occlusion of torso/boots by roofs, awning, press barrel and stone rim; foreground bodies cover the corresponding base. Stalled night stations have no false active lamp, while running damaged stations retain broken roof/facade silhouettes with lights at actual oven/indicator locations. Shop and well keep smaller stable canvases."
+    },
+    {
+      "page": "captures-reactions-000.png",
+      "sha256": "6dc3f46d1d4def0f070d9a49ac1ff70cc77d857d1f9edc3ba2e52fb5aa79824e",
+      "decision": "accepted",
+      "note": "Opened native and exact nearest 3x for all four reaction kinds at all map corners. Body retains natural viewport clipping with unchanged ground placement; separate warm exclamation/heart/note/question remains complete inside screen margins even when shifted away from its usual above-hat position. No duplicate glyph or opaque sprite rectangle is present; bottom/right edges preserve distinct glyph shape."
+    },
+    {
+      "page": "captures-reactions-001.png",
+      "sha256": "1e761fb3c49daa1c4d804758a5ef436e1c8714bcdff6fd28cbf367dcaf2fc973",
+      "decision": "accepted",
+      "note": "Opened native and exact nearest 3x for all four reaction kinds at all map corners. Body retains natural viewport clipping with unchanged ground placement; separate warm exclamation/heart/note/question remains complete inside screen margins even when shifted away from its usual above-hat position. No duplicate glyph or opaque sprite rectangle is present; bottom/right edges preserve distinct glyph shape."
+    },
+    {
+      "page": "captures-reactions-002.png",
+      "sha256": "efcc4a205539a19589c2f0db058621d421147d09f34dd3a4ea6daa88ba672323",
+      "decision": "accepted",
+      "note": "Opened native and exact nearest 3x for all four reaction kinds at all map corners. Body retains natural viewport clipping with unchanged ground placement; separate warm exclamation/heart/note/question remains complete inside screen margins even when shifted away from its usual above-hat position. No duplicate glyph or opaque sprite rectangle is present; bottom/right edges preserve distinct glyph shape."
+    },
+    {
+      "page": "captures-reactions-003.png",
+      "sha256": "309294390178bded3b12f0ffbf527e2956ff75b81f6805510c969502f07034b2",
+      "decision": "accepted",
+      "note": "Opened native and exact nearest 3x for all four reaction kinds at all map corners. Body retains natural viewport clipping with unchanged ground placement; separate warm exclamation/heart/note/question remains complete inside screen margins even when shifted away from its usual above-hat position. No duplicate glyph or opaque sprite rectangle is present; bottom/right edges preserve distinct glyph shape."
+    },
+    {
+      "page": "captures-reactions-004.png",
+      "sha256": "e11ac4610ca80da450864bd504619df1e93b3621e68c76236766ecf21da2b428",
+      "decision": "accepted",
+      "note": "Native and nearest 3x: crop note, fishing bang after work, night bang and destroyed-fence question appear once beside the hat; feet and shadow stay grounded. Expiry restores the prior west idle. Bang and heart retain their intentional south-facing reaction pose for all four incoming idle facings; warm dusk and cool unlit night preserve the glyph outline. Heart is a distinct red/cream shape, not the bang."
+    },
+    {
+      "page": "captures-reactions-005.png",
+      "sha256": "174579f08b8f99bb7e13f6192a35232b8e0ebec84ea7bf3ba7576d96fab2c7ac",
+      "decision": "accepted",
+      "note": "Native and nearest 3x: crop note, fishing bang after work, night bang and destroyed-fence question appear once beside the hat; feet and shadow stay grounded. Expiry restores the prior west idle. Bang and heart retain their intentional south-facing reaction pose for all four incoming idle facings; warm dusk and cool unlit night preserve the glyph outline. Heart is a distinct red/cream shape, not the bang."
+    },
+    {
+      "page": "captures-reactions-006.png",
+      "sha256": "184d93055a29348b72f91f21918a7f2f66b93bbbec51eda64931e7c534f0a56d",
+      "decision": "accepted",
+      "note": "Native and nearest 3x: crop note, fishing bang after work, night bang and destroyed-fence question appear once beside the hat; feet and shadow stay grounded. Expiry restores the prior west idle. Bang and heart retain their intentional south-facing reaction pose for all four incoming idle facings; warm dusk and cool unlit night preserve the glyph outline. Heart is a distinct red/cream shape, not the bang."
+    },
+    {
+      "page": "captures-reactions-007.png",
+      "sha256": "dff850998574c379ba75212ca0e45f10c0dac7abd468487881db7324c949527c",
+      "decision": "accepted",
+      "note": "Native and nearest 3x: crop note, fishing bang after work, night bang and destroyed-fence question appear once beside the hat; feet and shadow stay grounded. Expiry restores the prior west idle. Bang and heart retain their intentional south-facing reaction pose for all four incoming idle facings; warm dusk and cool unlit night preserve the glyph outline. Heart is a distinct red/cream shape, not the bang."
+    },
+    {
+      "page": "captures-reactions-008.png",
+      "sha256": "3391faa0e363383d697bad1f70de541905afaed78608e9f70a7004e3dc6c6b23",
+      "decision": "accepted",
+      "note": "Native and nearest 3x: night heart remains separate from the hat. Musical note has a clear stem and head; question has a curved head and separate dot. All incoming facings use the accepted south reaction body with identical boots and contact point. Day/dusk/night glyph placement stays stable. Separate contact shadow remains compact under the farmer, walker and tree; split bang renderer matches the authored combined sprite without duplicate glyph or rectangle."
+    },
+    {
+      "page": "captures-reactions-009.png",
+      "sha256": "e78e35f43836383b411c478cea4efea10e410758ea4ccdd50a8c5ed8e5ec3631",
+      "decision": "accepted",
+      "note": "Native and nearest 3x: night heart remains separate from the hat. Musical note has a clear stem and head; question has a curved head and separate dot. All incoming facings use the accepted south reaction body with identical boots and contact point. Day/dusk/night glyph placement stays stable. Separate contact shadow remains compact under the farmer, walker and tree; split bang renderer matches the authored combined sprite without duplicate glyph or rectangle."
+    },
+    {
+      "page": "captures-reactions-010.png",
+      "sha256": "0d70ee03bd26ee1a26d06eb2a8bcd8a170432b59f117fee6468394ad28fe1819",
+      "decision": "accepted",
+      "note": "Native and nearest 3x: night heart remains separate from the hat. Musical note has a clear stem and head; question has a curved head and separate dot. All incoming facings use the accepted south reaction body with identical boots and contact point. Day/dusk/night glyph placement stays stable. Separate contact shadow remains compact under the farmer, walker and tree; split bang renderer matches the authored combined sprite without duplicate glyph or rectangle."
+    },
+    {
+      "page": "captures-reactions-011.png",
+      "sha256": "39ca2894c6841f16a67a2a5ff71b0425c99a799484b6e5ec15f9d3c4c081a65e",
+      "decision": "accepted",
+      "note": "Native and nearest 3x: night heart remains separate from the hat. Musical note has a clear stem and head; question has a curved head and separate dot. All incoming facings use the accepted south reaction body with identical boots and contact point. Day/dusk/night glyph placement stays stable. Separate contact shadow remains compact under the farmer, walker and tree; split bang renderer matches the authored combined sprite without duplicate glyph or rectangle."
+    },
+    {
+      "page": "captures-reactions-012.png",
+      "sha256": "ed229426dc34e6600ed1fc43e71e8ac95d956736cf66980ee5a8b693d22fdcb8",
+      "decision": "accepted",
+      "note": "Native and nearest 3x: split heart, note and question match their combined authored sprites at the same feet; moving east suppresses the reaction. Chop, collect, craft, fish, harvest, mine, plant, reel, repair, till, trade and water display their work body/tools with no reaction glyph. Tree and furnace correctly occlude the rear actor while exposed axe, pick, rod and hoe silhouettes stay readable."
+    },
+    {
+      "page": "captures-reactions-013.png",
+      "sha256": "4d8ef4071e9b5fd734ed4d2a4186ee5016eb015d5868c6208fac3f8b67730b82",
+      "decision": "accepted",
+      "note": "Native and nearest 3x: split heart, note and question match their combined authored sprites at the same feet; moving east suppresses the reaction. Chop, collect, craft, fish, harvest, mine, plant, reel, repair, till, trade and water display their work body/tools with no reaction glyph. Tree and furnace correctly occlude the rear actor while exposed axe, pick, rod and hoe silhouettes stay readable."
+    },
+    {
+      "page": "captures-reactions-014.png",
+      "sha256": "3733593c8194681c71bc42ae0936442cd3eb4eed743ad7e82de427fd15aa7604",
+      "decision": "accepted",
+      "note": "Native and nearest 3x: split heart, note and question match their combined authored sprites at the same feet; moving east suppresses the reaction. Chop, collect, craft, fish, harvest, mine, plant, reel, repair, till, trade and water display their work body/tools with no reaction glyph. Tree and furnace correctly occlude the rear actor while exposed axe, pick, rod and hoe silhouettes stay readable."
+    },
+    {
+      "page": "captures-reactions-015.png",
+      "sha256": "e60bed8451ef179691a87ae667ce95ec05d7ae0fabeb5733c42de858f0d7e301",
+      "decision": "accepted",
+      "note": "Native and nearest 3x: split heart, note and question match their combined authored sprites at the same feet; moving east suppresses the reaction. Chop, collect, craft, fish, harvest, mine, plant, reel, repair, till, trade and water display their work body/tools with no reaction glyph. Tree and furnace correctly occlude the rear actor while exposed axe, pick, rod and hoe silhouettes stay readable."
+    },
+    {
+      "page": "captures-work-000.png",
+      "sha256": "5fd21f70fbd6bb9d94b66c7d0af1cc8f40101bbff36870094f6e65812a18d513",
+      "decision": "accepted",
+      "note": "Carry, all four facings and frames, native/3x: small brown crate is held at the chest and follows the arm bob while the boots stay planted. South uses the accepted side gesture; west is partly behind the furnace, north fully behind its continuous roof, east mirrors the exposed gesture with the crate toward the station. Occlusion is scene depth, not a missing sprite; no frame edge or transparent rectangle is visible."
+    },
+    {
+      "page": "captures-work-001.png",
+      "sha256": "20afe9c7683a4be35f687a7d59b1942a62c3b9f6f67d3224dfe0a850c1bf1e5e",
+      "decision": "accepted",
+      "note": "Carry, all four facings and frames, native/3x: small brown crate is held at the chest and follows the arm bob while the boots stay planted. South uses the accepted side gesture; west is partly behind the furnace, north fully behind its continuous roof, east mirrors the exposed gesture with the crate toward the station. Occlusion is scene depth, not a missing sprite; no frame edge or transparent rectangle is visible."
+    },
+    {
+      "page": "captures-work-002.png",
+      "sha256": "6dcfc10ab9f72688f5e6dbe6e19d243c8e3ba8d1f66d3508668d14ad69310a51",
+      "decision": "accepted",
+      "note": "Carry, all four facings and frames, native/3x: small brown crate is held at the chest and follows the arm bob while the boots stay planted. South uses the accepted side gesture; west is partly behind the furnace, north fully behind its continuous roof, east mirrors the exposed gesture with the crate toward the station. Occlusion is scene depth, not a missing sprite; no frame edge or transparent rectangle is visible."
+    },
+    {
+      "page": "captures-work-003.png",
+      "sha256": "92ae984fab941c89bf8c6d33005a4f3ef501d859d227d3d373d40b97bf96bd78",
+      "decision": "accepted",
+      "note": "Carry, all four facings and frames, native/3x: small brown crate is held at the chest and follows the arm bob while the boots stay planted. South uses the accepted side gesture; west is partly behind the furnace, north fully behind its continuous roof, east mirrors the exposed gesture with the crate toward the station. Occlusion is scene depth, not a missing sprite; no frame edge or transparent rectangle is visible."
+    },
+    {
+      "page": "captures-work-004.png",
+      "sha256": "e2defb0dbb8b7c8439101846f2bbc6bc623499d2aaa297175b62d48e1073f5b7",
+      "decision": "accepted",
+      "note": "Chop, all facings/four phases at native/3x: axe raises above the hat, lowers at contact, follows through low and recovers. West/east bodies lean with planted boots beside the trunk; east mirrors the blade. South behind the canopy exposes hat and raised blade only, north in front exposes the whole accepted side gesture. The canopy properly hides rear tool/body pixels, without seams or detached blade pixels."
+    },
+    {
+      "page": "captures-work-005.png",
+      "sha256": "1fe9c63bb0857aa3393260ce33dfde8d4e31d1add493f5519f407a7132b0d6e8",
+      "decision": "accepted",
+      "note": "Chop, all facings/four phases at native/3x: axe raises above the hat, lowers at contact, follows through low and recovers. West/east bodies lean with planted boots beside the trunk; east mirrors the blade. South behind the canopy exposes hat and raised blade only, north in front exposes the whole accepted side gesture. The canopy properly hides rear tool/body pixels, without seams or detached blade pixels."
+    },
+    {
+      "page": "captures-work-006.png",
+      "sha256": "2de6823f9c5c1c14b005601d7c940450f0efa10df76be094a90d0d3211471af5",
+      "decision": "accepted",
+      "note": "Chop, all facings/four phases at native/3x: axe raises above the hat, lowers at contact, follows through low and recovers. West/east bodies lean with planted boots beside the trunk; east mirrors the blade. South behind the canopy exposes hat and raised blade only, north in front exposes the whole accepted side gesture. The canopy properly hides rear tool/body pixels, without seams or detached blade pixels."
+    },
+    {
+      "page": "captures-work-007.png",
+      "sha256": "b422c0aba47fa6040ba017c3fb5a1aca0f3573475e0bb16e346e970392e2300e",
+      "decision": "accepted",
+      "note": "Chop, all facings/four phases at native/3x: axe raises above the hat, lowers at contact, follows through low and recovers. West/east bodies lean with planted boots beside the trunk; east mirrors the blade. South behind the canopy exposes hat and raised blade only, north in front exposes the whole accepted side gesture. The canopy properly hides rear tool/body pixels, without seams or detached blade pixels."
+    },
+    {
+      "page": "captures-work-008.png",
+      "sha256": "347f58477a513d0b80346381ba9e10b8c636c901e880f73cc4fbf0ff8b698237",
+      "decision": "accepted",
+      "note": "Collect, all facings/four phases at native/3x: standing anticipation changes to bent knees/reaching hands, then a gray pail appears beside the leg and remains in recovery. East mirrors reach/pail correctly. Cow black/cream silhouette stays anchored and separate in side views; north actor depth covers the cow with a small patch showing behind the hat. No boot jump, tool clipping or reaction overlay."
+    },
+    {
+      "page": "captures-work-009.png",
+      "sha256": "1a0d108f05fbcc65b21c36bee8cbdf6f005038551808217e81c8efdbe72e5002",
+      "decision": "accepted",
+      "note": "Collect, all facings/four phases at native/3x: standing anticipation changes to bent knees/reaching hands, then a gray pail appears beside the leg and remains in recovery. East mirrors reach/pail correctly. Cow black/cream silhouette stays anchored and separate in side views; north actor depth covers the cow with a small patch showing behind the hat. No boot jump, tool clipping or reaction overlay."
+    },
+    {
+      "page": "captures-work-010.png",
+      "sha256": "ba3556c5b0963f0668e5c6ad2b4266a30f5a69e5e251d97a0390d28a1c7a7089",
+      "decision": "accepted",
+      "note": "Collect, all facings/four phases at native/3x: standing anticipation changes to bent knees/reaching hands, then a gray pail appears beside the leg and remains in recovery. East mirrors reach/pail correctly. Cow black/cream silhouette stays anchored and separate in side views; north actor depth covers the cow with a small patch showing behind the hat. No boot jump, tool clipping or reaction overlay."
+    },
+    {
+      "page": "captures-work-011.png",
+      "sha256": "08af73cf9a015edb2e818f8fa3dcebdd401b234e511c1551987851c59f2bdf7f",
+      "decision": "accepted",
+      "note": "Collect, all facings/four phases at native/3x: standing anticipation changes to bent knees/reaching hands, then a gray pail appears beside the leg and remains in recovery. East mirrors reach/pail correctly. Cow black/cream silhouette stays anchored and separate in side views; north actor depth covers the cow with a small patch showing behind the hat. No boot jump, tool clipping or reaction overlay."
+    },
+    {
+      "page": "captures-work-012.png",
+      "sha256": "e513da9022c6cd61d0bf704fe9c46d002023dad3079ce23f0bfb946f6181165a",
+      "decision": "accepted",
+      "note": "Craft, all facings/four phases at native/3x: small chest-height hand motion extends and withdraws, with consistent hat/overalls/boots and no external tool. West head peeks above the furnace; north is hidden by the roof; east mirrors the hand gesture beside the roof edge. South is the accepted side gesture. The continuous roof and correct body occlusion remain intact in every phase."
+    },
+    {
+      "page": "captures-work-013.png",
+      "sha256": "17adf440ea3ae5c552e08bafcc0fe534d69bb3bd78458aa54c8721d39b28eb9d",
+      "decision": "accepted",
+      "note": "Craft, all facings/four phases at native/3x: small chest-height hand motion extends and withdraws, with consistent hat/overalls/boots and no external tool. West head peeks above the furnace; north is hidden by the roof; east mirrors the hand gesture beside the roof edge. South is the accepted side gesture. The continuous roof and correct body occlusion remain intact in every phase."
+    },
+    {
+      "page": "captures-work-014.png",
+      "sha256": "48a098f6195fc368751ace26591bf0c35852221b96a2fb30f9a072801373c42a",
+      "decision": "accepted",
+      "note": "Craft, all facings/four phases at native/3x: small chest-height hand motion extends and withdraws, with consistent hat/overalls/boots and no external tool. West head peeks above the furnace; north is hidden by the roof; east mirrors the hand gesture beside the roof edge. South is the accepted side gesture. The continuous roof and correct body occlusion remain intact in every phase."
+    },
+    {
+      "page": "captures-work-015.png",
+      "sha256": "218b728f4ca8fa80ab5ba5c2ced567bba0106bfa81770a8c922d1c7d41030811",
+      "decision": "accepted",
+      "note": "Craft, all facings/four phases at native/3x: small chest-height hand motion extends and withdraws, with consistent hat/overalls/boots and no external tool. West head peeks above the furnace; north is hidden by the roof; east mirrors the hand gesture beside the roof edge. South is the accepted side gesture. The continuous roof and correct body occlusion remain intact in every phase."
+    },
+    {
+      "page": "captures-work-016.png",
+      "sha256": "d250e3bd3f18a2fe177334b61be09c3e1e0e280932abec3c12c54a76a1058b63",
+      "decision": "accepted",
+      "note": "Fish: all four phases show a connected compact rod, raised anticipation/contact, low follow-through and raised recovery, with planted feet and unchanged hat/body scale. South/north intentionally reuse the accepted side gesture; east mirrors west. The one-cell water target changes side with facing; no alpha box or detached tool."
+    },
+    {
+      "page": "captures-work-017.png",
+      "sha256": "d06d9f2b154c2c2287c076ae7e3a350c860947c488a43f71f7c61f3d275a28f2",
+      "decision": "accepted",
+      "note": "Fish: all four phases show a connected compact rod, raised anticipation/contact, low follow-through and raised recovery, with planted feet and unchanged hat/body scale. South/north intentionally reuse the accepted side gesture; east mirrors west. The one-cell water target changes side with facing; no alpha box or detached tool."
+    },
+    {
+      "page": "captures-work-018.png",
+      "sha256": "1eefbf1f1a79cab251aa920fb95a00610c704e3c181c3d297fcfb3eea8b872cb",
+      "decision": "accepted",
+      "note": "Fish: all four phases show a connected compact rod, raised anticipation/contact, low follow-through and raised recovery, with planted feet and unchanged hat/body scale. South/north intentionally reuse the accepted side gesture; east mirrors west. The one-cell water target changes side with facing; no alpha box or detached tool."
+    },
+    {
+      "page": "captures-work-019.png",
+      "sha256": "52928a4c998ed753cbed86fc6144b7ca23d8c02d1ac28b895df5df14cb37bc55",
+      "decision": "accepted",
+      "note": "Fish: all four phases show a connected compact rod, raised anticipation/contact, low follow-through and raised recovery, with planted feet and unchanged hat/body scale. South/north intentionally reuse the accepted side gesture; east mirrors west. The one-cell water target changes side with facing; no alpha box or detached tool."
+    },
+    {
+      "page": "captures-work-020.png",
+      "sha256": "c80596ab9ab9ffd442d06aa1f9cf4945c65c9590509440f1ffb1ff2892630fca",
+      "decision": "accepted",
+      "note": "Harvest: standing anticipation bends into a low gather, then lifts the ochre sheaf and recovers upright. Only the target foliage disappears on core completion; joined soil remains. Four facings keep stable ground contact and the same hat/body scale, with the accepted side-on north/south and mirrored east. Hands and produce stay connected without opaque margins."
+    },
+    {
+      "page": "captures-work-021.png",
+      "sha256": "37aedec5bb469a4c6f3fc38198d707436f0dd0f7b0f310bd53f95c9a8a9ba138",
+      "decision": "accepted",
+      "note": "Harvest: standing anticipation bends into a low gather, then lifts the ochre sheaf and recovers upright. Only the target foliage disappears on core completion; joined soil remains. Four facings keep stable ground contact and the same hat/body scale, with the accepted side-on north/south and mirrored east. Hands and produce stay connected without opaque margins."
+    },
+    {
+      "page": "captures-work-022.png",
+      "sha256": "e0a96241ba3b14f59a8a6482125a5d568bcf91d62b56c171f4194d8c484774bf",
+      "decision": "accepted",
+      "note": "Harvest: standing anticipation bends into a low gather, then lifts the ochre sheaf and recovers upright. Only the target foliage disappears on core completion; joined soil remains. Four facings keep stable ground contact and the same hat/body scale, with the accepted side-on north/south and mirrored east. Hands and produce stay connected without opaque margins."
+    },
+    {
+      "page": "captures-work-023.png",
+      "sha256": "d35c0802142609aa593d6dcee8c2dd335c12072fa712d12c40ec0c3728f98e97",
+      "decision": "accepted",
+      "note": "Harvest: standing anticipation bends into a low gather, then lifts the ochre sheaf and recovers upright. Only the target foliage disappears on core completion; joined soil remains. Four facings keep stable ground contact and the same hat/body scale, with the accepted side-on north/south and mirrored east. Hands and produce stay connected without opaque margins."
+    },
+    {
+      "page": "captures-work-024.png",
+      "sha256": "8f18061624f85079317371480fadc713f1b4bb29551e4d54d86d6a7f3ce0d022",
+      "decision": "accepted",
+      "note": "Mine: a distinct narrow two-ended gray pick rises above the hat, drops to a crouched contact, extends low and returns overhead. Boots stay planted and the stone target retains its anchored layered form while damaged rather than vanishing prematurely. West/east align the tool toward the neighboring rock; north/south retain the documented side gesture. No clipped blade or changing body scale."
+    },
+    {
+      "page": "captures-work-025.png",
+      "sha256": "ec463cdad66c524928d5dfa38629f1ae3c10493f98fc437a4b6776db40d404e8",
+      "decision": "accepted",
+      "note": "Mine: a distinct narrow two-ended gray pick rises above the hat, drops to a crouched contact, extends low and returns overhead. Boots stay planted and the stone target retains its anchored layered form while damaged rather than vanishing prematurely. West/east align the tool toward the neighboring rock; north/south retain the documented side gesture. No clipped blade or changing body scale."
+    },
+    {
+      "page": "captures-work-026.png",
+      "sha256": "341afb135b7d5709040a34faf6c24d8e30c3cd64684030ea7a5ab259ac66b122",
+      "decision": "accepted",
+      "note": "Mine: a distinct narrow two-ended gray pick rises above the hat, drops to a crouched contact, extends low and returns overhead. Boots stay planted and the stone target retains its anchored layered form while damaged rather than vanishing prematurely. West/east align the tool toward the neighboring rock; north/south retain the documented side gesture. No clipped blade or changing body scale."
+    },
+    {
+      "page": "captures-work-027.png",
+      "sha256": "bdb4adb4f1318ea5497f92ba75c0d75666c21f4fa64ceff358d735361e037552",
+      "decision": "accepted",
+      "note": "Mine: a distinct narrow two-ended gray pick rises above the hat, drops to a crouched contact, extends low and returns overhead. Boots stay planted and the stone target retains its anchored layered form while damaged rather than vanishing prematurely. West/east align the tool toward the neighboring rock; north/south retain the documented side gesture. No clipped blade or changing body scale."
+    },
+    {
+      "page": "captures-work-028.png",
+      "sha256": "505f415f8b96aef1c6cfd11106ed9f8de590849132df959966e0c52bbc32c550",
+      "decision": "accepted",
+      "note": "Plant: a small hand-held seed preparation changes into forward sowing, low follow-through and standing recovery without changing the boot anchor. Soil stays under the gesture and the newly planted stage remains deliberately tiny rather than looking mature. Four facings preserve the authored side gesture/mirror contract; silhouette, pale hands and hat remain readable at native size."
+    },
+    {
+      "page": "captures-work-029.png",
+      "sha256": "56900021e5bc3816c1d47347a0c88c04b325e9322ddf8f99de98a8125ac65234",
+      "decision": "accepted",
+      "note": "Plant: a small hand-held seed preparation changes into forward sowing, low follow-through and standing recovery without changing the boot anchor. Soil stays under the gesture and the newly planted stage remains deliberately tiny rather than looking mature. Four facings preserve the authored side gesture/mirror contract; silhouette, pale hands and hat remain readable at native size."
+    },
+    {
+      "page": "captures-work-030.png",
+      "sha256": "a8b4e79d40ec41ed49c34b63b90ce728d640a45ce3838c0c1751971fc59da0fa",
+      "decision": "accepted",
+      "note": "Plant: a small hand-held seed preparation changes into forward sowing, low follow-through and standing recovery without changing the boot anchor. Soil stays under the gesture and the newly planted stage remains deliberately tiny rather than looking mature. Four facings preserve the authored side gesture/mirror contract; silhouette, pale hands and hat remain readable at native size."
+    },
+    {
+      "page": "captures-work-031.png",
+      "sha256": "b2752dc7234a1a1b4af5173c7a8acc724f801fc70121eff0b149f8e9b40fc001",
+      "decision": "accepted",
+      "note": "Plant: a small hand-held seed preparation changes into forward sowing, low follow-through and standing recovery without changing the boot anchor. Soil stays under the gesture and the newly planted stage remains deliberately tiny rather than looking mature. Four facings preserve the authored side gesture/mirror contract; silhouette, pale hands and hat remain readable at native size."
+    },
+    {
+      "page": "captures-work-032.png",
+      "sha256": "2a4ff9c9c29506d164be0b0426cd969528b11c6a8882a48ac386e231200784a1",
+      "decision": "accepted",
+      "note": "Reel: the long diagonal rod remains connected through subtle arm/reel changes in contact and recovery; returned ready pose retains the rod by design. Feet, body scale and water cell stay fixed. North/south use the accepted side gesture and east mirrors west; all four frames render without clipping. Motion is intentionally smaller than the casting/fish cycle."
+    },
+    {
+      "page": "captures-work-033.png",
+      "sha256": "1ff73f7eec68a49f089c5a5fb6e37b58085d24542ddba3b834692ef8c8583bca",
+      "decision": "accepted",
+      "note": "Reel: the long diagonal rod remains connected through subtle arm/reel changes in contact and recovery; returned ready pose retains the rod by design. Feet, body scale and water cell stay fixed. North/south use the accepted side gesture and east mirrors west; all four frames render without clipping. Motion is intentionally smaller than the casting/fish cycle."
+    },
+    {
+      "page": "captures-work-034.png",
+      "sha256": "1f50a86f502e7340321f477b8a025cb665871901b9ec9ea294c460167dbb661f",
+      "decision": "accepted",
+      "note": "Reel: the long diagonal rod remains connected through subtle arm/reel changes in contact and recovery; returned ready pose retains the rod by design. Feet, body scale and water cell stay fixed. North/south use the accepted side gesture and east mirrors west; all four frames render without clipping. Motion is intentionally smaller than the casting/fish cycle."
+    },
+    {
+      "page": "captures-work-035.png",
+      "sha256": "fc10b46c1777704bb83db407710a60e664b5a8fdfaff095c55015cf6adce155e",
+      "decision": "accepted",
+      "note": "Reel: the long diagonal rod remains connected through subtle arm/reel changes in contact and recovery; returned ready pose retains the rod by design. Feet, body scale and water cell stay fixed. North/south use the accepted side gesture and east mirrors west; all four frames render without clipping. Motion is intentionally smaller than the casting/fish cycle."
+    },
+    {
+      "page": "captures-work-036.png",
+      "sha256": "6a2b1df32468045f1ce45c51a9d1c8b8fb3bb6a816efe88afaaeda85b61f3072",
+      "decision": "accepted",
+      "note": "Repair: compact gray hammer lifts near the shoulder, reaches forward for contact, dips and recovers. Ground contact stays fixed across the short three-tick core repair. The small damaged fence post is correctly behind/in front according to facing and is not a missing actor texture. Four distinct poses remain in the same scale/canvas; east is mirrored and north/south retain the accepted side gesture."
+    },
+    {
+      "page": "captures-work-037.png",
+      "sha256": "0e7a19086217491705a2ec5b20f051c9cbc53398b52b1a6ea5af7baf4241f9b0",
+      "decision": "accepted",
+      "note": "Repair: compact gray hammer lifts near the shoulder, reaches forward for contact, dips and recovers. Ground contact stays fixed across the short three-tick core repair. The small damaged fence post is correctly behind/in front according to facing and is not a missing actor texture. Four distinct poses remain in the same scale/canvas; east is mirrored and north/south retain the accepted side gesture."
+    },
+    {
+      "page": "captures-work-038.png",
+      "sha256": "f9ff64566d0936afdef6dac613951b787366d498973c831a7cbe9419d224520d",
+      "decision": "accepted",
+      "note": "Repair: compact gray hammer lifts near the shoulder, reaches forward for contact, dips and recovers. Ground contact stays fixed across the short three-tick core repair. The small damaged fence post is correctly behind/in front according to facing and is not a missing actor texture. Four distinct poses remain in the same scale/canvas; east is mirrored and north/south retain the accepted side gesture."
+    },
+    {
+      "page": "captures-work-039.png",
+      "sha256": "a61c43fd61702dcca82ed408fde62199e7adfaeec65f2c4dc37784414b3aac2c",
+      "decision": "accepted",
+      "note": "Repair: compact gray hammer lifts near the shoulder, reaches forward for contact, dips and recovers. Ground contact stays fixed across the short three-tick core repair. The small damaged fence post is correctly behind/in front according to facing and is not a missing actor texture. Four distinct poses remain in the same scale/canvas; east is mirrored and north/south retain the accepted side gesture."
+    },
+    {
+      "page": "captures-work-040.png",
+      "sha256": "88049e8b2c98b5a6569e121f6b7a3975d161ad43ab80bcab198dac620e9302f0",
+      "decision": "accepted",
+      "note": "Opened native and nearest 3x: till raises the gray hoe, lowers it for contact and follow-through, then recovers without moving the feet. The correct adjacent soil cell gains joined furrows. West/east gestures aim toward the cell; north/south retain accepted lateral gestures. No detached tool or alpha box."
+    },
+    {
+      "page": "captures-work-041.png",
+      "sha256": "87c657b621f34562d2ce7780b5085510c2781007501e138c8b70a86038542467",
+      "decision": "accepted",
+      "note": "Opened native and nearest 3x: till raises the gray hoe, lowers it for contact and follow-through, then recovers without moving the feet. The correct adjacent soil cell gains joined furrows. West/east gestures aim toward the cell; north/south retain accepted lateral gestures. No detached tool or alpha box."
+    },
+    {
+      "page": "captures-work-042.png",
+      "sha256": "236df5802a45065dfc2b90fca1d1aa437738e4992b37629f7259feb12798ae19",
+      "decision": "accepted",
+      "note": "Opened native and nearest 3x: till raises the gray hoe, lowers it for contact and follow-through, then recovers without moving the feet. The correct adjacent soil cell gains joined furrows. West/east gestures aim toward the cell; north/south retain accepted lateral gestures. No detached tool or alpha box."
+    },
+    {
+      "page": "captures-work-043.png",
+      "sha256": "dd6a11b29e089d0d1ddd09130cf8ecdacab516885e78b98a937f3c96ec2d0511",
+      "decision": "accepted",
+      "note": "Opened native and nearest 3x: till raises the gray hoe, lowers it for contact and follow-through, then recovers without moving the feet. The correct adjacent soil cell gains joined furrows. West/east gestures aim toward the cell; north/south retain accepted lateral gestures. No detached tool or alpha box."
+    },
+    {
+      "page": "captures-work-044.png",
+      "sha256": "d3c4bdcbaf8ef8342b8686b4412ff4c2705bc028f0c960379636b55d4ebd087a",
+      "decision": "accepted",
+      "note": "Opened native and nearest 3x: trade keeps hat and feet fixed with a compact reach/withdraw hand gesture. South body/hands are naturally occluded by the shop awning; west/east remain beside the counter and north in front. Four core-selected frames render with correct depth and no opaque backing. Trade is immediate, so frame zero is returned ready pose, not anticipation."
+    },
+    {
+      "page": "captures-work-045.png",
+      "sha256": "78fcdbf48fe578cda59960524227047f58a5a05f5a84dc366aa1fa430a44ea75",
+      "decision": "accepted",
+      "note": "Opened native and nearest 3x: trade keeps hat and feet fixed with a compact reach/withdraw hand gesture. South body/hands are naturally occluded by the shop awning; west/east remain beside the counter and north in front. Four core-selected frames render with correct depth and no opaque backing. Trade is immediate, so frame zero is returned ready pose, not anticipation."
+    },
+    {
+      "page": "captures-work-046.png",
+      "sha256": "6799b094abd3816e955a4a24d2e89b1637408de41c9d40eef5bb4cead0a69629",
+      "decision": "accepted",
+      "note": "Opened native and nearest 3x: trade keeps hat and feet fixed with a compact reach/withdraw hand gesture. South body/hands are naturally occluded by the shop awning; west/east remain beside the counter and north in front. Four core-selected frames render with correct depth and no opaque backing. Trade is immediate, so frame zero is returned ready pose, not anticipation."
+    },
+    {
+      "page": "captures-work-047.png",
+      "sha256": "f9fb933077924a90f152212d2f4fef9945ad454ee45ad92fdcf1b952eae98095",
+      "decision": "accepted",
+      "note": "Opened native and nearest 3x: trade keeps hat and feet fixed with a compact reach/withdraw hand gesture. South body/hands are naturally occluded by the shop awning; west/east remain beside the counter and north in front. Four core-selected frames render with correct depth and no opaque backing. Trade is immediate, so frame zero is returned ready pose, not anticipation."
+    },
+    {
+      "page": "captures-work-048.png",
+      "sha256": "25d35607306c74e62ee9ce8f7ac6df2ab0d88505d5a89241af6110fe1dd2491f",
+      "decision": "accepted",
+      "note": "Opened native and nearest 3x: blue-gray watering can moves from waist to forward/down pour and returns, with fixed feet and intact hat/body outline. West/east spout follows the adjacent wet soil; north/south use accepted lateral gestures. No alpha rectangle or tool jump. Immediate core action means frame zero is returned ready pose."
+    },
+    {
+      "page": "captures-work-049.png",
+      "sha256": "3ebbb38d1a7087937fcb9b77b7e0b1335628ba799b47e46da3b3ed136e944962",
+      "decision": "accepted",
+      "note": "Opened native and nearest 3x: blue-gray watering can moves from waist to forward/down pour and returns, with fixed feet and intact hat/body outline. West/east spout follows the adjacent wet soil; north/south use accepted lateral gestures. No alpha rectangle or tool jump. Immediate core action means frame zero is returned ready pose."
+    },
+    {
+      "page": "captures-work-050.png",
+      "sha256": "fbfa989c4a1d8e60910ba1983ef9838ecad030043d7060ac6bd72e201c7a60df",
+      "decision": "accepted",
+      "note": "Opened native and nearest 3x: blue-gray watering can moves from waist to forward/down pour and returns, with fixed feet and intact hat/body outline. West/east spout follows the adjacent wet soil; north/south use accepted lateral gestures. No alpha rectangle or tool jump. Immediate core action means frame zero is returned ready pose."
+    },
+    {
+      "page": "captures-work-051.png",
+      "sha256": "a35195adc68c3b33bc43c624413d024fa3d344e762adf4ccefcc8bda9ce75059",
+      "decision": "accepted",
+      "note": "Opened native and nearest 3x: blue-gray watering can moves from waist to forward/down pour and returns, with fixed feet and intact hat/body outline. West/east spout follows the adjacent wet soil; north/south use accepted lateral gestures. No alpha rectangle or tool jump. Immediate core action means frame zero is returned ready pose."
+    }
+  ]
+}

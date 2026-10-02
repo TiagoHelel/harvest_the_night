@@ -1,6 +1,6 @@
 # 0020 - Whole-game visual review and deliverable catalogue
 
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0019
 - **Likely files:** implementation/sprites/PROGRESS.md; implementation/sprites/DELIVERY.md (new); src/tools/shot.gd; docs/PLAYTEST.md
 - **Generation briefs:** CORRECTION only for assets failing review

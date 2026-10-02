@@ -1308,3 +1308,79 @@ recorded in review, outside this atmosphere task.
 
 Queue after completion: 19 done, 1 todo, zero doing/blocked. Next: 0020 final audit.
 Exactly one task closes this cycle; the longer goal remains active through 0020.
+
+## 0020 - Complete native visual review and delivery catalogue - 2026-10-02
+
+Closed the final sprite task against all twenty original prompt requirements.
+Preserved completed art: zero ImageGen calls, revisions, new masters or replaced
+runtime PNGs in this cycle. The 468 PNGs, 447 raster entries, accepted raw sources,
+prior prompts and deterministic recipes remain byte-identical to `c03c169`.
+Core, project resolution, grid, collision, save formats, balance, original owner
+sheet/reference and planning sim/data baselines remain unchanged.
+
+The final catalogue records every output's owner, SHA-256, native canvas, visible
+bounds, pivot, animation frame/timing, source/prompt lineage, emission points and
+compatibility role. Ownership is 447 raster / 21 ASCII / zero owner-sheet. All
+sixteen enemy compatibility aliases equal their canonical authored frames.
+The unused legacy actors/placeholder.png has no src/scenes reference; all required
+runtime families have real textures. DELIVERY.md links sources, nineteen native
+contact sheets with their nearest-3x pairs, reproduction commands and limits.
+README and PLAYTEST now describe the playable raster-art project.
+
+Two complete offline import/generate/cut cycles in a completely clean managed
+checkout of `c03c169` preserved all 1,283 tracked art/source/generated-metadata
+files. Both cycles wrote zero outputs and left Git clean. clean-rebuild.json
+records command output and every file hash. The temporary worktree is archived.
+Final audit compares all these current bytes, rather than only runtime PNGs.
+
+Captured 890 actual 480x270 images through 25 sequential renderer runs covering
+every production family, dense beds, all work verbs/facings, structure levels and
+states, mixed waves, Giant and deaths, localized effects, real menus, both locales,
+themes and accessibility. All 648 new/changed views were opened at native and exact
+nearest 3x on 167 pages. All 38 runtime contact pages were also opened. The hashed
+visual-review.json ledger has 205/205 accepted pages, zero pending. The remaining
+242 views have exact decoded pixel matches to earlier accepted views; reused-review
+proves each prior capture remains committed-byte exact and resolves to its saved
+native/3x index and review journal. No changed view reuses prior acceptance.
+
+The work fixture now covers thirteen four-frame gestures in all four gameplay
+facings (208 captures), instead of west/east only. North/south preserve accepted
+lateral gestures; east mirrors west. The automatic water fixture now waits for
+six actual phase changes with a 12s failure bound; the original 3.8s window caught
+only five on the loaded renderer. Its failure log/trace are retained. Production
+550ms timing is unchanged; the final A/B/C/A/B/C trace takes 4.409s/136 frames
+with three unique phases and identical serialized state. These two fixture changes
+were included in the final full verification; no runtime/view code changed later.
+
+Actual renderer checks: placement 542; locomotion 540; work 7,813; reactions 828;
+terrain 19,669; water 2,288; props 8,643; crops 9,248; house 1,193; stations 3,956;
+towers 1,356; barriers 3,353; enemies 2,040; Giant 2,530; effects 3,156; UI 10,548;
+atmosphere 300. All zero failed. Capture commands restore their isolated settings
+and save state; no new gameplay event or rule is introduced for animation.
+
+Final full tools/verify.py: 52 passed, zero skipped/failed in 431s with the user's
+Godot 4.7.1. All 115 scripts parse, 6,646 rule assertions and 982 input cases pass;
+Windows/Web exports pass in 35.6s. Sim `1961000123`, data `407837701`, unchanged.
+The 300s soft verification target is exceeded without a failed gate. Runtime perf
+passes: night tick 549us/8,333us, path rebuild 4,260us/33,333us. Captured 100-actor
+FX stress uses 24 raster slots within the 420 shared limit; 240 samples give
+CPU view p95 532us/16,000us with unchanged state. No GPU cost claim is made.
+
+Concrete criterion decisions and the complete original requirement audit are in
+reviews/0020/REVIEW.md and requirements-coverage.json. completion-audit.json proves
+all native capture/page pixels, hashed visual decisions, prior-review reuse,
+catalogue ownership/source/prompt hashes, exact aliases, clean reproduction and
+core/reference preservation. Evidence: implementation/shots/sprites/0020/,
+reviews/0020/verify.log, capture-runs.json, capture-index.json, catalogue.json,
+visual-review.json, reused-review.json and clean-rebuild.json.
+
+Known limits remain explicit: static trees/animals/banks/crop stages, side-on work,
+horizontal enemy facing on vertical movement, authored station/tower state poses,
+bounded one-shot deaths/effects, natural canopy/roof/map-edge clipping and existing
+untranslated result/tech labels. Enlarging the window does not restore native
+detail. No required family, visual criterion or source gate remains incomplete.
+
+Queue after completion: 20 done, zero todo/doing/blocked. This closes exactly task
+0020 and completes the longer requested sprite-production goal. Only this task's
+files are staged; unrelated prior capture imports remain excluded. No push,
+publication, unattended driver or automation is started.
