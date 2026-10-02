@@ -101,11 +101,12 @@ const HOUSE_ROOM := Vector2i(20, 13)
 const HOUSE_DOOR := Vector2i(10, 12)
 const HOUSE_SPAWN := Vector2i(10, 11)
 const HOUSE_FURNITURE := [
-	{"id": &"kitchen", "cell": Vector2i(1, 4), "size": Vector2i(6, 2)},
-	{"id": &"fireplace", "cell": Vector2i(10, 4), "size": Vector2i(3, 2)},
-	{"id": &"bed", "cell": Vector2i(16, 4), "size": Vector2i(3, 3)},
+	{"id": &"kitchen", "cell": Vector2i(1, 3), "size": Vector2i(6, 2)},
+	{"id": &"fireplace", "cell": Vector2i(10, 3), "size": Vector2i(3, 2)},
+	{"id": &"bed", "cell": Vector2i(16, 3), "size": Vector2i(3, 3)},
+	{"id": &"nightstand", "cell": Vector2i(14, 3), "size": Vector2i(2, 1)},
 	{"id": &"table", "cell": Vector2i(3, 8), "size": Vector2i(5, 2)},
-	{"id": &"storage", "cell": Vector2i(16, 9), "size": Vector2i(3, 2)},
+	{"id": &"storage", "cell": Vector2i(17, 8), "size": Vector2i(2, 3)},
 	{"id": &"plant", "cell": Vector2i(1, 10), "size": Vector2i(2, 1)},
 ]
 

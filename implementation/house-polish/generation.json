@@ -1,0 +1,36 @@
+[
+  {
+    "tool": "image_gen.imagegen",
+    "mode": "built-in edit",
+    "date": "2026-10-02",
+    "transparent_background": true,
+    "original_output": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-0751e5fd-4d6a-466c-a85d-1a69cbd7cb84.png",
+    "workspace_source": "assets/art_source/interior/storage-west-v1.png",
+    "source_sha256": "0553c2fbf9e4ddab8683ff44b99a2e2bd94c32af624490d3d0ff3a7e5294cc5f",
+    "prompt": "implementation/house-polish/storage-west.prompt.txt",
+    "prompt_sha256": "0312a48777cbb17e3f80550574aa6997932330f4f042b4b8033e02ef36904414",
+    "references": [
+      {
+        "path": "assets/art_source/interior/farmhouse-v1.png",
+        "role": "style/camera and furniture identity"
+      }
+    ]
+  },
+  {
+    "tool": "image_gen.imagegen",
+    "mode": "built-in generation",
+    "date": "2026-10-02",
+    "transparent_background": true,
+    "original_output": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-578aee53-8b36-4695-9fb3-b223877c996f.png",
+    "workspace_source": "assets/art_source/interior/nightstand-lamp-v1.png",
+    "source_sha256": "1138e39e3ea89aea7b61d124a8dd4dcc7ed988bad92ceeb83203e6f97f73f1e4",
+    "prompt": "implementation/house-polish/nightstand-lamp.prompt.txt",
+    "prompt_sha256": "391dab670f4694c33e806e04a34e60bd15063fc380332e4cb8e93d5a2ccc3e73",
+    "references": [
+      {
+        "path": "assets/art_source/interior/farmhouse-v1.png",
+        "role": "style/camera and furniture identity"
+      }
+    ]
+  }
+]

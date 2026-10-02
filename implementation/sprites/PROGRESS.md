@@ -1516,3 +1516,24 @@ State version 3 supports both preceding saves without dropping crops/jobs/stock.
 Intentional sim 3960053733 → 1270427719; data 3913993875 → 3247244688. Final suite
 and exports are recorded in implementation/farm-house/verify-pass.log and the
 main progress journal. No publishing, push or scheduled work is requested.
+
+
+## 2026-10-02 — Follow-up: farmhouse walls, hearth and bedside lamp
+
+The user's interior polish adds two built-in ImageGen assets: a west-facing
+wardrobe against the east wall and a small cabinet/lamp beside the bed. Originals
+and exact prompts/provenance/cuts are saved in implementation/house-polish/ and
+assets/art_source/interior/. The normal source-owned palette/alpha import creates
+sprites/interior/storage.png and nightstand.png. Kitchen, hearth and bed reuse
+their existing art with closer north-wall placement. Only the requested wardrobe
+changes among 5,746 preceding tracked PNGs.
+
+The existing hearth flame animates inside its measured 14x10 firebox with masonry,
+plants, grate and original colors preserved. Cosmetic time freezes with pause;
+steady-light accessibility stops the flame and the lamp halo stays steady.
+Native 480x270 review passes 293 checks, including actual pixel comparisons.
+Full verification/export is 54 passed, zero skipped/failed; 7,581 core assertions
+and 996 input cases pass. Intentional furniture data 3247244688 → 8148086;
+sim remains 1270427719. Saved indoor positions obstructed by new furniture repair
+to free floor without changing the farm return point. Full logs/native captures
+and review are in implementation/house-polish/. The production queue stays 20 done.

@@ -1898,15 +1898,19 @@
       "owner": "raster"
     },
     {
-      "output": "sprites/interior/storage.png",
-      "owner": "raster"
-    },
-    {
       "output": "sprites/interior/rug.png",
       "owner": "raster"
     },
     {
       "output": "sprites/interior/plant.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/interior/storage.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/interior/nightstand.png",
       "owner": "raster"
     }
   ]

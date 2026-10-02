@@ -248,6 +248,7 @@ func _process(_delta: float) -> void:
 		return
 	_drop_a_crumb(_delta)
 	_world.ambient_running = _driver.running and not _driver.holding()
+	_house_view.ambient_running = _world.ambient_running
 	var indoors := House.inside(_driver.state)
 	_world.visible = not indoors
 	_lighting.visible = not indoors

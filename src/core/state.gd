@@ -183,6 +183,8 @@ static func reconcile(state: Dictionary) -> Array:
 			if not theirs.has(key):
 				mine.erase(key)
 				notes.append("dropped '%s' from %s" % [str(key), named])
+	if House.repair_position(state):
+		notes.append("moved indoor player off revised furniture")
 	return notes
 
 

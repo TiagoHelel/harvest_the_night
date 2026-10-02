@@ -7,6 +7,7 @@ var _state: Dictionary
 var _world: WorldView
 var _house: HouseView
 const OUT := "res://implementation/farm-house/captures/"
+var _out := OUT
 
 
 func _initialize() -> void:
@@ -49,6 +50,9 @@ func _legacy() -> Dictionary:
 
 func _run() -> void:
 	_capture = not OS.get_cmdline_user_args().has("--check")
+	for arg in OS.get_cmdline_user_args():
+		if arg.begins_with("--out="):
+			_out = "res://" + arg.trim_prefix("--out=").trim_suffix("/") + "/"
 	_state = State.create(30303)
 	expect(GameData.validate().is_empty(), "Expanded farm data validates: %s" % str(GameData.validate()))
 	expect(Grid.CELLS == 1125 and Grid.CELLS * 100 == 900 * 125, "Farm has exactly 25% more total area")
@@ -177,6 +181,7 @@ func _run() -> void:
 		"Scaled chimney particles remain aligned to the actual sprite")
 	House.enter(_state)
 	await _shoot("interior_entry", true)
+	await _check_furniture_art()
 	_stand(_state, Vector2i(9, 8))
 	await _shoot("interior_dining", true)
 	_stand(_state, Vector2i(14, 7))
@@ -205,5 +210,61 @@ func _shoot(name: String, indoors: bool) -> void:
 	await RenderingServer.frame_post_draw
 	var picture := root.get_texture().get_image()
 	expect(picture.get_size() == Vector2i(480, 270), "Inspection uses the real native viewport")
-	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(OUT))
-	expect(picture.save_png(OUT + name + ".png") == OK, "Native capture saved")
+	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(_out))
+	expect(picture.save_png(_out + name + ".png") == OK, "Native capture saved")
+
+
+func _check_furniture_art() -> void:
+	var pieces: Dictionary = {}
+	for piece in House.FURNITURE:
+		pieces[piece["id"]] = piece
+	for id in [&"kitchen", &"fireplace", &"bed", &"nightstand"]:
+		expect(pieces[id]["cell"].y == 3, "%s backs onto the north wall" % id)
+	expect(pieces[&"nightstand"]["cell"].x + pieces[&"nightstand"]["size"].x == pieces[&"bed"]["cell"].x,
+		"The lamp cabinet sits beside the head of the bed")
+	expect(pieces[&"storage"]["cell"].x + pieces[&"storage"]["size"].x == House.ROOM.x - 1,
+		"The west-facing wardrobe backs onto the east wall")
+	var before := var_to_bytes(_state)
+	_house.ambient_running = false
+	var stopped := _house._ambient_time
+	_house._refresh_ambient(0.5)
+	expect(_house._ambient_time == stopped, "Pause freezes hearth animation")
+	_house.ambient_running = true
+	var settings := root.get_node("Settings")
+	var previous: bool = settings.get_bool(&"a11y/flashing")
+	settings.set_value(&"a11y/flashing", false)
+	_house._refresh_ambient(0.5)
+	expect(float(_house._flame.get_shader_parameter("flame_time")) == 0.0,
+		"Steady light accessibility keeps the hearth stationary")
+	settings.set_value(&"a11y/flashing", true)
+	_house._refresh_ambient(0.5)
+	expect(_house._ambient_time > stopped, "The hearth animates when running")
+	if _capture:
+		_house.ambient_running = false
+		_house._flame.set_shader_parameter("flame_time", 0.0)
+		await _shoot("fire_a", true)
+		var first := root.get_texture().get_image()
+		_house._flame.set_shader_parameter("flame_time", 0.27)
+		await _shoot("fire_b", true)
+		var second := root.get_texture().get_image()
+		# The default camera is native 1:1: room origin is (80,38), hearth
+		# sprite origin (240,54). Inspect the actual shader-rendered pixels.
+		var changed := 0
+		var masonry_changed := 0
+		var source_changed := 0
+		var original: Image = load("res://sprites/interior/fireplace.png").get_image()
+		for y in 64:
+			for x in 48:
+				if first.get_pixel(240 + x, 54 + y) != second.get_pixel(240 + x, 54 + y):
+					changed += 1
+					if not Rect2i(17, 43, 14, 10).has_point(Vector2i(x, y)):
+						masonry_changed += 1
+				if original.get_pixel(x, y).a == 1.0 and not Rect2i(17, 43, 14, 10).has_point(Vector2i(x, y)):
+					if first.get_pixel(240 + x, 54 + y) != original.get_pixel(x, y):
+						source_changed += 1
+		expect(changed >= 8, "Fire changes visibly inside the rendered firebox")
+		expect(masonry_changed == 0, "Masonry, plants and grate stay perfectly still")
+		expect(source_changed == 0, "Static hearth pixels keep the exact original source colors")
+	_house.ambient_running = true
+	settings.set_value(&"a11y/flashing", previous)
+	expect(var_to_bytes(_state) == before, "Hearth and lamp never write simulation state")

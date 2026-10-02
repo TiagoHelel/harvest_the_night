@@ -77,6 +77,25 @@ static func walkable(cell: Vector2i) -> bool:
 	return true
 
 
+## Rehome an indoor save if a furniture revision occupies its old standing cell.
+static func repair_position(state: Dictionary) -> bool:
+	if not inside(state) or walkable(Player.cell(state)):
+		return false
+	var original := Player.cell(state)
+	var nearest := SPAWN
+	var distance := ROOM.x + ROOM.y
+	for y in range(3, ROOM.y - 1):
+		for x in range(1, ROOM.x - 1):
+			var cell := Vector2i(x, y)
+			var next := absi(cell.x - original.x) + absi(cell.y - original.y)
+			if walkable(cell) and next < distance:
+				nearest = cell
+				distance = next
+	state["player"]["pos"] = [nearest.x * Player.SUBTILE + Player.SUBTILE / 2,
+		nearest.y * Player.SUBTILE + Player.SUBTILE / 2]
+	return true
+
+
 static func tick(state: Dictionary) -> void:
 	var intent: Dictionary = state["intent"]
 	var move: Array = intent["move"]

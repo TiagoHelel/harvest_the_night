@@ -1,0 +1,3 @@
+5746 previous tracked PNG files checked.
+Changed: ['sprites/interior/storage.png']
+All other prior PNGs are byte-identical, including the source sheet.

@@ -1882,12 +1882,14 @@ func _case_0111_farm_house() -> void:
 	await press_key(KEY_W, true)
 	await until(func(): return Player.cell(state).y < House.SPAWN.y, "the farmer to walk inside")
 	await press_key(KEY_W, false)
-	_stand_at(state, Vector2i(4, 6), Player.NORTH)
+	var kitchen: Dictionary = House.FURNITURE[0]
+	var kitchen_front: int = kitchen["cell"].y + kitchen["size"].y
+	_stand_at(state, Vector2i(4, kitchen_front), Player.NORTH)
 	var target_tick := int(state["tick"]) + 20
 	await press_key(KEY_W, true)
 	await until(func(): return int(state["tick"]) >= target_tick, "walking into the kitchen for twenty ticks")
 	await press_key(KEY_W, false)
-	expect(Player.cell(state).y == 6, "Real movement cannot pass through kitchen furniture")
+	expect(Player.cell(state).y == kitchen_front, "Real movement cannot pass through kitchen furniture")
 	await tap_key(KEY_B)
 	expect(not Building.is_active(state), "The build key cannot open an outdoor ghost inside the house")
 	await tap_key(KEY_EQUAL)
@@ -1897,9 +1899,12 @@ func _case_0111_farm_house() -> void:
 	await until(func(): return not driver.running, "the indoor pause menu to stop simulation")
 	var paused_tick := int(state["tick"])
 	var paused_pos := Player.position(state)
+	await frames(2)
+	var paused_flame := room._ambient_time
 	await frames(30)
 	expect(int(state["tick"]) == paused_tick and Player.position(state) == paused_pos and House.inside(state),
 		"Pause preserves indoor position and freezes farm time")
+	expect(room._ambient_time == paused_flame, "The pause key also freezes the visible hearth flame")
 	await tap_key(KEY_ESCAPE)
 	await until(func(): return driver.running, "the indoor pause menu to resume")
 	_stand_at(state, House.SPAWN)

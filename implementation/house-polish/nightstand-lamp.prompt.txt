@@ -1,0 +1,7 @@
+Use case: stylized-concept
+Asset type: ONE transparent pixel-art bedside cabinet with table lamp for a cozy farmhouse game.
+Input image: reference sheet, style and camera only. Match the front-facing bed and kitchen in this sheet.
+Primary request: create a small rustic wooden bedside nightstand with one drawer, a tiny bronze handle and a cream fabric lampshade on a short brass stem. Lamp is lit with a warm soft yellow interior, but no external glow painted into the background. Cabinet and lamp are one connected furniture sprite.
+Composition: isolated centered upright object, orthogonal top-down three-quarter camera identical to bed reference, front faces south/bottom, cabinet back goes against north/top wall. Fully visible with generous true transparent alpha margin, no floor, no wall, no other furniture.
+Style: crisp warm pixel art, chunky readable clusters that remain clear at 28x42 native pixels. Brown oak, cream lampshade, muted brass, dark brown outlines, cozy farm-game material. Compact lamp slightly narrower than cabinet, lamp contributes the upper half of the height.
+Constraints: one asset, no bedroom scene, no text, labels, watermarks, blur, ground shadow or checkerboard background.

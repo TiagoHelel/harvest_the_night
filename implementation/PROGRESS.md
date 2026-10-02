@@ -10284,3 +10284,39 @@ Optional GODOT_PROJECT_PATH and the task's QA mirror isolate save/profile fixtur
 from player files; release exports always use the actual project settings.
 No new top-level folder, push or automation. Unrelated editor serialization and
 previous untracked imports remain outside the commit.
+
+
+## 2026-10-02 — Follow-up: wall furniture, living hearth and bedside lamp
+
+User requested the north furniture against the wall, a coherent wardrobe
+orientation, animated fire, and a bedside cabinet with lamp. Kitchen/hearth/bed
+move their solid footprints north by one row. A new cabinet beside the bed blocks
+movement; the wardrobe occupies the east wall facing west. Measured presentation
+offsets align the cabinet back/headboard/wardrobe rear to their walls. Circulation
+and the southern exit remain open. Indoor saves under newly occupied furniture
+move deterministically to nearby free floor, preserving their outdoor position.
+
+Two separate built-in image_gen.imagegen calls generate only the west-facing
+wardrobe and lamp cabinet. Their originals, exact prompts, provenance, measured
+cuts, review and native 480x270 evidence are under implementation/house-polish/
+and assets/art_source/interior/. Source-owned outputs use the existing palette
+and import pipeline. Of 5,746 previously tracked PNGs, only the requested storage
+sprite changes; all other prior art and prior room captures remain byte-identical.
+
+The existing fireplace uses a localized shader for its 14x10 open firebox. Its
+cosmetic clock freezes with pause and honors steady-light accessibility. Stones,
+plants and grate remain stationary, with exactly their original source colors;
+the native pixel comparison verifies both movement and source preservation.
+The bedside lamp adds a small steady warm halo. Neither writes simulation state.
+
+Furniture footprint data intentionally moves data 3247244688 → 8148086.
+Sim remains 1270427719. Visual offsets and animation remain UI-only. Verification:
+293 native room checks, 272 headless room checks, 7,581 core assertions and 996
+full input cases pass, including the real pause key freezing the hearth. The
+isolated nine-case house harness retains its existing shutdown warning; the
+complete input suite passes. Full verify and Windows/Web/playtest exports:
+54 passed, zero skipped/failed, logged in implementation/house-polish/verify-pass.log.
+608s exceeds the soft 300s suite target; runtime checks pass at 650us/night tick
+and 8,481us/path rebuild. Native/Main Portuguese captures are actually opened.
+No new top-level folder, backlog status change, publishing, push or automation.
+Unrelated project serialization and prior untracked imports stay outside the commit.

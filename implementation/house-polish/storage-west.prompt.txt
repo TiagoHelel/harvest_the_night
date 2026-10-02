@@ -1,0 +1,7 @@
+Use case: precise-object-edit
+Asset type: transparent game sprite, west-facing wooden wardrobe for a farmhouse room.
+Input image: reference sprite sheet for material and palette; edit target is the bottom-left wardrobe and attached little bookcase.
+Primary request: reorient only this wardrobe/bookcase furniture so its BACK is against the EAST (right) wall and its doors FACE WEST (left into the room). Make an upright standing wardrobe viewed from above in the same orthogonal 3/4 top-down game camera as the reference. The cabinet door/front is on its LEFT face, the rear is on the RIGHT. Its footprint runs north-south along the right wall. The long front face recedes vertically in screen space, with a small top surface visible. Keep the same cozy rustic oak, two handles, lower drawer and tiny olive plant. Keep the bookcase attached at the southern end, facing left too.
+Composition: ONE isolated cabinet/bookcase sprite centered, full furniture visible with generous transparent margin. Narrow horizontal extent and taller vertical extent. No room, walls or floor. True alpha background.
+Style: crisp warm brown pixel art, chunky readable pixels, cream and olive accents, dark brown outlines, no perspective vanishing points. It must read at around 40x76 native pixels.
+Constraints: preserve furniture identity and materials, physically rotate an upright piece about its vertical axis, do not tip it sideways. No bed, no other sprites, no labels, no glow, no text or watermark.

@@ -214,6 +214,15 @@ func _task_0111_house() -> void:
 		"an indoor pointer cannot sell an outdoor workshop")
 	for piece in House.FURNITURE:
 		expect(not House.walkable(piece["cell"]), "%s blocks indoor movement" % piece["id"])
+	var obstructed: Dictionary = state.duplicate(true)
+	_stand_the_farmer(obstructed, Vector2i(14, 3))
+	var saved_outside: Array = obstructed["house_visit"]["outside_pos"].duplicate()
+	expect(not State.reconcile(obstructed).is_empty() and House.walkable(Player.cell(obstructed)),
+		"an indoor save under the new lamp cabinet moves to nearby free floor")
+	expect(Player.cell(obstructed) == Vector2i(13, 3)
+		and obstructed["house_visit"]["outside_pos"] == saved_outside,
+		"indoor furniture repair is deterministic and keeps the saved porch position")
+	expect(State.reconcile(obstructed).is_empty(), "indoor furniture repair is stable after one pass")
 	state["intent"]["interact"] = true
 	Sim.tick(state)
 	expect(not House.inside(state) and Player.position(state) == outside, "the indoor exit restores the farm position")

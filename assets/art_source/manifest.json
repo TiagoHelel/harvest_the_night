@@ -30208,38 +30208,6 @@
       "output_sha256": "219ba81527ac7194651a40aeff35481d369be632e6d02ee105acb4b050f436cc"
     },
     {
-      "id": "interior/storage",
-      "owner": "raster",
-      "source": "assets/art_source/interior/farmhouse-v1.png",
-      "source_sha256": "08cbf8e82803b07e15e6c47ba5dfec96bfd17964bb44c404ed64f3e6a80c37fc",
-      "crop_xywh": [
-        147,
-        700,
-        324,
-        283
-      ],
-      "canvas_wh": [
-        68,
-        60
-      ],
-      "pivot_xy": [
-        34,
-        60
-      ],
-      "content_scale": 0.19753086419753085,
-      "alpha_threshold": 128,
-      "palette": "tools/palette.py:COLOURS",
-      "animation": "interior/storage",
-      "frame": 0,
-      "seconds": 1.0,
-      "loop": true,
-      "output": "sprites/interior/storage.png",
-      "prompt": "implementation/farm-house/interior.prompt.txt",
-      "prompt_sha256": "58de1a79a0fa050ceea18ec46bf067be78cfc4a1df4cbe4782ec3e04c078cb9b",
-      "references": [],
-      "output_sha256": "5ed9b4291f57813518dbcc1c51fac691722fc3bc4a399b592fec0e42a708e140"
-    },
-    {
       "id": "interior/rug",
       "owner": "raster",
       "source": "assets/art_source/interior/farmhouse-v1.png",
@@ -30302,6 +30270,82 @@
       "prompt_sha256": "58de1a79a0fa050ceea18ec46bf067be78cfc4a1df4cbe4782ec3e04c078cb9b",
       "references": [],
       "output_sha256": "4ae1aad4f0c20fa2eb93268327fd29dced3585aedc46ce8ad588529b61d580ec"
+    },
+    {
+      "id": "interior/storage",
+      "owner": "raster",
+      "source": "assets/art_source/interior/storage-west-v1.png",
+      "source_sha256": "0553c2fbf9e4ddab8683ff44b99a2e2bd94c32af624490d3d0ff3a7e5294cc5f",
+      "crop_xywh": [
+        298,
+        169,
+        436,
+        1205
+      ],
+      "canvas_wh": [
+        40,
+        76
+      ],
+      "pivot_xy": [
+        20,
+        76
+      ],
+      "content_scale": 0.05975103734439834,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "interior/storage",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": true,
+      "output": "sprites/interior/storage.png",
+      "prompt": "implementation/house-polish/storage-west.prompt.txt",
+      "prompt_sha256": "0312a48777cbb17e3f80550574aa6997932330f4f042b4b8033e02ef36904414",
+      "references": [
+        {
+          "path": "assets/art_source/interior/farmhouse-v1.png",
+          "sha256": "08cbf8e82803b07e15e6c47ba5dfec96bfd17964bb44c404ed64f3e6a80c37fc",
+          "role": "style"
+        }
+      ],
+      "output_sha256": "17ca9c32043a78af89c051c9c6043b9d71e56b121714f804c2d82f2e7519a7ad"
+    },
+    {
+      "id": "interior/nightstand",
+      "owner": "raster",
+      "source": "assets/art_source/interior/nightstand-lamp-v1.png",
+      "source_sha256": "1138e39e3ea89aea7b61d124a8dd4dcc7ed988bad92ceeb83203e6f97f73f1e4",
+      "crop_xywh": [
+        266,
+        362,
+        492,
+        917
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        48
+      ],
+      "content_scale": 0.04580152671755725,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "interior/nightstand",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": true,
+      "output": "sprites/interior/nightstand.png",
+      "prompt": "implementation/house-polish/nightstand-lamp.prompt.txt",
+      "prompt_sha256": "391dab670f4694c33e806e04a34e60bd15063fc380332e4cb8e93d5a2ccc3e73",
+      "references": [
+        {
+          "path": "assets/art_source/interior/farmhouse-v1.png",
+          "sha256": "08cbf8e82803b07e15e6c47ba5dfec96bfd17964bb44c404ed64f3e6a80c37fc",
+          "role": "style"
+        }
+      ],
+      "output_sha256": "764a7c0ce1d179373ed6b4dc4f6754de4f57812a7e2777a15a6d3ca0c56dd71a"
     }
   ]
 }

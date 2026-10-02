@@ -16,6 +16,12 @@ var _was_inside := false
 var _zoom_index := 1
 var _zoom := 1.0
 var _focus := Vector2(160, 104)
+var ambient_running := true
+var _ambient_time := 0.0
+var _flame: ShaderMaterial
+const HEARTH_FLAME := preload("res://src/ui/hearth_flame.gdshader")
+const FURNITURE_OFFSETS := {&"bed": Vector2(0, -4),
+	&"nightstand": Vector2(0, -9), &"storage": Vector2(9, 0)}
 
 
 func _ready() -> void:
@@ -87,8 +93,15 @@ func _build_room() -> void:
 		var size: Vector2i = piece["size"]
 		var at := Vector2((cell.x + size.x * 0.5) * 16, (cell.y + size.y) * 16)
 		var sprite := _sprite(str(piece["id"]), furniture, at)
+		sprite.position += Vector2(FURNITURE_OFFSETS.get(piece["id"], Vector2.ZERO))
 		sprite.name = str(piece["id"])
 		sprite.offset = -Vector2(RasterArt.FRAMES[sprite.texture.resource_path]["pivot"])
+		if piece["id"] == &"fireplace":
+			_flame = ShaderMaterial.new()
+			_flame.shader = HEARTH_FLAME
+			sprite.material = _flame
+		elif piece["id"] == &"nightstand":
+			_add_lamp_glow(sprite)
 	_farmer = PlayerView.new()
 	_farmer.name = "IndoorFarmer"
 	furniture.add_child(_farmer)
@@ -103,6 +116,37 @@ func _build_room() -> void:
 		frame.draw_rect(Rect2(152, 192, 32, 16), Color8(140, 98, 57))
 		frame.draw_line(Vector2(154, 205), Vector2(182, 205), Color8(232, 224, 207), 1.0))
 	_room.add_child(frame)
+
+
+func _add_lamp_glow(sprite: Sprite2D) -> void:
+	var gradient := Gradient.new()
+	gradient.offsets = PackedFloat32Array([0.0, 0.3, 1.0])
+	gradient.colors = PackedColorArray([Color(1.0, 0.76, 0.34, 0.20),
+		Color(1.0, 0.76, 0.34, 0.08), Color(1.0, 0.76, 0.34, 0.0)])
+	var texture := GradientTexture2D.new()
+	texture.gradient = gradient
+	texture.width = 48
+	texture.height = 48
+	texture.fill = GradientTexture2D.FILL_RADIAL
+	texture.fill_from = Vector2(0.5, 0.5)
+	texture.fill_to = Vector2(1.0, 0.5)
+	var glow := Sprite2D.new()
+	glow.name = "LampGlow"
+	glow.texture = texture
+	glow.position = Vector2(0, -32)
+	glow.show_behind_parent = true
+	sprite.add_child(glow)
+
+
+func _refresh_ambient(delta: float) -> void:
+	if not ambient_running:
+		return
+	var settings := get_node_or_null("/root/Settings")
+	if settings != null and not settings.get_bool(&"a11y/flashing"):
+		_flame.set_shader_parameter("flame_time", 0.0)
+		return
+	_ambient_time += maxf(delta, 0.0)
+	_flame.set_shader_parameter("flame_time", _ambient_time)
 
 
 func _set_room_visible(on: bool) -> void:
@@ -146,6 +190,7 @@ func _process(delta: float) -> void:
 	_fade.color.a = maxf(0.0, _fade.color.a - delta * 5.0)
 	if not indoors:
 		return
+	_refresh_ambient(delta)
 	_title.text = I18n.t(&"HOUSE_TITLE")
 	_hint.text = I18n.f(&"HOUSE_EXIT_HINT", [interact_key])
 	var blend := 1.0 - exp(-WorldView.CAMERA_RESPONSE * delta)
