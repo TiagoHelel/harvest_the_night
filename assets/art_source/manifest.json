@@ -30014,6 +30014,294 @@
       "resource_id": "tech",
       "display_role": "compact_hud",
       "output_sha256": "1af9d660469b11234de5bf38fa64a94ae089e57b0f518c5171e6adb6c9388974"
+    },
+    {
+      "id": "interior/floor",
+      "owner": "raster",
+      "source": "assets/art_source/interior/farmhouse-v1.png",
+      "source_sha256": "08cbf8e82803b07e15e6c47ba5dfec96bfd17964bb44c404ed64f3e6a80c37fc",
+      "crop_xywh": [
+        190,
+        70,
+        256,
+        256
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        16
+      ],
+      "content_scale": 0.0625,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "interior/floor",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": true,
+      "output": "sprites/interior/floor.png",
+      "prompt": "implementation/farm-house/interior.prompt.txt",
+      "prompt_sha256": "58de1a79a0fa050ceea18ec46bf067be78cfc4a1df4cbe4782ec3e04c078cb9b",
+      "references": [],
+      "output_sha256": "8a7dcf78a813a4804bafa51dcdaf7ad55e1147ee21b2c1a61cbccdb20be613b5"
+    },
+    {
+      "id": "interior/wall",
+      "owner": "raster",
+      "source": "assets/art_source/interior/farmhouse-v1.png",
+      "source_sha256": "08cbf8e82803b07e15e6c47ba5dfec96bfd17964bb44c404ed64f3e6a80c37fc",
+      "crop_xywh": [
+        656,
+        40,
+        221,
+        300
+      ],
+      "canvas_wh": [
+        24,
+        32
+      ],
+      "pivot_xy": [
+        12,
+        32
+      ],
+      "content_scale": 0.10666666666666667,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "interior/wall",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": true,
+      "output": "sprites/interior/wall.png",
+      "prompt": "implementation/farm-house/interior.prompt.txt",
+      "prompt_sha256": "58de1a79a0fa050ceea18ec46bf067be78cfc4a1df4cbe4782ec3e04c078cb9b",
+      "references": [],
+      "output_sha256": "d7fa6647ca263a8e10c178700eb286424e96f3311742fc18e23632ea13527e35"
+    },
+    {
+      "id": "interior/bed",
+      "owner": "raster",
+      "source": "assets/art_source/interior/farmhouse-v1.png",
+      "source_sha256": "08cbf8e82803b07e15e6c47ba5dfec96bfd17964bb44c404ed64f3e6a80c37fc",
+      "crop_xywh": [
+        1113,
+        42,
+        215,
+        307
+      ],
+      "canvas_wh": [
+        48,
+        64
+      ],
+      "pivot_xy": [
+        24,
+        64
+      ],
+      "content_scale": 0.19543973941368079,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "interior/bed",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": true,
+      "output": "sprites/interior/bed.png",
+      "prompt": "implementation/farm-house/interior.prompt.txt",
+      "prompt_sha256": "58de1a79a0fa050ceea18ec46bf067be78cfc4a1df4cbe4782ec3e04c078cb9b",
+      "references": [],
+      "output_sha256": "fec4239f21fc34ab5d74e0956331ac5dbc5ecfcba81463f498a98228bb03d758"
+    },
+    {
+      "id": "interior/kitchen",
+      "owner": "raster",
+      "source": "assets/art_source/interior/farmhouse-v1.png",
+      "source_sha256": "08cbf8e82803b07e15e6c47ba5dfec96bfd17964bb44c404ed64f3e6a80c37fc",
+      "crop_xywh": [
+        129,
+        395,
+        344,
+        285
+      ],
+      "canvas_wh": [
+        88,
+        76
+      ],
+      "pivot_xy": [
+        44,
+        76
+      ],
+      "content_scale": 0.2441860465116279,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "interior/kitchen",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": true,
+      "output": "sprites/interior/kitchen.png",
+      "prompt": "implementation/farm-house/interior.prompt.txt",
+      "prompt_sha256": "58de1a79a0fa050ceea18ec46bf067be78cfc4a1df4cbe4782ec3e04c078cb9b",
+      "references": [],
+      "output_sha256": "d39a6d77a50152cfb81f458a22c235995c9b5705d5f858f55097c3155324ec21"
+    },
+    {
+      "id": "interior/table",
+      "owner": "raster",
+      "source": "assets/art_source/interior/farmhouse-v1.png",
+      "source_sha256": "08cbf8e82803b07e15e6c47ba5dfec96bfd17964bb44c404ed64f3e6a80c37fc",
+      "crop_xywh": [
+        562,
+        441,
+        450,
+        246
+      ],
+      "canvas_wh": [
+        80,
+        48
+      ],
+      "pivot_xy": [
+        40,
+        48
+      ],
+      "content_scale": 0.16,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "interior/table",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": true,
+      "output": "sprites/interior/table.png",
+      "prompt": "implementation/farm-house/interior.prompt.txt",
+      "prompt_sha256": "58de1a79a0fa050ceea18ec46bf067be78cfc4a1df4cbe4782ec3e04c078cb9b",
+      "references": [],
+      "output_sha256": "2e6f3357ef9ed71136a037970fbdc9b07fbf4af26dd98a01904af8fcc8300a87"
+    },
+    {
+      "id": "interior/fireplace",
+      "owner": "raster",
+      "source": "assets/art_source/interior/farmhouse-v1.png",
+      "source_sha256": "08cbf8e82803b07e15e6c47ba5dfec96bfd17964bb44c404ed64f3e6a80c37fc",
+      "crop_xywh": [
+        1112,
+        365,
+        262,
+        322
+      ],
+      "canvas_wh": [
+        48,
+        64
+      ],
+      "pivot_xy": [
+        24,
+        64
+      ],
+      "content_scale": 0.17391304347826086,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "interior/fireplace",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": true,
+      "output": "sprites/interior/fireplace.png",
+      "prompt": "implementation/farm-house/interior.prompt.txt",
+      "prompt_sha256": "58de1a79a0fa050ceea18ec46bf067be78cfc4a1df4cbe4782ec3e04c078cb9b",
+      "references": [],
+      "output_sha256": "219ba81527ac7194651a40aeff35481d369be632e6d02ee105acb4b050f436cc"
+    },
+    {
+      "id": "interior/storage",
+      "owner": "raster",
+      "source": "assets/art_source/interior/farmhouse-v1.png",
+      "source_sha256": "08cbf8e82803b07e15e6c47ba5dfec96bfd17964bb44c404ed64f3e6a80c37fc",
+      "crop_xywh": [
+        147,
+        700,
+        324,
+        283
+      ],
+      "canvas_wh": [
+        68,
+        60
+      ],
+      "pivot_xy": [
+        34,
+        60
+      ],
+      "content_scale": 0.19753086419753085,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "interior/storage",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": true,
+      "output": "sprites/interior/storage.png",
+      "prompt": "implementation/farm-house/interior.prompt.txt",
+      "prompt_sha256": "58de1a79a0fa050ceea18ec46bf067be78cfc4a1df4cbe4782ec3e04c078cb9b",
+      "references": [],
+      "output_sha256": "5ed9b4291f57813518dbcc1c51fac691722fc3bc4a399b592fec0e42a708e140"
+    },
+    {
+      "id": "interior/rug",
+      "owner": "raster",
+      "source": "assets/art_source/interior/farmhouse-v1.png",
+      "source_sha256": "08cbf8e82803b07e15e6c47ba5dfec96bfd17964bb44c404ed64f3e6a80c37fc",
+      "crop_xywh": [
+        626,
+        807,
+        316,
+        160
+      ],
+      "canvas_wh": [
+        64,
+        36
+      ],
+      "pivot_xy": [
+        32,
+        36
+      ],
+      "content_scale": 0.20253164556962025,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "interior/rug",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": true,
+      "output": "sprites/interior/rug.png",
+      "prompt": "implementation/farm-house/interior.prompt.txt",
+      "prompt_sha256": "58de1a79a0fa050ceea18ec46bf067be78cfc4a1df4cbe4782ec3e04c078cb9b",
+      "references": [],
+      "output_sha256": "3100e2b09be13eff9ed824c8c3d12e0b200a6c8cef74abdcbb7ef1f3f90d2d6c"
+    },
+    {
+      "id": "interior/plant",
+      "owner": "raster",
+      "source": "assets/art_source/interior/farmhouse-v1.png",
+      "source_sha256": "08cbf8e82803b07e15e6c47ba5dfec96bfd17964bb44c404ed64f3e6a80c37fc",
+      "crop_xywh": [
+        1119,
+        725,
+        225,
+        258
+      ],
+      "canvas_wh": [
+        28,
+        36
+      ],
+      "pivot_xy": [
+        14,
+        36
+      ],
+      "content_scale": 0.10666666666666667,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "interior/plant",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": true,
+      "output": "sprites/interior/plant.png",
+      "prompt": "implementation/farm-house/interior.prompt.txt",
+      "prompt_sha256": "58de1a79a0fa050ceea18ec46bf067be78cfc4a1df4cbe4782ec3e04c078cb9b",
+      "references": [],
+      "output_sha256": "4ae1aad4f0c20fa2eb93268327fd29dced3585aedc46ce8ad588529b61d580ec"
     }
   ]
 }

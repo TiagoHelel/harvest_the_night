@@ -225,6 +225,10 @@ static func cost_of(id: StringName) -> Dictionary:
 
 ## How many tiles it covers. Towers are one; a press is two by two.
 static func size_of(id: StringName) -> Vector2i:
+	if id == &"house":
+		return GameData.HOUSE_SIZE
+	if id == &"shop":
+		return GameData.SHOP_SIZE
 	var entry: Variant = entry_of(id)
 	if entry == null:
 		return Vector2i.ONE
@@ -258,6 +262,31 @@ static func anchor_of(state: Dictionary, cell: Vector2i) -> Vector2i:
 		return cell
 	var pair: Array = at
 	return Vector2i(int(pair[0]), int(pair[1]))
+
+
+## Actual occupied cells also support protected, compact legacy save structures.
+static func parts_at(state: Dictionary, cell: Vector2i) -> Array[Vector2i]:
+	var on := Farm.occupant(state, cell)
+	var id: StringName = on.get("id", &"")
+	if on.is_empty():
+		return []
+	if size_of(id) == Vector2i.ONE:
+		return [cell]
+	var anchor := on.get("anchor", []) as Array
+	var parts: Array[Vector2i] = []
+	for idx in state["occupants"]:
+		var other: Dictionary = state["occupants"][idx]
+		if other.get("id", &"") == id and other.get("anchor", []) == anchor:
+			parts.append(Grid.cell(int(idx)))
+	parts.sort_custom(func(a: Vector2i, b: Vector2i): return Grid.index(a) < Grid.index(b))
+	return parts
+
+
+static func bounds_at(state: Dictionary, cell: Vector2i) -> Rect2i:
+	var bounds := Rect2i()
+	for part in parts_at(state, cell):
+		bounds = Rect2i(part, Vector2i.ONE) if bounds.size == Vector2i.ZERO else bounds.merge(Rect2i(part, Vector2i.ONE))
+	return bounds
 
 
 ## How many more of this may go down tonight. A big number for anything with
@@ -313,6 +342,8 @@ static func can_place(state: Dictionary, id: StringName, cell: Vector2i) -> bool
 ## Why it will not go there, for the red ghost and the tooltip. An empty
 ## Array when it will. See `why_not_upgrade` for the shape.
 static func why_not(state: Dictionary, id: StringName, cell: Vector2i) -> Array:
+	if House.inside(state):
+		return [&"WHY_ON_THE_HOUSE"]
 	if not is_placeable(id):
 		return [&"WHY_NOTHING_SELECTED"]
 	if not allowed_in_phase(state, id):
@@ -413,9 +444,9 @@ static func sell(state: Dictionary, cell: Vector2i) -> Dictionary:
 	var back := refund_for(state, cell)
 	# Selling any tile of a building sells the building, and takes every tile
 	# of it with it.
-	var at := anchor_of(state, cell)
 	var removed := false
-	for part in footprint(id, at):
+	var owned_parts := parts_at(state, cell)
+	for part in owned_parts:
 		if Farm.occupant(state, part).get("id", &"") == id:
 			removed = Farm.remove(state, part) or removed
 	if not removed:
@@ -435,6 +466,8 @@ static func selected(state: Dictionary) -> StringName:
 
 
 static func set_active(state: Dictionary, active: bool) -> void:
+	if active and House.inside(state):
+		return
 	var build: Dictionary = state["build"]
 	build["active"] = active
 	if not active:
@@ -459,6 +492,8 @@ static func tick(state: Dictionary) -> void:
 	intent["build_place"] = false
 	intent["build_sell"] = false
 	intent["build_upgrade"] = false
+	if House.inside(state):
+		return
 	if not (place_asked or sell_asked or upgrade_asked):
 		return
 

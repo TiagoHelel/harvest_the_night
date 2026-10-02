@@ -459,9 +459,18 @@ static func _room_for(state: Dictionary, id: StringName) -> Vector2i:
 	for cell in _near_the_house(state):
 		if not _clear(state, cell, size):
 			continue
+		# The larger roof has several entry cells. Leave a firing margin so
+		# the first gun covers the approaches before enemies reach an edge.
+		if guns and not GameData.DEFENCES[id].has("path_cost") \
+				and not Traps.is_trap(id) and _house_distance(state, cell) < 2:
+			continue
 		# A tower wants to be near the house and toward the approach; a shed
 		# wants to be near the house and as far from the approach as it can.
-		var score := 2 * _house_distance(cell) 			+ (_far(cell, side) if guns else -_far(cell, side))
+		var score := (2 * _house_distance(state, cell)
+			+ (_far(cell, side) if guns else -_far(cell, side))) * 32
+		# Equally close cells cover the middle of the enlarged frontage first.
+		var home := Farm.house_centre(state)
+		score += absi(cell.x - home.x) + absi(cell.y - home.y)
 		if score < best_score:
 			best_score = score
 			best = cell
@@ -488,9 +497,10 @@ static func _near_the_house(state: Dictionary) -> Array:
 	if state.has("autoplay_spots"):
 		return state["autoplay_spots"]
 	var spots: Array = []
-	for x in range(maxi(HOUSE.x - REACH, 0), mini(HOUSE.x + REACH, Grid.WIDTH)):
-		for y in range(maxi(HOUSE.y - REACH, 1),
-				mini(HOUSE.y + REACH, Grid.HEIGHT - 1)):
+	var home := Farm.house_centre(state)
+	for x in range(maxi(home.x - REACH, 0), mini(home.x + REACH, Grid.WIDTH)):
+		for y in range(maxi(home.y - REACH, 1),
+				mini(home.y + REACH, Grid.HEIGHT - 1)):
 			spots.append(Vector2i(x, y))
 	state["autoplay_spots"] = spots
 	return spots
@@ -500,8 +510,11 @@ static func _far(a: Vector2i, b: Vector2i) -> int:
 	return maxi(absi(a.x - b.x), absi(a.y - b.y))
 
 
-static func _house_distance(cell: Vector2i) -> int:
-	return _far(cell, HOUSE)
+static func _house_distance(state: Dictionary, cell: Vector2i) -> int:
+	var bounds := Farm.house_bounds(state)
+	var closest := Vector2i(clampi(cell.x, bounds.position.x, bounds.end.x - 1),
+		clampi(cell.y, bounds.position.y, bounds.end.y - 1))
+	return _far(cell, closest)
 
 
 static func _clear(state: Dictionary, at: Vector2i, size: Vector2i) -> bool:
@@ -515,5 +528,4 @@ static func _clear(state: Dictionary, at: Vector2i, size: Vector2i) -> bool:
 ## The middle of the house, and how far around it the robot is willing to
 ## build. Both are the instrument's own business rather than rules, so they
 ## live here and not in `GameData`.
-const HOUSE := Vector2i(16, 4)
 const REACH := 9

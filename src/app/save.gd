@@ -310,7 +310,7 @@ static func _migrate(payload: Dictionary, from_version: int) -> Dictionary:
 ## Version 2 widens the farm. Cell indices need remapping, while coordinates,
 ## inventories, jobs and live entities remain at the same world positions.
 static func migrations() -> Dictionary:
-	return {1: _expand_farm_v1}
+	return {1: _expand_farm_v1, 2: _expand_farm_v2}
 
 
 static func _expanded_index(index: int) -> int:
@@ -368,6 +368,85 @@ static func _expand_farm_v1(previous: Dictionary) -> Dictionary:
 	state["grid_version"] = int(state.get("grid_version", 0)) + 1
 	state["version"] = 2
 	return state
+
+
+## Version 3 adds five clear southern rows and larger structure footprints.
+## Never cover a saved plot or another occupant to make a building larger.
+static func _expand_farm_v2(previous: Dictionary) -> Dictionary:
+	var state := previous.duplicate(true)
+	var terrain: PackedByteArray = state.get("terrain", PackedByteArray())
+	if terrain.size() != 45 * 20 and terrain.size() != Grid.CELLS:
+		return {}
+	terrain.resize(Grid.CELLS)
+	var added: PackedByteArray = Farm.initial()["terrain"]
+	for idx in range(45 * 20, Grid.CELLS):
+		terrain[idx] = added[idx]
+	state["terrain"] = terrain
+	var before_porch := House.porch(state)
+	var groups := {}
+	var occupants: Dictionary = state["occupants"]
+	var old_keys := occupants.keys()
+	old_keys.sort()
+	for idx in old_keys:
+		var on: Dictionary = occupants[idx]
+		var id: StringName = on.get("id", &"")
+		if Building.size_of(id) == Vector2i.ONE:
+			continue
+		var key := "%s@%s" % [id, str(on.get("anchor", []))]
+		if not groups.has(key):
+			groups[key] = []
+		groups[key].append(Grid.cell(int(idx)))
+	for key in GameData.sorted_names(groups.keys()):
+		var old_parts: Array = groups[key]
+		var old_origin: Vector2i = old_parts[0]
+		var prototype: Dictionary = Farm.occupant(state, old_origin).duplicate(true)
+		var id: StringName = prototype["id"]
+		var origin := old_origin + Vector2i(-2, 1) if id == &"house" and old_parts.size() == 9 else old_origin
+		var wanted := Building.size_of(id)
+		if not _room_to_expand(state, origin, wanted, old_parts):
+			if id != &"house":
+				continue # A dense legacy station keeps its saved cells and jobs.
+			origin = Vector2i(-1, -1)
+			for y in range(20, Grid.HEIGHT - wanted.y):
+				for x in range(1, Grid.WIDTH - wanted.x):
+					if _room_to_expand(state, Vector2i(x, y), wanted, old_parts):
+						origin = Vector2i(x, y)
+						break
+				if origin.x >= 0:
+					break
+			if origin.x < 0:
+				return {}
+		if id == &"house":
+			for cell in old_parts:
+				occupants.erase(Grid.index(cell))
+			prototype["anchor"] = [origin.x, origin.y]
+		for cell in Building.footprint(id, origin):
+			if not occupants.has(Grid.index(cell)):
+				occupants[Grid.index(cell)] = prototype.duplicate(true)
+	if not Farm.house_bounds(state).size == Vector2i.ZERO:
+		state["house_cell"] = Farm._centre_of(occupants)
+	var here := Player.cell(state)
+	if here == before_porch or not Farm.walkable(state, here):
+		var porch := House.porch(state)
+		state["player"]["pos"] = [porch.x * Player.SUBTILE + Player.SUBTILE / 2,
+			porch.y * Player.SUBTILE + Player.SUBTILE / 2]
+	for key in Pathing.initial():
+		state[key] = Pathing.initial()[key]
+	state["grid_version"] = int(state.get("grid_version", 0)) + 1
+	state["version"] = 3
+	return state
+
+
+static func _room_to_expand(state: Dictionary, origin: Vector2i, size: Vector2i, old_parts: Array) -> bool:
+	for y in size.y:
+		for x in size.x:
+			var cell := origin + Vector2i(x, y)
+			if not Grid.in_bounds(cell) or state.get("plots", {}).has(Grid.index(cell)):
+				return false
+			if not old_parts.has(cell) and (not Farm.is_empty(state, cell) or Farm.UNBUILDABLE.has(Farm.terrain_at(state, cell))):
+				return false
+	var front := origin + Vector2i(size.x / 2, size.y)
+	return Grid.in_bounds(front) and (Farm.walkable(state, front) or old_parts.has(front))
 
 
 ## And the same for the file format.

@@ -78,6 +78,9 @@ const SCENARIOS: Array = [
 	["options_controls", "the controls tab", "OptionsScreen:controls"],
 	["react", "a crop came ready nearby", ""],
 	["refused", "build mode, over something built", ""],
+	["house_interior", "the furnished farmhouse", ""],
+	["farm_extension", "planting on the new southern land", ""],
+	["larger_stations", "the larger farm buildings", ""],
 ]
 
 var _written := 0
@@ -613,6 +616,9 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"options_controls": _set_options_controls(state)
 		"react": _set_react(state)
 		"refused": _set_refused(state)
+		"house_interior": _set_house_interior(state)
+		"farm_extension": _set_farm_extension(state)
+		"larger_stations": _set_larger_stations(state)
 
 	_walk_to(state, _standing_at)
 	main.get_node("%WorldView").look_at_cell(Player.cell(state))
@@ -857,6 +863,31 @@ func _a_sown_field(state: Dictionary) -> void:
 		_standing_at = Vector2i(middle.x + 3, middle.y)
 	# The crops need time on them or the field is six rows of bare soil.
 	Sim.advance(state, 40 * GameData.SECONDS)
+
+
+func _set_house_interior(state: Dictionary) -> void:
+	_walk_to(state, House.porch(state))
+	House.enter(state)
+	_standing_at = Vector2i(9, 8)
+
+
+func _set_farm_extension(state: Dictionary) -> void:
+	Resources.gain(state, {GameData.MONEY: 999})
+	for y in range(20, 23):
+		for x in range(30, 34):
+			var cell := Vector2i(x, y)
+			Farming.act(state, cell)
+			Farming.act(state, cell)
+			state["plots"][Grid.index(cell)]["growth"] = 2000
+	_standing_at = Vector2i(34, 20)
+
+
+func _set_larger_stations(state: Dictionary) -> void:
+	Resources.gain(state, {GameData.WOOD: 999, GameData.STONE: 999, GameData.IRON: 999})
+	Building.place(state, &"press", Vector2i(28, 20))
+	Building.place(state, &"kitchen", Vector2i(33, 20))
+	Building.place(state, &"generator", Vector2i(38, 20))
+	_standing_at = Vector2i(34, 18)
 
 
 func _set_noon(state: Dictionary) -> void:

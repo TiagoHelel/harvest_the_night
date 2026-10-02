@@ -191,10 +191,11 @@ func _draw() -> void:
 		var box: Array = middles[name]
 		var id: StringName = box[0]
 		var at := ((box[1] as Vector2) / float(box[2]) + Vector2(0.5, 0.5)) 			* tile
-		at = ArtPlacement.emission(id, (box[3] as Vector2) * tile, &"light", at)
+		var footprint := Building.bounds_at(_state, Vector2i(box[3])).size
+		at = ArtPlacement.emission(id, (box[3] as Vector2) * tile, &"light", at, footprint)
 		match id:
 			&"house":
-				for window in ArtPlacement.emissions(id, (box[3] as Vector2) * tile, &"windows", at):
+				for window in ArtPlacement.emissions(id, (box[3] as Vector2) * tile, &"windows", at, &"light", footprint):
 					_window_cores.append(get_viewport().get_canvas_transform()*window)
 					_glow_at(window, HOUSE_RADIUS * tile, HOUSE_COLOUR, 0.26)
 			&"kitchen", &"workshop":

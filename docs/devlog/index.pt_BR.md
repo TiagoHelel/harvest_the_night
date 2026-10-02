@@ -158,7 +158,7 @@ voz alta.
 
 ## Toda vez que o jogo mudou por baixo
 
-Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas de balanceamento. Entre os dois eles se mexeram 26 vezes, e cada uma teve que ser escrita antes de ser aceita.
+Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas de balanceamento. Entre os dois eles se mexeram 27 vezes, e cada uma teve que ser escrita antes de ser aceita.
 
 - **verify.py and the determinism guard** (0005) - `data` 3714036227 -> 1895612796
 - **The resource ledger** (0007) - `sim` 2127612543 -> 673656594
@@ -186,6 +186,7 @@ Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas d
 - **Onboarding in seven lines** (0101) - `data` 2842078959 -> 407837701
 - **Onboarding in seven lines** (0101) - `sim` 215410677 -> 4262811284
 - **Saves survive an update** (0104) - `sim` 4262811284 -> 1961000123
+- **Refusals in two languages** (0110) - `sim` 1961000123 -> 3960053733
 
 ## O que deu errado
 

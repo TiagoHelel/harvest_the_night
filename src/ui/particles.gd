@@ -370,13 +370,14 @@ func _watch(delta: float) -> void:
 				continue
 			var anchor: Array = on.get("anchor", [Grid.cell(int(idx)).x, Grid.cell(int(idx)).y])
 			if id == &"house":
-				var corner := Farm.house_centre(_state) - Vector2i.ONE
+				var corner := Farm.house_bounds(_state).position
 				anchor = [corner.x, corner.y]
 			var name := "%s@%s" % [id, str(anchor)]
 			if chimneys.has(name):
 				continue
 			chimneys[name] = true
-			at = ArtPlacement.emission(id, Vector2(anchor[0], anchor[1]) * tile, &"smoke", at)
+			at = ArtPlacement.emission(id, Vector2(anchor[0], anchor[1]) * tile, &"smoke", at,
+				Building.bounds_at(_state, Vector2i(anchor[0], anchor[1])).size)
 			_burst(at, 1, &"smoke", SMOKE, 8.0)
 			_forms.emit(&"smoke",at,Vector2(0,-4))
 		elif _is_wrecked(on):

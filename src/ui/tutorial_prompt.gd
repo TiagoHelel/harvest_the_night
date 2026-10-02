@@ -82,6 +82,10 @@ func showing() -> StringName:
 func _process(_delta: float) -> void:
 	if _state.is_empty():
 		return
+	if House.inside(_state):
+		visible = false
+		_showing = &""
+		return
 
 	# Asked once, on the first frame with a state. A player who has seen it
 	# does not see it again; a player halfway through their first day does.

@@ -318,7 +318,7 @@ func _refresh(force: bool) -> void:
 				_day_only.append(child as Control)
 	for node in _day_only:
 		node.visible = daylight
-	visible = true
+	visible = not House.inside(_state)
 
 	# **The night's controls are the inverse of the day's.** They are not in
 	# `_day_only`, so they are shown here and hidden by the same test.

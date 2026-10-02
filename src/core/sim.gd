@@ -94,14 +94,16 @@ static func _tick_day(state: Dictionary) -> void:
 	# **Filling the can is a fact about where the player is standing**, so it
 	# is asked here where both are in scope rather than from inside `Farming`,
 	# which `Player` already reaches through `Interact`.
-	Farming.refill_beside(state, Player.cell(state))
+	if not House.inside(state):
+		Farming.refill_beside(state, Player.cell(state))
 	# Same reason as the refill above: a line in the water is a fact about
 	# where the farmer is standing, and walking off gives it up.
 	Fishing.tick(state, Player.cell(state))
 	Gathering.tick(state)
 	Livestock.tick(state)
 	# Watching, never gating: it can only notice that something happened.
-	Tutorial.tick(state)
+	if not House.inside(state):
+		Tutorial.tick(state)
 	Crafting.tick(state)
 	Player.tick(state)
 

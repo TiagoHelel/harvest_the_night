@@ -10243,3 +10243,44 @@ source provenance and five Main captures under implementation/shots/world-visibi
 Only three runtime PNGs changed; other sprite families and 480x270 resolution
 are preserved. Ambient animals stay in their gameplay cells; fractional zoom
 retains nearest-neighbor pixel-size variation. No push or automation is started.
+
+## 2026-10-02 — Larger buildings, another 25% farm and enterable farmhouse
+
+User-directed follow-up outside the completed implementation/sprite queues.
+House, shop, workshop, kitchen, press and generator reuse their accepted exterior
+PNG art at 2x integer scale, with larger logical footprints and aligned placement,
+lights and chimney. The fresh farm rearranges fixtures to keep the doorway and
+ore approach accessible. Its map grows 45x20 → 45x25, 900 → 1,125 (+25%), adding
+225 connected clear southern cells. Actual planting beds also grow 48 → 60 (+25%)
+with a 4x3 southern garden; grass remains building/circulation ground. Clear
+soil/grass after the larger buildings grows 591 → 787. All 468 previous tracked
+PNG files are unchanged; no prior sprite family or resolution is regenerated.
+
+One built-in image_gen.imagegen transparent modular sheet supplies nine new
+source-owned interior assets. Original, exact prompt, measured cuts, metadata,
+plan and native evidence: implementation/farm-house/. Interact at the daytime
+porch enters a furnished 20x13 room. Walk to the southern door to exit. The same
+farmer, zoom, smooth camera and pause work there. Furniture blocks movement and
+is currently decorative. Farm growth/production continue; defence returns outside.
+Indoor coordinates cannot sell/build outdoors or open external workshop/tutorial
+panels. Locale refresh also skips the I18n service's own static traversal method.
+
+State 2 → 3 migrates both old grids while preserving crops, inventory, queued
+jobs and products. Obstructed stations retain compact saved footprints; a house
+whose enlargement would cover crops moves onto clear southern land. The automatic
+player now scores the actual house frontage and leaves firing space, preserving
+all four policies' first-night survival. Giant/rerouting tests retain their behavior
+checks with power behind the fight and a genuinely connected fence gap.
+
+Map, footprints, interior state and new garden intentionally move sim
+3960053733 → 1270427719 and data 3913993875 → 3247244688. Native verification:
+273 room/farm checks, 8 keyboard house cases, six room/exterior captures and eight
+Main captures at 480x270. Final full verification is logged at
+implementation/farm-house/verify-pass.log: **54 passed, zero skipped/failed**;
+122 scripts parsed, 7,577 core assertions and 995 input cases passed, including
+Windows/Web/playtest exports. 479s exceeds the soft 300s suite target; runtime
+performance checks pass. Sim/data are stable at the new recorded baselines.
+Optional GODOT_PROJECT_PATH and the task's QA mirror isolate save/profile fixtures
+from player files; release exports always use the actual project settings.
+No new top-level folder, push or automation. Unrelated editor serialization and
+previous untracked imports remain outside the commit.

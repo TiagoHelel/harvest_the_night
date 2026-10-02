@@ -1,0 +1,12 @@
+  script parse                 PASS   7.2s  PARSED 122 scripts, 0 failed
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+CASE 0111 farm house
+HARVEST THE NIGHT v0.1.0 (prototype, built 2026-09-28)
+HOUSE INPUT: 8 cases, 0 failed
+WARNING: 4 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 2 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+
+exit code 0

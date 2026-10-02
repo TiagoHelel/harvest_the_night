@@ -1,0 +1,14 @@
+Use case: stylized-concept
+Asset type: one modular interior sprite sheet for an original farming game, 3 columns by 3 rows on a true transparent canvas.
+Create nine carefully separated usable game sprites, no room scene and no UI. Original cozy rural farmhouse furniture, warm earthy brown wood, cream plaster, muted olive greens, rust-red highlights, dark brown crisp outlines. Hand-authored pixel-art appearance with clearly separated pixel clusters, straight-on top-down three-quarter RPG view, horizontal front faces and vertical parallel sides, NOT isometric. Uniform camera angle and gentle upper-left light. No characters, writing, watermark, labels or grid lines.
+Exactly this row-major 3x3 layout:
+row 1 left: seamless square warm wooden plank floor tile, all square opaque edge to edge, horizontal boards;
+row 1 middle: rectangular repeatable north wall section, pale cream plaster above dark wood wainscoting with a wooden top beam, width:height 1:2;
+row 1 right: wooden single bed with pillow and muted green blanket, headboard to north, width:height 3:4.
+row 2 left: a compact rustic kitchen counter with iron stove, basin and shelves as ONE combined sprite, width:height 2:1;
+row 2 middle: small wooden dining table and two chairs as ONE combined sprite, width:height 4:3;
+row 2 right: small brick and stone fireplace with amber ember hearth and chimney, width:height 3:4.
+row 3 left: wooden wardrobe and short bookcase together as ONE combined sprite, width:height 3:4;
+row 3 middle: flat small oval woven rug, muted terracotta, width:height 2:1;
+row 3 right: one leafy potted houseplant in a clay pot, width:height 3:4.
+Arrange each object centrally within its equal-sized panel, generous transparent gutters between objects and outside. All sprites completely visible with clean transparent edges; no cast shadows spreading into other panels. Furniture must read clearly when cut and reduced for a 30-pixel-tall farmer: bed about 42x56 pixels, counter 84x42, table 56x42, fireplace 42x56, cabinet 42x56, rug 64x32, plant 24x32. Keep bold simple structure and restrained detail for that small size. Floor and wall are tiles, all other items are individual cutouts.

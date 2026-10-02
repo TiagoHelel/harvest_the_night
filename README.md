@@ -65,8 +65,18 @@ From the repository root, with Godot set in your environment:
 
 Use the mouse wheel or `=` / `-` to zoom and `0` to return to the default view.
 These bindings can be changed in Controls. The camera follows the farmer
-smoothly on both axes. Existing 40x18 saves are migrated to the 45x20 farm
-without moving their buildings or losing crops, inventory or job progress.
+smoothly on both axes. The farm now has 45x25 cells and five new clear southern
+rows for planting. Buildings reuse the exterior art at twice its previous scale.
+Planting beds also grow by 25%, from 48 to 60, with a new southern plot.
+Existing 40x18 and 45x20 saves retain crops, inventory and production; structures
+expand where safe, and a crowded old farmhouse moves to the new meadow.
+
+During the day, stand at the farmhouse's front door and press Interact
+(Space or Enter by default) to enter. Walk around the furnished room, then walk
+through the southern doorway to return outside. The same zoom and pause controls
+work indoors. Crops keep growing during visits; starting defence returns you
+outside. Furniture is decorative with solid collision; sleep, storage and cooking
+interactions inside the house are not implemented.
 
 ---
 
@@ -76,7 +86,7 @@ without moving their buildings or losing crops, inventory or job progress.
 |---|---|
 | Engine | Godot 4.7, `gl_compatibility` so the Web export works |
 | Resolution | 480x270 base, 16px tiles, integer scaling only |
-| The farm | one 45x20 grid (900 cells), and it is the entire world |
+| The farm | one 45x25 grid (1,125 cells), plus the enterable farmhouse room |
 | Simulation | one fixed 30Hz `Sim.tick(state)` for day growth and night combat alike |
 | Pathing | a flow field from the house, not A* per zombie |
 | Language | English throughout; pt-BR is a translation file at task 0097 |

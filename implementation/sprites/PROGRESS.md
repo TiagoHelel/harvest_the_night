@@ -1495,3 +1495,24 @@ every waiting tick, pause, state replacement/resume, bite glyph, catch follow-th
 cancel, movement, missed bite and dusk pose removal. Evidence and reproduction:
 implementation/reviews/fishing-hold/. No full export suite rerun is claimed.
 Queue remains 20 done; unrelated editor serialization and imports are excluded.
+
+## 2026-10-02 — Follow-up: larger buildings and farmhouse interior
+
+The accepted exterior families are reused at 2x integer scale and coherently
+larger footprints. All 468 preceding tracked PNGs remain byte-identical. A single
+new built-in imagegen transparent modular sheet is preserved and registered as
+nine interior assets: floor, wall, kitchen, dining table, hearth, bed, storage,
+rug and plant. The original prompt/call metadata/cuts and native review are under
+implementation/farm-house/. This is the user's gameplay follow-up; the sprite
+production queue stays 20 done.
+
+The farm grows 900 → 1,125 cells (+25%) and planting beds 48 → 60 (+25%). The
+farmer can enter and explore the daytime farmhouse using existing controls, then
+leave through its southern door. Native 480x270 inspection covers the complete
+room, circulation, zoom, porch and exterior building/person ratios. Existing
+sprites, animations, palette and viewport remain intact. Review also suppresses
+outdoor tutorial/workshop panels indoors and aligns enlarged chimney emission.
+State version 3 supports both preceding saves without dropping crops/jobs/stock.
+Intentional sim 3960053733 → 1270427719; data 3913993875 → 3247244688. Final suite
+and exports are recorded in implementation/farm-house/verify-pass.log and the
+main progress journal. No publishing, push or scheduled work is requested.

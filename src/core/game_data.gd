@@ -93,8 +93,21 @@ const TERRAIN_COST: Array = [
 const WIDEST_STEP := 32
 
 const GRID_WIDTH := 45
-const GRID_HEIGHT := 20
+const GRID_HEIGHT := 25
 const TILE_SIZE := 16
+const HOUSE_SIZE := Vector2i(6, 4)
+const SHOP_SIZE := Vector2i(4, 2)
+const HOUSE_ROOM := Vector2i(20, 13)
+const HOUSE_DOOR := Vector2i(10, 12)
+const HOUSE_SPAWN := Vector2i(10, 11)
+const HOUSE_FURNITURE := [
+	{"id": &"kitchen", "cell": Vector2i(1, 4), "size": Vector2i(6, 2)},
+	{"id": &"fireplace", "cell": Vector2i(10, 4), "size": Vector2i(3, 2)},
+	{"id": &"bed", "cell": Vector2i(16, 4), "size": Vector2i(3, 3)},
+	{"id": &"table", "cell": Vector2i(3, 8), "size": Vector2i(5, 2)},
+	{"id": &"storage", "cell": Vector2i(16, 9), "size": Vector2i(3, 2)},
+	{"id": &"plant", "cell": Vector2i(1, 10), "size": Vector2i(2, 1)},
+]
 
 ## What the farmhouse can take before the night is lost.
 const HOUSE_HP := 100                   # LEVER: hit points, 60-200
@@ -263,7 +276,7 @@ const WATER_LASTS_UNTIL_NIGHT := true
 
 ## How many tiles one canful waters.
 ##
-## The field is forty-eight plots, so watering all of it is six trips to the
+## The field is sixty plots, so watering all of it takes eight trips to the
 ## water. That is the chore: worth doing, never required, and the reason the
 ## well is somewhere you have to walk to.
 const WATER_CAN_CAPACITY := 8           # LEVER: tiles per fill, 3-20
@@ -459,19 +472,19 @@ const BUILDINGS: Dictionary = {
 		"hp": 80,                       # LEVER: hit points, 40-160
 		"cost": {WOOD: 20, STONE: 10},
 		"energy_draw": 0,
-		"size": Vector2i(2, 2),
+		"size": Vector2i(4, 3),
 	},
 	&"press": {
 		"hp": 80,                       # LEVER: hit points, 40-160
 		"cost": {WOOD: 25, IRON: 5},
 		"energy_draw": 2,               # LEVER: energy per tick, 1-5
-		"size": Vector2i(2, 2),
+		"size": Vector2i(4, 3),
 	},
 	&"kitchen": {
 		"hp": 70,                       # LEVER: hit points, 40-160
 		"cost": {WOOD: 15, STONE: 15},
 		"energy_draw": 1,               # LEVER: energy per tick, 0-3
-		"size": Vector2i(2, 2),
+		"size": Vector2i(4, 3),
 	},
 	&"generator": {
 		"hp": 90,                       # LEVER: hit points, 40-160
@@ -483,7 +496,7 @@ const BUILDINGS: Dictionary = {
 		# against the twelve a press can make in a day. Expensive enough to be a
 		# decision, cheap enough that the answer is sometimes yes.
 		"fuel_every_ticks": 60 * SECONDS,   # LEVER: ticks, 20-120 seconds worth
-		"size": Vector2i(2, 2),
+		"size": Vector2i(4, 3),
 	},
 }
 
@@ -1593,8 +1606,9 @@ const DEFEAT_KEEPS_TECH := true
 
 # ====================================================================== the map
 
-## The farm, as one 45x20 picture: 900 cells, 25% above the original 720.
-## Existing coordinates stay fixed; new meadow extends east and shore south.
+## The farm, as one 45x25 picture: 1,125 cells, 25% above the preceding 900.
+## Enlarged fixtures leave at least 25% more plantable land; five clear rows
+## extend the farm south. Save migrations preserve crops and production.
 ##
 ## **The whole world is this map**, by day and by night alike: `design.md`
 ## pillar 1 is that there is one farm and it is everything, and pillar 2 is that
@@ -1616,16 +1630,16 @@ const FARM_MAP: Array = [
 	"TTT.TTTT....TTT..TT.....TT....TT..TTT.TTT.TT.",
 	"....................S######o........T.......T",
 	"T..ssssss......ppp..S######o...........T.....",
-	"...ssssss.....pHHHp.S######o...........T.....",
-	"...ssssss......HHH..S######o....r............",
-	"T..ssssss......HHH..S######o...........T.....",
-	"...ssssss.....ppppp.#####ooo.................",
-	"T.........w............................T.....",
-	"..ssssss....WW.p....r.....r............T.....",
-	"..ssssss....WW.p...$$............T.T...T.....",
-	"..ssssss.......p...............rTT.TT..T.....",
-	"T.......c...c..p.................TT.T..T.....",
-	".....r.....C...p....T.........TT.TT.TT.......",
+	"...ssssss.....p...p.S######o...........T.....",
+	"...ssssss....HHHHHH.S######o....r............",
+	"T..ssssss....HHHHHH.S######o...........T.....",
+	"...ssssss....HHHHHH.#####ooo...$$$$..........",
+	"T.....w......HHHHHH............$$$$....T.....",
+	"..ssssss.......pp...r.....r............T.....",
+	"..ssssssWWWW...pp................T.T...T.....",
+	"..ssssssWWWW...pp..............rTT.TT..T.....",
+	"T.......WWWWc..pp................TT.T..T.....",
+	".....rc....C...pp...T.........TT.TT.TT.......",
 	"T.........=====p......T.........TT.T...T.....",
 	"..~~~~~~~~=====..............................",
 	".~~~~~~~~~~~~~~~~~..............TT...........",
@@ -1633,6 +1647,11 @@ const FARM_MAP: Array = [
 	"~~~~~~~~~~~~~~~~~~~~~~~~~~..TTT...TTTTTT.....",
 	"~~~~~~~~~~~~~~~~~~~~~~~~~~~..................",
 	"~~~~~~~~~~~~~~~~~~~~~~~~~~~~...TT...TT..TTTTT",
+	"..............................ssss...........",
+	"..............................ssss...........",
+	"..............................ssss...........",
+	".............................................",
+	".............................................",
 ]
 
 ## What each character means: the terrain under it, and what is standing on it.
@@ -2474,6 +2493,8 @@ static func digest() -> int:
 			MAX_CATCH_UP_TICKS],
 		"farm": [GRID_WIDTH, GRID_HEIGHT, TILE_SIZE, HOUSE_HP,
 			PLAYER_SPEED],
+		"house": [HOUSE_SIZE, SHOP_SIZE, HOUSE_ROOM, HOUSE_DOOR,
+			HOUSE_SPAWN, HOUSE_FURNITURE],
 		"map": FARM_MAP,
 		"resources": RESOURCES,
 		"sell_price": SELL_PRICE,

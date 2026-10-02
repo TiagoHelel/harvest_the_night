@@ -51,7 +51,7 @@ const DIAGONAL_DENOMINATOR := 256
 ## The keys this subsystem owns. `State.create()` merges them in.
 static func initial() -> Dictionary:
 	# On the porch, south of the farmhouse, looking at the farm.
-	var start := Vector2i(17, 7)
+	var start := Vector2i(16, 8)
 	return {
 		"player": {
 			"pos": [start.x * SUBTILE + SUBTILE / 2,
@@ -144,10 +144,15 @@ static func is_busy(state: Dictionary) -> bool:
 
 ## One tick of being a person on a farm. Called from `Sim._tick_day()`.
 static func tick(state: Dictionary) -> void:
+	if House.inside(state):
+		House.tick(state)
+		return
 	var intent: Dictionary = state["intent"]
 	var move: Array = intent["move"]
 	var dx := signi(int(move[0]))
 	var dy := signi(int(move[1]))
+	if bool(intent.get("interact", false)) and dx == 0 and dy == 0 and House.enter(state):
+		return
 
 	# **A panel takes the keys.** Walking away from a stall you are standing at
 	# would be a way to shop while running, and cancel is how you leave.

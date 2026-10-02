@@ -59,7 +59,7 @@ def main():
         print("no Godot found - set GODOT or put it on the path")
         return 1
 
-    command = [verify.GODOT, "--path", ".",
+    command = [verify.GODOT, "--path", verify.PROJECT_PATH,
                "--fixed-fps", str(FIXED_FPS),
                "--position", WINDOW_AT,
                "--script", "res://src/tools/shot.gd", "--"]

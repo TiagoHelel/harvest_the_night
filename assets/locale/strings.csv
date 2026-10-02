@@ -387,3 +387,6 @@ WORK_QUEUED_RUNNING,0,%d. %s  (running),%d. %s  (fazendo)
 WORK_ROOM,0,  %d slot free,  %d lugar livre
 WORK_ROOM.other,0,  %d slots free,  %d lugares livres
 WORK_STALLED,0,waiting on materials,faltam materiais
+HOUSE_TITLE,456,FARMHOUSE,CASA DA FAZENDA
+HOUSE_EXIT_HINT,456,Walk to the door or %s near it to leave.,Caminhe ate a porta ou use %s perto dela para sair.
+HOUSE_ENTER_HINT,240,%s: enter the farmhouse,%s: entrar na casa

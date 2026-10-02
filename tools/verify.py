@@ -22,6 +22,9 @@ import sys
 import time
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# Optional mirrored project with a dedicated user:// directory for destructive
+# save/input fixtures. Resource sources still come from this repository.
+PROJECT_PATH = os.environ.get("GODOT_PROJECT_PATH", ".")
 GODOT = os.environ.get(
     "GODOT",
     "C:/Users/PC GAMER DA FAMILIA/Documents/Godot/"
@@ -63,7 +66,7 @@ def run(cmd, timeout=600):
 
 
 def godot(args, timeout=600):
-    return run([GODOT, "--path", ".", *args], timeout=timeout)
+    return run([GODOT, "--path", PROJECT_PATH, *args], timeout=timeout)
 
 
 def row(name, status, detail=""):
@@ -241,6 +244,11 @@ def check_house_art():
 def check_house_showcase():
     code, out = run([sys.executable, "tools/show_art.py", "--house", "--check"])
     return check("house HP/lighting", code == 0, next((s for s in out.splitlines() if s.startswith("HOUSE SHOWCASE:")), tail(out, 4)))
+
+
+def check_house_visit():
+    code, out = run([sys.executable, "tools/show_art.py", "--house-visit", "--check"])
+    return check("farm/house visit", code == 0, next((s for s in out.splitlines() if s.startswith("FARM HOUSE:")), tail(out, 4)))
 
 
 def check_station_art():
@@ -672,8 +680,9 @@ def check_exports():
             continue
         dest = rel(*out_path.split("/"))
         os.makedirs(os.path.dirname(dest), exist_ok=True)
-        code, out = godot(["--headless", "--export-release", name, out_path],
-                          timeout=900)
+        # Release checks use the real project config, never the QA user folder.
+        code, out = run([GODOT, "--path", ROOT, "--headless", "--export-release", name, dest],
+                        timeout=900)
         if code != 0 or not os.path.exists(dest):
             bad.append("%s: %s" % (name, tail(out, 3)))
     return check("exports", not bad, "; ".join(bad)[:300])
@@ -725,6 +734,7 @@ def main():
     check_crop_showcase()
     check_house_art()
     check_house_showcase()
+    check_house_visit()
     check_station_art()
     check_station_showcase()
     check_tower_art()

@@ -629,7 +629,7 @@ func show_ghost(cell: Vector2i, id: StringName, ok: bool) -> void:
 		return
 	var size := float(GameData.TILE_SIZE)
 	_ghost.texture = _texture_for(_barrier_name({"id": id}, cell) if connected_barrier(id) else id)
-	ArtPlacement.place(_ghost, cell, Vector2i(3, 3) if id == &"house" else Building.size_of(id))
+	ArtPlacement.place(_ghost, cell, Building.size_of(id))
 	_ghost.visible = true
 	if cell == _ghost_cell and ok == _ghost_ok and id == _ghost_id:
 		return
@@ -651,7 +651,7 @@ func ghost_cell() -> Vector2i:
 
 
 func ghost_footprint() -> Vector2i:
-	return Vector2i(3, 3) if _ghost_id == &"house" else Building.size_of(_ghost_id)
+	return Building.size_of(_ghost_id)
 
 
 func hide_ghost() -> void:
@@ -995,7 +995,7 @@ func _refresh() -> void:
 			anchor = Vector2i(int(anchored[0]), int(anchored[1]))
 		elif _fixture_corner.has(id):
 			anchor = _fixture_corner[id]
-		var footprint := Vector2i(3, 3) if id == &"house" else Building.size_of(id)
+		var footprint := Building.bounds_at(_state, cell).size if Building.size_of(id) != Vector2i.ONE else Vector2i.ONE
 		var whole := _texture_for(_station_art(id, on, anchor))
 		var grouped := footprint != Vector2i.ONE and (RasterArt.FRAMES.has(whole.resource_path)
 			or (whole.get_width() >= footprint.x * GameData.TILE_SIZE
@@ -1010,7 +1010,9 @@ func _refresh() -> void:
 		if grouped:
 			for y in footprint.y:
 				for x in footprint.x:
-					logical_cells.append(Grid.index(anchor + Vector2i(x, y)))
+					var part := Grid.index(anchor + Vector2i(x, y))
+					if occupants.has(part) and occupants[part].get("id", &"") == id:
+						logical_cells.append(part)
 		else:
 			logical_cells.append(idx)
 		sprite.set_meta("logical_cells", logical_cells)

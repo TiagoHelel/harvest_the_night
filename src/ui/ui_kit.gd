@@ -200,6 +200,7 @@ const SPACED := &"Spaced"
 ## nothing left to press - with green letters, so "you have this" and "you
 ## cannot afford this" are not the same grey.
 const OWNED := &"Owned"
+const PORCH_HINT := &"PorchHint"
 
 
 ## The same nine roles, pushed apart. **Task 0098.**
@@ -324,6 +325,9 @@ static func _dress_text(out: Theme) -> void:
 	# engine's grey.
 	out.set_stylebox(&"panel", &"TooltipPanel", tooltip())
 	out.set_color(&"font_color", &"TooltipLabel", colour())
+	out.set_type_variation(PORCH_HINT, &"Label")
+	out.set_color(&"font_color", PORCH_HINT, colour(WARM))
+	out.set_stylebox(&"normal", PORCH_HINT, _flat(_wash(&"ink", 0.90)))
 
 
 static func _dress_frames(out: Theme) -> void:

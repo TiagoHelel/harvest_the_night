@@ -159,7 +159,7 @@ is the sort of thing this list exists to say out loud.
 
 ## Every time the game changed underneath itself
 
-Two hashes guard this project: one over the rules and one over the balance tables. Between them they moved 26 times, and each one had to be written down before it was accepted.
+Two hashes guard this project: one over the rules and one over the balance tables. Between them they moved 27 times, and each one had to be written down before it was accepted.
 
 - **verify.py and the determinism guard** (0005) - `data` 3714036227 -> 1895612796
 - **The resource ledger** (0007) - `sim` 2127612543 -> 673656594
@@ -187,6 +187,7 @@ Two hashes guard this project: one over the rules and one over the balance table
 - **Onboarding in seven lines** (0101) - `data` 2842078959 -> 407837701
 - **Onboarding in seven lines** (0101) - `sim` 215410677 -> 4262811284
 - **Saves survive an update** (0104) - `sim` 4262811284 -> 1961000123
+- **Refusals in two languages** (0110) - `sim` 1961000123 -> 3960053733
 
 ## What went wrong
 

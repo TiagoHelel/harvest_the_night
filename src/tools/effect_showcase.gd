@@ -245,8 +245,8 @@ func _chimney() -> void:
 		await _settle()
 		_fx._smoke_due = 0.0
 		_fx._process(0.0)
-		var corner := Farm.house_centre(_state)-Vector2i.ONE
-		var at := ArtPlacement.emission(&"house",Vector2(corner)*GameData.TILE_SIZE,&"smoke",Vector2.ZERO)
+		var bounds := Farm.house_bounds(_state)
+		var at := ArtPlacement.emission(&"house",Vector2(bounds.position)*GameData.TILE_SIZE,&"smoke",Vector2.ZERO,bounds.size)
 		var count := 0
 		for record in _fx._forms.records:
 			if record["family"]==&"smoke":

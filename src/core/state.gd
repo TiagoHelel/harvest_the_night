@@ -24,7 +24,7 @@ extends RefCounted
 ## filling in can express - a key that means something different than it used
 ## to, a number that changed units, two keys that became one. Then there is a
 ## migration under it, and `Save` runs them in order.
-const VERSION := 2
+const VERSION := 3
 
 ## The nested dictionaries whose keys come from the code.
 ##
@@ -35,7 +35,7 @@ const VERSION := 2
 ## it was taken away. Both are mended by looking at a new game.
 const TABLES: Array = [
 	"ability", "build", "gained", "held", "intent", "player", "power",
-	"reaction", "selected_recipe", "stall", "stats", "tutorial", "wave",
+	"reaction", "selected_recipe", "stall", "stats", "tutorial", "wave", "house_visit",
 ]
 
 ## And the ones whose keys come from playing.
@@ -73,6 +73,7 @@ static func create(seed_value: int) -> Dictionary:
 	_adopt(state, Resources.initial(), "Resources")
 	_adopt(state, Farm.initial(), "Farm")
 	_adopt(state, Player.initial(), "Player")
+	_adopt(state, House.initial(), "House")
 	_adopt(state, Gathering.initial(), "Gathering")
 	_adopt(state, Farming.initial(), "Farming")
 	_adopt(state, Crafting.initial(), "Crafting")

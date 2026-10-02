@@ -1,0 +1,24 @@
+{
+  "tool": "image_gen.imagegen",
+  "mode": "built-in generation",
+  "date": "2026-10-02",
+  "transparent_background": true,
+  "original_output": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-acc4cb25-efb6-467e-bb2a-1b8a14343a79.png",
+  "workspace_source": "assets/art_source/interior/farmhouse-v1.png",
+  "source_sha256": "08cbf8e82803b07e15e6c47ba5dfec96bfd17964bb44c404ed64f3e6a80c37fc",
+  "prompt": "implementation/farm-house/interior.prompt.txt",
+  "prompt_sha256": "58de1a79a0fa050ceea18ec46bf067be78cfc4a1df4cbe4782ec3e04c078cb9b",
+  "cuts": "implementation/farm-house/register_art.py",
+  "manifest": "assets/art_source/manifest.json",
+  "outputs": [
+    "sprites/interior/bed.png",
+    "sprites/interior/fireplace.png",
+    "sprites/interior/floor.png",
+    "sprites/interior/kitchen.png",
+    "sprites/interior/plant.png",
+    "sprites/interior/rug.png",
+    "sprites/interior/storage.png",
+    "sprites/interior/table.png",
+    "sprites/interior/wall.png"
+  ]
+}

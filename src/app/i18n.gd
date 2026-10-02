@@ -237,7 +237,7 @@ static func forget_missing() -> void:
 ## that a screen was reached rather than hoping.
 static func relabel(from: Node) -> int:
 	var done := 0
-	if from.has_method(&"relabel"):
+	if not from is I18n and from.has_method(&"relabel"):
 		from.call(&"relabel")
 		done += 1
 	for child in from.get_children():

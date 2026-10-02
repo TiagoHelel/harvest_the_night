@@ -91,7 +91,7 @@ func show_state(state: Dictionary) -> void:
 
 ## The station the farmer is at, or off the farm when they are not at one.
 func station_cell() -> Vector2i:
-	if _state.is_empty() or int(_state["phase"]) != Phases.DAY:
+	if _state.is_empty() or int(_state["phase"]) != Phases.DAY or House.inside(_state):
 		return Vector2i(-1, -1)
 	var at := Player.target(_state)
 	var on := Farm.occupant(_state, at)

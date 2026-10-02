@@ -61,6 +61,19 @@ static func initial() -> Dictionary:
 					occupants[idx]["hp"] = int((entry_for as Dictionary)
 						.get("hp", 1))
 
+	# Map-authored cells share the same owner as player-placed structures.
+	var corners := {}
+	for idx in occupants:
+		var id: StringName = occupants[idx]["id"]
+		if Building.size_of(id) != Vector2i.ONE:
+			var cell := Grid.cell(int(idx))
+			var corner: Vector2i = corners.get(id, cell)
+			corners[id] = Vector2i(mini(cell.x, corner.x), mini(cell.y, corner.y))
+	for idx in occupants:
+		var id: StringName = occupants[idx]["id"]
+		if corners.has(id):
+			var corner: Vector2i = corners[id]
+			occupants[idx]["anchor"] = [corner.x, corner.y]
 	return {
 		"terrain": terrain,
 		"occupants": occupants,
@@ -84,14 +97,14 @@ static func initial() -> Dictionary:
 	}
 
 
-## The middle of the 3x3 farmhouse, from the occupant table it was built from.
+## The middle of the farmhouse, from the occupant table it was built from.
 static func _centre_of(occupants: Dictionary) -> Array:
 	var sum := Vector2i.ZERO
 	var n := 0
 	var keys: Array = occupants.keys()
 	keys.sort()
 	for idx in keys:
-		if (occupants[idx] as Dictionary)["id"] == &"house":
+		if (occupants[idx] as Dictionary).get("id", &"") == &"house":
 			sum += Grid.cell(int(idx))
 			n += 1
 	if n == 0:
@@ -102,6 +115,15 @@ static func _centre_of(occupants: Dictionary) -> Array:
 static func terrain_at(state: Dictionary, cell: Vector2i) -> int:
 	var idx := Grid.index(cell)
 	return -1 if idx < 0 else int((state["terrain"] as PackedByteArray)[idx])
+
+
+static func house_bounds(state: Dictionary) -> Rect2i:
+	var bounds := Rect2i()
+	for idx in state.get("occupants", {}):
+		if state["occupants"][idx].get("id", &"") == &"house":
+			var cell := Grid.cell(int(idx))
+			bounds = Rect2i(cell, Vector2i.ONE) if bounds.size == Vector2i.ZERO else bounds.merge(Rect2i(cell, Vector2i.ONE))
+	return bounds
 
 
 ## What crossing a tile of this terrain costs somebody walking in. Zero when
@@ -148,6 +170,8 @@ static func buildable(state: Dictionary, cell: Vector2i) -> bool:
 	var t := terrain_at(state, cell)
 	if t < 0 or UNBUILDABLE.has(t):
 		return false
+	if cell == House.porch(state):
+		return false
 	return is_empty(state, cell)
 
 
@@ -157,6 +181,8 @@ static func why_not_buildable(state: Dictionary, cell: Vector2i) -> Array:
 	var t := terrain_at(state, cell)
 	if t < 0:
 		return [&"WHY_OFF_THE_FARM"]
+	if cell == House.porch(state):
+		return [&"WHY_ON_THE_HOUSE"]
 	if t == Terrain.WATER:
 		return [&"WHY_IN_THE_WATER"]
 	if t == Terrain.ROCK:

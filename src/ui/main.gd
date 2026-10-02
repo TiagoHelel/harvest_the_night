@@ -42,6 +42,8 @@ var _dressed: Theme
 
 ## The router. By path, because it is an autoload: see `app.gd`.
 var _router: Node
+var _house_view: HouseView
+var _inside_house := false
 
 @onready var _world: WorldView = %WorldView
 @onready var _shop: ShopPanel = %ShopPanel
@@ -88,6 +90,9 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	print(BuildInfo.line())
+	_house_view = HouseView.new()
+	_house_view.name = "HouseView"
+	add_child(_house_view)
 	_driver.stepping.connect(_player_view.before_tick)
 	_driver.stepped.connect(_player_view.after_tick)
 	_driver.stepping.connect(_world.before_tick)
@@ -203,6 +208,7 @@ func _hand_out() -> void:
 
 	_world.show_state(_driver.state)
 	_player_view.show_state(_driver.state)
+	_house_view.show_state(_driver.state)
 	_shop.show_state(_driver.state)
 	# The HUD drives the speed and skip buttons through this,
 	# rather than reaching into the state to do it itself.
@@ -242,6 +248,12 @@ func _process(_delta: float) -> void:
 		return
 	_drop_a_crumb(_delta)
 	_world.ambient_running = _driver.running and not _driver.holding()
+	var indoors := House.inside(_driver.state)
+	_world.visible = not indoors
+	_lighting.visible = not indoors
+	if _inside_house and not indoors:
+		_world.look_at_cell(Player.cell(_driver.state))
+	_inside_house = indoors
 	var intent: Dictionary = _driver.state["intent"]
 	var move: Array = intent["move"]
 	move[0] = int(Input.get_axis(&"move_left", &"move_right"))
@@ -264,7 +276,8 @@ func _process(_delta: float) -> void:
 	_world.highlight(Vector2i(-1, -1)
 		if Shop.is_open(_driver.state) or Building.is_active(_driver.state)
 		else _target_cell())
-	_world.follow_player(Player.position(_driver.state), _delta)
+	if not indoors:
+		_world.follow_player(Player.position(_driver.state), _delta)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -274,6 +287,13 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	for action in [&"zoom_in", &"zoom_out", &"zoom_reset"]:
 		if event.is_action_pressed(action):
+			if House.inside(_driver.state):
+				if action == &"zoom_reset":
+					_house_view.reset_zoom()
+				else:
+					_house_view.change_zoom(1 if action == &"zoom_in" else -1)
+				get_viewport().set_input_as_handled()
+				return
 			if action == &"zoom_reset":
 				_world.reset_zoom()
 			else:

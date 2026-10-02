@@ -32,7 +32,7 @@ extends SceneTree
 const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
-const GROUPS := 102
+const GROUPS := 103
 
 const SettingsScript := preload("res://src/app/settings.gd")
 const AppScript := preload("res://src/app/app.gd")
@@ -180,6 +180,48 @@ func _run() -> void:
 	_task_0108_devlog()
 	_task_0109_reactions()
 	_task_0110_refusals()
+	_task_0111_house()
+
+
+## The farm expansion and room use the same deterministic state and inputs.
+func _task_0111_house() -> void:
+	var state := State.create(111111)
+	expect(Grid.CELLS * 100 == 900 * 125, "the preceding farm gains exactly 25% area")
+	var new_bed := Vector2i(31, 21)
+	Farming.act(state, new_bed)
+	Farming.act(state, new_bed)
+	expect(Farming.crop_on(state, new_bed) != &"", "new southern beds support ordinary tilling and planting")
+	expect(Farm.house_bounds(state).size == GameData.HOUSE_SIZE, "the enlarged house owns its whole footprint")
+	var porch := House.porch(state)
+	expect(Farm.walkable(state, porch) and not Farm.buildable(state, porch), "the doorway remains free")
+	_stand_the_farmer(state, porch)
+	var outside := Player.position(state)
+	state["intent"]["interact"] = true
+	Sim.tick(state)
+	expect(House.inside(state) and Player.cell(state) == House.SPAWN, "interact enters the furnished room")
+	var loaded: Dictionary = bytes_to_var(var_to_bytes(state))
+	expect(State.hash_of(loaded) == State.hash_of(state), "room visits survive serialization")
+	expect(State.reconcile(loaded).is_empty(), "a saved room is already the current state shape")
+	var day := int(state["day_tick"])
+	Sim.advance(state, 30)
+	expect(int(state["day_tick"]) == day + 30, "the farm continues growing during visits")
+	expect(not Building.can_place(state, &"press", Vector2i(35, 21)), "indoor coordinates never place outdoor structures")
+	var workshop: Vector2i = Farm.cells_with(state, &"workshop")[0]
+	state["intent"]["build_sell"] = true
+	state["intent"]["build_cell"] = [workshop.x, workshop.y]
+	Building.tick(state)
+	expect(Farm.occupant(state, workshop).get("id", &"") == &"workshop",
+		"an indoor pointer cannot sell an outdoor workshop")
+	for piece in House.FURNITURE:
+		expect(not House.walkable(piece["cell"]), "%s blocks indoor movement" % piece["id"])
+	state["intent"]["interact"] = true
+	Sim.tick(state)
+	expect(not House.inside(state) and Player.position(state) == outside, "the indoor exit restores the farm position")
+	House.enter(state)
+	Phases.begin_preparation(state)
+	expect(not House.inside(state) and Player.position(state) == outside, "defence starts outside")
+	expect(not House.enter(state), "house visits cannot bypass the night")
+	_completed += 1
 
 
 ## 0102 - the performance budget.
@@ -740,7 +782,7 @@ func _task_0104_saves() -> void:
 	var expanded := Save.step_up(legacy, 1, State.VERSION, Save.migrations())
 	var new_index := Grid.index(Vector2i(9, 9))
 	expect(var_to_bytes(legacy) == original_bytes, "Farm migration does not modify its source save")
-	expect(expanded["terrain"].size() == 900 and expanded["terrain"][new_index] == Farm.Terrain.SOIL,
+	expect(expanded["terrain"].size() == Grid.CELLS and expanded["terrain"][new_index] == Farm.Terrain.SOIL,
 		"Old terrain lands on the same coordinates in the expanded farm")
 	for key in ["occupants", "plots", "rubble", "crafting", "livestock", "repair_debt", "produced"]:
 		expect(expanded[key][new_index] == {"kept": 17}, "Migration retains indexed run data: " + key)
@@ -1508,7 +1550,7 @@ func _task_0109_reactions() -> void:
 	var night := State.create(109105)
 	Resources.gain(night, {GameData.WOOD: 900, GameData.STONE: 900})
 	for y in range(3, 14):
-		Building.place(night, &"fence", Vector2i(30, y))
+		Building.place(night, &"fence", Vector2i(29, y))
 	Phases.begin_preparation(night)
 	var announced := false
 	for _i in 2000:
@@ -1520,7 +1562,8 @@ func _task_0109_reactions() -> void:
 	expect(announced, "the night arriving puts a ! up")
 
 	for i in 40:
-		Enemies.spawn(night, &"walker", i % GameData.SPAWNS.size())
+		# A close horde must chew this fence rather than bypass its distant end.
+		Entities.spawn(night, &"walker", Vector2i(30, 8))
 	var mourned := false
 	var wrong_one := &""
 	for _i in 6000:
@@ -2129,8 +2172,8 @@ func _task_0007_resources() -> void:
 func _task_0008_farm() -> void:
 	var state := State.create(31)
 
-	expect(Grid.WIDTH == 45 and Grid.HEIGHT == 20 and Grid.CELLS == 900,
-		"the farm has 25% more area than its original 720 cells", str(Grid.CELLS))
+	expect(Grid.WIDTH == 45 and Grid.HEIGHT == 25 and Grid.CELLS == 1125,
+		"the farm has another 25% more area than its previous 900 cells", str(Grid.CELLS))
 	expect((state["terrain"] as PackedByteArray).size() == Grid.CELLS,
 		"every cell has terrain")
 
@@ -2144,8 +2187,8 @@ func _task_0008_farm() -> void:
 		"and one past the right edge does not wrap onto the next row")
 
 	# The map made the farm the design document asks for.
-	expect(Farm.cells_with(state, &"house").size() == 9,
-		"the farmhouse is three by three",
+	expect(Farm.cells_with(state, &"house").size() == 24,
+		"the farmhouse is six by four",
 		str(Farm.cells_with(state, &"house").size()))
 	expect(Farm.cells_with(state, &"tree").size() >= 40, "there is a wood",
 		str(Farm.cells_with(state, &"tree").size()))
@@ -2154,11 +2197,11 @@ func _task_0008_farm() -> void:
 	# tower - so an ore node added or removed is a balance change, not scenery.
 	expect(Farm.cells_with(state, &"ore").size() == 8, "eight ore nodes",
 		str(Farm.cells_with(state, &"ore").size()))
-	expect(Farm.cells_of(state, Farm.Terrain.SOIL).size() == 48, "a field",
+	expect(Farm.cells_of(state, Farm.Terrain.SOIL).size() == 60, "25% more planting beds",
 		str(Farm.cells_of(state, Farm.Terrain.SOIL).size()))
 	expect(Farm.cells_of(state, Farm.Terrain.WATER).size() > 60, "a pond",
 		str(Farm.cells_of(state, Farm.Terrain.WATER).size()))
-	expect(Farm.cells_with(state, &"shop").size() == 2, "a shop stall")
+	expect(Farm.cells_with(state, &"shop").size() == 8, "a shop stall")
 
 	# Water and rock refuse to be built on, and say why.
 	var pond: Vector2i = Farm.cells_of(state, Farm.Terrain.WATER)[0]
@@ -2176,7 +2219,7 @@ func _task_0008_farm() -> void:
 	expect(_refused(Farm.why_not_buildable(state, house)) == &"WHY_ON_THE_HOUSE",
 		"and it says so", str(Farm.why_not_buildable(state, house)))
 	expect(not Farm.remove(state, house), "and the house cannot be removed")
-	expect(Farm.cells_with(state, &"house").size() == 9, "it is still there")
+	expect(Farm.cells_with(state, &"house").size() == 24, "it is still there")
 
 	# **Place then remove leaves the farm byte-identical.** The done-when of
 	# this task, and the property a build-then-sell loop depends on.
@@ -2753,7 +2796,7 @@ func _task_0018_wheat() -> void:
 	# rather than lean on whichever one happens to be the default.
 	Farming.select_seed(state, GameData.WHEAT)
 	var field := Farm.cells_of(state, Farm.Terrain.SOIL)
-	expect(field.size() == 48, "there is a field", str(field.size()))
+	expect(field.size() == 60, "there are sixty planting beds", str(field.size()))
 
 	var plot: Vector2i = field[0]
 	var data: Dictionary = GameData.CROPS[GameData.WHEAT]
@@ -2845,17 +2888,17 @@ func _task_0018_wheat() -> void:
 		Interact.complete(farmed, cell, &"till")
 		Interact.complete(farmed, cell, &"plant")
 	var counts := Farming.counts(farmed)
-	expect(int(counts["planted"]) == 48, "forty-eight plots planted",
+	expect(int(counts["planted"]) == 60, "sixty plots planted",
 		str(counts))
 	Sim.advance(farmed, grow_ticks)
-	expect(int(Farming.counts(farmed)["ready"]) == 48,
+	expect(int(Farming.counts(farmed)["ready"]) == 60,
 		"and all of them come up together",
 		str(Farming.counts(farmed)))
 	var before_harvest := Resources.amount(farmed, GameData.WHEAT)
 	for cell in Farm.cells_of(farmed, Farm.Terrain.SOIL):
 		Interact.complete(farmed, cell, &"harvest")
 	expect(Resources.amount(farmed, GameData.WHEAT)
-		== before_harvest + 48 * int(data["yield"]),
+		== before_harvest + 60 * int(data["yield"]),
 		"paying the whole field", str(Resources.amount(farmed, GameData.WHEAT)))
 
 	# You can walk across your own field, and a zombie will be able to too.
@@ -2892,7 +2935,7 @@ func _task_0019_workshop() -> void:
 	var state := State.create(81)
 
 	var benches := Farm.cells_with(state, &"workshop")
-	expect(benches.size() == 4, "the farm comes with a workshop",
+	expect(benches.size() == 12, "the farm comes with a workshop",
 		str(benches.size()))
 	var bench: Vector2i = benches[0]
 	expect(Interact.verb_at(state, bench) == &"craft",
@@ -3337,7 +3380,7 @@ func _task_0023_building() -> void:
 	expect(Building.sell(state, Farm.cells_with(state, &"tree")[0]).is_empty(),
 		"a tree cannot be sold back")
 	expect(Building.sell(state, house).is_empty(), "nor the house")
-	expect(Farm.cells_with(state, &"house").size() == 9, "which is still there")
+	expect(Farm.cells_with(state, &"house").size() == 24, "which is still there")
 
 	# **A kit is the cost paid early**, and it is spent instead of the ledger.
 	var banker := State.create(122)
@@ -3606,10 +3649,11 @@ func _task_0025_zombies() -> void:
 	# longer than it was.
 	var walled := _fresh_night(402)
 	Pathing.refresh(walled)
-	var corner: Vector2i = Farm.cells_with(walled, &"house")[0] + Vector2i(4, 4)
+	var bounds := Farm.house_bounds(walled)
+	var corner := bounds.end + Vector2i(3, 1)
 	var straight := Pathing.distance(walled, corner)
 	for dy in range(-3, 4):
-		var block: Vector2i = Farm.house_centre(walled) + Vector2i(2, dy)
+		var block: Vector2i = Vector2i(bounds.end.x + 1, bounds.end.y + dy)
 		if Farm.buildable(walled, block):
 			Farm.place(walled, block, {"id": &"wall", "hp": 120})
 	Pathing.refresh(walled)
@@ -5051,10 +5095,10 @@ func _task_0032_oil() -> void:
 	# it will not hang off the edge of the farm.
 	var state := State.create(1400)
 	expect(Building.is_placeable(&"press"), "a press can be placed")
-	expect(Building.size_of(&"press") == Vector2i(2, 2), "two by two",
+	expect(Building.size_of(&"press") == Vector2i(4, 3), "four by three",
 		str(Building.size_of(&"press")))
-	expect(Building.footprint(&"press", Vector2i(4, 4)).size() == 4,
-		"covering four cells")
+	expect(Building.footprint(&"press", Vector2i(4, 4)).size() == 12,
+		"covering twelve cells")
 	expect(Building.catalogue(state).has(&"press"),
 		"and the build palette offers it")
 
@@ -8747,6 +8791,20 @@ func _walled_lane(seed_value: int, where_gap: StringName,
 			built += 1
 	Pathing.refresh(state)
 
+	# The southern extension lies below an old tree belt. Choose the last gap
+	# connected to the spawn as well as the house, rather than a sealed pocket.
+	if where_gap == &"end" and state["flow_open"][Grid.index(spawn)] == Pathing.UNREACHABLE:
+		for y in range(gap - 1, -1, -1):
+			var candidate := Vector2i(column, y)
+			if Farm.occupant(state, candidate).get("id", &"") != barrier:
+				continue
+			Farm.place(state, Vector2i(column, gap), {"id": barrier, "hp": hp})
+			Farm.remove(state, candidate)
+			gap = y
+			Pathing.refresh(state)
+			if state["flow_open"][Grid.index(spawn)] < Pathing.UNREACHABLE:
+				break
+
 	var walker := Entities.spawn(state, kind, spawn)
 	var house_before := int(state["house_hp"])
 	var standing := _wall_hp_in_column(state, column, barrier)
@@ -9430,7 +9488,7 @@ func _which_it_goes_for(seed_value: int) -> Dictionary:
 
 	# One near the spawn and one across the farm, both off the walking route.
 	var near := Vector2i(spawn.x - 4, spawn.y + 3)
-	var far := Vector2i(6, spawn.y + 3)
+	var far := Vector2i(6, spawn.y + 4)
 	for cell in [near, far]:
 		if not Farm.place(state, cell, {"id": &"gun_tower", "hp": 60}):
 			return {"chosen": Vector2i(-1, -1), "nearest": Vector2i(-2, -2)}
@@ -10774,7 +10832,8 @@ func _giant_against(seed_value: int, mix: Array) -> Dictionary:
 	Resources.gain(state, {GameData.OIL: 4000, GameData.IRON: 4000,
 		GameData.WOOD: 4000, GameData.STONE: 4000, GameData.GUNPOWDER: 4000})
 	for _i in 6:
-		var plant := _room_for(state, Building.size_of(&"generator"))
+		# Power belongs behind the fight, leaving the measured tower line clear.
+		var plant := Vector2i(1 + _i * Building.size_of(&"generator").x, 20)
 		if plant != Vector2i(-1, -1):
 			Building.place(state, &"generator", plant)
 
@@ -12402,10 +12461,10 @@ func _task_0068_balance() -> void:
 		if not GameData.DEFENCES.has(on["id"]):
 			continue
 		nearest = mini(nearest, Autoplay._far(Grid.cell(int(idx)), approach))
-	expect(nearest < Autoplay._far(Autoplay.HOUSE, approach),
+	expect(nearest < Autoplay._far(Farm.house_centre(state), approach),
 		"the robot builds between the house and the spawns",
 		"tower is %d from the approach, the house is %d"
-			% [nearest, Autoplay._far(Autoplay.HOUSE, approach)])
+			% [nearest, Autoplay._far(Farm.house_centre(state), approach)])
 
 	# **The gap between waves is a lever again.** Task 0059 moved the pace of
 	# a night onto the night's own record and every one of the ten declared
@@ -14113,12 +14172,12 @@ func _task_0082_shots() -> void:
 	# same reason the audio group counts its settings: a scenario arriving
 	# without anybody deciding to add one should be a failing row rather
 	# than an extra picture nobody looks at.
-	expect(names.size() == 12,
-		"the five scenarios task 0082 names, and one per options tab",
+	expect(names.size() == 15,
+		"the original scenarios, options tabs and three farmhouse scenarios",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",
 			"options_access", "options_video", "options_audio",
-			"options_controls"]:
+			"options_controls", "house_interior", "farm_extension", "larger_stations"]:
 		expect(names.has(wanted), "there is a '%s' scenario" % wanted)
 
 	# Every one has a builder, so a scenario added to the table and not

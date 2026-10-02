@@ -41,7 +41,7 @@ const WATCHDOG_SECONDS := 20.0
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const CASES := 60
+const CASES := 61
 
 ## The pixels two pieces of text in one row must have between them. Two is
 ## the width of the gap inside a letter at this size, so anything less reads
@@ -81,6 +81,11 @@ func _run() -> void:
 	# of them would be a slower suite testing nothing. `_case_0099_ident`
 	# calls `BootIdent.forget()` and watches it happen properly.
 	BootIdent.played()
+	if OS.get_cmdline_user_args().has("--house-visit-only"):
+		await _case_0111_farm_house()
+		print("HOUSE INPUT: %d cases, %d failed" % [passed + failed, failed])
+		quit(1 if failed > 0 else 0)
+		return
 	await _case_0011_harness()
 	await _case_0012_debug_overlay()
 	await _case_0013_world_view()
@@ -93,6 +98,7 @@ func _run() -> void:
 	await _case_0028_seeds()
 	await _case_0029_watering()
 	await _case_0030_fishing()
+	await _case_0111_farm_house()
 	await _case_0032_press()
 	await _case_0033_power()
 	await _case_0034_livestock()
@@ -1854,6 +1860,63 @@ func _case_0030_fishing() -> void:
 	_completed += 1     # last line: an abandoned case never gets here
 
 
+## Real doorway, room movement, furniture, camera and pause through Main.
+func _case_0111_farm_house() -> void:
+	print("CASE 0111 farm house")
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var state: Dictionary = driver.state
+	var porch := House.porch(state)
+	_stand_at(state, porch)
+	var outside := Player.position(state)
+	await tap_key(KEY_SPACE)
+	await until(func(): return House.inside(state), "the porch interact key to enter the house")
+	await frames(4)
+	expect(not (require_control("WorldView") as WorldView).visible
+		and not (require_control("DayHud") as DayHud).visible, "Indoor view hides the farm and outdoor planting controls")
+	var room: HouseView = require_control("HouseView")
+	expect(not (require_control("WorkshopPanel") as WorkshopPanel).is_open()
+		and not (require_control("TutorialPrompt") as TutorialPrompt).visible,
+		"Indoor coordinates cannot open outdoor workshop or tutorial panels")
+	expect(room._clip.visible and room._farmer.visible, "The furnished room uses the actual farmer view")
+	await press_key(KEY_W, true)
+	await until(func(): return Player.cell(state).y < House.SPAWN.y, "the farmer to walk inside")
+	await press_key(KEY_W, false)
+	_stand_at(state, Vector2i(4, 6), Player.NORTH)
+	var target_tick := int(state["tick"]) + 20
+	await press_key(KEY_W, true)
+	await until(func(): return int(state["tick"]) >= target_tick, "walking into the kitchen for twenty ticks")
+	await press_key(KEY_W, false)
+	expect(Player.cell(state).y == 6, "Real movement cannot pass through kitchen furniture")
+	await tap_key(KEY_B)
+	expect(not Building.is_active(state), "The build key cannot open an outdoor ghost inside the house")
+	await tap_key(KEY_EQUAL)
+	await until(func(): return room._room.scale.x > 1.01, "the interior camera to zoom")
+	await tap_key(KEY_0)
+	await tap_key(KEY_P)
+	await until(func(): return not driver.running, "the indoor pause menu to stop simulation")
+	var paused_tick := int(state["tick"])
+	var paused_pos := Player.position(state)
+	await frames(30)
+	expect(int(state["tick"]) == paused_tick and Player.position(state) == paused_pos and House.inside(state),
+		"Pause preserves indoor position and freezes farm time")
+	await tap_key(KEY_ESCAPE)
+	await until(func(): return driver.running, "the indoor pause menu to resume")
+	_stand_at(state, House.SPAWN)
+	await tap_key(KEY_SPACE)
+	await until(func(): return not House.inside(state), "the interior doorway to return outside")
+	await frames(4)
+	expect(Player.position(state) == outside and (require_control("WorldView") as WorldView).visible,
+		"The same interact key returns to the saved porch position and farm camera")
+	await tap_key(KEY_SPACE)
+	await until(func(): return House.inside(state), "another visit to the house")
+	await tap_key(KEY_N)
+	await until(func(): return int(state["phase"]) == Phases.PREPARATION, "night input during a house visit")
+	expect(not House.inside(state), "Starting night inside returns outside for defence")
+	await close_scene()
+	_completed += 1
+
+
 ## Land next to open water.
 func _a_shore(state: Dictionary) -> Vector2i:
 	for found in Farm.cells_of(state, Farm.Terrain.WATER):
@@ -1952,7 +2015,7 @@ func _case_0032_press() -> void:
 	for at in Building.footprint(&"press", spot):
 		if Farm.occupant(state, at).get("id", &"") == &"press":
 			covered += 1
-	expect(covered == 4, "all four tiles of it are there", str(covered))
+	expect(covered == 12, "all twelve tiles of it are there", str(covered))
 
 	# B toggles it, the same key that opened it.
 	await hold_key(KEY_B, 4)
@@ -2405,7 +2468,7 @@ func _case_0037_queue() -> void:
 	# **Walking away closes it**, and the queue keeps going without anybody
 	# looking - which is the whole feature.
 	var kits_before := Crafting.kits(state, &"barricade")
-	_stand_at(state, Vector2i(stand.x, stand.y + 3), Player.SOUTH)
+	_stand_at(state, Vector2i(stand.x, stand.y + Building.size_of(&"workshop").y + 3), Player.SOUTH)
 	await until(func() -> bool: return not panel.is_open(),
 		"the panel to close when the farmer walks off")
 	expect(not panel.is_open(), "walking away closes it")

@@ -1872,6 +1872,42 @@
     {
       "output": "sprites/ui/tooltip.png",
       "owner": "ascii"
+    },
+    {
+      "output": "sprites/interior/floor.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/interior/wall.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/interior/bed.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/interior/kitchen.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/interior/table.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/interior/fireplace.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/interior/storage.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/interior/rug.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/interior/plant.png",
+      "owner": "raster"
     }
   ]
 }

@@ -132,10 +132,10 @@ func _run() -> void:
 	_world.show_ghost(Vector2i(14, 10), &"house", true)
 	await _settle()
 	var ghost: Sprite2D = _world.find_child("Ghost", true, false)
-	expect(ghost.position == Vector2(248, 208), "House ghost sorts at the 3x3 ground contact")
+	expect(ghost.position == Vector2(272, 224) and ghost.scale == Vector2(2, 2), "House ghost sorts at the enlarged ground contact")
 	expect(ghost.offset == Vector2(-32, -60), "House ghost uses source-owned pivot")
-	expect(_world.ghost_footprint() == Vector2i(3, 3), "House preview frame covers its nine cells")
-	await _shoot("ghost_house", "House preview: unchanged 3x3 footprint / roof overhang")
+	expect(_world.ghost_footprint() == GameData.HOUSE_SIZE, "House preview frame covers its enlarged blocked cells")
+	await _shoot("ghost_house", "House preview: 6x4 footprint / enlarged existing roof")
 	_world.show_ghost(Vector2i(14, 10), &"gun_tower", true)
 	await _settle()
 	expect(ghost.position == Vector2(232, 176), "Tower ghost stands on the selected cell")
@@ -202,7 +202,9 @@ func _station_fixture(lighting: int = 1, kind: int = 0) -> void:
 		if i < 4:
 			expect(Building.place(_state, STATIONS[i], STATION_CORNERS[i]), "Real station placement retains its existing cost and 2x2 anchor")
 		else:
-			expect(Farm.restore(_state, STATION_CORNERS[i], {"id":STATIONS[i]}), "Shop/well remains one original fixture cell")
+			for cell in Building.footprint(STATIONS[i], STATION_CORNERS[i]):
+				expect(Farm.restore(_state, cell, {"id":STATIONS[i], "anchor": [STATION_CORNERS[i].x,STATION_CORNERS[i].y]}),
+					"Shop/well fixture covers its declared occupied cells")
 		if kind == 2 and i < 4:
 			Farm.damage(_state, STATION_CORNERS[i], int(GameData.BUILDINGS[STATIONS[i]]["hp"]) * 3 / 4)
 	if kind == 1:
@@ -475,12 +477,16 @@ func _house_check(corner: Vector2i = Vector2i(20, 6)) -> void:
 			var cell := corner + Vector2i(x, y)
 			expect(Farm.occupant(_state, cell).get("id") == &"house" and not Farm.is_empty(_state, cell), "All nine original footprint cells remain blocked")
 	expect(Farm.is_empty(_state, corner + Vector2i(3, 2)), "Roof overhang adds no logical blocking cell")
-	var windows := ArtPlacement.emissions(&"house", Vector2(corner * 16), &"windows", Vector2.ZERO)
+	var size := Farm.house_bounds(_state).size
+	var windows := ArtPlacement.emissions(&"house", Vector2(corner * 16), &"windows", Vector2.ZERO, &"light", size)
 	expect(windows.size() == 5, "One grouped house emits exactly five physical window lights")
 	var local := [Vector2(32, 33), Vector2(19, 45), Vector2(41, 45), Vector2(30, 45), Vector2(52, 46)]
 	for i in windows.size():
-		expect(windows[i] == Vector2(corner * 16) + Vector2(-8, -12) + local[i], "Each glow uses its measured glass plane")
-	expect(ArtPlacement.emission(&"house", Vector2(corner * 16), &"smoke", Vector2.ZERO) == Vector2(corner * 16) + Vector2(43, 0), "Chimney smoke shares the authored whole/hurt roof opening")
+		expect(windows[i] == sprite.position + (local[i] + sprite.offset) * sprite.scale,
+			"Each glow uses the measured glass plane of the actual enlarged drawing")
+	expect(ArtPlacement.emission(&"house", Vector2(corner * 16), &"smoke", Vector2.ZERO, size)
+		== sprite.position + (Vector2(51,12) + sprite.offset) * sprite.scale,
+		"Chimney smoke shares the authored whole/hurt roof opening")
 
 
 func _house_settle(view: PlayerView) -> void:
@@ -531,7 +537,7 @@ func _house_lamp_pixels() -> void:
 	await RenderingServer.frame_post_draw
 	var lit := root.get_texture().get_image()
 	var transform := root.get_canvas_transform()
-	for window in ArtPlacement.emissions(&"house", Vector2(320, 96), &"windows", Vector2.ZERO):
+	for window in ArtPlacement.emissions(&"house", Vector2(320, 96), &"windows", Vector2.ZERO, &"light", Farm.house_bounds(_state).size):
 		var point := Vector2i(transform * window)
 		expect(lit.get_pixelv(point).r > dark.get_pixelv(point).r + 0.05, "Each physical window receives a visible local warm pool")
 	var outside := Vector2i(transform * Vector2(344, 90))
@@ -596,7 +602,8 @@ func _house_family() -> void:
 		await _house_settle(view)
 		_world.show_ghost(Vector2i(14, 10), &"house", true)
 		var ghost: Sprite2D = _world.find_child("Ghost", true, false)
-		expect(ghost.position == Vector2(248, 208) and ghost.offset == Vector2(-32, -60) and _world.ghost_footprint() == Vector2i(3, 3), "House preview keeps the whole roof over its original nine-cell footprint")
+		expect(ghost.position == Vector2(272, 224) and ghost.offset == Vector2(-32, -60) and ghost.scale == Vector2(2,2)
+			and _world.ghost_footprint() == GameData.HOUSE_SIZE, "House preview covers its enlarged collision footprint")
 		await _shoot("ghost_light%d" % lighting, "Full farmhouse preview; unchanged 3x3 footprint; light %d" % lighting)
 		_world.hide_ghost()
 	for hurt in 2:
@@ -1843,9 +1850,9 @@ func _check_placement() -> void:
 	expect(player.position == ArtPlacement.contact(_state["player"]["pos"]), "Player and enemies share contact coordinates")
 	var body: Sprite2D = player.get_node("Body")
 	expect(body.offset == Vector2(-24, -44), "Pilot farmer is the accepted 30px source at its ground pivot")
-	var light := ArtPlacement.emission(&"house", Vector2(320, 96), &"light", Vector2.ZERO)
-	var smoke := ArtPlacement.emission(&"house", Vector2(320, 96), &"smoke", Vector2.ZERO)
-	expect(light == Vector2(331, 129) and smoke == Vector2(363, 96), "Lamp/chimney anchor follows the same full house drawing")
+	var light := ArtPlacement.emission(&"house", Vector2(320, 96), &"light", Vector2.ZERO, Vector2i(3,3))
+	var smoke := ArtPlacement.emission(&"house", Vector2(320, 96), &"smoke", Vector2.ZERO, Vector2i(3,3))
+	expect(light == Vector2(318, 114) and smoke == Vector2(382, 48), "Lamp/chimney anchor follows the enlarged legacy fixture drawing")
 
 
 func _shoot(name: String, caption: String) -> void:
