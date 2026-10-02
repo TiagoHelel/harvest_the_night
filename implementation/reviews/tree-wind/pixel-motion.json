@@ -1,0 +1,42 @@
+{
+  "day": [
+    {
+      "texture": "res://sprites/props/tree_b.png",
+      "max_adjacent_frame_channel_change": 4,
+      "unique_canopy_crops": 356,
+      "all_360_trunk_frames_equal_to_static": true
+    },
+    {
+      "texture": "res://sprites/props/tree.png",
+      "max_adjacent_frame_channel_change": 4,
+      "unique_canopy_crops": 355,
+      "all_360_trunk_frames_equal_to_static": true
+    },
+    {
+      "texture": "res://sprites/props/tree_b.png",
+      "max_adjacent_frame_channel_change": 3,
+      "unique_canopy_crops": 351,
+      "all_360_trunk_frames_equal_to_static": true
+    }
+  ],
+  "night": [
+    {
+      "texture": "res://sprites/props/tree_b.png",
+      "max_adjacent_frame_channel_change": 2,
+      "unique_canopy_crops": 354,
+      "all_360_trunk_frames_equal_to_static": true
+    },
+    {
+      "texture": "res://sprites/props/tree.png",
+      "max_adjacent_frame_channel_change": 2,
+      "unique_canopy_crops": 358,
+      "all_360_trunk_frames_equal_to_static": true
+    },
+    {
+      "texture": "res://sprites/props/tree_b.png",
+      "max_adjacent_frame_channel_change": 1,
+      "unique_canopy_crops": 350,
+      "all_360_trunk_frames_equal_to_static": true
+    }
+  ]
+}

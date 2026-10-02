@@ -1,0 +1,32 @@
+[
+	{
+		"phase": 3.77,
+		"speed": 0.85,
+		"strength": 0.803409090909091,
+		"texture": "res://sprites/props/tree_b.png",
+		"top": [
+			140,
+			83
+		]
+	},
+	{
+		"phase": 1.56,
+		"speed": 0.829166666666667,
+		"strength": 0.922727272727273,
+		"texture": "res://sprites/props/tree.png",
+		"top": [
+			220,
+			83
+		]
+	},
+	{
+		"phase": 12.48,
+		"speed": 0.5875,
+		"strength": 0.656818181818182,
+		"texture": "res://sprites/props/tree_b.png",
+		"top": [
+			300,
+			83
+		]
+	}
+]

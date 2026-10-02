@@ -1,0 +1,5 @@
+  script parse                 PASS   6.0s  PARSED 117 scripts, 0 failed
+  camera/zoom/ambient          PASS   1.2s  VISIBILITY SHOWCASE: 121 checks, 0 failed
+  sim hash                     PASS   1.8s  3960053733 unchanged
+  data hash                    PASS   0.0s  3913993875 unchanged
+  perf                         PASS   3.6s  OK    a night tick is 674us of the 8333 it may have (8%), a path rebuild 5828us of 33333

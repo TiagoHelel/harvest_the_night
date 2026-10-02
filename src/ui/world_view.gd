@@ -1019,6 +1019,10 @@ func _refresh() -> void:
 			motion.shader = AMBIENT_MOTION
 			motion.set_shader_parameter("species", 0 if id == &"tree" else (1 if id == &"chicken" else 2))
 			motion.set_shader_parameter("phase", float((cell.x * 37 + cell.y * 19) % 101) * 0.13)
+			if id == &"tree":
+				var wind_seed := ((cell.x + 1) * 73856093) ^ ((cell.y + 1) * 19349663)
+				motion.set_shader_parameter("wind_speed", 0.55 + float(wind_seed % 97) / 96.0 * 0.4)
+				motion.set_shader_parameter("wind_strength", 0.65 + float((wind_seed / 97) % 89) / 88.0 * 0.3)
 			motion.set_shader_parameter("motion_time", _ambient_time)
 			sprite.material = motion
 			_ambient_materials.append(motion)

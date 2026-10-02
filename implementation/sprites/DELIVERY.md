@@ -86,6 +86,8 @@ The October 2 follow-up adds canopy sway, hen pecking and cow head/tail movement
 from the existing tree/animal textures, plus a brief farmer blink. Animals keep
 their gameplay cells; this is ambient motion, not roaming. Banks and crop stages
 remain static. See [native follow-up evidence](../reviews/world-visibility/REVIEW.md).
+The [leaf-only wind correction](../reviews/tree-wind/REVIEW.md) keeps all exposed
+wood fixed and gives trees individual, slow rhythms with subpixel leaf motion.
 Water and farmer motion loop; timed work uses real anticipation/contact followed by short cosmetic
 recovery. Instant water/reel/trade start at contact and return to ready.
 North/south work deliberately uses the accepted side-on gesture, with west

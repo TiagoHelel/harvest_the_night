@@ -1450,3 +1450,28 @@ zoom, picking, state purity and pause guards pass 121. Scope audit proves origin
 map cells and all except three runtime PNGs preserved. Evidence and reproduction
 scripts are in implementation/reviews/world-visibility/; five HUD captures in
 implementation/shots/world-visibility/. The original sprite queue remains 20 done.
+
+## 2026-10-02 — Follow-up: leaf-only, individual tree wind
+
+The user noticed moving trunks in the preceding ambient effect and requested
+only leaves moving, gently and differently between trees. The vertical mask now
+ends at source row 22, above all exposed wood in both 40x48 tree variants. Lower
+leaf collars remain anchored. Canopy displacement is reduced to 0.65–0.95 native
+pixels; cell-derived speed, amplitude and phase plus two slow wave components
+provide independent rhythms. Horizontal premultiplied interpolation is confined
+to foliage so tiny movements progress smoothly; trunk/branch/root pixels retain
+the original nearest sampling. No raster sources or runtime PNGs are changed.
+
+New real-renderer --tree-wind showcase: 3,617 checks / zero failures over three
+trees, both variants, 360 consecutive 30Hz frames in daylight and another 360 at
+night. Every protected wood crop equals its no-shader static reference exactly.
+Independent pixel checks find 350–358 distinct canopy appearances and adjacent
+RGB changes of at most 4/255 by day and 2/255 at night. Native/3x phases and source
+boundaries inspected. Original captures, native timed GIFs, parameters, pixel
+metrics and reproduction scripts are in implementation/reviews/tree-wind/.
+
+Focused verification passes: 117 scripts, 121 presentation checks, performance
+budgets, unchanged sim 3960053733 and data 3913993875. The preceding task's full
+53-gate suite is not claimed as a rerun for this shader correction. The unrelated
+project.godot editor serialization change and prior untracked imports remain
+excluded. Queue stays 20 done; no push or automation is started.
