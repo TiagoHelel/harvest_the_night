@@ -1,0 +1,123 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+UI ART SHOWCASE: 536 checks, 24 failed
+ERROR: Normal/hover/pressed/disabled have distinct actual frame sources
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://src/tools/ui_art_showcase.gd:20)
+       [1] _surfaces (res://src/tools/ui_art_showcase.gd:193)
+ERROR: Normal/hover/pressed/disabled have distinct actual frame sources
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://src/tools/ui_art_showcase.gd:20)
+       [1] _surfaces (res://src/tools/ui_art_showcase.gd:193)
+ERROR: Normal/hover/pressed/disabled have distinct actual frame sources
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://src/tools/ui_art_showcase.gd:20)
+       [1] _surfaces (res://src/tools/ui_art_showcase.gd:193)
+ERROR: Normal/hover/pressed/disabled have distinct actual frame sources
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://src/tools/ui_art_showcase.gd:20)
+       [1] _surfaces (res://src/tools/ui_art_showcase.gd:193)
+ERROR: Normal/hover/pressed/disabled have distinct actual frame sources
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://src/tools/ui_art_showcase.gd:20)
+       [1] _surfaces (res://src/tools/ui_art_showcase.gd:193)
+ERROR: Normal/hover/pressed/disabled have distinct actual frame sources
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://src/tools/ui_art_showcase.gd:20)
+       [1] _surfaces (res://src/tools/ui_art_showcase.gd:193)
+ERROR: Normal/hover/pressed/disabled have distinct actual frame sources
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://src/tools/ui_art_showcase.gd:20)
+       [1] _surfaces (res://src/tools/ui_art_showcase.gd:193)
+ERROR: Normal/hover/pressed/disabled have distinct actual frame sources
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://src/tools/ui_art_showcase.gd:20)
+       [1] _surfaces (res://src/tools/ui_art_showcase.gd:193)
+ERROR: Normal/hover/pressed/disabled have distinct actual frame sources
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://src/tools/ui_art_showcase.gd:20)
+       [1] _surfaces (res://src/tools/ui_art_showcase.gd:193)
+ERROR: Normal/hover/pressed/disabled have distinct actual frame sources
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://src/tools/ui_art_showcase.gd:20)
+       [1] _surfaces (res://src/tools/ui_art_showcase.gd:193)
+ERROR: Normal/hover/pressed/disabled have distinct actual frame sources
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://src/tools/ui_art_showcase.gd:20)
+       [1] _surfaces (res://src/tools/ui_art_showcase.gd:193)
+ERROR: Normal/hover/pressed/disabled have distinct actual frame sources
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://src/tools/ui_art_showcase.gd:20)
+       [1] _surfaces (res://src/tools/ui_art_showcase.gd:193)
+ERROR: Normal/hover/pressed/disabled have distinct actual frame sources
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://src/tools/ui_art_showcase.gd:20)
+       [1] _surfaces (res://src/tools/ui_art_showcase.gd:193)
+ERROR: Normal/hover/pressed/disabled have distinct actual frame sources
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://src/tools/ui_art_showcase.gd:20)
+       [1] _surfaces (res://src/tools/ui_art_showcase.gd:193)
+ERROR: Normal/hover/pressed/disabled have distinct actual frame sources
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://src/tools/ui_art_showcase.gd:20)
+       [1] _surfaces (res://src/tools/ui_art_showcase.gd:193)
+ERROR: Normal/hover/pressed/disabled have distinct actual frame sources
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://src/tools/ui_art_showcase.gd:20)
+       [1] _surfaces (res://src/tools/ui_art_showcase.gd:193)
+ERROR: Normal/hover/pressed/disabled have distinct actual frame sources
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://src/tools/ui_art_showcase.gd:20)
+       [1] _surfaces (res://src/tools/ui_art_showcase.gd:193)
+ERROR: Normal/hover/pressed/disabled have distinct actual frame sources
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://src/tools/ui_art_showcase.gd:20)
+       [1] _surfaces (res://src/tools/ui_art_showcase.gd:193)
+ERROR: Normal/hover/pressed/disabled have distinct actual frame sources
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://src/tools/ui_art_showcase.gd:20)
+       [1] _surfaces (res://src/tools/ui_art_showcase.gd:193)
+ERROR: Normal/hover/pressed/disabled have distinct actual frame sources
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://src/tools/ui_art_showcase.gd:20)
+       [1] _surfaces (res://src/tools/ui_art_showcase.gd:193)
+ERROR: Normal/hover/pressed/disabled have distinct actual frame sources
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://src/tools/ui_art_showcase.gd:20)
+       [1] _surfaces (res://src/tools/ui_art_showcase.gd:193)
+ERROR: Normal/hover/pressed/disabled have distinct actual frame sources
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://src/tools/ui_art_showcase.gd:20)
+       [1] _surfaces (res://src/tools/ui_art_showcase.gd:193)
+ERROR: Normal/hover/pressed/disabled have distinct actual frame sources
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://src/tools/ui_art_showcase.gd:20)
+       [1] _surfaces (res://src/tools/ui_art_showcase.gd:193)
+ERROR: Normal/hover/pressed/disabled have distinct actual frame sources
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://src/tools/ui_art_showcase.gd:20)
+       [1] _surfaces (res://src/tools/ui_art_showcase.gd:193)

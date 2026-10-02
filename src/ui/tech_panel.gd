@@ -58,7 +58,16 @@ func _ready() -> void:
 
 	var heading := _label("TechHeading", Vector2(8, 4), UiKit.WARM)
 	heading.text = I18n.t(&"TECH_TITLE")
-	_held = _label("TechHeld", Vector2(120, 4), UiKit.WARM)
+	var icon := TextureRect.new()
+	icon.texture = UiKit.icon(GameData.TECH,true)
+	icon.position = Vector2(120,4)
+	icon.size = Vector2(10,10)
+	icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	icon.stretch_mode = TextureRect.STRETCH_KEEP
+	icon.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_frame.add_child(icon)
+	_held = _label("TechHeld", Vector2(132, 4), UiKit.WARM)
 	_reason = _label("TechReason", Vector2(8, 186), UiKit.DIM)
 	# **What the node under the cursor does**, on its own line where there is
 	# room for a sentence. The buttons are too narrow for one.

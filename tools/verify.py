@@ -293,6 +293,16 @@ def check_effect_art():
     return check("effect sources/origins", code == 0, tail(out, 4))
 
 
+def check_ui_art():
+    code, out = run([sys.executable, "tools/check_ui_art.py"])
+    return check("UI sources/native icons", code == 0, tail(out, 4))
+
+
+def check_ui_art_showcase():
+    code, out = run([sys.executable, "tools/show_art.py", "--ui", "--check"])
+    return check("UI display/states", code == 0, next((s for s in out.splitlines() if s.startswith("UI ART SHOWCASE:")), tail(out, 4)))
+
+
 def check_effect_showcase():
     code, out = run([sys.executable, "tools/show_art.py", "--effects", "--check"])
     return check("effect contacts/a11y", code == 0, next((s for s in out.splitlines() if s.startswith("EFFECT SHOWCASE:")), tail(out, 4)))
@@ -716,6 +726,8 @@ def main():
     check_giant_showcase()
     check_effect_art()
     check_effect_showcase()
+    check_ui_art()
+    check_ui_art_showcase()
     check_font()
     check_logo()
     check_sfx()

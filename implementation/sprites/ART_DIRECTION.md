@@ -296,3 +296,21 @@ ground dust low. Do not enlarge these forms to the actor canvas or blanket
 the wave with additive halos. Preserve existing good procedural pixels and
 every completed sprite. Accessibility uses fewer emissions and steady fading
 silhouettes; it never changes the simulation. General atmosphere remains 0019.
+
+Task 0018 completes the actual fifteen-resource icon vocabulary. Each preserved
+transparent ImageGen source supplies a centered 16x16 inventory cut and a
+separate 10x10 HUD cut. Visible envelopes are at most 14 and 8 pixels; clear
+outer padding prevents clipping. Draw these cuts at native size, nearest,
+without runtime scaling. The logs/rocks/bar distinguish wood/stone/iron; the
+bowl/fish/barrel distinguish food/fish/oil. Wheat is a slender branch, corn
+has a broad green husk, and carrot tapers orange. Meat is a red steak,
+gunpowder a low grey pile, incendiary a red can, money gold coins, energy a
+gold bolt and technology a steel/brass gear. Keep localized names beside
+small icons: an icon supplements the word rather than replacing it.
+
+The existing UI kit remains deterministic code-owned art. Calm centers and
+three-pixel nine-patch profiles preserve layout. Trim only outer corner pixels;
+use a gold tab underline for selection, a lighter hover field, quieter disabled
+fields/ticks/grips and the existing open white keyboard-focus ring. Sliders
+use the same eight-pixel grip family in normal/highlight/disabled states.
+No text is baked into PNGs. All completed world/actor/effect sprites stay exact.

@@ -4,7 +4,7 @@ extends Control
 ## Everything you own, on one key.
 ##
 ## The top bar shows six numbers because that is what fits across 480 pixels.
-## There are fourteen resources. This is where the other eight live.
+## There are fifteen resources. This is where the other nine live.
 ##
 ## ## It is a view, and it behaves like one
 ##
@@ -51,7 +51,8 @@ func _ready() -> void:
 
 	var frame := PanelContainer.new()
 	frame.name = "InventoryFrame"
-	frame.position = Vector2(138, 20)
+	# The complete fifteen-resource ledger is 252px tall at native resolution.
+	frame.position = Vector2(138, 9)
 	frame.custom_minimum_size = Vector2(204, 0)
 	frame.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(frame)
@@ -114,7 +115,7 @@ func _process(_delta: float) -> void:
 
 
 func _signature() -> String:
-	var parts: Array = []
+	var parts: Array = [str(I18n.revision())]
 	for entry in Inventory.rows(_state):
 		var r: Dictionary = entry
 		parts.append("%s=%d" % [r["id"], r["held"]])
@@ -122,6 +123,7 @@ func _signature() -> String:
 
 
 func _build() -> void:
+	(find_child("InventoryTitle",true,false) as Label).text = I18n.t(&"INV_TITLE")
 	for child in _rows.get_children():
 		# Out of the tree before it is freed: `queue_free()` is deferred, and
 		# a container that lays out the old rows and the new ones for a frame
@@ -151,10 +153,19 @@ func _row(line: Dictionary) -> Control:
 	row.name = "inv_%s" % line["id"]
 	Tooltip.describes(row, StringName("resource:%s" % line["id"]))
 	row.custom_minimum_size = Vector2(190, ROW_HEIGHT)
+	var icon := TextureRect.new()
+	icon.name = "inv_icon_%s" % line["id"]
+	icon.texture = UiKit.icon(StringName(line["id"]),true)
+	icon.custom_minimum_size = Vector2(10,10)
+	icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	icon.stretch_mode = TextureRect.STRETCH_KEEP
+	icon.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	row.add_child(icon)
 
 	var name_label := Label.new()
 	name_label.name = "inv_name_%s" % line["id"]
-	name_label.text = "  " + str(line["id"])
+	name_label.text = "  " + Names.of(StringName(line["id"]))
 	name_label.custom_minimum_size = Vector2(104, 0)
 	name_label.theme_type_variation = UiKit.DIM if held > 0 \
 		else UiKit.FAINT

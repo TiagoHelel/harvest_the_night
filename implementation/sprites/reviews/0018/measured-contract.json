@@ -1,0 +1,1552 @@
+[
+  {
+    "id": "ui/icon_wood",
+    "owner": "raster",
+    "source": "assets/art_source/ui/wood.png",
+    "source_sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+    "crop_xywh": [
+      312,
+      376,
+      630,
+      571
+    ],
+    "canvas_wh": [
+      16,
+      16
+    ],
+    "pivot_xy": [
+      8,
+      8
+    ],
+    "content_scale": 0.022222222222222223,
+    "content_anchor_xy": [
+      7,
+      6
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "animation": "ui/icon_wood",
+    "frame": 0,
+    "seconds": 1.0,
+    "loop": false,
+    "output": "sprites/ui/icon_wood.png",
+    "prompt": "implementation/sprites/generation/0018-wood.prompt.txt",
+    "prompt_sha256": "8541ca8021ec102127a130c5b147e48c503d5d2f9c9ee888c1a3fe9f5ba82b6a",
+    "references": [
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "As indexed in exact submitted prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0018",
+    "revision": 0,
+    "resource_id": "wood",
+    "display_role": "inventory",
+    "output_sha256": "6d0275b93c12105ae00a148ca6f27aaf586a985cb4897bba84ef6ec2b89d9148"
+  },
+  {
+    "id": "ui/hud_wood",
+    "owner": "raster",
+    "source": "assets/art_source/ui/wood.png",
+    "source_sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+    "crop_xywh": [
+      312,
+      376,
+      630,
+      571
+    ],
+    "canvas_wh": [
+      10,
+      10
+    ],
+    "pivot_xy": [
+      5,
+      5
+    ],
+    "content_scale": 0.012698412698412698,
+    "content_anchor_xy": [
+      4,
+      3
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "animation": "ui/hud_wood",
+    "frame": 0,
+    "seconds": 1.0,
+    "loop": false,
+    "output": "sprites/ui/hud_wood.png",
+    "prompt": "implementation/sprites/generation/0018-wood.prompt.txt",
+    "prompt_sha256": "8541ca8021ec102127a130c5b147e48c503d5d2f9c9ee888c1a3fe9f5ba82b6a",
+    "references": [
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "As indexed in exact submitted prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0018",
+    "revision": 0,
+    "resource_id": "wood",
+    "display_role": "compact_hud",
+    "output_sha256": "fc1bf6a471078c71e0b99e7a79be2e24f9a888cd541f6914304bdd6124080540"
+  },
+  {
+    "id": "ui/icon_stone",
+    "owner": "raster",
+    "source": "assets/art_source/ui/stone.png",
+    "source_sha256": "bd028d163f7dc8471a0d6b9009f9c162ba997e7f8c2403f0839c004a7f1c7159",
+    "crop_xywh": [
+      307,
+      427,
+      654,
+      508
+    ],
+    "canvas_wh": [
+      16,
+      16
+    ],
+    "pivot_xy": [
+      8,
+      8
+    ],
+    "content_scale": 0.021406727828746176,
+    "content_anchor_xy": [
+      7,
+      5
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "animation": "ui/icon_stone",
+    "frame": 0,
+    "seconds": 1.0,
+    "loop": false,
+    "output": "sprites/ui/icon_stone.png",
+    "prompt": "implementation/sprites/generation/0018-stone.prompt.txt",
+    "prompt_sha256": "e95e64790b6d26bc7df60cbefefab653b0180126435f2d7a0c69b0fe24658a30",
+    "references": [
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "As indexed in exact submitted prompt"
+      },
+      {
+        "path": "assets/art_source/ui/wood.png",
+        "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+        "role": "As indexed in exact submitted prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0018",
+    "revision": 0,
+    "resource_id": "stone",
+    "display_role": "inventory",
+    "output_sha256": "0aef918775dab9c27284725d28a507c50e0d3788dca6deadc9eea410037d254e"
+  },
+  {
+    "id": "ui/hud_stone",
+    "owner": "raster",
+    "source": "assets/art_source/ui/stone.png",
+    "source_sha256": "bd028d163f7dc8471a0d6b9009f9c162ba997e7f8c2403f0839c004a7f1c7159",
+    "crop_xywh": [
+      307,
+      427,
+      654,
+      508
+    ],
+    "canvas_wh": [
+      10,
+      10
+    ],
+    "pivot_xy": [
+      5,
+      5
+    ],
+    "content_scale": 0.012232415902140673,
+    "content_anchor_xy": [
+      4,
+      3
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "animation": "ui/hud_stone",
+    "frame": 0,
+    "seconds": 1.0,
+    "loop": false,
+    "output": "sprites/ui/hud_stone.png",
+    "prompt": "implementation/sprites/generation/0018-stone.prompt.txt",
+    "prompt_sha256": "e95e64790b6d26bc7df60cbefefab653b0180126435f2d7a0c69b0fe24658a30",
+    "references": [
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "As indexed in exact submitted prompt"
+      },
+      {
+        "path": "assets/art_source/ui/wood.png",
+        "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+        "role": "As indexed in exact submitted prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0018",
+    "revision": 0,
+    "resource_id": "stone",
+    "display_role": "compact_hud",
+    "output_sha256": "69678215024f2f74a275dda79fed76277da5a5d35fe77ba6e7f62d60fe239bcc"
+  },
+  {
+    "id": "ui/icon_iron",
+    "owner": "raster",
+    "source": "assets/art_source/ui/iron.png",
+    "source_sha256": "f1b60c1d3931ea8777448af0b68d533d2e6b8e69f1da7efb417c35403d77538d",
+    "crop_xywh": [
+      294,
+      384,
+      696,
+      571
+    ],
+    "canvas_wh": [
+      16,
+      16
+    ],
+    "pivot_xy": [
+      8,
+      8
+    ],
+    "content_scale": 0.020114942528735632,
+    "content_anchor_xy": [
+      7,
+      5
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "animation": "ui/icon_iron",
+    "frame": 0,
+    "seconds": 1.0,
+    "loop": false,
+    "output": "sprites/ui/icon_iron.png",
+    "prompt": "implementation/sprites/generation/0018-iron.prompt.txt",
+    "prompt_sha256": "68adee9272afef86718f040ddd7847a01ce81990396bf7e30d36e14efe8dba24",
+    "references": [
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "As indexed in exact submitted prompt"
+      },
+      {
+        "path": "assets/art_source/ui/wood.png",
+        "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+        "role": "As indexed in exact submitted prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0018",
+    "revision": 0,
+    "resource_id": "iron",
+    "display_role": "inventory",
+    "output_sha256": "cc8315903bb141470e6f26dc65cbd19287823fb42f945cfd8bdd0f05fc890ef6"
+  },
+  {
+    "id": "ui/hud_iron",
+    "owner": "raster",
+    "source": "assets/art_source/ui/iron.png",
+    "source_sha256": "f1b60c1d3931ea8777448af0b68d533d2e6b8e69f1da7efb417c35403d77538d",
+    "crop_xywh": [
+      294,
+      384,
+      696,
+      571
+    ],
+    "canvas_wh": [
+      10,
+      10
+    ],
+    "pivot_xy": [
+      5,
+      5
+    ],
+    "content_scale": 0.011494252873563218,
+    "content_anchor_xy": [
+      4,
+      3
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "animation": "ui/hud_iron",
+    "frame": 0,
+    "seconds": 1.0,
+    "loop": false,
+    "output": "sprites/ui/hud_iron.png",
+    "prompt": "implementation/sprites/generation/0018-iron.prompt.txt",
+    "prompt_sha256": "68adee9272afef86718f040ddd7847a01ce81990396bf7e30d36e14efe8dba24",
+    "references": [
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "As indexed in exact submitted prompt"
+      },
+      {
+        "path": "assets/art_source/ui/wood.png",
+        "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+        "role": "As indexed in exact submitted prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0018",
+    "revision": 0,
+    "resource_id": "iron",
+    "display_role": "compact_hud",
+    "output_sha256": "6c505a65227e474d97624412188021eb0a8d977e1b88939ed5d8541689ec6edc"
+  },
+  {
+    "id": "ui/icon_food",
+    "owner": "raster",
+    "source": "assets/art_source/ui/food.png",
+    "source_sha256": "e8248ecfbccc768af04e33d21dde98f2e494f7b6030358bcd1912027f85ec489",
+    "crop_xywh": [
+      305,
+      387,
+      644,
+      524
+    ],
+    "canvas_wh": [
+      16,
+      16
+    ],
+    "pivot_xy": [
+      8,
+      8
+    ],
+    "content_scale": 0.021739130434782608,
+    "content_anchor_xy": [
+      7,
+      5
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "animation": "ui/icon_food",
+    "frame": 0,
+    "seconds": 1.0,
+    "loop": false,
+    "output": "sprites/ui/icon_food.png",
+    "prompt": "implementation/sprites/generation/0018-food.prompt.txt",
+    "prompt_sha256": "d9c0e09f2c9e06bf1af3de5747819b0b160768be0c9ef559a2dd2a06e211cdc1",
+    "references": [
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "As indexed in exact submitted prompt"
+      },
+      {
+        "path": "assets/art_source/ui/wood.png",
+        "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+        "role": "As indexed in exact submitted prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0018",
+    "revision": 0,
+    "resource_id": "food",
+    "display_role": "inventory",
+    "output_sha256": "d0243226b87ef637b1981a2d9e987182b81272610397e6808a05d86a78cf4afb"
+  },
+  {
+    "id": "ui/hud_food",
+    "owner": "raster",
+    "source": "assets/art_source/ui/food.png",
+    "source_sha256": "e8248ecfbccc768af04e33d21dde98f2e494f7b6030358bcd1912027f85ec489",
+    "crop_xywh": [
+      305,
+      387,
+      644,
+      524
+    ],
+    "canvas_wh": [
+      10,
+      10
+    ],
+    "pivot_xy": [
+      5,
+      5
+    ],
+    "content_scale": 0.012422360248447204,
+    "content_anchor_xy": [
+      4,
+      3
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "animation": "ui/hud_food",
+    "frame": 0,
+    "seconds": 1.0,
+    "loop": false,
+    "output": "sprites/ui/hud_food.png",
+    "prompt": "implementation/sprites/generation/0018-food.prompt.txt",
+    "prompt_sha256": "d9c0e09f2c9e06bf1af3de5747819b0b160768be0c9ef559a2dd2a06e211cdc1",
+    "references": [
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "As indexed in exact submitted prompt"
+      },
+      {
+        "path": "assets/art_source/ui/wood.png",
+        "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+        "role": "As indexed in exact submitted prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0018",
+    "revision": 0,
+    "resource_id": "food",
+    "display_role": "compact_hud",
+    "output_sha256": "9d7fb69365cbbe0dae4d9f1c82539c9f1fd4b0c99fab556fa13a4b6fe4073067"
+  },
+  {
+    "id": "ui/icon_fish",
+    "owner": "raster",
+    "source": "assets/art_source/ui/fish.png",
+    "source_sha256": "82d82f6e401cd20e0fd676c090071abf228290b1e53ab432f73cb1ca7cfb0442",
+    "crop_xywh": [
+      261,
+      466,
+      766,
+      432
+    ],
+    "canvas_wh": [
+      16,
+      16
+    ],
+    "pivot_xy": [
+      8,
+      8
+    ],
+    "content_scale": 0.018276762402088774,
+    "content_anchor_xy": [
+      7,
+      4
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "animation": "ui/icon_fish",
+    "frame": 0,
+    "seconds": 1.0,
+    "loop": false,
+    "output": "sprites/ui/icon_fish.png",
+    "prompt": "implementation/sprites/generation/0018-fish.prompt.txt",
+    "prompt_sha256": "669af851c5d8e587ab434be43dc619c15e3dea6bceada05a6312218638c9e149",
+    "references": [
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "As indexed in exact submitted prompt"
+      },
+      {
+        "path": "assets/art_source/ui/wood.png",
+        "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+        "role": "As indexed in exact submitted prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0018",
+    "revision": 0,
+    "resource_id": "fish",
+    "display_role": "inventory",
+    "output_sha256": "589a1dbf534d95d92d214c00812a8fd2da75b396196ef4f788bb53eea6d9fda5"
+  },
+  {
+    "id": "ui/hud_fish",
+    "owner": "raster",
+    "source": "assets/art_source/ui/fish.png",
+    "source_sha256": "82d82f6e401cd20e0fd676c090071abf228290b1e53ab432f73cb1ca7cfb0442",
+    "crop_xywh": [
+      261,
+      466,
+      766,
+      432
+    ],
+    "canvas_wh": [
+      10,
+      10
+    ],
+    "pivot_xy": [
+      5,
+      5
+    ],
+    "content_scale": 0.010443864229765013,
+    "content_anchor_xy": [
+      4,
+      2
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "animation": "ui/hud_fish",
+    "frame": 0,
+    "seconds": 1.0,
+    "loop": false,
+    "output": "sprites/ui/hud_fish.png",
+    "prompt": "implementation/sprites/generation/0018-fish.prompt.txt",
+    "prompt_sha256": "669af851c5d8e587ab434be43dc619c15e3dea6bceada05a6312218638c9e149",
+    "references": [
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "As indexed in exact submitted prompt"
+      },
+      {
+        "path": "assets/art_source/ui/wood.png",
+        "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+        "role": "As indexed in exact submitted prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0018",
+    "revision": 0,
+    "resource_id": "fish",
+    "display_role": "compact_hud",
+    "output_sha256": "82f5c816dd8cc2009b1e10b791552a667c87067e7b2fe9f68fbcd539c440349b"
+  },
+  {
+    "id": "ui/icon_oil",
+    "owner": "raster",
+    "source": "assets/art_source/ui/oil.png",
+    "source_sha256": "187ede7f76748eefd84209009dfba2f7607af0d6afe888c7d219de14ed3b2621",
+    "crop_xywh": [
+      445,
+      408,
+      364,
+      505
+    ],
+    "canvas_wh": [
+      16,
+      16
+    ],
+    "pivot_xy": [
+      8,
+      8
+    ],
+    "content_scale": 0.027722772277227723,
+    "content_anchor_xy": [
+      5,
+      7
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "animation": "ui/icon_oil",
+    "frame": 0,
+    "seconds": 1.0,
+    "loop": false,
+    "output": "sprites/ui/icon_oil.png",
+    "prompt": "implementation/sprites/generation/0018-oil.prompt.txt",
+    "prompt_sha256": "637e46f55760704bfa60695f7b1aaba867227965b287227dce670afc0f93b7af",
+    "references": [
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "As indexed in exact submitted prompt"
+      },
+      {
+        "path": "assets/art_source/ui/wood.png",
+        "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+        "role": "As indexed in exact submitted prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0018",
+    "revision": 0,
+    "resource_id": "oil",
+    "display_role": "inventory",
+    "output_sha256": "a85b74e43b2b023cf9c54e5e5c57f7f1613d374c13e9515ba5abcf6bf69aa58a"
+  },
+  {
+    "id": "ui/hud_oil",
+    "owner": "raster",
+    "source": "assets/art_source/ui/oil.png",
+    "source_sha256": "187ede7f76748eefd84209009dfba2f7607af0d6afe888c7d219de14ed3b2621",
+    "crop_xywh": [
+      445,
+      408,
+      364,
+      505
+    ],
+    "canvas_wh": [
+      10,
+      10
+    ],
+    "pivot_xy": [
+      5,
+      5
+    ],
+    "content_scale": 0.015841584158415842,
+    "content_anchor_xy": [
+      3,
+      4
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "animation": "ui/hud_oil",
+    "frame": 0,
+    "seconds": 1.0,
+    "loop": false,
+    "output": "sprites/ui/hud_oil.png",
+    "prompt": "implementation/sprites/generation/0018-oil.prompt.txt",
+    "prompt_sha256": "637e46f55760704bfa60695f7b1aaba867227965b287227dce670afc0f93b7af",
+    "references": [
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "As indexed in exact submitted prompt"
+      },
+      {
+        "path": "assets/art_source/ui/wood.png",
+        "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+        "role": "As indexed in exact submitted prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0018",
+    "revision": 0,
+    "resource_id": "oil",
+    "display_role": "compact_hud",
+    "output_sha256": "28843e0f412984d85336b24d022de8726ba7c5aeb16631ea7b7b9c5a99f1d339"
+  },
+  {
+    "id": "ui/icon_wheat",
+    "owner": "raster",
+    "source": "assets/art_source/ui/wheat.png",
+    "source_sha256": "dbf57c9b0f45fb61d798eacbaeff67382e6adac344d329f7457dadccb077aaa4",
+    "crop_xywh": [
+      380,
+      330,
+      554,
+      641
+    ],
+    "canvas_wh": [
+      16,
+      16
+    ],
+    "pivot_xy": [
+      8,
+      8
+    ],
+    "content_scale": 0.0218408736349454,
+    "content_anchor_xy": [
+      6,
+      7
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "animation": "ui/icon_wheat",
+    "frame": 0,
+    "seconds": 1.0,
+    "loop": false,
+    "output": "sprites/ui/icon_wheat.png",
+    "prompt": "implementation/sprites/generation/0018-wheat.prompt.txt",
+    "prompt_sha256": "593877ce31c7ab7a75f5f67a3cb7fef722c034a415631e4d7a9a5cff716fe205",
+    "references": [
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "As indexed in exact submitted prompt"
+      },
+      {
+        "path": "assets/art_source/ui/wood.png",
+        "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+        "role": "As indexed in exact submitted prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0018",
+    "revision": 0,
+    "resource_id": "wheat",
+    "display_role": "inventory",
+    "output_sha256": "6df63672d3ee3fa397ca4e7e148b8bb43b7b51bd895d7cb4eddb7e07b531bcf0"
+  },
+  {
+    "id": "ui/hud_wheat",
+    "owner": "raster",
+    "source": "assets/art_source/ui/wheat.png",
+    "source_sha256": "dbf57c9b0f45fb61d798eacbaeff67382e6adac344d329f7457dadccb077aaa4",
+    "crop_xywh": [
+      380,
+      330,
+      554,
+      641
+    ],
+    "canvas_wh": [
+      10,
+      10
+    ],
+    "pivot_xy": [
+      5,
+      5
+    ],
+    "content_scale": 0.0124804992199688,
+    "content_anchor_xy": [
+      3,
+      4
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "animation": "ui/hud_wheat",
+    "frame": 0,
+    "seconds": 1.0,
+    "loop": false,
+    "output": "sprites/ui/hud_wheat.png",
+    "prompt": "implementation/sprites/generation/0018-wheat.prompt.txt",
+    "prompt_sha256": "593877ce31c7ab7a75f5f67a3cb7fef722c034a415631e4d7a9a5cff716fe205",
+    "references": [
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "As indexed in exact submitted prompt"
+      },
+      {
+        "path": "assets/art_source/ui/wood.png",
+        "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+        "role": "As indexed in exact submitted prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0018",
+    "revision": 0,
+    "resource_id": "wheat",
+    "display_role": "compact_hud",
+    "output_sha256": "9773b76da64350118f2a142c03222ace36bf38fde7d9e574ce1b4aa262fc3e94"
+  },
+  {
+    "id": "ui/icon_corn",
+    "owner": "raster",
+    "source": "assets/art_source/ui/corn.png",
+    "source_sha256": "ad82d6e923e07d1d013d8f04dcb83c1428b50f71b6939033cd0fd83e5538ca84",
+    "crop_xywh": [
+      285,
+      249,
+      735,
+      828
+    ],
+    "canvas_wh": [
+      16,
+      16
+    ],
+    "pivot_xy": [
+      8,
+      8
+    ],
+    "content_scale": 0.016908212560386472,
+    "content_anchor_xy": [
+      6,
+      7
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "animation": "ui/icon_corn",
+    "frame": 0,
+    "seconds": 1.0,
+    "loop": false,
+    "output": "sprites/ui/icon_corn.png",
+    "prompt": "implementation/sprites/generation/0018-corn.prompt.txt",
+    "prompt_sha256": "2dca660ce20d5300c8ed9135f9a449ef7ea80a9b92f129b9c8187736a5381a90",
+    "references": [
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "As indexed in exact submitted prompt"
+      },
+      {
+        "path": "assets/art_source/ui/wood.png",
+        "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+        "role": "As indexed in exact submitted prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0018",
+    "revision": 0,
+    "resource_id": "corn",
+    "display_role": "inventory",
+    "output_sha256": "fc456602d1d15cac8e9bde9217e2cadc0be0830753801816e79db1488cd6865b"
+  },
+  {
+    "id": "ui/hud_corn",
+    "owner": "raster",
+    "source": "assets/art_source/ui/corn.png",
+    "source_sha256": "ad82d6e923e07d1d013d8f04dcb83c1428b50f71b6939033cd0fd83e5538ca84",
+    "crop_xywh": [
+      285,
+      249,
+      735,
+      828
+    ],
+    "canvas_wh": [
+      10,
+      10
+    ],
+    "pivot_xy": [
+      5,
+      5
+    ],
+    "content_scale": 0.00966183574879227,
+    "content_anchor_xy": [
+      3,
+      4
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "animation": "ui/hud_corn",
+    "frame": 0,
+    "seconds": 1.0,
+    "loop": false,
+    "output": "sprites/ui/hud_corn.png",
+    "prompt": "implementation/sprites/generation/0018-corn.prompt.txt",
+    "prompt_sha256": "2dca660ce20d5300c8ed9135f9a449ef7ea80a9b92f129b9c8187736a5381a90",
+    "references": [
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "As indexed in exact submitted prompt"
+      },
+      {
+        "path": "assets/art_source/ui/wood.png",
+        "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+        "role": "As indexed in exact submitted prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0018",
+    "revision": 0,
+    "resource_id": "corn",
+    "display_role": "compact_hud",
+    "output_sha256": "e2e46c1cba123865e2a134031348aef7d85804988e562edb17c00aa53d1856ff"
+  },
+  {
+    "id": "ui/icon_carrot",
+    "owner": "raster",
+    "source": "assets/art_source/ui/carrot.png",
+    "source_sha256": "d55aa9d51c2078c454aa834a05a19faec0f9256724758da3d976b2acaa1505f2",
+    "crop_xywh": [
+      369,
+      354,
+      578,
+      633
+    ],
+    "canvas_wh": [
+      16,
+      16
+    ],
+    "pivot_xy": [
+      8,
+      8
+    ],
+    "content_scale": 0.022116903633491312,
+    "content_anchor_xy": [
+      6,
+      7
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "animation": "ui/icon_carrot",
+    "frame": 0,
+    "seconds": 1.0,
+    "loop": false,
+    "output": "sprites/ui/icon_carrot.png",
+    "prompt": "implementation/sprites/generation/0018-carrot.prompt.txt",
+    "prompt_sha256": "cd42f9f258f48056197b56c53395969132485f82ebc4c418d10d607ec27160ae",
+    "references": [
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "As indexed in exact submitted prompt"
+      },
+      {
+        "path": "assets/art_source/ui/wood.png",
+        "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+        "role": "As indexed in exact submitted prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0018",
+    "revision": 0,
+    "resource_id": "carrot",
+    "display_role": "inventory",
+    "output_sha256": "490346cd9a33a472916b5e413af09768035603d4abd2179a0efd7f4cbfa200c6"
+  },
+  {
+    "id": "ui/hud_carrot",
+    "owner": "raster",
+    "source": "assets/art_source/ui/carrot.png",
+    "source_sha256": "d55aa9d51c2078c454aa834a05a19faec0f9256724758da3d976b2acaa1505f2",
+    "crop_xywh": [
+      369,
+      354,
+      578,
+      633
+    ],
+    "canvas_wh": [
+      10,
+      10
+    ],
+    "pivot_xy": [
+      5,
+      5
+    ],
+    "content_scale": 0.01263823064770932,
+    "content_anchor_xy": [
+      3,
+      4
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "animation": "ui/hud_carrot",
+    "frame": 0,
+    "seconds": 1.0,
+    "loop": false,
+    "output": "sprites/ui/hud_carrot.png",
+    "prompt": "implementation/sprites/generation/0018-carrot.prompt.txt",
+    "prompt_sha256": "cd42f9f258f48056197b56c53395969132485f82ebc4c418d10d607ec27160ae",
+    "references": [
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "As indexed in exact submitted prompt"
+      },
+      {
+        "path": "assets/art_source/ui/wood.png",
+        "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+        "role": "As indexed in exact submitted prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0018",
+    "revision": 0,
+    "resource_id": "carrot",
+    "display_role": "compact_hud",
+    "output_sha256": "cce00ff88632b5c92f2461e4969ac05a1230fdd6bce2502c4cd98203107a5b94"
+  },
+  {
+    "id": "ui/icon_meat",
+    "owner": "raster",
+    "source": "assets/art_source/ui/meat.png",
+    "source_sha256": "de5ca07076fbac90816872d658b56342f23773faaa5b5cb1e3ec3cb0d8d92e7d",
+    "crop_xywh": [
+      304,
+      379,
+      670,
+      577
+    ],
+    "canvas_wh": [
+      16,
+      16
+    ],
+    "pivot_xy": [
+      8,
+      8
+    ],
+    "content_scale": 0.020895522388059702,
+    "content_anchor_xy": [
+      7,
+      6
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "animation": "ui/icon_meat",
+    "frame": 0,
+    "seconds": 1.0,
+    "loop": false,
+    "output": "sprites/ui/icon_meat.png",
+    "prompt": "implementation/sprites/generation/0018-meat.prompt.txt",
+    "prompt_sha256": "0fdeaa4317c8d6b8778e04407e34c2e3a7dbbe350593dab5e018801962b3d75c",
+    "references": [
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "As indexed in exact submitted prompt"
+      },
+      {
+        "path": "assets/art_source/ui/wood.png",
+        "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+        "role": "As indexed in exact submitted prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0018",
+    "revision": 0,
+    "resource_id": "meat",
+    "display_role": "inventory",
+    "output_sha256": "9dca3e036de6964a7f0ab052fb995f0a787fec31316ec9a3e69e77da54d5f23b"
+  },
+  {
+    "id": "ui/hud_meat",
+    "owner": "raster",
+    "source": "assets/art_source/ui/meat.png",
+    "source_sha256": "de5ca07076fbac90816872d658b56342f23773faaa5b5cb1e3ec3cb0d8d92e7d",
+    "crop_xywh": [
+      304,
+      379,
+      670,
+      577
+    ],
+    "canvas_wh": [
+      10,
+      10
+    ],
+    "pivot_xy": [
+      5,
+      5
+    ],
+    "content_scale": 0.011940298507462687,
+    "content_anchor_xy": [
+      4,
+      3
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "animation": "ui/hud_meat",
+    "frame": 0,
+    "seconds": 1.0,
+    "loop": false,
+    "output": "sprites/ui/hud_meat.png",
+    "prompt": "implementation/sprites/generation/0018-meat.prompt.txt",
+    "prompt_sha256": "0fdeaa4317c8d6b8778e04407e34c2e3a7dbbe350593dab5e018801962b3d75c",
+    "references": [
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "As indexed in exact submitted prompt"
+      },
+      {
+        "path": "assets/art_source/ui/wood.png",
+        "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+        "role": "As indexed in exact submitted prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0018",
+    "revision": 0,
+    "resource_id": "meat",
+    "display_role": "compact_hud",
+    "output_sha256": "aaff5df261ee3e16f37bc74780c3dc9a92e927861bd8c91fa24817799a0981bd"
+  },
+  {
+    "id": "ui/icon_gunpowder",
+    "owner": "raster",
+    "source": "assets/art_source/ui/gunpowder.png",
+    "source_sha256": "2f18146a66795026639f9415b1ddffe152d36d2c15bf147adef47d1bfc13c079",
+    "crop_xywh": [
+      328,
+      479,
+      611,
+      399
+    ],
+    "canvas_wh": [
+      16,
+      16
+    ],
+    "pivot_xy": [
+      8,
+      8
+    ],
+    "content_scale": 0.022913256955810146,
+    "content_anchor_xy": [
+      7,
+      4
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "animation": "ui/icon_gunpowder",
+    "frame": 0,
+    "seconds": 1.0,
+    "loop": false,
+    "output": "sprites/ui/icon_gunpowder.png",
+    "prompt": "implementation/sprites/generation/0018-gunpowder.prompt.txt",
+    "prompt_sha256": "d8fe471c3be80e55af8eed5f653f37e713362a69b30d72ca22af45f152cf295c",
+    "references": [
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "As indexed in exact submitted prompt"
+      },
+      {
+        "path": "assets/art_source/ui/wood.png",
+        "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+        "role": "As indexed in exact submitted prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0018",
+    "revision": 0,
+    "resource_id": "gunpowder",
+    "display_role": "inventory",
+    "output_sha256": "2d845f087c16c5d93865d01d371406fde74b800ce2c7a588255327f6554ac63d"
+  },
+  {
+    "id": "ui/hud_gunpowder",
+    "owner": "raster",
+    "source": "assets/art_source/ui/gunpowder.png",
+    "source_sha256": "2f18146a66795026639f9415b1ddffe152d36d2c15bf147adef47d1bfc13c079",
+    "crop_xywh": [
+      328,
+      479,
+      611,
+      399
+    ],
+    "canvas_wh": [
+      10,
+      10
+    ],
+    "pivot_xy": [
+      5,
+      5
+    ],
+    "content_scale": 0.01309328968903437,
+    "content_anchor_xy": [
+      4,
+      2
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "animation": "ui/hud_gunpowder",
+    "frame": 0,
+    "seconds": 1.0,
+    "loop": false,
+    "output": "sprites/ui/hud_gunpowder.png",
+    "prompt": "implementation/sprites/generation/0018-gunpowder.prompt.txt",
+    "prompt_sha256": "d8fe471c3be80e55af8eed5f653f37e713362a69b30d72ca22af45f152cf295c",
+    "references": [
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "As indexed in exact submitted prompt"
+      },
+      {
+        "path": "assets/art_source/ui/wood.png",
+        "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+        "role": "As indexed in exact submitted prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0018",
+    "revision": 0,
+    "resource_id": "gunpowder",
+    "display_role": "compact_hud",
+    "output_sha256": "b53006783e93480773e16853c039544b82a0b3162fcd1b6581c38ba6b5540dfb"
+  },
+  {
+    "id": "ui/icon_incendiary",
+    "owner": "raster",
+    "source": "assets/art_source/ui/incendiary.png",
+    "source_sha256": "745acde75e4e144439301dcdbe6dc2c76d9e55077054b13a7196ecb56371dbb8",
+    "crop_xywh": [
+      316,
+      352,
+      614,
+      620
+    ],
+    "canvas_wh": [
+      16,
+      16
+    ],
+    "pivot_xy": [
+      8,
+      8
+    ],
+    "content_scale": 0.02258064516129032,
+    "content_anchor_xy": [
+      7,
+      7
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "animation": "ui/icon_incendiary",
+    "frame": 0,
+    "seconds": 1.0,
+    "loop": false,
+    "output": "sprites/ui/icon_incendiary.png",
+    "prompt": "implementation/sprites/generation/0018-incendiary.prompt.txt",
+    "prompt_sha256": "ec1425e14229e91f22eafd958531cb5a5cee439e80fd22d717e889001e188b85",
+    "references": [
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "As indexed in exact submitted prompt"
+      },
+      {
+        "path": "assets/art_source/ui/wood.png",
+        "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+        "role": "As indexed in exact submitted prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0018",
+    "revision": 0,
+    "resource_id": "incendiary",
+    "display_role": "inventory",
+    "output_sha256": "5c51a4aa471e471d9f524dd76b9a683fd5646f7062fb98d7a51c11038224ff52"
+  },
+  {
+    "id": "ui/hud_incendiary",
+    "owner": "raster",
+    "source": "assets/art_source/ui/incendiary.png",
+    "source_sha256": "745acde75e4e144439301dcdbe6dc2c76d9e55077054b13a7196ecb56371dbb8",
+    "crop_xywh": [
+      316,
+      352,
+      614,
+      620
+    ],
+    "canvas_wh": [
+      10,
+      10
+    ],
+    "pivot_xy": [
+      5,
+      5
+    ],
+    "content_scale": 0.012903225806451613,
+    "content_anchor_xy": [
+      4,
+      4
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "animation": "ui/hud_incendiary",
+    "frame": 0,
+    "seconds": 1.0,
+    "loop": false,
+    "output": "sprites/ui/hud_incendiary.png",
+    "prompt": "implementation/sprites/generation/0018-incendiary.prompt.txt",
+    "prompt_sha256": "ec1425e14229e91f22eafd958531cb5a5cee439e80fd22d717e889001e188b85",
+    "references": [
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "As indexed in exact submitted prompt"
+      },
+      {
+        "path": "assets/art_source/ui/wood.png",
+        "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+        "role": "As indexed in exact submitted prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0018",
+    "revision": 0,
+    "resource_id": "incendiary",
+    "display_role": "compact_hud",
+    "output_sha256": "101c12fa6c18c5d4bd0f2b56449b41c8f91a6b08e1296b8f80ce7562d9074067"
+  },
+  {
+    "id": "ui/icon_money",
+    "owner": "raster",
+    "source": "assets/art_source/ui/money.png",
+    "source_sha256": "42086b0c085a64ff2dbac663f6cc39432ba16ec29df7f97aa9d85c5b3fdce158",
+    "crop_xywh": [
+      342,
+      427,
+      612,
+      489
+    ],
+    "canvas_wh": [
+      16,
+      16
+    ],
+    "pivot_xy": [
+      8,
+      8
+    ],
+    "content_scale": 0.02287581699346405,
+    "content_anchor_xy": [
+      7,
+      5
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "animation": "ui/icon_money",
+    "frame": 0,
+    "seconds": 1.0,
+    "loop": false,
+    "output": "sprites/ui/icon_money.png",
+    "prompt": "implementation/sprites/generation/0018-money.prompt.txt",
+    "prompt_sha256": "81a436983b04046d2de370896b082ac5ca20bf1d215b1efbd04a1eaf2865cbef",
+    "references": [
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "As indexed in exact submitted prompt"
+      },
+      {
+        "path": "assets/art_source/ui/wood.png",
+        "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+        "role": "As indexed in exact submitted prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0018",
+    "revision": 0,
+    "resource_id": "money",
+    "display_role": "inventory",
+    "output_sha256": "e1131306f92cc6a2de702395d1aec2d517a9eab39223f540be603198c793979e"
+  },
+  {
+    "id": "ui/hud_money",
+    "owner": "raster",
+    "source": "assets/art_source/ui/money.png",
+    "source_sha256": "42086b0c085a64ff2dbac663f6cc39432ba16ec29df7f97aa9d85c5b3fdce158",
+    "crop_xywh": [
+      342,
+      427,
+      612,
+      489
+    ],
+    "canvas_wh": [
+      10,
+      10
+    ],
+    "pivot_xy": [
+      5,
+      5
+    ],
+    "content_scale": 0.013071895424836602,
+    "content_anchor_xy": [
+      4,
+      3
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "animation": "ui/hud_money",
+    "frame": 0,
+    "seconds": 1.0,
+    "loop": false,
+    "output": "sprites/ui/hud_money.png",
+    "prompt": "implementation/sprites/generation/0018-money.prompt.txt",
+    "prompt_sha256": "81a436983b04046d2de370896b082ac5ca20bf1d215b1efbd04a1eaf2865cbef",
+    "references": [
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "As indexed in exact submitted prompt"
+      },
+      {
+        "path": "assets/art_source/ui/wood.png",
+        "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+        "role": "As indexed in exact submitted prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0018",
+    "revision": 0,
+    "resource_id": "money",
+    "display_role": "compact_hud",
+    "output_sha256": "13a5ff774d41199fb21607aa4838cfc5571d8adf644749e64ac641746b2bfb97"
+  },
+  {
+    "id": "ui/icon_energy",
+    "owner": "raster",
+    "source": "assets/art_source/ui/energy.png",
+    "source_sha256": "3f75fbff1fa1c831cb854e1294d676ca535344200df3d1c12e1fae9be6743ada",
+    "crop_xywh": [
+      408,
+      327,
+      479,
+      620
+    ],
+    "canvas_wh": [
+      16,
+      16
+    ],
+    "pivot_xy": [
+      8,
+      8
+    ],
+    "content_scale": 0.02258064516129032,
+    "content_anchor_xy": [
+      5,
+      7
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "animation": "ui/icon_energy",
+    "frame": 0,
+    "seconds": 1.0,
+    "loop": false,
+    "output": "sprites/ui/icon_energy.png",
+    "prompt": "implementation/sprites/generation/0018-energy.prompt.txt",
+    "prompt_sha256": "f702b450d4057c49f10f76d79fe9346aaeb57a7c59c89d0cd31560e5a843836e",
+    "references": [
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "As indexed in exact submitted prompt"
+      },
+      {
+        "path": "assets/art_source/ui/wood.png",
+        "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+        "role": "As indexed in exact submitted prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0018",
+    "revision": 0,
+    "resource_id": "energy",
+    "display_role": "inventory",
+    "output_sha256": "87d219e0637b06a7c25c2ddc97eb90e87a85f679a3c3b4dd5d509d4da1513fe4"
+  },
+  {
+    "id": "ui/hud_energy",
+    "owner": "raster",
+    "source": "assets/art_source/ui/energy.png",
+    "source_sha256": "3f75fbff1fa1c831cb854e1294d676ca535344200df3d1c12e1fae9be6743ada",
+    "crop_xywh": [
+      408,
+      327,
+      479,
+      620
+    ],
+    "canvas_wh": [
+      10,
+      10
+    ],
+    "pivot_xy": [
+      5,
+      5
+    ],
+    "content_scale": 0.012903225806451613,
+    "content_anchor_xy": [
+      3,
+      4
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "animation": "ui/hud_energy",
+    "frame": 0,
+    "seconds": 1.0,
+    "loop": false,
+    "output": "sprites/ui/hud_energy.png",
+    "prompt": "implementation/sprites/generation/0018-energy.prompt.txt",
+    "prompt_sha256": "f702b450d4057c49f10f76d79fe9346aaeb57a7c59c89d0cd31560e5a843836e",
+    "references": [
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "As indexed in exact submitted prompt"
+      },
+      {
+        "path": "assets/art_source/ui/wood.png",
+        "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+        "role": "As indexed in exact submitted prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0018",
+    "revision": 0,
+    "resource_id": "energy",
+    "display_role": "compact_hud",
+    "output_sha256": "11df77c7dbf37b3100317c09d3aeaa55a417267df7eb11e6b9aff07876d0152e"
+  },
+  {
+    "id": "ui/icon_tech",
+    "owner": "raster",
+    "source": "assets/art_source/ui/tech.png",
+    "source_sha256": "6a72bbfce6ae216646a7bc63f65708872b97ad887c7d2d216c5b6b8e24072c6c",
+    "crop_xywh": [
+      306,
+      316,
+      643,
+      624
+    ],
+    "canvas_wh": [
+      16,
+      16
+    ],
+    "pivot_xy": [
+      8,
+      8
+    ],
+    "content_scale": 0.02177293934681182,
+    "content_anchor_xy": [
+      7,
+      7
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "animation": "ui/icon_tech",
+    "frame": 0,
+    "seconds": 1.0,
+    "loop": false,
+    "output": "sprites/ui/icon_tech.png",
+    "prompt": "implementation/sprites/generation/0018-tech.prompt.txt",
+    "prompt_sha256": "6f711b979fa8672039d6c415c015f60563c26e1ebd987a3e3e34be5eba6da6bf",
+    "references": [
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "As indexed in exact submitted prompt"
+      },
+      {
+        "path": "assets/art_source/ui/wood.png",
+        "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+        "role": "As indexed in exact submitted prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0018",
+    "revision": 0,
+    "resource_id": "tech",
+    "display_role": "inventory",
+    "output_sha256": "884ccf99ed8701ece103cc9c3639066ad55556af6b38b48d910720996faf08e8"
+  },
+  {
+    "id": "ui/hud_tech",
+    "owner": "raster",
+    "source": "assets/art_source/ui/tech.png",
+    "source_sha256": "6a72bbfce6ae216646a7bc63f65708872b97ad887c7d2d216c5b6b8e24072c6c",
+    "crop_xywh": [
+      306,
+      316,
+      643,
+      624
+    ],
+    "canvas_wh": [
+      10,
+      10
+    ],
+    "pivot_xy": [
+      5,
+      5
+    ],
+    "content_scale": 0.012441679626749611,
+    "content_anchor_xy": [
+      4,
+      4
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "animation": "ui/hud_tech",
+    "frame": 0,
+    "seconds": 1.0,
+    "loop": false,
+    "output": "sprites/ui/hud_tech.png",
+    "prompt": "implementation/sprites/generation/0018-tech.prompt.txt",
+    "prompt_sha256": "6f711b979fa8672039d6c415c015f60563c26e1ebd987a3e3e34be5eba6da6bf",
+    "references": [
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "As indexed in exact submitted prompt"
+      },
+      {
+        "path": "assets/art_source/ui/wood.png",
+        "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+        "role": "As indexed in exact submitted prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0018",
+    "revision": 0,
+    "resource_id": "tech",
+    "display_role": "compact_hud",
+    "output_sha256": "1af9d660469b11234de5bf38fa64a94ae089e57b0f518c5171e6adb6c9388974"
+  }
+]

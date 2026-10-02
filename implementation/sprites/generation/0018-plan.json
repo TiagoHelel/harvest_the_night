@@ -1,0 +1,271 @@
+[
+  {
+    "id": "wood",
+    "subject": "two short stacked timber logs with warm bark and one large pale cut end; horizontal silhouette",
+    "references": [
+      "docs/reference-sheet.png"
+    ],
+    "canvas": [
+      16,
+      16
+    ],
+    "compact_canvas": [
+      10,
+      10
+    ],
+    "visible": 14,
+    "compact_visible": 9
+  },
+  {
+    "id": "stone",
+    "subject": "two chunky grey fieldstones with broad angular faces; low irregular silhouette",
+    "references": [
+      "docs/reference-sheet.png",
+      "assets/art_source/ui/wood.png"
+    ],
+    "canvas": [
+      16,
+      16
+    ],
+    "compact_canvas": [
+      10,
+      10
+    ],
+    "visible": 14,
+    "compact_visible": 9
+  },
+  {
+    "id": "iron",
+    "subject": "one silver-grey iron ingot, elongated trapezoid with a bright broad top and dark side; no rocks",
+    "references": [
+      "docs/reference-sheet.png",
+      "assets/art_source/ui/wood.png"
+    ],
+    "canvas": [
+      16,
+      16
+    ],
+    "compact_canvas": [
+      10,
+      10
+    ],
+    "visible": 14,
+    "compact_visible": 9
+  },
+  {
+    "id": "food",
+    "subject": "one shallow wooden bowl holding a simple cream cooked meal with one green garnish; round open bowl silhouette, not a corn cob or raw meat",
+    "references": [
+      "docs/reference-sheet.png",
+      "assets/art_source/ui/wood.png"
+    ],
+    "canvas": [
+      16,
+      16
+    ],
+    "compact_canvas": [
+      10,
+      10
+    ],
+    "visible": 14,
+    "compact_visible": 9
+  },
+  {
+    "id": "fish",
+    "subject": "one blue fish facing left with a distinct forked tail and pale belly; horizontal oval silhouette",
+    "references": [
+      "docs/reference-sheet.png",
+      "assets/art_source/ui/wood.png"
+    ],
+    "canvas": [
+      16,
+      16
+    ],
+    "compact_canvas": [
+      10,
+      10
+    ],
+    "visible": 14,
+    "compact_visible": 9
+  },
+  {
+    "id": "oil",
+    "subject": "one squat upright wooden oil barrel with two dark metal hoops and closed lid; warm brown cylindrical silhouette",
+    "references": [
+      "docs/reference-sheet.png",
+      "assets/art_source/ui/wood.png"
+    ],
+    "canvas": [
+      16,
+      16
+    ],
+    "compact_canvas": [
+      10,
+      10
+    ],
+    "visible": 14,
+    "compact_visible": 9
+  },
+  {
+    "id": "wheat",
+    "subject": "one slim golden wheat head leaning diagonally with short stem and joined grain lobes; no corn cob",
+    "references": [
+      "docs/reference-sheet.png",
+      "assets/art_source/ui/wood.png"
+    ],
+    "canvas": [
+      16,
+      16
+    ],
+    "compact_canvas": [
+      10,
+      10
+    ],
+    "visible": 14,
+    "compact_visible": 9
+  },
+  {
+    "id": "corn",
+    "subject": "one broad golden corn cob with a simple dark-green peeled husk; wide tapering grain mass, no long stalk",
+    "references": [
+      "docs/reference-sheet.png",
+      "assets/art_source/ui/wood.png"
+    ],
+    "canvas": [
+      16,
+      16
+    ],
+    "compact_canvas": [
+      10,
+      10
+    ],
+    "visible": 14,
+    "compact_visible": 9
+  },
+  {
+    "id": "carrot",
+    "subject": "one orange carrot with two short joined green leaves; long tapered root silhouette",
+    "references": [
+      "docs/reference-sheet.png",
+      "assets/art_source/ui/wood.png"
+    ],
+    "canvas": [
+      16,
+      16
+    ],
+    "compact_canvas": [
+      10,
+      10
+    ],
+    "visible": 14,
+    "compact_visible": 9
+  },
+  {
+    "id": "meat",
+    "subject": "one red raw steak with a cream fat rim and one central bone spot; compact irregular red oval",
+    "references": [
+      "docs/reference-sheet.png",
+      "assets/art_source/ui/wood.png"
+    ],
+    "canvas": [
+      16,
+      16
+    ],
+    "compact_canvas": [
+      10,
+      10
+    ],
+    "visible": 14,
+    "compact_visible": 9
+  },
+  {
+    "id": "gunpowder",
+    "subject": "one low triangular mound of charcoal-grey gunpowder with two broad light planes; no barrel or metallic ingot",
+    "references": [
+      "docs/reference-sheet.png",
+      "assets/art_source/ui/wood.png"
+    ],
+    "canvas": [
+      16,
+      16
+    ],
+    "compact_canvas": [
+      10,
+      10
+    ],
+    "visible": 14,
+    "compact_visible": 9
+  },
+  {
+    "id": "incendiary",
+    "subject": "one squat red metal fuel can with a short spout and one small orange flame emblem made of pixels, no letters; red rectangular silhouette distinct from the brown oil barrel",
+    "references": [
+      "docs/reference-sheet.png",
+      "assets/art_source/ui/wood.png"
+    ],
+    "canvas": [
+      16,
+      16
+    ],
+    "compact_canvas": [
+      10,
+      10
+    ],
+    "visible": 14,
+    "compact_visible": 9
+  },
+  {
+    "id": "money",
+    "subject": "three overlapping golden coins, two stacked and one showing a plain broad face; no embossed letters or numbers",
+    "references": [
+      "docs/reference-sheet.png",
+      "assets/art_source/ui/wood.png"
+    ],
+    "canvas": [
+      16,
+      16
+    ],
+    "compact_canvas": [
+      10,
+      10
+    ],
+    "visible": 14,
+    "compact_visible": 9
+  },
+  {
+    "id": "energy",
+    "subject": "one bold gold lightning bolt leaning right; a compact five-turn zigzag, no enclosing battery or glow",
+    "references": [
+      "docs/reference-sheet.png",
+      "assets/art_source/ui/wood.png"
+    ],
+    "canvas": [
+      16,
+      16
+    ],
+    "compact_canvas": [
+      10,
+      10
+    ],
+    "visible": 14,
+    "compact_visible": 9
+  },
+  {
+    "id": "tech",
+    "subject": "one pale steel six-tooth gear with a dark circular hole and one warm brass accent; bold mechanism silhouette, no letter or number",
+    "references": [
+      "docs/reference-sheet.png",
+      "assets/art_source/ui/wood.png"
+    ],
+    "canvas": [
+      16,
+      16
+    ],
+    "compact_canvas": [
+      10,
+      10
+    ],
+    "visible": 14,
+    "compact_visible": 9
+  }
+]

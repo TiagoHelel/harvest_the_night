@@ -2481,3 +2481,8 @@ SPRITES = {
         "....iiiiii......",
     ]),
 }
+
+
+# Task 0018 preserves the established deterministic source for UI surfaces.
+from ui_surfaces import refine as refine_ui_surfaces
+refine_ui_surfaces(SPRITES)

@@ -1,0 +1,14 @@
+4 written, 0 failed, into res://implementation/shots/sprites/0018/
+WARNING: Save: the run is state 2 and this build knows 1
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] _no (res://src/app/save.gd:175)
+       [1] read_run_at (res://src/app/save.gd:127)
+       [2] read_run (res://src/app/save.gd:106)
+       [3] can_continue (res://src/app/save.gd:154)
+       [4] _build_menu (res://src/ui/title_screen.gd:306)
+       [5] _ready (res://src/ui/title_screen.gd:116)
+       [6] _take_the_save_trouble (res://src/tools/shot.gd:548)
+       [7] _take_the_front (res://src/tools/shot.gd:491)
+       [8] _take_the_crash (res://src/tools/shot.gd:516)
+       [9] _shoot (res://src/tools/shot.gd:673)

@@ -107,6 +107,7 @@ var _seed_rows: Dictionary = {}     # crop id -> Label
 var _water: Label
 var _line: Label
 var _power: Label
+var _power_icon: TextureRect
 var _ammo: Label
 var _day_only: Array[Control] = []
 
@@ -129,7 +130,9 @@ func _ready() -> void:
 	_day = _label("Day", Vector2(4, 3), UiKit.WARM)
 	_day.text = I18n.t(&"DHUD_DAY_FIRST")
 
-	_money = _label("Money", Vector2(96, 3), UiKit.WARM)
+	# Reserve the full Portuguese dusk label before the money group.
+	_icon(GameData.MONEY, Vector2(144, 3))
+	_money = _label("Money", Vector2(156, 3), UiKit.WARM)
 	_money.text = I18n.t(&"DHUD_MONEY_FIRST")
 
 	# Two rows of three, right-aligned against the top-right corner, the way
@@ -137,8 +140,9 @@ func _ready() -> void:
 	for row in SHOWN.size():
 		for column in (SHOWN[row] as Array).size():
 			var id: StringName = SHOWN[row][column]
+			_icon(id, Vector2(210 + column * 88, 3 + row * 11))
 			var label := _label("res_%s" % id,
-				Vector2(210 + column * 88, 3 + row * 11), UiKit.DIM)
+				Vector2(222 + column * 88, 3 + row * 11), UiKit.DIM)
 			_labels[id] = label
 			_last[id] = -1
 
@@ -156,7 +160,8 @@ func _ready() -> void:
 
 	# **Bottom left, and it stays up after dark.** Supply against draw, and
 	# what that is doing to the speed of everything.
-	_power = _label("PowerLine", Vector2(4, 258), UiKit.DIM)
+	_power_icon = _icon(GameData.ENERGY, Vector2(4, 258))
+	_power = _label("PowerLine", Vector2(16, 258), UiKit.DIM)
 
 	# Under the power line, and up after dark for the same reason.
 	_ammo = _label("AmmoLine", Vector2(4, 248), UiKit.DIM)
@@ -309,7 +314,7 @@ func _refresh(force: bool) -> void:
 
 	if _day_only.is_empty():
 		for child in get_children():
-			if child is Control and child != _power and child != _ammo:
+			if child is Control and child != _power and child != _ammo and child != _power_icon:
 				_day_only.append(child as Control)
 	for node in _day_only:
 		node.visible = daylight
@@ -433,13 +438,28 @@ func _fade(delta: float) -> void:
 		label.modulate = Color.WHITE
 
 
-## The whole word, until task 0079 draws the icons the reference sheet has.
+## Keep the localized whole word beside the compact icon.
 ##
 ## The first version of this abbreviated to three letters and produced "WOO",
 ## "STO" and "IRO" - which is not shorthand, it is a puzzle. At font size 9 the
 ## longest of these is forty pixels and the bar is four hundred and eighty.
 func _short(id: StringName) -> String:
 	return Names.of(id)
+
+
+## Compact cuts keep their own native pixels in the existing eleven-pixel rows.
+func _icon(id: StringName, at: Vector2) -> TextureRect:
+	var image := TextureRect.new()
+	image.name = "icon_%s" % id
+	image.texture = UiKit.icon(id, true)
+	image.position = at
+	image.size = Vector2(10, 10)
+	image.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	image.stretch_mode = TextureRect.STRETCH_KEEP
+	image.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	image.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(image)
+	return image
 
 
 func _label(node_name: String, at: Vector2,

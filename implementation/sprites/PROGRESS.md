@@ -1201,3 +1201,56 @@ Full evidence and measurement limits: `reviews/0017/REVIEW.md`.
 Queue: 17 done, 3 todo, zero doing/blocked. Next: 0018. Exactly one task
 completed this cycle; the longer goal remains active. The 0019 atmosphere
 follow-up will use current art, honoring the user's request not to redo sprites.
+
+
+## 2026-10-02 - 0018 complete: native resource icons and UI surfaces
+
+Completed all fifteen resource icons with fifteen actual built-in ImageGen
+calls and zero revisions. Raw masters are `assets/art_source/ui/*.png`;
+`generation/0018-*` preserves exact prompts, submitted arguments, references,
+SHA-256 hashes and deterministic cut recipes. The reference sheet and accepted
+wood master maintain material consistency. Each source owns a 16x16 inventory
+cut and 10x10 compact cut, with maximum visible dimensions 14 and 8, transparent
+padding, binary alpha and the existing palette. Thirty distinct outputs replace
+the fifteen legacy icons and add compact variants; no completed world, player,
+enemy or effect sprites were regenerated.
+
+HUD, tech currency, inventory and market quantity-one buttons use native cuts
+while preserving localized names. Existing deterministic UI surfaces retain
+three-pixel nine-patch margins, clear normal/hover/pressed/disabled states,
+selected tab underline and visible focus. Seven additional tab/check/grip states
+stay code-owned. Actual capture review caught and fixed the inventory's bottom
+clipping, Godot's default disabled slider grip and Portuguese dusk/money overlap.
+Inventory now fits y=9..261 and refreshes translated names on locale change.
+The HUD reserves the full dusk label before money at x=144; a day-99 fixture
+with balance 1,000,024 also fits. No project resolution or rule changes.
+
+Final full verification: 51 passed, zero skipped/failed in 407s, Godot 4.7.1;
+114 scripts parse, 6,613 rule assertions, 982 input cases and Windows/Web exports pass.
+The 300s soft target is over budget without a failed gate. Sim `1961000123` and
+data `407837701` unchanged. Raster reproduction: 447 outputs, zero writes.
+UI headless: 1,948 checks; actual renderer: 10,548; zero failed. Night tick
+546us/8,333us and path rebuild 4,264us/33,333us pass; no GPU claim. Initial
+failed fixture/full logs remain beside final successful logs; no check disabled.
+
+Opened raw sources and all light/dark/checker native/nearest-3x icon sheets,
+and 92 actual 480x270 views paired on `reviews/0018/captures-00..91.png`.
+They cover all fifteen resources, button/tab/check/slider states and focus,
+inventory, market buy/sell, dusk/night HUD, title/error views, options, tech,
+result and the five standard scenes, in English/pt-BR and both themes.
+Following final money reflow, reviewed all forty HUD strips and reopened the
+five full night captures with animation/shader variation. Other thirty-five
+capture bodies are pixel-identical outside the money region. Native legibility,
+state distinction, localization fit, alpha/padding and source ownership pass.
+
+Audit against `566a503` proves 1,184 protected core/art files and all 417 prior
+raster entries unchanged. Fifteen raw sources match actual tool returns; thirty
+cuts are source-owned. Ownership is 447 raster / 21 ASCII / zero player-sheet,
+468 runtime PNGs. Scope and source evidence: `reviews/0018/scope-and-sources.json`;
+criterion-by-criterion review and limitations: `reviews/0018/REVIEW.md`.
+The staged audit proves 75 source/prompt/argument/runtime files byte-exact.
+Unrelated previously generated imports are excluded from this task's commit.
+
+Queue after completion: 18 done, 2 todo, zero doing/blocked. Next: 0019 atmosphere,
+using accepted sprites. Exactly one task closes this cycle; the longer goal
+remains active through 0019 and 0020.

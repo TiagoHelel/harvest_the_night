@@ -1,0 +1,370 @@
+[
+  {
+    "capture": "implementation/shots/sprites/0018/crash-contrast.png",
+    "review": "implementation/sprites/reviews/0018/captures-00.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/crash-pt_BR-contrast.png",
+    "review": "implementation/sprites/reviews/0018/captures-01.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/crash-pt_BR.png",
+    "review": "implementation/sprites/reviews/0018/captures-02.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/crash.png",
+    "review": "implementation/sprites/reviews/0018/captures-03.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/dusk-contrast.png",
+    "review": "implementation/sprites/reviews/0018/captures-04.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/dusk-pt_BR-contrast.png",
+    "review": "implementation/sprites/reviews/0018/captures-05.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/dusk-pt_BR.png",
+    "review": "implementation/sprites/reviews/0018/captures-06.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/dusk.png",
+    "review": "implementation/sprites/reviews/0018/captures-07.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/ident-contrast.png",
+    "review": "implementation/sprites/reviews/0018/captures-08.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/ident-pt_BR-contrast.png",
+    "review": "implementation/sprites/reviews/0018/captures-09.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/ident-pt_BR.png",
+    "review": "implementation/sprites/reviews/0018/captures-10.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/ident.png",
+    "review": "implementation/sprites/reviews/0018/captures-11.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/noon-contrast.png",
+    "review": "implementation/sprites/reviews/0018/captures-12.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/noon-pt_BR-contrast.png",
+    "review": "implementation/sprites/reviews/0018/captures-13.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/noon-pt_BR.png",
+    "review": "implementation/sprites/reviews/0018/captures-14.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/noon.png",
+    "review": "implementation/sprites/reviews/0018/captures-15.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/options_access-contrast.png",
+    "review": "implementation/sprites/reviews/0018/captures-16.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/options_access-pt_BR-contrast.png",
+    "review": "implementation/sprites/reviews/0018/captures-17.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/options_access-pt_BR.png",
+    "review": "implementation/sprites/reviews/0018/captures-18.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/options_access.png",
+    "review": "implementation/sprites/reviews/0018/captures-19.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/options_audio-contrast.png",
+    "review": "implementation/sprites/reviews/0018/captures-20.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/options_audio-pt_BR-contrast.png",
+    "review": "implementation/sprites/reviews/0018/captures-21.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/options_audio-pt_BR.png",
+    "review": "implementation/sprites/reviews/0018/captures-22.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/options_audio.png",
+    "review": "implementation/sprites/reviews/0018/captures-23.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/options_controls-contrast.png",
+    "review": "implementation/sprites/reviews/0018/captures-24.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/options_controls-pt_BR-contrast.png",
+    "review": "implementation/sprites/reviews/0018/captures-25.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/options_controls-pt_BR.png",
+    "review": "implementation/sprites/reviews/0018/captures-26.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/options_controls.png",
+    "review": "implementation/sprites/reviews/0018/captures-27.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/options_video-contrast.png",
+    "review": "implementation/sprites/reviews/0018/captures-28.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/options_video-pt_BR-contrast.png",
+    "review": "implementation/sprites/reviews/0018/captures-29.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/options_video-pt_BR.png",
+    "review": "implementation/sprites/reviews/0018/captures-30.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/options_video.png",
+    "review": "implementation/sprites/reviews/0018/captures-31.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/pause-contrast.png",
+    "review": "implementation/sprites/reviews/0018/captures-32.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/pause-pt_BR-contrast.png",
+    "review": "implementation/sprites/reviews/0018/captures-33.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/pause-pt_BR.png",
+    "review": "implementation/sprites/reviews/0018/captures-34.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/pause.png",
+    "review": "implementation/sprites/reviews/0018/captures-35.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/result-contrast.png",
+    "review": "implementation/sprites/reviews/0018/captures-36.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/result-pt_BR-contrast.png",
+    "review": "implementation/sprites/reviews/0018/captures-37.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/result-pt_BR.png",
+    "review": "implementation/sprites/reviews/0018/captures-38.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/result.png",
+    "review": "implementation/sprites/reviews/0018/captures-39.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/save_trouble-contrast.png",
+    "review": "implementation/sprites/reviews/0018/captures-40.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/save_trouble-pt_BR-contrast.png",
+    "review": "implementation/sprites/reviews/0018/captures-41.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/save_trouble-pt_BR.png",
+    "review": "implementation/sprites/reviews/0018/captures-42.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/save_trouble.png",
+    "review": "implementation/sprites/reviews/0018/captures-43.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/tech-contrast.png",
+    "review": "implementation/sprites/reviews/0018/captures-44.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/tech-pt_BR-contrast.png",
+    "review": "implementation/sprites/reviews/0018/captures-45.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/tech-pt_BR.png",
+    "review": "implementation/sprites/reviews/0018/captures-46.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/tech.png",
+    "review": "implementation/sprites/reviews/0018/captures-47.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/title-contrast.png",
+    "review": "implementation/sprites/reviews/0018/captures-48.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/title-pt_BR-contrast.png",
+    "review": "implementation/sprites/reviews/0018/captures-49.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/title-pt_BR.png",
+    "review": "implementation/sprites/reviews/0018/captures-50.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/title.png",
+    "review": "implementation/sprites/reviews/0018/captures-51.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/ui/controls_en.png",
+    "review": "implementation/sprites/reviews/0018/captures-52.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/ui/controls_en_contrast.png",
+    "review": "implementation/sprites/reviews/0018/captures-53.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/ui/controls_pt_BR.png",
+    "review": "implementation/sprites/reviews/0018/captures-54.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/ui/controls_pt_BR_contrast.png",
+    "review": "implementation/sprites/reviews/0018/captures-55.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/ui/hud_dusk_en.png",
+    "review": "implementation/sprites/reviews/0018/captures-56.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/ui/hud_dusk_en_contrast.png",
+    "review": "implementation/sprites/reviews/0018/captures-57.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/ui/hud_dusk_pt_BR.png",
+    "review": "implementation/sprites/reviews/0018/captures-58.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/ui/hud_dusk_pt_BR_contrast.png",
+    "review": "implementation/sprites/reviews/0018/captures-59.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/ui/hud_night_en.png",
+    "review": "implementation/sprites/reviews/0018/captures-60.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/ui/hud_night_en_contrast.png",
+    "review": "implementation/sprites/reviews/0018/captures-61.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/ui/hud_night_pt_BR.png",
+    "review": "implementation/sprites/reviews/0018/captures-62.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/ui/hud_night_pt_BR_contrast.png",
+    "review": "implementation/sprites/reviews/0018/captures-63.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/ui/icons_en.png",
+    "review": "implementation/sprites/reviews/0018/captures-64.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/ui/icons_en_contrast.png",
+    "review": "implementation/sprites/reviews/0018/captures-65.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/ui/icons_pt_BR.png",
+    "review": "implementation/sprites/reviews/0018/captures-66.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/ui/icons_pt_BR_contrast.png",
+    "review": "implementation/sprites/reviews/0018/captures-67.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/ui/inventory_en.png",
+    "review": "implementation/sprites/reviews/0018/captures-68.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/ui/inventory_en_contrast.png",
+    "review": "implementation/sprites/reviews/0018/captures-69.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/ui/inventory_pt_BR.png",
+    "review": "implementation/sprites/reviews/0018/captures-70.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/ui/inventory_pt_BR_contrast.png",
+    "review": "implementation/sprites/reviews/0018/captures-71.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/ui/shop_buy_en.png",
+    "review": "implementation/sprites/reviews/0018/captures-72.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/ui/shop_buy_en_contrast.png",
+    "review": "implementation/sprites/reviews/0018/captures-73.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/ui/shop_buy_pt_BR.png",
+    "review": "implementation/sprites/reviews/0018/captures-74.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/ui/shop_buy_pt_BR_contrast.png",
+    "review": "implementation/sprites/reviews/0018/captures-75.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/ui/shop_sell_en.png",
+    "review": "implementation/sprites/reviews/0018/captures-76.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/ui/shop_sell_en_contrast.png",
+    "review": "implementation/sprites/reviews/0018/captures-77.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/ui/shop_sell_pt_BR.png",
+    "review": "implementation/sprites/reviews/0018/captures-78.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/ui/shop_sell_pt_BR_contrast.png",
+    "review": "implementation/sprites/reviews/0018/captures-79.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/ui/slider_focus_en.png",
+    "review": "implementation/sprites/reviews/0018/captures-80.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/ui/slider_focus_en_contrast.png",
+    "review": "implementation/sprites/reviews/0018/captures-81.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/ui/slider_focus_pt_BR.png",
+    "review": "implementation/sprites/reviews/0018/captures-82.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/ui/slider_focus_pt_BR_contrast.png",
+    "review": "implementation/sprites/reviews/0018/captures-83.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/ui/tab_check_focus_en.png",
+    "review": "implementation/sprites/reviews/0018/captures-84.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/ui/tab_check_focus_en_contrast.png",
+    "review": "implementation/sprites/reviews/0018/captures-85.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/ui/tab_check_focus_pt_BR.png",
+    "review": "implementation/sprites/reviews/0018/captures-86.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/ui/tab_check_focus_pt_BR_contrast.png",
+    "review": "implementation/sprites/reviews/0018/captures-87.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/wave-contrast.png",
+    "review": "implementation/sprites/reviews/0018/captures-88.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/wave-pt_BR-contrast.png",
+    "review": "implementation/sprites/reviews/0018/captures-89.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/wave-pt_BR.png",
+    "review": "implementation/sprites/reviews/0018/captures-90.png"
+  },
+  {
+    "capture": "implementation/shots/sprites/0018/wave.png",
+    "review": "implementation/sprites/reviews/0018/captures-91.png"
+  }
+]

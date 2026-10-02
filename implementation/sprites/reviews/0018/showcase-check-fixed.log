@@ -1,0 +1,27 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+UI ART SHOWCASE: 1884 checks, 4 failed
+ERROR: Actual localized control fits native viewport: InventoryFrame
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://src/tools/ui_art_showcase.gd:20)
+       [1] _check_bounds (res://src/tools/ui_art_showcase.gd:265)
+       [2] _menus (res://src/tools/ui_art_showcase.gd:232)
+ERROR: Actual localized control fits native viewport: InventoryFrame
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://src/tools/ui_art_showcase.gd:20)
+       [1] _check_bounds (res://src/tools/ui_art_showcase.gd:265)
+       [2] _menus (res://src/tools/ui_art_showcase.gd:232)
+ERROR: Actual localized control fits native viewport: InventoryFrame
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://src/tools/ui_art_showcase.gd:20)
+       [1] _check_bounds (res://src/tools/ui_art_showcase.gd:265)
+       [2] _menus (res://src/tools/ui_art_showcase.gd:232)
+ERROR: Actual localized control fits native viewport: InventoryFrame
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://src/tools/ui_art_showcase.gd:20)
+       [1] _check_bounds (res://src/tools/ui_art_showcase.gd:265)
+       [2] _menus (res://src/tools/ui_art_showcase.gd:232)

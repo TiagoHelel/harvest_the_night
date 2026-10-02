@@ -1702,68 +1702,136 @@
       "owner": "ascii"
     },
     {
+      "output": "sprites/ui/checkbox_off_disabled.png",
+      "owner": "ascii"
+    },
+    {
       "output": "sprites/ui/checkbox_on.png",
       "owner": "ascii"
     },
     {
-      "output": "sprites/ui/icon_carrot.png",
+      "output": "sprites/ui/checkbox_on_disabled.png",
       "owner": "ascii"
+    },
+    {
+      "output": "sprites/ui/hud_carrot.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_corn.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_energy.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_fish.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_food.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_gunpowder.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_incendiary.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_iron.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_meat.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_money.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_oil.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_stone.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_tech.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_wheat.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_wood.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_carrot.png",
+      "owner": "raster"
     },
     {
       "output": "sprites/ui/icon_corn.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/ui/icon_energy.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/ui/icon_fish.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/ui/icon_food.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/ui/icon_gunpowder.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/ui/icon_incendiary.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/ui/icon_iron.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/ui/icon_meat.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/ui/icon_money.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/ui/icon_oil.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/ui/icon_stone.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/ui/icon_tech.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/ui/icon_wheat.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/ui/icon_wood.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/ui/panel.png",
@@ -1774,11 +1842,31 @@
       "owner": "ascii"
     },
     {
+      "output": "sprites/ui/slider_grab_disabled.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/ui/slider_grab_highlight.png",
+      "owner": "ascii"
+    },
+    {
       "output": "sprites/ui/slider_track.png",
       "owner": "ascii"
     },
     {
       "output": "sprites/ui/tab.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/ui/tab_disabled.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/ui/tab_hover.png",
+      "owner": "ascii"
+    },
+    {
+      "output": "sprites/ui/tab_selected.png",
       "owner": "ascii"
     },
     {

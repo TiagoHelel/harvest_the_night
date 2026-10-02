@@ -6,9 +6,9 @@ extends RefCounted
 ## **One kit, so four screens look like one game.** The day HUD, the night
 ## HUD, the shop and the tech tree each grew their own `StyleBoxFlat` with its
 ## own colours as they were written, which is four places to change a border
-## and four chances to miss one. Everything here is generated from
-## `tools/sprite_maps.py` like the rest of the art, and anything that wants a
-## panel asks for the same one.
+## and four chances to miss one. Frames come from `tools/sprite_maps.py`;
+## resource icons are deterministic cuts from preserved ImageGen sources.
+## Anything that wants a panel asks for the same one.
 ##
 ## ## Nine-slice, and the margin is three
 ##
@@ -77,8 +77,8 @@ static var _cache: Dictionary = {}
 
 
 ## The icon for a resource, or null when nobody has drawn one.
-static func icon(id: StringName) -> Texture2D:
-	return _texture("icon_%s" % id)
+static func icon(id: StringName, compact: bool = false) -> Texture2D:
+	return _texture(("hud_%s" if compact else "icon_%s") % id)
 
 
 ## Whether every resource has one and no icon is orphaned. The done-when of
@@ -379,15 +379,13 @@ static func _dress_buttons(out: Theme) -> void:
 	out.set_type_variation(OWNED, &"Button")
 	out.set_color(&"font_disabled_color", OWNED, colour(GOOD))
 
-	# **A tab is the same frame in every state**, because a tab does not press
-	# in - it is either the page you are on or it is not, and the letters say
-	# which. The colours are the reason this is not just `Button`: a `Button`
-	# draws its pressed letters in ink, which is right on a gold press and
-	# wrong on a tab, where it made the tab you were *on* the one that looked
-	# switched off.
+	# Open-bottom tabs retain their three-pixel side margins. A gold underline
+	# identifies the selected page; hover and disabled have their own fields.
+	# Pressed letters remain warm rather than disappearing against the field.
 	out.set_type_variation(TAB, &"Button")
 	for state in BUTTON_STATES:
-		out.set_stylebox(StringName(state), TAB, _padded(tab(), ROW_PAD, 0))
+		var name := "tab_hover" if state == "hover" else "tab_selected" if state == "pressed" else "tab_disabled" if state == "disabled" else "tab"
+		out.set_stylebox(StringName(state), TAB, _padded(_frame(name, 0), ROW_PAD, 0))
 	out.set_stylebox(&"focus", TAB, _frame("button_focus"))
 	out.set_color(&"font_color", TAB, colour(DIM))
 	out.set_color(&"font_hover_color", TAB, colour())
@@ -411,7 +409,9 @@ static func _dress_buttons(out: Theme) -> void:
 	var grab := slider_grab()
 	if grab != null:
 		out.set_icon(&"grabber", &"HSlider", grab)
-		out.set_icon(&"grabber_highlight", &"HSlider", grab)
+		out.set_icon(&"grabber_highlight", &"HSlider", _texture("slider_grab_highlight"))
+		out.set_icon(&"grabber_disabled", &"HSlider", _texture("slider_grab_disabled"))
+	out.set_stylebox(&"focus", &"HSlider", _frame("button_focus"))
 	# **A scroll bar, which nothing had ever dressed.** There have been three
 	# `ScrollContainer`s in the game since task 0040 and every one of them
 	# had Godot's default grey slab down its side - found the same way the
@@ -430,6 +430,8 @@ static func _dress_buttons(out: Theme) -> void:
 	if on != null and off != null:
 		out.set_icon(&"checked", &"CheckBox", on)
 		out.set_icon(&"unchecked", &"CheckBox", off)
+		out.set_icon(&"checked_disabled", &"CheckBox", _texture("checkbox_on_disabled"))
+		out.set_icon(&"unchecked_disabled", &"CheckBox", _texture("checkbox_off_disabled"))
 
 
 static func _dress_gaps(out: Theme) -> void:

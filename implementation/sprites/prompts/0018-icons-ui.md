@@ -1,6 +1,6 @@
 # 0018 - Resource icons and restrained UI surfaces
 
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0010, 0013
 - **Likely files:** assets/art_source/ui/; sprites/ui/; src/ui/ui_kit.gd; src/ui/day_hud.gd; src/ui/night_hud.gd
 - **Generation briefs:** ICON, UI_SURFACE

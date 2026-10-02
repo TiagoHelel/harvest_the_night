@@ -1,0 +1,151 @@
+{
+  "id": "tech",
+  "revision": 0,
+  "tool": "built-in ImageGen",
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-5b83c5ac-6b80-4644-8e07-c6086c513184.png",
+  "source": "assets/art_source/ui/tech.png",
+  "source_sha256": "6a72bbfce6ae216646a7bc63f65708872b97ad887c7d2d216c5b6b8e24072c6c",
+  "source_wh": [
+    1254,
+    1254
+  ],
+  "source_alpha_range": [
+    0,
+    255
+  ],
+  "crop_xywh": [
+    306,
+    316,
+    643,
+    624
+  ],
+  "prompt": "implementation/sprites/generation/0018-tech.prompt.txt",
+  "prompt_sha256": "6f711b979fa8672039d6c415c015f60563c26e1ebd987a3e3e34be5eba6da6bf",
+  "references": [
+    "docs/reference-sheet.png",
+    "assets/art_source/ui/wood.png"
+  ],
+  "reference_hashes": {
+    "docs/reference-sheet.png": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+    "assets/art_source/ui/wood.png": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2"
+  },
+  "actual_submitted_arguments": {
+    "prompt": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm\nthat becomes a fortress against zombies at night.\nPrimary request: ONE isolated inventory icon ui/icon_tech, one neutral static state: one pale steel six-tooth gear with a dark circular hole and one warm brass accent; bold mechanism silhouette, no letter or number..\nInput images: Image 1: approved world materials and resource vocabulary, style reference only; do not reproduce its panels, lettering or scene. Image 2: accepted wood icon family master, reference only for outline thickness, clustered detail and neutral upper-left light, not an edit target or the requested object.\nStyle/medium: coherent hand-crafted pixel art with deliberate pixel clusters,\ncolored outlines, restrained texture, readable material planes and clean forms.\nComposition/framing: orthographic three-quarter top-down view on a rectangular\ngrid; match the approved master camera and scale. Final native canvas is\n16x16 pixels with contact pivot 8,8; this is a downstream import\ntarget, so the generated source must remain simple enough to survive reduction.\nLighting/mood: neutral warm daytime, highlights from upper left, darker underside;\nruntime supplies dusk/night lighting. Keep emission in separate localized forms.\nColor palette: match the approved project palette and master, warm timber and\nterracotta, layered greens, cool water, violet/blue shadows; limited ramps.\nScene/backdrop: true transparent background outside the icon; no enclosing frame or ground. No baked ground shadow for actors.\nConstraints: complete unclipped object, consistent perspective and scale, clear\nground contact, generous tool/weapon clearance, no labels, text, watermark or UI.\nAvoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,\nrandom pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,\nnew gameplay objects, tiny details that disappear at native size.\n\nCreate ONE resource icon for tech. Match the actual world material\nand approved icon master, target 16x16 with a clear shape and internal padding.\nRepresent one pale steel six-tooth gear with a dark circular hole and one warm brass accent; bold mechanism silhouette, no letter or number as appropriate.\nReadable at the actual small HUD scale, colored outline and 2\u20133 material planes.\nNo labels, numbers, enclosing panel, ground shadow or unrelated objects.\n\nNative contract: one centered complete object with generous transparent outer space. The import targets are 16x16 (maximum visible dimension 14) and a separate 10x10 compact HUD canvas (maximum visible dimension 9). The same source will be reduced for both: use a bold simple silhouette, a few joined color clusters and only 2-3 material planes. Think of a real tiny inventory sprite, not a miniature detailed illustration. Compact internal features must survive at nine visible pixels. No tiny line hatching, scattered crumbs, distant decorative fragments, floor, cast shadow, glow, labels, lettering, numbers, backdrop or extra objects. Maintain approximately square source framing with the object centered; do not clip its silhouette.\n",
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png"
+    ],
+    "transparent_background": true
+  },
+  "decision": "Accepted after raw alpha, native/nearest-3x sheets and actual EN/pt-BR UI review under both themes; no revisions",
+  "entries": [
+    {
+      "id": "ui/icon_tech",
+      "owner": "raster",
+      "source": "assets/art_source/ui/tech.png",
+      "source_sha256": "6a72bbfce6ae216646a7bc63f65708872b97ad887c7d2d216c5b6b8e24072c6c",
+      "crop_xywh": [
+        306,
+        316,
+        643,
+        624
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "content_scale": 0.02177293934681182,
+      "content_anchor_xy": [
+        7,
+        7
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/icon_tech",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false,
+      "output": "sprites/ui/icon_tech.png",
+      "prompt": "implementation/sprites/generation/0018-tech.prompt.txt",
+      "prompt_sha256": "6f711b979fa8672039d6c415c015f60563c26e1ebd987a3e3e34be5eba6da6bf",
+      "references": [
+        {
+          "path": "docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/ui/wood.png",
+          "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0018",
+      "revision": 0,
+      "resource_id": "tech",
+      "display_role": "inventory",
+      "output_sha256": "884ccf99ed8701ece103cc9c3639066ad55556af6b38b48d910720996faf08e8"
+    },
+    {
+      "id": "ui/hud_tech",
+      "owner": "raster",
+      "source": "assets/art_source/ui/tech.png",
+      "source_sha256": "6a72bbfce6ae216646a7bc63f65708872b97ad887c7d2d216c5b6b8e24072c6c",
+      "crop_xywh": [
+        306,
+        316,
+        643,
+        624
+      ],
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "content_scale": 0.012441679626749611,
+      "content_anchor_xy": [
+        4,
+        4
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/hud_tech",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false,
+      "output": "sprites/ui/hud_tech.png",
+      "prompt": "implementation/sprites/generation/0018-tech.prompt.txt",
+      "prompt_sha256": "6f711b979fa8672039d6c415c015f60563c26e1ebd987a3e3e34be5eba6da6bf",
+      "references": [
+        {
+          "path": "docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/ui/wood.png",
+          "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0018",
+      "revision": 0,
+      "resource_id": "tech",
+      "display_role": "compact_hud",
+      "output_sha256": "1af9d660469b11234de5bf38fa64a94ae089e57b0f518c5171e6adb6c9388974"
+    }
+  ],
+  "selected_outputs": [
+    "sprites/ui/icon_tech.png",
+    "sprites/ui/hud_tech.png"
+  ]
+}

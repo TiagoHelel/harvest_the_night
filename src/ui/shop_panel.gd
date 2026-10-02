@@ -247,6 +247,9 @@ func _button(button_name: String, text: String, enabled: bool,
 		action: Callable) -> Button:
 	var button := Button.new()
 	button.name = button_name
+	if button_name.begins_with("sell_one_") or button_name.begins_with("buy_one_"):
+		var id := button_name.trim_prefix("sell_one_").trim_prefix("buy_one_")
+		button.icon = UiKit.icon(StringName(id),true)
 	button.text = text
 	button.disabled = not enabled
 	button.custom_minimum_size = Vector2(34, ROW_HEIGHT)

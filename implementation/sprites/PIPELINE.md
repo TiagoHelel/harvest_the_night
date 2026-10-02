@@ -577,3 +577,39 @@ and subdued smoke at day/night, chimney/outlet placement, real work, real flare,
 benchmark measures view update CPU separately from GPU; full perf still covers
 the existing complete world budgets. Full/half/off 90-tick core controls must
 remain byte-identical. The exact raw/tool/prompt/reference ledger is preserved.
+
+## Native UI family (0018)
+
+Fifteen raw transparent tool returns in `assets/art_source/ui/` each own two
+static outputs: `ui/icon_<resource>` at 16x16/(8,8), and `ui/hud_<resource>` at
+10x10/(5,5). The two recipes use the exact same measured source crop with
+different explicit nearest scales, threshold 128 and the unchanged 42-color
+palette. Canonical cuts fit fourteen visible pixels; compact cuts fit eight,
+leaving clear internal margins. No runtime resize or theme tint is permitted
+for these material icons. Each `0018-*-arguments.json` preserves the exact
+built-in request, and each call ledger hashes raw/prompt/reference/output bytes.
+Always read prompt and JSON metadata as UTF-8 on Windows.
+
+`tools/ui_surfaces.py` refines the established ASCII kit through `sprite_maps`.
+Panel/button/tab mid-edge profiles retain three-pixel margins, center fields
+remain flat, and the focus ring stays transparent inside. New explicit tab,
+checkbox-disabled and slider-highlight/disabled sources remain ASCII-owned.
+The ownership registry now has 447 raster and 21 ASCII runtime outputs.
+
+```powershell
+python tools/check_ui_art.py
+python tools/show_art.py --ui --check
+python tools/show_art.py --ui --out=implementation/shots/sprites/<task-id>/ui
+python implementation/sprites/reviews/0018/build_review.py
+python implementation/sprites/reviews/0018/audit.py
+```
+
+The UI fixture renders all fifteen full/compact icons, engine control states,
+keyboard focus, day/night HUD and actual inventory/shop panels in English and
+pt-BR under both themes. It compares every opaque displayed icon pixel to its
+native source, checks real menu labels/bounds, preserves observer state bytes
+and verifies day-only money hides while power remains visible after dark.
+The full localized dusk label and large balances must remain separated.
+The full verifier includes both source and UI-display gates. Real standard,
+tech/result/pause/options/title captures supplement the fixture; visual review
+still decides legibility, state contrast and material identity.

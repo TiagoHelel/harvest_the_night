@@ -1,0 +1,498 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Started Project initialization (5 steps)[39m[0m
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Scanning file structure...[39m[0m
+[  16% ] [90m[1mfirst_scan_filesystem[22m | Loading global class names...[39m[0m
+[  33% ] [90m[1mfirst_scan_filesystem[22m | Verifying GDExtensions...[39m[0m
+[  50% ] [90m[1mfirst_scan_filesystem[22m | Creating autoload scripts...[39m[0m
+[  66% ] [90m[1mfirst_scan_filesystem[22m | Initializing plugins...[39m[0m
+[  83% ] [90m[1mfirst_scan_filesystem[22m | Starting file scan...[39m[0m
+[92m[ DONE ][39m [1mfirst_scan_filesystem[22m
+[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | Started Registering global classes... (6 steps)[39m[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  14% ] [90m[1mupdate_scripts_classes[22m | DayHud[39m[0m
+[  28% ] [90m[1mupdate_scripts_classes[22m | RasterArt[39m[0m
+[  42% ] [90m[1mupdate_scripts_classes[22m | ShopPanel[39m[0m
+[  57% ] [90m[1mupdate_scripts_classes[22m | TechPanel[39m[0m
+[  71% ] [90m[1mupdate_scripts_classes[22m | UiKit[39m[0m
+[92m[ DONE ][39m [1mupdate_scripts_classes[22m
+[0m
+[   0% ] [90m[1m_update_scan_actions[22m | Started Scanning actions... (187 steps)[39m[0m
+[   0% ] [90m[1m_update_scan_actions[22m | carrot.png[39m[0m
+[   0% ] [90m[1m_update_scan_actions[22m | corn.png[39m[0m
+[   1% ] [90m[1m_update_scan_actions[22m | energy.png[39m[0m
+[   1% ] [90m[1m_update_scan_actions[22m | fish.png[39m[0m
+[   2% ] [90m[1m_update_scan_actions[22m | food.png[39m[0m
+[   2% ] [90m[1m_update_scan_actions[22m | gunpowder.png[39m[0m
+[   3% ] [90m[1m_update_scan_actions[22m | incendiary.png[39m[0m
+[   3% ] [90m[1m_update_scan_actions[22m | iron.png[39m[0m
+[   4% ] [90m[1m_update_scan_actions[22m | meat.png[39m[0m
+[   4% ] [90m[1m_update_scan_actions[22m | money.png[39m[0m
+[   5% ] [90m[1m_update_scan_actions[22m | oil.png[39m[0m
+[   5% ] [90m[1m_update_scan_actions[22m | stone.png[39m[0m
+[   6% ] [90m[1m_update_scan_actions[22m | tech.png[39m[0m
+[   6% ] [90m[1m_update_scan_actions[22m | wheat.png[39m[0m
+[   7% ] [90m[1m_update_scan_actions[22m | wood.png[39m[0m
+[   7% ] [90m[1m_update_scan_actions[22m | harvest_heading.png[39m[0m
+[   8% ] [90m[1m_update_scan_actions[22m | harvest_hud.png[39m[0m
+[   9% ] [90m[1m_update_scan_actions[22m | strings.csv[39m[0m
+[   9% ] [90m[1m_update_scan_actions[22m | a11y_off.png[39m[0m
+[  10% ] [90m[1m_update_scan_actions[22m | a11y_reset.png[39m[0m
+[  10% ] [90m[1m_update_scan_actions[22m | a11y_steady_half.png[39m[0m
+[  11% ] [90m[1m_update_scan_actions[22m | busy_burning.png[39m[0m
+[  11% ] [90m[1m_update_scan_actions[22m | busy_flare.png[39m[0m
+[  12% ] [90m[1m_update_scan_actions[22m | busy_ignition.png[39m[0m
+[  12% ] [90m[1m_update_scan_actions[22m | chimney_0.png[39m[0m
+[  13% ] [90m[1m_update_scan_actions[22m | chimney_1.png[39m[0m
+[  13% ] [90m[1m_update_scan_actions[22m | deaths_0.png[39m[0m
+[  14% ] [90m[1m_update_scan_actions[22m | deaths_1.png[39m[0m
+[  14% ] [90m[1m_update_scan_actions[22m | deaths_2.png[39m[0m
+[  15% ] [90m[1m_update_scan_actions[22m | deaths_3.png[39m[0m
+[  15% ] [90m[1m_update_scan_actions[22m | deaths_expired.png[39m[0m
+[  16% ] [90m[1m_update_scan_actions[22m | gallery_0_0.png[39m[0m
+[  17% ] [90m[1m_update_scan_actions[22m | gallery_0_1.png[39m[0m
+[  17% ] [90m[1m_update_scan_actions[22m | gallery_0_2.png[39m[0m
+[  18% ] [90m[1m_update_scan_actions[22m | gallery_0_3.png[39m[0m
+[  18% ] [90m[1m_update_scan_actions[22m | gallery_0_expired.png[39m[0m
+[  19% ] [90m[1m_update_scan_actions[22m | gallery_1_0.png[39m[0m
+[  19% ] [90m[1m_update_scan_actions[22m | gallery_1_1.png[39m[0m
+[  20% ] [90m[1m_update_scan_actions[22m | gallery_1_2.png[39m[0m
+[  20% ] [90m[1m_update_scan_actions[22m | gallery_1_3.png[39m[0m
+[  21% ] [90m[1m_update_scan_actions[22m | gallery_1_expired.png[39m[0m
+[  21% ] [90m[1m_update_scan_actions[22m | towers_after0.png[39m[0m
+[  22% ] [90m[1m_update_scan_actions[22m | towers_after1.png[39m[0m
+[  22% ] [90m[1m_update_scan_actions[22m | towers_after2.png[39m[0m
+[  23% ] [90m[1m_update_scan_actions[22m | towers_contact.png[39m[0m
+[  23% ] [90m[1m_update_scan_actions[22m | work_chop_contact.png[39m[0m
+[  24% ] [90m[1m_update_scan_actions[22m | work_chop_peak.png[39m[0m
+[  25% ] [90m[1m_update_scan_actions[22m | work_fish_contact.png[39m[0m
+[  25% ] [90m[1m_update_scan_actions[22m | work_fish_peak.png[39m[0m
+[  26% ] [90m[1m_update_scan_actions[22m | work_harvest_contact.png[39m[0m
+[  26% ] [90m[1m_update_scan_actions[22m | work_harvest_peak.png[39m[0m
+[  27% ] [90m[1m_update_scan_actions[22m | work_mine_contact.png[39m[0m
+[  27% ] [90m[1m_update_scan_actions[22m | work_mine_peak.png[39m[0m
+[  28% ] [90m[1m_update_scan_actions[22m | work_water_contact.png[39m[0m
+[  28% ] [90m[1m_update_scan_actions[22m | work_water_peak.png[39m[0m
+[  29% ] [90m[1m_update_scan_actions[22m | dusk.png[39m[0m
+[  29% ] [90m[1m_update_scan_actions[22m | noon.png[39m[0m
+[  30% ] [90m[1m_update_scan_actions[22m | result.png[39m[0m
+[  30% ] [90m[1m_update_scan_actions[22m | tech.png[39m[0m
+[  31% ] [90m[1m_update_scan_actions[22m | wave.png[39m[0m
+[  31% ] [90m[1m_update_scan_actions[22m | captures-00.png[39m[0m
+[  32% ] [90m[1m_update_scan_actions[22m | captures-01.png[39m[0m
+[  32% ] [90m[1m_update_scan_actions[22m | captures-02.png[39m[0m
+[  33% ] [90m[1m_update_scan_actions[22m | captures-03.png[39m[0m
+[  34% ] [90m[1m_update_scan_actions[22m | captures-04.png[39m[0m
+[  34% ] [90m[1m_update_scan_actions[22m | captures-05.png[39m[0m
+[  35% ] [90m[1m_update_scan_actions[22m | captures-06.png[39m[0m
+[  35% ] [90m[1m_update_scan_actions[22m | captures-07.png[39m[0m
+[  36% ] [90m[1m_update_scan_actions[22m | captures-08.png[39m[0m
+[  36% ] [90m[1m_update_scan_actions[22m | captures-09.png[39m[0m
+[  37% ] [90m[1m_update_scan_actions[22m | captures-10.png[39m[0m
+[  37% ] [90m[1m_update_scan_actions[22m | captures-11.png[39m[0m
+[  38% ] [90m[1m_update_scan_actions[22m | captures-12.png[39m[0m
+[  38% ] [90m[1m_update_scan_actions[22m | captures-13.png[39m[0m
+[  39% ] [90m[1m_update_scan_actions[22m | captures-14.png[39m[0m
+[  39% ] [90m[1m_update_scan_actions[22m | captures-15.png[39m[0m
+[  40% ] [90m[1m_update_scan_actions[22m | captures-16.png[39m[0m
+[  40% ] [90m[1m_update_scan_actions[22m | captures-17.png[39m[0m
+[  41% ] [90m[1m_update_scan_actions[22m | captures-18.png[39m[0m
+[  42% ] [90m[1m_update_scan_actions[22m | captures-19.png[39m[0m
+[  42% ] [90m[1m_update_scan_actions[22m | captures-20.png[39m[0m
+[  43% ] [90m[1m_update_scan_actions[22m | hud_carrot-3x.png[39m[0m
+[  43% ] [90m[1m_update_scan_actions[22m | hud_carrot-native.png[39m[0m
+[  44% ] [90m[1m_update_scan_actions[22m | hud_corn-3x.png[39m[0m
+[  44% ] [90m[1m_update_scan_actions[22m | hud_corn-native.png[39m[0m
+[  45% ] [90m[1m_update_scan_actions[22m | hud_energy-3x.png[39m[0m
+[  45% ] [90m[1m_update_scan_actions[22m | hud_energy-native.png[39m[0m
+[  46% ] [90m[1m_update_scan_actions[22m | hud_fish-3x.png[39m[0m
+[  46% ] [90m[1m_update_scan_actions[22m | hud_fish-native.png[39m[0m
+[  47% ] [90m[1m_update_scan_actions[22m | hud_food-3x.png[39m[0m
+[  47% ] [90m[1m_update_scan_actions[22m | hud_food-native.png[39m[0m
+[  48% ] [90m[1m_update_scan_actions[22m | hud_gunpowder-3x.png[39m[0m
+[  48% ] [90m[1m_update_scan_actions[22m | hud_gunpowder-native.png[39m[0m
+[  49% ] [90m[1m_update_scan_actions[22m | hud_incendiary-3x.png[39m[0m
+[  50% ] [90m[1m_update_scan_actions[22m | hud_incendiary-native.png[39m[0m
+[  50% ] [90m[1m_update_scan_actions[22m | hud_iron-3x.png[39m[0m
+[  51% ] [90m[1m_update_scan_actions[22m | hud_iron-native.png[39m[0m
+[  51% ] [90m[1m_update_scan_actions[22m | hud_meat-3x.png[39m[0m
+[  52% ] [90m[1m_update_scan_actions[22m | hud_meat-native.png[39m[0m
+[  52% ] [90m[1m_update_scan_actions[22m | hud_money-3x.png[39m[0m
+[  53% ] [90m[1m_update_scan_actions[22m | hud_money-native.png[39m[0m
+[  53% ] [90m[1m_update_scan_actions[22m | hud_oil-3x.png[39m[0m
+[  54% ] [90m[1m_update_scan_actions[22m | hud_oil-native.png[39m[0m
+[  54% ] [90m[1m_update_scan_actions[22m | hud_stone-3x.png[39m[0m
+[  55% ] [90m[1m_update_scan_actions[22m | hud_stone-native.png[39m[0m
+[  55% ] [90m[1m_update_scan_actions[22m | hud_tech-3x.png[39m[0m
+[  56% ] [90m[1m_update_scan_actions[22m | hud_tech-native.png[39m[0m
+[  56% ] [90m[1m_update_scan_actions[22m | hud_wheat-3x.png[39m[0m
+[  57% ] [90m[1m_update_scan_actions[22m | hud_wheat-native.png[39m[0m
+[  57% ] [90m[1m_update_scan_actions[22m | hud_wood-3x.png[39m[0m
+[  58% ] [90m[1m_update_scan_actions[22m | hud_wood-native.png[39m[0m
+[  59% ] [90m[1m_update_scan_actions[22m | icon_carrot-3x.png[39m[0m
+[  59% ] [90m[1m_update_scan_actions[22m | icon_carrot-native.png[39m[0m
+[  60% ] [90m[1m_update_scan_actions[22m | icon_corn-3x.png[39m[0m
+[  60% ] [90m[1m_update_scan_actions[22m | icon_corn-native.png[39m[0m
+[  61% ] [90m[1m_update_scan_actions[22m | icon_energy-3x.png[39m[0m
+[  61% ] [90m[1m_update_scan_actions[22m | icon_energy-native.png[39m[0m
+[  62% ] [90m[1m_update_scan_actions[22m | icon_fish-3x.png[39m[0m
+[  62% ] [90m[1m_update_scan_actions[22m | icon_fish-native.png[39m[0m
+[  63% ] [90m[1m_update_scan_actions[22m | icon_food-3x.png[39m[0m
+[  63% ] [90m[1m_update_scan_actions[22m | icon_food-native.png[39m[0m
+[  64% ] [90m[1m_update_scan_actions[22m | icon_gunpowder-3x.png[39m[0m
+[  64% ] [90m[1m_update_scan_actions[22m | icon_gunpowder-native.png[39m[0m
+[  65% ] [90m[1m_update_scan_actions[22m | icon_incendiary-3x.png[39m[0m
+[  65% ] [90m[1m_update_scan_actions[22m | icon_incendiary-native.png[39m[0m
+[  66% ] [90m[1m_update_scan_actions[22m | icon_iron-3x.png[39m[0m
+[  67% ] [90m[1m_update_scan_actions[22m | icon_iron-native.png[39m[0m
+[  67% ] [90m[1m_update_scan_actions[22m | icon_meat-3x.png[39m[0m
+[  68% ] [90m[1m_update_scan_actions[22m | icon_meat-native.png[39m[0m
+[  68% ] [90m[1m_update_scan_actions[22m | icon_money-3x.png[39m[0m
+[  69% ] [90m[1m_update_scan_actions[22m | icon_money-native.png[39m[0m
+[  69% ] [90m[1m_update_scan_actions[22m | icon_oil-3x.png[39m[0m
+[  70% ] [90m[1m_update_scan_actions[22m | icon_oil-native.png[39m[0m
+[  70% ] [90m[1m_update_scan_actions[22m | icon_stone-3x.png[39m[0m
+[  71% ] [90m[1m_update_scan_actions[22m | icon_stone-native.png[39m[0m
+[  71% ] [90m[1m_update_scan_actions[22m | icon_tech-3x.png[39m[0m
+[  72% ] [90m[1m_update_scan_actions[22m | icon_tech-native.png[39m[0m
+[  72% ] [90m[1m_update_scan_actions[22m | icon_wheat-3x.png[39m[0m
+[  73% ] [90m[1m_update_scan_actions[22m | icon_wheat-native.png[39m[0m
+[  73% ] [90m[1m_update_scan_actions[22m | icon_wood-3x.png[39m[0m
+[  74% ] [90m[1m_update_scan_actions[22m | icon_wood-native.png[39m[0m
+[  75% ] [90m[1m_update_scan_actions[22m | button_disabled.png[39m[0m
+[  75% ] [90m[1m_update_scan_actions[22m | button_hover.png[39m[0m
+[  76% ] [90m[1m_update_scan_actions[22m | button_normal.png[39m[0m
+[  76% ] [90m[1m_update_scan_actions[22m | button_pressed.png[39m[0m
+[  77% ] [90m[1m_update_scan_actions[22m | checkbox_off.png[39m[0m
+[  77% ] [90m[1m_update_scan_actions[22m | checkbox_off_disabled.png[39m[0m
+[  78% ] [90m[1m_update_scan_actions[22m | checkbox_on.png[39m[0m
+[  78% ] [90m[1m_update_scan_actions[22m | checkbox_on_disabled.png[39m[0m
+[  79% ] [90m[1m_update_scan_actions[22m | hud_carrot.png[39m[0m
+[  79% ] [90m[1m_update_scan_actions[22m | hud_corn.png[39m[0m
+[  80% ] [90m[1m_update_scan_actions[22m | hud_energy.png[39m[0m
+[  80% ] [90m[1m_update_scan_actions[22m | hud_fish.png[39m[0m
+[  81% ] [90m[1m_update_scan_actions[22m | hud_food.png[39m[0m
+[  81% ] [90m[1m_update_scan_actions[22m | hud_gunpowder.png[39m[0m
+[  82% ] [90m[1m_update_scan_actions[22m | hud_incendiary.png[39m[0m
+[  82% ] [90m[1m_update_scan_actions[22m | hud_iron.png[39m[0m
+[  83% ] [90m[1m_update_scan_actions[22m | hud_meat.png[39m[0m
+[  84% ] [90m[1m_update_scan_actions[22m | hud_money.png[39m[0m
+[  84% ] [90m[1m_update_scan_actions[22m | hud_oil.png[39m[0m
+[  85% ] [90m[1m_update_scan_actions[22m | hud_stone.png[39m[0m
+[  85% ] [90m[1m_update_scan_actions[22m | hud_tech.png[39m[0m
+[  86% ] [90m[1m_update_scan_actions[22m | hud_wheat.png[39m[0m
+[  86% ] [90m[1m_update_scan_actions[22m | hud_wood.png[39m[0m
+[  87% ] [90m[1m_update_scan_actions[22m | icon_carrot.png[39m[0m
+[  87% ] [90m[1m_update_scan_actions[22m | icon_corn.png[39m[0m
+[  88% ] [90m[1m_update_scan_actions[22m | icon_energy.png[39m[0m
+[  88% ] [90m[1m_update_scan_actions[22m | icon_fish.png[39m[0m
+[  89% ] [90m[1m_update_scan_actions[22m | icon_food.png[39m[0m
+[  89% ] [90m[1m_update_scan_actions[22m | icon_gunpowder.png[39m[0m
+[  90% ] [90m[1m_update_scan_actions[22m | icon_incendiary.png[39m[0m
+[  90% ] [90m[1m_update_scan_actions[22m | icon_iron.png[39m[0m
+[  91% ] [90m[1m_update_scan_actions[22m | icon_meat.png[39m[0m
+[  92% ] [90m[1m_update_scan_actions[22m | icon_money.png[39m[0m
+[  92% ] [90m[1m_update_scan_actions[22m | icon_oil.png[39m[0m
+[  93% ] [90m[1m_update_scan_actions[22m | icon_stone.png[39m[0m
+[  93% ] [90m[1m_update_scan_actions[22m | icon_tech.png[39m[0m
+[  94% ] [90m[1m_update_scan_actions[22m | icon_wheat.png[39m[0m
+[  94% ] [90m[1m_update_scan_actions[22m | icon_wood.png[39m[0m
+[  95% ] [90m[1m_update_scan_actions[22m | panel.png[39m[0m
+[  95% ] [90m[1m_update_scan_actions[22m | slider_grab.png[39m[0m
+[  96% ] [90m[1m_update_scan_actions[22m | slider_grab_highlight.png[39m[0m
+[  96% ] [90m[1m_update_scan_actions[22m | tab.png[39m[0m
+[  97% ] [90m[1m_update_scan_actions[22m | tab_disabled.png[39m[0m
+[  97% ] [90m[1m_update_scan_actions[22m | tab_hover.png[39m[0m
+[  98% ] [90m[1m_update_scan_actions[22m | tab_selected.png[39m[0m
+[  98% ] [90m[1m_update_scan_actions[22m | tooltip.png[39m[0m
+[92m[ DONE ][39m [1m_update_scan_actions[22m
+[0m
+[   0% ] [90m[1mreimport[22m | Started (Re)Importing Assets (135 steps)[39m[0m
+[   0% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[   0% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[   1% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[   2% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[   2% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[   3% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[   4% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[   5% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[   5% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[   6% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[   7% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[   8% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[   8% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[   9% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  10% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  11% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  11% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  12% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  13% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  13% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  14% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  15% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  16% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  16% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  17% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  18% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  19% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  19% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  20% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  21% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  22% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  22% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  23% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  24% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  25% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  25% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  26% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  27% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  27% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  28% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  29% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  30% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  30% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  31% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  32% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  33% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  33% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  34% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  35% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  36% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  36% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  37% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  38% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  38% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  39% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  40% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  41% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  41% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  42% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  43% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  44% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  44% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  45% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  46% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  47% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  47% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  48% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  49% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  50% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  50% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  51% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  52% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  52% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  53% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  54% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  55% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  55% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  56% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  57% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  58% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  58% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  59% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  60% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  61% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  61% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  62% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  63% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  63% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  64% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  65% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  66% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  66% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  67% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  68% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  69% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  69% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  70% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  71% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  72% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  72% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  73% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  74% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  75% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  75% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  76% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  77% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  77% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  78% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  79% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  80% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  80% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  81% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  82% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  83% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  83% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  84% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  85% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  86% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  86% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  87% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  88% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  88% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  89% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  90% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  91% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  91% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  92% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  93% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  94% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  94% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  95% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  96% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  97% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  97% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  98% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[   0% ] [90m[1mreimport[22m | Executing pre-reimport operations...[39m[0m
+[   0% ] [90m[1mreimport[22m | hud_fish.png[39m[0m
+[   0% ] [90m[1mreimport[22m | hud_energy.png[39m[0m
+[   1% ] [90m[1mreimport[22m | hud_corn.png[39m[0m
+[   2% ] [90m[1mreimport[22m | hud_carrot.png[39m[0m
+[   2% ] [90m[1mreimport[22m | checkbox_on_disabled.png[39m[0m
+[   3% ] [90m[1mreimport[22m | checkbox_on.png[39m[0m
+[   4% ] [90m[1mreimport[22m | checkbox_off_disabled.png[39m[0m
+[   5% ] [90m[1mreimport[22m | checkbox_off.png[39m[0m
+[   5% ] [90m[1mreimport[22m | button_pressed.png[39m[0m
+[   6% ] [90m[1mreimport[22m | button_normal.png[39m[0m
+[   7% ] [90m[1mreimport[22m | button_hover.png[39m[0m
+[   8% ] [90m[1mreimport[22m | button_disabled.png[39m[0m
+[   8% ] [90m[1mreimport[22m | icon_wood-native.png[39m[0m
+[   9% ] [90m[1mreimport[22m | icon_wood-3x.png[39m[0m
+[  10% ] [90m[1mreimport[22m | icon_wheat-native.png[39m[0m
+[  11% ] [90m[1mreimport[22m | icon_wheat-3x.png[39m[0m
+[  11% ] [90m[1mreimport[22m | icon_food-native.png[39m[0m
+[  12% ] [90m[1mreimport[22m | icon_gunpowder-3x.png[39m[0m
+[  13% ] [90m[1mreimport[22m | icon_gunpowder-native.png[39m[0m
+[  13% ] [90m[1mreimport[22m | icon_incendiary-3x.png[39m[0m
+[  14% ] [90m[1mreimport[22m | icon_incendiary-native.png[39m[0m
+[  15% ] [90m[1mreimport[22m | icon_iron-3x.png[39m[0m
+[  16% ] [90m[1mreimport[22m | icon_iron-native.png[39m[0m
+[  16% ] [90m[1mreimport[22m | icon_meat-3x.png[39m[0m
+[  17% ] [90m[1mreimport[22m | icon_meat-native.png[39m[0m
+[  18% ] [90m[1mreimport[22m | icon_money-3x.png[39m[0m
+[  19% ] [90m[1mreimport[22m | icon_money-native.png[39m[0m
+[  19% ] [90m[1mreimport[22m | icon_oil-3x.png[39m[0m
+[  20% ] [90m[1mreimport[22m | icon_oil-native.png[39m[0m
+[  21% ] [90m[1mreimport[22m | icon_stone-3x.png[39m[0m
+[  22% ] [90m[1mreimport[22m | icon_stone-native.png[39m[0m
+[  22% ] [90m[1mreimport[22m | icon_tech-3x.png[39m[0m
+[  23% ] [90m[1mreimport[22m | icon_tech-native.png[39m[0m
+[  24% ] [90m[1mreimport[22m | icon_incendiary.png[39m[0m
+[  25% ] [90m[1mreimport[22m | icon_iron.png[39m[0m
+[  25% ] [90m[1mreimport[22m | icon_meat.png[39m[0m
+[  26% ] [90m[1mreimport[22m | icon_money.png[39m[0m
+[  27% ] [90m[1mreimport[22m | icon_oil.png[39m[0m
+[  27% ] [90m[1mreimport[22m | icon_stone.png[39m[0m
+[  28% ] [90m[1mreimport[22m | icon_tech.png[39m[0m
+[  29% ] [90m[1mreimport[22m | icon_wheat.png[39m[0m
+[  30% ] [90m[1mreimport[22m | icon_wood.png[39m[0m
+[  30% ] [90m[1mreimport[22m | panel.png[39m[0m
+[  31% ] [90m[1mreimport[22m | slider_grab.png[39m[0m
+[  32% ] [90m[1mreimport[22m | slider_grab_highlight.png[39m[0m
+[  33% ] [90m[1mreimport[22m | tab.png[39m[0m
+[  33% ] [90m[1mreimport[22m | tab_disabled.png[39m[0m
+[  34% ] [90m[1mreimport[22m | tab_hover.png[39m[0m
+[  35% ] [90m[1mreimport[22m | tab_selected.png[39m[0m
+[  36% ] [90m[1mreimport[22m | tooltip.png[39m[0m
+[  36% ] [90m[1mreimport[22m | hud_food.png[39m[0m
+[  37% ] [90m[1mreimport[22m | hud_gunpowder.png[39m[0m
+[  38% ] [90m[1mreimport[22m | hud_incendiary.png[39m[0m
+[  38% ] [90m[1mreimport[22m | hud_iron.png[39m[0m
+[  39% ] [90m[1mreimport[22m | hud_meat.png[39m[0m
+[  40% ] [90m[1mreimport[22m | hud_money.png[39m[0m
+[  41% ] [90m[1mreimport[22m | hud_oil.png[39m[0m
+[  41% ] [90m[1mreimport[22m | hud_stone.png[39m[0m
+[  42% ] [90m[1mreimport[22m | hud_tech.png[39m[0m
+[  43% ] [90m[1mreimport[22m | hud_wheat.png[39m[0m
+[  44% ] [90m[1mreimport[22m | hud_wood.png[39m[0m
+[  44% ] [90m[1mreimport[22m | icon_carrot.png[39m[0m
+[  45% ] [90m[1mreimport[22m | icon_corn.png[39m[0m
+[  46% ] [90m[1mreimport[22m | icon_energy.png[39m[0m
+[  47% ] [90m[1mreimport[22m | icon_fish.png[39m[0m
+[  47% ] [90m[1mreimport[22m | icon_food.png[39m[0m
+[  48% ] [90m[1mreimport[22m | icon_gunpowder.png[39m[0m
+[  49% ] [90m[1mreimport[22m | deaths_0.png[39m[0m
+[  50% ] [90m[1mreimport[22m | deaths_1.png[39m[0m
+[  50% ] [90m[1mreimport[22m | deaths_2.png[39m[0m
+[  51% ] [90m[1mreimport[22m | deaths_3.png[39m[0m
+[  52% ] [90m[1mreimport[22m | towers_contact.png[39m[0m
+[  52% ] [90m[1mreimport[22m | wave.png[39m[0m
+[  53% ] [90m[1mreimport[22m | captures-01.png[39m[0m
+[  54% ] [90m[1mreimport[22m | captures-02.png[39m[0m
+[  55% ] [90m[1mreimport[22m | captures-04.png[39m[0m
+[  55% ] [90m[1mreimport[22m | captures-05.png[39m[0m
+[  56% ] [90m[1mreimport[22m | captures-13.png[39m[0m
+[  57% ] [90m[1mreimport[22m | captures-20.png[39m[0m
+[  58% ] [90m[1mreimport[22m | hud_carrot-3x.png[39m[0m
+[  58% ] [90m[1mreimport[22m | hud_carrot-native.png[39m[0m
+[  59% ] [90m[1mreimport[22m | hud_corn-3x.png[39m[0m
+[  60% ] [90m[1mreimport[22m | hud_corn-native.png[39m[0m
+[  61% ] [90m[1mreimport[22m | hud_energy-3x.png[39m[0m
+[  61% ] [90m[1mreimport[22m | carrot.png[39m[0m
+[  62% ] [90m[1mreimport[22m | corn.png[39m[0m
+[  63% ] [90m[1mreimport[22m | energy.png[39m[0m
+[  63% ] [90m[1mreimport[22m | fish.png[39m[0m
+[  64% ] [90m[1mreimport[22m | food.png[39m[0m
+[  65% ] [90m[1mreimport[22m | gunpowder.png[39m[0m
+[  66% ] [90m[1mreimport[22m | incendiary.png[39m[0m
+[  66% ] [90m[1mreimport[22m | iron.png[39m[0m
+[  67% ] [90m[1mreimport[22m | meat.png[39m[0m
+[  68% ] [90m[1mreimport[22m | money.png[39m[0m
+[  69% ] [90m[1mreimport[22m | oil.png[39m[0m
+[  69% ] [90m[1mreimport[22m | stone.png[39m[0m
+[  70% ] [90m[1mreimport[22m | tech.png[39m[0m
+[  71% ] [90m[1mreimport[22m | wheat.png[39m[0m
+[  72% ] [90m[1mreimport[22m | wood.png[39m[0m
+[  72% ] [90m[1mreimport[22m | busy_burning.png[39m[0m
+[  73% ] [90m[1mreimport[22m | busy_flare.png[39m[0m
+[  74% ] [90m[1mreimport[22m | hud_stone-3x.png[39m[0m
+[  75% ] [90m[1mreimport[22m | hud_stone-native.png[39m[0m
+[  75% ] [90m[1mreimport[22m | hud_tech-3x.png[39m[0m
+[  76% ] [90m[1mreimport[22m | hud_tech-native.png[39m[0m
+[  77% ] [90m[1mreimport[22m | hud_wheat-3x.png[39m[0m
+[  77% ] [90m[1mreimport[22m | hud_wheat-native.png[39m[0m
+[  78% ] [90m[1mreimport[22m | hud_wood-3x.png[39m[0m
+[  79% ] [90m[1mreimport[22m | hud_wood-native.png[39m[0m
+[  80% ] [90m[1mreimport[22m | icon_carrot-3x.png[39m[0m
+[  80% ] [90m[1mreimport[22m | icon_carrot-native.png[39m[0m
+[  81% ] [90m[1mreimport[22m | icon_corn-3x.png[39m[0m
+[  82% ] [90m[1mreimport[22m | icon_corn-native.png[39m[0m
+[  83% ] [90m[1mreimport[22m | icon_energy-3x.png[39m[0m
+[  83% ] [90m[1mreimport[22m | icon_energy-native.png[39m[0m
+[  84% ] [90m[1mreimport[22m | icon_fish-3x.png[39m[0m
+[  85% ] [90m[1mreimport[22m | icon_fish-native.png[39m[0m
+[  86% ] [90m[1mreimport[22m | icon_food-3x.png[39m[0m
+[  86% ] [90m[1mreimport[22m | hud_energy-native.png[39m[0m
+[  87% ] [90m[1mreimport[22m | hud_fish-3x.png[39m[0m
+[  88% ] [90m[1mreimport[22m | hud_fish-native.png[39m[0m
+[  88% ] [90m[1mreimport[22m | hud_food-3x.png[39m[0m
+[  89% ] [90m[1mreimport[22m | hud_food-native.png[39m[0m
+[  90% ] [90m[1mreimport[22m | hud_gunpowder-3x.png[39m[0m
+[  91% ] [90m[1mreimport[22m | hud_gunpowder-native.png[39m[0m
+[  91% ] [90m[1mreimport[22m | hud_incendiary-3x.png[39m[0m
+[  92% ] [90m[1mreimport[22m | hud_incendiary-native.png[39m[0m
+[  93% ] [90m[1mreimport[22m | hud_iron-3x.png[39m[0m
+[  94% ] [90m[1mreimport[22m | hud_iron-native.png[39m[0m
+[  94% ] [90m[1mreimport[22m | hud_meat-3x.png[39m[0m
+[  95% ] [90m[1mreimport[22m | hud_meat-native.png[39m[0m
+[  96% ] [90m[1mreimport[22m | hud_money-3x.png[39m[0m
+[  97% ] [90m[1mreimport[22m | hud_money-native.png[39m[0m
+[  97% ] [90m[1mreimport[22m | hud_oil-3x.png[39m[0m
+[  98% ] [90m[1mreimport[22m | hud_oil-native.png[39m[0m
+[  99% ] [90m[1mreimport[22m | Finalizing Asset Import...[39m[0m
+[92m[ DONE ][39m [1mreimport[22m
+[0m
+[   0% ] [90m[1mreimport[22m | Started (Re)Importing Assets (135 steps)[39m[0m
+[   0% ] [90m[1mreimport[22m | Executing post-reimport operations...[39m[0m
+[92m[ DONE ][39m [1mreimport[22m
+[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Started Loading editor (5 steps)[39m[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Loading editor layout...[39m[0m
+[  16% ] [90m[1mloading_editor_layout[22m | Loading docks...[39m[0m
+[  33% ] [90m[1mloading_editor_layout[22m | Reopening scenes...[39m[0m
+[  50% ] [90m[1mloading_editor_layout[22m | Loading central editor layout...[39m[0m
+[  66% ] [90m[1mloading_editor_layout[22m | Loading plugin window layout...[39m[0m
+[  83% ] [90m[1mloading_editor_layout[22m | Editor layout ready.[39m[0m
+[92m[ DONE ][39m [1mloading_editor_layout[22m
+[0m

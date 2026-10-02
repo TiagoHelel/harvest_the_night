@@ -1,0 +1,162 @@
+[
+  {
+    "capture": "dusk-contrast.png",
+    "outside_money_region_changed_pixels": 0
+  },
+  {
+    "capture": "dusk-pt_BR-contrast.png",
+    "outside_money_region_changed_pixels": 0
+  },
+  {
+    "capture": "dusk-pt_BR.png",
+    "outside_money_region_changed_pixels": 0
+  },
+  {
+    "capture": "dusk.png",
+    "outside_money_region_changed_pixels": 0
+  },
+  {
+    "capture": "noon-contrast.png",
+    "outside_money_region_changed_pixels": 0
+  },
+  {
+    "capture": "noon-pt_BR-contrast.png",
+    "outside_money_region_changed_pixels": 0
+  },
+  {
+    "capture": "noon-pt_BR.png",
+    "outside_money_region_changed_pixels": 0
+  },
+  {
+    "capture": "noon.png",
+    "outside_money_region_changed_pixels": 0
+  },
+  {
+    "capture": "options_access-contrast.png",
+    "outside_money_region_changed_pixels": 0
+  },
+  {
+    "capture": "options_access-pt_BR-contrast.png",
+    "outside_money_region_changed_pixels": 0
+  },
+  {
+    "capture": "options_access-pt_BR.png",
+    "outside_money_region_changed_pixels": 0
+  },
+  {
+    "capture": "options_access.png",
+    "outside_money_region_changed_pixels": 0
+  },
+  {
+    "capture": "options_audio-contrast.png",
+    "outside_money_region_changed_pixels": 0
+  },
+  {
+    "capture": "options_audio-pt_BR-contrast.png",
+    "outside_money_region_changed_pixels": 0
+  },
+  {
+    "capture": "options_audio-pt_BR.png",
+    "outside_money_region_changed_pixels": 0
+  },
+  {
+    "capture": "options_audio.png",
+    "outside_money_region_changed_pixels": 0
+  },
+  {
+    "capture": "options_controls-contrast.png",
+    "outside_money_region_changed_pixels": 0
+  },
+  {
+    "capture": "options_controls-pt_BR-contrast.png",
+    "outside_money_region_changed_pixels": 0
+  },
+  {
+    "capture": "options_controls-pt_BR.png",
+    "outside_money_region_changed_pixels": 0
+  },
+  {
+    "capture": "options_controls.png",
+    "outside_money_region_changed_pixels": 0
+  },
+  {
+    "capture": "options_video-contrast.png",
+    "outside_money_region_changed_pixels": 0
+  },
+  {
+    "capture": "options_video-pt_BR-contrast.png",
+    "outside_money_region_changed_pixels": 0
+  },
+  {
+    "capture": "options_video-pt_BR.png",
+    "outside_money_region_changed_pixels": 0
+  },
+  {
+    "capture": "options_video.png",
+    "outside_money_region_changed_pixels": 0
+  },
+  {
+    "capture": "pause-contrast.png",
+    "outside_money_region_changed_pixels": 23201
+  },
+  {
+    "capture": "pause-pt_BR-contrast.png",
+    "outside_money_region_changed_pixels": 27276
+  },
+  {
+    "capture": "pause-pt_BR.png",
+    "outside_money_region_changed_pixels": 27276
+  },
+  {
+    "capture": "pause.png",
+    "outside_money_region_changed_pixels": 0
+  },
+  {
+    "capture": "result-contrast.png",
+    "outside_money_region_changed_pixels": 0
+  },
+  {
+    "capture": "result-pt_BR-contrast.png",
+    "outside_money_region_changed_pixels": 0
+  },
+  {
+    "capture": "result-pt_BR.png",
+    "outside_money_region_changed_pixels": 0
+  },
+  {
+    "capture": "result.png",
+    "outside_money_region_changed_pixels": 0
+  },
+  {
+    "capture": "tech-contrast.png",
+    "outside_money_region_changed_pixels": 0
+  },
+  {
+    "capture": "tech-pt_BR-contrast.png",
+    "outside_money_region_changed_pixels": 0
+  },
+  {
+    "capture": "tech-pt_BR.png",
+    "outside_money_region_changed_pixels": 0
+  },
+  {
+    "capture": "tech.png",
+    "outside_money_region_changed_pixels": 0
+  },
+  {
+    "capture": "wave-contrast.png",
+    "outside_money_region_changed_pixels": 34358
+  },
+  {
+    "capture": "wave-pt_BR-contrast.png",
+    "outside_money_region_changed_pixels": 0
+  },
+  {
+    "capture": "wave-pt_BR.png",
+    "outside_money_region_changed_pixels": 34373
+  },
+  {
+    "capture": "wave.png",
+    "outside_money_region_changed_pixels": 0
+  }
+]
