@@ -268,6 +268,16 @@ def check_barrier_showcase():
     return check("barrier damage/mines", code == 0, next((s for s in out.splitlines() if s.startswith("BARRIER SHOWCASE:")), tail(out, 4)))
 
 
+def check_enemy_art():
+    code, out = run([sys.executable, "tools/check_enemy_art.py"])
+    return check("enemy sources/motion", code == 0, tail(out, 4))
+
+
+def check_enemy_showcase():
+    code, out = run([sys.executable, "tools/show_art.py", "--enemies", "--check"])
+    return check("enemy movement/attacks", code == 0, next((s for s in out.splitlines() if s.startswith("ENEMY SHOWCASE:")), tail(out, 4)))
+
+
 def check_logo():
     """The logo still matches the letters it was composed from.
 
@@ -680,6 +690,8 @@ def main():
     check_tower_showcase()
     check_barrier_art()
     check_barrier_showcase()
+    check_enemy_art()
+    check_enemy_showcase()
     check_font()
     check_logo()
     check_sfx()

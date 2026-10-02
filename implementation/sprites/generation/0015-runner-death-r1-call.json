@@ -1,0 +1,111 @@
+{
+  "id": "runner",
+  "kind": "death-r1",
+  "revision": 1,
+  "tool": "built-in ImageGen",
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-ffc10428-f74f-4dd6-9969-9db9b1dceb4e.png",
+  "source": "assets/art_source/enemies/runner/death-r1.png",
+  "source_sha256": "4ec8f9cc1c56937c698e4f3d05dbdde72f180fa5034d9e61be7afd6501b90e2e",
+  "source_wh": [
+    2172,
+    724
+  ],
+  "source_alpha_range": [
+    0,
+    255
+  ],
+  "prompt": "implementation/sprites/generation/0015-runner-death-r1.prompt.txt",
+  "prompt_sha256": "e0b926153bf5a40bfc1b0ba00f84865c0312e9543e96ad095f4516f14bffe2a5",
+  "references": [
+    "assets/art_source/enemies/runner/death.png",
+    "assets/art_source/enemies/runner/master.png"
+  ],
+  "reference_hashes": {
+    "assets/art_source/enemies/runner/death.png": "5aaed5efbb1fd5fc7583ea20935d6c5e1b6bb796315f167c0f9ffb49a2e2eca3",
+    "assets/art_source/enemies/runner/master.png": "ba8d17160c93b9068379ba62d4f0b84616876d1160e012120cd609146e882b5b"
+  },
+  "tool_arguments": {
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\enemies\\runner\\death.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\enemies\\runner\\master.png"
+    ]
+  },
+  "measurements": [
+    {
+      "role": "death_0",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        535,
+        724
+      ],
+      "crop_xywh": [
+        64,
+        167,
+        413,
+        462
+      ]
+    },
+    {
+      "role": "death_1",
+      "sheet_cell_xywh": [
+        535,
+        0,
+        530,
+        724
+      ],
+      "crop_xywh": [
+        593,
+        282,
+        428,
+        347
+      ]
+    },
+    {
+      "role": "death_2",
+      "sheet_cell_xywh": [
+        1065,
+        0,
+        559,
+        724
+      ],
+      "crop_xywh": [
+        1109,
+        383,
+        469,
+        247
+      ]
+    },
+    {
+      "role": "death_3",
+      "sheet_cell_xywh": [
+        1624,
+        0,
+        548,
+        724
+      ],
+      "crop_xywh": [
+        1671,
+        464,
+        462,
+        172
+      ]
+    }
+  ],
+  "decision": "Accepted after native/3x complete motion review; source crop and palette conversion only",
+  "actual_submitted_arguments": {
+    "prompt": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm that becomes a fortress against zombies at night.\nStyle: deliberate chunky hand-crafted pixel art, colored dark outlines, large readable clusters, restrained texture. Orthographic three-quarter top-down rectangular-grid camera matching Image 1. Neutral daytime upper-left light; runtime supplies night lighting. Muted rot greens, worn cloth, violet undersides, cold small highlights. No ground shadow, scenery, text, watermark, checkerboard, blur, gradients, smooth painting, new gameplay objects or excessive gore. Complete unclipped body, true transparent background. The final downstream native canvas is 32x40 with ground pivot (16,36), visible standing body 29 pixels high. Keep forms simple enough to survive reduction. This is a zombie, not a farmer costume. All heads, hands, legs and clothes must remain recognizable as black silhouettes.\n\nPrimary request: enemies/runner/death, exactly 4 sequential frames in ONE horizontal strip. Image 1 is the accepted runner identity master: retain exactly its head, clothing, body mass, camera and colors. Image 2 is only the pixel-cluster style reference. Identity: Very thin wiry body, conspicuous forward lean, swept-back sparse dark hair, ragged faded teal sleeveless shirt, charcoal knee-length trousers, long bent legs and tucked angular running arms. A fast hungry sprinter; clearly different from the slouched walker.\nOrder from left to right: knees first buckle and arms lose support; torso pitches sideways while one knee contacts ground; shoulder and hip contact ground with legs folding; fully collapsed low side-lying body with head and arms resting. The sequence forms a single irreversible collapse, ending low and still. Facing is three-quarter screen-left and toward the viewer throughout. Use equally sized generous cells separated by completely empty transparent gutters. Same ground/contact baseline at 90 percent of cell height and contact center at each cell's horizontal midpoint. Keep common drawing scale across the entire strip; never enlarge a collapsed or crouched pose. No limbs cross another cell. Actual joints, weight transfer and changing leg/arm shapes: never translate the whole drawing as an animation. No impact victim, dust, blood pool, weapon trails, ground shadow, labels or panels.\n\nTargeted revision 1: Image 1 is the rejected death strip to edit, Image 2 is the accepted identity master. Retain the four ordered collapse poses and character. Fix layout only: spread the four cells apart with at least 64 source pixels of completely transparent full-height gutter between EVERY adjacent pair. No part of any frame may overlap another frame horizontally, including boots and hair. Keep one common body scale and ground baseline.\n",
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/enemies/runner/death.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/enemies/runner/master.png"
+    ],
+    "transparent_background": true
+  },
+  "selected_outputs": [
+    "enemies/runner_death_0",
+    "enemies/runner_death_1",
+    "enemies/runner_death_2",
+    "enemies/runner_death_3"
+  ]
+}

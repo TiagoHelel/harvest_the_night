@@ -13225,12 +13225,15 @@ func _task_0074_zombie_art() -> void:
 				continue
 			var other := Image.load_from_file(ProjectSettings.globalize_path(
 				"res://sprites/enemies/%s.png" % kind))
-			expect(other != null and giant.get_height() > other.get_height()
-				and giant.get_width() > other.get_width(),
+			# Authored lunges keep a generous transparent animation envelope.
+			# Size dominance concerns the visible body, never empty clearance.
+			var giant_size := giant.get_used_rect().size
+			var other_size := other.get_used_rect().size if other != null else Vector2i.ZERO
+			expect(other != null and giant_size.y > other_size.y
+				and giant_size.x > other_size.x,
 				"and is bigger than the %s" % kind,
-				"%dx%d against %dx%d" % [giant.get_width(),
-					giant.get_height(), other.get_width(),
-					other.get_height()])
+				"visible %dx%d against %dx%d" % [giant_size.x,
+					giant_size.y, other_size.x, other_size.y])
 
 	# **The rim light is a colour the night ramp leaves alone.** That is the
 	# whole trick, and it is an agreement between two tasks: 0071 exempts

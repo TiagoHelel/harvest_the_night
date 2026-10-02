@@ -1001,3 +1001,75 @@ in 0015, Giant/death playback in 0016 and shared final atmosphere in 0019.
 Queue after completion: 14 done, 6 todo, zero doing/blocked. Next: 0015,
 walker/runner/tank/breaker sprites and motion. Exactly one sprite task completed
 this cycle; the active /goal continues automatically toward the backlog.
+
+## 2026-10-02 — 0015: ordinary enemy masters and authored motion
+
+Completed walker, runner, tank and breaker masters plus 4/3/4 walk, attack and
+death sources. Twenty-one actual built-in ImageGen returns are preserved in
+`assets/art_source/enemies/`: sixteen selected, five rejected attempts archived.
+Exact prompts, reference hashes, tool arguments and original return paths are
+under `generation/0015-*`. Runner/tank death revision 1 separates overlapping
+frames; breaker walk revision 2 preserves its hammer, attack revision 1 separates
+tool/body bounds. All returned sources were opened; no asset exceeds revision 2.
+The installer performs measured cuts and fixed nearest/palette/binary-alpha
+conversion only, with one scale per strip and no Python-painted enemy art.
+
+Forty-eight authored poses and twelve byte-identical old-name aliases replace
+the ordinary procedural motion. Ownership becomes 372 raster / 34 ASCII / zero
+player-sheet, 406 runtime PNGs. Common 64x48 canvases, pivot (32,44), deliberately
+add transparent clearance beyond the pilot 32x40 contract for the runner lunge
+and hammer. Visible standing bodies remain about 29 pixels high, near the
+farmer's 30; feet and core position do not move with pose or canvas dimensions.
+Death sequences progressively collapse at the same scale; playback follows in
+0016. Giant's original runtime/source art remains unchanged this cycle.
+
+EnemyMotion is view-owned: actual position deltas advance walk poses; observed
+core hits/waits choose contact, recovery and pre-hit poses. It mirrors observed
+horizontal travel, retains horizontal facing during vertical movement, and
+does not claim four cardinal source directions. Rendering/paused frames cannot
+advance the cache; removed entities and new states clear it. Stale chew targets
+do not invent attacks. The first core hit stays immediate. No gameplay, RNG,
+save fields, collision, balance or core code changed. Hurt modulation retains
+the body/material/tool instead of washing the family white.
+
+Full verification PASS: 45 passed, zero skipped/failed in 320 seconds, with
+Godot 4.7.1. The soft 300-second duration target reports OVER BUDGET without
+failing the command. All 109 scripts parse; 6,611 rule assertions, 982 input
+cases, performance and Windows/Web exports pass. Sim `1961000123` and data
+`407837701` stay unchanged. Raster source check proves 372 outputs, zero writes;
+enemy checker proves 48 real poses, twelve aliases, fixed contacts, shared
+strip scale, silhouette differences and actual motion rather than row shifts.
+Enemy headless showcase: 1,982 checks; real renderer: 2,040 checks; zero failed.
+It covers real movement/hits/waits, all walk/attack frames, mirrors, paused and
+4x ticks, state-byte preservation, removal/load reset, hurt and mixed night wave.
+
+The initial full run failed only the older Giant size comparison, which counted
+new transparent pose clearance as body width. The assertion now compares visible
+alpha bounds for both types and still requires Giant to be wider and taller
+than all ordinary bodies. Final full suite passes without hash acceptance or
+skipping. Initial debug logs remain with successful logs in `reviews/0015/`.
+The raster importer is unchanged; no extra fault-suite run is claimed.
+
+Opened all four native and 3x complete motion sheets, black silhouette reviews,
+and 34 real native 480x270 captures paired with exact nearest 3x on 17 pages
+`reviews/0015/captures-00..16.png`. Original shots live in
+`implementation/shots/sprites/0015/` and `enemies/`. Reviewed daylight/night
+identities, black silhouettes, both moving directions, actual attack sequences,
+hurt, prepared death textures, mixed dark/moving waves and all five standard
+views. Function, contacts, body scale, alpha, movement and depth gates pass.
+Existing night lighting makes cloth colors very dark; shape distinguishes the
+families there. Shared atmosphere task 0019 should improve this using the current
+art. The user explicitly requested preservation of completed sprites; no
+additional generation followed that clarification and no previous family was
+regenerated. Enlarging a viewport does not recover detail lost at native scale.
+
+Audit against `6e81946` proves 962 protected prior core/art files unchanged,
+including owner/pilot/player art, all earlier raw sources and unrelated runtime
+PNGs, palette and hash guards. Exact raw/prompt/reference/runtime ownership is
+recorded in `reviews/0015/scope-and-sources.json`; staged bytes are checked before
+commit. Fifteen unrelated pre-existing untracked files are excluded. Complete
+visual findings, revisions and limits are in `reviews/0015/REVIEW.md`.
+
+Queue after completion: 15 done, 5 todo, zero doing/blocked. Next: 0016, Giant and
+death playback. Exactly one sprite task completed this cycle; the active /goal
+continues automatically toward the backlog while preserving finished families.

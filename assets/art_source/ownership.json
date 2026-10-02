@@ -1039,19 +1039,63 @@
     },
     {
       "output": "sprites/enemies/breaker.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/enemies/breaker_attack.png",
-      "owner": "ascii"
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/breaker_attack_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/breaker_attack_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/breaker_attack_2.png",
+      "owner": "raster"
     },
     {
       "output": "sprites/enemies/breaker_death.png",
-      "owner": "ascii"
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/breaker_death_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/breaker_death_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/breaker_death_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/breaker_death_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/breaker_walk_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/breaker_walk_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/breaker_walk_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/breaker_walk_3.png",
+      "owner": "raster"
     },
     {
       "output": "sprites/enemies/breaker_walk_b.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/enemies/giant.png",
@@ -1075,35 +1119,123 @@
     },
     {
       "output": "sprites/enemies/runner.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/enemies/runner_attack.png",
-      "owner": "ascii"
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/runner_attack_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/runner_attack_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/runner_attack_2.png",
+      "owner": "raster"
     },
     {
       "output": "sprites/enemies/runner_death.png",
-      "owner": "ascii"
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/runner_death_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/runner_death_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/runner_death_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/runner_death_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/runner_walk_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/runner_walk_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/runner_walk_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/runner_walk_3.png",
+      "owner": "raster"
     },
     {
       "output": "sprites/enemies/runner_walk_b.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/enemies/tank.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/enemies/tank_attack.png",
-      "owner": "ascii"
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/tank_attack_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/tank_attack_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/tank_attack_2.png",
+      "owner": "raster"
     },
     {
       "output": "sprites/enemies/tank_death.png",
-      "owner": "ascii"
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/tank_death_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/tank_death_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/tank_death_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/tank_death_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/tank_walk_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/tank_walk_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/tank_walk_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/tank_walk_3.png",
+      "owner": "raster"
     },
     {
       "output": "sprites/enemies/tank_walk_b.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/enemies/walker.png",
@@ -1114,7 +1246,51 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/enemies/walker_attack_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/walker_attack_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/walker_attack_2.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/enemies/walker_death.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/walker_death_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/walker_death_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/walker_death_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/walker_death_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/walker_walk_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/walker_walk_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/walker_walk_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/walker_walk_3.png",
       "owner": "raster"
     },
     {

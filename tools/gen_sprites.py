@@ -552,10 +552,19 @@ def migrated_barriers():
     return complete
 
 
+def migrated_enemies():
+    """Stop procedural motion only when the complete authored family owns it."""
+    owners = art_ownership.registry()
+    return {'enemies/' + family for family in ('walker', 'runner', 'tank', 'breaker') if all(
+        owners.get('sprites/enemies/' + family + suffix + '.png') == 'raster'
+        for suffix in ('', '_walk_b', '_attack', '_death') + tuple('_walk_%d' % i for i in range(4))
+        + tuple('_attack_%d' % i for i in range(3)) + tuple('_death_%d' % i for i in range(4)))}
+
+
 def derived_sprites():
     """{name: (w, h, pixels)} for every pose that is not drawn by hand."""
     out = {}
-    migrated = migrated_towers() | migrated_barriers()
+    migrated = migrated_towers() | migrated_barriers() | migrated_enemies()
 
     # Buildings, cut into the tiles the view asks for.
     for key, (name, cols, rows) in sorted(SLICED.items()):
@@ -604,6 +613,8 @@ def derived_sprites():
 
     for kind in DERIVED:
         key = "enemies/" + kind
+        if key in migrated:
+            continue
         width, height, pixels = render(key, SPRITES[key])
         out["enemies/%s_walk_b" % kind] = (width, height, bobbed(pixels))
         out["enemies/%s_attack" % kind] = (width, height, lunging(pixels))
@@ -636,7 +647,7 @@ def write(path, data):
 def everything(dispatch=True):
     """Every output file, as {path: bytes}."""
     out = {}
-    migrated = migrated_towers() | migrated_barriers()
+    migrated = migrated_towers() | migrated_barriers() | migrated_enemies()
     for name, spec in sorted(SPRITES.items()):
         if name in migrated:
             continue

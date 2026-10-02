@@ -1,0 +1,45 @@
+{
+  "id": "runner",
+  "kind": "death",
+  "revision": 0,
+  "tool": "built-in ImageGen",
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-9a3742b6-5a15-4a54-9353-f9ae87465a9b.png",
+  "source": "assets/art_source/enemies/runner/death.png",
+  "source_sha256": "5aaed5efbb1fd5fc7583ea20935d6c5e1b6bb796315f167c0f9ffb49a2e2eca3",
+  "source_wh": [
+    1983,
+    793
+  ],
+  "source_alpha_range": [
+    0,
+    255
+  ],
+  "prompt": "implementation/sprites/generation/0015-runner-death.prompt.txt",
+  "prompt_sha256": "c176f23b3c1c0fb3f3f4bc9b75b2421f3b8d6a5bfd916cac3d78ceebe9221bda",
+  "references": [
+    "assets/art_source/enemies/runner/master.png",
+    "assets/art_source/masters/walker.png"
+  ],
+  "reference_hashes": {
+    "assets/art_source/enemies/runner/master.png": "ba8d17160c93b9068379ba62d4f0b84616876d1160e012120cd609146e882b5b",
+    "assets/art_source/masters/walker.png": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5"
+  },
+  "tool_arguments": {
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\enemies\\runner\\master.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\masters\\walker.png"
+    ]
+  },
+  "measurements": [],
+  "decision": "Rejected: no clear transparent column between adjacent death frames",
+  "actual_submitted_arguments": {
+    "prompt": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm that becomes a fortress against zombies at night.\nStyle: deliberate chunky hand-crafted pixel art, colored dark outlines, large readable clusters, restrained texture. Orthographic three-quarter top-down rectangular-grid camera matching Image 1. Neutral daytime upper-left light; runtime supplies night lighting. Muted rot greens, worn cloth, violet undersides, cold small highlights. No ground shadow, scenery, text, watermark, checkerboard, blur, gradients, smooth painting, new gameplay objects or excessive gore. Complete unclipped body, true transparent background. The final downstream native canvas is 32x40 with ground pivot (16,36), visible standing body 29 pixels high. Keep forms simple enough to survive reduction. This is a zombie, not a farmer costume. All heads, hands, legs and clothes must remain recognizable as black silhouettes.\n\nPrimary request: enemies/runner/death, exactly 4 sequential frames in ONE horizontal strip. Image 1 is the accepted runner identity master: retain exactly its head, clothing, body mass, camera and colors. Image 2 is only the pixel-cluster style reference. Identity: Very thin wiry body, conspicuous forward lean, swept-back sparse dark hair, ragged faded teal sleeveless shirt, charcoal knee-length trousers, long bent legs and tucked angular running arms. A fast hungry sprinter; clearly different from the slouched walker.\nOrder from left to right: knees first buckle and arms lose support; torso pitches sideways while one knee contacts ground; shoulder and hip contact ground with legs folding; fully collapsed low side-lying body with head and arms resting. The sequence forms a single irreversible collapse, ending low and still. Facing is three-quarter screen-left and toward the viewer throughout. Use equally sized generous cells separated by completely empty transparent gutters. Same ground/contact baseline at 90 percent of cell height and contact center at each cell's horizontal midpoint. Keep common drawing scale across the entire strip; never enlarge a collapsed or crouched pose. No limbs cross another cell. Actual joints, weight transfer and changing leg/arm shapes: never translate the whole drawing as an animation. No impact victim, dust, blood pool, weapon trails, ground shadow, labels or panels.\n",
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/enemies/runner/master.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/masters/walker.png"
+    ],
+    "transparent_background": true
+  },
+  "selected_outputs": []
+}

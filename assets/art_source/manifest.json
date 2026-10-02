@@ -62,195 +62,6 @@
       ]
     },
     {
-      "id": "enemies/walker",
-      "owner": "raster",
-      "source": "assets/art_source/masters/walker.png",
-      "source_sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
-      "crop_xywh": [
-        293,
-        192,
-        593,
-        1086
-      ],
-      "sheet_cell_xywh": [
-        0,
-        0,
-        1086,
-        1448
-      ],
-      "gutter_xy": [
-        0,
-        0
-      ],
-      "canvas_wh": [
-        32,
-        40
-      ],
-      "pivot_xy": [
-        16,
-        36
-      ],
-      "content_scale": 0.026703499079189688,
-      "alpha_threshold": 128,
-      "palette": "tools/palette.py:COLOURS",
-      "animation": "enemies/walker",
-      "frame": 0,
-      "seconds": 0.55,
-      "loop": true,
-      "output": "sprites/enemies/walker.png",
-      "output_sha256": "d46dd91c4a380876cc97da04cd62c50632ff620d8b81da55ac7fb70c921a03ee",
-      "prompt": "implementation/sprites/generation/0001-walker.prompt.txt",
-      "prompt_sha256": "a37705c1e7b4c7612b8e7aa87d67244a59a1a1c174a43d8cdfb16cf540a00807",
-      "references": [
-        {
-          "path": "assets/art_source/masters/farmer.png",
-          "role": "style/body-scale reference",
-          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
-        },
-        {
-          "path": "assets/art_source/masters/tree.png",
-          "role": "world style reference",
-          "sha256": "a9b0f2880631364cf6ceb0dc7795cc132de6d1205b18e4b70434f67ecc7ec3f9"
-        },
-        {
-          "path": "assets/art_source/masters/house.png",
-          "role": "world style reference",
-          "sha256": "26d2646bf9328eae0eeb699193a11f46e6f92cd487d2369dea27b4295bdab81f"
-        }
-      ],
-      "tool": "built-in ImageGen",
-      "generation_task": "0001"
-    },
-    {
-      "owner": "raster",
-      "palette": "tools/palette.py:COLOURS",
-      "seconds": 0.55,
-      "loop": true,
-      "prompt": "implementation/sprites/generation/0001-walker.prompt.txt",
-      "prompt_sha256": "a37705c1e7b4c7612b8e7aa87d67244a59a1a1c174a43d8cdfb16cf540a00807",
-      "references": [
-        {
-          "path": "assets/art_source/masters/farmer.png",
-          "role": "style/body-scale reference",
-          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
-        },
-        {
-          "path": "assets/art_source/masters/tree.png",
-          "role": "world style reference",
-          "sha256": "a9b0f2880631364cf6ceb0dc7795cc132de6d1205b18e4b70434f67ecc7ec3f9"
-        },
-        {
-          "path": "assets/art_source/masters/house.png",
-          "role": "world style reference",
-          "sha256": "26d2646bf9328eae0eeb699193a11f46e6f92cd487d2369dea27b4295bdab81f"
-        }
-      ],
-      "tool": "built-in ImageGen",
-      "generation_task": "0001",
-      "id": "enemies/walker_walk_b",
-      "input": "enemies/walker",
-      "operation": "legacy_bob",
-      "canvas_wh": [
-        32,
-        40
-      ],
-      "pivot_xy": [
-        16,
-        36
-      ],
-      "animation": "enemies/walker_walk_b",
-      "frame": 0,
-      "output": "sprites/enemies/walker_walk_b.png",
-      "output_sha256": "50d167979439be2b3141d7284e8b2c04aa9ff7bc8af177501a1494e60aa480cd",
-      "provisional": "Legacy procedural motion from new master; authored strips/death playback in task 0015."
-    },
-    {
-      "owner": "raster",
-      "palette": "tools/palette.py:COLOURS",
-      "seconds": 0.55,
-      "loop": true,
-      "prompt": "implementation/sprites/generation/0001-walker.prompt.txt",
-      "prompt_sha256": "a37705c1e7b4c7612b8e7aa87d67244a59a1a1c174a43d8cdfb16cf540a00807",
-      "references": [
-        {
-          "path": "assets/art_source/masters/farmer.png",
-          "role": "style/body-scale reference",
-          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
-        },
-        {
-          "path": "assets/art_source/masters/tree.png",
-          "role": "world style reference",
-          "sha256": "a9b0f2880631364cf6ceb0dc7795cc132de6d1205b18e4b70434f67ecc7ec3f9"
-        },
-        {
-          "path": "assets/art_source/masters/house.png",
-          "role": "world style reference",
-          "sha256": "26d2646bf9328eae0eeb699193a11f46e6f92cd487d2369dea27b4295bdab81f"
-        }
-      ],
-      "tool": "built-in ImageGen",
-      "generation_task": "0001",
-      "id": "enemies/walker_attack",
-      "input": "enemies/walker",
-      "operation": "legacy_lunge",
-      "canvas_wh": [
-        32,
-        40
-      ],
-      "pivot_xy": [
-        16,
-        36
-      ],
-      "animation": "enemies/walker_attack",
-      "frame": 0,
-      "output": "sprites/enemies/walker_attack.png",
-      "output_sha256": "9491627c3b72b6f79b9e798db29c283c8768965efa70c4b2f329618ea47076af",
-      "provisional": "Legacy procedural motion from new master; authored strips/death playback in task 0015."
-    },
-    {
-      "owner": "raster",
-      "palette": "tools/palette.py:COLOURS",
-      "seconds": 0.55,
-      "loop": true,
-      "prompt": "implementation/sprites/generation/0001-walker.prompt.txt",
-      "prompt_sha256": "a37705c1e7b4c7612b8e7aa87d67244a59a1a1c174a43d8cdfb16cf540a00807",
-      "references": [
-        {
-          "path": "assets/art_source/masters/farmer.png",
-          "role": "style/body-scale reference",
-          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
-        },
-        {
-          "path": "assets/art_source/masters/tree.png",
-          "role": "world style reference",
-          "sha256": "a9b0f2880631364cf6ceb0dc7795cc132de6d1205b18e4b70434f67ecc7ec3f9"
-        },
-        {
-          "path": "assets/art_source/masters/house.png",
-          "role": "world style reference",
-          "sha256": "26d2646bf9328eae0eeb699193a11f46e6f92cd487d2369dea27b4295bdab81f"
-        }
-      ],
-      "tool": "built-in ImageGen",
-      "generation_task": "0001",
-      "id": "enemies/walker_death",
-      "input": "enemies/walker",
-      "operation": "legacy_fall",
-      "canvas_wh": [
-        40,
-        40
-      ],
-      "pivot_xy": [
-        20,
-        36
-      ],
-      "animation": "enemies/walker_death",
-      "frame": 0,
-      "output": "sprites/enemies/walker_death.png",
-      "output_sha256": "66fbe788d80f2a45af9de795b602e4d27aef4b3d4e9d0239d38654fe7cb5d0e9",
-      "provisional": "Legacy procedural motion from new master; authored strips/death playback in task 0015."
-    },
-    {
       "id": "actors/idle_south_0",
       "owner": "raster",
       "source": "assets/art_source/player/idle_south.png",
@@ -21569,6 +21380,4094 @@
       "output_sha256": "33d1aad8c927e8c120a582488078156004a289e62c2f771dadc510f128f590d4",
       "barrier_family": "mine",
       "barrier_state": "spent"
+    },
+    {
+      "id": "enemies/walker",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/walker/master.png",
+      "source_sha256": "c9cbd7ae7fb219c00809ecc11e478696567a56287afc488b9eb38352e65fcde1",
+      "crop_xywh": [
+        274,
+        173,
+        633,
+        1186
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        1086,
+        1448
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "content_scale": 0.024451939291736932,
+      "content_anchor_xy": [
+        8,
+        29
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/walker_master",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": true,
+      "output": "sprites/enemies/walker.png",
+      "prompt": "implementation/sprites/generation/0015-walker-master.prompt.txt",
+      "prompt_sha256": "44235223ca214cbaf37d35df5505596a3d3ed170bfd56d74a7f01248f85bb7e3",
+      "references": [
+        {
+          "path": "assets/art_source/masters/walker.png",
+          "sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 0,
+      "enemy_family": "walker",
+      "enemy_motion": "master",
+      "enemy_master_id": "enemies/walker",
+      "scale_reference": {
+        "role": "tallest standing pose",
+        "raw_height": 1186,
+        "native_height": 29
+      },
+      "ground_measurement": "lowest two native alpha rows",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "output_sha256": "13fdb8d174ab924ef069998fdba8e575bf66fbc94f5293d3617c516c08adc2e8"
+    },
+    {
+      "id": "enemies/walker_walk_0",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/walker/walk.png",
+      "source_sha256": "0315ab049760b069c3b7c9c2e02f041e7fb3af1afc69c4506b0893c5cbaa6030",
+      "crop_xywh": [
+        87,
+        26,
+        408,
+        668
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        560,
+        720
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "content_scale": 0.043219076005961254,
+      "content_anchor_xy": [
+        5,
+        29
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/walker_walk",
+      "frame": 0,
+      "seconds": 0.125,
+      "loop": true,
+      "output": "sprites/enemies/walker_walk_0.png",
+      "prompt": "implementation/sprites/generation/0015-walker-walk.prompt.txt",
+      "prompt_sha256": "91673651a40240ff0278e2914de5e923650ec24fda6d42d1a4d61dcf575c364c",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/walker/master.png",
+          "sha256": "c9cbd7ae7fb219c00809ecc11e478696567a56287afc488b9eb38352e65fcde1",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/masters/walker.png",
+          "sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 0,
+      "enemy_family": "walker",
+      "enemy_motion": "walk",
+      "enemy_master_id": "enemies/walker",
+      "scale_reference": {
+        "role": "tallest standing pose",
+        "raw_height": 671,
+        "native_height": 29
+      },
+      "ground_measurement": "lowest two native alpha rows",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "output_sha256": "ecc650b818231414e190297a3ff09f1514194ea78c7b506923c96cd1d2643d81"
+    },
+    {
+      "id": "enemies/walker_walk_1",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/walker/walk.png",
+      "source_sha256": "0315ab049760b069c3b7c9c2e02f041e7fb3af1afc69c4506b0893c5cbaa6030",
+      "crop_xywh": [
+        625,
+        25,
+        422,
+        670
+      ],
+      "sheet_cell_xywh": [
+        560,
+        0,
+        542,
+        720
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "content_scale": 0.043219076005961254,
+      "content_anchor_xy": [
+        8,
+        29
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/walker_walk",
+      "frame": 1,
+      "seconds": 0.125,
+      "loop": true,
+      "output": "sprites/enemies/walker_walk_1.png",
+      "prompt": "implementation/sprites/generation/0015-walker-walk.prompt.txt",
+      "prompt_sha256": "91673651a40240ff0278e2914de5e923650ec24fda6d42d1a4d61dcf575c364c",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/walker/master.png",
+          "sha256": "c9cbd7ae7fb219c00809ecc11e478696567a56287afc488b9eb38352e65fcde1",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/masters/walker.png",
+          "sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 0,
+      "enemy_family": "walker",
+      "enemy_motion": "walk",
+      "enemy_master_id": "enemies/walker",
+      "scale_reference": {
+        "role": "tallest standing pose",
+        "raw_height": 671,
+        "native_height": 29
+      },
+      "ground_measurement": "lowest two native alpha rows",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "variant_of": "enemies/walker_walk_0",
+      "output_sha256": "cb06b713d39eaf4a2ce3531f32238a7bb40baa650da162559191e54ed30a17cf"
+    },
+    {
+      "id": "enemies/walker_walk_2",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/walker/walk.png",
+      "source_sha256": "0315ab049760b069c3b7c9c2e02f041e7fb3af1afc69c4506b0893c5cbaa6030",
+      "crop_xywh": [
+        1158,
+        24,
+        435,
+        671
+      ],
+      "sheet_cell_xywh": [
+        1102,
+        0,
+        546,
+        720
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "content_scale": 0.043219076005961254,
+      "content_anchor_xy": [
+        7,
+        29
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/walker_walk",
+      "frame": 2,
+      "seconds": 0.125,
+      "loop": true,
+      "output": "sprites/enemies/walker_walk_2.png",
+      "prompt": "implementation/sprites/generation/0015-walker-walk.prompt.txt",
+      "prompt_sha256": "91673651a40240ff0278e2914de5e923650ec24fda6d42d1a4d61dcf575c364c",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/walker/master.png",
+          "sha256": "c9cbd7ae7fb219c00809ecc11e478696567a56287afc488b9eb38352e65fcde1",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/masters/walker.png",
+          "sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 0,
+      "enemy_family": "walker",
+      "enemy_motion": "walk",
+      "enemy_master_id": "enemies/walker",
+      "scale_reference": {
+        "role": "tallest standing pose",
+        "raw_height": 671,
+        "native_height": 29
+      },
+      "ground_measurement": "lowest two native alpha rows",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "variant_of": "enemies/walker_walk_0",
+      "output_sha256": "fd1695b7025e85d80be12478d5001521aede8324a2771bf67d1c4cc507e3e117"
+    },
+    {
+      "id": "enemies/walker_walk_3",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/walker/walk.png",
+      "source_sha256": "0315ab049760b069c3b7c9c2e02f041e7fb3af1afc69c4506b0893c5cbaa6030",
+      "crop_xywh": [
+        1703,
+        24,
+        419,
+        666
+      ],
+      "sheet_cell_xywh": [
+        1648,
+        0,
+        536,
+        720
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "content_scale": 0.043219076005961254,
+      "content_anchor_xy": [
+        9,
+        29
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/walker_walk",
+      "frame": 3,
+      "seconds": 0.125,
+      "loop": true,
+      "output": "sprites/enemies/walker_walk_3.png",
+      "prompt": "implementation/sprites/generation/0015-walker-walk.prompt.txt",
+      "prompt_sha256": "91673651a40240ff0278e2914de5e923650ec24fda6d42d1a4d61dcf575c364c",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/walker/master.png",
+          "sha256": "c9cbd7ae7fb219c00809ecc11e478696567a56287afc488b9eb38352e65fcde1",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/masters/walker.png",
+          "sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 0,
+      "enemy_family": "walker",
+      "enemy_motion": "walk",
+      "enemy_master_id": "enemies/walker",
+      "scale_reference": {
+        "role": "tallest standing pose",
+        "raw_height": 671,
+        "native_height": 29
+      },
+      "ground_measurement": "lowest two native alpha rows",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "variant_of": "enemies/walker_walk_0",
+      "output_sha256": "b47fbc52582b9f8921fd9ea22985ee983588c5f55afee440b33956544d13143d"
+    },
+    {
+      "id": "enemies/walker_attack_0",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/walker/attack.png",
+      "source_sha256": "2167e1fb372a1d352707486e2935ea716e985871be895ccfe8cdd0d068a7b370",
+      "crop_xywh": [
+        56,
+        40,
+        489,
+        759
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        586,
+        836
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "content_scale": 0.038926174496644296,
+      "content_anchor_xy": [
+        10,
+        30
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/walker_attack",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/walker_attack_0.png",
+      "prompt": "implementation/sprites/generation/0015-walker-attack.prompt.txt",
+      "prompt_sha256": "8b8d49e33d64b838f9b79dca762916a6ae3737747415c09db4f0292493b0d87c",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/walker/master.png",
+          "sha256": "c9cbd7ae7fb219c00809ecc11e478696567a56287afc488b9eb38352e65fcde1",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/masters/walker.png",
+          "sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 0,
+      "enemy_family": "walker",
+      "enemy_motion": "attack",
+      "enemy_master_id": "enemies/walker",
+      "scale_reference": {
+        "role": "recovery standing pose",
+        "raw_height": 745,
+        "native_height": 29
+      },
+      "ground_measurement": "lowest two native alpha rows",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "output_sha256": "225a2274a44e7160e623babc34b4448bfa61b262359adb424c368f2287afb3cf"
+    },
+    {
+      "id": "enemies/walker_attack_1",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/walker/attack.png",
+      "source_sha256": "2167e1fb372a1d352707486e2935ea716e985871be895ccfe8cdd0d068a7b370",
+      "crop_xywh": [
+        627,
+        74,
+        685,
+        727
+      ],
+      "sheet_cell_xywh": [
+        586,
+        0,
+        784,
+        836
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "content_scale": 0.038926174496644296,
+      "content_anchor_xy": [
+        18,
+        28
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/walker_attack",
+      "frame": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/walker_attack_1.png",
+      "prompt": "implementation/sprites/generation/0015-walker-attack.prompt.txt",
+      "prompt_sha256": "8b8d49e33d64b838f9b79dca762916a6ae3737747415c09db4f0292493b0d87c",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/walker/master.png",
+          "sha256": "c9cbd7ae7fb219c00809ecc11e478696567a56287afc488b9eb38352e65fcde1",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/masters/walker.png",
+          "sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 0,
+      "enemy_family": "walker",
+      "enemy_motion": "attack",
+      "enemy_master_id": "enemies/walker",
+      "scale_reference": {
+        "role": "recovery standing pose",
+        "raw_height": 745,
+        "native_height": 29
+      },
+      "ground_measurement": "lowest two native alpha rows",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "variant_of": "enemies/walker_attack_0",
+      "output_sha256": "06128bb814feb8298f411acd87851908465c5cd6b3491273df6224238f6a42bb"
+    },
+    {
+      "id": "enemies/walker_attack_2",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/walker/attack.png",
+      "source_sha256": "2167e1fb372a1d352707486e2935ea716e985871be895ccfe8cdd0d068a7b370",
+      "crop_xywh": [
+        1429,
+        58,
+        411,
+        745
+      ],
+      "sheet_cell_xywh": [
+        1370,
+        0,
+        511,
+        836
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "content_scale": 0.038926174496644296,
+      "content_anchor_xy": [
+        9,
+        29
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/walker_attack",
+      "frame": 2,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/walker_attack_2.png",
+      "prompt": "implementation/sprites/generation/0015-walker-attack.prompt.txt",
+      "prompt_sha256": "8b8d49e33d64b838f9b79dca762916a6ae3737747415c09db4f0292493b0d87c",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/walker/master.png",
+          "sha256": "c9cbd7ae7fb219c00809ecc11e478696567a56287afc488b9eb38352e65fcde1",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/masters/walker.png",
+          "sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 0,
+      "enemy_family": "walker",
+      "enemy_motion": "attack",
+      "enemy_master_id": "enemies/walker",
+      "scale_reference": {
+        "role": "recovery standing pose",
+        "raw_height": 745,
+        "native_height": 29
+      },
+      "ground_measurement": "lowest two native alpha rows",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "variant_of": "enemies/walker_attack_0",
+      "output_sha256": "a8c205e8d62fe1dfd93eb58c61ff42da6ca1256927da046264cf6e3c2fda1667"
+    },
+    {
+      "id": "enemies/walker_death_0",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/walker/death.png",
+      "source_sha256": "bc5e8b3239168d1212ad7bf95202d4c9189992599510674e2d8223d3bf2f2206",
+      "crop_xywh": [
+        52,
+        111,
+        365,
+        570
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        465,
+        724
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "content_scale": 0.04736842105263158,
+      "content_anchor_xy": [
+        8,
+        27
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/walker_death",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/walker_death_0.png",
+      "prompt": "implementation/sprites/generation/0015-walker-death.prompt.txt",
+      "prompt_sha256": "191fb37e3a60842c5a1c36da4b910e84d814ae027fa99ac8d545f00950390b59",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/walker/master.png",
+          "sha256": "c9cbd7ae7fb219c00809ecc11e478696567a56287afc488b9eb38352e65fcde1",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/masters/walker.png",
+          "sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 0,
+      "enemy_family": "walker",
+      "enemy_motion": "death",
+      "enemy_master_id": "enemies/walker",
+      "scale_reference": {
+        "role": "first buckling pose",
+        "raw_height": 570,
+        "native_height": 27
+      },
+      "ground_measurement": "collapse bounds midpoint",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "output_sha256": "34234f10ca19cc6a25c36ff022d12177033912ca0e65c901e3322e00f50a9920"
+    },
+    {
+      "id": "enemies/walker_death_1",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/walker/death.png",
+      "source_sha256": "bc5e8b3239168d1212ad7bf95202d4c9189992599510674e2d8223d3bf2f2206",
+      "crop_xywh": [
+        513,
+        209,
+        490,
+        461
+      ],
+      "sheet_cell_xywh": [
+        465,
+        0,
+        558,
+        724
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "content_scale": 0.04736842105263158,
+      "content_anchor_xy": [
+        11,
+        22
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/walker_death",
+      "frame": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/walker_death_1.png",
+      "prompt": "implementation/sprites/generation/0015-walker-death.prompt.txt",
+      "prompt_sha256": "191fb37e3a60842c5a1c36da4b910e84d814ae027fa99ac8d545f00950390b59",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/walker/master.png",
+          "sha256": "c9cbd7ae7fb219c00809ecc11e478696567a56287afc488b9eb38352e65fcde1",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/masters/walker.png",
+          "sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 0,
+      "enemy_family": "walker",
+      "enemy_motion": "death",
+      "enemy_master_id": "enemies/walker",
+      "scale_reference": {
+        "role": "first buckling pose",
+        "raw_height": 570,
+        "native_height": 27
+      },
+      "ground_measurement": "collapse bounds midpoint",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "variant_of": "enemies/walker_death_0",
+      "output_sha256": "9a85152935dc94baa16686ef2aa9fff7b251b91fedc901d0f4d07837fd811fcd"
+    },
+    {
+      "id": "enemies/walker_death_2",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/walker/death.png",
+      "source_sha256": "bc5e8b3239168d1212ad7bf95202d4c9189992599510674e2d8223d3bf2f2206",
+      "crop_xywh": [
+        1043,
+        358,
+        550,
+        297
+      ],
+      "sheet_cell_xywh": [
+        1023,
+        0,
+        583,
+        724
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "content_scale": 0.04736842105263158,
+      "content_anchor_xy": [
+        13,
+        14
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/walker_death",
+      "frame": 2,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/walker_death_2.png",
+      "prompt": "implementation/sprites/generation/0015-walker-death.prompt.txt",
+      "prompt_sha256": "191fb37e3a60842c5a1c36da4b910e84d814ae027fa99ac8d545f00950390b59",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/walker/master.png",
+          "sha256": "c9cbd7ae7fb219c00809ecc11e478696567a56287afc488b9eb38352e65fcde1",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/masters/walker.png",
+          "sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 0,
+      "enemy_family": "walker",
+      "enemy_motion": "death",
+      "enemy_master_id": "enemies/walker",
+      "scale_reference": {
+        "role": "first buckling pose",
+        "raw_height": 570,
+        "native_height": 27
+      },
+      "ground_measurement": "collapse bounds midpoint",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "variant_of": "enemies/walker_death_0",
+      "output_sha256": "531fbfdd96d897e77988913536bf36ddef2fd43c4eb3778000b886b87c1fa975"
+    },
+    {
+      "id": "enemies/walker_death_3",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/walker/death.png",
+      "source_sha256": "bc5e8b3239168d1212ad7bf95202d4c9189992599510674e2d8223d3bf2f2206",
+      "crop_xywh": [
+        1619,
+        437,
+        539,
+        212
+      ],
+      "sheet_cell_xywh": [
+        1606,
+        0,
+        566,
+        724
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "content_scale": 0.04736842105263158,
+      "content_anchor_xy": [
+        13,
+        10
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/walker_death",
+      "frame": 3,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/walker_death_3.png",
+      "prompt": "implementation/sprites/generation/0015-walker-death.prompt.txt",
+      "prompt_sha256": "191fb37e3a60842c5a1c36da4b910e84d814ae027fa99ac8d545f00950390b59",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/walker/master.png",
+          "sha256": "c9cbd7ae7fb219c00809ecc11e478696567a56287afc488b9eb38352e65fcde1",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/masters/walker.png",
+          "sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 0,
+      "enemy_family": "walker",
+      "enemy_motion": "death",
+      "enemy_master_id": "enemies/walker",
+      "scale_reference": {
+        "role": "first buckling pose",
+        "raw_height": 570,
+        "native_height": 27
+      },
+      "ground_measurement": "collapse bounds midpoint",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "variant_of": "enemies/walker_death_0",
+      "output_sha256": "3c20c0d6ba72a253b87b0ba125136e06994571d8677c92d7eeadde7708a81246"
+    },
+    {
+      "id": "enemies/walker_walk_b",
+      "owner": "raster",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/walker_compat_walk_b",
+      "frame": 0,
+      "seconds": 0.125,
+      "loop": false,
+      "output": "sprites/enemies/walker_walk_b.png",
+      "prompt": "implementation/sprites/generation/0015-walker-walk.prompt.txt",
+      "prompt_sha256": "91673651a40240ff0278e2914de5e923650ec24fda6d42d1a4d61dcf575c364c",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/walker/master.png",
+          "sha256": "c9cbd7ae7fb219c00809ecc11e478696567a56287afc488b9eb38352e65fcde1",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/masters/walker.png",
+          "sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 0,
+      "enemy_family": "walker",
+      "enemy_motion": "walk",
+      "enemy_master_id": "enemies/walker",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "output_sha256": "fd1695b7025e85d80be12478d5001521aede8324a2771bf67d1c4cc507e3e117",
+      "input": "enemies/walker_walk_2",
+      "operation": "copy",
+      "alias_of": "enemies/walker_walk_2"
+    },
+    {
+      "id": "enemies/walker_attack",
+      "owner": "raster",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/walker_compat_attack",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/walker_attack.png",
+      "prompt": "implementation/sprites/generation/0015-walker-attack.prompt.txt",
+      "prompt_sha256": "8b8d49e33d64b838f9b79dca762916a6ae3737747415c09db4f0292493b0d87c",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/walker/master.png",
+          "sha256": "c9cbd7ae7fb219c00809ecc11e478696567a56287afc488b9eb38352e65fcde1",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/masters/walker.png",
+          "sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 0,
+      "enemy_family": "walker",
+      "enemy_motion": "attack",
+      "enemy_master_id": "enemies/walker",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "output_sha256": "06128bb814feb8298f411acd87851908465c5cd6b3491273df6224238f6a42bb",
+      "input": "enemies/walker_attack_1",
+      "operation": "copy",
+      "alias_of": "enemies/walker_attack_1"
+    },
+    {
+      "id": "enemies/walker_death",
+      "owner": "raster",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/walker_compat_death",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/walker_death.png",
+      "prompt": "implementation/sprites/generation/0015-walker-death.prompt.txt",
+      "prompt_sha256": "191fb37e3a60842c5a1c36da4b910e84d814ae027fa99ac8d545f00950390b59",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/walker/master.png",
+          "sha256": "c9cbd7ae7fb219c00809ecc11e478696567a56287afc488b9eb38352e65fcde1",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/masters/walker.png",
+          "sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 0,
+      "enemy_family": "walker",
+      "enemy_motion": "death",
+      "enemy_master_id": "enemies/walker",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "output_sha256": "3c20c0d6ba72a253b87b0ba125136e06994571d8677c92d7eeadde7708a81246",
+      "input": "enemies/walker_death_3",
+      "operation": "copy",
+      "alias_of": "enemies/walker_death_3"
+    },
+    {
+      "id": "enemies/runner",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/runner/master.png",
+      "source_sha256": "ba8d17160c93b9068379ba62d4f0b84616876d1160e012120cd609146e882b5b",
+      "crop_xywh": [
+        222,
+        232,
+        727,
+        1059
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        1086,
+        1448
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "content_scale": 0.027384324834749764,
+      "content_anchor_xy": [
+        6,
+        29
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/runner_master",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": true,
+      "output": "sprites/enemies/runner.png",
+      "prompt": "implementation/sprites/generation/0015-runner-master.prompt.txt",
+      "prompt_sha256": "2534d80e8b62bc211cdae2310266a09345a139fa196b41488880dba2814a4f6b",
+      "references": [
+        {
+          "path": "assets/art_source/masters/walker.png",
+          "sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 0,
+      "enemy_family": "runner",
+      "enemy_motion": "master",
+      "enemy_master_id": "enemies/runner",
+      "scale_reference": {
+        "role": "tallest standing pose",
+        "raw_height": 1059,
+        "native_height": 29
+      },
+      "ground_measurement": "lowest two native alpha rows",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "output_sha256": "2df6d10ec083d5995f65c77613a41f099a8f8f5c8dac73241711c52f6302cfc2"
+    },
+    {
+      "id": "enemies/runner_walk_0",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/runner/walk.png",
+      "source_sha256": "a3af08691581a69a88b4fca8a38d9e27de9cd73f18fd350872237933bde56d57",
+      "crop_xywh": [
+        37,
+        96,
+        462,
+        648
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        514,
+        793
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "content_scale": 0.044753086419753084,
+      "content_anchor_xy": [
+        6,
+        29
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/runner_walk",
+      "frame": 0,
+      "seconds": 0.125,
+      "loop": true,
+      "output": "sprites/enemies/runner_walk_0.png",
+      "prompt": "implementation/sprites/generation/0015-runner-walk.prompt.txt",
+      "prompt_sha256": "984c5fa9627995629c15216e1050ac3c10e0bf2322e200821143e42597ddfc05",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/runner/master.png",
+          "sha256": "ba8d17160c93b9068379ba62d4f0b84616876d1160e012120cd609146e882b5b",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/masters/walker.png",
+          "sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 0,
+      "enemy_family": "runner",
+      "enemy_motion": "walk",
+      "enemy_master_id": "enemies/runner",
+      "scale_reference": {
+        "role": "tallest standing pose",
+        "raw_height": 648,
+        "native_height": 29
+      },
+      "ground_measurement": "lowest two native alpha rows",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "output_sha256": "8937bc6993e9497c1c946038ca99fb6e0efeea5fbf4973ccaea773c1bdcea546"
+    },
+    {
+      "id": "enemies/runner_walk_1",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/runner/walk.png",
+      "source_sha256": "a3af08691581a69a88b4fca8a38d9e27de9cd73f18fd350872237933bde56d57",
+      "crop_xywh": [
+        530,
+        96,
+        452,
+        628
+      ],
+      "sheet_cell_xywh": [
+        514,
+        0,
+        482,
+        793
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "content_scale": 0.044753086419753084,
+      "content_anchor_xy": [
+        18,
+        28
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/runner_walk",
+      "frame": 1,
+      "seconds": 0.125,
+      "loop": true,
+      "output": "sprites/enemies/runner_walk_1.png",
+      "prompt": "implementation/sprites/generation/0015-runner-walk.prompt.txt",
+      "prompt_sha256": "984c5fa9627995629c15216e1050ac3c10e0bf2322e200821143e42597ddfc05",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/runner/master.png",
+          "sha256": "ba8d17160c93b9068379ba62d4f0b84616876d1160e012120cd609146e882b5b",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/masters/walker.png",
+          "sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 0,
+      "enemy_family": "runner",
+      "enemy_motion": "walk",
+      "enemy_master_id": "enemies/runner",
+      "scale_reference": {
+        "role": "tallest standing pose",
+        "raw_height": 648,
+        "native_height": 29
+      },
+      "ground_measurement": "lowest two native alpha rows",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "variant_of": "enemies/runner_walk_0",
+      "output_sha256": "c2723eba96f3216353c3a87e1e69b9eae5f6d74e1da7345ff5a4b99771df368e"
+    },
+    {
+      "id": "enemies/runner_walk_2",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/runner/walk.png",
+      "source_sha256": "a3af08691581a69a88b4fca8a38d9e27de9cd73f18fd350872237933bde56d57",
+      "crop_xywh": [
+        1010,
+        100,
+        476,
+        634
+      ],
+      "sheet_cell_xywh": [
+        996,
+        0,
+        506,
+        793
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "content_scale": 0.044753086419753084,
+      "content_anchor_xy": [
+        8,
+        28
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/runner_walk",
+      "frame": 2,
+      "seconds": 0.125,
+      "loop": true,
+      "output": "sprites/enemies/runner_walk_2.png",
+      "prompt": "implementation/sprites/generation/0015-runner-walk.prompt.txt",
+      "prompt_sha256": "984c5fa9627995629c15216e1050ac3c10e0bf2322e200821143e42597ddfc05",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/runner/master.png",
+          "sha256": "ba8d17160c93b9068379ba62d4f0b84616876d1160e012120cd609146e882b5b",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/masters/walker.png",
+          "sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 0,
+      "enemy_family": "runner",
+      "enemy_motion": "walk",
+      "enemy_master_id": "enemies/runner",
+      "scale_reference": {
+        "role": "tallest standing pose",
+        "raw_height": 648,
+        "native_height": 29
+      },
+      "ground_measurement": "lowest two native alpha rows",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "variant_of": "enemies/runner_walk_0",
+      "output_sha256": "82b4eb70a70ded18672bc6bff65acbac8c07910a6985e4cc651e924cc72531c3"
+    },
+    {
+      "id": "enemies/runner_walk_3",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/runner/walk.png",
+      "source_sha256": "a3af08691581a69a88b4fca8a38d9e27de9cd73f18fd350872237933bde56d57",
+      "crop_xywh": [
+        1518,
+        96,
+        441,
+        629
+      ],
+      "sheet_cell_xywh": [
+        1502,
+        0,
+        481,
+        793
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "content_scale": 0.044753086419753084,
+      "content_anchor_xy": [
+        17,
+        28
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/runner_walk",
+      "frame": 3,
+      "seconds": 0.125,
+      "loop": true,
+      "output": "sprites/enemies/runner_walk_3.png",
+      "prompt": "implementation/sprites/generation/0015-runner-walk.prompt.txt",
+      "prompt_sha256": "984c5fa9627995629c15216e1050ac3c10e0bf2322e200821143e42597ddfc05",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/runner/master.png",
+          "sha256": "ba8d17160c93b9068379ba62d4f0b84616876d1160e012120cd609146e882b5b",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/masters/walker.png",
+          "sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 0,
+      "enemy_family": "runner",
+      "enemy_motion": "walk",
+      "enemy_master_id": "enemies/runner",
+      "scale_reference": {
+        "role": "tallest standing pose",
+        "raw_height": 648,
+        "native_height": 29
+      },
+      "ground_measurement": "lowest two native alpha rows",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "variant_of": "enemies/runner_walk_0",
+      "output_sha256": "a5fb4607fbdb9ebdfc6f0b1ba0939e0ee24230a926012bbf28bb5d6a972a3dab"
+    },
+    {
+      "id": "enemies/runner_attack_0",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/runner/attack.png",
+      "source_sha256": "899d7f7aac6bcc5405b512bd76a777862aaf253b02f30004d9234b60dfc35a9a",
+      "crop_xywh": [
+        44,
+        131,
+        534,
+        643
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        602,
+        836
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "content_scale": 0.04380664652567976,
+      "content_anchor_xy": [
+        12,
+        28
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/runner_attack",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/runner_attack_0.png",
+      "prompt": "implementation/sprites/generation/0015-runner-attack.prompt.txt",
+      "prompt_sha256": "aadd7bed9fa5770d73c3f0a7ab38d2ecf5468ffba52180dfab780e3d29a5ea00",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/runner/master.png",
+          "sha256": "ba8d17160c93b9068379ba62d4f0b84616876d1160e012120cd609146e882b5b",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/masters/walker.png",
+          "sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 0,
+      "enemy_family": "runner",
+      "enemy_motion": "attack",
+      "enemy_master_id": "enemies/runner",
+      "scale_reference": {
+        "role": "recovery standing pose",
+        "raw_height": 662,
+        "native_height": 29
+      },
+      "ground_measurement": "lowest two native alpha rows",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "output_sha256": "9f358ac078965990c83027ff5eb4b8fd642897b9747c2d71f92cced2790b320b"
+    },
+    {
+      "id": "enemies/runner_attack_1",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/runner/attack.png",
+      "source_sha256": "899d7f7aac6bcc5405b512bd76a777862aaf253b02f30004d9234b60dfc35a9a",
+      "crop_xywh": [
+        626,
+        160,
+        721,
+        618
+      ],
+      "sheet_cell_xywh": [
+        602,
+        0,
+        745,
+        836
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "content_scale": 0.04380664652567976,
+      "content_anchor_xy": [
+        21,
+        27
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/runner_attack",
+      "frame": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/runner_attack_1.png",
+      "prompt": "implementation/sprites/generation/0015-runner-attack.prompt.txt",
+      "prompt_sha256": "aadd7bed9fa5770d73c3f0a7ab38d2ecf5468ffba52180dfab780e3d29a5ea00",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/runner/master.png",
+          "sha256": "ba8d17160c93b9068379ba62d4f0b84616876d1160e012120cd609146e882b5b",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/masters/walker.png",
+          "sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 0,
+      "enemy_family": "runner",
+      "enemy_motion": "attack",
+      "enemy_master_id": "enemies/runner",
+      "scale_reference": {
+        "role": "recovery standing pose",
+        "raw_height": 662,
+        "native_height": 29
+      },
+      "ground_measurement": "lowest two native alpha rows",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "variant_of": "enemies/runner_attack_0",
+      "output_sha256": "0b8d1b8f291f496eaa23dad0f93ced1229d190a171168d0693ab6a1871d4c58e"
+    },
+    {
+      "id": "enemies/runner_attack_2",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/runner/attack.png",
+      "source_sha256": "899d7f7aac6bcc5405b512bd76a777862aaf253b02f30004d9234b60dfc35a9a",
+      "crop_xywh": [
+        1348,
+        122,
+        501,
+        662
+      ],
+      "sheet_cell_xywh": [
+        1347,
+        0,
+        534,
+        836
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "content_scale": 0.04380664652567976,
+      "content_anchor_xy": [
+        13,
+        29
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/runner_attack",
+      "frame": 2,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/runner_attack_2.png",
+      "prompt": "implementation/sprites/generation/0015-runner-attack.prompt.txt",
+      "prompt_sha256": "aadd7bed9fa5770d73c3f0a7ab38d2ecf5468ffba52180dfab780e3d29a5ea00",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/runner/master.png",
+          "sha256": "ba8d17160c93b9068379ba62d4f0b84616876d1160e012120cd609146e882b5b",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/masters/walker.png",
+          "sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 0,
+      "enemy_family": "runner",
+      "enemy_motion": "attack",
+      "enemy_master_id": "enemies/runner",
+      "scale_reference": {
+        "role": "recovery standing pose",
+        "raw_height": 662,
+        "native_height": 29
+      },
+      "ground_measurement": "lowest two native alpha rows",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "variant_of": "enemies/runner_attack_0",
+      "output_sha256": "8d8d5ffdb01beef3dbd0241982101b8770b39a5f7437c72ca83e4f3fade8a929"
+    },
+    {
+      "id": "enemies/runner_death_0",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/runner/death-r1.png",
+      "source_sha256": "4ec8f9cc1c56937c698e4f3d05dbdde72f180fa5034d9e61be7afd6501b90e2e",
+      "crop_xywh": [
+        64,
+        167,
+        413,
+        462
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        535,
+        724
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "content_scale": 0.05844155844155844,
+      "content_anchor_xy": [
+        12,
+        27
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/runner_death",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/runner_death_0.png",
+      "prompt": "implementation/sprites/generation/0015-runner-death-r1.prompt.txt",
+      "prompt_sha256": "e0b926153bf5a40bfc1b0ba00f84865c0312e9543e96ad095f4516f14bffe2a5",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/runner/death.png",
+          "sha256": "5aaed5efbb1fd5fc7583ea20935d6c5e1b6bb796315f167c0f9ffb49a2e2eca3",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/enemies/runner/master.png",
+          "sha256": "ba8d17160c93b9068379ba62d4f0b84616876d1160e012120cd609146e882b5b",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 1,
+      "enemy_family": "runner",
+      "enemy_motion": "death",
+      "enemy_master_id": "enemies/runner",
+      "scale_reference": {
+        "role": "first buckling pose",
+        "raw_height": 462,
+        "native_height": 27
+      },
+      "ground_measurement": "collapse bounds midpoint",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "output_sha256": "3c769b9dd16d4c9348c7a078cd00f7efb870abba7f83963fafc85a7f9442dfca"
+    },
+    {
+      "id": "enemies/runner_death_1",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/runner/death-r1.png",
+      "source_sha256": "4ec8f9cc1c56937c698e4f3d05dbdde72f180fa5034d9e61be7afd6501b90e2e",
+      "crop_xywh": [
+        593,
+        282,
+        428,
+        347
+      ],
+      "sheet_cell_xywh": [
+        535,
+        0,
+        530,
+        724
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "content_scale": 0.05844155844155844,
+      "content_anchor_xy": [
+        12,
+        20
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/runner_death",
+      "frame": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/runner_death_1.png",
+      "prompt": "implementation/sprites/generation/0015-runner-death-r1.prompt.txt",
+      "prompt_sha256": "e0b926153bf5a40bfc1b0ba00f84865c0312e9543e96ad095f4516f14bffe2a5",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/runner/death.png",
+          "sha256": "5aaed5efbb1fd5fc7583ea20935d6c5e1b6bb796315f167c0f9ffb49a2e2eca3",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/enemies/runner/master.png",
+          "sha256": "ba8d17160c93b9068379ba62d4f0b84616876d1160e012120cd609146e882b5b",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 1,
+      "enemy_family": "runner",
+      "enemy_motion": "death",
+      "enemy_master_id": "enemies/runner",
+      "scale_reference": {
+        "role": "first buckling pose",
+        "raw_height": 462,
+        "native_height": 27
+      },
+      "ground_measurement": "collapse bounds midpoint",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "variant_of": "enemies/runner_death_0",
+      "output_sha256": "47f044348571d21f1f66b1441c607f0ebd71f52792479eee5973c533b60ff2fa"
+    },
+    {
+      "id": "enemies/runner_death_2",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/runner/death-r1.png",
+      "source_sha256": "4ec8f9cc1c56937c698e4f3d05dbdde72f180fa5034d9e61be7afd6501b90e2e",
+      "crop_xywh": [
+        1109,
+        383,
+        469,
+        247
+      ],
+      "sheet_cell_xywh": [
+        1065,
+        0,
+        559,
+        724
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "content_scale": 0.05844155844155844,
+      "content_anchor_xy": [
+        13,
+        14
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/runner_death",
+      "frame": 2,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/runner_death_2.png",
+      "prompt": "implementation/sprites/generation/0015-runner-death-r1.prompt.txt",
+      "prompt_sha256": "e0b926153bf5a40bfc1b0ba00f84865c0312e9543e96ad095f4516f14bffe2a5",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/runner/death.png",
+          "sha256": "5aaed5efbb1fd5fc7583ea20935d6c5e1b6bb796315f167c0f9ffb49a2e2eca3",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/enemies/runner/master.png",
+          "sha256": "ba8d17160c93b9068379ba62d4f0b84616876d1160e012120cd609146e882b5b",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 1,
+      "enemy_family": "runner",
+      "enemy_motion": "death",
+      "enemy_master_id": "enemies/runner",
+      "scale_reference": {
+        "role": "first buckling pose",
+        "raw_height": 462,
+        "native_height": 27
+      },
+      "ground_measurement": "collapse bounds midpoint",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "variant_of": "enemies/runner_death_0",
+      "output_sha256": "2d9da0536cddccf23b3913e5bde9c0285348729198f5c01b855b8fba3d9c4266"
+    },
+    {
+      "id": "enemies/runner_death_3",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/runner/death-r1.png",
+      "source_sha256": "4ec8f9cc1c56937c698e4f3d05dbdde72f180fa5034d9e61be7afd6501b90e2e",
+      "crop_xywh": [
+        1671,
+        464,
+        462,
+        172
+      ],
+      "sheet_cell_xywh": [
+        1624,
+        0,
+        548,
+        724
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "content_scale": 0.05844155844155844,
+      "content_anchor_xy": [
+        13,
+        10
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/runner_death",
+      "frame": 3,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/runner_death_3.png",
+      "prompt": "implementation/sprites/generation/0015-runner-death-r1.prompt.txt",
+      "prompt_sha256": "e0b926153bf5a40bfc1b0ba00f84865c0312e9543e96ad095f4516f14bffe2a5",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/runner/death.png",
+          "sha256": "5aaed5efbb1fd5fc7583ea20935d6c5e1b6bb796315f167c0f9ffb49a2e2eca3",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/enemies/runner/master.png",
+          "sha256": "ba8d17160c93b9068379ba62d4f0b84616876d1160e012120cd609146e882b5b",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 1,
+      "enemy_family": "runner",
+      "enemy_motion": "death",
+      "enemy_master_id": "enemies/runner",
+      "scale_reference": {
+        "role": "first buckling pose",
+        "raw_height": 462,
+        "native_height": 27
+      },
+      "ground_measurement": "collapse bounds midpoint",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "variant_of": "enemies/runner_death_0",
+      "output_sha256": "b711a535a59b3290cbf5a9821a77a2c224a6784fd9cf6a0357a562f9896c77f3"
+    },
+    {
+      "id": "enemies/runner_walk_b",
+      "owner": "raster",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/runner_compat_walk_b",
+      "frame": 0,
+      "seconds": 0.125,
+      "loop": false,
+      "output": "sprites/enemies/runner_walk_b.png",
+      "prompt": "implementation/sprites/generation/0015-runner-walk.prompt.txt",
+      "prompt_sha256": "984c5fa9627995629c15216e1050ac3c10e0bf2322e200821143e42597ddfc05",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/runner/master.png",
+          "sha256": "ba8d17160c93b9068379ba62d4f0b84616876d1160e012120cd609146e882b5b",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/masters/walker.png",
+          "sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 0,
+      "enemy_family": "runner",
+      "enemy_motion": "walk",
+      "enemy_master_id": "enemies/runner",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "output_sha256": "82b4eb70a70ded18672bc6bff65acbac8c07910a6985e4cc651e924cc72531c3",
+      "input": "enemies/runner_walk_2",
+      "operation": "copy",
+      "alias_of": "enemies/runner_walk_2"
+    },
+    {
+      "id": "enemies/runner_attack",
+      "owner": "raster",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/runner_compat_attack",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/runner_attack.png",
+      "prompt": "implementation/sprites/generation/0015-runner-attack.prompt.txt",
+      "prompt_sha256": "aadd7bed9fa5770d73c3f0a7ab38d2ecf5468ffba52180dfab780e3d29a5ea00",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/runner/master.png",
+          "sha256": "ba8d17160c93b9068379ba62d4f0b84616876d1160e012120cd609146e882b5b",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/masters/walker.png",
+          "sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 0,
+      "enemy_family": "runner",
+      "enemy_motion": "attack",
+      "enemy_master_id": "enemies/runner",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "output_sha256": "0b8d1b8f291f496eaa23dad0f93ced1229d190a171168d0693ab6a1871d4c58e",
+      "input": "enemies/runner_attack_1",
+      "operation": "copy",
+      "alias_of": "enemies/runner_attack_1"
+    },
+    {
+      "id": "enemies/runner_death",
+      "owner": "raster",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/runner_compat_death",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/runner_death.png",
+      "prompt": "implementation/sprites/generation/0015-runner-death-r1.prompt.txt",
+      "prompt_sha256": "e0b926153bf5a40bfc1b0ba00f84865c0312e9543e96ad095f4516f14bffe2a5",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/runner/death.png",
+          "sha256": "5aaed5efbb1fd5fc7583ea20935d6c5e1b6bb796315f167c0f9ffb49a2e2eca3",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/enemies/runner/master.png",
+          "sha256": "ba8d17160c93b9068379ba62d4f0b84616876d1160e012120cd609146e882b5b",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 1,
+      "enemy_family": "runner",
+      "enemy_motion": "death",
+      "enemy_master_id": "enemies/runner",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "output_sha256": "b711a535a59b3290cbf5a9821a77a2c224a6784fd9cf6a0357a562f9896c77f3",
+      "input": "enemies/runner_death_3",
+      "operation": "copy",
+      "alias_of": "enemies/runner_death_3"
+    },
+    {
+      "id": "enemies/tank",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/tank/master.png",
+      "source_sha256": "a819ab464e485f0a904f8fe5aaa4ec28774068973a08ed7f04eada4c25bc62a5",
+      "crop_xywh": [
+        80,
+        203,
+        951,
+        1155
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        1086,
+        1448
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "content_scale": 0.025108225108225107,
+      "content_anchor_xy": [
+        17,
+        29
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/tank_master",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": true,
+      "output": "sprites/enemies/tank.png",
+      "prompt": "implementation/sprites/generation/0015-tank-master.prompt.txt",
+      "prompt_sha256": "e3a9b6eb1832825cd48bc9659e4571d33adb48609107783c3898282544e61dc3",
+      "references": [
+        {
+          "path": "assets/art_source/masters/walker.png",
+          "sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 0,
+      "enemy_family": "tank",
+      "enemy_motion": "master",
+      "enemy_master_id": "enemies/tank",
+      "scale_reference": {
+        "role": "tallest standing pose",
+        "raw_height": 1155,
+        "native_height": 29
+      },
+      "ground_measurement": "lowest two native alpha rows",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "output_sha256": "ce561d6b21ce1c7437cbef104d2ae52ad426b84f770df9d083c339a05f25e011"
+    },
+    {
+      "id": "enemies/tank_walk_0",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/tank/walk.png",
+      "source_sha256": "1ccfbf0f397a371d45db906c93c2d94ad59e3b0dca048e22e98a997aadf8c6c3",
+      "crop_xywh": [
+        12,
+        117,
+        500,
+        596
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        519,
+        793
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "content_scale": 0.048013245033112585,
+      "content_anchor_xy": [
+        11,
+        29
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/tank_walk",
+      "frame": 0,
+      "seconds": 0.125,
+      "loop": true,
+      "output": "sprites/enemies/tank_walk_0.png",
+      "prompt": "implementation/sprites/generation/0015-tank-walk.prompt.txt",
+      "prompt_sha256": "dbea11349e3015515c27449928df255785a1b9ab4a88451a6882d6070d64b55e",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/tank/master.png",
+          "sha256": "a819ab464e485f0a904f8fe5aaa4ec28774068973a08ed7f04eada4c25bc62a5",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/masters/walker.png",
+          "sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 0,
+      "enemy_family": "tank",
+      "enemy_motion": "walk",
+      "enemy_master_id": "enemies/tank",
+      "scale_reference": {
+        "role": "tallest standing pose",
+        "raw_height": 604,
+        "native_height": 29
+      },
+      "ground_measurement": "lowest two native alpha rows",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "output_sha256": "a6d2e2c4d275eba2dfd58617ff66a57c89694e222879b9811e9833ae8b39066e"
+    },
+    {
+      "id": "enemies/tank_walk_1",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/tank/walk.png",
+      "source_sha256": "1ccfbf0f397a371d45db906c93c2d94ad59e3b0dca048e22e98a997aadf8c6c3",
+      "crop_xywh": [
+        527,
+        117,
+        466,
+        601
+      ],
+      "sheet_cell_xywh": [
+        519,
+        0,
+        480,
+        793
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "content_scale": 0.048013245033112585,
+      "content_anchor_xy": [
+        8,
+        29
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/tank_walk",
+      "frame": 1,
+      "seconds": 0.125,
+      "loop": true,
+      "output": "sprites/enemies/tank_walk_1.png",
+      "prompt": "implementation/sprites/generation/0015-tank-walk.prompt.txt",
+      "prompt_sha256": "dbea11349e3015515c27449928df255785a1b9ab4a88451a6882d6070d64b55e",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/tank/master.png",
+          "sha256": "a819ab464e485f0a904f8fe5aaa4ec28774068973a08ed7f04eada4c25bc62a5",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/masters/walker.png",
+          "sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 0,
+      "enemy_family": "tank",
+      "enemy_motion": "walk",
+      "enemy_master_id": "enemies/tank",
+      "scale_reference": {
+        "role": "tallest standing pose",
+        "raw_height": 604,
+        "native_height": 29
+      },
+      "ground_measurement": "lowest two native alpha rows",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "variant_of": "enemies/tank_walk_0",
+      "output_sha256": "3da8230ad3b4ecbe65d662c06da8cb5e78565672ec1bd59306a0a74337aa134b"
+    },
+    {
+      "id": "enemies/tank_walk_2",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/tank/walk.png",
+      "source_sha256": "1ccfbf0f397a371d45db906c93c2d94ad59e3b0dca048e22e98a997aadf8c6c3",
+      "crop_xywh": [
+        1006,
+        115,
+        488,
+        604
+      ],
+      "sheet_cell_xywh": [
+        999,
+        0,
+        498,
+        793
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "content_scale": 0.048013245033112585,
+      "content_anchor_xy": [
+        10,
+        29
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/tank_walk",
+      "frame": 2,
+      "seconds": 0.125,
+      "loop": true,
+      "output": "sprites/enemies/tank_walk_2.png",
+      "prompt": "implementation/sprites/generation/0015-tank-walk.prompt.txt",
+      "prompt_sha256": "dbea11349e3015515c27449928df255785a1b9ab4a88451a6882d6070d64b55e",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/tank/master.png",
+          "sha256": "a819ab464e485f0a904f8fe5aaa4ec28774068973a08ed7f04eada4c25bc62a5",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/masters/walker.png",
+          "sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 0,
+      "enemy_family": "tank",
+      "enemy_motion": "walk",
+      "enemy_master_id": "enemies/tank",
+      "scale_reference": {
+        "role": "tallest standing pose",
+        "raw_height": 604,
+        "native_height": 29
+      },
+      "ground_measurement": "lowest two native alpha rows",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "variant_of": "enemies/tank_walk_0",
+      "output_sha256": "884f2e5918656e49935565f14cfb0917b7315b3ea28e814dda3b1b72303c82c6"
+    },
+    {
+      "id": "enemies/tank_walk_3",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/tank/walk.png",
+      "source_sha256": "1ccfbf0f397a371d45db906c93c2d94ad59e3b0dca048e22e98a997aadf8c6c3",
+      "crop_xywh": [
+        1501,
+        116,
+        478,
+        599
+      ],
+      "sheet_cell_xywh": [
+        1497,
+        0,
+        486,
+        793
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "content_scale": 0.048013245033112585,
+      "content_anchor_xy": [
+        10,
+        29
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/tank_walk",
+      "frame": 3,
+      "seconds": 0.125,
+      "loop": true,
+      "output": "sprites/enemies/tank_walk_3.png",
+      "prompt": "implementation/sprites/generation/0015-tank-walk.prompt.txt",
+      "prompt_sha256": "dbea11349e3015515c27449928df255785a1b9ab4a88451a6882d6070d64b55e",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/tank/master.png",
+          "sha256": "a819ab464e485f0a904f8fe5aaa4ec28774068973a08ed7f04eada4c25bc62a5",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/masters/walker.png",
+          "sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 0,
+      "enemy_family": "tank",
+      "enemy_motion": "walk",
+      "enemy_master_id": "enemies/tank",
+      "scale_reference": {
+        "role": "tallest standing pose",
+        "raw_height": 604,
+        "native_height": 29
+      },
+      "ground_measurement": "lowest two native alpha rows",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "variant_of": "enemies/tank_walk_0",
+      "output_sha256": "95dca7f22024f27ae5067066c30eac7f65d43a6891dbbd7b1a09a6e130ec5fd7"
+    },
+    {
+      "id": "enemies/tank_attack_0",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/tank/attack.png",
+      "source_sha256": "753cb94bcf829d8c9f1c812c8dc42692905c67891d6ba81f54fecdfee6c6bcd5",
+      "crop_xywh": [
+        117,
+        73,
+        532,
+        606
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        693,
+        724
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "content_scale": 0.046849757673667204,
+      "content_anchor_xy": [
+        12,
+        28
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/tank_attack",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/tank_attack_0.png",
+      "prompt": "implementation/sprites/generation/0015-tank-attack.prompt.txt",
+      "prompt_sha256": "0ef594fce2f37eac5de009677c80ee2ba431d0533951eae4c468571159237380",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/tank/master.png",
+          "sha256": "a819ab464e485f0a904f8fe5aaa4ec28774068973a08ed7f04eada4c25bc62a5",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/masters/walker.png",
+          "sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 0,
+      "enemy_family": "tank",
+      "enemy_motion": "attack",
+      "enemy_master_id": "enemies/tank",
+      "scale_reference": {
+        "role": "recovery standing pose",
+        "raw_height": 619,
+        "native_height": 29
+      },
+      "ground_measurement": "lowest two native alpha rows",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "output_sha256": "4382011d4e3ebc0434ef6b1a4570ee7150038ecbbad2d479d508e58a8941c60f"
+    },
+    {
+      "id": "enemies/tank_attack_1",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/tank/attack.png",
+      "source_sha256": "753cb94bcf829d8c9f1c812c8dc42692905c67891d6ba81f54fecdfee6c6bcd5",
+      "crop_xywh": [
+        738,
+        64,
+        702,
+        608
+      ],
+      "sheet_cell_xywh": [
+        693,
+        0,
+        791,
+        724
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "content_scale": 0.046849757673667204,
+      "content_anchor_xy": [
+        20,
+        28
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/tank_attack",
+      "frame": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/tank_attack_1.png",
+      "prompt": "implementation/sprites/generation/0015-tank-attack.prompt.txt",
+      "prompt_sha256": "0ef594fce2f37eac5de009677c80ee2ba431d0533951eae4c468571159237380",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/tank/master.png",
+          "sha256": "a819ab464e485f0a904f8fe5aaa4ec28774068973a08ed7f04eada4c25bc62a5",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/masters/walker.png",
+          "sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 0,
+      "enemy_family": "tank",
+      "enemy_motion": "attack",
+      "enemy_master_id": "enemies/tank",
+      "scale_reference": {
+        "role": "recovery standing pose",
+        "raw_height": 619,
+        "native_height": 29
+      },
+      "ground_measurement": "lowest two native alpha rows",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "variant_of": "enemies/tank_attack_0",
+      "output_sha256": "2dc33a5b3f5e4f79d5cf12697994a1ff5b4903d62d00f1dd33d3ac8e16cb8676"
+    },
+    {
+      "id": "enemies/tank_attack_2",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/tank/attack.png",
+      "source_sha256": "753cb94bcf829d8c9f1c812c8dc42692905c67891d6ba81f54fecdfee6c6bcd5",
+      "crop_xywh": [
+        1528,
+        64,
+        610,
+        619
+      ],
+      "sheet_cell_xywh": [
+        1484,
+        0,
+        688,
+        724
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "content_scale": 0.046849757673667204,
+      "content_anchor_xy": [
+        15,
+        29
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/tank_attack",
+      "frame": 2,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/tank_attack_2.png",
+      "prompt": "implementation/sprites/generation/0015-tank-attack.prompt.txt",
+      "prompt_sha256": "0ef594fce2f37eac5de009677c80ee2ba431d0533951eae4c468571159237380",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/tank/master.png",
+          "sha256": "a819ab464e485f0a904f8fe5aaa4ec28774068973a08ed7f04eada4c25bc62a5",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/masters/walker.png",
+          "sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 0,
+      "enemy_family": "tank",
+      "enemy_motion": "attack",
+      "enemy_master_id": "enemies/tank",
+      "scale_reference": {
+        "role": "recovery standing pose",
+        "raw_height": 619,
+        "native_height": 29
+      },
+      "ground_measurement": "lowest two native alpha rows",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "variant_of": "enemies/tank_attack_0",
+      "output_sha256": "058d34ee2e8c1bda6e360c977ab1f08227f9aee9aa1a1f9dcbb17e14490b9669"
+    },
+    {
+      "id": "enemies/tank_death_0",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/tank/death-r1.png",
+      "source_sha256": "4bb6ef3ea2d2e9bcad0271fdcc75207b1d1411ab6abba29efcabad6342104135",
+      "crop_xywh": [
+        40,
+        173,
+        408,
+        433
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        497,
+        726
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "content_scale": 0.06235565819861432,
+      "content_anchor_xy": [
+        12,
+        27
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/tank_death",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/tank_death_0.png",
+      "prompt": "implementation/sprites/generation/0015-tank-death-r1.prompt.txt",
+      "prompt_sha256": "d24b35b835ed27f61c40193a84fdb460b4903607096c33ca025f8ba5eee75f5e",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/tank/death.png",
+          "sha256": "134b374943d229c137306d59c45dd6c3507c0377b25001a02a861cf11fdd9e6a",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/enemies/tank/master.png",
+          "sha256": "a819ab464e485f0a904f8fe5aaa4ec28774068973a08ed7f04eada4c25bc62a5",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 1,
+      "enemy_family": "tank",
+      "enemy_motion": "death",
+      "enemy_master_id": "enemies/tank",
+      "scale_reference": {
+        "role": "first buckling pose",
+        "raw_height": 433,
+        "native_height": 27
+      },
+      "ground_measurement": "collapse bounds midpoint",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "output_sha256": "43bdc94932c2d75cebcb5c2b9bc4bd97c96796762ccd484993d516f846eef486"
+    },
+    {
+      "id": "enemies/tank_death_1",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/tank/death-r1.png",
+      "source_sha256": "4bb6ef3ea2d2e9bcad0271fdcc75207b1d1411ab6abba29efcabad6342104135",
+      "crop_xywh": [
+        546,
+        230,
+        437,
+        382
+      ],
+      "sheet_cell_xywh": [
+        497,
+        0,
+        530,
+        726
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "content_scale": 0.06235565819861432,
+      "content_anchor_xy": [
+        13,
+        24
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/tank_death",
+      "frame": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/tank_death_1.png",
+      "prompt": "implementation/sprites/generation/0015-tank-death-r1.prompt.txt",
+      "prompt_sha256": "d24b35b835ed27f61c40193a84fdb460b4903607096c33ca025f8ba5eee75f5e",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/tank/death.png",
+          "sha256": "134b374943d229c137306d59c45dd6c3507c0377b25001a02a861cf11fdd9e6a",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/enemies/tank/master.png",
+          "sha256": "a819ab464e485f0a904f8fe5aaa4ec28774068973a08ed7f04eada4c25bc62a5",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 1,
+      "enemy_family": "tank",
+      "enemy_motion": "death",
+      "enemy_master_id": "enemies/tank",
+      "scale_reference": {
+        "role": "first buckling pose",
+        "raw_height": 433,
+        "native_height": 27
+      },
+      "ground_measurement": "collapse bounds midpoint",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "variant_of": "enemies/tank_death_0",
+      "output_sha256": "7a5bbf71a8b73163b7c794b64c66832ccc2cacf0ef5bf8edb6ebd7bcc1c94fc3"
+    },
+    {
+      "id": "enemies/tank_death_2",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/tank/death-r1.png",
+      "source_sha256": "4bb6ef3ea2d2e9bcad0271fdcc75207b1d1411ab6abba29efcabad6342104135",
+      "crop_xywh": [
+        1071,
+        341,
+        455,
+        274
+      ],
+      "sheet_cell_xywh": [
+        1027,
+        0,
+        540,
+        726
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "content_scale": 0.06235565819861432,
+      "content_anchor_xy": [
+        14,
+        17
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/tank_death",
+      "frame": 2,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/tank_death_2.png",
+      "prompt": "implementation/sprites/generation/0015-tank-death-r1.prompt.txt",
+      "prompt_sha256": "d24b35b835ed27f61c40193a84fdb460b4903607096c33ca025f8ba5eee75f5e",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/tank/death.png",
+          "sha256": "134b374943d229c137306d59c45dd6c3507c0377b25001a02a861cf11fdd9e6a",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/enemies/tank/master.png",
+          "sha256": "a819ab464e485f0a904f8fe5aaa4ec28774068973a08ed7f04eada4c25bc62a5",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 1,
+      "enemy_family": "tank",
+      "enemy_motion": "death",
+      "enemy_master_id": "enemies/tank",
+      "scale_reference": {
+        "role": "first buckling pose",
+        "raw_height": 433,
+        "native_height": 27
+      },
+      "ground_measurement": "collapse bounds midpoint",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "variant_of": "enemies/tank_death_0",
+      "output_sha256": "546eedb870aa07708a3fbd1146cb8dac028fbb85155acc06e8d43f39ccabfe6b"
+    },
+    {
+      "id": "enemies/tank_death_3",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/tank/death-r1.png",
+      "source_sha256": "4bb6ef3ea2d2e9bcad0271fdcc75207b1d1411ab6abba29efcabad6342104135",
+      "crop_xywh": [
+        1609,
+        394,
+        512,
+        223
+      ],
+      "sheet_cell_xywh": [
+        1567,
+        0,
+        600,
+        726
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "content_scale": 0.06235565819861432,
+      "content_anchor_xy": [
+        16,
+        14
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/tank_death",
+      "frame": 3,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/tank_death_3.png",
+      "prompt": "implementation/sprites/generation/0015-tank-death-r1.prompt.txt",
+      "prompt_sha256": "d24b35b835ed27f61c40193a84fdb460b4903607096c33ca025f8ba5eee75f5e",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/tank/death.png",
+          "sha256": "134b374943d229c137306d59c45dd6c3507c0377b25001a02a861cf11fdd9e6a",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/enemies/tank/master.png",
+          "sha256": "a819ab464e485f0a904f8fe5aaa4ec28774068973a08ed7f04eada4c25bc62a5",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 1,
+      "enemy_family": "tank",
+      "enemy_motion": "death",
+      "enemy_master_id": "enemies/tank",
+      "scale_reference": {
+        "role": "first buckling pose",
+        "raw_height": 433,
+        "native_height": 27
+      },
+      "ground_measurement": "collapse bounds midpoint",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "variant_of": "enemies/tank_death_0",
+      "output_sha256": "9cb525f7f6980a90f6da4007b7bc8f821764ef2f6d8864b08566d54a87f68fc2"
+    },
+    {
+      "id": "enemies/tank_walk_b",
+      "owner": "raster",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/tank_compat_walk_b",
+      "frame": 0,
+      "seconds": 0.125,
+      "loop": false,
+      "output": "sprites/enemies/tank_walk_b.png",
+      "prompt": "implementation/sprites/generation/0015-tank-walk.prompt.txt",
+      "prompt_sha256": "dbea11349e3015515c27449928df255785a1b9ab4a88451a6882d6070d64b55e",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/tank/master.png",
+          "sha256": "a819ab464e485f0a904f8fe5aaa4ec28774068973a08ed7f04eada4c25bc62a5",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/masters/walker.png",
+          "sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 0,
+      "enemy_family": "tank",
+      "enemy_motion": "walk",
+      "enemy_master_id": "enemies/tank",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "output_sha256": "884f2e5918656e49935565f14cfb0917b7315b3ea28e814dda3b1b72303c82c6",
+      "input": "enemies/tank_walk_2",
+      "operation": "copy",
+      "alias_of": "enemies/tank_walk_2"
+    },
+    {
+      "id": "enemies/tank_attack",
+      "owner": "raster",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/tank_compat_attack",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/tank_attack.png",
+      "prompt": "implementation/sprites/generation/0015-tank-attack.prompt.txt",
+      "prompt_sha256": "0ef594fce2f37eac5de009677c80ee2ba431d0533951eae4c468571159237380",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/tank/master.png",
+          "sha256": "a819ab464e485f0a904f8fe5aaa4ec28774068973a08ed7f04eada4c25bc62a5",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/masters/walker.png",
+          "sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 0,
+      "enemy_family": "tank",
+      "enemy_motion": "attack",
+      "enemy_master_id": "enemies/tank",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "output_sha256": "2dc33a5b3f5e4f79d5cf12697994a1ff5b4903d62d00f1dd33d3ac8e16cb8676",
+      "input": "enemies/tank_attack_1",
+      "operation": "copy",
+      "alias_of": "enemies/tank_attack_1"
+    },
+    {
+      "id": "enemies/tank_death",
+      "owner": "raster",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/tank_compat_death",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/tank_death.png",
+      "prompt": "implementation/sprites/generation/0015-tank-death-r1.prompt.txt",
+      "prompt_sha256": "d24b35b835ed27f61c40193a84fdb460b4903607096c33ca025f8ba5eee75f5e",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/tank/death.png",
+          "sha256": "134b374943d229c137306d59c45dd6c3507c0377b25001a02a861cf11fdd9e6a",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/enemies/tank/master.png",
+          "sha256": "a819ab464e485f0a904f8fe5aaa4ec28774068973a08ed7f04eada4c25bc62a5",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 1,
+      "enemy_family": "tank",
+      "enemy_motion": "death",
+      "enemy_master_id": "enemies/tank",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "output_sha256": "9cb525f7f6980a90f6da4007b7bc8f821764ef2f6d8864b08566d54a87f68fc2",
+      "input": "enemies/tank_death_3",
+      "operation": "copy",
+      "alias_of": "enemies/tank_death_3"
+    },
+    {
+      "id": "enemies/breaker",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/breaker/master.png",
+      "source_sha256": "6b014e232b44c98f74ef1e8884f1c31cc3bcd9bba5b789224ad08b207913eda8",
+      "crop_xywh": [
+        99,
+        187,
+        998,
+        1137
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        1122,
+        1402
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "content_scale": 0.025505716798592787,
+      "content_anchor_xy": [
+        11,
+        29
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/breaker_master",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": true,
+      "output": "sprites/enemies/breaker.png",
+      "prompt": "implementation/sprites/generation/0015-breaker-master.prompt.txt",
+      "prompt_sha256": "77913d794c689f8706f9f0679b8fa6020092d1ac979864980a9b0452b34710ff",
+      "references": [
+        {
+          "path": "assets/art_source/masters/walker.png",
+          "sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 0,
+      "enemy_family": "breaker",
+      "enemy_motion": "master",
+      "enemy_master_id": "enemies/breaker",
+      "scale_reference": {
+        "role": "tallest standing pose",
+        "raw_height": 1137,
+        "native_height": 29
+      },
+      "ground_measurement": "lowest two native alpha rows",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "output_sha256": "00ae35d13b104019b4a2b7bc58259409d26d4cbe59613df76233ba263cb9bcb6"
+    },
+    {
+      "id": "enemies/breaker_walk_0",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/breaker/walk-r2.png",
+      "source_sha256": "e8b4c928e4528cf842838e76afefcc83f05a11df93096e56c4ab30b9e6a06cae",
+      "crop_xywh": [
+        30,
+        132,
+        474,
+        560
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        518,
+        780
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "content_scale": 0.050966608084358524,
+      "content_anchor_xy": [
+        7,
+        29
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/breaker_walk",
+      "frame": 0,
+      "seconds": 0.125,
+      "loop": true,
+      "output": "sprites/enemies/breaker_walk_0.png",
+      "prompt": "implementation/sprites/generation/0015-breaker-walk-r2.prompt.txt",
+      "prompt_sha256": "c7e4d5d8460c4ed191ac10b72b3b39d22ad6488927b73434b8071557e6ab30f4",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/breaker/master.png",
+          "sha256": "6b014e232b44c98f74ef1e8884f1c31cc3bcd9bba5b789224ad08b207913eda8",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/masters/walker.png",
+          "sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 2,
+      "enemy_family": "breaker",
+      "enemy_motion": "walk",
+      "enemy_master_id": "enemies/breaker",
+      "scale_reference": {
+        "role": "tallest standing pose",
+        "raw_height": 569,
+        "native_height": 29
+      },
+      "ground_measurement": "lowest two native alpha rows",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "output_sha256": "28c6aba3e63dd06ac1f2eb082d2a76697e09ad4ec5bcba698ce363a064dd5aa4"
+    },
+    {
+      "id": "enemies/breaker_walk_1",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/breaker/walk-r2.png",
+      "source_sha256": "e8b4c928e4528cf842838e76afefcc83f05a11df93096e56c4ab30b9e6a06cae",
+      "crop_xywh": [
+        533,
+        125,
+        476,
+        566
+      ],
+      "sheet_cell_xywh": [
+        518,
+        0,
+        505,
+        780
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "content_scale": 0.050966608084358524,
+      "content_anchor_xy": [
+        8,
+        29
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/breaker_walk",
+      "frame": 1,
+      "seconds": 0.125,
+      "loop": true,
+      "output": "sprites/enemies/breaker_walk_1.png",
+      "prompt": "implementation/sprites/generation/0015-breaker-walk-r2.prompt.txt",
+      "prompt_sha256": "c7e4d5d8460c4ed191ac10b72b3b39d22ad6488927b73434b8071557e6ab30f4",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/breaker/master.png",
+          "sha256": "6b014e232b44c98f74ef1e8884f1c31cc3bcd9bba5b789224ad08b207913eda8",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/masters/walker.png",
+          "sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 2,
+      "enemy_family": "breaker",
+      "enemy_motion": "walk",
+      "enemy_master_id": "enemies/breaker",
+      "scale_reference": {
+        "role": "tallest standing pose",
+        "raw_height": 569,
+        "native_height": 29
+      },
+      "ground_measurement": "lowest two native alpha rows",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "variant_of": "enemies/breaker_walk_0",
+      "output_sha256": "c15e792ef2cdd5331c14f72b0551160902ff4d9f58030546a70fb7cbb680afc4"
+    },
+    {
+      "id": "enemies/breaker_walk_2",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/breaker/walk-r2.png",
+      "source_sha256": "e8b4c928e4528cf842838e76afefcc83f05a11df93096e56c4ab30b9e6a06cae",
+      "crop_xywh": [
+        1037,
+        126,
+        474,
+        566
+      ],
+      "sheet_cell_xywh": [
+        1023,
+        0,
+        509,
+        780
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "content_scale": 0.050966608084358524,
+      "content_anchor_xy": [
+        11,
+        29
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/breaker_walk",
+      "frame": 2,
+      "seconds": 0.125,
+      "loop": true,
+      "output": "sprites/enemies/breaker_walk_2.png",
+      "prompt": "implementation/sprites/generation/0015-breaker-walk-r2.prompt.txt",
+      "prompt_sha256": "c7e4d5d8460c4ed191ac10b72b3b39d22ad6488927b73434b8071557e6ab30f4",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/breaker/master.png",
+          "sha256": "6b014e232b44c98f74ef1e8884f1c31cc3bcd9bba5b789224ad08b207913eda8",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/masters/walker.png",
+          "sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 2,
+      "enemy_family": "breaker",
+      "enemy_motion": "walk",
+      "enemy_master_id": "enemies/breaker",
+      "scale_reference": {
+        "role": "tallest standing pose",
+        "raw_height": 569,
+        "native_height": 29
+      },
+      "ground_measurement": "lowest two native alpha rows",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "variant_of": "enemies/breaker_walk_0",
+      "output_sha256": "d924299cec41b9dd07e448cb3371274c0b4379c6e176d88b66c8d00397637ef3"
+    },
+    {
+      "id": "enemies/breaker_walk_3",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/breaker/walk-r2.png",
+      "source_sha256": "e8b4c928e4528cf842838e76afefcc83f05a11df93096e56c4ab30b9e6a06cae",
+      "crop_xywh": [
+        1553,
+        127,
+        458,
+        569
+      ],
+      "sheet_cell_xywh": [
+        1532,
+        0,
+        485,
+        780
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "content_scale": 0.050966608084358524,
+      "content_anchor_xy": [
+        10,
+        29
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/breaker_walk",
+      "frame": 3,
+      "seconds": 0.125,
+      "loop": true,
+      "output": "sprites/enemies/breaker_walk_3.png",
+      "prompt": "implementation/sprites/generation/0015-breaker-walk-r2.prompt.txt",
+      "prompt_sha256": "c7e4d5d8460c4ed191ac10b72b3b39d22ad6488927b73434b8071557e6ab30f4",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/breaker/master.png",
+          "sha256": "6b014e232b44c98f74ef1e8884f1c31cc3bcd9bba5b789224ad08b207913eda8",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/masters/walker.png",
+          "sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 2,
+      "enemy_family": "breaker",
+      "enemy_motion": "walk",
+      "enemy_master_id": "enemies/breaker",
+      "scale_reference": {
+        "role": "tallest standing pose",
+        "raw_height": 569,
+        "native_height": 29
+      },
+      "ground_measurement": "lowest two native alpha rows",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "variant_of": "enemies/breaker_walk_0",
+      "output_sha256": "9c55219b1dc644f12bdf7a013f4a64bee37aba1f6c53c2aaf4359f34b5a76193"
+    },
+    {
+      "id": "enemies/breaker_attack_0",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/breaker/attack-r1.png",
+      "source_sha256": "5ae347799a0a90993e9d435fb1bfd733884c3caa61010480945185e073dc81e2",
+      "crop_xywh": [
+        120,
+        76,
+        375,
+        571
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        614,
+        739
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "content_scale": 0.061052631578947365,
+      "content_anchor_xy": [
+        13,
+        35
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/breaker_attack",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/breaker_attack_0.png",
+      "prompt": "implementation/sprites/generation/0015-breaker-attack-r1.prompt.txt",
+      "prompt_sha256": "f3655c126d568b75839a21bc09cf00937dad81266d91dccbe31f8083f261f36c",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/breaker/attack.png",
+          "sha256": "2fb33c6aa6216f542d407b9b19510c05154bba3ac4d65d0d112b736d45244850",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/enemies/breaker/master.png",
+          "sha256": "6b014e232b44c98f74ef1e8884f1c31cc3bcd9bba5b789224ad08b207913eda8",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 1,
+      "enemy_family": "breaker",
+      "enemy_motion": "attack",
+      "enemy_master_id": "enemies/breaker",
+      "scale_reference": {
+        "role": "recovery standing pose",
+        "raw_height": 475,
+        "native_height": 29
+      },
+      "ground_measurement": "lowest two native alpha rows",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "output_sha256": "a8b236d32aa24b41164a0ac470fadf292d5741df8ec9a9d55aacc30fc03a2c93"
+    },
+    {
+      "id": "enemies/breaker_attack_1",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/breaker/attack-r1.png",
+      "source_sha256": "5ae347799a0a90993e9d435fb1bfd733884c3caa61010480945185e073dc81e2",
+      "crop_xywh": [
+        734,
+        180,
+        597,
+        462
+      ],
+      "sheet_cell_xywh": [
+        614,
+        0,
+        854,
+        739
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "content_scale": 0.061052631578947365,
+      "content_anchor_xy": [
+        25,
+        28
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/breaker_attack",
+      "frame": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/breaker_attack_1.png",
+      "prompt": "implementation/sprites/generation/0015-breaker-attack-r1.prompt.txt",
+      "prompt_sha256": "f3655c126d568b75839a21bc09cf00937dad81266d91dccbe31f8083f261f36c",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/breaker/attack.png",
+          "sha256": "2fb33c6aa6216f542d407b9b19510c05154bba3ac4d65d0d112b736d45244850",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/enemies/breaker/master.png",
+          "sha256": "6b014e232b44c98f74ef1e8884f1c31cc3bcd9bba5b789224ad08b207913eda8",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 1,
+      "enemy_family": "breaker",
+      "enemy_motion": "attack",
+      "enemy_master_id": "enemies/breaker",
+      "scale_reference": {
+        "role": "recovery standing pose",
+        "raw_height": 475,
+        "native_height": 29
+      },
+      "ground_measurement": "lowest two native alpha rows",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "variant_of": "enemies/breaker_attack_0",
+      "output_sha256": "48c168245923e897a9e5846949055d44df679b08d0226b2b918bfe87b2d74983"
+    },
+    {
+      "id": "enemies/breaker_attack_2",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/breaker/attack-r1.png",
+      "source_sha256": "5ae347799a0a90993e9d435fb1bfd733884c3caa61010480945185e073dc81e2",
+      "crop_xywh": [
+        1605,
+        172,
+        477,
+        475
+      ],
+      "sheet_cell_xywh": [
+        1468,
+        0,
+        660,
+        739
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "content_scale": 0.061052631578947365,
+      "content_anchor_xy": [
+        13,
+        29
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/breaker_attack",
+      "frame": 2,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/breaker_attack_2.png",
+      "prompt": "implementation/sprites/generation/0015-breaker-attack-r1.prompt.txt",
+      "prompt_sha256": "f3655c126d568b75839a21bc09cf00937dad81266d91dccbe31f8083f261f36c",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/breaker/attack.png",
+          "sha256": "2fb33c6aa6216f542d407b9b19510c05154bba3ac4d65d0d112b736d45244850",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/enemies/breaker/master.png",
+          "sha256": "6b014e232b44c98f74ef1e8884f1c31cc3bcd9bba5b789224ad08b207913eda8",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 1,
+      "enemy_family": "breaker",
+      "enemy_motion": "attack",
+      "enemy_master_id": "enemies/breaker",
+      "scale_reference": {
+        "role": "recovery standing pose",
+        "raw_height": 475,
+        "native_height": 29
+      },
+      "ground_measurement": "lowest two native alpha rows",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "variant_of": "enemies/breaker_attack_0",
+      "output_sha256": "71138207caa4ba1121e3be18aad7245143fbe3edfed151a16e463e409c4d0230"
+    },
+    {
+      "id": "enemies/breaker_death_0",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/breaker/death.png",
+      "source_sha256": "0f99432908238f06ea5392c0e3dc9f81fde0681fafa9bc0a06d3358e943c0211",
+      "crop_xywh": [
+        31,
+        211,
+        443,
+        472
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        484,
+        793
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "content_scale": 0.057203389830508475,
+      "content_anchor_xy": [
+        12,
+        27
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/breaker_death",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/breaker_death_0.png",
+      "prompt": "implementation/sprites/generation/0015-breaker-death.prompt.txt",
+      "prompt_sha256": "cad43d9ff13d2dddb16e831452dfd122ef957abe4401320d3125cef471fdbd00",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/breaker/master.png",
+          "sha256": "6b014e232b44c98f74ef1e8884f1c31cc3bcd9bba5b789224ad08b207913eda8",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/masters/walker.png",
+          "sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 0,
+      "enemy_family": "breaker",
+      "enemy_motion": "death",
+      "enemy_master_id": "enemies/breaker",
+      "scale_reference": {
+        "role": "first buckling pose",
+        "raw_height": 472,
+        "native_height": 27
+      },
+      "ground_measurement": "collapse bounds midpoint",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "output_sha256": "fa80b3de2ff22642d62874f60fe2ac176fece8cc986d931b4707f2944ad0fe07"
+    },
+    {
+      "id": "enemies/breaker_death_1",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/breaker/death.png",
+      "source_sha256": "0f99432908238f06ea5392c0e3dc9f81fde0681fafa9bc0a06d3358e943c0211",
+      "crop_xywh": [
+        494,
+        312,
+        429,
+        371
+      ],
+      "sheet_cell_xywh": [
+        484,
+        0,
+        458,
+        793
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "content_scale": 0.057203389830508475,
+      "content_anchor_xy": [
+        12,
+        21
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/breaker_death",
+      "frame": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/breaker_death_1.png",
+      "prompt": "implementation/sprites/generation/0015-breaker-death.prompt.txt",
+      "prompt_sha256": "cad43d9ff13d2dddb16e831452dfd122ef957abe4401320d3125cef471fdbd00",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/breaker/master.png",
+          "sha256": "6b014e232b44c98f74ef1e8884f1c31cc3bcd9bba5b789224ad08b207913eda8",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/masters/walker.png",
+          "sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 0,
+      "enemy_family": "breaker",
+      "enemy_motion": "death",
+      "enemy_master_id": "enemies/breaker",
+      "scale_reference": {
+        "role": "first buckling pose",
+        "raw_height": 472,
+        "native_height": 27
+      },
+      "ground_measurement": "collapse bounds midpoint",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "variant_of": "enemies/breaker_death_0",
+      "output_sha256": "ff9c675b9ddf3d848048dccd49e285bb1cafe183eb3f29bad77932a0a3cf18be"
+    },
+    {
+      "id": "enemies/breaker_death_2",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/breaker/death.png",
+      "source_sha256": "0f99432908238f06ea5392c0e3dc9f81fde0681fafa9bc0a06d3358e943c0211",
+      "crop_xywh": [
+        962,
+        430,
+        472,
+        291
+      ],
+      "sheet_cell_xywh": [
+        942,
+        0,
+        510,
+        793
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "content_scale": 0.057203389830508475,
+      "content_anchor_xy": [
+        13,
+        17
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/breaker_death",
+      "frame": 2,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/breaker_death_2.png",
+      "prompt": "implementation/sprites/generation/0015-breaker-death.prompt.txt",
+      "prompt_sha256": "cad43d9ff13d2dddb16e831452dfd122ef957abe4401320d3125cef471fdbd00",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/breaker/master.png",
+          "sha256": "6b014e232b44c98f74ef1e8884f1c31cc3bcd9bba5b789224ad08b207913eda8",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/masters/walker.png",
+          "sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 0,
+      "enemy_family": "breaker",
+      "enemy_motion": "death",
+      "enemy_master_id": "enemies/breaker",
+      "scale_reference": {
+        "role": "first buckling pose",
+        "raw_height": 472,
+        "native_height": 27
+      },
+      "ground_measurement": "collapse bounds midpoint",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "variant_of": "enemies/breaker_death_0",
+      "output_sha256": "5080a09d0fd6e519af1c816aa420fdb9da7e12fba2aa11264c587b3c5317bb43"
+    },
+    {
+      "id": "enemies/breaker_death_3",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/breaker/death.png",
+      "source_sha256": "0f99432908238f06ea5392c0e3dc9f81fde0681fafa9bc0a06d3358e943c0211",
+      "crop_xywh": [
+        1470,
+        496,
+        483,
+        225
+      ],
+      "sheet_cell_xywh": [
+        1452,
+        0,
+        531,
+        793
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "content_scale": 0.057203389830508475,
+      "content_anchor_xy": [
+        14,
+        13
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/breaker_death",
+      "frame": 3,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/breaker_death_3.png",
+      "prompt": "implementation/sprites/generation/0015-breaker-death.prompt.txt",
+      "prompt_sha256": "cad43d9ff13d2dddb16e831452dfd122ef957abe4401320d3125cef471fdbd00",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/breaker/master.png",
+          "sha256": "6b014e232b44c98f74ef1e8884f1c31cc3bcd9bba5b789224ad08b207913eda8",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/masters/walker.png",
+          "sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 0,
+      "enemy_family": "breaker",
+      "enemy_motion": "death",
+      "enemy_master_id": "enemies/breaker",
+      "scale_reference": {
+        "role": "first buckling pose",
+        "raw_height": 472,
+        "native_height": 27
+      },
+      "ground_measurement": "collapse bounds midpoint",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "variant_of": "enemies/breaker_death_0",
+      "output_sha256": "90e06db05410f7b183be422efcd8511ff8927eacf31abd965b8c27ef349b1b53"
+    },
+    {
+      "id": "enemies/breaker_walk_b",
+      "owner": "raster",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/breaker_compat_walk_b",
+      "frame": 0,
+      "seconds": 0.125,
+      "loop": false,
+      "output": "sprites/enemies/breaker_walk_b.png",
+      "prompt": "implementation/sprites/generation/0015-breaker-walk-r2.prompt.txt",
+      "prompt_sha256": "c7e4d5d8460c4ed191ac10b72b3b39d22ad6488927b73434b8071557e6ab30f4",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/breaker/master.png",
+          "sha256": "6b014e232b44c98f74ef1e8884f1c31cc3bcd9bba5b789224ad08b207913eda8",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/masters/walker.png",
+          "sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 2,
+      "enemy_family": "breaker",
+      "enemy_motion": "walk",
+      "enemy_master_id": "enemies/breaker",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "output_sha256": "d924299cec41b9dd07e448cb3371274c0b4379c6e176d88b66c8d00397637ef3",
+      "input": "enemies/breaker_walk_2",
+      "operation": "copy",
+      "alias_of": "enemies/breaker_walk_2"
+    },
+    {
+      "id": "enemies/breaker_attack",
+      "owner": "raster",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/breaker_compat_attack",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/breaker_attack.png",
+      "prompt": "implementation/sprites/generation/0015-breaker-attack-r1.prompt.txt",
+      "prompt_sha256": "f3655c126d568b75839a21bc09cf00937dad81266d91dccbe31f8083f261f36c",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/breaker/attack.png",
+          "sha256": "2fb33c6aa6216f542d407b9b19510c05154bba3ac4d65d0d112b736d45244850",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/enemies/breaker/master.png",
+          "sha256": "6b014e232b44c98f74ef1e8884f1c31cc3bcd9bba5b789224ad08b207913eda8",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 1,
+      "enemy_family": "breaker",
+      "enemy_motion": "attack",
+      "enemy_master_id": "enemies/breaker",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "output_sha256": "48c168245923e897a9e5846949055d44df679b08d0226b2b918bfe87b2d74983",
+      "input": "enemies/breaker_attack_1",
+      "operation": "copy",
+      "alias_of": "enemies/breaker_attack_1"
+    },
+    {
+      "id": "enemies/breaker_death",
+      "owner": "raster",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/breaker_compat_death",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/breaker_death.png",
+      "prompt": "implementation/sprites/generation/0015-breaker-death.prompt.txt",
+      "prompt_sha256": "cad43d9ff13d2dddb16e831452dfd122ef957abe4401320d3125cef471fdbd00",
+      "references": [
+        {
+          "path": "assets/art_source/enemies/breaker/master.png",
+          "sha256": "6b014e232b44c98f74ef1e8884f1c31cc3bcd9bba5b789224ad08b207913eda8",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/masters/walker.png",
+          "sha256": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0015",
+      "revision": 0,
+      "enemy_family": "breaker",
+      "enemy_motion": "death",
+      "enemy_master_id": "enemies/breaker",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "output_sha256": "90e06db05410f7b183be422efcd8511ff8927eacf31abd965b8c27ef349b1b53",
+      "input": "enemies/breaker_death_3",
+      "operation": "copy",
+      "alias_of": "enemies/breaker_death_3"
     }
   ]
 }

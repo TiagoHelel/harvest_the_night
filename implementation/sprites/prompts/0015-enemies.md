@@ -1,6 +1,6 @@
 # 0015 - Walker, runner, tank and breaker motion
 
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0003, 0013
 - **Likely files:** assets/art_source/enemies/; sprites/enemies/; src/ui/world_view.gd; generated animation metadata
 - **Generation briefs:** WALKER, ENEMY_STRIP

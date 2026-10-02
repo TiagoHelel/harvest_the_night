@@ -1,0 +1,111 @@
+{
+  "id": "walker",
+  "kind": "death",
+  "revision": 0,
+  "tool": "built-in ImageGen",
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-552dde13-08a3-4078-8c9f-4df8f71659e4.png",
+  "source": "assets/art_source/enemies/walker/death.png",
+  "source_sha256": "bc5e8b3239168d1212ad7bf95202d4c9189992599510674e2d8223d3bf2f2206",
+  "source_wh": [
+    2172,
+    724
+  ],
+  "source_alpha_range": [
+    0,
+    255
+  ],
+  "prompt": "implementation/sprites/generation/0015-walker-death.prompt.txt",
+  "prompt_sha256": "191fb37e3a60842c5a1c36da4b910e84d814ae027fa99ac8d545f00950390b59",
+  "references": [
+    "assets/art_source/enemies/walker/master.png",
+    "assets/art_source/masters/walker.png"
+  ],
+  "reference_hashes": {
+    "assets/art_source/enemies/walker/master.png": "c9cbd7ae7fb219c00809ecc11e478696567a56287afc488b9eb38352e65fcde1",
+    "assets/art_source/masters/walker.png": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5"
+  },
+  "tool_arguments": {
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\enemies\\walker\\master.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\masters\\walker.png"
+    ]
+  },
+  "measurements": [
+    {
+      "role": "death_0",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        465,
+        724
+      ],
+      "crop_xywh": [
+        52,
+        111,
+        365,
+        570
+      ]
+    },
+    {
+      "role": "death_1",
+      "sheet_cell_xywh": [
+        465,
+        0,
+        558,
+        724
+      ],
+      "crop_xywh": [
+        513,
+        209,
+        490,
+        461
+      ]
+    },
+    {
+      "role": "death_2",
+      "sheet_cell_xywh": [
+        1023,
+        0,
+        583,
+        724
+      ],
+      "crop_xywh": [
+        1043,
+        358,
+        550,
+        297
+      ]
+    },
+    {
+      "role": "death_3",
+      "sheet_cell_xywh": [
+        1606,
+        0,
+        566,
+        724
+      ],
+      "crop_xywh": [
+        1619,
+        437,
+        539,
+        212
+      ]
+    }
+  ],
+  "decision": "Accepted after native/3x complete motion review; source crop and palette conversion only",
+  "actual_submitted_arguments": {
+    "prompt": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm that becomes a fortress against zombies at night.\nStyle: deliberate chunky hand-crafted pixel art, colored dark outlines, large readable clusters, restrained texture. Orthographic three-quarter top-down rectangular-grid camera matching Image 1. Neutral daytime upper-left light; runtime supplies night lighting. Muted rot greens, worn cloth, violet undersides, cold small highlights. No ground shadow, scenery, text, watermark, checkerboard, blur, gradients, smooth painting, new gameplay objects or excessive gore. Complete unclipped body, true transparent background. The final downstream native canvas is 32x40 with ground pivot (16,36), visible standing body 29 pixels high. Keep forms simple enough to survive reduction. This is a zombie, not a farmer costume. All heads, hands, legs and clothes must remain recognizable as black silhouettes.\n\nPrimary request: enemies/walker/death, exactly 4 sequential frames in ONE horizontal strip. Image 1 is the accepted walker identity master: retain exactly its head, clothing, body mass, camera and colors. Image 2 is only the pixel-cluster style reference. Identity: Slouched uneven shoulders, shaggy brown hair, torn muted plum shirt, brown trousers, long dangling thin green arms. Uneven weary stance. Preserve the pilot identity in Image 1.\nOrder from left to right: knees first buckle and arms lose support; torso pitches sideways while one knee contacts ground; shoulder and hip contact ground with legs folding; fully collapsed low side-lying body with head and arms resting. The sequence forms a single irreversible collapse, ending low and still. Facing is three-quarter screen-left and toward the viewer throughout. Use equally sized generous cells separated by completely empty transparent gutters. Same ground/contact baseline at 90 percent of cell height and contact center at each cell's horizontal midpoint. Keep common drawing scale across the entire strip; never enlarge a collapsed or crouched pose. No limbs cross another cell. Actual joints, weight transfer and changing leg/arm shapes: never translate the whole drawing as an animation. No impact victim, dust, blood pool, weapon trails, ground shadow, labels or panels.\n",
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/enemies/walker/master.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/masters/walker.png"
+    ],
+    "transparent_background": true
+  },
+  "selected_outputs": [
+    "enemies/walker_death_0",
+    "enemies/walker_death_1",
+    "enemies/walker_death_2",
+    "enemies/walker_death_3"
+  ]
+}

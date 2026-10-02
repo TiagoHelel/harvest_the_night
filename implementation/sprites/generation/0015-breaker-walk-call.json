@@ -1,0 +1,45 @@
+{
+  "id": "breaker",
+  "kind": "walk",
+  "revision": 0,
+  "tool": "built-in ImageGen",
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-291e0b7e-8aac-44da-9313-6d97d85ff307.png",
+  "source": "assets/art_source/enemies/breaker/walk.png",
+  "source_sha256": "2a76c57017e33a1ccf7b6a6a3e74bdbe5193f285f28c40edcdde84dde5683ea6",
+  "source_wh": [
+    1983,
+    793
+  ],
+  "source_alpha_range": [
+    0,
+    255
+  ],
+  "prompt": "implementation/sprites/generation/0015-breaker-walk.prompt.txt",
+  "prompt_sha256": "2ddc212701f5de4486491257178867e5e9e437f61106b6ea05d6b955aebb65bd",
+  "references": [
+    "assets/art_source/enemies/breaker/master.png",
+    "assets/art_source/masters/walker.png"
+  ],
+  "reference_hashes": {
+    "assets/art_source/enemies/breaker/master.png": "6b014e232b44c98f74ef1e8884f1c31cc3bcd9bba5b789224ad08b207913eda8",
+    "assets/art_source/masters/walker.png": "7f0120767e860d1f3d3334510f59ae8d9864261af6cf2d32715968fef9e24cd5"
+  },
+  "tool_arguments": {
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\enemies\\breaker\\master.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\masters\\walker.png"
+    ]
+  },
+  "measurements": [],
+  "decision": "Rejected: frame 4 loses hammer, neighboring frames lack full-height gutters",
+  "actual_submitted_arguments": {
+    "prompt": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm that becomes a fortress against zombies at night.\nStyle: deliberate chunky hand-crafted pixel art, colored dark outlines, large readable clusters, restrained texture. Orthographic three-quarter top-down rectangular-grid camera matching Image 1. Neutral daytime upper-left light; runtime supplies night lighting. Muted rot greens, worn cloth, violet undersides, cold small highlights. No ground shadow, scenery, text, watermark, checkerboard, blur, gradients, smooth painting, new gameplay objects or excessive gore. Complete unclipped body, true transparent background. The final downstream native canvas is 32x40 with ground pivot (16,36), visible standing body 29 pixels high. Keep forms simple enough to survive reduction. This is a zombie, not a farmer costume. All heads, hands, legs and clothes must remain recognizable as black silhouettes.\n\nPrimary request: enemies/breaker/walk, exactly 4 sequential frames in ONE horizontal strip. Image 1 is the accepted breaker identity master: retain exactly its head, clothing, body mass, camera and colors. Image 2 is only the pixel-cluster style reference. Identity: Conspicuous very long muscular arms and a demolition stance, small bent knees, cropped dark hair, ragged muted rust-red work shirt, desaturated brown trousers. One oversized dark iron demolition hammer held low outward in the left-side leading hand; functional silhouette distinct from the tank. No hard hat, shield or extra equipment.\nOrder from left to right: left leading heel planted with right trailing toe; left leg passing under hips and right foot lifted; right leading heel planted with left trailing toe; right leg passing under hips and left foot lifted. The sequence forms a seamless weight-transfer loop. Facing is three-quarter screen-left and toward the viewer throughout. Use equally sized generous cells separated by completely empty transparent gutters. Same ground/contact baseline at 90 percent of cell height and contact center at each cell's horizontal midpoint. Keep common drawing scale across the entire strip; never enlarge a collapsed or crouched pose. No limbs cross another cell. Actual joints, weight transfer and changing leg/arm shapes: never translate the whole drawing as an animation. No impact victim, dust, blood pool, weapon trails, ground shadow, labels or panels.\n",
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/enemies/breaker/master.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/masters/walker.png"
+    ],
+    "transparent_background": true
+  },
+  "selected_outputs": []
+}

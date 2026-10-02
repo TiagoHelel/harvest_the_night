@@ -160,6 +160,7 @@ var _shots: Node2D
 var _shot_before: Dictionary = {}
 var _shot_origins: Dictionary = {}
 var _observing_tick := false
+var _enemy_motion := EnemyMotion.new()
 var _tower_history: Dictionary = {}
 var _tower_version := -1
 var _wrecks: Node2D
@@ -276,6 +277,7 @@ func _ready() -> void:
 ## Point the view at a game. Called by whatever screen owns the simulation.
 func show_state(state: Dictionary) -> void:
 	if not is_same(_state, state):
+		_enemy_motion.clear()
 		_shot_before.clear()
 		_shot_origins.clear()
 		_observing_tick = false
@@ -1003,13 +1005,12 @@ func _refresh_actors() -> void:
 		var one := Entities.get_one(_state, int(ids[i]))
 		var sprite: Sprite2D = _actor_sprites[i]
 		sprite.texture = _texture_for(_pose_of(one))
-		# **A hit reads at a glance.** The rules say how long something stays
-		# lit; the view only turns that into white. Task 0088 adds the shake
-		# and the numbers on top.
-		sprite.modulate = Color(2.4, 2.2, 2.2) if int(one.get("hurt", 0)) > 0 \
+		# Keep material planes and family silhouettes during the core hurt cue.
+		sprite.flip_h = _enemy_motion.faces_right(one) if EnemyMotion.FAMILIES.has(one["kind"]) else false
+		sprite.modulate = Color(1.25, 1.12, 1.12) if int(one.get("hurt", 0)) > 0 \
 			else Color(1, 1, 1)
 		# **Anchored at the feet, not at a tile corner.** An enemy is no
-		# longer one tile - a walker is 24x32 and the Giant 40x52 - so the
+		# longer one tile - motion has transparent clearance around the body - so the
 		# old "half a tile back and up" drew them with their shins in the
 		# ground and their heads in the next row. Bottom-centre on the cell
 		# they occupy is the same rule the player uses, and it is what makes
@@ -1053,6 +1054,7 @@ func before_tick(state: Dictionary) -> void:
 	if not is_same(_state, state):
 		return
 	_observing_tick = true
+	_enemy_motion.before_tick(state)
 	_mine_before.clear()
 	if int(state["grid_version"]) != _mine_grid_version:
 		_mine_grid_version = int(state["grid_version"])
@@ -1075,6 +1077,7 @@ func after_tick(state: Dictionary) -> void:
 	if not is_same(_state, state) or not _observing_tick:
 		return
 	_observing_tick = false
+	_enemy_motion.after_tick(state)
 	_observe_mines(state)
 	var alive: Dictionary = {}
 	var barrels: Dictionary = {}
@@ -1660,6 +1663,8 @@ func _texture_for(id: StringName) -> Texture2D:
 ## it leaves is task 0077's, and `enemies/*_death.png` is waiting for it.
 func _pose_of(one: Dictionary) -> StringName:
 	var kind: StringName = one["kind"]
+	if EnemyMotion.FAMILIES.has(kind):
+		return _enemy_motion.pose(one, _state)
 	if int(one.get("winding_at", -1)) >= 0:
 		var telegraph := StringName("%s_telegraph" % kind)
 		if ResourceLoader.exists(ENEMY_DIR + str(telegraph) + ".png"):

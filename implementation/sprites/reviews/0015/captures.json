@@ -1,0 +1,342 @@
+[
+  {
+    "path": "implementation/shots/sprites/0015/enemies/attack_000.png",
+    "sha256": "544f4fbee0d234fc4301336efec08b6cacfed14cf0ba1f0d203484cf975cad99",
+    "page": "captures-00.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0015/enemies/attack_002.png",
+    "sha256": "7e5ca9f93d49b4ce7be78ce940eddb75c4fed6f87c4cfbe03ba7d30ca2e27628",
+    "page": "captures-00.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0015/enemies/attack_013.png",
+    "sha256": "3312dd2871877c24656ef27ad660d4c65c1d47b26cce82ff536acddc90248a2c",
+    "page": "captures-01.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0015/enemies/attack_029.png",
+    "sha256": "3e06d8740181fc632c3ac39a0bb95c8e54f674696f6ecd29774cc4feb2c949f8",
+    "page": "captures-01.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0015/enemies/attack_030.png",
+    "sha256": "c737614ac9e60d4f04a804a67887be5f895007a52598326a8e3f0a69577b5b84",
+    "page": "captures-02.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0015/enemies/attack_032.png",
+    "sha256": "82f1a45b0ada8af64e9cc983afbb47a571b63f6f531ceabe1982b8a79fbbae76",
+    "page": "captures-02.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0015/enemies/attack_047.png",
+    "sha256": "208400f957235d34325fb5a0657faad3d10e29e7d235906ea21601a2a32fe554",
+    "page": "captures-03.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0015/enemies/attack_061.png",
+    "sha256": "8b0611697ca506ec0c3a781cfebe45b153eb40cebe685a519c720da53002a863",
+    "page": "captures-03.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0015/enemies/attack_077.png",
+    "sha256": "4b797636d5ccd90faa55b05be2d78c1dd42239f8e8130b9f4ee060cadf240113",
+    "page": "captures-04.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0015/enemies/attack_093.png",
+    "sha256": "b4945595da1a5992e405c26b0e3d80cedc58407a8f468363296d6dbf7139acfe",
+    "page": "captures-04.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0015/enemies/death_sources.png",
+    "sha256": "6ad53ec5ff074f91823f088fec6edf065cf8a1b2c1c3ccab53a73547e8989fe8",
+    "page": "captures-05.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0015/enemies/hurt_walker.png",
+    "sha256": "2091ac3fb6a5f5027c0710164cbdaad76d2af64e71206a4f27e2d0791a07d0ae",
+    "page": "captures-05.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0015/enemies/identities_0.png",
+    "sha256": "b850c86e01297e973ee961e5ca8a2c00a8908512b34def06c96e368196e291e5",
+    "page": "captures-06.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0015/enemies/identities_1.png",
+    "sha256": "3732c38fed340a80ca59c34161d2b356e22d9615f1057e646e5d549052addb3e",
+    "page": "captures-06.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0015/enemies/mixed_wave_moving.png",
+    "sha256": "945d7534021c65e35cf8178fb8362a835c1e299bcf14a925b23afbee154c286a",
+    "page": "captures-07.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0015/enemies/mixed_wave_night.png",
+    "sha256": "cbd50375e305c83b5d36b7fb4c5bd70f6270709c4945851c1336dacd358e37b3",
+    "page": "captures-07.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0015/enemies/silhouettes.png",
+    "sha256": "21fb46a62eee69f0135ed1ca1d025700c2962b2facb47b46902071f37e0c24e4",
+    "page": "captures-08.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0015/enemies/walk_0_07.png",
+    "sha256": "72ba9b77a3359d4f250d9abaa7f90097f9178a97d16f44fce85d76fe3ded0e30",
+    "page": "captures-08.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0015/enemies/walk_0_23.png",
+    "sha256": "738086e706b4de970e138d2fd25a7c1bb9935132b503b39e76118d23a03b56ee",
+    "page": "captures-09.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0015/enemies/walk_0_39.png",
+    "sha256": "2d01c050eca4a9ff7cad3e4f7ca612ca72c79e71353d025af013f84c9200309e",
+    "page": "captures-09.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0015/enemies/walk_0_55.png",
+    "sha256": "3666b856609b4d8df56ef2fcf4a3a97f90607a80e198464fd11c34fb74616b36",
+    "page": "captures-10.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0015/enemies/walk_0_71.png",
+    "sha256": "b398fdc5a08cf2494b205c1fe818e8ba55966041f1f1a7c3dd00776059368330",
+    "page": "captures-10.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0015/enemies/walk_0_87.png",
+    "sha256": "caf0fdd9d3a38992527a075ec6215414d862c1282df4bb7ac8798ea403899f1c",
+    "page": "captures-11.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0015/enemies/walk_1_07.png",
+    "sha256": "ef124a7428f1d7ab388dae341c89f68e3b4d5834306228af9244230e1221dbc9",
+    "page": "captures-11.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0015/enemies/walk_1_23.png",
+    "sha256": "164a2b0d610db05df72a3e9eee70c45a6884fb56de6eea56eda18700cdd68bcf",
+    "page": "captures-12.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0015/enemies/walk_1_39.png",
+    "sha256": "fe20962d2e0d576529bf8ce287855c136f9f156a77221a95f0c72aac5662e935",
+    "page": "captures-12.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0015/enemies/walk_1_55.png",
+    "sha256": "fdc13f456c362dc071dca859009704e159d27a4c2f8d4ef34db8a2f0794d7e0f",
+    "page": "captures-13.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0015/enemies/walk_1_71.png",
+    "sha256": "efb65022fe2f0efafd096d238d3fe233d6d30badf106b5c7ec3790dc9c52c79c",
+    "page": "captures-13.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0015/enemies/walk_1_87.png",
+    "sha256": "592688020eefebf569cbc3fec8ee265e3d413d5010dba1f32b8e491d59191fe2",
+    "page": "captures-14.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0015/dusk.png",
+    "sha256": "56a629c3a0e8a8c91e65b9db5734efa78c766d698b1844d2f6e54f67f5cf7448",
+    "page": "captures-14.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0015/noon.png",
+    "sha256": "ee20b02153596fd8c1b506f07e3cd90608c87b224d22625876737b8244350c06",
+    "page": "captures-15.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0015/result.png",
+    "sha256": "ee05e6bf53a56f7a0fe7444c0819a720ad4fa664237b4b5b4096cdee4cc57fe7",
+    "page": "captures-15.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0015/tech.png",
+    "sha256": "c80cd683841f52adba9f58a4419172e5e1e3d36561a63fe4887105dbc691020c",
+    "page": "captures-16.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0015/wave.png",
+    "sha256": "06b215fa243a396553d98628cdfda3a952827f6dd6930780e8b7955c1717b4b7",
+    "page": "captures-16.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  }
+]

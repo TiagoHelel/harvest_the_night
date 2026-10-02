@@ -1,0 +1,254 @@
+[
+  {
+    "id": "walker",
+    "kind": "master",
+    "modules": [
+      "master"
+    ],
+    "references": [
+      "assets/art_source/masters/walker.png",
+      "docs/reference-sheet.png"
+    ],
+    "layout": "row"
+  },
+  {
+    "id": "walker",
+    "kind": "walk",
+    "modules": [
+      "walk_0",
+      "walk_1",
+      "walk_2",
+      "walk_3"
+    ],
+    "references": [
+      "assets/art_source/enemies/walker/master.png",
+      "assets/art_source/masters/walker.png"
+    ],
+    "layout": "row"
+  },
+  {
+    "id": "walker",
+    "kind": "attack",
+    "modules": [
+      "attack_0",
+      "attack_1",
+      "attack_2"
+    ],
+    "references": [
+      "assets/art_source/enemies/walker/master.png",
+      "assets/art_source/masters/walker.png"
+    ],
+    "layout": "row"
+  },
+  {
+    "id": "walker",
+    "kind": "death",
+    "modules": [
+      "death_0",
+      "death_1",
+      "death_2",
+      "death_3"
+    ],
+    "references": [
+      "assets/art_source/enemies/walker/master.png",
+      "assets/art_source/masters/walker.png"
+    ],
+    "layout": "row"
+  },
+  {
+    "id": "runner",
+    "kind": "master",
+    "modules": [
+      "master"
+    ],
+    "references": [
+      "assets/art_source/masters/walker.png",
+      "docs/reference-sheet.png"
+    ],
+    "layout": "row"
+  },
+  {
+    "id": "runner",
+    "kind": "walk",
+    "modules": [
+      "walk_0",
+      "walk_1",
+      "walk_2",
+      "walk_3"
+    ],
+    "references": [
+      "assets/art_source/enemies/runner/master.png",
+      "assets/art_source/masters/walker.png"
+    ],
+    "layout": "row"
+  },
+  {
+    "id": "runner",
+    "kind": "attack",
+    "modules": [
+      "attack_0",
+      "attack_1",
+      "attack_2"
+    ],
+    "references": [
+      "assets/art_source/enemies/runner/master.png",
+      "assets/art_source/masters/walker.png"
+    ],
+    "layout": "row"
+  },
+  {
+    "id": "runner",
+    "kind": "death",
+    "modules": [
+      "death_0",
+      "death_1",
+      "death_2",
+      "death_3"
+    ],
+    "references": [
+      "assets/art_source/enemies/runner/master.png",
+      "assets/art_source/masters/walker.png"
+    ],
+    "layout": "row",
+    "revision_references": {
+      "1": [
+        "assets/art_source/enemies/runner/death.png",
+        "assets/art_source/enemies/runner/master.png"
+      ]
+    }
+  },
+  {
+    "id": "tank",
+    "kind": "master",
+    "modules": [
+      "master"
+    ],
+    "references": [
+      "assets/art_source/masters/walker.png",
+      "docs/reference-sheet.png"
+    ],
+    "layout": "row"
+  },
+  {
+    "id": "tank",
+    "kind": "walk",
+    "modules": [
+      "walk_0",
+      "walk_1",
+      "walk_2",
+      "walk_3"
+    ],
+    "references": [
+      "assets/art_source/enemies/tank/master.png",
+      "assets/art_source/masters/walker.png"
+    ],
+    "layout": "row"
+  },
+  {
+    "id": "tank",
+    "kind": "attack",
+    "modules": [
+      "attack_0",
+      "attack_1",
+      "attack_2"
+    ],
+    "references": [
+      "assets/art_source/enemies/tank/master.png",
+      "assets/art_source/masters/walker.png"
+    ],
+    "layout": "row"
+  },
+  {
+    "id": "tank",
+    "kind": "death",
+    "modules": [
+      "death_0",
+      "death_1",
+      "death_2",
+      "death_3"
+    ],
+    "references": [
+      "assets/art_source/enemies/tank/master.png",
+      "assets/art_source/masters/walker.png"
+    ],
+    "layout": "row",
+    "revision_references": {
+      "1": [
+        "assets/art_source/enemies/tank/death.png",
+        "assets/art_source/enemies/tank/master.png"
+      ]
+    }
+  },
+  {
+    "id": "breaker",
+    "kind": "master",
+    "modules": [
+      "master"
+    ],
+    "references": [
+      "assets/art_source/masters/walker.png",
+      "docs/reference-sheet.png"
+    ],
+    "layout": "row"
+  },
+  {
+    "id": "breaker",
+    "kind": "walk",
+    "modules": [
+      "walk_0",
+      "walk_1",
+      "walk_2",
+      "walk_3"
+    ],
+    "references": [
+      "assets/art_source/enemies/breaker/master.png",
+      "assets/art_source/masters/walker.png"
+    ],
+    "layout": "row",
+    "revision_references": {
+      "1": [
+        "assets/art_source/enemies/breaker/walk.png",
+        "assets/art_source/enemies/breaker/master.png"
+      ],
+      "2": [
+        "assets/art_source/enemies/breaker/master.png",
+        "assets/art_source/masters/walker.png"
+      ]
+    }
+  },
+  {
+    "id": "breaker",
+    "kind": "attack",
+    "modules": [
+      "attack_0",
+      "attack_1",
+      "attack_2"
+    ],
+    "references": [
+      "assets/art_source/enemies/breaker/master.png",
+      "assets/art_source/masters/walker.png"
+    ],
+    "layout": "row",
+    "revision_references": {
+      "1": [
+        "assets/art_source/enemies/breaker/attack.png",
+        "assets/art_source/enemies/breaker/master.png"
+      ]
+    }
+  },
+  {
+    "id": "breaker",
+    "kind": "death",
+    "modules": [
+      "death_0",
+      "death_1",
+      "death_2",
+      "death_3"
+    ],
+    "references": [
+      "assets/art_source/enemies/breaker/master.png",
+      "assets/art_source/masters/walker.png"
+    ],
+    "layout": "row"
+  }
+]
