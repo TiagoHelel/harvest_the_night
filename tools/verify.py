@@ -288,6 +288,16 @@ def check_giant_showcase():
     return check("giant/death playback", code == 0, next((s for s in out.splitlines() if s.startswith("GIANT SHOWCASE:")), tail(out, 4)))
 
 
+def check_effect_art():
+    code, out = run([sys.executable, "tools/check_effect_art.py"])
+    return check("effect sources/origins", code == 0, tail(out, 4))
+
+
+def check_effect_showcase():
+    code, out = run([sys.executable, "tools/show_art.py", "--effects", "--check"])
+    return check("effect contacts/a11y", code == 0, next((s for s in out.splitlines() if s.startswith("EFFECT SHOWCASE:")), tail(out, 4)))
+
+
 def check_logo():
     """The logo still matches the letters it was composed from.
 
@@ -704,6 +714,8 @@ def main():
     check_enemy_showcase()
     check_giant_art()
     check_giant_showcase()
+    check_effect_art()
+    check_effect_showcase()
     check_font()
     check_logo()
     check_sfx()

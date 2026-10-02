@@ -1,0 +1,172 @@
+[
+  {
+    "path": "implementation/shots/sprites/0017/effects/busy_burning.png",
+    "sha256": "ea1f268070f61c98b774b34a9935016e1492584f0b568a478d6b4b0eb2c996a3",
+    "page": "captures-01.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0017/effects/busy_flare.png",
+    "sha256": "b53a4d9d4b342045a436549c7809b7eff0b80262079872e25ef39322e3826116",
+    "page": "captures-02.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0017/effects/deaths_0.png",
+    "sha256": "3d8f03f82496e0f7226f2b25bb974778da2bf948355eaae1ee2f90f5b8da05d1",
+    "page": "captures-04.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0017/effects/deaths_1.png",
+    "sha256": "7f01374b134163c5b9cc11b09c97240dab156f58a8eeb94b4f101e1ce0a9ab7c",
+    "page": "captures-04.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0017/effects/deaths_2.png",
+    "sha256": "5c51ef2a97d177cc6353d303a4e4abe3430e8a5c97e07e66bdf39bea5651f89b",
+    "page": "captures-05.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0017/effects/deaths_3.png",
+    "sha256": "23e0c582765eef86d00d7f5b310b8fc38451300ac15251c221057d2008e88765",
+    "page": "captures-05.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0017/effects/towers_contact.png",
+    "sha256": "5bffef6f793f43b55dc9ab1609ed1935b013a2cc67e11f3947c7d8608d574cd0",
+    "page": "captures-13.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0017/effects/work_chop_contact.png",
+    "sha256": "939f491338014c86b9d0138aa690c427961b549b3caeb4b6a4a0ecbabf1c8d44",
+    "page": "captures-13.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0017/effects/work_chop_peak.png",
+    "sha256": "2e8f3691f3c7491d721769eb83461dae5b86de47df94702ed420f754bd3cf463",
+    "page": "captures-14.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0017/effects/work_fish_contact.png",
+    "sha256": "98d047ef91e8367b99da02b6628005b676fea4932f3e84e6d060fc7adcefeca9",
+    "page": "captures-14.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0017/effects/work_fish_peak.png",
+    "sha256": "68c5c9c3e14e4af12894c5a505e573112c731807458417037fdf681fb1e25e54",
+    "page": "captures-15.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0017/effects/work_harvest_contact.png",
+    "sha256": "3eeea7fc15355e550e490dc076f3d9c8c885d8d1f39a689d240bfc772ce57e6c",
+    "page": "captures-15.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0017/effects/work_harvest_peak.png",
+    "sha256": "c2177f3e2e7bf24b1273d0c82606c1cc2188a42827f95a955adf9d65cf0eadd0",
+    "page": "captures-16.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0017/effects/work_mine_contact.png",
+    "sha256": "210da0ca3778da6a5bdedeff85e0a0fd6a74cc21a984ecd6fed54f17d4bac015",
+    "page": "captures-16.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0017/effects/work_mine_peak.png",
+    "sha256": "9404ce258a5fe452ad01689a991869572194d43bf41734d5f7767d4b2516f994",
+    "page": "captures-17.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0017/effects/work_water_contact.png",
+    "sha256": "b96ab19eff77d3ee00fe5594edb94cf4ab240b5fb7d33a2ae430ae6d5e9d2b93",
+    "page": "captures-17.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0017/effects/work_water_peak.png",
+    "sha256": "7e52b5962b57d862411006a67af0223d41c52933065a1f2f65787c62c5597cc7",
+    "page": "captures-18.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  }
+]

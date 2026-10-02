@@ -57,6 +57,7 @@ const STOVE_RADIUS := 2.2
 const GENERATOR_RADIUS := 1.6
 const MUZZLE_RADIUS := 2.0
 const BURNING_RADIUS := 1.3
+const MAX_BURNING_LIGHTS := 12
 
 ## What each of them is the colour of. All of them are above task 0071's
 ## `NIGHT_WARM_KEEP`, which is what keeps them warm after dark.
@@ -78,6 +79,16 @@ func _ready() -> void:
 		CanvasItemMaterial.BLEND_MODE_ADD
 	_glow = _build_glow()
 	_read_quality()
+	var service := get_node_or_null(^"/root/Settings")
+	if service != null and not service.changed.is_connected(_on_setting):
+		service.changed.connect(_on_setting)
+		service.reloaded.connect(_read_quality)
+
+
+func _on_setting(key: StringName) -> void:
+	if key in [&"video/lights", &"a11y/flashing"]:
+		_read_quality()
+		queue_redraw()
 
 
 func show_state(state: Dictionary) -> void:
@@ -186,15 +197,36 @@ func _draw() -> void:
 
 	# **What is on fire.** The one light that moves, and the reason the whole
 	# thing is redrawn rather than cached.
+	for where in burning_lights():
+		_glow_at(where, BURNING_RADIUS * tile, BURNING_COLOUR, 0.22)
+
+
+## Nearby burning actors share a subdued halo; every actor still keeps its
+## actual flame/ember pixels. Additive per-actor lights previously washed a
+## dense wave into bright continuous bands. This bounds both glare and draws.
+func burning_lights() -> Array[Vector2]:
+	var points: Array[Vector2] = []
+	if _state.is_empty():
+		return points
+	var per := float(GameData.TILE_SIZE) / Player.SUBTILE
+	var separation := BURNING_RADIUS * GameData.TILE_SIZE * 1.6
 	for id in Entities.ids(_state):
 		if not Combat.is_burning(_state, int(id)):
 			continue
 		var one := Entities.get_one(_state, int(id))
 		if one.is_empty():
 			continue
-		var where := Vector2(float(one["pos"][0]), float(one["pos"][1])) \
-			* tile / float(Player.SUBTILE)
-		_glow_at(where, BURNING_RADIUS * tile, BURNING_COLOUR, 0.85)
+		var where := Vector2(one["pos"][0],one["pos"][1])*per
+		var separate := true
+		for point in points:
+			if point.distance_to(where)<separation:
+				separate = false
+				break
+		if separate:
+			points.append(where)
+		if points.size()==MAX_BURNING_LIGHTS:
+			break
+	return points
 
 
 ## Whether this cell is part of something that is currently lit.

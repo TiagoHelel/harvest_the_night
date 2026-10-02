@@ -209,7 +209,11 @@ func _watch(delta: float) -> void:
 		if now.has(gone):
 			continue
 		var last: Array = _seen[gone]
-		_corpse(last[2] as Vector2, last[1] as StringName)
+		# WorldView owns authored death playback for the five enemy families.
+		# Keep the legacy fallback for callers without that world, rather than
+		# drawing a second, flattened body above the new animation.
+		if _world == null or not EnemyMotion.TRACKED.has(last[1]):
+			_corpse(last[2] as Vector2, last[1] as StringName)
 		deaths += 1
 	_seen = now
 

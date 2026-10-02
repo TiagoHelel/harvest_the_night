@@ -26831,6 +26831,1659 @@
       "input": "enemies/giant_windup_2",
       "operation": "copy",
       "alias_of": "enemies/giant_windup_2"
+    },
+    {
+      "id": "effects/muzzle_0",
+      "owner": "raster",
+      "source": "assets/art_source/effects/muzzle.png",
+      "source_sha256": "49d1745f83972fdb67b4298fd032bbc47eddda428068d9adb4da0e4ddb3230bd",
+      "crop_xywh": [
+        203,
+        254,
+        348,
+        244
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        690,
+        724
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "pivot_xy": [
+        6,
+        6
+      ],
+      "content_scale": 0.01949317738791423,
+      "content_anchor_xy": [
+        3,
+        2
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "effects/muzzle",
+      "frame": 0,
+      "seconds": 0.065,
+      "loop": false,
+      "output": "sprites/effects/muzzle_0.png",
+      "prompt": "implementation/sprites/generation/0017-muzzle-strip.prompt.txt",
+      "prompt_sha256": "7a38d15ad40936ddfe71517dbc62457d24947eaa1326039ddf407b57a6ad3c77",
+      "references": [
+        {
+          "path": "docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0017",
+      "revision": 0,
+      "fx_family": "muzzle",
+      "fx_origin": "center",
+      "scale_reference": {
+        "visible_height": 8,
+        "max_raw_height": 401
+      },
+      "output_sha256": "d2a3fbd95425757b2c20768392682201cf2cf7dc7eb0598073d92a87958d95f3"
+    },
+    {
+      "id": "effects/muzzle_1",
+      "owner": "raster",
+      "source": "assets/art_source/effects/muzzle.png",
+      "source_sha256": "49d1745f83972fdb67b4298fd032bbc47eddda428068d9adb4da0e4ddb3230bd",
+      "crop_xywh": [
+        830,
+        162,
+        513,
+        401
+      ],
+      "sheet_cell_xywh": [
+        690,
+        0,
+        808,
+        724
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "pivot_xy": [
+        6,
+        6
+      ],
+      "content_scale": 0.01949317738791423,
+      "content_anchor_xy": [
+        5,
+        4
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "effects/muzzle",
+      "frame": 1,
+      "seconds": 0.065,
+      "loop": false,
+      "output": "sprites/effects/muzzle_1.png",
+      "prompt": "implementation/sprites/generation/0017-muzzle-strip.prompt.txt",
+      "prompt_sha256": "7a38d15ad40936ddfe71517dbc62457d24947eaa1326039ddf407b57a6ad3c77",
+      "references": [
+        {
+          "path": "docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0017",
+      "revision": 0,
+      "fx_family": "muzzle",
+      "fx_origin": "center",
+      "scale_reference": {
+        "visible_height": 8,
+        "max_raw_height": 401
+      },
+      "variant_of": "effects/muzzle_0",
+      "output_sha256": "fe8a03c41b5d5f87cb849f1b4421fbbf997f5a5ae4f5f9f698ac588e81473a21"
+    },
+    {
+      "id": "effects/muzzle_2",
+      "owner": "raster",
+      "source": "assets/art_source/effects/muzzle.png",
+      "source_sha256": "49d1745f83972fdb67b4298fd032bbc47eddda428068d9adb4da0e4ddb3230bd",
+      "crop_xywh": [
+        1653,
+        254,
+        399,
+        260
+      ],
+      "sheet_cell_xywh": [
+        1498,
+        0,
+        674,
+        724
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "pivot_xy": [
+        6,
+        6
+      ],
+      "content_scale": 0.01949317738791423,
+      "content_anchor_xy": [
+        4,
+        2
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "effects/muzzle",
+      "frame": 2,
+      "seconds": 0.065,
+      "loop": false,
+      "output": "sprites/effects/muzzle_2.png",
+      "prompt": "implementation/sprites/generation/0017-muzzle-strip.prompt.txt",
+      "prompt_sha256": "7a38d15ad40936ddfe71517dbc62457d24947eaa1326039ddf407b57a6ad3c77",
+      "references": [
+        {
+          "path": "docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0017",
+      "revision": 0,
+      "fx_family": "muzzle",
+      "fx_origin": "center",
+      "scale_reference": {
+        "visible_height": 8,
+        "max_raw_height": 401
+      },
+      "variant_of": "effects/muzzle_0",
+      "output_sha256": "abf38edfabe46a07badf7a1b892a0b70916a592aeaaea2f3ca755c942345258d"
+    },
+    {
+      "id": "effects/impact_0",
+      "owner": "raster",
+      "source": "assets/art_source/effects/impact.png",
+      "source_sha256": "3b780e9840de8225540938eea089af1b240550de187a713616e702770d5b0af0",
+      "crop_xywh": [
+        299,
+        261,
+        282,
+        252
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        747,
+        724
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "pivot_xy": [
+        6,
+        6
+      ],
+      "content_scale": 0.02237136465324385,
+      "content_anchor_xy": [
+        3,
+        3
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "effects/impact",
+      "frame": 0,
+      "seconds": 0.065,
+      "loop": false,
+      "output": "sprites/effects/impact_0.png",
+      "prompt": "implementation/sprites/generation/0017-impact-strip.prompt.txt",
+      "prompt_sha256": "b7e61e537440de65e0acefadf1c8d0552225ac0113d6c1ee0adc810696557169",
+      "references": [
+        {
+          "path": "docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/effects/muzzle.png",
+          "sha256": "49d1745f83972fdb67b4298fd032bbc47eddda428068d9adb4da0e4ddb3230bd",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0017",
+      "revision": 0,
+      "fx_family": "impact",
+      "fx_origin": "center",
+      "scale_reference": {
+        "visible_height": 9,
+        "max_raw_height": 380
+      },
+      "output_sha256": "57430acd3bc0b8f2e19504f11a4c35180427788a656259da8694002bdba06343"
+    },
+    {
+      "id": "effects/impact_1",
+      "owner": "raster",
+      "source": "assets/art_source/effects/impact.png",
+      "source_sha256": "3b780e9840de8225540938eea089af1b240550de187a713616e702770d5b0af0",
+      "crop_xywh": [
+        913,
+        169,
+        447,
+        380
+      ],
+      "sheet_cell_xywh": [
+        747,
+        0,
+        745,
+        724
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "pivot_xy": [
+        6,
+        6
+      ],
+      "content_scale": 0.02237136465324385,
+      "content_anchor_xy": [
+        5,
+        4
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "effects/impact",
+      "frame": 1,
+      "seconds": 0.065,
+      "loop": false,
+      "output": "sprites/effects/impact_1.png",
+      "prompt": "implementation/sprites/generation/0017-impact-strip.prompt.txt",
+      "prompt_sha256": "b7e61e537440de65e0acefadf1c8d0552225ac0113d6c1ee0adc810696557169",
+      "references": [
+        {
+          "path": "docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/effects/muzzle.png",
+          "sha256": "49d1745f83972fdb67b4298fd032bbc47eddda428068d9adb4da0e4ddb3230bd",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0017",
+      "revision": 0,
+      "fx_family": "impact",
+      "fx_origin": "center",
+      "scale_reference": {
+        "visible_height": 9,
+        "max_raw_height": 380
+      },
+      "variant_of": "effects/impact_0",
+      "output_sha256": "6a5cff67720916e243ef4264acb21b903de449abc32ac5bb4aa5c2ef335a4f54"
+    },
+    {
+      "id": "effects/impact_2",
+      "owner": "raster",
+      "source": "assets/art_source/effects/impact.png",
+      "source_sha256": "3b780e9840de8225540938eea089af1b240550de187a713616e702770d5b0af0",
+      "crop_xywh": [
+        1624,
+        269,
+        349,
+        244
+      ],
+      "sheet_cell_xywh": [
+        1492,
+        0,
+        680,
+        724
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "pivot_xy": [
+        6,
+        6
+      ],
+      "content_scale": 0.02237136465324385,
+      "content_anchor_xy": [
+        4,
+        2
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "effects/impact",
+      "frame": 2,
+      "seconds": 0.065,
+      "loop": false,
+      "output": "sprites/effects/impact_2.png",
+      "prompt": "implementation/sprites/generation/0017-impact-strip.prompt.txt",
+      "prompt_sha256": "b7e61e537440de65e0acefadf1c8d0552225ac0113d6c1ee0adc810696557169",
+      "references": [
+        {
+          "path": "docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/effects/muzzle.png",
+          "sha256": "49d1745f83972fdb67b4298fd032bbc47eddda428068d9adb4da0e4ddb3230bd",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0017",
+      "revision": 0,
+      "fx_family": "impact",
+      "fx_origin": "center",
+      "scale_reference": {
+        "visible_height": 9,
+        "max_raw_height": 380
+      },
+      "variant_of": "effects/impact_0",
+      "output_sha256": "b7ef6481206411ce8f782408ca1a96dc451222bac84bded76a992d3273f155f3"
+    },
+    {
+      "id": "effects/flame_0",
+      "owner": "raster",
+      "source": "assets/art_source/effects/flame.png",
+      "source_sha256": "3fbfabd9defb484d516ebb0dfddc2218fd8ae8415d93d1662b74182d56a2799e",
+      "crop_xywh": [
+        269,
+        308,
+        151,
+        268
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        580,
+        724
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        16,
+        20
+      ],
+      "pivot_xy": [
+        8,
+        18
+      ],
+      "content_scale": 0.03488372093023256,
+      "content_anchor_xy": [
+        2,
+        9
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "effects/flame",
+      "frame": 0,
+      "seconds": 0.14,
+      "loop": false,
+      "output": "sprites/effects/flame_0.png",
+      "prompt": "implementation/sprites/generation/0017-flame-strip.prompt.txt",
+      "prompt_sha256": "568768773d44523f02d73a1e133263b9ed7d185a38db7e60228126e286d2a7ca",
+      "references": [
+        {
+          "path": "docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/effects/muzzle.png",
+          "sha256": "49d1745f83972fdb67b4298fd032bbc47eddda428068d9adb4da0e4ddb3230bd",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0017",
+      "revision": 0,
+      "fx_family": "flame",
+      "fx_origin": "base",
+      "scale_reference": {
+        "visible_height": 15,
+        "max_raw_height": 430
+      },
+      "output_sha256": "2b5b0db6f57b19d11ff46a6ba8f18d538eb44a366bb14cd32ec2a06cb7bc65d3"
+    },
+    {
+      "id": "effects/flame_1",
+      "owner": "raster",
+      "source": "assets/art_source/effects/flame.png",
+      "source_sha256": "3fbfabd9defb484d516ebb0dfddc2218fd8ae8415d93d1662b74182d56a2799e",
+      "crop_xywh": [
+        740,
+        146,
+        278,
+        430
+      ],
+      "sheet_cell_xywh": [
+        580,
+        0,
+        558,
+        724
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        16,
+        20
+      ],
+      "pivot_xy": [
+        8,
+        18
+      ],
+      "content_scale": 0.03488372093023256,
+      "content_anchor_xy": [
+        5,
+        15
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "effects/flame",
+      "frame": 1,
+      "seconds": 0.14,
+      "loop": false,
+      "output": "sprites/effects/flame_1.png",
+      "prompt": "implementation/sprites/generation/0017-flame-strip.prompt.txt",
+      "prompt_sha256": "568768773d44523f02d73a1e133263b9ed7d185a38db7e60228126e286d2a7ca",
+      "references": [
+        {
+          "path": "docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/effects/muzzle.png",
+          "sha256": "49d1745f83972fdb67b4298fd032bbc47eddda428068d9adb4da0e4ddb3230bd",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0017",
+      "revision": 0,
+      "fx_family": "flame",
+      "fx_origin": "base",
+      "scale_reference": {
+        "visible_height": 15,
+        "max_raw_height": 430
+      },
+      "variant_of": "effects/flame_0",
+      "output_sha256": "94317a44c8b2c3fcdd7278203ea187520c539cc873fd89737a7f5a2c2e3e71c0"
+    },
+    {
+      "id": "effects/flame_2",
+      "owner": "raster",
+      "source": "assets/art_source/effects/flame.png",
+      "source_sha256": "3fbfabd9defb484d516ebb0dfddc2218fd8ae8415d93d1662b74182d56a2799e",
+      "crop_xywh": [
+        1258,
+        244,
+        242,
+        332
+      ],
+      "sheet_cell_xywh": [
+        1138,
+        0,
+        496,
+        724
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        16,
+        20
+      ],
+      "pivot_xy": [
+        8,
+        18
+      ],
+      "content_scale": 0.03488372093023256,
+      "content_anchor_xy": [
+        4,
+        12
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "effects/flame",
+      "frame": 2,
+      "seconds": 0.14,
+      "loop": false,
+      "output": "sprites/effects/flame_2.png",
+      "prompt": "implementation/sprites/generation/0017-flame-strip.prompt.txt",
+      "prompt_sha256": "568768773d44523f02d73a1e133263b9ed7d185a38db7e60228126e286d2a7ca",
+      "references": [
+        {
+          "path": "docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/effects/muzzle.png",
+          "sha256": "49d1745f83972fdb67b4298fd032bbc47eddda428068d9adb4da0e4ddb3230bd",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0017",
+      "revision": 0,
+      "fx_family": "flame",
+      "fx_origin": "base",
+      "scale_reference": {
+        "visible_height": 15,
+        "max_raw_height": 430
+      },
+      "variant_of": "effects/flame_0",
+      "output_sha256": "2ae79a18bd21a88e545fe43195cb2f6bd1aa55dff02c751210efdec77ea7ab91"
+    },
+    {
+      "id": "effects/flame_3",
+      "owner": "raster",
+      "source": "assets/art_source/effects/flame.png",
+      "source_sha256": "3fbfabd9defb484d516ebb0dfddc2218fd8ae8415d93d1662b74182d56a2799e",
+      "crop_xywh": [
+        1768,
+        257,
+        182,
+        305
+      ],
+      "sheet_cell_xywh": [
+        1634,
+        0,
+        538,
+        724
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        16,
+        20
+      ],
+      "pivot_xy": [
+        8,
+        18
+      ],
+      "content_scale": 0.03488372093023256,
+      "content_anchor_xy": [
+        3,
+        11
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "effects/flame",
+      "frame": 3,
+      "seconds": 0.14,
+      "loop": false,
+      "output": "sprites/effects/flame_3.png",
+      "prompt": "implementation/sprites/generation/0017-flame-strip.prompt.txt",
+      "prompt_sha256": "568768773d44523f02d73a1e133263b9ed7d185a38db7e60228126e286d2a7ca",
+      "references": [
+        {
+          "path": "docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/effects/muzzle.png",
+          "sha256": "49d1745f83972fdb67b4298fd032bbc47eddda428068d9adb4da0e4ddb3230bd",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0017",
+      "revision": 0,
+      "fx_family": "flame",
+      "fx_origin": "base",
+      "scale_reference": {
+        "visible_height": 15,
+        "max_raw_height": 430
+      },
+      "variant_of": "effects/flame_0",
+      "output_sha256": "80df139559c9cfefacf96876169d636292e2072b59250ae47b2964ca0df2c8cd"
+    },
+    {
+      "id": "effects/smoke_0",
+      "owner": "raster",
+      "source": "assets/art_source/effects/smoke.png",
+      "source_sha256": "391ba8ad86cb22c0ef8dbdccf4301f883934e8616a5393ee96e7463d2666d4b0",
+      "crop_xywh": [
+        176,
+        442,
+        248,
+        153
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        567,
+        724
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        16,
+        20
+      ],
+      "pivot_xy": [
+        8,
+        18
+      ],
+      "content_scale": 0.0339943342776204,
+      "content_anchor_xy": [
+        4,
+        5
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "effects/smoke",
+      "frame": 0,
+      "seconds": 0.14,
+      "loop": false,
+      "output": "sprites/effects/smoke_0.png",
+      "prompt": "implementation/sprites/generation/0017-smoke-strip.prompt.txt",
+      "prompt_sha256": "517ff52a5679d75c172e1f9b63fb3aec3cf0af714e9e1329bbbcc907fed72bdf",
+      "references": [
+        {
+          "path": "docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/effects/muzzle.png",
+          "sha256": "49d1745f83972fdb67b4298fd032bbc47eddda428068d9adb4da0e4ddb3230bd",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0017",
+      "revision": 0,
+      "fx_family": "smoke",
+      "fx_origin": "base",
+      "scale_reference": {
+        "visible_height": 12,
+        "max_raw_height": 353
+      },
+      "output_sha256": "e40b7dca9a82caa7daae0b1aa45e0bded8fbff32167fe2ba00ac159e02768709"
+    },
+    {
+      "id": "effects/smoke_1",
+      "owner": "raster",
+      "source": "assets/art_source/effects/smoke.png",
+      "source_sha256": "391ba8ad86cb22c0ef8dbdccf4301f883934e8616a5393ee96e7463d2666d4b0",
+      "crop_xywh": [
+        710,
+        280,
+        262,
+        318
+      ],
+      "sheet_cell_xywh": [
+        567,
+        0,
+        536,
+        724
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        16,
+        20
+      ],
+      "pivot_xy": [
+        8,
+        18
+      ],
+      "content_scale": 0.0339943342776204,
+      "content_anchor_xy": [
+        4,
+        11
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "effects/smoke",
+      "frame": 1,
+      "seconds": 0.14,
+      "loop": false,
+      "output": "sprites/effects/smoke_1.png",
+      "prompt": "implementation/sprites/generation/0017-smoke-strip.prompt.txt",
+      "prompt_sha256": "517ff52a5679d75c172e1f9b63fb3aec3cf0af714e9e1329bbbcc907fed72bdf",
+      "references": [
+        {
+          "path": "docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/effects/muzzle.png",
+          "sha256": "49d1745f83972fdb67b4298fd032bbc47eddda428068d9adb4da0e4ddb3230bd",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0017",
+      "revision": 0,
+      "fx_family": "smoke",
+      "fx_origin": "base",
+      "scale_reference": {
+        "visible_height": 12,
+        "max_raw_height": 353
+      },
+      "variant_of": "effects/smoke_0",
+      "output_sha256": "f0aa5eba4e3405790ff8fae9d6ab08581704dd170e83b7a3eb460c4d889bf0e6"
+    },
+    {
+      "id": "effects/smoke_2",
+      "owner": "raster",
+      "source": "assets/art_source/effects/smoke.png",
+      "source_sha256": "391ba8ad86cb22c0ef8dbdccf4301f883934e8616a5393ee96e7463d2666d4b0",
+      "crop_xywh": [
+        1235,
+        230,
+        224,
+        353
+      ],
+      "sheet_cell_xywh": [
+        1103,
+        0,
+        531,
+        724
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        16,
+        20
+      ],
+      "pivot_xy": [
+        8,
+        18
+      ],
+      "content_scale": 0.0339943342776204,
+      "content_anchor_xy": [
+        4,
+        12
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "effects/smoke",
+      "frame": 2,
+      "seconds": 0.14,
+      "loop": false,
+      "output": "sprites/effects/smoke_2.png",
+      "prompt": "implementation/sprites/generation/0017-smoke-strip.prompt.txt",
+      "prompt_sha256": "517ff52a5679d75c172e1f9b63fb3aec3cf0af714e9e1329bbbcc907fed72bdf",
+      "references": [
+        {
+          "path": "docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/effects/muzzle.png",
+          "sha256": "49d1745f83972fdb67b4298fd032bbc47eddda428068d9adb4da0e4ddb3230bd",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0017",
+      "revision": 0,
+      "fx_family": "smoke",
+      "fx_origin": "base",
+      "scale_reference": {
+        "visible_height": 12,
+        "max_raw_height": 353
+      },
+      "variant_of": "effects/smoke_0",
+      "output_sha256": "1d8049d02c554a792c4b6e545f4b23b618e3cf03f786931103c7a2c5efe2fcdc"
+    },
+    {
+      "id": "effects/smoke_3",
+      "owner": "raster",
+      "source": "assets/art_source/effects/smoke.png",
+      "source_sha256": "391ba8ad86cb22c0ef8dbdccf4301f883934e8616a5393ee96e7463d2666d4b0",
+      "crop_xywh": [
+        1809,
+        342,
+        147,
+        241
+      ],
+      "sheet_cell_xywh": [
+        1634,
+        0,
+        538,
+        724
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        16,
+        20
+      ],
+      "pivot_xy": [
+        8,
+        18
+      ],
+      "content_scale": 0.0339943342776204,
+      "content_anchor_xy": [
+        2,
+        8
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "effects/smoke",
+      "frame": 3,
+      "seconds": 0.14,
+      "loop": false,
+      "output": "sprites/effects/smoke_3.png",
+      "prompt": "implementation/sprites/generation/0017-smoke-strip.prompt.txt",
+      "prompt_sha256": "517ff52a5679d75c172e1f9b63fb3aec3cf0af714e9e1329bbbcc907fed72bdf",
+      "references": [
+        {
+          "path": "docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/effects/muzzle.png",
+          "sha256": "49d1745f83972fdb67b4298fd032bbc47eddda428068d9adb4da0e4ddb3230bd",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0017",
+      "revision": 0,
+      "fx_family": "smoke",
+      "fx_origin": "base",
+      "scale_reference": {
+        "visible_height": 12,
+        "max_raw_height": 353
+      },
+      "variant_of": "effects/smoke_0",
+      "output_sha256": "87b029d90da8a0d73b3c8d7bb416bf94aed42d020de568e457aa146249bd8d91"
+    },
+    {
+      "id": "effects/dust_0",
+      "owner": "raster",
+      "source": "assets/art_source/effects/dust.png",
+      "source_sha256": "75b3c707dd7653bf9ca190fed34327fc5ea645ee88dce3e67bce21f8f4a67463",
+      "crop_xywh": [
+        221,
+        321,
+        313,
+        221
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        685,
+        724
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        16,
+        12
+      ],
+      "pivot_xy": [
+        8,
+        10
+      ],
+      "content_scale": 0.02626641651031895,
+      "content_anchor_xy": [
+        4,
+        6
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "effects/dust",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/effects/dust_0.png",
+      "prompt": "implementation/sprites/generation/0017-dust-strip.prompt.txt",
+      "prompt_sha256": "27f7e090fbd90a89b487212f4ecb5d479c5ebf98ec34472c9b2475a8f3ca828c",
+      "references": [
+        {
+          "path": "docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/effects/muzzle.png",
+          "sha256": "49d1745f83972fdb67b4298fd032bbc47eddda428068d9adb4da0e4ddb3230bd",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0017",
+      "revision": 0,
+      "fx_family": "dust",
+      "fx_origin": "base",
+      "scale_reference": {
+        "visible_height": 8,
+        "max_raw_height": 267
+      },
+      "output_sha256": "b00cd5724f5421bbec6ae5d4aac552ba46d5485923bf0508294e1ea02227200a"
+    },
+    {
+      "id": "effects/dust_1",
+      "owner": "raster",
+      "source": "assets/art_source/effects/dust.png",
+      "source_sha256": "75b3c707dd7653bf9ca190fed34327fc5ea645ee88dce3e67bce21f8f4a67463",
+      "crop_xywh": [
+        836,
+        275,
+        533,
+        267
+      ],
+      "sheet_cell_xywh": [
+        685,
+        0,
+        844,
+        724
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        16,
+        12
+      ],
+      "pivot_xy": [
+        8,
+        10
+      ],
+      "content_scale": 0.02626641651031895,
+      "content_anchor_xy": [
+        7,
+        7
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "effects/dust",
+      "frame": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/effects/dust_1.png",
+      "prompt": "implementation/sprites/generation/0017-dust-strip.prompt.txt",
+      "prompt_sha256": "27f7e090fbd90a89b487212f4ecb5d479c5ebf98ec34472c9b2475a8f3ca828c",
+      "references": [
+        {
+          "path": "docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/effects/muzzle.png",
+          "sha256": "49d1745f83972fdb67b4298fd032bbc47eddda428068d9adb4da0e4ddb3230bd",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0017",
+      "revision": 0,
+      "fx_family": "dust",
+      "fx_origin": "base",
+      "scale_reference": {
+        "visible_height": 8,
+        "max_raw_height": 267
+      },
+      "variant_of": "effects/dust_0",
+      "output_sha256": "a36da5b5321abbfa1ae324b1dc11e6cbde0b43c6604eac37f14d6dc35f7ab1d0"
+    },
+    {
+      "id": "effects/dust_2",
+      "owner": "raster",
+      "source": "assets/art_source/effects/dust.png",
+      "source_sha256": "75b3c707dd7653bf9ca190fed34327fc5ea645ee88dce3e67bce21f8f4a67463",
+      "crop_xywh": [
+        1690,
+        310,
+        319,
+        232
+      ],
+      "sheet_cell_xywh": [
+        1529,
+        0,
+        643,
+        724
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        16,
+        12
+      ],
+      "pivot_xy": [
+        8,
+        10
+      ],
+      "content_scale": 0.02626641651031895,
+      "content_anchor_xy": [
+        4,
+        6
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "effects/dust",
+      "frame": 2,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/effects/dust_2.png",
+      "prompt": "implementation/sprites/generation/0017-dust-strip.prompt.txt",
+      "prompt_sha256": "27f7e090fbd90a89b487212f4ecb5d479c5ebf98ec34472c9b2475a8f3ca828c",
+      "references": [
+        {
+          "path": "docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/effects/muzzle.png",
+          "sha256": "49d1745f83972fdb67b4298fd032bbc47eddda428068d9adb4da0e4ddb3230bd",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0017",
+      "revision": 0,
+      "fx_family": "dust",
+      "fx_origin": "base",
+      "scale_reference": {
+        "visible_height": 8,
+        "max_raw_height": 267
+      },
+      "variant_of": "effects/dust_0",
+      "output_sha256": "e5095ad8dc99e57e685edf6d1e506833fd114df1430235f7d8f0cbc503c0e7f2"
+    },
+    {
+      "id": "effects/splash_0",
+      "owner": "raster",
+      "source": "assets/art_source/effects/splash.png",
+      "source_sha256": "a1c9fd126730e2e5a90df669a9ea7c574d7d59f1f3c8535cbb8b22beb492a821",
+      "crop_xywh": [
+        105,
+        348,
+        432,
+        246
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        603,
+        724
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        20,
+        16
+      ],
+      "pivot_xy": [
+        10,
+        14
+      ],
+      "content_scale": 0.032,
+      "content_anchor_xy": [
+        7,
+        8
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "effects/splash",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/effects/splash_0.png",
+      "prompt": "implementation/sprites/generation/0017-splash-strip.prompt.txt",
+      "prompt_sha256": "def1b0f6438e9f7e80aa65f8b953793906874bdfb40a8dec53624febb6997db7",
+      "references": [
+        {
+          "path": "docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/effects/muzzle.png",
+          "sha256": "49d1745f83972fdb67b4298fd032bbc47eddda428068d9adb4da0e4ddb3230bd",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0017",
+      "revision": 0,
+      "fx_family": "splash",
+      "fx_origin": "base",
+      "scale_reference": {
+        "visible_height": 12,
+        "max_raw_height": 375
+      },
+      "output_sha256": "0e285f03a76353f11a8d249fa6bde87785f24ae8bd0ca13a220f370571850bf8"
+    },
+    {
+      "id": "effects/splash_1",
+      "owner": "raster",
+      "source": "assets/art_source/effects/splash.png",
+      "source_sha256": "a1c9fd126730e2e5a90df669a9ea7c574d7d59f1f3c8535cbb8b22beb492a821",
+      "crop_xywh": [
+        670,
+        220,
+        366,
+        375
+      ],
+      "sheet_cell_xywh": [
+        603,
+        0,
+        533,
+        724
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        20,
+        16
+      ],
+      "pivot_xy": [
+        10,
+        14
+      ],
+      "content_scale": 0.032,
+      "content_anchor_xy": [
+        6,
+        12
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "effects/splash",
+      "frame": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/effects/splash_1.png",
+      "prompt": "implementation/sprites/generation/0017-splash-strip.prompt.txt",
+      "prompt_sha256": "def1b0f6438e9f7e80aa65f8b953793906874bdfb40a8dec53624febb6997db7",
+      "references": [
+        {
+          "path": "docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/effects/muzzle.png",
+          "sha256": "49d1745f83972fdb67b4298fd032bbc47eddda428068d9adb4da0e4ddb3230bd",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0017",
+      "revision": 0,
+      "fx_family": "splash",
+      "fx_origin": "base",
+      "scale_reference": {
+        "visible_height": 12,
+        "max_raw_height": 375
+      },
+      "variant_of": "effects/splash_0",
+      "output_sha256": "61498ad8b7f37c6ca394703d329ebf3ef2b77def65eef486c1240d70a5131c5d"
+    },
+    {
+      "id": "effects/splash_2",
+      "owner": "raster",
+      "source": "assets/art_source/effects/splash.png",
+      "source_sha256": "a1c9fd126730e2e5a90df669a9ea7c574d7d59f1f3c8535cbb8b22beb492a821",
+      "crop_xywh": [
+        1236,
+        322,
+        297,
+        273
+      ],
+      "sheet_cell_xywh": [
+        1136,
+        0,
+        526,
+        724
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        20,
+        16
+      ],
+      "pivot_xy": [
+        10,
+        14
+      ],
+      "content_scale": 0.032,
+      "content_anchor_xy": [
+        5,
+        9
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "effects/splash",
+      "frame": 2,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/effects/splash_2.png",
+      "prompt": "implementation/sprites/generation/0017-splash-strip.prompt.txt",
+      "prompt_sha256": "def1b0f6438e9f7e80aa65f8b953793906874bdfb40a8dec53624febb6997db7",
+      "references": [
+        {
+          "path": "docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/effects/muzzle.png",
+          "sha256": "49d1745f83972fdb67b4298fd032bbc47eddda428068d9adb4da0e4ddb3230bd",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0017",
+      "revision": 0,
+      "fx_family": "splash",
+      "fx_origin": "base",
+      "scale_reference": {
+        "visible_height": 12,
+        "max_raw_height": 375
+      },
+      "variant_of": "effects/splash_0",
+      "output_sha256": "8fbec4553e9cfea3de89d6771c53ca3ce782549821aefc33b0e5b861e07000de"
+    },
+    {
+      "id": "effects/splash_3",
+      "owner": "raster",
+      "source": "assets/art_source/effects/splash.png",
+      "source_sha256": "a1c9fd126730e2e5a90df669a9ea7c574d7d59f1f3c8535cbb8b22beb492a821",
+      "crop_xywh": [
+        1792,
+        443,
+        219,
+        151
+      ],
+      "sheet_cell_xywh": [
+        1662,
+        0,
+        510,
+        724
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        20,
+        16
+      ],
+      "pivot_xy": [
+        10,
+        14
+      ],
+      "content_scale": 0.032,
+      "content_anchor_xy": [
+        3,
+        5
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "effects/splash",
+      "frame": 3,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/effects/splash_3.png",
+      "prompt": "implementation/sprites/generation/0017-splash-strip.prompt.txt",
+      "prompt_sha256": "def1b0f6438e9f7e80aa65f8b953793906874bdfb40a8dec53624febb6997db7",
+      "references": [
+        {
+          "path": "docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/effects/muzzle.png",
+          "sha256": "49d1745f83972fdb67b4298fd032bbc47eddda428068d9adb4da0e4ddb3230bd",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0017",
+      "revision": 0,
+      "fx_family": "splash",
+      "fx_origin": "base",
+      "scale_reference": {
+        "visible_height": 12,
+        "max_raw_height": 375
+      },
+      "variant_of": "effects/splash_0",
+      "output_sha256": "23cb4c761e1ac09e83df8bad8cd9c72b52f1007bb5b7961be7ab985bd4116505"
+    },
+    {
+      "id": "effects/flare_0",
+      "owner": "raster",
+      "source": "assets/art_source/effects/flare.png",
+      "source_sha256": "dacef2fd1f172bb27223a2e342742889906a23bbb0b05da4e992552f54bbd1c1",
+      "crop_xywh": [
+        178,
+        279,
+        188,
+        203
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        492,
+        724
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        12
+      ],
+      "content_scale": 0.05069124423963134,
+      "content_anchor_xy": [
+        5,
+        5
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "effects/flare",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/effects/flare_0.png",
+      "prompt": "implementation/sprites/generation/0017-flare-strip.prompt.txt",
+      "prompt_sha256": "212056323122f50f040170d034d2bb54ca94284355c8d75ac577413251b88046",
+      "references": [
+        {
+          "path": "docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/effects/muzzle.png",
+          "sha256": "49d1745f83972fdb67b4298fd032bbc47eddda428068d9adb4da0e4ddb3230bd",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0017",
+      "revision": 0,
+      "fx_family": "flare",
+      "fx_origin": "center",
+      "scale_reference": {
+        "visible_height": 19,
+        "max_raw_height": 350
+      },
+      "output_sha256": "298f56654a3e2437f3cf90ef4ce25b5c090e79fd6de3f83c19dfa69b60c22ae7"
+    },
+    {
+      "id": "effects/flare_1",
+      "owner": "raster",
+      "source": "assets/art_source/effects/flare.png",
+      "source_sha256": "dacef2fd1f172bb27223a2e342742889906a23bbb0b05da4e992552f54bbd1c1",
+      "crop_xywh": [
+        619,
+        205,
+        380,
+        329
+      ],
+      "sheet_cell_xywh": [
+        492,
+        0,
+        566,
+        724
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        12
+      ],
+      "content_scale": 0.05069124423963134,
+      "content_anchor_xy": [
+        9,
+        8
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "effects/flare",
+      "frame": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/effects/flare_1.png",
+      "prompt": "implementation/sprites/generation/0017-flare-strip.prompt.txt",
+      "prompt_sha256": "212056323122f50f040170d034d2bb54ca94284355c8d75ac577413251b88046",
+      "references": [
+        {
+          "path": "docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/effects/muzzle.png",
+          "sha256": "49d1745f83972fdb67b4298fd032bbc47eddda428068d9adb4da0e4ddb3230bd",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0017",
+      "revision": 0,
+      "fx_family": "flare",
+      "fx_origin": "center",
+      "scale_reference": {
+        "visible_height": 19,
+        "max_raw_height": 350
+      },
+      "variant_of": "effects/flare_0",
+      "output_sha256": "63a75020f3b3559a45820ebe35c2de797c3d2d069032dcb8ce8048feb9d05365"
+    },
+    {
+      "id": "effects/flare_2",
+      "owner": "raster",
+      "source": "assets/art_source/effects/flare.png",
+      "source_sha256": "dacef2fd1f172bb27223a2e342742889906a23bbb0b05da4e992552f54bbd1c1",
+      "crop_xywh": [
+        1118,
+        197,
+        434,
+        350
+      ],
+      "sheet_cell_xywh": [
+        1058,
+        0,
+        591,
+        724
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        12
+      ],
+      "content_scale": 0.05069124423963134,
+      "content_anchor_xy": [
+        11,
+        9
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "effects/flare",
+      "frame": 2,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/effects/flare_2.png",
+      "prompt": "implementation/sprites/generation/0017-flare-strip.prompt.txt",
+      "prompt_sha256": "212056323122f50f040170d034d2bb54ca94284355c8d75ac577413251b88046",
+      "references": [
+        {
+          "path": "docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/effects/muzzle.png",
+          "sha256": "49d1745f83972fdb67b4298fd032bbc47eddda428068d9adb4da0e4ddb3230bd",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0017",
+      "revision": 0,
+      "fx_family": "flare",
+      "fx_origin": "center",
+      "scale_reference": {
+        "visible_height": 19,
+        "max_raw_height": 350
+      },
+      "variant_of": "effects/flare_0",
+      "output_sha256": "f68de4a64581b97b95a7786b75ebd7336bdc0da51574774676959650047f6c5c"
+    },
+    {
+      "id": "effects/flare_3",
+      "owner": "raster",
+      "source": "assets/art_source/effects/flare.png",
+      "source_sha256": "dacef2fd1f172bb27223a2e342742889906a23bbb0b05da4e992552f54bbd1c1",
+      "crop_xywh": [
+        1747,
+        244,
+        296,
+        276
+      ],
+      "sheet_cell_xywh": [
+        1649,
+        0,
+        523,
+        724
+      ],
+      "gutter_xy": [
+        0,
+        0
+      ],
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        12
+      ],
+      "content_scale": 0.05069124423963134,
+      "content_anchor_xy": [
+        7,
+        7
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "effects/flare",
+      "frame": 3,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/effects/flare_3.png",
+      "prompt": "implementation/sprites/generation/0017-flare-strip.prompt.txt",
+      "prompt_sha256": "212056323122f50f040170d034d2bb54ca94284355c8d75ac577413251b88046",
+      "references": [
+        {
+          "path": "docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "As indexed in exact submitted prompt"
+        },
+        {
+          "path": "assets/art_source/effects/muzzle.png",
+          "sha256": "49d1745f83972fdb67b4298fd032bbc47eddda428068d9adb4da0e4ddb3230bd",
+          "role": "As indexed in exact submitted prompt"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "0017",
+      "revision": 0,
+      "fx_family": "flare",
+      "fx_origin": "center",
+      "scale_reference": {
+        "visible_height": 19,
+        "max_raw_height": 350
+      },
+      "variant_of": "effects/flare_0",
+      "output_sha256": "2ae8d37e5c8f0f26f6ac5725095a6d9f24abff324695600fe88c9cc4224340e0"
     }
   ]
 }

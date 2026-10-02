@@ -525,3 +525,55 @@ coordinates, one-shot expiry, 64 simultaneous removals/24-cue cap, load/day
 cleanup, performance and identical serialized core state. Review full 480x270
 captures beside exact 3x nearest views; enlarged windows alone do not restore
 detail discarded by native sprite conversion. The raster importer is unchanged.
+## Task 0017: localized combat and work forms
+
+Seven transparent ImageGen strips own 25 new runtime frames under
+`sprites/effects/`. No completed source or runtime family is replaced. One
+fixed reduction scale per strip preserves expansion and dissipation; alpha128,
+nearest reduction and the shared palette are the only image conversions.
+
+| Family | Frames | Canvas | Pivot | Seconds per frame |
+| --- | --- | --- | --- | --- |
+| muzzle | 3 | 12x12 | 6,6 | 0.065 |
+| impact | 3 | 12x12 | 6,6 | 0.065 |
+| flame | 4 | 16x20 | 8,18 | 0.14 |
+| smoke | 4 | 16x20 | 8,18 | 0.14 |
+| dust | 3 | 16x12 | 8,10 | 0.10 |
+| splash | 4 | 20x16 | 10,14 | 0.10 |
+| flare | 4 | 24x24 | 12,12 | 0.10 |
+
+All are one-shots. PixelEffects observes fixed ticks through Particles, with
+borrowed coordinate Arrays released after each observation. Reload rises emit
+at the measured levelled outlets, including powered reloads; hurt/burning
+transitions, real ability counts and PlayerWork completion observations supply
+the other contacts. It never retains a core entity or writes a state/save field.
+Render frames cannot repeat a shot. Chimneys remain grouped by building anchor.
+
+At most 24 lazily reused Sprite2D forms reserve at most a quarter of the shared
+`video/max_particles` budget; the remaining slots keep the effective cheap
+procedural pixels. Lower density uses emission credits; zero hides all effects
+immediately. Live `a11y/flashing=false` holds the first form with a gentle fade,
+suppresses fragment drift and stops light wobble. State replacement clears cues.
+Periodic flames are limited to three actors per beat. Nearby burning actors
+share at most 12 separated, subdued light halos, avoiding additive wave glare.
+Juice keeps hit numbers/shake but delegates tracked enemy deaths to WorldView.
+Dust and splash sprites use WorldView's existing ground layer below actors,
+so work effects cannot cover an opaque farmer/tool pixel. Binding occurs on
+first playback because Main's child emitter readies before the parent builds
+that layer. Removing the emitter also releases its borrowed ground children.
+
+```powershell
+python tools/check_effect_art.py
+python tools/show_art.py --effects --check
+python tools/show_art.py --effects --out=implementation/shots/sprites/<task-id>/effects
+python implementation/sprites/reviews/0017/build_review.py
+python implementation/sprites/reviews/0017/audit.py
+```
+
+Full verify includes source/frame and actual-state/contact/a11y gates. Capture
+mode compares imported PNG pixels and real native hide/show pixels, warm fire
+and subdued smoke at day/night, chimney/outlet placement, real work, real flare,
+75 simultaneous ignitions/deaths and all frame expiry. A 100-actor saturated FX
+benchmark measures view update CPU separately from GPU; full perf still covers
+the existing complete world budgets. Full/half/off 90-tick core controls must
+remain byte-identical. The exact raw/tool/prompt/reference ledger is preserved.

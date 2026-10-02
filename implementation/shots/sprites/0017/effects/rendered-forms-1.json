@@ -1,0 +1,51 @@
+[
+	{
+		"changed_native_pixels": 26,
+		"mean_luma": 0.370467580408144,
+		"path": "res://sprites/effects/muzzle_1.png",
+		"source_pixels": 26,
+		"warm_pixels": 3
+	},
+	{
+		"changed_native_pixels": 35,
+		"mean_luma": 0.258079559782147,
+		"path": "res://sprites/effects/impact_1.png",
+		"source_pixels": 35,
+		"warm_pixels": 0
+	},
+	{
+		"changed_native_pixels": 68,
+		"mean_luma": 0.279838011846056,
+		"path": "res://sprites/effects/flame_1.png",
+		"source_pixels": 68,
+		"warm_pixels": 3
+	},
+	{
+		"changed_native_pixels": 48,
+		"mean_luma": 0.174973126203908,
+		"path": "res://sprites/effects/smoke_1.png",
+		"source_pixels": 48,
+		"warm_pixels": 0
+	},
+	{
+		"changed_native_pixels": 49,
+		"mean_luma": 0.219461471709062,
+		"path": "res://sprites/effects/dust_1.png",
+		"source_pixels": 49,
+		"warm_pixels": 0
+	},
+	{
+		"changed_native_pixels": 64,
+		"mean_luma": 0.338160728855524,
+		"path": "res://sprites/effects/splash_1.png",
+		"source_pixels": 64,
+		"warm_pixels": 0
+	},
+	{
+		"changed_native_pixels": 119,
+		"mean_luma": 0.249831807683997,
+		"path": "res://sprites/effects/flare_1.png",
+		"source_pixels": 119,
+		"warm_pixels": 2
+	}
+]

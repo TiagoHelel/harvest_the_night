@@ -1,0 +1,30 @@
+Use case: stylized-concept
+Asset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm
+that becomes a fortress against zombies at night.
+Primary request: effects/flare, exactly 4 ordered sequential frames of localized amber flare burst: tiny warm ignition star, thin broken radiant arcs around a small warm center, separated outward ember spokes, sparse dim ember remnants; no opaque filled disc.
+Input images: Image 1: approved farm/night material and clustered-pixel style reference, not a scene to reproduce. Image 2: accepted muzzle effect strip, reference for cluster simplicity and localized effect scale, not an edit target or a color requirement for smoke/water/dust.
+Style/medium: coherent hand-crafted pixel art with deliberate pixel clusters,
+colored outlines, restrained texture, readable material planes and clean forms.
+Composition/framing: orthographic three-quarter top-down view on a rectangular
+grid; match the approved master camera and scale. Final native canvas is
+24x24 pixels with contact pivot 12,12; this is a downstream import
+target, so the generated source must remain simple enough to survive reduction.
+Lighting/mood: neutral warm daytime, highlights from upper left, darker underside;
+runtime supplies dusk/night lighting. Keep emission in separate localized forms.
+Color palette: match the approved project palette and master, warm timber and
+terracotta, layered greens, cool water, violet/blue shadows; limited ramps.
+Scene/backdrop: true transparent background outside the actual clustered effect. No baked ground shadow for actors.
+Constraints: complete unclipped object, consistent perspective and scale, clear
+ground contact, generous tool/weapon clearance, no labels, text, watermark or UI.
+Avoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,
+random pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,
+new gameplay objects, tiny details that disappear at native size.
+
+Create one short pixel-art effect strip for flare, 4 ordered frames, target 24x24.
+Clear localized origin at 12,12. Sparks/flame have small warm bright cores;
+smoke/dust are subdued clustered forms. Expansion then dissipation, no looping
+flash unless specifically declared. Transparent outside actual particles, no
+full-image bloom, smooth photographic smoke or background gradient. Must remain
+readable over the game's night grass without covering nearby actors.
+
+Produce ONE horizontal strip, exactly 4 equal spacious cells, left to right in the stated order. Same pixel scale throughout: peak visible height about 19 native pixels. Each effect occupies less than half its cell width; leave large completely transparent gutters so disconnected fragments can still be assigned to their own frame. Keep the localized center at the same horizontal center and vertical baseline in every frame. Expansion then dissipation at fixed scale, do not enlarge final remnants. Omit every building, gun, actor, ground plane, label, separator and border. No smooth glow, no gray/white background, no checkerboard painted into pixels. Keep very few broad deliberate clusters, no noise cloud. This is a short ONE-SHOT, not a loop. Render generously large but conceptually chunky; the downstream native sizes are small.

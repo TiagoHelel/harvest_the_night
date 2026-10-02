@@ -1,0 +1,90 @@
+[
+  {
+    "path": "implementation/shots/sprites/0017/effects/busy_burning.png",
+    "sha256": "829737b8487bf89c89e0cb78515c9eaacccffa87e9ed000ef71ec4d8e0dd8568",
+    "page": "captures-01.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3,
+    "current_sha256": "2a77eaf83e06727ceefae984628bc898805ca2862df91a72b9513d066d6808f1"
+  },
+  {
+    "path": "implementation/shots/sprites/0017/effects/busy_flare.png",
+    "sha256": "d93d35ec93eeecbe3969c890f66773a6d03f2c3c0e4220079835132dc42ac404",
+    "page": "captures-02.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3,
+    "current_sha256": "08b0e3778538517dd2c7388bda41695754202330881def5c76181feb7ada83a6"
+  },
+  {
+    "path": "implementation/shots/sprites/0017/effects/deaths_0.png",
+    "sha256": "77858a431b2c7b7f4564fa2498ac3ccc0c8c29a4e20742708033a3506a8fe143",
+    "page": "captures-04.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3,
+    "current_sha256": "b9420d5d58ede9f9c72ab648afb4ff7fd7b0841f08b7b00f3688345f45ead784"
+  },
+  {
+    "path": "implementation/shots/sprites/0017/effects/deaths_1.png",
+    "sha256": "d5fafd7433b65a96184a0675bbdf0922c39f162b2cecd2bc6b4d58b8540efcfd",
+    "page": "captures-04.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3,
+    "current_sha256": "3e64d25af3ea546aec7d5e554ecb054645504d4a7a036d1c7f2436a88c9ea38d"
+  },
+  {
+    "path": "implementation/shots/sprites/0017/effects/deaths_2.png",
+    "sha256": "c5348733058087295af77ff9b921fbf2a7826797e17e0143df49557bdd214959",
+    "page": "captures-05.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3,
+    "current_sha256": "35546180dfb50afb0dc6608c3ba7a5517e04d0c23af9ec2a48a7ed63136bfa50"
+  },
+  {
+    "path": "implementation/shots/sprites/0017/effects/deaths_3.png",
+    "sha256": "9c6a6676adaaa5e1e3a90483a2bbeb05fd106ea4d934de0480dd96077d7b46f5",
+    "page": "captures-05.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3,
+    "current_sha256": "51fde8e3fd25857b541b3eb4d67b08d13523793b56f824f353ac8448253f1a51"
+  },
+  {
+    "path": "implementation/shots/sprites/0017/effects/towers_contact.png",
+    "sha256": "b1db41aa31bd20bb9bfaab19a7675fa467935dbe2ef4d2d1e8d5fabd5e5e9c93",
+    "page": "captures-13.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3,
+    "current_sha256": "5bffef6f793f43b55dc9ab1609ed1935b013a2cc67e11f3947c7d8608d574cd0"
+  },
+  {
+    "path": "implementation/shots/sprites/0017/wave.png",
+    "sha256": "f03202a7573a6ea2a38610bd3b3d6e0ce655b1507b42dc81382f111230a448d5",
+    "page": "captures-20.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3,
+    "current_sha256": "92e89022b32e2780646d6aec7e33026e60950229763f286284122e6cfb72656b"
+  }
+]

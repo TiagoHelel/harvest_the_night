@@ -1,6 +1,6 @@
 # 0017 - Combat and work effects in the same pixel language
 
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0014, 0016
 - **Likely files:** assets/art_source/effects/; src/ui/particles.gd; src/ui/world_view.gd; src/ui/juice.gd; src/ui/lighting.gd
 - **Generation briefs:** FX

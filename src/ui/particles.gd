@@ -63,6 +63,9 @@ const DEFAULT_CAP := 420
 var _state: Dictionary = {}
 var _cap := DEFAULT_CAP
 var _density := 1.0
+var _motion := true
+var _forms := PixelEffects.new()
+var _burn_cursor := 0
 
 # The pool. Parallel arrays rather than an array of dictionaries: a hundred
 # small dictionaries allocated and freed every second is the one place this
@@ -87,14 +90,48 @@ func _ready() -> void:
 	z_index = 15                # over the farm, under task 0076's lights
 	z_as_relative = false
 	_resize(DEFAULT_CAP)
+	var world := get_parent() as WorldView
+	if world != null:
+		_forms.ground_parent = world._ground_traps
 	_read_settings()
+	var service := get_node_or_null(^"/root/Settings")
+	if service != null and not service.changed.is_connected(_on_setting):
+		service.changed.connect(_on_setting)
+		service.reloaded.connect(_read_settings)
+
+
+func _exit_tree() -> void:
+	# Ground forms live below actors in WorldView. Release those reused
+	# children too when this emitter leaves the tree.
+	_forms.release()
 
 
 func show_state(state: Dictionary) -> void:
 	if not is_same(_state, state):
 		_guns_for = -1
 		_guns.clear()
+		_seen_entities.clear()
+		_seen_occupants.clear()
+		_smoke_due = 0.0
+		_forms.reset()
+		for i in _left.size():
+			_left[i] = 0.0
 	_state = state
+
+
+func before_tick(state: Dictionary) -> void:
+	if is_same(state, _state):
+		_forms.before_tick(state, _gun_cells())
+
+
+func after_tick(state: Dictionary) -> void:
+	if is_same(state, _state):
+		_forms.after_tick(state)
+
+
+func _on_setting(key: StringName) -> void:
+	if key in [&"video/max_particles", &"a11y/particle_density", &"a11y/flashing"]:
+		_read_settings()
 
 
 ## Read by path rather than by name: `verify.py` parses every script on its
@@ -110,11 +147,14 @@ func _read_settings() -> void:
 	if service == null or not service.has_method("get_value"):
 		return
 	var cap: Variant = service.get_value(&"video/max_particles")
-	if cap != null:
+	if cap != null and int(cap) != _cap:
 		_resize(maxi(int(cap), 0))
 	var density: Variant = service.get_value(&"a11y/particle_density")
 	if density != null:
-		_density = clampf(float(density), 0.0, 1.0)
+		set_density(float(density))
+	var flashing: Variant = service.get_value(&"a11y/flashing")
+	if flashing != null:
+		set_motion(bool(flashing))
 
 
 func cap() -> int:
@@ -129,6 +169,15 @@ func density() -> float:
 ## same without them.
 func set_density(value: float) -> void:
 	_density = clampf(value, 0.0, 1.0)
+	_forms.set_density(_density)
+	if _density == 0.0:
+		for i in _left.size():
+			_left[i] = 0.0
+
+
+func set_motion(value: bool) -> void:
+	_motion = value
+	_forms.motion = value
 
 
 func set_cap(value: int) -> void:
@@ -141,11 +190,15 @@ func live() -> int:
 	for i in _left.size():
 		if _left[i] > 0.0:
 			n += 1
-	return n
+	return n + _forms.records.size()
 
 
 func _resize(size: int) -> void:
 	_cap = size
+	_forms.limit = mini(PixelEffects.MAX_FORMS, size / 4)
+	_forms.reset()
+	# Raster forms and cheap pixels share one hard ceiling.
+	size -= _forms.limit
 	# **Each one by name.** A `PackedFloat32Array` is a value type, so
 	# `for pool in [_x, _y, ...]` resizes six copies and leaves the six
 	# members empty - which fails on the next line rather than quietly, but
@@ -167,8 +220,8 @@ func _process(delta: float) -> void:
 	if _state.is_empty():
 		return
 	_advance(delta)
-	if _density > 0.0 and _cap > 0:
-		_watch(delta)
+	_forms.advance(delta, self)
+	_watch(delta)
 	queue_redraw()
 
 
@@ -183,8 +236,9 @@ func _advance(delta: float) -> void:
 		if _left[i] <= 0.0:
 			continue
 		_left[i] -= delta
-		_x[i] += _vx[i] * delta
-		_y[i] += _vy[i] * delta
+		if _motion:
+			_x[i] += _vx[i] * delta
+			_y[i] += _vy[i] * delta
 		# Everything slows; smoke and embers also rise.
 		_vx[i] *= 0.94
 		_vy[i] = _vy[i] * 0.94 + (18.0 * delta if _span[i] > 1.0 else 0.0)
@@ -240,12 +294,8 @@ func _watch(delta: float) -> void:
 	# **The guns keep their own pass**, because a muzzle flash is a moment
 	# and a moment missed is a moment gone. It is cheap: only things that can
 	# shoot are asked, and there are never many of those.
-	for idx in _gun_cells():
-		var on: Variant = (_state["occupants"] as Dictionary).get(int(idx),
-			null)
-		if on != null and _firing(on as Dictionary):
-			for muzzle in WorldView.tower_muzzles(on, Grid.cell(int(idx))):
-				_burst(muzzle, 3, &"spark", SPARK, 55.0)
+	# Muzzles are observed once per fixed tick by PixelEffects, rather than
+	# re-emitting for every rendered frame of the reload flash.
 
 	for id in _seen_entities:
 		if entities.has(id):
@@ -253,7 +303,7 @@ func _watch(delta: float) -> void:
 		# It was here and it is not. Dust, and a little blood.
 		var where: Vector2 = (_seen_entities[id] as Array)[0]
 		_burst(where, 5, &"dust", DUST, 34.0)
-		_burst(where, 2, &"blood", BLOOD, 26.0)
+		_burst(where, 1, &"blood", BLOOD, 26.0)
 	_seen_entities = entities
 
 	# **Guns, chimneys and wreckage, and not every frame.**
@@ -271,6 +321,19 @@ func _watch(delta: float) -> void:
 	if _smoke_due > 0.0:
 		return
 	_smoke_due = 0.35
+	# At most three localized flames per smoke beat, rotating through live
+	# burning actors. Large groups keep their cheap one-pixel embers.
+	var burning: Array[int] = []
+	for id in Entities.ids(_state):
+		if Combat.is_burning(_state,int(id)):
+			burning.append(int(id))
+	for i in mini(3,burning.size()):
+		var id := burning[(_burn_cursor+i)%burning.size()]
+		var one := Entities.get_one(_state,id)
+		var at := Vector2(one["pos"][0],one["pos"][1])*per
+		_forms.emit(&"flame",at-Vector2(0,4))
+	if not burning.is_empty():
+		_burn_cursor = (_burn_cursor+3)%burning.size()
 	var occupants: Dictionary = _state["occupants"]
 	var standing: Dictionary = {}
 	var chimneys: Dictionary = {}
@@ -292,8 +355,10 @@ func _watch(delta: float) -> void:
 			chimneys[name] = true
 			at = ArtPlacement.emission(id, Vector2(anchor[0], anchor[1]) * tile, &"smoke", at)
 			_burst(at, 1, &"smoke", SMOKE, 8.0)
+			_forms.emit(&"smoke",at,Vector2(0,-4))
 		elif _is_wrecked(on):
 			_burst(at, 1, &"smoke", SMOKE, 10.0)
+			_forms.emit(&"smoke",at,Vector2(0,-4))
 	for idx in _seen_occupants:
 		if standing.has(idx):
 			continue
@@ -301,6 +366,7 @@ func _watch(delta: float) -> void:
 		var where := (Vector2(Grid.cell(int(idx))) + Vector2(0.5, 0.5)) * tile
 		_burst(where, 7, &"dust", DUST, 40.0)
 		_burst(where, 3, &"smoke", SMOKE, 14.0)
+		_forms.emit(&"dust",where)
 	_seen_occupants = standing
 
 
@@ -381,8 +447,8 @@ func _burst(at: Vector2, how_many: int, kind: StringName, colour: String,
 ## frame** against a budget of sixteen. A ring overwrites in emission order,
 ## which is age order, so it gets the same answer by not asking the question.
 func _slot() -> int:
-	if _cap <= 0:
+	if _left.is_empty():
 		return -1
 	var i := _next
-	_next = (_next + 1) % _cap
+	_next = (_next + 1) % _left.size()
 	return i

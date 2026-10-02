@@ -1152,3 +1152,52 @@ Complete evidence and limits are in `reviews/0016/REVIEW.md`.
 Queue after completion: 16 done, 4 todo, zero doing/blocked. Next: 0017, common
 effects. Exactly one sprite task completed this cycle; the active /goal continues
 automatically toward the backlog while preserving finished families.
+
+
+## 2026-10-02 - 0017 complete: combat and work effects
+
+Added seven missing raster families with seven actual built-in ImageGen calls
+and zero revisions: muzzle, impact, flame, smoke, dust, splash and flare.
+Exact raw sources are `assets/art_source/effects/*.png`; prompts, submitted
+arguments, reference/source hashes and deterministic cuts are saved under
+`generation/0017-*`. All seven sources and 25 distinct converted frames were
+opened. Shared strip scales, binary alpha, existing palette and exact pivots
+pass source checks. Ownership is 417 raster / 29 ASCII / zero player-sheet,
+446 runtime PNGs. All 392 earlier raster entries and completed sprites remain
+unchanged; audit against `4f42da7` proves 1,153 protected art/core files exact.
+
+Fixed-tick observations attach one-shots to actual gun outlets, damage,
+ignition, flare use and completed work. Useful procedural particles remain.
+At most 24 reusable forms share the existing particle capacity. Dust/splashes
+render below the farmer; five work peak comparisons change zero opaque actor
+pixels. Lazy binding and teardown cover normal Main scene readiness. Authored
+enemy deaths replace the duplicate legacy corpse overlay. Halos are limited to
+12 separated centers with lower intensity after reviewing glare in a 75-enemy
+stress view. This uses existing sprites; no completed art was regenerated.
+Live particle density/capacity and steady accessibility settings pass; full,
+half and off 90-tick rule states match exactly. Sources/collision/balance/save
+formats and palette are preserved.
+
+Final full verify: 49 passed, zero skipped/failed in 368s, Godot 4.7.1;
+113 scripts parsed, 6,613 rule assertions, 982 input cases and Windows/Web
+exports pass. Soft 300s duration target is over budget without gate failure.
+Sim `1961000123` and data `407837701` unchanged. Raster reproduction checks
+417 outputs with zero writes. Effects headless: 2,997 checks; actual renderer:
+3,156; tower regression: 1,305; all zero failed. The old tower expectation of
+three procedural sparks was replaced with exact authored outlet checks.
+100 burning actors with full 24-slot/420-total pool: CPU view-update p95 525us
+of 16,000us across 240 samples, identical state. GPU cost is excluded.
+
+Opened six native/nearest-3x animation sheets and all 42 actual 480x270 captures
+paired on 21 review pages in `reviews/0017/captures-00..20.png`. Views in
+`implementation/shots/sprites/0017/` and `effects/` cover every phase, day/night,
+real tower shots, smoke, five work actions, crowded fire/flare, deaths/expiry,
+a11y and all five standard scenes. Final changed pages were reopened; direct
+native busy/work views also pass. Night muzzle/flame/flare retain warm cores,
+smoke stays subdued, and ground cues preserve the actor silhouette. Rejected
+halo captures and initial failed regression logs remain in the review folder.
+Full evidence and measurement limits: `reviews/0017/REVIEW.md`.
+
+Queue: 17 done, 3 todo, zero doing/blocked. Next: 0018. Exactly one task
+completed this cycle; the longer goal remains active. The 0019 atmosphere
+follow-up will use current art, honoring the user's request not to redo sprites.

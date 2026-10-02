@@ -1,0 +1,111 @@
+{
+  "id": "flame",
+  "kind": "strip",
+  "revision": 0,
+  "tool": "built-in ImageGen",
+  "actual_submitted_arguments": {
+    "prompt": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm\nthat becomes a fortress against zombies at night.\nPrimary request: effects/flame, exactly 4 ordered sequential frames of small upright flame: short ignition tongue, two overlapping orange tongues with tiny cream core, bent shorter tongues, detached ember tips.\nInput images: Image 1: approved farm/night material and clustered-pixel style reference, not a scene to reproduce. Image 2: accepted muzzle effect strip, reference for cluster simplicity and localized effect scale, not an edit target or a color requirement for smoke/water/dust.\nStyle/medium: coherent hand-crafted pixel art with deliberate pixel clusters,\ncolored outlines, restrained texture, readable material planes and clean forms.\nComposition/framing: orthographic three-quarter top-down view on a rectangular\ngrid; match the approved master camera and scale. Final native canvas is\n16x20 pixels with contact pivot 8,18; this is a downstream import\ntarget, so the generated source must remain simple enough to survive reduction.\nLighting/mood: neutral warm daytime, highlights from upper left, darker underside;\nruntime supplies dusk/night lighting. Keep emission in separate localized forms.\nColor palette: match the approved project palette and master, warm timber and\nterracotta, layered greens, cool water, violet/blue shadows; limited ramps.\nScene/backdrop: true transparent background outside the actual clustered effect. No baked ground shadow for actors.\nConstraints: complete unclipped object, consistent perspective and scale, clear\nground contact, generous tool/weapon clearance, no labels, text, watermark or UI.\nAvoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,\nrandom pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,\nnew gameplay objects, tiny details that disappear at native size.\n\nCreate one short pixel-art effect strip for flame, 4 ordered frames, target 16x20.\nClear localized origin at 8,18. Sparks/flame have small warm bright cores;\nsmoke/dust are subdued clustered forms. Expansion then dissipation, no looping\nflash unless specifically declared. Transparent outside actual particles, no\nfull-image bloom, smooth photographic smoke or background gradient. Must remain\nreadable over the game's night grass without covering nearby actors.\n\nProduce ONE horizontal strip, exactly 4 equal spacious cells, left to right in the stated order. Same pixel scale throughout: peak visible height about 15 native pixels. Each effect occupies less than half its cell width; leave large completely transparent gutters so disconnected fragments can still be assigned to their own frame. Keep the localized ground/emission base at the same horizontal center and vertical baseline in every frame. Expansion then dissipation at fixed scale, do not enlarge final remnants. Omit every building, gun, actor, ground plane, label, separator and border. No smooth glow, no gray/white background, no checkerboard painted into pixels. Keep very few broad deliberate clusters, no noise cloud. This is a short ONE-SHOT, not a loop. Render generously large but conceptually chunky; the downstream native sizes are small.\n",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/effects/muzzle.png"
+    ]
+  },
+  "returned_file": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-b8458d28-7358-4262-9541-386a0a05aab2.png",
+  "source": "assets/art_source/effects/flame.png",
+  "source_sha256": "3fbfabd9defb484d516ebb0dfddc2218fd8ae8415d93d1662b74182d56a2799e",
+  "source_wh": [
+    2172,
+    724
+  ],
+  "source_alpha_range": [
+    0,
+    255
+  ],
+  "prompt": "implementation/sprites/generation/0017-flame-strip.prompt.txt",
+  "prompt_sha256": "568768773d44523f02d73a1e133263b9ed7d185a38db7e60228126e286d2a7ca",
+  "references": [
+    "docs/reference-sheet.png",
+    "assets/art_source/effects/muzzle.png"
+  ],
+  "reference_hashes": {
+    "docs/reference-sheet.png": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+    "assets/art_source/effects/muzzle.png": "49d1745f83972fdb67b4298fd032bbc47eddda428068d9adb4da0e4ddb3230bd"
+  },
+  "tool_arguments": {
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\effects\\muzzle.png"
+    ]
+  },
+  "measurements": [
+    {
+      "role": "frame_0",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        580,
+        724
+      ],
+      "crop_xywh": [
+        269,
+        308,
+        151,
+        268
+      ]
+    },
+    {
+      "role": "frame_1",
+      "sheet_cell_xywh": [
+        580,
+        0,
+        558,
+        724
+      ],
+      "crop_xywh": [
+        740,
+        146,
+        278,
+        430
+      ]
+    },
+    {
+      "role": "frame_2",
+      "sheet_cell_xywh": [
+        1138,
+        0,
+        496,
+        724
+      ],
+      "crop_xywh": [
+        1258,
+        244,
+        242,
+        332
+      ]
+    },
+    {
+      "role": "frame_3",
+      "sheet_cell_xywh": [
+        1634,
+        0,
+        538,
+        724
+      ],
+      "crop_xywh": [
+        1768,
+        257,
+        182,
+        305
+      ]
+    }
+  ],
+  "decision": "Accepted after native/3x full frame review and actual 480x270 Godot effect/contact/accessibility captures; deterministic crop, nearest reduction and palette conversion only",
+  "selected_outputs": [
+    "effects/flame_0",
+    "effects/flame_1",
+    "effects/flame_2",
+    "effects/flame_3"
+  ]
+}

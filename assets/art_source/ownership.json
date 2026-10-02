@@ -1038,6 +1038,106 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/effects/dust_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/dust_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/dust_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/flame_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/flame_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/flame_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/flame_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/flare_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/flare_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/flare_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/flare_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/impact_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/impact_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/impact_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/muzzle_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/muzzle_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/muzzle_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/smoke_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/smoke_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/smoke_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/smoke_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/splash_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/splash_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/splash_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/splash_3.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/enemies/breaker.png",
       "owner": "raster"
     },

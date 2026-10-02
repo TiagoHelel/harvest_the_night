@@ -223,18 +223,34 @@ func _outlets() -> void:
 	sparks.set_process(false)
 	sparks.set_cap(420)
 	sparks.set_density(1.0)
-	sparks.show_state(_state)
+	sparks.set_motion(true)
+	var particle_state := _state.duplicate(true)
+	for cell in _cells:
+		Farm.occupant(particle_state,cell)["reload"] = 0
+	sparks.show_state(particle_state)
 	sparks._smoke_due = 100.0
-	sparks._watch(0.0)
-	expect(sparks.live() == expected.size() * 3, "Exactly three launch sparks per measured barrel, without duplicate buildings")
+	sparks.before_tick(particle_state)
+	particle_state["tick"] = int(particle_state["tick"])+1
+	for cell in _cells:
+		var on := Farm.occupant(particle_state,cell)
+		on["reload"] = WorldView.levelled_stat(on,"reload_ticks")
+	var contacts := var_to_bytes(particle_state)
+	sparks.after_tick(particle_state)
+	sparks._forms.advance(0.0,sparks)
+	expect(sparks._forms.records.size() == expected.size(), "Exactly one localized authored form per measured barrel, without duplicate buildings")
 	for point in expected:
 		var count := 0
-		for i in sparks._left.size():
-			if sparks._left[i] > 0.0 and Vector2(sparks._x[i], sparks._y[i]) == point:
+		for sprite in sparks._forms.sprites:
+			if sprite.visible and sprite.position == point:
 				count += 1
-		expect(count == 3, "Real particle pool launches on the reviewed muzzle: " + str(point))
+				expect(sprite.offset == -Vector2(RasterArt.FRAMES[sprite.texture.resource_path]["pivot"]),"Actual launch form uses its source-owned origin")
+		expect(count == 1, "Real raster particle pool launches on the reviewed muzzle: " + str(point))
+	expect(var_to_bytes(particle_state)==contacts,"Fixed-tick muzzle observations cannot alter their core/save bytes")
+	sparks._process(0.0)
+	sparks.after_tick(particle_state)
+	expect(sparks._forms.records.size()==expected.size(),"Repeated rendered/after-tick observations cannot duplicate launches")
 	expect(var_to_bytes(_state) == before, "Particles and emission probes cannot alter gameplay or RNG")
-	await _shoot("outlets_night", "All 13 weapon outlets / real glow and launch sparks")
+	await _shoot("outlets_night", "All 13 weapon outlets / real glow and authored launch forms")
 	sparks.queue_free()
 	# Replacing a tower with a different cell at the same occupant count must
 	# invalidate the gun cache, unlike its former count-only key.

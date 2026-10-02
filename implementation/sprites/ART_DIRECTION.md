@@ -14,7 +14,7 @@ day art. Use clustered highlights and colored outlines, with darker outlines
 on underside/contact areas. Avoid uniform black boxes, random one-pixel noise,
 smooth painted gradients, blur and enlarged single-pixel placeholders.
 
-## Scale contract — accepted source previews in 0001 and playable pilot in 0003
+## Scale contract â€” accepted source previews in 0001 and playable pilot in 0003
 
 Keep 16x16 terrain cells, 40x18 world and 480x270 viewport with nearest filtering
 and integer scaling. Do not raise the game resolution to accommodate generated
@@ -23,8 +23,8 @@ art. These are final native canvas targets, not claimed ImageGen output sizes.
 | Family | Proposed native canvas | Placement |
 |---|---|---|
 | Ground and edge tiles | 16x16 | Exact cell, seamless edges |
-| Farmer | 48x48, body about 28–32 px high | Feet at (24,44); tool clearance in remaining canvas |
-| Standard enemies | 32x40, body about 24–32 px high | Feet at (16,36); tank/breaker silhouette varies |
+| Farmer | 48x48, body about 28â€“32 px high | Feet at (24,44); tool clearance in remaining canvas |
+| Standard enemies | 32x40, body about 24â€“32 px high | Feet at (16,36); tank/breaker silhouette varies |
 | Giant | 64x64 | Feet at (32,60), distinct wind-up silhouette |
 | Trees | 40x48 | Trunk contact at (20,44), one existing logical cell; 36x42 visible body |
 | Rocks, stumps, ore | 16x16 or 32x24 | Anchor from manifest, keep logical footprint |
@@ -52,18 +52,18 @@ family must reuse its accepted body scale and canvas rather than refitting each
 pose independently. Task 0003 accepts these proportions in the actual 480x270
 farm, including farmer/walker overlap with both landmarks. The remaining 43
 owner-sheet player poses are recut to the same 30 px body reference, 48x48
-canvas and (24,44) contact while authored strips replace them in 0004–0006.
+canvas and (24,44) contact while authored strips replace them in 0004â€“0006.
 The house ground pivot is (32,60); its visual starts at (-8,-12) relative to
 the unchanged 3x3 footprint. Trees and actors sort by ground contact. These
 accepted canvases/pivots apply to future families; animation must not grow the
 body or shift the planted feet to fill individual frame bounds.
 
 Task 0004 accepts authored idle/walk for south/north/west, with east mirroring
-west. Their visible height stays 30 px; width is 20–22 px across directions
+west. Their visible height stays 30 px; width is 20â€“22 px across directions
 and strides versus the static pilot's 20 px. This allows the hat and extended
 limbs without changing canvas, contact, grid or collision. One measured scale
 per strip applies to every frame; no pose is individually resized. Twenty-five
-owner-sheet work/reaction frames remain at the pilot scale for 0005–0006.
+owner-sheet work/reaction frames remain at the pilot scale for 0005â€“0006.
 
 Task 0005 accepts thirteen west work strips with four distinct frames each.
 East mirrors west; north/south work intentionally uses the west side-on art.
@@ -88,7 +88,7 @@ while the complete glyph stays inside a two-pixel margin.
 
 The separate shared contact shadow uses 20x8 with a measured 18x3 opaque
 silhouette, one palette color and binary alpha. It is intentionally shallow
-under the 20–22 px farmer body, not stretched to the prompt's approximate 4 px
+under the 20â€“22 px farmer body, not stretched to the prompt's approximate 4 px
 height. Existing 0.42 modulate, centered placement and -1 px ground offset stay
 unchanged for player, trees and enemies. No body source contains a second shadow.
 
@@ -288,3 +288,11 @@ Death uses the last observed position, once, with a hard cap of 24 cosmetic
 sprites; it never preserves a dead entity or changes hits/pathing. Ordinary
 death drawings come unchanged from 0015. Shared night tuning remains 0019
 and should use the accepted art rather than regenerate completed families.
+Task 0017 adds small one-shot forms for muzzle, impact, flame, smoke, dust,
+splash and flare. Their peak visible envelopes remain 8/9/15/12/7/12/18 pixels
+high on 12..24-pixel canvases; this is localized contact art on the unchanged
+16-pixel grid. Keep warm bright cores sparse, smoke subdued, water blue and
+ground dust low. Do not enlarge these forms to the actor canvas or blanket
+the wave with additive halos. Preserve existing good procedural pixels and
+every completed sprite. Accessibility uses fewer emissions and steady fading
+silhouettes; it never changes the simulation. General atmosphere remains 0019.

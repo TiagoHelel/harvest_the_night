@@ -1,0 +1,180 @@
+[
+  {
+    "id": "muzzle",
+    "kind": "strip",
+    "modules": [
+      "frame_0",
+      "frame_1",
+      "frame_2"
+    ],
+    "layout": "row",
+    "references": [
+      "docs/reference-sheet.png"
+    ],
+    "canvas": [
+      12,
+      12
+    ],
+    "pivot": [
+      6,
+      6
+    ],
+    "visible_height": 8,
+    "anchor": "center",
+    "seconds": 0.065
+  },
+  {
+    "id": "impact",
+    "kind": "strip",
+    "modules": [
+      "frame_0",
+      "frame_1",
+      "frame_2"
+    ],
+    "layout": "row",
+    "references": [
+      "docs/reference-sheet.png",
+      "assets/art_source/effects/muzzle.png"
+    ],
+    "canvas": [
+      12,
+      12
+    ],
+    "pivot": [
+      6,
+      6
+    ],
+    "visible_height": 9,
+    "anchor": "center",
+    "seconds": 0.065
+  },
+  {
+    "id": "flame",
+    "kind": "strip",
+    "modules": [
+      "frame_0",
+      "frame_1",
+      "frame_2",
+      "frame_3"
+    ],
+    "layout": "row",
+    "references": [
+      "docs/reference-sheet.png",
+      "assets/art_source/effects/muzzle.png"
+    ],
+    "canvas": [
+      16,
+      20
+    ],
+    "pivot": [
+      8,
+      18
+    ],
+    "visible_height": 15,
+    "anchor": "base",
+    "seconds": 0.14
+  },
+  {
+    "id": "smoke",
+    "kind": "strip",
+    "modules": [
+      "frame_0",
+      "frame_1",
+      "frame_2",
+      "frame_3"
+    ],
+    "layout": "row",
+    "references": [
+      "docs/reference-sheet.png",
+      "assets/art_source/effects/muzzle.png"
+    ],
+    "canvas": [
+      16,
+      20
+    ],
+    "pivot": [
+      8,
+      18
+    ],
+    "visible_height": 12,
+    "anchor": "base",
+    "seconds": 0.14
+  },
+  {
+    "id": "dust",
+    "kind": "strip",
+    "modules": [
+      "frame_0",
+      "frame_1",
+      "frame_2"
+    ],
+    "layout": "row",
+    "references": [
+      "docs/reference-sheet.png",
+      "assets/art_source/effects/muzzle.png"
+    ],
+    "canvas": [
+      16,
+      12
+    ],
+    "pivot": [
+      8,
+      10
+    ],
+    "visible_height": 8,
+    "anchor": "base",
+    "seconds": 0.1
+  },
+  {
+    "id": "splash",
+    "kind": "strip",
+    "modules": [
+      "frame_0",
+      "frame_1",
+      "frame_2",
+      "frame_3"
+    ],
+    "layout": "row",
+    "references": [
+      "docs/reference-sheet.png",
+      "assets/art_source/effects/muzzle.png"
+    ],
+    "canvas": [
+      20,
+      16
+    ],
+    "pivot": [
+      10,
+      14
+    ],
+    "visible_height": 12,
+    "anchor": "base",
+    "seconds": 0.1
+  },
+  {
+    "id": "flare",
+    "kind": "strip",
+    "modules": [
+      "frame_0",
+      "frame_1",
+      "frame_2",
+      "frame_3"
+    ],
+    "layout": "row",
+    "references": [
+      "docs/reference-sheet.png",
+      "assets/art_source/effects/muzzle.png"
+    ],
+    "canvas": [
+      24,
+      24
+    ],
+    "pivot": [
+      12,
+      12
+    ],
+    "visible_height": 19,
+    "anchor": "center",
+    "seconds": 0.1
+  }
+]

@@ -1,0 +1,87 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+
+TOWER SHOWCASE: 1290 checks, 14 failed
+ERROR: Exactly three launch sparks per measured barrel, without duplicate buildings
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://src/tools/tower_showcase.gd:30)
+       [1] _outlets (res://src/tools/tower_showcase.gd:229)
+       [2] _settle (res://src/tools/tower_showcase.gd:157)
+ERROR: Real particle pool launches on the reviewed muzzle: (178.0, 72.0)
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://src/tools/tower_showcase.gd:30)
+       [1] _outlets (res://src/tools/tower_showcase.gd:235)
+       [2] _settle (res://src/tools/tower_showcase.gd:157)
+ERROR: Real particle pool launches on the reviewed muzzle: (178.0, 135.0)
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://src/tools/tower_showcase.gd:30)
+       [1] _outlets (res://src/tools/tower_showcase.gd:235)
+       [2] _settle (res://src/tools/tower_showcase.gd:157)
+ERROR: Real particle pool launches on the reviewed muzzle: (178.0, 198.0)
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://src/tools/tower_showcase.gd:30)
+       [1] _outlets (res://src/tools/tower_showcase.gd:235)
+       [2] _settle (res://src/tools/tower_showcase.gd:157)
+ERROR: Real particle pool launches on the reviewed muzzle: (178.0, 201.0)
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://src/tools/tower_showcase.gd:30)
+       [1] _outlets (res://src/tools/tower_showcase.gd:235)
+       [2] _settle (res://src/tools/tower_showcase.gd:157)
+ERROR: Real particle pool launches on the reviewed muzzle: (274.0, 73.0)
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://src/tools/tower_showcase.gd:30)
+       [1] _outlets (res://src/tools/tower_showcase.gd:235)
+       [2] _settle (res://src/tools/tower_showcase.gd:157)
+ERROR: Real particle pool launches on the reviewed muzzle: (274.0, 137.0)
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://src/tools/tower_showcase.gd:30)
+       [1] _outlets (res://src/tools/tower_showcase.gd:235)
+       [2] _settle (res://src/tools/tower_showcase.gd:157)
+ERROR: Real particle pool launches on the reviewed muzzle: (273.0, 205.0)
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://src/tools/tower_showcase.gd:30)
+       [1] _outlets (res://src/tools/tower_showcase.gd:235)
+       [2] _settle (res://src/tools/tower_showcase.gd:157)
+ERROR: Real particle pool launches on the reviewed muzzle: (366.0, 78.0)
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://src/tools/tower_showcase.gd:30)
+       [1] _outlets (res://src/tools/tower_showcase.gd:235)
+       [2] _settle (res://src/tools/tower_showcase.gd:157)
+ERROR: Real particle pool launches on the reviewed muzzle: (367.0, 138.0)
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://src/tools/tower_showcase.gd:30)
+       [1] _outlets (res://src/tools/tower_showcase.gd:235)
+       [2] _settle (res://src/tools/tower_showcase.gd:157)
+ERROR: Real particle pool launches on the reviewed muzzle: (367.0, 201.0)
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://src/tools/tower_showcase.gd:30)
+       [1] _outlets (res://src/tools/tower_showcase.gd:235)
+       [2] _settle (res://src/tools/tower_showcase.gd:157)
+ERROR: Real particle pool launches on the reviewed muzzle: (464.0, 71.0)
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://src/tools/tower_showcase.gd:30)
+       [1] _outlets (res://src/tools/tower_showcase.gd:235)
+       [2] _settle (res://src/tools/tower_showcase.gd:157)
+ERROR: Real particle pool launches on the reviewed muzzle: (466.0, 137.0)
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://src/tools/tower_showcase.gd:30)
+       [1] _outlets (res://src/tools/tower_showcase.gd:235)
+       [2] _settle (res://src/tools/tower_showcase.gd:157)
+ERROR: Real particle pool launches on the reviewed muzzle: (465.0, 202.0)
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://src/tools/tower_showcase.gd:30)
+       [1] _outlets (res://src/tools/tower_showcase.gd:235)
+       [2] _settle (res://src/tools/tower_showcase.gd:157)
