@@ -1099,23 +1099,83 @@
     },
     {
       "output": "sprites/enemies/giant.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/enemies/giant_attack.png",
-      "owner": "ascii"
+      "owner": "raster"
     },
     {
       "output": "sprites/enemies/giant_death.png",
-      "owner": "ascii"
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/giant_death_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/giant_death_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/giant_death_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/giant_death_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/giant_death_4.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/giant_slam_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/giant_slam_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/giant_slam_2.png",
+      "owner": "raster"
     },
     {
       "output": "sprites/enemies/giant_telegraph.png",
-      "owner": "ascii"
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/giant_walk_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/giant_walk_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/giant_walk_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/giant_walk_3.png",
+      "owner": "raster"
     },
     {
       "output": "sprites/enemies/giant_walk_b.png",
-      "owner": "ascii"
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/giant_windup_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/giant_windup_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/giant_windup_2.png",
+      "owner": "raster"
     },
     {
       "output": "sprites/enemies/runner.png",

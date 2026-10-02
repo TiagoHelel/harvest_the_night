@@ -3866,14 +3866,23 @@ func _case_0074_zombie_art() -> void:
 	expect(giant_id > 0, "the Giant is on the field")
 	if giant_id > 0:
 		var one := Entities.get_one(state, giant_id)
-		# Either frame of the two-frame walk. The first version of this
-		# asked for `giant` on the nose and got `giant_walk_b`, because the
-		# walk alternates on the tick and the tick does not stop for a test.
+		# The real fixed-tick observer selects one of four authored steps.
 		var walking := str(view._pose_of(one))
-		expect(walking == "giant" or walking == "giant_walk_b",
+		expect(walking in ["giant", "giant_walk_0", "giant_walk_1", "giant_walk_2", "giant_walk_3"],
 			"a Giant that is walking is drawn walking", walking)
-		one["winding_at"] = Grid.index(Player.cell(state))
-		expect(str(view._pose_of(one)) == "giant_telegraph",
+		# Let the existing rules begin a valid tell at the house. A stale
+		# distant winding_at value alone must not invent an attack pose.
+		var house: Array = state["house_cell"]
+		one["pos"] = [int(house[0]) * Player.SUBTILE, int(house[1]) * Player.SUBTILE]
+		one["winding_at"] = -1
+		one["chewing"] = -1
+		one["chew_wait"] = 0
+		view._enemy_motion.clear()
+		view.before_tick(state)
+		state["tick"] = int(state["tick"]) + 1
+		Enemies.tick(state)
+		view.after_tick(state)
+		expect(Enemies.is_winding(state, giant_id) and str(view._pose_of(one)) == "giant_windup_0",
 			"and one that is winding up is drawn winding up",
 			str(view._pose_of(one)))
 

@@ -4,6 +4,7 @@ extends RefCounted
 ## Observation only: authored ordinary-enemy poses follow actual core deltas.
 ## No movement on a render frame, no invented damage, and no saved fields.
 const FAMILIES: Array[StringName] = [&"walker", &"runner", &"tank", &"breaker"]
+const TRACKED: Array[StringName] = [&"walker", &"runner", &"tank", &"breaker", &"giant"]
 var _before: Dictionary = {}
 var _actors: Dictionary = {}
 
@@ -17,10 +18,10 @@ func before_tick(state: Dictionary) -> void:
 	_before.clear()
 	for id in Entities.ids(state):
 		var one := Entities.get_one(state, int(id))
-		if not FAMILIES.has(one["kind"]):
+		if not TRACKED.has(one["kind"]):
 			continue
 		_before[int(id)] = {"pos": Vector2i(int(one["pos"][0]), int(one["pos"][1])),
-			"wait": int(one.get("chew_wait", 0)), "tick": int(state["tick"])}
+			"wait": int(one.get("chew_wait", 0)), "winding": int(one.get("winding_at", -1)), "tick": int(state["tick"])}
 
 
 func after_tick(state: Dictionary) -> void:
@@ -28,7 +29,7 @@ func after_tick(state: Dictionary) -> void:
 	var tick := int(state["tick"])
 	for id in Entities.ids(state):
 		var one := Entities.get_one(state, int(id))
-		if not FAMILIES.has(one["kind"]):
+		if not TRACKED.has(one["kind"]):
 			continue
 		var key := int(id)
 		alive[key] = true
@@ -44,11 +45,12 @@ func after_tick(state: Dictionary) -> void:
 			var delta: Vector2i = pos - previous["pos"]
 			memo["moving"] = delta != Vector2i.ZERO
 			if delta != Vector2i.ZERO:
-				memo["strike"] = -1000
+				if one["kind"] != &"giant" or tick - int(memo["strike"]) >= 9:
+					memo["strike"] = -1000
 				memo["travel"] = int(memo["travel"]) + absi(delta.x) + absi(delta.y)
 				if delta.x != 0:
 					memo["right"] = delta.x > 0
-			elif int(one.get("chew_wait", 0)) > int(previous["wait"]) and int(one.get("chewing", -1)) >= 0:
+			elif int(one.get("chew_wait", 0)) > int(previous["wait"]) and int(one.get("chewing", -1)) >= 0 and (one["kind"] != &"giant" or int(previous["winding"]) == int(one.get("winding_at", -1)) and int(one["chewing"]) == int(one.get("winding_at", -1))):
 				# The core has just dealt a real structure hit and set its wait.
 				# Even a destroyed target gets the observed contact/recovery pose.
 				memo["strike"] = tick
@@ -58,6 +60,11 @@ func after_tick(state: Dictionary) -> void:
 				var here := Vector2i(pos.x / Player.SUBTILE, pos.y / Player.SUBTILE)
 				if target.x != here.x:
 					memo["right"] = target.x > here.x
+		if one["kind"] == &"giant" and not bool(memo["moving"]):
+			var aimed := Enemies.winding_at(state, key)
+			var here := Vector2i(pos.x / Player.SUBTILE, pos.y / Player.SUBTILE)
+			if aimed.x >= 0 and aimed.x != here.x:
+				memo["right"] = aimed.x > here.x
 		_actors[key] = memo
 	for key in _actors.keys():
 		if not alive.has(key):
@@ -69,6 +76,8 @@ func pose(one: Dictionary, state: Dictionary) -> StringName:
 	var family: StringName = one["kind"]
 	var memo: Dictionary = _actors.get(int(one["id"]), {})
 	var tick := int(state["tick"])
+	if family == &"giant":
+		return _giant_pose(one, state, memo)
 	if memo.is_empty() or tick != int(memo["tick"]):
 		return family
 	if memo["pos"] != Vector2i(int(one["pos"][0]), int(one["pos"][1])):
@@ -91,5 +100,29 @@ func pose(one: Dictionary, state: Dictionary) -> StringName:
 	return family
 
 
+func _giant_pose(one: Dictionary, state: Dictionary, memo: Dictionary) -> StringName:
+	var current: bool = not memo.is_empty() and int(memo["tick"]) == int(state["tick"]) and memo["pos"] == Vector2i(int(one["pos"][0]), int(one["pos"][1]))
+	var age := int(state["tick"]) - int(memo.get("strike", -1000))
+	if current and age >= 0 and age < 9:
+		return StringName("giant_slam_%d" % (age / 3))
+	if current and bool(memo["moving"]):
+		return StringName("giant_walk_%d" % ((int(memo["travel"]) / (Player.SUBTILE / 4)) % 4))
+	var target := Enemies.winding_at(state, int(one["id"]))
+	if target.x >= 0:
+		var here := Vector2i(int(one["pos"][0]) / Player.SUBTILE, int(one["pos"][1]) / Player.SUBTILE)
+		var on := Farm.occupant(state, target)
+		if Grid.manhattan(here, target) <= 1 and not on.is_empty() and (on.get("id", &"") == &"house" or int(on.get("hp", 0)) > 0):
+			var full := maxi(int(GameData.ENEMIES[&"giant"]["telegraph_ticks"]), 1)
+			var elapsed := maxi(full - int(one.get("chew_wait", 0)), 0)
+			return StringName("giant_windup_%d" % mini(elapsed * 3 / full, 2))
+	return &"giant"
+
+
 func faces_right(one: Dictionary) -> bool:
-	return bool((_actors.get(int(one["id"]), {}) as Dictionary).get("right", false))
+	var memo: Dictionary = _actors.get(int(one["id"]), {})
+	if memo.is_empty() and one["kind"] == &"giant" and int(one.get("chew_wait", 0)) > 0 and int(one.get("winding_at", -1)) >= 0:
+		var target := Grid.cell(int(one["winding_at"]))
+		var here := Vector2i(int(one["pos"][0]) / Player.SUBTILE, int(one["pos"][1]) / Player.SUBTILE)
+		if Grid.manhattan(here, target) <= 1 and target.x != here.x:
+			return target.x > here.x
+	return bool(memo.get("right", false))

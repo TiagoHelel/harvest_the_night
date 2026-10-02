@@ -267,3 +267,24 @@ These are authored join/damage/outcome states. Mines have a short one-shot
 presentation cue; no continuous barrier or trap animation is claimed. The
 normal enemy family remains 0015, Giant/death playback 0016 and common final
 night atmosphere 0019.
+
+Task 0015 gives walker, runner, tank and breaker authored 4/3/4 motion on
+64x48 canvases with pivot (32,44). Their visible standing bodies remain about
+29 pixels high, near the owner's farmer. Transparent pose clearance is not
+body size. Preserve these finished sources and drawings during later tuning.
+
+Task 0016 gives Giant a 43x42 visible master, oversized fists, bare mottled
+skin, asymmetric shoulder growth and ragged shorts. Four steps, three raised
+arm preparations, three contact/recovery poses and five collapse poses share
+80x64/(40,60). The extra sixteen transparent columns beyond the planned 64x64
+envelope accommodate the contact fist while keeping the feet on the same
+ground pivot; they do not enlarge the standing body or change its map cell.
+Scale stays fixed within each strip. Wind-up grows from 39 to 48 to 55 visible
+pixels as the arm rises. Death collapses from 39 to 16 visible pixels.
+
+The existing target ring belongs above the boss and house roof so neither
+can conceal a real warning. Its target and timing still come from core.
+Death uses the last observed position, once, with a hard cap of 24 cosmetic
+sprites; it never preserves a dead entity or changes hits/pathing. Ordinary
+death drawings come unchanged from 0015. Shared night tuning remains 0019
+and should use the accepted art rather than regenerate completed families.

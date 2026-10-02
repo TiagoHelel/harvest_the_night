@@ -1073,3 +1073,82 @@ visual findings, revisions and limits are in `reviews/0015/REVIEW.md`.
 Queue after completion: 15 done, 5 todo, zero doing/blocked. Next: 0016, Giant and
 death playback. Exactly one sprite task completed this cycle; the active /goal
 continues automatically toward the backlog while preserving finished families.
+
+## 2026-10-02 - 0016: Giant motion and bounded enemy deaths
+
+Completed only Giant's missing master and 4/3/3/5 walk/wind-up/slam/death family.
+Five actual built-in ImageGen returns, all accepted with zero revisions, are
+saved in `assets/art_source/enemies/giant/`. Exact prompts, actual submissions,
+return paths, source/reference hashes and measured cuts live under
+`generation/0016-*`. Sixteen canonical poses and four exact old-name aliases
+replace the five legacy procedural Giant outputs. Ownership becomes 392 raster
+/ 29 ASCII / zero player-sheet, 421 runtime PNGs. All earlier completed art,
+including every ordinary enemy drawing from 0015, is reused unchanged.
+
+The visible Giant master is 43x42, larger than ordinary 29-pixel standing bodies.
+Its shared canvas/pivot is 80x64/(40,60): sixteen extra transparent columns beyond
+the pilot 64x64 allow the contact fist while preserving planted feet. Strip
+scale stays fixed, raised-arm heights are 39/48/55, and collapse heights are
+39/33/27/20/16. Source conversion only cuts, resamples nearest, maps the existing
+palette and resolves alpha; it does not paint missing poses. ART_DIRECTION and
+PIPELINE document the accepted envelope and observation/playback contract.
+
+Real observed movement advances Giant walking/facing. Existing valid target
+and wait data drive the tell; actual observed core contact starts slam. Stale
+targets cannot invent attacks. Nine cosmetic recovery ticks never postpone a
+core step. EnemyDeaths borrows only coordinate Arrays during one core tick,
+copies final moved positions for removed enemies, then releases those arrays.
+No entity dictionary or dead core entity survives for art. At most 24 cues and
+24 reusable y-sorted sprites play once: ordinary four-frame deaths expire at
+0.48 seconds, Giant five-frame deaths at 0.60, with 0.12 seconds per frame.
+Duplicate observations, skipped tick gaps, load and morning cleanup cannot
+replay deaths. No core, balance, collision, map footprint, RNG or save changes.
+
+The actual house capture initially exposed an invisible warning: all three
+wind-up phases produced zero target-ring pixels beneath the roof. The ring now
+draws above boss/roof and below shots, with its existing target/color/radius/time.
+Rejected captures and failure log remain under `reviews/0016/pre-warning-layer/`
+and `showcase-house-warning.log`. Wall tells in both directions and every house
+phase now pass actual rendered hide/show pixel comparisons. Natural body/roof
+occlusion remains; no source regeneration was needed to fix the warning.
+
+Final full verification PASS: 47 passed, zero skipped/failed in 352 seconds,
+Godot 4.7.1. The soft 300-second duration target reports OVER BUDGET without
+failing. All 111 scripts parse; 6,612 rule assertions, 982 input cases,
+performance and Windows/Web exports pass. Sim `1961000123` and data `407837701`
+remain unchanged. Raster check proves 392 outputs, zero writes. Giant headless
+showcase: 2,433 checks; actual renderer: 2,530 checks; zero failed. It covers
+real core movement/waits/hits, all poses/mirrors, valid/stale tells, final
+movement-before-removal positions, one-shot death/expiry, 64 actual simultaneous
+kills with the 24-sprite cap, load/day cleanup and identical serialized state.
+Full death-pool refresh measures 110.6us in capture mode. Night tick is
+555us/8,333us and path rebuild 4,246us/33,333us in final verify.
+
+The first full run failed only the old input expectations for procedural
+two-frame Giant names and an invalid manually assigned distant tell. The case
+now checks four authored steps and lets core begin a real house tell. Focused
+input rerun and the final full suite both pass. Initial and successful logs
+remain in `reviews/0016/`; no hash baseline acceptance or skipped check was used.
+The raster importer is unchanged; no extra fault-suite run is claimed.
+
+Opened six complete light/dark/checker motion sheets at native and exact nearest
+3x, and every one of 49 accepted actual 480x270 captures paired with exact 3x
+on 25 pages `reviews/0016/captures-00..24.png`. Original views live in
+`implementation/shots/sprites/0016/` and `giant/`. Reviewed native day/night
+identities and silhouettes, movement with escorts, every tell/slam, house warning
+and spent Giant, all five deaths and expiry, capped pool and five standard views.
+The Giant's heavy silhouette, raised arm, stable contact and progressive death
+pass. Existing shared lighting makes night cloth colors dark; task 0019 should
+tune atmosphere using the current art. The user's request to preserve completed
+sprites is respected. A larger window alone does not recover native detail.
+
+Audit against `94ce993` proves 1,109 prior core/art files unchanged, including
+owner/pilot/player art, all earlier raw sources and runtime families, palette
+and hash guards. Exact raw/prompt/reference/output ownership is recorded in
+`reviews/0016/scope-and-sources.json`; thirty staged source/prompt/runtime files
+match worktree bytes exactly. Prior unrelated generated imports are excluded.
+Complete evidence and limits are in `reviews/0016/REVIEW.md`.
+
+Queue after completion: 16 done, 4 todo, zero doing/blocked. Next: 0017, common
+effects. Exactly one sprite task completed this cycle; the active /goal continues
+automatically toward the backlog while preserving finished families.

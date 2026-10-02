@@ -1,0 +1,1181 @@
+[
+  {
+    "id": "enemies/giant",
+    "owner": "raster",
+    "source": "assets/art_source/enemies/giant/master.png",
+    "source_sha256": "6f65de383660225fd6bea3da529102ce0f3bf495fa8c657a0b2a62f15362f4f1",
+    "crop_xywh": [
+      31,
+      118,
+      1160,
+      1136
+    ],
+    "sheet_cell_xywh": [
+      0,
+      0,
+      1217,
+      1293
+    ],
+    "gutter_xy": [
+      0,
+      0
+    ],
+    "canvas_wh": [
+      80,
+      64
+    ],
+    "pivot_xy": [
+      40,
+      60
+    ],
+    "content_scale": 0.03697183098591549,
+    "content_anchor_xy": [
+      26,
+      42
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "animation": "enemies/giant_master",
+    "frame": 0,
+    "seconds": 0.1,
+    "loop": true,
+    "output": "sprites/enemies/giant.png",
+    "prompt": "implementation/sprites/generation/0016-giant-master.prompt.txt",
+    "prompt_sha256": "3ec17d97a170cb495c9021b09218120da66cdc156cb52c0ea8afa23f651664c1",
+    "references": [
+      {
+        "path": "assets/art_source/enemies/tank/master.png",
+        "sha256": "a819ab464e485f0a904f8fe5aaa4ec28774068973a08ed7f04eada4c25bc62a5",
+        "role": "As indexed in exact submitted prompt"
+      },
+      {
+        "path": "docs/reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "As indexed in exact submitted prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0016",
+    "revision": 0,
+    "enemy_family": "giant",
+    "enemy_motion": "master",
+    "enemy_master_id": "enemies/giant",
+    "scale_reference": {
+      "role": "tallest standing pose",
+      "raw_height": 1136,
+      "native_height": 42
+    },
+    "ground_measurement": "lower eight-row support band, excluding left contact fist for slam 0/1",
+    "cell_offset_xy": [
+      -32,
+      -44
+    ],
+    "output_sha256": "bf323b154199d619ff6b7c4dede07394c7dd1eb4ccfcc57450f20f69a3abe49f"
+  },
+  {
+    "id": "enemies/giant_walk_0",
+    "owner": "raster",
+    "source": "assets/art_source/enemies/giant/walk.png",
+    "source_sha256": "310a430ab6ff5cccd0fc6617550e5151fcb6f44395fbdc0182f97469dfbbfb68",
+    "crop_xywh": [
+      47,
+      27,
+      604,
+      544
+    ],
+    "sheet_cell_xywh": [
+      0,
+      0,
+      678,
+      586
+    ],
+    "gutter_xy": [
+      0,
+      0
+    ],
+    "canvas_wh": [
+      80,
+      64
+    ],
+    "pivot_xy": [
+      40,
+      60
+    ],
+    "content_scale": 0.07608695652173914,
+    "content_anchor_xy": [
+      25,
+      41
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "animation": "enemies/giant_walk",
+    "frame": 0,
+    "seconds": 0.14,
+    "loop": true,
+    "output": "sprites/enemies/giant_walk_0.png",
+    "prompt": "implementation/sprites/generation/0016-giant-walk.prompt.txt",
+    "prompt_sha256": "a49e53131060d6dedf2c77ab873de1671d9eed4d98e294450fdda4dc962fe8ed",
+    "references": [
+      {
+        "path": "assets/art_source/enemies/giant/master.png",
+        "sha256": "6f65de383660225fd6bea3da529102ce0f3bf495fa8c657a0b2a62f15362f4f1",
+        "role": "As indexed in exact submitted prompt"
+      },
+      {
+        "path": "assets/art_source/enemies/tank/master.png",
+        "sha256": "a819ab464e485f0a904f8fe5aaa4ec28774068973a08ed7f04eada4c25bc62a5",
+        "role": "As indexed in exact submitted prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0016",
+    "revision": 0,
+    "enemy_family": "giant",
+    "enemy_motion": "walk",
+    "enemy_master_id": "enemies/giant",
+    "scale_reference": {
+      "role": "tallest standing pose",
+      "raw_height": 552,
+      "native_height": 42
+    },
+    "ground_measurement": "lower eight-row support band, excluding left contact fist for slam 0/1",
+    "cell_offset_xy": [
+      -32,
+      -44
+    ],
+    "output_sha256": "df3e96e2ffce6f44e7d7d019462417444565cbc622ab6f475b73b441fb29ea64"
+  },
+  {
+    "id": "enemies/giant_walk_1",
+    "owner": "raster",
+    "source": "assets/art_source/enemies/giant/walk.png",
+    "source_sha256": "310a430ab6ff5cccd0fc6617550e5151fcb6f44395fbdc0182f97469dfbbfb68",
+    "crop_xywh": [
+      706,
+      38,
+      573,
+      536
+    ],
+    "sheet_cell_xywh": [
+      678,
+      0,
+      652,
+      586
+    ],
+    "gutter_xy": [
+      0,
+      0
+    ],
+    "canvas_wh": [
+      80,
+      64
+    ],
+    "pivot_xy": [
+      40,
+      60
+    ],
+    "content_scale": 0.07608695652173914,
+    "content_anchor_xy": [
+      30,
+      41
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "animation": "enemies/giant_walk",
+    "frame": 1,
+    "seconds": 0.14,
+    "loop": true,
+    "output": "sprites/enemies/giant_walk_1.png",
+    "prompt": "implementation/sprites/generation/0016-giant-walk.prompt.txt",
+    "prompt_sha256": "a49e53131060d6dedf2c77ab873de1671d9eed4d98e294450fdda4dc962fe8ed",
+    "references": [
+      {
+        "path": "assets/art_source/enemies/giant/master.png",
+        "sha256": "6f65de383660225fd6bea3da529102ce0f3bf495fa8c657a0b2a62f15362f4f1",
+        "role": "As indexed in exact submitted prompt"
+      },
+      {
+        "path": "assets/art_source/enemies/tank/master.png",
+        "sha256": "a819ab464e485f0a904f8fe5aaa4ec28774068973a08ed7f04eada4c25bc62a5",
+        "role": "As indexed in exact submitted prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0016",
+    "revision": 0,
+    "enemy_family": "giant",
+    "enemy_motion": "walk",
+    "enemy_master_id": "enemies/giant",
+    "scale_reference": {
+      "role": "tallest standing pose",
+      "raw_height": 552,
+      "native_height": 42
+    },
+    "ground_measurement": "lower eight-row support band, excluding left contact fist for slam 0/1",
+    "cell_offset_xy": [
+      -32,
+      -44
+    ],
+    "variant_of": "enemies/giant_walk_0",
+    "output_sha256": "69a26549232dd52978e2a8c9e3e5b2348fadaac55538be891d8bb2d72d0a37a9"
+  },
+  {
+    "id": "enemies/giant_walk_2",
+    "owner": "raster",
+    "source": "assets/art_source/enemies/giant/walk.png",
+    "source_sha256": "310a430ab6ff5cccd0fc6617550e5151fcb6f44395fbdc0182f97469dfbbfb68",
+    "crop_xywh": [
+      47,
+      598,
+      610,
+      527
+    ],
+    "sheet_cell_xywh": [
+      0,
+      586,
+      680,
+      596
+    ],
+    "gutter_xy": [
+      0,
+      0
+    ],
+    "canvas_wh": [
+      80,
+      64
+    ],
+    "pivot_xy": [
+      40,
+      60
+    ],
+    "content_scale": 0.07608695652173914,
+    "content_anchor_xy": [
+      26,
+      40
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "animation": "enemies/giant_walk",
+    "frame": 2,
+    "seconds": 0.14,
+    "loop": true,
+    "output": "sprites/enemies/giant_walk_2.png",
+    "prompt": "implementation/sprites/generation/0016-giant-walk.prompt.txt",
+    "prompt_sha256": "a49e53131060d6dedf2c77ab873de1671d9eed4d98e294450fdda4dc962fe8ed",
+    "references": [
+      {
+        "path": "assets/art_source/enemies/giant/master.png",
+        "sha256": "6f65de383660225fd6bea3da529102ce0f3bf495fa8c657a0b2a62f15362f4f1",
+        "role": "As indexed in exact submitted prompt"
+      },
+      {
+        "path": "assets/art_source/enemies/tank/master.png",
+        "sha256": "a819ab464e485f0a904f8fe5aaa4ec28774068973a08ed7f04eada4c25bc62a5",
+        "role": "As indexed in exact submitted prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0016",
+    "revision": 0,
+    "enemy_family": "giant",
+    "enemy_motion": "walk",
+    "enemy_master_id": "enemies/giant",
+    "scale_reference": {
+      "role": "tallest standing pose",
+      "raw_height": 552,
+      "native_height": 42
+    },
+    "ground_measurement": "lower eight-row support band, excluding left contact fist for slam 0/1",
+    "cell_offset_xy": [
+      -32,
+      -44
+    ],
+    "variant_of": "enemies/giant_walk_0",
+    "output_sha256": "594964056a928505d2025d00360756c8190c132e7cd6cf722928899d817e7b9e"
+  },
+  {
+    "id": "enemies/giant_walk_3",
+    "owner": "raster",
+    "source": "assets/art_source/enemies/giant/walk.png",
+    "source_sha256": "310a430ab6ff5cccd0fc6617550e5151fcb6f44395fbdc0182f97469dfbbfb68",
+    "crop_xywh": [
+      703,
+      603,
+      591,
+      552
+    ],
+    "sheet_cell_xywh": [
+      680,
+      586,
+      650,
+      596
+    ],
+    "gutter_xy": [
+      0,
+      0
+    ],
+    "canvas_wh": [
+      80,
+      64
+    ],
+    "pivot_xy": [
+      40,
+      60
+    ],
+    "content_scale": 0.07608695652173914,
+    "content_anchor_xy": [
+      24,
+      42
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "animation": "enemies/giant_walk",
+    "frame": 3,
+    "seconds": 0.14,
+    "loop": true,
+    "output": "sprites/enemies/giant_walk_3.png",
+    "prompt": "implementation/sprites/generation/0016-giant-walk.prompt.txt",
+    "prompt_sha256": "a49e53131060d6dedf2c77ab873de1671d9eed4d98e294450fdda4dc962fe8ed",
+    "references": [
+      {
+        "path": "assets/art_source/enemies/giant/master.png",
+        "sha256": "6f65de383660225fd6bea3da529102ce0f3bf495fa8c657a0b2a62f15362f4f1",
+        "role": "As indexed in exact submitted prompt"
+      },
+      {
+        "path": "assets/art_source/enemies/tank/master.png",
+        "sha256": "a819ab464e485f0a904f8fe5aaa4ec28774068973a08ed7f04eada4c25bc62a5",
+        "role": "As indexed in exact submitted prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0016",
+    "revision": 0,
+    "enemy_family": "giant",
+    "enemy_motion": "walk",
+    "enemy_master_id": "enemies/giant",
+    "scale_reference": {
+      "role": "tallest standing pose",
+      "raw_height": 552,
+      "native_height": 42
+    },
+    "ground_measurement": "lower eight-row support band, excluding left contact fist for slam 0/1",
+    "cell_offset_xy": [
+      -32,
+      -44
+    ],
+    "variant_of": "enemies/giant_walk_0",
+    "output_sha256": "f6e703c341b71e5669bd322359d1a63f945930d65ba5f1130e4b59561a0f9dab"
+  },
+  {
+    "id": "enemies/giant_windup_0",
+    "owner": "raster",
+    "source": "assets/art_source/enemies/giant/windup.png",
+    "source_sha256": "3f6787b8dcbf78c9c831cf936f7d6c80c96d4e5d652e508c83c69015ff31cde6",
+    "crop_xywh": [
+      28,
+      219,
+      640,
+      518
+    ],
+    "sheet_cell_xywh": [
+      0,
+      0,
+      691,
+      748
+    ],
+    "gutter_xy": [
+      0,
+      0
+    ],
+    "canvas_wh": [
+      80,
+      64
+    ],
+    "pivot_xy": [
+      40,
+      60
+    ],
+    "content_scale": 0.07528957528957529,
+    "content_anchor_xy": [
+      25,
+      39
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "animation": "enemies/giant_windup",
+    "frame": 0,
+    "seconds": 0.1,
+    "loop": false,
+    "output": "sprites/enemies/giant_windup_0.png",
+    "prompt": "implementation/sprites/generation/0016-giant-windup.prompt.txt",
+    "prompt_sha256": "5b4a38970b45ba7f3637995a4488d9ae5253d6f0118406f31164387a3fc7e43b",
+    "references": [
+      {
+        "path": "assets/art_source/enemies/giant/master.png",
+        "sha256": "6f65de383660225fd6bea3da529102ce0f3bf495fa8c657a0b2a62f15362f4f1",
+        "role": "As indexed in exact submitted prompt"
+      },
+      {
+        "path": "assets/art_source/enemies/tank/master.png",
+        "sha256": "a819ab464e485f0a904f8fe5aaa4ec28774068973a08ed7f04eada4c25bc62a5",
+        "role": "As indexed in exact submitted prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0016",
+    "revision": 0,
+    "enemy_family": "giant",
+    "enemy_motion": "windup",
+    "enemy_master_id": "enemies/giant",
+    "scale_reference": {
+      "role": "first crouch",
+      "raw_height": 518,
+      "native_height": 39
+    },
+    "ground_measurement": "lower eight-row support band, excluding left contact fist for slam 0/1",
+    "cell_offset_xy": [
+      -32,
+      -44
+    ],
+    "output_sha256": "03be22b2a0f539e10f8ae35ff4694b8f36ac23647d7576c8f8b7297b61b8519e"
+  },
+  {
+    "id": "enemies/giant_windup_1",
+    "owner": "raster",
+    "source": "assets/art_source/enemies/giant/windup.png",
+    "source_sha256": "3f6787b8dcbf78c9c831cf936f7d6c80c96d4e5d652e508c83c69015ff31cde6",
+    "crop_xywh": [
+      715,
+      95,
+      651,
+      642
+    ],
+    "sheet_cell_xywh": [
+      691,
+      0,
+      709,
+      748
+    ],
+    "gutter_xy": [
+      0,
+      0
+    ],
+    "canvas_wh": [
+      80,
+      64
+    ],
+    "pivot_xy": [
+      40,
+      60
+    ],
+    "content_scale": 0.07528957528957529,
+    "content_anchor_xy": [
+      28,
+      48
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "animation": "enemies/giant_windup",
+    "frame": 1,
+    "seconds": 0.1,
+    "loop": false,
+    "output": "sprites/enemies/giant_windup_1.png",
+    "prompt": "implementation/sprites/generation/0016-giant-windup.prompt.txt",
+    "prompt_sha256": "5b4a38970b45ba7f3637995a4488d9ae5253d6f0118406f31164387a3fc7e43b",
+    "references": [
+      {
+        "path": "assets/art_source/enemies/giant/master.png",
+        "sha256": "6f65de383660225fd6bea3da529102ce0f3bf495fa8c657a0b2a62f15362f4f1",
+        "role": "As indexed in exact submitted prompt"
+      },
+      {
+        "path": "assets/art_source/enemies/tank/master.png",
+        "sha256": "a819ab464e485f0a904f8fe5aaa4ec28774068973a08ed7f04eada4c25bc62a5",
+        "role": "As indexed in exact submitted prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0016",
+    "revision": 0,
+    "enemy_family": "giant",
+    "enemy_motion": "windup",
+    "enemy_master_id": "enemies/giant",
+    "scale_reference": {
+      "role": "first crouch",
+      "raw_height": 518,
+      "native_height": 39
+    },
+    "ground_measurement": "lower eight-row support band, excluding left contact fist for slam 0/1",
+    "cell_offset_xy": [
+      -32,
+      -44
+    ],
+    "variant_of": "enemies/giant_windup_0",
+    "output_sha256": "92c4fe3f008c13554b6163d6824033a6a0e0ff6695512152557af77ec04d4fac"
+  },
+  {
+    "id": "enemies/giant_windup_2",
+    "owner": "raster",
+    "source": "assets/art_source/enemies/giant/windup.png",
+    "source_sha256": "3f6787b8dcbf78c9c831cf936f7d6c80c96d4e5d652e508c83c69015ff31cde6",
+    "crop_xywh": [
+      1435,
+      10,
+      638,
+      727
+    ],
+    "sheet_cell_xywh": [
+      1400,
+      0,
+      703,
+      748
+    ],
+    "gutter_xy": [
+      0,
+      0
+    ],
+    "canvas_wh": [
+      80,
+      64
+    ],
+    "pivot_xy": [
+      40,
+      60
+    ],
+    "content_scale": 0.07528957528957529,
+    "content_anchor_xy": [
+      29,
+      55
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "animation": "enemies/giant_windup",
+    "frame": 2,
+    "seconds": 0.1,
+    "loop": false,
+    "output": "sprites/enemies/giant_windup_2.png",
+    "prompt": "implementation/sprites/generation/0016-giant-windup.prompt.txt",
+    "prompt_sha256": "5b4a38970b45ba7f3637995a4488d9ae5253d6f0118406f31164387a3fc7e43b",
+    "references": [
+      {
+        "path": "assets/art_source/enemies/giant/master.png",
+        "sha256": "6f65de383660225fd6bea3da529102ce0f3bf495fa8c657a0b2a62f15362f4f1",
+        "role": "As indexed in exact submitted prompt"
+      },
+      {
+        "path": "assets/art_source/enemies/tank/master.png",
+        "sha256": "a819ab464e485f0a904f8fe5aaa4ec28774068973a08ed7f04eada4c25bc62a5",
+        "role": "As indexed in exact submitted prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0016",
+    "revision": 0,
+    "enemy_family": "giant",
+    "enemy_motion": "windup",
+    "enemy_master_id": "enemies/giant",
+    "scale_reference": {
+      "role": "first crouch",
+      "raw_height": 518,
+      "native_height": 39
+    },
+    "ground_measurement": "lower eight-row support band, excluding left contact fist for slam 0/1",
+    "cell_offset_xy": [
+      -32,
+      -44
+    ],
+    "variant_of": "enemies/giant_windup_0",
+    "output_sha256": "b1561a60dbc055c216f0cf5c6749b991f3a35d025654e663c92d19c4f8a7ceb5"
+  },
+  {
+    "id": "enemies/giant_slam_0",
+    "owner": "raster",
+    "source": "assets/art_source/enemies/giant/slam.png",
+    "source_sha256": "94a7dffd818126e5aecc7744f1a7a546bd228697f10a5115384471f290c2ea15",
+    "crop_xywh": [
+      18,
+      157,
+      736,
+      533
+    ],
+    "sheet_cell_xywh": [
+      0,
+      0,
+      792,
+      724
+    ],
+    "gutter_xy": [
+      0,
+      0
+    ],
+    "canvas_wh": [
+      80,
+      64
+    ],
+    "pivot_xy": [
+      40,
+      60
+    ],
+    "content_scale": 0.0634441087613293,
+    "content_anchor_xy": [
+      33,
+      34
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "animation": "enemies/giant_slam",
+    "frame": 0,
+    "seconds": 0.1,
+    "loop": false,
+    "output": "sprites/enemies/giant_slam_0.png",
+    "prompt": "implementation/sprites/generation/0016-giant-slam.prompt.txt",
+    "prompt_sha256": "c167f71d600bc979585eeab7d9b146abdbb4f8dbbb9e53379fd832fe29fbcfa5",
+    "references": [
+      {
+        "path": "assets/art_source/enemies/giant/master.png",
+        "sha256": "6f65de383660225fd6bea3da529102ce0f3bf495fa8c657a0b2a62f15362f4f1",
+        "role": "As indexed in exact submitted prompt"
+      },
+      {
+        "path": "assets/art_source/enemies/tank/master.png",
+        "sha256": "a819ab464e485f0a904f8fe5aaa4ec28774068973a08ed7f04eada4c25bc62a5",
+        "role": "As indexed in exact submitted prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0016",
+    "revision": 0,
+    "enemy_family": "giant",
+    "enemy_motion": "slam",
+    "enemy_master_id": "enemies/giant",
+    "scale_reference": {
+      "role": "standing recovery",
+      "raw_height": 662,
+      "native_height": 42
+    },
+    "ground_measurement": "lower eight-row support band, excluding left contact fist for slam 0/1",
+    "cell_offset_xy": [
+      -32,
+      -44
+    ],
+    "output_sha256": "9b88239ef825c25588d2b75abcdbe0c7a82375e70ebdc4351e6f515cab997cdc"
+  },
+  {
+    "id": "enemies/giant_slam_1",
+    "owner": "raster",
+    "source": "assets/art_source/enemies/giant/slam.png",
+    "source_sha256": "94a7dffd818126e5aecc7744f1a7a546bd228697f10a5115384471f290c2ea15",
+    "crop_xywh": [
+      831,
+      168,
+      699,
+      524
+    ],
+    "sheet_cell_xywh": [
+      792,
+      0,
+      750,
+      724
+    ],
+    "gutter_xy": [
+      0,
+      0
+    ],
+    "canvas_wh": [
+      80,
+      64
+    ],
+    "pivot_xy": [
+      40,
+      60
+    ],
+    "content_scale": 0.0634441087613293,
+    "content_anchor_xy": [
+      29,
+      33
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "animation": "enemies/giant_slam",
+    "frame": 1,
+    "seconds": 0.1,
+    "loop": false,
+    "output": "sprites/enemies/giant_slam_1.png",
+    "prompt": "implementation/sprites/generation/0016-giant-slam.prompt.txt",
+    "prompt_sha256": "c167f71d600bc979585eeab7d9b146abdbb4f8dbbb9e53379fd832fe29fbcfa5",
+    "references": [
+      {
+        "path": "assets/art_source/enemies/giant/master.png",
+        "sha256": "6f65de383660225fd6bea3da529102ce0f3bf495fa8c657a0b2a62f15362f4f1",
+        "role": "As indexed in exact submitted prompt"
+      },
+      {
+        "path": "assets/art_source/enemies/tank/master.png",
+        "sha256": "a819ab464e485f0a904f8fe5aaa4ec28774068973a08ed7f04eada4c25bc62a5",
+        "role": "As indexed in exact submitted prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0016",
+    "revision": 0,
+    "enemy_family": "giant",
+    "enemy_motion": "slam",
+    "enemy_master_id": "enemies/giant",
+    "scale_reference": {
+      "role": "standing recovery",
+      "raw_height": 662,
+      "native_height": 42
+    },
+    "ground_measurement": "lower eight-row support band, excluding left contact fist for slam 0/1",
+    "cell_offset_xy": [
+      -32,
+      -44
+    ],
+    "variant_of": "enemies/giant_slam_0",
+    "output_sha256": "0cbae98adb40200d45374bdfaab987543977ba804a839aa3694cd9b0b7056dc1"
+  },
+  {
+    "id": "enemies/giant_slam_2",
+    "owner": "raster",
+    "source": "assets/art_source/enemies/giant/slam.png",
+    "source_sha256": "94a7dffd818126e5aecc7744f1a7a546bd228697f10a5115384471f290c2ea15",
+    "crop_xywh": [
+      1555,
+      30,
+      613,
+      662
+    ],
+    "sheet_cell_xywh": [
+      1542,
+      0,
+      630,
+      724
+    ],
+    "gutter_xy": [
+      0,
+      0
+    ],
+    "canvas_wh": [
+      80,
+      64
+    ],
+    "pivot_xy": [
+      40,
+      60
+    ],
+    "content_scale": 0.0634441087613293,
+    "content_anchor_xy": [
+      22,
+      42
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "animation": "enemies/giant_slam",
+    "frame": 2,
+    "seconds": 0.1,
+    "loop": false,
+    "output": "sprites/enemies/giant_slam_2.png",
+    "prompt": "implementation/sprites/generation/0016-giant-slam.prompt.txt",
+    "prompt_sha256": "c167f71d600bc979585eeab7d9b146abdbb4f8dbbb9e53379fd832fe29fbcfa5",
+    "references": [
+      {
+        "path": "assets/art_source/enemies/giant/master.png",
+        "sha256": "6f65de383660225fd6bea3da529102ce0f3bf495fa8c657a0b2a62f15362f4f1",
+        "role": "As indexed in exact submitted prompt"
+      },
+      {
+        "path": "assets/art_source/enemies/tank/master.png",
+        "sha256": "a819ab464e485f0a904f8fe5aaa4ec28774068973a08ed7f04eada4c25bc62a5",
+        "role": "As indexed in exact submitted prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0016",
+    "revision": 0,
+    "enemy_family": "giant",
+    "enemy_motion": "slam",
+    "enemy_master_id": "enemies/giant",
+    "scale_reference": {
+      "role": "standing recovery",
+      "raw_height": 662,
+      "native_height": 42
+    },
+    "ground_measurement": "lower eight-row support band, excluding left contact fist for slam 0/1",
+    "cell_offset_xy": [
+      -32,
+      -44
+    ],
+    "variant_of": "enemies/giant_slam_0",
+    "output_sha256": "026fd4c5f09a1905ae10913aa6205aeed1f31dce8fa3d88b071cbb5937576cf2"
+  },
+  {
+    "id": "enemies/giant_death_0",
+    "owner": "raster",
+    "source": "assets/art_source/enemies/giant/death.png",
+    "source_sha256": "6b8bdf3cc385b840adf2cc0bc4e7fdb1408f4469e0707c0c1ca7b98fefc3abbd",
+    "crop_xywh": [
+      13,
+      215,
+      396,
+      390
+    ],
+    "sheet_cell_xywh": [
+      0,
+      0,
+      414,
+      724
+    ],
+    "gutter_xy": [
+      0,
+      0
+    ],
+    "canvas_wh": [
+      80,
+      64
+    ],
+    "pivot_xy": [
+      40,
+      60
+    ],
+    "content_scale": 0.1,
+    "content_anchor_xy": [
+      20,
+      39
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "animation": "enemies/giant_death",
+    "frame": 0,
+    "seconds": 0.12,
+    "loop": false,
+    "output": "sprites/enemies/giant_death_0.png",
+    "prompt": "implementation/sprites/generation/0016-giant-death.prompt.txt",
+    "prompt_sha256": "c3a9ce902cbbaa84e2b727004f5720fce89ff9185800b53844ace480272bb16a",
+    "references": [
+      {
+        "path": "assets/art_source/enemies/giant/master.png",
+        "sha256": "6f65de383660225fd6bea3da529102ce0f3bf495fa8c657a0b2a62f15362f4f1",
+        "role": "As indexed in exact submitted prompt"
+      },
+      {
+        "path": "assets/art_source/enemies/tank/master.png",
+        "sha256": "a819ab464e485f0a904f8fe5aaa4ec28774068973a08ed7f04eada4c25bc62a5",
+        "role": "As indexed in exact submitted prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0016",
+    "revision": 0,
+    "enemy_family": "giant",
+    "enemy_motion": "death",
+    "enemy_master_id": "enemies/giant",
+    "scale_reference": {
+      "role": "first crouch",
+      "raw_height": 390,
+      "native_height": 39
+    },
+    "ground_measurement": "collapse bounds midpoint",
+    "cell_offset_xy": [
+      -32,
+      -44
+    ],
+    "output_sha256": "de9b3f418e9694f40b54d12b41eaf60098a4a1f2d8a59de40e922c7bd04948bc"
+  },
+  {
+    "id": "enemies/giant_death_1",
+    "owner": "raster",
+    "source": "assets/art_source/enemies/giant/death.png",
+    "source_sha256": "6b8bdf3cc385b840adf2cc0bc4e7fdb1408f4469e0707c0c1ca7b98fefc3abbd",
+    "crop_xywh": [
+      419,
+      275,
+      375,
+      334
+    ],
+    "sheet_cell_xywh": [
+      414,
+      0,
+      390,
+      724
+    ],
+    "gutter_xy": [
+      0,
+      0
+    ],
+    "canvas_wh": [
+      80,
+      64
+    ],
+    "pivot_xy": [
+      40,
+      60
+    ],
+    "content_scale": 0.1,
+    "content_anchor_xy": [
+      19,
+      33
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "animation": "enemies/giant_death",
+    "frame": 1,
+    "seconds": 0.12,
+    "loop": false,
+    "output": "sprites/enemies/giant_death_1.png",
+    "prompt": "implementation/sprites/generation/0016-giant-death.prompt.txt",
+    "prompt_sha256": "c3a9ce902cbbaa84e2b727004f5720fce89ff9185800b53844ace480272bb16a",
+    "references": [
+      {
+        "path": "assets/art_source/enemies/giant/master.png",
+        "sha256": "6f65de383660225fd6bea3da529102ce0f3bf495fa8c657a0b2a62f15362f4f1",
+        "role": "As indexed in exact submitted prompt"
+      },
+      {
+        "path": "assets/art_source/enemies/tank/master.png",
+        "sha256": "a819ab464e485f0a904f8fe5aaa4ec28774068973a08ed7f04eada4c25bc62a5",
+        "role": "As indexed in exact submitted prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0016",
+    "revision": 0,
+    "enemy_family": "giant",
+    "enemy_motion": "death",
+    "enemy_master_id": "enemies/giant",
+    "scale_reference": {
+      "role": "first crouch",
+      "raw_height": 390,
+      "native_height": 39
+    },
+    "ground_measurement": "collapse bounds midpoint",
+    "cell_offset_xy": [
+      -32,
+      -44
+    ],
+    "variant_of": "enemies/giant_death_0",
+    "output_sha256": "19273a48971f8cc261cde9b40d40ce0934cebcd8199a94864a96a6b87ded91d2"
+  },
+  {
+    "id": "enemies/giant_death_2",
+    "owner": "raster",
+    "source": "assets/art_source/enemies/giant/death.png",
+    "source_sha256": "6b8bdf3cc385b840adf2cc0bc4e7fdb1408f4469e0707c0c1ca7b98fefc3abbd",
+    "crop_xywh": [
+      815,
+      338,
+      434,
+      270
+    ],
+    "sheet_cell_xywh": [
+      804,
+      0,
+      454,
+      724
+    ],
+    "gutter_xy": [
+      0,
+      0
+    ],
+    "canvas_wh": [
+      80,
+      64
+    ],
+    "pivot_xy": [
+      40,
+      60
+    ],
+    "content_scale": 0.1,
+    "content_anchor_xy": [
+      21,
+      27
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "animation": "enemies/giant_death",
+    "frame": 2,
+    "seconds": 0.12,
+    "loop": false,
+    "output": "sprites/enemies/giant_death_2.png",
+    "prompt": "implementation/sprites/generation/0016-giant-death.prompt.txt",
+    "prompt_sha256": "c3a9ce902cbbaa84e2b727004f5720fce89ff9185800b53844ace480272bb16a",
+    "references": [
+      {
+        "path": "assets/art_source/enemies/giant/master.png",
+        "sha256": "6f65de383660225fd6bea3da529102ce0f3bf495fa8c657a0b2a62f15362f4f1",
+        "role": "As indexed in exact submitted prompt"
+      },
+      {
+        "path": "assets/art_source/enemies/tank/master.png",
+        "sha256": "a819ab464e485f0a904f8fe5aaa4ec28774068973a08ed7f04eada4c25bc62a5",
+        "role": "As indexed in exact submitted prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0016",
+    "revision": 0,
+    "enemy_family": "giant",
+    "enemy_motion": "death",
+    "enemy_master_id": "enemies/giant",
+    "scale_reference": {
+      "role": "first crouch",
+      "raw_height": 390,
+      "native_height": 39
+    },
+    "ground_measurement": "collapse bounds midpoint",
+    "cell_offset_xy": [
+      -32,
+      -44
+    ],
+    "variant_of": "enemies/giant_death_0",
+    "output_sha256": "dfb167feb3a2f47fc7007d08ea57c1718cec77abee1aee1fd8b8cdcb757c94cc"
+  },
+  {
+    "id": "enemies/giant_death_3",
+    "owner": "raster",
+    "source": "assets/art_source/enemies/giant/death.png",
+    "source_sha256": "6b8bdf3cc385b840adf2cc0bc4e7fdb1408f4469e0707c0c1ca7b98fefc3abbd",
+    "crop_xywh": [
+      1268,
+      404,
+      427,
+      204
+    ],
+    "sheet_cell_xywh": [
+      1258,
+      0,
+      442,
+      724
+    ],
+    "gutter_xy": [
+      0,
+      0
+    ],
+    "canvas_wh": [
+      80,
+      64
+    ],
+    "pivot_xy": [
+      40,
+      60
+    ],
+    "content_scale": 0.1,
+    "content_anchor_xy": [
+      21,
+      20
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "animation": "enemies/giant_death",
+    "frame": 3,
+    "seconds": 0.12,
+    "loop": false,
+    "output": "sprites/enemies/giant_death_3.png",
+    "prompt": "implementation/sprites/generation/0016-giant-death.prompt.txt",
+    "prompt_sha256": "c3a9ce902cbbaa84e2b727004f5720fce89ff9185800b53844ace480272bb16a",
+    "references": [
+      {
+        "path": "assets/art_source/enemies/giant/master.png",
+        "sha256": "6f65de383660225fd6bea3da529102ce0f3bf495fa8c657a0b2a62f15362f4f1",
+        "role": "As indexed in exact submitted prompt"
+      },
+      {
+        "path": "assets/art_source/enemies/tank/master.png",
+        "sha256": "a819ab464e485f0a904f8fe5aaa4ec28774068973a08ed7f04eada4c25bc62a5",
+        "role": "As indexed in exact submitted prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0016",
+    "revision": 0,
+    "enemy_family": "giant",
+    "enemy_motion": "death",
+    "enemy_master_id": "enemies/giant",
+    "scale_reference": {
+      "role": "first crouch",
+      "raw_height": 390,
+      "native_height": 39
+    },
+    "ground_measurement": "collapse bounds midpoint",
+    "cell_offset_xy": [
+      -32,
+      -44
+    ],
+    "variant_of": "enemies/giant_death_0",
+    "output_sha256": "21d3422bd87ae51e35065b1fb192ae45437f76432eff688c111d2b1139e956af"
+  },
+  {
+    "id": "enemies/giant_death_4",
+    "owner": "raster",
+    "source": "assets/art_source/enemies/giant/death.png",
+    "source_sha256": "6b8bdf3cc385b840adf2cc0bc4e7fdb1408f4469e0707c0c1ca7b98fefc3abbd",
+    "crop_xywh": [
+      1706,
+      451,
+      453,
+      158
+    ],
+    "sheet_cell_xywh": [
+      1700,
+      0,
+      472,
+      724
+    ],
+    "gutter_xy": [
+      0,
+      0
+    ],
+    "canvas_wh": [
+      80,
+      64
+    ],
+    "pivot_xy": [
+      40,
+      60
+    ],
+    "content_scale": 0.1,
+    "content_anchor_xy": [
+      22,
+      16
+    ],
+    "alpha_threshold": 128,
+    "palette": "tools/palette.py:COLOURS",
+    "animation": "enemies/giant_death",
+    "frame": 4,
+    "seconds": 0.12,
+    "loop": false,
+    "output": "sprites/enemies/giant_death_4.png",
+    "prompt": "implementation/sprites/generation/0016-giant-death.prompt.txt",
+    "prompt_sha256": "c3a9ce902cbbaa84e2b727004f5720fce89ff9185800b53844ace480272bb16a",
+    "references": [
+      {
+        "path": "assets/art_source/enemies/giant/master.png",
+        "sha256": "6f65de383660225fd6bea3da529102ce0f3bf495fa8c657a0b2a62f15362f4f1",
+        "role": "As indexed in exact submitted prompt"
+      },
+      {
+        "path": "assets/art_source/enemies/tank/master.png",
+        "sha256": "a819ab464e485f0a904f8fe5aaa4ec28774068973a08ed7f04eada4c25bc62a5",
+        "role": "As indexed in exact submitted prompt"
+      }
+    ],
+    "tool": "built-in ImageGen",
+    "generation_task": "0016",
+    "revision": 0,
+    "enemy_family": "giant",
+    "enemy_motion": "death",
+    "enemy_master_id": "enemies/giant",
+    "scale_reference": {
+      "role": "first crouch",
+      "raw_height": 390,
+      "native_height": 39
+    },
+    "ground_measurement": "collapse bounds midpoint",
+    "cell_offset_xy": [
+      -32,
+      -44
+    ],
+    "variant_of": "enemies/giant_death_0",
+    "output_sha256": "da0aa36414c31dc5037b58e7afeaf16cae0fb6996c2e129e071a02d6f7a00ccc"
+  }
+]

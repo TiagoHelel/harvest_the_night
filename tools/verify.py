@@ -278,6 +278,16 @@ def check_enemy_showcase():
     return check("enemy movement/attacks", code == 0, next((s for s in out.splitlines() if s.startswith("ENEMY SHOWCASE:")), tail(out, 4)))
 
 
+def check_giant_art():
+    code, out = run([sys.executable, "tools/check_giant_art.py"])
+    return check("giant sources/motion", code == 0, tail(out, 4))
+
+
+def check_giant_showcase():
+    code, out = run([sys.executable, "tools/show_art.py", "--giant", "--check"])
+    return check("giant/death playback", code == 0, next((s for s in out.splitlines() if s.startswith("GIANT SHOWCASE:")), tail(out, 4)))
+
+
 def check_logo():
     """The logo still matches the letters it was composed from.
 
@@ -692,6 +702,8 @@ def main():
     check_barrier_showcase()
     check_enemy_art()
     check_enemy_showcase()
+    check_giant_art()
+    check_giant_showcase()
     check_font()
     check_logo()
     check_sfx()

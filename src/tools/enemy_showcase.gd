@@ -24,6 +24,19 @@ func expect(ok: bool, message: String) -> void:
 
 
 func _run() -> void:
+	await _setup()
+	await _identities()
+	await _walks(false)
+	await _walks(true)
+	await _attacks()
+	await _guards()
+	await _mixed()
+	await _death_sources()
+	print("ENEMY SHOWCASE: %d checks, %d failed" % [_checks, _failed])
+	quit(1 if _failed > 0 else 0)
+
+
+func _setup() -> void:
 	var args := OS.get_cmdline_user_args()
 	_capture = not args.has("--check")
 	for arg in args:
@@ -55,15 +68,6 @@ func _run() -> void:
 	_caption.add_theme_font_override("font", load("res://assets/fonts/harvest_hud.fnt"))
 	_caption.add_theme_font_size_override("font_size", 8)
 	overlay.add_child(_caption)
-	await _identities()
-	await _walks(false)
-	await _walks(true)
-	await _attacks()
-	await _guards()
-	await _mixed()
-	await _death_sources()
-	print("ENEMY SHOWCASE: %d checks, %d failed" % [_checks, _failed])
-	quit(1 if _failed > 0 else 0)
 
 
 func _blank(night: bool = false) -> Dictionary:

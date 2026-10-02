@@ -1,0 +1,95 @@
+{
+  "id": "giant",
+  "kind": "windup",
+  "revision": 0,
+  "tool": "built-in ImageGen",
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-240e4976-88f2-4e87-b558-a9a39d6b4a61.png",
+  "source": "assets/art_source/enemies/giant/windup.png",
+  "source_sha256": "3f6787b8dcbf78c9c831cf936f7d6c80c96d4e5d652e508c83c69015ff31cde6",
+  "source_wh": [
+    2103,
+    748
+  ],
+  "source_alpha_range": [
+    0,
+    255
+  ],
+  "prompt": "implementation/sprites/generation/0016-giant-windup.prompt.txt",
+  "prompt_sha256": "5b4a38970b45ba7f3637995a4488d9ae5253d6f0118406f31164387a3fc7e43b",
+  "references": [
+    "assets/art_source/enemies/giant/master.png",
+    "assets/art_source/enemies/tank/master.png"
+  ],
+  "reference_hashes": {
+    "assets/art_source/enemies/giant/master.png": "6f65de383660225fd6bea3da529102ce0f3bf495fa8c657a0b2a62f15362f4f1",
+    "assets/art_source/enemies/tank/master.png": "a819ab464e485f0a904f8fe5aaa4ec28774068973a08ed7f04eada4c25bc62a5"
+  },
+  "tool_arguments": {
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\enemies\\giant\\master.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\enemies\\tank\\master.png"
+    ]
+  },
+  "measurements": [
+    {
+      "role": "windup_0",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        691,
+        748
+      ],
+      "crop_xywh": [
+        28,
+        219,
+        640,
+        518
+      ]
+    },
+    {
+      "role": "windup_1",
+      "sheet_cell_xywh": [
+        691,
+        0,
+        709,
+        748
+      ],
+      "crop_xywh": [
+        715,
+        95,
+        651,
+        642
+      ]
+    },
+    {
+      "role": "windup_2",
+      "sheet_cell_xywh": [
+        1400,
+        0,
+        703,
+        748
+      ],
+      "crop_xywh": [
+        1435,
+        10,
+        638,
+        727
+      ]
+    }
+  ],
+  "decision": "Accepted after native/3x complete motion review; source crop and palette conversion only",
+  "actual_submitted_arguments": {
+    "prompt": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT.\nStyle: chunky deliberate pixel-art clusters, colored dark outlines, orthographic three-quarter top-down rectangular-grid camera. Neutral upper-left daytime light. True transparent background, no ground shadow, labels, scenery, target, aura, glow, blur or excessive gore. Preserve large readable masses for reduction to a 64x64 native canvas, ground pivot (32,60), standing body about 42 pixels high. Muted rot/stone greens, violet undersides, worn brown cloth, small cold highlights. The Giant must be clearly broader and taller than the ordinary enemies but fit the farm's established camera. Keep hands and feet fully within each separate source cell.\n\nPrimary request: EXACTLY THREE ordered left-facing wind-up poses, ONE HORIZONTAL ROW with generous transparent separators. Image 1 is the accepted Giant identity reference; Image 2 the ordinary material/camera reference. Frame0 heavy planted ready crouch, frame1 right striking fist rising behind shoulder, frame2 striking forearm raised high and loaded overhead with knees planted. Preserve identity, visible feet and body scale; raised arm adds height but body never grows. The final raised-arm silhouette must be unmistakable against walk. No aura, target, impact or scenery.\n",
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/enemies/giant/master.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/enemies/tank/master.png"
+    ],
+    "transparent_background": true
+  },
+  "selected_outputs": [
+    "enemies/giant_windup_0",
+    "enemies/giant_windup_1",
+    "enemies/giant_windup_2"
+  ]
+}

@@ -484,3 +484,44 @@ Full verify includes source and real-state gates. Capture mode checks actual
 farmer/barrier occlusion and mine/actor/crop pixels, all joins under day/dusk/night,
 legal previews, route restoration, loaded ruins and identical 4x simulation bytes.
 Run the fault suite in isolation from import/editor/verify and restore all bytes.
+
+## Giant motion and bounded enemy deaths (0016)
+
+Five exact ImageGen returns own Giant master/walk/wind-up/slam/death. Preserve
+their raw alpha, exact prompts, reference hashes and actual submission arguments
+under `assets/art_source/enemies/giant/` and `generation/0016-*`. Measured cuts
+use one scale per strip, nearest/palette conversion and binary alpha. All sixteen
+canonical poses share 80x64/(40,60); four old names are exact output aliases.
+This transparent envelope admits the ground-contact fist without changing
+the 43x42 standing body, feet or logical cell. Ordinary 0015 outputs are reused.
+
+EnemyMotion observes actual movement and valid core targets/waits. It rejects
+stale/distant tells and uses observed contact to start the three slam poses.
+The nine-tick cosmetic slam recovery may accompany subsequent core movement;
+it never delays a core step. The warning ring renders above actors/roof only
+while the real tell is valid. No new attack timing or simulation field exists.
+
+EnemyDeaths borrows only each coordinate Array across one fixed core tick.
+Existing in-place movement updates it before traps/projectiles remove the ID.
+Immediately afterward, missing tracked IDs become copied Vector2i/kind/facing
+cues and all borrowed arrays are released. Entity dictionaries are never held.
+At most 24 cues and 24 lazily allocated y-sorted sprites survive. Each frame
+lasts 0.12 render seconds, then ordinary four-frame deaths expire at 0.48s and
+Giant five-frame deaths at 0.60s. A full pool replaces its oldest cue. Duplicate
+observation, skipped tick gaps, new state and day cleanup cannot replay deaths.
+
+```powershell
+python tools/check_giant_art.py
+python tools/show_art.py --giant --check
+python tools/show_art.py --giant --out=implementation/shots/sprites/<task-id>/giant
+python implementation/sprites/reviews/0016/build_review.py
+python implementation/sprites/reviews/0016/capture_review.py
+python implementation/sprites/reviews/0016/audit.py
+```
+
+Full verify covers source ownership, both walking directions, all real wall
+and house tell/contact phases, warning visibility, movement-before-death final
+coordinates, one-shot expiry, 64 simultaneous removals/24-cue cap, load/day
+cleanup, performance and identical serialized core state. Review full 480x270
+captures beside exact 3x nearest views; enlarged windows alone do not restore
+detail discarded by native sprite conversion. The raster importer is unchanged.

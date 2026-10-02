@@ -555,10 +555,14 @@ def migrated_barriers():
 def migrated_enemies():
     """Stop procedural motion only when the complete authored family owns it."""
     owners = art_ownership.registry()
-    return {'enemies/' + family for family in ('walker', 'runner', 'tank', 'breaker') if all(
+    complete = {'enemies/' + family for family in ('walker', 'runner', 'tank', 'breaker') if all(
         owners.get('sprites/enemies/' + family + suffix + '.png') == 'raster'
         for suffix in ('', '_walk_b', '_attack', '_death') + tuple('_walk_%d' % i for i in range(4))
         + tuple('_attack_%d' % i for i in range(3)) + tuple('_death_%d' % i for i in range(4)))}
+    giant_suffixes = ('', '_walk_b', '_attack', '_death', '_telegraph') + tuple('_walk_%d' % i for i in range(4)) + tuple('_windup_%d' % i for i in range(3)) + tuple('_slam_%d' % i for i in range(3)) + tuple('_death_%d' % i for i in range(5))
+    if all(owners.get('sprites/enemies/giant' + suffix + '.png') == 'raster' for suffix in giant_suffixes):
+        complete.add('enemies/giant')
+    return complete
 
 
 def derived_sprites():
@@ -623,8 +627,9 @@ def derived_sprites():
     # **The Giant's telegraph is its own pose**, which the task asks for by
     # name: a bigger reach than an attack, so the second before it swings
     # looks different from the swing.
-    width, height, pixels = render("enemies/giant", SPRITES["enemies/giant"])
-    out["enemies/giant_telegraph"] = (width, height, lunging(pixels, 5))
+    if 'enemies/giant' not in migrated:
+        width, height, pixels = render("enemies/giant", SPRITES["enemies/giant"])
+        out["enemies/giant_telegraph"] = (width, height, lunging(pixels, 5))
     return out
 
 

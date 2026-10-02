@@ -1,0 +1,63 @@
+{
+  "id": "giant",
+  "kind": "master",
+  "revision": 0,
+  "tool": "built-in ImageGen",
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-32cf408b-1e14-40a9-bf63-cc1fdedb0646.png",
+  "source": "assets/art_source/enemies/giant/master.png",
+  "source_sha256": "6f65de383660225fd6bea3da529102ce0f3bf495fa8c657a0b2a62f15362f4f1",
+  "source_wh": [
+    1217,
+    1293
+  ],
+  "source_alpha_range": [
+    0,
+    255
+  ],
+  "prompt": "implementation/sprites/generation/0016-giant-master.prompt.txt",
+  "prompt_sha256": "3ec17d97a170cb495c9021b09218120da66cdc156cb52c0ea8afa23f651664c1",
+  "references": [
+    "assets/art_source/enemies/tank/master.png",
+    "docs/reference-sheet.png"
+  ],
+  "reference_hashes": {
+    "assets/art_source/enemies/tank/master.png": "a819ab464e485f0a904f8fe5aaa4ec28774068973a08ed7f04eada4c25bc62a5",
+    "docs/reference-sheet.png": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c"
+  },
+  "tool_arguments": {
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\enemies\\tank\\master.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png"
+    ]
+  },
+  "measurements": [
+    {
+      "role": "master",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        1217,
+        1293
+      ],
+      "crop_xywh": [
+        31,
+        118,
+        1160,
+        1136
+      ]
+    }
+  ],
+  "decision": "Accepted after native/3x complete motion review; source crop and palette conversion only",
+  "actual_submitted_arguments": {
+    "prompt": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT.\nStyle: chunky deliberate pixel-art clusters, colored dark outlines, orthographic three-quarter top-down rectangular-grid camera. Neutral upper-left daytime light. True transparent background, no ground shadow, labels, scenery, target, aura, glow, blur or excessive gore. Preserve large readable masses for reduction to a 64x64 native canvas, ground pivot (32,60), standing body about 42 pixels high. Muted rot/stone greens, violet undersides, worn brown cloth, small cold highlights. The Giant must be clearly broader and taller than the ordinary enemies but fit the farm's established camera. Keep hands and feet fully within each separate source cell.\n\nPrimary request: ONE identity master for enemies/giant, neutral heavy standing stance, three-quarter facing screen-left and viewer. Image 1 is the accepted ordinary tank as camera/material reference, not an edit target; Image 2 is the world style reference including the boss in its bottom-right panel. Create a new massive mutated zombie with oversized heavy forearms, hunched broad shoulders, a small bald green head with bony brow, exposed mottled gray-green torso and ragged dark-brown trouser shorts. Distinct from the clothed tank: bare heavy torso, asymmetric stone-like shoulder growth and very large clenched fists. Simplify texture; no tiny pustule noise. No weapon or extra attack type.\n",
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/enemies/tank/master.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png"
+    ],
+    "transparent_background": true
+  },
+  "selected_outputs": [
+    "enemies/giant"
+  ]
+}

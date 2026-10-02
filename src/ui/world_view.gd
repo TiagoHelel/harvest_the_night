@@ -161,6 +161,9 @@ var _shot_before: Dictionary = {}
 var _shot_origins: Dictionary = {}
 var _observing_tick := false
 var _enemy_motion := EnemyMotion.new()
+var _enemy_warning: Node2D
+var _enemy_deaths := EnemyDeaths.new()
+var _death_sprites: Array[Sprite2D] = []
 var _tower_history: Dictionary = {}
 var _tower_version := -1
 var _wrecks: Node2D
@@ -246,6 +249,12 @@ func _ready() -> void:
 	_actors.y_sort_enabled = true
 	_occupants.add_child(_actors)
 
+	_enemy_warning = Node2D.new()
+	_enemy_warning.name = "EnemyWarning"
+	_enemy_warning.z_index = 7
+	_enemy_warning.draw.connect(_draw_enemy_warning)
+	add_child(_enemy_warning)
+
 	_shots = Node2D.new()
 	_shots.name = "Shots"
 	_shots.z_index = 8              # over everything on the ground
@@ -278,6 +287,8 @@ func _ready() -> void:
 func show_state(state: Dictionary) -> void:
 	if not is_same(_state, state):
 		_enemy_motion.clear()
+		_enemy_deaths.clear()
+		_refresh_deaths(0.0)
 		_shot_before.clear()
 		_shot_origins.clear()
 		_observing_tick = false
@@ -329,6 +340,8 @@ func _process(delta: float) -> void:
 		_refresh_plots()
 
 	_refresh_actors()
+	_refresh_deaths(delta)
+	_enemy_warning.queue_redraw()
 	_refresh_stations(delta)
 	_remember_towers(_state)
 	_refresh_wrecks()
@@ -636,6 +649,29 @@ func hide_ghost() -> void:
 		_highlight.queue_redraw()
 
 
+func _draw_enemy_warning() -> void:
+	if _state.is_empty():
+		return
+	var size := float(GameData.TILE_SIZE)
+	# **What the Giant is about to hit.** A ring closing on the cell it has
+	# picked, so the second the telegraph buys is a second the player can see
+	# and spend. Drawn from the rules' own wind-up, so it cannot promise a
+	# blow that is not coming.
+	for id in Entities.ids(_state):
+		var aimed := Enemies.winding_at(_state, id)
+		if aimed.x < 0:
+			continue
+		# The same observed wind-up drives both body and ring. A post-hit
+		# cooldown or stale target while walking must not promise another slam.
+		if not str(_pose_of(Entities.get_one(_state, int(id)))).begins_with("giant_windup_"):
+			continue
+		var middle := (Vector2(aimed) + Vector2(0.5, 0.5)) * size
+		var swing := fmod(float(Time.get_ticks_msec()) / 400.0, 1.0)
+		_enemy_warning.draw_arc(middle, size * (1.4 - 0.6 * swing), 0.0, TAU, 24,
+			Color(1.0, 0.45, 0.30, 0.9), 2.0, true)
+
+
+
 func _draw_highlight() -> void:
 	if _state.is_empty():
 		return
@@ -655,18 +691,6 @@ func _draw_highlight() -> void:
 
 	var size := float(GameData.TILE_SIZE)
 
-	# **What the Giant is about to hit.** A ring closing on the cell it has
-	# picked, so the second the telegraph buys is a second the player can see
-	# and spend. Drawn from the rules' own wind-up, so it cannot promise a
-	# blow that is not coming.
-	for id in Entities.ids(_state):
-		var aimed := Enemies.winding_at(_state, id)
-		if aimed.x < 0:
-			continue
-		var middle := (Vector2(aimed) + Vector2(0.5, 0.5)) * size
-		var swing := fmod(float(Time.get_ticks_msec()) / 400.0, 1.0)
-		_highlight.draw_arc(middle, size * (1.4 - 0.6 * swing), 0.0, TAU, 24,
-			Color(1.0, 0.45, 0.30, 0.9), 2.0, true)
 
 	# **The flare.** An expanding ring at the player's feet, fading as it goes,
 	# so the one button reads as something that happened *there* rather than a
@@ -1006,7 +1030,7 @@ func _refresh_actors() -> void:
 		var sprite: Sprite2D = _actor_sprites[i]
 		sprite.texture = _texture_for(_pose_of(one))
 		# Keep material planes and family silhouettes during the core hurt cue.
-		sprite.flip_h = _enemy_motion.faces_right(one) if EnemyMotion.FAMILIES.has(one["kind"]) else false
+		sprite.flip_h = _enemy_motion.faces_right(one) if EnemyMotion.TRACKED.has(one["kind"]) else false
 		sprite.modulate = Color(1.25, 1.12, 1.12) if int(one.get("hurt", 0)) > 0 \
 			else Color(1, 1, 1)
 		# **Anchored at the feet, not at a tile corner.** An enemy is no
@@ -1019,6 +1043,31 @@ func _refresh_actors() -> void:
 		var metadata: Dictionary = RasterArt.FRAMES.get(sprite.texture.resource_path, {})
 		sprite.offset = -Vector2(metadata.get("pivot",
 			Vector2i(sprite.texture.get_width() / 2, sprite.texture.get_height())))
+
+
+## Bounded source-owned one-shots. Removed core entities stay removed.
+func _refresh_deaths(delta: float) -> void:
+	if _actors == null:
+		return
+	if not _state.is_empty() and int(_state["phase"]) == Phases.DAY:
+		_enemy_deaths.clear()
+	_enemy_deaths.advance(delta)
+	while _death_sprites.size() < _enemy_deaths._cues.size():
+		var sprite := Sprite2D.new()
+		sprite.centered = false
+		_actors.add_child(sprite)
+		_death_sprites.append(sprite)
+	for i in _death_sprites.size():
+		var sprite: Sprite2D = _death_sprites[i]
+		sprite.visible = i < _enemy_deaths._cues.size()
+		if not sprite.visible:
+			continue
+		var cue: Dictionary = _enemy_deaths._cues[i]
+		sprite.texture = _texture_for(EnemyDeaths.pose(cue))
+		sprite.position = ArtPlacement.contact([cue["pos"].x, cue["pos"].y])
+		sprite.flip_h = bool(cue["right"])
+		var metadata: Dictionary = RasterArt.FRAMES.get(sprite.texture.resource_path, {})
+		sprite.offset = -Vector2(metadata.get("pivot", Vector2i(sprite.texture.get_width() / 2, sprite.texture.get_height())))
 
 
 ## Shots in the air. Two pixels of bright, which at this resolution is enough
@@ -1054,6 +1103,7 @@ func before_tick(state: Dictionary) -> void:
 	if not is_same(_state, state):
 		return
 	_observing_tick = true
+	_enemy_deaths.before_tick(state, _enemy_motion)
 	_enemy_motion.before_tick(state)
 	_mine_before.clear()
 	if int(state["grid_version"]) != _mine_grid_version:
@@ -1077,6 +1127,7 @@ func after_tick(state: Dictionary) -> void:
 	if not is_same(_state, state) or not _observing_tick:
 		return
 	_observing_tick = false
+	_enemy_deaths.after_tick(state)
 	_enemy_motion.after_tick(state)
 	_observe_mines(state)
 	var alive: Dictionary = {}
@@ -1650,20 +1701,11 @@ func _texture_for(id: StringName) -> Texture2D:
 	return _flat_block(id)
 
 
-## Which drawing an enemy is showing.
-##
-## **Off the state, not off a guess.** `winding_at` is the rules' own word for
-## "this one is about to hit something", and it is what the telegraph and the
-## attack pose hang on. The walk alternates on the tick, so two zombies that
-## arrived together do not shamble in lockstep - the id is mixed in, which
-## costs nothing and is what stops a wave looking like a chorus line.
-##
-## There is art for a death and nothing plays it. `Combat._kill()` removes the
-## entity on the tick it dies, so there is no moment to draw it in; the corpse
-## it leaves is task 0077's, and `enemies/*_death.png` is waiting for it.
+## Authored movement and real wind-up/hit poses are selected by tick observers.
+## Removed entities use the separate bounded death pool.
 func _pose_of(one: Dictionary) -> StringName:
 	var kind: StringName = one["kind"]
-	if EnemyMotion.FAMILIES.has(kind):
+	if EnemyMotion.TRACKED.has(kind):
 		return _enemy_motion.pose(one, _state)
 	if int(one.get("winding_at", -1)) >= 0:
 		var telegraph := StringName("%s_telegraph" % kind)

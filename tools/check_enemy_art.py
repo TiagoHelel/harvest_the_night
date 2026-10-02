@@ -22,7 +22,7 @@ def silhouette(image):
 def main():
     data=import_art.load_manifest(); files,images=import_art.build(data)
     entries={e['id']:e for e in data['assets']}
-    if gen_sprites.migrated_enemies() != {'enemies/'+f for f in FAMILIES}:
+    if not {'enemies/'+f for f in FAMILIES}.issubset(gen_sprites.migrated_enemies()):
         raise ValueError('Incomplete authored enemy ownership')
     old=gen_sprites.everything(dispatch=False)
     signatures={}

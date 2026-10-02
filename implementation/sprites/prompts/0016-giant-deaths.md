@@ -1,6 +1,6 @@
 # 0016 - Giant wind-up and view-owned death playback
 
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0015
 - **Likely files:** sprites/enemies/giant*; src/ui/world_view.gd; src/ui/particles.gd; visual animation metadata
 - **Generation briefs:** GIANT

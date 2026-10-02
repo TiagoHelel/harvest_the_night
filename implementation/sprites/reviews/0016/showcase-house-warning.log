@@ -1,0 +1,20 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+OpenGL API 3.3.0 Core Profile Context 22.20.27.09.230330 - Compatibility - Using Device: ATI Technologies Inc. - AMD Radeon (TM) Graphics
+
+DEATH POOL: 24 sprites, 104.7us per refresh
+GIANT SHOWCASE: 2530 checks, 3 failed
+ERROR: Actual target ring remains visible around the Giant: 0 pixels
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://src/tools/enemy_showcase.gd:23)
+       [1] _ring_pixels (res://src/tools/giant_showcase.gd:148)
+ERROR: Actual target ring remains visible around the Giant: 0 pixels
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://src/tools/enemy_showcase.gd:23)
+       [1] _ring_pixels (res://src/tools/giant_showcase.gd:148)
+ERROR: Actual target ring remains visible around the Giant: 0 pixels
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] expect (res://src/tools/enemy_showcase.gd:23)
+       [1] _ring_pixels (res://src/tools/giant_showcase.gd:148)

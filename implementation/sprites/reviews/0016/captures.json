@@ -1,0 +1,492 @@
+[
+  {
+    "path": "implementation/shots/sprites/0016/giant/attack_0_giant_slam_0.png",
+    "sha256": "bbea0eeee6af64ec37b431dd215e8d7ae03e161b678c069e721ae8a4ed11fd59",
+    "page": "captures-00.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0016/giant/attack_0_giant_slam_1.png",
+    "sha256": "fc53db1867c011934f9ec7f08d1690661175f475223bd856f3356c373c8b23df",
+    "page": "captures-00.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0016/giant/attack_0_giant_slam_2.png",
+    "sha256": "e25a4340fd44db20dbb126fbe2847ce2320ded7020589574b2b0ceb74ff71754",
+    "page": "captures-01.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0016/giant/attack_0_giant_windup_0.png",
+    "sha256": "814f38fa209f05be1f8bea7ed0ba6fea630e41088a4af0b56c2f98bfcba8ac7f",
+    "page": "captures-01.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0016/giant/attack_0_giant_windup_1.png",
+    "sha256": "ea26ff2cd97abdf4ab62f0a83afdfe818787a7bdcd27d54648a0845d07d79c30",
+    "page": "captures-02.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0016/giant/attack_0_giant_windup_2.png",
+    "sha256": "8fabfafc2a28f5d588dcf84d489d50b68b9317998690a57d4cd157818a698465",
+    "page": "captures-02.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0016/giant/attack_1_giant_slam_0.png",
+    "sha256": "810b6a0158a98016e4549c02f390c1d0978a8faeb80334a7a8d320083296922e",
+    "page": "captures-03.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0016/giant/attack_1_giant_slam_1.png",
+    "sha256": "2034cbd02ccf80fcda0ad1355833e965c563e78eec0528c0a7c655ee303047fe",
+    "page": "captures-03.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0016/giant/attack_1_giant_slam_2.png",
+    "sha256": "d00ab6ffa948b20b4117062dc03d23f96132b6d2c9523770881b61818febcc01",
+    "page": "captures-04.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0016/giant/attack_1_giant_windup_0.png",
+    "sha256": "a40e6ef8ce41c4eef27b3faaab18c589ebd312fa2e17dee223770a0a80d6286f",
+    "page": "captures-04.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0016/giant/attack_1_giant_windup_1.png",
+    "sha256": "66906c4b1bf31660fe61251bc60d6d93b18c7ed5f79526f813532141202ec0fa",
+    "page": "captures-05.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0016/giant/attack_1_giant_windup_2.png",
+    "sha256": "f0eb0e8424444782130bd6c0686cd95f080b1c12f83042dee6df7697af2ebb98",
+    "page": "captures-05.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0016/giant/death_pool_cap.png",
+    "sha256": "f8dee36d4d1411546741ed330642fb8b3040957f49995e2a6920c581930fd5d0",
+    "page": "captures-06.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0016/giant/deaths_0_0.png",
+    "sha256": "892e22096e6e5e8ab44ad33d4b1351816e58e49c0c63584d8d2d517d7e53817f",
+    "page": "captures-06.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0016/giant/deaths_0_1.png",
+    "sha256": "5d71abcd8ff69e8a1185ed2eb033d7dcdfa1033aa7ef1a32287501353973d20d",
+    "page": "captures-07.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0016/giant/deaths_0_2.png",
+    "sha256": "dbc456f22f8b9d6ad672ca02f0bd0ddd01ec7e9b51bc9e55a1d15a03fc82ef1f",
+    "page": "captures-07.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0016/giant/deaths_0_3.png",
+    "sha256": "2112705899f07ba5a6518c9b708f1760a1bc1762ca6ff3a83c4ecf72416369bd",
+    "page": "captures-08.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0016/giant/deaths_0_4.png",
+    "sha256": "ba01ae8f51dd4c2c9b12d0ca36ef7d07e91ef59f948374c42792d478f284c3b8",
+    "page": "captures-08.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0016/giant/deaths_0_expired.png",
+    "sha256": "96ad8bdebd950ee35658d6196afac97034c9af8579345064b700668696c0c6b2",
+    "page": "captures-09.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0016/giant/deaths_1_0.png",
+    "sha256": "9bf6b649ce1f9622985cd12d5d974497820362458a5e41a3a440751a8ed75281",
+    "page": "captures-09.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0016/giant/deaths_1_1.png",
+    "sha256": "64de0a09b3c0799bf222c9ede003df254a3a8282132bc452ee5ef36dd1f4737c",
+    "page": "captures-10.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0016/giant/deaths_1_2.png",
+    "sha256": "31b5244b8a161d7260db5869f626fdf5e3bbf64225a04fd9dfff96e9587bc186",
+    "page": "captures-10.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0016/giant/deaths_1_3.png",
+    "sha256": "cdb7632989531a9f7f386b8a758e24ee6228d8ff5c2a02b057d0d22a23a30bb6",
+    "page": "captures-11.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0016/giant/deaths_1_4.png",
+    "sha256": "08a57ea2c6e5fb7c8f20afb1732f92b1e9c159eea5e34387c4ffdab72ed6a3d1",
+    "page": "captures-11.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0016/giant/deaths_1_expired.png",
+    "sha256": "19ccfe5f2f67297dad23c0fddac7873ad22a11b29e80522f944d77a5a4ebe67b",
+    "page": "captures-12.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0016/giant/house_giant_windup_0.png",
+    "sha256": "fb6da70a2c0fac8c5eb1e8bda674d2f6855d3b7ea36fcb47426f06e4013c2bc7",
+    "page": "captures-12.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0016/giant/house_giant_windup_1.png",
+    "sha256": "ecbc3e1e71052d7d11d5a328f0654028a4d1b54c3fb7046ddc5128046d983f91",
+    "page": "captures-13.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0016/giant/house_giant_windup_2.png",
+    "sha256": "b038a8cf8ec2a7689f80bbb3f5fb8efeafdec17c58aaf4b77d0fa7f6fd225123",
+    "page": "captures-13.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0016/giant/house_spent_death.png",
+    "sha256": "3a1a1ffeda8bcf78fe74c8665787b242aa5bcc39f4d822932bb556c8f6cbb117",
+    "page": "captures-14.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0016/giant/identities_0.png",
+    "sha256": "e1daee523a66bab61a27f568ab23b5ef5bb844e2a689261929c1e4ea61e83afe",
+    "page": "captures-14.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0016/giant/identities_1.png",
+    "sha256": "c7d83b7ca851b2d4bcf4968dbf43a52d9d5ce38ddd5cef717971af25a9d7cc49",
+    "page": "captures-15.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0016/giant/silhouettes.png",
+    "sha256": "ee4901d6341bd6d0af3010b060384170ba428831acd30c6eb304ab08d52e1929",
+    "page": "captures-15.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0016/giant/walk_0_015.png",
+    "sha256": "2b31291a43c2e993178a9d1459bd089d75152c3dc30ca9e467159ff99c088624",
+    "page": "captures-16.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0016/giant/walk_0_031.png",
+    "sha256": "39147dc37b7132047c1bbedec3ea199e028125332853641626272fc953dadf1d",
+    "page": "captures-16.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0016/giant/walk_0_047.png",
+    "sha256": "e93e5a904c985ef8a1ff3efcab85a301570468937a1f81a039dcacc82b62ed85",
+    "page": "captures-17.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0016/giant/walk_0_063.png",
+    "sha256": "b9cf3ee6ce30dd6bcc25da6ebd8ec2851efb66f8d84787518f8d1d2e7678aea7",
+    "page": "captures-17.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0016/giant/walk_0_079.png",
+    "sha256": "baa6b0db61eddbbcaf6759de4471028c8951506631e6863cd5c0fbb9596ed821",
+    "page": "captures-18.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0016/giant/walk_0_095.png",
+    "sha256": "b88e4b3a1b84dd2610073a171868c404cc1a682ba79a158d544ce12cbff3f700",
+    "page": "captures-18.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0016/giant/walk_1_015.png",
+    "sha256": "3f7f54d38412da20313e49be2a5ed917ffe6b85c9380fc39f8db614b8cf1ee8e",
+    "page": "captures-19.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0016/giant/walk_1_031.png",
+    "sha256": "e7976c8af1f462b2e8c24cd9906a3f757496e2299132405e7e9a29d8e91bd6f7",
+    "page": "captures-19.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0016/giant/walk_1_047.png",
+    "sha256": "3d7c77ec36644006411522bccc4ca7889c5d446a71796712a0c43d35be30102e",
+    "page": "captures-20.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0016/giant/walk_1_063.png",
+    "sha256": "16ca9243accf45c4fdb041222e472ad8fe10b0f4aa1d536f0ec2472d9c8cc6cc",
+    "page": "captures-20.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0016/giant/walk_1_079.png",
+    "sha256": "6544a0862a60a04907e5a7aed4245363bceea0c1806b4241559ee215ea540c3d",
+    "page": "captures-21.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0016/giant/walk_1_095.png",
+    "sha256": "ce78122e695ae6b9ead5bea2266a31ce3d87b7f23d85825d32ef839e5e79d4a0",
+    "page": "captures-21.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0016/dusk.png",
+    "sha256": "56a629c3a0e8a8c91e65b9db5734efa78c766d698b1844d2f6e54f67f5cf7448",
+    "page": "captures-22.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0016/noon.png",
+    "sha256": "ee20b02153596fd8c1b506f07e3cd90608c87b224d22625876737b8244350c06",
+    "page": "captures-22.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0016/result.png",
+    "sha256": "ee05e6bf53a56f7a0fe7444c0819a720ad4fa664237b4b5b4096cdee4cc57fe7",
+    "page": "captures-23.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0016/tech.png",
+    "sha256": "c80cd683841f52adba9f58a4419172e5e1e3d36561a63fe4887105dbc691020c",
+    "page": "captures-23.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  },
+  {
+    "path": "implementation/shots/sprites/0016/wave.png",
+    "sha256": "6ab39b0e67ff69b479efc861496e7276a4390226cc42cc653addd01644399bc8",
+    "page": "captures-24.png",
+    "native_wh": [
+      480,
+      270
+    ],
+    "nearest_scale": 3
+  }
+]

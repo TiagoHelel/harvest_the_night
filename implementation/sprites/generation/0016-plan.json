@@ -1,0 +1,73 @@
+[
+  {
+    "id": "giant",
+    "kind": "master",
+    "modules": [
+      "master"
+    ],
+    "layout": "row",
+    "references": [
+      "assets/art_source/enemies/tank/master.png",
+      "docs/reference-sheet.png"
+    ]
+  },
+  {
+    "id": "giant",
+    "kind": "walk",
+    "modules": [
+      "walk_0",
+      "walk_1",
+      "walk_2",
+      "walk_3"
+    ],
+    "layout": "grid",
+    "references": [
+      "assets/art_source/enemies/giant/master.png",
+      "assets/art_source/enemies/tank/master.png"
+    ]
+  },
+  {
+    "id": "giant",
+    "kind": "windup",
+    "modules": [
+      "windup_0",
+      "windup_1",
+      "windup_2"
+    ],
+    "layout": "row",
+    "references": [
+      "assets/art_source/enemies/giant/master.png",
+      "assets/art_source/enemies/tank/master.png"
+    ]
+  },
+  {
+    "id": "giant",
+    "kind": "slam",
+    "modules": [
+      "slam_0",
+      "slam_1",
+      "slam_2"
+    ],
+    "layout": "row",
+    "references": [
+      "assets/art_source/enemies/giant/master.png",
+      "assets/art_source/enemies/tank/master.png"
+    ]
+  },
+  {
+    "id": "giant",
+    "kind": "death",
+    "modules": [
+      "death_0",
+      "death_1",
+      "death_2",
+      "death_3",
+      "death_4"
+    ],
+    "layout": "row",
+    "references": [
+      "assets/art_source/enemies/giant/master.png",
+      "assets/art_source/enemies/tank/master.png"
+    ]
+  }
+]
