@@ -7,3 +7,4 @@
 *.pck binary
 # Submitted prompts are hashed as bytes; retain their exact saved newlines.
 implementation/sprites/generation/0014-*.prompt.txt -text whitespace=cr-at-eol
+implementation/fhd-player/directional/prompts/*.prompt.txt -text whitespace=cr-at-eol

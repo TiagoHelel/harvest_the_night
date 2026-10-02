@@ -1,0 +1,221 @@
+{
+  "version": 1,
+  "status": "awaiting-user-validation",
+  "integration": "preview only; no runtime replacement before user review",
+  "directions": [
+    "south",
+    "west",
+    "north",
+    "east"
+  ],
+  "locomotion_frames": {
+    "idle": 3,
+    "walk": 8,
+    "run": 8
+  },
+  "activity_frames": 4,
+  "existing_front": "implementation/fhd-player/locomotion-contract.json",
+  "jobs": [
+    {
+      "id": "idle_north",
+      "action": "idle",
+      "direction": "north",
+      "columns": 3,
+      "rows": 1,
+      "count": 3,
+      "seconds": 0.55
+    },
+    {
+      "id": "walk_north",
+      "action": "walk",
+      "direction": "north",
+      "columns": 4,
+      "rows": 2,
+      "count": 8,
+      "seconds": 0.12
+    },
+    {
+      "id": "run_north",
+      "action": "run",
+      "direction": "north",
+      "columns": 4,
+      "rows": 2,
+      "count": 8,
+      "seconds": 0.08
+    },
+    {
+      "id": "idle_west",
+      "action": "idle",
+      "direction": "west",
+      "columns": 3,
+      "rows": 1,
+      "count": 3,
+      "seconds": 0.55
+    },
+    {
+      "id": "walk_west",
+      "action": "walk",
+      "direction": "west",
+      "columns": 4,
+      "rows": 2,
+      "count": 8,
+      "seconds": 0.12
+    },
+    {
+      "id": "run_west",
+      "action": "run",
+      "direction": "west",
+      "columns": 4,
+      "rows": 2,
+      "count": 8,
+      "seconds": 0.08
+    },
+    {
+      "id": "idle_east",
+      "action": "idle",
+      "direction": "east",
+      "columns": 3,
+      "rows": 1,
+      "count": 3,
+      "seconds": 0.55
+    },
+    {
+      "id": "walk_east",
+      "action": "walk",
+      "direction": "east",
+      "columns": 4,
+      "rows": 2,
+      "count": 8,
+      "seconds": 0.12
+    },
+    {
+      "id": "run_east",
+      "action": "run",
+      "direction": "east",
+      "columns": 4,
+      "rows": 2,
+      "count": 8,
+      "seconds": 0.08
+    },
+    {
+      "id": "chop",
+      "action": "chop",
+      "direction": "all",
+      "columns": 4,
+      "rows": 4,
+      "count": 16,
+      "seconds": 0.16
+    },
+    {
+      "id": "mine",
+      "action": "mine",
+      "direction": "all",
+      "columns": 4,
+      "rows": 4,
+      "count": 16,
+      "seconds": 0.16
+    },
+    {
+      "id": "till",
+      "action": "till",
+      "direction": "all",
+      "columns": 4,
+      "rows": 4,
+      "count": 16,
+      "seconds": 0.16
+    },
+    {
+      "id": "plant",
+      "action": "plant",
+      "direction": "all",
+      "columns": 4,
+      "rows": 4,
+      "count": 16,
+      "seconds": 0.16
+    },
+    {
+      "id": "harvest",
+      "action": "harvest",
+      "direction": "all",
+      "columns": 4,
+      "rows": 4,
+      "count": 16,
+      "seconds": 0.16
+    },
+    {
+      "id": "water",
+      "action": "water",
+      "direction": "all",
+      "columns": 4,
+      "rows": 4,
+      "count": 16,
+      "seconds": 0.16
+    },
+    {
+      "id": "fish",
+      "action": "fish",
+      "direction": "all",
+      "columns": 4,
+      "rows": 4,
+      "count": 16,
+      "seconds": 0.24
+    },
+    {
+      "id": "reel",
+      "action": "reel",
+      "direction": "all",
+      "columns": 4,
+      "rows": 4,
+      "count": 16,
+      "seconds": 0.2
+    },
+    {
+      "id": "collect",
+      "action": "collect",
+      "direction": "all",
+      "columns": 4,
+      "rows": 4,
+      "count": 16,
+      "seconds": 0.16
+    },
+    {
+      "id": "craft",
+      "action": "craft",
+      "direction": "all",
+      "columns": 4,
+      "rows": 4,
+      "count": 16,
+      "seconds": 0.16
+    },
+    {
+      "id": "trade",
+      "action": "trade",
+      "direction": "all",
+      "columns": 4,
+      "rows": 4,
+      "count": 16,
+      "seconds": 0.16
+    },
+    {
+      "id": "repair",
+      "action": "repair",
+      "direction": "all",
+      "columns": 4,
+      "rows": 4,
+      "count": 16,
+      "seconds": 0.16
+    },
+    {
+      "id": "carry",
+      "action": "carry",
+      "direction": "all",
+      "columns": 4,
+      "rows": 4,
+      "count": 16,
+      "seconds": 0.16
+    }
+  ],
+  "final_native_frames": 284,
+  "directional_animations": 64,
+  "runtime_promotion": false
+}

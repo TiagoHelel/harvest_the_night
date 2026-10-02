@@ -1,0 +1,242 @@
+[
+  {
+    "action": "idle",
+    "renderer_frames": [
+      0,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85
+    ],
+    "cadence_fps": 25,
+    "montage": "review-stills\\idle-consecutive.png"
+  },
+  {
+    "action": "walk",
+    "renderer_frames": [
+      0,
+      3,
+      6,
+      9,
+      12,
+      15,
+      18,
+      21
+    ],
+    "cadence_fps": 25,
+    "montage": "review-stills\\walk-consecutive.png"
+  },
+  {
+    "action": "run",
+    "renderer_frames": [
+      0,
+      2,
+      4,
+      6,
+      8,
+      10,
+      12,
+      14
+    ],
+    "cadence_fps": 25,
+    "montage": "review-stills\\run-consecutive.png"
+  },
+  {
+    "action": "chop",
+    "renderer_frames": [
+      0,
+      4,
+      8,
+      12,
+      16,
+      20,
+      24,
+      28
+    ],
+    "cadence_fps": 25,
+    "montage": "review-stills\\chop-consecutive.png"
+  },
+  {
+    "action": "mine",
+    "renderer_frames": [
+      0,
+      4,
+      8,
+      12,
+      16,
+      20,
+      24,
+      28
+    ],
+    "cadence_fps": 25,
+    "montage": "review-stills\\mine-consecutive.png"
+  },
+  {
+    "action": "till",
+    "renderer_frames": [
+      0,
+      4,
+      8,
+      12,
+      16,
+      20,
+      24,
+      28
+    ],
+    "cadence_fps": 25,
+    "montage": "review-stills\\till-consecutive.png"
+  },
+  {
+    "action": "plant",
+    "renderer_frames": [
+      0,
+      4,
+      8,
+      12,
+      16,
+      20,
+      24,
+      28
+    ],
+    "cadence_fps": 25,
+    "montage": "review-stills\\plant-consecutive.png"
+  },
+  {
+    "action": "harvest",
+    "renderer_frames": [
+      0,
+      4,
+      8,
+      12,
+      16,
+      20,
+      24,
+      28
+    ],
+    "cadence_fps": 25,
+    "montage": "review-stills\\harvest-consecutive.png"
+  },
+  {
+    "action": "water",
+    "renderer_frames": [
+      0,
+      4,
+      8,
+      12,
+      16,
+      20,
+      24,
+      28
+    ],
+    "cadence_fps": 25,
+    "montage": "review-stills\\water-consecutive.png"
+  },
+  {
+    "action": "fish",
+    "renderer_frames": [
+      0,
+      5,
+      6,
+      9,
+      10,
+      15,
+      16,
+      55
+    ],
+    "cadence_fps": 25,
+    "montage": "review-stills\\fish-consecutive.png"
+  },
+  {
+    "action": "reel",
+    "renderer_frames": [
+      0,
+      4,
+      8,
+      12,
+      16,
+      20,
+      24,
+      28
+    ],
+    "cadence_fps": 25,
+    "montage": "review-stills\\reel-consecutive.png"
+  },
+  {
+    "action": "collect",
+    "renderer_frames": [
+      0,
+      4,
+      8,
+      12,
+      16,
+      20,
+      24,
+      28
+    ],
+    "cadence_fps": 25,
+    "montage": "review-stills\\collect-consecutive.png"
+  },
+  {
+    "action": "craft",
+    "renderer_frames": [
+      0,
+      4,
+      8,
+      12,
+      16,
+      20,
+      24,
+      28
+    ],
+    "cadence_fps": 25,
+    "montage": "review-stills\\craft-consecutive.png"
+  },
+  {
+    "action": "trade",
+    "renderer_frames": [
+      0,
+      4,
+      8,
+      12,
+      16,
+      20,
+      24,
+      28
+    ],
+    "cadence_fps": 25,
+    "montage": "review-stills\\trade-consecutive.png"
+  },
+  {
+    "action": "repair",
+    "renderer_frames": [
+      0,
+      4,
+      8,
+      12,
+      16,
+      20,
+      24,
+      28
+    ],
+    "cadence_fps": 25,
+    "montage": "review-stills\\repair-consecutive.png"
+  },
+  {
+    "action": "carry",
+    "renderer_frames": [
+      0,
+      4,
+      8,
+      12,
+      16,
+      20,
+      24,
+      28
+    ],
+    "cadence_fps": 25,
+    "montage": "review-stills\\carry-consecutive.png"
+  }
+]

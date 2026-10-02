@@ -1,0 +1,6 @@
+# Full actual-renderer sequences stay locally reproducible and available.
+# Selected source-native evidence is retained separately in review-stills/.
+captures/*
+!captures/.gdignore
+contacts/*.import
+__pycache__/

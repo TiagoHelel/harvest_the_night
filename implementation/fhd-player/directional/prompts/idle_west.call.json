@@ -1,0 +1,17 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-02",
+  "transparent_background": true,
+  "raw_original": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-fb70cdc7-7fd9-4647-a019-52a24e5f5689.png",
+  "workspace_source": "assets/art_source/player-fhd/directional/idle_west.png",
+  "prompt_file": "implementation/fhd-player/directional/prompts/idle_west.prompt.txt",
+  "references": [
+    "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/approved/idle_south.png"
+  ],
+  "layout": {
+    "columns": 3,
+    "rows": 1,
+    "count": 3
+  },
+  "status": "candidate for source and native-size review"
+}

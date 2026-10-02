@@ -1,0 +1,19 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+OpenGL API 3.3.0 Core Profile Context 22.20.27.09.230330 - Compatibility - Using Device: ATI Technologies Inc. - AMD Radeon (TM) Graphics
+
+DIRECTIONAL REVIEW: idle 192 renderer frames, four directions, 120px body reference
+DIRECTIONAL REVIEW: walk 192 renderer frames, four directions, 120px body reference
+DIRECTIONAL REVIEW: run 192 renderer frames, four directions, 120px body reference
+DIRECTIONAL REVIEW: chop 192 renderer frames, four directions, 120px body reference
+DIRECTIONAL REVIEW: mine 192 renderer frames, four directions, 120px body reference
+DIRECTIONAL REVIEW: till 192 renderer frames, four directions, 120px body reference
+DIRECTIONAL REVIEW: plant 192 renderer frames, four directions, 120px body reference
+DIRECTIONAL REVIEW: harvest 192 renderer frames, four directions, 120px body reference
+DIRECTIONAL REVIEW: water 192 renderer frames, four directions, 120px body reference
+DIRECTIONAL REVIEW: fish 192 renderer frames, four directions, 120px body reference
+DIRECTIONAL REVIEW: reel 192 renderer frames, four directions, 120px body reference
+DIRECTIONAL REVIEW: collect 192 renderer frames, four directions, 120px body reference
+DIRECTIONAL REVIEW: craft 192 renderer frames, four directions, 120px body reference
+DIRECTIONAL REVIEW: trade 192 renderer frames, four directions, 120px body reference
+DIRECTIONAL REVIEW: repair 192 renderer frames, four directions, 120px body reference
+DIRECTIONAL REVIEW: carry 192 renderer frames, four directions, 120px body reference

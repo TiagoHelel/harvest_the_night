@@ -10378,3 +10378,53 @@ implementation/fhd-player/verify-locomotion.log. The game/sprite backlog statuse
 remain complete and unchanged. This focused art commit does not add a sprint
 mechanic or promote a partial actor family into gameplay. Broader FHD rendering
 and full character-family integration remain separate unfinished workspace work.
+
+## 2026-10-02 — Follow-up: four-direction farmer animation validation
+
+The user approved the front idle/walk/run preview and requested all four
+cardinal views and every activity, with horizontal GIFs before game integration.
+Built-in ImageGen generated nine missing locomotion strips and thirteen activity
+atlases, with six focused source revisions. The exact approved front identity
+(SHA-256 4706f5b8163d4be2d3d8f285bdffe970a315a9c770e6b28bef4e74c4993ba6f1)
+and all nineteen previously approved front native frames remain unchanged.
+
+The review family contains 284 native frames / 64 directional animations: three
+idle, eight walk and eight run per direction, plus four key poses per direction
+for chop, mine, till, plant, harvest, water, fish, reel, collect, craft, trade,
+repair and carry. All four views are authored independently. Raw sources and
+265 new cuts live in assets/art_source/player-fhd/directional/; exact prompts,
+call provenance and final source/prompt/output/selection hashes are in
+implementation/fhd-player/directional/. No sprites/actors, production player
+bindings, movement mechanic or core/balance data are replaced by this follow-up.
+
+Visual review caught and fixed reversed east run poses, side-facing planting
+bends, the west hammer striking backward, and north axe/pickaxe contact behind
+the target direction. Crop review additionally caught the north crown being
+measured from its brim, inconsistent brown material ramps and foreign tool tips
+leaking from adjacent atlas rows. Final cuts use per-column activity gutters,
+connected original farmer/tool alpha components (with seeds/drops included),
+uniform strip scales and the existing shared palette. Complete locomotion
+silhouettes remain within 60 native pixels, preserving flight and planted feet;
+work's transparent 128x128 canvas retains raised tools without shrinking bodies.
+
+Real Godot playback captures 192 frames at 25fps per category. The sixteen
+1040x288 horizontal GIFs show front/left/back/right at the intended 120px FHD
+body scale. The combined todas-animacoes-horizontal.gif cycles all categories
+for 61.44 seconds. The local index.html offers individual clips, native/FHD scale,
+downloads and all directional contact sheets. Complete native contact overviews
+and original renderer phase evidence were opened; casting holds a visible rod
+while waiting. The source check verifies all counts, hashes, binary native alpha,
+unique work poses and eight distinct lower-body phases for each walk/run cycle.
+Full local renderer captures remain under captures/; 128 selected originals and
+sixteen consecutive-phase montages are retained under review-stills/.
+
+Full working-tree verify/export passed 54 checks with zero skips/failures in
+527s (over the 300s soft target), including 7,581 core assertions and 996 input
+cases. Sim 1270427719 and data 8148086 remain unchanged; night tick 631us, path
+rebuild 8,562us. Log: implementation/fhd-player/directional/verify.log. Latest
+standalone preview parsing, exact cuts and real renderer playback were checked
+again after crop/palette-only refinements. Completed game/sprite queues remain
+unchanged. This is a candidate family awaiting the user's visual validation;
+subjective gait/readability approval, consistent runtime padding/bindings and
+live farm/house day/night composition remain integration work after approval.
+The earlier broader FHD working-tree edits and rejected pilots are preserved.
