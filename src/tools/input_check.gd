@@ -1808,6 +1808,11 @@ func _case_0030_fishing() -> void:
 	await frames(2)
 	expect(line != null and line.visible,
 		"and the HUD says there is a line out")
+	var farmer: PlayerView = require_control("PlayerView")
+	var rod_body: Sprite2D = farmer.get_node("Body")
+	await until(func() -> bool: return farmer.playing() == &"reel", "the farmer holds the rod after casting")
+	expect(rod_body.texture.resource_path == PlayerArt.texture_path(&"reel", 0),
+		"Waiting for a fish keeps the rod-ready drawing")
 
 	# **Wait for the bite**, which is the part the player cannot hurry.
 	var bit := await until(func() -> bool: return Fishing.is_biting(state),
@@ -1818,6 +1823,8 @@ func _case_0030_fishing() -> void:
 		"and the HUD shouts about it", line.text if line else "")
 	expect(Interact.verb_at(state, pond) == &"reel",
 		"the water says reel now", str(Interact.verb_at(state, pond)))
+	expect(farmer.playing() == &"reel" and rod_body.texture.resource_path == PlayerArt.texture_path(&"reel", 0),
+		"The rod remains in hand when the fish bites")
 
 	# **Land it.** A press inside the window, and the fish is in the basket.
 	var before := Resources.amount(state, GameData.FISH)

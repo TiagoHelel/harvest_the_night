@@ -122,8 +122,9 @@ func _animate(delta: float) -> void:
 	# **Task 0109.** The rules say which bubble and for how long; this only
 	# draws it. Nothing here decides when one appears, which is what lets a
 	# replay and a screenshot show the same one.
-	var reacting := PlayerArt.reaction_pose(name, Reactions.now(_state))
-	if reacting != &"":
+	var holding_rod := Fishing.is_casting(_state) and name == &"reel"
+	var reacting := PlayerArt.reaction_pose(&"idle_south" if holding_rod else name, Reactions.now(_state))
+	if reacting != &"" and not holding_rod:
 		name = reacting
 		pose = pose.duplicate()
 		pose["name"] = name
@@ -154,22 +155,28 @@ func _animate(delta: float) -> void:
 	_sprite.offset = Vector2(float(feet.x - canvas.x) if bool(pose["flip"])
 		else -float(feet.x), -float(feet.y))
 	if reacting != &"" and texture != null:
-		_show_bubble(texture, metadata)
+		if holding_rod:
+			var reaction_path := PlayerArt.texture_path(reacting, 0)
+			_show_bubble(_texture(reaction_path), RasterArt.FRAMES[reaction_path], false)
+		else:
+			_show_bubble(texture, metadata)
 
 
 ## The existing reaction selects the pose; only its glyph can move to stay
 ## within the viewport. The body keeps its ground anchor, scale and sorting.
-func _show_bubble(texture: Texture2D, metadata: Dictionary) -> void:
+func _show_bubble(texture: Texture2D, metadata: Dictionary, mask_body := true) -> void:
 	if not metadata.has("bubble"):
 		push_error("Missing source-owned reaction bubble crop")
 		return
 	var box: Rect2i = metadata["bubble"]
-	_sprite.material = _bubble_material
-	_bubble_material.set_shader_parameter("bubble_box",
-		Vector4(box.position.x, box.position.y, box.size.x, box.size.y))
+	if mask_body:
+		_sprite.material = _bubble_material
+		_bubble_material.set_shader_parameter("bubble_box",
+			Vector4(box.position.x, box.position.y, box.size.x, box.size.y))
 	_bubble.texture = texture
 	_bubble.region_rect = Rect2(box)
-	_bubble.position = _sprite.offset + Vector2(box.position)
+	var origin := _sprite.offset if mask_body else -Vector2(metadata["pivot"])
+	_bubble.position = origin + Vector2(box.position)
 	# Work in actual viewport pixels, including integer stretch/camera zoom.
 	var transform := get_global_transform_with_canvas()
 	var top_left := transform * _bubble.position

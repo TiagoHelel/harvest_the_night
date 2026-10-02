@@ -171,6 +171,7 @@ static func tick(state: Dictionary) -> void:
 		# Walking away gives up on whatever was being done. Half a tree does
 		# not stay half chopped in some invisible ledger.
 		_stop(state)
+		Fishing.give_up(state)
 
 	if dx != 0 or dy != 0:
 		_step(state, dx, dy)

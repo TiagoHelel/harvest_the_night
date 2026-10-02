@@ -130,4 +130,10 @@ func pose(state: Dictionary, delta: float) -> Dictionary:
 		var active_pose := PlayerArt.pose(Player.facing(state), false, active)
 		active_pose["frame"] = 0
 		return active_pose
+	# Casting finishes the player's action, but the line remains in the water.
+	# Keep the existing rod-ready drawing until a catch, miss or cancellation.
+	if int(state["phase"]) == Phases.DAY and Fishing.is_casting(state):
+		var waiting := PlayerArt.pose(Player.facing(state), false, &"reel")
+		waiting["frame"] = 0
+		return waiting
 	return {}

@@ -1475,3 +1475,23 @@ budgets, unchanged sim 3960053733 and data 3913993875. The preceding task's full
 53-gate suite is not claimed as a rerun for this shader correction. The unrelated
 project.godot editor serialization change and prior untracked imports remain
 excluded. Queue stays 20 done; no push or automation is started.
+
+## 2026-10-02 — Follow-up: keep the fishing rod in hand
+
+The user reported losing the rod after casting while waiting for the fish.
+PlayerWork now holds the existing reel frame 0 while the persistent fishing line
+is WAITING or BITING, after the normal cast cue finishes. PlayerView draws the
+existing bite glyph separately so the warning no longer replaces the rod pose.
+The same cancellation/movement branch that stops player actions now gives up
+the fishing line, fixing a missing documented rule exposed by the regression.
+Catch and cast strips, raster files, fishing delay/yield and viewport are reused.
+
+Actual native renderer verification: 4,708 checks, zero failures, twelve 480x270
+waiting/bite/catch captures across all four facings. Work regression passes
+12,081 checks, reactions 690, input 987 cases and parse 117 scripts. Core headless
+suite exits successfully; its resource teardown diagnostics are retained in the
+focused log. Sim 3960053733 and data 3913993875 remain unchanged. Coverage includes
+every waiting tick, pause, state replacement/resume, bite glyph, catch follow-through,
+cancel, movement, missed bite and dusk pose removal. Evidence and reproduction:
+implementation/reviews/fishing-hold/. No full export suite rerun is claimed.
+Queue remains 20 done; unrelated editor serialization and imports are excluded.

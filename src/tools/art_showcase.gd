@@ -99,6 +99,11 @@ func _run() -> void:
 		print("TERRAIN SHOWCASE: %d checks, %d failed" % [_checks, _failed])
 		quit(1 if _failed > 0 else 0)
 		return
+	if args.has("--fishing-hold"):
+		await _fishing_hold()
+		print("FISHING HOLD: %d checks, %d failed" % [_checks, _failed])
+		quit(1 if _failed > 0 else 0)
+		return
 	if args.has("--reactions"):
 		await _reactions()
 		print("PLAYER REACTIONS: %d checks, %d failed" % [_checks, _failed])
@@ -1517,6 +1522,68 @@ func _work_cycles() -> void:
 	_work_tick(view)
 	view._process(0.0)
 	expect(String(view.playing()).begins_with("idle_"), "Dusk ends daylight work without leaving a tool")
+	await _fishing_hold()
+
+
+## A completed cast is no longer a player action, but still owns the rod pose.
+func _fishing_hold() -> void:
+	var view: PlayerView = _world.get_node("Occupants/PlayerView")
+	view.set_process(false)
+	_world.set_process(false)
+	for facing in [Player.SOUTH, Player.WEST, Player.NORTH, Player.EAST]:
+		var water := _work_fixture(&"fish", facing)
+		_state["intent"]["interact"] = true
+		for _i in Interact.ticks_for(_state, water, &"fish"):
+			_work_tick(view, true)
+			view._process(1.0 / GameData.TICK_HZ)
+		expect(Fishing.is_casting(_state) and not Player.is_busy(_state),
+			"Completed cast keeps its line without inventing another action")
+		view._process(0.3)
+		_work_frame(view, &"reel", 0, facing, 0.0)
+		await _settle()
+		await _shoot("fishing_wait_facing%d" % facing, "Waiting / rod stays in hand / facing %d" % facing)
+		# Repeated rendering, including a pause, cannot advance the fishing timer.
+		_work_frame(view, &"reel", 0, facing, 100.0)
+		# A loaded/resumed waiting state recovers the pose without a cast cue.
+		_state = _state.duplicate(true)
+		view.show_state(_state)
+		_work_frame(view, &"reel", 0, facing, 0.0)
+		for _i in Fishing.ticks_left(_state):
+			_work_tick(view, true)
+			_work_frame(view, &"reel", 0, facing, 1.0 / GameData.TICK_HZ)
+		expect(Fishing.is_biting(_state), "Real wait timer reaches the bite window")
+		_reaction_check(view, &"bang", true)
+		await _settle()
+		await _shoot("fishing_bite_facing%d" % facing, "Bite / rod and warning together / facing %d" % facing)
+		_state["intent"]["interact"] = true
+		_work_tick(view, true)
+		expect(not Fishing.is_casting(_state) and not Fishing.last_catch(_state).is_empty(),
+			"Reeling still pays the actual catch")
+		_work_frame(view, &"reel", 1, facing, 0.0)
+		await _settle()
+		await _shoot("fishing_catch_facing%d" % facing, "Catch / existing reel animation / facing %d" % facing)
+		view._process(0.4)
+		expect(view.playing() != &"reel", "Catch follow-through returns to an ordinary pose")
+		for exit_kind in ["cancel", "move", "miss", "dusk"]:
+			_work_fixture(&"reel", facing)
+			_work_frame(view, &"reel", 0, facing, 0.0)
+			match exit_kind:
+				"cancel":
+					_state["intent"]["cancel"] = true
+				"move":
+					_state["intent"]["move"] = [1, 0]
+				"miss":
+					_state["fishing"]["left"] = 1
+				"dusk":
+					_state["intent"]["begin_night"] = true
+			_work_tick(view, true)
+			view._process(0.4)
+			if exit_kind == "dusk":
+				expect(int(_state["phase"]) == Phases.PREPARATION and view.playing() != &"reel",
+					"Ending daylight removes the rod pose")
+			else:
+				expect(not Fishing.is_casting(_state) and view.playing() != &"reel",
+					"%s ends the line and held rod together" % exit_kind)
 
 
 ## Existing reaction rules and actual PlayerView, including viewport limits.
@@ -1548,26 +1615,32 @@ func _reaction_settle(view: PlayerView) -> void:
 	expect(var_to_bytes(_state) == before, "Reaction world/view rendering cannot mutate any state/save field")
 
 
-func _reaction_check(view: PlayerView, kind: StringName) -> void:
+func _reaction_check(view: PlayerView, kind: StringName, holding_rod := false) -> void:
 	var before := var_to_bytes(_state)
 	view._process(0.2)
 	var body: Sprite2D = view.get_node("Body")
 	var bubble: Sprite2D = view.get_node("ReactionBubble")
 	var shadow: Sprite2D = view.get_node("Shadow")
 	var name := StringName("react_%s" % kind)
+	var body_name := &"reel" if holding_rod else name
+	var glyph_path := PlayerArt.texture_path(name, 0)
 	expect(var_to_bytes(_state) == before, "Held reaction cannot update state or its lifetime")
-	expect(view.playing() == name and not view.flipped(), "All reactions keep their south pose without mirroring")
-	expect(body.texture != null and body.texture.resource_path == PlayerArt.texture_path(name, 0),
+	expect(view.playing() == body_name and view.flipped() == (holding_rod and Player.facing(_state) == Player.EAST),
+		"Reaction keeps its south pose, or the held fishing rod's facing")
+	expect(body.texture != null and body.texture.resource_path == PlayerArt.texture_path(body_name, 0),
 		"Each existing reaction uses its own source-owned frame")
 	expect(body.offset == Vector2(-24, -44) and body.texture.get_size() == Vector2(48, 48),
 		"Reaction body preserves the common canvas and planted feet")
 	expect(view.position == ArtPlacement.contact(_state["player"]["pos"]), "Bubble clamping never moves the farmer")
-	var metadata: Dictionary = RasterArt.FRAMES[body.texture.resource_path]
-	expect(bubble.visible and bubble.texture == body.texture and bubble.region_rect == Rect2(metadata["bubble"]),
+	var metadata: Dictionary = RasterArt.FRAMES[glyph_path]
+	expect(bubble.visible and bubble.texture.resource_path == glyph_path and bubble.region_rect == Rect2(metadata["bubble"]),
 		"One separate glyph draws the exact source-owned crop")
-	expect(body.material is ShaderMaterial and (body.material as ShaderMaterial).get_shader_parameter("bubble_box")
-		== Vector4(bubble.region_rect.position.x, bubble.region_rect.position.y,
-			bubble.region_rect.size.x, bubble.region_rect.size.y), "Body masks only its duplicate source glyph")
+	if holding_rod:
+		expect(body.material == null, "A separate bite bubble never masks the fishing rod")
+	else:
+		expect(body.material is ShaderMaterial and (body.material as ShaderMaterial).get_shader_parameter("bubble_box")
+			== Vector4(bubble.region_rect.position.x, bubble.region_rect.position.y,
+				bubble.region_rect.size.x, bubble.region_rect.size.y), "Body masks only its duplicate source glyph")
 	var canvas_transform := bubble.get_global_transform_with_canvas()
 	var first := canvas_transform * Vector2.ZERO
 	var last := canvas_transform * bubble.region_rect.size
@@ -1620,8 +1693,8 @@ func _reactions() -> void:
 	Reactions.tick(_state)
 	expect(Fishing.is_biting(_state) and Reactions.now(_state) == &"bang", "Actual bite selects the existing bang")
 	await _reaction_settle(view)
-	_reaction_check(view, &"bang")
-	await _shoot("event_fishing_bite", "Actual fishing bite -> bang, only after work ends")
+	_reaction_check(view, &"bang", true)
+	await _shoot("event_fishing_bite", "Actual fishing bite -> bang while keeping the rod in hand")
 	# Existing night transition and damage/destruction priority.
 	_reaction_fixture()
 	expect(Phases.begin_preparation(_state) and Phases.begin_night(_state), "Existing phase transitions begin night")
