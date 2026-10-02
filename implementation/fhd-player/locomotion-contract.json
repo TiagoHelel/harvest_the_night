@@ -1,0 +1,1251 @@
+{
+  "recipe": "nearest-palette-alpha-v1",
+  "canvas_wh": [
+    96,
+    96
+  ],
+  "pivot_xy": [
+    48,
+    88
+  ],
+  "draw_scale": 0.5,
+  "fhd_physical_body_height": 120,
+  "frames": [
+    {
+      "id": "idle_south_0",
+      "source": "assets/art_source/player-fhd/approved/idle_south.png",
+      "source_sha256": "4706f5b8163d4be2d3d8f285bdffe970a315a9c770e6b28bef4e74c4993ba6f1",
+      "crop_xywh": [
+        180,
+        95,
+        429,
+        595
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        678,
+        773
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_scale": 0.10084033613445378,
+      "content_anchor_xy": [
+        22,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "soil_dark",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "bone",
+        "bone_dark",
+        "cloth_dark",
+        "cloth",
+        "cloth_light"
+      ],
+      "animation": "idle_south",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true,
+      "draw_scale": 0.5,
+      "body_reference_height": 595,
+      "feet_source_xy": [
+        394.5,
+        690
+      ],
+      "output": "assets/art_source/player-fhd/approved/frames/idle_south_0.png",
+      "prompt": "implementation/fhd-player/approved-prompts/idle_south.prompt.txt",
+      "prompt_sha256": "55555eb6c48405036cb6fb67d4198ed2d3d59e5313e6f4235736cf28c69c4a2d",
+      "output_sha256": "69d499c3bfea8b6a9e508015f942d016783715dec167449d525e7f27f75e707c"
+    },
+    {
+      "id": "idle_south_1",
+      "source": "assets/art_source/player-fhd/approved/idle_south.png",
+      "source_sha256": "4706f5b8163d4be2d3d8f285bdffe970a315a9c770e6b28bef4e74c4993ba6f1",
+      "crop_xywh": [
+        804,
+        95,
+        427,
+        595
+      ],
+      "sheet_cell_xywh": [
+        678,
+        0,
+        679,
+        773
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_scale": 0.10084033613445378,
+      "content_anchor_xy": [
+        22,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "soil_dark",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "bone",
+        "bone_dark",
+        "cloth_dark",
+        "cloth",
+        "cloth_light"
+      ],
+      "animation": "idle_south",
+      "frame": 1,
+      "seconds": 0.55,
+      "loop": true,
+      "draw_scale": 0.5,
+      "body_reference_height": 595,
+      "feet_source_xy": [
+        1017.5,
+        690
+      ],
+      "output": "assets/art_source/player-fhd/approved/frames/idle_south_1.png",
+      "prompt": "implementation/fhd-player/approved-prompts/idle_south.prompt.txt",
+      "prompt_sha256": "55555eb6c48405036cb6fb67d4198ed2d3d59e5313e6f4235736cf28c69c4a2d",
+      "output_sha256": "07145184a1dcb7dae2029694d45de983518dfd82f2c8bdd4df6f9e6894df860a"
+    },
+    {
+      "id": "idle_south_2",
+      "source": "assets/art_source/player-fhd/approved/idle_south.png",
+      "source_sha256": "4706f5b8163d4be2d3d8f285bdffe970a315a9c770e6b28bef4e74c4993ba6f1",
+      "crop_xywh": [
+        1426,
+        95,
+        430,
+        595
+      ],
+      "sheet_cell_xywh": [
+        1357,
+        0,
+        678,
+        773
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_scale": 0.10084033613445378,
+      "content_anchor_xy": [
+        22,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "soil_dark",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "bone",
+        "bone_dark",
+        "cloth_dark",
+        "cloth",
+        "cloth_light"
+      ],
+      "animation": "idle_south",
+      "frame": 2,
+      "seconds": 0.55,
+      "loop": true,
+      "draw_scale": 0.5,
+      "body_reference_height": 595,
+      "feet_source_xy": [
+        1641.0,
+        690
+      ],
+      "output": "assets/art_source/player-fhd/approved/frames/idle_south_2.png",
+      "prompt": "implementation/fhd-player/approved-prompts/idle_south.prompt.txt",
+      "prompt_sha256": "55555eb6c48405036cb6fb67d4198ed2d3d59e5313e6f4235736cf28c69c4a2d",
+      "output_sha256": "01075afecad55245252034de4ab9c9fe8bedd694c2437896443997ae3ddfb090"
+    },
+    {
+      "id": "walk_south_0",
+      "source": "assets/art_source/player-fhd/approved/walk_south_8-r1.png",
+      "source_sha256": "8a70c2e178e281615ed37d59b254e990f1f9471263e0d72846dd6d9e00d9e54c",
+      "crop_xywh": [
+        108,
+        56,
+        307,
+        383
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_scale": 0.1566579634464752,
+      "content_anchor_xy": [
+        24,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "soil_dark",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "bone",
+        "bone_dark",
+        "cloth_dark",
+        "cloth",
+        "cloth_light"
+      ],
+      "animation": "walk_south",
+      "frame": 0,
+      "seconds": 0.12,
+      "loop": true,
+      "draw_scale": 0.5,
+      "body_reference_height": 383,
+      "feet_source_xy": [
+        261.5,
+        439
+      ],
+      "output": "assets/art_source/player-fhd/approved/frames/walk_south_0.png",
+      "prompt": "implementation/fhd-player/approved-prompts/walk_south_8-r1.prompt.txt",
+      "prompt_sha256": "a75dce980b4c9961b534a1013ae053292b38793603848d04a7b7f0c36cbf66a8",
+      "output_sha256": "9ac2905faed23d8f05e99f51b7a5c480a8b303ddbe0ae780da5ed61ebc183d04"
+    },
+    {
+      "id": "walk_south_1",
+      "source": "assets/art_source/player-fhd/approved/walk_south_8-r1.png",
+      "source_sha256": "8a70c2e178e281615ed37d59b254e990f1f9471263e0d72846dd6d9e00d9e54c",
+      "crop_xywh": [
+        509,
+        56,
+        308,
+        383
+      ],
+      "sheet_cell_xywh": [
+        444,
+        0,
+        443,
+        444
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_scale": 0.1566579634464752,
+      "content_anchor_xy": [
+        24,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "soil_dark",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "bone",
+        "bone_dark",
+        "cloth_dark",
+        "cloth",
+        "cloth_light"
+      ],
+      "animation": "walk_south",
+      "frame": 1,
+      "seconds": 0.12,
+      "loop": true,
+      "draw_scale": 0.5,
+      "body_reference_height": 383,
+      "feet_source_xy": [
+        663.0,
+        439
+      ],
+      "output": "assets/art_source/player-fhd/approved/frames/walk_south_1.png",
+      "prompt": "implementation/fhd-player/approved-prompts/walk_south_8-r1.prompt.txt",
+      "prompt_sha256": "a75dce980b4c9961b534a1013ae053292b38793603848d04a7b7f0c36cbf66a8",
+      "output_sha256": "14b288cc2910c19da4e9253ba7183650944d812009024ebfe7a4d2d429d55845"
+    },
+    {
+      "id": "walk_south_2",
+      "source": "assets/art_source/player-fhd/approved/walk_south_8-r1.png",
+      "source_sha256": "8a70c2e178e281615ed37d59b254e990f1f9471263e0d72846dd6d9e00d9e54c",
+      "crop_xywh": [
+        934,
+        56,
+        309,
+        383
+      ],
+      "sheet_cell_xywh": [
+        887,
+        0,
+        443,
+        444
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_scale": 0.1566579634464752,
+      "content_anchor_xy": [
+        24,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "soil_dark",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "bone",
+        "bone_dark",
+        "cloth_dark",
+        "cloth",
+        "cloth_light"
+      ],
+      "animation": "walk_south",
+      "frame": 2,
+      "seconds": 0.12,
+      "loop": true,
+      "draw_scale": 0.5,
+      "body_reference_height": 383,
+      "feet_source_xy": [
+        1088.5,
+        439
+      ],
+      "output": "assets/art_source/player-fhd/approved/frames/walk_south_2.png",
+      "prompt": "implementation/fhd-player/approved-prompts/walk_south_8-r1.prompt.txt",
+      "prompt_sha256": "a75dce980b4c9961b534a1013ae053292b38793603848d04a7b7f0c36cbf66a8",
+      "output_sha256": "2f1df42dc03335adc6701198212015e034a091b87946837bf8f8fbacd811d57e"
+    },
+    {
+      "id": "walk_south_3",
+      "source": "assets/art_source/player-fhd/approved/walk_south_8-r1.png",
+      "source_sha256": "8a70c2e178e281615ed37d59b254e990f1f9471263e0d72846dd6d9e00d9e54c",
+      "crop_xywh": [
+        1357,
+        56,
+        309,
+        383
+      ],
+      "sheet_cell_xywh": [
+        1330,
+        0,
+        444,
+        444
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_scale": 0.1566579634464752,
+      "content_anchor_xy": [
+        24,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "soil_dark",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "bone",
+        "bone_dark",
+        "cloth_dark",
+        "cloth",
+        "cloth_light"
+      ],
+      "animation": "walk_south",
+      "frame": 3,
+      "seconds": 0.12,
+      "loop": true,
+      "draw_scale": 0.5,
+      "body_reference_height": 383,
+      "feet_source_xy": [
+        1511.5,
+        439
+      ],
+      "output": "assets/art_source/player-fhd/approved/frames/walk_south_3.png",
+      "prompt": "implementation/fhd-player/approved-prompts/walk_south_8-r1.prompt.txt",
+      "prompt_sha256": "a75dce980b4c9961b534a1013ae053292b38793603848d04a7b7f0c36cbf66a8",
+      "output_sha256": "e42c836a3361dc68d12ecba7402a781bc6e442d3cba5282ca7cf42a716c9653c"
+    },
+    {
+      "id": "walk_south_4",
+      "source": "assets/art_source/player-fhd/approved/walk_south_8-r1.png",
+      "source_sha256": "8a70c2e178e281615ed37d59b254e990f1f9471263e0d72846dd6d9e00d9e54c",
+      "crop_xywh": [
+        108,
+        454,
+        308,
+        380
+      ],
+      "sheet_cell_xywh": [
+        0,
+        444,
+        444,
+        443
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_scale": 0.1566579634464752,
+      "content_anchor_xy": [
+        24,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "soil_dark",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "bone",
+        "bone_dark",
+        "cloth_dark",
+        "cloth",
+        "cloth_light"
+      ],
+      "animation": "walk_south",
+      "frame": 4,
+      "seconds": 0.12,
+      "loop": true,
+      "draw_scale": 0.5,
+      "body_reference_height": 383,
+      "feet_source_xy": [
+        262.0,
+        834
+      ],
+      "output": "assets/art_source/player-fhd/approved/frames/walk_south_4.png",
+      "prompt": "implementation/fhd-player/approved-prompts/walk_south_8-r1.prompt.txt",
+      "prompt_sha256": "a75dce980b4c9961b534a1013ae053292b38793603848d04a7b7f0c36cbf66a8",
+      "output_sha256": "4c3d31a8288364407e6ff4273d5b2cd5f20af0ab2e85f9e45fece9c8adf12c9d"
+    },
+    {
+      "id": "walk_south_5",
+      "source": "assets/art_source/player-fhd/approved/walk_south_8-r1.png",
+      "source_sha256": "8a70c2e178e281615ed37d59b254e990f1f9471263e0d72846dd6d9e00d9e54c",
+      "crop_xywh": [
+        510,
+        453,
+        308,
+        381
+      ],
+      "sheet_cell_xywh": [
+        444,
+        444,
+        443,
+        443
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_scale": 0.1566579634464752,
+      "content_anchor_xy": [
+        24,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "soil_dark",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "bone",
+        "bone_dark",
+        "cloth_dark",
+        "cloth",
+        "cloth_light"
+      ],
+      "animation": "walk_south",
+      "frame": 5,
+      "seconds": 0.12,
+      "loop": true,
+      "draw_scale": 0.5,
+      "body_reference_height": 383,
+      "feet_source_xy": [
+        664.0,
+        834
+      ],
+      "output": "assets/art_source/player-fhd/approved/frames/walk_south_5.png",
+      "prompt": "implementation/fhd-player/approved-prompts/walk_south_8-r1.prompt.txt",
+      "prompt_sha256": "a75dce980b4c9961b534a1013ae053292b38793603848d04a7b7f0c36cbf66a8",
+      "output_sha256": "f95fe267ee7529dca12e603a18afc29d9aa1543e89bf91a8e38bd17d4a3e7651"
+    },
+    {
+      "id": "walk_south_6",
+      "source": "assets/art_source/player-fhd/approved/walk_south_8-r1.png",
+      "source_sha256": "8a70c2e178e281615ed37d59b254e990f1f9471263e0d72846dd6d9e00d9e54c",
+      "crop_xywh": [
+        937,
+        454,
+        307,
+        380
+      ],
+      "sheet_cell_xywh": [
+        887,
+        444,
+        443,
+        443
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_scale": 0.1566579634464752,
+      "content_anchor_xy": [
+        24,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "soil_dark",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "bone",
+        "bone_dark",
+        "cloth_dark",
+        "cloth",
+        "cloth_light"
+      ],
+      "animation": "walk_south",
+      "frame": 6,
+      "seconds": 0.12,
+      "loop": true,
+      "draw_scale": 0.5,
+      "body_reference_height": 383,
+      "feet_source_xy": [
+        1090.5,
+        834
+      ],
+      "output": "assets/art_source/player-fhd/approved/frames/walk_south_6.png",
+      "prompt": "implementation/fhd-player/approved-prompts/walk_south_8-r1.prompt.txt",
+      "prompt_sha256": "a75dce980b4c9961b534a1013ae053292b38793603848d04a7b7f0c36cbf66a8",
+      "output_sha256": "c562e185c533f4996957949272e2cceaad80ca062b39b497d843815c976bf709"
+    },
+    {
+      "id": "walk_south_7",
+      "source": "assets/art_source/player-fhd/approved/walk_south_8-r1.png",
+      "source_sha256": "8a70c2e178e281615ed37d59b254e990f1f9471263e0d72846dd6d9e00d9e54c",
+      "crop_xywh": [
+        1359,
+        454,
+        308,
+        380
+      ],
+      "sheet_cell_xywh": [
+        1330,
+        444,
+        444,
+        443
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_scale": 0.1566579634464752,
+      "content_anchor_xy": [
+        24,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "soil_dark",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "bone",
+        "bone_dark",
+        "cloth_dark",
+        "cloth",
+        "cloth_light"
+      ],
+      "animation": "walk_south",
+      "frame": 7,
+      "seconds": 0.12,
+      "loop": true,
+      "draw_scale": 0.5,
+      "body_reference_height": 383,
+      "feet_source_xy": [
+        1513.0,
+        834
+      ],
+      "output": "assets/art_source/player-fhd/approved/frames/walk_south_7.png",
+      "prompt": "implementation/fhd-player/approved-prompts/walk_south_8-r1.prompt.txt",
+      "prompt_sha256": "a75dce980b4c9961b534a1013ae053292b38793603848d04a7b7f0c36cbf66a8",
+      "output_sha256": "c9926e6d0f2ee851cc90bb874961e3945a2ced1b7cf4ce5573062fe7d028ed75"
+    },
+    {
+      "id": "run_south_0",
+      "source": "assets/art_source/player-fhd/approved/run_south_8.png",
+      "source_sha256": "273f6d8099590e48d31edc761c757be00758324405175cabba39c9eaea413d46",
+      "crop_xywh": [
+        115,
+        46,
+        294,
+        383
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_scale": 0.1507537688442211,
+      "content_anchor_xy": [
+        22,
+        58
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "soil_dark",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "bone",
+        "bone_dark",
+        "cloth_dark",
+        "cloth",
+        "cloth_light"
+      ],
+      "animation": "run_south",
+      "frame": 0,
+      "seconds": 0.08,
+      "loop": true,
+      "draw_scale": 0.5,
+      "body_reference_height": 398,
+      "feet_source_xy": [
+        262.0,
+        429
+      ],
+      "output": "assets/art_source/player-fhd/approved/frames/run_south_0.png",
+      "prompt": "implementation/fhd-player/approved-prompts/run_south_8.prompt.txt",
+      "prompt_sha256": "1107cde247834cc6d6e134062d71c95810b6f41d751f2729df395fa9c710be9f",
+      "output_sha256": "caecbba5ff4d96ed3ad941bb991232c38ed0b339e8269685ae116842a9093809"
+    },
+    {
+      "id": "run_south_1",
+      "source": "assets/art_source/player-fhd/approved/run_south_8.png",
+      "source_sha256": "273f6d8099590e48d31edc761c757be00758324405175cabba39c9eaea413d46",
+      "crop_xywh": [
+        535,
+        46,
+        294,
+        371
+      ],
+      "sheet_cell_xywh": [
+        444,
+        0,
+        443,
+        444
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_scale": 0.1507537688442211,
+      "content_anchor_xy": [
+        22,
+        58
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "soil_dark",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "bone",
+        "bone_dark",
+        "cloth_dark",
+        "cloth",
+        "cloth_light"
+      ],
+      "animation": "run_south",
+      "frame": 1,
+      "seconds": 0.08,
+      "loop": true,
+      "draw_scale": 0.5,
+      "body_reference_height": 398,
+      "feet_source_xy": [
+        682.0,
+        429
+      ],
+      "output": "assets/art_source/player-fhd/approved/frames/run_south_1.png",
+      "prompt": "implementation/fhd-player/approved-prompts/run_south_8.prompt.txt",
+      "prompt_sha256": "1107cde247834cc6d6e134062d71c95810b6f41d751f2729df395fa9c710be9f",
+      "output_sha256": "4d7a9acbf7b322b95db12e147ade2d52390f2634b9d651256a099cacbd972ba6"
+    },
+    {
+      "id": "run_south_2",
+      "source": "assets/art_source/player-fhd/approved/run_south_8.png",
+      "source_sha256": "273f6d8099590e48d31edc761c757be00758324405175cabba39c9eaea413d46",
+      "crop_xywh": [
+        952,
+        46,
+        295,
+        370
+      ],
+      "sheet_cell_xywh": [
+        887,
+        0,
+        443,
+        444
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_scale": 0.1507537688442211,
+      "content_anchor_xy": [
+        22,
+        58
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "soil_dark",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "bone",
+        "bone_dark",
+        "cloth_dark",
+        "cloth",
+        "cloth_light"
+      ],
+      "animation": "run_south",
+      "frame": 2,
+      "seconds": 0.08,
+      "loop": true,
+      "draw_scale": 0.5,
+      "body_reference_height": 398,
+      "feet_source_xy": [
+        1099.5,
+        429
+      ],
+      "output": "assets/art_source/player-fhd/approved/frames/run_south_2.png",
+      "prompt": "implementation/fhd-player/approved-prompts/run_south_8.prompt.txt",
+      "prompt_sha256": "1107cde247834cc6d6e134062d71c95810b6f41d751f2729df395fa9c710be9f",
+      "output_sha256": "3d55ea6f57df7688f1340ca0976814d9c96c3bdf5400463433fd77f794c772ef"
+    },
+    {
+      "id": "run_south_3",
+      "source": "assets/art_source/player-fhd/approved/run_south_8.png",
+      "source_sha256": "273f6d8099590e48d31edc761c757be00758324405175cabba39c9eaea413d46",
+      "crop_xywh": [
+        1367,
+        31,
+        295,
+        369
+      ],
+      "sheet_cell_xywh": [
+        1330,
+        0,
+        444,
+        444
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_scale": 0.1507537688442211,
+      "content_anchor_xy": [
+        22,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "soil_dark",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "bone",
+        "bone_dark",
+        "cloth_dark",
+        "cloth",
+        "cloth_light"
+      ],
+      "animation": "run_south",
+      "frame": 3,
+      "seconds": 0.08,
+      "loop": true,
+      "draw_scale": 0.5,
+      "body_reference_height": 398,
+      "feet_source_xy": [
+        1514.5,
+        429
+      ],
+      "output": "assets/art_source/player-fhd/approved/frames/run_south_3.png",
+      "prompt": "implementation/fhd-player/approved-prompts/run_south_8.prompt.txt",
+      "prompt_sha256": "1107cde247834cc6d6e134062d71c95810b6f41d751f2729df395fa9c710be9f",
+      "output_sha256": "026406dbc8825b3aacee7153bb683ce46d47e0c72f2be894e398cb599fc2f884"
+    },
+    {
+      "id": "run_south_4",
+      "source": "assets/art_source/player-fhd/approved/run_south_8.png",
+      "source_sha256": "273f6d8099590e48d31edc761c757be00758324405175cabba39c9eaea413d46",
+      "crop_xywh": [
+        115,
+        461,
+        295,
+        385
+      ],
+      "sheet_cell_xywh": [
+        0,
+        444,
+        444,
+        443
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_scale": 0.1507537688442211,
+      "content_anchor_xy": [
+        22,
+        58
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "soil_dark",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "bone",
+        "bone_dark",
+        "cloth_dark",
+        "cloth",
+        "cloth_light"
+      ],
+      "animation": "run_south",
+      "frame": 4,
+      "seconds": 0.08,
+      "loop": true,
+      "draw_scale": 0.5,
+      "body_reference_height": 398,
+      "feet_source_xy": [
+        262.5,
+        846
+      ],
+      "output": "assets/art_source/player-fhd/approved/frames/run_south_4.png",
+      "prompt": "implementation/fhd-player/approved-prompts/run_south_8.prompt.txt",
+      "prompt_sha256": "1107cde247834cc6d6e134062d71c95810b6f41d751f2729df395fa9c710be9f",
+      "output_sha256": "1dde5473ca5aff47a48e4c4ad3904d128916eef4ce75085106244204add78c3d"
+    },
+    {
+      "id": "run_south_5",
+      "source": "assets/art_source/player-fhd/approved/run_south_8.png",
+      "source_sha256": "273f6d8099590e48d31edc761c757be00758324405175cabba39c9eaea413d46",
+      "crop_xywh": [
+        535,
+        461,
+        294,
+        373
+      ],
+      "sheet_cell_xywh": [
+        444,
+        444,
+        443,
+        443
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_scale": 0.1507537688442211,
+      "content_anchor_xy": [
+        22,
+        58
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "soil_dark",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "bone",
+        "bone_dark",
+        "cloth_dark",
+        "cloth",
+        "cloth_light"
+      ],
+      "animation": "run_south",
+      "frame": 5,
+      "seconds": 0.08,
+      "loop": true,
+      "draw_scale": 0.5,
+      "body_reference_height": 398,
+      "feet_source_xy": [
+        682.0,
+        846
+      ],
+      "output": "assets/art_source/player-fhd/approved/frames/run_south_5.png",
+      "prompt": "implementation/fhd-player/approved-prompts/run_south_8.prompt.txt",
+      "prompt_sha256": "1107cde247834cc6d6e134062d71c95810b6f41d751f2729df395fa9c710be9f",
+      "output_sha256": "eee372ffdd3e4d1121db574e1c4139d10931d1462aed7e9590f1be0b8833f5d2"
+    },
+    {
+      "id": "run_south_6",
+      "source": "assets/art_source/player-fhd/approved/run_south_8.png",
+      "source_sha256": "273f6d8099590e48d31edc761c757be00758324405175cabba39c9eaea413d46",
+      "crop_xywh": [
+        951,
+        461,
+        296,
+        370
+      ],
+      "sheet_cell_xywh": [
+        887,
+        444,
+        443,
+        443
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_scale": 0.1507537688442211,
+      "content_anchor_xy": [
+        22,
+        58
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "soil_dark",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "bone",
+        "bone_dark",
+        "cloth_dark",
+        "cloth",
+        "cloth_light"
+      ],
+      "animation": "run_south",
+      "frame": 6,
+      "seconds": 0.08,
+      "loop": true,
+      "draw_scale": 0.5,
+      "body_reference_height": 398,
+      "feet_source_xy": [
+        1099.0,
+        846
+      ],
+      "output": "assets/art_source/player-fhd/approved/frames/run_south_6.png",
+      "prompt": "implementation/fhd-player/approved-prompts/run_south_8.prompt.txt",
+      "prompt_sha256": "1107cde247834cc6d6e134062d71c95810b6f41d751f2729df395fa9c710be9f",
+      "output_sha256": "4b6aba1b0b6e3caec9b8835043b71a9aa99636c4e6b8bc64be827fa3f58f3df8"
+    },
+    {
+      "id": "run_south_7",
+      "source": "assets/art_source/player-fhd/approved/run_south_8.png",
+      "source_sha256": "273f6d8099590e48d31edc761c757be00758324405175cabba39c9eaea413d46",
+      "crop_xywh": [
+        1367,
+        454,
+        295,
+        370
+      ],
+      "sheet_cell_xywh": [
+        1330,
+        444,
+        444,
+        443
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_scale": 0.1507537688442211,
+      "content_anchor_xy": [
+        22,
+        59
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "soil_dark",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "bone",
+        "bone_dark",
+        "cloth_dark",
+        "cloth",
+        "cloth_light"
+      ],
+      "animation": "run_south",
+      "frame": 7,
+      "seconds": 0.08,
+      "loop": true,
+      "draw_scale": 0.5,
+      "body_reference_height": 398,
+      "feet_source_xy": [
+        1514.5,
+        846
+      ],
+      "output": "assets/art_source/player-fhd/approved/frames/run_south_7.png",
+      "prompt": "implementation/fhd-player/approved-prompts/run_south_8.prompt.txt",
+      "prompt_sha256": "1107cde247834cc6d6e134062d71c95810b6f41d751f2729df395fa9c710be9f",
+      "output_sha256": "704ff317544b1005d9a55a1a22c303f6be83d745ff6095c1f20bb021330c4b8d"
+    }
+  ],
+  "scope": "source-owned front-facing animation assets and review playback; gameplay unchanged"
+}

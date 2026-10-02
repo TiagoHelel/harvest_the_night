@@ -1,0 +1,16 @@
+{
+  "tool": "built-in ImageGen",
+  "mode": "edit, then exact user-attached approval",
+  "date": "2026-10-02",
+  "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-46f4c535-82b9-44bb-ba91-a9821f90cc6e.png",
+  "workspace_source": "assets/art_source/player-fhd/approved/idle_south.png",
+  "source_sha256": "4706f5b8163d4be2d3d8f285bdffe970a315a9c770e6b28bef4e74c4993ba6f1",
+  "approval": "User explicitly approved the attached clipboard-2fd5139d image and authorized walk/run animations from it. Exact attached alpha/pixels preserved as the identity reference.",
+  "note": "This is the v2 eye arrangement selected by the user, rather than later v3/v4 experiments. Clipboard encoding causes a negligible 0.0083 mean opaque RGB difference from the original generated file; alpha is identical.",
+  "prompt_file": "implementation/fhd-player/approved-prompts/idle_south.prompt.txt",
+  "layout": {
+    "columns": 3,
+    "rows": 1,
+    "frames": 3
+  }
+}

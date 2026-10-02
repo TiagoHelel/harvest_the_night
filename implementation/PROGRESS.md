@@ -10343,3 +10343,38 @@ exceeded); 7,581 core assertions, 996 input cases and Windows/Web/playtest expor
 pass. Runtime budgets pass (521us/night tick, 6,980us/path rebuild). Sim 1270427719
 and data 8148086 stay unchanged. Evidence/log: implementation/house-polish/fire-fix/.
 No new top-level directory, new art generation, push or automation.
+
+
+## 2026-10-02 — Follow-up: approved farmer walk/run animation assets
+
+The user approved the exact compact farmer attachment and requested eight frames
+each for walking and running, plus a horizontal idle/walk/run GIF. The approved
+identity is assets/art_source/player-fhd/approved/idle_south.png; it keeps the eye
+arrangement the user selected rather than later eye experiments. Built-in ImageGen
+produced eight front-facing walking and eight front-facing running drawings.
+The first walk was revised to correct misordered left/right support halves.
+
+Nineteen source-owned native assets (three idle, eight walk, eight run) use a
+96x96 canvas, (48,88) contact, binary alpha, the shared palette and one measured
+reduction scale per strip. Hat center registers the body horizontally rather
+than moving it onto the current single support boot. Running retains raised
+boots during flight. Both cycles have eight distinct lower-body drawings.
+Exact source cuts, hashes, ground measurements and playback timings are in
+implementation/fhd-player/locomotion-contract.json; raw sheets, PNG frames and
+exact prompts/call metadata are under the approved art/prompts directories.
+
+Real Godot playback produces 192 captures at 25fps, drawn at the intended 120px
+physical FHD body height. The 660x240 horizontal GIF runs 7.68 seconds with a
+shared palette: walk 120ms/frame, run 80ms/frame, idle with a brief blink. Source
+checks pass, complete contact sheets and consecutive actual renderer frames are
+opened, and both cycle wraps are reviewed. GIF: implementation/fhd-player/
+idle-walk-run-horizontal.gif; captures: locomotion-playback/; reproduce with
+build_locomotion_preview.py and src/tools/fhd_locomotion_preview.gd.
+
+Full working-tree verify/export: 54 passed, zero skipped/failed in 472s (soft
+300s target exceeded), 7,581 core assertions and 996 input cases. Sim 1270427719
+and data 8148086 remain unchanged; night tick 510us, path rebuild 6,822us. Log:
+implementation/fhd-player/verify-locomotion.log. The game/sprite backlog statuses
+remain complete and unchanged. This focused art commit does not add a sprint
+mechanic or promote a partial actor family into gameplay. Broader FHD rendering
+and full character-family integration remain separate unfinished workspace work.
