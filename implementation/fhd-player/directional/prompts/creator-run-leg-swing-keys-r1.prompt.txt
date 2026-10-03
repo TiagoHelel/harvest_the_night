@@ -1,0 +1,42 @@
+Use case: stylized-concept. Production pixel-art RUN animation, FOUR cardinal anchor poses, 2x2 grid.
+Reference 1 fixes the approved RIGHT-FACING farmer identity only (head, hat, white eye, shirt, overalls, proportions). Reference 2 is the existing lateral WALK key-pose guide: its opposite anatomical legs and opposite arm swings are the movement baseline. Convert its stride to a RUN with flight and heel recovery. Do NOT copy a frozen arm/leg pose across the grid.
+Keep the exact compact farmer, identical head size, 60-native-pixel body, white eyes, gold straw hat, cream shirt, BLUE overalls, brown boots. Side profile / slightly overhead, always face RIGHT. Two connected legs below two hip joints, both boots legible. Foreground leg is MEDIUM BRIGHT BLUE pants with LIGHT/MEDIUM brown boot. Background leg is DARK BLUE pants with consistently DEEP DARK BROWN boot. The background boot MUST stay deep dark brown wherever it moves, including its forward ground contact; never use the foreground boot's light brown on it. This makes it possible to track BOTH separate legs throughout the loop. No bare calves.
+Exactly these FOUR different poses:
+TOP LEFT / PHASE 0: foreground leg extends forward RIGHT, LIGHT brown boot low and flat at the invisible ground. Background leg behind LEFT, dark heel raised. Foreground arm swings BACK LEFT, bent elbow and cream sleeve visible behind torso; background arm swings forward RIGHT.
+TOP RIGHT / PHASE 2: airborne passing. Foreground thigh and knee swing BACK LEFT, its light brown heel folds HIGH up and LEFT toward buttocks. Background thigh and knee swing FORWARD RIGHT, then dark calf folds down/back so dark boot sits just RIGHT below hips. Foreground arm forward RIGHT; background arm back LEFT. A compact bent-knee passing silhouette, narrower than contact.
+BOTTOM LEFT / PHASE 4: OPPOSITE ground contact. Background DARK BLUE leg extends forward RIGHT, DEEP DARK BROWN boot low and flat on same ground as phase0. Foreground BRIGHT BLUE thigh angles BACK LEFT, light brown boot raised HIGH behind LEFT toward buttocks. Both thigh/calf chains visible, with a transparent notch between legs. Foreground arm forward RIGHT; background arm back LEFT. This is the opposite physical leg supporting, with an obviously DARK front boot and LIGHT lifted back boot; the light leg cannot remain in front.
+BOTTOM RIGHT / PHASE 6: opposite airborne passing. Foreground bright knee rises FORWARD RIGHT, light brown calf folds so light boot sits just RIGHT under the hip. Background dark thigh and knee swing BACK LEFT, dark heel raised HIGH behind LEFT. Foreground arm BACK LEFT, background arm forward RIGHT.
+Clear full-foot motion, not recoloring the same pose: the LIGHT foreground boot travels from forward/low (phase0) to rear/high (phase2 and4) then under hip (phase6); DARK background boot follows the opposite trajectory. Foreground sleeve and arm also exchange sides: BACK LEFT in0/6, FORWARD RIGHT in2/4. Keep forearms separated from the lower body so the two leg chains are readable at game size. Knee and ankle geometry genuinely changes across the four cells.
+Uniform figure scale, shared ground/pivot, generous TRANSPARENT gutters, all feet complete. Airborne phases2/6 stay visibly above ground. Simple crisp native pixel-art clusters with one-pixel outline, NO texture, gradients, blur, antialiasing, noise, labels, divider lines, scenery, shadows, floor or extra legs. True alpha transparency. Four complete right-facing farmers only.
+Creator action contract below is the original prompt basis; the anatomical phase instructions above specify the exact foreground/background correction:
+Create a 4-frame pixel art RUN animation sprite sheet of this character, in a top-down RPG perspective (3/4 overhead view, like a classic top-down RPG).
+
+Attached images:
+1) Facing Right: the character already rotated to face RIGHT. Use EXACTLY this view and facing in every frame.
+2) Character: the original character design. Match its outfit, colors, proportions, weapon and details exactly.
+3) Run Down: the same character's run animation facing down. Use the EXACT SAME moves, weapon, effects and timing — only change the facing direction.
+
+The character FACES RIGHT (east). We see their side profile: face, chest and front foot point toward the RIGHT edge of the image; their back is on the LEFT side.
+
+Arrange the 4 frames in a 2x2 grid on a transparent background (no background).
+
+Top row (frames 1-2):
+Frame 1 (top-left): Push off - body leaning forward, long stride, arms pumping
+Frame 2 (top-right): Airborne - both feet off the ground, legs tucked
+
+Bottom row (frames 3-4):
+Frame 3 (bottom-left): Opposite stride - the other leg reaching forward, arms pumping the other way
+Frame 4 (bottom-right): Airborne - both feet off the ground again, legs tucked
+
+This is a fast looping run cycle moving toward the right edge of the image, with a clear forward lean and longer strides than a walk.
+
+CRITICAL: All 4 frames must show the character facing the SAME direction. Only the pose changes between frames.
+
+Use detailed 32-bit pixel art style with proper shading and highlights. Same character design, size and proportions in all frames.
+
+BACKGROUND: NONE. Output a PNG with a REAL transparent background (alpha channel). Everything that is not the subject must be fully transparent. Do NOT draw a checkerboard pattern to represent transparency, and do NOT add any backdrop, color fill, floor, ground shadow, scenery, or vignette.
+
+IMPORTANT: Do NOT render any text, letters, words, numbers, labels, watermarks, or captions anywhere in the image. Do NOT draw any grid lines, borders, frame dividers, or separator lines between frames — leave the spacing between poses fully transparent. Keep each pose centered inside its own quarter of the image.
+
+Image format: SQUARE (1:1).
+

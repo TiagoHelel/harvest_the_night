@@ -1,0 +1,17 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-03",
+  "transparent_background": true,
+  "raw_original": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-2248155b-67d9-425b-a23e-db01eb2cfac1.png",
+  "workspace_source": "assets/art_source/player-fhd/directional/creator-run-leg-swing-keys-r2.png",
+  "references": [
+    "assets/art_source/player-fhd/directional/creator-run-leg-swing-keys-r1.png"
+  ],
+  "prompt_file": "implementation/fhd-player/directional/prompts/creator-run-leg-swing-keys-r2.prompt.txt",
+  "layout": {
+    "columns": 2,
+    "rows": 2,
+    "count": 4
+  },
+  "status": "revision required: arm swing corrected; top-right boots have reversed light/dark anatomical ownership"
+}

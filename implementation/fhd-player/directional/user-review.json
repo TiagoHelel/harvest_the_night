@@ -48,21 +48,35 @@
       "method": "four key poses and four in-betweens; left mirrors right as recommended by creator README"
     },
     "run": {
-      "feedback": "a corrida left e right ainda na so com uma perna",
+      "feedback": "mas a corrida left e right ainda ta bugada, so fica 1 perna pra frente",
+      "date": "2026-10-03",
       "directions": [
         "west",
         "east"
       ],
-      "status": "repaired and integrated; visual validation pending",
+      "status": "revised and integrated; visual validation pending",
       "sources": [
-        "creator-run-two-leg-keys-r2.png",
-        "creator-run-two-leg-transitions-r1.png"
+        "creator-run-leg-swing-keys-r3.png",
+        "creator-run-leg-swing-transitions-r2.png",
+        "creator-run-two-leg-keys-r2.png (retained passing phase2)"
       ],
       "preview": "gifs/run-horizontal.gif",
-      "method": "True near/far trouser, knee and ankle exchange; compact passing poses; left mirrors the complete right pose",
-      "date": "2026-10-03",
-      "reported_bad_commit": "0cbb4a27",
-      "comparison": "review-stills/run-two-leg-comparison.gif"
+      "method": "Source-owned anatomical trouser/boot continuity, independent recovery in phases3/5, opposite arm swing and distinct supporting feet; west mirrors whole east poses",
+      "reported_bad_commit": "80d269e6",
+      "comparison": "review-stills/run-two-leg-comparison.gif",
+      "slow_comparison": "review-stills/run-two-leg-comparison-slow.gif",
+      "replaced_frames_per_direction": [
+        0,
+        1,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "retained_frames_per_direction": [
+        2
+      ]
     },
     "walking_head_scale": {
       "feedback": "no walking down e up a cabeca dele ta maior",
@@ -91,5 +105,26 @@
     "date": "2026-10-02",
     "feedback": "quando terminar implementa no game",
     "scope": "idle/walk/run in four directions"
-  }
+  },
+  "history": [
+    {
+      "run_revision": {
+        "feedback": "a corrida left e right ainda na so com uma perna",
+        "directions": [
+          "west",
+          "east"
+        ],
+        "status": "repaired and integrated; visual validation pending",
+        "sources": [
+          "creator-run-two-leg-keys-r2.png",
+          "creator-run-two-leg-transitions-r1.png"
+        ],
+        "preview": "gifs/run-horizontal.gif",
+        "method": "True near/far trouser, knee and ankle exchange; compact passing poses; left mirrors the complete right pose",
+        "date": "2026-10-03",
+        "reported_bad_commit": "0cbb4a27",
+        "comparison": "review-stills/run-two-leg-comparison.gif"
+      }
+    }
+  ]
 }

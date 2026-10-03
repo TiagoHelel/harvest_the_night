@@ -253,17 +253,16 @@
     },
     {
       "id": "run_east_keys",
-      "source_id": "creator-run-two-leg-keys-r2",
+      "source_id": "creator-run-leg-swing-keys-r3",
       "action": "run",
       "direction": "east",
       "animation": "run_east",
       "columns": 2,
       "rows": 2,
-      "count": 4,
+      "count": 3,
       "seconds": 0.08,
       "frame_map": {
         "0": 0,
-        "1": 2,
         "2": 4,
         "3": 6
       },
@@ -271,7 +270,7 @@
     },
     {
       "id": "run_east_transitions",
-      "source_id": "creator-run-two-leg-transitions-r1",
+      "source_id": "creator-run-leg-swing-transitions-r2",
       "action": "run",
       "direction": "east",
       "animation": "run_east",
@@ -289,17 +288,16 @@
     },
     {
       "id": "run_west_keys",
-      "source_id": "creator-run-two-leg-keys-r2",
+      "source_id": "creator-run-leg-swing-keys-r3",
       "action": "run",
       "direction": "west",
       "animation": "run_west",
       "columns": 2,
       "rows": 2,
-      "count": 4,
+      "count": 3,
       "seconds": 0.08,
       "frame_map": {
         "0": 0,
-        "1": 2,
         "2": 4,
         "3": 6
       },
@@ -307,7 +305,7 @@
     },
     {
       "id": "run_west_transitions",
-      "source_id": "creator-run-two-leg-transitions-r1",
+      "source_id": "creator-run-leg-swing-transitions-r2",
       "action": "run",
       "direction": "west",
       "animation": "run_west",
@@ -332,6 +330,36 @@
       "rows": 2,
       "count": 8,
       "seconds": 0.12
+    },
+    {
+      "id": "run_east_retained_passing",
+      "source_id": "creator-run-two-leg-keys-r2",
+      "action": "run",
+      "direction": "east",
+      "animation": "run_east",
+      "columns": 2,
+      "rows": 2,
+      "count": 1,
+      "seconds": 0.08,
+      "frame_map": {
+        "1": 2
+      },
+      "flip_horizontal": false
+    },
+    {
+      "id": "run_west_retained_passing",
+      "source_id": "creator-run-two-leg-keys-r2",
+      "action": "run",
+      "direction": "west",
+      "animation": "run_west",
+      "columns": 2,
+      "rows": 2,
+      "count": 1,
+      "seconds": 0.08,
+      "frame_map": {
+        "1": 2
+      },
+      "flip_horizontal": true
     }
   ],
   "final_native_frames": 284,

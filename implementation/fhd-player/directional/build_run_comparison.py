@@ -5,7 +5,7 @@ import subprocess
 from PIL import Image, ImageDraw
 
 HERE = Path(__file__).resolve().parent
-BASELINE = '0cbb4a27'
+BASELINE = '80d269e6'
 
 def main():
     old = Image.open(BytesIO(subprocess.check_output([
@@ -31,6 +31,8 @@ def main():
         frames.append(row)
     frames[0].save(HERE/'review-stills/run-two-leg-comparison.gif',save_all=True,
                   append_images=frames[1:],duration=40,loop=0,optimize=False,disposal=2)
+    frames[0].save(HERE/'review-stills/run-two-leg-comparison-slow.gif',save_all=True,
+                  append_images=frames[1:],duration=80,loop=0,optimize=False,disposal=2)
     frames[8].save(HERE/'review-stills/run-two-leg-comparison.png')
     print('Actual Godot comparison: old/new left, old/new right, 7.68s at 25fps.')
 

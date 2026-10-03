@@ -1,0 +1,20 @@
+SOURCE CHECK: 284 frames, 64 directional animations; source hashes, native alpha, unique poses and legs checked
+GIF: idle 4 directions, 1040x288, 7.68 seconds
+GIF: walk 4 directions, 1040x288, 7.68 seconds
+GIF: run 4 directions, 1040x288, 7.68 seconds
+GIF: chop 4 directions, 1040x288, 7.68 seconds
+GIF: mine 4 directions, 1040x288, 7.68 seconds
+GIF: till 4 directions, 1040x288, 7.68 seconds
+GIF: plant 4 directions, 1040x288, 7.68 seconds
+GIF: harvest 4 directions, 1040x288, 7.68 seconds
+GIF: water 4 directions, 1040x288, 7.68 seconds
+GIF: fish 4 directions, 1040x288, 7.68 seconds
+GIF: reel 4 directions, 1040x288, 7.68 seconds
+GIF: collect 4 directions, 1040x288, 7.68 seconds
+GIF: craft 4 directions, 1040x288, 7.68 seconds
+GIF: trade 4 directions, 1040x288, 7.68 seconds
+GIF: repair 4 directions, 1040x288, 7.68 seconds
+GIF: carry 4 directions, 1040x288, 7.68 seconds
+OVERVIEW GIF: 61440 ms; all groups in one horizontal four-direction playback
+Actual Godot comparison: old/new left, old/new right, 7.68s at 25fps.
+Actual runtime GIF: 384 frames / 25fps / 1024x232, day/night and all four directions.

@@ -10714,3 +10714,69 @@ visual validation. During this work the user again rejected lateral RUN, so its
 next revision is separate from this completed head correction. No RUN drawing
 was changed in this commit. Unrelated pilot files stay outside the commit.
 No push, automation or core/control/movement change was made.
+
+## 2026-10-03 — Follow-up: readable anatomical leg recovery in lateral RUN
+
+The user again rejected lateral running after 80d269e6: it still looked like
+only one leg stayed forward. That baseline passed anchor-knee tests, but its
+phase-3 bright trouser connected to the dark foreground boot, contact sleeves
+barely alternated and the far front boot was too bright to distinguish support.
+The completed front/back WALK head correction c876a33 is preserved.
+
+Built-in ImageGen, using the actual sprite-sheet-creator run prompt and existing
+farmer references, produced creator-run-leg-swing-keys-r1/r2/r3.png and
+creator-run-leg-swing-transitions-r1/r2.png under
+assets/art_source/player-fhd/directional/. Exact submitted prompts, original
+output paths, reference roles and selection/rejection decisions are saved in
+directional/prompts/creator-run-leg-swing-*.*. Key r1 repeated sleeves; r2 still
+misassigned a passing trouser/boot. Select only r3 source cells 0/2/3 as phases
+0/4/6. Its cell 1 is rejected; phase 2 remains byte-identical to the coherent
+existing creator-run-two-leg-keys-r2 cell 1. Transition r1 also misassigned the
+phase-3 trouser; r2 corrects that connection and supplies phases 1/3/5/7.
+This is three targeted key revisions and two transition revisions. No native
+sprite was painted and no intermediate pose was procedurally invented.
+
+Partial source selection now measures scale and row ground from the complete
+four-cell family before choosing output cells, preserving the old passing pose.
+The existing lateral boot material ramp explicitly covers these new sources;
+without it, generic nearest-palette conversion incorrectly made boots gold.
+Fourteen native/runtime PNGs changed; two phase-2 poses and all 270 remaining
+native frames are byte-identical to c876a33. Eight frames per direction,
+96x96 canvas, existing pivots, 0.5 draw scale and 120px FHD body height remain.
+
+All previous anchor-knee, boot material, contact/flight, unique lower-body and
+walking-head guards remain. The additional recovery/sleeve/contact guard rejects
+the actual reported baseline. In both directions, phase-3 recovery improves
+from 1.03 to 5.72 native pixels, opposite contact sleeve movement from -0.12 to
+5.38; contact boot contrast is now 105.48/102.12 instead of 94.89/51.99.
+check_run_leg_swing.py and run-leg-swing-regression.json record the negative
+control, both passing loops and unchanged-art checks. Tests support structural
+consistency; subjective motion remains pending user validation.
+
+Actual Godot preview captured 192 RUN frames at 25fps. Normal before/after
+comparison uses 80d269e6 and matched clocks, 7.68s; the slow GIF uses the same
+frames at 80ms, 15.36s, without interpolation. The same index.html has normal
+and slow comparison links, preserved UTF-8 text and new RUN hash f36eae092348.
+Its RUN selection and screenshot were checked in the existing browser tab.
+The gallery overview remains 61.44s and the fifteen other action GIFs are
+unchanged. Selected native nearest-3x strip was visually inspected.
+
+Production World/PlayerView with 30Hz Player.tick captured 24 day/night
+sequences, 1,536 FHD frames and 6,168 checks, zero failures. Consecutive RUN
+phase montages, normal-cadence playback and day/night nearest-3x crops were
+inspected for continuous trouser-to-boot ownership, alternating supports/arms
+and loop continuity. Phases 2/6 clear the ground by three native pixels;
+intermediate phases 3/7 clear it by one, retaining quantized eight-frame motion.
+All six full-game FHD stills were opened in
+implementation/shots/sprites/fhd-run-leg-swing/: noon, dusk, wave, result, tech,
+house_interior. Original timed capture trees remain local and excluded from Git.
+
+Full tools/verify.py passed 55 checks, zero skipped/failed, 518s (above the
+300s soft target), including 125 parsed scripts, 7,768 core assertions,
+1,006 input cases and exports. Sim/data hashes remain 1270427719 / 8148086.
+Evidence is directional/run-leg-swing-{source,promotion,import,godot-import,
+check,preview-capture,runtime-capture,encode,shots,verify}.log.
+Both journals are appended; queues remain 110 game and 20 sprite tasks complete.
+Existing integration authorization is used; no new approval is inferred.
+No core, controls, movement speed, project resolution, push or automation change.
+Unrelated pilot and import sidecar files remain outside this focused commit.

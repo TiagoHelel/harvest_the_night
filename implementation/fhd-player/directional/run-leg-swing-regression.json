@@ -1,0 +1,109 @@
+{
+  "baseline_commit": "c876a33",
+  "preserved_native_frames": 270,
+  "changed_native_frames": [
+    "run_east_0",
+    "run_east_4",
+    "run_east_6",
+    "run_east_1",
+    "run_east_3",
+    "run_east_5",
+    "run_east_7",
+    "run_west_0",
+    "run_west_4",
+    "run_west_6",
+    "run_west_1",
+    "run_west_3",
+    "run_west_5",
+    "run_west_7"
+  ],
+  "retained_phases": [
+    "run_east_2",
+    "run_west_2"
+  ],
+  "previous": {
+    "east": {
+      "foreground_knee_x": {
+        "0": 50.01315789473684,
+        "4": 44.07627118644068,
+        "6": 50.9622641509434,
+        "1": 48.62337662337662,
+        "3": 48.98039215686274,
+        "5": 41.73809523809524,
+        "7": 52.37662337662338,
+        "2": 40.74545454545454
+      },
+      "recovery_3_px": 1.0327657378741009,
+      "recovery_5_px": 8.275062656641602,
+      "opposite_sleeve_swing_px": -0.1202614379084963,
+      "contact_boot_contrast": {
+        "0": 94.89423076923077,
+        "4": 51.99309478970497
+      },
+      "pass": false
+    },
+    "west": {
+      "foreground_knee_x": {
+        "0": 44.98684210526316,
+        "4": 50.92372881355932,
+        "6": 44.0377358490566,
+        "1": 46.37662337662338,
+        "3": 46.01960784313726,
+        "5": 53.26190476190476,
+        "7": 42.62337662337662,
+        "2": 54.25454545454546
+      },
+      "recovery_3_px": 1.0327657378741009,
+      "recovery_5_px": 8.275062656641602,
+      "opposite_sleeve_swing_px": -0.1202614379084963,
+      "contact_boot_contrast": {
+        "0": 94.89423076923077,
+        "4": 51.99309478970497
+      },
+      "pass": false
+    }
+  },
+  "replacement": {
+    "east": {
+      "foreground_knee_x": {
+        "0": 47.53846153846154,
+        "4": 42.642857142857146,
+        "6": 49.275,
+        "1": 46.38461538461539,
+        "3": 41.82222222222222,
+        "5": 41.905660377358494,
+        "7": 49.2112676056338,
+        "2": 40.74545454545454
+      },
+      "recovery_3_px": 5.716239316239317,
+      "recovery_5_px": 5.632801161103046,
+      "opposite_sleeve_swing_px": 5.3807814992025484,
+      "contact_boot_contrast": {
+        "0": 105.48092868988391,
+        "4": 102.11538461538464
+      },
+      "pass": true
+    },
+    "west": {
+      "foreground_knee_x": {
+        "0": 47.46153846153846,
+        "4": 52.357142857142854,
+        "6": 45.725,
+        "1": 48.61538461538461,
+        "3": 53.17777777777778,
+        "5": 53.094339622641506,
+        "7": 45.7887323943662,
+        "2": 54.25454545454546
+      },
+      "recovery_3_px": 5.716239316239317,
+      "recovery_5_px": 5.632801161103046,
+      "opposite_sleeve_swing_px": 5.3807814992025484,
+      "contact_boot_contrast": {
+        "0": 105.48092868988391,
+        "4": 102.11538461538464
+      },
+      "pass": true
+    }
+  },
+  "scope": "Foreground recovery, opposite sleeve swing and distinct contact boot material; actual normal-speed renderer review also required"
+}

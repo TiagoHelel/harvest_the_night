@@ -1,0 +1,18 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-03",
+  "transparent_background": true,
+  "raw_original": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-e8b476bf-0eec-4b88-99f6-f164d7ccf810.png",
+  "workspace_source": "assets/art_source/player-fhd/directional/creator-run-leg-swing-transitions-r1.png",
+  "references": [
+    "assets/art_source/player-fhd/directional/creator-run-leg-swing-keys-r3.png",
+    "assets/art_source/player-fhd/directional/idle_east.png"
+  ],
+  "prompt_file": "implementation/fhd-player/directional/prompts/creator-run-leg-swing-transitions-r1.prompt.txt",
+  "layout": {
+    "columns": 2,
+    "rows": 2,
+    "count": 4
+  },
+  "status": "revision required: top-right bright trousers still connect to dark forward boot"
+}

@@ -188,14 +188,15 @@ def recipes(partial=False):
                 if job['direction'] == 'all':
                     name = job['action'] + '_' + DIRECTIONS[row]
                     frame = col
+                    included = True
                 else:
                     name = job.get('animation', job['id'])
                     source_frame = row * job['columns'] + col
-                    if 'frame_map' in job and str(source_frame) not in job['frame_map']:
-                        continue
+                    included = 'frame_map' not in job or str(source_frame) in job['frame_map']
                     frame = job.get('frame_map', {}).get(str(source_frame), source_frame + job.get('frame_start', 0))
                 measured.update(name=name, frame=frame, left=left, top=cell_top,
-                                row=row, cell=[left,cell_top,right-left,cell_bottom-cell_top])
+                                row=row, included=included,
+                                cell=[left,cell_top,right-left,cell_bottom-cell_top])
                 groups.setdefault(name, []).append(measured)
         for name, group in groups.items():
             if job['direction'] == 'all' and name in OVERRIDES:
@@ -218,6 +219,8 @@ def recipes(partial=False):
             if job['action'] == 'collect':
                 material_keys += ['roof_dark','roof','roof_light']
             for m in group:
+                if not m['included']:
+                    continue  # Scale/ground are measured from the complete source family.
                 x0,y0,x1,y1 = m['crop']
                 center = m['hat_center'] if locomotion or job['action'] == 'carry' else m['boot_center']
                 ground = row_ground[m['row']] if locomotion else m['ground']
@@ -238,7 +241,7 @@ def recipes(partial=False):
                          "alpha_threshold": 128, "palette": "tools/palette.py:COLOURS",
                          "palette_keys": material_keys, "seconds": job['seconds'], "loop": True,
                          "material_ramp_rule":"saturated-red-prop" if job['action']=='collect' else
-                             "lateral-boot-materials" if source_id.startswith(('creator-walk-right-transitions', 'creator-run-right-', 'creator-run-two-leg-')) else "action-subset",
+                             "lateral-boot-materials" if source_id.startswith(('creator-walk-right-transitions', 'creator-run-right-', 'creator-run-two-leg-', 'creator-run-leg-swing-')) else "action-subset",
                          "prompt": 'implementation/fhd-player/directional/prompts/' + source_id + '.prompt.txt',
                          "output": (OUT / (name + '_' + str(m['frame']) + '.png')).relative_to(ROOT).as_posix()}
                 entry['prompt_sha256'] = import_art.sha((ROOT / entry['prompt']).read_bytes())
@@ -347,6 +350,55 @@ def head_dimensions(image):
             'brim_width':int(xx[hat].max() - xx[hat].min() + 1)}
 
 
+def lateral_run_readability(images, direction):
+    """Recovery keeps the bright trouser chain behind, with opposite sleeve swing."""
+    sign = 1 if direction == 'east' else -1
+    knees, sleeves, contacts = {}, {}, {}
+    for phase, image in images.items():
+        pixels = np.array(image.convert('RGBA'))
+        yy, xx = np.indices(pixels.shape[:2])
+        opaque = pixels[:, :, 3] > 0
+        near = ((pixels[:, :, :3] == COLOURS['cloth']).all(2)
+                | (pixels[:, :, :3] == COLOURS['cloth_light']).all(2))
+        near &= opaque & (yy >= 70) & (yy <= 80)
+        assert near.any(), (direction, phase, 'missing foreground trouser chain')
+        knees[phase] = float(xx[near].mean())
+        if phase not in (0, 4):
+            continue
+        white = ((pixels[:, :, :3] == COLOURS['bone']).all(2)
+                 | (pixels[:, :, :3] == COLOURS['bone_dark']).all(2))
+        white &= opaque & (yy >= 58) & (yy <= 71)
+        sleeves[phase] = float(xx[white].mean())
+        leather = np.zeros_like(opaque)
+        for material in ('soil_dark', 'wood_dark', 'wood', 'wood_light'):
+            leather |= (pixels[:, :, :3] == COLOURS[material]).all(2)
+        leather &= opaque & (yy >= 72)
+        luminance = pixels[:, :, :3].astype(np.int32).sum(2)
+        contrast = float(luminance[leather & (xx >= 48)].mean()
+                         - luminance[leather & (xx < 48)].mean())
+        contacts[phase] = sign * (1 if phase == 0 else -1) * contrast
+    metrics = {'foreground_knee_x':knees,
+               'recovery_3_px':sign * (knees[0] - knees[3]),
+               'recovery_5_px':sign * (knees[0] - knees[5]),
+               'opposite_sleeve_swing_px':sign * (sleeves[4] - sleeves[0]),
+               'contact_boot_contrast':contacts}
+    metrics['pass'] = (metrics['recovery_3_px'] >= 3
+                       and metrics['recovery_5_px'] >= 3
+                       and metrics['opposite_sleeve_swing_px'] >= 4
+                       and min(contacts.values()) >= 70)
+    return metrics
+
+
+def assert_lateral_run_readability(frames):
+    result = {}
+    for direction in ('east', 'west'):
+        images = {e['frame']:Image.open(ROOT / e['output'])
+                  for e in frames if e['animation'] == 'run_' + direction}
+        result[direction] = lateral_run_readability(images, direction)
+        assert result[direction]['pass'], (direction, 'ambiguous lateral run recovery/support', result[direction])
+    return result
+
+
 def assert_walking_head_scale(frames):
     """Front/back walking heads retain the accepted idle width at native scale."""
     result = {}
@@ -433,6 +485,8 @@ def build(check=False, partial=False):
                        for e in group]
             assert max(heights) <= 61, (name,'full native silhouette scale drift',heights)
     assert_lateral_knee_exchange(entries)
+    if not partial:
+        assert_lateral_run_readability(entries)
     if not partial:
         assert_walking_head_scale(entries)
     if not partial:
@@ -530,7 +584,7 @@ def gallery():
 <nav id="choices"></nav><h2 id="title"></h2><div class="preview"><img id="animation" width="1040" height="288" alt="Animações nas quatro direções"></div>
 <div class="tools"><button id="size" aria-pressed="true">Tamanho previsto em FHD: 120 px de altura</button><a id="download" class="download" download>Baixar este GIF</a><small id="details"></small></div>
 <p>Os pixels são ampliados exatamente em 2×, sem suavização. Você pode alternar para a escala nativa de 60 px. Em telas menores, role a prévia para os lados para conservar o tamanho dos pixels.</p>
-<div id="contact"></div><footer><a class="download" href="review-stills/walk-head-comparison.gif" download>Comparar cabeça na caminhada: antes e depois</a> <a class="download" href="review-stills/run-two-leg-comparison.gif" download>Comparar corrida: antes e depois</a> <a class="download" href="review-stills/runtime-horizontal.gif" download>Ver GIF capturado no jogo</a> <a class="download" href="todas-animacoes-horizontal.gif" download>Baixar GIF geral</a><p>O GIF geral percorre as 16 categorias. Os GIFs individuais repetem a atividade escolhida. Fontes, prompts e receitas estão guardados nesta pasta e em assets/art_source/player-fhd/directional.</p></footer></main>
+<div id="contact"></div><footer><a class="download" href="review-stills/walk-head-comparison.gif" download>Comparar cabeça na caminhada: antes e depois</a> <a class="download" href="review-stills/run-two-leg-comparison.gif" download>Comparar corrida: antes e depois</a> <a class="download" href="review-stills/run-two-leg-comparison-slow.gif" download>Ver corrida em câmera lenta (0.5×)</a> <a class="download" href="review-stills/runtime-horizontal.gif" download>Ver GIF capturado no jogo</a> <a class="download" href="todas-animacoes-horizontal.gif" download>Baixar GIF geral</a><p>O GIF geral percorre as 16 categorias. Os GIFs individuais repetem a atividade escolhida. Fontes, prompts e receitas estão guardados nesta pasta e em assets/art_source/player-fhd/directional.</p></footer></main>
 <script>const groups=__DATA__;const names={south:'Frente',west:'Esquerda',north:'Costas',east:'Direita'};const choices=document.querySelector('#choices'),image=document.querySelector('#animation');function select(g){document.querySelector('#title').textContent=g.label;image.src='gifs/'+g.action+'-horizontal.gif?v='+g.version;document.querySelector('#download').href=image.src;document.querySelector('#details').textContent=g.count+' quadros por direção · 4 direções';document.querySelectorAll('nav button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.action===g.action)));document.querySelector('#contact').replaceChildren(...g.columns.map(c=>{const a=document.createElement('a');a.href='contacts/'+g.action+'_'+c.direction+'.png?v='+g.version;a.textContent='Ver quadros: '+names[c.direction];a.target='_blank';return a}));}for(const g of groups){const b=document.createElement('button');b.textContent=g.label;b.dataset.action=g.action;b.setAttribute('aria-pressed','false');b.onclick=()=>select(g);choices.append(b);}document.querySelector('#size').onclick=function(){const large=this.getAttribute('aria-pressed')==='true';this.setAttribute('aria-pressed',String(!large));image.width=large?520:1040;image.height=large?144:288;this.textContent=large?'Escala nativa: 60 px de altura':'Tamanho previsto em FHD: 120 px de altura';};select(groups[0]);</script></html>'''
     (HERE/'index.html').write_bytes(page.replace('__DATA__',data).encode('utf-8'))
 
