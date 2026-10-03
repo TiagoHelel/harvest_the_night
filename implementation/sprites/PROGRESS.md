@@ -1802,3 +1802,69 @@ Review metadata and the same index.html now distinguish integrated locomotion
 from pending activities and link the runtime GIF. Older rejected pilots and
 unrelated untracked source/import side effects remain outside this commit.
 No push was made.
+
+## 2026-10-03 — Follow-up: repair actual two-leg motion in lateral RUN
+
+The user reported that integrated left/right RUN still looked like one moving
+leg. That report is confirmed: previous commit 0cbb4a27 passes every old boot
+material check, but its foreground trouser/knee barely changes position across
+opposite contact/passing phases. Different PNGs and boot colors had provided a
+false positive. The earlier integration remains functional; this repairs the
+sixteen lateral run drawings and the insufficient visual guard.
+
+Built-in ImageGen generated creator-run-two-leg-keys-r1 from the approved
+idle_east identity. It was rejected because its airborne anchors repeated an
+extended stride. A targeted r2 draws compact bent-knee passing poses and true
+foreground/background trouser/ankle exchange. Four intermediates come from
+creator-run-two-leg-transitions-r1. Final masters are under
+assets/art_source/player-fhd/directional/; submitted prompts, original built-in
+output paths, references, decisions and the creator run prompt provenance are
+in implementation/fhd-player/directional/prompts/creator-run-two-leg-*. The
+sprite-sheet-creator run/opposite-stride guidance remains the prompt basis.
+No native sprite was hand-painted or substituted with code.
+
+New source-owned cuts retain the 60px body, 96x96 canvas and east (48,88) /
+west (47,88) contacts. West reflects the complete east pose and registration.
+Near bright trousers/medium leather now recover behind while dark far trousers/
+leather bear weight, followed by the opposite passing and support. Eight
+individual lower-body poses remain. The source importer writes exactly sixteen
+runtime PNGs; other 268 native review frames and fifteen individual action GIFs
+remain byte-identical to 0cbb4a27. All other runtime actor PNGs are preserved.
+
+The new foreground-trouser geometric test excludes boots. Opposite knee
+positions now exchange by 5.94 native pixels across contact and 10.22 across
+passing in both directions. The actual reported baseline fails this test even
+though it passes the old color test. check_lateral_run.py / run-gait-regression.json
+retain the negative control and measurements. Existing boot and contact/flight
+checks stay enabled. The geometric guard runs during build_review and the
+runtime-source check in the full suite; visual playback remains required.
+
+Source/prompt/native/runtime contracts and manifest reference hashes are updated.
+The same runtime bindings, eight-frame clocks, FHD scale, controls, movement
+speed, collisions and core rules are preserved. This is a drawing repair.
+
+Actual Godot preview: 192 frames at 25fps, RUN GIF 1040x288 / 7.68s, and the
+61.44s overview refreshed. Runtime World/PlayerView/Player.tick day/night capture:
+24 timed sequences, 1,536 actual FHD frames, 6,168 checks and zero failures.
+Normal-speed leg recovery and loop continuity were inspected in consecutive
+frames, native scale and nearest 3x crops. runtime-horizontal.gif and its phase/
+3x/FHD evidence are refreshed. build_run_comparison.py creates
+review-stills/run-two-leg-comparison.gif (1040x312 / 7.68s), showing old/new left
+and old/new right at the same clock. Original renderer frames stay local and
+reproducible; no interpolated poses were invented.
+
+The same local index.html loads the new RUN by content hash b14756c5d6c9 and
+links the comparison. Its RUN selection and updated links were checked in the
+existing browser tab. Full-game FHD noon/dusk/wave/result/tech/house_interior
+captures were opened in implementation/shots/sprites/fhd-run-two-legs/.
+User review metadata marks the repaired RUN as pending visual validation while
+keeping it integrated under the existing authorization.
+
+Full working-tree verify/export passed 55 checks, zero skips/failures, in 529s
+(over the 300s soft target), parsing 125 scripts, with 7,768 core assertions and
+1,006 input cases. Sim hash 1270427719 and data hash 8148086 remain unchanged.
+Logs: directional/two-leg-verify.log, two-leg-gait-check.log,
+two-leg-preview-capture.log, two-leg-runtime-capture.log and two-leg-shots.log.
+Sprite queue check remains PASS for 20 completed prompts; queues are unchanged.
+Incidental editor reserialization of the run input was restored to the existing
+config. Older unrelated pilot files remain outside the focused commit. No push.

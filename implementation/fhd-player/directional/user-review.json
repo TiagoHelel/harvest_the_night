@@ -16,6 +16,7 @@
     }
   },
   "pending": [
+    "run",
     "chop",
     "mine",
     "till",
@@ -46,18 +47,21 @@
       "method": "four key poses and four in-betweens; left mirrors right as recommended by creator README"
     },
     "run": {
-      "feedback": "agora arruma o run left and wight",
+      "feedback": "a corrida left e right ainda na so com uma perna",
       "directions": [
         "west",
         "east"
       ],
-      "status": "runtime integration authorized by user; latest selected sources promoted",
+      "status": "repaired and integrated; visual validation pending",
       "sources": [
-        "creator-run-right-keys-r1.png",
-        "creator-run-right-transitions-r2.png"
+        "creator-run-two-leg-keys-r2.png",
+        "creator-run-two-leg-transitions-r1.png"
       ],
       "preview": "gifs/run-horizontal.gif",
-      "method": "four running keys plus four transitions; visible alternating leg support, arm swing and flight; left reflects right"
+      "method": "True near/far trouser, knee and ankle exchange; compact passing poses; left mirrors the complete right pose",
+      "date": "2026-10-03",
+      "reported_bad_commit": "0cbb4a27",
+      "comparison": "review-stills/run-two-leg-comparison.gif"
     }
   },
   "runtime_families": [

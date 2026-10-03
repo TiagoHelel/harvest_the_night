@@ -1,12 +1,38 @@
 {
-  "baseline_commit": "d5a27f7d",
+  "baseline_commit": "0cbb4a27",
   "unchanged_other_native_frames": 268,
-  "scope": "Boot materials and contact/flight; subjective motion still needs user review",
+  "scope": "Foreground trouser/knee exchange, boot material and contact/flight; visual playback still reviewed",
+  "previous_color_guard_false_positive": true,
+  "previous_knee_motion": {
+    "east": {
+      "contact_exchange_px": -0.8713564566031593,
+      "passing_exchange_px": -1.743890518084065,
+      "pass": false
+    },
+    "west": {
+      "contact_exchange_px": -0.8713564566031593,
+      "passing_exchange_px": -1.743890518084065,
+      "pass": false
+    }
+  },
+  "replacement_knee_motion": {
+    "east": {
+      "contact_exchange_px": 5.936886708296164,
+      "passing_exchange_px": 10.216809605488855,
+      "pass": true
+    },
+    "west": {
+      "contact_exchange_px": 5.936886708296164,
+      "passing_exchange_px": 10.216809605488855,
+      "pass": true
+    }
+  },
   "previous_same_leg_control": [
     {
       "direction": "east",
       "phase": 0,
-      "boot_brightness_right_minus_left": 9.380139152435163,
+      "foreground_knee_x": 44.056179775280896,
+      "boot_brightness_right_minus_left": 85.67210279219174,
       "opposite_leg_material_pass": true,
       "ground_clearance_native_px": 0,
       "contact_or_flight_pass": true
@@ -14,31 +40,35 @@
     {
       "direction": "east",
       "phase": 2,
-      "boot_brightness_right_minus_left": 12.938808373590973,
-      "opposite_leg_material_pass": false,
-      "ground_clearance_native_px": 0,
-      "contact_or_flight_pass": false
+      "foreground_knee_x": 43.96969696969697,
+      "boot_brightness_right_minus_left": -16.682900432900425,
+      "opposite_leg_material_pass": true,
+      "ground_clearance_native_px": 3,
+      "contact_or_flight_pass": true
     },
     {
       "direction": "east",
       "phase": 4,
-      "boot_brightness_right_minus_left": 12.911764705882348,
-      "opposite_leg_material_pass": false,
+      "foreground_knee_x": 44.927536231884055,
+      "boot_brightness_right_minus_left": -12.766233766233768,
+      "opposite_leg_material_pass": true,
       "ground_clearance_native_px": 0,
       "contact_or_flight_pass": true
     },
     {
       "direction": "east",
       "phase": 6,
-      "boot_brightness_right_minus_left": 9.221813725490193,
+      "foreground_knee_x": 42.225806451612904,
+      "boot_brightness_right_minus_left": 73.62229102167186,
       "opposite_leg_material_pass": true,
-      "ground_clearance_native_px": 0,
-      "contact_or_flight_pass": false
+      "ground_clearance_native_px": 4,
+      "contact_or_flight_pass": true
     },
     {
       "direction": "east",
       "phase": 1,
-      "boot_brightness_right_minus_left": 34.30000000000001,
+      "foreground_knee_x": 43.70909090909091,
+      "boot_brightness_right_minus_left": 77.33333333333331,
       "opposite_leg_material_pass": true,
       "ground_clearance_native_px": 0,
       "contact_or_flight_pass": true
@@ -46,7 +76,8 @@
     {
       "direction": "east",
       "phase": 3,
-      "boot_brightness_right_minus_left": -8.399122807017562,
+      "foreground_knee_x": 46.36065573770492,
+      "boot_brightness_right_minus_left": -27.52976190476187,
       "opposite_leg_material_pass": true,
       "ground_clearance_native_px": 3,
       "contact_or_flight_pass": true
@@ -54,23 +85,26 @@
     {
       "direction": "east",
       "phase": 5,
-      "boot_brightness_right_minus_left": 10.734126984126988,
-      "opposite_leg_material_pass": false,
+      "foreground_knee_x": 45.857142857142854,
+      "boot_brightness_right_minus_left": -2.654798761609925,
+      "opposite_leg_material_pass": true,
       "ground_clearance_native_px": 0,
       "contact_or_flight_pass": true
     },
     {
       "direction": "east",
       "phase": 7,
-      "boot_brightness_right_minus_left": -18.366666666666674,
-      "opposite_leg_material_pass": false,
+      "foreground_knee_x": 45.916666666666664,
+      "boot_brightness_right_minus_left": 114.56504702194354,
+      "opposite_leg_material_pass": true,
       "ground_clearance_native_px": 2,
       "contact_or_flight_pass": true
     },
     {
       "direction": "west",
       "phase": 0,
-      "boot_brightness_right_minus_left": -2.1929824561403564,
+      "foreground_knee_x": 50.943820224719104,
+      "boot_brightness_right_minus_left": -85.67210279219174,
       "opposite_leg_material_pass": true,
       "ground_clearance_native_px": 0,
       "contact_or_flight_pass": true
@@ -78,47 +112,53 @@
     {
       "direction": "west",
       "phase": 2,
-      "boot_brightness_right_minus_left": -4.313186813186803,
-      "opposite_leg_material_pass": false,
-      "ground_clearance_native_px": 0,
-      "contact_or_flight_pass": false
+      "foreground_knee_x": 51.03030303030303,
+      "boot_brightness_right_minus_left": 16.682900432900425,
+      "opposite_leg_material_pass": true,
+      "ground_clearance_native_px": 3,
+      "contact_or_flight_pass": true
     },
     {
       "direction": "west",
       "phase": 4,
-      "boot_brightness_right_minus_left": -7.242857142857133,
-      "opposite_leg_material_pass": false,
-      "ground_clearance_native_px": 1,
-      "contact_or_flight_pass": false
+      "foreground_knee_x": 50.072463768115945,
+      "boot_brightness_right_minus_left": 12.766233766233768,
+      "opposite_leg_material_pass": true,
+      "ground_clearance_native_px": 0,
+      "contact_or_flight_pass": true
     },
     {
       "direction": "west",
       "phase": 6,
-      "boot_brightness_right_minus_left": -24.28451178451178,
+      "foreground_knee_x": 52.774193548387096,
+      "boot_brightness_right_minus_left": -73.62229102167186,
       "opposite_leg_material_pass": true,
-      "ground_clearance_native_px": 0,
-      "contact_or_flight_pass": false
+      "ground_clearance_native_px": 4,
+      "contact_or_flight_pass": true
     },
     {
       "direction": "west",
       "phase": 1,
-      "boot_brightness_right_minus_left": 8.478260869565219,
-      "opposite_leg_material_pass": false,
+      "foreground_knee_x": 51.29090909090909,
+      "boot_brightness_right_minus_left": -77.33333333333331,
+      "opposite_leg_material_pass": true,
       "ground_clearance_native_px": 0,
       "contact_or_flight_pass": true
     },
     {
       "direction": "west",
       "phase": 3,
-      "boot_brightness_right_minus_left": -5.533333333333331,
-      "opposite_leg_material_pass": false,
+      "foreground_knee_x": 48.63934426229508,
+      "boot_brightness_right_minus_left": 27.52976190476187,
+      "opposite_leg_material_pass": true,
       "ground_clearance_native_px": 3,
       "contact_or_flight_pass": true
     },
     {
       "direction": "west",
       "phase": 5,
-      "boot_brightness_right_minus_left": 28.895833333333343,
+      "foreground_knee_x": 49.142857142857146,
+      "boot_brightness_right_minus_left": 2.654798761609925,
       "opposite_leg_material_pass": true,
       "ground_clearance_native_px": 0,
       "contact_or_flight_pass": true
@@ -126,7 +166,8 @@
     {
       "direction": "west",
       "phase": 7,
-      "boot_brightness_right_minus_left": -2.5,
+      "foreground_knee_x": 49.083333333333336,
+      "boot_brightness_right_minus_left": -114.56504702194354,
       "opposite_leg_material_pass": true,
       "ground_clearance_native_px": 2,
       "contact_or_flight_pass": true
@@ -136,7 +177,8 @@
     {
       "direction": "east",
       "phase": 0,
-      "boot_brightness_right_minus_left": 85.67210279219174,
+      "foreground_knee_x": 50.01315789473684,
+      "boot_brightness_right_minus_left": 94.89423076923077,
       "opposite_leg_material_pass": true,
       "ground_clearance_native_px": 0,
       "contact_or_flight_pass": true
@@ -144,7 +186,8 @@
     {
       "direction": "east",
       "phase": 2,
-      "boot_brightness_right_minus_left": -16.682900432900425,
+      "foreground_knee_x": 40.74545454545454,
+      "boot_brightness_right_minus_left": -35.0,
       "opposite_leg_material_pass": true,
       "ground_clearance_native_px": 3,
       "contact_or_flight_pass": true
@@ -152,7 +195,8 @@
     {
       "direction": "east",
       "phase": 4,
-      "boot_brightness_right_minus_left": -12.766233766233768,
+      "foreground_knee_x": 44.07627118644068,
+      "boot_brightness_right_minus_left": -51.99309478970497,
       "opposite_leg_material_pass": true,
       "ground_clearance_native_px": 0,
       "contact_or_flight_pass": true
@@ -160,7 +204,8 @@
     {
       "direction": "east",
       "phase": 6,
-      "boot_brightness_right_minus_left": 73.62229102167186,
+      "foreground_knee_x": 50.9622641509434,
+      "boot_brightness_right_minus_left": 110.68256578947367,
       "opposite_leg_material_pass": true,
       "ground_clearance_native_px": 4,
       "contact_or_flight_pass": true
@@ -168,7 +213,8 @@
     {
       "direction": "east",
       "phase": 1,
-      "boot_brightness_right_minus_left": 77.33333333333331,
+      "foreground_knee_x": 48.62337662337662,
+      "boot_brightness_right_minus_left": 87.95031055900623,
       "opposite_leg_material_pass": true,
       "ground_clearance_native_px": 0,
       "contact_or_flight_pass": true
@@ -176,15 +222,17 @@
     {
       "direction": "east",
       "phase": 3,
-      "boot_brightness_right_minus_left": -27.52976190476187,
+      "foreground_knee_x": 48.98039215686274,
+      "boot_brightness_right_minus_left": -96.3745787193067,
       "opposite_leg_material_pass": true,
-      "ground_clearance_native_px": 3,
+      "ground_clearance_native_px": 1,
       "contact_or_flight_pass": true
     },
     {
       "direction": "east",
       "phase": 5,
-      "boot_brightness_right_minus_left": -2.654798761609925,
+      "foreground_knee_x": 41.73809523809524,
+      "boot_brightness_right_minus_left": -102.41071428571428,
       "opposite_leg_material_pass": true,
       "ground_clearance_native_px": 0,
       "contact_or_flight_pass": true
@@ -192,7 +240,8 @@
     {
       "direction": "east",
       "phase": 7,
-      "boot_brightness_right_minus_left": 114.56504702194354,
+      "foreground_knee_x": 52.37662337662338,
+      "boot_brightness_right_minus_left": 116.62849289967932,
       "opposite_leg_material_pass": true,
       "ground_clearance_native_px": 2,
       "contact_or_flight_pass": true
@@ -200,7 +249,8 @@
     {
       "direction": "west",
       "phase": 0,
-      "boot_brightness_right_minus_left": -85.67210279219174,
+      "foreground_knee_x": 44.98684210526316,
+      "boot_brightness_right_minus_left": -94.89423076923077,
       "opposite_leg_material_pass": true,
       "ground_clearance_native_px": 0,
       "contact_or_flight_pass": true
@@ -208,7 +258,8 @@
     {
       "direction": "west",
       "phase": 2,
-      "boot_brightness_right_minus_left": 16.682900432900425,
+      "foreground_knee_x": 54.25454545454546,
+      "boot_brightness_right_minus_left": 35.0,
       "opposite_leg_material_pass": true,
       "ground_clearance_native_px": 3,
       "contact_or_flight_pass": true
@@ -216,7 +267,8 @@
     {
       "direction": "west",
       "phase": 4,
-      "boot_brightness_right_minus_left": 12.766233766233768,
+      "foreground_knee_x": 50.92372881355932,
+      "boot_brightness_right_minus_left": 51.99309478970497,
       "opposite_leg_material_pass": true,
       "ground_clearance_native_px": 0,
       "contact_or_flight_pass": true
@@ -224,7 +276,8 @@
     {
       "direction": "west",
       "phase": 6,
-      "boot_brightness_right_minus_left": -73.62229102167186,
+      "foreground_knee_x": 44.0377358490566,
+      "boot_brightness_right_minus_left": -110.68256578947367,
       "opposite_leg_material_pass": true,
       "ground_clearance_native_px": 4,
       "contact_or_flight_pass": true
@@ -232,7 +285,8 @@
     {
       "direction": "west",
       "phase": 1,
-      "boot_brightness_right_minus_left": -77.33333333333331,
+      "foreground_knee_x": 46.37662337662338,
+      "boot_brightness_right_minus_left": -87.95031055900623,
       "opposite_leg_material_pass": true,
       "ground_clearance_native_px": 0,
       "contact_or_flight_pass": true
@@ -240,15 +294,17 @@
     {
       "direction": "west",
       "phase": 3,
-      "boot_brightness_right_minus_left": 27.52976190476187,
+      "foreground_knee_x": 46.01960784313726,
+      "boot_brightness_right_minus_left": 96.3745787193067,
       "opposite_leg_material_pass": true,
-      "ground_clearance_native_px": 3,
+      "ground_clearance_native_px": 1,
       "contact_or_flight_pass": true
     },
     {
       "direction": "west",
       "phase": 5,
-      "boot_brightness_right_minus_left": 2.654798761609925,
+      "foreground_knee_x": 53.26190476190476,
+      "boot_brightness_right_minus_left": 102.41071428571428,
       "opposite_leg_material_pass": true,
       "ground_clearance_native_px": 0,
       "contact_or_flight_pass": true
@@ -256,7 +312,8 @@
     {
       "direction": "west",
       "phase": 7,
-      "boot_brightness_right_minus_left": -114.56504702194354,
+      "foreground_knee_x": 42.62337662337662,
+      "boot_brightness_right_minus_left": -116.62849289967932,
       "opposite_leg_material_pass": true,
       "ground_clearance_native_px": 2,
       "contact_or_flight_pass": true

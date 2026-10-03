@@ -210,3 +210,42 @@ including the house, are in implementation/shots/sprites/fhd-locomotion/.
 Final full verification: **55 passed, zero skipped/failed**, 491s.
 Parsed 125 scripts; 7,768 core assertions; 1,006 input cases.
 Sim/data hashes remain 1270427719 / 8148086. Evidence: runtime-verify.log.
+
+
+## Lateral run: actual two-leg exchange — 2026-10-03
+
+The user reported that integrated left/right RUN still looked like one moving
+leg. The preceding color-based test was a false positive: baseline 0cbb4a27
+passes all its boot checks while its foreground trouser/knee remains nearly
+stationary between opposite contact and passing phases.
+
+Built-in ImageGen generated creator-run-two-leg-keys-r1 from the approved east
+idle identity. It was rejected because flight repeated an extended stride.
+A targeted r2 replaces flight with compact, bent-knee passing poses and makes
+opposite near/far chains explicit. creator-run-two-leg-transitions-r1 supplies
+four compressed/reaching intermediates. Exact submitted prompts, references,
+original output paths and decisions are retained in prompts/*.call.json.
+The creator repository's existing run/push-off/opposite-stride guidance remains
+the basis of the prompts. No pixels were painted by a script.
+
+Sixteen lateral native/runtime PNGs are replaced; other 268 review frames are
+byte-identical to 0cbb4a27. West reflects the complete east source and pivot.
+The foreground trouser knee now exchanges by 5.94 native pixels across contact
+and 10.22 across passing in both directions. The new geometric guard excludes
+boot pixels and rejects the actual reported baseline. It runs during review
+and the full runtime-source check. Boot/material and contact/flight guards
+remain, rather than being removed to accept a new image.
+
+The eight-phase contact sheets and normal-speed Godot preview were refreshed,
+as were the FHD day/night runtime sequences and runtime-horizontal.gif.
+review-stills/run-two-leg-comparison.gif compares old/new left and old/new
+right at the same 25fps clock. This is renderer evidence, not interpolated
+or procedurally generated motion. The same index.html links this comparison
+and loads the new RUN GIF using its content hash. Runtime speed/control rules
+remain unchanged; RUN continues to use the existing travel speed.
+
+Reproduction: run build_run_comparison.py after the RUN Godot capture.
+Full working-tree verification passed **55 checks**, zero skips/failures,
+in 529s (over the 300s soft target): 125 parsed scripts, 7,768 core assertions,
+1,006 input cases. Sim/data hashes remain 1270427719 / 8148086.
+Logs: two-leg-verify.log, two-leg-gait-check.log, two-leg-runtime-capture.log.

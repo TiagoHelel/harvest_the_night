@@ -10,7 +10,7 @@ from PIL import Image
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
-BASELINE = 'd5a27f7d'
+BASELINE = '0cbb4a27'
 sys.path.insert(0, str(ROOT / 'tools'))
 from palette import COLOURS
 
@@ -28,7 +28,11 @@ def measure(image, direction, phase):
     expected = (1 if direction == 'east' else -1) * (1 if phase in (0,1,6,7) else -1)
     bottom = image.getbbox()[3]
     flying = phase in (2,3,6,7)
+    near = ((pixels[:,:,:3] == COLOURS['cloth']).all(2)
+            | (pixels[:,:,:3] == COLOURS['cloth_light']).all(2))
+    near &= (yy >= 70) & (yy <= 80) & (pixels[:,:,3] > 0)
     return {'direction':direction, 'phase':phase,
+            'foreground_knee_x':float(xx[near].mean()),
             'boot_brightness_right_minus_left':delta,
             'opposite_leg_material_pass':bool(delta * expected > 0),
             'ground_clearance_native_px':88 - bottom,
@@ -51,12 +55,29 @@ def main():
             preserved += 1
     assert preserved == 268
     assert all(e['opposite_leg_material_pass'] and e['contact_or_flight_pass'] for e in replacement)
-    assert not all(e['opposite_leg_material_pass'] for e in previous), 'Old same-leg control incorrectly accepted'
+    def knee_motion(samples):
+        result = {}
+        for direction in ('east','west'):
+            x = {e['phase']:e['foreground_knee_x'] for e in samples if e['direction']==direction}
+            sign = 1 if direction=='east' else -1
+            contact, passing = sign*(x[0]-x[4]), sign*(x[6]-x[2])
+            result[direction] = {'contact_exchange_px':contact, 'passing_exchange_px':passing,
+                                 'pass':contact>=4 and passing>=5}
+        return result
+    old_knees, new_knees = knee_motion(previous), knee_motion(replacement)
+    assert all(e['pass'] for e in new_knees.values()), new_knees
+    assert not all(e['pass'] for e in old_knees.values()), 'Reported bad run incorrectly accepted'
+    # The actual reported baseline PASSED the old boot-color guard. It must now
+    # fail a geometric foreground-trouser test that no boot recoloring can fix.
+    assert all(e['opposite_leg_material_pass'] for e in previous)
     report = {'baseline_commit':BASELINE, 'unchanged_other_native_frames':preserved,
-              'scope':'Boot materials and contact/flight; subjective motion still needs user review',
+              'scope':'Foreground trouser/knee exchange, boot material and contact/flight; visual playback still reviewed',
+              'previous_color_guard_false_positive':True,
+              'previous_knee_motion':old_knees,'replacement_knee_motion':new_knees,
               'previous_same_leg_control':previous, 'replacement':replacement}
     (HERE / 'run-gait-regression.json').write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8')
-    print('RUN GAIT GUARD: sixteen contact/flight and opposite-leg phases pass; previous same-leg control fails.')
+    print('RUN GAIT GUARD: sixteen contact/flight/material phases pass; both foreground knee paths exchange.')
+    print('NEGATIVE CONTROL: actual reported baseline passes old color guard but fails the new knee-motion test.')
     print('PRESERVATION GUARD: other 268 native frames byte-identical to ' + BASELINE + '.')
 
 

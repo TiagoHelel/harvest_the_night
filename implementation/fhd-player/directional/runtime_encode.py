@@ -30,6 +30,16 @@ def main():
         for motion in ('walk', 'run'):
             name = f'{lighting}_{motion}_east_fhd.png'
             shutil.copyfile(HERE / 'runtime-captures' / name, HERE / 'review-stills' / ('runtime_' + name))
+        sheet = Image.new('RGB', (2048, 464), '#17151c')
+        draw = ImageDraw.Draw(sheet)
+        for row, direction in enumerate(('east','west')):
+            for phase in range(8):
+                with Image.open(HERE/'runtime-captures'/f'{lighting}_run_{direction}_{phase*2:03d}.png') as picture:
+                    sheet.paste(picture.convert('RGB'), (phase*256,row*232+24))
+                draw.text((phase*256+8,row*232+6),f'{lighting} {direction} frame {phase*2}',fill='#ece3d3')
+        sheet.save(HERE/'review-stills'/f'runtime-{lighting}-run-phases.png')
+        with Image.open(HERE/'runtime-captures'/f'{lighting}_run_east_008.png') as picture:
+            picture.resize((768,624),Image.Resampling.NEAREST).save(HERE/'review-stills'/f'runtime-{lighting}-3x.png')
     print('Actual runtime GIF: 384 frames / 25fps / 1024x232, day/night and all four directions.')
 
 

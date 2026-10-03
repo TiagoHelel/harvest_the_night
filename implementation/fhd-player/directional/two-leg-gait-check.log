@@ -1,0 +1,3 @@
+RUN GAIT GUARD: sixteen contact/flight/material phases pass; both foreground knee paths exchange.
+NEGATIVE CONTROL: actual reported baseline passes old color guard but fails the new knee-motion test.
+PRESERVATION GUARD: other 268 native frames byte-identical to 0cbb4a27.

@@ -832,23 +832,23 @@
       "id": "run_east_0",
       "animation": "run_east",
       "frame": 0,
-      "source": "assets/art_source/player-fhd/directional/creator-run-right-keys-r1.png",
-      "source_sha256": "d56016c0a05d47d2e9030e22b9e4b3a42d3e7ab59cf3633fedb95da70ffac715",
+      "source": "assets/art_source/player-fhd/directional/creator-run-two-leg-keys-r2.png",
+      "source_sha256": "f90247de67f1d7c20e218b66aa9f74808f31ae44303736ff8efa830a8f3fb801",
       "crop_xywh": [
-        201,
-        162,
-        374,
-        470
+        170,
+        64,
+        417,
+        515
       ],
       "sheet_cell_xywh": [
         0,
         0,
-        627,
-        632
+        665,
+        591
       ],
-      "content_scale": 0.1276595744680851,
+      "content_scale": 0.11650485436893204,
       "source_selection": "connected-farmer-and-particles-v1",
-      "source_selection_sha256": "4a752a285b0666dd1e45ef2b9f169d768ac69553f84bf5b6ceb969904c708092",
+      "source_selection_sha256": "90e80db277846f14c9b1685fd9c399fde3f45a5c2248bdb5b9a5239856b6425d",
       "action": "run",
       "content_anchor_xy": [
         25,
@@ -863,10 +863,10 @@
         88
       ],
       "draw_scale": 0.5,
-      "body_reference_height": 470,
+      "body_reference_height": 515,
       "feet_source_xy": [
-        396.0,
-        632
+        385.5,
+        579
       ],
       "alpha_threshold": 128,
       "palette": "tools/palette.py:COLOURS",
@@ -892,32 +892,32 @@
       "seconds": 0.08,
       "loop": true,
       "material_ramp_rule": "lateral-boot-materials",
-      "prompt": "implementation/fhd-player/directional/prompts/creator-run-right-keys-r1.prompt.txt",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-run-two-leg-keys-r2.prompt.txt",
       "output": "assets/art_source/player-fhd/directional/frames/run_east_0.png",
-      "prompt_sha256": "184e88483d8dc6f1a2f1f2fdbf5c0cee8899b3ff3aee56546e687cb8585ba08f",
-      "output_sha256": "7e4ad8e02cbd5a9a779a1c55b665032798a7246fa3fcc462337b12491abef41d"
+      "prompt_sha256": "316494d946abfd71790bbaa00c7d6fee41f5cbfbe2d06c91ac399fd03a355ae7",
+      "output_sha256": "812c0d20fdc69ffe0da15b48d4c017e37f7c4abfd5322e9b40c5ff8eefa20a03"
     },
     {
       "id": "run_east_1",
       "animation": "run_east",
       "frame": 1,
-      "source": "assets/art_source/player-fhd/directional/creator-run-right-transitions-r2.png",
-      "source_sha256": "e67930524c11d0b70f2829c8bf8e62d9fde9f92e184185bea090849e695636e1",
+      "source": "assets/art_source/player-fhd/directional/creator-run-two-leg-transitions-r1.png",
+      "source_sha256": "b16c6060a83ecadfbef2596a1acd6ea12efa32c0c840da2145732f1c4a6ffb25",
       "crop_xywh": [
-        201,
-        171,
-        358,
-        462
+        175,
+        86,
+        404,
+        495
       ],
       "sheet_cell_xywh": [
         0,
         0,
-        627,
-        633
+        665,
+        591
       ],
-      "content_scale": 0.12987012987012986,
+      "content_scale": 0.12121212121212122,
       "source_selection": "connected-farmer-and-particles-v1",
-      "source_selection_sha256": "aba0a4b7d30c789d7c3131c2533d8d943e65b6e66506392cae83641282842d48",
+      "source_selection_sha256": "c6781b81fe2548800f4ec879888e9ca5f2a12cd995e64f2458d498b1615c8429",
       "action": "run",
       "content_anchor_xy": [
         24,
@@ -932,10 +932,10 @@
         88
       ],
       "draw_scale": 0.5,
-      "body_reference_height": 462,
+      "body_reference_height": 495,
       "feet_source_xy": [
-        386.0,
-        633
+        377.0,
+        581
       ],
       "alpha_threshold": 128,
       "palette": "tools/palette.py:COLOURS",
@@ -961,32 +961,32 @@
       "seconds": 0.08,
       "loop": true,
       "material_ramp_rule": "lateral-boot-materials",
-      "prompt": "implementation/fhd-player/directional/prompts/creator-run-right-transitions-r2.prompt.txt",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-run-two-leg-transitions-r1.prompt.txt",
       "output": "assets/art_source/player-fhd/directional/frames/run_east_1.png",
-      "prompt_sha256": "4ff6cd802eec9218213f253eeead21e7c22b7ec1c07a477fb23b89625d3ffbda",
-      "output_sha256": "436375337d8168daefcecb6aee1397e180a2f08326e66388aa6c612b2b4b1afa"
+      "prompt_sha256": "5d2d2db77b7f3ef26c93509f66fbb73463e5dbeb21cc0168ceeff9d3d9c42daf",
+      "output_sha256": "e4335b368359cc9d767bd509e8502c99ecd23ebbec95eb40457a85b435e75e0f"
     },
     {
       "id": "run_east_2",
       "animation": "run_east",
       "frame": 2,
-      "source": "assets/art_source/player-fhd/directional/creator-run-right-keys-r1.png",
-      "source_sha256": "d56016c0a05d47d2e9030e22b9e4b3a42d3e7ab59cf3633fedb95da70ffac715",
+      "source": "assets/art_source/player-fhd/directional/creator-run-two-leg-keys-r2.png",
+      "source_sha256": "f90247de67f1d7c20e218b66aa9f74808f31ae44303736ff8efa830a8f3fb801",
       "crop_xywh": [
-        828,
-        162,
-        362,
-        450
+        823,
+        64,
+        400,
+        487
       ],
       "sheet_cell_xywh": [
-        627,
+        665,
         0,
-        627,
-        632
+        665,
+        591
       ],
-      "content_scale": 0.1276595744680851,
+      "content_scale": 0.11650485436893204,
       "source_selection": "connected-farmer-and-particles-v1",
-      "source_selection_sha256": "c0e00ce2cd70021f682dd00eb6a5ae38d6bf0f9741bb0ce74824585e74bc9b69",
+      "source_selection_sha256": "88a2817c15309048e67ade753a644e9886914d147094f8e43355496a105539d7",
       "action": "run",
       "content_anchor_xy": [
         23,
@@ -1001,10 +1001,10 @@
         88
       ],
       "draw_scale": 0.5,
-      "body_reference_height": 470,
+      "body_reference_height": 515,
       "feet_source_xy": [
-        1009.5,
-        632
+        1023.0,
+        579
       ],
       "alpha_threshold": 128,
       "palette": "tools/palette.py:COLOURS",
@@ -1030,32 +1030,32 @@
       "seconds": 0.08,
       "loop": true,
       "material_ramp_rule": "lateral-boot-materials",
-      "prompt": "implementation/fhd-player/directional/prompts/creator-run-right-keys-r1.prompt.txt",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-run-two-leg-keys-r2.prompt.txt",
       "output": "assets/art_source/player-fhd/directional/frames/run_east_2.png",
-      "prompt_sha256": "184e88483d8dc6f1a2f1f2fdbf5c0cee8899b3ff3aee56546e687cb8585ba08f",
-      "output_sha256": "3bb35951a3b36ec188f70a808965b57375c221e9c380876b4995e3a5fa36af1b"
+      "prompt_sha256": "316494d946abfd71790bbaa00c7d6fee41f5cbfbe2d06c91ac399fd03a355ae7",
+      "output_sha256": "051017b47d4caffc72f822907e4aae0ee7fe3a54238a076f2337a5fbe4666f85"
     },
     {
       "id": "run_east_3",
       "animation": "run_east",
       "frame": 3,
-      "source": "assets/art_source/player-fhd/directional/creator-run-right-transitions-r2.png",
-      "source_sha256": "e67930524c11d0b70f2829c8bf8e62d9fde9f92e184185bea090849e695636e1",
+      "source": "assets/art_source/player-fhd/directional/creator-run-two-leg-transitions-r1.png",
+      "source_sha256": "b16c6060a83ecadfbef2596a1acd6ea12efa32c0c840da2145732f1c4a6ffb25",
       "crop_xywh": [
-        782,
-        171,
-        355,
-        439
+        821,
+        86,
+        396,
+        484
       ],
       "sheet_cell_xywh": [
-        627,
+        665,
         0,
-        627,
-        633
+        665,
+        591
       ],
-      "content_scale": 0.12987012987012986,
+      "content_scale": 0.12121212121212122,
       "source_selection": "connected-farmer-and-particles-v1",
-      "source_selection_sha256": "4d420f3fb9202f51d39bdc794f1688d58c3ec17e27ef8b3db10da752bb743047",
+      "source_selection_sha256": "591a3aa40cdbc4163bf4ad329f62d3a5c8dbf04bf9e18657b4cb47124dbc40b0",
       "action": "run",
       "content_anchor_xy": [
         24,
@@ -1070,10 +1070,10 @@
         88
       ],
       "draw_scale": 0.5,
-      "body_reference_height": 462,
+      "body_reference_height": 495,
       "feet_source_xy": [
-        965.5,
-        633
+        1019.5,
+        581
       ],
       "alpha_threshold": 128,
       "palette": "tools/palette.py:COLOURS",
@@ -1099,36 +1099,36 @@
       "seconds": 0.08,
       "loop": true,
       "material_ramp_rule": "lateral-boot-materials",
-      "prompt": "implementation/fhd-player/directional/prompts/creator-run-right-transitions-r2.prompt.txt",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-run-two-leg-transitions-r1.prompt.txt",
       "output": "assets/art_source/player-fhd/directional/frames/run_east_3.png",
-      "prompt_sha256": "4ff6cd802eec9218213f253eeead21e7c22b7ec1c07a477fb23b89625d3ffbda",
-      "output_sha256": "f6b55effd3add3de2f7c0811c83cb507851bcd6fa645cdc917488c2ccbfe4115"
+      "prompt_sha256": "5d2d2db77b7f3ef26c93509f66fbb73463e5dbeb21cc0168ceeff9d3d9c42daf",
+      "output_sha256": "7c80dda2a0a9d84654cb2edcb496e00b093e1bf21b8152072df6562d07eedea8"
     },
     {
       "id": "run_east_4",
       "animation": "run_east",
       "frame": 4,
-      "source": "assets/art_source/player-fhd/directional/creator-run-right-keys-r1.png",
-      "source_sha256": "d56016c0a05d47d2e9030e22b9e4b3a42d3e7ab59cf3633fedb95da70ffac715",
+      "source": "assets/art_source/player-fhd/directional/creator-run-two-leg-keys-r2.png",
+      "source_sha256": "f90247de67f1d7c20e218b66aa9f74808f31ae44303736ff8efa830a8f3fb801",
       "crop_xywh": [
-        199,
-        725,
-        378,
-        466
+        169,
+        620,
+        418,
+        501
       ],
       "sheet_cell_xywh": [
         0,
-        632,
-        627,
-        622
+        591,
+        665,
+        591
       ],
-      "content_scale": 0.1276595744680851,
+      "content_scale": 0.11650485436893204,
       "source_selection": "connected-farmer-and-particles-v1",
-      "source_selection_sha256": "7740c7ee4daff9ee374bfb8948a8a399b43df3f4de74b9a734520a6b73e7a1b2",
+      "source_selection_sha256": "2fc72e63478e02366c61734208f01fbe163a28503760d847fd287a22f594d94a",
       "action": "run",
       "content_anchor_xy": [
         25,
-        59
+        58
       ],
       "canvas_wh": [
         96,
@@ -1139,10 +1139,10 @@
         88
       ],
       "draw_scale": 0.5,
-      "body_reference_height": 470,
+      "body_reference_height": 515,
       "feet_source_xy": [
-        397.5,
-        1191
+        387.5,
+        1121
       ],
       "alpha_threshold": 128,
       "palette": "tools/palette.py:COLOURS",
@@ -1168,32 +1168,32 @@
       "seconds": 0.08,
       "loop": true,
       "material_ramp_rule": "lateral-boot-materials",
-      "prompt": "implementation/fhd-player/directional/prompts/creator-run-right-keys-r1.prompt.txt",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-run-two-leg-keys-r2.prompt.txt",
       "output": "assets/art_source/player-fhd/directional/frames/run_east_4.png",
-      "prompt_sha256": "184e88483d8dc6f1a2f1f2fdbf5c0cee8899b3ff3aee56546e687cb8585ba08f",
-      "output_sha256": "b144aeb944e0b369e1e184e0fd4635e43e24ada763e8e90ff6011fd029209cc8"
+      "prompt_sha256": "316494d946abfd71790bbaa00c7d6fee41f5cbfbe2d06c91ac399fd03a355ae7",
+      "output_sha256": "6f3868feef51a5faa361d454f4707ad85033be19ee54a9f223109dd0647d87c9"
     },
     {
       "id": "run_east_5",
       "animation": "run_east",
       "frame": 5,
-      "source": "assets/art_source/player-fhd/directional/creator-run-right-transitions-r2.png",
-      "source_sha256": "e67930524c11d0b70f2829c8bf8e62d9fde9f92e184185bea090849e695636e1",
+      "source": "assets/art_source/player-fhd/directional/creator-run-two-leg-transitions-r1.png",
+      "source_sha256": "b16c6060a83ecadfbef2596a1acd6ea12efa32c0c840da2145732f1c4a6ffb25",
       "crop_xywh": [
-        210,
-        726,
-        362,
-        447
+        177,
+        644,
+        402,
+        481
       ],
       "sheet_cell_xywh": [
         0,
-        633,
-        627,
-        621
+        591,
+        665,
+        591
       ],
-      "content_scale": 0.12987012987012986,
+      "content_scale": 0.12121212121212122,
       "source_selection": "connected-farmer-and-particles-v1",
-      "source_selection_sha256": "26369befb4c63771127f7be1d388313368fdd693e345b5cf8daeaf26a2f14df1",
+      "source_selection_sha256": "8deadb4a1ee780d840a8f1ec3615bcfadff614398483ebb5f2f6b617bf8b475b",
       "action": "run",
       "content_anchor_xy": [
         24,
@@ -1208,10 +1208,10 @@
         88
       ],
       "draw_scale": 0.5,
-      "body_reference_height": 462,
+      "body_reference_height": 495,
       "feet_source_xy": [
-        398.0,
-        1173
+        378.0,
+        1125
       ],
       "alpha_threshold": 128,
       "palette": "tools/palette.py:COLOURS",
@@ -1237,104 +1237,35 @@
       "seconds": 0.08,
       "loop": true,
       "material_ramp_rule": "lateral-boot-materials",
-      "prompt": "implementation/fhd-player/directional/prompts/creator-run-right-transitions-r2.prompt.txt",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-run-two-leg-transitions-r1.prompt.txt",
       "output": "assets/art_source/player-fhd/directional/frames/run_east_5.png",
-      "prompt_sha256": "4ff6cd802eec9218213f253eeead21e7c22b7ec1c07a477fb23b89625d3ffbda",
-      "output_sha256": "f7f06e58ae847eabfc99967cb0fe58ec827762872beb310573eb98ed4486e14f"
+      "prompt_sha256": "5d2d2db77b7f3ef26c93509f66fbb73463e5dbeb21cc0168ceeff9d3d9c42daf",
+      "output_sha256": "c0ef171b6bc93299514187a47c94701d3a31bc2735f48e84bc69906a56a4fd2c"
     },
     {
       "id": "run_east_6",
       "animation": "run_east",
       "frame": 6,
-      "source": "assets/art_source/player-fhd/directional/creator-run-right-keys-r1.png",
-      "source_sha256": "d56016c0a05d47d2e9030e22b9e4b3a42d3e7ab59cf3633fedb95da70ffac715",
+      "source": "assets/art_source/player-fhd/directional/creator-run-two-leg-keys-r2.png",
+      "source_sha256": "f90247de67f1d7c20e218b66aa9f74808f31ae44303736ff8efa830a8f3fb801",
       "crop_xywh": [
-        837,
-        725,
-        358,
-        428
+        825,
+        620,
+        397,
+        460
       ],
       "sheet_cell_xywh": [
-        627,
-        632,
-        627,
-        622
+        665,
+        591,
+        665,
+        591
       ],
-      "content_scale": 0.1276595744680851,
+      "content_scale": 0.11650485436893204,
       "source_selection": "connected-farmer-and-particles-v1",
-      "source_selection_sha256": "a9557d1a7638fde9c6b534aa6201eddd2877d80e3eda90d68bf37517457ffe88",
+      "source_selection_sha256": "6e0a3db441233ebc2fee9c72b701a940f44093d3c47b710f7164c1f9e7a250d9",
       "action": "run",
       "content_anchor_xy": [
         23,
-        59
-      ],
-      "canvas_wh": [
-        96,
-        96
-      ],
-      "pivot_xy": [
-        48,
-        88
-      ],
-      "draw_scale": 0.5,
-      "body_reference_height": 470,
-      "feet_source_xy": [
-        1015.0,
-        1191
-      ],
-      "alpha_threshold": 128,
-      "palette": "tools/palette.py:COLOURS",
-      "palette_keys": [
-        "ink",
-        "ink_soft",
-        "soil_dark",
-        "wood_dark",
-        "wood",
-        "wood_light",
-        "gold_dark",
-        "gold",
-        "gold_light",
-        "skin_dark",
-        "skin",
-        "skin_light",
-        "bone",
-        "bone_dark",
-        "cloth_dark",
-        "cloth",
-        "cloth_light"
-      ],
-      "seconds": 0.08,
-      "loop": true,
-      "material_ramp_rule": "lateral-boot-materials",
-      "prompt": "implementation/fhd-player/directional/prompts/creator-run-right-keys-r1.prompt.txt",
-      "output": "assets/art_source/player-fhd/directional/frames/run_east_6.png",
-      "prompt_sha256": "184e88483d8dc6f1a2f1f2fdbf5c0cee8899b3ff3aee56546e687cb8585ba08f",
-      "output_sha256": "54b7d2ff17edd4c6b9eafe402aab0b4fe66a82efc73b903d5b298bfa48154002"
-    },
-    {
-      "id": "run_east_7",
-      "animation": "run_east",
-      "frame": 7,
-      "source": "assets/art_source/player-fhd/directional/creator-run-right-transitions-r2.png",
-      "source_sha256": "e67930524c11d0b70f2829c8bf8e62d9fde9f92e184185bea090849e695636e1",
-      "crop_xywh": [
-        796,
-        726,
-        370,
-        432
-      ],
-      "sheet_cell_xywh": [
-        627,
-        633,
-        627,
-        621
-      ],
-      "content_scale": 0.12987012987012986,
-      "source_selection": "connected-farmer-and-particles-v1",
-      "source_selection_sha256": "4385a8c2f9ea0d8ea21e943e40d2def74536622fd2d2b75fb8798c46b89c5c1a",
-      "action": "run",
-      "content_anchor_xy": [
-        25,
         58
       ],
       "canvas_wh": [
@@ -1346,10 +1277,10 @@
         88
       ],
       "draw_scale": 0.5,
-      "body_reference_height": 462,
+      "body_reference_height": 515,
       "feet_source_xy": [
-        989.5,
-        1173
+        1023.0,
+        1121
       ],
       "alpha_threshold": 128,
       "palette": "tools/palette.py:COLOURS",
@@ -1375,10 +1306,79 @@
       "seconds": 0.08,
       "loop": true,
       "material_ramp_rule": "lateral-boot-materials",
-      "prompt": "implementation/fhd-player/directional/prompts/creator-run-right-transitions-r2.prompt.txt",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-run-two-leg-keys-r2.prompt.txt",
+      "output": "assets/art_source/player-fhd/directional/frames/run_east_6.png",
+      "prompt_sha256": "316494d946abfd71790bbaa00c7d6fee41f5cbfbe2d06c91ac399fd03a355ae7",
+      "output_sha256": "333c250f17649c73286039d2de5fe710dae69d562c68da2e5a95a10506b06d60"
+    },
+    {
+      "id": "run_east_7",
+      "animation": "run_east",
+      "frame": 7,
+      "source": "assets/art_source/player-fhd/directional/creator-run-two-leg-transitions-r1.png",
+      "source_sha256": "b16c6060a83ecadfbef2596a1acd6ea12efa32c0c840da2145732f1c4a6ffb25",
+      "crop_xywh": [
+        822,
+        643,
+        401,
+        458
+      ],
+      "sheet_cell_xywh": [
+        665,
+        591,
+        665,
+        591
+      ],
+      "content_scale": 0.12121212121212122,
+      "source_selection": "connected-farmer-and-particles-v1",
+      "source_selection_sha256": "7ad3bfb3b832e55b10d3bc2ac210e97cb25f7a97f3246cca5f42633022c0b5f9",
+      "action": "run",
+      "content_anchor_xy": [
+        24,
+        58
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "draw_scale": 0.5,
+      "body_reference_height": 495,
+      "feet_source_xy": [
+        1023.0,
+        1125
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "soil_dark",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "bone",
+        "bone_dark",
+        "cloth_dark",
+        "cloth",
+        "cloth_light"
+      ],
+      "seconds": 0.08,
+      "loop": true,
+      "material_ramp_rule": "lateral-boot-materials",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-run-two-leg-transitions-r1.prompt.txt",
       "output": "assets/art_source/player-fhd/directional/frames/run_east_7.png",
-      "prompt_sha256": "4ff6cd802eec9218213f253eeead21e7c22b7ec1c07a477fb23b89625d3ffbda",
-      "output_sha256": "7e5c61a60bcb1503530b2793a88904eece759e75451c2f0dd827bb1c51ab82e7"
+      "prompt_sha256": "5d2d2db77b7f3ef26c93509f66fbb73463e5dbeb21cc0168ceeff9d3d9c42daf",
+      "output_sha256": "b63e02374a59f294577408f8b0c53c354db214e041a39b9040dee076ea24f3f8"
     },
     {
       "id": "run_north_0",
@@ -2464,23 +2464,23 @@
       "id": "run_west_0",
       "animation": "run_west",
       "frame": 0,
-      "source": "assets/art_source/player-fhd/directional/creator-run-right-keys-r1.png",
-      "source_sha256": "d56016c0a05d47d2e9030e22b9e4b3a42d3e7ab59cf3633fedb95da70ffac715",
+      "source": "assets/art_source/player-fhd/directional/creator-run-two-leg-keys-r2.png",
+      "source_sha256": "f90247de67f1d7c20e218b66aa9f74808f31ae44303736ff8efa830a8f3fb801",
       "crop_xywh": [
-        201,
-        162,
-        374,
-        470
+        170,
+        64,
+        417,
+        515
       ],
       "sheet_cell_xywh": [
         0,
         0,
-        627,
-        632
+        665,
+        591
       ],
-      "content_scale": 0.1276595744680851,
+      "content_scale": 0.11650485436893204,
       "source_selection": "connected-farmer-and-particles-v1",
-      "source_selection_sha256": "4a752a285b0666dd1e45ef2b9f169d768ac69553f84bf5b6ceb969904c708092",
+      "source_selection_sha256": "90e80db277846f14c9b1685fd9c399fde3f45a5c2248bdb5b9a5239856b6425d",
       "action": "run",
       "content_anchor_xy": [
         25,
@@ -2495,10 +2495,10 @@
         88
       ],
       "draw_scale": 0.5,
-      "body_reference_height": 470,
+      "body_reference_height": 515,
       "feet_source_xy": [
-        396.0,
-        632
+        385.5,
+        579
       ],
       "alpha_threshold": 128,
       "palette": "tools/palette.py:COLOURS",
@@ -2524,37 +2524,37 @@
       "seconds": 0.08,
       "loop": true,
       "material_ramp_rule": "lateral-boot-materials",
-      "prompt": "implementation/fhd-player/directional/prompts/creator-run-right-keys-r1.prompt.txt",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-run-two-leg-keys-r2.prompt.txt",
       "output": "assets/art_source/player-fhd/directional/frames/run_west_0.png",
-      "prompt_sha256": "184e88483d8dc6f1a2f1f2fdbf5c0cee8899b3ff3aee56546e687cb8585ba08f",
+      "prompt_sha256": "316494d946abfd71790bbaa00c7d6fee41f5cbfbe2d06c91ac399fd03a355ae7",
       "source_canvas_pivot_xy": [
         48,
         88
       ],
       "flip_horizontal": true,
-      "output_sha256": "e5d7f6c7a077d1ee8542bc5fedf53efd92c44aac3f6fc7e21f5f7ab6264fecdf"
+      "output_sha256": "8545d2e3375e7a761b7aef7c2df4fc24f9dcc5e33883678b37e8ebac4d354687"
     },
     {
       "id": "run_west_1",
       "animation": "run_west",
       "frame": 1,
-      "source": "assets/art_source/player-fhd/directional/creator-run-right-transitions-r2.png",
-      "source_sha256": "e67930524c11d0b70f2829c8bf8e62d9fde9f92e184185bea090849e695636e1",
+      "source": "assets/art_source/player-fhd/directional/creator-run-two-leg-transitions-r1.png",
+      "source_sha256": "b16c6060a83ecadfbef2596a1acd6ea12efa32c0c840da2145732f1c4a6ffb25",
       "crop_xywh": [
-        201,
-        171,
-        358,
-        462
+        175,
+        86,
+        404,
+        495
       ],
       "sheet_cell_xywh": [
         0,
         0,
-        627,
-        633
+        665,
+        591
       ],
-      "content_scale": 0.12987012987012986,
+      "content_scale": 0.12121212121212122,
       "source_selection": "connected-farmer-and-particles-v1",
-      "source_selection_sha256": "aba0a4b7d30c789d7c3131c2533d8d943e65b6e66506392cae83641282842d48",
+      "source_selection_sha256": "c6781b81fe2548800f4ec879888e9ca5f2a12cd995e64f2458d498b1615c8429",
       "action": "run",
       "content_anchor_xy": [
         24,
@@ -2569,10 +2569,10 @@
         88
       ],
       "draw_scale": 0.5,
-      "body_reference_height": 462,
+      "body_reference_height": 495,
       "feet_source_xy": [
-        386.0,
-        633
+        377.0,
+        581
       ],
       "alpha_threshold": 128,
       "palette": "tools/palette.py:COLOURS",
@@ -2598,37 +2598,37 @@
       "seconds": 0.08,
       "loop": true,
       "material_ramp_rule": "lateral-boot-materials",
-      "prompt": "implementation/fhd-player/directional/prompts/creator-run-right-transitions-r2.prompt.txt",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-run-two-leg-transitions-r1.prompt.txt",
       "output": "assets/art_source/player-fhd/directional/frames/run_west_1.png",
-      "prompt_sha256": "4ff6cd802eec9218213f253eeead21e7c22b7ec1c07a477fb23b89625d3ffbda",
+      "prompt_sha256": "5d2d2db77b7f3ef26c93509f66fbb73463e5dbeb21cc0168ceeff9d3d9c42daf",
       "source_canvas_pivot_xy": [
         48,
         88
       ],
       "flip_horizontal": true,
-      "output_sha256": "66f5e8b1ced46f65e56633e6a1bd51614497576d69e753ecfc69284cd8d14874"
+      "output_sha256": "ebb296b602c6c5eb5c9dae51775acefd532ec1eddf2299f9f093eacf4db38abc"
     },
     {
       "id": "run_west_2",
       "animation": "run_west",
       "frame": 2,
-      "source": "assets/art_source/player-fhd/directional/creator-run-right-keys-r1.png",
-      "source_sha256": "d56016c0a05d47d2e9030e22b9e4b3a42d3e7ab59cf3633fedb95da70ffac715",
+      "source": "assets/art_source/player-fhd/directional/creator-run-two-leg-keys-r2.png",
+      "source_sha256": "f90247de67f1d7c20e218b66aa9f74808f31ae44303736ff8efa830a8f3fb801",
       "crop_xywh": [
-        828,
-        162,
-        362,
-        450
+        823,
+        64,
+        400,
+        487
       ],
       "sheet_cell_xywh": [
-        627,
+        665,
         0,
-        627,
-        632
+        665,
+        591
       ],
-      "content_scale": 0.1276595744680851,
+      "content_scale": 0.11650485436893204,
       "source_selection": "connected-farmer-and-particles-v1",
-      "source_selection_sha256": "c0e00ce2cd70021f682dd00eb6a5ae38d6bf0f9741bb0ce74824585e74bc9b69",
+      "source_selection_sha256": "88a2817c15309048e67ade753a644e9886914d147094f8e43355496a105539d7",
       "action": "run",
       "content_anchor_xy": [
         23,
@@ -2643,10 +2643,10 @@
         88
       ],
       "draw_scale": 0.5,
-      "body_reference_height": 470,
+      "body_reference_height": 515,
       "feet_source_xy": [
-        1009.5,
-        632
+        1023.0,
+        579
       ],
       "alpha_threshold": 128,
       "palette": "tools/palette.py:COLOURS",
@@ -2672,37 +2672,37 @@
       "seconds": 0.08,
       "loop": true,
       "material_ramp_rule": "lateral-boot-materials",
-      "prompt": "implementation/fhd-player/directional/prompts/creator-run-right-keys-r1.prompt.txt",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-run-two-leg-keys-r2.prompt.txt",
       "output": "assets/art_source/player-fhd/directional/frames/run_west_2.png",
-      "prompt_sha256": "184e88483d8dc6f1a2f1f2fdbf5c0cee8899b3ff3aee56546e687cb8585ba08f",
+      "prompt_sha256": "316494d946abfd71790bbaa00c7d6fee41f5cbfbe2d06c91ac399fd03a355ae7",
       "source_canvas_pivot_xy": [
         48,
         88
       ],
       "flip_horizontal": true,
-      "output_sha256": "b73cdc3ae99f66de004ed00d96dcff77a67aa1be0a8aa9ce09ca564395db7e3b"
+      "output_sha256": "bd84a55a0b0e02d0b5e6ca8e9c0eaadc5d9084af0bd8e6ce57ddb7de01915fcb"
     },
     {
       "id": "run_west_3",
       "animation": "run_west",
       "frame": 3,
-      "source": "assets/art_source/player-fhd/directional/creator-run-right-transitions-r2.png",
-      "source_sha256": "e67930524c11d0b70f2829c8bf8e62d9fde9f92e184185bea090849e695636e1",
+      "source": "assets/art_source/player-fhd/directional/creator-run-two-leg-transitions-r1.png",
+      "source_sha256": "b16c6060a83ecadfbef2596a1acd6ea12efa32c0c840da2145732f1c4a6ffb25",
       "crop_xywh": [
-        782,
-        171,
-        355,
-        439
+        821,
+        86,
+        396,
+        484
       ],
       "sheet_cell_xywh": [
-        627,
+        665,
         0,
-        627,
-        633
+        665,
+        591
       ],
-      "content_scale": 0.12987012987012986,
+      "content_scale": 0.12121212121212122,
       "source_selection": "connected-farmer-and-particles-v1",
-      "source_selection_sha256": "4d420f3fb9202f51d39bdc794f1688d58c3ec17e27ef8b3db10da752bb743047",
+      "source_selection_sha256": "591a3aa40cdbc4163bf4ad329f62d3a5c8dbf04bf9e18657b4cb47124dbc40b0",
       "action": "run",
       "content_anchor_xy": [
         24,
@@ -2717,10 +2717,10 @@
         88
       ],
       "draw_scale": 0.5,
-      "body_reference_height": 462,
+      "body_reference_height": 495,
       "feet_source_xy": [
-        965.5,
-        633
+        1019.5,
+        581
       ],
       "alpha_threshold": 128,
       "palette": "tools/palette.py:COLOURS",
@@ -2746,41 +2746,41 @@
       "seconds": 0.08,
       "loop": true,
       "material_ramp_rule": "lateral-boot-materials",
-      "prompt": "implementation/fhd-player/directional/prompts/creator-run-right-transitions-r2.prompt.txt",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-run-two-leg-transitions-r1.prompt.txt",
       "output": "assets/art_source/player-fhd/directional/frames/run_west_3.png",
-      "prompt_sha256": "4ff6cd802eec9218213f253eeead21e7c22b7ec1c07a477fb23b89625d3ffbda",
+      "prompt_sha256": "5d2d2db77b7f3ef26c93509f66fbb73463e5dbeb21cc0168ceeff9d3d9c42daf",
       "source_canvas_pivot_xy": [
         48,
         88
       ],
       "flip_horizontal": true,
-      "output_sha256": "f349b19da380a0043ea72dadd1130e8dc460478c532a9d229a38aa126020ce69"
+      "output_sha256": "d2b7d3dc57729e09bbcea63b7dcdda48b847df12a0bcc8882a2a436ed5fff670"
     },
     {
       "id": "run_west_4",
       "animation": "run_west",
       "frame": 4,
-      "source": "assets/art_source/player-fhd/directional/creator-run-right-keys-r1.png",
-      "source_sha256": "d56016c0a05d47d2e9030e22b9e4b3a42d3e7ab59cf3633fedb95da70ffac715",
+      "source": "assets/art_source/player-fhd/directional/creator-run-two-leg-keys-r2.png",
+      "source_sha256": "f90247de67f1d7c20e218b66aa9f74808f31ae44303736ff8efa830a8f3fb801",
       "crop_xywh": [
-        199,
-        725,
-        378,
-        466
+        169,
+        620,
+        418,
+        501
       ],
       "sheet_cell_xywh": [
         0,
-        632,
-        627,
-        622
+        591,
+        665,
+        591
       ],
-      "content_scale": 0.1276595744680851,
+      "content_scale": 0.11650485436893204,
       "source_selection": "connected-farmer-and-particles-v1",
-      "source_selection_sha256": "7740c7ee4daff9ee374bfb8948a8a399b43df3f4de74b9a734520a6b73e7a1b2",
+      "source_selection_sha256": "2fc72e63478e02366c61734208f01fbe163a28503760d847fd287a22f594d94a",
       "action": "run",
       "content_anchor_xy": [
         25,
-        59
+        58
       ],
       "canvas_wh": [
         96,
@@ -2791,10 +2791,10 @@
         88
       ],
       "draw_scale": 0.5,
-      "body_reference_height": 470,
+      "body_reference_height": 515,
       "feet_source_xy": [
-        397.5,
-        1191
+        387.5,
+        1121
       ],
       "alpha_threshold": 128,
       "palette": "tools/palette.py:COLOURS",
@@ -2820,37 +2820,37 @@
       "seconds": 0.08,
       "loop": true,
       "material_ramp_rule": "lateral-boot-materials",
-      "prompt": "implementation/fhd-player/directional/prompts/creator-run-right-keys-r1.prompt.txt",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-run-two-leg-keys-r2.prompt.txt",
       "output": "assets/art_source/player-fhd/directional/frames/run_west_4.png",
-      "prompt_sha256": "184e88483d8dc6f1a2f1f2fdbf5c0cee8899b3ff3aee56546e687cb8585ba08f",
+      "prompt_sha256": "316494d946abfd71790bbaa00c7d6fee41f5cbfbe2d06c91ac399fd03a355ae7",
       "source_canvas_pivot_xy": [
         48,
         88
       ],
       "flip_horizontal": true,
-      "output_sha256": "70bc1ea108ca6766646fe34fbec9a407f6876be85d192f878222e6babcc486f8"
+      "output_sha256": "358bf212baa093d3c30478fdab29a8327dc54c100c877aa474c7f77fdd1dc290"
     },
     {
       "id": "run_west_5",
       "animation": "run_west",
       "frame": 5,
-      "source": "assets/art_source/player-fhd/directional/creator-run-right-transitions-r2.png",
-      "source_sha256": "e67930524c11d0b70f2829c8bf8e62d9fde9f92e184185bea090849e695636e1",
+      "source": "assets/art_source/player-fhd/directional/creator-run-two-leg-transitions-r1.png",
+      "source_sha256": "b16c6060a83ecadfbef2596a1acd6ea12efa32c0c840da2145732f1c4a6ffb25",
       "crop_xywh": [
-        210,
-        726,
-        362,
-        447
+        177,
+        644,
+        402,
+        481
       ],
       "sheet_cell_xywh": [
         0,
-        633,
-        627,
-        621
+        591,
+        665,
+        591
       ],
-      "content_scale": 0.12987012987012986,
+      "content_scale": 0.12121212121212122,
       "source_selection": "connected-farmer-and-particles-v1",
-      "source_selection_sha256": "26369befb4c63771127f7be1d388313368fdd693e345b5cf8daeaf26a2f14df1",
+      "source_selection_sha256": "8deadb4a1ee780d840a8f1ec3615bcfadff614398483ebb5f2f6b617bf8b475b",
       "action": "run",
       "content_anchor_xy": [
         24,
@@ -2865,10 +2865,10 @@
         88
       ],
       "draw_scale": 0.5,
-      "body_reference_height": 462,
+      "body_reference_height": 495,
       "feet_source_xy": [
-        398.0,
-        1173
+        378.0,
+        1125
       ],
       "alpha_threshold": 128,
       "palette": "tools/palette.py:COLOURS",
@@ -2894,114 +2894,40 @@
       "seconds": 0.08,
       "loop": true,
       "material_ramp_rule": "lateral-boot-materials",
-      "prompt": "implementation/fhd-player/directional/prompts/creator-run-right-transitions-r2.prompt.txt",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-run-two-leg-transitions-r1.prompt.txt",
       "output": "assets/art_source/player-fhd/directional/frames/run_west_5.png",
-      "prompt_sha256": "4ff6cd802eec9218213f253eeead21e7c22b7ec1c07a477fb23b89625d3ffbda",
+      "prompt_sha256": "5d2d2db77b7f3ef26c93509f66fbb73463e5dbeb21cc0168ceeff9d3d9c42daf",
       "source_canvas_pivot_xy": [
         48,
         88
       ],
       "flip_horizontal": true,
-      "output_sha256": "87b7d19e43a3333ce594d94c07e744633391805b68247f21872584c9c4c4cd1c"
+      "output_sha256": "dc72d1befc0b3ccf040b26ea167e1a86f2c68c1b111c0c7bb49ea21810c79fd2"
     },
     {
       "id": "run_west_6",
       "animation": "run_west",
       "frame": 6,
-      "source": "assets/art_source/player-fhd/directional/creator-run-right-keys-r1.png",
-      "source_sha256": "d56016c0a05d47d2e9030e22b9e4b3a42d3e7ab59cf3633fedb95da70ffac715",
+      "source": "assets/art_source/player-fhd/directional/creator-run-two-leg-keys-r2.png",
+      "source_sha256": "f90247de67f1d7c20e218b66aa9f74808f31ae44303736ff8efa830a8f3fb801",
       "crop_xywh": [
-        837,
-        725,
-        358,
-        428
+        825,
+        620,
+        397,
+        460
       ],
       "sheet_cell_xywh": [
-        627,
-        632,
-        627,
-        622
+        665,
+        591,
+        665,
+        591
       ],
-      "content_scale": 0.1276595744680851,
+      "content_scale": 0.11650485436893204,
       "source_selection": "connected-farmer-and-particles-v1",
-      "source_selection_sha256": "a9557d1a7638fde9c6b534aa6201eddd2877d80e3eda90d68bf37517457ffe88",
+      "source_selection_sha256": "6e0a3db441233ebc2fee9c72b701a940f44093d3c47b710f7164c1f9e7a250d9",
       "action": "run",
       "content_anchor_xy": [
         23,
-        59
-      ],
-      "canvas_wh": [
-        96,
-        96
-      ],
-      "pivot_xy": [
-        47,
-        88
-      ],
-      "draw_scale": 0.5,
-      "body_reference_height": 470,
-      "feet_source_xy": [
-        1015.0,
-        1191
-      ],
-      "alpha_threshold": 128,
-      "palette": "tools/palette.py:COLOURS",
-      "palette_keys": [
-        "ink",
-        "ink_soft",
-        "soil_dark",
-        "wood_dark",
-        "wood",
-        "wood_light",
-        "gold_dark",
-        "gold",
-        "gold_light",
-        "skin_dark",
-        "skin",
-        "skin_light",
-        "bone",
-        "bone_dark",
-        "cloth_dark",
-        "cloth",
-        "cloth_light"
-      ],
-      "seconds": 0.08,
-      "loop": true,
-      "material_ramp_rule": "lateral-boot-materials",
-      "prompt": "implementation/fhd-player/directional/prompts/creator-run-right-keys-r1.prompt.txt",
-      "output": "assets/art_source/player-fhd/directional/frames/run_west_6.png",
-      "prompt_sha256": "184e88483d8dc6f1a2f1f2fdbf5c0cee8899b3ff3aee56546e687cb8585ba08f",
-      "source_canvas_pivot_xy": [
-        48,
-        88
-      ],
-      "flip_horizontal": true,
-      "output_sha256": "c38166b7e1c102eac5afcc6d5b307e4f9708bf19a675e6edbd475e579e8e76b9"
-    },
-    {
-      "id": "run_west_7",
-      "animation": "run_west",
-      "frame": 7,
-      "source": "assets/art_source/player-fhd/directional/creator-run-right-transitions-r2.png",
-      "source_sha256": "e67930524c11d0b70f2829c8bf8e62d9fde9f92e184185bea090849e695636e1",
-      "crop_xywh": [
-        796,
-        726,
-        370,
-        432
-      ],
-      "sheet_cell_xywh": [
-        627,
-        633,
-        627,
-        621
-      ],
-      "content_scale": 0.12987012987012986,
-      "source_selection": "connected-farmer-and-particles-v1",
-      "source_selection_sha256": "4385a8c2f9ea0d8ea21e943e40d2def74536622fd2d2b75fb8798c46b89c5c1a",
-      "action": "run",
-      "content_anchor_xy": [
-        25,
         58
       ],
       "canvas_wh": [
@@ -3013,10 +2939,10 @@
         88
       ],
       "draw_scale": 0.5,
-      "body_reference_height": 462,
+      "body_reference_height": 515,
       "feet_source_xy": [
-        989.5,
-        1173
+        1023.0,
+        1121
       ],
       "alpha_threshold": 128,
       "palette": "tools/palette.py:COLOURS",
@@ -3042,15 +2968,89 @@
       "seconds": 0.08,
       "loop": true,
       "material_ramp_rule": "lateral-boot-materials",
-      "prompt": "implementation/fhd-player/directional/prompts/creator-run-right-transitions-r2.prompt.txt",
-      "output": "assets/art_source/player-fhd/directional/frames/run_west_7.png",
-      "prompt_sha256": "4ff6cd802eec9218213f253eeead21e7c22b7ec1c07a477fb23b89625d3ffbda",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-run-two-leg-keys-r2.prompt.txt",
+      "output": "assets/art_source/player-fhd/directional/frames/run_west_6.png",
+      "prompt_sha256": "316494d946abfd71790bbaa00c7d6fee41f5cbfbe2d06c91ac399fd03a355ae7",
       "source_canvas_pivot_xy": [
         48,
         88
       ],
       "flip_horizontal": true,
-      "output_sha256": "67bfe8a336c0335f4b0d2c790fbdd379a9d249180a7a5f40c19484dea99478b6"
+      "output_sha256": "b6b10adcc1fd3b8d947ad05b295fe90a06d38c668c77b8f76b7f7b31bfbed364"
+    },
+    {
+      "id": "run_west_7",
+      "animation": "run_west",
+      "frame": 7,
+      "source": "assets/art_source/player-fhd/directional/creator-run-two-leg-transitions-r1.png",
+      "source_sha256": "b16c6060a83ecadfbef2596a1acd6ea12efa32c0c840da2145732f1c4a6ffb25",
+      "crop_xywh": [
+        822,
+        643,
+        401,
+        458
+      ],
+      "sheet_cell_xywh": [
+        665,
+        591,
+        665,
+        591
+      ],
+      "content_scale": 0.12121212121212122,
+      "source_selection": "connected-farmer-and-particles-v1",
+      "source_selection_sha256": "7ad3bfb3b832e55b10d3bc2ac210e97cb25f7a97f3246cca5f42633022c0b5f9",
+      "action": "run",
+      "content_anchor_xy": [
+        24,
+        58
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        47,
+        88
+      ],
+      "draw_scale": 0.5,
+      "body_reference_height": 495,
+      "feet_source_xy": [
+        1023.0,
+        1125
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "soil_dark",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "bone",
+        "bone_dark",
+        "cloth_dark",
+        "cloth",
+        "cloth_light"
+      ],
+      "seconds": 0.08,
+      "loop": true,
+      "material_ramp_rule": "lateral-boot-materials",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-run-two-leg-transitions-r1.prompt.txt",
+      "output": "assets/art_source/player-fhd/directional/frames/run_west_7.png",
+      "prompt_sha256": "5d2d2db77b7f3ef26c93509f66fbb73463e5dbeb21cc0168ceeff9d3d9c42daf",
+      "source_canvas_pivot_xy": [
+        48,
+        88
+      ],
+      "flip_horizontal": true,
+      "output_sha256": "7a34b142653ed561ac3487c8112f7f614b8d0b5f8ba0902350984c0d088fa723"
     },
     {
       "id": "walk_east_0",

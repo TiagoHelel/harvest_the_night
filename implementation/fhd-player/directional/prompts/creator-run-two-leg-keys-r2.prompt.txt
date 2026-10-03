@@ -1,0 +1,15 @@
+Edit the supplied four-pose pixel-art RUN sheet. Keep the approved farmer identity, hat, right-facing white eye, torso, white shirt, blue overalls and transparent background. Preserve a 2x2 layout of FOUR complete farmers. This is a precise lower-body animation repair.
+
+The present top-right and bottom-right frames incorrectly repeat a full extended stride. Replace the LEGS ONLY in these two airborne passing poses with strongly bent KNEES and FEET PASSING BELOW THE HIPS, not feet stretched far left and right.
+
+Identify the two anatomical legs using continuous pants AND boot color: NEAR leg = bright blue thigh + medium/light brown boot; FAR leg = dark navy thigh + deep DARK brown boot. Maintain this same ownership even when one leg crosses in front of the other. Make far boot clearly darker, with no bright brown patch that could be mistaken for the near boot.
+
+TOP LEFT: retain its extended stride: NEAR bright knee/boot ahead RIGHT low on ground, FAR dark knee/boot behind LEFT high. ONLY make the rear far boot deep dark brown.
+
+TOP RIGHT: redraw to PASSING POSE. NEAR bright thigh points backward LEFT; near knee bent 90 degrees with medium brown heel raised HIGH behind LEFT, almost level with the hip. FAR dark thigh points forward RIGHT with knee raised ahead, but far LOWER LEG folds BACK toward LEFT so far dark boot sits UNDER THE HIP, not sticking way ahead. Both soles off ground. This must visibly shorten the entire lower-body width by a third compared with the extended top-left pose. A bent knee is not an extended diagonal trouser leg. Near arm forward, far arm back.
+
+BOTTOM LEFT: opposite ground-contact stride. NEAR BRIGHT trouser leg folds backward LEFT, with its medium brown boot HIGH and LEFT behind the hips, near heel nearly up to the buttocks. FAR DARK trouser leg extends ahead RIGHT toward ground with the very DARK BROWN boot LOW and FLAT, toe to RIGHT. This foreground bright boot at LEFT is the SAME physical boot that is low ahead RIGHT in top-left. Preserve two connected thighs emerging from their own hips; do not just recolor the top-left pose. Near arm forward right, far arm back left.
+
+BOTTOM RIGHT: opposite PASSING POSE. NEAR BRIGHT thigh and knee raised ahead RIGHT, but its medium brown calf folds BACK towards LEFT so medium brown boot sits UNDER THE HIP. FAR DARK thigh/knee backward LEFT, far very dark heel lifted HIGH behind LEFT, almost level with hips. Both off ground. Width narrower than bottom-left. Opposite legs from top-right. Near arm backward left, far arm forward right.
+
+No additional legs or feet, no tools, labels, shadow, ground or checkerboard. Pixel art, same compact proportions, no added texture. KEEP the head facing RIGHT. Transparent alpha. Different actual knee/ankle positions between all four frames, not changes of leather color alone.

@@ -252,7 +252,7 @@
     },
     {
       "id": "run_east_keys",
-      "source_id": "creator-run-right-keys-r1",
+      "source_id": "creator-run-two-leg-keys-r2",
       "action": "run",
       "direction": "east",
       "animation": "run_east",
@@ -270,7 +270,7 @@
     },
     {
       "id": "run_east_transitions",
-      "source_id": "creator-run-right-transitions-r2",
+      "source_id": "creator-run-two-leg-transitions-r1",
       "action": "run",
       "direction": "east",
       "animation": "run_east",
@@ -288,7 +288,7 @@
     },
     {
       "id": "run_west_keys",
-      "source_id": "creator-run-right-keys-r1",
+      "source_id": "creator-run-two-leg-keys-r2",
       "action": "run",
       "direction": "west",
       "animation": "run_west",
@@ -306,7 +306,7 @@
     },
     {
       "id": "run_west_transitions",
-      "source_id": "creator-run-right-transitions-r2",
+      "source_id": "creator-run-two-leg-transitions-r1",
       "action": "run",
       "direction": "west",
       "animation": "run_west",

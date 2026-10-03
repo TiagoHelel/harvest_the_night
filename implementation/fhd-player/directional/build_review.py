@@ -235,7 +235,7 @@ def recipes(partial=False):
                          "alpha_threshold": 128, "palette": "tools/palette.py:COLOURS",
                          "palette_keys": material_keys, "seconds": job['seconds'], "loop": True,
                          "material_ramp_rule":"saturated-red-prop" if job['action']=='collect' else
-                             "lateral-boot-materials" if source_id.startswith(('creator-walk-right-transitions', 'creator-run-right-')) else "action-subset",
+                             "lateral-boot-materials" if source_id.startswith(('creator-walk-right-transitions', 'creator-run-right-', 'creator-run-two-leg-')) else "action-subset",
                          "prompt": 'implementation/fhd-player/directional/prompts/' + source_id + '.prompt.txt',
                          "output": (OUT / (name + '_' + str(m['frame']) + '.png')).relative_to(ROOT).as_posix()}
                 entry['prompt_sha256'] = import_art.sha((ROOT / entry['prompt']).read_bytes())
@@ -293,6 +293,32 @@ def render_selected(entry):
     if entry.get('flip_horizontal'):
         canvas = canvas.transpose(Image.Transpose.FLIP_LEFT_RIGHT)
     return canvas
+
+
+def assert_lateral_knee_exchange(frames):
+    """Foreground trouser movement must cross stride halves, independent of boots."""
+    result = {}
+    for direction in ('east', 'west'):
+        points = {}
+        for entry in frames:
+            if entry['animation'] != 'run_' + direction or entry['frame'] not in (0,2,4,6):
+                continue
+            pixels = np.array(Image.open(ROOT / entry['output']).convert('RGBA'))
+            yy, xx = np.indices(pixels.shape[:2])
+            near = ((pixels[:,:,:3] == COLOURS['cloth']).all(2)
+                    | (pixels[:,:,:3] == COLOURS['cloth_light']).all(2))
+            near &= (yy >= 70) & (yy <= 80) & (pixels[:,:,3] > 0)
+            assert near.any(), (direction, entry['frame'], 'missing foreground trouser leg')
+            points[entry['frame']] = float(xx[near].mean())
+        if not points:
+            continue
+        sign = 1 if direction == 'east' else -1
+        contact = sign * (points[0] - points[4])
+        passing = sign * (points[6] - points[2])
+        assert contact >= 4 and passing >= 5, (direction, 'foreground knee never exchanges position', points)
+        result[direction] = {'foreground_knee_x':points,
+                             'contact_exchange_px':contact,'passing_exchange_px':passing}
+    return result
 
 
 def build(check=False, partial=False):
@@ -361,6 +387,7 @@ def build(check=False, partial=False):
             heights = [Image.open(ROOT/e['output']).getbbox()[3]-Image.open(ROOT/e['output']).getbbox()[1]
                        for e in group]
             assert max(heights) <= 61, (name,'full native silhouette scale drift',heights)
+    assert_lateral_knee_exchange(entries)
     if not partial:
         assert len(entries) == 284 and len(groups) == 64, (len(entries),len(groups))
     manifest = {"version":1,"integration":"preview only; awaiting user validation",
@@ -456,7 +483,7 @@ def gallery():
 <nav id="choices"></nav><h2 id="title"></h2><div class="preview"><img id="animation" width="1040" height="288" alt="Animações nas quatro direções"></div>
 <div class="tools"><button id="size" aria-pressed="true">Tamanho previsto em FHD: 120 px de altura</button><a id="download" class="download" download>Baixar este GIF</a><small id="details"></small></div>
 <p>Os pixels são ampliados exatamente em 2×, sem suavização. Você pode alternar para a escala nativa de 60 px. Em telas menores, role a prévia para os lados para conservar o tamanho dos pixels.</p>
-<div id="contact"></div><footer><a class="download" href="review-stills/runtime-horizontal.gif" download>Ver GIF capturado no jogo</a> <a class="download" href="todas-animacoes-horizontal.gif" download>Baixar GIF geral</a><p>O GIF geral percorre as 16 categorias. Os GIFs individuais repetem a atividade escolhida. Fontes, prompts e receitas estão guardados nesta pasta e em assets/art_source/player-fhd/directional.</p></footer></main>
+<div id="contact"></div><footer><a class="download" href="review-stills/run-two-leg-comparison.gif" download>Comparar corrida: antes e depois</a> <a class="download" href="review-stills/runtime-horizontal.gif" download>Ver GIF capturado no jogo</a> <a class="download" href="todas-animacoes-horizontal.gif" download>Baixar GIF geral</a><p>O GIF geral percorre as 16 categorias. Os GIFs individuais repetem a atividade escolhida. Fontes, prompts e receitas estão guardados nesta pasta e em assets/art_source/player-fhd/directional.</p></footer></main>
 <script>const groups=__DATA__;const names={south:'Frente',west:'Esquerda',north:'Costas',east:'Direita'};const choices=document.querySelector('#choices'),image=document.querySelector('#animation');function select(g){document.querySelector('#title').textContent=g.label;image.src='gifs/'+g.action+'-horizontal.gif?v='+g.version;document.querySelector('#download').href=image.src;document.querySelector('#details').textContent=g.count+' quadros por direção · 4 direções';document.querySelectorAll('nav button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.action===g.action)));document.querySelector('#contact').replaceChildren(...g.columns.map(c=>{const a=document.createElement('a');a.href='contacts/'+g.action+'_'+c.direction+'.png?v='+g.version;a.textContent='Ver quadros: '+names[c.direction];a.target='_blank';return a}));}for(const g of groups){const b=document.createElement('button');b.textContent=g.label;b.dataset.action=g.action;b.setAttribute('aria-pressed','false');b.onclick=()=>select(g);choices.append(b);}document.querySelector('#size').onclick=function(){const large=this.getAttribute('aria-pressed')==='true';this.setAttribute('aria-pressed',String(!large));image.width=large?520:1040;image.height=large?144:288;this.textContent=large?'Escala nativa: 60 px de altura':'Tamanho previsto em FHD: 120 px de altura';};select(groups[0]);</script></html>'''
     (HERE/'index.html').write_bytes(page.replace('__DATA__',data).encode('utf-8'))
 
