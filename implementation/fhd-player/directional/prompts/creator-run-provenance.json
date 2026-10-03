@@ -1,0 +1,29 @@
+{
+  "repository": "C:/Users/Helel/Documents/repos/sprite-sheet-creator",
+  "file": "C:\\Users\\Helel\\Documents\\repos\\sprite-sheet-creator\\app\\lib\\prompts.ts",
+  "source_sha256": "5bdeda5f9d40b0becfd4bbacac9728225211218fa4d2b26574e42de39a74f1f8",
+  "export": "buildDirectionalPrompt",
+  "action": "run",
+  "direction": "right",
+  "references": [
+    {
+      "kind": "rotation",
+      "label": "Facing Right"
+    },
+    {
+      "kind": "character",
+      "label": "Character"
+    },
+    {
+      "kind": "action",
+      "label": "Run Down"
+    }
+  ],
+  "adaptations": [
+    "Preserve approved compact pixel style",
+    "Four keys plus four intermediate poses",
+    "Opposite near/far legs and arms",
+    "Explicit ground contact versus flight"
+  ],
+  "left_direction": "Reflect complete right-facing poses and ground pivot"
+}

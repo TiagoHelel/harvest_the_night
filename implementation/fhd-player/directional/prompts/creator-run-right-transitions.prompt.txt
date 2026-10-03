@@ -1,0 +1,31 @@
+Create a 4-frame pixel art RUN TRANSITIONS animation sprite sheet of this character, in a top-down RPG perspective (3/4 overhead view, like a classic top-down RPG).
+
+Attached images:
+1) Facing Right: the character already rotated to face RIGHT. Use EXACTLY this view and facing in every frame.
+2) Character: the original character design. Match its outfit, colors, proportions, weapon and details exactly.
+
+The character FACES RIGHT (east). We see their side profile: face, chest and front foot point toward the RIGHT edge of the image; their back is on the LEFT side.
+
+Arrange the 4 frames in a 2x2 grid on a transparent background (no background).
+
+Top row (frames 1-2):
+Frame 1 (top-left): Frame 1: compression/push-off on the near bright leg below the body; dark far heel lifts behind LEFT as its knee starts traveling forward
+Frame 2 (top-right): Frame 3: descending flight: dark far leg extends ahead RIGHT preparing contact, near bright leg trails behind LEFT; both feet clear ground
+
+Bottom row (frames 3-4):
+Frame 3 (bottom-left): Frame 5: opposite compression/push-off on the dark far leg below the body; bright near heel lifts behind LEFT as its knee starts traveling forward
+Frame 4 (bottom-right): Frame 7: opposite descending flight: bright near leg extends ahead RIGHT preparing contact, dark far leg trails behind LEFT; both feet clear ground
+
+Only four distinct intermediate poses, not the four anchors. Full playback order is key0, transition1, key2, transition3, key4, transition5, key6, transition7. Lean forward gently, short proportional limbs, bent pumping arms. Near leg is brighter brown, far leg darker brown throughout.
+
+CRITICAL: All 4 frames must show the character facing the SAME direction. Only the pose changes between frames.
+
+Match the exact approved compact pixel-art farmer: same short proportions, straw hat, blue overalls, brown boots and open white eye. Design for 60 useful native pixels of body height. Simple square pixels, flat readable shading, no blur or antialiasing. Same character design, size and proportions in all frames.
+
+BACKGROUND: NONE. Output a PNG with a REAL transparent background (alpha channel). Everything that is not the subject must be fully transparent. Do NOT draw a checkerboard pattern to represent transparency, and do NOT add any backdrop, color fill, floor, ground shadow, scenery, or vignette.
+
+IMPORTANT: Do NOT render any text, letters, words, numbers, labels, watermarks, or captions anywhere in the image. Do NOT draw any grid lines, borders, frame dividers, or separator lines between frames — leave the spacing between poses fully transparent. Keep each pose centered inside its own quarter of the image.
+
+Image format: SQUARE (1:1).
+
+Additional image 3 contains the four running anchors in reading order (frames 0,2,4,6). Draw the four intermediate poses that connect them. Match exact body scale, face, hat, torso lean, palette and right-facing camera. One support foot at frames 1 and 5; NO ground contact at frames 3 and 7. Both knees and arms exchange their roles between stride halves. Foreground leather is medium brown, background leather dark brown; no yellow boots. Same ground registration in all cells, preserve flight clearance, generous transparent gutters, no labels, shadows, lines or background.

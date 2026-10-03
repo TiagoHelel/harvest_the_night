@@ -235,7 +235,7 @@ def recipes(partial=False):
                          "alpha_threshold": 128, "palette": "tools/palette.py:COLOURS",
                          "palette_keys": material_keys, "seconds": job['seconds'], "loop": True,
                          "material_ramp_rule":"saturated-red-prop" if job['action']=='collect' else
-                             "lateral-boot-materials" if source_id.startswith('creator-walk-right-transitions') else "action-subset",
+                             "lateral-boot-materials" if source_id.startswith(('creator-walk-right-transitions', 'creator-run-right-')) else "action-subset",
                          "prompt": 'implementation/fhd-player/directional/prompts/' + source_id + '.prompt.txt',
                          "output": (OUT / (name + '_' + str(m['frame']) + '.png')).relative_to(ROOT).as_posix()}
                 entry['prompt_sha256'] = import_art.sha((ROOT / entry['prompt']).read_bytes())
@@ -322,13 +322,16 @@ def build(check=False, partial=False):
         if name.startswith(('walk_','run_')):
             assert len({import_art.sha(Image.open(ROOT/e['output']).crop((18,66,78,94)).tobytes())
                         for e in group}) == 8, (name,'duplicate leg phases')
-        if name in ('walk_west', 'walk_east'):
+        if name in ('walk_west', 'walk_east', 'run_west', 'run_east'):
             # Regression: the two contact halves must exchange which boot leads.
             # Eight distinct PNGs alone previously passed with the same leg ahead.
             direction_sign = -1 if name.endswith('west') else 1
-            for phase, forward_sign in ((0, direction_sign), (1, direction_sign),
-                                        (3, -direction_sign), (4, -direction_sign),
-                                        (5, -direction_sign), (7, direction_sign)):
+            phases = [(0, direction_sign), (1, direction_sign),
+                      (3, -direction_sign), (4, -direction_sign),
+                      (5, -direction_sign), (7, direction_sign)]
+            if name.startswith('run_'):
+                phases += [(2, -direction_sign), (6, direction_sign)]
+            for phase, forward_sign in phases:
                 entry = next(e for e in group if e['frame'] == phase)
                 pixels = np.array(Image.open(ROOT / entry['output']))
                 yy, xx = np.indices(pixels.shape[:2])
@@ -344,6 +347,14 @@ def build(check=False, partial=False):
                 luminance = pixels[:, :, :3].astype(np.int32).sum(2)
                 separation = float(luminance[right].mean() - luminance[left].mean())
                 assert separation * forward_sign > 0, (name, phase, 'same leg leads both contact halves')
+            if name.startswith('run_'):
+                for entry in group:
+                    bottom = Image.open(ROOT / entry['output']).getbbox()[3]
+                    ground = entry['pivot_xy'][1]
+                    if entry['frame'] in (2,3,6,7):
+                        assert bottom < ground, (name, entry['frame'], 'airborne pose touches ground')
+                    else:
+                        assert bottom == ground, (name, entry['frame'], 'support pose floats')
         # Inspect actual full silhouette too: disconnected hat colors must not
         # create a larger back-view farmer despite a valid numeric recipe.
         if name.startswith(('idle_','walk_','run_')):

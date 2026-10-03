@@ -21,7 +21,7 @@ ImageGen; subsequent activities also reference the generated cardinal idle views
 | Chop, mine, till, plant, harvest, water, fish, reel, collect, craft, trade, repair, carry | 4 each | 4 | 208 |
 | Total | | 64 animations | 284 |
 
-Most views were generated separately. The revised lateral walk follows the
+Most views were generated separately. The revised lateral walk and run follow the
 creator repository recommendation: generate right and reflect the complete
 source-owned poses to obtain left, with the reflected foot pivot retained. Walking/running have eight different native
 lower-body drawings each. Work strips use four action key poses, not repeated
@@ -44,7 +44,8 @@ The casting preview deliberately holds the final waiting pose before recasting.
 
 The renderer presents standing bodies at 120 physical pixels (60 source-native
 pixels enlarged exactly twice), matching the intended FHD actor appearance.
-Locomotion uses 96x96 native canvases with (48,88) ground registration. Work uses
+Locomotion uses 96x96 native canvases with (48,88) ground registration, or
+(47,88) for the reflected west walk/run. Work uses
 128x128 / (64,108) to preserve complete raised tools and contact below the boots.
 The body scale stays 60 pixels; extra transparent canvas is tool clearance.
 Future runtime promotion must unify padding/metadata before swapping the family.
@@ -132,6 +133,35 @@ material separation; actual renderer playback still requires visual review.
 HTML versions image URLs by GIF content hash so revised previews avoid stale
 browser images. Full Godot captures, eight consecutive phases and a browser
 screenshot remain in `review-stills/`.
+
+### Lateral running review follow-up
+
+The user requested the same repair for left/right running. The reusable
+`import_creator_run_prompts.cjs` imports the actual creator repository's `run`
+action and directional prompt builder. Exact base/submitted prompts, source
+hash and reference roles are in `prompts/creator-run-*`.
+
+Final sources are `creator-run-right-keys-r1.png` and
+`creator-run-right-transitions-r2.png`. Four anchors occupy frames 0,2,4,6;
+four intermediates occupy frames 1,3,5,7. Foreground/background legs exchange
+support, arms pump in opposite directions between stride halves, and both boots
+clear the ground during flight phases 2,3,6,7. The contact/support phases
+0,1,4,5 remain on the shared ground. Left reflects the complete right drawings.
+The first anchors repeated their arm swing; the first intermediates repeated
+extended contact and their revision hid the second leg in opposite support.
+Focused edits correct those errors without painting native sprites.
+
+Only sixteen lateral run PNGs changed in this follow-up. The other 268 native
+frames, including idle, all walking and front/back running, remain byte-identical
+to commit `d5a27f7d`. `check_lateral_run.py` and `run-gait-regression.json` retain
+the old same-leg negative control and final measurements. All sixteen new
+material/contact/flight measurements pass, while the previous cycle fails the
+opposite-leg check. Material checks do not establish subjective motion quality.
+
+Real Godot captures refresh `gifs/run-horizontal.gif` (1040x288, 7.68s at 25fps)
+and the running section of the 61.44s overview. Native sheets, eight consecutive
+actual renderer phases and the browser proof are retained. Run remains pending
+user validation in `user-review.json`; runtime actor bindings are unchanged.
 
 This delivery is a candidate review, not automatic user approval. These PNGs
 have not replaced `sprites/actors/` or the registered runtime player family.

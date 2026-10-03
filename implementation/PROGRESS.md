@@ -10477,3 +10477,55 @@ review output and passed final source/gait checks plus real renderer capture and
 GIF encoding. Completed game/sprite queues remain unchanged. Runtime bindings,
 core simulation and pre-existing broader FHD changes are preserved. Walking
 still awaits user visual validation; no push or runtime integration was made.
+
+
+## 2026-10-02 — Follow-up: lateral running from creator prompts
+
+The user requested replacements for left/right running after the lateral walking
+review. This changes preview art only. Idle approval, all walking and front/back
+running remain intact; runtime player bindings have not been promoted.
+
+The actual sprite-sheet-creator run action and buildDirectionalPrompt export are
+imported through import_creator_run_prompts.cjs. The external repository is read
+without modification. Exact base/submitted prompts, references, original output
+paths and builder provenance are retained in directional/prompts/creator-run-*.
+The builder source SHA-256 remains
+5bdeda5f9d40b0becfd4bbacac9728225211218fa4d2b26574e42de39a74f1f8.
+Built-in ImageGen produced the sources; no native sprite was painted by hand.
+
+Final raw sources are assets/art_source/player-fhd/directional/
+creator-run-right-keys-r1.png and creator-run-right-transitions-r2.png. Four
+anchors occupy phases 0,2,4,6 and four intermediates occupy phases 1,3,5,7.
+Focused edits corrected repeated arm swing, extended contact substituted for
+compressed support, and a hidden recovery leg in opposite support. Both legs
+and the near/far arm roles now alternate between stride halves. Left reflects
+the complete right drawing and pivot: west (47,88), east (48,88), 96x96 canvas.
+The existing brown material ramp preserves leather rather than mapping it onto
+hat gold. Only sixteen lateral running PNGs changed; the other 268 native
+frames are byte-identical to d5a27f7d, including idle and all walking.
+
+Source checks pass for 284 frames, 64 animations, exact hashes, binary alpha,
+complete silhouettes and eight unique lower-body locomotion phases. The new
+run check guards boot material alternation and planted/airborne registration
+for all sixteen lateral poses. Contact/support phases 0,1,4,5 stay on the shared
+ground; flight phases 2,3,6,7 clear it by 2-4 native pixels. A negative control
+rejects the old same-leg running family. Reproducible evidence is retained in
+check_lateral_run.py, run-gait-regression.json and run-gait-check.log. These
+checks target the earlier defects and do not imply user visual approval.
+
+Godot recaptured 192 original walking-speed-independent RUN frames at 25fps,
+switching to the next pose every two frames. The 1040x288 horizontal run GIF
+loops for 7.68s at the intended FHD 120px body height; the 61.44s combined
+overview also contains the revised run. Eight consecutive actual renderer
+poses, native contact sheets and the browser proof run-gallery.png were opened.
+The same local index.html was reloaded with RUN selected and content-hashed GIF
+URLs. All other individual GIFs remain unchanged.
+
+Full working-tree verify/export passed 54 checks, zero skips/failures, in 507s
+(over the 300s soft target). It parsed 124 scripts and passed 7,581 core asserts
+and 996 input cases. Sim hash 1270427719 and data hash 8148086 remain unchanged.
+Complete evidence is in implementation/fhd-player/directional/run-verify.log.
+
+The sprite queue check remains PASS for 20 completed prompts. Runtime bindings,
+core simulation and unrelated broader FHD work remain unchanged. User review
+metadata records run as pending. No push or runtime integration was made.

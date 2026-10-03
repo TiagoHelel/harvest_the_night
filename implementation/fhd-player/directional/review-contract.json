@@ -2777,558 +2777,6 @@
       "output_sha256": "2c3a1eb4adc9cd8e630e682f4f56bf18e4b5d4a251f3be5465745e673ba1eb7d"
     },
     {
-      "id": "run_west_0",
-      "animation": "run_west",
-      "frame": 0,
-      "source": "assets/art_source/player-fhd/directional/run_west.png",
-      "source_sha256": "9c2b570f34fd145eff09354ee0c213b225a05065a96a2630b0daaf2f168c3248",
-      "crop_xywh": [
-        47,
-        93,
-        279,
-        383
-      ],
-      "sheet_cell_xywh": [
-        0,
-        0,
-        384,
-        512
-      ],
-      "content_scale": 0.15424164524421594,
-      "source_selection": "connected-farmer-and-particles-v1",
-      "source_selection_sha256": "dc1923dc500fd4f41b85416580acc4b823d596e83afce33764735304448ac8e1",
-      "action": "run",
-      "content_anchor_xy": [
-        21,
-        59
-      ],
-      "canvas_wh": [
-        96,
-        96
-      ],
-      "pivot_xy": [
-        48,
-        88
-      ],
-      "draw_scale": 0.5,
-      "body_reference_height": 389,
-      "feet_source_xy": [
-        185.0,
-        477
-      ],
-      "alpha_threshold": 128,
-      "palette": "tools/palette.py:COLOURS",
-      "palette_keys": [
-        "ink",
-        "ink_soft",
-        "soil_dark",
-        "wood_dark",
-        "wood",
-        "wood_light",
-        "gold_dark",
-        "gold",
-        "gold_light",
-        "skin_dark",
-        "skin",
-        "skin_light",
-        "bone",
-        "bone_dark",
-        "cloth_dark",
-        "cloth",
-        "cloth_light"
-      ],
-      "seconds": 0.08,
-      "loop": true,
-      "material_ramp_rule": "action-subset",
-      "prompt": "implementation/fhd-player/directional/prompts/run_west.prompt.txt",
-      "output": "assets/art_source/player-fhd/directional/frames/run_west_0.png",
-      "prompt_sha256": "13b93fae648ad576c89e1bd1bb88d75c265a5a17b88cabafc6bbcccc3a480678",
-      "output_sha256": "b2d95a8baeb81cbfe1f964441c1e38cac4b882ef4b0558e6856d0e0b725536a8"
-    },
-    {
-      "id": "run_west_1",
-      "animation": "run_west",
-      "frame": 1,
-      "source": "assets/art_source/player-fhd/directional/run_west.png",
-      "source_sha256": "9c2b570f34fd145eff09354ee0c213b225a05065a96a2630b0daaf2f168c3248",
-      "crop_xywh": [
-        416,
-        100,
-        281,
-        377
-      ],
-      "sheet_cell_xywh": [
-        384,
-        0,
-        384,
-        512
-      ],
-      "content_scale": 0.15424164524421594,
-      "source_selection": "connected-farmer-and-particles-v1",
-      "source_selection_sha256": "66015289328375a67c00ef3d76a9160ab8a34bb1730ac2f782186e8f4a468024",
-      "action": "run",
-      "content_anchor_xy": [
-        22,
-        58
-      ],
-      "canvas_wh": [
-        96,
-        96
-      ],
-      "pivot_xy": [
-        48,
-        88
-      ],
-      "draw_scale": 0.5,
-      "body_reference_height": 389,
-      "feet_source_xy": [
-        557.0,
-        477
-      ],
-      "alpha_threshold": 128,
-      "palette": "tools/palette.py:COLOURS",
-      "palette_keys": [
-        "ink",
-        "ink_soft",
-        "soil_dark",
-        "wood_dark",
-        "wood",
-        "wood_light",
-        "gold_dark",
-        "gold",
-        "gold_light",
-        "skin_dark",
-        "skin",
-        "skin_light",
-        "bone",
-        "bone_dark",
-        "cloth_dark",
-        "cloth",
-        "cloth_light"
-      ],
-      "seconds": 0.08,
-      "loop": true,
-      "material_ramp_rule": "action-subset",
-      "prompt": "implementation/fhd-player/directional/prompts/run_west.prompt.txt",
-      "output": "assets/art_source/player-fhd/directional/frames/run_west_1.png",
-      "prompt_sha256": "13b93fae648ad576c89e1bd1bb88d75c265a5a17b88cabafc6bbcccc3a480678",
-      "output_sha256": "1a6681e3dde8071fa387f86faef180480f3ec2cdc8804f8f6def3e4e1cd96ac0"
-    },
-    {
-      "id": "run_west_2",
-      "animation": "run_west",
-      "frame": 2,
-      "source": "assets/art_source/player-fhd/directional/run_west.png",
-      "source_sha256": "9c2b570f34fd145eff09354ee0c213b225a05065a96a2630b0daaf2f168c3248",
-      "crop_xywh": [
-        793,
-        94,
-        277,
-        382
-      ],
-      "sheet_cell_xywh": [
-        768,
-        0,
-        384,
-        512
-      ],
-      "content_scale": 0.15424164524421594,
-      "source_selection": "connected-farmer-and-particles-v1",
-      "source_selection_sha256": "91a3eeb1c3aacf7d085bb96b76f9a03cdfe79601ec51e44caabe14615fe952f4",
-      "action": "run",
-      "content_anchor_xy": [
-        21,
-        59
-      ],
-      "canvas_wh": [
-        96,
-        96
-      ],
-      "pivot_xy": [
-        48,
-        88
-      ],
-      "draw_scale": 0.5,
-      "body_reference_height": 389,
-      "feet_source_xy": [
-        931.0,
-        477
-      ],
-      "alpha_threshold": 128,
-      "palette": "tools/palette.py:COLOURS",
-      "palette_keys": [
-        "ink",
-        "ink_soft",
-        "soil_dark",
-        "wood_dark",
-        "wood",
-        "wood_light",
-        "gold_dark",
-        "gold",
-        "gold_light",
-        "skin_dark",
-        "skin",
-        "skin_light",
-        "bone",
-        "bone_dark",
-        "cloth_dark",
-        "cloth",
-        "cloth_light"
-      ],
-      "seconds": 0.08,
-      "loop": true,
-      "material_ramp_rule": "action-subset",
-      "prompt": "implementation/fhd-player/directional/prompts/run_west.prompt.txt",
-      "output": "assets/art_source/player-fhd/directional/frames/run_west_2.png",
-      "prompt_sha256": "13b93fae648ad576c89e1bd1bb88d75c265a5a17b88cabafc6bbcccc3a480678",
-      "output_sha256": "d45ea76408c0b77a3ac50a0ea58a9cef9abcbe77803d7ff69422af69ffc52066"
-    },
-    {
-      "id": "run_west_3",
-      "animation": "run_west",
-      "frame": 3,
-      "source": "assets/art_source/player-fhd/directional/run_west.png",
-      "source_sha256": "9c2b570f34fd145eff09354ee0c213b225a05065a96a2630b0daaf2f168c3248",
-      "crop_xywh": [
-        1180,
-        88,
-        299,
-        367
-      ],
-      "sheet_cell_xywh": [
-        1152,
-        0,
-        384,
-        512
-      ],
-      "content_scale": 0.15424164524421594,
-      "source_selection": "connected-farmer-and-particles-v1",
-      "source_selection_sha256": "e924ca7ee086bb2ea3429e095441e2f01fd00769efe9f1b398baa255f539b077",
-      "action": "run",
-      "content_anchor_xy": [
-        22,
-        60
-      ],
-      "canvas_wh": [
-        96,
-        96
-      ],
-      "pivot_xy": [
-        48,
-        88
-      ],
-      "draw_scale": 0.5,
-      "body_reference_height": 389,
-      "feet_source_xy": [
-        1321.0,
-        477
-      ],
-      "alpha_threshold": 128,
-      "palette": "tools/palette.py:COLOURS",
-      "palette_keys": [
-        "ink",
-        "ink_soft",
-        "soil_dark",
-        "wood_dark",
-        "wood",
-        "wood_light",
-        "gold_dark",
-        "gold",
-        "gold_light",
-        "skin_dark",
-        "skin",
-        "skin_light",
-        "bone",
-        "bone_dark",
-        "cloth_dark",
-        "cloth",
-        "cloth_light"
-      ],
-      "seconds": 0.08,
-      "loop": true,
-      "material_ramp_rule": "action-subset",
-      "prompt": "implementation/fhd-player/directional/prompts/run_west.prompt.txt",
-      "output": "assets/art_source/player-fhd/directional/frames/run_west_3.png",
-      "prompt_sha256": "13b93fae648ad576c89e1bd1bb88d75c265a5a17b88cabafc6bbcccc3a480678",
-      "output_sha256": "ced8e64ce5b887a5b34616be00fb989e55c40391b525daed2fc630cae7f10ba7"
-    },
-    {
-      "id": "run_west_4",
-      "animation": "run_west",
-      "frame": 4,
-      "source": "assets/art_source/player-fhd/directional/run_west.png",
-      "source_sha256": "9c2b570f34fd145eff09354ee0c213b225a05065a96a2630b0daaf2f168c3248",
-      "crop_xywh": [
-        48,
-        570,
-        290,
-        377
-      ],
-      "sheet_cell_xywh": [
-        0,
-        512,
-        384,
-        512
-      ],
-      "content_scale": 0.15424164524421594,
-      "source_selection": "connected-farmer-and-particles-v1",
-      "source_selection_sha256": "28e5a624d6f5ce181527cd1417149416b6ca5b87b7d7f01a27114ca6d655e935",
-      "action": "run",
-      "content_anchor_xy": [
-        21,
-        59
-      ],
-      "canvas_wh": [
-        96,
-        96
-      ],
-      "pivot_xy": [
-        48,
-        88
-      ],
-      "draw_scale": 0.5,
-      "body_reference_height": 389,
-      "feet_source_xy": [
-        187.0,
-        951
-      ],
-      "alpha_threshold": 128,
-      "palette": "tools/palette.py:COLOURS",
-      "palette_keys": [
-        "ink",
-        "ink_soft",
-        "soil_dark",
-        "wood_dark",
-        "wood",
-        "wood_light",
-        "gold_dark",
-        "gold",
-        "gold_light",
-        "skin_dark",
-        "skin",
-        "skin_light",
-        "bone",
-        "bone_dark",
-        "cloth_dark",
-        "cloth",
-        "cloth_light"
-      ],
-      "seconds": 0.08,
-      "loop": true,
-      "material_ramp_rule": "action-subset",
-      "prompt": "implementation/fhd-player/directional/prompts/run_west.prompt.txt",
-      "output": "assets/art_source/player-fhd/directional/frames/run_west_4.png",
-      "prompt_sha256": "13b93fae648ad576c89e1bd1bb88d75c265a5a17b88cabafc6bbcccc3a480678",
-      "output_sha256": "488559ee23acca4c0b037244d9f2199f28ca8e26d448683ab6f6214e9cd588e5"
-    },
-    {
-      "id": "run_west_5",
-      "animation": "run_west",
-      "frame": 5,
-      "source": "assets/art_source/player-fhd/directional/run_west.png",
-      "source_sha256": "9c2b570f34fd145eff09354ee0c213b225a05065a96a2630b0daaf2f168c3248",
-      "crop_xywh": [
-        424,
-        574,
-        276,
-        377
-      ],
-      "sheet_cell_xywh": [
-        384,
-        512,
-        384,
-        512
-      ],
-      "content_scale": 0.15424164524421594,
-      "source_selection": "connected-farmer-and-particles-v1",
-      "source_selection_sha256": "cfa679be4ed3bb508141483db5a48b21dd05a109b2d719355d5a58c4d9a35aac",
-      "action": "run",
-      "content_anchor_xy": [
-        21,
-        58
-      ],
-      "canvas_wh": [
-        96,
-        96
-      ],
-      "pivot_xy": [
-        48,
-        88
-      ],
-      "draw_scale": 0.5,
-      "body_reference_height": 389,
-      "feet_source_xy": [
-        561.5,
-        951
-      ],
-      "alpha_threshold": 128,
-      "palette": "tools/palette.py:COLOURS",
-      "palette_keys": [
-        "ink",
-        "ink_soft",
-        "soil_dark",
-        "wood_dark",
-        "wood",
-        "wood_light",
-        "gold_dark",
-        "gold",
-        "gold_light",
-        "skin_dark",
-        "skin",
-        "skin_light",
-        "bone",
-        "bone_dark",
-        "cloth_dark",
-        "cloth",
-        "cloth_light"
-      ],
-      "seconds": 0.08,
-      "loop": true,
-      "material_ramp_rule": "action-subset",
-      "prompt": "implementation/fhd-player/directional/prompts/run_west.prompt.txt",
-      "output": "assets/art_source/player-fhd/directional/frames/run_west_5.png",
-      "prompt_sha256": "13b93fae648ad576c89e1bd1bb88d75c265a5a17b88cabafc6bbcccc3a480678",
-      "output_sha256": "3b0348d7264a61099abb79130b95b57db5fea5b3246e8acd9b50fea3e966bcac"
-    },
-    {
-      "id": "run_west_6",
-      "animation": "run_west",
-      "frame": 6,
-      "source": "assets/art_source/player-fhd/directional/run_west.png",
-      "source_sha256": "9c2b570f34fd145eff09354ee0c213b225a05065a96a2630b0daaf2f168c3248",
-      "crop_xywh": [
-        796,
-        567,
-        277,
-        383
-      ],
-      "sheet_cell_xywh": [
-        768,
-        512,
-        384,
-        512
-      ],
-      "content_scale": 0.15424164524421594,
-      "source_selection": "connected-farmer-and-particles-v1",
-      "source_selection_sha256": "89dfbdb92c82655f2733964c49223d13edcf315574d6046709f67e3ad4ce6428",
-      "action": "run",
-      "content_anchor_xy": [
-        21,
-        59
-      ],
-      "canvas_wh": [
-        96,
-        96
-      ],
-      "pivot_xy": [
-        48,
-        88
-      ],
-      "draw_scale": 0.5,
-      "body_reference_height": 389,
-      "feet_source_xy": [
-        933.5,
-        951
-      ],
-      "alpha_threshold": 128,
-      "palette": "tools/palette.py:COLOURS",
-      "palette_keys": [
-        "ink",
-        "ink_soft",
-        "soil_dark",
-        "wood_dark",
-        "wood",
-        "wood_light",
-        "gold_dark",
-        "gold",
-        "gold_light",
-        "skin_dark",
-        "skin",
-        "skin_light",
-        "bone",
-        "bone_dark",
-        "cloth_dark",
-        "cloth",
-        "cloth_light"
-      ],
-      "seconds": 0.08,
-      "loop": true,
-      "material_ramp_rule": "action-subset",
-      "prompt": "implementation/fhd-player/directional/prompts/run_west.prompt.txt",
-      "output": "assets/art_source/player-fhd/directional/frames/run_west_6.png",
-      "prompt_sha256": "13b93fae648ad576c89e1bd1bb88d75c265a5a17b88cabafc6bbcccc3a480678",
-      "output_sha256": "7c2dc222bcea217792f1a7b356756c59858eeb6c0d1d3ac141362d25c2e2dc63"
-    },
-    {
-      "id": "run_west_7",
-      "animation": "run_west",
-      "frame": 7,
-      "source": "assets/art_source/player-fhd/directional/run_west.png",
-      "source_sha256": "9c2b570f34fd145eff09354ee0c213b225a05065a96a2630b0daaf2f168c3248",
-      "crop_xywh": [
-        1187,
-        562,
-        290,
-        376
-      ],
-      "sheet_cell_xywh": [
-        1152,
-        512,
-        384,
-        512
-      ],
-      "content_scale": 0.15424164524421594,
-      "source_selection": "connected-farmer-and-particles-v1",
-      "source_selection_sha256": "407cdceee39961b5024d84e05cddb9cfc2d9c9e6fe3e873cd27168728d0898d5",
-      "action": "run",
-      "content_anchor_xy": [
-        21,
-        60
-      ],
-      "canvas_wh": [
-        96,
-        96
-      ],
-      "pivot_xy": [
-        48,
-        88
-      ],
-      "draw_scale": 0.5,
-      "body_reference_height": 389,
-      "feet_source_xy": [
-        1326.0,
-        951
-      ],
-      "alpha_threshold": 128,
-      "palette": "tools/palette.py:COLOURS",
-      "palette_keys": [
-        "ink",
-        "ink_soft",
-        "soil_dark",
-        "wood_dark",
-        "wood",
-        "wood_light",
-        "gold_dark",
-        "gold",
-        "gold_light",
-        "skin_dark",
-        "skin",
-        "skin_light",
-        "bone",
-        "bone_dark",
-        "cloth_dark",
-        "cloth",
-        "cloth_light"
-      ],
-      "seconds": 0.08,
-      "loop": true,
-      "material_ramp_rule": "action-subset",
-      "prompt": "implementation/fhd-player/directional/prompts/run_west.prompt.txt",
-      "output": "assets/art_source/player-fhd/directional/frames/run_west_7.png",
-      "prompt_sha256": "13b93fae648ad576c89e1bd1bb88d75c265a5a17b88cabafc6bbcccc3a480678",
-      "output_sha256": "0c1ca031dced6f23d4fad0d7e8133348220b48f075e555ff9890c36045d26aeb"
-    },
-    {
       "id": "idle_east_0",
       "animation": "idle_east",
       "frame": 0,
@@ -3534,558 +2982,6 @@
       "output": "assets/art_source/player-fhd/directional/frames/idle_east_2.png",
       "prompt_sha256": "f4c1f3f2bb2e2e132b4245caddfbfaf23f4a3037f83b07dac7071b1bf79ebdd5",
       "output_sha256": "9c29e21d3e31c429406e520cc35e9b5850df31eb64f3ee89ff23b6219012754f"
-    },
-    {
-      "id": "run_east_0",
-      "animation": "run_east",
-      "frame": 0,
-      "source": "assets/art_source/player-fhd/directional/run_east-r1.png",
-      "source_sha256": "94b91141ba9e5a057dccd6cd6632235b6f6d1b1b3aa458526c486fe877f657ec",
-      "crop_xywh": [
-        125,
-        57,
-        304,
-        375
-      ],
-      "sheet_cell_xywh": [
-        0,
-        0,
-        443,
-        443
-      ],
-      "content_scale": 0.1566579634464752,
-      "source_selection": "connected-farmer-and-particles-v1",
-      "source_selection_sha256": "b7b667c847b72754307a8807267aee56905a584e47a88269e2a4b21aa9fdeaa8",
-      "action": "run",
-      "content_anchor_xy": [
-        24,
-        59
-      ],
-      "canvas_wh": [
-        96,
-        96
-      ],
-      "pivot_xy": [
-        48,
-        88
-      ],
-      "draw_scale": 0.5,
-      "body_reference_height": 383,
-      "feet_source_xy": [
-        277.0,
-        432
-      ],
-      "alpha_threshold": 128,
-      "palette": "tools/palette.py:COLOURS",
-      "palette_keys": [
-        "ink",
-        "ink_soft",
-        "soil_dark",
-        "wood_dark",
-        "wood",
-        "wood_light",
-        "gold_dark",
-        "gold",
-        "gold_light",
-        "skin_dark",
-        "skin",
-        "skin_light",
-        "bone",
-        "bone_dark",
-        "cloth_dark",
-        "cloth",
-        "cloth_light"
-      ],
-      "seconds": 0.08,
-      "loop": true,
-      "material_ramp_rule": "action-subset",
-      "prompt": "implementation/fhd-player/directional/prompts/run_east-r1.prompt.txt",
-      "output": "assets/art_source/player-fhd/directional/frames/run_east_0.png",
-      "prompt_sha256": "e50e3f1c2cb090376154814d45a01d7b44f78af28d70e0f3f46cc922f8a0b555",
-      "output_sha256": "c76223ea6eaf485f0662d9623872f29ec4332a10742be409f65ad062fae223f6"
-    },
-    {
-      "id": "run_east_1",
-      "animation": "run_east",
-      "frame": 1,
-      "source": "assets/art_source/player-fhd/directional/run_east-r1.png",
-      "source_sha256": "94b91141ba9e5a057dccd6cd6632235b6f6d1b1b3aa458526c486fe877f657ec",
-      "crop_xywh": [
-        529,
-        57,
-        303,
-        375
-      ],
-      "sheet_cell_xywh": [
-        443,
-        0,
-        444,
-        443
-      ],
-      "content_scale": 0.1566579634464752,
-      "source_selection": "connected-farmer-and-particles-v1",
-      "source_selection_sha256": "d9e4f665fbcbe4374d343252f463ad684b8bd07cb1b83fa6754ba32e3e7a7648",
-      "action": "run",
-      "content_anchor_xy": [
-        24,
-        59
-      ],
-      "canvas_wh": [
-        96,
-        96
-      ],
-      "pivot_xy": [
-        48,
-        88
-      ],
-      "draw_scale": 0.5,
-      "body_reference_height": 383,
-      "feet_source_xy": [
-        680.5,
-        432
-      ],
-      "alpha_threshold": 128,
-      "palette": "tools/palette.py:COLOURS",
-      "palette_keys": [
-        "ink",
-        "ink_soft",
-        "soil_dark",
-        "wood_dark",
-        "wood",
-        "wood_light",
-        "gold_dark",
-        "gold",
-        "gold_light",
-        "skin_dark",
-        "skin",
-        "skin_light",
-        "bone",
-        "bone_dark",
-        "cloth_dark",
-        "cloth",
-        "cloth_light"
-      ],
-      "seconds": 0.08,
-      "loop": true,
-      "material_ramp_rule": "action-subset",
-      "prompt": "implementation/fhd-player/directional/prompts/run_east-r1.prompt.txt",
-      "output": "assets/art_source/player-fhd/directional/frames/run_east_1.png",
-      "prompt_sha256": "e50e3f1c2cb090376154814d45a01d7b44f78af28d70e0f3f46cc922f8a0b555",
-      "output_sha256": "26ffa0157c87252a910ddb86b733a4a47e0f31178af909768ed5c6117f84cff3"
-    },
-    {
-      "id": "run_east_2",
-      "animation": "run_east",
-      "frame": 2,
-      "source": "assets/art_source/player-fhd/directional/run_east-r1.png",
-      "source_sha256": "94b91141ba9e5a057dccd6cd6632235b6f6d1b1b3aa458526c486fe877f657ec",
-      "crop_xywh": [
-        942,
-        53,
-        305,
-        379
-      ],
-      "sheet_cell_xywh": [
-        887,
-        0,
-        443,
-        443
-      ],
-      "content_scale": 0.1566579634464752,
-      "source_selection": "connected-farmer-and-particles-v1",
-      "source_selection_sha256": "f755f31dda237ffe668560b259620d9d815c510e14455202f2fe1b8c9c681f09",
-      "action": "run",
-      "content_anchor_xy": [
-        24,
-        59
-      ],
-      "canvas_wh": [
-        96,
-        96
-      ],
-      "pivot_xy": [
-        48,
-        88
-      ],
-      "draw_scale": 0.5,
-      "body_reference_height": 383,
-      "feet_source_xy": [
-        1094.0,
-        432
-      ],
-      "alpha_threshold": 128,
-      "palette": "tools/palette.py:COLOURS",
-      "palette_keys": [
-        "ink",
-        "ink_soft",
-        "soil_dark",
-        "wood_dark",
-        "wood",
-        "wood_light",
-        "gold_dark",
-        "gold",
-        "gold_light",
-        "skin_dark",
-        "skin",
-        "skin_light",
-        "bone",
-        "bone_dark",
-        "cloth_dark",
-        "cloth",
-        "cloth_light"
-      ],
-      "seconds": 0.08,
-      "loop": true,
-      "material_ramp_rule": "action-subset",
-      "prompt": "implementation/fhd-player/directional/prompts/run_east-r1.prompt.txt",
-      "output": "assets/art_source/player-fhd/directional/frames/run_east_2.png",
-      "prompt_sha256": "e50e3f1c2cb090376154814d45a01d7b44f78af28d70e0f3f46cc922f8a0b555",
-      "output_sha256": "79220f884c613b602b508dc6109750ec14da837241a4a5a3a0e70b61bcfe1162"
-    },
-    {
-      "id": "run_east_3",
-      "animation": "run_east",
-      "frame": 3,
-      "source": "assets/art_source/player-fhd/directional/run_east-r1.png",
-      "source_sha256": "94b91141ba9e5a057dccd6cd6632235b6f6d1b1b3aa458526c486fe877f657ec",
-      "crop_xywh": [
-        1354,
-        49,
-        308,
-        366
-      ],
-      "sheet_cell_xywh": [
-        1330,
-        0,
-        444,
-        443
-      ],
-      "content_scale": 0.1566579634464752,
-      "source_selection": "connected-farmer-and-particles-v1",
-      "source_selection_sha256": "b1cc930a11a014d0fed39c8478ef06b384e0168c7e9692d44bc8655bd0b8150d",
-      "action": "run",
-      "content_anchor_xy": [
-        24,
-        60
-      ],
-      "canvas_wh": [
-        96,
-        96
-      ],
-      "pivot_xy": [
-        48,
-        88
-      ],
-      "draw_scale": 0.5,
-      "body_reference_height": 383,
-      "feet_source_xy": [
-        1508.5,
-        432
-      ],
-      "alpha_threshold": 128,
-      "palette": "tools/palette.py:COLOURS",
-      "palette_keys": [
-        "ink",
-        "ink_soft",
-        "soil_dark",
-        "wood_dark",
-        "wood",
-        "wood_light",
-        "gold_dark",
-        "gold",
-        "gold_light",
-        "skin_dark",
-        "skin",
-        "skin_light",
-        "bone",
-        "bone_dark",
-        "cloth_dark",
-        "cloth",
-        "cloth_light"
-      ],
-      "seconds": 0.08,
-      "loop": true,
-      "material_ramp_rule": "action-subset",
-      "prompt": "implementation/fhd-player/directional/prompts/run_east-r1.prompt.txt",
-      "output": "assets/art_source/player-fhd/directional/frames/run_east_3.png",
-      "prompt_sha256": "e50e3f1c2cb090376154814d45a01d7b44f78af28d70e0f3f46cc922f8a0b555",
-      "output_sha256": "43f26970dd4d003076bdb8347510d7e9a74bd011c7f282fa68d223aa6c97b386"
-    },
-    {
-      "id": "run_east_4",
-      "animation": "run_east",
-      "frame": 4,
-      "source": "assets/art_source/player-fhd/directional/run_east-r1.png",
-      "source_sha256": "94b91141ba9e5a057dccd6cd6632235b6f6d1b1b3aa458526c486fe877f657ec",
-      "crop_xywh": [
-        117,
-        468,
-        307,
-        370
-      ],
-      "sheet_cell_xywh": [
-        0,
-        443,
-        443,
-        444
-      ],
-      "content_scale": 0.1566579634464752,
-      "source_selection": "connected-farmer-and-particles-v1",
-      "source_selection_sha256": "76572c4c10edef34bfdd8b082f56a5cc2fdbc59be3e3a06b4c6cf17bcb5428d2",
-      "action": "run",
-      "content_anchor_xy": [
-        24,
-        58
-      ],
-      "canvas_wh": [
-        96,
-        96
-      ],
-      "pivot_xy": [
-        48,
-        88
-      ],
-      "draw_scale": 0.5,
-      "body_reference_height": 383,
-      "feet_source_xy": [
-        270.5,
-        839
-      ],
-      "alpha_threshold": 128,
-      "palette": "tools/palette.py:COLOURS",
-      "palette_keys": [
-        "ink",
-        "ink_soft",
-        "soil_dark",
-        "wood_dark",
-        "wood",
-        "wood_light",
-        "gold_dark",
-        "gold",
-        "gold_light",
-        "skin_dark",
-        "skin",
-        "skin_light",
-        "bone",
-        "bone_dark",
-        "cloth_dark",
-        "cloth",
-        "cloth_light"
-      ],
-      "seconds": 0.08,
-      "loop": true,
-      "material_ramp_rule": "action-subset",
-      "prompt": "implementation/fhd-player/directional/prompts/run_east-r1.prompt.txt",
-      "output": "assets/art_source/player-fhd/directional/frames/run_east_4.png",
-      "prompt_sha256": "e50e3f1c2cb090376154814d45a01d7b44f78af28d70e0f3f46cc922f8a0b555",
-      "output_sha256": "5d4ad3bfa538f1a1c3d6796dbb922c96b1f3604131008f3a84f2858147827a53"
-    },
-    {
-      "id": "run_east_5",
-      "animation": "run_east",
-      "frame": 5,
-      "source": "assets/art_source/player-fhd/directional/run_east-r1.png",
-      "source_sha256": "94b91141ba9e5a057dccd6cd6632235b6f6d1b1b3aa458526c486fe877f657ec",
-      "crop_xywh": [
-        528,
-        468,
-        304,
-        371
-      ],
-      "sheet_cell_xywh": [
-        443,
-        443,
-        444,
-        444
-      ],
-      "content_scale": 0.1566579634464752,
-      "source_selection": "connected-farmer-and-particles-v1",
-      "source_selection_sha256": "0c71cfa81e86e04edc22d2c3c808d8570156758faa1929e4efb6e4f2b1f3f687",
-      "action": "run",
-      "content_anchor_xy": [
-        24,
-        58
-      ],
-      "canvas_wh": [
-        96,
-        96
-      ],
-      "pivot_xy": [
-        48,
-        88
-      ],
-      "draw_scale": 0.5,
-      "body_reference_height": 383,
-      "feet_source_xy": [
-        680.0,
-        839
-      ],
-      "alpha_threshold": 128,
-      "palette": "tools/palette.py:COLOURS",
-      "palette_keys": [
-        "ink",
-        "ink_soft",
-        "soil_dark",
-        "wood_dark",
-        "wood",
-        "wood_light",
-        "gold_dark",
-        "gold",
-        "gold_light",
-        "skin_dark",
-        "skin",
-        "skin_light",
-        "bone",
-        "bone_dark",
-        "cloth_dark",
-        "cloth",
-        "cloth_light"
-      ],
-      "seconds": 0.08,
-      "loop": true,
-      "material_ramp_rule": "action-subset",
-      "prompt": "implementation/fhd-player/directional/prompts/run_east-r1.prompt.txt",
-      "output": "assets/art_source/player-fhd/directional/frames/run_east_5.png",
-      "prompt_sha256": "e50e3f1c2cb090376154814d45a01d7b44f78af28d70e0f3f46cc922f8a0b555",
-      "output_sha256": "e9a1cd4b35003ff2b71d36d33b2e9da7b9a11375823a8aadb37419b84500dd43"
-    },
-    {
-      "id": "run_east_6",
-      "animation": "run_east",
-      "frame": 6,
-      "source": "assets/art_source/player-fhd/directional/run_east-r1.png",
-      "source_sha256": "94b91141ba9e5a057dccd6cd6632235b6f6d1b1b3aa458526c486fe877f657ec",
-      "crop_xywh": [
-        942,
-        459,
-        305,
-        380
-      ],
-      "sheet_cell_xywh": [
-        887,
-        443,
-        443,
-        444
-      ],
-      "content_scale": 0.1566579634464752,
-      "source_selection": "connected-farmer-and-particles-v1",
-      "source_selection_sha256": "da282c93e659b676f9edd2888faf68af90bf4da81812bdc039ffd42324a49b9f",
-      "action": "run",
-      "content_anchor_xy": [
-        24,
-        60
-      ],
-      "canvas_wh": [
-        96,
-        96
-      ],
-      "pivot_xy": [
-        48,
-        88
-      ],
-      "draw_scale": 0.5,
-      "body_reference_height": 383,
-      "feet_source_xy": [
-        1094.5,
-        839
-      ],
-      "alpha_threshold": 128,
-      "palette": "tools/palette.py:COLOURS",
-      "palette_keys": [
-        "ink",
-        "ink_soft",
-        "soil_dark",
-        "wood_dark",
-        "wood",
-        "wood_light",
-        "gold_dark",
-        "gold",
-        "gold_light",
-        "skin_dark",
-        "skin",
-        "skin_light",
-        "bone",
-        "bone_dark",
-        "cloth_dark",
-        "cloth",
-        "cloth_light"
-      ],
-      "seconds": 0.08,
-      "loop": true,
-      "material_ramp_rule": "action-subset",
-      "prompt": "implementation/fhd-player/directional/prompts/run_east-r1.prompt.txt",
-      "output": "assets/art_source/player-fhd/directional/frames/run_east_6.png",
-      "prompt_sha256": "e50e3f1c2cb090376154814d45a01d7b44f78af28d70e0f3f46cc922f8a0b555",
-      "output_sha256": "099e07946236598deb5ccb7bf55e2d08af13ae792be10a776f4e81ca0cd29eb4"
-    },
-    {
-      "id": "run_east_7",
-      "animation": "run_east",
-      "frame": 7,
-      "source": "assets/art_source/player-fhd/directional/run_east-r1.png",
-      "source_sha256": "94b91141ba9e5a057dccd6cd6632235b6f6d1b1b3aa458526c486fe877f657ec",
-      "crop_xywh": [
-        1354,
-        459,
-        305,
-        369
-      ],
-      "sheet_cell_xywh": [
-        1330,
-        443,
-        444,
-        444
-      ],
-      "content_scale": 0.1566579634464752,
-      "source_selection": "connected-farmer-and-particles-v1",
-      "source_selection_sha256": "fe21e4fcbf4d6ac2706fdd4303e671af15398b15ed4154edb2d1719153fafef5",
-      "action": "run",
-      "content_anchor_xy": [
-        24,
-        60
-      ],
-      "canvas_wh": [
-        96,
-        96
-      ],
-      "pivot_xy": [
-        48,
-        88
-      ],
-      "draw_scale": 0.5,
-      "body_reference_height": 383,
-      "feet_source_xy": [
-        1507.0,
-        839
-      ],
-      "alpha_threshold": 128,
-      "palette": "tools/palette.py:COLOURS",
-      "palette_keys": [
-        "ink",
-        "ink_soft",
-        "soil_dark",
-        "wood_dark",
-        "wood",
-        "wood_light",
-        "gold_dark",
-        "gold",
-        "gold_light",
-        "skin_dark",
-        "skin",
-        "skin_light",
-        "bone",
-        "bone_dark",
-        "cloth_dark",
-        "cloth",
-        "cloth_light"
-      ],
-      "seconds": 0.08,
-      "loop": true,
-      "material_ramp_rule": "action-subset",
-      "prompt": "implementation/fhd-player/directional/prompts/run_east-r1.prompt.txt",
-      "output": "assets/art_source/player-fhd/directional/frames/run_east_7.png",
-      "prompt_sha256": "e50e3f1c2cb090376154814d45a01d7b44f78af28d70e0f3f46cc922f8a0b555",
-      "output_sha256": "ee89c0927a1ce1223a9ca4d015bc39d352e76ec20078e825ab5b2814284b1ba1"
     },
     {
       "id": "chop_south_0",
@@ -19198,6 +18094,1150 @@
       ],
       "flip_horizontal": true,
       "output_sha256": "2b64198532cb9fb9f4b4dffa15c5e0d5edadfee8226752412daa3a35e1a78825"
+    },
+    {
+      "id": "run_east_0",
+      "animation": "run_east",
+      "frame": 0,
+      "source": "assets/art_source/player-fhd/directional/creator-run-right-keys-r1.png",
+      "source_sha256": "d56016c0a05d47d2e9030e22b9e4b3a42d3e7ab59cf3633fedb95da70ffac715",
+      "crop_xywh": [
+        201,
+        162,
+        374,
+        470
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        627,
+        632
+      ],
+      "content_scale": 0.1276595744680851,
+      "source_selection": "connected-farmer-and-particles-v1",
+      "source_selection_sha256": "4a752a285b0666dd1e45ef2b9f169d768ac69553f84bf5b6ceb969904c708092",
+      "action": "run",
+      "content_anchor_xy": [
+        25,
+        60
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "draw_scale": 0.5,
+      "body_reference_height": 470,
+      "feet_source_xy": [
+        396.0,
+        632
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "soil_dark",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "bone",
+        "bone_dark",
+        "cloth_dark",
+        "cloth",
+        "cloth_light"
+      ],
+      "seconds": 0.08,
+      "loop": true,
+      "material_ramp_rule": "lateral-boot-materials",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-run-right-keys-r1.prompt.txt",
+      "output": "assets/art_source/player-fhd/directional/frames/run_east_0.png",
+      "prompt_sha256": "184e88483d8dc6f1a2f1f2fdbf5c0cee8899b3ff3aee56546e687cb8585ba08f",
+      "output_sha256": "7e4ad8e02cbd5a9a779a1c55b665032798a7246fa3fcc462337b12491abef41d"
+    },
+    {
+      "id": "run_east_2",
+      "animation": "run_east",
+      "frame": 2,
+      "source": "assets/art_source/player-fhd/directional/creator-run-right-keys-r1.png",
+      "source_sha256": "d56016c0a05d47d2e9030e22b9e4b3a42d3e7ab59cf3633fedb95da70ffac715",
+      "crop_xywh": [
+        828,
+        162,
+        362,
+        450
+      ],
+      "sheet_cell_xywh": [
+        627,
+        0,
+        627,
+        632
+      ],
+      "content_scale": 0.1276595744680851,
+      "source_selection": "connected-farmer-and-particles-v1",
+      "source_selection_sha256": "c0e00ce2cd70021f682dd00eb6a5ae38d6bf0f9741bb0ce74824585e74bc9b69",
+      "action": "run",
+      "content_anchor_xy": [
+        23,
+        60
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "draw_scale": 0.5,
+      "body_reference_height": 470,
+      "feet_source_xy": [
+        1009.5,
+        632
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "soil_dark",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "bone",
+        "bone_dark",
+        "cloth_dark",
+        "cloth",
+        "cloth_light"
+      ],
+      "seconds": 0.08,
+      "loop": true,
+      "material_ramp_rule": "lateral-boot-materials",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-run-right-keys-r1.prompt.txt",
+      "output": "assets/art_source/player-fhd/directional/frames/run_east_2.png",
+      "prompt_sha256": "184e88483d8dc6f1a2f1f2fdbf5c0cee8899b3ff3aee56546e687cb8585ba08f",
+      "output_sha256": "3bb35951a3b36ec188f70a808965b57375c221e9c380876b4995e3a5fa36af1b"
+    },
+    {
+      "id": "run_east_4",
+      "animation": "run_east",
+      "frame": 4,
+      "source": "assets/art_source/player-fhd/directional/creator-run-right-keys-r1.png",
+      "source_sha256": "d56016c0a05d47d2e9030e22b9e4b3a42d3e7ab59cf3633fedb95da70ffac715",
+      "crop_xywh": [
+        199,
+        725,
+        378,
+        466
+      ],
+      "sheet_cell_xywh": [
+        0,
+        632,
+        627,
+        622
+      ],
+      "content_scale": 0.1276595744680851,
+      "source_selection": "connected-farmer-and-particles-v1",
+      "source_selection_sha256": "7740c7ee4daff9ee374bfb8948a8a399b43df3f4de74b9a734520a6b73e7a1b2",
+      "action": "run",
+      "content_anchor_xy": [
+        25,
+        59
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "draw_scale": 0.5,
+      "body_reference_height": 470,
+      "feet_source_xy": [
+        397.5,
+        1191
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "soil_dark",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "bone",
+        "bone_dark",
+        "cloth_dark",
+        "cloth",
+        "cloth_light"
+      ],
+      "seconds": 0.08,
+      "loop": true,
+      "material_ramp_rule": "lateral-boot-materials",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-run-right-keys-r1.prompt.txt",
+      "output": "assets/art_source/player-fhd/directional/frames/run_east_4.png",
+      "prompt_sha256": "184e88483d8dc6f1a2f1f2fdbf5c0cee8899b3ff3aee56546e687cb8585ba08f",
+      "output_sha256": "b144aeb944e0b369e1e184e0fd4635e43e24ada763e8e90ff6011fd029209cc8"
+    },
+    {
+      "id": "run_east_6",
+      "animation": "run_east",
+      "frame": 6,
+      "source": "assets/art_source/player-fhd/directional/creator-run-right-keys-r1.png",
+      "source_sha256": "d56016c0a05d47d2e9030e22b9e4b3a42d3e7ab59cf3633fedb95da70ffac715",
+      "crop_xywh": [
+        837,
+        725,
+        358,
+        428
+      ],
+      "sheet_cell_xywh": [
+        627,
+        632,
+        627,
+        622
+      ],
+      "content_scale": 0.1276595744680851,
+      "source_selection": "connected-farmer-and-particles-v1",
+      "source_selection_sha256": "a9557d1a7638fde9c6b534aa6201eddd2877d80e3eda90d68bf37517457ffe88",
+      "action": "run",
+      "content_anchor_xy": [
+        23,
+        59
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "draw_scale": 0.5,
+      "body_reference_height": 470,
+      "feet_source_xy": [
+        1015.0,
+        1191
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "soil_dark",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "bone",
+        "bone_dark",
+        "cloth_dark",
+        "cloth",
+        "cloth_light"
+      ],
+      "seconds": 0.08,
+      "loop": true,
+      "material_ramp_rule": "lateral-boot-materials",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-run-right-keys-r1.prompt.txt",
+      "output": "assets/art_source/player-fhd/directional/frames/run_east_6.png",
+      "prompt_sha256": "184e88483d8dc6f1a2f1f2fdbf5c0cee8899b3ff3aee56546e687cb8585ba08f",
+      "output_sha256": "54b7d2ff17edd4c6b9eafe402aab0b4fe66a82efc73b903d5b298bfa48154002"
+    },
+    {
+      "id": "run_east_1",
+      "animation": "run_east",
+      "frame": 1,
+      "source": "assets/art_source/player-fhd/directional/creator-run-right-transitions-r2.png",
+      "source_sha256": "e67930524c11d0b70f2829c8bf8e62d9fde9f92e184185bea090849e695636e1",
+      "crop_xywh": [
+        201,
+        171,
+        358,
+        462
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        627,
+        633
+      ],
+      "content_scale": 0.12987012987012986,
+      "source_selection": "connected-farmer-and-particles-v1",
+      "source_selection_sha256": "aba0a4b7d30c789d7c3131c2533d8d943e65b6e66506392cae83641282842d48",
+      "action": "run",
+      "content_anchor_xy": [
+        24,
+        60
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "draw_scale": 0.5,
+      "body_reference_height": 462,
+      "feet_source_xy": [
+        386.0,
+        633
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "soil_dark",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "bone",
+        "bone_dark",
+        "cloth_dark",
+        "cloth",
+        "cloth_light"
+      ],
+      "seconds": 0.08,
+      "loop": true,
+      "material_ramp_rule": "lateral-boot-materials",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-run-right-transitions-r2.prompt.txt",
+      "output": "assets/art_source/player-fhd/directional/frames/run_east_1.png",
+      "prompt_sha256": "4ff6cd802eec9218213f253eeead21e7c22b7ec1c07a477fb23b89625d3ffbda",
+      "output_sha256": "436375337d8168daefcecb6aee1397e180a2f08326e66388aa6c612b2b4b1afa"
+    },
+    {
+      "id": "run_east_3",
+      "animation": "run_east",
+      "frame": 3,
+      "source": "assets/art_source/player-fhd/directional/creator-run-right-transitions-r2.png",
+      "source_sha256": "e67930524c11d0b70f2829c8bf8e62d9fde9f92e184185bea090849e695636e1",
+      "crop_xywh": [
+        782,
+        171,
+        355,
+        439
+      ],
+      "sheet_cell_xywh": [
+        627,
+        0,
+        627,
+        633
+      ],
+      "content_scale": 0.12987012987012986,
+      "source_selection": "connected-farmer-and-particles-v1",
+      "source_selection_sha256": "4d420f3fb9202f51d39bdc794f1688d58c3ec17e27ef8b3db10da752bb743047",
+      "action": "run",
+      "content_anchor_xy": [
+        24,
+        60
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "draw_scale": 0.5,
+      "body_reference_height": 462,
+      "feet_source_xy": [
+        965.5,
+        633
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "soil_dark",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "bone",
+        "bone_dark",
+        "cloth_dark",
+        "cloth",
+        "cloth_light"
+      ],
+      "seconds": 0.08,
+      "loop": true,
+      "material_ramp_rule": "lateral-boot-materials",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-run-right-transitions-r2.prompt.txt",
+      "output": "assets/art_source/player-fhd/directional/frames/run_east_3.png",
+      "prompt_sha256": "4ff6cd802eec9218213f253eeead21e7c22b7ec1c07a477fb23b89625d3ffbda",
+      "output_sha256": "f6b55effd3add3de2f7c0811c83cb507851bcd6fa645cdc917488c2ccbfe4115"
+    },
+    {
+      "id": "run_east_5",
+      "animation": "run_east",
+      "frame": 5,
+      "source": "assets/art_source/player-fhd/directional/creator-run-right-transitions-r2.png",
+      "source_sha256": "e67930524c11d0b70f2829c8bf8e62d9fde9f92e184185bea090849e695636e1",
+      "crop_xywh": [
+        210,
+        726,
+        362,
+        447
+      ],
+      "sheet_cell_xywh": [
+        0,
+        633,
+        627,
+        621
+      ],
+      "content_scale": 0.12987012987012986,
+      "source_selection": "connected-farmer-and-particles-v1",
+      "source_selection_sha256": "26369befb4c63771127f7be1d388313368fdd693e345b5cf8daeaf26a2f14df1",
+      "action": "run",
+      "content_anchor_xy": [
+        24,
+        58
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "draw_scale": 0.5,
+      "body_reference_height": 462,
+      "feet_source_xy": [
+        398.0,
+        1173
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "soil_dark",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "bone",
+        "bone_dark",
+        "cloth_dark",
+        "cloth",
+        "cloth_light"
+      ],
+      "seconds": 0.08,
+      "loop": true,
+      "material_ramp_rule": "lateral-boot-materials",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-run-right-transitions-r2.prompt.txt",
+      "output": "assets/art_source/player-fhd/directional/frames/run_east_5.png",
+      "prompt_sha256": "4ff6cd802eec9218213f253eeead21e7c22b7ec1c07a477fb23b89625d3ffbda",
+      "output_sha256": "f7f06e58ae847eabfc99967cb0fe58ec827762872beb310573eb98ed4486e14f"
+    },
+    {
+      "id": "run_east_7",
+      "animation": "run_east",
+      "frame": 7,
+      "source": "assets/art_source/player-fhd/directional/creator-run-right-transitions-r2.png",
+      "source_sha256": "e67930524c11d0b70f2829c8bf8e62d9fde9f92e184185bea090849e695636e1",
+      "crop_xywh": [
+        796,
+        726,
+        370,
+        432
+      ],
+      "sheet_cell_xywh": [
+        627,
+        633,
+        627,
+        621
+      ],
+      "content_scale": 0.12987012987012986,
+      "source_selection": "connected-farmer-and-particles-v1",
+      "source_selection_sha256": "4385a8c2f9ea0d8ea21e943e40d2def74536622fd2d2b75fb8798c46b89c5c1a",
+      "action": "run",
+      "content_anchor_xy": [
+        25,
+        58
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "draw_scale": 0.5,
+      "body_reference_height": 462,
+      "feet_source_xy": [
+        989.5,
+        1173
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "soil_dark",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "bone",
+        "bone_dark",
+        "cloth_dark",
+        "cloth",
+        "cloth_light"
+      ],
+      "seconds": 0.08,
+      "loop": true,
+      "material_ramp_rule": "lateral-boot-materials",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-run-right-transitions-r2.prompt.txt",
+      "output": "assets/art_source/player-fhd/directional/frames/run_east_7.png",
+      "prompt_sha256": "4ff6cd802eec9218213f253eeead21e7c22b7ec1c07a477fb23b89625d3ffbda",
+      "output_sha256": "7e5c61a60bcb1503530b2793a88904eece759e75451c2f0dd827bb1c51ab82e7"
+    },
+    {
+      "id": "run_west_0",
+      "animation": "run_west",
+      "frame": 0,
+      "source": "assets/art_source/player-fhd/directional/creator-run-right-keys-r1.png",
+      "source_sha256": "d56016c0a05d47d2e9030e22b9e4b3a42d3e7ab59cf3633fedb95da70ffac715",
+      "crop_xywh": [
+        201,
+        162,
+        374,
+        470
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        627,
+        632
+      ],
+      "content_scale": 0.1276595744680851,
+      "source_selection": "connected-farmer-and-particles-v1",
+      "source_selection_sha256": "4a752a285b0666dd1e45ef2b9f169d768ac69553f84bf5b6ceb969904c708092",
+      "action": "run",
+      "content_anchor_xy": [
+        25,
+        60
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        47,
+        88
+      ],
+      "draw_scale": 0.5,
+      "body_reference_height": 470,
+      "feet_source_xy": [
+        396.0,
+        632
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "soil_dark",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "bone",
+        "bone_dark",
+        "cloth_dark",
+        "cloth",
+        "cloth_light"
+      ],
+      "seconds": 0.08,
+      "loop": true,
+      "material_ramp_rule": "lateral-boot-materials",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-run-right-keys-r1.prompt.txt",
+      "output": "assets/art_source/player-fhd/directional/frames/run_west_0.png",
+      "prompt_sha256": "184e88483d8dc6f1a2f1f2fdbf5c0cee8899b3ff3aee56546e687cb8585ba08f",
+      "source_canvas_pivot_xy": [
+        48,
+        88
+      ],
+      "flip_horizontal": true,
+      "output_sha256": "e5d7f6c7a077d1ee8542bc5fedf53efd92c44aac3f6fc7e21f5f7ab6264fecdf"
+    },
+    {
+      "id": "run_west_2",
+      "animation": "run_west",
+      "frame": 2,
+      "source": "assets/art_source/player-fhd/directional/creator-run-right-keys-r1.png",
+      "source_sha256": "d56016c0a05d47d2e9030e22b9e4b3a42d3e7ab59cf3633fedb95da70ffac715",
+      "crop_xywh": [
+        828,
+        162,
+        362,
+        450
+      ],
+      "sheet_cell_xywh": [
+        627,
+        0,
+        627,
+        632
+      ],
+      "content_scale": 0.1276595744680851,
+      "source_selection": "connected-farmer-and-particles-v1",
+      "source_selection_sha256": "c0e00ce2cd70021f682dd00eb6a5ae38d6bf0f9741bb0ce74824585e74bc9b69",
+      "action": "run",
+      "content_anchor_xy": [
+        23,
+        60
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        47,
+        88
+      ],
+      "draw_scale": 0.5,
+      "body_reference_height": 470,
+      "feet_source_xy": [
+        1009.5,
+        632
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "soil_dark",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "bone",
+        "bone_dark",
+        "cloth_dark",
+        "cloth",
+        "cloth_light"
+      ],
+      "seconds": 0.08,
+      "loop": true,
+      "material_ramp_rule": "lateral-boot-materials",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-run-right-keys-r1.prompt.txt",
+      "output": "assets/art_source/player-fhd/directional/frames/run_west_2.png",
+      "prompt_sha256": "184e88483d8dc6f1a2f1f2fdbf5c0cee8899b3ff3aee56546e687cb8585ba08f",
+      "source_canvas_pivot_xy": [
+        48,
+        88
+      ],
+      "flip_horizontal": true,
+      "output_sha256": "b73cdc3ae99f66de004ed00d96dcff77a67aa1be0a8aa9ce09ca564395db7e3b"
+    },
+    {
+      "id": "run_west_4",
+      "animation": "run_west",
+      "frame": 4,
+      "source": "assets/art_source/player-fhd/directional/creator-run-right-keys-r1.png",
+      "source_sha256": "d56016c0a05d47d2e9030e22b9e4b3a42d3e7ab59cf3633fedb95da70ffac715",
+      "crop_xywh": [
+        199,
+        725,
+        378,
+        466
+      ],
+      "sheet_cell_xywh": [
+        0,
+        632,
+        627,
+        622
+      ],
+      "content_scale": 0.1276595744680851,
+      "source_selection": "connected-farmer-and-particles-v1",
+      "source_selection_sha256": "7740c7ee4daff9ee374bfb8948a8a399b43df3f4de74b9a734520a6b73e7a1b2",
+      "action": "run",
+      "content_anchor_xy": [
+        25,
+        59
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        47,
+        88
+      ],
+      "draw_scale": 0.5,
+      "body_reference_height": 470,
+      "feet_source_xy": [
+        397.5,
+        1191
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "soil_dark",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "bone",
+        "bone_dark",
+        "cloth_dark",
+        "cloth",
+        "cloth_light"
+      ],
+      "seconds": 0.08,
+      "loop": true,
+      "material_ramp_rule": "lateral-boot-materials",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-run-right-keys-r1.prompt.txt",
+      "output": "assets/art_source/player-fhd/directional/frames/run_west_4.png",
+      "prompt_sha256": "184e88483d8dc6f1a2f1f2fdbf5c0cee8899b3ff3aee56546e687cb8585ba08f",
+      "source_canvas_pivot_xy": [
+        48,
+        88
+      ],
+      "flip_horizontal": true,
+      "output_sha256": "70bc1ea108ca6766646fe34fbec9a407f6876be85d192f878222e6babcc486f8"
+    },
+    {
+      "id": "run_west_6",
+      "animation": "run_west",
+      "frame": 6,
+      "source": "assets/art_source/player-fhd/directional/creator-run-right-keys-r1.png",
+      "source_sha256": "d56016c0a05d47d2e9030e22b9e4b3a42d3e7ab59cf3633fedb95da70ffac715",
+      "crop_xywh": [
+        837,
+        725,
+        358,
+        428
+      ],
+      "sheet_cell_xywh": [
+        627,
+        632,
+        627,
+        622
+      ],
+      "content_scale": 0.1276595744680851,
+      "source_selection": "connected-farmer-and-particles-v1",
+      "source_selection_sha256": "a9557d1a7638fde9c6b534aa6201eddd2877d80e3eda90d68bf37517457ffe88",
+      "action": "run",
+      "content_anchor_xy": [
+        23,
+        59
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        47,
+        88
+      ],
+      "draw_scale": 0.5,
+      "body_reference_height": 470,
+      "feet_source_xy": [
+        1015.0,
+        1191
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "soil_dark",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "bone",
+        "bone_dark",
+        "cloth_dark",
+        "cloth",
+        "cloth_light"
+      ],
+      "seconds": 0.08,
+      "loop": true,
+      "material_ramp_rule": "lateral-boot-materials",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-run-right-keys-r1.prompt.txt",
+      "output": "assets/art_source/player-fhd/directional/frames/run_west_6.png",
+      "prompt_sha256": "184e88483d8dc6f1a2f1f2fdbf5c0cee8899b3ff3aee56546e687cb8585ba08f",
+      "source_canvas_pivot_xy": [
+        48,
+        88
+      ],
+      "flip_horizontal": true,
+      "output_sha256": "c38166b7e1c102eac5afcc6d5b307e4f9708bf19a675e6edbd475e579e8e76b9"
+    },
+    {
+      "id": "run_west_1",
+      "animation": "run_west",
+      "frame": 1,
+      "source": "assets/art_source/player-fhd/directional/creator-run-right-transitions-r2.png",
+      "source_sha256": "e67930524c11d0b70f2829c8bf8e62d9fde9f92e184185bea090849e695636e1",
+      "crop_xywh": [
+        201,
+        171,
+        358,
+        462
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        627,
+        633
+      ],
+      "content_scale": 0.12987012987012986,
+      "source_selection": "connected-farmer-and-particles-v1",
+      "source_selection_sha256": "aba0a4b7d30c789d7c3131c2533d8d943e65b6e66506392cae83641282842d48",
+      "action": "run",
+      "content_anchor_xy": [
+        24,
+        60
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        47,
+        88
+      ],
+      "draw_scale": 0.5,
+      "body_reference_height": 462,
+      "feet_source_xy": [
+        386.0,
+        633
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "soil_dark",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "bone",
+        "bone_dark",
+        "cloth_dark",
+        "cloth",
+        "cloth_light"
+      ],
+      "seconds": 0.08,
+      "loop": true,
+      "material_ramp_rule": "lateral-boot-materials",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-run-right-transitions-r2.prompt.txt",
+      "output": "assets/art_source/player-fhd/directional/frames/run_west_1.png",
+      "prompt_sha256": "4ff6cd802eec9218213f253eeead21e7c22b7ec1c07a477fb23b89625d3ffbda",
+      "source_canvas_pivot_xy": [
+        48,
+        88
+      ],
+      "flip_horizontal": true,
+      "output_sha256": "66f5e8b1ced46f65e56633e6a1bd51614497576d69e753ecfc69284cd8d14874"
+    },
+    {
+      "id": "run_west_3",
+      "animation": "run_west",
+      "frame": 3,
+      "source": "assets/art_source/player-fhd/directional/creator-run-right-transitions-r2.png",
+      "source_sha256": "e67930524c11d0b70f2829c8bf8e62d9fde9f92e184185bea090849e695636e1",
+      "crop_xywh": [
+        782,
+        171,
+        355,
+        439
+      ],
+      "sheet_cell_xywh": [
+        627,
+        0,
+        627,
+        633
+      ],
+      "content_scale": 0.12987012987012986,
+      "source_selection": "connected-farmer-and-particles-v1",
+      "source_selection_sha256": "4d420f3fb9202f51d39bdc794f1688d58c3ec17e27ef8b3db10da752bb743047",
+      "action": "run",
+      "content_anchor_xy": [
+        24,
+        60
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        47,
+        88
+      ],
+      "draw_scale": 0.5,
+      "body_reference_height": 462,
+      "feet_source_xy": [
+        965.5,
+        633
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "soil_dark",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "bone",
+        "bone_dark",
+        "cloth_dark",
+        "cloth",
+        "cloth_light"
+      ],
+      "seconds": 0.08,
+      "loop": true,
+      "material_ramp_rule": "lateral-boot-materials",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-run-right-transitions-r2.prompt.txt",
+      "output": "assets/art_source/player-fhd/directional/frames/run_west_3.png",
+      "prompt_sha256": "4ff6cd802eec9218213f253eeead21e7c22b7ec1c07a477fb23b89625d3ffbda",
+      "source_canvas_pivot_xy": [
+        48,
+        88
+      ],
+      "flip_horizontal": true,
+      "output_sha256": "f349b19da380a0043ea72dadd1130e8dc460478c532a9d229a38aa126020ce69"
+    },
+    {
+      "id": "run_west_5",
+      "animation": "run_west",
+      "frame": 5,
+      "source": "assets/art_source/player-fhd/directional/creator-run-right-transitions-r2.png",
+      "source_sha256": "e67930524c11d0b70f2829c8bf8e62d9fde9f92e184185bea090849e695636e1",
+      "crop_xywh": [
+        210,
+        726,
+        362,
+        447
+      ],
+      "sheet_cell_xywh": [
+        0,
+        633,
+        627,
+        621
+      ],
+      "content_scale": 0.12987012987012986,
+      "source_selection": "connected-farmer-and-particles-v1",
+      "source_selection_sha256": "26369befb4c63771127f7be1d388313368fdd693e345b5cf8daeaf26a2f14df1",
+      "action": "run",
+      "content_anchor_xy": [
+        24,
+        58
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        47,
+        88
+      ],
+      "draw_scale": 0.5,
+      "body_reference_height": 462,
+      "feet_source_xy": [
+        398.0,
+        1173
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "soil_dark",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "bone",
+        "bone_dark",
+        "cloth_dark",
+        "cloth",
+        "cloth_light"
+      ],
+      "seconds": 0.08,
+      "loop": true,
+      "material_ramp_rule": "lateral-boot-materials",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-run-right-transitions-r2.prompt.txt",
+      "output": "assets/art_source/player-fhd/directional/frames/run_west_5.png",
+      "prompt_sha256": "4ff6cd802eec9218213f253eeead21e7c22b7ec1c07a477fb23b89625d3ffbda",
+      "source_canvas_pivot_xy": [
+        48,
+        88
+      ],
+      "flip_horizontal": true,
+      "output_sha256": "87b7d19e43a3333ce594d94c07e744633391805b68247f21872584c9c4c4cd1c"
+    },
+    {
+      "id": "run_west_7",
+      "animation": "run_west",
+      "frame": 7,
+      "source": "assets/art_source/player-fhd/directional/creator-run-right-transitions-r2.png",
+      "source_sha256": "e67930524c11d0b70f2829c8bf8e62d9fde9f92e184185bea090849e695636e1",
+      "crop_xywh": [
+        796,
+        726,
+        370,
+        432
+      ],
+      "sheet_cell_xywh": [
+        627,
+        633,
+        627,
+        621
+      ],
+      "content_scale": 0.12987012987012986,
+      "source_selection": "connected-farmer-and-particles-v1",
+      "source_selection_sha256": "4385a8c2f9ea0d8ea21e943e40d2def74536622fd2d2b75fb8798c46b89c5c1a",
+      "action": "run",
+      "content_anchor_xy": [
+        25,
+        58
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        47,
+        88
+      ],
+      "draw_scale": 0.5,
+      "body_reference_height": 462,
+      "feet_source_xy": [
+        989.5,
+        1173
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "soil_dark",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "bone",
+        "bone_dark",
+        "cloth_dark",
+        "cloth",
+        "cloth_light"
+      ],
+      "seconds": 0.08,
+      "loop": true,
+      "material_ramp_rule": "lateral-boot-materials",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-run-right-transitions-r2.prompt.txt",
+      "output": "assets/art_source/player-fhd/directional/frames/run_west_7.png",
+      "prompt_sha256": "4ff6cd802eec9218213f253eeead21e7c22b7ec1c07a477fb23b89625d3ffbda",
+      "source_canvas_pivot_xy": [
+        48,
+        88
+      ],
+      "flip_horizontal": true,
+      "output_sha256": "67bfe8a336c0335f4b0d2c790fbdd379a9d249180a7a5f40c19484dea99478b6"
     },
     {
       "id": "repair_west_0",

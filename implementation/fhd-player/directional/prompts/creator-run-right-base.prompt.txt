@@ -1,0 +1,30 @@
+Create a 4-frame pixel art RUN animation sprite sheet of this character, in a top-down RPG perspective (3/4 overhead view, like a classic top-down RPG).
+
+Attached images:
+1) Facing Right: the character already rotated to face RIGHT. Use EXACTLY this view and facing in every frame.
+2) Character: the original character design. Match its outfit, colors, proportions, weapon and details exactly.
+3) Run Down: the same character's run animation facing down. Use the EXACT SAME moves, weapon, effects and timing — only change the facing direction.
+
+The character FACES RIGHT (east). We see their side profile: face, chest and front foot point toward the RIGHT edge of the image; their back is on the LEFT side.
+
+Arrange the 4 frames in a 2x2 grid on a transparent background (no background).
+
+Top row (frames 1-2):
+Frame 1 (top-left): Push off - body leaning forward, long stride, arms pumping
+Frame 2 (top-right): Airborne - both feet off the ground, legs tucked
+
+Bottom row (frames 3-4):
+Frame 3 (bottom-left): Opposite stride - the other leg reaching forward, arms pumping the other way
+Frame 4 (bottom-right): Airborne - both feet off the ground again, legs tucked
+
+This is a fast looping run cycle moving toward the right edge of the image, with a clear forward lean and longer strides than a walk.
+
+CRITICAL: All 4 frames must show the character facing the SAME direction. Only the pose changes between frames.
+
+Use detailed 32-bit pixel art style with proper shading and highlights. Same character design, size and proportions in all frames.
+
+BACKGROUND: NONE. Output a PNG with a REAL transparent background (alpha channel). Everything that is not the subject must be fully transparent. Do NOT draw a checkerboard pattern to represent transparency, and do NOT add any backdrop, color fill, floor, ground shadow, scenery, or vignette.
+
+IMPORTANT: Do NOT render any text, letters, words, numbers, labels, watermarks, or captions anywhere in the image. Do NOT draw any grid lines, borders, frame dividers, or separator lines between frames — leave the spacing between poses fully transparent. Keep each pose centered inside its own quarter of the image.
+
+Image format: SQUARE (1:1).
