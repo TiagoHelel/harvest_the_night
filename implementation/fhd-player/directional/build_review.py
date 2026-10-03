@@ -16,9 +16,11 @@ ART = ROOT / "assets/art_source/player-fhd/directional"
 OUT = ART / "frames"
 sys.path.insert(0, str(ROOT / "tools"))
 import import_art
+from palette import COLOURS
 
 DIRECTIONS = ["south", "west", "north", "east"]
-REVISIONS = {"run_north": "run_north-r1", "run_east": "run_east-r1", "plant": "plant-r1",
+REVISIONS = {"walk_west": "walk_west-r2", "walk_east": "walk_east-r3",
+             "run_north": "run_north-r1", "run_east": "run_east-r1", "plant": "plant-r1",
              "repair_west": "repair_west-r1", "chop_north": "chop_north-r1",
              "mine_north": "mine_north-r1"}
 OVERRIDES = ["repair_west", "chop_north", "mine_north"]
@@ -157,7 +159,7 @@ def recipes(partial=False):
         entry["review_source"] = "previously user-approved front locomotion"
         entries.append(entry)
     for job in jobs:
-        source_id = REVISIONS.get(job['id'], job['id'])
+        source_id = job.get('source_id', REVISIONS.get(job['id'], job['id']))
         source = ART / (source_id + '.png')
         if not source.exists() and partial:
             continue
@@ -184,8 +186,11 @@ def recipes(partial=False):
                     name = job['action'] + '_' + DIRECTIONS[row]
                     frame = col
                 else:
-                    name = job['id']
-                    frame = row * job['columns'] + col
+                    name = job.get('animation', job['id'])
+                    source_frame = row * job['columns'] + col
+                    if 'frame_map' in job and str(source_frame) not in job['frame_map']:
+                        continue
+                    frame = job.get('frame_map', {}).get(str(source_frame), source_frame + job.get('frame_start', 0))
                 measured.update(name=name, frame=frame, left=left, top=cell_top,
                                 row=row, cell=[left,cell_top,right-left,cell_bottom-cell_top])
                 groups.setdefault(name, []).append(measured)
@@ -229,10 +234,17 @@ def recipes(partial=False):
                          "feet_source_xy": [m['left']+center,m['top']+ground],
                          "alpha_threshold": 128, "palette": "tools/palette.py:COLOURS",
                          "palette_keys": material_keys, "seconds": job['seconds'], "loop": True,
-                         "material_ramp_rule":"saturated-red-prop" if job['action']=='collect' else "action-subset",
+                         "material_ramp_rule":"saturated-red-prop" if job['action']=='collect' else
+                             "lateral-boot-materials" if source_id.startswith('creator-walk-right-transitions') else "action-subset",
                          "prompt": 'implementation/fhd-player/directional/prompts/' + source_id + '.prompt.txt',
                          "output": (OUT / (name + '_' + str(m['frame']) + '.png')).relative_to(ROOT).as_posix()}
                 entry['prompt_sha256'] = import_art.sha((ROOT / entry['prompt']).read_bytes())
+                if job.get('flip_horizontal'):
+                    # Match the creator repo's right-to-left mirror workflow;
+                    # reflect the full generated pose, including its foot pivot.
+                    entry['source_canvas_pivot_xy'] = list(pivot)
+                    entry['pivot_xy'] = [canvas[0] - 1 - pivot[0], pivot[1]]
+                    entry['flip_horizontal'] = True
                 entries.append(entry)
     return entries
 
@@ -253,22 +265,33 @@ def render_selected(entry):
     crop = crop.resize(size,Image.Resampling.NEAREST)
     colors = tuple(import_art.palette.COLOURS[k] for k in entry['palette_keys'])
     cache,reduced = {},[]
-    for r,g,b,a in import_art.samples(crop):
+    for sample_index, (r,g,b,a) in enumerate(import_art.samples(crop)):
         if a < entry['alpha_threshold']:
             reduced.append((0,0,0,0))
         else:
             rgb = (r,g,b)
-            if rgb not in cache:
-                allowed = colors
-                if entry['material_ramp_rule'] == 'saturated-red-prop' and not (r > g*2.5 and r > b*2.5):
-                    allowed = colors[:-3]  # Brown leather/hair must not borrow the red mushroom ramp.
-                cache[rgb] = min(allowed,key=lambda c:sum((c[i]-rgb[i])**2 for i in range(3)))
-            reduced.append((*cache[rgb],255))
+            allowed = colors
+            boot_material = (entry['material_ramp_rule'] == 'lateral-boot-materials'
+                             and sample_index // size[0] >= entry['content_anchor_xy'][1] - 14
+                             and r > 75 and g > 45 and r > b*1.5 and g > b*.9)
+            if boot_material:
+                # Keep warm generated leather in the project's brown ramp;
+                # unrestricted nearest-color mapping can otherwise choose hat gold.
+                allowed = tuple(COLOURS[k] for k in ('soil_dark','wood_dark','wood','wood_light'))
+            elif entry['material_ramp_rule'] == 'saturated-red-prop' and not (r > g*2.5 and r > b*2.5):
+                allowed = colors[:-3]
+            cache_key = (rgb, boot_material)
+            if cache_key not in cache:
+                cache[cache_key] = min(allowed,key=lambda c:sum((c[i]-rgb[i])**2 for i in range(3)))
+            reduced.append((*cache[cache_key],255))
     crop.putdata(reduced)
     canvas = Image.new('RGBA',tuple(entry['canvas_wh']))
-    offset = tuple(entry['pivot_xy'][i]-entry['content_anchor_xy'][i] for i in range(2))
+    cut_pivot = entry.get('source_canvas_pivot_xy', entry['pivot_xy'])
+    offset = tuple(cut_pivot[i]-entry['content_anchor_xy'][i] for i in range(2))
     assert all(offset[i] >= 0 and offset[i]+size[i] <= canvas.size[i] for i in range(2)),entry['id']
     canvas.alpha_composite(crop,offset)
+    if entry.get('flip_horizontal'):
+        canvas = canvas.transpose(Image.Transpose.FLIP_LEFT_RIGHT)
     return canvas
 
 
@@ -299,6 +322,28 @@ def build(check=False, partial=False):
         if name.startswith(('walk_','run_')):
             assert len({import_art.sha(Image.open(ROOT/e['output']).crop((18,66,78,94)).tobytes())
                         for e in group}) == 8, (name,'duplicate leg phases')
+        if name in ('walk_west', 'walk_east'):
+            # Regression: the two contact halves must exchange which boot leads.
+            # Eight distinct PNGs alone previously passed with the same leg ahead.
+            direction_sign = -1 if name.endswith('west') else 1
+            for phase, forward_sign in ((0, direction_sign), (1, direction_sign),
+                                        (3, -direction_sign), (4, -direction_sign),
+                                        (5, -direction_sign), (7, direction_sign)):
+                entry = next(e for e in group if e['frame'] == phase)
+                pixels = np.array(Image.open(ROOT / entry['output']))
+                yy, xx = np.indices(pixels.shape[:2])
+                leather = np.zeros(pixels.shape[:2], dtype=bool)
+                for material in ('soil_dark','wood_dark','wood','wood_light'):
+                    leather |= (pixels[:, :, :3] == COLOURS[material]).all(2)
+                # Include raised heels; compare full material shading rather
+                # than assigning every medium-brown highlight to the near foot.
+                foot_region = leather & (yy >= 72) & (pixels[:, :, 3] > 0)
+                left = foot_region & (xx < pixels.shape[1] / 2)
+                right = foot_region & (xx >= pixels.shape[1] / 2)
+                assert left.any() and right.any(), (name, phase, 'missing left/right boot materials')
+                luminance = pixels[:, :, :3].astype(np.int32).sum(2)
+                separation = float(luminance[right].mean() - luminance[left].mean())
+                assert separation * forward_sign > 0, (name, phase, 'same leg leads both contact halves')
         # Inspect actual full silhouette too: disconnected hat colors must not
         # create a larger back-view farmer despite a valid numeric recipe.
         if name.startswith(('idle_','walk_','run_')):
@@ -389,7 +434,9 @@ def gallery():
     """A local review page loads only one GIF at a time and keeps physical size."""
     spec = json.loads((HERE/'playback.json').read_text())
     groups = spec['groups']
-    data = json.dumps([{**g,'count':len(g['columns'][0]['frames'])} for g in groups],ensure_ascii=False)
+    data = json.dumps([{**g,'count':len(g['columns'][0]['frames']),
+                       'version':import_art.sha((HERE/'gifs'/(g['action']+'-horizontal.gif')).read_bytes())[:12]}
+                      for g in groups],ensure_ascii=False)
     page = '''<!doctype html><html lang="pt-BR"><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1"><title>Farmer — validação de animações</title>
 <style>body{margin:0;background:#17151c;color:#ece3d3;font:16px system-ui,sans-serif}main{max-width:1120px;margin:auto;padding:36px 24px}h1{font-size:30px;margin:8px 0}p{color:#c2b5a1;line-height:1.6}nav{display:flex;gap:8px;flex-wrap:wrap;margin:22px 0}button,a.download{background:#35303e;color:#ece3d3;border:1px solid #51485b;padding:10px 14px;border-radius:8px;cursor:pointer;text-decoration:none}button[aria-pressed=true]{background:#b88c42;color:#19151a;border-color:#b88c42}.preview{overflow:auto;background:#29252f;border-radius:12px;padding:18px 0}img{display:block;margin:auto;image-rendering:pixelated;max-width:none}.tools{display:flex;gap:12px;align-items:center;margin:18px 0;flex-wrap:wrap}small{color:#c2b5a1}#contact{display:flex;gap:12px;flex-wrap:wrap}#contact a{color:#dbb875}footer{border-top:1px solid #3f3748;margin-top:30px;padding-top:16px}</style>
@@ -399,7 +446,7 @@ def gallery():
 <div class="tools"><button id="size" aria-pressed="true">Tamanho previsto em FHD: 120 px de altura</button><a id="download" class="download" download>Baixar este GIF</a><small id="details"></small></div>
 <p>Os pixels são ampliados exatamente em 2×, sem suavização. Você pode alternar para a escala nativa de 60 px. Em telas menores, role a prévia para os lados para conservar o tamanho dos pixels.</p>
 <div id="contact"></div><footer><a class="download" href="todas-animacoes-horizontal.gif" download>Baixar GIF geral</a><p>O GIF geral percorre as 16 categorias. Os GIFs individuais repetem a atividade escolhida. Fontes, prompts e receitas estão guardados nesta pasta e em assets/art_source/player-fhd/directional.</p></footer></main>
-<script>const groups=__DATA__;const names={south:'Frente',west:'Esquerda',north:'Costas',east:'Direita'};const choices=document.querySelector('#choices'),image=document.querySelector('#animation');function select(g){document.querySelector('#title').textContent=g.label;image.src='gifs/'+g.action+'-horizontal.gif';document.querySelector('#download').href=image.src;document.querySelector('#details').textContent=g.count+' quadros por direção · 4 direções';document.querySelectorAll('nav button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.action===g.action)));document.querySelector('#contact').replaceChildren(...g.columns.map(c=>{const a=document.createElement('a');a.href='contacts/'+g.action+'_'+c.direction+'.png';a.textContent='Ver quadros: '+names[c.direction];a.target='_blank';return a}));}for(const g of groups){const b=document.createElement('button');b.textContent=g.label;b.dataset.action=g.action;b.setAttribute('aria-pressed','false');b.onclick=()=>select(g);choices.append(b);}document.querySelector('#size').onclick=function(){const large=this.getAttribute('aria-pressed')==='true';this.setAttribute('aria-pressed',String(!large));image.width=large?520:1040;image.height=large?144:288;this.textContent=large?'Escala nativa: 60 px de altura':'Tamanho previsto em FHD: 120 px de altura';};select(groups[0]);</script></html>'''
+<script>const groups=__DATA__;const names={south:'Frente',west:'Esquerda',north:'Costas',east:'Direita'};const choices=document.querySelector('#choices'),image=document.querySelector('#animation');function select(g){document.querySelector('#title').textContent=g.label;image.src='gifs/'+g.action+'-horizontal.gif?v='+g.version;document.querySelector('#download').href=image.src;document.querySelector('#details').textContent=g.count+' quadros por direção · 4 direções';document.querySelectorAll('nav button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.action===g.action)));document.querySelector('#contact').replaceChildren(...g.columns.map(c=>{const a=document.createElement('a');a.href='contacts/'+g.action+'_'+c.direction+'.png?v='+g.version;a.textContent='Ver quadros: '+names[c.direction];a.target='_blank';return a}));}for(const g of groups){const b=document.createElement('button');b.textContent=g.label;b.dataset.action=g.action;b.setAttribute('aria-pressed','false');b.onclick=()=>select(g);choices.append(b);}document.querySelector('#size').onclick=function(){const large=this.getAttribute('aria-pressed')==='true';this.setAttribute('aria-pressed',String(!large));image.width=large?520:1040;image.height=large?144:288;this.textContent=large?'Escala nativa: 60 px de altura':'Tamanho previsto em FHD: 120 px de altura';};select(groups[0]);</script></html>'''
     (HERE/'index.html').write_bytes(page.replace('__DATA__',data).encode('utf-8'))
 
 

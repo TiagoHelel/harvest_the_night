@@ -1,0 +1,7 @@
+Create FOUR RIGHT-facing farmer walk poses in ONE horizontal row of four equal cells. Transparent alpha. Image1 shows the NEAR-FOOT-leading contact pose and fixes pose1. Image2 fixes the same farmer's face, proportions and materials.
+This FIRST HALF animates ONLY the DARK BACKGROUND FAR leg swinging while the BRIGHT FOREGROUND NEAR leg supports:
+1: BRIGHT near boot AHEAD RIGHT on ground, DARK far boot BEHIND LEFT on ground, near blue thigh down-right.
+2: BRIGHT near boot planted underneath hip, DARK far heel lifts BEHIND LEFT with bent knee.
+3: BRIGHT near boot planted slightly BEHIND LEFT, DARK far knee and DARK boot pass beneath hip ABOVE ground. The raised boot must be DARK here; do not raise the bright foreground foot.
+4: BRIGHT near boot planted BEHIND LEFT, DARK far leg reaches AHEAD RIGHT with DARK boot just above ground. The raised/reaching boot must be DARK, not bright. Near blue thigh slopes down-left.
+Freeze the RIGHT-facing head/hat, OPEN white eye and torso. Every nose still points RIGHT. Keep near leg bright, far leg darker, two physically connected short legs, no foot ownership swapping, no high kick, no turning or blinking. Arms counter-swing gently. Same scale and ground baseline across all cells. Crisp simple pixel art for60-native-pixel body, clean flat clusters, no blur/grain/antialiasing, no text, shadow or ground. Generous transparent gutters and full boots visible.

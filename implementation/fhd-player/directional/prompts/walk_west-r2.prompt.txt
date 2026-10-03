@@ -1,0 +1,11 @@
+EDIT the walking sheet reference (image 2), keeping the approved idle farmer identity (image 1). Correct the broken gait. Output 4 columns x 2 rows, eight chronological frames. True transparent alpha background, NO brown background or background glow.
+The bright visible near leg currently steps forward twice, making the animation repeat the SAME leg. Fix this: on the TOP ROW the bright near boot steps forward LEFT and then slides back toward the hip through frames0,1,2,3. On the BOTTOM ROW the bright near leg MUST be BEHIND the hip at image RIGHT in frame4 while the dark far leg extends LEFT. Then the bright near knee bends and boot lifts behind in5, passes under hip in6, reaches forward LEFT in7. Keep near boot bright throughout. Far boot dark throughout. Two legs physically connect to the pelvis, alternate which one is ahead. Near arm swings opposite near leg. No kicking, only low compact walking.
+Frame0: BRIGHT boot left and DARK boot right, both grounded.
+Frame1: bright boot slightly left grounded, dark boot behind lifted.
+Frame2: bright boot at center grounded, dark boot at center raised.
+Frame3: bright boot slightly right grounded, dark boot reaches left nearly grounded.
+Frame4: DARK boot left and BRIGHT boot right, both grounded. MUST look distinctly opposite to frame0, with the bright thigh sloping BACK TO THE RIGHT.
+Frame5: dark boot slightly left grounded, bright boot behind lifted.
+Frame6: dark boot at center grounded, bright boot at center raised.
+Frame7: dark boot slightly right grounded, bright boot reaches left nearly grounded.
+All eight figures face LEFT. Freeze hat, face, OPEN white eye and torso matching approved idle. Eight DIFFERENT phases, no duplicated halves, one-pixel bob maximum. Compact 60-native-pixel body; enlarged clean square pixel art. Preserve equal scale and ground row baseline, generous transparent gutters. No labels, shadow or scene.

@@ -1,0 +1,7 @@
+FOUR RIGHT-facing farmer walk poses in one horizontal row of four equal cells, transparent alpha. The supplied sprite is the FAR-FOOT-LEADING contact. Use it for pose1, preserving its compact proportions and SAME right-facing head/hat/open white eye/chest in every pose.
+This half of the cycle animates the BRIGHT foreground/near leg's return swing while the DARK far leg supports:
+1 = reference: BRIGHT near boot BEHIND LEFT, DARK far boot AHEAD RIGHT, both grounded. Near thigh slopes down-left.
+2 = dark far boot supports at center; BRIGHT near heel lifts BEHIND LEFT with bent knee.
+3 = dark far boot supports behind LEFT; BRIGHT near knee and boot pass underneath the hip, BRIGHT boot clearly lifted ABOVE ground.
+4 = dark far boot supports behind LEFT; BRIGHT near leg reaches AHEAD RIGHT just above ground ready for contact.
+Foreground leg stays bright, background leg stays dark. Draw two connected short legs, no leg ownership swap, no front/back body turn, no high kick, no blinking. Arm swing opposite near leg. All noses and boot toes point RIGHT. Same scale and ground line, complete boots and generous transparent gutters. Clean flat enlarged square pixel clusters, no grain, antialiasing or gradients. No shadows, ground, text or labels.

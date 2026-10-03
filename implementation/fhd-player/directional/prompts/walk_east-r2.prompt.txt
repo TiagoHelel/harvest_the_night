@@ -1,0 +1,11 @@
+Create a new clean RIGHT-FACING walking animation for this approved pixel farmer. Eight sequential sprites in a FOUR-column TWO-row sheet. Row-major sequence. Transparent alpha, NO backdrop of any kind. All eight heads, hat, face and torso match reference's first open-eye RIGHT-facing idle, frozen orientation and identical proportions. White eye open in all frames. Nose points RIGHT throughout.
+The two short legs exchange their ahead/behind positions. Top row: NEAR visible leg takes a step. Bottom row: FAR hidden leg takes a step while NEAR leg swings. Keep clothing and boots consistent, draw the far limb darker.
+0: near boot ahead RIGHT, far boot behind LEFT, contact ground.
+1: near boot supports under hip, far heel lifts behind LEFT.
+2: near boot supports behind LEFT, far raised boot passes under hip.
+3: near boot supports behind LEFT, far boot reaches ahead RIGHT.
+4: far boot ahead RIGHT, near boot behind LEFT, contact ground. Near blue leg visibly slopes down-left here, opposite frame0.
+5: far boot supports under hip, near heel lifts behind LEFT.
+6: far boot supports behind LEFT, near raised boot passes under hip.
+7: far boot supports behind LEFT, near boot reaches ahead RIGHT, ready for0.
+No body turning, front-facing frames, duplicated halves, changing eye shapes, or kicking. Arms gently swing opposite the legs. One-pixel bob, short walking strides, no running. Chunky simple flat pixel clusters for 60 native pixel height with about40pixel hat, shown magnified. No texture/blur/gradients, no labels, shadows or ground. All sprites same scale, complete boots, generous transparent gutters.

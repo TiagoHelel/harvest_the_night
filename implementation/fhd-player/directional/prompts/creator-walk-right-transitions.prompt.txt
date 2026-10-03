@@ -1,0 +1,31 @@
+Create a 4-frame pixel art WALK TRANSITIONS animation sprite sheet of this character, in a top-down RPG perspective (3/4 overhead view, like a classic top-down RPG).
+
+Attached images:
+1) Facing Right: the character already rotated to face RIGHT. Use EXACTLY this view and facing in every frame.
+2) Character: the original character design. Match its outfit, colors, proportions, weapon and details exactly.
+
+The character FACES RIGHT (east). We see their side profile: face, chest and front foot point toward the RIGHT edge of the image; their back is on the LEFT side.
+
+Arrange the 4 frames in a 2x2 grid on a transparent background (no background).
+
+Top row (frames 1-2):
+Frame 1 (top-left): Between key poses 1 and 2: down/support on the brighter near leg ahead RIGHT; dark far heel lifts behind LEFT, knee bent
+Frame 2 (top-right): Between key poses 2 and 3: brighter near leg supports behind LEFT; dark far leg reaches forward RIGHT just above ground
+
+Bottom row (frames 3-4):
+Frame 3 (bottom-left): Between key poses 3 and 4: down/support on the dark far leg ahead RIGHT; brighter near heel lifts behind LEFT, knee bent
+Frame 4 (bottom-right): Between key poses 4 and 1: dark far leg supports behind LEFT; brighter near leg reaches forward RIGHT just above ground
+
+These are ONLY the four in-between poses. The four main poses in attached image 3 remain unchanged. Chronological playback alternates key1, transition1, key2, transition2, key3, transition3, key4, transition4. Keep the foreground leg brighter and background leg darker throughout. Short natural walking strides, no high kicks or running.
+
+CRITICAL: All 4 frames must show the character facing the SAME direction. Only the pose changes between frames.
+
+Match the exact approved compact pixel-art farmer references, open white eye, short proportions and clean square pixels. Design for 60 useful native pixels body height, simple flat shading, no blur or antialiasing. Same character design, size and proportions in all frames.
+
+BACKGROUND: NONE. Output a PNG with a REAL transparent background (alpha channel). Everything that is not the subject must be fully transparent. Do NOT draw a checkerboard pattern to represent transparency, and do NOT add any backdrop, color fill, floor, ground shadow, scenery, or vignette.
+
+IMPORTANT: Do NOT render any text, letters, words, numbers, labels, watermarks, or captions anywhere in the image. Do NOT draw any grid lines, borders, frame dividers, or separator lines between frames — leave the spacing between poses fully transparent. Keep each pose centered inside its own quarter of the image.
+
+Image format: SQUARE (1:1).
+
+Additional attached image 3: the four correct RIGHT-facing walking key poses, in 2x2 reading order. Draw the intermediate poses that connect these anchors, with the same head, torso and body scale. Align every figure on the same ground baseline and give it generous transparent gutters. Two connected short legs exchange support; only the indicated leg is lifted.

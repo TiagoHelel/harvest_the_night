@@ -1638,3 +1638,52 @@ unchanged. This is a candidate family awaiting the user's visual validation;
 subjective gait/readability approval, consistent runtime padding/bindings and
 live farm/house day/night composition remain integration work after approval.
 The earlier broader FHD working-tree edits and rejected pilots are preserved.
+
+
+## 2026-10-02 — Follow-up: lateral farmer walk from creator prompts
+
+The user approved idle and rejected west/east walking because the same leg led
+both stride halves. The replacement remains a review candidate; it has not been
+promoted to the runtime actor family. Idle approval stays in user-review.json.
+
+Imported the actual buildDirectionalPrompt and STUDIO_ACTIONS exports from
+C:/Users/Helel/Documents/repos/sprite-sheet-creator/app/lib/prompts.ts without
+changing that repository. Its source SHA-256 is
+5bdeda5f9d40b0becfd4bbacac9728225211218fa4d2b26574e42de39a74f1f8.
+Reference order follows the builder: accepted right rotation, canonical farmer,
+and accepted front walking. Exact base/adapted prompts, calls, original output
+paths and failed candidates remain in implementation/fhd-player/directional/.
+
+Final sources are assets/art_source/player-fhd/directional/
+creator-walk-right-keys-r1.png and creator-walk-right-transitions-r2.png. Four
+anchor poses occupy phases 0,2,4,6; four transitions occupy 1,3,5,7. The complete
+right poses are reflected for left, following the creator README. The reflected
+96x96 canvas retains its corresponding ground pivot at (47,88), versus (48,88)
+on the right. Only sixteen lateral walking native PNGs changed. The other 268
+frames, including approved idle and front/back walking, are byte-identical to
+HEAD. Transition boot colors use the existing brown material ramp so palette
+quantization does not map warm leather onto hat gold; no sprite is hand-painted.
+
+Added a meaningful gait regression check for near/far boot material separation
+at contact/support/reach phases 0,1,3,4,5,7 in both lateral views. All twelve final
+poses pass, while the earlier same-leg family fails the negative control. This
+check catches that specific error; it does not establish subjective animation
+quality. Measurements are retained in walk-gait-regression.json. Exact source
+checks pass for 284 frames and 64 animations, binary alpha, hashes, distinct
+poses and eight distinct lower-body drawings per locomotion cycle.
+
+Recaptured 192 real Godot walking frames at 25fps. Rebuilt the 1040x288 horizontal
+walk GIF (7.68s) and the full sixteen-category overview (61.44s). Eight consecutive
+phases, selected original captures, contact sheets and the final browser proof
+are retained in review-stills/. The same local index.html was reloaded, WALK
+selected and verified at the intended FHD 120px body size. Content hashes on GIF
+URLs prevent old cached previews. Prompts use built-in ImageGen.
+
+Full working-tree verify/export passed 54 checks, zero skips/failures in 675s
+(over the 300s soft target), including 7,581 core assertions and 996 input cases.
+Sim hash 1270427719 and data hash 8148086 remain unchanged. Evidence is in
+walk-revision-verify.log. Later changes were confined to offline art cuts and
+review output and passed final source/gait checks plus real renderer capture and
+GIF encoding. Completed game/sprite queues remain unchanged. Runtime bindings,
+core simulation and pre-existing broader FHD changes are preserved. Walking
+still awaits user visual validation; no push or runtime integration was made.

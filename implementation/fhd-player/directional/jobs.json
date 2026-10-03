@@ -53,15 +53,6 @@
       "seconds": 0.55
     },
     {
-      "id": "walk_west",
-      "action": "walk",
-      "direction": "west",
-      "columns": 4,
-      "rows": 2,
-      "count": 8,
-      "seconds": 0.12
-    },
-    {
       "id": "run_west",
       "action": "run",
       "direction": "west",
@@ -78,15 +69,6 @@
       "rows": 1,
       "count": 3,
       "seconds": 0.55
-    },
-    {
-      "id": "walk_east",
-      "action": "walk",
-      "direction": "east",
-      "columns": 4,
-      "rows": 2,
-      "count": 8,
-      "seconds": 0.12
     },
     {
       "id": "run_east",
@@ -213,9 +195,82 @@
       "rows": 4,
       "count": 16,
       "seconds": 0.16
+    },
+    {
+      "id": "walk_east_keys",
+      "source_id": "creator-walk-right-keys-r1",
+      "action": "walk",
+      "direction": "east",
+      "animation": "walk_east",
+      "columns": 2,
+      "rows": 2,
+      "count": 4,
+      "seconds": 0.12,
+      "frame_map": {
+        "0": 0,
+        "1": 2,
+        "2": 4,
+        "3": 6
+      },
+      "flip_horizontal": false
+    },
+    {
+      "id": "walk_east_transitions",
+      "source_id": "creator-walk-right-transitions-r2",
+      "action": "walk",
+      "direction": "east",
+      "animation": "walk_east",
+      "columns": 2,
+      "rows": 2,
+      "count": 4,
+      "seconds": 0.12,
+      "frame_map": {
+        "0": 1,
+        "1": 3,
+        "2": 5,
+        "3": 7
+      },
+      "flip_horizontal": false
+    },
+    {
+      "id": "walk_west_keys",
+      "source_id": "creator-walk-right-keys-r1",
+      "action": "walk",
+      "direction": "west",
+      "animation": "walk_west",
+      "columns": 2,
+      "rows": 2,
+      "count": 4,
+      "seconds": 0.12,
+      "frame_map": {
+        "0": 0,
+        "1": 2,
+        "2": 4,
+        "3": 6
+      },
+      "flip_horizontal": true
+    },
+    {
+      "id": "walk_west_transitions",
+      "source_id": "creator-walk-right-transitions-r2",
+      "action": "walk",
+      "direction": "west",
+      "animation": "walk_west",
+      "columns": 2,
+      "rows": 2,
+      "count": 4,
+      "seconds": 0.12,
+      "frame_map": {
+        "0": 1,
+        "1": 3,
+        "2": 5,
+        "3": 7
+      },
+      "flip_horizontal": true
     }
   ],
   "final_native_frames": 284,
   "directional_animations": 64,
-  "runtime_promotion": false
+  "runtime_promotion": false,
+  "lateral_walk_method": "sprite-sheet-creator buildDirectionalPrompt; four anchor poses + four transitions; right-to-left full-pose reflection"
 }

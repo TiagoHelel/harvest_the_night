@@ -21,8 +21,9 @@ ImageGen; subsequent activities also reference the generated cardinal idle views
 | Chop, mine, till, plant, harvest, water, fish, reel, collect, craft, trade, repair, carry | 4 each | 4 | 208 |
 | Total | | 64 animations | 284 |
 
-Front, left, back and right are genuinely separate generated views; east assets
-are not runtime flips of west. Walking/running have eight different native
+Most views were generated separately. The revised lateral walk follows the
+creator repository recommendation: generate right and reflect the complete
+source-owned poses to obtain left, with the reflected foot pivot retained. Walking/running have eight different native
 lower-body drawings each. Work strips use four action key poses, not repeated
 idle frames. A held rod is present in casting, waiting and reeling drawings.
 The casting preview deliberately holds the final waiting pose before recasting.
@@ -100,6 +101,37 @@ GIF encoding validates the dimensions, 192 real renderer inputs and timing.
 No game simulation is run by the isolated playback scene.
 
 ## Integration boundary
+
+### Lateral walking review follow-up
+
+The user accepted all four idle directions and requested replacements for west/
+east walking. Following additional feedback, the final workflow imports the
+actual `buildDirectionalPrompt` and `STUDIO_ACTIONS` from the local
+`sprite-sheet-creator/app/lib/prompts.ts`. `import_creator_prompts.cjs` reads that
+repository without changing it; `prompts/creator-provenance.json` pins its SHA-256.
+Submitted prompts and calls are retained exactly, including focused revisions.
+
+Reference order follows that builder: accepted facing-right rotation, canonical
+farmer design, and accepted front walking. Its four anchor poses use a 2x2 grid.
+Four distinct in-between poses complete the requested eight-frame cycle, with
+explicit near/far boot material corrections where the generator reused the same
+leg. Final sources are `creator-walk-right-keys-r1.png` and
+`creator-walk-right-transitions-r2.png`. Left reflects the complete right poses,
+as the creator README recommends, rather than regenerating a mismatched gait.
+
+Only sixteen lateral walking frames changed; the remaining 268 native frames,
+including approved idle and front/back walking, stay byte-identical. Warm boot
+pixels in the generated transitions use the project's brown material ramp so
+nearest palette mapping does not turn leather into hat gold. No pixels are
+hand-painted. The source check now guards opposite near/far boot positions at
+contacts and the support/reach phases (0,1,3,4,5,7), catching the earlier same-leg
+cycle that passed simple frame-count/uniqueness tests. This guard is limited to
+material separation; actual renderer playback still requires visual review.
+
+`user-review.json` retains idle approval and leaves walking pending. The same
+HTML versions image URLs by GIF content hash so revised previews avoid stale
+browser images. Full Godot captures, eight consecutive phases and a browser
+screenshot remain in `review-stills/`.
 
 This delivery is a candidate review, not automatic user approval. These PNGs
 have not replaced `sprites/actors/` or the registered runtime player family.

@@ -1,0 +1,18 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-02",
+  "transparent_background": true,
+  "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-96d0fd9c-dcd5-4eca-a538-52449794dff0.png",
+  "workspace_source": "assets/art_source/player-fhd/directional/walk_west-r2.png",
+  "prompt_file": "implementation/fhd-player/directional/prompts/walk_west-r2.prompt.txt",
+  "references": [
+    "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/directional/idle_west.png",
+    "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-3ee9b5e7-ae08-4d2f-8df7-5b450a7f911a.png"
+  ],
+  "layout": {
+    "columns": 4,
+    "rows": 2,
+    "count": 8
+  },
+  "status": "replacement candidate; keep subject to user gait review"
+}

@@ -1,0 +1,18 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-02",
+  "transparent_background": true,
+  "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-a18b28e8-ffd4-4298-b6dd-fc8418ba0f80.png",
+  "workspace_source": "assets/art_source/player-fhd/directional/creator-walk-right-transitions-r2.png",
+  "prompt_file": "implementation/fhd-player/directional/prompts/creator-walk-right-transitions-r2.prompt.txt",
+  "references": [
+    "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-184b4fd5-c4f0-4aa9-bee9-0667f60398b3.png"
+  ],
+  "layout": {
+    "columns": 2,
+    "rows": 2,
+    "count": 4
+  },
+  "status": "selected four intermediate poses; user acceptance pending",
+  "prompt_builder": "C:/Users/Helel/Documents/repos/sprite-sheet-creator/app/lib/prompts.ts"
+}

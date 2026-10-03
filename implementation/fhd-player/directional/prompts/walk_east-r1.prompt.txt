@@ -1,0 +1,20 @@
+Use case: stylized-concept.
+Create a replacement walking sprite sheet for an existing pixel-art farmer game. Reference image is the APPROVED idle identity and proportions, not a walk pose. Preserve its straw hat with brown band, hair, cream shirt, blue overalls, gold buttons, brown boots and one ivory-white side eye with dark pupil. This is a compact short-legged farmer. Same outfit and facial features in all frames, eyes OPEN throughout walking, no blinking. Small clean pixel clusters for a 60-native-pixel tall body, no gradients, grain, antialiasing or blur, no new details.
+OUTPUT exactly EIGHT sprites in FOUR columns by TWO rows, row-major temporal order 0,1,2,3 / 4,5,6,7. Generous transparent gutters, fixed body scale and equal cell sizes. True transparent background. No ground, shadow, text or labels.
+CRITICAL: redraw a physically coherent WALK cycle with TWO attached legs, NOT eight variations of the same forward boot. Closest leg is brighter with a clearly visible blue thigh, calf, brown boot; far leg is darker and partially occluded. Leg depth identity NEVER swaps shading. Near and far legs each take one step in the complete eight-frame cycle. Each knee connects its hip to its corresponding boot; no detached, merged or extra boots. Short strides, no high kicks or airborne running. Feet stay under the body, not a moonwalk. Arms counter-swing. Upper body and head retain identical facing, shape and scale; at most ONE native pixel vertical bounce.
+Motion contract below uses FORWARD to mean the character's facing, BACK opposite facing:
+0 CONTACT A: NEAR foot ahead/forward at ground, FAR foot back at ground; near arm back.
+1 DOWN A: near foot supports, moves slightly back toward center; far heel lifts behind with bent knee.
+2 PASS A: near foot centered and planted, far knee and lifted boot pass beside/under hip traveling forward, toe not planted.
+3 UP A: near support foot behind hip, far leg reaches forward for next contact, far boot just above ground.
+4 CONTACT B: FAR foot ahead/forward at ground, NEAR foot back at ground; near arm forward. This is the OPPOSITE leg taking the forward step versus frame0.
+5 DOWN B: far foot supports, moves back toward center; near heel lifts behind with bent knee.
+6 PASS B: far foot centered and planted, near knee and lifted boot pass beside/under hip traveling forward.
+7 UP B: far support foot behind hip, near leg reaches forward for next contact, near boot just above ground.
+Frame7 smoothly transitions to0. The grounded supporting boot moves progressively forward->center->back across its four support phases as if the farmer were walking through the world. The lifted foot returns back->center->forward. Never jump leg identities or reverse phase order. Show two opposite contact poses, two passing poses, two heel-lift poses and two reaches. Make phase0 and4 clearly different by near/far leg ownership.
+
+Facing: RIGHT / EAST in EVERY frame. Nose and boot toes image RIGHT. Keep the approved east idle upper-body model. FORWARD=RIGHT, BACK=LEFT.
+MANDATORY FOOT TRAJECTORIES relative to the hip, scaled to 60-native-pixel body. These coordinates describe ankle centers, not text to draw:
+NEAR bright ankle X across frames0..7: +7,+4,0,-4,-7,-4,0,+4.
+FAR dark ankle X across frames0..7: -7,-4,0,+4,+7,+4,0,-4.
+NEAR foot support ground frames0..3, then lifts and swings frames4..7. FAR foot swings frames0..3, supports ground frames4..7. In frames0 and4 both ankles contact the ground. In frame0 brighter near boot is on RIGHT; in frame4 brighter near boot is on LEFT and darker far boot on RIGHT. This difference MUST be visually obvious, not recoloring the same pose. Frames2 and6: feet pass underneath hip with one boot clearly lifted. Knees bent only for swing, short legs. No duplicated first/second half poses. Freeze hat face chest, have near hand swing left when near foot right and vice versa.

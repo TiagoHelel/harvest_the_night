@@ -1,0 +1,6 @@
+EDIT only four BOOTS in image1, keeping EVERY pose, pixel silhouette, leg position, hat, face, eye, shirt, layout and ground baseline unchanged.
+There is a material/color error: in TOP-RIGHT and BOTTOM-LEFT sprites the boot on the LEFT must be LIGHT warm tan leather (#B57B48) and the boot on the RIGHT must be DARK brown leather (#684126). Use a darker blue on the leg connected to the DARK right boot, and normal brighter blue on the leg connected to the LIGHT left boot. This ensures these two sprites depict the opposite-leg half of the walk.
+TOP-RIGHT: brighten the PLANTED LEFT boot to tan; darken the RAISED RIGHT boot to dark brown.
+BOTTOM-LEFT: brighten the LIFTED LEFT boot to tan; darken the PLANTED RIGHT boot to dark brown.
+Do not move any leg or boot, and do not change the top-left or bottom-right sprites at all. Do not default to tan leather on the right boot in the corrected two sprites: their right boot must be dark brown, their left boot must be tan. These are the two exact requested material corrections.
+Keep the existing clean compact pixel-art farmer, same pixels/shape and true transparent background. No text, shadow, extra detail, blur, antialiasing or scenery.

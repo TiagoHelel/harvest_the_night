@@ -1,0 +1,170 @@
+[
+  {
+    "source": "HEAD",
+    "direction": "east",
+    "frame": 0,
+    "right_minus_left_brightness": -23.418,
+    "opposite_leg_material_check": false
+  },
+  {
+    "source": "HEAD",
+    "direction": "east",
+    "frame": 1,
+    "right_minus_left_brightness": -25.815,
+    "opposite_leg_material_check": false
+  },
+  {
+    "source": "HEAD",
+    "direction": "east",
+    "frame": 3,
+    "right_minus_left_brightness": -15.619,
+    "opposite_leg_material_check": true
+  },
+  {
+    "source": "HEAD",
+    "direction": "east",
+    "frame": 4,
+    "right_minus_left_brightness": -22.2,
+    "opposite_leg_material_check": true
+  },
+  {
+    "source": "HEAD",
+    "direction": "east",
+    "frame": 5,
+    "right_minus_left_brightness": -10.563,
+    "opposite_leg_material_check": true
+  },
+  {
+    "source": "HEAD",
+    "direction": "east",
+    "frame": 7,
+    "right_minus_left_brightness": -15.299,
+    "opposite_leg_material_check": false
+  },
+  {
+    "source": "HEAD",
+    "direction": "west",
+    "frame": 0,
+    "right_minus_left_brightness": -28.69,
+    "opposite_leg_material_check": true
+  },
+  {
+    "source": "HEAD",
+    "direction": "west",
+    "frame": 1,
+    "right_minus_left_brightness": -30.798,
+    "opposite_leg_material_check": true
+  },
+  {
+    "source": "HEAD",
+    "direction": "west",
+    "frame": 3,
+    "right_minus_left_brightness": -26.182,
+    "opposite_leg_material_check": false
+  },
+  {
+    "source": "HEAD",
+    "direction": "west",
+    "frame": 4,
+    "right_minus_left_brightness": -26.19,
+    "opposite_leg_material_check": false
+  },
+  {
+    "source": "HEAD",
+    "direction": "west",
+    "frame": 5,
+    "right_minus_left_brightness": -38.717,
+    "opposite_leg_material_check": false
+  },
+  {
+    "source": "HEAD",
+    "direction": "west",
+    "frame": 7,
+    "right_minus_left_brightness": -27.443,
+    "opposite_leg_material_check": true
+  },
+  {
+    "source": "replacement",
+    "direction": "east",
+    "frame": 0,
+    "right_minus_left_brightness": 8.292,
+    "opposite_leg_material_check": true
+  },
+  {
+    "source": "replacement",
+    "direction": "east",
+    "frame": 1,
+    "right_minus_left_brightness": 10.363,
+    "opposite_leg_material_check": true
+  },
+  {
+    "source": "replacement",
+    "direction": "east",
+    "frame": 3,
+    "right_minus_left_brightness": -133.332,
+    "opposite_leg_material_check": true
+  },
+  {
+    "source": "replacement",
+    "direction": "east",
+    "frame": 4,
+    "right_minus_left_brightness": -47.571,
+    "opposite_leg_material_check": true
+  },
+  {
+    "source": "replacement",
+    "direction": "east",
+    "frame": 5,
+    "right_minus_left_brightness": -110.515,
+    "opposite_leg_material_check": true
+  },
+  {
+    "source": "replacement",
+    "direction": "east",
+    "frame": 7,
+    "right_minus_left_brightness": 37.219,
+    "opposite_leg_material_check": true
+  },
+  {
+    "source": "replacement",
+    "direction": "west",
+    "frame": 0,
+    "right_minus_left_brightness": -8.292,
+    "opposite_leg_material_check": true
+  },
+  {
+    "source": "replacement",
+    "direction": "west",
+    "frame": 1,
+    "right_minus_left_brightness": -10.363,
+    "opposite_leg_material_check": true
+  },
+  {
+    "source": "replacement",
+    "direction": "west",
+    "frame": 3,
+    "right_minus_left_brightness": 133.332,
+    "opposite_leg_material_check": true
+  },
+  {
+    "source": "replacement",
+    "direction": "west",
+    "frame": 4,
+    "right_minus_left_brightness": 47.571,
+    "opposite_leg_material_check": true
+  },
+  {
+    "source": "replacement",
+    "direction": "west",
+    "frame": 5,
+    "right_minus_left_brightness": 110.515,
+    "opposite_leg_material_check": true
+  },
+  {
+    "source": "replacement",
+    "direction": "west",
+    "frame": 7,
+    "right_minus_left_brightness": -37.219,
+    "opposite_leg_material_check": true
+  }
+]

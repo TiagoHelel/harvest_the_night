@@ -1,0 +1,20 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-02",
+  "transparent_background": true,
+  "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-7b1b3984-fc1b-473a-8525-da3704a88e40.png",
+  "workspace_source": "assets/art_source/player-fhd/directional/creator-walk-right-transitions.png",
+  "prompt_file": "implementation/fhd-player/directional/prompts/creator-walk-right-transitions.prompt.txt",
+  "references": [
+    "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/fhd-player/directional/review-stills/creator-rotation-right.png",
+    "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/fhd-player/directional/review-stills/creator-character.png",
+    "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-adea0e36-5fa9-4c26-a95f-2e9dd3a1d7da.png"
+  ],
+  "layout": {
+    "columns": 2,
+    "rows": 2,
+    "count": 4
+  },
+  "status": "superseded; boot material ownership repeats",
+  "prompt_builder": "C:/Users/Helel/Documents/repos/sprite-sheet-creator/app/lib/prompts.ts"
+}

@@ -1,0 +1,7 @@
+Generate exactly FOUR left-facing farmer walking poses, in a single horizontal row of four equal-width cells. Transparent alpha background. Keep the referenced approved pixel farmer, same hat face white eye, outfit and short compact proportions, 60-pixel native height shown enlarged.
+These four poses are the SECOND HALF of a walk cycle: the VISIBLE NEAR LEG swings backward and then forward while the partially hidden FAR LEG supports weight. Draw the near/visible blue thigh BEHIND the pelvis to the RIGHT, not projecting to the left.
+Pose1: far leg steps ahead LEFT with a darker boot LEFT of body. The near leg extends BACK RIGHT with bright brown boot RIGHT of body on ground. The near cream sleeve and hand swing FORWARD LEFT. This is the far-foot-leading contact, with the visible leg BACK.
+Pose2: dark far boot supports under hip; near/bright boot lifts BEHIND body to the RIGHT, knee bent. Near arm forward.
+Pose3: dark far boot supports, near knee and bright boot pass underneath the hip, raised.
+Pose4: dark far boot supports BEHIND body to the RIGHT; near leg and bright boot reach forward LEFT just above ground. Near arm swings back.
+Front-facing nose and hat? NO. All farmers MUST face LEFT as in reference. Do not repeat the near-foot-leading contact in pose1. Two connected legs, far and near depths remain consistent. Low soft walking motion, no kick or run. Same head and torso, no eye blink, no proportions changing. Pure flat pixel clusters, no texture, outline on limbs, no shadows, labels or ground. Complete boots and generous transparent separation.

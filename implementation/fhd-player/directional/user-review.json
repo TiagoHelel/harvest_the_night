@@ -2,7 +2,12 @@
   "version": 1,
   "runtime_promotion": false,
   "reviewed_preview_commit": "454f91c1",
-  "directions": ["south", "west", "north", "east"],
+  "directions": [
+    "south",
+    "west",
+    "north",
+    "east"
+  ],
   "approved": {
     "idle": {
       "feedback": "idle ok",
@@ -11,7 +16,36 @@
     }
   },
   "pending": [
-    "walk", "run", "chop", "mine", "till", "plant", "harvest",
-    "water", "fish", "reel", "collect", "craft", "trade", "repair", "carry"
-  ]
+    "walk",
+    "run",
+    "chop",
+    "mine",
+    "till",
+    "plant",
+    "harvest",
+    "water",
+    "fish",
+    "reel",
+    "collect",
+    "craft",
+    "trade",
+    "repair",
+    "carry"
+  ],
+  "revisions": {
+    "walk": {
+      "feedback": "na criacao, usa os prompts desse repo: sprite-sheet-creator",
+      "directions": [
+        "west",
+        "east"
+      ],
+      "status": "creator-prompt replacement awaiting user validation",
+      "sources": [
+        "creator-walk-right-keys-r1.png",
+        "creator-walk-right-transitions-r2.png"
+      ],
+      "preview": "gifs/walk-horizontal.gif",
+      "method": "four key poses and four in-betweens; left mirrors right as recommended by creator README"
+    }
+  }
 }

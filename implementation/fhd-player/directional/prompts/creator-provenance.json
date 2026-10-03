@@ -1,0 +1,28 @@
+{
+  "repository": "C:/Users/Helel/Documents/repos/sprite-sheet-creator",
+  "file": "C:\\Users\\Helel\\Documents\\repos\\sprite-sheet-creator\\app\\lib\\prompts.ts",
+  "source_sha256": "5bdeda5f9d40b0becfd4bbacac9728225211218fa4d2b26574e42de39a74f1f8",
+  "export": "buildDirectionalPrompt",
+  "action": "walk",
+  "direction": "right",
+  "references": [
+    {
+      "kind": "rotation",
+      "label": "Facing Right"
+    },
+    {
+      "kind": "character",
+      "label": "Character"
+    },
+    {
+      "kind": "action",
+      "label": "Walk Down"
+    }
+  ],
+  "adaptations": [
+    "Preserve approved simple pixel art instead of detailed 32-bit styling",
+    "Fixed scale and ground baseline",
+    "Explicit opposite-leg contact"
+  ],
+  "expansion": "Four anchor poses first; four distinct in-between poses then form the requested eight-frame cycle"
+}
