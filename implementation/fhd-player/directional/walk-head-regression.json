@@ -1,0 +1,191 @@
+{
+  "baseline_commit": "80d269e6",
+  "unchanged_other_native_frames": 268,
+  "previous": {
+    "walk_south": [
+      {
+        "head_width": 48,
+        "head_height": 33,
+        "brim_width": 44
+      },
+      {
+        "head_width": 48,
+        "head_height": 33,
+        "brim_width": 44
+      },
+      {
+        "head_width": 48,
+        "head_height": 33,
+        "brim_width": 44
+      },
+      {
+        "head_width": 48,
+        "head_height": 33,
+        "brim_width": 44
+      },
+      {
+        "head_width": 48,
+        "head_height": 33,
+        "brim_width": 44
+      },
+      {
+        "head_width": 48,
+        "head_height": 34,
+        "brim_width": 44
+      },
+      {
+        "head_width": 48,
+        "head_height": 33,
+        "brim_width": 44
+      },
+      {
+        "head_width": 48,
+        "head_height": 34,
+        "brim_width": 44
+      }
+    ],
+    "walk_north": [
+      {
+        "head_width": 46,
+        "head_height": 30,
+        "brim_width": 42
+      },
+      {
+        "head_width": 46,
+        "head_height": 31,
+        "brim_width": 42
+      },
+      {
+        "head_width": 46,
+        "head_height": 30,
+        "brim_width": 42
+      },
+      {
+        "head_width": 46,
+        "head_height": 31,
+        "brim_width": 42
+      },
+      {
+        "head_width": 46,
+        "head_height": 29,
+        "brim_width": 42
+      },
+      {
+        "head_width": 46,
+        "head_height": 29,
+        "brim_width": 42
+      },
+      {
+        "head_width": 46,
+        "head_height": 30,
+        "brim_width": 42
+      },
+      {
+        "head_width": 46,
+        "head_height": 29,
+        "brim_width": 42
+      }
+    ]
+  },
+  "replacement": {
+    "south": {
+      "idle": {
+        "head_width": 43,
+        "head_height": 31,
+        "brim_width": 39
+      },
+      "walking": [
+        {
+          "head_width": 42,
+          "head_height": 30,
+          "brim_width": 38
+        },
+        {
+          "head_width": 42,
+          "head_height": 30,
+          "brim_width": 38
+        },
+        {
+          "head_width": 42,
+          "head_height": 30,
+          "brim_width": 38
+        },
+        {
+          "head_width": 42,
+          "head_height": 30,
+          "brim_width": 38
+        },
+        {
+          "head_width": 42,
+          "head_height": 29,
+          "brim_width": 38
+        },
+        {
+          "head_width": 42,
+          "head_height": 29,
+          "brim_width": 37
+        },
+        {
+          "head_width": 42,
+          "head_height": 29,
+          "brim_width": 38
+        },
+        {
+          "head_width": 42,
+          "head_height": 29,
+          "brim_width": 38
+        }
+      ]
+    },
+    "north": {
+      "idle": {
+        "head_width": 43,
+        "head_height": 31,
+        "brim_width": 39
+      },
+      "walking": [
+        {
+          "head_width": 42,
+          "head_height": 26,
+          "brim_width": 38
+        },
+        {
+          "head_width": 43,
+          "head_height": 27,
+          "brim_width": 39
+        },
+        {
+          "head_width": 42,
+          "head_height": 27,
+          "brim_width": 38
+        },
+        {
+          "head_width": 43,
+          "head_height": 27,
+          "brim_width": 39
+        },
+        {
+          "head_width": 44,
+          "head_height": 28,
+          "brim_width": 40
+        },
+        {
+          "head_width": 44,
+          "head_height": 27,
+          "brim_width": 40
+        },
+        {
+          "head_width": 44,
+          "head_height": 28,
+          "brim_width": 40
+        },
+        {
+          "head_width": 44,
+          "head_height": 28,
+          "brim_width": 40
+        }
+      ]
+    }
+  },
+  "scope": "Native head/brim width versus approved idle, frame consistency; normal-speed playback also reviewed"
+}

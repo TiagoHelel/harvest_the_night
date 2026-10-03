@@ -16,6 +16,7 @@
     }
   },
   "pending": [
+    "walk",
     "run",
     "chop",
     "mine",
@@ -62,6 +63,23 @@
       "date": "2026-10-03",
       "reported_bad_commit": "0cbb4a27",
       "comparison": "review-stills/run-two-leg-comparison.gif"
+    },
+    "walking_head_scale": {
+      "feedback": "no walking down e up a cabeca dele ta maior",
+      "date": "2026-10-03",
+      "reported_bad_commit": "80d269e6",
+      "directions": [
+        "south",
+        "north"
+      ],
+      "status": "repaired and integrated; visual validation pending",
+      "sources": [
+        "walk_south-head-r1.png",
+        "walk_north-head-r1.png"
+      ],
+      "preview": "gifs/walk-horizontal.gif",
+      "comparison": "review-stills/walk-head-comparison.gif",
+      "method": "Targeted ImageGen edits preserve eight original walking poses; exact native head/brim width checked against approved idle"
     }
   },
   "runtime_families": [

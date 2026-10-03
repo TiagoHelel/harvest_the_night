@@ -10658,3 +10658,59 @@ two-leg-preview-capture.log, two-leg-runtime-capture.log and two-leg-shots.log.
 Sprite queue check remains PASS for 20 completed prompts; queues are unchanged.
 Incidental editor reserialization of the run input was restored to the existing
 config. Older unrelated pilot files remain outside the focused commit. No push.
+
+## 2026-10-03 — Follow-up: match front/back WALK head proportions to idle
+
+The user reported enlarged heads while walking down and up. Native comparison
+confirmed south head/brim widths of 48/44 pixels and north widths of 46/42,
+versus the accepted idle head width of 43 and south/north brim width of 39.
+This is source-art proportion drift, not a window/resolution issue.
+
+Built-in ImageGen made one targeted edit per eight-pose sheet, retaining the
+existing contact/lift order, compact farmer identity and approved eye whites.
+Selected raw masters: assets/art_source/player-fhd/directional/walk_south-head-r1.png
+and walk_north-head-r1.png. Exact submitted prompts, original built-in output
+paths, reference roles and decisions are under directional/prompts/walk_*-head-r1.*.
+Original approved sheets remain unchanged. No native sprite was painted.
+
+New source-owned cuts keep 96x96 canvases, (48,88) pivots and 0.5 draw scale.
+South head width is 42, brim 37–38; north head is 42–44, brim 38–40. Maximum
+body height stays 60 native / 120 physical pixels at FHD, with natural passing
+pose variation. Eight unique lower-body phases remain in each strip. The other
+268 native review drawings, every other runtime actor and fifteen other action
+GIFs are byte-identical to 80d269e6. Exactly sixteen runtime PNGs were rewritten.
+Body/leg drawings within the two edited sheets are generated source edits;
+they are not claimed byte-identical to the old sheets.
+
+build_review.head_dimensions excludes overall buttons from hat measurements.
+assert_walking_head_scale checks all sixteen head/brim widths against accepted
+idle and cycle consistency during review and the full runtime-source guard.
+check_walking_heads.py / walk-head-regression.json retain the actual old
+oversized-head negative control and preservation measurements. Revised south
+walking has an explicit source owner; the historical approved front contract
+stays intact. Stable contract ordering avoids unrelated manifest churn.
+
+Actual Godot WALK preview: 192 frames at 25fps, same horizontal gallery and
+7.68s four-direction GIF. build_walk_head_comparison.py provides old/new down
+and old/new up at matched clocks in review-stills/walk-head-comparison.gif.
+Native nearest-3x idle/before/after comparison was opened. Production
+World/PlayerView and 30Hz Player.tick day/night capture: 1,536 FHD frames,
+24 sequences, 6,168 checks, zero failures. The runtime GIF, every consecutive
+front/back phase montage and day/night nearest-3x crops were inspected for
+proportions, separate boots and loop continuity. Captures remain local,
+excluded from Git and editor import. UTF-8 gallery text is preserved.
+
+Full-game FHD screenshots for noon, dusk, wave, result, tech and house_interior
+were opened in implementation/shots/sprites/fhd-walk-heads/. Full verify/export:
+55 passed, zero skipped/failed, 510s (over the 300s soft target); 125 parsed
+scripts, 7,768 core assertions and 1,006 input cases. Sim/data hashes remain
+1270427719 / 8148086. Evidence: walk-head-verify.log, walk-head-check.log,
+walk-head-source.log, walk-head-import.log, walk-head-preview-capture.log,
+walk-head-runtime-capture.log, walk-head-encode.log and walk-head-shots.log.
+Sprite queue check remains PASS for twenty completed prompts.
+
+The existing integration authorization persists; walking remains pending user
+visual validation. During this work the user again rejected lateral RUN, so its
+next revision is separate from this completed head correction. No RUN drawing
+was changed in this commit. Unrelated pilot files stay outside the commit.
+No push, automation or core/control/movement change was made.

@@ -32,7 +32,8 @@
       "columns": 4,
       "rows": 2,
       "count": 8,
-      "seconds": 0.12
+      "seconds": 0.12,
+      "source_id": "walk_north-head-r1"
     },
     {
       "id": "run_north",
@@ -321,6 +322,16 @@
         "3": 7
       },
       "flip_horizontal": true
+    },
+    {
+      "id": "walk_south-head-r1",
+      "animation": "walk_south",
+      "action": "walk",
+      "direction": "south",
+      "columns": 4,
+      "rows": 2,
+      "count": 8,
+      "seconds": 0.12
     }
   ],
   "final_native_frames": 284,

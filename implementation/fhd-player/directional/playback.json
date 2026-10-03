@@ -119,56 +119,56 @@
           "direction": "south",
           "frames": [
             {
-              "path": "res://assets/art_source/player-fhd/approved/frames/walk_south_0.png",
+              "path": "res://assets/art_source/player-fhd/directional/frames/walk_south_0.png",
               "pivot": [
                 48,
                 88
               ]
             },
             {
-              "path": "res://assets/art_source/player-fhd/approved/frames/walk_south_1.png",
+              "path": "res://assets/art_source/player-fhd/directional/frames/walk_south_1.png",
               "pivot": [
                 48,
                 88
               ]
             },
             {
-              "path": "res://assets/art_source/player-fhd/approved/frames/walk_south_2.png",
+              "path": "res://assets/art_source/player-fhd/directional/frames/walk_south_2.png",
               "pivot": [
                 48,
                 88
               ]
             },
             {
-              "path": "res://assets/art_source/player-fhd/approved/frames/walk_south_3.png",
+              "path": "res://assets/art_source/player-fhd/directional/frames/walk_south_3.png",
               "pivot": [
                 48,
                 88
               ]
             },
             {
-              "path": "res://assets/art_source/player-fhd/approved/frames/walk_south_4.png",
+              "path": "res://assets/art_source/player-fhd/directional/frames/walk_south_4.png",
               "pivot": [
                 48,
                 88
               ]
             },
             {
-              "path": "res://assets/art_source/player-fhd/approved/frames/walk_south_5.png",
+              "path": "res://assets/art_source/player-fhd/directional/frames/walk_south_5.png",
               "pivot": [
                 48,
                 88
               ]
             },
             {
-              "path": "res://assets/art_source/player-fhd/approved/frames/walk_south_6.png",
+              "path": "res://assets/art_source/player-fhd/directional/frames/walk_south_6.png",
               "pivot": [
                 48,
                 88
               ]
             },
             {
-              "path": "res://assets/art_source/player-fhd/approved/frames/walk_south_7.png",
+              "path": "res://assets/art_source/player-fhd/directional/frames/walk_south_7.png",
               "pivot": [
                 48,
                 88

@@ -154,7 +154,10 @@ def recipes(partial=False):
                      "columns":4,"rows":1,"count":4,"seconds":.16})
     entries = []
     front = json.loads((HERE.parent / "locomotion-contract.json").read_text())["frames"]
+    replaced_front = {job.get('animation', job['id']) for job in jobs}
     for previous in front:
+        if previous['animation'] in replaced_front:
+            continue  # A focused generated revision owns this direction.
         entry = dict(previous)
         entry["review_source"] = "previously user-approved front locomotion"
         entries.append(entry)
@@ -246,6 +249,10 @@ def recipes(partial=False):
                     entry['pivot_xy'] = [canvas[0] - 1 - pivot[0], pivot[1]]
                     entry['flip_horizontal'] = True
                 entries.append(entry)
+    # Keep the original front contract's order even when one family is recut.
+    # This avoids unrelated manifest churn when south WALK moves to a new master.
+    front_order = {entry['id']:index for index, entry in enumerate(front)}
+    entries.sort(key=lambda e:(0, front_order[e['id']]) if e['id'] in front_order else (1, 0))
     return entries
 
 
@@ -321,6 +328,44 @@ def assert_lateral_knee_exchange(frames):
     return result
 
 
+def head_dimensions(image):
+    """Measure head/brim above the overalls, excluding gold trouser buttons."""
+    pixels = np.array(image.convert('RGBA'))
+    opaque = pixels[:, :, 3] > 0
+    yy, xx = np.indices(opaque.shape)
+    blue = np.zeros_like(opaque)
+    gold = np.zeros_like(opaque)
+    for material in ('cloth_dark', 'cloth', 'cloth_light'):
+        blue |= (pixels[:, :, :3] == COLOURS[material]).all(2)
+    for material in ('gold_dark', 'gold', 'gold_light'):
+        gold |= (pixels[:, :, :3] == COLOURS[material]).all(2)
+    shoulder = int(yy[blue & opaque].min())
+    head = opaque & (yy < shoulder)
+    hat = gold & head
+    return {'head_width':int(xx[head].max() - xx[head].min() + 1),
+            'head_height':int(yy[head].max() - yy[head].min() + 1),
+            'brim_width':int(xx[hat].max() - xx[hat].min() + 1)}
+
+
+def assert_walking_head_scale(frames):
+    """Front/back walking heads retain the accepted idle width at native scale."""
+    result = {}
+    for direction in ('south', 'north'):
+        reference = next(e for e in frames if e['id'] == 'idle_' + direction + '_0')
+        idle = head_dimensions(Image.open(ROOT / reference['output']))
+        walking = sorted((e for e in frames if e['animation'] == 'walk_' + direction),
+                         key=lambda e:e['frame'])
+        assert len(walking) == 8, (direction, 'incomplete head correction')
+        dimensions = [head_dimensions(Image.open(ROOT / e['output'])) for e in walking]
+        for phase, measured in enumerate(dimensions):
+            assert abs(measured['head_width'] - idle['head_width']) <= 2, (direction, phase, 'head width exceeds idle', measured, idle)
+            assert abs(measured['brim_width'] - idle['brim_width']) <= 2, (direction, phase, 'brim width exceeds idle', measured, idle)
+            assert measured['head_height'] <= idle['head_height'] + 2, (direction, phase, 'head grows taller than idle', measured, idle)
+        assert max(e['head_width'] for e in dimensions) - min(e['head_width'] for e in dimensions) <= 2, (direction, 'head size changes through cycle')
+        result[direction] = {'idle':idle, 'walking':dimensions}
+    return result
+
+
 def build(check=False, partial=False):
     OUT.mkdir(parents=True, exist_ok=True)
     entries = recipes(partial)
@@ -388,6 +433,8 @@ def build(check=False, partial=False):
                        for e in group]
             assert max(heights) <= 61, (name,'full native silhouette scale drift',heights)
     assert_lateral_knee_exchange(entries)
+    if not partial:
+        assert_walking_head_scale(entries)
     if not partial:
         assert len(entries) == 284 and len(groups) == 64, (len(entries),len(groups))
     manifest = {"version":1,"integration":"preview only; awaiting user validation",
@@ -483,7 +530,7 @@ def gallery():
 <nav id="choices"></nav><h2 id="title"></h2><div class="preview"><img id="animation" width="1040" height="288" alt="Animações nas quatro direções"></div>
 <div class="tools"><button id="size" aria-pressed="true">Tamanho previsto em FHD: 120 px de altura</button><a id="download" class="download" download>Baixar este GIF</a><small id="details"></small></div>
 <p>Os pixels são ampliados exatamente em 2×, sem suavização. Você pode alternar para a escala nativa de 60 px. Em telas menores, role a prévia para os lados para conservar o tamanho dos pixels.</p>
-<div id="contact"></div><footer><a class="download" href="review-stills/run-two-leg-comparison.gif" download>Comparar corrida: antes e depois</a> <a class="download" href="review-stills/runtime-horizontal.gif" download>Ver GIF capturado no jogo</a> <a class="download" href="todas-animacoes-horizontal.gif" download>Baixar GIF geral</a><p>O GIF geral percorre as 16 categorias. Os GIFs individuais repetem a atividade escolhida. Fontes, prompts e receitas estão guardados nesta pasta e em assets/art_source/player-fhd/directional.</p></footer></main>
+<div id="contact"></div><footer><a class="download" href="review-stills/walk-head-comparison.gif" download>Comparar cabeça na caminhada: antes e depois</a> <a class="download" href="review-stills/run-two-leg-comparison.gif" download>Comparar corrida: antes e depois</a> <a class="download" href="review-stills/runtime-horizontal.gif" download>Ver GIF capturado no jogo</a> <a class="download" href="todas-animacoes-horizontal.gif" download>Baixar GIF geral</a><p>O GIF geral percorre as 16 categorias. Os GIFs individuais repetem a atividade escolhida. Fontes, prompts e receitas estão guardados nesta pasta e em assets/art_source/player-fhd/directional.</p></footer></main>
 <script>const groups=__DATA__;const names={south:'Frente',west:'Esquerda',north:'Costas',east:'Direita'};const choices=document.querySelector('#choices'),image=document.querySelector('#animation');function select(g){document.querySelector('#title').textContent=g.label;image.src='gifs/'+g.action+'-horizontal.gif?v='+g.version;document.querySelector('#download').href=image.src;document.querySelector('#details').textContent=g.count+' quadros por direção · 4 direções';document.querySelectorAll('nav button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.action===g.action)));document.querySelector('#contact').replaceChildren(...g.columns.map(c=>{const a=document.createElement('a');a.href='contacts/'+g.action+'_'+c.direction+'.png?v='+g.version;a.textContent='Ver quadros: '+names[c.direction];a.target='_blank';return a}));}for(const g of groups){const b=document.createElement('button');b.textContent=g.label;b.dataset.action=g.action;b.setAttribute('aria-pressed','false');b.onclick=()=>select(g);choices.append(b);}document.querySelector('#size').onclick=function(){const large=this.getAttribute('aria-pressed')==='true';this.setAttribute('aria-pressed',String(!large));image.width=large?520:1040;image.height=large?144:288;this.textContent=large?'Escala nativa: 60 px de altura':'Tamanho previsto em FHD: 120 px de altura';};select(groups[0]);</script></html>'''
     (HERE/'index.html').write_bytes(page.replace('__DATA__',data).encode('utf-8'))
 

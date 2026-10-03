@@ -40,6 +40,17 @@ def main():
         sheet.save(HERE/'review-stills'/f'runtime-{lighting}-run-phases.png')
         with Image.open(HERE/'runtime-captures'/f'{lighting}_run_east_008.png') as picture:
             picture.resize((768,624),Image.Resampling.NEAREST).save(HERE/'review-stills'/f'runtime-{lighting}-3x.png')
+        heads = Image.new('RGB', (2048, 464), '#17151c')
+        draw = ImageDraw.Draw(heads)
+        for row, direction in enumerate(('south', 'north')):
+            for phase in range(8):
+                with Image.open(HERE/'runtime-captures'/f'{lighting}_walk_{direction}_{phase*3:03d}.png') as picture:
+                    heads.paste(picture.convert('RGB'), (phase*256, row*232+24))
+                draw.text((phase*256+8, row*232+6), f'{lighting} walk {direction} phase {phase}', fill='#ece3d3')
+            with Image.open(HERE/'runtime-captures'/f'{lighting}_walk_{direction}_008.png') as picture:
+                picture.resize((768,624),Image.Resampling.NEAREST).save(
+                    HERE/'review-stills'/f'runtime-{lighting}-walk-{direction}-3x.png')
+        heads.save(HERE/'review-stills'/f'runtime-{lighting}-walk-head-phases.png')
     print('Actual runtime GIF: 384 frames / 25fps / 1024x232, day/night and all four directions.')
 
 

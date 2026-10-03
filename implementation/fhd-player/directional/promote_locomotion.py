@@ -35,7 +35,8 @@ def check_sources(contract):
         assert import_art.sha(content) == entry['output_sha256'], ('native source recipe changed', entry['id'])
         assert (ROOT / entry['output']).read_bytes() == content, ('review frame tampered', entry['id'])
     review.assert_lateral_knee_exchange(contract['frames'])
-    print('FHD SOURCE: 76 locomotion frames match their generated sources; lateral foreground knees exchange positions.')
+    review.assert_walking_head_scale(contract['frames'])
+    print('FHD SOURCE: 76 exact source-owned frames; lateral knees alternate and front/back walking heads match idle width.')
 
 
 def runtime_entry(frame, contract_hash):
