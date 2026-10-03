@@ -112,6 +112,7 @@ var _speaking := ""
 
 
 func _initialize() -> void:
+	CaptureSize.configure(root, OS.get_cmdline_user_args().has("--fhd"))
 	var args := OS.get_cmdline_user_args()
 	if args.has("--list"):
 		for entry in SCENARIOS:

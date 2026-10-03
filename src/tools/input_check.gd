@@ -3842,9 +3842,30 @@ func _case_0073_player_art() -> void:
 
 	await press_key(KEY_D, true)
 	await frames(8)
-	expect(str(view.playing()) == "walk_west",
-		"walking right plays the same drawing", str(view.playing()))
-	expect(view.flipped(), "mirrored, because the sheet has no east set")
+	expect(str(view.playing()) == "walk_east",
+		"walking right uses the registered east animation", str(view.playing()))
+	expect(not view.flipped(), "east locomotion already owns its facing and pivot")
+	await press_key(KEY_D, false)
+	await frames(3)
+	# Run is a named held presentation action, not a simulation speed command.
+	await press_key(KEY_SHIFT, true)
+	await frames(3)
+	expect(str(view.playing()).begins_with("idle_"), "Shift alone does not run in place")
+	for motion_key in [KEY_A, KEY_D, KEY_W, KEY_S]:
+		await press_key(motion_key, true)
+		await frames(8)
+		var run_name := StringName("run_%s" % PlayerArt.FACINGS[Player.facing(state)][0])
+		expect(view.playing() == run_name and not view.flipped(),
+			"Shift plus movement selects the correct running direction", str(view.playing()))
+		expect(body.texture != null and body.texture.resource_path.begins_with(PlayerArt.DIR + String(run_name)),
+			"The actual running view resolves promoted runtime textures")
+		await press_key(motion_key, false)
+		await frames(3)
+	await press_key(KEY_D, true)
+	await frames(4)
+	await press_key(KEY_SHIFT, false)
+	await frames(4)
+	expect(view.playing() == &"walk_east", "Releasing Shift returns to walking while movement stays held")
 	await press_key(KEY_D, false)
 	await frames(3)
 

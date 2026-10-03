@@ -24,6 +24,7 @@ func expect(ok: bool, message: String) -> void:
 
 
 func _run() -> void:
+	CaptureSize.configure(root)
 	await _setup()
 	if OS.get_cmdline_user_args().has("--walk-loop"):
 		await _walk_loop()

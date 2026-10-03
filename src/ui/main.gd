@@ -259,6 +259,10 @@ func _process(_delta: float) -> void:
 	var move: Array = intent["move"]
 	move[0] = int(Input.get_axis(&"move_left", &"move_right"))
 	move[1] = int(Input.get_axis(&"move_up", &"move_down"))
+	var running_art := _driver.running and not _driver.holding() \
+		and Input.is_action_pressed(&"run")
+	_player_view.set_running(running_art)
+	_house_view.set_running(running_art)
 	if _just_pressed(&"ability"):
 		intent["ability"] = true
 	if _just_pressed(&"interact"):

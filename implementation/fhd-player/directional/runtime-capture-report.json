@@ -1,0 +1,222 @@
+{
+  "checks": 6168,
+  "failures": 0,
+  "sequences": [
+    {
+      "fps": 25,
+      "poses": 3,
+      "sequence": "day_idle_south",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "fps": 25,
+      "poses": 3,
+      "sequence": "day_idle_west",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "fps": 25,
+      "poses": 3,
+      "sequence": "day_idle_north",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "fps": 25,
+      "poses": 3,
+      "sequence": "day_idle_east",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "fps": 25,
+      "poses": 8,
+      "sequence": "day_walk_south",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "fps": 25,
+      "poses": 8,
+      "sequence": "day_walk_west",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "fps": 25,
+      "poses": 8,
+      "sequence": "day_walk_north",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "fps": 25,
+      "poses": 8,
+      "sequence": "day_walk_east",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "fps": 25,
+      "poses": 8,
+      "sequence": "day_run_south",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "fps": 25,
+      "poses": 8,
+      "sequence": "day_run_west",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "fps": 25,
+      "poses": 8,
+      "sequence": "day_run_north",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "fps": 25,
+      "poses": 8,
+      "sequence": "day_run_east",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "fps": 25,
+      "poses": 3,
+      "sequence": "night_idle_south",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "fps": 25,
+      "poses": 3,
+      "sequence": "night_idle_west",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "fps": 25,
+      "poses": 3,
+      "sequence": "night_idle_north",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "fps": 25,
+      "poses": 3,
+      "sequence": "night_idle_east",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "fps": 25,
+      "poses": 8,
+      "sequence": "night_walk_south",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "fps": 25,
+      "poses": 8,
+      "sequence": "night_walk_west",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "fps": 25,
+      "poses": 8,
+      "sequence": "night_walk_north",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "fps": 25,
+      "poses": 8,
+      "sequence": "night_walk_east",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "fps": 25,
+      "poses": 8,
+      "sequence": "night_run_south",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "fps": 25,
+      "poses": 8,
+      "sequence": "night_run_west",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "fps": 25,
+      "poses": 8,
+      "sequence": "night_run_north",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "fps": 25,
+      "poses": 8,
+      "sequence": "night_run_east",
+      "size": [
+        1920,
+        1080
+      ]
+    }
+  ]
+}

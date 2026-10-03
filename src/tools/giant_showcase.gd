@@ -2,6 +2,7 @@ extends "res://src/tools/enemy_showcase.gd"
 
 ## Real Giant movement/hits and removed-enemy playback on the native renderer.
 func _run() -> void:
+	CaptureSize.configure(root)
 	_folder = "res://implementation/shots/sprites/0016/giant/"
 	await _setup()
 	await _boss_identity()

@@ -1739,3 +1739,66 @@ Complete evidence is in implementation/fhd-player/directional/run-verify.log.
 The sprite queue check remains PASS for 20 completed prompts. Runtime bindings,
 core simulation and unrelated broader FHD work remain unchanged. User review
 metadata records run as pending. No push or runtime integration was made.
+
+## 2026-10-02 — Follow-up: reviewed farmer locomotion integrated in FHD
+
+The user explicitly authorized game integration: "quando terminar implementa no
+game". Promoted idle/walk/run in all four directions: 12 idle + 32 walking +
+32 running poses, 76 runtime PNGs. The thirteen activity candidates (208 frames)
+remain pending visual review; no new images were generated in this integration.
+
+implementation/fhd-player/directional/promote_locomotion.py registers the exact
+selected native PNGs with the existing raster owner. The runtime contract pins
+the original generated masters, submitted prompts, crop recipes and hashes.
+Its --check rederives all 76 original native cuts and verifies identical runtime
+bytes, fixed per-animation geometry and 0.5 draw scale. Source/native paths are
+retained in runtime-locomotion-contract.json. Revised lateral masters remain
+creator-walk-right-keys-r1.png / creator-walk-right-transitions-r2.png and
+creator-run-right-keys-r1.png / creator-run-right-transitions-r2.png under
+assets/art_source/player-fhd/directional/. References/prompts remain those
+already retained in directional/prompts/; no hand-drawn replacements or recuts.
+
+The manifest now owns 512 raster outputs (55 additions). Legacy work/reaction
+art and the shadow remain intact: 58 unrelated actor PNGs are byte-identical
+to the previous commit. Generated PlayerFrames/RasterArt metadata binds all
+twelve locomotion animations; 96x96 canvases preserve the reviewed contact,
+including west's reflected (47,88) pivot. Existing tools/reactions retain
+their own canvas metadata. East locomotion uses explicit east assets.
+
+The game defaults to 1920x1080 and Canvas Items rendering over the unchanged
+480x270 design layout. Video defaults and fallback use scale 4. A 60-native-
+pixel farmer draws at 120 physical pixels in FHD. CaptureSize explicitly keeps
+legacy test fixtures native while --fhd captures actual production detail.
+
+Shift is a named/rebindable held input selecting RUN, outdoors and in the house.
+Releasing it while moving restores WALK; Shift alone remains IDLE. Core speed,
+collision and simulation are unchanged. Run currently animates at the existing
+walking travel speed; sprint speed/stride-to-travel tuning is a gameplay
+follow-up if requested. No simulation hash was accepted or moved.
+
+Production World/PlayerView and Player.tick were captured at physical FHD under
+the real day/night relight pipeline: 24 timed sequences, 1,536 renderer frames,
+all 76 poses in each light state, 6,168 checks and zero failures. Simulation
+movement runs at 30Hz, sampled at 25fps. runtime_capture.gd / runtime_encode.py
+retain reproduction. Original runtime-captures stay local, excluded from Git
+and editor import. runtime-capture-report.json and runtime-capture.log record
+the evidence. review-stills/runtime-horizontal.gif contains the actual physical
+pixels (1024x232, 384 frames, 15.36s), with full FHD frames and consecutive
+lateral running phases alongside. Native and nearest 3x crops were inspected
+for eye whites, alternating boots, ground alignment and flight/loop continuity.
+
+Full-game FHD screenshots were opened for noon, dusk, wave, result, tech and
+house_interior in implementation/shots/sprites/fhd-locomotion/. Player scale and
+sorting remain coherent in farm/house and lighting. An initial verification
+found stale hard-coded terrain pivot and east-idle expectations; those assertions
+now check actual per-animation metadata and explicit east idle. Final complete
+working-tree verify/export passed 55 checks, zero skips/failures, in 491s
+(over the 300s soft target), parsing 125 scripts, 7,768 core assertions and
+1,006 input cases. Evidence: directional/runtime-verify.log. Sim hash 1270427719
+and data hash 8148086 are unchanged. Sprite queue check remains PASS for all
+20 completed prompts; completed queues stay unchanged.
+
+Review metadata and the same index.html now distinguish integrated locomotion
+from pending activities and link the runtime GIF. Older rejected pilots and
+unrelated untracked source/import side effects remain outside this commit.
+No push was made.

@@ -4,3 +4,5 @@ captures/*
 !captures/.gdignore
 contacts/*.import
 __pycache__/
+runtime-captures/*
+!runtime-captures/.gdignore

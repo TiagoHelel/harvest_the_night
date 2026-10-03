@@ -43,7 +43,7 @@ const VERSION := 1
 ## which is how `group()` slices them for the four options tabs.
 const DEFAULTS := {
 	&"video/window_mode": 0,            # 0 windowed, 1 borderless, 2 fullscreen
-	&"video/scale": 3,                  # integer multiple of 480x270
+	&"video/scale": 4,                  # integer multiple of 480x270
 	&"video/size": "",                  # "1366x768" beats the multiple
 	&"video/integer_scaling": true,
 	&"video/vsync": true,

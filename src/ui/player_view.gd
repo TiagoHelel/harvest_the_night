@@ -15,8 +15,8 @@ extends Node2D
 ##
 ## ## Two tiles wide and three tall
 ##
-## Sprite task 0003's pilot: 30px body on a 48x48 canvas over the unchanged
-## 16px grid. Legacy poses use the same scale during the authored migration.
+## FHD art: 60px body on a 96x96 source canvas, drawn at half scale over
+## the unchanged 16px grid. FHD renders each authored pixel at twice its size.
 ##
 ## **The node sits at the feet and the sprite is offset up and left**, rather
 ## than the node sitting at the sprite's corner, because y-sorting uses the
@@ -51,6 +51,12 @@ var _elapsed := 0.0
 var _playing: StringName = &""
 var _textures: Dictionary = {}      # path -> Texture2D, loaded once
 var _work := PlayerWork.new()
+var _running := false
+
+
+## A presentation choice only; core movement remains owned by Player.tick.
+func set_running(running: bool) -> void:
+	_running = running
 
 
 func _ready() -> void:
@@ -113,7 +119,7 @@ func _animate(delta: float) -> void:
 	_sprite.material = null
 	var pose := _work.pose(_state, delta)
 	if pose.is_empty():
-		pose = PlayerArt.pose(Player.facing(_state), _is_moving(), _verb())
+		pose = PlayerArt.pose(Player.facing(_state), _is_moving(), _verb(), _running)
 	var name: StringName = pose["name"]
 	if int(pose["frames"]) < 1:
 		_sprite.texture = null
@@ -152,6 +158,7 @@ func _animate(delta: float) -> void:
 	var metadata: Dictionary = RasterArt.FRAMES.get(path, {})
 	var feet: Vector2i = metadata.get("pivot", PlayerFrames.FEET)
 	var canvas: Vector2i = metadata.get("canvas", PlayerFrames.CANVAS)
+	_sprite.scale = Vector2.ONE * float(metadata.get("draw_scale", 1.0))
 	_sprite.offset = Vector2(float(feet.x - canvas.x) if bool(pose["flip"])
 		else -float(feet.x), -float(feet.y))
 	if reacting != &"" and texture != null:
@@ -175,12 +182,14 @@ func _show_bubble(texture: Texture2D, metadata: Dictionary, mask_body := true) -
 			Vector4(box.position.x, box.position.y, box.size.x, box.size.y))
 	_bubble.texture = texture
 	_bubble.region_rect = Rect2(box)
+	var draw_scale := float(metadata.get("draw_scale", 1.0))
+	_bubble.scale = Vector2.ONE * draw_scale
 	var origin := _sprite.offset if mask_body else -Vector2(metadata["pivot"])
-	_bubble.position = origin + Vector2(box.position)
+	_bubble.position = (origin + Vector2(box.position)) * draw_scale
 	# Work in actual viewport pixels, including integer stretch/camera zoom.
 	var transform := get_global_transform_with_canvas()
 	var top_left := transform * _bubble.position
-	var bottom_right := transform * (_bubble.position + Vector2(box.size))
+	var bottom_right := transform * (_bubble.position + Vector2(box.size) * draw_scale)
 	var safe := get_viewport_rect().grow(-2.0)
 	var shift := Vector2(
 		maxf(safe.position.x - top_left.x, 0.0) - maxf(bottom_right.x - safe.end.x, 0.0),

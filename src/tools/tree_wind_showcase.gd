@@ -24,6 +24,7 @@ func _read() -> Image:
 
 
 func _run() -> void:
+	CaptureSize.configure(root)
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(OUT))
 	var world: WorldView = load("res://scenes/World.tscn").instantiate()
 	root.add_child(world)

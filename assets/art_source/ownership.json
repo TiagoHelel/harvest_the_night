@@ -98,6 +98,18 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/actors/idle_east_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/idle_east_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/idle_east_2.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/actors/idle_north_0.png",
       "owner": "raster"
     },
@@ -218,6 +230,134 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/actors/run_east_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/run_east_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/run_east_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/run_east_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/run_east_4.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/run_east_5.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/run_east_6.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/run_east_7.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/run_north_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/run_north_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/run_north_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/run_north_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/run_north_4.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/run_north_5.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/run_north_6.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/run_north_7.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/run_south_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/run_south_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/run_south_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/run_south_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/run_south_4.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/run_south_5.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/run_south_6.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/run_south_7.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/run_west_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/run_west_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/run_west_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/run_west_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/run_west_4.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/run_west_5.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/run_west_6.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/run_west_7.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/actors/shadow.png",
       "owner": "raster"
     },
@@ -254,6 +394,38 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/actors/walk_east_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/walk_east_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/walk_east_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/walk_east_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/walk_east_4.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/walk_east_5.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/walk_east_6.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/walk_east_7.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/actors/walk_north_0.png",
       "owner": "raster"
     },
@@ -267,6 +439,22 @@
     },
     {
       "output": "sprites/actors/walk_north_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/walk_north_4.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/walk_north_5.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/walk_north_6.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/walk_north_7.png",
       "owner": "raster"
     },
     {
@@ -286,6 +474,22 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/actors/walk_south_4.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/walk_south_5.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/walk_south_6.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/walk_south_7.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/actors/walk_west_0.png",
       "owner": "raster"
     },
@@ -299,6 +503,22 @@
     },
     {
       "output": "sprites/actors/walk_west_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/walk_west_4.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/walk_west_5.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/walk_west_6.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/walk_west_7.png",
       "owner": "raster"
     },
     {
@@ -1458,6 +1678,46 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/interior/bed.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/interior/fireplace.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/interior/floor.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/interior/kitchen.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/interior/nightstand.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/interior/plant.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/interior/rug.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/interior/storage.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/interior/table.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/interior/wall.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/props/chicken.png",
       "owner": "raster"
     },
@@ -1872,46 +2132,6 @@
     {
       "output": "sprites/ui/tooltip.png",
       "owner": "ascii"
-    },
-    {
-      "output": "sprites/interior/floor.png",
-      "owner": "raster"
-    },
-    {
-      "output": "sprites/interior/wall.png",
-      "owner": "raster"
-    },
-    {
-      "output": "sprites/interior/bed.png",
-      "owner": "raster"
-    },
-    {
-      "output": "sprites/interior/kitchen.png",
-      "owner": "raster"
-    },
-    {
-      "output": "sprites/interior/table.png",
-      "owner": "raster"
-    },
-    {
-      "output": "sprites/interior/fireplace.png",
-      "owner": "raster"
-    },
-    {
-      "output": "sprites/interior/rug.png",
-      "owner": "raster"
-    },
-    {
-      "output": "sprites/interior/plant.png",
-      "owner": "raster"
-    },
-    {
-      "output": "sprites/interior/storage.png",
-      "owner": "raster"
-    },
-    {
-      "output": "sprites/interior/nightstand.png",
-      "owner": "raster"
     }
   ]
 }

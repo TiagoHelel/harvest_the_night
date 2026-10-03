@@ -24,6 +24,12 @@ const FURNITURE_OFFSETS := {&"bed": Vector2(0, -4),
 	&"nightstand": Vector2(0, -9), &"storage": Vector2(9, 0)}
 
 
+## Match the outdoor farmer's held run animation without changing house rules.
+func set_running(running: bool) -> void:
+	if _farmer != null:
+		_farmer.set_running(running)
+
+
 func _ready() -> void:
 	layer = 2
 	_backdrop = ColorRect.new()

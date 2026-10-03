@@ -7,6 +7,7 @@ var _saved_options: Dictionary = {}
 
 
 func _run() -> void:
+	CaptureSize.configure(root)
 	_folder = "res://implementation/shots/sprites/0017/effects/"
 	await _setup()
 	_fx = Particles.new()

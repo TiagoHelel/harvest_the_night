@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "status": "awaiting-user-validation",
-  "integration": "preview only; no runtime replacement before user review",
+  "status": "locomotion-integrated; activities-awaiting-user-validation",
+  "integration": "idle/walk/run promoted by user request on 2026-10-02; activity candidates remain preview-only",
   "directions": [
     "south",
     "west",
@@ -325,7 +325,12 @@
   ],
   "final_native_frames": 284,
   "directional_animations": 64,
-  "runtime_promotion": false,
+  "runtime_promotion": true,
   "lateral_walk_method": "sprite-sheet-creator buildDirectionalPrompt; four anchor poses + four transitions; right-to-left full-pose reflection",
-  "lateral_run_method": "sprite-sheet-creator run prompt; four anchors plus four transitions; complete right-to-left reflection"
+  "lateral_run_method": "sprite-sheet-creator run prompt; four anchors plus four transitions; complete right-to-left reflection",
+  "runtime_families": [
+    "idle",
+    "walk",
+    "run"
+  ]
 }

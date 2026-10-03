@@ -31,6 +31,7 @@ func expect(ok: bool, message: String) -> void:
 
 
 func _run() -> void:
+	CaptureSize.configure(root)
 	var args := OS.get_cmdline_user_args()
 	_capture = not args.has("--check")
 	for arg in args:

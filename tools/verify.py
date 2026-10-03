@@ -186,6 +186,11 @@ def check_player_showcase():
     return check("player locomotion", code == 0, verdict)
 
 
+def check_player_fhd_sources():
+    code, out = run([sys.executable, "implementation/fhd-player/directional/promote_locomotion.py", "--check"])
+    return check("FHD player sources", code == 0, tail(out, 2))
+
+
 def check_player_work():
     code, out = run([sys.executable, "tools/show_art.py", "--work", "--check"])
     verdict = next((line for line in out.splitlines() if line.startswith("PLAYER WORK:")), tail(out, 4))
@@ -719,6 +724,7 @@ def main():
     check_core_is_pure()
     check_sprites()
     check_player_art()
+    check_player_fhd_sources()
     check_raster_art()
     check_art_showcase()
     check_visibility_showcase()

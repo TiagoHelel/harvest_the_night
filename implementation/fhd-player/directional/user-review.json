@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "runtime_promotion": false,
+  "runtime_promotion": true,
   "reviewed_preview_commit": "454f91c1",
   "directions": [
     "south",
@@ -16,8 +16,6 @@
     }
   },
   "pending": [
-    "walk",
-    "run",
     "chop",
     "mine",
     "till",
@@ -39,7 +37,7 @@
         "west",
         "east"
       ],
-      "status": "creator-prompt replacement awaiting user validation",
+      "status": "runtime integration authorized by user; latest selected sources promoted",
       "sources": [
         "creator-walk-right-keys-r1.png",
         "creator-walk-right-transitions-r2.png"
@@ -53,7 +51,7 @@
         "west",
         "east"
       ],
-      "status": "creator-prompt replacement awaiting user validation",
+      "status": "runtime integration authorized by user; latest selected sources promoted",
       "sources": [
         "creator-run-right-keys-r1.png",
         "creator-run-right-transitions-r2.png"
@@ -61,5 +59,15 @@
       "preview": "gifs/run-horizontal.gif",
       "method": "four running keys plus four transitions; visible alternating leg support, arm swing and flight; left reflects right"
     }
+  },
+  "runtime_families": [
+    "idle",
+    "walk",
+    "run"
+  ],
+  "runtime_authorization": {
+    "date": "2026-10-02",
+    "feedback": "quando terminar implementa no game",
+    "scope": "idle/walk/run in four directions"
   }
 }

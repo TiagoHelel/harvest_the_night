@@ -22,7 +22,7 @@ extends Node
 ##
 ## ## Integer scaling is the whole reason this task is not a checkbox
 ##
-## The game is drawn at 480x270 and stretched. At a whole multiple of that
+## The game uses 480x270 design coordinates and renders at the window size. At a whole multiple of that
 ## every game pixel is the same square block of screen pixels. At anything
 ## else some pixels are two screen pixels wide and their neighbours are three,
 ## which crawls when the camera moves. So the resolution list **marks** the
@@ -30,7 +30,7 @@ extends Node
 ## monitor have no multiple at their own size, and a game that refused to run
 ## at native on them would be a game being clever at the player's expense.
 
-## What the game is drawn at, before any of this.
+## Logical design size; Canvas Items preserves detail at the actual window size.
 const BASE := Vector2i(480, 270)
 
 ## How long a new mode has to be confirmed before it is undone. **Under the
@@ -180,7 +180,7 @@ static func size_from(text: String) -> Vector2i:
 func window_size() -> Vector2i:
 	var settings := _settings()
 	if settings == null:
-		return size_of(3)
+		return size_of(4)
 	var written := size_from(String(settings.get_string(&"video/size")))
 	if written != Vector2i.ZERO:
 		return written

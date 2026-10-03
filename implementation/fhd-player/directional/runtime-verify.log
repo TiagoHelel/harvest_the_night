@@ -1,0 +1,63 @@
+
+HARVEST THE NIGHT - verify
+  godot: found
+
+  python tooling               PASS   0.1s
+  backlog index                PASS   0.1s
+  godot import                 PASS  19.5s
+  script parse                 PASS   6.0s  PARSED 125 scripts, 0 failed
+  core is pure                 PASS   0.0s
+  sprites                      PASS  13.1s  OK    21 sprites match their maps
+  player art                   PASS   1.8s  OK    0 player frames match the sheet
+  FHD player sources           PASS   5.5s  FHD SOURCE: 76 locomotion frames still match their original generated source recipes. | FHD RUNTIME: 12 idle + 32 walk + 32 run frames; exact native bytes, 0.5 draw scale, four directions.
+  raster art                   PASS  26.7s  OK: 512 raster outputs, metadata verified, 0 written
+  art placement                PASS   1.6s  ART SHOWCASE: 531 checks, 0 failed
+  camera/zoom/ambient          PASS   1.2s  VISIBILITY SHOWCASE: 121 checks, 0 failed
+  player locomotion            PASS   1.6s  PLAYER SHOWCASE: 1156 checks, 0 failed
+  player work                  PASS   2.9s  PLAYER WORK: 12081 checks, 0 failed
+  player reactions             PASS   2.0s  PLAYER REACTIONS: 690 checks, 0 failed
+  terrain sources/atlas        PASS  26.2s  OK: 8 seamless materials; 3 distinct water phases; 8 static sides; 8 exact corner caps; 21 raster atlas cells; all 80 cells source-exact
+  terrain lighting             PASS   1.7s  TERRAIN SHOWCASE: 30544 checks, 0 failed
+  water edges/corners          PASS   2.4s  WATER SHOWCASE: 2201 checks, 0 failed
+  prop sources/variants        PASS  12.9s  OK: 11 source-owned props; 4 distinct same-scale variants; clean silhouettes and exact ground pivots
+  prop overlap/gathering       PASS   1.6s  PROP SHOWCASE: 11970 checks, 0 failed
+  crop sources/moisture        PASS  12.9s  OK: 14 source-exact crop/soil outputs; progressive stages; grounded tall corn; wet cue exposed under every stage
+  crop placement/growth        PASS   1.6s  CROP SHOWCASE: 6224 checks, 0 failed
+  house sources/windows        PASS  13.4s  OK: 2 independent source-owned house states; 18 exact roof slices; 5 readable glass lamps; shared scale/door contact; 148 roof damage pixels
+  house HP/lighting            PASS   1.7s  HOUSE SHOWCASE: 1059 checks, 0 failed
+  farm/house visit             PASS   1.5s  FARM HOUSE: 272 checks, 0 failed
+  station sources/quarters     PASS  12.9s  OK: 6 coherent masters/fixtures, 12 distinct authored production states, 16 exact migrated quarters, fixed canvas/contact/scale and binary alpha
+  station activity/placement   PASS   2.3s  STATION SHOWCASE: 7086 checks, 0 failed
+  tower sources/muzzles        PASS  13.3s  OK: 4 tower families / 12 authored levels / 48 distinct states, exact cuts, common canvas/contact, 39 opaque weapon outlets and complete legacy migration
+  tower firing/wrecks          PASS   1.6s  TOWER SHOWCASE: 1305 checks, 0 failed
+  barrier joins/sources        PASS  12.9s  OK: 84 exact source-owned outputs, all 64 occupancy masks/wear states, physical scale and mixed material seams
+  barrier damage/mines         PASS   1.7s  BARRIER SHOWCASE: 3275 checks, 0 failed
+  enemy sources/motion         PASS  28.9s  OK: 48 authored enemy poses, 12 exact aliases, fixed contacts, 4/3/4 motion; silhouette differences {'walker/runner': 62, 'walker/tank': 63, 'walker/breaker': 81, 'runner/tank': 79, 'runner/breaker': 77, 'tank/breaker': 68}
+  enemy movement/attacks       PASS   1.6s  ENEMY SHOWCASE: 1982 checks, 0 failed
+  giant sources/motion         PASS  26.0s  OK: 16 authored Giant poses, four exact aliases, 80x64/(40,60), visible master 43x42, real wind-up/collapse
+  giant/death playback         PASS   1.7s  GIANT SHOWCASE: 2433 checks, 0 failed
+  effect sources/origins       PASS  13.0s  OK: seven FX families / 25 distinct one-shot frames / shared strip scales / palette alpha / unclipped origins / exact outputs
+  effect contacts/a11y         PASS   2.3s  EFFECT SHOWCASE: 2997 checks, 0 failed
+  UI sources/native icons      PASS  25.8s  OK: 15 exact generated resources / 30 distinct native cuts / clear margins / palette alpha / preserved three-pixel frame profiles / focus ring
+  UI display/states            PASS   1.4s  UI ART SHOWCASE: 1948 checks, 0 failed
+  atmosphere/emission          PASS   2.0s  ATMOSPHERE SHOWCASE: 198 checks, 0 failed
+  font                         PASS   0.1s  OK    4 font files match the maps
+  logo                         PASS   0.1s  OK    the logo matches the font it is made of
+  sfx                          PASS   0.4s  OK    27 sounds match their recipes (13 day, 14 night)
+  perf                         PASS   3.3s  OK    a night tick is 518us of the 8333 it may have (6%), a path rebuild 6758us of 33333
+  icon                         PASS   0.3s  OK    8 icon sizes match the one drawing
+  playtest                     PASS   0.1s  OK    the reader reads what the game writes
+  store                        PASS   0.1s  CHECKED  the parts that need no capture
+  devlog                       PASS   0.2s  journal    112 entries against 110 done, 27 hash moves, 50 findings
+  strings                      PASS   0.1s  OK    392 keys in 2 languages, all of them fit
+  music                        PASS   9.7s  OK    4 pieces match their recipes
+  ambience                     PASS   1.6s  OK    11 ambience files match their recipes (2 beds, 9 touches)
+  headless_check               PASS  69.2s  7768 asserts, 0 failed
+  sim hash                     PASS   1.9s  1270427719 unchanged
+  data hash                    PASS   0.0s  8148086 unchanged
+  input_check                  PASS  73.0s  1006 cases, 0 failed
+  exports                      PASS  25.4s
+
+  55 passed, 0 skipped, 0 failed in 491s  (OVER BUDGET)
+
+PASS

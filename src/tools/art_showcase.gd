@@ -25,6 +25,7 @@ func expect(ok: bool, message: String) -> void:
 
 
 func _run() -> void:
+	CaptureSize.configure(root)
 	var args := OS.get_cmdline_user_args()
 	_capture = not args.has("--check")
 	for arg in args:
@@ -996,7 +997,7 @@ func _terrain_materials() -> void:
 			expect(source.texture.resource_path == WorldView.TERRAIN_ATLAS, "World draws the committed source-owned atlas")
 			expect(source.texture.get_size() == Vector2(256, 80), "Native terrain atlas row shape is unchanged")
 			expect(view.position == Vector2(296, 176), "Terrain art cannot move farmer feet")
-			expect(view.get_node("Body").offset == Vector2(-24, -44), "Farmer retains the accepted body pivot")
+			expect(_body_contact_is_valid(view.get_node("Body")), "Farmer retains its source-owned canvas, scale and body pivot")
 			expect(var_to_bytes(_state) == before, "Material/lighting view changes cannot alter any serialized state")
 			await _shoot("material_%s_light%d" % [names[material], lighting], "%s / day-dusk-night %d / native tiles and actors" % [names[material], lighting])
 		# The unmodified farm, including paths, rocky ground and the wooden dock.
@@ -1247,7 +1248,10 @@ func _locomotion() -> void:
 	var body: Sprite2D = view.get_node("Body")
 	var player: Dictionary = _state["player"]
 	for facing in [Player.SOUTH, Player.WEST, Player.NORTH, Player.EAST]:
-		for moving in [false, true]:
+		for motion in ["idle", "walk", "run"]:
+			var moving: bool = motion != "idle"
+			var running: bool = motion == "run"
+			view.set_running(running)
 			_set_contact(player, Vector2i(248, 208))
 			var step: Vector2i = Player.FACING_STEPS[facing]
 			_state["intent"]["move"] = [step.x, step.y]
@@ -1255,12 +1259,12 @@ func _locomotion() -> void:
 			expect(Player.facing(_state) == facing, "Core movement resolves the cardinal facing")
 			if not moving:
 				_state["intent"]["move"] = [0, 0]
-			var pose := PlayerArt.pose(facing, moving, &"")
+			var pose := PlayerArt.pose(facing, moving, &"", running)
 			var count := int(pose["frames"])
 			var expected_name: StringName = StringName("%s_%s" % [
-				"walk" if moving else "idle", PlayerArt.FACINGS[facing][0]])
-			expect(pose["name"] == expected_name and count == (4 if moving else 3),
-				"Each facing selects its complete authored idle/walk family")
+				motion, PlayerArt.FACINGS[facing][0]])
+			expect(pose["name"] == expected_name and count == (8 if moving else 3),
+				"Each facing selects its complete reviewed idle/walk/run family")
 			expect(PlayerFrames.SECONDS.has(expected_name), "Timing comes from the accepted strip")
 			await _settle()
 			var fixed_contact := ArtPlacement.contact(player["pos"])
@@ -1271,21 +1275,22 @@ func _locomotion() -> void:
 				view._process(0.0 if phase == 0 else PlayerArt.frame_seconds(pose, (phase - 1) % count) + 0.0001)
 				expect(State.hash_of(_state) == before, "Drawing the player never changes core state")
 				expect(view.playing() == expected_name, "No locomotion family silently falls back to idle")
-				expect(view.flipped() == (facing == Player.EAST), "Only east mirrors the accepted west")
+				expect(not view.flipped(), "Locomotion owns its direction and reflected ground registration")
 				expect(body.texture != null and body.texture.resource_path ==
 					PlayerArt.texture_path(expected_name, phase % count),
 					"Actual view clock selects each authored frame, including loop wrap")
-				expect(body.offset == Vector2(-24, -44), "A turn or mirror cannot move the foot pivot")
+				expect(_body_contact_is_valid(body), "A turn or mirror cannot move the foot pivot")
 				expect(view.position == ArtPlacement.contact(player["pos"]),
 					"Visible ground origin agrees with unchanged core position")
 				if not moving:
 					expect(view.position == fixed_contact, "Idle feet stay planted across both loops")
 				var metadata: Dictionary = RasterArt.FRAMES.get(body.texture.resource_path, {})
-				expect(metadata.get("canvas") == Vector2i(48, 48)
-					and metadata.get("pivot") == Vector2i(24, 44), "Every frame uses accepted source geometry")
+				expect(metadata.get("canvas") == Vector2i(96,96)
+					and body.scale == Vector2(0.5,0.5), "Every locomotion frame preserves reviewed native geometry")
 				if phase < count:
-					await _shoot("%s_facing%d_%02d" % ["walk" if moving else "idle", facing, phase],
+					await _shoot("%s_facing%d_%02d" % [motion, facing, phase],
 						"%s / facing %d / authored frame %d" % [expected_name, facing, phase])
+	view.set_running(false)
 	# Vertical wins a diagonal tie in core; release retains the resulting facing.
 	for move in [Vector2i(-1, -1), Vector2i(1, -1), Vector2i(-1, 1), Vector2i(1, 1)]:
 		_set_contact(player, Vector2i(248, 208))
@@ -1311,10 +1316,21 @@ func _locomotion() -> void:
 		Player.tick(_state)
 		view._process(0.13)
 		expect(view.playing() == StringName("walk_%s" % PlayerArt.FACINGS[facing][0])
-			and view.flipped() == (facing == Player.EAST), "Immediate direction changes show the correct art")
-		expect(view.position == ArtPlacement.contact(player["pos"]) and body.offset == Vector2(-24, -44),
+			and not view.flipped(), "Immediate direction changes show the correct art")
+		expect(view.position == ArtPlacement.contact(player["pos"]) and _body_contact_is_valid(body),
 			"Turning never adds an artificial canvas-width displacement")
 		await _shoot("turn_%d" % facing, "Direction change / facing %d / no contact jump" % facing)
+
+
+func _body_contact_is_valid(body: Sprite2D) -> bool:
+	if body.texture == null:
+		return false
+	var metadata: Dictionary = RasterArt.FRAMES.get(body.texture.resource_path, {})
+	var pivot: Vector2i = metadata.get("pivot", PlayerFrames.FEET)
+	var canvas: Vector2i = metadata.get("canvas", PlayerFrames.CANVAS)
+	var offset := Vector2(pivot.x - canvas.x if body.flip_h else -pivot.x, -pivot.y)
+	return body.offset == offset and body.texture.get_size() == Vector2(canvas) \
+		and body.scale == Vector2.ONE * float(metadata.get("draw_scale", 1.0))
 
 
 func _set_contact(who: Dictionary, pixels: Vector2i) -> void:
@@ -1400,7 +1416,7 @@ func _work_frame(view: PlayerView, verb: StringName, frame: int, facing: int, de
 	expect(body.texture != null and body.texture.resource_path == PlayerArt.texture_path(verb, frame),
 		"Actual work completion clock selects %s authored frame %d" % [verb, frame])
 	expect(view.flipped() == (facing == Player.EAST), "Work east mirrors west, with consistent handedness")
-	expect(body.offset == Vector2(-24, -44) and body.texture.get_size() == Vector2(48, 48),
+	expect(body.offset == -Vector2(PlayerFrames.FEET) and body.texture.get_size() == Vector2(PlayerFrames.CANVAS),
 		"Tools share the fixed player canvas and feet")
 	expect(view.position == ArtPlacement.contact(_state["player"]["pos"]),
 		"Work never shifts the logical ground contact")
@@ -1450,7 +1466,7 @@ func _work_cycles() -> void:
 			_state["intent"]["move"] = [1, 0]
 			_work_tick(view)
 			view._process(0.0)
-			expect(view.playing() == &"walk_west" and view.flipped(), "%s returns immediately to core-resolved walking" % verb)
+			expect(view.playing() == &"walk_east" and not view.flipped(), "%s returns immediately to core-resolved walking" % verb)
 			# Interrupt before the timed payload, not only after a finished cycle.
 			if not instant:
 				for walk_away in [false, true]:
@@ -1636,7 +1652,7 @@ func _reaction_check(view: PlayerView, kind: StringName, holding_rod := false) -
 		"Reaction keeps its south pose, or the held fishing rod's facing")
 	expect(body.texture != null and body.texture.resource_path == PlayerArt.texture_path(body_name, 0),
 		"Each existing reaction uses its own source-owned frame")
-	expect(body.offset == Vector2(-24, -44) and body.texture.get_size() == Vector2(48, 48),
+	expect(body.offset == -Vector2(PlayerFrames.FEET) and body.texture.get_size() == Vector2(PlayerFrames.CANVAS),
 		"Reaction body preserves the common canvas and planted feet")
 	expect(view.position == ArtPlacement.contact(_state["player"]["pos"]), "Bubble clamping never moves the farmer")
 	var metadata: Dictionary = RasterArt.FRAMES[glyph_path]
@@ -1739,7 +1755,7 @@ func _reactions() -> void:
 	_state["intent"]["move"] = [1, 0]
 	Player.tick(_state)
 	view._process(0.0)
-	expect(view.playing() == &"walk_west" and view.flipped() and not view.get_node("ReactionBubble").visible,
+	expect(view.playing() == &"walk_east" and not view.flipped() and not view.get_node("ReactionBubble").visible,
 		"Walking hides the reaction without changing the state's remaining lifetime")
 	await _shoot("suppressed_walk", "Moving east: authored walk, no reaction layer")
 	_state["intent"]["move"] = [0, 0]
@@ -1748,7 +1764,7 @@ func _reactions() -> void:
 	for _i in GameData.REACTION_TICKS:
 		Reactions.tick(_state)
 	view._process(0.0)
-	expect(Reactions.now(_state) == &"" and view.playing() == &"idle_west"
+	expect(Reactions.now(_state) == &"" and view.playing() == &"idle_east"
 		and not view.get_node("ReactionBubble").visible, "Expiry removes bubble and body mask and restores idle")
 	await _shoot("expired_reaction", "Existing reaction lifetime expires to normal authored idle")
 	# Four symbols at all map/camera corners: glyph alone can be clamped.
@@ -1849,7 +1865,7 @@ func _check_placement() -> void:
 	var player := _world.get_node("Occupants/PlayerView")
 	expect(player.position == ArtPlacement.contact(_state["player"]["pos"]), "Player and enemies share contact coordinates")
 	var body: Sprite2D = player.get_node("Body")
-	expect(body.offset == Vector2(-24, -44), "Pilot farmer is the accepted 30px source at its ground pivot")
+	expect(_body_contact_is_valid(body), "Farmer retains its accepted source geometry and ground pivot")
 	var light := ArtPlacement.emission(&"house", Vector2(320, 96), &"light", Vector2.ZERO, Vector2i(3,3))
 	var smoke := ArtPlacement.emission(&"house", Vector2(320, 96), &"smoke", Vector2.ZERO, Vector2i(3,3))
 	expect(light == Vector2(318, 114) and smoke == Vector2(382, 48), "Lamp/chimney anchor follows the enlarged legacy fixture drawing")
@@ -1894,6 +1910,7 @@ func _contacts() -> void:
 			var metadata: Dictionary = RasterArt.FRAMES.get(path, {})
 			var pivot: Vector2 = Vector2(metadata.get("pivot", PlayerFrames.FEET))
 			sprite.offset = -pivot
+			sprite.scale = Vector2.ONE * float(metadata.get("draw_scale", 1.0))
 			sprite.position = Vector2(32 + i % 7 * 64, 80 + i / 7 * 58)
 			layer.add_child(sprite)
 			expect(sprite.texture != null, "Every contact frame has an actual texture")

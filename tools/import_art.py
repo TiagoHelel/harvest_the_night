@@ -84,6 +84,9 @@ def load_manifest(path=MANIFEST):
         ids.add(ident)
         outputs.add(output)
         canvas = integers(entry["canvas_wh"], 2, "canvas", 1)
+        draw_scale = entry.get("draw_scale", 1.0)
+        if type(draw_scale) not in (int, float) or not math.isfinite(draw_scale) or draw_scale <= 0:
+            raise ValueError("Invalid UI draw scale: " + ident)
         pivot = integers(entry["pivot_xy"], 2, "pivot")
         if any(pivot[i] > canvas[i] for i in range(2)):
             raise ValueError("Out-of-range pivot: " + ident)
@@ -189,6 +192,8 @@ def load_manifest(path=MANIFEST):
         scales = {e["content_scale"] for e in frames if "source" in e}
         if len(scales) > 1:
             raise ValueError("Per-frame scale drift: " + name)
+        if len({e.get("draw_scale", 1.0) for e in frames}) > 1:
+            raise ValueError("Per-frame UI scale drift: " + name)
     return data
 
 
@@ -353,6 +358,8 @@ def metadata(data):
         if "bubble_xywh" in entry:
             x, y, w, h = entry["bubble_xywh"]
             lines[-1] = lines[-1][:-2] + ', "bubble": Rect2i(%d, %d, %d, %d)},' % (x, y, w, h)
+        if "draw_scale" in entry:
+            lines[-1] = lines[-1][:-2] + ', "draw_scale": %s},' % entry["draw_scale"]
     lines.extend(["}", ""])
     return "\n".join(lines).encode("utf-8")
 

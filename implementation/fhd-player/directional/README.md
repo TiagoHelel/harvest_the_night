@@ -1,9 +1,10 @@
 # Approved farmer: directional animation review
 
-This follow-up produces review assets only. The user approved the front-facing
-farmer and requested every movement/activity in all four directions, with a
-horizontal GIF **before** promotion into the game. Runtime actor bindings,
-movement rules, tools, collision and simulation are not changed by this family.
+The user requested previews first and subsequently authorized game integration
+on 2026-10-02: "quando terminar implementa no game". Idle, walk and run are now
+promoted in all four directions. The thirteen activity families remain review
+candidates. Runtime rendering uses the exact reviewed native locomotion PNGs;
+movement speed, tools, collision and deterministic simulation remain unchanged.
 
 The exact approved identity is `assets/art_source/player-fhd/approved/idle_south.png`
 (SHA-256 `4706f5b8163d4be2d3d8f285bdffe970a315a9c770e6b28bef4e74c4993ba6f1`).
@@ -48,7 +49,8 @@ Locomotion uses 96x96 native canvases with (48,88) ground registration, or
 (47,88) for the reflected west walk/run. Work uses
 128x128 / (64,108) to preserve complete raised tools and contact below the boots.
 The body scale stays 60 pixels; extra transparent canvas is tool clearance.
-Future runtime promotion must unify padding/metadata before swapping the family.
+Runtime locomotion retains its 96x96 canvas and per-direction pivot, drawn at
+0.5 logical scale. Existing activity/reaction padding remains independent.
 
 ## Source contract and revisions
 
@@ -160,11 +162,51 @@ opposite-leg check. Material checks do not establish subjective motion quality.
 
 Real Godot captures refresh `gifs/run-horizontal.gif` (1040x288, 7.68s at 25fps)
 and the running section of the 61.44s overview. Native sheets, eight consecutive
-actual renderer phases and the browser proof are retained. Run remains pending
-user validation in `user-review.json`; runtime actor bindings are unchanged.
+actual renderer phases and the browser proof are retained. At preview commit
+`82307ecd`, run remained pending user validation and actor bindings were unchanged.
+The subsequent explicit user integration request promotes locomotion as recorded
+below. Older rejected pilot assets remain separate from the promoted selection.
 
-This delivery is a candidate review, not automatic user approval. These PNGs
-have not replaced `sprites/actors/` or the registered runtime player family.
-Live farm/house day/night composition and actor-family binding happen after
-the user validates the previews. The pre-existing broader FHD working-tree
-changes and older rejected pilot assets remain separate unfinished work.
+
+## Runtime integration — 2026-10-02
+
+`promote_locomotion.py` registers 76 reviewed locomotion PNGs with the existing
+raster importer: 12 idle, 32 walk and 32 run. `runtime-locomotion-contract.json`
+pins the original master/prompt/crop/native output recipes. Its `--check`
+rederives every original cut and checks exact runtime bytes and geometry.
+The 208 directional activity candidates remain pending review.
+
+The game defaults to 1920x1080 with Canvas Items rendering over the existing
+480x270 layout. A 60-native-pixel body draws at 120 physical pixels in FHD.
+Each locomotion family owns its canvas, pivot and 0.5 draw scale; old tools and
+reactions keep their own metadata. East no longer substitutes a flipped west
+walk. West walk/run retain the reviewed reflected (47,88) ground pivot.
+
+Holding **Shift** while moving selects RUN; releasing it returns to WALK.
+Shift alone remains IDLE. This selects animation at the existing movement
+speed, outdoors and indoors, and is rebindable in the controls menu.
+
+```powershell
+python implementation/fhd-player/directional/promote_locomotion.py
+python tools/import_art.py
+python implementation/fhd-player/directional/promote_locomotion.py --check
+. implementation/farm-house/prepare_qa.ps1
+$env:GODOT = 'C:/Users/Helel/Documents/godot/Godot_v4.7.1-stable_win64_console.exe'
+& $env:GODOT --path $env:GODOT_PROJECT_PATH --fixed-fps 25 --position -4000,-4000 --script res://implementation/fhd-player/directional/runtime_capture.gd
+python implementation/fhd-player/directional/runtime_encode.py
+python tools/shot.py sprites/fhd-locomotion --fhd noon dusk wave result tech house_interior
+python tools/verify.py
+```
+
+`runtime_capture.gd` runs the production World/PlayerView and Player.tick at
+30Hz while sampling at 25fps, with the actual day/night relight pipeline.
+All 24 timed sequences show every registered pose: 1,536 FHD renderer frames,
+6,168 checks, no failures. Captures are excluded from Git and protected from
+editor import by .gdignore. `review-stills/runtime-horizontal.gif` retains
+physical pixels without rescaling; four complete FHD frames are saved alongside.
+`runtime-capture-report.json` records the sequences. Full-game screenshots,
+including the house, are in implementation/shots/sprites/fhd-locomotion/.
+
+Final full verification: **55 passed, zero skipped/failed**, 491s.
+Parsed 125 scripts; 7,768 core assertions; 1,006 input cases.
+Sim/data hashes remain 1270427719 / 8148086. Evidence: runtime-verify.log.

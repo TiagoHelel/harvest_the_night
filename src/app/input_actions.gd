@@ -39,6 +39,7 @@ const ACTIONS: Array = [
 	[&"move_down", &"ACT_MOVE_DOWN", &"ACT_GROUP_MOVING"],
 	[&"move_left", &"ACT_MOVE_LEFT", &"ACT_GROUP_MOVING"],
 	[&"move_right", &"ACT_MOVE_RIGHT", &"ACT_GROUP_MOVING"],
+	[&"run", &"ACT_RUN", &"ACT_GROUP_MOVING"],
 	[&"zoom_in", &"ACT_ZOOM_IN", &"ACT_GROUP_MOVING"],
 	[&"zoom_out", &"ACT_ZOOM_OUT", &"ACT_GROUP_MOVING"],
 	[&"zoom_reset", &"ACT_ZOOM_RESET", &"ACT_GROUP_MOVING"],
@@ -187,9 +188,8 @@ static func from_text(text: String) -> InputEvent:
 
 ## Whether an event is one this game will take as a binding.
 ##
-## **Not every key is a binding.** A modifier on its own binds an action to
-## something that can never be pressed alone, and the three Godot reserves for
-## the window would take the game away from the player with no way back.
+## Shift is a standalone hold action for the run animation. Other modifiers
+## and lock keys remain unavailable as lone bindings.
 static func is_bindable(event: InputEvent) -> bool:
 	var button := event as InputEventMouseButton
 	if button != null:
@@ -198,7 +198,7 @@ static func is_bindable(event: InputEvent) -> bool:
 	if key == null:
 		return false
 	var code := key.keycode if key.keycode != 0 else key.physical_keycode
-	return not [KEY_SHIFT, KEY_CTRL, KEY_ALT, KEY_META, KEY_CAPSLOCK,
+	return not [KEY_CTRL, KEY_ALT, KEY_META, KEY_CAPSLOCK,
 		KEY_NUMLOCK, KEY_SCROLLLOCK, KEY_UNKNOWN, 0].has(code)
 
 

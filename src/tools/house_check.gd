@@ -49,6 +49,7 @@ func _legacy() -> Dictionary:
 
 
 func _run() -> void:
+	CaptureSize.configure(root)
 	_capture = not OS.get_cmdline_user_args().has("--check")
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--out="):

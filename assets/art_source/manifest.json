@@ -64,33 +64,28 @@
     {
       "id": "actors/idle_south_0",
       "owner": "raster",
-      "source": "assets/art_source/player/idle_south-eyes-v3.png",
-      "source_sha256": "5d529f6f66d47edcec1150eaf876539cf408a1aa49bac7b2b65ce3baeaefc381",
+      "source": "assets/art_source/player-fhd/approved/frames/idle_south_0.png",
+      "source_sha256": "69d499c3bfea8b6a9e508015f942d016783715dec167449d525e7f27f75e707c",
       "crop_xywh": [
-        198,
-        119,
-        395,
-        564
-      ],
-      "sheet_cell_xywh": [
         0,
         0,
-        706,
-        773
-      ],
-      "gutter_xy": [
-        0,
-        0
+        96,
+        96
       ],
       "canvas_wh": [
-        48,
-        48
+        96,
+        96
       ],
       "pivot_xy": [
-        24,
-        44
+        48,
+        88
       ],
-      "content_scale": 0.05319148936170213,
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "tools/palette.py:COLOURS",
       "animation": "idle_south",
@@ -98,51 +93,50 @@
       "seconds": 0.55,
       "loop": true,
       "output": "sprites/actors/idle_south_0.png",
-      "output_sha256": "822ca40f70b1122f9a35d2d7b65006779d0127f1657edd0db40d633c0263f6a8",
-      "prompt": "implementation/sprites/generation/visibility-idle-eyes-v3.prompt.txt",
-      "prompt_sha256": "7dbf35ef5d5b327fed0f6c059001c568d8f8fb5fb1a3da439ce96fee14e9b07e",
+      "output_sha256": "69d499c3bfea8b6a9e508015f942d016783715dec167449d525e7f27f75e707c",
+      "prompt": "implementation/fhd-player/approved-prompts/idle_south.prompt.txt",
+      "prompt_sha256": "55555eb6c48405036cb6fb67d4198ed2d3d59e5313e6f4235736cf28c69c4a2d",
       "references": [
         {
-          "path": "assets/art_source/player/idle_south.png",
-          "role": "Original idle strip edit target",
-          "sha256": "49de04f2e849b42f984ba145cf54505616ed055a242b6e6363f90d3dfe5ea7b2"
+          "path": "assets/art_source/player-fhd/approved/idle_south.png",
+          "sha256": "4706f5b8163d4be2d3d8f285bdffe970a315a9c770e6b28bef4e74c4993ba6f1",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
         }
       ],
       "tool": "built-in ImageGen",
-      "generation_task": "0004",
-      "revision": 1,
-      "approval": "Native/3x strip review before runtime promotion"
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
     },
     {
       "id": "actors/idle_south_1",
       "owner": "raster",
-      "source": "assets/art_source/player/idle_south-eyes-v3.png",
-      "source_sha256": "5d529f6f66d47edcec1150eaf876539cf408a1aa49bac7b2b65ce3baeaefc381",
+      "source": "assets/art_source/player-fhd/approved/frames/idle_south_1.png",
+      "source_sha256": "07145184a1dcb7dae2029694d45de983518dfd82f2c8bdd4df6f9e6894df860a",
       "crop_xywh": [
-        819,
-        122,
-        394,
-        561
-      ],
-      "sheet_cell_xywh": [
-        706,
         0,
-        621,
-        773
-      ],
-      "gutter_xy": [
         0,
-        0
+        96,
+        96
       ],
       "canvas_wh": [
-        48,
-        48
+        96,
+        96
       ],
       "pivot_xy": [
-        24,
-        44
+        48,
+        88
       ],
-      "content_scale": 0.05319148936170213,
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "tools/palette.py:COLOURS",
       "animation": "idle_south",
@@ -150,51 +144,50 @@
       "seconds": 0.55,
       "loop": true,
       "output": "sprites/actors/idle_south_1.png",
-      "output_sha256": "8dcca8cb52e22bf389a3eb6012306f41de59065b33c396644241659123293106",
-      "prompt": "implementation/sprites/generation/visibility-idle-eyes-v3.prompt.txt",
-      "prompt_sha256": "7dbf35ef5d5b327fed0f6c059001c568d8f8fb5fb1a3da439ce96fee14e9b07e",
+      "output_sha256": "07145184a1dcb7dae2029694d45de983518dfd82f2c8bdd4df6f9e6894df860a",
+      "prompt": "implementation/fhd-player/approved-prompts/idle_south.prompt.txt",
+      "prompt_sha256": "55555eb6c48405036cb6fb67d4198ed2d3d59e5313e6f4235736cf28c69c4a2d",
       "references": [
         {
-          "path": "assets/art_source/player/idle_south.png",
-          "role": "Original idle strip edit target",
-          "sha256": "49de04f2e849b42f984ba145cf54505616ed055a242b6e6363f90d3dfe5ea7b2"
+          "path": "assets/art_source/player-fhd/approved/idle_south.png",
+          "sha256": "4706f5b8163d4be2d3d8f285bdffe970a315a9c770e6b28bef4e74c4993ba6f1",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
         }
       ],
       "tool": "built-in ImageGen",
-      "generation_task": "0004",
-      "revision": 1,
-      "approval": "Native/3x strip review before runtime promotion"
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
     },
     {
       "id": "actors/idle_south_2",
       "owner": "raster",
-      "source": "assets/art_source/player/idle_south-eyes-v3.png",
-      "source_sha256": "5d529f6f66d47edcec1150eaf876539cf408a1aa49bac7b2b65ce3baeaefc381",
+      "source": "assets/art_source/player-fhd/approved/frames/idle_south_2.png",
+      "source_sha256": "01075afecad55245252034de4ab9c9fe8bedd694c2437896443997ae3ddfb090",
       "crop_xywh": [
-        1441,
-        119,
-        395,
-        564
-      ],
-      "sheet_cell_xywh": [
-        1327,
         0,
-        706,
-        773
-      ],
-      "gutter_xy": [
         0,
-        0
+        96,
+        96
       ],
       "canvas_wh": [
-        48,
-        48
+        96,
+        96
       ],
       "pivot_xy": [
-        24,
-        44
+        48,
+        88
       ],
-      "content_scale": 0.05319148936170213,
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "tools/palette.py:COLOURS",
       "animation": "idle_south",
@@ -202,299 +195,254 @@
       "seconds": 0.55,
       "loop": true,
       "output": "sprites/actors/idle_south_2.png",
-      "output_sha256": "c6cf1e24b51b42df7d703dba94ecac2090a0600fed605c629a6dd8e3a116a69e",
-      "prompt": "implementation/sprites/generation/visibility-idle-eyes-v3.prompt.txt",
-      "prompt_sha256": "7dbf35ef5d5b327fed0f6c059001c568d8f8fb5fb1a3da439ce96fee14e9b07e",
+      "output_sha256": "01075afecad55245252034de4ab9c9fe8bedd694c2437896443997ae3ddfb090",
+      "prompt": "implementation/fhd-player/approved-prompts/idle_south.prompt.txt",
+      "prompt_sha256": "55555eb6c48405036cb6fb67d4198ed2d3d59e5313e6f4235736cf28c69c4a2d",
       "references": [
         {
-          "path": "assets/art_source/player/idle_south.png",
-          "role": "Original idle strip edit target",
-          "sha256": "49de04f2e849b42f984ba145cf54505616ed055a242b6e6363f90d3dfe5ea7b2"
+          "path": "assets/art_source/player-fhd/approved/idle_south.png",
+          "sha256": "4706f5b8163d4be2d3d8f285bdffe970a315a9c770e6b28bef4e74c4993ba6f1",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
         }
       ],
       "tool": "built-in ImageGen",
-      "generation_task": "0004",
-      "revision": 1,
-      "approval": "Native/3x strip review before runtime promotion"
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
     },
     {
       "id": "actors/walk_south_0",
       "owner": "raster",
-      "source": "assets/art_source/player/walk_south.png",
-      "source_sha256": "c5e566a03fd5bf3ae61571e48f6a348e2658acca48c1b6f7eae91b54f62ea3c4",
+      "source": "assets/art_source/player-fhd/approved/frames/walk_south_0.png",
+      "source_sha256": "9ac2905faed23d8f05e99f51b7a5c480a8b303ddbe0ae780da5ed61ebc183d04",
       "crop_xywh": [
-        87,
-        111,
-        361,
-        530
-      ],
-      "sheet_cell_xywh": [
         0,
         0,
-        543,
-        724
-      ],
-      "gutter_xy": [
-        87,
-        83
+        96,
+        96
       ],
       "canvas_wh": [
-        48,
-        48
+        96,
+        96
       ],
       "pivot_xy": [
-        24,
-        44
+        48,
+        88
       ],
-      "content_scale": 0.056818181818181816,
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "tools/palette.py:COLOURS",
       "animation": "walk_south",
       "frame": 0,
-      "seconds": 0.13,
+      "seconds": 0.12,
       "loop": true,
       "output": "sprites/actors/walk_south_0.png",
-      "output_sha256": "66da8a9f1882c8c4aeb1018c8322297a1323cbd1b6c52c6bd3cb5037b91b7077",
-      "prompt": "implementation/sprites/generation/0004-walk_south-r1.prompt.txt",
-      "prompt_sha256": "658860b48c2b1bc79efc6d352802f3448c6cfa520adc5fe7fece29c66f2db8e0",
+      "output_sha256": "9ac2905faed23d8f05e99f51b7a5c480a8b303ddbe0ae780da5ed61ebc183d04",
+      "prompt": "implementation/fhd-player/approved-prompts/walk_south_8-r1.prompt.txt",
+      "prompt_sha256": "a75dce980b4c9961b534a1013ae053292b38793603848d04a7b7f0c36cbf66a8",
       "references": [
         {
-          "path": "assets/art_source/masters/farmer.png",
-          "role": "approved identity and body-scale master",
-          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+          "path": "assets/art_source/player-fhd/approved/walk_south_8-r1.png",
+          "sha256": "8a70c2e178e281615ed37d59b254e990f1f9471263e0d72846dd6d9e00d9e54c",
+          "role": "Original generated locomotion master"
         },
         {
-          "path": "assets/art_source/player/candidates/walk_south-r0.png",
-          "role": "edit target for accepted revision",
-          "sha256": "39c0c250ea74222a8c7b8e1c4004a4152ec864524a224ae3f6b75af00321a377"
-        },
-        {
-          "path": "implementation/sprites/generation/0004-walk_south.prompt.txt",
-          "role": "original complete strip prompt",
-          "sha256": "cf5c237ba19ed8512926e600402b219e5f794c31ac041c43e7299d92a28ed8ac"
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
         }
       ],
       "tool": "built-in ImageGen",
-      "generation_task": "0004",
-      "revision": 1,
-      "approval": "Native/3x strip review before runtime promotion"
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
     },
     {
       "id": "actors/walk_south_1",
       "owner": "raster",
-      "source": "assets/art_source/player/walk_south.png",
-      "source_sha256": "c5e566a03fd5bf3ae61571e48f6a348e2658acca48c1b6f7eae91b54f62ea3c4",
+      "source": "assets/art_source/player-fhd/approved/frames/walk_south_1.png",
+      "source_sha256": "14b288cc2910c19da4e9253ba7183650944d812009024ebfe7a4d2d429d55845",
       "crop_xywh": [
-        639,
-        111,
-        360,
-        526
-      ],
-      "sheet_cell_xywh": [
-        543,
         0,
-        543,
-        724
-      ],
-      "gutter_xy": [
-        87,
-        87
+        0,
+        96,
+        96
       ],
       "canvas_wh": [
-        48,
-        48
+        96,
+        96
       ],
       "pivot_xy": [
-        24,
-        44
+        48,
+        88
       ],
-      "content_scale": 0.056818181818181816,
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "tools/palette.py:COLOURS",
       "animation": "walk_south",
       "frame": 1,
-      "seconds": 0.13,
+      "seconds": 0.12,
       "loop": true,
       "output": "sprites/actors/walk_south_1.png",
-      "output_sha256": "632681cb45eff18ac588fa87c7bc353cd426247149776a852989c15c2b4154ea",
-      "prompt": "implementation/sprites/generation/0004-walk_south-r1.prompt.txt",
-      "prompt_sha256": "658860b48c2b1bc79efc6d352802f3448c6cfa520adc5fe7fece29c66f2db8e0",
+      "output_sha256": "14b288cc2910c19da4e9253ba7183650944d812009024ebfe7a4d2d429d55845",
+      "prompt": "implementation/fhd-player/approved-prompts/walk_south_8-r1.prompt.txt",
+      "prompt_sha256": "a75dce980b4c9961b534a1013ae053292b38793603848d04a7b7f0c36cbf66a8",
       "references": [
         {
-          "path": "assets/art_source/masters/farmer.png",
-          "role": "approved identity and body-scale master",
-          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+          "path": "assets/art_source/player-fhd/approved/walk_south_8-r1.png",
+          "sha256": "8a70c2e178e281615ed37d59b254e990f1f9471263e0d72846dd6d9e00d9e54c",
+          "role": "Original generated locomotion master"
         },
         {
-          "path": "assets/art_source/player/candidates/walk_south-r0.png",
-          "role": "edit target for accepted revision",
-          "sha256": "39c0c250ea74222a8c7b8e1c4004a4152ec864524a224ae3f6b75af00321a377"
-        },
-        {
-          "path": "implementation/sprites/generation/0004-walk_south.prompt.txt",
-          "role": "original complete strip prompt",
-          "sha256": "cf5c237ba19ed8512926e600402b219e5f794c31ac041c43e7299d92a28ed8ac"
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
         }
       ],
       "tool": "built-in ImageGen",
-      "generation_task": "0004",
-      "revision": 1,
-      "approval": "Native/3x strip review before runtime promotion"
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
     },
     {
       "id": "actors/walk_south_2",
       "owner": "raster",
-      "source": "assets/art_source/player/walk_south.png",
-      "source_sha256": "c5e566a03fd5bf3ae61571e48f6a348e2658acca48c1b6f7eae91b54f62ea3c4",
+      "source": "assets/art_source/player-fhd/approved/frames/walk_south_2.png",
+      "source_sha256": "2f1df42dc03335adc6701198212015e034a091b87946837bf8f8fbacd811d57e",
       "crop_xywh": [
-        1173,
-        111,
-        360,
-        530
-      ],
-      "sheet_cell_xywh": [
-        1086,
         0,
-        543,
-        724
-      ],
-      "gutter_xy": [
-        87,
-        83
+        0,
+        96,
+        96
       ],
       "canvas_wh": [
-        48,
-        48
+        96,
+        96
       ],
       "pivot_xy": [
-        24,
-        44
+        48,
+        88
       ],
-      "content_scale": 0.056818181818181816,
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "tools/palette.py:COLOURS",
       "animation": "walk_south",
       "frame": 2,
-      "seconds": 0.13,
+      "seconds": 0.12,
       "loop": true,
       "output": "sprites/actors/walk_south_2.png",
-      "output_sha256": "a12a3246059856c159f52bb89529a566771b32f33c570e82fd15811fffc34302",
-      "prompt": "implementation/sprites/generation/0004-walk_south-r1.prompt.txt",
-      "prompt_sha256": "658860b48c2b1bc79efc6d352802f3448c6cfa520adc5fe7fece29c66f2db8e0",
+      "output_sha256": "2f1df42dc03335adc6701198212015e034a091b87946837bf8f8fbacd811d57e",
+      "prompt": "implementation/fhd-player/approved-prompts/walk_south_8-r1.prompt.txt",
+      "prompt_sha256": "a75dce980b4c9961b534a1013ae053292b38793603848d04a7b7f0c36cbf66a8",
       "references": [
         {
-          "path": "assets/art_source/masters/farmer.png",
-          "role": "approved identity and body-scale master",
-          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+          "path": "assets/art_source/player-fhd/approved/walk_south_8-r1.png",
+          "sha256": "8a70c2e178e281615ed37d59b254e990f1f9471263e0d72846dd6d9e00d9e54c",
+          "role": "Original generated locomotion master"
         },
         {
-          "path": "assets/art_source/player/candidates/walk_south-r0.png",
-          "role": "edit target for accepted revision",
-          "sha256": "39c0c250ea74222a8c7b8e1c4004a4152ec864524a224ae3f6b75af00321a377"
-        },
-        {
-          "path": "implementation/sprites/generation/0004-walk_south.prompt.txt",
-          "role": "original complete strip prompt",
-          "sha256": "cf5c237ba19ed8512926e600402b219e5f794c31ac041c43e7299d92a28ed8ac"
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
         }
       ],
       "tool": "built-in ImageGen",
-      "generation_task": "0004",
-      "revision": 1,
-      "approval": "Native/3x strip review before runtime promotion"
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
     },
     {
       "id": "actors/walk_south_3",
       "owner": "raster",
-      "source": "assets/art_source/player/walk_south.png",
-      "source_sha256": "c5e566a03fd5bf3ae61571e48f6a348e2658acca48c1b6f7eae91b54f62ea3c4",
+      "source": "assets/art_source/player-fhd/approved/frames/walk_south_3.png",
+      "source_sha256": "e42c836a3361dc68d12ecba7402a781bc6e442d3cba5282ca7cf42a716c9653c",
       "crop_xywh": [
-        1725,
-        111,
-        360,
-        526
-      ],
-      "sheet_cell_xywh": [
-        1629,
         0,
-        543,
-        724
-      ],
-      "gutter_xy": [
-        87,
-        87
+        0,
+        96,
+        96
       ],
       "canvas_wh": [
-        48,
-        48
+        96,
+        96
       ],
       "pivot_xy": [
-        24,
-        44
+        48,
+        88
       ],
-      "content_scale": 0.056818181818181816,
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "tools/palette.py:COLOURS",
       "animation": "walk_south",
       "frame": 3,
-      "seconds": 0.13,
+      "seconds": 0.12,
       "loop": true,
       "output": "sprites/actors/walk_south_3.png",
-      "output_sha256": "5c01f4f74f8de12202505a3cbaa9db103ec152af415d05b6a1ac560712a2589e",
-      "prompt": "implementation/sprites/generation/0004-walk_south-r1.prompt.txt",
-      "prompt_sha256": "658860b48c2b1bc79efc6d352802f3448c6cfa520adc5fe7fece29c66f2db8e0",
+      "output_sha256": "e42c836a3361dc68d12ecba7402a781bc6e442d3cba5282ca7cf42a716c9653c",
+      "prompt": "implementation/fhd-player/approved-prompts/walk_south_8-r1.prompt.txt",
+      "prompt_sha256": "a75dce980b4c9961b534a1013ae053292b38793603848d04a7b7f0c36cbf66a8",
       "references": [
         {
-          "path": "assets/art_source/masters/farmer.png",
-          "role": "approved identity and body-scale master",
-          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+          "path": "assets/art_source/player-fhd/approved/walk_south_8-r1.png",
+          "sha256": "8a70c2e178e281615ed37d59b254e990f1f9471263e0d72846dd6d9e00d9e54c",
+          "role": "Original generated locomotion master"
         },
         {
-          "path": "assets/art_source/player/candidates/walk_south-r0.png",
-          "role": "edit target for accepted revision",
-          "sha256": "39c0c250ea74222a8c7b8e1c4004a4152ec864524a224ae3f6b75af00321a377"
-        },
-        {
-          "path": "implementation/sprites/generation/0004-walk_south.prompt.txt",
-          "role": "original complete strip prompt",
-          "sha256": "cf5c237ba19ed8512926e600402b219e5f794c31ac041c43e7299d92a28ed8ac"
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
         }
       ],
       "tool": "built-in ImageGen",
-      "generation_task": "0004",
-      "revision": 1,
-      "approval": "Native/3x strip review before runtime promotion"
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
     },
     {
       "id": "actors/idle_north_0",
       "owner": "raster",
-      "source": "assets/art_source/player/idle_north.png",
-      "source_sha256": "6de9c2f2df1bc0a0a0631769c15dfc21a6514017e38e63b375b194d2aac38800",
+      "source": "assets/art_source/player-fhd/directional/frames/idle_north_0.png",
+      "source_sha256": "10f68d5fe9241e0cc62638185720a215c67df01326d149e8287e51380192deae",
       "crop_xywh": [
-        318,
-        83,
-        404,
-        575
-      ],
-      "sheet_cell_xywh": [
         0,
         0,
-        802,
-        724
-      ],
-      "gutter_xy": [
-        80,
-        66
+        96,
+        96
       ],
       "canvas_wh": [
-        48,
-        48
+        96,
+        96
       ],
       "pivot_xy": [
-        24,
-        44
+        48,
+        88
       ],
-      "content_scale": 0.052083333333333336,
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "tools/palette.py:COLOURS",
       "animation": "idle_north",
@@ -502,51 +450,50 @@
       "seconds": 0.55,
       "loop": true,
       "output": "sprites/actors/idle_north_0.png",
-      "output_sha256": "ca55cfbe772bfe0e4fa66f1a9cdcdbc0cf08a2c45dcc3eaa10cc7a9eaaed0c6c",
-      "prompt": "implementation/sprites/generation/0004-idle_north.prompt.txt",
-      "prompt_sha256": "789c3d1a76ecaf73605d356ea3550570fc9dfb1a04a0052ee8eb3dbacfa76e78",
+      "output_sha256": "10f68d5fe9241e0cc62638185720a215c67df01326d149e8287e51380192deae",
+      "prompt": "implementation/fhd-player/directional/prompts/idle_north.prompt.txt",
+      "prompt_sha256": "c3297996c50ef8c68751d47e47a328ee2d502f0057a6306fda56c6977f4d07ef",
       "references": [
         {
-          "path": "assets/art_source/masters/farmer.png",
-          "role": "approved identity and body-scale master",
-          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+          "path": "assets/art_source/player-fhd/directional/idle_north.png",
+          "sha256": "bab2f7fb878efe13744b388636a2982166ce481433848fa618403b3fed2b2f34",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
         }
       ],
       "tool": "built-in ImageGen",
-      "generation_task": "0004",
-      "revision": 0,
-      "approval": "Native/3x strip review before runtime promotion"
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
     },
     {
       "id": "actors/idle_north_1",
       "owner": "raster",
-      "source": "assets/art_source/player/idle_north.png",
-      "source_sha256": "6de9c2f2df1bc0a0a0631769c15dfc21a6514017e38e63b375b194d2aac38800",
+      "source": "assets/art_source/player-fhd/directional/frames/idle_north_1.png",
+      "source_sha256": "4e0537edbe9461b4d8d094abdf6e2f8008075408264d05c71f0d7949e62b603f",
       "crop_xywh": [
-        883,
-        82,
-        405,
-        576
-      ],
-      "sheet_cell_xywh": [
-        802,
         0,
-        567,
-        724
-      ],
-      "gutter_xy": [
-        81,
-        66
+        0,
+        96,
+        96
       ],
       "canvas_wh": [
-        48,
-        48
+        96,
+        96
       ],
       "pivot_xy": [
-        24,
-        44
+        48,
+        88
       ],
-      "content_scale": 0.052083333333333336,
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "tools/palette.py:COLOURS",
       "animation": "idle_north",
@@ -554,51 +501,50 @@
       "seconds": 0.55,
       "loop": true,
       "output": "sprites/actors/idle_north_1.png",
-      "output_sha256": "031789fe57adb88f48c500e5c8b935d8f5d54bb10ade77d9a025068b5568c1f8",
-      "prompt": "implementation/sprites/generation/0004-idle_north.prompt.txt",
-      "prompt_sha256": "789c3d1a76ecaf73605d356ea3550570fc9dfb1a04a0052ee8eb3dbacfa76e78",
+      "output_sha256": "4e0537edbe9461b4d8d094abdf6e2f8008075408264d05c71f0d7949e62b603f",
+      "prompt": "implementation/fhd-player/directional/prompts/idle_north.prompt.txt",
+      "prompt_sha256": "c3297996c50ef8c68751d47e47a328ee2d502f0057a6306fda56c6977f4d07ef",
       "references": [
         {
-          "path": "assets/art_source/masters/farmer.png",
-          "role": "approved identity and body-scale master",
-          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+          "path": "assets/art_source/player-fhd/directional/idle_north.png",
+          "sha256": "bab2f7fb878efe13744b388636a2982166ce481433848fa618403b3fed2b2f34",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
         }
       ],
       "tool": "built-in ImageGen",
-      "generation_task": "0004",
-      "revision": 0,
-      "approval": "Native/3x strip review before runtime promotion"
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
     },
     {
       "id": "actors/idle_north_2",
       "owner": "raster",
-      "source": "assets/art_source/player/idle_north.png",
-      "source_sha256": "6de9c2f2df1bc0a0a0631769c15dfc21a6514017e38e63b375b194d2aac38800",
+      "source": "assets/art_source/player-fhd/directional/frames/idle_north_2.png",
+      "source_sha256": "717bae2390c55a91e3279370b7578e6da8751f7fdf93e8a62d1410da2fd51236",
       "crop_xywh": [
-        1450,
-        82,
-        405,
-        576
-      ],
-      "sheet_cell_xywh": [
-        1369,
         0,
-        803,
-        724
-      ],
-      "gutter_xy": [
-        81,
-        66
+        0,
+        96,
+        96
       ],
       "canvas_wh": [
-        48,
-        48
+        96,
+        96
       ],
       "pivot_xy": [
-        24,
-        44
+        48,
+        88
       ],
-      "content_scale": 0.052083333333333336,
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "tools/palette.py:COLOURS",
       "animation": "idle_north",
@@ -606,319 +552,254 @@
       "seconds": 0.55,
       "loop": true,
       "output": "sprites/actors/idle_north_2.png",
-      "output_sha256": "ccf61bc2df6e0a1998264e2ea5761312069a3ef6f3da7f8fa39eb9bbf7b35b21",
-      "prompt": "implementation/sprites/generation/0004-idle_north.prompt.txt",
-      "prompt_sha256": "789c3d1a76ecaf73605d356ea3550570fc9dfb1a04a0052ee8eb3dbacfa76e78",
+      "output_sha256": "717bae2390c55a91e3279370b7578e6da8751f7fdf93e8a62d1410da2fd51236",
+      "prompt": "implementation/fhd-player/directional/prompts/idle_north.prompt.txt",
+      "prompt_sha256": "c3297996c50ef8c68751d47e47a328ee2d502f0057a6306fda56c6977f4d07ef",
       "references": [
         {
-          "path": "assets/art_source/masters/farmer.png",
-          "role": "approved identity and body-scale master",
-          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+          "path": "assets/art_source/player-fhd/directional/idle_north.png",
+          "sha256": "bab2f7fb878efe13744b388636a2982166ce481433848fa618403b3fed2b2f34",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
         }
       ],
       "tool": "built-in ImageGen",
-      "generation_task": "0004",
-      "revision": 0,
-      "approval": "Native/3x strip review before runtime promotion"
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
     },
     {
       "id": "actors/walk_north_0",
       "owner": "raster",
-      "source": "assets/art_source/player/walk_north.png",
-      "source_sha256": "9a0a1429d754062e81bd1165a644ba0f3d593b814433ac8159da57d766e43a47",
+      "source": "assets/art_source/player-fhd/directional/frames/walk_north_0.png",
+      "source_sha256": "06033d0f87195fd35bdee034bf66d9984a1451350ce541038ce2adfd13a00449",
       "crop_xywh": [
-        130,
-        114,
-        360,
-        505
-      ],
-      "sheet_cell_xywh": [
         0,
         0,
-        551,
-        756
-      ],
-      "gutter_xy": [
-        61,
-        114
+        96,
+        96
       ],
       "canvas_wh": [
-        48,
-        48
+        96,
+        96
       ],
       "pivot_xy": [
-        24,
-        44
+        48,
+        88
       ],
-      "content_scale": 0.05928853754940711,
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "tools/palette.py:COLOURS",
       "animation": "walk_north",
       "frame": 0,
-      "seconds": 0.13,
+      "seconds": 0.12,
       "loop": true,
       "output": "sprites/actors/walk_north_0.png",
-      "output_sha256": "a1c39a20f20643083a130f908342092dea290a9de7590b3a5cef2a30989cf6d3",
-      "prompt": "implementation/sprites/generation/0004-walk_north-r1.prompt.txt",
-      "prompt_sha256": "599a850fb68f7dba77a76422dc5d72f62a572c2153cc5867e607d0b1cfd929d5",
+      "output_sha256": "06033d0f87195fd35bdee034bf66d9984a1451350ce541038ce2adfd13a00449",
+      "prompt": "implementation/fhd-player/directional/prompts/walk_north.prompt.txt",
+      "prompt_sha256": "1d5504bb26a36b2dae42df3ded0a14da6f8c08967e5c97591080509844cf80ce",
       "references": [
         {
-          "path": "assets/art_source/masters/farmer.png",
-          "role": "approved identity and body-scale master",
-          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+          "path": "assets/art_source/player-fhd/directional/walk_north.png",
+          "sha256": "bf67a3ed6269a2aef16059edba3bf3bf516a21ee04c69ee91ceb919de7b07b2f",
+          "role": "Original generated locomotion master"
         },
         {
-          "path": "assets/art_source/player/candidates/walk_north-r0.png",
-          "role": "edit target for accepted revision",
-          "sha256": "b26e9ff8b1d35ef6bad7fe664ad2cbb51b41518c865a34f8bd19853d92d78445"
-        },
-        {
-          "path": "implementation/sprites/generation/0004-walk_north.prompt.txt",
-          "role": "original complete strip prompt",
-          "sha256": "f20b8b9241ea7dbc4568af135e49d9c8d75ce12f9c6e228fc71413ff2116948f"
-        },
-        {
-          "path": "assets/art_source/player/idle_north.png",
-          "role": "accepted back-view clothing reference",
-          "sha256": "6de9c2f2df1bc0a0a0631769c15dfc21a6514017e38e63b375b194d2aac38800"
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
         }
       ],
       "tool": "built-in ImageGen",
-      "generation_task": "0004",
-      "revision": 1,
-      "approval": "Native/3x strip review before runtime promotion"
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
     },
     {
       "id": "actors/walk_north_1",
       "owner": "raster",
-      "source": "assets/art_source/player/walk_north.png",
-      "source_sha256": "9a0a1429d754062e81bd1165a644ba0f3d593b814433ac8159da57d766e43a47",
+      "source": "assets/art_source/player-fhd/directional/frames/walk_north_1.png",
+      "source_sha256": "6c77a2d35345cbd488dca79d6460ea99229a559b31b730791caf2519c92aea62",
       "crop_xywh": [
-        612,
-        114,
-        360,
-        506
-      ],
-      "sheet_cell_xywh": [
-        551,
         0,
-        488,
-        756
-      ],
-      "gutter_xy": [
-        61,
-        114
+        0,
+        96,
+        96
       ],
       "canvas_wh": [
-        48,
-        48
+        96,
+        96
       ],
       "pivot_xy": [
-        24,
-        44
+        48,
+        88
       ],
-      "content_scale": 0.05928853754940711,
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "tools/palette.py:COLOURS",
       "animation": "walk_north",
       "frame": 1,
-      "seconds": 0.13,
+      "seconds": 0.12,
       "loop": true,
       "output": "sprites/actors/walk_north_1.png",
-      "output_sha256": "6d8e14fb06e319711ecdd29e1277f56e19d6a3d6bcdd2bc5b1599519378dd274",
-      "prompt": "implementation/sprites/generation/0004-walk_north-r1.prompt.txt",
-      "prompt_sha256": "599a850fb68f7dba77a76422dc5d72f62a572c2153cc5867e607d0b1cfd929d5",
+      "output_sha256": "6c77a2d35345cbd488dca79d6460ea99229a559b31b730791caf2519c92aea62",
+      "prompt": "implementation/fhd-player/directional/prompts/walk_north.prompt.txt",
+      "prompt_sha256": "1d5504bb26a36b2dae42df3ded0a14da6f8c08967e5c97591080509844cf80ce",
       "references": [
         {
-          "path": "assets/art_source/masters/farmer.png",
-          "role": "approved identity and body-scale master",
-          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+          "path": "assets/art_source/player-fhd/directional/walk_north.png",
+          "sha256": "bf67a3ed6269a2aef16059edba3bf3bf516a21ee04c69ee91ceb919de7b07b2f",
+          "role": "Original generated locomotion master"
         },
         {
-          "path": "assets/art_source/player/candidates/walk_north-r0.png",
-          "role": "edit target for accepted revision",
-          "sha256": "b26e9ff8b1d35ef6bad7fe664ad2cbb51b41518c865a34f8bd19853d92d78445"
-        },
-        {
-          "path": "implementation/sprites/generation/0004-walk_north.prompt.txt",
-          "role": "original complete strip prompt",
-          "sha256": "f20b8b9241ea7dbc4568af135e49d9c8d75ce12f9c6e228fc71413ff2116948f"
-        },
-        {
-          "path": "assets/art_source/player/idle_north.png",
-          "role": "accepted back-view clothing reference",
-          "sha256": "6de9c2f2df1bc0a0a0631769c15dfc21a6514017e38e63b375b194d2aac38800"
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
         }
       ],
       "tool": "built-in ImageGen",
-      "generation_task": "0004",
-      "revision": 1,
-      "approval": "Native/3x strip review before runtime promotion"
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
     },
     {
       "id": "actors/walk_north_2",
       "owner": "raster",
-      "source": "assets/art_source/player/walk_north.png",
-      "source_sha256": "9a0a1429d754062e81bd1165a644ba0f3d593b814433ac8159da57d766e43a47",
+      "source": "assets/art_source/player-fhd/directional/frames/walk_north_2.png",
+      "source_sha256": "ab34465e4126420fcae1e31b6bd9dc5286c490b0ce7608359f5484d8fa630ee2",
       "crop_xywh": [
-        1106,
-        114,
-        360,
-        507
-      ],
-      "sheet_cell_xywh": [
-        1039,
         0,
-        489,
-        756
-      ],
-      "gutter_xy": [
-        62,
-        114
+        0,
+        96,
+        96
       ],
       "canvas_wh": [
-        48,
-        48
+        96,
+        96
       ],
       "pivot_xy": [
-        24,
-        44
+        48,
+        88
       ],
-      "content_scale": 0.05928853754940711,
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "tools/palette.py:COLOURS",
       "animation": "walk_north",
       "frame": 2,
-      "seconds": 0.13,
+      "seconds": 0.12,
       "loop": true,
       "output": "sprites/actors/walk_north_2.png",
-      "output_sha256": "7d249f42fabf46ca14beca1f4b9674a639c3a23da067305ae902ee17c2f4e902",
-      "prompt": "implementation/sprites/generation/0004-walk_north-r1.prompt.txt",
-      "prompt_sha256": "599a850fb68f7dba77a76422dc5d72f62a572c2153cc5867e607d0b1cfd929d5",
+      "output_sha256": "ab34465e4126420fcae1e31b6bd9dc5286c490b0ce7608359f5484d8fa630ee2",
+      "prompt": "implementation/fhd-player/directional/prompts/walk_north.prompt.txt",
+      "prompt_sha256": "1d5504bb26a36b2dae42df3ded0a14da6f8c08967e5c97591080509844cf80ce",
       "references": [
         {
-          "path": "assets/art_source/masters/farmer.png",
-          "role": "approved identity and body-scale master",
-          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+          "path": "assets/art_source/player-fhd/directional/walk_north.png",
+          "sha256": "bf67a3ed6269a2aef16059edba3bf3bf516a21ee04c69ee91ceb919de7b07b2f",
+          "role": "Original generated locomotion master"
         },
         {
-          "path": "assets/art_source/player/candidates/walk_north-r0.png",
-          "role": "edit target for accepted revision",
-          "sha256": "b26e9ff8b1d35ef6bad7fe664ad2cbb51b41518c865a34f8bd19853d92d78445"
-        },
-        {
-          "path": "implementation/sprites/generation/0004-walk_north.prompt.txt",
-          "role": "original complete strip prompt",
-          "sha256": "f20b8b9241ea7dbc4568af135e49d9c8d75ce12f9c6e228fc71413ff2116948f"
-        },
-        {
-          "path": "assets/art_source/player/idle_north.png",
-          "role": "accepted back-view clothing reference",
-          "sha256": "6de9c2f2df1bc0a0a0631769c15dfc21a6514017e38e63b375b194d2aac38800"
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
         }
       ],
       "tool": "built-in ImageGen",
-      "generation_task": "0004",
-      "revision": 1,
-      "approval": "Native/3x strip review before runtime promotion"
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
     },
     {
       "id": "actors/walk_north_3",
       "owner": "raster",
-      "source": "assets/art_source/player/walk_north.png",
-      "source_sha256": "9a0a1429d754062e81bd1165a644ba0f3d593b814433ac8159da57d766e43a47",
+      "source": "assets/art_source/player-fhd/directional/frames/walk_north_3.png",
+      "source_sha256": "87616c46621a14b072de23eee286d80f8d173d6b4f491f9fdac856e969fb0bb3",
       "crop_xywh": [
-        1590,
-        113,
-        359,
-        506
-      ],
-      "sheet_cell_xywh": [
-        1528,
         0,
-        551,
-        756
-      ],
-      "gutter_xy": [
-        62,
-        113
+        0,
+        96,
+        96
       ],
       "canvas_wh": [
-        48,
-        48
+        96,
+        96
       ],
       "pivot_xy": [
-        24,
-        44
+        48,
+        88
       ],
-      "content_scale": 0.05928853754940711,
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "tools/palette.py:COLOURS",
       "animation": "walk_north",
       "frame": 3,
-      "seconds": 0.13,
+      "seconds": 0.12,
       "loop": true,
       "output": "sprites/actors/walk_north_3.png",
-      "output_sha256": "3b32ba8b8a8dbd92c8f923be92e7e168cd576c3fb03bb8757d20b048a9aae932",
-      "prompt": "implementation/sprites/generation/0004-walk_north-r1.prompt.txt",
-      "prompt_sha256": "599a850fb68f7dba77a76422dc5d72f62a572c2153cc5867e607d0b1cfd929d5",
+      "output_sha256": "87616c46621a14b072de23eee286d80f8d173d6b4f491f9fdac856e969fb0bb3",
+      "prompt": "implementation/fhd-player/directional/prompts/walk_north.prompt.txt",
+      "prompt_sha256": "1d5504bb26a36b2dae42df3ded0a14da6f8c08967e5c97591080509844cf80ce",
       "references": [
         {
-          "path": "assets/art_source/masters/farmer.png",
-          "role": "approved identity and body-scale master",
-          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+          "path": "assets/art_source/player-fhd/directional/walk_north.png",
+          "sha256": "bf67a3ed6269a2aef16059edba3bf3bf516a21ee04c69ee91ceb919de7b07b2f",
+          "role": "Original generated locomotion master"
         },
         {
-          "path": "assets/art_source/player/candidates/walk_north-r0.png",
-          "role": "edit target for accepted revision",
-          "sha256": "b26e9ff8b1d35ef6bad7fe664ad2cbb51b41518c865a34f8bd19853d92d78445"
-        },
-        {
-          "path": "implementation/sprites/generation/0004-walk_north.prompt.txt",
-          "role": "original complete strip prompt",
-          "sha256": "f20b8b9241ea7dbc4568af135e49d9c8d75ce12f9c6e228fc71413ff2116948f"
-        },
-        {
-          "path": "assets/art_source/player/idle_north.png",
-          "role": "accepted back-view clothing reference",
-          "sha256": "6de9c2f2df1bc0a0a0631769c15dfc21a6514017e38e63b375b194d2aac38800"
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
         }
       ],
       "tool": "built-in ImageGen",
-      "generation_task": "0004",
-      "revision": 1,
-      "approval": "Native/3x strip review before runtime promotion"
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
     },
     {
       "id": "actors/idle_west_0",
       "owner": "raster",
-      "source": "assets/art_source/player/idle_west.png",
-      "source_sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5",
+      "source": "assets/art_source/player-fhd/directional/frames/idle_west_0.png",
+      "source_sha256": "f2d5a9e88b6d616a781dafc82d2998b80534529fdbfc4c7d2e0d6bb65e473e42",
       "crop_xywh": [
-        208,
-        93,
-        383,
-        572
-      ],
-      "sheet_cell_xywh": [
         0,
         0,
-        739,
-        724
-      ],
-      "gutter_xy": [
-        148,
-        59
+        96,
+        96
       ],
       "canvas_wh": [
-        48,
-        48
+        96,
+        96
       ],
       "pivot_xy": [
-        24,
-        44
+        48,
+        88
       ],
-      "content_scale": 0.05244755244755245,
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "tools/palette.py:COLOURS",
       "animation": "idle_west",
@@ -926,51 +807,50 @@
       "seconds": 0.55,
       "loop": true,
       "output": "sprites/actors/idle_west_0.png",
-      "output_sha256": "804c8951ee291ec625f8b1fe1587f6ab78580b084c05b641eb2c727c1fccf824",
-      "prompt": "implementation/sprites/generation/0004-idle_west.prompt.txt",
-      "prompt_sha256": "26de6c3327cfa037b2b764f25c7b980cbc6b2ea9a995143725449114c26780ea",
+      "output_sha256": "f2d5a9e88b6d616a781dafc82d2998b80534529fdbfc4c7d2e0d6bb65e473e42",
+      "prompt": "implementation/fhd-player/directional/prompts/idle_west.prompt.txt",
+      "prompt_sha256": "0499f99ef8d043619880e0ae814f5d3935c94d0a6d1049ba0135408043a39b96",
       "references": [
         {
-          "path": "assets/art_source/masters/farmer.png",
-          "role": "approved identity and body-scale master",
-          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+          "path": "assets/art_source/player-fhd/directional/idle_west.png",
+          "sha256": "12b85c8fd70cc54c985781c308fe6613869c1c519b0163ac6193c0cdafe1de6f",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
         }
       ],
       "tool": "built-in ImageGen",
-      "generation_task": "0004",
-      "revision": 0,
-      "approval": "Native/3x strip review before runtime promotion"
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
     },
     {
       "id": "actors/idle_west_1",
       "owner": "raster",
-      "source": "assets/art_source/player/idle_west.png",
-      "source_sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5",
+      "source": "assets/art_source/player-fhd/directional/frames/idle_west_1.png",
+      "source_sha256": "0887189b43f2626f853850c05d0b756597c542d57dc0042ec46fed2e819f5f17",
       "crop_xywh": [
-        887,
-        93,
-        382,
-        572
-      ],
-      "sheet_cell_xywh": [
-        739,
         0,
-        679,
-        724
-      ],
-      "gutter_xy": [
-        148,
-        59
+        0,
+        96,
+        96
       ],
       "canvas_wh": [
-        48,
-        48
+        96,
+        96
       ],
       "pivot_xy": [
-        24,
-        44
+        48,
+        88
       ],
-      "content_scale": 0.05244755244755245,
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "tools/palette.py:COLOURS",
       "animation": "idle_west",
@@ -978,51 +858,50 @@
       "seconds": 0.55,
       "loop": true,
       "output": "sprites/actors/idle_west_1.png",
-      "output_sha256": "831b1be9a2039920b86711bb4113b94830c6c7943e2d35a91bc04b0baf125809",
-      "prompt": "implementation/sprites/generation/0004-idle_west.prompt.txt",
-      "prompt_sha256": "26de6c3327cfa037b2b764f25c7b980cbc6b2ea9a995143725449114c26780ea",
+      "output_sha256": "0887189b43f2626f853850c05d0b756597c542d57dc0042ec46fed2e819f5f17",
+      "prompt": "implementation/fhd-player/directional/prompts/idle_west.prompt.txt",
+      "prompt_sha256": "0499f99ef8d043619880e0ae814f5d3935c94d0a6d1049ba0135408043a39b96",
       "references": [
         {
-          "path": "assets/art_source/masters/farmer.png",
-          "role": "approved identity and body-scale master",
-          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+          "path": "assets/art_source/player-fhd/directional/idle_west.png",
+          "sha256": "12b85c8fd70cc54c985781c308fe6613869c1c519b0163ac6193c0cdafe1de6f",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
         }
       ],
       "tool": "built-in ImageGen",
-      "generation_task": "0004",
-      "revision": 0,
-      "approval": "Native/3x strip review before runtime promotion"
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
     },
     {
       "id": "actors/idle_west_2",
       "owner": "raster",
-      "source": "assets/art_source/player/idle_west.png",
-      "source_sha256": "283747d8f1bd2fd27bb66a51eb4771e6e160cd11e173bd5812eb4973e8e488f5",
+      "source": "assets/art_source/player-fhd/directional/frames/idle_west_2.png",
+      "source_sha256": "2c3a1eb4adc9cd8e630e682f4f56bf18e4b5d4a251f3be5465745e673ba1eb7d",
       "crop_xywh": [
-        1567,
-        93,
-        381,
-        572
-      ],
-      "sheet_cell_xywh": [
-        1418,
         0,
-        754,
-        724
-      ],
-      "gutter_xy": [
-        149,
-        59
+        0,
+        96,
+        96
       ],
       "canvas_wh": [
-        48,
-        48
+        96,
+        96
       ],
       "pivot_xy": [
-        24,
-        44
+        48,
+        88
       ],
-      "content_scale": 0.05244755244755245,
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "tools/palette.py:COLOURS",
       "animation": "idle_west",
@@ -1030,308 +909,3033 @@
       "seconds": 0.55,
       "loop": true,
       "output": "sprites/actors/idle_west_2.png",
-      "output_sha256": "64eee3826c4634dc552221175e8a2ef8679641e9743f11b62616166d21e51d53",
-      "prompt": "implementation/sprites/generation/0004-idle_west.prompt.txt",
-      "prompt_sha256": "26de6c3327cfa037b2b764f25c7b980cbc6b2ea9a995143725449114c26780ea",
+      "output_sha256": "2c3a1eb4adc9cd8e630e682f4f56bf18e4b5d4a251f3be5465745e673ba1eb7d",
+      "prompt": "implementation/fhd-player/directional/prompts/idle_west.prompt.txt",
+      "prompt_sha256": "0499f99ef8d043619880e0ae814f5d3935c94d0a6d1049ba0135408043a39b96",
       "references": [
         {
-          "path": "assets/art_source/masters/farmer.png",
-          "role": "approved identity and body-scale master",
-          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+          "path": "assets/art_source/player-fhd/directional/idle_west.png",
+          "sha256": "12b85c8fd70cc54c985781c308fe6613869c1c519b0163ac6193c0cdafe1de6f",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
         }
       ],
       "tool": "built-in ImageGen",
-      "generation_task": "0004",
-      "revision": 0,
-      "approval": "Native/3x strip review before runtime promotion"
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
     },
     {
       "id": "actors/walk_west_0",
       "owner": "raster",
-      "source": "assets/art_source/player/walk_west.png",
-      "source_sha256": "74433ffa7aca64de1e9ee1bf4e54ab73557293ed8fb16068f3423f046a8fa6bf",
+      "source": "assets/art_source/player-fhd/directional/frames/walk_west_0.png",
+      "source_sha256": "45986abefcc6cb9e9a4d2d06263faccb2351b8e59df5a484953f20962675efdd",
       "crop_xywh": [
-        114,
-        112,
-        394,
-        521
-      ],
-      "sheet_cell_xywh": [
         0,
         0,
-        557,
-        724
-      ],
-      "gutter_xy": [
-        49,
-        91
+        96,
+        96
       ],
       "canvas_wh": [
-        48,
-        48
+        96,
+        96
       ],
       "pivot_xy": [
-        24,
-        44
+        47,
+        88
       ],
-      "content_scale": 0.05687203791469194,
+      "content_anchor_xy": [
+        47,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "tools/palette.py:COLOURS",
       "animation": "walk_west",
       "frame": 0,
-      "seconds": 0.13,
+      "seconds": 0.12,
       "loop": true,
       "output": "sprites/actors/walk_west_0.png",
-      "output_sha256": "5381c3ab5762dc21e525b71f8d8c98934d2c67839fe253da056a269e2d40cc4a",
-      "prompt": "implementation/sprites/generation/0004-walk_west-r2.prompt.txt",
-      "prompt_sha256": "01ba23e80f6c78d2feafc8ba28933a8335cda02a0ee2a574a66c7b2e05b15c08",
+      "output_sha256": "45986abefcc6cb9e9a4d2d06263faccb2351b8e59df5a484953f20962675efdd",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-walk-right-keys-r1.prompt.txt",
+      "prompt_sha256": "c04bfe2c480c7586350c680ab4e8fda110259e8044c8bec462d60e857612e4bc",
       "references": [
         {
-          "path": "assets/art_source/masters/farmer.png",
-          "role": "approved identity and body-scale master",
-          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+          "path": "assets/art_source/player-fhd/directional/creator-walk-right-keys-r1.png",
+          "sha256": "47b8d1c710e14aff1e9416e59fe5bb1a7c316e0d310312fb3eedaa22046e70b7",
+          "role": "Original generated locomotion master"
         },
         {
-          "path": "assets/art_source/player/candidates/walk_west-r1.png",
-          "role": "edit target for accepted revision",
-          "sha256": "879ee785ceb8709b75ed302b49ada22d57166ebef5406931062265b6d75f059f"
-        },
-        {
-          "path": "implementation/sprites/generation/0004-walk_west.prompt.txt",
-          "role": "original complete strip prompt",
-          "sha256": "4e1e7fe1b2a9d55f5086d75d49eeb4cee5ba66eebd204e2ea77149a1da558127"
-        },
-        {
-          "path": "assets/art_source/player/candidates/walk_west-r0.png",
-          "role": "preserved first candidate in revision chain",
-          "sha256": "2c61036c0ae35132a988ff95992262fe6adc17d3c6fa82b02e2901faacaa3f29"
-        },
-        {
-          "path": "implementation/sprites/generation/0004-walk_west-r1.prompt.txt",
-          "role": "first targeted revision prompt",
-          "sha256": "659cb16d1b5294ea5836a5a505de20f79c92b1643a047acc00d166638f5e01b0"
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
         }
       ],
       "tool": "built-in ImageGen",
-      "generation_task": "0004",
-      "revision": 2,
-      "approval": "Native/3x strip review before runtime promotion"
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
     },
     {
       "id": "actors/walk_west_1",
       "owner": "raster",
-      "source": "assets/art_source/player/walk_west.png",
-      "source_sha256": "74433ffa7aca64de1e9ee1bf4e54ab73557293ed8fb16068f3423f046a8fa6bf",
+      "source": "assets/art_source/player-fhd/directional/frames/walk_west_1.png",
+      "source_sha256": "93f6b4f929498c0fb4a6be8a56cab9caeaab49d1b0fba25316c5cf9f0265931e",
       "crop_xywh": [
-        606,
-        112,
-        394,
-        531
-      ],
-      "sheet_cell_xywh": [
-        557,
         0,
-        516,
-        724
-      ],
-      "gutter_xy": [
-        49,
-        81
+        0,
+        96,
+        96
       ],
       "canvas_wh": [
-        48,
-        48
+        96,
+        96
       ],
       "pivot_xy": [
-        24,
-        44
+        47,
+        88
       ],
-      "content_scale": 0.05687203791469194,
+      "content_anchor_xy": [
+        47,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "tools/palette.py:COLOURS",
       "animation": "walk_west",
       "frame": 1,
-      "seconds": 0.13,
+      "seconds": 0.12,
       "loop": true,
       "output": "sprites/actors/walk_west_1.png",
-      "output_sha256": "dff0e6ad36a69086975f22d87501614fae909fa232ace2d2f0f8cf8b4809cbb3",
-      "prompt": "implementation/sprites/generation/0004-walk_west-r2.prompt.txt",
-      "prompt_sha256": "01ba23e80f6c78d2feafc8ba28933a8335cda02a0ee2a574a66c7b2e05b15c08",
+      "output_sha256": "93f6b4f929498c0fb4a6be8a56cab9caeaab49d1b0fba25316c5cf9f0265931e",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-walk-right-transitions-r2.prompt.txt",
+      "prompt_sha256": "9d8fc0fed455b5b47ed48dbb88c605ae77fdf0eaa03dc87aa0125a1a2f3f159e",
       "references": [
         {
-          "path": "assets/art_source/masters/farmer.png",
-          "role": "approved identity and body-scale master",
-          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+          "path": "assets/art_source/player-fhd/directional/creator-walk-right-transitions-r2.png",
+          "sha256": "4b6c3b4e84e053ff72af6e85bcef64e3e01fffa523bfd7300044acaee99ecf42",
+          "role": "Original generated locomotion master"
         },
         {
-          "path": "assets/art_source/player/candidates/walk_west-r1.png",
-          "role": "edit target for accepted revision",
-          "sha256": "879ee785ceb8709b75ed302b49ada22d57166ebef5406931062265b6d75f059f"
-        },
-        {
-          "path": "implementation/sprites/generation/0004-walk_west.prompt.txt",
-          "role": "original complete strip prompt",
-          "sha256": "4e1e7fe1b2a9d55f5086d75d49eeb4cee5ba66eebd204e2ea77149a1da558127"
-        },
-        {
-          "path": "assets/art_source/player/candidates/walk_west-r0.png",
-          "role": "preserved first candidate in revision chain",
-          "sha256": "2c61036c0ae35132a988ff95992262fe6adc17d3c6fa82b02e2901faacaa3f29"
-        },
-        {
-          "path": "implementation/sprites/generation/0004-walk_west-r1.prompt.txt",
-          "role": "first targeted revision prompt",
-          "sha256": "659cb16d1b5294ea5836a5a505de20f79c92b1643a047acc00d166638f5e01b0"
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
         }
       ],
       "tool": "built-in ImageGen",
-      "generation_task": "0004",
-      "revision": 2,
-      "approval": "Native/3x strip review before runtime promotion"
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
     },
     {
       "id": "actors/walk_west_2",
       "owner": "raster",
-      "source": "assets/art_source/player/walk_west.png",
-      "source_sha256": "74433ffa7aca64de1e9ee1bf4e54ab73557293ed8fb16068f3423f046a8fa6bf",
+      "source": "assets/art_source/player-fhd/directional/frames/walk_west_2.png",
+      "source_sha256": "bf2033e9fa6dc3bf87d399e0e82d333eab27d977598f60bdbbd681f63ae3aa92",
       "crop_xywh": [
-        1146,
-        112,
-        391,
-        525
-      ],
-      "sheet_cell_xywh": [
-        1073,
         0,
-        518,
-        724
-      ],
-      "gutter_xy": [
-        54,
-        87
+        0,
+        96,
+        96
       ],
       "canvas_wh": [
-        48,
-        48
+        96,
+        96
       ],
       "pivot_xy": [
-        24,
-        44
+        47,
+        88
       ],
-      "content_scale": 0.05687203791469194,
+      "content_anchor_xy": [
+        47,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "tools/palette.py:COLOURS",
       "animation": "walk_west",
       "frame": 2,
-      "seconds": 0.13,
+      "seconds": 0.12,
       "loop": true,
       "output": "sprites/actors/walk_west_2.png",
-      "output_sha256": "e84177f9aa56ac84e660faefbc5fa3f6d7e7a82a42fa891bc6ceb578ab492585",
-      "prompt": "implementation/sprites/generation/0004-walk_west-r2.prompt.txt",
-      "prompt_sha256": "01ba23e80f6c78d2feafc8ba28933a8335cda02a0ee2a574a66c7b2e05b15c08",
+      "output_sha256": "bf2033e9fa6dc3bf87d399e0e82d333eab27d977598f60bdbbd681f63ae3aa92",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-walk-right-keys-r1.prompt.txt",
+      "prompt_sha256": "c04bfe2c480c7586350c680ab4e8fda110259e8044c8bec462d60e857612e4bc",
       "references": [
         {
-          "path": "assets/art_source/masters/farmer.png",
-          "role": "approved identity and body-scale master",
-          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+          "path": "assets/art_source/player-fhd/directional/creator-walk-right-keys-r1.png",
+          "sha256": "47b8d1c710e14aff1e9416e59fe5bb1a7c316e0d310312fb3eedaa22046e70b7",
+          "role": "Original generated locomotion master"
         },
         {
-          "path": "assets/art_source/player/candidates/walk_west-r1.png",
-          "role": "edit target for accepted revision",
-          "sha256": "879ee785ceb8709b75ed302b49ada22d57166ebef5406931062265b6d75f059f"
-        },
-        {
-          "path": "implementation/sprites/generation/0004-walk_west.prompt.txt",
-          "role": "original complete strip prompt",
-          "sha256": "4e1e7fe1b2a9d55f5086d75d49eeb4cee5ba66eebd204e2ea77149a1da558127"
-        },
-        {
-          "path": "assets/art_source/player/candidates/walk_west-r0.png",
-          "role": "preserved first candidate in revision chain",
-          "sha256": "2c61036c0ae35132a988ff95992262fe6adc17d3c6fa82b02e2901faacaa3f29"
-        },
-        {
-          "path": "implementation/sprites/generation/0004-walk_west-r1.prompt.txt",
-          "role": "first targeted revision prompt",
-          "sha256": "659cb16d1b5294ea5836a5a505de20f79c92b1643a047acc00d166638f5e01b0"
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
         }
       ],
       "tool": "built-in ImageGen",
-      "generation_task": "0004",
-      "revision": 2,
-      "approval": "Native/3x strip review before runtime promotion"
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
     },
     {
       "id": "actors/walk_west_3",
       "owner": "raster",
-      "source": "assets/art_source/player/walk_west.png",
-      "source_sha256": "74433ffa7aca64de1e9ee1bf4e54ab73557293ed8fb16068f3423f046a8fa6bf",
+      "source": "assets/art_source/player-fhd/directional/frames/walk_west_3.png",
+      "source_sha256": "fea91db8efa0725c4f44aa27a28ba40a5c69f1493c6a127c5d96e2c534d570bb",
       "crop_xywh": [
-        1646,
-        112,
-        389,
-        530
-      ],
-      "sheet_cell_xywh": [
-        1591,
         0,
-        581,
-        724
-      ],
-      "gutter_xy": [
-        55,
-        82
+        0,
+        96,
+        96
       ],
       "canvas_wh": [
-        48,
-        48
+        96,
+        96
       ],
       "pivot_xy": [
-        24,
-        44
+        47,
+        88
       ],
-      "content_scale": 0.05687203791469194,
+      "content_anchor_xy": [
+        47,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "tools/palette.py:COLOURS",
       "animation": "walk_west",
       "frame": 3,
-      "seconds": 0.13,
+      "seconds": 0.12,
       "loop": true,
       "output": "sprites/actors/walk_west_3.png",
-      "output_sha256": "129fca613b7198e9cff6c103ce7e159f9fe9c6ab2827b94a83038b4016edd4cf",
-      "prompt": "implementation/sprites/generation/0004-walk_west-r2.prompt.txt",
-      "prompt_sha256": "01ba23e80f6c78d2feafc8ba28933a8335cda02a0ee2a574a66c7b2e05b15c08",
+      "output_sha256": "fea91db8efa0725c4f44aa27a28ba40a5c69f1493c6a127c5d96e2c534d570bb",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-walk-right-transitions-r2.prompt.txt",
+      "prompt_sha256": "9d8fc0fed455b5b47ed48dbb88c605ae77fdf0eaa03dc87aa0125a1a2f3f159e",
       "references": [
         {
-          "path": "assets/art_source/masters/farmer.png",
-          "role": "approved identity and body-scale master",
-          "sha256": "13940bd9d6e5f1e794bc505a89e349f05c4fba961dca3a52605ecf1885a07bf4"
+          "path": "assets/art_source/player-fhd/directional/creator-walk-right-transitions-r2.png",
+          "sha256": "4b6c3b4e84e053ff72af6e85bcef64e3e01fffa523bfd7300044acaee99ecf42",
+          "role": "Original generated locomotion master"
         },
         {
-          "path": "assets/art_source/player/candidates/walk_west-r1.png",
-          "role": "edit target for accepted revision",
-          "sha256": "879ee785ceb8709b75ed302b49ada22d57166ebef5406931062265b6d75f059f"
-        },
-        {
-          "path": "implementation/sprites/generation/0004-walk_west.prompt.txt",
-          "role": "original complete strip prompt",
-          "sha256": "4e1e7fe1b2a9d55f5086d75d49eeb4cee5ba66eebd204e2ea77149a1da558127"
-        },
-        {
-          "path": "assets/art_source/player/candidates/walk_west-r0.png",
-          "role": "preserved first candidate in revision chain",
-          "sha256": "2c61036c0ae35132a988ff95992262fe6adc17d3c6fa82b02e2901faacaa3f29"
-        },
-        {
-          "path": "implementation/sprites/generation/0004-walk_west-r1.prompt.txt",
-          "role": "first targeted revision prompt",
-          "sha256": "659cb16d1b5294ea5836a5a505de20f79c92b1643a047acc00d166638f5e01b0"
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
         }
       ],
       "tool": "built-in ImageGen",
-      "generation_task": "0004",
-      "revision": 2,
-      "approval": "Native/3x strip review before runtime promotion"
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/idle_east_0",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/directional/frames/idle_east_0.png",
+      "source_sha256": "aa572e6091d3af7ac7c17cc4fb1f00acee503f9eb555d245bff057f05a0523d7",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "idle_east",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true,
+      "output": "sprites/actors/idle_east_0.png",
+      "output_sha256": "aa572e6091d3af7ac7c17cc4fb1f00acee503f9eb555d245bff057f05a0523d7",
+      "prompt": "implementation/fhd-player/directional/prompts/idle_east.prompt.txt",
+      "prompt_sha256": "f4c1f3f2bb2e2e132b4245caddfbfaf23f4a3037f83b07dac7071b1bf79ebdd5",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/directional/idle_east.png",
+          "sha256": "1e7fc69d8518946f8c8283f276e6d92017ef5d56a324016c37036c3061594466",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/idle_east_1",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/directional/frames/idle_east_1.png",
+      "source_sha256": "39338da609ed9dfe72e90fc1019469cc8b4c32fc6fe85ffd708e37cc98e2c2b3",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "idle_east",
+      "frame": 1,
+      "seconds": 0.55,
+      "loop": true,
+      "output": "sprites/actors/idle_east_1.png",
+      "output_sha256": "39338da609ed9dfe72e90fc1019469cc8b4c32fc6fe85ffd708e37cc98e2c2b3",
+      "prompt": "implementation/fhd-player/directional/prompts/idle_east.prompt.txt",
+      "prompt_sha256": "f4c1f3f2bb2e2e132b4245caddfbfaf23f4a3037f83b07dac7071b1bf79ebdd5",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/directional/idle_east.png",
+          "sha256": "1e7fc69d8518946f8c8283f276e6d92017ef5d56a324016c37036c3061594466",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/idle_east_2",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/directional/frames/idle_east_2.png",
+      "source_sha256": "9c29e21d3e31c429406e520cc35e9b5850df31eb64f3ee89ff23b6219012754f",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "idle_east",
+      "frame": 2,
+      "seconds": 0.55,
+      "loop": true,
+      "output": "sprites/actors/idle_east_2.png",
+      "output_sha256": "9c29e21d3e31c429406e520cc35e9b5850df31eb64f3ee89ff23b6219012754f",
+      "prompt": "implementation/fhd-player/directional/prompts/idle_east.prompt.txt",
+      "prompt_sha256": "f4c1f3f2bb2e2e132b4245caddfbfaf23f4a3037f83b07dac7071b1bf79ebdd5",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/directional/idle_east.png",
+          "sha256": "1e7fc69d8518946f8c8283f276e6d92017ef5d56a324016c37036c3061594466",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/run_east_0",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/directional/frames/run_east_0.png",
+      "source_sha256": "7e4ad8e02cbd5a9a779a1c55b665032798a7246fa3fcc462337b12491abef41d",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "run_east",
+      "frame": 0,
+      "seconds": 0.08,
+      "loop": true,
+      "output": "sprites/actors/run_east_0.png",
+      "output_sha256": "7e4ad8e02cbd5a9a779a1c55b665032798a7246fa3fcc462337b12491abef41d",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-run-right-keys-r1.prompt.txt",
+      "prompt_sha256": "184e88483d8dc6f1a2f1f2fdbf5c0cee8899b3ff3aee56546e687cb8585ba08f",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/directional/creator-run-right-keys-r1.png",
+          "sha256": "d56016c0a05d47d2e9030e22b9e4b3a42d3e7ab59cf3633fedb95da70ffac715",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/run_east_1",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/directional/frames/run_east_1.png",
+      "source_sha256": "436375337d8168daefcecb6aee1397e180a2f08326e66388aa6c612b2b4b1afa",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "run_east",
+      "frame": 1,
+      "seconds": 0.08,
+      "loop": true,
+      "output": "sprites/actors/run_east_1.png",
+      "output_sha256": "436375337d8168daefcecb6aee1397e180a2f08326e66388aa6c612b2b4b1afa",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-run-right-transitions-r2.prompt.txt",
+      "prompt_sha256": "4ff6cd802eec9218213f253eeead21e7c22b7ec1c07a477fb23b89625d3ffbda",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/directional/creator-run-right-transitions-r2.png",
+          "sha256": "e67930524c11d0b70f2829c8bf8e62d9fde9f92e184185bea090849e695636e1",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/run_east_2",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/directional/frames/run_east_2.png",
+      "source_sha256": "3bb35951a3b36ec188f70a808965b57375c221e9c380876b4995e3a5fa36af1b",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "run_east",
+      "frame": 2,
+      "seconds": 0.08,
+      "loop": true,
+      "output": "sprites/actors/run_east_2.png",
+      "output_sha256": "3bb35951a3b36ec188f70a808965b57375c221e9c380876b4995e3a5fa36af1b",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-run-right-keys-r1.prompt.txt",
+      "prompt_sha256": "184e88483d8dc6f1a2f1f2fdbf5c0cee8899b3ff3aee56546e687cb8585ba08f",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/directional/creator-run-right-keys-r1.png",
+          "sha256": "d56016c0a05d47d2e9030e22b9e4b3a42d3e7ab59cf3633fedb95da70ffac715",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/run_east_3",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/directional/frames/run_east_3.png",
+      "source_sha256": "f6b55effd3add3de2f7c0811c83cb507851bcd6fa645cdc917488c2ccbfe4115",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "run_east",
+      "frame": 3,
+      "seconds": 0.08,
+      "loop": true,
+      "output": "sprites/actors/run_east_3.png",
+      "output_sha256": "f6b55effd3add3de2f7c0811c83cb507851bcd6fa645cdc917488c2ccbfe4115",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-run-right-transitions-r2.prompt.txt",
+      "prompt_sha256": "4ff6cd802eec9218213f253eeead21e7c22b7ec1c07a477fb23b89625d3ffbda",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/directional/creator-run-right-transitions-r2.png",
+          "sha256": "e67930524c11d0b70f2829c8bf8e62d9fde9f92e184185bea090849e695636e1",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/run_east_4",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/directional/frames/run_east_4.png",
+      "source_sha256": "b144aeb944e0b369e1e184e0fd4635e43e24ada763e8e90ff6011fd029209cc8",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "run_east",
+      "frame": 4,
+      "seconds": 0.08,
+      "loop": true,
+      "output": "sprites/actors/run_east_4.png",
+      "output_sha256": "b144aeb944e0b369e1e184e0fd4635e43e24ada763e8e90ff6011fd029209cc8",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-run-right-keys-r1.prompt.txt",
+      "prompt_sha256": "184e88483d8dc6f1a2f1f2fdbf5c0cee8899b3ff3aee56546e687cb8585ba08f",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/directional/creator-run-right-keys-r1.png",
+          "sha256": "d56016c0a05d47d2e9030e22b9e4b3a42d3e7ab59cf3633fedb95da70ffac715",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/run_east_5",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/directional/frames/run_east_5.png",
+      "source_sha256": "f7f06e58ae847eabfc99967cb0fe58ec827762872beb310573eb98ed4486e14f",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "run_east",
+      "frame": 5,
+      "seconds": 0.08,
+      "loop": true,
+      "output": "sprites/actors/run_east_5.png",
+      "output_sha256": "f7f06e58ae847eabfc99967cb0fe58ec827762872beb310573eb98ed4486e14f",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-run-right-transitions-r2.prompt.txt",
+      "prompt_sha256": "4ff6cd802eec9218213f253eeead21e7c22b7ec1c07a477fb23b89625d3ffbda",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/directional/creator-run-right-transitions-r2.png",
+          "sha256": "e67930524c11d0b70f2829c8bf8e62d9fde9f92e184185bea090849e695636e1",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/run_east_6",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/directional/frames/run_east_6.png",
+      "source_sha256": "54b7d2ff17edd4c6b9eafe402aab0b4fe66a82efc73b903d5b298bfa48154002",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "run_east",
+      "frame": 6,
+      "seconds": 0.08,
+      "loop": true,
+      "output": "sprites/actors/run_east_6.png",
+      "output_sha256": "54b7d2ff17edd4c6b9eafe402aab0b4fe66a82efc73b903d5b298bfa48154002",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-run-right-keys-r1.prompt.txt",
+      "prompt_sha256": "184e88483d8dc6f1a2f1f2fdbf5c0cee8899b3ff3aee56546e687cb8585ba08f",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/directional/creator-run-right-keys-r1.png",
+          "sha256": "d56016c0a05d47d2e9030e22b9e4b3a42d3e7ab59cf3633fedb95da70ffac715",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/run_east_7",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/directional/frames/run_east_7.png",
+      "source_sha256": "7e5c61a60bcb1503530b2793a88904eece759e75451c2f0dd827bb1c51ab82e7",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "run_east",
+      "frame": 7,
+      "seconds": 0.08,
+      "loop": true,
+      "output": "sprites/actors/run_east_7.png",
+      "output_sha256": "7e5c61a60bcb1503530b2793a88904eece759e75451c2f0dd827bb1c51ab82e7",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-run-right-transitions-r2.prompt.txt",
+      "prompt_sha256": "4ff6cd802eec9218213f253eeead21e7c22b7ec1c07a477fb23b89625d3ffbda",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/directional/creator-run-right-transitions-r2.png",
+          "sha256": "e67930524c11d0b70f2829c8bf8e62d9fde9f92e184185bea090849e695636e1",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/run_north_0",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/directional/frames/run_north_0.png",
+      "source_sha256": "08f43f00b5d7508c8d3461556c6be42ff9698e8af4440c17d281654004e2dfea",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "run_north",
+      "frame": 0,
+      "seconds": 0.08,
+      "loop": true,
+      "output": "sprites/actors/run_north_0.png",
+      "output_sha256": "08f43f00b5d7508c8d3461556c6be42ff9698e8af4440c17d281654004e2dfea",
+      "prompt": "implementation/fhd-player/directional/prompts/run_north-r1.prompt.txt",
+      "prompt_sha256": "3f7fcc582f93f06fb499ae97f20590075c5cfe5eaac8dea65d7dd5c3d3c1eb72",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/directional/run_north-r1.png",
+          "sha256": "e31cc63d09d8ebe8f0fabedeab05cca15642fc3a05459f5171f6bce5b0e9bb97",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/run_north_1",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/directional/frames/run_north_1.png",
+      "source_sha256": "9bb66d1d271d1384757f5180b78aed3585214aa015227fb78e4efe7bcee1d7b0",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "run_north",
+      "frame": 1,
+      "seconds": 0.08,
+      "loop": true,
+      "output": "sprites/actors/run_north_1.png",
+      "output_sha256": "9bb66d1d271d1384757f5180b78aed3585214aa015227fb78e4efe7bcee1d7b0",
+      "prompt": "implementation/fhd-player/directional/prompts/run_north-r1.prompt.txt",
+      "prompt_sha256": "3f7fcc582f93f06fb499ae97f20590075c5cfe5eaac8dea65d7dd5c3d3c1eb72",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/directional/run_north-r1.png",
+          "sha256": "e31cc63d09d8ebe8f0fabedeab05cca15642fc3a05459f5171f6bce5b0e9bb97",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/run_north_2",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/directional/frames/run_north_2.png",
+      "source_sha256": "411d83a509582dcc23cab2f9b0d4bc653123af91c3d88ab3f0113bba820f260d",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "run_north",
+      "frame": 2,
+      "seconds": 0.08,
+      "loop": true,
+      "output": "sprites/actors/run_north_2.png",
+      "output_sha256": "411d83a509582dcc23cab2f9b0d4bc653123af91c3d88ab3f0113bba820f260d",
+      "prompt": "implementation/fhd-player/directional/prompts/run_north-r1.prompt.txt",
+      "prompt_sha256": "3f7fcc582f93f06fb499ae97f20590075c5cfe5eaac8dea65d7dd5c3d3c1eb72",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/directional/run_north-r1.png",
+          "sha256": "e31cc63d09d8ebe8f0fabedeab05cca15642fc3a05459f5171f6bce5b0e9bb97",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/run_north_3",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/directional/frames/run_north_3.png",
+      "source_sha256": "66811296cfebc9a7ff98b1c7f17ce7e0d419501aa10151a854ed661ea23ea1ac",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "run_north",
+      "frame": 3,
+      "seconds": 0.08,
+      "loop": true,
+      "output": "sprites/actors/run_north_3.png",
+      "output_sha256": "66811296cfebc9a7ff98b1c7f17ce7e0d419501aa10151a854ed661ea23ea1ac",
+      "prompt": "implementation/fhd-player/directional/prompts/run_north-r1.prompt.txt",
+      "prompt_sha256": "3f7fcc582f93f06fb499ae97f20590075c5cfe5eaac8dea65d7dd5c3d3c1eb72",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/directional/run_north-r1.png",
+          "sha256": "e31cc63d09d8ebe8f0fabedeab05cca15642fc3a05459f5171f6bce5b0e9bb97",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/run_north_4",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/directional/frames/run_north_4.png",
+      "source_sha256": "dcf4bbf69305b03daa3ba364a6861b767cee9eac9f20bd0f27b51d0f83b00b7d",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "run_north",
+      "frame": 4,
+      "seconds": 0.08,
+      "loop": true,
+      "output": "sprites/actors/run_north_4.png",
+      "output_sha256": "dcf4bbf69305b03daa3ba364a6861b767cee9eac9f20bd0f27b51d0f83b00b7d",
+      "prompt": "implementation/fhd-player/directional/prompts/run_north-r1.prompt.txt",
+      "prompt_sha256": "3f7fcc582f93f06fb499ae97f20590075c5cfe5eaac8dea65d7dd5c3d3c1eb72",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/directional/run_north-r1.png",
+          "sha256": "e31cc63d09d8ebe8f0fabedeab05cca15642fc3a05459f5171f6bce5b0e9bb97",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/run_north_5",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/directional/frames/run_north_5.png",
+      "source_sha256": "cba39196d43208c847c3bd5825bf1cbf6b172e1990008c50b4576d51a6f19034",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "run_north",
+      "frame": 5,
+      "seconds": 0.08,
+      "loop": true,
+      "output": "sprites/actors/run_north_5.png",
+      "output_sha256": "cba39196d43208c847c3bd5825bf1cbf6b172e1990008c50b4576d51a6f19034",
+      "prompt": "implementation/fhd-player/directional/prompts/run_north-r1.prompt.txt",
+      "prompt_sha256": "3f7fcc582f93f06fb499ae97f20590075c5cfe5eaac8dea65d7dd5c3d3c1eb72",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/directional/run_north-r1.png",
+          "sha256": "e31cc63d09d8ebe8f0fabedeab05cca15642fc3a05459f5171f6bce5b0e9bb97",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/run_north_6",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/directional/frames/run_north_6.png",
+      "source_sha256": "0bb13d3f8e340752bdcc57954bb3212d76a76eb388f1bb2de1a7ff2caa69446e",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "run_north",
+      "frame": 6,
+      "seconds": 0.08,
+      "loop": true,
+      "output": "sprites/actors/run_north_6.png",
+      "output_sha256": "0bb13d3f8e340752bdcc57954bb3212d76a76eb388f1bb2de1a7ff2caa69446e",
+      "prompt": "implementation/fhd-player/directional/prompts/run_north-r1.prompt.txt",
+      "prompt_sha256": "3f7fcc582f93f06fb499ae97f20590075c5cfe5eaac8dea65d7dd5c3d3c1eb72",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/directional/run_north-r1.png",
+          "sha256": "e31cc63d09d8ebe8f0fabedeab05cca15642fc3a05459f5171f6bce5b0e9bb97",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/run_north_7",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/directional/frames/run_north_7.png",
+      "source_sha256": "457a5d97ed3b78ede5311b82861613c8a4b293d3b9ca74430f6c8afca2748c77",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "run_north",
+      "frame": 7,
+      "seconds": 0.08,
+      "loop": true,
+      "output": "sprites/actors/run_north_7.png",
+      "output_sha256": "457a5d97ed3b78ede5311b82861613c8a4b293d3b9ca74430f6c8afca2748c77",
+      "prompt": "implementation/fhd-player/directional/prompts/run_north-r1.prompt.txt",
+      "prompt_sha256": "3f7fcc582f93f06fb499ae97f20590075c5cfe5eaac8dea65d7dd5c3d3c1eb72",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/directional/run_north-r1.png",
+          "sha256": "e31cc63d09d8ebe8f0fabedeab05cca15642fc3a05459f5171f6bce5b0e9bb97",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/run_south_0",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/approved/frames/run_south_0.png",
+      "source_sha256": "caecbba5ff4d96ed3ad941bb991232c38ed0b339e8269685ae116842a9093809",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "run_south",
+      "frame": 0,
+      "seconds": 0.08,
+      "loop": true,
+      "output": "sprites/actors/run_south_0.png",
+      "output_sha256": "caecbba5ff4d96ed3ad941bb991232c38ed0b339e8269685ae116842a9093809",
+      "prompt": "implementation/fhd-player/approved-prompts/run_south_8.prompt.txt",
+      "prompt_sha256": "1107cde247834cc6d6e134062d71c95810b6f41d751f2729df395fa9c710be9f",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/approved/run_south_8.png",
+          "sha256": "273f6d8099590e48d31edc761c757be00758324405175cabba39c9eaea413d46",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/run_south_1",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/approved/frames/run_south_1.png",
+      "source_sha256": "4d7a9acbf7b322b95db12e147ade2d52390f2634b9d651256a099cacbd972ba6",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "run_south",
+      "frame": 1,
+      "seconds": 0.08,
+      "loop": true,
+      "output": "sprites/actors/run_south_1.png",
+      "output_sha256": "4d7a9acbf7b322b95db12e147ade2d52390f2634b9d651256a099cacbd972ba6",
+      "prompt": "implementation/fhd-player/approved-prompts/run_south_8.prompt.txt",
+      "prompt_sha256": "1107cde247834cc6d6e134062d71c95810b6f41d751f2729df395fa9c710be9f",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/approved/run_south_8.png",
+          "sha256": "273f6d8099590e48d31edc761c757be00758324405175cabba39c9eaea413d46",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/run_south_2",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/approved/frames/run_south_2.png",
+      "source_sha256": "3d55ea6f57df7688f1340ca0976814d9c96c3bdf5400463433fd77f794c772ef",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "run_south",
+      "frame": 2,
+      "seconds": 0.08,
+      "loop": true,
+      "output": "sprites/actors/run_south_2.png",
+      "output_sha256": "3d55ea6f57df7688f1340ca0976814d9c96c3bdf5400463433fd77f794c772ef",
+      "prompt": "implementation/fhd-player/approved-prompts/run_south_8.prompt.txt",
+      "prompt_sha256": "1107cde247834cc6d6e134062d71c95810b6f41d751f2729df395fa9c710be9f",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/approved/run_south_8.png",
+          "sha256": "273f6d8099590e48d31edc761c757be00758324405175cabba39c9eaea413d46",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/run_south_3",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/approved/frames/run_south_3.png",
+      "source_sha256": "026406dbc8825b3aacee7153bb683ce46d47e0c72f2be894e398cb599fc2f884",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "run_south",
+      "frame": 3,
+      "seconds": 0.08,
+      "loop": true,
+      "output": "sprites/actors/run_south_3.png",
+      "output_sha256": "026406dbc8825b3aacee7153bb683ce46d47e0c72f2be894e398cb599fc2f884",
+      "prompt": "implementation/fhd-player/approved-prompts/run_south_8.prompt.txt",
+      "prompt_sha256": "1107cde247834cc6d6e134062d71c95810b6f41d751f2729df395fa9c710be9f",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/approved/run_south_8.png",
+          "sha256": "273f6d8099590e48d31edc761c757be00758324405175cabba39c9eaea413d46",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/run_south_4",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/approved/frames/run_south_4.png",
+      "source_sha256": "1dde5473ca5aff47a48e4c4ad3904d128916eef4ce75085106244204add78c3d",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "run_south",
+      "frame": 4,
+      "seconds": 0.08,
+      "loop": true,
+      "output": "sprites/actors/run_south_4.png",
+      "output_sha256": "1dde5473ca5aff47a48e4c4ad3904d128916eef4ce75085106244204add78c3d",
+      "prompt": "implementation/fhd-player/approved-prompts/run_south_8.prompt.txt",
+      "prompt_sha256": "1107cde247834cc6d6e134062d71c95810b6f41d751f2729df395fa9c710be9f",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/approved/run_south_8.png",
+          "sha256": "273f6d8099590e48d31edc761c757be00758324405175cabba39c9eaea413d46",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/run_south_5",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/approved/frames/run_south_5.png",
+      "source_sha256": "eee372ffdd3e4d1121db574e1c4139d10931d1462aed7e9590f1be0b8833f5d2",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "run_south",
+      "frame": 5,
+      "seconds": 0.08,
+      "loop": true,
+      "output": "sprites/actors/run_south_5.png",
+      "output_sha256": "eee372ffdd3e4d1121db574e1c4139d10931d1462aed7e9590f1be0b8833f5d2",
+      "prompt": "implementation/fhd-player/approved-prompts/run_south_8.prompt.txt",
+      "prompt_sha256": "1107cde247834cc6d6e134062d71c95810b6f41d751f2729df395fa9c710be9f",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/approved/run_south_8.png",
+          "sha256": "273f6d8099590e48d31edc761c757be00758324405175cabba39c9eaea413d46",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/run_south_6",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/approved/frames/run_south_6.png",
+      "source_sha256": "4b6aba1b0b6e3caec9b8835043b71a9aa99636c4e6b8bc64be827fa3f58f3df8",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "run_south",
+      "frame": 6,
+      "seconds": 0.08,
+      "loop": true,
+      "output": "sprites/actors/run_south_6.png",
+      "output_sha256": "4b6aba1b0b6e3caec9b8835043b71a9aa99636c4e6b8bc64be827fa3f58f3df8",
+      "prompt": "implementation/fhd-player/approved-prompts/run_south_8.prompt.txt",
+      "prompt_sha256": "1107cde247834cc6d6e134062d71c95810b6f41d751f2729df395fa9c710be9f",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/approved/run_south_8.png",
+          "sha256": "273f6d8099590e48d31edc761c757be00758324405175cabba39c9eaea413d46",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/run_south_7",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/approved/frames/run_south_7.png",
+      "source_sha256": "704ff317544b1005d9a55a1a22c303f6be83d745ff6095c1f20bb021330c4b8d",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "run_south",
+      "frame": 7,
+      "seconds": 0.08,
+      "loop": true,
+      "output": "sprites/actors/run_south_7.png",
+      "output_sha256": "704ff317544b1005d9a55a1a22c303f6be83d745ff6095c1f20bb021330c4b8d",
+      "prompt": "implementation/fhd-player/approved-prompts/run_south_8.prompt.txt",
+      "prompt_sha256": "1107cde247834cc6d6e134062d71c95810b6f41d751f2729df395fa9c710be9f",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/approved/run_south_8.png",
+          "sha256": "273f6d8099590e48d31edc761c757be00758324405175cabba39c9eaea413d46",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/run_west_0",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/directional/frames/run_west_0.png",
+      "source_sha256": "e5d7f6c7a077d1ee8542bc5fedf53efd92c44aac3f6fc7e21f5f7ab6264fecdf",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        47,
+        88
+      ],
+      "content_anchor_xy": [
+        47,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "run_west",
+      "frame": 0,
+      "seconds": 0.08,
+      "loop": true,
+      "output": "sprites/actors/run_west_0.png",
+      "output_sha256": "e5d7f6c7a077d1ee8542bc5fedf53efd92c44aac3f6fc7e21f5f7ab6264fecdf",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-run-right-keys-r1.prompt.txt",
+      "prompt_sha256": "184e88483d8dc6f1a2f1f2fdbf5c0cee8899b3ff3aee56546e687cb8585ba08f",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/directional/creator-run-right-keys-r1.png",
+          "sha256": "d56016c0a05d47d2e9030e22b9e4b3a42d3e7ab59cf3633fedb95da70ffac715",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/run_west_1",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/directional/frames/run_west_1.png",
+      "source_sha256": "66f5e8b1ced46f65e56633e6a1bd51614497576d69e753ecfc69284cd8d14874",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        47,
+        88
+      ],
+      "content_anchor_xy": [
+        47,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "run_west",
+      "frame": 1,
+      "seconds": 0.08,
+      "loop": true,
+      "output": "sprites/actors/run_west_1.png",
+      "output_sha256": "66f5e8b1ced46f65e56633e6a1bd51614497576d69e753ecfc69284cd8d14874",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-run-right-transitions-r2.prompt.txt",
+      "prompt_sha256": "4ff6cd802eec9218213f253eeead21e7c22b7ec1c07a477fb23b89625d3ffbda",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/directional/creator-run-right-transitions-r2.png",
+          "sha256": "e67930524c11d0b70f2829c8bf8e62d9fde9f92e184185bea090849e695636e1",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/run_west_2",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/directional/frames/run_west_2.png",
+      "source_sha256": "b73cdc3ae99f66de004ed00d96dcff77a67aa1be0a8aa9ce09ca564395db7e3b",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        47,
+        88
+      ],
+      "content_anchor_xy": [
+        47,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "run_west",
+      "frame": 2,
+      "seconds": 0.08,
+      "loop": true,
+      "output": "sprites/actors/run_west_2.png",
+      "output_sha256": "b73cdc3ae99f66de004ed00d96dcff77a67aa1be0a8aa9ce09ca564395db7e3b",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-run-right-keys-r1.prompt.txt",
+      "prompt_sha256": "184e88483d8dc6f1a2f1f2fdbf5c0cee8899b3ff3aee56546e687cb8585ba08f",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/directional/creator-run-right-keys-r1.png",
+          "sha256": "d56016c0a05d47d2e9030e22b9e4b3a42d3e7ab59cf3633fedb95da70ffac715",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/run_west_3",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/directional/frames/run_west_3.png",
+      "source_sha256": "f349b19da380a0043ea72dadd1130e8dc460478c532a9d229a38aa126020ce69",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        47,
+        88
+      ],
+      "content_anchor_xy": [
+        47,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "run_west",
+      "frame": 3,
+      "seconds": 0.08,
+      "loop": true,
+      "output": "sprites/actors/run_west_3.png",
+      "output_sha256": "f349b19da380a0043ea72dadd1130e8dc460478c532a9d229a38aa126020ce69",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-run-right-transitions-r2.prompt.txt",
+      "prompt_sha256": "4ff6cd802eec9218213f253eeead21e7c22b7ec1c07a477fb23b89625d3ffbda",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/directional/creator-run-right-transitions-r2.png",
+          "sha256": "e67930524c11d0b70f2829c8bf8e62d9fde9f92e184185bea090849e695636e1",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/run_west_4",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/directional/frames/run_west_4.png",
+      "source_sha256": "70bc1ea108ca6766646fe34fbec9a407f6876be85d192f878222e6babcc486f8",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        47,
+        88
+      ],
+      "content_anchor_xy": [
+        47,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "run_west",
+      "frame": 4,
+      "seconds": 0.08,
+      "loop": true,
+      "output": "sprites/actors/run_west_4.png",
+      "output_sha256": "70bc1ea108ca6766646fe34fbec9a407f6876be85d192f878222e6babcc486f8",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-run-right-keys-r1.prompt.txt",
+      "prompt_sha256": "184e88483d8dc6f1a2f1f2fdbf5c0cee8899b3ff3aee56546e687cb8585ba08f",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/directional/creator-run-right-keys-r1.png",
+          "sha256": "d56016c0a05d47d2e9030e22b9e4b3a42d3e7ab59cf3633fedb95da70ffac715",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/run_west_5",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/directional/frames/run_west_5.png",
+      "source_sha256": "87b7d19e43a3333ce594d94c07e744633391805b68247f21872584c9c4c4cd1c",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        47,
+        88
+      ],
+      "content_anchor_xy": [
+        47,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "run_west",
+      "frame": 5,
+      "seconds": 0.08,
+      "loop": true,
+      "output": "sprites/actors/run_west_5.png",
+      "output_sha256": "87b7d19e43a3333ce594d94c07e744633391805b68247f21872584c9c4c4cd1c",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-run-right-transitions-r2.prompt.txt",
+      "prompt_sha256": "4ff6cd802eec9218213f253eeead21e7c22b7ec1c07a477fb23b89625d3ffbda",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/directional/creator-run-right-transitions-r2.png",
+          "sha256": "e67930524c11d0b70f2829c8bf8e62d9fde9f92e184185bea090849e695636e1",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/run_west_6",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/directional/frames/run_west_6.png",
+      "source_sha256": "c38166b7e1c102eac5afcc6d5b307e4f9708bf19a675e6edbd475e579e8e76b9",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        47,
+        88
+      ],
+      "content_anchor_xy": [
+        47,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "run_west",
+      "frame": 6,
+      "seconds": 0.08,
+      "loop": true,
+      "output": "sprites/actors/run_west_6.png",
+      "output_sha256": "c38166b7e1c102eac5afcc6d5b307e4f9708bf19a675e6edbd475e579e8e76b9",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-run-right-keys-r1.prompt.txt",
+      "prompt_sha256": "184e88483d8dc6f1a2f1f2fdbf5c0cee8899b3ff3aee56546e687cb8585ba08f",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/directional/creator-run-right-keys-r1.png",
+          "sha256": "d56016c0a05d47d2e9030e22b9e4b3a42d3e7ab59cf3633fedb95da70ffac715",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/run_west_7",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/directional/frames/run_west_7.png",
+      "source_sha256": "67bfe8a336c0335f4b0d2c790fbdd379a9d249180a7a5f40c19484dea99478b6",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        47,
+        88
+      ],
+      "content_anchor_xy": [
+        47,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "run_west",
+      "frame": 7,
+      "seconds": 0.08,
+      "loop": true,
+      "output": "sprites/actors/run_west_7.png",
+      "output_sha256": "67bfe8a336c0335f4b0d2c790fbdd379a9d249180a7a5f40c19484dea99478b6",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-run-right-transitions-r2.prompt.txt",
+      "prompt_sha256": "4ff6cd802eec9218213f253eeead21e7c22b7ec1c07a477fb23b89625d3ffbda",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/directional/creator-run-right-transitions-r2.png",
+          "sha256": "e67930524c11d0b70f2829c8bf8e62d9fde9f92e184185bea090849e695636e1",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/walk_east_0",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/directional/frames/walk_east_0.png",
+      "source_sha256": "5f94ba46c66b4a7915422c4b2923086320d3c8cb3d19be1beb5ed5cb61c555cb",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "walk_east",
+      "frame": 0,
+      "seconds": 0.12,
+      "loop": true,
+      "output": "sprites/actors/walk_east_0.png",
+      "output_sha256": "5f94ba46c66b4a7915422c4b2923086320d3c8cb3d19be1beb5ed5cb61c555cb",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-walk-right-keys-r1.prompt.txt",
+      "prompt_sha256": "c04bfe2c480c7586350c680ab4e8fda110259e8044c8bec462d60e857612e4bc",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/directional/creator-walk-right-keys-r1.png",
+          "sha256": "47b8d1c710e14aff1e9416e59fe5bb1a7c316e0d310312fb3eedaa22046e70b7",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/walk_east_1",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/directional/frames/walk_east_1.png",
+      "source_sha256": "20c321420f997c648deb51eab5e4b0327ef982336c9fcdfbe6675b7126e3cf19",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "walk_east",
+      "frame": 1,
+      "seconds": 0.12,
+      "loop": true,
+      "output": "sprites/actors/walk_east_1.png",
+      "output_sha256": "20c321420f997c648deb51eab5e4b0327ef982336c9fcdfbe6675b7126e3cf19",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-walk-right-transitions-r2.prompt.txt",
+      "prompt_sha256": "9d8fc0fed455b5b47ed48dbb88c605ae77fdf0eaa03dc87aa0125a1a2f3f159e",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/directional/creator-walk-right-transitions-r2.png",
+          "sha256": "4b6c3b4e84e053ff72af6e85bcef64e3e01fffa523bfd7300044acaee99ecf42",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/walk_east_2",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/directional/frames/walk_east_2.png",
+      "source_sha256": "9b95f0a26100f18140bece36653c5ed908c67363a61b240a2df79f3fe99ecbac",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "walk_east",
+      "frame": 2,
+      "seconds": 0.12,
+      "loop": true,
+      "output": "sprites/actors/walk_east_2.png",
+      "output_sha256": "9b95f0a26100f18140bece36653c5ed908c67363a61b240a2df79f3fe99ecbac",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-walk-right-keys-r1.prompt.txt",
+      "prompt_sha256": "c04bfe2c480c7586350c680ab4e8fda110259e8044c8bec462d60e857612e4bc",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/directional/creator-walk-right-keys-r1.png",
+          "sha256": "47b8d1c710e14aff1e9416e59fe5bb1a7c316e0d310312fb3eedaa22046e70b7",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/walk_east_3",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/directional/frames/walk_east_3.png",
+      "source_sha256": "a05a163855150404f7b88fe922b6b7f6221d1b0d8d1822c645f9376998084ee2",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "walk_east",
+      "frame": 3,
+      "seconds": 0.12,
+      "loop": true,
+      "output": "sprites/actors/walk_east_3.png",
+      "output_sha256": "a05a163855150404f7b88fe922b6b7f6221d1b0d8d1822c645f9376998084ee2",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-walk-right-transitions-r2.prompt.txt",
+      "prompt_sha256": "9d8fc0fed455b5b47ed48dbb88c605ae77fdf0eaa03dc87aa0125a1a2f3f159e",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/directional/creator-walk-right-transitions-r2.png",
+          "sha256": "4b6c3b4e84e053ff72af6e85bcef64e3e01fffa523bfd7300044acaee99ecf42",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/walk_east_4",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/directional/frames/walk_east_4.png",
+      "source_sha256": "1ac9454a12e82f2cda26dd8c7da99ddd2a5f8e38dbefefb61a494caafb28885a",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "walk_east",
+      "frame": 4,
+      "seconds": 0.12,
+      "loop": true,
+      "output": "sprites/actors/walk_east_4.png",
+      "output_sha256": "1ac9454a12e82f2cda26dd8c7da99ddd2a5f8e38dbefefb61a494caafb28885a",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-walk-right-keys-r1.prompt.txt",
+      "prompt_sha256": "c04bfe2c480c7586350c680ab4e8fda110259e8044c8bec462d60e857612e4bc",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/directional/creator-walk-right-keys-r1.png",
+          "sha256": "47b8d1c710e14aff1e9416e59fe5bb1a7c316e0d310312fb3eedaa22046e70b7",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/walk_east_5",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/directional/frames/walk_east_5.png",
+      "source_sha256": "1f75ff47b29eb353f61812b71c6c53ba2a66b3ef79a406aef9b453068725c574",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "walk_east",
+      "frame": 5,
+      "seconds": 0.12,
+      "loop": true,
+      "output": "sprites/actors/walk_east_5.png",
+      "output_sha256": "1f75ff47b29eb353f61812b71c6c53ba2a66b3ef79a406aef9b453068725c574",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-walk-right-transitions-r2.prompt.txt",
+      "prompt_sha256": "9d8fc0fed455b5b47ed48dbb88c605ae77fdf0eaa03dc87aa0125a1a2f3f159e",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/directional/creator-walk-right-transitions-r2.png",
+          "sha256": "4b6c3b4e84e053ff72af6e85bcef64e3e01fffa523bfd7300044acaee99ecf42",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/walk_east_6",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/directional/frames/walk_east_6.png",
+      "source_sha256": "692c1a07f7755341de387bd692777d7ae682e5845a7b9b51ceb3545b3f49ec8e",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "walk_east",
+      "frame": 6,
+      "seconds": 0.12,
+      "loop": true,
+      "output": "sprites/actors/walk_east_6.png",
+      "output_sha256": "692c1a07f7755341de387bd692777d7ae682e5845a7b9b51ceb3545b3f49ec8e",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-walk-right-keys-r1.prompt.txt",
+      "prompt_sha256": "c04bfe2c480c7586350c680ab4e8fda110259e8044c8bec462d60e857612e4bc",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/directional/creator-walk-right-keys-r1.png",
+          "sha256": "47b8d1c710e14aff1e9416e59fe5bb1a7c316e0d310312fb3eedaa22046e70b7",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/walk_east_7",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/directional/frames/walk_east_7.png",
+      "source_sha256": "57744b499085e150eb2dd920686efd8d782590c3f9f0df8ad2d3400533fadb51",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "walk_east",
+      "frame": 7,
+      "seconds": 0.12,
+      "loop": true,
+      "output": "sprites/actors/walk_east_7.png",
+      "output_sha256": "57744b499085e150eb2dd920686efd8d782590c3f9f0df8ad2d3400533fadb51",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-walk-right-transitions-r2.prompt.txt",
+      "prompt_sha256": "9d8fc0fed455b5b47ed48dbb88c605ae77fdf0eaa03dc87aa0125a1a2f3f159e",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/directional/creator-walk-right-transitions-r2.png",
+          "sha256": "4b6c3b4e84e053ff72af6e85bcef64e3e01fffa523bfd7300044acaee99ecf42",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/walk_north_4",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/directional/frames/walk_north_4.png",
+      "source_sha256": "e777b4f75c77d60d72ccee775357f75b68a127d63868d857e7acc9de1f87a786",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "walk_north",
+      "frame": 4,
+      "seconds": 0.12,
+      "loop": true,
+      "output": "sprites/actors/walk_north_4.png",
+      "output_sha256": "e777b4f75c77d60d72ccee775357f75b68a127d63868d857e7acc9de1f87a786",
+      "prompt": "implementation/fhd-player/directional/prompts/walk_north.prompt.txt",
+      "prompt_sha256": "1d5504bb26a36b2dae42df3ded0a14da6f8c08967e5c97591080509844cf80ce",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/directional/walk_north.png",
+          "sha256": "bf67a3ed6269a2aef16059edba3bf3bf516a21ee04c69ee91ceb919de7b07b2f",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/walk_north_5",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/directional/frames/walk_north_5.png",
+      "source_sha256": "5a046a1a5ba2c7e1b32c16ab75d45f7d50ad67497c82e6b5fd1d9fdf07eec6d6",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "walk_north",
+      "frame": 5,
+      "seconds": 0.12,
+      "loop": true,
+      "output": "sprites/actors/walk_north_5.png",
+      "output_sha256": "5a046a1a5ba2c7e1b32c16ab75d45f7d50ad67497c82e6b5fd1d9fdf07eec6d6",
+      "prompt": "implementation/fhd-player/directional/prompts/walk_north.prompt.txt",
+      "prompt_sha256": "1d5504bb26a36b2dae42df3ded0a14da6f8c08967e5c97591080509844cf80ce",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/directional/walk_north.png",
+          "sha256": "bf67a3ed6269a2aef16059edba3bf3bf516a21ee04c69ee91ceb919de7b07b2f",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/walk_north_6",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/directional/frames/walk_north_6.png",
+      "source_sha256": "4339dfb38b20b5646e885f3e1e0dbeb3119be4a36bbb6669ea45a01dd477b488",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "walk_north",
+      "frame": 6,
+      "seconds": 0.12,
+      "loop": true,
+      "output": "sprites/actors/walk_north_6.png",
+      "output_sha256": "4339dfb38b20b5646e885f3e1e0dbeb3119be4a36bbb6669ea45a01dd477b488",
+      "prompt": "implementation/fhd-player/directional/prompts/walk_north.prompt.txt",
+      "prompt_sha256": "1d5504bb26a36b2dae42df3ded0a14da6f8c08967e5c97591080509844cf80ce",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/directional/walk_north.png",
+          "sha256": "bf67a3ed6269a2aef16059edba3bf3bf516a21ee04c69ee91ceb919de7b07b2f",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/walk_north_7",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/directional/frames/walk_north_7.png",
+      "source_sha256": "9f8d2091052b4da24e91516f8bba9172b49d576cd4510a9ac4968965a8a4194d",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "walk_north",
+      "frame": 7,
+      "seconds": 0.12,
+      "loop": true,
+      "output": "sprites/actors/walk_north_7.png",
+      "output_sha256": "9f8d2091052b4da24e91516f8bba9172b49d576cd4510a9ac4968965a8a4194d",
+      "prompt": "implementation/fhd-player/directional/prompts/walk_north.prompt.txt",
+      "prompt_sha256": "1d5504bb26a36b2dae42df3ded0a14da6f8c08967e5c97591080509844cf80ce",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/directional/walk_north.png",
+          "sha256": "bf67a3ed6269a2aef16059edba3bf3bf516a21ee04c69ee91ceb919de7b07b2f",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/walk_south_4",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/approved/frames/walk_south_4.png",
+      "source_sha256": "4c3d31a8288364407e6ff4273d5b2cd5f20af0ab2e85f9e45fece9c8adf12c9d",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "walk_south",
+      "frame": 4,
+      "seconds": 0.12,
+      "loop": true,
+      "output": "sprites/actors/walk_south_4.png",
+      "output_sha256": "4c3d31a8288364407e6ff4273d5b2cd5f20af0ab2e85f9e45fece9c8adf12c9d",
+      "prompt": "implementation/fhd-player/approved-prompts/walk_south_8-r1.prompt.txt",
+      "prompt_sha256": "a75dce980b4c9961b534a1013ae053292b38793603848d04a7b7f0c36cbf66a8",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/approved/walk_south_8-r1.png",
+          "sha256": "8a70c2e178e281615ed37d59b254e990f1f9471263e0d72846dd6d9e00d9e54c",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/walk_south_5",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/approved/frames/walk_south_5.png",
+      "source_sha256": "f95fe267ee7529dca12e603a18afc29d9aa1543e89bf91a8e38bd17d4a3e7651",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "walk_south",
+      "frame": 5,
+      "seconds": 0.12,
+      "loop": true,
+      "output": "sprites/actors/walk_south_5.png",
+      "output_sha256": "f95fe267ee7529dca12e603a18afc29d9aa1543e89bf91a8e38bd17d4a3e7651",
+      "prompt": "implementation/fhd-player/approved-prompts/walk_south_8-r1.prompt.txt",
+      "prompt_sha256": "a75dce980b4c9961b534a1013ae053292b38793603848d04a7b7f0c36cbf66a8",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/approved/walk_south_8-r1.png",
+          "sha256": "8a70c2e178e281615ed37d59b254e990f1f9471263e0d72846dd6d9e00d9e54c",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/walk_south_6",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/approved/frames/walk_south_6.png",
+      "source_sha256": "c562e185c533f4996957949272e2cceaad80ca062b39b497d843815c976bf709",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "walk_south",
+      "frame": 6,
+      "seconds": 0.12,
+      "loop": true,
+      "output": "sprites/actors/walk_south_6.png",
+      "output_sha256": "c562e185c533f4996957949272e2cceaad80ca062b39b497d843815c976bf709",
+      "prompt": "implementation/fhd-player/approved-prompts/walk_south_8-r1.prompt.txt",
+      "prompt_sha256": "a75dce980b4c9961b534a1013ae053292b38793603848d04a7b7f0c36cbf66a8",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/approved/walk_south_8-r1.png",
+          "sha256": "8a70c2e178e281615ed37d59b254e990f1f9471263e0d72846dd6d9e00d9e54c",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/walk_south_7",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/approved/frames/walk_south_7.png",
+      "source_sha256": "c9926e6d0f2ee851cc90bb874961e3945a2ced1b7cf4ce5573062fe7d028ed75",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        48,
+        88
+      ],
+      "content_anchor_xy": [
+        48,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "walk_south",
+      "frame": 7,
+      "seconds": 0.12,
+      "loop": true,
+      "output": "sprites/actors/walk_south_7.png",
+      "output_sha256": "c9926e6d0f2ee851cc90bb874961e3945a2ced1b7cf4ce5573062fe7d028ed75",
+      "prompt": "implementation/fhd-player/approved-prompts/walk_south_8-r1.prompt.txt",
+      "prompt_sha256": "a75dce980b4c9961b534a1013ae053292b38793603848d04a7b7f0c36cbf66a8",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/approved/walk_south_8-r1.png",
+          "sha256": "8a70c2e178e281615ed37d59b254e990f1f9471263e0d72846dd6d9e00d9e54c",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/walk_west_4",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/directional/frames/walk_west_4.png",
+      "source_sha256": "1c63f488dd45769b5eaa4a703a3bed72cda2bc05d8bfe662e079fef6be31ea40",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        47,
+        88
+      ],
+      "content_anchor_xy": [
+        47,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "walk_west",
+      "frame": 4,
+      "seconds": 0.12,
+      "loop": true,
+      "output": "sprites/actors/walk_west_4.png",
+      "output_sha256": "1c63f488dd45769b5eaa4a703a3bed72cda2bc05d8bfe662e079fef6be31ea40",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-walk-right-keys-r1.prompt.txt",
+      "prompt_sha256": "c04bfe2c480c7586350c680ab4e8fda110259e8044c8bec462d60e857612e4bc",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/directional/creator-walk-right-keys-r1.png",
+          "sha256": "47b8d1c710e14aff1e9416e59fe5bb1a7c316e0d310312fb3eedaa22046e70b7",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/walk_west_5",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/directional/frames/walk_west_5.png",
+      "source_sha256": "5e9e41896d5558692e3c70364c25f719f4ec917722c99372da29b433e8ef2b52",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        47,
+        88
+      ],
+      "content_anchor_xy": [
+        47,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "walk_west",
+      "frame": 5,
+      "seconds": 0.12,
+      "loop": true,
+      "output": "sprites/actors/walk_west_5.png",
+      "output_sha256": "5e9e41896d5558692e3c70364c25f719f4ec917722c99372da29b433e8ef2b52",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-walk-right-transitions-r2.prompt.txt",
+      "prompt_sha256": "9d8fc0fed455b5b47ed48dbb88c605ae77fdf0eaa03dc87aa0125a1a2f3f159e",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/directional/creator-walk-right-transitions-r2.png",
+          "sha256": "4b6c3b4e84e053ff72af6e85bcef64e3e01fffa523bfd7300044acaee99ecf42",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/walk_west_6",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/directional/frames/walk_west_6.png",
+      "source_sha256": "585bcd0c72379df707658c6dfb09dff66fe64259c158457c637400ad2586a901",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        47,
+        88
+      ],
+      "content_anchor_xy": [
+        47,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "walk_west",
+      "frame": 6,
+      "seconds": 0.12,
+      "loop": true,
+      "output": "sprites/actors/walk_west_6.png",
+      "output_sha256": "585bcd0c72379df707658c6dfb09dff66fe64259c158457c637400ad2586a901",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-walk-right-keys-r1.prompt.txt",
+      "prompt_sha256": "c04bfe2c480c7586350c680ab4e8fda110259e8044c8bec462d60e857612e4bc",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/directional/creator-walk-right-keys-r1.png",
+          "sha256": "47b8d1c710e14aff1e9416e59fe5bb1a7c316e0d310312fb3eedaa22046e70b7",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
+    },
+    {
+      "id": "actors/walk_west_7",
+      "owner": "raster",
+      "source": "assets/art_source/player-fhd/directional/frames/walk_west_7.png",
+      "source_sha256": "2b64198532cb9fb9f4b4dffa15c5e0d5edadfee8226752412daa3a35e1a78825",
+      "crop_xywh": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "canvas_wh": [
+        96,
+        96
+      ],
+      "pivot_xy": [
+        47,
+        88
+      ],
+      "content_anchor_xy": [
+        47,
+        88
+      ],
+      "content_scale": 1.0,
+      "draw_scale": 0.5,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "walk_west",
+      "frame": 7,
+      "seconds": 0.12,
+      "loop": true,
+      "output": "sprites/actors/walk_west_7.png",
+      "output_sha256": "2b64198532cb9fb9f4b4dffa15c5e0d5edadfee8226752412daa3a35e1a78825",
+      "prompt": "implementation/fhd-player/directional/prompts/creator-walk-right-transitions-r2.prompt.txt",
+      "prompt_sha256": "9d8fc0fed455b5b47ed48dbb88c605ae77fdf0eaa03dc87aa0125a1a2f3f159e",
+      "references": [
+        {
+          "path": "assets/art_source/player-fhd/directional/creator-walk-right-transitions-r2.png",
+          "sha256": "4b6c3b4e84e053ff72af6e85bcef64e3e01fffa523bfd7300044acaee99ecf42",
+          "role": "Original generated locomotion master"
+        },
+        {
+          "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
+          "sha256": "f4fd11f10f5fa2d9ca091aae03fc7fb52386d21e04ee17e2366b0df82a21bfb1",
+          "role": "Source-owned native cut and ground registration contract"
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "fhd-locomotion",
+      "approval": "Runtime integration authorized by user on 2026-10-02"
     },
     {
       "id": "actors/chop_0",

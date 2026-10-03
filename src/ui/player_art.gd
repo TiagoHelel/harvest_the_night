@@ -9,12 +9,10 @@ extends RefCounted
 ## never guesses from the position, which is what would make a farmer chop at
 ## a tree they had already walked away from.
 ##
-## ## All the side art faces west
+## ## Locomotion has four explicit directions
 ##
-## There is no east-facing set on the sheet, and there does not need to be:
-## `flip` mirrors the west frames. The verbs are drawn side-on too, so a
-## farmer tilling while facing north is drawn side-on. Task 0005 deliberately
-## authors thirteen west work strips; it does not claim north/south work art.
+## Reviewed idle/walk/run use their own cardinal bindings and ground pivots.
+## Existing work strips remain west-facing and mirror only when facing east.
 ##
 ## ## The speeds are data
 ##
@@ -74,7 +72,7 @@ const FACINGS := [
 	[&"south", false],      # SOUTH
 	[&"west", false],       # WEST
 	[&"north", false],      # NORTH
-	[&"west", true],        # EAST - the west art, mirrored
+	[&"east", false],       # EAST - registered right-facing locomotion
 ]
 
 
@@ -82,17 +80,19 @@ const FACINGS := [
 ##
 ## `verb` is empty when the player is not working. `moving` is whether they
 ## are walking, which only matters when they are not.
-static func pose(facing: int, moving: bool, verb: StringName) -> Dictionary:
+static func pose(facing: int, moving: bool, verb: StringName, running: bool = false) -> Dictionary:
 	var side: Array = FACINGS[clampi(facing, 0, FACINGS.size() - 1)]
 	var flip: bool = side[1]
 
 	var name: StringName = &""
 	if verb != &"" and VERBS.has(verb):
 		name = VERBS[verb]
+		flip = facing == Player.EAST
 	elif COSMETIC.has(verb):
 		name = COSMETIC[verb]
+		flip = facing == Player.EAST
 	elif moving:
-		name = StringName("walk_%s" % side[0])
+		name = StringName("%s_%s" % ["run" if running else "walk", side[0]])
 	else:
 		name = StringName("idle_%s" % side[0])
 
@@ -112,7 +112,7 @@ static func pose(facing: int, moving: bool, verb: StringName) -> Dictionary:
 static func frame_at(pose_data: Dictionary, seconds: float) -> int:
 	# The closed-eye drawing is a brief blink, not one third of idle time.
 	# Preserve the authored poses; leave the eyes open between blinks.
-	if pose_data.get("name", &"") in [&"idle_south", &"idle_west"]:
+	if String(pose_data.get("name", &"")).begins_with("idle_"):
 		var phase := fposmod(maxf(seconds, 0.0), BLINK_SECONDS[0] + BLINK_SECONDS[1] + BLINK_SECONDS[2])
 		return 0 if phase < BLINK_SECONDS[0] else (1 if phase < BLINK_SECONDS[0] + BLINK_SECONDS[1] else 2)
 	var frames := maxi(int(pose_data["frames"]), 1)
@@ -121,7 +121,7 @@ static func frame_at(pose_data: Dictionary, seconds: float) -> int:
 
 
 static func frame_seconds(pose_data: Dictionary, frame: int) -> float:
-	if pose_data.get("name", &"") in [&"idle_south", &"idle_west"]:
+	if String(pose_data.get("name", &"")).begins_with("idle_"):
 		return float(BLINK_SECONDS[frame % BLINK_SECONDS.size()])
 	return float(pose_data["seconds"])
 

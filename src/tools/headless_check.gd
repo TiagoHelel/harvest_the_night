@@ -13174,8 +13174,8 @@ func _task_0073_player_art() -> void:
 		str(north["name"]))
 	expect(str(west["name"]) == "walk_west" and not bool(west["flip"]),
 		"west walks west, unmirrored", str(west))
-	expect(str(east["name"]) == "walk_west" and bool(east["flip"]),
-		"and east is the same drawing, mirrored", str(east))
+	expect(str(east["name"]) == "walk_east" and not bool(east["flip"]),
+		"east uses its registered right-facing drawing", str(east))
 	for facing in [Player.SOUTH, Player.NORTH, Player.WEST]:
 		expect(not bool(PlayerArt.pose(facing, false, &"")["flip"]),
 			"nothing but east is mirrored", str(facing))
@@ -13184,6 +13184,13 @@ func _task_0073_player_art() -> void:
 	for facing in [Player.SOUTH, Player.NORTH, Player.WEST, Player.EAST]:
 		var still := PlayerArt.pose(facing, false, &"")
 		var going := PlayerArt.pose(facing, true, &"")
+		var running := PlayerArt.pose(facing, true, &"", true)
+		expect(str(running["name"]) == "run_%s" % PlayerArt.FACINGS[facing][0]
+			and int(running["frames"]) == 8 and not bool(running["flip"]),
+			"Each direction has eight registered running poses", str(running))
+		expect(int(going["frames"]) == 8, "Walking retains all eight reviewed poses")
+		expect(PlayerArt.pose(facing, false, &"", true)["name"] == still["name"],
+			"Holding run without movement remains idle")
 		expect(str(still["name"]) != str(going["name"]),
 			"facing %d stands and walks differently" % facing,
 			str(still["name"]))
@@ -13236,11 +13243,14 @@ func _task_0073_player_art() -> void:
 	# **The canvas is the size task 0073 decided on**: two tiles wide and
 	# three tall over an unchanged sixteen pixel grid.
 	var tile := GameData.TILE_SIZE
-	expect(PlayerFrames.CANVAS.x >= tile * 2
-		and PlayerFrames.CANVAS.x <= tile * 4,
+	var draw_scale := float(RasterArt.FRAMES[PlayerArt.texture_path(&"idle_south", 0)].get("draw_scale", 1.0))
+	var idle_metadata: Dictionary = RasterArt.FRAMES[PlayerArt.texture_path(&"idle_south", 0)]
+	var logical_canvas := Vector2(idle_metadata["canvas"]) * draw_scale
+	expect(logical_canvas.x >= tile * 2
+		and logical_canvas.x <= tile * 4,
 		"the player is about two tiles wide", str(PlayerFrames.CANVAS))
-	expect(PlayerFrames.CANVAS.y >= tile * 3
-		and PlayerFrames.CANVAS.y <= tile * 4,
+	expect(logical_canvas.y >= tile * 3
+		and logical_canvas.y <= tile * 4,
 		"and about three tall", str(PlayerFrames.CANVAS))
 	expect(PlayerFrames.FEET.y > PlayerFrames.CANVAS.y / 2,
 		"and stands near the bottom of it", str(PlayerFrames.FEET))
@@ -14120,8 +14130,8 @@ func _task_0081_theme() -> void:
 	# ever stretches by anything other than whole numbers, `SCALE := 1` stops
 	# being a decision and becomes a leftover.
 	expect(str(ProjectSettings.get_setting(
-		"display/window/stretch/mode", "")) == "viewport",
-		"because the project stretches the whole viewport",
+		"display/window/stretch/mode", "")) == "canvas_items",
+		"because Canvas Items renders useful art detail at the window resolution",
 		str(ProjectSettings.get_setting("display/window/stretch/mode", "")))
 	expect(str(ProjectSettings.get_setting(
 		"display/window/stretch/scale_mode", "")) == "integer",
@@ -15860,12 +15870,13 @@ func _task_0095_controls() -> void:
 		"a mouse button has a name a player would use",
 		ActionsScript.label_of(click))
 
-	# **Not every key is a binding.** A modifier on its own can never be
-	# pressed alone, so binding to one is binding to nothing.
+	# Shift is a valid held run action; other lone modifiers remain refused.
 	expect(ActionsScript.is_bindable(letter), "a letter can be bound")
 	expect(ActionsScript.is_bindable(click), "and so can a mouse button")
 	var modifier := InputEventKey.new()
 	modifier.keycode = KEY_SHIFT
+	expect(ActionsScript.is_bindable(modifier), "Shift can select the run animation")
+	modifier.keycode = KEY_CTRL
 	expect(not ActionsScript.is_bindable(modifier),
 		"a modifier on its own cannot")
 

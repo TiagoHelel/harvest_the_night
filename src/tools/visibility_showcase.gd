@@ -22,6 +22,7 @@ func expect(ok: bool, message: String) -> void:
 
 
 func _run() -> void:
+	CaptureSize.configure(root)
 	_capture = not OS.get_cmdline_user_args().has("--check")
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(_folder))
 	_world = load("res://scenes/World.tscn").instantiate()
