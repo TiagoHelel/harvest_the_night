@@ -37,6 +37,7 @@ def check_sources(contract):
     review.assert_lateral_knee_exchange(contract['frames'])
     review.assert_lateral_run_readability(contract['frames'])
     review.assert_walking_head_scale(contract['frames'])
+    review.assert_front_walk_body_scale(contract['frames'])
     print('FHD SOURCE: 76 exact source-owned frames; lateral knees alternate and front/back walking heads match idle width.')
 
 

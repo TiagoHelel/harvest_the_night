@@ -104,7 +104,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -155,7 +155,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -206,7 +206,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -218,7 +218,7 @@
       "id": "actors/walk_south_0",
       "owner": "raster",
       "source": "assets/art_source/player-fhd/directional/frames/walk_south_0.png",
-      "source_sha256": "62f271edd27aedcdf25a0c11e1578a7f6a10f07b0c3a282fc5052d6d5fe0169a",
+      "source_sha256": "3e1b1e76ca4750ec31944998d30832cc611a4e3c621c889c0c3eb247c6813613",
       "crop_xywh": [
         0,
         0,
@@ -246,18 +246,18 @@
       "seconds": 0.12,
       "loop": true,
       "output": "sprites/actors/walk_south_0.png",
-      "output_sha256": "62f271edd27aedcdf25a0c11e1578a7f6a10f07b0c3a282fc5052d6d5fe0169a",
-      "prompt": "implementation/fhd-player/directional/prompts/walk_south-head-r1.prompt.txt",
-      "prompt_sha256": "ab6a8359b3ba98dedc3ae838ddc55f0f76a14998217254b2be2d41b3260d1d42",
+      "output_sha256": "3e1b1e76ca4750ec31944998d30832cc611a4e3c621c889c0c3eb247c6813613",
+      "prompt": "implementation/fhd-player/directional/prompts/walk_south-body-r1.prompt.txt",
+      "prompt_sha256": "c2bfbba3d1eaaa9d47b4ea64c5dffefbc19cae67401be9aa769a12fed9d0b187",
       "references": [
         {
-          "path": "assets/art_source/player-fhd/directional/walk_south-head-r1.png",
-          "sha256": "11d13daa04f56a785bc44086a0a6353d293eaecd4b56c2a91b5e44c0885e739d",
+          "path": "assets/art_source/player-fhd/directional/walk_south-body-r1.png",
+          "sha256": "0a8bc86bdbe239297c7d249fe38829fc9f6f81ca044b559a568ecaed33c2e1a5",
           "role": "Original generated locomotion master"
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -269,7 +269,7 @@
       "id": "actors/walk_south_1",
       "owner": "raster",
       "source": "assets/art_source/player-fhd/directional/frames/walk_south_1.png",
-      "source_sha256": "57c05919c417886ecce212e4ad38a3928dede3e37927fd5f4cba62f9dbb2bc97",
+      "source_sha256": "eec682a69af5f7b3d44e2df5797ef719faa6a7cf2b24b3f4e1a5a8ce6a151f59",
       "crop_xywh": [
         0,
         0,
@@ -297,18 +297,18 @@
       "seconds": 0.12,
       "loop": true,
       "output": "sprites/actors/walk_south_1.png",
-      "output_sha256": "57c05919c417886ecce212e4ad38a3928dede3e37927fd5f4cba62f9dbb2bc97",
-      "prompt": "implementation/fhd-player/directional/prompts/walk_south-head-r1.prompt.txt",
-      "prompt_sha256": "ab6a8359b3ba98dedc3ae838ddc55f0f76a14998217254b2be2d41b3260d1d42",
+      "output_sha256": "eec682a69af5f7b3d44e2df5797ef719faa6a7cf2b24b3f4e1a5a8ce6a151f59",
+      "prompt": "implementation/fhd-player/directional/prompts/walk_south-body-r1.prompt.txt",
+      "prompt_sha256": "c2bfbba3d1eaaa9d47b4ea64c5dffefbc19cae67401be9aa769a12fed9d0b187",
       "references": [
         {
-          "path": "assets/art_source/player-fhd/directional/walk_south-head-r1.png",
-          "sha256": "11d13daa04f56a785bc44086a0a6353d293eaecd4b56c2a91b5e44c0885e739d",
+          "path": "assets/art_source/player-fhd/directional/walk_south-body-r1.png",
+          "sha256": "0a8bc86bdbe239297c7d249fe38829fc9f6f81ca044b559a568ecaed33c2e1a5",
           "role": "Original generated locomotion master"
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -320,7 +320,7 @@
       "id": "actors/walk_south_2",
       "owner": "raster",
       "source": "assets/art_source/player-fhd/directional/frames/walk_south_2.png",
-      "source_sha256": "71359022c26621c9068e1209016057d942cadb5872bc64019499f856e1fb07c0",
+      "source_sha256": "5af54dd53b72a91734fed50e6a0f90ecbe81be85d28a7ac7d1a96f277d055fe1",
       "crop_xywh": [
         0,
         0,
@@ -348,18 +348,18 @@
       "seconds": 0.12,
       "loop": true,
       "output": "sprites/actors/walk_south_2.png",
-      "output_sha256": "71359022c26621c9068e1209016057d942cadb5872bc64019499f856e1fb07c0",
-      "prompt": "implementation/fhd-player/directional/prompts/walk_south-head-r1.prompt.txt",
-      "prompt_sha256": "ab6a8359b3ba98dedc3ae838ddc55f0f76a14998217254b2be2d41b3260d1d42",
+      "output_sha256": "5af54dd53b72a91734fed50e6a0f90ecbe81be85d28a7ac7d1a96f277d055fe1",
+      "prompt": "implementation/fhd-player/directional/prompts/walk_south-body-r1.prompt.txt",
+      "prompt_sha256": "c2bfbba3d1eaaa9d47b4ea64c5dffefbc19cae67401be9aa769a12fed9d0b187",
       "references": [
         {
-          "path": "assets/art_source/player-fhd/directional/walk_south-head-r1.png",
-          "sha256": "11d13daa04f56a785bc44086a0a6353d293eaecd4b56c2a91b5e44c0885e739d",
+          "path": "assets/art_source/player-fhd/directional/walk_south-body-r1.png",
+          "sha256": "0a8bc86bdbe239297c7d249fe38829fc9f6f81ca044b559a568ecaed33c2e1a5",
           "role": "Original generated locomotion master"
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -371,7 +371,7 @@
       "id": "actors/walk_south_3",
       "owner": "raster",
       "source": "assets/art_source/player-fhd/directional/frames/walk_south_3.png",
-      "source_sha256": "ffad641d22ceaced3124478d37b5d5af0be2845ff301ab4c9854c0b767c166bd",
+      "source_sha256": "b30c7d0b596bb66e0a8e9fd81749a4204a966f153d037628d1bff132de97e1db",
       "crop_xywh": [
         0,
         0,
@@ -399,18 +399,18 @@
       "seconds": 0.12,
       "loop": true,
       "output": "sprites/actors/walk_south_3.png",
-      "output_sha256": "ffad641d22ceaced3124478d37b5d5af0be2845ff301ab4c9854c0b767c166bd",
-      "prompt": "implementation/fhd-player/directional/prompts/walk_south-head-r1.prompt.txt",
-      "prompt_sha256": "ab6a8359b3ba98dedc3ae838ddc55f0f76a14998217254b2be2d41b3260d1d42",
+      "output_sha256": "b30c7d0b596bb66e0a8e9fd81749a4204a966f153d037628d1bff132de97e1db",
+      "prompt": "implementation/fhd-player/directional/prompts/walk_south-body-r1.prompt.txt",
+      "prompt_sha256": "c2bfbba3d1eaaa9d47b4ea64c5dffefbc19cae67401be9aa769a12fed9d0b187",
       "references": [
         {
-          "path": "assets/art_source/player-fhd/directional/walk_south-head-r1.png",
-          "sha256": "11d13daa04f56a785bc44086a0a6353d293eaecd4b56c2a91b5e44c0885e739d",
+          "path": "assets/art_source/player-fhd/directional/walk_south-body-r1.png",
+          "sha256": "0a8bc86bdbe239297c7d249fe38829fc9f6f81ca044b559a568ecaed33c2e1a5",
           "role": "Original generated locomotion master"
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -461,7 +461,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -512,7 +512,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -563,7 +563,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -614,7 +614,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -665,7 +665,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -716,7 +716,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -767,7 +767,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -818,7 +818,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -869,7 +869,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -920,7 +920,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -971,7 +971,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -1022,7 +1022,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -1073,7 +1073,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -1124,7 +1124,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -1175,7 +1175,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -1226,7 +1226,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -1277,7 +1277,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -1328,7 +1328,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -1379,7 +1379,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -1430,7 +1430,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -1481,7 +1481,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -1532,7 +1532,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -1583,7 +1583,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -1634,7 +1634,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -1685,7 +1685,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -1736,7 +1736,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -1787,7 +1787,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -1838,7 +1838,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -1889,7 +1889,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -1940,7 +1940,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -1991,7 +1991,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -2042,7 +2042,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -2093,7 +2093,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -2144,7 +2144,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -2195,7 +2195,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -2246,7 +2246,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -2297,7 +2297,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -2348,7 +2348,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -2399,7 +2399,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -2450,7 +2450,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -2501,7 +2501,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -2552,7 +2552,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -2603,7 +2603,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -2654,7 +2654,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -2705,7 +2705,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -2756,7 +2756,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -2807,7 +2807,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -2858,7 +2858,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -2909,7 +2909,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -2960,7 +2960,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -3011,7 +3011,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -3062,7 +3062,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -3113,7 +3113,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -3164,7 +3164,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -3215,7 +3215,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -3266,7 +3266,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -3317,7 +3317,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -3368,7 +3368,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -3419,7 +3419,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -3470,7 +3470,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -3521,7 +3521,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -3533,7 +3533,7 @@
       "id": "actors/walk_south_4",
       "owner": "raster",
       "source": "assets/art_source/player-fhd/directional/frames/walk_south_4.png",
-      "source_sha256": "8c1bebb7cd40f22ec34e7ef2d8cb2629ee13aca4c07a7447b644ec7645667f0a",
+      "source_sha256": "84ce6a42b07dccaa40971b485cf465a844291e092a219f295de45c8518a4d958",
       "crop_xywh": [
         0,
         0,
@@ -3561,18 +3561,18 @@
       "seconds": 0.12,
       "loop": true,
       "output": "sprites/actors/walk_south_4.png",
-      "output_sha256": "8c1bebb7cd40f22ec34e7ef2d8cb2629ee13aca4c07a7447b644ec7645667f0a",
-      "prompt": "implementation/fhd-player/directional/prompts/walk_south-head-r1.prompt.txt",
-      "prompt_sha256": "ab6a8359b3ba98dedc3ae838ddc55f0f76a14998217254b2be2d41b3260d1d42",
+      "output_sha256": "84ce6a42b07dccaa40971b485cf465a844291e092a219f295de45c8518a4d958",
+      "prompt": "implementation/fhd-player/directional/prompts/walk_south-body-r1.prompt.txt",
+      "prompt_sha256": "c2bfbba3d1eaaa9d47b4ea64c5dffefbc19cae67401be9aa769a12fed9d0b187",
       "references": [
         {
-          "path": "assets/art_source/player-fhd/directional/walk_south-head-r1.png",
-          "sha256": "11d13daa04f56a785bc44086a0a6353d293eaecd4b56c2a91b5e44c0885e739d",
+          "path": "assets/art_source/player-fhd/directional/walk_south-body-r1.png",
+          "sha256": "0a8bc86bdbe239297c7d249fe38829fc9f6f81ca044b559a568ecaed33c2e1a5",
           "role": "Original generated locomotion master"
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -3584,7 +3584,7 @@
       "id": "actors/walk_south_5",
       "owner": "raster",
       "source": "assets/art_source/player-fhd/directional/frames/walk_south_5.png",
-      "source_sha256": "71530a6815bf20f4a991d8589c2c32c6ecbad374ec95924f74ea79f14efedddd",
+      "source_sha256": "b5ef83cb91035d8219d118228fabcbb092e07b2dbc5c778c04cc19604c4cd8a1",
       "crop_xywh": [
         0,
         0,
@@ -3612,18 +3612,18 @@
       "seconds": 0.12,
       "loop": true,
       "output": "sprites/actors/walk_south_5.png",
-      "output_sha256": "71530a6815bf20f4a991d8589c2c32c6ecbad374ec95924f74ea79f14efedddd",
-      "prompt": "implementation/fhd-player/directional/prompts/walk_south-head-r1.prompt.txt",
-      "prompt_sha256": "ab6a8359b3ba98dedc3ae838ddc55f0f76a14998217254b2be2d41b3260d1d42",
+      "output_sha256": "b5ef83cb91035d8219d118228fabcbb092e07b2dbc5c778c04cc19604c4cd8a1",
+      "prompt": "implementation/fhd-player/directional/prompts/walk_south-body-r1.prompt.txt",
+      "prompt_sha256": "c2bfbba3d1eaaa9d47b4ea64c5dffefbc19cae67401be9aa769a12fed9d0b187",
       "references": [
         {
-          "path": "assets/art_source/player-fhd/directional/walk_south-head-r1.png",
-          "sha256": "11d13daa04f56a785bc44086a0a6353d293eaecd4b56c2a91b5e44c0885e739d",
+          "path": "assets/art_source/player-fhd/directional/walk_south-body-r1.png",
+          "sha256": "0a8bc86bdbe239297c7d249fe38829fc9f6f81ca044b559a568ecaed33c2e1a5",
           "role": "Original generated locomotion master"
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -3635,7 +3635,7 @@
       "id": "actors/walk_south_6",
       "owner": "raster",
       "source": "assets/art_source/player-fhd/directional/frames/walk_south_6.png",
-      "source_sha256": "a5340b0017e71399737e034f04885ec3b680876f51a1368ca7b1523fdf568906",
+      "source_sha256": "3144d7e9989b64a4c38ff8e41dc007f0174e5bebba7ff770e340e52d3e5e37ea",
       "crop_xywh": [
         0,
         0,
@@ -3663,18 +3663,18 @@
       "seconds": 0.12,
       "loop": true,
       "output": "sprites/actors/walk_south_6.png",
-      "output_sha256": "a5340b0017e71399737e034f04885ec3b680876f51a1368ca7b1523fdf568906",
-      "prompt": "implementation/fhd-player/directional/prompts/walk_south-head-r1.prompt.txt",
-      "prompt_sha256": "ab6a8359b3ba98dedc3ae838ddc55f0f76a14998217254b2be2d41b3260d1d42",
+      "output_sha256": "3144d7e9989b64a4c38ff8e41dc007f0174e5bebba7ff770e340e52d3e5e37ea",
+      "prompt": "implementation/fhd-player/directional/prompts/walk_south-body-r1.prompt.txt",
+      "prompt_sha256": "c2bfbba3d1eaaa9d47b4ea64c5dffefbc19cae67401be9aa769a12fed9d0b187",
       "references": [
         {
-          "path": "assets/art_source/player-fhd/directional/walk_south-head-r1.png",
-          "sha256": "11d13daa04f56a785bc44086a0a6353d293eaecd4b56c2a91b5e44c0885e739d",
+          "path": "assets/art_source/player-fhd/directional/walk_south-body-r1.png",
+          "sha256": "0a8bc86bdbe239297c7d249fe38829fc9f6f81ca044b559a568ecaed33c2e1a5",
           "role": "Original generated locomotion master"
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -3686,7 +3686,7 @@
       "id": "actors/walk_south_7",
       "owner": "raster",
       "source": "assets/art_source/player-fhd/directional/frames/walk_south_7.png",
-      "source_sha256": "ea7f58ce405e11f6fa371688d631cddf2c8457f540f3b33b17230ea8e78c1fca",
+      "source_sha256": "b7785607dc741e95ae5704206cc4bae757116105c1a21916546a8ffa2ca51ac0",
       "crop_xywh": [
         0,
         0,
@@ -3714,18 +3714,18 @@
       "seconds": 0.12,
       "loop": true,
       "output": "sprites/actors/walk_south_7.png",
-      "output_sha256": "ea7f58ce405e11f6fa371688d631cddf2c8457f540f3b33b17230ea8e78c1fca",
-      "prompt": "implementation/fhd-player/directional/prompts/walk_south-head-r1.prompt.txt",
-      "prompt_sha256": "ab6a8359b3ba98dedc3ae838ddc55f0f76a14998217254b2be2d41b3260d1d42",
+      "output_sha256": "b7785607dc741e95ae5704206cc4bae757116105c1a21916546a8ffa2ca51ac0",
+      "prompt": "implementation/fhd-player/directional/prompts/walk_south-body-r1.prompt.txt",
+      "prompt_sha256": "c2bfbba3d1eaaa9d47b4ea64c5dffefbc19cae67401be9aa769a12fed9d0b187",
       "references": [
         {
-          "path": "assets/art_source/player-fhd/directional/walk_south-head-r1.png",
-          "sha256": "11d13daa04f56a785bc44086a0a6353d293eaecd4b56c2a91b5e44c0885e739d",
+          "path": "assets/art_source/player-fhd/directional/walk_south-body-r1.png",
+          "sha256": "0a8bc86bdbe239297c7d249fe38829fc9f6f81ca044b559a568ecaed33c2e1a5",
           "role": "Original generated locomotion master"
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -3776,7 +3776,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -3827,7 +3827,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -3878,7 +3878,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],
@@ -3929,7 +3929,7 @@
         },
         {
           "path": "implementation/fhd-player/directional/runtime-locomotion-contract.json",
-          "sha256": "dfbc994b10b58063225764d5753be3534409f0fd4f3596a719ca20c64a8c7fbd",
+          "sha256": "6d6fd7533e291b63e1063fe9bb098a012295b8fbf557a690fe4f3a1591ef1e25",
           "role": "Source-owned native cut and ground registration contract"
         }
       ],

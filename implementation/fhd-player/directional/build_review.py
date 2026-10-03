@@ -350,6 +350,42 @@ def head_dimensions(image):
             'brim_width':int(xx[hat].max() - xx[hat].min() + 1)}
 
 
+def upper_body_dimensions(image):
+    """Measure torso proportions separately from limb reach and full height."""
+    pixels = np.array(image.convert('RGBA'))
+    opaque = pixels[:, :, 3] > 0
+    yy, xx = np.indices(opaque.shape)
+    blue = np.zeros_like(opaque)
+    for colour in ('cloth_dark', 'cloth', 'cloth_light'):
+        blue |= (pixels[:, :, :3] == COLOURS[colour]).all(2)
+    blue &= opaque
+    shoulder = int(yy[blue].min())
+    chest = blue & (yy < shoulder + 11)
+    upper = opaque & (yy >= shoulder) & (yy < shoulder + 13)
+    return {'chest_width':int(xx[chest].max()-xx[chest].min()+1),
+            'shoulder_height':shoulder-int(yy[opaque].min()),
+            'upper_body_width':int(xx[upper].max()-xx[upper].min()+1),
+            'body_height':int(yy[opaque].max()-yy[opaque].min()+1)}
+
+
+def assert_front_walk_body_scale(frames):
+    """The reported front walking body keeps approved idle shoulder/arm scale."""
+    idle = [upper_body_dimensions(Image.open(ROOT / e['output'])) for e in frames
+            if e['animation'] == 'idle_south']
+    walking = [upper_body_dimensions(Image.open(ROOT / e['output'])) for e in frames
+               if e['animation'] == 'walk_south']
+    assert len(idle) == 3 and len(walking) == 8
+    arm_limit = max(e['upper_body_width'] for e in idle) + 1
+    chest_limit = max(e['chest_width'] for e in idle)
+    shoulder_min = min(e['shoulder_height'] for e in idle) - 1
+    shoulder_max = max(e['shoulder_height'] for e in idle) + 1
+    for phase, measured in enumerate(walking):
+        assert measured['upper_body_width'] <= arm_limit, (phase, 'walking arms/body grow beyond idle', measured, idle)
+        assert measured['chest_width'] <= chest_limit, (phase, 'walking torso grows beyond idle', measured, idle)
+        assert shoulder_min <= measured['shoulder_height'] <= shoulder_max, (phase, 'walking head/shoulder ratio differs from idle', measured, idle)
+    return {'idle':idle, 'walking':walking}
+
+
 def lateral_run_readability(images, direction):
     """Recovery keeps the bright trouser chain behind, with opposite sleeve swing."""
     sign = 1 if direction == 'east' else -1
@@ -489,6 +525,7 @@ def build(check=False, partial=False):
         assert_lateral_run_readability(entries)
     if not partial:
         assert_walking_head_scale(entries)
+        assert_front_walk_body_scale(entries)
     if not partial:
         assert len(entries) == 284 and len(groups) == 64, (len(entries),len(groups))
     manifest = {"version":1,"integration":"preview only; awaiting user validation",
@@ -584,7 +621,7 @@ def gallery():
 <nav id="choices"></nav><h2 id="title"></h2><div class="preview"><img id="animation" width="1040" height="288" alt="Animações nas quatro direções"></div>
 <div class="tools"><button id="size" aria-pressed="true">Tamanho previsto em FHD: 120 px de altura</button><a id="download" class="download" download>Baixar este GIF</a><small id="details"></small></div>
 <p>Os pixels são ampliados exatamente em 2×, sem suavização. Você pode alternar para a escala nativa de 60 px. Em telas menores, role a prévia para os lados para conservar o tamanho dos pixels.</p>
-<div id="contact"></div><footer><a class="download" href="review-stills/walk-head-comparison.gif" download>Comparar cabeça na caminhada: antes e depois</a> <a class="download" href="review-stills/run-two-leg-comparison.gif" download>Comparar corrida: antes e depois</a> <a class="download" href="review-stills/run-two-leg-comparison-slow.gif" download>Ver corrida em câmera lenta (0.5×)</a> <a class="download" href="review-stills/runtime-horizontal.gif" download>Ver GIF capturado no jogo</a> <a class="download" href="todas-animacoes-horizontal.gif" download>Baixar GIF geral</a><p>O GIF geral percorre as 16 categorias. Os GIFs individuais repetem a atividade escolhida. Fontes, prompts e receitas estão guardados nesta pasta e em assets/art_source/player-fhd/directional.</p></footer></main>
+<div id="contact"></div><footer><a class="download" href="review-stills/walk-body-comparison.gif" download>Comparar tamanho: idle, caminhada anterior e nova</a> <a class="download" href="review-stills/walk-head-comparison.gif" download>Comparar cabeça na caminhada: antes e depois</a> <a class="download" href="review-stills/run-two-leg-comparison.gif" download>Comparar corrida: antes e depois</a> <a class="download" href="review-stills/run-two-leg-comparison-slow.gif" download>Ver corrida em câmera lenta (0.5×)</a> <a class="download" href="review-stills/runtime-horizontal.gif" download>Ver GIF capturado no jogo</a> <a class="download" href="todas-animacoes-horizontal.gif" download>Baixar GIF geral</a><p>O GIF geral percorre as 16 categorias. Os GIFs individuais repetem a atividade escolhida. Fontes, prompts e receitas estão guardados nesta pasta e em assets/art_source/player-fhd/directional.</p></footer></main>
 <script>const groups=__DATA__;const names={south:'Frente',west:'Esquerda',north:'Costas',east:'Direita'};const choices=document.querySelector('#choices'),image=document.querySelector('#animation');function select(g){document.querySelector('#title').textContent=g.label;image.src='gifs/'+g.action+'-horizontal.gif?v='+g.version;document.querySelector('#download').href=image.src;document.querySelector('#details').textContent=g.count+' quadros por direção · 4 direções';document.querySelectorAll('nav button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.action===g.action)));document.querySelector('#contact').replaceChildren(...g.columns.map(c=>{const a=document.createElement('a');a.href='contacts/'+g.action+'_'+c.direction+'.png?v='+g.version;a.textContent='Ver quadros: '+names[c.direction];a.target='_blank';return a}));}for(const g of groups){const b=document.createElement('button');b.textContent=g.label;b.dataset.action=g.action;b.setAttribute('aria-pressed','false');b.onclick=()=>select(g);choices.append(b);}document.querySelector('#size').onclick=function(){const large=this.getAttribute('aria-pressed')==='true';this.setAttribute('aria-pressed',String(!large));image.width=large?520:1040;image.height=large?144:288;this.textContent=large?'Escala nativa: 60 px de altura':'Tamanho previsto em FHD: 120 px de altura';};select(groups[0]);</script></html>'''
     (HERE/'index.html').write_bytes(page.replace('__DATA__',data).encode('utf-8'))
 

@@ -1,0 +1,127 @@
+{
+  "baseline_commit": "9c2e51ec",
+  "unchanged_other_native_frames": 276,
+  "previous": [
+    {
+      "chest_width": 18,
+      "shoulder_height": 30,
+      "upper_body_width": 40,
+      "body_height": 60
+    },
+    {
+      "chest_width": 18,
+      "shoulder_height": 30,
+      "upper_body_width": 40,
+      "body_height": 60
+    },
+    {
+      "chest_width": 17,
+      "shoulder_height": 30,
+      "upper_body_width": 40,
+      "body_height": 60
+    },
+    {
+      "chest_width": 16,
+      "shoulder_height": 30,
+      "upper_body_width": 40,
+      "body_height": 60
+    },
+    {
+      "chest_width": 16,
+      "shoulder_height": 29,
+      "upper_body_width": 40,
+      "body_height": 59
+    },
+    {
+      "chest_width": 16,
+      "shoulder_height": 29,
+      "upper_body_width": 40,
+      "body_height": 59
+    },
+    {
+      "chest_width": 16,
+      "shoulder_height": 29,
+      "upper_body_width": 40,
+      "body_height": 59
+    },
+    {
+      "chest_width": 16,
+      "shoulder_height": 29,
+      "upper_body_width": 40,
+      "body_height": 59
+    }
+  ],
+  "replacement": {
+    "idle": [
+      {
+        "chest_width": 16,
+        "shoulder_height": 31,
+        "upper_body_width": 35,
+        "body_height": 60
+      },
+      {
+        "chest_width": 15,
+        "shoulder_height": 30,
+        "upper_body_width": 35,
+        "body_height": 60
+      },
+      {
+        "chest_width": 16,
+        "shoulder_height": 31,
+        "upper_body_width": 34,
+        "body_height": 60
+      }
+    ],
+    "walking": [
+      {
+        "chest_width": 16,
+        "shoulder_height": 30,
+        "upper_body_width": 34,
+        "body_height": 60
+      },
+      {
+        "chest_width": 15,
+        "shoulder_height": 30,
+        "upper_body_width": 33,
+        "body_height": 60
+      },
+      {
+        "chest_width": 16,
+        "shoulder_height": 30,
+        "upper_body_width": 34,
+        "body_height": 60
+      },
+      {
+        "chest_width": 16,
+        "shoulder_height": 30,
+        "upper_body_width": 34,
+        "body_height": 60
+      },
+      {
+        "chest_width": 16,
+        "shoulder_height": 30,
+        "upper_body_width": 34,
+        "body_height": 59
+      },
+      {
+        "chest_width": 16,
+        "shoulder_height": 30,
+        "upper_body_width": 34,
+        "body_height": 59
+      },
+      {
+        "chest_width": 15,
+        "shoulder_height": 29,
+        "upper_body_width": 34,
+        "body_height": 59
+      },
+      {
+        "chest_width": 16,
+        "shoulder_height": 30,
+        "upper_body_width": 34,
+        "body_height": 59
+      }
+    ]
+  },
+  "scope": "Screenshot pose walk_south_4; chest/arm/shoulder proportions versus all three idle poses"
+}

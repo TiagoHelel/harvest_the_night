@@ -1,0 +1,109 @@
+{
+  "baseline_commit": "9c2e51ec",
+  "idle": [
+    {
+      "id": "idle_south_1",
+      "mean_squared_error": 340.7180428134329,
+      "screen_xy": [
+        60,
+        30
+      ],
+      "native": {
+        "head_width": 43,
+        "head_height": 30,
+        "brim_width": 39,
+        "chest_width": 15,
+        "shoulder_height": 30,
+        "upper_body_width": 35,
+        "body_height": 60
+      }
+    },
+    {
+      "id": "idle_south_2",
+      "mean_squared_error": 2337.9271155033694,
+      "screen_xy": [
+        60,
+        30
+      ],
+      "native": {
+        "head_width": 43,
+        "head_height": 31,
+        "brim_width": 39,
+        "chest_width": 16,
+        "shoulder_height": 31,
+        "upper_body_width": 34,
+        "body_height": 60
+      }
+    },
+    {
+      "id": "idle_south_0",
+      "mean_squared_error": 2408.815999999986,
+      "screen_xy": [
+        60,
+        30
+      ],
+      "native": {
+        "head_width": 43,
+        "head_height": 31,
+        "brim_width": 39,
+        "chest_width": 16,
+        "shoulder_height": 31,
+        "upper_body_width": 35,
+        "body_height": 60
+      }
+    }
+  ],
+  "movement": [
+    {
+      "id": "walk_south_4",
+      "mean_squared_error": 137.78626865673422,
+      "screen_xy": [
+        26,
+        17
+      ],
+      "native": {
+        "head_width": 42,
+        "head_height": 29,
+        "brim_width": 38,
+        "chest_width": 16,
+        "shoulder_height": 29,
+        "upper_body_width": 40,
+        "body_height": 59
+      }
+    },
+    {
+      "id": "walk_south_5",
+      "mean_squared_error": 1239.520334928243,
+      "screen_xy": [
+        26,
+        17
+      ],
+      "native": {
+        "head_width": 42,
+        "head_height": 29,
+        "brim_width": 37,
+        "chest_width": 16,
+        "shoulder_height": 29,
+        "upper_body_width": 40,
+        "body_height": 59
+      }
+    },
+    {
+      "id": "walk_south_6",
+      "mean_squared_error": 1273.6520958083765,
+      "screen_xy": [
+        26,
+        17
+      ],
+      "native": {
+        "head_width": 42,
+        "head_height": 29,
+        "brim_width": 38,
+        "chest_width": 16,
+        "shoulder_height": 29,
+        "upper_body_width": 40,
+        "body_height": 59
+      }
+    }
+  ]
+}

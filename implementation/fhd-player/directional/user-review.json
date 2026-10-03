@@ -94,6 +94,17 @@
       "preview": "gifs/walk-horizontal.gif",
       "comparison": "review-stills/walk-head-comparison.gif",
       "method": "Targeted ImageGen edits preserve eight original walking poses; exact native head/brim width checked against approved idle"
+    },
+    "walking_body": {
+      "date": "2026-10-03",
+      "feedback": "ta maior que idle",
+      "reported_pose": "walk_south_4",
+      "baseline": "9c2e51ec",
+      "direction": "south",
+      "source": "walk_south-body-r1.png",
+      "status": "revised and integrated; visual validation pending",
+      "comparison": "review-stills/walk-body-comparison.gif",
+      "method": "Match upper-body arm/chest width to accepted idle; exact same 0.5 runtime draw scale; preserve all other 276 native frames"
     }
   },
   "runtime_families": [

@@ -10780,3 +10780,62 @@ Both journals are appended; queues remain 110 game and 20 sprite tasks complete.
 Existing integration authorization is used; no new approval is inferred.
 No core, controls, movement speed, project resolution, push or automation change.
 Unrelated pilot and import sidecar files remain outside this focused commit.
+
+## 2026-10-03 — Follow-up: match the reported front WALK body to idle
+
+The two user screenshots identified a remaining size mismatch. Masked pixel
+matching against actual 9c2e51ec production frames identifies idle_south_1 and
+walk_south_4; reported-size-diagnostic.json preserves the matches and source
+anatomy. Their head widths were already 43/42 and heights 60/59 native pixels.
+The walking upper body, including sleeves/hands, was 40 pixels wide versus idle
+34–35, about 14% wider; chest width alone and total height missed this drift.
+
+One targeted built-in ImageGen edit uses the current walking sheet as edit
+target and the exact approved idle as identity/proportion reference. Source:
+assets/art_source/player-fhd/directional/walk_south-body-r1.png. Prompt and call
+metadata: directional/prompts/walk_south-body-r1.*. Original generated output:
+C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-b71fded5-ebcc-461c-ae65-412d3b413e60.png.
+No native pixels were painted, no whole-sprite stretch was introduced and the
+approved idle remains unchanged. Generated legs retain eight distinct phases;
+the lower bodies of the regenerated sheet are not claimed byte-identical.
+
+New eight-frame front walking has upper-body width 33–34, blue chest 15–16,
+head width 42, brim 38, visible height 59–60. Shoulder offset is 29–30 versus
+idle 30–31: one passing pose remains one pixel outside the idle range, within
+the single-pixel animation tolerance. Build and promotion now check torso/arm
+width and shoulder proportion as well as all previous head, native scale,
+leg/boot, contact, palette, ownership and lateral RUN guards. The regression
+helper rejects all eight actual old broad poses and verifies all 276 unrelated
+native frames are byte-identical to 9c2e51ec, including every RUN and the other
+three WALK directions. Runtime importer reports 512 outputs, exactly eight
+rewritten. Fifteen other action GIFs are byte-identical. Existing 96x96 canvas,
+ground pivot and 0.5 draw scale remain unchanged.
+
+Actual preview captured 192 IDLE and 192 WALK frames at 25fps. Production
+World/PlayerView with real 30Hz Player.tick captured 1,536 FHD frames over
+24 day/night sequences, 6,168 checks, zero failures. Native contact strip,
+consecutive day/night phase montages and nearest-3x runtime crops were opened.
+The normal-speed idle/before/after production GIF uses saved baseline renderer
+frames and current exact-size crops; 768x232, 192 frames, 7.68s, without motion
+interpolation or sprite rescaling. Comparison still and explicit nearest-3x
+magnification were inspected. All six full FHD screenshots were opened under
+implementation/shots/sprites/fhd-walk-body/. An initial legacy-size capture was
+replaced by the required --fhd capture; final files are 1920x1080.
+
+The same HTML includes the new size comparison link and current WALK GIF hash
+88c114e1e239. Its fresh WALK selection and screenshot were checked in the
+existing browser tab. Sources/prompts, diagnostic, anatomy regression and
+comparison helpers are saved for reproduction. Original timed captures remain
+local, excluded from Git. Integration uses existing user authorization, while
+subjective visual validation remains pending. Queues remain 110 game and
+20 sprite tasks complete. No core, speed, camera, resolution or controls changed.
+The pre-existing project.godot input-event serialization remains outside this
+commit, along with unrelated pilot/import sidecars. No push or automation.
+
+
+Full tools/verify.py: 55 passed, zero skipped/failed, 623s (above the 300s soft
+budget), including 125 parsed scripts, 7,768 core assertions, 1,006 input cases
+and both exports. Sim/data hashes remain 1270427719 / 8148086. Evidence logs:
+directional/walk-body-{diagnostic,source,promotion,import,godot-import,qa-import,
+check,preview-capture,runtime-capture,encode,comparison,shots,verify}.log.
+Sprite queue and final journal checks also pass; no queue statuses changed.

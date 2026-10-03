@@ -322,7 +322,7 @@
       "flip_horizontal": true
     },
     {
-      "id": "walk_south-head-r1",
+      "id": "walk_south-body-r1",
       "animation": "walk_south",
       "action": "walk",
       "direction": "south",

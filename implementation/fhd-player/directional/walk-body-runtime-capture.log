@@ -1,0 +1,28 @@
+Godot Engine v4.7.1.stable.official.a13da4feb - https://godotengine.org
+OpenGL API 3.3.0 Core Profile Context 22.20.27.09.230330 - Compatibility - Using Device: ATI Technologies Inc. - AMD Radeon (TM) Graphics
+
+CONTACT day_idle_south: (928.0, 540.0)
+CONTACT day_idle_west: (928.0, 540.0)
+CONTACT day_idle_north: (928.0, 540.0)
+CONTACT day_idle_east: (928.0, 540.0)
+CONTACT day_walk_south: (928.0, 544.0)
+CONTACT day_walk_west: (920.0, 540.0)
+CONTACT day_walk_north: (928.0, 532.0)
+CONTACT day_walk_east: (932.0, 540.0)
+CONTACT day_run_south: (928.0, 544.0)
+CONTACT day_run_west: (920.0, 540.0)
+CONTACT day_run_north: (928.0, 532.0)
+CONTACT day_run_east: (932.0, 540.0)
+CONTACT night_idle_south: (928.0, 540.0)
+CONTACT night_idle_west: (928.0, 540.0)
+CONTACT night_idle_north: (928.0, 540.0)
+CONTACT night_idle_east: (928.0, 540.0)
+CONTACT night_walk_south: (928.0, 544.0)
+CONTACT night_walk_west: (920.0, 540.0)
+CONTACT night_walk_north: (928.0, 532.0)
+CONTACT night_walk_east: (932.0, 540.0)
+CONTACT night_run_south: (928.0, 544.0)
+CONTACT night_run_west: (920.0, 540.0)
+CONTACT night_run_north: (928.0, 532.0)
+CONTACT night_run_east: (932.0, 540.0)
+FHD RUNTIME CAPTURE: 6168 checks, 0 failed
