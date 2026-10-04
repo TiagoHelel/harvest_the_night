@@ -2095,3 +2095,34 @@ The final movement is awaiting the explicit review requested by the user. Other
 rotations/directions are planned, not generated. No runtime assets, game code,
 queues or project.godot were modified; no game integration, game test suite or
 export run was performed for this isolated approval pilot.
+
+
+## 2026-10-04 — Walk-right review and user-directed leg-proportion correction
+
+Recorded explicit walk-down approval ("lindo, perfeito") and the user's new
+one-direction-at-a-time review requirement in the pilot directions-status.json.
+Produced right only: a standing rotation, red/cyan anatomical walk construction,
+material restoration and a head-proportion correction using built-in ImageGen.
+The user then identified thinner/longer right-facing legs than approved down.
+A targeted body revision, materials-r3.png, now uses the approved down sheet as
+the direct body reference, adding thigh/shin volume and compact leg proportions.
+All original sheets/prompts/provenance are preserved under the 2026-10-04 pilot.
+
+Primary review is implementation/fhd-player/pilots/2026-10-04/walk-right/
+down-right-comparison.gif plus index.html: unchanged approved down versus revised
+right, same integer display scales (2x proposed FHD, 4x detail), 8 frames at10fps.
+Source row split at y=498 avoids second-row hat tips crossing the nominal512px
+boundary. Native right heights63-65px, hat widths30-31px; native down62-64px.
+Reviewed original tracking chains and final pose sheet, native-size comparison,
+and browser display. Lower-shin color measurements confirm both anatomical legs
+pass forward and backward and opposite contacts exchange positions. That check
+applies to the original colored source, not a guarantee of the revised anatomy.
+Eight exported RGBA frames are distinct; saved GIF timing is8x100ms. Material
+restoration is not pixel-identical (initial silhouette IoU0.94333), and subsequent
+head/body revisions intentionally change shapes. Minor per-frame pixel/height
+variation remains; no claim of perfect anatomy or runtime validation is made.
+
+Selected right candidate remains awaiting explicit user approval. The initial
+right idle is a direction reference, not an approved replacement idle. Remaining
+six directions are not started. No runtime sprites, game code, manifests, queues
+or project.godot changed; no engine suite/export rerun for this isolated preview.

@@ -1,0 +1,47 @@
+{
+  "check": "opposite contacts and both shins travel before/behind torso",
+  "result": "PASS",
+  "measurements": [
+    {
+      "frame": 1,
+      "near_red_lower_shin_x_from_hat_center": 49.7,
+      "far_cyan_lower_shin_x_from_hat_center": -76.09
+    },
+    {
+      "frame": 2,
+      "near_red_lower_shin_x_from_hat_center": 36.15,
+      "far_cyan_lower_shin_x_from_hat_center": -57.54
+    },
+    {
+      "frame": 3,
+      "near_red_lower_shin_x_from_hat_center": -19.88,
+      "far_cyan_lower_shin_x_from_hat_center": -42.23
+    },
+    {
+      "frame": 4,
+      "near_red_lower_shin_x_from_hat_center": -67.83,
+      "far_cyan_lower_shin_x_from_hat_center": 89.76
+    },
+    {
+      "frame": 5,
+      "near_red_lower_shin_x_from_hat_center": -85.54,
+      "far_cyan_lower_shin_x_from_hat_center": 76.12
+    },
+    {
+      "frame": 6,
+      "near_red_lower_shin_x_from_hat_center": -44.79,
+      "far_cyan_lower_shin_x_from_hat_center": 34.82
+    },
+    {
+      "frame": 7,
+      "near_red_lower_shin_x_from_hat_center": 5.21,
+      "far_cyan_lower_shin_x_from_hat_center": -2.16
+    },
+    {
+      "frame": 8,
+      "near_red_lower_shin_x_from_hat_center": 53.51,
+      "far_cyan_lower_shin_x_from_hat_center": -64.69
+    }
+  ],
+  "limitation": "Color segmentation measures lower-shin motion, not boot material or complete anatomical correctness. Boots are not consistently tracking-colored in the generated source."
+}

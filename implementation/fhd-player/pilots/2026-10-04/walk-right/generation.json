@@ -1,0 +1,61 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-04",
+  "status": "awaiting user approval after leg-proportion correction",
+  "transparent_background": true,
+  "source_directory": "assets/art_source/player-fhd/pilots/2026-10-04/walk-right",
+  "calls": [
+    {
+      "prompt": "rotation-r1.prompt.txt",
+      "references": [
+        "assets/art_source/player-fhd/pilots/2026-10-04/character-r1.png"
+      ],
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-f07f7355-02fd-4579-85c3-12f09f16f1c9.png",
+      "source": "rotation-r1.png",
+      "review": "Full standing right profile, one visible eye, consistent identity and slender proportions. Used as direction reference before animation."
+    },
+    {
+      "prompt": "tracking-r1.prompt.txt",
+      "references": [
+        "rotation-r1.png",
+        "implementation/fhd-player/pilots/2026-10-04/walk-right/leg-ownership-guide.png"
+      ],
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-024e8c1f-baea-4aac-a680-73af3561c63b.png",
+      "source": "tracking-r1.png",
+      "review": "Near red and far cyan trousers maintain hip ownership and exchange forward/backward positions. Boots are partly brown already, so diagnostic colors are not complete boot masks. Inspected complete chains and opposite contacts; lower-shin travel check passes."
+    },
+    {
+      "prompt": "materials-r1.prompt.txt",
+      "references": [
+        "tracking-r1.png",
+        "rotation-r1.png"
+      ],
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-a2ae75bf-e2cf-448a-b4d8-32e92064cfe8.png",
+      "source": "materials-r1.png",
+      "review": "Materials restored and gait retained, but equal-height idle/walk preview exposed a smaller walking head/hat. Preserved for provenance; targeted head-proportion revision requested. Silhouette IoU versus tracking 0.94333, not pixel-identical."
+    },
+    {
+      "prompt": "materials-r2.prompt.txt",
+      "references": [
+        "materials-r1.png",
+        "rotation-r1.png"
+      ],
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-d41cbc3a-ef59-4bd1-b70e-0ea991dd4c7d.png",
+      "source": "materials-r2.png",
+      "review": "Head/hat proportion corrected; second-row hats cross nominal 512px cut, so an empty-gutter cut at 498px is required for this source. User then identified that right-facing legs were thinner and longer than approved down. Superseded pending a body-proportion correction against approved down directly."
+    },
+    {
+      "prompt": "materials-r3.prompt.txt",
+      "references": [
+        "materials-r2.png",
+        "assets/art_source/player-fhd/pilots/2026-10-04/walk-down/materials-r1.png"
+      ],
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-cf915bbb-6fb5-4d77-bfa7-55d36b3c34a3.png",
+      "source": "materials-r3.png",
+      "review": "User-directed correction: fuller thighs/shins, more compact leg proportion, preserved opposing walk phases. Direct approved-down comparison added. Inspected at native-derived 2x and 4x scales. Awaiting explicit approval."
+    }
+  ],
+  "user_feedback": "as pernas do wlaking right estao masi magras e compridas que walking down (original)",
+  "next_revision_reason": "User-directed correction: fuller and shorter legs matched to approved walk-down. Keep this direction pending; do not start another.",
+  "selected_source": "materials-r3.png"
+}

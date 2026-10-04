@@ -1,0 +1,141 @@
+{
+  "status": "awaiting user review; not integrated",
+  "frames": 8,
+  "fps": 10,
+  "canvas": [
+    80,
+    80
+  ],
+  "selected_source": "materials-r3.png",
+  "source_row_cuts": [
+    0,
+    498,
+    1024
+  ],
+  "native_target_height": 64,
+  "fhd_display_scale": 2,
+  "common_source_scale": 0.13646055437100213,
+  "idle_bbox": [
+    25,
+    8,
+    54,
+    72
+  ],
+  "frames_metrics": [
+    {
+      "frame": 1,
+      "bbox": [
+        22,
+        8,
+        56,
+        71
+      ],
+      "height": 63,
+      "hat_region_width": 30,
+      "sha256": "77be0febbabec0778379f4eaabf99185466d2bd0da76d379c4e40eb539b78c79"
+    },
+    {
+      "frame": 2,
+      "bbox": [
+        24,
+        8,
+        55,
+        71
+      ],
+      "height": 63,
+      "hat_region_width": 30,
+      "sha256": "ed9fcf628b934e4349c4e02dbd1f6284eb106097fef899022461d549c39a3871"
+    },
+    {
+      "frame": 3,
+      "bbox": [
+        24,
+        8,
+        54,
+        71
+      ],
+      "height": 63,
+      "hat_region_width": 30,
+      "sha256": "59d59a9ac7fd50595e45b1008221b7ebece12c1ce324369edf7bd54a2193a469"
+    },
+    {
+      "frame": 4,
+      "bbox": [
+        22,
+        8,
+        60,
+        71
+      ],
+      "height": 63,
+      "hat_region_width": 30,
+      "sha256": "c441b4c77fc62532939e2f0e650d862621b548b2ec8b3b78296a257848b33d8e"
+    },
+    {
+      "frame": 5,
+      "bbox": [
+        20,
+        8,
+        58,
+        73
+      ],
+      "height": 65,
+      "hat_region_width": 31,
+      "sha256": "62edb3d3429782d136bbb6c852ed4699c6551cc38853e14e0b7b18e925541ad7"
+    },
+    {
+      "frame": 6,
+      "bbox": [
+        24,
+        8,
+        55,
+        73
+      ],
+      "height": 65,
+      "hat_region_width": 31,
+      "sha256": "2deb1fe6a4d7d88b5687dc777dd7a52b3bb03b1d99baad1f10d2f070243342ad"
+    },
+    {
+      "frame": 7,
+      "bbox": [
+        24,
+        8,
+        55,
+        72
+      ],
+      "height": 64,
+      "hat_region_width": 31,
+      "sha256": "23e6c47c30c6ff3a8c5c95420ec5d4f4d435b720497e2990ddfeb9e2aa5b3c29"
+    },
+    {
+      "frame": 8,
+      "bbox": [
+        21,
+        8,
+        59,
+        72
+      ],
+      "height": 64,
+      "hat_region_width": 31,
+      "sha256": "4f516284ede7940ac4d024e2d7b4d9e10964f839b64bdc169194593ba4f16d4f"
+    }
+  ],
+  "source_alpha_threshold": 128,
+  "resample": "nearest",
+  "anchor": "hat center and fixed head top",
+  "limitations": [
+    "Prototype display size, not yet rendered inside the game.",
+    "Material restoration is not pixel-identical; later revisions correct head and leg proportions."
+  ],
+  "idle_hat_region_width": 29,
+  "material_restoration_silhouette_iou": 0.943334877717841,
+  "gif_frame_durations_ms": [
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100
+  ]
+}

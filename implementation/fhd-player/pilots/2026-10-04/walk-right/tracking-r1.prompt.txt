@@ -1,0 +1,17 @@
+Create an eight-frame WALK RIGHT sprite sheet using image 1 as the EXACT right-facing farmer identity and standing proportions. Image 2 is ONLY a right-facing anatomical gait diagram. Keep the camera and farmer facing screen RIGHT in every frame. Keep exact same narrow/slim torso, long legs, shallow straw hat, brown hair, single ivory-white eye with dark pupil looking right, cream sleeves, blue overall bib, ochre buttons. Same head/body ratio and size as the standing reference. Do not turn toward camera.
+
+DIAGNOSTIC LEG MATERIALS: the NEAR anatomical RIGHT leg, closest to viewer, is RED from its own hip through thigh, knee and shin to a DARK RED boot. The FAR anatomical LEFT leg is CYAN from its own hip through thigh, knee and shin to a DARK CYAN boot. Rolled cuffs distinct. Both chains stay connected to the same hip throughout; NEVER exchange colors to fake alternating legs. Near RED leg is drawn IN FRONT of far CYAN leg wherever they cross, INCLUDING frames 5-7 when red leg is BEHIND the body in the walking direction. Blue bib stays blue, all upper body colors normal.
+
+Exactly 8 complete unique sprites in a regular 4 columns x 2 rows grid. Output 1536x1024 transparent RGBA; equal384x512cells, each body approx430px tall. Shared head scale, camera, torso size, center and ground plane. Regular relaxed walking to right IN PLACE, moderate stride, no sprint, no jumping, no excessive high knee lift. At least one boot supports on the ground throughout. Each leg must visibly move from behind the hips (screen LEFT), pass beneath hips, and reach in front of hips (screen RIGHT) once per loop. Both legs actively swing, not one rigid trailing leg. Knee flexion is anatomically continuous. Grounded foot moves backward relative to fixed torso. Opposite arms swing: red/right near arm BACK when red near leg is forward, near arm FORWARD when red near leg is back. Head steady, at most tiny vertical bob, NO head enlargement or tilt.
+
+Read frames left to right then top to bottom:
+1 near RED foot contacts FRONT/screen-right, far CYAN foot at REAR/screen-left toe off. Near arm back.
+2 near RED supports and begins moving under body; far CYAN rear knee flexes, heel lifts.
+3 near RED straight support leg under hip; far CYAN bent knee passes FORWARD, cyan lifted boot below/behind knee. Two connected legs, red occludes crossing.
+4 near RED trails back, far CYAN reaches front with heel about to contact.
+5 far CYAN foot contacts FRONT/screen-right, near RED foot at REAR/screen-left toe off; RED leg clearly slopes BACK from near hip and stays foreground. Near arm forward.
+6 far CYAN supports under body; near RED rear knee flexes, heel lifts behind.
+7 far CYAN straight support leg under hip; near RED bent knee passes FORWARD over the cyan support leg.
+8 far CYAN trails back; near RED reaches front/screen-right, joins frame1 smoothly.
+
+Pixel art same style as reference; constant square pixel clusters, flat controlled color ramps. No extra character redesign, no floor, cast shadows, glows, background objects, numbers, labels, cell borders or grid lines. Actual transparent alpha around each full body, no cropped hats or feet.

@@ -1,0 +1,33 @@
+{
+  "order": [
+    "down",
+    "right",
+    "up",
+    "left",
+    "down-right",
+    "up-right",
+    "up-left",
+    "down-left"
+  ],
+  "review_policy": "One completed direction per turn, then explicit user approval before the next.",
+  "walk_down": {
+    "status": "approved",
+    "user_feedback": "lindo, perfeito",
+    "date": "2026-10-04"
+  },
+  "walk_right": {
+    "status": "awaiting_approval",
+    "candidate": "walk-right/materials-r3",
+    "feedback_addressed": "thinner and longer legs than approved down",
+    "preview": "walk-right/down-right-comparison.gif"
+  },
+  "remaining": [
+    "up",
+    "left",
+    "down-right",
+    "up-right",
+    "up-left",
+    "down-left"
+  ],
+  "runtime_integration": "not requested at this review stage"
+}
