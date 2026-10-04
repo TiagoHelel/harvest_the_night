@@ -10839,3 +10839,20 @@ and both exports. Sim/data hashes remain 1270427719 / 8148086. Evidence logs:
 directional/walk-body-{diagnostic,source,promotion,import,godot-import,qa-import,
 check,preview-capture,runtime-capture,encode,comparison,shots,verify}.log.
 Sprite queue and final journal checks also pass; no queue statuses changed.
+
+
+## 2026-10-04 — Preview: original farmer and clothing-layer direction
+
+The user requested a Stardew Valley-like original character and asked whether
+each clothing item needs sprites. One built-in ImageGen design pilot is saved
+at assets/art_source/player-fhd/pilots/2026-10-04/character-r1.png; exact prompt,
+call provenance and layering notes are in implementation/fhd-player/pilots/2026-10-04/.
+The inspected source is RGBA 1086x1448 with transparency. It is a large visual
+master, not a verified native 48px sprite or a runtime replacement. Native-grid
+conversion, animation and wearable layers are not claimed complete. The current
+Body Sprite2D uses one complete texture per pose; distinct clothes would need
+aligned layers, with palette reuse for colour variants and per-pose occlusion.
+No game code, runtime art or manifests changed. This isolated preview was
+visually inspected and checked for PNG/alpha integrity; no game test suite or
+export was rerun. Existing project.godot changes remain untouched. Queues remain
+complete, and the pilot is not recorded as new finished sprite production.

@@ -1,0 +1,12 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-04",
+  "purpose": "Original farming RPG character design pilot and clothing-layer discussion",
+  "status": "preview only; not integrated or native-pixel certified",
+  "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-f76d22b7-1586-4237-9d0f-d3e376d0f906.png",
+  "workspace_source": "assets/art_source/player-fhd/pilots/2026-10-04/character-r1.png",
+  "prompt_file": "implementation/fhd-player/pilots/2026-10-04/character-r1.prompt.txt",
+  "transparent_background": true,
+  "references": [],
+  "review": "Complete front idle farmer on alpha, slimmer/longer body than the existing mascot; source is a large design master, not a tested 48-pixel runtime sprite."
+}
