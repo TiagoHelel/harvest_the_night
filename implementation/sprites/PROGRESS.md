@@ -2230,3 +2230,19 @@ comparison is available beside normal material. Corrected DOWN-RIGHT awaits
 explicit approval; up-right, up-left and down-left remain. No runtime assets,
 engine code or queue status changed; unrelated project.godot edit preserved.
 No engine suite/export rerun for this isolated art pilot, no in-game claim.
+
+
+## 2026-10-04 — Horizontal preview of all current farmer walks
+
+The user requested one horizontal GIF with everything created so far in the
+current directional walk review. Composed unchanged native frames for down,
+right, up, left and latest corrected down-right in one row at matching integer
+2x display, eight100ms frames (10fps), looping. Saved
+implementation/fhd-player/pilots/2026-10-04/all-walk-directions.gif, poster,
+build_all_directions_preview.py and input-hash validation JSON. Shared palette
+and nearest sampling retain crisp display. Inspected the full horizontal poster;
+verified five80x80 input families, output1040x330, eightframes,100ms cadence and
+infinite loop. Down-right remains awaiting approval, labeled IN REVIEW; the
+other four stay APPROVED. No new art generated, native frames edited, direction
+approvals inferred or subsequent directions started. No runtime/queue changes;
+project.godot edit remains untouched. No engine suite was rerun for GIF assembly.
