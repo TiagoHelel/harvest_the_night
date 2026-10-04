@@ -1,0 +1,17 @@
+Use case: identity-preserve.
+Asset type: exact eight-frame WALK DOWN-RIGHT pixel-art farmer diagnostic atlas.
+Image1 is the new standing three-quarter front-right character master and strict camera/identity authority. Image2 is ONLY a colored anatomy/phase schematic, not an artwork/style reference. Image3 is approved down body-proportion reference.
+Keep this exact farmer and permanent three-quarter DOWN-RIGHT/southeast view in every frame: visible front bib and near side, both ivory eyes foreshortened appropriately, pupils same gaze, straw hat, chestnut hair, cream sleeves, blue overall bib. Constant head/hat/body ratios and full compact thick trouser legs, no thin long legs. No turn toward pure side or front during cycle.
+Temporary leg MATERIALS only: whole anatomical RIGHT hip-thigh-knee-shin-cuff-BOOT chain RED (boot dark red), on the NEAR side SCREEN LEFT/down. Whole anatomical LEFT leg CYAN (boot dark cyan), FAR side SCREEN RIGHT/up. Near red chain may occlude far cyan, but NEVER recolor or swap chain ownership during the loop. Blue bib unchanged. Colored whole boot and cuff boundary remain legible. Both complete chains stay attached to their own pelvis side.
+Walk in place towards DOWN AND RIGHT, NOT sideways right and NOT straight towards viewer: foreshortened diagonally projected steps, modest stride. Forward foot travels right/down relative to its own hip; trailing foot travels left/up. Both feet alternately planted and visibly recovering with bent knees and raised heels. Arms counter-swing, both participate. Minimal vertical head bob, no head rotation, no squash/stretch. Do not move the whole character sideways within cells.
+Exactly8 distinct complete figures in4 columns by2 rows, 1536x1024 transparent RGBA, 384x512cells, read left to right then next row. Standing pose height about450px per cell, generous margins, no overlap or cropped hats/boots. Same pose scale, torso placement/head center, implied ground plane.
+Frame1: red/right NEAR leg contacts FORWARD down-right; cyan/far leg behind up-left, heel raised. Near arm backward, far arm forward.
+Frame2: red/right planted bears weight; cyan/far bent knee begins recovery behind with clearly raised boot. Arms transition, no identity change.
+Frame3: red/right supports under own hip; cyan/far bent knee PASSES forward down-right, boot visibly lifted/foreshortened.
+Frame4: cyan/far reaches FORWARD down-right, red/near trails up-left. Near arm swings forward, far arm back.
+Frame5: opposite contact: cyan/far leg contacts FORWARD down-right; red/near leg BEHIND up-left with heel raised. Near arm forward, far arm back.
+Frame6: cyan/far planted bears weight; red/near bent knee begins recovery behind, red boot lifted.
+Frame7: cyan/far supports under own hip; red/near bent knee PASSES forward down-right with clearly lifted foreshortened boot.
+Frame8: red/near reaches FORWARD down-right, cyan/far trails up-left. Arms exchange into frame1.
+Do not leave either boot planted through the entire loop. Two true half-cycles, each leg takes its own turn supporting and recovering. Smooth eight-to-one closure.
+Style exactly like reference pixel art, clean square pixel clusters and limited color ramps, no painting, blur or gradients. Genuine transparent alpha, no floor/shadow/text/grid/labels/props/extra figures.

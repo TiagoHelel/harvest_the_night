@@ -1,0 +1,137 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-04",
+  "status": "awaiting user approval of down-right only",
+  "selected_source": "materials-r2.png",
+  "source_directory": "assets/art_source/player-fhd/pilots/2026-10-04/walk-down-right",
+  "transparent_background": true,
+  "user_rejections": [
+    "legs did not alternate",
+    "only right leg remained forward",
+    "still same leg"
+  ],
+  "workflow_reference": "sprite_generator/welcome_back_hero/prepare_ranger_transition.py: separate contacts, two four-frame transitions, fixed hip color ownership",
+  "derived_source": "tracking-r4.png is lossless cuts/packing of transition-a-r1 and transition-b-r2; no painting, reflection or scaling",
+  "guide_history": "First two tracking calls used the guide without hip markers; that deterministic original is reconstructed as leg-ownership-guide-r1.png. Later calls use current guide with hip markers.",
+  "actual_sources": {
+    "tracking-r4": [
+      2508,
+      1254
+    ],
+    "materials-r2": [
+      1774,
+      887
+    ]
+  },
+  "limitations": [
+    "User approval remains pending. Automated color checks assist review but do not prove complete anatomical correctness.",
+    "Only art previews; no game runtime or engine validation."
+  ],
+  "calls": [
+    {
+      "prompt": "rotation-r1.prompt.txt",
+      "references": [
+        "approved-down-reference.png",
+        "approved-right-reference.png"
+      ],
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-3f1917ed-4fa1-44df-a7a0-15dbdf1dea04.png",
+      "source": "rotation-r1.png",
+      "review": "Standing front-right direction and proportion master."
+    },
+    {
+      "prompt": "tracking-r1.prompt.txt",
+      "references": [
+        "rotation-r1.png",
+        "leg-ownership-guide.png",
+        "approved-down-reference.png"
+      ],
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-5ad1895e-abd7-4e54-9f2f-810ef40851ba.png",
+      "source": "tracking-r1.png",
+      "review": "Rejected: nearly frozen arms and premature grounded near leg on frame7. User also reported no leg alternation."
+    },
+    {
+      "prompt": "tracking-r2.prompt.txt",
+      "references": [
+        "tracking-r1.png",
+        "leg-ownership-guide.png"
+      ],
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-6192390d-5fd3-4b0d-8366-ca353624192a.png",
+      "source": "tracking-r2.png",
+      "review": "Arms/recovery improved, but contact leg identity remained visually ambiguous."
+    },
+    {
+      "prompt": "materials-r1.prompt.txt",
+      "references": [
+        "tracking-r2.png",
+        "approved-down-reference.png",
+        "rotation-r1.png"
+      ],
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-e5c27430-67e8-4133-aec0-c93555c484d0.png",
+      "source": "materials-r1.png",
+      "review": "Rejected by user: only right leg stayed forward. Head calibration succeeded, but leg silhouettes were repeated."
+    },
+    {
+      "prompt": "tracking-r3.prompt.txt",
+      "references": [
+        "materials-r1.png",
+        "leg-ownership-guide.png"
+      ],
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-d03bb65b-9997-4049-9cea-0fe4dc0a1ab3.png",
+      "source": "tracking-r3.png",
+      "review": "Rejected by user again: same leg. Colored endpoint displacement alone did not prove fixed hip ownership."
+    },
+    {
+      "prompt": "contact-05-r1.prompt.txt",
+      "references": [
+        "contact-01-reference.png",
+        "contact-05-guide.png"
+      ],
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-f2940330-6de5-40df-a1de-08cb094159db.png",
+      "source": "contact-05-r1.png",
+      "review": "New isolated opposite contact: near red thigh visibly back left, far cyan thigh grounded forward right, separate hip roots."
+    },
+    {
+      "prompt": "transition-a-r1.prompt.txt",
+      "references": [
+        "contact-01-reference.png",
+        "contact-05-r1.png",
+        "transition-a-guide.png"
+      ],
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-cbbe43eb-fcbc-4460-a2c5-5c53c7330072.png",
+      "source": "transition-a-r1.png",
+      "review": "Four-phase first half referenced to both contacts."
+    },
+    {
+      "prompt": "transition-b-r1.prompt.txt",
+      "references": [
+        "contact-05-r1.png",
+        "contact-01-reference.png",
+        "transition-b-guide.png"
+      ],
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-67ddf0d9-e1ce-48e8-b065-70f21ebefecf.png",
+      "source": "transition-b-r1.png",
+      "review": "Rejected internally: extra red shin in frame6 and missing arm counter-swing."
+    },
+    {
+      "prompt": "transition-b-r2.prompt.txt",
+      "references": [
+        "transition-b-r1.png",
+        "contact-05-r1.png",
+        "transition-b-guide.png"
+      ],
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-f0e503fc-60e4-4e5c-931c-427e57916e0d.png",
+      "source": "transition-b-r2.png",
+      "review": "Removed extra shin; only two leg chains. Near thigh visibly retreats in contacts5/6; arms exchange."
+    },
+    {
+      "prompt": "materials-r2.prompt.txt",
+      "references": [
+        "tracking-r4.png",
+        "rotation-r1.png"
+      ],
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-2d1e685b-ae59-4988-be77-d05d53a455e4.png",
+      "source": "materials-r2.png",
+      "review": "Selected for user review: lighter near thigh retreats left in4-6; darker far thigh supports right, both recovery poses retained. Uniform head calibration requested; exported hats31-32px. Recoloring not pixel-identical."
+    }
+  ]
+}

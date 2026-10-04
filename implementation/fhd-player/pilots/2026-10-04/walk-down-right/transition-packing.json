@@ -1,0 +1,93 @@
+{
+  "operation": "lossless crop and pack; no painting, reflection or rescaling",
+  "cells": [
+    {
+      "frame": 1,
+      "half": "a",
+      "cell": 1,
+      "bbox": [
+        150,
+        55,
+        507,
+        610
+      ]
+    },
+    {
+      "frame": 2,
+      "half": "a",
+      "cell": 2,
+      "bbox": [
+        150,
+        59,
+        493,
+        613
+      ]
+    },
+    {
+      "frame": 3,
+      "half": "a",
+      "cell": 3,
+      "bbox": [
+        157,
+        33,
+        509,
+        591
+      ]
+    },
+    {
+      "frame": 4,
+      "half": "a",
+      "cell": 4,
+      "bbox": [
+        168,
+        33,
+        542,
+        591
+      ]
+    },
+    {
+      "frame": 5,
+      "half": "b",
+      "cell": 1,
+      "bbox": [
+        179,
+        56,
+        499,
+        607
+      ]
+    },
+    {
+      "frame": 6,
+      "half": "b",
+      "cell": 2,
+      "bbox": [
+        172,
+        56,
+        472,
+        609
+      ]
+    },
+    {
+      "frame": 7,
+      "half": "b",
+      "cell": 3,
+      "bbox": [
+        170,
+        25,
+        507,
+        586
+      ]
+    },
+    {
+      "frame": 8,
+      "half": "b",
+      "cell": 4,
+      "bbox": [
+        132,
+        25,
+        489,
+        586
+      ]
+    }
+  ]
+}

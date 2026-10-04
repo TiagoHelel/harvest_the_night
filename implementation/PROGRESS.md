@@ -10976,3 +10976,47 @@ and browser display; HTML Next advances Frame 1 to Frame 2. Left awaits explicit
 user approval. Four diagonals remain. No runtime assets, game code or queue
 statuses changed. Unrelated project.godot edit remains untouched. No engine
 suite/export rerun for this isolated approval pilot; no in-game playback claimed.
+
+
+## 2026-10-04 — Approved left; corrected walk down-right for review
+
+The user approved LEFT ("perfeito, proximo"). Produced DOWN-RIGHT only using
+built-in ImageGen, preserving the one-direction approval policy. Established a
+standing diagonal master from approved down/right first-cell crops. Earlier
+full-atlas tracking/recolor attempts repeated the foreground leg silhouette;
+the user rejected these during work three times. Colored endpoint displacement
+alone passed while ownership was wrong, so those checks were not treated as
+approval. Saved all rejected sources and prompts. Explicit user corrections
+required further targeted revisions beyond the initial atlas attempts.
+
+Applied sprite_generator/welcome_back_hero/prepare_ranger_transition.py's
+contact-anchor workflow: created one isolated opposite contact with near thigh
+back left and far thigh forward right, then two four-frame transitions. First
+B half invented an extra shin; targeted B-R2 removed it and restored arm
+counter-swing. pack_transitions.py losslessly cuts/packs A-R1 and B-R2 into
+tracking-r4 (2508x1254), without repainting/reflection/rescaling. Selected
+materials-r2 restores consistent lighter near denim, shadowed far denim and
+brown boots, with uniform head-size calibration. Generated canvas1774x887 is
+cut using rounded quarters/halves inside transparent gutters. Sources live at
+assets/art_source/player-fhd/pilots/2026-10-04/walk-down-right/. Prompts, call
+provenance, skeleton guides and repeatable exports live at
+implementation/fhd-player/pilots/2026-10-04/walk-down-right/.
+
+Eight native 80x80 frames, transparent strip, contact sheet, idle/walk GIF,
+colored-leg slow GIF and HTML controls saved. Main horizontal
+down-diagonal-comparison.gif compares unchanged approved down and corrected
+candidate at integer 2x proposed FHD display and 4x detail. Native heights
+62-65px, hats31-32px, standing diagonal hat31px. One common scale per source
+family across all poses, hard alpha128 and nearest sampling. R4 color checks
+cover opposite diagonal displacements, both recovery poses3/7 and separate
+forward-foot positions at contacts1/5 (36.84px separation normalized to384px
+cell width). These are review aids, not proof of perfect anatomical motion.
+Material/head changes are not pixel-identical: native silhouette IoU0.81532.
+
+Validation: eight unique frame hashes, all three GIFs eight frames with expected
+100/100/200ms timing. Inspected complete contact sheet, equal-scale poster,
+corrected limb chains and browser playback. HTML Next reaches Frame5; slow
+comparison is available beside normal material. Corrected DOWN-RIGHT awaits
+explicit approval; up-right, up-left and down-left remain. No runtime assets,
+engine code or queue status changed; unrelated project.godot edit preserved.
+No engine suite/export rerun for this isolated art pilot, no in-game claim.

@@ -24,7 +24,6 @@
     "date": "2026-10-04"
   },
   "remaining": [
-    "down-right",
     "up-right",
     "up-left",
     "down-left"
@@ -38,8 +37,18 @@
     "date": "2026-10-04"
   },
   "walk_left": {
-    "status": "awaiting_approval",
+    "status": "approved",
     "candidate": "walk-left/materials-r2",
-    "preview": "walk-left/right-left-comparison.gif"
+    "preview": "walk-left/right-left-comparison.gif",
+    "user_feedback": "perfeito, proximo",
+    "date": "2026-10-04"
+  },
+  "walk_down_right": {
+    "status": "awaiting_approval",
+    "user_feedback": "only the right leg remains forward; fix fixed hip ownership",
+    "rejected_candidate": "walk-down-right/materials-r1",
+    "candidate": "walk-down-right/materials-r2",
+    "preview": "walk-down-right/down-diagonal-comparison.gif",
+    "diagnostic": "walk-down-right/leg-tracking-slow.gif"
   }
 }

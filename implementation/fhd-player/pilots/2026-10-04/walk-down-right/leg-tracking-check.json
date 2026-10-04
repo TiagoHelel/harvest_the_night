@@ -1,0 +1,117 @@
+{
+  "opposite_forward_boot_x_separation_at_384_cell_scale": 36.84,
+  "check": "opposite diagonal contacts and both recovery phases",
+  "result": "PASS",
+  "checks": {
+    "near_red": {
+      "contact_displacement_forward_xy": [
+        151.43,
+        75.71
+      ],
+      "moves_right_and_down": true
+    },
+    "far_cyan": {
+      "contact_displacement_forward_xy": [
+        193.81,
+        61.89
+      ],
+      "moves_right_and_down": true
+    }
+  },
+  "passing_checks": {
+    "far_boot_lifted_on_frame3": true,
+    "near_boot_lifted_on_frame7": true,
+    "opposite_forward_boot_uses_other_side": true
+  },
+  "measurements": [
+    {
+      "frame": 1,
+      "near_red": [
+        31.45,
+        527.41
+      ],
+      "far_cyan": [
+        -102.2,
+        459.69
+      ]
+    },
+    {
+      "frame": 2,
+      "near_red": [
+        7.25,
+        526.29
+      ],
+      "far_cyan": [
+        -101.93,
+        451.85
+      ]
+    },
+    {
+      "frame": 3,
+      "near_red": [
+        -7.37,
+        526.54
+      ],
+      "far_cyan": [
+        66.64,
+        457.55
+      ]
+    },
+    {
+      "frame": 4,
+      "near_red": [
+        -125.7,
+        467.42
+      ],
+      "far_cyan": [
+        126.13,
+        523.91
+      ]
+    },
+    {
+      "frame": 5,
+      "near_red": [
+        -119.98,
+        451.7
+      ],
+      "far_cyan": [
+        91.61,
+        521.58
+      ]
+    },
+    {
+      "frame": 6,
+      "near_red": [
+        -108.33,
+        452.71
+      ],
+      "far_cyan": [
+        73.82,
+        522.04
+      ]
+    },
+    {
+      "frame": 7,
+      "near_red": [
+        54.75,
+        436.95
+      ],
+      "far_cyan": [
+        27.71,
+        529.14
+      ]
+    },
+    {
+      "frame": 8,
+      "near_red": [
+        84.58,
+        526.2
+      ],
+      "far_cyan": [
+        -102.5,
+        462.45
+      ]
+    }
+  ],
+  "limitation": "Lower-leg color displacement assists visual review; does not prove joint anatomy, planted-foot timing or restored-material fidelity."
+}
