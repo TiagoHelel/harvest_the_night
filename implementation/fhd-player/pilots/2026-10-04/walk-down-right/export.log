@@ -6,12 +6,13 @@
     80,
     80
   ],
-  "selected_source": "materials-r3.png",
+  "selected_source": "materials-r5.png",
   "source_row_cuts": [
     0,
     444,
     887
   ],
+  "scale_reference": "materials-r3.png; retained across lower-body corrections",
   "native_target_height": 64,
   "fhd_display_scale": 2,
   "common_source_scale": 0.1702127659574468,
@@ -29,11 +30,11 @@
         17,
         8,
         58,
-        72
+        70
       ],
-      "height": 64,
-      "hat_region_width": 32,
-      "sha256": "d56e2d7457b71b3f7af74648b38385d0e1cf819157c606c4b1316009da3bb00b"
+      "height": 62,
+      "hat_region_width": 33,
+      "sha256": "17907464a2ffa2de7322d3bc3d259b5f5ce7d2ae566ad472b154c8d31503b041"
     },
     {
       "frame": 2,
@@ -41,59 +42,59 @@
         18,
         8,
         57,
-        72
+        70
       ],
-      "height": 64,
-      "hat_region_width": 31,
-      "sha256": "034d350d851abe5967eba1bed219eda94373f29a5e5ffbb56d58083194996bb8"
+      "height": 62,
+      "hat_region_width": 32,
+      "sha256": "50bb55101fd4f12b6fe8042d0d37d975e12acd596320f0a5a8a4e2864dcdf7b2"
     },
     {
       "frame": 3,
       "bbox": [
-        19,
+        17,
         8,
-        58,
-        73
-      ],
-      "height": 65,
-      "hat_region_width": 32,
-      "sha256": "a8ac2771f2f4cd2e60dbf3f5ca77507ca16631f19bdf1b87cd1d74629b686286"
-    },
-    {
-      "frame": 4,
-      "bbox": [
-        18,
-        8,
-        63,
+        57,
         72
       ],
       "height": 64,
       "hat_region_width": 33,
-      "sha256": "062e5e3e48832cc694ec7c37fc565a030e9bc71a3fa758437e2b251f735e776a"
+      "sha256": "9aca52a4ffb63ff0db5cd377b8133fde2588cd9d7880363fae258c97db6a1bf9"
+    },
+    {
+      "frame": 4,
+      "bbox": [
+        20,
+        8,
+        60,
+        72
+      ],
+      "height": 64,
+      "hat_region_width": 33,
+      "sha256": "99367bf7866c7e7b71ed3df1d397108af5ec10c7070ca78ccab318bc146ffce7"
     },
     {
       "frame": 5,
       "bbox": [
         18,
         8,
-        59,
-        71
+        56,
+        70
       ],
-      "height": 63,
+      "height": 62,
       "hat_region_width": 32,
-      "sha256": "613ebec6ebd120e25ac0a29d7d6f58702187625162d5d32cc6e6c018f18cc9a0"
+      "sha256": "1f6caf0db018d05151b1ccfbf8d88a0292abbdebaae137d2f9edd291926a77e1"
     },
     {
       "frame": 6,
       "bbox": [
-        19,
+        20,
         8,
-        58,
-        72
+        57,
+        70
       ],
-      "height": 64,
+      "height": 62,
       "hat_region_width": 32,
-      "sha256": "a77b367b50bfefffe0cfa02771b7bee177fc5cfcb7a76a66a8b6633ce407c6ca"
+      "sha256": "f39a39b292b0c6f6a7e2315fb837945e834b7052b2f9f1f0350344226961879d"
     },
     {
       "frame": 7,
@@ -101,23 +102,23 @@
         18,
         8,
         57,
-        73
+        72
       ],
-      "height": 65,
-      "hat_region_width": 32,
-      "sha256": "5a5d8e0a245297557bd7bf8434055f3da53e709ec497b0cb32a5b6fc9052d949"
+      "height": 64,
+      "hat_region_width": 33,
+      "sha256": "92299ee981bccb3c97133e12d4d6b76c72b3c43d16046314db521403f88368bb"
     },
     {
       "frame": 8,
       "bbox": [
         18,
         8,
-        58,
-        72
+        59,
+        70
       ],
-      "height": 64,
+      "height": 62,
       "hat_region_width": 33,
-      "sha256": "e9d4614e971080d81c1595422dbbe732e736ffde9c5793cd4214bfe728eec731"
+      "sha256": "7f53b3eb966929059d2c77428b1f25d77c8c626c1e9bfa62bbe99cc407308185"
     }
   ],
   "source_alpha_threshold": 128,
@@ -125,10 +126,10 @@
   "anchor": "hat center and fixed head top",
   "limitations": [
     "Prototype display size, not yet rendered inside the game.",
-    "Body-volume correction may alter pixels; compare both knees, thighs and boots with the diagnostic source."
+    "Trouser and boot-design correction may alter pixels; compare both knees, thighs and boots with the diagnostic source."
   ],
   "idle_hat_region_width": 31,
-  "native_material_restoration_silhouette_iou": 0.8318822914852865,
+  "native_material_restoration_silhouette_iou": 0.8029274314434354,
   "gif_frame_durations_ms": [
     100,
     100,

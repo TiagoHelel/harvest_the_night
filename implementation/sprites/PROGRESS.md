@@ -2269,3 +2269,27 @@ full contact sheet and equal-scale poster. Other four approved walk families
 remain unchanged. Down-right still awaits explicit approval; no subsequent
 direction started and no runtime, queue or project settings changed. Existing
 project.godot edit preserved; no engine test rerun for isolated art previews.
+
+
+## 2026-10-04 — Narrow diagonal legs and matching boots
+
+The user rejected the down-right candidate's remaining wide legs and mismatched
+shoes. Built-in ImageGen made two targeted lower-body edits, saved as materials-r4
+and materials-r5 with exact prompts, references and raw-source provenance. R4
+introduced the approved work-boot construction: flat dark outsole, modest heel,
+brown leather and outer gold detail. It was retained as an intermediate because
+native comparison still showed broad trousers; R5 narrows thighs/calves/cuffs and
+compacts the boots further using the R4 equal-scale comparison as a reference.
+
+Selected R5 keeps R3's common source scale instead of resizing the body upward
+when boots become smaller. Exported eight unique80x80 frames, visible heights
+62-64px and hats32-33px; edits are not pixel-identical. Lower-trouser blue area
+averages191.125 vs254.375 before; boot brown area131.875 vs161.75. Counts vary by
+pose/projection and only assist visual review. Inspected all eight poses,
+opposite contacts1/5 and both recovery poses3/7. Rebuilt individual previews,
+contact sheet, equal-scale down comparison, HTML cache keys and all-five walk
+GIF. Fresh down-diagonal-leg-boots-r5.gif and all-walk-directions-leg-boots-r5.gif
+avoid cached inline results. Builders validated eight-frame100ms looping output.
+Four approved direction families remain unchanged. Down-right awaits explicit
+user approval. No runtime/queue changes or engine tests for isolated previews;
+unrelated project.godot edit remains untouched.

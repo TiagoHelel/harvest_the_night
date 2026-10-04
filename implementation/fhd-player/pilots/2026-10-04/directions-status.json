@@ -45,11 +45,11 @@
   },
   "walk_down_right": {
     "status": "awaiting_approval",
-    "user_feedback": "down-right looked wider/chubbier than approved original",
-    "rejected_candidate": "walk-down-right/materials-r2",
-    "candidate": "walk-down-right/materials-r3",
+    "user_feedback": "legs still too wide and shoes do not match",
+    "rejected_candidate": "walk-down-right/materials-r3",
+    "candidate": "walk-down-right/materials-r5",
     "preview": "walk-down-right/down-diagonal-comparison.gif",
     "diagnostic": "walk-down-right/leg-tracking-slow.gif",
-    "feedback_addressed": "slimmer torso, hips and leg contours while retaining opposite leg contacts"
+    "feedback_addressed": "narrower trouser legs/cuffs; compact brown work ankle boots with flat dark outsole and matching outer gold detail"
   }
 }

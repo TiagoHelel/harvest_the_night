@@ -1,0 +1,237 @@
+{
+  "method": "Native rows44-75: HSV blue hue(.55,.72), saturation>.4; brown hue(.02,.13), saturation>.3,value>.15; alpha>0. Excludes dark outline. Area varies with pose and overlap; not anatomical proof.",
+  "approved_down": [
+    {
+      "frame": 1,
+      "lower_trouser_blue_pixels_rows_44_75": 189,
+      "boot_brown_pixels_rows_44_75": 91
+    },
+    {
+      "frame": 2,
+      "lower_trouser_blue_pixels_rows_44_75": 195,
+      "boot_brown_pixels_rows_44_75": 88
+    },
+    {
+      "frame": 3,
+      "lower_trouser_blue_pixels_rows_44_75": 175,
+      "boot_brown_pixels_rows_44_75": 103
+    },
+    {
+      "frame": 4,
+      "lower_trouser_blue_pixels_rows_44_75": 184,
+      "boot_brown_pixels_rows_44_75": 90
+    },
+    {
+      "frame": 5,
+      "lower_trouser_blue_pixels_rows_44_75": 183,
+      "boot_brown_pixels_rows_44_75": 94
+    },
+    {
+      "frame": 6,
+      "lower_trouser_blue_pixels_rows_44_75": 189,
+      "boot_brown_pixels_rows_44_75": 100
+    },
+    {
+      "frame": 7,
+      "lower_trouser_blue_pixels_rows_44_75": 186,
+      "boot_brown_pixels_rows_44_75": 114
+    },
+    {
+      "frame": 8,
+      "lower_trouser_blue_pixels_rows_44_75": 180,
+      "boot_brown_pixels_rows_44_75": 80
+    }
+  ],
+  "approved_right": [
+    {
+      "frame": 1,
+      "lower_trouser_blue_pixels_rows_44_75": 283,
+      "boot_brown_pixels_rows_44_75": 171
+    },
+    {
+      "frame": 2,
+      "lower_trouser_blue_pixels_rows_44_75": 238,
+      "boot_brown_pixels_rows_44_75": 165
+    },
+    {
+      "frame": 3,
+      "lower_trouser_blue_pixels_rows_44_75": 201,
+      "boot_brown_pixels_rows_44_75": 119
+    },
+    {
+      "frame": 4,
+      "lower_trouser_blue_pixels_rows_44_75": 273,
+      "boot_brown_pixels_rows_44_75": 173
+    },
+    {
+      "frame": 5,
+      "lower_trouser_blue_pixels_rows_44_75": 305,
+      "boot_brown_pixels_rows_44_75": 175
+    },
+    {
+      "frame": 6,
+      "lower_trouser_blue_pixels_rows_44_75": 220,
+      "boot_brown_pixels_rows_44_75": 165
+    },
+    {
+      "frame": 7,
+      "lower_trouser_blue_pixels_rows_44_75": 158,
+      "boot_brown_pixels_rows_44_75": 146
+    },
+    {
+      "frame": 8,
+      "lower_trouser_blue_pixels_rows_44_75": 293,
+      "boot_brown_pixels_rows_44_75": 172
+    }
+  ],
+  "before_r3": [
+    {
+      "frame": 1,
+      "lower_trouser_blue_pixels_rows_44_75": 228,
+      "boot_brown_pixels_rows_44_75": 167
+    },
+    {
+      "frame": 2,
+      "lower_trouser_blue_pixels_rows_44_75": 236,
+      "boot_brown_pixels_rows_44_75": 174
+    },
+    {
+      "frame": 3,
+      "lower_trouser_blue_pixels_rows_44_75": 260,
+      "boot_brown_pixels_rows_44_75": 143
+    },
+    {
+      "frame": 4,
+      "lower_trouser_blue_pixels_rows_44_75": 304,
+      "boot_brown_pixels_rows_44_75": 170
+    },
+    {
+      "frame": 5,
+      "lower_trouser_blue_pixels_rows_44_75": 283,
+      "boot_brown_pixels_rows_44_75": 151
+    },
+    {
+      "frame": 6,
+      "lower_trouser_blue_pixels_rows_44_75": 267,
+      "boot_brown_pixels_rows_44_75": 159
+    },
+    {
+      "frame": 7,
+      "lower_trouser_blue_pixels_rows_44_75": 185,
+      "boot_brown_pixels_rows_44_75": 164
+    },
+    {
+      "frame": 8,
+      "lower_trouser_blue_pixels_rows_44_75": 272,
+      "boot_brown_pixels_rows_44_75": 166
+    }
+  ],
+  "means": {
+    "approved_down": {
+      "lower_trouser_blue_pixels_rows_44_75": 185.125,
+      "boot_brown_pixels_rows_44_75": 95
+    },
+    "approved_right": {
+      "lower_trouser_blue_pixels_rows_44_75": 246.375,
+      "boot_brown_pixels_rows_44_75": 160.75
+    },
+    "before_r3": {
+      "lower_trouser_blue_pixels_rows_44_75": 254.375,
+      "boot_brown_pixels_rows_44_75": 161.75
+    },
+    "after_r4": {
+      "lower_trouser_blue_pixels_rows_44_75": 215,
+      "boot_brown_pixels_rows_44_75": 148.5
+    },
+    "after_r5": {
+      "lower_trouser_blue_pixels_rows_44_75": 191.125,
+      "boot_brown_pixels_rows_44_75": 131.875
+    }
+  },
+  "after_r4": [
+    {
+      "frame": 1,
+      "lower_trouser_blue_pixels_rows_44_75": 196,
+      "boot_brown_pixels_rows_44_75": 142
+    },
+    {
+      "frame": 2,
+      "lower_trouser_blue_pixels_rows_44_75": 200,
+      "boot_brown_pixels_rows_44_75": 144
+    },
+    {
+      "frame": 3,
+      "lower_trouser_blue_pixels_rows_44_75": 238,
+      "boot_brown_pixels_rows_44_75": 123
+    },
+    {
+      "frame": 4,
+      "lower_trouser_blue_pixels_rows_44_75": 246,
+      "boot_brown_pixels_rows_44_75": 156
+    },
+    {
+      "frame": 5,
+      "lower_trouser_blue_pixels_rows_44_75": 231,
+      "boot_brown_pixels_rows_44_75": 150
+    },
+    {
+      "frame": 6,
+      "lower_trouser_blue_pixels_rows_44_75": 206,
+      "boot_brown_pixels_rows_44_75": 158
+    },
+    {
+      "frame": 7,
+      "lower_trouser_blue_pixels_rows_44_75": 168,
+      "boot_brown_pixels_rows_44_75": 160
+    },
+    {
+      "frame": 8,
+      "lower_trouser_blue_pixels_rows_44_75": 235,
+      "boot_brown_pixels_rows_44_75": 155
+    }
+  ],
+  "after_r5": [
+    {
+      "frame": 1,
+      "lower_trouser_blue_pixels_rows_44_75": 189,
+      "boot_brown_pixels_rows_44_75": 130
+    },
+    {
+      "frame": 2,
+      "lower_trouser_blue_pixels_rows_44_75": 180,
+      "boot_brown_pixels_rows_44_75": 134
+    },
+    {
+      "frame": 3,
+      "lower_trouser_blue_pixels_rows_44_75": 209,
+      "boot_brown_pixels_rows_44_75": 105
+    },
+    {
+      "frame": 4,
+      "lower_trouser_blue_pixels_rows_44_75": 220,
+      "boot_brown_pixels_rows_44_75": 134
+    },
+    {
+      "frame": 5,
+      "lower_trouser_blue_pixels_rows_44_75": 193,
+      "boot_brown_pixels_rows_44_75": 136
+    },
+    {
+      "frame": 6,
+      "lower_trouser_blue_pixels_rows_44_75": 181,
+      "boot_brown_pixels_rows_44_75": 141
+    },
+    {
+      "frame": 7,
+      "lower_trouser_blue_pixels_rows_44_75": 152,
+      "boot_brown_pixels_rows_44_75": 143
+    },
+    {
+      "frame": 8,
+      "lower_trouser_blue_pixels_rows_44_75": 205,
+      "boot_brown_pixels_rows_44_75": 132
+    }
+  ],
+  "r4_note": "Intermediate R4 export used its own median64px calibration. Selected R5 retains the R3 common scale to avoid enlarging upper body when shrinking boots.",
+  "selected_source": "materials-r5.png"
+}
