@@ -1,0 +1,26 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-04",
+  "status": "awaiting user approval of left only",
+  "selected_source": "materials-r2.png",
+  "source_directory": "assets/art_source/player-fhd/pilots/2026-10-04/walk-left",
+  "transparent_background": true,
+  "approved_reference": "assets/art_source/player-fhd/pilots/2026-10-04/walk-right/materials-r3.png",
+  "workflow_reference": "C:/Users/Helel/Documents/repos/sprite_generator/welcome_back_hero/hero-generation-plan.md:578",
+  "calls": [
+    {
+      "prompt": "materials-r1.prompt.txt",
+      "references": ["walk-right/materials-r3.png"],
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-a1f37ce9-5a04-4e1e-95f6-e3beee129e4a.png",
+      "source": "materials-r1.png",
+      "review": "Rejected internally: size/identity retained but arms and far-leg passing pose drift from approved right."
+    },
+    {
+      "prompt": "materials-r2.prompt.txt",
+      "references": ["walk-left/materials-r1.png", "walk-right/materials-r3.png"],
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-6f3bf61a-5e4a-4a16-9bc8-00d8cd824998.png",
+      "source": "materials-r2.png",
+      "review": "Selected for user review: both near and far knees/boots recover in opposing halves, with compact full leg volume. Arms exchange across the loop. Near arm starts its forward swing one frame later than approved right; reflection is not pixel-identical. Inspected full contact sheet, equal-scale poster and browser."
+    }
+  ]
+}

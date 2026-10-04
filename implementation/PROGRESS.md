@@ -10946,3 +10946,33 @@ UP now awaits explicit user approval. Left and four diagonals are not started.
 No runtime assets, game rules, production manifests or queues changed. The prior
 project.godot edit remains untouched. No engine suite/export was rerun for this
 isolated approval preview, and no in-game validation is claimed.
+
+
+## 2026-10-04 — Approved up; next direction is walk left
+
+The user approved UP ("perfeito, proximo"). Recorded this approval and produced
+LEFT only, preserving the one-direction-at-a-time approval policy. Followed the
+sprite_generator hero plan's directional reflection shortcut for walks without
+handed tools. Built-in ImageGen edits approved right materials-r3 per cell;
+no code-drawn replacement artwork or Python creative reflection is used. First
+candidate changed some limb phases and was rejected internally. Targeted R2
+corrects both knee/boot recoveries and opposing contacts while retaining full,
+compact trouser legs. Arms exchange across the cycle; near arm starts forward
+one frame later than right, so generated reflection is not pixel-identical.
+
+Raw sources: assets/art_source/player-fhd/pilots/2026-10-04/walk-left/.
+Exact prompts, provenance and deterministic export code:
+implementation/fhd-player/pilots/2026-10-04/walk-left/. Main horizontal preview
+right-left-comparison.gif shows approved right and candidate left at matching
+integer 2x proposed FHD display and 4x detail. Saved eight 80x80 RGBA frames,
+transparent strip, slow comparison GIF, contact sheet and HTML frame controls.
+Native heights 63-65px; hat widths 30-31px, matching approved right's range.
+One common export scale and fixed hat anchors apply to all frames. Genuine
+source alpha checked; row cut y498 lies in the empty y480-506 gutter.
+
+Validation: eight distinct frame hashes, 8x100ms main GIF and 8x200ms slow GIF
+pass. Inspected raw sources, all eight native-derived poses, same-scale poster
+and browser display; HTML Next advances Frame 1 to Frame 2. Left awaits explicit
+user approval. Four diagonals remain. No runtime assets, game code or queue
+statuses changed. Unrelated project.godot edit remains untouched. No engine
+suite/export rerun for this isolated approval pilot; no in-game playback claimed.

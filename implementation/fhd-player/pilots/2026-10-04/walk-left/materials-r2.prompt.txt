@@ -1,0 +1,15 @@
+Use case: precise-object-edit.
+Asset: eight-frame WALK LEFT farmer pixel-art 4-column by 2-row transparent atlas, 1536x1024.
+Image 1: edit target LEFT candidate, consistent approved proportions but some gait poses drifted.
+Image 2: APPROVED RIGHT atlas, authoritative eight limb poses to reflect INSIDE each cell, never reverse frame order.
+Keep left candidate identity, head, hat, scale, full compact trouser legs, cream shirt, ivory eye, blue denim, brown boots. Correct ONLY arms and legs so every numbered left pose corresponds to the same numbered right pose reflected horizontally.
+Critical exact limb map, reading cells left to right top to bottom, walking towards SCREEN LEFT:
+1: NEAR leg forward LEFT straight, FAR leg back RIGHT; NEAR arm swings backward RIGHT.
+2: NEAR leg planted toward LEFT, FAR knee bends and brown boot lifts at BACK RIGHT; NEAR arm still backward RIGHT. Do not switch the near leg into recovery.
+3: NEAR leg vertical planted, FAR knee rises FORWARD LEFT and far boot is mostly hidden behind the planted leg, NOT kicked backward right; NEAR arm now forward LEFT, far arm back RIGHT.
+4: NEAR leg reaches BACK RIGHT, FAR leg forward LEFT, NEAR arm forward LEFT.
+5: opposite contact of frame1: NEAR leg BACK RIGHT, FAR leg FORWARD LEFT; NEAR arm forward LEFT.
+6: FAR leg vertical grounded, NEAR leg bends behind RIGHT and boot lifts; NEAR arm forward LEFT.
+7: FAR leg vertical grounded, NEAR knee bends FORWARD LEFT with its boot near center, NEAR arm still forward LEFT.
+8: NEAR leg reaches FORWARD LEFT, FAR leg BACK RIGHT; NEAR arm moves backward RIGHT, leading into frame1.
+Near means the foreground chain attached to the visible side of the hip: distinguish the two anatomical chains by which one occludes the other, do not swap them midway. Full opposed leg excursions over the eight poses, no same-leg repeating half cycle. Preserve thick short calves of the approved right, do not elongate. No overall translation, no new body shape, no change to grid or scale. Genuine transparent background, no text, grids, labels, effects or shadow.

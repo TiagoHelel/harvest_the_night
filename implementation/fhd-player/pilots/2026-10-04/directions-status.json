@@ -24,7 +24,6 @@
     "date": "2026-10-04"
   },
   "remaining": [
-    "left",
     "down-right",
     "up-right",
     "up-left",
@@ -32,8 +31,15 @@
   ],
   "runtime_integration": "not requested at this review stage",
   "walk_up": {
-    "status": "awaiting_approval",
+    "status": "approved",
     "candidate": "walk-up/materials-r1",
-    "preview": "walk-up/down-up-comparison.gif"
+    "preview": "walk-up/down-up-comparison.gif",
+    "user_feedback": "perfeito, proximo",
+    "date": "2026-10-04"
+  },
+  "walk_left": {
+    "status": "awaiting_approval",
+    "candidate": "walk-left/materials-r2",
+    "preview": "walk-left/right-left-comparison.gif"
   }
 }

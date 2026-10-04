@@ -1,0 +1,134 @@
+{
+  "status": "awaiting user approval; not integrated",
+  "frames": 8,
+  "fps": 10,
+  "canvas": [
+    80,
+    80
+  ],
+  "selected_source": "materials-r2.png",
+  "source_row_cuts": [
+    0,
+    498,
+    1024
+  ],
+  "native_target_height": 64,
+  "fhd_display_scale": 2,
+  "common_source_scale": 0.13646055437100213,
+  "source_alpha_threshold": 128,
+  "resample": "nearest",
+  "anchor": "hat center and fixed head top",
+  "frames_metrics": [
+    {
+      "frame": 1,
+      "bbox": [
+        20,
+        8,
+        58,
+        72
+      ],
+      "height": 64,
+      "hat_region_width": 30,
+      "sha256": "a04435a6872c2cdf62cc6749fe18f0cc31b3dfe7ef7f1e48b762f9b9b4617b51"
+    },
+    {
+      "frame": 2,
+      "bbox": [
+        25,
+        8,
+        55,
+        71
+      ],
+      "height": 63,
+      "hat_region_width": 30,
+      "sha256": "2daf85dcb4da4e7d1e828476089af708ac67299d7a2787e04ce7132af06446e9"
+    },
+    {
+      "frame": 3,
+      "bbox": [
+        25,
+        8,
+        55,
+        72
+      ],
+      "height": 64,
+      "hat_region_width": 30,
+      "sha256": "35217b1012592084e740e401c3d0bd8d22ebfb9cfa7e50e94d78899b73aefb36"
+    },
+    {
+      "frame": 4,
+      "bbox": [
+        21,
+        8,
+        58,
+        71
+      ],
+      "height": 63,
+      "hat_region_width": 30,
+      "sha256": "4ca241bca9ba14bea8cacc4b1ebae5d652e32283827c88524a853a6ee6d4ba76"
+    },
+    {
+      "frame": 5,
+      "bbox": [
+        19,
+        8,
+        58,
+        72
+      ],
+      "height": 64,
+      "hat_region_width": 30,
+      "sha256": "24fb0dad284a8d2c131d3ca0a748390cc628123f342cf8996c23993d9562e9ab"
+    },
+    {
+      "frame": 6,
+      "bbox": [
+        25,
+        8,
+        57,
+        73
+      ],
+      "height": 65,
+      "hat_region_width": 30,
+      "sha256": "1446491602d2ab172b9edbbc802307afd9cc37b5679c5bbaa8bf9c6ae2c83352"
+    },
+    {
+      "frame": 7,
+      "bbox": [
+        25,
+        8,
+        55,
+        73
+      ],
+      "height": 65,
+      "hat_region_width": 30,
+      "sha256": "66cb3c08596664dce7337a196f676c25e432831a4c6e809b3e9e4e4d2c8d4272"
+    },
+    {
+      "frame": 8,
+      "bbox": [
+        20,
+        8,
+        58,
+        73
+      ],
+      "height": 65,
+      "hat_region_width": 31,
+      "sha256": "b6fd9f375501259f337902bcaf852ab54cfea4e7451ad4c58051fcb6c5fe7ab7"
+    }
+  ],
+  "gif_frame_durations_ms": [
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100
+  ],
+  "limitations": [
+    "Generated reflection is not guaranteed pixel-identical.",
+    "Near arm begins forward swing one frame later than approved right.",
+    "Preview display scale only; no engine playback validation."
+  ]
+}
