@@ -1,0 +1,24 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-04",
+  "status": "one movement ready for user review; not integrated",
+  "approved_identity": "assets/art_source/player-fhd/pilots/2026-10-04/character-r1.png",
+  "calls": [
+    {
+      "prompt": "tracking-r1.prompt.txt",
+      "transparent_background": true,
+      "references": ["assets/art_source/player-fhd/pilots/2026-10-04/character-r1.png", "implementation/fhd-player/pilots/2026-10-04/walk-down/leg-ownership-guide.png"],
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-90667873-7f92-447c-936e-6bbf300cd0a0.png",
+      "saved_source": "assets/art_source/player-fhd/pilots/2026-10-04/walk-down/tracking-r1.png",
+      "review": "Eight down-facing poses, fixed red screen-left and cyan screen-right anatomical leg ownership. Opposite legs visibly advance in each half-cycle. Transparent alpha, although RGB in zero-alpha pixels contains colored halos. Clean alpha at export."
+    },
+    {
+      "prompt": "materials-r1.prompt.txt",
+      "transparent_background": true,
+      "references": ["assets/art_source/player-fhd/pilots/2026-10-04/walk-down/tracking-r1.png", "assets/art_source/player-fhd/pilots/2026-10-04/character-r1.png"],
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-0281640b-14c0-45f0-af23-9b396bd5a393.png",
+      "saved_source": "assets/art_source/player-fhd/pilots/2026-10-04/walk-down/materials-r1.png",
+      "review": "Blue denim and brown boots restored, all eight poses retained. Source silhouette intersection-over-union 0.97537: recoloring is close but not pixel-identical. No claim of exact shape preservation."
+    }
+  ]
+}

@@ -2066,3 +2066,32 @@ No game code, runtime art or manifests changed. This isolated preview was
 visually inspected and checked for PNG/alpha integrity; no game test suite or
 export was rerun. Existing project.godot changes remain untouched. Queues remain
 complete, and the pilot is not recorded as new finished sprite production.
+
+## 2026-10-04 — Approved new farmer: one walk-down review pilot
+
+The user approved character-r1 and requested one walking movement for review
+before an eight-direction set. Read the rotation, anatomical leg-color guides,
+tracking preview and material restoration workflow in the external
+C:/Users/Helel/Documents/repos/sprite_generator project. Implemented walk-down
+only: eight ImageGen poses with fixed red/cyan anatomical leg ownership, followed
+by one material-restoration call. Both raw sheets, exact prompts and provenance
+are retained under assets/art_source/player-fhd/pilots/2026-10-04/walk-down and
+implementation/fhd-player/pilots/2026-10-04/walk-down respectively.
+
+Deterministic export uses hard alpha and nearest sampling, one scale for the
+entire movement, hat-centered horizontal alignment and a common head top. The
+80x80 frames contain a 62-64px-tall walking farmer beside the 64px idle; hat width
+is 31-32px versus idle 31px. Proposed FHD display uses integer 2x, about 128px
+standing height. Saved normal-speed horizontal idle/walk/detail GIF (8x100ms),
+slow colored-leg comparison GIF, strip, individual frames and an HTML reviewer.
+Confirmed eight distinct exported frames, genuine source alpha and GIF timing;
+inspected both contact sheets and browser rendering. Both legs reach forward in
+opposite half-cycles. Material recoloring retains 97.54% silhouette IoU; it is
+not pixel-identical. Minor pixel/pose variation remains for user assessment;
+no claim of perfect animation or in-game playback validation is made.
+
+Local preview: http://127.0.0.1:8765/implementation/fhd-player/pilots/2026-10-04/walk-down/index.html.
+The final movement is awaiting the explicit review requested by the user. Other
+rotations/directions are planned, not generated. No runtime assets, game code,
+queues or project.godot were modified; no game integration, game test suite or
+export run was performed for this isolated approval pilot.

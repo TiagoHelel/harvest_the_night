@@ -1,0 +1,126 @@
+{
+  "status": "awaiting user review; not integrated",
+  "frames": 8,
+  "fps": 10,
+  "canvas": [
+    80,
+    80
+  ],
+  "native_target_height": 64,
+  "fhd_display_scale": 2,
+  "common_source_scale": 0.141280353200883,
+  "idle_bbox": [
+    24,
+    8,
+    55,
+    72
+  ],
+  "frames_metrics": [
+    {
+      "frame": 1,
+      "bbox": [
+        24,
+        8,
+        55,
+        71
+      ],
+      "height": 63,
+      "sha256": "df9b1e4b92943a3ed7c89c80a74ead009d5aa3f137f4c1b845abb4a45b79a44b"
+    },
+    {
+      "frame": 2,
+      "bbox": [
+        24,
+        8,
+        55,
+        71
+      ],
+      "height": 63,
+      "sha256": "0ad8f2692eac4b43e74aaa1c11aca65cc50470dc49caef728905dd14cc6387f1"
+    },
+    {
+      "frame": 3,
+      "bbox": [
+        24,
+        8,
+        55,
+        70
+      ],
+      "height": 62,
+      "sha256": "b613068bf3a7dc212e044b067cf6f4ec9dfdcd69c17489f183309615143dec12"
+    },
+    {
+      "frame": 4,
+      "bbox": [
+        24,
+        8,
+        55,
+        71
+      ],
+      "height": 63,
+      "sha256": "12f0c0b05d847e9d1d41a803b630b8367fb38d02e6659af4bd3fe01cb6d52c9b"
+    },
+    {
+      "frame": 5,
+      "bbox": [
+        24,
+        8,
+        55,
+        71
+      ],
+      "height": 63,
+      "sha256": "3e91d5da76f86fbce18af81c5ffac7b6a03b85b1bbb8ddcc4ba003e9acfa080e"
+    },
+    {
+      "frame": 6,
+      "bbox": [
+        25,
+        8,
+        56,
+        72
+      ],
+      "height": 64,
+      "sha256": "220caab19f8bb6e4fa5a2ba2f6a3f0bd63e5886ab68ef0634f1ddc349cc2a149"
+    },
+    {
+      "frame": 7,
+      "bbox": [
+        24,
+        8,
+        56,
+        72
+      ],
+      "height": 64,
+      "sha256": "949c9d993a7b06e7451d74c896264b357c1b4ca268c5a0be8a685e244c254c53"
+    },
+    {
+      "frame": 8,
+      "bbox": [
+        25,
+        8,
+        56,
+        71
+      ],
+      "height": 63,
+      "sha256": "bf67c0e49eb881e5ea6613628f2ed0b40cb92289bef87db376dc37fd0d322ce5"
+    }
+  ],
+  "source_alpha_threshold": 128,
+  "resample": "nearest",
+  "anchor": "hat center and fixed head top",
+  "limitations": [
+    "Prototype display size, not yet rendered inside the game.",
+    "ImageGen material restoration may alter pixels; inspect against tracking source."
+  ],
+  "material_restoration_silhouette_iou": 0.9753695254850663,
+  "gif_frame_durations_ms": [
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100
+  ]
+}

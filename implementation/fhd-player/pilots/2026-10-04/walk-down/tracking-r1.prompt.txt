@@ -1,0 +1,17 @@
+Create an eight-frame WALK DOWN sprite sheet of exactly the farmer in image 1 (approved character identity). Image 2 is ONLY an anatomical leg-ownership/phase diagram, never an art/style reference. Use built-in pixel-art rendering with clean constant-sized square pixel clusters, restricted ramps, no blur. Same slim body, straw hat, brown hair, ivory eye whites and straight dark pupils, cream short-sleeved shirt, blue overall bib with two gold buttons, modest boots. Preserve exact head/body proportions and width of image 1. Face DOWN toward camera throughout, same slightly top-down farming RPG camera. Do not make the head bigger, do not redesign.
+
+For this diagnostic source ONLY: color the entire anatomical RIGHT trouser leg (SCREEN LEFT in this front view) red, including its boot in dark red; color the entire anatomical LEFT trouser leg (SCREEN RIGHT) cyan, including its boot in dark cyan. Keep recognizable rolled trouser cuffs and boot boundaries. Color identifies one whole hip-thigh-knee-shin-boot chain; it NEVER switches sides or teleports. Bib stays original BLUE. Upper body normal colors. Red and cyan are temporary material tracking colors, not lights or accessories.
+
+Produce exactly 8 unique full-body frames in 4 columns by 2 rows, read left to right then top to bottom. Target 1536x1024 transparent RGBA, each equal 384x512 cell, standing body about 410px tall, generous margins. Fixed center x and shared implied ground plane in every cell. Fixed head size, hat width and torso width. Same two open eyes every frame, no blink. A walk in place toward viewer, relaxed believable small steps, feet alternate forward/down-screen and backward/up-screen with foreshortening, not side kicks or running/high knees. Arms swing opposite the legs; both arms participate. Head only tiny vertical bob, no tilt/rotation, no squash/stretch.
+
+Exact phases:
+1 red leg forward contacting ground (screen-left foot lower); cyan leg back, heel raised. Cyan-side arm forward, red-side arm back.
+2 transfer weight onto red leg; cyan trailing foot starts toe-off.
+3 red supports under hip; cyan bent knee passes forward with lifted foot. Feet approach same image y; cyan foot foreshortened/lifted.
+4 cyan leg extends toward front/down-screen, red trails; approaching opposite contact.
+5 cyan leg forward contacting ground (screen-right foot lower); red leg back, heel raised. Red-side arm forward, cyan-side arm back.
+6 transfer weight onto cyan leg; red trailing foot starts toe-off.
+7 cyan supports under hip; red bent knee passes forward lifted. Feet approach same image y; red foot foreshortened/lifted.
+8 red leg extends toward front/down-screen, cyan trails, leads smoothly into frame 1.
+
+Do NOT repeat identical planted boot shapes in all frames; show lifted heel/shorter foreshortened rear boot and longer grounded forward boot. Both legs stay attached to their own pelvis side. Keep silhouette compact and true to source. No floor, shadows, labels, text, numbers, grid lines, backgrounds, or extra frames. Preserve transparent alpha.
