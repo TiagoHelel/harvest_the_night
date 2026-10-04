@@ -1,0 +1,40 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-04",
+  "status": "awaiting user approval of up only",
+  "selected_source": "materials-r1.png",
+  "source_directory": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up",
+  "transparent_background": true,
+  "approved_identity": "assets/art_source/player-fhd/pilots/2026-10-04/walk-down/materials-r1.png",
+  "reference_preparation": "First 384x512 cell of approved down, alpha>=128, saved as approved-down-reference.png. Approved master unchanged.",
+  "calls": [
+    {
+      "prompt": "rotation-r1.prompt.txt",
+      "references": ["approved-down-reference.png"],
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-a1b79f71-5efa-4454-b364-af60f9cbf186.png",
+      "source": "rotation-r1.png",
+      "review": "Full rear idle, no face, consistent hair/hat and compact denim legs. Direction master established before animation."
+    },
+    {
+      "prompt": "tracking-r1.prompt.txt",
+      "references": ["rotation-r1.png", "implementation/fhd-player/pilots/2026-10-04/walk-up/leg-ownership-guide.png", "approved-down-reference.png"],
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-d8164114-c30c-4cd4-a680-13d7cc83000d.png",
+      "source": "tracking-r1.png",
+      "review": "Both legs alternate, with distinct heel/sole tilt and recovery. Arms are almost frozen, so candidate rejected internally before material restoration."
+    },
+    {
+      "prompt": "tracking-r2.prompt.txt",
+      "references": ["tracking-r1.png"],
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-bd9f1874-0631-4db8-b7e4-52ddae1a90b3.png",
+      "source": "tracking-r2.png",
+      "review": "Arm extremes exchange in opposite half-cycles with neutral passing poses; both original leg recoveries retained. Screen-right red and screen-left cyan keep anatomical ownership."
+    },
+    {
+      "prompt": "materials-r1.prompt.txt",
+      "references": ["tracking-r2.png", "approved-down-reference.png"],
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-501b4c32-88dd-4bf5-8e6b-840474bd6c8e.png",
+      "source": "materials-r1.png",
+      "review": "Blue denim restored, brown boots and arm counter-swing retained. Inspected source/contact sheet/native-derived display. Recoloring is not pixel-identical: source alpha silhouette IoU 0.91568. Eight exported frames and timing checked; user approval remains pending."
+    }
+  ]
+}

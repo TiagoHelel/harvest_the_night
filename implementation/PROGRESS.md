@@ -10916,3 +10916,33 @@ Selected right candidate remains awaiting explicit user approval. The initial
 right idle is a direction reference, not an approved replacement idle. Remaining
 six directions are not started. No runtime sprites, game code, manifests, queues
 or project.godot changed; no engine suite/export rerun for this isolated preview.
+
+
+## 2026-10-04 — Approved right; next direction is walk up
+
+The user approved corrected right ("perfeito, proximo"). Recorded this approval
+and produced UP only, keeping the user's one-direction-at-a-time review policy.
+Built-in ImageGen created a rear standing master from a deterministic first-cell
+crop of approved down, then an eight-frame colored-leg source. First source had
+nearly frozen arms; a targeted second source fixes counter-swing before the third
+animation call restores denim materials. Rear-view anatomical right/red stays
+screen-right, left/cyan stays screen-left. Both knees and brown boots recover
+in opposite half-cycles; upper-body/head direction remains back-facing.
+
+Sources: assets/art_source/player-fhd/pilots/2026-10-04/walk-up/. Exact prompts,
+raw-call provenance, anatomy-guide code and repeatable exports are in
+implementation/fhd-player/pilots/2026-10-04/walk-up/. Eight80x80 RGBA frames,
+transparent strip, idle/walk GIF, slow diagnostic comparison, contact sheet and
+HTML review are saved. Primary down-up-comparison.gif shows unchanged approved
+down and candidate up at matching integer2x proposed FHD display and4x detail.
+Native up heights64-65px, all hat regions32px wide, same as rear idle; approved
+down heights62-64px. Inspected source, complete contact sheet, equal-scale poster
+and browser display. Eight distinct exports and8x100ms GIF timing pass. Sources
+have genuine alpha; nominal512px row cut falls inside an empty gutter. Material
+restoration is not pixel-identical (silhouette IoU0.91568); minor pixel/pose
+variation remains for user assessment, with no perfect-anatomy claim.
+
+UP now awaits explicit user approval. Left and four diagonals are not started.
+No runtime assets, game rules, production manifests or queues changed. The prior
+project.godot edit remains untouched. No engine suite/export was rerun for this
+isolated approval preview, and no in-game validation is claimed.

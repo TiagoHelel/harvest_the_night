@@ -1,0 +1,17 @@
+Create exactly EIGHT WALK UP animation poses of the rear-view farmer in image1. Image1 is the directional standing master, image2 is ONLY a rear-view gait/leg-ownership diagram, and image3 is the USER-APPROVED front/down farmer that LOCKS overall character size, compact leg proportions, limb volume and pixel-art finish. Same farmer viewed from behind, walking away/up-screen IN PLACE. EVERY FRAME a pure back view: no face, no eyes, no nose, no sideways turn. Same broad shallow straw hat, chestnut hair, ears, cream short sleeves, rear blue overall straps, back seat and two rear pockets, full thighs/calves and thick cuffs. Head/hat about36% height, crotch-to-sole about34-36% height. No thinner or longer legs than the approved down. Keep hat width and total body scale steady in all8frames.
+
+Temporary diagnostic colors on trouser legs ONLY: anatomical RIGHT leg is SCREEN RIGHT in back view and is RED; anatomical LEFT leg is SCREEN LEFT and is CYAN. The back waist/seat remains BLUE, both boots remain original BROWN with distinct heels, cuffs can follow leg diagnostic colors. Each color stays attached to the same hip and full thigh-knee-shin, never switch colors or teleport to fake gait. Keep both leg chains visibly separate whenever possible, no crossed hips. Arms have normal skin and cream sleeves, and swing opposite their own legs.
+
+Exactly8fullbodyframes, 4columns x2rows,1536x1024RGBA, equal384x512cells. Each farmer about430px tall with at least35px of clear vertical margin inside its cell; do not cross into neighboring cells. Small relaxed walking strides, no run, no jump, no hopping or side kicks. Head stays upright with tiny natural vertical bob only. Feet move alternately ahead UP-SCREEN and trail DOWN-SCREEN, with foreshortening and heel/toe changes appropriate to back view. Forward foot looks shorter/partially occluded; trailing boot may lift heel/show sole, but no long stretched leg. Do NOT animate merely by shifting a rigid straight leg: knee flexes during recovery and boot tilts during toe-off. Both legs actively pass their own hips once per cycle. Smooth arm counter-swing, not stiff arms.
+
+Frame order left-to-right, top-to-bottom:
+1 RIGHT/RED foot ahead/up-screen in contact, LEFT/CYAN trails down-screen starting toe-off. LEFT arm swings back toward viewer (slightly lower hand), RIGHT arm forward away (slightly higher hand).
+2 Weight on RIGHT/RED; LEFT/CYAN trailing heel lifts and knee bends.
+3 RIGHT/RED support under hip; LEFT/CYAN lifted bent knee passes forward/up-screen, shorter/foreshortened boot.
+4 LEFT/CYAN reaches ahead/up-screen, RIGHT/RED trails; arms reversing smoothly.
+5 LEFT/CYAN foot ahead/up-screen in contact, RIGHT/RED trails down-screen at toe-off. RIGHT arm back toward viewer, LEFT arm forward away.
+6 Weight on LEFT/CYAN; RIGHT/RED trailing heel lifts and knee bends.
+7 LEFT/CYAN support under hip; RIGHT/RED lifted bent knee passes forward/up-screen, shorter/foreshortened boot.
+8 RIGHT/RED reaches ahead/up-screen, LEFT/CYAN trails; smoothly leads back to frame1.
+
+Same crisp pixel clusters, limited controlled palette and charming farming RPG art as approved image3. No smooth render, blur, glow, halo, floor, cast shadows, words, labels, numbers, grid lines or extra sprites. Actual transparent background and complete hats/feet.

@@ -16,18 +16,24 @@
     "date": "2026-10-04"
   },
   "walk_right": {
-    "status": "awaiting_approval",
+    "status": "approved",
     "candidate": "walk-right/materials-r3",
     "feedback_addressed": "thinner and longer legs than approved down",
-    "preview": "walk-right/down-right-comparison.gif"
+    "preview": "walk-right/down-right-comparison.gif",
+    "user_feedback": "perfeito, proximo",
+    "date": "2026-10-04"
   },
   "remaining": [
-    "up",
     "left",
     "down-right",
     "up-right",
     "up-left",
     "down-left"
   ],
-  "runtime_integration": "not requested at this review stage"
+  "runtime_integration": "not requested at this review stage",
+  "walk_up": {
+    "status": "awaiting_approval",
+    "candidate": "walk-up/materials-r1",
+    "preview": "walk-up/down-up-comparison.gif"
+  }
 }

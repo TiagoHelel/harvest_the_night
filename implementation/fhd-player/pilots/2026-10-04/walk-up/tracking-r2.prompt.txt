@@ -1,0 +1,13 @@
+TARGETED ARM-COUNTERSWING CORRECTION to this eight-frame WALK UP rear-view diagnostic sheet. Keep every leg, knee, rolled cuff, brown boot pose, red/cyan leg ownership, hat, hair, head, back straps, two rear pockets, shoulder position, canvas and cell layout EXACTLY as input. The legs already alternate, but both arms repeat the same frozen pose in all8frames. ONLY correct the arms to give a smooth opposite swing over the same gait cycle. Do not redesign hands or enlarge arms. Keep body/head steady.
+
+Exactly8back-facing sprites in same4columns x2rows. Both arms remain attached to their own shoulders. Forward away from viewer = upper arm foreshortened, hand appears HIGHER near waist, elbow can partly occlude behind torso. Back toward viewer = arm swings downward with slight bend, hand appears LOWER near top of thigh. Small relaxed swing, not outstretched sideways, no punching. Screen-left arm belongs to cyan/left leg; screen-right arm belongs to red/right leg. Opposing legs and arms, smooth mirrored half-cycles:
+1 screen-left hand low, screen-right hand high (current pose can remain).
+2 screen-left hand a little higher, screen-right hand a little lower, approaching neutral.
+3 both hands near same middle height, subtle elbow bends; preserve left lifted leg.
+4 screen-RIGHT hand low/back toward viewer, screen-LEFT hand high/forward away, smoothly approaching opposite arm extreme.
+5 screen-RIGHT hand low, screen-LEFT hand high; MIRROR the arm positions of frame1 while keeping legs of frame5.
+6 screen-right hand a little higher, screen-left hand a little lower, approaching neutral.
+7 both hands near same middle height, subtle elbow bends; preserve right lifted leg.
+8 screen-LEFT hand low/back, screen-RIGHT hand high/forward, joins frame1 smoothly.
+
+Keep sleeves cream, hands skin tone; no diagnostic color on arms. Preserve full blue hip/seat, RED screen-right trouser leg and CYAN screen-left trouser leg in all8frames. No swapped legs or repeated poses. Crisp pixel art same asinput.1536x1024RGBA, actual transparency, no glow, floor, shadow, text, labels, grid lines, new objects. This is an arm animation edit only.
