@@ -173,35 +173,35 @@
     "down-right": [
       {
         "path": "walk-down-right/frames/walk-down-right-01.png",
-        "sha256": "5bbdab186535f80eb03a6db2d312e350a0313607139c3bb447d933263ad1092e"
+        "sha256": "596674d957f6ddeba5f9d60851f63c769614808862d2378e5183235996c44619"
       },
       {
         "path": "walk-down-right/frames/walk-down-right-02.png",
-        "sha256": "e22f4ce67e71894dc72c7e1030887294ab36ecfdc54869561ee88a8020cc1262"
+        "sha256": "c7be2f63f395aacc592d1855069490342f50498218668a8f18c7dd98139dcdca"
       },
       {
         "path": "walk-down-right/frames/walk-down-right-03.png",
-        "sha256": "306395b6a6713280291aa5e9b7cc28760965188ae4a82981a3e42b3d1456f510"
+        "sha256": "bb471306c1755c12b2216bbf33c93b33689a62f3ab4d94e2a0b0866ba6d0f9fb"
       },
       {
         "path": "walk-down-right/frames/walk-down-right-04.png",
-        "sha256": "5424affdae367f120341ce3a21f06d2a55dbaece4d956499ddca96bbb1cb3ffb"
+        "sha256": "bf67bc4cf1b286e1c3e5bcbfca53adabab833decc26e08cc998f97b1d8cf2e74"
       },
       {
         "path": "walk-down-right/frames/walk-down-right-05.png",
-        "sha256": "66b7fb9ccced6459b96dead173c16bf912204f9a1ac696c01b85212564062f92"
+        "sha256": "2dd4346f60d6944c849f5e433155138effcbd5920608cc9dec2717f8e5342240"
       },
       {
         "path": "walk-down-right/frames/walk-down-right-06.png",
-        "sha256": "3e24bd7d11567cf80f2992c45fe7e61bd3cd0b4e44dcd6c6aadebb4eb7dac99b"
+        "sha256": "ba1e7fcc9c69497947f8993b8c0baf747ebb961ee15c41e5d046a137bd8f04fe"
       },
       {
         "path": "walk-down-right/frames/walk-down-right-07.png",
-        "sha256": "5f52fdb74fcc06483ed4a53fb93bc575c0221437ab5187f5e79366b953f8cee2"
+        "sha256": "9b0a80433d2d3599711e7c9c3fdfe3390a4ccf3254fb65aeb717e94741d0722f"
       },
       {
         "path": "walk-down-right/frames/walk-down-right-08.png",
-        "sha256": "a2f4e678584299562243f9b5d625830464280520421a25044bb850cbd529861e"
+        "sha256": "6f839c95604b732c56c10e82410e7036bf11f3a668ffb5dc945eb049d3f49c51"
       }
     ]
   }

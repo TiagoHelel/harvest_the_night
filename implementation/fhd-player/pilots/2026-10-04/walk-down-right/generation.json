@@ -2,13 +2,14 @@
   "tool": "built-in ImageGen",
   "date": "2026-10-04",
   "status": "awaiting user approval of down-right only",
-  "selected_source": "materials-r2.png",
+  "selected_source": "materials-r3.png",
   "source_directory": "assets/art_source/player-fhd/pilots/2026-10-04/walk-down-right",
   "transparent_background": true,
   "user_rejections": [
     "legs did not alternate",
     "only right leg remained forward",
-    "still same leg"
+    "still same leg",
+    "down-right looked wider/chubbier than approved original down"
   ],
   "workflow_reference": "sprite_generator/welcome_back_hero/prepare_ranger_transition.py: separate contacts, two four-frame transitions, fixed hip color ownership",
   "derived_source": "tracking-r4.png is lossless cuts/packing of transition-a-r1 and transition-b-r2; no painting, reflection or scaling",
@@ -19,6 +20,10 @@
       1254
     ],
     "materials-r2": [
+      1774,
+      887
+    ],
+    "materials-r3": [
       1774,
       887
     ]
@@ -131,7 +136,18 @@
       ],
       "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-2d1e685b-ae59-4988-be77-d05d53a455e4.png",
       "source": "materials-r2.png",
-      "review": "Selected for user review: lighter near thigh retreats left in4-6; darker far thigh supports right, both recovery poses retained. Uniform head calibration requested; exported hats31-32px. Recoloring not pixel-identical."
+      "review": "Selected for user review: lighter near thigh retreats left in4-6; darker far thigh supports right, both recovery poses retained. Uniform head calibration requested; exported hats31-32px. Recoloring not pixel-identical. Superseded after user rejected excessive body volume."
+    },
+    {
+      "prompt": "materials-r3.prompt.txt",
+      "references": [
+        "materials-r2.png",
+        "approved-down-reference.png"
+      ],
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-280615bf-25cd-4bd0-9cdf-9ef6c77a21f1.png",
+      "source": "materials-r3.png",
+      "review": "Slimmer torso, hips and leg contours. Both opposite contacts and recovery poses retained on visual review. Native heights63-65px, hat widths31-33px; not pixel-identical to R2. Awaiting user approval."
     }
-  ]
+  ],
+  "body_volume_review": "body-volume-review.json; average torso blue pixels97.0 before,86.75 after,82.625 approved down; pose-dependent review aid only."
 }

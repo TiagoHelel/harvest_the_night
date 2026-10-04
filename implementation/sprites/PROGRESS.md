@@ -2246,3 +2246,26 @@ infinite loop. Down-right remains awaiting approval, labeled IN REVIEW; the
 other four stay APPROVED. No new art generated, native frames edited, direction
 approvals inferred or subsequent directions started. No runtime/queue changes;
 project.godot edit remains untouched. No engine suite was rerun for GIF assembly.
+
+
+## 2026-10-04 — Slimmer down-right body review
+
+The user reported that down-right looked chubbier than the approved original.
+Built-in ImageGen edited only this direction using selected materials-r2 plus
+approved down as the body-build reference. Preserved raw materials-r3 source,
+exact prompt and provenance; superseded R2 remains archived. Slimmed torso,
+hips and leg contours, retained opposite contact poses1/5 and recovery poses3/7
+on visual inspection of all eight native frames. Shared nearest-sampling scale
+produces80x80 canvases, visible heights63-65px and hats31-33px. Head contours
+are not pixel-identical to R2: widths differ by up to one native pixel.
+Blue-clothing count in native rows32-42 averages86.75 instead of97.0, against
+82.625 in approved down; pose/occlusion make this only a review aid.
+
+Rebuilt selected frames, strip, individual GIFs, equal-scale down comparison,
+posters, HTML with revision cache keys, and the five-direction horizontal GIF.
+Added all-walk-directions-slimmer-down-right.gif for fresh inline review. Export
+and comparison builders passed; checked eight unique frames,100ms loop timing,
+full contact sheet and equal-scale poster. Other four approved walk families
+remain unchanged. Down-right still awaits explicit approval; no subsequent
+direction started and no runtime, queue or project settings changed. Existing
+project.godot edit preserved; no engine test rerun for isolated art previews.

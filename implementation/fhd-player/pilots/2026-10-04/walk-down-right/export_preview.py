@@ -57,7 +57,7 @@ def gif(frames, path, duration):
     paletted[0].save(path, save_all=True, append_images=paletted[1:], duration=duration, loop=0, disposal=2, optimize=False)
 
 tracking_cells = cuts(SOURCE / 'walk-down-right/tracking-r4.png')
-normal_cells = cuts(SOURCE / 'walk-down-right/materials-r2.png')
+normal_cells = cuts(SOURCE / 'walk-down-right/materials-r3.png')
 scale = HEIGHT / statistics.median(c.getbbox()[3]-c.getbbox()[1] for c in normal_cells)
 normal = pack(normal_cells, scale)
 tracking_scale = HEIGHT / statistics.median(c.getbbox()[3]-c.getbbox()[1] for c in tracking_cells)
@@ -116,13 +116,13 @@ for i,frame in enumerate(normal):
     caption(ImageDraw.Draw(contact),(i*160+10,190),f'{i+1:02}')
 contact.convert('RGB').save(ROOT/'contact-sheet.png')
 report={'status':'awaiting user review; not integrated','frames':8,'fps':10,'canvas':[80,80],
-        'selected_source':'materials-r2.png',
-        'source_row_cuts':[0,round(Image.open(SOURCE/'walk-down-right/materials-r2.png').height/2),Image.open(SOURCE/'walk-down-right/materials-r2.png').height],
+        'selected_source':'materials-r3.png',
+        'source_row_cuts':[0,round(Image.open(SOURCE/'walk-down-right/materials-r3.png').height/2),Image.open(SOURCE/'walk-down-right/materials-r3.png').height],
         'native_target_height':64,'fhd_display_scale':2,'common_source_scale':scale,'tracking_common_source_scale':tracking_scale,
         'idle_bbox':idle.getbbox(),'frames_metrics':metrics,
         'source_alpha_threshold':128,'resample':'nearest','anchor':'hat center and fixed head top',
         'limitations':['Prototype display size, not yet rendered inside the game.',
-                        'Material restoration and uniform head calibration may alter pixels; compare both knees, thighs and boots with the diagnostic source.']}
+                        'Body-volume correction may alter pixels; compare both knees, thighs and boots with the diagnostic source.']}
 ih=idle.crop((0,TOP,FRAME,TOP+14)).getbbox()
 report['idle_hat_region_width']=ih[2]-ih[0]
 from PIL import ImageChops

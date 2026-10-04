@@ -1,0 +1,135 @@
+{
+  "method": "Blue-pixel counts in native rows32-42; review aid only, pose/occlusion affect counts.",
+  "approved_down": [
+    {
+      "frame": 1,
+      "blue_torso_pixel_count_rows_32_42": 80,
+      "maximum_blue_width": 11
+    },
+    {
+      "frame": 2,
+      "blue_torso_pixel_count_rows_32_42": 84,
+      "maximum_blue_width": 11
+    },
+    {
+      "frame": 3,
+      "blue_torso_pixel_count_rows_32_42": 82,
+      "maximum_blue_width": 12
+    },
+    {
+      "frame": 4,
+      "blue_torso_pixel_count_rows_32_42": 81,
+      "maximum_blue_width": 12
+    },
+    {
+      "frame": 5,
+      "blue_torso_pixel_count_rows_32_42": 85,
+      "maximum_blue_width": 12
+    },
+    {
+      "frame": 6,
+      "blue_torso_pixel_count_rows_32_42": 86,
+      "maximum_blue_width": 12
+    },
+    {
+      "frame": 7,
+      "blue_torso_pixel_count_rows_32_42": 80,
+      "maximum_blue_width": 12
+    },
+    {
+      "frame": 8,
+      "blue_torso_pixel_count_rows_32_42": 83,
+      "maximum_blue_width": 11
+    }
+  ],
+  "before_r2": [
+    {
+      "frame": 1,
+      "blue_torso_pixel_count_rows_32_42": 119,
+      "maximum_blue_width": 16
+    },
+    {
+      "frame": 2,
+      "blue_torso_pixel_count_rows_32_42": 115,
+      "maximum_blue_width": 16
+    },
+    {
+      "frame": 3,
+      "blue_torso_pixel_count_rows_32_42": 118,
+      "maximum_blue_width": 16
+    },
+    {
+      "frame": 4,
+      "blue_torso_pixel_count_rows_32_42": 54,
+      "maximum_blue_width": 8
+    },
+    {
+      "frame": 5,
+      "blue_torso_pixel_count_rows_32_42": 63,
+      "maximum_blue_width": 8
+    },
+    {
+      "frame": 6,
+      "blue_torso_pixel_count_rows_32_42": 66,
+      "maximum_blue_width": 8
+    },
+    {
+      "frame": 7,
+      "blue_torso_pixel_count_rows_32_42": 127,
+      "maximum_blue_width": 18
+    },
+    {
+      "frame": 8,
+      "blue_torso_pixel_count_rows_32_42": 114,
+      "maximum_blue_width": 16
+    }
+  ],
+  "after_r3": [
+    {
+      "frame": 1,
+      "blue_torso_pixel_count_rows_32_42": 104,
+      "maximum_blue_width": 16
+    },
+    {
+      "frame": 2,
+      "blue_torso_pixel_count_rows_32_42": 103,
+      "maximum_blue_width": 14
+    },
+    {
+      "frame": 3,
+      "blue_torso_pixel_count_rows_32_42": 104,
+      "maximum_blue_width": 14
+    },
+    {
+      "frame": 4,
+      "blue_torso_pixel_count_rows_32_42": 46,
+      "maximum_blue_width": 13
+    },
+    {
+      "frame": 5,
+      "blue_torso_pixel_count_rows_32_42": 51,
+      "maximum_blue_width": 14
+    },
+    {
+      "frame": 6,
+      "blue_torso_pixel_count_rows_32_42": 62,
+      "maximum_blue_width": 19
+    },
+    {
+      "frame": 7,
+      "blue_torso_pixel_count_rows_32_42": 111,
+      "maximum_blue_width": 17
+    },
+    {
+      "frame": 8,
+      "blue_torso_pixel_count_rows_32_42": 113,
+      "maximum_blue_width": 24
+    }
+  ],
+  "mean_blue_pixel_counts": {
+    "approved_down": 82.625,
+    "before_r2": 97,
+    "after_r3": 86.75
+  },
+  "limitations": "Clothing area is a review aid, not anatomical equivalence. Head widths changed by up to one native pixel; common export scaling retained."
+}
