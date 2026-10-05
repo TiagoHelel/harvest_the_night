@@ -1,0 +1,146 @@
+{
+  "status": "awaiting user approval; not integrated",
+  "frames": 8,
+  "fps": 10,
+  "canvas": [
+    80,
+    80
+  ],
+  "selected_source": "rebuild-materials-r6.png; all eight frames new",
+  "source_size": [
+    1774,
+    887
+  ],
+  "source_row_cuts": [
+    0,
+    444,
+    887
+  ],
+  "source_col_cuts": [
+    0,
+    444,
+    887,
+    1330,
+    1774
+  ],
+  "native_target_height": 64,
+  "fhd_display_scale": 2,
+  "common_source_scale": 0.17902097902097902,
+  "source_alpha_threshold": 128,
+  "tracking_source": "rebuild-tracking-r6-packed.png; already-native geometry reference",
+  "resample": "nearest",
+  "anchor": "hat center and fixed head top",
+  "frames_metrics": [
+    {
+      "frame": 1,
+      "bbox": [
+        24,
+        8,
+        56,
+        71
+      ],
+      "height": 63,
+      "hat_region_width": 29,
+      "sha256": "d9620aa88533468bc76e45f6bc33a051174fa2a99a9de8c6457f8475c126dd2f"
+    },
+    {
+      "frame": 2,
+      "bbox": [
+        25,
+        8,
+        58,
+        71
+      ],
+      "height": 63,
+      "hat_region_width": 29,
+      "sha256": "34eeeee6d04ed85ab3055d553c6045ffadb7377a85743c6e68816f7edfee48d5"
+    },
+    {
+      "frame": 3,
+      "bbox": [
+        25,
+        8,
+        54,
+        72
+      ],
+      "height": 64,
+      "hat_region_width": 29,
+      "sha256": "3a227dacaf51778ecf5ba113b5bcc6744764a865f0f226c54c91802ee3f14688"
+    },
+    {
+      "frame": 4,
+      "bbox": [
+        25,
+        8,
+        58,
+        72
+      ],
+      "height": 64,
+      "hat_region_width": 29,
+      "sha256": "a6492c77837ec4a52c2cfb24b7b95a4b0e73a5abac54b3458f0781a5e6f0f684"
+    },
+    {
+      "frame": 5,
+      "bbox": [
+        23,
+        8,
+        56,
+        68
+      ],
+      "height": 60,
+      "hat_region_width": 29,
+      "sha256": "f0e3adcd1177ed4d11c813f9dc8995ef986a01ebcecba720776bc390a0762adb"
+    },
+    {
+      "frame": 6,
+      "bbox": [
+        23,
+        8,
+        56,
+        68
+      ],
+      "height": 60,
+      "hat_region_width": 29,
+      "sha256": "78a5aa797c258a0dbd6a0838fd3a9c1de1b234175ddac969b3f17aae39c57ae3"
+    },
+    {
+      "frame": 7,
+      "bbox": [
+        25,
+        8,
+        54,
+        73
+      ],
+      "height": 65,
+      "hat_region_width": 29,
+      "sha256": "2c0a2b99d5526ffdf1e978324164c672ee9e609fd9d7f6b399bcdf7e9756f004"
+    },
+    {
+      "frame": 8,
+      "bbox": [
+        22,
+        8,
+        58,
+        72
+      ],
+      "height": 64,
+      "hat_region_width": 29,
+      "sha256": "5f0b1052d8f5ee2aa91923b61d690814b3b6d5404c2471e073c834e64a2b3836"
+    }
+  ],
+  "gif_frame_durations_ms": [
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100
+  ],
+  "limitations": [
+    "Restored materials are not pixel-identical to the tracking source.",
+    "Approval preview only; not rendered inside the game.",
+    "Diagnostic colors support visual review; numeric frame checks do not prove gait quality."
+  ]
+}

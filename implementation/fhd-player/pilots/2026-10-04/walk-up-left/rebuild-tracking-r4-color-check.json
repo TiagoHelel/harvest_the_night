@@ -1,0 +1,172 @@
+{
+  "source": "rebuild-tracking-r4.png",
+  "result": "FAIL",
+  "all_eight_roots_consistent": false,
+  "opposite_boot_contacts_1_5": true,
+  "phases": [
+    {
+      "phase": 1,
+      "color_metrics": {
+        "near_cyan": {
+          "root_x": 212.69254658385094,
+          "root_y": 245.95652173913044,
+          "boot_x": 150.5478645066274,
+          "boot_y": 401.100147275405,
+          "colored_pixels": 8232
+        },
+        "far_pink": {
+          "root_x": 239.1341463414634,
+          "root_y": 244.6890243902439,
+          "boot_x": 279.5463378176383,
+          "boot_y": 439.30194319880417,
+          "colored_pixels": 7355
+        }
+      },
+      "cyan_root_left_of_pink": true
+    },
+    {
+      "phase": 2,
+      "color_metrics": {
+        "near_cyan": {
+          "root_x": 181.81224489795918,
+          "root_y": 249.91224489795917,
+          "boot_x": 167.13419117647058,
+          "boot_y": 435.32046568627453,
+          "colored_pixels": 9576
+        },
+        "far_pink": {
+          "root_x": 207.75744680851065,
+          "root_y": 244.20851063829787,
+          "boot_x": 255.814332247557,
+          "boot_y": 395.10749185667754,
+          "colored_pixels": 4817
+        }
+      },
+      "cyan_root_left_of_pink": true
+    },
+    {
+      "phase": 3,
+      "color_metrics": {
+        "near_cyan": {
+          "root_x": 161.13793103448276,
+          "root_y": 247.92456896551724,
+          "boot_x": 137.79453836150844,
+          "boot_y": 439.7808842652796,
+          "colored_pixels": 8687
+        },
+        "far_pink": {
+          "root_x": 186.28855721393035,
+          "root_y": 242.08955223880596,
+          "boot_x": 225.12101910828025,
+          "boot_y": 383.6783439490446,
+          "colored_pixels": 4351
+        }
+      },
+      "cyan_root_left_of_pink": true
+    },
+    {
+      "phase": 4,
+      "color_metrics": {
+        "near_cyan": {
+          "root_x": 176.91737288135593,
+          "root_y": 247.86228813559322,
+          "boot_x": 220.68909512761022,
+          "boot_y": 442.3194122196442,
+          "colored_pixels": 9602
+        },
+        "far_pink": {
+          "root_x": 200.27906976744185,
+          "root_y": 244.2,
+          "boot_x": 126.92140921409214,
+          "boot_y": 406.7886178861789,
+          "colored_pixels": 4110
+        }
+      },
+      "cyan_root_left_of_pink": true
+    },
+    {
+      "phase": 5,
+      "color_metrics": {
+        "near_cyan": {
+          "root_x": 237.1922077922078,
+          "root_y": 213.65194805194804,
+          "boot_x": 260.03908554572274,
+          "boot_y": 411.73893805309734,
+          "colored_pixels": 6427
+        },
+        "far_pink": {
+          "root_x": 211.0841121495327,
+          "root_y": 206.72429906542055,
+          "boot_x": 146.3430152143845,
+          "boot_y": 364.87275242047025,
+          "colored_pixels": 7918
+        }
+      },
+      "cyan_root_left_of_pink": false
+    },
+    {
+      "phase": 6,
+      "color_metrics": {
+        "near_cyan": {
+          "root_x": 212.24496644295303,
+          "root_y": 211.8020134228188,
+          "boot_x": 255.72312703583063,
+          "boot_y": 369.5407166123779,
+          "colored_pixels": 6306
+        },
+        "far_pink": {
+          "root_x": 185.60365853658536,
+          "root_y": 210.33231707317074,
+          "boot_x": 157.1399870382372,
+          "boot_y": 401.74789371354507,
+          "colored_pixels": 8565
+        }
+      },
+      "cyan_root_left_of_pink": false
+    },
+    {
+      "phase": 7,
+      "color_metrics": {
+        "near_cyan": {
+          "root_x": 173.8398058252427,
+          "root_y": 212.49514563106797,
+          "boot_x": 123.43387096774194,
+          "boot_y": 359.60483870967744,
+          "colored_pixels": 5395
+        },
+        "far_pink": {
+          "root_x": 195.09666666666666,
+          "root_y": 210.27,
+          "boot_x": 184.91133628879038,
+          "boot_y": 410.692210259658,
+          "colored_pixels": 8005
+        }
+      },
+      "cyan_root_left_of_pink": true
+    },
+    {
+      "phase": 8,
+      "color_metrics": {
+        "near_cyan": {
+          "root_x": 180.96052631578948,
+          "root_y": 212.76315789473685,
+          "boot_x": 98.68527918781726,
+          "boot_y": 368.48223350253807,
+          "colored_pixels": 6803
+        },
+        "far_pink": {
+          "root_x": 200.5117845117845,
+          "root_y": 210.6969696969697,
+          "boot_x": 241.4793187347932,
+          "boot_y": 412.09671532846716,
+          "colored_pixels": 8028
+        }
+      },
+      "cyan_root_left_of_pink": true
+    }
+  ],
+  "limitations": [
+    "Color centroids check roots/contacts, not full anatomical connectedness.",
+    "Occluded leg chains and frame3/4 knee unfolding require visual inspection."
+  ]
+}

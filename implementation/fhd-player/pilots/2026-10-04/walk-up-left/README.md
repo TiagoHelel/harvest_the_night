@@ -1,3 +1,55 @@
+# Walk up-left: full rebuild R7 review
+
+The user rejected R3 because frames1/2 exchange leg ownership and4 is bugged,
+and requested all eight poses rebuilt. This candidate uses all new drawings;
+no R3 native frame is retained. The previous candidate and exporter are preserved
+under rejected-r3. Six other walking directions remain approved and unchanged.
+
+Built-in ImageGen constructs a new colored gait using the rotated identity and
+fixed hip-knee-ankle schematic. Near LEFT is cyan, far RIGHT is pink; each root
+stays below its own rear pocket. R4 and R5 still swap roots5/6, detected both
+visually and by check_rebuild_colors.py. A third isolated diagnostic generation
+constructs crossed opposite contacts5/6 from the fixed waist of1. The assembled
+R6 diagnostic passes all8root-order checks and opposite contacts1/5. These
+centroids do not prove full anatomical connectedness or smooth motion.
+
+pack_rebuild_tracking.py performs source cuts, binary alpha, uniform source/head
+reference calibration, nearest sampling and packing only. No Python art repaint,
+reflection, bone warping or leg reshaping. Source row cut478 follows an actual
+empty gutter, preventing the next row's hat from entering a previous cell.
+ImageGen restores denim/leather in R6, then R7 corrects the undersized hat and
+short5/6calves. Material silhouettes differ from diagnostic pixels: this is
+recorded in review-check.json, not described as a pixel-exact geometry match.
+
+Selected raw art: assets/art_source/player-fhd/pilots/2026-10-04/walk-up-left/
+rebuild-materials-r7.png. Exact prompts, references, original paths, dimensions,
+SHA256 and rejection history are recorded in generation.json. Diagnostic masters
+R4/R5, isolated pairR6, packed native/reference atlas and raw materialR6/R7 remain
+preserved. Three diagnostic attempts and two material attempts were evaluated.
+
+Run export_preview.py for80x80native frames, one common scale and fixed hat-top
+anchor. Visible heights62-66px and hat widths31-32px, matching the approved head
+width. Normal GIFs8x100ms, slow/color comparisons8x200ms, shared palette, no blur.
+All8previous UP-LEFT frames replaced; all48approved frame PNGs unchanged by SHA256.
+
+Review files:
+- up-diagonals-rebuilt-r7.gif: approved UP-RIGHT beside full UP-LEFT rebuild.
+- tracking-materials-rebuild-r7.gif: cyanLEFT/pinkRIGHT source beside materials.
+- idle-walk-up-left.gif, gait-comparison-slow.gif, transparent strip/contact sheet.
+- index.html: same review URL, visible diagnostic comparison and manual controls.
+- rebuild-tracking-r6-reference-color-check.json: fixed upper roots and contacts.
+- browser-frame4-r7.png and browser-review-r7.png: actual browser evidence.
+- ../all-walk-directions-rebuilt-up-left-r7.gif: updated seven-direction overview.
+
+Inspected raw colored chains, native material contact sheet, normal browser
+playback and manual2/4. User motion approval remains pending. Existing game is
+unchanged; no integration, resolution/collision/simulation/balance/queue changes.
+No engine suite rerun for isolated review assets. Earlier full engine PASS remains
+in ../walk-up-right/verify-result.json and does not approve the gait. Preserve
+unrelated project.godot edits. Await UP-LEFT approval before starting DOWN-LEFT.
+
+## Earlier rejected R3 candidate
+
 # Walk up-left: one-direction approval candidate
 
 The user approved UP-RIGHT R6 with "aprovado" on 2026-10-05. This task

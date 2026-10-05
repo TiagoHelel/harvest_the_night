@@ -11184,3 +11184,42 @@ suite not rerun for an isolated preview; prior full PASS remains recorded in
 walk-up-right/verify-result.json, with sim1270427719/data8148086 unchanged.
 Existing unrelated project.godot edits preserved. DOWN-LEFT and game integration
 have not started. No push, public publishing or unattended automation.
+
+
+## 2026-10-05 — Rebuild all eight up-left walking poses after rejection
+
+User feedback:1/2swap leg ownership,4bugged; redo the whole cycle. Preserved the
+rejected R3 candidate/nativeframes/metadata/exporter under walk-up-left/rejected-r3.
+Rebuilt every frame from the rotated identity using sprite_generator's fixed
+colored hip chains and opposite contact concepts. Diagnostic cyanLEFT/pinkRIGHT
+masters R4/R5 repeat the root inversion5/6 and are rejected, not hidden by denim.
+check_rebuild_colors.py detects those failures. A third isolated diagnostic pair
+R6 fixes crossed thighs5/6: cyan rootedLEFT crosses foreground to rearRIGHT boot,
+pink rootedRIGHT crosses behind to frontLEFT. Full assembled diagnostic PASS:
+all8upper roots keep cyanleft/pinkright, opposite boot contacts1/5. Color centroids
+support inspection but do not prove full knee linkage or smooth playback.
+
+Built-in ImageGen then restores denim/leather in R6 and corrects proportions in
+R7: hats31-32nativepixels instead of29, lower reach5/6 consistent with adjacent
+poses. All eight new80x80native frame files replace R3, visibleheight62-66px,
+8unique poses, binaryalpha, unclippedmargins, normal8x100ms/slow8x200ms loops.
+All48approved PNGs unchanged by SHA256. Material contours/boot/arm poses are not
+pixel-identical to diagnostic; R7 also intentionally changes head/calf sizes.
+Silhouette comparisons and their limits are recorded rather than used as gait
+approval. Three diagnostic attempts and two material attempts were evaluated.
+
+Raw sources: assets/art_source/player-fhd/pilots/2026-10-04/walk-up-left/.
+Exact prompts and original ImageGen paths/dimensions/hashes: pilot generation.json.
+New schematic and packing/check scripts are diagnostic/deterministic only: no
+Python sprite repaint, reflection or limb warp. Correct source row gutter478
+prevents next-row hat contamination. Current previews: up-diagonals-rebuilt-r7.gif,
+tracking-materials-rebuild-r7.gif, normal/slow walk, native strip/contact sheet,
+and same HTML review URL. Parent seven-direction GIF updated, fresh versioned
+all-walk-directions-rebuilt-up-left-r7.gif saved. Inspected native art and actual
+browser playback, manual2/4. Evidence: browser-frame4-r7.png/browser-review-r7.png.
+
+UP-LEFT R7 awaits explicit user visual review. No gameplay/runtime integration,
+resolution, collision, balance, simulation or queue changes. Full engine suite
+not rerun for isolated previews; previous engine PASS remains documented in
+walk-up-right/verify-result.json, sim1270427719/data8148086 unchanged. Existing
+project.godot edits preserved. DOWN-LEFT not started; no push or automation.

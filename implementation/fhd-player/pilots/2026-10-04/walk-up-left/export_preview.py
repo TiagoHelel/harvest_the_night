@@ -37,31 +37,21 @@ def save_gif(frames, path, duration):
             assert saved.info['duration'] == duration
 
 
-source = clean(Image.open(SOURCE / 'materials-r2.png'))
+source = clean(Image.open(SOURCE / 'rebuild-materials-r7.png'))
 cols = [round(i * source.width / 4) for i in range(5)]
-rows = [0, round(source.height / 2), source.height]
+blank = [y for y in range(round(source.height*.4),round(source.height*.6))
+         if source.getchannel('A').crop((0,y,source.width,y+1)).getbbox() is None]
+assert blank, 'No empty source row gutter; inspect before cutting.'
+rows = [0, round(statistics.median(blank)), source.height]
 cells = [source.crop((cols[c], rows[r], cols[c+1], rows[r+1]))
          for r in range(2) for c in range(4)]
 assert all(c.getbbox() is not None for c in cells)
 scale = HEIGHT / statistics.median(c.getbbox()[3] - c.getbbox()[1] for c in cells)
-pair = clean(Image.open(SOURCE / 'recovery-r3.png'))
-middle = round(pair.width / 2)
-pair_cells = [pair.crop((0,0,middle,pair.height)), pair.crop((middle,0,pair.width,pair.height))]
-head_widths = []
-for cell in pair_cells:
-    b = cell.getbbox()
-    h = cell.crop((0,b[1],cell.width,b[1]+round((b[3]-b[1])*.22))).getbbox()
-    head_widths.append(h[2]-h[0])
-# Calibrate the whole pair uniformly against the approved32px hat width.
-# No per-limb geometry or artwork manipulation is performed.
-pair_scale = 32 / statistics.median(head_widths)
-cells[6:] = pair_cells
-scales = [scale]*6 + [pair_scale]*2
 frames, metrics = [], []
 (ROOT / 'frames').mkdir(exist_ok=True)
 strip = Image.new('RGBA', (FRAME * 8, FRAME))
 for i, cell in enumerate(cells):
-    cell_scale = scales[i]
+    cell_scale = scale
     box = cell.getbbox()
     head_depth = round((box[3] - box[1]) * .22)
     head = cell.crop((0, box[1], cell.width, box[1] + head_depth)).getbbox()
@@ -89,7 +79,20 @@ idle = Image.new('RGBA', (FRAME, FRAME))
 idle.alpha_composite(idle_small, ((FRAME-idle_small.width)//2, TOP))
 idle.save(ROOT / 'idle-native.png')
 
-previews, slow, idle_previews = [], [], []
+# The tracking source was already uniformly sampled and packed into80px cells.
+# Read those pixels exactly for the geometry/material comparison.
+tracking_source = clean(Image.open(SOURCE / 'rebuild-tracking-r6-packed.png'))
+assert tracking_source.size == (320,160)
+tracking_cells = [tracking_source.crop((c*80,r*80,(c+1)*80,(r+1)*80))
+                  for r in range(2) for c in range(4)]
+tracking_frames = []
+(ROOT/'tracking-frames').mkdir(exist_ok=True)
+for i,cell in enumerate(tracking_cells):
+    frame=cell
+    frame.save(ROOT/f'tracking-frames/phase-{i+1:02}.png')
+    tracking_frames.append(frame)
+
+previews, slow, idle_previews, diagnostics = [], [], [], []
 contact = Image.new('RGBA', (1280, 390), '#303a3e')
 for i, left in enumerate(frames):
     right = Image.open(RIGHT / f'frames/walk-up-right-{i+1:02}.png').convert('RGBA')
@@ -111,6 +114,11 @@ for i, left in enumerate(frames):
     check.alpha_composite(left.resize((320,320),Image.Resampling.NEAREST), (320,35))
     caption(ImageDraw.Draw(check), (15,10), f'APPROVED UP-RIGHT / UP-LEFT / FRAME {i+1}', 13)
     slow.append(check)
+    diagnostic=Image.new('RGBA',(640,370),'#303a3e')
+    diagnostic.alpha_composite(tracking_frames[i].resize((320,320),Image.Resampling.NEAREST),(0,35))
+    diagnostic.alpha_composite(left.resize((320,320),Image.Resampling.NEAREST),(320,35))
+    caption(ImageDraw.Draw(diagnostic),(15,10),f'LEFT CYAN / RIGHT PINK | MATERIALS | FRAME {i+1}',12)
+    diagnostics.append(diagnostic)
     contact.alpha_composite(right.resize((160,160),Image.Resampling.NEAREST), (i*160,25))
     contact.alpha_composite(left.resize((160,160),Image.Resampling.NEAREST), (i*160,210))
     caption(ImageDraw.Draw(contact), (i*160+10,190), f'{i+1:02}')
@@ -125,21 +133,22 @@ for i, left in enumerate(frames):
     caption(sd, (30,312), 'Preview only - awaiting approval', 14, '#aac2bd')
     caption(sd, (30,348), f'Frame {i+1:02} / 08', 14)
     idle_previews.append(standing)
-save_gif(previews, ROOT / 'up-diagonals-comparison-r3.gif', 100)
+save_gif(previews, ROOT / 'up-diagonals-rebuilt-r7.gif', 100)
 save_gif(slow, ROOT / 'gait-comparison-slow.gif', 200)
+save_gif(diagnostics, ROOT / 'tracking-materials-rebuild-r7.gif', 200)
 save_gif(idle_previews, ROOT / 'idle-walk-up-left.gif', 100)
 previews[0].convert('RGB').save(ROOT / 'comparison-poster.png')
 contact.convert('RGB').save(ROOT / 'contact-sheet.png')
 report = {'status': 'awaiting user approval; not integrated', 'frames': 8, 'fps': 10,
-          'canvas': [80,80], 'selected_source': 'materials-r2.png + recovery-r3.png for7/8', 'source_size': list(source.size),
+          'canvas': [80,80], 'selected_source': 'rebuild-materials-r7.png; all eight frames new', 'source_size': list(source.size),
           'source_row_cuts': rows, 'source_col_cuts': cols, 'native_target_height': HEIGHT,
           'fhd_display_scale': 2, 'common_source_scale': scale, 'source_alpha_threshold': 128,
-          'native_overrides': {'frames':[7,8], 'source':'recovery-r3.png', 'pair_common_scale':pair_scale},
+          'tracking_source': 'rebuild-tracking-r6-packed.png; already-native geometry reference',
           'resample': 'nearest', 'anchor': 'hat center and fixed head top', 'frames_metrics': metrics,
           'gif_frame_durations_ms': [100]*8,
-          'limitations': ['Generated directional counterpart is not a pixel-exact mirror.',
+          'limitations': ['Restored materials are not pixel-identical to the tracking source.',
                          'Approval preview only; not rendered inside the game.',
-                         'Approved gait reference reused; no colored anatomy proof claimed.']}
+                         'Diagnostic colors support visual review; numeric frame checks do not prove gait quality.']}
 (ROOT / 'validation.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
 print(json.dumps({'heights':[m['height'] for m in metrics],
                   'hat_widths':[m['hat_region_width'] for m in metrics]},indent=2))

@@ -65,9 +65,11 @@
   "walk_up_left": {
     "status": "awaiting_approval",
     "date": "2026-10-05",
-    "candidate": "walk-up-left/materials-r2 + recovery-r3 overrides7/8",
-    "preview": "walk-up-left/up-diagonals-comparison-r3.gif",
-    "diagnostic": "walk-up-left/gait-comparison-slow.gif",
-    "feedback_addressed": "Directional reuse of approved UP-RIGHT R6; rear-left rotation locked; opposite recovery7/8 restored."
+    "candidate": "walk-up-left/rebuild-materials-r7",
+    "preview": "walk-up-left/up-diagonals-rebuilt-r7.gif",
+    "diagnostic": "walk-up-left/tracking-materials-rebuild-r7.gif",
+    "feedback_addressed": "All8poses rebuilt; fixed cyan-left/pink-right hip roots in diagnostic; opposite contacts1/5; no recycled R3frames.",
+    "rejected_candidate": "walk-up-left/materials-r2 + recovery-r3 overrides7/8",
+    "user_feedback": "Frames1/2 swap leg identity; frame4 bugged. Redo all8frames."
   }
 }

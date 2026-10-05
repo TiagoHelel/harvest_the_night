@@ -1,0 +1,262 @@
+{
+  "direction": "up-left",
+  "phases": [
+    {
+      "phase": 1,
+      "near_left": {
+        "hip": [
+          180,
+          296
+        ],
+        "knee": [
+          163,
+          355
+        ],
+        "ankle": [
+          138,
+          420
+        ]
+      },
+      "far_right": {
+        "hip": [
+          210,
+          289
+        ],
+        "knee": [
+          226,
+          373
+        ],
+        "ankle": [
+          252,
+          450
+        ]
+      },
+      "meaning": "Near left contact; far right trails"
+    },
+    {
+      "phase": 2,
+      "near_left": {
+        "hip": [
+          180,
+          296
+        ],
+        "knee": [
+          172,
+          368
+        ],
+        "ankle": [
+          153,
+          432
+        ]
+      },
+      "far_right": {
+        "hip": [
+          210,
+          289
+        ],
+        "knee": [
+          228,
+          360
+        ],
+        "ankle": [
+          252,
+          416
+        ]
+      },
+      "meaning": "Near left supports; far right toe-off"
+    },
+    {
+      "phase": 3,
+      "near_left": {
+        "hip": [
+          180,
+          296
+        ],
+        "knee": [
+          178,
+          378
+        ],
+        "ankle": [
+          176,
+          449
+        ]
+      },
+      "far_right": {
+        "hip": [
+          210,
+          289
+        ],
+        "knee": [
+          195,
+          350
+        ],
+        "ankle": [
+          220,
+          398
+        ]
+      },
+      "meaning": "Far right bends through; near left supports"
+    },
+    {
+      "phase": 4,
+      "near_left": {
+        "hip": [
+          180,
+          296
+        ],
+        "knee": [
+          193,
+          375
+        ],
+        "ankle": [
+          213,
+          453
+        ]
+      },
+      "far_right": {
+        "hip": [
+          210,
+          289
+        ],
+        "knee": [
+          185,
+          354
+        ],
+        "ankle": [
+          165,
+          408
+        ]
+      },
+      "meaning": "Far right reaches; near left recedes"
+    },
+    {
+      "phase": 5,
+      "near_left": {
+        "hip": [
+          180,
+          296
+        ],
+        "knee": [
+          208,
+          374
+        ],
+        "ankle": [
+          234,
+          455
+        ]
+      },
+      "far_right": {
+        "hip": [
+          210,
+          289
+        ],
+        "knee": [
+          184,
+          354
+        ],
+        "ankle": [
+          150,
+          417
+        ]
+      },
+      "meaning": "Far right contact; near left trails"
+    },
+    {
+      "phase": 6,
+      "near_left": {
+        "hip": [
+          180,
+          296
+        ],
+        "knee": [
+          211,
+          350
+        ],
+        "ankle": [
+          235,
+          418
+        ]
+      },
+      "far_right": {
+        "hip": [
+          210,
+          289
+        ],
+        "knee": [
+          190,
+          369
+        ],
+        "ankle": [
+          166,
+          435
+        ]
+      },
+      "meaning": "Far right supports; near left toe-off"
+    },
+    {
+      "phase": 7,
+      "near_left": {
+        "hip": [
+          180,
+          296
+        ],
+        "knee": [
+          169,
+          341
+        ],
+        "ankle": [
+          192,
+          394
+        ]
+      },
+      "far_right": {
+        "hip": [
+          210,
+          289
+        ],
+        "knee": [
+          204,
+          379
+        ],
+        "ankle": [
+          204,
+          451
+        ]
+      },
+      "meaning": "Near left bends through; far right supports"
+    },
+    {
+      "phase": 8,
+      "near_left": {
+        "hip": [
+          180,
+          296
+        ],
+        "knee": [
+          153,
+          349
+        ],
+        "ankle": [
+          140,
+          410
+        ]
+      },
+      "far_right": {
+        "hip": [
+          210,
+          289
+        ],
+        "knee": [
+          218,
+          379
+        ],
+        "ankle": [
+          238,
+          455
+        ]
+      },
+      "meaning": "Near left reaches; far right recedes"
+    }
+  ],
+  "purpose": "diagnostic pose paths only; never sprite artwork"
+}

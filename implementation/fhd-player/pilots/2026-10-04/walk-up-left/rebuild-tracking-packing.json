@@ -1,0 +1,102 @@
+{
+  "source_row_cut": 478,
+  "common_scale": 0.143658810325477,
+  "pair_reference_calibration": 0.463302752293578,
+  "pose_sources": [
+    "rebuild-tracking-r5.png",
+    "rebuild-tracking-r5.png",
+    "rebuild-tracking-r5.png",
+    "rebuild-tracking-r5.png",
+    "rebuild-contacts-r6.png",
+    "rebuild-contacts-r6.png",
+    "rebuild-tracking-r5.png",
+    "rebuild-tracking-r5.png"
+  ],
+  "canvas": [
+    80,
+    80
+  ],
+  "metrics": [
+    {
+      "phase": 1,
+      "bbox": [
+        24,
+        8,
+        56,
+        71
+      ],
+      "height": 63
+    },
+    {
+      "phase": 2,
+      "bbox": [
+        26,
+        8,
+        58,
+        71
+      ],
+      "height": 63
+    },
+    {
+      "phase": 3,
+      "bbox": [
+        26,
+        8,
+        55,
+        72
+      ],
+      "height": 64
+    },
+    {
+      "phase": 4,
+      "bbox": [
+        26,
+        8,
+        57,
+        72
+      ],
+      "height": 64
+    },
+    {
+      "phase": 5,
+      "bbox": [
+        24,
+        8,
+        56,
+        69
+      ],
+      "height": 61
+    },
+    {
+      "phase": 6,
+      "bbox": [
+        23,
+        8,
+        56,
+        68
+      ],
+      "height": 60
+    },
+    {
+      "phase": 7,
+      "bbox": [
+        25,
+        8,
+        55,
+        73
+      ],
+      "height": 65
+    },
+    {
+      "phase": 8,
+      "bbox": [
+        22,
+        8,
+        59,
+        73
+      ],
+      "height": 65
+    }
+  ],
+  "operations": "alpha threshold, uniform whole-source nearest sampling, packing only"
+}
