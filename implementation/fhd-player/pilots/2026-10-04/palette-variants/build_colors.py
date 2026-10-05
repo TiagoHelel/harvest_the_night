@@ -1,11 +1,11 @@
 """Palette-only recoloring, used only with the user's explicit code-paint choice."""
-from bisect import bisect_left, bisect_right
+from bisect import bisect_left
 from collections import Counter
 from pathlib import Path
 import hashlib
 import json
 import sys
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw
 
 HERE=Path(__file__).resolve().parent
 PILOT=HERE.parent
@@ -138,15 +138,15 @@ def draw_swatches(variants):
 def write_html(variants):
     html='''<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Four garment palettes — all eight directions</title><style>body{background:#182426;color:#e9e3cf;font:17px Consolas,monospace;margin:20px}h1{font-size:24px}h2{font-size:20px}a{color:#98dcd6}img{image-rendering:pixelated}.overflow{overflow-x:auto;margin:20px 0}button{background:#344b48;color:#e9e3cf;border:1px solid #75958d;padding:12px;font:inherit;margin:16px 8px 16px 0}summary{cursor:pointer}details{margin:24px 0}</style>
-<h1>Same farmer, four garment palettes</h1><p>RIGHT blue standard plus olive, brown and wine. Newly approved DOWN included. Same64 poses; only garment pixels change.</p><nav>'''
+<h1>Same farmer, four garment palettes</h1><p>RIGHT blue standard plus olive, brown and wine. Newly approved DOWN included. The same 64 poses; only garment pixels change.</p><nav>'''
     html+=' · '.join(f'<a href="#{name}">{name.upper()}</a>' for name in variants)+'</nav>'
-    html+='<p>Native80px cells, integer2x display, eight frames at10FPS. Scroll horizontally to see all eight directions.</p>'
+    html+='<p>Native 80px cells, eight frames at 10 FPS. Choose 1x to compare all directions together, or 2x for the game display size.</p><button id="scale">Show all eight at native 1x</button>'
     for name in variants:
-        html+=f'<section id="{name}"><h2>{name.upper()}'+(' — RIGHT reference standard' if name=='blue' else ' — variation')+f'</h2><div class="overflow"><img src="{name}/all-eight.gif?v=palette-r1" width="1440" height="280" alt="Eight directions in {name}"></div></section>'
+        html+=f'<section id="{name}"><h2>{name.upper()}'+(' — RIGHT reference standard' if name=='blue' else ' — variation')+f'</h2><div class="overflow"><img class="cycle" src="{name}/all-eight.gif?v=palette-r1" width="1440" height="280" alt="Eight directions in {name}"></div></section>'
     html+='''<details><summary>Compare a single frame across all colors</summary><button id="previous">Previous</button><button id="next">Next</button><span id="number">Frame1/8</span><div id="comparison"></div></details>'''
     html+='<details><summary>Exact garment palettes</summary><img src="palettes.png" width="1000" height="220"></details><details><summary>Garment-mask audit</summary><div class="overflow"><img src="mask-audit.png" width="1280" height="1480"></div></details>'
     html+='<p>Awaiting color approval; preview-only outputs. All original source frames retained. <a href="validation.json">Pixel invariance and palette report</a></p>'
-    html+='''<script>let i=0;const variants=['blue','olive','brown','wine'];const dirs=['down','right','up','left','down-right','up-right','up-left','down-left'];function show(d){i=(i+d+8)%8;const n=String(i+1).padStart(2,'0');document.getElementById('number').textContent=`Frame ${i+1}/8`;document.getElementById('comparison').innerHTML=variants.map(c=>`<h2>${c.toUpperCase()}</h2><div class="overflow" style="display:flex;width:100%;gap:20px">`+dirs.map(t=>`<div>${t}<br><img src="${c}/frames/${t}/${n}.png" width="160" height="160"></div>`).join('')+'</div>').join('');}document.getElementById('previous').onclick=()=>show(-1);document.getElementById('next').onclick=()=>show(1);show(0);</script></html>'''
+    html+='''<script>let i=0;const variants=['blue','olive','brown','wine'];const dirs=['down','right','up','left','down-right','up-right','up-left','down-left'];function show(d){i=(i+d+8)%8;const n=String(i+1).padStart(2,'0');document.getElementById('number').textContent=`Frame ${i+1}/8`;document.getElementById('comparison').innerHTML=variants.map(c=>`<h2>${c.toUpperCase()}</h2><div class="overflow" style="display:flex;width:100%;gap:20px">`+dirs.map(t=>`<div>${t}<br><img src="${c}/frames/${t}/${n}.png" width="160" height="160"></div>`).join('')+'</div>').join('');}document.getElementById('previous').onclick=()=>show(-1);document.getElementById('next').onclick=()=>show(1);show(0);let native=false;document.getElementById('scale').onclick=()=>{native=!native;document.querySelectorAll('.cycle').forEach(img=>{img.width=native?720:1440;img.height=native?140:280;});document.getElementById('scale').textContent=native?'Show game display at 2x':'Show all eight at native 1x';};</script></html>'''
     (HERE/'index.html').write_text(html,encoding='utf-8')
 
 if __name__=='__main__':recolor()

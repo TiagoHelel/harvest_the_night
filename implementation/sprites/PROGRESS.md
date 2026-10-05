@@ -2994,3 +2994,42 @@ exports PASS, sim1270427719/data8148086 unchanged. No broad re-run for acceptanc
 metadata and read-only mask preparation. No completed-task/production claim for
 palette work; color GIFs and visual validation remain outstanding. No queue
 mutation, project.godot staging, push or unattended automation.
+
+
+## FHD garment colors — shared RIGHT blue and three variants — 2026-10-05
+
+The user explicitly chose code recoloring and preserved movement. Authorization
+is recorded in palette-variants/authorization.json. Completed256 sibling80x80
+native PNGs:64 poses each in blue, olive, brown and wine. Inputs are the exact
+approved DOWN R3, selected UR03/UL03 and preceding direction files frozen in
+selection.json. No new generated poses, scaling, mirroring, limb edits or source
+replacement. Existing DOWN-RIGHT arm-review status remains pending.
+
+build_colors.py extracts12 actual RIGHT garment medoid colors. A fixed monotonic
+shade map over each complete eight-frame direction aligns its blue distribution
+to RIGHT; RIGHT uses nearest original RGB shades. All eight directions use the
+exact same12 RGB garment colors. Alternative ramps keep ordered brightness and
+change hue. The inspected HSV garment masks cover trousers, bib and straps;
+hat, skin, shirt, buttons, boots and other unmasked RGBA remain exact originals.
+New colors are review candidates, not automatically accepted runtime assets.
+
+Each color has all-eight.gif:1440x280, eight frames,100ms per frame, infinite loop;
+all-frames.png contains all64 native poses enlarged with nearest2x. HTML exposes
+all four GIFs, native1x/game2x controls, same-frame comparison and palette/mask
+inspection. Opened actual browser playback in2x/1x and manual frame5. Browser
+proof: palette-variants/browser-all-colors.png and browser-frame05.png. No claim
+of a new gait; all movement geometry comes from preserved input frames.
+
+check_colors.py verified256 decoded native PNGs, identical alpha/bounds,
+1,559,268 unmasked RGBA comparisons, exact shared12-color sets and64 unchanged
+current source hashes; previous64 baseline source hashes also unchanged. Rebuild
+produced identical256 PNG and four GIF hashes. checks.json records all output
+hashes and GIF timing. Native PNGs carry exact RGB; GIF's shared256-color preview
+palette may quantize display shades. Inspection found consistent garment colors.
+
+Sprite queue and diff --check PASS. Most recent unchanged-engine suite remains
+55-check PASS in500s (OVER BUDGET),7768 asserts,1006 input cases, both exports
+PASS; sim1270427719/data8148086 unchanged. Retained the preceding full engine
+result for this isolated palette review; no game/runtime files changed. No
+queue mutation, project.godot staging, push or automation. Color approval is
+pending at palette-variants/index.html?v=palette-r1.

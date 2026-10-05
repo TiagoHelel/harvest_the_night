@@ -188,6 +188,25 @@
     }
   },
   "pending_reviews": [
-    "down-right"
-  ]
+    "down-right",
+    "garment-palettes"
+  ],
+  "garment_palette_review": {
+    "date": "2026-10-05",
+    "status": "awaiting_approval",
+    "method": "User-authorized deterministic palette mapping",
+    "reference": "right",
+    "variants": [
+      "blue",
+      "olive",
+      "brown",
+      "wine"
+    ],
+    "review": "palette-variants/index.html?v=palette-r1",
+    "native_outputs": 256,
+    "source_frames": 64,
+    "animation_geometry_preserved": true,
+    "unmasked_rgba_preserved": true,
+    "runtime_integrated": false
+  }
 }
