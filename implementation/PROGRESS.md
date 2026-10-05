@@ -11568,3 +11568,47 @@ PASS
 
 Sprite queue and git diff --check PASS. No sim/data acceptance, queue mutation,
 runtime integration, push or project.godot edits. Unrelated files preserved.
+
+## UR03 frame4 raised boot correction - review ready 2026-10-05
+
+User identified a malformed lifted boot in UR03 frame4. One built-in ImageGen
+edit using the exact frame4 target, neighboring3/5 poses and rebuilt boot7 as
+design reference. Exact prompt: selected-UR03-UL03/UR03-boot4-r3.prompt.json;
+arguments, source/input SHA256 and output ownership: UR03-boot4-r3.call.json.
+Original1254x1254RGBA preserved and copied unchanged into assets/art_source/
+player-fhd/pilots/2026-10-04/selected-UR03-UL03/UR03-boot4-r3.png.
+
+Native source uses common32pxhat calibration, nearest sampling and binary
+alpha. Lossless boot cut(42,52,54,62) placed at original cuff(42,50), correcting
+the generated source's2pxlower ankle. Original blue trouser pixels inside
+the patch retained by material mask; all outside pixels exact. No painted boot
+pixels, limb warp, recoloring or per-limb scaling. Source boot silhouette now
+has a narrow ankle, heel, rounded rightward toe and continuous dark sole.
+
+New isolated cycle:UR03/revisions/boot4-r3/frames. Exactly one frame changed
+relative to boot-r2; other7poses including revised7byte-identical. All8approved
+UL03 frame hashes retained;56active native assets remain unchanged. Previous
+sources/cycles retained. Same index.html now opens manual review at frame4.
+Updated horizontal720x350normalGIF(integer2x,8x100ms),960x380slow(integer4x,
+8x200ms),all7directions1440x330,contactstrip and before/after frame4 detail.
+Other five directions unchanged. Browser screenshots:boot4-r3-browser.png,
+boot4-r3-frame4-browser.png. Integer2xpreview playback and4xboot shape inspected;
+format/scope PASS. UR03 visual approval remains pending; UL03 stays approved.
+
+Full required engine verification PASS, no sim/data hash acceptance:
+
+```text
+  ambience                     PASS   1.7s  OK    11 ambience files match their recipes (2 beds, 9 touches)
+  headless_check               PASS  74.6s  7768 asserts, 0 failed
+  sim hash                     PASS   1.9s  1270427719 unchanged
+  data hash                    PASS   0.0s  8148086 unchanged
+  input_check                  PASS  73.9s  1006 cases, 0 failed
+  exports                      PASS  27.0s
+
+  55 passed, 0 skipped, 0 failed in 497s  (OVER BUDGET)
+
+PASS
+```
+
+Sprite queue and git diff --check PASS. No runtime promotion, queue mutation,
+next direction, push or project.godot edit. Unrelated work preserved.

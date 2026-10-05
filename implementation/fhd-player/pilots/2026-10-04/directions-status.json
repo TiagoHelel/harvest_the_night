@@ -55,14 +55,14 @@
   "walk_up_right": {
     "status": "awaiting_approval",
     "date": "2026-10-05",
-    "candidate": "selected-UR03-UL03/UR03/revisions/boot-r2/frames",
+    "candidate": "selected-UR03-UL03/UR03/revisions/boot4-r3/frames",
     "preview": "selected-UR03-UL03/index.html",
-    "diagnostic": "selected-UR03-UL03/UR03-boot-r2-before-after.png",
-    "user_feedback": "Frame7 lifted foot remains malformed; UL03 approved.",
+    "diagnostic": "selected-UR03-UL03/UR03-boot4-r3-before-after.png",
+    "user_feedback": "Frame4 raised boot deformed; repair only that boot.",
     "rejected_candidate": "walk-up-right/full-arm-materials-r13",
-    "feedback_addressed": "Whole lifted boot silhouette rebuilt in7; other7selected poses exact.",
+    "feedback_addressed": "Frame4 raised boot rebuilt; all original blue trousers, previous frame7 and approved UL03 retained.",
     "approval_date": "2026-10-05",
-    "review_limit": "Only UR03 frame7 rebuilt boot awaits user review; no runtime integration.",
+    "review_limit": "Selected UR03 cycle visual approval pending; no runtime integration.",
     "diagonal_reference_attempt": {
       "date": "2026-10-05",
       "status": "visual_gate_failed",
@@ -76,14 +76,15 @@
       "selected_code": "UR03",
       "selected_base": "before-07-08-r5/frames",
       "requested_frames": [
-        7
+        4
       ],
       "status": "awaiting_approval",
-      "candidate": "selected-UR03-UL03/UR03/revisions/boot-r2/frames",
+      "candidate": "selected-UR03-UL03/UR03/revisions/boot4-r3/frames",
       "preview": "selected-UR03-UL03/index.html",
       "runtime_integrated": false,
       "user_feedback": "Frame7 foot remains malformed; rebuild the boot silhouette.",
-      "revision": "boot-r2"
+      "revision": "boot4-r3",
+      "retained_previous_revision": "boot-r2 frame7"
     }
   },
   "walk_up_left": {
