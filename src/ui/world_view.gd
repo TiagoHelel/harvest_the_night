@@ -42,9 +42,6 @@ const SHAKE_CAP := 6.0
 const SHAKE_DECAY := 9.0
 ## Follow continuous coordinates on both axes. Picking uses the same transform.
 const CAMERA_RESPONSE := 10.0
-const ZOOM_LEVELS := [0.875, 1.0, 1.25, 1.5, 2.0]
-var _zoom_index := 1
-var _zoom_target := 1.0
 
 const WORLD_SIZE := Vector2i(
 	GameData.GRID_WIDTH * GameData.TILE_SIZE,
@@ -802,33 +799,21 @@ func look_at_cell(cell: Vector2i) -> void:
 
 
 ## Follow subtile motion rather than jumping a whole tile at cell boundaries.
+##
+## **No zoom.** Like Stardew Valley, the scale is fixed: a 16px tile is 64
+## screen pixels at 1920x1080, so the farmer is always two tiles tall.
 func follow_player(subtile: Vector2i, delta: float) -> void:
 	var weight := 1.0 - exp(-CAMERA_RESPONSE * maxf(delta, 0.0))
-	var zoom_value := lerpf(_camera.zoom.x, _zoom_target, weight)
-	if absf(zoom_value - _zoom_target) < 0.001:
-		zoom_value = _zoom_target
-	_camera.zoom = Vector2.ONE * zoom_value
 	var target := Vector2(subtile) * (float(GameData.TILE_SIZE) / Player.SUBTILE)
 	_camera.position = _camera_bounds(_camera.position.lerp(_camera_bounds(target), weight))
 	_camera.force_update_scroll()
 
 
 func _camera_bounds(point: Vector2) -> Vector2:
-	var half := get_viewport_rect().size / (_camera.zoom * 2.0)
+	var half := get_viewport_rect().size * 0.5
 	var world := Vector2(WORLD_SIZE)
 	return Vector2(world.x * 0.5 if half.x * 2.0 >= world.x else clampf(point.x, half.x, world.x - half.x),
 		world.y * 0.5 if half.y * 2.0 >= world.y else clampf(point.y, half.y, world.y - half.y))
-
-
-## Wheel and keyboard share these bounded, view-only zoom steps.
-func change_zoom(steps: int) -> void:
-	_zoom_index = clampi(_zoom_index + steps, 0, ZOOM_LEVELS.size() - 1)
-	_zoom_target = float(ZOOM_LEVELS[_zoom_index])
-
-
-func reset_zoom() -> void:
-	_zoom_index = 1
-	_zoom_target = 1.0
 
 
 ## Where a farm cell is on screen, in viewport pixels.

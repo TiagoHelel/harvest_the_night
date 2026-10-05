@@ -2,6 +2,11 @@
 
 Raw sources are immutable approvals. If they change, explicitly approve their
 new hash in the manifest before rebuilding. PNGs and view metadata are generated.
+
+Most recipes reduce their source to the one project palette. A recipe whose
+palette is `EXACT_SOURCE` is already finished native pixel art - the farmer's
+reviewed walk cycles - and keeps every source colour: it is copied with binary
+alpha, never resampled or recoloured.
 """
 import argparse
 import hashlib
@@ -20,6 +25,9 @@ MANIFEST = ROOT / "assets/art_source/manifest.json"
 METADATA = ROOT / "src/ui/raster_art.gd"
 PLAYER_METADATA = ROOT / "src/ui/player_frames.gd"
 VERSION = 1
+PROJECT_PALETTE = "tools/palette.py:COLOURS"
+## Finished native art whose approved colours are the art: no reduction.
+EXACT_SOURCE = "exact-source"
 
 
 def sha(data):
@@ -118,8 +126,11 @@ def load_manifest(path=MANIFEST):
                 x0, y0, x1, y1 = rect(entry["muzzle_region_xywh"], canvas, "muzzle region")
                 if not x0 <= point[0] < x1 or not y0 <= point[1] < y1:
                     raise ValueError("Muzzle outside its authored weapon region: " + ident)
-        if entry["palette"] != "tools/palette.py:COLOURS":
+        if entry["palette"] not in (PROJECT_PALETTE, EXACT_SOURCE):
             raise ValueError("Unknown palette: " + ident)
+        if entry["palette"] == EXACT_SOURCE and ("palette_keys" in entry
+                or entry.get("content_scale", 1.0) != 1.0):
+            raise ValueError("Exact source art is neither recoloured nor resampled: " + ident)
         if "palette_keys" in entry:
             keys = entry["palette_keys"]
             if not isinstance(keys, list) or not keys or any(not isinstance(k, str) or k not in palette.COLOURS for k in keys) or len(set(keys)) != len(keys):
@@ -206,11 +217,14 @@ def render_source(entry):
     # A declared material uses a subset of the one project palette, never a
     # separate color table. This keeps small grass/earth/water shapes from
     # accidentally borrowing nearby enemy or cloth colors during reduction.
+    exact = entry["palette"] == EXACT_SOURCE
     keys = entry.get("palette_keys", list(palette.COLOURS))
     colors, cache, reduced = tuple(palette.COLOURS[k] for k in keys), {}, []
     for r, g, b, a in samples(crop):
         if a < entry["alpha_threshold"]:
             reduced.append((0, 0, 0, 0))
+        elif exact:
+            reduced.append((r, g, b, 255))
         else:
             rgb = (r, g, b)
             if rgb not in cache:
@@ -309,7 +323,9 @@ def build(data):
         if list(image.size) != entry["canvas_wh"]:
             raise ValueError("Derived canvas mismatch: " + ident)
         opaque = [p for p in samples(image) if p[3]]
-        if not opaque or any(p[3] != 255 or p[:3] not in palette.COLOURS.values() for p in opaque):
+        known = set(palette.COLOURS.values())
+        exact = entry["palette"] == EXACT_SOURCE
+        if not opaque or any(p[3] != 255 or (not exact and p[:3] not in known) for p in opaque):
             raise ValueError("Empty frame, nonbinary alpha or unknown color: " + ident)
         if "bubble_xywh" in entry:
             box = rect(entry["bubble_xywh"], image.size, "reaction bubble")

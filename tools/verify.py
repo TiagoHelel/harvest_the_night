@@ -177,7 +177,7 @@ def check_art_showcase():
 
 def check_visibility_showcase():
     code, out = run([sys.executable, "tools/show_art.py", "--visibility", "--check"])
-    return check("camera/zoom/ambient", code == 0, next((s for s in out.splitlines() if s.startswith("VISIBILITY SHOWCASE:")), tail(out, 4)))
+    return check("camera/ambient", code == 0, next((s for s in out.splitlines() if s.startswith("VISIBILITY SHOWCASE:")), tail(out, 4)))
 
 
 def check_player_showcase():
@@ -187,7 +187,9 @@ def check_player_showcase():
 
 
 def check_player_fhd_sources():
-    code, out = run([sys.executable, "implementation/fhd-player/directional/promote_locomotion.py", "--check"])
+    """The farmer's runtime walk is the reviewed blue cycle, pixel for pixel."""
+    code, out = run([sys.executable, "implementation/fhd-player/pilots/2026-10-04/"
+                     "palette-variants/promote_blue_walk.py", "--check"])
     return check("FHD player sources", code == 0, tail(out, 2))
 
 

@@ -24,7 +24,7 @@ extends RefCounted
 ## filling in can express - a key that means something different than it used
 ## to, a number that changed units, two keys that became one. Then there is a
 ## migration under it, and `Save` runs them in order.
-const VERSION := 3
+const VERSION := 4
 
 ## The nested dictionaries whose keys come from the code.
 ##

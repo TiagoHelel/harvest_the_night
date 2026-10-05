@@ -29,9 +29,9 @@ extends RefCounted
 ## Units per tile. 64 gives movement fine enough that nobody can see the steps.
 const SUBTILE := 64
 
-## Which way the player is looking. Four, because that is how many ways the
-## sprite will be drawn (task 0073); eight-way movement still resolves to one
-## of these.
+## Which way the player is looking: four, because "the tile in front of me"
+## is one of four. Eight-way movement resolves to one of these; the walk is
+## drawn eight ways, but that is the view's business (`PlayerArt.direction`).
 enum { SOUTH, WEST, NORTH, EAST }
 
 const FACING_STEPS: Array[Vector2i] = [
@@ -227,6 +227,12 @@ static func _try_axis(state: Dictionary, delta: Vector2i) -> void:
 		return                      # the pond stops you; it does not swallow you
 	pos[0] = moved.x
 	pos[1] = moved.y
+
+
+## The facing a held direction resolves to. Public so that the view's
+## eight-way drawing can ask the rule instead of keeping a copy of it.
+static func facing_for(dx: int, dy: int, current: int) -> int:
+	return _facing_for(dx, dy, current)
 
 
 static func _facing_for(dx: int, dy: int, current: int) -> int:

@@ -423,6 +423,14 @@ static func _sweep(state: Dictionary, cost: PackedInt32Array,
 
 	# Nothing is ever filed further ahead than `WIDEST_STEP`, so the bucket
 	# being emptied is never one being filled: the wheel can be a ring.
+	#
+	# **Flat indices, no vectors.** Since the farm became Stardew-sized - 5,200
+	# cells, not 1,125 - this loop is most of a path rebuild, so it walks the
+	# neighbours as index arithmetic in `Grid.STEPS` order (north, east, south,
+	# west) instead of building a `Vector2i` per step. Same visits, same order,
+	# same field.
+	var width := Grid.WIDTH
+	var last_row := Grid.CELLS - width
 	var d := 0
 	while queued > 0:
 		var slot := d % wheel_size
@@ -430,12 +438,11 @@ static func _sweep(state: Dictionary, cost: PackedInt32Array,
 		if not bucket.is_empty():
 			wheel[slot] = []
 			for entry in bucket:
-				var idx := int(entry)
+				var idx: int = entry
 				queued -= 1
 				# A cheaper way here turned up after this one was filed.
-				if int(field[idx]) != d:
+				if field[idx] != d:
 					continue
-				var cell := Grid.cell(idx)
 				# **The step costs what entering `cell` costs, not what
 				# entering the neighbour costs.** The sweep runs outward from
 				# the house and the walking runs inward, so the move being
@@ -448,21 +455,37 @@ static func _sweep(state: Dictionary, cost: PackedInt32Array,
 				# which then had cells whose cheapest neighbour was worth more
 				# than they were, and a zombie walked in a circle for four
 				# hundred steps instead of arriving.
-				var enter := int(cost[idx])
-				for offset in Grid.STEPS:
-					var n: Vector2i = cell + offset
-					var n_idx := Grid.index(n)
-					if n_idx < 0:
-						continue
-					# Nothing can stand here, so nothing walks in from it.
-					if int(cost[n_idx]) == IMPASSABLE:
-						continue
-					var through := d + enter
-					if through >= int(field[n_idx]):
-						continue
-					field[n_idx] = through
-					(wheel[through % wheel_size] as Array).append(n_idx)
-					queued += 1
+				var through: int = d + cost[idx]
+				# Never this bucket: every step costs at least one and at most
+				# `WIDEST_STEP`, less than the wheel.
+				var into: Array = wheel[through % wheel_size]
+				var x := idx % width
+				# Nothing can stand on an impassable neighbour, so nothing
+				# walks in from it.
+				if idx >= width:
+					var n_idx := idx - width
+					if cost[n_idx] != IMPASSABLE and through < field[n_idx]:
+						field[n_idx] = through
+						into.append(n_idx)
+						queued += 1
+				if x < width - 1:
+					var n_idx := idx + 1
+					if cost[n_idx] != IMPASSABLE and through < field[n_idx]:
+						field[n_idx] = through
+						into.append(n_idx)
+						queued += 1
+				if idx < last_row:
+					var n_idx := idx + width
+					if cost[n_idx] != IMPASSABLE and through < field[n_idx]:
+						field[n_idx] = through
+						into.append(n_idx)
+						queued += 1
+				if x > 0:
+					var n_idx := idx - 1
+					if cost[n_idx] != IMPASSABLE and through < field[n_idx]:
+						field[n_idx] = through
+						into.append(n_idx)
+						queued += 1
 		d += 1
 	return field
 
@@ -481,8 +504,13 @@ static func _entry_costs(state: Dictionary) -> Dictionary:
 	var cost := PackedInt32Array()
 	cost.resize(Grid.CELLS)
 	var terrain: PackedByteArray = state["terrain"]
+	# One lookup per terrain byte, then one array read per cell.
+	var by_terrain := PackedInt32Array()
+	by_terrain.resize(256)
+	for kind in 256:
+		by_terrain[kind] = Farm.cost_of_terrain(kind)
 	for idx in Grid.CELLS:
-		cost[idx] = Farm.cost_of_terrain(int(terrain[idx]))
+		cost[idx] = by_terrain[terrain[idx]]
 	# The two are the same everywhere nobody has built anything, which is most
 	# of the farm.
 	var open := cost.duplicate()

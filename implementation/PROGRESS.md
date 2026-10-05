@@ -11823,3 +11823,89 @@ PASS; sim1270427719/data8148086 unchanged. Retained the preceding full engine
 result for this isolated palette review; no game/runtime files changed. No
 queue mutation, project.godot staging, push or automation. Color approval is
 pending at palette-variants/index.html?v=palette-r1.
+
+
+## 2026-10-05 — Stardew-sized farm, blue eight-way farmer, no zoom
+
+User-directed, outside both queues. Three requests: make the farm the size of
+Stardew Valley's; integrate the walking frames of
+`implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames`, blue
+only, preserving size, alignment and frame order, with the farmer as tall as
+Stardew's on a 1920x1080 screen; and remove the zoom, which Stardew does not have.
+
+**No zoom.** The zoom_in/zoom_out/zoom_reset actions, their three strings and the
+farm and farmhouse camera zoom are gone; both cameras stay at 1x. At 1920x1080 a
+16px tile is 64 screen pixels and 30x17 tiles are on screen, Stardew's own 100%
+view. input_check now asserts that =, -, 0 and the wheel leave the camera alone.
+
+**The farmer.** The 64 blue frames (8 directions x 8) are copied byte for byte to
+`assets/art_source/player-fhd/walk-blue/frames/` and promoted by
+`palette-variants/promote_blue_walk.py` (contract:
+`runtime-blue-walk-contract.json`). They carry 33,107 colours, so `import_art.py`
+gained an `exact-source` palette that copies a finished frame with binary alpha
+instead of reducing it to the 42-colour project palette, which would have
+repainted it. One 80x80 canvas and one ground pivot (40,72) for all 64 frames -
+nothing re-registered per frame - drawn at 0.5: a ~64px body is 32 logical
+pixels, 128 screen pixels at 1080p, two tiles, the height of Stardew's 16x32
+farmer at its 4x scale. Files 01..08 are frames 0..7 at the reviewed 10 FPS.
+`PlayerArt` draws one of eight walks from the direction held; the rules keep four
+facings and the view asks them through the new `Player.facing_for()`, so a
+facing a verb changed outranks a remembered diagonal. This farmer has no idle,
+run or work art yet: idle holds one walk frame per direction (down 1, up 5,
+left/right 7, down-left/down-right/up-right 3, up-left 7) in the three idle
+slots the blink and the legacy sheet expect; run plays the walk at 0.07s a frame
+and the view keeps the frame when Shift changes the pace. The previous
+four-direction idle/walk/run runtime (76 frames, 32 run PNGs deleted) is retired;
+its review and sources stay and `promote_locomotion.py` says it is superseded.
+Reactions now draw only their glyph beside the head, 2px higher for the taller
+farmer, instead of swapping in the previous farmer's body; the body mask shader
+is deleted. Work verbs keep the legacy strips. The pilot status files record the
+blue choice and integration; down-right went in with the others at the user's
+request, without a separate approval of its own.
+
+**The farm.** 45x25 -> 80x65 (5,200 cells), the Standard Farm. The 45x25 farm is
+its top left character for character, so the house, buildings, the 60 soil
+cells, pond, quarry and every hand-written test coordinate are where they were.
+Around it: a one-tree border, roads out east (rows 9-10) and south (columns
+39-40), staggered woods just east of column 44 where the east horde already
+gathers, a staggered forest with a pond to the south west, an orchard, a pond
+with a jetty, a rocky outcrop, and stones and saplings over the open ground.
+Every tree and stone keeps a standable neighbour and all new ground is reachable
+from the porch. The spawns did not move, so a night plays as it did; the new
+land is day land. `design.md` asked for 1.2-1.5 screens; the owner chose this.
+
+Save version 3 -> 4. One `Save._widen()` lays any older farm (40x18, 45x20,
+45x25) onto today's grid at the same coordinates: terrain, occupants, rubble,
+plots, jobs, products, livestock, repair debt, regrowth, generator fuel, enemy
+targets and the expiring list (which the old v1 step never remapped); caches are
+thrown away. The v1->v2 and v2->v3 steps now widen first, so their footprint
+logic runs on today's grid. The golden saves load and play.
+
+**Speed.** The path sweep walks flat indices in `Grid.STEPS` order: identical
+fields in three wall/tower variants, 11.9ms -> 2.1ms a sweep at 5,200 cells, a
+whole rebuild 8.4ms as before at a quarter of the size. `Farm.house_bounds()`
+grows from `house_cell` instead of scanning ~660 occupants (168 -> 88us, and so
+every `buildable()`), `cells_with()` sorts only its matches, and the autoplayer's
+repair/upgrade/station scans skip trees and stones: headless_check 138s -> 85s,
+inside the 120s limit. perf_check keeps its forty guns on the farmstead (x < 45):
+filling rows across the wider farm had parked them past the woods with nothing
+to shoot. Night tick 548us of 8,333, path rebuild 8,418us of 33,333; the perf
+baseline is left as it was.
+
+Files: src/core/game_data.gd, grid size and map; src/core/{farm,pathing,player,
+state}.gd; src/app/{save,input_actions}.gd; src/ui/{player_view,player_art,
+world_view,house_view,main,raster_art,player_frames}.gd; tools/import_art.py;
+assets/art_source manifest/ownership; sprites/actors; the checks.
+Verify: **55 passed, 0 skipped, 0 failed** in 529s (OVER BUDGET as before),
+16,137 asserts, 1,017 input cases, both exports. The map, grid size and save
+version intentionally move sim 1270427719 → 3096784529
+and data 8148086 → 3219365985.
+Shots: `implementation/shots/stardew-farm/overview.png` is the whole farm at once
+(review-only camera), with close-ups of the new land and the standard set;
+`implementation/shots/fhd-walk-blue-1080/` shows the farmer at 1920x1080.
+
+Not done, worth deciding next: Stardew lets any ground be tilled, here only
+SOIL offers farming (`Interact`), so the new land holds no crops yet; idle, run,
+work and reaction art for the blue farmer; spawns at the new borders, which
+would need the nights rebalanced. Nothing pushed; project.godot's unrelated
+editor reserialisation of the run key is left unstaged.

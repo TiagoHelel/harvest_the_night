@@ -117,10 +117,42 @@ static func terrain_at(state: Dictionary, cell: Vector2i) -> int:
 	return -1 if idx < 0 else int((state["terrain"] as PackedByteArray)[idx])
 
 
+## The cells the farmhouse stands on, as one rectangle.
+##
+## **Grown out from `house_cell`, not scanned for.** Every `buildable()` asks
+## for the porch, which asks for this, and the Stardew-sized farm starts with
+## six hundred trees and stones on it - a scan of all of them per question was
+## most of what placing anything cost. The house is one connected footprint
+## around its own centre, so a flood from there finds every part of it. A
+## state whose centre is not on the house (one being assembled by hand) gets
+## the scan.
 static func house_bounds(state: Dictionary) -> Rect2i:
+	var occupants: Dictionary = state.get("occupants", {})
+	var at: Array = state.get("house_cell", [])
+	var start := Grid.index(Vector2i(int(at[0]), int(at[1]))) if at.size() == 2 else -1
+	if start < 0 or (occupants.get(start, {}) as Dictionary).get("id", &"") != &"house":
+		return _scanned_house_bounds(occupants)
+	var seen := {start: true}
+	var pending: Array = [Grid.cell(start)]
+	var bounds := Rect2i(Grid.cell(start), Vector2i.ONE)
+	while not pending.is_empty():
+		var cell: Vector2i = pending.pop_back()
+		for step in Grid.STEPS:
+			var next: Vector2i = cell + step
+			var idx := Grid.index(next)
+			if idx < 0 or seen.has(idx):
+				continue
+			seen[idx] = true
+			if (occupants.get(idx, {}) as Dictionary).get("id", &"") == &"house":
+				bounds = bounds.merge(Rect2i(next, Vector2i.ONE))
+				pending.append(next)
+	return bounds
+
+
+static func _scanned_house_bounds(occupants: Dictionary) -> Rect2i:
 	var bounds := Rect2i()
-	for idx in state.get("occupants", {}):
-		if state["occupants"][idx].get("id", &"") == &"house":
+	for idx in occupants:
+		if occupants[idx].get("id", &"") == &"house":
 			var cell := Grid.cell(int(idx))
 			bounds = Rect2i(cell, Vector2i.ONE) if bounds.size == Vector2i.ZERO else bounds.merge(Rect2i(cell, Vector2i.ONE))
 	return bounds
@@ -352,13 +384,17 @@ static func _changed(state: Dictionary) -> void:
 ## every machine, which matters the moment something iterates trees and draws
 ## from the RNG.
 static func cells_with(state: Dictionary, id: StringName) -> Array:
-	var out: Array = []
+	# Matched first and sorted after: the farm holds hundreds of trees and
+	# stones, and only the few cells asked for need putting in order.
+	var found: Array = []
 	var occupants: Dictionary = state["occupants"]
-	var keys: Array = occupants.keys()
-	keys.sort()
-	for idx in keys:
+	for idx in occupants:
 		if (occupants[idx] as Dictionary)["id"] == id:
-			out.append(Grid.cell(idx))
+			found.append(idx)
+	found.sort()
+	var out: Array = []
+	for idx in found:
+		out.append(Grid.cell(idx))
 	return out
 
 

@@ -40,9 +40,6 @@ const ACTIONS: Array = [
 	[&"move_left", &"ACT_MOVE_LEFT", &"ACT_GROUP_MOVING"],
 	[&"move_right", &"ACT_MOVE_RIGHT", &"ACT_GROUP_MOVING"],
 	[&"run", &"ACT_RUN", &"ACT_GROUP_MOVING"],
-	[&"zoom_in", &"ACT_ZOOM_IN", &"ACT_GROUP_MOVING"],
-	[&"zoom_out", &"ACT_ZOOM_OUT", &"ACT_GROUP_MOVING"],
-	[&"zoom_reset", &"ACT_ZOOM_RESET", &"ACT_GROUP_MOVING"],
 
 	[&"interact", &"ACT_INTERACT", &"ACT_GROUP_FARM"],
 	[&"inventory", &"ACT_INVENTORY", &"ACT_GROUP_FARM"],

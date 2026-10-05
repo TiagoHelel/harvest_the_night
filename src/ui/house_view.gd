@@ -13,8 +13,6 @@ var _porch_hint: Label
 var _backdrop: ColorRect
 var _fade: ColorRect
 var _was_inside := false
-var _zoom_index := 1
-var _zoom := 1.0
 var _focus := Vector2(160, 104)
 var ambient_running := true
 var _ambient_time := 0.0
@@ -168,14 +166,6 @@ func show_state(value: Dictionary) -> void:
 		_farmer.show_state(state)
 
 
-func change_zoom(direction: int) -> void:
-	_zoom_index = clampi(_zoom_index + direction, 0, WorldView.ZOOM_LEVELS.size() - 1)
-
-
-func reset_zoom() -> void:
-	_zoom_index = 1
-
-
 func _process(delta: float) -> void:
 	if state.is_empty():
 		return
@@ -200,13 +190,12 @@ func _process(delta: float) -> void:
 	_title.text = I18n.t(&"HOUSE_TITLE")
 	_hint.text = I18n.f(&"HOUSE_EXIT_HINT", [interact_key])
 	var blend := 1.0 - exp(-WorldView.CAMERA_RESPONSE * delta)
-	_zoom = lerpf(_zoom, float(WorldView.ZOOM_LEVELS[_zoom_index]), blend)
 	var target := Vector2(Player.position(state)) * GameData.TILE_SIZE / Player.SUBTILE
 	_focus = _focus.lerp(target, blend)
 	var extent := Vector2(House.ROOM) * GameData.TILE_SIZE
-	var half := _clip.size * 0.5 / _zoom
+	# Fixed scale, like the farm outside: no zoom.
+	var half := _clip.size * 0.5
 	var camera := Vector2(
 		extent.x * 0.5 if extent.x < half.x * 2.0 else clampf(_focus.x, half.x, extent.x - half.x),
 		extent.y * 0.5 if extent.y < half.y * 2.0 else clampf(_focus.y, half.y, extent.y - half.y))
-	_room.scale = Vector2.ONE * _zoom
-	_room.position = _clip.size * 0.5 - camera * _zoom
+	_room.position = _clip.size * 0.5 - camera

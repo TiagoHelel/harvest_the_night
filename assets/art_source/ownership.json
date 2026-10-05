@@ -122,6 +122,30 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/actors/idle_north_east_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/idle_north_east_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/idle_north_east_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/idle_north_west_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/idle_north_west_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/idle_north_west_2.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/actors/idle_south_0.png",
       "owner": "raster"
     },
@@ -131,6 +155,30 @@
     },
     {
       "output": "sprites/actors/idle_south_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/idle_south_east_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/idle_south_east_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/idle_south_east_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/idle_south_west_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/idle_south_west_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/idle_south_west_2.png",
       "owner": "raster"
     },
     {
@@ -227,134 +275,6 @@
     },
     {
       "output": "sprites/actors/repair_3.png",
-      "owner": "raster"
-    },
-    {
-      "output": "sprites/actors/run_east_0.png",
-      "owner": "raster"
-    },
-    {
-      "output": "sprites/actors/run_east_1.png",
-      "owner": "raster"
-    },
-    {
-      "output": "sprites/actors/run_east_2.png",
-      "owner": "raster"
-    },
-    {
-      "output": "sprites/actors/run_east_3.png",
-      "owner": "raster"
-    },
-    {
-      "output": "sprites/actors/run_east_4.png",
-      "owner": "raster"
-    },
-    {
-      "output": "sprites/actors/run_east_5.png",
-      "owner": "raster"
-    },
-    {
-      "output": "sprites/actors/run_east_6.png",
-      "owner": "raster"
-    },
-    {
-      "output": "sprites/actors/run_east_7.png",
-      "owner": "raster"
-    },
-    {
-      "output": "sprites/actors/run_north_0.png",
-      "owner": "raster"
-    },
-    {
-      "output": "sprites/actors/run_north_1.png",
-      "owner": "raster"
-    },
-    {
-      "output": "sprites/actors/run_north_2.png",
-      "owner": "raster"
-    },
-    {
-      "output": "sprites/actors/run_north_3.png",
-      "owner": "raster"
-    },
-    {
-      "output": "sprites/actors/run_north_4.png",
-      "owner": "raster"
-    },
-    {
-      "output": "sprites/actors/run_north_5.png",
-      "owner": "raster"
-    },
-    {
-      "output": "sprites/actors/run_north_6.png",
-      "owner": "raster"
-    },
-    {
-      "output": "sprites/actors/run_north_7.png",
-      "owner": "raster"
-    },
-    {
-      "output": "sprites/actors/run_south_0.png",
-      "owner": "raster"
-    },
-    {
-      "output": "sprites/actors/run_south_1.png",
-      "owner": "raster"
-    },
-    {
-      "output": "sprites/actors/run_south_2.png",
-      "owner": "raster"
-    },
-    {
-      "output": "sprites/actors/run_south_3.png",
-      "owner": "raster"
-    },
-    {
-      "output": "sprites/actors/run_south_4.png",
-      "owner": "raster"
-    },
-    {
-      "output": "sprites/actors/run_south_5.png",
-      "owner": "raster"
-    },
-    {
-      "output": "sprites/actors/run_south_6.png",
-      "owner": "raster"
-    },
-    {
-      "output": "sprites/actors/run_south_7.png",
-      "owner": "raster"
-    },
-    {
-      "output": "sprites/actors/run_west_0.png",
-      "owner": "raster"
-    },
-    {
-      "output": "sprites/actors/run_west_1.png",
-      "owner": "raster"
-    },
-    {
-      "output": "sprites/actors/run_west_2.png",
-      "owner": "raster"
-    },
-    {
-      "output": "sprites/actors/run_west_3.png",
-      "owner": "raster"
-    },
-    {
-      "output": "sprites/actors/run_west_4.png",
-      "owner": "raster"
-    },
-    {
-      "output": "sprites/actors/run_west_5.png",
-      "owner": "raster"
-    },
-    {
-      "output": "sprites/actors/run_west_6.png",
-      "owner": "raster"
-    },
-    {
-      "output": "sprites/actors/run_west_7.png",
       "owner": "raster"
     },
     {
@@ -458,6 +378,70 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/actors/walk_north_east_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/walk_north_east_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/walk_north_east_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/walk_north_east_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/walk_north_east_4.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/walk_north_east_5.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/walk_north_east_6.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/walk_north_east_7.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/walk_north_west_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/walk_north_west_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/walk_north_west_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/walk_north_west_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/walk_north_west_4.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/walk_north_west_5.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/walk_north_west_6.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/walk_north_west_7.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/actors/walk_south_0.png",
       "owner": "raster"
     },
@@ -487,6 +471,70 @@
     },
     {
       "output": "sprites/actors/walk_south_7.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/walk_south_east_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/walk_south_east_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/walk_south_east_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/walk_south_east_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/walk_south_east_4.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/walk_south_east_5.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/walk_south_east_6.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/walk_south_east_7.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/walk_south_west_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/walk_south_west_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/walk_south_west_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/walk_south_west_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/walk_south_west_4.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/walk_south_west_5.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/walk_south_west_6.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/actors/walk_south_west_7.png",
       "owner": "raster"
     },
     {

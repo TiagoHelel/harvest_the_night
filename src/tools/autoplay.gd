@@ -381,9 +381,14 @@ static func _the_field(state: Dictionary) -> Array:
 
 
 ## Occupant cells in a fixed order, so two runs of a seed upgrade the same
-## tower first.
+## tower first. **Not the trees and stones**: nothing here mends, upgrades or
+## crafts at one, and the Stardew-sized farm has six hundred of them.
 static func _sorted_occupants(state: Dictionary) -> Array:
-	var keys: Array = (state["occupants"] as Dictionary).keys()
+	var occupants: Dictionary = state["occupants"]
+	var keys: Array = []
+	for idx in occupants:
+		if not GameData.GATHERING.has((occupants[idx] as Dictionary)["id"]):
+			keys.append(idx)
 	keys.sort()
 	return keys
 

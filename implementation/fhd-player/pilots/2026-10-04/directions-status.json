@@ -48,7 +48,7 @@
     "date": "2026-10-04"
   },
   "remaining": [],
-  "runtime_integration": "not requested at this review stage",
+  "runtime_integration": "Integrated 2026-10-05 at the user's request: blue garment palette, all eight directions, exact native frames (palette-variants/promote_blue_walk.py).",
   "walk_up": {
     "status": "approved",
     "candidate": "walk-up/materials-r1",
@@ -72,7 +72,9 @@
     "diagnostic": "walk-down-right/leg-tracking-slow.gif",
     "feedback_addressed": "Doubled sleeve in4 replaced by one near sleeve and far forearm behind torso; seven accepted poses byte-identical.",
     "date": "2026-10-05",
-    "previous_approval_date": "2026-10-04"
+    "previous_approval_date": "2026-10-04",
+    "runtime_integrated": true,
+    "runtime_note": "Integrated with the other seven blue directions at the user's request; no separate approval of this direction is recorded."
   },
   "walk_up_right": {
     "status": "approved",
@@ -188,12 +190,11 @@
     }
   },
   "pending_reviews": [
-    "down-right",
-    "garment-palettes"
+    "down-right"
   ],
   "garment_palette_review": {
     "date": "2026-10-05",
-    "status": "awaiting_approval",
+    "status": "blue_selected",
     "method": "User-authorized deterministic palette mapping",
     "reference": "right",
     "variants": [
@@ -207,6 +208,7 @@
     "source_frames": 64,
     "animation_geometry_preserved": true,
     "unmasked_rgba_preserved": true,
-    "runtime_integrated": false
+    "runtime_integrated": true,
+    "selected": "blue"
   }
 }

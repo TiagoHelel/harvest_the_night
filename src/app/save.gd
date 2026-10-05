@@ -307,57 +307,78 @@ static func _migrate(payload: Dictionary, from_version: int) -> Dictionary:
 ## to fill in new keys - `State.reconcile()` does that for every load - only
 ## the things filling in cannot express.
 ##
-## Version 2 widens the farm. Cell indices need remapping, while coordinates,
-## inventories, jobs and live entities remain at the same world positions.
+## Every bump so far has widened the farm, and always to the right and down:
+## 40x18 at version 1, 45x20 at 2, 45x25 with larger buildings at 3, and at 4
+## Stardew Valley's Standard Farm, 80x65. A cell keeps its coordinates through
+## all of them - only its index changes - so crops, buildings, jobs and live
+## entities stay exactly where they were, and the new ground is today's map.
 static func migrations() -> Dictionary:
-	return {1: _expand_farm_v1, 2: _expand_farm_v2}
+	return {1: _expand_farm_v1, 2: _expand_farm_v2, 3: _expand_farm_v3}
 
 
-static func _expanded_index(index: int) -> int:
-	return index if index < 0 else (index / 40) * Grid.WIDTH + index % 40
+## The farm each version was written with.
+const V1_FARM := Vector2i(40, 18)
+const V2_FARM := Vector2i(45, 20)
+const V3_FARM := Vector2i(45, 25)
 
 
-static func _expanded_table(table: Dictionary) -> Dictionary:
+static func _widened_index(index: int, width: int) -> int:
+	return index if index < 0 else (index / width) * Grid.WIDTH + index % width
+
+
+static func _widened_table(table: Dictionary, width: int) -> Dictionary:
 	var result: Dictionary = {}
 	var keys := table.keys()
 	keys.sort()
 	for key in keys:
-		result[_expanded_index(int(key))] = table[key]
+		result[_widened_index(int(key), width)] = table[key]
 	return result
 
 
-## Extend old saves without moving a building or resurrecting harvested trees.
-static func _expand_farm_v1(previous: Dictionary) -> Dictionary:
+## Whether a save's farm is already the size this build plays on.
+static func _is_today(state: Dictionary) -> bool:
+	return (state.get("terrain", PackedByteArray()) as PackedByteArray).size() == Grid.CELLS
+
+
+## Lay a farm `size` cells across onto today's grid, every cell at the same
+## coordinates. The ground it never had, and whatever today's map stands on
+## it, comes from a new game; every cache keyed by a cell index is thrown away
+## to be rebuilt. Empty when the farm is not that size.
+static func _widen(previous: Dictionary, size: Vector2i) -> Dictionary:
 	var state := previous.duplicate(true)
 	var terrain: PackedByteArray = state.get("terrain", PackedByteArray())
-	if terrain.size() == Grid.CELLS:
-		state["version"] = 2
-		return state
-	if terrain.size() != 40 * 18:
+	if terrain.size() != size.x * size.y:
 		return {}
 	var farm := Farm.initial()
-	var expanded: PackedByteArray = farm["terrain"]
+	var widened: PackedByteArray = farm["terrain"]
 	for old_index in terrain.size():
-		expanded[_expanded_index(old_index)] = terrain[old_index]
-	state["terrain"] = expanded
+		widened[_widened_index(old_index, size.x)] = terrain[old_index]
+	state["terrain"] = widened
 	for key in ["occupants", "rubble", "plots", "crafting", "livestock", "repair_debt", "produced"]:
 		if state.has(key):
-			state[key] = _expanded_table(state[key])
+			state[key] = _widened_table(state[key], size.x)
 	var occupants: Dictionary = state.get("occupants", {})
-	for idx in farm["occupants"]:
+	var fresh: Array = farm["occupants"].keys()
+	fresh.sort()
+	for idx in fresh:
 		var cell := Grid.cell(int(idx))
-		if cell.x >= 40 or cell.y >= 18:
+		if cell.x >= size.x or cell.y >= size.y:
 			occupants[idx] = farm["occupants"][idx]
 	state["occupants"] = occupants
 	for entry in state.get("regrowing", []):
-		entry[Gathering.PENDING_CELL] = _expanded_index(int(entry[Gathering.PENDING_CELL]))
+		entry[Gathering.PENDING_CELL] = _widened_index(int(entry[Gathering.PENDING_CELL]), size.x)
+	if state.has("expiring"):
+		var expiring: Array = []
+		for idx in state["expiring"]:
+			expiring.append(_widened_index(int(idx), size.x))
+		state["expiring"] = expiring
 	for entity in state.get("entities", {}).values():
 		for key in ["chewing", "winding_at"]:
 			if entity.has(key):
-				entity[key] = _expanded_index(int(entity[key]))
+				entity[key] = _widened_index(int(entity[key]), size.x)
 	if state.has("power"):
 		var power: Dictionary = state["power"]
-		power["burning"] = _expanded_table(power.get("burning", {}))
+		power["burning"] = _widened_table(power.get("burning", {}), size.x)
 		power["plants"] = []
 		power["for_version"] = -1
 	for key in Pathing.initial():
@@ -366,22 +387,25 @@ static func _expand_farm_v1(previous: Dictionary) -> Dictionary:
 		state[key + "_cells"] = []
 		state[key + "_version"] = -1
 	state["grid_version"] = int(state.get("grid_version", 0)) + 1
+	return state
+
+
+## Version 2 widened the first 40x18 farm. Nothing moves and no harvested
+## tree comes back.
+static func _expand_farm_v1(previous: Dictionary) -> Dictionary:
+	var state := previous.duplicate(true) if _is_today(previous) else _widen(previous, V1_FARM)
+	if state.is_empty():
+		return {}
 	state["version"] = 2
 	return state
 
 
-## Version 3 adds five clear southern rows and larger structure footprints.
+## Version 3 added five clear southern rows and larger structure footprints.
 ## Never cover a saved plot or another occupant to make a building larger.
 static func _expand_farm_v2(previous: Dictionary) -> Dictionary:
-	var state := previous.duplicate(true)
-	var terrain: PackedByteArray = state.get("terrain", PackedByteArray())
-	if terrain.size() != 45 * 20 and terrain.size() != Grid.CELLS:
+	var state := previous.duplicate(true) if _is_today(previous) else _widen(previous, V2_FARM)
+	if state.is_empty():
 		return {}
-	terrain.resize(Grid.CELLS)
-	var added: PackedByteArray = Farm.initial()["terrain"]
-	for idx in range(45 * 20, Grid.CELLS):
-		terrain[idx] = added[idx]
-	state["terrain"] = terrain
 	var before_porch := House.porch(state)
 	var groups := {}
 	var occupants: Dictionary = state["occupants"]
@@ -434,6 +458,16 @@ static func _expand_farm_v2(previous: Dictionary) -> Dictionary:
 		state[key] = Pathing.initial()[key]
 	state["grid_version"] = int(state.get("grid_version", 0)) + 1
 	state["version"] = 3
+	return state
+
+
+## Version 4 is Stardew Valley's Standard Farm, 80x65, with the 45x25 farm of
+## version 3 its top left corner, character for character.
+static func _expand_farm_v3(previous: Dictionary) -> Dictionary:
+	var state := previous.duplicate(true) if _is_today(previous) else _widen(previous, V3_FARM)
+	if state.is_empty():
+		return {}
+	state["version"] = 4
 	return state
 
 

@@ -134,9 +134,13 @@ func _the_worst_case() -> Dictionary:
 	# night ten before it walked ten tiles - a worst case with nothing in it
 	# is not a worst case. Forty is more than anybody builds and still
 	# leaves a fight to time.
+	# **On the farmstead, where the fight is.** The Stardew-sized farm runs on
+	# to column 79, and a row-by-row fill now put the guns out past the woods
+	# where nothing walks: forty towers with nothing to shoot is a quieter
+	# night, not a worse one.
 	var guns := 0
 	for y in range(1, Grid.HEIGHT - 1):
-		for x in range(21, Grid.WIDTH - 1):
+		for x in range(21, mini(Grid.WIDTH, Save.V3_FARM.x) - 1):
 			if guns >= TOWERS:
 				break
 			if Building.place(state, &"gun_tower", Vector2i(x, y)):

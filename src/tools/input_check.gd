@@ -708,25 +708,23 @@ func _case_0013_world_view() -> void:
 	expect(view.cell_to_screen(Vector2i(20, 9)).x != at_cell_before.x,
 		"so a fixed cell is somewhere else on screen afterwards")
 
-	# Screen and cell are each other's inverse, wherever the camera is.
-	var zoom_before := cam_probe.zoom.x
+	# **No zoom, as in Stardew Valley.** The keys and the wheel that used to
+	# zoom do nothing to the camera: a tile is always 64 pixels at 1920x1080.
 	await tap_key(KEY_EQUAL)
-	await until(func(): return cam_probe.zoom.x == 1.25, "zoom-in settles")
-	expect(cam_probe.zoom.x > zoom_before, "The zoom-in binding enlarges the world")
+	await click_at(Vector2(240, 125), MOUSE_BUTTON_WHEEL_UP)
 	await click_at(Vector2(240, 125), MOUSE_BUTTON_WHEEL_DOWN)
-	await until(func(): return cam_probe.zoom.x == zoom_before, "wheel zoom-out settles")
-	expect(absf(cam_probe.zoom.x - zoom_before) < 0.02, "Mouse wheel zooms back out through the real input path")
-	await tap_key(KEY_EQUAL)
-	await until(func(): return cam_probe.zoom.x == 1.25, "second zoom-in settles")
+	await tap_key(KEY_MINUS)
+	await frames(10)
+	expect(cam_probe.zoom == Vector2.ONE, "Neither keys nor the wheel zoom the camera",
+		str(cam_probe.zoom))
+
+	# Screen and cell are each other's inverse, wherever the camera is.
 	for cell in [Vector2i(20, 9), Vector2i(25, 4), Vector2i(30, 12)]:
 		expect(view.screen_to_cell(view.cell_to_screen(cell)) == cell,
 			"cell %s survives a round trip through the screen" % cell,
 			str(view.screen_to_cell(view.cell_to_screen(cell))))
 	expect(view.screen_to_cell(Vector2(-500, -500)) == Vector2i(-1, -1),
 		"and a position off the farm is not a cell")
-	await tap_key(KEY_0)
-	await until(func(): return cam_probe.zoom == Vector2.ONE, "zoom reset settles")
-	expect(cam_probe.zoom == Vector2.ONE, "Zero restores the default zoom")
 
 	# **The camera is clamped**, so panning past either end shows the farm
 	# rather than a gap. Godot does the clamping; this checks it was asked to.
@@ -1496,6 +1494,17 @@ func tap_key(keycode: int) -> void:
 	await press_key(keycode, false)
 
 
+## Let go of several keys in the same frame, as a hand leaving a diagonal does.
+func release_keys(keycodes: Array) -> void:
+	for keycode in keycodes:
+		var ev := InputEventKey.new()
+		ev.keycode = keycode
+		ev.physical_keycode = keycode
+		ev.pressed = false
+		Input.parse_input_event(ev)
+	await process_frame
+
+
 ## Hold a key down for a number of frames, then let go. What "walk east for a
 ## second" looks like from outside the game.
 func hold_key(keycode: int, frame_count: int) -> void:
@@ -1893,8 +1902,8 @@ func _case_0111_farm_house() -> void:
 	await tap_key(KEY_B)
 	expect(not Building.is_active(state), "The build key cannot open an outdoor ghost inside the house")
 	await tap_key(KEY_EQUAL)
-	await until(func(): return room._room.scale.x > 1.01, "the interior camera to zoom")
-	await tap_key(KEY_0)
+	await frames(10)
+	expect(room._room.scale == Vector2.ONE, "The interior camera has no zoom either")
 	await tap_key(KEY_P)
 	await until(func(): return not driver.running, "the indoor pause menu to stop simulation")
 	var paused_tick := int(state["tick"])
@@ -3847,17 +3856,35 @@ func _case_0073_player_art() -> void:
 	expect(not view.flipped(), "east locomotion already owns its facing and pivot")
 	await press_key(KEY_D, false)
 	await frames(3)
-	# Run is a named held presentation action, not a simulation speed command.
+
+	# **Eight directions.** Two keys at once walk the diagonal drawing, and
+	# letting go stands still in that same diagonal.
+	for pair in [[KEY_S, KEY_D, &"south_east"], [KEY_S, KEY_A, &"south_west"],
+			[KEY_W, KEY_D, &"north_east"], [KEY_W, KEY_A, &"north_west"]]:
+		await press_key(pair[0], true)
+		await press_key(pair[1], true)
+		await frames(8)
+		expect(view.playing() == StringName("walk_%s" % pair[2]) and not view.flipped(),
+			"two keys walk the %s drawing" % pair[2], str(view.playing()))
+		await release_keys([pair[0], pair[1]])
+		await frames(3)
+		expect(view.playing() == StringName("idle_%s" % pair[2]),
+			"and letting go stands still facing %s" % pair[2], str(view.playing()))
+
+	# Run is a named held presentation action, not a simulation speed command:
+	# the same walk, played faster.
 	await press_key(KEY_SHIFT, true)
 	await frames(3)
 	expect(str(view.playing()).begins_with("idle_"), "Shift alone does not run in place")
 	for motion_key in [KEY_A, KEY_D, KEY_W, KEY_S]:
 		await press_key(motion_key, true)
 		await frames(8)
-		var run_name := StringName("run_%s" % PlayerArt.FACINGS[Player.facing(state)][0])
-		expect(view.playing() == run_name and not view.flipped(),
+		var walk_name := StringName("walk_%s" % PlayerArt.FACINGS[Player.facing(state)][0])
+		expect(view.playing() == walk_name and not view.flipped(),
 			"Shift plus movement selects the correct running direction", str(view.playing()))
-		expect(body.texture != null and body.texture.resource_path.begins_with(PlayerArt.DIR + String(run_name)),
+		expect(is_equal_approx(view.frame_seconds(), PlayerArt.RUN_FRAME_SECONDS),
+			"and plays it at the running pace", str(view.frame_seconds()))
+		expect(body.texture != null and body.texture.resource_path.begins_with(PlayerArt.DIR + String(walk_name)),
 			"The actual running view resolves promoted runtime textures")
 		await press_key(motion_key, false)
 		await frames(3)
@@ -3865,7 +3892,8 @@ func _case_0073_player_art() -> void:
 	await frames(4)
 	await press_key(KEY_SHIFT, false)
 	await frames(4)
-	expect(view.playing() == &"walk_east", "Releasing Shift returns to walking while movement stays held")
+	expect(view.playing() == &"walk_east" and view.frame_seconds() > PlayerArt.RUN_FRAME_SECONDS,
+		"Releasing Shift returns to walking while movement stays held")
 	await press_key(KEY_D, false)
 	await frames(3)
 

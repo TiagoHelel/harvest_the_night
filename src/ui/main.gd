@@ -285,28 +285,6 @@ func _process(_delta: float) -> void:
 		_world.follow_player(Player.position(_driver.state), _delta)
 
 
-func _unhandled_input(event: InputEvent) -> void:
-	if _driver == null or _driver.state.is_empty() or not _driver.running:
-		return
-	if _router != null and _router.here() != _router.RUN:
-		return
-	for action in [&"zoom_in", &"zoom_out", &"zoom_reset"]:
-		if event.is_action_pressed(action):
-			if House.inside(_driver.state):
-				if action == &"zoom_reset":
-					_house_view.reset_zoom()
-				else:
-					_house_view.change_zoom(1 if action == &"zoom_in" else -1)
-				get_viewport().set_input_as_handled()
-				return
-			if action == &"zoom_reset":
-				_world.reset_zoom()
-			else:
-				_world.change_zoom(1 if action == &"zoom_in" else -1)
-			get_viewport().set_input_as_handled()
-			return
-
-
 ## Fold this run's numbers into the profile and write both files, once per
 ## night survived.
 ##

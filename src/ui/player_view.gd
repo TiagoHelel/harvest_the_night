@@ -13,10 +13,12 @@ extends Node2D
 ## It sits inside the world's y-sorted layer, so walking behind a tree puts the
 ## player behind the tree.
 ##
-## ## Two tiles wide and three tall
+## ## Two tiles tall, like Stardew Valley's farmer
 ##
-## FHD art: 60px body on a 96x96 source canvas, drawn at half scale over
-## the unchanged 16px grid. FHD renders each authored pixel at twice its size.
+## FHD art: the reviewed blue walk, a ~64px body on an 80x80 source canvas,
+## drawn at half scale over the unchanged 16px grid. At 1920x1080 a tile is
+## 64 screen pixels and one authored pixel is two, so the farmer stands 128
+## pixels tall - the height of Stardew Valley's 16x32 farmer at its 4x scale.
 ##
 ## **The node sits at the feet and the sprite is offset up and left**, rather
 ## than the node sitting at the sprite's corner, because y-sorting uses the
@@ -25,30 +27,37 @@ extends Node2D
 ##
 ## ## The animation is the state's, not the view's
 ##
-## Which drawing plays is `PlayerArt.pose()` off `Player.facing()` and the
-## action verb. PlayerWork observes core completion for tool contact and uses
-## a view clock only for the expiring return; idle/walk use their authored
-## durations. Neither clock can affect gameplay.
+## Which drawing plays is `PlayerArt.pose()` off `Player.facing()`, the
+## action verb and the direction last held - eight ways, read from the same
+## `intent.move` the rules read. PlayerWork observes core completion for tool
+## contact and uses a view clock only for the expiring return; idle/walk use
+## their authored durations. Neither clock can affect gameplay.
 
 ## Separately authored contact shadow, never painted into body/reaction art.
 ## Binary source pixels use the shared palette; modulate supplies transparency.
 const SHADOW := "res://sprites/actors/shadow.png"
-const BUBBLE_MASK := preload("res://src/ui/player_bubble.gdshader")
 ## Strong enough to read on grass and weak enough not to look like a hole.
 ## Measured rather than picked: at 0.30 the shadow changed 47 pixels of the
 ## screen and was invisible in a screenshot at three times magnification.
 const SHADOW_ALPHA := 0.42
+## The reaction glyphs were drawn three pixels above a 30px farmer's head. The
+## walking farmer is 32px tall, so the glyph keeps its authored place beside
+## the head and rises by the difference.
+const BUBBLE_LIFT := Vector2(0.0, -2.0)
 
 var _sprite: Sprite2D
 var _shadow: Sprite2D
 var _bubble: Sprite2D
-var _bubble_material: ShaderMaterial
 var _state: Dictionary = {}
 
 ## Seconds into the current animation, and which one that was. Reset when the
 ## drawing changes, so a swing always starts at the top of the swing.
 var _elapsed := 0.0
 var _playing: StringName = &""
+var _seconds := 0.0
+## The last direction held, eight ways. View memory only: it decides which of
+## the eight drawings stands still, never where anybody is.
+var _heading := Vector2i.ZERO
 var _textures: Dictionary = {}      # path -> Texture2D, loaded once
 var _work := PlayerWork.new()
 var _running := false
@@ -76,8 +85,6 @@ func _ready() -> void:
 	_sprite.offset = Vector2(-float(PlayerFrames.FEET.x),
 		-float(PlayerFrames.FEET.y))
 	add_child(_sprite)
-	_bubble_material = ShaderMaterial.new()
-	_bubble_material.shader = BUBBLE_MASK
 	_bubble = Sprite2D.new()
 	_bubble.name = "ReactionBubble"
 	_bubble.centered = false
@@ -90,6 +97,7 @@ func show_state(state: Dictionary) -> void:
 	if not is_same(state, _state):
 		_work.reset()
 		_playing = &""
+		_heading = Vector2i.ZERO
 	_state = state
 
 
@@ -116,10 +124,12 @@ func _process(delta: float) -> void:
 ## Pick the drawing, advance the clock, and show the frame.
 func _animate(delta: float) -> void:
 	_bubble.visible = false
-	_sprite.material = null
+	var move := _move()
+	if move != Vector2i.ZERO:
+		_heading = move
 	var pose := _work.pose(_state, delta)
 	if pose.is_empty():
-		pose = PlayerArt.pose(Player.facing(_state), _is_moving(), _verb(), _running)
+		pose = PlayerArt.pose(Player.facing(_state), move != Vector2i.ZERO, _verb(), _running, _heading)
 	var name: StringName = pose["name"]
 	if int(pose["frames"]) < 1:
 		_sprite.texture = null
@@ -127,18 +137,11 @@ func _animate(delta: float) -> void:
 
 	# **Task 0109.** The rules say which bubble and for how long; this only
 	# draws it. Nothing here decides when one appears, which is what lets a
-	# replay and a screenshot show the same one.
+	# replay and a screenshot show the same one. Only the glyph is drawn:
+	# the farmer keeps standing the way they stand.
 	var holding_rod := Fishing.is_casting(_state) and name == &"reel"
 	var reacting := PlayerArt.reaction_pose(&"idle_south" if holding_rod else name, Reactions.now(_state))
-	if reacting != &"" and not holding_rod:
-		name = reacting
-		pose = pose.duplicate()
-		pose["name"] = name
-		pose["frames"] = int(PlayerFrames.COUNT.get(name, 1))
-		pose["seconds"] = float(PlayerFrames.SECONDS.get(name, 0.2))
-		# The drawings face the viewer, so a mirrored one would be a farmer
-		# whose bubble sits on the wrong shoulder.
-		pose["flip"] = false
+	var seconds := float(pose["seconds"])
 	if name != _playing:
 		# **From the start.** A chop that inherited the walk's clock would
 		# begin halfway through the swing, which is the one frame of it that
@@ -146,7 +149,12 @@ func _animate(delta: float) -> void:
 		_playing = name
 		_elapsed = 0.0
 	else:
+		# Walking and running share drawings at two speeds. Rescaling the
+		# clock keeps the frame on screen when the run key changes.
+		if _seconds > 0.0 and seconds > 0.0 and not is_equal_approx(seconds, _seconds):
+			_elapsed *= seconds / _seconds
 		_elapsed += delta
+	_seconds = seconds
 
 	var frame := int(pose["frame"]) if pose.has("frame") else PlayerArt.frame_at(pose, _elapsed)
 	var path := PlayerArt.texture_path(name, frame)
@@ -162,31 +170,26 @@ func _animate(delta: float) -> void:
 	_sprite.offset = Vector2(float(feet.x - canvas.x) if bool(pose["flip"])
 		else -float(feet.x), -float(feet.y))
 	if reacting != &"" and texture != null:
-		if holding_rod:
-			var reaction_path := PlayerArt.texture_path(reacting, 0)
-			_show_bubble(_texture(reaction_path), RasterArt.FRAMES[reaction_path], false)
-		else:
-			_show_bubble(texture, metadata)
+		var reaction_path := PlayerArt.texture_path(reacting, 0)
+		# The rod pose is the older 30px farmer the glyph was drawn beside.
+		_show_bubble(_texture(reaction_path), RasterArt.FRAMES[reaction_path],
+			Vector2.ZERO if holding_rod else BUBBLE_LIFT)
 
 
-## The existing reaction selects the pose; only its glyph can move to stay
-## within the viewport. The body keeps its ground anchor, scale and sorting.
-func _show_bubble(texture: Texture2D, metadata: Dictionary, mask_body := true) -> void:
+## The reaction frame's own glyph, where it was drawn relative to the feet.
+## Only the glyph can move to stay within the viewport; the body keeps its
+## ground anchor, scale and sorting.
+func _show_bubble(texture: Texture2D, metadata: Dictionary, lift: Vector2) -> void:
 	if not metadata.has("bubble"):
 		push_error("Missing source-owned reaction bubble crop")
 		return
 	var box: Rect2i = metadata["bubble"]
-	if mask_body:
-		_sprite.material = _bubble_material
-		_bubble_material.set_shader_parameter("bubble_box",
-			Vector4(box.position.x, box.position.y, box.size.x, box.size.y))
 	_bubble.texture = texture
 	_bubble.region_rect = Rect2(box)
 	var draw_scale := float(metadata.get("draw_scale", 1.0))
 	_bubble.scale = Vector2.ONE * draw_scale
-	var origin := _sprite.offset if mask_body else -Vector2(metadata["pivot"])
-	_bubble.position = (origin + Vector2(box.position)) * draw_scale
-	# Work in actual viewport pixels, including integer stretch/camera zoom.
+	_bubble.position = (Vector2(box.position) - Vector2(metadata["pivot"])) * draw_scale + lift
+	# Work in actual viewport pixels, including the integer stretch.
 	var transform := get_global_transform_with_canvas()
 	var top_left := transform * _bubble.position
 	var bottom_right := transform * (_bubble.position + Vector2(box.size) * draw_scale)
@@ -206,12 +209,13 @@ func _verb() -> StringName:
 	return &"" if action.is_empty() else StringName(action["verb"])
 
 
-## Whether they are walking. Asked of the intent rather than of two positions,
-## because comparing frames would make a farmer standing against a fence look
-## like a farmer standing still - and they are holding a key.
-func _is_moving() -> bool:
+## The direction held, eight ways, or zero. Asked of the intent rather than of
+## two positions, because comparing frames would make a farmer standing
+## against a fence look like a farmer standing still - and they are holding a
+## key.
+func _move() -> Vector2i:
 	var move: Array = (_state["intent"] as Dictionary)["move"]
-	return int(move[0]) != 0 or int(move[1]) != 0
+	return Vector2i(signi(int(move[0])), signi(int(move[1])))
 
 
 ## Textures, loaded once each. Forty-two frames loaded per frame of video
@@ -230,6 +234,11 @@ func _texture(path: String) -> Texture2D:
 ## What is on screen right now, for `input_check` to read back.
 func playing() -> StringName:
 	return _playing
+
+
+## How long each frame of it lasts: shorter while the run key is held.
+func frame_seconds() -> float:
+	return _seconds
 
 
 func flipped() -> bool:

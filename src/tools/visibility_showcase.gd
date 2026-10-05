@@ -1,6 +1,6 @@
 extends SceneTree
 
-## Native evidence and regression guards for zoom, camera tracking and idle life.
+## Native evidence and regression guards for the fixed camera, tracking and idle life.
 var _world: WorldView
 var _player: PlayerView
 var _state: Dictionary
@@ -44,21 +44,23 @@ func _run() -> void:
 	_world.follow_player(sub + Vector2i(2, 0), 1.0 / 60.0)
 	expect(_world._camera.position.x > start.x and _world._camera.position.x - start.x < 0.5,
 		"Camera responds smoothly to movement within one cell")
-	for zoom_step in [-100, 100, -3]:
-		_world.change_zoom(zoom_step)
-		for frame in 90:
-			_world.follow_player(sub, 1.0 / 60.0)
-		expect(_world._camera.zoom.x == _world._zoom_target, "Zoom settles to its bounded level")
-		for cell in [Vector2i.ZERO, Vector2i(44,19), Vector2i(23,10)]:
-			_world.look_at_cell(cell)
-			var half := Vector2(480,270) / (_world._camera.zoom * 2.0)
-			var centre := _world._camera.position
-			expect(centre.x >= half.x and centre.y >= half.y and centre.x + half.x <= WorldView.WORLD_SIZE.x
-				and centre.y + half.y <= WorldView.WORLD_SIZE.y, "Zoom and pan keep all viewport corners inside the farm")
-			expect(_world.screen_to_cell(_world.cell_to_screen(cell)) == cell, "Zoom preserves cell picking")
-		await _shoot("zoom-%s" % str(_world._camera.zoom.x))
+	# **No zoom, as in Stardew Valley**: one tile is always 16 native pixels,
+	# 64 screen pixels at 1920x1080, and the farmer two tiles tall.
+	expect(not _world.has_method("change_zoom") and not _world.has_method("reset_zoom"),
+		"The farm camera exposes no zoom")
+	for frame in 90:
+		_world.follow_player(sub, 1.0 / 60.0)
+	expect(_world._camera.zoom == Vector2.ONE, "The camera stays at the fixed Stardew-like scale")
+	var far_corner := Vector2i(Grid.WIDTH - 1, Grid.HEIGHT - 1)
+	for cell in [Vector2i.ZERO, far_corner, Vector2i(23,10), Vector2i(Grid.WIDTH - 1, 0), Vector2i(0, Grid.HEIGHT - 1)]:
+		_world.look_at_cell(cell)
+		var half := Vector2(480,270) * 0.5
+		var centre := _world._camera.position
+		expect(centre.x >= half.x and centre.y >= half.y and centre.x + half.x <= WorldView.WORLD_SIZE.x
+			and centre.y + half.y <= WorldView.WORLD_SIZE.y, "Panning keeps all viewport corners inside the farm")
+		expect(_world.screen_to_cell(_world.cell_to_screen(cell)) == cell, "The fixed camera preserves cell picking")
+		await _shoot("pan-%d-%d" % [cell.x, cell.y])
 	expect(var_to_bytes(_state) == unchanged, "Camera controls never alter the saved simulation")
-	_world.reset_zoom()
 	for frame in 90:
 		_world.follow_player(sub, 1.0 / 60.0)
 	_world.look_at_cell(Vector2i(24,10))

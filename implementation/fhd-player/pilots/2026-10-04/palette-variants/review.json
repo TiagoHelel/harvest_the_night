@@ -1,6 +1,6 @@
 {
   "date": "2026-10-05",
-  "status": "awaiting_approval",
+  "status": "blue_selected",
   "method": "User-authorized deterministic palette mapping",
   "reference": "right",
   "variants": [
@@ -14,5 +14,9 @@
   "source_frames": 64,
   "animation_geometry_preserved": true,
   "unmasked_rgba_preserved": true,
-  "runtime_integrated": false
+  "runtime_integrated": true,
+  "selected": "blue",
+  "selection_date": "2026-10-05",
+  "user_instruction": "Integre os sprites de caminhada dessa pasta, usando somente a versão azul e preservando tamanho, alinhamento e ordem dos frames.",
+  "runtime_promotion": "promote_blue_walk.py; contract runtime-blue-walk-contract.json"
 }

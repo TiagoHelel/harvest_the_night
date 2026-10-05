@@ -186,7 +186,8 @@ func _run() -> void:
 ## The farm expansion and room use the same deterministic state and inputs.
 func _task_0111_house() -> void:
 	var state := State.create(111111)
-	expect(Grid.CELLS * 100 == 900 * 125, "the preceding farm gains exactly 25% area")
+	expect(Grid.WIDTH >= Save.V3_FARM.x and Grid.HEIGHT >= Save.V3_FARM.y,
+		"the 45x25 farm this task built is still the top left of today's")
 	var new_bed := Vector2i(31, 21)
 	Farming.act(state, new_bed)
 	Farming.act(state, new_bed)
@@ -2181,8 +2182,8 @@ func _task_0007_resources() -> void:
 func _task_0008_farm() -> void:
 	var state := State.create(31)
 
-	expect(Grid.WIDTH == 45 and Grid.HEIGHT == 25 and Grid.CELLS == 1125,
-		"the farm has another 25% more area than its previous 900 cells", str(Grid.CELLS))
+	expect(Grid.WIDTH == 80 and Grid.HEIGHT == 65 and Grid.CELLS == 5200,
+		"the farm is Stardew Valley's Standard Farm, 80 x 65 tiles", str(Grid.CELLS))
 	expect((state["terrain"] as PackedByteArray).size() == Grid.CELLS,
 		"every cell has terrain")
 
@@ -8785,7 +8786,11 @@ func _walled_lane(seed_value: int, where_gap: StringName,
 		# row of this column is a tree, so leaving row seventeen unwalled left
 		# the line sealed after all and every runner dutifully ate its way
 		# through a wall it was supposed to run around.
-		for y in range(Grid.HEIGHT - 1, -1, -1):
+		#
+		# **Within the farmstead's 25 rows.** The farm runs on to row 64 now,
+		# and a gap down there is a way round four times as long as the one
+		# this lane measures; the column below the gap is walled instead.
+		for y in range(mini(Grid.HEIGHT, Save.V3_FARM.y) - 1, -1, -1):
 			if Farm.walkable(state, Vector2i(column, y)):
 				gap = y
 				break
@@ -13180,14 +13185,15 @@ func _task_0073_player_art() -> void:
 		expect(not bool(PlayerArt.pose(facing, false, &"")["flip"]),
 			"nothing but east is mirrored", str(facing))
 
-	# **Standing and walking are different drawings.**
+	# **Standing and walking are different drawings.** Running is the same
+	# walk played faster: the blue farmer has no running art yet.
 	for facing in [Player.SOUTH, Player.NORTH, Player.WEST, Player.EAST]:
 		var still := PlayerArt.pose(facing, false, &"")
 		var going := PlayerArt.pose(facing, true, &"")
 		var running := PlayerArt.pose(facing, true, &"", true)
-		expect(str(running["name"]) == "run_%s" % PlayerArt.FACINGS[facing][0]
-			and int(running["frames"]) == 8 and not bool(running["flip"]),
-			"Each direction has eight registered running poses", str(running))
+		expect(running["name"] == going["name"] and int(running["frames"]) == 8
+			and float(running["seconds"]) < float(going["seconds"]) and not bool(running["flip"]),
+			"Each direction runs its eight walking poses at a faster pace", str(running))
 		expect(int(going["frames"]) == 8, "Walking retains all eight reviewed poses")
 		expect(PlayerArt.pose(facing, false, &"", true)["name"] == still["name"],
 			"Holding run without movement remains idle")
@@ -13202,6 +13208,18 @@ func _task_0073_player_art() -> void:
 	var busy := PlayerArt.pose(Player.SOUTH, true, &"chop")
 	expect(str(busy["name"]) == "chop",
 		"a verb is drawn even while a direction is held", str(busy["name"]))
+
+	# **Eight directions of walking.** A held diagonal draws its own diagonal,
+	# and standing still afterwards holds that diagonal, as long as the core
+	# facing agrees with it.
+	for heading in PlayerArt.HEADINGS:
+		var facing := Player.facing_for(heading.x, heading.y, Player.SOUTH)
+		var suffix := String(PlayerArt.HEADINGS[heading])
+		expect(str(PlayerArt.pose(facing, true, &"", false, heading)["name"]) == "walk_" + suffix
+			and str(PlayerArt.pose(facing, false, &"", false, heading)["name"]) == "idle_" + suffix,
+			"heading %s walks and stands as %s" % [str(heading), suffix])
+	expect(str(PlayerArt.pose(Player.EAST, false, &"", false, Vector2i(-1, 1))["name"]) == "idle_east",
+		"a heading the facing has since left falls back to the facing's own drawing")
 
 	# **Every frame the table promises is a file that exists.**
 	var counted := 0
@@ -13240,18 +13258,20 @@ func _task_0073_player_art() -> void:
 	expect(PlayerArt.frame_at(walk, float(walk["frames"])
 		* float(walk["seconds"])) == 0, "and comes back round to it")
 
-	# **The canvas is the size task 0073 decided on**: two tiles wide and
-	# three tall over an unchanged sixteen pixel grid.
+	# **Two tiles tall, as Stardew Valley's farmer is on a 1080p screen**: its
+	# 16x32 sprite at 4x is 128 pixels, two 64px tiles. Ours is the reviewed
+	# ~64px drawing at half scale over the sixteen pixel grid - 32 logical
+	# pixels, which the 480x270 viewport stretches by four to the same 128.
 	var tile := GameData.TILE_SIZE
-	var draw_scale := float(RasterArt.FRAMES[PlayerArt.texture_path(&"idle_south", 0)].get("draw_scale", 1.0))
-	var idle_metadata: Dictionary = RasterArt.FRAMES[PlayerArt.texture_path(&"idle_south", 0)]
-	var logical_canvas := Vector2(idle_metadata["canvas"]) * draw_scale
-	expect(logical_canvas.x >= tile * 2
-		and logical_canvas.x <= tile * 4,
-		"the player is about two tiles wide", str(PlayerFrames.CANVAS))
-	expect(logical_canvas.y >= tile * 3
-		and logical_canvas.y <= tile * 4,
-		"and about three tall", str(PlayerFrames.CANVAS))
+	var idle_path := PlayerArt.texture_path(&"idle_south", 0)
+	var draw_scale := float(RasterArt.FRAMES[idle_path].get("draw_scale", 1.0))
+	var idle_metadata: Dictionary = RasterArt.FRAMES[idle_path]
+	var standing := Image.load_from_file(ProjectSettings.globalize_path(idle_path)).get_used_rect()
+	var logical_height := float(standing.size.y) * draw_scale
+	expect(logical_height >= tile * 1.9 and logical_height <= tile * 2.1,
+		"the standing farmer is two tiles tall", str(logical_height))
+	expect(Vector2(idle_metadata["canvas"]) * draw_scale == Vector2(40, 40),
+		"on an 80x80 native canvas drawn at half scale", str(idle_metadata["canvas"]))
 	expect(PlayerFrames.FEET.y > PlayerFrames.CANVAS.y / 2,
 		"and stands near the bottom of it", str(PlayerFrames.FEET))
 
@@ -15935,10 +15955,9 @@ func _task_0095_controls() -> void:
 		"the right button is already SELL, so it is refused too",
 		String(moused.get("why", "")))
 	var free_click := InputEventMouseButton.new()
-	var release_wheel := InputEventKey.new()
-	release_wheel.keycode = KEY_F8
-	expect(bool(actions.bind(&"zoom_in", release_wheel)["ok"]),
-		"Zoom can be rebound to free its default wheel button")
+	# The wheel is free: there is no camera zoom to own it, as in Stardew.
+	expect(not InputMap.has_action("zoom_in") and not InputMap.has_action("zoom_out"),
+		"No zoom action is shipped")
 	free_click.button_index = MOUSE_BUTTON_WHEEL_UP
 	moused = actions.bind(&"ability", free_click)
 	expect(bool(moused["ok"]), "a free mouse button is taken like a key",

@@ -1,4 +1,10 @@
-"""Promote reviewed locomotion through the existing raster owner, without recuts."""
+"""Promote reviewed locomotion through the existing raster owner, without recuts.
+
+Superseded on 2026-10-05: the runtime idle/walk/run families now come from
+`implementation/fhd-player/pilots/2026-10-04/palette-variants/promote_blue_walk.py`
+(the user's blue eight-direction walk). This review and its sources are kept;
+running this script again would put the earlier four-direction farmer back.
+"""
 from pathlib import Path
 import argparse
 import importlib.util

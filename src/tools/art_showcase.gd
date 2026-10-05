@@ -1240,32 +1240,40 @@ func _add_house(corner: Vector2i) -> void:
 			(_state["occupants"] as Dictionary)[Grid.index(corner + Vector2i(x, y))] = {"id": &"house"}
 
 
-## The actual PlayerView clock/flip/frame binding, plus core-resolved diagonal facing.
+## The actual PlayerView clock/frame binding for the reviewed blue walk, in
+## all eight directions, plus the four facings core resolves them onto.
 func _locomotion() -> void:
 	(_state["entities"] as Dictionary).clear()
 	var view: PlayerView = _world.get_node("Occupants/PlayerView")
 	view.set_process(false)
 	var body: Sprite2D = view.get_node("Body")
 	var player: Dictionary = _state["player"]
-	for facing in [Player.SOUTH, Player.WEST, Player.NORTH, Player.EAST]:
+	for heading in PlayerArt.HEADINGS:
+		var suffix: StringName = PlayerArt.HEADINGS[heading]
 		for motion in ["idle", "walk", "run"]:
 			var moving: bool = motion != "idle"
 			var running: bool = motion == "run"
 			view.set_running(running)
 			_set_contact(player, Vector2i(248, 208))
-			var step: Vector2i = Player.FACING_STEPS[facing]
-			_state["intent"]["move"] = [step.x, step.y]
+			_state["intent"]["move"] = [heading.x, heading.y]
 			Player.tick(_state)
-			expect(Player.facing(_state) == facing, "Core movement resolves the cardinal facing")
+			var facing := Player.facing(_state)
+			expect(facing == Player.facing_for(heading.x, heading.y, facing),
+				"Core resolves the eight-way heading onto one of its four facings")
+			# The view sees the direction while it is held, then stands in it.
+			view._process(0.0)
 			if not moving:
 				_state["intent"]["move"] = [0, 0]
-			var pose := PlayerArt.pose(facing, moving, &"", running)
+			# Run and walk share drawings, so start every family from frame 0.
+			view._playing = &""
+			var pose := PlayerArt.pose(facing, moving, &"", running, heading)
 			var count := int(pose["frames"])
-			var expected_name: StringName = StringName("%s_%s" % [
-				motion, PlayerArt.FACINGS[facing][0]])
+			var expected_name := StringName("%s_%s" % ["walk" if moving else "idle", suffix])
 			expect(pose["name"] == expected_name and count == (8 if moving else 3),
-				"Each facing selects its complete reviewed idle/walk/run family")
+				"Each of the eight directions selects its own reviewed walk and held idle")
 			expect(PlayerFrames.SECONDS.has(expected_name), "Timing comes from the accepted strip")
+			expect(is_equal_approx(float(pose["seconds"]), PlayerArt.RUN_FRAME_SECONDS if running
+				else float(PlayerFrames.SECONDS[expected_name])), "Running plays the same cycle faster")
 			await _settle()
 			var fixed_contact := ArtPlacement.contact(player["pos"])
 			for phase in count * 2:
@@ -1285,13 +1293,14 @@ func _locomotion() -> void:
 				if not moving:
 					expect(view.position == fixed_contact, "Idle feet stay planted across both loops")
 				var metadata: Dictionary = RasterArt.FRAMES.get(body.texture.resource_path, {})
-				expect(metadata.get("canvas") == Vector2i(96,96)
+				expect(metadata.get("canvas") == Vector2i(80, 80) and metadata.get("pivot") == Vector2i(40, 72)
 					and body.scale == Vector2(0.5,0.5), "Every locomotion frame preserves reviewed native geometry")
 				if phase < count:
-					await _shoot("%s_facing%d_%02d" % [motion, facing, phase],
-						"%s / facing %d / authored frame %d" % [expected_name, facing, phase])
+					await _shoot("%s_%s_%02d" % [motion, suffix, phase],
+						"%s / %s / authored frame %d" % [expected_name, motion, phase])
 	view.set_running(false)
-	# Vertical wins a diagonal tie in core; release retains the resulting facing.
+	view._playing = &""
+	# Vertical wins a diagonal tie in core, but the drawing is the diagonal one.
 	for move in [Vector2i(-1, -1), Vector2i(1, -1), Vector2i(-1, 1), Vector2i(1, 1)]:
 		_set_contact(player, Vector2i(248, 208))
 		_state["intent"]["move"] = [move.x, move.y]
@@ -1303,12 +1312,17 @@ func _locomotion() -> void:
 			"Diagonal movement advances both axes using actual core rules")
 		view._process(0.13)
 		expect(Player.facing(_state) == expected and view.playing() ==
-			StringName("walk_%s" % PlayerArt.FACINGS[expected][0]), "Diagonal direction binds to core-facing art")
-		await _shoot("diagonal_%d_%d" % [move.x, move.y], "Diagonal %s: core facing, shared feet" % str(move))
+			StringName("walk_%s" % PlayerArt.HEADINGS[move]), "A diagonal walk shows its own diagonal drawing")
+		await _shoot("diagonal_%d_%d" % [move.x, move.y], "Diagonal %s: its own drawing, shared feet" % str(move))
 		_state["intent"]["move"] = [0, 0]
 		view._process(0.0)
-		expect(view.playing() == StringName("idle_%s" % PlayerArt.FACINGS[expected][0]),
-			"Releasing diagonal input retains facing and enters authored idle")
+		expect(view.playing() == StringName("idle_%s" % PlayerArt.HEADINGS[move]),
+			"Releasing a diagonal stands still in that diagonal")
+	# A facing the rules change afterwards (a verb turning to its target)
+	# outranks the remembered diagonal.
+	expect(PlayerArt.pose(Player.WEST, false, &"", false, Vector2i(1, 1))["name"] == &"idle_west"
+		and PlayerArt.pose(Player.NORTH, true, &"", false, Vector2i(1, 1))["name"] == &"walk_north",
+		"A heading the core facing disagrees with falls back to the facing's own drawing")
 	# Direction changes without recreating the view, including east -> west.
 	for facing in [Player.EAST, Player.WEST, Player.NORTH, Player.SOUTH]:
 		var step: Vector2i = Player.FACING_STEPS[facing]
@@ -1320,6 +1334,20 @@ func _locomotion() -> void:
 		expect(view.position == ArtPlacement.contact(player["pos"]) and _body_contact_is_valid(body),
 			"Turning never adds an artificial canvas-width displacement")
 		await _shoot("turn_%d" % facing, "Direction change / facing %d / no contact jump" % facing)
+	# **Stardew Valley's height at 1920x1080.** Its farmer is a 16x32 sprite at
+	# 4x: two 64px tiles. Ours is ~64 native pixels at half scale, which the
+	# 480x270 viewport stretches by four: 128 screen pixels, the same two tiles.
+	for name in PlayerFrames.COUNT:
+		if not (String(name).begins_with("walk_") or String(name).begins_with("idle_")):
+			continue
+		for frame in int(PlayerFrames.COUNT[name]):
+			var path := PlayerArt.texture_path(name, frame)
+			var image := Image.load_from_file(ProjectSettings.globalize_path(path))
+			var used := image.get_used_rect()
+			var tall := float(used.size.y) * float(RasterArt.FRAMES[path].get("draw_scale", 1.0))
+			# A long stride dips the body a little: 1.8 tiles is the deepest.
+			expect(tall >= GameData.TILE_SIZE * 1.8 and tall <= GameData.TILE_SIZE * 2.1,
+				"%s is two tiles tall, like Stardew's farmer on a 1080p screen" % path)
 
 
 func _body_contact_is_valid(body: Sprite2D) -> bool:
@@ -1645,25 +1673,24 @@ func _reaction_check(view: PlayerView, kind: StringName, holding_rod := false) -
 	var bubble: Sprite2D = view.get_node("ReactionBubble")
 	var shadow: Sprite2D = view.get_node("Shadow")
 	var name := StringName("react_%s" % kind)
-	var body_name := &"reel" if holding_rod else name
+	# The farmer keeps standing as they stand: the reaction frames show the
+	# previous farmer, so only their glyph is drawn.
+	var body_name: StringName = &"reel" if holding_rod else PlayerArt.pose(Player.facing(_state), false, &"")["name"]
 	var glyph_path := PlayerArt.texture_path(name, 0)
 	expect(var_to_bytes(_state) == before, "Held reaction cannot update state or its lifetime")
 	expect(view.playing() == body_name and view.flipped() == (holding_rod and Player.facing(_state) == Player.EAST),
-		"Reaction keeps its south pose, or the held fishing rod's facing")
-	expect(body.texture != null and body.texture.resource_path == PlayerArt.texture_path(body_name, 0),
-		"Each existing reaction uses its own source-owned frame")
-	expect(body.offset == -Vector2(PlayerFrames.FEET) and body.texture.get_size() == Vector2(PlayerFrames.CANVAS),
-		"Reaction body preserves the common canvas and planted feet")
+		"Reaction keeps the farmer's own idle pose, or the held fishing rod's facing")
+	var body_path := body.texture.resource_path if body.texture != null else ""
+	expect(body_path.begins_with(PlayerArt.DIR + String(body_name) + "_"),
+		"A reaction never swaps the farmer for the older reaction body")
+	var body_metadata: Dictionary = RasterArt.FRAMES.get(body_path, {})
+	expect(_body_contact_is_valid(body) and body_metadata.has("pivot"),
+		"Reaction body preserves its own canvas and planted feet")
 	expect(view.position == ArtPlacement.contact(_state["player"]["pos"]), "Bubble clamping never moves the farmer")
 	var metadata: Dictionary = RasterArt.FRAMES[glyph_path]
 	expect(bubble.visible and bubble.texture.resource_path == glyph_path and bubble.region_rect == Rect2(metadata["bubble"]),
 		"One separate glyph draws the exact source-owned crop")
-	if holding_rod:
-		expect(body.material == null, "A separate bite bubble never masks the fishing rod")
-	else:
-		expect(body.material is ShaderMaterial and (body.material as ShaderMaterial).get_shader_parameter("bubble_box")
-			== Vector4(bubble.region_rect.position.x, bubble.region_rect.position.y,
-				bubble.region_rect.size.x, bubble.region_rect.size.y), "Body masks only its duplicate source glyph")
+	expect(body.material == null, "Nothing masks the farmer under a glyph")
 	var canvas_transform := bubble.get_global_transform_with_canvas()
 	var first := canvas_transform * Vector2.ZERO
 	var last := canvas_transform * bubble.region_rect.size
@@ -1760,7 +1787,8 @@ func _reactions() -> void:
 	await _shoot("suppressed_walk", "Moving east: authored walk, no reaction layer")
 	_state["intent"]["move"] = [0, 0]
 	view._process(0.0)
-	expect(view.playing() == &"react_note", "Stopping shows the still-active existing reaction")
+	expect(view.playing() == &"idle_east" and view.get_node("ReactionBubble").visible,
+		"Stopping shows the still-active existing reaction")
 	for _i in GameData.REACTION_TICKS:
 		Reactions.tick(_state)
 	view._process(0.0)
@@ -1793,25 +1821,35 @@ func _reactions() -> void:
 			expect(prop.get_child_count() == 1 and prop.get_child(0).texture.resource_path == PlayerView.SHADOW,
 				"Tree has one separate shared contact shadow")
 	await _shoot("shared_shadows", "Farmer, tree and walker share one compact contact-shadow source")
-	# On the real renderer, split body/glyph must equal the original combined PNG.
+	# On the real renderer a reaction adds its glyph and nothing else: every
+	# pixel it changes lies inside the glyph's own box.
 	if _capture:
 		for kind in Reactions.KINDS:
 			_reaction_fixture()
 			Reactions.show(_state, kind)
 			await _reaction_settle(view)
-			var body: Sprite2D = view.get_node("Body")
 			var bubble: Sprite2D = view.get_node("ReactionBubble")
 			await process_frame
 			await RenderingServer.frame_post_draw
-			var split := root.get_texture().get_image()
-			body.material = null
+			var with_glyph := root.get_texture().get_image()
+			var glyph_box := Rect2(bubble.get_global_transform_with_canvas() * Vector2.ZERO,
+				bubble.region_rect.size * bubble.scale).grow(1.0)
 			bubble.visible = false
 			await process_frame
 			await RenderingServer.frame_post_draw
-			var combined := root.get_texture().get_image()
-			expect(split.get_data() == combined.get_data(), "Split %s glyph equals combined source: no double glyph/halo/body alteration" % kind)
+			var without := root.get_texture().get_image()
+			var inside := 0
+			var outside := 0
+			for y in with_glyph.get_height():
+				for x in with_glyph.get_width():
+					if with_glyph.get_pixel(x, y) != without.get_pixel(x, y):
+						if glyph_box.has_point(Vector2(x, y) + Vector2(0.5, 0.5)):
+							inside += 1
+						else:
+							outside += 1
+			expect(inside > 0 and outside == 0, "The %s glyph changes only its own box; the farmer is untouched" % kind)
 			view._process(0.0)
-			await _shoot("split_equals_source_%s" % kind, "Renderer: %s body+glyph equals combined committed PNG" % kind)
+			await _shoot("glyph_only_%s" % kind, "Renderer: %s glyph beside the farmer's head" % kind)
 		_reaction_fixture()
 		await _reaction_settle(view)
 		var shadow: Sprite2D = view.get_node("Shadow")

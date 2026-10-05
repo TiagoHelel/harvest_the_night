@@ -48,6 +48,11 @@ func _legacy() -> Dictionary:
 	return state
 
 
+## Where a cell was in a version 2 save, whose rows were 45 cells long.
+func _legacy_index(cell: Vector2i) -> int:
+	return cell.y * Save.V2_FARM.x + cell.x
+
+
 func _run() -> void:
 	CaptureSize.configure(root)
 	_capture = not OS.get_cmdline_user_args().has("--check")
@@ -56,14 +61,20 @@ func _run() -> void:
 			_out = "res://" + arg.trim_prefix("--out=").trim_suffix("/") + "/"
 	_state = State.create(30303)
 	expect(GameData.validate().is_empty(), "Expanded farm data validates: %s" % str(GameData.validate()))
-	expect(Grid.CELLS == 1125 and Grid.CELLS * 100 == 900 * 125, "Farm has exactly 25% more total area")
+	# The farmstead this check was written for is the top left 45x25 of the
+	# Stardew-sized farm, unchanged, so its numbers are asked of that corner.
+	var farmstead := Save.V3_FARM
+	expect(Grid.WIDTH >= farmstead.x and Grid.HEIGHT >= farmstead.y and Grid.CELLS == 80 * 65,
+		"The farm is Stardew-sized with the 45x25 farmstead at its top left")
 	var available := 0
 	for idx in Grid.CELLS:
-		if Farm.is_empty(_state, Grid.cell(idx)) and _state["terrain"][idx] in [Farm.Terrain.GRASS, Farm.Terrain.SOIL]:
+		var at := Grid.cell(idx)
+		if at.x < farmstead.x and at.y < farmstead.y and Farm.is_empty(_state, at) \
+				and _state["terrain"][idx] in [Farm.Terrain.GRASS, Farm.Terrain.SOIL]:
 			available += 1
 	expect(available == 787 and available * 100 >= 591 * 125, "Enlarged buildings leave at least 25% more clear usable land")
 	for y in range(20, 25):
-		for x in Grid.WIDTH:
+		for x in farmstead.x:
 			expect(Farm.walkable(_state, Vector2i(x, y)) and Farm.terrain_at(_state, Vector2i(x, y)) in [Farm.Terrain.GRASS, Farm.Terrain.SOIL],
 				"Every new southern cell is clear ground")
 	expect(Farm.cells_of(_state, Farm.Terrain.SOIL).size() * 100 == 48 * 125,
@@ -80,23 +91,25 @@ func _run() -> void:
 				pending.append(neighbour)
 	var connected := 0
 	for y in range(20, 25):
-		for x in Grid.WIDTH:
+		for x in farmstead.x:
 			connected += int(reachable.has(Grid.index(Vector2i(x, y))))
 	expect(connected == 225, "All new southern land is reachable from the farmhouse without clearing trees")
 	expect(Farm.house_bounds(_state).size == GameData.HOUSE_SIZE, "House collision covers the enlarged footprint")
 	expect(not Farm.buildable(_state, House.porch(_state)) and Farm.walkable(_state, House.porch(_state)),
 		"The front door stays accessible and cannot be walled in")
 	var legacy := _legacy()
-	legacy["plots"][Grid.index(Vector2i(14, 7))] = {"crop": &"carrot", "growth": 123, "watered": true}
-	legacy["plots"][Grid.index(Vector2i(14, 8))] = {"crop": &"wheat", "growth": 77, "watered": true}
-	legacy["crafting"][Grid.index(Vector2i(12, 8))] = {"queue": [&"gunpowder"], "left": 25, "total": 30}
-	legacy["produced"][Grid.index(Vector2i(13, 8))] = {"at": 40, "yield": {&"wood": 2}}
-	var crops: Dictionary = legacy["plots"].duplicate(true)
-	var jobs: Dictionary = legacy["crafting"].duplicate(true)
-	var products: Dictionary = legacy["produced"].duplicate(true)
+	# A version 2 save keys its cells 45 to a row; today's grid is 80 wide.
+	legacy["plots"][_legacy_index(Vector2i(14, 7))] = {"crop": &"carrot", "growth": 123, "watered": true}
+	legacy["plots"][_legacy_index(Vector2i(14, 8))] = {"crop": &"wheat", "growth": 77, "watered": true}
+	legacy["crafting"][_legacy_index(Vector2i(12, 8))] = {"queue": [&"gunpowder"], "left": 25, "total": 30}
+	legacy["produced"][_legacy_index(Vector2i(13, 8))] = {"at": 40, "yield": {&"wood": 2}}
+	var crops := {Grid.index(Vector2i(14, 7)): legacy["plots"][_legacy_index(Vector2i(14, 7))].duplicate(true),
+		Grid.index(Vector2i(14, 8)): legacy["plots"][_legacy_index(Vector2i(14, 8))].duplicate(true)}
+	var jobs := {Grid.index(Vector2i(12, 8)): legacy["crafting"][_legacy_index(Vector2i(12, 8))].duplicate(true)}
+	var products := {Grid.index(Vector2i(13, 8)): legacy["produced"][_legacy_index(Vector2i(13, 8))].duplicate(true)}
 	var inventory: Dictionary = legacy["held"].duplicate(true)
 	var migrated := Save.step_up(legacy, 2, State.VERSION, Save.migrations())
-	expect(not migrated.is_empty() and int(migrated["version"]) == 3 and migrated["terrain"].size() == Grid.CELLS,
+	expect(not migrated.is_empty() and int(migrated["version"]) == State.VERSION and migrated["terrain"].size() == Grid.CELLS,
 		"Version 2 save expands successfully")
 	expect(migrated["plots"] == crops and migrated["crafting"] == jobs and migrated["produced"] == products
 		and migrated["held"] == inventory, "Migration preserves saved crops, queued work, deliveries and inventory")
@@ -187,10 +200,6 @@ func _run() -> void:
 	await _shoot("interior_dining", true)
 	_stand(_state, Vector2i(14, 7))
 	await _shoot("interior_bedroom", true)
-	_house.change_zoom(1)
-	_house._process(1.0)
-	await _shoot("interior_zoom", true)
-	_house.reset_zoom()
 	House.leave(_state)
 	await _shoot("exterior_return", false)
 	_world.queue_free()

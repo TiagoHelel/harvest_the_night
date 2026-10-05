@@ -9,10 +9,15 @@ extends RefCounted
 ## never guesses from the position, which is what would make a farmer chop at
 ## a tree they had already walked away from.
 ##
-## ## Locomotion has four explicit directions
+## ## Locomotion has eight directions
 ##
-## Reviewed idle/walk/run use their own cardinal bindings and ground pivots.
-## Existing work strips remain west-facing and mirror only when facing east.
+## The reviewed blue walk (2026-10-05) is drawn in all eight, so a diagonal
+## walk shows the diagonal drawing. Which one comes from the direction held,
+## `heading`; the rules still resolve it onto four facings, and the drawing
+## never disagrees with them (`direction()`). Standing still holds a pose of
+## the same walk, and running plays the same cycle faster - neither has art of
+## its own yet. Existing work strips remain west-facing and mirror only when
+## facing east.
 ##
 ## ## The speeds are data
 ##
@@ -25,6 +30,22 @@ extends RefCounted
 
 const DIR := "res://sprites/actors/"
 const BLINK_SECONDS := [3.2, 0.1, 0.16]
+
+## A held direction, as the suffix of the drawing that walks that way.
+const HEADINGS := {
+	Vector2i(0, 1): &"south",
+	Vector2i(0, -1): &"north",
+	Vector2i(-1, 0): &"west",
+	Vector2i(1, 0): &"east",
+	Vector2i(1, 1): &"south_east",
+	Vector2i(-1, 1): &"south_west",
+	Vector2i(1, -1): &"north_east",
+	Vector2i(-1, -1): &"north_west",
+}
+
+## Seconds a frame lasts while running: the walk's 0.1, played half again as
+## fast. The run key is presentation only, so this is not in `game_data.gd`.
+const RUN_FRAME_SECONDS := 0.07
 
 ## Seconds a frame lasts, per animation. A swing is quick, a stand is slow.
 const SECONDS := {
@@ -79,12 +100,15 @@ const FACINGS := [
 ## What to draw: {"name", "frames", "seconds", "flip"}.
 ##
 ## `verb` is empty when the player is not working. `moving` is whether they
-## are walking, which only matters when they are not.
-static func pose(facing: int, moving: bool, verb: StringName, running: bool = false) -> Dictionary:
+## are walking, which only matters when they are not. `heading` is the last
+## direction held, eight ways; zero draws the plain facing.
+static func pose(facing: int, moving: bool, verb: StringName, running: bool = false,
+		heading: Vector2i = Vector2i.ZERO) -> Dictionary:
 	var side: Array = FACINGS[clampi(facing, 0, FACINGS.size() - 1)]
 	var flip: bool = side[1]
 
 	var name: StringName = &""
+	var seconds := 0.0
 	if verb != &"" and VERBS.has(verb):
 		name = VERBS[verb]
 		flip = facing == Player.EAST
@@ -92,9 +116,11 @@ static func pose(facing: int, moving: bool, verb: StringName, running: bool = fa
 		name = COSMETIC[verb]
 		flip = facing == Player.EAST
 	elif moving:
-		name = StringName("%s_%s" % ["run" if running else "walk", side[0]])
+		name = StringName("walk_%s" % direction(facing, heading))
+		if running:
+			seconds = RUN_FRAME_SECONDS
 	else:
-		name = StringName("idle_%s" % side[0])
+		name = StringName("idle_%s" % direction(facing, heading))
 
 	# A missing binding/count is a source error, never a disguised idle pose.
 	if not PlayerFrames.COUNT.has(name):
@@ -103,9 +129,20 @@ static func pose(facing: int, moving: bool, verb: StringName, running: bool = fa
 	return {
 		"name": name,
 		"frames": int(PlayerFrames.COUNT.get(name, 0)),
-		"seconds": float(PlayerFrames.SECONDS.get(name, SECONDS.get(name, 0.2))),
+		"seconds": seconds if seconds > 0.0
+			else float(PlayerFrames.SECONDS.get(name, SECONDS.get(name, 0.2))),
 		"flip": flip,
 	}
+
+
+## Which of the eight drawings `heading` is - but only while it agrees with
+## the facing the rules hold. A chop that turned the farmer to face its tree
+## outranks the diagonal they walked in on.
+static func direction(facing: int, heading: Vector2i) -> StringName:
+	var step := Vector2i(signi(heading.x), signi(heading.y))
+	if step != Vector2i.ZERO and Player.facing_for(step.x, step.y, facing) == facing:
+		return HEADINGS[step]
+	return FACINGS[clampi(facing, 0, FACINGS.size() - 1)][0]
 
 
 ## Which frame of that pose, at this many seconds in. Loops.
@@ -126,7 +163,7 @@ static func frame_seconds(pose_data: Dictionary, frame: int) -> float:
 	return float(pose_data["seconds"])
 
 
-## Which drawing a reaction asks for, or `&""`.
+## Which reaction frame's glyph to draw, or `&""`.
 ##
 ## **Only over an idle pose.** A farmer mid-swing with a music note over
 ## their head is two things happening at once and reads as neither; a farmer
@@ -134,11 +171,9 @@ static func frame_seconds(pose_data: Dictionary, frame: int) -> float:
 ## for the work to finish, and if the bubble runs out first it is simply not
 ## shown - which is right, because the moment it was about has passed.
 ##
-## All four drawings face the viewer, so this turns the farmer south for as
-## long as it lasts. That is a choice and not an accident: it reads as
-## looking up, and the alternative - showing the bubble only when they
-## already happen to face south - is a feature that works a quarter of the
-## time.
+## Only the glyph is drawn: the reaction frames show the previous farmer, so
+## `PlayerView` keeps the farmer standing the way they stand and puts that
+## frame's source-owned glyph beside their head.
 static func reaction_pose(name: StringName, kind: StringName) -> StringName:
 	if kind == &"" or not String(name).begins_with("idle_"):
 		return &""
