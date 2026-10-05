@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-05",
+  "mode": "built-in image_gen",
+  "original_output": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-ade6d8ec-8038-4c41-abd1-d7e4b5dfdd7c.png",
+  "workspace_source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\player-fhd\\pilots\\2026-10-04\\walk-down-left\\contacts-r2.png",
+  "arguments": {
+    "prompt": "Use case: identity-preserve. Edit target image1 is the TWO diagnostic DOWN-LEFT contact sprites. Image2 is the approved original down-view farmer's proportion/style reference; image3 the approved down-right diagonal proportions. Change ONLY the proportion/style mismatch of image1: bring the head, hat, eyes and boots back to the original approved farmer proportions, without changing down-left perspective, the two opposite contact poses, diagnostic leg identity/colors or outfit. Current head/eyes and boots are too big/chibi. The original farmer is 64 native pixels tall with a 32-pixel-wide hat, head about17px tall, slim blue overall torso11px wide, trouser legs5-6px wide, compact ankle boots roughly7px wide and6px tall. Preserve original leg/torso lengths and use the references for the same head-to-body and shoe-to-trouser ratios. Eyes small readable white sclera and brown-black pupil, not oversized doll eyes. Make the entire farmer look like the original rotated three-quarter to southwest/front-left, not a different child character. Left cell: LEFT near cyan leg forward, RIGHT far magenta leg behind. Right cell: RIGHT far magenta forward, LEFT near cyan behind. Keep two limbs, equal sprite size, pixel art, no text, same two horizontal equal cells, transparent background.",
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/walk-down-left/contacts-r1.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/walk-down-left/approved-down-reference.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/walk-down-left/diagonal-proportions-reference.png"
+    ],
+    "transparent_background": true
+  },
+  "sha256": "6166f29083d26f635141a20622c6df82cee926901e793729ef4bbeb90a5bfe7d",
+  "dimensions": [
+    1774,
+    887
+  ],
+  "references": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/walk-down-left/contacts-r1.png",
+      "sha256": "685aacd2e5f2edeac044dad7fbe81df52ae0e94315f8d91dcf3313559d37c379"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/walk-down-left/approved-down-reference.png",
+      "sha256": "21c31bb03fea8492722de65a82ffe5fe166ced6b50d70d3921f5648d7e1c5c9a"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/walk-down-left/diagonal-proportions-reference.png",
+      "sha256": "6e4ba2e954d40825d8347debd5f804c5fea9db54fddf0edcba1a9ccd5ff6939a"
+    }
+  ],
+  "review": "Rotated contact orientation retained; head/eyes smaller and boots restored. Reference only: equal arm silhouettes and pelvis ownership still ambiguous. Transition guides must govern subsequent motion.",
+  "runtime_integrated": false
+}

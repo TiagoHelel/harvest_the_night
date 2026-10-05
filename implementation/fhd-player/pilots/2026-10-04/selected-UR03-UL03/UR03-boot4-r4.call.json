@@ -135,7 +135,7 @@
   "UL03": "approved; eight frozen PNGs unchanged",
   "current_native_unchanged": 56,
   "scope": "Only frame4 boot lowered1nativepixel relative to boot4-r3; frame7 byte-identical.",
-  "status": "awaiting user visual review; no runtime integration",
+  "status": "approved by user2026-10-05",
   "user_feedback": "Boot shape is good; lower frame4 foot slightly for walking motion.",
   "change": "Existing boot source placement moved down1nativepixel (2screenpixels at preview scale); no generation.",
   "visual_review": {
@@ -150,5 +150,6 @@
     "result": "PASS",
     "log": "boot4-r4-engine-check.log",
     "sha256": "7b0ef343747a4773408b341309d819d6454cfab55e9139865d40ed5ca30bcfbe"
-  }
+  },
+  "user_approval": "ta bom vai, ok"
 }

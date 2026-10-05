@@ -1,0 +1,126 @@
+{
+  "selected_source": "tracking-eight.png",
+  "source_size": [
+    1774,
+    887
+  ],
+  "source_row_cuts": [
+    0,
+    445,
+    887
+  ],
+  "source_col_cuts": [
+    0,
+    444,
+    887,
+    1330,
+    1774
+  ],
+  "common_source_scale": 0.18028169014084508,
+  "native_canvas": [
+    80,
+    80
+  ],
+  "hat_calibration": 32,
+  "source_alpha_threshold": 128,
+  "resample": "nearest",
+  "anchor": "hat center and fixed top8px",
+  "frames_metrics": [
+    {
+      "frame": 1,
+      "bbox": [
+        24,
+        8,
+        60,
+        69
+      ],
+      "height": 61,
+      "hat_region_width": 32,
+      "sha256": "45102fb4d930cf4bf1f8fdf8deffd6de39784815420a0f1fef5b7debc6f96401"
+    },
+    {
+      "frame": 2,
+      "bbox": [
+        24,
+        8,
+        62,
+        69
+      ],
+      "height": 61,
+      "hat_region_width": 32,
+      "sha256": "074a6ddf620745ac7bcadde499d6942d8cacfcd762703eb8a2e34cf228e44f6e"
+    },
+    {
+      "frame": 3,
+      "bbox": [
+        24,
+        8,
+        61,
+        69
+      ],
+      "height": 61,
+      "hat_region_width": 32,
+      "sha256": "1ab8debcceb1cb7eefe55e213721ea7454352bae4dd00566d996eda9013dd9c4"
+    },
+    {
+      "frame": 4,
+      "bbox": [
+        24,
+        8,
+        57,
+        68
+      ],
+      "height": 60,
+      "hat_region_width": 32,
+      "sha256": "fb3de70e309a3908915c9d4ffc79ac6e90a302e2b912ba1e99678271e97ced87"
+    },
+    {
+      "frame": 5,
+      "bbox": [
+        24,
+        8,
+        60,
+        70
+      ],
+      "height": 62,
+      "hat_region_width": 32,
+      "sha256": "706135f8bad4fd89984b38408a2c7b2cd300e6836a82587aa61e4caffd1b6523"
+    },
+    {
+      "frame": 6,
+      "bbox": [
+        24,
+        8,
+        59,
+        70
+      ],
+      "height": 62,
+      "hat_region_width": 32,
+      "sha256": "d5f72b56b749800cb3378a56c9f5f7d470d80eb57341eeb5bea27f2714178be5"
+    },
+    {
+      "frame": 7,
+      "bbox": [
+        22,
+        8,
+        60,
+        68
+      ],
+      "height": 60,
+      "hat_region_width": 33,
+      "sha256": "2b6662b8cc66b4a0bab79d44bf92ae349da36b4d6132664ca10795c3717ecf1f"
+    },
+    {
+      "frame": 8,
+      "bbox": [
+        24,
+        8,
+        62,
+        70
+      ],
+      "height": 62,
+      "hat_region_width": 32,
+      "sha256": "6e49656a06b26d289c7d7e324e4be94f5e5228b7a75c60fa803ce6adba7021e5"
+    }
+  ]
+}

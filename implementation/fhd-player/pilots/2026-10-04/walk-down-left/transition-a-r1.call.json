@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-05",
+  "mode": "built-in image_gen",
+  "original_output": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-04d0d3f1-aa9a-404d-af44-0f2cf7ffd599.png",
+  "workspace_source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\player-fhd\\pilots\\2026-10-04\\walk-down-left\\transition-a-r1.png",
+  "arguments": {
+    "prompt": "Use case: identity-preserve.\nAsset type: farmer DOWN-LEFT walk transition A, FOUR frames 1,2,3,4 in a 2-column by2-row square sheet, row-major. Image1 is the approved original farmer down-view: preserve its mature slim proportions (body height twice hat width, head ~quarter of height), eye size, clothes and boots. Image2 supplies southwest/front-left rotation and two contact-pose direction references ONLY; do not inherit its wider chibi head or unchanged arms. Image3 is the exact fixed-ownership motion guide for THESE four phases. Follow its hip/knee/foot chains, not the stick figure's design.\nSame farmer strawhat reddish-brown hair small white eyes white shirt blue bib overalls gold buttons. Walk toward viewer and left, FRONT THREE-QUARTER DOWN-LEFT. No back view. No run/high hop. Low compact walking step. Every sprite identical slim body with same head/hat size. Hat width HALF standing body height, torso about11 native pixels, trousers5 pixels each and compact low ankle boots7x6 pixels. Native body equivalent64px tall and32px-wide hat.\nDiagnostic anatomical LEFT near leg CYAN (#00bfc9), diagnostic anatomical RIGHT far leg MAGENTA (#e42aad), entire trousers AND boot retain color. Fixed pelvis attachment: MAGENTA hip on screen-LEFT, CYAN hip on screen-RIGHT in ALL four frames. Put visible small colored marks at those two same hip roots just below the blue bib, so ownership can be traced. The cyan thigh must diagonally CROSS IN FRONT of the magenta thigh on contact1, not attach to the wrong hip. Colors never exchange ownership at passing. Two full connected thigh/knee/shin/ankle chains; normal calf width.\nPhase1: cyan leg reaches forward-left/down, magenta trails right/up; its magenta hip still screen-left and cyan hip screen-right. Phase2: weight on cyan foot, magenta bends and swings under body smoothly. Phase3: magenta foot passes behind planted cyan shin, both knees near center. Phase4: magenta extends toward forward-left/down ready for next opposite contact, cyan toe pushes back on right. These are small successive 1/8-cycle steps, not two different static contacts.\nArms counter-swing smoothly opposite their OWN legs: near LEFT arm on screen-right starts slightly back/right at1, arcs down beside hip at2/3 and forward toward screen-left at4. Far RIGHT arm starts forward-left at1 and eases back behind torso by4 but remains partially visible, never simply vanishes. Connected elbows and relaxed tiny hands, hands near thigh level, exactly two arms. Keep elbows near ribs, no wide splayed pose or huge hand paddles.\nOutput exactly four well-spaced complete sprites in equal square cells, consistent scale and camera/perspective. Crisp readable pixel art faithful to original farmer, not chibi, gradients or painting. Transparent alpha, no labels, shadows, guide dots beyond two colored hip marks, text or background.",
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/walk-down-left/approved-down-reference.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/walk-down-left/contacts-r2.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/walk-down-left/transition-a-guide.png"
+    ],
+    "transparent_background": true
+  },
+  "sha256": "df81e8b70bb3839d8184f3dfc8e3aafc1fbc7143ad4de062f67ee8ff2c093677",
+  "dimensions": [
+    1448,
+    1086
+  ],
+  "references": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/walk-down-left/approved-down-reference.png",
+      "sha256": "21c31bb03fea8492722de65a82ffe5fe166ced6b50d70d3921f5648d7e1c5c9a"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/walk-down-left/contacts-r2.png",
+      "sha256": "6166f29083d26f635141a20622c6df82cee926901e793729ef4bbeb90a5bfe7d"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/walk-down-left/transition-a-guide.png",
+      "sha256": "7e6e1b07b5f2258d4e9860364c974f1e486764ebb1cd9b5aeb84d2c3ecab2573"
+    }
+  ],
+  "review": "Rejected motion gate: phases1-3 remain similar planted contact with far boot staying right; phase4 abrupt contact exchange. Leg colors also partially restored prematurely. Do not promote.",
+  "runtime_integrated": false
+}

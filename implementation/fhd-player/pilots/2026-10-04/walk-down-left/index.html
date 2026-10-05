@@ -1,0 +1,34 @@
+<!doctype html><html lang="en"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DOWN-LEFT walk review</title><style>
+body{background:#182426;color:#e9e3cf;font:17px Consolas,monospace;margin:20px}
+h1{font-size:23px}a{color:#98dcd6}img{image-rendering:pixelated}
+.overflow{overflow-x:auto;margin:20px 0}.preview{width:880px;height:450px}
+.frames{display:flex;gap:20px}.frames img{width:320px;height:320px;background:#303a3e}
+button{background:#344b48;color:#e9e3cf;border:1px solid #75958d;padding:12px;font:inherit;margin:16px 8px 16px 0}
+details{margin:28px 0}summary{cursor:pointer}p{line-height:1.5}
+</style><h1>DOWN-LEFT — eighth direction</h1>
+<p>Eight frames at 10 FPS. Original DOWN shown at the same integer 2x scale.</p>
+<div class="overflow"><img class="preview" src="walk-down-left.gif?v=dl-r1" alt="Down-left walk beside approved down proportions"></div>
+<details><summary>Inspect individual frames</summary>
+<button id="previous">Previous</button><button id="next">Next</button><span id="number">Frame 1 / 8</span>
+<div class="overflow frames"><div>DOWN-LEFT<br><img id="final" src="frames/walk-down-left-01.png"></div></div></details>
+<details><summary>Slow playback against down-right reference</summary><div class="overflow">
+<img src="walk-down-left-slow.gif" width="900" height="395" alt="Slow down-right reference and down-left comparison"></div></details>
+<details><summary>Rejected leg-color diagnostic</summary><p>This attempt failed limb ownership and was not used as the final pose source.</p>
+<div class="overflow"><img src="tracking-frames-native.png" width="960" height="480" alt="Rejected eight-pose diagnostic, not final art"></div></details>
+<details><summary>All eight walking directions</summary><p>UR03 boot4-r4 and approved UL03 selected. DOWN-RIGHT arm repair and DOWN-LEFT await review.</p>
+<div class="overflow"><img src="all-eight-walk-directions.gif" width="1440" height="280" alt="All eight directions horizontally"></div></details>
+<details><summary>Eight-frame contact sheet</summary><div class="overflow"><img src="contact-sheet.png" width="1280" height="205"></div></details>
+<p>Preview only — awaiting your approval.</p>
+<p><a href="../selected-UR03-UL03/index.html?v=approved-r4">Approved UR03 / UL03 review</a> ·
+<a href="validation.json">Validation and source sampling</a></p>
+<script>
+let current=0;
+function show(delta){current=(current+delta+8)%8;const n=String(current+1).padStart(2,'0');
+document.getElementById('number').textContent=`Frame ${current+1} / 8`;
+document.getElementById('final').src=`frames/walk-down-left-${n}.png`;
+}
+document.getElementById('previous').onclick=()=>show(-1);
+document.getElementById('next').onclick=()=>show(1);
+</script></html>

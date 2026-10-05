@@ -1,0 +1,7 @@
+{
+  "prompt": "Use case: precise-object-edit. Image1 is the edit target, an existing eight-frame pixel-art farmer walk DOWN-RIGHT, 4 columns x2 rows. Make the corresponding DOWN-LEFT sheet by horizontally reflecting EACH INDIVIDUAL CHARACTER inside its own original cell. Maintain cell order1,2,3,4 then5,6,7,8. Do NOT mirror/reverse the whole image, reorder frames, swap poses or generate a different walk. Keep each original pose's head-to-body ratio, short natural arm swing, kneecap/ankle positions, leg silhouette, boot details, shading, small eyes, strawhat and blue/white/brown colors. Exact same pixel-art farmer and original approved eight-phase motion, facing front-three-quarter left instead of right. No colored limb diagnostics or dots. Blue trousers, original compact brown boots. Each original right-directed foot/toe now points left. Avoid aesthetic redesign, larger head, wider/thinner/longer legs, new contacts, a different animation or different clothes. Exactly TWO arms and TWO legs in every cell; reconstruct any cropped original wrist edge with one small relaxed connected hand and nothing extra. Actual transparent alpha, no background/text/ground shadows. Equal cell spacing and consistent scale, full farmer remains wholly inside each cell. This is a strict per-pose direction edit of the provided approved animation.",
+  "referenced_image_paths": [
+    "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/walk-down-left/down-right-eight-reference.png"
+  ],
+  "transparent_background": true
+}

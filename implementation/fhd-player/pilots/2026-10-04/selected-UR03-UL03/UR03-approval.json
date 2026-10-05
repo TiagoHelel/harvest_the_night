@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-05",
+  "status": "approved",
+  "user_feedback": "ta bom vai, ok",
+  "candidate": "UR03/revisions/boot4-r4/frames",
+  "frame_sha256": {
+    "01.png": "5f36215641900e45763420159ded46bf659a74bb270680ee4438f66139558419",
+    "02.png": "0730f610a57bdc6e69e676654a323236ad38380e87ad91c3a96ccbf99a23669a",
+    "03.png": "32f31b11ad371bcc3751609752d6f66effa2d31b0c915f8fbc807d6c3c4f898d",
+    "04.png": "a3f1ea2faa1a66788dd80ea34d5a4752d59cacf6a0670a2a08b23e44d4ae04e4",
+    "05.png": "1e6c318ff613841f287356c7cd90b3360a408c7f2a24cf9dd2e10a616703bc7c",
+    "06.png": "c483b077ce83f4b0e95c37527480f35bb09aed5ab6216d0a7d698a93d72252f2",
+    "07.png": "72e56b779c7ad2c5b722707e39380039c191451887ad19e37e0af7b20581eef0",
+    "08.png": "c2d96e95a28ea8d147f41f60d42f9ea8acf4cdcb8a2eb8663390c98e09d4c953"
+  },
+  "runtime_integrated": false
+}

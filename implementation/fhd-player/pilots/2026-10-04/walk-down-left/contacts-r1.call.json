@@ -1,0 +1,41 @@
+{
+  "date": "2026-10-05",
+  "mode": "built-in image_gen",
+  "original_output": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-e30ad2b4-4361-41a6-8800-ca84ab6580fe.png",
+  "workspace_source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\player-fhd\\pilots\\2026-10-04\\walk-down-left\\contacts-r1.png",
+  "arguments": {
+    "prompt": "Use case: identity-preserve.\nAsset type: TWO contact-pose masters for the farmer WALK DOWN-LEFT (southwest).\nInputs: Image1 is existing opposite down-right farmer for exact diagonal body, slim leg and boot proportions. Image2 is approved front-view farmer identity/head/eye/shirt/overall reference. Image3 is approved left-facing farmer identity and leftward boot direction. Image4 is ONLY fixed anatomical leg ownership and contact phase diagram; its stick figure is not art.\nRotate the farmer first: create the same farmer viewed from FRONT THREE-QUARTER, walking down-left toward the viewer and left. Both a little front of the chest and left-facing nose visible; never back view. Straw hat, red-brown hair, white shirt, blue overall bib, gold buttons, small white sclera with dark pupils, small relaxed hands. Same slim original body and head/hat ratio, compact work ankle boots with heel/toe/sole design. Native equivalent approximately64px tall, hat about32px wide, torso about11px wide, each trouser leg5-6px wide. No taller/thinner or wider/chubby character.\nOutput exactly TWO full-body sprites horizontally in equal square cells: LEFT CELL contact1, RIGHT CELL opposite contact5. Clearly opposite contact poses, as shown in diagram1 and5. Use diagnostic leg colors ONLY: anatomical LEFT leg and its entire boot CYAN (#00bfc9), rooted permanently at the NEAR hip on SCREEN-RIGHT. Anatomical RIGHT leg and entire boot MAGENTA (#e42aad), rooted permanently at the FAR hip on SCREEN-LEFT. Include each leg's whole chain from its own hip through knee/ankle/boot; never color by which leg currently occupies the left side of the image. Torso overalls stay BLUE; small colored hip-root marker may peek below bib for ownership.\nContact1: near LEFT/CYAN leg reaches forward toward screen-left/down; far RIGHT/MAGENTA trails behind toward screen-right/up. Contact5: RIGHT/MAGENTA reaches forward toward screen-left/down; LEFT/CYAN trails back screen-right/up. Each foot's toe faces the walking direction left, with a normal low walking stride, not a huge run leap. Both hips retain same original owner in both poses even as legs cross. Relaxed arms counter-swing: the arm on a forward leg trails back; opposing arm reaches forward. Exactly two attached arms with small compact hands. Light torso/head bob only, identical body size between poses.\nCrisp simple pixel-art clusters matching inputs. Real transparent alpha, no ground shadow, no labels, props, diagram or background. Equal sprite scale and wide transparent padding around the two poses. This is a rotated reconstruction, not a flat mirrored image, with correct visible side of the outfit.",
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/walk-down-left/diagonal-proportions-reference.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/walk-down-left/approved-down-reference.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/walk-down-left/approved-left-reference.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/walk-down-left/ownership-eight-guide.png"
+    ],
+    "transparent_background": true
+  },
+  "sha256": "685aacd2e5f2edeac044dad7fbe81df52ae0e94315f8d91dcf3313559d37c379",
+  "dimensions": [
+    1774,
+    887
+  ],
+  "references": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/walk-down-left/diagonal-proportions-reference.png",
+      "sha256": "6e4ba2e954d40825d8347debd5f804c5fea9db54fddf0edcba1a9ccd5ff6939a"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/walk-down-left/approved-down-reference.png",
+      "sha256": "21c31bb03fea8492722de65a82ffe5fe166ced6b50d70d3921f5648d7e1c5c9a"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/walk-down-left/approved-left-reference.png",
+      "sha256": "d7fa3744c0d38243776adf35722bf03191864a98f05b19a7a1f08caf4f258a9a"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/walk-down-left/ownership-eight-guide.png",
+      "sha256": "79eac40dfc649a7040c4aeafe173b2b253a2f4482c9d0cf66a33514ad5fd73b4"
+    }
+  ],
+  "review": "Rejected as proportion master: two opposite leg contacts visible, but head/eyes and boots larger than the original reference; arms too similar across contacts.",
+  "runtime_integrated": false
+}

@@ -1,0 +1,272 @@
+{
+  "selected_source": "materials-r1.png",
+  "source_size": [
+    1774,
+    887
+  ],
+  "source_row_cuts": [
+    0,
+    442,
+    887
+  ],
+  "source_col_cuts": [
+    0,
+    444,
+    887,
+    1330,
+    1774
+  ],
+  "common_source_scale": 0.1792717086834734,
+  "native_canvas": [
+    80,
+    80
+  ],
+  "hat_calibration": 32,
+  "source_alpha_threshold": 128,
+  "resample": "nearest",
+  "anchor": "hat center and fixed top8px",
+  "frames_metrics": [
+    {
+      "frame": 1,
+      "bbox": [
+        23,
+        8,
+        63,
+        69
+      ],
+      "height": 61,
+      "hat_region_width": 33,
+      "sha256": "7756e5d156535e3b819d157144cecbeaaef07e460bb996f167c9303a95e625fa"
+    },
+    {
+      "frame": 2,
+      "bbox": [
+        24,
+        8,
+        62,
+        68
+      ],
+      "height": 60,
+      "hat_region_width": 32,
+      "sha256": "60506f07afaee6ea0c0d71086eb2f4b864f8e2f6f076d47b2a737da71914ae06"
+    },
+    {
+      "frame": 3,
+      "bbox": [
+        24,
+        8,
+        62,
+        70
+      ],
+      "height": 62,
+      "hat_region_width": 32,
+      "sha256": "22213defa9edd6c22d8047d875f77ac4b0d952f8ac416c90f4735b45839bf252"
+    },
+    {
+      "frame": 4,
+      "bbox": [
+        21,
+        8,
+        61,
+        70
+      ],
+      "height": 62,
+      "hat_region_width": 32,
+      "sha256": "6d8e726ddf04533da776d14b96dce5c7c813814c4efa36cc1cc4a97117ea3b25"
+    },
+    {
+      "frame": 5,
+      "bbox": [
+        24,
+        8,
+        62,
+        69
+      ],
+      "height": 61,
+      "hat_region_width": 32,
+      "sha256": "f651853cafd086f59bc2e28c4fb9f7aa9316e9f17d66be5358b9dca16caba941"
+    },
+    {
+      "frame": 6,
+      "bbox": [
+        24,
+        8,
+        61,
+        69
+      ],
+      "height": 61,
+      "hat_region_width": 31,
+      "sha256": "3a531ef99fabcb46ff235a3ce5d758f593712e1e4b03a9504f6f5485b79c2c30"
+    },
+    {
+      "frame": 7,
+      "bbox": [
+        23,
+        8,
+        61,
+        71
+      ],
+      "height": 63,
+      "hat_region_width": 31,
+      "sha256": "27e6f38063ceeb41a810d6231ebfa4ad1976de4f2e974c2369164746e4b1b31f"
+    },
+    {
+      "frame": 8,
+      "bbox": [
+        22,
+        8,
+        62,
+        69
+      ],
+      "height": 61,
+      "hat_region_width": 32,
+      "sha256": "30579c7a40df2f59172f76eccbd595fc86dc28933209a7bfdd10ab56fd0744dc"
+    }
+  ],
+  "status": "awaiting user visual approval",
+  "date": "2026-10-05",
+  "frames": 8,
+  "fps": 10,
+  "fhd_display_scale": 2,
+  "gif_duration_ms": 100,
+  "slow_duration_ms": 200,
+  "existing_native_frames_unchanged": 72,
+  "rejected_tracking_sampling": {
+    "selected_source": "tracking-eight.png",
+    "source_size": [
+      1774,
+      887
+    ],
+    "source_row_cuts": [
+      0,
+      445,
+      887
+    ],
+    "source_col_cuts": [
+      0,
+      444,
+      887,
+      1330,
+      1774
+    ],
+    "common_source_scale": 0.18028169014084508,
+    "native_canvas": [
+      80,
+      80
+    ],
+    "hat_calibration": 32,
+    "source_alpha_threshold": 128,
+    "resample": "nearest",
+    "anchor": "hat center and fixed top8px",
+    "frames_metrics": [
+      {
+        "frame": 1,
+        "bbox": [
+          24,
+          8,
+          60,
+          69
+        ],
+        "height": 61,
+        "hat_region_width": 32,
+        "sha256": "45102fb4d930cf4bf1f8fdf8deffd6de39784815420a0f1fef5b7debc6f96401"
+      },
+      {
+        "frame": 2,
+        "bbox": [
+          24,
+          8,
+          62,
+          69
+        ],
+        "height": 61,
+        "hat_region_width": 32,
+        "sha256": "074a6ddf620745ac7bcadde499d6942d8cacfcd762703eb8a2e34cf228e44f6e"
+      },
+      {
+        "frame": 3,
+        "bbox": [
+          24,
+          8,
+          61,
+          69
+        ],
+        "height": 61,
+        "hat_region_width": 32,
+        "sha256": "1ab8debcceb1cb7eefe55e213721ea7454352bae4dd00566d996eda9013dd9c4"
+      },
+      {
+        "frame": 4,
+        "bbox": [
+          24,
+          8,
+          57,
+          68
+        ],
+        "height": 60,
+        "hat_region_width": 32,
+        "sha256": "fb3de70e309a3908915c9d4ffc79ac6e90a302e2b912ba1e99678271e97ced87"
+      },
+      {
+        "frame": 5,
+        "bbox": [
+          24,
+          8,
+          60,
+          70
+        ],
+        "height": 62,
+        "hat_region_width": 32,
+        "sha256": "706135f8bad4fd89984b38408a2c7b2cd300e6836a82587aa61e4caffd1b6523"
+      },
+      {
+        "frame": 6,
+        "bbox": [
+          24,
+          8,
+          59,
+          70
+        ],
+        "height": 62,
+        "hat_region_width": 32,
+        "sha256": "d5f72b56b749800cb3378a56c9f5f7d470d80eb57341eeb5bea27f2714178be5"
+      },
+      {
+        "frame": 7,
+        "bbox": [
+          22,
+          8,
+          60,
+          68
+        ],
+        "height": 60,
+        "hat_region_width": 33,
+        "sha256": "2b6662b8cc66b4a0bab79d44bf92ae349da36b4d6132664ca10795c3717ecf1f"
+      },
+      {
+        "frame": 8,
+        "bbox": [
+          24,
+          8,
+          62,
+          70
+        ],
+        "height": 62,
+        "hat_region_width": 32,
+        "sha256": "6e49656a06b26d289c7d7e324e4be94f5e5228b7a75c60fa803ce6adba7021e5"
+      }
+    ]
+  },
+  "runtime_integrated": false,
+  "limits": "Format, scope and unique drawings do not prove anatomy, smoothness or user approval.",
+  "frame_file_sha256": {
+    "walk-down-left-01.png": "cb2fb411c7d7f9f10cf36d86da8a53518e8ee925d2f84398c6e17aecdafe055c",
+    "walk-down-left-02.png": "dd602d46a8b217ebfa376ae9ae79863a528987350ea56e583b6e91acb5a0cf5b",
+    "walk-down-left-03.png": "46e856f426a870dbfc563555313d8ba088774e060687b5a13244dc9098459981",
+    "walk-down-left-04.png": "cfa52172b527bda1cfb986b95888f6dd8e58870b9dac91024765363a0e452897",
+    "walk-down-left-05.png": "0d1c9eb0421dbd0e9e511168f07fcd5255e8092f1fda003f25be5cd80b6c16d6",
+    "walk-down-left-06.png": "919116fc1b881521efafc24e2a14c2ff61016e9c816b03f6915913a81cbd68d3",
+    "walk-down-left-07.png": "e8f0301b35cdeacbc4b233db0deb0ecc9dc0e375c591331ea8d97a088f8f73b8",
+    "walk-down-left-08.png": "22a399622f2b745d66ac0413a49be629612ad0f0fc96be33c08f1f6997de9bb8"
+  }
+}

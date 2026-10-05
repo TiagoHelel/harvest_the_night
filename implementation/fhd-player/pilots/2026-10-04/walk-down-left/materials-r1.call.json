@@ -1,0 +1,26 @@
+{
+  "date": "2026-10-05",
+  "mode": "built-in image_gen",
+  "original_output": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-c83df0cf-f8db-4694-8eee-d7240a84dffe.png",
+  "workspace_source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\player-fhd\\pilots\\2026-10-04\\walk-down-left\\materials-r1.png",
+  "arguments": {
+    "prompt": "Use case: precise-object-edit. Image1 is the edit target, an existing eight-frame pixel-art farmer walk DOWN-RIGHT, 4 columns x2 rows. Make the corresponding DOWN-LEFT sheet by horizontally reflecting EACH INDIVIDUAL CHARACTER inside its own original cell. Maintain cell order1,2,3,4 then5,6,7,8. Do NOT mirror/reverse the whole image, reorder frames, swap poses or generate a different walk. Keep each original pose's head-to-body ratio, short natural arm swing, kneecap/ankle positions, leg silhouette, boot details, shading, small eyes, strawhat and blue/white/brown colors. Exact same pixel-art farmer and original approved eight-phase motion, facing front-three-quarter left instead of right. No colored limb diagnostics or dots. Blue trousers, original compact brown boots. Each original right-directed foot/toe now points left. Avoid aesthetic redesign, larger head, wider/thinner/longer legs, new contacts, a different animation or different clothes. Exactly TWO arms and TWO legs in every cell; reconstruct any cropped original wrist edge with one small relaxed connected hand and nothing extra. Actual transparent alpha, no background/text/ground shadows. Equal cell spacing and consistent scale, full farmer remains wholly inside each cell. This is a strict per-pose direction edit of the provided approved animation.",
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/walk-down-left/down-right-eight-reference.png"
+    ],
+    "transparent_background": true
+  },
+  "sha256": "0a664c6665a147fdc3237a28b42b0f3e192b9a8ee1da9ec7e14a742619306ced",
+  "dimensions": [
+    1774,
+    887
+  ],
+  "references": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/walk-down-left/down-right-eight-reference.png",
+      "sha256": "7e0ec6c0cf0a46cc4009c4fb9974fed0dd5abbfb8d54d60381f1800878b31c67"
+    }
+  ],
+  "review": "Selected for pending user review: all8 southwest/front-left poses, original-like 60-63px body and 31-33px hat widths, two visible leg passing poses3/7, near arm across torso4-6. Generated contour/boot differences and similar contact poses remain. Not pixel-exact and not user approved.",
+  "runtime_integrated": false
+}

@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-05",
+  "mode": "built-in image_gen",
+  "original_output": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-aadc848f-4e45-48b6-a0c2-07b78a964fbc.png",
+  "workspace_source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\player-fhd\\pilots\\2026-10-04\\walk-down-left\\cycle-reference-r3.png",
+  "arguments": {
+    "prompt": "Use case: identity-preserve. Asset type: exact EIGHT-PHASE DOWN-LEFT walk sprite sheet, 4 columns by2 rows, row-major1..8. Image1 is the EXISTING APPROVED down-right walking cycle, each of its8 cells is the exact motion/proportion/style reference for the corresponding output cell. Image2 shows fixed anatomical leg ownership and timeline. Image3 is the original front-view identity. Create the opposite FRONT three-quarter direction: this same farmer now faces DOWN-LEFT/SOUTHWEST (nose to left, chest partly toward viewer). Reflect the orientation of EACH individual pose from image1 while keeping the original frame timeline/cell order; do not reverse the whole sheet or shuffle poses. Match each corresponding source pose faithfully. All8 phase-specific knees/ankles/foot lifts and arm swings must reproduce the proven source walk now facing southwest, not eight poses invented independently. Output every farmer fully inside its own cell, restore any hand clipped at an edge in reference cell4 as one compact connected forearm, EXACTLY two arms and two legs.\nKeep original slim adult farmer: straw hat about32 pixels wide in a64px-tall character, reddish brown hair, small white eyes with dark pupils, white shirt, blue bib, gold buttons. Match reference body/head/leg/shoe proportions and boot construction EXACTLY. Do not make bigger doll head, thicker legs, longer legs or chibi proportions.\nUse diagnostic colors on the TWO ENTIRE leg chains only: near anatomical LEFT leg CYAN, far anatomical RIGHT leg MAGENTA. Both the trouser and its boot carry their owning leg color. The pelvis maintains cyan hip at SCREEN-RIGHT and magenta hip at SCREEN-LEFT in all poses, add small fixed dots of these colors just below bib. A crossing leg keeps its original hip and color. Never repaint by screen column or whichever leg is in front. Match opposite contacts: frame1 cyan forward-left/down and magenta back-right/up; frame5 magenta forward-left/down and cyan back-right/up. Frame3 far MAGENTA is in passing, frame7 near CYAN is in passing. Source image1 provides the smooth physical motion of both legs and arms for all8 steps; small planted/lifted foot differences, no flying stride or abrupt alternate color swaps. Arms swing close to body opposite their respective legs, hands tiny and wrists always connected.\nEvery phase same pixel resolution, body volume, camera, scale and orientation.8distinct consecutive walk drawings, no duplicates. Crisp simple farming RPG pixel art, limited color clusters like source1, no painterly shading. Equal cells in4x2 landscape sheet, generous transparent padding. Actual transparent alpha, no ground/shadow/text/frame numbers/guide geometry. This replaces failed transition attempts with the approved opposite-diagonal timeline as the motion reference.",
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/walk-down-left/down-right-eight-reference.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/walk-down-left/ownership-eight-guide.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/walk-down-left/approved-down-reference.png"
+    ],
+    "transparent_background": true
+  },
+  "sha256": "83123f353bf28fea321071deb01efded573d36e37d643a8af9ea384b56392f54",
+  "dimensions": [
+    1774,
+    887
+  ],
+  "references": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/walk-down-left/down-right-eight-reference.png",
+      "sha256": "7e0ec6c0cf0a46cc4009c4fb9974fed0dd5abbfb8d54d60381f1800878b31c67"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/walk-down-left/ownership-eight-guide.png",
+      "sha256": "79eac40dfc649a7040c4aeafe173b2b253a2f4482c9d0cf66a33514ad5fd73b4"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/walk-down-left/approved-down-reference.png",
+      "sha256": "21c31bb03fea8492722de65a82ffe5fe166ced6b50d70d3921f5648d7e1c5c9a"
+    }
+  ],
+  "review": "Rejected ownership gate: frame1 and5 same contact, frame2 trousers and boot colors inconsistent, guiding color roots not trustworthy. Do not use these poses for final. Final materials candidate is a separate direction-only edit of original opposite diagonal.",
+  "runtime_integrated": false
+}

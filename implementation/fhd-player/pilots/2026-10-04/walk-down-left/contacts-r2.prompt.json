@@ -1,0 +1,9 @@
+{
+  "prompt": "Use case: identity-preserve. Edit target image1 is the TWO diagnostic DOWN-LEFT contact sprites. Image2 is the approved original down-view farmer's proportion/style reference; image3 the approved down-right diagonal proportions. Change ONLY the proportion/style mismatch of image1: bring the head, hat, eyes and boots back to the original approved farmer proportions, without changing down-left perspective, the two opposite contact poses, diagnostic leg identity/colors or outfit. Current head/eyes and boots are too big/chibi. The original farmer is 64 native pixels tall with a 32-pixel-wide hat, head about17px tall, slim blue overall torso11px wide, trouser legs5-6px wide, compact ankle boots roughly7px wide and6px tall. Preserve original leg/torso lengths and use the references for the same head-to-body and shoe-to-trouser ratios. Eyes small readable white sclera and brown-black pupil, not oversized doll eyes. Make the entire farmer look like the original rotated three-quarter to southwest/front-left, not a different child character. Left cell: LEFT near cyan leg forward, RIGHT far magenta leg behind. Right cell: RIGHT far magenta forward, LEFT near cyan behind. Keep two limbs, equal sprite size, pixel art, no text, same two horizontal equal cells, transparent background.",
+  "referenced_image_paths": [
+    "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/walk-down-left/contacts-r1.png",
+    "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/walk-down-left/approved-down-reference.png",
+    "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/walk-down-left/diagonal-proportions-reference.png"
+  ],
+  "transparent_background": true
+}
