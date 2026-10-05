@@ -2822,3 +2822,39 @@ PASS
 
 Sprite queue and git diff --check PASS. No runtime promotion, queue mutation,
 next direction, push or project.godot edit. Unrelated work preserved.
+
+## UR03 frame4 foot placement lowered one pixel - 2026-10-05
+
+User liked the rebuilt boot shape and requested that frame4's foot sit a little
+lower during walking. Adjusted the editable deterministic source placement:
+same boot cut(42,52,54,62), target now(42,51,54,61), one native pixel belowr3.
+Existing ankle cap and every blue trouser pixel retained. No new ImageGen call,
+new boot artwork, recoloring, scaling or warp. Reused the unchanged raw/source
+UR03-boot4-r3.png; provenance and previous generation arguments recorded in
+UR03-boot4-r4.call.json. New isolated cycle:UR03/revisions/boot4-r4/frames.
+
+Scope/format PASS: only frame4 placement changed relative tor3; other7UR03
+poses including7byte-identical,8approved UL03 poses exact,56active native
+frames unchanged. Previous artifacts retained. Normal720x350integer2xGIF,
+slow960x380integer4xGIF,all-seven-directionsGIF,contactstrip and manual4x
+comparison updated in the same index.html. Eight poses at100/200ms infinite
+loops. Browser normal playback and frame4 ankle/foot placement inspected;
+boot4-r4-browser.png / boot4-r4-frame4-browser.png saved. User review pending.
+
+Required engine verification PASS:
+
+```text
+  ambience                     PASS   1.7s  OK    11 ambience files match their recipes (2 beds, 9 touches)
+  headless_check               PASS  73.7s  7768 asserts, 0 failed
+  sim hash                     PASS   2.0s  1270427719 unchanged
+  data hash                    PASS   0.0s  8148086 unchanged
+  input_check                  PASS  74.7s  1006 cases, 0 failed
+  exports                      PASS  30.1s
+
+  55 passed, 0 skipped, 0 failed in 498s  (OVER BUDGET)
+
+PASS
+```
+
+Sprite queue and git diff --check PASS. No runtime promotion, new direction,
+queue mutation, hash acceptance, push or project.godot change.

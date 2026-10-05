@@ -1,0 +1,154 @@
+{
+  "date": "2026-10-05",
+  "tool": "deterministic source placement",
+  "imagegen_calls": 0,
+  "source_generation_arguments": {
+    "prompt": "Use case: precise-object-edit.\nAsset type: ONE pixel-art walking pose, UR03 rear three-quarter UP-RIGHT frame4.\nInput images: Image1 is the exact EDIT TARGET frame4. Image2 contains supporting poses3,5,7 (left to right). Poses3 and5 establish the motion before/after; pose7 on the RIGHT shows the recently repaired work-boot silhouette and material.\nPrimary request: repair ONLY the lifted brown work boot on the SCREEN-RIGHT leg of target frame4. The current boot is a deformed tall brown mitten/lump without a readable foot. Replace the WHOLE lifted boot with a coherent short ankle shaft, small heel, rounded toe projecting toward screen-right/up-right, and one short dark sole. Same simple work-boot shape and brown/gold palette as supporting pose7, adapted to frame4's raised recovery angle. Do not just lower or rotate the malformed original blob. The blue trouser cuff, ankle attachment and bent knee stay in exactly the target position; boot is airborne, heel tucked below the ankle, toe clearly protrudes to the right. Keep it compact: no long point, swollen shoe or giant sole. In an80x80 native cell, all changed boot pixels should lie approximately x42..55,y49..61. Crisp readable low-resolution clusters; around8-10pixels wide and10pixels tall boot, with a narrow shaft and clearly wider toe/sole.\nHard invariants: preserve the target straw hat/head/hair, rear-facing direction, torso, both arms/hands, all blue trouser/leg/calf poses, planted leg and planted boot, character height and sprite alignment. Do not modify any other frame or invent a new leg pose. Full-body single square sprite with same scale/transparent padding as image1. Genuine transparent alpha. No labels, extra limbs, props, shadows, scenery, antialiasing or finer pixel detail.",
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/selected-UR03-UL03/UR03-frame04-boot-target.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/selected-UR03-UL03/UR03-frame04-neighbors-and-boot-reference.png"
+    ],
+    "transparent_background": true
+  },
+  "raw_original": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-28f969ac-7fef-4e03-8c28-1467f7039825.png",
+  "saved_source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\player-fhd\\pilots\\2026-10-04\\selected-UR03-UL03\\UR03-boot4-r3.png",
+  "source_sha256": "cf44e23f5be4f4f2264978a033a78420dcfbb9624524b96a897d5a41c910b66b",
+  "input_sha256": {
+    "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/selected-UR03-UL03/UR03-frame04-boot-target.png": "595ecdf85940b63d3eba7dcd4fee0c51af7e531f788c2ae43fab9fdc819a26e1",
+    "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/selected-UR03-UL03/UR03-frame04-neighbors-and-boot-reference.png": "3a330fce51ab6407d09890ad89a5684387ff8fec7d32fec823c898ae5806c84b"
+  },
+  "sampling": {
+    "source": "UR03-boot4-r3.png",
+    "source_size": [
+      1254,
+      1254
+    ],
+    "col_cuts": [
+      0,
+      1254
+    ],
+    "common_scale": 0.06808510638297872,
+    "native_canvas": [
+      80,
+      80
+    ],
+    "hat_target": 32,
+    "resample": "nearest",
+    "alpha_threshold": 128
+  },
+  "source_cut": [
+    42,
+    52,
+    54,
+    62
+  ],
+  "target_region": [
+    42,
+    51,
+    54,
+    61
+  ],
+  "alignment": "Same generated boot source placed1nativepixel lower than boot4-r3; existing ankle cap retained.",
+  "protected_material": "All original blue trouser pixels retained exactly by material mask.",
+  "frames": [
+    {
+      "frame": 1,
+      "baseline_sha256": "5f36215641900e45763420159ded46bf659a74bb270680ee4438f66139558419",
+      "sha256": "5f36215641900e45763420159ded46bf659a74bb270680ee4438f66139558419",
+      "changed": false
+    },
+    {
+      "frame": 2,
+      "baseline_sha256": "0730f610a57bdc6e69e676654a323236ad38380e87ad91c3a96ccbf99a23669a",
+      "sha256": "0730f610a57bdc6e69e676654a323236ad38380e87ad91c3a96ccbf99a23669a",
+      "changed": false
+    },
+    {
+      "frame": 3,
+      "baseline_sha256": "32f31b11ad371bcc3751609752d6f66effa2d31b0c915f8fbc807d6c3c4f898d",
+      "sha256": "32f31b11ad371bcc3751609752d6f66effa2d31b0c915f8fbc807d6c3c4f898d",
+      "changed": false
+    },
+    {
+      "frame": 4,
+      "baseline_sha256": "286d4a00ef87286ca4b87cab2a49a41d210fc51e9ce6e6ad249fdc5688c42704",
+      "sha256": "a3f1ea2faa1a66788dd80ea34d5a4752d59cacf6a0670a2a08b23e44d4ae04e4",
+      "changed": true
+    },
+    {
+      "frame": 5,
+      "baseline_sha256": "1e6c318ff613841f287356c7cd90b3360a408c7f2a24cf9dd2e10a616703bc7c",
+      "sha256": "1e6c318ff613841f287356c7cd90b3360a408c7f2a24cf9dd2e10a616703bc7c",
+      "changed": false
+    },
+    {
+      "frame": 6,
+      "baseline_sha256": "c483b077ce83f4b0e95c37527480f35bb09aed5ab6216d0a7d698a93d72252f2",
+      "sha256": "c483b077ce83f4b0e95c37527480f35bb09aed5ab6216d0a7d698a93d72252f2",
+      "changed": false
+    },
+    {
+      "frame": 7,
+      "baseline_sha256": "72e56b779c7ad2c5b722707e39380039c191451887ad19e37e0af7b20581eef0",
+      "sha256": "72e56b779c7ad2c5b722707e39380039c191451887ad19e37e0af7b20581eef0",
+      "changed": false
+    },
+    {
+      "frame": 8,
+      "baseline_sha256": "c2d96e95a28ea8d147f41f60d42f9ea8acf4cdcb8a2eb8663390c98e09d4c953",
+      "sha256": "c2d96e95a28ea8d147f41f60d42f9ea8acf4cdcb8a2eb8663390c98e09d4c953",
+      "changed": false
+    }
+  ],
+  "gifs": [
+    {
+      "file": "selected-corrections-boot4-r4.gif",
+      "size": [
+        720,
+        350
+      ],
+      "frames": 8,
+      "duration_ms": 100,
+      "sha256": "2538e3fbf539f890ae64d4977149a7c0b1f38aff09950da7babc60cf39edb856"
+    },
+    {
+      "file": "selected-corrections-boot4-slow-r4.gif",
+      "size": [
+        960,
+        380
+      ],
+      "frames": 8,
+      "duration_ms": 200,
+      "sha256": "e56693206ca1d0e551207068956e562bc3350ee88814cce322a948795da95209"
+    },
+    {
+      "file": "all-walk-directions-boot4-r4.gif",
+      "size": [
+        1440,
+        330
+      ],
+      "frames": 8,
+      "duration_ms": 100,
+      "sha256": "3483afaab9d38c7927a534310095ba43bd0eb74271a45b05300c3c248f055975"
+    }
+  ],
+  "UL03": "approved; eight frozen PNGs unchanged",
+  "current_native_unchanged": 56,
+  "scope": "Only frame4 boot lowered1nativepixel relative to boot4-r3; frame7 byte-identical.",
+  "status": "awaiting user visual review; no runtime integration",
+  "user_feedback": "Boot shape is good; lower frame4 foot slightly for walking motion.",
+  "change": "Existing boot source placement moved down1nativepixel (2screenpixels at preview scale); no generation.",
+  "visual_review": {
+    "result": "Lowered foot and ankle connection inspected at2x/4x; cycle approval pending.",
+    "evidence": [
+      "boot4-r4-browser.png",
+      "boot4-r4-frame4-browser.png",
+      "UR03-frame4-boot-r4-detail.png"
+    ]
+  },
+  "engine_verification": {
+    "result": "PASS",
+    "log": "boot4-r4-engine-check.log",
+    "sha256": "7b0ef343747a4773408b341309d819d6454cfab55e9139865d40ed5ca30bcfbe"
+  }
+}

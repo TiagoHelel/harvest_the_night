@@ -55,12 +55,12 @@
   "walk_up_right": {
     "status": "awaiting_approval",
     "date": "2026-10-05",
-    "candidate": "selected-UR03-UL03/UR03/revisions/boot4-r3/frames",
+    "candidate": "selected-UR03-UL03/UR03/revisions/boot4-r4/frames",
     "preview": "selected-UR03-UL03/index.html",
-    "diagnostic": "selected-UR03-UL03/UR03-boot4-r3-before-after.png",
-    "user_feedback": "Frame4 raised boot deformed; repair only that boot.",
+    "diagnostic": "selected-UR03-UL03/UR03-boot4-r4-before-after.png",
+    "user_feedback": "Boot shape good; lower frame4 foot slightly for walking motion.",
     "rejected_candidate": "walk-up-right/full-arm-materials-r13",
-    "feedback_addressed": "Frame4 raised boot rebuilt; all original blue trousers, previous frame7 and approved UL03 retained.",
+    "feedback_addressed": "Existing frame4 boot source lowered1nativepixel; no new generation. Blue trousers, frame7 and UL03 retained.",
     "approval_date": "2026-10-05",
     "review_limit": "Selected UR03 cycle visual approval pending; no runtime integration.",
     "diagonal_reference_attempt": {
@@ -79,11 +79,11 @@
         4
       ],
       "status": "awaiting_approval",
-      "candidate": "selected-UR03-UL03/UR03/revisions/boot4-r3/frames",
+      "candidate": "selected-UR03-UL03/UR03/revisions/boot4-r4/frames",
       "preview": "selected-UR03-UL03/index.html",
       "runtime_integrated": false,
       "user_feedback": "Frame7 foot remains malformed; rebuild the boot silhouette.",
-      "revision": "boot4-r3",
+      "revision": "boot4-r4",
       "retained_previous_revision": "boot-r2 frame7"
     }
   },
