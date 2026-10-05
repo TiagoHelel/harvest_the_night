@@ -70,6 +70,19 @@
       "preview": "up-diagonal-reference-arms-r18.gif",
       "user_feedback": "Use another approved diagonal walk as arm reference.",
       "result": "All three revisions rejected; native frames and active candidate retained."
+    },
+    "selected_archive_review": {
+      "date": "2026-10-05",
+      "selected_code": "UR03",
+      "selected_base": "before-07-08-r5/frames",
+      "requested_frames": [
+        7
+      ],
+      "status": "awaiting_approval",
+      "candidate": "selected-UR03-UL03/UR03/frames",
+      "preview": "selected-UR03-UL03/index.html",
+      "runtime_integrated": false,
+      "user_feedback": "UR03: redo only7. UL03: redo5and6. Use selected gallery versions."
     }
   },
   "walk_up_left": {
@@ -89,6 +102,20 @@
       "preview": "up-diagonal-reference-arms-r18.gif",
       "user_feedback": "Use another approved diagonal walk as arm reference.",
       "result": "All three revisions rejected; native frames and active candidate retained."
+    },
+    "selected_archive_review": {
+      "date": "2026-10-05",
+      "selected_code": "UL03",
+      "selected_base": "before-arm-smoothing/frames",
+      "requested_frames": [
+        5,
+        6
+      ],
+      "status": "awaiting_approval",
+      "candidate": "selected-UR03-UL03/UL03/frames",
+      "preview": "selected-UR03-UL03/index.html",
+      "runtime_integrated": false,
+      "user_feedback": "UR03: redo only7. UL03: redo5and6. Use selected gallery versions."
     }
   }
 }

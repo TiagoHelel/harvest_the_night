@@ -1,0 +1,256 @@
+{
+  "UR03": {
+    "source": "UR03-r1.png",
+    "source_size": [
+      1254,
+      1254
+    ],
+    "col_cuts": [
+      0,
+      1254
+    ],
+    "common_scale": 0.06438631790744467,
+    "native_canvas": [
+      80,
+      80
+    ],
+    "hat_target": 32,
+    "resample": "nearest",
+    "alpha_threshold": 128,
+    "changed_frames": [
+      7
+    ],
+    "byte_identical_unedited_frames": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      8
+    ],
+    "regions": [
+      {
+        "frame": 7,
+        "generated_region": [
+          44,
+          48,
+          62,
+          68
+        ]
+      }
+    ],
+    "retained_regions": "UR03 head, torso, arms, planted leg/boot; UL03 head, legs, boots and far arm retained outside fixed source cuts.",
+    "frame_checks": [
+      {
+        "frame": 1,
+        "original_sha256": "5f36215641900e45763420159ded46bf659a74bb270680ee4438f66139558419",
+        "revised_sha256": "5f36215641900e45763420159ded46bf659a74bb270680ee4438f66139558419",
+        "changed": false
+      },
+      {
+        "frame": 2,
+        "original_sha256": "0730f610a57bdc6e69e676654a323236ad38380e87ad91c3a96ccbf99a23669a",
+        "revised_sha256": "0730f610a57bdc6e69e676654a323236ad38380e87ad91c3a96ccbf99a23669a",
+        "changed": false
+      },
+      {
+        "frame": 3,
+        "original_sha256": "32f31b11ad371bcc3751609752d6f66effa2d31b0c915f8fbc807d6c3c4f898d",
+        "revised_sha256": "32f31b11ad371bcc3751609752d6f66effa2d31b0c915f8fbc807d6c3c4f898d",
+        "changed": false
+      },
+      {
+        "frame": 4,
+        "original_sha256": "79e6bb19ea258c1e2895920b39253ffbafb6172380618bf0e06f3730590704da",
+        "revised_sha256": "79e6bb19ea258c1e2895920b39253ffbafb6172380618bf0e06f3730590704da",
+        "changed": false
+      },
+      {
+        "frame": 5,
+        "original_sha256": "1e6c318ff613841f287356c7cd90b3360a408c7f2a24cf9dd2e10a616703bc7c",
+        "revised_sha256": "1e6c318ff613841f287356c7cd90b3360a408c7f2a24cf9dd2e10a616703bc7c",
+        "changed": false
+      },
+      {
+        "frame": 6,
+        "original_sha256": "c483b077ce83f4b0e95c37527480f35bb09aed5ab6216d0a7d698a93d72252f2",
+        "revised_sha256": "c483b077ce83f4b0e95c37527480f35bb09aed5ab6216d0a7d698a93d72252f2",
+        "changed": false
+      },
+      {
+        "frame": 7,
+        "original_sha256": "f4bda5237ae21d953f8ac6a8ddf44381c980e7fdcb31c7238a8a691f82f8237a",
+        "revised_sha256": "006ad497e76ef5867e89b76e60bc90deaa142843dfdd0a588528fb72879707b4",
+        "changed": true
+      },
+      {
+        "frame": 8,
+        "original_sha256": "c2d96e95a28ea8d147f41f60d42f9ea8acf4cdcb8a2eb8663390c98e09d4c953",
+        "revised_sha256": "c2d96e95a28ea8d147f41f60d42f9ea8acf4cdcb8a2eb8663390c98e09d4c953",
+        "changed": false
+      }
+    ]
+  },
+  "UL03": {
+    "source": "UL03-r1.png",
+    "source_size": [
+      1774,
+      887
+    ],
+    "col_cuts": [
+      0,
+      887,
+      1774
+    ],
+    "common_scale": 0.09026798307475317,
+    "native_canvas": [
+      80,
+      80
+    ],
+    "hat_target": 32,
+    "resample": "nearest",
+    "alpha_threshold": 128,
+    "changed_frames": [
+      5,
+      6
+    ],
+    "byte_identical_unedited_frames": [
+      1,
+      2,
+      3,
+      4,
+      7,
+      8
+    ],
+    "regions": [
+      {
+        "frame": 5,
+        "generated_region": [
+          22,
+          30,
+          46,
+          50
+        ]
+      },
+      {
+        "frame": 6,
+        "generated_region": [
+          22,
+          30,
+          46,
+          50
+        ]
+      }
+    ],
+    "retained_regions": "UR03 head, torso, arms, planted leg/boot; UL03 head, legs, boots and far arm retained outside fixed source cuts.",
+    "frame_checks": [
+      {
+        "frame": 1,
+        "original_sha256": "afefe3c6a10bf46d3a201bbf8916c83c6f4f1987351016380582e7c5b75a2c25",
+        "revised_sha256": "afefe3c6a10bf46d3a201bbf8916c83c6f4f1987351016380582e7c5b75a2c25",
+        "changed": false
+      },
+      {
+        "frame": 2,
+        "original_sha256": "d3e63d45898d135d52be58045692be53ba42717a1c2a147d4f358e5446a40984",
+        "revised_sha256": "d3e63d45898d135d52be58045692be53ba42717a1c2a147d4f358e5446a40984",
+        "changed": false
+      },
+      {
+        "frame": 3,
+        "original_sha256": "2168b536023bd739724bf898636778a0ed671fa7f3e7ee1c7dfe6f36699a3be6",
+        "revised_sha256": "2168b536023bd739724bf898636778a0ed671fa7f3e7ee1c7dfe6f36699a3be6",
+        "changed": false
+      },
+      {
+        "frame": 4,
+        "original_sha256": "81d9959b5dab17ecfcde14b1bd6f93d56629fd8bc1dfb84b9df522b38dd46611",
+        "revised_sha256": "81d9959b5dab17ecfcde14b1bd6f93d56629fd8bc1dfb84b9df522b38dd46611",
+        "changed": false
+      },
+      {
+        "frame": 5,
+        "original_sha256": "8190eab38cfde5217d5b1c15196260e40291ba5ca8d21c68337383db5c134a01",
+        "revised_sha256": "1a1b7324138da0e676e15662f3b81f01ce6afe8377776d175fd6e693b29e00dc",
+        "changed": true
+      },
+      {
+        "frame": 6,
+        "original_sha256": "bb1afe1a1970e8ac364743398f8333c5d454b64d9b9c5a40afb631c9fc3f527c",
+        "revised_sha256": "539b94cae2f7eef782a40584a77029f1405d190aa128032d5d6442ec1022dd40",
+        "changed": true
+      },
+      {
+        "frame": 7,
+        "original_sha256": "bc3ac8506d749598d6611a89bf061e2e8a12443a0dcaf6d8efe107a111f74ca4",
+        "revised_sha256": "bc3ac8506d749598d6611a89bf061e2e8a12443a0dcaf6d8efe107a111f74ca4",
+        "changed": false
+      },
+      {
+        "frame": 8,
+        "original_sha256": "f0ef2b5b74baf72e3fb63f31acef5ba355f23fd6c237fa9744dba7283d3914a9",
+        "revised_sha256": "f0ef2b5b74baf72e3fb63f31acef5ba355f23fd6c237fa9744dba7283d3914a9",
+        "changed": false
+      }
+    ]
+  },
+  "status": "awaiting user visual review; preview only",
+  "unchanged_current_native_count": 56,
+  "edited_selected_frame_count": 3,
+  "unchanged_selected_frame_count": 13,
+  "revision": "r1",
+  "gif_checks": [
+    {
+      "file": "selected-corrections-r1.gif",
+      "size": [
+        960,
+        350
+      ],
+      "frames": 8,
+      "duration_ms": 100,
+      "loop": 0,
+      "sha256": "5d2fdac1f743f24ab8dc765e91a064f41f317bfd6c0f3e77fa8ddd7cf015718b"
+    },
+    {
+      "file": "selected-corrections-slow-r1.gif",
+      "size": [
+        1280,
+        380
+      ],
+      "frames": 8,
+      "duration_ms": 200,
+      "loop": 0,
+      "sha256": "b348a6b7d3ca81a73ae79c0fd9906e71cfe3671f4f89829e8ad4cea446cfb246"
+    },
+    {
+      "file": "all-walk-directions-selected-r1.gif",
+      "size": [
+        1440,
+        330
+      ],
+      "frames": 8,
+      "duration_ms": 100,
+      "loop": 0,
+      "sha256": "d9a84de4438590dcef4490257f5ca28254501f0a201d5de3676510e684357251"
+    }
+  ],
+  "format_and_scope": "PASS",
+  "selected_archive_ownership": "PASS: exact UR03 and UL03 archive hashes",
+  "visual_review": {
+    "inspected": [
+      "normal 10fps comparison",
+      "frame5",
+      "frame6",
+      "frame7"
+    ],
+    "screenshots": [
+      "browser.png",
+      "frame5-browser.png",
+      "frame6-browser.png",
+      "frame7-browser.png"
+    ],
+    "finding": "UL03 cross-back arm removed in5/6; UR03 lifted boot lowered in7. Protected regions retained. User review pending."
+  },
+  "engine_validation": "Not rerun for isolated preview assets; previous full engine run passed55checks. No runtime asset changes."
+}

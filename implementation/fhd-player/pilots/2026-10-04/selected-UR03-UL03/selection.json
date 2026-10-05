@@ -1,0 +1,99 @@
+{
+  "date": "2026-10-05",
+  "selected": {
+    "UR03": {
+      "id": "UR03",
+      "direction": "up-right",
+      "name": "before-07-08-r5/frames",
+      "aliases": [
+        {
+          "name": "before-07-08-r5/frames",
+          "path": "implementation/fhd-player/pilots/2026-10-04/walk-up-right/before-07-08-r5/frames",
+          "source_sha256": null
+        }
+      ],
+      "sampling": {
+        "method": "Exact existing native PNGs; no resampling.",
+        "input_sha256": {
+          "walk-up-right-01.png": "5f36215641900e45763420159ded46bf659a74bb270680ee4438f66139558419",
+          "walk-up-right-02.png": "0730f610a57bdc6e69e676654a323236ad38380e87ad91c3a96ccbf99a23669a",
+          "walk-up-right-03.png": "32f31b11ad371bcc3751609752d6f66effa2d31b0c915f8fbc807d6c3c4f898d",
+          "walk-up-right-04.png": "79e6bb19ea258c1e2895920b39253ffbafb6172380618bf0e06f3730590704da",
+          "walk-up-right-05.png": "1e6c318ff613841f287356c7cd90b3360a408c7f2a24cf9dd2e10a616703bc7c",
+          "walk-up-right-06.png": "c483b077ce83f4b0e95c37527480f35bb09aed5ab6216d0a7d698a93d72252f2",
+          "walk-up-right-07.png": "f4bda5237ae21d953f8ac6a8ddf44381c980e7fdcb31c7238a8a691f82f8237a",
+          "walk-up-right-08.png": "c2d96e95a28ea8d147f41f60d42f9ea8acf4cdcb8a2eb8663390c98e09d4c953"
+        }
+      },
+      "gif": "UR03.gif",
+      "strip": "UR03-strip.png",
+      "frames": 8,
+      "duration_ms": 100,
+      "display_scale": 2,
+      "export_sha256": {
+        "UR03-frame-01.png": "5f36215641900e45763420159ded46bf659a74bb270680ee4438f66139558419",
+        "UR03-frame-02.png": "0730f610a57bdc6e69e676654a323236ad38380e87ad91c3a96ccbf99a23669a",
+        "UR03-frame-03.png": "32f31b11ad371bcc3751609752d6f66effa2d31b0c915f8fbc807d6c3c4f898d",
+        "UR03-frame-04.png": "79e6bb19ea258c1e2895920b39253ffbafb6172380618bf0e06f3730590704da",
+        "UR03-frame-05.png": "1e6c318ff613841f287356c7cd90b3360a408c7f2a24cf9dd2e10a616703bc7c",
+        "UR03-frame-06.png": "c483b077ce83f4b0e95c37527480f35bb09aed5ab6216d0a7d698a93d72252f2",
+        "UR03-frame-07.png": "f4bda5237ae21d953f8ac6a8ddf44381c980e7fdcb31c7238a8a691f82f8237a",
+        "UR03-frame-08.png": "c2d96e95a28ea8d147f41f60d42f9ea8acf4cdcb8a2eb8663390c98e09d4c953",
+        "UR03-strip.png": "4bccd2f634889130eb23304844ff868ed90b93b9dfe536ba540376510e9f6ed9",
+        "UR03.gif": "f7dcfcd5b1113de33d5c391d09ae95269b3bed52625aa2cca887c126a887b54d"
+      }
+    },
+    "UL03": {
+      "id": "UL03",
+      "direction": "up-left",
+      "name": "before-arm-smoothing/frames",
+      "aliases": [
+        {
+          "name": "before-arm-smoothing/frames",
+          "path": "implementation/fhd-player/pilots/2026-10-04/walk-up-left/before-arm-smoothing/frames",
+          "source_sha256": null
+        }
+      ],
+      "sampling": {
+        "method": "Exact existing native PNGs; no resampling.",
+        "input_sha256": {
+          "walk-up-left-01.png": "afefe3c6a10bf46d3a201bbf8916c83c6f4f1987351016380582e7c5b75a2c25",
+          "walk-up-left-02.png": "d3e63d45898d135d52be58045692be53ba42717a1c2a147d4f358e5446a40984",
+          "walk-up-left-03.png": "2168b536023bd739724bf898636778a0ed671fa7f3e7ee1c7dfe6f36699a3be6",
+          "walk-up-left-04.png": "81d9959b5dab17ecfcde14b1bd6f93d56629fd8bc1dfb84b9df522b38dd46611",
+          "walk-up-left-05.png": "8190eab38cfde5217d5b1c15196260e40291ba5ca8d21c68337383db5c134a01",
+          "walk-up-left-06.png": "bb1afe1a1970e8ac364743398f8333c5d454b64d9b9c5a40afb631c9fc3f527c",
+          "walk-up-left-07.png": "bc3ac8506d749598d6611a89bf061e2e8a12443a0dcaf6d8efe107a111f74ca4",
+          "walk-up-left-08.png": "f0ef2b5b74baf72e3fb63f31acef5ba355f23fd6c237fa9744dba7283d3914a9"
+        }
+      },
+      "gif": "UL03.gif",
+      "strip": "UL03-strip.png",
+      "frames": 8,
+      "duration_ms": 100,
+      "display_scale": 2,
+      "export_sha256": {
+        "UL03-frame-01.png": "afefe3c6a10bf46d3a201bbf8916c83c6f4f1987351016380582e7c5b75a2c25",
+        "UL03-frame-02.png": "d3e63d45898d135d52be58045692be53ba42717a1c2a147d4f358e5446a40984",
+        "UL03-frame-03.png": "2168b536023bd739724bf898636778a0ed671fa7f3e7ee1c7dfe6f36699a3be6",
+        "UL03-frame-04.png": "81d9959b5dab17ecfcde14b1bd6f93d56629fd8bc1dfb84b9df522b38dd46611",
+        "UL03-frame-05.png": "8190eab38cfde5217d5b1c15196260e40291ba5ca8d21c68337383db5c134a01",
+        "UL03-frame-06.png": "bb1afe1a1970e8ac364743398f8333c5d454b64d9b9c5a40afb631c9fc3f527c",
+        "UL03-frame-07.png": "bc3ac8506d749598d6611a89bf061e2e8a12443a0dcaf6d8efe107a111f74ca4",
+        "UL03-frame-08.png": "f0ef2b5b74baf72e3fb63f31acef5ba355f23fd6c237fa9744dba7283d3914a9",
+        "UL03-strip.png": "08cced2f8275f7a566643eda872e664bdc017f1f75bd86f686aa3e5a3fc038f9",
+        "UL03.gif": "857ce122a42ab03c29df45939b5f98bda7f4ba8d8d5d54a87ad67f3bf240cdec"
+      }
+    }
+  },
+  "requested_changes": {
+    "UR03": [
+      7
+    ],
+    "UL03": [
+      5,
+      6
+    ]
+  },
+  "native_integration": false
+}

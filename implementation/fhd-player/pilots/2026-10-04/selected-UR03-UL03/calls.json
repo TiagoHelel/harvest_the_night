@@ -1,0 +1,60 @@
+{
+  "UR03": [
+    {
+      "prompt": "Use case: precise-object-edit. One pixel-art walking pose correction. Image1 is the EDIT TARGET: frame7 from the user's selected UR03 rear three-quarter UP-RIGHT walk. Image2 shows the EXACT ACCEPTED neighboring poses: frame6 on left and frame8 on right. Output ONE corrected frame7 only, keeping its same farmer and northeast-facing angle. Fix the recovery between6 and8: frame7's raised boot is currently pulled sharply up/back and the leg seems stuck before lowering. Bring the lifted boot slightly down and forward, knee naturally bent, making a true intermediate passing step between the neighbor images, not a new contact pose or a kick. In normalized80x80 coordinates the lifted boot's bottom should be about62px rather than58px, intermediate between the neighbors. Preserve the planted leg, its foot position and contact height; keep anatomical leg ownership, same trouser thickness and boot sizes. Relax the near arm just slightly into its passing angle between6 and8, keep two small attached hands. LOCK original hat, head size, hair, rear-facing face, torso and clothing palette, body proportions, source pixel-grid size, planted leg/boot, canvas placement and transparent padding. No body turn, oversized fist, longer leg, extra limb, double knee, flipped leg, antialiasing or labels. Same simple pixel clusters as the accepted native reference, approximately64pixel-tall artwork. Full-body single sprite on genuine transparent alpha, square canvas with same relative framing as image1.",
+      "referenced_image_paths": [
+        "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/selected-UR03-UL03/UR03-frame-07-target.png",
+        "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/selected-UR03-UL03/UR03-neighbors-06-08.png"
+      ],
+      "transparent_background": true,
+      "source": "UR03-r1.png",
+      "original": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-606a9624-7177-46bd-b784-c9b95b7f23ac.png",
+      "review": "Selected for local review: generated recovery boot moves from original y60 extent to y62, while fixed cut retains planted leg, upper body and arms.",
+      "tool": "image_gen.imagegen",
+      "date": "2026-10-05",
+      "mode": "built-in edit",
+      "source_sha256": "8101e27ce540ceba30433d5f970ed42da0792115e1fa3ac15454ace2b7d4011b",
+      "original_sha256": "8101e27ce540ceba30433d5f970ed42da0792115e1fa3ac15454ace2b7d4011b",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "input_sha256": {
+        "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/selected-UR03-UL03/UR03-frame-07-target.png": "14229dd6ae37b675df8df9f46080dee4bfc550a64cb55285dceca28d45cd1ad9",
+        "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/selected-UR03-UL03/UR03-neighbors-06-08.png": "9cb2208af6d0cc3179de4d7120e4c37092bdf538081111360170872845249d2e"
+      },
+      "selected_base": "before-07-08-r5/frames",
+      "assembly": "Fixed rectangular cut from generated artwork; original pixels retained outside cut.",
+      "status": "awaiting user visual review; preview only"
+    }
+  ],
+  "UL03": [
+    {
+      "prompt": "Use case: precise-object-edit. Surgical two-pose pixel-art arm correction. Image1 is the EDIT TARGET: selected UL03 UP-LEFT frames5(left) and6(right). Image2 shows accepted surrounding poses4(left) and7(right). Output EXACTLY TWO corrected sprites, frame5 then6 side by side. Fix only the NEAR anatomical LEFT arm attached to the SCREEN-LEFT shoulder in5 and6: it currently stretches conspicuously across the central back/blue overalls. Replace that awkward cross-back forearm with a small relaxed backward swing kept close to its own left hip. In5 the elbow is gently down/back below the left sleeve and wrist is only slightly to its right, near its own hip, never reaching the middle back pocket. In6 the near arm starts returning naturally toward the hanging passing arm in accepted7; smaller angle than5. Compact rounded hands, relaxed wrists and connected elbow/forearm; not a horizontal paddle or boxing fist. Interpolate the near-arm arc from accepted4 through5 and6 toward7, no teleport, third arm or abrupt full extension. Keep the far RIGHT arm, both white sleeve designs, exact hat/head/hair/back view, torso width, blue overall palette, ALL leg/knee/calf poses, boot shape/size, planted/lifted foot positions, pixel grid and full-body placement unchanged in BOTH target frames. The user chose this exact lower-body cycle: absolutely no leg edits or new gait. Repair the small blue overall area previously covered by the awkward near forearm naturally. Genuine transparent alpha, two equal square cells, horizontal2x1 layout, same scale/padding as image1, plenty of transparent space. Pixel art matching source native clusters; no extra fine detail, antialiasing, labels, shadows, objects or background.",
+      "referenced_image_paths": [
+        "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/selected-UR03-UL03/UL03-frames-05-06-target.png",
+        "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/selected-UR03-UL03/UL03-neighbors-04-07.png"
+      ],
+      "transparent_background": true,
+      "source": "UL03-r1.png",
+      "original": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-ef0502cc-47bb-48f9-aa96-797c3c9da476.png",
+      "review": "Selected for local review: near arms stay at own hip through5/6; generated arm-region crop preserves heads, legs, boots and far arms from UL03.",
+      "tool": "image_gen.imagegen",
+      "date": "2026-10-05",
+      "mode": "built-in edit",
+      "source_sha256": "56a2ca58d31bde7e1229e3e593b19ee3a91537b7850b0f1c5ecf20ef0566d480",
+      "original_sha256": "56a2ca58d31bde7e1229e3e593b19ee3a91537b7850b0f1c5ecf20ef0566d480",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "input_sha256": {
+        "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/selected-UR03-UL03/UL03-frames-05-06-target.png": "7be255daa508b45b674456256059ad2008a4dd9c9b08e065008face467a2e5ab",
+        "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/selected-UR03-UL03/UL03-neighbors-04-07.png": "0caeba428295712d8a2cf27503b7e523f106dc8f740f892dd9a08211a6383790"
+      },
+      "selected_base": "before-arm-smoothing/frames",
+      "assembly": "Fixed rectangular cut from generated artwork; original pixels retained outside cut.",
+      "status": "awaiting user visual review; preview only"
+    }
+  ]
+}

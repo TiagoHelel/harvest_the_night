@@ -2702,3 +2702,36 @@ unchanged sim/data hashes. Sprite queue and git diff --check PASS.
 
 No new sprite generation, next direction, queue changes, push or changes to
 project.godot. Existing unrelated files preserved. Awaiting user selection.
+
+## Selected UR03 / UL03 local corrections - review ready 2026-10-05
+
+User selected UR03 (before-07-08-r5/frames) and UL03
+(before-arm-smoothing/frames), requesting only UR03 frame7 and UL03 frames5/6.
+Frozen gallery IDs and original archive pixels preserved. New review lives in
+implementation/fhd-player/pilots/2026-10-04/selected-UR03-UL03/index.html.
+The gallery and both existing upper-diagonal pages link to this local review.
+
+Two built-in ImageGen edit calls, one single recovery pose and one arm pair;
+English prompts and exact arguments in prompts-r1.json/calls.json. Originals
+copied unchanged into assets/art_source/player-fhd/pilots/2026-10-04/
+selected-UR03-UL03/, with dimensions and source/input SHA256 recorded.
+Native export uses a shared32px hat calibration per source and nearest sampling.
+Fixed generated cuts:UR03 frame7(44,48,62,68), UL03 frames5/6(22,30,46,50).
+All other pixels of those frames retained; no hand painting or limb warping.
+UR03 planted leg/boot, head, torso and arms retained. UL03 legs/boots in all8
+poses, heads and far arms retained. Other13selected poses byte-identical.
+
+Horizontal before/after:selected-corrections-r1.gif,960x350,8x100ms,
+integer2x. Slow detail:1280x380,8x200ms,integer4x. Seven-direction review:
+all-walk-directions-selected-r1.gif,1440x330,8x100ms; other five directions
+unchanged. Manual comparison controls inspect all8poses without interpolation.
+
+Format/scope PASS: exact selected archives,16binary-alpha80x80frames,
+only3changed poses, protected regions identical,8unique poses per infinite
+GIF, correct cadence,56current native assets unchanged. Browser inspected
+normal comparison and corrected phases5/6/7; screenshots saved beside review.
+UR03 recovery boot now lower in7; UL03 near arm no longer crosses the back.
+Visual approval remains pending. No active native/runtime assets replaced.
+Full engine suite not rerun for isolated preview art; preceding run passed55
+checks with unchanged sim/data hashes. Sprite queue and git diff --check PASS.
+No next direction, queue mutation, push or project.godot change.
