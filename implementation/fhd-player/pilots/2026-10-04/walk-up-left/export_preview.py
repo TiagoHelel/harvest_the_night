@@ -80,6 +80,29 @@ for i, cell in enumerate(cells):
                     'sha256': hashlib.sha256(frame.tobytes()).hexdigest()})
     frames.append(frame)
 assert len({m['sha256'] for m in metrics}) == 8
+# Replace ONLY reported poses5/6; the other6R9 frames retain their pixels.
+pair=clean(Image.open(SOURCE/'arm-05-06-r10.png'))
+mid=round(pair.width/2)
+pair_cells=[pair.crop((0,0,mid,pair.height)),pair.crop((mid,0,pair.width,pair.height))]
+pair_scale=32/statistics.median(map(hat_width,pair_cells))
+for i,cell in zip([4,5],pair_cells):
+    b=cell.getbbox()
+    head=cell.crop((0,b[1],cell.width,b[1]+round((b[3]-b[1])*.22))).getbbox()
+    center=(head[0]+head[2])/2
+    small=cell.resize((round(cell.width*pair_scale),round(cell.height*pair_scale)),Image.Resampling.NEAREST)
+    frame=Image.new('RGBA',(FRAME,FRAME))
+    frame.alpha_composite(small,(round(FRAME/2-center*pair_scale),TOP-small.getbbox()[1]))
+    b=frame.getbbox()
+    assert b[0]>0 and b[2]<FRAME and b[3]<FRAME-2,b
+    frames[i]=frame
+    frame.save(ROOT/f'frames/walk-up-left-{i+1:02}.png')
+    hb=frame.crop((0,TOP,FRAME,TOP+14)).getbbox()
+    metrics[i]={'frame':i+1,'bbox':b,'height':b[3]-b[1],'hat_region_width':hb[2]-hb[0],
+                'sha256':hashlib.sha256(frame.tobytes()).hexdigest()}
+strip=Image.new('RGBA',(FRAME*8,FRAME))
+for i,frame in enumerate(frames):
+    strip.alpha_composite(frame,(i*FRAME,0))
+assert len({m['sha256'] for m in metrics}) == 8
 strip.save(ROOT / 'walk-up-left-strip.png')
 
 idle_src = clean(Image.open(SOURCE / 'rotation-r1.png'))
@@ -108,7 +131,7 @@ for i, left in enumerate(frames):
     right = Image.open(RIGHT / f'frames/walk-up-right-{i+1:02}.png').convert('RGBA')
     canvas = Image.new('RGBA', (1040, 420), '#20292c')
     d = ImageDraw.Draw(canvas)
-    caption(d, (22,16), 'APPROVED UP-RIGHT / WALK UP-LEFT / 8 FRAMES / 10 FPS', 19)
+    caption(d, (22,16), 'WALK UP-RIGHT / WALK UP-LEFT / 8 FRAMES / 10 FPS', 19)
     for label, x in [('UP-RIGHT | FHD 1x',20), ('UP-LEFT | FHD 1x',195),
                      ('UP-RIGHT | DETAIL 2x',390), ('UP-LEFT | DETAIL 2x',720)]:
         caption(d, (x,66), label)
@@ -122,7 +145,7 @@ for i, left in enumerate(frames):
     check = Image.new('RGBA', (640,370), '#303a3e')
     check.alpha_composite(right.resize((320,320),Image.Resampling.NEAREST), (0,35))
     check.alpha_composite(left.resize((320,320),Image.Resampling.NEAREST), (320,35))
-    caption(ImageDraw.Draw(check), (15,10), f'APPROVED UP-RIGHT / UP-LEFT / FRAME {i+1}', 13)
+    caption(ImageDraw.Draw(check), (15,10), f'UP-RIGHT / UP-LEFT / FRAME {i+1}', 13)
     slow.append(check)
     diagnostic=Image.new('RGBA',(640,370),'#303a3e')
     diagnostic.alpha_composite(tracking_frames[i].resize((320,320),Image.Resampling.NEAREST),(0,35))
@@ -143,14 +166,15 @@ for i, left in enumerate(frames):
     caption(sd, (30,312), 'Preview only - awaiting approval', 14, '#aac2bd')
     caption(sd, (30,348), f'Frame {i+1:02} / 08', 14)
     idle_previews.append(standing)
-save_gif(previews, ROOT / 'up-diagonals-arms-r9.gif', 100)
+save_gif(previews, ROOT / 'up-diagonals-arms-r10.gif', 100)
 save_gif(slow, ROOT / 'gait-comparison-slow.gif', 200)
-save_gif(diagnostics, ROOT / 'tracking-materials-arms-r9.gif', 200)
+save_gif(diagnostics, ROOT / 'tracking-materials-arms-r10.gif', 200)
 save_gif(idle_previews, ROOT / 'idle-walk-up-left.gif', 100)
 previews[0].convert('RGB').save(ROOT / 'comparison-poster.png')
 contact.convert('RGB').save(ROOT / 'contact-sheet.png')
 report = {'status': 'awaiting user approval; not integrated', 'frames': 8, 'fps': 10,
-          'canvas': [80,80], 'selected_source': 'arms-r9.png; opposing arm swing correction', 'source_size': list(source.size),
+          'canvas': [80,80], 'selected_source': 'arms-r9.png + arm-05-06-r10.png override5/6', 'source_size': list(source.size),
+          'arm_override_frames':[5,6],'arm_pair_source_scale':pair_scale,
           'source_row_cuts': rows, 'source_col_cuts': cols, 'native_target_height': HEIGHT,
           'fhd_display_scale': 2, 'common_source_scale': scale, 'source_alpha_threshold': 128,
           'arm_source_hat_calibration': arm_source_calibration,

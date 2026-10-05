@@ -6,11 +6,16 @@
     80,
     80
   ],
-  "selected_source": "arms-r9.png; opposing arm swing correction",
+  "selected_source": "arms-r9.png + arm-05-06-r10.png override5/6",
   "source_size": [
     1774,
     887
   ],
+  "arm_override_frames": [
+    5,
+    6
+  ],
+  "arm_pair_source_scale": 0.08333333333333333,
   "source_row_cuts": [
     0,
     438,
@@ -83,26 +88,26 @@
     {
       "frame": 5,
       "bbox": [
-        23,
+        24,
         8,
-        56,
-        71
+        57,
+        70
       ],
-      "height": 63,
-      "hat_region_width": 32,
-      "sha256": "1349476e9a8b50d0c13395d9f8b1c962ac992a63eba2abc04db8fab18e79df20"
+      "height": 62,
+      "hat_region_width": 33,
+      "sha256": "4bbb302a97d79c5324eb6ecbb7dff1da98e84673bb9e8838a65501553292dacd"
     },
     {
       "frame": 6,
       "bbox": [
         24,
         8,
-        58,
-        70
+        57,
+        69
       ],
-      "height": 62,
+      "height": 61,
       "hat_region_width": 32,
-      "sha256": "4ab1ad0c1342dca99e700b9e3e3498d58efa278900855238df7f3a3dcab5bd79"
+      "sha256": "ed9d54a18e0f941114440095ee0b14ade126fac6eb161c0001cde1bd08b3df67"
     },
     {
       "frame": 7,

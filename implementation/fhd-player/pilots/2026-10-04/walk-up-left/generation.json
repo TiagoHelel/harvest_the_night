@@ -1,7 +1,7 @@
 {
   "tool": "built-in ImageGen",
   "date": "2026-10-05",
-  "status": "awaiting user review: arm animation/sleeve correction",
+  "status": "awaiting user review: smoother walking arm movement",
   "transparent_background": true,
   "source_directory": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-left",
   "workflow_reference": "sprite_generator/welcome_back_hero/prepare_ranger_transition.py: fixed colored hip chains, opposite contacts and passing/reaching phases. Previous per-cell reflection approach rejected by user; all eight poses rebuilt.",
@@ -174,15 +174,30 @@
       "sha256": "a994ba9a49b382f176f67b72fef031261f6458cc4af6a22cc0a1ac8d4c017046",
       "date": "2026-10-05",
       "review": "Selected: both arms counter-swing with far arm occlusion in4/5. User review pending."
+    },
+    {
+      "source": "arm-05-06-r10.png",
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-0228a514-04c1-4a32-8355-0df1bc63081b.png",
+      "prompt": "Use case: precise-object-edit. Image1 is edit target: a transparent horizontal TWO-pose crop of farmer WALK UP-LEFT frames5(left) and6(right). Fix ONLY the near anatomical LEFT arm from the SCREEN-LEFT shoulder. Currently its forearm swings unnaturally far across the entire visible blue back. Reduce that backward swing to a natural LOW amplitude with relaxed arm hanging near the LEFT SIDE of the body. Pose5: same left shoulder/sleeve, upper arm extends mostly down, elbow only slightly bent, fist near the left hip rather than the center of the back, mostly peach arm outline outside the left torso silhouette. The forearm bends slightly screen-right but no more than2native pixels from a relaxed vertical arm; it must not cover the central blue back pocket or either overall strap. Pose6: starts returning smoothly toward neutral, elbow a little straighter and hand about1native pixel lower/left than5. Pose5 and6 must read as adjacent mild arm swings, not an arm folded across the back or flung behind the character. Preserve the FAR anatomical RIGHT arm on screen-right exactly as shown, with its current coherent occlusion/return. Exactly2arms. Keep head, hat size, torso, face/hair, shoulder position, white shirt, blue overalls, waist, legs, knee positions, boots and all lower-body pixels unchanged in design and scale. Keep BOTH complete full-body sprites on the same horizontal two-cell layout with transparent margins, no cropping, labels or extra characters. Crisp pixel-art edges, no antialiasing, true transparent background.",
+      "references": [
+        "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-left/arm-05-06-original.png"
+      ],
+      "dimensions": [
+        1763,
+        892
+      ],
+      "sha256": "01eaa3d331c9b8e479f4b16e1ced400ca895141c82882fa975fec4cf1b07852d",
+      "date": "2026-10-05",
+      "review": "Selected: near left arm stays relaxed by left hip in5/6, no forearm across central back. Only5/6 overridden."
     }
   ],
-  "selected_source": "arms-r9.png",
+  "selected_source": "arms-r9.png + arm-05-06-r10.png override5/6",
   "selected_preview": "up-diagonals-rebuilt-r7.gif",
   "native_overrides": null,
   "limitations": [
-    "Preview only, no runtime integration.",
-    "ImageGen edits preserve design, not byte-exact unchanged regions within edited poses.",
-    "Frame-count and scope checks do not prove gait quality; user review remains pending."
+    "Preview only; no runtime integration.",
+    "Generated edits preserve design, not byte-exact unchanged regions inside edited poses.",
+    "Numeric scope checks do not establish motion quality."
   ],
   "previous_candidate": {
     "source": "materials-r2.png + recovery-r3.png for7/8",
@@ -191,5 +206,16 @@
   },
   "diagnostic": "tracking-materials-rebuild-r7.gif",
   "diagnostic_source": "rebuild-tracking-r5.png poses1-4,7-8 plus rebuild-contacts-r6.png poses5/6; normalized in rebuild-tracking-r6-packed/reference.png",
-  "arm_correction_request": "Right arm does not move; one down-right pose appears to have three arms."
+  "arm_correction_request": "Right arm does not move; one down-right pose appears to have three arms.",
+  "arm_smoothing_request": "Up-right left arm pops in/out; up-left arm5/6 extends unnaturally across back.",
+  "arm_edit_reference": {
+    "source": "arms-r9.png",
+    "crop": [
+      0,
+      438,
+      887,
+      887
+    ],
+    "operation": "lossless two-cell crop of5/6; common native hat-width calibration"
+  }
 }

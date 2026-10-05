@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-05",
+  "status": "awaiting user review; preview only",
+  "changed_frames": [
+    "walk-up-left/frames/walk-up-left-05.png",
+    "walk-up-left/frames/walk-up-left-06.png",
+    "walk-up-right/frames/walk-up-right-01.png",
+    "walk-up-right/frames/walk-up-right-02.png",
+    "walk-up-right/frames/walk-up-right-03.png",
+    "walk-up-right/frames/walk-up-right-04.png",
+    "walk-up-right/frames/walk-up-right-05.png",
+    "walk-up-right/frames/walk-up-right-06.png",
+    "walk-up-right/frames/walk-up-right-07.png",
+    "walk-up-right/frames/walk-up-right-08.png"
+  ],
+  "unchanged_frame_count": 46,
+  "unchanged_up_left": [
+    1,
+    2,
+    3,
+    4,
+    7,
+    8
+  ],
+  "fps": 10,
+  "canvas": [
+    80,
+    80
+  ],
+  "display_scale": 2,
+  "gif_durations_ms": [
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100
+  ],
+  "slow_gif_durations_ms": [
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200
+  ],
+  "runtime_changes": false,
+  "engine_suite_rerun": false,
+  "limitations": [
+    "Generated edits preserve design, not byte-exact pixels inside edited poses.",
+    "Frame counts and scope assertions do not prove anatomy or motion quality."
+  ]
+}

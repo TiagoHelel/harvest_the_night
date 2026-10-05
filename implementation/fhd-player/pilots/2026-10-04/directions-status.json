@@ -53,24 +53,24 @@
     "previous_approval_date": "2026-10-04"
   },
   "walk_up_right": {
-    "status": "approved",
+    "status": "awaiting_approval",
     "date": "2026-10-05",
-    "candidate": "walk-up-right/materials-r5 + recovery-07-08-r1 overrides",
-    "preview": "walk-up-right/up-diagonal-recovery-r6.gif",
-    "diagnostic": "walk-up-right/recovery-before-after-r6.gif",
-    "user_feedback": "aprovado",
+    "candidate": "walk-up-right/arm-smoothing-r9",
+    "preview": "walk-up-right/up-diagonal-arms-r9.gif",
+    "diagnostic": "up-diagonal-arms-before-after.gif",
+    "user_feedback": "Left arm disappears and appears without fluid motion.",
     "rejected_candidate": "walk-up-right/materials-r3",
-    "feedback_addressed": "Only frames7/8 replaced; frame8 now reaches and lowers instead of holding phase7. Frames1-6 unchanged.",
+    "feedback_addressed": "Continuous far left shoulder/elbow/hand cycle with modest arc.",
     "approval_date": "2026-10-05"
   },
   "walk_up_left": {
     "status": "awaiting_approval",
     "date": "2026-10-05",
-    "candidate": "walk-up-left/arms-r9",
-    "preview": "walk-up-left/up-diagonals-arms-r9.gif",
-    "diagnostic": "up-left-arms-before-after.gif",
-    "feedback_addressed": "Far right arm swings across8phases; near left arm4/5/6 corrected for opposing swing.",
+    "candidate": "walk-up-left/arms-r9 + arm-05-06-r10 override5/6",
+    "preview": "walk-up-left/up-diagonals-arms-r10.gif",
+    "diagnostic": "up-diagonal-arms-before-after.gif",
+    "feedback_addressed": "Relaxed near arm beside hip in5/6, reduced bend; six other native poses unchanged.",
     "rejected_candidate": "walk-up-left/materials-r2 + recovery-r3 overrides7/8",
-    "user_feedback": "Right arm does not move."
+    "user_feedback": "Arm goes too far backward in5/6."
   }
 }

@@ -1,3 +1,7 @@
+## Arm smoothing follow-up - 2026-10-05
+
+Current arm candidate: arm-smoothing-r9.png. Far left arm bends near the waist in1, extends progressively through2-5 and returns through6-8; it remains visible. Near right1/5/8 were corrected to counter-swing after R8 edited the wrong arm. Three targeted attempts evaluated. Native canvas80px; hats31-32px; height60-63px. Current main GIF: up-diagonal-arms-r9.gif. Exact sources/prompts/rejections: generation.json. Preview only and awaiting user review.
+
 # Walk up-right: frames7/8 R6 approved
 
 User approved the R6 frames7/8 correction on2026-10-05 with "aprovado".

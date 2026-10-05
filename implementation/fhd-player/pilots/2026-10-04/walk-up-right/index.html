@@ -3,18 +3,19 @@
 <title>New farmer - Walk up-right review</title>
 <style>body{margin:32px;background:#172225;color:#e9e3cf;font:16px system-ui}main{max-width:1100px;margin:auto}h1{font-size:26px}p{color:#b7ccc7}img{image-rendering:pixelated;max-width:100%;height:auto}button,a{color:#e9e3cf}button{background:#344b48;border:1px solid #66847c;padding:10px 18px;cursor:pointer;margin:8px}canvas{image-rendering:pixelated;width:320px;height:320px;background:#303a3e}details{margin-top:24px}summary{cursor:pointer}small{color:#b7ccc7}</style>
 <main><h1>New farmer &middot; Walk up-right</h1><p>Approved up and walking up-right at the same display scale. Eight frames, 10 fps.</p>
-<img src="up-diagonal-recovery-r6.gif?v=up-right-r6" width="1040" height="420" alt="Approved walking up beside walking up-right, at FHD size and enlarged">
-<p>Only frames7 and8 revised: the raised foot reaches and lowers into frame1. Frames1 to6 are unchanged.</p>
-<details><summary>Direction master, walk and enlarged view</summary><img src="idle-walk-up-right.gif?v=up-right-r6" width="880" height="400" alt="Standing direction reference, animated walk and enlarged walk"></details>
+<img src="up-diagonal-arms-r9.gif?v=arm-smoothing-r9" width="1040" height="420" alt="Approved walking up beside walking up-right, at FHD size and enlarged">
+<p>Far left arm now follows a gradual visible elbow/hand arc through all8poses. Recovery gait7/8 remains the design reference.</p>
+<details open><summary>Current arm correction comparison</summary><img src="../up-diagonal-arms-before-after.gif?v=arm-smoothing-r9" width="1280" height="380" alt="Both up diagonal arm cycles before and after"></details>
+<details><summary>Direction master, walk and enlarged view</summary><img src="idle-walk-up-right.gif?v=arm-smoothing-r9" width="880" height="400" alt="Standing direction reference, animated walk and enlarged walk"></details>
 <details><summary>Inspect individual frames</summary>
 <p><button id="back">Previous</button><button id="next">Next</button><span id="count">Frame 1 / 8</span></p><canvas width="80" height="80" id="pose"></canvas>
 <p><a href="walk-up-right-strip.png">Transparent sprite strip</a></p></details>
-<details><summary>Compare frames7-8 before and after slowly</summary><p>Left: previous R5. Right: only frames7-8 revised. Check the lifted foot reaching and lowering through6-7-8-1.</p><img src="recovery-before-after-r6.gif?v=up-right-r6" width="640" height="370" alt="Previous R5 beside revised frames7-8 at half speed"></details>
-<details><summary>All eight poses</summary><img src="contact-sheet.png?v=up-right-r6" alt="Top row: previous R5. Bottom row: frames7-8 revised."></details>
-<p><a href="../all-walk-directions.gif?v=seven-r1">All seven current walk directions</a></p>
-<p><small>Preview only &middot; Approved2026-10-05 &middot; Proposed character height: about 128 screen pixels</small></p></main>
+<details><summary>Compare frames7-8 before and after slowly</summary><p>Left: previous R5. Right: only frames7-8 revised. Check the lifted foot reaching and lowering through6-7-8-1.</p><img src="recovery-before-after-r6.gif?v=arm-smoothing-r9" width="640" height="370" alt="Previous R5 beside revised frames7-8 at half speed"></details>
+<details><summary>All eight poses</summary><img src="contact-sheet.png?v=arm-smoothing-r9" alt="Top row: previous R5. Bottom row: frames7-8 revised."></details>
+<p><a href="../all-walk-directions.gif?v=arm-smoothing-r9">All seven current walk directions</a></p>
+<p><small>Preview only &middot; Arm correction awaiting review &middot; Proposed character height: about 128 screen pixels</small></p></main>
 <script>
-const frames=Array.from({length:8},(_,i)=>{let im=new Image();im.src=`frames/walk-up-right-${String(i+1).padStart(2,'0')}.png?v=up-right-r6`;return im});let index=0;
+const frames=Array.from({length:8},(_,i)=>{let im=new Image();im.src=`frames/walk-up-right-${String(i+1).padStart(2,'0')}.png?v=arm-smoothing-r9`;return im});let index=0;
 const ctx=document.querySelector('canvas').getContext('2d');ctx.imageSmoothingEnabled=false;
 function show(){ctx.clearRect(0,0,80,80);ctx.drawImage(frames[index],0,0);document.getElementById('count').textContent=`Frame ${index+1} / 8`}
 frames[0].onload=show;document.getElementById('next').onclick=()=>{index=(index+1)%8;show()};document.getElementById('back').onclick=()=>{index=(index+7)%8;show()};

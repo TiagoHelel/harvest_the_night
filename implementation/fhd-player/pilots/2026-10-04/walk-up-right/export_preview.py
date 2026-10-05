@@ -82,6 +82,21 @@ normal[6:] = pack(recovery_cells, scale*recovery_calibration,
                  head_depth=round(100/recovery_calibration))
 tracking_scale = scale
 tracking = pack(tracking_cells, tracking_scale)
+# Arm edit uses the complete accepted8-pose reference, including recovery7/8.
+arm_cells=cuts(SOURCE/'walk-up-right/arm-smoothing-r9.png')
+tracking=[clean(Image.open(ROOT/f'before-arm-smoothing/frames/walk-up-right-{i+1:02}.png'))
+          for i in range(8)]
+native_hat_widths=[]
+source_hat_widths=[]
+for old,cell in zip(tracking,arm_cells):
+    hb=old.crop((0,TOP,FRAME,TOP+14)).getbbox()
+    native_hat_widths.append(hb[2]-hb[0])
+    b=cell.getbbox()
+    hb=cell.crop((0,b[1],cell.width,b[1]+round((b[3]-b[1])*.22))).getbbox()
+    source_hat_widths.append(hb[2]-hb[0])
+arm_scale=statistics.median(native_hat_widths)/statistics.median(source_hat_widths)
+arm_head_depth=round(statistics.median(c.getbbox()[3]-c.getbbox()[1] for c in arm_cells)*.22)
+normal=pack(arm_cells,arm_scale,head_depth=arm_head_depth)
 idle_source = clean(Image.open(SOURCE / 'walk-up-right/rotation-r1.png'))
 ib = idle_source.getbbox()
 idle_crop = idle_source.crop(ib)
@@ -124,7 +139,7 @@ for i, frame in enumerate(normal):
     check=Image.new('RGBA',(640,370),'#303a3e')
     check.alpha_composite(tracking[i].resize((320,320),Image.Resampling.NEAREST),(0,35))
     check.alpha_composite(frame.resize((320,320),Image.Resampling.NEAREST),(320,35))
-    caption(ImageDraw.Draw(check),(15,10),f'BEFORE R5 (LEFT) / FRAMES 7-8 REVISED (RIGHT) / FRAME {i+1}',12)
+    caption(ImageDraw.Draw(check),(15,10),f'BEFORE (LEFT) / CONTINUOUS FAR ARM (RIGHT) / FRAME {i+1}',12)
     diagnostic.append(check)
 gif(preview,ROOT/'idle-walk-up-right.gif',100)
 gif(diagnostic,ROOT/'leg-tracking-slow.gif',200)
@@ -136,16 +151,16 @@ for i,frame in enumerate(normal):
     caption(ImageDraw.Draw(contact),(i*160+10,190),f'{i+1:02}')
 contact.convert('RGB').save(ROOT/'contact-sheet.png')
 report={'status':'awaiting user review; not integrated','frames':8,'fps':10,'canvas':[80,80],
-        'selected_source':'materials-r5.png; frames7/8 from recovery-07-08-r1.png',
-        'native_overrides':{'frames':[7,8],'source':'recovery-07-08-r1.png',
-                            'pair_common_reference_scale':recovery_calibration,
-                            'native_source_scale':scale*recovery_calibration},
-        'source_row_cuts':[0,round(Image.open(SOURCE/'walk-up-right/materials-r5.png').height/2),Image.open(SOURCE/'walk-up-right/materials-r5.png').height],
-        'native_target_height':64,'fhd_display_scale':2,'common_source_scale':scale,'tracking_common_source_scale':tracking_scale,
+        'selected_source':'arm-smoothing-r9.png; far left elbow/hand trajectory8poses',
+        'native_overrides':{'frames':list(range(1,9)),'source':'arm-smoothing-r9.png',
+                            'native_source_scale':arm_scale},
+        'source_row_cuts':[0,round(Image.open(SOURCE/'walk-up-right/arm-smoothing-r9.png').height/2),Image.open(SOURCE/'walk-up-right/arm-smoothing-r9.png').height],
+        'native_target_height':64,'fhd_display_scale':2,'common_source_scale':arm_scale,'tracking_common_source_scale':1,
+        'arm_calibration_reference':'Median native hat width of accepted eight-pose recovery cycle',
         'idle_bbox':idle.getbbox(),'frames_metrics':metrics,
         'source_alpha_threshold':128,'resample':'nearest','anchor':'hat center and fixed head top',
         'limitations':['Prototype display size, not yet rendered inside the game.',
-                        'Slow comparison shows R5 beside revised frames7/8, not a colored-leg construction proof.',
+                        'Slow comparison shows accepted recovery cycle beside far-arm correction.',
                         'Generated source edits are not pixel-identical to their references.']}
 ih=idle.crop((0,TOP,FRAME,TOP+14)).getbbox()
 report['idle_hat_region_width']=ih[2]-ih[0]

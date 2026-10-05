@@ -1,7 +1,7 @@
 {
   "tool": "built-in ImageGen",
   "date": "2026-10-04",
-  "status": "approved: R6 frames7/8",
+  "status": "awaiting user review: smoother walking arm movement",
   "source_directory": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right",
   "transparent_background": true,
   "workflow_reference": "sprite_generator/welcome_back_hero/prepare_ranger_transition.py: rotate first, fixed hip color ownership, isolated opposite contacts, two four-frame transitions",
@@ -209,6 +209,54 @@
       "source": "recovery-07-08-r1.png",
       "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-dfed9e7f-1c32-4ec7-b89f-38e62f03ff1f.png",
       "review": "Only exported frames7/8 replaced. Frame8 unfolds near knee and advances/lowers the boot rather than holding frame7 pose. Native hats32px, heights63px. Frames1-6 byte-identical; anatomy/motion approval pending."
+    },
+    {
+      "source": "arm-smoothing-r7.png",
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-8f35893b-cc34-433c-85e7-fa569578ddcc.png",
+      "prompt": "Use case: precise-object-edit. Image1 is edit target: eight existing pixel-art WALK UP-RIGHT farmer poses, 4columns2rows, reading order. Fix ONLY anatomical LEFT arm, the FAR arm attached to SCREEN-LEFT shoulder. It currently merely disappears in1 and pops into a static pose in2-8. Draw its complete consistent white sleeve -> peach upper arm -> bent elbow -> forearm -> hand chain in a SMOOTH SMALL walking counter-swing. Keep that far LEFT hand partly visible outside the SCREEN-LEFT torso silhouette in EVERY frame; never erase it completely, never teleport it to another side, never attach it to the near right shoulder. Phase1: maximum modest BACK swing down-left, hand below hip outside the left waist. Phase2: a little closer to the hip as it returns. Phase3: passes just beside the hip. Phase4: starts forward/up-right, small bent elbow, hand moves upward and a little right, still readable beside torso. Phase5: modest maximum forward swing, hand near upper hip/lower waist left edge, forearm bends slightly toward torso, never hidden completely. Phase6: starts lowering and returning. Phase7: hand passes beside hip going back. Phase8: hand lowers/back-left between7 and1. Give each consecutive hand/elbow pose a visible small change of about1-2 native pixels, using a low-amplitude arc; same upper arm and forearm lengths, shoulder stays fixed. No sudden visibility changes or arm extension across the whole back. Near RIGHT arm, head, straw hat, white eyes, hair, shirt/overall design, blue leg identity, all8leg positions including approved recovery7/8, trouser width, boot shapes, torso size and character pixel grid are invariants. Exactly TWO arms and hands. Preserve pixel art with same logical pixel size and same source proportions, crisp binary alpha, original transparent padding and4x2grid. No antialiasing, painterly gradients, labels, numbers, shadows or floor. Transparent background.",
+      "references": [
+        "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/arm-smoothing-original.png"
+      ],
+      "dimensions": [
+        1774,
+        887
+      ],
+      "sha256": "ece4e929b5f72fdc16b802ff2292aac9901f55dabe5ba2700172342004da0cdc",
+      "date": "2026-10-05",
+      "review": "Rejected: far left hand now visible in1 but still nearly static across8poses."
+    },
+    {
+      "source": "arm-smoothing-r8.png",
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-5381c709-0d1b-4cf4-b58d-431fdb4acf03.png",
+      "prompt": "Use case: precise-object-edit. Image1 EDIT TARGET eight-pose up-right pixel farmer4x2sheet. Image2 ABSTRACT ARM TRAJECTORY GUIDE ONLY, not a new character reference. R7 made the far LEFT arm visible but still almost IDENTICAL hanging straight down in all8poses: this fails animation. Change ONLY FAR anatomical LEFT arm on SCREEN-LEFT and follow the eight elbow/hand positions from guide2. Keep original shoulder fixed, keep sleeve white and skin peach, do NOT copy cyan color or gray mannequin or any guide labels. Importantly, guide phase1 is forward toward travel/up-right, with left hand raised at left waist and elbow bent, because the near RIGHT arm is backward in1. Guide phase5 is far left arm back down-left extended modestly, opposite to the near right arm's forward bent swing. Native80x80positions: shoulder(34,32)all; phase1 elbow(31,39) hand(34,41); phase2 elbow(31,39) hand(32,43); phase3 elbow(32,40) hand(30,45); phase4 elbow(31,41) hand(28,47); phase5 elbow(31,42) hand(27,49); phase6 elbow(31,41) hand(28,47); phase7 elbow(32,40) hand(30,45); phase8 elbow(31,39) hand(32,43). These are normalized pose-local guide coordinates, adapt to target alignment without moving shoulder/torso. Hand moves smoothly DOWN-LEFT 1to5 then UP-RIGHT 5to1. Most visible hand is ALWAYS outside left torso silhouette, small natural arm shape and modest7px vertical range. Frame1 MUST have visibly bent forearm and higher hand than5; frame5 MUST have hand lower and leftwards. Never duplicate the same hanging arm in all frames. Shoulder->elbow->hand connected with constant upper-arm/forearm lengths; mild bend as in guide. Preserve ALL existing near right arms, heads, hats, overalls, hips, legs, boots, gait recovery7/8, pixel scale and4x2layout. Absolutely no character redesign, body stretching, arm across the full back, arm disappearing completely or swapping shoulders. EXACTLY TWO arms per pose. Crisp pixel art, transparent background. No guide colors, numbers, writing, shadows or extra characters.",
+      "references": [
+        "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/arm-smoothing-r7.png",
+        "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/far-arm-trajectory-guide.png"
+      ],
+      "dimensions": [
+        1774,
+        887
+      ],
+      "sha256": "d75755f4596d211ff3f69a3402abe46b80c2258c62320d387aa18d71ef6e5e12",
+      "date": "2026-10-05",
+      "review": "Rejected: slightly changes far arm but accidentally reverses near arm1/5/8."
+    },
+    {
+      "source": "arm-smoothing-r9.png",
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-f0fc7e52-2543-4a90-abf2-bafee3ebbfad.png",
+      "prompt": "Use case: precise-object-edit. Image1 EDIT TARGET eight walking farmer cells4columns2rows. Image2 is the ORIGINAL near-right-arm pose reference. Image3 is a movement diagram. Precise correction: target's arm on the LEFT SIDE OF EACH PICTURE must visibly BEND AT ELBOW in phases1,2,8 instead of hanging nearly straight in every phase. This image-left arm is the FAR anatomical LEFT arm. Its white sleeve sits on the LEFT shoulder. Phase1(top-left): upper arm descends from LEFT sleeve, elbow sits BELOW LEFT sleeve, then forearm angles UP and RIGHT toward the LEFT EDGE of the BLUE WAIST. Its hand is near the waist, considerably HIGHER than the straight hand in phase5. Keep the elbow visible projecting LEFT of torso so this is one bent arm attached to the LEFT shoulder, not the arm on picture-right. Phase2(top second): same LEFT shoulder, left elbow bends less, hand lowers halfway toward the relaxed left hip. Phase3(top third): left hand next to left hip, near vertical passing arm. Phase4(top fourth): left hand starts reaching BACK down-left. Phase5(bottom first): LEFT arm modestly extended down-left, hand below hip, matching image1left-arm5. Phase6(bottom second): LEFT hand returns midway upward from5. Phase7(bottom third): LEFT arm passes hip. Phase8(bottom fourth): LEFT elbow bends partially, left hand moves up/right midway to1. Image-left1 vs5 are opposite higher-bent and lower-straighter key poses. Visible LEFT hand all8phases, no arm hiding, no duplicate arms. RESTORE the arm on the RIGHT SIDE OF EACH PICTURE (near anatomical RIGHT) to its exact pose in image2: picture-right arm DOWN in1/2/3, raised/bent FORWARD in4/5/6, DOWN in7/8. In image1 the wrong picture-right arm was accidentally bent in1/8 and lowered in5; correct those three using originalimage2. Thus the arms COUNTER-SWING, one moves forward while the other moves backward. Do not flip the image, exchange shoulders, copy the forward pose onto both arms, or modify legs. Keep all eight heads, hat sizes, faces, blue trousers, boots, hips, leg positions and source proportions unchanged. Preserve pixel-grid crispness and white/peach arm palette. No cyan diagram lines or text. Source4x2layout, true transparent background, EXACTLY TWO ARMS in each pose.",
+      "references": [
+        "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/arm-smoothing-r8.png",
+        "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/arm-smoothing-original.png",
+        "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/far-arm-trajectory-guide.png"
+      ],
+      "dimensions": [
+        1774,
+        887
+      ],
+      "sha256": "cb84939521bb36df29fe00f1bf06d621be249a0b06191249e8c1bb3cadc1199f",
+      "date": "2026-10-05",
+      "review": "Selected candidate: bent/extended far-arm cycle with near-arm correction. User review pending."
     }
   ],
   "actual_sources": {
@@ -298,8 +346,9 @@
     ]
   },
   "limitations": [
-    "Current construction candidates require visual review; colors alone do not prove anatomical correctness.",
-    "No runtime integration or engine validation."
+    "Preview only; no runtime integration.",
+    "Generated edits preserve design, not byte-exact unchanged regions inside edited poses.",
+    "Numeric scope checks do not establish motion quality."
   ],
   "guide_history": "guide-archive-r1 preserves the original leg-only schematic used for contacts; later transition guides also specify arm counter-swing. Reconstructed from identical create_guide geometry with arm block omitted.",
   "derived_sources": {
@@ -316,7 +365,7 @@
     "feedback": "reprovado, a perna troca sem movimento coerente",
     "archived_preview": "rejected-r3"
   },
-  "selected_source": "materials-r5.png with frame7/8 recovery-07-08-r1.png overrides",
+  "selected_source": "arm-smoothing-r9.png",
   "selected_preview": "up-diagonal-recovery-r6.gif",
   "revision_date": "2026-10-05",
   "selected_preview_sha256": "8ca57cc5fdc57f789d118ac7655abdc322adea7cb9b541975e34ab69c34a77f9",
@@ -341,5 +390,10 @@
   "approval": {
     "date": "2026-10-05",
     "feedback": "aprovado"
+  },
+  "arm_smoothing_request": "Up-right left arm pops in/out; up-left arm5/6 extends unnaturally across back.",
+  "arm_edit_reference": {
+    "source": "before-arm-smoothing/frames/*.png",
+    "operation": "lossless320x160packing, nearest6x to1920x960; includes approved recovery7/8"
   }
 }

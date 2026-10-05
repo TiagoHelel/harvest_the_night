@@ -1,36 +1,57 @@
 {
   "date": "2026-10-05",
-  "status": "awaiting user approval; preview only",
+  "status": "awaiting user review; preview only",
   "changed_frames": [
-    "walk-down-right/frames/walk-down-right-04.png",
-    "walk-up-left/frames/walk-up-left-01.png",
-    "walk-up-left/frames/walk-up-left-02.png",
-    "walk-up-left/frames/walk-up-left-03.png",
-    "walk-up-left/frames/walk-up-left-04.png",
     "walk-up-left/frames/walk-up-left-05.png",
     "walk-up-left/frames/walk-up-left-06.png",
-    "walk-up-left/frames/walk-up-left-07.png",
-    "walk-up-left/frames/walk-up-left-08.png"
+    "walk-up-right/frames/walk-up-right-01.png",
+    "walk-up-right/frames/walk-up-right-02.png",
+    "walk-up-right/frames/walk-up-right-03.png",
+    "walk-up-right/frames/walk-up-right-04.png",
+    "walk-up-right/frames/walk-up-right-05.png",
+    "walk-up-right/frames/walk-up-right-06.png",
+    "walk-up-right/frames/walk-up-right-07.png",
+    "walk-up-right/frames/walk-up-right-08.png"
   ],
-  "unchanged_frame_count": 47,
-  "down_right_unchanged_frames": [
+  "unchanged_frame_count": 46,
+  "unchanged_up_left": [
     1,
     2,
     3,
-    5,
-    6,
+    4,
     7,
     8
   ],
-  "native_canvas": [
+  "fps": 10,
+  "canvas": [
     80,
     80
   ],
   "display_scale": 2,
-  "fps": 10,
-  "loop": 0,
-  "art_method": "built-in ImageGen edits; deterministic alpha/cuts/nearest/GIF composition",
-  "visual_checks": "Manual source and native inspection; frame counts do not prove anatomy or gait.",
+  "gif_durations_ms": [
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100
+  ],
+  "slow_gif_durations_ms": [
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200
+  ],
   "runtime_changes": false,
-  "full_engine_suite_rerun": false
+  "engine_suite_rerun": false,
+  "limitations": [
+    "Generated edits preserve design, not byte-exact pixels inside edited poses.",
+    "Frame counts and scope assertions do not prove anatomy or motion quality."
+  ]
 }
