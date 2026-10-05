@@ -2670,3 +2670,35 @@ Sprite queue check PASS:20prompts with valid dependencies/statuses/index.
 Format/scope and git diff --check PASS; visual gate FAIL. No runtime sprite
 integration, game/data/input/collision changes, queue mutations, next direction
 or push. Existing project.godot edits and unrelated untracked files preserved.
+
+## Complete upper-diagonal revision gallery - review ready 2026-10-05
+
+User requested every existing UP-RIGHT and UP-LEFT version to choose a pair.
+Added implementation/fhd-player/pilots/2026-10-04/walk-revision-gallery/
+index.html:25unique UP-RIGHT cycles (UR01-UR25),21UP-LEFT (UL01-UL21),
+plus16static original masters/contact/partial sheets. Existing generated
+sources and exact native archives are both represented; identical displayed
+cycles share a card with all original aliases. All54canonical generated or
+assembled source sheets are accounted for in manifest.json coverage.
+
+build_walk_revision_gallery.py composes existing art only;0ImageGen calls.
+Exact native archives retain all original pixels. Whole source sheets are cut
+4x2 and sampled with one common scale per sheet (32px hat target,70px height
+limit for unusually tall rejected studies), not per-frame scaling. No limb
+painting, warping, flipping, source replacement or actual sprite corrections.
+All56current native frames remain unchanged; choosing a gallery card has no
+runtime effect. Each card provides a240x215GIF with integer2x farmer display,
+8poses at100ms, plus a1280px horizontal frame strip and source ownership.
+
+Validation PASS:46eight-frame100ms infinite GIFs, source/output SHA256,
+coverage of every generated call,16partial previews and56native scope guard.
+Browser loaded all46cycle GIFs and independently selected UR04+UL03; reset
+those test choices before leaving the gallery open for the user. Screenshot:
+walk-revision-gallery/browser.png. Both current upper-diagonal pages link to
+this gallery. Independent review codes and comparison controls are ready;
+no automatic art approval and no runtime integration. Full engine suite not
+rerun for the gallery-only change; preceding full run passed55checks and
+unchanged sim/data hashes. Sprite queue and git diff --check PASS.
+
+No new sprite generation, next direction, queue changes, push or changes to
+project.godot. Existing unrelated files preserved. Awaiting user selection.

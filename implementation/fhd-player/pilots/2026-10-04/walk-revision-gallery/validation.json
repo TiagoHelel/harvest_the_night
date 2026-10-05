@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "unique_cycles": {
+    "up-right": 25,
+    "up-left": 21
+  },
+  "partial_sources": 16,
+  "covered_source_count": 54,
+  "gif_checks": "46 eight-frame,100ms,loop0,240x215 GIFs verified",
+  "unchanged_native_frames": 56,
+  "new_generation_calls": 0,
+  "runtime_integration": false,
+  "limits": "Gallery display/ownership checks are not motion approval. Whole-sheet sources use common scale; archived native exports preserve original pixels.",
+  "browser_checks": {
+    "loaded_cycle_gifs": 46,
+    "independent_selection": "UR04 + UL03 tested; selection reset before handoff",
+    "screenshot": "browser.png"
+  }
+}

@@ -1,0 +1,2457 @@
+{
+  "date": "2026-10-05",
+  "items": [
+    {
+      "id": "UR01",
+      "direction": "up-right",
+      "name": "CURRENT | hands-r15",
+      "aliases": [
+        {
+          "name": "CURRENT | hands-r15",
+          "path": "implementation/fhd-player/pilots/2026-10-04/walk-up-right/frames",
+          "source_sha256": null
+        },
+        {
+          "name": "before-diagonal-arm-reference/frames",
+          "path": "implementation/fhd-player/pilots/2026-10-04/walk-up-right/before-diagonal-arm-reference/frames",
+          "source_sha256": null
+        },
+        {
+          "name": "hands-r15.png",
+          "path": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/hands-r15.png",
+          "source_sha256": "ae83bca882b0e8c49da22082706e98f82e3fe49ccd8b47f396da3096eaa9cba7"
+        }
+      ],
+      "sampling": {
+        "method": "Exact existing native PNGs; no resampling.",
+        "input_sha256": {
+          "walk-up-right-01.png": "fd8e8a90818672f0befc0888b2ccdc95925e4f5e2891dc161befdefc751e4eab",
+          "walk-up-right-02.png": "846281a5057052cb1a69dd9b89148a895dda2ff5b6573c552fedfe763d851c39",
+          "walk-up-right-03.png": "4d248b6a71e6c3881f2700e07482baeb0f5089ec785a3212b76248d70e382e79",
+          "walk-up-right-04.png": "d4ebb7fcd2bea48552334c3bc711beb6ff6026237d0af8b6a8067e332f54b4f8",
+          "walk-up-right-05.png": "a3bce06595c67af0e12dfef3eb6b39858bfc6f1ed525bfd020038f95f8ac6359",
+          "walk-up-right-06.png": "3bce5b4c0f243c1ca0dd91324ba3651d0cf8b7e014d2aabd6b75cd891e6de542",
+          "walk-up-right-07.png": "656d61a38860effd01815e396f54ef9c4b31bd245a66a58820f939f033582333",
+          "walk-up-right-08.png": "0f0d1d6c030e0e706d123371521f7a90078a48753c3ef4c9c9c307ccc2a36f30"
+        }
+      },
+      "gif": "UR01.gif",
+      "strip": "UR01-strip.png",
+      "frames": 8,
+      "duration_ms": 100,
+      "display_scale": 2,
+      "export_sha256": {
+        "UR01-frame-01.png": "fd8e8a90818672f0befc0888b2ccdc95925e4f5e2891dc161befdefc751e4eab",
+        "UR01-frame-02.png": "846281a5057052cb1a69dd9b89148a895dda2ff5b6573c552fedfe763d851c39",
+        "UR01-frame-03.png": "4d248b6a71e6c3881f2700e07482baeb0f5089ec785a3212b76248d70e382e79",
+        "UR01-frame-04.png": "d4ebb7fcd2bea48552334c3bc711beb6ff6026237d0af8b6a8067e332f54b4f8",
+        "UR01-frame-05.png": "a3bce06595c67af0e12dfef3eb6b39858bfc6f1ed525bfd020038f95f8ac6359",
+        "UR01-frame-06.png": "3bce5b4c0f243c1ca0dd91324ba3651d0cf8b7e014d2aabd6b75cd891e6de542",
+        "UR01-frame-07.png": "656d61a38860effd01815e396f54ef9c4b31bd245a66a58820f939f033582333",
+        "UR01-frame-08.png": "0f0d1d6c030e0e706d123371521f7a90078a48753c3ef4c9c9c307ccc2a36f30",
+        "UR01-strip.png": "35461ba0be975b21c6449510bcb81b1df2388730276f574745afde3b09949893",
+        "UR01.gif": "211d5d1eefb7ab2e18f7195acefe92c352e4282e76c2fea034fa570d410cde86"
+      }
+    },
+    {
+      "id": "UR02",
+      "direction": "up-right",
+      "name": "arm-tracking-frames",
+      "aliases": [
+        {
+          "name": "arm-tracking-frames",
+          "path": "implementation/fhd-player/pilots/2026-10-04/walk-up-right/arm-tracking-frames",
+          "source_sha256": null
+        },
+        {
+          "name": "full-arm-tracking-r12.png",
+          "path": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/full-arm-tracking-r12.png",
+          "source_sha256": "5875e09a3e417e9478487a8729ecfa3c2ef7b878664e2e5eed480575515040d5"
+        }
+      ],
+      "sampling": {
+        "method": "Exact existing native PNGs; no resampling.",
+        "input_sha256": {
+          "walk-up-right-01.png": "59d5f48d3cd77a1d294c408bd94e16c397b06058ecd2ea676e1511d501e6f0f7",
+          "walk-up-right-02.png": "0b6d2940aebaccc1c65a52fe7b7cb4c158cd973ab65ed0f98a52ca65bcdfb3d8",
+          "walk-up-right-03.png": "0e24c1411437c560e9186954f3d8f7f52db1b11d8c0c62f46c23aab6b27909f8",
+          "walk-up-right-04.png": "c61ef8fc50876fb5690d332e9b032d2f26779d8262ede2edeeed43de6653420c",
+          "walk-up-right-05.png": "ff4d035f0bdce30fcb2b23a51c9f2ecaae42aa905d32f812615ee51d73e5b2e0",
+          "walk-up-right-06.png": "0609020a89d4727f601d4bf288c046281aceda757bbcc896b9c6a7612ce69c41",
+          "walk-up-right-07.png": "dbe867994f5e3b9ffbe228ceb27330814bc676594ce618216c1b9315de59782b",
+          "walk-up-right-08.png": "6eea70f8e1056340ed06dec65b7c3bdbbda0522e562db73e51829cda8435b8fd"
+        }
+      },
+      "gif": "UR02.gif",
+      "strip": "UR02-strip.png",
+      "frames": 8,
+      "duration_ms": 100,
+      "display_scale": 2,
+      "export_sha256": {
+        "UR02-frame-01.png": "59d5f48d3cd77a1d294c408bd94e16c397b06058ecd2ea676e1511d501e6f0f7",
+        "UR02-frame-02.png": "0b6d2940aebaccc1c65a52fe7b7cb4c158cd973ab65ed0f98a52ca65bcdfb3d8",
+        "UR02-frame-03.png": "0e24c1411437c560e9186954f3d8f7f52db1b11d8c0c62f46c23aab6b27909f8",
+        "UR02-frame-04.png": "c61ef8fc50876fb5690d332e9b032d2f26779d8262ede2edeeed43de6653420c",
+        "UR02-frame-05.png": "ff4d035f0bdce30fcb2b23a51c9f2ecaae42aa905d32f812615ee51d73e5b2e0",
+        "UR02-frame-06.png": "0609020a89d4727f601d4bf288c046281aceda757bbcc896b9c6a7612ce69c41",
+        "UR02-frame-07.png": "dbe867994f5e3b9ffbe228ceb27330814bc676594ce618216c1b9315de59782b",
+        "UR02-frame-08.png": "6eea70f8e1056340ed06dec65b7c3bdbbda0522e562db73e51829cda8435b8fd",
+        "UR02-strip.png": "ea8f0d323a40826ee6e51b6599356b76810e781d0efa2803015b46c5bef85847",
+        "UR02.gif": "d5443da5a8c4a652543460bd365f13b72ec96e0e851b85deb6c49d10a92fc792"
+      }
+    },
+    {
+      "id": "UR03",
+      "direction": "up-right",
+      "name": "before-07-08-r5/frames",
+      "aliases": [
+        {
+          "name": "before-07-08-r5/frames",
+          "path": "implementation/fhd-player/pilots/2026-10-04/walk-up-right/before-07-08-r5/frames",
+          "source_sha256": null
+        }
+      ],
+      "sampling": {
+        "method": "Exact existing native PNGs; no resampling.",
+        "input_sha256": {
+          "walk-up-right-01.png": "5f36215641900e45763420159ded46bf659a74bb270680ee4438f66139558419",
+          "walk-up-right-02.png": "0730f610a57bdc6e69e676654a323236ad38380e87ad91c3a96ccbf99a23669a",
+          "walk-up-right-03.png": "32f31b11ad371bcc3751609752d6f66effa2d31b0c915f8fbc807d6c3c4f898d",
+          "walk-up-right-04.png": "79e6bb19ea258c1e2895920b39253ffbafb6172380618bf0e06f3730590704da",
+          "walk-up-right-05.png": "1e6c318ff613841f287356c7cd90b3360a408c7f2a24cf9dd2e10a616703bc7c",
+          "walk-up-right-06.png": "c483b077ce83f4b0e95c37527480f35bb09aed5ab6216d0a7d698a93d72252f2",
+          "walk-up-right-07.png": "f4bda5237ae21d953f8ac6a8ddf44381c980e7fdcb31c7238a8a691f82f8237a",
+          "walk-up-right-08.png": "c2d96e95a28ea8d147f41f60d42f9ea8acf4cdcb8a2eb8663390c98e09d4c953"
+        }
+      },
+      "gif": "UR03.gif",
+      "strip": "UR03-strip.png",
+      "frames": 8,
+      "duration_ms": 100,
+      "display_scale": 2,
+      "export_sha256": {
+        "UR03-frame-01.png": "5f36215641900e45763420159ded46bf659a74bb270680ee4438f66139558419",
+        "UR03-frame-02.png": "0730f610a57bdc6e69e676654a323236ad38380e87ad91c3a96ccbf99a23669a",
+        "UR03-frame-03.png": "32f31b11ad371bcc3751609752d6f66effa2d31b0c915f8fbc807d6c3c4f898d",
+        "UR03-frame-04.png": "79e6bb19ea258c1e2895920b39253ffbafb6172380618bf0e06f3730590704da",
+        "UR03-frame-05.png": "1e6c318ff613841f287356c7cd90b3360a408c7f2a24cf9dd2e10a616703bc7c",
+        "UR03-frame-06.png": "c483b077ce83f4b0e95c37527480f35bb09aed5ab6216d0a7d698a93d72252f2",
+        "UR03-frame-07.png": "f4bda5237ae21d953f8ac6a8ddf44381c980e7fdcb31c7238a8a691f82f8237a",
+        "UR03-frame-08.png": "c2d96e95a28ea8d147f41f60d42f9ea8acf4cdcb8a2eb8663390c98e09d4c953",
+        "UR03-strip.png": "4bccd2f634889130eb23304844ff868ed90b93b9dfe536ba540376510e9f6ed9",
+        "UR03.gif": "f7dcfcd5b1113de33d5c391d09ae95269b3bed52625aa2cca887c126a887b54d"
+      }
+    },
+    {
+      "id": "UR04",
+      "direction": "up-right",
+      "name": "before-arm-smoothing/frames",
+      "aliases": [
+        {
+          "name": "before-arm-smoothing/frames",
+          "path": "implementation/fhd-player/pilots/2026-10-04/walk-up-right/before-arm-smoothing/frames",
+          "source_sha256": null
+        }
+      ],
+      "sampling": {
+        "method": "Exact existing native PNGs; no resampling.",
+        "input_sha256": {
+          "walk-up-right-01.png": "5f36215641900e45763420159ded46bf659a74bb270680ee4438f66139558419",
+          "walk-up-right-02.png": "0730f610a57bdc6e69e676654a323236ad38380e87ad91c3a96ccbf99a23669a",
+          "walk-up-right-03.png": "32f31b11ad371bcc3751609752d6f66effa2d31b0c915f8fbc807d6c3c4f898d",
+          "walk-up-right-04.png": "79e6bb19ea258c1e2895920b39253ffbafb6172380618bf0e06f3730590704da",
+          "walk-up-right-05.png": "1e6c318ff613841f287356c7cd90b3360a408c7f2a24cf9dd2e10a616703bc7c",
+          "walk-up-right-06.png": "c483b077ce83f4b0e95c37527480f35bb09aed5ab6216d0a7d698a93d72252f2",
+          "walk-up-right-07.png": "68612046eac1a48d68dd6be6bdc633b496c8bc20a47b48ff0046a355c6fa79f4",
+          "walk-up-right-08.png": "6c5c1ff72b4b3bbbacea9dc6a1c3789ee09ed851a3ecd9fd00638bd33fb675a8"
+        }
+      },
+      "gif": "UR04.gif",
+      "strip": "UR04-strip.png",
+      "frames": 8,
+      "duration_ms": 100,
+      "display_scale": 2,
+      "export_sha256": {
+        "UR04-frame-01.png": "5f36215641900e45763420159ded46bf659a74bb270680ee4438f66139558419",
+        "UR04-frame-02.png": "0730f610a57bdc6e69e676654a323236ad38380e87ad91c3a96ccbf99a23669a",
+        "UR04-frame-03.png": "32f31b11ad371bcc3751609752d6f66effa2d31b0c915f8fbc807d6c3c4f898d",
+        "UR04-frame-04.png": "79e6bb19ea258c1e2895920b39253ffbafb6172380618bf0e06f3730590704da",
+        "UR04-frame-05.png": "1e6c318ff613841f287356c7cd90b3360a408c7f2a24cf9dd2e10a616703bc7c",
+        "UR04-frame-06.png": "c483b077ce83f4b0e95c37527480f35bb09aed5ab6216d0a7d698a93d72252f2",
+        "UR04-frame-07.png": "68612046eac1a48d68dd6be6bdc633b496c8bc20a47b48ff0046a355c6fa79f4",
+        "UR04-frame-08.png": "6c5c1ff72b4b3bbbacea9dc6a1c3789ee09ed851a3ecd9fd00638bd33fb675a8",
+        "UR04-strip.png": "de88855177fb274eb6a4b06db0ee967e60bbd65268a94910d5890b3a089373f3",
+        "UR04.gif": "7eea49f4d428de4398916432359c8fa29464140f95b6fefeeb95cf392c764ab1"
+      }
+    },
+    {
+      "id": "UR05",
+      "direction": "up-right",
+      "name": "before-full-arm-cycle/frames",
+      "aliases": [
+        {
+          "name": "before-full-arm-cycle/frames",
+          "path": "implementation/fhd-player/pilots/2026-10-04/walk-up-right/before-full-arm-cycle/frames",
+          "source_sha256": null
+        }
+      ],
+      "sampling": {
+        "method": "Exact existing native PNGs; no resampling.",
+        "input_sha256": {
+          "walk-up-right-01.png": "eafb3db121d380b7e47bbed3f4aba28316651541e078e22bd4981368dd146cfa",
+          "walk-up-right-02.png": "a0a5d8e739238d0d084a52ec7602ec895cc61cc55f8e502b810a0a49fde19e04",
+          "walk-up-right-03.png": "4643d66a5f6eae7b850dcb0cf9a49e8e325235a441d9eb8cac1037a8d2a03102",
+          "walk-up-right-04.png": "ab42d2bace209fb96ff9a4112a7f4bef5edb8fd789183085706ef08703882f43",
+          "walk-up-right-05.png": "41d9e1037bf6180c8283287bb1a16ce497bb4c5104a49885af86eec34821ce51",
+          "walk-up-right-06.png": "d9d3bee7921c911218c724e061ac77a2675d245ecd94cf5026c2f5dde8e85e4e",
+          "walk-up-right-07.png": "6c78f8bbb861800541a1ca86b26434dae171b62af7d4020e83289e47d609f8f5",
+          "walk-up-right-08.png": "1b0adb425f79b59285bbe2ac5bef77532a5abbaaef37ce28b58ed2e996b6dfaf"
+        }
+      },
+      "gif": "UR05.gif",
+      "strip": "UR05-strip.png",
+      "frames": 8,
+      "duration_ms": 100,
+      "display_scale": 2,
+      "export_sha256": {
+        "UR05-frame-01.png": "eafb3db121d380b7e47bbed3f4aba28316651541e078e22bd4981368dd146cfa",
+        "UR05-frame-02.png": "a0a5d8e739238d0d084a52ec7602ec895cc61cc55f8e502b810a0a49fde19e04",
+        "UR05-frame-03.png": "4643d66a5f6eae7b850dcb0cf9a49e8e325235a441d9eb8cac1037a8d2a03102",
+        "UR05-frame-04.png": "ab42d2bace209fb96ff9a4112a7f4bef5edb8fd789183085706ef08703882f43",
+        "UR05-frame-05.png": "41d9e1037bf6180c8283287bb1a16ce497bb4c5104a49885af86eec34821ce51",
+        "UR05-frame-06.png": "d9d3bee7921c911218c724e061ac77a2675d245ecd94cf5026c2f5dde8e85e4e",
+        "UR05-frame-07.png": "6c78f8bbb861800541a1ca86b26434dae171b62af7d4020e83289e47d609f8f5",
+        "UR05-frame-08.png": "1b0adb425f79b59285bbe2ac5bef77532a5abbaaef37ce28b58ed2e996b6dfaf",
+        "UR05-strip.png": "5df0d26adeb5284485973e143254284e787ca322f20d1c3682f0c50221f07160",
+        "UR05.gif": "ce078a8626b6b2ffeca3c515d65c7d1406231288a35c5fa339a21293374d8c9c"
+      }
+    },
+    {
+      "id": "UR06",
+      "direction": "up-right",
+      "name": "before-hand-rebuild/frames",
+      "aliases": [
+        {
+          "name": "before-hand-rebuild/frames",
+          "path": "implementation/fhd-player/pilots/2026-10-04/walk-up-right/before-hand-rebuild/frames",
+          "source_sha256": null
+        },
+        {
+          "name": "full-arm-materials-r13.png",
+          "path": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/full-arm-materials-r13.png",
+          "source_sha256": "1f2b4faad0682f96fc3582f83a60c14b10ccfd1d25f26804b9ded7c32bbaffdf"
+        }
+      ],
+      "sampling": {
+        "method": "Exact existing native PNGs; no resampling.",
+        "input_sha256": {
+          "walk-up-right-01.png": "e2dd627db4c28935fb4a28c6bee870859882188cb4a4019592ff2ce3fe57e576",
+          "walk-up-right-02.png": "a71bb34432811969872747158360dcdd181fed9cf7079705017b72efd2527218",
+          "walk-up-right-03.png": "bdabf5e6a705d7296f232698530c618d400073d25ab48873b5607e8da739d4bf",
+          "walk-up-right-04.png": "7942d5819b1c35f28033c1d57a71624fa39f557ffe90b04af73e7923e90bff27",
+          "walk-up-right-05.png": "56af2056b4616e68bbfd31cb623e7754624d13d2c850666b4cb710e830483f4e",
+          "walk-up-right-06.png": "a51bfc63397b6097f4928375dc47c790886749445e21aa504bc2426c3d03f1f8",
+          "walk-up-right-07.png": "65f189717b8710caa490589d90186fb03ac4f67351800ca78fd46100596a1ca0",
+          "walk-up-right-08.png": "292ab06bfb47223b1303e3c3840d243347c502a3f85a3a7480e666871d985f28"
+        }
+      },
+      "gif": "UR06.gif",
+      "strip": "UR06-strip.png",
+      "frames": 8,
+      "duration_ms": 100,
+      "display_scale": 2,
+      "export_sha256": {
+        "UR06-frame-01.png": "e2dd627db4c28935fb4a28c6bee870859882188cb4a4019592ff2ce3fe57e576",
+        "UR06-frame-02.png": "a71bb34432811969872747158360dcdd181fed9cf7079705017b72efd2527218",
+        "UR06-frame-03.png": "bdabf5e6a705d7296f232698530c618d400073d25ab48873b5607e8da739d4bf",
+        "UR06-frame-04.png": "7942d5819b1c35f28033c1d57a71624fa39f557ffe90b04af73e7923e90bff27",
+        "UR06-frame-05.png": "56af2056b4616e68bbfd31cb623e7754624d13d2c850666b4cb710e830483f4e",
+        "UR06-frame-06.png": "a51bfc63397b6097f4928375dc47c790886749445e21aa504bc2426c3d03f1f8",
+        "UR06-frame-07.png": "65f189717b8710caa490589d90186fb03ac4f67351800ca78fd46100596a1ca0",
+        "UR06-frame-08.png": "292ab06bfb47223b1303e3c3840d243347c502a3f85a3a7480e666871d985f28",
+        "UR06-strip.png": "d2299ac245047e9b4fbaad508788722812e4320b93ffb6278f5e85fc3a53f8f0",
+        "UR06.gif": "5979475a89d98d8327a02a00d9c1f9cad3636e39944219b94f3b43aaba45ba37"
+      }
+    },
+    {
+      "id": "UR07",
+      "direction": "up-right",
+      "name": "hand-candidate",
+      "aliases": [
+        {
+          "name": "hand-candidate",
+          "path": "implementation/fhd-player/pilots/2026-10-04/walk-up-right/hand-candidate",
+          "source_sha256": null
+        },
+        {
+          "name": "hands-r16.png",
+          "path": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/hands-r16.png",
+          "source_sha256": "5e62725d1aa4fe47a426053af23636890c93853d0e0b1716493e053f254c1945"
+        }
+      ],
+      "sampling": {
+        "method": "Exact existing native PNGs; no resampling.",
+        "input_sha256": {
+          "walk-up-right-01.png": "7950f01cd6881efd2ca605f47bec88d93186320039799b0ae9023f23bb62c614",
+          "walk-up-right-02.png": "392e38a7181841c5122f534c86964c317f47eeac790ec8241f67a9666974b120",
+          "walk-up-right-03.png": "87f9a8fea94d7ca091fa85d3bf13a55b1c68fd1fe8a19f79fc3bc40a1d1855d7",
+          "walk-up-right-04.png": "98a8e2c59d6aa786a3f9e170771ca4b3fec5412815d74ddc05f0c903c3f2d07e",
+          "walk-up-right-05.png": "cd4274d2aeac6a1b07ddbdf73872a17cc8ae183dfa684e4887dc5544ad360630",
+          "walk-up-right-06.png": "eb863b24bb78fa88f85a882c90d43b4f90bef5262fcc15fa4b7229ac43336c7b",
+          "walk-up-right-07.png": "0c7c2623110c8a2bb307582621b014b87b79ff5420068dce2303aafb482e08ed",
+          "walk-up-right-08.png": "cd2319cfc80fc7ce38cbcc232ef34dd98ec2d5c2c9beca604d6e975430b335e5"
+        }
+      },
+      "gif": "UR07.gif",
+      "strip": "UR07-strip.png",
+      "frames": 8,
+      "duration_ms": 100,
+      "display_scale": 2,
+      "export_sha256": {
+        "UR07-frame-01.png": "7950f01cd6881efd2ca605f47bec88d93186320039799b0ae9023f23bb62c614",
+        "UR07-frame-02.png": "392e38a7181841c5122f534c86964c317f47eeac790ec8241f67a9666974b120",
+        "UR07-frame-03.png": "87f9a8fea94d7ca091fa85d3bf13a55b1c68fd1fe8a19f79fc3bc40a1d1855d7",
+        "UR07-frame-04.png": "98a8e2c59d6aa786a3f9e170771ca4b3fec5412815d74ddc05f0c903c3f2d07e",
+        "UR07-frame-05.png": "cd4274d2aeac6a1b07ddbdf73872a17cc8ae183dfa684e4887dc5544ad360630",
+        "UR07-frame-06.png": "eb863b24bb78fa88f85a882c90d43b4f90bef5262fcc15fa4b7229ac43336c7b",
+        "UR07-frame-07.png": "0c7c2623110c8a2bb307582621b014b87b79ff5420068dce2303aafb482e08ed",
+        "UR07-frame-08.png": "cd2319cfc80fc7ce38cbcc232ef34dd98ec2d5c2c9beca604d6e975430b335e5",
+        "UR07-strip.png": "bc361c58557d9bf5cbc06822a20a79e2ac9a1ff7f330461c4953208434a732d7",
+        "UR07.gif": "f155cd1f744338a0d121736a62cea5d3c4c74fac8d75efedba93d8dd5f4a6b46"
+      }
+    },
+    {
+      "id": "UR08",
+      "direction": "up-right",
+      "name": "reference-arm-candidate",
+      "aliases": [
+        {
+          "name": "reference-arm-candidate",
+          "path": "implementation/fhd-player/pilots/2026-10-04/walk-up-right/reference-arm-candidate",
+          "source_sha256": null
+        },
+        {
+          "name": "diagonal-reference-arms-r18.png",
+          "path": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/diagonal-reference-arms-r18.png",
+          "source_sha256": "8bb18923dbc08b93fe749d5a40c35358bd18fcdb5cf2e8057510d2fb26c50ff4"
+        }
+      ],
+      "sampling": {
+        "method": "Exact existing native PNGs; no resampling.",
+        "input_sha256": {
+          "walk-up-right-01.png": "393b95c13abd204512e3f9b20aed3e430ff49abe68d524518bad37ddf32bb201",
+          "walk-up-right-02.png": "a5ee9e6cb034d1def9305870738d3e4493ee0faa45bf29cb7fec63a350d82642",
+          "walk-up-right-03.png": "1cfe869ae8a547fa6399c49b40fe7b693eb893eb8ff5704bedade0d830445bb7",
+          "walk-up-right-04.png": "6a6a61da244eecbdc51565a7008c841c8e680468a0e8829b029668fbdceb3ac8",
+          "walk-up-right-05.png": "32aa51c5af471a491d2eec659b8f7cde50f4d71d90642c7cf63417e4bfe58211",
+          "walk-up-right-06.png": "67e0be8ea20dd72b9ebbc0eabd353d8c6e8f1c56c7e41fd69be9c61b70eb0e17",
+          "walk-up-right-07.png": "b5df099392cc899bb8de53186a42c74e4b444570010cc58dc8216e69baac0af5",
+          "walk-up-right-08.png": "7cd55331f8e0bdea4353005c3b9f577d962d96d43faece18d6714c57c53672a4"
+        }
+      },
+      "gif": "UR08.gif",
+      "strip": "UR08-strip.png",
+      "frames": 8,
+      "duration_ms": 100,
+      "display_scale": 2,
+      "export_sha256": {
+        "UR08-frame-01.png": "393b95c13abd204512e3f9b20aed3e430ff49abe68d524518bad37ddf32bb201",
+        "UR08-frame-02.png": "a5ee9e6cb034d1def9305870738d3e4493ee0faa45bf29cb7fec63a350d82642",
+        "UR08-frame-03.png": "1cfe869ae8a547fa6399c49b40fe7b693eb893eb8ff5704bedade0d830445bb7",
+        "UR08-frame-04.png": "6a6a61da244eecbdc51565a7008c841c8e680468a0e8829b029668fbdceb3ac8",
+        "UR08-frame-05.png": "32aa51c5af471a491d2eec659b8f7cde50f4d71d90642c7cf63417e4bfe58211",
+        "UR08-frame-06.png": "67e0be8ea20dd72b9ebbc0eabd353d8c6e8f1c56c7e41fd69be9c61b70eb0e17",
+        "UR08-frame-07.png": "b5df099392cc899bb8de53186a42c74e4b444570010cc58dc8216e69baac0af5",
+        "UR08-frame-08.png": "7cd55331f8e0bdea4353005c3b9f577d962d96d43faece18d6714c57c53672a4",
+        "UR08-strip.png": "50fc37221e6b03f5061873547872d556a60e27bb54d3cf1de2bf83185e08d60c",
+        "UR08.gif": "9403979ab68c5a61d6cdce274a8564d4c4a9d3c1b6ffd72e0963cad6166c68e7"
+      }
+    },
+    {
+      "id": "UR09",
+      "direction": "up-right",
+      "name": "rejected-r3/frames",
+      "aliases": [
+        {
+          "name": "rejected-r3/frames",
+          "path": "implementation/fhd-player/pilots/2026-10-04/walk-up-right/rejected-r3/frames",
+          "source_sha256": null
+        }
+      ],
+      "sampling": {
+        "method": "Exact existing native PNGs; no resampling.",
+        "input_sha256": {
+          "walk-up-right-01.png": "87e37374d8bc6201ff6d6bfa71dfb1069554c628b0d6d5037c8851e7a80be76c",
+          "walk-up-right-02.png": "fb0351bf7ecd719bf91fde8943128eb550cad70ee54c2b7116a83f46a996c833",
+          "walk-up-right-03.png": "7944e30b80a5171938ddea51ee66c271d9d8e63d4e3088a94ddbcb4a0b6ac0a8",
+          "walk-up-right-04.png": "bce0390e4bdc5e671364871b2963535ad1193a87db7f02bacddd0d464abdc818",
+          "walk-up-right-05.png": "b0d9ddff625003e143902ce9cc86ebf0c277c87d7eefb1632af52d140b682083",
+          "walk-up-right-06.png": "1267333fd040bac4fa12fd0899d0ba5654a2806916366be10962ae9060b2c55d",
+          "walk-up-right-07.png": "30e464825232bfdc8b0948d4ede1f86bfc68d1c352ebec9b25edb7bd10f4f7bf",
+          "walk-up-right-08.png": "fdc01fee5a0517f2934076d55e4a238f6309b502bbceff19f71e91f69e5bc109"
+        }
+      },
+      "gif": "UR09.gif",
+      "strip": "UR09-strip.png",
+      "frames": 8,
+      "duration_ms": 100,
+      "display_scale": 2,
+      "export_sha256": {
+        "UR09-frame-01.png": "87e37374d8bc6201ff6d6bfa71dfb1069554c628b0d6d5037c8851e7a80be76c",
+        "UR09-frame-02.png": "fb0351bf7ecd719bf91fde8943128eb550cad70ee54c2b7116a83f46a996c833",
+        "UR09-frame-03.png": "7944e30b80a5171938ddea51ee66c271d9d8e63d4e3088a94ddbcb4a0b6ac0a8",
+        "UR09-frame-04.png": "bce0390e4bdc5e671364871b2963535ad1193a87db7f02bacddd0d464abdc818",
+        "UR09-frame-05.png": "b0d9ddff625003e143902ce9cc86ebf0c277c87d7eefb1632af52d140b682083",
+        "UR09-frame-06.png": "1267333fd040bac4fa12fd0899d0ba5654a2806916366be10962ae9060b2c55d",
+        "UR09-frame-07.png": "30e464825232bfdc8b0948d4ede1f86bfc68d1c352ebec9b25edb7bd10f4f7bf",
+        "UR09-frame-08.png": "fdc01fee5a0517f2934076d55e4a238f6309b502bbceff19f71e91f69e5bc109",
+        "UR09-strip.png": "0c3256ae8fd3dd4c875361384ccb00b2d7110e3990114eb25fb747f5281f26a0",
+        "UR09.gif": "68945e7c5a02f05d598d36dd0825d21a5aa44cc96192b44f9a9212cdeae469a5"
+      }
+    },
+    {
+      "id": "UR10",
+      "direction": "up-right",
+      "name": "materials-r1.png",
+      "aliases": [
+        {
+          "name": "materials-r1.png",
+          "path": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/materials-r1.png",
+          "source_sha256": "37589c2cfeacaacd2391a67f3f8095466bf2582724f27773d8a629bdc39a57ee"
+        }
+      ],
+      "sampling": {
+        "method": "Common 32px hat scale, limited to 70px height when needed; nearest sampling, alpha128.",
+        "scale": 0.1568627450980392,
+        "rows": [
+          0,
+          440,
+          887
+        ],
+        "cols": [
+          0,
+          444,
+          887,
+          1330,
+          1774
+        ],
+        "source": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/materials-r1.png"
+      },
+      "gif": "UR10.gif",
+      "strip": "UR10-strip.png",
+      "frames": 8,
+      "duration_ms": 100,
+      "display_scale": 2,
+      "export_sha256": {
+        "UR10-frame-01.png": "3c65ed820f91825b26aebd01656bfe217dde448882139ffaa0ea5f533a8ea40c",
+        "UR10-frame-02.png": "010bc188f51c9fccddee81b72d460ab049f46bcfbb68fadb16c7d6a0870c1236",
+        "UR10-frame-03.png": "1e2060c6cd8a34634b5d41d2b6cde25edc932a1db2ac0ae7e75fd3b27e99d3a8",
+        "UR10-frame-04.png": "24819d554d5ceff23599ae60e6b3156c00b6ccb8f8663b489575847f4065ad2e",
+        "UR10-frame-05.png": "6f01947be2413d8903dc8dfa74c9b76892fdced785927432d4449d822c9d3386",
+        "UR10-frame-06.png": "e3dbc5e33fdb1928efb0b48e9c31c4e43c98534ef7fb39087faaef743ec40775",
+        "UR10-frame-07.png": "b1d00a11b04e9704322367cd137be58fc3abafdda9fd8f551e556c16df26783b",
+        "UR10-frame-08.png": "d93c878e0b9363b007c0506a6c4af402ee930dac14ee7ffd6f7af76416bfac8b",
+        "UR10-strip.png": "75b90b732f959f778f5b9a00151d5964d2aa1f085e65757589f441d16e7125cf",
+        "UR10.gif": "e4dc3966ef81bfd07acda6907f28f1b8a49ee08c4b9001ad326aa7fb571217d6"
+      }
+    },
+    {
+      "id": "UR11",
+      "direction": "up-right",
+      "name": "materials-r2.png",
+      "aliases": [
+        {
+          "name": "materials-r2.png",
+          "path": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/materials-r2.png",
+          "source_sha256": "efa2a7ee7b70be94c3c48faf76803c69f4fcfa7202b5334192692d0db45d4a65"
+        }
+      ],
+      "sampling": {
+        "method": "Common 32px hat scale, limited to 70px height when needed; nearest sampling, alpha128.",
+        "scale": 0.1671018276762402,
+        "rows": [
+          0,
+          443,
+          887
+        ],
+        "cols": [
+          0,
+          444,
+          887,
+          1330,
+          1774
+        ],
+        "source": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/materials-r2.png"
+      },
+      "gif": "UR11.gif",
+      "strip": "UR11-strip.png",
+      "frames": 8,
+      "duration_ms": 100,
+      "display_scale": 2,
+      "export_sha256": {
+        "UR11-frame-01.png": "3c559998dbd6592879b91384f9573b54480232157aad87418342535cf331782d",
+        "UR11-frame-02.png": "ea2a612b08d999b1e7a5fffb525aa861b99db0a790a7b087e565b19ce02a8975",
+        "UR11-frame-03.png": "79fad53f51a65a0ef1e5c5037033c50855eeb8b322eb5c4622abc5c9eb0c4205",
+        "UR11-frame-04.png": "b59adbf9eb4879ba2d816e0d06e75d8a70185a8dfbbe8b69046e774fc0c3ba51",
+        "UR11-frame-05.png": "17a202ae2dfc8d7c6558f6930bbbf934b1df62d17baf5f81555d5ac4aa5e8eed",
+        "UR11-frame-06.png": "4449037be542c2a715226184ac70083e5b55fd2941d0bce203d9865729ed62e5",
+        "UR11-frame-07.png": "55fe0021f4fcec4f6da982a7ed74890454995ac6984b9620b054dd424b3733ac",
+        "UR11-frame-08.png": "0d33c5effb9affdff1abaa38cd37c4b48399227f252f3c3f499e200308061a89",
+        "UR11-strip.png": "13d5196bfe9386fe81455dfa556c9d013ef64fee7b5af23673f45dc92df08ae1",
+        "UR11.gif": "77021e59f1c9e91e26098496c31511b03e298b49d7a384a2f7809802a480e83c"
+      }
+    },
+    {
+      "id": "UR12",
+      "direction": "up-right",
+      "name": "materials-r3.png",
+      "aliases": [
+        {
+          "name": "materials-r3.png",
+          "path": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/materials-r3.png",
+          "source_sha256": "95e144765f8d1e20ccb7186e8952cf5f8a7c9866dabda94b15e7de1df06aa84a"
+        }
+      ],
+      "sampling": {
+        "method": "Common 32px hat scale, limited to 70px height when needed; nearest sampling, alpha128.",
+        "scale": 0.16080402010050251,
+        "rows": [
+          0,
+          440,
+          887
+        ],
+        "cols": [
+          0,
+          444,
+          887,
+          1330,
+          1774
+        ],
+        "source": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/materials-r3.png"
+      },
+      "gif": "UR12.gif",
+      "strip": "UR12-strip.png",
+      "frames": 8,
+      "duration_ms": 100,
+      "display_scale": 2,
+      "export_sha256": {
+        "UR12-frame-01.png": "85bc60be1240533262c0933ad37ff775d775c5d9db1f06c76a9941b7d7cda7a2",
+        "UR12-frame-02.png": "858ffea4535d03f07b97160b5f7e8c37e74bfc5af604d139e35238cdbd41b83d",
+        "UR12-frame-03.png": "b6c12d52851553c40e92b403be723a3aa67e52f59c01b8b45fa02e5e2745d363",
+        "UR12-frame-04.png": "967429d3328699bcbd69304ba179258e32752bb069033a422a03042dc89b3a46",
+        "UR12-frame-05.png": "17841197f55918c69bfcb74951747f71c09de09e4b4d7a5a68c7624659930b84",
+        "UR12-frame-06.png": "b2353036c6d65b4772eb1ed360d72e626acf2b08428cb3a741fbcbdd12e1dd3c",
+        "UR12-frame-07.png": "1f6664720f2d684e7a2b8050fe9b5b232cb650a3276cf7f1920ff5a5b74096d4",
+        "UR12-frame-08.png": "a52350b6b3e1f99d607f56d61591b9247ddb4bc2bd020663bed803967d6da88f",
+        "UR12-strip.png": "f38aec972890d04f28327c325fe6ab26417dd01f997286e19deee87a9f72fbca",
+        "UR12.gif": "5d1df143e76c833832ee8310a52a574e26fe61467db85a2ae9da14c5db917b76"
+      }
+    },
+    {
+      "id": "UR13",
+      "direction": "up-right",
+      "name": "tracking-r2.png",
+      "aliases": [
+        {
+          "name": "tracking-r2.png",
+          "path": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/tracking-r2.png",
+          "source_sha256": "18fed24da053df6e42c7780b94faa9df843178120d03c3c75850b7b9eb4ae4ca"
+        }
+      ],
+      "sampling": {
+        "method": "Common 32px hat scale, limited to 70px height when needed; nearest sampling, alpha128.",
+        "scale": 0.15421686746987953,
+        "rows": [
+          0,
+          440,
+          887
+        ],
+        "cols": [
+          0,
+          444,
+          887,
+          1330,
+          1774
+        ],
+        "source": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/tracking-r2.png"
+      },
+      "gif": "UR13.gif",
+      "strip": "UR13-strip.png",
+      "frames": 8,
+      "duration_ms": 100,
+      "display_scale": 2,
+      "export_sha256": {
+        "UR13-frame-01.png": "40d714c2f73f54d878ed712588126359cb915041170f8080db99ef6e74f08bc9",
+        "UR13-frame-02.png": "1b8ff2bbb32c7132b962c51c90b9de21885582f371cc2e95fbda58e023303602",
+        "UR13-frame-03.png": "f5aeca5447883bd614723b44f494fe14aca9d0452dacc9bcf752941f50ee9d54",
+        "UR13-frame-04.png": "8f53417a916ef6fb38cbd7d97e5dea3310731f3c8187401145de9b60676633ec",
+        "UR13-frame-05.png": "e9cf98f4a76a0f9c8b38a6e26ecd1f375a05d1c676d3e0ff356b992173758ef3",
+        "UR13-frame-06.png": "89318f004522634ea01ec06da3423eebbdcc53536a25a6fbdbe78dedf3894b8f",
+        "UR13-frame-07.png": "e67ccf3239196cc532860477bee906662ea57ce72d09c9027202f6b8dcf67932",
+        "UR13-frame-08.png": "6e2f7bae24ee32211e4524048dda1287dfbf41fda9df65f2956ebeb6969bab0e",
+        "UR13-strip.png": "46a07f1cdc77fce8ff90613115ed698b7ed6e360ba0da2b747205296da84334d",
+        "UR13.gif": "bff672f550902bfd7a55286511664df802ba55217ad53c81e136e72a88bc7ce7"
+      }
+    },
+    {
+      "id": "UR14",
+      "direction": "up-right",
+      "name": "tracking-r3.png",
+      "aliases": [
+        {
+          "name": "tracking-r3.png",
+          "path": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/tracking-r3.png",
+          "source_sha256": "b5648368eecc1a7dc6a08ff6019388609fdc7057202d3f89e447aa1f47338c27"
+        }
+      ],
+      "sampling": {
+        "method": "Common 32px hat scale, limited to 70px height when needed; nearest sampling, alpha128.",
+        "scale": 0.15165876777251186,
+        "rows": [
+          0,
+          439,
+          887
+        ],
+        "cols": [
+          0,
+          444,
+          887,
+          1330,
+          1774
+        ],
+        "source": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/tracking-r3.png"
+      },
+      "gif": "UR14.gif",
+      "strip": "UR14-strip.png",
+      "frames": 8,
+      "duration_ms": 100,
+      "display_scale": 2,
+      "export_sha256": {
+        "UR14-frame-01.png": "3c81146659e70436ab343601059f345b957b027567a1438ac1d1c01e1330b232",
+        "UR14-frame-02.png": "f9b8c8c0d8570b14864ffadb030e08a259873396cb8bb602155c37a7464e47ea",
+        "UR14-frame-03.png": "da55e1a2fd2bfec9a034c53df14bbeecaef6df6034097d24e058b3c7e2b15d11",
+        "UR14-frame-04.png": "43bec927e6897c0439ccb53c6e8196144a40623ec13a8d87e2a83887a3c4678d",
+        "UR14-frame-05.png": "f3797730cc4b513f98c8d60cbe3811fce05b48797332738f832c6b28b3084c00",
+        "UR14-frame-06.png": "46cfae90d11d00c76b01a8b30e3150446e443521694217538d4d30f6c289d035",
+        "UR14-frame-07.png": "a5570457526e65c920e9f21b76c48bf66ee7eb8c63a4d974fe5f0c762d7de4a0",
+        "UR14-frame-08.png": "0e56829e14e4e0e2b2c7ec529d538f9934a891ab2d1784370e98bd3dc39504c7",
+        "UR14-strip.png": "e39f7bdc5a0c5e24057d836e8922f91ac93c51d1b629f2ece88776bbae1c089a",
+        "UR14.gif": "a3f5b8a584dfae9c62d4c1892b5166be116699f8094b10738db234297ea3c03f"
+      }
+    },
+    {
+      "id": "UR15",
+      "direction": "up-right",
+      "name": "tracking-r4.png",
+      "aliases": [
+        {
+          "name": "tracking-r4.png",
+          "path": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/tracking-r4.png",
+          "source_sha256": "c883be597609b0be751b6a27511cd5967c2a6748c567c245e6edae360e7df14d"
+        }
+      ],
+      "sampling": {
+        "method": "Common 32px hat scale, limited to 70px height when needed; nearest sampling, alpha128.",
+        "scale": 0.1400437636761488,
+        "rows": [
+          0,
+          504,
+          1024
+        ],
+        "cols": [
+          0,
+          384,
+          768,
+          1152,
+          1536
+        ],
+        "source": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/tracking-r4.png"
+      },
+      "gif": "UR15.gif",
+      "strip": "UR15-strip.png",
+      "frames": 8,
+      "duration_ms": 100,
+      "display_scale": 2,
+      "export_sha256": {
+        "UR15-frame-01.png": "a6c934fbd4946428556fdf0189abc34c1f744b89447b666920caa213ff3bb5a1",
+        "UR15-frame-02.png": "e7b5201d47e87ce86fe5fe20ffa85dd37cc933f4ebc3683800def822c0c5a090",
+        "UR15-frame-03.png": "e6b13118071d41522da508764a13dde8f8e32e62f8fc3e795c6325a9e77272f5",
+        "UR15-frame-04.png": "4f66063b0a02a4824f81bf3d1bc8f736d11aa8658de647b7e304086847b1ac3f",
+        "UR15-frame-05.png": "58e723c62f5219998e532ff448b867b20cdd21af1bd979997a2a5377884c60ff",
+        "UR15-frame-06.png": "0b6bb73c58bf10fcda6b9949c7c7005af832d5b0c071ab8a6e9c64a79175beaf",
+        "UR15-frame-07.png": "5e8e1b7d3de365f4125b5cdf2678d0739ee672e7d4eb3a4d24ca314d9599aaf6",
+        "UR15-frame-08.png": "3c02b066377cde2a57f048ae14efecec5511c6bdcac3a7b9912c6468e398c48c",
+        "UR15-strip.png": "994f9fb45765afa2f643e74babc54addfeb8144654b9d4797ac2e9aee73c3275",
+        "UR15.gif": "a5297ef60b4f08878f944b458d928977923db01fcfbd21092e5b0b2f9c4bc2aa"
+      }
+    },
+    {
+      "id": "UR16",
+      "direction": "up-right",
+      "name": "materials-r5.png",
+      "aliases": [
+        {
+          "name": "materials-r5.png",
+          "path": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/materials-r5.png",
+          "source_sha256": "f821d9fd8d69dd66781d0c092f8225dd67473b9885c1b85e01a470d4c920795c"
+        }
+      ],
+      "sampling": {
+        "method": "Common 32px hat scale, limited to 70px height when needed; nearest sampling, alpha128.",
+        "scale": 0.16120906801007556,
+        "rows": [
+          0,
+          442,
+          887
+        ],
+        "cols": [
+          0,
+          444,
+          887,
+          1330,
+          1774
+        ],
+        "source": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/materials-r5.png"
+      },
+      "gif": "UR16.gif",
+      "strip": "UR16-strip.png",
+      "frames": 8,
+      "duration_ms": 100,
+      "display_scale": 2,
+      "export_sha256": {
+        "UR16-frame-01.png": "cc0c11c852922bc85670631fc32f95c217b94d2e54a770e69c87f7d0fe93d20e",
+        "UR16-frame-02.png": "fa5d1c036e759443484ee3cd480deb78a1cd893e1c7102bf6a79abb0e1a2817a",
+        "UR16-frame-03.png": "65d1844ef733232ea09a406d33451e2571dd02e5f18841e3ea21f7824dc8bfaa",
+        "UR16-frame-04.png": "d161f43fdad398dbdf3d29e72bbd4e5eb87a5688ae6d5b1e461fc129d0680fcb",
+        "UR16-frame-05.png": "3dc5fcc4c24cf1096f2fde92858ce5378949542b5a99f32b27f9e136d7908989",
+        "UR16-frame-06.png": "38fae0e7399ce8b813889206316d6d843a8f8a22ef411f5841642f6d81c4f529",
+        "UR16-frame-07.png": "d34d6d20d719737d382c13d5c09c709bcc466f92474bd5eed53cb45b91583808",
+        "UR16-frame-08.png": "0e2c412cfb68ce4873bda623d088305be51df9d56d603aa960db5381be20cc32",
+        "UR16-strip.png": "523c3e561a4a0b18a762e1e353a0227d33d27cfed2c0a0a8943ffbea1bd422a2",
+        "UR16.gif": "6d6e5b8d72c8c4bd728696ca21fb2d26189525a3f8faae271e4e46f3c5e3e194"
+      }
+    },
+    {
+      "id": "UR17",
+      "direction": "up-right",
+      "name": "arm-smoothing-r7.png",
+      "aliases": [
+        {
+          "name": "arm-smoothing-r7.png",
+          "path": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/arm-smoothing-r7.png",
+          "source_sha256": "ece4e929b5f72fdc16b802ff2292aac9901f55dabe5ba2700172342004da0cdc"
+        }
+      ],
+      "sampling": {
+        "method": "Common 32px hat scale, limited to 70px height when needed; nearest sampling, alpha128.",
+        "scale": 0.1787709497206704,
+        "rows": [
+          0,
+          446,
+          887
+        ],
+        "cols": [
+          0,
+          444,
+          887,
+          1330,
+          1774
+        ],
+        "source": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/arm-smoothing-r7.png"
+      },
+      "gif": "UR17.gif",
+      "strip": "UR17-strip.png",
+      "frames": 8,
+      "duration_ms": 100,
+      "display_scale": 2,
+      "export_sha256": {
+        "UR17-frame-01.png": "f4048fbf8051086d7b62ec7004ccdb0456ce486c1fdc6709f9bd332987b5fe0c",
+        "UR17-frame-02.png": "e3c737960c62035269f28a7792d15ce99a855d32b335d9c3cf21f53a92102630",
+        "UR17-frame-03.png": "3d77b299667a48feed9e0b9671413ecfd0ba0ad5264a8c3c00e74fd528aaa987",
+        "UR17-frame-04.png": "d575bd98d5d47079080363e894fe2b1c1c515fc3889e9e74da7cc40057417af4",
+        "UR17-frame-05.png": "a6082d5193c73e94d4101c3b98266c363fff4008194cccc6d524ba0bd6e95aba",
+        "UR17-frame-06.png": "8fa3241a6157dcd61254d9dbe9c75b180abba3a665744f90106711cb597d7353",
+        "UR17-frame-07.png": "1746e78959b1d9c21011ea2eafc148fc44ae3e77d6ee1415e58b3affc10b37e4",
+        "UR17-frame-08.png": "0f28ffd7fe23a8fb0a287b741b00053e95f2be4a93a2fd9949d0241eeafd9f37",
+        "UR17-strip.png": "2d014203a230b8319ad9fffc39bae6dd41950ffe3ef232fe8b09b26a367d2b42",
+        "UR17.gif": "278e083412924ab4d04270801c266c7632b1287ba2b1c17fd136aaa086c1211b"
+      }
+    },
+    {
+      "id": "UR18",
+      "direction": "up-right",
+      "name": "arm-smoothing-r8.png",
+      "aliases": [
+        {
+          "name": "arm-smoothing-r8.png",
+          "path": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/arm-smoothing-r8.png",
+          "source_sha256": "d75755f4596d211ff3f69a3402abe46b80c2258c62320d387aa18d71ef6e5e12"
+        }
+      ],
+      "sampling": {
+        "method": "Common 32px hat scale, limited to 70px height when needed; nearest sampling, alpha128.",
+        "scale": 0.17486338797814208,
+        "rows": [
+          0,
+          446,
+          887
+        ],
+        "cols": [
+          0,
+          444,
+          887,
+          1330,
+          1774
+        ],
+        "source": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/arm-smoothing-r8.png"
+      },
+      "gif": "UR18.gif",
+      "strip": "UR18-strip.png",
+      "frames": 8,
+      "duration_ms": 100,
+      "display_scale": 2,
+      "export_sha256": {
+        "UR18-frame-01.png": "ff19d10c367e30e66d7190556f9f56e1fff98d1b55bb955d726318888a915147",
+        "UR18-frame-02.png": "47a9d3a1d5db37a43949444c3e71dedbf087d85ff1bb5697c779e34bd623960a",
+        "UR18-frame-03.png": "82ef8a90faa942fafba20ac469c740e192e2f9a12231d055fa0bfc4e515b212a",
+        "UR18-frame-04.png": "c26e439caf08925fa993c68021ecca79a5eb8d5b884e37f67c82bc3d1697863f",
+        "UR18-frame-05.png": "8ed27064a2e5115fb13cebbfa88316cd15c7c749ea8bab182c487e384feb935c",
+        "UR18-frame-06.png": "e83c3fd01560434a61aeca221c55b1647f03474acc8b051d62a54316c3f1bf34",
+        "UR18-frame-07.png": "a8d015e4245c6b064eafc35ed314a30f986af52604c1875291a3f7115cb4e9d9",
+        "UR18-frame-08.png": "274d28b97be8ed381f0a8e46b45fc34b2a60c3913c9430d62faf5d63fc5ed44c",
+        "UR18-strip.png": "016bea2edd4006033d2c75c257ae7a3e67fa5a9c009680670629d8f40b5413e5",
+        "UR18.gif": "24947259f60c70213d6f40239713ff8c6fe4dee65c1004e7ddf9f105f913ee67"
+      }
+    },
+    {
+      "id": "UR19",
+      "direction": "up-right",
+      "name": "arm-smoothing-r9.png",
+      "aliases": [
+        {
+          "name": "arm-smoothing-r9.png",
+          "path": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/arm-smoothing-r9.png",
+          "source_sha256": "cb84939521bb36df29fe00f1bf06d621be249a0b06191249e8c1bb3cadc1199f"
+        }
+      ],
+      "sampling": {
+        "method": "Common 32px hat scale, limited to 70px height when needed; nearest sampling, alpha128.",
+        "scale": 0.1702127659574468,
+        "rows": [
+          0,
+          447,
+          887
+        ],
+        "cols": [
+          0,
+          444,
+          887,
+          1330,
+          1774
+        ],
+        "source": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/arm-smoothing-r9.png"
+      },
+      "gif": "UR19.gif",
+      "strip": "UR19-strip.png",
+      "frames": 8,
+      "duration_ms": 100,
+      "display_scale": 2,
+      "export_sha256": {
+        "UR19-frame-01.png": "3f804a7bdd13daeb8eed1896467c13e2a9b3a6564c5fd06bc079c8b5e7ee589b",
+        "UR19-frame-02.png": "0569f1c0847d052b075ee04ac0f552d86d4d638888a26b112a9db58a6aee7b90",
+        "UR19-frame-03.png": "d0ab2fad8bee32bd14c14a92fd5e486e767e1a2dde837aa649b7cba966de40d1",
+        "UR19-frame-04.png": "c466570bace035247f1c7d1431b4526d6b4f11ecfc9373c17565c15ce008c124",
+        "UR19-frame-05.png": "dea839b7c5368ba6f20dd625fa7e92a0fde832df721a3b9e88c70e6a365d6c34",
+        "UR19-frame-06.png": "0df57f5f13381bb60b9a1151894737613152f625a33e58cd967e5d2671e18143",
+        "UR19-frame-07.png": "a230e8aa3f3e590d739c60baf4f1cfa0eaeb09d824959ebcf2cf789e5d1a6606",
+        "UR19-frame-08.png": "b532a1c76406b712ab6c45d8068b36246f89a7aeed9992c61dee90a799b84ab6",
+        "UR19-strip.png": "286637213668577c97578412d368b15ba3209e617e4e28de5d372d1bbb60d203",
+        "UR19.gif": "fa277317444ffb9cd344b0d7d601e9a11bd098f17fb790e04b73fc057e53b430"
+      }
+    },
+    {
+      "id": "UR20",
+      "direction": "up-right",
+      "name": "full-arm-tracking-r11.png",
+      "aliases": [
+        {
+          "name": "full-arm-tracking-r11.png",
+          "path": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/full-arm-tracking-r11.png",
+          "source_sha256": "e6da7be4b4e4037516b28baae60b45ff5c25f7e614fc45462debb16c655380fd"
+        }
+      ],
+      "sampling": {
+        "method": "Common 32px hat scale, limited to 70px height when needed; nearest sampling, alpha128.",
+        "scale": 0.18181818181818182,
+        "rows": [
+          0,
+          442,
+          887
+        ],
+        "cols": [
+          0,
+          444,
+          887,
+          1330,
+          1774
+        ],
+        "source": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/full-arm-tracking-r11.png"
+      },
+      "gif": "UR20.gif",
+      "strip": "UR20-strip.png",
+      "frames": 8,
+      "duration_ms": 100,
+      "display_scale": 2,
+      "export_sha256": {
+        "UR20-frame-01.png": "6faaedfc4b85dbfa57a0ce2c65f10eef58a9537131d16e5a529ef48ce738efd4",
+        "UR20-frame-02.png": "3fad9ee744788086d0051e504c6ecc2feb2e9aa2a7a3370db08d6261876f0781",
+        "UR20-frame-03.png": "871cf6dedbb9c759c5130b52cf52a94e79a3bed94b3364046664f3f9dcde0844",
+        "UR20-frame-04.png": "7bb245927a3cc6abc3cdc8bda6934f744d194e4d40a7e5e412136db322e03de3",
+        "UR20-frame-05.png": "02d1a100c269a130ce715d56f1697322db813be55d81527d373743c1cb54e80c",
+        "UR20-frame-06.png": "63ad05a2f5223ac805c0f1a876f0f9f6a9fd3e16539937d3aed5b26111efe310",
+        "UR20-frame-07.png": "6567db9fd2f0599f0652a733c57a81d963b7ff48e379bd9aca88d914067bc1fa",
+        "UR20-frame-08.png": "3a8e64deb9508b32d0a209e702b5804ab3c02f78648f89b84fa2b22ac93ff40a",
+        "UR20-strip.png": "15c6ce2f387ea58878107db9332b99e4b2bfebb73a94e002f3f9d43fc313f78e",
+        "UR20.gif": "5403e8b3877bc986c2b00c30230c793db85a78c48c0585fc85237f5edcf17ae8"
+      }
+    },
+    {
+      "id": "UR21",
+      "direction": "up-right",
+      "name": "hands-r14.png",
+      "aliases": [
+        {
+          "name": "hands-r14.png",
+          "path": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/hands-r14.png",
+          "source_sha256": "e6caa6bef595efda772993c5f7c1f1cb93a545ebb60e8694d706254ab824c38f"
+        }
+      ],
+      "sampling": {
+        "method": "Common 32px hat scale, limited to 70px height when needed; nearest sampling, alpha128.",
+        "scale": 0.1787709497206704,
+        "rows": [
+          0,
+          436,
+          887
+        ],
+        "cols": [
+          0,
+          444,
+          887,
+          1330,
+          1774
+        ],
+        "source": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/hands-r14.png"
+      },
+      "gif": "UR21.gif",
+      "strip": "UR21-strip.png",
+      "frames": 8,
+      "duration_ms": 100,
+      "display_scale": 2,
+      "export_sha256": {
+        "UR21-frame-01.png": "cc935ed669709d5bd4daddc5782444f2e59849888e4e02b5e94befb85e0373fd",
+        "UR21-frame-02.png": "e91ebc029d975abf6969ceca4d99adb20be3bee99a752327627b9aee9c085f98",
+        "UR21-frame-03.png": "bd2b6d030553ee35fb865b7a01621290947886c49766f8c6c594c727c7cf807c",
+        "UR21-frame-04.png": "f4df5992f8c36ad583e1b6b6ef34862615c2f3304aaaa1a75dc72ceec21ca742",
+        "UR21-frame-05.png": "0abc5464f6ff8e893c8759a1ab4eff7684b2a2104d8d652e77f77801b0862692",
+        "UR21-frame-06.png": "d0964a523a47142c43b419bb63a8d26a5651f3952bd6a4af4583e9163e0c28a7",
+        "UR21-frame-07.png": "9a8dbd3c84f55e35b4135406ddfe91fe86c92bbcd627a70c158dc8312b7e2d61",
+        "UR21-frame-08.png": "10b8871551fbfe54e12983eec571ee3f282944a6ef16c3c4a8761767f07704b0",
+        "UR21-strip.png": "c745753a1e2c7e57d74645447313fb93be81a6c31322bec23701c9f86d39abd6",
+        "UR21.gif": "801010c5189eba157dcb014b5b0c0e84f474fb3ee7235ea6a4244d4db1b7443e"
+      }
+    },
+    {
+      "id": "UR22",
+      "direction": "up-right",
+      "name": "diagonal-reference-arms-r17.png",
+      "aliases": [
+        {
+          "name": "diagonal-reference-arms-r17.png",
+          "path": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/diagonal-reference-arms-r17.png",
+          "source_sha256": "ec0f224bfbf8baf417f93a577af9bb49ae95d773c5c0eb8ba8eff948e26d9dfd"
+        }
+      ],
+      "sampling": {
+        "method": "Common 32px hat scale, limited to 70px height when needed; nearest sampling, alpha128.",
+        "scale": 0.17679558011049723,
+        "rows": [
+          0,
+          442,
+          887
+        ],
+        "cols": [
+          0,
+          444,
+          887,
+          1330,
+          1774
+        ],
+        "source": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/diagonal-reference-arms-r17.png"
+      },
+      "gif": "UR22.gif",
+      "strip": "UR22-strip.png",
+      "frames": 8,
+      "duration_ms": 100,
+      "display_scale": 2,
+      "export_sha256": {
+        "UR22-frame-01.png": "74459af49a621ce3205edd39e72f5de6be83796e0b24706c1c83407d44a26792",
+        "UR22-frame-02.png": "7806275145fb0df8f421700475af553d109cb48b6ee984405622f9caf90f995b",
+        "UR22-frame-03.png": "b6556a7ac4aab1243b5177cbf5f8bcf29935b61aea37506a13d3873773648462",
+        "UR22-frame-04.png": "43f1e6396c2c7f710ae4b2c238fc825be3a710ddb9d4655a2c2deb4d47b3c6d3",
+        "UR22-frame-05.png": "eaf3be29c2109f9a300ba1b40ae86d29ed87aa384dcfce01345def6bb25ed821",
+        "UR22-frame-06.png": "d4f91a1db3182d579e8decf9a2c60e6a5c1fdb3660d2e6830a1c8c7b2a722360",
+        "UR22-frame-07.png": "cd08aceeae915427031f93bd0d765909ac4a660967e699946b70e0aadfa72731",
+        "UR22-frame-08.png": "251d19e648e1fd7bf010026db25f33c80eb389aff121f347f3be852da4ab9775",
+        "UR22-strip.png": "4e12bc15c2c2aa0edbdcb43f2861346303ce5d87a4218893758ad0b98625b909",
+        "UR22.gif": "eeac2cb58da2965bbd359d376a3dec3ad9f673c4a4cdd5d4769942c354b50d15"
+      }
+    },
+    {
+      "id": "UR23",
+      "direction": "up-right",
+      "name": "diagonal-reference-arms-r19.png",
+      "aliases": [
+        {
+          "name": "diagonal-reference-arms-r19.png",
+          "path": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/diagonal-reference-arms-r19.png",
+          "source_sha256": "998e781e824bed650b349e1979fce2e8f356ad6198e8c525021cff4fa957e6e3"
+        }
+      ],
+      "sampling": {
+        "method": "Common 32px hat scale, limited to 70px height when needed; nearest sampling, alpha128.",
+        "scale": 0.1797752808988764,
+        "rows": [
+          0,
+          451,
+          887
+        ],
+        "cols": [
+          0,
+          444,
+          887,
+          1330,
+          1774
+        ],
+        "source": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/diagonal-reference-arms-r19.png"
+      },
+      "gif": "UR23.gif",
+      "strip": "UR23-strip.png",
+      "frames": 8,
+      "duration_ms": 100,
+      "display_scale": 2,
+      "export_sha256": {
+        "UR23-frame-01.png": "2760c81eceae82c46b361a19c12c514522525a70d3d85a97cda57a795359d1af",
+        "UR23-frame-02.png": "f125576a691fa50c77b0fbd9e4ebe22121c6ce0315829470bb5597cec300d779",
+        "UR23-frame-03.png": "dd9a4efb1a432047bc359ecf366df8390c6ef50e89da28a18006429519d7c59f",
+        "UR23-frame-04.png": "43f111d8a784bac470f62d3526e18cceba4b44c708535f2e70c3f333969a9299",
+        "UR23-frame-05.png": "d231b016714c12796565a8e79f9dfc22030be1c38b38a180f2b802cf38508473",
+        "UR23-frame-06.png": "6da280441c5d03bd4812ab56c18831c7e1bea0af151b55b601b84a6984ece053",
+        "UR23-frame-07.png": "6ba7b0f260aa83a38ac60c0400f202ce982123fec17204d99707a0f9ee3f5585",
+        "UR23-frame-08.png": "ea1b71502a33db8ec9eb8efa40f4c75d5d099447d7809b9f90fbd25d5f2062fc",
+        "UR23-strip.png": "f6fbe54831b8bcff4a24acd8a43c586bbb8637a9a1c91b8cdf3ba9125ffd6734",
+        "UR23.gif": "0eb161040a4908f71de704b425c8d4333261e200b2d6d6102a1501157edfaaaf"
+      }
+    },
+    {
+      "id": "UR24",
+      "direction": "up-right",
+      "name": "materials-r4.png",
+      "aliases": [
+        {
+          "name": "materials-r4.png",
+          "path": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/materials-r4.png",
+          "source_sha256": "00a491ac7bd7c951894299fad3df3c4225556fbe1de0721d0524730abcd91a73"
+        }
+      ],
+      "sampling": {
+        "method": "Common 32px hat scale, limited to 70px height when needed; nearest sampling, alpha128.",
+        "scale": 0.16080402010050251,
+        "rows": [
+          0,
+          440,
+          888
+        ],
+        "cols": [
+          0,
+          444,
+          888,
+          1332,
+          1776
+        ],
+        "source": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/materials-r4.png"
+      },
+      "gif": "UR24.gif",
+      "strip": "UR24-strip.png",
+      "frames": 8,
+      "duration_ms": 100,
+      "display_scale": 2,
+      "export_sha256": {
+        "UR24-frame-01.png": "85bc60be1240533262c0933ad37ff775d775c5d9db1f06c76a9941b7d7cda7a2",
+        "UR24-frame-02.png": "fdcaf746da345f4b83f5933638a19c0afcbd71bb5b8a54fb572dfc49e457bb2f",
+        "UR24-frame-03.png": "614fb5cf3914b06a07355d3cf107e04fd20e83c53ca88a12609482b8388331a7",
+        "UR24-frame-04.png": "a83896dcd1d4baeec281535f50d7d2b34da078feb1ded9007d11ee0ae04e69d4",
+        "UR24-frame-05.png": "03de3164d6fcac04fe9416361d1b36fefdd535f7b43913cd55bc8e2ddddb6aa2",
+        "UR24-frame-06.png": "8a8d02268f903179f621a0afd5590b3710847176bb9237592099c383326aca31",
+        "UR24-frame-07.png": "8a480af5d3e836afb74eb51f9c8f7836de9670be20ecf82781761185b3b12516",
+        "UR24-frame-08.png": "e8e3fbec6fa7d0c23f652aa2613ddc38068a8c11294354065750bd0488e4950e",
+        "UR24-strip.png": "e9247ab514e30b6394b5a8fc826ad5032225d53b607b111e53234a881caa021e",
+        "UR24.gif": "6d99243751adc4af6d38ce79be60293c171690c74136a9fb63786a0c95551f28"
+      }
+    },
+    {
+      "id": "UR25",
+      "direction": "up-right",
+      "name": "tracking-r1.png",
+      "aliases": [
+        {
+          "name": "tracking-r1.png",
+          "path": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/tracking-r1.png",
+          "source_sha256": "803a07f100bc4e54ad5d4500d278133b1bd262e3aab05ce2e1cb74d74f69b798"
+        }
+      ],
+      "sampling": {
+        "method": "Common 32px hat scale, limited to 70px height when needed; nearest sampling, alpha128.",
+        "scale": 0.11091854419410745,
+        "rows": [
+          0,
+          617,
+          1254
+        ],
+        "cols": [
+          0,
+          627,
+          1254,
+          1881,
+          2508
+        ],
+        "source": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/tracking-r1.png"
+      },
+      "gif": "UR25.gif",
+      "strip": "UR25-strip.png",
+      "frames": 8,
+      "duration_ms": 100,
+      "display_scale": 2,
+      "export_sha256": {
+        "UR25-frame-01.png": "31c0148f19476955b19a7c3055128367541ad11201a17f7628c1daf613bc13dd",
+        "UR25-frame-02.png": "b7c18a95faa445291f4dcd1b572f64609e7254720c54b642e3e6eb900d0f94a3",
+        "UR25-frame-03.png": "674b447c5d97ba69ad505fd9aa11ab8a1f4420f2e98ff75cc42e70267a27260c",
+        "UR25-frame-04.png": "f5abd002a26bd9b7120064bb74637bf47a78d9af9ec67a455830fd6152f8fb94",
+        "UR25-frame-05.png": "b32d7030029409b937590ad1d1604e6b1088461183b461f81b7a4f5e0563beb6",
+        "UR25-frame-06.png": "fbb31e884097c108b75137eac1257ca29739845355e303461aa7931a89841538",
+        "UR25-frame-07.png": "eb078224d7ce7c347ac0e9a28ebbc604871957364eb07d91746fd965a8091d78",
+        "UR25-frame-08.png": "fbd949f6e306a87ece2c132e626883e7cb04ac3b37a62fd5df6947fa7c4959aa",
+        "UR25-strip.png": "1c12a5b119a9f42a1a4258604c3361a7a8816537ca96839ac780bdbd9e01416e",
+        "UR25.gif": "f0519dfb596fb81bb590ab9c58926b5e8781d505e4f2f11d58757aca5055e278"
+      }
+    },
+    {
+      "id": "UL01",
+      "direction": "up-left",
+      "name": "CURRENT | hands-r15",
+      "aliases": [
+        {
+          "name": "CURRENT | hands-r15",
+          "path": "implementation/fhd-player/pilots/2026-10-04/walk-up-left/frames",
+          "source_sha256": null
+        },
+        {
+          "name": "before-diagonal-arm-reference/frames",
+          "path": "implementation/fhd-player/pilots/2026-10-04/walk-up-left/before-diagonal-arm-reference/frames",
+          "source_sha256": null
+        },
+        {
+          "name": "hand-candidate",
+          "path": "implementation/fhd-player/pilots/2026-10-04/walk-up-left/hand-candidate",
+          "source_sha256": null
+        },
+        {
+          "name": "hands-r15.png",
+          "path": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-left/hands-r15.png",
+          "source_sha256": "819578d9da082807bb8a07ca29e8f9a1c04ba9b888909945039911e9bcb75250"
+        }
+      ],
+      "sampling": {
+        "method": "Exact existing native PNGs; no resampling.",
+        "input_sha256": {
+          "walk-up-left-01.png": "099cd0e3bfc75ba8ac0eb24ebddeeb35e3066e15cd49409b5331e7438382ee6d",
+          "walk-up-left-02.png": "4844d056457929237a1728d68face93ddaf238f80b4218db41ae7e3f646254c4",
+          "walk-up-left-03.png": "0c6a2583ffa249175730b4f52410912e6f19bc9b069794cbefcffcf6926f04fc",
+          "walk-up-left-04.png": "53d424d1189aee505da7e038ebf3262382e804028e4892b7b7c71eb2fb2487a2",
+          "walk-up-left-05.png": "1d5d192724d73c858e77d83723d3f94dcc5cb8a442d5eb2f2bc5e458f34497fe",
+          "walk-up-left-06.png": "874a9a214b5991725ffe570d33be6b38475f8cc532a1f2c75077cd4697c79d2a",
+          "walk-up-left-07.png": "292d4bb5f197a89d0b65b5335bc194fd6259dc3b2fa6239a5967174a2c6f1663",
+          "walk-up-left-08.png": "e5af6dda5602d7f3b8a611eaaa5229af80529ac757a48af85c5555c028907eb4"
+        }
+      },
+      "gif": "UL01.gif",
+      "strip": "UL01-strip.png",
+      "frames": 8,
+      "duration_ms": 100,
+      "display_scale": 2,
+      "export_sha256": {
+        "UL01-frame-01.png": "099cd0e3bfc75ba8ac0eb24ebddeeb35e3066e15cd49409b5331e7438382ee6d",
+        "UL01-frame-02.png": "4844d056457929237a1728d68face93ddaf238f80b4218db41ae7e3f646254c4",
+        "UL01-frame-03.png": "0c6a2583ffa249175730b4f52410912e6f19bc9b069794cbefcffcf6926f04fc",
+        "UL01-frame-04.png": "53d424d1189aee505da7e038ebf3262382e804028e4892b7b7c71eb2fb2487a2",
+        "UL01-frame-05.png": "1d5d192724d73c858e77d83723d3f94dcc5cb8a442d5eb2f2bc5e458f34497fe",
+        "UL01-frame-06.png": "874a9a214b5991725ffe570d33be6b38475f8cc532a1f2c75077cd4697c79d2a",
+        "UL01-frame-07.png": "292d4bb5f197a89d0b65b5335bc194fd6259dc3b2fa6239a5967174a2c6f1663",
+        "UL01-frame-08.png": "e5af6dda5602d7f3b8a611eaaa5229af80529ac757a48af85c5555c028907eb4",
+        "UL01-strip.png": "e1ad15271d925b52d16fa852f9d6eeb509edc2190b8831fc22a3d495816f2ec6",
+        "UL01.gif": "643b621b138d2562890dfbbff1b33c52a764bb699b97e5479da098ff387c7890"
+      }
+    },
+    {
+      "id": "UL02",
+      "direction": "up-left",
+      "name": "arm-tracking-frames",
+      "aliases": [
+        {
+          "name": "arm-tracking-frames",
+          "path": "implementation/fhd-player/pilots/2026-10-04/walk-up-left/arm-tracking-frames",
+          "source_sha256": null
+        },
+        {
+          "name": "full-arm-tracking-r12.png",
+          "path": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-left/full-arm-tracking-r12.png",
+          "source_sha256": "18cbd64e80b6a501acf2666b6a14d85fc5fe78cbbe232e09d6b79cdf31bc7fbf"
+        }
+      ],
+      "sampling": {
+        "method": "Exact existing native PNGs; no resampling.",
+        "input_sha256": {
+          "walk-up-left-01.png": "e183468f46af3a4e162ef61b063b6706b3ff77795707fbe4d43a8d02339e8543",
+          "walk-up-left-02.png": "14888c1979e4f7794d3069d06def1e860bccad504ea16208658008d0268f196d",
+          "walk-up-left-03.png": "c9001e076d48d9012292d72d271494065372b4a4c834e93e19b5c36b33d81e63",
+          "walk-up-left-04.png": "33b23bc420a0bf715152d706b8041ff33ade9174d6cded1c641beb2904713e42",
+          "walk-up-left-05.png": "3d5abade9dece7e5a77325b466abcbf0933d76c5200ab5b99346620158f94be6",
+          "walk-up-left-06.png": "850b810a4279232b65441d71342212cd135dcdac880779da6da60028daa78846",
+          "walk-up-left-07.png": "ca5913067cdc50a25da349e93bd043ab782aa79426fb53cffd99873d624982d3",
+          "walk-up-left-08.png": "ddff45709b20087a6f8044e52f4bbb2f3a1589dbcd4d3b55f5c8341de822954f"
+        }
+      },
+      "gif": "UL02.gif",
+      "strip": "UL02-strip.png",
+      "frames": 8,
+      "duration_ms": 100,
+      "display_scale": 2,
+      "export_sha256": {
+        "UL02-frame-01.png": "e183468f46af3a4e162ef61b063b6706b3ff77795707fbe4d43a8d02339e8543",
+        "UL02-frame-02.png": "14888c1979e4f7794d3069d06def1e860bccad504ea16208658008d0268f196d",
+        "UL02-frame-03.png": "c9001e076d48d9012292d72d271494065372b4a4c834e93e19b5c36b33d81e63",
+        "UL02-frame-04.png": "33b23bc420a0bf715152d706b8041ff33ade9174d6cded1c641beb2904713e42",
+        "UL02-frame-05.png": "3d5abade9dece7e5a77325b466abcbf0933d76c5200ab5b99346620158f94be6",
+        "UL02-frame-06.png": "850b810a4279232b65441d71342212cd135dcdac880779da6da60028daa78846",
+        "UL02-frame-07.png": "ca5913067cdc50a25da349e93bd043ab782aa79426fb53cffd99873d624982d3",
+        "UL02-frame-08.png": "ddff45709b20087a6f8044e52f4bbb2f3a1589dbcd4d3b55f5c8341de822954f",
+        "UL02-strip.png": "06bd813484e8fadc9aebad7e9ebdd19d30c39ced98d1041f507ad134207ad723",
+        "UL02.gif": "662894a8f5ffc61d8b184ae58e03172a75ff63435d1cb213b7b5a4adaf616a2f"
+      }
+    },
+    {
+      "id": "UL03",
+      "direction": "up-left",
+      "name": "before-arm-smoothing/frames",
+      "aliases": [
+        {
+          "name": "before-arm-smoothing/frames",
+          "path": "implementation/fhd-player/pilots/2026-10-04/walk-up-left/before-arm-smoothing/frames",
+          "source_sha256": null
+        }
+      ],
+      "sampling": {
+        "method": "Exact existing native PNGs; no resampling.",
+        "input_sha256": {
+          "walk-up-left-01.png": "afefe3c6a10bf46d3a201bbf8916c83c6f4f1987351016380582e7c5b75a2c25",
+          "walk-up-left-02.png": "d3e63d45898d135d52be58045692be53ba42717a1c2a147d4f358e5446a40984",
+          "walk-up-left-03.png": "2168b536023bd739724bf898636778a0ed671fa7f3e7ee1c7dfe6f36699a3be6",
+          "walk-up-left-04.png": "81d9959b5dab17ecfcde14b1bd6f93d56629fd8bc1dfb84b9df522b38dd46611",
+          "walk-up-left-05.png": "8190eab38cfde5217d5b1c15196260e40291ba5ca8d21c68337383db5c134a01",
+          "walk-up-left-06.png": "bb1afe1a1970e8ac364743398f8333c5d454b64d9b9c5a40afb631c9fc3f527c",
+          "walk-up-left-07.png": "bc3ac8506d749598d6611a89bf061e2e8a12443a0dcaf6d8efe107a111f74ca4",
+          "walk-up-left-08.png": "f0ef2b5b74baf72e3fb63f31acef5ba355f23fd6c237fa9744dba7283d3914a9"
+        }
+      },
+      "gif": "UL03.gif",
+      "strip": "UL03-strip.png",
+      "frames": 8,
+      "duration_ms": 100,
+      "display_scale": 2,
+      "export_sha256": {
+        "UL03-frame-01.png": "afefe3c6a10bf46d3a201bbf8916c83c6f4f1987351016380582e7c5b75a2c25",
+        "UL03-frame-02.png": "d3e63d45898d135d52be58045692be53ba42717a1c2a147d4f358e5446a40984",
+        "UL03-frame-03.png": "2168b536023bd739724bf898636778a0ed671fa7f3e7ee1c7dfe6f36699a3be6",
+        "UL03-frame-04.png": "81d9959b5dab17ecfcde14b1bd6f93d56629fd8bc1dfb84b9df522b38dd46611",
+        "UL03-frame-05.png": "8190eab38cfde5217d5b1c15196260e40291ba5ca8d21c68337383db5c134a01",
+        "UL03-frame-06.png": "bb1afe1a1970e8ac364743398f8333c5d454b64d9b9c5a40afb631c9fc3f527c",
+        "UL03-frame-07.png": "bc3ac8506d749598d6611a89bf061e2e8a12443a0dcaf6d8efe107a111f74ca4",
+        "UL03-frame-08.png": "f0ef2b5b74baf72e3fb63f31acef5ba355f23fd6c237fa9744dba7283d3914a9",
+        "UL03-strip.png": "08cced2f8275f7a566643eda872e664bdc017f1f75bd86f686aa3e5a3fc038f9",
+        "UL03.gif": "857ce122a42ab03c29df45939b5f98bda7f4ba8d8d5d54a87ad67f3bf240cdec"
+      }
+    },
+    {
+      "id": "UL04",
+      "direction": "up-left",
+      "name": "before-arms-2026-10-05/frames",
+      "aliases": [
+        {
+          "name": "before-arms-2026-10-05/frames",
+          "path": "implementation/fhd-player/pilots/2026-10-04/walk-up-left/before-arms-2026-10-05/frames",
+          "source_sha256": null
+        }
+      ],
+      "sampling": {
+        "method": "Exact existing native PNGs; no resampling.",
+        "input_sha256": {
+          "walk-up-left-01.png": "cd26ad90b2ab4b4588c93c6a9a8fb5768404147ec3fcff82df69784b344f6c48",
+          "walk-up-left-02.png": "e099f6352aa5e7b1be802326ac31a26d2425e639843eaab596d5eb02fd583aa3",
+          "walk-up-left-03.png": "e6e8c90761cffa8bc779ffa9835e2b1eb7dfb8022ff844915afa8dfa69ec0f7d",
+          "walk-up-left-04.png": "7cde2e157363da274636d2a2a2bb5e2ac22664251137ebe83a93bd7508bfb056",
+          "walk-up-left-05.png": "97e4793316209b583defcb193f19a69d1a8db7737daca0ee989c9143496b8c22",
+          "walk-up-left-06.png": "00d520b5e27e309d37aa3fea36977c5a3ff59506f2907de478b4474e5523fdee",
+          "walk-up-left-07.png": "a4af6e53c677697767f7468ea06f726f9ab33efea118f46ec2ff549a37ebdd58",
+          "walk-up-left-08.png": "eb6cdd614db9371e97f422571366775902bf90beccd52dbcfdfe8936760f7559"
+        }
+      },
+      "gif": "UL04.gif",
+      "strip": "UL04-strip.png",
+      "frames": 8,
+      "duration_ms": 100,
+      "display_scale": 2,
+      "export_sha256": {
+        "UL04-frame-01.png": "cd26ad90b2ab4b4588c93c6a9a8fb5768404147ec3fcff82df69784b344f6c48",
+        "UL04-frame-02.png": "e099f6352aa5e7b1be802326ac31a26d2425e639843eaab596d5eb02fd583aa3",
+        "UL04-frame-03.png": "e6e8c90761cffa8bc779ffa9835e2b1eb7dfb8022ff844915afa8dfa69ec0f7d",
+        "UL04-frame-04.png": "7cde2e157363da274636d2a2a2bb5e2ac22664251137ebe83a93bd7508bfb056",
+        "UL04-frame-05.png": "97e4793316209b583defcb193f19a69d1a8db7737daca0ee989c9143496b8c22",
+        "UL04-frame-06.png": "00d520b5e27e309d37aa3fea36977c5a3ff59506f2907de478b4474e5523fdee",
+        "UL04-frame-07.png": "a4af6e53c677697767f7468ea06f726f9ab33efea118f46ec2ff549a37ebdd58",
+        "UL04-frame-08.png": "eb6cdd614db9371e97f422571366775902bf90beccd52dbcfdfe8936760f7559",
+        "UL04-strip.png": "d4ec4e3ea391e132bd8ec7297fcc23c444127bcca46071e523f7ff81e0945208",
+        "UL04.gif": "ab71c75ed9c2d8ac6979dbc4305876fd49b5c55c59b89f148c162d8e6ecfba04"
+      }
+    },
+    {
+      "id": "UL05",
+      "direction": "up-left",
+      "name": "before-full-arm-cycle/frames",
+      "aliases": [
+        {
+          "name": "before-full-arm-cycle/frames",
+          "path": "implementation/fhd-player/pilots/2026-10-04/walk-up-left/before-full-arm-cycle/frames",
+          "source_sha256": null
+        }
+      ],
+      "sampling": {
+        "method": "Exact existing native PNGs; no resampling.",
+        "input_sha256": {
+          "walk-up-left-01.png": "afefe3c6a10bf46d3a201bbf8916c83c6f4f1987351016380582e7c5b75a2c25",
+          "walk-up-left-02.png": "d3e63d45898d135d52be58045692be53ba42717a1c2a147d4f358e5446a40984",
+          "walk-up-left-03.png": "2168b536023bd739724bf898636778a0ed671fa7f3e7ee1c7dfe6f36699a3be6",
+          "walk-up-left-04.png": "81d9959b5dab17ecfcde14b1bd6f93d56629fd8bc1dfb84b9df522b38dd46611",
+          "walk-up-left-05.png": "a0b84b6649c103affae0e73137ff4e4eb3be29f6ccd0c2f6626fec1311e21666",
+          "walk-up-left-06.png": "e52b49c6141bc4c118dadc0f7dd526308cbd7cb603be193a0109653501e3f54b",
+          "walk-up-left-07.png": "bc3ac8506d749598d6611a89bf061e2e8a12443a0dcaf6d8efe107a111f74ca4",
+          "walk-up-left-08.png": "f0ef2b5b74baf72e3fb63f31acef5ba355f23fd6c237fa9744dba7283d3914a9"
+        }
+      },
+      "gif": "UL05.gif",
+      "strip": "UL05-strip.png",
+      "frames": 8,
+      "duration_ms": 100,
+      "display_scale": 2,
+      "export_sha256": {
+        "UL05-frame-01.png": "afefe3c6a10bf46d3a201bbf8916c83c6f4f1987351016380582e7c5b75a2c25",
+        "UL05-frame-02.png": "d3e63d45898d135d52be58045692be53ba42717a1c2a147d4f358e5446a40984",
+        "UL05-frame-03.png": "2168b536023bd739724bf898636778a0ed671fa7f3e7ee1c7dfe6f36699a3be6",
+        "UL05-frame-04.png": "81d9959b5dab17ecfcde14b1bd6f93d56629fd8bc1dfb84b9df522b38dd46611",
+        "UL05-frame-05.png": "a0b84b6649c103affae0e73137ff4e4eb3be29f6ccd0c2f6626fec1311e21666",
+        "UL05-frame-06.png": "e52b49c6141bc4c118dadc0f7dd526308cbd7cb603be193a0109653501e3f54b",
+        "UL05-frame-07.png": "bc3ac8506d749598d6611a89bf061e2e8a12443a0dcaf6d8efe107a111f74ca4",
+        "UL05-frame-08.png": "f0ef2b5b74baf72e3fb63f31acef5ba355f23fd6c237fa9744dba7283d3914a9",
+        "UL05-strip.png": "9c0ef09643cde6bec99f4359ad961d38fc1df18e2a5c2c19efffa7ae8ae8a090",
+        "UL05.gif": "bf6fd24528ae8ada9c2caeabd0bf288acdfc5cc043ba40a202abed68071e0314"
+      }
+    },
+    {
+      "id": "UL06",
+      "direction": "up-left",
+      "name": "before-hand-rebuild/frames",
+      "aliases": [
+        {
+          "name": "before-hand-rebuild/frames",
+          "path": "implementation/fhd-player/pilots/2026-10-04/walk-up-left/before-hand-rebuild/frames",
+          "source_sha256": null
+        },
+        {
+          "name": "full-arm-materials-r13.png",
+          "path": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-left/full-arm-materials-r13.png",
+          "source_sha256": "622f8869129a3e49ab45768bc4735478ec52305caf17d973b5bca10771dca9bf"
+        }
+      ],
+      "sampling": {
+        "method": "Exact existing native PNGs; no resampling.",
+        "input_sha256": {
+          "walk-up-left-01.png": "15537115983ecb6d7afc691b8c9a782288355f0b06183d0b11271ac8844f2ac0",
+          "walk-up-left-02.png": "4663b7a642849e8c900003f37dec852bc7db73e239dcf809c94097f5d239e591",
+          "walk-up-left-03.png": "9fd5bcba29cf68a9936e4e61d122b8c0b8070cd5da62e7f84a76aec62f06ac4e",
+          "walk-up-left-04.png": "b688c97a9847234386314199e515b7673e5ced6c820761f2187c6738d21f1b39",
+          "walk-up-left-05.png": "b3c863a1e9afbc741d77b516bc2b9f7aa8bd97b561c06338f9240c38ed404d89",
+          "walk-up-left-06.png": "59e893f44cd705a7c1a777509bb6014f5f59c486a262e3e361a09b0ba6c72ea4",
+          "walk-up-left-07.png": "c5f8f828b86dc8498ef2e17845e0578a1e5d45ed120c15c8271ca59f4f9c1ee3",
+          "walk-up-left-08.png": "9dd045b0aa6ef555f300107f43fcfcb04dedf3e1b865e6a6c106ee1bab42249b"
+        }
+      },
+      "gif": "UL06.gif",
+      "strip": "UL06-strip.png",
+      "frames": 8,
+      "duration_ms": 100,
+      "display_scale": 2,
+      "export_sha256": {
+        "UL06-frame-01.png": "15537115983ecb6d7afc691b8c9a782288355f0b06183d0b11271ac8844f2ac0",
+        "UL06-frame-02.png": "4663b7a642849e8c900003f37dec852bc7db73e239dcf809c94097f5d239e591",
+        "UL06-frame-03.png": "9fd5bcba29cf68a9936e4e61d122b8c0b8070cd5da62e7f84a76aec62f06ac4e",
+        "UL06-frame-04.png": "b688c97a9847234386314199e515b7673e5ced6c820761f2187c6738d21f1b39",
+        "UL06-frame-05.png": "b3c863a1e9afbc741d77b516bc2b9f7aa8bd97b561c06338f9240c38ed404d89",
+        "UL06-frame-06.png": "59e893f44cd705a7c1a777509bb6014f5f59c486a262e3e361a09b0ba6c72ea4",
+        "UL06-frame-07.png": "c5f8f828b86dc8498ef2e17845e0578a1e5d45ed120c15c8271ca59f4f9c1ee3",
+        "UL06-frame-08.png": "9dd045b0aa6ef555f300107f43fcfcb04dedf3e1b865e6a6c106ee1bab42249b",
+        "UL06-strip.png": "78faa42d00713bfa4d20ac6dcfdced046d38f83bcc9c5092c278e80f16c3eb45",
+        "UL06.gif": "8e0b94301136c455a9951097f50095544ca96bdc2b25657006a498fe9435bb8c"
+      }
+    },
+    {
+      "id": "UL07",
+      "direction": "up-left",
+      "name": "reference-arm-candidate",
+      "aliases": [
+        {
+          "name": "reference-arm-candidate",
+          "path": "implementation/fhd-player/pilots/2026-10-04/walk-up-left/reference-arm-candidate",
+          "source_sha256": null
+        },
+        {
+          "name": "diagonal-reference-arms-r18.png",
+          "path": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-left/diagonal-reference-arms-r18.png",
+          "source_sha256": "f6f7ff60160b86ddf2e7dcd59927896c617bbb85a49a6c10127a230e4f140ae9"
+        }
+      ],
+      "sampling": {
+        "method": "Exact existing native PNGs; no resampling.",
+        "input_sha256": {
+          "walk-up-left-01.png": "7ebab853bf80f46fffa0295bc94c8778d2b70b4f7304c049581a96ca7bbb69d6",
+          "walk-up-left-02.png": "034932d70f462a7e47a7480510adcb387a6e97c7fb6dfa98acf0b78af71aa253",
+          "walk-up-left-03.png": "cff64a7e14129fe4ee8bf080c35242b64e7b6fe64f149b3609738c55fb1e5baa",
+          "walk-up-left-04.png": "8ac85e61877a351997a8dcb490e7ad4139e0c614786fe2c44b03253105b60e30",
+          "walk-up-left-05.png": "91b7a3737776b36832e1f57e70fd9f21ff9a69b28c624076d960051ecd86ac68",
+          "walk-up-left-06.png": "2e7e1516f75bf6869e70db956f9f80ab5c939c544c47d432997cedb387e100c7",
+          "walk-up-left-07.png": "1159ae25dff85b8607330aa9c80e5cec9e31bee19f10cb40c01e70dc5b536b53",
+          "walk-up-left-08.png": "2af2c0fd6ed799e895113411ac7e33adfef55cb3513e24e644a8bce1b8c0361d"
+        }
+      },
+      "gif": "UL07.gif",
+      "strip": "UL07-strip.png",
+      "frames": 8,
+      "duration_ms": 100,
+      "display_scale": 2,
+      "export_sha256": {
+        "UL07-frame-01.png": "7ebab853bf80f46fffa0295bc94c8778d2b70b4f7304c049581a96ca7bbb69d6",
+        "UL07-frame-02.png": "034932d70f462a7e47a7480510adcb387a6e97c7fb6dfa98acf0b78af71aa253",
+        "UL07-frame-03.png": "cff64a7e14129fe4ee8bf080c35242b64e7b6fe64f149b3609738c55fb1e5baa",
+        "UL07-frame-04.png": "8ac85e61877a351997a8dcb490e7ad4139e0c614786fe2c44b03253105b60e30",
+        "UL07-frame-05.png": "91b7a3737776b36832e1f57e70fd9f21ff9a69b28c624076d960051ecd86ac68",
+        "UL07-frame-06.png": "2e7e1516f75bf6869e70db956f9f80ab5c939c544c47d432997cedb387e100c7",
+        "UL07-frame-07.png": "1159ae25dff85b8607330aa9c80e5cec9e31bee19f10cb40c01e70dc5b536b53",
+        "UL07-frame-08.png": "2af2c0fd6ed799e895113411ac7e33adfef55cb3513e24e644a8bce1b8c0361d",
+        "UL07-strip.png": "5e1b40d38c11e35f4ef604547793666048c0d9523b3ac6c71e33b1607ec6fe7a",
+        "UL07.gif": "b4829133a9f760f267c0b9b93e2722c35dda07627cb8998a6a970ecf5ee7da25"
+      }
+    },
+    {
+      "id": "UL08",
+      "direction": "up-left",
+      "name": "rejected-r3/frames",
+      "aliases": [
+        {
+          "name": "rejected-r3/frames",
+          "path": "implementation/fhd-player/pilots/2026-10-04/walk-up-left/rejected-r3/frames",
+          "source_sha256": null
+        }
+      ],
+      "sampling": {
+        "method": "Exact existing native PNGs; no resampling.",
+        "input_sha256": {
+          "walk-up-left-01.png": "fbca703b9f538fa6862ac53e4e387b95bd7b7c57ea9935c2cfb90097ffbc17d2",
+          "walk-up-left-02.png": "4b535ab2ee0892d9fac6071116bfffc0ce914f727d11aa9227cf1270d4f2be2b",
+          "walk-up-left-03.png": "141eae75b745e8b8fe0074e8e2996bd74b5d60f1e1b1dbfbfb98185e6d27a222",
+          "walk-up-left-04.png": "50b6e20c688eac17c3ab06b335661ff30620bc05aa1a7a9ceecad45ffb0fecd0",
+          "walk-up-left-05.png": "ab588ec1143697ae9d793c18135818cabd235a9512d6d345c587719ae49bb011",
+          "walk-up-left-06.png": "37e5ffc7dcc40c3d072d4064d338ca97952347fba0aa03cb30d3a11d89c02387",
+          "walk-up-left-07.png": "eae4866bc21335bd48719b4cb13facc879e93bec27a5e713fef6c11cd084ac14",
+          "walk-up-left-08.png": "b687074bb24fe9b29ad3a28e1991aa8019ca6e7af578f2e5197246dfafe8c71f"
+        }
+      },
+      "gif": "UL08.gif",
+      "strip": "UL08-strip.png",
+      "frames": 8,
+      "duration_ms": 100,
+      "display_scale": 2,
+      "export_sha256": {
+        "UL08-frame-01.png": "fbca703b9f538fa6862ac53e4e387b95bd7b7c57ea9935c2cfb90097ffbc17d2",
+        "UL08-frame-02.png": "4b535ab2ee0892d9fac6071116bfffc0ce914f727d11aa9227cf1270d4f2be2b",
+        "UL08-frame-03.png": "141eae75b745e8b8fe0074e8e2996bd74b5d60f1e1b1dbfbfb98185e6d27a222",
+        "UL08-frame-04.png": "50b6e20c688eac17c3ab06b335661ff30620bc05aa1a7a9ceecad45ffb0fecd0",
+        "UL08-frame-05.png": "ab588ec1143697ae9d793c18135818cabd235a9512d6d345c587719ae49bb011",
+        "UL08-frame-06.png": "37e5ffc7dcc40c3d072d4064d338ca97952347fba0aa03cb30d3a11d89c02387",
+        "UL08-frame-07.png": "eae4866bc21335bd48719b4cb13facc879e93bec27a5e713fef6c11cd084ac14",
+        "UL08-frame-08.png": "b687074bb24fe9b29ad3a28e1991aa8019ca6e7af578f2e5197246dfafe8c71f",
+        "UL08-strip.png": "5f37dbe91ecd3c2a1a1f3917073ed7c29bf48671c88d980ecee4f2b7d9ed4a61",
+        "UL08.gif": "3317201340d6d464ae876485e7dba8882b109bd25c3488c33e0269b4869e761e"
+      }
+    },
+    {
+      "id": "UL09",
+      "direction": "up-left",
+      "name": "materials-r1.png",
+      "aliases": [
+        {
+          "name": "materials-r1.png",
+          "path": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-left/materials-r1.png",
+          "source_sha256": "d87d0b0109472d6c8561dbb299243a69cebf1b7eb12049274aaa3b080f10afb9"
+        }
+      ],
+      "sampling": {
+        "method": "Common 32px hat scale, limited to 70px height when needed; nearest sampling, alpha128.",
+        "scale": 0.17204301075268819,
+        "rows": [
+          0,
+          438,
+          887
+        ],
+        "cols": [
+          0,
+          444,
+          887,
+          1330,
+          1774
+        ],
+        "source": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-left/materials-r1.png"
+      },
+      "gif": "UL09.gif",
+      "strip": "UL09-strip.png",
+      "frames": 8,
+      "duration_ms": 100,
+      "display_scale": 2,
+      "export_sha256": {
+        "UL09-frame-01.png": "22b3a4b8f972ee6a44d8898e56ed8ad575e3c5f0ad27ce883acfcb8395e3f38e",
+        "UL09-frame-02.png": "6434e80e8b3639a03418c336750e008e89e15a936523536e9b2a81c24296d897",
+        "UL09-frame-03.png": "e7e5a0a444aeb72f3ee36917e2ba9a984f56d4c4502f736cc20af4a43ef3ed46",
+        "UL09-frame-04.png": "14167274f51afa688dd995138e9b080967c7ba03c52c6da0b8aebfec734e9bad",
+        "UL09-frame-05.png": "a920733dbfff78d5887ef6faf3f2c133e262f735a34aa5c623b3e47a8f4cc687",
+        "UL09-frame-06.png": "d1b83015159a40bf0916b4ac5b9e7bef0a5a512dce0183a88bda7ea3e885276e",
+        "UL09-frame-07.png": "a195c1b369e89b09e4e7f0cbe64f0aa937118061ec44f9b3ee5a5c1e37c17bb8",
+        "UL09-frame-08.png": "ea3ae47a8d88016e22a12ec03fdc5f53ee74acfc1d8c6f9612bb69c79d48b55e",
+        "UL09-strip.png": "f691b738269026517c2b907d81abc5ca0d5b0787eb408387d419bc5e789c8949",
+        "UL09.gif": "0c6739ba1896346962350e3fbb796a5ad34e1b932c72518fa5deb210c17dd008"
+      }
+    },
+    {
+      "id": "UL10",
+      "direction": "up-left",
+      "name": "materials-r2.png",
+      "aliases": [
+        {
+          "name": "materials-r2.png",
+          "path": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-left/materials-r2.png",
+          "source_sha256": "ec70b5a037b7ae087f34f52b72f861377eb4cef1a8ee5fcc0d30537aa0c2bb53"
+        }
+      ],
+      "sampling": {
+        "method": "Common 32px hat scale, limited to 70px height when needed; nearest sampling, alpha128.",
+        "scale": 0.1671018276762402,
+        "rows": [
+          0,
+          438,
+          887
+        ],
+        "cols": [
+          0,
+          444,
+          887,
+          1330,
+          1774
+        ],
+        "source": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-left/materials-r2.png"
+      },
+      "gif": "UL10.gif",
+      "strip": "UL10-strip.png",
+      "frames": 8,
+      "duration_ms": 100,
+      "display_scale": 2,
+      "export_sha256": {
+        "UL10-frame-01.png": "c92a1e3590d169dec3f98bcbad718fe1ab09e911975024e6049cf0db9232f74b",
+        "UL10-frame-02.png": "c975539c8062014a74e4c0acd89aa223712124fbbfd9bfa6c7bd51ab08e34c7f",
+        "UL10-frame-03.png": "3b785568f2477c9999d07eebf981c6e5fd3515e60589733eafe712c07d0cce1b",
+        "UL10-frame-04.png": "47c068708249d68f72a9ce693b6bd61ae5bc133a333b5da401b6f211890ef089",
+        "UL10-frame-05.png": "ead3429652c5900e654f7d45883cd44ea5056f6ce9595c95ddcd5fc6ad9b387d",
+        "UL10-frame-06.png": "9b6f685bb292f2dd077f650f08abd8a573817be0dbf78c609029e2eed199979c",
+        "UL10-frame-07.png": "68ff80471072c128cf59dd71f0a1e615f428e276a0b80192a882ff835d3af51f",
+        "UL10-frame-08.png": "1e1b6bdd2e2bb361ca750459688725872de9ac16804f8eff591b81343623524f",
+        "UL10-strip.png": "55eeb878821bba2914526b4748fe7c8d12a9a1204f0f9aa977f06c9d8a851b99",
+        "UL10.gif": "432634e3719dd83da0f5687a1160e5c6fc28b3ddf57dc63de72d4779cf2b3336"
+      }
+    },
+    {
+      "id": "UL11",
+      "direction": "up-left",
+      "name": "rebuild-tracking-r4.png",
+      "aliases": [
+        {
+          "name": "rebuild-tracking-r4.png",
+          "path": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-left/rebuild-tracking-r4.png",
+          "source_sha256": "69e4ed2d546e283485db1dcae07855695e9b24bc1f30767447457e87bb5a13df"
+        }
+      ],
+      "sampling": {
+        "method": "Common 32px hat scale, limited to 70px height when needed; nearest sampling, alpha128.",
+        "scale": 0.15555555555555556,
+        "rows": [
+          0,
+          478,
+          1024
+        ],
+        "cols": [
+          0,
+          384,
+          768,
+          1152,
+          1536
+        ],
+        "source": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-left/rebuild-tracking-r4.png"
+      },
+      "gif": "UL11.gif",
+      "strip": "UL11-strip.png",
+      "frames": 8,
+      "duration_ms": 100,
+      "display_scale": 2,
+      "export_sha256": {
+        "UL11-frame-01.png": "4a267d66680598ec6012c7b003fd25207b26a13590e812557e6396af862bada3",
+        "UL11-frame-02.png": "f7aef4c580bf807b72c60876d948b6c2b91d28eda8dda102d4d1f765ece06dbc",
+        "UL11-frame-03.png": "8181f48eab75e8aeca339b3534983e8f3c96896ad040d581d72b0678433f5b6b",
+        "UL11-frame-04.png": "7d551f04b86e959c9190fbb588597126ea2140ed8efee0660768d462aec93113",
+        "UL11-frame-05.png": "01b96f95f9513aa51d33c37bf984894277db432e098ebae4b4464b1cdc611884",
+        "UL11-frame-06.png": "719dfd433f64b803cf30449b7c71a9fa251ed8e089ae8de9195a68ac667b213a",
+        "UL11-frame-07.png": "df30dd8234872aa54f72ab7eb716cbb9287c77c4c6664aa6710024200b2b5086",
+        "UL11-frame-08.png": "93c9a65fe866d4464418f6225c059cf081d709f45a7fc57abc5e096617f37921",
+        "UL11-strip.png": "8a515ce24f9f1d9cc7d0ab42ce3e6962ccd97219660a82656ca401a8c04369d0",
+        "UL11.gif": "d3a3d24d700bf85476c25226dbbcd28e3749652d3b5d13a8044a2e6d8d4e3067"
+      }
+    },
+    {
+      "id": "UL12",
+      "direction": "up-left",
+      "name": "rebuild-tracking-r5.png",
+      "aliases": [
+        {
+          "name": "rebuild-tracking-r5.png",
+          "path": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-left/rebuild-tracking-r5.png",
+          "source_sha256": "ccd30601c87c10212434f19f31f9b4b95ecebe085507c1e5a4ba1b326447bb8e"
+        }
+      ],
+      "sampling": {
+        "method": "Common 32px hat scale, limited to 70px height when needed; nearest sampling, alpha128.",
+        "scale": 0.15418502202643172,
+        "rows": [
+          0,
+          478,
+          1024
+        ],
+        "cols": [
+          0,
+          384,
+          768,
+          1152,
+          1536
+        ],
+        "source": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-left/rebuild-tracking-r5.png"
+      },
+      "gif": "UL12.gif",
+      "strip": "UL12-strip.png",
+      "frames": 8,
+      "duration_ms": 100,
+      "display_scale": 2,
+      "export_sha256": {
+        "UL12-frame-01.png": "8e79fed77afe91d44ca24fbb362d375e2c20885c1043ce267049e1560fbd1e30",
+        "UL12-frame-02.png": "bf2d702fab3e10cb1e7821e4cdb2715b2f79d81f0072241807a560680623c2ea",
+        "UL12-frame-03.png": "f61809ea17202f5645e647d2b2eb68165e6d2c1f07cd015f91489b72688f9884",
+        "UL12-frame-04.png": "c367037d9ebdf14062f87f2aeeb36f0f7f8929089e5d874b7d12ce331c38fce1",
+        "UL12-frame-05.png": "9e7cb4451e790e3ea46f08e823812ef2a4481cc0e3ff04391c74cadc70c6d04e",
+        "UL12-frame-06.png": "4595932c52a93c850201b6b83831f97fdd35281e46b4d9691a7ee0b0850a7b70",
+        "UL12-frame-07.png": "3a27e87c1aa715b08f4f22949e9fad62b1598a8e6a556604851b4ef88b8546ad",
+        "UL12-frame-08.png": "2310a6147afb24821bc9c0134efa32565d8411d1c0e89af6731c32cb9b6b637e",
+        "UL12-strip.png": "f587a21c98d720f3d7f9daee820ac3be1cba131e2e5d4fedc7918cacc7ea9ed3",
+        "UL12.gif": "5435db3c918e1d1f8a0e7ae501518f4762eeb1140a96bbabac6c39cfe2a08b45"
+      }
+    },
+    {
+      "id": "UL13",
+      "direction": "up-left",
+      "name": "rebuild-materials-r6.png",
+      "aliases": [
+        {
+          "name": "rebuild-materials-r6.png",
+          "path": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-left/rebuild-materials-r6.png",
+          "source_sha256": "69d93f52c12cfb0e5cbb89fac9852044129f3a271036d380ea70b3d49bdf72d1"
+        }
+      ],
+      "sampling": {
+        "method": "Common 32px hat scale, limited to 70px height when needed; nearest sampling, alpha128.",
+        "scale": 0.19230769230769232,
+        "rows": [
+          0,
+          444,
+          887
+        ],
+        "cols": [
+          0,
+          444,
+          887,
+          1330,
+          1774
+        ],
+        "source": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-left/rebuild-materials-r6.png"
+      },
+      "gif": "UL13.gif",
+      "strip": "UL13-strip.png",
+      "frames": 8,
+      "duration_ms": 100,
+      "display_scale": 2,
+      "export_sha256": {
+        "UL13-frame-01.png": "8a61a38c0945d7ec93bab991e964c97b1b4ded60dd2fab234a61e8bb6142be53",
+        "UL13-frame-02.png": "ca379cb4d5fec6605d0223ea96b238b3925286b498a4ff7919567e7278037356",
+        "UL13-frame-03.png": "b64b752133ccc21c89e0bbf003b0db2df4ba5351936dd75bac6c7af44bff1c85",
+        "UL13-frame-04.png": "e00852e3967ea4c03790b78c79d56a6e30e640b3fdaa83cf5dd44ea7a14651d5",
+        "UL13-frame-05.png": "9de85ee5d7c871b88cd4bc1a19183ff767b75265d9e0e8dc69c6c3745907979c",
+        "UL13-frame-06.png": "86ef98f393039519321838c8f00e594f6d08ffd1c2ee4d18725ea588e7d223a6",
+        "UL13-frame-07.png": "62fb9802ff6d3a89531d865abc079acb2d0dc0dc91c13c9589c5066ea1371594",
+        "UL13-frame-08.png": "a641aaaeb6d42f81648addcc016bc51818400f0d0a5f139395a69de800097cb2",
+        "UL13-strip.png": "de00c52497a6cec64db97457c7b45927302a596ddb0b92d5a4e58a6550cf8052",
+        "UL13.gif": "74c4046f1da72083b84a781d8b9b13c1a26f079e1fbdb37f4e55743e0dfc11e1"
+      }
+    },
+    {
+      "id": "UL14",
+      "direction": "up-left",
+      "name": "rebuild-materials-r7.png",
+      "aliases": [
+        {
+          "name": "rebuild-materials-r7.png",
+          "path": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-left/rebuild-materials-r7.png",
+          "source_sha256": "a7599c67cd856c8eaa4972ce27c7fb63a3ba0c7145edea5d60a35c76b3ddf311"
+        }
+      ],
+      "sampling": {
+        "method": "Common 32px hat scale, limited to 70px height when needed; nearest sampling, alpha128.",
+        "scale": 0.17297297297297298,
+        "rows": [
+          0,
+          438,
+          887
+        ],
+        "cols": [
+          0,
+          444,
+          887,
+          1330,
+          1774
+        ],
+        "source": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-left/rebuild-materials-r7.png"
+      },
+      "gif": "UL14.gif",
+      "strip": "UL14-strip.png",
+      "frames": 8,
+      "duration_ms": 100,
+      "display_scale": 2,
+      "export_sha256": {
+        "UL14-frame-01.png": "625c4530d8e09633e527b0cb3a8b13e5e9e843bef5171bae744a4ee87a6dd431",
+        "UL14-frame-02.png": "15705fc04f78e1dc47aa4546b38e8cc17c048e9a97096fc4ecd9088af6ab2ab9",
+        "UL14-frame-03.png": "e6e8c90761cffa8bc779ffa9835e2b1eb7dfb8022ff844915afa8dfa69ec0f7d",
+        "UL14-frame-04.png": "7cde2e157363da274636d2a2a2bb5e2ac22664251137ebe83a93bd7508bfb056",
+        "UL14-frame-05.png": "97e4793316209b583defcb193f19a69d1a8db7737daca0ee989c9143496b8c22",
+        "UL14-frame-06.png": "00d520b5e27e309d37aa3fea36977c5a3ff59506f2907de478b4474e5523fdee",
+        "UL14-frame-07.png": "a4af6e53c677697767f7468ea06f726f9ab33efea118f46ec2ff549a37ebdd58",
+        "UL14-frame-08.png": "eb6cdd614db9371e97f422571366775902bf90beccd52dbcfdfe8936760f7559",
+        "UL14-strip.png": "ab4c12abe4c921e0d3dc105a3e55d204410a7146c9fa504d6a4f41b3a34f0ca0",
+        "UL14.gif": "81fd56994396457fbf877a4e2ccb3e49d4e440b4072fa23164caab692fb64158"
+      }
+    },
+    {
+      "id": "UL15",
+      "direction": "up-left",
+      "name": "arms-r8.png",
+      "aliases": [
+        {
+          "name": "arms-r8.png",
+          "path": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-left/arms-r8.png",
+          "source_sha256": "6f46a44d1ca28de5dbae2eb04af87f9f920f9373092e4f83cc7b825fb1dc840e"
+        }
+      ],
+      "sampling": {
+        "method": "Common 32px hat scale, limited to 70px height when needed; nearest sampling, alpha128.",
+        "scale": 0.16976127320954906,
+        "rows": [
+          0,
+          438,
+          887
+        ],
+        "cols": [
+          0,
+          444,
+          887,
+          1330,
+          1774
+        ],
+        "source": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-left/arms-r8.png"
+      },
+      "gif": "UL15.gif",
+      "strip": "UL15-strip.png",
+      "frames": 8,
+      "duration_ms": 100,
+      "display_scale": 2,
+      "export_sha256": {
+        "UL15-frame-01.png": "d3b42d611de34409252d7957fa59b4cca6fb443d4e2742be0f46db90d40ff332",
+        "UL15-frame-02.png": "d74b66f106757ac32ac990698dc1546146b06fb9aac25a9add0a420deea1b075",
+        "UL15-frame-03.png": "71c8bff03aa4c617ab505943c9cae48de3dd977a1f1e82c34cdcf8128b2144e3",
+        "UL15-frame-04.png": "7abfbac411e229f5854648a83a98204c2e5615d3d7936f188ad10d90b7201ecd",
+        "UL15-frame-05.png": "5769ed65f9e3b2de3b1ca4580798726454a13fc69afc2250ce2b3e7fd28ed519",
+        "UL15-frame-06.png": "fdfdc7102a8f84472a06c718638cdee1b2296586aa9d25aee103a3c3f7aa7b8c",
+        "UL15-frame-07.png": "24d83932c9047191d09f4be13827af714a0158c4d3c2e52f09bf9de99db75159",
+        "UL15-frame-08.png": "c746941710acd4b1a343d5818c4e9adc795ba4147feeaef6083c43247c940f53",
+        "UL15-strip.png": "21653ab5956d8b4b1bff349e3d532b30e0fcce3858c082fb75aa16d4a8b685b8",
+        "UL15.gif": "f9edc75b7dd886b844d6fd42f33413343cb0423e5c3fed8e870bd66626d194c4"
+      }
+    },
+    {
+      "id": "UL16",
+      "direction": "up-left",
+      "name": "arms-r9.png",
+      "aliases": [
+        {
+          "name": "arms-r9.png",
+          "path": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-left/arms-r9.png",
+          "source_sha256": "a994ba9a49b382f176f67b72fef031261f6458cc4af6a22cc0a1ac8d4c017046"
+        }
+      ],
+      "sampling": {
+        "method": "Common 32px hat scale, limited to 70px height when needed; nearest sampling, alpha128.",
+        "scale": 0.16753926701570682,
+        "rows": [
+          0,
+          438,
+          887
+        ],
+        "cols": [
+          0,
+          444,
+          887,
+          1330,
+          1774
+        ],
+        "source": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-left/arms-r9.png"
+      },
+      "gif": "UL16.gif",
+      "strip": "UL16-strip.png",
+      "frames": 8,
+      "duration_ms": 100,
+      "display_scale": 2,
+      "export_sha256": {
+        "UL16-frame-01.png": "699a12051a2b92a716721481dda7ad6cf895d4131ac975f93cfcdd0a12292c06",
+        "UL16-frame-02.png": "384a98247507117a27d42e6a3c0a3c425ca53e012a5fbe25ae65dabc8997344e",
+        "UL16-frame-03.png": "912437819393e19ef467b5ce1256d3893588a5913fc09fce09bc84d3cae72941",
+        "UL16-frame-04.png": "d420bf7ae249ac976471291441924d4b37d9faf5f875cbaa086ebe7a86882fd3",
+        "UL16-frame-05.png": "a329bb993d12074da874e99ef22090d08825ef1d207acd4c110640a78dd605a1",
+        "UL16-frame-06.png": "e37f293efa766487551a4d40091eab077b128b2bca2460a77fc2dce3c58e71bd",
+        "UL16-frame-07.png": "487dda034fc9d7f539ba68ff420166ecc9be209a315beec54ba0d9cc5fa9fdba",
+        "UL16-frame-08.png": "1897749f444e80a17bee136635eac0052ec4b7c36272832f3728fc191747ae36",
+        "UL16-strip.png": "3091d24980346fb973d21a314ad29178497f944c3dc38e1c1c6f01d61c671449",
+        "UL16.gif": "df8d0d8f53a712f12ba9c85a1d930f68fc38b1ed29e13d142e0aa0d52df42615"
+      }
+    },
+    {
+      "id": "UL17",
+      "direction": "up-left",
+      "name": "full-arm-tracking-r11.png",
+      "aliases": [
+        {
+          "name": "full-arm-tracking-r11.png",
+          "path": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-left/full-arm-tracking-r11.png",
+          "source_sha256": "cf3fa4c0d073c0f829f67dde42df30f7972bd63db37e54f8330b91a98639aeb1"
+        }
+      ],
+      "sampling": {
+        "method": "Common 32px hat scale, limited to 70px height when needed; nearest sampling, alpha128.",
+        "scale": 0.18285714285714286,
+        "rows": [
+          0,
+          441,
+          887
+        ],
+        "cols": [
+          0,
+          444,
+          887,
+          1330,
+          1774
+        ],
+        "source": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-left/full-arm-tracking-r11.png"
+      },
+      "gif": "UL17.gif",
+      "strip": "UL17-strip.png",
+      "frames": 8,
+      "duration_ms": 100,
+      "display_scale": 2,
+      "export_sha256": {
+        "UL17-frame-01.png": "f75e5f2a45fa01f3ae8bc0df7e1c7acd216ed9a495cd706d34cc1f91ab7a086f",
+        "UL17-frame-02.png": "a7930825efdd60223cdd51ef2c0873c2e1d7ae56969a44d039dd0c5e6c9b2171",
+        "UL17-frame-03.png": "1f7c51556141ca1dc2a4283df06d0009fdc8b9236c14f240ae72b9c0f7e9bd60",
+        "UL17-frame-04.png": "963a63ff8a6c7c45b1c562b729a6b3c4a2be4cbec5b451b716ddb6e87432c5ad",
+        "UL17-frame-05.png": "860c22a99b8e89c33a0453f758e1900e1a5908a6ef3df6f8791f6ed337339d98",
+        "UL17-frame-06.png": "7408616a3734b912d6e581b9ba2b311ad5a00e53d712f5a489461f9981e5bee7",
+        "UL17-frame-07.png": "0479b9f3e33430bedb04a262538d1f47bfe95207e7feab0d69401d0e34fa12cc",
+        "UL17-frame-08.png": "7956ee327f83e7bab19bed186958fb19f5a0f5547693088d7e8db2f2f017eee7",
+        "UL17-strip.png": "051d3e83152cedfaa65d9736948e9691a12e28bee6925ef34d8f6e04ac7ac304",
+        "UL17.gif": "250aa2ba4c1029392b59b137afc4cfaf575a5ef9f2fd85ed67fac561e83dd89a"
+      }
+    },
+    {
+      "id": "UL18",
+      "direction": "up-left",
+      "name": "hands-r14.png",
+      "aliases": [
+        {
+          "name": "hands-r14.png",
+          "path": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-left/hands-r14.png",
+          "source_sha256": "493a0808440061dc892203bf8fde3a859b553494e24a78de588e392c70b97081"
+        }
+      ],
+      "sampling": {
+        "method": "Common 32px hat scale, limited to 70px height when needed; nearest sampling, alpha128.",
+        "scale": 0.18181818181818182,
+        "rows": [
+          0,
+          446,
+          887
+        ],
+        "cols": [
+          0,
+          444,
+          887,
+          1330,
+          1774
+        ],
+        "source": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-left/hands-r14.png"
+      },
+      "gif": "UL18.gif",
+      "strip": "UL18-strip.png",
+      "frames": 8,
+      "duration_ms": 100,
+      "display_scale": 2,
+      "export_sha256": {
+        "UL18-frame-01.png": "17e76e90be5ad31037f008688e4dd40031c208856529b90c5346c193c1fd5931",
+        "UL18-frame-02.png": "2d3d45e0a4b0ff6d57f58ea32e73da9cd79c20acdd0d89434a20bad333d6459d",
+        "UL18-frame-03.png": "190a3a5f877634818c5f9647fba63f2620a3c0f7b145f83c589cb656ec4f2a94",
+        "UL18-frame-04.png": "b5010a9a7d85af6cd56c05cb85709d39f2f20cfd415f6b7fe93266ea04f2247c",
+        "UL18-frame-05.png": "83b23cfbd6eff88ba6c7a4806dbe0f59d1eab68019d1ec2bbd4f7fa16cd2f98b",
+        "UL18-frame-06.png": "2d3c70f4770d54dd12a9a4f2a2808a999c93776d08ab52d2a82e072367c217b1",
+        "UL18-frame-07.png": "120901ea8b6864ce4a31eb0a7c0de762218a26d72a606c05f0a2d31a48ea466c",
+        "UL18-frame-08.png": "91fdb4a08075cbbc2fac9daa4c1f8124908fbf3f208eb94432de3718db3b0da8",
+        "UL18-strip.png": "c224ad59ad818afabb22cb5cdb043ca7b73355623cea3c821d8f6b474f330a24",
+        "UL18.gif": "f1a450dcd830ff1061b14ae383fbdc6d2e606f3517fd8e48e83a57de67383a11"
+      }
+    },
+    {
+      "id": "UL19",
+      "direction": "up-left",
+      "name": "diagonal-reference-arms-r17.png",
+      "aliases": [
+        {
+          "name": "diagonal-reference-arms-r17.png",
+          "path": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-left/diagonal-reference-arms-r17.png",
+          "source_sha256": "f245a0f1f34659ee7ba81b24c710f0fca851f7ba350509132fd81a2797f08ada"
+        }
+      ],
+      "sampling": {
+        "method": "Common 32px hat scale, limited to 70px height when needed; nearest sampling, alpha128.",
+        "scale": 0.1787709497206704,
+        "rows": [
+          0,
+          442,
+          887
+        ],
+        "cols": [
+          0,
+          444,
+          887,
+          1330,
+          1774
+        ],
+        "source": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-left/diagonal-reference-arms-r17.png"
+      },
+      "gif": "UL19.gif",
+      "strip": "UL19-strip.png",
+      "frames": 8,
+      "duration_ms": 100,
+      "display_scale": 2,
+      "export_sha256": {
+        "UL19-frame-01.png": "86f318570fc63fd4bde8aa6120db3eb08dd066966bd4acab150b984e7c07928b",
+        "UL19-frame-02.png": "86e6498770d594c19ac49ef5e9e772fe24f09861cf66ac81337d3f43ec47eea6",
+        "UL19-frame-03.png": "943ed480ef1319ee10f80af4bd5c7ef627695f5379aadb3ef25223c48a8e700c",
+        "UL19-frame-04.png": "9356d28204cf5d5d3466ef15dfec10661afd87d793fe30092e0cae71dd5892d3",
+        "UL19-frame-05.png": "08200d634194b41e79074560aadc2625af04a952ae7dbba2950f84e9e8e5e3b6",
+        "UL19-frame-06.png": "6d5ffa405fdc0e8e44455ec412f96d8210a48f03fe90e4c2b5c5e2b3e7a071a0",
+        "UL19-frame-07.png": "20c70f717c13f79c911005412a89816c5604d193794743b20f561df04e3eafda",
+        "UL19-frame-08.png": "6824fd7d4618b81b101f846a225625f7b82ced63609cb9a16501ed8bc0e70ef8",
+        "UL19-strip.png": "efa5d68132994e191089c8c97cd08d45c5a868b35ec1f4c0426e6a51387faf13",
+        "UL19.gif": "d2d50e75d64d9f2572fab3cfd28db55428f4a9e22abe66a0f5a97c611e9570fa"
+      }
+    },
+    {
+      "id": "UL20",
+      "direction": "up-left",
+      "name": "diagonal-reference-arms-r19.png",
+      "aliases": [
+        {
+          "name": "diagonal-reference-arms-r19.png",
+          "path": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-left/diagonal-reference-arms-r19.png",
+          "source_sha256": "f976c5ca51e18e4e0b5f0af7f941279449007b178d985e1d93aab07f0f2115b7"
+        }
+      ],
+      "sampling": {
+        "method": "Common 32px hat scale, limited to 70px height when needed; nearest sampling, alpha128.",
+        "scale": 0.18604651162790697,
+        "rows": [
+          0,
+          446,
+          887
+        ],
+        "cols": [
+          0,
+          444,
+          887,
+          1330,
+          1774
+        ],
+        "source": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-left/diagonal-reference-arms-r19.png"
+      },
+      "gif": "UL20.gif",
+      "strip": "UL20-strip.png",
+      "frames": 8,
+      "duration_ms": 100,
+      "display_scale": 2,
+      "export_sha256": {
+        "UL20-frame-01.png": "2bbb3f6ea340e5838ea16ade0b4a2738bb27bcf13dca3b6df53490fe3f27d78c",
+        "UL20-frame-02.png": "322434c14096d38e67d9242d4ec00a11c236fa575d6ffba875dadece43bed11f",
+        "UL20-frame-03.png": "d570ffce991e9d77a32f12019396108ba2157ecf143ccbd20b553c497dd3b20c",
+        "UL20-frame-04.png": "861c015d731a8d8d99a22fdb96f86d5efe5020097e0f7526a5a8f2e29974815b",
+        "UL20-frame-05.png": "5a2476e248155266e94f6ff6dad6ff21268fe4058fea55e1178ae6e119d4c900",
+        "UL20-frame-06.png": "04854a89912c52da41d9844f3010e4fd6bd94b7535522ad8bbc41c64b8fd719f",
+        "UL20-frame-07.png": "7d8d0e5311d1ada287294838f8ac0f3772d6cf803b80343fac9e14e7221035b3",
+        "UL20-frame-08.png": "a4eeee59dd3abd32fa526eee89e158e78b031cbdae7d2e9f10280bdc46bdde0a",
+        "UL20-strip.png": "7e999db911c854e5158ab5bd62e98cf2c152365f92cf5ccbd633a3db0cd51950",
+        "UL20.gif": "480bbec00319bdd3ed0c095ec709c5340629b0b76020e6c666228fce7aac4998"
+      }
+    },
+    {
+      "id": "UL21",
+      "direction": "up-left",
+      "name": "rebuild-tracking-r6-packed.png",
+      "aliases": [
+        {
+          "name": "rebuild-tracking-r6-packed.png",
+          "path": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-left/rebuild-tracking-r6-packed.png",
+          "source_sha256": "d6fee9e7491401c1dc81947fac7b37f7e78ed67b057d0a61b435666b58c156e6"
+        }
+      ],
+      "sampling": {
+        "method": "Common 32px hat scale, limited to 70px height when needed; nearest sampling, alpha128.",
+        "scale": 1.0769230769230769,
+        "rows": [
+          0,
+          80,
+          160
+        ],
+        "cols": [
+          0,
+          80,
+          160,
+          240,
+          320
+        ],
+        "source": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-left/rebuild-tracking-r6-packed.png"
+      },
+      "gif": "UL21.gif",
+      "strip": "UL21-strip.png",
+      "frames": 8,
+      "duration_ms": 100,
+      "display_scale": 2,
+      "export_sha256": {
+        "UL21-frame-01.png": "c510bfa16e4734e47115ff42a2fb94657721b5b03bfed3063142fabc205a54e0",
+        "UL21-frame-02.png": "ea196c1e8ffa9679d0440d61deff9b79ab92f2efb4598aa8356c30c40642f735",
+        "UL21-frame-03.png": "5beec01561e1fdcde783ed5c83e3b6d59cb58b7004eb885beafe2456aec24040",
+        "UL21-frame-04.png": "f7ceba1f1f0832c120feefb08f89158610f708f5c7996f21b8fbcc8aad18353e",
+        "UL21-frame-05.png": "6406499e6a982dadf2bc0befcea51ee153d7f2908d3710d27458fa2710c5f036",
+        "UL21-frame-06.png": "852d4fdcce28e25e0b12c55b1cf97b077799f3c396a4802cd2a94d843ce02270",
+        "UL21-frame-07.png": "91e1d3d303de37c27fe032f032ded883e20ee4225d154518c836d22943531804",
+        "UL21-frame-08.png": "6a0e53f491faff63c5ae4a9a98411c25d776eb0b2b1b956ed0168017469512ef",
+        "UL21-strip.png": "dbe8ed3acb18b4544695e6496919c72dd8bb8730019312b88a307b8927d200a2",
+        "UL21.gif": "e0cdc44387003260081aacab29ee224c3e18b70bcbb3fe91662acebd24840684"
+      }
+    }
+  ],
+  "partials": [
+    {
+      "direction": "up-right",
+      "name": "rotation-r1.png",
+      "preview": "partial-up-right-rotation-r1.png",
+      "source": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/rotation-r1.png",
+      "sha256": "2896a62a9b1a81e5740a188980218190418c5524e6fd9169b873d363f68b7f93"
+    },
+    {
+      "direction": "up-right",
+      "name": "contacts-r1.png",
+      "preview": "partial-up-right-contacts-r1.png",
+      "source": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/contacts-r1.png",
+      "sha256": "9ffc2c9074b85112c72884532c69659e492a32930c26f0f7b2b92a5731f814be"
+    },
+    {
+      "direction": "up-right",
+      "name": "contacts-r2.png",
+      "preview": "partial-up-right-contacts-r2.png",
+      "source": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/contacts-r2.png",
+      "sha256": "4f1a12a1655a8e9d962f37bc7ec1a908cc8d0b864745d7806cc69141dbc5eac3"
+    },
+    {
+      "direction": "up-right",
+      "name": "contact-05-r1.png",
+      "preview": "partial-up-right-contact-05-r1.png",
+      "source": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/contact-05-r1.png",
+      "sha256": "ad2f0fd5da35eb9cb28aebf0d4d88898e0036cbd16da95fa740936b3294b1b8f"
+    },
+    {
+      "direction": "up-right",
+      "name": "transition-a-r1.png",
+      "preview": "partial-up-right-transition-a-r1.png",
+      "source": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/transition-a-r1.png",
+      "sha256": "dba76300b6dd5074d4d18dfb4069429f50c26f71041657f242232aa6c2f3e75f"
+    },
+    {
+      "direction": "up-right",
+      "name": "transition-a-r2.png",
+      "preview": "partial-up-right-transition-a-r2.png",
+      "source": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/transition-a-r2.png",
+      "sha256": "88d8a79746a68f2136f16b8f15c0fb0ad9fa929a1c8e48fe7512742b2c377d32"
+    },
+    {
+      "direction": "up-right",
+      "name": "transition-b-r1.png",
+      "preview": "partial-up-right-transition-b-r1.png",
+      "source": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/transition-b-r1.png",
+      "sha256": "1b4c1ec05021b508166fc442df53e47c7479eeb64ffda64e4b91dfe6e5ffe2ae"
+    },
+    {
+      "direction": "up-right",
+      "name": "transition-b-r2.png",
+      "preview": "partial-up-right-transition-b-r2.png",
+      "source": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/transition-b-r2.png",
+      "sha256": "c6365778727ef7af0d3070f576ffc90d0a25e4f4373931a3f238dd2c23411497"
+    },
+    {
+      "direction": "up-right",
+      "name": "phase-06-r1.png",
+      "preview": "partial-up-right-phase-06-r1.png",
+      "source": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/phase-06-r1.png",
+      "sha256": "a56739c5009036f6021563488c9fa242bd55088553be949a500902b881db2c8f"
+    },
+    {
+      "direction": "up-right",
+      "name": "reach-04-08-r1.png",
+      "preview": "partial-up-right-reach-04-08-r1.png",
+      "source": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/reach-04-08-r1.png",
+      "sha256": "b53b0ef1556027113ce5db1fee9b8b7082af54e8d1796028cac9f542b6ae7bd3"
+    },
+    {
+      "direction": "up-right",
+      "name": "passing-03-07-r1.png",
+      "preview": "partial-up-right-passing-03-07-r1.png",
+      "source": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/passing-03-07-r1.png",
+      "sha256": "145c22a60df8dd1e1aaa7933b9fcebeb3deec9398ddf30e5fecc13540034b9eb"
+    },
+    {
+      "direction": "up-right",
+      "name": "recovery-07-08-r1.png",
+      "preview": "partial-up-right-recovery-07-08-r1.png",
+      "source": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/recovery-07-08-r1.png",
+      "sha256": "83bebaa4e5d2d7a2bbf514e4ac7c06ed64b2823f480d27485b463566e8e023ca"
+    },
+    {
+      "direction": "up-left",
+      "name": "rotation-r1.png",
+      "preview": "partial-up-left-rotation-r1.png",
+      "source": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-left/rotation-r1.png",
+      "sha256": "e4d2e5fcdece0b890b15aa10a3417107e130c39a56fbc00f94b5a5d3efd88379"
+    },
+    {
+      "direction": "up-left",
+      "name": "recovery-r3.png",
+      "preview": "partial-up-left-recovery-r3.png",
+      "source": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-left/recovery-r3.png",
+      "sha256": "397cc49a0165905df96b5f1017ea8bb16b99b155f91e9c526a4d8b3b51e76c64"
+    },
+    {
+      "direction": "up-left",
+      "name": "rebuild-contacts-r6.png",
+      "preview": "partial-up-left-rebuild-contacts-r6.png",
+      "source": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-left/rebuild-contacts-r6.png",
+      "sha256": "0b5f16d4956fb462230dea0e2df4ecf490c68ffd6f48f9579974c826bbb0654a"
+    },
+    {
+      "direction": "up-left",
+      "name": "arm-05-06-r10.png",
+      "preview": "partial-up-left-arm-05-06-r10.png",
+      "source": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-left/arm-05-06-r10.png",
+      "sha256": "01eaa3d331c9b8e479f4b16e1ced400ca895141c82882fa975fec4cf1b07852d"
+    }
+  ],
+  "coverage": {
+    "up-right": {
+      "rotation-r1.png": {
+        "type": "static/partial",
+        "preview": "partial-up-right-rotation-r1.png"
+      },
+      "contacts-r1.png": {
+        "type": "static/partial",
+        "preview": "partial-up-right-contacts-r1.png"
+      },
+      "contacts-r2.png": {
+        "type": "static/partial",
+        "preview": "partial-up-right-contacts-r2.png"
+      },
+      "contact-05-r1.png": {
+        "type": "static/partial",
+        "preview": "partial-up-right-contact-05-r1.png"
+      },
+      "transition-a-r1.png": {
+        "type": "static/partial",
+        "preview": "partial-up-right-transition-a-r1.png"
+      },
+      "transition-a-r2.png": {
+        "type": "static/partial",
+        "preview": "partial-up-right-transition-a-r2.png"
+      },
+      "transition-b-r1.png": {
+        "type": "static/partial",
+        "preview": "partial-up-right-transition-b-r1.png"
+      },
+      "transition-b-r2.png": {
+        "type": "static/partial",
+        "preview": "partial-up-right-transition-b-r2.png"
+      },
+      "phase-06-r1.png": {
+        "type": "static/partial",
+        "preview": "partial-up-right-phase-06-r1.png"
+      },
+      "materials-r1.png": {
+        "type": "complete eight-frame cycle",
+        "id": "UR10"
+      },
+      "materials-r2.png": {
+        "type": "complete eight-frame cycle",
+        "id": "UR11"
+      },
+      "materials-r3.png": {
+        "type": "complete eight-frame cycle",
+        "id": "UR12"
+      },
+      "tracking-r2.png": {
+        "type": "complete eight-frame cycle",
+        "id": "UR13"
+      },
+      "tracking-r3.png": {
+        "type": "complete eight-frame cycle",
+        "id": "UR14"
+      },
+      "tracking-r4.png": {
+        "type": "complete eight-frame cycle",
+        "id": "UR15"
+      },
+      "reach-04-08-r1.png": {
+        "type": "static/partial",
+        "preview": "partial-up-right-reach-04-08-r1.png"
+      },
+      "passing-03-07-r1.png": {
+        "type": "static/partial",
+        "preview": "partial-up-right-passing-03-07-r1.png"
+      },
+      "materials-r5.png": {
+        "type": "complete eight-frame cycle",
+        "id": "UR16"
+      },
+      "recovery-07-08-r1.png": {
+        "type": "static/partial",
+        "preview": "partial-up-right-recovery-07-08-r1.png"
+      },
+      "arm-smoothing-r7.png": {
+        "type": "complete eight-frame cycle",
+        "id": "UR17"
+      },
+      "arm-smoothing-r8.png": {
+        "type": "complete eight-frame cycle",
+        "id": "UR18"
+      },
+      "arm-smoothing-r9.png": {
+        "type": "complete eight-frame cycle",
+        "id": "UR19"
+      },
+      "full-arm-tracking-r11.png": {
+        "type": "complete eight-frame cycle",
+        "id": "UR20"
+      },
+      "full-arm-tracking-r12.png": {
+        "type": "complete eight-frame cycle",
+        "id": "UR02"
+      },
+      "full-arm-materials-r13.png": {
+        "type": "complete eight-frame cycle",
+        "id": "UR06"
+      },
+      "hands-r14.png": {
+        "type": "complete eight-frame cycle",
+        "id": "UR21"
+      },
+      "hands-r15.png": {
+        "type": "complete eight-frame cycle",
+        "id": "UR01"
+      },
+      "hands-r16.png": {
+        "type": "complete eight-frame cycle",
+        "id": "UR07"
+      },
+      "diagonal-reference-arms-r17.png": {
+        "type": "complete eight-frame cycle",
+        "id": "UR22"
+      },
+      "diagonal-reference-arms-r18.png": {
+        "type": "complete eight-frame cycle",
+        "id": "UR08"
+      },
+      "diagonal-reference-arms-r19.png": {
+        "type": "complete eight-frame cycle",
+        "id": "UR23"
+      },
+      "materials-r4.png": {
+        "type": "complete eight-frame cycle",
+        "id": "UR24"
+      },
+      "tracking-r1.png": {
+        "type": "complete eight-frame cycle",
+        "id": "UR25"
+      }
+    },
+    "up-left": {
+      "rotation-r1.png": {
+        "type": "static/partial",
+        "preview": "partial-up-left-rotation-r1.png"
+      },
+      "materials-r1.png": {
+        "type": "complete eight-frame cycle",
+        "id": "UL09"
+      },
+      "materials-r2.png": {
+        "type": "complete eight-frame cycle",
+        "id": "UL10"
+      },
+      "recovery-r3.png": {
+        "type": "static/partial",
+        "preview": "partial-up-left-recovery-r3.png"
+      },
+      "rebuild-tracking-r4.png": {
+        "type": "complete eight-frame cycle",
+        "id": "UL11"
+      },
+      "rebuild-tracking-r5.png": {
+        "type": "complete eight-frame cycle",
+        "id": "UL12"
+      },
+      "rebuild-contacts-r6.png": {
+        "type": "static/partial",
+        "preview": "partial-up-left-rebuild-contacts-r6.png"
+      },
+      "rebuild-materials-r6.png": {
+        "type": "complete eight-frame cycle",
+        "id": "UL13"
+      },
+      "rebuild-materials-r7.png": {
+        "type": "complete eight-frame cycle",
+        "id": "UL14"
+      },
+      "arms-r8.png": {
+        "type": "complete eight-frame cycle",
+        "id": "UL15"
+      },
+      "arms-r9.png": {
+        "type": "complete eight-frame cycle",
+        "id": "UL16"
+      },
+      "arm-05-06-r10.png": {
+        "type": "static/partial",
+        "preview": "partial-up-left-arm-05-06-r10.png"
+      },
+      "full-arm-tracking-r11.png": {
+        "type": "complete eight-frame cycle",
+        "id": "UL17"
+      },
+      "full-arm-tracking-r12.png": {
+        "type": "complete eight-frame cycle",
+        "id": "UL02"
+      },
+      "full-arm-materials-r13.png": {
+        "type": "complete eight-frame cycle",
+        "id": "UL06"
+      },
+      "hands-r14.png": {
+        "type": "complete eight-frame cycle",
+        "id": "UL18"
+      },
+      "hands-r15.png": {
+        "type": "complete eight-frame cycle",
+        "id": "UL01"
+      },
+      "diagonal-reference-arms-r17.png": {
+        "type": "complete eight-frame cycle",
+        "id": "UL19"
+      },
+      "diagonal-reference-arms-r18.png": {
+        "type": "complete eight-frame cycle",
+        "id": "UL07"
+      },
+      "diagonal-reference-arms-r19.png": {
+        "type": "complete eight-frame cycle",
+        "id": "UL20"
+      },
+      "rebuild-tracking-r6-packed.png": {
+        "type": "complete eight-frame cycle",
+        "id": "UL21"
+      }
+    }
+  },
+  "unique_cycles": {
+    "up-right": 25,
+    "up-left": 21
+  },
+  "unchanged_native_frames": 56,
+  "source_changes": false,
+  "new_generation_calls": 0,
+  "selection_applies_to_game": false
+}
