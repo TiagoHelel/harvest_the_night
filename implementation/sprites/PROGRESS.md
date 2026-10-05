@@ -2334,3 +2334,27 @@ python tools/verify.py with the supplied Godot binary: PASS,55passed/0skipped/
 This checks existing game behavior and does not establish preview gait quality.
 No runtime/source-code, queue, collision or resolution changes. Existing unrelated
 project.godot edits preserved. No push or unattended automation.
+
+
+## 2026-10-05 — Revise only up-right walking frames7/8
+
+The user requested only7/8 because the lifted leg appeared to pause before
+lowering. Built-in ImageGen edited an isolated two-cell R5 crop, using previous6
+and following1 as gait context. Frame8 now unfolds the near knee and advances/
+lowers the boot instead of repeating7. Saved raw pair at assets/art_source/
+player-fhd/pilots/2026-10-04/walk-up-right/recovery-07-08-r1.png; exact prompt,
+references and raw original path are in the pilot's generation.json.
+
+Export overrides7/8 only, using one common hat-reference pair calibration and
+nearest sampling; both new poses are80x80, visible63px high with32px hat width.
+Frames1-6 are byte-identical to previousR5, verified by SHA256. New upper pixels
+are not pixel-identical to the references. Archived prior frames/validation/GIFs
+under before-07-08-r5. Export/comparison builders and eight-frame100ms normal /
+200ms slow loop checks passed; recovery-validation.json records exact scope.
+Inspected native contact sheet and browser frame7,8 and wrap to1. Capture:
+implementation/fhd-player/pilots/2026-10-04/walk-up-right/browser-frame8-r6.png.
+Updated the same HTML, up-diagonal-recovery-r6.gif, recovery-before-after-r6.gif
+and parent six-direction horizontal GIF. Previous versionedR5 GIFs preserved.
+No other walk family, runtime/code, queue or project settings changed; unrelated
+project.godot edit preserved. No engine suite rerun for this isolated correction;
+prior full verification remains documented. Up-right R6 awaits user approval.

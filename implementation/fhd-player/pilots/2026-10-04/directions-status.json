@@ -55,11 +55,11 @@
   "walk_up_right": {
     "status": "awaiting_approval",
     "date": "2026-10-05",
-    "candidate": "walk-up-right/materials-r5",
-    "preview": "walk-up-right/up-diagonal-continuity-r5.gif",
-    "diagnostic": "walk-up-right/rejected-vs-revised-slow-r5.gif",
-    "user_feedback": "reprovado, a perna troca sem movimento coerente",
+    "candidate": "walk-up-right/materials-r5 + recovery-07-08-r1 overrides",
+    "preview": "walk-up-right/up-diagonal-recovery-r6.gif",
+    "diagnostic": "walk-up-right/recovery-before-after-r6.gif",
+    "user_feedback": "redo only frames7/8: leg appears to hold before lowering",
     "rejected_candidate": "walk-up-right/materials-r3",
-    "feedback_addressed": "Passing and reaching poses3/4/7/8 individually rebuilt, restored shin length, head reference scale retained. Motion review pending."
+    "feedback_addressed": "Only frames7/8 replaced; frame8 now reaches and lowers instead of holding phase7. Frames1-6 unchanged."
   }
 }

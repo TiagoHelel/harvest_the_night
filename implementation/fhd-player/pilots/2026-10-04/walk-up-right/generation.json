@@ -1,7 +1,7 @@
 {
   "tool": "built-in ImageGen",
   "date": "2026-10-04",
-  "status": "awaiting user approval: R5 continuous passing/reaching revision",
+  "status": "awaiting approval: R6 frames7/8 only",
   "source_directory": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right",
   "transparent_background": true,
   "workflow_reference": "sprite_generator/welcome_back_hero/prepare_ranger_transition.py: rotate first, fixed hip color ownership, isolated opposite contacts, two four-frame transitions",
@@ -198,6 +198,17 @@
       "source": "materials-r5.png",
       "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-042108b2-ebe5-4ef5-8f91-5e1ff5b104f6.png",
       "review": "Restores planted calf lengths in intermediate poses3/4/7/8 without reintroducing their wide contact silhouette. Native heights62-65px, hat widths31-32px at retained R3 common scale. Generated edits still change pixels; visual approval pending."
+    },
+    {
+      "date": "2026-10-05",
+      "prompt": "recovery-07-08-r1.prompt.txt",
+      "references": [
+        "recovery-07-08-source.png",
+        "recovery-06-01-context.png"
+      ],
+      "source": "recovery-07-08-r1.png",
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-dfed9e7f-1c32-4ec7-b89f-38e62f03ff1f.png",
+      "review": "Only exported frames7/8 replaced. Frame8 unfolds near knee and advances/lowers the boot rather than holding frame7 pose. Native hats32px, heights63px. Frames1-6 byte-identical; anatomy/motion approval pending."
     }
   ],
   "actual_sources": {
@@ -280,6 +291,10 @@
     "materials-r5": [
       1774,
       887
+    ],
+    "recovery-07-08-r1": [
+      1774,
+      887
     ]
   },
   "limitations": [
@@ -301,9 +316,26 @@
     "feedback": "reprovado, a perna troca sem movimento coerente",
     "archived_preview": "rejected-r3"
   },
-  "selected_source": "materials-r5.png",
-  "selected_preview": "up-diagonal-continuity-r5.gif",
+  "selected_source": "materials-r5.png with frame7/8 recovery-07-08-r1.png overrides",
+  "selected_preview": "up-diagonal-recovery-r6.gif",
   "revision_date": "2026-10-05",
-  "selected_source_sha256": "f821d9fd8d69dd66781d0c092f8225dd67473b9885c1b85e01a470d4c920795c",
-  "selected_preview_sha256": "9b92a37b60952329892b17fdd055f31489d23dc4513f9b1ba1540aba13983181"
+  "selected_preview_sha256": "8ca57cc5fdc57f789d118ac7655abdc322adea7cb9b541975e34ab69c34a77f9",
+  "source_base_sha256": "f821d9fd8d69dd66781d0c092f8225dd67473b9885c1b85e01a470d4c920795c",
+  "native_overrides": {
+    "frames": [
+      7,
+      8
+    ],
+    "source": "recovery-07-08-r1.png",
+    "pair_common_reference_scale": 0.4907292954264524,
+    "native_source_scale": 0.0784186639383095
+  },
+  "latest_feedback": {
+    "date": "2026-10-05",
+    "scope": [
+      7,
+      8
+    ],
+    "feedback": "leg appears to hold before lowering; redo only7/8"
+  }
 }

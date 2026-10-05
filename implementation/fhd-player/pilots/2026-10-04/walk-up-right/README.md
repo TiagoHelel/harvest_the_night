@@ -1,4 +1,29 @@
-# Walk up-right: R5 motion review
+# Walk up-right: frames7/8 R6 motion review
+
+The latest request changes only frames7 and8 because the leg appeared to hold
+before lowering. Built-in ImageGen produced recovery-07-08-r1.png from a two-cell
+R5 crop, with frame6 and loop frame1 supplied as movement context. Frame7 is the
+lifted passing pose; frame8 unfolds the same knee and advances/lowers the boot.
+Exact prompt: recovery-07-08-r1.prompt.txt. Native frames1-6 remain byte-identical
+(checks and hashes in recovery-validation.json). Only7/8 are new drawings.
+
+Current source ownership is R5 for1-6 and the generated recovery pair for7-8.
+export_preview.py applies one common pair calibration0.4907292954264524 based
+on source hat widths, then nearest sampling at0.0784186639383095. Both new poses
+have native32px hats and63px visible height on80x80 canvases. No limb deformation
+or pixel painting by the export script; upper pixels of generated7/8 are not
+identical to their references. The previous R5 frames, validation and GIFs are
+archived in before-07-08-r5. No other direction or runtime art was changed.
+
+Current review: up-diagonal-recovery-r6.gif (normal100ms) and
+recovery-before-after-r6.gif (R5 left, revised7/8 right,200ms). Eight frames each,
+looping. The same HTML and parent six-direction GIF are updated. Actual browser
+controls were inspected at7,8 and wrapping back to1; browser-frame8-r6.png is the
+capture. Export/scope/timing checks passed. No engine suite rerun for this narrow
+preview-only correction; the previous55-check PASS is recorded below. Awaiting
+user approval before starting another direction.
+
+## Earlier R5 continuity work
 
 The user approved down-right R5 on2026-10-04, then rejected up-right R3:
 "reprovado, a perna troca sem movimento coerente". This direction remains

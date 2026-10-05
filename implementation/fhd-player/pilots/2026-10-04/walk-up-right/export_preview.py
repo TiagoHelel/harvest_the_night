@@ -24,13 +24,13 @@ def cuts(path):
     return [im.crop((cols[c], rows[r], cols[c+1], rows[r+1]))
             for r in range(2) for c in range(4)]
 
-def pack(cells, scale):
+def pack(cells, scale, head_depth=100):
     frames = []
     for cell in cells:
         box = cell.getbbox()
         assert box is not None
         # Hat center anchors horizontal position; arm swings cannot shift the body.
-        head = cell.crop((0, box[1], cell.width, box[1] + 100)).getbbox()
+        head = cell.crop((0, box[1], cell.width, box[1] + head_depth)).getbbox()
         center = (head[0] + head[2]) / 2
         small = cell.resize((round(cell.width*scale), round(cell.height*scale)), Image.Resampling.NEAREST)
         b = small.getbbox()
@@ -56,13 +56,31 @@ def gif(frames, path, duration):
     paletted = [f.convert('RGB').quantize(palette=palette, dither=Image.Dither.NONE) for f in frames]
     paletted[0].save(path, save_all=True, append_images=paletted[1:], duration=duration, loop=0, disposal=2, optimize=False)
 
-tracking_cells = cuts(SOURCE / 'walk-up-right/materials-r3.png')
+tracking_cells = cuts(SOURCE / 'walk-up-right/materials-r5.png')
 normal_cells = cuts(SOURCE / 'walk-up-right/materials-r5.png')
 # Hold the rejected R3's common character scale. Shorter intermediate poses
 # must not enlarge the head when the median visible silhouette becomes shorter.
 scale = json.loads((ROOT/'rejected-r3/validation.json').read_text())['common_source_scale']
 normal = pack(normal_cells, scale)
-tracking_scale = HEIGHT / statistics.median(c.getbbox()[3]-c.getbbox()[1] for c in tracking_cells)
+# Only frames7/8 are replaced. The six R5 native frames use their original
+# source cuts and sampling grid; packing a new full atlas could change them.
+recovery_source = clean(Image.open(SOURCE / 'walk-up-right/recovery-07-08-r1.png'))
+mid = round(recovery_source.width/2)
+recovery_cells = [recovery_source.crop((0,0,mid,recovery_source.height)),
+                  recovery_source.crop((mid,0,recovery_source.width,recovery_source.height))]
+reference_widths = []
+pair_widths = []
+for base, cell in zip(normal_cells[6:], recovery_cells):
+    b = base.getbbox()
+    ref = base.crop((0,b[1],base.width,b[1]+100)).getbbox()
+    reference_widths.append(ref[2]-ref[0])
+    b = cell.getbbox()
+    head = cell.crop((0,b[1],cell.width,b[1]+round((b[3]-b[1])*.25))).getbbox()
+    pair_widths.append(head[2]-head[0])
+recovery_calibration = statistics.median(reference_widths)/statistics.median(pair_widths)
+normal[6:] = pack(recovery_cells, scale*recovery_calibration,
+                 head_depth=round(100/recovery_calibration))
+tracking_scale = scale
 tracking = pack(tracking_cells, tracking_scale)
 idle_source = clean(Image.open(SOURCE / 'walk-up-right/rotation-r1.png'))
 ib = idle_source.getbbox()
@@ -106,7 +124,7 @@ for i, frame in enumerate(normal):
     check=Image.new('RGBA',(640,370),'#303a3e')
     check.alpha_composite(tracking[i].resize((320,320),Image.Resampling.NEAREST),(0,35))
     check.alpha_composite(frame.resize((320,320),Image.Resampling.NEAREST),(320,35))
-    caption(ImageDraw.Draw(check),(15,10),f'REJECTED R3 (LEFT) / REVISED (RIGHT) / FRAME {i+1}',14)
+    caption(ImageDraw.Draw(check),(15,10),f'BEFORE R5 (LEFT) / FRAMES 7-8 REVISED (RIGHT) / FRAME {i+1}',12)
     diagnostic.append(check)
 gif(preview,ROOT/'idle-walk-up-right.gif',100)
 gif(diagnostic,ROOT/'leg-tracking-slow.gif',200)
@@ -118,13 +136,16 @@ for i,frame in enumerate(normal):
     caption(ImageDraw.Draw(contact),(i*160+10,190),f'{i+1:02}')
 contact.convert('RGB').save(ROOT/'contact-sheet.png')
 report={'status':'awaiting user review; not integrated','frames':8,'fps':10,'canvas':[80,80],
-        'selected_source':'materials-r5.png',
+        'selected_source':'materials-r5.png; frames7/8 from recovery-07-08-r1.png',
+        'native_overrides':{'frames':[7,8],'source':'recovery-07-08-r1.png',
+                            'pair_common_reference_scale':recovery_calibration,
+                            'native_source_scale':scale*recovery_calibration},
         'source_row_cuts':[0,round(Image.open(SOURCE/'walk-up-right/materials-r5.png').height/2),Image.open(SOURCE/'walk-up-right/materials-r5.png').height],
         'native_target_height':64,'fhd_display_scale':2,'common_source_scale':scale,'tracking_common_source_scale':tracking_scale,
         'idle_bbox':idle.getbbox(),'frames_metrics':metrics,
         'source_alpha_threshold':128,'resample':'nearest','anchor':'hat center and fixed head top',
         'limitations':['Prototype display size, not yet rendered inside the game.',
-                        'Slow comparison shows rejected R3 beside the revision, not a colored-leg construction proof.',
+                        'Slow comparison shows R5 beside revised frames7/8, not a colored-leg construction proof.',
                         'Generated source edits are not pixel-identical to their references.']}
 ih=idle.crop((0,TOP,FRAME,TOP+14)).getbbox()
 report['idle_hat_region_width']=ih[2]-ih[0]
@@ -134,7 +155,7 @@ for diagnostic, material in zip(tracking, normal):
     ta, ma = diagnostic.getchannel('A'), material.getchannel('A')
     intersection += ImageChops.darker(ta,ma).histogram()[255]
     union += ImageChops.lighter(ta,ma).histogram()[255]
-report['native_rejected_vs_revised_silhouette_iou'] = intersection / union
+report['native_previous_vs_revised_silhouette_iou'] = intersection / union
 with Image.open(ROOT/'idle-walk-up-right.gif') as saved:
     assert saved.n_frames == 8
     durations = []

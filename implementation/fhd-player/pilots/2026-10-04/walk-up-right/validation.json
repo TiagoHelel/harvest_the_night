@@ -6,7 +6,16 @@
     80,
     80
   ],
-  "selected_source": "materials-r5.png",
+  "selected_source": "materials-r5.png; frames7/8 from recovery-07-08-r1.png",
+  "native_overrides": {
+    "frames": [
+      7,
+      8
+    ],
+    "source": "recovery-07-08-r1.png",
+    "pair_common_reference_scale": 0.4907292954264524,
+    "native_source_scale": 0.0784186639383095
+  },
   "source_row_cuts": [
     0,
     444,
@@ -105,19 +114,19 @@
       ],
       "height": 63,
       "hat_region_width": 32,
-      "sha256": "86b6142b0c51517b9a2210bcaa124299e2f4ec01b587c6cf22893b57056e4b7a"
+      "sha256": "1328cf7229290b386204a28ccb727c73bda5817988c58ba5e2c90ca9426c798d"
     },
     {
       "frame": 8,
       "bbox": [
         24,
         8,
-        56,
+        57,
         71
       ],
       "height": 63,
       "hat_region_width": 32,
-      "sha256": "5c9d982bf0854d75e1238baf673afc11b36fddd5ea85dbbfd78adb42b0f087ad"
+      "sha256": "193d7f4d71eb038f0b3039c2825dae9b8375b523331b41a5500bbb366dbb613d"
     }
   ],
   "source_alpha_threshold": 128,
@@ -125,11 +134,11 @@
   "anchor": "hat center and fixed head top",
   "limitations": [
     "Prototype display size, not yet rendered inside the game.",
-    "Slow comparison shows rejected R3 beside the revision, not a colored-leg construction proof.",
+    "Slow comparison shows R5 beside revised frames7/8, not a colored-leg construction proof.",
     "Generated source edits are not pixel-identical to their references."
   ],
   "idle_hat_region_width": 30,
-  "native_rejected_vs_revised_silhouette_iou": 0.8612821807168097,
+  "native_previous_vs_revised_silhouette_iou": 0.9733984799131379,
   "gif_frame_durations_ms": [
     100,
     100,
