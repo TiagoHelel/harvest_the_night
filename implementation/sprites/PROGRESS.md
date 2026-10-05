@@ -2735,3 +2735,46 @@ Visual approval remains pending. No active native/runtime assets replaced.
 Full engine suite not rerun for isolated preview art; preceding run passed55
 checks with unchanged sim/data hashes. Sprite queue and git diff --check PASS.
 No next direction, queue mutation, push or project.godot change.
+
+## UR03 frame7 boot rebuild / UL03 approved - 2026-10-05
+
+User rejected UR03 frame7's malformed foot and explicitly approved UL03.
+UL03-approval.json freezes all8approved frame SHA256 values. Direction status
+records the exact approved selected cycle; all8UL03 files remain byte-identical.
+No next direction or runtime promotion performed during this correction.
+
+One built-in ImageGen edit call:UR03-boot-r2.prompt.json, exact arguments and
+source/input hashes in UR03-boot-r2.call.json. Original1254x1254RGBA preserved
+under CODEX_HOME and copied unchanged to assets/art_source/player-fhd/pilots/
+2026-10-04/selected-UR03-UL03/UR03-boot-r2.png. Rebuilt lifted boot has a narrow
+ankle, rounded toe and dark sole. The rejectedr1 cut missed part of the original
+heel, leaving an incoherent composite. New fixed generated cut(41,52,55,61)
+covers the whole raised boot below the retained cuff. All outside pixels exact;
+other7UR03 selected poses copied unchanged. No limb painting, flipping or warp.
+
+New selected review cycle:UR03/revisions/boot-r2/frames. Previousr1frames and
+sources retained. Existing index.html now shows original UR03 / revised UR03 /
+approved UL03,720x350,integer2x,8x100ms; slow960x380,integer4x,8x200ms.
+All-seven-direction horizontal GIF updated; other five directions unchanged.
+Format/scope PASS: only boot7changed,7unchanged UR03 poses,8frozen UL03 poses,
+56active native assets unchanged,binary alpha,3eight-frame infinite GIFs.
+Manual frame7 and normal playback inspected; boot-r2-browser.png and
+boot-r2-frame7-browser.png saved. User approval remains pending for UR03.
+
+Required full engine verification PASS (boot-r2-engine-check.log):
+
+```text
+  ambience                     PASS   1.8s  OK    11 ambience files match their recipes (2 beds, 9 touches)
+  headless_check               PASS  73.7s  7768 asserts, 0 failed
+  sim hash                     PASS   1.9s  1270427719 unchanged
+  data hash                    PASS   0.0s  8148086 unchanged
+  input_check                  PASS  74.0s  1006 cases, 0 failed
+  exports                      PASS  28.0s
+
+  55 passed, 0 skipped, 0 failed in 501s  (OVER BUDGET)
+
+PASS
+```
+
+Sprite queue and git diff --check PASS. No sim/data acceptance, queue mutation,
+runtime integration, push or project.godot edits. Unrelated files preserved.

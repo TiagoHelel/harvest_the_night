@@ -25,7 +25,7 @@
       },
       "selected_base": "before-07-08-r5/frames",
       "assembly": "Fixed rectangular cut from generated artwork; original pixels retained outside cut.",
-      "status": "awaiting user visual review; preview only"
+      "status": "rejected by user: frame7 foot malformed"
     }
   ],
   "UL03": [
@@ -54,7 +54,7 @@
       },
       "selected_base": "before-arm-smoothing/frames",
       "assembly": "Fixed rectangular cut from generated artwork; original pixels retained outside cut.",
-      "status": "awaiting user visual review; preview only"
+      "status": "approved by user on2026-10-05; exact final cycle frozen in UL03-approval.json"
     }
   ]
 }

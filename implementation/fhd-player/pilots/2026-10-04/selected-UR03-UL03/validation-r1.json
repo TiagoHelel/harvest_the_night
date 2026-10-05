@@ -252,5 +252,10 @@
     ],
     "finding": "UL03 cross-back arm removed in5/6; UR03 lifted boot lowered in7. Protected regions retained. User review pending."
   },
-  "engine_validation": "Not rerun for isolated preview assets; previous full engine run passed55checks. No runtime asset changes."
+  "engine_validation": "Not rerun for isolated preview assets; previous full engine run passed55checks. No runtime asset changes.",
+  "user_review_2026_10_05": {
+    "UR03": "frame7 rejected: foot malformed",
+    "UL03": "approved",
+    "next_review": "index.html boot-r2"
+  }
 }

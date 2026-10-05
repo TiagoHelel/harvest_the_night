@@ -55,14 +55,14 @@
   "walk_up_right": {
     "status": "awaiting_approval",
     "date": "2026-10-05",
-    "candidate": "walk-up-right/hands-r15",
-    "preview": "up-diagonal-hands-r15.gif",
-    "diagnostic": "up-diagonal-hands-before-after-r15.gif",
-    "user_feedback": "Hands still look strange; rebuild them.",
+    "candidate": "selected-UR03-UL03/UR03/revisions/boot-r2/frames",
+    "preview": "selected-UR03-UL03/index.html",
+    "diagnostic": "selected-UR03-UL03/UR03-boot-r2-before-after.png",
+    "user_feedback": "Frame7 lifted foot remains malformed; UL03 approved.",
     "rejected_candidate": "walk-up-right/full-arm-materials-r13",
-    "feedback_addressed": "Compact palms, narrower wrists and relaxed downward forearm/hand angles.",
+    "feedback_addressed": "Whole lifted boot silhouette rebuilt in7; other7selected poses exact.",
     "approval_date": "2026-10-05",
-    "review_limit": "Far left arm travel remains subtle; hand and gait approval pending.",
+    "review_limit": "Only UR03 frame7 rebuilt boot awaits user review; no runtime integration.",
     "diagonal_reference_attempt": {
       "date": "2026-10-05",
       "status": "visual_gate_failed",
@@ -79,22 +79,23 @@
         7
       ],
       "status": "awaiting_approval",
-      "candidate": "selected-UR03-UL03/UR03/frames",
+      "candidate": "selected-UR03-UL03/UR03/revisions/boot-r2/frames",
       "preview": "selected-UR03-UL03/index.html",
       "runtime_integrated": false,
-      "user_feedback": "UR03: redo only7. UL03: redo5and6. Use selected gallery versions."
+      "user_feedback": "Frame7 foot remains malformed; rebuild the boot silhouette.",
+      "revision": "boot-r2"
     }
   },
   "walk_up_left": {
-    "status": "awaiting_approval",
+    "status": "approved",
     "date": "2026-10-05",
-    "candidate": "walk-up-left/hands-r15",
-    "preview": "up-diagonal-hands-r15.gif",
-    "diagnostic": "up-diagonal-hands-before-after-r15.gif",
-    "feedback_addressed": "Compact palms, narrower wrists and relaxed downward forearm/hand angles.",
+    "candidate": "selected-UR03-UL03/UL03/frames",
+    "preview": "selected-UR03-UL03/index.html",
+    "diagnostic": "selected-UR03-UL03/UL03-before-after.png",
+    "feedback_addressed": "Selected UL03 cycle with corrected near-arm poses5/6; original legs and boots retained.",
     "rejected_candidate": "walk-up-left/full-arm-materials-r13",
-    "user_feedback": "Hands still look strange; rebuild them.",
-    "review_limit": "Awaiting user visual approval at actual preview size.",
+    "user_feedback": "UL03 aprovado",
+    "review_limit": "User approved the exact selected UL03 cycle with local frames5/6 corrections.",
     "diagonal_reference_attempt": {
       "date": "2026-10-05",
       "status": "visual_gate_failed",
@@ -111,11 +112,22 @@
         5,
         6
       ],
-      "status": "awaiting_approval",
+      "status": "approved",
       "candidate": "selected-UR03-UL03/UL03/frames",
       "preview": "selected-UR03-UL03/index.html",
       "runtime_integrated": false,
-      "user_feedback": "UR03: redo only7. UL03: redo5and6. Use selected gallery versions."
-    }
+      "user_feedback": "UL03 aprovado",
+      "approved_frame_sha256": {
+        "01.png": "afefe3c6a10bf46d3a201bbf8916c83c6f4f1987351016380582e7c5b75a2c25",
+        "02.png": "d3e63d45898d135d52be58045692be53ba42717a1c2a147d4f358e5446a40984",
+        "03.png": "2168b536023bd739724bf898636778a0ed671fa7f3e7ee1c7dfe6f36699a3be6",
+        "04.png": "81d9959b5dab17ecfcde14b1bd6f93d56629fd8bc1dfb84b9df522b38dd46611",
+        "05.png": "1a1b7324138da0e676e15662f3b81f01ce6afe8377776d175fd6e693b29e00dc",
+        "06.png": "539b94cae2f7eef782a40584a77029f1405d190aa128032d5d6442ec1022dd40",
+        "07.png": "bc3ac8506d749598d6611a89bf061e2e8a12443a0dcaf6d8efe107a111f74ca4",
+        "08.png": "f0ef2b5b74baf72e3fb63f31acef5ba355f23fd6c237fa9744dba7283d3914a9"
+      }
+    },
+    "approval_date": "2026-10-05"
   }
 }
