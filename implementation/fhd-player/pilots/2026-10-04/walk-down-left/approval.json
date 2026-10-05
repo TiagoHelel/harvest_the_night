@@ -1,0 +1,18 @@
+{
+  "date": "2026-10-05",
+  "status": "approved",
+  "user_feedback": "caralho perfeitooo",
+  "candidate": "frames",
+  "source": "materials-r1.png",
+  "frame_sha256": {
+    "walk-down-left-01.png": "cb2fb411c7d7f9f10cf36d86da8a53518e8ee925d2f84398c6e17aecdafe055c",
+    "walk-down-left-02.png": "dd602d46a8b217ebfa376ae9ae79863a528987350ea56e583b6e91acb5a0cf5b",
+    "walk-down-left-03.png": "46e856f426a870dbfc563555313d8ba088774e060687b5a13244dc9098459981",
+    "walk-down-left-04.png": "cfa52172b527bda1cfb986b95888f6dd8e58870b9dac91024765363a0e452897",
+    "walk-down-left-05.png": "0d1c9eb0421dbd0e9e511168f07fcd5255e8092f1fda003f25be5cd80b6c16d6",
+    "walk-down-left-06.png": "919116fc1b881521efafc24e2a14c2ff61016e9c816b03f6915913a81cbd68d3",
+    "walk-down-left-07.png": "e8f0301b35cdeacbc4b233db0deb0ecc9dc0e375c591331ea8d97a088f8f73b8",
+    "walk-down-left-08.png": "22a399622f2b745d66ac0413a49be629612ad0f0fc96be33c08f1f6997de9bb8"
+  },
+  "runtime_integrated": false
+}

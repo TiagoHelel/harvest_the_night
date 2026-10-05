@@ -2,8 +2,10 @@
 
 The user approved UR03 `boot4-r4`. Its exact eight PNG hashes are frozen in
 `../selected-UR03-UL03/UR03-approval.json`. This folder contains the next and
-last walking direction for individual review. DOWN-LEFT remains awaiting user
-approval. No runtime files were replaced.
+last walking direction for individual review. The user approved DOWN-LEFT on
+2026-10-05; `approval.json` freezes the exact eight PNG hashes. No runtime files
+were replaced. Rebuilding an approved preview reads those files without
+resampling them and checks the approval hashes first.
 
 ## Production and selection
 
@@ -43,16 +45,22 @@ farmer. Native frames are 80x80, artwork 60–63px tall, hat region 31–33px wi
 - `contact-sheet.png`: all eight poses; manual Previous/Next controls in HTML.
 - `all-eight-walk-directions.gif`: horizontal overview. Approved UR03 boot4-r4
   and approved UL03 are selected explicitly, not their rejected active archives.
-  DOWN-RIGHT's later arm repair and the new DOWN-LEFT still carry IN REVIEW.
+  DOWN-LEFT now carries APPROVED; DOWN-RIGHT's later arm repair remains IN REVIEW.
 - `browser.png`, `frame3-browser.png`, `frame5-browser.png`, `frame7-browser.png`,
   `slow-browser.png`: actual browser review evidence.
 
 Visual inspection covers normal cadence, the two passing poses 3/7, the opposite
 contact 5 and all eight silhouettes. Two limbs remain readable, with compact
 boots and no clipping. Contact phases 1/2 and 4/5/6 have similar poses, reflecting
-the reference timing; generated small contour/boot differences remain. This is
-a review candidate, not a claim of perfect anatomy or automatic visual approval.
+the reference timing; generated small contour/boot differences remain. This
+candidate was subsequently approved by the user.
 The rejected colored sheet does not prove the final animation's leg identity.
+
+`approved-browser.png` records the approved status in the current browser.
+Acceptance changes preview labels and metadata only; all eight approved farmer
+drawings and all 72 earlier native frames retain their original file hashes.
+The previous engine PASS applies to the unchanged game; no engine suite rerun
+was needed for this acceptance record.
 
 ## Checks
 

@@ -15,7 +15,18 @@ def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 def build():
-    frames, sampling = sample('down-left', 'materials-r1.png', 'frames')
+    approval_path = HERE / 'approval.json'
+    approval = json.loads(approval_path.read_text()) if approval_path.exists() else None
+    approved = approval is not None and approval['status'] == 'approved'
+    status_path = PILOT / 'directions-status.json'
+    status = json.loads(status_path.read_text())
+    if approved:
+        paths = sorted((HERE / 'frames').glob('*.png'))
+        assert {p.name: sha(p) for p in paths} == approval['frame_sha256']
+        frames = [Image.open(p).convert('RGBA') for p in paths]
+        sampling = json.loads((HERE / 'frames-sampling.json').read_text())
+    else:
+        frames, sampling = sample('down-left', 'materials-r1.png', 'frames')
     colored, tracking = sample('down-left', 'tracking-eight.png', 'tracking-frames')
     original = Image.open(PILOT / 'walk-down/frames/walk-down-01.png').convert('RGBA')
     normal, slow = [], []
@@ -31,7 +42,7 @@ def build():
             canvas.alpha_composite(image.resize((size, size), Image.Resampling.NEAREST),
                                    (x, 108 if size == 160 else 92))
         caption(draw, (25, 315), '80px canvas / artwork ~64px / integer 2x', 14)
-        caption(draw, (25, 347), 'Preview only - awaiting visual approval', 14)
+        caption(draw, (25, 347), 'Approved DOWN-LEFT / 2026-10-05' if approved else 'Preview only - awaiting visual approval', 14)
         caption(draw, (25, 388), f'Frame {i+1:02} / 08', 17)
         normal.append(canvas.convert('RGB'))
         detail = Image.new('RGBA', (900, 395), '#20292c')
@@ -39,7 +50,7 @@ def build():
         for x, im, label in [(20, opposite, 'DOWN-RIGHT REFERENCE'), (450, frame, 'DOWN-LEFT DIRECTION EDIT')]:
             caption(dd, (x, 15), label, 17)
             detail.alpha_composite(im.resize((320, 320), Image.Resampling.NEAREST), (x, 45))
-        caption(dd, (20, 370), f'Frame {i+1} / 8 / slow comparison / awaiting review', 15)
+        caption(dd, (20, 370), f'Frame {i+1} / 8 / slow comparison / '+('DOWN-LEFT approved' if approved else 'awaiting review'), 15)
         slow.append(detail.convert('RGB'))
     save_gif(normal, HERE / 'walk-down-left.gif', 100)
     save_gif(slow, HERE / 'walk-down-left-slow.gif', 200)
@@ -73,23 +84,24 @@ def build():
             x = j*180
             caption(draw, (x+12, 55), direction.upper(), 16)
             canvas.alpha_composite(all_frames[direction][i].resize((160, 160), Image.Resampling.NEAREST), (x, 82))
-            caption(draw, (x+12, 245), 'IN REVIEW' if direction in ['down-right', 'down-left'] else 'APPROVED', 13)
+            accepted = approved if direction == 'down-left' else status[f'walk_{direction.replace("-", "_")}']['status'] == 'approved'
+            caption(draw, (x+12, 245), 'APPROVED' if accepted else 'IN REVIEW', 13)
         combined.append(canvas.convert('RGB'))
     save_gif(combined, HERE / 'all-eight-walk-directions.gif', 100)
     combined[0].save(HERE / 'all-eight-poster.png')
     baseline = json.loads((HERE / 'baseline.json').read_text())
     assert len(baseline) == 72
     assert all(sha(PILOT / name) == value for name, value in baseline.items())
-    sampling.update(status='awaiting user visual approval', date='2026-10-05',
+    sampling.update(status='approved' if approved else 'awaiting user visual approval', date='2026-10-05',
         frames=8, fps=10, fhd_display_scale=2, gif_duration_ms=100,
         slow_duration_ms=200, existing_native_frames_unchanged=72,
         rejected_tracking_sampling=tracking, runtime_integrated=False,
         limits='Format, scope and unique drawings do not prove anatomy, smoothness or user approval.')
     sampling['frame_file_sha256'] = {p.name: sha(p) for p in sorted((HERE / 'frames').glob('*.png'))}
+    if approved:
+        sampling.update(approval_date=approval['date'], user_feedback=approval['user_feedback'])
     (HERE / 'validation.json').write_text(json.dumps(sampling, indent=2) + '\n')
-    status_path = PILOT / 'directions-status.json'
-    status = json.loads(status_path.read_text())
-    status['walk_down_left'].update(status='awaiting_approval', frames=8, fps=10,
+    status['walk_down_left'].update(status='approved' if approved else 'awaiting_approval', frames=8, fps=10,
         review='walk-down-left/index.html', selected_source='materials-r1.png',
         workflow='Rotate/contact probes; reject colored transitions and full colored cycle; built-in per-pose direction edit of existing opposite-diagonal eight-phase animation.',
         tracking_gate='FAILED: diagnostic attempt rejected; final source does not use its poses.')
@@ -128,10 +140,16 @@ document.getElementById('final').src=`frames/walk-down-left-${n}.png`;
 document.getElementById('previous').onclick=()=>show(-1);
 document.getElementById('next').onclick=()=>show(1);
 </script></html>'''
+    if approved:
+        html = html.replace('walk-down-left.gif?v=dl-r1', 'walk-down-left.gif?v=dl-approved-r1')
+        html = html.replace('DOWN-RIGHT arm repair and DOWN-LEFT await review.',
+                            'DOWN-LEFT approved. DOWN-RIGHT arm repair awaits review.')
+        html = html.replace('Preview only — awaiting your approval.',
+                            'DOWN-LEFT approved by you on 2026-10-05.')
     (HERE / 'index.html').write_text(html, encoding='utf-8')
     print(json.dumps({'heights': [m['height'] for m in sampling['frames_metrics']],
         'hat_widths': [m['hat_region_width'] for m in sampling['frames_metrics']],
-        'unchanged_existing_frames': 72, 'status': 'awaiting approval'}))
+        'unchanged_existing_frames': 72, 'status': 'approved' if approved else 'awaiting approval'}))
 
 if __name__ == '__main__':
     build()

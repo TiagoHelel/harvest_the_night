@@ -123,7 +123,7 @@
       "sha256": "30579c7a40df2f59172f76eccbd595fc86dc28933209a7bfdd10ab56fd0744dc"
     }
   ],
-  "status": "awaiting user visual approval",
+  "status": "approved",
   "date": "2026-10-05",
   "frames": 8,
   "fps": 10,
@@ -268,5 +268,7 @@
     "walk-down-left-06.png": "919116fc1b881521efafc24e2a14c2ff61016e9c816b03f6915913a81cbd68d3",
     "walk-down-left-07.png": "e8f0301b35cdeacbc4b233db0deb0ecc9dc0e375c591331ea8d97a088f8f73b8",
     "walk-down-left-08.png": "22a399622f2b745d66ac0413a49be629612ad0f0fc96be33c08f1f6997de9bb8"
-  }
+  },
+  "approval_date": "2026-10-05",
+  "user_feedback": "caralho perfeitooo"
 }

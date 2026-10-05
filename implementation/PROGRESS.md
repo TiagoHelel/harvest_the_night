@@ -11700,3 +11700,22 @@ to 300s suite target), 7768 headless asserts, 1006 input cases, both exports PAS
 Sim 1270427719 and data 8148086 unchanged. Full engine-check.log retained. Sprite
 queue and diff checks PASS; completed queues unchanged. Preview-only follow-up;
 no new backlog claim, simulation edits, project.godot staging, push or automation.
+
+
+## FHD walking review — DOWN-LEFT accepted — 2026-10-05
+
+The user approved the exact eight-frame DOWN-LEFT materials-r1 candidate.
+walk-down-left/approval.json freezes the eight file hashes and feedback.
+directions-status.json, validation.json and the generation record now mark it
+approved. The creation order has no remaining directions; the existing separate
+DOWN-RIGHT frame4 arm-repair review remains pending and was not auto-approved.
+
+Preview labels, normal/slow GIFs and the eight-direction overview now show
+DOWN-LEFT as APPROVED. The approved export path reads the existing PNGs and
+checks their acceptance hashes rather than resampling them. All eight accepted
+frame files and all 72 preceding native files unchanged. Actual browser proof:
+implementation/fhd-player/pilots/2026-10-04/walk-down-left/approved-browser.png.
+GIF format/timing checks and sprite queue check PASS; diff --check PASS.
+Previous engine 55-check PASS retained for unchanged game files; no new engine
+suite run for metadata/label acceptance. No generation, runtime promotion,
+queue mutation, project.godot staging, push or new activity animation.
