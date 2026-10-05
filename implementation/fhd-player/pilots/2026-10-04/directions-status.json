@@ -13,7 +13,21 @@
   "walk_down": {
     "status": "approved",
     "user_feedback": "lindo, perfeito",
-    "date": "2026-10-04"
+    "date": "2026-10-04",
+    "size_refinement_review": {
+      "date": "2026-10-05",
+      "status": "awaiting_approval",
+      "user_feedback": "Down looks smaller than the other directions; regenerate it first, then repaint trousers.",
+      "candidate": "walk-down-size-review/down-r3/frames",
+      "preview": "walk-down-size-review/index.html?v=down-r3",
+      "native_height_range": [
+        63,
+        65
+      ],
+      "original_approved_frames_retained": true,
+      "palette_harmonization": "deferred until after down approval",
+      "runtime_integrated": false
+    }
   },
   "walk_right": {
     "status": "approved",
@@ -164,6 +178,7 @@
     }
   },
   "pending_reviews": [
-    "down-right"
+    "down-right",
+    "down-size-refinement"
   ]
 }

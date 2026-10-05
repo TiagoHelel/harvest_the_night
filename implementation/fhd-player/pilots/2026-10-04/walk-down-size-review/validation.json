@@ -1,0 +1,204 @@
+{
+  "date": "2026-10-05",
+  "status": "awaiting_approval",
+  "source": "down-r3.png",
+  "source_sha256": "714aa9813b932b876b283ec816624c8b7733296a7cb2e2eb83ce6f37885375d9",
+  "source_size": [
+    1774,
+    887
+  ],
+  "source_col_cuts": [
+    0,
+    444,
+    887,
+    1330,
+    1774
+  ],
+  "source_row_cuts": [
+    0,
+    446,
+    887
+  ],
+  "common_source_scale": 0.17391304347826086,
+  "native_canvas": [
+    80,
+    80
+  ],
+  "target_height": 64,
+  "normal_display_scale": 2,
+  "detail_display_scale": 4,
+  "alpha_threshold": 128,
+  "sampling": "nearest, common scale across all8 poses, hat-center/top8 anchor",
+  "candidate_frames": "down-r3/frames",
+  "frames_metrics": [
+    {
+      "frame": 1,
+      "bbox": [
+        23,
+        8,
+        56,
+        72
+      ],
+      "height": 64,
+      "hat_width": 33,
+      "sha256": "c82cbd6cf0887e2c5a7cd4076459b29b8084c951f56eb57fd46dfb6ebdb23c0c",
+      "torso_and_arms_width": 29
+    },
+    {
+      "frame": 2,
+      "bbox": [
+        24,
+        8,
+        57,
+        72
+      ],
+      "height": 64,
+      "hat_width": 33,
+      "sha256": "07866f105cba410837fab72f7389ab32dc1aacdca8c8fa9670d580e46ca42942",
+      "torso_and_arms_width": 30
+    },
+    {
+      "frame": 3,
+      "bbox": [
+        23,
+        8,
+        56,
+        71
+      ],
+      "height": 63,
+      "hat_width": 33,
+      "sha256": "402c2a0d47e0b0f81b9e53c9b023a2a6548ec9c9380e06caf0b696bfd6b91fc1",
+      "torso_and_arms_width": 29
+    },
+    {
+      "frame": 4,
+      "bbox": [
+        23,
+        8,
+        56,
+        73
+      ],
+      "height": 65,
+      "hat_width": 33,
+      "sha256": "0d4c9769e7246d97b6b8bf56b18125ec0241a9fec77bbf96bdb9c03f9a486f99",
+      "torso_and_arms_width": 29
+    },
+    {
+      "frame": 5,
+      "bbox": [
+        23,
+        8,
+        56,
+        72
+      ],
+      "height": 64,
+      "hat_width": 33,
+      "sha256": "b9d2d94264437b3d2051e4f3f1406e2054268ee4d36c062416f5166236e997d9",
+      "torso_and_arms_width": 30
+    },
+    {
+      "frame": 6,
+      "bbox": [
+        24,
+        8,
+        57,
+        73
+      ],
+      "height": 65,
+      "hat_width": 33,
+      "sha256": "c4482b89d332df2086d1535edecf8ab3bbe59a051d2097b1f49dc7ced7c653da",
+      "torso_and_arms_width": 30
+    },
+    {
+      "frame": 7,
+      "bbox": [
+        23,
+        8,
+        56,
+        73
+      ],
+      "height": 65,
+      "hat_width": 33,
+      "sha256": "cb112be6ef2480094ed013cababa809f5a4a438b22ed03dd2cb72f416b7c9634",
+      "torso_and_arms_width": 29
+    },
+    {
+      "frame": 8,
+      "bbox": [
+        23,
+        8,
+        56,
+        72
+      ],
+      "height": 64,
+      "hat_width": 33,
+      "sha256": "e50aa3e610fdf790ab4e73278e23c982bd3961abed6924ce0d7d354a5f634f84",
+      "torso_and_arms_width": 29
+    }
+  ],
+  "existing_selected_frames_unchanged": 64,
+  "normal_ms": 100,
+  "slow_ms": 200,
+  "loop": 0,
+  "runtime_integrated": false,
+  "palette_harmonization": "deferred by user",
+  "limits": "Native geometry/format checks do not prove gait coherence or user approval.",
+  "gif_checks": {
+    "walk-down-size-review.gif": {
+      "dimensions": [
+        990,
+        440
+      ],
+      "frames": 8,
+      "duration_ms": 100,
+      "loop": 0,
+      "sha256": "a54d813434ef5b5c0bcc98d4c2eadd8c052716de2315c266edb691f693a1d732"
+    },
+    "walk-down-size-slow.gif": {
+      "dimensions": [
+        1040,
+        390
+      ],
+      "frames": 8,
+      "duration_ms": 200,
+      "loop": 0,
+      "sha256": "58241bd0843df0cecd8564928653930cbe2e4371010dac9d96e063d3c9a22067"
+    },
+    "all-eight-with-new-down.gif": {
+      "dimensions": [
+        1440,
+        280
+      ],
+      "frames": 8,
+      "duration_ms": 100,
+      "loop": 0,
+      "sha256": "245259ccdb8259d8348b56c229fb6ad064c562a9cc19b67ddde2362a565c87c5"
+    }
+  },
+  "visual_review": {
+    "body_volume": "Fuller frontal bib, sleeves and limbs compared at identical integer2x scale.",
+    "height_range": [
+      63,
+      65
+    ],
+    "hat_width": 33,
+    "right_reference_hat_width": "30-31 native pixels; front view is wider.",
+    "gait": "R3 keeps the original pose progression; support changes between halves. R1/R2 rejected for repeated/early switching support.",
+    "limits": "Front arms remain subtle. No perfect-motion claim; user size and animation approval is pending.",
+    "actual_preview": "index.html?v=down-r3, normal10FPS plus manual controls; browser.png",
+    "game_capture": "Not integrated; browser review only."
+  },
+  "engine_verification": {
+    "passed": 55,
+    "skipped": 0,
+    "failed": 0,
+    "duration_s": 500,
+    "suite_budget": "OVER BUDGET",
+    "headless_asserts": 7768,
+    "input_cases": 1006,
+    "exports": "PASS",
+    "sim_hash": 1270427719,
+    "data_hash": 8148086,
+    "log": "engine-check.log"
+  }
+}

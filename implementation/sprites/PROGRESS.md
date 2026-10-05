@@ -2929,3 +2929,39 @@ GIF format/timing checks and sprite queue check PASS; diff --check PASS.
 Previous engine 55-check PASS retained for unchanged game files; no new engine
 suite run for metadata/label acceptance. No generation, runtime promotion,
 queue mutation, project.godot staging, push or new activity animation.
+
+
+## FHD walking review — regenerated DOWN size candidate — 2026-10-05
+
+The user requested a larger-looking DOWN first and explicitly deferred trousers
+palette harmonization. Generated a new frontal eight-frame candidate through
+built-in image_gen.imagegen using approved RIGHT and DOWN-LEFT identity/volume
+references plus the original DOWN poses. All exact prompts, reference hashes,
+raw source hashes and call metadata are saved under walk-down-size-review.
+Sources: assets/art_source/player-fhd/pilots/2026-10-04/walk-down-size-review/.
+Review: implementation/fhd-player/pilots/2026-10-04/walk-down-size-review/.
+
+R1 improved body volume but repeatedly extended the same support leg. R2 did
+not follow the colored leg-height guide continuously and was also rejected.
+R3 refines the original DOWN poses and is selected for explicit user review.
+Its native80x80 frames have height63-65px and hat33px wide; RIGHT height63-65,
+hat30-31. Frontal bib, sleeves and limbs are fuller without enlarging the display
+scale. One common nearest source scale, alpha threshold128 and top8/hat-center
+anchor only; no per-limb paint, warping or mirrored farmer art. Two support sides
+are visible across the cycle. Front arm swing remains subtle, so this is a size
+candidate, not a perfect-gait claim. User approval is pending.
+
+Normal990x440 GIF and all-eight1440x280 GIF: eight frames,100ms, infinite loop.
+Slow1040x390 GIF: eight frames,200ms. Actual browser normal playback and manual
+frames5/8 inspected; browser.png and browser-frame05/08.png are retained.
+The HTML includes original/new/RIGHT at identical integer2x display and4x detail.
+All64 previously selected frame file hashes remain unchanged. The original DOWN
+approval remains historical; its new size_refinement_review is awaiting approval.
+No game integration or palette remap, and DOWN-RIGHT's separate arm review remains
+pending. Palette audit files from the prior turn are not part of this change.
+
+Required engine suite PASS:55 passed,0 skipped,0 failed in500s (OVER BUDGET versus
+300s suite target),7768 headless asserts,1006 input cases, both exports PASS.
+Sim1270427719/data8148086 unchanged. engine-check.log retained. Sprite queue
+check PASS:20 prompts. GIF/native-format checks PASS; diff --check PASS.
+Completed queues unchanged; no project.godot staging, push or automation.

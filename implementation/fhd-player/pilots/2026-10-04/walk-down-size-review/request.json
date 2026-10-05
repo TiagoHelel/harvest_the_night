@@ -1,0 +1,22 @@
+{
+  "date": "2026-10-05",
+  "status": "awaiting_approval",
+  "feedback": "DOWN appears smaller than other directions; regenerate DOWN first, pants recoloring later.",
+  "scope": "New eight-pose front-facing DOWN candidate; preserve all64 selected original frames.",
+  "display": "Same 80x80 cells, integer2x normal display; target body64px and hat31-32px.",
+  "palette_harmonization": "deferred by user",
+  "runtime_integrated": false,
+  "selected_source": "down-r3.png",
+  "candidate": "down-r3/frames",
+  "preview": "index.html?v=down-r3",
+  "candidate_frame_sha256": {
+    "walk-down-01.png": "c82cbd6cf0887e2c5a7cd4076459b29b8084c951f56eb57fd46dfb6ebdb23c0c",
+    "walk-down-02.png": "07866f105cba410837fab72f7389ab32dc1aacdca8c8fa9670d580e46ca42942",
+    "walk-down-03.png": "402c2a0d47e0b0f81b9e53c9b023a2a6548ec9c9380e06caf0b696bfd6b91fc1",
+    "walk-down-04.png": "0d4c9769e7246d97b6b8bf56b18125ec0241a9fec77bbf96bdb9c03f9a486f99",
+    "walk-down-05.png": "b9d2d94264437b3d2051e4f3f1406e2054268ee4d36c062416f5166236e997d9",
+    "walk-down-06.png": "c4482b89d332df2086d1535edecf8ab3bbe59a051d2097b1f49dc7ced7c653da",
+    "walk-down-07.png": "cb112be6ef2480094ed013cababa809f5a4a438b22ed03dd2cb72f416b7c9634",
+    "walk-down-08.png": "e50aa3e610fdf790ab4e73278e23c982bd3961abed6924ce0d7d354a5f634f84"
+  }
+}

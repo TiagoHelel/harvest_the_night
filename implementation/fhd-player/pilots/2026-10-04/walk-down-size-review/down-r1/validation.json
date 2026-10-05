@@ -1,0 +1,146 @@
+{
+  "date": "2026-10-05",
+  "status": "awaiting_approval",
+  "source": "down-r1.png",
+  "source_sha256": "99013ad800d5b43a4837a929bf41c68b3b8cc9bcbd0a52240235df85c7e45bab",
+  "source_size": [
+    1774,
+    887
+  ],
+  "source_col_cuts": [
+    0,
+    444,
+    887,
+    1330,
+    1774
+  ],
+  "source_row_cuts": [
+    0,
+    442,
+    887
+  ],
+  "common_source_scale": 0.1671018276762402,
+  "native_canvas": [
+    80,
+    80
+  ],
+  "target_height": 64,
+  "normal_display_scale": 2,
+  "detail_display_scale": 4,
+  "alpha_threshold": 128,
+  "sampling": "nearest, common scale across all8 poses, hat-center/top8 anchor",
+  "candidate_frames": "down-r1/frames",
+  "frames_metrics": [
+    {
+      "frame": 1,
+      "bbox": [
+        24,
+        8,
+        56,
+        72
+      ],
+      "height": 64,
+      "hat_width": 32,
+      "sha256": "25da57339dde73097558291ad4c11e8cc6a39c48733b2b14408fc4a79ac866b9",
+      "torso_and_arms_width": 27
+    },
+    {
+      "frame": 2,
+      "bbox": [
+        24,
+        8,
+        56,
+        72
+      ],
+      "height": 64,
+      "hat_width": 32,
+      "sha256": "2b1dc90dd5a208f9496ab33b53e83bb82c5c98ceb70bd0247fbf47613c9bb0a0",
+      "torso_and_arms_width": 27
+    },
+    {
+      "frame": 3,
+      "bbox": [
+        24,
+        8,
+        56,
+        72
+      ],
+      "height": 64,
+      "hat_width": 32,
+      "sha256": "ffc5d5ce9a385750e2ccc811e6f82e822323f5b840dcbe48a71db24c359ceecf",
+      "torso_and_arms_width": 27
+    },
+    {
+      "frame": 4,
+      "bbox": [
+        23,
+        8,
+        55,
+        72
+      ],
+      "height": 64,
+      "hat_width": 32,
+      "sha256": "c46508a98e30143621d778ef1a329c41933dc576883159f850922a5a74e1b9b6",
+      "torso_and_arms_width": 27
+    },
+    {
+      "frame": 5,
+      "bbox": [
+        24,
+        8,
+        55,
+        72
+      ],
+      "height": 64,
+      "hat_width": 31,
+      "sha256": "dd634f91ce7a05f977ee43e3711b7260b979f66f168bc9841ec1ea9a39ba18b6",
+      "torso_and_arms_width": 29
+    },
+    {
+      "frame": 6,
+      "bbox": [
+        24,
+        8,
+        56,
+        72
+      ],
+      "height": 64,
+      "hat_width": 32,
+      "sha256": "18bdef0a55c09f519c1e38bcbb99a091d1b11cd732283dd702fe2e925d39d492",
+      "torso_and_arms_width": 28
+    },
+    {
+      "frame": 7,
+      "bbox": [
+        24,
+        8,
+        56,
+        72
+      ],
+      "height": 64,
+      "hat_width": 32,
+      "sha256": "c49d43e6e6e8548fae0f7fe47ee461e4df8a3adcd2334045c2aa35771d0c1891",
+      "torso_and_arms_width": 28
+    },
+    {
+      "frame": 8,
+      "bbox": [
+        24,
+        8,
+        56,
+        72
+      ],
+      "height": 64,
+      "hat_width": 32,
+      "sha256": "922d7dbfb0b164c0c83b0ace8ce4d9d1187f321a82b11f7b59469643be7384b9",
+      "torso_and_arms_width": 28
+    }
+  ],
+  "existing_selected_frames_unchanged": 64,
+  "normal_ms": 100,
+  "slow_ms": 200,
+  "loop": 0,
+  "runtime_integrated": false,
+  "palette_harmonization": "deferred by user",
+  "limits": "Native geometry/format checks do not prove gait coherence or user approval."
+}

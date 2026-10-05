@@ -1,0 +1,18 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>New DOWN size review</title><style>body{background:#182426;color:#e9e3cf;font:17px Consolas,monospace;margin:20px}
+h1{font-size:23px}a{color:#98dcd6}img{image-rendering:pixelated}.overflow{overflow-x:auto;margin:20px 0}.frames{display:flex;gap:20px}
+.frames img{width:320px;height:320px;background:#303a3e}summary{cursor:pointer}details{margin:25px 0}
+button{background:#344b48;color:#e9e3cf;border:1px solid #75958d;padding:12px;font:inherit;margin:16px 8px 16px 0}</style>
+<h1>Regenerated WALK DOWN — size and body proportions</h1><p>OLD DOWN, NEW DOWN and approved RIGHT shown at the same integer 2x scale. Eight frames at 10 FPS.</p>
+<div class="overflow"><img src="walk-down-size-review.gif?v=down-r3" width="990" height="440" alt="Old and new down compared with right"></div>
+<details><summary>Inspect individual frames</summary><button id="previous">Previous</button><button id="next">Next</button><span id="number">Frame 1 / 8</span>
+<div class="overflow frames"><div>OLD DOWN<br><img id="old" src="../walk-down/frames/walk-down-01.png"></div><div>NEW DOWN<br><img id="new" src="down-r3/frames/walk-down-01.png"></div><div>RIGHT<br><img id="right" src="../walk-right/frames/walk-right-01.png"></div></div></details>
+<details><summary>Slow before-and-after comparison</summary><div class="overflow"><img src="walk-down-size-slow.gif?v=down-r3" width="1040" height="390"></div></details>
+<details><summary>All eight with the new down</summary><div class="overflow"><img src="all-eight-with-new-down.gif?v=down-r3" width="1440" height="280"></div></details>
+<details><summary>Eight-frame contact sheet</summary><div class="overflow"><img src="contact-sheet.png" width="1280" height="400"></div></details>
+<p>Awaiting your approval. Pants palette harmonization is the next separate step.</p>
+<p><a href="validation.json">Measurements and source</a> · <a href="down-r3.prompt.json">Generation prompt</a></p>
+<script>let i=0;function show(d){i=(i+d+8)%8;const n=String(i+1).padStart(2,'0');document.getElementById('number').textContent=`Frame ${i+1} / 8`;
+document.getElementById('old').src=`../walk-down/frames/walk-down-${n}.png`;document.getElementById('new').src=`down-r3/frames/walk-down-${n}.png`;
+document.getElementById('right').src=`../walk-right/frames/walk-right-${n}.png`;}
+document.getElementById('previous').onclick=()=>show(-1);document.getElementById('next').onclick=()=>show(1);</script></html>

@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-05",
+  "mode": "built-in image_gen.imagegen; identity-preserve edit",
+  "arguments": {
+    "prompt": "Precise identity-preserve EDIT of image1, the original EIGHT FRAME front-facing walking farmer. Preserve EACH cell's exact existing walking pose and frame order: torso location, hip roots, knee bends, both feet pixel silhouettes and positions, both hands' positions and arm gesture. Do NOT invent a new walking cycle, shuffle or interchange any legs. One-to-one eight existing poses kept intact. Improve ONLY the proportional body volume/rendering to make this front-facing farmer look the same size and same character as the approved RIGHT farmer in image2 and frontthreequarter farmer in image3. The original in image1 is too thin/small-looking and softly shaded: thicken each arm by about1nativepixel, each trouser leg by about1nativepixel, bib byabout2nativepixels total, frontal shoulders naturally wider than profile. Keep compact ankle boots same original pose, add a little volume without changing sole placement. Keep body64nativepixels tall, hat31-32wide, head SAME ORIGINAL small proportional size, don't enlarge head into chibi. Maintain adult slim proportions, crisp large connected pixelclusters and dark outline, no gradients or smoothillustration. SAME farmer clothing strawhat brownband,reddishbrownhair, whiteshirt, blueoveralls,goldbuttons,brownankleboots. Eyes small straight forward whitesclera blackbrownpupils, samefaceimage3. The hat of image1 already matches the reference size; keep that size. Keep the original gait carefully, especially the smooth leg recovery and alternating support from first half to second half. Image2/3 identity and thickness/style references ONLY, must not change direction to profile/diagonal. Output exactly4columns2rows likeimage1, exactly8whole sprites in same poses, genuine transparent alpha margins, no text/no guides/no background/no shadows. This is a proportional refinement of image1 and all 8 original poses must be retained. No global palette work on other directions.",
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/walk-down-size-review/old-down-eight.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/walk-down-size-review/right-eight-reference.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/walk-down-size-review/down-left-eight-reference.png"
+    ],
+    "transparent_background": true
+  },
+  "original_output_path": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-6b205c55-9869-45b9-bbe4-3aaf496743cf.png",
+  "saved_source": "assets/art_source/player-fhd/pilots/2026-10-04/walk-down-size-review/down-r3.png",
+  "source_sha256": "714aa9813b932b876b283ec816624c8b7733296a7cb2e2eb83ce6f37885375d9",
+  "dimensions": [
+    1774,
+    887
+  ],
+  "references": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/walk-down-size-review/old-down-eight.png",
+      "sha256": "a1bd7ba0b8fb4614ce417b0646b5b573b18ccfefdbd791a1576bf34e0684ba25"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/walk-down-size-review/right-eight-reference.png",
+      "sha256": "dea36c8e24feb7a2c59f121ec56a143c4d23d1a1bf524e2061bed6eda75998b3"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/walk-down-size-review/down-left-eight-reference.png",
+      "sha256": "9190b4a6d12bead6998aa21b15beccb3a6dda36fc715bb872a8bf21acb7e88b9"
+    }
+  ],
+  "status": "awaiting_approval",
+  "runtime_integrated": false,
+  "visual_result": "Selected size review candidate; original front gait retained as reference."
+}
