@@ -1,7 +1,7 @@
 {
   "tool": "built-in ImageGen",
   "date": "2026-10-04",
-  "status": "awaiting approval: R6 frames7/8 only",
+  "status": "approved: R6 frames7/8",
   "source_directory": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right",
   "transparent_background": true,
   "workflow_reference": "sprite_generator/welcome_back_hero/prepare_ranger_transition.py: rotate first, fixed hip color ownership, isolated opposite contacts, two four-frame transitions",
@@ -337,5 +337,9 @@
       8
     ],
     "feedback": "leg appears to hold before lowering; redo only7/8"
+  },
+  "approval": {
+    "date": "2026-10-05",
+    "feedback": "aprovado"
   }
 }

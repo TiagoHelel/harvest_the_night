@@ -1,4 +1,8 @@
-# Walk up-right: frames7/8 R6 motion review
+# Walk up-right: frames7/8 R6 approved
+
+User approved the R6 frames7/8 correction on2026-10-05 with "aprovado".
+The earlier review history below is retained.
+
 
 The latest request changes only frames7 and8 because the leg appeared to hold
 before lowering. Built-in ImageGen produced recovery-07-08-r1.png from a two-cell

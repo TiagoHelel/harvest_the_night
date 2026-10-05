@@ -24,7 +24,6 @@
     "date": "2026-10-04"
   },
   "remaining": [
-    "up-left",
     "down-left"
   ],
   "runtime_integration": "not requested at this review stage",
@@ -53,13 +52,22 @@
     "date": "2026-10-04"
   },
   "walk_up_right": {
-    "status": "awaiting_approval",
+    "status": "approved",
     "date": "2026-10-05",
     "candidate": "walk-up-right/materials-r5 + recovery-07-08-r1 overrides",
     "preview": "walk-up-right/up-diagonal-recovery-r6.gif",
     "diagnostic": "walk-up-right/recovery-before-after-r6.gif",
-    "user_feedback": "redo only frames7/8: leg appears to hold before lowering",
+    "user_feedback": "aprovado",
     "rejected_candidate": "walk-up-right/materials-r3",
-    "feedback_addressed": "Only frames7/8 replaced; frame8 now reaches and lowers instead of holding phase7. Frames1-6 unchanged."
+    "feedback_addressed": "Only frames7/8 replaced; frame8 now reaches and lowers instead of holding phase7. Frames1-6 unchanged.",
+    "approval_date": "2026-10-05"
+  },
+  "walk_up_left": {
+    "status": "awaiting_approval",
+    "date": "2026-10-05",
+    "candidate": "walk-up-left/materials-r2 + recovery-r3 overrides7/8",
+    "preview": "walk-up-left/up-diagonals-comparison-r3.gif",
+    "diagnostic": "walk-up-left/gait-comparison-slow.gif",
+    "feedback_addressed": "Directional reuse of approved UP-RIGHT R6; rear-left rotation locked; opposite recovery7/8 restored."
   }
 }

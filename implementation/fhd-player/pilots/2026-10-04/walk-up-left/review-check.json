@@ -1,0 +1,59 @@
+{
+  "result": "PASS",
+  "approved_frames_unchanged": 48,
+  "first_six_preserved_from_r2": true,
+  "unique_frames": 8,
+  "rgba_canvas": [
+    80,
+    80
+  ],
+  "alpha": "binary; transparent outside silhouette",
+  "normal_durations_ms": [
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100
+  ],
+  "slow_durations_ms": [
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200
+  ],
+  "native_heights": [
+    64,
+    64,
+    62,
+    63,
+    64,
+    64,
+    64,
+    64
+  ],
+  "native_hat_widths": [
+    33,
+    32,
+    32,
+    32,
+    33,
+    33,
+    32,
+    31
+  ],
+  "runtime_integration": false,
+  "engine_suite": "Not rerun for isolated preview; prior full PASS in ../walk-up-right/verify-result.json does not establish visual quality.",
+  "browser_evidence": "browser-review-r3.png",
+  "browser_manual_frames_inspected": [
+    7,
+    8,
+    1
+  ]
+}

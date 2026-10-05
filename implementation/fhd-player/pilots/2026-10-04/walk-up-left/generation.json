@@ -1,0 +1,87 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-05",
+  "status": "awaiting user approval",
+  "transparent_background": true,
+  "source_directory": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-left",
+  "workflow_reference": "sprite_generator/welcome_back_hero/champion/hero-generation-plan.md: rotate before animating; reuse right-facing gait by per-cell reflection when handedness is irrelevant. No held props in this walk.",
+  "calls": [
+    {
+      "prompt": "rotation-r1.prompt.txt",
+      "source": "rotation-r1.png",
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-126b09cc-ee32-4033-8721-eb49fc575c8f.png",
+      "references": [
+        "../walk-up-right/rotation-r1.png",
+        "approved-up-right-r6-reference.png"
+      ],
+      "dimensions": [
+        1086,
+        1448
+      ],
+      "sha256": "e4d2e5fcdece0b890b15aa10a3417107e130c39a56fbc00f94b5a5d3efd88379",
+      "review": "Rear-left neutral master established before animation."
+    },
+    {
+      "prompt": "materials-r1.prompt.txt",
+      "source": "materials-r1.png",
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-8c392af2-0ade-4911-909d-cead2f1767d2.png",
+      "references": [
+        "approved-up-right-r6-reference.png",
+        "rotation-r1.png"
+      ],
+      "dimensions": [
+        1774,
+        887
+      ],
+      "sha256": "d87d0b0109472d6c8561dbb299243a69cebf1b7eb12049274aaa3b080f10afb9",
+      "review": "Rejected: bottom row still faces up-right."
+    },
+    {
+      "prompt": "materials-r2.prompt.txt",
+      "source": "materials-r2.png",
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-76f89e74-9c0d-4aaf-912c-aff95acc8e3e.png",
+      "references": [
+        "materials-r1.png",
+        "rotation-r1.png",
+        "approved-up-right-r6-reference.png"
+      ],
+      "dimensions": [
+        1774,
+        887
+      ],
+      "sha256": "ec70b5a037b7ae087f34f52b72f861377eb4cef1a8ee5fcc0d30537aa0c2bb53",
+      "review": "Rear-left rotation consistent in all8; selected1-6. Passing7 repeated support leg from3, and8 failed the opposite recovery; replaced7/8."
+    },
+    {
+      "prompt": "recovery-r3.prompt.txt",
+      "source": "recovery-r3.png",
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-d5bda0c2-cd83-40ad-9af2-3c61ce0c5a8d.png",
+      "references": [
+        "../walk-up-right/recovery-07-08-r1.png",
+        "rotation-r1.png",
+        "phase-06-01-context.png"
+      ],
+      "dimensions": [
+        1774,
+        887
+      ],
+      "sha256": "397cc49a0165905df96b5f1017ea8bb16b99b155f91e9c526a4d8b3b51e76c64",
+      "review": "Selected7/8: near left knee and boot recover while far right leg supports;8 unfolds/lowers into1. User review pending."
+    }
+  ],
+  "selected_source": "materials-r2.png + recovery-r3.png for7/8",
+  "selected_preview": "up-diagonals-comparison-r3.gif",
+  "native_overrides": {
+    "frames": [
+      7,
+      8
+    ],
+    "source": "recovery-r3.png",
+    "pair_common_scale": 0.08387942332896461
+  },
+  "limitations": [
+    "Generated counterpart, not a pixel-exact reflection; small contour and arm-phase differences remain.",
+    "No debug-colored leg anatomy proof claimed for reuse of an approved gait.",
+    "Preview only; no runtime integration."
+  ]
+}

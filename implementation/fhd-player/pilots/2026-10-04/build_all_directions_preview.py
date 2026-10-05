@@ -5,7 +5,7 @@ import json
 from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parent
-DIRECTIONS = ['down', 'right', 'up', 'left', 'down-right', 'up-right']
+DIRECTIONS = ['down', 'right', 'up', 'left', 'down-right', 'up-right', 'up-left']
 STATUS = json.loads((ROOT/'directions-status.json').read_text(encoding='utf-8'))
 DURATION = 100
 SCALE = 2

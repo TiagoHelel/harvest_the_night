@@ -11148,3 +11148,39 @@ and parent six-direction horizontal GIF. Previous versionedR5 GIFs preserved.
 No other walk family, runtime/code, queue or project settings changed; unrelated
 project.godot edit preserved. No engine suite rerun for this isolated correction;
 prior full verification remains documented. Up-right R6 awaits user approval.
+
+
+## 2026-10-05 — Approve up-right R6 and review walking up-left
+
+The user approved the up-right frames7/8 correction with "aprovado". Recorded
+approval in directions-status.json and its pilot metadata without changing any
+approved sprite pixels. Created UP-LEFT only, using the requested sprite_generator
+concepts: rotate first and reuse an approved gait through per-cell directional
+reflection when there are no asymmetric held props. Built-in ImageGen produced
+the rear-left neutral master, then three targeted gait candidates. R1 retained
+wrong-facing bottom cells; R2 fixes orientation but repeats the passing support
+leg. Selected R2 frames1-6 plus the R3 recovery pair7/8. Near left leg recovers
+while far right supports;8 unfolds/lowers into1. No Python artwork repaint,
+reflection or limb deformation; only packing, alpha threshold and nearest scale.
+
+Raw sources: assets/art_source/player-fhd/pilots/2026-10-04/walk-up-left/.
+Exact prompts, raw-original paths, dimensions and SHA256 provenance are saved in
+implementation/fhd-player/pilots/2026-10-04/walk-up-left/generation.json.
+Raw and rejected candidates preserved, with native historical review evidence.
+Current previews: up-diagonals-comparison-r3.gif, gait-comparison-slow.gif,
+idle-walk-up-left.gif, contact-sheet.png, transparent strip and HTML controls in
+that pilot. Updated parent seven-direction horizontal overview and saved a fresh
+all-walk-directions-seven-r1.gif. Browser capture: walk-up-left/browser-review-r3.png.
+
+Validation PASS:8 unique80x80 RGBA frames, binary alpha, unclipped margins,
+normal8x100ms and slow8x200ms loops; visible height62-64px and hat width31-33px.
+All48 already-approved frame PNGs unchanged by SHA256. R2 frames1-6 unchanged
+after the pair override. Inspected raw sources, native contact sheet, normal
+browser playback and manual7,8,1 controls. Small generated contour, boot-angle
+and arm-phase differences remain; this is not a pixel-exact reflected gait and
+no debug-colored anatomy proof is claimed. UP-LEFT awaits explicit user review.
+No runtime, resolution, collision, simulation, balance or queue changes. Engine
+suite not rerun for an isolated preview; prior full PASS remains recorded in
+walk-up-right/verify-result.json, with sim1270427719/data8148086 unchanged.
+Existing unrelated project.godot edits preserved. DOWN-LEFT and game integration
+have not started. No push, public publishing or unattended automation.

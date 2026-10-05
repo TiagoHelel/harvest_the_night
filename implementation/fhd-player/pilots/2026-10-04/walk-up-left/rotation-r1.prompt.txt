@@ -1,0 +1,7 @@
+Use case: identity-preserve.
+Asset: farmer standing UP-LEFT directional master for eight-frame walk.
+Image1: reference image, approved UP-RIGHT neutral master, identity and proportions authority.
+Image2: reference image, newly approved UP-RIGHT R6 eight walking poses, final slim denim and compact boots authority.
+Show exactly the same farmer rotated to UP-LEFT (northwest), three-quarter BACK-LEFT view, away and towards the LEFT. This is the directional counterpart of image1. Back of straw hat, tousled brown hair, cream shirt, blue overall rear straps and two back pockets. No front bib, no frontal face/eye pair. Same farming-camera elevation. No new clothes or props; no asymmetric held tools.
+Neutral stance, separate hips, both feet grounded below their own hips, relaxed arms. Same short slim trouser calves and modest brown ankle-work boots, short toe, flat dark sole, little gold outer ankle stud if visible. No swollen thighs, long legs or large hat. Head and body proportions of the approved R6, target about64 pixels visible height and31-32pixels hat width. Plain clean square pixel clusters with stepped contours, controlled palette. ONE centered fullbody figure with transparent margin.
+Preserve the approved anatomy and volumes while turning toward northwest. No motion pose, labels, text, shadow, floor, scenery, grid or checkerboard. True transparent RGBA background.
