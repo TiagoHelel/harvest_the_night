@@ -1,0 +1,290 @@
+[
+  {
+    "frame": 1,
+    "phase": "R contact / L toe-off",
+    "chains": [
+      {
+        "leg": "far_left",
+        "hip": [
+          190,
+          299
+        ],
+        "knee": [
+          170,
+          382
+        ],
+        "ankle": [
+          150,
+          456
+        ]
+      },
+      {
+        "leg": "near_right",
+        "hip": [
+          220,
+          307
+        ],
+        "knee": [
+          240,
+          370
+        ],
+        "ankle": [
+          260,
+          440
+        ]
+      }
+    ]
+  },
+  {
+    "frame": 2,
+    "phase": "R support / L lift",
+    "chains": [
+      {
+        "leg": "far_left",
+        "hip": [
+          190,
+          299
+        ],
+        "knee": [
+          175,
+          363
+        ],
+        "ankle": [
+          160,
+          430
+        ]
+      },
+      {
+        "leg": "near_right",
+        "hip": [
+          220,
+          307
+        ],
+        "knee": [
+          230,
+          378
+        ],
+        "ankle": [
+          240,
+          446
+        ]
+      }
+    ]
+  },
+  {
+    "frame": 3,
+    "phase": "R under hip / L passing",
+    "chains": [
+      {
+        "leg": "far_left",
+        "hip": [
+          190,
+          299
+        ],
+        "knee": [
+          208,
+          357
+        ],
+        "ankle": [
+          190,
+          414
+        ]
+      },
+      {
+        "leg": "near_right",
+        "hip": [
+          220,
+          307
+        ],
+        "knee": [
+          220,
+          382
+        ],
+        "ankle": [
+          220,
+          452
+        ]
+      }
+    ]
+  },
+  {
+    "frame": 4,
+    "phase": "R trailing / L reach",
+    "chains": [
+      {
+        "leg": "far_left",
+        "hip": [
+          190,
+          299
+        ],
+        "knee": [
+          215,
+          360
+        ],
+        "ankle": [
+          220,
+          419
+        ]
+      },
+      {
+        "leg": "near_right",
+        "hip": [
+          220,
+          307
+        ],
+        "knee": [
+          210,
+          386
+        ],
+        "ankle": [
+          200,
+          458
+        ]
+      }
+    ]
+  },
+  {
+    "frame": 5,
+    "phase": "L contact / R toe-off",
+    "chains": [
+      {
+        "leg": "far_left",
+        "hip": [
+          190,
+          299
+        ],
+        "knee": [
+          210,
+          362
+        ],
+        "ankle": [
+          230,
+          432
+        ]
+      },
+      {
+        "leg": "near_right",
+        "hip": [
+          220,
+          307
+        ],
+        "knee": [
+          200,
+          390
+        ],
+        "ankle": [
+          180,
+          464
+        ]
+      }
+    ]
+  },
+  {
+    "frame": 6,
+    "phase": "L support / R lift",
+    "chains": [
+      {
+        "leg": "far_left",
+        "hip": [
+          190,
+          299
+        ],
+        "knee": [
+          200,
+          370
+        ],
+        "ankle": [
+          210,
+          438
+        ]
+      },
+      {
+        "leg": "near_right",
+        "hip": [
+          220,
+          307
+        ],
+        "knee": [
+          205,
+          371
+        ],
+        "ankle": [
+          190,
+          438
+        ]
+      }
+    ]
+  },
+  {
+    "frame": 7,
+    "phase": "L under hip / R passing",
+    "chains": [
+      {
+        "leg": "far_left",
+        "hip": [
+          190,
+          299
+        ],
+        "knee": [
+          190,
+          374
+        ],
+        "ankle": [
+          190,
+          444
+        ]
+      },
+      {
+        "leg": "near_right",
+        "hip": [
+          220,
+          307
+        ],
+        "knee": [
+          238,
+          365
+        ],
+        "ankle": [
+          220,
+          422
+        ]
+      }
+    ]
+  },
+  {
+    "frame": 8,
+    "phase": "L trailing / R reach",
+    "chains": [
+      {
+        "leg": "far_left",
+        "hip": [
+          190,
+          299
+        ],
+        "knee": [
+          180,
+          378
+        ],
+        "ankle": [
+          170,
+          450
+        ]
+      },
+      {
+        "leg": "near_right",
+        "hip": [
+          220,
+          307
+        ],
+        "knee": [
+          245,
+          368
+        ],
+        "ankle": [
+          250,
+          427
+        ]
+      }
+    ]
+  }
+]

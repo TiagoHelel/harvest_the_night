@@ -1,0 +1,155 @@
+{
+  "source": "tracking-r4.png",
+  "common_scale": 0.14349775784753363,
+  "measurements": [
+    {
+      "frame": 1,
+      "right_red": [
+        -7.819,
+        61.678
+      ],
+      "left_cyan": [
+        -6.207,
+        53.707
+      ]
+    },
+    {
+      "frame": 2,
+      "right_red": [
+        3.827,
+        59.929
+      ],
+      "left_cyan": [
+        4.792,
+        54.517
+      ]
+    },
+    {
+      "frame": 3,
+      "right_red": [
+        7.168,
+        61.358
+      ],
+      "left_cyan": [
+        5.588,
+        55.791
+      ]
+    },
+    {
+      "frame": 4,
+      "right_red": [
+        -4.222,
+        61.127
+      ],
+      "left_cyan": [
+        -0.531,
+        52.384
+      ]
+    },
+    {
+      "frame": 5,
+      "right_red": [
+        -6.167,
+        62.544
+      ],
+      "left_cyan": [
+        -5.388,
+        54.824
+      ]
+    },
+    {
+      "frame": 6,
+      "right_red": [
+        -3.281,
+        60.6
+      ],
+      "left_cyan": [
+        2.608,
+        53.085
+      ]
+    },
+    {
+      "frame": 7,
+      "right_red": [
+        -1.195,
+        63.271
+      ],
+      "left_cyan": [
+        -3.089,
+        55.615
+      ]
+    },
+    {
+      "frame": 8,
+      "right_red": [
+        -8.012,
+        62.365
+      ],
+      "left_cyan": [
+        -7.207,
+        54.784
+      ]
+    }
+  ],
+  "checks": {
+    "right_red": {
+      "cycle_displacements_native_px": [
+        11.777,
+        3.634,
+        11.392,
+        2.406,
+        3.48,
+        3.389,
+        6.877,
+        0.714
+      ],
+      "largest_step_native_px": 11.777,
+      "support_x_changes": [
+        11.646,
+        3.341,
+        -11.39,
+        -1.945
+      ],
+      "support_moves_backward_with_1px_tolerance": false
+    },
+    "left_cyan": {
+      "cycle_displacements_native_px": [
+        11.029,
+        1.502,
+        7.004,
+        5.435,
+        8.183,
+        6.234,
+        4.201,
+        1.47
+      ],
+      "largest_step_native_px": 11.029,
+      "support_x_changes": [
+        7.996,
+        -5.697,
+        -4.118,
+        1.0
+      ],
+      "support_moves_backward_with_1px_tolerance": false
+    },
+    "horizontal_boot_separation_by_frame": [
+      1.612,
+      0.965,
+      1.58,
+      3.691,
+      0.779,
+      5.889,
+      1.894,
+      0.805
+    ],
+    "passing3_narrower_than_contacts": false,
+    "passing7_narrower_than_contacts": false
+  },
+  "limitations": [
+    "Do not interpret these centroids or checks as leg ownership or valid gait measurements.",
+    "Colored boot centroids estimate trajectories; occlusion and perspective can bias them.",
+    "These numbers cannot prove hip attachment or anatomical correctness.",
+    "Inspect actual 10fps and slow playback, then obtain user approval."
+  ],
+  "status": "INVALID: source returned blue denim/brown boots; detected hues are not anatomical construction labels"
+}

@@ -24,7 +24,6 @@
     "date": "2026-10-04"
   },
   "remaining": [
-    "up-right",
     "up-left",
     "down-left"
   ],
@@ -44,12 +43,23 @@
     "date": "2026-10-04"
   },
   "walk_down_right": {
-    "status": "awaiting_approval",
-    "user_feedback": "legs still too wide and shoes do not match",
+    "status": "approved",
+    "user_feedback": "aprovado, proximo",
     "rejected_candidate": "walk-down-right/materials-r3",
     "candidate": "walk-down-right/materials-r5",
     "preview": "walk-down-right/down-diagonal-comparison.gif",
     "diagnostic": "walk-down-right/leg-tracking-slow.gif",
-    "feedback_addressed": "narrower trouser legs/cuffs; compact brown work ankle boots with flat dark outsole and matching outer gold detail"
+    "feedback_addressed": "narrower trouser legs/cuffs; compact brown work ankle boots with flat dark outsole and matching outer gold detail",
+    "date": "2026-10-04"
+  },
+  "walk_up_right": {
+    "status": "awaiting_approval",
+    "date": "2026-10-05",
+    "candidate": "walk-up-right/materials-r5",
+    "preview": "walk-up-right/up-diagonal-continuity-r5.gif",
+    "diagnostic": "walk-up-right/rejected-vs-revised-slow-r5.gif",
+    "user_feedback": "reprovado, a perna troca sem movimento coerente",
+    "rejected_candidate": "walk-up-right/materials-r3",
+    "feedback_addressed": "Passing and reaching poses3/4/7/8 individually rebuilt, restored shin length, head reference scale retained. Motion review pending."
   }
 }

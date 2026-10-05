@@ -1,0 +1,13 @@
+Edit ONLY the lower body of image 1, a four-column, two-row farmer walking sheet. Keep every hat, head, hair, face, torso, shirt and arm exactly as in image 1. Transparent background. Image 2 is a schematic of the precise eight leg poses in the same row-major order; use its leg paths, not its head/body.
+This is a DIAGNOSTIC sprite sheet: color the farmer's anatomical RIGHT leg solid bright RED, including its boot, from the root below the RIGHT pocket (screen-right) down to the boot. Color the anatomical LEFT leg solid CYAN, including its boot, from the root below the LEFT pocket (screen-left) down to that boot. No blue trousers below the crotch, no brown boots. These two fixed colors are the primary requirement. Never change which hip a color starts from.
+Red is the near, foreground leg. Cyan is the far leg behind it, including when the red thigh crosses leftwards.
+Correct phases 2,4,6,8 to provide smaller evenly spaced intermediates:
+1 red forward contact, cyan trailing toe off.
+2 red planted ankle halfway from its phase1 contact to directly beneath its right hip; cyan bent lifted ankle behind its left hip.
+3 red planted ankle directly beneath right hip, cyan bent raised passing ankle beneath left hip.
+4 red planted ankle only slightly BACK from its right hip, cyan raised boot only slightly AHEAD of left hip. Both feet close beneath body; NOT another fully extended contact.
+5 cyan forward contact, red trailing toe off, the opposite of1.
+6 cyan planted ankle halfway from its phase5 contact to directly beneath left hip; red bent lifted ankle behind right hip. Do NOT copy phase2 with merely switched colors.
+7 cyan planted ankle directly beneath left hip, red bent raised passing ankle beneath right hip.
+8 cyan planted ankle only slightly BACK from left hip, red raised boot only slightly AHEAD of right hip. Both feet close beneath body; NOT another fully extended contact.
+The planted ankle progresses steadily backward through its support half-cycle. The recovering ankle travels rear -> raised under own hip -> slightly ahead -> contact, never jumping across the body. Honor the narrow passing poses at3 and7 in image1. Preserve slim trousers, compact boot shapes, anatomical chain continuity and the fixed rear-three-quarter up-right angle. No text, guides, markers or ground. Eight separate cells.

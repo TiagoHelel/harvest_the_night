@@ -1,0 +1,115 @@
+{
+  "check": "same construction chain at opposite contacts",
+  "contact_checks": {
+    "near_red": {
+      "forward_minus_rear_contact_xy": [
+        105.05,
+        -67.46
+      ],
+      "rightward_forward_contact": true,
+      "upward_forward_contact": true
+    },
+    "far_cyan": {
+      "forward_minus_rear_contact_xy": [
+        101.02,
+        -3.39
+      ],
+      "rightward_forward_contact": true,
+      "upward_forward_contact": false
+    }
+  },
+  "measurements": [
+    {
+      "frame": 1,
+      "near_red": [
+        75.32,
+        428.54
+      ],
+      "far_cyan": [
+        -52.68,
+        466.54
+      ]
+    },
+    {
+      "frame": 2,
+      "near_red": [
+        60.34,
+        460.56
+      ],
+      "far_cyan": [
+        -50.77,
+        450.82
+      ]
+    },
+    {
+      "frame": 3,
+      "near_red": [
+        47.48,
+        485.69
+      ],
+      "far_cyan": [
+        -18.13,
+        443.4
+      ]
+    },
+    {
+      "frame": 4,
+      "near_red": [
+        -28.53,
+        457.46
+      ],
+      "far_cyan": [
+        66.92,
+        447.55
+      ]
+    },
+    {
+      "frame": 5,
+      "near_red": [
+        -29.73,
+        496.0
+      ],
+      "far_cyan": [
+        48.34,
+        463.15
+      ]
+    },
+    {
+      "frame": 6,
+      "near_red": [
+        -13.5,
+        456.33
+      ],
+      "far_cyan": [
+        55.24,
+        481.27
+      ]
+    },
+    {
+      "frame": 7,
+      "near_red": [
+        62.37,
+        408.71
+      ],
+      "far_cyan": [
+        -36.38,
+        500.0
+      ]
+    },
+    {
+      "frame": 8,
+      "near_red": [
+        79.26,
+        465.41
+      ],
+      "far_cyan": [
+        -61.95,
+        488.55
+      ]
+    }
+  ],
+  "limitations": [
+    "Largest 8-connected construction-color component excludes isolated reddish boot-edge pixels that corrupted the initial bounding-extents estimate. Colored cuff displacement cannot prove hip attachment, sole contact or anatomy. Both boots may have brown leather, so this measures trouser cuffs rather than soles.",
+    "Anatomy, passing knees, arm counter-swing and material preservation require visual comparison."
+  ]
+}

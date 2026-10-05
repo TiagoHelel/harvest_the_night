@@ -1,0 +1,18 @@
+{
+  "date": "2026-10-05",
+  "command": "python tools/verify.py",
+  "godot": "C:/Users/Helel/Documents/godot/Godot_v4.7.1-stable_win64_console.exe",
+  "status": "PASS",
+  "passed": 55,
+  "skipped": 0,
+  "failed": 0,
+  "elapsed_seconds": 526,
+  "over_budget": true,
+  "parsed_scripts": 125,
+  "headless_asserts": 7768,
+  "input_cases": 1006,
+  "sim_hash": 1270427719,
+  "data_hash": 8148086,
+  "hashes_unchanged": true,
+  "scope": "Existing game regression checks; preview farmer was not integrated and this does not approve its gait."
+}

@@ -1,7 +1,7 @@
 {
   "tool": "built-in ImageGen",
   "date": "2026-10-04",
-  "status": "awaiting user approval of down-right only",
+  "status": "approved by user: aprovado, proximo",
   "selected_source": "materials-r5.png",
   "source_directory": "assets/art_source/player-fhd/pilots/2026-10-04/walk-down-right",
   "transparent_background": true,
@@ -181,5 +181,6 @@
     }
   ],
   "body_volume_review": "body-volume-review.json; average torso blue pixels97.0 before,86.75 after,82.625 approved down; pose-dependent review aid only.",
-  "lower_body_review": "lower-body-review.json; average native trouser blue pixels254.375 before to191.125 after; boot brown pixels161.75 to131.875. Pose-dependent area aids, not proof of anatomical equivalence."
+  "lower_body_review": "lower-body-review.json; average native trouser blue pixels254.375 before to191.125 after; boot brown pixels161.75 to131.875. Pose-dependent area aids, not proof of anatomical equivalence.",
+  "approval_date": "2026-10-04"
 }

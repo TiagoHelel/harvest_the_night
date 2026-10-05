@@ -1,0 +1,153 @@
+{
+  "source": "tracking-r3.png",
+  "common_scale": 0.16040100250626566,
+  "measurements": [
+    {
+      "frame": 1,
+      "right_red": [
+        -9.432,
+        61.081
+      ],
+      "left_cyan": [
+        -8.511,
+        53.395
+      ]
+    },
+    {
+      "frame": 2,
+      "right_red": [
+        4.358,
+        59.977
+      ],
+      "left_cyan": [
+        -7.654,
+        55.941
+      ]
+    },
+    {
+      "frame": 3,
+      "right_red": [
+        2.212,
+        60.183
+      ],
+      "left_cyan": [
+        -5.32,
+        55.201
+      ]
+    },
+    {
+      "frame": 4,
+      "right_red": [
+        -1.151,
+        61.271
+      ],
+      "left_cyan": [
+        6.828,
+        53.349
+      ]
+    },
+    {
+      "frame": 5,
+      "right_red": [
+        8.688,
+        55.521
+      ],
+      "left_cyan": [
+        -4.923,
+        61.471
+      ]
+    },
+    {
+      "frame": 6,
+      "right_red": [
+        -4.432,
+        53.211
+      ],
+      "left_cyan": [
+        2.552,
+        58.853
+      ]
+    },
+    {
+      "frame": 7,
+      "right_red": [
+        3.388,
+        53.81
+      ],
+      "left_cyan": [
+        -2.707,
+        60.754
+      ]
+    },
+    {
+      "frame": 8,
+      "right_red": [
+        8.909,
+        55.427
+      ],
+      "left_cyan": [
+        -3.837,
+        60.732
+      ]
+    }
+  ],
+  "checks": {
+    "right_red": {
+      "cycle_displacements_native_px": [
+        13.834,
+        2.156,
+        3.535,
+        11.396,
+        13.322,
+        7.843,
+        5.753,
+        19.193
+      ],
+      "largest_step_native_px": 19.193,
+      "support_x_changes": [
+        13.79,
+        -2.146,
+        -3.363,
+        9.839
+      ],
+      "support_moves_backward_with_1px_tolerance": false
+    },
+    "left_cyan": {
+      "cycle_displacements_native_px": [
+        2.686,
+        2.449,
+        12.288,
+        14.285,
+        7.92,
+        5.592,
+        1.13,
+        8.699
+      ],
+      "largest_step_native_px": 14.285,
+      "support_x_changes": [
+        7.475,
+        -5.259,
+        -1.13,
+        -4.674
+      ],
+      "support_moves_backward_with_1px_tolerance": false
+    },
+    "horizontal_boot_separation_by_frame": [
+      0.921,
+      12.012,
+      7.532,
+      7.979,
+      13.611,
+      6.984,
+      6.095,
+      12.746
+    ],
+    "passing3_narrower_than_contacts": false,
+    "passing7_narrower_than_contacts": false
+  },
+  "limitations": [
+    "Colored boot centroids estimate trajectories; occlusion and perspective can bias them.",
+    "These numbers cannot prove hip attachment or anatomical correctness.",
+    "Inspect actual 10fps and slow playback, then obtain user approval."
+  ]
+}

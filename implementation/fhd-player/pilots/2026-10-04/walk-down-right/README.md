@@ -59,6 +59,6 @@ tracking-r4, check_leg_tracking.py, export_preview.py and
 build_direction_comparison.py. Raw ImageGen masters and exact prompts are saved;
 generating new artwork remains a separate creative step using the saved prompts.
 
-Await explicit user approval of the corrected DOWN-RIGHT. No runtime integration,
+The user approved selected DOWN-RIGHT R5 on2026-10-04 ("aprovado, proximo"). No runtime integration,
 game code, project resolution or simulation changes. No engine verification suite
 was rerun for this isolated preview and no in-game playback is claimed.

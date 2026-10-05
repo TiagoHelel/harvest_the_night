@@ -1,0 +1,177 @@
+{
+  "operation": "seven lossless source cuts plus isolated phase6 calibrated once to contact5 hat width; transparent padding, no painting or reflection",
+  "canvas": [
+    2508,
+    1254
+  ],
+  "cells": [
+    {
+      "frame": 1,
+      "source": "transition-a-r2.png",
+      "source_cut": [
+        0,
+        0,
+        627,
+        627
+      ],
+      "opaque_bbox": [
+        213,
+        30,
+        510,
+        588
+      ],
+      "cut_sha256": "ae035f5ffff3a29a7c0115fcbbd91757503871434a766b036cd717cae506003a",
+      "padding_offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 2,
+      "source": "transition-a-r2.png",
+      "source_cut": [
+        627,
+        0,
+        1254,
+        627
+      ],
+      "opaque_bbox": [
+        135,
+        30,
+        412,
+        583
+      ],
+      "cut_sha256": "96a175c4fd5ec9c0f5dfc3b12da9127b7879230bf7521e1af927f0def6af800c",
+      "padding_offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 3,
+      "source": "transition-a-r2.png",
+      "source_cut": [
+        0,
+        627,
+        627,
+        1254
+      ],
+      "opaque_bbox": [
+        213,
+        25,
+        490,
+        581
+      ],
+      "cut_sha256": "fa35fdbd24dded9cb95d1145ba4c98fc3152c9e462d7559f1b398c5874efeb7b",
+      "padding_offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 4,
+      "source": "transition-a-r2.png",
+      "source_cut": [
+        627,
+        627,
+        1254,
+        1254
+      ],
+      "opaque_bbox": [
+        134,
+        25,
+        422,
+        589
+      ],
+      "cut_sha256": "9a86760c44f70ab4e4d292b524e2127ddc3edcc41b712f295d643f872789b010",
+      "padding_offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 5,
+      "source": "transition-b-r2.png",
+      "source_cut": [
+        0,
+        0,
+        627,
+        627
+      ],
+      "opaque_bbox": [
+        201,
+        29,
+        514,
+        609
+      ],
+      "cut_sha256": "26c47cbd671b8a6517fe9f464b7be55705d845916bf953db922aebae44c436f5",
+      "padding_offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 6,
+      "source": "phase-06-r1.png",
+      "operation": "one isolated-source scale calibration to contact5 hat width; nearest, no painting",
+      "scale": 0.4975124378109453,
+      "position": [
+        201,
+        29
+      ],
+      "opaque_bbox": [
+        201,
+        29,
+        514,
+        569
+      ],
+      "prepared_cell_sha256": "79b4e4b9253d1e5f2c1d8e57a191a637f7e43dd25bfe2369ada003e3f0cda42b",
+      "padding_offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 7,
+      "source": "transition-b-r2.png",
+      "source_cut": [
+        0,
+        627,
+        627,
+        1254
+      ],
+      "opaque_bbox": [
+        211,
+        19,
+        521,
+        602
+      ],
+      "cut_sha256": "0f95156e8258e5a7b479eb11ccfda508b0c5aa06ddb817be339621ffb237ded0",
+      "padding_offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 8,
+      "source": "transition-b-r2.png",
+      "source_cut": [
+        627,
+        627,
+        1254,
+        1254
+      ],
+      "opaque_bbox": [
+        130,
+        19,
+        446,
+        598
+      ],
+      "cut_sha256": "3fdfb5b3e74a12c8ea911fd3a1cd80404d131817ad53d0b8956cf26c1b67c243",
+      "padding_offset": [
+        0,
+        0
+      ]
+    }
+  ]
+}

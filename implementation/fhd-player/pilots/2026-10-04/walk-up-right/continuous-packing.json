@@ -1,0 +1,102 @@
+{
+  "selected_source": "materials-r4.png",
+  "pair_common_head_reference_scales": {
+    "reach-04-08-r1.png": 0.4835965978128797,
+    "passing-03-07-r1.png": 0.46650998824911866
+  },
+  "frames": [
+    {
+      "frame": 1,
+      "source": "materials-r3.png",
+      "cut": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "uniform_scale": 1,
+      "tile_sha256": "d785edc0d19cdb6160b4e745e4948a7818773b5e303e5dc9a30de423bcaa18ae"
+    },
+    {
+      "frame": 2,
+      "source": "materials-r3.png",
+      "cut": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "uniform_scale": 1,
+      "tile_sha256": "b121ea0f386c761d8208ae8c01c3fbb860edf05ff9708ba79fbd887b603cb38f"
+    },
+    {
+      "frame": 3,
+      "source": "passing-03-07-r1.png",
+      "pair_cell": 0,
+      "uniform_scale": 0.46650998824911866,
+      "placement": [
+        23,
+        2
+      ],
+      "tile_sha256": "9024483c1e9b0247ce0d2ca63ad767aa2ce0f04caec3bd2b6626edb80ab27b33"
+    },
+    {
+      "frame": 4,
+      "source": "reach-04-08-r1.png",
+      "pair_cell": 0,
+      "uniform_scale": 0.4835965978128797,
+      "placement": [
+        -21,
+        -13
+      ],
+      "tile_sha256": "1ebd38929b19be565c42ba24404f6220012069aa557ccfe6fe6ad99c7d34735d"
+    },
+    {
+      "frame": 5,
+      "source": "materials-r3.png",
+      "cut": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "uniform_scale": 1,
+      "tile_sha256": "8f19b9b528121fd86f1f73c0271449c95c06340caf404327c916c9caa55156a2"
+    },
+    {
+      "frame": 6,
+      "source": "materials-r3.png",
+      "cut": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "uniform_scale": 1,
+      "tile_sha256": "4bf3d391cf364930d84153b4ee5869af51d0dde1f63ae9fc1a06833fa483febc"
+    },
+    {
+      "frame": 7,
+      "source": "passing-03-07-r1.png",
+      "pair_cell": 1,
+      "uniform_scale": 0.46650998824911866,
+      "placement": [
+        25,
+        2
+      ],
+      "tile_sha256": "941e7310a4dbca4748b12aed5cd33784bc9c66b929b7a35d7af40a54f4f8e256"
+    },
+    {
+      "frame": 8,
+      "source": "reach-04-08-r1.png",
+      "pair_cell": 1,
+      "uniform_scale": 0.4835965978128797,
+      "placement": [
+        -15,
+        -12
+      ],
+      "tile_sha256": "32acea6d8b5c028772ef665343c33c85470590ba9953939103906a0cd3f09efa"
+    }
+  ],
+  "operations": "cut, threshold alpha, pad; each new pair uniformly resampled once by common hat width; no limb painting or deformation"
+}

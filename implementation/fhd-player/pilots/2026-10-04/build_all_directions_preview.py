@@ -5,11 +5,11 @@ import json
 from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parent
-DIRECTIONS = ['down', 'right', 'up', 'left', 'down-right']
+DIRECTIONS = ['down', 'right', 'up', 'left', 'down-right', 'up-right']
 STATUS = json.loads((ROOT/'directions-status.json').read_text(encoding='utf-8'))
 DURATION = 100
 SCALE = 2
-WIDTH, HEIGHT = 1040, 330
+WIDTH, HEIGHT = 40 + 200 * len(DIRECTIONS), 330
 BACKGROUND = '#20292c'
 
 def font(size):
@@ -33,7 +33,7 @@ frames = []
 for i in range(8):
     canvas = Image.new('RGBA', (WIDTH,HEIGHT), BACKGROUND)
     draw = ImageDraw.Draw(canvas)
-    draw.text((24,16), 'FARMER WALK / 5 DIRECTIONS / 8 FRAMES / 10 FPS', font=font(20), fill='#e9e3cf')
+    draw.text((24,16), f'FARMER WALK / {len(DIRECTIONS)} DIRECTIONS / 8 FRAMES / 10 FPS', font=font(20), fill='#e9e3cf')
     draw.text((24,45), 'Same integer 2x scale / about 128 px character height', font=font(14), fill='#aac2bd')
     for j, direction in enumerate(DIRECTIONS):
         center = 120+j*200

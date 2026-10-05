@@ -1,0 +1,53 @@
+{
+  "common_scale": 0.1140819964349376,
+  "frames": [
+    {
+      "frame": 1,
+      "visible_height": 65,
+      "source_hat_width": 277,
+      "native_hat_width_estimate": 31.600713012477716
+    },
+    {
+      "frame": 2,
+      "visible_height": 64,
+      "source_hat_width": 277,
+      "native_hat_width_estimate": 31.600713012477716
+    },
+    {
+      "frame": 3,
+      "visible_height": 64,
+      "source_hat_width": 277,
+      "native_hat_width_estimate": 31.600713012477716
+    },
+    {
+      "frame": 4,
+      "visible_height": 65,
+      "source_hat_width": 277,
+      "native_hat_width_estimate": 31.600713012477716
+    },
+    {
+      "frame": 5,
+      "visible_height": 67,
+      "source_hat_width": 300,
+      "native_hat_width_estimate": 34.22459893048128
+    },
+    {
+      "frame": 6,
+      "visible_height": 62,
+      "source_hat_width": 300,
+      "native_hat_width_estimate": 34.22459893048128
+    },
+    {
+      "frame": 7,
+      "visible_height": 67,
+      "source_hat_width": 310,
+      "native_hat_width_estimate": 35.365418894830654
+    },
+    {
+      "frame": 8,
+      "visible_height": 67,
+      "source_hat_width": 308,
+      "native_hat_width_estimate": 35.13725490196078
+    }
+  ]
+}

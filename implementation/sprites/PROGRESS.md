@@ -2293,3 +2293,44 @@ avoid cached inline results. Builders validated eight-frame100ms looping output.
 Four approved direction families remain unchanged. Down-right awaits explicit
 user approval. No runtime/queue changes or engine tests for isolated previews;
 unrelated project.godot edit remains untouched.
+
+
+## 2026-10-05 — Up-right walking continuity review
+
+The user approved down-right R5, then rejected up-right R3 because leg exchange
+lacked coherent movement. Recorded the down-right approval without changing its
+frames. Up-right rotation/contact/transition/arm/head work from the interrupted
+2026-10-04 turn is preserved with exact prompts and built-in ImageGen provenance.
+Archived rejected R3 native frames, validation and playback under walk-up-right/
+rejected-r3. No remaining direction started.
+
+A new fixed-hip schematic specifies support, lifted passing and reach paths.
+Three whole-sheet studies were inspected and rejected: colors were ignored,
+a cyan calf ended in a red boot, or the old contact poses were repeated.
+R4 study color-centroid output is explicitly invalid for ordinary denim/boots;
+no numeric anatomy PASS is claimed. Changed to isolated generation of passing
+poses3/7 and reaching4/8. Packed those pairs with four R3 source cells using
+lossless cuts and one common hat-size conversion per pair, without painting
+or joint deformation. Derived materialR4 had short shins; generated materialR5
+restores their length. Selected source: assets/art_source/player-fhd/pilots/
+2026-10-04/walk-up-right/materials-r5.png. Prompts, actual canvas dimensions,
+raw original paths and rejection notes are in the pilot's generation.json.
+
+Retained R3 common export scale0.15980024968789014; eight unique80x80frames,
+visible heights62-65px and hats31-32px. Hard alpha128 and nearest sampling;
+generated upper/lower contours are not pixel-identical. Normal GIFs have eight
+100ms frames; before/after slow comparison uses200ms frames. Export/comparison
+builders passed. Inspected the native contact sheet, actual browser playback,
+passing3, reaching4, opposite passing7 and wrap8-to1 controls. Browser capture:
+implementation/fhd-player/pilots/2026-10-04/walk-up-right/browser-review-r5.png.
+Fresh up-diagonal-continuity-r5.gif and rejected-vs-revised-slow-r5.gif are in the
+same folder; updated the same HTML and parent six-direction horizontal GIF.
+Five approved direction frame files remain unchanged. Up-right R5 awaits user
+visual approval; up-left/down-left and runtime integration have not started.
+
+python tools/verify.py with the supplied Godot binary: PASS,55passed/0skipped/
+0failed in526seconds, over300second budget;125scripts parsed,7768headless asserts,
+1006input cases. Sim1270427719/data8148086 unchanged. Summary in verify-result.json.
+This checks existing game behavior and does not establish preview gait quality.
+No runtime/source-code, queue, collision or resolution changes. Existing unrelated
+project.godot edits preserved. No push or unattended automation.
