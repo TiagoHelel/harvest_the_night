@@ -2965,3 +2965,32 @@ Required engine suite PASS:55 passed,0 skipped,0 failed in500s (OVER BUDGET vers
 Sim1270427719/data8148086 unchanged. engine-check.log retained. Sprite queue
 check PASS:20 prompts. GIF/native-format checks PASS; diff --check PASS.
 Completed queues unchanged; no project.godot staging, push or automation.
+
+
+## FHD walking review — DOWN approved; garment palette preparation — 2026-10-05
+
+The user approved the exact DOWN R3 with feedback "lindo" and requested a shared
+RIGHT-blue garment palette plus three additional colors, each as an All eight GIF.
+walk-down-size-review/approval.json freezes all eight native hashes. Acceptance
+metadata and normal/slow/overview labels are updated; approved builds read the
+frozen PNGs rather than resampling them. Existing DOWN-RIGHT arm review remains
+pending. All64 previously selected original files and the eight approved DOWN
+R3 files remain unchanged. No runtime promotion.
+
+Prepared palette-variants/selection.json with the exact64 current input files,
+including approved R3 DOWN and selected UR03/UL03. Read-only HSV garment masks
+cover trousers/bib/straps; inspected all64 pink-mask silhouettes in mask-audit.png.
+Prepared build_colors.py for a fixed12-shade palette derived from actual RIGHT
+colors and olive/brown/wine variants. It asserts exact alpha/geometry and unmasked
+RGBA preservation for256 sibling PNGs and exports four All eight GIFs at10FPS.
+No recolored farmer output has been generated yet. The built-in ImageGen tool
+instructions require an explicit user choice before Python image editing, so
+an asynchronous method question is pending. The script requires authorization.json
+and has not been run; compilation alone does not validate color output.
+
+Sprite queue check and diff --check PASS. Latest unchanged-engine suite from
+preceding DOWN review remains55-check PASS in500s,7768 asserts,1006 input cases,
+exports PASS, sim1270427719/data8148086 unchanged. No broad re-run for acceptance
+metadata and read-only mask preparation. No completed-task/production claim for
+palette work; color GIFs and visual validation remain outstanding. No queue
+mutation, project.godot staging, push or unattended automation.

@@ -6,6 +6,8 @@ from PIL import Image
 
 HERE=Path(__file__).resolve().parent
 PILOT=HERE.parent
+if (HERE/'approval.json').exists():
+    raise SystemExit('Approved DOWN files are frozen; do not reset this review to awaiting approval.')
 def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 def save(path,data):

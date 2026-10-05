@@ -16,8 +16,8 @@
     "date": "2026-10-04",
     "size_refinement_review": {
       "date": "2026-10-05",
-      "status": "awaiting_approval",
-      "user_feedback": "Down looks smaller than the other directions; regenerate it first, then repaint trousers.",
+      "status": "approved",
+      "user_feedback": "lindo",
       "candidate": "walk-down-size-review/down-r3/frames",
       "preview": "walk-down-size-review/index.html?v=down-r3",
       "native_height_range": [
@@ -25,8 +25,18 @@
         65
       ],
       "original_approved_frames_retained": true,
-      "palette_harmonization": "deferred until after down approval",
-      "runtime_integrated": false
+      "palette_harmonization": "Requested as next separate review.",
+      "runtime_integrated": false,
+      "approved_frame_sha256": {
+        "walk-down-01.png": "c82cbd6cf0887e2c5a7cd4076459b29b8084c951f56eb57fd46dfb6ebdb23c0c",
+        "walk-down-02.png": "07866f105cba410837fab72f7389ab32dc1aacdca8c8fa9670d580e46ca42942",
+        "walk-down-03.png": "402c2a0d47e0b0f81b9e53c9b023a2a6548ec9c9380e06caf0b696bfd6b91fc1",
+        "walk-down-04.png": "0d4c9769e7246d97b6b8bf56b18125ec0241a9fec77bbf96bdb9c03f9a486f99",
+        "walk-down-05.png": "b9d2d94264437b3d2051e4f3f1406e2054268ee4d36c062416f5166236e997d9",
+        "walk-down-06.png": "c4482b89d332df2086d1535edecf8ab3bbe59a051d2097b1f49dc7ced7c653da",
+        "walk-down-07.png": "cb112be6ef2480094ed013cababa809f5a4a438b22ed03dd2cb72f416b7c9634",
+        "walk-down-08.png": "e50aa3e610fdf790ab4e73278e23c982bd3961abed6924ce0d7d354a5f634f84"
+      }
     }
   },
   "walk_right": {
@@ -178,7 +188,6 @@
     }
   },
   "pending_reviews": [
-    "down-right",
-    "down-size-refinement"
+    "down-right"
   ]
 }

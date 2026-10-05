@@ -17,6 +17,10 @@ def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 def export(source_name):
+    approval_path=HERE/'approval.json'
+    approval=json.loads(approval_path.read_text()) if approval_path.exists() else None
+    previous_report=json.loads((HERE/'validation.json').read_text()) if (HERE/'validation.json').exists() else {}
+    approved=bool(approval and approval['candidate']==Path(source_name).stem+'/frames')
     image = Image.open(SOURCE / source_name).convert('RGBA')
     image.putalpha(image.getchannel('A').point(lambda value: 255 if value >= 128 else 0))
     cols = [round(i * image.width / 4) for i in range(5)]
@@ -40,11 +44,18 @@ def export(source_name):
         frame.alpha_composite(small, (round(40-center*scale),8-small.getbbox()[1]))
         b = frame.getbbox(); assert b[0]>1 and b[2]<79 and b[3]<78, b
         path = frame_dir / f'walk-down-{i+1:02}.png'
-        frame.save(path)
+        if approved:
+            assert digest(path)==approval['approved_frame_sha256'][path.name]
+            frame=Image.open(path).convert('RGBA')
+            b=frame.getbbox()
+        else:
+            frame.save(path)
         h = frame.crop((0,8,80,23)).getbbox()
         metrics.append({'frame':i+1,'bbox':b,'height':b[3]-b[1],'hat_width':h[2]-h[0],
                         'sha256':digest(path),'torso_and_arms_width':frame.crop((0,30,80,49)).getbbox()[2]-frame.crop((0,30,80,49)).getbbox()[0]})
         frames.append(frame)
+    if approved:
+        assert {p.name:digest(p) for p in frame_dir.glob('*.png')}==approval['approved_frame_sha256']
     assert len({m['sha256'] for m in metrics}) == 8
     selected = json.loads((PILOT / 'walk-down-left/aggregate-selection.json').read_text())
     old = [Image.open(PILOT / item['path']).convert('RGBA') for item in selected['down']]
@@ -61,7 +72,7 @@ def export(source_name):
                 draw.line((x,254,x+160,254),fill='#4b6661')
         caption(draw,(20,305),'Same 80px cells / integer 2x normal display',15)
         caption(draw,(20,340),'New DOWN candidate / pants recoloring comes later',15)
-        caption(draw,(20,386),f'Frame {i+1:02} / 08 / awaiting your approval',15)
+        caption(draw,(20,386),f'Frame {i+1:02} / 08 / '+('APPROVED' if approved else 'awaiting your approval'),15)
         normal.append(canvas.convert('RGB'))
         detail=Image.new('RGBA',(1040,390),'#20292c'); sd=ImageDraw.Draw(detail)
         for x,im,label in [(10,old[i],'OLD DOWN'),(360,frame,'NEW DOWN'),(710,right[i],'RIGHT REFERENCE')]:
@@ -86,13 +97,13 @@ def export(source_name):
             im=frames[i] if direction=='down' else Image.open(PILOT/items[i]['path']).convert('RGBA')
             caption(draw,(j*180+12,55),direction.upper(),16)
             canvas.alpha_composite(im.resize((160,160),Image.Resampling.NEAREST),(j*180,82))
-            caption(draw,(j*180+12,245),'NEW CANDIDATE' if direction=='down' else 'REFERENCE',12)
+            caption(draw,(j*180+12,245),('APPROVED DOWN' if approved else 'NEW CANDIDATE') if direction=='down' else 'REFERENCE',12)
         combined.append(canvas.convert('RGB'))
     save_gif(combined,HERE/'all-eight-with-new-down.gif',100)
     combined[0].save(HERE/'all-eight-poster.png')
     baseline=json.loads((HERE/'baseline.json').read_text())
     assert len(baseline)==64 and all(digest(PILOT/name)==value for name,value in baseline.items())
-    report={'date':'2026-10-05','status':'awaiting_approval','source':source_name,'source_sha256':digest(SOURCE/source_name),
+    report={'date':'2026-10-05','status':'approved' if approved else 'awaiting_approval','source':source_name,'source_sha256':digest(SOURCE/source_name),
         'source_size':image.size,'source_col_cuts':cols,'source_row_cuts':rows,'common_source_scale':scale,
         'native_canvas':[80,80],'target_height':64,'normal_display_scale':2,'detail_display_scale':4,
         'alpha_threshold':128,'sampling':'nearest, common scale across all8 poses, hat-center/top8 anchor',
@@ -100,6 +111,10 @@ def export(source_name):
         'existing_selected_frames_unchanged':64,'normal_ms':100,'slow_ms':200,'loop':0,
         'runtime_integrated':False,'palette_harmonization':'deferred by user',
         'limits':'Native geometry/format checks do not prove gait coherence or user approval.'}
+    if approved:
+        report.update({k:v for k,v in previous_report.items() if k in ['visual_review','engine_verification']})
+        report.update({'approval_date':approval['date'],'user_feedback':approval['user_feedback'],
+                       'approved_frame_sha256':approval['approved_frame_sha256']})
     (HERE/'validation.json').write_text(json.dumps(report,indent=2)+'\n')
     (frame_dir.parent/'validation.json').write_text(json.dumps(report,indent=2)+'\n')
     (HERE/'selection.json').write_text(json.dumps({'source':source_name,'frames':report['candidate_frames']},indent=2)+'\n')
@@ -123,6 +138,9 @@ document.getElementById('right').src=`../walk-right/frames/walk-right-${n}.png`;
 document.getElementById('previous').onclick=()=>show(-1);document.getElementById('next').onclick=()=>show(1);</script></html>'''
     html=html.replace('SOURCE',Path(source_name).stem).replace('FRAMES',report['candidate_frames'])
     html=html.replace('down-r1.prompt.json',Path(source_name).stem+'.prompt.json')
+    if approved:
+        html=html.replace('Awaiting your approval. Pants palette harmonization is the next separate step.',
+                          'DOWN approved. Garment color harmonization is the next separate review.')
     (HERE/'index.html').write_text(html,encoding='utf-8')
     print(json.dumps({'source':source_name,'heights':[m['height'] for m in metrics],'hat_widths':[m['hat_width'] for m in metrics],'existing_unchanged':64}))
 

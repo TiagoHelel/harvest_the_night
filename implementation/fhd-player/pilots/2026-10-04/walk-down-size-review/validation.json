@@ -1,6 +1,6 @@
 {
   "date": "2026-10-05",
-  "status": "awaiting_approval",
+  "status": "approved",
   "source": "down-r3.png",
   "source_sha256": "714aa9813b932b876b283ec816624c8b7733296a7cb2e2eb83ce6f37885375d9",
   "source_size": [
@@ -143,38 +143,6 @@
   "runtime_integrated": false,
   "palette_harmonization": "deferred by user",
   "limits": "Native geometry/format checks do not prove gait coherence or user approval.",
-  "gif_checks": {
-    "walk-down-size-review.gif": {
-      "dimensions": [
-        990,
-        440
-      ],
-      "frames": 8,
-      "duration_ms": 100,
-      "loop": 0,
-      "sha256": "a54d813434ef5b5c0bcc98d4c2eadd8c052716de2315c266edb691f693a1d732"
-    },
-    "walk-down-size-slow.gif": {
-      "dimensions": [
-        1040,
-        390
-      ],
-      "frames": 8,
-      "duration_ms": 200,
-      "loop": 0,
-      "sha256": "58241bd0843df0cecd8564928653930cbe2e4371010dac9d96e063d3c9a22067"
-    },
-    "all-eight-with-new-down.gif": {
-      "dimensions": [
-        1440,
-        280
-      ],
-      "frames": 8,
-      "duration_ms": 100,
-      "loop": 0,
-      "sha256": "245259ccdb8259d8348b56c229fb6ad064c562a9cc19b67ddde2362a565c87c5"
-    }
-  },
   "visual_review": {
     "body_volume": "Fuller frontal bib, sleeves and limbs compared at identical integer2x scale.",
     "height_range": [
@@ -184,7 +152,7 @@
     "hat_width": 33,
     "right_reference_hat_width": "30-31 native pixels; front view is wider.",
     "gait": "R3 keeps the original pose progression; support changes between halves. R1/R2 rejected for repeated/early switching support.",
-    "limits": "Front arms remain subtle. No perfect-motion claim; user size and animation approval is pending.",
+    "limits": "User approved the exact R3 size and animation review. Front arms remain subtle; no runtime promotion.",
     "actual_preview": "index.html?v=down-r3, normal10FPS plus manual controls; browser.png",
     "game_capture": "Not integrated; browser review only."
   },
@@ -200,5 +168,17 @@
     "sim_hash": 1270427719,
     "data_hash": 8148086,
     "log": "engine-check.log"
+  },
+  "approval_date": "2026-10-05",
+  "user_feedback": "lindo",
+  "approved_frame_sha256": {
+    "walk-down-01.png": "c82cbd6cf0887e2c5a7cd4076459b29b8084c951f56eb57fd46dfb6ebdb23c0c",
+    "walk-down-02.png": "07866f105cba410837fab72f7389ab32dc1aacdca8c8fa9670d580e46ca42942",
+    "walk-down-03.png": "402c2a0d47e0b0f81b9e53c9b023a2a6548ec9c9380e06caf0b696bfd6b91fc1",
+    "walk-down-04.png": "0d4c9769e7246d97b6b8bf56b18125ec0241a9fec77bbf96bdb9c03f9a486f99",
+    "walk-down-05.png": "b9d2d94264437b3d2051e4f3f1406e2054268ee4d36c062416f5166236e997d9",
+    "walk-down-06.png": "c4482b89d332df2086d1535edecf8ab3bbe59a051d2097b1f49dc7ced7c653da",
+    "walk-down-07.png": "cb112be6ef2480094ed013cababa809f5a4a438b22ed03dd2cb72f416b7c9634",
+    "walk-down-08.png": "e50aa3e610fdf790ab4e73278e23c982bd3961abed6924ce0d7d354a5f634f84"
   }
 }
