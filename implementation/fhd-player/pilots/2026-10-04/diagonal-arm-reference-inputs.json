@@ -1,0 +1,56 @@
+{
+  "gait_source": "Approved DOWN-RIGHT R5 cycle, excluding reopened pose4.",
+  "accepted_motion_frames": [
+    {
+      "frame": 1,
+      "path": "walk-down-right/before-arms-2026-10-05/frames/walk-down-right-01.png",
+      "sha256": "ec27f04c86d3a45a86c78ac23e29c30012f102566e5996bda75903b528a18e6a"
+    },
+    {
+      "frame": 2,
+      "path": "walk-down-right/before-arms-2026-10-05/frames/walk-down-right-02.png",
+      "sha256": "7bd4e5cb6082cb10050e337b89feeacad47f3b77dc622ddd40843f1ab2a367c6"
+    },
+    {
+      "frame": 3,
+      "path": "walk-down-right/before-arms-2026-10-05/frames/walk-down-right-03.png",
+      "sha256": "c1c6a7538d3e5ef860043ebf3ccb95f7af2d5c4ea93b312bb8a3b929dfdb1476"
+    },
+    {
+      "frame": 5,
+      "path": "walk-down-right/before-arms-2026-10-05/frames/walk-down-right-05.png",
+      "sha256": "ad80095e839c241ea1130d41beb920143968c8c0a609e97f497980f0b3414579"
+    },
+    {
+      "frame": 6,
+      "path": "walk-down-right/before-arms-2026-10-05/frames/walk-down-right-06.png",
+      "sha256": "ec72603956b9be22f9f5fa67c892a64e0769ba5dc7eed98261615d60f3ab4f90"
+    },
+    {
+      "frame": 7,
+      "path": "walk-down-right/before-arms-2026-10-05/frames/walk-down-right-07.png",
+      "sha256": "89ae4b02626d8900cce576b020bed57048b4bd2d8feca5de9115c0f97e170818"
+    },
+    {
+      "frame": 8,
+      "path": "walk-down-right/before-arms-2026-10-05/frames/walk-down-right-08.png",
+      "sha256": "07ebd7c577de84404ff44e3b0231d5f095a8db9b3e95b312873c076b1e95a981"
+    }
+  ],
+  "omitted_reference_frames": [
+    4
+  ],
+  "frame4_rule": "Interpolate target arm poses3-to5; do not copy the doubled sleeve or assume approval of R7repair.",
+  "operations": [
+    "Unmodified RGBA frame packing",
+    "Integer6x nearest scaling"
+  ],
+  "source_alpha_preserved": true,
+  "facing_only_reference": {
+    "operation": "Unmodified crop of pose3 from the packed target; x960..1440,y0..480, no repaint.",
+    "paths": [
+      "walk-up-right/diagonal-arm-facing-only.png",
+      "walk-up-left/diagonal-arm-facing-only.png"
+    ]
+  }
+}

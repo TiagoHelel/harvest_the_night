@@ -62,7 +62,15 @@
     "rejected_candidate": "walk-up-right/full-arm-materials-r13",
     "feedback_addressed": "Compact palms, narrower wrists and relaxed downward forearm/hand angles.",
     "approval_date": "2026-10-05",
-    "review_limit": "Far left arm travel remains subtle; hand and gait approval pending."
+    "review_limit": "Far left arm travel remains subtle; hand and gait approval pending.",
+    "diagonal_reference_attempt": {
+      "date": "2026-10-05",
+      "status": "visual_gate_failed",
+      "comparison_source": "diagonal-reference-arms-r18.png",
+      "preview": "up-diagonal-reference-arms-r18.gif",
+      "user_feedback": "Use another approved diagonal walk as arm reference.",
+      "result": "All three revisions rejected; native frames and active candidate retained."
+    }
   },
   "walk_up_left": {
     "status": "awaiting_approval",
@@ -73,6 +81,14 @@
     "feedback_addressed": "Compact palms, narrower wrists and relaxed downward forearm/hand angles.",
     "rejected_candidate": "walk-up-left/full-arm-materials-r13",
     "user_feedback": "Hands still look strange; rebuild them.",
-    "review_limit": "Awaiting user visual approval at actual preview size."
+    "review_limit": "Awaiting user visual approval at actual preview size.",
+    "diagonal_reference_attempt": {
+      "date": "2026-10-05",
+      "status": "visual_gate_failed",
+      "comparison_source": "diagonal-reference-arms-r18.png",
+      "preview": "up-diagonal-reference-arms-r18.gif",
+      "user_feedback": "Use another approved diagonal walk as arm reference.",
+      "result": "All three revisions rejected; native frames and active candidate retained."
+    }
   }
 }

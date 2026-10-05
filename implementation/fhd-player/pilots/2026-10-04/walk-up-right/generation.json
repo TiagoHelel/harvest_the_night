@@ -378,6 +378,60 @@
       "date": "2026-10-05",
       "transparent_background": true,
       "tool": "built-in ImageGen"
+    },
+    {
+      "prompt": "Use case: precise-object-edit.\nAsset type: eight-frame pixel-art farmer walk sprite sheet.\nImage 1 is the EDIT TARGET: the current WALK UP-RIGHT 4-column, 2-row sheet. Image 2 is the APPROVED MOTION REFERENCE: WALK DOWN-RIGHT from the same farmer, with reference pose 4 intentionally blank.\nPrimary request: redraw only BOTH arms and hands in Image 1 using the natural arm swing, changing elbow angles and compact rounded hand shapes of the approved diagonal reference, adapted to the target rear three-quarter up-right facing. Keep the exact target hat, head, rear view, body size, clothing, leg poses and boots. Do not copy the front view or rotate the target to front.\nMotion: this is a complete walking cycle, not a set of standing poses. Each arm swings forward then back, smoothly through all 8 frames; the two arms swing opposite each other and opposite their own leg. Study the reference's alternating sleeve/forearm silhouette in poses 1,2,3,5,6,7,8. The elbow must flex naturally as it passes the torso, rather than every forearm staying vertically down. Compact relaxed hands stay attached to their wrists and follow the forearm. Give the farther arm a readable arc as well as the nearer arm, with continuous partial torso occlusion if necessary; never remove the whole arm for a frame or create a spare hand/stump. anatomical right arm is near the viewer on screen-right; anatomical left arm is farther away on screen-left. Keep those anatomical identities throughout the cycle.\nFill output pose 4 by smoothly interpolating the transition 3 to 5, since reference pose 4 is blank. Output ALL EIGHT poses, row-major order, complete 1-8 loop with small 8-to1 transition. Preserve Image 1's phase order and counter-swing relative to its legs.\nStyle: match the reference's simple crisp pixel clusters, same white sleeves and peach skin, consistent arm lengths and small hands, no isolated fists, no long paddles, no waving or raised elbows. Maintain current farmer proportions and native approximately 64-pixel height. Output 4 equal columns x 2 equal rows on real transparent alpha, with generous transparent gutters and identical pose scale. No text, labels, shadow, ground or background.",
+      "referenced_image_paths": [
+        "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/diagonal-arm-target-reference.png",
+        "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/approved-diagonal-arm-motion-reference.png"
+      ],
+      "transparent_background": true,
+      "original": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-76ab2ff9-5eed-47ec-923b-8bcd3d61e036.png",
+      "source": "diagonal-reference-arms-r17.png",
+      "review": "Rejected: farther arm remains nearly stationary; near-arm poses1 and5 lack clearly opposite swing.",
+      "source_sha256": "ec0f224bfbf8baf417f93a577af9bb49ae95d773c5c0eb8ba8eff948e26d9dfd",
+      "source_dimensions": [
+        1774,
+        887
+      ],
+      "date": "2026-10-05",
+      "tool": "built-in ImageGen"
+    },
+    {
+      "prompt": "Use case: precise-object-edit. Sprite-animation correction.\nImage 1 = approved DOWN-RIGHT walking motion reference, seven approved poses with empty cell4.\nImage 2 = target WALK UP-RIGHT rear diagonal farmer, 8 poses in 4x2 layout.\nRedraw BOTH ARMS in Image 2 to reproduce a real alternating walk cycle from Image 1. Current target is wrong: its far arm stays down and near arm barely changes, which must NOT be preserved. Preserve target farmer's rear-facing hat, head, torso proportions, white shirt, blue overalls and leg/boot poses. Only replace both arm/hand animations.\nAnalyze reference poses1 and5: they show OPPOSITE arm positions. Translate this clear front-versus-back sweep into the rear diagonal perspective, do not merely wiggle fingers. Near arm is anatomical RIGHT, near, shoulder on screen-right; far arm is anatomical LEFT, far, shoulder on screen-left. They must sweep in opposite phase. FORWARD relative to this facing is screen-right and slightly upward; BACKWARD is screen-left and downward, alongside the back of the overalls. The projected arms can overlap the torso; this is what creates real swing. Do not keep both arms splayed out toward their own screen edges.\nEight ordered poses, row-major:\n1 near arm at backward extreme, far arm at forward extreme;\n2 near arm beginning forward, far arm beginning backward;\n3 both arms passing beneath their own shoulders;\n4 near arm moving forward, far arm moving backward;\n5 near arm at forward extreme, far arm at backward extreme;\n6 near arm beginning backward, far arm beginning forward;\n7 both arms passing beneath their own shoulders;\n8 near arm moving backward, far arm moving forward, close to1 but not identical.\nUse the approved reference's relaxed elbow flex, small connected palms, consistent sleeve widths, and compact hands. Near forearm at pose5 must point toward the facing, unlike pose1 which trails behind. Far forearm must also visibly reverse between1 and5. Hands follow elbows continuously, not disappear/reappear and not wave sideways. Small partial occlusion by body is fine but keep continuity and shoulder ownership. Opposite poses must NOT have the same arm silhouettes.\nOutput all8 finished poses, exactly4columns2rows equallyspaced transparent cells. Crisp simple pixel art, same scale across poses, enough transparent gutter. No labels, props, ground or background.",
+      "referenced_image_paths": [
+        "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/approved-diagonal-arm-motion-reference.png",
+        "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/diagonal-arm-target-reference.png"
+      ],
+      "transparent_background": true,
+      "original": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-6c8bf084-8ca7-4aa6-9d29-9ed3559bf7c1.png",
+      "source": "diagonal-reference-arms-r18.png",
+      "review": "Rejected: arm sweeps do not clearly match approved alternating reference; several raised poses compress the hand into a fist. Retained as comparison only, not promoted.",
+      "source_sha256": "8bb18923dbc08b93fe749d5a40c35358bd18fcdb5cf2e8057510d2fb26c50ff4",
+      "source_dimensions": [
+        1774,
+        887
+      ],
+      "date": "2026-10-05",
+      "tool": "built-in ImageGen"
+    },
+    {
+      "prompt": "Use case: identity-preserve. Pixel-art animation perspective adaptation.\nIMAGE 1 is the approved DOWN-RIGHT farmer walk. Recreate THIS approved motion cycle viewed from the opposite rear three-quarter angle, walking UP-RIGHT (away from the camera and toward the right).\nIMAGE 2 is ONLY the rear-facing orientation and body-proportion reference. Do NOT duplicate its static arms over the animation. The full eight-frame motion comes from Image 1.\nKeep the same farmer: straw hat, reddish hair, short-sleeved white shirt, blue overalls, brown boots, slim proportional build, small relaxed hands, crisp low-resolution pixel clusters. Use Image2 for what the back of the farmer looks like; preserve hat-to-body and boot/leg proportions. Reconstruct the approved pose motion in a rear view rather than rotating flat pixels.\nThe key task is preserving BOTH anatomical arm trajectories from the approved walk: near arm sweeps from trailing behind the hip at contact1 to forward past the torso at opposite contact5; far arm does the reverse. Turn each whole reference pose spatially, including shoulders, elbows and palms. The arm swing must follow the walking direction, partly across the silhouette and torso, rather than both hands remaining splayed down toward their respective edges. At least1 and5 must show clearly opposite near AND far-arm positions.\nVisible sleeve-to-elbow-to-wrist connections; gently relaxed elbows and compact palms, no boxing fists. Far arm has its own motion, gently occluded by torso as it goes forward, reappearing continuously as it trails backward. Do not glue the far hand at hip height in all8poses. No stump popping on and off. No extra arm. An arm cannot teleport across its shoulder or swap anatomical identity.\nBuild a single coherent complete walk1-8: contact1, recoil2, passing3, rise4, opposite contact5, recoil6, passing7, rise8, then1. Same two legs alternately step, opposite arm follows each leg. Image1 missing pose4 intentionally; interpolate3-to5. Pose8-to1 must continue the arc smoothly.\nOutput a finished4-column2-row transparent sprite sheet with8distinct full-body poses in sequence. Allcharacterssameapproximately64nativepixelheight, equalcells, wide transparentgutter betweenrows andcolumns. Pixel art at consistent pixel size, no antialiasing or extra tiny texture, no labels, props, shadow, scene or background.",
+      "referenced_image_paths": [
+        "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/approved-diagonal-arm-motion-reference.png",
+        "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/diagonal-arm-facing-only.png"
+      ],
+      "transparent_background": true,
+      "original": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-08903d4f-62fc-4cc7-b129-1f40ff59de8a.png",
+      "source": "diagonal-reference-arms-r19.png",
+      "review": "Rejected: rear facing flips from up-right in1-4 to up-left in5-8; far-arm arc still weak; design invariant fails.",
+      "source_sha256": "998e781e824bed650b349e1979fce2e8f356ad6198e8c525021cff4fa957e6e3",
+      "source_dimensions": [
+        1774,
+        887
+      ],
+      "date": "2026-10-05",
+      "tool": "built-in ImageGen"
     }
   ],
   "actual_sources": {
@@ -533,5 +587,16 @@
     "edit_scope": "Hand/wrist silhouettes and connected forearm trajectories; no runtime integration.",
     "workflow": "Native reference, approved DOWN hand proportions, relaxed-wrist shoulder/elbow guide.",
     "limitations": "Generated edits are not byte-exact outside hands within the edited poses; scope checks are not anatomy proof."
+  },
+  "diagonal_arm_reference": {
+    "date": "2026-10-05",
+    "baseline": "before-diagonal-arm-reference",
+    "feedback": "Arms are still poor; use another approved diagonal walk as reference.",
+    "reference": "Seven approved original DOWN-RIGHT R5 poses; reopened pose4 excluded.",
+    "scope": "Both upper-diagonal arms and hands; preview only. No runtime integration.",
+    "result": "Three evaluated revisions per direction; none met the visual gate. Current native sources retained.",
+    "comparison_source": "diagonal-reference-arms-r18.png",
+    "comparison_preview": "up-diagonal-reference-arms-r18.gif",
+    "limitations": "Generated target edits preserve design, not byte-exact body pixels; comparison candidates are rejected."
   }
 }

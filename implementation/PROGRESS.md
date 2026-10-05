@@ -11413,3 +11413,50 @@ previews outside runtime. No runtime integration, gameplay/collision/input/
 simulation/resolution changes, next direction, queue mutations or push.
 Both upper diagonals remain in review;40other native frames untouched.
 Existing project.godot edits and unrelated untracked files preserved.
+
+## Diagonal arm motion from an approved reference - visual gate failed 2026-10-05
+
+User follow-up: use another approved diagonal walk as the arm reference.
+Used original accepted DOWN-RIGHT R5 poses1,2,3,5,6,7,8; excluded reopened
+pose4 from the generation input. Its separate current repair is displayed
+as a comparison with an explicit pending-review label. Packed actual native
+frames at integer6x; used current rear sheets, then single rear pose3 for
+orientation. No drawn farmer limbs, hand repaint, mirroring or limb warps.
+
+Built-in ImageGen:3 evaluated revisions per upper diagonal,6calls total.
+R17 preserved weak/static far-arm movement. R18 still lacks clearly opposite
+contact sweeps and compresses several hands into raised fists. UP-RIGHT R19
+changes rear facing from NE to NW between halves; UP-LEFT R19 drifts body/leg
+proportions without resolving smooth two-arm motion. All candidates rejected.
+Following the sprite runner's three-revision limit, no fourth generation and
+no candidate promotion. Requested visual correction remains unresolved.
+
+Sources preserved under assets/art_source/player-fhd/pilots/2026-10-04/
+walk-up-{right,left}/diagonal-reference-arms-r{17,18,19}.png. Exact prompts,
+original tool paths, dimensions, source/input SHA256 and rejection findings:
+diagonal-arm-reference-calls.json and three diagonal-arm-reference prompt
+sets in implementation/fhd-player/pilots/2026-10-04/. Native baseline and
+reference ownership:diagonal-arm-reference-baseline.json/inputs.json.
+
+Comparison only:up-diagonal-reference-arms-r18.gif at960x360,8x100ms;
+slow before/after1280x380,8x200ms; both infinite loops/shared palette.
+Selected comparison frames are8unique80x80binary-alpha per direction;
+common32px hat calibration, no per-frame scaling. UP-RIGHT heights63-65px,
+UP-LEFT60-64px. All56current native PNGs remain byte-identical to the baseline.
+Existing selected sources, idle sheets and the other five directions retained.
+Generation histories append failed calls without replacing active selections.
+
+Same upper-diagonal HTMLs now explicitly label the reference attempts as not
+accepted and expose reference/rear frame controls. Browser evidence:
+diagonal-arm-reference-browser.png, frame1-browser.png, frame5-browser.png
+(full filenames prefixed diagonal-arm-reference-). Normal playback, slow
+comparison and opposing contact1/5 inspected. Browser page remains open.
+No user approval implied by format checks or engine success.
+
+Verify PASS:55checks,0skips,0fails;7768headless asserts,1006input cases;
+sim1270427719/data8148086 unchanged; both exports PASS.518s exceeds the300s
+verification budget. Log:diagonal-arm-reference-engine-check.log.
+Sprite queue check PASS:20prompts with valid dependencies/statuses/index.
+Format/scope and git diff --check PASS; visual gate FAIL. No runtime sprite
+integration, game/data/input/collision changes, queue mutations, next direction
+or push. Existing project.godot edits and unrelated untracked files preserved.

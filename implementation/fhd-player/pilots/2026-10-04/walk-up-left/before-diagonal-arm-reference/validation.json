@@ -1,0 +1,144 @@
+{
+  "selected_source": "hands-r15.png",
+  "source_size": [
+    1774,
+    887
+  ],
+  "source_row_cuts": [
+    0,
+    445,
+    887
+  ],
+  "source_col_cuts": [
+    0,
+    444,
+    887,
+    1330,
+    1774
+  ],
+  "common_source_scale": 0.17679558011049723,
+  "native_canvas": [
+    80,
+    80
+  ],
+  "hat_calibration": 32,
+  "source_alpha_threshold": 128,
+  "resample": "nearest",
+  "anchor": "hat center and fixed top8px",
+  "frames_metrics": [
+    {
+      "frame": 1,
+      "bbox": [
+        22,
+        8,
+        58,
+        70
+      ],
+      "height": 62,
+      "hat_region_width": 32,
+      "sha256": "c15e1eb2b48f1dd605972d72ae8919da2475310aead222627d4b73484bd937be"
+    },
+    {
+      "frame": 2,
+      "bbox": [
+        22,
+        8,
+        59,
+        69
+      ],
+      "height": 61,
+      "hat_region_width": 31,
+      "sha256": "7c7896c5e6b0ac3e5f2f00a6158236f78e389b6c54d3623f8376e085d1e8471b"
+    },
+    {
+      "frame": 3,
+      "bbox": [
+        24,
+        8,
+        57,
+        70
+      ],
+      "height": 62,
+      "hat_region_width": 32,
+      "sha256": "63d06f3baba6e8bb9cea8d4f0e86bfac6b0a9457727f9e35ac8df498abf0144f"
+    },
+    {
+      "frame": 4,
+      "bbox": [
+        24,
+        8,
+        57,
+        72
+      ],
+      "height": 64,
+      "hat_region_width": 31,
+      "sha256": "bbf149fddafaab5d23650ba1403b5792e7c862b9ac2861a7943d098926fa8f92"
+    },
+    {
+      "frame": 5,
+      "bbox": [
+        22,
+        8,
+        57,
+        70
+      ],
+      "height": 62,
+      "hat_region_width": 32,
+      "sha256": "649766c0977b39feb1c84bc5f19315c107301174269eee6b5517a1bbe1d68302"
+    },
+    {
+      "frame": 6,
+      "bbox": [
+        24,
+        8,
+        57,
+        68
+      ],
+      "height": 60,
+      "hat_region_width": 31,
+      "sha256": "d3d7349a4ab86932f3851b7065398e7d3887f840ce913c76ae67c96d1b7edb46"
+    },
+    {
+      "frame": 7,
+      "bbox": [
+        24,
+        8,
+        57,
+        71
+      ],
+      "height": 63,
+      "hat_region_width": 32,
+      "sha256": "54b4d8a165ebd219c6095838dbf0fcae025609cdbcc64c5faf3865626ec3aac2"
+    },
+    {
+      "frame": 8,
+      "bbox": [
+        22,
+        8,
+        56,
+        70
+      ],
+      "height": 62,
+      "hat_region_width": 31,
+      "sha256": "e558ea43d4644d5c5a0ce7b730e94fd0bb58718482e5b3d5ea9cc9baa57236de"
+    }
+  ],
+  "status": "awaiting user review; preview only",
+  "frames": 8,
+  "fps": 10,
+  "fhd_display_scale": 2,
+  "gif_frame_durations_ms": [
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100
+  ],
+  "limitations": [
+    "Generated arm edits are not byte-exact outside hands inside edited poses.",
+    "Frame and scope checks do not prove anatomy or smooth motion."
+  ]
+}

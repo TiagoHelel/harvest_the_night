@@ -1,0 +1,62 @@
+{
+  "date": "2026-10-05",
+  "visual_gate": "FAIL",
+  "generations_per_asset": 3,
+  "failure_reasons": [
+    "R17/R18 far arm stays down and opposite-contact arcs remain incoherent.",
+    "UP-RIGHT R19 turns from NE to NW between halves.",
+    "UP-LEFT R19 changes body/leg proportions and still lacks smooth opposed arm motion."
+  ],
+  "format_scope_checks": "PASS",
+  "unchanged_native_frames": 56,
+  "changed_native_frames": [],
+  "candidate_checks": {
+    "up-right": {
+      "frames": 8,
+      "unique": 8,
+      "canvas": [
+        80,
+        80
+      ],
+      "alpha": "binary",
+      "generations": 3
+    },
+    "up-left": {
+      "frames": 8,
+      "unique": 8,
+      "canvas": [
+        80,
+        80
+      ],
+      "alpha": "binary",
+      "generations": 3
+    }
+  },
+  "comparison_sources": {
+    "up-right": "diagonal-reference-arms-r18.png",
+    "up-left": "diagonal-reference-arms-r18.png"
+  },
+  "promoted_to_native": false,
+  "integrated_in_game": false,
+  "reference": "Original approved DOWN-RIGHT R5 except reopened pose4.",
+  "evidence": [
+    "diagonal-arm-reference-browser.png",
+    "diagonal-arm-reference-frame1-browser.png",
+    "diagonal-arm-reference-frame5-browser.png"
+  ],
+  "engine_check": {
+    "status": "PASS",
+    "checks": 55,
+    "skipped": 0,
+    "failed": 0,
+    "elapsed_seconds": 518,
+    "over_budget": true,
+    "headless_asserts": 7768,
+    "input_cases": 1006,
+    "sim_hash": "1270427719 unchanged",
+    "data_hash": "8148086 unchanged",
+    "exports": "PASS",
+    "log": "diagonal-arm-reference-engine-check.log",
+    "limits": "Engine verification does not validate unintegrated sprite motion."
+  }
+}

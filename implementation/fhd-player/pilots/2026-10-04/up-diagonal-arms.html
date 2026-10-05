@@ -1,19 +1,20 @@
 <!doctype html>
 <html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Farmer - hand and wrist review</title>
-<style>body{margin:32px;background:#172225;color:#e9e3cf;font:16px system-ui}main{max-width:1100px;margin:auto}h1{font-size:26px}p{color:#b7ccc7}img{image-rendering:pixelated;max-width:100%;height:auto}button,a{color:#e9e3cf}button{background:#344b48;border:1px solid #66847c;padding:10px 18px;cursor:pointer;margin:8px}canvas{image-rendering:pixelated;width:320px;height:320px;background:#303a3e}details{margin-top:24px}summary{cursor:pointer}small{color:#b7ccc7}.poses{display:flex;gap:20px;flex-wrap:wrap}</style>
-<main><h1>Farmer &middot; Upper diagonal hands</h1>
-<p>Hands and wrists rebuilt across all eight poses. Normal playback: 10 fps. Compare the two directions at the same display scale.</p>
-<img src="up-diagonal-hands-r15.gif?v=hands-r15" width="1040" height="420" alt="Up-right and up-left revised arm cycles at FHD size and enlarged">
-<details><summary>Slow before and after</summary><img src="up-diagonal-hands-before-after-r15.gif?v=hands-r15" width="1280" height="380" alt="Previous and revised arm cycles, both directions, half speed"></details>
+<title>Farmer - diagonal reference arm review</title>
+<style>body{margin:24px;background:#172225;color:#e9e3cf;font:16px system-ui}main{max-width:1280px;margin:auto}h1{font-size:26px}p{color:#b7ccc7}img{image-rendering:pixelated;max-width:none;height:auto}.clip{overflow-x:auto}button,a{color:#e9e3cf}button{background:#344b48;border:1px solid #66847c;padding:10px 18px;cursor:pointer;margin:8px}canvas{image-rendering:pixelated;width:320px;height:320px;background:#303a3e}details{margin-top:24px}summary{cursor:pointer}small{color:#b7ccc7}.poses{display:flex;gap:20px;flex-wrap:wrap}</style>
+<main><h1>Farmer &middot; Diagonal arm reference</h1>
+<p>DOWN-RIGHT motion reference beside the new rear-diagonal attempts. These candidates were not accepted: arm continuity is still unresolved. Current sprites are preserved. Normal playback: 10 fps.</p>
+<div class="clip"><img src="up-diagonal-reference-arms-r18.gif?v=diagonal-reference-r18" width="960" height="360" alt="Down-right reference beside up-right and up-left revised walking arms"></div>
+<details><summary>Slow before and after</summary><div class="clip"><img src="up-diagonal-reference-before-after-r18.gif?v=diagonal-reference-r18" width="1280" height="380" alt="Previous and revised rear diagonals at half speed"></div></details>
 <details><summary>Inspect individual frames</summary>
 <p><button id="back">Previous</button><button id="next">Next</button><span id="count">Frame 1 / 8</span></p>
-<div class="poses"><div><p>UP-RIGHT</p><canvas width="80" height="80" id="right"></canvas></div><div><p>UP-LEFT</p><canvas width="80" height="80" id="left"></canvas></div></div></details>
-<p><a href="all-walk-directions-hands-r15.gif?v=hands-r15">All seven current walk directions</a></p>
-<p><small>Preview only &middot; Awaiting visual approval</small></p></main>
+<div class="poses"><div><p>DOWN-RIGHT REFERENCE</p><canvas width="80" height="80" id="reference"></canvas></div><div><p>UP-RIGHT</p><canvas width="80" height="80" id="right"></canvas></div><div><p>UP-LEFT</p><canvas width="80" height="80" id="left"></canvas></div></div></details>
+<p><a href="all-walk-directions-hands-r15.gif?v=hands-r15">All seven current walk directions (preserved)</a></p>
+<p><small>Comparison only &middot; Not accepted. Reference pose 4 displays the separate repair still in review; the other seven reference poses are approved.</small></p></main>
 <script>
-const series=Object.fromEntries(['right','left'].map(d=>[d,Array.from({length:8},(_,i)=>{let im=new Image();im.src=`walk-up-${d}/frames/walk-up-${d}-${String(i+1).padStart(2,'0')}.png?v=hands-r15`;return im})]));let index=0;
-function show(){for(const d of ['right','left']){const ctx=document.getElementById(d).getContext('2d');ctx.imageSmoothingEnabled=false;ctx.clearRect(0,0,80,80);if(series[d][index].complete)ctx.drawImage(series[d][index],0,0)}document.getElementById('count').textContent=`Frame ${index+1} / 8`}
+const paths={reference:'down-right',right:'up-right',left:'up-left'};
+const series=Object.fromEntries(Object.entries(paths).map(([key,d])=>[key,Array.from({length:8},(_,i)=>{let im=new Image();const folder=key==='reference'?'frames':'reference-arm-candidate';im.src=`walk-${d}/${folder}/walk-${d}-${String(i+1).padStart(2,'0')}.png?v=diagonal-reference-r18`;return im})]));let index=0;
+function show(){for(const d of Object.keys(paths)){const ctx=document.getElementById(d).getContext('2d');ctx.imageSmoothingEnabled=false;ctx.clearRect(0,0,80,80);if(series[d][index].complete)ctx.drawImage(series[d][index],0,0)}document.getElementById('count').textContent=`Frame ${index+1} / 8`}
 for(const images of Object.values(series))for(const im of images)im.onload=show;
 document.getElementById('next').onclick=()=>{index=(index+1)%8;show()};document.getElementById('back').onclick=()=>{index=(index+7)%8;show()};
 </script></html>
