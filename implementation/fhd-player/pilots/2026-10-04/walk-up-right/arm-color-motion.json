@@ -1,0 +1,263 @@
+{
+  "direction": "up-right",
+  "status": "FAIL",
+  "arms": {
+    "left": [
+      {
+        "area": 54,
+        "bbox": [
+          23,
+          37,
+          32,
+          46
+        ],
+        "lower_extent_y": 45,
+        "distal_centroid": [
+          28.294117647058822,
+          43.8235294117647
+        ],
+        "mask_hash": "40047a71c5433a6f7282066fcbc69de3b47eeb7122b15a16eac3686d8a299f11"
+      },
+      {
+        "area": 47,
+        "bbox": [
+          23,
+          37,
+          30,
+          47
+        ],
+        "lower_extent_y": 46,
+        "distal_centroid": [
+          25,
+          44.84615384615385
+        ],
+        "mask_hash": "ac65d27aa2c43657a8c4a9fda2c47fb3cc59a10c870bb4ca6bfc5b5113e9684e"
+      },
+      {
+        "area": 54,
+        "bbox": [
+          24,
+          38,
+          31,
+          50
+        ],
+        "lower_extent_y": 49,
+        "distal_centroid": [
+          26.25,
+          47.45
+        ],
+        "mask_hash": "a370afabdafde4d9e78bd2b1b08f32c4fae4a05ee61cffbe118a3944b9554b9e"
+      },
+      {
+        "area": 71,
+        "bbox": [
+          21,
+          38,
+          32,
+          51
+        ],
+        "lower_extent_y": 50,
+        "distal_centroid": [
+          23.5,
+          48.36363636363637
+        ],
+        "mask_hash": "b98e33ac1b55ad7b73bfa3838fe256d5dd0c9de96474826f158e8af65163f5ec"
+      },
+      {
+        "area": 69,
+        "bbox": [
+          21,
+          38,
+          31,
+          51
+        ],
+        "lower_extent_y": 50,
+        "distal_centroid": [
+          23.5,
+          48.36363636363637
+        ],
+        "mask_hash": "8270c6628123bf1df5ad0f75e2697cced9ce2074cf32dfa83c71c352a0a11cd6"
+      },
+      {
+        "area": 48,
+        "bbox": [
+          22,
+          39,
+          31,
+          47
+        ],
+        "lower_extent_y": 46,
+        "distal_centroid": [
+          24.352941176470587,
+          44.94117647058823
+        ],
+        "mask_hash": "f4a5d2bb727c2c4b74764e701bc9618edc99f867ed6b9c52d03d18d107d89af3"
+      },
+      {
+        "area": 63,
+        "bbox": [
+          24,
+          38,
+          31,
+          51
+        ],
+        "lower_extent_y": 50,
+        "distal_centroid": [
+          26.5,
+          48.36363636363637
+        ],
+        "mask_hash": "d26eccae8a10ecadb6be8b52b1f001ae97b8f9545e63427a80ba6fcb0ac366c8"
+      },
+      {
+        "area": 49,
+        "bbox": [
+          24,
+          37,
+          32,
+          46
+        ],
+        "lower_extent_y": 45,
+        "distal_centroid": [
+          28.785714285714285,
+          43.785714285714285
+        ],
+        "mask_hash": "123807201740a421cea54278b5d4f320c0b1473739edd630cce04ea566d0f7b1"
+      }
+    ],
+    "right": [
+      {
+        "area": 56,
+        "bbox": [
+          46,
+          38,
+          54,
+          49
+        ],
+        "lower_extent_y": 48,
+        "distal_centroid": [
+          50.6,
+          46.8
+        ],
+        "mask_hash": "4ce9d966276b905af68f680d7e2923a893828584048fb5d16c4d141ee9934e6c"
+      },
+      {
+        "area": 56,
+        "bbox": [
+          46,
+          38,
+          55,
+          48
+        ],
+        "lower_extent_y": 47,
+        "distal_centroid": [
+          51.785714285714285,
+          45.785714285714285
+        ],
+        "mask_hash": "6de66e7f2c8aa4d292dd92c9e5596e622f40053a789ffa2c882bfd3bf3a5d194"
+      },
+      {
+        "area": 47,
+        "bbox": [
+          46,
+          37,
+          54,
+          47
+        ],
+        "lower_extent_y": 46,
+        "distal_centroid": [
+          50.93333333333333,
+          44.86666666666667
+        ],
+        "mask_hash": "7110c19117d5c411d828ddfd729469aa1ee74fec420c4400dee9f5377d9ffdd7"
+      },
+      {
+        "area": 48,
+        "bbox": [
+          49,
+          33,
+          58,
+          42
+        ],
+        "lower_extent_y": 41,
+        "distal_centroid": [
+          51.733333333333334,
+          39.666666666666664
+        ],
+        "mask_hash": "c4901e3198b4127cc6e381cf9afd9cc072dd34e6709689901853228f74de459d"
+      },
+      {
+        "area": 57,
+        "bbox": [
+          47,
+          33,
+          58,
+          42
+        ],
+        "lower_extent_y": 41,
+        "distal_centroid": [
+          50.31578947368421,
+          39.78947368421053
+        ],
+        "mask_hash": "dbdacceac1d24423bbf9390bf7692ba2135b90d25bf19a08ebfe713570ee9d9d"
+      },
+      {
+        "area": 47,
+        "bbox": [
+          47,
+          37,
+          56,
+          46
+        ],
+        "lower_extent_y": 45,
+        "distal_centroid": [
+          52.05555555555556,
+          43.77777777777778
+        ],
+        "mask_hash": "175ce95f86a4267cad2ef2ab0bc70edf38ee1abdd10e87cd7d2fb4344582d656"
+      },
+      {
+        "area": 56,
+        "bbox": [
+          46,
+          37,
+          55,
+          48
+        ],
+        "lower_extent_y": 47,
+        "distal_centroid": [
+          51.5,
+          45.875
+        ],
+        "mask_hash": "5c34d646ee298c81896abaad0098cb307685d4a12b6cee8986709ea910dda544"
+      },
+      {
+        "area": 60,
+        "bbox": [
+          46,
+          37,
+          55,
+          49
+        ],
+        "lower_extent_y": 48,
+        "distal_centroid": [
+          51.5,
+          46.36363636363637
+        ],
+        "mask_hash": "886148d6462186f6c50ed2fef9011086e81aa23ea03de8a41766104ec5d2779f"
+      }
+    ]
+  },
+  "gates": {
+    "left": {
+      "lower_extent_range_px": 5,
+      "consecutive_identical_color_masks": [],
+      "pass": false
+    },
+    "right": {
+      "lower_extent_range_px": 7,
+      "consecutive_identical_color_masks": [],
+      "pass": true
+    }
+  },
+  "limits": "Colored lower extents/changed masks check visible motion amplitude, not anatomy, wrist landmarks or user approval."
+}

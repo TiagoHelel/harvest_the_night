@@ -211,69 +211,69 @@
     "up-right": [
       {
         "path": "walk-up-right/frames/walk-up-right-01.png",
-        "sha256": "eafb3db121d380b7e47bbed3f4aba28316651541e078e22bd4981368dd146cfa"
+        "sha256": "e2dd627db4c28935fb4a28c6bee870859882188cb4a4019592ff2ce3fe57e576"
       },
       {
         "path": "walk-up-right/frames/walk-up-right-02.png",
-        "sha256": "a0a5d8e739238d0d084a52ec7602ec895cc61cc55f8e502b810a0a49fde19e04"
+        "sha256": "a71bb34432811969872747158360dcdd181fed9cf7079705017b72efd2527218"
       },
       {
         "path": "walk-up-right/frames/walk-up-right-03.png",
-        "sha256": "4643d66a5f6eae7b850dcb0cf9a49e8e325235a441d9eb8cac1037a8d2a03102"
+        "sha256": "bdabf5e6a705d7296f232698530c618d400073d25ab48873b5607e8da739d4bf"
       },
       {
         "path": "walk-up-right/frames/walk-up-right-04.png",
-        "sha256": "ab42d2bace209fb96ff9a4112a7f4bef5edb8fd789183085706ef08703882f43"
+        "sha256": "7942d5819b1c35f28033c1d57a71624fa39f557ffe90b04af73e7923e90bff27"
       },
       {
         "path": "walk-up-right/frames/walk-up-right-05.png",
-        "sha256": "41d9e1037bf6180c8283287bb1a16ce497bb4c5104a49885af86eec34821ce51"
+        "sha256": "56af2056b4616e68bbfd31cb623e7754624d13d2c850666b4cb710e830483f4e"
       },
       {
         "path": "walk-up-right/frames/walk-up-right-06.png",
-        "sha256": "d9d3bee7921c911218c724e061ac77a2675d245ecd94cf5026c2f5dde8e85e4e"
+        "sha256": "a51bfc63397b6097f4928375dc47c790886749445e21aa504bc2426c3d03f1f8"
       },
       {
         "path": "walk-up-right/frames/walk-up-right-07.png",
-        "sha256": "6c78f8bbb861800541a1ca86b26434dae171b62af7d4020e83289e47d609f8f5"
+        "sha256": "65f189717b8710caa490589d90186fb03ac4f67351800ca78fd46100596a1ca0"
       },
       {
         "path": "walk-up-right/frames/walk-up-right-08.png",
-        "sha256": "1b0adb425f79b59285bbe2ac5bef77532a5abbaaef37ce28b58ed2e996b6dfaf"
+        "sha256": "292ab06bfb47223b1303e3c3840d243347c502a3f85a3a7480e666871d985f28"
       }
     ],
     "up-left": [
       {
         "path": "walk-up-left/frames/walk-up-left-01.png",
-        "sha256": "afefe3c6a10bf46d3a201bbf8916c83c6f4f1987351016380582e7c5b75a2c25"
+        "sha256": "15537115983ecb6d7afc691b8c9a782288355f0b06183d0b11271ac8844f2ac0"
       },
       {
         "path": "walk-up-left/frames/walk-up-left-02.png",
-        "sha256": "d3e63d45898d135d52be58045692be53ba42717a1c2a147d4f358e5446a40984"
+        "sha256": "4663b7a642849e8c900003f37dec852bc7db73e239dcf809c94097f5d239e591"
       },
       {
         "path": "walk-up-left/frames/walk-up-left-03.png",
-        "sha256": "2168b536023bd739724bf898636778a0ed671fa7f3e7ee1c7dfe6f36699a3be6"
+        "sha256": "9fd5bcba29cf68a9936e4e61d122b8c0b8070cd5da62e7f84a76aec62f06ac4e"
       },
       {
         "path": "walk-up-left/frames/walk-up-left-04.png",
-        "sha256": "81d9959b5dab17ecfcde14b1bd6f93d56629fd8bc1dfb84b9df522b38dd46611"
+        "sha256": "b688c97a9847234386314199e515b7673e5ced6c820761f2187c6738d21f1b39"
       },
       {
         "path": "walk-up-left/frames/walk-up-left-05.png",
-        "sha256": "a0b84b6649c103affae0e73137ff4e4eb3be29f6ccd0c2f6626fec1311e21666"
+        "sha256": "b3c863a1e9afbc741d77b516bc2b9f7aa8bd97b561c06338f9240c38ed404d89"
       },
       {
         "path": "walk-up-left/frames/walk-up-left-06.png",
-        "sha256": "e52b49c6141bc4c118dadc0f7dd526308cbd7cb603be193a0109653501e3f54b"
+        "sha256": "59e893f44cd705a7c1a777509bb6014f5f59c486a262e3e361a09b0ba6c72ea4"
       },
       {
         "path": "walk-up-left/frames/walk-up-left-07.png",
-        "sha256": "bc3ac8506d749598d6611a89bf061e2e8a12443a0dcaf6d8efe107a111f74ca4"
+        "sha256": "c5f8f828b86dc8498ef2e17845e0578a1e5d45ed120c15c8271ca59f4f9c1ee3"
       },
       {
         "path": "walk-up-left/frames/walk-up-left-08.png",
-        "sha256": "f0ef2b5b74baf72e3fb63f31acef5ba355f23fd6c237fa9744dba7283d3914a9"
+        "sha256": "9dd045b0aa6ef555f300107f43fcfcb04dedf3e1b865e6a6c106ee1bab42249b"
       }
     ]
   }

@@ -1,0 +1,158 @@
+{
+  "status": "awaiting user review; not integrated",
+  "frames": 8,
+  "fps": 10,
+  "canvas": [
+    80,
+    80
+  ],
+  "selected_source": "arm-smoothing-r9.png; far left elbow/hand trajectory8poses",
+  "native_overrides": {
+    "frames": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "source": "arm-smoothing-r9.png",
+    "native_source_scale": 0.1702127659574468
+  },
+  "source_row_cuts": [
+    0,
+    444,
+    887
+  ],
+  "native_target_height": 64,
+  "fhd_display_scale": 2,
+  "common_source_scale": 0.1702127659574468,
+  "tracking_common_source_scale": 1,
+  "arm_calibration_reference": "Median native hat width of accepted eight-pose recovery cycle",
+  "idle_bbox": [
+    25,
+    8,
+    55,
+    72
+  ],
+  "frames_metrics": [
+    {
+      "frame": 1,
+      "bbox": [
+        24,
+        8,
+        58,
+        70
+      ],
+      "height": 62,
+      "hat_region_width": 32,
+      "sha256": "7946c0c9755426d909dcab11968fb085639bd7b9d26371ec19529686c5e6eec2"
+    },
+    {
+      "frame": 2,
+      "bbox": [
+        24,
+        8,
+        55,
+        71
+      ],
+      "height": 63,
+      "hat_region_width": 31,
+      "sha256": "081b6e062df29485f4e663f8f978fb471e838cc851aabc65147e726d036c9fa0"
+    },
+    {
+      "frame": 3,
+      "bbox": [
+        22,
+        8,
+        55,
+        69
+      ],
+      "height": 61,
+      "hat_region_width": 31,
+      "sha256": "0bccb6262828873750d3727ee45800fc1c30aeb0bd89c419183d4d5dd4660b9f"
+    },
+    {
+      "frame": 4,
+      "bbox": [
+        21,
+        8,
+        58,
+        69
+      ],
+      "height": 61,
+      "hat_region_width": 32,
+      "sha256": "14a26988d7c9b1d37400614f6b023176337716f5842398f6e72b2b27e9dc6842"
+    },
+    {
+      "frame": 5,
+      "bbox": [
+        21,
+        8,
+        57,
+        70
+      ],
+      "height": 62,
+      "hat_region_width": 32,
+      "sha256": "300f074a943fb150091935fbfd013cf9f19f15e583038dd57d324cf6f5b49429"
+    },
+    {
+      "frame": 6,
+      "bbox": [
+        21,
+        8,
+        57,
+        70
+      ],
+      "height": 62,
+      "hat_region_width": 31,
+      "sha256": "ab4d69151e92d0a11cbc5c81da0eb59c06a91344079b3eb89d88f0c5d3076e19"
+    },
+    {
+      "frame": 7,
+      "bbox": [
+        22,
+        8,
+        55,
+        68
+      ],
+      "height": 60,
+      "hat_region_width": 31,
+      "sha256": "31d9a869bb6bfdb7faec68598fd92b81509e05ce92757c5cf25e8d25ceecf219"
+    },
+    {
+      "frame": 8,
+      "bbox": [
+        24,
+        8,
+        58,
+        68
+      ],
+      "height": 60,
+      "hat_region_width": 32,
+      "sha256": "7989e730cad5b3c225a4a623e3eb3b744b5cda8b0264fd80a36cdd54336180f4"
+    }
+  ],
+  "source_alpha_threshold": 128,
+  "resample": "nearest",
+  "anchor": "hat center and fixed head top",
+  "limitations": [
+    "Prototype display size, not yet rendered inside the game.",
+    "Slow comparison shows accepted recovery cycle beside far-arm correction.",
+    "Generated source edits are not pixel-identical to their references."
+  ],
+  "idle_hat_region_width": 30,
+  "native_previous_vs_revised_silhouette_iou": 0.8145062020641984,
+  "gif_frame_durations_ms": [
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100
+  ]
+}

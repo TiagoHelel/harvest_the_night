@@ -6,7 +6,7 @@
     80,
     80
   ],
-  "selected_source": "arm-smoothing-r9.png; far left elbow/hand trajectory8poses",
+  "selected_source": "full-arm-materials-r13.png",
   "native_overrides": {
     "frames": [
       1,
@@ -18,19 +18,21 @@
       7,
       8
     ],
-    "source": "arm-smoothing-r9.png",
-    "native_source_scale": 0.1702127659574468
+    "source": "full-arm-materials-r13.png",
+    "native_source_scale": 0.17582417582417584
   },
   "source_row_cuts": [
     0,
-    444,
+    438,
     887
   ],
   "native_target_height": 64,
   "fhd_display_scale": 2,
-  "common_source_scale": 0.1702127659574468,
-  "tracking_common_source_scale": 1,
-  "arm_calibration_reference": "Median native hat width of accepted eight-pose recovery cycle",
+  "common_source_scale": 0.17582417582417584,
+  "tracking_common_source_scale": 0.17777777777777778,
+  "arm_calibration_reference": "Common32pxhat-width calibration across all eight poses",
+  "tracking_source": "full-arm-tracking-r12.png; cyan left arm/pink right arm",
+  "color_motion_status": "FAIL",
   "idle_bbox": [
     25,
     8,
@@ -41,98 +43,98 @@
     {
       "frame": 1,
       "bbox": [
-        24,
+        23,
         8,
         58,
-        70
+        69
       ],
-      "height": 62,
+      "height": 61,
       "hat_region_width": 32,
-      "sha256": "7946c0c9755426d909dcab11968fb085639bd7b9d26371ec19529686c5e6eec2"
+      "sha256": "1ce099b9cbfe967e71dde18d31bb1abfdba5c2699d63d56297f15ffe274d1c2b"
     },
     {
       "frame": 2,
       "bbox": [
-        24,
+        22,
         8,
-        55,
-        71
+        57,
+        69
       ],
-      "height": 63,
-      "hat_region_width": 31,
-      "sha256": "081b6e062df29485f4e663f8f978fb471e838cc851aabc65147e726d036c9fa0"
+      "height": 61,
+      "hat_region_width": 32,
+      "sha256": "57ebea3bae2c4fec5cf2b4ac5cbc6718d75e5de81070f3d901cbd1610ecb1805"
     },
     {
       "frame": 3,
       "bbox": [
         22,
         8,
-        55,
-        69
+        56,
+        68
       ],
-      "height": 61,
-      "hat_region_width": 31,
-      "sha256": "0bccb6262828873750d3727ee45800fc1c30aeb0bd89c419183d4d5dd4660b9f"
+      "height": 60,
+      "hat_region_width": 32,
+      "sha256": "febfdda9db71aec83ff56d3787b4f7216285280a2a07e406b5b79d7159b4a728"
     },
     {
       "frame": 4,
       "bbox": [
-        21,
+        20,
         8,
         58,
-        69
+        68
       ],
-      "height": 61,
+      "height": 60,
       "hat_region_width": 32,
-      "sha256": "14a26988d7c9b1d37400614f6b023176337716f5842398f6e72b2b27e9dc6842"
+      "sha256": "83e551eefb18d7e705ce38af302c30189540b1958ffca0bf6ef09edc23083647"
     },
     {
       "frame": 5,
       "bbox": [
-        21,
+        20,
         8,
         57,
-        70
+        69
       ],
-      "height": 62,
+      "height": 61,
       "hat_region_width": 32,
-      "sha256": "300f074a943fb150091935fbfd013cf9f19f15e583038dd57d324cf6f5b49429"
+      "sha256": "d9de6bef4dc89d5558835f9ac3e91259deda70dd539e58a844a619d17a1571cf"
     },
     {
       "frame": 6,
       "bbox": [
-        21,
+        22,
         8,
-        57,
-        70
+        56,
+        69
       ],
-      "height": 62,
-      "hat_region_width": 31,
-      "sha256": "ab4d69151e92d0a11cbc5c81da0eb59c06a91344079b3eb89d88f0c5d3076e19"
+      "height": 61,
+      "hat_region_width": 32,
+      "sha256": "9ff760b51dcee1080ac524b5427cad279e69d337eeeee498550f90920da041f9"
     },
     {
       "frame": 7,
       "bbox": [
         22,
         8,
-        55,
-        68
+        56,
+        67
       ],
-      "height": 60,
-      "hat_region_width": 31,
-      "sha256": "31d9a869bb6bfdb7faec68598fd92b81509e05ce92757c5cf25e8d25ceecf219"
+      "height": 59,
+      "hat_region_width": 32,
+      "sha256": "8c7e0df9adfd7838e9fb8643410aff28c6a486bdac398f666c7c55eb103a0822"
     },
     {
       "frame": 8,
       "bbox": [
-        24,
+        22,
         8,
-        58,
-        68
+        57,
+        67
       ],
-      "height": 60,
+      "height": 59,
       "hat_region_width": 32,
-      "sha256": "7989e730cad5b3c225a4a623e3eb3b744b5cda8b0264fd80a36cdd54336180f4"
+      "sha256": "59ab4e80db3bdf9fd82182e7ddb144937d39a87f7f12a3fde8fe5f1bc970f712"
     }
   ],
   "source_alpha_threshold": 128,
@@ -140,11 +142,11 @@
   "anchor": "hat center and fixed head top",
   "limitations": [
     "Prototype display size, not yet rendered inside the game.",
-    "Slow comparison shows accepted recovery cycle beside far-arm correction.",
+    "Slow comparison shows cyan left/pink right arm source beside restored materials.",
     "Generated source edits are not pixel-identical to their references."
   ],
   "idle_hat_region_width": 30,
-  "native_previous_vs_revised_silhouette_iou": 0.8145062020641984,
+  "native_tracking_vs_material_silhouette_iou": 0.8929554210236654,
   "gif_frame_durations_ms": [
     100,
     100,

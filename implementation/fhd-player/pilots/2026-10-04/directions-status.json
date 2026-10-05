@@ -55,22 +55,24 @@
   "walk_up_right": {
     "status": "awaiting_approval",
     "date": "2026-10-05",
-    "candidate": "walk-up-right/arm-smoothing-r9",
-    "preview": "walk-up-right/up-diagonal-arms-r9.gif",
-    "diagnostic": "up-diagonal-arms-before-after.gif",
-    "user_feedback": "Left arm disappears and appears without fluid motion.",
-    "rejected_candidate": "walk-up-right/materials-r3",
-    "feedback_addressed": "Continuous far left shoulder/elbow/hand cycle with modest arc.",
-    "approval_date": "2026-10-05"
+    "candidate": "walk-up-right/full-arm-materials-r13",
+    "preview": "up-diagonal-full-arms-r13.gif",
+    "diagnostic": "up-diagonal-full-arms-before-after-r13.gif",
+    "user_feedback": "UP-RIGHT left arm barely moves; UP-LEFT arm stays static in most poses.",
+    "rejected_candidate": "walk-up-right/arm-smoothing-r9",
+    "feedback_addressed": "Rebuilt all eight shoulder/elbow/hand chains using fixed cyan-left/pink-right arm identities.",
+    "approval_date": "2026-10-05",
+    "review_limit": "Motion quality awaits user review; UP-LEFT near-arm7-to8 remains brisk."
   },
   "walk_up_left": {
     "status": "awaiting_approval",
     "date": "2026-10-05",
-    "candidate": "walk-up-left/arms-r9 + arm-05-06-r10 override5/6",
-    "preview": "walk-up-left/up-diagonals-arms-r10.gif",
-    "diagnostic": "up-diagonal-arms-before-after.gif",
-    "feedback_addressed": "Relaxed near arm beside hip in5/6, reduced bend; six other native poses unchanged.",
-    "rejected_candidate": "walk-up-left/materials-r2 + recovery-r3 overrides7/8",
-    "user_feedback": "Arm goes too far backward in5/6."
+    "candidate": "walk-up-left/full-arm-materials-r13",
+    "preview": "up-diagonal-full-arms-r13.gif",
+    "diagnostic": "up-diagonal-full-arms-before-after-r13.gif",
+    "feedback_addressed": "Rebuilt all eight shoulder/elbow/hand chains using fixed cyan-left/pink-right arm identities.",
+    "rejected_candidate": "walk-up-left/arms-r9 + arm-05-06-r10 override5/6",
+    "user_feedback": "UP-RIGHT left arm barely moves; UP-LEFT arm stays static in most poses.",
+    "review_limit": "Motion quality awaits user review; UP-LEFT near-arm7-to8 remains brisk."
   }
 }

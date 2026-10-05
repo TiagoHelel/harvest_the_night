@@ -56,47 +56,13 @@ def gif(frames, path, duration):
     paletted = [f.convert('RGB').quantize(palette=palette, dither=Image.Dither.NONE) for f in frames]
     paletted[0].save(path, save_all=True, append_images=paletted[1:], duration=duration, loop=0, disposal=2, optimize=False)
 
-tracking_cells = cuts(SOURCE / 'walk-up-right/materials-r5.png')
-normal_cells = cuts(SOURCE / 'walk-up-right/materials-r5.png')
-# Hold the rejected R3's common character scale. Shorter intermediate poses
-# must not enlarge the head when the median visible silhouette becomes shorter.
-scale = json.loads((ROOT/'rejected-r3/validation.json').read_text())['common_source_scale']
-normal = pack(normal_cells, scale)
-# Only frames7/8 are replaced. The six R5 native frames use their original
-# source cuts and sampling grid; packing a new full atlas could change them.
-recovery_source = clean(Image.open(SOURCE / 'walk-up-right/recovery-07-08-r1.png'))
-mid = round(recovery_source.width/2)
-recovery_cells = [recovery_source.crop((0,0,mid,recovery_source.height)),
-                  recovery_source.crop((mid,0,recovery_source.width,recovery_source.height))]
-reference_widths = []
-pair_widths = []
-for base, cell in zip(normal_cells[6:], recovery_cells):
-    b = base.getbbox()
-    ref = base.crop((0,b[1],base.width,b[1]+100)).getbbox()
-    reference_widths.append(ref[2]-ref[0])
-    b = cell.getbbox()
-    head = cell.crop((0,b[1],cell.width,b[1]+round((b[3]-b[1])*.25))).getbbox()
-    pair_widths.append(head[2]-head[0])
-recovery_calibration = statistics.median(reference_widths)/statistics.median(pair_widths)
-normal[6:] = pack(recovery_cells, scale*recovery_calibration,
-                 head_depth=round(100/recovery_calibration))
-tracking_scale = scale
-tracking = pack(tracking_cells, tracking_scale)
-# Arm edit uses the complete accepted8-pose reference, including recovery7/8.
-arm_cells=cuts(SOURCE/'walk-up-right/arm-smoothing-r9.png')
-tracking=[clean(Image.open(ROOT/f'before-arm-smoothing/frames/walk-up-right-{i+1:02}.png'))
-          for i in range(8)]
-native_hat_widths=[]
-source_hat_widths=[]
-for old,cell in zip(tracking,arm_cells):
-    hb=old.crop((0,TOP,FRAME,TOP+14)).getbbox()
-    native_hat_widths.append(hb[2]-hb[0])
-    b=cell.getbbox()
-    hb=cell.crop((0,b[1],cell.width,b[1]+round((b[3]-b[1])*.22))).getbbox()
-    source_hat_widths.append(hb[2]-hb[0])
-arm_scale=statistics.median(native_hat_widths)/statistics.median(source_hat_widths)
-arm_head_depth=round(statistics.median(c.getbbox()[3]-c.getbbox()[1] for c in arm_cells)*.22)
-normal=pack(arm_cells,arm_scale,head_depth=arm_head_depth)
+# Shared full-arm source keeps one common scale across all eight poses.
+import sys
+sys.path.insert(0,str(ROOT.parent))
+from full_arm_cycle_export import export_direction
+normal,tracking,cycle = export_direction('up-right')
+arm_scale = cycle['common_source_scale']
+tracking_scale = cycle['tracking_sampling']['common_source_scale']
 idle_source = clean(Image.open(SOURCE / 'walk-up-right/rotation-r1.png'))
 ib = idle_source.getbbox()
 idle_crop = idle_source.crop(ib)
@@ -139,7 +105,7 @@ for i, frame in enumerate(normal):
     check=Image.new('RGBA',(640,370),'#303a3e')
     check.alpha_composite(tracking[i].resize((320,320),Image.Resampling.NEAREST),(0,35))
     check.alpha_composite(frame.resize((320,320),Image.Resampling.NEAREST),(320,35))
-    caption(ImageDraw.Draw(check),(15,10),f'BEFORE (LEFT) / CONTINUOUS FAR ARM (RIGHT) / FRAME {i+1}',12)
+    caption(ImageDraw.Draw(check),(15,10),f'ARM LEFT CYAN / RIGHT PINK | MATERIALS | FRAME {i+1}',12)
     diagnostic.append(check)
 gif(preview,ROOT/'idle-walk-up-right.gif',100)
 gif(diagnostic,ROOT/'leg-tracking-slow.gif',200)
@@ -151,16 +117,18 @@ for i,frame in enumerate(normal):
     caption(ImageDraw.Draw(contact),(i*160+10,190),f'{i+1:02}')
 contact.convert('RGB').save(ROOT/'contact-sheet.png')
 report={'status':'awaiting user review; not integrated','frames':8,'fps':10,'canvas':[80,80],
-        'selected_source':'arm-smoothing-r9.png; far left elbow/hand trajectory8poses',
-        'native_overrides':{'frames':list(range(1,9)),'source':'arm-smoothing-r9.png',
+        'selected_source':cycle['selected_source'],
+        'native_overrides':{'frames':list(range(1,9)),'source':cycle['selected_source'],
                             'native_source_scale':arm_scale},
-        'source_row_cuts':[0,round(Image.open(SOURCE/'walk-up-right/arm-smoothing-r9.png').height/2),Image.open(SOURCE/'walk-up-right/arm-smoothing-r9.png').height],
-        'native_target_height':64,'fhd_display_scale':2,'common_source_scale':arm_scale,'tracking_common_source_scale':1,
-        'arm_calibration_reference':'Median native hat width of accepted eight-pose recovery cycle',
+        'source_row_cuts':cycle['source_row_cuts'],
+        'native_target_height':64,'fhd_display_scale':2,'common_source_scale':arm_scale,'tracking_common_source_scale':tracking_scale,
+        'arm_calibration_reference':'Common32pxhat-width calibration across all eight poses',
+        'tracking_source':'full-arm-tracking-r12.png; cyan left arm/pink right arm',
+        'color_motion_status':cycle['color_motion_status'],
         'idle_bbox':idle.getbbox(),'frames_metrics':metrics,
         'source_alpha_threshold':128,'resample':'nearest','anchor':'hat center and fixed head top',
         'limitations':['Prototype display size, not yet rendered inside the game.',
-                        'Slow comparison shows accepted recovery cycle beside far-arm correction.',
+                        'Slow comparison shows cyan left/pink right arm source beside restored materials.',
                         'Generated source edits are not pixel-identical to their references.']}
 ih=idle.crop((0,TOP,FRAME,TOP+14)).getbbox()
 report['idle_hat_region_width']=ih[2]-ih[0]
@@ -170,7 +138,7 @@ for diagnostic, material in zip(tracking, normal):
     ta, ma = diagnostic.getchannel('A'), material.getchannel('A')
     intersection += ImageChops.darker(ta,ma).histogram()[255]
     union += ImageChops.lighter(ta,ma).histogram()[255]
-report['native_previous_vs_revised_silhouette_iou'] = intersection / union
+report['native_tracking_vs_material_silhouette_iou'] = intersection / union
 with Image.open(ROOT/'idle-walk-up-right.gif') as saved:
     assert saved.n_frames == 8
     durations = []

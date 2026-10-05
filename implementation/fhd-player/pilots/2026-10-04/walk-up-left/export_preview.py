@@ -37,73 +37,15 @@ def save_gif(frames, path, duration):
             assert saved.info['duration'] == duration
 
 
-source = clean(Image.open(SOURCE / 'arms-r9.png'))
-cols = [round(i * source.width / 4) for i in range(5)]
-blank = [y for y in range(round(source.height*.4),round(source.height*.6))
-         if source.getchannel('A').crop((0,y,source.width,y+1)).getbbox() is None]
-assert blank, 'No empty source row gutter; inspect before cutting.'
-rows = [0, round(statistics.median(blank)), source.height]
-cells = [source.crop((cols[c], rows[r], cols[c+1], rows[r+1]))
-         for r in range(2) for c in range(4)]
-assert all(c.getbbox() is not None for c in cells)
-# Arm silhouettes must not change the accepted head and leg display scale.
-scale = json.loads((ROOT / 'before-arms-2026-10-05/validation.json').read_text())['common_source_scale']
-reference = clean(Image.open(SOURCE / 'rebuild-materials-r7.png'))
-reference_cells = [reference.crop((cols[c],rows[r],cols[c+1],rows[r+1]))
-                   for r in range(2) for c in range(4)]
-def hat_width(cell):
-    b=cell.getbbox()
-    h=cell.crop((0,b[1],cell.width,b[1]+round((b[3]-b[1])*.22))).getbbox()
-    return h[2]-h[0]
-arm_source_calibration = statistics.median(map(hat_width,reference_cells))/statistics.median(map(hat_width,cells))
-scale *= arm_source_calibration
-frames, metrics = [], []
-(ROOT / 'frames').mkdir(exist_ok=True)
-strip = Image.new('RGBA', (FRAME * 8, FRAME))
-for i, cell in enumerate(cells):
-    cell_scale = scale
-    box = cell.getbbox()
-    head_depth = round((box[3] - box[1]) * .22)
-    head = cell.crop((0, box[1], cell.width, box[1] + head_depth)).getbbox()
-    center = (head[0] + head[2]) / 2
-    small = cell.resize((round(cell.width * cell_scale), round(cell.height * cell_scale)), Image.Resampling.NEAREST)
-    frame = Image.new('RGBA', (FRAME, FRAME))
-    frame.alpha_composite(small, (round(FRAME / 2 - center * cell_scale), TOP - small.getbbox()[1]))
-    b = frame.getbbox()
-    assert b[0] > 0 and b[2] < FRAME and b[3] < FRAME - 2, b
-    assert set(frame.getchannel('A').tobytes()) <= {0, 255}
-    frame.save(ROOT / f'frames/walk-up-left-{i + 1:02}.png')
-    strip.alpha_composite(frame, (i * FRAME, 0))
-    hb = frame.crop((0, TOP, FRAME, TOP + 14)).getbbox()
-    metrics.append({'frame': i+1, 'bbox': b, 'height': b[3]-b[1],
-                    'hat_region_width': hb[2]-hb[0],
-                    'sha256': hashlib.sha256(frame.tobytes()).hexdigest()})
-    frames.append(frame)
-assert len({m['sha256'] for m in metrics}) == 8
-# Replace ONLY reported poses5/6; the other6R9 frames retain their pixels.
-pair=clean(Image.open(SOURCE/'arm-05-06-r10.png'))
-mid=round(pair.width/2)
-pair_cells=[pair.crop((0,0,mid,pair.height)),pair.crop((mid,0,pair.width,pair.height))]
-pair_scale=32/statistics.median(map(hat_width,pair_cells))
-for i,cell in zip([4,5],pair_cells):
-    b=cell.getbbox()
-    head=cell.crop((0,b[1],cell.width,b[1]+round((b[3]-b[1])*.22))).getbbox()
-    center=(head[0]+head[2])/2
-    small=cell.resize((round(cell.width*pair_scale),round(cell.height*pair_scale)),Image.Resampling.NEAREST)
-    frame=Image.new('RGBA',(FRAME,FRAME))
-    frame.alpha_composite(small,(round(FRAME/2-center*pair_scale),TOP-small.getbbox()[1]))
-    b=frame.getbbox()
-    assert b[0]>0 and b[2]<FRAME and b[3]<FRAME-2,b
-    frames[i]=frame
-    frame.save(ROOT/f'frames/walk-up-left-{i+1:02}.png')
-    hb=frame.crop((0,TOP,FRAME,TOP+14)).getbbox()
-    metrics[i]={'frame':i+1,'bbox':b,'height':b[3]-b[1],'hat_region_width':hb[2]-hb[0],
-                'sha256':hashlib.sha256(frame.tobytes()).hexdigest()}
-strip=Image.new('RGBA',(FRAME*8,FRAME))
-for i,frame in enumerate(frames):
-    strip.alpha_composite(frame,(i*FRAME,0))
-assert len({m['sha256'] for m in metrics}) == 8
-strip.save(ROOT / 'walk-up-left-strip.png')
+# Both complete arm cycles are sampled from generated sources in one shared pipeline.
+import sys
+sys.path.insert(0,str(ROOT.parent))
+from full_arm_cycle_export import export_direction
+frames,tracking_frames,cycle = export_direction('up-left')
+metrics = cycle['frames_metrics']
+source = clean(Image.open(SOURCE / cycle['selected_source']))
+cols,rows = cycle['source_col_cuts'],cycle['source_row_cuts']
+scale = cycle['common_source_scale']
 
 idle_src = clean(Image.open(SOURCE / 'rotation-r1.png'))
 idle_crop = idle_src.crop(idle_src.getbbox())
@@ -112,18 +54,7 @@ idle = Image.new('RGBA', (FRAME, FRAME))
 idle.alpha_composite(idle_small, ((FRAME-idle_small.width)//2, TOP))
 idle.save(ROOT / 'idle-native.png')
 
-# The tracking source was already uniformly sampled and packed into80px cells.
-# Read those pixels exactly for the geometry/material comparison.
-tracking_source = clean(Image.open(SOURCE / 'rebuild-tracking-r6-packed.png'))
-assert tracking_source.size == (320,160)
-tracking_cells = [tracking_source.crop((c*80,r*80,(c+1)*80,(r+1)*80))
-                  for r in range(2) for c in range(4)]
-tracking_frames = []
-(ROOT/'tracking-frames').mkdir(exist_ok=True)
-for i,cell in enumerate(tracking_cells):
-    frame=cell
-    frame.save(ROOT/f'tracking-frames/phase-{i+1:02}.png')
-    tracking_frames.append(frame)
+# Colored arm frames from the shared export retain source arm identities.
 
 previews, slow, idle_previews, diagnostics = [], [], [], []
 contact = Image.new('RGBA', (1280, 390), '#303a3e')
@@ -150,7 +81,7 @@ for i, left in enumerate(frames):
     diagnostic=Image.new('RGBA',(640,370),'#303a3e')
     diagnostic.alpha_composite(tracking_frames[i].resize((320,320),Image.Resampling.NEAREST),(0,35))
     diagnostic.alpha_composite(left.resize((320,320),Image.Resampling.NEAREST),(320,35))
-    caption(ImageDraw.Draw(diagnostic),(15,10),f'LEFT CYAN / RIGHT PINK | MATERIALS | FRAME {i+1}',12)
+    caption(ImageDraw.Draw(diagnostic),(15,10),f'ARM LEFT CYAN / RIGHT PINK | MATERIALS | FRAME {i+1}',12)
     diagnostics.append(diagnostic)
     contact.alpha_composite(right.resize((160,160),Image.Resampling.NEAREST), (i*160,25))
     contact.alpha_composite(left.resize((160,160),Image.Resampling.NEAREST), (i*160,210))
@@ -166,19 +97,20 @@ for i, left in enumerate(frames):
     caption(sd, (30,312), 'Preview only - awaiting approval', 14, '#aac2bd')
     caption(sd, (30,348), f'Frame {i+1:02} / 08', 14)
     idle_previews.append(standing)
-save_gif(previews, ROOT / 'up-diagonals-arms-r10.gif', 100)
+save_gif(previews, ROOT / 'up-diagonals-full-arms-r13.gif', 100)
 save_gif(slow, ROOT / 'gait-comparison-slow.gif', 200)
-save_gif(diagnostics, ROOT / 'tracking-materials-arms-r10.gif', 200)
+save_gif(diagnostics, ROOT / 'tracking-materials-full-arms-r13.gif', 200)
 save_gif(idle_previews, ROOT / 'idle-walk-up-left.gif', 100)
 previews[0].convert('RGB').save(ROOT / 'comparison-poster.png')
 contact.convert('RGB').save(ROOT / 'contact-sheet.png')
 report = {'status': 'awaiting user approval; not integrated', 'frames': 8, 'fps': 10,
-          'canvas': [80,80], 'selected_source': 'arms-r9.png + arm-05-06-r10.png override5/6', 'source_size': list(source.size),
-          'arm_override_frames':[5,6],'arm_pair_source_scale':pair_scale,
+          'canvas': [80,80], 'selected_source': cycle['selected_source'], 'source_size': list(source.size),
+          'arm_override_frames':list(range(1,9)),
           'source_row_cuts': rows, 'source_col_cuts': cols, 'native_target_height': HEIGHT,
           'fhd_display_scale': 2, 'common_source_scale': scale, 'source_alpha_threshold': 128,
-          'arm_source_hat_calibration': arm_source_calibration,
-          'tracking_source': 'rebuild-tracking-r6-packed.png; already-native geometry reference',
+          'arm_source_hat_calibration':32,
+          'tracking_source': 'full-arm-tracking-r12.png; cyan left arm/pink right arm',
+          'color_motion_status':cycle['color_motion_status'],
           'resample': 'nearest', 'anchor': 'hat center and fixed head top', 'frames_metrics': metrics,
           'gif_frame_durations_ms': [100]*8,
           'limitations': ['Restored materials are not pixel-identical to the tracking source.',
