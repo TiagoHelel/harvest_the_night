@@ -1,3 +1,7 @@
+## Arm correction - 2026-10-05
+
+Current candidate: arms-r9.png. Both arms counter-swing; far right arm is partly occluded in phases4/5. Native hats32px in every pose; heights62-65px. Export calibrates the generated sheet against the prior R7 hat width with one common scale. The generated edit preserves the design and gait poses, not byte-exact pixels inside those edited poses. Current GIF: up-diagonals-arms-r9.gif. Before/after: ../up-left-arms-before-after.gif. Exact prompts and provenance: generation.json. Still preview-only and awaiting review.
+
 # Walk up-left: full rebuild R7 review
 
 The user rejected R3 because frames1/2 exchange leg ownership and4 is bugged,

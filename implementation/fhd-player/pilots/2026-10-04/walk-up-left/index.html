@@ -2,19 +2,20 @@
 <html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>New farmer - Walk up-left review</title>
 <style>body{margin:32px;background:#172225;color:#e9e3cf;font:16px system-ui}main{max-width:1100px;margin:auto}h1{font-size:26px}p{color:#b7ccc7}img{image-rendering:pixelated;max-width:100%;height:auto}button,a{color:#e9e3cf}button{background:#344b48;border:1px solid #66847c;padding:10px 18px;cursor:pointer;margin:8px}canvas{image-rendering:pixelated;width:320px;height:320px;background:#303a3e}details{margin-top:24px}summary{cursor:pointer}small{color:#b7ccc7}</style>
-<main><h1>New farmer &middot; Walk up-left</h1><p>All eight up-left poses rebuilt. Approved up-right at the same display scale. Eight frames, 10 fps.</p>
-<img src="up-diagonals-rebuilt-r7.gif?v=up-left-rebuilt-r7" width="1040" height="420" alt="Approved up-right beside proposed up-left, at FHD size and enlarged">
-<details><summary>Direction master, walk and enlarged view</summary><img src="idle-walk-up-left.gif?v=up-left-rebuilt-r7" width="880" height="400" alt="Standing master, walk and enlarged walk"></details>
-<details open><summary>Track each leg through the cycle</summary><p>Cyan: anatomical left leg. Pink: anatomical right leg. The two hip roots stay fixed through all eight poses. Right panel: final denim and boots.</p><img src="tracking-materials-rebuild-r7.gif?v=up-left-rebuilt-r7" width="640" height="370" alt="Fixed cyan left leg and pink right leg beside final materials"></details>
+<main><h1>New farmer &middot; Walk up-left</h1><p>Both arms now counter-swing through the up-left cycle. Approved up-right at the same display scale. Eight frames, 10 fps.</p>
+<img src="up-diagonals-arms-r9.gif?v=arms-r9" width="1040" height="420" alt="Approved up-right beside proposed up-left, at FHD size and enlarged">
+<details open><summary>Arm correction before and after, half speed</summary><img src="../up-left-arms-before-after.gif?v=arms-r9" width="640" height="370" alt="Previous static right arm beside corrected swing"></details>
+<details><summary>Direction master, walk and enlarged view</summary><img src="idle-walk-up-left.gif?v=arms-r9" width="880" height="400" alt="Standing master, walk and enlarged walk"></details>
+<details><summary>Track each leg through the cycle</summary><p>Cyan: anatomical left leg. Pink: anatomical right leg. The two hip roots stay fixed through all eight poses. Right panel: final denim and boots.</p><img src="tracking-materials-arms-r9.gif?v=arms-r9" width="640" height="370" alt="Fixed cyan left leg and pink right leg beside final materials"></details>
 <details><summary>Inspect individual frames</summary>
 <p><button id="back">Previous</button><button id="next">Next</button><span id="count">Frame 1 / 8</span></p><canvas width="80" height="80" id="pose"></canvas>
 <p><a href="walk-up-left-strip.png">Transparent sprite strip</a></p></details>
-<details><summary>Compare the two directions slowly</summary><img src="gait-comparison-slow.gif?v=up-left-rebuilt-r7" width="640" height="370" alt="Approved up-right and new up-left at half speed"></details>
-<details><summary>All eight poses</summary><img src="contact-sheet.png?v=up-left-rebuilt-r7" alt="Top row: approved up-right. Bottom row: new up-left."></details>
-<p><a href="../all-walk-directions.gif?v=seven-rebuilt-r7">All seven current walk directions</a></p>
+<details><summary>Compare the two directions slowly</summary><img src="gait-comparison-slow.gif?v=arms-r9" width="640" height="370" alt="Approved up-right and new up-left at half speed"></details>
+<details><summary>All eight poses</summary><img src="contact-sheet.png?v=arms-r9" alt="Top row: approved up-right. Bottom row: new up-left."></details>
+<p><a href="../all-walk-directions.gif?v=arms-r9">All seven current walk directions</a></p>
 <p><small>Preview only &middot; Awaiting approval &middot; Proposed character height: about 128 screen pixels</small></p></main>
 <script>
-const frames=Array.from({length:8},(_,i)=>{let im=new Image();im.src=`frames/walk-up-left-${String(i+1).padStart(2,'0')}.png?v=up-left-rebuilt-r7`;return im});let index=0;
+const frames=Array.from({length:8},(_,i)=>{let im=new Image();im.src=`frames/walk-up-left-${String(i+1).padStart(2,'0')}.png?v=arms-r9`;return im});let index=0;
 const ctx=document.querySelector('canvas').getContext('2d');ctx.imageSmoothingEnabled=false;
 function show(){ctx.clearRect(0,0,80,80);ctx.drawImage(frames[index],0,0);document.getElementById('count').textContent=`Frame ${index+1} / 8`}
 frames[0].onload=show;document.getElementById('next').onclick=()=>{index=(index+1)%8;show()};document.getElementById('back').onclick=()=>{index=(index+7)%8;show()};

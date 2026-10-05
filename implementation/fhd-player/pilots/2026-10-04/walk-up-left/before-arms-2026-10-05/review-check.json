@@ -1,0 +1,82 @@
+{
+  "result": "PASS for artifact and color-root checks; visual review pending",
+  "all_eight_frames_replaced": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "approved_frames_unchanged": 48,
+  "colored_roots": "PASS",
+  "visible_heights": [
+    62,
+    63,
+    64,
+    64,
+    64,
+    63,
+    66,
+    66
+  ],
+  "hat_widths": [
+    31,
+    32,
+    32,
+    32,
+    31,
+    32,
+    32,
+    32
+  ],
+  "tracking_to_material_silhouette_iou": [
+    0.83,
+    0.8213740458015267,
+    0.8792111750205424,
+    0.8580441640378549,
+    0.7338830584707646,
+    0.7620874904067536,
+    0.8391502276176024,
+    0.838855421686747
+  ],
+  "intentional_material_geometry_changes": "R7 enlarges head to approved31-32px hat and restores calf reach5/6. No automatic gait approval.",
+  "gif_ms": {
+    "normal": [
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100
+    ],
+    "slow": [
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200
+    ]
+  },
+  "runtime_integration": false,
+  "engine_suite": "Not rerun for this isolated preview; previous full PASS remains in ../walk-up-right/verify-result.json.",
+  "limitations": [
+    "Color-root test does not prove full knee connectivity or smooth playback.",
+    "Material contours and some boot/arm poses differ from the diagnostic guide."
+  ],
+  "browser_manual_frames_inspected": [
+    2,
+    4
+  ],
+  "browser_evidence": [
+    "browser-frame4-r7.png",
+    "browser-review-r7.png"
+  ]
+}

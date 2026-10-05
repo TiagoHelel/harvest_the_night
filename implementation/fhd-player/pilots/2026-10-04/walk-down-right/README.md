@@ -1,3 +1,7 @@
+## Arm correction - 2026-10-05
+
+Current correction: materials-r5.png plus arm-frame04-r7.png override for frame4 only. One near sleeve replaces the doubled shoulder; far forearm is partially hidden behind torso. Frames1-3 and5-8 are byte-identical to the approved R5 exports. The single edited pose is uniformly calibrated against the original frame4 hat width. Current GIF: down-diagonal-arms-r7.gif. Exact prompts and provenance: generation.json. This correction reopens user review; previous gait approval remains historical.
+
 # Walk down-right: corrected approval candidate
 
 The user approved left and requested the next direction only. This task makes

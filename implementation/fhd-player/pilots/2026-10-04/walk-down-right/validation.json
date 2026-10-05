@@ -6,7 +6,11 @@
     80,
     80
   ],
-  "selected_source": "materials-r5.png",
+  "selected_source": "materials-r5.png + arm-frame04-r7.png override (frame4 only)",
+  "arm_override_frames": [
+    4
+  ],
+  "arm_override_hat_calibration": 0.3567467652495379,
   "source_row_cuts": [
     0,
     444,
@@ -63,14 +67,14 @@
     {
       "frame": 4,
       "bbox": [
-        20,
+        19,
         8,
-        60,
+        59,
         72
       ],
       "height": 64,
-      "hat_region_width": 33,
-      "sha256": "99367bf7866c7e7b71ed3df1d397108af5ec10c7070ca78ccab318bc146ffce7"
+      "hat_region_width": 32,
+      "sha256": "38d7c6c629b8fdf6dc707328dced2f4f1e197779820ad917a65e03e6d6575a6a"
     },
     {
       "frame": 5,
@@ -129,7 +133,7 @@
     "Trouser and boot-design correction may alter pixels; compare both knees, thighs and boots with the diagnostic source."
   ],
   "idle_hat_region_width": 31,
-  "native_material_restoration_silhouette_iou": 0.8029274314434354,
+  "native_material_restoration_silhouette_iou": 0.7950321500924866,
   "gif_frame_durations_ms": [
     100,
     100,

@@ -1,8 +1,8 @@
 {
   "tool": "built-in ImageGen",
-  "date": "2026-10-04",
-  "status": "approved by user: aprovado, proximo",
-  "selected_source": "materials-r5.png",
+  "date": "2026-10-05",
+  "status": "awaiting user review: arm animation/sleeve correction",
+  "selected_source": "materials-r5.png + arm-frame04-r7.png override4",
   "source_directory": "assets/art_source/player-fhd/pilots/2026-10-04/walk-down-right",
   "transparent_background": true,
   "user_rejections": [
@@ -38,8 +38,9 @@
     ]
   },
   "limitations": [
-    "User approval remains pending. Automated color checks assist review but do not prove complete anatomical correctness.",
-    "Only art previews; no game runtime or engine validation."
+    "Preview only, no runtime integration.",
+    "ImageGen edits preserve design, not byte-exact unchanged regions within edited poses.",
+    "Frame-count and scope checks do not prove gait quality; user review remains pending."
   ],
   "calls": [
     {
@@ -178,9 +179,52 @@
       "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-2752b1ae-a20f-42f7-9c0a-3fb8f10f382b.png",
       "source": "materials-r5.png",
       "review": "Selected for user review: narrower thighs/calves/cuffs and more compact matching work boots. Both opposite contacts and lifted recovery poses remain visually distinct. Same common export scale as R3; native heights62-64px and hats32-33px. Generated edit is not pixel-identical; user approval pending."
+    },
+    {
+      "source": "arm-frame04-r6.png",
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-9185141a-5082-4b3e-ae9a-b9f11d5931bf.png",
+      "prompt": "Use case: precise-object-edit. Edit target: this ONE transparent farmer WALK DOWN-RIGHT frame4. Repair its arm anatomy only. Current drawing has overlapping doubled white sleeve/shoulder shapes, and a stray white sleeve on the far screen-right edge of the chest, creating an apparent third arm. Draw exactly TWO coherent arms: near anatomical RIGHT shoulder at screen-left of the chest connects to its white sleeve then the large peach arm swinging FORWARD across the lower front of the overalls toward screen-right; far anatomical LEFT shoulder behind the upper screen-right side of the chest connects behind the torso to ONE far arm swinging BACK toward screen-left, partially occluded by the torso. Remove all duplicate sleeve/arm stumps and any third shoulder. The far arm must visibly originate behind the torso, not from a second sleeve pasted on the same near shoulder. Preserve the existing head, face, eyes, hat, torso, leg poses, leg width, waist, boot shapes, brown/blue/white palette, character scale and exact position. Keep the same canvas dimensions and transparent padding as the input. Do not change the pose, stride, outfit or proportion. Hard crisp pixel sprite edges, transparent background, one character only, no ground shadow, no labels.",
+      "references": [
+        "assets/art_source/player-fhd/pilots/2026-10-04/walk-down-right/arm-frame04-original.png"
+      ],
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "sha256": "d273b6674f9055527b06a34fc7c560045506ef9304fb26ad3cb9e59b248c0dfe",
+      "date": "2026-10-05",
+      "review": "Still shows doubled sleeve at near shoulder; refined."
+    },
+    {
+      "source": "arm-frame04-r7.png",
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-96536204-fd0c-4186-854f-5b4ba4a464a2.png",
+      "prompt": "Use case: precise-object-edit. Image1 is edit target, image2 original character proportion reference. Correct only the doubled white sleeve at SCREEN-LEFT shoulder of this one walk down-right pose. Keep ONE visible white near sleeve attached to the large near arm reaching diagonally screen-right forward. Behind it currently a SECOND white sleeve patch projects toward screen-left and reaches the peach rear hand: DELETE/occlude that second white sleeve patch. The far arm's shoulder, sleeve and upper arm are fully hidden BEHIND the blue torso and the visible near shoulder. Show only the far peach forearm/hand peeking BACK to screen-left from behind the waist below the near armpit, with a clear torso overlap. No second shoulder silhouette or white sleeve at that screen-left edge and no far white sleeve sticking out at the screen-right chest. Exactly two arms: one large near arm forward, one small far hand behind. Preserve all other artwork, especially original head size, hat, eyes, legs, narrow blue cuffs and compact work boots. Transparent background. Same single-character canvas and position, no labels.",
+      "references": [
+        "assets/art_source/player-fhd/pilots/2026-10-04/walk-down-right/arm-frame04-r6.png",
+        "assets/art_source/player-fhd/pilots/2026-10-04/walk-down-right/arm-frame04-original.png"
+      ],
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "sha256": "adbf095064ff52d6d3fba3cc6959a0d3f42a9230d07e9e442a064f5760ea5783",
+      "date": "2026-10-05",
+      "review": "Selected: one near white sleeve, far forearm emerges behind torso. Only frame4 replaced; pending review."
     }
   ],
   "body_volume_review": "body-volume-review.json; average torso blue pixels97.0 before,86.75 after,82.625 approved down; pose-dependent review aid only.",
   "lower_body_review": "lower-body-review.json; average native trouser blue pixels254.375 before to191.125 after; boot brown pixels161.75 to131.875. Pose-dependent area aids, not proof of anatomical equivalence.",
-  "approval_date": "2026-10-04"
+  "approval_date": "2026-10-04",
+  "arm_correction_request": "Right arm does not move; one down-right pose appears to have three arms.",
+  "arm_original_crop": {
+    "source": "materials-r5.png",
+    "bounds": [
+      1330,
+      0,
+      1774,
+      444
+    ],
+    "output": "arm-frame04-original.png",
+    "operation": "lossless crop"
+  }
 }

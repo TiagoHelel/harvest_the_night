@@ -24,13 +24,13 @@ def cuts(path):
     return [im.crop((cols[c], rows[r], cols[c+1], rows[r+1]))
             for r in range(2) for c in range(4)]
 
-def pack(cells, scale):
+def pack(cells, scale, head_depth=100):
     frames = []
     for cell in cells:
         box = cell.getbbox()
         assert box is not None
         # Hat center anchors horizontal position; arm swings cannot shift the body.
-        head = cell.crop((0, box[1], cell.width, box[1] + 100)).getbbox()
+        head = cell.crop((0, box[1], cell.width, box[1] + head_depth)).getbbox()
         center = (head[0] + head[2]) / 2
         small = cell.resize((round(cell.width*scale), round(cell.height*scale)), Image.Resampling.NEAREST)
         b = small.getbbox()
@@ -63,6 +63,16 @@ calibration_cells = cuts(SOURCE / 'walk-down-right/materials-r3.png')
 assert Image.open(SOURCE / 'walk-down-right/materials-r5.png').size == Image.open(SOURCE / 'walk-down-right/materials-r3.png').size
 scale = HEIGHT / statistics.median(c.getbbox()[3]-c.getbbox()[1] for c in calibration_cells)
 normal = pack(normal_cells, scale)
+# Replace only the reported doubled-sleeve pose. The other seven cells keep
+# their accepted R5 cuts and sampling grid byte for byte.
+arm_cell = clean(Image.open(SOURCE / 'walk-down-right/arm-frame04-r7.png'))
+base = normal_cells[3]
+bb, ab = base.getbbox(), arm_cell.getbbox()
+base_hat = base.crop((0,bb[1],base.width,bb[1]+100)).getbbox()
+arm_hat = arm_cell.crop((0,ab[1],arm_cell.width,ab[1]+round((ab[3]-ab[1])*.25))).getbbox()
+arm_calibration = (base_hat[2]-base_hat[0])/(arm_hat[2]-arm_hat[0])
+normal[3] = pack([arm_cell],scale*arm_calibration,
+                 head_depth=round(100/arm_calibration))[0]
 tracking_scale = HEIGHT / statistics.median(c.getbbox()[3]-c.getbbox()[1] for c in tracking_cells)
 tracking = pack(tracking_cells, tracking_scale)
 idle_source = clean(Image.open(SOURCE / 'walk-down-right/rotation-r1.png'))
@@ -119,7 +129,8 @@ for i,frame in enumerate(normal):
     caption(ImageDraw.Draw(contact),(i*160+10,190),f'{i+1:02}')
 contact.convert('RGB').save(ROOT/'contact-sheet.png')
 report={'status':'awaiting user review; not integrated','frames':8,'fps':10,'canvas':[80,80],
-        'selected_source':'materials-r5.png',
+        'selected_source':'materials-r5.png + arm-frame04-r7.png override (frame4 only)',
+        'arm_override_frames':[4], 'arm_override_hat_calibration':arm_calibration,
         'source_row_cuts':[0,round(Image.open(SOURCE/'walk-down-right/materials-r5.png').height/2),Image.open(SOURCE/'walk-down-right/materials-r5.png').height],
         'scale_reference':'materials-r3.png; retained across lower-body corrections','native_target_height':64,'fhd_display_scale':2,'common_source_scale':scale,'tracking_common_source_scale':tracking_scale,
         'idle_bbox':idle.getbbox(),'frames_metrics':metrics,

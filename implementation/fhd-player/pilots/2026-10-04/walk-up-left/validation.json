@@ -6,7 +6,7 @@
     80,
     80
   ],
-  "selected_source": "rebuild-materials-r7.png; all eight frames new",
+  "selected_source": "arms-r9.png; opposing arm swing correction",
   "source_size": [
     1774,
     887
@@ -25,8 +25,9 @@
   ],
   "native_target_height": 64,
   "fhd_display_scale": 2,
-  "common_source_scale": 0.17414965986394557,
+  "common_source_scale": 0.16867898992057553,
   "source_alpha_threshold": 128,
+  "arm_source_hat_calibration": 0.9685863874345549,
   "tracking_source": "rebuild-tracking-r6-packed.png; already-native geometry reference",
   "resample": "nearest",
   "anchor": "hat center and fixed head top",
@@ -34,26 +35,26 @@
     {
       "frame": 1,
       "bbox": [
-        22,
+        23,
         8,
-        56,
+        57,
         70
       ],
       "height": 62,
-      "hat_region_width": 31,
-      "sha256": "28aa0244bd86af2fbfc0d405bba4e6ede3d3412366d6c9faa2d10dafa63fa207"
+      "hat_region_width": 32,
+      "sha256": "03887caec88a93e0d8243aec29bc1d28e91a425d79d45fa71d3de8494c1b7563"
     },
     {
       "frame": 2,
       "bbox": [
-        23,
+        24,
         8,
-        58,
-        71
+        59,
+        70
       ],
-      "height": 63,
+      "height": 62,
       "hat_region_width": 32,
-      "sha256": "e9007eb8dc62ecc4425df2e5534427ec1fa0da76bc51646e4c9f9bdf8a3af153"
+      "sha256": "cef1027186e33b013449c9f69a52679e8054c8b4ce0fef2388b8cbf183360594"
     },
     {
       "frame": 3,
@@ -61,11 +62,11 @@
         24,
         8,
         56,
-        72
+        71
       ],
-      "height": 64,
+      "height": 63,
       "hat_region_width": 32,
-      "sha256": "22a1e57309301f7742b0a344b8a70fa6c69bf227af3bea930de8bc5d5807f775"
+      "sha256": "a9ffd44de602e91d8f71c6feb9ece06f3d25fc2e86408785b4f8c7c20bdba619"
     },
     {
       "frame": 4,
@@ -73,11 +74,11 @@
         24,
         8,
         58,
-        72
+        71
       ],
-      "height": 64,
+      "height": 63,
       "hat_region_width": 32,
-      "sha256": "42deb752bed9fafcc8baf92d0d1d163f9c8527e1da46a551ab6248ba20684d95"
+      "sha256": "626cec38e0d7bcc6c4667441976b36729df8ff2de78d7cba023ef9fa1e7ceb09"
     },
     {
       "frame": 5,
@@ -85,23 +86,23 @@
         23,
         8,
         56,
-        72
+        71
       ],
-      "height": 64,
-      "hat_region_width": 31,
-      "sha256": "9d4ceb131b6e149f68d07514c44f6f24055d517cc7f3806be13110f1e5bd4032"
+      "height": 63,
+      "hat_region_width": 32,
+      "sha256": "1349476e9a8b50d0c13395d9f8b1c962ac992a63eba2abc04db8fab18e79df20"
     },
     {
       "frame": 6,
       "bbox": [
         24,
         8,
-        57,
-        71
+        58,
+        70
       ],
-      "height": 63,
+      "height": 62,
       "hat_region_width": 32,
-      "sha256": "913d1e2c57d483852abc8f3923ae066879625759f06fb330414b66420a9f2203"
+      "sha256": "4ab1ad0c1342dca99e700b9e3e3498d58efa278900855238df7f3a3dcab5bd79"
     },
     {
       "frame": 7,
@@ -109,11 +110,11 @@
         24,
         8,
         56,
-        74
+        73
       ],
-      "height": 66,
+      "height": 65,
       "hat_region_width": 32,
-      "sha256": "beb77b07c72205c2f2952fc8b8187feb4cf090a24508269cffc13772e14c7e2b"
+      "sha256": "236dd1777a71d3428442b1e00c953a0af9531a7e8e67f5b3619415092baa47fc"
     },
     {
       "frame": 8,
@@ -121,11 +122,11 @@
         22,
         8,
         58,
-        74
+        72
       ],
-      "height": 66,
+      "height": 64,
       "hat_region_width": 32,
-      "sha256": "7c4405b2afab55a465584c1aa7a0bf47321e982cc35a24bb1406cc04767115a4"
+      "sha256": "b1c56e1e5369afa5402d6252f5ca2f253de9b90414eb5793579c998ad6e4eccd"
     }
   ],
   "gif_frame_durations_ms": [

@@ -33,7 +33,7 @@
     "right": "approved",
     "up": "approved",
     "left": "approved",
-    "down-right": "approved",
+    "down-right": "awaiting_approval",
     "up-right": "approved",
     "up-left": "awaiting_approval"
   },
@@ -189,7 +189,7 @@
       },
       {
         "path": "walk-down-right/frames/walk-down-right-04.png",
-        "sha256": "113bcb5bb0401adc52376f997cdf671cc3cc727fc0c7f1fd3aacd0803ba6297c"
+        "sha256": "aa547f5d61e3532ef7a5e2d05e1c5890b133ed7dc05f6b1c24a0649fca49b51a"
       },
       {
         "path": "walk-down-right/frames/walk-down-right-05.png",
@@ -245,35 +245,35 @@
     "up-left": [
       {
         "path": "walk-up-left/frames/walk-up-left-01.png",
-        "sha256": "cd26ad90b2ab4b4588c93c6a9a8fb5768404147ec3fcff82df69784b344f6c48"
+        "sha256": "afefe3c6a10bf46d3a201bbf8916c83c6f4f1987351016380582e7c5b75a2c25"
       },
       {
         "path": "walk-up-left/frames/walk-up-left-02.png",
-        "sha256": "e099f6352aa5e7b1be802326ac31a26d2425e639843eaab596d5eb02fd583aa3"
+        "sha256": "d3e63d45898d135d52be58045692be53ba42717a1c2a147d4f358e5446a40984"
       },
       {
         "path": "walk-up-left/frames/walk-up-left-03.png",
-        "sha256": "e6e8c90761cffa8bc779ffa9835e2b1eb7dfb8022ff844915afa8dfa69ec0f7d"
+        "sha256": "2168b536023bd739724bf898636778a0ed671fa7f3e7ee1c7dfe6f36699a3be6"
       },
       {
         "path": "walk-up-left/frames/walk-up-left-04.png",
-        "sha256": "7cde2e157363da274636d2a2a2bb5e2ac22664251137ebe83a93bd7508bfb056"
+        "sha256": "81d9959b5dab17ecfcde14b1bd6f93d56629fd8bc1dfb84b9df522b38dd46611"
       },
       {
         "path": "walk-up-left/frames/walk-up-left-05.png",
-        "sha256": "97e4793316209b583defcb193f19a69d1a8db7737daca0ee989c9143496b8c22"
+        "sha256": "8190eab38cfde5217d5b1c15196260e40291ba5ca8d21c68337383db5c134a01"
       },
       {
         "path": "walk-up-left/frames/walk-up-left-06.png",
-        "sha256": "00d520b5e27e309d37aa3fea36977c5a3ff59506f2907de478b4474e5523fdee"
+        "sha256": "bb1afe1a1970e8ac364743398f8333c5d454b64d9b9c5a40afb631c9fc3f527c"
       },
       {
         "path": "walk-up-left/frames/walk-up-left-07.png",
-        "sha256": "a4af6e53c677697767f7468ea06f726f9ab33efea118f46ec2ff549a37ebdd58"
+        "sha256": "bc3ac8506d749598d6611a89bf061e2e8a12443a0dcaf6d8efe107a111f74ca4"
       },
       {
         "path": "walk-up-left/frames/walk-up-left-08.png",
-        "sha256": "eb6cdd614db9371e97f422571366775902bf90beccd52dbcfdfe8936760f7559"
+        "sha256": "f0ef2b5b74baf72e3fb63f31acef5ba355f23fd6c237fa9744dba7283d3914a9"
       }
     ]
   }

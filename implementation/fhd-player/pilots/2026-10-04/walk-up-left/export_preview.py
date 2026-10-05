@@ -37,7 +37,7 @@ def save_gif(frames, path, duration):
             assert saved.info['duration'] == duration
 
 
-source = clean(Image.open(SOURCE / 'rebuild-materials-r7.png'))
+source = clean(Image.open(SOURCE / 'arms-r9.png'))
 cols = [round(i * source.width / 4) for i in range(5)]
 blank = [y for y in range(round(source.height*.4),round(source.height*.6))
          if source.getchannel('A').crop((0,y,source.width,y+1)).getbbox() is None]
@@ -46,7 +46,17 @@ rows = [0, round(statistics.median(blank)), source.height]
 cells = [source.crop((cols[c], rows[r], cols[c+1], rows[r+1]))
          for r in range(2) for c in range(4)]
 assert all(c.getbbox() is not None for c in cells)
-scale = HEIGHT / statistics.median(c.getbbox()[3] - c.getbbox()[1] for c in cells)
+# Arm silhouettes must not change the accepted head and leg display scale.
+scale = json.loads((ROOT / 'before-arms-2026-10-05/validation.json').read_text())['common_source_scale']
+reference = clean(Image.open(SOURCE / 'rebuild-materials-r7.png'))
+reference_cells = [reference.crop((cols[c],rows[r],cols[c+1],rows[r+1]))
+                   for r in range(2) for c in range(4)]
+def hat_width(cell):
+    b=cell.getbbox()
+    h=cell.crop((0,b[1],cell.width,b[1]+round((b[3]-b[1])*.22))).getbbox()
+    return h[2]-h[0]
+arm_source_calibration = statistics.median(map(hat_width,reference_cells))/statistics.median(map(hat_width,cells))
+scale *= arm_source_calibration
 frames, metrics = [], []
 (ROOT / 'frames').mkdir(exist_ok=True)
 strip = Image.new('RGBA', (FRAME * 8, FRAME))
@@ -133,16 +143,17 @@ for i, left in enumerate(frames):
     caption(sd, (30,312), 'Preview only - awaiting approval', 14, '#aac2bd')
     caption(sd, (30,348), f'Frame {i+1:02} / 08', 14)
     idle_previews.append(standing)
-save_gif(previews, ROOT / 'up-diagonals-rebuilt-r7.gif', 100)
+save_gif(previews, ROOT / 'up-diagonals-arms-r9.gif', 100)
 save_gif(slow, ROOT / 'gait-comparison-slow.gif', 200)
-save_gif(diagnostics, ROOT / 'tracking-materials-rebuild-r7.gif', 200)
+save_gif(diagnostics, ROOT / 'tracking-materials-arms-r9.gif', 200)
 save_gif(idle_previews, ROOT / 'idle-walk-up-left.gif', 100)
 previews[0].convert('RGB').save(ROOT / 'comparison-poster.png')
 contact.convert('RGB').save(ROOT / 'contact-sheet.png')
 report = {'status': 'awaiting user approval; not integrated', 'frames': 8, 'fps': 10,
-          'canvas': [80,80], 'selected_source': 'rebuild-materials-r7.png; all eight frames new', 'source_size': list(source.size),
+          'canvas': [80,80], 'selected_source': 'arms-r9.png; opposing arm swing correction', 'source_size': list(source.size),
           'source_row_cuts': rows, 'source_col_cuts': cols, 'native_target_height': HEIGHT,
           'fhd_display_scale': 2, 'common_source_scale': scale, 'source_alpha_threshold': 128,
+          'arm_source_hat_calibration': arm_source_calibration,
           'tracking_source': 'rebuild-tracking-r6-packed.png; already-native geometry reference',
           'resample': 'nearest', 'anchor': 'hat center and fixed head top', 'frames_metrics': metrics,
           'gif_frame_durations_ms': [100]*8,
