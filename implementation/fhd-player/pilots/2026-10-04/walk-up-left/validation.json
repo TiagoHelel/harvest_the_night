@@ -1,29 +1,12 @@
 {
-  "status": "awaiting user approval; not integrated",
-  "frames": 8,
-  "fps": 10,
-  "canvas": [
-    80,
-    80
-  ],
-  "selected_source": "full-arm-materials-r13.png",
+  "selected_source": "hands-r15.png",
   "source_size": [
     1774,
     887
   ],
-  "arm_override_frames": [
-    1,
-    2,
-    3,
-    4,
-    5,
-    6,
-    7,
-    8
-  ],
   "source_row_cuts": [
     0,
-    444,
+    445,
     887
   ],
   "source_col_cuts": [
@@ -33,113 +16,117 @@
     1330,
     1774
   ],
-  "native_target_height": 64,
-  "fhd_display_scale": 2,
-  "common_source_scale": 0.1797752808988764,
+  "common_source_scale": 0.17679558011049723,
+  "native_canvas": [
+    80,
+    80
+  ],
+  "hat_calibration": 32,
   "source_alpha_threshold": 128,
-  "arm_source_hat_calibration": 32,
-  "tracking_source": "full-arm-tracking-r12.png; cyan left arm/pink right arm",
-  "color_motion_status": "PASS",
   "resample": "nearest",
-  "anchor": "hat center and fixed head top",
+  "anchor": "hat center and fixed top8px",
   "frames_metrics": [
     {
       "frame": 1,
       "bbox": [
-        21,
+        22,
         8,
-        59,
-        71
-      ],
-      "height": 63,
-      "hat_region_width": 32,
-      "sha256": "f2fff7865e1491cecb08a4c7cb7d8209fa476d62551f1a5c8f8b0a6cc5a95091"
-    },
-    {
-      "frame": 2,
-      "bbox": [
-        21,
-        8,
-        59,
+        58,
         70
       ],
       "height": 62,
       "hat_region_width": 32,
-      "sha256": "ad4beaebf59ad74c9ff2a33787a36dba193db481d18a0beff24346a09362081e"
+      "sha256": "c15e1eb2b48f1dd605972d72ae8919da2475310aead222627d4b73484bd937be"
+    },
+    {
+      "frame": 2,
+      "bbox": [
+        22,
+        8,
+        59,
+        69
+      ],
+      "height": 61,
+      "hat_region_width": 31,
+      "sha256": "7c7896c5e6b0ac3e5f2f00a6158236f78e389b6c54d3623f8376e085d1e8471b"
     },
     {
       "frame": 3,
       "bbox": [
         24,
         8,
-        58,
-        71
+        57,
+        70
       ],
-      "height": 63,
+      "height": 62,
       "hat_region_width": 32,
-      "sha256": "71828a7a335274e55512e5ae983ba2dea10c2dad5131155ba89c24a27e9ca5b8"
+      "sha256": "63d06f3baba6e8bb9cea8d4f0e86bfac6b0a9457727f9e35ac8df498abf0144f"
     },
     {
       "frame": 4,
       "bbox": [
         24,
         8,
-        59,
-        73
+        57,
+        72
       ],
-      "height": 65,
-      "hat_region_width": 32,
-      "sha256": "de4c65e6cc532d7c37d3d88c662885d957122a85fecf8780b13f34ec0871896a"
+      "height": 64,
+      "hat_region_width": 31,
+      "sha256": "bbf149fddafaab5d23650ba1403b5792e7c862b9ac2861a7943d098926fa8f92"
     },
     {
       "frame": 5,
       "bbox": [
-        23,
+        22,
         8,
-        58,
-        71
+        57,
+        70
       ],
-      "height": 63,
+      "height": 62,
       "hat_region_width": 32,
-      "sha256": "39dae98b97e3a7f28eaab9684a05fd3a3ae4d5487daf54974fb302423548b0ba"
+      "sha256": "649766c0977b39feb1c84bc5f19315c107301174269eee6b5517a1bbe1d68302"
     },
     {
       "frame": 6,
       "bbox": [
         24,
         8,
-        58,
-        70
+        57,
+        68
       ],
-      "height": 62,
-      "hat_region_width": 32,
-      "sha256": "8a87f6eb01d517107e957bc05a13101afe6c54fb5ee8fa9c0bbbd5a11ee419b0"
+      "height": 60,
+      "hat_region_width": 31,
+      "sha256": "d3d7349a4ab86932f3851b7065398e7d3887f840ce913c76ae67c96d1b7edb46"
     },
     {
       "frame": 7,
       "bbox": [
         24,
         8,
-        58,
-        73
-      ],
-      "height": 65,
-      "hat_region_width": 32,
-      "sha256": "8089d9d5afff908b8788c18b9c178930fb798dd2f65620876c71606c45b97300"
-    },
-    {
-      "frame": 8,
-      "bbox": [
-        19,
-        8,
-        58,
+        57,
         71
       ],
       "height": 63,
       "hat_region_width": 32,
-      "sha256": "78b2a54974652a7c4dfd188f464ee9846dacb28f7ebad44c45417317f095444f"
+      "sha256": "54b4d8a165ebd219c6095838dbf0fcae025609cdbcc64c5faf3865626ec3aac2"
+    },
+    {
+      "frame": 8,
+      "bbox": [
+        22,
+        8,
+        56,
+        70
+      ],
+      "height": 62,
+      "hat_region_width": 31,
+      "sha256": "e558ea43d4644d5c5a0ce7b730e94fd0bb58718482e5b3d5ea9cc9baa57236de"
     }
   ],
+  "status": "awaiting user review; preview only",
+  "frames": 8,
+  "fps": 10,
+  "fhd_display_scale": 2,
   "gif_frame_durations_ms": [
     100,
     100,
@@ -151,8 +138,7 @@
     100
   ],
   "limitations": [
-    "Restored materials are not pixel-identical to the tracking source.",
-    "Approval preview only; not rendered inside the game.",
-    "Diagnostic colors support visual review; numeric frame checks do not prove gait quality."
+    "Generated arm edits are not byte-exact outside hands inside edited poses.",
+    "Frame and scope checks do not prove anatomy or smooth motion."
   ]
 }

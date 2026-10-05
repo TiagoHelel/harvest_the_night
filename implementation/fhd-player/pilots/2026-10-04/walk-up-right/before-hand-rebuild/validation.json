@@ -1,0 +1,160 @@
+{
+  "status": "awaiting user review; not integrated",
+  "frames": 8,
+  "fps": 10,
+  "canvas": [
+    80,
+    80
+  ],
+  "selected_source": "full-arm-materials-r13.png",
+  "native_overrides": {
+    "frames": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "source": "full-arm-materials-r13.png",
+    "native_source_scale": 0.17582417582417584
+  },
+  "source_row_cuts": [
+    0,
+    438,
+    887
+  ],
+  "native_target_height": 64,
+  "fhd_display_scale": 2,
+  "common_source_scale": 0.17582417582417584,
+  "tracking_common_source_scale": 0.17777777777777778,
+  "arm_calibration_reference": "Common32pxhat-width calibration across all eight poses",
+  "tracking_source": "full-arm-tracking-r12.png; cyan left arm/pink right arm",
+  "color_motion_status": "FAIL",
+  "idle_bbox": [
+    25,
+    8,
+    55,
+    72
+  ],
+  "frames_metrics": [
+    {
+      "frame": 1,
+      "bbox": [
+        23,
+        8,
+        58,
+        69
+      ],
+      "height": 61,
+      "hat_region_width": 32,
+      "sha256": "1ce099b9cbfe967e71dde18d31bb1abfdba5c2699d63d56297f15ffe274d1c2b"
+    },
+    {
+      "frame": 2,
+      "bbox": [
+        22,
+        8,
+        57,
+        69
+      ],
+      "height": 61,
+      "hat_region_width": 32,
+      "sha256": "57ebea3bae2c4fec5cf2b4ac5cbc6718d75e5de81070f3d901cbd1610ecb1805"
+    },
+    {
+      "frame": 3,
+      "bbox": [
+        22,
+        8,
+        56,
+        68
+      ],
+      "height": 60,
+      "hat_region_width": 32,
+      "sha256": "febfdda9db71aec83ff56d3787b4f7216285280a2a07e406b5b79d7159b4a728"
+    },
+    {
+      "frame": 4,
+      "bbox": [
+        20,
+        8,
+        58,
+        68
+      ],
+      "height": 60,
+      "hat_region_width": 32,
+      "sha256": "83e551eefb18d7e705ce38af302c30189540b1958ffca0bf6ef09edc23083647"
+    },
+    {
+      "frame": 5,
+      "bbox": [
+        20,
+        8,
+        57,
+        69
+      ],
+      "height": 61,
+      "hat_region_width": 32,
+      "sha256": "d9de6bef4dc89d5558835f9ac3e91259deda70dd539e58a844a619d17a1571cf"
+    },
+    {
+      "frame": 6,
+      "bbox": [
+        22,
+        8,
+        56,
+        69
+      ],
+      "height": 61,
+      "hat_region_width": 32,
+      "sha256": "9ff760b51dcee1080ac524b5427cad279e69d337eeeee498550f90920da041f9"
+    },
+    {
+      "frame": 7,
+      "bbox": [
+        22,
+        8,
+        56,
+        67
+      ],
+      "height": 59,
+      "hat_region_width": 32,
+      "sha256": "8c7e0df9adfd7838e9fb8643410aff28c6a486bdac398f666c7c55eb103a0822"
+    },
+    {
+      "frame": 8,
+      "bbox": [
+        22,
+        8,
+        57,
+        67
+      ],
+      "height": 59,
+      "hat_region_width": 32,
+      "sha256": "59ab4e80db3bdf9fd82182e7ddb144937d39a87f7f12a3fde8fe5f1bc970f712"
+    }
+  ],
+  "source_alpha_threshold": 128,
+  "resample": "nearest",
+  "anchor": "hat center and fixed head top",
+  "limitations": [
+    "Prototype display size, not yet rendered inside the game.",
+    "Slow comparison shows cyan left/pink right arm source beside restored materials.",
+    "Generated source edits are not pixel-identical to their references."
+  ],
+  "idle_hat_region_width": 30,
+  "native_tracking_vs_material_silhouette_iou": 0.8929554210236654,
+  "gif_frame_durations_ms": [
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100
+  ]
+}

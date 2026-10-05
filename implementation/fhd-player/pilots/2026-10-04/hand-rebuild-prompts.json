@@ -1,0 +1,18 @@
+{
+  "tool": "built-in image_gen",
+  "date": "2026-10-05",
+  "up_right": {
+    "references": [
+      "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/hand-rebuild-reference.png",
+      "assets/art_source/player-fhd/pilots/2026-10-04/approved-hand-proportions-reference.png"
+    ],
+    "prompt": "Use case: precise-object-edit.\nImage1 is the EDIT TARGET: 8 WALK UP-RIGHT farmer poses in4columns2rows. Image2 is ONLY the approved small hand/arm proportion reference; do not copy its facing or pose.\nRebuild both hands and wrists in all8poses. Current hands look like oversized flat paddles attached to rigid forearms. Give each hand a compact relaxed mitten silhouette, same size and skin palette across the cycle: about3x4 logical pixels on an80pxcell/64pxfarmer. Narrow2pixel wrist joined to slim3pixel forearm, a subtle single-pixel thumb on the anatomical inner side, rounded pixel palm, no individually splayed fingers. Hand follows forearm angle with neutral relaxed wrist, never bends backwards or points sideways like a wave. Distant anatomical LEFT hand stays a small readable hand, not a fist larger than near hand. Keep both arm chains attached to their original white sleeves and preserve opposing swing. Left hand high/front in1, gradually lowers2/3/4, low/back in5, returns6/7/8; right hand opposite. Slight natural elbow flex, smooth intermediate hand positions, no abrupt last-frame leap. Repair only arm skin/hand/wrist shapes and necessary connected forearm contours. LOCK straw hat, hair/face, head dimensions, white sleeves/torso, blue overalls, waist, ALL leg poses and boots to image1. Same pixel grid, sharp nearest-style blocks, no extra fine detail, consistent small hand proportions of image2. Exact original4x2 layout,8 complete equally scaled sprites, transparent background, no labels or shadows."
+  },
+  "up_left": {
+    "references": [
+      "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-left/hand-rebuild-reference.png",
+      "assets/art_source/player-fhd/pilots/2026-10-04/approved-hand-proportions-reference.png"
+    ],
+    "prompt": "Use case: precise-object-edit.\nImage1 is the EDIT TARGET:8 WALK UP-LEFT farmer poses in4columns2rows. Image2 supplies ONLY the approved hand/arm size and skin palette, not facing/pose.\nRebuild both hands/wrists throughout all8poses. Replace current flat elongated paddle hands with compact relaxed hands,3x4 logical pixels at64pxcharacter height on80pxcell. Same small palm volume in each pose; narrow2pixel wrist joined to slim3pixel forearm, one subtle thumb pixel on anatomical inner side, rounded pixel mitten. No long horizontal fingers, oversized fists, clenched boxing gloves or backwards wrist angles. Keep distant RIGHT hand partly visible, small and connected to its sleeve throughout. Preserve opposing shoulder/elbow/hand swing, but fix LEFT/near return: after modest rear hand5 by left hip,6 starts forward,7 visibly halfway forward,8 approaches front at an intermediate angle below hand1. Do not leave hand7 hanging then abruptly lift hand8 to horizontal. Near hand never crosses central back pocket. Relaxed wrists align with forearms at all phases. Exactly2arms/hands, not3; no disappearing hands or switching sides. Restrict edits to hand/wrist/skin forearm regions and connected contour if needed. LOCK all hat/head/hair/face dimensions, white shirt/torso, blue overalls, waist, ALL8 leg/knee/boot poses from image1. Same crisp logical pixel grid, no smooth painterly detailing. Original4x2 layout, eight complete equally scaled sprites, true transparent background, no text/shadows."
+  }
+}

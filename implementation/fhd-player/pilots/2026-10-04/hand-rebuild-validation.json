@@ -1,0 +1,62 @@
+{
+  "date": "2026-10-05",
+  "status": "awaiting user visual review; not integrated",
+  "scope_checks": "PASS",
+  "changed_frames": [
+    "walk-up-left/frames/walk-up-left-01.png",
+    "walk-up-left/frames/walk-up-left-02.png",
+    "walk-up-left/frames/walk-up-left-03.png",
+    "walk-up-left/frames/walk-up-left-04.png",
+    "walk-up-left/frames/walk-up-left-05.png",
+    "walk-up-left/frames/walk-up-left-06.png",
+    "walk-up-left/frames/walk-up-left-07.png",
+    "walk-up-left/frames/walk-up-left-08.png",
+    "walk-up-right/frames/walk-up-right-01.png",
+    "walk-up-right/frames/walk-up-right-02.png",
+    "walk-up-right/frames/walk-up-right-03.png",
+    "walk-up-right/frames/walk-up-right-04.png",
+    "walk-up-right/frames/walk-up-right-05.png",
+    "walk-up-right/frames/walk-up-right-06.png",
+    "walk-up-right/frames/walk-up-right-07.png",
+    "walk-up-right/frames/walk-up-right-08.png"
+  ],
+  "unchanged_frame_count": 40,
+  "selected_sources": {
+    "up-right": "hands-r15.png",
+    "up-left": "hands-r15.png"
+  },
+  "fps": 10,
+  "canvas": [
+    80,
+    80
+  ],
+  "display_scale": 2,
+  "gif_durations_ms": [
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100
+  ],
+  "slow_gif_durations_ms": [
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200
+  ],
+  "runtime_changes": false,
+  "engine_suite_rerun": false,
+  "visual_review": "Compact hand/wrist candidate selected after rejecting R14 raised paddles and R16 bulky bent fist.",
+  "remaining_review": [
+    "UP-RIGHT far-left arm travel remains subtle in R15; do not mark the earlier full arm-smoothing gate resolved.",
+    "User must approve hand silhouettes and loop continuity at normal preview size."
+  ],
+  "limits": "Automated scope/format checks are not user approval."
+}

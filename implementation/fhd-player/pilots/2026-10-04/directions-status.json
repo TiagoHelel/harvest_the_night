@@ -55,24 +55,24 @@
   "walk_up_right": {
     "status": "awaiting_approval",
     "date": "2026-10-05",
-    "candidate": "walk-up-right/full-arm-materials-r13",
-    "preview": "up-diagonal-full-arms-r13.gif",
-    "diagnostic": "up-diagonal-full-arms-before-after-r13.gif",
-    "user_feedback": "UP-RIGHT left arm barely moves; UP-LEFT arm stays static in most poses.",
-    "rejected_candidate": "walk-up-right/arm-smoothing-r9",
-    "feedback_addressed": "Rebuilt all eight shoulder/elbow/hand chains using fixed cyan-left/pink-right arm identities.",
+    "candidate": "walk-up-right/hands-r15",
+    "preview": "up-diagonal-hands-r15.gif",
+    "diagnostic": "up-diagonal-hands-before-after-r15.gif",
+    "user_feedback": "Hands still look strange; rebuild them.",
+    "rejected_candidate": "walk-up-right/full-arm-materials-r13",
+    "feedback_addressed": "Compact palms, narrower wrists and relaxed downward forearm/hand angles.",
     "approval_date": "2026-10-05",
-    "review_limit": "Motion quality awaits user review; UP-LEFT near-arm7-to8 remains brisk."
+    "review_limit": "Far left arm travel remains subtle; hand and gait approval pending."
   },
   "walk_up_left": {
     "status": "awaiting_approval",
     "date": "2026-10-05",
-    "candidate": "walk-up-left/full-arm-materials-r13",
-    "preview": "up-diagonal-full-arms-r13.gif",
-    "diagnostic": "up-diagonal-full-arms-before-after-r13.gif",
-    "feedback_addressed": "Rebuilt all eight shoulder/elbow/hand chains using fixed cyan-left/pink-right arm identities.",
-    "rejected_candidate": "walk-up-left/arms-r9 + arm-05-06-r10 override5/6",
-    "user_feedback": "UP-RIGHT left arm barely moves; UP-LEFT arm stays static in most poses.",
-    "review_limit": "Motion quality awaits user review; UP-LEFT near-arm7-to8 remains brisk."
+    "candidate": "walk-up-left/hands-r15",
+    "preview": "up-diagonal-hands-r15.gif",
+    "diagnostic": "up-diagonal-hands-before-after-r15.gif",
+    "feedback_addressed": "Compact palms, narrower wrists and relaxed downward forearm/hand angles.",
+    "rejected_candidate": "walk-up-left/full-arm-materials-r13",
+    "user_feedback": "Hands still look strange; rebuild them.",
+    "review_limit": "Awaiting user visual approval at actual preview size."
   }
 }

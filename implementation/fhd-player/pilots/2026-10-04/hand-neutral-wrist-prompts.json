@@ -1,0 +1,19 @@
+{
+  "tool": "built-in image_gen",
+  "up_right": {
+    "references": [
+      "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/hand-refinement-reference.png",
+      "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/neutral-wrist-guide.png",
+      "assets/art_source/player-fhd/pilots/2026-10-04/approved-hand-proportions-reference.png"
+    ],
+    "prompt": "Use case: precise-object-edit. Edit image1: WALK UP-RIGHT8farmer sprites,4x2. Image2 is ONLY a shoulder/elbow/WRIST trajectory diagram; cyan anatomical left chain, pink right chain. Image3 supplies small relaxed hand proportions only.\nReplace awkward wrist/hand poses with relaxed natural walking arms matching image2 in all8phases. Critical: BOTH wrists are BELOW their elbows in EVERY frame; NO elbow bent90degrees, NO upward wave, NO horizontal forearm paddle. Arm swing remains visible but follows diagonal downward shoulder-elbow-wrist lines. Soft20degree elbow flex at most. Forearms taper to slim wrists, hands small downward relaxed ovals, about3logical pixels wide and4high, thumb one pixel. Hand volume consistent, same warm peach2tone skin as3; no giant fists or detailed fingers. In4/5/6, replace near/right upward fist with a compact hand BELOW elbow, forward diagonal toward waist. Left far arm swings from mildly forward1 through intermediate2/3/4 to backward/down5 and smoothly returns6/7/8; do not turn it into a repeated vertical stump. Two hands partly readable throughout. Preserve everything else from1: exact hat/head/hair/face proportions, shirt/overalls body, all8lower-body leg/boot drawings, identical framing and pixel style. Only reconstruct connected arm-skin/wrist/hand region and sleeve connection if absolutely necessary. Crisp native pixel clusters, not painterly art. Original4columns2rows,8same-scale sprites, transparent background; do not reproduce guide diagram text, lines, colors or markers."
+  },
+  "up_left": {
+    "references": [
+      "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-left/hand-refinement-reference.png",
+      "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-left/neutral-wrist-guide.png",
+      "assets/art_source/player-fhd/pilots/2026-10-04/approved-hand-proportions-reference.png"
+    ],
+    "prompt": "Use case: precise-object-edit. Edit image1: WALK UP-LEFT8farmer sprites4x2. Image2 is only shoulder/elbow/WRIST pose guide, cyan anatomical LEFT/near, pink RIGHT/far. Image3 is small relaxed hand proportion reference only.\nRebuild both arms' hand/wrist poses to follow all8diagonal-downward guide chains. Keep palms below elbows at every phase, mild elbow flex20degrees maximum, relaxed straight wrists, never a horizontal paddle or bent upward fist. Both hands are compact rounded mittens3pixels wide4high on80pxnative cell, narrow2pixel wrists, simple peach2tone skin and onepixel thumb. Same hand volume all8frames; no flat elongated fingers, gloves or giant fists. LEFT/near hand1 forward-down diagonal,2slightly lower,3passes lower/central,4back beside left hip,5back/down by left hip,6starts return,7middle diagonal forward,8approaching front/down before1. Follow GUIDE elbow/wrist positions, especially intermediate7/8; no hand7hanging then hand8horizontal, no hand across back pocket. RIGHT/far hand opposes1low/back,5forward/down by waist, always partly visible and connected. Two coherent arms with readable smooth intermediate angles, same fixed shoulder identity. LOCK image1farmer hat/head/face/hair size, body torso/overalls, all8leg/knee/boot poses and framing. Only edit arm skin/wrist/hand chains and necessary sleeve joins. Native pixel clusters same as1and3; no added fine detail. Exactly8same-scale sprites4x2 on genuine transparent background, no diagram labels/colors/markers or shadows."
+  }
+}

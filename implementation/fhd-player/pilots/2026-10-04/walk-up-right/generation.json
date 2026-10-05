@@ -1,7 +1,7 @@
 {
   "tool": "built-in ImageGen",
   "date": "2026-10-04",
-  "status": "awaiting visual review: full arm cycle",
+  "status": "awaiting user visual review: hand and wrist rebuild",
   "source_directory": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right",
   "transparent_background": true,
   "workflow_reference": "sprite_generator/welcome_back_hero/prepare_ranger_transition.py: rotate first, fixed hip color ownership, isolated opposite contacts, two four-frame transitions",
@@ -317,6 +317,67 @@
       "source_sha256": "1f2b4faad0682f96fc3582f83a60c14b10ccfd1d25f26804b9ded7c32bbaffdf",
       "transparent_background": true,
       "review": "Final review candidate: larger left arm arc, restored peach skin. Visual approval pending."
+    },
+    {
+      "source": "hands-r14.png",
+      "prompt_file": "implementation/fhd-player/pilots/2026-10-04/hand-rebuild-prompts.json",
+      "prompt_key": "up_right",
+      "exact_prompt": "Use case: precise-object-edit.\nImage1 is the EDIT TARGET: 8 WALK UP-RIGHT farmer poses in4columns2rows. Image2 is ONLY the approved small hand/arm proportion reference; do not copy its facing or pose.\nRebuild both hands and wrists in all8poses. Current hands look like oversized flat paddles attached to rigid forearms. Give each hand a compact relaxed mitten silhouette, same size and skin palette across the cycle: about3x4 logical pixels on an80pxcell/64pxfarmer. Narrow2pixel wrist joined to slim3pixel forearm, a subtle single-pixel thumb on the anatomical inner side, rounded pixel palm, no individually splayed fingers. Hand follows forearm angle with neutral relaxed wrist, never bends backwards or points sideways like a wave. Distant anatomical LEFT hand stays a small readable hand, not a fist larger than near hand. Keep both arm chains attached to their original white sleeves and preserve opposing swing. Left hand high/front in1, gradually lowers2/3/4, low/back in5, returns6/7/8; right hand opposite. Slight natural elbow flex, smooth intermediate hand positions, no abrupt last-frame leap. Repair only arm skin/hand/wrist shapes and necessary connected forearm contours. LOCK straw hat, hair/face, head dimensions, white sleeves/torso, blue overalls, waist, ALL leg poses and boots to image1. Same pixel grid, sharp nearest-style blocks, no extra fine detail, consistent small hand proportions of image2. Exact original4x2 layout,8 complete equally scaled sprites, transparent background, no labels or shadows.",
+      "references": [
+        "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/hand-rebuild-reference.png",
+        "assets/art_source/player-fhd/pilots/2026-10-04/approved-hand-proportions-reference.png"
+      ],
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-8447204a-19f3-4a13-88f2-ad40db90bb0c.png",
+      "review": "Not selected: reduced palms but horizontal near-hand waving persists4/5/6.",
+      "source_sha256": "e6caa6bef595efda772993c5f7c1f1cb93a545ebb60e8694d706254ab824c38f",
+      "source_dimensions": [
+        1774,
+        887
+      ],
+      "date": "2026-10-05",
+      "transparent_background": true,
+      "tool": "built-in ImageGen"
+    },
+    {
+      "source": "hands-r15.png",
+      "prompt_file": "implementation/fhd-player/pilots/2026-10-04/hand-neutral-wrist-prompts.json",
+      "prompt_key": "up_right",
+      "exact_prompt": "Use case: precise-object-edit. Edit image1: WALK UP-RIGHT8farmer sprites,4x2. Image2 is ONLY a shoulder/elbow/WRIST trajectory diagram; cyan anatomical left chain, pink right chain. Image3 supplies small relaxed hand proportions only.\nReplace awkward wrist/hand poses with relaxed natural walking arms matching image2 in all8phases. Critical: BOTH wrists are BELOW their elbows in EVERY frame; NO elbow bent90degrees, NO upward wave, NO horizontal forearm paddle. Arm swing remains visible but follows diagonal downward shoulder-elbow-wrist lines. Soft20degree elbow flex at most. Forearms taper to slim wrists, hands small downward relaxed ovals, about3logical pixels wide and4high, thumb one pixel. Hand volume consistent, same warm peach2tone skin as3; no giant fists or detailed fingers. In4/5/6, replace near/right upward fist with a compact hand BELOW elbow, forward diagonal toward waist. Left far arm swings from mildly forward1 through intermediate2/3/4 to backward/down5 and smoothly returns6/7/8; do not turn it into a repeated vertical stump. Two hands partly readable throughout. Preserve everything else from1: exact hat/head/hair/face proportions, shirt/overalls body, all8lower-body leg/boot drawings, identical framing and pixel style. Only reconstruct connected arm-skin/wrist/hand region and sleeve connection if absolutely necessary. Crisp native pixel clusters, not painterly art. Original4columns2rows,8same-scale sprites, transparent background; do not reproduce guide diagram text, lines, colors or markers.",
+      "references": [
+        "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/hand-refinement-reference.png",
+        "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/neutral-wrist-guide.png",
+        "assets/art_source/player-fhd/pilots/2026-10-04/approved-hand-proportions-reference.png"
+      ],
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-05b24182-d6c1-4b6e-aafa-1264e143e1fc.png",
+      "review": "Selected for hand/wrist review: compact downward relaxed skin chains; far-arm travel remains subtle. No automatic motion approval.",
+      "source_sha256": "ae83bca882b0e8c49da22082706e98f82e3fe49ccd8b47f396da3096eaa9cba7",
+      "source_dimensions": [
+        1774,
+        887
+      ],
+      "date": "2026-10-05",
+      "transparent_background": true,
+      "tool": "built-in ImageGen"
+    },
+    {
+      "source": "hands-r16.png",
+      "prompt_file": "implementation/fhd-player/pilots/2026-10-04/hand-far-arm-prompt.json",
+      "prompt_key": "up_right",
+      "exact_prompt": "Use case: precise-object-edit. Image1 EDIT TARGET:8WALK UP-RIGHT farmer poses4x2. Image2 contains only the desired8shoulder/elbow/wrist chains; CYAN is LEFT far arm, PINK right near arm. Keep current R15small relaxed hands and right-near arm, but LEFT far arm has regressed to almost the SAME downward diagonal in all8poses.\nChange ONLY LEFT far arm from sleeve to hand. Give it visibly different forward and backward poses in1vs5 with intermediate2/3/4and6/7/8. Frame1: LEFT far elbow modestly bends TOWARD RIGHT/center of waist, hand at left waist below elbow; NOT the backward-slanted down-left arm of current1. Frame2: hand halfway out/down. Frame3: hand hangs below fixed left shoulder passing neutral. Frame4: hand moves diagonally BACK out to left. Frame5: far arm slants BACK/down-left, hand clearly farther left and lower than1. Frame6: starts returning toward neutral. Frame7: hand below shoulder but moving forward. Frame8: between7and1, fist nearer waist, NOT identical1or hanging. Follow cyan guide silhouette closely; preserve fixed anatomical shoulder. Small rounded peach hands, same3x4nativepixel palm volume, neutral wrist, wrists always below elbows, not flat horizontal paddles or large fists. Actual shoulder-elbow-wrist bend can be mild30degrees but never90degree waving. Hand1-to5 must travel clearly about8nativepixels horizontally and6vertically rather than tiny1pixeljitter. Keep TWOarms, exact right-near arm R15shape/phase unchanged. LOCK all head/hat, hair/face, torso/overalls, ALL8leg/boot drawings and original4x2layout/scale. Transparent background, crisp pixel grid, no diagrams/labels/colored limbs/shadows.",
+      "references": [
+        "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/hands-r15.png",
+        "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/neutral-wrist-guide.png"
+      ],
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-dbd0d43e-5cec-4f8c-b097-5b0684b47795.png",
+      "review": "Rejected: forward-left arm1 became a bulky sharply bent fist, abrupt relative to adjacent8/2. Near arm also altered; prefer R15hand silhouettes.",
+      "source_sha256": "5e62725d1aa4fe47a426053af23636890c93853d0e0b1716493e053f254c1945",
+      "source_dimensions": [
+        1774,
+        887
+      ],
+      "date": "2026-10-05",
+      "transparent_background": true,
+      "tool": "built-in ImageGen"
     }
   ],
   "actual_sources": {
@@ -425,8 +486,8 @@
     "feedback": "reprovado, a perna troca sem movimento coerente",
     "archived_preview": "rejected-r3"
   },
-  "selected_source": "full-arm-materials-r13.png",
-  "selected_preview": "up-diagonal-full-arms-r13.gif",
+  "selected_source": "hands-r15.png",
+  "selected_preview": "up-diagonal-hands-r15.gif",
   "revision_date": "2026-10-05",
   "selected_preview_sha256": "8ca57cc5fdc57f789d118ac7655abdc322adea7cb9b541975e34ab69c34a77f9",
   "source_base_sha256": "f821d9fd8d69dd66781d0c092f8225dd67473b9885c1b85e01a470d4c920795c",
@@ -464,5 +525,13 @@
     "scope": "All eight native poses in both upper diagonals; other40 native poses byte-identical.",
     "diagnostic_colors": "CYAN anatomical left arm; PINK anatomical right arm",
     "limits": "Color tracking evaluates a diagnostic source; material restoration is not pixel-identical and does not prove final motion quality."
+  },
+  "hand_rebuild": {
+    "date": "2026-10-05",
+    "baseline": "before-hand-rebuild",
+    "feedback": "Hands still look strange in both upper diagonals.",
+    "edit_scope": "Hand/wrist silhouettes and connected forearm trajectories; no runtime integration.",
+    "workflow": "Native reference, approved DOWN hand proportions, relaxed-wrist shoulder/elbow guide.",
+    "limitations": "Generated edits are not byte-exact outside hands within the edited poses; scope checks are not anatomy proof."
   }
 }

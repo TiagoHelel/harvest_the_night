@@ -1,44 +1,30 @@
 {
-  "status": "awaiting user review; not integrated",
-  "frames": 8,
-  "fps": 10,
-  "canvas": [
+  "selected_source": "hands-r15.png",
+  "source_size": [
+    1774,
+    887
+  ],
+  "source_row_cuts": [
+    0,
+    433,
+    887
+  ],
+  "source_col_cuts": [
+    0,
+    444,
+    887,
+    1330,
+    1774
+  ],
+  "common_source_scale": 0.18604651162790697,
+  "native_canvas": [
     80,
     80
   ],
-  "selected_source": "full-arm-materials-r13.png",
-  "native_overrides": {
-    "frames": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8
-    ],
-    "source": "full-arm-materials-r13.png",
-    "native_source_scale": 0.17582417582417584
-  },
-  "source_row_cuts": [
-    0,
-    438,
-    887
-  ],
-  "native_target_height": 64,
-  "fhd_display_scale": 2,
-  "common_source_scale": 0.17582417582417584,
-  "tracking_common_source_scale": 0.17777777777777778,
-  "arm_calibration_reference": "Common32pxhat-width calibration across all eight poses",
-  "tracking_source": "full-arm-tracking-r12.png; cyan left arm/pink right arm",
-  "color_motion_status": "FAIL",
-  "idle_bbox": [
-    25,
-    8,
-    55,
-    72
-  ],
+  "hat_calibration": 32,
+  "source_alpha_threshold": 128,
+  "resample": "nearest",
+  "anchor": "hat center and fixed top8px",
   "frames_metrics": [
     {
       "frame": 1,
@@ -46,107 +32,101 @@
         23,
         8,
         58,
-        69
+        71
       ],
-      "height": 61,
+      "height": 63,
       "hat_region_width": 32,
-      "sha256": "1ce099b9cbfe967e71dde18d31bb1abfdba5c2699d63d56297f15ffe274d1c2b"
+      "sha256": "5061ff82de86cb62b0420dabbc8db728a56d7b8a835cad97228159678895f42a"
     },
     {
       "frame": 2,
       "bbox": [
-        22,
+        23,
         8,
-        57,
-        69
+        56,
+        71
       ],
-      "height": 61,
+      "height": 63,
       "hat_region_width": 32,
-      "sha256": "57ebea3bae2c4fec5cf2b4ac5cbc6718d75e5de81070f3d901cbd1610ecb1805"
+      "sha256": "5b8bc021111fb2a2f61739f3cd48a346798ad426ebd7c6979581e19063f66c61"
     },
     {
       "frame": 3,
       "bbox": [
         22,
         8,
-        56,
-        68
+        55,
+        70
       ],
-      "height": 60,
-      "hat_region_width": 32,
-      "sha256": "febfdda9db71aec83ff56d3787b4f7216285280a2a07e406b5b79d7159b4a728"
+      "height": 62,
+      "hat_region_width": 31,
+      "sha256": "91333bd24b4feaa2cd77bb7ae11e3fdf026acc0ec813ed0e1294d7c1ccd52814"
     },
     {
       "frame": 4,
       "bbox": [
-        20,
+        22,
         8,
-        58,
-        68
+        57,
+        70
       ],
-      "height": 60,
+      "height": 62,
       "hat_region_width": 32,
-      "sha256": "83e551eefb18d7e705ce38af302c30189540b1958ffca0bf6ef09edc23083647"
+      "sha256": "3681fb6d461542e1f0b7e577b8959d5f2e9432d3e9c97f0371e1f342459afb4f"
     },
     {
       "frame": 5,
       "bbox": [
-        20,
+        22,
         8,
-        57,
-        69
+        56,
+        70
       ],
-      "height": 61,
+      "height": 62,
       "hat_region_width": 32,
-      "sha256": "d9de6bef4dc89d5558835f9ac3e91259deda70dd539e58a844a619d17a1571cf"
+      "sha256": "5909177f613bafa28fa2ae0686c75a69cc17ae4d68bd226b49ccdbc7fc04601b"
     },
     {
       "frame": 6,
       "bbox": [
-        22,
+        23,
         8,
         56,
-        69
+        70
       ],
-      "height": 61,
+      "height": 62,
       "hat_region_width": 32,
-      "sha256": "9ff760b51dcee1080ac524b5427cad279e69d337eeeee498550f90920da041f9"
+      "sha256": "3076ef166c50d3f7c72070c20c404bfc3b9d032a0e71e054819adab0ab1200e9"
     },
     {
       "frame": 7,
       "bbox": [
         22,
         8,
-        56,
-        67
+        55,
+        68
       ],
-      "height": 59,
-      "hat_region_width": 32,
-      "sha256": "8c7e0df9adfd7838e9fb8643410aff28c6a486bdac398f666c7c55eb103a0822"
+      "height": 60,
+      "hat_region_width": 31,
+      "sha256": "1f53494e9385b2dcf890f4274d854ea73ade77ced50aa9e4fff5f91aaba74154"
     },
     {
       "frame": 8,
       "bbox": [
-        22,
+        24,
         8,
-        57,
-        67
+        58,
+        68
       ],
-      "height": 59,
+      "height": 60,
       "hat_region_width": 32,
-      "sha256": "59ab4e80db3bdf9fd82182e7ddb144937d39a87f7f12a3fde8fe5f1bc970f712"
+      "sha256": "3cdabe2caa98b6b57c30e8ac306d8e5053751b71f52b4e5bd87f29ac469669df"
     }
   ],
-  "source_alpha_threshold": 128,
-  "resample": "nearest",
-  "anchor": "hat center and fixed head top",
-  "limitations": [
-    "Prototype display size, not yet rendered inside the game.",
-    "Slow comparison shows cyan left/pink right arm source beside restored materials.",
-    "Generated source edits are not pixel-identical to their references."
-  ],
-  "idle_hat_region_width": 30,
-  "native_tracking_vs_material_silhouette_iou": 0.8929554210236654,
+  "status": "awaiting user review; preview only",
+  "frames": 8,
+  "fps": 10,
+  "fhd_display_scale": 2,
   "gif_frame_durations_ms": [
     100,
     100,
@@ -156,5 +136,9 @@
     100,
     100,
     100
+  ],
+  "limitations": [
+    "Generated arm edits are not byte-exact outside hands inside edited poses.",
+    "Frame and scope checks do not prove anatomy or smooth motion."
   ]
 }

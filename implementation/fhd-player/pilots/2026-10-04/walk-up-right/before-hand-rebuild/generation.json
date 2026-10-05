@@ -1,0 +1,468 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-04",
+  "status": "awaiting visual review: full arm cycle",
+  "source_directory": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right",
+  "transparent_background": true,
+  "workflow_reference": "sprite_generator/welcome_back_hero/prepare_ranger_transition.py: rotate first, fixed hip color ownership, isolated opposite contacts, two four-frame transitions",
+  "calls": [
+    {
+      "prompt": "rotation-r1.prompt.txt",
+      "references": [
+        "approved-up-reference.png",
+        "approved-right-reference.png",
+        "approved-down-right-reference.png"
+      ],
+      "source": "rotation-r1.png",
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-e8f1e11c-1fbe-4fc2-b863-a7dba84ac901.png",
+      "review": "Rear3quarter northeast standing identity master, hat/hair/back straps and pockets retained."
+    },
+    {
+      "prompt": "contacts-r1.prompt.txt",
+      "references": [
+        "rotation-r1.png",
+        "implementation/fhd-player/pilots/2026-10-04/walk-up-right/guide-archive-r1/contact-guide.png"
+      ],
+      "source": "contacts-r1.png",
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-8b6ceb24-d46e-4b19-a43c-d6218936e286.png",
+      "review": "Rejected: repeated near arm extreme and second contact changes apparent red/cyan hip attachment. User feedback: this stride is bugged. Not used as approved motion."
+    },
+    {
+      "prompt": "contacts-r2.prompt.txt",
+      "references": [
+        "contacts-r1.png",
+        "rotation-r1.png",
+        "implementation/fhd-player/pilots/2026-10-04/walk-up-right/guide-archive-r1/contact-guide.png",
+        "approved-down-right-reference.png"
+      ],
+      "source": "contacts-r2.png",
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-f9c0899e-38f8-4fa7-be71-a3013edac114.png",
+      "review": "Rejected internally: hip dots added, but repeated raised near arm and apparent leg-root ambiguity persisted. Not used for final transition."
+    },
+    {
+      "prompt": "contact-05-r1.prompt.txt",
+      "references": [
+        "rotation-r1.png",
+        "implementation/fhd-player/pilots/2026-10-04/walk-up-right/guide-archive-r1/contact-05-guide.png"
+      ],
+      "source": "contact-05-r1.png",
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-30c46f4f-dbd4-41cc-ad3d-259accd4631a.png",
+      "review": "New isolated crossed opposite contact: foreground thigh angles back-left from right hip, other leg advances behind. Tool retained blue denim instead of debug colors; used as routing/pose reference, not a colored proof."
+    },
+    {
+      "prompt": "transition-a-r1.prompt.txt",
+      "references": [
+        "contact-01-r1.png",
+        "contact-05-r1.png",
+        "rotation-r1.png",
+        "implementation/fhd-player/pilots/2026-10-04/walk-up-right/transition-a-guide.png"
+      ],
+      "source": "transition-a-r1.png",
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-a8a491ea-73ed-475f-960b-816c6d81b50a.png",
+      "review": "Leg recovery and opposite routing visible; top-row near arms incorrectly stayed raised. Local arm fix requested."
+    },
+    {
+      "prompt": "transition-a-r2.prompt.txt",
+      "references": [
+        "transition-a-r1.png",
+        "implementation/fhd-player/pilots/2026-10-04/walk-up-right/transition-a-guide.png"
+      ],
+      "source": "transition-a-r2.png",
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-702da65e-6889-4574-b78b-14456f7440bf.png",
+      "review": "Near arm lowered in top-row poses1/2, neutral in3, forward in4. Distinct far recovery3 retained; used for first four phases."
+    },
+    {
+      "prompt": "transition-b-r1.prompt.txt",
+      "references": [
+        "contact-05-r1.png",
+        "contact-01-r1.png",
+        "rotation-r1.png",
+        "implementation/fhd-player/pilots/2026-10-04/walk-up-right/transition-b-guide.png"
+      ],
+      "source": "transition-b-r1.png",
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-c7fa15f7-f944-4308-9eeb-d681df030ad3.png",
+      "review": "Opposite contact5 and near recovery7 visible; phase6 prematurely returns to near-forward routing and phase8 near arm stays forward. Localized correction requested before packing."
+    },
+    {
+      "prompt": "transition-b-r2.prompt.txt",
+      "references": [
+        "transition-b-r1.png",
+        "implementation/fhd-player/pilots/2026-10-04/walk-up-right/transition-b-guide.png",
+        "transition-a-r2.png"
+      ],
+      "source": "transition-b-r2.png",
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-08a26f0d-af71-415c-8f25-fa9adeb4aca8.png",
+      "review": "Phase8 lowered near arm now counter-swings; phase6 still repeats the near-forward pattern. Use only phases5,7,8, replace6 with isolated source."
+    },
+    {
+      "prompt": "phase-06-r1.prompt.txt",
+      "references": [
+        "contact-05-color-reference.png"
+      ],
+      "source": "phase-06-r1.png",
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-baeac1d6-3120-43a9-be31-c72896fa8464.png",
+      "review": "Isolated heel-off from actual correct phase5 instead of editing a wrong phase6 silhouette. Red near thigh still crosses backward-left, red heel lifts; cyan far supports. Separate source calibrated once to phase5 hat width using nearest sampling."
+    },
+    {
+      "prompt": "materials-r1.prompt.txt",
+      "references": [
+        "tracking-r1.png",
+        "approved-up-reference.png",
+        "approved-down-right-reference.png"
+      ],
+      "source": "materials-r1.png",
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-fdd944c6-34da-4f9f-a51b-bb88ed20d0d0.png",
+      "review": "Restored denim and all brown boots, retained opposite contact5, heel-off6, both passing recoveries and arm extremes. Body contour calibration. Bottom-row hats still33-34px vs32px first row: targeted head-only revision requested."
+    },
+    {
+      "prompt": "materials-r2.prompt.txt",
+      "references": [
+        "materials-r1.png",
+        "implementation/fhd-player/pilots/2026-10-04/walk-up-right/head-scale-r1-comparison.png",
+        "approved-up-reference.png"
+      ],
+      "source": "materials-r2.png",
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-73786e61-8317-4a83-ba92-76724873f489.png",
+      "review": "Rejected internally: bottom heads overshrank to29-30nativepx vs32px firstrow, with sourcebrims179-182px vs201-202px. Reference background haze remains below exportalpha threshold. Final attempt uses originalR1 with absolute200pxbrim target rather than percentage."
+    },
+    {
+      "prompt": "materials-r3.prompt.txt",
+      "references": [
+        "materials-r1.png",
+        "approved-up-reference.png"
+      ],
+      "source": "materials-r3.png",
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-c3ef81aa-f0f1-4d69-8cda-4c95eff526de.png",
+      "review": "Uniform native hats32px, eight unique frames. Rejected by user on2026-10-05: leg exchange lacks coherent movement. Endpoints alone did not establish temporal continuity."
+    },
+    {
+      "date": "2026-10-05",
+      "prompt": "continuity-r2.prompt.txt",
+      "references": [
+        "materials-r3.png",
+        "continuity-guide-r2.png"
+      ],
+      "source": "tracking-r2.png",
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-ec5eb392-1659-412c-9a29-204f64a01955.png",
+      "review": "Tool returned blue clothing despite construction-color request. Passing poses3/7 now closer beneath hips, but reaches4/8 are still overly extended. Targeted correction required; not selected."
+    },
+    {
+      "date": "2026-10-05",
+      "prompt": "tracking-r3.prompt.txt",
+      "references": [
+        "tracking-r2.png",
+        "continuity-guide-r2.png"
+      ],
+      "source": "tracking-r3.png",
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-2aeee23f-00f1-4a24-b47d-9d26b2827c68.png",
+      "review": "Rejected internally: first cyan calf incorrectly ends in red boot; contact5 repeats contact1 leg geometry and support checks fail. Never used as final motion. Next construction uses diagram as primary edit target, farmer only as identity reference."
+    },
+    {
+      "date": "2026-10-05",
+      "prompt": "tracking-r4.prompt.txt",
+      "references": [
+        "continuity-guide-r2.png",
+        "materials-r3.png"
+      ],
+      "source": "tracking-r4.png",
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-1cae2350-2899-450c-a3a7-7a512fa9cc9d.png",
+      "review": "Rejected internally: model again ignored construction colors and reproduced extended reference leg poses. Colored-centroid analysis is invalid for blue denim/brown boots; previously generated numeric file is archived as invalid. Switch to isolated transition poses, not another whole-sheet retry."
+    },
+    {
+      "date": "2026-10-05",
+      "prompt": "reach-04-08-r1.prompt.txt",
+      "references": [
+        "reach-04-08-source.png",
+        "passing-contact-reference.png"
+      ],
+      "source": "reach-04-08-r1.png",
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-e41d3112-e9db-44f5-bb17-6dc44ec14439.png",
+      "review": "Localized phases4/8 replace full scissor stride with closer planted/reaching ankles. Upper proportions not pixel-identical."
+    },
+    {
+      "date": "2026-10-05",
+      "prompt": "passing-03-07-r1.prompt.txt",
+      "references": [
+        "passing-03-07-source.png"
+      ],
+      "source": "passing-03-07-r1.png",
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-354bf3de-a7e4-48a3-9413-7a8cdd423c88.png",
+      "review": "Localized opposite passing poses with lifted ankle closer beneath its own hip. Common pair hat calibration preserves head scale; resulting planted shins need stature correction."
+    },
+    {
+      "date": "2026-10-05",
+      "prompt": "materials-r5.prompt.txt",
+      "references": [
+        "materials-r4.png"
+      ],
+      "source": "materials-r5.png",
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-042108b2-ebe5-4ef5-8f91-5e1ff5b104f6.png",
+      "review": "Restores planted calf lengths in intermediate poses3/4/7/8 without reintroducing their wide contact silhouette. Native heights62-65px, hat widths31-32px at retained R3 common scale. Generated edits still change pixels; visual approval pending."
+    },
+    {
+      "date": "2026-10-05",
+      "prompt": "recovery-07-08-r1.prompt.txt",
+      "references": [
+        "recovery-07-08-source.png",
+        "recovery-06-01-context.png"
+      ],
+      "source": "recovery-07-08-r1.png",
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-dfed9e7f-1c32-4ec7-b89f-38e62f03ff1f.png",
+      "review": "Only exported frames7/8 replaced. Frame8 unfolds near knee and advances/lowers the boot rather than holding frame7 pose. Native hats32px, heights63px. Frames1-6 byte-identical; anatomy/motion approval pending."
+    },
+    {
+      "source": "arm-smoothing-r7.png",
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-8f35893b-cc34-433c-85e7-fa569578ddcc.png",
+      "prompt": "Use case: precise-object-edit. Image1 is edit target: eight existing pixel-art WALK UP-RIGHT farmer poses, 4columns2rows, reading order. Fix ONLY anatomical LEFT arm, the FAR arm attached to SCREEN-LEFT shoulder. It currently merely disappears in1 and pops into a static pose in2-8. Draw its complete consistent white sleeve -> peach upper arm -> bent elbow -> forearm -> hand chain in a SMOOTH SMALL walking counter-swing. Keep that far LEFT hand partly visible outside the SCREEN-LEFT torso silhouette in EVERY frame; never erase it completely, never teleport it to another side, never attach it to the near right shoulder. Phase1: maximum modest BACK swing down-left, hand below hip outside the left waist. Phase2: a little closer to the hip as it returns. Phase3: passes just beside the hip. Phase4: starts forward/up-right, small bent elbow, hand moves upward and a little right, still readable beside torso. Phase5: modest maximum forward swing, hand near upper hip/lower waist left edge, forearm bends slightly toward torso, never hidden completely. Phase6: starts lowering and returning. Phase7: hand passes beside hip going back. Phase8: hand lowers/back-left between7 and1. Give each consecutive hand/elbow pose a visible small change of about1-2 native pixels, using a low-amplitude arc; same upper arm and forearm lengths, shoulder stays fixed. No sudden visibility changes or arm extension across the whole back. Near RIGHT arm, head, straw hat, white eyes, hair, shirt/overall design, blue leg identity, all8leg positions including approved recovery7/8, trouser width, boot shapes, torso size and character pixel grid are invariants. Exactly TWO arms and hands. Preserve pixel art with same logical pixel size and same source proportions, crisp binary alpha, original transparent padding and4x2grid. No antialiasing, painterly gradients, labels, numbers, shadows or floor. Transparent background.",
+      "references": [
+        "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/arm-smoothing-original.png"
+      ],
+      "dimensions": [
+        1774,
+        887
+      ],
+      "sha256": "ece4e929b5f72fdc16b802ff2292aac9901f55dabe5ba2700172342004da0cdc",
+      "date": "2026-10-05",
+      "review": "Rejected: far left hand now visible in1 but still nearly static across8poses."
+    },
+    {
+      "source": "arm-smoothing-r8.png",
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-5381c709-0d1b-4cf4-b58d-431fdb4acf03.png",
+      "prompt": "Use case: precise-object-edit. Image1 EDIT TARGET eight-pose up-right pixel farmer4x2sheet. Image2 ABSTRACT ARM TRAJECTORY GUIDE ONLY, not a new character reference. R7 made the far LEFT arm visible but still almost IDENTICAL hanging straight down in all8poses: this fails animation. Change ONLY FAR anatomical LEFT arm on SCREEN-LEFT and follow the eight elbow/hand positions from guide2. Keep original shoulder fixed, keep sleeve white and skin peach, do NOT copy cyan color or gray mannequin or any guide labels. Importantly, guide phase1 is forward toward travel/up-right, with left hand raised at left waist and elbow bent, because the near RIGHT arm is backward in1. Guide phase5 is far left arm back down-left extended modestly, opposite to the near right arm's forward bent swing. Native80x80positions: shoulder(34,32)all; phase1 elbow(31,39) hand(34,41); phase2 elbow(31,39) hand(32,43); phase3 elbow(32,40) hand(30,45); phase4 elbow(31,41) hand(28,47); phase5 elbow(31,42) hand(27,49); phase6 elbow(31,41) hand(28,47); phase7 elbow(32,40) hand(30,45); phase8 elbow(31,39) hand(32,43). These are normalized pose-local guide coordinates, adapt to target alignment without moving shoulder/torso. Hand moves smoothly DOWN-LEFT 1to5 then UP-RIGHT 5to1. Most visible hand is ALWAYS outside left torso silhouette, small natural arm shape and modest7px vertical range. Frame1 MUST have visibly bent forearm and higher hand than5; frame5 MUST have hand lower and leftwards. Never duplicate the same hanging arm in all frames. Shoulder->elbow->hand connected with constant upper-arm/forearm lengths; mild bend as in guide. Preserve ALL existing near right arms, heads, hats, overalls, hips, legs, boots, gait recovery7/8, pixel scale and4x2layout. Absolutely no character redesign, body stretching, arm across the full back, arm disappearing completely or swapping shoulders. EXACTLY TWO arms per pose. Crisp pixel art, transparent background. No guide colors, numbers, writing, shadows or extra characters.",
+      "references": [
+        "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/arm-smoothing-r7.png",
+        "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/far-arm-trajectory-guide.png"
+      ],
+      "dimensions": [
+        1774,
+        887
+      ],
+      "sha256": "d75755f4596d211ff3f69a3402abe46b80c2258c62320d387aa18d71ef6e5e12",
+      "date": "2026-10-05",
+      "review": "Rejected: slightly changes far arm but accidentally reverses near arm1/5/8."
+    },
+    {
+      "source": "arm-smoothing-r9.png",
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-f0fc7e52-2543-4a90-abf2-bafee3ebbfad.png",
+      "prompt": "Use case: precise-object-edit. Image1 EDIT TARGET eight walking farmer cells4columns2rows. Image2 is the ORIGINAL near-right-arm pose reference. Image3 is a movement diagram. Precise correction: target's arm on the LEFT SIDE OF EACH PICTURE must visibly BEND AT ELBOW in phases1,2,8 instead of hanging nearly straight in every phase. This image-left arm is the FAR anatomical LEFT arm. Its white sleeve sits on the LEFT shoulder. Phase1(top-left): upper arm descends from LEFT sleeve, elbow sits BELOW LEFT sleeve, then forearm angles UP and RIGHT toward the LEFT EDGE of the BLUE WAIST. Its hand is near the waist, considerably HIGHER than the straight hand in phase5. Keep the elbow visible projecting LEFT of torso so this is one bent arm attached to the LEFT shoulder, not the arm on picture-right. Phase2(top second): same LEFT shoulder, left elbow bends less, hand lowers halfway toward the relaxed left hip. Phase3(top third): left hand next to left hip, near vertical passing arm. Phase4(top fourth): left hand starts reaching BACK down-left. Phase5(bottom first): LEFT arm modestly extended down-left, hand below hip, matching image1left-arm5. Phase6(bottom second): LEFT hand returns midway upward from5. Phase7(bottom third): LEFT arm passes hip. Phase8(bottom fourth): LEFT elbow bends partially, left hand moves up/right midway to1. Image-left1 vs5 are opposite higher-bent and lower-straighter key poses. Visible LEFT hand all8phases, no arm hiding, no duplicate arms. RESTORE the arm on the RIGHT SIDE OF EACH PICTURE (near anatomical RIGHT) to its exact pose in image2: picture-right arm DOWN in1/2/3, raised/bent FORWARD in4/5/6, DOWN in7/8. In image1 the wrong picture-right arm was accidentally bent in1/8 and lowered in5; correct those three using originalimage2. Thus the arms COUNTER-SWING, one moves forward while the other moves backward. Do not flip the image, exchange shoulders, copy the forward pose onto both arms, or modify legs. Keep all eight heads, hat sizes, faces, blue trousers, boots, hips, leg positions and source proportions unchanged. Preserve pixel-grid crispness and white/peach arm palette. No cyan diagram lines or text. Source4x2layout, true transparent background, EXACTLY TWO ARMS in each pose.",
+      "references": [
+        "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/arm-smoothing-r8.png",
+        "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/arm-smoothing-original.png",
+        "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/far-arm-trajectory-guide.png"
+      ],
+      "dimensions": [
+        1774,
+        887
+      ],
+      "sha256": "cb84939521bb36df29fe00f1bf06d621be249a0b06191249e8c1bb3cadc1199f",
+      "date": "2026-10-05",
+      "review": "Selected candidate: bent/extended far-arm cycle with near-arm correction. User review pending."
+    },
+    {
+      "tool": "built-in ImageGen",
+      "date": "2026-10-05",
+      "source": "full-arm-tracking-r11.png",
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-59ec64c4-a3b4-4172-ae28-cbadd5caa4ce.png",
+      "prompt_file": "implementation/fhd-player/pilots/2026-10-04/full-arm-cycle-prompts.json",
+      "prompt_key": "up_right",
+      "exact_prompt": "Use case: precise-object-edit. Image1 EDIT TARGET eight existing WALK UP-RIGHT pixel farmer sprites4columns2rows. Image2 ABSTRACT JOINT GUIDE with eight opposing arm chains, not a character reference. Repair BOTH arms as a coherent eight-frame walking cycle. Prior edits left the far arm nearly static; this revision must have a clearly visible pendulum swing through distinct intermediate shoulder/elbow/hand silhouettes. Follow guide2 in reading order closely, adapting its80x80local positions to the farmer's existing shoulder alignment. Fixed left shoulder34,31; LEFT hand sequence(34,38),(32,40),(29,43),(27,46),(26,48),(27,46),(29,43),(32,40). Fixed right shoulder48,31; RIGHT hand sequence(54,46),(53,44),(51,41),(52,38),(54,36),(53,38),(51,41),(53,44). The two arms COUNTER-SWING with10native pixels of vertical hand travel, readable at64pxartwork height. Phase1: LEFT/far arm bent forward with hand higher by left waist, RIGHT/near arm backward hand down outside right hip. Phase5: LEFT/far arm clearly swings backward/down-left, RIGHT/near arm swings forward/up-right. Phases2,3,4 and6,7,8 are smooth intermediate angles; do not repeat one hanging arm across six poses. No teleporting, swapping shoulders or vanishing hand. Both hands must remain at least partly readable at every phase, with coherent torso overlap and two complete connected arm chains. For this DIAGNOSTIC render, color the entire LEFT skin arm/hand solid CYAN and RIGHT skin arm/hand solid MAGENTA in every frame, attached to the same white sleeves. Keep white sleeves white; ONLY arm skin changes to identity colors. Never recolor the blue trousers, boots or face. Keep farmer design, straw hat pixel width, head scale, white eyes, torso, waist, hips, all8existing leg poses, blue trousers and brown boots identical in design and proportion. Match simple crisp pixel style and logical pixel grid. Transparent background, original4x2layout, no captions, joint circles, skeleton lines, shadows or labels. Exactly two arms per pose, no extra fingers/arm stumps.",
+      "references": [
+        "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/full-arm-cycle-reference.png",
+        "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/full-arm-cycle-guide.png"
+      ],
+      "source_dimensions": [
+        1774,
+        887
+      ],
+      "source_sha256": "e6da7be4b4e4037516b28baae60b45ff5c25f7e614fc45462debb16c655380fd",
+      "transparent_background": true,
+      "review": "Not selected: far left diagnostic lower-extent travel4px; near right8px."
+    },
+    {
+      "tool": "built-in ImageGen",
+      "date": "2026-10-05",
+      "source": "full-arm-tracking-r12.png",
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-4aa08ac9-39fd-4f90-bf6b-ace6986fbc44.png",
+      "prompt_file": "implementation/fhd-player/pilots/2026-10-04/full-arm-cycle-refinement-prompts.json",
+      "prompt_key": "up_right",
+      "exact_prompt": "Use case: precise-object-edit. Image1 edit target transparent4x2eight-frame up-right farmer with cyan LEFT/far and pink RIGHT/near arms. Image2 desired whole-arm pendulum diagram. Current CYAN far arm has only4pxnative hand travel and near pink is repeated in1/2/3: fix this. Rotate the ENTIRE arm chain FROM SHOULDER, INCLUDING its WHITE SLEEVE orientation, upper arm, elbow and forearm in every frame. Shoulder root remains fixed, but sleeve must rotate; keeping white sleeve hanging vertically in every pose caused the rigid result. CYAN1: left sleeve angles forward, cyan upper arm angles toward the LEFT waist, elbow raised near lower sleeve, forearm bends gently UP-RIGHT, cyan fist HIGH near left waist just below sleeve, around native(33,38); the elbow must not hang down to same height as extended5. CYAN2: rotated sleeve/intermediate upper-arm angle, elbow partly lowers, cyan hand around(32,41). CYAN3: passing cyan arm approximately vertical, hand(29,44). CYAN4: sleeve/upper arm angle BACK down-left, hand(26,47). CYAN5: maximum natural back/down-left swing, hand(24,49), markedly lower and left than1. CYAN6: returning intermediate sleeve/arm angle, hand(26,47). CYAN7: passes beside hip, hand(29,44). CYAN8: rotates forward and partly bends elbow, hand(32,41), smoothly returning to high1. Pink RIGHT counter-swing: hand1(55,48),2(54,45),3(52,42),4(53,39),5(55,36),6(54,39),7(52,42),8(54,45). Therefore pink2/3 cannot reuse hanging1, pink6/7 must gradually lower rather than snap down. The LEFT cyan hand and elbow must stay partly visible, coherent connected arm, no extra stumps or duplicated white sleeve. Do not draw body-colored skin on these diagnostic arms. Keep CYAN LEFT/PINK RIGHT ownership all8. Keep head, hat, hair, torso, straps/back pocket, legs, boots and existing gait unchanged in design. Pixel art with same logical grid,4x2layout, transparent background. No joint circles, guide labels, shadows or background.",
+      "references": [
+        "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/full-arm-tracking-r11.png",
+        "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/full-arm-cycle-guide.png"
+      ],
+      "source_dimensions": [
+        1774,
+        887
+      ],
+      "source_sha256": "5875e09a3e417e9478487a8729ecfa3c2ef7b878664e2e5eed480575515040d5",
+      "transparent_background": true,
+      "review": "Diagnostic only: far left5px fails6px planned motion gate; near right7px."
+    },
+    {
+      "tool": "built-in ImageGen",
+      "date": "2026-10-05",
+      "source": "full-arm-materials-r13.png",
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-afb6dddc-e86d-4bc8-b51d-08b72c0a9f00.png",
+      "prompt_file": "implementation/fhd-player/pilots/2026-10-04/full-arm-cycle-material-prompts.json",
+      "prompt_key": "up_right",
+      "exact_prompt": "Use case: precise-object-edit. Image1 EDIT TARGET WALK UP-RIGHT eight pixel farmer frames, 4 columns x2 rows in reading order. Image2 original design/proportion reference, NOT the old frozen arm motion. Restore cyan anatomical LEFT and magenta anatomical RIGHT arm skin to the original peach skin colors, with simple 2-3 shade pixel clusters, natural small hands and original white short sleeves. Preserve each current leg pose, knee/boot position, head/hat size, original narrow farmer proportions, blue denim/boots and native pixel grid. IMPORTANT final correction to the LEFT FAR ARM: current tracking has too little range; rotate its entire sleeve, upper arm and forearm from its LEFT SHOULDER, not just fingers. Frame1 far-left elbow bent forward/up so fist visible at WAIST LEVEL x33,y37 of local80x80, frame2 midway x31,y40, frame3 x28,y44, frame4 x25,y47, frame5 x24,y49 visibly downward/backward, frame6 x25,y47, frame7 x28,y44, frame8 x31,y40 flowing to1. Shoulder around34,31: sleeve angle rotates with upper arm throughout. Use AT LEAST10 logical pixels of visible wrist travel from1 to5; high wrist1 must be distinctly above low wrist5. Right/near arm counter-swings: hand1 low54,48,2(53,45),3(51,41),4(52,38),5(54,36),6(52,38),7(51,41),8(53,45). Distinct intermediate connected chains in every pose; sine-like easing at extremes and smooth8-to1, no identical hanging arm across multiple poses. Exactly TWO arms attached to same shoulder all8poses, hands partly visible in every frame. Re-establish original slim peach arms, no thick cyan/pink diagnostic blobs, no extra arm stump, no swapping anatomical ownership. Preserve crisp 64px-tall artwork rendered on evenly aligned80px cells and enlarged only by integer pixels. Do not add subpixel detailed texture, shadows or outlines softer than original. Eight same-size sprites4x2, transparent background, no labels or grid. This is a full8frame final arm correction, not a standing arm with tiny hand jitters.",
+      "references": [
+        "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/full-arm-tracking-native-reference.png",
+        "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/full-arm-cycle-reference.png"
+      ],
+      "source_dimensions": [
+        1774,
+        887
+      ],
+      "source_sha256": "1f2b4faad0682f96fc3582f83a60c14b10ccfd1d25f26804b9ded7c32bbaffdf",
+      "transparent_background": true,
+      "review": "Final review candidate: larger left arm arc, restored peach skin. Visual approval pending."
+    }
+  ],
+  "actual_sources": {
+    "rotation-r1": [
+      1086,
+      1448
+    ],
+    "contacts-r1": [
+      1536,
+      1024
+    ],
+    "contacts-r2": [
+      1536,
+      1024
+    ],
+    "contact-05-r1": [
+      1086,
+      1448
+    ],
+    "transition-a-r1": [
+      1254,
+      1254
+    ],
+    "transition-a-r2": [
+      1254,
+      1254
+    ],
+    "transition-b-r1": [
+      1254,
+      1254
+    ],
+    "transition-b-r2": [
+      1254,
+      1254
+    ],
+    "phase-06-r1": [
+      1254,
+      1254
+    ],
+    "tracking-r1": [
+      2508,
+      1254
+    ],
+    "materials-r1": [
+      1774,
+      887
+    ],
+    "materials-r2": [
+      1774,
+      887
+    ],
+    "materials-r3": [
+      1774,
+      887
+    ],
+    "tracking-r2": [
+      1774,
+      887
+    ],
+    "tracking-r3": [
+      1774,
+      887
+    ],
+    "tracking-r4": [
+      1536,
+      1024
+    ],
+    "reach-04-08-r1": [
+      1774,
+      887
+    ],
+    "passing-03-07-r1": [
+      1774,
+      887
+    ],
+    "materials-r4": [
+      1776,
+      888
+    ],
+    "materials-r5": [
+      1774,
+      887
+    ],
+    "recovery-07-08-r1": [
+      1774,
+      887
+    ]
+  },
+  "limitations": [
+    "Preview only; no runtime integration.",
+    "Generated edits preserve design, not byte-exact unchanged regions inside edited poses.",
+    "Numeric scope checks do not establish motion quality."
+  ],
+  "guide_history": "guide-archive-r1 preserves the original leg-only schematic used for contacts; later transition guides also specify arm counter-swing. Reconstructed from identical create_guide geometry with arm block omitted.",
+  "derived_sources": {
+    "contact-01-r1.png": "Lossless left half of rejected contacts-r1; used only for first-contact leg pose, wrong original arms explicitly overridden.",
+    "contact-05-r1.png": "New ImageGen isolated opposite-contact pose; blue rather than requested construction colors.",
+    "tracking-r1.png": "Seven unpainted source cuts from transition-a-r2 and transition-b-r2, plus isolated phase6 normalized once by phase5 hat width. Transparent padding, no reflection; exact packing metadata in transition-packing.json.",
+    "contact-05-color-reference.png": "Lossless top-left cell of transition-b-r2, the corrected opposite leg contact used for isolated heel-off6.",
+    "materials-r4.png": "Four unpainted R3 cells plus four localized generated poses from two pairs, uniformly calibrated per pair using median source hat width. Exact cuts/scales in continuous-packing.json. Intermediate: frame3/4/7/8 visible heights59-60px against64-65px contacts, so calf-only correction requested."
+  },
+  "construction_check_note": "Rejected construction studies are archived. R3 diagnostic colors violate first calf/boot attachment; R4 returned blue denim/brown boots, making color-centroid analysis invalid. No colored-leg trajectory PASS is claimed for selected artwork. Review actual motion and user feedback.",
+  "user_rejection": {
+    "date": "2026-10-05",
+    "candidate": "materials-r3.png",
+    "feedback": "reprovado, a perna troca sem movimento coerente",
+    "archived_preview": "rejected-r3"
+  },
+  "selected_source": "full-arm-materials-r13.png",
+  "selected_preview": "up-diagonal-full-arms-r13.gif",
+  "revision_date": "2026-10-05",
+  "selected_preview_sha256": "8ca57cc5fdc57f789d118ac7655abdc322adea7cb9b541975e34ab69c34a77f9",
+  "source_base_sha256": "f821d9fd8d69dd66781d0c092f8225dd67473b9885c1b85e01a470d4c920795c",
+  "native_overrides": {
+    "frames": [
+      7,
+      8
+    ],
+    "source": "recovery-07-08-r1.png",
+    "pair_common_reference_scale": 0.4907292954264524,
+    "native_source_scale": 0.0784186639383095
+  },
+  "latest_feedback": {
+    "date": "2026-10-05",
+    "scope": [
+      7,
+      8
+    ],
+    "feedback": "leg appears to hold before lowering; redo only7/8"
+  },
+  "approval": {
+    "date": "2026-10-05",
+    "feedback": "aprovado"
+  },
+  "arm_smoothing_request": "Up-right left arm pops in/out; up-left arm5/6 extends unnaturally across back.",
+  "arm_edit_reference": {
+    "source": "before-arm-smoothing/frames/*.png",
+    "operation": "lossless320x160packing, nearest6x to1920x960; includes approved recovery7/8"
+  },
+  "full_arm_cycle": {
+    "date": "2026-10-05",
+    "rejected_previous_candidate": "walk-up-right/arm-smoothing-r9",
+    "attempts_per_direction": 3,
+    "baseline_archive": "before-full-arm-cycle",
+    "scope": "All eight native poses in both upper diagonals; other40 native poses byte-identical.",
+    "diagnostic_colors": "CYAN anatomical left arm; PINK anatomical right arm",
+    "limits": "Color tracking evaluates a diagnostic source; material restoration is not pixel-identical and does not prove final motion quality."
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "tool": "built-in image_gen",
+  "up_right": {
+    "references": [
+      "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/hands-r15.png",
+      "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-right/neutral-wrist-guide.png"
+    ],
+    "prompt": "Use case: precise-object-edit. Image1 EDIT TARGET:8WALK UP-RIGHT farmer poses4x2. Image2 contains only the desired8shoulder/elbow/wrist chains; CYAN is LEFT far arm, PINK right near arm. Keep current R15small relaxed hands and right-near arm, but LEFT far arm has regressed to almost the SAME downward diagonal in all8poses.\nChange ONLY LEFT far arm from sleeve to hand. Give it visibly different forward and backward poses in1vs5 with intermediate2/3/4and6/7/8. Frame1: LEFT far elbow modestly bends TOWARD RIGHT/center of waist, hand at left waist below elbow; NOT the backward-slanted down-left arm of current1. Frame2: hand halfway out/down. Frame3: hand hangs below fixed left shoulder passing neutral. Frame4: hand moves diagonally BACK out to left. Frame5: far arm slants BACK/down-left, hand clearly farther left and lower than1. Frame6: starts returning toward neutral. Frame7: hand below shoulder but moving forward. Frame8: between7and1, fist nearer waist, NOT identical1or hanging. Follow cyan guide silhouette closely; preserve fixed anatomical shoulder. Small rounded peach hands, same3x4nativepixel palm volume, neutral wrist, wrists always below elbows, not flat horizontal paddles or large fists. Actual shoulder-elbow-wrist bend can be mild30degrees but never90degree waving. Hand1-to5 must travel clearly about8nativepixels horizontally and6vertically rather than tiny1pixeljitter. Keep TWOarms, exact right-near arm R15shape/phase unchanged. LOCK all head/hat, hair/face, torso/overalls, ALL8leg/boot drawings and original4x2layout/scale. Transparent background, crisp pixel grid, no diagrams/labels/colored limbs/shadows."
+  }
+}

@@ -1,7 +1,7 @@
 {
   "tool": "built-in ImageGen",
   "date": "2026-10-05",
-  "status": "awaiting visual review: full arm cycle",
+  "status": "awaiting user visual review: hand and wrist rebuild",
   "transparent_background": true,
   "source_directory": "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-left",
   "workflow_reference": "sprite_generator/welcome_back_hero/prepare_ranger_transition.py: fixed colored hip chains, opposite contacts and passing/reaching phases. Previous per-cell reflection approach rejected by user; all eight poses rebuilt.",
@@ -249,10 +249,51 @@
       "source_sha256": "622f8869129a3e49ab45768bc4735478ec52305caf17d973b5bca10771dca9bf",
       "transparent_background": true,
       "review": "Final review candidate: both arms change poses; near-arm7-to8 rises more abruptly than requested. Visual approval pending."
+    },
+    {
+      "source": "hands-r14.png",
+      "prompt_file": "implementation/fhd-player/pilots/2026-10-04/hand-rebuild-prompts.json",
+      "prompt_key": "up_left",
+      "exact_prompt": "Use case: precise-object-edit.\nImage1 is the EDIT TARGET:8 WALK UP-LEFT farmer poses in4columns2rows. Image2 supplies ONLY the approved hand/arm size and skin palette, not facing/pose.\nRebuild both hands/wrists throughout all8poses. Replace current flat elongated paddle hands with compact relaxed hands,3x4 logical pixels at64pxcharacter height on80pxcell. Same small palm volume in each pose; narrow2pixel wrist joined to slim3pixel forearm, one subtle thumb pixel on anatomical inner side, rounded pixel mitten. No long horizontal fingers, oversized fists, clenched boxing gloves or backwards wrist angles. Keep distant RIGHT hand partly visible, small and connected to its sleeve throughout. Preserve opposing shoulder/elbow/hand swing, but fix LEFT/near return: after modest rear hand5 by left hip,6 starts forward,7 visibly halfway forward,8 approaches front at an intermediate angle below hand1. Do not leave hand7 hanging then abruptly lift hand8 to horizontal. Near hand never crosses central back pocket. Relaxed wrists align with forearms at all phases. Exactly2arms/hands, not3; no disappearing hands or switching sides. Restrict edits to hand/wrist/skin forearm regions and connected contour if needed. LOCK all hat/head/hair/face dimensions, white shirt/torso, blue overalls, waist, ALL8 leg/knee/boot poses from image1. Same crisp logical pixel grid, no smooth painterly detailing. Original4x2 layout, eight complete equally scaled sprites, true transparent background, no text/shadows.",
+      "references": [
+        "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-left/hand-rebuild-reference.png",
+        "assets/art_source/player-fhd/pilots/2026-10-04/approved-hand-proportions-reference.png"
+      ],
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-b3705c35-a021-4545-9c88-f07ffba7796f.png",
+      "review": "Not selected: forward1/8 still flat horizontal palm and abrupt7-to8.",
+      "source_sha256": "493a0808440061dc892203bf8fde3a859b553494e24a78de588e392c70b97081",
+      "source_dimensions": [
+        1774,
+        887
+      ],
+      "date": "2026-10-05",
+      "transparent_background": true,
+      "tool": "built-in ImageGen"
+    },
+    {
+      "source": "hands-r15.png",
+      "prompt_file": "implementation/fhd-player/pilots/2026-10-04/hand-neutral-wrist-prompts.json",
+      "prompt_key": "up_left",
+      "exact_prompt": "Use case: precise-object-edit. Edit image1: WALK UP-LEFT8farmer sprites4x2. Image2 is only shoulder/elbow/WRIST pose guide, cyan anatomical LEFT/near, pink RIGHT/far. Image3 is small relaxed hand proportion reference only.\nRebuild both arms' hand/wrist poses to follow all8diagonal-downward guide chains. Keep palms below elbows at every phase, mild elbow flex20degrees maximum, relaxed straight wrists, never a horizontal paddle or bent upward fist. Both hands are compact rounded mittens3pixels wide4high on80pxnative cell, narrow2pixel wrists, simple peach2tone skin and onepixel thumb. Same hand volume all8frames; no flat elongated fingers, gloves or giant fists. LEFT/near hand1 forward-down diagonal,2slightly lower,3passes lower/central,4back beside left hip,5back/down by left hip,6starts return,7middle diagonal forward,8approaching front/down before1. Follow GUIDE elbow/wrist positions, especially intermediate7/8; no hand7hanging then hand8horizontal, no hand across back pocket. RIGHT/far hand opposes1low/back,5forward/down by waist, always partly visible and connected. Two coherent arms with readable smooth intermediate angles, same fixed shoulder identity. LOCK image1farmer hat/head/face/hair size, body torso/overalls, all8leg/knee/boot poses and framing. Only edit arm skin/wrist/hand chains and necessary sleeve joins. Native pixel clusters same as1and3; no added fine detail. Exactly8same-scale sprites4x2 on genuine transparent background, no diagram labels/colors/markers or shadows.",
+      "references": [
+        "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-left/hand-refinement-reference.png",
+        "assets/art_source/player-fhd/pilots/2026-10-04/walk-up-left/neutral-wrist-guide.png",
+        "assets/art_source/player-fhd/pilots/2026-10-04/approved-hand-proportions-reference.png"
+      ],
+      "raw_original": "C:/Users/Helel/.codex/generated_images/01a0f7e5-4a37-7612-b3d9-590f2b3bfba5/exec-15ff5c63-927e-4864-9c5d-6ab5bac297f3.png",
+      "review": "Selected for hand/wrist review: smaller relaxed palms with diagonal forearms, intermediate return7/8. Visual approval pending.",
+      "source_sha256": "819578d9da082807bb8a07ca29e8f9a1c04ba9b888909945039911e9bcb75250",
+      "source_dimensions": [
+        1774,
+        887
+      ],
+      "date": "2026-10-05",
+      "transparent_background": true,
+      "tool": "built-in ImageGen"
     }
   ],
-  "selected_source": "full-arm-materials-r13.png",
-  "selected_preview": "up-diagonal-full-arms-r13.gif",
+  "selected_source": "hands-r15.png",
+  "selected_preview": "up-diagonal-hands-r15.gif",
   "native_overrides": null,
   "limitations": [
     "Preview only; no runtime integration.",
@@ -286,5 +327,13 @@
     "scope": "All eight native poses in both upper diagonals; other40 native poses byte-identical.",
     "diagnostic_colors": "CYAN anatomical left arm; PINK anatomical right arm",
     "limits": "Color tracking evaluates a diagnostic source; material restoration is not pixel-identical and does not prove final motion quality."
+  },
+  "hand_rebuild": {
+    "date": "2026-10-05",
+    "baseline": "before-hand-rebuild",
+    "feedback": "Hands still look strange in both upper diagonals.",
+    "edit_scope": "Hand/wrist silhouettes and connected forearm trajectories; no runtime integration.",
+    "workflow": "Native reference, approved DOWN hand proportions, relaxed-wrist shoulder/elbow guide.",
+    "limitations": "Generated edits are not byte-exact outside hands within the edited poses; scope checks are not anatomy proof."
   }
 }
