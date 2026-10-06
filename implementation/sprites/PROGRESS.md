@@ -3133,3 +3133,38 @@ gait defects. Integration is delegated by the user via this handoff; no game
 sprites or runtime recipes were changed here. Existing runtime verification
 remains the prior recorded54-gate pass plus successful1017-case input retry;
 no new engine behavior changed. No queue mutation, push or automation.
+
+
+### 2026-10-06 — Enemy pixel-density review and32px farmer comparison
+
+Added implementation/fhd-enemies/pilots/2026-10-05/16px-review/ as an isolated
+user-requested review, without promoting game sprites or changing queue state.
+All80 existing enemy poses are sampled at half resolution with NEAREST and
+restored to their original runtime cells. Current ordinary enemies have about29
+body pixels; the coarse test has about15, while Giant changes about42 to21.
+Exact source colors, binary alpha, original ordering and pivots are preserved.
+Actual WorldView/Relight FHD captures show day/night walk, attack, death and
+Giant windup/slam, with frame inspection and side-view mirroring controls.
+
+The user requested the farmer alongside these enemies, then32px detail and
+a horizontal strip of all his walking movements. Both16px and32px blue farmers
+stand in the same grounded idle left pose and at the same physical FHD scale
+in all seven-column comparison rows. The32px sample derives from the accepted
+80x80 source cells through40x40 NEAREST sampling and integer2x restoration;
+its body still occupies about128 physical pixels, with4 screen pixels per
+detail pixel versus8 for the16px sample. All64 walking frames and8 grounded
+idles are exported under farmer32/native-40 and farmer32/runtime-80, using
+only canonical accepted sources, never rejected diagonal candidates.
+
+farmer32-all-eight.gif shows the eight approved walking directions horizontally,
+8 frames at100ms each, in actual Godot-rendered day/night scenes. The page opens
+at #farmer32-walk with a size toggle; browser-review.png records the visible
+result. Source and output hashes, geometry and timing are in contract.json.
+
+Validation: isolated renderer1530 checks,0 failures;76 seven-actor strips,
+4 full FHD captures and128 farmer walk crops. All80 enemy and72 farmer source
+hashes unchanged; all306 exported PNGs reproduce byte-identically on rerun.
+GIF frame/duration evidence is in checks.json. Production verification was not
+rerun for this isolated export; concurrent changes to project/core/check files
+are excluded. No new gait was invented and no production integration, push,
+automation or backlog mutation was performed.

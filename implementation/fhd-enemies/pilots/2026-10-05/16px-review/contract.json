@@ -1,0 +1,3523 @@
+{
+  "date": "2026-10-05",
+  "status": "review only",
+  "runtime_integrated": false,
+  "method": "NEAREST half-size then integer2x NEAREST restore; no redraw or recoloring",
+  "FHD_physical_pixels_per_detail_pixel": 8,
+  "common_enemy_art_height_px": "approximately15\u201316",
+  "giant_art_height_px": "approximately21",
+  "original_frame_order_and_ground_pivots": true,
+  "entries": [
+    {
+      "source": "sprites/enemies/breaker.png",
+      "source_sha256": "00ae35d13b104019b4a2b7bc58259409d26d4cbe59613df76233ba263cb9bcb6",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        21,
+        15,
+        46,
+        44
+      ],
+      "native_content_xyxy": [
+        10,
+        7,
+        23,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/breaker.png",
+          "sha256": "cc9da91d3cf8699e318a376d3cdb804d6e702d75b812c3a030121cea13ee3f09"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/breaker.png",
+          "sha256": "f74aabd7e4071b022fd7a5282af466097ad9a8f75e4a1d0fd37d5f35cbc6f353"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/breaker_attack.png",
+      "source_sha256": "48c168245923e897a9e5846949055d44df679b08d0226b2b918bfe87b2d74983",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        7,
+        16,
+        43,
+        44
+      ],
+      "native_content_xyxy": [
+        3,
+        8,
+        21,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/breaker_attack.png",
+          "sha256": "8a30f6d7b55d9c03f3d9b8350c72dd469261ffc1629d0e9295dc04773df01fdd"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/breaker_attack.png",
+          "sha256": "6a23080713113c3497b051ed438ed6b66b209970e1e06de1b86ece5f24e87063"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/breaker_attack_0.png",
+      "source_sha256": "a8b236d32aa24b41164a0ac470fadf292d5741df8ec9a9d55aacc30fc03a2c93",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        19,
+        9,
+        42,
+        44
+      ],
+      "native_content_xyxy": [
+        9,
+        4,
+        21,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/breaker_attack_0.png",
+          "sha256": "a4505e4fa24c9fa50839ebda6a7e12b896cab4161cb9d457f28c74e4471b63d8"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/breaker_attack_0.png",
+          "sha256": "34e58feeb2851cc22285858413a0e19af689a19c86db1b99faf0092b91353ea7"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/breaker_attack_1.png",
+      "source_sha256": "48c168245923e897a9e5846949055d44df679b08d0226b2b918bfe87b2d74983",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        7,
+        16,
+        43,
+        44
+      ],
+      "native_content_xyxy": [
+        3,
+        8,
+        21,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/breaker_attack_1.png",
+          "sha256": "8a30f6d7b55d9c03f3d9b8350c72dd469261ffc1629d0e9295dc04773df01fdd"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/breaker_attack_1.png",
+          "sha256": "6a23080713113c3497b051ed438ed6b66b209970e1e06de1b86ece5f24e87063"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/breaker_attack_2.png",
+      "source_sha256": "71138207caa4ba1121e3be18aad7245143fbe3edfed151a16e463e409c4d0230",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        19,
+        15,
+        48,
+        44
+      ],
+      "native_content_xyxy": [
+        9,
+        7,
+        24,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/breaker_attack_2.png",
+          "sha256": "4af12302adea89d6c85a1583db1b5c94966fa76be264cf3134e7f08ca9a17042"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/breaker_attack_2.png",
+          "sha256": "3e9c139731bdac7f2b8f9c603fd226974699cafd9295f4b01a5a6b6780160ab5"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/breaker_death.png",
+      "source_sha256": "90e06db05410f7b183be422efcd8511ff8927eacf31abd965b8c27ef349b1b53",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        18,
+        31,
+        46,
+        44
+      ],
+      "native_content_xyxy": [
+        9,
+        15,
+        23,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/breaker_death.png",
+          "sha256": "7d7f1948be568025db26d73345c7cc4a16b09f4737ac84040e1ae7132ff9125c"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/breaker_death.png",
+          "sha256": "e37a3b564f8969bf430d392d6b3e1468e263287302a12d996df1e331890a741c"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/breaker_death_0.png",
+      "source_sha256": "fa80b3de2ff22642d62874f60fe2ac176fece8cc986d931b4707f2944ad0fe07",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        20,
+        17,
+        45,
+        44
+      ],
+      "native_content_xyxy": [
+        10,
+        8,
+        22,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/breaker_death_0.png",
+          "sha256": "f183065e4440f09d3ee06572e5d20ab3a74ade0fc94a29d31c01d88ecf989880"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/breaker_death_0.png",
+          "sha256": "537a579b573992dcd0594449796332de8ec763dbbb293756ba1877af40077e93"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/breaker_death_1.png",
+      "source_sha256": "ff9c675b9ddf3d848048dccd49e285bb1cafe183eb3f29bad77932a0a3cf18be",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        20,
+        23,
+        45,
+        44
+      ],
+      "native_content_xyxy": [
+        10,
+        11,
+        22,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/breaker_death_1.png",
+          "sha256": "8f6b07e4c62fcea747bfee2ced8261bdbe97e77b6bcb58e536a04da05e314a84"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/breaker_death_1.png",
+          "sha256": "f1a8a386f1d7b8d74b3ccc5c9c7e4592f59961549e604399ed8b028794e21ced"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/breaker_death_2.png",
+      "source_sha256": "5080a09d0fd6e519af1c816aa420fdb9da7e12fba2aa11264c587b3c5317bb43",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        19,
+        27,
+        46,
+        44
+      ],
+      "native_content_xyxy": [
+        9,
+        13,
+        23,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/breaker_death_2.png",
+          "sha256": "cc1d0a8ff327c0d7e2cd8f1d2d97bd5acafe1d03905c67991d68da969d067b40"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/breaker_death_2.png",
+          "sha256": "f0ebf55faf7fdeaf1a76b3de3d521b5e672ca2590a3564a359ff97628cf55ff4"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/breaker_death_3.png",
+      "source_sha256": "90e06db05410f7b183be422efcd8511ff8927eacf31abd965b8c27ef349b1b53",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        18,
+        31,
+        46,
+        44
+      ],
+      "native_content_xyxy": [
+        9,
+        15,
+        23,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/breaker_death_3.png",
+          "sha256": "7d7f1948be568025db26d73345c7cc4a16b09f4737ac84040e1ae7132ff9125c"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/breaker_death_3.png",
+          "sha256": "e37a3b564f8969bf430d392d6b3e1468e263287302a12d996df1e331890a741c"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/breaker_walk_0.png",
+      "source_sha256": "28c6aba3e63dd06ac1f2eb082d2a76697e09ad4ec5bcba698ce363a064dd5aa4",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        25,
+        15,
+        49,
+        44
+      ],
+      "native_content_xyxy": [
+        12,
+        8,
+        24,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/breaker_walk_0.png",
+          "sha256": "a96ed62f20f45fa578fd7454fd92766f65b30c8c524eeadf085a8fbc615f6e02"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/breaker_walk_0.png",
+          "sha256": "b849227bc8b42ae5a1cdaa07346e45a7b56429aeaee48fd8f3d69e0aca936541"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/breaker_walk_1.png",
+      "source_sha256": "c15e792ef2cdd5331c14f72b0551160902ff4d9f58030546a70fb7cbb680afc4",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        24,
+        15,
+        48,
+        44
+      ],
+      "native_content_xyxy": [
+        12,
+        7,
+        24,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/breaker_walk_1.png",
+          "sha256": "13c1eb4204ecc45e9890120928ff869c46d906f559258815b6099faaac1c76fb"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/breaker_walk_1.png",
+          "sha256": "385880862860f42bfa862f8ba3a6cd2d8a43b757071c4dfcf62dfb67ada68dc2"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/breaker_walk_2.png",
+      "source_sha256": "d924299cec41b9dd07e448cb3371274c0b4379c6e176d88b66c8d00397637ef3",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        21,
+        15,
+        45,
+        44
+      ],
+      "native_content_xyxy": [
+        10,
+        8,
+        22,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/breaker_walk_2.png",
+          "sha256": "3f972684621a69812154e81e6ecd421cef0a504a0b44225d81592aed56d2fb28"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/breaker_walk_2.png",
+          "sha256": "8511288eb759ecc71c38cd99b9743efecc43dd19a4f1b36f1445eaaef2c0289e"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/breaker_walk_3.png",
+      "source_sha256": "9c55219b1dc644f12bdf7a013f4a64bee37aba1f6c53c2aaf4359f34b5a76193",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        22,
+        15,
+        45,
+        44
+      ],
+      "native_content_xyxy": [
+        11,
+        8,
+        22,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/breaker_walk_3.png",
+          "sha256": "b3bf54e8c060c8064be2984b9308e56793c3480a1509808926769419197fcc42"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/breaker_walk_3.png",
+          "sha256": "1e766cb0e76b3a2a5352274e880d87742d02fce17ee309060b8ae6d29939e7d5"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/breaker_walk_b.png",
+      "source_sha256": "d924299cec41b9dd07e448cb3371274c0b4379c6e176d88b66c8d00397637ef3",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        21,
+        15,
+        45,
+        44
+      ],
+      "native_content_xyxy": [
+        10,
+        8,
+        22,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/breaker_walk_b.png",
+          "sha256": "3f972684621a69812154e81e6ecd421cef0a504a0b44225d81592aed56d2fb28"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/breaker_walk_b.png",
+          "sha256": "8511288eb759ecc71c38cd99b9743efecc43dd19a4f1b36f1445eaaef2c0289e"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/giant.png",
+      "source_sha256": "bf323b154199d619ff6b7c4dede07394c7dd1eb4ccfcc57450f20f69a3abe49f",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "source_content_xyxy": [
+        14,
+        18,
+        57,
+        60
+      ],
+      "native_content_xyxy": [
+        7,
+        9,
+        28,
+        30
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/giant.png",
+          "sha256": "3f60b69b163b1a8a913747ff0784adfe6975418ecce313ed59ea2697616e4439"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/giant.png",
+          "sha256": "e45169c90bddd0656c861227df0df00fd3fd3a44368deff49bd688bb1bf087c3"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/giant_attack.png",
+      "source_sha256": "9b88239ef825c25588d2b75abcdbe0c7a82375e70ebdc4351e6f515cab997cdc",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "source_content_xyxy": [
+        7,
+        26,
+        54,
+        60
+      ],
+      "native_content_xyxy": [
+        3,
+        13,
+        27,
+        30
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/giant_attack.png",
+          "sha256": "300fde4ce358a42052ca986875fd288d097335d2711ce94e7677f59b9de3d5d9"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/giant_attack.png",
+          "sha256": "d10f90f8e49955f16565ce39b0863246b624282f013cc954d35897ef02e8582e"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/giant_death.png",
+      "source_sha256": "da0aa36414c31dc5037b58e7afeaf16cae0fb6996c2e129e071a02d6f7a00ccc",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "source_content_xyxy": [
+        18,
+        44,
+        63,
+        60
+      ],
+      "native_content_xyxy": [
+        9,
+        22,
+        31,
+        30
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/giant_death.png",
+          "sha256": "cfa343aa539af1f919b8b0dd7490a754ee285faef171ce42ebd42743adef56ce"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/giant_death.png",
+          "sha256": "3b91c11aac9cb898073084352aa0edae2edc42c4962a88d33fceb80a99f89a84"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/giant_death_0.png",
+      "source_sha256": "de9b3f418e9694f40b54d12b41eaf60098a4a1f2d8a59de40e922c7bd04948bc",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "source_content_xyxy": [
+        20,
+        21,
+        60,
+        60
+      ],
+      "native_content_xyxy": [
+        10,
+        10,
+        30,
+        30
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/giant_death_0.png",
+          "sha256": "8204727884e350ac7c3c928d80a3e9d837a46a122c8ac4d88152a5cedaa95991"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/giant_death_0.png",
+          "sha256": "bf84fd3f2716082fc816f32460328ea04d480adc14c3d9e4bf9cfa4e061b2341"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/giant_death_1.png",
+      "source_sha256": "19273a48971f8cc261cde9b40d40ce0934cebcd8199a94864a96a6b87ded91d2",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "source_content_xyxy": [
+        21,
+        27,
+        59,
+        60
+      ],
+      "native_content_xyxy": [
+        10,
+        13,
+        29,
+        30
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/giant_death_1.png",
+          "sha256": "20cb7311debb9c8fb977d5c48ce7244bb7f3889b33824d7ea3e3fcd8d952f3ab"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/giant_death_1.png",
+          "sha256": "e6d8e2821a01da8b2520b95f16c76e591f8983702bb0b5fa9e87b5cb3eb574ea"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/giant_death_2.png",
+      "source_sha256": "dfb167feb3a2f47fc7007d08ea57c1718cec77abee1aee1fd8b8cdcb757c94cc",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "source_content_xyxy": [
+        19,
+        33,
+        62,
+        60
+      ],
+      "native_content_xyxy": [
+        9,
+        16,
+        31,
+        30
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/giant_death_2.png",
+          "sha256": "50c25c1e72572b9e48ab0eaa398cc735a3fed471e569d8ce0a4d4c65b8c4f67f"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/giant_death_2.png",
+          "sha256": "7bdf117702b3a075edc470660a9dd73c47071998ee210f02b96be63c93f7783e"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/giant_death_3.png",
+      "source_sha256": "21d3422bd87ae51e35065b1fb192ae45437f76432eff688c111d2b1139e956af",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "source_content_xyxy": [
+        19,
+        40,
+        62,
+        60
+      ],
+      "native_content_xyxy": [
+        9,
+        20,
+        31,
+        30
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/giant_death_3.png",
+          "sha256": "40d8d3a6d3766500c41c229a6a7da91d1bb43ef2817b5551382e0dbb6e06c1cd"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/giant_death_3.png",
+          "sha256": "694d2da3aecb2fc33db8d71d2b526ba8865db766590240e1d829cc71d83af041"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/giant_death_4.png",
+      "source_sha256": "da0aa36414c31dc5037b58e7afeaf16cae0fb6996c2e129e071a02d6f7a00ccc",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "source_content_xyxy": [
+        18,
+        44,
+        63,
+        60
+      ],
+      "native_content_xyxy": [
+        9,
+        22,
+        31,
+        30
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/giant_death_4.png",
+          "sha256": "cfa343aa539af1f919b8b0dd7490a754ee285faef171ce42ebd42743adef56ce"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/giant_death_4.png",
+          "sha256": "3b91c11aac9cb898073084352aa0edae2edc42c4962a88d33fceb80a99f89a84"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/giant_slam_0.png",
+      "source_sha256": "9b88239ef825c25588d2b75abcdbe0c7a82375e70ebdc4351e6f515cab997cdc",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "source_content_xyxy": [
+        7,
+        26,
+        54,
+        60
+      ],
+      "native_content_xyxy": [
+        3,
+        13,
+        27,
+        30
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/giant_slam_0.png",
+          "sha256": "300fde4ce358a42052ca986875fd288d097335d2711ce94e7677f59b9de3d5d9"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/giant_slam_0.png",
+          "sha256": "d10f90f8e49955f16565ce39b0863246b624282f013cc954d35897ef02e8582e"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/giant_slam_1.png",
+      "source_sha256": "0cbae98adb40200d45374bdfaab987543977ba804a839aa3694cd9b0b7056dc1",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "source_content_xyxy": [
+        11,
+        27,
+        55,
+        60
+      ],
+      "native_content_xyxy": [
+        5,
+        13,
+        27,
+        30
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/giant_slam_1.png",
+          "sha256": "5f99df6aa067a6bd251244b4ed25242b5b1bcd0caab2177b3e1cecf6c7feb617"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/giant_slam_1.png",
+          "sha256": "e9eae9f611ef5e2706824ac43a02972a0d38cb214215ceadfdf4cebf861ead79"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/giant_slam_2.png",
+      "source_sha256": "026fd4c5f09a1905ae10913aa6205aeed1f31dce8fa3d88b071cbb5937576cf2",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "source_content_xyxy": [
+        18,
+        18,
+        57,
+        60
+      ],
+      "native_content_xyxy": [
+        9,
+        9,
+        28,
+        30
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/giant_slam_2.png",
+          "sha256": "272533ccd0756af8f06f1d56e62a3a011cb9626c5ebb113ce1968eaa4d9a4f9d"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/giant_slam_2.png",
+          "sha256": "f0cdb1ceb2a65a13ef2fb587b23236611fd644319a6e251596f95d0a61e4aab9"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/giant_telegraph.png",
+      "source_sha256": "b1561a60dbc055c216f0cf5c6749b991f3a35d025654e663c92d19c4f8a7ceb5",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "source_content_xyxy": [
+        11,
+        5,
+        59,
+        60
+      ],
+      "native_content_xyxy": [
+        5,
+        2,
+        29,
+        30
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/giant_telegraph.png",
+          "sha256": "e66c0766dab4fab462a40585a5a06951fa0dad8a3b72b385d5a36d684e808b6a"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/giant_telegraph.png",
+          "sha256": "d98b388ed444db72861fac8cf1e86f69db44f209d441d773ef8d77b6a6fa35f0"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/giant_walk_0.png",
+      "source_sha256": "df3e96e2ffce6f44e7d7d019462417444565cbc622ab6f475b73b441fb29ea64",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "source_content_xyxy": [
+        15,
+        19,
+        61,
+        60
+      ],
+      "native_content_xyxy": [
+        7,
+        9,
+        30,
+        30
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/giant_walk_0.png",
+          "sha256": "c49c43e10c88bca2e66a12fb8c1426bfdf1f7f95c706c2013fb650c843789a5f"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/giant_walk_0.png",
+          "sha256": "1a2c008b1a53df05ed5af46dc7c5d14d1011cdacc8fb5be6a459b4ea7ce83e01"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/giant_walk_1.png",
+      "source_sha256": "69a26549232dd52978e2a8c9e3e5b2348fadaac55538be891d8bb2d72d0a37a9",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "source_content_xyxy": [
+        10,
+        19,
+        54,
+        60
+      ],
+      "native_content_xyxy": [
+        5,
+        9,
+        27,
+        30
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/giant_walk_1.png",
+          "sha256": "a9c050ef4757bef3af7a57dc9d6ea2d5167e1fa88102a500544dc95bd2967c40"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/giant_walk_1.png",
+          "sha256": "daa26f99bb01f2857e7ad3250871a08babb5813e513ad7a1b75bb1434e6a9641"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/giant_walk_2.png",
+      "source_sha256": "594964056a928505d2025d00360756c8190c132e7cd6cf722928899d817e7b9e",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "source_content_xyxy": [
+        14,
+        20,
+        60,
+        60
+      ],
+      "native_content_xyxy": [
+        7,
+        10,
+        30,
+        30
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/giant_walk_2.png",
+          "sha256": "6ed54417d29525f23701aecc5a58215eff8167d402b9684c1bfaad8d4983c24c"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/giant_walk_2.png",
+          "sha256": "4a610bb936fb31ae1aff1ea8e73be0db8a4e5e5523489bbbd2c43e1e3aafdc4e"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/giant_walk_3.png",
+      "source_sha256": "f6e703c341b71e5669bd322359d1a63f945930d65ba5f1130e4b59561a0f9dab",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "source_content_xyxy": [
+        16,
+        18,
+        61,
+        60
+      ],
+      "native_content_xyxy": [
+        8,
+        9,
+        30,
+        30
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/giant_walk_3.png",
+          "sha256": "2370df86dec92801f70cf24eb5df89e002169a3689360093ab8ac0227b5dfa9d"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/giant_walk_3.png",
+          "sha256": "9b06b522c02653b78fefec225b3d017c5e8098435be84a72e20bbaab02a44919"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/giant_walk_b.png",
+      "source_sha256": "594964056a928505d2025d00360756c8190c132e7cd6cf722928899d817e7b9e",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "source_content_xyxy": [
+        14,
+        20,
+        60,
+        60
+      ],
+      "native_content_xyxy": [
+        7,
+        10,
+        30,
+        30
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/giant_walk_b.png",
+          "sha256": "6ed54417d29525f23701aecc5a58215eff8167d402b9684c1bfaad8d4983c24c"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/giant_walk_b.png",
+          "sha256": "4a610bb936fb31ae1aff1ea8e73be0db8a4e5e5523489bbbd2c43e1e3aafdc4e"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/giant_windup_0.png",
+      "source_sha256": "03be22b2a0f539e10f8ae35ff4694b8f36ac23647d7576c8f8b7297b61b8519e",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "source_content_xyxy": [
+        15,
+        21,
+        63,
+        60
+      ],
+      "native_content_xyxy": [
+        7,
+        10,
+        31,
+        30
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/giant_windup_0.png",
+          "sha256": "c32c886e93e84f54695a0d4fac6c7c5d1b0b2929f2982d72069e846b0e1e3c8b"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/giant_windup_0.png",
+          "sha256": "8d84d72e72bbdaa66000be7b9396b49e9e17fb8fa4797c89f6e92d4b55426c8d"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/giant_windup_1.png",
+      "source_sha256": "92c4fe3f008c13554b6163d6824033a6a0e0ff6695512152557af77ec04d4fac",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "source_content_xyxy": [
+        12,
+        12,
+        61,
+        60
+      ],
+      "native_content_xyxy": [
+        6,
+        6,
+        30,
+        30
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/giant_windup_1.png",
+          "sha256": "6d23c2b6b9d9fdf76d06a875f4d4755f52a167d13d48dbb1c514942243b76fe2"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/giant_windup_1.png",
+          "sha256": "73206db6ba71486adb36045727c768c5c85c89eb10fe49bcabe79b5787f79228"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/giant_windup_2.png",
+      "source_sha256": "b1561a60dbc055c216f0cf5c6749b991f3a35d025654e663c92d19c4f8a7ceb5",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "source_content_xyxy": [
+        11,
+        5,
+        59,
+        60
+      ],
+      "native_content_xyxy": [
+        5,
+        2,
+        29,
+        30
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/giant_windup_2.png",
+          "sha256": "e66c0766dab4fab462a40585a5a06951fa0dad8a3b72b385d5a36d684e808b6a"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/giant_windup_2.png",
+          "sha256": "d98b388ed444db72861fac8cf1e86f69db44f209d441d773ef8d77b6a6fa35f0"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/runner.png",
+      "source_sha256": "2df6d10ec083d5995f65c77613a41f099a8f8f5c8dac73241711c52f6302cfc2",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        26,
+        15,
+        46,
+        44
+      ],
+      "native_content_xyxy": [
+        13,
+        7,
+        23,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/runner.png",
+          "sha256": "174710447197cbc3e4bfa8195adfc8de9382e3abc5a2fc8cb90b9f2113fd365c"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/runner.png",
+          "sha256": "caf686b96bde978d9175903bf4d173c5ed00a3795830756e246ce5a4356407c7"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/runner_attack.png",
+      "source_sha256": "0b8d1b8f291f496eaa23dad0f93ced1229d190a171168d0693ab6a1871d4c58e",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        11,
+        17,
+        43,
+        44
+      ],
+      "native_content_xyxy": [
+        5,
+        9,
+        21,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/runner_attack.png",
+          "sha256": "e757c591657d21e63f88e775d3d78120b6382ff50f49a72ecc931e32f7a66516"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/runner_attack.png",
+          "sha256": "a3fc538b00520cfb57cc3e9eb099cdf5d6432676799cf783643cdd45549bb038"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/runner_attack_0.png",
+      "source_sha256": "9f358ac078965990c83027ff5eb4b8fd642897b9747c2d71f92cced2790b320b",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        20,
+        16,
+        43,
+        44
+      ],
+      "native_content_xyxy": [
+        10,
+        8,
+        21,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/runner_attack_0.png",
+          "sha256": "602c68a52e1b5b8a87816186a017f3f51936851cda5f99ee3e59c4bb773aa46e"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/runner_attack_0.png",
+          "sha256": "a9b50fc49e766879b8d2790d5524bb1c43d2b01f5b29ac27dee2bfaa41ebe3fa"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/runner_attack_1.png",
+      "source_sha256": "0b8d1b8f291f496eaa23dad0f93ced1229d190a171168d0693ab6a1871d4c58e",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        11,
+        17,
+        43,
+        44
+      ],
+      "native_content_xyxy": [
+        5,
+        9,
+        21,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/runner_attack_1.png",
+          "sha256": "e757c591657d21e63f88e775d3d78120b6382ff50f49a72ecc931e32f7a66516"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/runner_attack_1.png",
+          "sha256": "a3fc538b00520cfb57cc3e9eb099cdf5d6432676799cf783643cdd45549bb038"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/runner_attack_2.png",
+      "source_sha256": "8d8d5ffdb01beef3dbd0241982101b8770b39a5f7437c72ca83e4f3fade8a929",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        19,
+        15,
+        41,
+        44
+      ],
+      "native_content_xyxy": [
+        9,
+        7,
+        20,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/runner_attack_2.png",
+          "sha256": "f2b3d6477ace8a24571d5a66eb0d5b8ea80a64acf91445ba77942a1762988a4a"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/runner_attack_2.png",
+          "sha256": "3d3e37b09c3a472eb0a89493ea8a9ffb65409548689ec41680598fd7dd7c9207"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/runner_death.png",
+      "source_sha256": "b711a535a59b3290cbf5a9821a77a2c224a6784fd9cf6a0357a562f9896c77f3",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        19,
+        34,
+        46,
+        44
+      ],
+      "native_content_xyxy": [
+        9,
+        17,
+        23,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/runner_death.png",
+          "sha256": "a3aecafa2e158fee0fe91e5ba71471a8517898fc26727a72711058b58b290aaa"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/runner_death.png",
+          "sha256": "8bc37b0e8bd2913d42801116ee24ab71cc1144cd26b882c6b596cdbbcaeb5fcc"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/runner_death_0.png",
+      "source_sha256": "3c769b9dd16d4c9348c7a078cd00f7efb870abba7f83963fafc85a7f9442dfca",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        20,
+        17,
+        44,
+        44
+      ],
+      "native_content_xyxy": [
+        10,
+        8,
+        22,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/runner_death_0.png",
+          "sha256": "ea3f20e6ef8d52fada211840d55822f18c5eea8e9cb4a5dedb8b545c47b1c87c"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/runner_death_0.png",
+          "sha256": "ec69e6321e3d0271520f4ecb895159b8f8ec26f355ee1291c958e76852b978d4"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/runner_death_1.png",
+      "source_sha256": "47f044348571d21f1f66b1441c607f0ebd71f52792479eee5973c533b60ff2fa",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        20,
+        24,
+        45,
+        44
+      ],
+      "native_content_xyxy": [
+        10,
+        12,
+        22,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/runner_death_1.png",
+          "sha256": "98ae26350a9745a074c01434a3ca1088b6d7fcc8f6b8e618d1c954205ba697e7"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/runner_death_1.png",
+          "sha256": "72b30cd4844696abe9c16f05953b28821286141fc4e6566ffa9a520338f5a9f7"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/runner_death_2.png",
+      "source_sha256": "2d9da0536cddccf23b3913e5bde9c0285348729198f5c01b855b8fba3d9c4266",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        19,
+        30,
+        46,
+        44
+      ],
+      "native_content_xyxy": [
+        9,
+        15,
+        23,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/runner_death_2.png",
+          "sha256": "dcc05edb78848ff035d8850bcce1295fde7448cada6181f6485947eebd3b3866"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/runner_death_2.png",
+          "sha256": "621364a8d05932b054fbdc30e63bf18015a977ddd65d6a758c25b9b560180e6d"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/runner_death_3.png",
+      "source_sha256": "b711a535a59b3290cbf5a9821a77a2c224a6784fd9cf6a0357a562f9896c77f3",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        19,
+        34,
+        46,
+        44
+      ],
+      "native_content_xyxy": [
+        9,
+        17,
+        23,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/runner_death_3.png",
+          "sha256": "a3aecafa2e158fee0fe91e5ba71471a8517898fc26727a72711058b58b290aaa"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/runner_death_3.png",
+          "sha256": "8bc37b0e8bd2913d42801116ee24ab71cc1144cd26b882c6b596cdbbcaeb5fcc"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/runner_walk_0.png",
+      "source_sha256": "8937bc6993e9497c1c946038ca99fb6e0efeea5fbf4973ccaea773c1bdcea546",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        26,
+        15,
+        47,
+        44
+      ],
+      "native_content_xyxy": [
+        13,
+        7,
+        23,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/runner_walk_0.png",
+          "sha256": "82fd0b1d0dd3bc9db3cc77cd42a2e117010feb9aaaa51a94586659b129fdd8d5"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/runner_walk_0.png",
+          "sha256": "ab6c3558501cd1f962d306cedb996eebe426b820d5ba9d840502a97abf3ec849"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/runner_walk_1.png",
+      "source_sha256": "c2723eba96f3216353c3a87e1e69b9eae5f6d74e1da7345ff5a4b99771df368e",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        14,
+        16,
+        34,
+        44
+      ],
+      "native_content_xyxy": [
+        7,
+        8,
+        17,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/runner_walk_1.png",
+          "sha256": "8f8ea63f2588bbde8f2f004eeeda73023e3c52627f4ae1434b81a9fa1e244540"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/runner_walk_1.png",
+          "sha256": "7e6f7065295a635a64fae4c50f5590f6eb1e6f13c08a74e17f7ab3e1030ded3e"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/runner_walk_2.png",
+      "source_sha256": "82b4eb70a70ded18672bc6bff65acbac8c07910a6985e4cc651e924cc72531c3",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        24,
+        16,
+        45,
+        44
+      ],
+      "native_content_xyxy": [
+        12,
+        8,
+        22,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/runner_walk_2.png",
+          "sha256": "1373e142ce3467101cfaad93247356b22de5ad246dd017c315fec27d06fc0ef9"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/runner_walk_2.png",
+          "sha256": "bfbf43cbee81a4bc248619046684b0fe906942bb55292a0a88099562027e2385"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/runner_walk_3.png",
+      "source_sha256": "a5fb4607fbdb9ebdfc6f0b1ba0939e0ee24230a926012bbf28bb5d6a972a3dab",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        15,
+        16,
+        35,
+        44
+      ],
+      "native_content_xyxy": [
+        7,
+        8,
+        17,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/runner_walk_3.png",
+          "sha256": "8e812940ffec9408d236dd6eeb97443649be7c1595af5607a6ac5b007813d934"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/runner_walk_3.png",
+          "sha256": "57b7ac95d10ad0efe5bbc9ddc8b5e68f7df1c3f5c42864ff3d342458c410f351"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/runner_walk_b.png",
+      "source_sha256": "82b4eb70a70ded18672bc6bff65acbac8c07910a6985e4cc651e924cc72531c3",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        24,
+        16,
+        45,
+        44
+      ],
+      "native_content_xyxy": [
+        12,
+        8,
+        22,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/runner_walk_b.png",
+          "sha256": "1373e142ce3467101cfaad93247356b22de5ad246dd017c315fec27d06fc0ef9"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/runner_walk_b.png",
+          "sha256": "bfbf43cbee81a4bc248619046684b0fe906942bb55292a0a88099562027e2385"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/tank.png",
+      "source_sha256": "ce561d6b21ce1c7437cbef104d2ae52ad426b84f770df9d083c339a05f25e011",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        15,
+        15,
+        39,
+        44
+      ],
+      "native_content_xyxy": [
+        7,
+        7,
+        19,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/tank.png",
+          "sha256": "1cb7f53f10903e2ea889f2ce6eb6511199e6dd7d7f6424e807537901f906fc0c"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/tank.png",
+          "sha256": "93be0d04700cae4079b51b4662edd220f643a14eb6eb4dd1fc3c2393009be7b2"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/tank_attack.png",
+      "source_sha256": "2dc33a5b3f5e4f79d5cf12697994a1ff5b4903d62d00f1dd33d3ac8e16cb8676",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        12,
+        16,
+        45,
+        44
+      ],
+      "native_content_xyxy": [
+        6,
+        8,
+        22,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/tank_attack.png",
+          "sha256": "8dead081a2aff88dd589d3849ae98e4a9d8b5027d93fcce07c085e26f5c634a8"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/tank_attack.png",
+          "sha256": "75e255d62f7b210f8e7ed2ff591a26318858c11baa5449dc615a7391e392f612"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/tank_attack_0.png",
+      "source_sha256": "4382011d4e3ebc0434ef6b1a4570ee7150038ecbbad2d479d508e58a8941c60f",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        20,
+        16,
+        45,
+        44
+      ],
+      "native_content_xyxy": [
+        10,
+        8,
+        22,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/tank_attack_0.png",
+          "sha256": "d150f91327095b253866eb76c447360acc49439a44744cdda1e1cf1e5250e88b"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/tank_attack_0.png",
+          "sha256": "bb41e7ae004e27a06262cc5ca475d3ce838b6575cb731b16fca63a23ec2f9fb1"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/tank_attack_1.png",
+      "source_sha256": "2dc33a5b3f5e4f79d5cf12697994a1ff5b4903d62d00f1dd33d3ac8e16cb8676",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        12,
+        16,
+        45,
+        44
+      ],
+      "native_content_xyxy": [
+        6,
+        8,
+        22,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/tank_attack_1.png",
+          "sha256": "8dead081a2aff88dd589d3849ae98e4a9d8b5027d93fcce07c085e26f5c634a8"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/tank_attack_1.png",
+          "sha256": "75e255d62f7b210f8e7ed2ff591a26318858c11baa5449dc615a7391e392f612"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/tank_attack_2.png",
+      "source_sha256": "058d34ee2e8c1bda6e360c977ab1f08227f9aee9aa1a1f9dcbb17e14490b9669",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        17,
+        15,
+        46,
+        44
+      ],
+      "native_content_xyxy": [
+        8,
+        7,
+        23,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/tank_attack_2.png",
+          "sha256": "d5b5b8bba179697bdc407c9ba97aeacf945f34026c8bd9ada89af6168db0fc9f"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/tank_attack_2.png",
+          "sha256": "11820b2ee84d37298bba0fde94fb0824aac2189e641b72b5b5a1a7abb67bb19d"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/tank_death.png",
+      "source_sha256": "9cb525f7f6980a90f6da4007b7bc8f821764ef2f6d8864b08566d54a87f68fc2",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        16,
+        30,
+        48,
+        44
+      ],
+      "native_content_xyxy": [
+        8,
+        15,
+        24,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/tank_death.png",
+          "sha256": "c3768b8120920496f849d93eaadd430ca4a356d9684797bcb378fdee4a05d6d4"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/tank_death.png",
+          "sha256": "3672786afbdbf84012e7cd77eed7c4888b3c519920fedc9a405e43b709968653"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/tank_death_0.png",
+      "source_sha256": "43bdc94932c2d75cebcb5c2b9bc4bd97c96796762ccd484993d516f846eef486",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        20,
+        17,
+        45,
+        44
+      ],
+      "native_content_xyxy": [
+        10,
+        8,
+        22,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/tank_death_0.png",
+          "sha256": "5db447b8b1a5bf2c1d489a824b6ed6f86fe7541f48a34aacd7f92cdd5968d3d0"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/tank_death_0.png",
+          "sha256": "c6620c2573019cb974334494a6df6749fff072ee39390cf8e660eada782a546a"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/tank_death_1.png",
+      "source_sha256": "7a5bbf71a8b73163b7c794b64c66832ccc2cacf0ef5bf8edb6ebd7bcc1c94fc3",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        19,
+        20,
+        46,
+        44
+      ],
+      "native_content_xyxy": [
+        9,
+        10,
+        23,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/tank_death_1.png",
+          "sha256": "a7fc53cfcc7a8d2999a79dd9c9eb0685c87bacc9b4ce16189d7af8f1b33ef39f"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/tank_death_1.png",
+          "sha256": "daf767b4638ea81a4060488353c9756f8c3946fc3f2876888f1ef0e0d76d1823"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/tank_death_2.png",
+      "source_sha256": "546eedb870aa07708a3fbd1146cb8dac028fbb85155acc06e8d43f39ccabfe6b",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        18,
+        27,
+        46,
+        44
+      ],
+      "native_content_xyxy": [
+        9,
+        13,
+        23,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/tank_death_2.png",
+          "sha256": "ea659e59f977cd7b3296b7bdb9ec3f09849adeedf69ce6af610c322198d9d66c"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/tank_death_2.png",
+          "sha256": "27f6ec17ed38d099304dd841874d78df32ed73743f6c190a1395b8ccbb685391"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/tank_death_3.png",
+      "source_sha256": "9cb525f7f6980a90f6da4007b7bc8f821764ef2f6d8864b08566d54a87f68fc2",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        16,
+        30,
+        48,
+        44
+      ],
+      "native_content_xyxy": [
+        8,
+        15,
+        24,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/tank_death_3.png",
+          "sha256": "c3768b8120920496f849d93eaadd430ca4a356d9684797bcb378fdee4a05d6d4"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/tank_death_3.png",
+          "sha256": "3672786afbdbf84012e7cd77eed7c4888b3c519920fedc9a405e43b709968653"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/tank_walk_0.png",
+      "source_sha256": "a6d2e2c4d275eba2dfd58617ff66a57c89694e222879b9811e9833ae8b39066e",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        21,
+        15,
+        45,
+        44
+      ],
+      "native_content_xyxy": [
+        10,
+        7,
+        22,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/tank_walk_0.png",
+          "sha256": "12a1d3a9595bdb52af38ffbe7b28868a6721764aa83f771e19e609bf088c3ae0"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/tank_walk_0.png",
+          "sha256": "1ef4d5a634c87fbe426d7f7baaedd4a0ad99760fe184fb125d935ecd11de7fd1"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/tank_walk_1.png",
+      "source_sha256": "3da8230ad3b4ecbe65d662c06da8cb5e78565672ec1bd59306a0a74337aa134b",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        24,
+        15,
+        46,
+        44
+      ],
+      "native_content_xyxy": [
+        12,
+        7,
+        23,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/tank_walk_1.png",
+          "sha256": "1106c7624b22ba9e1c78ee1e6d42ad0976c916d92ca864855b8469bcc2cde535"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/tank_walk_1.png",
+          "sha256": "17e8def1d5fbbe4064ad6273466c6b85e39964bf60f58c65635f9b79b90431cf"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/tank_walk_2.png",
+      "source_sha256": "884f2e5918656e49935565f14cfb0917b7315b3ea28e814dda3b1b72303c82c6",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        22,
+        15,
+        45,
+        44
+      ],
+      "native_content_xyxy": [
+        11,
+        7,
+        22,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/tank_walk_2.png",
+          "sha256": "1782095196158363e7fe5100af0ab37e2c3cb2dafdd7926e375da227ee0b7e2f"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/tank_walk_2.png",
+          "sha256": "8e17a890e8e4ca2f1644c41db9f022dc1b526a08d9be6677650caad91c529d7c"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/tank_walk_3.png",
+      "source_sha256": "95dca7f22024f27ae5067066c30eac7f65d43a6891dbbd7b1a09a6e130ec5fd7",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        22,
+        15,
+        45,
+        44
+      ],
+      "native_content_xyxy": [
+        11,
+        7,
+        22,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/tank_walk_3.png",
+          "sha256": "44947787380539cfc73c5fd70741f9f2def60a61d87b95e5098dcef4e17fdb95"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/tank_walk_3.png",
+          "sha256": "c95209ef6622a56f8e36b1ea0c40bd2ae80e1b875c411fe19a0318c137827c1d"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/tank_walk_b.png",
+      "source_sha256": "884f2e5918656e49935565f14cfb0917b7315b3ea28e814dda3b1b72303c82c6",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        22,
+        15,
+        45,
+        44
+      ],
+      "native_content_xyxy": [
+        11,
+        7,
+        22,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/tank_walk_b.png",
+          "sha256": "1782095196158363e7fe5100af0ab37e2c3cb2dafdd7926e375da227ee0b7e2f"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/tank_walk_b.png",
+          "sha256": "8e17a890e8e4ca2f1644c41db9f022dc1b526a08d9be6677650caad91c529d7c"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/walker.png",
+      "source_sha256": "13fdb8d174ab924ef069998fdba8e575bf66fbc94f5293d3617c516c08adc2e8",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        24,
+        15,
+        39,
+        44
+      ],
+      "native_content_xyxy": [
+        12,
+        7,
+        19,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/walker.png",
+          "sha256": "a153856db98b5674860d6d98287f231ffd699b59e71bc31840fccb431ba8a60a"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/walker.png",
+          "sha256": "b4c77c596e92f69197173ac3342425ae4819f5a81eb8d3618e2cfd92b2d3ac31"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/walker_attack.png",
+      "source_sha256": "06128bb814feb8298f411acd87851908465c5cd6b3491273df6224238f6a42bb",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        14,
+        16,
+        41,
+        44
+      ],
+      "native_content_xyxy": [
+        7,
+        8,
+        20,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/walker_attack.png",
+          "sha256": "efba9e5f44fb9ffd906f621b45470ab29735a81146ec4e844186d20cbfd8668b"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/walker_attack.png",
+          "sha256": "5787b7c4b88ec873263498e99bfe8ddb5eb3e840011e6c785a0d1a7e2663adb8"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/walker_attack_0.png",
+      "source_sha256": "225a2274a44e7160e623babc34b4448bfa61b262359adb424c368f2287afb3cf",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        22,
+        14,
+        41,
+        44
+      ],
+      "native_content_xyxy": [
+        11,
+        7,
+        20,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/walker_attack_0.png",
+          "sha256": "042e8da7ecd3df2714109c3581013da74fe8dcc27da929009fb9408df138c927"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/walker_attack_0.png",
+          "sha256": "ab0144b02bfb9e8946cf3041da29f63eccbf0efb222a0661074451d48c2a6fc1"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/walker_attack_1.png",
+      "source_sha256": "06128bb814feb8298f411acd87851908465c5cd6b3491273df6224238f6a42bb",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        14,
+        16,
+        41,
+        44
+      ],
+      "native_content_xyxy": [
+        7,
+        8,
+        20,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/walker_attack_1.png",
+          "sha256": "efba9e5f44fb9ffd906f621b45470ab29735a81146ec4e844186d20cbfd8668b"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/walker_attack_1.png",
+          "sha256": "5787b7c4b88ec873263498e99bfe8ddb5eb3e840011e6c785a0d1a7e2663adb8"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/walker_attack_2.png",
+      "source_sha256": "a8c205e8d62fe1dfd93eb58c61ff42da6ca1256927da046264cf6e3c2fda1667",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        23,
+        15,
+        39,
+        44
+      ],
+      "native_content_xyxy": [
+        11,
+        7,
+        19,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/walker_attack_2.png",
+          "sha256": "a9702d1826a25be21ebddac22adb1602fb3fa2cbe70cacfb908d2b826347987d"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/walker_attack_2.png",
+          "sha256": "39f2522a29ae73ec79189ef6b9d83a4c05360dae396be275c1482937bb5ff6ec"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/walker_death.png",
+      "source_sha256": "3c20c0d6ba72a253b87b0ba125136e06994571d8677c92d7eeadde7708a81246",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        19,
+        34,
+        45,
+        44
+      ],
+      "native_content_xyxy": [
+        9,
+        17,
+        22,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/walker_death.png",
+          "sha256": "01713f6407c81b88e8a1189db06fd2c4c93a45a3409e15df805c761294015697"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/walker_death.png",
+          "sha256": "83cad24a16c884580715916f29a3642fdf3df1a078f1cf8e9e7d07358666ca81"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/walker_death_0.png",
+      "source_sha256": "34234f10ca19cc6a25c36ff022d12177033912ca0e65c901e3322e00f50a9920",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        24,
+        17,
+        41,
+        44
+      ],
+      "native_content_xyxy": [
+        12,
+        8,
+        20,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/walker_death_0.png",
+          "sha256": "91cea454fb06e2152fe387d0874858454910e454c0bd67123fbd2039d38288ad"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/walker_death_0.png",
+          "sha256": "2e1f434e7fd7270371c1149e33d4fcd3d4ff2f8c8468ec5777dcac1c4361b101"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/walker_death_1.png",
+      "source_sha256": "9a85152935dc94baa16686ef2aa9fff7b251b91fedc901d0f4d07837fd811fcd",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        21,
+        22,
+        44,
+        44
+      ],
+      "native_content_xyxy": [
+        10,
+        11,
+        22,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/walker_death_1.png",
+          "sha256": "1d541912aa55542483980ec885071ae26b54e97f7774553b8568b3f6935b2941"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/walker_death_1.png",
+          "sha256": "8c5785f4798c0b26c72eb56eb05c5c54958edf755a3d08bf64f760a5875b74dc"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/walker_death_2.png",
+      "source_sha256": "531fbfdd96d897e77988913536bf36ddef2fd43c4eb3778000b886b87c1fa975",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        19,
+        30,
+        45,
+        44
+      ],
+      "native_content_xyxy": [
+        9,
+        15,
+        22,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/walker_death_2.png",
+          "sha256": "c3862805aead5999f2892c289e33da603024f1780bf7b92666c1ead7fe4d264b"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/walker_death_2.png",
+          "sha256": "54b6b0ff7ee7a52f892dd843694f297ec6e90f047e9fcbae2bb2d603d0c1e275"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/walker_death_3.png",
+      "source_sha256": "3c20c0d6ba72a253b87b0ba125136e06994571d8677c92d7eeadde7708a81246",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        19,
+        34,
+        45,
+        44
+      ],
+      "native_content_xyxy": [
+        9,
+        17,
+        22,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/walker_death_3.png",
+          "sha256": "01713f6407c81b88e8a1189db06fd2c4c93a45a3409e15df805c761294015697"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/walker_death_3.png",
+          "sha256": "83cad24a16c884580715916f29a3642fdf3df1a078f1cf8e9e7d07358666ca81"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/walker_walk_0.png",
+      "source_sha256": "48a68c09e6971c05cc191dcbe1ef56027ed8b31acdc7ef935d34a839ac2af4dc",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        23,
+        15,
+        41,
+        44
+      ],
+      "native_content_xyxy": [
+        11,
+        7,
+        20,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/walker_walk_0.png",
+          "sha256": "3c567a5bbb51ae7825a1f768193ac9162630649442c6df7cb43c32fc061179cf"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/walker_walk_0.png",
+          "sha256": "724661a7fbae07872aed249c9205e777cc9978ff9eba14f28202ceea4c335cf4"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/walker_walk_1.png",
+      "source_sha256": "762fc410aec3e49297cc580aac73bd40cf8fdb2ff9a2cb97c549be0274fdf1cf",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        24,
+        15,
+        41,
+        44
+      ],
+      "native_content_xyxy": [
+        12,
+        8,
+        20,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/walker_walk_1.png",
+          "sha256": "057b618152631da1f77f146fb0d6ef00f8dd38742483a9f5a748026a39c3455e"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/walker_walk_1.png",
+          "sha256": "a4318aa6e22f6fccb032b405801663b3299ac1749a5ba7443e1164223ee15313"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/walker_walk_2.png",
+      "source_sha256": "19d719e2b628673507cc9ae056b0cff3b9fe8afbe6ac603d4bf2e8d1f933e529",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        23,
+        16,
+        42,
+        44
+      ],
+      "native_content_xyxy": [
+        11,
+        8,
+        21,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/walker_walk_2.png",
+          "sha256": "8b7f1964cd276de1a394f3582373f961e8a6ea61f7096084e7e1b26a9b03ee79"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/walker_walk_2.png",
+          "sha256": "16aa5b7c6a6203b57cfe36a2fb53dd66531922a1d6fe31d68dacf825c8a6d139"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/walker_walk_3.png",
+      "source_sha256": "29e6f72b51849d7ebf051375995b42498b3cec5753809699e2026c36e22bae63",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        24,
+        15,
+        40,
+        44
+      ],
+      "native_content_xyxy": [
+        12,
+        7,
+        20,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/walker_walk_3.png",
+          "sha256": "c8a230e4111db1d2d9b5a0d4ceed8b061aa20984cfe4572958840fb373d0640e"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/walker_walk_3.png",
+          "sha256": "31fa41a0cebda24f8d38ef0d214a353dbdc495f8215d100ec6754e17539a0706"
+        }
+      }
+    },
+    {
+      "source": "sprites/enemies/walker_walk_b.png",
+      "source_sha256": "19d719e2b628673507cc9ae056b0cff3b9fe8afbe6ac603d4bf2e8d1f933e529",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "source_content_xyxy": [
+        23,
+        16,
+        42,
+        44
+      ],
+      "native_content_xyxy": [
+        11,
+        8,
+        21,
+        22
+      ],
+      "outputs": {
+        "native-half": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/native-half/walker_walk_b.png",
+          "sha256": "8b7f1964cd276de1a394f3582373f961e8a6ea61f7096084e7e1b26a9b03ee79"
+        },
+        "runtime-size": {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/runtime-size/walker_walk_b.png",
+          "sha256": "16aa5b7c6a6203b57cfe36a2fb53dd66531922a1d6fe31d68dacf825c8a6d139"
+        }
+      }
+    }
+  ],
+  "farmer32": {
+    "source": "assets/art_source/player-fhd/idle-blue-grounded/frames/left.png",
+    "source_sha256": "5ec4ff42e2a73a7fe05904ae727f76e28c9b97deb41bd57f368f649b7270e52a",
+    "output_sha256": "5a195a04d9413f7f318734361b406ae481aae89994cd97d432d57ec4c28a9316",
+    "method": "80->40->80 NEAREST, same idle left pose",
+    "body_height_px": 32,
+    "FHD_detail_pixel_size": 4,
+    "runtime_integrated": false,
+    "assets": [
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/down/01.png",
+        "source_sha256": "714b0bee6d4a29560ed45f018d1697f63a9c8f6ec9618600d48a8d8c1996caaf",
+        "name": "walk/down/01.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/down/01.png",
+            "sha256": "5dd6704f22e6d6595115fe72fec9969452eb9af23bb1c0cf958b6491c1f23e01"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/down/01.png",
+            "sha256": "6038e82323b4c771c1d75472e20e781070129dafd32dbccbbb61c81821028d81"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/down/02.png",
+        "source_sha256": "61b58d0ff19f9021fd5ae353760d02fddef284f4629e0dc016841abb0e7fc0db",
+        "name": "walk/down/02.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/down/02.png",
+            "sha256": "bb488715ff11036f44692c6432eb9c9849561ca16581a2837eef0bab5129d7a1"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/down/02.png",
+            "sha256": "29f41e882900007abd73a0e663773edf3b5fa90289dd9657f97a98387900a95f"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/down/03.png",
+        "source_sha256": "e651a739a552e2983bb7e30a735d81cb46d6adceac6ed1cd169da89c313839f3",
+        "name": "walk/down/03.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/down/03.png",
+            "sha256": "42674df0c829c113a513e9ae6aa40cbd029228a47f3662dd5236ae6f44d2a67e"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/down/03.png",
+            "sha256": "767bec414058e695b5f807917fcea7fba52c0b706cd8203db39e5359d0949d0a"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/down/04.png",
+        "source_sha256": "7493a35ae58c14c08a0ca5600755515a71544242c1a2ef1e85897bcc8d605d5d",
+        "name": "walk/down/04.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/down/04.png",
+            "sha256": "fcd21c4b52790187001d12dc8d24d60012c9a2fb8dc618f7a160e510c68e5867"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/down/04.png",
+            "sha256": "5f45f45069ab74ee7f23eaf60125920e6dcefe1debdda0332bc1a4ddcd212e48"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/down/05.png",
+        "source_sha256": "63163f9ccb75e27a3e18a2d218d95056e310f8d28882a41fb6ebc8ebea501014",
+        "name": "walk/down/05.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/down/05.png",
+            "sha256": "6790e67eb67b33bba79ef9c62a17da61466d9e4d6d5bfd1eaa2c47efe649a8a7"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/down/05.png",
+            "sha256": "4554b7a205659d84283a93c4b2fafc7deed43e8fae0f269c8ef8ed21956f8de4"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/down/06.png",
+        "source_sha256": "610933327627ec1c87dece11803f49886098790f91e65cc7e2a89c08b699e5c9",
+        "name": "walk/down/06.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/down/06.png",
+            "sha256": "454f1f9497bf8400015ea3646c0172a9daa037177f8e05bca864ab0f0a299fad"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/down/06.png",
+            "sha256": "6abb91c6ac32082801b8a32a7a633f02810b6713318c5a1fbe72c22dbbfbe1c1"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/down/07.png",
+        "source_sha256": "2c2ab1aaffafee82182df05f604ddf305d44b4a39559539c7dbebdba1eca3c52",
+        "name": "walk/down/07.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/down/07.png",
+            "sha256": "dde11c6b9692a96ba0f685418a9ca9107a317413f6dfe8a71cd9f8816f8ca1a0"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/down/07.png",
+            "sha256": "ca142c8a241c0944990a0d75bf5d3b795acf2b8cf4a683e48c6ca17ef26ce89b"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/down/08.png",
+        "source_sha256": "afe71c2721efee0fa81c95ac5c4328d5c2fe5e1586e8a4f2ff6aa32e0bd5d665",
+        "name": "walk/down/08.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/down/08.png",
+            "sha256": "02f644468cfe0aead5555759fa15a3bbc8af61760dedbc35804b43bc293b168f"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/down/08.png",
+            "sha256": "b9edd52fdc091ed74e759291c6e7945205fe1776cea98b048f49849b697addf5"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/idle-blue-grounded/frames/down.png",
+        "source_sha256": "cd0aaf7ef1af1cddd989b45f1c8d11c1f2db8e26687246b98dcd07a399720ea3",
+        "name": "idle/down.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/idle/down.png",
+            "sha256": "c0a4f065234bc8bade440d3a524312975e86ff71bfc00319b0a66a4143b78d3e"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/idle/down.png",
+            "sha256": "5a8039aa4fc321d7cfd979a8a6ff35a5e7e0157f60d923d743f5d4bb047d6483"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/right/01.png",
+        "source_sha256": "a925d8d459d40d0de5a1bb9a59962bdbf5d2839490de1ccb968d634206ef7cd9",
+        "name": "walk/right/01.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/right/01.png",
+            "sha256": "6ee0abe8e5755ff39dbe200ae31b463728ea936f6958cbfafe8a9331d35e5e2d"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/right/01.png",
+            "sha256": "c57dbbd774935472a08dcb8eab07aaf8f33ad353e0b140b9e641edd0e1e1d287"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/right/02.png",
+        "source_sha256": "728de94283d25406f0cc5c4332dfe263c1161bda676259eacb78772864acd60f",
+        "name": "walk/right/02.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/right/02.png",
+            "sha256": "26f6e739fc14ac8d983df8a1e146f9acf5e28c710a730f34507c8d92636c2e88"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/right/02.png",
+            "sha256": "b4f79e76c2226c89d15bee2cb646336a7dcf074b3bd627430d5c0298946a3ee5"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/right/03.png",
+        "source_sha256": "d167e791e0ebcdbc400279c09b86a3e0996983325114db900c57c5ba1529ddab",
+        "name": "walk/right/03.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/right/03.png",
+            "sha256": "5830601e44d06df298f778386829985ca3abc3fb8a4ebeaf05673990621c5d5c"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/right/03.png",
+            "sha256": "6cbb6fcf0c9c753a98a1bd9a2fab3c6c2711cb4ee362a1a212961d1da51b7f6a"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/right/04.png",
+        "source_sha256": "bef96f5af9119633be0240b80812d3215f229aaae8abf67a782015a59d3bcd26",
+        "name": "walk/right/04.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/right/04.png",
+            "sha256": "5180cacc253867e8a557c22d1c7443cf67d21ebc0ffcbeedff43a599f49aaec8"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/right/04.png",
+            "sha256": "a3de489a7dfff3eb67bff5e12655c6d0275f9a50ec1e829ab8e9967952c6d2d6"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/right/05.png",
+        "source_sha256": "d4e5379d453e40ad9764ba7538b6151bf9d4045225ec5c02c93a7bc2639a1be8",
+        "name": "walk/right/05.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/right/05.png",
+            "sha256": "ac17138f81bcda7dbbb993a0372652ef25da30f0bd5ad173e1ebe2617814912b"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/right/05.png",
+            "sha256": "522b1c4ef684c4e101f89e060cb6610a343b6d833f69265609e3f5bb5dea8150"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/right/06.png",
+        "source_sha256": "9c276c1aa3412b37bcce2ce6788a110a1adfdfccdf9b7b859ca695b8203c173f",
+        "name": "walk/right/06.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/right/06.png",
+            "sha256": "b79b7ef2eaa6b1e9a9c372f9ee0228d8ad7a175679be8a91bc7eece02d9c6c40"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/right/06.png",
+            "sha256": "8a2dc77730598b3940aaeb57ecf3e3fea9f5b3eeb0e855f219cb6d3b6dfe6690"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/right/07.png",
+        "source_sha256": "90167f5e1214db065146c5c67df54d00deb93f663de69d0dcedc83a616b0bf15",
+        "name": "walk/right/07.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/right/07.png",
+            "sha256": "f506e994ef76bf7cdfc302c1e8265325d5c37b20816d2a079a64eb2718f20bb0"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/right/07.png",
+            "sha256": "b71e939b2505d6dbc41b86bce73bd3eaad09c3565333d8289cd4944a2c07b3f9"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/right/08.png",
+        "source_sha256": "e218e679dfbe74eb57e1e75f423dcfb7f1e9f7d9be9d43b4db2872f80bb7f4dc",
+        "name": "walk/right/08.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/right/08.png",
+            "sha256": "cf863dda8e8e95b01bde9bf8f36b1abec5d8479ed67bafaa26715994e35ab46c"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/right/08.png",
+            "sha256": "90fefadeddc377aa8387891faf4baccab70d9fba7999ecb9a38a22fb2652d13d"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/idle-blue-grounded/frames/right.png",
+        "source_sha256": "09cca790c8db70968ab10b571d149fd0de5d21f601f2dd2ed457ff95cbe96d03",
+        "name": "idle/right.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/idle/right.png",
+            "sha256": "8f87425f41597d568c2296c66ed47b11831c4ee87c5ab562ffc4ab69645559bb"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/idle/right.png",
+            "sha256": "f82926a7c175f7e8359542ebddacfd1d3f48ababd14270357621235fdb83820e"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/up/01.png",
+        "source_sha256": "36b4b5f9ab9d1c652a121bfb39cacd5654ed9bc3e82b5d1a30ab8e5d167b76ee",
+        "name": "walk/up/01.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/up/01.png",
+            "sha256": "65049b4bc820c08ecb1f79faea006738a01ed9b9d3a4aaefb54b6cd3b09e55c9"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/up/01.png",
+            "sha256": "1d29d07f6651ecbe1bc0c4cfc5368763e9147a881a4c657c9b1207f72004ff95"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/up/02.png",
+        "source_sha256": "e1e9ac2f2e85a0f977f62e3c87bd3d572e87ca345fec8ce7baa51f883d5b88d3",
+        "name": "walk/up/02.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/up/02.png",
+            "sha256": "736bad92fac409c8d4e9633bf4c5efaae3a77c96e69e22fdfd5a6306dbf72120"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/up/02.png",
+            "sha256": "18c765528ce60691c042fa3258648bab390732b6829f8ca762d3a394b9c8c5db"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/up/03.png",
+        "source_sha256": "c6b026d7f0bc14ce85b761e971505cb03d2261854a189752e2b2f54572129710",
+        "name": "walk/up/03.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/up/03.png",
+            "sha256": "3f3445b5a9c79ba1dbe7b5671ae80ef769b0087e39c0adacdd7bee227f116ee3"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/up/03.png",
+            "sha256": "2d3a8df165bc4b8dd0e85ae44be5ae6a6bf0eb2eefac0e8c406f8fbb7e668a99"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/up/04.png",
+        "source_sha256": "a79e9b21e5a228d02332d6c72d3fdaa787b9678e2cf6931e34a8be61f18d8dda",
+        "name": "walk/up/04.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/up/04.png",
+            "sha256": "f4788fcf14f7f77028d89513981397d2d03b6f022cab73e5b1ed81e098b990ba"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/up/04.png",
+            "sha256": "77dd4dc04c7b3d9aab1a5cf954b646285c54c1cf8b2542a4176d2929eff49f64"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/up/05.png",
+        "source_sha256": "2e310ed0899735460abca6883dfc1c7eb7d3e6ac85845e41e13c2a6c7af43182",
+        "name": "walk/up/05.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/up/05.png",
+            "sha256": "f76ea47795d70c74cd0cb6727c2579fc37657c858c6b9ea4de3d367a3307f0f6"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/up/05.png",
+            "sha256": "5e4ceacbb03515264e4aefdd6ace07143ed089685d43eb506d1eb360f7b6fcc9"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/up/06.png",
+        "source_sha256": "0cdc8420aab64f156afd61bbb69e00d4e8bbc71d95f3f7b3c27ffa2b27147670",
+        "name": "walk/up/06.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/up/06.png",
+            "sha256": "dd9993d44ef4ae93640f1e8a3dd4a47c26144fed5b9e495e01a793b8442231eb"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/up/06.png",
+            "sha256": "ecc6e53dc16eaf4dac479de62d9420691ed7d97c65b1562c883c4a48eb9a881c"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/up/07.png",
+        "source_sha256": "569b79975ea60e5217b51a4a5596e4cbca2cbd08f75a01f44433d0dc3b7551e8",
+        "name": "walk/up/07.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/up/07.png",
+            "sha256": "e3f90fc17c91a62597e9fc7a597111af5d66481ee91b6bac1abcce450244a8ca"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/up/07.png",
+            "sha256": "7b9ef2f6b85254ffb20eafce7a0bd78b4db7fc54e20ec8cbfcec1bd145bb658e"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/up/08.png",
+        "source_sha256": "9ff9bbfd775a24b22c8a4379392a878d1d233b6b6cae347158b9a12bf0d9ec12",
+        "name": "walk/up/08.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/up/08.png",
+            "sha256": "b085a396b5fc9098ab7e555ff43c90f61b6db4c691f739b22365f5473e41b3d6"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/up/08.png",
+            "sha256": "5c8dd82e9ea424d1f7efba74e0c39779f3f6bf0e014adaba4d324ecbcc829d12"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/idle-blue-grounded/frames/up.png",
+        "source_sha256": "7e6f89a31d595627de7b45496328c2174116c59c266f8abada11b565658d793b",
+        "name": "idle/up.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/idle/up.png",
+            "sha256": "48657d156325b5395548f5a5065c6f08a3226995cfa4308fe91b98a98e9fb95d"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/idle/up.png",
+            "sha256": "215c13a6c8c2dfabe99af9476e309d39539b26aab12fb4dfa4fbbf6b1b79f29c"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/left/01.png",
+        "source_sha256": "a4483d4d3b2170b68922109327c2052b7e4752d7ebf7136f452ee5215fee6cd8",
+        "name": "walk/left/01.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/left/01.png",
+            "sha256": "6d294983b63db65a46df523cb7bf0b39d87e223c5e7d1e79f202d7631376549e"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/left/01.png",
+            "sha256": "dc8b477c55263ec4b4d14d0df9247bb64479cf0de55c939bdbea5f5b3d843b18"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/left/02.png",
+        "source_sha256": "d7207adb366affd40504c0ddcb5f8d881436ce2e352ec2d95d580a93b0aac68f",
+        "name": "walk/left/02.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/left/02.png",
+            "sha256": "cb806b5a8dc2504066d4f6bdea9b637d05cf096255ea5b0fc5aad4a769daaaaf"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/left/02.png",
+            "sha256": "ed2f63b3b9b7f7701dbf8475bf06790f9c0d0f55402797c41a0a6f446eac2153"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/left/03.png",
+        "source_sha256": "a5060a3ba97bf9bb43da40d548f1ec6e5659f625bc4856d1b9834f4da805005f",
+        "name": "walk/left/03.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/left/03.png",
+            "sha256": "a23faff427bb6ae514a8b9173d307ece97ec90bb578f1d2102c33d4a62ce4a72"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/left/03.png",
+            "sha256": "28f1875f3fa3e7a2f1e5be01fd3fe59b0485860802f4f11a63a9e87d277ce604"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/left/04.png",
+        "source_sha256": "0fd22e4e3e33348184387a718c8dfb0a43a407bcb8574ea473c073c6cecedb78",
+        "name": "walk/left/04.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/left/04.png",
+            "sha256": "4d4fb00e390fdcb26c3b3d637896a55aa3ba23eec9490426acf3f2970dbd480f"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/left/04.png",
+            "sha256": "ec06262e47352982f77c7de023c07c9f35f5d33fcff5f5af0b545bc58af14ea5"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/left/05.png",
+        "source_sha256": "8df046ba8464eda614f77367f4c8bbcbcd80498318efbffa8c95ba592f881c90",
+        "name": "walk/left/05.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/left/05.png",
+            "sha256": "9d7750811de58385377c99dbeea927af38be40dd8fa2b3503214630cffd26670"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/left/05.png",
+            "sha256": "e6ac359911b32e60924f1aef57913bf584d8ab4a1d960a5daf2e9bb21fd51358"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/left/06.png",
+        "source_sha256": "4be67a359327ce51c5e69bd6a8ae779e314a908ad2ef7f56aae8b61e467c5f9a",
+        "name": "walk/left/06.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/left/06.png",
+            "sha256": "bc88adfede31534db5dc58c292a3ee26be0ca82a760cd308910401021b297e5e"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/left/06.png",
+            "sha256": "de751de7736038834c61fb3601596efc9ead1ce4ab267d23a0d79d8a0c8c7f94"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/left/07.png",
+        "source_sha256": "b3c319e88bc7e8501d378c72e5092c10455d68451259a224b269cd98b3a230c2",
+        "name": "walk/left/07.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/left/07.png",
+            "sha256": "fe2aaa31fd5cdcf9d2205a2ffa85d8cec52c84f7007850818aa69d0cffdb6836"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/left/07.png",
+            "sha256": "cc98df488dbc0f01c4eceabeb9cb041f48035e5ba84eec916b5e7c869b4167e5"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/left/08.png",
+        "source_sha256": "84a5a5de7760f45940f90acd81956eeb103311aabcceb53af2a73b6b23b65747",
+        "name": "walk/left/08.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/left/08.png",
+            "sha256": "351c413dce857be9770f69124ccef27003adcb3856bd256425007349cc70410a"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/left/08.png",
+            "sha256": "3a3166609aab4df9f874d5cb811e5a154e35199edec533e10a8bf8b6ce46ba52"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/idle-blue-grounded/frames/left.png",
+        "source_sha256": "5ec4ff42e2a73a7fe05904ae727f76e28c9b97deb41bd57f368f649b7270e52a",
+        "name": "idle/left.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/idle/left.png",
+            "sha256": "0b30087cd944b50169fe1de7d98de360d2c1c30241eeb989f0e7bf93fd719eae"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/idle/left.png",
+            "sha256": "5a195a04d9413f7f318734361b406ae481aae89994cd97d432d57ec4c28a9316"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/down-right/01.png",
+        "source_sha256": "6a92b28d59603ed3bc10811a695072cbf152f60259370d00eec0f9dfb6b3ef29",
+        "name": "walk/down-right/01.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/down-right/01.png",
+            "sha256": "49295ebf6ab6755d3237897dbb450dbe964ff3dca3733f4af9247ae2f77c8f4a"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/down-right/01.png",
+            "sha256": "2339fccb57737753a5738aa6a0c85eaef52aadf6bee6c6b2a4aa0773357cf19c"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/down-right/02.png",
+        "source_sha256": "e7358b2ac5cd6b6b272512c9fa66f9bb6f37547530fe3578094ac4ba1658a802",
+        "name": "walk/down-right/02.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/down-right/02.png",
+            "sha256": "087ef5262359129cba57077a20abef184f6c906e63009977711c688bd8915295"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/down-right/02.png",
+            "sha256": "010a8c643ba2e7c0f5c82a6c1de7eba1b90ea41999e95819236739223cb3da53"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/down-right/03.png",
+        "source_sha256": "ad9e55ce68234f2602cc1c239f85dc66dc929ed921acbb0d37596a4a90fc09b7",
+        "name": "walk/down-right/03.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/down-right/03.png",
+            "sha256": "80a636e63ca2cbeccc9c509026dea23b4ee50bb5c0155898a7d7260ffa9988d3"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/down-right/03.png",
+            "sha256": "e9b2d06668a74224e3d3a2a9c9eba1d7bd59d72a87664dd73443e3f93d255b84"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/down-right/04.png",
+        "source_sha256": "8543ab95a75f61d644f25d35c322bb2bb12048c8f017ade9f7ebd6b86bf7f5d0",
+        "name": "walk/down-right/04.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/down-right/04.png",
+            "sha256": "febeb1b11ac5910333d7c2c86e2e077e3bf2cd187ec13537b286931241d9ec41"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/down-right/04.png",
+            "sha256": "e1cc7b417f0bd5c2e2af34573f3a783d60d0f71f8a510abad251914be704efea"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/down-right/05.png",
+        "source_sha256": "798bf689e9d0bcec9a07cecc57b548a4f40181a9065a608afa64b73e20f3184c",
+        "name": "walk/down-right/05.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/down-right/05.png",
+            "sha256": "84e4ac847c084b02b913bc85f86f98daf9b41bf16d01da5ac057c18f8f5a64e2"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/down-right/05.png",
+            "sha256": "016e32c4ffb8279efdbc62194ba596686ec9c896c3eda734d0b6de315d84eb37"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/down-right/06.png",
+        "source_sha256": "bf2b8de4719b4429165eed4ea915ad33cb1bd11c2a403c173f5ac5311ef853cb",
+        "name": "walk/down-right/06.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/down-right/06.png",
+            "sha256": "eaf0e566a5f50107df1091cd08b477d483353e013cd5e968ae951d41b2e8d87c"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/down-right/06.png",
+            "sha256": "8a7a672befd319026c67f2bde37e946c6aba04e93d36d3ca73bc1233e12136df"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/down-right/07.png",
+        "source_sha256": "a72b3a57f252e1c89c9d79924c113884de3336730cd94510b8b0bc61625fc192",
+        "name": "walk/down-right/07.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/down-right/07.png",
+            "sha256": "17453ad7071ceab2d77765ddd24aa6bfda21087714be439705a7e002ec403a01"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/down-right/07.png",
+            "sha256": "b096fd7d9f511256fa3bf3bb2d99a3b2b0079371983afd7bcb68ac7f9cd70af0"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/down-right/08.png",
+        "source_sha256": "203c16c7b9d0b4ce6a1e0f5190562f55eeeae558f59eb659a73073b3c20064fb",
+        "name": "walk/down-right/08.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/down-right/08.png",
+            "sha256": "759f3417c113de26cb4a96e6b59142fb03d3765ab8ae3c1a1329eb9937186908"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/down-right/08.png",
+            "sha256": "96bc9ce25e480e97698ec5df3394602849723af56b8f9a4c5e0a038b5f87b898"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/idle-blue-grounded/frames/down-right.png",
+        "source_sha256": "b64d33daea7da53b5d83f38134830f740342ffe45cfb45ffd5a6aae37c476cbb",
+        "name": "idle/down-right.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/idle/down-right.png",
+            "sha256": "7cb9a9f9db2754f02972d5790c143bc7c7fbc7c12bc028b0a5a34cc3d921255f"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/idle/down-right.png",
+            "sha256": "6bb9c70d4b2db3cfd3915e5e64c0958f8266d4a23cc7e7850610b5c455b69ab6"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/up-right/01.png",
+        "source_sha256": "bf3fc01e87961bff86d1a49b3d236a49b097e7ad60cc163da8b065663f28483f",
+        "name": "walk/up-right/01.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/up-right/01.png",
+            "sha256": "e9544e70bd8b5988f8fcacaf4105a275b9c45a539967b9615c0e83f6a34e5e27"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/up-right/01.png",
+            "sha256": "312529f53004d8b6ac17ac3f73ac5696a20b8ecaedc890fdfdf9d9f8ecf41abc"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/up-right/02.png",
+        "source_sha256": "43c41c7d7f5a57f3d1abf5c7a7be6655418118aa0801307c3afa155a9ab74247",
+        "name": "walk/up-right/02.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/up-right/02.png",
+            "sha256": "96275a0d181536b798c550df1a783aa92897565ccf5394a75b55e635208462dc"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/up-right/02.png",
+            "sha256": "e13a1b91e748a3aea420dfc4598163a411bb3e281c1f904c184364f569fd31d2"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/up-right/03.png",
+        "source_sha256": "5c438509887ac04e9a32362c0c3b836041123a9ea497c3c6e3081659497c71c0",
+        "name": "walk/up-right/03.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/up-right/03.png",
+            "sha256": "83d8d116fa9b20bc052c47447cdc52244ddd218548587444bf68988ae0737309"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/up-right/03.png",
+            "sha256": "e5f329b7f6bd5eff514da14bab47266dc275a12662789d19b7a0071245f7d764"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/up-right/04.png",
+        "source_sha256": "00d9c60552a818946eca187d48c59dfc70149ea0b3b749748f03ab334b0262e7",
+        "name": "walk/up-right/04.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/up-right/04.png",
+            "sha256": "e0cc5c2cc0324ec2ec9c89f4acd9ea57b6bd3bf0eaf595a7210e5c1830bd4f79"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/up-right/04.png",
+            "sha256": "c20e0e11be8d281c664fd9cbed8b9e3b19cae756e1ecc6b9311e33e926cd1043"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/up-right/05.png",
+        "source_sha256": "6c269b32dbf93cc4c77d89cd38e994c43949c540845933737c2267a77d357ab1",
+        "name": "walk/up-right/05.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/up-right/05.png",
+            "sha256": "974f1d612dff6f186410a57d96913aa30b1fec6f75f34319ca9658e0c071cc7f"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/up-right/05.png",
+            "sha256": "7102c51d43f873ffec0d5f2a91575183834028ee4f737b085bb929e2436d2b18"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/up-right/06.png",
+        "source_sha256": "7747eef88ff6d4db534650bef985945a20010cdb492c75373076ed32ca83e0bd",
+        "name": "walk/up-right/06.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/up-right/06.png",
+            "sha256": "480790864b33edb5452087df79c4463294f9f547c9636ac3704c8344cd212a2c"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/up-right/06.png",
+            "sha256": "199ba6ee91ced31ab9069fe105c196daa0e2cc7d0d2e73ef509c957b335be5bb"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/up-right/07.png",
+        "source_sha256": "ed04bf6d8e704b9e71264f36c2d919c68d6963f179429dd28fe2f2e925ec848f",
+        "name": "walk/up-right/07.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/up-right/07.png",
+            "sha256": "bbf774617fd7bfe18dc337496dadfaf8e5728464ffb7b115241962f747ba9a75"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/up-right/07.png",
+            "sha256": "173a961edfc14f1dfdd255553121677b7374173dcffed1ca253a60da10786041"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/up-right/08.png",
+        "source_sha256": "dd1794e0a8dc59bf8734d7958f27f9dbf1affb275b4eca44e2ca9acc824df117",
+        "name": "walk/up-right/08.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/up-right/08.png",
+            "sha256": "c2073f41a7fc6e603dccf3d4f73d2accd239c197e2dd7ae17195a64aadadf5fe"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/up-right/08.png",
+            "sha256": "c024f33db92405575efc83c485194d7b5a41f0984650b49b52d124e9d30a05c2"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/idle-blue-grounded/frames/up-right.png",
+        "source_sha256": "b9934404536e81d8ca7b3fc1342f6581da3f5bf5190a23a8d577405add3380d0",
+        "name": "idle/up-right.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/idle/up-right.png",
+            "sha256": "8271f2e9fc36f82a05f9c09fc1a4017db2d1da9281e53705e4b995b2e0d4cb89"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/idle/up-right.png",
+            "sha256": "ba7743510483c88d5a0145ad0bf56bce1cb1b8d2adbd0d26391692926837b354"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/up-left/01.png",
+        "source_sha256": "6c0d8c85e00698b07754bfc849641fbfc8a4cbfc0ec3530c636b3297c62e414e",
+        "name": "walk/up-left/01.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/up-left/01.png",
+            "sha256": "2984348151103b789f07af473a2e8e6f47c65db2ae6415524224b1ee72fcfd5b"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/up-left/01.png",
+            "sha256": "cc6352e39cdb3c77ef7de80590be9b86312d4837059c6cc0972e54c2a35290d0"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/up-left/02.png",
+        "source_sha256": "451cec4c3993c6265706478c01df32f7fe28118c16b411a2c55925adb28184c4",
+        "name": "walk/up-left/02.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/up-left/02.png",
+            "sha256": "db21ee7ae316f33ee20115bc76a3ae67447f6ab22afef100744639e4ec1e1b11"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/up-left/02.png",
+            "sha256": "60b6eef352060a7f95f48d0c2ac0b236513767e21d9e6278c5119b1c13b30c14"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/up-left/03.png",
+        "source_sha256": "909451f379a3f30f715c1933ab739469fe29c5f0adea84a7e1273a696f8d0863",
+        "name": "walk/up-left/03.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/up-left/03.png",
+            "sha256": "4fdcdd3f972cc96960d2271130685d796bcf7a66651d3e42b3841abb7fab019a"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/up-left/03.png",
+            "sha256": "c46161d19adb8a5ba731fd3ace4072b867d35a94784e63740336bbad60ab8b4c"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/up-left/04.png",
+        "source_sha256": "f66d71a852cc3aea5a1df64986e3bae694b583393e0405e0f8c6a8c5585764b1",
+        "name": "walk/up-left/04.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/up-left/04.png",
+            "sha256": "6547c8ad6b3ad43707245774a1b1853b8debab6ee860ae65a100735c41aeb196"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/up-left/04.png",
+            "sha256": "18f04196cb9f09d6d29f2dff5355b66a1cefb7fed48f5e2b411c201c17efd2e2"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/up-left/05.png",
+        "source_sha256": "b4d491c36b1fdbe058a8ff393aa87e5b1fac3f723c9187ccbafe1bce4f6c2951",
+        "name": "walk/up-left/05.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/up-left/05.png",
+            "sha256": "7f182fe4054c22f57b5a7ca48c32ae717ac979e038d3a4a693f248783e8620f9"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/up-left/05.png",
+            "sha256": "cef1ae8e01e144a8f16eb3f3735c12d66bf145c2aeb841dec92790002bea1018"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/up-left/06.png",
+        "source_sha256": "da58b40efb3a89dbfd38891813ccf094899bea2976f4f99ee0681d8b404ab3a4",
+        "name": "walk/up-left/06.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/up-left/06.png",
+            "sha256": "032c3888c0530982a35602f9a6fc56bb16ebc85ac7ba77abb5551afc7016f864"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/up-left/06.png",
+            "sha256": "658becdac21b6ba6cba1265285892e8ef815822fb3c80bb7c500a0ddcdc3f3c9"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/up-left/07.png",
+        "source_sha256": "e5561bd7906c2b5a35667de194f9002e20b1e5782f12201c24ed3fb5516bb89a",
+        "name": "walk/up-left/07.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/up-left/07.png",
+            "sha256": "6b34734167bc2f2042fccd8d183b2a8d53df1d5e4fbf8df3f07b76ac808c7b26"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/up-left/07.png",
+            "sha256": "d503a6410004386995246155992fc00f638900267c88f8ad052956fa46ed6617"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/up-left/08.png",
+        "source_sha256": "29a518d700c551dd1bc7ea4b776c461f66d1db76acee5e2836fd557537741e0c",
+        "name": "walk/up-left/08.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/up-left/08.png",
+            "sha256": "4b4d1769e5288c5e9fb897a5e937e2aafc6e9f06c4221146753b26589b8b94b1"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/up-left/08.png",
+            "sha256": "0ff457aceeb8cd32c8905de5742fd26be9fc1422d85ed49ee1d5d877a7cfee25"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/idle-blue-grounded/frames/up-left.png",
+        "source_sha256": "4fad1d8c82cf5f6cba609705104880c086dcc67e001e32e333bd3dfd6c3483d5",
+        "name": "idle/up-left.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/idle/up-left.png",
+            "sha256": "c88584be25f41275c3677bf7a7e541f56dc39e6fd3475d9199340552409d5a63"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/idle/up-left.png",
+            "sha256": "bade83afac9ada7fff02e9ad4c47fd70ec67d16834d903b9fc91108b5115e26e"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/down-left/01.png",
+        "source_sha256": "58bfae12ba874c940b25fc3d04c984b9133e334599a7fabe6d8a2ed4a2a7fc8e",
+        "name": "walk/down-left/01.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/down-left/01.png",
+            "sha256": "193249e697405567f07ef29c2187f3eca679a9900598534e025c09e0bd28e7ed"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/down-left/01.png",
+            "sha256": "fea1d963e18f52b255a93c5dcdbf165a7bdf91793e62535b0d5916d3a61680ad"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/down-left/02.png",
+        "source_sha256": "77997837529272d0260297ec46202e70e8400a673a2e5af07de994fe6722def0",
+        "name": "walk/down-left/02.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/down-left/02.png",
+            "sha256": "5a6b059b7643d8e576be7ab9a6e90c24c70128432a2d032d6e1a29925d7bbd90"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/down-left/02.png",
+            "sha256": "f5692cc0a70099cb77f9a63bc494870c083a2f6569f2bb217c934640040b0b10"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/down-left/03.png",
+        "source_sha256": "0a7ea43ce076e31530acf18b2356b96a650b0136e2a985adbd4b8609ad36e591",
+        "name": "walk/down-left/03.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/down-left/03.png",
+            "sha256": "1d1df84c24472e7c9c1776d5baddde016f72653a520c97a4338cce84de5cbcf6"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/down-left/03.png",
+            "sha256": "714d32825c313519a37543c5d0d4b43765cf31e3729664dee66ff9a58a7eaaad"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/down-left/04.png",
+        "source_sha256": "a6bad38f2d04de72ef423bb263060422df1f4fd8dd34ec675510262ee1d81215",
+        "name": "walk/down-left/04.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/down-left/04.png",
+            "sha256": "e5fc1ef09e71a320597b253daab5560950c0cb3ce4f1c1aa30c74dc5d5c193c8"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/down-left/04.png",
+            "sha256": "732d077c8f9c3223a9f85301d71eb10e8d47f972eb1a68e6677f48cbee026692"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/down-left/05.png",
+        "source_sha256": "7993497dfa11a268aa3406a927edaf07ed45d0d8343d712c98b66ce72128ade4",
+        "name": "walk/down-left/05.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/down-left/05.png",
+            "sha256": "451191179ccbb24e0f5a74c3672187b2d211277b675f9242a78a415dc044f22e"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/down-left/05.png",
+            "sha256": "bbe3746493864eca7f567ed5c664c6ef5e272ef1813826b354bb70dd3cd8c30f"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/down-left/06.png",
+        "source_sha256": "2375bf0ebff687b677d98d5fc4dd44de56e1bbde421e8845d44fa2ed3c0c5c4d",
+        "name": "walk/down-left/06.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/down-left/06.png",
+            "sha256": "7d9ceb03559e4556b1292aa1185df65aa4a8cbcbdcdb8718e49637289a45a3c8"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/down-left/06.png",
+            "sha256": "259c8297e21ef49cc22fc9927a63ee7888e79c7411288facb7652e8720edce75"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/down-left/07.png",
+        "source_sha256": "ad79fc6aadd4504ceab7ba513dcdff05b345a5028302f32dfea82ba2cf1644fb",
+        "name": "walk/down-left/07.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/down-left/07.png",
+            "sha256": "d4c0c7b077485d4b7364a83bd7512ac2a06279f7f65e806086f02578bbe4dd55"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/down-left/07.png",
+            "sha256": "80043ae9746f9ee68d3dec9fc97374293c8b3972f024518beb91962062e7bd78"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/walk-blue/frames/down-left/08.png",
+        "source_sha256": "913224ed27bf4fd8e01bc4589e0e73f94944e22597799b041c00374f27edf612",
+        "name": "walk/down-left/08.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/walk/down-left/08.png",
+            "sha256": "1b9d5aeea1bd9f1ad6876890ad26c02526c9182e76e7c69786d5780129ab2c30"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/down-left/08.png",
+            "sha256": "6b5447a8dd4beba9d8e4d74bc468fdbd9e54f9323c50d0003e32ada4bc1f00d5"
+          }
+        }
+      },
+      {
+        "source": "assets/art_source/player-fhd/idle-blue-grounded/frames/down-left.png",
+        "source_sha256": "fd8c796d1edf29ddae3784761e4730a5004ca6e20bd9fbf397c6cbea429db5ab",
+        "name": "idle/down-left.png",
+        "outputs": {
+          "native-40": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/native-40/idle/down-left.png",
+            "sha256": "952de167feb69df00919beecab236dd17ac1f3904a8dac37ea6d8e0326b4c1ca"
+          },
+          "runtime-80": {
+            "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/idle/down-left.png",
+            "sha256": "bfcd82b33eea7c3f45d4ed1d42073bf41e3269c250b1818d01da5d5926dea09b"
+          }
+        }
+      }
+    ],
+    "native_canvas_wh": [
+      40,
+      40
+    ],
+    "native_pivot_xy": [
+      20,
+      36
+    ],
+    "runtime_pivot_xy": [
+      40,
+      72
+    ],
+    "runtime_draw_scale": 0.5,
+    "walk_frame_seconds": 0.1
+  },
+  "farmer16": {
+    "source": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/idle/left.png",
+    "source_sha256": "3a0975aeb79ea8e388b859a82a2890b9372fd0cff174e0ba540fada36996ef3d",
+    "body_height_px": 16,
+    "FHD_detail_pixel_size": 8
+  }
+}

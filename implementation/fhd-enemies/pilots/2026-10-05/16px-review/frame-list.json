@@ -1,0 +1,192 @@
+[
+  {
+    "label": "idle_0",
+    "names": [
+      "walker",
+      "runner",
+      "tank",
+      "breaker",
+      "giant"
+    ]
+  },
+  {
+    "label": "walk_0",
+    "names": [
+      "walker_walk_0",
+      "runner_walk_0",
+      "tank_walk_0",
+      "breaker_walk_0",
+      "giant_walk_0"
+    ]
+  },
+  {
+    "label": "walk_1",
+    "names": [
+      "walker_walk_1",
+      "runner_walk_1",
+      "tank_walk_1",
+      "breaker_walk_1",
+      "giant_walk_1"
+    ]
+  },
+  {
+    "label": "walk_2",
+    "names": [
+      "walker_walk_2",
+      "runner_walk_2",
+      "tank_walk_2",
+      "breaker_walk_2",
+      "giant_walk_2"
+    ]
+  },
+  {
+    "label": "walk_3",
+    "names": [
+      "walker_walk_3",
+      "runner_walk_3",
+      "tank_walk_3",
+      "breaker_walk_3",
+      "giant_walk_3"
+    ]
+  },
+  {
+    "label": "attack_0",
+    "names": [
+      "walker_attack_0",
+      "runner_attack_0",
+      "tank_attack_0",
+      "breaker_attack_0",
+      "giant_slam_0"
+    ]
+  },
+  {
+    "label": "attack_1",
+    "names": [
+      "walker_attack_1",
+      "runner_attack_1",
+      "tank_attack_1",
+      "breaker_attack_1",
+      "giant_slam_1"
+    ]
+  },
+  {
+    "label": "attack_2",
+    "names": [
+      "walker_attack_2",
+      "runner_attack_2",
+      "tank_attack_2",
+      "breaker_attack_2",
+      "giant_slam_2"
+    ]
+  },
+  {
+    "label": "death_0",
+    "names": [
+      "walker_death_0",
+      "runner_death_0",
+      "tank_death_0",
+      "breaker_death_0",
+      "giant_death_0"
+    ]
+  },
+  {
+    "label": "death_1",
+    "names": [
+      "walker_death_1",
+      "runner_death_1",
+      "tank_death_1",
+      "breaker_death_1",
+      "giant_death_1"
+    ]
+  },
+  {
+    "label": "death_2",
+    "names": [
+      "walker_death_2",
+      "runner_death_2",
+      "tank_death_2",
+      "breaker_death_2",
+      "giant_death_2"
+    ]
+  },
+  {
+    "label": "death_3",
+    "names": [
+      "walker_death_3",
+      "runner_death_3",
+      "tank_death_3",
+      "breaker_death_3",
+      "giant_death_3"
+    ]
+  },
+  {
+    "label": "death_4",
+    "names": [
+      "walker_death_3",
+      "runner_death_3",
+      "tank_death_3",
+      "breaker_death_3",
+      "giant_death_4"
+    ]
+  },
+  {
+    "label": "windup_0",
+    "names": [
+      "walker",
+      "runner",
+      "tank",
+      "breaker",
+      "giant_windup_0"
+    ]
+  },
+  {
+    "label": "windup_1",
+    "names": [
+      "walker",
+      "runner",
+      "tank",
+      "breaker",
+      "giant_windup_1"
+    ]
+  },
+  {
+    "label": "windup_2",
+    "names": [
+      "walker",
+      "runner",
+      "tank",
+      "breaker",
+      "giant_windup_2"
+    ]
+  },
+  {
+    "label": "slam_0",
+    "names": [
+      "walker",
+      "runner",
+      "tank",
+      "breaker",
+      "giant_slam_0"
+    ]
+  },
+  {
+    "label": "slam_1",
+    "names": [
+      "walker",
+      "runner",
+      "tank",
+      "breaker",
+      "giant_slam_1"
+    ]
+  },
+  {
+    "label": "slam_2",
+    "names": [
+      "walker",
+      "runner",
+      "tank",
+      "breaker",
+      "giant_slam_2"
+    ]
+  }
+]

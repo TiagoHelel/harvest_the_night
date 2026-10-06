@@ -1,0 +1,107 @@
+{
+  "original_enemy_sources_unchanged": 80,
+  "original_farmer_sources_unchanged": 72,
+  "output_pngs_reproducible": 306,
+  "renderer_checks": 1530,
+  "renderer_failures": 0,
+  "actual_pose_strips": 76,
+  "actual_farmer_walk_crops": 128,
+  "full_FHD_scenes": 4,
+  "runtime_integrated": false,
+  "gif_frames": {
+    "attack-day-night.gif": {
+      "frames": 4,
+      "durations_ms": [
+        100,
+        100,
+        100,
+        600
+      ],
+      "canvas": [
+        1680,
+        1200
+      ]
+    },
+    "death-day-night.gif": {
+      "frames": 6,
+      "durations_ms": [
+        120,
+        120,
+        120,
+        120,
+        120,
+        600
+      ],
+      "canvas": [
+        1680,
+        1200
+      ]
+    },
+    "farmer32-all-eight.gif": {
+      "frames": 8,
+      "durations_ms": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "canvas": [
+        1920,
+        600
+      ]
+    },
+    "idle-day-night.gif": {
+      "frames": 1,
+      "durations_ms": [
+        700
+      ],
+      "canvas": [
+        1680,
+        1200
+      ]
+    },
+    "slam-day-night.gif": {
+      "frames": 4,
+      "durations_ms": [
+        100,
+        100,
+        100,
+        600
+      ],
+      "canvas": [
+        1680,
+        1200
+      ]
+    },
+    "walk-day-night.gif": {
+      "frames": 4,
+      "durations_ms": [
+        120,
+        130,
+        120,
+        130
+      ],
+      "canvas": [
+        1680,
+        1200
+      ]
+    },
+    "windup-day-night.gif": {
+      "frames": 4,
+      "durations_ms": [
+        200,
+        200,
+        200,
+        600
+      ],
+      "canvas": [
+        1680,
+        1200
+      ]
+    }
+  }
+}
