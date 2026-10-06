@@ -1,0 +1,68 @@
+Work in C:\Users\Helel\Documents\repos\harvest_the_night.
+
+Use all existing non-character assets shown in this gallery alongside the
+selected32px blue farmer. Read the repository instructions and current working
+tree first. Preserve concurrent changes. This is a direct art integration/audit
+request, not authorization to run unrelated backlog tasks or remake the art.
+
+Gallery and complete inventory:
+C:\Users\Helel\Documents\repos\harvest_the_night\implementation\fhd-assets\pilots\2026-10-06\32px-review
+
+Read README.txt, contract.json and checks.json. contract.json lists every PNG's
+repository-relative path, current SHA256, native dimensions and available source
+recipe information. These paths point to the actual transparent runtime PNGs
+under sprites/, not to copies inside the gallery folder. Join each entry.path
+to the repository root and verify its hash before using it. There are320 files:
+166 buildings/defenses,27 trees/animals/objects,10 interior/furniture,14 crops,
+28 terrain,26 effects including contact shadow,49 interface assets. Farmer poses
+and all enemies are excluded from this inventory.
+
+These existing environment assets already have the detail density that matches
+the selected32px farmer: one native world-art pixel becomes4 physical screen
+pixels at FHD1920x1080. This does NOT mean that every object should fit a32x32
+canvas or be reduced to32 pixels tall. Keep the existing native canvases and
+physical proportions of trees, houses, furniture, animals, crops and defenses.
+Do not downsample these PNGs again or bake the gallery's4x display enlargement
+into the source files. Keep nearest filtering and the current logical viewport,
+camera, map, placement, collisions and game rules. UI9-patch pieces and icons
+must retain their existing layout semantics, not become enlarged world props.
+
+The PNGs are already runtime assets. Audit their existing use and ownership;
+retain correct bindings and integrate any required missing bindings through the
+normal source-owned pipeline. Do not create duplicate sprite sets or replace
+working integrations just to claim an import. Use assets/art_source/manifest.json,
+assets/art_source/ownership.json, tools/import_art.py and the appropriate legacy
+generator for each asset. Keep original sources, palette, alpha and provenance.
+Do not manually overwrite generated metadata or allow later rebuilds to revert
+the selected art. The gallery inventory is a snapshot, not a substitute for the
+production ownership registry. If a hash differs due to concurrent work, inspect
+the newer change before deciding; never overwrite another worker's work blindly.
+
+Use assets in their intended roles: upgrades and firing/damaged/destroyed states
+are conditional variants; wall/fence modules and building slices assemble their
+structures; the terrain atlas is derived support art. Do not place all320 files
+as separate decorative objects or show growth/damage states indiscriminately.
+Preserve source-owned effects, actual event timing, tree/animal ambient shaders,
+fireplace flame animation, nightstand lamp glow and the existing interior layout.
+The gallery displays static unlit source frames; its presentation does not replace
+the real game's animation or lighting logic.
+
+For the chosen farmer and current left/right zombie behavior, also read:
+C:\Users\Helel\Documents\repos\harvest_the_night\implementation\fhd-enemies\pilots\2026-10-05\16px-review\CLAUDE-32PX-PROMPT.txt
+Reuse any already completed integration from that handoff. Do not bring in16px
+farmer or enemy comparison variants, rejected diagonal trials, or sprites cut
+from screenshots/GIFs. No new AI generation, recoloring or wholesale remake is
+needed for this task.
+
+Godot is installed at C:\Users\Helel\Documents\godot. Run required ownership,
+raster/import and gameplay checks appropriate to actual changes; verify offline
+rebuild reproducibility and unchanged deterministic rules. Review real FHD
+day/night scenes showing terrain, tree/animals, crops, houses/stations, defense
+states/effects and the furnished interior alongside the32px farmer. Check scale,
+pixel filtering, foot/ground pivots, occlusion and animations. Do not claim that
+the static browser gallery proves gameplay behavior.
+
+Finish the requested scoped integration/audit, show actual in-game captures and
+report which bindings changed versus which were already correct. Append both
+implementation journals with validation and any pre-existing failure. Commit
+only your changes, preserving unrelated work. Do not push, deploy or publish.

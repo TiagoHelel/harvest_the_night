@@ -12084,3 +12084,15 @@ search(tree ->2 matches),2x view and4x restoration checked visually.
 Saved browser-review.png and checks.json. No gameplay changes or full-engine
 test rerun for an isolated gallery. No new top-level directory, backlog change,
 push or automation; concurrent core/project edits preserved.
+
+
+### 2026-10-06 — Complete asset handoff for Claude
+
+Saved32px-review/CLAUDE-ALL-ASSETS-PROMPT.txt in the non-character gallery.
+The requested handoff points to all320 runtime PNG paths and their inventory,
+retains native dimensions/shared4px FHD density, source ownership and intended
+state/module roles, and references the existing32px farmer handoff. It requires
+audit of already integrated art, scoped missing bindings, actual FHD review
+and appropriate validation, without duplicate imports or new generation.
+Validated all320 inventory paths and the referenced farmer handoff exist.
+Text-only change; no production edits or gameplay tests.
