@@ -17,8 +17,11 @@ extends Node2D
 ##
 ## FHD art: the reviewed blue walk, a ~64px body on an 80x80 source canvas,
 ## drawn at half scale over the unchanged 16px grid. At 1920x1080 a tile is
-## 64 screen pixels and one authored pixel is two, so the farmer stands 128
-## pixels tall - the height of Stardew Valley's 16x32 farmer at its 4x scale.
+## 64 screen pixels, so the farmer stands 128 pixels tall - the height of
+## Stardew Valley's 16x32 farmer at its 4x scale. Since 2026-10-06 the frames
+## carry the chosen "32px" detail: each art pixel is a 2x2 block of the
+## canvas, four screen pixels square, like the zombies, the tool poses and
+## the rest of the world (`detail_wh` in tools/import_art.py).
 ##
 ## **The node sits at the feet and the sprite is offset up and left**, rather
 ## than the node sitting at the sprite's corner, because y-sorting uses the

@@ -3220,3 +3220,22 @@ audit of already integrated art, scoped missing bindings, actual FHD review
 and appropriate validation, without duplicate imports or new generation.
 Validated all320 inventory paths and the referenced farmer handoff exist.
 Text-only change; no production edits or gameplay tests.
+
+### 2026-10-06 — 32px farmer detail integrated
+
+Executed CLAUDE-32PX-PROMPT.txt. New importer recipe `detail_wh` (NEAREST to
+the grid and back, same canvas): the 88 farmer locomotion entries use [40, 40],
+i.e. the review's 80 to 40 to 80 sampling, exact source colours, binary alpha,
+80x80 / pivot (40,72) / draw scale 0.5. Sources: the unchanged
+walk-blue/frames (64) and idle-blue-grounded/frames (8 poses, 24 slots).
+Outputs are pixel-identical to farmer32/runtime-80 for all 88 (file hashes
+differ only by PNG encoder; the manifest's output_sha256 is the importer's).
+Ownership: farmer_density.py + both promoter checks reject the 64px source,
+the 16px variant and a missing recipe. Work/fishing/reaction art (48x48 at
+scale 1.0) already draws 4 px per art pixel and was left as authored; it is a
+stockier legacy drawing (~120 px vs 128 px) - a design gap, not a density one.
+Enemies unchanged; no 16px enemy or farmer variant promoted.
+Validation: verify 55/55 PASS, hashes unchanged, import_art rerun 0 written;
+real-renderer FHD review 4,955 checks / 0 failed, 63 pictures + 6 GIFs in
+implementation/shots/farmer32-1080/ (idle feet exactly on the contact in all
+eight directions, day and night).

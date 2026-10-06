@@ -8,11 +8,16 @@ User request, 2026-10-05: integrate the walking sprites of
 `palette-variants/blue/frames`, blue only, preserving size, alignment and
 frame order, with the farmer as tall as Stardew Valley's on a 1920x1080 screen.
 
-* **Size.** Every 80x80 native frame is copied unchanged (all 33k source
-  colours, binary alpha) and drawn at 0.5 of the 480x270 viewport, so one
-  authored pixel is 2x2 screen pixels at 1920x1080. The farmer is ~64 native
-  pixels tall: 32 logical pixels, two 16px tiles, 128 screen pixels - the
-  height of Stardew Valley's 16x32 farmer drawn at its 4x scale.
+* **Size.** Every 80x80 native frame keeps its canvas and is drawn at 0.5 of
+  the 480x270 viewport. The farmer is ~64 canvas pixels tall: 32 logical
+  pixels, two 16px tiles, 128 screen pixels - the height of Stardew Valley's
+  16x32 farmer drawn at its 4x scale.
+* **Detail (2026-10-06).** The owner chose the "32px" detail of
+  `fhd-enemies/pilots/2026-10-05/16px-review` (farmer32): the importer samples
+  each source 80 -> 40 -> 80 NEAREST (`detail_wh`, see ../farmer_density.py),
+  so one art pixel is 4x4 screen pixels at 1920x1080 like the zombies and the
+  rest of the world. Exact source colours, binary alpha; the full-detail
+  sources are kept as they were.
 * **Alignment.** One ground pivot (40, 72) for all 64 frames. No frame is
   re-registered, so the reviewed bob and sway are what the game shows.
 * **Order.** Files 01..08 become frames 0..7, in the reviewed 10 FPS cycle.
@@ -41,6 +46,8 @@ sys.path.insert(0, str(ROOT / "tools"))
 import import_art  # noqa: E402
 sys.path.insert(0, str(HERE.parent / "idle-grounded-review"))
 import promote_idle  # noqa: E402
+sys.path.insert(0, str(PILOT))
+import farmer_density  # noqa: E402
 
 REVIEW = HERE / "blue" / "frames"
 SOURCES = ROOT / "assets/art_source/player-fhd/walk-blue/frames"
@@ -140,6 +147,9 @@ def build_contract():
         "draw_scale": DRAW_SCALE,
         "native_body_height": [63, 65],
         "screen_height_1080p": "about 128 px: two 64px tiles, as Stardew Valley's 16x32 farmer at 4x",
+        "detail_wh": farmer_density.DETAIL_WH,
+        "detail_review": file_entry(farmer_density.REVIEW_CONTRACT),
+        "screen_detail_1080p": "4x4 physical pixels per art pixel: the 32px farmer chosen on 2026-10-06",
         "walk_seconds": WALK_SECONDS,
         "idle_seconds": IDLE_SECONDS,
         "idle_slots": IDLE_SLOTS,
@@ -165,15 +175,16 @@ def walk_entry(frame, contract_hash):
         "id": "actors/" + frame["id"], "owner": "raster",
         "source": frame["source"], "source_sha256": sha(source.read_bytes()),
         "crop_xywh": [0, 0, *CANVAS], "canvas_wh": CANVAS, "pivot_xy": PIVOT,
-        "content_anchor_xy": PIVOT, "content_scale": 1.0, "draw_scale": DRAW_SCALE,
+        "content_anchor_xy": PIVOT, "content_scale": 1.0,
+        "detail_wh": farmer_density.DETAIL_WH, "draw_scale": DRAW_SCALE,
         "alpha_threshold": 128, "palette": import_art.EXACT_SOURCE,
         "animation": frame["animation"], "frame": frame["frame"],
         "seconds": WALK_SECONDS, "loop": True,
         "output": "sprites/actors/%s.png" % frame["id"],
         "prompt": frame["prompt"]["path"], "prompt_sha256": frame["prompt"]["sha256"],
-        "references": references(frame, contract_hash),
+        "references": references(frame, contract_hash) + farmer_density.references(frame["source"]),
         "tool": "built-in ImageGen", "generation_task": "fhd-walk-blue",
-        "approval": "Blue walk integrated at user request on %s" % DATE,
+        "approval": "Blue walk integrated at user request on %s; 32px detail chosen 2026-10-06" % DATE,
     }
     entry["output_sha256"] = import_art.sha(import_art.png(import_art.render_source(entry)))
     return entry
@@ -191,11 +202,6 @@ def owned(entry):
     return entry["output"].startswith("sprites/actors/") and entry["animation"].startswith(FAMILIES)
 
 
-def pixels(path):
-    with Image.open(path) as image:
-        return image.convert("RGBA").tobytes()
-
-
 def check(contract, content, entries):
     assert CONTRACT.read_bytes() == content, "Contract differs from the reviewed blue frames"
     for frame in contract["frames"]:
@@ -206,11 +212,13 @@ def check(contract, content, entries):
     wanted = {e["id"]: e for e in entries}
     assert present == wanted, "Runtime locomotion ownership/geometry drift: %s" % sorted(set(present) ^ set(wanted))
     for entry in entries:
-        origin = ROOT / (entry["source"] if "source" in entry else wanted[entry["input"]]["source"])
-        assert pixels(ROOT / entry["output"]) == pixels(origin), ("runtime pixels differ from source", entry["id"])
+        # The reviewed 32px sample of the full-detail source, never the source
+        # itself (64px detail) nor the 16px comparison variant.
+        farmer_density.check_runtime(entry)
     promote_idle.check()
-    print("FHD RUNTIME: blue walk, 8 directions x %d frames + 8 grounded idle poses; exact source pixels, "
-          "80x80 canvas, pivot (40,72), 0.5 draw scale (two tiles, 128px at 1080p)." % FRAMES)
+    print("FHD RUNTIME: blue walk, 8 directions x %d frames + 8 grounded idle poses; 32px detail "
+          "(80->40->80 NEAREST, exact source colours, 4x4 screen px per art px), 80x80 canvas, "
+          "pivot (40,72), 0.5 draw scale (two tiles, 128px at 1080p)." % FRAMES)
 
 
 def main():

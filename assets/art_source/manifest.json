@@ -85,6 +85,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -108,14 +112,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/down/01.png",
+          "sha256": "6038e82323b4c771c1d75472e20e781070129dafd32dbccbbb61c81821028d81",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "81a3205960796ad795a7c2c0eee4efdac6fb228a81d379321c7ad91f7361edcb"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "ff9909951ec07d3f96f9ff4ea162efb4e6707dd5f237a3c2a49ea664478e89dc"
     },
     {
       "id": "actors/walk_south_1",
@@ -141,6 +155,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -164,14 +182,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/down/02.png",
+          "sha256": "29f41e882900007abd73a0e663773edf3b5fa90289dd9657f97a98387900a95f",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "d22042411926daa6a9a3d93eaab5653e816b163772a53759e53204b1ac8fde9b"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "292234f1fef7958736e030643f7061e7b1a58e8fb27d09383869d04745a775df"
     },
     {
       "id": "actors/walk_south_2",
@@ -197,6 +225,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -220,14 +252,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/down/03.png",
+          "sha256": "767bec414058e695b5f807917fcea7fba52c0b706cd8203db39e5359d0949d0a",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "70f6cb233acffaccb4984e17d6d291eb8d56d46f47a950bb2bd9fddddb169437"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "6d8a7a0abb71eccbd81627bc3c31948e1b67edf151a169905291cd72f2411779"
     },
     {
       "id": "actors/walk_south_3",
@@ -253,6 +295,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -276,14 +322,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/down/04.png",
+          "sha256": "5f45f45069ab74ee7f23eaf60125920e6dcefe1debdda0332bc1a4ddcd212e48",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "6bd68aadef62f14d9bc0116a980945df82fa3959be99a649421b13409a46f08c"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "efd55276887dc266f3b56ae0ceeac9e3d6153c0a368320007c868e7b44bd2ac3"
     },
     {
       "id": "actors/walk_south_4",
@@ -309,6 +365,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -332,14 +392,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/down/05.png",
+          "sha256": "4554b7a205659d84283a93c4b2fafc7deed43e8fae0f269c8ef8ed21956f8de4",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "50f3776d5fa73fafa01ec08099fcd1edb2772ef0a16758326085c52c3399f002"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "d682f15c7d85b7396b1764b470266042460b494806091db765ddd2532fddb8ab"
     },
     {
       "id": "actors/walk_south_5",
@@ -365,6 +435,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -388,14 +462,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/down/06.png",
+          "sha256": "6abb91c6ac32082801b8a32a7a633f02810b6713318c5a1fbe72c22dbbfbe1c1",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "a97eda36a3049ae18afd6fb790df59058fa773296237221fcc0a11f4e715413e"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "b0000405c9445b123c5ed6a527b0fdacb25f574ce5b862216b93268f381a87f6"
     },
     {
       "id": "actors/walk_south_6",
@@ -421,6 +505,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -444,14 +532,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/down/07.png",
+          "sha256": "ca142c8a241c0944990a0d75bf5d3b795acf2b8cf4a683e48c6ca17ef26ce89b",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "e2a8b7347319a1e6d95763d76eb87405f834871cb4d36735c6574ee08961c6b4"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "0b6b3a0476e5af82b703e2b11b5f2bb031a4da16148055ee8e13ae6f39ab49b8"
     },
     {
       "id": "actors/walk_south_7",
@@ -477,6 +575,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -500,14 +602,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/down/08.png",
+          "sha256": "b9edd52fdc091ed74e759291c6e7945205fe1776cea98b048f49849b697addf5",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "c9eff2711718c6616f7e7aa25ddb79d597cbce97f18ed1237a51d2f4c1122708"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "51c844463242ca19f7680c2985c5f69c7b7bd994a70dd6a7d07c8ef559aa8444"
     },
     {
       "id": "actors/walk_east_0",
@@ -533,6 +645,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -556,14 +672,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/right/01.png",
+          "sha256": "c57dbbd774935472a08dcb8eab07aaf8f33ad353e0b140b9e641edd0e1e1d287",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "af8bb874dfdfc469b77df634d289900477cb2429d074fe3550e0ad4675996ecb"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "9294e9821fb2b12bfcf67236f7c8c6711b1b6d2c154b7c960cdfe18ad2cc6a8c"
     },
     {
       "id": "actors/walk_east_1",
@@ -589,6 +715,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -612,14 +742,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/right/02.png",
+          "sha256": "b4f79e76c2226c89d15bee2cb646336a7dcf074b3bd627430d5c0298946a3ee5",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "a1c17c9726732681535c0ca153bc112e0313280ac620fcdddc096e693f8f2a15"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "c4d7fbccc8183b0af5ab3d43ad155cbf646b0f3629a4a0148bfd07554b1c516e"
     },
     {
       "id": "actors/walk_east_2",
@@ -645,6 +785,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -668,14 +812,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/right/03.png",
+          "sha256": "6cbb6fcf0c9c753a98a1bd9a2fab3c6c2711cb4ee362a1a212961d1da51b7f6a",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "c64eccc48691cafb1dc1f0cdc2707c48fe87fe7a2f999b6aed49c546b49f97d7"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "9483024d84658712d2d53f5d4a621f22b1deda8989c81cbf8ebc4373d25eb759"
     },
     {
       "id": "actors/walk_east_3",
@@ -701,6 +855,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -724,14 +882,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/right/04.png",
+          "sha256": "a3de489a7dfff3eb67bff5e12655c6d0275f9a50ec1e829ab8e9967952c6d2d6",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "153540fc916c491e5ece44c9b30a6b645a4ed4d843a115c38d7c29946903d057"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "f7e3982a94398f4c414ea8ba0f57dde4aa6661b40052e553973093ac9584c69f"
     },
     {
       "id": "actors/walk_east_4",
@@ -757,6 +925,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -780,14 +952,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/right/05.png",
+          "sha256": "522b1c4ef684c4e101f89e060cb6610a343b6d833f69265609e3f5bb5dea8150",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "f49576e833b19b5b88e4094b94a89ed022e0ed3c6320f383826ff3e04a89b829"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "bbf96182934c4c2122f843f40abae04abd37933e704fac702b6dd68d0d8a5f61"
     },
     {
       "id": "actors/walk_east_5",
@@ -813,6 +995,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -836,14 +1022,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/right/06.png",
+          "sha256": "8a2dc77730598b3940aaeb57ecf3e3fea9f5b3eeb0e855f219cb6d3b6dfe6690",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "02c5e9e0729388e68d4dd78f32290452fc886ec871a07ba89eafae4567aee61e"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "1fc43bf7c6242beaa31332d7be9eb19a6ccbc26a3bcd3e4843def737ec91cd04"
     },
     {
       "id": "actors/walk_east_6",
@@ -869,6 +1065,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -892,14 +1092,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/right/07.png",
+          "sha256": "b71e939b2505d6dbc41b86bce73bd3eaad09c3565333d8289cd4944a2c07b3f9",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "3e4381f5ff36f288c5fa41de57dfc2fd659e4d6223e73c50bae564e03278ef0c"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "3624772c27e06d34f24ab68fd15c5440d54b1964b1ea8a6826834e52cbbe7c92"
     },
     {
       "id": "actors/walk_east_7",
@@ -925,6 +1135,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -948,14 +1162,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/right/08.png",
+          "sha256": "90fefadeddc377aa8387891faf4baccab70d9fba7999ecb9a38a22fb2652d13d",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "3cc2c143c2988e6e8febbaa93f329e177ed3f25f174e3b24ce22d6e7bae9be01"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "f2d5830cc125effbecf1b75c931e1dde06f5e58ac358dba2747be43344131c89"
     },
     {
       "id": "actors/walk_north_0",
@@ -981,6 +1205,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -1004,14 +1232,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/up/01.png",
+          "sha256": "1d29d07f6651ecbe1bc0c4cfc5368763e9147a881a4c657c9b1207f72004ff95",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "c7f200d642bcceb81aaf7e7224a63a969b25f0c2cdcbeb6702f6fc8437b4406d"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "9cd16457742531281eb3c11fbff3748e095f4df2a64ca48c824433b9493be337"
     },
     {
       "id": "actors/walk_north_1",
@@ -1037,6 +1275,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -1060,14 +1302,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/up/02.png",
+          "sha256": "18c765528ce60691c042fa3258648bab390732b6829f8ca762d3a394b9c8c5db",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "ece202f12d39ec14dfd09dafa2ca7343f81ee0826b320ed209ede417dda2e628"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "f33a7d5985588f825fafe790ca01b758f8065350b39d0a74bfb377dfa4a1e649"
     },
     {
       "id": "actors/walk_north_2",
@@ -1093,6 +1345,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -1116,14 +1372,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/up/03.png",
+          "sha256": "2d3a8df165bc4b8dd0e85ae44be5ae6a6bf0eb2eefac0e8c406f8fbb7e668a99",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "ea85b5ed5606b178bc57e169170ddcf4b88c727acee960330062993b2f7c6fbc"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "41119cc5b6c70765b90b2f71e767a4bf9e5dbba51d0b17d3afa536968d887b7a"
     },
     {
       "id": "actors/walk_north_3",
@@ -1149,6 +1415,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -1172,14 +1442,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/up/04.png",
+          "sha256": "77dd4dc04c7b3d9aab1a5cf954b646285c54c1cf8b2542a4176d2929eff49f64",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "14e5478f38a6cfebbdf45e49924b3ad4e2979e39798935162e72243640e48e27"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "c39b35ff337c6faccae138b39d22c53c248a7212c19d82b7b72c97e6deb39a5b"
     },
     {
       "id": "actors/walk_north_4",
@@ -1205,6 +1485,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -1228,14 +1512,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/up/05.png",
+          "sha256": "5e4ceacbb03515264e4aefdd6ace07143ed089685d43eb506d1eb360f7b6fcc9",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "9592c3408098fb83908a5db706a70d503755acaf3a440cbbf3c5c3f5323cea0b"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "7ecb0cc884fbd362705551da44d6b3e8704d62fa28e600df14982292f7902eb9"
     },
     {
       "id": "actors/walk_north_5",
@@ -1261,6 +1555,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -1284,14 +1582,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/up/06.png",
+          "sha256": "ecc6e53dc16eaf4dac479de62d9420691ed7d97c65b1562c883c4a48eb9a881c",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "5c0778f26baaf33f37d490b3eff642d0daea3da5cecb8311e16437f222aaf0fd"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "5301286757533277d4f30e29e7710fbdedbcddba65679b1b8253c32ab257a735"
     },
     {
       "id": "actors/walk_north_6",
@@ -1317,6 +1625,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -1340,14 +1652,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/up/07.png",
+          "sha256": "7b9ef2f6b85254ffb20eafce7a0bd78b4db7fc54e20ec8cbfcec1bd145bb658e",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "c2e902fc0c62171aafc1b1cf48cccb5af93776ce7472d176b1c699b6af8c3e6c"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "69b34f71b84902e24184ab3b70f21db49cde3c839823b3f54c3f2f3c3b3079d1"
     },
     {
       "id": "actors/walk_north_7",
@@ -1373,6 +1695,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -1396,14 +1722,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/up/08.png",
+          "sha256": "5c8dd82e9ea424d1f7efba74e0c39779f3f6bf0e014adaba4d324ecbcc829d12",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "28bf92b959e5750c61a5038fda3d362598d0ec894621871a4a39800ab880ff8d"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "b98c936de792ce25e32d345a9ced832809fd94d1b13c39d4cec12e83de0dece4"
     },
     {
       "id": "actors/walk_west_0",
@@ -1429,6 +1765,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -1452,14 +1792,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/left/01.png",
+          "sha256": "dc8b477c55263ec4b4d14d0df9247bb64479cf0de55c939bdbea5f5b3d843b18",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "49b74be78d00033d1fd8b2fefbfc2aa3a560d4ea5a103759ebdb5705804afcab"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "0408076666fdb17427da4ccf8daf1fd2da1d9e0ed4a5fdb03655c653d0bc1786"
     },
     {
       "id": "actors/walk_west_1",
@@ -1485,6 +1835,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -1508,14 +1862,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/left/02.png",
+          "sha256": "ed2f63b3b9b7f7701dbf8475bf06790f9c0d0f55402797c41a0a6f446eac2153",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "f97e52ab1e7d3f804e455e82182c2808631e2c163df860ed784cb2b2b9d931ce"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "b4b81f145659e1d160777f1381d198783d1ce8fbc5fab1ee20b53c60be5c6bd8"
     },
     {
       "id": "actors/walk_west_2",
@@ -1541,6 +1905,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -1564,14 +1932,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/left/03.png",
+          "sha256": "28f1875f3fa3e7a2f1e5be01fd3fe59b0485860802f4f11a63a9e87d277ce604",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "e157d911a62afb049ab611f42a3f315c065adba5a01e1dc982cbda9d0aced09f"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "cfe07c560d672cba0f76ce98295fb0b405e0e288f477a6a19313a70d4aaed72d"
     },
     {
       "id": "actors/walk_west_3",
@@ -1597,6 +1975,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -1620,14 +2002,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/left/04.png",
+          "sha256": "ec06262e47352982f77c7de023c07c9f35f5d33fcff5f5af0b545bc58af14ea5",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "84e0d1b321e45140e66d42c709025ab62af1fc2637565edaf825f9239543f6fb"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "f1ffeb21921374199a8949d9e0741a0b2c71758c626bff64f49523b324fa42c5"
     },
     {
       "id": "actors/walk_west_4",
@@ -1653,6 +2045,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -1676,14 +2072,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/left/05.png",
+          "sha256": "e6ac359911b32e60924f1aef57913bf584d8ab4a1d960a5daf2e9bb21fd51358",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "a4de4bc49fc63adf134086cccee1720149c5bde79c7aec162dc668dcf084e4fd"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "eca47601d8063b51a39873dcde9087e46656f4f2c32c0c008217a217c658dd7e"
     },
     {
       "id": "actors/walk_west_5",
@@ -1709,6 +2115,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -1732,14 +2142,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/left/06.png",
+          "sha256": "de751de7736038834c61fb3601596efc9ead1ce4ab267d23a0d79d8a0c8c7f94",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "8803bbfebd75fdbfbe377fa4227038294542a3bcedbb3690a31b14a9d2751037"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "0658d092b96c7073ca339ae20cde49fa15d306a0a34830acaa47bed16e3ec8cd"
     },
     {
       "id": "actors/walk_west_6",
@@ -1765,6 +2185,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -1788,14 +2212,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/left/07.png",
+          "sha256": "cc98df488dbc0f01c4eceabeb9cb041f48035e5ba84eec916b5e7c869b4167e5",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "35336d703b60f05015af2add6e9bc170bb6756d94c93cc625ae9e81179bbb899"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "60d415b0cf55fff4125a0090f467d9857d4a5d89ae504c2026c8bd9f441d762b"
     },
     {
       "id": "actors/walk_west_7",
@@ -1821,6 +2255,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -1844,14 +2282,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/left/08.png",
+          "sha256": "3a3166609aab4df9f874d5cb811e5a154e35199edec533e10a8bf8b6ce46ba52",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "f7d4a3d283a51520ca5b596080caf2231dd7ed5c7f723c6fc737000de35af882"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "96ac18769f0f99422e03a47caa3bb7f70a67c09d50f888c0a5e1fff6e4fb222d"
     },
     {
       "id": "actors/walk_south_east_0",
@@ -1877,6 +2325,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -1900,14 +2352,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/down-right/01.png",
+          "sha256": "2339fccb57737753a5738aa6a0c85eaef52aadf6bee6c6b2a4aa0773357cf19c",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "da6a4a9d0e6c53888dc08b1b239255e4f14a831ba79496a0a3d7904e2cc02177"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "fee9d6e515a1ef0d3908804c82177fd0b2c6c80a97d7682df8d6f70e594b8bab"
     },
     {
       "id": "actors/walk_south_east_1",
@@ -1933,6 +2395,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -1956,14 +2422,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/down-right/02.png",
+          "sha256": "010a8c643ba2e7c0f5c82a6c1de7eba1b90ea41999e95819236739223cb3da53",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "e38a1c397f3d752d28f11aacb7133483c1cf91e3ea1fcf509057b6f9c2afb5a9"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "9c3f8ba40408bd744a7ca2c9525acbec50f2643c00d4b26c1dad60c9b7e626c6"
     },
     {
       "id": "actors/walk_south_east_2",
@@ -1989,6 +2465,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -2012,14 +2492,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/down-right/03.png",
+          "sha256": "e9b2d06668a74224e3d3a2a9c9eba1d7bd59d72a87664dd73443e3f93d255b84",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "062a09458aa15b2ed04c725797b6c4575ac5bfce8159dd0ee41b06591a435443"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "fb1b2bbfea77f8b9f615823b7b6e8bfba0fe32e41a7d073cb13e2b8cde9375b5"
     },
     {
       "id": "actors/walk_south_east_3",
@@ -2045,6 +2535,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -2068,14 +2562,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/down-right/04.png",
+          "sha256": "e1cc7b417f0bd5c2e2af34573f3a783d60d0f71f8a510abad251914be704efea",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "3740dbf1f2c043c54e41e0f669056cd5d3e6f12681fb9f76970260b71422048a"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "0be53192c4f1ee0b2156c8f4904ef9c558dfd5257ef81ddec0b74587c4fc58a2"
     },
     {
       "id": "actors/walk_south_east_4",
@@ -2101,6 +2605,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -2124,14 +2632,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/down-right/05.png",
+          "sha256": "016e32c4ffb8279efdbc62194ba596686ec9c896c3eda734d0b6de315d84eb37",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "f816a4743fe382415451391cec8d661bd0a17f2489b44c7ce54b8349bba9e028"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "18a82f8b1e01dbbb2a41ea6b05369f7ba9e304daebdb548b715d1b344b21d87c"
     },
     {
       "id": "actors/walk_south_east_5",
@@ -2157,6 +2675,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -2180,14 +2702,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/down-right/06.png",
+          "sha256": "8a7a672befd319026c67f2bde37e946c6aba04e93d36d3ca73bc1233e12136df",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "2abce6aba6d779da4ce9316342b2f4ec7cfd23c3ebc98101f2dd5bcbe83b5a78"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "f5cc36b9db7e61a255d0f766b85fe1eada3fb345f3f391c518949996db0cd282"
     },
     {
       "id": "actors/walk_south_east_6",
@@ -2213,6 +2745,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -2236,14 +2772,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/down-right/07.png",
+          "sha256": "b096fd7d9f511256fa3bf3bb2d99a3b2b0079371983afd7bcb68ac7f9cd70af0",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "fbb544c095026eb5029e4f448a4652bfcae415a725c9f20762e0023db6b0c531"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "2bfe5d7fa6341c2db908bbf4bb065eef99d442a975c79313a5c231a187ffe0bc"
     },
     {
       "id": "actors/walk_south_east_7",
@@ -2269,6 +2815,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -2292,14 +2842,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/down-right/08.png",
+          "sha256": "96bc9ce25e480e97698ec5df3394602849723af56b8f9a4c5e0a038b5f87b898",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "c8204bc8b2a8162d5dcac3040520b8d21ebe6b5d892f423044a96af52b7780d3"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "68ff47ce1ecc1a2e18b2ee537c7b1308f1f32f54448e58fc26d256391585da28"
     },
     {
       "id": "actors/walk_north_east_0",
@@ -2325,6 +2885,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -2348,14 +2912,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/up-right/01.png",
+          "sha256": "312529f53004d8b6ac17ac3f73ac5696a20b8ecaedc890fdfdf9d9f8ecf41abc",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "04472d077c8cfc138d03e9cbe801f8d71dbd1881c5b04d4a3c72f984295719b2"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "fc4ceccceb564cbf1f8f143c135cc4a326205d61ddf26af895c72dffc246ce06"
     },
     {
       "id": "actors/walk_north_east_1",
@@ -2381,6 +2955,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -2404,14 +2982,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/up-right/02.png",
+          "sha256": "e13a1b91e748a3aea420dfc4598163a411bb3e281c1f904c184364f569fd31d2",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "da122bf2cae3d761815c20742f8cd0797efe3ba81ada4ffe25848422db87bc7c"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "a69f7b49d9407646c1d124d49b8e605ce30d40257aef10a8ad4a2a94e1b90f1b"
     },
     {
       "id": "actors/walk_north_east_2",
@@ -2437,6 +3025,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -2460,14 +3052,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/up-right/03.png",
+          "sha256": "e5f329b7f6bd5eff514da14bab47266dc275a12662789d19b7a0071245f7d764",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "44de5c985b72e40d289815a5d30cbbcbc54fb9ffcb9385b4980fee6a8f9245ce"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "f0fedec97d56e9d54624953dc0ec6c41e96e1dae22d66cc5df87e3609c2f0243"
     },
     {
       "id": "actors/walk_north_east_3",
@@ -2493,6 +3095,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -2516,14 +3122,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/up-right/04.png",
+          "sha256": "c20e0e11be8d281c664fd9cbed8b9e3b19cae756e1ecc6b9311e33e926cd1043",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "148ddea657148fd589976591e481164a123b850c0413e0ae869432db1b6743f7"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "2ed8830344768820bc6df29b0b0b6575d699a7e20edb060bc13b7b9c2321171f"
     },
     {
       "id": "actors/walk_north_east_4",
@@ -2549,6 +3165,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -2572,14 +3192,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/up-right/05.png",
+          "sha256": "7102c51d43f873ffec0d5f2a91575183834028ee4f737b085bb929e2436d2b18",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "48a25f6f10dc2cf64d1306df1170982ac7f4481d475f0d641a8d1d2ca83cddce"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "d0ca53c4b1774fd1ceaaed2f99f4b32d8f59cc84b4306fc79461d76ab6268344"
     },
     {
       "id": "actors/walk_north_east_5",
@@ -2605,6 +3235,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -2628,14 +3262,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/up-right/06.png",
+          "sha256": "199ba6ee91ced31ab9069fe105c196daa0e2cc7d0d2e73ef509c957b335be5bb",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "907c70251b97096bbf789b33e8f1490fc1654113838e00dd702e7196c2d5b21d"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "1a74576651f9101e688e5301e788b7222da0e720e7c7a6af11ccb3d960fd0a70"
     },
     {
       "id": "actors/walk_north_east_6",
@@ -2661,6 +3305,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -2684,14 +3332,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/up-right/07.png",
+          "sha256": "173a961edfc14f1dfdd255553121677b7374173dcffed1ca253a60da10786041",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "97aee13cc66b8f88666bd2f256664c684f01a852b937e4f758f22ff70af5202a"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "822d729336b72d930d957d792400fb7a3df961e81c0a73909cdc099d89c4cb65"
     },
     {
       "id": "actors/walk_north_east_7",
@@ -2717,6 +3375,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -2740,14 +3402,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/up-right/08.png",
+          "sha256": "c024f33db92405575efc83c485194d7b5a41f0984650b49b52d124e9d30a05c2",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "8ac10a878f5dd9b397a973fd95f43691d7fb2ac24e959ad5b6223bdc5161ddd8"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "fa87597748823adffa1e3d2f728f32c2213ae820febe9e5dc9c22fbb6f6e29ae"
     },
     {
       "id": "actors/walk_north_west_0",
@@ -2773,6 +3445,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -2796,14 +3472,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/up-left/01.png",
+          "sha256": "cc6352e39cdb3c77ef7de80590be9b86312d4837059c6cc0972e54c2a35290d0",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "99551db7370f7f26ad9a6cc0be75340ff1480242c7a6e006455bf58fb1a657ad"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "3f95b7030883f9d7bf3a422e3310aeebd65924d9792f62d7769cfd00739a4559"
     },
     {
       "id": "actors/walk_north_west_1",
@@ -2829,6 +3515,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -2852,14 +3542,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/up-left/02.png",
+          "sha256": "60b6eef352060a7f95f48d0c2ac0b236513767e21d9e6278c5119b1c13b30c14",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "5137c43acd6080ed5f7797ad895c2fb2f7097753146365b333fc36b17426aa72"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "b82ee3e61e38ad3a78a21f08a338237521642425843cf81c22c9bcc32919f941"
     },
     {
       "id": "actors/walk_north_west_2",
@@ -2885,6 +3585,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -2908,14 +3612,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/up-left/03.png",
+          "sha256": "c46161d19adb8a5ba731fd3ace4072b867d35a94784e63740336bbad60ab8b4c",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "1a4f0ec887d742b6c7579669a91585d0c773e27aa7e1898249976f7396502607"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "5d27623d5e0999e1aaa219c6f44c77aaa1c1451ad93e04bacc43bd2111541e2d"
     },
     {
       "id": "actors/walk_north_west_3",
@@ -2941,6 +3655,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -2964,14 +3682,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/up-left/04.png",
+          "sha256": "18f04196cb9f09d6d29f2dff5355b66a1cefb7fed48f5e2b411c201c17efd2e2",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "1220c9367189e87de5b65d078ab3f64c44d2a53adabb51d21bc85523836dfb95"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "4fddf5fc6d1b95b80a5fb4ac872ee0e239ed1c75570148d338cc33de3a581e87"
     },
     {
       "id": "actors/walk_north_west_4",
@@ -2997,6 +3725,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -3020,14 +3752,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/up-left/05.png",
+          "sha256": "cef1ae8e01e144a8f16eb3f3735c12d66bf145c2aeb841dec92790002bea1018",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "5c24842eb6017434ab8c507cb6b4fc3fa9433e72b694313016cce8922434ecc8"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "f5f7bdba516bfdf9ce7ba027f8896b692a7ff163a6572f4db05660fb3df30f7e"
     },
     {
       "id": "actors/walk_north_west_5",
@@ -3053,6 +3795,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -3076,14 +3822,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/up-left/06.png",
+          "sha256": "658becdac21b6ba6cba1265285892e8ef815822fb3c80bb7c500a0ddcdc3f3c9",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "a0804d6612faa6b53f16c519b384a4fa1594327fb329acd77e5606b54c284890"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "41037d0135f12791ffeb62145cdf44791b916c9cf70f0889160bf92a5058b8e1"
     },
     {
       "id": "actors/walk_north_west_6",
@@ -3109,6 +3865,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -3132,14 +3892,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/up-left/07.png",
+          "sha256": "d503a6410004386995246155992fc00f638900267c88f8ad052956fa46ed6617",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "c716d5b7bddaf4aa37843df57919bab34813a6cb06c28e5a80b3c6635fa457d6"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "3670d29c8c61182792ddbbcbd44bbba255846e56a0da97ca04e5e62c09745d2b"
     },
     {
       "id": "actors/walk_north_west_7",
@@ -3165,6 +3935,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -3188,14 +3962,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/up-left/08.png",
+          "sha256": "0ff457aceeb8cd32c8905de5742fd26be9fc1422d85ed49ee1d5d877a7cfee25",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "570604295a8d2ed5f41dbc6a2c4c5481f85d034568f3278b9949196ab7675714"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "bd9344a6d14983961d91f1c58423f232ddfeb75a72004cd37b732622b8b448dc"
     },
     {
       "id": "actors/walk_south_west_0",
@@ -3221,6 +4005,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -3244,14 +4032,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/down-left/01.png",
+          "sha256": "fea1d963e18f52b255a93c5dcdbf165a7bdf91793e62535b0d5916d3a61680ad",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "b9af06f9a35559b50a462b18f1065462455d51fd584150324effb8264fc45e72"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "efdda845f6f88e4eb75b39602240894fc1c0aa1114fe38134a79097bcc25a965"
     },
     {
       "id": "actors/walk_south_west_1",
@@ -3277,6 +4075,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -3300,14 +4102,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/down-left/02.png",
+          "sha256": "f5692cc0a70099cb77f9a63bc494870c083a2f6569f2bb217c934640040b0b10",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "322a34dfac3d93d6444c1c2716cbf69085842e4e21f462184422c196fb5652a7"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "f63666b0a5a21ebef82c8c1d3a04207a78f97bebc32b2f1967abb4e5ebe99188"
     },
     {
       "id": "actors/walk_south_west_2",
@@ -3333,6 +4145,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -3356,14 +4172,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/down-left/03.png",
+          "sha256": "714d32825c313519a37543c5d0d4b43765cf31e3729664dee66ff9a58a7eaaad",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "c7ed5f187c83a03e1746000cfd177c285ce02c55c0807203b477c0146505fdde"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "79d669822b79e6070e6cb90f30927cd80a26fd7d768f36d6f496119a6ea08bd2"
     },
     {
       "id": "actors/walk_south_west_3",
@@ -3389,6 +4215,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -3412,14 +4242,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/down-left/04.png",
+          "sha256": "732d077c8f9c3223a9f85301d71eb10e8d47f972eb1a68e6677f48cbee026692",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "397d4688e957b7bfbb0b865209bee82117ae232444c61cff61e97d00cddb0d39"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "4c28908e12c197c1e337e88fe52fbc772a9d7656b98b207c11d5a8ad159a0d4a"
     },
     {
       "id": "actors/walk_south_west_4",
@@ -3445,6 +4285,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -3468,14 +4312,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/down-left/05.png",
+          "sha256": "bbe3746493864eca7f567ed5c664c6ef5e272ef1813826b354bb70dd3cd8c30f",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "cd1a1fe8fb6be23e4f834bb5e8ee0444eef89fdef49769accf7451c1ae872dce"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "01f38ad1b1da9738b0b117f629534d5c1fd18d0ebacbb2be49ee2a4b545cc3e6"
     },
     {
       "id": "actors/walk_south_west_5",
@@ -3501,6 +4355,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -3524,14 +4382,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/down-left/06.png",
+          "sha256": "259c8297e21ef49cc22fc9927a63ee7888e79c7411288facb7652e8720edce75",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "6dc35eb6f68467aa78fb85155c2cf4a6dcdfbf324057fbefd859404294370295"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "f9b78b1095f2ae792f3c9213e43577e14205ee834bf6f5e4b43f4831c4ede0f2"
     },
     {
       "id": "actors/walk_south_west_6",
@@ -3557,6 +4425,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -3580,14 +4452,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/down-left/07.png",
+          "sha256": "80043ae9746f9ee68d3dec9fc97374293c8b3972f024518beb91962062e7bd78",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "c3b8b95e247307003e3eca295ef834a893f9f9d16c1012a1be0f792aa57d33d0"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "d1e14b713229e144e6dec3f1e54996c1b8d04af91e45b5651fe5d6dc0c82484e"
     },
     {
       "id": "actors/walk_south_west_7",
@@ -3613,6 +4495,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -3636,14 +4522,24 @@
         },
         {
           "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
+          "sha256": "6f66a2feb3c172c7b2a322cc853c99822096a3e053eb4b1cd584a756a6a9475e",
           "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/walk/down-left/08.png",
+          "sha256": "6b5447a8dd4beba9d8e4d74bc468fdbd9e54f9323c50d0003e32ada4bc1f00d5",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-walk-blue",
-      "approval": "Blue walk integrated at user request on 2026-10-05",
-      "output_sha256": "1b8e0a68ea9abd05902e0174b7bb488519b229984378a9c338385af29cf87913"
+      "approval": "Blue walk integrated at user request on 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "03a7407bcff6bda3609a356203a62f7b972b2cfb819dd959fcfd2e390f9c01fe"
     },
     {
       "id": "actors/idle_south_0",
@@ -3669,6 +4565,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -3709,12 +4609,22 @@
           "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/runtime-idle-contract.json",
           "sha256": "89ff7e6197d616815a0172b1c650c10f67c0f10f4bd204e2a8f0edb5837a348c",
           "role": "Dedicated grounded idle geometry and approved walking pixel invariance"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/idle/down.png",
+          "sha256": "5a8039aa4fc321d7cfd979a8a6ff35a5e7e0157f60d923d743f5d4bb047d6483",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-idle-grounded",
-      "approval": "User-requested raised-foot idle fix; 2026-10-05",
-      "output_sha256": "d4533958866b0ffc08ba443ee026393214adcd9b80fc475c5e351d244974d241"
+      "approval": "User-requested raised-foot idle fix; 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "3349a44435b0f4b02033de505df056395c876c1b00e99db0eda1393370f2afe2"
     },
     {
       "id": "actors/idle_south_1",
@@ -3740,6 +4650,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -3780,12 +4694,22 @@
           "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/runtime-idle-contract.json",
           "sha256": "89ff7e6197d616815a0172b1c650c10f67c0f10f4bd204e2a8f0edb5837a348c",
           "role": "Dedicated grounded idle geometry and approved walking pixel invariance"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/idle/down.png",
+          "sha256": "5a8039aa4fc321d7cfd979a8a6ff35a5e7e0157f60d923d743f5d4bb047d6483",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-idle-grounded",
-      "approval": "User-requested raised-foot idle fix; 2026-10-05",
-      "output_sha256": "d4533958866b0ffc08ba443ee026393214adcd9b80fc475c5e351d244974d241"
+      "approval": "User-requested raised-foot idle fix; 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "3349a44435b0f4b02033de505df056395c876c1b00e99db0eda1393370f2afe2"
     },
     {
       "id": "actors/idle_south_2",
@@ -3811,6 +4735,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -3851,12 +4779,22 @@
           "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/runtime-idle-contract.json",
           "sha256": "89ff7e6197d616815a0172b1c650c10f67c0f10f4bd204e2a8f0edb5837a348c",
           "role": "Dedicated grounded idle geometry and approved walking pixel invariance"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/idle/down.png",
+          "sha256": "5a8039aa4fc321d7cfd979a8a6ff35a5e7e0157f60d923d743f5d4bb047d6483",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-idle-grounded",
-      "approval": "User-requested raised-foot idle fix; 2026-10-05",
-      "output_sha256": "d4533958866b0ffc08ba443ee026393214adcd9b80fc475c5e351d244974d241"
+      "approval": "User-requested raised-foot idle fix; 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "3349a44435b0f4b02033de505df056395c876c1b00e99db0eda1393370f2afe2"
     },
     {
       "id": "actors/idle_east_0",
@@ -3882,6 +4820,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -3922,12 +4864,22 @@
           "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/runtime-idle-contract.json",
           "sha256": "89ff7e6197d616815a0172b1c650c10f67c0f10f4bd204e2a8f0edb5837a348c",
           "role": "Dedicated grounded idle geometry and approved walking pixel invariance"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/idle/right.png",
+          "sha256": "f82926a7c175f7e8359542ebddacfd1d3f48ababd14270357621235fdb83820e",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-idle-grounded",
-      "approval": "User-requested raised-foot idle fix; 2026-10-05",
-      "output_sha256": "2f90330ddeca48197c3b38bee3dcb46a23c7bbc888c98373b12f2a68fb9cd8d8"
+      "approval": "User-requested raised-foot idle fix; 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "899341f91416aea2aa5bdcbd65a577a63670b63b7f278421b916836a8592d823"
     },
     {
       "id": "actors/idle_east_1",
@@ -3953,6 +4905,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -3993,12 +4949,22 @@
           "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/runtime-idle-contract.json",
           "sha256": "89ff7e6197d616815a0172b1c650c10f67c0f10f4bd204e2a8f0edb5837a348c",
           "role": "Dedicated grounded idle geometry and approved walking pixel invariance"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/idle/right.png",
+          "sha256": "f82926a7c175f7e8359542ebddacfd1d3f48ababd14270357621235fdb83820e",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-idle-grounded",
-      "approval": "User-requested raised-foot idle fix; 2026-10-05",
-      "output_sha256": "2f90330ddeca48197c3b38bee3dcb46a23c7bbc888c98373b12f2a68fb9cd8d8"
+      "approval": "User-requested raised-foot idle fix; 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "899341f91416aea2aa5bdcbd65a577a63670b63b7f278421b916836a8592d823"
     },
     {
       "id": "actors/idle_east_2",
@@ -4024,6 +4990,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -4064,12 +5034,22 @@
           "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/runtime-idle-contract.json",
           "sha256": "89ff7e6197d616815a0172b1c650c10f67c0f10f4bd204e2a8f0edb5837a348c",
           "role": "Dedicated grounded idle geometry and approved walking pixel invariance"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/idle/right.png",
+          "sha256": "f82926a7c175f7e8359542ebddacfd1d3f48ababd14270357621235fdb83820e",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-idle-grounded",
-      "approval": "User-requested raised-foot idle fix; 2026-10-05",
-      "output_sha256": "2f90330ddeca48197c3b38bee3dcb46a23c7bbc888c98373b12f2a68fb9cd8d8"
+      "approval": "User-requested raised-foot idle fix; 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "899341f91416aea2aa5bdcbd65a577a63670b63b7f278421b916836a8592d823"
     },
     {
       "id": "actors/idle_north_0",
@@ -4095,6 +5075,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -4135,12 +5119,22 @@
           "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/runtime-idle-contract.json",
           "sha256": "89ff7e6197d616815a0172b1c650c10f67c0f10f4bd204e2a8f0edb5837a348c",
           "role": "Dedicated grounded idle geometry and approved walking pixel invariance"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/idle/up.png",
+          "sha256": "215c13a6c8c2dfabe99af9476e309d39539b26aab12fb4dfa4fbbf6b1b79f29c",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-idle-grounded",
-      "approval": "User-requested raised-foot idle fix; 2026-10-05",
-      "output_sha256": "164bbfbc36097bca2f0ceaa1d68dd925644a4a3df74b9470324824ed9ec20711"
+      "approval": "User-requested raised-foot idle fix; 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "f2d8d7adc8cefe737e6735594aa01ec62e8eaddc3d4fc32ce6504fcb624d0a98"
     },
     {
       "id": "actors/idle_north_1",
@@ -4166,6 +5160,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -4206,12 +5204,22 @@
           "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/runtime-idle-contract.json",
           "sha256": "89ff7e6197d616815a0172b1c650c10f67c0f10f4bd204e2a8f0edb5837a348c",
           "role": "Dedicated grounded idle geometry and approved walking pixel invariance"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/idle/up.png",
+          "sha256": "215c13a6c8c2dfabe99af9476e309d39539b26aab12fb4dfa4fbbf6b1b79f29c",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-idle-grounded",
-      "approval": "User-requested raised-foot idle fix; 2026-10-05",
-      "output_sha256": "164bbfbc36097bca2f0ceaa1d68dd925644a4a3df74b9470324824ed9ec20711"
+      "approval": "User-requested raised-foot idle fix; 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "f2d8d7adc8cefe737e6735594aa01ec62e8eaddc3d4fc32ce6504fcb624d0a98"
     },
     {
       "id": "actors/idle_north_2",
@@ -4237,6 +5245,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -4277,12 +5289,22 @@
           "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/runtime-idle-contract.json",
           "sha256": "89ff7e6197d616815a0172b1c650c10f67c0f10f4bd204e2a8f0edb5837a348c",
           "role": "Dedicated grounded idle geometry and approved walking pixel invariance"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/idle/up.png",
+          "sha256": "215c13a6c8c2dfabe99af9476e309d39539b26aab12fb4dfa4fbbf6b1b79f29c",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-idle-grounded",
-      "approval": "User-requested raised-foot idle fix; 2026-10-05",
-      "output_sha256": "164bbfbc36097bca2f0ceaa1d68dd925644a4a3df74b9470324824ed9ec20711"
+      "approval": "User-requested raised-foot idle fix; 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "f2d8d7adc8cefe737e6735594aa01ec62e8eaddc3d4fc32ce6504fcb624d0a98"
     },
     {
       "id": "actors/idle_west_0",
@@ -4308,6 +5330,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -4348,12 +5374,22 @@
           "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/runtime-idle-contract.json",
           "sha256": "89ff7e6197d616815a0172b1c650c10f67c0f10f4bd204e2a8f0edb5837a348c",
           "role": "Dedicated grounded idle geometry and approved walking pixel invariance"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/idle/left.png",
+          "sha256": "5a195a04d9413f7f318734361b406ae481aae89994cd97d432d57ec4c28a9316",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-idle-grounded",
-      "approval": "User-requested raised-foot idle fix; 2026-10-05",
-      "output_sha256": "b062fec50cdfab3d70270f2f9e90794ef402b0bbb4780725cb0384403dde7be2"
+      "approval": "User-requested raised-foot idle fix; 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "98f3d6753fd256519e78eafc1fc35c5fe75276bb02a59f7f1633a45813f5bd01"
     },
     {
       "id": "actors/idle_west_1",
@@ -4379,6 +5415,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -4419,12 +5459,22 @@
           "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/runtime-idle-contract.json",
           "sha256": "89ff7e6197d616815a0172b1c650c10f67c0f10f4bd204e2a8f0edb5837a348c",
           "role": "Dedicated grounded idle geometry and approved walking pixel invariance"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/idle/left.png",
+          "sha256": "5a195a04d9413f7f318734361b406ae481aae89994cd97d432d57ec4c28a9316",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-idle-grounded",
-      "approval": "User-requested raised-foot idle fix; 2026-10-05",
-      "output_sha256": "b062fec50cdfab3d70270f2f9e90794ef402b0bbb4780725cb0384403dde7be2"
+      "approval": "User-requested raised-foot idle fix; 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "98f3d6753fd256519e78eafc1fc35c5fe75276bb02a59f7f1633a45813f5bd01"
     },
     {
       "id": "actors/idle_west_2",
@@ -4450,6 +5500,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -4490,12 +5544,22 @@
           "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/runtime-idle-contract.json",
           "sha256": "89ff7e6197d616815a0172b1c650c10f67c0f10f4bd204e2a8f0edb5837a348c",
           "role": "Dedicated grounded idle geometry and approved walking pixel invariance"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/idle/left.png",
+          "sha256": "5a195a04d9413f7f318734361b406ae481aae89994cd97d432d57ec4c28a9316",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-idle-grounded",
-      "approval": "User-requested raised-foot idle fix; 2026-10-05",
-      "output_sha256": "b062fec50cdfab3d70270f2f9e90794ef402b0bbb4780725cb0384403dde7be2"
+      "approval": "User-requested raised-foot idle fix; 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "98f3d6753fd256519e78eafc1fc35c5fe75276bb02a59f7f1633a45813f5bd01"
     },
     {
       "id": "actors/idle_south_east_0",
@@ -4521,6 +5585,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -4561,12 +5629,22 @@
           "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/runtime-idle-contract.json",
           "sha256": "89ff7e6197d616815a0172b1c650c10f67c0f10f4bd204e2a8f0edb5837a348c",
           "role": "Dedicated grounded idle geometry and approved walking pixel invariance"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/idle/down-right.png",
+          "sha256": "6bb9c70d4b2db3cfd3915e5e64c0958f8266d4a23cc7e7850610b5c455b69ab6",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-idle-grounded",
-      "approval": "User-requested raised-foot idle fix; 2026-10-05",
-      "output_sha256": "a07817197a8b4788dc0c88e098b9e86fc2906b25817bbd4e337c4732ec429cdc"
+      "approval": "User-requested raised-foot idle fix; 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "d5b9f493d157048697035555f7da6573518a0ae1e931167efce499b131aa1550"
     },
     {
       "id": "actors/idle_south_east_1",
@@ -4592,6 +5670,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -4632,12 +5714,22 @@
           "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/runtime-idle-contract.json",
           "sha256": "89ff7e6197d616815a0172b1c650c10f67c0f10f4bd204e2a8f0edb5837a348c",
           "role": "Dedicated grounded idle geometry and approved walking pixel invariance"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/idle/down-right.png",
+          "sha256": "6bb9c70d4b2db3cfd3915e5e64c0958f8266d4a23cc7e7850610b5c455b69ab6",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-idle-grounded",
-      "approval": "User-requested raised-foot idle fix; 2026-10-05",
-      "output_sha256": "a07817197a8b4788dc0c88e098b9e86fc2906b25817bbd4e337c4732ec429cdc"
+      "approval": "User-requested raised-foot idle fix; 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "d5b9f493d157048697035555f7da6573518a0ae1e931167efce499b131aa1550"
     },
     {
       "id": "actors/idle_south_east_2",
@@ -4663,6 +5755,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -4703,12 +5799,22 @@
           "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/runtime-idle-contract.json",
           "sha256": "89ff7e6197d616815a0172b1c650c10f67c0f10f4bd204e2a8f0edb5837a348c",
           "role": "Dedicated grounded idle geometry and approved walking pixel invariance"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/idle/down-right.png",
+          "sha256": "6bb9c70d4b2db3cfd3915e5e64c0958f8266d4a23cc7e7850610b5c455b69ab6",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-idle-grounded",
-      "approval": "User-requested raised-foot idle fix; 2026-10-05",
-      "output_sha256": "a07817197a8b4788dc0c88e098b9e86fc2906b25817bbd4e337c4732ec429cdc"
+      "approval": "User-requested raised-foot idle fix; 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "d5b9f493d157048697035555f7da6573518a0ae1e931167efce499b131aa1550"
     },
     {
       "id": "actors/idle_north_east_0",
@@ -4734,6 +5840,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -4774,12 +5884,22 @@
           "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/runtime-idle-contract.json",
           "sha256": "89ff7e6197d616815a0172b1c650c10f67c0f10f4bd204e2a8f0edb5837a348c",
           "role": "Dedicated grounded idle geometry and approved walking pixel invariance"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/idle/up-right.png",
+          "sha256": "ba7743510483c88d5a0145ad0bf56bce1cb1b8d2adbd0d26391692926837b354",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-idle-grounded",
-      "approval": "User-requested raised-foot idle fix; 2026-10-05",
-      "output_sha256": "be0f7a18807bfe42a0903dbf79e233eadff278b730608fac011ed8e5ca920ff8"
+      "approval": "User-requested raised-foot idle fix; 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "a8465edc0f2401ec178497c3ae0a08caca3aefb17220f2fa374446e18272a7dc"
     },
     {
       "id": "actors/idle_north_east_1",
@@ -4805,6 +5925,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -4845,12 +5969,22 @@
           "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/runtime-idle-contract.json",
           "sha256": "89ff7e6197d616815a0172b1c650c10f67c0f10f4bd204e2a8f0edb5837a348c",
           "role": "Dedicated grounded idle geometry and approved walking pixel invariance"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/idle/up-right.png",
+          "sha256": "ba7743510483c88d5a0145ad0bf56bce1cb1b8d2adbd0d26391692926837b354",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-idle-grounded",
-      "approval": "User-requested raised-foot idle fix; 2026-10-05",
-      "output_sha256": "be0f7a18807bfe42a0903dbf79e233eadff278b730608fac011ed8e5ca920ff8"
+      "approval": "User-requested raised-foot idle fix; 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "a8465edc0f2401ec178497c3ae0a08caca3aefb17220f2fa374446e18272a7dc"
     },
     {
       "id": "actors/idle_north_east_2",
@@ -4876,6 +6010,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -4916,12 +6054,22 @@
           "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/runtime-idle-contract.json",
           "sha256": "89ff7e6197d616815a0172b1c650c10f67c0f10f4bd204e2a8f0edb5837a348c",
           "role": "Dedicated grounded idle geometry and approved walking pixel invariance"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/idle/up-right.png",
+          "sha256": "ba7743510483c88d5a0145ad0bf56bce1cb1b8d2adbd0d26391692926837b354",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-idle-grounded",
-      "approval": "User-requested raised-foot idle fix; 2026-10-05",
-      "output_sha256": "be0f7a18807bfe42a0903dbf79e233eadff278b730608fac011ed8e5ca920ff8"
+      "approval": "User-requested raised-foot idle fix; 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "a8465edc0f2401ec178497c3ae0a08caca3aefb17220f2fa374446e18272a7dc"
     },
     {
       "id": "actors/idle_north_west_0",
@@ -4947,6 +6095,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -4987,12 +6139,22 @@
           "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/runtime-idle-contract.json",
           "sha256": "89ff7e6197d616815a0172b1c650c10f67c0f10f4bd204e2a8f0edb5837a348c",
           "role": "Dedicated grounded idle geometry and approved walking pixel invariance"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/idle/up-left.png",
+          "sha256": "bade83afac9ada7fff02e9ad4c47fd70ec67d16834d903b9fc91108b5115e26e",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-idle-grounded",
-      "approval": "User-requested raised-foot idle fix; 2026-10-05",
-      "output_sha256": "d5bedb001416d0edb98f33513bbfadab465d3767a352feef81a51f003df7acc1"
+      "approval": "User-requested raised-foot idle fix; 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "78a77dd20530a7c6e81164a3965614e2d55a2e254a11d78f21570ca77bf6e98c"
     },
     {
       "id": "actors/idle_north_west_1",
@@ -5018,6 +6180,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -5058,12 +6224,22 @@
           "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/runtime-idle-contract.json",
           "sha256": "89ff7e6197d616815a0172b1c650c10f67c0f10f4bd204e2a8f0edb5837a348c",
           "role": "Dedicated grounded idle geometry and approved walking pixel invariance"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/idle/up-left.png",
+          "sha256": "bade83afac9ada7fff02e9ad4c47fd70ec67d16834d903b9fc91108b5115e26e",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-idle-grounded",
-      "approval": "User-requested raised-foot idle fix; 2026-10-05",
-      "output_sha256": "d5bedb001416d0edb98f33513bbfadab465d3767a352feef81a51f003df7acc1"
+      "approval": "User-requested raised-foot idle fix; 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "78a77dd20530a7c6e81164a3965614e2d55a2e254a11d78f21570ca77bf6e98c"
     },
     {
       "id": "actors/idle_north_west_2",
@@ -5089,6 +6265,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -5129,12 +6309,22 @@
           "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/runtime-idle-contract.json",
           "sha256": "89ff7e6197d616815a0172b1c650c10f67c0f10f4bd204e2a8f0edb5837a348c",
           "role": "Dedicated grounded idle geometry and approved walking pixel invariance"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/idle/up-left.png",
+          "sha256": "bade83afac9ada7fff02e9ad4c47fd70ec67d16834d903b9fc91108b5115e26e",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-idle-grounded",
-      "approval": "User-requested raised-foot idle fix; 2026-10-05",
-      "output_sha256": "d5bedb001416d0edb98f33513bbfadab465d3767a352feef81a51f003df7acc1"
+      "approval": "User-requested raised-foot idle fix; 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "78a77dd20530a7c6e81164a3965614e2d55a2e254a11d78f21570ca77bf6e98c"
     },
     {
       "id": "actors/idle_south_west_0",
@@ -5160,6 +6350,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -5200,12 +6394,22 @@
           "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/runtime-idle-contract.json",
           "sha256": "89ff7e6197d616815a0172b1c650c10f67c0f10f4bd204e2a8f0edb5837a348c",
           "role": "Dedicated grounded idle geometry and approved walking pixel invariance"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/idle/down-left.png",
+          "sha256": "bfcd82b33eea7c3f45d4ed1d42073bf41e3269c250b1818d01da5d5926dea09b",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-idle-grounded",
-      "approval": "User-requested raised-foot idle fix; 2026-10-05",
-      "output_sha256": "0ae06c45600de8b7ed0c701de96ab18d78687447dc9020e0387ddcdbce274cd1"
+      "approval": "User-requested raised-foot idle fix; 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "7a18b421593c65cce9d266e36684a45b047faed0536d99d4837c5582da688b5c"
     },
     {
       "id": "actors/idle_south_west_1",
@@ -5231,6 +6435,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -5271,12 +6479,22 @@
           "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/runtime-idle-contract.json",
           "sha256": "89ff7e6197d616815a0172b1c650c10f67c0f10f4bd204e2a8f0edb5837a348c",
           "role": "Dedicated grounded idle geometry and approved walking pixel invariance"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/idle/down-left.png",
+          "sha256": "bfcd82b33eea7c3f45d4ed1d42073bf41e3269c250b1818d01da5d5926dea09b",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-idle-grounded",
-      "approval": "User-requested raised-foot idle fix; 2026-10-05",
-      "output_sha256": "0ae06c45600de8b7ed0c701de96ab18d78687447dc9020e0387ddcdbce274cd1"
+      "approval": "User-requested raised-foot idle fix; 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "7a18b421593c65cce9d266e36684a45b047faed0536d99d4837c5582da688b5c"
     },
     {
       "id": "actors/idle_south_west_2",
@@ -5302,6 +6520,10 @@
         72
       ],
       "content_scale": 1.0,
+      "detail_wh": [
+        40,
+        40
+      ],
       "draw_scale": 0.5,
       "alpha_threshold": 128,
       "palette": "exact-source",
@@ -5342,12 +6564,22 @@
           "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/runtime-idle-contract.json",
           "sha256": "89ff7e6197d616815a0172b1c650c10f67c0f10f4bd204e2a8f0edb5837a348c",
           "role": "Dedicated grounded idle geometry and approved walking pixel invariance"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/farmer32/runtime-80/idle/down-left.png",
+          "sha256": "bfcd82b33eea7c3f45d4ed1d42073bf41e3269c250b1818d01da5d5926dea09b",
+          "role": "Selected 32px detail review frame; the runtime output is pixel-identical"
+        },
+        {
+          "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+          "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557",
+          "role": "32px farmer review contract: 80->40->80 NEAREST, pivot (40,72), 0.5 draw scale"
         }
       ],
       "tool": "built-in ImageGen",
       "generation_task": "fhd-idle-grounded",
-      "approval": "User-requested raised-foot idle fix; 2026-10-05",
-      "output_sha256": "0ae06c45600de8b7ed0c701de96ab18d78687447dc9020e0387ddcdbce274cd1"
+      "approval": "User-requested raised-foot idle fix; 2026-10-05; 32px detail chosen 2026-10-06",
+      "output_sha256": "7a18b421593c65cce9d266e36684a45b047faed0536d99d4837c5582da688b5c"
     },
     {
       "id": "actors/chop_0",

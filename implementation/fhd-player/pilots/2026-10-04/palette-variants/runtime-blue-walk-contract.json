@@ -19,6 +19,15 @@
     65
   ],
   "screen_height_1080p": "about 128 px: two 64px tiles, as Stardew Valley's 16x32 farmer at 4x",
+  "detail_wh": [
+    40,
+    40
+  ],
+  "detail_review": {
+    "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
+    "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557"
+  },
+  "screen_detail_1080p": "4x4 physical pixels per art pixel: the 32px farmer chosen on 2026-10-06",
   "walk_seconds": 0.1,
   "idle_seconds": 0.55,
   "idle_slots": 3,

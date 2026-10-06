@@ -6,7 +6,14 @@ new hash in the manifest before rebuilding. PNGs and view metadata are generated
 Most recipes reduce their source to the one project palette. A recipe whose
 palette is `EXACT_SOURCE` is already finished native pixel art - the farmer's
 reviewed walk cycles - and keeps every source colour: it is copied with binary
-alpha, never resampled or recoloured.
+alpha, never recoloured.
+
+A `detail_wh` recipe sets the art's pixel density without changing its size:
+the crop is sampled NEAREST down to that grid and NEAREST back up, so every
+detail pixel is a whole block of runtime pixels holding one source colour. The
+farmer's 80x80 frames use [40, 40] - the "32px" detail the owner chose on
+2026-10-06, 4x4 screen pixels per art pixel at 1920x1080 like the rest of the
+world - while the full-detail sources stay untouched in assets/art_source.
 """
 import argparse
 import hashlib
@@ -162,6 +169,13 @@ def load_manifest(path=MANIFEST):
                 raise ValueError("Invalid scale: " + ident)
             if type(entry["alpha_threshold"]) is not int or not 1 <= entry["alpha_threshold"] <= 255:
                 raise ValueError("Invalid alpha threshold: " + ident)
+            if "detail_wh" in entry:
+                detail = integers(entry["detail_wh"], 2, "detail grid", 1)
+                sized = [max(1, round(n * scale)) for n in entry["crop_xywh"][2:]]
+                if any(sized[i] % detail[i] or detail[i] >= sized[i] for i in range(2)):
+                    raise ValueError("Detail grid must evenly divide a larger crop: " + ident)
+        elif "detail_wh" in entry:
+            raise ValueError("Detail density belongs to a source recipe: " + ident)
         elif "input" not in entry or entry.get("operation") not in {"copy", "slice", "slice_canvas", "compose", "rotate", "legacy_bob", "legacy_lunge", "legacy_fall"}:
             raise ValueError("Missing source/valid derivation: " + ident)
         if entry.get("operation") == "rotate" and (type(entry.get("quarter_turns")) is not int or entry["quarter_turns"] not in (1, 2, 3)):
@@ -191,7 +205,7 @@ def load_manifest(path=MANIFEST):
         parent = by_id[parent_id]
         if "source" not in entry or "source" not in parent or "variant_of" in parent:
             raise ValueError("Variation requires independent raw source and direct master: " + entry["id"])
-        if any(entry.get(field) != parent.get(field) for field in ("canvas_wh", "pivot_xy", "content_scale", "palette_keys")):
+        if any(entry.get(field) != parent.get(field) for field in ("canvas_wh", "pivot_xy", "content_scale", "detail_wh", "palette_keys")):
             raise ValueError("Variation scale/canvas/contact/palette drift: " + entry["id"])
     for name, frames in animations.items():
         indices = sorted(e["frame"] for e in frames)
@@ -203,6 +217,8 @@ def load_manifest(path=MANIFEST):
         scales = {e["content_scale"] for e in frames if "source" in e}
         if len(scales) > 1:
             raise ValueError("Per-frame scale drift: " + name)
+        if len({tuple(e.get("detail_wh", ())) for e in frames if "source" in e}) > 1:
+            raise ValueError("Per-frame detail density drift: " + name)
         if len({e.get("draw_scale", 1.0) for e in frames}) > 1:
             raise ValueError("Per-frame UI scale drift: " + name)
     return data
@@ -214,6 +230,11 @@ def render_source(entry):
         scale = entry["content_scale"]
         size = tuple(max(1, round(n * scale)) for n in crop.size)
         crop = crop.resize(size, Image.Resampling.NEAREST)
+        if "detail_wh" in entry:
+            # Coarser art pixels on the same canvas: pick one source pixel per
+            # detail cell and repeat it. No blend, no new colour, no new alpha.
+            crop = crop.resize(tuple(entry["detail_wh"]), Image.Resampling.NEAREST)
+            crop = crop.resize(size, Image.Resampling.NEAREST)
     # A declared material uses a subset of the one project palette, never a
     # separate color table. This keeps small grass/earth/water shapes from
     # accidentally borrowing nearby enemy or cloth colors during reduction.

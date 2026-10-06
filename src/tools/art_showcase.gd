@@ -1364,6 +1364,43 @@ func _locomotion() -> void:
 			# A long stride dips the body a little: 1.8 tiles is the deepest.
 			expect(tall >= GameData.TILE_SIZE * 1.8 and tall <= GameData.TILE_SIZE * 2.1,
 				"%s is two tiles tall, like Stardew's farmer on a 1080p screen" % path)
+			# **The chosen 32px detail (2026-10-06).** One art pixel is 4x4
+			# physical pixels at 1080p, as on the zombies and the world - not
+			# the sources' 2x2 (64px) nor the 16px comparison's 8x8.
+			expect(is_equal_approx(_screen_detail(path), 4.0),
+				"%s draws each art pixel 4x4 at 1080p: the 32px farmer" % path)
+
+
+## How many physical pixels at 1920x1080 one art pixel of `path` covers: the
+## side of the largest aligned square of canvas pixels that always holds a
+## single colour, times the frame's draw scale, times the viewport's stretch.
+func _screen_detail(path: String) -> float:
+	var image := Image.load_from_file(ProjectSettings.globalize_path(path))
+	image.convert(Image.FORMAT_RGBA8)
+	var block := 1
+	for side in [2, 4, 8]:
+		if not _uniform_blocks(image, side):
+			break
+		block = side
+	var stretch := float(ProjectSettings.get_setting("display/window/size/window_width_override")) \
+		/ float(ProjectSettings.get_setting("display/window/size/viewport_width"))
+	return block * float(RasterArt.FRAMES[path].get("draw_scale", 1.0)) * stretch
+
+
+## Whether every aligned side x side square of the image is one colour.
+func _uniform_blocks(image: Image, side: int) -> bool:
+	var data := image.get_data()
+	var width := image.get_width()
+	if width % side != 0 or image.get_height() % side != 0:
+		return false
+	for y in range(0, image.get_height(), side):
+		for x in range(0, width, side):
+			var first := data.decode_u32((y * width + x) * 4)
+			for dy in side:
+				for dx in side:
+					if data.decode_u32(((y + dy) * width + x + dx) * 4) != first:
+						return false
+	return true
 
 
 func _body_contact_is_valid(body: Sprite2D) -> bool:
@@ -1471,6 +1508,15 @@ func _work_cycles() -> void:
 	view.set_process(false)
 	var verbs := PlayerArt.known_verbs()
 	expect(verbs == GameData.sorted_names(Interact.DEFAULT_TICKS.keys()), "Every core verb has a work binding")
+	# A tool pose keeps the density of the walk it interrupts. The work art is
+	# native pixels at full scale - 4x4 at 1080p already, like the 32px walk's
+	# 2x2 blocks at half scale - so it is used as authored, never halved.
+	var walking := _screen_detail(PlayerArt.texture_path(&"walk_east", 0))
+	for verb in verbs:
+		for frame in int(PlayerFrames.COUNT[verb]):
+			var path := PlayerArt.texture_path(verb, frame)
+			expect(is_equal_approx(_screen_detail(path), walking),
+				"%s keeps the walking farmer's 4x4 art pixel: no detail jump" % path)
 	for facing in [Player.SOUTH, Player.WEST, Player.NORTH, Player.EAST]:
 		for verb in verbs:
 			var at := _work_fixture(verb, facing)
@@ -1723,6 +1769,11 @@ func _reactions() -> void:
 	var view: PlayerView = _world.get_node("Occupants/PlayerView")
 	view.set_process(false)
 	_world.set_process(false)
+	# The glyphs are native pixels at full scale: the 32px farmer's density.
+	for kind in Reactions.KINDS:
+		var glyph := PlayerArt.texture_path(StringName("react_%s" % kind), 0)
+		expect(is_equal_approx(_screen_detail(glyph), 4.0),
+			"%s draws each art pixel 4x4 at 1080p, like the farmer under it" % glyph)
 	# Each symbol under day/dusk/night; all initial facings select south art.
 	for lighting in 3:
 		for kind in Reactions.KINDS:
