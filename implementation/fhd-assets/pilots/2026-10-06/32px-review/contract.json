@@ -1,0 +1,7391 @@
+{
+  "date": "2026-10-06",
+  "status": "review only",
+  "runtime_integrated": false,
+  "method": "Display unchanged runtime PNGs with nearest pixel scaling; no resampling or recoloring",
+  "basis": "32px farmer detail occupies4 physical FHD pixels per detail pixel; current world art uses the same density",
+  "logical_tile_size": 16,
+  "FHD_screen_tile_size": 64,
+  "display_modes": {
+    "FHD": 4,
+    "overview": 2,
+    "native": 1
+  },
+  "every_asset_forced_into_32x32": false,
+  "excluded": [
+    "farmer poses",
+    "all enemies"
+  ],
+  "count": 320,
+  "groups": {
+    "buildings": 166,
+    "props": 27,
+    "interior": 10,
+    "crops": 14,
+    "terrain": 28,
+    "effects": 26,
+    "ui": 49
+  },
+  "entries": [
+    {
+      "path": "sprites/buildings/house.png",
+      "name": "house",
+      "group": "buildings",
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "content_xyxy": [
+        4,
+        5,
+        60,
+        60
+      ],
+      "sha256": "34afcc26fed1df120b23916aac39ef7798fe14ad7c1ccc73f856afe346e46b5b",
+      "source": "assets/art_source/buildings/house/whole.png",
+      "source_sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/house",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/workshop.png",
+      "name": "workshop",
+      "group": "buildings",
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "content_xyxy": [
+        3,
+        12,
+        43,
+        44
+      ],
+      "sha256": "d05b4add0ad3a723a3ec84b30f146d29cf899f7b767671c8638a574463c7f6af",
+      "source": "assets/art_source/buildings/workshop/states.png",
+      "source_sha256": "1187fa7bdf73abb2ff47cc77ae15ae37a38a4fa4617de894eaa8ac88b69249b4",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/workshop",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/kitchen.png",
+      "name": "kitchen",
+      "group": "buildings",
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "content_xyxy": [
+        4,
+        10,
+        44,
+        44
+      ],
+      "sha256": "16ab377567d177b59dd07e7ce9ea7be0f493829e37d46791342048afe50e1e29",
+      "source": "assets/art_source/buildings/kitchen/states.png",
+      "source_sha256": "e58737928e05cf0bb250c43b2c4425627636f52dfccd9c5413e35cc3a2a8d62d",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/kitchen",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/gun_tower.png",
+      "name": "gun_tower",
+      "group": "buildings",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "content_xyxy": [
+        8,
+        19,
+        27,
+        44
+      ],
+      "sha256": "8bb08e6ffbf0ed0f209d19035c0e904df8c93266ebf099542d1bbf080c1d6a8d",
+      "source": "assets/art_source/defences/gun_tower/level-1-r2.png",
+      "source_sha256": "bd5738bdbfde1167ea30d0c06fecdf6693d15bc35e406df3680a1a8e572b0af4",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/gun_tower",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/auto_crossbow.png",
+      "name": "auto_crossbow",
+      "group": "buildings",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "content_xyxy": [
+        6,
+        16,
+        30,
+        44
+      ],
+      "sha256": "431d1b53e11b54d99dc6663cb8399fec7b5ce08863b45594a247f5e6611c6b20",
+      "source": "assets/art_source/defences/auto_crossbow/level-1-r1.png",
+      "source_sha256": "956aaad82df55fe2ea2fb2e60a23c209e1f244c3f4370f8af3a4b30ab380db62",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/auto_crossbow",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/flame_tower.png",
+      "name": "flame_tower",
+      "group": "buildings",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "content_xyxy": [
+        7,
+        19,
+        28,
+        44
+      ],
+      "sha256": "47ae4a5ac86fbd32ba922f11c930c5f73d850a40bb65e9e57e4e38d5ffc2b933",
+      "source": "assets/art_source/defences/flame_tower/level-1-r1.png",
+      "source_sha256": "5245bfbaa2000537d01e27ac892140d99903876bd805aa20a1399c352be064d3",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/flame_tower",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/mortar.png",
+      "name": "mortar",
+      "group": "buildings",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "content_xyxy": [
+        6,
+        24,
+        27,
+        44
+      ],
+      "sha256": "be87c0ec7487b14ade3c06ca9be29946030c87f00040bb42b912b16860d4ea18",
+      "source": "assets/art_source/defences/mortar/level-1.png",
+      "source_sha256": "9870fd4f33840cf5064e807756d0aaf1321ddf30a151b80803c902891ba5fdf0",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/mortar",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/fence.png",
+      "name": "fence",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        6,
+        7,
+        10,
+        20
+      ],
+      "sha256": "6813a5126a4c5e7b43dfee07a7122b9cbf58031cbfa03a363fc31eb8167d69e0",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/fence",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/wall.png",
+      "name": "wall",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        5,
+        5,
+        11,
+        20
+      ],
+      "sha256": "294c1acc604fb29411c5a670d9ca14626eb5aee29fa34c5f0d0bba66a47b7789",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/wall",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/barricade.png",
+      "name": "barricade",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        24
+      ],
+      "content_xyxy": [
+        1,
+        11,
+        15,
+        20
+      ],
+      "sha256": "e99ee6cb46d0f0ac182a1eace7703c5f04e0d8fd25f44dc8901261707b0a8839",
+      "source": "assets/art_source/defences/barricade/states.png",
+      "source_sha256": "81c2e301689be20f4c56308c775ca2cc00869226143d1d396fd7f666a4d3a80f",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/barricade",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/mine.png",
+      "name": "mine",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        2,
+        6,
+        14,
+        14
+      ],
+      "sha256": "b9fa9c7cacd19ec0afb921ff40630cf4b8924e56ad28cb9bd6e758f8fdddff27",
+      "source": "assets/art_source/defences/mine/states.png",
+      "source_sha256": "aa99a9f3ee6300b0e0aa1137c5b07da21f4ff8aa6652bdd6f40db9d21ea2f44a",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/mine",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/auto_crossbow_2.png",
+      "name": "auto_crossbow_2",
+      "group": "buildings",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "content_xyxy": [
+        6,
+        18,
+        30,
+        44
+      ],
+      "sha256": "afee775f61cba6cebb1d5d9afaa33b0dc6568413e0da4b62d592fdb799b9d173",
+      "source": "assets/art_source/defences/auto_crossbow/level-2.png",
+      "source_sha256": "2f5dd111248f91b27acc1a00019898310468844e92aced23e63825ce2489b1cb",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/auto_crossbow_2",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/auto_crossbow_2_fire.png",
+      "name": "auto_crossbow_2_fire",
+      "group": "buildings",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "content_xyxy": [
+        6,
+        19,
+        31,
+        44
+      ],
+      "sha256": "07a8fe91ff31f5f53b8dfcd51d3d8740fffe8a96678cdde7c57986de61c71d3e",
+      "source": "assets/art_source/defences/auto_crossbow/level-2.png",
+      "source_sha256": "2f5dd111248f91b27acc1a00019898310468844e92aced23e63825ce2489b1cb",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/auto_crossbow_2_fire",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/auto_crossbow_2_hurt.png",
+      "name": "auto_crossbow_2_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "content_xyxy": [
+        6,
+        18,
+        30,
+        44
+      ],
+      "sha256": "1aa1fddbd62c907cc6559844ea94764a802cbff179fde4c100d9f807df817ff3",
+      "source": "assets/art_source/defences/auto_crossbow/level-2.png",
+      "source_sha256": "2f5dd111248f91b27acc1a00019898310468844e92aced23e63825ce2489b1cb",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/auto_crossbow_2_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/auto_crossbow_2_wreck.png",
+      "name": "auto_crossbow_2_wreck",
+      "group": "buildings",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "content_xyxy": [
+        4,
+        27,
+        27,
+        44
+      ],
+      "sha256": "4335c61a64fe4cd12bc0c42c5921dda50ee26c9f0cd85680a5722f94e1d8cc00",
+      "source": "assets/art_source/defences/auto_crossbow/level-2.png",
+      "source_sha256": "2f5dd111248f91b27acc1a00019898310468844e92aced23e63825ce2489b1cb",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/auto_crossbow_2_wreck",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/auto_crossbow_3.png",
+      "name": "auto_crossbow_3",
+      "group": "buildings",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "content_xyxy": [
+        7,
+        19,
+        31,
+        44
+      ],
+      "sha256": "4e789a407c511de327d6b4dbb51b89cbcdea7e488218a6938bee80d0fb66b03f",
+      "source": "assets/art_source/defences/auto_crossbow/level-3.png",
+      "source_sha256": "b0cbc3215b5c2038ac131c121f57fc8b395a21c6876b280a9f696e91d7bd4dea",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/auto_crossbow_3",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/auto_crossbow_3_fire.png",
+      "name": "auto_crossbow_3_fire",
+      "group": "buildings",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "content_xyxy": [
+        7,
+        17,
+        31,
+        44
+      ],
+      "sha256": "0dbec747e548ce4fc424592e15ca1af66bab2f4a706c92adb6b9835b5d7a2bb4",
+      "source": "assets/art_source/defences/auto_crossbow/level-3.png",
+      "source_sha256": "b0cbc3215b5c2038ac131c121f57fc8b395a21c6876b280a9f696e91d7bd4dea",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/auto_crossbow_3_fire",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/auto_crossbow_3_hurt.png",
+      "name": "auto_crossbow_3_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "content_xyxy": [
+        6,
+        19,
+        30,
+        44
+      ],
+      "sha256": "81fba822f43d101950f488f3c9547b3eb1a778f8bb1a7db93286aa9364a86d3b",
+      "source": "assets/art_source/defences/auto_crossbow/level-3.png",
+      "source_sha256": "b0cbc3215b5c2038ac131c121f57fc8b395a21c6876b280a9f696e91d7bd4dea",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/auto_crossbow_3_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/auto_crossbow_3_wreck.png",
+      "name": "auto_crossbow_3_wreck",
+      "group": "buildings",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "content_xyxy": [
+        5,
+        27,
+        27,
+        44
+      ],
+      "sha256": "865de62cd237bc1b5fa3336ed5b7e26f2eeb39f499f73797307162dc481c4c88",
+      "source": "assets/art_source/defences/auto_crossbow/level-3.png",
+      "source_sha256": "b0cbc3215b5c2038ac131c121f57fc8b395a21c6876b280a9f696e91d7bd4dea",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/auto_crossbow_3_wreck",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/auto_crossbow_fire.png",
+      "name": "auto_crossbow_fire",
+      "group": "buildings",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "content_xyxy": [
+        6,
+        16,
+        31,
+        44
+      ],
+      "sha256": "7bbfb9a0aa88412a03b69e0eb7df591fd984d5849f130214bf65164e912c2b97",
+      "source": "assets/art_source/defences/auto_crossbow/level-1-r1.png",
+      "source_sha256": "956aaad82df55fe2ea2fb2e60a23c209e1f244c3f4370f8af3a4b30ab380db62",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/auto_crossbow_fire",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/auto_crossbow_hurt.png",
+      "name": "auto_crossbow_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "content_xyxy": [
+        6,
+        16,
+        30,
+        44
+      ],
+      "sha256": "516c4dd258267a13bc05a8805f4fc3b5f5b55d2c1833b419afea0ae558d2d75b",
+      "source": "assets/art_source/defences/auto_crossbow/level-1-r1.png",
+      "source_sha256": "956aaad82df55fe2ea2fb2e60a23c209e1f244c3f4370f8af3a4b30ab380db62",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/auto_crossbow_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/auto_crossbow_wreck.png",
+      "name": "auto_crossbow_wreck",
+      "group": "buildings",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "content_xyxy": [
+        4,
+        25,
+        28,
+        44
+      ],
+      "sha256": "602f62d9612f8ee143828ecbbbbbd8e2f7b3c23555acce393755412591239ca0",
+      "source": "assets/art_source/defences/auto_crossbow/level-1-r1.png",
+      "source_sha256": "956aaad82df55fe2ea2fb2e60a23c209e1f244c3f4370f8af3a4b30ab380db62",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/auto_crossbow_wreck",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/barricade_hurt.png",
+      "name": "barricade_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        24
+      ],
+      "content_xyxy": [
+        1,
+        11,
+        15,
+        20
+      ],
+      "sha256": "156db8aa98daaa7cf461ac01636cf1e01f85344f54885f73b57c8f1f86d718a7",
+      "source": "assets/art_source/defences/barricade/states.png",
+      "source_sha256": "81c2e301689be20f4c56308c775ca2cc00869226143d1d396fd7f666a4d3a80f",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/barricade_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/barricade_wreck.png",
+      "name": "barricade_wreck",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        24
+      ],
+      "content_xyxy": [
+        1,
+        14,
+        15,
+        20
+      ],
+      "sha256": "7be52b535f3bdd137c8afc6c1b43d16aa4d7ec57467f3dae13139645a699386e",
+      "source": "assets/art_source/defences/barricade/states.png",
+      "source_sha256": "81c2e301689be20f4c56308c775ca2cc00869226143d1d396fd7f666a4d3a80f",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/barricade_wreck",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/fence_hurt.png",
+      "name": "fence_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        6,
+        7,
+        10,
+        20
+      ],
+      "sha256": "43c5bfe158dd2d2a7d56042bb8b1dc3b3f0b13012a98ec630aa0085a0a680d2e",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/fence_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/fence_join_1.png",
+      "name": "fence_join_1",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        6,
+        3,
+        10,
+        20
+      ],
+      "sha256": "dbeb402f02ea7a0ea8963abc5c15c80d1bb7785785ad843b3d36c147f44d13d0",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/fence_join_1",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/fence_join_10.png",
+      "name": "fence_join_10",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        0,
+        7,
+        16,
+        20
+      ],
+      "sha256": "1a1832401fa01aed66fd795b5c75fccd9139f4999e42c8a23358bce6662e161e",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/fence_join_10",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/fence_join_10_hurt.png",
+      "name": "fence_join_10_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        0,
+        7,
+        16,
+        20
+      ],
+      "sha256": "f4fe7a2d7c1995f61a17aef20c4f47d96bf058c55f3798034e0965ac5f409433",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/fence_join_10_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/fence_join_11.png",
+      "name": "fence_join_11",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        0,
+        3,
+        16,
+        20
+      ],
+      "sha256": "a25121eb44958546837419e07650c202539ea75783db8f828aa5ec97236f5f99",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/fence_join_11",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/fence_join_11_hurt.png",
+      "name": "fence_join_11_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        0,
+        3,
+        16,
+        20
+      ],
+      "sha256": "e8d1da202705476b3a6f54c4c1dbf746ae7e902945e948b3b7d201f28bbc2de6",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/fence_join_11_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/fence_join_12.png",
+      "name": "fence_join_12",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        0,
+        7,
+        10,
+        28
+      ],
+      "sha256": "1eae69f225399adedb5e035c6d9c9401943d6359e96bbfb9195269af74a1835e",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/fence_join_12",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/fence_join_12_hurt.png",
+      "name": "fence_join_12_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        0,
+        7,
+        10,
+        28
+      ],
+      "sha256": "b73c382bbc5eeb9f08048233d5deb043059f2a0210f1008312df739f6562121b",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/fence_join_12_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/fence_join_13.png",
+      "name": "fence_join_13",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        0,
+        3,
+        10,
+        28
+      ],
+      "sha256": "f941f463b8dedd4afa71d886cd6885d75906ec4aa2a38971d34d59773343f95a",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/fence_join_13",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/fence_join_13_hurt.png",
+      "name": "fence_join_13_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        0,
+        3,
+        10,
+        28
+      ],
+      "sha256": "27d59e76a293ae4e7b8238f6bb621751acc7aa6ca6c9cd5da299ca5d2b8accd6",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/fence_join_13_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/fence_join_14.png",
+      "name": "fence_join_14",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        0,
+        7,
+        16,
+        28
+      ],
+      "sha256": "4c4ba38912586b1cd0bd9bfc8925ae8e0b23120e54c0dda82b8bf1c345cf0e7a",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/fence_join_14",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/fence_join_14_hurt.png",
+      "name": "fence_join_14_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        0,
+        7,
+        16,
+        28
+      ],
+      "sha256": "7e8959714faaee074c17d6636a81df1cb3f2d540e43909157b1eb09bf4fadb4e",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/fence_join_14_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/fence_join_15.png",
+      "name": "fence_join_15",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        0,
+        3,
+        16,
+        28
+      ],
+      "sha256": "907053949a57d815ea371502ffac64ec3d5c9be2dc9102a1243684fe8ef1e1c2",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/fence_join_15",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/fence_join_15_hurt.png",
+      "name": "fence_join_15_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        0,
+        3,
+        16,
+        28
+      ],
+      "sha256": "19af3ccfb7294006e28cdf75332e265eb968721756bd41065da45a3b223c6949",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/fence_join_15_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/fence_join_1_hurt.png",
+      "name": "fence_join_1_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        6,
+        3,
+        10,
+        20
+      ],
+      "sha256": "4e926fb38fc9cad6180de149f9488bdac616e9b07d2754b25ea15c82111aa84c",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/fence_join_1_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/fence_join_2.png",
+      "name": "fence_join_2",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        6,
+        7,
+        16,
+        20
+      ],
+      "sha256": "ee7856cc11ca7f75bd6e796499f02125c54d7974b61ac1d58bbab63a3bbbcc53",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/fence_join_2",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/fence_join_2_hurt.png",
+      "name": "fence_join_2_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        6,
+        7,
+        16,
+        20
+      ],
+      "sha256": "ac12d3645411f84812725c1f07b1096d52245217a398419ca48a1be8cc0327f7",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/fence_join_2_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/fence_join_3.png",
+      "name": "fence_join_3",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        6,
+        3,
+        16,
+        20
+      ],
+      "sha256": "4db7ba50c2d03bcfd1334e1bbbbb226cbbdbd43b899be85fae7fa878444a3c45",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/fence_join_3",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/fence_join_3_hurt.png",
+      "name": "fence_join_3_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        6,
+        3,
+        16,
+        20
+      ],
+      "sha256": "beb487227019178e8981412ef32d37b067f48b44b9b796ae9ac5a56edd8fe928",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/fence_join_3_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/fence_join_4.png",
+      "name": "fence_join_4",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        6,
+        7,
+        10,
+        28
+      ],
+      "sha256": "5a3d86115ecaf30a85e9a009bcd9321fdbf40058b2123cfd8186c1e84cab89a8",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/fence_join_4",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/fence_join_4_hurt.png",
+      "name": "fence_join_4_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        6,
+        7,
+        10,
+        28
+      ],
+      "sha256": "b9988afab7782383fb23f4d0e7378d1617f9456b2fbf3415c865e8d68b2ea70f",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/fence_join_4_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/fence_join_5.png",
+      "name": "fence_join_5",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        6,
+        3,
+        10,
+        28
+      ],
+      "sha256": "acb5f30e0c0e2e39e5a9621729202b203d07583a47e236d177b60b4c87656333",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/fence_join_5",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/fence_join_5_hurt.png",
+      "name": "fence_join_5_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        6,
+        3,
+        10,
+        28
+      ],
+      "sha256": "8af65d47a9ab9b8c4777f6fd112b91f32229b02cb43a6a7dec2a928febfa0ff7",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/fence_join_5_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/fence_join_6.png",
+      "name": "fence_join_6",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        6,
+        7,
+        16,
+        28
+      ],
+      "sha256": "8b9013d3dc1c5fe00a18c370d3aea47353c6da29798413565b0a138f7f5a3dcf",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/fence_join_6",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/fence_join_6_hurt.png",
+      "name": "fence_join_6_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        6,
+        7,
+        16,
+        28
+      ],
+      "sha256": "2d6f59247c7bd2cd6511753aa3c04294feb9b4169b0ddf60e4233f63802e61f3",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/fence_join_6_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/fence_join_7.png",
+      "name": "fence_join_7",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        6,
+        3,
+        16,
+        28
+      ],
+      "sha256": "fc01e6634a52ae5e11e3ebab4785dffc2ee5f0fd39c655affffdd1d39672b64d",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/fence_join_7",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/fence_join_7_hurt.png",
+      "name": "fence_join_7_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        6,
+        3,
+        16,
+        28
+      ],
+      "sha256": "e7dd5aa34e242027343f41985abd30b255ddb9520b819dbb0962a9c07a89e582",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/fence_join_7_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/fence_join_8.png",
+      "name": "fence_join_8",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        0,
+        7,
+        10,
+        20
+      ],
+      "sha256": "b283bc4d361b1cd4230d771fee54cbea1b24ea67d0243fa2993794b51a80dcdc",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/fence_join_8",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/fence_join_8_hurt.png",
+      "name": "fence_join_8_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        0,
+        7,
+        10,
+        20
+      ],
+      "sha256": "6454f77560f5422209641a11c60192b33ad7466b0dec6bd904bf20860d48dc20",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/fence_join_8_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/fence_join_9.png",
+      "name": "fence_join_9",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        0,
+        3,
+        10,
+        20
+      ],
+      "sha256": "c81326d1974c2d2089261035b7f6a0b3b9986231b31fe3a1e9d28a04fd86e33d",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/fence_join_9",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/fence_join_9_hurt.png",
+      "name": "fence_join_9_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        0,
+        3,
+        10,
+        20
+      ],
+      "sha256": "6c31d74b6153144541fb47c5eddf2554f4726ca33eb60a26613507124c01378d",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/fence_join_9_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/fence_wreck.png",
+      "name": "fence_wreck",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        1,
+        21,
+        15,
+        28
+      ],
+      "sha256": "67bb7143ec656123dfbd619f2667589148ce03c093fafe90792f6e5e4f414070",
+      "source": "assets/art_source/defences/fence/whole-r2.png",
+      "source_sha256": "f2adb2c9cfa940b8509583d4937936a225327bbb3cfad7c9f9eddc4eacf51df7",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/fence_wreck",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/flame_tower_2.png",
+      "name": "flame_tower_2",
+      "group": "buildings",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "content_xyxy": [
+        5,
+        19,
+        27,
+        44
+      ],
+      "sha256": "4f5a583f0dcc03b74eef95d80e530dcf4d3176e6c2be0fb90a83dd0a1681aed4",
+      "source": "assets/art_source/defences/flame_tower/level-2.png",
+      "source_sha256": "89fff997347eb02a6c5efabf850b481ee7bcec939c1eaf2ec488ed39836f5af6",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/flame_tower_2",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/flame_tower_2_fire.png",
+      "name": "flame_tower_2_fire",
+      "group": "buildings",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "content_xyxy": [
+        5,
+        19,
+        31,
+        44
+      ],
+      "sha256": "3aa7eff0b2553fe9aad785b85f903100bd330e364720bc88680d0820ce95cba7",
+      "source": "assets/art_source/defences/flame_tower/level-2.png",
+      "source_sha256": "89fff997347eb02a6c5efabf850b481ee7bcec939c1eaf2ec488ed39836f5af6",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/flame_tower_2_fire",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/flame_tower_2_hurt.png",
+      "name": "flame_tower_2_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "content_xyxy": [
+        6,
+        20,
+        27,
+        44
+      ],
+      "sha256": "f1f540925f8ae22f7e1e6a26e77f5880b3e5dc3021efa5df38905d1d9d7418cf",
+      "source": "assets/art_source/defences/flame_tower/level-2.png",
+      "source_sha256": "89fff997347eb02a6c5efabf850b481ee7bcec939c1eaf2ec488ed39836f5af6",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/flame_tower_2_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/flame_tower_2_wreck.png",
+      "name": "flame_tower_2_wreck",
+      "group": "buildings",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "content_xyxy": [
+        5,
+        27,
+        28,
+        44
+      ],
+      "sha256": "d2650de7a9abf6dcab5604c9baa75e06795268d2c494a021b333cf8b5046a27a",
+      "source": "assets/art_source/defences/flame_tower/level-2.png",
+      "source_sha256": "89fff997347eb02a6c5efabf850b481ee7bcec939c1eaf2ec488ed39836f5af6",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/flame_tower_2_wreck",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/flame_tower_3.png",
+      "name": "flame_tower_3",
+      "group": "buildings",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "content_xyxy": [
+        7,
+        22,
+        28,
+        44
+      ],
+      "sha256": "1efe42559a37aa5df1ecc92ed4d2e7e81c69d043d0ed42e552acddaea254be94",
+      "source": "assets/art_source/defences/flame_tower/level-3.png",
+      "source_sha256": "55be9f319c37fd5c0c438d366cec11704b1fbd5fb7f4d260856d7c50250f95d8",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/flame_tower_3",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/flame_tower_3_fire.png",
+      "name": "flame_tower_3_fire",
+      "group": "buildings",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "content_xyxy": [
+        7,
+        23,
+        31,
+        44
+      ],
+      "sha256": "d379d6abf677689dfc7a179d25beea1e3300f4b6b033af5535e724d870a199d4",
+      "source": "assets/art_source/defences/flame_tower/level-3.png",
+      "source_sha256": "55be9f319c37fd5c0c438d366cec11704b1fbd5fb7f4d260856d7c50250f95d8",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/flame_tower_3_fire",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/flame_tower_3_hurt.png",
+      "name": "flame_tower_3_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "content_xyxy": [
+        7,
+        23,
+        27,
+        44
+      ],
+      "sha256": "be4c3e85ee025e901f15d37264c80c695cd7c0b2e8d8a4f060d37d5ab4bd14a5",
+      "source": "assets/art_source/defences/flame_tower/level-3.png",
+      "source_sha256": "55be9f319c37fd5c0c438d366cec11704b1fbd5fb7f4d260856d7c50250f95d8",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/flame_tower_3_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/flame_tower_3_wreck.png",
+      "name": "flame_tower_3_wreck",
+      "group": "buildings",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "content_xyxy": [
+        6,
+        31,
+        27,
+        44
+      ],
+      "sha256": "8a9ba919ad36f7e248bfc01fca363899b17a4a3584b844ab2119d8e12e045886",
+      "source": "assets/art_source/defences/flame_tower/level-3.png",
+      "source_sha256": "55be9f319c37fd5c0c438d366cec11704b1fbd5fb7f4d260856d7c50250f95d8",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/flame_tower_3_wreck",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/flame_tower_fire.png",
+      "name": "flame_tower_fire",
+      "group": "buildings",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "content_xyxy": [
+        7,
+        19,
+        30,
+        44
+      ],
+      "sha256": "79edbf092f8d717c4b2afbbe3e6bc7f02f4a6d09f23ec5e488f0a7b7c2d06d76",
+      "source": "assets/art_source/defences/flame_tower/level-1-r1.png",
+      "source_sha256": "5245bfbaa2000537d01e27ac892140d99903876bd805aa20a1399c352be064d3",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/flame_tower_fire",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/flame_tower_hurt.png",
+      "name": "flame_tower_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "content_xyxy": [
+        6,
+        19,
+        27,
+        44
+      ],
+      "sha256": "88574026480394052895cc1bb1a44c93ffc02dfe61333091c0ff038b42d8af6d",
+      "source": "assets/art_source/defences/flame_tower/level-1-r1.png",
+      "source_sha256": "5245bfbaa2000537d01e27ac892140d99903876bd805aa20a1399c352be064d3",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/flame_tower_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/flame_tower_wreck.png",
+      "name": "flame_tower_wreck",
+      "group": "buildings",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "content_xyxy": [
+        5,
+        29,
+        26,
+        44
+      ],
+      "sha256": "3569b3b7b2a7fddd4769a25bb6de8cfb68d061706826f7c1024d2ae23d3d28d8",
+      "source": "assets/art_source/defences/flame_tower/level-1-r1.png",
+      "source_sha256": "5245bfbaa2000537d01e27ac892140d99903876bd805aa20a1399c352be064d3",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/flame_tower_wreck",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/gun_tower_2.png",
+      "name": "gun_tower_2",
+      "group": "buildings",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "content_xyxy": [
+        6,
+        18,
+        27,
+        44
+      ],
+      "sha256": "f133d98f50bffc6f31e26598a9e91b7444d037d2d9cd0940fc2c7cc7ae5c830c",
+      "source": "assets/art_source/defences/gun_tower/level-2-r2.png",
+      "source_sha256": "681e3bf85aa33690b4ec66d26e9cf680144fd4838eb5cd76abe0bafb7836fc70",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/gun_tower_2",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/gun_tower_2_fire.png",
+      "name": "gun_tower_2_fire",
+      "group": "buildings",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "content_xyxy": [
+        6,
+        16,
+        31,
+        44
+      ],
+      "sha256": "c90da1426474ad661c54edbba5ebb332cb6862b66cb384cd0b3d5befc41691f0",
+      "source": "assets/art_source/defences/gun_tower/level-2-r2.png",
+      "source_sha256": "681e3bf85aa33690b4ec66d26e9cf680144fd4838eb5cd76abe0bafb7836fc70",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/gun_tower_2_fire",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/gun_tower_2_hurt.png",
+      "name": "gun_tower_2_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "content_xyxy": [
+        6,
+        18,
+        27,
+        44
+      ],
+      "sha256": "43e838ccf34d0d4744f5a44ec1d9c7620ed8d9711b39305669b05a3655d32c81",
+      "source": "assets/art_source/defences/gun_tower/level-2-r2.png",
+      "source_sha256": "681e3bf85aa33690b4ec66d26e9cf680144fd4838eb5cd76abe0bafb7836fc70",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/gun_tower_2_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/gun_tower_2_wreck.png",
+      "name": "gun_tower_2_wreck",
+      "group": "buildings",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "content_xyxy": [
+        4,
+        26,
+        28,
+        44
+      ],
+      "sha256": "fc3db332751093305ee36486d837b3d03e3c8ac4d89a70b0b2307363fbfc2199",
+      "source": "assets/art_source/defences/gun_tower/level-2-r2.png",
+      "source_sha256": "681e3bf85aa33690b4ec66d26e9cf680144fd4838eb5cd76abe0bafb7836fc70",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/gun_tower_2_wreck",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/gun_tower_3.png",
+      "name": "gun_tower_3",
+      "group": "buildings",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "content_xyxy": [
+        5,
+        16,
+        29,
+        44
+      ],
+      "sha256": "558fd793e557e930ec8558f9cf7d40bd0ca25b3984cc1dee5c8ab5da4dcae177",
+      "source": "assets/art_source/defences/gun_tower/level-3.png",
+      "source_sha256": "8ae73e8523abdf59976d032ff71b8a4e89fc6f2e05df382e669cee028b0cb954",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/gun_tower_3",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/gun_tower_3_fire.png",
+      "name": "gun_tower_3_fire",
+      "group": "buildings",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "content_xyxy": [
+        5,
+        16,
+        31,
+        44
+      ],
+      "sha256": "a2fa985e062c75f458ee4ee1a0b1f0d142876d4ba4cb552a5b2907c17f881e85",
+      "source": "assets/art_source/defences/gun_tower/level-3.png",
+      "source_sha256": "8ae73e8523abdf59976d032ff71b8a4e89fc6f2e05df382e669cee028b0cb954",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/gun_tower_3_fire",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/gun_tower_3_hurt.png",
+      "name": "gun_tower_3_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "content_xyxy": [
+        5,
+        16,
+        29,
+        44
+      ],
+      "sha256": "5b2fc9da334c59007b5d7825fcafc5a76581ab7393b3dce17c227037a6b00f6f",
+      "source": "assets/art_source/defences/gun_tower/level-3.png",
+      "source_sha256": "8ae73e8523abdf59976d032ff71b8a4e89fc6f2e05df382e669cee028b0cb954",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/gun_tower_3_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/gun_tower_3_wreck.png",
+      "name": "gun_tower_3_wreck",
+      "group": "buildings",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "content_xyxy": [
+        4,
+        27,
+        30,
+        44
+      ],
+      "sha256": "8a515438349c3d5b788853722c1a719c7cd000836fab1d34aaca900d64df63ac",
+      "source": "assets/art_source/defences/gun_tower/level-3.png",
+      "source_sha256": "8ae73e8523abdf59976d032ff71b8a4e89fc6f2e05df382e669cee028b0cb954",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/gun_tower_3_wreck",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/gun_tower_fire.png",
+      "name": "gun_tower_fire",
+      "group": "buildings",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "content_xyxy": [
+        8,
+        17,
+        30,
+        44
+      ],
+      "sha256": "a17f2510c192f81dbd6828d46b124cf93ad8ba4c2e9477cc734dc18a16c91e0b",
+      "source": "assets/art_source/defences/gun_tower/level-1-r2.png",
+      "source_sha256": "bd5738bdbfde1167ea30d0c06fecdf6693d15bc35e406df3680a1a8e572b0af4",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/gun_tower_fire",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/gun_tower_hurt.png",
+      "name": "gun_tower_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "content_xyxy": [
+        7,
+        19,
+        25,
+        44
+      ],
+      "sha256": "e808902a460de800d0a8c41f4719cdab046af28bbec9361c2f876dde7c4ac9b0",
+      "source": "assets/art_source/defences/gun_tower/level-1-r2.png",
+      "source_sha256": "bd5738bdbfde1167ea30d0c06fecdf6693d15bc35e406df3680a1a8e572b0af4",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/gun_tower_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/gun_tower_wreck.png",
+      "name": "gun_tower_wreck",
+      "group": "buildings",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "content_xyxy": [
+        6,
+        28,
+        26,
+        44
+      ],
+      "sha256": "a7dbe1adb2589a2439c8d396947daa4f71e7702bc293f23c72a9ef3e98a676d9",
+      "source": "assets/art_source/defences/gun_tower/level-1-r2.png",
+      "source_sha256": "bd5738bdbfde1167ea30d0c06fecdf6693d15bc35e406df3680a1a8e572b0af4",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/gun_tower_wreck",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/house_0_0.png",
+      "name": "house_0_0",
+      "group": "buildings",
+      "canvas_wh": [
+        24,
+        28
+      ],
+      "content_xyxy": [
+        7,
+        13,
+        24,
+        28
+      ],
+      "sha256": "70ab14dbcb383f0ecf5df8160f0f970b11c8f972ed1c8b39470a573481140bf3",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/house_0_0",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/house_0_0_hurt.png",
+      "name": "house_0_0_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        24,
+        28
+      ],
+      "content_xyxy": [
+        7,
+        13,
+        24,
+        28
+      ],
+      "sha256": "b9ab6a01fbeb22a0294ed30648e06d944f94ed33afa01969ca34102a0c6a66e0",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/house_0_0_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/house_0_1.png",
+      "name": "house_0_1",
+      "group": "buildings",
+      "canvas_wh": [
+        24,
+        16
+      ],
+      "content_xyxy": [
+        4,
+        0,
+        24,
+        16
+      ],
+      "sha256": "eb8c491c1d1e87d7aefba9ab59fea644202b09ac3c91c4f577ab67d8eff24bd7",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/house_0_1",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/house_0_1_hurt.png",
+      "name": "house_0_1_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        24,
+        16
+      ],
+      "content_xyxy": [
+        4,
+        0,
+        24,
+        16
+      ],
+      "sha256": "69841b9ecde5c122a52e7a46fd69a72a47fb9e51689efa2099c353d527f5a51c",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/house_0_1_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/house_0_2.png",
+      "name": "house_0_2",
+      "group": "buildings",
+      "canvas_wh": [
+        24,
+        20
+      ],
+      "content_xyxy": [
+        8,
+        0,
+        24,
+        15
+      ],
+      "sha256": "df5a562e0199afbaea49a6630c8bd425ff53fd8d6dfffe168b66596e00670be3",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/house_0_2",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/house_0_2_hurt.png",
+      "name": "house_0_2_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        24,
+        20
+      ],
+      "content_xyxy": [
+        8,
+        0,
+        24,
+        15
+      ],
+      "sha256": "5f92d021a408527f3027c336514973feceb6fcdb2458dcdf4b6af9f9449ea44f",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/house_0_2_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/house_1_0.png",
+      "name": "house_1_0",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        28
+      ],
+      "content_xyxy": [
+        0,
+        5,
+        16,
+        28
+      ],
+      "sha256": "1ee506aab38818ae617e41d048f7aee89c353d5e421523f326c0f228330a4c38",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/house_1_0",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/house_1_0_hurt.png",
+      "name": "house_1_0_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        28
+      ],
+      "content_xyxy": [
+        0,
+        5,
+        16,
+        28
+      ],
+      "sha256": "6adcc6b0a19133e33eb714d41b20626cddce1babf0ca36cd38ee59d91087c245",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/house_1_0_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/house_1_1.png",
+      "name": "house_1_1",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "sha256": "b471a605e5ce88c33e434dc94de96d00825b2722bbf1c3fb324bb9d85cee0f3e",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/house_1_1",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/house_1_1_hurt.png",
+      "name": "house_1_1_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "sha256": "e4242366c5ae754fbb55a0595ff44186a77b410d0f8864902cd409a72af64faa",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/house_1_1_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/house_1_2.png",
+      "name": "house_1_2",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        20
+      ],
+      "content_xyxy": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "sha256": "df0c73302e6753a2788aaa51c7c3f55ab230d8f1fd10b318038fa9b02fbae831",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/house_1_2",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/house_1_2_hurt.png",
+      "name": "house_1_2_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        20
+      ],
+      "content_xyxy": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "sha256": "65d163b6108465e0522615fae9243ac3dc51143fcec19ac6d0126572c2c5ce86",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/house_1_2_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/house_2_0.png",
+      "name": "house_2_0",
+      "group": "buildings",
+      "canvas_wh": [
+        24,
+        28
+      ],
+      "content_xyxy": [
+        0,
+        10,
+        20,
+        28
+      ],
+      "sha256": "143a9ed97e8660836df09f5b57efbeee8b844027bd4789c32dc626958728db96",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/house_2_0",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/house_2_0_hurt.png",
+      "name": "house_2_0_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        24,
+        28
+      ],
+      "content_xyxy": [
+        0,
+        10,
+        20,
+        28
+      ],
+      "sha256": "e7407b06a88620829b5c23612404d9cdcc282df9d60f5f717b32fae72133a843",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/house_2_0_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/house_2_1.png",
+      "name": "house_2_1",
+      "group": "buildings",
+      "canvas_wh": [
+        24,
+        16
+      ],
+      "content_xyxy": [
+        0,
+        0,
+        20,
+        16
+      ],
+      "sha256": "5c715a354aad4f68f25344a09e16701605913916445b7557f5f1488a9588bf4a",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/house_2_1",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/house_2_1_hurt.png",
+      "name": "house_2_1_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        24,
+        16
+      ],
+      "content_xyxy": [
+        0,
+        0,
+        20,
+        16
+      ],
+      "sha256": "d017447d45ae3e3fae2f3c5d3da0cc67f088f682a0b4bf36b312fc392f9f0c17",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/house_2_1_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/house_2_2.png",
+      "name": "house_2_2",
+      "group": "buildings",
+      "canvas_wh": [
+        24,
+        20
+      ],
+      "content_xyxy": [
+        0,
+        0,
+        18,
+        14
+      ],
+      "sha256": "34e930dc97637bc28f4835295ed38807e5d64824b67b88b3bbd1a0d7815dc3f2",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/house_2_2",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/house_2_2_hurt.png",
+      "name": "house_2_2_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        24,
+        20
+      ],
+      "content_xyxy": [
+        0,
+        0,
+        18,
+        15
+      ],
+      "sha256": "29ac74d80122365e926b79e0daaccdcb2a692f3dd57650aa832c3b705a1f6132",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/house_2_2_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/house_hurt.png",
+      "name": "house_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "content_xyxy": [
+        4,
+        5,
+        60,
+        60
+      ],
+      "sha256": "d4124c9c1e5cd9cd68741364f03628feb6c3cc59f586bfa14ce04e833e994f1b",
+      "source": "assets/art_source/buildings/house/hurt.png",
+      "source_sha256": "0ddfbbb4ed2f219f5a716417c78cf3d619bbe7b19b38379dcb4e3f36de101017",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/house_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/kitchen_0_0.png",
+      "name": "kitchen_0_0",
+      "group": "buildings",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "content_xyxy": [
+        5,
+        13,
+        24,
+        24
+      ],
+      "sha256": "03e7e746d8098b56405726abfb99922235b5c850e26eae8cb4ab421fdffec923",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/kitchen_0_0",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/kitchen_0_1.png",
+      "name": "kitchen_0_1",
+      "group": "buildings",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "content_xyxy": [
+        4,
+        0,
+        24,
+        20
+      ],
+      "sha256": "a2f8e1f103a3d18d742dec598a60838bde73671f71c5a5601c17ac129116893f",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/kitchen_0_1",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/kitchen_1_0.png",
+      "name": "kitchen_1_0",
+      "group": "buildings",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "content_xyxy": [
+        0,
+        10,
+        19,
+        24
+      ],
+      "sha256": "bb3c114c8ec88933742ce75700e8cece3df9b69f3e3d1f71f4d5986c86bffad9",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/kitchen_1_0",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/kitchen_1_1.png",
+      "name": "kitchen_1_1",
+      "group": "buildings",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "content_xyxy": [
+        0,
+        0,
+        20,
+        20
+      ],
+      "sha256": "9628faf9536618591da70aca4bc64f63d911521b4d5df80435ddd8e7d69bbc85",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/kitchen_1_1",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/kitchen_active.png",
+      "name": "kitchen_active",
+      "group": "buildings",
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "content_xyxy": [
+        4,
+        10,
+        44,
+        44
+      ],
+      "sha256": "8ca4107195326144704e3d63ef8278c796a03a705d0895a61a6a20c2f4b80c9e",
+      "source": "assets/art_source/buildings/kitchen/states.png",
+      "source_sha256": "e58737928e05cf0bb250c43b2c4425627636f52dfccd9c5413e35cc3a2a8d62d",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/kitchen_active",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/kitchen_hurt.png",
+      "name": "kitchen_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "content_xyxy": [
+        4,
+        10,
+        44,
+        44
+      ],
+      "sha256": "5b43674fc195732e69874b82a1d09d903b103522d6a8319caf6d9caf92273a60",
+      "source": "assets/art_source/buildings/kitchen/states.png",
+      "source_sha256": "e58737928e05cf0bb250c43b2c4425627636f52dfccd9c5413e35cc3a2a8d62d",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/kitchen_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/mine_spent.png",
+      "name": "mine_spent",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        2,
+        6,
+        14,
+        14
+      ],
+      "sha256": "33d1aad8c927e8c120a582488078156004a289e62c2f771dadc510f128f590d4",
+      "source": "assets/art_source/defences/mine/states.png",
+      "source_sha256": "aa99a9f3ee6300b0e0aa1137c5b07da21f4ff8aa6652bdd6f40db9d21ea2f44a",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/mine_spent",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/mine_triggered.png",
+      "name": "mine_triggered",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        2,
+        6,
+        14,
+        14
+      ],
+      "sha256": "d09033cffe6e7b6df0ba08c9024dfee2b16513c39db8dd9060422f435203846d",
+      "source": "assets/art_source/defences/mine/states.png",
+      "source_sha256": "aa99a9f3ee6300b0e0aa1137c5b07da21f4ff8aa6652bdd6f40db9d21ea2f44a",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/mine_triggered",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/modules/fence_horizontal.png",
+      "name": "fence_horizontal",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        0,
+        12,
+        16,
+        20
+      ],
+      "sha256": "92bec3b66b822c5dea25c267eb8ac791e73e9a93bf360d5486a2afc76e5459be",
+      "source": "assets/art_source/defences/fence/whole-r3.png",
+      "source_sha256": "0e9fa00c7eda620054e7840caf6e13975531e6f943f211a34aed247a3f89ddd7",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/modules/fence_horizontal",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/modules/fence_horizontal_hurt.png",
+      "name": "fence_horizontal_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        0,
+        11,
+        16,
+        20
+      ],
+      "sha256": "510effa996094e53943edd2677faafacc768ef810be59b6a67fafa26475d4097",
+      "source": "assets/art_source/defences/fence/hurt-r1.png",
+      "source_sha256": "cb79edca1060c85ca1baaff122c9ebffd2a30548596c5d6840831019a2b55727",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/modules/fence_horizontal_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/modules/fence_post.png",
+      "name": "fence_post",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        6,
+        7,
+        10,
+        20
+      ],
+      "sha256": "6813a5126a4c5e7b43dfee07a7122b9cbf58031cbfa03a363fc31eb8167d69e0",
+      "source": "assets/art_source/defences/fence/whole-r3.png",
+      "source_sha256": "0e9fa00c7eda620054e7840caf6e13975531e6f943f211a34aed247a3f89ddd7",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/modules/fence_post",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/modules/fence_post_hurt.png",
+      "name": "fence_post_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        6,
+        7,
+        10,
+        20
+      ],
+      "sha256": "43c5bfe158dd2d2a7d56042bb8b1dc3b3f0b13012a98ec630aa0085a0a680d2e",
+      "source": "assets/art_source/defences/fence/hurt-r1.png",
+      "source_sha256": "cb79edca1060c85ca1baaff122c9ebffd2a30548596c5d6840831019a2b55727",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/modules/fence_post_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/modules/fence_vertical.png",
+      "name": "fence_vertical",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        7,
+        11,
+        10,
+        28
+      ],
+      "sha256": "f7d10a1df7c617631d51451a0c203df5c04d1f459bb65399c741fcf42bf6c97e",
+      "source": "assets/art_source/defences/fence/whole-r2.png",
+      "source_sha256": "f2adb2c9cfa940b8509583d4937936a225327bbb3cfad7c9f9eddc4eacf51df7",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/modules/fence_vertical",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/modules/fence_vertical_hurt.png",
+      "name": "fence_vertical_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        6,
+        11,
+        10,
+        28
+      ],
+      "sha256": "89825c7a44d5d701edf890a93263d19073cbcad1ac23cb782505660e024a6cdc",
+      "source": "assets/art_source/defences/fence/hurt.png",
+      "source_sha256": "1243288d9892178b8ecdae0d1b67e6e8a5ca38731df5aac598caa8eb13e26e08",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/modules/fence_vertical_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/modules/wall_horizontal.png",
+      "name": "wall_horizontal",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        0,
+        12,
+        16,
+        20
+      ],
+      "sha256": "dc3f03ec5b0a08768a485b46b86ad17e8c58e158fc1aea87dfcde1fba373e0f3",
+      "source": "assets/art_source/defences/wall/whole-r3.png",
+      "source_sha256": "98bb946042365835d3ddeeecb57e2d25e44861c4864028b8b8c4dae45ba85ea3",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/modules/wall_horizontal",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/modules/wall_horizontal_hurt.png",
+      "name": "wall_horizontal_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        0,
+        12,
+        16,
+        20
+      ],
+      "sha256": "f9bf15321c298b390e38e1d83d22e28a65505fcc9ceb44ee19987256a340c9fc",
+      "source": "assets/art_source/defences/wall/hurt-r1.png",
+      "source_sha256": "96232d45f621e77bfe6ccaf38a20c654b3099d5abd7934e37d69d03064279fc2",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/modules/wall_horizontal_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/modules/wall_post.png",
+      "name": "wall_post",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        5,
+        5,
+        11,
+        20
+      ],
+      "sha256": "294c1acc604fb29411c5a670d9ca14626eb5aee29fa34c5f0d0bba66a47b7789",
+      "source": "assets/art_source/defences/wall/whole-r3.png",
+      "source_sha256": "98bb946042365835d3ddeeecb57e2d25e44861c4864028b8b8c4dae45ba85ea3",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/modules/wall_post",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/modules/wall_post_hurt.png",
+      "name": "wall_post_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        5,
+        5,
+        11,
+        20
+      ],
+      "sha256": "1c98d3053d63dde2550f39ec6428cae33f2e2f4edbeab6b5e55d145aebf38e4f",
+      "source": "assets/art_source/defences/wall/hurt-r1.png",
+      "source_sha256": "96232d45f621e77bfe6ccaf38a20c654b3099d5abd7934e37d69d03064279fc2",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/modules/wall_post_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/modules/wall_vertical.png",
+      "name": "wall_vertical",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        6,
+        9,
+        10,
+        28
+      ],
+      "sha256": "cf26fea10ebd75c1a82d4e87c9e26952c2f4f4c09c717633c7f81c82bd2bdc77",
+      "source": "assets/art_source/defences/wall/whole-r2.png",
+      "source_sha256": "93926678e72f136ee17b2fe607fa79a7f51c31d114efe304022958cfcb7fcf0c",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/modules/wall_vertical",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/modules/wall_vertical_hurt.png",
+      "name": "wall_vertical_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        6,
+        9,
+        11,
+        28
+      ],
+      "sha256": "6d0fe154340afb6dc9109dbcce6314bdc4e085ff4e4affcfe416b7caf85ba2cc",
+      "source": "assets/art_source/defences/wall/hurt.png",
+      "source_sha256": "fb13f45257b1176b595c11c0cd20e2e37748a020082dfbdd4c33628e80521e3d",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/modules/wall_vertical_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/mortar_2.png",
+      "name": "mortar_2",
+      "group": "buildings",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "content_xyxy": [
+        4,
+        20,
+        29,
+        44
+      ],
+      "sha256": "0c3a32f4a1e739a5c42094b4048ee54d5ab7557a0ac997807207878b16656b5c",
+      "source": "assets/art_source/defences/mortar/level-2.png",
+      "source_sha256": "ff074311eeab4ac363ecfa5881a96caa045e051d6fbdf579df30c09494c3cba9",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/mortar_2",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/mortar_2_fire.png",
+      "name": "mortar_2_fire",
+      "group": "buildings",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "content_xyxy": [
+        4,
+        17,
+        30,
+        44
+      ],
+      "sha256": "be1264190a77208d0c707af04740b005322cf94aef989d7984e82d67c926fb92",
+      "source": "assets/art_source/defences/mortar/level-2.png",
+      "source_sha256": "ff074311eeab4ac363ecfa5881a96caa045e051d6fbdf579df30c09494c3cba9",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/mortar_2_fire",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/mortar_2_hurt.png",
+      "name": "mortar_2_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "content_xyxy": [
+        4,
+        21,
+        28,
+        44
+      ],
+      "sha256": "833ffef4d9735923535cc48911ab4d3c32491717737a84fc2280773bccf6d1d2",
+      "source": "assets/art_source/defences/mortar/level-2.png",
+      "source_sha256": "ff074311eeab4ac363ecfa5881a96caa045e051d6fbdf579df30c09494c3cba9",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/mortar_2_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/mortar_2_wreck.png",
+      "name": "mortar_2_wreck",
+      "group": "buildings",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "content_xyxy": [
+        3,
+        26,
+        28,
+        44
+      ],
+      "sha256": "d0f7e87b1a45960a290c5501892c14b9a57fbb1dafa11500e7b58de70e32b170",
+      "source": "assets/art_source/defences/mortar/level-2.png",
+      "source_sha256": "ff074311eeab4ac363ecfa5881a96caa045e051d6fbdf579df30c09494c3cba9",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/mortar_2_wreck",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/mortar_3.png",
+      "name": "mortar_3",
+      "group": "buildings",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "content_xyxy": [
+        2,
+        17,
+        29,
+        44
+      ],
+      "sha256": "77be5d3c2deeef082c127fc25c57c41cbe25539ee46d032d354f50d8cacbf843",
+      "source": "assets/art_source/defences/mortar/level-3.png",
+      "source_sha256": "0b132a775f558cea165387c75e7cf9a71341b5018f5e83cd7e4b2d49d1d4bd12",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/mortar_3",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/mortar_3_fire.png",
+      "name": "mortar_3_fire",
+      "group": "buildings",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "content_xyxy": [
+        2,
+        15,
+        30,
+        44
+      ],
+      "sha256": "1b47c07f07195768205a3f6f18f1811f55239216bcb5bd71f3f8491946676dd8",
+      "source": "assets/art_source/defences/mortar/level-3.png",
+      "source_sha256": "0b132a775f558cea165387c75e7cf9a71341b5018f5e83cd7e4b2d49d1d4bd12",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/mortar_3_fire",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/mortar_3_hurt.png",
+      "name": "mortar_3_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "content_xyxy": [
+        3,
+        17,
+        30,
+        44
+      ],
+      "sha256": "575c9b3347cbf13702772211b25c2d095b7d1a17d807421085490344f8545f7d",
+      "source": "assets/art_source/defences/mortar/level-3.png",
+      "source_sha256": "0b132a775f558cea165387c75e7cf9a71341b5018f5e83cd7e4b2d49d1d4bd12",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/mortar_3_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/mortar_3_wreck.png",
+      "name": "mortar_3_wreck",
+      "group": "buildings",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "content_xyxy": [
+        3,
+        22,
+        31,
+        44
+      ],
+      "sha256": "d827eead804020a371d8f47beda02828154b0138c78b05913dbbe7da0401497c",
+      "source": "assets/art_source/defences/mortar/level-3.png",
+      "source_sha256": "0b132a775f558cea165387c75e7cf9a71341b5018f5e83cd7e4b2d49d1d4bd12",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/mortar_3_wreck",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/mortar_fire.png",
+      "name": "mortar_fire",
+      "group": "buildings",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "content_xyxy": [
+        6,
+        22,
+        28,
+        44
+      ],
+      "sha256": "46b5d3cfea80597e5d7bb0f2d3b4987113ccf7d5b749b733e788fbef75a98412",
+      "source": "assets/art_source/defences/mortar/level-1.png",
+      "source_sha256": "9870fd4f33840cf5064e807756d0aaf1321ddf30a151b80803c902891ba5fdf0",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/mortar_fire",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/mortar_hurt.png",
+      "name": "mortar_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "content_xyxy": [
+        6,
+        24,
+        27,
+        44
+      ],
+      "sha256": "c78d08fb4ea9e458c7644ed59e3a3184848cb2a2338e63a9c52b9c6e43968316",
+      "source": "assets/art_source/defences/mortar/level-1.png",
+      "source_sha256": "9870fd4f33840cf5064e807756d0aaf1321ddf30a151b80803c902891ba5fdf0",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/mortar_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/mortar_wreck.png",
+      "name": "mortar_wreck",
+      "group": "buildings",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "content_xyxy": [
+        5,
+        29,
+        27,
+        44
+      ],
+      "sha256": "7ce5c0f7486212849f8a943f84a7ff65229b6019c59917737429d61c8d719011",
+      "source": "assets/art_source/defences/mortar/level-1.png",
+      "source_sha256": "9870fd4f33840cf5064e807756d0aaf1321ddf30a151b80803c902891ba5fdf0",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/mortar_wreck",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/wall_hurt.png",
+      "name": "wall_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        5,
+        5,
+        11,
+        20
+      ],
+      "sha256": "1c98d3053d63dde2550f39ec6428cae33f2e2f4edbeab6b5e55d145aebf38e4f",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/wall_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/wall_join_1.png",
+      "name": "wall_join_1",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        5,
+        1,
+        11,
+        20
+      ],
+      "sha256": "b99e1aa9701543293821e5b05bf3b316180b987d294c98e1f183681877443467",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/wall_join_1",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/wall_join_10.png",
+      "name": "wall_join_10",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        0,
+        5,
+        16,
+        20
+      ],
+      "sha256": "6dac5663faf1ca9c197cb4d91b6ee8dd44d8a255feb0b9ba662bb80c8fbf3586",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/wall_join_10",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/wall_join_10_hurt.png",
+      "name": "wall_join_10_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        0,
+        5,
+        16,
+        20
+      ],
+      "sha256": "094bd85793cf76d2058b493442cc43073edff139c1f6f5afe38d510c28e0b819",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/wall_join_10_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/wall_join_11.png",
+      "name": "wall_join_11",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        0,
+        1,
+        16,
+        20
+      ],
+      "sha256": "e106c724963451307f5698c10b499d7234eeea50471137216ee6272d59a1cf0a",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/wall_join_11",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/wall_join_11_hurt.png",
+      "name": "wall_join_11_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        0,
+        1,
+        16,
+        20
+      ],
+      "sha256": "7acea5dfca372b6fbabc25118c0e2d8bd31d3bcbcab2716cdbb473de12e7c384",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/wall_join_11_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/wall_join_12.png",
+      "name": "wall_join_12",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        0,
+        5,
+        11,
+        28
+      ],
+      "sha256": "70111686b6c395bedd90da66e79b610dc5908018f910fb6f05d83aeba20dac63",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/wall_join_12",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/wall_join_12_hurt.png",
+      "name": "wall_join_12_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        0,
+        5,
+        11,
+        28
+      ],
+      "sha256": "b6503432ad074d37712320835427dd42bc883fb2794f2fece1fdb0d4cf663c76",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/wall_join_12_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/wall_join_13.png",
+      "name": "wall_join_13",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        0,
+        1,
+        11,
+        28
+      ],
+      "sha256": "ed67bda0e6489f1e39589ccb5873d5493e6c825fc354bc7533549f3a176317c0",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/wall_join_13",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/wall_join_13_hurt.png",
+      "name": "wall_join_13_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        0,
+        1,
+        11,
+        28
+      ],
+      "sha256": "9e730ad223abefa83cdb7a4a1024adcf452d86fdc2b06e983140475eb4e67b1a",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/wall_join_13_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/wall_join_14.png",
+      "name": "wall_join_14",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        0,
+        5,
+        16,
+        28
+      ],
+      "sha256": "d4cf0b57085eb4ecb2dfb660b94ff533cff836d3a9560625d751ea9cdcb31784",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/wall_join_14",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/wall_join_14_hurt.png",
+      "name": "wall_join_14_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        0,
+        5,
+        16,
+        28
+      ],
+      "sha256": "de953b35b7823e796a05361740a649eb1cbd139890757e4ca9d9fdd4efdab151",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/wall_join_14_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/wall_join_15.png",
+      "name": "wall_join_15",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        0,
+        1,
+        16,
+        28
+      ],
+      "sha256": "d8bec446a8d60a32a7ce4a88fdb7ed2eb5067353e2b5f34a7753bce7d7a74910",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/wall_join_15",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/wall_join_15_hurt.png",
+      "name": "wall_join_15_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        0,
+        1,
+        16,
+        28
+      ],
+      "sha256": "356dfc05ba09be4e4a3cff56855863b77c8366acd566e6f7f8994ea96f54b2ce",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/wall_join_15_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/wall_join_1_hurt.png",
+      "name": "wall_join_1_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        5,
+        1,
+        11,
+        20
+      ],
+      "sha256": "8a8017055efe3799c02d1ad68cfe8ee7ee95e20f5d2e6dd845ab7e6073072906",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/wall_join_1_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/wall_join_2.png",
+      "name": "wall_join_2",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        5,
+        5,
+        16,
+        20
+      ],
+      "sha256": "6340b96f2eb882dd67a557c57f03fde894af7d8f491bb98d0ab428fb11d25404",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/wall_join_2",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/wall_join_2_hurt.png",
+      "name": "wall_join_2_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        5,
+        5,
+        16,
+        20
+      ],
+      "sha256": "351b98bc9d8d56b25c06763c53e2519745249b34df37f45c5822609e94b2be4e",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/wall_join_2_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/wall_join_3.png",
+      "name": "wall_join_3",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        5,
+        1,
+        16,
+        20
+      ],
+      "sha256": "8c99881c9c7ca461b5d366c8dd54bd350b2ee17a3a864356cc8a9ab239b3fbb7",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/wall_join_3",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/wall_join_3_hurt.png",
+      "name": "wall_join_3_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        5,
+        1,
+        16,
+        20
+      ],
+      "sha256": "7bafa698f217ebf8bd62556c8050ad553ef3ff6959de9dad8121c94cfbfb822b",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/wall_join_3_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/wall_join_4.png",
+      "name": "wall_join_4",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        5,
+        5,
+        11,
+        28
+      ],
+      "sha256": "03595c39675a570b242e60c8e8a791d5541e9d551134ca2a1bb9298f0176e6bb",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/wall_join_4",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/wall_join_4_hurt.png",
+      "name": "wall_join_4_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        5,
+        5,
+        11,
+        28
+      ],
+      "sha256": "139abfa25ceeb656e4ce65f8fc95fa08be7c1dd252ea66fd2cff9e902755c4c7",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/wall_join_4_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/wall_join_5.png",
+      "name": "wall_join_5",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        5,
+        1,
+        11,
+        28
+      ],
+      "sha256": "87fccb8757ba611a0cb99e4b77919159ee1ce8dda9ac0b826dc53626d044d02a",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/wall_join_5",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/wall_join_5_hurt.png",
+      "name": "wall_join_5_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        5,
+        1,
+        11,
+        28
+      ],
+      "sha256": "21284428d5d5bae2727b40496c0a03b284dca2b2bece7b47e9c3f83bf9432821",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/wall_join_5_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/wall_join_6.png",
+      "name": "wall_join_6",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        5,
+        5,
+        16,
+        28
+      ],
+      "sha256": "7084b296746e7d64c5b5aa12cfb72e22e7d4ca7c2cb0a51e82c1763a2c1fe957",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/wall_join_6",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/wall_join_6_hurt.png",
+      "name": "wall_join_6_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        5,
+        5,
+        16,
+        28
+      ],
+      "sha256": "8076ea9f99645b01dbb5e14581abb4b1ccd4ea75a281d76d52bd0abe87bfee89",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/wall_join_6_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/wall_join_7.png",
+      "name": "wall_join_7",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        5,
+        1,
+        16,
+        28
+      ],
+      "sha256": "21e5d079b131cb79b3d7f17a100e47a7fb1440c3d09b89441d880e876bff27b1",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/wall_join_7",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/wall_join_7_hurt.png",
+      "name": "wall_join_7_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        5,
+        1,
+        16,
+        28
+      ],
+      "sha256": "0812d29a617a63b799e5a5ff7cbf47994fe4720611d9fb224882edfb3ba8956c",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/wall_join_7_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/wall_join_8.png",
+      "name": "wall_join_8",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        0,
+        5,
+        11,
+        20
+      ],
+      "sha256": "3ad49de62d9a7883c5c4f5c9251546ce02ba2bff99b6a774a4df733180dc914d",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/wall_join_8",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/wall_join_8_hurt.png",
+      "name": "wall_join_8_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        0,
+        5,
+        11,
+        20
+      ],
+      "sha256": "e0d7d19baf0ecb1cfc63f3f851181a66b55020ee7e0b218237a49c136dcf41e5",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/wall_join_8_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/wall_join_9.png",
+      "name": "wall_join_9",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        0,
+        1,
+        11,
+        20
+      ],
+      "sha256": "91301dad72183ea7957cd4523b4da408fc0f072e2eac96e7787ab1eb6e2655f4",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/wall_join_9",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/wall_join_9_hurt.png",
+      "name": "wall_join_9_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        0,
+        1,
+        11,
+        20
+      ],
+      "sha256": "529f295d9a127305e78d6d80fa98e76c132fe5028e264290a3c2b208ce9ef4dc",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/wall_join_9_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/wall_wreck.png",
+      "name": "wall_wreck",
+      "group": "buildings",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "content_xyxy": [
+        1,
+        23,
+        15,
+        28
+      ],
+      "sha256": "73a2e497ff621f0e4c0fe8c9ffcef5b1e8f700270a0003511206899ffc450905",
+      "source": "assets/art_source/defences/wall/whole-r2.png",
+      "source_sha256": "93926678e72f136ee17b2fe607fa79a7f51c31d114efe304022958cfcb7fcf0c",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/wall_wreck",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/workshop_0_0.png",
+      "name": "workshop_0_0",
+      "group": "buildings",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "content_xyxy": [
+        6,
+        12,
+        24,
+        24
+      ],
+      "sha256": "cee0e9a8fda498c2a1ea8dfd13b27b140af97498275537fee9afe62a0736f2e8",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/workshop_0_0",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/workshop_0_1.png",
+      "name": "workshop_0_1",
+      "group": "buildings",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "content_xyxy": [
+        3,
+        0,
+        24,
+        19
+      ],
+      "sha256": "07b652b8125de83e5063073f7ce69c5b560fd1245b68899131b9f202d621bcc5",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/workshop_0_1",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/workshop_1_0.png",
+      "name": "workshop_1_0",
+      "group": "buildings",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "content_xyxy": [
+        0,
+        12,
+        19,
+        24
+      ],
+      "sha256": "d24bb3b9e739074939e5b1dc936b75367bbe3b40530859ed7d98c6f4b082cc79",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/workshop_1_0",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/workshop_1_1.png",
+      "name": "workshop_1_1",
+      "group": "buildings",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "content_xyxy": [
+        0,
+        0,
+        19,
+        20
+      ],
+      "sha256": "5502dc155226708bc12e4780fdfdbddf011fbe671bb08e752406c71129792dcc",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "buildings/workshop_1_1",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/workshop_active.png",
+      "name": "workshop_active",
+      "group": "buildings",
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "content_xyxy": [
+        4,
+        12,
+        44,
+        44
+      ],
+      "sha256": "cacbd66456366613290297d51b907e9763d7ea6b66f2b5bdab3f0a437546c8bd",
+      "source": "assets/art_source/buildings/workshop/states.png",
+      "source_sha256": "1187fa7bdf73abb2ff47cc77ae15ae37a38a4fa4617de894eaa8ac88b69249b4",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/workshop_active",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/buildings/workshop_hurt.png",
+      "name": "workshop_hurt",
+      "group": "buildings",
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "content_xyxy": [
+        4,
+        12,
+        44,
+        44
+      ],
+      "sha256": "623ab045dc27424bebe7816211ba3288e81d689111ff5e36e624315937f74104",
+      "source": "assets/art_source/buildings/workshop/states.png",
+      "source_sha256": "1187fa7bdf73abb2ff47cc77ae15ae37a38a4fa4617de894eaa8ac88b69249b4",
+      "manifest_draw_scale": 1,
+      "animation": "buildings/workshop_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/props/tree.png",
+      "name": "tree",
+      "group": "props",
+      "canvas_wh": [
+        40,
+        48
+      ],
+      "content_xyxy": [
+        2,
+        2,
+        38,
+        44
+      ],
+      "sha256": "f617f07274a98b22fc29cf37b8b39ce85f3739aff9087c5062048abb472d9425",
+      "source": "assets/art_source/masters/tree.png",
+      "source_sha256": "a9b0f2880631364cf6ceb0dc7795cc132de6d1205b18e4b70434f67ecc7ec3f9",
+      "manifest_draw_scale": 1,
+      "animation": "props/tree",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/props/tree_b.png",
+      "name": "tree_b",
+      "group": "props",
+      "canvas_wh": [
+        40,
+        48
+      ],
+      "content_xyxy": [
+        2,
+        1,
+        38,
+        44
+      ],
+      "sha256": "9db2fcc63ee78043ab78f62ead5b9252aab39f93caa5d51152408d79f9354776",
+      "source": "assets/art_source/props/tree_b.png",
+      "source_sha256": "e7b4138f147769e67cbf4ab86b2dcfc04393b2f16a2062147ceb38eaa8986215",
+      "manifest_draw_scale": 1,
+      "animation": "props/tree_b",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false
+    },
+    {
+      "path": "sprites/props/chicken.png",
+      "name": "chicken",
+      "group": "props",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "content_xyxy": [
+        7,
+        10,
+        18,
+        22
+      ],
+      "sha256": "54ca6dc6b42be5bfdbb195f2c47d78bf2c4ef6d6722788fbf4ae02355b4480e8",
+      "source": "assets/art_source/props/chicken.png",
+      "source_sha256": "fdf30e750796f0d12a16f6b7b09584e5b6b72f4079a3861e4c54b34076ec09bc",
+      "manifest_draw_scale": 1,
+      "animation": "props/chicken",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false
+    },
+    {
+      "path": "sprites/props/cow.png",
+      "name": "cow",
+      "group": "props",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "content_xyxy": [
+        1,
+        9,
+        23,
+        22
+      ],
+      "sha256": "f6a2990f7b7d9f95acbf0927eae35fcb451b50b2c92c439a339e498b4f663374",
+      "source": "assets/art_source/props/cow.png",
+      "source_sha256": "a22e639050fefdce2d3ffde6e82cc4e88ba527e8f91e78c12a0f237d2dda70c4",
+      "manifest_draw_scale": 1,
+      "animation": "props/cow",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false
+    },
+    {
+      "path": "sprites/props/well.png",
+      "name": "well",
+      "group": "props",
+      "canvas_wh": [
+        24,
+        32
+      ],
+      "content_xyxy": [
+        2,
+        6,
+        22,
+        30
+      ],
+      "sha256": "3b75100a5ebee92069d2e42111d2ab804db51ee1a71750d7dc4c98e5dc453655",
+      "source": "assets/art_source/buildings/well/master.png",
+      "source_sha256": "815a533c2dfb7677c6372fb8c7e11585bd6d7a86cf92836c8b9e03a2aa5bccfe",
+      "manifest_draw_scale": 1,
+      "animation": "props/well",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/props/shop.png",
+      "name": "shop",
+      "group": "props",
+      "canvas_wh": [
+        32,
+        40
+      ],
+      "content_xyxy": [
+        2,
+        7,
+        30,
+        36
+      ],
+      "sha256": "f1e2d58430171a9e2168df5cafc3f954e3954c9618bcf72c7b2cc485cdd4e1cb",
+      "source": "assets/art_source/buildings/shop/master.png",
+      "source_sha256": "baf5ffdec4456354ce0284920a4334a149cd9f03bcc4df1c8b66c8dfb5774132",
+      "manifest_draw_scale": 1,
+      "animation": "props/shop",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/props/generator.png",
+      "name": "generator",
+      "group": "props",
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "content_xyxy": [
+        4,
+        14,
+        46,
+        44
+      ],
+      "sha256": "26eafa19dc75728704a6c72b3a9a5bbe6ca8e579b29dd905dd85afe541d8768a",
+      "source": "assets/art_source/buildings/generator/states.png",
+      "source_sha256": "5962ec85d3b13b94c7612ffe43625f6fb4227e712f35a016a2852a88f507ecb4",
+      "manifest_draw_scale": 1,
+      "animation": "props/generator",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/props/press.png",
+      "name": "press",
+      "group": "props",
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "content_xyxy": [
+        11,
+        10,
+        45,
+        44
+      ],
+      "sha256": "84cda96d22125a7d207db6d05e778396941254832cb00b87c1782a9e48739481",
+      "source": "assets/art_source/buildings/press/states.png",
+      "source_sha256": "131056e07af2977490bb70ee164605d8cc021e906ccdb7a8d067a33adefb5283",
+      "manifest_draw_scale": 1,
+      "animation": "props/press",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/props/ore.png",
+      "name": "ore",
+      "group": "props",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        1,
+        3,
+        15,
+        14
+      ],
+      "sha256": "abe01f81c58dfbb004aabe5a3b1fbf8f20013aff7559959e305b19941afe5d8e",
+      "source": "assets/art_source/props/ore.png",
+      "source_sha256": "732ce8cae8c1641fdc0c78e25ffbc2554b4e0a112a098eb13791fb5e6a989609",
+      "manifest_draw_scale": 1,
+      "animation": "props/ore",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false
+    },
+    {
+      "path": "sprites/props/rock.png",
+      "name": "rock",
+      "group": "props",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        1,
+        4,
+        15,
+        14
+      ],
+      "sha256": "2e9d0c2f94fae2594180778c6ab9c97802a2451efc713dd7d97cb1c85a0f3bf4",
+      "source": "assets/art_source/props/rock.png",
+      "source_sha256": "d31268fcb2c20f9f47597d6019219b57d28ef262e4d45a47c2d2f05656c6920c",
+      "manifest_draw_scale": 1,
+      "animation": "props/rock",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false
+    },
+    {
+      "path": "sprites/props/stump.png",
+      "name": "stump",
+      "group": "props",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        1,
+        6,
+        15,
+        14
+      ],
+      "sha256": "93d4e1ba9fe3de4d84be3bf6313fc724d0c9e6fe852628c603fa23c6c31f9455",
+      "source": "assets/art_source/props/stump.png",
+      "source_sha256": "04b155a793e485b04dfa3ee1102d9244589c0c9e5ef12183be8f8091d498a10e",
+      "manifest_draw_scale": 1,
+      "animation": "props/stump",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false
+    },
+    {
+      "path": "sprites/props/generator_0_0.png",
+      "name": "generator_0_0",
+      "group": "props",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "content_xyxy": [
+        8,
+        19,
+        24,
+        24
+      ],
+      "sha256": "5db190e132dee6ea10e83a22f123c02aa49743e644614606f26bb6ec5b06fbf3",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "props/generator_0_0",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/props/generator_0_1.png",
+      "name": "generator_0_1",
+      "group": "props",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "content_xyxy": [
+        4,
+        0,
+        24,
+        20
+      ],
+      "sha256": "f1a9fcb9c87932e983d6d579f45dfa14c525b785da2f0f6138514147805b5bb2",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "props/generator_0_1",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/props/generator_1_0.png",
+      "name": "generator_1_0",
+      "group": "props",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "content_xyxy": [
+        0,
+        14,
+        19,
+        24
+      ],
+      "sha256": "d211c87d0e4390e411785b1846da2987dfc7fabaa3d9635ac7f028c80b9de8da",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "props/generator_1_0",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/props/generator_1_1.png",
+      "name": "generator_1_1",
+      "group": "props",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "content_xyxy": [
+        0,
+        0,
+        22,
+        20
+      ],
+      "sha256": "f67339d3886491ea8c122d4095e559eb5937bab96ab47afa5318a5d43d45391d",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "props/generator_1_1",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/props/generator_active.png",
+      "name": "generator_active",
+      "group": "props",
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "content_xyxy": [
+        4,
+        14,
+        45,
+        44
+      ],
+      "sha256": "7c8299671b3f17923f1668eaaf0fd356d460b857e4899c17ce9f6e5c3b59e8dc",
+      "source": "assets/art_source/buildings/generator/states.png",
+      "source_sha256": "5962ec85d3b13b94c7612ffe43625f6fb4227e712f35a016a2852a88f507ecb4",
+      "manifest_draw_scale": 1,
+      "animation": "props/generator_active",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/props/generator_hurt.png",
+      "name": "generator_hurt",
+      "group": "props",
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "content_xyxy": [
+        4,
+        14,
+        46,
+        44
+      ],
+      "sha256": "becc86e85780dc984644afe3506207e75cfcaf4cb0ce8d7ea5aa09f3de39f78b",
+      "source": "assets/art_source/buildings/generator/states.png",
+      "source_sha256": "5962ec85d3b13b94c7612ffe43625f6fb4227e712f35a016a2852a88f507ecb4",
+      "manifest_draw_scale": 1,
+      "animation": "props/generator_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/props/ore_b.png",
+      "name": "ore_b",
+      "group": "props",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        1,
+        4,
+        15,
+        14
+      ],
+      "sha256": "063b932a485f579187492c37b5f546be73f11bc4169600678fe2c064f728f79d",
+      "source": "assets/art_source/props/ore_b.png",
+      "source_sha256": "06ee39306995017ec320a8f89dadd61ce64295e5d9ec8967051bd1e277ce8edf",
+      "manifest_draw_scale": 1,
+      "animation": "props/ore_b",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false
+    },
+    {
+      "path": "sprites/props/press_0_0.png",
+      "name": "press_0_0",
+      "group": "props",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "content_xyxy": [
+        12,
+        10,
+        24,
+        24
+      ],
+      "sha256": "8383ad5b9837a7e8f82601b231b1aef738f4e448bdc2797d721000eb7dd78349",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "props/press_0_0",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/props/press_0_1.png",
+      "name": "press_0_1",
+      "group": "props",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "content_xyxy": [
+        11,
+        0,
+        24,
+        20
+      ],
+      "sha256": "50447886a8e8d78294fc939dc47e8ecd733957e31cd60374b115fcdc2b96f441",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "props/press_0_1",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/props/press_1_0.png",
+      "name": "press_1_0",
+      "group": "props",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "content_xyxy": [
+        0,
+        10,
+        21,
+        24
+      ],
+      "sha256": "f0f5bab630b319dcdd44ac3fd2bee7a84ae6804d3749ab2f847af0bef607730f",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "props/press_1_0",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/props/press_1_1.png",
+      "name": "press_1_1",
+      "group": "props",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "content_xyxy": [
+        0,
+        0,
+        21,
+        20
+      ],
+      "sha256": "fb39ac86bf51c6a50ec2dffb519c0ab847c607541895bff2136d09c39f1fca76",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "props/press_1_1",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/props/press_active.png",
+      "name": "press_active",
+      "group": "props",
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "content_xyxy": [
+        10,
+        10,
+        46,
+        44
+      ],
+      "sha256": "2190d27248df8efbd156e6ce27de6d1a9d7bd1d29f91687e3f6ba74a6e5cf8dd",
+      "source": "assets/art_source/buildings/press/states.png",
+      "source_sha256": "131056e07af2977490bb70ee164605d8cc021e906ccdb7a8d067a33adefb5283",
+      "manifest_draw_scale": 1,
+      "animation": "props/press_active",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/props/press_hurt.png",
+      "name": "press_hurt",
+      "group": "props",
+      "canvas_wh": [
+        48,
+        48
+      ],
+      "content_xyxy": [
+        10,
+        9,
+        43,
+        44
+      ],
+      "sha256": "a01f13321e48d51655e42db9aa47d564ea99c848a2add83b8047d939465a6d2f",
+      "source": "assets/art_source/buildings/press/states.png",
+      "source_sha256": "131056e07af2977490bb70ee164605d8cc021e906ccdb7a8d067a33adefb5283",
+      "manifest_draw_scale": 1,
+      "animation": "props/press_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/props/rock_b.png",
+      "name": "rock_b",
+      "group": "props",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        1,
+        4,
+        15,
+        14
+      ],
+      "sha256": "cb32e7cd15c39980dde7be381366b30d51e3f0a5576c29b822c7f3db05971e16",
+      "source": "assets/art_source/props/rock_b.png",
+      "source_sha256": "1fa07696f592a1ef51059e2f15b14cbef0603083ff4e4e1e32b42c6a208313b9",
+      "manifest_draw_scale": 1,
+      "animation": "props/rock_b",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false
+    },
+    {
+      "path": "sprites/props/seam.png",
+      "name": "seam",
+      "group": "props",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        2,
+        7,
+        15,
+        14
+      ],
+      "sha256": "c47420d873606a1469a6ea1bc82a3dd8ef5185b60625ed99e3dce809224818c9",
+      "source": "assets/art_source/props/seam.png",
+      "source_sha256": "7e92de1560eb2f23a5fd3c4ebdac3d9574324d66a95d205f6273fb385fcde940",
+      "manifest_draw_scale": 1,
+      "animation": "props/seam",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false
+    },
+    {
+      "path": "sprites/props/seam_b.png",
+      "name": "seam_b",
+      "group": "props",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        1,
+        7,
+        15,
+        14
+      ],
+      "sha256": "eb96153bde91e9fd384503745415e796486534a58dcd144fe5d09eb06e6c2ad8",
+      "source": "assets/art_source/props/seam_b.png",
+      "source_sha256": "5a83f0de1842a9bed331987bb7c6e7d37898bd98fa22fde7ad899dd5dd966bb9",
+      "manifest_draw_scale": 1,
+      "animation": "props/seam_b",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false
+    },
+    {
+      "path": "sprites/interior/bed.png",
+      "name": "bed",
+      "group": "interior",
+      "canvas_wh": [
+        48,
+        64
+      ],
+      "content_xyxy": [
+        3,
+        4,
+        45,
+        64
+      ],
+      "sha256": "fec4239f21fc34ab5d74e0956331ac5dbc5ecfcba81463f498a98228bb03d758",
+      "source": "assets/art_source/interior/farmhouse-v1.png",
+      "source_sha256": "08cbf8e82803b07e15e6c47ba5dfec96bfd17964bb44c404ed64f3e6a80c37fc",
+      "manifest_draw_scale": 1,
+      "animation": "interior/bed",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": true
+    },
+    {
+      "path": "sprites/interior/nightstand.png",
+      "name": "nightstand",
+      "group": "interior",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "content_xyxy": [
+        5,
+        6,
+        28,
+        48
+      ],
+      "sha256": "764a7c0ce1d179373ed6b4dc4f6754de4f57812a7e2777a15a6d3ca0c56dd71a",
+      "source": "assets/art_source/interior/nightstand-lamp-v1.png",
+      "source_sha256": "1138e39e3ea89aea7b61d124a8dd4dcc7ed988bad92ceeb83203e6f97f73f1e4",
+      "manifest_draw_scale": 1,
+      "animation": "interior/nightstand",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": true
+    },
+    {
+      "path": "sprites/interior/storage.png",
+      "name": "storage",
+      "group": "interior",
+      "canvas_wh": [
+        40,
+        76
+      ],
+      "content_xyxy": [
+        7,
+        4,
+        33,
+        76
+      ],
+      "sha256": "17ca9c32043a78af89c051c9c6043b9d71e56b121714f804c2d82f2e7519a7ad",
+      "source": "assets/art_source/interior/storage-west-v1.png",
+      "source_sha256": "0553c2fbf9e4ddab8683ff44b99a2e2bd94c32af624490d3d0ff3a7e5294cc5f",
+      "manifest_draw_scale": 1,
+      "animation": "interior/storage",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": true
+    },
+    {
+      "path": "sprites/interior/fireplace.png",
+      "name": "fireplace",
+      "group": "interior",
+      "canvas_wh": [
+        48,
+        64
+      ],
+      "content_xyxy": [
+        1,
+        8,
+        47,
+        64
+      ],
+      "sha256": "219ba81527ac7194651a40aeff35481d369be632e6d02ee105acb4b050f436cc",
+      "source": "assets/art_source/interior/farmhouse-v1.png",
+      "source_sha256": "08cbf8e82803b07e15e6c47ba5dfec96bfd17964bb44c404ed64f3e6a80c37fc",
+      "manifest_draw_scale": 1,
+      "animation": "interior/fireplace",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": true
+    },
+    {
+      "path": "sprites/interior/kitchen.png",
+      "name": "kitchen",
+      "group": "interior",
+      "canvas_wh": [
+        88,
+        76
+      ],
+      "content_xyxy": [
+        2,
+        6,
+        86,
+        73
+      ],
+      "sha256": "d39a6d77a50152cfb81f458a22c235995c9b5705d5f858f55097c3155324ec21",
+      "source": "assets/art_source/interior/farmhouse-v1.png",
+      "source_sha256": "08cbf8e82803b07e15e6c47ba5dfec96bfd17964bb44c404ed64f3e6a80c37fc",
+      "manifest_draw_scale": 1,
+      "animation": "interior/kitchen",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": true
+    },
+    {
+      "path": "sprites/interior/table.png",
+      "name": "table",
+      "group": "interior",
+      "canvas_wh": [
+        80,
+        48
+      ],
+      "content_xyxy": [
+        4,
+        9,
+        76,
+        48
+      ],
+      "sha256": "2e6f3357ef9ed71136a037970fbdc9b07fbf4af26dd98a01904af8fcc8300a87",
+      "source": "assets/art_source/interior/farmhouse-v1.png",
+      "source_sha256": "08cbf8e82803b07e15e6c47ba5dfec96bfd17964bb44c404ed64f3e6a80c37fc",
+      "manifest_draw_scale": 1,
+      "animation": "interior/table",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": true
+    },
+    {
+      "path": "sprites/interior/rug.png",
+      "name": "rug",
+      "group": "interior",
+      "canvas_wh": [
+        64,
+        36
+      ],
+      "content_xyxy": [
+        0,
+        4,
+        64,
+        36
+      ],
+      "sha256": "3100e2b09be13eff9ed824c8c3d12e0b200a6c8cef74abdcbb7ef1f3f90d2d6c",
+      "source": "assets/art_source/interior/farmhouse-v1.png",
+      "source_sha256": "08cbf8e82803b07e15e6c47ba5dfec96bfd17964bb44c404ed64f3e6a80c37fc",
+      "manifest_draw_scale": 1,
+      "animation": "interior/rug",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": true
+    },
+    {
+      "path": "sprites/interior/plant.png",
+      "name": "plant",
+      "group": "interior",
+      "canvas_wh": [
+        28,
+        36
+      ],
+      "content_xyxy": [
+        2,
+        8,
+        26,
+        36
+      ],
+      "sha256": "4ae1aad4f0c20fa2eb93268327fd29dced3585aedc46ce8ad588529b61d580ec",
+      "source": "assets/art_source/interior/farmhouse-v1.png",
+      "source_sha256": "08cbf8e82803b07e15e6c47ba5dfec96bfd17964bb44c404ed64f3e6a80c37fc",
+      "manifest_draw_scale": 1,
+      "animation": "interior/plant",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": true
+    },
+    {
+      "path": "sprites/interior/wall.png",
+      "name": "wall",
+      "group": "interior",
+      "canvas_wh": [
+        24,
+        32
+      ],
+      "content_xyxy": [
+        0,
+        0,
+        24,
+        32
+      ],
+      "sha256": "d7fa6647ca263a8e10c178700eb286424e96f3311742fc18e23632ea13527e35",
+      "source": "assets/art_source/interior/farmhouse-v1.png",
+      "source_sha256": "08cbf8e82803b07e15e6c47ba5dfec96bfd17964bb44c404ed64f3e6a80c37fc",
+      "manifest_draw_scale": 1,
+      "animation": "interior/wall",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": true
+    },
+    {
+      "path": "sprites/interior/floor.png",
+      "name": "floor",
+      "group": "interior",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "sha256": "8a7dcf78a813a4804bafa51dcdaf7ad55e1147ee21b2c1a61cbccdb20be613b5",
+      "source": "assets/art_source/interior/farmhouse-v1.png",
+      "source_sha256": "08cbf8e82803b07e15e6c47ba5dfec96bfd17964bb44c404ed64f3e6a80c37fc",
+      "manifest_draw_scale": 1,
+      "animation": "interior/floor",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": true
+    },
+    {
+      "path": "sprites/crops/carrot_0.png",
+      "name": "carrot_0",
+      "group": "crops",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        6,
+        12,
+        11,
+        14
+      ],
+      "sha256": "7fc85705617ef3902dd32129495d4ed0ff24a945189ba1a667300ebb3b925dd4",
+      "source": "assets/art_source/crops/carrot.png",
+      "source_sha256": "6d085cca53da6e4fc819da3158634877b1896801170be7cfe40b64305646a94d",
+      "manifest_draw_scale": 1,
+      "animation": "crops/carrot",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false
+    },
+    {
+      "path": "sprites/crops/carrot_1.png",
+      "name": "carrot_1",
+      "group": "crops",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        5,
+        10,
+        12,
+        14
+      ],
+      "sha256": "75ef0bb6151c0b111a2d679efeff63b8fa451bc7fb0ed19e1d7d0b9377335754",
+      "source": "assets/art_source/crops/carrot.png",
+      "source_sha256": "6d085cca53da6e4fc819da3158634877b1896801170be7cfe40b64305646a94d",
+      "manifest_draw_scale": 1,
+      "animation": "crops/carrot",
+      "frame": 1,
+      "seconds": 0.55,
+      "loop": false
+    },
+    {
+      "path": "sprites/crops/carrot_2.png",
+      "name": "carrot_2",
+      "group": "crops",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        3,
+        8,
+        13,
+        14
+      ],
+      "sha256": "6f00db999cf9382b602e4e66c2409cc67f2c068521e29d31c29ccb9505228482",
+      "source": "assets/art_source/crops/carrot.png",
+      "source_sha256": "6d085cca53da6e4fc819da3158634877b1896801170be7cfe40b64305646a94d",
+      "manifest_draw_scale": 1,
+      "animation": "crops/carrot",
+      "frame": 2,
+      "seconds": 0.55,
+      "loop": false
+    },
+    {
+      "path": "sprites/crops/carrot_3.png",
+      "name": "carrot_3",
+      "group": "crops",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        2,
+        5,
+        14,
+        14
+      ],
+      "sha256": "dc4f21b5b12d2dcc7d5e676a49418d10e9e8df9b53cf067f9423012270632cc9",
+      "source": "assets/art_source/crops/carrot.png",
+      "source_sha256": "6d085cca53da6e4fc819da3158634877b1896801170be7cfe40b64305646a94d",
+      "manifest_draw_scale": 1,
+      "animation": "crops/carrot",
+      "frame": 3,
+      "seconds": 0.55,
+      "loop": false
+    },
+    {
+      "path": "sprites/crops/corn_0.png",
+      "name": "corn_0",
+      "group": "crops",
+      "canvas_wh": [
+        16,
+        24
+      ],
+      "content_xyxy": [
+        6,
+        20,
+        10,
+        22
+      ],
+      "sha256": "bc1d09430134f62b6283140c35adaabaa08ed1e4535c03aa9ba79356e3b0d21d",
+      "source": "assets/art_source/crops/corn.png",
+      "source_sha256": "56735130d8c9f10a49e464f3d0f8518c961156a013f1cfb414b52a19ff21ba00",
+      "manifest_draw_scale": 1,
+      "animation": "crops/corn",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false
+    },
+    {
+      "path": "sprites/crops/corn_1.png",
+      "name": "corn_1",
+      "group": "crops",
+      "canvas_wh": [
+        16,
+        24
+      ],
+      "content_xyxy": [
+        4,
+        18,
+        12,
+        22
+      ],
+      "sha256": "72e5d8453e707871f9e68e7ce45d178061d92ddd236101e7ce0c347acba90dce",
+      "source": "assets/art_source/crops/corn.png",
+      "source_sha256": "56735130d8c9f10a49e464f3d0f8518c961156a013f1cfb414b52a19ff21ba00",
+      "manifest_draw_scale": 1,
+      "animation": "crops/corn",
+      "frame": 1,
+      "seconds": 0.55,
+      "loop": false
+    },
+    {
+      "path": "sprites/crops/corn_2.png",
+      "name": "corn_2",
+      "group": "crops",
+      "canvas_wh": [
+        16,
+        24
+      ],
+      "content_xyxy": [
+        3,
+        11,
+        13,
+        22
+      ],
+      "sha256": "6ea12d15ff523fdc3b1fcc4d86425eaae6667c9cafc839e929eeeff985d06a26",
+      "source": "assets/art_source/crops/corn.png",
+      "source_sha256": "56735130d8c9f10a49e464f3d0f8518c961156a013f1cfb414b52a19ff21ba00",
+      "manifest_draw_scale": 1,
+      "animation": "crops/corn",
+      "frame": 2,
+      "seconds": 0.55,
+      "loop": false
+    },
+    {
+      "path": "sprites/crops/corn_3.png",
+      "name": "corn_3",
+      "group": "crops",
+      "canvas_wh": [
+        16,
+        24
+      ],
+      "content_xyxy": [
+        2,
+        2,
+        14,
+        22
+      ],
+      "sha256": "60d71616a2b337c2a5591edd9c99a4bc4aec8a408da5af63ac9f7dee63d4f6af",
+      "source": "assets/art_source/crops/corn.png",
+      "source_sha256": "56735130d8c9f10a49e464f3d0f8518c961156a013f1cfb414b52a19ff21ba00",
+      "manifest_draw_scale": 1,
+      "animation": "crops/corn",
+      "frame": 3,
+      "seconds": 0.55,
+      "loop": false
+    },
+    {
+      "path": "sprites/crops/tilled.png",
+      "name": "tilled",
+      "group": "crops",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "sha256": "6ebcb96545a85493925d913004de5539037b3592d192d9dc609d9686127779af",
+      "source": "assets/art_source/crops/tilled.png",
+      "source_sha256": "059b4694178aa87883540b3b648831918f8f650caeaf2fb953bc2338c6e5b4e3",
+      "manifest_draw_scale": 1,
+      "animation": "crops/tilled",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false
+    },
+    {
+      "path": "sprites/crops/tilled_wet.png",
+      "name": "tilled_wet",
+      "group": "crops",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "sha256": "f3be498c9b31064979a3ce8295221572ad75464256e4f6bb932456a28f49e73c",
+      "source": "assets/art_source/crops/tilled_wet.png",
+      "source_sha256": "9eefdaa50a729463d491094e771e3232e37698dd4e1cf67cc78ba7b896b141d7",
+      "manifest_draw_scale": 1,
+      "animation": "crops/tilled_wet",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false
+    },
+    {
+      "path": "sprites/crops/wheat_0.png",
+      "name": "wheat_0",
+      "group": "crops",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        6,
+        12,
+        10,
+        14
+      ],
+      "sha256": "1e8b1b3224504e82ff525eb9ff70c14b342dfb1bb4ca8930e114cf02de3890d2",
+      "source": "assets/art_source/crops/wheat.png",
+      "source_sha256": "fe1ecbccbcd3c078942fc3ea6fefcc87ecacbf4c40b99422702903a4961751b0",
+      "manifest_draw_scale": 1,
+      "animation": "crops/wheat",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false
+    },
+    {
+      "path": "sprites/crops/wheat_1.png",
+      "name": "wheat_1",
+      "group": "crops",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        6,
+        10,
+        10,
+        14
+      ],
+      "sha256": "53225ec3ef5d8a26c575a3b06c8093e01a21e833b10545a0982f3c89c5ee0b63",
+      "source": "assets/art_source/crops/wheat.png",
+      "source_sha256": "fe1ecbccbcd3c078942fc3ea6fefcc87ecacbf4c40b99422702903a4961751b0",
+      "manifest_draw_scale": 1,
+      "animation": "crops/wheat",
+      "frame": 1,
+      "seconds": 0.55,
+      "loop": false
+    },
+    {
+      "path": "sprites/crops/wheat_2.png",
+      "name": "wheat_2",
+      "group": "crops",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        4,
+        6,
+        12,
+        14
+      ],
+      "sha256": "22f264c4edb6310a1e7ef4db0e0d6da2fa442af3249ac8904f49af1ab5385671",
+      "source": "assets/art_source/crops/wheat.png",
+      "source_sha256": "fe1ecbccbcd3c078942fc3ea6fefcc87ecacbf4c40b99422702903a4961751b0",
+      "manifest_draw_scale": 1,
+      "animation": "crops/wheat",
+      "frame": 2,
+      "seconds": 0.55,
+      "loop": false
+    },
+    {
+      "path": "sprites/crops/wheat_3.png",
+      "name": "wheat_3",
+      "group": "crops",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        4,
+        2,
+        13,
+        14
+      ],
+      "sha256": "5081e30c016bbf5813aa0270ddd08c7892404548da40b629d263cd6f3f70cbd0",
+      "source": "assets/art_source/crops/wheat.png",
+      "source_sha256": "fe1ecbccbcd3c078942fc3ea6fefcc87ecacbf4c40b99422702903a4961751b0",
+      "manifest_draw_scale": 1,
+      "animation": "crops/wheat",
+      "frame": 3,
+      "seconds": 0.55,
+      "loop": false
+    },
+    {
+      "path": "sprites/terrain/atlas.png",
+      "name": "atlas",
+      "group": "terrain",
+      "canvas_wh": [
+        256,
+        80
+      ],
+      "content_xyxy": [
+        0,
+        0,
+        256,
+        80
+      ],
+      "sha256": "b3bdb273aa78b057651dbb2b2b55a36f132e015762ce48b427d26cad93597365",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": null,
+      "frame": null,
+      "seconds": null,
+      "loop": null
+    },
+    {
+      "path": "sprites/terrain/edge_corner_ne.png",
+      "name": "edge_corner_ne",
+      "group": "terrain",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        15,
+        0,
+        16,
+        1
+      ],
+      "sha256": "5763bfb8a4b69e05a043020110af0aff831fe3d4274d2b2635d2284d37a07ce1",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "terrain_edge_corner_ne",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false
+    },
+    {
+      "path": "sprites/terrain/edge_corner_nw.png",
+      "name": "edge_corner_nw",
+      "group": "terrain",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "sha256": "1728c049cbefd0f0b062a5a466e513a231a5cd1839792e9cf8081e439fea04a6",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "terrain_edge_corner_nw",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false
+    },
+    {
+      "path": "sprites/terrain/edge_corner_se.png",
+      "name": "edge_corner_se",
+      "group": "terrain",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        15,
+        15,
+        16,
+        16
+      ],
+      "sha256": "e5cb16ec01e9c58c07cb1b31a51a71d22c0ca0cba8a03f5c6baf64d71d6f43c6",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "terrain_edge_corner_se",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false
+    },
+    {
+      "path": "sprites/terrain/edge_corner_sw.png",
+      "name": "edge_corner_sw",
+      "group": "terrain",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        0,
+        15,
+        1,
+        16
+      ],
+      "sha256": "9a3804226ee23dab0f2ce3f4e6f9dc805711740d856df185fdcbdeb3cf6d3741",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "terrain_edge_corner_sw",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false
+    },
+    {
+      "path": "sprites/terrain/edge_e.png",
+      "name": "edge_e",
+      "group": "terrain",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        14,
+        0,
+        16,
+        16
+      ],
+      "sha256": "ae65cbf68979346b98e2045fa25c42928116c10aed69c2046da16bfcf1ed9b37",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "terrain_edge_e",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false
+    },
+    {
+      "path": "sprites/terrain/edge_n.png",
+      "name": "edge_n",
+      "group": "terrain",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        0,
+        0,
+        16,
+        2
+      ],
+      "sha256": "e305eb77e123cec529ec7788500e0618ed4d7acf27c297a2131aae4081496f71",
+      "source": "assets/art_source/terrain/edge-n.png",
+      "source_sha256": "44914576c7532adeeb7c5a6df66385840e461e54937416d50e92e0f6b60eca4c",
+      "manifest_draw_scale": 1,
+      "animation": "terrain_edge_n",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false
+    },
+    {
+      "path": "sprites/terrain/edge_s.png",
+      "name": "edge_s",
+      "group": "terrain",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        0,
+        14,
+        16,
+        16
+      ],
+      "sha256": "672dad4ee2c3733014c13060389a306a695d2414819139a3dc8c44d53730ff6e",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "terrain_edge_s",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false
+    },
+    {
+      "path": "sprites/terrain/edge_w.png",
+      "name": "edge_w",
+      "group": "terrain",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        0,
+        0,
+        2,
+        16
+      ],
+      "sha256": "59ffcc929daa2515313732065b869ad20fd8bc90ca2ccb5bd7d734b9ec30d780",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "terrain_edge_w",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false
+    },
+    {
+      "path": "sprites/terrain/floor.png",
+      "name": "floor",
+      "group": "terrain",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "sha256": "c0f3bbf8b3b77b1bb24feae99b55666698f9ec37e578b470c8819b9217f6eb8d",
+      "source": "assets/art_source/terrain/floor.png",
+      "source_sha256": "d7c1b998f4007529a3913c616e31ee69d4fc0c1600edcd7cdf091c16bb9dad2d",
+      "manifest_draw_scale": 1,
+      "animation": "terrain_floor",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false
+    },
+    {
+      "path": "sprites/terrain/grass.png",
+      "name": "grass",
+      "group": "terrain",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "sha256": "4d1d187493ab8275082ea8aed39ab884e50384b9bb35cc750276ffbd3b54fc3e",
+      "source": "assets/art_source/terrain/grass.png",
+      "source_sha256": "f9084889428db5aed278e6893118995da00a6e1f0895ee9346cd6a64600b39d6",
+      "manifest_draw_scale": 1,
+      "animation": "terrain_grass",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false
+    },
+    {
+      "path": "sprites/terrain/grass_b.png",
+      "name": "grass_b",
+      "group": "terrain",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "sha256": "e65b863607c80fc98446bfd54f5db7879dc2c22284c3b01f96a8343ea038d4cd",
+      "source": "assets/art_source/terrain/grass_b.png",
+      "source_sha256": "cfd24bb952e47581974d3c4a26f583e361c05826c0d971da7a62db3ad27669a6",
+      "manifest_draw_scale": 1,
+      "animation": "terrain_grass_b",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false
+    },
+    {
+      "path": "sprites/terrain/grass_c.png",
+      "name": "grass_c",
+      "group": "terrain",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "sha256": "6bebf9ccc1902f7352b47dd8f8f06ebcfd4f44f23d6c76dbc84516ff214f66b8",
+      "source": "assets/art_source/terrain/grass_c.png",
+      "source_sha256": "d854a3fba84668d19c56fa50b691c8f06d68d23af1fca70ac232f25233f03a8a",
+      "manifest_draw_scale": 1,
+      "animation": "terrain_grass_c",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false
+    },
+    {
+      "path": "sprites/terrain/grass_d.png",
+      "name": "grass_d",
+      "group": "terrain",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "sha256": "9219456f2ef872c74713287178a95d6eacaf864019a7e3c3c9b48ba2d6ed61f2",
+      "source": "assets/art_source/terrain/grass_d.png",
+      "source_sha256": "597b415b6712308fa1ab8455d5c3d898c0cba01fd2d75eaf08a8d03108ac4658",
+      "manifest_draw_scale": 1,
+      "animation": "terrain_grass_d",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false
+    },
+    {
+      "path": "sprites/terrain/path.png",
+      "name": "path",
+      "group": "terrain",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "sha256": "bd3031d7f35f0b3b89a7dd0d9c55676aa80c4c6b0b43a9e1ab6ee58dbb83001d",
+      "source": "assets/art_source/terrain/path.png",
+      "source_sha256": "aa46572715df423dd98f736340cd7e0e3ea72c16b5377afaab887f1068824ca0",
+      "manifest_draw_scale": 1,
+      "animation": "terrain_path",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false
+    },
+    {
+      "path": "sprites/terrain/rock.png",
+      "name": "rock",
+      "group": "terrain",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "sha256": "6ebc2fbb298286967c154f3bb1018e54549ebcc7898551cae3194b7ba62f852b",
+      "source": "assets/art_source/terrain/rock.png",
+      "source_sha256": "46c3c7f4d4d5bae38b98a47622c42cb6b7104950e370724a03303471c3ddec11",
+      "manifest_draw_scale": 1,
+      "animation": "terrain_rock",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false
+    },
+    {
+      "path": "sprites/terrain/shore_corner_ne.png",
+      "name": "shore_corner_ne",
+      "group": "terrain",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        14,
+        0,
+        16,
+        2
+      ],
+      "sha256": "e49a44d44d46f5a9083bff5802c6128c7ae8df8d8e2f628fc33b3282abc7c9d6",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "terrain_shore_corner_ne",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false
+    },
+    {
+      "path": "sprites/terrain/shore_corner_nw.png",
+      "name": "shore_corner_nw",
+      "group": "terrain",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        0,
+        0,
+        2,
+        2
+      ],
+      "sha256": "180f1ba9802a9f2e42630c20e598cda80ad122f0629a781cfeb48941f231dd50",
+      "source": "assets/art_source/terrain/shore-corner-nw.png",
+      "source_sha256": "ba3bf79e8c14620c4fb065d763999230d9b70aff00f85d514ec6b84ab0855da6",
+      "manifest_draw_scale": 1,
+      "animation": "terrain_shore_corner_nw",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false
+    },
+    {
+      "path": "sprites/terrain/shore_corner_se.png",
+      "name": "shore_corner_se",
+      "group": "terrain",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        14,
+        14,
+        16,
+        16
+      ],
+      "sha256": "f8832cc1c40693fee77317864e6e3a08cb5341a0b60b1c54700e38719a2dc764",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "terrain_shore_corner_se",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false
+    },
+    {
+      "path": "sprites/terrain/shore_corner_sw.png",
+      "name": "shore_corner_sw",
+      "group": "terrain",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        0,
+        14,
+        2,
+        16
+      ],
+      "sha256": "4c2946e14e84fa1412b4c0742c0e815f543005e247a93e0818fb0544bd282f70",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "terrain_shore_corner_sw",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false
+    },
+    {
+      "path": "sprites/terrain/shore_e.png",
+      "name": "shore_e",
+      "group": "terrain",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        13,
+        0,
+        16,
+        16
+      ],
+      "sha256": "2729e63339c9c30cf0f323c4eaf13f33d12511207f34c08696f3893e559d7117",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "terrain_shore_e",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false
+    },
+    {
+      "path": "sprites/terrain/shore_n.png",
+      "name": "shore_n",
+      "group": "terrain",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        0,
+        0,
+        16,
+        3
+      ],
+      "sha256": "4d786185077013771aad1aaa9df172d29aaae7b5752d8bab09bfa6dbf0d6689a",
+      "source": "assets/art_source/terrain/shore-n.png",
+      "source_sha256": "20542d78c3e88ef97e7f710287d5a9031a4e649ebbc79b7ac90af35f0faa7868",
+      "manifest_draw_scale": 1,
+      "animation": "terrain_shore_n",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false
+    },
+    {
+      "path": "sprites/terrain/shore_s.png",
+      "name": "shore_s",
+      "group": "terrain",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        0,
+        13,
+        16,
+        16
+      ],
+      "sha256": "3cbcd4f327dddb1967a0e372f6590c09cb5f79b8ee708a208d14fce5cb83ae1b",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "terrain_shore_s",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false
+    },
+    {
+      "path": "sprites/terrain/shore_w.png",
+      "name": "shore_w",
+      "group": "terrain",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        0,
+        0,
+        3,
+        16
+      ],
+      "sha256": "4deeee7f40117f8475ed861ff80e04297bf955eaf0807def7667dc0d20419d5d",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": "terrain_shore_w",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false
+    },
+    {
+      "path": "sprites/terrain/soil.png",
+      "name": "soil",
+      "group": "terrain",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "sha256": "7f2a394dee9d4801c32da75bc1ddec0522c035936d450a48bff2f3894cc79d4e",
+      "source": "assets/art_source/terrain/soil.png",
+      "source_sha256": "66b14e30ca51158206c29c56c34908b0ee696d9c088f640f9d54897d9d1df754",
+      "manifest_draw_scale": 1,
+      "animation": "terrain_soil",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false
+    },
+    {
+      "path": "sprites/terrain/water.png",
+      "name": "water",
+      "group": "terrain",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "sha256": "0adcf6c3e136bae507188e883ade51f6780dd7a2918ba66cb1bbb3858a9bc2a2",
+      "source": "assets/art_source/terrain/water-loop.png",
+      "source_sha256": "a77b6a3c52605aa03814b4784cc166bd56e58334b6e894006ebc32e2a37405f1",
+      "manifest_draw_scale": 1,
+      "animation": "terrain_water",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/terrain/water_b.png",
+      "name": "water_b",
+      "group": "terrain",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "sha256": "e4be453788104b64c02cb13f66baa2c79691813732b91b6cbb03b13e890b9b0b",
+      "source": "assets/art_source/terrain/water-loop.png",
+      "source_sha256": "a77b6a3c52605aa03814b4784cc166bd56e58334b6e894006ebc32e2a37405f1",
+      "manifest_draw_scale": 1,
+      "animation": "terrain_water",
+      "frame": 1,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/terrain/water_c.png",
+      "name": "water_c",
+      "group": "terrain",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "sha256": "dd3b41a21c7edc867af6b8fd63a691cd73469b7cf0512d31b34892d4d1e31b6d",
+      "source": "assets/art_source/terrain/water-loop.png",
+      "source_sha256": "a77b6a3c52605aa03814b4784cc166bd56e58334b6e894006ebc32e2a37405f1",
+      "manifest_draw_scale": 1,
+      "animation": "terrain_water",
+      "frame": 2,
+      "seconds": 0.55,
+      "loop": true
+    },
+    {
+      "path": "sprites/effects/dust_0.png",
+      "name": "dust_0",
+      "group": "effects",
+      "canvas_wh": [
+        16,
+        12
+      ],
+      "content_xyxy": [
+        4,
+        5,
+        11,
+        10
+      ],
+      "sha256": "b00cd5724f5421bbec6ae5d4aac552ba46d5485923bf0508294e1ea02227200a",
+      "source": "assets/art_source/effects/dust.png",
+      "source_sha256": "75b3c707dd7653bf9ca190fed34327fc5ea645ee88dce3e67bce21f8f4a67463",
+      "manifest_draw_scale": 1,
+      "animation": "effects/dust",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false
+    },
+    {
+      "path": "sprites/effects/dust_1.png",
+      "name": "dust_1",
+      "group": "effects",
+      "canvas_wh": [
+        16,
+        12
+      ],
+      "content_xyxy": [
+        1,
+        3,
+        14,
+        10
+      ],
+      "sha256": "a36da5b5321abbfa1ae324b1dc11e6cbde0b43c6604eac37f14d6dc35f7ab1d0",
+      "source": "assets/art_source/effects/dust.png",
+      "source_sha256": "75b3c707dd7653bf9ca190fed34327fc5ea645ee88dce3e67bce21f8f4a67463",
+      "manifest_draw_scale": 1,
+      "animation": "effects/dust",
+      "frame": 1,
+      "seconds": 0.1,
+      "loop": false
+    },
+    {
+      "path": "sprites/effects/dust_2.png",
+      "name": "dust_2",
+      "group": "effects",
+      "canvas_wh": [
+        16,
+        12
+      ],
+      "content_xyxy": [
+        4,
+        4,
+        11,
+        10
+      ],
+      "sha256": "e5095ad8dc99e57e685edf6d1e506833fd114df1430235f7d8f0cbc503c0e7f2",
+      "source": "assets/art_source/effects/dust.png",
+      "source_sha256": "75b3c707dd7653bf9ca190fed34327fc5ea645ee88dce3e67bce21f8f4a67463",
+      "manifest_draw_scale": 1,
+      "animation": "effects/dust",
+      "frame": 2,
+      "seconds": 0.1,
+      "loop": false
+    },
+    {
+      "path": "sprites/effects/flame_0.png",
+      "name": "flame_0",
+      "group": "effects",
+      "canvas_wh": [
+        16,
+        20
+      ],
+      "content_xyxy": [
+        6,
+        9,
+        11,
+        18
+      ],
+      "sha256": "2b5b0db6f57b19d11ff46a6ba8f18d538eb44a366bb14cd32ec2a06cb7bc65d3",
+      "source": "assets/art_source/effects/flame.png",
+      "source_sha256": "3fbfabd9defb484d516ebb0dfddc2218fd8ae8415d93d1662b74182d56a2799e",
+      "manifest_draw_scale": 1,
+      "animation": "effects/flame",
+      "frame": 0,
+      "seconds": 0.14,
+      "loop": false
+    },
+    {
+      "path": "sprites/effects/flame_1.png",
+      "name": "flame_1",
+      "group": "effects",
+      "canvas_wh": [
+        16,
+        20
+      ],
+      "content_xyxy": [
+        3,
+        3,
+        13,
+        18
+      ],
+      "sha256": "94317a44c8b2c3fcdd7278203ea187520c539cc873fd89737a7f5a2c2e3e71c0",
+      "source": "assets/art_source/effects/flame.png",
+      "source_sha256": "3fbfabd9defb484d516ebb0dfddc2218fd8ae8415d93d1662b74182d56a2799e",
+      "manifest_draw_scale": 1,
+      "animation": "effects/flame",
+      "frame": 1,
+      "seconds": 0.14,
+      "loop": false
+    },
+    {
+      "path": "sprites/effects/flame_2.png",
+      "name": "flame_2",
+      "group": "effects",
+      "canvas_wh": [
+        16,
+        20
+      ],
+      "content_xyxy": [
+        4,
+        6,
+        12,
+        18
+      ],
+      "sha256": "2ae79a18bd21a88e545fe43195cb2f6bd1aa55dff02c751210efdec77ea7ab91",
+      "source": "assets/art_source/effects/flame.png",
+      "source_sha256": "3fbfabd9defb484d516ebb0dfddc2218fd8ae8415d93d1662b74182d56a2799e",
+      "manifest_draw_scale": 1,
+      "animation": "effects/flame",
+      "frame": 2,
+      "seconds": 0.14,
+      "loop": false
+    },
+    {
+      "path": "sprites/effects/flame_3.png",
+      "name": "flame_3",
+      "group": "effects",
+      "canvas_wh": [
+        16,
+        20
+      ],
+      "content_xyxy": [
+        5,
+        7,
+        11,
+        18
+      ],
+      "sha256": "80df139559c9cfefacf96876169d636292e2072b59250ae47b2964ca0df2c8cd",
+      "source": "assets/art_source/effects/flame.png",
+      "source_sha256": "3fbfabd9defb484d516ebb0dfddc2218fd8ae8415d93d1662b74182d56a2799e",
+      "manifest_draw_scale": 1,
+      "animation": "effects/flame",
+      "frame": 3,
+      "seconds": 0.14,
+      "loop": false
+    },
+    {
+      "path": "sprites/effects/flare_0.png",
+      "name": "flare_0",
+      "group": "effects",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "content_xyxy": [
+        7,
+        7,
+        17,
+        17
+      ],
+      "sha256": "298f56654a3e2437f3cf90ef4ce25b5c090e79fd6de3f83c19dfa69b60c22ae7",
+      "source": "assets/art_source/effects/flare.png",
+      "source_sha256": "dacef2fd1f172bb27223a2e342742889906a23bbb0b05da4e992552f54bbd1c1",
+      "manifest_draw_scale": 1,
+      "animation": "effects/flare",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false
+    },
+    {
+      "path": "sprites/effects/flare_1.png",
+      "name": "flare_1",
+      "group": "effects",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "content_xyxy": [
+        3,
+        4,
+        22,
+        21
+      ],
+      "sha256": "63a75020f3b3559a45820ebe35c2de797c3d2d069032dcb8ce8048feb9d05365",
+      "source": "assets/art_source/effects/flare.png",
+      "source_sha256": "dacef2fd1f172bb27223a2e342742889906a23bbb0b05da4e992552f54bbd1c1",
+      "manifest_draw_scale": 1,
+      "animation": "effects/flare",
+      "frame": 1,
+      "seconds": 0.1,
+      "loop": false
+    },
+    {
+      "path": "sprites/effects/flare_2.png",
+      "name": "flare_2",
+      "group": "effects",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "content_xyxy": [
+        1,
+        3,
+        23,
+        21
+      ],
+      "sha256": "f68de4a64581b97b95a7786b75ebd7336bdc0da51574774676959650047f6c5c",
+      "source": "assets/art_source/effects/flare.png",
+      "source_sha256": "dacef2fd1f172bb27223a2e342742889906a23bbb0b05da4e992552f54bbd1c1",
+      "manifest_draw_scale": 1,
+      "animation": "effects/flare",
+      "frame": 2,
+      "seconds": 0.1,
+      "loop": false
+    },
+    {
+      "path": "sprites/effects/flare_3.png",
+      "name": "flare_3",
+      "group": "effects",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "content_xyxy": [
+        5,
+        5,
+        20,
+        19
+      ],
+      "sha256": "2ae8d37e5c8f0f26f6ac5725095a6d9f24abff324695600fe88c9cc4224340e0",
+      "source": "assets/art_source/effects/flare.png",
+      "source_sha256": "dacef2fd1f172bb27223a2e342742889906a23bbb0b05da4e992552f54bbd1c1",
+      "manifest_draw_scale": 1,
+      "animation": "effects/flare",
+      "frame": 3,
+      "seconds": 0.1,
+      "loop": false
+    },
+    {
+      "path": "sprites/effects/impact_0.png",
+      "name": "impact_0",
+      "group": "effects",
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "content_xyxy": [
+        3,
+        3,
+        9,
+        9
+      ],
+      "sha256": "57430acd3bc0b8f2e19504f11a4c35180427788a656259da8694002bdba06343",
+      "source": "assets/art_source/effects/impact.png",
+      "source_sha256": "3b780e9840de8225540938eea089af1b240550de187a713616e702770d5b0af0",
+      "manifest_draw_scale": 1,
+      "animation": "effects/impact",
+      "frame": 0,
+      "seconds": 0.065,
+      "loop": false
+    },
+    {
+      "path": "sprites/effects/impact_1.png",
+      "name": "impact_1",
+      "group": "effects",
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "content_xyxy": [
+        1,
+        2,
+        10,
+        11
+      ],
+      "sha256": "6a5cff67720916e243ef4264acb21b903de449abc32ac5bb4aa5c2ef335a4f54",
+      "source": "assets/art_source/effects/impact.png",
+      "source_sha256": "3b780e9840de8225540938eea089af1b240550de187a713616e702770d5b0af0",
+      "manifest_draw_scale": 1,
+      "animation": "effects/impact",
+      "frame": 1,
+      "seconds": 0.065,
+      "loop": false
+    },
+    {
+      "path": "sprites/effects/impact_2.png",
+      "name": "impact_2",
+      "group": "effects",
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "content_xyxy": [
+        2,
+        4,
+        10,
+        9
+      ],
+      "sha256": "b7ef6481206411ce8f782408ca1a96dc451222bac84bded76a992d3273f155f3",
+      "source": "assets/art_source/effects/impact.png",
+      "source_sha256": "3b780e9840de8225540938eea089af1b240550de187a713616e702770d5b0af0",
+      "manifest_draw_scale": 1,
+      "animation": "effects/impact",
+      "frame": 2,
+      "seconds": 0.065,
+      "loop": false
+    },
+    {
+      "path": "sprites/effects/muzzle_0.png",
+      "name": "muzzle_0",
+      "group": "effects",
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "content_xyxy": [
+        3,
+        4,
+        9,
+        8
+      ],
+      "sha256": "d2a3fbd95425757b2c20768392682201cf2cf7dc7eb0598073d92a87958d95f3",
+      "source": "assets/art_source/effects/muzzle.png",
+      "source_sha256": "49d1745f83972fdb67b4298fd032bbc47eddda428068d9adb4da0e4ddb3230bd",
+      "manifest_draw_scale": 1,
+      "animation": "effects/muzzle",
+      "frame": 0,
+      "seconds": 0.065,
+      "loop": false
+    },
+    {
+      "path": "sprites/effects/muzzle_1.png",
+      "name": "muzzle_1",
+      "group": "effects",
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "content_xyxy": [
+        2,
+        3,
+        9,
+        10
+      ],
+      "sha256": "fe8a03c41b5d5f87cb849f1b4421fbbf997f5a5ae4f5f9f698ac588e81473a21",
+      "source": "assets/art_source/effects/muzzle.png",
+      "source_sha256": "49d1745f83972fdb67b4298fd032bbc47eddda428068d9adb4da0e4ddb3230bd",
+      "manifest_draw_scale": 1,
+      "animation": "effects/muzzle",
+      "frame": 1,
+      "seconds": 0.065,
+      "loop": false
+    },
+    {
+      "path": "sprites/effects/muzzle_2.png",
+      "name": "muzzle_2",
+      "group": "effects",
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "content_xyxy": [
+        2,
+        4,
+        8,
+        9
+      ],
+      "sha256": "abf38edfabe46a07badf7a1b892a0b70916a592aeaaea2f3ca755c942345258d",
+      "source": "assets/art_source/effects/muzzle.png",
+      "source_sha256": "49d1745f83972fdb67b4298fd032bbc47eddda428068d9adb4da0e4ddb3230bd",
+      "manifest_draw_scale": 1,
+      "animation": "effects/muzzle",
+      "frame": 2,
+      "seconds": 0.065,
+      "loop": false
+    },
+    {
+      "path": "sprites/effects/smoke_0.png",
+      "name": "smoke_0",
+      "group": "effects",
+      "canvas_wh": [
+        16,
+        20
+      ],
+      "content_xyxy": [
+        4,
+        13,
+        11,
+        18
+      ],
+      "sha256": "e40b7dca9a82caa7daae0b1aa45e0bded8fbff32167fe2ba00ac159e02768709",
+      "source": "assets/art_source/effects/smoke.png",
+      "source_sha256": "391ba8ad86cb22c0ef8dbdccf4301f883934e8616a5393ee96e7463d2666d4b0",
+      "manifest_draw_scale": 1,
+      "animation": "effects/smoke",
+      "frame": 0,
+      "seconds": 0.14,
+      "loop": false
+    },
+    {
+      "path": "sprites/effects/smoke_1.png",
+      "name": "smoke_1",
+      "group": "effects",
+      "canvas_wh": [
+        16,
+        20
+      ],
+      "content_xyxy": [
+        4,
+        7,
+        13,
+        18
+      ],
+      "sha256": "f0aa5eba4e3405790ff8fae9d6ab08581704dd170e83b7a3eb460c4d889bf0e6",
+      "source": "assets/art_source/effects/smoke.png",
+      "source_sha256": "391ba8ad86cb22c0ef8dbdccf4301f883934e8616a5393ee96e7463d2666d4b0",
+      "manifest_draw_scale": 1,
+      "animation": "effects/smoke",
+      "frame": 1,
+      "seconds": 0.14,
+      "loop": false
+    },
+    {
+      "path": "sprites/effects/smoke_2.png",
+      "name": "smoke_2",
+      "group": "effects",
+      "canvas_wh": [
+        16,
+        20
+      ],
+      "content_xyxy": [
+        4,
+        6,
+        12,
+        18
+      ],
+      "sha256": "1d8049d02c554a792c4b6e545f4b23b618e3cf03f786931103c7a2c5efe2fcdc",
+      "source": "assets/art_source/effects/smoke.png",
+      "source_sha256": "391ba8ad86cb22c0ef8dbdccf4301f883934e8616a5393ee96e7463d2666d4b0",
+      "manifest_draw_scale": 1,
+      "animation": "effects/smoke",
+      "frame": 2,
+      "seconds": 0.14,
+      "loop": false
+    },
+    {
+      "path": "sprites/effects/smoke_3.png",
+      "name": "smoke_3",
+      "group": "effects",
+      "canvas_wh": [
+        16,
+        20
+      ],
+      "content_xyxy": [
+        6,
+        10,
+        11,
+        18
+      ],
+      "sha256": "87b029d90da8a0d73b3c8d7bb416bf94aed42d020de568e457aa146249bd8d91",
+      "source": "assets/art_source/effects/smoke.png",
+      "source_sha256": "391ba8ad86cb22c0ef8dbdccf4301f883934e8616a5393ee96e7463d2666d4b0",
+      "manifest_draw_scale": 1,
+      "animation": "effects/smoke",
+      "frame": 3,
+      "seconds": 0.14,
+      "loop": false
+    },
+    {
+      "path": "sprites/effects/splash_0.png",
+      "name": "splash_0",
+      "group": "effects",
+      "canvas_wh": [
+        20,
+        16
+      ],
+      "content_xyxy": [
+        3,
+        6,
+        17,
+        14
+      ],
+      "sha256": "0e285f03a76353f11a8d249fa6bde87785f24ae8bd0ca13a220f370571850bf8",
+      "source": "assets/art_source/effects/splash.png",
+      "source_sha256": "a1c9fd126730e2e5a90df669a9ea7c574d7d59f1f3c8535cbb8b22beb492a821",
+      "manifest_draw_scale": 1,
+      "animation": "effects/splash",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false
+    },
+    {
+      "path": "sprites/effects/splash_1.png",
+      "name": "splash_1",
+      "group": "effects",
+      "canvas_wh": [
+        20,
+        16
+      ],
+      "content_xyxy": [
+        4,
+        2,
+        16,
+        14
+      ],
+      "sha256": "61498ad8b7f37c6ca394703d329ebf3ef2b77def65eef486c1240d70a5131c5d",
+      "source": "assets/art_source/effects/splash.png",
+      "source_sha256": "a1c9fd126730e2e5a90df669a9ea7c574d7d59f1f3c8535cbb8b22beb492a821",
+      "manifest_draw_scale": 1,
+      "animation": "effects/splash",
+      "frame": 1,
+      "seconds": 0.1,
+      "loop": false
+    },
+    {
+      "path": "sprites/effects/splash_2.png",
+      "name": "splash_2",
+      "group": "effects",
+      "canvas_wh": [
+        20,
+        16
+      ],
+      "content_xyxy": [
+        5,
+        5,
+        15,
+        14
+      ],
+      "sha256": "8fbec4553e9cfea3de89d6771c53ca3ce782549821aefc33b0e5b861e07000de",
+      "source": "assets/art_source/effects/splash.png",
+      "source_sha256": "a1c9fd126730e2e5a90df669a9ea7c574d7d59f1f3c8535cbb8b22beb492a821",
+      "manifest_draw_scale": 1,
+      "animation": "effects/splash",
+      "frame": 2,
+      "seconds": 0.1,
+      "loop": false
+    },
+    {
+      "path": "sprites/effects/splash_3.png",
+      "name": "splash_3",
+      "group": "effects",
+      "canvas_wh": [
+        20,
+        16
+      ],
+      "content_xyxy": [
+        7,
+        9,
+        14,
+        14
+      ],
+      "sha256": "23cb4c761e1ac09e83df8bad8cd9c72b52f1007bb5b7961be7ab985bd4116505",
+      "source": "assets/art_source/effects/splash.png",
+      "source_sha256": "a1c9fd126730e2e5a90df669a9ea7c574d7d59f1f3c8535cbb8b22beb492a821",
+      "manifest_draw_scale": 1,
+      "animation": "effects/splash",
+      "frame": 3,
+      "seconds": 0.1,
+      "loop": false
+    },
+    {
+      "path": "sprites/actors/shadow.png",
+      "name": "shadow",
+      "group": "effects",
+      "canvas_wh": [
+        20,
+        8
+      ],
+      "content_xyxy": [
+        1,
+        3,
+        19,
+        6
+      ],
+      "sha256": "0378b32c2a9bed7529f0552e126c7e05ea17d071fd682633086bd931fac2dcc4",
+      "source": "assets/art_source/player/shadow.png",
+      "source_sha256": "fc43ec54ed74bc71f7058ad0bf5b472e38e3597b3bc8af6dac51044356f2d39f",
+      "manifest_draw_scale": 1,
+      "animation": "shadow",
+      "frame": 0,
+      "seconds": 0.2,
+      "loop": false
+    },
+    {
+      "path": "sprites/ui/button_disabled.png",
+      "name": "button_disabled",
+      "group": "ui",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "sha256": "d546b15a280cb19424c804230f1f3342bb77ab771b1287e7be3a974bd91e889e",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": null,
+      "frame": null,
+      "seconds": null,
+      "loop": null
+    },
+    {
+      "path": "sprites/ui/button_focus.png",
+      "name": "button_focus",
+      "group": "ui",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        1,
+        1,
+        15,
+        15
+      ],
+      "sha256": "c157c5feff7a52eda69a67e4809a3967add4e0f6a5896b77fbd24e6bc60dd6d4",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": null,
+      "frame": null,
+      "seconds": null,
+      "loop": null
+    },
+    {
+      "path": "sprites/ui/button_hover.png",
+      "name": "button_hover",
+      "group": "ui",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "sha256": "a88f450d2d03517d76fc4cd862c7473ba15c707cc930070b51f1f4105b97b8f1",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": null,
+      "frame": null,
+      "seconds": null,
+      "loop": null
+    },
+    {
+      "path": "sprites/ui/button_normal.png",
+      "name": "button_normal",
+      "group": "ui",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "sha256": "5458208f6d0c21cad0382ec0c07cc16f34ef90e6b1bc61251e4ae4985fe14344",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": null,
+      "frame": null,
+      "seconds": null,
+      "loop": null
+    },
+    {
+      "path": "sprites/ui/button_pressed.png",
+      "name": "button_pressed",
+      "group": "ui",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "sha256": "d1bfe746ac1fd6feb8df941972d6880fda963147b2a2d422ea8abf2b7109e45a",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": null,
+      "frame": null,
+      "seconds": null,
+      "loop": null
+    },
+    {
+      "path": "sprites/ui/checkbox_off.png",
+      "name": "checkbox_off",
+      "group": "ui",
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "content_xyxy": [
+        0,
+        0,
+        12,
+        12
+      ],
+      "sha256": "e730eaedac714e41923f9bf2d0f7614690af06188610adc5ed5b5f627a228cd2",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": null,
+      "frame": null,
+      "seconds": null,
+      "loop": null
+    },
+    {
+      "path": "sprites/ui/checkbox_off_disabled.png",
+      "name": "checkbox_off_disabled",
+      "group": "ui",
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "content_xyxy": [
+        0,
+        0,
+        12,
+        12
+      ],
+      "sha256": "c603416fa5344293493dd17aa5b1d609c2a7b27a72201ed107f8a2882e0ecf05",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": null,
+      "frame": null,
+      "seconds": null,
+      "loop": null
+    },
+    {
+      "path": "sprites/ui/checkbox_on.png",
+      "name": "checkbox_on",
+      "group": "ui",
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "content_xyxy": [
+        0,
+        0,
+        12,
+        12
+      ],
+      "sha256": "8fb0f5b73ae7f4a8acfa79a32db5ab1dbbc7a8215c44f9f4131203a4adb6934c",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": null,
+      "frame": null,
+      "seconds": null,
+      "loop": null
+    },
+    {
+      "path": "sprites/ui/checkbox_on_disabled.png",
+      "name": "checkbox_on_disabled",
+      "group": "ui",
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "content_xyxy": [
+        0,
+        0,
+        12,
+        12
+      ],
+      "sha256": "dc162c2334b9a7ecff345911a5598c64d51c82875219fc510f43ee38363522c2",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": null,
+      "frame": null,
+      "seconds": null,
+      "loop": null
+    },
+    {
+      "path": "sprites/ui/hud_carrot.png",
+      "name": "hud_carrot",
+      "group": "ui",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "content_xyxy": [
+        2,
+        1,
+        9,
+        9
+      ],
+      "sha256": "cce00ff88632b5c92f2461e4969ac05a1230fdd6bce2502c4cd98203107a5b94",
+      "source": "assets/art_source/ui/carrot.png",
+      "source_sha256": "d55aa9d51c2078c454aa834a05a19faec0f9256724758da3d976b2acaa1505f2",
+      "manifest_draw_scale": 1,
+      "animation": "ui/hud_carrot",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false
+    },
+    {
+      "path": "sprites/ui/hud_corn.png",
+      "name": "hud_corn",
+      "group": "ui",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "content_xyxy": [
+        2,
+        1,
+        9,
+        9
+      ],
+      "sha256": "e2e46c1cba123865e2a134031348aef7d85804988e562edb17c00aa53d1856ff",
+      "source": "assets/art_source/ui/corn.png",
+      "source_sha256": "ad82d6e923e07d1d013d8f04dcb83c1428b50f71b6939033cd0fd83e5538ca84",
+      "manifest_draw_scale": 1,
+      "animation": "ui/hud_corn",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false
+    },
+    {
+      "path": "sprites/ui/hud_energy.png",
+      "name": "hud_energy",
+      "group": "ui",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "content_xyxy": [
+        2,
+        1,
+        8,
+        9
+      ],
+      "sha256": "11df77c7dbf37b3100317c09d3aeaa55a417267df7eb11e6b9aff07876d0152e",
+      "source": "assets/art_source/ui/energy.png",
+      "source_sha256": "3f75fbff1fa1c831cb854e1294d676ca535344200df3d1c12e1fae9be6743ada",
+      "manifest_draw_scale": 1,
+      "animation": "ui/hud_energy",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false
+    },
+    {
+      "path": "sprites/ui/hud_fish.png",
+      "name": "hud_fish",
+      "group": "ui",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "content_xyxy": [
+        1,
+        3,
+        9,
+        8
+      ],
+      "sha256": "82f5c816dd8cc2009b1e10b791552a667c87067e7b2fe9f68fbcd539c440349b",
+      "source": "assets/art_source/ui/fish.png",
+      "source_sha256": "82d82f6e401cd20e0fd676c090071abf228290b1e53ab432f73cb1ca7cfb0442",
+      "manifest_draw_scale": 1,
+      "animation": "ui/hud_fish",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false
+    },
+    {
+      "path": "sprites/ui/hud_food.png",
+      "name": "hud_food",
+      "group": "ui",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "content_xyxy": [
+        1,
+        2,
+        9,
+        9
+      ],
+      "sha256": "9d7fb69365cbbe0dae4d9f1c82539c9f1fd4b0c99fab556fa13a4b6fe4073067",
+      "source": "assets/art_source/ui/food.png",
+      "source_sha256": "e8248ecfbccc768af04e33d21dde98f2e494f7b6030358bcd1912027f85ec489",
+      "manifest_draw_scale": 1,
+      "animation": "ui/hud_food",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false
+    },
+    {
+      "path": "sprites/ui/hud_gunpowder.png",
+      "name": "hud_gunpowder",
+      "group": "ui",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "content_xyxy": [
+        1,
+        3,
+        9,
+        8
+      ],
+      "sha256": "b53006783e93480773e16853c039544b82a0b3162fcd1b6581c38ba6b5540dfb",
+      "source": "assets/art_source/ui/gunpowder.png",
+      "source_sha256": "2f18146a66795026639f9415b1ddffe152d36d2c15bf147adef47d1bfc13c079",
+      "manifest_draw_scale": 1,
+      "animation": "ui/hud_gunpowder",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false
+    },
+    {
+      "path": "sprites/ui/hud_incendiary.png",
+      "name": "hud_incendiary",
+      "group": "ui",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "content_xyxy": [
+        1,
+        1,
+        9,
+        9
+      ],
+      "sha256": "101c12fa6c18c5d4bd0f2b56449b41c8f91a6b08e1296b8f80ce7562d9074067",
+      "source": "assets/art_source/ui/incendiary.png",
+      "source_sha256": "745acde75e4e144439301dcdbe6dc2c76d9e55077054b13a7196ecb56371dbb8",
+      "manifest_draw_scale": 1,
+      "animation": "ui/hud_incendiary",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false
+    },
+    {
+      "path": "sprites/ui/hud_iron.png",
+      "name": "hud_iron",
+      "group": "ui",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "content_xyxy": [
+        1,
+        2,
+        9,
+        9
+      ],
+      "sha256": "6c505a65227e474d97624412188021eb0a8d977e1b88939ed5d8541689ec6edc",
+      "source": "assets/art_source/ui/iron.png",
+      "source_sha256": "f1b60c1d3931ea8777448af0b68d533d2e6b8e69f1da7efb417c35403d77538d",
+      "manifest_draw_scale": 1,
+      "animation": "ui/hud_iron",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false
+    },
+    {
+      "path": "sprites/ui/hud_meat.png",
+      "name": "hud_meat",
+      "group": "ui",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "content_xyxy": [
+        1,
+        2,
+        9,
+        9
+      ],
+      "sha256": "aaff5df261ee3e16f37bc74780c3dc9a92e927861bd8c91fa24817799a0981bd",
+      "source": "assets/art_source/ui/meat.png",
+      "source_sha256": "de5ca07076fbac90816872d658b56342f23773faaa5b5cb1e3ec3cb0d8d92e7d",
+      "manifest_draw_scale": 1,
+      "animation": "ui/hud_meat",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false
+    },
+    {
+      "path": "sprites/ui/hud_money.png",
+      "name": "hud_money",
+      "group": "ui",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "content_xyxy": [
+        1,
+        2,
+        9,
+        8
+      ],
+      "sha256": "13a5ff774d41199fb21607aa4838cfc5571d8adf644749e64ac641746b2bfb97",
+      "source": "assets/art_source/ui/money.png",
+      "source_sha256": "42086b0c085a64ff2dbac663f6cc39432ba16ec29df7f97aa9d85c5b3fdce158",
+      "manifest_draw_scale": 1,
+      "animation": "ui/hud_money",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false
+    },
+    {
+      "path": "sprites/ui/hud_oil.png",
+      "name": "hud_oil",
+      "group": "ui",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "content_xyxy": [
+        2,
+        1,
+        8,
+        9
+      ],
+      "sha256": "28843e0f412984d85336b24d022de8726ba7c5aeb16631ea7b7b9c5a99f1d339",
+      "source": "assets/art_source/ui/oil.png",
+      "source_sha256": "187ede7f76748eefd84209009dfba2f7607af0d6afe888c7d219de14ed3b2621",
+      "manifest_draw_scale": 1,
+      "animation": "ui/hud_oil",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false
+    },
+    {
+      "path": "sprites/ui/hud_stone.png",
+      "name": "hud_stone",
+      "group": "ui",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "content_xyxy": [
+        1,
+        2,
+        9,
+        8
+      ],
+      "sha256": "69678215024f2f74a275dda79fed76277da5a5d35fe77ba6e7f62d60fe239bcc",
+      "source": "assets/art_source/ui/stone.png",
+      "source_sha256": "bd028d163f7dc8471a0d6b9009f9c162ba997e7f8c2403f0839c004a7f1c7159",
+      "manifest_draw_scale": 1,
+      "animation": "ui/hud_stone",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false
+    },
+    {
+      "path": "sprites/ui/hud_tech.png",
+      "name": "hud_tech",
+      "group": "ui",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "content_xyxy": [
+        1,
+        1,
+        9,
+        9
+      ],
+      "sha256": "1af9d660469b11234de5bf38fa64a94ae089e57b0f518c5171e6adb6c9388974",
+      "source": "assets/art_source/ui/tech.png",
+      "source_sha256": "6a72bbfce6ae216646a7bc63f65708872b97ad887c7d2d216c5b6b8e24072c6c",
+      "manifest_draw_scale": 1,
+      "animation": "ui/hud_tech",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false
+    },
+    {
+      "path": "sprites/ui/hud_wheat.png",
+      "name": "hud_wheat",
+      "group": "ui",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "content_xyxy": [
+        2,
+        1,
+        9,
+        9
+      ],
+      "sha256": "9773b76da64350118f2a142c03222ace36bf38fde7d9e574ce1b4aa262fc3e94",
+      "source": "assets/art_source/ui/wheat.png",
+      "source_sha256": "dbf57c9b0f45fb61d798eacbaeff67382e6adac344d329f7457dadccb077aaa4",
+      "manifest_draw_scale": 1,
+      "animation": "ui/hud_wheat",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false
+    },
+    {
+      "path": "sprites/ui/hud_wood.png",
+      "name": "hud_wood",
+      "group": "ui",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "content_xyxy": [
+        1,
+        2,
+        9,
+        9
+      ],
+      "sha256": "fc1bf6a471078c71e0b99e7a79be2e24f9a888cd541f6914304bdd6124080540",
+      "source": "assets/art_source/ui/wood.png",
+      "source_sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+      "manifest_draw_scale": 1,
+      "animation": "ui/hud_wood",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false
+    },
+    {
+      "path": "sprites/ui/icon_carrot.png",
+      "name": "icon_carrot",
+      "group": "ui",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        2,
+        1,
+        15,
+        15
+      ],
+      "sha256": "490346cd9a33a472916b5e413af09768035603d4abd2179a0efd7f4cbfa200c6",
+      "source": "assets/art_source/ui/carrot.png",
+      "source_sha256": "d55aa9d51c2078c454aa834a05a19faec0f9256724758da3d976b2acaa1505f2",
+      "manifest_draw_scale": 1,
+      "animation": "ui/icon_carrot",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false
+    },
+    {
+      "path": "sprites/ui/icon_corn.png",
+      "name": "icon_corn",
+      "group": "ui",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        2,
+        1,
+        14,
+        15
+      ],
+      "sha256": "fc456602d1d15cac8e9bde9217e2cadc0be0830753801816e79db1488cd6865b",
+      "source": "assets/art_source/ui/corn.png",
+      "source_sha256": "ad82d6e923e07d1d013d8f04dcb83c1428b50f71b6939033cd0fd83e5538ca84",
+      "manifest_draw_scale": 1,
+      "animation": "ui/icon_corn",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false
+    },
+    {
+      "path": "sprites/ui/icon_energy.png",
+      "name": "icon_energy",
+      "group": "ui",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        3,
+        1,
+        14,
+        15
+      ],
+      "sha256": "87d219e0637b06a7c25c2ddc97eb90e87a85f679a3c3b4dd5d509d4da1513fe4",
+      "source": "assets/art_source/ui/energy.png",
+      "source_sha256": "3f75fbff1fa1c831cb854e1294d676ca535344200df3d1c12e1fae9be6743ada",
+      "manifest_draw_scale": 1,
+      "animation": "ui/icon_energy",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false
+    },
+    {
+      "path": "sprites/ui/icon_fish.png",
+      "name": "icon_fish",
+      "group": "ui",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        1,
+        4,
+        15,
+        12
+      ],
+      "sha256": "589a1dbf534d95d92d214c00812a8fd2da75b396196ef4f788bb53eea6d9fda5",
+      "source": "assets/art_source/ui/fish.png",
+      "source_sha256": "82d82f6e401cd20e0fd676c090071abf228290b1e53ab432f73cb1ca7cfb0442",
+      "manifest_draw_scale": 1,
+      "animation": "ui/icon_fish",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false
+    },
+    {
+      "path": "sprites/ui/icon_food.png",
+      "name": "icon_food",
+      "group": "ui",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        1,
+        3,
+        15,
+        14
+      ],
+      "sha256": "d0243226b87ef637b1981a2d9e987182b81272610397e6808a05d86a78cf4afb",
+      "source": "assets/art_source/ui/food.png",
+      "source_sha256": "e8248ecfbccc768af04e33d21dde98f2e494f7b6030358bcd1912027f85ec489",
+      "manifest_draw_scale": 1,
+      "animation": "ui/icon_food",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false
+    },
+    {
+      "path": "sprites/ui/icon_gunpowder.png",
+      "name": "icon_gunpowder",
+      "group": "ui",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        1,
+        4,
+        15,
+        13
+      ],
+      "sha256": "2d845f087c16c5d93865d01d371406fde74b800ce2c7a588255327f6554ac63d",
+      "source": "assets/art_source/ui/gunpowder.png",
+      "source_sha256": "2f18146a66795026639f9415b1ddffe152d36d2c15bf147adef47d1bfc13c079",
+      "manifest_draw_scale": 1,
+      "animation": "ui/icon_gunpowder",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false
+    },
+    {
+      "path": "sprites/ui/icon_incendiary.png",
+      "name": "icon_incendiary",
+      "group": "ui",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        1,
+        1,
+        15,
+        15
+      ],
+      "sha256": "5c51a4aa471e471d9f524dd76b9a683fd5646f7062fb98d7a51c11038224ff52",
+      "source": "assets/art_source/ui/incendiary.png",
+      "source_sha256": "745acde75e4e144439301dcdbe6dc2c76d9e55077054b13a7196ecb56371dbb8",
+      "manifest_draw_scale": 1,
+      "animation": "ui/icon_incendiary",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false
+    },
+    {
+      "path": "sprites/ui/icon_iron.png",
+      "name": "icon_iron",
+      "group": "ui",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        1,
+        3,
+        15,
+        14
+      ],
+      "sha256": "cc8315903bb141470e6f26dc65cbd19287823fb42f945cfd8bdd0f05fc890ef6",
+      "source": "assets/art_source/ui/iron.png",
+      "source_sha256": "f1b60c1d3931ea8777448af0b68d533d2e6b8e69f1da7efb417c35403d77538d",
+      "manifest_draw_scale": 1,
+      "animation": "ui/icon_iron",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false
+    },
+    {
+      "path": "sprites/ui/icon_meat.png",
+      "name": "icon_meat",
+      "group": "ui",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        1,
+        2,
+        15,
+        14
+      ],
+      "sha256": "9dca3e036de6964a7f0ab052fb995f0a787fec31316ec9a3e69e77da54d5f23b",
+      "source": "assets/art_source/ui/meat.png",
+      "source_sha256": "de5ca07076fbac90816872d658b56342f23773faaa5b5cb1e3ec3cb0d8d92e7d",
+      "manifest_draw_scale": 1,
+      "animation": "ui/icon_meat",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false
+    },
+    {
+      "path": "sprites/ui/icon_money.png",
+      "name": "icon_money",
+      "group": "ui",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        1,
+        3,
+        15,
+        14
+      ],
+      "sha256": "e1131306f92cc6a2de702395d1aec2d517a9eab39223f540be603198c793979e",
+      "source": "assets/art_source/ui/money.png",
+      "source_sha256": "42086b0c085a64ff2dbac663f6cc39432ba16ec29df7f97aa9d85c5b3fdce158",
+      "manifest_draw_scale": 1,
+      "animation": "ui/icon_money",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false
+    },
+    {
+      "path": "sprites/ui/icon_oil.png",
+      "name": "icon_oil",
+      "group": "ui",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        3,
+        1,
+        13,
+        15
+      ],
+      "sha256": "a85b74e43b2b023cf9c54e5e5c57f7f1613d374c13e9515ba5abcf6bf69aa58a",
+      "source": "assets/art_source/ui/oil.png",
+      "source_sha256": "187ede7f76748eefd84209009dfba2f7607af0d6afe888c7d219de14ed3b2621",
+      "manifest_draw_scale": 1,
+      "animation": "ui/icon_oil",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false
+    },
+    {
+      "path": "sprites/ui/icon_stone.png",
+      "name": "icon_stone",
+      "group": "ui",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        1,
+        3,
+        15,
+        14
+      ],
+      "sha256": "0aef918775dab9c27284725d28a507c50e0d3788dca6deadc9eea410037d254e",
+      "source": "assets/art_source/ui/stone.png",
+      "source_sha256": "bd028d163f7dc8471a0d6b9009f9c162ba997e7f8c2403f0839c004a7f1c7159",
+      "manifest_draw_scale": 1,
+      "animation": "ui/icon_stone",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false
+    },
+    {
+      "path": "sprites/ui/icon_tech.png",
+      "name": "icon_tech",
+      "group": "ui",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        1,
+        1,
+        15,
+        15
+      ],
+      "sha256": "884ccf99ed8701ece103cc9c3639066ad55556af6b38b48d910720996faf08e8",
+      "source": "assets/art_source/ui/tech.png",
+      "source_sha256": "6a72bbfce6ae216646a7bc63f65708872b97ad887c7d2d216c5b6b8e24072c6c",
+      "manifest_draw_scale": 1,
+      "animation": "ui/icon_tech",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false
+    },
+    {
+      "path": "sprites/ui/icon_wheat.png",
+      "name": "icon_wheat",
+      "group": "ui",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        2,
+        1,
+        14,
+        15
+      ],
+      "sha256": "6df63672d3ee3fa397ca4e7e148b8bb43b7b51bd895d7cb4eddb7e07b531bcf0",
+      "source": "assets/art_source/ui/wheat.png",
+      "source_sha256": "dbf57c9b0f45fb61d798eacbaeff67382e6adac344d329f7457dadccb077aaa4",
+      "manifest_draw_scale": 1,
+      "animation": "ui/icon_wheat",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false
+    },
+    {
+      "path": "sprites/ui/icon_wood.png",
+      "name": "icon_wood",
+      "group": "ui",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        1,
+        2,
+        15,
+        15
+      ],
+      "sha256": "6d0275b93c12105ae00a148ca6f27aaf586a985cb4897bba84ef6ec2b89d9148",
+      "source": "assets/art_source/ui/wood.png",
+      "source_sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+      "manifest_draw_scale": 1,
+      "animation": "ui/icon_wood",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false
+    },
+    {
+      "path": "sprites/ui/panel.png",
+      "name": "panel",
+      "group": "ui",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "sha256": "0c7d37fe6f4c333a048959f0d5b4b6867cce201d270f260ec78f367d082a1863",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": null,
+      "frame": null,
+      "seconds": null,
+      "loop": null
+    },
+    {
+      "path": "sprites/ui/slider_grab.png",
+      "name": "slider_grab",
+      "group": "ui",
+      "canvas_wh": [
+        8,
+        8
+      ],
+      "content_xyxy": [
+        0,
+        0,
+        8,
+        8
+      ],
+      "sha256": "dbb118a90a32fa6941bb51e3f1eb1a7354c4147d7c22e28d5992f6968891e79e",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": null,
+      "frame": null,
+      "seconds": null,
+      "loop": null
+    },
+    {
+      "path": "sprites/ui/slider_grab_disabled.png",
+      "name": "slider_grab_disabled",
+      "group": "ui",
+      "canvas_wh": [
+        8,
+        8
+      ],
+      "content_xyxy": [
+        0,
+        0,
+        8,
+        8
+      ],
+      "sha256": "534e065acf8d10a6a76e271f5a4cf90ca6a5bc66145852360885964cd6304bd9",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": null,
+      "frame": null,
+      "seconds": null,
+      "loop": null
+    },
+    {
+      "path": "sprites/ui/slider_grab_highlight.png",
+      "name": "slider_grab_highlight",
+      "group": "ui",
+      "canvas_wh": [
+        8,
+        8
+      ],
+      "content_xyxy": [
+        0,
+        0,
+        8,
+        8
+      ],
+      "sha256": "5b995d665c626e53ae4fe4028c4b8703aad110fbf544f7036587c7137519bee8",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": null,
+      "frame": null,
+      "seconds": null,
+      "loop": null
+    },
+    {
+      "path": "sprites/ui/slider_track.png",
+      "name": "slider_track",
+      "group": "ui",
+      "canvas_wh": [
+        16,
+        4
+      ],
+      "content_xyxy": [
+        0,
+        0,
+        16,
+        4
+      ],
+      "sha256": "e9c0be12295a96953254b1379b17e1326f5d95429b2923ac93da24679bafb01b",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": null,
+      "frame": null,
+      "seconds": null,
+      "loop": null
+    },
+    {
+      "path": "sprites/ui/tab.png",
+      "name": "tab",
+      "group": "ui",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "sha256": "e9a5e66a8dc6f4aa744ab9055a6189017dc5644ab0a6e0651d7527db2e80b719",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": null,
+      "frame": null,
+      "seconds": null,
+      "loop": null
+    },
+    {
+      "path": "sprites/ui/tab_disabled.png",
+      "name": "tab_disabled",
+      "group": "ui",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "sha256": "1969ef9e739629f8c9d80f4c933b43e9405659afefd038b1f6f0ed38dbc8a160",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": null,
+      "frame": null,
+      "seconds": null,
+      "loop": null
+    },
+    {
+      "path": "sprites/ui/tab_hover.png",
+      "name": "tab_hover",
+      "group": "ui",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "sha256": "972b9d58da7682a75aeb1fb4fca3832f76ed1a7076ab7fb71c8af0ae330501fd",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": null,
+      "frame": null,
+      "seconds": null,
+      "loop": null
+    },
+    {
+      "path": "sprites/ui/tab_selected.png",
+      "name": "tab_selected",
+      "group": "ui",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "sha256": "6b7f461faed2e96cab17d819a485520ee94d9ce1514d04bb8cd62250446f1d97",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": null,
+      "frame": null,
+      "seconds": null,
+      "loop": null
+    },
+    {
+      "path": "sprites/ui/tooltip.png",
+      "name": "tooltip",
+      "group": "ui",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "content_xyxy": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "sha256": "cea90c9de6ee02b120ca255ddcee7722858e4f60938ef3fc7160c2832abdbc44",
+      "source": null,
+      "source_sha256": null,
+      "manifest_draw_scale": 1,
+      "animation": null,
+      "frame": null,
+      "seconds": null,
+      "loop": null
+    }
+  ]
+}

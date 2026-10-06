@@ -12061,3 +12061,26 @@ tool/fishing pose size, current camera/game rules and actual FHD validation.
 No production integration or core edits were performed in this handoff.
 Validation: source paths and existing direction/mirror/pivot code inspected;
 text-only change, no new renderer or gameplay test run.
+
+
+### 2026-10-06 — Other asset gallery matching32px farmer density
+
+The user requested all other assets excluding farmer and zombies. Added
+implementation/fhd-assets/pilots/2026-10-06/32px-review/, a review page of all
+320 existing non-character runtime PNGs:166 buildings,27 props,10 furniture,
+14 crops,28 terrain,26 effects including contact shadow,49 interface assets.
+Includes upgrades, damaged/destroyed states, modules, slices and atlas.
+The current world art already matches the32px farmer's density: one native
+pixel occupies4 physical FHD pixels. No universal32x32 resize, regeneration,
+recoloring or runtime promotion was applied. Large objects keep proportions.
+The page labels source sizes and offers category/search plus1x/2x/4x nearest
+display. It shows unlit source frames; procedural shaders and gameplay timing
+are not represented as fabricated animation.
+
+Validation:320 distinct referenced PNGs and320 unchanged runtime SHA256
+values; every initial display size is integer4x; page/contract reproducible
+byte-for-byte; farmer/enemy poses excluded. Browser category filtering,
+search(tree ->2 matches),2x view and4x restoration checked visually.
+Saved browser-review.png and checks.json. No gameplay changes or full-engine
+test rerun for an isolated gallery. No new top-level directory, backlog change,
+push or automation; concurrent core/project edits preserved.

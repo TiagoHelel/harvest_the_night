@@ -1,0 +1,8 @@
+{
+  "runtime_pngs_unchanged": 320,
+  "unique_pngs_in_html": 320,
+  "FHD_integer_scale": 4,
+  "excluded_farmer_and_enemies": true,
+  "builder_reproduces_html_and_contract": true,
+  "simulation_or_production_files_modified": false
+}
