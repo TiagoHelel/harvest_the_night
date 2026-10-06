@@ -14,9 +14,9 @@ extends RefCounted
 ## The reviewed blue walk (2026-10-05) is drawn in all eight, so a diagonal
 ## walk shows the diagonal drawing. Which one comes from the direction held,
 ## `heading`; the rules still resolve it onto four facings, and the drawing
-## never disagrees with them (`direction()`). Standing still holds a pose of
-## the same walk, and running plays the same cycle faster - neither has art of
-## its own yet. Existing work strips remain west-facing and mirror only when
+## never disagrees with them (`direction()`). Standing still uses independent
+## grounded idle poses; running plays the same walk cycle faster. Existing
+## work strips remain west-facing and mirror only when
 ## facing east.
 ##
 ## ## The speeds are data

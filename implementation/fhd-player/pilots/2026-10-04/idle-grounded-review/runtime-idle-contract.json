@@ -1,0 +1,361 @@
+{
+  "version": 1,
+  "date": "2026-10-05",
+  "reason": "Replace raised-foot walk poses used as idle in runtime",
+  "canvas_wh": [
+    80,
+    80
+  ],
+  "pivot_xy": [
+    40,
+    72
+  ],
+  "draw_scale": 0.5,
+  "idle_seconds": 0.55,
+  "idle_slots": 3,
+  "raw": {
+    "path": "assets/art_source/player-fhd/idle-blue-grounded/idle-r1.raw.png",
+    "sha256": "44bf86d816ac64b492291701e77697790f31e4bf61e3a556c219909f20ed4895",
+    "role": "Accepted generated eight-way neutral idle sheet"
+  },
+  "prompt": {
+    "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/idle-r1.prompt.txt",
+    "sha256": "67257199ebab00725be33a654f0366cd594453447b38eba47cec8eb0b7653a0c",
+    "role": "Eight-way grounded idle generation prompt"
+  },
+  "references": [
+    {
+      "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/raised-foot-edit-target.png",
+      "sha256": "95f0f8a4e3e91baf33cb42c0f5363ea3980a91d02795d74d4e2cf22189de2f61",
+      "role": "Edit target: prior raised-foot idle stand-ins"
+    },
+    {
+      "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/approved-walk-reference.png",
+      "sha256": "0e9285aa619bedf573f5630f5ceb3674a90f3ecf8c8bed4e39853326d62aa7a9",
+      "role": "Approved walking identity and proportions"
+    },
+    {
+      "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/validation.json",
+      "sha256": "43f9117d2c3688f4fd2ef7ebc1a12c8e36b6ba79f28fcbc18737279afb22540f",
+      "role": "User-approved RIGHT blue garment ramp"
+    },
+    {
+      "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/walk-baseline.json",
+      "sha256": "131760438a52435366e75c3739aa79e1d02a960011893b3c93dd3efdd5d5b929",
+      "role": "Frozen 192 approved walk review/source/runtime hashes"
+    }
+  ],
+  "palette_rgb": [
+    [
+      2,
+      16,
+      53
+    ],
+    [
+      1,
+      25,
+      73
+    ],
+    [
+      9,
+      31,
+      81
+    ],
+    [
+      9,
+      51,
+      121
+    ],
+    [
+      18,
+      56,
+      125
+    ],
+    [
+      17,
+      65,
+      144
+    ],
+    [
+      24,
+      70,
+      152
+    ],
+    [
+      28,
+      80,
+      173
+    ],
+    [
+      31,
+      82,
+      177
+    ],
+    [
+      31,
+      84,
+      180
+    ],
+    [
+      31,
+      85,
+      180
+    ],
+    [
+      40,
+      97,
+      193
+    ]
+  ],
+  "sampling": "Measured cells, alpha>=128, one 0.18 nearest scale, center x40 / ground y72; garment palette only",
+  "frames": [
+    {
+      "direction": "down",
+      "suffix": "south",
+      "raw_cell_xyxy": [
+        0,
+        0,
+        443,
+        443
+      ],
+      "raw_content_xyxy": [
+        127,
+        45,
+        311,
+        399
+      ],
+      "common_scale": 0.18,
+      "native_bbox_xyxy": [
+        24,
+        8,
+        57,
+        72
+      ],
+      "source": {
+        "path": "assets/art_source/player-fhd/idle-blue-grounded/frames/down.png",
+        "sha256": "cd0aaf7ef1af1cddd989b45f1c8d11c1f2db8e26687246b98dcd07a399720ea3",
+        "role": "Generated neutral standing pose, both boots grounded"
+      },
+      "garment_rgb_pixels_changed": 425,
+      "garment_colors": 11,
+      "alpha_and_non_garment_rgba_preserved": true
+    },
+    {
+      "direction": "right",
+      "suffix": "east",
+      "raw_cell_xyxy": [
+        443,
+        0,
+        887,
+        443
+      ],
+      "raw_content_xyxy": [
+        134,
+        40,
+        309,
+        400
+      ],
+      "common_scale": 0.18,
+      "native_bbox_xyxy": [
+        24,
+        7,
+        56,
+        72
+      ],
+      "source": {
+        "path": "assets/art_source/player-fhd/idle-blue-grounded/frames/right.png",
+        "sha256": "09cca790c8db70968ab10b571d149fd0de5d21f601f2dd2ed457ff95cbe96d03",
+        "role": "Generated neutral standing pose, both boots grounded"
+      },
+      "garment_rgb_pixels_changed": 252,
+      "garment_colors": 10,
+      "alpha_and_non_garment_rgba_preserved": true
+    },
+    {
+      "direction": "up",
+      "suffix": "north",
+      "raw_cell_xyxy": [
+        887,
+        0,
+        1330,
+        443
+      ],
+      "raw_content_xyxy": [
+        130,
+        45,
+        313,
+        399
+      ],
+      "common_scale": 0.18,
+      "native_bbox_xyxy": [
+        24,
+        8,
+        57,
+        72
+      ],
+      "source": {
+        "path": "assets/art_source/player-fhd/idle-blue-grounded/frames/up.png",
+        "sha256": "7e6f89a31d595627de7b45496328c2174116c59c266f8abada11b565658d793b",
+        "role": "Generated neutral standing pose, both boots grounded"
+      },
+      "garment_rgb_pixels_changed": 435,
+      "garment_colors": 12,
+      "alpha_and_non_garment_rgba_preserved": true
+    },
+    {
+      "direction": "left",
+      "suffix": "west",
+      "raw_cell_xyxy": [
+        1330,
+        0,
+        1774,
+        443
+      ],
+      "raw_content_xyxy": [
+        133,
+        44,
+        309,
+        399
+      ],
+      "common_scale": 0.18,
+      "native_bbox_xyxy": [
+        24,
+        8,
+        56,
+        72
+      ],
+      "source": {
+        "path": "assets/art_source/player-fhd/idle-blue-grounded/frames/left.png",
+        "sha256": "5ec4ff42e2a73a7fe05904ae727f76e28c9b97deb41bd57f368f649b7270e52a",
+        "role": "Generated neutral standing pose, both boots grounded"
+      },
+      "garment_rgb_pixels_changed": 248,
+      "garment_colors": 11,
+      "alpha_and_non_garment_rgba_preserved": true
+    },
+    {
+      "direction": "down-right",
+      "suffix": "south_east",
+      "raw_cell_xyxy": [
+        0,
+        443,
+        443,
+        887
+      ],
+      "raw_content_xyxy": [
+        128,
+        44,
+        311,
+        393
+      ],
+      "common_scale": 0.18,
+      "native_bbox_xyxy": [
+        24,
+        9,
+        57,
+        72
+      ],
+      "source": {
+        "path": "assets/art_source/player-fhd/idle-blue-grounded/frames/down-right.png",
+        "sha256": "b64d33daea7da53b5d83f38134830f740342ffe45cfb45ffd5a6aae37c476cbb",
+        "role": "Generated neutral standing pose, both boots grounded"
+      },
+      "garment_rgb_pixels_changed": 411,
+      "garment_colors": 10,
+      "alpha_and_non_garment_rgba_preserved": true
+    },
+    {
+      "direction": "up-right",
+      "suffix": "north_east",
+      "raw_cell_xyxy": [
+        443,
+        443,
+        887,
+        887
+      ],
+      "raw_content_xyxy": [
+        134,
+        44,
+        313,
+        393
+      ],
+      "common_scale": 0.18,
+      "native_bbox_xyxy": [
+        24,
+        9,
+        56,
+        72
+      ],
+      "source": {
+        "path": "assets/art_source/player-fhd/idle-blue-grounded/frames/up-right.png",
+        "sha256": "b9934404536e81d8ca7b3fc1342f6581da3f5bf5190a23a8d577405add3380d0",
+        "role": "Generated neutral standing pose, both boots grounded"
+      },
+      "garment_rgb_pixels_changed": 358,
+      "garment_colors": 11,
+      "alpha_and_non_garment_rgba_preserved": true
+    },
+    {
+      "direction": "up-left",
+      "suffix": "north_west",
+      "raw_cell_xyxy": [
+        887,
+        443,
+        1330,
+        887
+      ],
+      "raw_content_xyxy": [
+        129,
+        45,
+        309,
+        393
+      ],
+      "common_scale": 0.18,
+      "native_bbox_xyxy": [
+        24,
+        9,
+        56,
+        72
+      ],
+      "source": {
+        "path": "assets/art_source/player-fhd/idle-blue-grounded/frames/up-left.png",
+        "sha256": "4fad1d8c82cf5f6cba609705104880c086dcc67e001e32e333bd3dfd6c3483d5",
+        "role": "Generated neutral standing pose, both boots grounded"
+      },
+      "garment_rgb_pixels_changed": 353,
+      "garment_colors": 9,
+      "alpha_and_non_garment_rgba_preserved": true
+    },
+    {
+      "direction": "down-left",
+      "suffix": "south_west",
+      "raw_cell_xyxy": [
+        1330,
+        443,
+        1774,
+        887
+      ],
+      "raw_content_xyxy": [
+        131,
+        42,
+        315,
+        392
+      ],
+      "common_scale": 0.18,
+      "native_bbox_xyxy": [
+        24,
+        9,
+        57,
+        72
+      ],
+      "source": {
+        "path": "assets/art_source/player-fhd/idle-blue-grounded/frames/down-left.png",
+        "sha256": "fd8c796d1edf29ddae3784761e4730a5004ca6e20bd9fbf397c6cbea429db5ab",
+        "role": "Generated neutral standing pose, both boots grounded"
+      },
+      "garment_rgb_pixels_changed": 394,
+      "garment_colors": 11,
+      "alpha_and_non_garment_rgba_preserved": true
+    }
+  ]
+}

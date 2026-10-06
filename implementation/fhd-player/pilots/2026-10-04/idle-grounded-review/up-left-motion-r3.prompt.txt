@@ -1,0 +1,13 @@
+Precise final calf-length correction of this 4x2 WALK UP-LEFT pixel-art atlas. KEEP the eight leg poses and anatomical owners from this image, including the newly corrected narrow REACHING poses in frames4and8. Do NOT return4or8to a wide contact. Every hat/head/neck/shirt/arm/hand/pelvis/hip/pocket pixel stays unchanged. No new walk cycle.
+The supporting boot is too high in several frames because their calf is shortened. On this exact1774x887 sheet each cell is about443x443 rasterpixels. Hat tops are localy44. A grounded support boot's bottom must reach localy398 to400 in EVERY cell (approximately nativegroundpivoty72 at0.18sampling), while the other swinging foot remains raised in its current pose.
+Adjust ONLY supporting calves and their attached brown boots:
+Frame1 boot bottom is localy383: extend supporting calves DOWN about15rasterpixels, preserve both wide contact angles, same bootshape.
+Frame2 support boot383: extend supporting shin DOWN15pixels.
+Frame3 support394: extend supporting shin DOWN5pixels.
+Frame4 support389: extend supporting shin DOWN10pixels. Preserve the opposite reaching boot raised at its current forward position; do not turn it into contact.
+Frame5 support389: extend supporting calf DOWN10pixels, preserve opposite-leg contact ownership.
+Frame6 support388: extend supporting shin DOWN11pixels.
+Frame7 support400: keep completely unchanged.
+Frame8 support391: extend supporting shin DOWN8pixels. Opposite reaching boot remains raised, forward with its same compactshape.
+Each extension follows the same calf axis and connects continuously from its unchanged knee; move the associated boot down without scaling or reshaping it. The knees and upper thighs stay where they are. Keep the other lifted boot and its trajectory unchanged. No floating cuff, no leg-root swaps, same lighter-blue NEAR anatomical LEFT leg and darker-blue FAR anatomical RIGHT. Match original slim denim thickness, compact boots and leg bone lengths.
+Visible height now consistent at354±3rasterpixels in all8 (~64nativepixels); SAME COMMON SCALE for all poses, stable hatwidth and headsize. Do not stretch the full body, move the hat down or enlarge anycharacter. Transparent alpha, same8fullbody poses4x2, no grid/text/shadow, crisp native square pixels. ONLY calf reach correction, all other artwork and phaseorder unchanged.

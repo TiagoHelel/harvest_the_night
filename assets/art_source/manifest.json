@@ -3648,6 +3648,14 @@
     {
       "id": "actors/idle_south_0",
       "owner": "raster",
+      "source": "assets/art_source/player-fhd/idle-blue-grounded/frames/down.png",
+      "source_sha256": "cd0aaf7ef1af1cddd989b45f1c8d11c1f2db8e26687246b98dcd07a399720ea3",
+      "crop_xywh": [
+        0,
+        0,
+        80,
+        80
+      ],
       "canvas_wh": [
         80,
         80
@@ -3656,43 +3664,69 @@
         40,
         72
       ],
+      "content_anchor_xy": [
+        40,
+        72
+      ],
+      "content_scale": 1.0,
       "draw_scale": 0.5,
+      "alpha_threshold": 128,
       "palette": "exact-source",
       "animation": "idle_south",
       "frame": 0,
       "seconds": 0.55,
       "loop": true,
       "output": "sprites/actors/idle_south_0.png",
-      "output_sha256": "81a3205960796ad795a7c2c0eee4efdac6fb228a81d379321c7ad91f7361edcb",
-      "prompt": "implementation/fhd-player/pilots/2026-10-04/walk-down-size-review/down-r3.prompt.json",
-      "prompt_sha256": "be71c225e471e49a440f3ac25fbff2cd9e484fa7aa18fa786312800c04caaf04",
+      "prompt": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/idle-r1.prompt.txt",
+      "prompt_sha256": "67257199ebab00725be33a654f0366cd594453447b38eba47cec8eb0b7653a0c",
       "references": [
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-size-review/down-r3/frames/walk-down-01.png",
-          "sha256": "c82cbd6cf0887e2c5a7cd4076459b29b8084c951f56eb57fd46dfb6ebdb23c0c",
-          "role": "Approved walking pose before the blue garment palette"
+          "path": "assets/art_source/player-fhd/idle-blue-grounded/idle-r1.raw.png",
+          "sha256": "44bf86d816ac64b492291701e77697790f31e4bf61e3a556c219909f20ed4895",
+          "role": "Accepted generated eight-way neutral idle sheet"
         },
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/down/01.png",
-          "sha256": "714b0bee6d4a29560ed45f018d1697f63a9c8f6ec9618600d48a8d8c1996caaf",
-          "role": "Reviewed blue frame; the source is a byte-identical copy"
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/raised-foot-edit-target.png",
+          "sha256": "95f0f8a4e3e91baf33cb42c0f5363ea3980a91d02795d74d4e2cf22189de2f61",
+          "role": "Edit target: prior raised-foot idle stand-ins"
         },
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
-          "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/approved-walk-reference.png",
+          "sha256": "0e9285aa619bedf573f5630f5ceb3674a90f3ecf8c8bed4e39853326d62aa7a9",
+          "role": "Approved walking identity and proportions"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/validation.json",
+          "sha256": "43f9117d2c3688f4fd2ef7ebc1a12c8e36b6ba79f28fcbc18737279afb22540f",
+          "role": "User-approved RIGHT blue garment ramp"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/walk-baseline.json",
+          "sha256": "131760438a52435366e75c3739aa79e1d02a960011893b3c93dd3efdd5d5b929",
+          "role": "Frozen 192 approved walk review/source/runtime hashes"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/runtime-idle-contract.json",
+          "sha256": "89ff7e6197d616815a0172b1c650c10f67c0f10f4bd204e2a8f0edb5837a348c",
+          "role": "Dedicated grounded idle geometry and approved walking pixel invariance"
         }
       ],
       "tool": "built-in ImageGen",
-      "generation_task": "fhd-walk-blue",
-      "approval": "Held walk frame as idle until idle art exists; 2026-10-05",
-      "input": "actors/walk_south_0",
-      "operation": "copy",
-      "alias_of": "actors/walk_south_0"
+      "generation_task": "fhd-idle-grounded",
+      "approval": "User-requested raised-foot idle fix; 2026-10-05",
+      "output_sha256": "d4533958866b0ffc08ba443ee026393214adcd9b80fc475c5e351d244974d241"
     },
     {
       "id": "actors/idle_south_1",
       "owner": "raster",
+      "source": "assets/art_source/player-fhd/idle-blue-grounded/frames/down.png",
+      "source_sha256": "cd0aaf7ef1af1cddd989b45f1c8d11c1f2db8e26687246b98dcd07a399720ea3",
+      "crop_xywh": [
+        0,
+        0,
+        80,
+        80
+      ],
       "canvas_wh": [
         80,
         80
@@ -3701,43 +3735,69 @@
         40,
         72
       ],
+      "content_anchor_xy": [
+        40,
+        72
+      ],
+      "content_scale": 1.0,
       "draw_scale": 0.5,
+      "alpha_threshold": 128,
       "palette": "exact-source",
       "animation": "idle_south",
       "frame": 1,
       "seconds": 0.55,
       "loop": true,
       "output": "sprites/actors/idle_south_1.png",
-      "output_sha256": "81a3205960796ad795a7c2c0eee4efdac6fb228a81d379321c7ad91f7361edcb",
-      "prompt": "implementation/fhd-player/pilots/2026-10-04/walk-down-size-review/down-r3.prompt.json",
-      "prompt_sha256": "be71c225e471e49a440f3ac25fbff2cd9e484fa7aa18fa786312800c04caaf04",
+      "prompt": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/idle-r1.prompt.txt",
+      "prompt_sha256": "67257199ebab00725be33a654f0366cd594453447b38eba47cec8eb0b7653a0c",
       "references": [
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-size-review/down-r3/frames/walk-down-01.png",
-          "sha256": "c82cbd6cf0887e2c5a7cd4076459b29b8084c951f56eb57fd46dfb6ebdb23c0c",
-          "role": "Approved walking pose before the blue garment palette"
+          "path": "assets/art_source/player-fhd/idle-blue-grounded/idle-r1.raw.png",
+          "sha256": "44bf86d816ac64b492291701e77697790f31e4bf61e3a556c219909f20ed4895",
+          "role": "Accepted generated eight-way neutral idle sheet"
         },
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/down/01.png",
-          "sha256": "714b0bee6d4a29560ed45f018d1697f63a9c8f6ec9618600d48a8d8c1996caaf",
-          "role": "Reviewed blue frame; the source is a byte-identical copy"
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/raised-foot-edit-target.png",
+          "sha256": "95f0f8a4e3e91baf33cb42c0f5363ea3980a91d02795d74d4e2cf22189de2f61",
+          "role": "Edit target: prior raised-foot idle stand-ins"
         },
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
-          "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/approved-walk-reference.png",
+          "sha256": "0e9285aa619bedf573f5630f5ceb3674a90f3ecf8c8bed4e39853326d62aa7a9",
+          "role": "Approved walking identity and proportions"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/validation.json",
+          "sha256": "43f9117d2c3688f4fd2ef7ebc1a12c8e36b6ba79f28fcbc18737279afb22540f",
+          "role": "User-approved RIGHT blue garment ramp"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/walk-baseline.json",
+          "sha256": "131760438a52435366e75c3739aa79e1d02a960011893b3c93dd3efdd5d5b929",
+          "role": "Frozen 192 approved walk review/source/runtime hashes"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/runtime-idle-contract.json",
+          "sha256": "89ff7e6197d616815a0172b1c650c10f67c0f10f4bd204e2a8f0edb5837a348c",
+          "role": "Dedicated grounded idle geometry and approved walking pixel invariance"
         }
       ],
       "tool": "built-in ImageGen",
-      "generation_task": "fhd-walk-blue",
-      "approval": "Held walk frame as idle until idle art exists; 2026-10-05",
-      "input": "actors/walk_south_0",
-      "operation": "copy",
-      "alias_of": "actors/walk_south_0"
+      "generation_task": "fhd-idle-grounded",
+      "approval": "User-requested raised-foot idle fix; 2026-10-05",
+      "output_sha256": "d4533958866b0ffc08ba443ee026393214adcd9b80fc475c5e351d244974d241"
     },
     {
       "id": "actors/idle_south_2",
       "owner": "raster",
+      "source": "assets/art_source/player-fhd/idle-blue-grounded/frames/down.png",
+      "source_sha256": "cd0aaf7ef1af1cddd989b45f1c8d11c1f2db8e26687246b98dcd07a399720ea3",
+      "crop_xywh": [
+        0,
+        0,
+        80,
+        80
+      ],
       "canvas_wh": [
         80,
         80
@@ -3746,43 +3806,69 @@
         40,
         72
       ],
+      "content_anchor_xy": [
+        40,
+        72
+      ],
+      "content_scale": 1.0,
       "draw_scale": 0.5,
+      "alpha_threshold": 128,
       "palette": "exact-source",
       "animation": "idle_south",
       "frame": 2,
       "seconds": 0.55,
       "loop": true,
       "output": "sprites/actors/idle_south_2.png",
-      "output_sha256": "81a3205960796ad795a7c2c0eee4efdac6fb228a81d379321c7ad91f7361edcb",
-      "prompt": "implementation/fhd-player/pilots/2026-10-04/walk-down-size-review/down-r3.prompt.json",
-      "prompt_sha256": "be71c225e471e49a440f3ac25fbff2cd9e484fa7aa18fa786312800c04caaf04",
+      "prompt": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/idle-r1.prompt.txt",
+      "prompt_sha256": "67257199ebab00725be33a654f0366cd594453447b38eba47cec8eb0b7653a0c",
       "references": [
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-size-review/down-r3/frames/walk-down-01.png",
-          "sha256": "c82cbd6cf0887e2c5a7cd4076459b29b8084c951f56eb57fd46dfb6ebdb23c0c",
-          "role": "Approved walking pose before the blue garment palette"
+          "path": "assets/art_source/player-fhd/idle-blue-grounded/idle-r1.raw.png",
+          "sha256": "44bf86d816ac64b492291701e77697790f31e4bf61e3a556c219909f20ed4895",
+          "role": "Accepted generated eight-way neutral idle sheet"
         },
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/down/01.png",
-          "sha256": "714b0bee6d4a29560ed45f018d1697f63a9c8f6ec9618600d48a8d8c1996caaf",
-          "role": "Reviewed blue frame; the source is a byte-identical copy"
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/raised-foot-edit-target.png",
+          "sha256": "95f0f8a4e3e91baf33cb42c0f5363ea3980a91d02795d74d4e2cf22189de2f61",
+          "role": "Edit target: prior raised-foot idle stand-ins"
         },
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
-          "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/approved-walk-reference.png",
+          "sha256": "0e9285aa619bedf573f5630f5ceb3674a90f3ecf8c8bed4e39853326d62aa7a9",
+          "role": "Approved walking identity and proportions"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/validation.json",
+          "sha256": "43f9117d2c3688f4fd2ef7ebc1a12c8e36b6ba79f28fcbc18737279afb22540f",
+          "role": "User-approved RIGHT blue garment ramp"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/walk-baseline.json",
+          "sha256": "131760438a52435366e75c3739aa79e1d02a960011893b3c93dd3efdd5d5b929",
+          "role": "Frozen 192 approved walk review/source/runtime hashes"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/runtime-idle-contract.json",
+          "sha256": "89ff7e6197d616815a0172b1c650c10f67c0f10f4bd204e2a8f0edb5837a348c",
+          "role": "Dedicated grounded idle geometry and approved walking pixel invariance"
         }
       ],
       "tool": "built-in ImageGen",
-      "generation_task": "fhd-walk-blue",
-      "approval": "Held walk frame as idle until idle art exists; 2026-10-05",
-      "input": "actors/walk_south_0",
-      "operation": "copy",
-      "alias_of": "actors/walk_south_0"
+      "generation_task": "fhd-idle-grounded",
+      "approval": "User-requested raised-foot idle fix; 2026-10-05",
+      "output_sha256": "d4533958866b0ffc08ba443ee026393214adcd9b80fc475c5e351d244974d241"
     },
     {
       "id": "actors/idle_east_0",
       "owner": "raster",
+      "source": "assets/art_source/player-fhd/idle-blue-grounded/frames/right.png",
+      "source_sha256": "09cca790c8db70968ab10b571d149fd0de5d21f601f2dd2ed457ff95cbe96d03",
+      "crop_xywh": [
+        0,
+        0,
+        80,
+        80
+      ],
       "canvas_wh": [
         80,
         80
@@ -3791,43 +3877,69 @@
         40,
         72
       ],
+      "content_anchor_xy": [
+        40,
+        72
+      ],
+      "content_scale": 1.0,
       "draw_scale": 0.5,
+      "alpha_threshold": 128,
       "palette": "exact-source",
       "animation": "idle_east",
       "frame": 0,
       "seconds": 0.55,
       "loop": true,
       "output": "sprites/actors/idle_east_0.png",
-      "output_sha256": "3e4381f5ff36f288c5fa41de57dfc2fd659e4d6223e73c50bae564e03278ef0c",
-      "prompt": "implementation/fhd-player/pilots/2026-10-04/walk-right/materials-r3.prompt.txt",
-      "prompt_sha256": "da41688c5b12dd85dc2e6bd2636ef2d966105d8220cd0fe575db40602a5fd02a",
+      "prompt": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/idle-r1.prompt.txt",
+      "prompt_sha256": "67257199ebab00725be33a654f0366cd594453447b38eba47cec8eb0b7653a0c",
       "references": [
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/walk-right/frames/walk-right-07.png",
-          "sha256": "372141b1d4e29e8b1758f7bd1fe621815462433e4c1af43cd09bc73a3e227f94",
-          "role": "Approved walking pose before the blue garment palette"
+          "path": "assets/art_source/player-fhd/idle-blue-grounded/idle-r1.raw.png",
+          "sha256": "44bf86d816ac64b492291701e77697790f31e4bf61e3a556c219909f20ed4895",
+          "role": "Accepted generated eight-way neutral idle sheet"
         },
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/right/07.png",
-          "sha256": "90167f5e1214db065146c5c67df54d00deb93f663de69d0dcedc83a616b0bf15",
-          "role": "Reviewed blue frame; the source is a byte-identical copy"
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/raised-foot-edit-target.png",
+          "sha256": "95f0f8a4e3e91baf33cb42c0f5363ea3980a91d02795d74d4e2cf22189de2f61",
+          "role": "Edit target: prior raised-foot idle stand-ins"
         },
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
-          "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/approved-walk-reference.png",
+          "sha256": "0e9285aa619bedf573f5630f5ceb3674a90f3ecf8c8bed4e39853326d62aa7a9",
+          "role": "Approved walking identity and proportions"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/validation.json",
+          "sha256": "43f9117d2c3688f4fd2ef7ebc1a12c8e36b6ba79f28fcbc18737279afb22540f",
+          "role": "User-approved RIGHT blue garment ramp"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/walk-baseline.json",
+          "sha256": "131760438a52435366e75c3739aa79e1d02a960011893b3c93dd3efdd5d5b929",
+          "role": "Frozen 192 approved walk review/source/runtime hashes"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/runtime-idle-contract.json",
+          "sha256": "89ff7e6197d616815a0172b1c650c10f67c0f10f4bd204e2a8f0edb5837a348c",
+          "role": "Dedicated grounded idle geometry and approved walking pixel invariance"
         }
       ],
       "tool": "built-in ImageGen",
-      "generation_task": "fhd-walk-blue",
-      "approval": "Held walk frame as idle until idle art exists; 2026-10-05",
-      "input": "actors/walk_east_6",
-      "operation": "copy",
-      "alias_of": "actors/walk_east_6"
+      "generation_task": "fhd-idle-grounded",
+      "approval": "User-requested raised-foot idle fix; 2026-10-05",
+      "output_sha256": "2f90330ddeca48197c3b38bee3dcb46a23c7bbc888c98373b12f2a68fb9cd8d8"
     },
     {
       "id": "actors/idle_east_1",
       "owner": "raster",
+      "source": "assets/art_source/player-fhd/idle-blue-grounded/frames/right.png",
+      "source_sha256": "09cca790c8db70968ab10b571d149fd0de5d21f601f2dd2ed457ff95cbe96d03",
+      "crop_xywh": [
+        0,
+        0,
+        80,
+        80
+      ],
       "canvas_wh": [
         80,
         80
@@ -3836,43 +3948,69 @@
         40,
         72
       ],
+      "content_anchor_xy": [
+        40,
+        72
+      ],
+      "content_scale": 1.0,
       "draw_scale": 0.5,
+      "alpha_threshold": 128,
       "palette": "exact-source",
       "animation": "idle_east",
       "frame": 1,
       "seconds": 0.55,
       "loop": true,
       "output": "sprites/actors/idle_east_1.png",
-      "output_sha256": "3e4381f5ff36f288c5fa41de57dfc2fd659e4d6223e73c50bae564e03278ef0c",
-      "prompt": "implementation/fhd-player/pilots/2026-10-04/walk-right/materials-r3.prompt.txt",
-      "prompt_sha256": "da41688c5b12dd85dc2e6bd2636ef2d966105d8220cd0fe575db40602a5fd02a",
+      "prompt": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/idle-r1.prompt.txt",
+      "prompt_sha256": "67257199ebab00725be33a654f0366cd594453447b38eba47cec8eb0b7653a0c",
       "references": [
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/walk-right/frames/walk-right-07.png",
-          "sha256": "372141b1d4e29e8b1758f7bd1fe621815462433e4c1af43cd09bc73a3e227f94",
-          "role": "Approved walking pose before the blue garment palette"
+          "path": "assets/art_source/player-fhd/idle-blue-grounded/idle-r1.raw.png",
+          "sha256": "44bf86d816ac64b492291701e77697790f31e4bf61e3a556c219909f20ed4895",
+          "role": "Accepted generated eight-way neutral idle sheet"
         },
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/right/07.png",
-          "sha256": "90167f5e1214db065146c5c67df54d00deb93f663de69d0dcedc83a616b0bf15",
-          "role": "Reviewed blue frame; the source is a byte-identical copy"
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/raised-foot-edit-target.png",
+          "sha256": "95f0f8a4e3e91baf33cb42c0f5363ea3980a91d02795d74d4e2cf22189de2f61",
+          "role": "Edit target: prior raised-foot idle stand-ins"
         },
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
-          "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/approved-walk-reference.png",
+          "sha256": "0e9285aa619bedf573f5630f5ceb3674a90f3ecf8c8bed4e39853326d62aa7a9",
+          "role": "Approved walking identity and proportions"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/validation.json",
+          "sha256": "43f9117d2c3688f4fd2ef7ebc1a12c8e36b6ba79f28fcbc18737279afb22540f",
+          "role": "User-approved RIGHT blue garment ramp"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/walk-baseline.json",
+          "sha256": "131760438a52435366e75c3739aa79e1d02a960011893b3c93dd3efdd5d5b929",
+          "role": "Frozen 192 approved walk review/source/runtime hashes"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/runtime-idle-contract.json",
+          "sha256": "89ff7e6197d616815a0172b1c650c10f67c0f10f4bd204e2a8f0edb5837a348c",
+          "role": "Dedicated grounded idle geometry and approved walking pixel invariance"
         }
       ],
       "tool": "built-in ImageGen",
-      "generation_task": "fhd-walk-blue",
-      "approval": "Held walk frame as idle until idle art exists; 2026-10-05",
-      "input": "actors/walk_east_6",
-      "operation": "copy",
-      "alias_of": "actors/walk_east_6"
+      "generation_task": "fhd-idle-grounded",
+      "approval": "User-requested raised-foot idle fix; 2026-10-05",
+      "output_sha256": "2f90330ddeca48197c3b38bee3dcb46a23c7bbc888c98373b12f2a68fb9cd8d8"
     },
     {
       "id": "actors/idle_east_2",
       "owner": "raster",
+      "source": "assets/art_source/player-fhd/idle-blue-grounded/frames/right.png",
+      "source_sha256": "09cca790c8db70968ab10b571d149fd0de5d21f601f2dd2ed457ff95cbe96d03",
+      "crop_xywh": [
+        0,
+        0,
+        80,
+        80
+      ],
       "canvas_wh": [
         80,
         80
@@ -3881,43 +4019,69 @@
         40,
         72
       ],
+      "content_anchor_xy": [
+        40,
+        72
+      ],
+      "content_scale": 1.0,
       "draw_scale": 0.5,
+      "alpha_threshold": 128,
       "palette": "exact-source",
       "animation": "idle_east",
       "frame": 2,
       "seconds": 0.55,
       "loop": true,
       "output": "sprites/actors/idle_east_2.png",
-      "output_sha256": "3e4381f5ff36f288c5fa41de57dfc2fd659e4d6223e73c50bae564e03278ef0c",
-      "prompt": "implementation/fhd-player/pilots/2026-10-04/walk-right/materials-r3.prompt.txt",
-      "prompt_sha256": "da41688c5b12dd85dc2e6bd2636ef2d966105d8220cd0fe575db40602a5fd02a",
+      "prompt": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/idle-r1.prompt.txt",
+      "prompt_sha256": "67257199ebab00725be33a654f0366cd594453447b38eba47cec8eb0b7653a0c",
       "references": [
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/walk-right/frames/walk-right-07.png",
-          "sha256": "372141b1d4e29e8b1758f7bd1fe621815462433e4c1af43cd09bc73a3e227f94",
-          "role": "Approved walking pose before the blue garment palette"
+          "path": "assets/art_source/player-fhd/idle-blue-grounded/idle-r1.raw.png",
+          "sha256": "44bf86d816ac64b492291701e77697790f31e4bf61e3a556c219909f20ed4895",
+          "role": "Accepted generated eight-way neutral idle sheet"
         },
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/right/07.png",
-          "sha256": "90167f5e1214db065146c5c67df54d00deb93f663de69d0dcedc83a616b0bf15",
-          "role": "Reviewed blue frame; the source is a byte-identical copy"
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/raised-foot-edit-target.png",
+          "sha256": "95f0f8a4e3e91baf33cb42c0f5363ea3980a91d02795d74d4e2cf22189de2f61",
+          "role": "Edit target: prior raised-foot idle stand-ins"
         },
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
-          "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/approved-walk-reference.png",
+          "sha256": "0e9285aa619bedf573f5630f5ceb3674a90f3ecf8c8bed4e39853326d62aa7a9",
+          "role": "Approved walking identity and proportions"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/validation.json",
+          "sha256": "43f9117d2c3688f4fd2ef7ebc1a12c8e36b6ba79f28fcbc18737279afb22540f",
+          "role": "User-approved RIGHT blue garment ramp"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/walk-baseline.json",
+          "sha256": "131760438a52435366e75c3739aa79e1d02a960011893b3c93dd3efdd5d5b929",
+          "role": "Frozen 192 approved walk review/source/runtime hashes"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/runtime-idle-contract.json",
+          "sha256": "89ff7e6197d616815a0172b1c650c10f67c0f10f4bd204e2a8f0edb5837a348c",
+          "role": "Dedicated grounded idle geometry and approved walking pixel invariance"
         }
       ],
       "tool": "built-in ImageGen",
-      "generation_task": "fhd-walk-blue",
-      "approval": "Held walk frame as idle until idle art exists; 2026-10-05",
-      "input": "actors/walk_east_6",
-      "operation": "copy",
-      "alias_of": "actors/walk_east_6"
+      "generation_task": "fhd-idle-grounded",
+      "approval": "User-requested raised-foot idle fix; 2026-10-05",
+      "output_sha256": "2f90330ddeca48197c3b38bee3dcb46a23c7bbc888c98373b12f2a68fb9cd8d8"
     },
     {
       "id": "actors/idle_north_0",
       "owner": "raster",
+      "source": "assets/art_source/player-fhd/idle-blue-grounded/frames/up.png",
+      "source_sha256": "7e6f89a31d595627de7b45496328c2174116c59c266f8abada11b565658d793b",
+      "crop_xywh": [
+        0,
+        0,
+        80,
+        80
+      ],
       "canvas_wh": [
         80,
         80
@@ -3926,43 +4090,69 @@
         40,
         72
       ],
+      "content_anchor_xy": [
+        40,
+        72
+      ],
+      "content_scale": 1.0,
       "draw_scale": 0.5,
+      "alpha_threshold": 128,
       "palette": "exact-source",
       "animation": "idle_north",
       "frame": 0,
       "seconds": 0.55,
       "loop": true,
       "output": "sprites/actors/idle_north_0.png",
-      "output_sha256": "9592c3408098fb83908a5db706a70d503755acaf3a440cbbf3c5c3f5323cea0b",
-      "prompt": "implementation/fhd-player/pilots/2026-10-04/walk-up/materials-r1.prompt.txt",
-      "prompt_sha256": "2885c6db62accd67de6ad31e3f53e5230876aff381a6a43277959852e02c51cb",
+      "prompt": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/idle-r1.prompt.txt",
+      "prompt_sha256": "67257199ebab00725be33a654f0366cd594453447b38eba47cec8eb0b7653a0c",
       "references": [
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/walk-up/frames/walk-up-05.png",
-          "sha256": "f6083d07b2d3ed0782da6ab615543498f5916463a14bdead7474502683e0246c",
-          "role": "Approved walking pose before the blue garment palette"
+          "path": "assets/art_source/player-fhd/idle-blue-grounded/idle-r1.raw.png",
+          "sha256": "44bf86d816ac64b492291701e77697790f31e4bf61e3a556c219909f20ed4895",
+          "role": "Accepted generated eight-way neutral idle sheet"
         },
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/up/05.png",
-          "sha256": "2e310ed0899735460abca6883dfc1c7eb7d3e6ac85845e41e13c2a6c7af43182",
-          "role": "Reviewed blue frame; the source is a byte-identical copy"
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/raised-foot-edit-target.png",
+          "sha256": "95f0f8a4e3e91baf33cb42c0f5363ea3980a91d02795d74d4e2cf22189de2f61",
+          "role": "Edit target: prior raised-foot idle stand-ins"
         },
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
-          "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/approved-walk-reference.png",
+          "sha256": "0e9285aa619bedf573f5630f5ceb3674a90f3ecf8c8bed4e39853326d62aa7a9",
+          "role": "Approved walking identity and proportions"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/validation.json",
+          "sha256": "43f9117d2c3688f4fd2ef7ebc1a12c8e36b6ba79f28fcbc18737279afb22540f",
+          "role": "User-approved RIGHT blue garment ramp"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/walk-baseline.json",
+          "sha256": "131760438a52435366e75c3739aa79e1d02a960011893b3c93dd3efdd5d5b929",
+          "role": "Frozen 192 approved walk review/source/runtime hashes"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/runtime-idle-contract.json",
+          "sha256": "89ff7e6197d616815a0172b1c650c10f67c0f10f4bd204e2a8f0edb5837a348c",
+          "role": "Dedicated grounded idle geometry and approved walking pixel invariance"
         }
       ],
       "tool": "built-in ImageGen",
-      "generation_task": "fhd-walk-blue",
-      "approval": "Held walk frame as idle until idle art exists; 2026-10-05",
-      "input": "actors/walk_north_4",
-      "operation": "copy",
-      "alias_of": "actors/walk_north_4"
+      "generation_task": "fhd-idle-grounded",
+      "approval": "User-requested raised-foot idle fix; 2026-10-05",
+      "output_sha256": "164bbfbc36097bca2f0ceaa1d68dd925644a4a3df74b9470324824ed9ec20711"
     },
     {
       "id": "actors/idle_north_1",
       "owner": "raster",
+      "source": "assets/art_source/player-fhd/idle-blue-grounded/frames/up.png",
+      "source_sha256": "7e6f89a31d595627de7b45496328c2174116c59c266f8abada11b565658d793b",
+      "crop_xywh": [
+        0,
+        0,
+        80,
+        80
+      ],
       "canvas_wh": [
         80,
         80
@@ -3971,43 +4161,69 @@
         40,
         72
       ],
+      "content_anchor_xy": [
+        40,
+        72
+      ],
+      "content_scale": 1.0,
       "draw_scale": 0.5,
+      "alpha_threshold": 128,
       "palette": "exact-source",
       "animation": "idle_north",
       "frame": 1,
       "seconds": 0.55,
       "loop": true,
       "output": "sprites/actors/idle_north_1.png",
-      "output_sha256": "9592c3408098fb83908a5db706a70d503755acaf3a440cbbf3c5c3f5323cea0b",
-      "prompt": "implementation/fhd-player/pilots/2026-10-04/walk-up/materials-r1.prompt.txt",
-      "prompt_sha256": "2885c6db62accd67de6ad31e3f53e5230876aff381a6a43277959852e02c51cb",
+      "prompt": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/idle-r1.prompt.txt",
+      "prompt_sha256": "67257199ebab00725be33a654f0366cd594453447b38eba47cec8eb0b7653a0c",
       "references": [
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/walk-up/frames/walk-up-05.png",
-          "sha256": "f6083d07b2d3ed0782da6ab615543498f5916463a14bdead7474502683e0246c",
-          "role": "Approved walking pose before the blue garment palette"
+          "path": "assets/art_source/player-fhd/idle-blue-grounded/idle-r1.raw.png",
+          "sha256": "44bf86d816ac64b492291701e77697790f31e4bf61e3a556c219909f20ed4895",
+          "role": "Accepted generated eight-way neutral idle sheet"
         },
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/up/05.png",
-          "sha256": "2e310ed0899735460abca6883dfc1c7eb7d3e6ac85845e41e13c2a6c7af43182",
-          "role": "Reviewed blue frame; the source is a byte-identical copy"
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/raised-foot-edit-target.png",
+          "sha256": "95f0f8a4e3e91baf33cb42c0f5363ea3980a91d02795d74d4e2cf22189de2f61",
+          "role": "Edit target: prior raised-foot idle stand-ins"
         },
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
-          "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/approved-walk-reference.png",
+          "sha256": "0e9285aa619bedf573f5630f5ceb3674a90f3ecf8c8bed4e39853326d62aa7a9",
+          "role": "Approved walking identity and proportions"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/validation.json",
+          "sha256": "43f9117d2c3688f4fd2ef7ebc1a12c8e36b6ba79f28fcbc18737279afb22540f",
+          "role": "User-approved RIGHT blue garment ramp"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/walk-baseline.json",
+          "sha256": "131760438a52435366e75c3739aa79e1d02a960011893b3c93dd3efdd5d5b929",
+          "role": "Frozen 192 approved walk review/source/runtime hashes"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/runtime-idle-contract.json",
+          "sha256": "89ff7e6197d616815a0172b1c650c10f67c0f10f4bd204e2a8f0edb5837a348c",
+          "role": "Dedicated grounded idle geometry and approved walking pixel invariance"
         }
       ],
       "tool": "built-in ImageGen",
-      "generation_task": "fhd-walk-blue",
-      "approval": "Held walk frame as idle until idle art exists; 2026-10-05",
-      "input": "actors/walk_north_4",
-      "operation": "copy",
-      "alias_of": "actors/walk_north_4"
+      "generation_task": "fhd-idle-grounded",
+      "approval": "User-requested raised-foot idle fix; 2026-10-05",
+      "output_sha256": "164bbfbc36097bca2f0ceaa1d68dd925644a4a3df74b9470324824ed9ec20711"
     },
     {
       "id": "actors/idle_north_2",
       "owner": "raster",
+      "source": "assets/art_source/player-fhd/idle-blue-grounded/frames/up.png",
+      "source_sha256": "7e6f89a31d595627de7b45496328c2174116c59c266f8abada11b565658d793b",
+      "crop_xywh": [
+        0,
+        0,
+        80,
+        80
+      ],
       "canvas_wh": [
         80,
         80
@@ -4016,43 +4232,69 @@
         40,
         72
       ],
+      "content_anchor_xy": [
+        40,
+        72
+      ],
+      "content_scale": 1.0,
       "draw_scale": 0.5,
+      "alpha_threshold": 128,
       "palette": "exact-source",
       "animation": "idle_north",
       "frame": 2,
       "seconds": 0.55,
       "loop": true,
       "output": "sprites/actors/idle_north_2.png",
-      "output_sha256": "9592c3408098fb83908a5db706a70d503755acaf3a440cbbf3c5c3f5323cea0b",
-      "prompt": "implementation/fhd-player/pilots/2026-10-04/walk-up/materials-r1.prompt.txt",
-      "prompt_sha256": "2885c6db62accd67de6ad31e3f53e5230876aff381a6a43277959852e02c51cb",
+      "prompt": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/idle-r1.prompt.txt",
+      "prompt_sha256": "67257199ebab00725be33a654f0366cd594453447b38eba47cec8eb0b7653a0c",
       "references": [
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/walk-up/frames/walk-up-05.png",
-          "sha256": "f6083d07b2d3ed0782da6ab615543498f5916463a14bdead7474502683e0246c",
-          "role": "Approved walking pose before the blue garment palette"
+          "path": "assets/art_source/player-fhd/idle-blue-grounded/idle-r1.raw.png",
+          "sha256": "44bf86d816ac64b492291701e77697790f31e4bf61e3a556c219909f20ed4895",
+          "role": "Accepted generated eight-way neutral idle sheet"
         },
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/up/05.png",
-          "sha256": "2e310ed0899735460abca6883dfc1c7eb7d3e6ac85845e41e13c2a6c7af43182",
-          "role": "Reviewed blue frame; the source is a byte-identical copy"
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/raised-foot-edit-target.png",
+          "sha256": "95f0f8a4e3e91baf33cb42c0f5363ea3980a91d02795d74d4e2cf22189de2f61",
+          "role": "Edit target: prior raised-foot idle stand-ins"
         },
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
-          "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/approved-walk-reference.png",
+          "sha256": "0e9285aa619bedf573f5630f5ceb3674a90f3ecf8c8bed4e39853326d62aa7a9",
+          "role": "Approved walking identity and proportions"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/validation.json",
+          "sha256": "43f9117d2c3688f4fd2ef7ebc1a12c8e36b6ba79f28fcbc18737279afb22540f",
+          "role": "User-approved RIGHT blue garment ramp"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/walk-baseline.json",
+          "sha256": "131760438a52435366e75c3739aa79e1d02a960011893b3c93dd3efdd5d5b929",
+          "role": "Frozen 192 approved walk review/source/runtime hashes"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/runtime-idle-contract.json",
+          "sha256": "89ff7e6197d616815a0172b1c650c10f67c0f10f4bd204e2a8f0edb5837a348c",
+          "role": "Dedicated grounded idle geometry and approved walking pixel invariance"
         }
       ],
       "tool": "built-in ImageGen",
-      "generation_task": "fhd-walk-blue",
-      "approval": "Held walk frame as idle until idle art exists; 2026-10-05",
-      "input": "actors/walk_north_4",
-      "operation": "copy",
-      "alias_of": "actors/walk_north_4"
+      "generation_task": "fhd-idle-grounded",
+      "approval": "User-requested raised-foot idle fix; 2026-10-05",
+      "output_sha256": "164bbfbc36097bca2f0ceaa1d68dd925644a4a3df74b9470324824ed9ec20711"
     },
     {
       "id": "actors/idle_west_0",
       "owner": "raster",
+      "source": "assets/art_source/player-fhd/idle-blue-grounded/frames/left.png",
+      "source_sha256": "5ec4ff42e2a73a7fe05904ae727f76e28c9b97deb41bd57f368f649b7270e52a",
+      "crop_xywh": [
+        0,
+        0,
+        80,
+        80
+      ],
       "canvas_wh": [
         80,
         80
@@ -4061,43 +4303,69 @@
         40,
         72
       ],
+      "content_anchor_xy": [
+        40,
+        72
+      ],
+      "content_scale": 1.0,
       "draw_scale": 0.5,
+      "alpha_threshold": 128,
       "palette": "exact-source",
       "animation": "idle_west",
       "frame": 0,
       "seconds": 0.55,
       "loop": true,
       "output": "sprites/actors/idle_west_0.png",
-      "output_sha256": "35336d703b60f05015af2add6e9bc170bb6756d94c93cc625ae9e81179bbb899",
-      "prompt": "implementation/fhd-player/pilots/2026-10-04/walk-left/materials-r2.prompt.txt",
-      "prompt_sha256": "d31beb0c0d5bf23fdcafd2692bd778a3d190ef7a36adc53a8736a7818c61d26e",
+      "prompt": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/idle-r1.prompt.txt",
+      "prompt_sha256": "67257199ebab00725be33a654f0366cd594453447b38eba47cec8eb0b7653a0c",
       "references": [
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/walk-left/frames/walk-left-07.png",
-          "sha256": "5e51e586701fde2a64f9709b6d73c13925c8c1c434d4631be5658daa03d0bca4",
-          "role": "Approved walking pose before the blue garment palette"
+          "path": "assets/art_source/player-fhd/idle-blue-grounded/idle-r1.raw.png",
+          "sha256": "44bf86d816ac64b492291701e77697790f31e4bf61e3a556c219909f20ed4895",
+          "role": "Accepted generated eight-way neutral idle sheet"
         },
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/left/07.png",
-          "sha256": "b3c319e88bc7e8501d378c72e5092c10455d68451259a224b269cd98b3a230c2",
-          "role": "Reviewed blue frame; the source is a byte-identical copy"
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/raised-foot-edit-target.png",
+          "sha256": "95f0f8a4e3e91baf33cb42c0f5363ea3980a91d02795d74d4e2cf22189de2f61",
+          "role": "Edit target: prior raised-foot idle stand-ins"
         },
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
-          "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/approved-walk-reference.png",
+          "sha256": "0e9285aa619bedf573f5630f5ceb3674a90f3ecf8c8bed4e39853326d62aa7a9",
+          "role": "Approved walking identity and proportions"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/validation.json",
+          "sha256": "43f9117d2c3688f4fd2ef7ebc1a12c8e36b6ba79f28fcbc18737279afb22540f",
+          "role": "User-approved RIGHT blue garment ramp"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/walk-baseline.json",
+          "sha256": "131760438a52435366e75c3739aa79e1d02a960011893b3c93dd3efdd5d5b929",
+          "role": "Frozen 192 approved walk review/source/runtime hashes"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/runtime-idle-contract.json",
+          "sha256": "89ff7e6197d616815a0172b1c650c10f67c0f10f4bd204e2a8f0edb5837a348c",
+          "role": "Dedicated grounded idle geometry and approved walking pixel invariance"
         }
       ],
       "tool": "built-in ImageGen",
-      "generation_task": "fhd-walk-blue",
-      "approval": "Held walk frame as idle until idle art exists; 2026-10-05",
-      "input": "actors/walk_west_6",
-      "operation": "copy",
-      "alias_of": "actors/walk_west_6"
+      "generation_task": "fhd-idle-grounded",
+      "approval": "User-requested raised-foot idle fix; 2026-10-05",
+      "output_sha256": "b062fec50cdfab3d70270f2f9e90794ef402b0bbb4780725cb0384403dde7be2"
     },
     {
       "id": "actors/idle_west_1",
       "owner": "raster",
+      "source": "assets/art_source/player-fhd/idle-blue-grounded/frames/left.png",
+      "source_sha256": "5ec4ff42e2a73a7fe05904ae727f76e28c9b97deb41bd57f368f649b7270e52a",
+      "crop_xywh": [
+        0,
+        0,
+        80,
+        80
+      ],
       "canvas_wh": [
         80,
         80
@@ -4106,43 +4374,69 @@
         40,
         72
       ],
+      "content_anchor_xy": [
+        40,
+        72
+      ],
+      "content_scale": 1.0,
       "draw_scale": 0.5,
+      "alpha_threshold": 128,
       "palette": "exact-source",
       "animation": "idle_west",
       "frame": 1,
       "seconds": 0.55,
       "loop": true,
       "output": "sprites/actors/idle_west_1.png",
-      "output_sha256": "35336d703b60f05015af2add6e9bc170bb6756d94c93cc625ae9e81179bbb899",
-      "prompt": "implementation/fhd-player/pilots/2026-10-04/walk-left/materials-r2.prompt.txt",
-      "prompt_sha256": "d31beb0c0d5bf23fdcafd2692bd778a3d190ef7a36adc53a8736a7818c61d26e",
+      "prompt": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/idle-r1.prompt.txt",
+      "prompt_sha256": "67257199ebab00725be33a654f0366cd594453447b38eba47cec8eb0b7653a0c",
       "references": [
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/walk-left/frames/walk-left-07.png",
-          "sha256": "5e51e586701fde2a64f9709b6d73c13925c8c1c434d4631be5658daa03d0bca4",
-          "role": "Approved walking pose before the blue garment palette"
+          "path": "assets/art_source/player-fhd/idle-blue-grounded/idle-r1.raw.png",
+          "sha256": "44bf86d816ac64b492291701e77697790f31e4bf61e3a556c219909f20ed4895",
+          "role": "Accepted generated eight-way neutral idle sheet"
         },
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/left/07.png",
-          "sha256": "b3c319e88bc7e8501d378c72e5092c10455d68451259a224b269cd98b3a230c2",
-          "role": "Reviewed blue frame; the source is a byte-identical copy"
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/raised-foot-edit-target.png",
+          "sha256": "95f0f8a4e3e91baf33cb42c0f5363ea3980a91d02795d74d4e2cf22189de2f61",
+          "role": "Edit target: prior raised-foot idle stand-ins"
         },
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
-          "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/approved-walk-reference.png",
+          "sha256": "0e9285aa619bedf573f5630f5ceb3674a90f3ecf8c8bed4e39853326d62aa7a9",
+          "role": "Approved walking identity and proportions"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/validation.json",
+          "sha256": "43f9117d2c3688f4fd2ef7ebc1a12c8e36b6ba79f28fcbc18737279afb22540f",
+          "role": "User-approved RIGHT blue garment ramp"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/walk-baseline.json",
+          "sha256": "131760438a52435366e75c3739aa79e1d02a960011893b3c93dd3efdd5d5b929",
+          "role": "Frozen 192 approved walk review/source/runtime hashes"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/runtime-idle-contract.json",
+          "sha256": "89ff7e6197d616815a0172b1c650c10f67c0f10f4bd204e2a8f0edb5837a348c",
+          "role": "Dedicated grounded idle geometry and approved walking pixel invariance"
         }
       ],
       "tool": "built-in ImageGen",
-      "generation_task": "fhd-walk-blue",
-      "approval": "Held walk frame as idle until idle art exists; 2026-10-05",
-      "input": "actors/walk_west_6",
-      "operation": "copy",
-      "alias_of": "actors/walk_west_6"
+      "generation_task": "fhd-idle-grounded",
+      "approval": "User-requested raised-foot idle fix; 2026-10-05",
+      "output_sha256": "b062fec50cdfab3d70270f2f9e90794ef402b0bbb4780725cb0384403dde7be2"
     },
     {
       "id": "actors/idle_west_2",
       "owner": "raster",
+      "source": "assets/art_source/player-fhd/idle-blue-grounded/frames/left.png",
+      "source_sha256": "5ec4ff42e2a73a7fe05904ae727f76e28c9b97deb41bd57f368f649b7270e52a",
+      "crop_xywh": [
+        0,
+        0,
+        80,
+        80
+      ],
       "canvas_wh": [
         80,
         80
@@ -4151,43 +4445,69 @@
         40,
         72
       ],
+      "content_anchor_xy": [
+        40,
+        72
+      ],
+      "content_scale": 1.0,
       "draw_scale": 0.5,
+      "alpha_threshold": 128,
       "palette": "exact-source",
       "animation": "idle_west",
       "frame": 2,
       "seconds": 0.55,
       "loop": true,
       "output": "sprites/actors/idle_west_2.png",
-      "output_sha256": "35336d703b60f05015af2add6e9bc170bb6756d94c93cc625ae9e81179bbb899",
-      "prompt": "implementation/fhd-player/pilots/2026-10-04/walk-left/materials-r2.prompt.txt",
-      "prompt_sha256": "d31beb0c0d5bf23fdcafd2692bd778a3d190ef7a36adc53a8736a7818c61d26e",
+      "prompt": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/idle-r1.prompt.txt",
+      "prompt_sha256": "67257199ebab00725be33a654f0366cd594453447b38eba47cec8eb0b7653a0c",
       "references": [
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/walk-left/frames/walk-left-07.png",
-          "sha256": "5e51e586701fde2a64f9709b6d73c13925c8c1c434d4631be5658daa03d0bca4",
-          "role": "Approved walking pose before the blue garment palette"
+          "path": "assets/art_source/player-fhd/idle-blue-grounded/idle-r1.raw.png",
+          "sha256": "44bf86d816ac64b492291701e77697790f31e4bf61e3a556c219909f20ed4895",
+          "role": "Accepted generated eight-way neutral idle sheet"
         },
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/left/07.png",
-          "sha256": "b3c319e88bc7e8501d378c72e5092c10455d68451259a224b269cd98b3a230c2",
-          "role": "Reviewed blue frame; the source is a byte-identical copy"
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/raised-foot-edit-target.png",
+          "sha256": "95f0f8a4e3e91baf33cb42c0f5363ea3980a91d02795d74d4e2cf22189de2f61",
+          "role": "Edit target: prior raised-foot idle stand-ins"
         },
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
-          "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/approved-walk-reference.png",
+          "sha256": "0e9285aa619bedf573f5630f5ceb3674a90f3ecf8c8bed4e39853326d62aa7a9",
+          "role": "Approved walking identity and proportions"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/validation.json",
+          "sha256": "43f9117d2c3688f4fd2ef7ebc1a12c8e36b6ba79f28fcbc18737279afb22540f",
+          "role": "User-approved RIGHT blue garment ramp"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/walk-baseline.json",
+          "sha256": "131760438a52435366e75c3739aa79e1d02a960011893b3c93dd3efdd5d5b929",
+          "role": "Frozen 192 approved walk review/source/runtime hashes"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/runtime-idle-contract.json",
+          "sha256": "89ff7e6197d616815a0172b1c650c10f67c0f10f4bd204e2a8f0edb5837a348c",
+          "role": "Dedicated grounded idle geometry and approved walking pixel invariance"
         }
       ],
       "tool": "built-in ImageGen",
-      "generation_task": "fhd-walk-blue",
-      "approval": "Held walk frame as idle until idle art exists; 2026-10-05",
-      "input": "actors/walk_west_6",
-      "operation": "copy",
-      "alias_of": "actors/walk_west_6"
+      "generation_task": "fhd-idle-grounded",
+      "approval": "User-requested raised-foot idle fix; 2026-10-05",
+      "output_sha256": "b062fec50cdfab3d70270f2f9e90794ef402b0bbb4780725cb0384403dde7be2"
     },
     {
       "id": "actors/idle_south_east_0",
       "owner": "raster",
+      "source": "assets/art_source/player-fhd/idle-blue-grounded/frames/down-right.png",
+      "source_sha256": "b64d33daea7da53b5d83f38134830f740342ffe45cfb45ffd5a6aae37c476cbb",
+      "crop_xywh": [
+        0,
+        0,
+        80,
+        80
+      ],
       "canvas_wh": [
         80,
         80
@@ -4196,43 +4516,69 @@
         40,
         72
       ],
+      "content_anchor_xy": [
+        40,
+        72
+      ],
+      "content_scale": 1.0,
       "draw_scale": 0.5,
+      "alpha_threshold": 128,
       "palette": "exact-source",
       "animation": "idle_south_east",
       "frame": 0,
       "seconds": 0.55,
       "loop": true,
       "output": "sprites/actors/idle_south_east_0.png",
-      "output_sha256": "062a09458aa15b2ed04c725797b6c4575ac5bfce8159dd0ee41b06591a435443",
-      "prompt": "implementation/fhd-player/pilots/2026-10-04/walk-down-right/materials-r5.prompt.txt",
-      "prompt_sha256": "5ab1754a284fa0852e10d48bcdec8b6be8bdcb85300876d70d6c84b00bb7410a",
+      "prompt": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/idle-r1.prompt.txt",
+      "prompt_sha256": "67257199ebab00725be33a654f0366cd594453447b38eba47cec8eb0b7653a0c",
       "references": [
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-right/frames/walk-down-right-03.png",
-          "sha256": "c1c6a7538d3e5ef860043ebf3ccb95f7af2d5c4ea93b312bb8a3b929dfdb1476",
-          "role": "Approved walking pose before the blue garment palette"
+          "path": "assets/art_source/player-fhd/idle-blue-grounded/idle-r1.raw.png",
+          "sha256": "44bf86d816ac64b492291701e77697790f31e4bf61e3a556c219909f20ed4895",
+          "role": "Accepted generated eight-way neutral idle sheet"
         },
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/down-right/03.png",
-          "sha256": "ad9e55ce68234f2602cc1c239f85dc66dc929ed921acbb0d37596a4a90fc09b7",
-          "role": "Reviewed blue frame; the source is a byte-identical copy"
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/raised-foot-edit-target.png",
+          "sha256": "95f0f8a4e3e91baf33cb42c0f5363ea3980a91d02795d74d4e2cf22189de2f61",
+          "role": "Edit target: prior raised-foot idle stand-ins"
         },
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
-          "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/approved-walk-reference.png",
+          "sha256": "0e9285aa619bedf573f5630f5ceb3674a90f3ecf8c8bed4e39853326d62aa7a9",
+          "role": "Approved walking identity and proportions"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/validation.json",
+          "sha256": "43f9117d2c3688f4fd2ef7ebc1a12c8e36b6ba79f28fcbc18737279afb22540f",
+          "role": "User-approved RIGHT blue garment ramp"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/walk-baseline.json",
+          "sha256": "131760438a52435366e75c3739aa79e1d02a960011893b3c93dd3efdd5d5b929",
+          "role": "Frozen 192 approved walk review/source/runtime hashes"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/runtime-idle-contract.json",
+          "sha256": "89ff7e6197d616815a0172b1c650c10f67c0f10f4bd204e2a8f0edb5837a348c",
+          "role": "Dedicated grounded idle geometry and approved walking pixel invariance"
         }
       ],
       "tool": "built-in ImageGen",
-      "generation_task": "fhd-walk-blue",
-      "approval": "Held walk frame as idle until idle art exists; 2026-10-05",
-      "input": "actors/walk_south_east_2",
-      "operation": "copy",
-      "alias_of": "actors/walk_south_east_2"
+      "generation_task": "fhd-idle-grounded",
+      "approval": "User-requested raised-foot idle fix; 2026-10-05",
+      "output_sha256": "a07817197a8b4788dc0c88e098b9e86fc2906b25817bbd4e337c4732ec429cdc"
     },
     {
       "id": "actors/idle_south_east_1",
       "owner": "raster",
+      "source": "assets/art_source/player-fhd/idle-blue-grounded/frames/down-right.png",
+      "source_sha256": "b64d33daea7da53b5d83f38134830f740342ffe45cfb45ffd5a6aae37c476cbb",
+      "crop_xywh": [
+        0,
+        0,
+        80,
+        80
+      ],
       "canvas_wh": [
         80,
         80
@@ -4241,43 +4587,69 @@
         40,
         72
       ],
+      "content_anchor_xy": [
+        40,
+        72
+      ],
+      "content_scale": 1.0,
       "draw_scale": 0.5,
+      "alpha_threshold": 128,
       "palette": "exact-source",
       "animation": "idle_south_east",
       "frame": 1,
       "seconds": 0.55,
       "loop": true,
       "output": "sprites/actors/idle_south_east_1.png",
-      "output_sha256": "062a09458aa15b2ed04c725797b6c4575ac5bfce8159dd0ee41b06591a435443",
-      "prompt": "implementation/fhd-player/pilots/2026-10-04/walk-down-right/materials-r5.prompt.txt",
-      "prompt_sha256": "5ab1754a284fa0852e10d48bcdec8b6be8bdcb85300876d70d6c84b00bb7410a",
+      "prompt": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/idle-r1.prompt.txt",
+      "prompt_sha256": "67257199ebab00725be33a654f0366cd594453447b38eba47cec8eb0b7653a0c",
       "references": [
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-right/frames/walk-down-right-03.png",
-          "sha256": "c1c6a7538d3e5ef860043ebf3ccb95f7af2d5c4ea93b312bb8a3b929dfdb1476",
-          "role": "Approved walking pose before the blue garment palette"
+          "path": "assets/art_source/player-fhd/idle-blue-grounded/idle-r1.raw.png",
+          "sha256": "44bf86d816ac64b492291701e77697790f31e4bf61e3a556c219909f20ed4895",
+          "role": "Accepted generated eight-way neutral idle sheet"
         },
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/down-right/03.png",
-          "sha256": "ad9e55ce68234f2602cc1c239f85dc66dc929ed921acbb0d37596a4a90fc09b7",
-          "role": "Reviewed blue frame; the source is a byte-identical copy"
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/raised-foot-edit-target.png",
+          "sha256": "95f0f8a4e3e91baf33cb42c0f5363ea3980a91d02795d74d4e2cf22189de2f61",
+          "role": "Edit target: prior raised-foot idle stand-ins"
         },
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
-          "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/approved-walk-reference.png",
+          "sha256": "0e9285aa619bedf573f5630f5ceb3674a90f3ecf8c8bed4e39853326d62aa7a9",
+          "role": "Approved walking identity and proportions"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/validation.json",
+          "sha256": "43f9117d2c3688f4fd2ef7ebc1a12c8e36b6ba79f28fcbc18737279afb22540f",
+          "role": "User-approved RIGHT blue garment ramp"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/walk-baseline.json",
+          "sha256": "131760438a52435366e75c3739aa79e1d02a960011893b3c93dd3efdd5d5b929",
+          "role": "Frozen 192 approved walk review/source/runtime hashes"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/runtime-idle-contract.json",
+          "sha256": "89ff7e6197d616815a0172b1c650c10f67c0f10f4bd204e2a8f0edb5837a348c",
+          "role": "Dedicated grounded idle geometry and approved walking pixel invariance"
         }
       ],
       "tool": "built-in ImageGen",
-      "generation_task": "fhd-walk-blue",
-      "approval": "Held walk frame as idle until idle art exists; 2026-10-05",
-      "input": "actors/walk_south_east_2",
-      "operation": "copy",
-      "alias_of": "actors/walk_south_east_2"
+      "generation_task": "fhd-idle-grounded",
+      "approval": "User-requested raised-foot idle fix; 2026-10-05",
+      "output_sha256": "a07817197a8b4788dc0c88e098b9e86fc2906b25817bbd4e337c4732ec429cdc"
     },
     {
       "id": "actors/idle_south_east_2",
       "owner": "raster",
+      "source": "assets/art_source/player-fhd/idle-blue-grounded/frames/down-right.png",
+      "source_sha256": "b64d33daea7da53b5d83f38134830f740342ffe45cfb45ffd5a6aae37c476cbb",
+      "crop_xywh": [
+        0,
+        0,
+        80,
+        80
+      ],
       "canvas_wh": [
         80,
         80
@@ -4286,43 +4658,69 @@
         40,
         72
       ],
+      "content_anchor_xy": [
+        40,
+        72
+      ],
+      "content_scale": 1.0,
       "draw_scale": 0.5,
+      "alpha_threshold": 128,
       "palette": "exact-source",
       "animation": "idle_south_east",
       "frame": 2,
       "seconds": 0.55,
       "loop": true,
       "output": "sprites/actors/idle_south_east_2.png",
-      "output_sha256": "062a09458aa15b2ed04c725797b6c4575ac5bfce8159dd0ee41b06591a435443",
-      "prompt": "implementation/fhd-player/pilots/2026-10-04/walk-down-right/materials-r5.prompt.txt",
-      "prompt_sha256": "5ab1754a284fa0852e10d48bcdec8b6be8bdcb85300876d70d6c84b00bb7410a",
+      "prompt": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/idle-r1.prompt.txt",
+      "prompt_sha256": "67257199ebab00725be33a654f0366cd594453447b38eba47cec8eb0b7653a0c",
       "references": [
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-right/frames/walk-down-right-03.png",
-          "sha256": "c1c6a7538d3e5ef860043ebf3ccb95f7af2d5c4ea93b312bb8a3b929dfdb1476",
-          "role": "Approved walking pose before the blue garment palette"
+          "path": "assets/art_source/player-fhd/idle-blue-grounded/idle-r1.raw.png",
+          "sha256": "44bf86d816ac64b492291701e77697790f31e4bf61e3a556c219909f20ed4895",
+          "role": "Accepted generated eight-way neutral idle sheet"
         },
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/down-right/03.png",
-          "sha256": "ad9e55ce68234f2602cc1c239f85dc66dc929ed921acbb0d37596a4a90fc09b7",
-          "role": "Reviewed blue frame; the source is a byte-identical copy"
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/raised-foot-edit-target.png",
+          "sha256": "95f0f8a4e3e91baf33cb42c0f5363ea3980a91d02795d74d4e2cf22189de2f61",
+          "role": "Edit target: prior raised-foot idle stand-ins"
         },
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
-          "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/approved-walk-reference.png",
+          "sha256": "0e9285aa619bedf573f5630f5ceb3674a90f3ecf8c8bed4e39853326d62aa7a9",
+          "role": "Approved walking identity and proportions"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/validation.json",
+          "sha256": "43f9117d2c3688f4fd2ef7ebc1a12c8e36b6ba79f28fcbc18737279afb22540f",
+          "role": "User-approved RIGHT blue garment ramp"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/walk-baseline.json",
+          "sha256": "131760438a52435366e75c3739aa79e1d02a960011893b3c93dd3efdd5d5b929",
+          "role": "Frozen 192 approved walk review/source/runtime hashes"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/runtime-idle-contract.json",
+          "sha256": "89ff7e6197d616815a0172b1c650c10f67c0f10f4bd204e2a8f0edb5837a348c",
+          "role": "Dedicated grounded idle geometry and approved walking pixel invariance"
         }
       ],
       "tool": "built-in ImageGen",
-      "generation_task": "fhd-walk-blue",
-      "approval": "Held walk frame as idle until idle art exists; 2026-10-05",
-      "input": "actors/walk_south_east_2",
-      "operation": "copy",
-      "alias_of": "actors/walk_south_east_2"
+      "generation_task": "fhd-idle-grounded",
+      "approval": "User-requested raised-foot idle fix; 2026-10-05",
+      "output_sha256": "a07817197a8b4788dc0c88e098b9e86fc2906b25817bbd4e337c4732ec429cdc"
     },
     {
       "id": "actors/idle_north_east_0",
       "owner": "raster",
+      "source": "assets/art_source/player-fhd/idle-blue-grounded/frames/up-right.png",
+      "source_sha256": "b9934404536e81d8ca7b3fc1342f6581da3f5bf5190a23a8d577405add3380d0",
+      "crop_xywh": [
+        0,
+        0,
+        80,
+        80
+      ],
       "canvas_wh": [
         80,
         80
@@ -4331,43 +4729,69 @@
         40,
         72
       ],
+      "content_anchor_xy": [
+        40,
+        72
+      ],
+      "content_scale": 1.0,
       "draw_scale": 0.5,
+      "alpha_threshold": 128,
       "palette": "exact-source",
       "animation": "idle_north_east",
       "frame": 0,
       "seconds": 0.55,
       "loop": true,
       "output": "sprites/actors/idle_north_east_0.png",
-      "output_sha256": "44de5c985b72e40d289815a5d30cbbcbc54fb9ffcb9385b4980fee6a8f9245ce",
-      "prompt": "implementation/fhd-player/pilots/2026-10-04/walk-up-right/materials-r5.prompt.txt",
-      "prompt_sha256": "95c6300736d136214edea39c6e4de941f3a2d4eb0cf03affdc62ea7c7099efdb",
+      "prompt": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/idle-r1.prompt.txt",
+      "prompt_sha256": "67257199ebab00725be33a654f0366cd594453447b38eba47cec8eb0b7653a0c",
       "references": [
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/selected-UR03-UL03/UR03/revisions/boot4-r4/frames/03.png",
-          "sha256": "32f31b11ad371bcc3751609752d6f66effa2d31b0c915f8fbc807d6c3c4f898d",
-          "role": "Approved walking pose before the blue garment palette"
+          "path": "assets/art_source/player-fhd/idle-blue-grounded/idle-r1.raw.png",
+          "sha256": "44bf86d816ac64b492291701e77697790f31e4bf61e3a556c219909f20ed4895",
+          "role": "Accepted generated eight-way neutral idle sheet"
         },
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/up-right/03.png",
-          "sha256": "5c438509887ac04e9a32362c0c3b836041123a9ea497c3c6e3081659497c71c0",
-          "role": "Reviewed blue frame; the source is a byte-identical copy"
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/raised-foot-edit-target.png",
+          "sha256": "95f0f8a4e3e91baf33cb42c0f5363ea3980a91d02795d74d4e2cf22189de2f61",
+          "role": "Edit target: prior raised-foot idle stand-ins"
         },
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
-          "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/approved-walk-reference.png",
+          "sha256": "0e9285aa619bedf573f5630f5ceb3674a90f3ecf8c8bed4e39853326d62aa7a9",
+          "role": "Approved walking identity and proportions"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/validation.json",
+          "sha256": "43f9117d2c3688f4fd2ef7ebc1a12c8e36b6ba79f28fcbc18737279afb22540f",
+          "role": "User-approved RIGHT blue garment ramp"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/walk-baseline.json",
+          "sha256": "131760438a52435366e75c3739aa79e1d02a960011893b3c93dd3efdd5d5b929",
+          "role": "Frozen 192 approved walk review/source/runtime hashes"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/runtime-idle-contract.json",
+          "sha256": "89ff7e6197d616815a0172b1c650c10f67c0f10f4bd204e2a8f0edb5837a348c",
+          "role": "Dedicated grounded idle geometry and approved walking pixel invariance"
         }
       ],
       "tool": "built-in ImageGen",
-      "generation_task": "fhd-walk-blue",
-      "approval": "Held walk frame as idle until idle art exists; 2026-10-05",
-      "input": "actors/walk_north_east_2",
-      "operation": "copy",
-      "alias_of": "actors/walk_north_east_2"
+      "generation_task": "fhd-idle-grounded",
+      "approval": "User-requested raised-foot idle fix; 2026-10-05",
+      "output_sha256": "be0f7a18807bfe42a0903dbf79e233eadff278b730608fac011ed8e5ca920ff8"
     },
     {
       "id": "actors/idle_north_east_1",
       "owner": "raster",
+      "source": "assets/art_source/player-fhd/idle-blue-grounded/frames/up-right.png",
+      "source_sha256": "b9934404536e81d8ca7b3fc1342f6581da3f5bf5190a23a8d577405add3380d0",
+      "crop_xywh": [
+        0,
+        0,
+        80,
+        80
+      ],
       "canvas_wh": [
         80,
         80
@@ -4376,43 +4800,69 @@
         40,
         72
       ],
+      "content_anchor_xy": [
+        40,
+        72
+      ],
+      "content_scale": 1.0,
       "draw_scale": 0.5,
+      "alpha_threshold": 128,
       "palette": "exact-source",
       "animation": "idle_north_east",
       "frame": 1,
       "seconds": 0.55,
       "loop": true,
       "output": "sprites/actors/idle_north_east_1.png",
-      "output_sha256": "44de5c985b72e40d289815a5d30cbbcbc54fb9ffcb9385b4980fee6a8f9245ce",
-      "prompt": "implementation/fhd-player/pilots/2026-10-04/walk-up-right/materials-r5.prompt.txt",
-      "prompt_sha256": "95c6300736d136214edea39c6e4de941f3a2d4eb0cf03affdc62ea7c7099efdb",
+      "prompt": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/idle-r1.prompt.txt",
+      "prompt_sha256": "67257199ebab00725be33a654f0366cd594453447b38eba47cec8eb0b7653a0c",
       "references": [
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/selected-UR03-UL03/UR03/revisions/boot4-r4/frames/03.png",
-          "sha256": "32f31b11ad371bcc3751609752d6f66effa2d31b0c915f8fbc807d6c3c4f898d",
-          "role": "Approved walking pose before the blue garment palette"
+          "path": "assets/art_source/player-fhd/idle-blue-grounded/idle-r1.raw.png",
+          "sha256": "44bf86d816ac64b492291701e77697790f31e4bf61e3a556c219909f20ed4895",
+          "role": "Accepted generated eight-way neutral idle sheet"
         },
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/up-right/03.png",
-          "sha256": "5c438509887ac04e9a32362c0c3b836041123a9ea497c3c6e3081659497c71c0",
-          "role": "Reviewed blue frame; the source is a byte-identical copy"
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/raised-foot-edit-target.png",
+          "sha256": "95f0f8a4e3e91baf33cb42c0f5363ea3980a91d02795d74d4e2cf22189de2f61",
+          "role": "Edit target: prior raised-foot idle stand-ins"
         },
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
-          "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/approved-walk-reference.png",
+          "sha256": "0e9285aa619bedf573f5630f5ceb3674a90f3ecf8c8bed4e39853326d62aa7a9",
+          "role": "Approved walking identity and proportions"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/validation.json",
+          "sha256": "43f9117d2c3688f4fd2ef7ebc1a12c8e36b6ba79f28fcbc18737279afb22540f",
+          "role": "User-approved RIGHT blue garment ramp"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/walk-baseline.json",
+          "sha256": "131760438a52435366e75c3739aa79e1d02a960011893b3c93dd3efdd5d5b929",
+          "role": "Frozen 192 approved walk review/source/runtime hashes"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/runtime-idle-contract.json",
+          "sha256": "89ff7e6197d616815a0172b1c650c10f67c0f10f4bd204e2a8f0edb5837a348c",
+          "role": "Dedicated grounded idle geometry and approved walking pixel invariance"
         }
       ],
       "tool": "built-in ImageGen",
-      "generation_task": "fhd-walk-blue",
-      "approval": "Held walk frame as idle until idle art exists; 2026-10-05",
-      "input": "actors/walk_north_east_2",
-      "operation": "copy",
-      "alias_of": "actors/walk_north_east_2"
+      "generation_task": "fhd-idle-grounded",
+      "approval": "User-requested raised-foot idle fix; 2026-10-05",
+      "output_sha256": "be0f7a18807bfe42a0903dbf79e233eadff278b730608fac011ed8e5ca920ff8"
     },
     {
       "id": "actors/idle_north_east_2",
       "owner": "raster",
+      "source": "assets/art_source/player-fhd/idle-blue-grounded/frames/up-right.png",
+      "source_sha256": "b9934404536e81d8ca7b3fc1342f6581da3f5bf5190a23a8d577405add3380d0",
+      "crop_xywh": [
+        0,
+        0,
+        80,
+        80
+      ],
       "canvas_wh": [
         80,
         80
@@ -4421,43 +4871,69 @@
         40,
         72
       ],
+      "content_anchor_xy": [
+        40,
+        72
+      ],
+      "content_scale": 1.0,
       "draw_scale": 0.5,
+      "alpha_threshold": 128,
       "palette": "exact-source",
       "animation": "idle_north_east",
       "frame": 2,
       "seconds": 0.55,
       "loop": true,
       "output": "sprites/actors/idle_north_east_2.png",
-      "output_sha256": "44de5c985b72e40d289815a5d30cbbcbc54fb9ffcb9385b4980fee6a8f9245ce",
-      "prompt": "implementation/fhd-player/pilots/2026-10-04/walk-up-right/materials-r5.prompt.txt",
-      "prompt_sha256": "95c6300736d136214edea39c6e4de941f3a2d4eb0cf03affdc62ea7c7099efdb",
+      "prompt": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/idle-r1.prompt.txt",
+      "prompt_sha256": "67257199ebab00725be33a654f0366cd594453447b38eba47cec8eb0b7653a0c",
       "references": [
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/selected-UR03-UL03/UR03/revisions/boot4-r4/frames/03.png",
-          "sha256": "32f31b11ad371bcc3751609752d6f66effa2d31b0c915f8fbc807d6c3c4f898d",
-          "role": "Approved walking pose before the blue garment palette"
+          "path": "assets/art_source/player-fhd/idle-blue-grounded/idle-r1.raw.png",
+          "sha256": "44bf86d816ac64b492291701e77697790f31e4bf61e3a556c219909f20ed4895",
+          "role": "Accepted generated eight-way neutral idle sheet"
         },
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/up-right/03.png",
-          "sha256": "5c438509887ac04e9a32362c0c3b836041123a9ea497c3c6e3081659497c71c0",
-          "role": "Reviewed blue frame; the source is a byte-identical copy"
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/raised-foot-edit-target.png",
+          "sha256": "95f0f8a4e3e91baf33cb42c0f5363ea3980a91d02795d74d4e2cf22189de2f61",
+          "role": "Edit target: prior raised-foot idle stand-ins"
         },
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
-          "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/approved-walk-reference.png",
+          "sha256": "0e9285aa619bedf573f5630f5ceb3674a90f3ecf8c8bed4e39853326d62aa7a9",
+          "role": "Approved walking identity and proportions"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/validation.json",
+          "sha256": "43f9117d2c3688f4fd2ef7ebc1a12c8e36b6ba79f28fcbc18737279afb22540f",
+          "role": "User-approved RIGHT blue garment ramp"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/walk-baseline.json",
+          "sha256": "131760438a52435366e75c3739aa79e1d02a960011893b3c93dd3efdd5d5b929",
+          "role": "Frozen 192 approved walk review/source/runtime hashes"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/runtime-idle-contract.json",
+          "sha256": "89ff7e6197d616815a0172b1c650c10f67c0f10f4bd204e2a8f0edb5837a348c",
+          "role": "Dedicated grounded idle geometry and approved walking pixel invariance"
         }
       ],
       "tool": "built-in ImageGen",
-      "generation_task": "fhd-walk-blue",
-      "approval": "Held walk frame as idle until idle art exists; 2026-10-05",
-      "input": "actors/walk_north_east_2",
-      "operation": "copy",
-      "alias_of": "actors/walk_north_east_2"
+      "generation_task": "fhd-idle-grounded",
+      "approval": "User-requested raised-foot idle fix; 2026-10-05",
+      "output_sha256": "be0f7a18807bfe42a0903dbf79e233eadff278b730608fac011ed8e5ca920ff8"
     },
     {
       "id": "actors/idle_north_west_0",
       "owner": "raster",
+      "source": "assets/art_source/player-fhd/idle-blue-grounded/frames/up-left.png",
+      "source_sha256": "4fad1d8c82cf5f6cba609705104880c086dcc67e001e32e333bd3dfd6c3483d5",
+      "crop_xywh": [
+        0,
+        0,
+        80,
+        80
+      ],
       "canvas_wh": [
         80,
         80
@@ -4466,43 +4942,69 @@
         40,
         72
       ],
+      "content_anchor_xy": [
+        40,
+        72
+      ],
+      "content_scale": 1.0,
       "draw_scale": 0.5,
+      "alpha_threshold": 128,
       "palette": "exact-source",
       "animation": "idle_north_west",
       "frame": 0,
       "seconds": 0.55,
       "loop": true,
       "output": "sprites/actors/idle_north_west_0.png",
-      "output_sha256": "c716d5b7bddaf4aa37843df57919bab34813a6cb06c28e5a80b3c6635fa457d6",
-      "prompt": "implementation/fhd-player/pilots/2026-10-04/walk-up-left/rebuild-materials-r7.prompt.txt",
-      "prompt_sha256": "1b4cd4e4fa70a40e1cb08c5eb4fac6b1398b086e4fcfa6ec4011246ea8b3174a",
+      "prompt": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/idle-r1.prompt.txt",
+      "prompt_sha256": "67257199ebab00725be33a654f0366cd594453447b38eba47cec8eb0b7653a0c",
       "references": [
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/selected-UR03-UL03/UL03/frames/07.png",
-          "sha256": "bc3ac8506d749598d6611a89bf061e2e8a12443a0dcaf6d8efe107a111f74ca4",
-          "role": "Approved walking pose before the blue garment palette"
+          "path": "assets/art_source/player-fhd/idle-blue-grounded/idle-r1.raw.png",
+          "sha256": "44bf86d816ac64b492291701e77697790f31e4bf61e3a556c219909f20ed4895",
+          "role": "Accepted generated eight-way neutral idle sheet"
         },
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/up-left/07.png",
-          "sha256": "e5561bd7906c2b5a35667de194f9002e20b1e5782f12201c24ed3fb5516bb89a",
-          "role": "Reviewed blue frame; the source is a byte-identical copy"
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/raised-foot-edit-target.png",
+          "sha256": "95f0f8a4e3e91baf33cb42c0f5363ea3980a91d02795d74d4e2cf22189de2f61",
+          "role": "Edit target: prior raised-foot idle stand-ins"
         },
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
-          "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/approved-walk-reference.png",
+          "sha256": "0e9285aa619bedf573f5630f5ceb3674a90f3ecf8c8bed4e39853326d62aa7a9",
+          "role": "Approved walking identity and proportions"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/validation.json",
+          "sha256": "43f9117d2c3688f4fd2ef7ebc1a12c8e36b6ba79f28fcbc18737279afb22540f",
+          "role": "User-approved RIGHT blue garment ramp"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/walk-baseline.json",
+          "sha256": "131760438a52435366e75c3739aa79e1d02a960011893b3c93dd3efdd5d5b929",
+          "role": "Frozen 192 approved walk review/source/runtime hashes"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/runtime-idle-contract.json",
+          "sha256": "89ff7e6197d616815a0172b1c650c10f67c0f10f4bd204e2a8f0edb5837a348c",
+          "role": "Dedicated grounded idle geometry and approved walking pixel invariance"
         }
       ],
       "tool": "built-in ImageGen",
-      "generation_task": "fhd-walk-blue",
-      "approval": "Held walk frame as idle until idle art exists; 2026-10-05",
-      "input": "actors/walk_north_west_6",
-      "operation": "copy",
-      "alias_of": "actors/walk_north_west_6"
+      "generation_task": "fhd-idle-grounded",
+      "approval": "User-requested raised-foot idle fix; 2026-10-05",
+      "output_sha256": "d5bedb001416d0edb98f33513bbfadab465d3767a352feef81a51f003df7acc1"
     },
     {
       "id": "actors/idle_north_west_1",
       "owner": "raster",
+      "source": "assets/art_source/player-fhd/idle-blue-grounded/frames/up-left.png",
+      "source_sha256": "4fad1d8c82cf5f6cba609705104880c086dcc67e001e32e333bd3dfd6c3483d5",
+      "crop_xywh": [
+        0,
+        0,
+        80,
+        80
+      ],
       "canvas_wh": [
         80,
         80
@@ -4511,43 +5013,69 @@
         40,
         72
       ],
+      "content_anchor_xy": [
+        40,
+        72
+      ],
+      "content_scale": 1.0,
       "draw_scale": 0.5,
+      "alpha_threshold": 128,
       "palette": "exact-source",
       "animation": "idle_north_west",
       "frame": 1,
       "seconds": 0.55,
       "loop": true,
       "output": "sprites/actors/idle_north_west_1.png",
-      "output_sha256": "c716d5b7bddaf4aa37843df57919bab34813a6cb06c28e5a80b3c6635fa457d6",
-      "prompt": "implementation/fhd-player/pilots/2026-10-04/walk-up-left/rebuild-materials-r7.prompt.txt",
-      "prompt_sha256": "1b4cd4e4fa70a40e1cb08c5eb4fac6b1398b086e4fcfa6ec4011246ea8b3174a",
+      "prompt": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/idle-r1.prompt.txt",
+      "prompt_sha256": "67257199ebab00725be33a654f0366cd594453447b38eba47cec8eb0b7653a0c",
       "references": [
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/selected-UR03-UL03/UL03/frames/07.png",
-          "sha256": "bc3ac8506d749598d6611a89bf061e2e8a12443a0dcaf6d8efe107a111f74ca4",
-          "role": "Approved walking pose before the blue garment palette"
+          "path": "assets/art_source/player-fhd/idle-blue-grounded/idle-r1.raw.png",
+          "sha256": "44bf86d816ac64b492291701e77697790f31e4bf61e3a556c219909f20ed4895",
+          "role": "Accepted generated eight-way neutral idle sheet"
         },
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/up-left/07.png",
-          "sha256": "e5561bd7906c2b5a35667de194f9002e20b1e5782f12201c24ed3fb5516bb89a",
-          "role": "Reviewed blue frame; the source is a byte-identical copy"
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/raised-foot-edit-target.png",
+          "sha256": "95f0f8a4e3e91baf33cb42c0f5363ea3980a91d02795d74d4e2cf22189de2f61",
+          "role": "Edit target: prior raised-foot idle stand-ins"
         },
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
-          "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/approved-walk-reference.png",
+          "sha256": "0e9285aa619bedf573f5630f5ceb3674a90f3ecf8c8bed4e39853326d62aa7a9",
+          "role": "Approved walking identity and proportions"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/validation.json",
+          "sha256": "43f9117d2c3688f4fd2ef7ebc1a12c8e36b6ba79f28fcbc18737279afb22540f",
+          "role": "User-approved RIGHT blue garment ramp"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/walk-baseline.json",
+          "sha256": "131760438a52435366e75c3739aa79e1d02a960011893b3c93dd3efdd5d5b929",
+          "role": "Frozen 192 approved walk review/source/runtime hashes"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/runtime-idle-contract.json",
+          "sha256": "89ff7e6197d616815a0172b1c650c10f67c0f10f4bd204e2a8f0edb5837a348c",
+          "role": "Dedicated grounded idle geometry and approved walking pixel invariance"
         }
       ],
       "tool": "built-in ImageGen",
-      "generation_task": "fhd-walk-blue",
-      "approval": "Held walk frame as idle until idle art exists; 2026-10-05",
-      "input": "actors/walk_north_west_6",
-      "operation": "copy",
-      "alias_of": "actors/walk_north_west_6"
+      "generation_task": "fhd-idle-grounded",
+      "approval": "User-requested raised-foot idle fix; 2026-10-05",
+      "output_sha256": "d5bedb001416d0edb98f33513bbfadab465d3767a352feef81a51f003df7acc1"
     },
     {
       "id": "actors/idle_north_west_2",
       "owner": "raster",
+      "source": "assets/art_source/player-fhd/idle-blue-grounded/frames/up-left.png",
+      "source_sha256": "4fad1d8c82cf5f6cba609705104880c086dcc67e001e32e333bd3dfd6c3483d5",
+      "crop_xywh": [
+        0,
+        0,
+        80,
+        80
+      ],
       "canvas_wh": [
         80,
         80
@@ -4556,43 +5084,69 @@
         40,
         72
       ],
+      "content_anchor_xy": [
+        40,
+        72
+      ],
+      "content_scale": 1.0,
       "draw_scale": 0.5,
+      "alpha_threshold": 128,
       "palette": "exact-source",
       "animation": "idle_north_west",
       "frame": 2,
       "seconds": 0.55,
       "loop": true,
       "output": "sprites/actors/idle_north_west_2.png",
-      "output_sha256": "c716d5b7bddaf4aa37843df57919bab34813a6cb06c28e5a80b3c6635fa457d6",
-      "prompt": "implementation/fhd-player/pilots/2026-10-04/walk-up-left/rebuild-materials-r7.prompt.txt",
-      "prompt_sha256": "1b4cd4e4fa70a40e1cb08c5eb4fac6b1398b086e4fcfa6ec4011246ea8b3174a",
+      "prompt": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/idle-r1.prompt.txt",
+      "prompt_sha256": "67257199ebab00725be33a654f0366cd594453447b38eba47cec8eb0b7653a0c",
       "references": [
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/selected-UR03-UL03/UL03/frames/07.png",
-          "sha256": "bc3ac8506d749598d6611a89bf061e2e8a12443a0dcaf6d8efe107a111f74ca4",
-          "role": "Approved walking pose before the blue garment palette"
+          "path": "assets/art_source/player-fhd/idle-blue-grounded/idle-r1.raw.png",
+          "sha256": "44bf86d816ac64b492291701e77697790f31e4bf61e3a556c219909f20ed4895",
+          "role": "Accepted generated eight-way neutral idle sheet"
         },
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/up-left/07.png",
-          "sha256": "e5561bd7906c2b5a35667de194f9002e20b1e5782f12201c24ed3fb5516bb89a",
-          "role": "Reviewed blue frame; the source is a byte-identical copy"
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/raised-foot-edit-target.png",
+          "sha256": "95f0f8a4e3e91baf33cb42c0f5363ea3980a91d02795d74d4e2cf22189de2f61",
+          "role": "Edit target: prior raised-foot idle stand-ins"
         },
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
-          "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/approved-walk-reference.png",
+          "sha256": "0e9285aa619bedf573f5630f5ceb3674a90f3ecf8c8bed4e39853326d62aa7a9",
+          "role": "Approved walking identity and proportions"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/validation.json",
+          "sha256": "43f9117d2c3688f4fd2ef7ebc1a12c8e36b6ba79f28fcbc18737279afb22540f",
+          "role": "User-approved RIGHT blue garment ramp"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/walk-baseline.json",
+          "sha256": "131760438a52435366e75c3739aa79e1d02a960011893b3c93dd3efdd5d5b929",
+          "role": "Frozen 192 approved walk review/source/runtime hashes"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/runtime-idle-contract.json",
+          "sha256": "89ff7e6197d616815a0172b1c650c10f67c0f10f4bd204e2a8f0edb5837a348c",
+          "role": "Dedicated grounded idle geometry and approved walking pixel invariance"
         }
       ],
       "tool": "built-in ImageGen",
-      "generation_task": "fhd-walk-blue",
-      "approval": "Held walk frame as idle until idle art exists; 2026-10-05",
-      "input": "actors/walk_north_west_6",
-      "operation": "copy",
-      "alias_of": "actors/walk_north_west_6"
+      "generation_task": "fhd-idle-grounded",
+      "approval": "User-requested raised-foot idle fix; 2026-10-05",
+      "output_sha256": "d5bedb001416d0edb98f33513bbfadab465d3767a352feef81a51f003df7acc1"
     },
     {
       "id": "actors/idle_south_west_0",
       "owner": "raster",
+      "source": "assets/art_source/player-fhd/idle-blue-grounded/frames/down-left.png",
+      "source_sha256": "fd8c796d1edf29ddae3784761e4730a5004ca6e20bd9fbf397c6cbea429db5ab",
+      "crop_xywh": [
+        0,
+        0,
+        80,
+        80
+      ],
       "canvas_wh": [
         80,
         80
@@ -4601,43 +5155,69 @@
         40,
         72
       ],
+      "content_anchor_xy": [
+        40,
+        72
+      ],
+      "content_scale": 1.0,
       "draw_scale": 0.5,
+      "alpha_threshold": 128,
       "palette": "exact-source",
       "animation": "idle_south_west",
       "frame": 0,
       "seconds": 0.55,
       "loop": true,
       "output": "sprites/actors/idle_south_west_0.png",
-      "output_sha256": "c7ed5f187c83a03e1746000cfd177c285ce02c55c0807203b477c0146505fdde",
-      "prompt": "implementation/fhd-player/pilots/2026-10-04/walk-down-left/materials-r1.prompt.json",
-      "prompt_sha256": "46ca6755bfb6436481249a57f7317e6f426ed1ecf40ca618aad4449d99885e7a",
+      "prompt": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/idle-r1.prompt.txt",
+      "prompt_sha256": "67257199ebab00725be33a654f0366cd594453447b38eba47cec8eb0b7653a0c",
       "references": [
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-left/frames/walk-down-left-03.png",
-          "sha256": "46e856f426a870dbfc563555313d8ba088774e060687b5a13244dc9098459981",
-          "role": "Approved walking pose before the blue garment palette"
+          "path": "assets/art_source/player-fhd/idle-blue-grounded/idle-r1.raw.png",
+          "sha256": "44bf86d816ac64b492291701e77697790f31e4bf61e3a556c219909f20ed4895",
+          "role": "Accepted generated eight-way neutral idle sheet"
         },
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/down-left/03.png",
-          "sha256": "0a7ea43ce076e31530acf18b2356b96a650b0136e2a985adbd4b8609ad36e591",
-          "role": "Reviewed blue frame; the source is a byte-identical copy"
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/raised-foot-edit-target.png",
+          "sha256": "95f0f8a4e3e91baf33cb42c0f5363ea3980a91d02795d74d4e2cf22189de2f61",
+          "role": "Edit target: prior raised-foot idle stand-ins"
         },
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
-          "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/approved-walk-reference.png",
+          "sha256": "0e9285aa619bedf573f5630f5ceb3674a90f3ecf8c8bed4e39853326d62aa7a9",
+          "role": "Approved walking identity and proportions"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/validation.json",
+          "sha256": "43f9117d2c3688f4fd2ef7ebc1a12c8e36b6ba79f28fcbc18737279afb22540f",
+          "role": "User-approved RIGHT blue garment ramp"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/walk-baseline.json",
+          "sha256": "131760438a52435366e75c3739aa79e1d02a960011893b3c93dd3efdd5d5b929",
+          "role": "Frozen 192 approved walk review/source/runtime hashes"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/runtime-idle-contract.json",
+          "sha256": "89ff7e6197d616815a0172b1c650c10f67c0f10f4bd204e2a8f0edb5837a348c",
+          "role": "Dedicated grounded idle geometry and approved walking pixel invariance"
         }
       ],
       "tool": "built-in ImageGen",
-      "generation_task": "fhd-walk-blue",
-      "approval": "Held walk frame as idle until idle art exists; 2026-10-05",
-      "input": "actors/walk_south_west_2",
-      "operation": "copy",
-      "alias_of": "actors/walk_south_west_2"
+      "generation_task": "fhd-idle-grounded",
+      "approval": "User-requested raised-foot idle fix; 2026-10-05",
+      "output_sha256": "0ae06c45600de8b7ed0c701de96ab18d78687447dc9020e0387ddcdbce274cd1"
     },
     {
       "id": "actors/idle_south_west_1",
       "owner": "raster",
+      "source": "assets/art_source/player-fhd/idle-blue-grounded/frames/down-left.png",
+      "source_sha256": "fd8c796d1edf29ddae3784761e4730a5004ca6e20bd9fbf397c6cbea429db5ab",
+      "crop_xywh": [
+        0,
+        0,
+        80,
+        80
+      ],
       "canvas_wh": [
         80,
         80
@@ -4646,43 +5226,69 @@
         40,
         72
       ],
+      "content_anchor_xy": [
+        40,
+        72
+      ],
+      "content_scale": 1.0,
       "draw_scale": 0.5,
+      "alpha_threshold": 128,
       "palette": "exact-source",
       "animation": "idle_south_west",
       "frame": 1,
       "seconds": 0.55,
       "loop": true,
       "output": "sprites/actors/idle_south_west_1.png",
-      "output_sha256": "c7ed5f187c83a03e1746000cfd177c285ce02c55c0807203b477c0146505fdde",
-      "prompt": "implementation/fhd-player/pilots/2026-10-04/walk-down-left/materials-r1.prompt.json",
-      "prompt_sha256": "46ca6755bfb6436481249a57f7317e6f426ed1ecf40ca618aad4449d99885e7a",
+      "prompt": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/idle-r1.prompt.txt",
+      "prompt_sha256": "67257199ebab00725be33a654f0366cd594453447b38eba47cec8eb0b7653a0c",
       "references": [
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-left/frames/walk-down-left-03.png",
-          "sha256": "46e856f426a870dbfc563555313d8ba088774e060687b5a13244dc9098459981",
-          "role": "Approved walking pose before the blue garment palette"
+          "path": "assets/art_source/player-fhd/idle-blue-grounded/idle-r1.raw.png",
+          "sha256": "44bf86d816ac64b492291701e77697790f31e4bf61e3a556c219909f20ed4895",
+          "role": "Accepted generated eight-way neutral idle sheet"
         },
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/down-left/03.png",
-          "sha256": "0a7ea43ce076e31530acf18b2356b96a650b0136e2a985adbd4b8609ad36e591",
-          "role": "Reviewed blue frame; the source is a byte-identical copy"
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/raised-foot-edit-target.png",
+          "sha256": "95f0f8a4e3e91baf33cb42c0f5363ea3980a91d02795d74d4e2cf22189de2f61",
+          "role": "Edit target: prior raised-foot idle stand-ins"
         },
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
-          "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/approved-walk-reference.png",
+          "sha256": "0e9285aa619bedf573f5630f5ceb3674a90f3ecf8c8bed4e39853326d62aa7a9",
+          "role": "Approved walking identity and proportions"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/validation.json",
+          "sha256": "43f9117d2c3688f4fd2ef7ebc1a12c8e36b6ba79f28fcbc18737279afb22540f",
+          "role": "User-approved RIGHT blue garment ramp"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/walk-baseline.json",
+          "sha256": "131760438a52435366e75c3739aa79e1d02a960011893b3c93dd3efdd5d5b929",
+          "role": "Frozen 192 approved walk review/source/runtime hashes"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/runtime-idle-contract.json",
+          "sha256": "89ff7e6197d616815a0172b1c650c10f67c0f10f4bd204e2a8f0edb5837a348c",
+          "role": "Dedicated grounded idle geometry and approved walking pixel invariance"
         }
       ],
       "tool": "built-in ImageGen",
-      "generation_task": "fhd-walk-blue",
-      "approval": "Held walk frame as idle until idle art exists; 2026-10-05",
-      "input": "actors/walk_south_west_2",
-      "operation": "copy",
-      "alias_of": "actors/walk_south_west_2"
+      "generation_task": "fhd-idle-grounded",
+      "approval": "User-requested raised-foot idle fix; 2026-10-05",
+      "output_sha256": "0ae06c45600de8b7ed0c701de96ab18d78687447dc9020e0387ddcdbce274cd1"
     },
     {
       "id": "actors/idle_south_west_2",
       "owner": "raster",
+      "source": "assets/art_source/player-fhd/idle-blue-grounded/frames/down-left.png",
+      "source_sha256": "fd8c796d1edf29ddae3784761e4730a5004ca6e20bd9fbf397c6cbea429db5ab",
+      "crop_xywh": [
+        0,
+        0,
+        80,
+        80
+      ],
       "canvas_wh": [
         80,
         80
@@ -4691,39 +5297,57 @@
         40,
         72
       ],
+      "content_anchor_xy": [
+        40,
+        72
+      ],
+      "content_scale": 1.0,
       "draw_scale": 0.5,
+      "alpha_threshold": 128,
       "palette": "exact-source",
       "animation": "idle_south_west",
       "frame": 2,
       "seconds": 0.55,
       "loop": true,
       "output": "sprites/actors/idle_south_west_2.png",
-      "output_sha256": "c7ed5f187c83a03e1746000cfd177c285ce02c55c0807203b477c0146505fdde",
-      "prompt": "implementation/fhd-player/pilots/2026-10-04/walk-down-left/materials-r1.prompt.json",
-      "prompt_sha256": "46ca6755bfb6436481249a57f7317e6f426ed1ecf40ca618aad4449d99885e7a",
+      "prompt": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/idle-r1.prompt.txt",
+      "prompt_sha256": "67257199ebab00725be33a654f0366cd594453447b38eba47cec8eb0b7653a0c",
       "references": [
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-left/frames/walk-down-left-03.png",
-          "sha256": "46e856f426a870dbfc563555313d8ba088774e060687b5a13244dc9098459981",
-          "role": "Approved walking pose before the blue garment palette"
+          "path": "assets/art_source/player-fhd/idle-blue-grounded/idle-r1.raw.png",
+          "sha256": "44bf86d816ac64b492291701e77697790f31e4bf61e3a556c219909f20ed4895",
+          "role": "Accepted generated eight-way neutral idle sheet"
         },
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/down-left/03.png",
-          "sha256": "0a7ea43ce076e31530acf18b2356b96a650b0136e2a985adbd4b8609ad36e591",
-          "role": "Reviewed blue frame; the source is a byte-identical copy"
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/raised-foot-edit-target.png",
+          "sha256": "95f0f8a4e3e91baf33cb42c0f5363ea3980a91d02795d74d4e2cf22189de2f61",
+          "role": "Edit target: prior raised-foot idle stand-ins"
         },
         {
-          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/runtime-blue-walk-contract.json",
-          "sha256": "73ce7b8d4e5e97a578d13055ba49aabd2fc7f1703dfc67d858f03585c4e180fe",
-          "role": "Runtime blue walk contract: canvas, ground pivot, frame order, idle choice"
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/approved-walk-reference.png",
+          "sha256": "0e9285aa619bedf573f5630f5ceb3674a90f3ecf8c8bed4e39853326d62aa7a9",
+          "role": "Approved walking identity and proportions"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/validation.json",
+          "sha256": "43f9117d2c3688f4fd2ef7ebc1a12c8e36b6ba79f28fcbc18737279afb22540f",
+          "role": "User-approved RIGHT blue garment ramp"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/walk-baseline.json",
+          "sha256": "131760438a52435366e75c3739aa79e1d02a960011893b3c93dd3efdd5d5b929",
+          "role": "Frozen 192 approved walk review/source/runtime hashes"
+        },
+        {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/runtime-idle-contract.json",
+          "sha256": "89ff7e6197d616815a0172b1c650c10f67c0f10f4bd204e2a8f0edb5837a348c",
+          "role": "Dedicated grounded idle geometry and approved walking pixel invariance"
         }
       ],
       "tool": "built-in ImageGen",
-      "generation_task": "fhd-walk-blue",
-      "approval": "Held walk frame as idle until idle art exists; 2026-10-05",
-      "input": "actors/walk_south_west_2",
-      "operation": "copy",
-      "alias_of": "actors/walk_south_west_2"
+      "generation_task": "fhd-idle-grounded",
+      "approval": "User-requested raised-foot idle fix; 2026-10-05",
+      "output_sha256": "0ae06c45600de8b7ed0c701de96ab18d78687447dc9020e0387ddcdbce274cd1"
     },
     {
       "id": "actors/chop_0",

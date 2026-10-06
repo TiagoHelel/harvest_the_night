@@ -1270,7 +1270,7 @@ func _locomotion() -> void:
 			var count := int(pose["frames"])
 			var expected_name := StringName("%s_%s" % ["walk" if moving else "idle", suffix])
 			expect(pose["name"] == expected_name and count == (8 if moving else 3),
-				"Each of the eight directions selects its own reviewed walk and held idle")
+				"Each of the eight directions selects its own reviewed walk and grounded idle")
 			expect(PlayerFrames.SECONDS.has(expected_name), "Timing comes from the accepted strip")
 			expect(is_equal_approx(float(pose["seconds"]), PlayerArt.RUN_FRAME_SECONDS if running
 				else float(PlayerFrames.SECONDS[expected_name])), "Running plays the same cycle faster")
@@ -1298,6 +1298,22 @@ func _locomotion() -> void:
 				if phase < count:
 					await _shoot("%s_%s_%02d" % [motion, suffix, phase],
 						"%s / %s / authored frame %d" % [expected_name, motion, phase])
+			if motion == "walk":
+				# Releasing ANY step must select the independent grounded pose,
+				# rather than freezing the step with its suspended boot.
+				for step in 8:
+					_state["intent"]["move"] = [heading.x, heading.y]
+					view._playing = expected_name
+					view._elapsed = step * 0.1
+					view._process(0.0)
+					var walk_pixels := body.texture.get_image().get_data()
+					var stopped_at := view.position
+					_state["intent"]["move"] = [0, 0]
+					view._process(0.0)
+					expect(body.texture.resource_path == PlayerArt.texture_path(StringName("idle_%s" % suffix), 0),
+						"Releasing each walk phase immediately selects neutral idle frame zero")
+					expect(body.texture.get_image().get_data() != walk_pixels and view.position == stopped_at,
+						"Stopping changes the suspended-leg drawing without shifting the ground pivot")
 	view.set_running(false)
 	view._playing = &""
 	# Vertical wins a diagonal tie in core, but the drawing is the diagonal one.

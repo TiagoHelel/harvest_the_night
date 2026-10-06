@@ -1,0 +1,629 @@
+{
+  "date": "2026-10-05",
+  "status": "awaiting_user_motion_review",
+  "runtime_integrated": false,
+  "changes": "UL: reaching poses 4/8, consistent supporting calf reach, raised passing foot7; UR: stable pelvis/back-pocket contour",
+  "revisions": {
+    "up-left-r1": "Rejected: reaching poses still duplicate wide contact",
+    "up-left-r2": "Rejected: supporting calves shortened, inconsistent height",
+    "up-left-r3": "Selected for frames1..6/8; frame7 passing dip rejected",
+    "up-left-frame7-r1": "Targeted frame7 passing-foot repair, second targeted revision for this asset",
+    "up-right-r1": "Selected for user hip review"
+  },
+  "targeted_revisions_per_up_left_frame": {
+    "1": 2,
+    "2": 2,
+    "3": 2,
+    "4": 3,
+    "5": 2,
+    "6": 2,
+    "7": 2,
+    "8": 3
+  },
+  "canvas_wh": [
+    80,
+    80
+  ],
+  "pivot_xy": [
+    40,
+    72
+  ],
+  "draw_scale": 0.5,
+  "seconds": 0.1,
+  "palette_rgb": [
+    [
+      2,
+      16,
+      53
+    ],
+    [
+      1,
+      25,
+      73
+    ],
+    [
+      9,
+      31,
+      81
+    ],
+    [
+      9,
+      51,
+      121
+    ],
+    [
+      18,
+      56,
+      125
+    ],
+    [
+      17,
+      65,
+      144
+    ],
+    [
+      24,
+      70,
+      152
+    ],
+    [
+      28,
+      80,
+      173
+    ],
+    [
+      31,
+      82,
+      177
+    ],
+    [
+      31,
+      84,
+      180
+    ],
+    [
+      31,
+      85,
+      180
+    ],
+    [
+      40,
+      97,
+      193
+    ]
+  ],
+  "frames": {
+    "up-left": {
+      "raw_path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/up-left-motion-r3.raw.png",
+      "raw_sha256": "f15970ab4b04132ebba86dfef71b8eea87ae5fd396c0e1e29e326e9c322361fc",
+      "prompt_path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/up-left-motion-r3.prompt.txt",
+      "prompt_sha256": "489deb31309253ce940e106678233ab0e86ca483135c19a880358b036ec37427",
+      "suffix": "north_west",
+      "common_scale": 0.18,
+      "frames": [
+        {
+          "frame": 1,
+          "raw_cell_xyxy": [
+            0,
+            0,
+            443,
+            443
+          ],
+          "raw_content_xyxy": [
+            130,
+            43,
+            312,
+            397
+          ],
+          "offset_xy": [
+            24,
+            8
+          ],
+          "raw_path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/up-left-motion-r3.raw.png",
+          "raw_sha256": "f15970ab4b04132ebba86dfef71b8eea87ae5fd396c0e1e29e326e9c322361fc",
+          "prompt_path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/up-left-motion-r3.prompt.txt",
+          "prompt_sha256": "489deb31309253ce940e106678233ab0e86ca483135c19a880358b036ec37427",
+          "native_bounds_xyxy": [
+            24,
+            8,
+            57,
+            72
+          ],
+          "height": 64,
+          "native_path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/diagonal-candidate/frames/up-left/01.png",
+          "sha256": "126bad443ba0617305768321f2ac3777b7228ead25a6ae77d29f4172ee16fc20"
+        },
+        {
+          "frame": 2,
+          "raw_cell_xyxy": [
+            443,
+            0,
+            887,
+            443
+          ],
+          "raw_content_xyxy": [
+            132,
+            43,
+            326,
+            398
+          ],
+          "offset_xy": [
+            24,
+            8
+          ],
+          "raw_path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/up-left-motion-r3.raw.png",
+          "raw_sha256": "f15970ab4b04132ebba86dfef71b8eea87ae5fd396c0e1e29e326e9c322361fc",
+          "prompt_path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/up-left-motion-r3.prompt.txt",
+          "prompt_sha256": "489deb31309253ce940e106678233ab0e86ca483135c19a880358b036ec37427",
+          "native_bounds_xyxy": [
+            24,
+            8,
+            59,
+            72
+          ],
+          "height": 64,
+          "native_path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/diagonal-candidate/frames/up-left/02.png",
+          "sha256": "32e4787684793160c0f6b967c5f3232e4c1539e04f9a4ad3c6081a935877eccf"
+        },
+        {
+          "frame": 3,
+          "raw_cell_xyxy": [
+            887,
+            0,
+            1330,
+            443
+          ],
+          "raw_content_xyxy": [
+            131,
+            43,
+            311,
+            398
+          ],
+          "offset_xy": [
+            24,
+            8
+          ],
+          "raw_path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/up-left-motion-r3.raw.png",
+          "raw_sha256": "f15970ab4b04132ebba86dfef71b8eea87ae5fd396c0e1e29e326e9c322361fc",
+          "prompt_path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/up-left-motion-r3.prompt.txt",
+          "prompt_sha256": "489deb31309253ce940e106678233ab0e86ca483135c19a880358b036ec37427",
+          "native_bounds_xyxy": [
+            24,
+            8,
+            56,
+            72
+          ],
+          "height": 64,
+          "native_path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/diagonal-candidate/frames/up-left/03.png",
+          "sha256": "73a35baada2a5d638ef8b07615ce24a81e4f5da6fe2d56c40247449949e39f33"
+        },
+        {
+          "frame": 4,
+          "raw_cell_xyxy": [
+            1330,
+            0,
+            1774,
+            443
+          ],
+          "raw_content_xyxy": [
+            132,
+            43,
+            312,
+            398
+          ],
+          "offset_xy": [
+            24,
+            8
+          ],
+          "raw_path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/up-left-motion-r3.raw.png",
+          "raw_sha256": "f15970ab4b04132ebba86dfef71b8eea87ae5fd396c0e1e29e326e9c322361fc",
+          "prompt_path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/up-left-motion-r3.prompt.txt",
+          "prompt_sha256": "489deb31309253ce940e106678233ab0e86ca483135c19a880358b036ec37427",
+          "native_bounds_xyxy": [
+            24,
+            8,
+            56,
+            72
+          ],
+          "height": 64,
+          "native_path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/diagonal-candidate/frames/up-left/04.png",
+          "sha256": "55364063e626ac8c1b661b68c0c2a04adaf277f8cd00369fe3f14c7e3578c2df"
+        },
+        {
+          "frame": 5,
+          "raw_cell_xyxy": [
+            0,
+            443,
+            443,
+            887
+          ],
+          "raw_content_xyxy": [
+            131,
+            43,
+            312,
+            398
+          ],
+          "offset_xy": [
+            24,
+            8
+          ],
+          "raw_path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/up-left-motion-r3.raw.png",
+          "raw_sha256": "f15970ab4b04132ebba86dfef71b8eea87ae5fd396c0e1e29e326e9c322361fc",
+          "prompt_path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/up-left-motion-r3.prompt.txt",
+          "prompt_sha256": "489deb31309253ce940e106678233ab0e86ca483135c19a880358b036ec37427",
+          "native_bounds_xyxy": [
+            24,
+            8,
+            57,
+            72
+          ],
+          "height": 64,
+          "native_path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/diagonal-candidate/frames/up-left/05.png",
+          "sha256": "7640437469811fcfc4070a7d7495662608e2131be092618d04a69a0e2ae30e7e"
+        },
+        {
+          "frame": 6,
+          "raw_cell_xyxy": [
+            443,
+            443,
+            887,
+            887
+          ],
+          "raw_content_xyxy": [
+            132,
+            43,
+            321,
+            399
+          ],
+          "offset_xy": [
+            24,
+            8
+          ],
+          "raw_path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/up-left-motion-r3.raw.png",
+          "raw_sha256": "f15970ab4b04132ebba86dfef71b8eea87ae5fd396c0e1e29e326e9c322361fc",
+          "prompt_path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/up-left-motion-r3.prompt.txt",
+          "prompt_sha256": "489deb31309253ce940e106678233ab0e86ca483135c19a880358b036ec37427",
+          "native_bounds_xyxy": [
+            24,
+            8,
+            58,
+            72
+          ],
+          "height": 64,
+          "native_path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/diagonal-candidate/frames/up-left/06.png",
+          "sha256": "fbbfb7f2da2caf85837368bf09f97640c781277e8dba417e9a5a789fa0b1252f"
+        },
+        {
+          "frame": 7,
+          "raw_cell_xyxy": [
+            887,
+            443,
+            1330,
+            887
+          ],
+          "raw_content_xyxy": [
+            132,
+            44,
+            310,
+            398
+          ],
+          "offset_xy": [
+            24,
+            8
+          ],
+          "raw_path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/up-left-frame7-r1.raw.png",
+          "raw_sha256": "73739006e708799ea575442e63034d4005d8d9393a323cc7f1ffabecedd560b1",
+          "prompt_path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/up-left-frame7-r1.prompt.txt",
+          "prompt_sha256": "ecf8142c3efe066e49bee6a4d07422a700fee0df40fd9af9e14b28943cd8ca2f",
+          "native_bounds_xyxy": [
+            24,
+            8,
+            56,
+            72
+          ],
+          "height": 64,
+          "native_path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/diagonal-candidate/frames/up-left/07.png",
+          "sha256": "6575105da29375092a2d92e3f3df5698016acf6345cd69678a1df9ce45f48ce5"
+        },
+        {
+          "frame": 8,
+          "raw_cell_xyxy": [
+            1330,
+            443,
+            1774,
+            887
+          ],
+          "raw_content_xyxy": [
+            132,
+            43,
+            313,
+            399
+          ],
+          "offset_xy": [
+            24,
+            8
+          ],
+          "raw_path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/up-left-motion-r3.raw.png",
+          "raw_sha256": "f15970ab4b04132ebba86dfef71b8eea87ae5fd396c0e1e29e326e9c322361fc",
+          "prompt_path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/up-left-motion-r3.prompt.txt",
+          "prompt_sha256": "489deb31309253ce940e106678233ab0e86ca483135c19a880358b036ec37427",
+          "native_bounds_xyxy": [
+            24,
+            8,
+            57,
+            72
+          ],
+          "height": 64,
+          "native_path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/diagonal-candidate/frames/up-left/08.png",
+          "sha256": "8346a300ada35d2cddfc825d22c2ce4c4077972c83f93b84f03d4ba38a61e977"
+        }
+      ]
+    },
+    "up-right": {
+      "raw_path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/up-right-hips-r1.raw.png",
+      "raw_sha256": "22321cb9c76d44b6be8f6572220dccc1778eb2692f89c243de451da7a5b614d9",
+      "prompt_path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/up-right-hips-r1.prompt.txt",
+      "prompt_sha256": "90976134bd05be7a64cf49e6d128480f58c477f386b2f07a0bfe89dea568ce5b",
+      "suffix": "north_east",
+      "common_scale": 0.18,
+      "frames": [
+        {
+          "frame": 1,
+          "raw_cell_xyxy": [
+            0,
+            0,
+            443,
+            443
+          ],
+          "raw_content_xyxy": [
+            133,
+            44,
+            321,
+            399
+          ],
+          "offset_xy": [
+            24,
+            8
+          ],
+          "raw_path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/up-right-hips-r1.raw.png",
+          "raw_sha256": "22321cb9c76d44b6be8f6572220dccc1778eb2692f89c243de451da7a5b614d9",
+          "prompt_path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/up-right-hips-r1.prompt.txt",
+          "prompt_sha256": "90976134bd05be7a64cf49e6d128480f58c477f386b2f07a0bfe89dea568ce5b",
+          "native_bounds_xyxy": [
+            24,
+            8,
+            58,
+            72
+          ],
+          "height": 64,
+          "native_path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/diagonal-candidate/frames/up-right/01.png",
+          "sha256": "ec412901bf44b11759f2cf3d117f056e7355865b07b60e948e967b3e395d54a1"
+        },
+        {
+          "frame": 2,
+          "raw_cell_xyxy": [
+            443,
+            0,
+            887,
+            443
+          ],
+          "raw_content_xyxy": [
+            135,
+            44,
+            311,
+            405
+          ],
+          "offset_xy": [
+            24,
+            7
+          ],
+          "raw_path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/up-right-hips-r1.raw.png",
+          "raw_sha256": "22321cb9c76d44b6be8f6572220dccc1778eb2692f89c243de451da7a5b614d9",
+          "prompt_path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/up-right-hips-r1.prompt.txt",
+          "prompt_sha256": "90976134bd05be7a64cf49e6d128480f58c477f386b2f07a0bfe89dea568ce5b",
+          "native_bounds_xyxy": [
+            24,
+            7,
+            56,
+            72
+          ],
+          "height": 65,
+          "native_path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/diagonal-candidate/frames/up-right/02.png",
+          "sha256": "e270acb3d3566779fb14a2fbacdf00a007ca436896a9afa8d4c8ffc83bf05422"
+        },
+        {
+          "frame": 3,
+          "raw_cell_xyxy": [
+            887,
+            0,
+            1330,
+            443
+          ],
+          "raw_content_xyxy": [
+            133,
+            44,
+            309,
+            394
+          ],
+          "offset_xy": [
+            24,
+            9
+          ],
+          "raw_path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/up-right-hips-r1.raw.png",
+          "raw_sha256": "22321cb9c76d44b6be8f6572220dccc1778eb2692f89c243de451da7a5b614d9",
+          "prompt_path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/up-right-hips-r1.prompt.txt",
+          "prompt_sha256": "90976134bd05be7a64cf49e6d128480f58c477f386b2f07a0bfe89dea568ce5b",
+          "native_bounds_xyxy": [
+            24,
+            9,
+            56,
+            72
+          ],
+          "height": 63,
+          "native_path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/diagonal-candidate/frames/up-right/03.png",
+          "sha256": "22d065b369c7ea253b2c7c0ff28aff84eb2e6e509431e7ed20714b76d82a23fd"
+        },
+        {
+          "frame": 4,
+          "raw_cell_xyxy": [
+            1330,
+            0,
+            1774,
+            443
+          ],
+          "raw_content_xyxy": [
+            135,
+            44,
+            317,
+            394
+          ],
+          "offset_xy": [
+            24,
+            9
+          ],
+          "raw_path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/up-right-hips-r1.raw.png",
+          "raw_sha256": "22321cb9c76d44b6be8f6572220dccc1778eb2692f89c243de451da7a5b614d9",
+          "prompt_path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/up-right-hips-r1.prompt.txt",
+          "prompt_sha256": "90976134bd05be7a64cf49e6d128480f58c477f386b2f07a0bfe89dea568ce5b",
+          "native_bounds_xyxy": [
+            24,
+            9,
+            57,
+            72
+          ],
+          "height": 63,
+          "native_path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/diagonal-candidate/frames/up-right/04.png",
+          "sha256": "c69732a87a92a887dfe6e541ab21afae112ecc3aa778100d0c55d47105b0f18a"
+        },
+        {
+          "frame": 5,
+          "raw_cell_xyxy": [
+            0,
+            443,
+            443,
+            887
+          ],
+          "raw_content_xyxy": [
+            133,
+            45,
+            321,
+            405
+          ],
+          "offset_xy": [
+            24,
+            7
+          ],
+          "raw_path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/up-right-hips-r1.raw.png",
+          "raw_sha256": "22321cb9c76d44b6be8f6572220dccc1778eb2692f89c243de451da7a5b614d9",
+          "prompt_path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/up-right-hips-r1.prompt.txt",
+          "prompt_sha256": "90976134bd05be7a64cf49e6d128480f58c477f386b2f07a0bfe89dea568ce5b",
+          "native_bounds_xyxy": [
+            24,
+            7,
+            58,
+            72
+          ],
+          "height": 65,
+          "native_path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/diagonal-candidate/frames/up-right/05.png",
+          "sha256": "00740a0610a83609c015dc34eb261bd39d3be8140292f69fe0954ad1a79dca70"
+        },
+        {
+          "frame": 6,
+          "raw_cell_xyxy": [
+            443,
+            443,
+            887,
+            887
+          ],
+          "raw_content_xyxy": [
+            135,
+            45,
+            311,
+            405
+          ],
+          "offset_xy": [
+            24,
+            7
+          ],
+          "raw_path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/up-right-hips-r1.raw.png",
+          "raw_sha256": "22321cb9c76d44b6be8f6572220dccc1778eb2692f89c243de451da7a5b614d9",
+          "prompt_path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/up-right-hips-r1.prompt.txt",
+          "prompt_sha256": "90976134bd05be7a64cf49e6d128480f58c477f386b2f07a0bfe89dea568ce5b",
+          "native_bounds_xyxy": [
+            24,
+            7,
+            56,
+            72
+          ],
+          "height": 65,
+          "native_path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/diagonal-candidate/frames/up-right/06.png",
+          "sha256": "f5406e733c39ed9c6dba53b7587766ad881b5ccb17373ba08736606b7fe1fe1a"
+        },
+        {
+          "frame": 7,
+          "raw_cell_xyxy": [
+            887,
+            443,
+            1330,
+            887
+          ],
+          "raw_content_xyxy": [
+            133,
+            44,
+            309,
+            394
+          ],
+          "offset_xy": [
+            24,
+            9
+          ],
+          "raw_path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/up-right-hips-r1.raw.png",
+          "raw_sha256": "22321cb9c76d44b6be8f6572220dccc1778eb2692f89c243de451da7a5b614d9",
+          "prompt_path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/up-right-hips-r1.prompt.txt",
+          "prompt_sha256": "90976134bd05be7a64cf49e6d128480f58c477f386b2f07a0bfe89dea568ce5b",
+          "native_bounds_xyxy": [
+            24,
+            9,
+            56,
+            72
+          ],
+          "height": 63,
+          "native_path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/diagonal-candidate/frames/up-right/07.png",
+          "sha256": "ad3997be65b391b423c522234a585509602202d0638bdee37c0880a6046c7b2c"
+        },
+        {
+          "frame": 8,
+          "raw_cell_xyxy": [
+            1330,
+            443,
+            1774,
+            887
+          ],
+          "raw_content_xyxy": [
+            135,
+            45,
+            311,
+            394
+          ],
+          "offset_xy": [
+            24,
+            9
+          ],
+          "raw_path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/up-right-hips-r1.raw.png",
+          "raw_sha256": "22321cb9c76d44b6be8f6572220dccc1778eb2692f89c243de451da7a5b614d9",
+          "prompt_path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/up-right-hips-r1.prompt.txt",
+          "prompt_sha256": "90976134bd05be7a64cf49e6d128480f58c477f386b2f07a0bfe89dea568ce5b",
+          "native_bounds_xyxy": [
+            24,
+            9,
+            56,
+            72
+          ],
+          "height": 63,
+          "native_path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/diagonal-candidate/frames/up-right/08.png",
+          "sha256": "351ebef835f8b83a6a50cdbbd1b459ebe51248c95de801dadaa33f19927d8013"
+        }
+      ]
+    }
+  }
+}

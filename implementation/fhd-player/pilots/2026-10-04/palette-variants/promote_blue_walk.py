@@ -17,11 +17,10 @@ frame order, with the farmer as tall as Stardew Valley's on a 1920x1080 screen.
   re-registered, so the reviewed bob and sway are what the game shows.
 * **Order.** Files 01..08 become frames 0..7, in the reviewed 10 FPS cycle.
 
-There was no idle or run art for this farmer, and the old (different) farmer
-appearing whenever the player stops would be worse than a held pose. So each
-direction's idle is one of its own walk frames, held (`IDLE_FRAME`), and the
-run plays the same cycle faster in `PlayerArt`. Work verbs and reactions keep
-their existing art until replacements are drawn.
+Each direction now has its own grounded idle source in idle-grounded-review.
+The historical walk contract retains the original held-frame selection; that
+selection is no longer used by runtime_entries. Running plays the approved
+walk cycle faster in PlayerArt. Work verbs keep their existing art.
 
 Supersedes `implementation/fhd-player/directional/promote_locomotion.py` for
 the runtime idle/walk/run families; that review and its sources are retained.
@@ -40,6 +39,8 @@ PILOT = HERE.parent
 ROOT = HERE.parents[4]
 sys.path.insert(0, str(ROOT / "tools"))
 import import_art  # noqa: E402
+sys.path.insert(0, str(HERE.parent / "idle-grounded-review"))
+import promote_idle  # noqa: E402
 
 REVIEW = HERE / "blue" / "frames"
 SOURCES = ROOT / "assets/art_source/player-fhd/walk-blue/frames"
@@ -67,8 +68,8 @@ DIRECTIONS = {
     "down-left": "south_west",
 }
 
-# The held standing pose per direction (1-based file number): feet closest to
-# planted or together. A stand-in until idle art is drawn for this farmer.
+# Historical integration choices only, retained to preserve the sealed walk
+# contract. Runtime idle now comes from promote_idle's independent sources.
 IDLE_FRAME = {
     "down": 1, "up": 5, "left": 7, "right": 7,
     "down-left": 3, "down-right": 3, "up-left": 7, "up-right": 3,
@@ -178,36 +179,12 @@ def walk_entry(frame, contract_hash):
     return entry
 
 
-def idle_entry(suffix, index, walk, contract_hash, frame):
-    return {
-        "id": "actors/idle_%s_%d" % (suffix, index), "owner": "raster",
-        "canvas_wh": CANVAS, "pivot_xy": PIVOT, "draw_scale": DRAW_SCALE,
-        "palette": import_art.EXACT_SOURCE,
-        "animation": "idle_" + suffix, "frame": index, "seconds": IDLE_SECONDS, "loop": True,
-        "output": "sprites/actors/idle_%s_%d.png" % (suffix, index),
-        "output_sha256": walk["output_sha256"],
-        "prompt": walk["prompt"], "prompt_sha256": walk["prompt_sha256"],
-        "references": references(frame, contract_hash),
-        "tool": "built-in ImageGen", "generation_task": "fhd-walk-blue",
-        "approval": "Held walk frame as idle until idle art exists; %s" % DATE,
-        "input": walk["id"], "operation": "copy", "alias_of": walk["id"],
-    }
-
-
 def runtime_entries(contract, contract_hash):
-    walks, by_id = [], {}
+    walks = []
     for frame in contract["frames"]:
         entry = walk_entry(frame, contract_hash)
         walks.append(entry)
-        by_id[frame["id"]] = (entry, frame)
-    idles = []
-    for suffix, walk_id in contract["idle_from_walk_frame"].items():
-        entry, frame = by_id[walk_id]
-        # Three slots, the shape the idle blink (and the legacy sheet's idle
-        # rows) expect. All three hold the same pose until idle art exists.
-        for index in range(IDLE_SLOTS):
-            idles.append(idle_entry(suffix, index, entry, contract_hash, frame))
-    return walks + idles
+    return walks + promote_idle.runtime_entries()
 
 
 def owned(entry):
@@ -231,7 +208,8 @@ def check(contract, content, entries):
     for entry in entries:
         origin = ROOT / (entry["source"] if "source" in entry else wanted[entry["input"]]["source"])
         assert pixels(ROOT / entry["output"]) == pixels(origin), ("runtime pixels differ from source", entry["id"])
-    print("FHD RUNTIME: blue walk, 8 directions x %d frames + 8 held idle poses; exact source pixels, "
+    promote_idle.check()
+    print("FHD RUNTIME: blue walk, 8 directions x %d frames + 8 grounded idle poses; exact source pixels, "
           "80x80 canvas, pivot (40,72), 0.5 draw scale (two tiles, 128px at 1080p)." % FRAMES)
 
 

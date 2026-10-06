@@ -1,0 +1,26 @@
+{
+  "full_run": {
+    "passed": 54,
+    "skipped": 0,
+    "failed": 1,
+    "seconds": 632,
+    "log": "verify.log",
+    "failure": "input_check: repairing a wall after moving away, HP88; untouched timing-sensitive fixture"
+  },
+  "targeted_retry": {
+    "passed": 1,
+    "failed": 0,
+    "cases": 1017,
+    "seconds": 86.9,
+    "log": "input-retry.log",
+    "command": "verify.check_script with identical default arguments, no test/core changes"
+  },
+  "sim_hash": 3096784529,
+  "data_hash": 3219365985,
+  "headless_assertions": 16137,
+  "locomotion_assertions": 2533,
+  "renderer_assertions": 3472,
+  "remaining_failed_checks": 0,
+  "budget": "OVER BUDGET",
+  "runtime_changes": "24 idle PNG slots only; 192 walking review/source/runtime hashes preserved"
+}
