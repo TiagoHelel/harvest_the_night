@@ -1,0 +1,27 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>32px walk - up-right lower steps</title><style>
+
+body{margin:24px;background:#182426;color:#e9e3cf;font:17px Consolas,monospace}h1{font-size:26px}h2{font-size:21px}p{max-width:1050px;line-height:1.5}img,canvas{image-rendering:pixelated}.overflow{overflow:auto;margin:18px 0}button,select{padding:10px;font:inherit;color:#e9e3cf;background:#344b48;border:1px solid #75958d}a{color:#98dcd6}summary{cursor:pointer}details{margin:28px 0}.controls{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+
+</style></head><body><h1>32px walk - up-right lower steps</h1>
+
+<p>Focused comparison: BEFORE on the left, NEW CANDIDATE on the right. The lifted boots are lower; phases 2 and 6 remain unchanged. All seven other directions, including up-left, are approved and byte-identical. Eight frames at 10 FPS.</p>
+
+<p>Walking review only. Idle and tool activities are unchanged. These are actual Godot FHD captures with the same ground and camera; only the character sprite changes. Original approved sources and production sprites are preserved.</p>
+
+<h2>UP-RIGHT —before / new candidate</h2><div class="overflow"><img src="up-right-day.gif?v=low-step-r1" width="640" height="300" alt="Up-right with original lifted boot and new lower boot"></div><button id="scale">Show actual FHD screen size</button><h2>All eight directions —day</h2><div class="overflow"><img class="full" src="all-eight-day.gif?v=low-step-r1" width="960" height="300" alt="Eight walking directions with only up-right revised"></div>
+
+
+
+<details><summary>Day/night comparison</summary><h2>All eight —night</h2><div class="overflow"><img class="full" src="all-eight-night.gif?v=low-step-r1" width="960" height="300"></div><div class="overflow"><img src="up-right-night.gif?v=low-step-r1" width="640" height="300"></div></details>
+
+<h2>Pause and inspect a frame</h2><div class="controls"><select id="light" aria-label="Lighting"><option value="day">Day</option><option value="night">Night</option></select><button id="play">Play</button><button id="previous">Previous</button><button id="next">Next</button><span id="phase">Frame1/8</span></div>
+
+<div class="overflow"><canvas id="inspector" width="1920" height="600" style="width:960px;height:300px"></canvas></div>
+
+<p><a href="contract.json">Candidate contract and PNG hashes</a> · <a href="renderer-report.json">Actual renderer evidence</a> · <a href="../../../../fhd-enemies/pilots/2026-10-05/16px-review/index.html?v=z16-r6#farmer32-walk">Original32px review</a></p>
+
+<script>
+
+let frame=0,playing=false,half=true,token=0;const canvas=document.getElementById('inspector'),ctx=canvas.getContext('2d'),light=document.getElementById('light'),play=document.getElementById('play');function draw(){const t=++token;const im=new Image();im.onload=()=>{if(t!==token)return;ctx.imageSmoothingEnabled=false;ctx.drawImage(im,0,0)};im.src='frames/'+light.value+'/'+String(frame+1).padStart(2,'0')+'.png';document.getElementById('phase').textContent='Frame '+(frame+1)+'/8'}function stop(){playing=false;play.textContent='Play'}play.onclick=()=>{playing=!playing;play.textContent=playing?'Pause':'Play'};document.getElementById('previous').onclick=()=>{stop();frame=(frame+7)%8;draw()};document.getElementById('next').onclick=()=>{stop();frame=(frame+1)%8;draw()};light.onchange=draw;setInterval(()=>{if(playing){frame=(frame+1)%8;draw()}},100);document.getElementById('scale').onclick=function(){half=!half;document.querySelectorAll('.full').forEach(im=>{im.width=half?960:1920;im.height=half?300:600});canvas.style.width=(half?960:1920)+'px';canvas.style.height=(half?300:600)+'px';this.textContent=half?'Show actual FHD screen size':'Show at half screen size'};draw();
+
+</script></body></html>

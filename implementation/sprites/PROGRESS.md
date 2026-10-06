@@ -3277,3 +3277,26 @@ visible comparison checked. Local review server restarted on127.0.0.1:8765
 after the previous server had stopped. No engine-wide rerun or production
 promotion for this review; concurrent project edits preserved. No backlog
 mutation, generation, automation or push. Visual approval remains pending.
+
+
+### 2026-10-06 — Lower up-right walking feet; preserve seven approved directions
+
+The user approved the other seven directions of walk-mirror-review and requested
+lower up-right steps. Added an isolated walk-up-right-low-step review under
+implementation/fhd-player/pilots/2026-10-06/. Whole-sheet generation trials were
+rejected internally for gait quality; the final built-in ImageGen path edits
+raised boots in phases 1,3,4,5,7,8 individually. Phases 2/6 and all 56 phases of
+the seven approved directions remain byte-identical. Up-left is preserved.
+
+Final raw images and prompts are saved beside export_individual.py. Native40
+and runtime80 exports retain binary alpha, integer scaling, the fixed feet
+pivot and approved RIGHT blue palette. Actual Godot FHD capture provides focused
+horizontal before/after GIFs and all-eight day/night montages at 10 FPS, with a
+paused frame inspector. Saved browser-review.png and left the review page open.
+
+Validation: 128 PNG exports, 58 preserved phases / 6 targeted edits; original
+source hashes intact; per-phase character height within 1px of its source.
+144 same-camera FHD crops; 576 Godot assertions, 0 failures; four GIFs with
+8 frames and 100ms timing. Browser next-frame and night/day controls verified.
+Visual approval of the new up-right remains pending. No production promotion,
+engine-wide rerun, automation or push. Concurrent project.godot edits preserved.

@@ -1,0 +1,212 @@
+{
+  "edited_frames": 6,
+  "preserved_frames": 58,
+  "preserved_approved_directions": 7,
+  "source_hashes_preserved": 64,
+  "png_exports": 128,
+  "binary_alpha": true,
+  "integer_scale_exact": true,
+  "up_right_scale": [
+    {
+      "frame": 1,
+      "candidate_bbox": [
+        12,
+        4,
+        28,
+        36
+      ],
+      "before_bbox": [
+        12,
+        4,
+        29,
+        36
+      ]
+    },
+    {
+      "frame": 2,
+      "candidate_bbox": [
+        12,
+        4,
+        28,
+        36
+      ],
+      "before_bbox": [
+        12,
+        4,
+        28,
+        36
+      ]
+    },
+    {
+      "frame": 3,
+      "candidate_bbox": [
+        12,
+        4,
+        27,
+        35
+      ],
+      "before_bbox": [
+        12,
+        4,
+        28,
+        35
+      ]
+    },
+    {
+      "frame": 4,
+      "candidate_bbox": [
+        12,
+        4,
+        28,
+        35
+      ],
+      "before_bbox": [
+        12,
+        4,
+        28,
+        35
+      ]
+    },
+    {
+      "frame": 5,
+      "candidate_bbox": [
+        12,
+        4,
+        28,
+        36
+      ],
+      "before_bbox": [
+        12,
+        4,
+        29,
+        36
+      ]
+    },
+    {
+      "frame": 6,
+      "candidate_bbox": [
+        12,
+        4,
+        28,
+        36
+      ],
+      "before_bbox": [
+        12,
+        4,
+        28,
+        36
+      ]
+    },
+    {
+      "frame": 7,
+      "candidate_bbox": [
+        12,
+        4,
+        27,
+        35
+      ],
+      "before_bbox": [
+        12,
+        4,
+        28,
+        35
+      ]
+    },
+    {
+      "frame": 8,
+      "candidate_bbox": [
+        12,
+        4,
+        27,
+        35
+      ],
+      "before_bbox": [
+        12,
+        4,
+        28,
+        35
+      ]
+    }
+  ],
+  "playback": [
+    {
+      "name": "all-eight-day.gif",
+      "size": [
+        1920,
+        600
+      ],
+      "frames": 8,
+      "duration_ms": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ]
+    },
+    {
+      "name": "all-eight-night.gif",
+      "size": [
+        1920,
+        600
+      ],
+      "frames": 8,
+      "duration_ms": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ]
+    },
+    {
+      "name": "up-right-day.gif",
+      "size": [
+        640,
+        300
+      ],
+      "frames": 8,
+      "duration_ms": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ]
+    },
+    {
+      "name": "up-right-night.gif",
+      "size": [
+        640,
+        300
+      ],
+      "frames": 8,
+      "duration_ms": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ]
+    }
+  ],
+  "godot_checks": 576,
+  "godot_failures": 0,
+  "fixed_contact": [
+    960.0,
+    572.0
+  ],
+  "visual_motion_approval": "pending; automated checks do not establish motion quality"
+}
