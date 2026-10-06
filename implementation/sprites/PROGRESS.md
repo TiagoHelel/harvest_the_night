@@ -3168,3 +3168,20 @@ GIF frame/duration evidence is in checks.json. Production verification was not
 rerun for this isolated export; concurrent changes to project/core/check files
 are excluded. No new gait was invented and no production integration, push,
 automation or backlog mutation was performed.
+
+
+### 2026-10-06 —32px integration handoff for Claude
+
+The user selected32px and requested an implementation prompt. Saved
+implementation/fhd-enemies/pilots/2026-10-05/16px-review/CLAUDE-32PX-PROMPT.txt.
+The handoff integrates the72 source-owned blue farmer32 poses, preserves
+80x80 cells/pivot(40,72)/draw_scale0.5 and eight-frame10FPS walking, and keeps
+current approximately29px enemies: their4px FHD detail pixels match farmer32.
+The16px enemy samples remain comparative previews. Current enemy movement
+is a four-frame side-view cycle mirrored left/right, with separate attack,
+death and Giant cues, not eight authored directions. Instructions require
+reproducible manifest/import ownership, independent grounded idle, consistent
+tool/fishing pose size, current camera/game rules and actual FHD validation.
+No production integration or core edits were performed in this handoff.
+Validation: source paths and existing direction/mirror/pivot code inspected;
+text-only change, no new renderer or gameplay test run.

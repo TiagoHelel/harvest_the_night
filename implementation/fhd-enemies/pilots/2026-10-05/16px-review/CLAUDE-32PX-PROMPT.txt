@@ -1,0 +1,75 @@
+Work in C:\Users\Helel\Documents\repos\harvest_the_night.
+
+Integrate the selected approximately32px farmer detail into the game. Use only
+the blue outfit. Keep the existing current-detail zombies alongside him: ordinary
+zombies are already approximately29 artwork pixels tall, with4 physical screen
+pixels per detail pixel at FHD, matching the32px farmer's pixel density. Giant
+keeps its intentionally larger approximately42px body. Do not promote the16px
+enemy variants: those were a comparison experiment with8px screen detail pixels.
+This choice is artwork detail density, not a32x32 cell,32 colors, or a reduction
+of the game's FHD display resolution.
+
+Read repository instructions and inspect the current working tree first.
+Preserve concurrent changes, saves and existing gameplay architecture. This is
+an explicit integration task, not an instruction to run another backlog item.
+
+The review and transparent assets are here:
+C:\Users\Helel\Documents\repos\harvest_the_night\implementation\fhd-enemies\pilots\2026-10-05\16px-review
+
+Read contract.json, specifically farmer32 and its72 assets. Use:
+farmer32/runtime-80/walk/<direction>/01.png through08.png
+farmer32/runtime-80/idle/<direction>.png
+Directions: down, right, up, left, down-right, up-right, up-left, down-left.
+There are64 approved walking frames and8 independent grounded idle poses.
+Each runtime cell is80x80, pivot(40,72), draw_scale0.5. The native alternative
+uses40x40 cells, pivot(20,36). The selected version was produced by NEAREST
+80->40->80 sampling, preserving exact source colors and binary alpha. Keep the
+farmer approximately128 physical pixels tall at1920x1080. Do not double-scale
+or resample runtime-80 again. Keep nearest filtering and integer pixel scaling.
+
+Promote through assets/art_source/manifest.json and tools/import_art.py, using
+source-owned reproducible recipes and exact-source colors. Preserve original
+high-detail art. Update applicable ownership checks and player blue/idle
+promotion scripts so a rebuild cannot silently restore64px or16px detail.
+Update RasterArt/PlayerFrames through their normal generation path. Validate
+the new variant against its source and output hashes and rerun generation to
+prove reproducibility; manual overwrites of generated sprites are insufficient.
+
+Keep eight-frame10FPS walking, the existing direction mapping and the existing
+faster playback used for running. Idle must use the separate neutral grounded
+pose for each direction, never a lifted walking frame. Preserve ground contact,
+body height, y-sort, shadows, camera behavior, movement speeds and collisions.
+For existing tool/fishing/reaction states, check actual source resolution and
+metadata so changing poses does not jump in size or detail. Where existing
+high-detail farmer art needs conversion, use the same source-owned NEAREST
+density recipe, preserving tool visibility and animation timings. Do not blindly
+halve legacy art that already has lower native resolution. No new AI generation,
+new animation poses, additional directions, or environment art overhaul is needed.
+
+Zombies currently have one authored side-view walk cycle of4 frames per family;
+WorldView mirrors it with EnemyMotion.faces_right() for the opposite side.
+There are no separately authored up/down/diagonal walks. Keep that behavior.
+Preserve existing ordinary attack/death and Giant windup/slam/death poses,
+family dimensions, palettes, contact pivots and simulation-driven motion cues.
+Their current runtime cells/pivots are64x48/(32,44) for ordinary families and
+80x64/(40,60) for Giant. Do not force Giant into a32px body or copy the review
+GIF's fixed animation clock into real combat/movement logic.
+
+Do not extract sprites from GIFs or rendered captures: they contain grass,
+lighting and preview quantization. Do not use rejected diagonal-candidate or
+diagonal-rebuild-v1 art. The resolution conversion retains the existing approved
+motion; it is not a new gait repair. Keep FHD1920x1080 as the default display
+resolution and preserve the current logical viewport and camera settings.
+
+Godot for validation is installed at C:\Users\Helel\Documents\godot.
+Run the required repository checks, including raster/ownership/import checks,
+locomotion and gameplay verification appropriate to the integration. Use the
+real renderer to review idle/walk/run in all eight directions, stop/start,
+tool/fishing pose transitions and zombie left/right movement, attack/death and
+boss cues in day and night at actual FHD size. Check clean feet contact and
+stable sprite size. Preserve determinism and do not modify game rules just to
+make the visual tests pass. Document any pre-existing failure separately.
+
+Finish the integration, show actual in-game screenshots/playback and append
+both implementation journals with changed files and validation results. Commit
+only your scoped changes; preserve unrelated work and do not push or publish.
