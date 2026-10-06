@@ -3326,3 +3326,21 @@ Validation:128 PNG hashes and exact2x scaling/binary alpha verified;144 actual
 FHD crops,576 Godot assertions /0 failures; four8-frame100ms GIFs. Final pair
 and all-eight page opened, browser-review.png saved. Integration remains with
 Claude; concurrent in-progress integration files were preserved.
+
+### 2026-10-06 — Final approved eight-direction walk integrated
+
+Executed walk-final-mirrored/CLAUDE-APPROVED-WALK-PROMPT.txt (it supersedes
+the walk-up-right-low-step handoff, whose integration was underway and was
+switched over). Source: walk-final-mirrored/runtime-80/walk, all 128 pack
+exports matching contract.json and traced to the approved low-step frames;
+the three mirror pairs (right/left, down-left/down-right, up-right/up-left)
+exact in every phase. 64 frames copied to assets/art_source/player-fhd/
+walk-blue-32px/2026-10-06/ as owned sources (full-detail masters untouched).
+Manifest: exact-source, binary alpha, 80x80, pivot (40,72), draw scale 0.5,
+0.1 s, detail_wh [40,40] verified idempotent. Runtime walk PNGs RGBA-identical
+to the approved frames; 30 changed (left, down-right, up-left all 8; up-right
+1,3,4,5,7,8), 34 unchanged; idle, work, reactions, shadow, enemies untouched.
+The promoter check rejects older walks. FHD renderer review 1,798 checks / 0
+failed in implementation/shots/walk-approved-1080/; lower diagonals stand 1-2
+art px above the pivot as drawn (approved registration, kept).
+Validation: **55 passed, 0 skipped, 0 failed** in 516 s; sim 1242708873 and data 2015186086 unchanged. An earlier full run, made while other Godot captures were running on the machine, failed perf (every timing about 3x) and one timing-sensitive input case (a wall still mending just after release); both passed on this rerun on a quiet machine, and nothing they measure changed in between.

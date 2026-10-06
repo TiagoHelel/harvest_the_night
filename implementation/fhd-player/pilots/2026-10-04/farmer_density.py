@@ -3,14 +3,19 @@
 The owner chose the "32px" farmer on 2026-10-06: about 32 art pixels tall,
 each drawn 4x4 physical pixels at 1920x1080 - the density of the zombies, the
 buildings and the rest of the world art. It is not a 32x32 cell, 32 colours or
-a smaller screen. The approved 80x80 sources are sampled 80 -> 40 -> 80 NEAREST
-by `tools/import_art.py` (the `detail_wh` recipe): exact source colours, binary
+a smaller screen. `tools/import_art.py` holds every farmer frame to it with the
+`detail_wh` recipe, 80 -> 40 -> 80 NEAREST: exact source colours, binary
 alpha, the same canvas, pivot (40, 72) and 0.5 draw scale, so the farmer stays
-about 128 pixels tall. The full-detail sources stay as they are.
+about 128 pixels tall.
 
-The review that chose it records every expected runtime output; the promoters
-hold the game's frames to those pixels, so a rebuild cannot quietly bring back
-the 64px detail of the sources or the 16px variant that lost the comparison.
+* The grounded idle poses are sampled from their full-detail sources, and the
+  review that chose the density (farmer32) records every expected frame.
+* The walk comes from the approved 2026-10-06 pack, already at this detail; on
+  it the recipe changes nothing, and the walk promoter names the approved
+  frame each output must equal.
+
+Either way a rebuild cannot quietly bring back 64px detail, the 16px variant
+that lost the comparison, or a walk older than the approved one.
 """
 from functools import lru_cache
 from pathlib import Path
@@ -37,7 +42,7 @@ def detailed(path):
 
 @lru_cache(maxsize=1)
 def reviewed():
-    """{source path: reviewed runtime-80 output} for the 72 selected frames."""
+    """{source path: reviewed runtime-80 output} for the 72 farmer32 frames."""
     contract = json.loads(REVIEW_CONTRACT.read_text(encoding="utf-8"))["farmer32"]
     assert contract["native_canvas_wh"] == DETAIL_WH and contract["runtime_pivot_xy"] == [40, 72] \
         and contract["runtime_draw_scale"] == 0.5, "the 32px review changed its geometry"
@@ -50,7 +55,7 @@ def reviewed():
 
 
 def references(source):
-    """The manifest's link from a farmer frame to the review that chose its density."""
+    """The manifest's link from a farmer32 frame to the review that chose its density."""
     review = reviewed()[source]
     return [
         {"path": review["path"], "sha256": review["sha256"],
@@ -60,13 +65,16 @@ def references(source):
     ]
 
 
-def check_runtime(entry):
-    """The runtime frame is the reviewed 32px sample of its source, exactly."""
+def check_runtime(entry, approved=None):
+    """The runtime frame is its approved 32px frame and the 32px sample of its
+    source, exactly. `approved` defaults to the farmer32 review's frame."""
     assert entry.get("detail_wh") == DETAIL_WH, ("farmer frame lost its 32px density recipe", entry["id"])
-    review = reviewed()[entry["source"]]
-    assert sha(ROOT / review["path"]) == review["sha256"], ("reviewed 32px frame changed", review["path"])
+    if approved is None:
+        review = reviewed()[entry["source"]]
+        assert sha(ROOT / review["path"]) == review["sha256"], ("reviewed 32px frame changed", review["path"])
+        approved = ROOT / review["path"]
     expected = detailed(ROOT / entry["source"]).tobytes()
-    with Image.open(ROOT / review["path"]) as image:
-        assert image.convert("RGBA").tobytes() == expected, ("reviewed 32px frame drifted", review["path"])
+    with Image.open(approved) as image:
+        assert image.convert("RGBA").tobytes() == expected, ("approved 32px frame drifted", str(approved))
     with Image.open(ROOT / entry["output"]) as image:
-        assert image.convert("RGBA").tobytes() == expected, ("runtime frame is not the 32px sample", entry["id"])
+        assert image.convert("RGBA").tobytes() == expected, ("runtime frame is not its approved 32px frame", entry["id"])

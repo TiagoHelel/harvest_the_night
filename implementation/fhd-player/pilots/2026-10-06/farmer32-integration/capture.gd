@@ -33,6 +33,10 @@ const STAND := Vector2i(15, 9)
 
 var _report: Dictionary = {"farmer": [], "sheets": [], "frames": []}
 var _pictures := 0
+## Where pictures go, and how many walk phases a row shows: a script that
+## extends this one may point them elsewhere, or add the 8 -> 1 wrap.
+var _out := OUT
+var _walk_frames := 8
 ## The last whole frame `_shoot` wrote, for crops of the same instant.
 var _last: Image
 
@@ -41,8 +45,8 @@ func _run() -> void:
 	CaptureSize.configure(root, true)
 	await _setup()
 	_capture = true
-	_folder = OUT
-	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(OUT))
+	_folder = _out
+	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(_out))
 	for night in [false, true]:
 		await _locomotion(night)
 		await _stop_start(night)
@@ -53,7 +57,7 @@ func _run() -> void:
 		await _giant_attack(night)
 	await _fishing()
 	_summarise()
-	var file := FileAccess.open(OUT + "renderer-report.json", FileAccess.WRITE)
+	var file := FileAccess.open(_out + "renderer-report.json", FileAccess.WRITE)
 	file.store_string(JSON.stringify(_report, "  ") + "\n")
 	file.close()
 	print("FARMER32 FHD REVIEW: %d checks, %d failed, %d pictures" % [_checks, _failed, _pictures])
@@ -73,7 +77,7 @@ func _shoot(name: String, caption: String) -> void:
 	_caption.text = caption
 	var image: Image = await _frame()
 	expect(image.get_size() == Vector2i(1920, 1080), "The game's own FHD output: " + name)
-	expect(image.save_png(OUT + name + ".png") == OK, "Saved " + name)
+	expect(image.save_png(_out + name + ".png") == OK, "Saved " + name)
 	_last = image
 	_pictures += 1
 	(_report["frames"] as Array).append({"name": name, "caption": caption})
@@ -135,7 +139,7 @@ func _sheet(name: String, rows: Array, size := CROP) -> void:
 		for c in (rows[r] as Array).size():
 			var crop: Image = rows[r][c]
 			sheet.blit_rect(crop, Rect2i(Vector2i.ZERO, crop.get_size()), Vector2i(c * size.x, r * size.y))
-	expect(sheet.save_png(OUT + name + ".png") == OK, "Saved sheet " + name)
+	expect(sheet.save_png(_out + name + ".png") == OK, "Saved sheet " + name)
 	_pictures += 1
 	(_report["sheets"] as Array).append({"name": name, "rows": rows.size(), "columns": columns})
 
@@ -173,12 +177,12 @@ func _locomotion(night: bool) -> void:
 			var wanted := StringName("%s_%s" % ["idle" if motion == "idle" else "walk", suffix])
 			expect(_view.playing() == wanted, "%s %s plays %s" % [motion, suffix, wanted])
 			var row: Array = []
-			for frame in (1 if motion == "idle" else 8):
+			for frame in (1 if motion == "idle" else _walk_frames):
 				if frame > 0:
 					Player.tick(_state)
 					_view._process(_view.frame_seconds() + 0.0001)
 				var body: Sprite2D = _view.get_node("Body")
-				expect(body.texture.resource_path == PlayerArt.texture_path(wanted, frame),
+				expect(body.texture.resource_path == PlayerArt.texture_path(wanted, frame % 8),
 					"%s %s shows authored frame %d" % [motion, suffix, frame])
 				row.append(await _farmer("%s_%s_%s_%d" % [_tag(night), motion, suffix, frame]))
 			if motion == "walk" and heading == Vector2i(1, 0):

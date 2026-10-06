@@ -46,16 +46,17 @@ def check():
     assert len(baseline)==192
     manifest=json.loads(import_art.MANIFEST.read_text())
     actual={e['id']:e for e in manifest['assets']}
-    # Since 2026-10-06 the 64 runtime walks are the 32px samples of their
-    # frozen sources; the 128 source and review hashes stay exactly as frozen.
+    # The 128 frozen hashes of the full-detail walk masters and their palette
+    # review stay exactly as frozen. The 64 runtime walks have moved on since:
+    # the 32px detail, then the approved 2026-10-06 pack (promote_blue_walk.py
+    # holds them to it), so here they need only be their sources at 32px.
     walk_source={e['output']:e['source'] for e in manifest['assets'] if e['id'].startswith('actors/walk_')}
     for path,expected in baseline.items():
         if path in walk_source:
-            assert digest(ROOT/walk_source[path])==baseline[walk_source[path]], ('Approved walk changed',path)
             runtime=Image.open(ROOT/path).convert('RGBA')
-            assert runtime.tobytes()==farmer_density.detailed(ROOT/walk_source[path]).tobytes(), ('Walk lost its 32px sample',path)
+            assert runtime.tobytes()==farmer_density.detailed(ROOT/walk_source[path]).tobytes(), ('Walk lost its 32px detail',path)
         else:
-            assert digest(ROOT/path)==expected, ('Approved walk changed',path)
+            assert digest(ROOT/path)==expected, ('Frozen walk master or review changed',path)
     assert sum(path in walk_source for path in baseline)==64
     contract=json.loads(CONTRACT.read_text())
     palette={tuple(rgb) for rgb in contract['palette_rgb']}
@@ -82,6 +83,6 @@ def check():
             walk=Image.open(ROOT/f'sprites/actors/walk_{suffix}_{i}.png').convert('RGBA')
             assert runtime.tobytes()!=walk.tobytes(), ('Idle still holds a walk phase',entry['id'],i)
     print('GROUNDED IDLE: 8 dedicated poses / 24 slots at 32px detail, low resting boots, common height/pivot/palette; '
-          '128 approved walk source/review hashes unchanged, 64 runtime walks are their 32px samples.')
+          '128 frozen walk master/review hashes unchanged, no idle holds a walk phase.')
 
 if __name__=='__main__':check()

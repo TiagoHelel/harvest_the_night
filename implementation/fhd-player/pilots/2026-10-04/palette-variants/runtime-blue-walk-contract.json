@@ -1,10 +1,19 @@
 {
-  "version": 1,
-  "integration": "User requested runtime integration of the blue walk on 2026-10-05",
-  "palette_review": {
-    "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/validation.json",
-    "sha256": "43f9117d2c3688f4fd2ef7ebc1a12c8e36b6ba79f28fcbc18737279afb22540f"
+  "version": 2,
+  "integration": "Final approved blue 32px walk integrated at the owner's request on 2026-10-06",
+  "approval": {
+    "path": "implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/APPROVAL.json",
+    "sha256": "27e8e7d4659d4401d9b17bfa3b3dc24d8a850ea70c2f6aac1087155e12808a5e"
   },
+  "approved_pack": {
+    "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/contract.json",
+    "sha256": "a2a2f05b372f601b579e918107ae672a48c37925eabfcea0fc3cf51f403f872e"
+  },
+  "approved_from": {
+    "path": "implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/contract.json",
+    "sha256": "8b7f6ae62ea9c30a06fb782afc094d234dbe65e41b65efac14c2ebe0e10609bb"
+  },
+  "supersedes": "the 2026-10-05 blue walk sampled to 32px from its full-detail masters (commit 5d4051ab); walk-mirror-review and walk-up-right-low-step as walking sources, the old up-left included",
   "canvas_wh": [
     80,
     80
@@ -14,1249 +23,1649 @@
     72
   ],
   "draw_scale": 0.5,
-  "native_body_height": [
-    63,
-    65
-  ],
-  "screen_height_1080p": "about 128 px: two 64px tiles, as Stardew Valley's 16x32 farmer at 4x",
   "detail_wh": [
     40,
     40
   ],
-  "detail_review": {
-    "path": "implementation/fhd-enemies/pilots/2026-10-05/16px-review/contract.json",
-    "sha256": "d3597525c15a7c455cfb702fa47ea24b25bc0d24f25ed900dcc6e2ee4d745557"
-  },
-  "screen_detail_1080p": "4x4 physical pixels per art pixel: the 32px farmer chosen on 2026-10-06",
+  "screen_detail_1080p": "4x4 physical pixels per art pixel: the 32px farmer",
+  "screen_height_1080p": "about 128 px: two 64px tiles, as Stardew Valley's 16x32 farmer at 4x",
   "walk_seconds": 0.1,
-  "idle_seconds": 0.55,
-  "idle_slots": 3,
-  "idle_from_walk_frame": {
-    "south": "walk_south_0",
-    "east": "walk_east_6",
-    "north": "walk_north_4",
-    "west": "walk_west_6",
-    "south_east": "walk_south_east_2",
-    "north_east": "walk_north_east_2",
-    "north_west": "walk_north_west_6",
-    "south_west": "walk_south_west_2"
+  "run_seconds": "PlayerArt.RUN_FRAME_SECONDS, the same eight phases",
+  "mirrors": {
+    "left": "right",
+    "down-right": "down-left",
+    "up-left": "up-right"
   },
+  "edited_up_right_frames": [
+    1,
+    3,
+    4,
+    5,
+    7,
+    8
+  ],
+  "garment_palette": [
+    [
+      2,
+      16,
+      53
+    ],
+    [
+      1,
+      25,
+      73
+    ],
+    [
+      9,
+      31,
+      81
+    ],
+    [
+      9,
+      51,
+      121
+    ],
+    [
+      18,
+      56,
+      125
+    ],
+    [
+      17,
+      65,
+      144
+    ],
+    [
+      24,
+      70,
+      152
+    ],
+    [
+      28,
+      80,
+      173
+    ],
+    [
+      31,
+      82,
+      177
+    ],
+    [
+      31,
+      84,
+      180
+    ],
+    [
+      31,
+      85,
+      180
+    ],
+    [
+      40,
+      97,
+      193
+    ]
+  ],
   "frames": [
     {
       "id": "walk_south_0",
       "direction": "down",
       "animation": "walk_south",
       "frame": 0,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/down/01.png",
-        "sha256": "714b0bee6d4a29560ed45f018d1697f63a9c8f6ec9618600d48a8d8c1996caaf"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/down/01.png",
+        "sha256": "6038e82323b4c771c1d75472e20e781070129dafd32dbccbbb61c81821028d81"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/down/01.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-size-review/down-r3/frames/walk-down-01.png",
-        "sha256": "c82cbd6cf0887e2c5a7cd4076459b29b8084c951f56eb57fd46dfb6ebdb23c0c"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down/01.png",
+        "sha256": "5dd6704f22e6d6595115fe72fec9969452eb9af23bb1c0cf958b6491c1f23e01"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/down/01.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/down/01.png",
+        "sha256": "714b0bee6d4a29560ed45f018d1697f63a9c8f6ec9618600d48a8d8c1996caaf"
       },
       "prompt": {
         "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-size-review/down-r3.prompt.json",
         "sha256": "be71c225e471e49a440f3ac25fbff2cd9e484fa7aa18fa786312800c04caaf04"
-      }
+      },
+      "edited": false
     },
     {
       "id": "walk_south_1",
       "direction": "down",
       "animation": "walk_south",
       "frame": 1,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/down/02.png",
-        "sha256": "61b58d0ff19f9021fd5ae353760d02fddef284f4629e0dc016841abb0e7fc0db"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/down/02.png",
+        "sha256": "29f41e882900007abd73a0e663773edf3b5fa90289dd9657f97a98387900a95f"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/down/02.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-size-review/down-r3/frames/walk-down-02.png",
-        "sha256": "07866f105cba410837fab72f7389ab32dc1aacdca8c8fa9670d580e46ca42942"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down/02.png",
+        "sha256": "bb488715ff11036f44692c6432eb9c9849561ca16581a2837eef0bab5129d7a1"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/down/02.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/down/02.png",
+        "sha256": "61b58d0ff19f9021fd5ae353760d02fddef284f4629e0dc016841abb0e7fc0db"
       },
       "prompt": {
         "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-size-review/down-r3.prompt.json",
         "sha256": "be71c225e471e49a440f3ac25fbff2cd9e484fa7aa18fa786312800c04caaf04"
-      }
+      },
+      "edited": false
     },
     {
       "id": "walk_south_2",
       "direction": "down",
       "animation": "walk_south",
       "frame": 2,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/down/03.png",
-        "sha256": "e651a739a552e2983bb7e30a735d81cb46d6adceac6ed1cd169da89c313839f3"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/down/03.png",
+        "sha256": "767bec414058e695b5f807917fcea7fba52c0b706cd8203db39e5359d0949d0a"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/down/03.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-size-review/down-r3/frames/walk-down-03.png",
-        "sha256": "402c2a0d47e0b0f81b9e53c9b023a2a6548ec9c9380e06caf0b696bfd6b91fc1"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down/03.png",
+        "sha256": "42674df0c829c113a513e9ae6aa40cbd029228a47f3662dd5236ae6f44d2a67e"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/down/03.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/down/03.png",
+        "sha256": "e651a739a552e2983bb7e30a735d81cb46d6adceac6ed1cd169da89c313839f3"
       },
       "prompt": {
         "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-size-review/down-r3.prompt.json",
         "sha256": "be71c225e471e49a440f3ac25fbff2cd9e484fa7aa18fa786312800c04caaf04"
-      }
+      },
+      "edited": false
     },
     {
       "id": "walk_south_3",
       "direction": "down",
       "animation": "walk_south",
       "frame": 3,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/down/04.png",
-        "sha256": "7493a35ae58c14c08a0ca5600755515a71544242c1a2ef1e85897bcc8d605d5d"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/down/04.png",
+        "sha256": "5f45f45069ab74ee7f23eaf60125920e6dcefe1debdda0332bc1a4ddcd212e48"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/down/04.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-size-review/down-r3/frames/walk-down-04.png",
-        "sha256": "0d4c9769e7246d97b6b8bf56b18125ec0241a9fec77bbf96bdb9c03f9a486f99"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down/04.png",
+        "sha256": "fcd21c4b52790187001d12dc8d24d60012c9a2fb8dc618f7a160e510c68e5867"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/down/04.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/down/04.png",
+        "sha256": "7493a35ae58c14c08a0ca5600755515a71544242c1a2ef1e85897bcc8d605d5d"
       },
       "prompt": {
         "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-size-review/down-r3.prompt.json",
         "sha256": "be71c225e471e49a440f3ac25fbff2cd9e484fa7aa18fa786312800c04caaf04"
-      }
+      },
+      "edited": false
     },
     {
       "id": "walk_south_4",
       "direction": "down",
       "animation": "walk_south",
       "frame": 4,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/down/05.png",
-        "sha256": "63163f9ccb75e27a3e18a2d218d95056e310f8d28882a41fb6ebc8ebea501014"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/down/05.png",
+        "sha256": "4554b7a205659d84283a93c4b2fafc7deed43e8fae0f269c8ef8ed21956f8de4"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/down/05.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-size-review/down-r3/frames/walk-down-05.png",
-        "sha256": "b9d2d94264437b3d2051e4f3f1406e2054268ee4d36c062416f5166236e997d9"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down/05.png",
+        "sha256": "6790e67eb67b33bba79ef9c62a17da61466d9e4d6d5bfd1eaa2c47efe649a8a7"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/down/05.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/down/05.png",
+        "sha256": "63163f9ccb75e27a3e18a2d218d95056e310f8d28882a41fb6ebc8ebea501014"
       },
       "prompt": {
         "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-size-review/down-r3.prompt.json",
         "sha256": "be71c225e471e49a440f3ac25fbff2cd9e484fa7aa18fa786312800c04caaf04"
-      }
+      },
+      "edited": false
     },
     {
       "id": "walk_south_5",
       "direction": "down",
       "animation": "walk_south",
       "frame": 5,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/down/06.png",
-        "sha256": "610933327627ec1c87dece11803f49886098790f91e65cc7e2a89c08b699e5c9"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/down/06.png",
+        "sha256": "6abb91c6ac32082801b8a32a7a633f02810b6713318c5a1fbe72c22dbbfbe1c1"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/down/06.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-size-review/down-r3/frames/walk-down-06.png",
-        "sha256": "c4482b89d332df2086d1535edecf8ab3bbe59a051d2097b1f49dc7ced7c653da"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down/06.png",
+        "sha256": "454f1f9497bf8400015ea3646c0172a9daa037177f8e05bca864ab0f0a299fad"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/down/06.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/down/06.png",
+        "sha256": "610933327627ec1c87dece11803f49886098790f91e65cc7e2a89c08b699e5c9"
       },
       "prompt": {
         "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-size-review/down-r3.prompt.json",
         "sha256": "be71c225e471e49a440f3ac25fbff2cd9e484fa7aa18fa786312800c04caaf04"
-      }
+      },
+      "edited": false
     },
     {
       "id": "walk_south_6",
       "direction": "down",
       "animation": "walk_south",
       "frame": 6,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/down/07.png",
-        "sha256": "2c2ab1aaffafee82182df05f604ddf305d44b4a39559539c7dbebdba1eca3c52"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/down/07.png",
+        "sha256": "ca142c8a241c0944990a0d75bf5d3b795acf2b8cf4a683e48c6ca17ef26ce89b"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/down/07.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-size-review/down-r3/frames/walk-down-07.png",
-        "sha256": "cb112be6ef2480094ed013cababa809f5a4a438b22ed03dd2cb72f416b7c9634"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down/07.png",
+        "sha256": "dde11c6b9692a96ba0f685418a9ca9107a317413f6dfe8a71cd9f8816f8ca1a0"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/down/07.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/down/07.png",
+        "sha256": "2c2ab1aaffafee82182df05f604ddf305d44b4a39559539c7dbebdba1eca3c52"
       },
       "prompt": {
         "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-size-review/down-r3.prompt.json",
         "sha256": "be71c225e471e49a440f3ac25fbff2cd9e484fa7aa18fa786312800c04caaf04"
-      }
+      },
+      "edited": false
     },
     {
       "id": "walk_south_7",
       "direction": "down",
       "animation": "walk_south",
       "frame": 7,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/down/08.png",
-        "sha256": "afe71c2721efee0fa81c95ac5c4328d5c2fe5e1586e8a4f2ff6aa32e0bd5d665"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/down/08.png",
+        "sha256": "b9edd52fdc091ed74e759291c6e7945205fe1776cea98b048f49849b697addf5"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/down/08.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-size-review/down-r3/frames/walk-down-08.png",
-        "sha256": "e50aa3e610fdf790ab4e73278e23c982bd3961abed6924ce0d7d354a5f634f84"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down/08.png",
+        "sha256": "02f644468cfe0aead5555759fa15a3bbc8af61760dedbc35804b43bc293b168f"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/down/08.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/down/08.png",
+        "sha256": "afe71c2721efee0fa81c95ac5c4328d5c2fe5e1586e8a4f2ff6aa32e0bd5d665"
       },
       "prompt": {
         "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-size-review/down-r3.prompt.json",
         "sha256": "be71c225e471e49a440f3ac25fbff2cd9e484fa7aa18fa786312800c04caaf04"
-      }
+      },
+      "edited": false
     },
     {
       "id": "walk_east_0",
       "direction": "right",
       "animation": "walk_east",
       "frame": 0,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/right/01.png",
-        "sha256": "a925d8d459d40d0de5a1bb9a59962bdbf5d2839490de1ccb968d634206ef7cd9"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/right/01.png",
+        "sha256": "c57dbbd774935472a08dcb8eab07aaf8f33ad353e0b140b9e641edd0e1e1d287"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/right/01.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-right/frames/walk-right-01.png",
-        "sha256": "bd6d74acad4a75a50888ebc814fac3211f2fc549493bca90326d3186fafa841d"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/right/01.png",
+        "sha256": "6ee0abe8e5755ff39dbe200ae31b463728ea936f6958cbfafe8a9331d35e5e2d"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/right/01.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/right/01.png",
+        "sha256": "a925d8d459d40d0de5a1bb9a59962bdbf5d2839490de1ccb968d634206ef7cd9"
       },
       "prompt": {
         "path": "implementation/fhd-player/pilots/2026-10-04/walk-right/materials-r3.prompt.txt",
         "sha256": "da41688c5b12dd85dc2e6bd2636ef2d966105d8220cd0fe575db40602a5fd02a"
-      }
+      },
+      "edited": false
     },
     {
       "id": "walk_east_1",
       "direction": "right",
       "animation": "walk_east",
       "frame": 1,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/right/02.png",
-        "sha256": "728de94283d25406f0cc5c4332dfe263c1161bda676259eacb78772864acd60f"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/right/02.png",
+        "sha256": "b4f79e76c2226c89d15bee2cb646336a7dcf074b3bd627430d5c0298946a3ee5"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/right/02.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-right/frames/walk-right-02.png",
-        "sha256": "74a6543940b84c6a189fe9b0c2eb7efb1a1a1a6779d27ec580d0a12943e97ef3"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/right/02.png",
+        "sha256": "26f6e739fc14ac8d983df8a1e146f9acf5e28c710a730f34507c8d92636c2e88"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/right/02.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/right/02.png",
+        "sha256": "728de94283d25406f0cc5c4332dfe263c1161bda676259eacb78772864acd60f"
       },
       "prompt": {
         "path": "implementation/fhd-player/pilots/2026-10-04/walk-right/materials-r3.prompt.txt",
         "sha256": "da41688c5b12dd85dc2e6bd2636ef2d966105d8220cd0fe575db40602a5fd02a"
-      }
+      },
+      "edited": false
     },
     {
       "id": "walk_east_2",
       "direction": "right",
       "animation": "walk_east",
       "frame": 2,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/right/03.png",
-        "sha256": "d167e791e0ebcdbc400279c09b86a3e0996983325114db900c57c5ba1529ddab"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/right/03.png",
+        "sha256": "6cbb6fcf0c9c753a98a1bd9a2fab3c6c2711cb4ee362a1a212961d1da51b7f6a"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/right/03.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-right/frames/walk-right-03.png",
-        "sha256": "b6105caa2a58f2610edc5287e000a7e18c6fb705747c7384cd0caad7a7bd6844"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/right/03.png",
+        "sha256": "5830601e44d06df298f778386829985ca3abc3fb8a4ebeaf05673990621c5d5c"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/right/03.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/right/03.png",
+        "sha256": "d167e791e0ebcdbc400279c09b86a3e0996983325114db900c57c5ba1529ddab"
       },
       "prompt": {
         "path": "implementation/fhd-player/pilots/2026-10-04/walk-right/materials-r3.prompt.txt",
         "sha256": "da41688c5b12dd85dc2e6bd2636ef2d966105d8220cd0fe575db40602a5fd02a"
-      }
+      },
+      "edited": false
     },
     {
       "id": "walk_east_3",
       "direction": "right",
       "animation": "walk_east",
       "frame": 3,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/right/04.png",
-        "sha256": "bef96f5af9119633be0240b80812d3215f229aaae8abf67a782015a59d3bcd26"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/right/04.png",
+        "sha256": "a3de489a7dfff3eb67bff5e12655c6d0275f9a50ec1e829ab8e9967952c6d2d6"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/right/04.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-right/frames/walk-right-04.png",
-        "sha256": "3746411ce558d6106b24e5e2f7e2054c16b87744602eb9052b99c1995de2834f"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/right/04.png",
+        "sha256": "5180cacc253867e8a557c22d1c7443cf67d21ebc0ffcbeedff43a599f49aaec8"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/right/04.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/right/04.png",
+        "sha256": "bef96f5af9119633be0240b80812d3215f229aaae8abf67a782015a59d3bcd26"
       },
       "prompt": {
         "path": "implementation/fhd-player/pilots/2026-10-04/walk-right/materials-r3.prompt.txt",
         "sha256": "da41688c5b12dd85dc2e6bd2636ef2d966105d8220cd0fe575db40602a5fd02a"
-      }
+      },
+      "edited": false
     },
     {
       "id": "walk_east_4",
       "direction": "right",
       "animation": "walk_east",
       "frame": 4,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/right/05.png",
-        "sha256": "d4e5379d453e40ad9764ba7538b6151bf9d4045225ec5c02c93a7bc2639a1be8"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/right/05.png",
+        "sha256": "522b1c4ef684c4e101f89e060cb6610a343b6d833f69265609e3f5bb5dea8150"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/right/05.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-right/frames/walk-right-05.png",
-        "sha256": "19fe6722bda3069e5d9b15b2f999098fb5456c092ec3332247eea07e22303f5d"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/right/05.png",
+        "sha256": "ac17138f81bcda7dbbb993a0372652ef25da30f0bd5ad173e1ebe2617814912b"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/right/05.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/right/05.png",
+        "sha256": "d4e5379d453e40ad9764ba7538b6151bf9d4045225ec5c02c93a7bc2639a1be8"
       },
       "prompt": {
         "path": "implementation/fhd-player/pilots/2026-10-04/walk-right/materials-r3.prompt.txt",
         "sha256": "da41688c5b12dd85dc2e6bd2636ef2d966105d8220cd0fe575db40602a5fd02a"
-      }
+      },
+      "edited": false
     },
     {
       "id": "walk_east_5",
       "direction": "right",
       "animation": "walk_east",
       "frame": 5,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/right/06.png",
-        "sha256": "9c276c1aa3412b37bcce2ce6788a110a1adfdfccdf9b7b859ca695b8203c173f"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/right/06.png",
+        "sha256": "8a2dc77730598b3940aaeb57ecf3e3fea9f5b3eeb0e855f219cb6d3b6dfe6690"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/right/06.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-right/frames/walk-right-06.png",
-        "sha256": "0a242f033946a862e07dc44400dd41247b394ca923c4330af228895380b507f1"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/right/06.png",
+        "sha256": "b79b7ef2eaa6b1e9a9c372f9ee0228d8ad7a175679be8a91bc7eece02d9c6c40"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/right/06.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/right/06.png",
+        "sha256": "9c276c1aa3412b37bcce2ce6788a110a1adfdfccdf9b7b859ca695b8203c173f"
       },
       "prompt": {
         "path": "implementation/fhd-player/pilots/2026-10-04/walk-right/materials-r3.prompt.txt",
         "sha256": "da41688c5b12dd85dc2e6bd2636ef2d966105d8220cd0fe575db40602a5fd02a"
-      }
+      },
+      "edited": false
     },
     {
       "id": "walk_east_6",
       "direction": "right",
       "animation": "walk_east",
       "frame": 6,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/right/07.png",
-        "sha256": "90167f5e1214db065146c5c67df54d00deb93f663de69d0dcedc83a616b0bf15"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/right/07.png",
+        "sha256": "b71e939b2505d6dbc41b86bce73bd3eaad09c3565333d8289cd4944a2c07b3f9"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/right/07.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-right/frames/walk-right-07.png",
-        "sha256": "372141b1d4e29e8b1758f7bd1fe621815462433e4c1af43cd09bc73a3e227f94"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/right/07.png",
+        "sha256": "f506e994ef76bf7cdfc302c1e8265325d5c37b20816d2a079a64eb2718f20bb0"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/right/07.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/right/07.png",
+        "sha256": "90167f5e1214db065146c5c67df54d00deb93f663de69d0dcedc83a616b0bf15"
       },
       "prompt": {
         "path": "implementation/fhd-player/pilots/2026-10-04/walk-right/materials-r3.prompt.txt",
         "sha256": "da41688c5b12dd85dc2e6bd2636ef2d966105d8220cd0fe575db40602a5fd02a"
-      }
+      },
+      "edited": false
     },
     {
       "id": "walk_east_7",
       "direction": "right",
       "animation": "walk_east",
       "frame": 7,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/right/08.png",
-        "sha256": "e218e679dfbe74eb57e1e75f423dcfb7f1e9f7d9be9d43b4db2872f80bb7f4dc"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/right/08.png",
+        "sha256": "90fefadeddc377aa8387891faf4baccab70d9fba7999ecb9a38a22fb2652d13d"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/right/08.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-right/frames/walk-right-08.png",
-        "sha256": "c0d6a92bea35f4043abf5b95ebf784bb261746cd1b87b8a327cfdd1ce22df5d4"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/right/08.png",
+        "sha256": "cf863dda8e8e95b01bde9bf8f36b1abec5d8479ed67bafaa26715994e35ab46c"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/right/08.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/right/08.png",
+        "sha256": "e218e679dfbe74eb57e1e75f423dcfb7f1e9f7d9be9d43b4db2872f80bb7f4dc"
       },
       "prompt": {
         "path": "implementation/fhd-player/pilots/2026-10-04/walk-right/materials-r3.prompt.txt",
         "sha256": "da41688c5b12dd85dc2e6bd2636ef2d966105d8220cd0fe575db40602a5fd02a"
-      }
+      },
+      "edited": false
     },
     {
       "id": "walk_north_0",
       "direction": "up",
       "animation": "walk_north",
       "frame": 0,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/up/01.png",
-        "sha256": "36b4b5f9ab9d1c652a121bfb39cacd5654ed9bc3e82b5d1a30ab8e5d167b76ee"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/up/01.png",
+        "sha256": "1d29d07f6651ecbe1bc0c4cfc5368763e9147a881a4c657c9b1207f72004ff95"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/up/01.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-up/frames/walk-up-01.png",
-        "sha256": "18dacecf2f4f3dcc64bd777f61c370525b816998ccd1b00ffb97d1d0daab0d60"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/up/01.png",
+        "sha256": "65049b4bc820c08ecb1f79faea006738a01ed9b9d3a4aaefb54b6cd3b09e55c9"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/up/01.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/up/01.png",
+        "sha256": "36b4b5f9ab9d1c652a121bfb39cacd5654ed9bc3e82b5d1a30ab8e5d167b76ee"
       },
       "prompt": {
         "path": "implementation/fhd-player/pilots/2026-10-04/walk-up/materials-r1.prompt.txt",
         "sha256": "2885c6db62accd67de6ad31e3f53e5230876aff381a6a43277959852e02c51cb"
-      }
+      },
+      "edited": false
     },
     {
       "id": "walk_north_1",
       "direction": "up",
       "animation": "walk_north",
       "frame": 1,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/up/02.png",
-        "sha256": "e1e9ac2f2e85a0f977f62e3c87bd3d572e87ca345fec8ce7baa51f883d5b88d3"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/up/02.png",
+        "sha256": "18c765528ce60691c042fa3258648bab390732b6829f8ca762d3a394b9c8c5db"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/up/02.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-up/frames/walk-up-02.png",
-        "sha256": "24ec34b27ceb13fd9c26f6da52aaa233fbd2c53f4a6bb1198223bd8d83839cd5"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/up/02.png",
+        "sha256": "736bad92fac409c8d4e9633bf4c5efaae3a77c96e69e22fdfd5a6306dbf72120"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/up/02.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/up/02.png",
+        "sha256": "e1e9ac2f2e85a0f977f62e3c87bd3d572e87ca345fec8ce7baa51f883d5b88d3"
       },
       "prompt": {
         "path": "implementation/fhd-player/pilots/2026-10-04/walk-up/materials-r1.prompt.txt",
         "sha256": "2885c6db62accd67de6ad31e3f53e5230876aff381a6a43277959852e02c51cb"
-      }
+      },
+      "edited": false
     },
     {
       "id": "walk_north_2",
       "direction": "up",
       "animation": "walk_north",
       "frame": 2,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/up/03.png",
-        "sha256": "c6b026d7f0bc14ce85b761e971505cb03d2261854a189752e2b2f54572129710"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/up/03.png",
+        "sha256": "2d3a8df165bc4b8dd0e85ae44be5ae6a6bf0eb2eefac0e8c406f8fbb7e668a99"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/up/03.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-up/frames/walk-up-03.png",
-        "sha256": "05efabc18ce11f04e41c5fbd7fedf754598c8039362379216617b3c89c1dd6c6"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/up/03.png",
+        "sha256": "3f3445b5a9c79ba1dbe7b5671ae80ef769b0087e39c0adacdd7bee227f116ee3"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/up/03.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/up/03.png",
+        "sha256": "c6b026d7f0bc14ce85b761e971505cb03d2261854a189752e2b2f54572129710"
       },
       "prompt": {
         "path": "implementation/fhd-player/pilots/2026-10-04/walk-up/materials-r1.prompt.txt",
         "sha256": "2885c6db62accd67de6ad31e3f53e5230876aff381a6a43277959852e02c51cb"
-      }
+      },
+      "edited": false
     },
     {
       "id": "walk_north_3",
       "direction": "up",
       "animation": "walk_north",
       "frame": 3,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/up/04.png",
-        "sha256": "a79e9b21e5a228d02332d6c72d3fdaa787b9678e2cf6931e34a8be61f18d8dda"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/up/04.png",
+        "sha256": "77dd4dc04c7b3d9aab1a5cf954b646285c54c1cf8b2542a4176d2929eff49f64"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/up/04.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-up/frames/walk-up-04.png",
-        "sha256": "8bcc519af7def3ffc1251804f9a2cefc89253bc71d40309d41ab284425f0da08"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/up/04.png",
+        "sha256": "f4788fcf14f7f77028d89513981397d2d03b6f022cab73e5b1ed81e098b990ba"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/up/04.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/up/04.png",
+        "sha256": "a79e9b21e5a228d02332d6c72d3fdaa787b9678e2cf6931e34a8be61f18d8dda"
       },
       "prompt": {
         "path": "implementation/fhd-player/pilots/2026-10-04/walk-up/materials-r1.prompt.txt",
         "sha256": "2885c6db62accd67de6ad31e3f53e5230876aff381a6a43277959852e02c51cb"
-      }
+      },
+      "edited": false
     },
     {
       "id": "walk_north_4",
       "direction": "up",
       "animation": "walk_north",
       "frame": 4,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/up/05.png",
-        "sha256": "2e310ed0899735460abca6883dfc1c7eb7d3e6ac85845e41e13c2a6c7af43182"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/up/05.png",
+        "sha256": "5e4ceacbb03515264e4aefdd6ace07143ed089685d43eb506d1eb360f7b6fcc9"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/up/05.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-up/frames/walk-up-05.png",
-        "sha256": "f6083d07b2d3ed0782da6ab615543498f5916463a14bdead7474502683e0246c"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/up/05.png",
+        "sha256": "f76ea47795d70c74cd0cb6727c2579fc37657c858c6b9ea4de3d367a3307f0f6"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/up/05.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/up/05.png",
+        "sha256": "2e310ed0899735460abca6883dfc1c7eb7d3e6ac85845e41e13c2a6c7af43182"
       },
       "prompt": {
         "path": "implementation/fhd-player/pilots/2026-10-04/walk-up/materials-r1.prompt.txt",
         "sha256": "2885c6db62accd67de6ad31e3f53e5230876aff381a6a43277959852e02c51cb"
-      }
+      },
+      "edited": false
     },
     {
       "id": "walk_north_5",
       "direction": "up",
       "animation": "walk_north",
       "frame": 5,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/up/06.png",
-        "sha256": "0cdc8420aab64f156afd61bbb69e00d4e8bbc71d95f3f7b3c27ffa2b27147670"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/up/06.png",
+        "sha256": "ecc6e53dc16eaf4dac479de62d9420691ed7d97c65b1562c883c4a48eb9a881c"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/up/06.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-up/frames/walk-up-06.png",
-        "sha256": "3bf1d90bf320a8c9f398a33d4c62f0285ade728eb26864e23729aae79d671739"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/up/06.png",
+        "sha256": "dd9993d44ef4ae93640f1e8a3dd4a47c26144fed5b9e495e01a793b8442231eb"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/up/06.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/up/06.png",
+        "sha256": "0cdc8420aab64f156afd61bbb69e00d4e8bbc71d95f3f7b3c27ffa2b27147670"
       },
       "prompt": {
         "path": "implementation/fhd-player/pilots/2026-10-04/walk-up/materials-r1.prompt.txt",
         "sha256": "2885c6db62accd67de6ad31e3f53e5230876aff381a6a43277959852e02c51cb"
-      }
+      },
+      "edited": false
     },
     {
       "id": "walk_north_6",
       "direction": "up",
       "animation": "walk_north",
       "frame": 6,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/up/07.png",
-        "sha256": "569b79975ea60e5217b51a4a5596e4cbca2cbd08f75a01f44433d0dc3b7551e8"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/up/07.png",
+        "sha256": "7b9ef2f6b85254ffb20eafce7a0bd78b4db7fc54e20ec8cbfcec1bd145bb658e"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/up/07.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-up/frames/walk-up-07.png",
-        "sha256": "30cd3a8e72836d4018ec8762186cc471843409e69b6e5e85d1f78bcd1c095a3a"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/up/07.png",
+        "sha256": "e3f90fc17c91a62597e9fc7a597111af5d66481ee91b6bac1abcce450244a8ca"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/up/07.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/up/07.png",
+        "sha256": "569b79975ea60e5217b51a4a5596e4cbca2cbd08f75a01f44433d0dc3b7551e8"
       },
       "prompt": {
         "path": "implementation/fhd-player/pilots/2026-10-04/walk-up/materials-r1.prompt.txt",
         "sha256": "2885c6db62accd67de6ad31e3f53e5230876aff381a6a43277959852e02c51cb"
-      }
+      },
+      "edited": false
     },
     {
       "id": "walk_north_7",
       "direction": "up",
       "animation": "walk_north",
       "frame": 7,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/up/08.png",
-        "sha256": "9ff9bbfd775a24b22c8a4379392a878d1d233b6b6cae347158b9a12bf0d9ec12"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/up/08.png",
+        "sha256": "5c8dd82e9ea424d1f7efba74e0c39779f3f6bf0e014adaba4d324ecbcc829d12"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/up/08.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-up/frames/walk-up-08.png",
-        "sha256": "581a19a8d4f1728a667dc1f7255629ff4676a7561d806950e20ed6a79489e532"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/up/08.png",
+        "sha256": "b085a396b5fc9098ab7e555ff43c90f61b6db4c691f739b22365f5473e41b3d6"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/up/08.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/up/08.png",
+        "sha256": "9ff9bbfd775a24b22c8a4379392a878d1d233b6b6cae347158b9a12bf0d9ec12"
       },
       "prompt": {
         "path": "implementation/fhd-player/pilots/2026-10-04/walk-up/materials-r1.prompt.txt",
         "sha256": "2885c6db62accd67de6ad31e3f53e5230876aff381a6a43277959852e02c51cb"
-      }
+      },
+      "edited": false
     },
     {
       "id": "walk_west_0",
       "direction": "left",
       "animation": "walk_west",
       "frame": 0,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/left/01.png",
-        "sha256": "a4483d4d3b2170b68922109327c2052b7e4752d7ebf7136f452ee5215fee6cd8"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/left/01.png",
+        "sha256": "971c140d9fc3b87b013ec376a1c6993c137ee2cad92ea4e3c017b91200082947"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/left/01.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-left/frames/walk-left-01.png",
-        "sha256": "080af5486d975b232b7276d628bfd14a41bd59abc02240f112af15b8846ab709"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/left/01.png",
+        "sha256": "b24d95053eafcc2a11e4184932ff41badc3bf248c1e2d9af0785b7637660574a"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/left/01.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/right/01.png",
+        "sha256": "a925d8d459d40d0de5a1bb9a59962bdbf5d2839490de1ccb968d634206ef7cd9"
       },
       "prompt": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-left/materials-r2.prompt.txt",
-        "sha256": "d31beb0c0d5bf23fdcafd2692bd778a3d190ef7a36adc53a8736a7818c61d26e"
-      }
+        "path": "implementation/fhd-player/pilots/2026-10-04/walk-right/materials-r3.prompt.txt",
+        "sha256": "da41688c5b12dd85dc2e6bd2636ef2d966105d8220cd0fe575db40602a5fd02a"
+      },
+      "edited": false,
+      "mirrored_from": "right"
     },
     {
       "id": "walk_west_1",
       "direction": "left",
       "animation": "walk_west",
       "frame": 1,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/left/02.png",
-        "sha256": "d7207adb366affd40504c0ddcb5f8d881436ce2e352ec2d95d580a93b0aac68f"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/left/02.png",
+        "sha256": "861ae0f31fc9984808478dde8c3050af7f65b5c56f9fb78bfcb54ead05ac100a"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/left/02.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-left/frames/walk-left-02.png",
-        "sha256": "66de77a1944d56ca515263b548feadaf3dfe456cf6752dfecbed8642fc6ae7f2"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/left/02.png",
+        "sha256": "fa1ad1d18072eaa3bde067d4488a1ae631fbb8505d046713d85b288eb9112d78"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/left/02.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/right/02.png",
+        "sha256": "728de94283d25406f0cc5c4332dfe263c1161bda676259eacb78772864acd60f"
       },
       "prompt": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-left/materials-r2.prompt.txt",
-        "sha256": "d31beb0c0d5bf23fdcafd2692bd778a3d190ef7a36adc53a8736a7818c61d26e"
-      }
+        "path": "implementation/fhd-player/pilots/2026-10-04/walk-right/materials-r3.prompt.txt",
+        "sha256": "da41688c5b12dd85dc2e6bd2636ef2d966105d8220cd0fe575db40602a5fd02a"
+      },
+      "edited": false,
+      "mirrored_from": "right"
     },
     {
       "id": "walk_west_2",
       "direction": "left",
       "animation": "walk_west",
       "frame": 2,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/left/03.png",
-        "sha256": "a5060a3ba97bf9bb43da40d548f1ec6e5659f625bc4856d1b9834f4da805005f"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/left/03.png",
+        "sha256": "31fe4e562058bb0088f560c6d8360a91e961e01fbcca4648208180eeb89d9409"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/left/03.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-left/frames/walk-left-03.png",
-        "sha256": "b3578fa2029bd737bde51c89304d8dce4c9f6b976849cc22e126fb057dba6e42"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/left/03.png",
+        "sha256": "f95828c1d823c2ea96615d41f47f5eecd29eb2347741f91bf918b89a91ff3bba"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/left/03.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/right/03.png",
+        "sha256": "d167e791e0ebcdbc400279c09b86a3e0996983325114db900c57c5ba1529ddab"
       },
       "prompt": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-left/materials-r2.prompt.txt",
-        "sha256": "d31beb0c0d5bf23fdcafd2692bd778a3d190ef7a36adc53a8736a7818c61d26e"
-      }
+        "path": "implementation/fhd-player/pilots/2026-10-04/walk-right/materials-r3.prompt.txt",
+        "sha256": "da41688c5b12dd85dc2e6bd2636ef2d966105d8220cd0fe575db40602a5fd02a"
+      },
+      "edited": false,
+      "mirrored_from": "right"
     },
     {
       "id": "walk_west_3",
       "direction": "left",
       "animation": "walk_west",
       "frame": 3,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/left/04.png",
-        "sha256": "0fd22e4e3e33348184387a718c8dfb0a43a407bcb8574ea473c073c6cecedb78"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/left/04.png",
+        "sha256": "d564af9efd029e468018370c581f871d37b818e7d1ea2970ba113a454b5c2637"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/left/04.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-left/frames/walk-left-04.png",
-        "sha256": "86e99e2dc495d9678aa77a7ef30597bce50d909d53f6ffa75141583a5683670d"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/left/04.png",
+        "sha256": "8e86057857dd4c4cee6abf3975f8fca553225a1791037fb0e7a06a21d2825342"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/left/04.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/right/04.png",
+        "sha256": "bef96f5af9119633be0240b80812d3215f229aaae8abf67a782015a59d3bcd26"
       },
       "prompt": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-left/materials-r2.prompt.txt",
-        "sha256": "d31beb0c0d5bf23fdcafd2692bd778a3d190ef7a36adc53a8736a7818c61d26e"
-      }
+        "path": "implementation/fhd-player/pilots/2026-10-04/walk-right/materials-r3.prompt.txt",
+        "sha256": "da41688c5b12dd85dc2e6bd2636ef2d966105d8220cd0fe575db40602a5fd02a"
+      },
+      "edited": false,
+      "mirrored_from": "right"
     },
     {
       "id": "walk_west_4",
       "direction": "left",
       "animation": "walk_west",
       "frame": 4,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/left/05.png",
-        "sha256": "8df046ba8464eda614f77367f4c8bbcbcd80498318efbffa8c95ba592f881c90"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/left/05.png",
+        "sha256": "58f60f7d9556a4766cd794d9a35b4f4b3a99b6a291190152c58cdb85ad7b0318"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/left/05.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-left/frames/walk-left-05.png",
-        "sha256": "49c09137fd7fd1247095f83beabc37758afe81bf8376f7ebe17f4c3286c18e71"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/left/05.png",
+        "sha256": "9b7384c88ecfe3a7c634b1c76099408f801d81f7220bfc6fed4ad0a4b397e7cf"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/left/05.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/right/05.png",
+        "sha256": "d4e5379d453e40ad9764ba7538b6151bf9d4045225ec5c02c93a7bc2639a1be8"
       },
       "prompt": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-left/materials-r2.prompt.txt",
-        "sha256": "d31beb0c0d5bf23fdcafd2692bd778a3d190ef7a36adc53a8736a7818c61d26e"
-      }
+        "path": "implementation/fhd-player/pilots/2026-10-04/walk-right/materials-r3.prompt.txt",
+        "sha256": "da41688c5b12dd85dc2e6bd2636ef2d966105d8220cd0fe575db40602a5fd02a"
+      },
+      "edited": false,
+      "mirrored_from": "right"
     },
     {
       "id": "walk_west_5",
       "direction": "left",
       "animation": "walk_west",
       "frame": 5,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/left/06.png",
-        "sha256": "4be67a359327ce51c5e69bd6a8ae779e314a908ad2ef7f56aae8b61e467c5f9a"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/left/06.png",
+        "sha256": "6afcdd9e96e7746ab6a26c382f2b5f7c0714d8695f66a5b91805f88a164afc4a"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/left/06.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-left/frames/walk-left-06.png",
-        "sha256": "2f28e314684f9af14bcff4e46df4926cf3eb1a1fec2862d3e20004098c0f83f3"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/left/06.png",
+        "sha256": "c9ceeebdd4f5841e950a33d1577b6165cf81c3866229be83530ae2641ded60d3"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/left/06.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/right/06.png",
+        "sha256": "9c276c1aa3412b37bcce2ce6788a110a1adfdfccdf9b7b859ca695b8203c173f"
       },
       "prompt": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-left/materials-r2.prompt.txt",
-        "sha256": "d31beb0c0d5bf23fdcafd2692bd778a3d190ef7a36adc53a8736a7818c61d26e"
-      }
+        "path": "implementation/fhd-player/pilots/2026-10-04/walk-right/materials-r3.prompt.txt",
+        "sha256": "da41688c5b12dd85dc2e6bd2636ef2d966105d8220cd0fe575db40602a5fd02a"
+      },
+      "edited": false,
+      "mirrored_from": "right"
     },
     {
       "id": "walk_west_6",
       "direction": "left",
       "animation": "walk_west",
       "frame": 6,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/left/07.png",
-        "sha256": "b3c319e88bc7e8501d378c72e5092c10455d68451259a224b269cd98b3a230c2"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/left/07.png",
+        "sha256": "a00e0b84c9c85caa9aebe3f61c1bc7a76c92ee1f75a603f534e13a8efd22e20f"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/left/07.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-left/frames/walk-left-07.png",
-        "sha256": "5e51e586701fde2a64f9709b6d73c13925c8c1c434d4631be5658daa03d0bca4"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/left/07.png",
+        "sha256": "6dcd0383d0b7eed90347a8ff24a93cf2d43cd650221ed262f64f296eff5c8a43"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/left/07.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/right/07.png",
+        "sha256": "90167f5e1214db065146c5c67df54d00deb93f663de69d0dcedc83a616b0bf15"
       },
       "prompt": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-left/materials-r2.prompt.txt",
-        "sha256": "d31beb0c0d5bf23fdcafd2692bd778a3d190ef7a36adc53a8736a7818c61d26e"
-      }
+        "path": "implementation/fhd-player/pilots/2026-10-04/walk-right/materials-r3.prompt.txt",
+        "sha256": "da41688c5b12dd85dc2e6bd2636ef2d966105d8220cd0fe575db40602a5fd02a"
+      },
+      "edited": false,
+      "mirrored_from": "right"
     },
     {
       "id": "walk_west_7",
       "direction": "left",
       "animation": "walk_west",
       "frame": 7,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/left/08.png",
-        "sha256": "84a5a5de7760f45940f90acd81956eeb103311aabcceb53af2a73b6b23b65747"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/left/08.png",
+        "sha256": "74b4de7a8ed006305c796f27cb17fb075bfb46e182c6b10c0dccf9c213170b78"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/left/08.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-left/frames/walk-left-08.png",
-        "sha256": "0f826a3ccb8b71c4c1f132d9b61436f0959302e759d13cb266bb70d6ae618596"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/left/08.png",
+        "sha256": "4f50d4da650996e074f3b19582fc5d06347c8f6db10ae02738eef08e7e1977e4"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/left/08.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/right/08.png",
+        "sha256": "e218e679dfbe74eb57e1e75f423dcfb7f1e9f7d9be9d43b4db2872f80bb7f4dc"
       },
       "prompt": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-left/materials-r2.prompt.txt",
-        "sha256": "d31beb0c0d5bf23fdcafd2692bd778a3d190ef7a36adc53a8736a7818c61d26e"
-      }
+        "path": "implementation/fhd-player/pilots/2026-10-04/walk-right/materials-r3.prompt.txt",
+        "sha256": "da41688c5b12dd85dc2e6bd2636ef2d966105d8220cd0fe575db40602a5fd02a"
+      },
+      "edited": false,
+      "mirrored_from": "right"
     },
     {
       "id": "walk_south_east_0",
       "direction": "down-right",
       "animation": "walk_south_east",
       "frame": 0,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/down-right/01.png",
-        "sha256": "6a92b28d59603ed3bc10811a695072cbf152f60259370d00eec0f9dfb6b3ef29"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/down-right/01.png",
+        "sha256": "edf78a4d09e963af9586690e6d9dec82536469d732f7d22d53f3b5ee47574422"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/down-right/01.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-right/frames/walk-down-right-01.png",
-        "sha256": "ec27f04c86d3a45a86c78ac23e29c30012f102566e5996bda75903b528a18e6a"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down-right/01.png",
+        "sha256": "8221c4652cb10d3cd440dcd5a73dceb9d3da6a8220002d7e9820f7210982acfd"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/down-right/01.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/down-left/01.png",
+        "sha256": "58bfae12ba874c940b25fc3d04c984b9133e334599a7fabe6d8a2ed4a2a7fc8e"
       },
       "prompt": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-right/materials-r5.prompt.txt",
-        "sha256": "5ab1754a284fa0852e10d48bcdec8b6be8bdcb85300876d70d6c84b00bb7410a"
-      }
+        "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-left/materials-r1.prompt.json",
+        "sha256": "46ca6755bfb6436481249a57f7317e6f426ed1ecf40ca618aad4449d99885e7a"
+      },
+      "edited": false,
+      "mirrored_from": "down-left"
     },
     {
       "id": "walk_south_east_1",
       "direction": "down-right",
       "animation": "walk_south_east",
       "frame": 1,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/down-right/02.png",
-        "sha256": "e7358b2ac5cd6b6b272512c9fa66f9bb6f37547530fe3578094ac4ba1658a802"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/down-right/02.png",
+        "sha256": "b327386921a269bc2ec507ae579ccd010a33d8e79443989e778bb99156753376"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/down-right/02.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-right/frames/walk-down-right-02.png",
-        "sha256": "7bd4e5cb6082cb10050e337b89feeacad47f3b77dc622ddd40843f1ab2a367c6"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down-right/02.png",
+        "sha256": "0d40e7b7bb08c0934d2ec71c07dc98a00922a6caebaf5c0adf85f2515a906bad"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/down-right/02.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/down-left/02.png",
+        "sha256": "77997837529272d0260297ec46202e70e8400a673a2e5af07de994fe6722def0"
       },
       "prompt": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-right/materials-r5.prompt.txt",
-        "sha256": "5ab1754a284fa0852e10d48bcdec8b6be8bdcb85300876d70d6c84b00bb7410a"
-      }
+        "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-left/materials-r1.prompt.json",
+        "sha256": "46ca6755bfb6436481249a57f7317e6f426ed1ecf40ca618aad4449d99885e7a"
+      },
+      "edited": false,
+      "mirrored_from": "down-left"
     },
     {
       "id": "walk_south_east_2",
       "direction": "down-right",
       "animation": "walk_south_east",
       "frame": 2,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/down-right/03.png",
-        "sha256": "ad9e55ce68234f2602cc1c239f85dc66dc929ed921acbb0d37596a4a90fc09b7"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/down-right/03.png",
+        "sha256": "3af233c0ef3312c24cc0a7aa6e215dbf6548565894cc31ffc73a899d9046fe17"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/down-right/03.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-right/frames/walk-down-right-03.png",
-        "sha256": "c1c6a7538d3e5ef860043ebf3ccb95f7af2d5c4ea93b312bb8a3b929dfdb1476"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down-right/03.png",
+        "sha256": "f559ea830f54e89e7f5194804c6fa9d21da00575c5d6552013aa99af1fa13cc7"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/down-right/03.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/down-left/03.png",
+        "sha256": "0a7ea43ce076e31530acf18b2356b96a650b0136e2a985adbd4b8609ad36e591"
       },
       "prompt": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-right/materials-r5.prompt.txt",
-        "sha256": "5ab1754a284fa0852e10d48bcdec8b6be8bdcb85300876d70d6c84b00bb7410a"
-      }
+        "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-left/materials-r1.prompt.json",
+        "sha256": "46ca6755bfb6436481249a57f7317e6f426ed1ecf40ca618aad4449d99885e7a"
+      },
+      "edited": false,
+      "mirrored_from": "down-left"
     },
     {
       "id": "walk_south_east_3",
       "direction": "down-right",
       "animation": "walk_south_east",
       "frame": 3,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/down-right/04.png",
-        "sha256": "8543ab95a75f61d644f25d35c322bb2bb12048c8f017ade9f7ebd6b86bf7f5d0"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/down-right/04.png",
+        "sha256": "a3046749e67aa40cc3decc640fa7425c9a03e84b1340f83d7f3babf310cd8d2b"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/down-right/04.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-right/frames/walk-down-right-04.png",
-        "sha256": "aa547f5d61e3532ef7a5e2d05e1c5890b133ed7dc05f6b1c24a0649fca49b51a"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down-right/04.png",
+        "sha256": "cdd433eaf12db439afe638f64f00836b76acab63aad09c8db062baebb9b796a9"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/down-right/04.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/down-left/04.png",
+        "sha256": "a6bad38f2d04de72ef423bb263060422df1f4fd8dd34ec675510262ee1d81215"
       },
       "prompt": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-right/materials-r5.prompt.txt",
-        "sha256": "5ab1754a284fa0852e10d48bcdec8b6be8bdcb85300876d70d6c84b00bb7410a"
-      }
+        "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-left/materials-r1.prompt.json",
+        "sha256": "46ca6755bfb6436481249a57f7317e6f426ed1ecf40ca618aad4449d99885e7a"
+      },
+      "edited": false,
+      "mirrored_from": "down-left"
     },
     {
       "id": "walk_south_east_4",
       "direction": "down-right",
       "animation": "walk_south_east",
       "frame": 4,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/down-right/05.png",
-        "sha256": "798bf689e9d0bcec9a07cecc57b548a4f40181a9065a608afa64b73e20f3184c"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/down-right/05.png",
+        "sha256": "d88ee824e0ca1aaa2ad4bac509011645b33b482bca793fefc80d79e4fbd9216d"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/down-right/05.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-right/frames/walk-down-right-05.png",
-        "sha256": "ad80095e839c241ea1130d41beb920143968c8c0a609e97f497980f0b3414579"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down-right/05.png",
+        "sha256": "bb2cc680404b22096dcc415ae49af0cf7e7f13ab438f80eadd1d1d8618733944"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/down-right/05.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/down-left/05.png",
+        "sha256": "7993497dfa11a268aa3406a927edaf07ed45d0d8343d712c98b66ce72128ade4"
       },
       "prompt": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-right/materials-r5.prompt.txt",
-        "sha256": "5ab1754a284fa0852e10d48bcdec8b6be8bdcb85300876d70d6c84b00bb7410a"
-      }
+        "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-left/materials-r1.prompt.json",
+        "sha256": "46ca6755bfb6436481249a57f7317e6f426ed1ecf40ca618aad4449d99885e7a"
+      },
+      "edited": false,
+      "mirrored_from": "down-left"
     },
     {
       "id": "walk_south_east_5",
       "direction": "down-right",
       "animation": "walk_south_east",
       "frame": 5,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/down-right/06.png",
-        "sha256": "bf2b8de4719b4429165eed4ea915ad33cb1bd11c2a403c173f5ac5311ef853cb"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/down-right/06.png",
+        "sha256": "0470b8209a7911a1d43f966ad49647f34b18ef5da631f3b28bc66b0d85d77d2e"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/down-right/06.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-right/frames/walk-down-right-06.png",
-        "sha256": "ec72603956b9be22f9f5fa67c892a64e0769ba5dc7eed98261615d60f3ab4f90"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down-right/06.png",
+        "sha256": "ba59e64804c137822b6484fcec4ed6fa123146d1fcdbf3bddbe8463e43a814b9"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/down-right/06.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/down-left/06.png",
+        "sha256": "2375bf0ebff687b677d98d5fc4dd44de56e1bbde421e8845d44fa2ed3c0c5c4d"
       },
       "prompt": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-right/materials-r5.prompt.txt",
-        "sha256": "5ab1754a284fa0852e10d48bcdec8b6be8bdcb85300876d70d6c84b00bb7410a"
-      }
+        "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-left/materials-r1.prompt.json",
+        "sha256": "46ca6755bfb6436481249a57f7317e6f426ed1ecf40ca618aad4449d99885e7a"
+      },
+      "edited": false,
+      "mirrored_from": "down-left"
     },
     {
       "id": "walk_south_east_6",
       "direction": "down-right",
       "animation": "walk_south_east",
       "frame": 6,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/down-right/07.png",
-        "sha256": "a72b3a57f252e1c89c9d79924c113884de3336730cd94510b8b0bc61625fc192"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/down-right/07.png",
+        "sha256": "fcae0fcc23a149b5935d09bb5845645b61ffadf47861b9c6c531ef8b0bc50841"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/down-right/07.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-right/frames/walk-down-right-07.png",
-        "sha256": "89ae4b02626d8900cce576b020bed57048b4bd2d8feca5de9115c0f97e170818"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down-right/07.png",
+        "sha256": "1f36ba26e42aecda8922e36d6b2cf546f3280caca8f669623f30e776b8ea93a4"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/down-right/07.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/down-left/07.png",
+        "sha256": "ad79fc6aadd4504ceab7ba513dcdff05b345a5028302f32dfea82ba2cf1644fb"
       },
       "prompt": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-right/materials-r5.prompt.txt",
-        "sha256": "5ab1754a284fa0852e10d48bcdec8b6be8bdcb85300876d70d6c84b00bb7410a"
-      }
+        "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-left/materials-r1.prompt.json",
+        "sha256": "46ca6755bfb6436481249a57f7317e6f426ed1ecf40ca618aad4449d99885e7a"
+      },
+      "edited": false,
+      "mirrored_from": "down-left"
     },
     {
       "id": "walk_south_east_7",
       "direction": "down-right",
       "animation": "walk_south_east",
       "frame": 7,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/down-right/08.png",
-        "sha256": "203c16c7b9d0b4ce6a1e0f5190562f55eeeae558f59eb659a73073b3c20064fb"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/down-right/08.png",
+        "sha256": "978e27434a6f07b93d5e758601f23ae5c64655e03f5f0abd3e8329189ea2140e"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/down-right/08.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-right/frames/walk-down-right-08.png",
-        "sha256": "07ebd7c577de84404ff44e3b0231d5f095a8db9b3e95b312873c076b1e95a981"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down-right/08.png",
+        "sha256": "9777a801a7152c1c42bedbaeb51366c5c82a94d823e5343aa23f2e44f4d4e4ab"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/down-right/08.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/down-left/08.png",
+        "sha256": "913224ed27bf4fd8e01bc4589e0e73f94944e22597799b041c00374f27edf612"
       },
       "prompt": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-right/materials-r5.prompt.txt",
-        "sha256": "5ab1754a284fa0852e10d48bcdec8b6be8bdcb85300876d70d6c84b00bb7410a"
-      }
+        "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-left/materials-r1.prompt.json",
+        "sha256": "46ca6755bfb6436481249a57f7317e6f426ed1ecf40ca618aad4449d99885e7a"
+      },
+      "edited": false,
+      "mirrored_from": "down-left"
     },
     {
       "id": "walk_north_east_0",
       "direction": "up-right",
       "animation": "walk_north_east",
       "frame": 0,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/up-right/01.png",
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/up-right/01.png",
+        "sha256": "88fb8fb669bcf9ee2db7728311e8ea132f423d1b471c5e669baa84cbeca2363d"
+      },
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/up-right/01.png",
+        "sha256": "937167f2aff58fcb86b3e95ba67fa95c5c9c0d7d0b4d234583848b0adc9d8dd2"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/up-right/01.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/up-right/01.png",
         "sha256": "bf3fc01e87961bff86d1a49b3d236a49b097e7ad60cc163da8b065663f28483f"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/up-right/01.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/selected-UR03-UL03/UR03/revisions/boot4-r4/frames/01.png",
-        "sha256": "5f36215641900e45763420159ded46bf659a74bb270680ee4438f66139558419"
-      },
       "prompt": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-up-right/materials-r5.prompt.txt",
-        "sha256": "95c6300736d136214edea39c6e4de941f3a2d4eb0cf03affdc62ea7c7099efdb"
-      }
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/individual-frame-prompts.json",
+        "sha256": "e800138f286450b536fa034b84b093d356088c51b960dcdefa180fe13ffe1c4e"
+      },
+      "edited": true
     },
     {
       "id": "walk_north_east_1",
       "direction": "up-right",
       "animation": "walk_north_east",
       "frame": 1,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/up-right/02.png",
-        "sha256": "43c41c7d7f5a57f3d1abf5c7a7be6655418118aa0801307c3afa155a9ab74247"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/up-right/02.png",
+        "sha256": "e13a1b91e748a3aea420dfc4598163a411bb3e281c1f904c184364f569fd31d2"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/up-right/02.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/selected-UR03-UL03/UR03/revisions/boot4-r4/frames/02.png",
-        "sha256": "0730f610a57bdc6e69e676654a323236ad38380e87ad91c3a96ccbf99a23669a"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/up-right/02.png",
+        "sha256": "96275a0d181536b798c550df1a783aa92897565ccf5394a75b55e635208462dc"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/up-right/02.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/up-right/02.png",
+        "sha256": "43c41c7d7f5a57f3d1abf5c7a7be6655418118aa0801307c3afa155a9ab74247"
       },
       "prompt": {
         "path": "implementation/fhd-player/pilots/2026-10-04/walk-up-right/materials-r5.prompt.txt",
         "sha256": "95c6300736d136214edea39c6e4de941f3a2d4eb0cf03affdc62ea7c7099efdb"
-      }
+      },
+      "edited": false
     },
     {
       "id": "walk_north_east_2",
       "direction": "up-right",
       "animation": "walk_north_east",
       "frame": 2,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/up-right/03.png",
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/up-right/03.png",
+        "sha256": "d3283b6dccee9e977a85fe204c38506cbe88efddb2f5efe9113e5b4a5efac4a2"
+      },
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/up-right/03.png",
+        "sha256": "3b829506d664ffa5693146f457ce6e68d29f8e9afb58acdac966074cf7831ceb"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/up-right/03.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/up-right/03.png",
         "sha256": "5c438509887ac04e9a32362c0c3b836041123a9ea497c3c6e3081659497c71c0"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/up-right/03.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/selected-UR03-UL03/UR03/revisions/boot4-r4/frames/03.png",
-        "sha256": "32f31b11ad371bcc3751609752d6f66effa2d31b0c915f8fbc807d6c3c4f898d"
-      },
       "prompt": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-up-right/materials-r5.prompt.txt",
-        "sha256": "95c6300736d136214edea39c6e4de941f3a2d4eb0cf03affdc62ea7c7099efdb"
-      }
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/individual-frame-prompts.json",
+        "sha256": "e800138f286450b536fa034b84b093d356088c51b960dcdefa180fe13ffe1c4e"
+      },
+      "edited": true
     },
     {
       "id": "walk_north_east_3",
       "direction": "up-right",
       "animation": "walk_north_east",
       "frame": 3,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/up-right/04.png",
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/up-right/04.png",
+        "sha256": "33a5923fbb4eadbcc05f777f5ac6ebd6fb1d08f8909075869c296a5620c59bd5"
+      },
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/up-right/04.png",
+        "sha256": "3e4b88dcc9be2b2ffa23c28915985d5c676fb474d98db44568cb461fc41fffb7"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/up-right/04.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/up-right/04.png",
         "sha256": "00d9c60552a818946eca187d48c59dfc70149ea0b3b749748f03ab334b0262e7"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/up-right/04.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/selected-UR03-UL03/UR03/revisions/boot4-r4/frames/04.png",
-        "sha256": "a3f1ea2faa1a66788dd80ea34d5a4752d59cacf6a0670a2a08b23e44d4ae04e4"
-      },
       "prompt": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-up-right/materials-r5.prompt.txt",
-        "sha256": "95c6300736d136214edea39c6e4de941f3a2d4eb0cf03affdc62ea7c7099efdb"
-      }
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/individual-frame-prompts.json",
+        "sha256": "e800138f286450b536fa034b84b093d356088c51b960dcdefa180fe13ffe1c4e"
+      },
+      "edited": true
     },
     {
       "id": "walk_north_east_4",
       "direction": "up-right",
       "animation": "walk_north_east",
       "frame": 4,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/up-right/05.png",
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/up-right/05.png",
+        "sha256": "cb5197f5a8c6d1dee0d1526171402512b90b3c8019de8f8445b835d69e14ae10"
+      },
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/up-right/05.png",
+        "sha256": "a59eae03d1434f962eddccce5a2c99908611748f3968e876eed8862c571298b3"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/up-right/05.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/up-right/05.png",
         "sha256": "6c269b32dbf93cc4c77d89cd38e994c43949c540845933737c2267a77d357ab1"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/up-right/05.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/selected-UR03-UL03/UR03/revisions/boot4-r4/frames/05.png",
-        "sha256": "1e6c318ff613841f287356c7cd90b3360a408c7f2a24cf9dd2e10a616703bc7c"
-      },
       "prompt": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-up-right/materials-r5.prompt.txt",
-        "sha256": "95c6300736d136214edea39c6e4de941f3a2d4eb0cf03affdc62ea7c7099efdb"
-      }
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/individual-frame-prompts.json",
+        "sha256": "e800138f286450b536fa034b84b093d356088c51b960dcdefa180fe13ffe1c4e"
+      },
+      "edited": true
     },
     {
       "id": "walk_north_east_5",
       "direction": "up-right",
       "animation": "walk_north_east",
       "frame": 5,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/up-right/06.png",
-        "sha256": "7747eef88ff6d4db534650bef985945a20010cdb492c75373076ed32ca83e0bd"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/up-right/06.png",
+        "sha256": "199ba6ee91ced31ab9069fe105c196daa0e2cc7d0d2e73ef509c957b335be5bb"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/up-right/06.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/selected-UR03-UL03/UR03/revisions/boot4-r4/frames/06.png",
-        "sha256": "c483b077ce83f4b0e95c37527480f35bb09aed5ab6216d0a7d698a93d72252f2"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/up-right/06.png",
+        "sha256": "480790864b33edb5452087df79c4463294f9f547c9636ac3704c8344cd212a2c"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/up-right/06.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/up-right/06.png",
+        "sha256": "7747eef88ff6d4db534650bef985945a20010cdb492c75373076ed32ca83e0bd"
       },
       "prompt": {
         "path": "implementation/fhd-player/pilots/2026-10-04/walk-up-right/materials-r5.prompt.txt",
         "sha256": "95c6300736d136214edea39c6e4de941f3a2d4eb0cf03affdc62ea7c7099efdb"
-      }
+      },
+      "edited": false
     },
     {
       "id": "walk_north_east_6",
       "direction": "up-right",
       "animation": "walk_north_east",
       "frame": 6,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/up-right/07.png",
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/up-right/07.png",
+        "sha256": "605473b434041d1d2f69a98e409854807f30714891c1ccc8732d58c760c46157"
+      },
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/up-right/07.png",
+        "sha256": "d5b390c82d0d1b5ddbcc52fb0ed7a6f01d76310e4b136829e217c785297f77f7"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/up-right/07.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/up-right/07.png",
         "sha256": "ed04bf6d8e704b9e71264f36c2d919c68d6963f179429dd28fe2f2e925ec848f"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/up-right/07.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/selected-UR03-UL03/UR03/revisions/boot4-r4/frames/07.png",
-        "sha256": "72e56b779c7ad2c5b722707e39380039c191451887ad19e37e0af7b20581eef0"
-      },
       "prompt": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-up-right/materials-r5.prompt.txt",
-        "sha256": "95c6300736d136214edea39c6e4de941f3a2d4eb0cf03affdc62ea7c7099efdb"
-      }
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/individual-frame-prompts.json",
+        "sha256": "e800138f286450b536fa034b84b093d356088c51b960dcdefa180fe13ffe1c4e"
+      },
+      "edited": true
     },
     {
       "id": "walk_north_east_7",
       "direction": "up-right",
       "animation": "walk_north_east",
       "frame": 7,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/up-right/08.png",
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/up-right/08.png",
+        "sha256": "f8d29c20f04ee4313d08cdc7670a4343648a95a763e1050fc6d51ceafcecb001"
+      },
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/up-right/08.png",
+        "sha256": "c2e5bd71410113cc4bd6e3b35e0e93d882360fc4e76ec1d26cb5a93ef78982d5"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/up-right/08.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/up-right/08.png",
         "sha256": "dd1794e0a8dc59bf8734d7958f27f9dbf1affb275b4eca44e2ca9acc824df117"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/up-right/08.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/selected-UR03-UL03/UR03/revisions/boot4-r4/frames/08.png",
-        "sha256": "c2d96e95a28ea8d147f41f60d42f9ea8acf4cdcb8a2eb8663390c98e09d4c953"
-      },
       "prompt": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-up-right/materials-r5.prompt.txt",
-        "sha256": "95c6300736d136214edea39c6e4de941f3a2d4eb0cf03affdc62ea7c7099efdb"
-      }
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/individual-frame-prompts.json",
+        "sha256": "e800138f286450b536fa034b84b093d356088c51b960dcdefa180fe13ffe1c4e"
+      },
+      "edited": true
     },
     {
       "id": "walk_north_west_0",
       "direction": "up-left",
       "animation": "walk_north_west",
       "frame": 0,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/up-left/01.png",
-        "sha256": "6c0d8c85e00698b07754bfc849641fbfc8a4cbfc0ec3530c636b3297c62e414e"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/up-left/01.png",
+        "sha256": "7901b1f5b4a387366dcf64984527913e6b84039dac6bd0f184238a6bf8bacfa7"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/up-left/01.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/selected-UR03-UL03/UL03/frames/01.png",
-        "sha256": "afefe3c6a10bf46d3a201bbf8916c83c6f4f1987351016380582e7c5b75a2c25"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/up-left/01.png",
+        "sha256": "cf57a507937f651e34d8a31930c9d8c65a2bc42f5bddbf58100ceda3fe785f08"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/up-left/01.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/up-right/01.png",
+        "sha256": "bf3fc01e87961bff86d1a49b3d236a49b097e7ad60cc163da8b065663f28483f"
       },
       "prompt": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-up-left/rebuild-materials-r7.prompt.txt",
-        "sha256": "1b4cd4e4fa70a40e1cb08c5eb4fac6b1398b086e4fcfa6ec4011246ea8b3174a"
-      }
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/individual-frame-prompts.json",
+        "sha256": "e800138f286450b536fa034b84b093d356088c51b960dcdefa180fe13ffe1c4e"
+      },
+      "edited": true,
+      "mirrored_from": "up-right"
     },
     {
       "id": "walk_north_west_1",
       "direction": "up-left",
       "animation": "walk_north_west",
       "frame": 1,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/up-left/02.png",
-        "sha256": "451cec4c3993c6265706478c01df32f7fe28118c16b411a2c55925adb28184c4"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/up-left/02.png",
+        "sha256": "e7e4c5b1157bdce9f786bee0c6e10fd82f3c40895210b7a28efd8bbda865dac5"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/up-left/02.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/selected-UR03-UL03/UL03/frames/02.png",
-        "sha256": "d3e63d45898d135d52be58045692be53ba42717a1c2a147d4f358e5446a40984"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/up-left/02.png",
+        "sha256": "c59b7fff02b8389782d5d44be9bb960a603b8069be27071ccc671753b7b994af"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/up-left/02.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/up-right/02.png",
+        "sha256": "43c41c7d7f5a57f3d1abf5c7a7be6655418118aa0801307c3afa155a9ab74247"
       },
       "prompt": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-up-left/rebuild-materials-r7.prompt.txt",
-        "sha256": "1b4cd4e4fa70a40e1cb08c5eb4fac6b1398b086e4fcfa6ec4011246ea8b3174a"
-      }
+        "path": "implementation/fhd-player/pilots/2026-10-04/walk-up-right/materials-r5.prompt.txt",
+        "sha256": "95c6300736d136214edea39c6e4de941f3a2d4eb0cf03affdc62ea7c7099efdb"
+      },
+      "edited": false,
+      "mirrored_from": "up-right"
     },
     {
       "id": "walk_north_west_2",
       "direction": "up-left",
       "animation": "walk_north_west",
       "frame": 2,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/up-left/03.png",
-        "sha256": "909451f379a3f30f715c1933ab739469fe29c5f0adea84a7e1273a696f8d0863"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/up-left/03.png",
+        "sha256": "f4be526d4766f9eedd4ad047aa0ffb1bffa4df206b8bc175f3cee714d3d3ab3d"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/up-left/03.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/selected-UR03-UL03/UL03/frames/03.png",
-        "sha256": "2168b536023bd739724bf898636778a0ed671fa7f3e7ee1c7dfe6f36699a3be6"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/up-left/03.png",
+        "sha256": "b9f89cacb2e19036e262283a2172eb12aae2f8534b3e445ba8c9d1752592956c"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/up-left/03.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/up-right/03.png",
+        "sha256": "5c438509887ac04e9a32362c0c3b836041123a9ea497c3c6e3081659497c71c0"
       },
       "prompt": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-up-left/rebuild-materials-r7.prompt.txt",
-        "sha256": "1b4cd4e4fa70a40e1cb08c5eb4fac6b1398b086e4fcfa6ec4011246ea8b3174a"
-      }
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/individual-frame-prompts.json",
+        "sha256": "e800138f286450b536fa034b84b093d356088c51b960dcdefa180fe13ffe1c4e"
+      },
+      "edited": true,
+      "mirrored_from": "up-right"
     },
     {
       "id": "walk_north_west_3",
       "direction": "up-left",
       "animation": "walk_north_west",
       "frame": 3,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/up-left/04.png",
-        "sha256": "f66d71a852cc3aea5a1df64986e3bae694b583393e0405e0f8c6a8c5585764b1"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/up-left/04.png",
+        "sha256": "d2c4b422f66c9820b036d9e1fe00f366d1169ce22d516d0882329dab8ff0bc29"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/up-left/04.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/selected-UR03-UL03/UL03/frames/04.png",
-        "sha256": "81d9959b5dab17ecfcde14b1bd6f93d56629fd8bc1dfb84b9df522b38dd46611"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/up-left/04.png",
+        "sha256": "f796488262a071cf0fd6a0f1da1f5755dd2ca73a24662e3a55b0eda47c139c45"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/up-left/04.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/up-right/04.png",
+        "sha256": "00d9c60552a818946eca187d48c59dfc70149ea0b3b749748f03ab334b0262e7"
       },
       "prompt": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-up-left/rebuild-materials-r7.prompt.txt",
-        "sha256": "1b4cd4e4fa70a40e1cb08c5eb4fac6b1398b086e4fcfa6ec4011246ea8b3174a"
-      }
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/individual-frame-prompts.json",
+        "sha256": "e800138f286450b536fa034b84b093d356088c51b960dcdefa180fe13ffe1c4e"
+      },
+      "edited": true,
+      "mirrored_from": "up-right"
     },
     {
       "id": "walk_north_west_4",
       "direction": "up-left",
       "animation": "walk_north_west",
       "frame": 4,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/up-left/05.png",
-        "sha256": "b4d491c36b1fdbe058a8ff393aa87e5b1fac3f723c9187ccbafe1bce4f6c2951"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/up-left/05.png",
+        "sha256": "a76d620a76605eef45d368f45f341352d637e0477e8e24cb6d74ecfc11a0aba3"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/up-left/05.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/selected-UR03-UL03/UL03/frames/05.png",
-        "sha256": "1a1b7324138da0e676e15662f3b81f01ce6afe8377776d175fd6e693b29e00dc"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/up-left/05.png",
+        "sha256": "9f8f69f849e103f66a9fbf43e5fbc1640793a20ff71987db02f5ba1b67b45ff1"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/up-left/05.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/up-right/05.png",
+        "sha256": "6c269b32dbf93cc4c77d89cd38e994c43949c540845933737c2267a77d357ab1"
       },
       "prompt": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-up-left/rebuild-materials-r7.prompt.txt",
-        "sha256": "1b4cd4e4fa70a40e1cb08c5eb4fac6b1398b086e4fcfa6ec4011246ea8b3174a"
-      }
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/individual-frame-prompts.json",
+        "sha256": "e800138f286450b536fa034b84b093d356088c51b960dcdefa180fe13ffe1c4e"
+      },
+      "edited": true,
+      "mirrored_from": "up-right"
     },
     {
       "id": "walk_north_west_5",
       "direction": "up-left",
       "animation": "walk_north_west",
       "frame": 5,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/up-left/06.png",
-        "sha256": "da58b40efb3a89dbfd38891813ccf094899bea2976f4f99ee0681d8b404ab3a4"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/up-left/06.png",
+        "sha256": "3ba9885f63d8d92e9d9cccf6a381ac6f8a32acd6bbf69c93289c7573beb3e97c"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/up-left/06.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/selected-UR03-UL03/UL03/frames/06.png",
-        "sha256": "539b94cae2f7eef782a40584a77029f1405d190aa128032d5d6442ec1022dd40"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/up-left/06.png",
+        "sha256": "958349499f7e3338e59947b02ee14cdd9ba490b6ab81a30bd717597e8b9a5fd7"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/up-left/06.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/up-right/06.png",
+        "sha256": "7747eef88ff6d4db534650bef985945a20010cdb492c75373076ed32ca83e0bd"
       },
       "prompt": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-up-left/rebuild-materials-r7.prompt.txt",
-        "sha256": "1b4cd4e4fa70a40e1cb08c5eb4fac6b1398b086e4fcfa6ec4011246ea8b3174a"
-      }
+        "path": "implementation/fhd-player/pilots/2026-10-04/walk-up-right/materials-r5.prompt.txt",
+        "sha256": "95c6300736d136214edea39c6e4de941f3a2d4eb0cf03affdc62ea7c7099efdb"
+      },
+      "edited": false,
+      "mirrored_from": "up-right"
     },
     {
       "id": "walk_north_west_6",
       "direction": "up-left",
       "animation": "walk_north_west",
       "frame": 6,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/up-left/07.png",
-        "sha256": "e5561bd7906c2b5a35667de194f9002e20b1e5782f12201c24ed3fb5516bb89a"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/up-left/07.png",
+        "sha256": "95c216075380c10dc610833fe8fce461324a356b6230ca4f9a2a03a3d4e41007"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/up-left/07.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/selected-UR03-UL03/UL03/frames/07.png",
-        "sha256": "bc3ac8506d749598d6611a89bf061e2e8a12443a0dcaf6d8efe107a111f74ca4"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/up-left/07.png",
+        "sha256": "966124f75ca92e7af4cbd512a11f804b17038fadcc69b422533499f931b3702d"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/up-left/07.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/up-right/07.png",
+        "sha256": "ed04bf6d8e704b9e71264f36c2d919c68d6963f179429dd28fe2f2e925ec848f"
       },
       "prompt": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-up-left/rebuild-materials-r7.prompt.txt",
-        "sha256": "1b4cd4e4fa70a40e1cb08c5eb4fac6b1398b086e4fcfa6ec4011246ea8b3174a"
-      }
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/individual-frame-prompts.json",
+        "sha256": "e800138f286450b536fa034b84b093d356088c51b960dcdefa180fe13ffe1c4e"
+      },
+      "edited": true,
+      "mirrored_from": "up-right"
     },
     {
       "id": "walk_north_west_7",
       "direction": "up-left",
       "animation": "walk_north_west",
       "frame": 7,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/up-left/08.png",
-        "sha256": "29a518d700c551dd1bc7ea4b776c461f66d1db76acee5e2836fd557537741e0c"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/up-left/08.png",
+        "sha256": "fdcb6b0df83ea3d9032e0dd4b5c70c547e77921192bd1c60f6bd0aea419d28d1"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/up-left/08.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/selected-UR03-UL03/UL03/frames/08.png",
-        "sha256": "f0ef2b5b74baf72e3fb63f31acef5ba355f23fd6c237fa9744dba7283d3914a9"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/up-left/08.png",
+        "sha256": "8bdf1f934940209462ff2d0e41cb0ac28b156b866898128d06f4216df595364e"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/up-left/08.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/up-right/08.png",
+        "sha256": "dd1794e0a8dc59bf8734d7958f27f9dbf1affb275b4eca44e2ca9acc824df117"
       },
       "prompt": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-up-left/rebuild-materials-r7.prompt.txt",
-        "sha256": "1b4cd4e4fa70a40e1cb08c5eb4fac6b1398b086e4fcfa6ec4011246ea8b3174a"
-      }
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/individual-frame-prompts.json",
+        "sha256": "e800138f286450b536fa034b84b093d356088c51b960dcdefa180fe13ffe1c4e"
+      },
+      "edited": true,
+      "mirrored_from": "up-right"
     },
     {
       "id": "walk_south_west_0",
       "direction": "down-left",
       "animation": "walk_south_west",
       "frame": 0,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/down-left/01.png",
-        "sha256": "58bfae12ba874c940b25fc3d04c984b9133e334599a7fabe6d8a2ed4a2a7fc8e"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/down-left/01.png",
+        "sha256": "fea1d963e18f52b255a93c5dcdbf165a7bdf91793e62535b0d5916d3a61680ad"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/down-left/01.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-left/frames/walk-down-left-01.png",
-        "sha256": "cb2fb411c7d7f9f10cf36d86da8a53518e8ee925d2f84398c6e17aecdafe055c"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down-left/01.png",
+        "sha256": "193249e697405567f07ef29c2187f3eca679a9900598534e025c09e0bd28e7ed"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/down-left/01.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/down-left/01.png",
+        "sha256": "58bfae12ba874c940b25fc3d04c984b9133e334599a7fabe6d8a2ed4a2a7fc8e"
       },
       "prompt": {
         "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-left/materials-r1.prompt.json",
         "sha256": "46ca6755bfb6436481249a57f7317e6f426ed1ecf40ca618aad4449d99885e7a"
-      }
+      },
+      "edited": false
     },
     {
       "id": "walk_south_west_1",
       "direction": "down-left",
       "animation": "walk_south_west",
       "frame": 1,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/down-left/02.png",
-        "sha256": "77997837529272d0260297ec46202e70e8400a673a2e5af07de994fe6722def0"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/down-left/02.png",
+        "sha256": "f5692cc0a70099cb77f9a63bc494870c083a2f6569f2bb217c934640040b0b10"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/down-left/02.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-left/frames/walk-down-left-02.png",
-        "sha256": "dd602d46a8b217ebfa376ae9ae79863a528987350ea56e583b6e91acb5a0cf5b"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down-left/02.png",
+        "sha256": "5a6b059b7643d8e576be7ab9a6e90c24c70128432a2d032d6e1a29925d7bbd90"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/down-left/02.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/down-left/02.png",
+        "sha256": "77997837529272d0260297ec46202e70e8400a673a2e5af07de994fe6722def0"
       },
       "prompt": {
         "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-left/materials-r1.prompt.json",
         "sha256": "46ca6755bfb6436481249a57f7317e6f426ed1ecf40ca618aad4449d99885e7a"
-      }
+      },
+      "edited": false
     },
     {
       "id": "walk_south_west_2",
       "direction": "down-left",
       "animation": "walk_south_west",
       "frame": 2,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/down-left/03.png",
-        "sha256": "0a7ea43ce076e31530acf18b2356b96a650b0136e2a985adbd4b8609ad36e591"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/down-left/03.png",
+        "sha256": "714d32825c313519a37543c5d0d4b43765cf31e3729664dee66ff9a58a7eaaad"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/down-left/03.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-left/frames/walk-down-left-03.png",
-        "sha256": "46e856f426a870dbfc563555313d8ba088774e060687b5a13244dc9098459981"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down-left/03.png",
+        "sha256": "1d1df84c24472e7c9c1776d5baddde016f72653a520c97a4338cce84de5cbcf6"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/down-left/03.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/down-left/03.png",
+        "sha256": "0a7ea43ce076e31530acf18b2356b96a650b0136e2a985adbd4b8609ad36e591"
       },
       "prompt": {
         "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-left/materials-r1.prompt.json",
         "sha256": "46ca6755bfb6436481249a57f7317e6f426ed1ecf40ca618aad4449d99885e7a"
-      }
+      },
+      "edited": false
     },
     {
       "id": "walk_south_west_3",
       "direction": "down-left",
       "animation": "walk_south_west",
       "frame": 3,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/down-left/04.png",
-        "sha256": "a6bad38f2d04de72ef423bb263060422df1f4fd8dd34ec675510262ee1d81215"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/down-left/04.png",
+        "sha256": "732d077c8f9c3223a9f85301d71eb10e8d47f972eb1a68e6677f48cbee026692"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/down-left/04.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-left/frames/walk-down-left-04.png",
-        "sha256": "cfa52172b527bda1cfb986b95888f6dd8e58870b9dac91024765363a0e452897"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down-left/04.png",
+        "sha256": "e5fc1ef09e71a320597b253daab5560950c0cb3ce4f1c1aa30c74dc5d5c193c8"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/down-left/04.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/down-left/04.png",
+        "sha256": "a6bad38f2d04de72ef423bb263060422df1f4fd8dd34ec675510262ee1d81215"
       },
       "prompt": {
         "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-left/materials-r1.prompt.json",
         "sha256": "46ca6755bfb6436481249a57f7317e6f426ed1ecf40ca618aad4449d99885e7a"
-      }
+      },
+      "edited": false
     },
     {
       "id": "walk_south_west_4",
       "direction": "down-left",
       "animation": "walk_south_west",
       "frame": 4,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/down-left/05.png",
-        "sha256": "7993497dfa11a268aa3406a927edaf07ed45d0d8343d712c98b66ce72128ade4"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/down-left/05.png",
+        "sha256": "bbe3746493864eca7f567ed5c664c6ef5e272ef1813826b354bb70dd3cd8c30f"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/down-left/05.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-left/frames/walk-down-left-05.png",
-        "sha256": "0d1c9eb0421dbd0e9e511168f07fcd5255e8092f1fda003f25be5cd80b6c16d6"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down-left/05.png",
+        "sha256": "451191179ccbb24e0f5a74c3672187b2d211277b675f9242a78a415dc044f22e"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/down-left/05.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/down-left/05.png",
+        "sha256": "7993497dfa11a268aa3406a927edaf07ed45d0d8343d712c98b66ce72128ade4"
       },
       "prompt": {
         "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-left/materials-r1.prompt.json",
         "sha256": "46ca6755bfb6436481249a57f7317e6f426ed1ecf40ca618aad4449d99885e7a"
-      }
+      },
+      "edited": false
     },
     {
       "id": "walk_south_west_5",
       "direction": "down-left",
       "animation": "walk_south_west",
       "frame": 5,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/down-left/06.png",
-        "sha256": "2375bf0ebff687b677d98d5fc4dd44de56e1bbde421e8845d44fa2ed3c0c5c4d"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/down-left/06.png",
+        "sha256": "259c8297e21ef49cc22fc9927a63ee7888e79c7411288facb7652e8720edce75"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/down-left/06.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-left/frames/walk-down-left-06.png",
-        "sha256": "919116fc1b881521efafc24e2a14c2ff61016e9c816b03f6915913a81cbd68d3"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down-left/06.png",
+        "sha256": "7d9ceb03559e4556b1292aa1185df65aa4a8cbcbdcdb8718e49637289a45a3c8"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/down-left/06.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/down-left/06.png",
+        "sha256": "2375bf0ebff687b677d98d5fc4dd44de56e1bbde421e8845d44fa2ed3c0c5c4d"
       },
       "prompt": {
         "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-left/materials-r1.prompt.json",
         "sha256": "46ca6755bfb6436481249a57f7317e6f426ed1ecf40ca618aad4449d99885e7a"
-      }
+      },
+      "edited": false
     },
     {
       "id": "walk_south_west_6",
       "direction": "down-left",
       "animation": "walk_south_west",
       "frame": 6,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/down-left/07.png",
-        "sha256": "ad79fc6aadd4504ceab7ba513dcdff05b345a5028302f32dfea82ba2cf1644fb"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/down-left/07.png",
+        "sha256": "80043ae9746f9ee68d3dec9fc97374293c8b3972f024518beb91962062e7bd78"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/down-left/07.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-left/frames/walk-down-left-07.png",
-        "sha256": "e8f0301b35cdeacbc4b233db0deb0ecc9dc0e375c591331ea8d97a088f8f73b8"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down-left/07.png",
+        "sha256": "d4c0c7b077485d4b7364a83bd7512ac2a06279f7f65e806086f02578bbe4dd55"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/down-left/07.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/down-left/07.png",
+        "sha256": "ad79fc6aadd4504ceab7ba513dcdff05b345a5028302f32dfea82ba2cf1644fb"
       },
       "prompt": {
         "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-left/materials-r1.prompt.json",
         "sha256": "46ca6755bfb6436481249a57f7317e6f426ed1ecf40ca618aad4449d99885e7a"
-      }
+      },
+      "edited": false
     },
     {
       "id": "walk_south_west_7",
       "direction": "down-left",
       "animation": "walk_south_west",
       "frame": 7,
-      "review": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/palette-variants/blue/frames/down-left/08.png",
-        "sha256": "913224ed27bf4fd8e01bc4589e0e73f94944e22597799b041c00374f27edf612"
+      "approved": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/down-left/08.png",
+        "sha256": "6b5447a8dd4beba9d8e4d74bc468fdbd9e54f9323c50d0003e32ada4bc1f00d5"
       },
-      "source": "assets/art_source/player-fhd/walk-blue/frames/down-left/08.png",
-      "approved_pose": {
-        "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-left/frames/walk-down-left-08.png",
-        "sha256": "22a399622f2b745d66ac0413a49be629612ad0f0fc96be33c08f1f6997de9bb8"
+      "native_40": {
+        "path": "implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down-left/08.png",
+        "sha256": "1b9d5aeea1bd9f1ad6876890ad26c02526c9182e76e7c69786d5780129ab2c30"
+      },
+      "source": "assets/art_source/player-fhd/walk-blue-32px/2026-10-06/down-left/08.png",
+      "master": {
+        "path": "assets/art_source/player-fhd/walk-blue/frames/down-left/08.png",
+        "sha256": "913224ed27bf4fd8e01bc4589e0e73f94944e22597799b041c00374f27edf612"
       },
       "prompt": {
         "path": "implementation/fhd-player/pilots/2026-10-04/walk-down-left/materials-r1.prompt.json",
         "sha256": "46ca6755bfb6436481249a57f7317e6f426ed1ecf40ca618aad4449d99885e7a"
-      }
+      },
+      "edited": false
     }
   ]
 }

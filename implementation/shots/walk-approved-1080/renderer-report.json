@@ -1,0 +1,3060 @@
+{
+  "farmer": [
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_idle_south_0",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "idle_south",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/idle_south_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_idle_north_0",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "idle_north",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/idle_north_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_idle_west_0",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "idle_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/idle_west_0.png"
+    },
+    {
+      "body_height_px": 132,
+      "flipped": false,
+      "label": "day_idle_east_0",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "idle_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/idle_east_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_idle_south_east_0",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "idle_south_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/idle_south_east_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_idle_south_west_0",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "idle_south_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/idle_south_west_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_idle_north_east_0",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "idle_north_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/idle_north_east_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_idle_north_west_0",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "idle_north_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/idle_north_west_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_walk_south_0",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_south",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_walk_south_1",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_south",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_1.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_walk_south_2",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_south",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_2.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_walk_south_3",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_south",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_3.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_walk_south_4",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_south",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_4.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_walk_south_5",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_south",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_5.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_walk_south_6",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_south",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_6.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_walk_south_7",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_south",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_7.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_walk_south_8",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_south",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_walk_north_0",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_walk_north_1",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_1.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_walk_north_2",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_2.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_walk_north_3",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_3.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_walk_north_4",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_4.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_walk_north_5",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_5.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_walk_north_6",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_6.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_walk_north_7",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_7.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_walk_north_8",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_0.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_walk_west_0",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_west_0.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_walk_west_1",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_west_1.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_walk_west_2",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_west_2.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_walk_west_3",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_west_3.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_walk_west_4",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_west_4.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_walk_west_5",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_west_5.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_walk_west_6",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_west_6.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_walk_west_7",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_west_7.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_walk_west_8",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_west_0.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_walk_east_0",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_east_0.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_walk_east_1",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_east_1.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_walk_east_2",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_east_2.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_walk_east_3",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_east_3.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_walk_east_4",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_east_4.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_walk_east_5",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_east_5.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_walk_east_6",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_east_6.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_walk_east_7",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_east_7.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_walk_east_8",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_east_0.png"
+    },
+    {
+      "body_height_px": 120,
+      "flipped": false,
+      "label": "day_walk_south_east_0",
+      "lowest_pixel_vs_contact_px": -8,
+      "playing": "walk_south_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_east_0.png"
+    },
+    {
+      "body_height_px": 120,
+      "flipped": false,
+      "label": "day_walk_south_east_1",
+      "lowest_pixel_vs_contact_px": -8,
+      "playing": "walk_south_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_east_1.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_walk_south_east_2",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_south_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_east_2.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_walk_south_east_3",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_south_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_east_3.png"
+    },
+    {
+      "body_height_px": 120,
+      "flipped": false,
+      "label": "day_walk_south_east_4",
+      "lowest_pixel_vs_contact_px": -8,
+      "playing": "walk_south_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_east_4.png"
+    },
+    {
+      "body_height_px": 120,
+      "flipped": false,
+      "label": "day_walk_south_east_5",
+      "lowest_pixel_vs_contact_px": -8,
+      "playing": "walk_south_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_east_5.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_walk_south_east_6",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_south_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_east_6.png"
+    },
+    {
+      "body_height_px": 120,
+      "flipped": false,
+      "label": "day_walk_south_east_7",
+      "lowest_pixel_vs_contact_px": -8,
+      "playing": "walk_south_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_east_7.png"
+    },
+    {
+      "body_height_px": 120,
+      "flipped": false,
+      "label": "day_walk_south_east_8",
+      "lowest_pixel_vs_contact_px": -8,
+      "playing": "walk_south_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_east_0.png"
+    },
+    {
+      "body_height_px": 120,
+      "flipped": false,
+      "label": "day_walk_south_west_0",
+      "lowest_pixel_vs_contact_px": -8,
+      "playing": "walk_south_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_west_0.png"
+    },
+    {
+      "body_height_px": 120,
+      "flipped": false,
+      "label": "day_walk_south_west_1",
+      "lowest_pixel_vs_contact_px": -8,
+      "playing": "walk_south_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_west_1.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_walk_south_west_2",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_south_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_west_2.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_walk_south_west_3",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_south_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_west_3.png"
+    },
+    {
+      "body_height_px": 120,
+      "flipped": false,
+      "label": "day_walk_south_west_4",
+      "lowest_pixel_vs_contact_px": -8,
+      "playing": "walk_south_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_west_4.png"
+    },
+    {
+      "body_height_px": 120,
+      "flipped": false,
+      "label": "day_walk_south_west_5",
+      "lowest_pixel_vs_contact_px": -8,
+      "playing": "walk_south_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_west_5.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_walk_south_west_6",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_south_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_west_6.png"
+    },
+    {
+      "body_height_px": 120,
+      "flipped": false,
+      "label": "day_walk_south_west_7",
+      "lowest_pixel_vs_contact_px": -8,
+      "playing": "walk_south_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_west_7.png"
+    },
+    {
+      "body_height_px": 120,
+      "flipped": false,
+      "label": "day_walk_south_west_8",
+      "lowest_pixel_vs_contact_px": -8,
+      "playing": "walk_south_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_west_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_walk_north_east_0",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_east_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_walk_north_east_1",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_east_1.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_walk_north_east_2",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_north_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_east_2.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_walk_north_east_3",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_north_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_east_3.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_walk_north_east_4",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_east_4.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_walk_north_east_5",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_east_5.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_walk_north_east_6",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_north_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_east_6.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_walk_north_east_7",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_north_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_east_7.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_walk_north_east_8",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_east_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_walk_north_west_0",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_west_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_walk_north_west_1",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_west_1.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_walk_north_west_2",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_north_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_west_2.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_walk_north_west_3",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_north_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_west_3.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_walk_north_west_4",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_west_4.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_walk_north_west_5",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_west_5.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_walk_north_west_6",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_north_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_west_6.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_walk_north_west_7",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_north_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_west_7.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_walk_north_west_8",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_west_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_run_south_0",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_south",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_run_south_1",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_south",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_1.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_run_south_2",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_south",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_2.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_run_south_3",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_south",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_3.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_run_south_4",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_south",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_4.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_run_south_5",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_south",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_5.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_run_south_6",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_south",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_6.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_run_south_7",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_south",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_7.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_run_south_8",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_south",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_run_north_0",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_run_north_1",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_1.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_run_north_2",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_2.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_run_north_3",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_3.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_run_north_4",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_4.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_run_north_5",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_5.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_run_north_6",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_6.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_run_north_7",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_7.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_run_north_8",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_0.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_run_west_0",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_west_0.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_run_west_1",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_west_1.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_run_west_2",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_west_2.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_run_west_3",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_west_3.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_run_west_4",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_west_4.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_run_west_5",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_west_5.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_run_west_6",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_west_6.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_run_west_7",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_west_7.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_run_west_8",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_west_0.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_run_east_0",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_east_0.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_run_east_1",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_east_1.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_run_east_2",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_east_2.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_run_east_3",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_east_3.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_run_east_4",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_east_4.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_run_east_5",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_east_5.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_run_east_6",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_east_6.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_run_east_7",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_east_7.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_run_east_8",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_east_0.png"
+    },
+    {
+      "body_height_px": 120,
+      "flipped": false,
+      "label": "day_run_south_east_0",
+      "lowest_pixel_vs_contact_px": -8,
+      "playing": "walk_south_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_east_0.png"
+    },
+    {
+      "body_height_px": 120,
+      "flipped": false,
+      "label": "day_run_south_east_1",
+      "lowest_pixel_vs_contact_px": -8,
+      "playing": "walk_south_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_east_1.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_run_south_east_2",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_south_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_east_2.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_run_south_east_3",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_south_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_east_3.png"
+    },
+    {
+      "body_height_px": 120,
+      "flipped": false,
+      "label": "day_run_south_east_4",
+      "lowest_pixel_vs_contact_px": -8,
+      "playing": "walk_south_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_east_4.png"
+    },
+    {
+      "body_height_px": 120,
+      "flipped": false,
+      "label": "day_run_south_east_5",
+      "lowest_pixel_vs_contact_px": -8,
+      "playing": "walk_south_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_east_5.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_run_south_east_6",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_south_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_east_6.png"
+    },
+    {
+      "body_height_px": 120,
+      "flipped": false,
+      "label": "day_run_south_east_7",
+      "lowest_pixel_vs_contact_px": -8,
+      "playing": "walk_south_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_east_7.png"
+    },
+    {
+      "body_height_px": 120,
+      "flipped": false,
+      "label": "day_run_south_east_8",
+      "lowest_pixel_vs_contact_px": -8,
+      "playing": "walk_south_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_east_0.png"
+    },
+    {
+      "body_height_px": 120,
+      "flipped": false,
+      "label": "day_run_south_west_0",
+      "lowest_pixel_vs_contact_px": -8,
+      "playing": "walk_south_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_west_0.png"
+    },
+    {
+      "body_height_px": 120,
+      "flipped": false,
+      "label": "day_run_south_west_1",
+      "lowest_pixel_vs_contact_px": -8,
+      "playing": "walk_south_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_west_1.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_run_south_west_2",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_south_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_west_2.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_run_south_west_3",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_south_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_west_3.png"
+    },
+    {
+      "body_height_px": 120,
+      "flipped": false,
+      "label": "day_run_south_west_4",
+      "lowest_pixel_vs_contact_px": -8,
+      "playing": "walk_south_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_west_4.png"
+    },
+    {
+      "body_height_px": 120,
+      "flipped": false,
+      "label": "day_run_south_west_5",
+      "lowest_pixel_vs_contact_px": -8,
+      "playing": "walk_south_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_west_5.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_run_south_west_6",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_south_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_west_6.png"
+    },
+    {
+      "body_height_px": 120,
+      "flipped": false,
+      "label": "day_run_south_west_7",
+      "lowest_pixel_vs_contact_px": -8,
+      "playing": "walk_south_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_west_7.png"
+    },
+    {
+      "body_height_px": 120,
+      "flipped": false,
+      "label": "day_run_south_west_8",
+      "lowest_pixel_vs_contact_px": -8,
+      "playing": "walk_south_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_west_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_run_north_east_0",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_east_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_run_north_east_1",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_east_1.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_run_north_east_2",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_north_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_east_2.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_run_north_east_3",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_north_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_east_3.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_run_north_east_4",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_east_4.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_run_north_east_5",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_east_5.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_run_north_east_6",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_north_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_east_6.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_run_north_east_7",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_north_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_east_7.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_run_north_east_8",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_east_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_run_north_west_0",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_west_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_run_north_west_1",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_west_1.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_run_north_west_2",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_north_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_west_2.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_run_north_west_3",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_north_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_west_3.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_run_north_west_4",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_west_4.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_run_north_west_5",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_west_5.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_run_north_west_6",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_north_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_west_6.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_run_north_west_7",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_north_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_west_7.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_run_north_west_8",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_west_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_stop_start_00_idle",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "idle_south",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/idle_south_0.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_stop_start_01_walk_east",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_east_0.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_stop_start_02_walk_east",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_east_1.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_stop_start_03_walk_east",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_east_2.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_stop_start_04_walk_east",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_east_3.png"
+    },
+    {
+      "body_height_px": 132,
+      "flipped": false,
+      "label": "day_stop_start_05_idle_east",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "idle_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/idle_east_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_stop_start_06_walk_north_west",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_west_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_stop_start_07_walk_north_west",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_west_1.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_stop_start_08_walk_north_west",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_north_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_west_2.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_stop_start_09_idle_north_west",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "idle_north_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/idle_north_west_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_stop_start_10_walk_south",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_south",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_stop_start_11_walk_south",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_south",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_1.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "day_stop_start_12_walk_south",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_south",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_2.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "day_stop_start_13_idle_south",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "idle_south",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/idle_south_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_idle_south_0",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "idle_south",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/idle_south_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_idle_north_0",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "idle_north",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/idle_north_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_idle_west_0",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "idle_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/idle_west_0.png"
+    },
+    {
+      "body_height_px": 132,
+      "flipped": false,
+      "label": "night_idle_east_0",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "idle_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/idle_east_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_idle_south_east_0",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "idle_south_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/idle_south_east_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_idle_south_west_0",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "idle_south_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/idle_south_west_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_idle_north_east_0",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "idle_north_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/idle_north_east_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_idle_north_west_0",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "idle_north_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/idle_north_west_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_walk_south_0",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_south",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_walk_south_1",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_south",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_1.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_walk_south_2",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_south",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_2.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_walk_south_3",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_south",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_3.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_walk_south_4",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_south",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_4.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_walk_south_5",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_south",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_5.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_walk_south_6",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_south",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_6.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_walk_south_7",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_south",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_7.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_walk_south_8",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_south",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_walk_north_0",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_walk_north_1",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_1.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_walk_north_2",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_2.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_walk_north_3",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_3.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_walk_north_4",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_4.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_walk_north_5",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_5.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_walk_north_6",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_6.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_walk_north_7",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_7.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_walk_north_8",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_0.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_walk_west_0",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_west_0.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_walk_west_1",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_west_1.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_walk_west_2",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_west_2.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_walk_west_3",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_west_3.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_walk_west_4",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_west_4.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_walk_west_5",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_west_5.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_walk_west_6",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_west_6.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_walk_west_7",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_west_7.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_walk_west_8",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_west_0.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_walk_east_0",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_east_0.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_walk_east_1",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_east_1.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_walk_east_2",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_east_2.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_walk_east_3",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_east_3.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_walk_east_4",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_east_4.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_walk_east_5",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_east_5.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_walk_east_6",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_east_6.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_walk_east_7",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_east_7.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_walk_east_8",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_east_0.png"
+    },
+    {
+      "body_height_px": 120,
+      "flipped": false,
+      "label": "night_walk_south_east_0",
+      "lowest_pixel_vs_contact_px": -8,
+      "playing": "walk_south_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_east_0.png"
+    },
+    {
+      "body_height_px": 120,
+      "flipped": false,
+      "label": "night_walk_south_east_1",
+      "lowest_pixel_vs_contact_px": -8,
+      "playing": "walk_south_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_east_1.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_walk_south_east_2",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_south_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_east_2.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_walk_south_east_3",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_south_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_east_3.png"
+    },
+    {
+      "body_height_px": 120,
+      "flipped": false,
+      "label": "night_walk_south_east_4",
+      "lowest_pixel_vs_contact_px": -8,
+      "playing": "walk_south_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_east_4.png"
+    },
+    {
+      "body_height_px": 120,
+      "flipped": false,
+      "label": "night_walk_south_east_5",
+      "lowest_pixel_vs_contact_px": -8,
+      "playing": "walk_south_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_east_5.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_walk_south_east_6",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_south_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_east_6.png"
+    },
+    {
+      "body_height_px": 120,
+      "flipped": false,
+      "label": "night_walk_south_east_7",
+      "lowest_pixel_vs_contact_px": -8,
+      "playing": "walk_south_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_east_7.png"
+    },
+    {
+      "body_height_px": 120,
+      "flipped": false,
+      "label": "night_walk_south_east_8",
+      "lowest_pixel_vs_contact_px": -8,
+      "playing": "walk_south_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_east_0.png"
+    },
+    {
+      "body_height_px": 120,
+      "flipped": false,
+      "label": "night_walk_south_west_0",
+      "lowest_pixel_vs_contact_px": -8,
+      "playing": "walk_south_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_west_0.png"
+    },
+    {
+      "body_height_px": 120,
+      "flipped": false,
+      "label": "night_walk_south_west_1",
+      "lowest_pixel_vs_contact_px": -8,
+      "playing": "walk_south_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_west_1.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_walk_south_west_2",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_south_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_west_2.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_walk_south_west_3",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_south_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_west_3.png"
+    },
+    {
+      "body_height_px": 120,
+      "flipped": false,
+      "label": "night_walk_south_west_4",
+      "lowest_pixel_vs_contact_px": -8,
+      "playing": "walk_south_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_west_4.png"
+    },
+    {
+      "body_height_px": 120,
+      "flipped": false,
+      "label": "night_walk_south_west_5",
+      "lowest_pixel_vs_contact_px": -8,
+      "playing": "walk_south_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_west_5.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_walk_south_west_6",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_south_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_west_6.png"
+    },
+    {
+      "body_height_px": 120,
+      "flipped": false,
+      "label": "night_walk_south_west_7",
+      "lowest_pixel_vs_contact_px": -8,
+      "playing": "walk_south_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_west_7.png"
+    },
+    {
+      "body_height_px": 120,
+      "flipped": false,
+      "label": "night_walk_south_west_8",
+      "lowest_pixel_vs_contact_px": -8,
+      "playing": "walk_south_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_west_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_walk_north_east_0",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_east_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_walk_north_east_1",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_east_1.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_walk_north_east_2",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_north_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_east_2.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_walk_north_east_3",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_north_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_east_3.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_walk_north_east_4",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_east_4.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_walk_north_east_5",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_east_5.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_walk_north_east_6",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_north_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_east_6.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_walk_north_east_7",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_north_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_east_7.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_walk_north_east_8",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_east_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_walk_north_west_0",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_west_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_walk_north_west_1",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_west_1.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_walk_north_west_2",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_north_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_west_2.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_walk_north_west_3",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_north_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_west_3.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_walk_north_west_4",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_west_4.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_walk_north_west_5",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_west_5.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_walk_north_west_6",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_north_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_west_6.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_walk_north_west_7",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_north_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_west_7.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_walk_north_west_8",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_west_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_run_south_0",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_south",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_run_south_1",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_south",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_1.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_run_south_2",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_south",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_2.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_run_south_3",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_south",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_3.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_run_south_4",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_south",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_4.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_run_south_5",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_south",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_5.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_run_south_6",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_south",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_6.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_run_south_7",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_south",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_7.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_run_south_8",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_south",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_run_north_0",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_run_north_1",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_1.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_run_north_2",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_2.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_run_north_3",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_3.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_run_north_4",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_4.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_run_north_5",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_5.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_run_north_6",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_6.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_run_north_7",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_7.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_run_north_8",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_0.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_run_west_0",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_west_0.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_run_west_1",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_west_1.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_run_west_2",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_west_2.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_run_west_3",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_west_3.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_run_west_4",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_west_4.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_run_west_5",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_west_5.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_run_west_6",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_west_6.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_run_west_7",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_west_7.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_run_west_8",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_west_0.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_run_east_0",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_east_0.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_run_east_1",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_east_1.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_run_east_2",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_east_2.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_run_east_3",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_east_3.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_run_east_4",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_east_4.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_run_east_5",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_east_5.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_run_east_6",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_east_6.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_run_east_7",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_east_7.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_run_east_8",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_east_0.png"
+    },
+    {
+      "body_height_px": 120,
+      "flipped": false,
+      "label": "night_run_south_east_0",
+      "lowest_pixel_vs_contact_px": -8,
+      "playing": "walk_south_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_east_0.png"
+    },
+    {
+      "body_height_px": 120,
+      "flipped": false,
+      "label": "night_run_south_east_1",
+      "lowest_pixel_vs_contact_px": -8,
+      "playing": "walk_south_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_east_1.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_run_south_east_2",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_south_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_east_2.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_run_south_east_3",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_south_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_east_3.png"
+    },
+    {
+      "body_height_px": 120,
+      "flipped": false,
+      "label": "night_run_south_east_4",
+      "lowest_pixel_vs_contact_px": -8,
+      "playing": "walk_south_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_east_4.png"
+    },
+    {
+      "body_height_px": 120,
+      "flipped": false,
+      "label": "night_run_south_east_5",
+      "lowest_pixel_vs_contact_px": -8,
+      "playing": "walk_south_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_east_5.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_run_south_east_6",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_south_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_east_6.png"
+    },
+    {
+      "body_height_px": 120,
+      "flipped": false,
+      "label": "night_run_south_east_7",
+      "lowest_pixel_vs_contact_px": -8,
+      "playing": "walk_south_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_east_7.png"
+    },
+    {
+      "body_height_px": 120,
+      "flipped": false,
+      "label": "night_run_south_east_8",
+      "lowest_pixel_vs_contact_px": -8,
+      "playing": "walk_south_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_east_0.png"
+    },
+    {
+      "body_height_px": 120,
+      "flipped": false,
+      "label": "night_run_south_west_0",
+      "lowest_pixel_vs_contact_px": -8,
+      "playing": "walk_south_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_west_0.png"
+    },
+    {
+      "body_height_px": 120,
+      "flipped": false,
+      "label": "night_run_south_west_1",
+      "lowest_pixel_vs_contact_px": -8,
+      "playing": "walk_south_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_west_1.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_run_south_west_2",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_south_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_west_2.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_run_south_west_3",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_south_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_west_3.png"
+    },
+    {
+      "body_height_px": 120,
+      "flipped": false,
+      "label": "night_run_south_west_4",
+      "lowest_pixel_vs_contact_px": -8,
+      "playing": "walk_south_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_west_4.png"
+    },
+    {
+      "body_height_px": 120,
+      "flipped": false,
+      "label": "night_run_south_west_5",
+      "lowest_pixel_vs_contact_px": -8,
+      "playing": "walk_south_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_west_5.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_run_south_west_6",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_south_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_west_6.png"
+    },
+    {
+      "body_height_px": 120,
+      "flipped": false,
+      "label": "night_run_south_west_7",
+      "lowest_pixel_vs_contact_px": -8,
+      "playing": "walk_south_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_west_7.png"
+    },
+    {
+      "body_height_px": 120,
+      "flipped": false,
+      "label": "night_run_south_west_8",
+      "lowest_pixel_vs_contact_px": -8,
+      "playing": "walk_south_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_west_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_run_north_east_0",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_east_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_run_north_east_1",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_east_1.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_run_north_east_2",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_north_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_east_2.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_run_north_east_3",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_north_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_east_3.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_run_north_east_4",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_east_4.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_run_north_east_5",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_east_5.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_run_north_east_6",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_north_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_east_6.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_run_north_east_7",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_north_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_east_7.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_run_north_east_8",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_east_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_run_north_west_0",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_west_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_run_north_west_1",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_west_1.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_run_north_west_2",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_north_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_west_2.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_run_north_west_3",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_north_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_west_3.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_run_north_west_4",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_west_4.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_run_north_west_5",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_west_5.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_run_north_west_6",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_north_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_west_6.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_run_north_west_7",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_north_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_west_7.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_run_north_west_8",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_west_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_stop_start_00_idle",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "idle_south",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/idle_south_0.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_stop_start_01_walk_east",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_east_0.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_stop_start_02_walk_east",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_east_1.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_stop_start_03_walk_east",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_east_2.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_stop_start_04_walk_east",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_east_3.png"
+    },
+    {
+      "body_height_px": 132,
+      "flipped": false,
+      "label": "night_stop_start_05_idle_east",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "idle_east",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/idle_east_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_stop_start_06_walk_north_west",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_west_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_stop_start_07_walk_north_west",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_north_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_west_1.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_stop_start_08_walk_north_west",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_north_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_north_west_2.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_stop_start_09_idle_north_west",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "idle_north_west",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/idle_north_west_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_stop_start_10_walk_south",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_south",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_0.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_stop_start_11_walk_south",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "walk_south",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_1.png"
+    },
+    {
+      "body_height_px": 124,
+      "flipped": false,
+      "label": "night_stop_start_12_walk_south",
+      "lowest_pixel_vs_contact_px": -4,
+      "playing": "walk_south",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/walk_south_2.png"
+    },
+    {
+      "body_height_px": 128,
+      "flipped": false,
+      "label": "night_stop_start_13_idle_south",
+      "lowest_pixel_vs_contact_px": 0,
+      "playing": "idle_south",
+      "scale": 0.5,
+      "texture": "res://sprites/actors/idle_south_0.png"
+    }
+  ],
+  "frames": [
+    {
+      "caption": "32px farmer walking east / day / 1920x1080",
+      "name": "day_walk_east_full"
+    },
+    {
+      "caption": "32px farmer walking east / night / 1920x1080",
+      "name": "night_walk_east_full"
+    }
+  ],
+  "sheets": [
+    {
+      "columns": 8,
+      "name": "farmer_idle_day",
+      "rows": 1
+    },
+    {
+      "columns": 9,
+      "name": "farmer_walk_day",
+      "rows": 8
+    },
+    {
+      "columns": 9,
+      "name": "farmer_run_day",
+      "rows": 8
+    },
+    {
+      "columns": 14,
+      "name": "farmer_stop_start_day",
+      "rows": 1
+    },
+    {
+      "columns": 8,
+      "name": "farmer_idle_night",
+      "rows": 1
+    },
+    {
+      "columns": 9,
+      "name": "farmer_walk_night",
+      "rows": 8
+    },
+    {
+      "columns": 9,
+      "name": "farmer_run_night",
+      "rows": 8
+    },
+    {
+      "columns": 14,
+      "name": "farmer_stop_start_night",
+      "rows": 1
+    }
+  ],
+  "summary": {
+    "idle": {
+      "count": 24,
+      "height_max": 132,
+      "height_min": 128,
+      "low_max": 0,
+      "low_min": 0
+    },
+    "walk": {
+      "count": 308,
+      "height_max": 128,
+      "height_min": 120,
+      "low_max": 0,
+      "low_min": -8
+    }
+  }
+}

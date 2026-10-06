@@ -12341,3 +12341,65 @@ Validation:128 PNG hashes and exact2x scaling/binary alpha verified;144 actual
 FHD crops,576 Godot assertions /0 failures; four8-frame100ms GIFs. Final pair
 and all-eight page opened, browser-review.png saved. Integration remains with
 Claude; concurrent in-progress integration files were preserved.
+
+## 2026-10-06 — The final approved eight-direction walk in the game
+
+Executed implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/
+CLAUDE-APPROVED-WALK-PROMPT.txt, the latest handoff. It arrived while the
+integration of walk-up-right-low-step's prompt was underway (promoted,
+imported and reviewed, not committed); that work was continued with the source
+switched to the final pack, as the handoff asks. The final pack is the
+approved 32px walk: up-right phases 1, 3, 4, 5, 7 and 8 re-footed with lower
+boots ("excelente") and three exact whole-canvas mirrors - left of right,
+down-right of down-left and up-left of the NEW up-right. The old up-left still
+in walk-up-right-low-step is used nowhere.
+
+**The source chain moved to the approved frames.** promote_blue_walk.py had
+rebuilt the walk from the 2026-10-05 selection and full-detail masters; it now
+checks all 128 exports of the final pack against its contract.json, traces
+each pose to the approved low-step frame it copies (up-left: flips), checks
+the three mirror pairs in every phase at both sizes, copies the 64 runtime-80
+frames to versioned owned sources (assets/art_source/player-fhd/
+walk-blue-32px/2026-10-06/) and writes their manifest entries. The masters stay
+where they were, still hash-frozen; each entry references its approved frame,
+the final pack contract, the owner's approval record and the master it
+descends from. `detail_wh` [40, 40] stays: on this art, already 2x2 blocks, it
+changes no pixel (checked on all 64), so the density guard holds without a
+second reduction. The promoter's check - verify's "FHD player sources" -
+requires every generated walk PNG to be RGBA pixel-identical to its approved
+frame, in phase order (01 is frame 0), at 0.1 s, with the blue garment inside
+the twelve approved colours, and the three mirror pairs exact on the generated
+PNGs. Refused when tried: the old up-left (as game frame and as owned source),
+the 2026-10-05 walk and the up-right from before the lower boots. Mapping:
+down/right/up/left/down-right/up-right/up-left/down-left to walk_south/east/
+north/west/south_east/north_east/north_west/south_west, each folder bound as
+is - nothing is flipped twice. promote_idle.py's walk baseline keeps its 128
+frozen master/review hashes and checks the runtime walks only for their 32px
+detail, leaving their identity to the walk promoter.
+
+Against the last commit import_art changed exactly 30 frames (left 8,
+down-right 8, up-right 6, up-left 8); the other 34 walk frames and all 24 idle
+slots are byte-identical and RasterArt/PlayerFrames come out unchanged. A
+second promoter run leaves manifest, ownership and contract byte-identical; a
+second import writes nothing.
+
+Renderer review at 1920x1080 (walk-approved-integration/capture.gd, which
+reuses the 32px review's farmer capture with a ninth column for the 8 -> 1
+wrap): 1,798 checks, 0 failed; implementation/shots/walk-approved-1080/ has
+idle, walk and run in eight directions by day and night, stop/start strips and
+GIFs at 0.1 s and 0.07 s. Measured body: north 128 px on the contact; south,
+east, west, north-east, north-west 124-128 px, lowest pixel 0-4 px above it
+mid-stride (north-west now exactly as north-east); south-east and south-west
+120-124 px, 4-8 px above it through the whole cycle - the approved drawings'
+own registration (down-right mirrors down-left), kept since the task forbids
+repainting or re-registering. Idle stays 128-132 px with both feet on the
+contact; the wrap shows phase 1 again at the same size in every direction.
+
+Files: implementation/fhd-player/pilots/2026-10-04/{palette-variants/
+promote_blue_walk.py, palette-variants/runtime-blue-walk-contract.json,
+idle-grounded-review/promote_idle.py, farmer_density.py},
+assets/art_source/manifest.json, assets/art_source/player-fhd/walk-blue-32px/
+(64 sources), 30 sprites/actors/walk_*.png, farmer32-integration/capture.gd
+(output folder and row length as variables), walk-approved-integration/
+(README, capture.gd, playback.py), implementation/shots/walk-approved-1080/.
+Verify: **55 passed, 0 skipped, 0 failed** in 516 s; sim 1242708873 and data 2015186086 unchanged. An earlier full run, made while other Godot captures were running on the machine, failed perf (every timing about 3x) and one timing-sensitive input case (a wall still mending just after release); both passed on this rerun on a quiet machine, and nothing they measure changed in between.
