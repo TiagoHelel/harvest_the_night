@@ -1,0 +1,15 @@
+Work in C:\Users\Helel\Documents\repos\harvest_the_night.
+
+The user selected the coarser approximately16-pixel-tall character style from this preview:
+C:\Users\Helel\Documents\repos\harvest_the_night\implementation\fhd-player\pilots\2026-10-04\idle-grounded-review\resolution-review\coarse-4x.gif
+
+The actual transparent PNG handoff is already exported here:
+C:\Users\Helel\Documents\repos\harvest_the_night\implementation\fhd-player\pilots\2026-10-04\idle-grounded-review\resolution-review\16px-assets
+
+Read that folder's contract.json. It contains64 walking frames (8 directions x8 frames) and8 separate grounded idle poses, with source/output hashes. This is16 pixels of character artwork height, NOT a16x16 cell and NOT16 colors. native-20 uses20x20 cells/pivot(10,18). Use runtime-80 for the existing game geometry: those images are integer4x NEAREST expansions of native-20, on80x80 cells/pivot(40,72)/draw_scale0.5. Keep the character's existing on-screen height of about128 pixels at1920x1080. Do not apply another size multiplier.
+
+Integrate the runtime-80 PNGs via the reproducible source manifest/importer and update the affected contracts/promoters/checks to own the new resolution variant. Preserve original high-detail source PNGs. Do not let the existing blue promoter restore the old high-detail images. Keep FHD1920x1080 as the default display resolution and preserve the current viewport, camera, collisions, movement speed, frame order, eight-frame10FPS walk and existing blue palette. Running currently reuses the walking art faster; preserve that behavior. Fill idle slots from the corresponding independent neutral idle pose, never from a lifted walking phase.
+
+Do not extract sprites from the GIF: it contains rendered grass/lighting and quantized preview colors. Use the exported transparent PNGs. Do not use diagonal-candidate or diagonal-rebuild-v1: those attempts were rejected or interrupted, and their walking motion has no user approval. This handoff reproduces the selected coarser detail; it does not repair the known diagonal gait problems.
+
+No new AI generation is needed for this pixel-density conversion. Keep unrelated user changes, including project.godot edits, intact. Read repository instructions, validate the raster/import contracts, run the required checks with Godot at C:\Users\Helel\Documents\godot, and compare actual FHD renderer day/night playback before finishing. Show the result and report remaining motion issues honestly.

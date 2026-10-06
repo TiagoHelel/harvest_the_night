@@ -1,0 +1,12 @@
+{
+  "native_character_height_px": [
+    64,
+    32,
+    16
+  ],
+  "physical_display_height_px": 128,
+  "sampling": "NEAREST downsample of actual FHD crop by2/4 then NEAREST restore",
+  "frame_count": 24,
+  "milliseconds_per_frame": 100,
+  "runtime_sprites_changed": false
+}

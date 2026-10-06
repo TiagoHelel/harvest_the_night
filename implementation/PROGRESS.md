@@ -11977,3 +11977,35 @@ idle-grounded-review/index.html?v=grounded-r2#diagonal-review.
 
 No queue mutation, unrelated project.godot staging, push or automation.
 Idle is integrated; diagonal walking replacement awaits user visual review.
+
+
+## 2026-10-05 — selected16px character detail and Claude handoff
+
+The user rejected the preceding diagonal candidates for missing rear pockets
+and requested fresh cycles. A new standing identity and diagnostic paired
+colored-leg trials were generated under idle-grounded-review/diagonal-rebuild-v1,
+but rebuilding was interrupted before final extraction/motion approval.
+They are NOT accepted walking sources and must not be integrated.
+
+The user then requested a coarser pixel-density comparison alongside actual
+FHD day/night playback and selected the approximately16px character look.
+resolution-review/coarse-4x.gif derives from unchanged production renderer
+captures by NEAREST downsample4x and integer enlargement at identical screen
+size and24x100ms timing. The32px comparison and all-three-level montage are
+also saved. This is sampling loss, not AI-authored new movement or16 colors.
+
+Exported64 approved walking frames and8 independent grounded idle poses to
+resolution-review/16px-assets/: native20x20/pivot(10,18), and4x expanded80x80
+runtime cells/pivot(40,72)/draw_scale0.5. About16 authored body pixels still
+occupy about128 physical pixels at1920x1080. Exact-source colors and binary
+alpha are preserved; all144 PNGs reproduce byte-identically on a second run.
+Source/output SHA256, geometry and frame timings are in contract.json.
+192 accepted walking hashes and all runtime PNGs remain unchanged.
+
+CLAUDE-16PX-PROMPT.txt gives complete integration instructions, source paths,
+FHD/placement requirements and source-owned idle policy. It excludes rejected
+or interrupted diagonal trials and explains that coarse detail does not repair
+gait defects. Integration is delegated by the user via this handoff; no game
+sprites or runtime recipes were changed here. Existing runtime verification
+remains the prior recorded54-gate pass plus successful1017-case input retry;
+no new engine behavior changed. No queue mutation, push or automation.

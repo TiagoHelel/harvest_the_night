@@ -1,0 +1,1546 @@
+{
+  "date": "2026-10-05",
+  "selection": "User chose the approximately16px character detail test",
+  "method": "NEAREST80x80 to20x20, then integer4x NEAREST to80x80",
+  "source_body_height_px": 64,
+  "chosen_body_height_px": 16,
+  "physical_body_height_at_FHD_px": 128,
+  "native_canvas_wh": [
+    20,
+    20
+  ],
+  "native_pivot_xy": [
+    10,
+    18
+  ],
+  "runtime_canvas_wh": [
+    80,
+    80
+  ],
+  "runtime_pivot_xy": [
+    40,
+    72
+  ],
+  "runtime_draw_scale": 0.5,
+  "walk_frame_count_per_direction": 8,
+  "walk_seconds": 0.1,
+  "idle_policy": "Independent neutral idle; never hold a walking frame as idle",
+  "palette_policy": "Exact existing source colors; no recoloring or dithering",
+  "runtime_integrated": false,
+  "walking_geometry_changed": false,
+  "rejected_diagonal_candidates_used": false,
+  "assets": [
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/down/01.png",
+      "source_sha256": "714b0bee6d4a29560ed45f018d1697f63a9c8f6ec9618600d48a8d8c1996caaf",
+      "name": "walk/down/01.png",
+      "native_content_bounds": [
+        6,
+        2,
+        14,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/down/01.png",
+          "sha256": "03455c5d7dc97b94a72a315a554501e302419923db2ff017754dea07db11005d"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/down/01.png",
+          "sha256": "b783a096cf8205b9ce19aba99a539e839f7e0fdb4e64796538b96f43f736c9c7"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/down/02.png",
+      "source_sha256": "61b58d0ff19f9021fd5ae353760d02fddef284f4629e0dc016841abb0e7fc0db",
+      "name": "walk/down/02.png",
+      "native_content_bounds": [
+        6,
+        2,
+        14,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/down/02.png",
+          "sha256": "c28b00a082fe8e0fded6861de23c3e686e6e69b89250a0049741d4d15c450e4a"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/down/02.png",
+          "sha256": "d12db032d47c8d23a85772da2f66fb3de66834290a2cf149a3e9e4fe56e5091b"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/down/03.png",
+      "source_sha256": "e651a739a552e2983bb7e30a735d81cb46d6adceac6ed1cd169da89c313839f3",
+      "name": "walk/down/03.png",
+      "native_content_bounds": [
+        6,
+        2,
+        14,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/down/03.png",
+          "sha256": "e2474a5f601691239d91d219581c4413c6bccf2794b366001d24077b35dec95a"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/down/03.png",
+          "sha256": "5652e6f5a3d293104c4bea8be4ad6b090ad30989884d4602257d0240948aeaac"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/down/04.png",
+      "source_sha256": "7493a35ae58c14c08a0ca5600755515a71544242c1a2ef1e85897bcc8d605d5d",
+      "name": "walk/down/04.png",
+      "native_content_bounds": [
+        6,
+        2,
+        14,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/down/04.png",
+          "sha256": "c953284ff399395fd21c2b01b7e747daabf8f34e643a74e4d9fbd270c55e8961"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/down/04.png",
+          "sha256": "009c8910cf20b4d90a14340099efb8c0d7f07d3431247d83f8f0358d5ec9f022"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/down/05.png",
+      "source_sha256": "63163f9ccb75e27a3e18a2d218d95056e310f8d28882a41fb6ebc8ebea501014",
+      "name": "walk/down/05.png",
+      "native_content_bounds": [
+        6,
+        2,
+        14,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/down/05.png",
+          "sha256": "c14956da098bd63d39c07e8dc4585c421f14ff28403c457c3dabe773a0813580"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/down/05.png",
+          "sha256": "034162b3023320c6cca6430c663433c28cb4113add5c6bdc4f3a30e6bc93f8be"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/down/06.png",
+      "source_sha256": "610933327627ec1c87dece11803f49886098790f91e65cc7e2a89c08b699e5c9",
+      "name": "walk/down/06.png",
+      "native_content_bounds": [
+        6,
+        2,
+        14,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/down/06.png",
+          "sha256": "7979a1ef1dc8a3c6a8b9d6ae822fb854d9915d45a1751ed6beeaaae0c452c1dd"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/down/06.png",
+          "sha256": "a12cbe687772801a2e7a6a388fecb4550ed13936164d05de6350cf7860d117e1"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/down/07.png",
+      "source_sha256": "2c2ab1aaffafee82182df05f604ddf305d44b4a39559539c7dbebdba1eca3c52",
+      "name": "walk/down/07.png",
+      "native_content_bounds": [
+        6,
+        2,
+        14,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/down/07.png",
+          "sha256": "65348e7c6376b5c50bf36e82aa3bdfbda92834e32a872f1efe3db02f41d82810"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/down/07.png",
+          "sha256": "c53eac12682436500276e5c2cffe05c6713fe791e19d56568cc770f2f9aab449"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/down/08.png",
+      "source_sha256": "afe71c2721efee0fa81c95ac5c4328d5c2fe5e1586e8a4f2ff6aa32e0bd5d665",
+      "name": "walk/down/08.png",
+      "native_content_bounds": [
+        6,
+        2,
+        14,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/down/08.png",
+          "sha256": "24fb42199fbd2ed62eae0de92b0b9f92d22e7db5e6f9595c0519dd2c9f916751"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/down/08.png",
+          "sha256": "6b092b9da5fae11d59fb5f5287aa9c4aaf40ed32845508b0eba0d9a4b85ffe3a"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/idle-blue-grounded/frames/down.png",
+      "source_sha256": "cd0aaf7ef1af1cddd989b45f1c8d11c1f2db8e26687246b98dcd07a399720ea3",
+      "name": "idle/down.png",
+      "native_content_bounds": [
+        6,
+        2,
+        14,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/idle/down.png",
+          "sha256": "64a22abf689755e5e4ef522b4dd572b85442cf6a5b1714de9cf8fdeac5f70b88"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/idle/down.png",
+          "sha256": "130edcfe244b39d434488be44ea68d6a1aa5c8fb8a4bdf0d3d81e114e6bc1f5c"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/right/01.png",
+      "source_sha256": "a925d8d459d40d0de5a1bb9a59962bdbf5d2839490de1ccb968d634206ef7cd9",
+      "name": "walk/right/01.png",
+      "native_content_bounds": [
+        6,
+        2,
+        14,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/right/01.png",
+          "sha256": "d057188904993bba53f128248640a893b9318910355d65aa5f8dd45aa61f5e4b"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/right/01.png",
+          "sha256": "b61ddeb6b3c85fd3f436c2b05304616ac2099a442798791a32893975abbb5b8e"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/right/02.png",
+      "source_sha256": "728de94283d25406f0cc5c4332dfe263c1161bda676259eacb78772864acd60f",
+      "name": "walk/right/02.png",
+      "native_content_bounds": [
+        6,
+        2,
+        14,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/right/02.png",
+          "sha256": "cde618e9d6947df8b28ed0723ed6de3de8d15954a19cdb9426fe55b732c26594"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/right/02.png",
+          "sha256": "2d317e2c7b7012f8a25e75d4c83cd3b635fd96de8e0fa40c746c6d947ef60ce6"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/right/03.png",
+      "source_sha256": "d167e791e0ebcdbc400279c09b86a3e0996983325114db900c57c5ba1529ddab",
+      "name": "walk/right/03.png",
+      "native_content_bounds": [
+        6,
+        2,
+        13,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/right/03.png",
+          "sha256": "81bd4d2f22f95aae99f3ae3a1fba8853faf1dce514a5e8957442b19d2bf8da19"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/right/03.png",
+          "sha256": "937078920ee29ceb9e1480b4a8c42d3d2ff5fa1444541c1959671260ecbedd0a"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/right/04.png",
+      "source_sha256": "bef96f5af9119633be0240b80812d3215f229aaae8abf67a782015a59d3bcd26",
+      "name": "walk/right/04.png",
+      "native_content_bounds": [
+        6,
+        2,
+        15,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/right/04.png",
+          "sha256": "37fa910a719dbf040d5e218f68695c1ec1fa278011bfe5d78dab353704b0ae4d"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/right/04.png",
+          "sha256": "238a58672337bb15d384d2dbe6af25f1b5d56f1c47f4a939639ffa2bfa569186"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/right/05.png",
+      "source_sha256": "d4e5379d453e40ad9764ba7538b6151bf9d4045225ec5c02c93a7bc2639a1be8",
+      "name": "walk/right/05.png",
+      "native_content_bounds": [
+        5,
+        2,
+        14,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/right/05.png",
+          "sha256": "9b934d791d1b4cc22ba7f42a47977c159891f40945e82102a0e095970421ebed"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/right/05.png",
+          "sha256": "1ff8d622a50adc1e7567527c94bb667552033a206f9079c12033b1553ec2c427"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/right/06.png",
+      "source_sha256": "9c276c1aa3412b37bcce2ce6788a110a1adfdfccdf9b7b859ca695b8203c173f",
+      "name": "walk/right/06.png",
+      "native_content_bounds": [
+        6,
+        2,
+        14,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/right/06.png",
+          "sha256": "6630227e164733cd6607754f5b7776402cb47ae1a4f5a434278bcd66af5e68b7"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/right/06.png",
+          "sha256": "ed703a02913222695af1228f2531345e64ad42ecd5bbd63a224af57b2d6b3d6f"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/right/07.png",
+      "source_sha256": "90167f5e1214db065146c5c67df54d00deb93f663de69d0dcedc83a616b0bf15",
+      "name": "walk/right/07.png",
+      "native_content_bounds": [
+        6,
+        2,
+        14,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/right/07.png",
+          "sha256": "81cae384dd0fd76156e0fea97aa14723d07634adade8043894c01a8b040ae1a1"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/right/07.png",
+          "sha256": "90f4f7930f7acd22247fc499d8cc81d41ff1ec661811f5eb423b76b93da3861d"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/right/08.png",
+      "source_sha256": "e218e679dfbe74eb57e1e75f423dcfb7f1e9f7d9be9d43b4db2872f80bb7f4dc",
+      "name": "walk/right/08.png",
+      "native_content_bounds": [
+        5,
+        2,
+        15,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/right/08.png",
+          "sha256": "5f9d0c6e8845c7ae81e25ccea1989040c4ec1fc5756cdf3d361ca0e9c714d496"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/right/08.png",
+          "sha256": "c436d4366b651a90be9fecbfbad5049fa09ce11eb8ae17dd38db11db9f808237"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/idle-blue-grounded/frames/right.png",
+      "source_sha256": "09cca790c8db70968ab10b571d149fd0de5d21f601f2dd2ed457ff95cbe96d03",
+      "name": "idle/right.png",
+      "native_content_bounds": [
+        6,
+        2,
+        14,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/idle/right.png",
+          "sha256": "1eace1239edb78f7290eaf716a0e5150131c15ac0ff91ca6f695e70797d850b9"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/idle/right.png",
+          "sha256": "85b1880d6f063bc28af200c84b17a7f00456eb970076bccc2592f5336153c11a"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/up/01.png",
+      "source_sha256": "36b4b5f9ab9d1c652a121bfb39cacd5654ed9bc3e82b5d1a30ab8e5d167b76ee",
+      "name": "walk/up/01.png",
+      "native_content_bounds": [
+        6,
+        2,
+        14,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/up/01.png",
+          "sha256": "96d2210bd1eebf9ca1adb99cb93c84f8f5f4c7e861c4578c5c2c86036eb9dd0d"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/up/01.png",
+          "sha256": "bd2b48c5f4369e17371d48568092e88a1c05cf16d9846d7e4ec83898fe7dc6cc"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/up/02.png",
+      "source_sha256": "e1e9ac2f2e85a0f977f62e3c87bd3d572e87ca345fec8ce7baa51f883d5b88d3",
+      "name": "walk/up/02.png",
+      "native_content_bounds": [
+        6,
+        2,
+        14,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/up/02.png",
+          "sha256": "e253d9fce3d408200cd2c6b4251f35c2429aea63039e67468d9839703c4231bd"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/up/02.png",
+          "sha256": "ac2a316be8d03b9b504dbe8e3f39cf74b1d387a2bc4ff938e42ceec29d06ca51"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/up/03.png",
+      "source_sha256": "c6b026d7f0bc14ce85b761e971505cb03d2261854a189752e2b2f54572129710",
+      "name": "walk/up/03.png",
+      "native_content_bounds": [
+        6,
+        2,
+        14,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/up/03.png",
+          "sha256": "963d8b849144d7beb42c8a617a7faf1aa18d9cb16938bb4fd262b62232735c03"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/up/03.png",
+          "sha256": "55dbce27d87e4e575da6539b3152751710e527aefee752e7b8cef61010efa152"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/up/04.png",
+      "source_sha256": "a79e9b21e5a228d02332d6c72d3fdaa787b9678e2cf6931e34a8be61f18d8dda",
+      "name": "walk/up/04.png",
+      "native_content_bounds": [
+        6,
+        2,
+        14,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/up/04.png",
+          "sha256": "aeb3348074f408faded240c8a5e558ef74c41fb803d787550b4aaea2ecc496f8"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/up/04.png",
+          "sha256": "203463c9d43b9a587a40a451fd01d796d5a0463be3f2ba4462fe278fd8595f73"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/up/05.png",
+      "source_sha256": "2e310ed0899735460abca6883dfc1c7eb7d3e6ac85845e41e13c2a6c7af43182",
+      "name": "walk/up/05.png",
+      "native_content_bounds": [
+        6,
+        2,
+        14,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/up/05.png",
+          "sha256": "3b31f75236fdc8a1d25c42fc51752c7c2daac48ee46f3be3b002d864ad2b1b29"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/up/05.png",
+          "sha256": "4b3dc61b75ecf8ff1ebfa0341266e9c6c9407404ec8bd2342c0e802d44e3c7b3"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/up/06.png",
+      "source_sha256": "0cdc8420aab64f156afd61bbb69e00d4e8bbc71d95f3f7b3c27ffa2b27147670",
+      "name": "walk/up/06.png",
+      "native_content_bounds": [
+        6,
+        2,
+        14,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/up/06.png",
+          "sha256": "b3aaf679a11584a44f050228cdeb1eb70b3c021892607c99ede6f19cba26f7ae"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/up/06.png",
+          "sha256": "cff46739c79c2f58780c44cc470f5fcdfa64c34075a6200ed1c742b2e1f5293c"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/up/07.png",
+      "source_sha256": "569b79975ea60e5217b51a4a5596e4cbca2cbd08f75a01f44433d0dc3b7551e8",
+      "name": "walk/up/07.png",
+      "native_content_bounds": [
+        6,
+        2,
+        14,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/up/07.png",
+          "sha256": "80a6fd2ec02d054060a4461073dee40d26828fb968aeff538d3798d0d4a0e2b1"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/up/07.png",
+          "sha256": "53b515cd584b3693bf7c1ddb13d9172f0803bfcfc5f708db26a9aafd37ea0416"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/up/08.png",
+      "source_sha256": "9ff9bbfd775a24b22c8a4379392a878d1d233b6b6cae347158b9a12bf0d9ec12",
+      "name": "walk/up/08.png",
+      "native_content_bounds": [
+        6,
+        2,
+        14,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/up/08.png",
+          "sha256": "7e6f5af9da7a4877e0f688d8b072075ecd1e7003e2c79df362b23289b8747be9"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/up/08.png",
+          "sha256": "a6f8be46e17d8c7b0bf2e79555eaae82b379fb9d2600a5678becddd36d1a77e8"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/idle-blue-grounded/frames/up.png",
+      "source_sha256": "7e6f89a31d595627de7b45496328c2174116c59c266f8abada11b565658d793b",
+      "name": "idle/up.png",
+      "native_content_bounds": [
+        6,
+        2,
+        14,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/idle/up.png",
+          "sha256": "7355f4590286c0a6fb2340ff916da5f9ed47f2e44198b6c093bf7eceb532239f"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/idle/up.png",
+          "sha256": "bf31555869d7e308cca16ecd29c775d8b4af3ad7f88ad4f822ad9a5238af8fda"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/left/01.png",
+      "source_sha256": "a4483d4d3b2170b68922109327c2052b7e4752d7ebf7136f452ee5215fee6cd8",
+      "name": "walk/left/01.png",
+      "native_content_bounds": [
+        5,
+        2,
+        14,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/left/01.png",
+          "sha256": "ea45a8f1921cdde5fedd763011bf53d3b06333186141c9c046abfbb83cdb2c13"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/left/01.png",
+          "sha256": "58bfa8ddc7d061e61d0af08cca99479f0476ff8b6cc457f568ef38f691c8b138"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/left/02.png",
+      "source_sha256": "d7207adb366affd40504c0ddcb5f8d881436ce2e352ec2d95d580a93b0aac68f",
+      "name": "walk/left/02.png",
+      "native_content_bounds": [
+        6,
+        2,
+        14,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/left/02.png",
+          "sha256": "38a8161985f5683054a5e1b4d6bc9d7f13f04b6f58412fd4e389d8cdd6e7dee1"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/left/02.png",
+          "sha256": "9ad573d303c6e53925ba1eeb7b46a621cba72eb9c477ea4bc49462be3969ab93"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/left/03.png",
+      "source_sha256": "a5060a3ba97bf9bb43da40d548f1ec6e5659f625bc4856d1b9834f4da805005f",
+      "name": "walk/left/03.png",
+      "native_content_bounds": [
+        6,
+        2,
+        13,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/left/03.png",
+          "sha256": "8c910d46e02a41475a96caf1747ac3df959c69e2880958ff12e22785c6b4a670"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/left/03.png",
+          "sha256": "cf4108c742f9d7e00d01922972184b89dafbd5fafcc7c180d9e4b8518f3f0804"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/left/04.png",
+      "source_sha256": "0fd22e4e3e33348184387a718c8dfb0a43a407bcb8574ea473c073c6cecedb78",
+      "name": "walk/left/04.png",
+      "native_content_bounds": [
+        5,
+        2,
+        14,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/left/04.png",
+          "sha256": "a0599a7d6c7c91803601c562585ef48a39e5bfdfcd772003eba2fda4d594dc78"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/left/04.png",
+          "sha256": "6c2eaf1e2b27ff438c188fbc42ad68948671a7080f48da97c37fb05a322c1044"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/left/05.png",
+      "source_sha256": "8df046ba8464eda614f77367f4c8bbcbcd80498318efbffa8c95ba592f881c90",
+      "name": "walk/left/05.png",
+      "native_content_bounds": [
+        5,
+        2,
+        14,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/left/05.png",
+          "sha256": "247a627b4c930a3c71b1690ebfb6fab500d47486d6b5712e3104047d6cc73b61"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/left/05.png",
+          "sha256": "18d80af97d53c65d3a83585057b259eecf9c83f0701f1be8f3212744def09933"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/left/06.png",
+      "source_sha256": "4be67a359327ce51c5e69bd6a8ae779e314a908ad2ef7f56aae8b61e467c5f9a",
+      "name": "walk/left/06.png",
+      "native_content_bounds": [
+        6,
+        2,
+        14,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/left/06.png",
+          "sha256": "55e94160a7b67d21de787917ab4ce1df80f049a4c2e3aa7ffc8766a757064ae8"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/left/06.png",
+          "sha256": "f46d7921e9c8b1cf923f8b192b8b446e070fa65605dc2da62b9ef974553a4379"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/left/07.png",
+      "source_sha256": "b3c319e88bc7e8501d378c72e5092c10455d68451259a224b269cd98b3a230c2",
+      "name": "walk/left/07.png",
+      "native_content_bounds": [
+        6,
+        2,
+        14,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/left/07.png",
+          "sha256": "f605fa8aa01150e6a132161ca68d64efd71b44a7667b11669d4baf49a9e35f19"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/left/07.png",
+          "sha256": "fba3d5a2159538e47256eeb8fcb0c5a9705c1df81b9a085f316fdc546bbff7ad"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/left/08.png",
+      "source_sha256": "84a5a5de7760f45940f90acd81956eeb103311aabcceb53af2a73b6b23b65747",
+      "name": "walk/left/08.png",
+      "native_content_bounds": [
+        5,
+        2,
+        14,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/left/08.png",
+          "sha256": "f34b53d86725edd99082aceb83106f5f0b988235ae8616adc0bbd3eeec529b06"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/left/08.png",
+          "sha256": "2adb271d5aca3eb39eee7e8142ae37543f06112e4d8617495ba867e8d860a308"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/idle-blue-grounded/frames/left.png",
+      "source_sha256": "5ec4ff42e2a73a7fe05904ae727f76e28c9b97deb41bd57f368f649b7270e52a",
+      "name": "idle/left.png",
+      "native_content_bounds": [
+        6,
+        2,
+        14,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/idle/left.png",
+          "sha256": "9397601b9ce72ac87b9a4e16a4ec11e8db7c2f8d2038a4226735242e0fddba6b"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/idle/left.png",
+          "sha256": "3a0975aeb79ea8e388b859a82a2890b9372fd0cff174e0ba540fada36996ef3d"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/down-right/01.png",
+      "source_sha256": "6a92b28d59603ed3bc10811a695072cbf152f60259370d00eec0f9dfb6b3ef29",
+      "name": "walk/down-right/01.png",
+      "native_content_bounds": [
+        4,
+        2,
+        14,
+        17
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/down-right/01.png",
+          "sha256": "b296330e16fee50360335d028f88294453427eaa17c8efb280357640e2273bb8"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/down-right/01.png",
+          "sha256": "fa2b5310e1168200227073e178adf10cbabd6053e6909bc286f5ba86a6626462"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/down-right/02.png",
+      "source_sha256": "e7358b2ac5cd6b6b272512c9fa66f9bb6f37547530fe3578094ac4ba1658a802",
+      "name": "walk/down-right/02.png",
+      "native_content_bounds": [
+        4,
+        2,
+        14,
+        17
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/down-right/02.png",
+          "sha256": "e851792c9a0d8f6455c67504600d4342e3ee69694e22e24904dd96c78267f702"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/down-right/02.png",
+          "sha256": "4c332afc9565215efd87fdccc2c8614e0ba3c04b3e422991407465972e499b0f"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/down-right/03.png",
+      "source_sha256": "ad9e55ce68234f2602cc1c239f85dc66dc929ed921acbb0d37596a4a90fc09b7",
+      "name": "walk/down-right/03.png",
+      "native_content_bounds": [
+        4,
+        2,
+        14,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/down-right/03.png",
+          "sha256": "e8fc395ae875c3ac3d3ba1848056fc7590e1e7d048b6140962e39e756b6cb780"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/down-right/03.png",
+          "sha256": "5d72d6ec7c7e72432a509ceb7df9cc242a02f72b54eb75c80e9e538ece3985fa"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/down-right/04.png",
+      "source_sha256": "8543ab95a75f61d644f25d35c322bb2bb12048c8f017ade9f7ebd6b86bf7f5d0",
+      "name": "walk/down-right/04.png",
+      "native_content_bounds": [
+        5,
+        2,
+        15,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/down-right/04.png",
+          "sha256": "72365c8640a28843de718c9937a0154888b48c6bedf95820bec03f739e415bd2"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/down-right/04.png",
+          "sha256": "b418bdfe7a30b5bfbc377b09fb1ab41d6d96a6122a77700fe1fca1f70d1ad189"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/down-right/05.png",
+      "source_sha256": "798bf689e9d0bcec9a07cecc57b548a4f40181a9065a608afa64b73e20f3184c",
+      "name": "walk/down-right/05.png",
+      "native_content_bounds": [
+        4,
+        2,
+        14,
+        17
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/down-right/05.png",
+          "sha256": "5441f3015657e1b46b36e2fdbaa51d0e73106bc43af5530c6cb8814cef2710f7"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/down-right/05.png",
+          "sha256": "4be484513ce547b0e9277d5ac1a7111ac9680d9eeb197dec36f0e8743a1b556d"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/down-right/06.png",
+      "source_sha256": "bf2b8de4719b4429165eed4ea915ad33cb1bd11c2a403c173f5ac5311ef853cb",
+      "name": "walk/down-right/06.png",
+      "native_content_bounds": [
+        5,
+        2,
+        14,
+        17
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/down-right/06.png",
+          "sha256": "de66c0c7e082397bd02b0b3bb7f71e2dfce4a9d4ab1f2f24a00f94309ba3de79"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/down-right/06.png",
+          "sha256": "6beaf211fc1e2818a9460ce75119c9f9c0ff07de93b10c7e6a3577a2535f7acc"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/down-right/07.png",
+      "source_sha256": "a72b3a57f252e1c89c9d79924c113884de3336730cd94510b8b0bc61625fc192",
+      "name": "walk/down-right/07.png",
+      "native_content_bounds": [
+        4,
+        2,
+        14,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/down-right/07.png",
+          "sha256": "526c6e562200b2306e7a485d27a0ae09eaabedfd583462302ce22d59def64a96"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/down-right/07.png",
+          "sha256": "43c54ef4672ce0c0719ec54d0fc8e4c433ed1ef83110990cb2251ab855ec3e9f"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/down-right/08.png",
+      "source_sha256": "203c16c7b9d0b4ce6a1e0f5190562f55eeeae558f59eb659a73073b3c20064fb",
+      "name": "walk/down-right/08.png",
+      "native_content_bounds": [
+        4,
+        2,
+        15,
+        17
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/down-right/08.png",
+          "sha256": "1cd6d81bb25f91da21f41dee9cf5d6051dbb2f15f51d03e30abbbffc884be168"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/down-right/08.png",
+          "sha256": "b1465646f24f8c372a3e6c445f8d172b51ab0d5539f66a45457b7b6606ef597e"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/idle-blue-grounded/frames/down-right.png",
+      "source_sha256": "b64d33daea7da53b5d83f38134830f740342ffe45cfb45ffd5a6aae37c476cbb",
+      "name": "idle/down-right.png",
+      "native_content_bounds": [
+        6,
+        2,
+        14,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/idle/down-right.png",
+          "sha256": "e13cc7ca0b81c2ff4328d33df8b0103d926e8a4baa2c9e1f209ca6cd50055ccf"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/idle/down-right.png",
+          "sha256": "41099241d7328c9fe3693837b7807f2f099f961007fdd00b0572a72c494acca0"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/up-right/01.png",
+      "source_sha256": "bf3fc01e87961bff86d1a49b3d236a49b097e7ad60cc163da8b065663f28483f",
+      "name": "walk/up-right/01.png",
+      "native_content_bounds": [
+        6,
+        2,
+        14,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/up-right/01.png",
+          "sha256": "d16f4bd4a0dc5690cf29c08e86df5da6187f4e434bea411c280ea443254f3519"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/up-right/01.png",
+          "sha256": "5a9f717b63248b9c4ad5f216bcdf4208bb6189e3e79142517b055bebd8106fb3"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/up-right/02.png",
+      "source_sha256": "43c41c7d7f5a57f3d1abf5c7a7be6655418118aa0801307c3afa155a9ab74247",
+      "name": "walk/up-right/02.png",
+      "native_content_bounds": [
+        6,
+        2,
+        14,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/up-right/02.png",
+          "sha256": "cf87c3b2eeb1092444c1b91bf8fa2e046134721cf2bffbb7e96d7ce440b526fb"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/up-right/02.png",
+          "sha256": "1d34ebc7b2e273ad8b0922cb1c3d798819226f6d99400a5ef3f737a9b81d431c"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/up-right/03.png",
+      "source_sha256": "5c438509887ac04e9a32362c0c3b836041123a9ea497c3c6e3081659497c71c0",
+      "name": "walk/up-right/03.png",
+      "native_content_bounds": [
+        6,
+        2,
+        14,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/up-right/03.png",
+          "sha256": "d251fa9113669d31e0dd088d78afe1a9bd8c504eaab7ee6b37818827e6c244c5"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/up-right/03.png",
+          "sha256": "22cd7f1481a4b57ac5df2a63b1ed87e1194927d1366f73842c9c0494e08e5285"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/up-right/04.png",
+      "source_sha256": "00d9c60552a818946eca187d48c59dfc70149ea0b3b749748f03ab334b0262e7",
+      "name": "walk/up-right/04.png",
+      "native_content_bounds": [
+        6,
+        2,
+        14,
+        17
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/up-right/04.png",
+          "sha256": "789f49d7ee3af526c0cf78174c37276366e35866563296fe0bcdc181b58d3a60"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/up-right/04.png",
+          "sha256": "a57b98cc90bc12bb5e110856437c8f69ed8e09ae1353227e3fdd714fbaff2a82"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/up-right/05.png",
+      "source_sha256": "6c269b32dbf93cc4c77d89cd38e994c43949c540845933737c2267a77d357ab1",
+      "name": "walk/up-right/05.png",
+      "native_content_bounds": [
+        6,
+        2,
+        14,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/up-right/05.png",
+          "sha256": "76ccd6c0e507f2156e5f2b4b8c60216555a935065b2e141abbc627ba586ed117"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/up-right/05.png",
+          "sha256": "76aa4c54a375a0305cee6193599d5e1168725f97b4a5d0379ce1121029b67fbf"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/up-right/06.png",
+      "source_sha256": "7747eef88ff6d4db534650bef985945a20010cdb492c75373076ed32ca83e0bd",
+      "name": "walk/up-right/06.png",
+      "native_content_bounds": [
+        6,
+        2,
+        14,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/up-right/06.png",
+          "sha256": "f449382e3d03495f49b7199ccea3790ed334ac4ec1a0b99438eb396b9bf9f733"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/up-right/06.png",
+          "sha256": "c1444ba0b6076efc9673d2a5bd05a5d6f2e93c24d09669a8ba5501e7dcb42cdf"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/up-right/07.png",
+      "source_sha256": "ed04bf6d8e704b9e71264f36c2d919c68d6963f179429dd28fe2f2e925ec848f",
+      "name": "walk/up-right/07.png",
+      "native_content_bounds": [
+        6,
+        2,
+        14,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/up-right/07.png",
+          "sha256": "f78107d1dd263d72004926a038a579453ef541def175d2ecf71f7434fd1ec4e5"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/up-right/07.png",
+          "sha256": "9950fd4bd4bc4c3866c776fefa5583894851a1f17ecb9abacda4b72e3b4e15d9"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/up-right/08.png",
+      "source_sha256": "dd1794e0a8dc59bf8734d7958f27f9dbf1affb275b4eca44e2ca9acc824df117",
+      "name": "walk/up-right/08.png",
+      "native_content_bounds": [
+        6,
+        2,
+        14,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/up-right/08.png",
+          "sha256": "85ae595388036bca01af8b728c7fb7e708799854cf3dd9a9c51dfa1f951e3aa3"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/up-right/08.png",
+          "sha256": "9601b261b831d1f4d11981570e92d8c7dade7a87343749985564a6082d65a47c"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/idle-blue-grounded/frames/up-right.png",
+      "source_sha256": "b9934404536e81d8ca7b3fc1342f6581da3f5bf5190a23a8d577405add3380d0",
+      "name": "idle/up-right.png",
+      "native_content_bounds": [
+        6,
+        2,
+        14,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/idle/up-right.png",
+          "sha256": "3df95c0726b90f7a30fbe0780e0717195e8adfeb6ac071a0e436eeb2423e2b10"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/idle/up-right.png",
+          "sha256": "6571e62772233c002fc6cc1a202f9bbabea1d7b3e634752749e04b69f01ee168"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/up-left/01.png",
+      "source_sha256": "6c0d8c85e00698b07754bfc849641fbfc8a4cbfc0ec3530c636b3297c62e414e",
+      "name": "walk/up-left/01.png",
+      "native_content_bounds": [
+        6,
+        2,
+        14,
+        17
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/up-left/01.png",
+          "sha256": "0d2d5c7091794749d2b203064e3487824d80ebdf919167f6dd86b2c17534bfb9"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/up-left/01.png",
+          "sha256": "13310420301d46634839133c0ce76ea033b022781b84a6685b3ac0a65b54222c"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/up-left/02.png",
+      "source_sha256": "451cec4c3993c6265706478c01df32f7fe28118c16b411a2c55925adb28184c4",
+      "name": "walk/up-left/02.png",
+      "native_content_bounds": [
+        6,
+        2,
+        15,
+        17
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/up-left/02.png",
+          "sha256": "d3c80ce16ae095c058c5d6647f0da306455d93a80b731d47f730509ff6e6c517"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/up-left/02.png",
+          "sha256": "2cdf29b5e69cc7eac75ded813297e5b59899568f5ae42d00560c894c76275583"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/up-left/03.png",
+      "source_sha256": "909451f379a3f30f715c1933ab739469fe29c5f0adea84a7e1273a696f8d0863",
+      "name": "walk/up-left/03.png",
+      "native_content_bounds": [
+        6,
+        2,
+        14,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/up-left/03.png",
+          "sha256": "0c8ab18e39b8f47090a80d2c957637bf35c207541fefa25281a81ceb499738aa"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/up-left/03.png",
+          "sha256": "9c0fa6da755d5eb1945c6df78c9c39a7706201dd5ea81d919cae3a5b3ef03d31"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/up-left/04.png",
+      "source_sha256": "f66d71a852cc3aea5a1df64986e3bae694b583393e0405e0f8c6a8c5585764b1",
+      "name": "walk/up-left/04.png",
+      "native_content_bounds": [
+        6,
+        2,
+        14,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/up-left/04.png",
+          "sha256": "3dcf822e265591bff5d3aa2b7917b3d9426dbe9a2e15b425359c8e977a1dd1e9"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/up-left/04.png",
+          "sha256": "d8814d1bb0babb2ed57d8ebcf0c7568d220ca8ea080765295349cdc13bc2759e"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/up-left/05.png",
+      "source_sha256": "b4d491c36b1fdbe058a8ff393aa87e5b1fac3f723c9187ccbafe1bce4f6c2951",
+      "name": "walk/up-left/05.png",
+      "native_content_bounds": [
+        6,
+        2,
+        14,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/up-left/05.png",
+          "sha256": "558a9f4f0c696236ec22f9c4440896366b044fe44ca78c9e99dbba02af8281ec"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/up-left/05.png",
+          "sha256": "14223cbafa4bfefe4247cc41f40e324e1b4cf58f80028180ca42cb584ac8e39a"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/up-left/06.png",
+      "source_sha256": "da58b40efb3a89dbfd38891813ccf094899bea2976f4f99ee0681d8b404ab3a4",
+      "name": "walk/up-left/06.png",
+      "native_content_bounds": [
+        6,
+        2,
+        14,
+        17
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/up-left/06.png",
+          "sha256": "1f29133ec4dcb01496e82075f7268f49de67c68c2b3f991b9f0fcd213085e118"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/up-left/06.png",
+          "sha256": "7456df8ae60579dfbe66e6a357acee894ca4401c806a013b6e507398577629d0"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/up-left/07.png",
+      "source_sha256": "e5561bd7906c2b5a35667de194f9002e20b1e5782f12201c24ed3fb5516bb89a",
+      "name": "walk/up-left/07.png",
+      "native_content_bounds": [
+        6,
+        2,
+        14,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/up-left/07.png",
+          "sha256": "ce40b1c5ab30d0915ad367e9e6bf79fc10c22e9fc3a282d2ba23a94280f9a003"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/up-left/07.png",
+          "sha256": "2b7e231bb017f48f4bdba56692009c0108f5145bb25dbd1eb4a72025a0a289e0"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/up-left/08.png",
+      "source_sha256": "29a518d700c551dd1bc7ea4b776c461f66d1db76acee5e2836fd557537741e0c",
+      "name": "walk/up-left/08.png",
+      "native_content_bounds": [
+        6,
+        2,
+        14,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/up-left/08.png",
+          "sha256": "33d9846f7e9000586177f82aa2e3b85c4047c2839dd30586f88f3259170db201"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/up-left/08.png",
+          "sha256": "da2dea2feeb8b8f2ae76bb3b0ebf6170b3c9ec5604abdd83161fcf60871cb3e3"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/idle-blue-grounded/frames/up-left.png",
+      "source_sha256": "4fad1d8c82cf5f6cba609705104880c086dcc67e001e32e333bd3dfd6c3483d5",
+      "name": "idle/up-left.png",
+      "native_content_bounds": [
+        6,
+        2,
+        14,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/idle/up-left.png",
+          "sha256": "35b36ddd411f82b9c4369b73ade2198596cbd9092d1601fc5e79c6dbd2648087"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/idle/up-left.png",
+          "sha256": "b36336b2c875ab89f0fc82dad714029f6d80f6879c43090b0f6e6122355249d2"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/down-left/01.png",
+      "source_sha256": "58bfae12ba874c940b25fc3d04c984b9133e334599a7fabe6d8a2ed4a2a7fc8e",
+      "name": "walk/down-left/01.png",
+      "native_content_bounds": [
+        6,
+        2,
+        16,
+        17
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/down-left/01.png",
+          "sha256": "c7e32b1b8891a125c876dddac1e85aafb6f78c1d54ba6595fc749f24cad38f33"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/down-left/01.png",
+          "sha256": "67c4c2aff44a3d2c5a30b9063f910d16c20f298ca73bd0f0592c0b1da2e94004"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/down-left/02.png",
+      "source_sha256": "77997837529272d0260297ec46202e70e8400a673a2e5af07de994fe6722def0",
+      "name": "walk/down-left/02.png",
+      "native_content_bounds": [
+        6,
+        2,
+        15,
+        17
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/down-left/02.png",
+          "sha256": "5c120102786073d8e032d5841d0a39022721b4536289e73b09c764b63272b865"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/down-left/02.png",
+          "sha256": "43c96072e8aea1e925c901cfdfa81b879e2fc608999ec7cdf0e4e419b3177e0d"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/down-left/03.png",
+      "source_sha256": "0a7ea43ce076e31530acf18b2356b96a650b0136e2a985adbd4b8609ad36e591",
+      "name": "walk/down-left/03.png",
+      "native_content_bounds": [
+        6,
+        2,
+        15,
+        17
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/down-left/03.png",
+          "sha256": "b019dc32b13596c9e07c7194f6b97f2fdc7331107123dc27609a0609833feca2"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/down-left/03.png",
+          "sha256": "afe4075847b240d5060a5e39870b1e8aab7677df8167b043e4a637c780b2759f"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/down-left/04.png",
+      "source_sha256": "a6bad38f2d04de72ef423bb263060422df1f4fd8dd34ec675510262ee1d81215",
+      "name": "walk/down-left/04.png",
+      "native_content_bounds": [
+        5,
+        2,
+        15,
+        17
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/down-left/04.png",
+          "sha256": "d188772a1901ff0162dbfbe78878e274cd3e8bb4938ac1e9465f7d1bc4e475fc"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/down-left/04.png",
+          "sha256": "490d1de4a2922b8cd8ffdd15263082bcde04e5d5322c169cfb8f2f523fe75e7f"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/down-left/05.png",
+      "source_sha256": "7993497dfa11a268aa3406a927edaf07ed45d0d8343d712c98b66ce72128ade4",
+      "name": "walk/down-left/05.png",
+      "native_content_bounds": [
+        6,
+        2,
+        15,
+        17
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/down-left/05.png",
+          "sha256": "1503d58e7f434241520d18f8332d31ee83cb7acff7a30af1a37400867b464552"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/down-left/05.png",
+          "sha256": "4754fc09150710686ec0b08655db84c1102c3b8351b4332b607040c8bd282f28"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/down-left/06.png",
+      "source_sha256": "2375bf0ebff687b677d98d5fc4dd44de56e1bbde421e8845d44fa2ed3c0c5c4d",
+      "name": "walk/down-left/06.png",
+      "native_content_bounds": [
+        6,
+        2,
+        15,
+        17
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/down-left/06.png",
+          "sha256": "32c8b22ccf91d495b07b3135a3814d25b901342bc60938cbbfcd97ef58d52b50"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/down-left/06.png",
+          "sha256": "ca36b767eeaa97bc0b7103104b66245398a92589e337d9e587469781a1abf7da"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/down-left/07.png",
+      "source_sha256": "ad79fc6aadd4504ceab7ba513dcdff05b345a5028302f32dfea82ba2cf1644fb",
+      "name": "walk/down-left/07.png",
+      "native_content_bounds": [
+        6,
+        2,
+        15,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/down-left/07.png",
+          "sha256": "c1c866ad9129b8286c3006e8d0265b9b255cd3538bcf6a75205d942d2a1b8cd5"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/down-left/07.png",
+          "sha256": "3bd1629cb6f78b0bd5d0a79182909b409723733837b68357b807c629e3017099"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/walk-blue/frames/down-left/08.png",
+      "source_sha256": "913224ed27bf4fd8e01bc4589e0e73f94944e22597799b041c00374f27edf612",
+      "name": "walk/down-left/08.png",
+      "native_content_bounds": [
+        5,
+        2,
+        15,
+        17
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/walk/down-left/08.png",
+          "sha256": "70ed8787730ad3f3e12ebe644fed89872055f858705a2636d4aabcade09fa4c1"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/walk/down-left/08.png",
+          "sha256": "19f3c1d040a183606667b0b63aacb8de41325f49061fb8d51b9d8aa7c111b5fc"
+        }
+      }
+    },
+    {
+      "source": "assets/art_source/player-fhd/idle-blue-grounded/frames/down-left.png",
+      "source_sha256": "fd8c796d1edf29ddae3784761e4730a5004ca6e20bd9fbf397c6cbea429db5ab",
+      "name": "idle/down-left.png",
+      "native_content_bounds": [
+        6,
+        2,
+        14,
+        18
+      ],
+      "outputs": {
+        "native-20": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/native-20/idle/down-left.png",
+          "sha256": "ec929b5c4ce31f4f0ec48013bd28f64ba75d7aa9767116dd77ae3c898639e12e"
+        },
+        "runtime-80": {
+          "path": "implementation/fhd-player/pilots/2026-10-04/idle-grounded-review/resolution-review/16px-assets/runtime-80/idle/down-left.png",
+          "sha256": "ea213f14395153bc21a9a2b1b8efdbf95f67b991b97d4905b2e326a9bc670db0"
+        }
+      }
+    }
+  ]
+}
