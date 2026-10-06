@@ -68,13 +68,16 @@ the farmer is two tiles (128 pixels) tall. The camera follows the farmer
 smoothly on both axes. The farmer walks in eight directions with the reviewed
 blue walk; Shift plays the same walk faster.
 
-The farm is Stardew Valley's Standard Farm size, 80x65 tiles. The previous
-45x25 farm is its top left corner, unchanged; around it are a tree line, roads
-out east and south, woods, a forest with a pond, an orchard, a second pond with
-a jetty and open ground strewn with stones and saplings. Buildings reuse the
-exterior art at twice its previous scale, and the 60 planting beds are where
-they were. Saves from every earlier farm (40x18, 45x20, 45x25) keep crops,
-inventory and production at the same coordinates.
+The farm is Stardew Valley's Standard Farm size, 80x65 tiles, with the
+farmstead in the middle at the head of the south road: the house facing down
+the road, the workshop and animals to the west, the stall to the east, the well
+by the porch and the 60 planting beds in two fields either side of the road
+plus a small garden. Roads run out east and south; the night still comes from
+the east and the south east at the same distances from the house. The top left
+keeps the first farm's pond, jetty and quarry. Around it all are a tree line,
+woods, a forest with a pond, an orchard, a second pond with a jetty and open
+ground strewn with stones and saplings. Saves keep their own farm: older ones
+(40x18, 45x20, 45x25) are widened with every cell at the same coordinates.
 
 During the day, stand at the farmhouse's front door and press Interact
 (Space or Enter by default) to enter. Walk around the furnished room, then walk

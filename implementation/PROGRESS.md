@@ -12096,3 +12096,58 @@ audit of already integrated art, scoped missing bindings, actual FHD review
 and appropriate validation, without duplicate imports or new generation.
 Validated all320 inventory paths and the referenced farmer handoff exist.
 Text-only change; no production edits or gameplay tests.
+
+
+## 2026-10-06 — Farmstead moved to the middle of the farm
+
+User-directed, outside the queues: the owner circled the open field at the head
+of the south road on the farm overview and asked for the buildings and the
+farmer there. The house (37-42, 22-25) now faces down the south road with its
+porch, and the farmer's start, at (40, 26) - `GameData.PLAYER_START`, which
+`check_map()` holds to the porch the map draws. The workshop and its cow and
+chickens stand to the west with the small southern garden behind it, the stall
+to the east, the well by the porch, and the 48 beds of the old yard became two
+24-cell fields either side of the road (60 beds in all, unchanged). Roads run
+from the farmstead to the east and south edges. The old top left keeps its
+pond, jetty, path and quarry; the old yard went back to saplings and stones.
+
+**The night moved with the house.** With the house in the middle, the old
+spawn cells would have been ten tiles from it inside the farm. Spawns at the
+road exits were tried first: the autoplayer's `balanced` policy then fell from
+night 8 to night 2 (two sides 90 degrees apart instead of east and south-east).
+Both spawn groups were instead moved by the same step as the house (24 east,
+18 south), keeping every distance and bearing a night was balanced on. Two
+seeds per policy, before -> after: balanced 8 -> 8, economy 2.5 -> 2, towers
+8 -> 8, walls 8 -> 8 (no policy wins ten nights in either; unchanged).
+
+Saves keep their own farm. `Save._widen()` now lays only today's ground and its
+trees and stones onto the land an older save never had - not today's house,
+stall, workshop, well, animals or beds, whose floors and soil go back to grass.
+
+Tests written against the old yard's coordinates move by the same step through
+`_moved()` (headless_check, input_check, perf_check): tower bands, fences, the
+maze columns and gap rows, the reaction fence. Three needed more than the
+step: the maze's gaps stay within the old yard's 25 rows (its top and bottom
+were the map's edge); the maze watch restarts its trails when a wall comes
+down (a rebuild is a new field, not an oscillation); and the Giant's tower line
+stands six rows lower because the Giant now walks in along the east road
+instead of round the old quarry - measured, that reproduces the old fight
+(mortars kill it in 1,177 ticks against 1,248; crossbows alone let it in; a mix
+kills it 400 ticks before arrival against 409). house_check's land checks were
+restated for the farmstead (beds clear, within ten tiles of the porch, all
+reachable). input_check points at the buildable and water cells nearest the
+farmer, because the camera follows them on a farm four screens tall.
+
+Files: src/core/game_data.gd (map, PLAYER_START, SPAWNS, porch check),
+src/core/player.gd, src/app/save.gd, src/tools/{headless_check,input_check,
+house_check,perf_check}.gd, README.md, tools/perf_baseline.txt.
+Verify: **55 passed, 0 skipped, 0 failed** in 515s (OVER BUDGET as before),
+16,130 asserts, 1,017 input cases, both exports. The map, start and spawns
+intentionally move sim 3096784529 → 1242708873
+and data 3219365985 → 2015186086.
+perf baseline accepted: night tick 1050 → 594 us, path rebuild 8364 → 7918 us;
+night_towers measured alone 506 → 1028 us, because with the zombies frozen
+more of the forty guns keep firing at them in this geometry (the whole tick is
+what the budget is about, and it is 7% of it).
+Shots: implementation/shots/farmstead-centre/ (overview.png, farmstead.png,
+old-yard-pond-quarry.png and FHD noon/dusk/wave).

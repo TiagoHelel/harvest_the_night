@@ -553,13 +553,13 @@ func _case_0011_harness() -> void:
 	# identity - so what is checked here is that a cell lands somewhere on
 	# screen and comes back as itself, not where it happens to be today.
 	var view: WorldView = require_control("WorldView")
-	var centre := cell_to_screen(Vector2i(20, 9))
+	var centre := cell_to_screen(_moved(Vector2i(20, 9)))
 	expect(centre.x > 0.0 and centre.y > 0.0, "a farm cell is somewhere on screen",
 		str(centre))
-	expect(view.screen_to_cell(centre) == Vector2i(20, 9),
+	expect(view.screen_to_cell(centre) == _moved(Vector2i(20, 9)),
 		"and the screen position maps back to the cell it came from",
 		str(view.screen_to_cell(centre)))
-	await click_cell(Vector2i(20, 9))
+	await click_cell(_moved(Vector2i(20, 9)))
 	expect(true, "clicking a cell does not throw")
 
 	await close_scene()
@@ -700,12 +700,12 @@ func _case_0013_world_view() -> void:
 	# player, so it moves constantly.
 	var cam_probe: Camera2D = view.find_child("Camera", true, false)
 	var before_walk := cam_probe.position.x
-	var at_cell_before := view.cell_to_screen(Vector2i(20, 9))
+	var at_cell_before := view.cell_to_screen(_moved(Vector2i(20, 9)))
 	await hold_key(KEY_D, 60)
 	expect(cam_probe.position.x > before_walk,
 		"the camera follows the player east",
 		"%.0f then %.0f" % [before_walk, cam_probe.position.x])
-	expect(view.cell_to_screen(Vector2i(20, 9)).x != at_cell_before.x,
+	expect(view.cell_to_screen(_moved(Vector2i(20, 9))).x != at_cell_before.x,
 		"so a fixed cell is somewhere else on screen afterwards")
 
 	# **No zoom, as in Stardew Valley.** The keys and the wheel that used to
@@ -719,7 +719,7 @@ func _case_0013_world_view() -> void:
 		str(cam_probe.zoom))
 
 	# Screen and cell are each other's inverse, wherever the camera is.
-	for cell in [Vector2i(20, 9), Vector2i(25, 4), Vector2i(30, 12)]:
+	for cell in [_moved(Vector2i(20, 9)), _moved(Vector2i(25, 4)), _moved(Vector2i(30, 12))]:
 		expect(view.screen_to_cell(view.cell_to_screen(cell)) == cell,
 			"cell %s survives a round trip through the screen" % cell,
 			str(view.screen_to_cell(view.cell_to_screen(cell))))
@@ -892,12 +892,35 @@ func _facing_from(from_cell: Vector2i, to_cell: Vector2i) -> int:
 ## Somewhere nothing is standing and something could be. Found rather than
 ## written down, so that a map gaining a building does not fail a test about
 ## something else.
+## The buildable cell nearest the farmer, so it is on screen: the camera
+## follows them, and the farm is four screens tall.
 func _any_buildable(state: Dictionary) -> Vector2i:
-	for idx in Grid.CELLS:
-		var cell := Grid.cell(idx)
-		if Farm.buildable(state, cell):
-			return cell
+	var found := _nearest(state, func(cell: Vector2i) -> bool:
+		return Farm.buildable(state, cell))
+	return found
+
+
+## The water nearest the farmer, for the same reason.
+func _nearest_water(state: Dictionary) -> Vector2i:
+	return _nearest(state, func(cell: Vector2i) -> bool:
+		return Farm.terrain_at(state, cell) == Farm.Terrain.WATER)
+
+
+## Rings outward from the farmer's cell, each in a fixed order.
+func _nearest(state: Dictionary, wanted: Callable) -> Vector2i:
+	var here := Player.cell(state)
+	for radius in maxi(Grid.WIDTH, Grid.HEIGHT):
+		for cell in Grid.within(here, radius):
+			if Grid.chebyshev(here, cell) == radius and wanted.call(cell):
+				return cell
 	return Vector2i(-1, -1)
+
+
+## Where a cell of the first farm's yard is now: the farmstead moved to the
+## middle of the farm (2026-10-06), 24 tiles east and 18 south, and the
+## camera with the farmer standing on its porch.
+func _moved(cell: Vector2i) -> Vector2i:
+	return cell + GameData.PLAYER_START - Vector2i(16, 8)
 
 
 ## Occupant sprites only. The layer also holds the player and, since task
@@ -1198,7 +1221,7 @@ func _case_0023_build_mode() -> void:
 		str(view.ghost_cell()))
 	expect(view.ghost_is_ok(), "framed green, because it fits")
 
-	var pond: Vector2i = Farm.cells_of(state, Farm.Terrain.WATER)[0]
+	var pond := _nearest_water(state)
 	await _point_at(view, pond)
 	# **The table's words, not a sentence written here.** Task 0110: the
 	# rules hand back a key and `Names.refusal()` says it, so what this
@@ -1298,8 +1321,9 @@ func _case_0027_the_loop() -> void:
 	var placed := 0
 	for x in range(22, 34):
 		for y in [7, 9, 11, 5]:
-			if placed < 4 and Farm.buildable(state, Vector2i(x, y)):
-				if Building.place(state, &"gun_tower", Vector2i(x, y)):
+			var cell := _moved(Vector2i(x, y))
+			if placed < 4 and Farm.buildable(state, cell):
+				if Building.place(state, &"gun_tower", cell):
 					placed += 1
 	expect(placed == 4, "four towers go up", str(placed))
 

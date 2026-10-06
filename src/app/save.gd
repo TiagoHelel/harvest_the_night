@@ -341,9 +341,14 @@ static func _is_today(state: Dictionary) -> bool:
 
 
 ## Lay a farm `size` cells across onto today's grid, every cell at the same
-## coordinates. The ground it never had, and whatever today's map stands on
-## it, comes from a new game; every cache keyed by a cell index is thrown away
+## coordinates. The ground it never had comes from a new game, with the trees
+## and stones standing on it; every cache keyed by a cell index is thrown away
 ## to be rebuilt. Empty when the farm is not that size.
+##
+## **Today's ground, not today's farmstead.** A save keeps its own house,
+## stall, workshop, well, animals and beds where it built them; today's stand
+## in the middle of the farm, and laying them in too would give it two of
+## each. Their floors and beds go back to grass.
 static func _widen(previous: Dictionary, size: Vector2i) -> Dictionary:
 	var state := previous.duplicate(true)
 	var terrain: PackedByteArray = state.get("terrain", PackedByteArray())
@@ -351,6 +356,11 @@ static func _widen(previous: Dictionary, size: Vector2i) -> Dictionary:
 		return {}
 	var farm := Farm.initial()
 	var widened: PackedByteArray = farm["terrain"]
+	var standing: Dictionary = farm["occupants"]
+	for idx in widened.size():
+		var built := standing.has(idx) and not GameData.GATHERING.has(StringName(standing[idx]["id"]))
+		if int(widened[idx]) == Farm.Terrain.SOIL or (built and int(widened[idx]) == Farm.Terrain.FLOOR):
+			widened[idx] = Farm.Terrain.GRASS
 	for old_index in terrain.size():
 		widened[_widened_index(old_index, size.x)] = terrain[old_index]
 	state["terrain"] = widened
@@ -358,12 +368,12 @@ static func _widen(previous: Dictionary, size: Vector2i) -> Dictionary:
 		if state.has(key):
 			state[key] = _widened_table(state[key], size.x)
 	var occupants: Dictionary = state.get("occupants", {})
-	var fresh: Array = farm["occupants"].keys()
+	var fresh: Array = standing.keys()
 	fresh.sort()
 	for idx in fresh:
 		var cell := Grid.cell(int(idx))
-		if cell.x >= size.x or cell.y >= size.y:
-			occupants[idx] = farm["occupants"][idx]
+		if (cell.x >= size.x or cell.y >= size.y) 				and GameData.GATHERING.has(StringName(standing[idx]["id"])):
+			occupants[idx] = standing[idx]
 	state["occupants"] = occupants
 	for entry in state.get("regrowing", []):
 		entry[Gathering.PENDING_CELL] = _widened_index(int(entry[Gathering.PENDING_CELL]), size.x)

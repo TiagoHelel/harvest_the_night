@@ -134,19 +134,21 @@ func _the_worst_case() -> Dictionary:
 	# night ten before it walked ten tiles - a worst case with nothing in it
 	# is not a worst case. Forty is more than anybody builds and still
 	# leaves a fight to time.
-	# **On the farmstead, where the fight is.** The Stardew-sized farm runs on
-	# to column 79, and a row-by-row fill now put the guns out past the woods
-	# where nothing walks: forty towers with nothing to shoot is a quieter
-	# night, not a worse one.
+	# **On the farmstead, where the fight is**: the old yard's band, moved
+	# with the farmstead to the middle of the farm (24 east, 18 south,
+	# 2026-10-06). A row-by-row fill of the whole farm puts guns where nothing
+	# walks, and forty towers with nothing to shoot is a quieter night, not a
+	# worse one. The wall line stands on the house's east side, as it did.
+	var moved := GameData.PLAYER_START - Vector2i(16, 8)
 	var guns := 0
-	for y in range(1, Grid.HEIGHT - 1):
-		for x in range(21, mini(Grid.WIDTH, Save.V3_FARM.x) - 1):
+	for y in range(1 + moved.y, Grid.HEIGHT - 1):
+		for x in range(21 + moved.x, mini(Grid.WIDTH, Save.V3_FARM.x + moved.x) - 1):
 			if guns >= TOWERS:
 				break
 			if Building.place(state, &"gun_tower", Vector2i(x, y)):
 				guns += 1
 	for y in range(1, Grid.HEIGHT - 1):
-		Building.place(state, &"wall", Vector2i(19, y))
+		Building.place(state, &"wall", Vector2i(19 + moved.x, y))
 	var gen := _room_for(state, Building.size_of(&"generator"))
 	if gen != Vector2i(-1, -1):
 		Building.place(state, &"generator", gen)

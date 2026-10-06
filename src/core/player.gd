@@ -51,7 +51,7 @@ const DIAGONAL_DENOMINATOR := 256
 ## The keys this subsystem owns. `State.create()` merges them in.
 static func initial() -> Dictionary:
 	# On the porch, south of the farmhouse, looking at the farm.
-	var start := Vector2i(16, 8)
+	var start := GameData.PLAYER_START
 	return {
 		"player": {
 			"pos": [start.x * SUBTILE + SUBTILE / 2,

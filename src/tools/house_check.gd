@@ -61,23 +61,21 @@ func _run() -> void:
 			_out = "res://" + arg.trim_prefix("--out=").trim_suffix("/") + "/"
 	_state = State.create(30303)
 	expect(GameData.validate().is_empty(), "Expanded farm data validates: %s" % str(GameData.validate()))
-	# The farmstead this check was written for is the top left 45x25 of the
-	# Stardew-sized farm, unchanged, so its numbers are asked of that corner.
-	var farmstead := Save.V3_FARM
-	expect(Grid.WIDTH >= farmstead.x and Grid.HEIGHT >= farmstead.y and Grid.CELLS == 80 * 65,
-		"The farm is Stardew-sized with the 45x25 farmstead at its top left")
+	# **The farmstead in the middle of the Stardew-sized farm** (2026-10-06):
+	# the house at the head of the south road, its two fields either side of
+	# the road and the garden behind the workshop, all on clear ground.
+	expect(Grid.CELLS == 80 * 65 and House.porch(_state) == GameData.PLAYER_START,
+		"The farm is Stardew-sized and the farmer starts on the farmhouse porch")
 	var available := 0
 	for idx in Grid.CELLS:
-		var at := Grid.cell(idx)
-		if at.x < farmstead.x and at.y < farmstead.y and Farm.is_empty(_state, at) \
-				and _state["terrain"][idx] in [Farm.Terrain.GRASS, Farm.Terrain.SOIL]:
+		if Farm.is_empty(_state, Grid.cell(idx)) 				and _state["terrain"][idx] in [Farm.Terrain.GRASS, Farm.Terrain.SOIL]:
 			available += 1
-	expect(available == 787 and available * 100 >= 591 * 125, "Enlarged buildings leave at least 25% more clear usable land")
-	for y in range(20, 25):
-		for x in farmstead.x:
-			expect(Farm.walkable(_state, Vector2i(x, y)) and Farm.terrain_at(_state, Vector2i(x, y)) in [Farm.Terrain.GRASS, Farm.Terrain.SOIL],
-				"Every new southern cell is clear ground")
-	expect(Farm.cells_of(_state, Farm.Terrain.SOIL).size() * 100 == 48 * 125,
+	expect(available * 100 >= 787 * 400, "The farm has four times the clear usable land of the 45x25 farm")
+	var beds := Farm.cells_of(_state, Farm.Terrain.SOIL)
+	for bed in beds:
+		expect(Farm.walkable(_state, bed) and Grid.chebyshev(bed, House.porch(_state)) <= 10,
+			"Every bed is clear ground within ten tiles of the porch")
+	expect(beds.size() * 100 == 48 * 125,
 		"The real planting beds also increase by exactly 25%")
 	var reachable := {Grid.index(House.porch(_state)): true}
 	var pending := [House.porch(_state)]
@@ -90,10 +88,9 @@ func _run() -> void:
 				reachable[idx] = true
 				pending.append(neighbour)
 	var connected := 0
-	for y in range(20, 25):
-		for x in farmstead.x:
-			connected += int(reachable.has(Grid.index(Vector2i(x, y))))
-	expect(connected == 225, "All new southern land is reachable from the farmhouse without clearing trees")
+	for bed in beds:
+		connected += int(reachable.has(Grid.index(bed)))
+	expect(connected == beds.size(), "Every bed is reachable from the farmhouse without clearing trees")
 	expect(Farm.house_bounds(_state).size == GameData.HOUSE_SIZE, "House collision covers the enlarged footprint")
 	expect(not Farm.buildable(_state, House.porch(_state)) and Farm.walkable(_state, House.porch(_state)),
 		"The front door stays accessible and cannot be walled in")

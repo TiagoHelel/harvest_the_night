@@ -1560,7 +1560,7 @@ func _task_0109_reactions() -> void:
 	var night := State.create(109105)
 	Resources.gain(night, {GameData.WOOD: 900, GameData.STONE: 900})
 	for y in range(3, 14):
-		Building.place(night, &"fence", Vector2i(29, y))
+		Building.place(night, &"fence", _moved(Vector2i(29, y)))
 	Phases.begin_preparation(night)
 	var announced := false
 	for _i in 2000:
@@ -1573,7 +1573,7 @@ func _task_0109_reactions() -> void:
 
 	for i in 40:
 		# A close horde must chew this fence rather than bypass its distant end.
-		Entities.spawn(night, &"walker", Vector2i(30, 8))
+		Entities.spawn(night, &"walker", _moved(Vector2i(30, 8)))
 	var mourned := false
 	var wrong_one := &""
 	for _i in 6000:
@@ -3557,8 +3557,8 @@ func _task_0024_tower() -> void:
 func _night_with_tower(at_night: bool) -> Dictionary:
 	var state := State.create(201)
 	Resources.gain(state, {GameData.WOOD: 200, GameData.IRON: 200})
-	var cell := Vector2i(24, 9)
-	while not Farm.buildable(state, cell) and cell.x < 34:
+	var cell := _moved(Vector2i(24, 9))
+	while not Farm.buildable(state, cell) and cell.x < _moved(Vector2i(34, 9)).x:
 		cell.x += 1
 	Building.place(state, &"gun_tower", cell)
 	if at_night:
@@ -3572,8 +3572,8 @@ func _night_with_tower(at_night: bool) -> Dictionary:
 func _shooting_log(seed_value: int) -> Array:
 	var state := State.create(seed_value)
 	Resources.gain(state, {GameData.WOOD: 200, GameData.IRON: 200})
-	var cell := Vector2i(24, 9)
-	while not Farm.buildable(state, cell) and cell.x < 34:
+	var cell := _moved(Vector2i(24, 9))
+	while not Farm.buildable(state, cell) and cell.x < _moved(Vector2i(34, 9)).x:
 		cell.x += 1
 	Building.place(state, &"gun_tower", cell)
 	Phases.begin_preparation(state)
@@ -3596,8 +3596,8 @@ func _shooting_log(seed_value: int) -> Array:
 func _shots_in(ticks: int, reload: int) -> int:
 	var state := State.create(202)
 	Resources.gain(state, {GameData.WOOD: 200, GameData.IRON: 200})
-	var cell := Vector2i(24, 9)
-	while not Farm.buildable(state, cell) and cell.x < 34:
+	var cell := _moved(Vector2i(24, 9))
+	while not Farm.buildable(state, cell) and cell.x < _moved(Vector2i(34, 9)).x:
 		cell.x += 1
 	Building.place(state, &"gun_tower", cell)
 	Phases.begin_preparation(state)
@@ -3992,6 +3992,18 @@ func _task_0026_combat() -> void:
 
 
 ## Put a gun tower somewhere near a cell, and return where it went.
+## Where a cell of the first farm's yard is now.
+##
+## **The farmstead moved to the middle of the farm** (2026-10-06) and took the
+## night's spawn points with it, 24 tiles east and 18 south. These fixtures
+## were measured against the old yard - a tower so many tiles east of the
+## house, a fence across the way in from the east - so they are written in
+## those coordinates and moved by the same step: the same fight, on the same
+## ground relative to the house and the horde.
+func _moved(cell: Vector2i) -> Vector2i:
+	return cell + GameData.PLAYER_START - Vector2i(16, 8)
+
+
 func _tower_at(state: Dictionary, near: Vector2i) -> Vector2i:
 	var cell := near
 	while not Farm.buildable(state, cell) and cell.x < Grid.WIDTH - 1:
@@ -4006,8 +4018,8 @@ func _tower_at(state: Dictionary, near: Vector2i) -> Vector2i:
 ## A whole scripted fight, as one number.
 func _fight_result(seed_value: int) -> Array:
 	var state := _fresh_night(seed_value)
-	_tower_at(state, Vector2i(30, 9))
-	_tower_at(state, Vector2i(30, 11))
+	_tower_at(state, _moved(Vector2i(30, 9)))
+	_tower_at(state, _moved(Vector2i(30, 11)))
 	for _i in 8:
 		Enemies.spawn(state, &"walker", 0)
 	Sim.advance(state, 1200)
@@ -4185,7 +4197,7 @@ func _arm_the_farm(state: Dictionary, count: int) -> void:
 		for y in [7, 9, 11, 5]:
 			if placed >= count:
 				return
-			var cell := Vector2i(x, y)
+			var cell := _moved(Vector2i(x, y))
 			if Farm.buildable(state, cell):
 				if Building.place(state, &"gun_tower", cell):
 					placed += 1
@@ -5468,10 +5480,13 @@ func _task_0033_power() -> void:
 
 ## `count` towers in a row somewhere they will fit. Returns where they went.
 func _line_of_towers(state: Dictionary, id: StringName, count: int,
-		avoid: Array = []) -> Array:
+		avoid: Array = [], from: Vector2i = Vector2i(28, 2)) -> Array:
 	var out: Array = []
-	for y in range(2, Grid.HEIGHT - 2):
-		for x in range(20, Grid.WIDTH - 2):
+	# From the first open ground east of the old quarry, where this line
+	# always began: rows two to six started at column 28.
+	var start := _moved(from)
+	for y in range(start.y, Grid.HEIGHT - 2):
+		for x in range(start.x, Grid.WIDTH - 2):
 			if out.size() >= count:
 				return out
 			var cell := Vector2i(x, y)
@@ -5909,7 +5924,7 @@ func _mixed_night(seed_value: int, rounds: int) -> Dictionary:
 		for x in range(22, 30):
 			if guns >= 4:
 				break
-			if Building.place(state, &"gun_tower", Vector2i(x, y)):
+			if Building.place(state, &"gun_tower", _moved(Vector2i(x, y))):
 				guns += 1
 		if guns >= 4:
 			break
@@ -5918,7 +5933,7 @@ func _mixed_night(seed_value: int, rounds: int) -> Dictionary:
 		for x in range(10, 18):
 			if mortars >= 4:
 				break
-			if Building.place(state, &"mortar", Vector2i(x, y)):
+			if Building.place(state, &"mortar", _moved(Vector2i(x, y))):
 				mortars += 1
 		if mortars >= 4:
 			break
@@ -6487,11 +6502,12 @@ func _a_full_farm(seed_value: int) -> Dictionary:
 		Farming.act(state, cell)
 		sown += 1
 
-	# As many towers as will fit on the east half.
+	# As many towers as will fit on the east half of the old yard, moved
+	# with the farmstead - the fight this was measured on, not 2,000 guns.
 	var built := 0
-	for y in range(1, Grid.HEIGHT - 1):
-		for x in range(19, Grid.WIDTH - 1):
-			if Building.place(state, &"gun_tower", Vector2i(x, y)):
+	for y in range(1, Save.V3_FARM.y - 1):
+		for x in range(19, Save.V3_FARM.x - 1):
+			if Building.place(state, &"gun_tower", _moved(Vector2i(x, y))):
 				built += 1
 	var gen := _room_for(state, Building.size_of(&"generator"))
 	Building.place(state, &"generator", gen)
@@ -6983,7 +6999,7 @@ func _task_0041_tutorial() -> void:
 		for x in range(22, 32):
 			if placed >= 4:
 				break
-			if Building.place(armed, &"gun_tower", Vector2i(x, y)):
+			if Building.place(armed, &"gun_tower", _moved(Vector2i(x, y))):
 				placed += 1
 	expect(placed == 4, "four towers, which is a day's iron", str(placed))
 	expect(Tutorial.progress(armed) == 0,
@@ -7167,7 +7183,9 @@ func _aims_at(state: Dictionary, from: Vector2i, how: StringName) -> int:
 func _three_in_a_row(seed_value: int) -> Dictionary:
 	var state := State.create(seed_value)
 	Resources.gain(state, {GameData.WOOD: 200, GameData.IRON: 200})
-	var tower := _room_for(state, Vector2i(1, 1))
+	var tower := _moved(Vector2i(3, 0))
+	while not Farm.buildable(state, tower) and tower.x < Grid.WIDTH - 1:
+		tower.x += 1
 	Building.place(state, &"gun_tower", tower)
 	Phases.begin_preparation(state)
 	Sim.advance(state, GameData.PREPARATION_TICKS)
@@ -8015,8 +8033,8 @@ func _wall_a_lane(state: Dictionary, spawn: Vector2i) -> int:
 ## A zombie with wall on all four sides of it.
 func _seal_a_pocket(state: Dictionary) -> Dictionary:
 	Pathing.refresh(state)
-	var cell := Vector2i(30, 9)
-	while not Farm.buildable(state, cell) and cell.x < 36:
+	var cell := _moved(Vector2i(30, 9))
+	while not Farm.buildable(state, cell) and cell.x < _moved(Vector2i(36, 9)).x:
 		cell.x += 1
 	var walls := 0
 	for offset in [Vector2i(0, 1), Vector2i(0, -1), Vector2i(1, 0),
@@ -8724,8 +8742,11 @@ func _maze_night(seed_value: int, seal_the_last: bool = true) -> Dictionary:
 	Pathing.refresh(state)
 	var spawn: Vector2i = Enemies.spawn_cells(state, 0)[0]
 
+	# Every seventh column, lined up with the old yard's (6, 13, 20 ...) once
+	# moved, and its gaps on the same rows of that yard.
+	var shift := _moved(Vector2i.ZERO)
 	var columns: Array = []
-	var column := 6
+	var column := posmod(6 + shift.x, 7)
 	while column < Grid.WIDTH - 4:
 		columns.append(column)
 		column += 7
@@ -8742,17 +8763,19 @@ func _maze_night(seed_value: int, seal_the_last: bool = true) -> Dictionary:
 		if sealed < 0 or absi(int(x) - home.x) < absi(sealed - home.x):
 			sealed = int(x)
 
-	var offset := 0
 	for x in columns:
+		var offset := posmod((int(x) - (6 + shift.x)) / 7 * 3, 7)
 		for y in Grid.HEIGHT:
 			# One gap per line, in a different place each time - except the
-			# line nearest the house, which has none.
-			if int(x) != sealed and y % 7 == offset:
+			# line nearest the house, which has none. **Gaps only within the
+			# old yard's 25 rows**: its top and bottom were the edge of the
+			# map, and a maze with a way round both ends is not this maze.
+			var in_yard := y >= shift.y and y < shift.y + Save.V3_FARM.y
+			if int(x) != sealed and in_yard and posmod(y - shift.y, 7) == offset:
 				continue
 			var cell := Vector2i(int(x), y)
 			if Farm.buildable(state, cell):
 				Farm.place(state, cell, {"id": &"wall", "hp": hp})
-		offset = (offset + 3) % 7
 	Pathing.refresh(state)
 	return state
 
@@ -8787,10 +8810,12 @@ func _walled_lane(seed_value: int, where_gap: StringName,
 		# the line sealed after all and every runner dutifully ate its way
 		# through a wall it was supposed to run around.
 		#
-		# **Within the farmstead's 25 rows.** The farm runs on to row 64 now,
-		# and a gap down there is a way round four times as long as the one
-		# this lane measures; the column below the gap is walled instead.
-		for y in range(mini(Grid.HEIGHT, Save.V3_FARM.y) - 1, -1, -1):
+		# **Within the old yard's 25 rows, moved with the farmstead.** The
+		# farm runs on above and below them now, and a gap out there is a way
+		# round far longer than the one this lane measures; the rest of the
+		# column is walled instead.
+		var top := _moved(Vector2i.ZERO).y
+		for y in range(mini(Grid.HEIGHT, top + Save.V3_FARM.y) - 1, top - 1, -1):
 			if Farm.walkable(state, Vector2i(column, y)):
 				gap = y
 				break
@@ -8880,6 +8905,13 @@ func _watch_a_maze(seed_value: int, crowd: int, ticks: int) -> Dictionary:
 		var version := int(state["grid_version"])
 		Sim.advance(state, 1)
 		var stable := int(state["grid_version"]) == version
+		if not stable:
+			# **A wall came down: a new field, and a new walk.** The promise is
+			# that nobody turns back while the field holds still; after a
+			# rebuild, heading back past a cell to the new gap is the field
+			# working, so the trails start again from here.
+			seen.clear()
+			recent.clear()
 		for id in Entities.ids(state):
 			var at := Entities.cell_of(state, id)
 			if at.x < 0:
@@ -8908,6 +8940,8 @@ func _watch_a_maze(seed_value: int, crowd: int, ticks: int) -> Dictionary:
 			steps += 1
 			if stable and worth >= int(before[1]):
 				uphill += 1
+			if not seen.has(id):
+				seen[id] = {}
 			var been: Dictionary = seen[id]
 			if stable and been.has(Grid.index(at)):
 				revisited += 1
@@ -10846,8 +10880,9 @@ func _giant_against(seed_value: int, mix: Array) -> Dictionary:
 	Resources.gain(state, {GameData.OIL: 4000, GameData.IRON: 4000,
 		GameData.WOOD: 4000, GameData.STONE: 4000, GameData.GUNPOWDER: 4000})
 	for _i in 6:
-		# Power belongs behind the fight, leaving the measured tower line clear.
-		var plant := Vector2i(1 + _i * Building.size_of(&"generator").x, 20)
+		# Power belongs behind the fight, leaving the measured tower line clear:
+		# the first room from the top left, the old yard, is far behind it.
+		var plant := _room_for(state, Building.size_of(&"generator"))
 		if plant != Vector2i(-1, -1):
 			Building.place(state, &"generator", plant)
 
@@ -10855,7 +10890,14 @@ func _giant_against(seed_value: int, mix: Array) -> Dictionary:
 	var towers := 0
 	for pair in mix:
 		var id: StringName = (pair as Array)[0]
-		var placed := _line_of_towers(state, id, int((pair as Array)[1]))
+		# **As far from its walk as they were.** In the old yard the Giant
+		# came in along rows four to seven, round the quarry, under a line on
+		# row two. Here it walks in along the east road, six rows lower, so
+		# the line stands six rows lower too: measured, this is the fight the
+		# old numbers came from (mortars kill it, crossbows alone do not, a
+		# mix with about thirteen seconds to spare).
+		var placed := _line_of_towers(state, id, int((pair as Array)[1]), [],
+			Vector2i(28, 8))
 		towers += placed.size()
 		spend += _price_of(Building.cost_of(id)) * placed.size()
 	_night_falls(state)
@@ -12653,8 +12695,9 @@ func _task_0069_stats() -> void:
 
 ## A cell on the open right-hand side that will take a wall, or (-1, -1).
 func _somewhere_for_a_wall(state: Dictionary) -> Vector2i:
-	for x in range(19, Grid.WIDTH - 1):
-		for y in range(2, Grid.HEIGHT - 1):
+	var start := _moved(Vector2i(19, 2))
+	for x in range(start.x, Grid.WIDTH - 1):
+		for y in range(start.y, Grid.HEIGHT - 1):
 			var cell := Vector2i(x, y)
 			if Building.can_place(state, &"wall", cell):
 				return cell

@@ -111,6 +111,10 @@ const HOUSE_FURNITURE := [
 	{"id": &"plant", "cell": Vector2i(1, 10), "size": Vector2i(2, 1)},
 ]
 
+## Where a new game starts the farmer: on the farmhouse porch, the head of the
+## south road. `check_map()` holds it to the house the map draws.
+const PLAYER_START := Vector2i(40, 26)
+
 ## What the farmhouse can take before the night is lost.
 const HOUSE_HP := 100                   # LEVER: hit points, 60-200
 
@@ -1403,21 +1407,24 @@ const ENDLESS: Dictionary = {
 
 ## Where the horde comes in, as `[[x, y], ...]` per spawn point.
 ##
-## The wave tables above name these by index: `0` is the east edge, which is
-## the open ground the farm was drawn to have, and `1` is the south, across the
-## bottom of the map. A cell that is not walkable or cannot reach the house is
-## skipped at spawn time rather than being kept in step by hand here.
+## The wave tables above name these by index: `0` comes from the east and `1`
+## from the south east. **Where they always were, relative to the house**: when
+## the farmstead moved to the middle of the farm (2026-10-06) both moved with
+## it, 24 tiles east and 18 south, so a night is fought over the same ground
+## at the same distances it was balanced on. A cell that is not walkable or
+## cannot reach the house is skipped at spawn time rather than being kept in
+## step by hand here.
 ##
 ## **Two sides, not four.** A farm attacked from every direction at once cannot
 ## be defended with the handful of towers a first night affords, and the reason
 ## to choose where a wall goes disappears with it.
 const SPAWNS: Array = [
-	# 0 - the east edge, down the open right-hand side.
-	[[44, 4], [44, 5], [44, 6], [44, 7], [44, 8], [44, 9],
-	 [44, 10], [44, 11], [44, 12], [44, 13]],
-	# 1 - the south, along the bottom of the open ground.
-	[[26, 14], [28, 14], [30, 14], [32, 14], [34, 14],
-	 [24, 13], [36, 13]],
+	# 0 - the east, a line across the east road out in the open field.
+	[[68, 22], [68, 23], [68, 24], [68, 25], [68, 26], [68, 27],
+	 [68, 28], [68, 29], [68, 30], [68, 31]],
+	# 1 - the south east, along the open ground below the stall.
+	[[50, 32], [52, 32], [54, 32], [56, 32], [58, 32],
+	 [48, 31], [60, 31]],
 ]
 
 
@@ -1609,15 +1616,21 @@ const DEFEAT_KEEPS_TECH := true
 # ====================================================================== the map
 
 ## The farm, as one 80x65 picture: **Stardew Valley's Standard Farm size**,
-## 5,200 cells. The farm of the previous 45x25 map is still the top left of it,
-## character for character - house, shop, workshop, pond, quarry and beds where
-## they were - and the land around it is new: a tree line all round, a road
-## out east and one out south, woods east of the farm where the night's east
-## horde comes out, a forest with a pond in it to the south west, an orchard,
-## a second pond with a jetty, a rocky outcrop, and open ground strewn with
-## stones and saplings the way a new Stardew farm is. `design.md` asked for a
-## farm 1.2-1.5 screens wide; the owner asked for this one on 2026-10-05.
-## Save migrations widen older farms without moving anything on them.
+## 5,200 cells. `design.md` asked for 1.2-1.5 screens; the owner asked for
+## this one on 2026-10-05.
+##
+## **The farmstead is in the middle**, at the head of the south road, where the
+## owner put it on 2026-10-06: the house facing down the road, the workshop and
+## its animals to the west, the stall to the east, the well by the porch and
+## the beds in two fields either side of the road, with the small southern
+## garden behind the workshop. Roads run from it to the east and south edges,
+## and the night comes from the east and the south east (`SPAWNS`). The top
+## left is what the first farm was - its pond and jetty, the quarry, the
+## trees - with the old yard gone back to saplings and stones. Around it all:
+## a tree line, woods, a forest with a pond to the south west, an orchard, a
+## second pond with a jetty, a rocky outcrop, and open ground strewn the way a
+## new Stardew farm is. Saves keep their own farm: migrations widen older ones
+## without moving anything on them.
 ##
 ## **The whole world is this map**, by day and by night alike: `design.md`
 ## pillar 1 is that there is one farm and it is everything, and pillar 2 is that
@@ -1637,67 +1650,67 @@ const DEFEAT_KEEPS_TECH := true
 ## line rather than a farm that is subtly wrong down one edge.
 const FARM_MAP: Array = [
 	"TTT.TTTT....TTT..TT.....TT....TT..TTT.TTT.TT...TTTTT..TTTTT..TTTTT..TTTTT..TTT.T",
-	"....................S######o........T.......T..................................T",
-	"T..ssssss......ppp..S######o...........T.......T.T.............................T",
-	"...ssssss.....p...p.S######o...........T...........................#######r....T",
-	"...ssssss....HHHHHH.S######o....r.............T.T.T................#######.....T",
-	"T..ssssss....HHHHHH.S######o...........T.........................T.#######r....T",
-	"...ssssss....HHHHHH.#####ooo...$$$$............T.T.........T......r#######.....T",
-	"T.....w......HHHHHH............$$$$....T..........T..............rr.r..r.r.....T",
-	"..ssssss.......pp...r.....r............T......T.T.T.................r....T.....T",
-	"..ssssssWWWW...pp................T.T...T.....ppppppppppppppppppppppppppppppppppp",
-	"..ssssssWWWW...pp..............rTT.TT..T.....ppppppppppppppppppppppppppppppppppp",
-	"T.......WWWWc..pp................TT.T..T..................................r....T",
-	".....rc....C...pp...T.........TT.TT.TT........T.T.T............................T",
-	"T.........=====p......T.........TT.T...T..............r...T....................T",
-	"..~~~~~~~~=====................................T.T................r............T",
-	".~~~~~~~~~~~~~~~~~..............TT.....................T..T.TT..T..T..T..T..T..T",
+	"....................S######o........T.......T.......................r..........T",
+	"T......T............S######o...........T.......T.T...r.........................T",
+	"....................S######o...........T...........r...............#######r....T",
+	".....T...r..........S######o....r.............T.T.T...............r#######.....T",
+	"T..........r........S######o...........T..............T........T...#######r....T",
+	"......T.............#####ooo...................T.T................r#######.....T",
+	"T.........T.....T......................T.........................r..r..r.r.....T",
+	"...............pp...r.....r............T......T.T.T............................T",
+	"...T........T..pp................T.T...T...............................r.......T",
+	".........r.....pp.T............rTT.TT..T.......T.TT..T.........................T",
+	"T..............pp................TT.T..T.......................................T",
+	".....r......r..pp...T.........TT.TT.TT........T.T.T............................T",
+	"T.........=====p......T.........TT.T...T.......................................T",
+	"..~~~~~~~~=====................................T.T.............................T",
+	".~~~~~~~~~~~~~~~~~..............TT.....................T..T..T..T..T..T.TT..T..T",
 	"~~~~~~~~~~~~~~~~~~~~~~~....TT.................T.T.T............................T",
-	"~~~~~~~~~~~~~~~~~~~~~~~~~~..TTT...TTTTTT............r.T..........r.............T",
-	"~~~~~~~~~~~~~~~~~~~~~~~~~~~............................T..T..TT.TT.T..T..T..T..T",
-	"~~~~~~~~~~~~~~~~~~~~~~~~~~~~...TT...TT..TTTTT.............T....................T",
-	"..............................ssss........................Tr...................T",
-	"..............................ssss.....................T..T..T..T..T.TT..T..T..T",
-	"..............................ssss.....................................T..rr...T",
-	"...............................................................................T",
-	"...............................................................r...............T",
-	"T......r.......................r.......pp......................................T",
-	"T.....................................rpp......................................T",
-	"T......................................pp....................r............T....T",
-	"T.T.T.T.T.T.T.T.T...T.T........r.T.....ppT.....................................T",
-	"T......................................pp.................T....T...............T",
-	"T..T.......T.T.T.T.T.T.................pp......................................T",
-	"T.................................T....pp......................................T",
-	"T.T.T.T.T.T.T...T.T.T.T.......r........pp....r.................T....Tr.........T",
-	"T....................................T.pp........T..........T..................T",
-	"T..T.T.T.T.T.T.T.....T......T..........ppT..........T...T............r.........T",
-	"T......................................pp......T..........................rr...T",
-	"T.T...T.T.T.T.T.T.T.T.T................pp......................................T",
-	"T...........................T..........pp..................T...................T",
-	"T..T.T.............T.T.......T.........pp..............................T.......T",
-	"T......................................pp.T.......................T..T..r......T",
-	"T.T.T.T...~~~~....T.T.T............r...pp..T...........................r.......T",
-	"T........~~~~~~.........r..............pp...................T..==..............T",
-	"T..T.T...~~~~~~..T.T.T.........T....rT.pp...........T......T...==.....T........T",
-	"T........~~~~~~..pppppppp..............ppT...................~~==~~............T",
-	"T.T.T.T...~~~~....T.T.T................pp..................~~~~==~~~~~.........T",
-	"T........................r.............pp....T............~~~~~==~~~~~~........T",
-	"T....T...........T.T.T..............T..pp................~~~~~~~~~~~~~~~.......T",
-	"T...............................r....r.pp.............r..~~~~~~~~~~~~~~~~......T",
-	"T.T.T.............T.T.T................pp.T..............~~~~~~~~~~~~~~~~......T",
-	"T...............................T.r....pp.................~~~~~~~~~~~~~~....T..T",
-	"T..T.T.T.T.T.T.T...T.T..............T..pp.................~~~~~~~~~~~~~........T",
-	"T......................................pp.T..........r....r.~~~~~~~~~..........T",
-	"T...T.T.T.T.T.T.T.T.T.T........r.......pp.....................~~~~~T...........T",
-	"T...............................T......pp............r............T.r..........T",
-	"T..T.T.T.T.T.T.T.T.T.T.............T...pp...T........................r.........T",
-	"T.............................T........pp...............................r......T",
-	"T.T.T.T.T...T.T.T.T...T....T...........pp.T.......T.........T..................T",
-	"T......................................pp......T...r...T.......................T",
-	"T..T.T.T.T...T...T.T.T.................pp.r....................................T",
+	"~~~~~~~~~~~~~~~~~~~~~~~~~~..TTT...TTTTTT...........................T...........T",
+	"~~~~~~~~~~~~~~~~~~~~~~~~~~~............................T..T..T..T..T..T.TT..T..T",
+	"~~~~~~~~~~~~~~~~~~~~~~~~~~~~...TT...TT..TTTTT..................................T",
+	"..............................ssss........................T......r.............T",
+	"..............................ssss.....................T..T..T..T..T..T..T..T..T",
+	"..............................ssss...HHHHHH....................................T",
+	".....................................HHHHHH....................................T",
+	"..............................WWWW...HHHHHH.$$$$....r.......T...T..r...........T",
+	"T.............................WWWW...HHHHHH.$$$$...............................T",
+	"T.............................WWWW..w..pp.................T....................T",
+	"T......................T...C....pppppppppppppppppppppppppppppppppppppppppppppppp",
+	"T.T.T.T.T.T.T.T.T.T.T.Tr...............pp.......pppppppppppppppppppppppppppppppp",
+	"T.........................c.....ssssss.pp.ssssss...............................T",
+	"T..T.T.T.T.T...T.T.T........c...ssssss.pp.ssssss.....T.........................T",
+	"T...............................ssssss.pp.ssssss...T.....r.....................T",
+	"T.T.T.T.T.T.T.T.T.T.T.T.........ssssss.pp.ssssss...........T...................T",
+	"T......................................pp..............r.......................T",
+	"T..T.T.T...T...T.T.T.T.................pp............r.........................T",
 	"T......................................pp......................................T",
-	"T.T...T.T.T.T.T.T...T.T................pp.T...T.....T....T.....................T",
-	"T......................................pp...T....rT............................T",
+	"T.T.T.T.T.T.T.T.T.T.T.T...........r....pp......................................T",
+	"T......................................pp......................................T",
+	"T..T.............T.T.T.......T.........pp......................................T",
+	"T......................................pp.......T...r...T............T.........T",
+	"T.T...T...~~~~......T.T..............T.pp.............................TT.......T",
+	"T........~~~~~~........................pp......................==.r............T",
+	"T..T.T...~~~~~~..T.T.T.................pp......................==..............T",
+	"T........~~~~~~..pppppppp..............pp....................~~==~~............T",
+	"T.T.T.T...~~~~....T.T..................pp..................~~~~==~~~~~.r.......T",
+	"T...........................T......T...pp.................~~~~~==~~~~~~...r....T",
+	"T..T.T...........T.T.T.....T...T.......pp...........TT...~~~~~~~~~~~~~~~.r.....T",
+	"T...........................r..........pp...T............~~~~~~~~~~~~~~~~......T",
+	"T.T.T.T.............T.............r....pp................~~~~~~~~~~~~~~~~......T",
+	"T......................................pp..T....T..T......~~~~~~~~~~~~~~.......T",
+	"T..T.T.T.T.T.T.T.T.T.T...............r.pp.................~~~~~~~~~~~~~........T",
+	"T..............................r.......pp..............r....~~~~~~~~~..........T",
+	"T.T.T.T...T...T.T.T.T.T...r............ppr....................~~~~~............T",
+	"T......................................pp.....T................................T",
+	"T..T.T.T.T.T...T.T.T.T.........TT......pp...............................r......T",
+	"T......................................pp................................r.....T",
+	"T.T.T.T...T.T.T.T.T...T................pp................................T.....T",
+	"T......................T..............Tpp...T...........T.......T..............T",
+	"T..T.T...T.T.T.T...T.T.................pp......................................T",
+	"T......................................pp....................T.......T.........T",
+	"T.T...T.T.T.T...T.T.T.T......r.........pp......................................T",
+	"T....................................rTpp...................T..............r...T",
 	"T......................................pp......................................T",
 	"T......................................pp......................................T",
 	"T.TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT.pp.TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT.T",
@@ -2177,6 +2190,21 @@ static func check_map(rows: Array) -> Array:
 	if rows.size() != GRID_HEIGHT:
 		errors.append("the farm map is %d rows, not %d"
 			% [rows.size(), GRID_HEIGHT])
+	# **The farmer starts on the porch** - the middle of the cell row below
+	# the house - so moving the house on the map and not the start is a red
+	# line rather than a farmer standing in a field on day one.
+	var house := _cells_of_char(rows, _char_for(&"house"))
+	if not house.is_empty():
+		var low := Vector2i(GRID_WIDTH, GRID_HEIGHT)
+		var high := Vector2i(-1, -1)
+		for found in house:
+			var cell: Vector2i = found
+			low = Vector2i(mini(low.x, cell.x), mini(low.y, cell.y))
+			high = Vector2i(maxi(high.x, cell.x), maxi(high.y, cell.y))
+		var porch := Vector2i(low.x + (high.x - low.x + 1) / 2, high.y + 1)
+		if porch != PLAYER_START:
+			errors.append("the farmer starts at %s but the porch is %s"
+				% [PLAYER_START, porch])
 	for y in rows.size():
 		var row: String = rows[y]
 		if row.length() != GRID_WIDTH:
