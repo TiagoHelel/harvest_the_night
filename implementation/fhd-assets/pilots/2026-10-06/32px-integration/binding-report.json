@@ -1,0 +1,4649 @@
+[
+ {
+  "path": "sprites/actors/shadow.png",
+  "group": "effects",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/player/shadow.png",
+  "runtime_seen_in": [
+   "art-crops",
+   "art-fishing-hold",
+   "art-house",
+   "art-locomotion",
+   "art-props",
+   "art-reactions",
+   "art-stations",
+   "art-terrain",
+   "art-water",
+   "art-work",
+   "art",
+   "atmosphere",
+   "barriers",
+   "effects",
+   "enemies",
+   "giant",
+   "house_check",
+   "shot-assets32-probe",
+   "towers",
+   "tree_wind",
+   "visibility"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/auto_crossbow.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/auto_crossbow/level-1-r1.png",
+  "runtime_seen_in": [
+   "art",
+   "atmosphere",
+   "barriers",
+   "shot-assets32-probe",
+   "towers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/auto_crossbow_2.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/auto_crossbow/level-2.png",
+  "runtime_seen_in": [
+   "towers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/auto_crossbow_2_fire.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/auto_crossbow/level-2.png",
+  "runtime_seen_in": [
+   "art",
+   "towers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/auto_crossbow_2_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/auto_crossbow/level-2.png",
+  "runtime_seen_in": [
+   "art",
+   "towers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/auto_crossbow_2_wreck.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/auto_crossbow/level-2.png",
+  "runtime_seen_in": [
+   "towers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/auto_crossbow_3.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/auto_crossbow/level-3.png",
+  "runtime_seen_in": [
+   "towers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/auto_crossbow_3_fire.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/auto_crossbow/level-3.png",
+  "runtime_seen_in": [
+   "art",
+   "towers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/auto_crossbow_3_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/auto_crossbow/level-3.png",
+  "runtime_seen_in": [
+   "art",
+   "towers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/auto_crossbow_3_wreck.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/auto_crossbow/level-3.png",
+  "runtime_seen_in": [
+   "towers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/auto_crossbow_fire.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/auto_crossbow/level-1-r1.png",
+  "runtime_seen_in": [
+   "art",
+   "shot-assets32-probe",
+   "towers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/auto_crossbow_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/auto_crossbow/level-1-r1.png",
+  "runtime_seen_in": [
+   "art",
+   "towers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/auto_crossbow_wreck.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/auto_crossbow/level-1-r1.png",
+  "runtime_seen_in": [
+   "towers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/barricade.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/barricade/states.png",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/barricade_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/barricade/states.png",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/barricade_wreck.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/barricade/states.png",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/fence.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/fence_post",
+  "runtime_seen_in": [
+   "atmosphere",
+   "barriers",
+   "shot-assets32-probe"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/fence_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/fence_post_hurt",
+  "runtime_seen_in": [
+   "art-reactions",
+   "art-work",
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/fence_join_1.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/fence_post",
+  "runtime_seen_in": [
+   "atmosphere",
+   "barriers",
+   "shot-assets32-probe"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/fence_join_10.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/fence_post",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/fence_join_10_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/fence_post_hurt",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/fence_join_11.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/fence_post",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/fence_join_11_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/fence_post_hurt",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/fence_join_12.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/fence_post",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/fence_join_12_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/fence_post_hurt",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/fence_join_13.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/fence_post",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/fence_join_13_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/fence_post_hurt",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/fence_join_14.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/fence_post",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/fence_join_14_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/fence_post_hurt",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/fence_join_15.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/fence_post",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/fence_join_15_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/fence_post_hurt",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/fence_join_1_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/fence_post_hurt",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/fence_join_2.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/fence_post",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/fence_join_2_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/fence_post_hurt",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/fence_join_3.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/fence_post",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/fence_join_3_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/fence_post_hurt",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/fence_join_4.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/fence_post",
+  "runtime_seen_in": [
+   "atmosphere",
+   "barriers",
+   "shot-assets32-probe"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/fence_join_4_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/fence_post_hurt",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/fence_join_5.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/fence_post",
+  "runtime_seen_in": [
+   "atmosphere",
+   "barriers",
+   "shot-assets32-probe"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/fence_join_5_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/fence_post_hurt",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/fence_join_6.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/fence_post",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/fence_join_6_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/fence_post_hurt",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/fence_join_7.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/fence_post",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/fence_join_7_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/fence_post_hurt",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/fence_join_8.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/fence_post",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/fence_join_8_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/fence_post_hurt",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/fence_join_9.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/fence_post",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/fence_join_9_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/fence_post_hurt",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/fence_wreck.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/fence/whole-r2.png",
+  "runtime_seen_in": [
+   "art-reactions",
+   "barriers",
+   "shot-assets32-probe"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/flame_tower.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/flame_tower/level-1-r1.png",
+  "runtime_seen_in": [
+   "art",
+   "barriers",
+   "effects",
+   "towers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/flame_tower_2.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/flame_tower/level-2.png",
+  "runtime_seen_in": [
+   "effects",
+   "towers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/flame_tower_2_fire.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/flame_tower/level-2.png",
+  "runtime_seen_in": [
+   "art",
+   "effects",
+   "towers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/flame_tower_2_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/flame_tower/level-2.png",
+  "runtime_seen_in": [
+   "art",
+   "towers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/flame_tower_2_wreck.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/flame_tower/level-2.png",
+  "runtime_seen_in": [
+   "towers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/flame_tower_3.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/flame_tower/level-3.png",
+  "runtime_seen_in": [
+   "effects",
+   "towers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/flame_tower_3_fire.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/flame_tower/level-3.png",
+  "runtime_seen_in": [
+   "art",
+   "effects",
+   "towers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/flame_tower_3_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/flame_tower/level-3.png",
+  "runtime_seen_in": [
+   "art",
+   "towers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/flame_tower_3_wreck.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/flame_tower/level-3.png",
+  "runtime_seen_in": [
+   "towers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/flame_tower_fire.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/flame_tower/level-1-r1.png",
+  "runtime_seen_in": [
+   "art",
+   "effects",
+   "towers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/flame_tower_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/flame_tower/level-1-r1.png",
+  "runtime_seen_in": [
+   "art",
+   "towers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/flame_tower_wreck.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/flame_tower/level-1-r1.png",
+  "runtime_seen_in": [
+   "towers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/gun_tower.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/gun_tower/level-1-r2.png",
+  "runtime_seen_in": [
+   "art",
+   "atmosphere",
+   "barriers",
+   "effects",
+   "enemies",
+   "shot-assets32-probe",
+   "towers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/gun_tower_2.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/gun_tower/level-2-r2.png",
+  "runtime_seen_in": [
+   "effects",
+   "towers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/gun_tower_2_fire.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/gun_tower/level-2-r2.png",
+  "runtime_seen_in": [
+   "art",
+   "effects",
+   "towers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/gun_tower_2_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/gun_tower/level-2-r2.png",
+  "runtime_seen_in": [
+   "art",
+   "towers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/gun_tower_2_wreck.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/gun_tower/level-2-r2.png",
+  "runtime_seen_in": [
+   "towers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/gun_tower_3.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/gun_tower/level-3.png",
+  "runtime_seen_in": [
+   "effects",
+   "towers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/gun_tower_3_fire.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/gun_tower/level-3.png",
+  "runtime_seen_in": [
+   "art",
+   "effects",
+   "towers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/gun_tower_3_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/gun_tower/level-3.png",
+  "runtime_seen_in": [
+   "art",
+   "towers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/gun_tower_3_wreck.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/gun_tower/level-3.png",
+  "runtime_seen_in": [
+   "towers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/gun_tower_fire.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/gun_tower/level-1-r2.png",
+  "runtime_seen_in": [
+   "art",
+   "effects",
+   "shot-assets32-probe",
+   "towers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/gun_tower_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/gun_tower/level-1-r2.png",
+  "runtime_seen_in": [
+   "art",
+   "towers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/gun_tower_wreck.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/gun_tower/level-1-r2.png",
+  "runtime_seen_in": [
+   "towers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/house.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/buildings/house/whole.png",
+  "runtime_seen_in": [
+   "art-crops",
+   "art-house",
+   "art-locomotion",
+   "art-props",
+   "art-reactions",
+   "art-terrain",
+   "art-water",
+   "art",
+   "atmosphere",
+   "barriers",
+   "effects",
+   "enemies",
+   "giant",
+   "house_check",
+   "shot-assets32-probe",
+   "towers"
+  ],
+  "feeds": [
+   "sprites/buildings/house_0_0.png",
+   "sprites/buildings/house_0_1.png",
+   "sprites/buildings/house_0_2.png",
+   "sprites/buildings/house_1_0.png",
+   "sprites/buildings/house_1_1.png",
+   "sprites/buildings/house_1_2.png",
+   "sprites/buildings/house_2_0.png",
+   "sprites/buildings/house_2_1.png",
+   "sprites/buildings/house_2_2.png"
+  ],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/house_0_0.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "slice of buildings/house",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "exact cut of sprites/buildings/house.png, which WorldView draws whole; per-cell fallback"
+ },
+ {
+  "path": "sprites/buildings/house_0_0_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "slice of buildings/house_hurt",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "exact cut of sprites/buildings/house_hurt.png, which WorldView draws whole; per-cell fallback"
+ },
+ {
+  "path": "sprites/buildings/house_0_1.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "slice of buildings/house",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "exact cut of sprites/buildings/house.png, which WorldView draws whole; per-cell fallback"
+ },
+ {
+  "path": "sprites/buildings/house_0_1_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "slice of buildings/house_hurt",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "exact cut of sprites/buildings/house_hurt.png, which WorldView draws whole; per-cell fallback"
+ },
+ {
+  "path": "sprites/buildings/house_0_2.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "slice of buildings/house",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "exact cut of sprites/buildings/house.png, which WorldView draws whole; per-cell fallback"
+ },
+ {
+  "path": "sprites/buildings/house_0_2_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "slice of buildings/house_hurt",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "exact cut of sprites/buildings/house_hurt.png, which WorldView draws whole; per-cell fallback"
+ },
+ {
+  "path": "sprites/buildings/house_1_0.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "slice of buildings/house",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "exact cut of sprites/buildings/house.png, which WorldView draws whole; per-cell fallback"
+ },
+ {
+  "path": "sprites/buildings/house_1_0_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "slice of buildings/house_hurt",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "exact cut of sprites/buildings/house_hurt.png, which WorldView draws whole; per-cell fallback"
+ },
+ {
+  "path": "sprites/buildings/house_1_1.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "slice of buildings/house",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "exact cut of sprites/buildings/house.png, which WorldView draws whole; per-cell fallback"
+ },
+ {
+  "path": "sprites/buildings/house_1_1_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "slice of buildings/house_hurt",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "exact cut of sprites/buildings/house_hurt.png, which WorldView draws whole; per-cell fallback"
+ },
+ {
+  "path": "sprites/buildings/house_1_2.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "slice of buildings/house",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "exact cut of sprites/buildings/house.png, which WorldView draws whole; per-cell fallback"
+ },
+ {
+  "path": "sprites/buildings/house_1_2_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "slice of buildings/house_hurt",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "exact cut of sprites/buildings/house_hurt.png, which WorldView draws whole; per-cell fallback"
+ },
+ {
+  "path": "sprites/buildings/house_2_0.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "slice of buildings/house",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "exact cut of sprites/buildings/house.png, which WorldView draws whole; per-cell fallback"
+ },
+ {
+  "path": "sprites/buildings/house_2_0_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "slice of buildings/house_hurt",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "exact cut of sprites/buildings/house_hurt.png, which WorldView draws whole; per-cell fallback"
+ },
+ {
+  "path": "sprites/buildings/house_2_1.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "slice of buildings/house",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "exact cut of sprites/buildings/house.png, which WorldView draws whole; per-cell fallback"
+ },
+ {
+  "path": "sprites/buildings/house_2_1_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "slice of buildings/house_hurt",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "exact cut of sprites/buildings/house_hurt.png, which WorldView draws whole; per-cell fallback"
+ },
+ {
+  "path": "sprites/buildings/house_2_2.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "slice of buildings/house",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "exact cut of sprites/buildings/house.png, which WorldView draws whole; per-cell fallback"
+ },
+ {
+  "path": "sprites/buildings/house_2_2_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "slice of buildings/house_hurt",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "exact cut of sprites/buildings/house_hurt.png, which WorldView draws whole; per-cell fallback"
+ },
+ {
+  "path": "sprites/buildings/house_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/buildings/house/hurt.png",
+  "runtime_seen_in": [
+   "art-house"
+  ],
+  "feeds": [
+   "sprites/buildings/house_0_0_hurt.png",
+   "sprites/buildings/house_0_1_hurt.png",
+   "sprites/buildings/house_0_2_hurt.png",
+   "sprites/buildings/house_1_0_hurt.png",
+   "sprites/buildings/house_1_1_hurt.png",
+   "sprites/buildings/house_1_2_hurt.png",
+   "sprites/buildings/house_2_0_hurt.png",
+   "sprites/buildings/house_2_1_hurt.png",
+   "sprites/buildings/house_2_2_hurt.png"
+  ],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/kitchen.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/buildings/kitchen/states.png",
+  "runtime_seen_in": [
+   "art-stations",
+   "shot-assets32-probe"
+  ],
+  "feeds": [
+   "sprites/buildings/kitchen_0_0.png",
+   "sprites/buildings/kitchen_0_1.png",
+   "sprites/buildings/kitchen_1_0.png",
+   "sprites/buildings/kitchen_1_1.png"
+  ],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/kitchen_0_0.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "slice of buildings/kitchen",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "exact cut of sprites/buildings/kitchen.png, which WorldView draws whole; per-cell fallback"
+ },
+ {
+  "path": "sprites/buildings/kitchen_0_1.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "slice of buildings/kitchen",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "exact cut of sprites/buildings/kitchen.png, which WorldView draws whole; per-cell fallback"
+ },
+ {
+  "path": "sprites/buildings/kitchen_1_0.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "slice of buildings/kitchen",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "exact cut of sprites/buildings/kitchen.png, which WorldView draws whole; per-cell fallback"
+ },
+ {
+  "path": "sprites/buildings/kitchen_1_1.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "slice of buildings/kitchen",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "exact cut of sprites/buildings/kitchen.png, which WorldView draws whole; per-cell fallback"
+ },
+ {
+  "path": "sprites/buildings/kitchen_active.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/buildings/kitchen/states.png",
+  "runtime_seen_in": [
+   "art-stations"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/kitchen_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/buildings/kitchen/states.png",
+  "runtime_seen_in": [
+   "art-stations"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/mine.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/mine/states.png",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/mine_spent.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/mine/states.png",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/mine_triggered.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/mine/states.png",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/modules/fence_horizontal.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/fence/whole-r3.png",
+  "runtime_seen_in": [],
+  "feeds": [
+   "sprites/buildings/fence_join_10.png",
+   "sprites/buildings/fence_join_10.png",
+   "sprites/buildings/fence_join_11.png",
+   "sprites/buildings/fence_join_11.png",
+   "sprites/buildings/fence_join_12.png",
+   "sprites/buildings/fence_join_13.png",
+   "sprites/buildings/fence_join_14.png",
+   "sprites/buildings/fence_join_14.png",
+   "sprites/buildings/fence_join_15.png",
+   "sprites/buildings/fence_join_15.png",
+   "sprites/buildings/fence_join_2.png",
+   "sprites/buildings/fence_join_3.png",
+   "sprites/buildings/fence_join_6.png",
+   "sprites/buildings/fence_join_7.png",
+   "sprites/buildings/fence_join_8.png",
+   "sprites/buildings/fence_join_9.png"
+  ],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "module composed into 12 runtime joins"
+ },
+ {
+  "path": "sprites/buildings/modules/fence_horizontal_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/fence/hurt-r1.png",
+  "runtime_seen_in": [],
+  "feeds": [
+   "sprites/buildings/fence_join_10_hurt.png",
+   "sprites/buildings/fence_join_10_hurt.png",
+   "sprites/buildings/fence_join_11_hurt.png",
+   "sprites/buildings/fence_join_11_hurt.png",
+   "sprites/buildings/fence_join_12_hurt.png",
+   "sprites/buildings/fence_join_13_hurt.png",
+   "sprites/buildings/fence_join_14_hurt.png",
+   "sprites/buildings/fence_join_14_hurt.png",
+   "sprites/buildings/fence_join_15_hurt.png",
+   "sprites/buildings/fence_join_15_hurt.png",
+   "sprites/buildings/fence_join_2_hurt.png",
+   "sprites/buildings/fence_join_3_hurt.png",
+   "sprites/buildings/fence_join_6_hurt.png",
+   "sprites/buildings/fence_join_7_hurt.png",
+   "sprites/buildings/fence_join_8_hurt.png",
+   "sprites/buildings/fence_join_9_hurt.png"
+  ],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "module composed into 12 runtime joins"
+ },
+ {
+  "path": "sprites/buildings/modules/fence_post.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/fence/whole-r3.png",
+  "runtime_seen_in": [],
+  "feeds": [
+   "sprites/buildings/fence.png",
+   "sprites/buildings/fence.png",
+   "sprites/buildings/fence_join_1.png",
+   "sprites/buildings/fence_join_1.png",
+   "sprites/buildings/fence_join_10.png",
+   "sprites/buildings/fence_join_10.png",
+   "sprites/buildings/fence_join_11.png",
+   "sprites/buildings/fence_join_11.png",
+   "sprites/buildings/fence_join_12.png",
+   "sprites/buildings/fence_join_12.png",
+   "sprites/buildings/fence_join_13.png",
+   "sprites/buildings/fence_join_13.png",
+   "sprites/buildings/fence_join_14.png",
+   "sprites/buildings/fence_join_14.png",
+   "sprites/buildings/fence_join_15.png",
+   "sprites/buildings/fence_join_15.png",
+   "sprites/buildings/fence_join_2.png",
+   "sprites/buildings/fence_join_2.png",
+   "sprites/buildings/fence_join_3.png",
+   "sprites/buildings/fence_join_3.png",
+   "sprites/buildings/fence_join_4.png",
+   "sprites/buildings/fence_join_4.png",
+   "sprites/buildings/fence_join_5.png",
+   "sprites/buildings/fence_join_5.png",
+   "sprites/buildings/fence_join_6.png",
+   "sprites/buildings/fence_join_6.png",
+   "sprites/buildings/fence_join_7.png",
+   "sprites/buildings/fence_join_7.png",
+   "sprites/buildings/fence_join_8.png",
+   "sprites/buildings/fence_join_8.png",
+   "sprites/buildings/fence_join_9.png",
+   "sprites/buildings/fence_join_9.png"
+  ],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "module composed into 16 runtime joins"
+ },
+ {
+  "path": "sprites/buildings/modules/fence_post_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/fence/hurt-r1.png",
+  "runtime_seen_in": [],
+  "feeds": [
+   "sprites/buildings/fence_hurt.png",
+   "sprites/buildings/fence_hurt.png",
+   "sprites/buildings/fence_join_10_hurt.png",
+   "sprites/buildings/fence_join_10_hurt.png",
+   "sprites/buildings/fence_join_11_hurt.png",
+   "sprites/buildings/fence_join_11_hurt.png",
+   "sprites/buildings/fence_join_12_hurt.png",
+   "sprites/buildings/fence_join_12_hurt.png",
+   "sprites/buildings/fence_join_13_hurt.png",
+   "sprites/buildings/fence_join_13_hurt.png",
+   "sprites/buildings/fence_join_14_hurt.png",
+   "sprites/buildings/fence_join_14_hurt.png",
+   "sprites/buildings/fence_join_15_hurt.png",
+   "sprites/buildings/fence_join_15_hurt.png",
+   "sprites/buildings/fence_join_1_hurt.png",
+   "sprites/buildings/fence_join_1_hurt.png",
+   "sprites/buildings/fence_join_2_hurt.png",
+   "sprites/buildings/fence_join_2_hurt.png",
+   "sprites/buildings/fence_join_3_hurt.png",
+   "sprites/buildings/fence_join_3_hurt.png",
+   "sprites/buildings/fence_join_4_hurt.png",
+   "sprites/buildings/fence_join_4_hurt.png",
+   "sprites/buildings/fence_join_5_hurt.png",
+   "sprites/buildings/fence_join_5_hurt.png",
+   "sprites/buildings/fence_join_6_hurt.png",
+   "sprites/buildings/fence_join_6_hurt.png",
+   "sprites/buildings/fence_join_7_hurt.png",
+   "sprites/buildings/fence_join_7_hurt.png",
+   "sprites/buildings/fence_join_8_hurt.png",
+   "sprites/buildings/fence_join_8_hurt.png",
+   "sprites/buildings/fence_join_9_hurt.png",
+   "sprites/buildings/fence_join_9_hurt.png"
+  ],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "module composed into 16 runtime joins"
+ },
+ {
+  "path": "sprites/buildings/modules/fence_vertical.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/fence/whole-r2.png",
+  "runtime_seen_in": [],
+  "feeds": [
+   "sprites/buildings/fence_join_1.png",
+   "sprites/buildings/fence_join_11.png",
+   "sprites/buildings/fence_join_12.png",
+   "sprites/buildings/fence_join_13.png",
+   "sprites/buildings/fence_join_13.png",
+   "sprites/buildings/fence_join_14.png",
+   "sprites/buildings/fence_join_15.png",
+   "sprites/buildings/fence_join_15.png",
+   "sprites/buildings/fence_join_3.png",
+   "sprites/buildings/fence_join_4.png",
+   "sprites/buildings/fence_join_5.png",
+   "sprites/buildings/fence_join_5.png",
+   "sprites/buildings/fence_join_6.png",
+   "sprites/buildings/fence_join_7.png",
+   "sprites/buildings/fence_join_7.png",
+   "sprites/buildings/fence_join_9.png"
+  ],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "module composed into 12 runtime joins"
+ },
+ {
+  "path": "sprites/buildings/modules/fence_vertical_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/fence/hurt.png",
+  "runtime_seen_in": [],
+  "feeds": [
+   "sprites/buildings/fence_join_11_hurt.png",
+   "sprites/buildings/fence_join_12_hurt.png",
+   "sprites/buildings/fence_join_13_hurt.png",
+   "sprites/buildings/fence_join_13_hurt.png",
+   "sprites/buildings/fence_join_14_hurt.png",
+   "sprites/buildings/fence_join_15_hurt.png",
+   "sprites/buildings/fence_join_15_hurt.png",
+   "sprites/buildings/fence_join_1_hurt.png",
+   "sprites/buildings/fence_join_3_hurt.png",
+   "sprites/buildings/fence_join_4_hurt.png",
+   "sprites/buildings/fence_join_5_hurt.png",
+   "sprites/buildings/fence_join_5_hurt.png",
+   "sprites/buildings/fence_join_6_hurt.png",
+   "sprites/buildings/fence_join_7_hurt.png",
+   "sprites/buildings/fence_join_7_hurt.png",
+   "sprites/buildings/fence_join_9_hurt.png"
+  ],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "module composed into 12 runtime joins"
+ },
+ {
+  "path": "sprites/buildings/modules/wall_horizontal.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/wall/whole-r3.png",
+  "runtime_seen_in": [],
+  "feeds": [
+   "sprites/buildings/wall_join_10.png",
+   "sprites/buildings/wall_join_10.png",
+   "sprites/buildings/wall_join_11.png",
+   "sprites/buildings/wall_join_11.png",
+   "sprites/buildings/wall_join_12.png",
+   "sprites/buildings/wall_join_13.png",
+   "sprites/buildings/wall_join_14.png",
+   "sprites/buildings/wall_join_14.png",
+   "sprites/buildings/wall_join_15.png",
+   "sprites/buildings/wall_join_15.png",
+   "sprites/buildings/wall_join_2.png",
+   "sprites/buildings/wall_join_3.png",
+   "sprites/buildings/wall_join_6.png",
+   "sprites/buildings/wall_join_7.png",
+   "sprites/buildings/wall_join_8.png",
+   "sprites/buildings/wall_join_9.png"
+  ],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "module composed into 12 runtime joins"
+ },
+ {
+  "path": "sprites/buildings/modules/wall_horizontal_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/wall/hurt-r1.png",
+  "runtime_seen_in": [],
+  "feeds": [
+   "sprites/buildings/wall_join_10_hurt.png",
+   "sprites/buildings/wall_join_10_hurt.png",
+   "sprites/buildings/wall_join_11_hurt.png",
+   "sprites/buildings/wall_join_11_hurt.png",
+   "sprites/buildings/wall_join_12_hurt.png",
+   "sprites/buildings/wall_join_13_hurt.png",
+   "sprites/buildings/wall_join_14_hurt.png",
+   "sprites/buildings/wall_join_14_hurt.png",
+   "sprites/buildings/wall_join_15_hurt.png",
+   "sprites/buildings/wall_join_15_hurt.png",
+   "sprites/buildings/wall_join_2_hurt.png",
+   "sprites/buildings/wall_join_3_hurt.png",
+   "sprites/buildings/wall_join_6_hurt.png",
+   "sprites/buildings/wall_join_7_hurt.png",
+   "sprites/buildings/wall_join_8_hurt.png",
+   "sprites/buildings/wall_join_9_hurt.png"
+  ],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "module composed into 12 runtime joins"
+ },
+ {
+  "path": "sprites/buildings/modules/wall_post.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/wall/whole-r3.png",
+  "runtime_seen_in": [],
+  "feeds": [
+   "sprites/buildings/wall.png",
+   "sprites/buildings/wall.png",
+   "sprites/buildings/wall_join_1.png",
+   "sprites/buildings/wall_join_1.png",
+   "sprites/buildings/wall_join_10.png",
+   "sprites/buildings/wall_join_10.png",
+   "sprites/buildings/wall_join_11.png",
+   "sprites/buildings/wall_join_11.png",
+   "sprites/buildings/wall_join_12.png",
+   "sprites/buildings/wall_join_12.png",
+   "sprites/buildings/wall_join_13.png",
+   "sprites/buildings/wall_join_13.png",
+   "sprites/buildings/wall_join_14.png",
+   "sprites/buildings/wall_join_14.png",
+   "sprites/buildings/wall_join_15.png",
+   "sprites/buildings/wall_join_15.png",
+   "sprites/buildings/wall_join_2.png",
+   "sprites/buildings/wall_join_2.png",
+   "sprites/buildings/wall_join_3.png",
+   "sprites/buildings/wall_join_3.png",
+   "sprites/buildings/wall_join_4.png",
+   "sprites/buildings/wall_join_4.png",
+   "sprites/buildings/wall_join_5.png",
+   "sprites/buildings/wall_join_5.png",
+   "sprites/buildings/wall_join_6.png",
+   "sprites/buildings/wall_join_6.png",
+   "sprites/buildings/wall_join_7.png",
+   "sprites/buildings/wall_join_7.png",
+   "sprites/buildings/wall_join_8.png",
+   "sprites/buildings/wall_join_8.png",
+   "sprites/buildings/wall_join_9.png",
+   "sprites/buildings/wall_join_9.png"
+  ],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "module composed into 16 runtime joins"
+ },
+ {
+  "path": "sprites/buildings/modules/wall_post_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/wall/hurt-r1.png",
+  "runtime_seen_in": [],
+  "feeds": [
+   "sprites/buildings/wall_hurt.png",
+   "sprites/buildings/wall_hurt.png",
+   "sprites/buildings/wall_join_10_hurt.png",
+   "sprites/buildings/wall_join_10_hurt.png",
+   "sprites/buildings/wall_join_11_hurt.png",
+   "sprites/buildings/wall_join_11_hurt.png",
+   "sprites/buildings/wall_join_12_hurt.png",
+   "sprites/buildings/wall_join_12_hurt.png",
+   "sprites/buildings/wall_join_13_hurt.png",
+   "sprites/buildings/wall_join_13_hurt.png",
+   "sprites/buildings/wall_join_14_hurt.png",
+   "sprites/buildings/wall_join_14_hurt.png",
+   "sprites/buildings/wall_join_15_hurt.png",
+   "sprites/buildings/wall_join_15_hurt.png",
+   "sprites/buildings/wall_join_1_hurt.png",
+   "sprites/buildings/wall_join_1_hurt.png",
+   "sprites/buildings/wall_join_2_hurt.png",
+   "sprites/buildings/wall_join_2_hurt.png",
+   "sprites/buildings/wall_join_3_hurt.png",
+   "sprites/buildings/wall_join_3_hurt.png",
+   "sprites/buildings/wall_join_4_hurt.png",
+   "sprites/buildings/wall_join_4_hurt.png",
+   "sprites/buildings/wall_join_5_hurt.png",
+   "sprites/buildings/wall_join_5_hurt.png",
+   "sprites/buildings/wall_join_6_hurt.png",
+   "sprites/buildings/wall_join_6_hurt.png",
+   "sprites/buildings/wall_join_7_hurt.png",
+   "sprites/buildings/wall_join_7_hurt.png",
+   "sprites/buildings/wall_join_8_hurt.png",
+   "sprites/buildings/wall_join_8_hurt.png",
+   "sprites/buildings/wall_join_9_hurt.png",
+   "sprites/buildings/wall_join_9_hurt.png"
+  ],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "module composed into 16 runtime joins"
+ },
+ {
+  "path": "sprites/buildings/modules/wall_vertical.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/wall/whole-r2.png",
+  "runtime_seen_in": [],
+  "feeds": [
+   "sprites/buildings/wall_join_1.png",
+   "sprites/buildings/wall_join_11.png",
+   "sprites/buildings/wall_join_12.png",
+   "sprites/buildings/wall_join_13.png",
+   "sprites/buildings/wall_join_13.png",
+   "sprites/buildings/wall_join_14.png",
+   "sprites/buildings/wall_join_15.png",
+   "sprites/buildings/wall_join_15.png",
+   "sprites/buildings/wall_join_3.png",
+   "sprites/buildings/wall_join_4.png",
+   "sprites/buildings/wall_join_5.png",
+   "sprites/buildings/wall_join_5.png",
+   "sprites/buildings/wall_join_6.png",
+   "sprites/buildings/wall_join_7.png",
+   "sprites/buildings/wall_join_7.png",
+   "sprites/buildings/wall_join_9.png"
+  ],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "module composed into 12 runtime joins"
+ },
+ {
+  "path": "sprites/buildings/modules/wall_vertical_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/wall/hurt.png",
+  "runtime_seen_in": [],
+  "feeds": [
+   "sprites/buildings/wall_join_11_hurt.png",
+   "sprites/buildings/wall_join_12_hurt.png",
+   "sprites/buildings/wall_join_13_hurt.png",
+   "sprites/buildings/wall_join_13_hurt.png",
+   "sprites/buildings/wall_join_14_hurt.png",
+   "sprites/buildings/wall_join_15_hurt.png",
+   "sprites/buildings/wall_join_15_hurt.png",
+   "sprites/buildings/wall_join_1_hurt.png",
+   "sprites/buildings/wall_join_3_hurt.png",
+   "sprites/buildings/wall_join_4_hurt.png",
+   "sprites/buildings/wall_join_5_hurt.png",
+   "sprites/buildings/wall_join_5_hurt.png",
+   "sprites/buildings/wall_join_6_hurt.png",
+   "sprites/buildings/wall_join_7_hurt.png",
+   "sprites/buildings/wall_join_7_hurt.png",
+   "sprites/buildings/wall_join_9_hurt.png"
+  ],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "module composed into 12 runtime joins"
+ },
+ {
+  "path": "sprites/buildings/mortar.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/mortar/level-1.png",
+  "runtime_seen_in": [
+   "art",
+   "barriers",
+   "effects",
+   "towers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/mortar_2.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/mortar/level-2.png",
+  "runtime_seen_in": [
+   "effects",
+   "towers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/mortar_2_fire.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/mortar/level-2.png",
+  "runtime_seen_in": [
+   "art",
+   "effects",
+   "towers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/mortar_2_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/mortar/level-2.png",
+  "runtime_seen_in": [
+   "art",
+   "towers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/mortar_2_wreck.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/mortar/level-2.png",
+  "runtime_seen_in": [
+   "towers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/mortar_3.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/mortar/level-3.png",
+  "runtime_seen_in": [
+   "effects",
+   "towers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/mortar_3_fire.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/mortar/level-3.png",
+  "runtime_seen_in": [
+   "art",
+   "effects",
+   "towers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/mortar_3_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/mortar/level-3.png",
+  "runtime_seen_in": [
+   "art",
+   "towers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/mortar_3_wreck.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/mortar/level-3.png",
+  "runtime_seen_in": [
+   "towers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/mortar_fire.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/mortar/level-1.png",
+  "runtime_seen_in": [
+   "art",
+   "effects",
+   "towers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/mortar_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/mortar/level-1.png",
+  "runtime_seen_in": [
+   "art",
+   "towers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/mortar_wreck.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/mortar/level-1.png",
+  "runtime_seen_in": [
+   "towers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/wall.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/wall_post",
+  "runtime_seen_in": [
+   "barriers",
+   "enemies",
+   "giant",
+   "shot-assets32-probe"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/wall_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/wall_post_hurt",
+  "runtime_seen_in": [
+   "barriers",
+   "enemies"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/wall_join_1.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/wall_post",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/wall_join_10.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/wall_post",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/wall_join_10_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/wall_post_hurt",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/wall_join_11.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/wall_post",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/wall_join_11_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/wall_post_hurt",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/wall_join_12.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/wall_post",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/wall_join_12_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/wall_post_hurt",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/wall_join_13.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/wall_post",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/wall_join_13_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/wall_post_hurt",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/wall_join_14.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/wall_post",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/wall_join_14_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/wall_post_hurt",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/wall_join_15.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/wall_post",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/wall_join_15_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/wall_post_hurt",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/wall_join_1_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/wall_post_hurt",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/wall_join_2.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/wall_post",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/wall_join_2_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/wall_post_hurt",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/wall_join_3.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/wall_post",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/wall_join_3_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/wall_post_hurt",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/wall_join_4.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/wall_post",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/wall_join_4_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/wall_post_hurt",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/wall_join_5.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/wall_post",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/wall_join_5_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/wall_post_hurt",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/wall_join_6.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/wall_post",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/wall_join_6_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/wall_post_hurt",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/wall_join_7.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/wall_post",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/wall_join_7_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/wall_post_hurt",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/wall_join_8.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/wall_post",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/wall_join_8_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/wall_post_hurt",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/wall_join_9.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/wall_post",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/wall_join_9_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "compose of buildings/modules/wall_post_hurt",
+  "runtime_seen_in": [
+   "barriers"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/wall_wreck.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/defences/wall/whole-r2.png",
+  "runtime_seen_in": [
+   "barriers",
+   "giant"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/workshop.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/buildings/workshop/states.png",
+  "runtime_seen_in": [
+   "art-crops",
+   "art-props",
+   "art-reactions",
+   "art-stations",
+   "art-terrain",
+   "art-water",
+   "art-work",
+   "atmosphere",
+   "house_check",
+   "shot-assets32-probe"
+  ],
+  "feeds": [
+   "sprites/buildings/workshop_0_0.png",
+   "sprites/buildings/workshop_0_1.png",
+   "sprites/buildings/workshop_1_0.png",
+   "sprites/buildings/workshop_1_1.png"
+  ],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/workshop_0_0.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "slice of buildings/workshop",
+  "runtime_seen_in": [
+   "art-reactions",
+   "art-work"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/workshop_0_1.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "slice of buildings/workshop",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "exact cut of sprites/buildings/workshop.png, which WorldView draws whole; per-cell fallback"
+ },
+ {
+  "path": "sprites/buildings/workshop_1_0.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "slice of buildings/workshop",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "exact cut of sprites/buildings/workshop.png, which WorldView draws whole; per-cell fallback"
+ },
+ {
+  "path": "sprites/buildings/workshop_1_1.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "slice of buildings/workshop",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "exact cut of sprites/buildings/workshop.png, which WorldView draws whole; per-cell fallback"
+ },
+ {
+  "path": "sprites/buildings/workshop_active.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/buildings/workshop/states.png",
+  "runtime_seen_in": [
+   "art-stations"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/buildings/workshop_hurt.png",
+  "group": "buildings",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/buildings/workshop/states.png",
+  "runtime_seen_in": [
+   "art-stations"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/crops/carrot_0.png",
+  "group": "crops",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/crops/carrot.png",
+  "runtime_seen_in": [
+   "art-crops",
+   "art-reactions",
+   "art-work",
+   "art",
+   "effects"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/crops/carrot_1.png",
+  "group": "crops",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/crops/carrot.png",
+  "runtime_seen_in": [
+   "art-crops",
+   "art"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/crops/carrot_2.png",
+  "group": "crops",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/crops/carrot.png",
+  "runtime_seen_in": [
+   "art-crops",
+   "art",
+   "atmosphere",
+   "shot-assets32-probe"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/crops/carrot_3.png",
+  "group": "crops",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/crops/carrot.png",
+  "runtime_seen_in": [
+   "art-crops",
+   "art-reactions",
+   "art-work",
+   "art",
+   "atmosphere",
+   "effects",
+   "shot-assets32-probe"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/crops/corn_0.png",
+  "group": "crops",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/crops/corn.png",
+  "runtime_seen_in": [
+   "art-crops",
+   "art",
+   "atmosphere",
+   "shot-assets32-probe"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/crops/corn_1.png",
+  "group": "crops",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/crops/corn.png",
+  "runtime_seen_in": [
+   "art-crops",
+   "art"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/crops/corn_2.png",
+  "group": "crops",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/crops/corn.png",
+  "runtime_seen_in": [
+   "art-crops",
+   "art",
+   "shot-assets32-probe"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/crops/corn_3.png",
+  "group": "crops",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/crops/corn.png",
+  "runtime_seen_in": [
+   "art-crops",
+   "art",
+   "atmosphere",
+   "barriers",
+   "shot-assets32-probe"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/crops/tilled.png",
+  "group": "crops",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/crops/tilled.png",
+  "runtime_seen_in": [
+   "art-crops",
+   "art-reactions",
+   "art-work",
+   "art",
+   "atmosphere",
+   "effects",
+   "shot-assets32-probe"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/crops/tilled_wet.png",
+  "group": "crops",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/crops/tilled_wet.png",
+  "runtime_seen_in": [
+   "art-crops",
+   "art-reactions",
+   "art-work",
+   "art",
+   "barriers",
+   "effects"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/crops/wheat_0.png",
+  "group": "crops",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/crops/wheat.png",
+  "runtime_seen_in": [
+   "art-crops",
+   "art"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/crops/wheat_1.png",
+  "group": "crops",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/crops/wheat.png",
+  "runtime_seen_in": [
+   "art-crops",
+   "art",
+   "atmosphere",
+   "shot-assets32-probe"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/crops/wheat_2.png",
+  "group": "crops",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/crops/wheat.png",
+  "runtime_seen_in": [
+   "art-crops",
+   "art"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/crops/wheat_3.png",
+  "group": "crops",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/crops/wheat.png",
+  "runtime_seen_in": [
+   "art-crops",
+   "art",
+   "atmosphere",
+   "shot-assets32-probe"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/effects/dust_0.png",
+  "group": "effects",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/effects/dust.png",
+  "runtime_seen_in": [
+   "atmosphere",
+   "effects",
+   "shot-assets32-probe"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/effects/dust_1.png",
+  "group": "effects",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/effects/dust.png",
+  "runtime_seen_in": [
+   "effects",
+   "shot-assets32-probe"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/effects/dust_2.png",
+  "group": "effects",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/effects/dust.png",
+  "runtime_seen_in": [
+   "effects",
+   "shot-assets32-probe"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/effects/flame_0.png",
+  "group": "effects",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/effects/flame.png",
+  "runtime_seen_in": [
+   "atmosphere",
+   "effects"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/effects/flame_1.png",
+  "group": "effects",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/effects/flame.png",
+  "runtime_seen_in": [
+   "effects"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/effects/flame_2.png",
+  "group": "effects",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/effects/flame.png",
+  "runtime_seen_in": [
+   "effects"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/effects/flame_3.png",
+  "group": "effects",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/effects/flame.png",
+  "runtime_seen_in": [
+   "effects"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/effects/flare_0.png",
+  "group": "effects",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/effects/flare.png",
+  "runtime_seen_in": [
+   "atmosphere",
+   "effects"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/effects/flare_1.png",
+  "group": "effects",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/effects/flare.png",
+  "runtime_seen_in": [
+   "effects"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/effects/flare_2.png",
+  "group": "effects",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/effects/flare.png",
+  "runtime_seen_in": [
+   "effects"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/effects/flare_3.png",
+  "group": "effects",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/effects/flare.png",
+  "runtime_seen_in": [
+   "effects"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/effects/impact_0.png",
+  "group": "effects",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/effects/impact.png",
+  "runtime_seen_in": [
+   "atmosphere",
+   "effects",
+   "shot-assets32-probe"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/effects/impact_1.png",
+  "group": "effects",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/effects/impact.png",
+  "runtime_seen_in": [
+   "effects",
+   "shot-assets32-probe"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/effects/impact_2.png",
+  "group": "effects",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/effects/impact.png",
+  "runtime_seen_in": [
+   "effects",
+   "shot-assets32-probe"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/effects/muzzle_0.png",
+  "group": "effects",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/effects/muzzle.png",
+  "runtime_seen_in": [
+   "atmosphere",
+   "effects",
+   "shot-assets32-probe"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/effects/muzzle_1.png",
+  "group": "effects",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/effects/muzzle.png",
+  "runtime_seen_in": [
+   "effects",
+   "shot-assets32-probe"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/effects/muzzle_2.png",
+  "group": "effects",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/effects/muzzle.png",
+  "runtime_seen_in": [
+   "effects",
+   "shot-assets32-probe"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/effects/smoke_0.png",
+  "group": "effects",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/effects/smoke.png",
+  "runtime_seen_in": [
+   "atmosphere",
+   "effects",
+   "shot-assets32-probe"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/effects/smoke_1.png",
+  "group": "effects",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/effects/smoke.png",
+  "runtime_seen_in": [
+   "effects",
+   "shot-assets32-probe"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/effects/smoke_2.png",
+  "group": "effects",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/effects/smoke.png",
+  "runtime_seen_in": [
+   "effects",
+   "shot-assets32-probe"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/effects/smoke_3.png",
+  "group": "effects",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/effects/smoke.png",
+  "runtime_seen_in": [
+   "effects",
+   "shot-assets32-probe"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/effects/splash_0.png",
+  "group": "effects",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/effects/splash.png",
+  "runtime_seen_in": [
+   "atmosphere",
+   "effects"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/effects/splash_1.png",
+  "group": "effects",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/effects/splash.png",
+  "runtime_seen_in": [
+   "effects"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/effects/splash_2.png",
+  "group": "effects",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/effects/splash.png",
+  "runtime_seen_in": [
+   "effects"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/effects/splash_3.png",
+  "group": "effects",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/effects/splash.png",
+  "runtime_seen_in": [
+   "effects"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/interior/bed.png",
+  "group": "interior",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/interior/farmhouse-v1.png",
+  "runtime_seen_in": [
+   "house_check",
+   "shot-assets32-probe"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/interior/fireplace.png",
+  "group": "interior",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/interior/farmhouse-v1.png",
+  "runtime_seen_in": [
+   "house_check",
+   "shot-assets32-probe"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/interior/floor.png",
+  "group": "interior",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/interior/farmhouse-v1.png",
+  "runtime_seen_in": [
+   "house_check",
+   "shot-assets32-probe"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/interior/kitchen.png",
+  "group": "interior",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/interior/farmhouse-v1.png",
+  "runtime_seen_in": [
+   "house_check",
+   "shot-assets32-probe"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/interior/nightstand.png",
+  "group": "interior",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/interior/nightstand-lamp-v1.png",
+  "runtime_seen_in": [
+   "house_check",
+   "shot-assets32-probe"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/interior/plant.png",
+  "group": "interior",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/interior/farmhouse-v1.png",
+  "runtime_seen_in": [
+   "house_check",
+   "shot-assets32-probe"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/interior/rug.png",
+  "group": "interior",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/interior/farmhouse-v1.png",
+  "runtime_seen_in": [
+   "house_check",
+   "shot-assets32-probe"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/interior/storage.png",
+  "group": "interior",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/interior/storage-west-v1.png",
+  "runtime_seen_in": [
+   "house_check",
+   "shot-assets32-probe"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/interior/table.png",
+  "group": "interior",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/interior/farmhouse-v1.png",
+  "runtime_seen_in": [
+   "house_check",
+   "shot-assets32-probe"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/interior/wall.png",
+  "group": "interior",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/interior/farmhouse-v1.png",
+  "runtime_seen_in": [
+   "house_check",
+   "shot-assets32-probe"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/props/chicken.png",
+  "group": "props",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/props/chicken.png",
+  "runtime_seen_in": [
+   "art-crops",
+   "art-props",
+   "art-terrain",
+   "art-water",
+   "atmosphere",
+   "house_check",
+   "shot-assets32-probe"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/props/cow.png",
+  "group": "props",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/props/cow.png",
+  "runtime_seen_in": [
+   "art-crops",
+   "art-props",
+   "art-reactions",
+   "art-terrain",
+   "art-water",
+   "art-work",
+   "atmosphere",
+   "house_check",
+   "shot-assets32-probe"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/props/generator.png",
+  "group": "props",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/buildings/generator/states.png",
+  "runtime_seen_in": [
+   "art-stations",
+   "shot-assets32-probe"
+  ],
+  "feeds": [
+   "sprites/props/generator_0_0.png",
+   "sprites/props/generator_0_1.png",
+   "sprites/props/generator_1_0.png",
+   "sprites/props/generator_1_1.png"
+  ],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/props/generator_0_0.png",
+  "group": "props",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "slice of props/generator",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "exact cut of sprites/props/generator.png, which WorldView draws whole; per-cell fallback"
+ },
+ {
+  "path": "sprites/props/generator_0_1.png",
+  "group": "props",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "slice of props/generator",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "exact cut of sprites/props/generator.png, which WorldView draws whole; per-cell fallback"
+ },
+ {
+  "path": "sprites/props/generator_1_0.png",
+  "group": "props",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "slice of props/generator",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "exact cut of sprites/props/generator.png, which WorldView draws whole; per-cell fallback"
+ },
+ {
+  "path": "sprites/props/generator_1_1.png",
+  "group": "props",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "slice of props/generator",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "exact cut of sprites/props/generator.png, which WorldView draws whole; per-cell fallback"
+ },
+ {
+  "path": "sprites/props/generator_active.png",
+  "group": "props",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/buildings/generator/states.png",
+  "runtime_seen_in": [
+   "art-stations"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/props/generator_hurt.png",
+  "group": "props",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/buildings/generator/states.png",
+  "runtime_seen_in": [
+   "art-stations"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/props/ore.png",
+  "group": "props",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/props/ore.png",
+  "runtime_seen_in": [
+   "art-crops",
+   "art-props",
+   "art-terrain",
+   "art-water",
+   "atmosphere",
+   "house_check",
+   "shot-assets32-probe"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/props/ore_b.png",
+  "group": "props",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/props/ore_b.png",
+  "runtime_seen_in": [
+   "art-props"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/props/press.png",
+  "group": "props",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/buildings/press/states.png",
+  "runtime_seen_in": [
+   "art-stations",
+   "shot-assets32-probe"
+  ],
+  "feeds": [
+   "sprites/props/press_0_0.png",
+   "sprites/props/press_0_1.png",
+   "sprites/props/press_1_0.png",
+   "sprites/props/press_1_1.png"
+  ],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/props/press_0_0.png",
+  "group": "props",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "slice of props/press",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "exact cut of sprites/props/press.png, which WorldView draws whole; per-cell fallback"
+ },
+ {
+  "path": "sprites/props/press_0_1.png",
+  "group": "props",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "slice of props/press",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "exact cut of sprites/props/press.png, which WorldView draws whole; per-cell fallback"
+ },
+ {
+  "path": "sprites/props/press_1_0.png",
+  "group": "props",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "slice of props/press",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "exact cut of sprites/props/press.png, which WorldView draws whole; per-cell fallback"
+ },
+ {
+  "path": "sprites/props/press_1_1.png",
+  "group": "props",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "slice of props/press",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "exact cut of sprites/props/press.png, which WorldView draws whole; per-cell fallback"
+ },
+ {
+  "path": "sprites/props/press_active.png",
+  "group": "props",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/buildings/press/states.png",
+  "runtime_seen_in": [
+   "art-stations"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/props/press_hurt.png",
+  "group": "props",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/buildings/press/states.png",
+  "runtime_seen_in": [
+   "art-stations"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/props/rock.png",
+  "group": "props",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/props/rock.png",
+  "runtime_seen_in": [
+   "art-crops",
+   "art-props",
+   "art-reactions",
+   "art-terrain",
+   "art-water",
+   "art-work",
+   "atmosphere",
+   "effects",
+   "house_check",
+   "shot-assets32-probe"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/props/rock_b.png",
+  "group": "props",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/props/rock_b.png",
+  "runtime_seen_in": [
+   "art-crops",
+   "art-props",
+   "art-terrain",
+   "art-water",
+   "atmosphere",
+   "house_check",
+   "shot-assets32-probe"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/props/seam.png",
+  "group": "props",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/props/seam.png",
+  "runtime_seen_in": [
+   "art-crops",
+   "art-props",
+   "art-terrain",
+   "art-water",
+   "atmosphere",
+   "house_check",
+   "shot-assets32-probe"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/props/seam_b.png",
+  "group": "props",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/props/seam_b.png",
+  "runtime_seen_in": [
+   "art-crops",
+   "art-props",
+   "art-terrain",
+   "art-water",
+   "atmosphere",
+   "house_check",
+   "shot-assets32-probe"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/props/shop.png",
+  "group": "props",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/buildings/shop/master.png",
+  "runtime_seen_in": [
+   "art-crops",
+   "art-props",
+   "art-reactions",
+   "art-stations",
+   "art-terrain",
+   "art-water",
+   "art-work",
+   "atmosphere",
+   "house_check",
+   "shot-assets32-probe"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/props/stump.png",
+  "group": "props",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/props/stump.png",
+  "runtime_seen_in": [
+   "art-props"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/props/tree.png",
+  "group": "props",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/masters/tree.png",
+  "runtime_seen_in": [
+   "art-crops",
+   "art-house",
+   "art-locomotion",
+   "art-props",
+   "art-reactions",
+   "art-terrain",
+   "art-water",
+   "art-work",
+   "art",
+   "atmosphere",
+   "effects",
+   "enemies",
+   "house_check",
+   "shot-assets32-probe",
+   "tree_wind"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/props/tree_b.png",
+  "group": "props",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/props/tree_b.png",
+  "runtime_seen_in": [
+   "art-crops",
+   "art-props",
+   "art-terrain",
+   "art-water",
+   "atmosphere",
+   "house_check",
+   "shot-assets32-probe",
+   "tree_wind"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/props/well.png",
+  "group": "props",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/buildings/well/master.png",
+  "runtime_seen_in": [
+   "art-crops",
+   "art-props",
+   "art-stations",
+   "art-terrain",
+   "art-water",
+   "atmosphere",
+   "house_check",
+   "shot-assets32-probe"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/terrain/atlas.png",
+  "group": "terrain",
+  "hash_unchanged": true,
+  "owner": "ascii",
+  "recipe": "ASCII map in tools/gen_sprites.py",
+  "runtime_seen_in": [
+   "art-crops",
+   "art-fishing-hold",
+   "art-house",
+   "art-locomotion",
+   "art-props",
+   "art-reactions",
+   "art-stations",
+   "art-terrain",
+   "art-water",
+   "art-work",
+   "art",
+   "atmosphere",
+   "barriers",
+   "effects",
+   "enemies",
+   "giant",
+   "house_check",
+   "shot-assets32-probe",
+   "towers",
+   "tree_wind",
+   "visibility"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/terrain/edge_corner_ne.png",
+  "group": "terrain",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "rotate of terrain/edge_corner_nw",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "terrain atlas source: atlas.png is built from it, cell for cell (check_terrain_art)"
+ },
+ {
+  "path": "sprites/terrain/edge_corner_nw.png",
+  "group": "terrain",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "slice_canvas of terrain/edge_n",
+  "runtime_seen_in": [],
+  "feeds": [
+   "sprites/terrain/edge_corner_ne.png",
+   "sprites/terrain/edge_corner_se.png",
+   "sprites/terrain/edge_corner_sw.png"
+  ],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "terrain atlas source: atlas.png is built from it, cell for cell (check_terrain_art)"
+ },
+ {
+  "path": "sprites/terrain/edge_corner_se.png",
+  "group": "terrain",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "rotate of terrain/edge_corner_nw",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "terrain atlas source: atlas.png is built from it, cell for cell (check_terrain_art)"
+ },
+ {
+  "path": "sprites/terrain/edge_corner_sw.png",
+  "group": "terrain",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "rotate of terrain/edge_corner_nw",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "terrain atlas source: atlas.png is built from it, cell for cell (check_terrain_art)"
+ },
+ {
+  "path": "sprites/terrain/edge_e.png",
+  "group": "terrain",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "rotate of terrain/edge_n",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "terrain atlas source: atlas.png is built from it, cell for cell (check_terrain_art)"
+ },
+ {
+  "path": "sprites/terrain/edge_n.png",
+  "group": "terrain",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/terrain/edge-n.png",
+  "runtime_seen_in": [],
+  "feeds": [
+   "sprites/terrain/edge_corner_nw.png",
+   "sprites/terrain/edge_e.png",
+   "sprites/terrain/edge_s.png",
+   "sprites/terrain/edge_w.png"
+  ],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "terrain atlas source: atlas.png is built from it, cell for cell (check_terrain_art)"
+ },
+ {
+  "path": "sprites/terrain/edge_s.png",
+  "group": "terrain",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "rotate of terrain/edge_n",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "terrain atlas source: atlas.png is built from it, cell for cell (check_terrain_art)"
+ },
+ {
+  "path": "sprites/terrain/edge_w.png",
+  "group": "terrain",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "rotate of terrain/edge_n",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "terrain atlas source: atlas.png is built from it, cell for cell (check_terrain_art)"
+ },
+ {
+  "path": "sprites/terrain/floor.png",
+  "group": "terrain",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/terrain/floor.png",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/tools/art_showcase.gd",
+   "src/ui/house_view.gd",
+   "src/ui/raster_art.gd"
+  ],
+  "role": "terrain atlas source: atlas.png is built from it, cell for cell (check_terrain_art)"
+ },
+ {
+  "path": "sprites/terrain/grass.png",
+  "group": "terrain",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/terrain/grass.png",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/tools/art_showcase.gd",
+   "src/tools/atmosphere_showcase.gd",
+   "src/tools/headless_check.gd",
+   "src/ui/palette_data.gd",
+   "src/ui/raster_art.gd"
+  ],
+  "role": "terrain atlas source: atlas.png is built from it, cell for cell (check_terrain_art)"
+ },
+ {
+  "path": "sprites/terrain/grass_b.png",
+  "group": "terrain",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/terrain/grass_b.png",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/tools/art_showcase.gd",
+   "src/ui/raster_art.gd"
+  ],
+  "role": "terrain atlas source: atlas.png is built from it, cell for cell (check_terrain_art)"
+ },
+ {
+  "path": "sprites/terrain/grass_c.png",
+  "group": "terrain",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/terrain/grass_c.png",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/tools/art_showcase.gd",
+   "src/ui/raster_art.gd"
+  ],
+  "role": "terrain atlas source: atlas.png is built from it, cell for cell (check_terrain_art)"
+ },
+ {
+  "path": "sprites/terrain/grass_d.png",
+  "group": "terrain",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/terrain/grass_d.png",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/tools/art_showcase.gd",
+   "src/ui/raster_art.gd"
+  ],
+  "role": "terrain atlas source: atlas.png is built from it, cell for cell (check_terrain_art)"
+ },
+ {
+  "path": "sprites/terrain/path.png",
+  "group": "terrain",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/terrain/path.png",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/tools/art_showcase.gd",
+   "src/tools/effect_showcase.gd",
+   "src/tools/fhd_directional_preview.gd",
+   "src/ui/raster_art.gd"
+  ],
+  "role": "terrain atlas source: atlas.png is built from it, cell for cell (check_terrain_art)"
+ },
+ {
+  "path": "sprites/terrain/rock.png",
+  "group": "terrain",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/terrain/rock.png",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/core/game_data.gd",
+   "src/core/interact.gd",
+   "src/tools/art_showcase.gd",
+   "src/tools/effect_showcase.gd",
+   "src/tools/headless_check.gd",
+   "src/ui/raster_art.gd",
+   "src/ui/world_view.gd"
+  ],
+  "role": "terrain atlas source: atlas.png is built from it, cell for cell (check_terrain_art)"
+ },
+ {
+  "path": "sprites/terrain/shore_corner_ne.png",
+  "group": "terrain",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "rotate of terrain/shore_corner_nw",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "terrain atlas source: atlas.png is built from it, cell for cell (check_terrain_art)"
+ },
+ {
+  "path": "sprites/terrain/shore_corner_nw.png",
+  "group": "terrain",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/terrain/shore-corner-nw.png",
+  "runtime_seen_in": [],
+  "feeds": [
+   "sprites/terrain/shore_corner_ne.png",
+   "sprites/terrain/shore_corner_se.png",
+   "sprites/terrain/shore_corner_sw.png"
+  ],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "terrain atlas source: atlas.png is built from it, cell for cell (check_terrain_art)"
+ },
+ {
+  "path": "sprites/terrain/shore_corner_se.png",
+  "group": "terrain",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "rotate of terrain/shore_corner_nw",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "terrain atlas source: atlas.png is built from it, cell for cell (check_terrain_art)"
+ },
+ {
+  "path": "sprites/terrain/shore_corner_sw.png",
+  "group": "terrain",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "rotate of terrain/shore_corner_nw",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "terrain atlas source: atlas.png is built from it, cell for cell (check_terrain_art)"
+ },
+ {
+  "path": "sprites/terrain/shore_e.png",
+  "group": "terrain",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "rotate of terrain/shore_n",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "terrain atlas source: atlas.png is built from it, cell for cell (check_terrain_art)"
+ },
+ {
+  "path": "sprites/terrain/shore_n.png",
+  "group": "terrain",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/terrain/shore-n.png",
+  "runtime_seen_in": [],
+  "feeds": [
+   "sprites/terrain/shore_e.png",
+   "sprites/terrain/shore_s.png",
+   "sprites/terrain/shore_w.png"
+  ],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "terrain atlas source: atlas.png is built from it, cell for cell (check_terrain_art)"
+ },
+ {
+  "path": "sprites/terrain/shore_s.png",
+  "group": "terrain",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "rotate of terrain/shore_n",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "terrain atlas source: atlas.png is built from it, cell for cell (check_terrain_art)"
+ },
+ {
+  "path": "sprites/terrain/shore_w.png",
+  "group": "terrain",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "rotate of terrain/shore_n",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "terrain atlas source: atlas.png is built from it, cell for cell (check_terrain_art)"
+ },
+ {
+  "path": "sprites/terrain/soil.png",
+  "group": "terrain",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/terrain/soil.png",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/tools/art_showcase.gd",
+   "src/tools/atmosphere_showcase.gd",
+   "src/ui/palette_data.gd",
+   "src/ui/raster_art.gd"
+  ],
+  "role": "terrain atlas source: atlas.png is built from it, cell for cell (check_terrain_art)"
+ },
+ {
+  "path": "sprites/terrain/water.png",
+  "group": "terrain",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/terrain/water-loop.png",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/core/farming.gd",
+   "src/core/game_data.gd",
+   "src/core/interact.gd",
+   "src/core/tutorial.gd",
+   "src/tools/art_showcase.gd",
+   "src/tools/determinism.gd",
+   "src/tools/effect_showcase.gd",
+   "src/tools/headless_check.gd",
+   "src/tools/shot.gd",
+   "src/ui/palette_data.gd",
+   "src/ui/pixel_effects.gd",
+   "src/ui/player_art.gd",
+   "src/ui/player_frames.gd",
+   "src/ui/player_work.gd",
+   "src/ui/raster_art.gd",
+   "src/ui/sfx.gd",
+   "src/ui/title_screen.gd"
+  ],
+  "role": "terrain atlas source: atlas.png is built from it, cell for cell (check_terrain_art)"
+ },
+ {
+  "path": "sprites/terrain/water_b.png",
+  "group": "terrain",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/terrain/water-loop.png",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "terrain atlas source: atlas.png is built from it, cell for cell (check_terrain_art)"
+ },
+ {
+  "path": "sprites/terrain/water_c.png",
+  "group": "terrain",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/terrain/water-loop.png",
+  "runtime_seen_in": [],
+  "feeds": [],
+  "source_refs": [
+   "src/ui/raster_art.gd"
+  ],
+  "role": "terrain atlas source: atlas.png is built from it, cell for cell (check_terrain_art)"
+ },
+ {
+  "path": "sprites/ui/button_disabled.png",
+  "group": "ui",
+  "hash_unchanged": true,
+  "owner": "ascii",
+  "recipe": "ASCII map in tools/gen_sprites.py",
+  "runtime_seen_in": [
+   "atmosphere",
+   "house_check",
+   "shot-assets32-probe",
+   "ui"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/ui/button_focus.png",
+  "group": "ui",
+  "hash_unchanged": true,
+  "owner": "ascii",
+  "recipe": "ASCII map in tools/gen_sprites.py",
+  "runtime_seen_in": [
+   "atmosphere",
+   "house_check",
+   "shot-assets32-probe",
+   "ui"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/ui/button_hover.png",
+  "group": "ui",
+  "hash_unchanged": true,
+  "owner": "ascii",
+  "recipe": "ASCII map in tools/gen_sprites.py",
+  "runtime_seen_in": [
+   "atmosphere",
+   "house_check",
+   "shot-assets32-probe",
+   "ui"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/ui/button_normal.png",
+  "group": "ui",
+  "hash_unchanged": true,
+  "owner": "ascii",
+  "recipe": "ASCII map in tools/gen_sprites.py",
+  "runtime_seen_in": [
+   "atmosphere",
+   "house_check",
+   "shot-assets32-probe",
+   "ui"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/ui/button_pressed.png",
+  "group": "ui",
+  "hash_unchanged": true,
+  "owner": "ascii",
+  "recipe": "ASCII map in tools/gen_sprites.py",
+  "runtime_seen_in": [
+   "atmosphere",
+   "house_check",
+   "shot-assets32-probe",
+   "ui"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/ui/checkbox_off.png",
+  "group": "ui",
+  "hash_unchanged": true,
+  "owner": "ascii",
+  "recipe": "ASCII map in tools/gen_sprites.py",
+  "runtime_seen_in": [
+   "atmosphere",
+   "house_check",
+   "shot-assets32-probe",
+   "ui"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/ui/checkbox_off_disabled.png",
+  "group": "ui",
+  "hash_unchanged": true,
+  "owner": "ascii",
+  "recipe": "ASCII map in tools/gen_sprites.py",
+  "runtime_seen_in": [
+   "atmosphere",
+   "house_check",
+   "shot-assets32-probe",
+   "ui"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/ui/checkbox_on.png",
+  "group": "ui",
+  "hash_unchanged": true,
+  "owner": "ascii",
+  "recipe": "ASCII map in tools/gen_sprites.py",
+  "runtime_seen_in": [
+   "atmosphere",
+   "house_check",
+   "shot-assets32-probe",
+   "ui"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/ui/checkbox_on_disabled.png",
+  "group": "ui",
+  "hash_unchanged": true,
+  "owner": "ascii",
+  "recipe": "ASCII map in tools/gen_sprites.py",
+  "runtime_seen_in": [
+   "atmosphere",
+   "house_check",
+   "shot-assets32-probe",
+   "ui"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/ui/hud_carrot.png",
+  "group": "ui",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/ui/carrot.png",
+  "runtime_seen_in": [
+   "ui"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/ui/hud_corn.png",
+  "group": "ui",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/ui/corn.png",
+  "runtime_seen_in": [
+   "ui"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/ui/hud_energy.png",
+  "group": "ui",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/ui/energy.png",
+  "runtime_seen_in": [
+   "atmosphere",
+   "shot-assets32-probe",
+   "ui"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/ui/hud_fish.png",
+  "group": "ui",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/ui/fish.png",
+  "runtime_seen_in": [
+   "ui"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/ui/hud_food.png",
+  "group": "ui",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/ui/food.png",
+  "runtime_seen_in": [
+   "atmosphere",
+   "shot-assets32-probe",
+   "ui"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/ui/hud_gunpowder.png",
+  "group": "ui",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/ui/gunpowder.png",
+  "runtime_seen_in": [
+   "ui"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/ui/hud_incendiary.png",
+  "group": "ui",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/ui/incendiary.png",
+  "runtime_seen_in": [
+   "ui"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/ui/hud_iron.png",
+  "group": "ui",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/ui/iron.png",
+  "runtime_seen_in": [
+   "atmosphere",
+   "shot-assets32-probe",
+   "ui"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/ui/hud_meat.png",
+  "group": "ui",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/ui/meat.png",
+  "runtime_seen_in": [
+   "ui"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/ui/hud_money.png",
+  "group": "ui",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/ui/money.png",
+  "runtime_seen_in": [
+   "atmosphere",
+   "shot-assets32-probe",
+   "ui"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/ui/hud_oil.png",
+  "group": "ui",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/ui/oil.png",
+  "runtime_seen_in": [
+   "atmosphere",
+   "shot-assets32-probe",
+   "ui"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/ui/hud_stone.png",
+  "group": "ui",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/ui/stone.png",
+  "runtime_seen_in": [
+   "atmosphere",
+   "shot-assets32-probe",
+   "ui"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/ui/hud_tech.png",
+  "group": "ui",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/ui/tech.png",
+  "runtime_seen_in": [
+   "shot-assets32-probe",
+   "ui"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/ui/hud_wheat.png",
+  "group": "ui",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/ui/wheat.png",
+  "runtime_seen_in": [
+   "atmosphere",
+   "shot-assets32-probe",
+   "ui"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/ui/hud_wood.png",
+  "group": "ui",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/ui/wood.png",
+  "runtime_seen_in": [
+   "atmosphere",
+   "shot-assets32-probe",
+   "ui"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/ui/icon_carrot.png",
+  "group": "ui",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/ui/carrot.png",
+  "runtime_seen_in": [
+   "ui"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/ui/icon_corn.png",
+  "group": "ui",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/ui/corn.png",
+  "runtime_seen_in": [
+   "ui"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/ui/icon_energy.png",
+  "group": "ui",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/ui/energy.png",
+  "runtime_seen_in": [
+   "ui"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/ui/icon_fish.png",
+  "group": "ui",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/ui/fish.png",
+  "runtime_seen_in": [
+   "ui"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/ui/icon_food.png",
+  "group": "ui",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/ui/food.png",
+  "runtime_seen_in": [
+   "ui"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/ui/icon_gunpowder.png",
+  "group": "ui",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/ui/gunpowder.png",
+  "runtime_seen_in": [
+   "ui"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/ui/icon_incendiary.png",
+  "group": "ui",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/ui/incendiary.png",
+  "runtime_seen_in": [
+   "ui"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/ui/icon_iron.png",
+  "group": "ui",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/ui/iron.png",
+  "runtime_seen_in": [
+   "ui"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/ui/icon_meat.png",
+  "group": "ui",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/ui/meat.png",
+  "runtime_seen_in": [
+   "ui"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/ui/icon_money.png",
+  "group": "ui",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/ui/money.png",
+  "runtime_seen_in": [
+   "ui"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/ui/icon_oil.png",
+  "group": "ui",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/ui/oil.png",
+  "runtime_seen_in": [
+   "ui"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/ui/icon_stone.png",
+  "group": "ui",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/ui/stone.png",
+  "runtime_seen_in": [
+   "ui"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/ui/icon_tech.png",
+  "group": "ui",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/ui/tech.png",
+  "runtime_seen_in": [
+   "ui"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/ui/icon_wheat.png",
+  "group": "ui",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/ui/wheat.png",
+  "runtime_seen_in": [
+   "ui"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/ui/icon_wood.png",
+  "group": "ui",
+  "hash_unchanged": true,
+  "owner": "raster",
+  "recipe": "source assets/art_source/ui/wood.png",
+  "runtime_seen_in": [
+   "ui"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/ui/panel.png",
+  "group": "ui",
+  "hash_unchanged": true,
+  "owner": "ascii",
+  "recipe": "ASCII map in tools/gen_sprites.py",
+  "runtime_seen_in": [
+   "atmosphere",
+   "house_check",
+   "shot-assets32-probe",
+   "ui"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/ui/slider_grab.png",
+  "group": "ui",
+  "hash_unchanged": true,
+  "owner": "ascii",
+  "recipe": "ASCII map in tools/gen_sprites.py",
+  "runtime_seen_in": [
+   "atmosphere",
+   "house_check",
+   "shot-assets32-probe",
+   "ui"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/ui/slider_grab_disabled.png",
+  "group": "ui",
+  "hash_unchanged": true,
+  "owner": "ascii",
+  "recipe": "ASCII map in tools/gen_sprites.py",
+  "runtime_seen_in": [
+   "atmosphere",
+   "house_check",
+   "shot-assets32-probe",
+   "ui"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/ui/slider_grab_highlight.png",
+  "group": "ui",
+  "hash_unchanged": true,
+  "owner": "ascii",
+  "recipe": "ASCII map in tools/gen_sprites.py",
+  "runtime_seen_in": [
+   "atmosphere",
+   "house_check",
+   "shot-assets32-probe",
+   "ui"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/ui/slider_track.png",
+  "group": "ui",
+  "hash_unchanged": true,
+  "owner": "ascii",
+  "recipe": "ASCII map in tools/gen_sprites.py",
+  "runtime_seen_in": [
+   "atmosphere",
+   "house_check",
+   "shot-assets32-probe",
+   "ui"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/ui/tab.png",
+  "group": "ui",
+  "hash_unchanged": true,
+  "owner": "ascii",
+  "recipe": "ASCII map in tools/gen_sprites.py",
+  "runtime_seen_in": [
+   "atmosphere",
+   "house_check",
+   "shot-assets32-probe",
+   "ui"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/ui/tab_disabled.png",
+  "group": "ui",
+  "hash_unchanged": true,
+  "owner": "ascii",
+  "recipe": "ASCII map in tools/gen_sprites.py",
+  "runtime_seen_in": [
+   "atmosphere",
+   "house_check",
+   "shot-assets32-probe",
+   "ui"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/ui/tab_hover.png",
+  "group": "ui",
+  "hash_unchanged": true,
+  "owner": "ascii",
+  "recipe": "ASCII map in tools/gen_sprites.py",
+  "runtime_seen_in": [
+   "atmosphere",
+   "house_check",
+   "shot-assets32-probe",
+   "ui"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/ui/tab_selected.png",
+  "group": "ui",
+  "hash_unchanged": true,
+  "owner": "ascii",
+  "recipe": "ASCII map in tools/gen_sprites.py",
+  "runtime_seen_in": [
+   "atmosphere",
+   "house_check",
+   "shot-assets32-probe",
+   "ui"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ },
+ {
+  "path": "sprites/ui/tooltip.png",
+  "group": "ui",
+  "hash_unchanged": true,
+  "owner": "ascii",
+  "recipe": "ASCII map in tools/gen_sprites.py",
+  "runtime_seen_in": [
+   "atmosphere",
+   "house_check",
+   "shot-assets32-probe",
+   "ui"
+  ],
+  "feeds": [],
+  "role": "drawn at runtime"
+ }
+]

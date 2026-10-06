@@ -1,0 +1,182 @@
+[
+  {
+    "farmer_cell": [
+      40,
+      26
+    ],
+    "farmer_draw_scale": 0.5,
+    "farmer_texture": "res://sprites/actors/idle_south_0.png",
+    "inside": false,
+    "integer_stretch": true,
+    "line": "the farmstead: house, stall, workshop, well, animals, trees",
+    "nearest_filter": true,
+    "phase": "DAY",
+    "scene": "farmstead_noon",
+    "tick": 3712
+  },
+  {
+    "farmer_cell": [
+      40,
+      26
+    ],
+    "farmer_draw_scale": 0.5,
+    "farmer_texture": "res://sprites/actors/idle_south_0.png",
+    "inside": false,
+    "integer_stretch": true,
+    "line": "the farmstead at night: lit windows, lamps",
+    "nearest_filter": true,
+    "phase": "NIGHT",
+    "scene": "farmstead_night",
+    "tick": 676
+  },
+  {
+    "farmer_cell": [
+      41,
+      30
+    ],
+    "farmer_draw_scale": 0.5,
+    "farmer_texture": "res://sprites/actors/idle_south_0.png",
+    "inside": false,
+    "integer_stretch": true,
+    "line": "beds sown in three batches: growth stages, wet soil",
+    "nearest_filter": true,
+    "phase": "DAY",
+    "scene": "fields_noon",
+    "tick": 4616
+  },
+  {
+    "farmer_cell": [
+      41,
+      30
+    ],
+    "farmer_draw_scale": 0.5,
+    "farmer_texture": "res://sprites/actors/idle_south_0.png",
+    "inside": false,
+    "integer_stretch": true,
+    "line": "the same beds at night",
+    "nearest_filter": true,
+    "phase": "NIGHT",
+    "scene": "fields_night",
+    "tick": 5216
+  },
+  {
+    "farmer_cell": [
+      43,
+      25
+    ],
+    "farmer_draw_scale": 0.5,
+    "farmer_texture": "res://sprites/actors/idle_east_0.png",
+    "inside": false,
+    "integer_stretch": true,
+    "line": "press, kitchen and generator placed and running",
+    "nearest_filter": true,
+    "phase": "DAY",
+    "scene": "stations_noon",
+    "tick": 3776
+  },
+  {
+    "farmer_cell": [
+      43,
+      25
+    ],
+    "farmer_draw_scale": 0.5,
+    "farmer_texture": "res://sprites/actors/idle_east_0.png",
+    "inside": false,
+    "integer_stretch": true,
+    "line": "the same stations at night",
+    "nearest_filter": true,
+    "phase": "NIGHT",
+    "scene": "stations_night",
+    "tick": 898
+  },
+  {
+    "farmer_cell": [
+      51,
+      35
+    ],
+    "farmer_draw_scale": 0.5,
+    "farmer_texture": "res://sprites/actors/idle_east_0.png",
+    "inside": false,
+    "integer_stretch": true,
+    "line": "four tower families at levels one to three, joined walls and fences, wear",
+    "nearest_filter": true,
+    "phase": "DAY",
+    "scene": "defences_noon",
+    "tick": 3894
+  },
+  {
+    "farmer_cell": [
+      51,
+      26
+    ],
+    "farmer_draw_scale": 0.5,
+    "farmer_texture": "res://sprites/actors/idle_east_0.png",
+    "inside": false,
+    "integer_stretch": true,
+    "line": "a wave against the towers: muzzles, shots, hits",
+    "nearest_filter": true,
+    "phase": "NIGHT",
+    "scene": "defences_wave",
+    "tick": 2144
+  },
+  {
+    "farmer_cell": [
+      16,
+      13
+    ],
+    "farmer_draw_scale": 0.5,
+    "farmer_texture": "res://sprites/actors/idle_south_0.png",
+    "inside": false,
+    "integer_stretch": true,
+    "line": "the old pond: water, shore, jetty, path, stones, trees",
+    "nearest_filter": true,
+    "phase": "DAY",
+    "scene": "pond_noon",
+    "tick": 3675
+  },
+  {
+    "farmer_cell": [
+      16,
+      13
+    ],
+    "farmer_draw_scale": 0.5,
+    "farmer_texture": "res://sprites/actors/idle_south_0.png",
+    "inside": false,
+    "integer_stretch": true,
+    "line": "the pond at night",
+    "nearest_filter": true,
+    "phase": "NIGHT",
+    "scene": "pond_night",
+    "tick": 676
+  },
+  {
+    "farmer_cell": [
+      9,
+      8
+    ],
+    "farmer_draw_scale": 0.5,
+    "farmer_texture": "res://sprites/actors/idle_north_0.png",
+    "inside": true,
+    "integer_stretch": true,
+    "line": "the furnished farmhouse",
+    "nearest_filter": true,
+    "phase": "DAY",
+    "scene": "interior_noon",
+    "tick": 3705
+  },
+  {
+    "farmer_cell": [
+      9,
+      8
+    ],
+    "farmer_draw_scale": 0.5,
+    "farmer_texture": "res://sprites/actors/idle_north_0.png",
+    "inside": true,
+    "integer_stretch": true,
+    "line": "the farmhouse at dusk: fire and lamp",
+    "nearest_filter": true,
+    "phase": "DAY",
+    "scene": "interior_dusk",
+    "tick": 6021
+  }
+]

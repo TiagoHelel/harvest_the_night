@@ -12216,3 +12216,55 @@ Verify: **55 passed, 0 skipped, 0 failed** in 518s (OVER BUDGET as before);
 locomotion 2,621 checks, work 12,129, reactions 694; raster art 524 outputs
 and a second import_art run writes 0; a second promoter run leaves the
 manifest byte-identical. Sim 1242708873 and data 2015186086 unchanged.
+
+## 2026-10-06 — The 320 other assets beside the 32px farmer: audit
+
+Executed implementation/fhd-assets/pilots/2026-10-06/32px-review/
+CLAUDE-ALL-ASSETS-PROMPT.txt: use every non-character asset of the 32px
+gallery alongside the farmer, auditing the existing integration rather than
+importing anything twice.
+
+**Nothing needed converting.** All 320 paths exist and match the gallery's
+SHA-256 (the farmer commit before this one touched only farmer frames).
+Ownership: 300 raster recipes in the manifest (189 from sources, 64 composed
+joins, 34 slices, 12 rotations, one slice-to-canvas) and 20 ASCII outputs of
+gen_sprites (the terrain atlas, 19 UI theme pieces); none unregistered, no
+duplicate set. World art is drawn at scale 1.0 on the 480x270 viewport, which
+is already the 32px farmer's 4x4 physical pixels per art pixel at 1080p.
+
+**Every file is bound in its intended role; no binding changed.** The views
+compute texture names, so the audit asks them: probes extending the existing
+showcases and the real shot scenarios record which inventory textures are
+alive in Godot's resource cache, frame by frame (binding_audit.py and probe/
+in implementation/fhd-assets/pilots/2026-10-06/32px-integration/). 248 are
+drawn by a real view (87 already in the standard shot scenarios of Main.tscn,
+the rest in showcases driving the same views through tower levels, wear,
+wrecks, barrier masks and UI states); 27 terrain PNGs are the sources the atlas is built from
+cell for cell; 12 wall/fence modules are composed into the join pieces; 33
+are exact cuts of house/press/generator/kitchen/workshop masters that
+WorldView draws whole (the cuts are its per-cell fallback); 0 unbound.
+
+**Real FHD scenes with the 32px farmer** (scenes.gd, Main.tscn at 1920x1080,
+implementation/shots/assets32-1080/): farmstead, fields in three growth
+batches, the larger stations, all four tower families at levels one to three
+with joined and worn walls and fences and a mine, a night wave, the old pond,
+the furnished house at noon and dusk (a day visit by rule), day and night,
+with GIFs of the running game and the standard shot set under game/. One
+scale throughout, feet on the ground, y-sorted occlusion, lamps and windows
+lit at night. 91.5-100% of 4x4 art-pixel blocks in the world area are single
+colours; the rest is HUD text, light glows, and tree canopies, which
+ambient_motion.gdshader blends between neighbouring texels on purpose
+(kept, as the request asks for the ambient shaders).
+
+**Fixed on the way: two shot scenarios left behind by the farmstead move.**
+`farm_extension` and `larger_stations` still used the old yard's cells: the
+walk stopped at the well with the crops behind the crop table, and the press
+and kitchen (4x3) no longer fitted. They now stand the farmer beside the beds
+and put the three stations in the nearest room east of the stall, measured
+from the porch. Picture tooling only.
+
+Files: src/tools/shot.gd, implementation/fhd-assets/pilots/2026-10-06/
+32px-integration/ (README, binding_audit.py, probe/, scenes.gd,
+scenes_playback.py, binding-report.{md,json}), implementation/shots/
+assets32-1080/.
+Verify: **55 passed, 0 skipped, 0 failed** in 513s (OVER BUDGET as before), 142 scripts parsed, raster art 524 outputs / 0 written, 16,130 asserts, 1,017 input cases, both exports; sim 1242708873 and data 2015186086 unchanged. Binding audit: 320/320 hashes unchanged, 0 unbound; scenes 12/12 and shot set 15/15 written at 1920x1080.

@@ -1,0 +1,7 @@
+res://sprites/actors/shadow.png
+res://sprites/terrain/atlas.png
+res://sprites/buildings/house.png
+res://sprites/buildings/wall.png
+res://sprites/buildings/wall_hurt.png
+res://sprites/buildings/gun_tower.png
+res://sprites/props/tree.png

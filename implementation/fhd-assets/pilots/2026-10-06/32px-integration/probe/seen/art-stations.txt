@@ -1,0 +1,16 @@
+res://sprites/actors/shadow.png
+res://sprites/terrain/atlas.png
+res://sprites/buildings/kitchen.png
+res://sprites/buildings/workshop.png
+res://sprites/props/generator.png
+res://sprites/props/press.png
+res://sprites/props/shop.png
+res://sprites/props/well.png
+res://sprites/buildings/kitchen_active.png
+res://sprites/buildings/workshop_active.png
+res://sprites/props/generator_active.png
+res://sprites/props/press_active.png
+res://sprites/buildings/kitchen_hurt.png
+res://sprites/buildings/workshop_hurt.png
+res://sprites/props/generator_hurt.png
+res://sprites/props/press_hurt.png

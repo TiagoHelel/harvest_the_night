@@ -1,0 +1,13 @@
+res://sprites/actors/shadow.png
+res://sprites/terrain/atlas.png
+res://sprites/props/tree.png
+res://sprites/props/cow.png
+res://sprites/buildings/workshop.png
+res://sprites/buildings/workshop_0_0.png
+res://sprites/crops/carrot_3.png
+res://sprites/crops/tilled.png
+res://sprites/props/rock.png
+res://sprites/buildings/fence_hurt.png
+res://sprites/props/shop.png
+res://sprites/crops/carrot_0.png
+res://sprites/crops/tilled_wet.png

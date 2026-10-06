@@ -1,0 +1,4 @@
+res://sprites/actors/shadow.png
+res://sprites/terrain/atlas.png
+res://sprites/props/tree.png
+res://sprites/props/tree_b.png

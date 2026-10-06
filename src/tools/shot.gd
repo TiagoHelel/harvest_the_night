@@ -872,6 +872,12 @@ func _set_house_interior(state: Dictionary) -> void:
 	_standing_at = Vector2i(9, 8)
 
 
+## The north-west beds of the farmstead, planted and grown.
+##
+## **Stood beside, not walked to.** Since the farmstead moved to the middle of
+## the farm (2026-10-06) its workshop and well stand between the porch and
+## these beds, and the walk stopped at the well with the crops behind the
+## crop table. The farmer starts the picture next to them instead.
 func _set_farm_extension(state: Dictionary) -> void:
 	Resources.gain(state, {GameData.MONEY: 999})
 	for y in range(20, 23):
@@ -880,15 +886,40 @@ func _set_farm_extension(state: Dictionary) -> void:
 			Farming.act(state, cell)
 			Farming.act(state, cell)
 			state["plots"][Grid.index(cell)]["growth"] = 2000
-	_standing_at = Vector2i(34, 20)
+	_standing_at = Vector2i(34, 21)
+	_stand(state, _standing_at)
 
 
+## The press, the kitchen and the generator on the open ground east of the
+## stall, measured from the porch so the picture follows the farmstead.
+## The old cells were the old yard's and now sit behind the workshop; the
+## generator's no longer fitted at all. Each is four by three, so each takes
+## the nearest room it fits rather than a cell that a tree may be on.
 func _set_larger_stations(state: Dictionary) -> void:
 	Resources.gain(state, {GameData.WOOD: 999, GameData.STONE: 999, GameData.IRON: 999})
-	Building.place(state, &"press", Vector2i(28, 20))
-	Building.place(state, &"kitchen", Vector2i(33, 20))
-	Building.place(state, &"generator", Vector2i(38, 20))
-	_standing_at = Vector2i(34, 18)
+	var porch := GameData.PLAYER_START
+	for pair in [[&"press", Vector2i(8, -4)], [&"kitchen", Vector2i(13, -4)],
+			[&"generator", Vector2i(18, -4)]]:
+		var at := _room_near(state, pair[0], porch + pair[1])
+		if at != Vector2i(-1, -1):
+			Building.place(state, pair[0], at)
+	_standing_at = porch + Vector2i(12, 0)
+	_stand(state, _standing_at)
+
+
+## The cell nearest `near` where `id` can go, ring by ring, or (-1, -1).
+func _room_near(state: Dictionary, id: StringName, near: Vector2i) -> Vector2i:
+	for radius in 6:
+		for cell in Grid.within(near, radius):
+			if Grid.chebyshev(near, cell) == radius and Building.can_place(state, id, cell):
+				return cell
+	return Vector2i(-1, -1)
+
+
+## Put the farmer on a cell outright, for a subject the walk cannot reach.
+func _stand(state: Dictionary, cell: Vector2i) -> void:
+	state["player"]["pos"] = [cell.x * Player.SUBTILE + Player.SUBTILE / 2,
+		cell.y * Player.SUBTILE + Player.SUBTILE / 2]
 
 
 func _set_noon(state: Dictionary) -> void:

@@ -1,0 +1,15 @@
+res://sprites/actors/shadow.png
+res://sprites/terrain/atlas.png
+res://sprites/buildings/house.png
+res://sprites/buildings/workshop.png
+res://sprites/props/chicken.png
+res://sprites/props/cow.png
+res://sprites/props/ore.png
+res://sprites/props/rock.png
+res://sprites/props/rock_b.png
+res://sprites/props/seam.png
+res://sprites/props/seam_b.png
+res://sprites/props/shop.png
+res://sprites/props/tree.png
+res://sprites/props/tree_b.png
+res://sprites/props/well.png

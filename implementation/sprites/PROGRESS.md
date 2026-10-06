@@ -3239,3 +3239,17 @@ Validation: verify 55/55 PASS, hashes unchanged, import_art rerun 0 written;
 real-renderer FHD review 4,955 checks / 0 failed, 63 pictures + 6 GIFs in
 implementation/shots/farmer32-1080/ (idle feet exactly on the contact in all
 eight directions, day and night).
+
+### 2026-10-06 — 320 non-character assets audited at 32px density
+
+Executed CLAUDE-ALL-ASSETS-PROMPT.txt. Inventory: 320/320 paths present,
+320/320 SHA-256 unchanged; owners 300 raster + 20 ASCII, all registered, no
+duplicates. No resampling, regeneration or recolouring: world art at scale
+1.0 already draws 4 px per art pixel at FHD. Runtime binding probe (resource
+cache watched from every art showcase and the real shot scenarios): 248 drawn
+directly, 27 terrain atlas sources, 12 barrier modules, 33 exact cuts of
+masters drawn whole, 0 unbound - no binding changed. FHD day/night scenes with
+the 32px farmer and GIFs in implementation/shots/assets32-1080/. Known and
+kept: tree canopy wind blend (ambient_motion.gdshader). Tooling: two stale
+shot.gd scenarios reframed after the farmstead move.
+Validation: **55 passed, 0 skipped, 0 failed** in 513s (OVER BUDGET as before), 142 scripts parsed, raster art 524 outputs / 0 written, 16,130 asserts, 1,017 input cases, both exports; sim 1242708873 and data 2015186086 unchanged. Binding audit: 320/320 hashes unchanged, 0 unbound; scenes 12/12 and shot set 15/15 written at 1920x1080.
