@@ -12315,3 +12315,14 @@ source hashes intact; per-phase character height within 1px of its source.
 8 frames and 100ms timing. Browser next-frame and night/day controls verified.
 Visual approval of the new up-right remains pending. No production promotion,
 engine-wide rerun, automation or push. Concurrent project.godot edits preserved.
+
+
+### 2026-10-06 — Approved walking pack handed to Claude
+
+The user approved the lower-step up-right and requested an integration prompt.
+Saved APPROVAL.json and CLAUDE-APPROVED-WALK-PROMPT.txt in walk-up-right-low-step;
+updated review status/README/checks to record human approval. The handoff selects
+all 64 latest blue 32px walking frames, retains the seven approved directions
+(including the existing up-left), and specifies pipeline ownership, mapping,
+scale, timing and real-game validation. Verified all 128 exported PNG hashes.
+No sprite pixels, production code or concurrent project.godot changes touched.

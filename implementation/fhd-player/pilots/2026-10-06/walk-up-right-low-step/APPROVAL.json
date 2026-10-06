@@ -1,0 +1,19 @@
+{
+  "date": "2026-10-06",
+  "status": "approved for integration",
+  "user_confirmation": "excelente, prompt pro claude pegar",
+  "approved_pack": "runtime-80/walk",
+  "directions": [
+    "down",
+    "right",
+    "up",
+    "left",
+    "down-right",
+    "up-right",
+    "up-left",
+    "down-left"
+  ],
+  "frames_per_direction": 8,
+  "up_left_policy": "Preserve the separately approved existing up-left; do not mirror the newly edited up-right.",
+  "runtime_integrated": false
+}

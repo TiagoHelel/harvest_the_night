@@ -1,5 +1,5 @@
 {
-  "status": "awaiting visual review",
+  "status": "approved for integration",
   "runtime_integrated": false,
   "tool": "built-in image_gen",
   "method": "Targeted single-frame edits of raised boots; native nearest export and approved RIGHT blue palette mapping",
@@ -1225,5 +1225,7 @@
         }
       }
     }
-  ]
+  ],
+  "approval_record": "APPROVAL.json",
+  "approved_on": "2026-10-06"
 }

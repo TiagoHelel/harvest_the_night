@@ -1,6 +1,7 @@
 32px UP-RIGHT LOWER-STEP REVIEW — 2026-10-06
 
-Status: awaiting the user's visual motion review; not promoted to the game.
+Status: approved by the user on 2026-10-06; game integration handed to Claude.
+See APPROVAL.json and CLAUDE-APPROVED-WALK-PROMPT.txt.
 The user explicitly approved the other seven directions. Their 56 walking
 frames remain byte-identical to walk-mirror-review, including up-left.
 Up-right phases 2 and 6 remain unchanged; phases 1, 3, 4, 5, 7 and 8 received
@@ -33,4 +34,4 @@ PNG exports; binary alpha; approved RIGHT blue palette restoration; original
 source hashes intact; candidate body height within 1px of its original phase.
 144 same-camera FHD crops, 576 Godot assertions / 0 failures. Four GIFs with
 8 frames at 100ms. Browser frame advance and lighting controls checked.
-These checks establish export consistency, not the user's motion approval.
+These checks establish export consistency; the user's approval is in APPROVAL.json.

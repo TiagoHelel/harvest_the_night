@@ -208,5 +208,5 @@
     960.0,
     572.0
   ],
-  "visual_motion_approval": "pending; automated checks do not establish motion quality"
+  "visual_motion_approval": "User approved on 2026-10-06; see APPROVAL.json. Automated checks establish export consistency only."
 }
