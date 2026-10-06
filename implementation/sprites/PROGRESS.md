@@ -3253,3 +3253,27 @@ the 32px farmer and GIFs in implementation/shots/assets32-1080/. Known and
 kept: tree canopy wind blend (ambient_motion.gdshader). Tooling: two stale
 shot.gd scenarios reframed after the farmstead move.
 Validation: **55 passed, 0 skipped, 0 failed** in 513s (OVER BUDGET as before), 142 scripts parsed, raster art 524 outputs / 0 written, 16,130 asserts, 1,017 input cases, both exports; sim 1242708873 and data 2015186086 unchanged. Binding audit: 320/320 hashes unchanged, 0 unbound; scenes 12/12 and shot set 15/15 written at 1920x1080.
+
+
+### 2026-10-06 —32px walking mirrors, before/after review
+
+Implemented the user's requested exact horizontal transforms in
+implementation/fhd-player/pilots/2026-10-06/walk-mirror-review/: right->left,
+down-left->down-right, up-right->up-left. Five master directions stay unchanged.
+64 native40/runtime80 walking poses exported;24 mirrored,40 exact copies,
+with unchanged8-frame/100ms timing, source palette, binary alpha and foot pivot.
+Original32px sources and production sprites preserved. Idle/work unchanged.
+
+Actual WorldView/PlayerView/Relight FHD captures provide horizontal before/after
+GIFs of all eight and the three changed directions, day/night plus a paused
+frame inspector. Before is the upper row; after is lower.176 unscaled crops
+share the identical fixed foot contact, ground, camera and frozen state;
+unchanged columns reuse the same capture. Saved browser-review.png.
+
+Validation: exact transform/copy equality for64 poses;64 original before hashes
+unchanged;128 PNG exports reproduce byte-identically. Godot704 assertions,
+0 failures;4 GIFs x8 frames x100ms. Browser next-frame/night controls and
+visible comparison checked. Local review server restarted on127.0.0.1:8765
+after the previous server had stopped. No engine-wide rerun or production
+promotion for this review; concurrent project edits preserved. No backlog
+mutation, generation, automation or push. Visual approval remains pending.

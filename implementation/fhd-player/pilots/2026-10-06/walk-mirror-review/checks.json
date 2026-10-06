@@ -1,0 +1,81 @@
+{
+  "exact_mirrored_frames": 24,
+  "unchanged_frames": 40,
+  "runtime_and_native_outputs_reproducible": 128,
+  "original_before_sources_unchanged": 64,
+  "renderer_checks": 704,
+  "renderer_failures": 0,
+  "same_fixed_contact_for_all_captures": true,
+  "FHD_crops": 176,
+  "runtime_integrated": false,
+  "gif_frames": {
+    "all-eight-day.gif": {
+      "count": 8,
+      "canvas": [
+        1920,
+        600
+      ],
+      "durations_ms": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ]
+    },
+    "all-eight-night.gif": {
+      "count": 8,
+      "canvas": [
+        1920,
+        600
+      ],
+      "durations_ms": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ]
+    },
+    "changed-three-day.gif": {
+      "count": 8,
+      "canvas": [
+        960,
+        600
+      ],
+      "durations_ms": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ]
+    },
+    "changed-three-night.gif": {
+      "count": 8,
+      "canvas": [
+        960,
+        600
+      ],
+      "durations_ms": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ]
+    }
+  }
+}
