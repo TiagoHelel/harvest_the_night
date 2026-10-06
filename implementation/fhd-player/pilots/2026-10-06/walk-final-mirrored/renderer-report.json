@@ -1,0 +1,1446 @@
+{
+  "captures": [
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 1,
+      "label": "day_before_down_01",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/down/01.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 2,
+      "label": "day_before_down_02",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/down/02.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 3,
+      "label": "day_before_down_03",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/down/03.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 4,
+      "label": "day_before_down_04",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/down/04.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 5,
+      "label": "day_before_down_05",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/down/05.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 6,
+      "label": "day_before_down_06",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/down/06.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 7,
+      "label": "day_before_down_07",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/down/07.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 8,
+      "label": "day_before_down_08",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/down/08.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 1,
+      "label": "day_before_right_01",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/right/01.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 2,
+      "label": "day_before_right_02",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/right/02.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 3,
+      "label": "day_before_right_03",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/right/03.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 4,
+      "label": "day_before_right_04",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/right/04.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 5,
+      "label": "day_before_right_05",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/right/05.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 6,
+      "label": "day_before_right_06",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/right/06.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 7,
+      "label": "day_before_right_07",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/right/07.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 8,
+      "label": "day_before_right_08",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/right/08.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 1,
+      "label": "day_before_up_01",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/up/01.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 2,
+      "label": "day_before_up_02",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/up/02.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 3,
+      "label": "day_before_up_03",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/up/03.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 4,
+      "label": "day_before_up_04",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/up/04.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 5,
+      "label": "day_before_up_05",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/up/05.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 6,
+      "label": "day_before_up_06",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/up/06.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 7,
+      "label": "day_before_up_07",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/up/07.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 8,
+      "label": "day_before_up_08",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/up/08.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 1,
+      "label": "day_before_left_01",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/left/01.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 2,
+      "label": "day_before_left_02",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/left/02.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 3,
+      "label": "day_before_left_03",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/left/03.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 4,
+      "label": "day_before_left_04",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/left/04.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 5,
+      "label": "day_before_left_05",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/left/05.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 6,
+      "label": "day_before_left_06",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/left/06.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 7,
+      "label": "day_before_left_07",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/left/07.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 8,
+      "label": "day_before_left_08",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/left/08.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 1,
+      "label": "day_before_down-right_01",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/down-right/01.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 2,
+      "label": "day_before_down-right_02",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/down-right/02.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 3,
+      "label": "day_before_down-right_03",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/down-right/03.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 4,
+      "label": "day_before_down-right_04",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/down-right/04.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 5,
+      "label": "day_before_down-right_05",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/down-right/05.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 6,
+      "label": "day_before_down-right_06",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/down-right/06.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 7,
+      "label": "day_before_down-right_07",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/down-right/07.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 8,
+      "label": "day_before_down-right_08",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/down-right/08.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 1,
+      "label": "day_before_up-right_01",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/up-right/01.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 2,
+      "label": "day_before_up-right_02",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/up-right/02.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 3,
+      "label": "day_before_up-right_03",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/up-right/03.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 4,
+      "label": "day_before_up-right_04",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/up-right/04.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 5,
+      "label": "day_before_up-right_05",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/up-right/05.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 6,
+      "label": "day_before_up-right_06",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/up-right/06.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 7,
+      "label": "day_before_up-right_07",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/up-right/07.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 8,
+      "label": "day_before_up-right_08",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/up-right/08.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 1,
+      "label": "day_before_up-left_01",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/up-left/01.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 2,
+      "label": "day_before_up-left_02",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/up-left/02.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 3,
+      "label": "day_before_up-left_03",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/up-left/03.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 4,
+      "label": "day_before_up-left_04",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/up-left/04.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 5,
+      "label": "day_before_up-left_05",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/up-left/05.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 6,
+      "label": "day_before_up-left_06",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/up-left/06.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 7,
+      "label": "day_before_up-left_07",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/up-left/07.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 8,
+      "label": "day_before_up-left_08",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/up-left/08.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 1,
+      "label": "day_before_down-left_01",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/down-left/01.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 2,
+      "label": "day_before_down-left_02",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/down-left/02.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 3,
+      "label": "day_before_down-left_03",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/down-left/03.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 4,
+      "label": "day_before_down-left_04",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/down-left/04.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 5,
+      "label": "day_before_down-left_05",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/down-left/05.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 6,
+      "label": "day_before_down-left_06",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/down-left/06.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 7,
+      "label": "day_before_down-left_07",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/down-left/07.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 8,
+      "label": "day_before_down-left_08",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/down-left/08.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 1,
+      "label": "day_after_up-left_01",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/up-left/01.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 2,
+      "label": "day_after_up-left_02",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/up-left/02.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 3,
+      "label": "day_after_up-left_03",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/up-left/03.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 4,
+      "label": "day_after_up-left_04",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/up-left/04.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 5,
+      "label": "day_after_up-left_05",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/up-left/05.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 6,
+      "label": "day_after_up-left_06",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/up-left/06.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 7,
+      "label": "day_after_up-left_07",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/up-left/07.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 8,
+      "label": "day_after_up-left_08",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/up-left/08.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 1,
+      "label": "night_before_down_01",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/down/01.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 2,
+      "label": "night_before_down_02",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/down/02.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 3,
+      "label": "night_before_down_03",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/down/03.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 4,
+      "label": "night_before_down_04",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/down/04.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 5,
+      "label": "night_before_down_05",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/down/05.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 6,
+      "label": "night_before_down_06",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/down/06.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 7,
+      "label": "night_before_down_07",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/down/07.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 8,
+      "label": "night_before_down_08",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/down/08.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 1,
+      "label": "night_before_right_01",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/right/01.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 2,
+      "label": "night_before_right_02",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/right/02.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 3,
+      "label": "night_before_right_03",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/right/03.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 4,
+      "label": "night_before_right_04",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/right/04.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 5,
+      "label": "night_before_right_05",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/right/05.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 6,
+      "label": "night_before_right_06",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/right/06.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 7,
+      "label": "night_before_right_07",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/right/07.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 8,
+      "label": "night_before_right_08",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/right/08.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 1,
+      "label": "night_before_up_01",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/up/01.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 2,
+      "label": "night_before_up_02",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/up/02.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 3,
+      "label": "night_before_up_03",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/up/03.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 4,
+      "label": "night_before_up_04",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/up/04.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 5,
+      "label": "night_before_up_05",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/up/05.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 6,
+      "label": "night_before_up_06",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/up/06.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 7,
+      "label": "night_before_up_07",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/up/07.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 8,
+      "label": "night_before_up_08",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/up/08.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 1,
+      "label": "night_before_left_01",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/left/01.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 2,
+      "label": "night_before_left_02",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/left/02.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 3,
+      "label": "night_before_left_03",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/left/03.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 4,
+      "label": "night_before_left_04",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/left/04.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 5,
+      "label": "night_before_left_05",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/left/05.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 6,
+      "label": "night_before_left_06",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/left/06.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 7,
+      "label": "night_before_left_07",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/left/07.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 8,
+      "label": "night_before_left_08",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/left/08.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 1,
+      "label": "night_before_down-right_01",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/down-right/01.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 2,
+      "label": "night_before_down-right_02",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/down-right/02.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 3,
+      "label": "night_before_down-right_03",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/down-right/03.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 4,
+      "label": "night_before_down-right_04",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/down-right/04.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 5,
+      "label": "night_before_down-right_05",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/down-right/05.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 6,
+      "label": "night_before_down-right_06",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/down-right/06.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 7,
+      "label": "night_before_down-right_07",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/down-right/07.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 8,
+      "label": "night_before_down-right_08",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/down-right/08.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 1,
+      "label": "night_before_up-right_01",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/up-right/01.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 2,
+      "label": "night_before_up-right_02",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/up-right/02.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 3,
+      "label": "night_before_up-right_03",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/up-right/03.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 4,
+      "label": "night_before_up-right_04",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/up-right/04.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 5,
+      "label": "night_before_up-right_05",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/up-right/05.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 6,
+      "label": "night_before_up-right_06",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/up-right/06.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 7,
+      "label": "night_before_up-right_07",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/up-right/07.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 8,
+      "label": "night_before_up-right_08",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/up-right/08.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 1,
+      "label": "night_before_up-left_01",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/up-left/01.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 2,
+      "label": "night_before_up-left_02",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/up-left/02.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 3,
+      "label": "night_before_up-left_03",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/up-left/03.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 4,
+      "label": "night_before_up-left_04",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/up-left/04.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 5,
+      "label": "night_before_up-left_05",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/up-left/05.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 6,
+      "label": "night_before_up-left_06",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/up-left/06.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 7,
+      "label": "night_before_up-left_07",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/up-left/07.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 8,
+      "label": "night_before_up-left_08",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/up-left/08.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 1,
+      "label": "night_before_down-left_01",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/down-left/01.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 2,
+      "label": "night_before_down-left_02",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/down-left/02.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 3,
+      "label": "night_before_down-left_03",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/down-left/03.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 4,
+      "label": "night_before_down-left_04",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/down-left/04.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 5,
+      "label": "night_before_down-left_05",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/down-left/05.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 6,
+      "label": "night_before_down-left_06",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/down-left/06.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 7,
+      "label": "night_before_down-left_07",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/down-left/07.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 8,
+      "label": "night_before_down-left_08",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-up-right-low-step/runtime-80/walk/down-left/08.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 1,
+      "label": "night_after_up-left_01",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/up-left/01.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 2,
+      "label": "night_after_up-left_02",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/up-left/02.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 3,
+      "label": "night_after_up-left_03",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/up-left/03.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 4,
+      "label": "night_after_up-left_04",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/up-left/04.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 5,
+      "label": "night_after_up-left_05",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/up-left/05.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 6,
+      "label": "night_after_up-left_06",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/up-left/06.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 7,
+      "label": "night_after_up-left_07",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/up-left/07.png"
+    },
+    {
+      "contact": [
+        960.0,
+        572.0
+      ],
+      "frame": 8,
+      "label": "night_after_up-left_08",
+      "seconds": 0.1,
+      "source": "res://implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/runtime-80/walk/up-left/08.png"
+    }
+  ],
+  "checks": 576,
+  "failures": 0
+}

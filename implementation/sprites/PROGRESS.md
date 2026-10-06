@@ -3311,3 +3311,18 @@ all 64 latest blue 32px walking frames, retains the seven approved directions
 (including the existing up-left), and specifies pipeline ownership, mapping,
 scale, timing and real-game validation. Verified all 128 exported PNG hashes.
 No sprite pixels, production code or concurrent project.godot changes touched.
+
+
+### 2026-10-06 — Final up-left mirror prepared before Claude handoff
+
+The user clarified that Codex should create the mirror and Claude fetch the
+ready sprites. Exported walk-final-mirrored with all64 walking poses:8 up-left
+frames are exact flips of the newly approved low-step up-right; the other56
+poses are byte-identical to their approved inputs. All3 requested mirror pairs
+are exact in native40/runtime80. Saved final contract, integration prompt and
+a redirect from the earlier mirror handoff; no production files changed.
+
+Validation:128 PNG hashes and exact2x scaling/binary alpha verified;144 actual
+FHD crops,576 Godot assertions /0 failures; four8-frame100ms GIFs. Final pair
+and all-eight page opened, browser-review.png saved. Integration remains with
+Claude; concurrent in-progress integration files were preserved.

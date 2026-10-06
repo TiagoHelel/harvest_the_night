@@ -1,0 +1,98 @@
+LATEST HANDOFF: Codex has already mirrored the new approved up-right into up-left.
+All 64 final walking frames are ready; Claude only fetches and integrates them.
+This supersedes the earlier instruction to preserve the old up-left.
+
+Work in C:\Users\Helel\Documents\repos\harvest_the_night.
+
+Integrate the latest APPROVED blue 32px farmer walking pack in all eight directions.
+The user approved the other seven directions, then approved the new lower-step
+up-right on 2026-10-06 ("excelente"). Implement the approved assets without
+generating new sprites, repainting, changing phases or requesting visual approval again.
+
+Read repository instructions and inspect the current working tree. Preserve
+concurrent edits, especially project.godot, and the existing gameplay architecture.
+This is a scoped sprite integration task, not another backlog/runner-loop task.
+
+The authoritative APPROVED walking pack is:
+C:\Users\Helel\Documents\repos\harvest_the_night\implementation\fhd-player\pilots\2026-10-06\walk-final-mirrored
+
+Read contract.json, README.txt and checks.json there.
+Use runtime-80/walk/<direction>/01.png through 08.png for ALL eight directions.
+This folder contains the complete 64-frame pack: the approved low-step up-right,
+its exact mirrored up-left, and the other six approved directions. All three
+pairs are verified: right->left, down-left->down-right, up-right->up-left.
+It supersedes the older 2026-10-05 farmer32 walking pack and the mirror review
+as the walking source. Do not combine walking frames from older review folders.
+
+Preserve this exact mapping and frame order:
+  down       -> walk_south
+  right      -> walk_east
+  up         -> walk_north
+  left       -> walk_west
+  down-right -> walk_south_east
+  up-right   -> walk_north_east
+  up-left    -> walk_north_west
+  down-left  -> walk_south_west
+File 01.png is engine frame 0, through 08.png as engine frame 7.
+Each direction has eight phases at 0.1 seconds per phase (10 FPS).
+The current run animation reuses these same phases at 0.07 seconds per phase;
+retain that behavior and the existing movement speeds.
+
+IMPORTANT: left, down-right and up-left are already baked exact mirrors.
+Bind all eight source directories directly; do not flip them again at runtime.
+Up-left now mirrors the NEW approved lower-step up-right, not its old version.
+Do not generate or mirror sprites again. Keep every chronological phase intact.
+An earlier integration may already be underway: continue it, changing source
+selection to this final pack without resetting existing or concurrent work.
+
+Use runtime-80 as already exported: transparent 80x80 cells, pivot (40,72),
+draw_scale 0.5, nearest filtering, exact-source colors and binary alpha.
+The equivalent native-40 pack is 40x40 with pivot (20,36), already at 32px detail.
+"32px" describes character artwork detail, not a 32x32 cell or a new viewport.
+Preserve the FHD 1920x1080 display, current logical viewport and camera settings.
+At FHD the farmer remains approximately 128 physical screen pixels tall, with
+4x4 screen pixels per authored detail pixel. Do not reduce detail again to 16px.
+
+Integrate through the source-owned raster pipeline:
+assets/art_source/manifest.json, tools/import_art.py and generated
+src/ui/raster_art.gd / src/ui/player_frames.gd.
+Inspect implementation/fhd-player/pilots/2026-10-04/palette-variants/promote_blue_walk.py
+and its ownership checks: it currently reconstructs the older source selection.
+Update that promotion/verification path so future rebuilds reproduce the latest
+approved pack instead of silently restoring older walking frames. Preserve the
+original high-detail masters and use versioned owned sources where appropriate.
+The current detail_wh=[40,40] importer recipe may remain if verified pixel-idempotent
+on this already coarse runtime-80 input; do not apply another density reduction.
+A manual overwrite of generated sprites alone is not a complete integration.
+
+Verify every selected source PNG against contract.json SHA256 entries before
+promotion. After importing, verify the generated walking PNGs are RGBA
+pixel-identical to the approved runtime-80 frames, with correct canvas/pivot,
+phase order, timing and palette. Verify all three mirror pairs for every phase,
+including the new up-right/up-left pair. Rerun owner/importer checks to demonstrate
+reproducibility. Inspect src/ui/player_art.gd and src/ui/player_view.gd only as
+needed to preserve direction selection, animation metadata and foot anchoring.
+
+Keep the currently integrated independent grounded idle poses, tool/fishing/
+reaction art, shadows, enemies and environment unchanged. Idle must never use
+the lifted first walking phase. Do not replace accepted animations with
+individual-generated, tracking-native, raw sheets or rejected experiments.
+Do not extract sprites from GIFs, browser screenshots or rendered captures.
+Use final runtime-80 exports; build.py is their reproducible mirror/copy recipe.
+Previous review folders and generation experiments are superseded walking sources.
+Do not use the old up-left still stored in walk-up-right-low-step.
+
+Godot is installed at:
+C:\Users\Helel\Documents\godot\Godot_v4.7.1-stable_win64_console.exe
+
+Run required repository raster/import/ownership checks and locomotion checks
+appropriate to this integration. Use the real renderer at actual FHD size to
+review all eight directions walking and running, stop/start, idle transitions,
+the 8->1 loop, ground contact and stable body size in day/night. Keep the
+simulation deterministic; do not change gameplay rules to make visual tests pass.
+The existing preview evidence has 144 FHD crops and 576 checks / zero failures,
+but that is review-fixture evidence, not a substitute for game integration checks.
+
+Complete the integration, show actual in-game screenshots/playback, and report
+changed files and validation. Append both implementation journals. Commit only
+scoped changes; preserve unrelated work and do not push or publish.

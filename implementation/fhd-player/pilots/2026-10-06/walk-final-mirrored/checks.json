@@ -1,0 +1,15 @@
+{
+  "poses": 64,
+  "native_and_runtime_pngs": 128,
+  "new_mirrored_up_left_frames": 8,
+  "other_approved_frames_byte_identical": 56,
+  "all_three_mirror_pairs_exact": true,
+  "integer_scaling_exact": true,
+  "binary_alpha": true,
+  "gif_frames": 8,
+  "gif_frame_ms": 100,
+  "godot_checks": 576,
+  "godot_failures": 0,
+  "captures": 144,
+  "runtime_integrated": false
+}
