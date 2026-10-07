@@ -202,6 +202,19 @@ const SPACED := &"Spaced"
 const OWNED := &"Owned"
 const PORCH_HINT := &"PorchHint"
 
+## A column of menu entries - the title's, the pause menu's - with a little
+## air between them. See `MENU_GAP`.
+const STACKED := &"Stacked"
+
+## The air between two entries of a menu column, in pixels.
+const MENU_GAP := 2
+
+## A button that does something that cannot be undone - abandon, quit - in
+## the same key with red letters, so it never looks like the one beside it
+## that keeps things as they are.
+const DANGER := &"Danger"
+
+
 
 ## The same nine roles, pushed apart. **Task 0098.**
 ##
@@ -348,19 +361,38 @@ static func _dress_buttons(out: Theme) -> void:
 	for state in BUTTON_STATES:
 		out.set_stylebox(StringName(state), &"Button",
 			_padded(button(state), ROW_PAD, 0))
+	# **A pressed key sinks.** The drawing moves the light to the bottom
+	# edge; this moves the label down the pixel that goes with it. One pixel
+	# of top margin on one state, so the button still reserves almost nothing
+	# (see the note above) and the label only ever travels while it is held.
+	(out.get_stylebox(&"pressed", &"Button") as StyleBox).content_margin_top = 1
 	# **Focus is a state, not the absence of one.** Two screens used to hide
 	# Godot's grey dashed ring behind an empty box, which leaves a keyboard
-	# with no way to say where it is. `ui/button_focus` is a ring, drawn over
-	# whichever state the button is already in.
+	# with no way to say where it is. `ui/button_focus` is a gold ring laid
+	# over the brass trim, drawn over whichever state the button is in.
 	out.set_stylebox(&"focus", &"Button", _frame("button_focus"))
 	out.set_color(&"font_color", &"Button", colour())
-	out.set_color(&"font_hover_color", &"Button", colour(WARM))
-	out.set_color(&"font_focus_color", &"Button", colour())
+	# **Bone on the warm face, gold when only the keyboard has it.** Pointing
+	# warms the whole key (`ui/button_hover`), so its letters stay the body
+	# colour, which reads better on wood than gold does; a button selected by
+	# the keys keeps its dark face and says so with gold letters and the ring.
+	out.set_color(&"font_hover_color", &"Button", colour())
+	out.set_color(&"font_focus_color", &"Button", colour(WARM))
 	# Pressed is gold, so its letters are ink. Bone on gold is the one pair in
 	# this palette that cannot be read at eight pixels.
 	out.set_color(&"font_pressed_color", &"Button",
 		PaletteData.COLOURS[&"ink"])
+	out.set_color(&"font_hover_pressed_color", &"Button",
+		PaletteData.COLOURS[&"ink"])
 	out.set_color(&"font_disabled_color", &"Button", colour(FAINT))
+
+	# **The button that does something that cannot be undone.** Red letters on
+	# the same key, so the one entry in a question that throws a run away does
+	# not look like the one that keeps it.
+	out.set_type_variation(DANGER, &"Button")
+	out.set_color(&"font_color", DANGER, colour(BAD))
+	out.set_color(&"font_focus_color", DANGER, colour(BAD))
+	out.set_color(&"font_hover_color", DANGER, colour(BAD))
 
 	# **A list row has no frame until it is pointed at.** Flat boxes rather
 	# than drawings: a row's hover is one flat colour, and an ASCII map of
@@ -447,6 +479,10 @@ static func _dress_gaps(out: Theme) -> void:
 		out.set_constant(&"separation", type, 0)
 	out.set_type_variation(SPACED, &"HBoxContainer")
 	out.set_constant(&"separation", SPACED, ROW_PAD)
+	# A column of menu entries: two pixels of air between keys, so each one
+	# is its own thing to point at rather than one striped slab.
+	out.set_type_variation(STACKED, &"VBoxContainer")
+	out.set_constant(&"separation", STACKED, MENU_GAP)
 	for side in [&"margin_left", &"margin_right", &"margin_top",
 			&"margin_bottom"]:
 		out.set_constant(side, &"MarginContainer", PAD)

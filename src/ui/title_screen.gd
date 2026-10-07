@@ -279,11 +279,10 @@ func _wear(state: int) -> void:
 			_stats.show_profile(Save.read_profile())
 
 
+## The first entry takes the selection - and with it the caret - whenever
+## the menu comes up.
 func _focus_menu() -> void:
-	for child in _menu.get_children():
-		if child is Button and not (child as Button).disabled:
-			(child as Button).grab_focus()
-			return
+	MenuFocus.select_first(_menu.get_children())
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -350,6 +349,10 @@ func _build_menu() -> void:
 		button.focus_mode = Control.FOCUS_ALL
 		button.pressed.connect(_pick.bind(which))
 		_menu.add_child(button)
+	# **One selection for the keys, the pointer and a pad**, with the caret,
+	# wrapping and the menu's sounds - WELCOME BACK, HERO's lists.
+	_menu.theme_type_variation = UiKit.STACKED
+	MenuFocus.wire(_menu.get_children())
 
 
 ## **Nothing here changes a scene or opens a panel.** Every entry says where
@@ -385,6 +388,7 @@ func _input(event: InputEvent) -> void:
 		return
 	if _router.here() == _router.STATS or _router.here() == _router.OPTIONS:
 		_router.back()
+		MenuFocus.backed_out(self)
 		get_viewport().set_input_as_handled()
 
 

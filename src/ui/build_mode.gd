@@ -197,6 +197,14 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 		return
 
+	# **Escape leaves build mode first.** Escape opens the pause menu when it
+	# has nothing else to stop (`Main.escape_is_free`), and a player holding a
+	# wall over the farm who presses it means "put that down", not "pause".
+	if Building.is_active(_state) and event.is_action_pressed(&"cancel"):
+		Building.set_active(_state, false)
+		get_viewport().set_input_as_handled()
+		return
+
 	if not visible:
 		return
 

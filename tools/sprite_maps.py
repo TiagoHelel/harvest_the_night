@@ -83,104 +83,117 @@ SPRITES = {
     # player picks a button out at a glance by how light it is; a hover that
     # was only a different colour would be invisible to a good fraction of
     # people and to anybody on a bad screen.
+    #
+    # **Redrawn 2026-10-07 for the menus WELCOME BACK, HERO taught the owner
+    # to expect.** A button is a dark key with a brass trim - the same brass
+    # as the panels, so a thing that can be pressed reads as part of the
+    # furniture rather than a grey slab laid on it - lit from above and
+    # shaded below. Pointing at it warms it: the trim goes gold and the face
+    # turns to the colour of the lamplit wood. Pressing it sinks it: the
+    # light moves to the bottom edge, the face turns gold and the label drops
+    # a pixel (`UiKit` moves the label; the drawing moves the light). A
+    # switched-off button loses its trim and its relief entirely, so it
+    # reads as flat before it reads as grey.
     "ui/button_normal": dict(size=TILE, legend={
-        "k": "ink", "s": "ink_soft", "n": "night_light", "l": "stone_dark",
+        "k": "ink", "d": "gold_dark", "h": "stone_dark", "n": "night_light",
+        "s": "ink_soft",
     }, rows=[
         "kkkkkkkkkkkkkkkk",
-        "kllllllllllllllk",
-        "kllnnnnnnnnnnssk",
-        "kllnnnnnnnnnnssk",
-        "kllnnnnnnnnnnssk",
-        "kllnnnnnnnnnnssk",
-        "kllnnnnnnnnnnssk",
-        "kllnnnnnnnnnnssk",
-        "kllnnnnnnnnnnssk",
-        "kllnnnnnnnnnnssk",
-        "kllnnnnnnnnnnssk",
-        "kllnnnnnnnnnnssk",
-        "kllnnnnnnnnnnssk",
-        "kssssssssssssssk",
-        "kssssssssssssssk",
+        "kddddddddddddddk",
+        "kdhhhhhhhhhhhhdk",
+        "kdhnnnnnnnnnnsdk",
+        "kdhnnnnnnnnnnsdk",
+        "kdhnnnnnnnnnnsdk",
+        "kdhnnnnnnnnnnsdk",
+        "kdhnnnnnnnnnnsdk",
+        "kdhnnnnnnnnnnsdk",
+        "kdhnnnnnnnnnnsdk",
+        "kdhnnnnnnnnnnsdk",
+        "kdhnnnnnnnnnnsdk",
+        "kdhnnnnnnnnnnsdk",
+        "kdssssssssssssdk",
+        "kddddddddddddddk",
         "kkkkkkkkkkkkkkkk",
     ]),
 
     "ui/button_hover": dict(size=TILE, legend={
-        "k": "ink", "s": "stone_dark", "n": "stone", "l": "stone_light",
+        "k": "ink", "d": "gold", "h": "wood", "n": "wood_dark",
+        "s": "soil_dark",
     }, rows=[
         "kkkkkkkkkkkkkkkk",
-        "kllllllllllllllk",
-        "kllnnnnnnnnnnssk",
-        "kllnnnnnnnnnnssk",
-        "kllnnnnnnnnnnssk",
-        "kllnnnnnnnnnnssk",
-        "kllnnnnnnnnnnssk",
-        "kllnnnnnnnnnnssk",
-        "kllnnnnnnnnnnssk",
-        "kllnnnnnnnnnnssk",
-        "kllnnnnnnnnnnssk",
-        "kllnnnnnnnnnnssk",
-        "kllnnnnnnnnnnssk",
-        "kssssssssssssssk",
-        "kssssssssssssssk",
+        "kddddddddddddddk",
+        "kdhhhhhhhhhhhhdk",
+        "kdhnnnnnnnnnnsdk",
+        "kdhnnnnnnnnnnsdk",
+        "kdhnnnnnnnnnnsdk",
+        "kdhnnnnnnnnnnsdk",
+        "kdhnnnnnnnnnnsdk",
+        "kdhnnnnnnnnnnsdk",
+        "kdhnnnnnnnnnnsdk",
+        "kdhnnnnnnnnnnsdk",
+        "kdhnnnnnnnnnnsdk",
+        "kdhnnnnnnnnnnsdk",
+        "kdssssssssssssdk",
+        "kddddddddddddddk",
         "kkkkkkkkkkkkkkkk",
     ]),
 
-    # Pressed is the same button lit from below instead of above, which is
-    # what a pushed-in thing looks like.
+    # Pressed is the same key pushed in: the shadow on the top edge, the light
+    # on the bottom one, which is what a sunk thing looks like. Gold, because
+    # a toggle that is on is a pressed button, and "on" is the warm one.
     "ui/button_pressed": dict(size=TILE, legend={
-        "k": "ink", "s": "gold_dark", "n": "gold", "l": "gold_light",
+        "k": "ink", "d": "gold_light", "s": "gold_dark", "n": "gold",
+        "l": "gold_light",
     }, rows=[
         "kkkkkkkkkkkkkkkk",
-        "kssssssssssssssk",
-        "kssnnnnnnnnnnllk",
-        "kssnnnnnnnnnnllk",
-        "kssnnnnnnnnnnllk",
-        "kssnnnnnnnnnnllk",
-        "kssnnnnnnnnnnllk",
-        "kssnnnnnnnnnnllk",
-        "kssnnnnnnnnnnllk",
-        "kssnnnnnnnnnnllk",
-        "kssnnnnnnnnnnllk",
-        "kssnnnnnnnnnnllk",
-        "kssnnnnnnnnnnllk",
-        "kllllllllllllllk",
-        "kllllllllllllllk",
+        "kddddddddddddddk",
+        "kdssssssssssssdk",
+        "kdsnnnnnnnnnnldk",
+        "kdsnnnnnnnnnnldk",
+        "kdsnnnnnnnnnnldk",
+        "kdsnnnnnnnnnnldk",
+        "kdsnnnnnnnnnnldk",
+        "kdsnnnnnnnnnnldk",
+        "kdsnnnnnnnnnnldk",
+        "kdsnnnnnnnnnnldk",
+        "kdsnnnnnnnnnnldk",
+        "kdsnnnnnnnnnnldk",
+        "kdlllllllllllldk",
+        "kddddddddddddddk",
         "kkkkkkkkkkkkkkkk",
     ]),
 
     "ui/button_disabled": dict(size=TILE, legend={
-        "k": "ink", "s": "ink_soft", "n": "ink_soft", "l": "night_light",
+        "k": "ink", "e": "night_light", "n": "ink_soft",
     }, rows=[
         "kkkkkkkkkkkkkkkk",
-        "kllllllllllllllk",
-        "kllnnnnnnnnnnllk",
-        "kllnnnnnnnnnnllk",
-        "kllnnnnnnnnnnllk",
-        "kllnnnnnnnnnnllk",
-        "kllnnnnnnnnnnllk",
-        "kllnnnnnnnnnnllk",
-        "kllnnnnnnnnnnllk",
-        "kllnnnnnnnnnnllk",
-        "kllnnnnnnnnnnllk",
-        "kllnnnnnnnnnnllk",
-        "kllnnnnnnnnnnllk",
-        "kllllllllllllllk",
-        "kllllllllllllllk",
+        "keeeeeeeeeeeeeek",
+        "keeeeeeeeeeeeeek",
+        "keennnnnnnnnneek",
+        "keennnnnnnnnneek",
+        "keennnnnnnnnneek",
+        "keennnnnnnnnneek",
+        "keennnnnnnnnneek",
+        "keennnnnnnnnneek",
+        "keennnnnnnnnneek",
+        "keennnnnnnnnneek",
+        "keennnnnnnnnneek",
+        "keennnnnnnnnneek",
+        "keeeeeeeeeeeeeek",
+        "keeeeeeeeeeeeeek",
         "kkkkkkkkkkkkkkkk",
     ]),
 
     # **The ring the keyboard leaves behind.** Godot draws `focus` on top of
     # whichever state box a button is already wearing, so this one is a ring
-    # and nothing else: transparent in the middle, inset one pixel so the
-    # button keeps its own ink edge underneath.
+    # and nothing else: transparent in the middle, laid exactly over the
+    # brass trim, so the selected button's trim is lit gold all the way round.
     #
-    # It is bone rather than gold because pressed is already gold, and a focus
-    # a player cannot tell from a press is not a focus. The two other places
-    # that wanted this before task 0081 overrode `focus` with an empty box to
-    # hide Godot's grey dashed default - an empty box is not a focus state
-    # either, it is the absence of one.
+    # Gold rather than the bone it was, because the selection is now also
+    # marked by a gold caret in the margin (`MenuFocus`) and the two should be
+    # one signal. Pressed is a gold *face*, so the two still do not read alike.
     "ui/button_focus": dict(size=TILE, legend={
-        "l": "bone",
+        "l": "gold_light",
     }, rows=[
         "................",
         ".llllllllllllll.",

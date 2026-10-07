@@ -731,6 +731,10 @@ func _only_showing(main: Node, wanted: String) -> void:
 		screen.visible = named == want_screen
 		if screen.visible and want_tab != "":
 			screen.show_tab(StringName(want_tab))
+		# Opened the way the router opens it, so the picture has the caret on
+		# RESUME that a player sees.
+		if screen.visible and screen.has_method("set_open"):
+			screen.set_open(true)
 
 
 ## The last thing before the picture is taken.

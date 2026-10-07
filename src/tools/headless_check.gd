@@ -14506,8 +14506,21 @@ func _task_0084_day_sounds() -> void:
 	# moment task 0085 put fourteen more files in, which is the check working
 	# rather than the check being wrong.
 	var heard: Dictionary = {}
-	for id in wanted + _night_sound_ids():
+	for id in wanted + _night_sound_ids() + _menu_sound_ids():
 		heard[String(id).get_file()] = true
+
+	# **The menus' three are the quietest and the shortest thing there is**
+	# (2026-10-07). They are heard every time a selection moves; a menu that
+	# clicks louder than an axe on a tree is a menu somebody mutes.
+	for id in _menu_sound_ids():
+		var menu := _wav_facts("res://assets/%s.wav" % id)
+		expect(not menu.is_empty(), "the menus have a sound for '%s'" % id)
+		if menu.is_empty():
+			continue
+		expect(float(menu["peak"]) <= 0.31,
+			"'%s' is quieter than any day sound" % id, "%.3f" % menu["peak"])
+		expect(float(menu["seconds"]) < 0.2,
+			"and over before the next key", "%.3fs" % menu["seconds"])
 	var folder := DirAccess.open("res://assets/sfx/")
 	expect(folder != null, "assets/sfx exists")
 	if folder != null:
@@ -14738,6 +14751,11 @@ func _task_0085_night_sounds() -> void:
 
 
 ## Every id the night can ask for.
+## The menu sounds `MenuFocus` plays: moving, taking an entry, backing out.
+func _menu_sound_ids() -> Array:
+	return [MenuFocus.MOVE, MenuFocus.CONFIRM, MenuFocus.BACK]
+
+
 func _night_sound_ids() -> Array:
 	var out: Array = []
 	for id in GameData.sorted_names(SfxScript.TOWER_SOUNDS.keys()):
@@ -16106,14 +16124,23 @@ func _task_0096_pause() -> void:
 	expect(not router.take_resume(), "and a reset forgets it")
 	router.free()
 
-	# **The menu offers the four the task names.**
+	# **The menu offers the four the task names**, and since 2026-10-07 the
+	# two WELCOME BACK, HERO's pause menu has beside them - start the run
+	# again, and close the game - in that game's order: resume first.
 	var offered: Array = []
 	for entry in PauseScript.ENTRIES:
 		offered.append(String(entry[0]))
-	for wanted in ["resume", "options", "save", "abandon"]:
-		expect(offered.has(wanted), "the menu offers %s" % wanted,
-			str(offered))
-	expect(offered.size() == 4, "and nothing else", str(offered))
+	expect(offered == ["resume", "options", "restart", "save", "abandon", "quit"],
+		"the menu offers resume, options, restart, save, abandon and quit, in that order",
+		str(offered))
+	# **Everything that cannot be undone asks first** - and saving does not,
+	# because it loses nothing.
+	for asks in ["restart", "abandon", "quit"]:
+		expect(PauseScript.QUESTIONS.has(StringName(asks)),
+			"%s asks before it acts" % asks)
+	for safe in ["resume", "options", "save"]:
+		expect(not PauseScript.QUESTIONS.has(StringName(safe)),
+			"%s just does it" % safe)
 
 	# ---- and the part with the done-whens in it
 

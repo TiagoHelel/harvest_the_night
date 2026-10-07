@@ -42,6 +42,19 @@ var _dressed: Theme
 
 ## The router. By path, because it is an autoload: see `app.gd`.
 var _router: Node
+
+## **True from the moment the pause menu lets go until every action key is up.**
+##
+## The key that closes the menu - Enter on RESUME, Space, Escape - is still
+## held on the first frame the world runs again, and an edge read that frame
+## went straight into `state["intent"]`: resuming with Enter interacted with
+## whatever the farmer was facing, and with Space held it started watering.
+## While this is up nothing the keys say reaches the run; it drops the moment
+## they are all released.
+var _quiet := false
+## Whether the world was stopped last time the router spoke, so the moment it
+## starts again can be told from every other change.
+var _was_paused := false
 var _house_view: HouseView
 var _inside_house := false
 
@@ -152,7 +165,11 @@ func _went(_to: int, _from: int) -> void:
 	# not only while it is the top of it - Options opened from it leaves the
 	# game paused. `App.paused()` is the one that knows; this turns the only
 	# thing that advances time.
-	_driver.running = not _router.paused()
+	var paused_now: bool = _router.paused()
+	_driver.running = not paused_now
+	if _was_paused and not paused_now:
+		_quiet = true
+	_was_paused = paused_now
 	if tech_up != _tech.is_open():
 		_tech.open() if tech_up else _tech.close()
 	if _stats != null and stats_up != _stats.is_open():
@@ -263,15 +280,28 @@ func _process(_delta: float) -> void:
 		and Input.is_action_pressed(&"run")
 	_player_view.set_running(running_art)
 	_house_view.set_running(running_art)
-	if _just_pressed(&"ability"):
+	# Every edge is read every frame, paused or not, so `_was_down` knows what
+	# the keys are doing - and only reaches the run while the pause menu is
+	# not up and the keys that closed it have been let go (see `_quiet`).
+	# **The router's pause, not the driver's switch**: a check that stops the
+	# driver to step the sim by hand still wants the keys in the intent.
+	var ability := _just_pressed(&"ability")
+	var interact := _just_pressed(&"interact")
+	var cancel := _just_pressed(&"cancel")
+	var holding := Input.is_action_pressed(&"interact")
+	if _quiet:
+		_quiet = holding or Input.is_action_pressed(&"ability") \
+			or Input.is_action_pressed(&"cancel")
+	var live := not _was_paused and not _quiet
+	if live and ability:
 		intent["ability"] = true
-	if _just_pressed(&"interact"):
+	if live and interact:
 		intent["interact"] = true
 	# **The level as well as the edge.** Holding the key is how a row gets
 	# watered in one walk; the edge is what starts a job that then repeats
 	# itself. See `Player.initial()` for why they are two fields.
-	intent["interact_held"] = Input.is_action_pressed(&"interact")
-	if _just_pressed(&"cancel"):
+	intent["interact_held"] = holding and live
+	if live and cancel:
 		intent["cancel"] = true
 
 	_bank_if_a_night_ended()
@@ -321,6 +351,60 @@ func _pause_chose(which: StringName) -> void:
 			_left_on_purpose()
 			if _router != null:
 				_router.goto(_router.TITLE)
+		&"restart":
+			# **Abandon and NEW RUN in one**, without the trip through the
+			# title: the run and its save go, the profile stays, and the same
+			# seed every NEW RUN starts on begins again under the menu as it
+			# closes.
+			Save.delete_run()
+			_left_on_purpose()
+			begin_run(BOOT_SEED)
+			_banked_nights = -1
+			if _router != null:
+				_router.goto(_router.RUN)
+		&"quit":
+			# **Saved first, as SAVE AND QUIT saves**, then the window goes -
+			# the question said so before it was answered.
+			_profile = Stats.fold(_profile, _driver.state)
+			Save.write_profile(_profile)
+			Save.write_run(_driver.state)
+			_left_on_purpose()
+			get_tree().quit()
+
+
+## **Escape stops the world when it has nothing else to stop.**
+##
+## The pause menu closes on escape itself; opening it is here, because only
+## this node knows what else escape is for. It is the last thing to hear an
+## unhandled key, so a panel that took escape to close itself has already
+## kept it; and the run's own uses of it - leaving a stall, giving up a job, a
+## line in the water - come first, because they are what a player pressing
+## escape there means. WELCOME BACK, HERO's run screen asks the same questions
+## in the same order.
+func _unhandled_input(event: InputEvent) -> void:
+	if not event.is_action_pressed(&"cancel") or not escape_is_free():
+		return
+	_router.goto(_router.PAUSE)
+	get_viewport().set_input_as_handled()
+
+
+## Whether escape, pressed now, would have nothing else to do in the run.
+func escape_is_free() -> bool:
+	if _router == null or _router.here() != _router.RUN:
+		return false
+	var state := _driver.state
+	if state.is_empty():
+		return false
+	if StringName(state.get("open_panel", &"")) != &"":
+		return false
+	if Player.is_busy(state) or Fishing.is_casting(state):
+		return false
+	if Building.is_active(state):
+		return false
+	for panel in [_inventory, _result, _workshop, _shop]:
+		if panel != null and (panel as CanvasItem).visible:
+			return false
+	return true
 
 
 ## **This is what "written with the profile, not at the end of a run" means.**

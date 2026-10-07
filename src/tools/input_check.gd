@@ -5954,27 +5954,136 @@ func _case_0096_pause() -> void:
 	expect(not driver.running, "still stopped")
 	expect(menu.is_open(), "and the menu is back")
 
-	# **Abandon asks twice, and says what it is taking.**
+	# **The caret starts on RESUME, and the keys walk it round.** One
+	# selection for the keys and the pointer since 2026-10-07; down from the
+	# last entry is the first one again.
+	expect(menu.selected() == &"resume", "the caret is on RESUME",
+		str(menu.selected()))
+	await tap_key(KEY_DOWN)
+	await frames(2)
+	expect(menu.selected() == &"options", "down moves it", str(menu.selected()))
+	await tap_key(KEY_UP)
+	await tap_key(KEY_UP)
+	await frames(2)
+	expect(menu.selected() == &"quit", "and up from the top wraps to the bottom",
+		str(menu.selected()))
+
+	# **Abandon asks first, and says what it is taking.**
 	expect(menu.label_of(&"abandon") == "ABANDON RUN",
-		"the entry reads plainly at first", menu.label_of(&"abandon"))
+		"the entry reads plainly", menu.label_of(&"abandon"))
 	await click_control("Pause_abandon")
 	await frames(3)
-	expect(menu.asking(), "one press asks rather than doing it")
+	expect(menu.asking() and menu.question() == &"abandon",
+		"one press asks rather than doing it", str(menu.question()))
 	expect(router.here() == router.PAUSE, "and nothing has happened yet",
 		router.name_of(router.here()))
-	expect(menu.label_of(&"abandon") == "YES, ABANDON IT",
-		"the entry says what pressing it again does",
-		menu.label_of(&"abandon"))
+	expect(menu.label_of(&"do") == "YES, ABANDON IT",
+		"the button that goes ahead says what it does", menu.label_of(&"do"))
 	expect(menu.cost_shown().contains("DAY"),
 		"and what will be lost is on the screen", menu.cost_shown())
+	expect(menu.selected() == &"keep",
+		"with the caret on KEEP PLAYING, so a reflex press is the safe one",
+		str(menu.selected()))
 
-	# Anything else drops the question.
+	# **Escape takes the question back, not the menu.**
+	await tap_key(KEY_ESCAPE)
+	await frames(3)
+	expect(not menu.asking(), "escape takes the question away")
+	expect(router.here() == router.PAUSE and menu.is_open(),
+		"and leaves the pause menu up", router.name_of(router.here()))
+	expect(menu.selected() == &"abandon",
+		"with the caret back on the entry that asked", str(menu.selected()))
+	await click_control("Pause_abandon")
+	await frames(3)
+	await click_control("Pause_keep")
+	await frames(3)
+	expect(not menu.asking() and router.here() == router.PAUSE,
+		"KEEP PLAYING takes it back too", router.name_of(router.here()))
+
+	# **Quitting says the run is saved first** - and is not pressed here, for
+	# the obvious reason.
+	await click_control("Pause_quit")
+	await frames(3)
+	expect(menu.question() == &"quit" and menu.cost_shown().contains("SAVED"),
+		"closing the game asks too, and says the run is kept",
+		menu.cost_shown())
+	await tap_key(KEY_ESCAPE)
+	await frames(3)
+
 	await click_control("Pause_resume")
 	await frames(4)
-	expect(not menu.asking(), "walking away drops the question")
 	expect(router.here() == router.RUN, "RESUME resumes",
 		router.name_of(router.here()))
 	expect(driver.running, "and the world with it")
+
+	# **Escape opens it when escape has nothing else to do**, and closes it.
+	await tap_key(KEY_ESCAPE)
+	await frames(3)
+	expect(router.here() == router.PAUSE, "escape pauses an idle farmer",
+		router.name_of(router.here()))
+	await tap_key(KEY_ESCAPE)
+	await frames(3)
+	expect(router.here() == router.RUN, "and escape resumes",
+		router.name_of(router.here()))
+	# A panel that is open keeps escape for itself.
+	await tap_key(KEY_I)
+	await frames(3)
+	var bag: Control = locate_control("InventoryPanel") as Control
+	expect(bag != null and bag.visible, "the inventory opens")
+	await tap_key(KEY_ESCAPE)
+	await frames(3)
+	expect(bag != null and not bag.visible, "escape closes it")
+	expect(router.here() == router.RUN,
+		"and does not also pause the game", router.name_of(router.here()))
+
+	# **The key that resumes is not also a key pressed in the farm.** The
+	# farmer faces a tree; ENTER on RESUME used to start chopping it on the
+	# first tick back, because the edge went into the run's intent.
+	var state: Dictionary = driver.state
+	var tree_at := Vector2i(-1, -1)
+	var stand := Vector2i(-1, -1)
+	for y in range(2, Grid.HEIGHT - 2):
+		for x in range(2, Grid.WIDTH - 2):
+			var cell := Vector2i(x, y)
+			if Interact.verb_at(state, cell) == &"chop" \
+					and Farm.walkable(state, cell + Vector2i(-1, 0)):
+				tree_at = cell
+				stand = cell + Vector2i(-1, 0)
+				break
+		if tree_at.x >= 0:
+			break
+	expect(tree_at.x >= 0, "there is a tree to face")
+	if tree_at.x >= 0:
+		_stand_at(state, stand, Player.EAST)
+		await tap_key(KEY_P)
+		await frames(3)
+		expect(menu.selected() == &"resume", "back on RESUME")
+		await tap_key(KEY_ENTER)
+		await frames(8)
+		expect(router.here() == router.RUN, "ENTER on RESUME resumes",
+			router.name_of(router.here()))
+		expect(not Player.is_busy(state),
+			"and the farmer does not start on the tree with it")
+
+	# **Restart begins the run again where it stands.**
+	Resources.gain(state, {GameData.WOOD: 7})
+	await frames(30)
+	var before := int(driver.state["tick"])
+	await tap_key(KEY_P)
+	await frames(3)
+	await click_control("Pause_restart")
+	await frames(3)
+	expect(menu.question() == &"restart", "RESTART RUN asks first")
+	expect(menu.label_of(&"do") == "YES, START AGAIN",
+		"and says what going ahead does", menu.label_of(&"do"))
+	await click_control("Pause_do")
+	await frames(6)
+	expect(router.here() == router.RUN and not menu.is_open(),
+		"going ahead closes the menu on a run", router.name_of(router.here()))
+	expect(int(driver.state["tick"]) < before,
+		"which is a new one, from the start",
+		"%d against %d" % [int(driver.state["tick"]), before])
+	expect(driver.running, "and running")
 
 	# **Save and quit writes the run and leaves.**
 	Save.delete_run()
@@ -6034,15 +6143,15 @@ func _case_0096_pause() -> void:
 		"and by hand as well as by the button",
 		"%d against %d" % [int(driver.state["tick"]), at_save])
 
-	# **Abandon, pressed twice, takes it.**
+	# **Abandon, answered, takes it.**
 	await tap_key(KEY_P)
 	await frames(3)
 	menu = locate_control("PauseMenu") as PauseMenu
 	await click_control("Pause_abandon")
 	await frames(3)
-	await click_control("Pause_abandon")
+	await click_control("Pause_do")
 	await frames(4)
-	expect(router.here() == router.TITLE, "the second press ends the run",
+	expect(router.here() == router.TITLE, "going ahead ends the run",
 		router.name_of(router.here()))
 	expect(not Save.has_run(), "and the save goes with it")
 	await close_scene()

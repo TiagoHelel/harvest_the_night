@@ -12467,3 +12467,65 @@ scenes.gd (a dead BootIdent call), implementation/shots/studio-intro/ (ten FHD
 beats and the hand-over as playback.gif).
 Verify: **55 passed, 0 skipped, 0 failed** in 545 s; 16142 headless asserts,
 1029 input cases; sim 1242708873 and data 2015186086 unchanged.
+
+## 2026-10-07 — Buttons redrawn, and a pause menu like WELCOME BACK, HERO's
+
+The owner asked for a pause menu with WELCOME BACK, HERO's functions and for
+the buttons to be redesigned for UX. Options follow in their own commit.
+
+**The buttons.** The five button frames in tools/sprite_maps.py are redrawn
+(still 16x16, still a three pixel nine-slice, still ASCII maps): a dark key
+with a brass trim - the panels' brass, so a thing that can be pressed reads as
+furniture - lit from above and shaded below. Hover warms it (gold trim, the
+lamplit wood for a face); pressed sinks it (light on the bottom edge, gold
+face, and `UiKit` moves the label down a pixel); disabled loses the trim and
+the relief; focus is a gold ring laid over the trim. Hover letters stay bone
+on the warm face; keyboard focus is gold letters. A `Danger` variation gives
+red letters to the one entry that throws something away; `Stacked` puts two
+pixels between the keys of a menu column. All of check_ui_art, the nine-slice
+margin, the luminance gaps and the focus-ring checks still hold unchanged.
+
+**One selection for keys, pointer and pad** (src/ui/menu_focus.gd), WBH's
+MenuList behaviour on ordinary Buttons: hovering moves the focus, so there is
+never one entry lit by the mouse and another by the keys; up and down wrap and
+pass over switched-off entries; the selected entry wears a gold caret in the
+margin; and three new generated sounds - ui_move, ui_confirm, ui_back
+(tools/gen_sfx.py, the quietest tier at 0.30 peak, all under 0.14 s) - say the
+selection moved, an entry was taken, or the player backed out. The title menu
+uses it.
+
+**The pause menu** (src/ui/pause_menu.gd) is WBH's shape: the world dimmed
+behind one centred card, PAUSED, then RESUME, OPTIONS, RESTART RUN, SAVE AND
+QUIT, ABANDON RUN, QUIT GAME, with the caret on RESUME every time it opens and
+a line at the bottom naming the keys that close it. RESTART, ABANDON and QUIT
+swap the list for a question in red with what it costs (the day, the nights
+won, what is standing; for QUIT, that the run is saved first) and KEEP PLAYING
+under the caret; escape takes the question back. Restart is ABANDON + NEW RUN
+in place (Main.begin_run on the boot seed); quit saves like SAVE AND QUIT and
+closes the window. Escape now opens the menu when it has nothing else to stop
+(Main.escape_is_free: no stall open, no job, no line in the water, not in
+build mode, no panel up) - and leaves build mode first; P and a pad's Start
+toggle it as before. **A bug fixed on the way:** keys pressed while paused
+went into `state["intent"]` and fired on the first tick back - ENTER on RESUME
+started chopping the tree the farmer faced. Main now writes no edge while the
+router is paused and none until the keys that closed the menu are let go
+(input_check proves both).
+
+Checks: headless holds the six entries and which of them ask; input_check
+0096 walks the caret (wrap included), every question, escape and KEEP
+PLAYING, escape opening and closing it, the inventory keeping its own escape,
+the resume not leaking into the farm, and restart beginning a fresh run.
+src/tools/capture_menus.gd photographs the title menu (keys and hover) and the
+pause menu with each question at 1920x1080 into implementation/shots/menus/.
+
+Files: tools/sprite_maps.py, sprites/ui/button_{normal,hover,pressed,disabled,
+focus}.png, tools/gen_sfx.py, assets/sfx/ui_{move,confirm,back}.wav,
+src/ui/{ui_kit,menu_focus,pause_menu,main,title_screen,build_mode}.gd,
+assets/locale/strings.csv (11 rows), src/tools/{headless_check,input_check,shot,
+capture_menus}.gd, implementation/shots/menus/.
+Verify: 54 passed, 1 failed in 575 s - the one failure was headless's timing
+assert "a wall falling costs less than the tick it falls on" (40875 us against
+33333 on that run; the perf row the same run measured 7.9 ms per rebuild); two
+headless reruns straight after passed 16160/16160, and nothing here touches
+the path code. input_check 1051 cases, 0 failed; sim 1242708873 and data
+2015186086 unchanged.

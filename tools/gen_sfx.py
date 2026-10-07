@@ -75,6 +75,11 @@ NIGHT_PEAK = 0.70
 ## The Giant, which is allowed to be bigger than everything except the alarm.
 GIANT_PEAK = 0.88
 
+## What a menu sound may peak at: the quietest tier in the game. These are heard
+## every time a selection moves, and a menu that clicks louder than an axe on a
+## tree is a menu somebody turns the sound off for.
+UI_PEAK = 0.30
+
 ## **The house being hit, which is the loudest sound in the game.** It is the
 ## only one that means you are losing, and `headless_check` asserts that
 ## nothing else reaches it.
@@ -483,6 +488,29 @@ def house_hit():
                gain(alarm_a, 0.3), gain(alarm_b, 0.3))
 
 
+# ------------------------------------------------------------------ the menus
+
+def ui_move():
+    """A selection moving. One short, soft, high tick: a column walked from top
+    to bottom is a patter, not a drum."""
+    return lowpass(decay(tone(1175.0, 40), 9.0, 1.0), 5000.0)
+
+
+def ui_confirm():
+    """An entry taken. Two notes rising a fifth - "yes", rather than "click"."""
+    a = decay(tone(784.0, 60), 22.0, 2.0)
+    b = at(45, decay(tone(1175.0, 90), 32.0, 2.0))
+    return lowpass(mix(gain(a, 0.55), gain(b, 0.55)), 5500.0)
+
+
+def ui_back():
+    """Backing out. The same two notes the other way round, lower - a door
+    closed gently rather than slammed."""
+    a = decay(tone(1047.0, 50), 20.0, 2.0)
+    b = at(40, decay(tone(698.0, 80), 30.0, 2.0))
+    return lowpass(mix(gain(a, 0.5), gain(b, 0.5)), 4500.0)
+
+
 ## Every day sound: the id the game asks for, the recipe, and what it may peak
 ## at. The id is what `Audio.play()` takes, minus the `sfx/` the folder adds.
 DAY_SOUNDS = [
@@ -519,7 +547,16 @@ NIGHT_SOUNDS = [
     ("house_hit", house_hit, ALARM_PEAK),
 ]
 
-SOUNDS = DAY_SOUNDS + NIGHT_SOUNDS
+## And the menus' three (2026-10-07): moving the selection, taking an entry,
+## backing out - the feedback WELCOME BACK, HERO's menus give, at the quietest
+## level in the game. `MenuFocus` plays them.
+UI_SOUNDS = [
+    ("ui_move", ui_move, UI_PEAK),
+    ("ui_confirm", ui_confirm, UI_PEAK),
+    ("ui_back", ui_back, UI_PEAK),
+]
+
+SOUNDS = DAY_SOUNDS + NIGHT_SOUNDS + UI_SOUNDS
 
 
 # -------------------------------------------------------------------- the file
@@ -759,8 +796,8 @@ def main():
                 print("  " + line)
             print("FAIL  run: python tools/gen_sfx.py")
             return 1
-        print("OK    %d sounds match their recipes (%d day, %d night)"
-          % (len(files), len(DAY_SOUNDS), len(NIGHT_SOUNDS)))
+        print("OK    %d sounds match their recipes (%d day, %d night, %d menu)"
+          % (len(files), len(DAY_SOUNDS), len(NIGHT_SOUNDS), len(UI_SOUNDS)))
         return 0
 
     os.makedirs(OUT, exist_ok=True)
