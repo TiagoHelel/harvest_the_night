@@ -12660,3 +12660,44 @@ Notes: that scenario's own `Phases.enter_result(state, true)` is refused with
 "enter_result from RESULT", because its night is already lost by then - true
 before this change as well, and left alone, since moving it would move the
 hash for no rule.
+
+## 2026-10-07 — A plan for the whole game: day, night and the road to 1.0
+
+The owner asked for a plan, in a markdown file, of how the game develops from
+here: day earns the money, the night is defended while the farmer sleeps and
+the player places the weapons, how many days and nights there are, how it
+plays, the items, the farming and the fishing.
+
+`docs/PLANO-DO-JOGO.md`, in Portuguese like `design.md`, because it is the
+owner's document to answer and edit. In short: going to bed is the reality
+switch; at night a guardian cursor with a free camera places, upgrades, sells
+and repairs, and the flare is aimed; the build step waits for START. One year
+of 4 seasons x 14 days - **56 days and 56 nights** - with a Full Moon on each
+7th and a boss on each 14th (the Giant first, then three new ones), about 10
+to 13 hours, then an endless Year 2. Crops grow by days, any grass can be
+tilled, 12 crops each with a sale, food or defence role; fish by pond, season
+and hour with a small timing minigame and rods; tools in three tiers; coop,
+barn and five artisan machines; a shipping bin. 14 defences (6 new), 10
+enemies and 4 bosses. The calendar always moves on and a lost boss night
+repeats; a night ends at 06:00, the house standing at sunrise wins, and
+whoever is left walks off. Nine phases, of which Phase 1 (sleep = night, the
+cursor) is the checkpoint the rest waits on; twelve decisions with a
+recommendation each; what it changes against `design.md`; the known issues.
+
+Made from an audit of what the code does today - every table in
+`game_data.gd` and the rules that read them - so the plan starts from the
+real numbers: a 4 minute day, a 20 s build step, three crops that grow in
+minutes on 60 soil cells, one fish, no tools, one cow and two chickens for
+meat, eight defences, five enemies, ten nights and the endless curve. Two of
+its findings were confirmed by reading and are listed for Phase 0: repairs are
+measured against the base table, so a levelled tower mends to its level-1 HP
+and the house to 100 rather than 140, and the house-untouched money and
+technology are measured against 100 too. The rest it suspected from reading
+alone, and they are listed as suspected, not fixed: spawn regions that can be
+built shut, a mortar with no gunpowder dealing nothing, the flamethrower's
+bonuses and ammunition, the can's "/8", barricades laid by day, three stale
+documents. The night speed leaking into the day was confirmed and is fixed in
+the entry above.
+
+No code changed. Nothing is in the backlog yet: once the owner has answered
+section 11, each phase becomes tasks in tools/backlog/.
