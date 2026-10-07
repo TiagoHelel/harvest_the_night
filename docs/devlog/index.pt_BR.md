@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-114 tarefas em 5 dias, de  a 2026-10-07. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+115 tarefas em 5 dias, de  a 2026-10-07. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -157,6 +157,7 @@ voz alta.
 | 0110 | Refusals in two languages | 2026-09-29 |
 | 0112 | Room in the test suites | 2026-10-07 |
 | 0113 | Repairs mend to the real maximum | 2026-10-07 |
+| 0114 | Untouched means the house the night started with | 2026-10-07 |
 
 ## Toda vez que o jogo mudou por baixo
 

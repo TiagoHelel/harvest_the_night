@@ -36,7 +36,7 @@ extends "res://src/tools/input_check.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V1_CASES := 1
+const V1_CASES := 2
 
 
 func _process(delta: float) -> bool:
@@ -51,6 +51,7 @@ func _process(delta: float) -> bool:
 
 func _run() -> void:
 	await _case_0112_harness()
+	await _case_0114_house_bar()
 	_finish()
 
 
@@ -90,5 +91,59 @@ func _case_0112_harness() -> void:
 		"facing %d, wanted %d" % [Player.facing(driver.state), want])
 	expect(int(driver.state["tick"]) > tick, "and the world turned meanwhile",
 		"tick %d, then %d" % [tick, int(driver.state["tick"])])
+	await close_scene()
+	_completed += 1
+
+
+## 0114 - the night HUD's house bar measures the house the night started with.
+func _case_0114_house_bar() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var night_hud: NightHud = require_control("NightHud")
+	if driver == null or night_hud == null:
+		await close_scene()
+		_completed += 1
+		return
+	var state := driver.state
+	driver.set_speed(1)
+	(state["tech_owned"] as Array).append(&"stout timbers")
+	var full := Phases.house_full(state)
+	state["house_hp"] = full
+	Phases.begin_preparation(state)
+	Sim.advance(state, GameData.PREPARATION_TICKS)
+	await frames(3)
+	expect(int(state["phase"]) == Phases.NIGHT and night_hud.visible,
+		"it is night and the night HUD is up")
+	var house_text: Label = locate_control("HouseNumbers") as Label
+	var house_bar: ColorRect = locate_control("HouseBar") as ColorRect
+	expect(house_text != null and house_bar != null, "the house bar is there")
+	if house_text == null or house_bar == null:
+		await close_scene()
+		_completed += 1
+		return
+
+	# **A 140 house reads 140/140, whole and calm.** Against the base 100 it
+	# printed 140/100 and a bar clamped at full.
+	expect(full == 140, "stout timbers makes the house 140", str(full))
+	expect(house_text.text.contains("%d/%d" % [full, full]),
+		"the HUD reads 140/140", house_text.text)
+	# The danger pulse is the BAD variation and a red fill. **Not `r > g`**:
+	# the calm DIM ink is a warm grey, so its red is already over its green.
+	expect(house_text.theme_type_variation != UiKit.BAD
+		and house_bar.color == UiKit.colour(UiKit.GOOD),
+		"with no danger pulse", "%s, %s"
+			% [house_text.theme_type_variation, house_bar.color])
+	var whole := house_bar.size.x
+
+	# **And 80 of 140 is in danger**, which against 100 it was not: 57
+	# percent, under `HOUSE_DANGER_PERCENT`.
+	state["house_hp"] = 80
+	await frames(2)
+	expect(house_text.text.contains("80/%d" % full), "80 of 140 says so",
+		house_text.text)
+	expect(house_text.theme_type_variation == UiKit.BAD,
+		"and pulses red at 57 percent", str(house_text.theme_type_variation))
+	expect(house_bar.size.x < whole * 0.6, "on a bar four sevenths long",
+		"%f against %f" % [house_bar.size.x, whole])
 	await close_scene()
 	_completed += 1

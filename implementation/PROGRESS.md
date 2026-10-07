@@ -12851,3 +12851,35 @@ because the determinism scenario does not repair. The ALARM "no policy won a
 single run" was already there before this task (it is the robot against the
 current map and curve, not this fix) - the 1.0 balance tasks (0142 the sleeping
 robot, phase 15) own it.
+
+## 0114 - Untouched means the house the night started with - done 2026-10-07
+
+What changed: every "how whole is the house" question now asks
+`Phases.house_full(state)` (140 with 'stout timbers') instead of the base 100:
+the 'the house untouched' money in `Rewards._money_from`, `Tech._earned`
+"house untouched", the share `Sim.why_not_skip` compares with
+`SKIP_MIN_HOUSE_PERCENT`, `Enemies.house_fraction`, the night HUD's bar, numbers
+and `HOUSE_DANGER_PERCENT` pulse, the result screen's `RES_HOUSE` line and
+`play_nights.gd`'s report. **The result screen recomputes rather than records**:
+the tree only changes by day (`Tech.buy` and `Tech.refund` both refuse any other
+phase) and the screen is only up in RESULT, so `house_full` there is the
+night's own number - no new payout key, and SIM does not move. `GameData.HOUSE_HP`
+outside game_data.gd is now only in `Phases.house_full` and `Farm.initial`, and
+`_task_0114_untouched` scans src/core and src/ui code lines to keep it so
+(`_code_lines_of` moved into `SuiteKit.code_lines_of`, 8 call sites).
+input_check's 0056 house-bar case did not fail (its house owns no tree) and is
+untouched - but its "a house in danger is red" check (`ink.r > ink.g`) is
+trivially true: the calm DIM ink is a warm grey whose red is already over its
+green. The new `_case_0114_house_bar` compares the theme variation (DIM against
+BAD) and the fill colour instead; the old case is worth the same fix when it is
+next touched.
+Files: src/core/{rewards,tech,sim,enemies}.gd, src/ui/{night_hud,result_screen}.gd,
+src/tools/{play_nights,headless_v1,input_v1,suite_kit,headless_check}.gd
+Verify: **58 passed, 0 failed in 577s** (OVER BUDGET 300, as before); headless_check
+16173, headless_v1 54 (+12), input_check 1074, input_v1 11 (+8); sim 2728872771
+and data 1968527100 unchanged. No shots: the shot scenarios own no tree, so
+every picture is the 100/100 house it was.
+Notes: from here, a test that writes Python through a Bash heredoc can have its
+`\n` escapes turned into real newlines on this setup - task 0114's first edit of
+sim.gd came out with a literal `\n` in the code. GDScript edits go through the
+editor tool.

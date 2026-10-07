@@ -169,7 +169,8 @@ static func can_skip(state: Dictionary) -> bool:
 static func why_not_skip(state: Dictionary) -> Array:
 	if int(state["phase"]) != Phases.NIGHT:
 		return [&"WHY_ONLY_AT_NIGHT"]
-	var left := int(state["house_hp"]) * 100 / maxi(GameData.HOUSE_HP, 1)
+	# A share of the house the night started with, not of the base 100.
+	var left := int(state["house_hp"]) * 100 / maxi(Phases.house_full(state), 1)
 	if left < GameData.SKIP_MIN_HOUSE_PERCENT:
 		return [&"WHY_HOUSE_LOW", left]
 	return []

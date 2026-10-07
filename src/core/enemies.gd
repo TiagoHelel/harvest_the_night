@@ -385,6 +385,7 @@ static func withdraw_in_daylight(state: Dictionary) -> int:
 	return withdraw(state)
 
 
-## What is left of the farmhouse, as a fraction, for the night HUD.
+## What is left of the farmhouse, as a fraction of the house the night
+## started with ('stout timbers' included, task 0114), for the night HUD.
 static func house_fraction(state: Dictionary) -> float:
-	return float(state["house_hp"]) / float(maxi(GameData.HOUSE_HP, 1))
+	return float(state["house_hp"]) / float(maxi(Phases.house_full(state), 1))

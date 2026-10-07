@@ -253,7 +253,7 @@ static func spend(state: Dictionary, points: int) -> bool:
 static func _earned(state: Dictionary, id: StringName) -> bool:
 	match id:
 		&"house untouched":
-			return int(state["house_hp"]) >= GameData.HOUSE_HP
+			return int(state["house_hp"]) >= Phases.house_full(state)
 		&"nothing lost":
 			# Nothing the player built came down tonight.
 			return Farm.rubble_cells(state).is_empty()

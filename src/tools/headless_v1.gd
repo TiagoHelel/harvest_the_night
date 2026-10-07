@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 2
+const GROUPS := 3
 
 var passed := 0
 var failed := 0
@@ -69,6 +69,7 @@ func _process(delta: float) -> bool:
 func _run() -> void:
 	_task_0112_digest()
 	_task_0113_repairs()
+	_task_0114_untouched()
 
 
 func _finish() -> void:
@@ -258,4 +259,76 @@ func _task_0113_repairs() -> void:
 			note = String((row as Dictionary).get("note", ""))
 	expect(note.contains("mending") and not note.contains("house"),
 		"and the note promises every mend, the house's included", note)
+	_completed += 1
+
+
+## 0114 - "how whole is the house" is asked of the house the night started
+## with, not of the base 100.
+func _task_0114_untouched() -> void:
+	# **Only two places may name the base number.** `Phases.house_full()` is
+	# the answer and `Farm.initial()` is a new run's house, before any tree;
+	# everything else asks `house_full`, or 'stout timbers' quietly stops
+	# counting somewhere. Read as text, the way `_task_0095_controls` scans
+	# for raw keys.
+	var allowed := ["res://src/core/phases.gd", "res://src/core/farm.gd"]
+	var base := RegEx.create_from_string("\\bHOUSE_HP\\b")
+	var naming: Array = []
+	for folder in ["res://src/core", "res://src/ui"]:
+		for file in DirAccess.get_files_at(folder):
+			if not String(file).ends_with(".gd") or file == "game_data.gd":
+				continue
+			var path: String = String(folder).path_join(file)
+			for line in SuiteKit.code_lines_of(path).split("\n"):
+				var code := String(line)
+				var comment := code.find("#")
+				if comment >= 0:
+					code = code.substr(0, comment)
+				if base.search(code) != null:
+					naming.append(path)
+					break
+	for path in allowed:
+		expect(naming.has(path), "the scan still sees %s" % path, str(naming))
+	var stray: Array = naming.filter(func(p: String) -> bool:
+		return not allowed.has(p))
+	expect(stray.is_empty(),
+		"no rule or screen measures the house against the base HOUSE_HP",
+		str(stray))
+
+	# **The untouched bonus, both halves.** With 'stout timbers' a night that
+	# ends at 120 of 140 lost twenty: no money for it and no tech point.
+	for row in [[120, false], [140, true]]:
+		var night := State.create(114114)
+		(night["tech_owned"] as Array).append(&"stout timbers")
+		var full := Phases.house_full(night)
+		expect(full == 140, "stout timbers makes the house 140", str(full))
+		night["house_hp"] = int(row[0])
+		var tech := Tech.would_pay(night, int(night["night"]))
+		var paid := Rewards.settle(night, true)
+		var money := int((paid["money_from"] as Dictionary)["the house untouched"])
+		var want := bool(row[1])
+		expect((money == int(GameData.REWARDS["house_untouched_bonus"])) == want
+			and (money == 0) != want,
+			"%d of 140 %s the 'house untouched' money"
+				% [int(row[0]), "pays" if want else "does not pay"], str(money))
+		expect(tech.has(&"house untouched") == want,
+			"and %s the 'house untouched' tech point"
+				% ("earns" if want else "does not earn"), str(tech))
+
+	# **The skip refusal reads the same share.** 75 of 140 is 53 percent, over
+	# `SKIP_MIN_HOUSE_PERCENT`; 65 of 140 is 46, under it - and the refusal
+	# says 46, which against the base 100 it would have called 65.
+	var skip := State.create(114115)
+	(skip["tech_owned"] as Array).append(&"stout timbers")
+	skip["phase"] = Phases.NIGHT
+	skip["house_hp"] = 75
+	expect(Sim.why_not_skip(skip).is_empty(), "75 of 140 may be skipped",
+		str(Sim.why_not_skip(skip)))
+	skip["house_hp"] = 65
+	expect(Sim.why_not_skip(skip) == [&"WHY_HOUSE_LOW", 46],
+		"65 of 140 is refused at 46 percent", str(Sim.why_not_skip(skip)))
+
+	# And the HUD's fraction comes off the same number.
+	skip["house_hp"] = 70
+	expect(is_equal_approx(Enemies.house_fraction(skip), 0.5),
+		"70 of 140 is half a house", str(Enemies.house_fraction(skip)))
 	_completed += 1

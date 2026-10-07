@@ -447,7 +447,7 @@ func _task_0103_crash() -> void:
 	# words that it never touches `Save.RUN_PATH`. A check that cannot tell a
 	# promise from the thing it promises about is a check that teaches people
 	# to stop writing the promise down.
-	var source := _code_lines_of("res://src/app/crash.gd")
+	var source := SuiteKit.code_lines_of("res://src/app/crash.gd")
 	expect(not source.contains("Save."),
 		"and nothing in crash.gd can write a save at all")
 
@@ -560,7 +560,7 @@ func _no_code_in_src_says(needle: String) -> bool:
 		for name in DirAccess.get_files_at(folder):
 			if not String(name).ends_with(".gd"):
 				continue
-			if _code_lines_of(String(folder).path_join(String(name))) \
+			if SuiteKit.code_lines_of(String(folder).path_join(String(name))) \
 					.contains(needle):
 				return false
 	return true
@@ -578,19 +578,6 @@ func _nothing_in_src_says(needle: String) -> bool:
 			if source.contains(needle):
 				return false
 	return true
-
-
-## A file with its comments taken out, for a check about what code does.
-func _code_lines_of(path: String) -> String:
-	var out := PackedStringArray()
-	for line in FileAccess.get_file_as_string(path).split("
-"):
-		var trimmed := String(line).strip_edges()
-		if trimmed.begins_with("#"):
-			continue
-		out.append(line)
-	return "
-".join(out)
 
 
 ## Start and end with an empty `user://crash/`.
@@ -1047,7 +1034,7 @@ func _task_0105_playtest() -> void:
 
 	# The same grep task 0103 wrote, over the file that logs how somebody
 	# played. If anything ever wanted to phone home it would be this.
-	var source := _code_lines_of("res://src/app/playtest.gd")
+	var source := SuiteKit.code_lines_of("res://src/app/playtest.gd")
 	for way in ["HTTPRequest", "HTTPClient", "WebSocketPeer", "OS.execute"]:
 		expect(not source.contains(way),
 			"nothing in playtest.gd can %s" % way)
@@ -1074,7 +1061,7 @@ func _task_0105_playtest() -> void:
 		"an export preset turns the flag on")
 	expect(presets.contains('name="Windows Playtest"'),
 		"and it is its own build rather than a switch in the shipping one")
-	var release := _code_lines_of("res://tools/release.py")
+	var release := SuiteKit.code_lines_of("res://tools/release.py")
 	expect(release.contains("PLAYTEST_PRESET"),
 		"and release.py knows to leave it out unless it is asked for")
 
@@ -1209,7 +1196,7 @@ func _no_core_code_reads(needle: String) -> bool:
 	for name in DirAccess.get_files_at("res://src/core"):
 		if not String(name).ends_with(".gd") or String(name) == "game_data.gd":
 			continue
-		if _code_lines_of("res://src/core/".path_join(String(name))) \
+		if SuiteKit.code_lines_of("res://src/core/".path_join(String(name))) \
 				.contains(needle):
 			return false
 	return true
@@ -1378,7 +1365,7 @@ func _task_0109_reactions() -> void:
 			continue
 		if String(name) == "reactions.gd" or String(name) == "state.gd":
 			continue
-		var source := _code_lines_of("res://src/core/".path_join(String(name)))
+		var source := SuiteKit.code_lines_of("res://src/core/".path_join(String(name)))
 		if source.contains("\"reaction\"") or source.contains("Reactions."):
 			# `sim.gd` is allowed the one line that ticks it.
 			if String(name) == "sim.gd" \
@@ -1645,7 +1632,7 @@ func _task_0110_refusals() -> void:
 			continue
 		if String(name) == "game_data.gd" or String(name) == "build_info.gd":
 			continue
-		var source := _code_lines_of("res://src/core/".path_join(String(name)))
+		var source := SuiteKit.code_lines_of("res://src/core/".path_join(String(name)))
 		for line in source.split("\n"):
 			var trimmed := String(line).strip_edges()
 			# **`return "` and `return ["` both.** A sentence smuggled into
@@ -1673,7 +1660,7 @@ func _task_0110_refusals() -> void:
 	for name in DirAccess.get_files_at("res://src/ui"):
 		if not String(name).ends_with(".gd"):
 			continue
-		var view := _code_lines_of("res://src/ui/".path_join(String(name)))
+		var view := SuiteKit.code_lines_of("res://src/ui/".path_join(String(name)))
 		expect(not view.contains("Waves.note_for")
 			and not view.contains("summary_of"),
 			"no screen shows a developer note: %s" % String(name))

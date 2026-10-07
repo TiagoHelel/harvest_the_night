@@ -72,7 +72,7 @@ func _init() -> void:
 					int(played["budget"]), int(played["towers"]),
 					int(played["power"]),
 					"held, house %d/%d after %ds"
-						% [int(played["house"]), GameData.HOUSE_HP,
+						% [int(played["house"]), int(played["house_full"]),
 							int(played["ticks"]) / GameData.TICK_HZ]
 						if bool(played["held"])
 						else "FELL after %ds with %d still coming"
@@ -197,6 +197,7 @@ func _play(night: int, budget: int) -> Dictionary:
 		"held": int(state["house_hp"]) > 0,
 		"power": Power.percent(state),
 		"house": int(state["house_hp"]),
+		"house_full": Phases.house_full(state),
 		"ticks": ticks,
 		"towers": towers,
 		"left": Waves.remaining(state),

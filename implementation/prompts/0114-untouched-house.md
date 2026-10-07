@@ -1,7 +1,7 @@
 # 0114 - Untouched means the house the night started with
 
 - **Phase:** 9 - v1.0 groundwork
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0112, 0113
 - **Likely files:** src/core/rewards.gd, src/core/tech.gd, src/core/sim.gd, src/core/enemies.gd, src/ui/night_hud.gd, src/ui/result_screen.gd, src/tools/play_nights.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd, src/tools/input_check.gd
 

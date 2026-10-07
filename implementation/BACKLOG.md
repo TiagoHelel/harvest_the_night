@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`#########...............`  **112 / 296 done**
+`#########...............`  **113 / 296 done**
 
-0 doing / 184 todo / 0 blocked across 18 phases.
+0 doing / 183 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0114 - Untouched means the house the night started with**. The whole of what is left is
+First up: **0115 - Spawn ground that cannot be built shut**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,26 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-184 task(s) left, the ready ones first, then what they
+183 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0114 - Untouched means the house the night started with
-
-Ready to pick up.  Likely files: `src/core/rewards.gd, src/core/tech.gd, src/core/sim.gd, src/core/enemies.gd, src/ui/night_hud.gd, src/ui/result_screen.gd, src/tools/play_nights.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd, src/tools/input_check.gd`.
-
-With 'stout timbers' the house starts the night at 140, yet four rules still measure it against 100: it can lose 40 and still pay the untouched bonus, and the skip refusal and the danger bar read the wrong share. Every 'how whole is the house' question is asked of the house the night started with.
-
-- Route through `Phases.house_full(state)`: the 'the house untouched' line in `rewards.gd` (`house_hp >= GameData.HOUSE_HP`), `Tech._earned` `&"house untouched"`, the percentage `Sim.why_not_skip` compares with `SKIP_MIN_HOUSE_PERCENT`, and `Enemies.house_fraction`
-- The view reads the same number: the night HUD house bar, its text and its `HOUSE_DANGER_PERCENT` pulse (`night_hud.gd`, `full := maxi(GameData.HOUSE_HP, 1)`), the result screen's `RES_HOUSE` line, and `play_nights.gd`'s report
-- If the tree can change between the night and its result screen, `Rewards.settle` records the full value in the payout and the screen prints that instead of recomputing it - check and say which
-- `GameData.HOUSE_HP` outside `game_data.gd` is left only in `Phases.house_full` and `Farm.initial` (a new run's house, before any tree); 0113 (a dependency) has already taken it out of `repair.gd`. `_task_0114_untouched` in `headless_v1` reads the code lines of `src/core/` and `src/ui/` as text and keeps it so, the way `_task_0095_controls` scans for raw keys
-- Update `input_check`'s house-bar case (~l.3350, it reads `str(GameData.HOUSE_HP)`) only if it now fails; its no-tree house is still 100
-- No new number: 0191's house tiers build on `house_full`. The determinism scenario owns no tech, so the comparisons give the same answers and SIM should not move - but a new key in the payout (above) is hashed and moves it if the scenario's night settles; if SIM moves, say which and accept it with both numbers. DATA does not move
-
-  - done when: `_task_0114_untouched`: with 'stout timbers', a night ending at 120 of 140 pays no 'the house untouched' money and earns no 'house untouched' tech; one ending at 140 earns both
-  - done when: `Sim.why_not_skip` with 'stout timbers' allows a skip at 75 of 140 (53 %) and refuses at 65 of 140 with `[&"WHY_HOUSE_LOW", 46]`
-  - done when: `_case_0114_house_bar` in `input_v1`: a 140 house reads `140/140` on the night HUD with no danger pulse
 
 ### 0115 - Spawn ground that cannot be built shut
 
@@ -710,7 +693,7 @@ Hoe, watering can, axe, pickaxe and rod, each in three tiers bought at the works
 
 ### 0191 - The house in three tiers
 
-Waits on 0148, 0114.  Likely files: `src/core/phases.gd, src/core/house.gd, src/core/repair.gd, src/core/interact.gd, src/core/game_data.gd, src/ui/house_view.gd, src/ui/world_view.gd, src/ui/sfx.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Waits on 0148.  Likely files: `src/core/phases.gd, src/core/house.gd, src/core/repair.gd, src/core/interact.gd, src/core/game_data.gd, src/ui/house_view.gd, src/ui/world_view.gd, src/ui/sfx.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
 Money buys a stronger house - tiers I, II and III, each more hit points and cheaper repairs - because the house is what keeps the sleeping farmer safe (plan section 3.8).
 
@@ -3524,11 +3507,11 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0107** [Store assets](prompts/0107-store-assets.md)
 - [x] **0108** [The devlog and a trailer clip](prompts/0108-devlog.md)
 
-## 9 - v1.0 groundwork  (2/14)
+## 9 - v1.0 groundwork  (3/14)
 
 - [x] **0112** [Room in the test suites](prompts/0112-suite-headroom.md)
 - [x] **0113** [Repairs mend to the real maximum](prompts/0113-repairs-full-max.md)
-- [ ] **0114** [Untouched means the house the night started with](prompts/0114-untouched-house.md)
+- [x] **0114** [Untouched means the house the night started with](prompts/0114-untouched-house.md)
 - [ ] **0115** [Spawn ground that cannot be built shut](prompts/0115-spawn-room.md)
 - [ ] **0116** [The mortar and the flamethrower, empty and upgraded](prompts/0116-mortar-flame-ammo.md)
 - [ ] **0117** [Three stale documents](prompts/0117-stale-docs.md)
@@ -3614,7 +3597,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0188** [The dairy, the loom and the mill](prompts/0188-dairy-loom-mill.md) - needs 0187, 0185
 - [ ] **0189** [The shipping bin](prompts/0189-shipping-bin.md) - needs 0148, 0138, 0156
 - [ ] **0190** [The peddler and his hours](prompts/0190-peddler.md) - needs 0126, 0170, 0183, 0185, 0173
-- [ ] **0191** [The house in three tiers](prompts/0191-house-tiers.md) - needs 0148, 0114
+- [ ] **0191** [The house in three tiers](prompts/0191-house-tiers.md) - needs 0148
 - [ ] **0192** [Cooking with the new harvest](prompts/0192-cooking-v2.md) - needs 0188, 0184
 - [ ] **0193** [Every season can make what it needs](prompts/0193-seasonal-supply.md) - needs 0170, 0176, 0188, 0190, 0192
 - [ ] **0194** [The day's economy](prompts/0194-day-economy.md) - needs 0193, 0189, 0171, 0172, 0174, 0177, 0178, 0180, 0182, 0186, 0191

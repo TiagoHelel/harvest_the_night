@@ -38,3 +38,15 @@ static func any_buildable(state: Dictionary) -> Vector2i:
 		if Farm.buildable(state, cell) and not Farming.is_tilled(state, cell):
 			return cell
 	return Vector2i(-1, -1)
+
+
+## A file with its whole-line comments taken out, for a check about what code
+## does.
+static func code_lines_of(path: String) -> String:
+	var out := PackedStringArray()
+	for line in FileAccess.get_file_as_string(path).split("\n"):
+		var trimmed := String(line).strip_edges()
+		if trimmed.begins_with("#"):
+			continue
+		out.append(line)
+	return "\n".join(out)

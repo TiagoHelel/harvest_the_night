@@ -188,7 +188,10 @@ func _build(payout: Dictionary) -> void:
 	# with the count beside it. Counting the characters is not the same as
 	# measuring the string.
 	_row(I18n.f(&"RES_HOUSE",
-		[int(payout["house_hp"]), GameData.HOUSE_HP,
+		# Recomputed rather than recorded: the tree only changes by day
+		# (`Tech.buy` and `Tech.refund` refuse anything else), and this
+		# screen is only up in RESULT, so it is the night's own number.
+		[int(payout["house_hp"]), Phases.house_full(_state),
 			int(payout.get("structures", 0))]),
 		I18n.f(&"RES_UNTOUCHED", [int(payout.get("intact", 0))]),
 		UiKit.DIM)

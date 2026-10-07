@@ -209,7 +209,8 @@ func _refresh() -> void:
 	# **The house bar.** Width is the fraction, colour is the warning, and the
 	# pulse is what makes it impossible to look past.
 	var hp := int(_state["house_hp"])
-	var full := maxi(GameData.HOUSE_HP, 1)
+	# The house the night started with, 'stout timbers' and all (task 0114).
+	var full := maxi(Phases.house_full(_state), 1)
 	var share := clampf(float(hp) / float(full), 0.0, 1.0)
 	_house_fill.size = Vector2(maxf(158.0 * share, 0.0), 5.0)
 	_house_text.text = I18n.f(&"NHUD_HOUSE", [hp, full])

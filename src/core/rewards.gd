@@ -132,7 +132,9 @@ static func _money_from(state: Dictionary) -> Dictionary:
 	out["nothing touched"] = int(table["intact_structure_bonus"]) * intact
 	out["still standing"] = int(table["standing_structure_bonus"]) \
 		* maxi(_standing(state) - intact, 0)
-	if int(state["house_hp"]) >= GameData.HOUSE_HP:
+	# Against the house the night started with: with 'stout timbers' a house
+	# that lost forty of its 140 is not untouched (task 0114).
+	if int(state["house_hp"]) >= Phases.house_full(state):
 		out["the house untouched"] = int(table["house_untouched_bonus"])
 	return out
 
