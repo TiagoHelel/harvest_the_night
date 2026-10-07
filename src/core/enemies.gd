@@ -351,6 +351,40 @@ static func _bite(state: Dictionary, id: int, data: Dictionary) -> void:
 		Phases.enter_result(state, false)
 
 
+# ------------------------------------------------------------------- dawn
+
+## Whoever the night left standing goes back where it came from. Returns how
+## many went. Called from `Phases.begin_day()`.
+##
+## **Everything that was only about them goes too**: the shots still in the
+## air, the fires, the flare. None of those advance by day - only
+## `Sim._tick_night()` moves them - so one left over would hang over the farm
+## all afternoon and land on whatever walked under it the next night.
+##
+## The rules take them off the farm in one tick; walking off is the view's
+## (`EnemyRetreats`), which is why there is nothing to wait for here.
+static func withdraw(state: Dictionary) -> int:
+	var gone := Entities.count(state)
+	for id in Entities.ids(state):
+		Entities.remove(state, int(id))
+	(state["projectiles"] as Array).clear()
+	(state["burning"] as Dictionary).clear()
+	Ability.put_out(state)
+	return gone
+
+
+## The same, for a farm that is in daylight with a zombie on it - which only
+## a save written before dawn sent them home can be. Returns how many went.
+## Called from `State.reconcile()`.
+static func withdraw_in_daylight(state: Dictionary) -> int:
+	var phase := int(state.get("phase", Phases.DAY))
+	if phase != Phases.DAY and phase != Phases.PREPARATION:
+		return 0
+	if Entities.count(state) == 0:
+		return 0
+	return withdraw(state)
+
+
 ## What is left of the farmhouse, as a fraction, for the night HUD.
 static func house_fraction(state: Dictionary) -> float:
 	return float(state["house_hp"]) / float(maxi(GameData.HOUSE_HP, 1))

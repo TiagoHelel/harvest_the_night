@@ -162,6 +162,9 @@ var _enemy_motion := EnemyMotion.new()
 var _enemy_warning: Node2D
 var _enemy_deaths := EnemyDeaths.new()
 var _death_sprites: Array[Sprite2D] = []
+## Dawn: the survivors of a lost night walking off, after the rules removed them.
+var _enemy_retreats := EnemyRetreats.new()
+var _retreat_sprites: Array[Sprite2D] = []
 var _tower_history: Dictionary = {}
 var _tower_version := -1
 var _wrecks: Node2D
@@ -290,6 +293,8 @@ func show_state(state: Dictionary) -> void:
 		_enemy_motion.clear()
 		_enemy_deaths.clear()
 		_refresh_deaths(0.0)
+		_enemy_retreats.clear()
+		_refresh_retreats(0.0)
 		_shot_before.clear()
 		_shot_origins.clear()
 		_observing_tick = false
@@ -343,6 +348,7 @@ func _process(delta: float) -> void:
 	_refresh_actors()
 	_refresh_ambient(delta)
 	_refresh_deaths(delta)
+	_refresh_retreats(delta)
 	_enemy_warning.queue_redraw()
 	_refresh_stations(delta)
 	_remember_towers(_state)
@@ -1059,17 +1065,7 @@ func _refresh_actors() -> void:
 	# freeing and rebuilding a hundred nodes a frame is the one place this view
 	# could plausibly cost something.
 	while _actor_sprites.size() < ids.size():
-		var sprite := Sprite2D.new()
-		var shadow := Sprite2D.new()
-		shadow.name = "Shadow"
-		shadow.texture = load(PlayerView.SHADOW)
-		shadow.position.y = -1.0
-		shadow.modulate.a = PlayerView.SHADOW_ALPHA
-		shadow.show_behind_parent = true
-		sprite.add_child(shadow)
-		sprite.centered = false
-		_actors.add_child(sprite)
-		_actor_sprites.append(sprite)
+		_actor_sprites.append(_new_enemy_sprite())
 	while _actor_sprites.size() > ids.size():
 		var spare: Node = _actor_sprites.pop_back()
 		spare.queue_free()
@@ -1120,6 +1116,45 @@ func _refresh_deaths(delta: float) -> void:
 		sprite.offset = -Vector2(metadata.get("pivot", Vector2i(sprite.texture.get_width() / 2, sprite.texture.get_height())))
 
 
+## An enemy sprite with its shadow at the feet, for one of the pools.
+func _new_enemy_sprite() -> Sprite2D:
+	var sprite := Sprite2D.new()
+	var shadow := Sprite2D.new()
+	shadow.name = "Shadow"
+	shadow.texture = load(PlayerView.SHADOW)
+	shadow.position.y = -1.0
+	shadow.modulate.a = PlayerView.SHADOW_ALPHA
+	shadow.show_behind_parent = true
+	sprite.add_child(shadow)
+	sprite.centered = false
+	_actors.add_child(sprite)
+	return sprite
+
+
+## The survivors of a lost night walking off at dawn. The rules already took
+## them off the farm, so these are pictures and nothing else: no core entity
+## is read here, and the pool empties itself once the last has faded.
+func _refresh_retreats(delta: float) -> void:
+	if _actors == null:
+		return
+	_enemy_retreats.advance(delta)
+	var cues := _enemy_retreats._cues
+	while _retreat_sprites.size() < cues.size():
+		_retreat_sprites.append(_new_enemy_sprite())
+	for i in _retreat_sprites.size():
+		var sprite: Sprite2D = _retreat_sprites[i]
+		sprite.visible = i < cues.size()
+		if not sprite.visible:
+			continue
+		var cue: Dictionary = cues[i]
+		sprite.texture = _texture_for(EnemyRetreats.pose(cue))
+		sprite.position = ArtPlacement.contact(EnemyRetreats.position(cue))
+		sprite.flip_h = bool(cue["right"])
+		sprite.modulate = Color(1, 1, 1, EnemyRetreats.alpha(cue))
+		var metadata: Dictionary = RasterArt.FRAMES.get(sprite.texture.resource_path, {})
+		sprite.offset = -Vector2(metadata.get("pivot", Vector2i(sprite.texture.get_width() / 2, sprite.texture.get_height())))
+
+
 ## Shots in the air. Two pixels of bright, which at this resolution is enough
 ## to follow a line of fire across the farm.
 func _draw_shots() -> void:
@@ -1154,6 +1189,7 @@ func before_tick(state: Dictionary) -> void:
 		return
 	_observing_tick = true
 	_enemy_deaths.before_tick(state, _enemy_motion)
+	_enemy_retreats.before_tick(state, _enemy_motion)
 	_enemy_motion.before_tick(state)
 	_mine_before.clear()
 	if int(state["grid_version"]) != _mine_grid_version:
@@ -1178,6 +1214,7 @@ func after_tick(state: Dictionary) -> void:
 		return
 	_observing_tick = false
 	_enemy_deaths.after_tick(state)
+	_enemy_retreats.after_tick(state)
 	_enemy_motion.after_tick(state)
 	_observe_mines(state)
 	var alive: Dictionary = {}

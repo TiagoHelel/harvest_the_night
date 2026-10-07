@@ -49,6 +49,16 @@ static func recharge(state: Dictionary) -> void:
 	one["flare"] = []
 
 
+## The flare goes out with the night. Its ticks only count down in the dark,
+## so one set off in the last seconds of a night would otherwise burn over the
+## farm all day. Called at dawn by `Enemies.withdraw()`; the charge is left to
+## `recharge()`, which the next night calls anyway.
+static func put_out(state: Dictionary) -> void:
+	var one: Dictionary = state["ability"]
+	one["flare_ticks"] = 0
+	one["flare"] = []
+
+
 static func initial() -> Dictionary:
 	return {
 		"ability": {

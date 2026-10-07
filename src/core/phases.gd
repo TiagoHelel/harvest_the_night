@@ -168,6 +168,12 @@ static func begin_day(state: Dictionary) -> bool:
 	# **The yard is swept first.** The night's wreckage belongs to the
 	# night, and a farm that never cleared would silt up over ten of them.
 	Farm.clear_rubble(state)
+	# **And whoever the night left standing goes with it.** A won night
+	# ends only when nothing is left alive, but the house can fall with
+	# half a wave in the yard - and nothing ever told them to leave. They
+	# stood in the sun all day, and were already at the door when the same
+	# night came back.
+	Enemies.withdraw(state)
 	# A new day, a new stall. It refuses if it has already been out today, so
 	# calling it here and on the first tick costs nothing.
 	Shop.restock(state)

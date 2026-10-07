@@ -12592,3 +12592,71 @@ sim_driver,title_screen}.gd, assets/locale/strings.csv (6 new rows, CTL_RESET_ON
 gone with the X buttons, AUD_NOTE_TRY reworded), src/tools/{input_check,
 capture_menus}.gd, implementation/shots/menus/.
 Verify: **55 passed, 0 skipped, 0 failed** in 534 s; 16162 headless asserts, 1069 input cases, 405 strings that fit; sim 1242708873 and data 2015186086 unchanged.
+
+## 2026-10-07 — Dawn sends the night home
+
+The owner reported zombies left standing on the farm after dawn, and asked
+that at dawn they turn back and leave the screen.
+
+**The bug.** A won night ends only when nothing is left alive, but a lost one
+ends on the tick the house falls - with the rest of the wave still in the yard
+- and nothing ever took them off the farm. `begin_day()` swept the rubble and
+left the zombies: frozen all day (no enemy system ticks in daylight), drawn by
+the world view, and standing where they were when the same night came back, so
+a retried night began with last night's winners at the door. Reproduced
+headless: night 1 lost with 3 standing, still 3 that afternoon, and the
+replayed night opened with them plus its first spawn; the autoplayer's lost
+nights left 10 to 14 behind.
+
+**The rule.** `Enemies.withdraw()`, called from `Phases.begin_day()`, takes off
+the farm everything the night left on it: the survivors, the shots still in
+the air, the fires, and the flare (`Ability.put_out()`) - none of which advance
+by day, so any of them would have hung over the farm until the next night.
+`State.reconcile()` does the same for a save in DAY or PREPARATION with a
+zombie in it, which only a save written before this can be; a RESULT still
+being read keeps them until its morning.
+
+**The picture.** `EnemyRetreats` (src/ui/enemy_retreats.gd), a cosmetic pool
+like `EnemyDeaths`: the world view notes the survivors on the result screen's
+ticks and, when the rules remove them at dawn, walks each one away from the
+house - the one heading that cannot cross it - at 1.5 times its night pace, in
+its own walk frames, facing where it goes, and fades it out over the last two
+thirds of 2.4 s, about as long as the dawn change. Nothing in it is saved or
+hashed, and a won night leaves nobody to walk.
+
+**And the night's speed is the night's.** SimDriver multiplied the ticks of
+every phase by `gameplay/night_speed`, so a night watched at 4x was followed
+by a day at 4x - the clock, the crops and the farmer - and the options page's
+NIGHT SPEED did the same by day. `SimDriver.effective_speed()` is the chosen
+speed at night and one in every other phase, the build step included.
+
+Checks: headless 0065 loses a real night at 3 house hp, leaves a fire, a shot
+and a flare up, and holds that dawn clears all four, that nobody comes back in
+thirty seconds of day, that the replayed night starts the way a night never
+lost does, and that reconcile mends a daylight save and leaves a RESULT one
+alone. enemy_showcase walks all five kinds off through the real observers:
+removed by the rules, one picture each from its exact last position, heading
+away from the house, drawn where the walk has got to, in walk frames, fading,
+gone at 2.4 s, no state byte touched; a clean night's dawn has nobody. input
+0055 sets 4x by day and holds one by day and in the build step, four at night.
+Two checks leaned on the old behaviour and now say what they meant: the work
+showcase's "4x" day batch is a four-tick catch-up frame (art_showcase.gd), and
+input 0027 runs its build step off with `Sim.advance` instead of watching it
+at 8x.
+`src/tools/capture_dawn.gd` photographs a lost night's dawn from the real game
+at 1920x1080 into implementation/shots/dawn/ (night, result, two stills of the
+walk-off, playback.gif).
+
+Files: src/core/{enemies,ability,phases,state}.gd, src/ui/{enemy_retreats,
+world_view,sim_driver}.gd, src/tools/{headless_check,enemy_showcase,
+input_check,art_showcase,capture_dawn}.gd, tools/determinism_sim_hash.txt,
+implementation/shots/dawn/.
+Verify: **55 passed, 0 skipped, 0 failed** in 505s (OVER BUDGET, as before); headless 16173 asserts, input_check 1074 cases, enemy showcase 2089 checks, player work 12129 checks, all 0 failed.
+The sim hash moves on purpose, **1242708873 -> 2728872771**: the guard's
+scenario loses its night (its farm has no defence), and the survivors now
+leave at dawn instead of standing through the rest of the run. Data 2015186086
+unchanged.
+Notes: that scenario's own `Phases.enter_result(state, true)` is refused with
+"enter_result from RESULT", because its night is already lost by then - true
+before this change as well, and left alone, since moving it would move the
+hash for no rule.

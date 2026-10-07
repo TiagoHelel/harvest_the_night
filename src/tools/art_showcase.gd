@@ -1599,12 +1599,13 @@ func _work_cycles() -> void:
 		Sim.advance(expected, 4)
 		var driver := SimDriver.new()
 		driver.state = _state
-		driver.speed = 4
 		driver.stepping.connect(view.before_tick)
 		driver.stepped.connect(view.after_tick)
-		driver._process(1.01 / GameData.TICK_HZ / driver._slowness())
+		# A frame four ticks long, as a slow one is. Not 4x: these are the
+		# day's verbs, and the night's speed no longer runs the day.
+		driver._process(4.01 / GameData.TICK_HZ / driver._slowness())
 		expect(driver.last_ticks == 4 and var_to_bytes(_state) == var_to_bytes(expected),
-			"4x work observers preserve the exact Sim.advance state and tick count")
+			"Four catch-up ticks of work observers preserve the exact Sim.advance state and tick count")
 		_work_frame(view, verb, 1, Player.WEST, 0.0)
 		driver.free()
 	# Repeating three-tick repair must show all phases at normal rendering speed.

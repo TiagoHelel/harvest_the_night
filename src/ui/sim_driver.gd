@@ -122,6 +122,20 @@ func set_speed(value: int) -> void:
 		settings.set_value(&"gameplay/night_speed", wanted)
 
 
+## The speed this frame actually runs at: the chosen one at night, and one
+## everywhere else.
+##
+## **The setting is the night's** - `gameplay/night_speed`, cycled only after
+## dark - but it used to be applied in every phase, so a night watched at 4x
+## was followed by a day at 4x: the clock, the crops and the farmer all four
+## times as fast (found 2026-10-07). The build step stays at one as well; it is
+## the stretch of the game the player is promised no hurry in.
+func effective_speed() -> int:
+	if state.is_empty() or int(state["phase"]) != Phases.NIGHT:
+		return 1
+	return maxi(speed, 1)
+
+
 ## The next speed in the table, wrapping. What one button does.
 func cycle_speed() -> int:
 	var speeds: Array = GameData.SPEEDS
@@ -177,7 +191,7 @@ func _process(delta: float) -> void:
 	# second. Which is why the determinism hash cannot tell.
 	var owed: Array = Sim.ticks_for(_accumulator, delta * _slowness())
 	_accumulator = owed[1]
-	var ticks: int = int(owed[0]) * maxi(speed, 1)
+	var ticks: int = int(owed[0]) * effective_speed()
 	last_ticks = ticks
 	if ticks <= 0:
 		last_usec = 0

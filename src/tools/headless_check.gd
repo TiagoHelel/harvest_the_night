@@ -12106,6 +12106,72 @@ func _task_0065_defeat() -> void:
 	expect(int(twice["days"]) == 2,
 		"and it cost two days", str(twice["days"]))
 
+	# **Whoever won the night goes home at dawn.** A lost night ends with
+	# the house down and part of a wave still in the yard, and nothing told
+	# them to leave: they stood in the sun all day and were already at the
+	# door when the same night came back (found 2026-10-07).
+	var yard := _a_run_at_night(6505, 1)
+	var fresh := _a_run_at_night(6505, 1)
+	yard["house_hp"] = 3
+	for _t in 40000:
+		if int(yard["phase"]) != Phases.NIGHT:
+			break
+		Sim.tick(yard)
+	expect(int(yard["phase"]) == Phases.RESULT
+		and not bool((yard["last_result"] as Dictionary).get("survived", true)),
+		"a night the house falls on is lost", str(yard["last_result"]))
+	var winners := Entities.count(yard)
+	expect(winners > 0,
+		"with the ones that did it still in the yard while the result is read",
+		str(winners))
+	# And the things the last seconds of a night can leave hanging.
+	var first: int = Entities.ids(yard)[0] if winners > 0 else 0
+	(yard["burning"] as Dictionary)[first] = {"left": 30, "damage": 1, "next": 5}
+	(yard["projectiles"] as Array).append({"id": 99999, "target": first,
+		"damage": 1, "pos": [0, 0]})
+	var flare: Dictionary = yard["ability"]
+	flare["flare_ticks"] = 40
+	flare["flare"] = [1, 1]
+	(yard["intent"] as Dictionary)["confirm_result"] = true
+	Sim.advance(yard, 2)
+	expect(int(yard["phase"]) == Phases.DAY, "the result gives way to a morning",
+		str(yard["phase"]))
+	expect(Entities.count(yard) == 0, "and by morning every one of them has gone",
+		"%d of %d still there" % [Entities.count(yard), winners])
+	expect((yard["burning"] as Dictionary).is_empty()
+		and (yard["projectiles"] as Array).is_empty()
+		and Ability.flare_at(yard).is_empty(),
+		"with the fires, the shots and the flare that were only about them",
+		"%d burning, %d shots, flare %s" % [(yard["burning"] as Dictionary).size(),
+			(yard["projectiles"] as Array).size(), str(Ability.flare_at(yard))])
+	Sim.advance(yard, GameData.SECONDS * 30)
+	expect(Entities.count(yard) == 0, "nobody comes back while the sun is up",
+		str(Entities.count(yard)))
+	Phases.begin_preparation(yard)
+	Sim.advance(yard, GameData.PREPARATION_TICKS)
+	expect(int(yard["phase"]) == Phases.NIGHT and int(yard["night"]) == 1,
+		"the same night comes back", "%s night %d"
+			% [Phases.name_of(int(yard["phase"])), int(yard["night"])])
+	expect(Entities.count(yard) == Entities.count(fresh),
+		"and starts as a night never lost does, with nobody already at the door",
+		"%d against %d" % [Entities.count(yard), Entities.count(fresh)])
+
+	# **A save from before that is mended on load**, and only in daylight: a
+	# result still being read keeps its zombies until the morning.
+	var old := State.create(6506)
+	var porch := Farm.house_centre(old) + Vector2i(4, 0)
+	Entities.spawn(old, &"walker", porch)
+	var notes := State.reconcile(old)
+	expect(Entities.count(old) == 0 and str(notes).contains("sent home"),
+		"a day saved with a zombie standing in it loads without one", str(notes))
+	var reading := State.create(6507)
+	reading["phase"] = Phases.RESULT
+	Entities.spawn(reading, &"walker", porch)
+	State.reconcile(reading)
+	expect(Entities.count(reading) == 1,
+		"but a lost night still on its result screen keeps them until dawn",
+		str(Entities.count(reading)))
+
 	_completed += 1     # last line: an abandoned group never gets here
 
 

@@ -37,6 +37,7 @@ func _run() -> void:
 	await _attacks()
 	await _guards()
 	await _mixed()
+	await _dawn()
 	await _death_sources()
 	print("ENEMY SHOWCASE: %d checks, %d failed" % [_checks, _failed])
 	quit(1 if _failed > 0 else 0)
@@ -308,6 +309,86 @@ func _mixed() -> void:
 		_step()
 	await _settle()
 	await _shoot("mixed_wave_moving", "Actual mixed-wave movement / stable foot depth / authored frames")
+
+
+## A lost night's winners at dawn: the rules take them off the farm on the
+## tick the day begins, and the view walks each one away from the house and
+## out of the light rather than letting it vanish.
+func _dawn() -> void:
+	_state = _blank(true)
+	var home := Vector2(Farm.house_centre(_state)) * float(Player.SUBTILE) \
+		+ Vector2.ONE * float(Player.SUBTILE / 2)
+	var cells: Array[Vector2i] = [Vector2i(22, 8), Vector2i(30, 9),
+		Vector2i(26, 12), Vector2i(25, 4), Vector2i(29, 11)]
+	for i in cells.size():
+		Entities.spawn(_state, EnemyMotion.TRACKED[i], cells[i])
+	_state["phase"] = Phases.RESULT
+	await _settle()
+	_world.look_at_cell(Vector2i(26, 8))
+	await _shoot("dawn_0_result", "Lost night / the winners still in the yard while the result is read")
+	var starts: Array[Vector2] = []
+	for id in Entities.ids(_state):
+		var one := Entities.get_one(_state, int(id))
+		starts.append(Vector2(float(one["pos"][0]), float(one["pos"][1])))
+
+	(_state["intent"] as Dictionary)["confirm_result"] = true
+	_world.before_tick(_state)
+	Sim.tick(_state)
+	var after := var_to_bytes(_state)
+	_world.after_tick(_state)
+	expect(var_to_bytes(_state) == after, "Watching the dawn tick changes no core byte")
+	expect(int(_state["phase"]) == Phases.DAY, "Confirming the result is dawn")
+	expect(Entities.count(_state) == 0, "The rules take every survivor off the farm at dawn")
+	var cues := _world._enemy_retreats._cues
+	expect(cues.size() == cells.size(), "And the view keeps one walking picture of each")
+	expect(_world._enemy_retreats._before.is_empty(), "The dawn snapshot is released")
+	for i in mini(cues.size(), starts.size()):
+		var cue: Dictionary = cues[i]
+		var from: Vector2 = cue["from"]
+		var way: Vector2 = cue["way"]
+		expect(from == starts[i], "Each walks off from exactly where the rules last had it")
+		expect((from + way * 64.0).distance_to(home) > from.distance_to(home),
+			"Away from the house, never through it")
+
+	await _settle()
+	_world.look_at_cell(Vector2i(26, 8))
+	expect(_world._actor_sprites.is_empty(), "No live enemy sprite is left in daylight")
+	var shown := 0
+	for sprite in _world._retreat_sprites:
+		shown += 1 if sprite.visible else 0
+	expect(shown == cells.size(), "Every one of them is drawn walking off")
+	var steps := [0.5, 0.6, 0.6]
+	for s in steps.size():
+		var before := var_to_bytes(_state)
+		_world._refresh_retreats(steps[s])
+		expect(var_to_bytes(_state) == before, "Walking them off never touches the state")
+		for i in cues.size():
+			var sprite: Sprite2D = _world._retreat_sprites[i]
+			var at: Array = EnemyRetreats.position(cues[i])
+			expect(sprite.position == ArtPlacement.contact(at), "Drawn where the walk has got to")
+			expect(Vector2(at[0], at[1]).distance_to(home) > starts[i].distance_to(home), "Further from the house as dawn goes on")
+			expect(sprite.texture.resource_path.contains("_walk_"), "Walking, in the night's own frames")
+			expect(sprite.modulate.a <= 1.0 and sprite.modulate.a > 0.0, "Still there to be seen leaving")
+		await process_frame
+		await _shoot("dawn_%d_leaving" % (s + 1), "Dawn / the survivors turn their backs on the house and walk off")
+	expect(not cues.is_empty() and EnemyRetreats.alpha(cues[0]) < 1.0
+		and float(cues[0]["age"]) < EnemyRetreats.SECONDS, "Fading before they are gone")
+	_world._refresh_retreats(EnemyRetreats.SECONDS)
+	expect(_world._enemy_retreats._cues.is_empty(), "And gone once the walk is over")
+	var still := 0
+	for sprite in _world._retreat_sprites:
+		still += 1 if sprite.visible else 0
+	expect(still == 0, "Leaving nothing drawn behind")
+
+	# A won night leaves nobody, so its morning has nobody to walk off.
+	_state = _blank(true)
+	_state["phase"] = Phases.RESULT
+	await _settle()
+	(_state["intent"] as Dictionary)["confirm_result"] = true
+	_world.before_tick(_state)
+	Sim.tick(_state)
+	_world.after_tick(_state)
+	expect(int(_state["phase"]) == Phases.DAY and _world._enemy_retreats._cues.is_empty(), "A clean night has a clean dawn")
 
 
 func _death_sources() -> void:

@@ -1326,6 +1326,15 @@ func _case_0027_the_loop() -> void:
 	await until(func() -> bool: return int(state["phase"]) != Phases.DAY,
 		"the night to begin")
 
+	# **The build step runs in real time at any speed** - it is the stretch
+	# the player is promised no hurry in - so its twenty seconds are run off
+	# here rather than waited for.
+	if int(state["phase"]) == Phases.PREPARATION:
+		Sim.advance(state, maxi(GameData.PREPARATION_TICKS
+			- int(state["phase_tick"]), 0))
+	expect(int(state["phase"]) == Phases.NIGHT, "the build step gives way to the night",
+		Phases.name_of(int(state["phase"])))
+
 	# Let the night play out. Faster than real time, because a night is a
 	# minute and a test is not.
 	driver.speed = 8
@@ -3182,6 +3191,26 @@ func _case_0055_speed() -> void:
 	await frames(2)
 	expect(driver.speed == 1, "V does nothing in daylight",
 		str(driver.speed))
+	# **The night's speed is the night's.** One chosen in the options by day,
+	# or left over from last night, does not run the farm: it used to, and a
+	# night at 4x was followed by a day at 4x.
+	driver.set_speed(4)
+	expect(driver.effective_speed() == 1,
+		"a speed set by day leaves the day at one",
+		str(driver.effective_speed()))
+	Phases.begin_preparation(state)
+	expect(driver.effective_speed() == 1,
+		"and the build step too", str(driver.effective_speed()))
+	Sim.advance(state, GameData.PREPARATION_TICKS)
+	expect(driver.effective_speed() == 4,
+		"and it takes hold when the night does",
+		str(driver.effective_speed()))
+	driver.set_speed(1)
+	Phases.enter_result(state, true)
+	(state["intent"] as Dictionary)["confirm_result"] = true
+	Sim.advance(state, 2)
+	expect(int(state["phase"]) == Phases.DAY, "back in daylight for the rest",
+		Phases.name_of(int(state["phase"])))
 
 	Phases.begin_preparation(state)
 	Sim.advance(state, GameData.PREPARATION_TICKS)
