@@ -19,7 +19,7 @@ task 0120 until each pack is integrated - or with the pack's art if
 
 ## Requirements
 
-- `TOOLS` in `game_data.gd`: hoe, can, axe and pickaxe at basic/iron/gold, the rod at bamboo/fibre/iron, as tiers 0/1/2 of one ladder; each tier's cost (money + ore) and the effect fields 0174, 0175 and 0181 read, all `# LEVER`
+- `TOOLS` in `game_data.gd`: hoe, can, axe and pickaxe at basic/iron/gold, the rod at bamboo/fibre/iron, as tiers 0/1/2 of one ladder; each tier's cost (money + ore) and the effect fields 0174, 0175, 0180 and 0181 read, all `# LEVER`
 - The tiers held and any pending upgrade live in a `tools` dictionary (keys from code: `State.TABLES`, through a new `initial()` - e.g. `src/core/tool_tiers.gd` - and one `_adopt` line), all tier 0 in a new game. **Tools are not resources**: `Rewards._loss` iterates `RESOURCES` and must never take one
 - An upgrade is a workshop recipe whose output names a tool tier: a new branch in `Crafting._deliver` (and in `check_recipes`, which accepts only resources and defences today) records it as pending, and `Phases.begin_day` hands it over - ready the next morning. The tool keeps its old tier until then, so no day is spent without a can
 - This task ships tier 1 for all five (iron hoe, can, axe and pickaxe; fibre rod) and the rod's tier 2 (iron). The gold costs arrive with 0176; until then gold is listed and refused with a reason

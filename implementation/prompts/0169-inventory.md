@@ -3,7 +3,7 @@
 - **Phase:** 12 - The day that pays
 - **Status:** todo
 - **Depends on:** 0168
-- **Likely files:** src/ui/inventory_panel.gd, src/core/inventory.gd, src/core/game_data.gd, src/ui/day_hud.gd, src/ui/names.gd, src/app/input_actions.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd
+- **Likely files:** src/ui/inventory_panel.gd, src/core/inventory.gd, src/core/game_data.gd, src/ui/day_hud.gd, src/ui/names.gd, src/app/input_actions.gd, project.godot, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd
 
 ## Goal
 
@@ -12,7 +12,7 @@ Task 0036's inventory was a list for fifteen things and 1.0 has about seventy. G
 ## Requirements
 
 - `RESOURCE_GROUPS` grows to the categories of plan section 8 (materials, crops, seeds, fish, animal goods, artisan goods, ammunition, night leftovers, the farm). A group may be declared before its members exist; an empty group is not drawn
-- `inventory_panel.gd` shows one group per page with tabs (keyboard, mouse and pad through `InputActions`), amount and sale price per row, and fits 480x270 with seventy items in all; `ROW_HEIGHT` decides how many rows a page holds. Each tab is named by a literal key (`INV_GROUP_*` rows, en and pt_BR, looked up through a literal table so `tools/i18n_check.py` sees them)
+- `inventory_panel.gd` shows one group per page with tabs (keyboard, mouse and pad through `InputActions`: a new page action goes into `InputActions.ACTIONS` and `project.godot` with a pad binding and its `ACT_*` row, or reuse an existing one - say which), amount and sale price per row, and fits 480x270 with seventy items in all; `ROW_HEIGHT` decides how many rows a page holds. Each tab is named by a literal key (`INV_GROUP_*` rows, en and pt_BR, looked up through a literal table so `tools/i18n_check.py` sees them). `_case_0036_inventory` expects every resource's `inv_<id>` row on screen at once and `_task_0036_inventory` the reference sheet's groups: rewrite both in place for pages
 - `DayHud.SHOWN` stays six numbers in two rows; which six is a decision written in the journal (wood, stone, iron and food, plus the two that matter most in 1.0). The bar never grows
 - **From here on a resource is not done until it is complete**: `GameData.validate()` (an extended `check_groups` or a new check) refuses a `RESOURCES` id with no `SELL_PRICE` (money, energy and tech excepted) or no group (nothing new may fall into `GROUP_OTHER`), and headless asserts each id has a `Names.KEYS` entry and an `ITEM_*` row in both languages. Every later task that adds a resource adds all four
 - An item with no `ui/icon_<id>` draws a placeholder through the placeholder road (0120), so no row is ever blank

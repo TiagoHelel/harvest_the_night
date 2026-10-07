@@ -20,7 +20,7 @@ task 0120 until each pack is integrated - or with the pack's art if
 ## Requirements
 
 - Sheep live in the barn, eat hay and give `WOOL` (`# LEVER`s)
-- Pigs find truffles: each morning a housed pig marks dig spots on open grass near its barn (a `RUN_DATA` cell -> item record, deterministic - run RNG or a `(seed, day)` stream, decide; SIM moves); the farmer collects `TRUFFLE` by day with a verb in `Interact`; a spot never sits on a plot, a path or an occupied cell, and is gone at night. A new verb goes in `DAY_ONLY` and `all_verbs` with an `Sfx.VERB_SOUNDS` entry (borrow `sfx/collect` until 0281), or `_task_0084_day_sounds` fails
+- Pigs find truffles: each morning a housed pig marks dig spots on open grass near its barn (a `RUN_DATA` cell -> item record, deterministic - run RNG or a `(seed, day)` stream, decide; SIM moves); the farmer collects `TRUFFLE` by day with a verb in `Interact`; a spot never sits on a plot, a path or an occupied cell, and is gone at night. A spot is on open grass, where 0167 offers `till`: the spot's verb wins there. A new verb goes in `DAY_ONLY`, `all_verbs` and an `Interact.complete` arm with an `Sfx.VERB_SOUNDS` entry (borrow `sfx/collect` until 0281), or `_task_0084_day_sounds` fails
 - The dog is a pet from day 1 that follows the farmer by day and sleeps by the porch at night. **View only**: no state key, no occupant, nothing in `src/core/`, so the hash cannot see it; petting it is a view-only gesture (a heart). Its night power is 0233's
 - View-only wander, eat and sleep states for every animal (cow, chicken, sheep, pig, dog) near its building, in `src/ui/animal_view.gd`, never touching the state; at night `transition.gd`'s `DAY_ONLY` (today cow and chicken: add sheep and pig) hides them as it does today
 - `WOOL` and `TRUFFLE` with prices, groups, names and strings in both languages; `check_livestock` covers sheep and pig. SIM moves on purpose (new resources, the dig-spot key); DATA moves
@@ -29,10 +29,10 @@ task 0120 until each pack is integrated - or with the pack's art if
 
 ## Done when
 
-- [ ] `_task_0185_animals` in `src/tools/headless_v1.gd`: a sheep gives wool; a pig's dig spot can be collected and is never on a plot or a path; a text scan finds no dog in `src/core/`, so the hash cannot depend on it
+- [ ] `_task_0185_animals` in `src/tools/headless_v1.gd` (mornings by `Phases.begin_day`, never a whole day of ticks): a sheep gives wool; a pig's dig spot can be collected and is never on a plot or a path; a text scan finds no dog in `src/core/`, so the hash cannot depend on it
 - [ ] `_case_0185_truffle` in `src/tools/input_v1.gd`: walk to a dig spot and collect a truffle
 - [ ] A new `barnyard` scenario: `python tools/shot.py 0185 barnyard --fhd` shows the barnyard with every animal and the dog following; opened and looked at
-- [ ] the Deliverables tables of `implementation/backlog/packs/A025-farmer-care.md`, `A026-farm-animals.md` and `A027-cow-chicken.md` state the scales, states and frames this task settled
+- [ ] the Deliverables tables of `implementation/backlog/packs/A026-farm-animals.md` and `A027-cow-chicken.md` state the scales, states and frames this task settled, and so does `A025-farmer-care.md` for the tend and pet poses - that pack file does not exist yet: if it is still missing, write the settled poses into the journal under an `A025` heading for its author, create no pack, and say so
 - [ ] `python tools/verify.py` prints PASS
 - [ ] the determinism hash is unchanged, or the change is deliberate and both
       the old and the new number are in the journal

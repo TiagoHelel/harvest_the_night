@@ -3,7 +3,7 @@
 - **Phase:** 12 - The day that pays
 - **Status:** todo
 - **Depends on:** 0165
-- **Likely files:** src/core/game_data.gd, src/ui/names.gd, assets/locale/strings.csv, src/ui/day_hud.gd, src/ui/placeholder_art.gd, src/tools/shot.gd, src/tools/headless_v1.gd
+- **Likely files:** src/core/game_data.gd, src/ui/names.gd, assets/locale/strings.csv, src/ui/day_hud.gd, src/ui/shop_panel.gd, src/ui/placeholder_art.gd, src/tools/shot.gd, src/tools/input_check.gd, src/tools/headless_v1.gd
 
 ## Goal
 
@@ -24,7 +24,7 @@ task 0120 until each pack is integrated - or with the pack's art if
 - Ids are the plain crop names; the defences that share a crop word keep their own ids (`garlic_braid`, `catapult`, `decoy`)
 - `Names.KEYS` and `ITEM_POTATO`..`ITEM_BEET` rows in `assets/locale/strings.csv` (key,width,en,pt_BR: batata, alho, morango, pimenta, girassol, melancia, abóbora, uva, beterraba); `tools/i18n_check.py` clean
 - `check_crops` keeps 'no crop dominates on money, visits and seed cost at once' across all twelve: seed costs that rise with value per day are enough. Put the table in the journal; 0170 may narrow the comparison to one season
-- Twelve rows overflow the `DayHud` seed strip and its six `SEED_ACTIONS`. Until 0170 filters it by season, keep it legible (page it, or six rows around the selection - view only) and capture it
+- Twelve rows overflow the `DayHud` seed strip and its six `SEED_ACTIONS`, and the stall's seed rows (`shop_panel.gd`, which `_case_0040_shop` reads one by one). Until 0170 filters them by season, keep both legible (page them, or six rows around the selection - view only) and capture them
 - Every new crop draws through the placeholder road: a tinted stand-in of an existing crop's four stages at the final canvas (the art contract's 16x16, pivot (8,14); sunflower and the grape trellis very tall at 16x32, pivot (8,30)) until A015/A016/A017 are integrated by 0198/0199/0200
 - DATA moves (the tables). SIM moves on purpose: nine new keys in `held`/`gained`, which `State.hash_of` folds, and the determinism scenario sows `Farming.seeds()` in sorted order, so its field changes. Record both
 

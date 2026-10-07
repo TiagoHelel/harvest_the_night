@@ -19,7 +19,7 @@ task 0120 until each pack is integrated - or with the pack's art if
 
 ## Requirements
 
-- Four legendaries in `FISH_SPECIES` - the Old Catfish, the Golden Queen, the Ghost Pike and the Ice Sturgeon, one per season - each with a pond, hours and a condition (`# LEVER`s, bounded by `check_fishing`), catchable only on the iron rod and with the hardest bar of 0180
+- Four legendaries in `FISH_SPECIES` - the Old Catfish, the Golden Queen, the Ghost Pike and the Ice Sturgeon (ids `old_catfish`, `golden_queen`, `ghost_pike`, `ice_sturgeon`, as A022 names them), one per season - each with a pond, hours and a condition (`# LEVER`s, bounded by `check_fishing`), catchable only on the iron rod and with the hardest bar of 0180
 - Decide whether a legendary can be caught once per run; if so the draw skips it once the book has it
 - The book: a `fish_book` dictionary in the state (keys come from play: `State.RUN_DATA`), species -> times caught and the first day; folded into the profile through `Stats` so it outlives the run
 - A book view (an inventory tab or its own panel) with a page per species, unknown ones as silhouettes with a hint, and a collection count (n of every species, legendaries included); portraits through the placeholder road until A022's are integrated by 0205, the tab icon until A023's by 0206

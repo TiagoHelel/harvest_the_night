@@ -16,7 +16,7 @@
 - Answer honestly in the journal: is the day fun even without thinking about the night? What drags, what is busywork, what is missing
 - If the answer changes the plan, edit the later prompts (0197 on) before they run, and say which
 - If the answer is no, mark this task blocked with the reason, so phase 13 does not start on a day that does not work
-- Change no rule here: fixes go into later prompts or new tasks
+- Change no rule here, so neither hash moves: fixes go into later prompts or new tasks
 
 ## Done when
 

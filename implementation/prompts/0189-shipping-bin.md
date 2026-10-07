@@ -23,7 +23,7 @@ task 0120 until each pack is integrated - or with the pack's art if
 - Fixture or building - decide and say why. A fixture (`Farm.FIXTURES`, never sold or wrecked) laid by `FARM_MAP` reaches new farms only: old saves need a `State.VERSION` bump with a step that places it on the site when that cell is empty, in the style of 0156's, and a golden at the new version. A cheap day building needs no bump
 - What waits is a `shipping` dictionary in the state (resource -> count; keys come from play: `State.RUN_DATA`); putting a stack in takes it out of `held` at once
 - The morning report (0138's, shown in RESULT before `begin_day`) prints what the bin will pay, worked out with `Shop.paid_for` (the sell price and the `sell_percent` bonus) from what waits; the money lands at `Phases.begin_day` and the bin empties. The line and the ledger agree, asserted
-- A panel to choose what goes in, reusing the stall's sell rows (`shop_panel.gd`); decide whether it stops the clock like the stall (`open_panel`) and say why; keyboard, mouse and pad
+- A panel to choose what goes in, reusing the stall's sell rows (`shop_panel.gd`); decide whether it stops the clock like the stall (`open_panel`) and say why; keyboard, mouse and pad. `ship` opens a panel, so it joins `Interact.ONE_SHOT` beside `trade` - a repeating verb reopens its panel on the tick after it closes
 - Decide what a lost night does to the bin (the horde takes 25% of the stock): what is in the bin is sold, not stock, or it is taken - write it down and assert it
 - Names and strings in both languages; the bin draws through the placeholder road until A033 is integrated by 0215
 - DATA moves; SIM moves on purpose (the `shipping` key, and the bin if it is on the map) - record both

@@ -3,7 +3,7 @@
 - **Phase:** 12 - The day that pays
 - **Status:** todo
 - **Depends on:** 0173
-- **Likely files:** src/core/interact.gd, src/core/gathering.gd, src/core/game_data.gd, assets/locale/strings.csv, src/tools/headless_v1.gd
+- **Likely files:** src/core/interact.gd, src/core/gathering.gd, src/core/game_data.gd, src/ui/main.gd, assets/locale/strings.csv, src/tools/headless_v1.gd
 
 ## Goal
 
@@ -12,7 +12,7 @@ The axe and the pickaxe save time by tier, and the hardest things on the farm - 
 ## Requirements
 
 - Fewer swings by tier: the tool's tier scales the swing in `Interact.ticks_for` or the `hits` `Gathering.strike` counts - pick one, keep it integer, and make it compose with 'sharp tools' (`gather_percent`) rather than replace it
-- A `GATHERING` entry may name a `min_tier`; below it the cell still shows its verb but the work is refused with a reason in both languages ('needs an iron axe'), never a swing that silently does nothing
+- A `GATHERING` entry may name a `min_tier`; below it the cell still shows its verb but the work is refused with a reason in both languages ('needs an iron axe'), never a swing that silently does nothing - through the `Interact` reason road 0171 opened (a `Building.why_not`-shaped array that `Names.refusal` words), or open it here if 0171 has not landed
 - The real gates arrive with their nodes - hardwood stumps (0177) want an iron axe, gold (0176) an iron pickaxe - so test the rule here with a rigged entry
 - `validate()` checks `min_tier` against the `TOOLS` ladder; `check_iron` and `check_reachable` still pass
 - DATA moves; SIM only if the scenario gathers with an upgraded tool

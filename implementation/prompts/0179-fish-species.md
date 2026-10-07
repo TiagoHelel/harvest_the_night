@@ -2,7 +2,7 @@
 
 - **Phase:** 12 - The day that pays
 - **Status:** todo
-- **Depends on:** 0126, 0149, 0156
+- **Depends on:** 0126, 0149, 0156, 0165
 - **Likely files:** src/core/fishing.gd, src/core/game_data.gd, src/core/crafting.gd, src/app/save.gd, src/core/state.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/make_goldens.gd, tools/goldens/, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd
 
 ## Goal
@@ -20,10 +20,10 @@ task 0120 until each pack is integrated - or with the pack's art if
 ## Requirements
 
 - `FISH_SPECIES` in `game_data.gd`: about twelve species (carp, perch, catfish, tilapia; trout, pike, eel; dorado, salmon, sturgeon; two more to fill the seasons) with ponds (the ids of 0156's `PONDS` table, found from a cell by `Farm.pond_of`; use 0156's names, not the plan's), seasons, hours (0126's `Phases.clock_minute`), a rarity weight and a value, all `# LEVER`, in `digest()`. Legendaries are 0182's
-- `Fishing.begin` draws the species at the cast from the run RNG, among those the pond, the season and the hour allow, weighted by rarity; the bite-delay draw stays. `Fishing.reel` gives that species and `last_catch` names it. SIM moves
+- `Fishing.begin` draws the species at the cast from the run RNG, among those the pond, the season and the hour allow, weighted by rarity; the bite-delay draw stays. `Fishing.reel` gives that species and `last_catch` names it. SIM moves on purpose (the draw, the new resources, the version) and DATA moves (`FISH_SPECIES`, `FISHING`, the recipes): record both
 - Each species is a resource: `RESOURCES`, `SELL_PRICE`, a fish group, `Names.KEYS`, `ITEM_*` rows in both languages
 - **Recipes that took `fish` accept any species**, as a rule: a recipe input may name the fish group, and `Crafting` pays it from the species held in a fixed order (cheapest first, then by name). `check_recipes`, `check_chain` (value it at the cheapest member) and `Crafting.missing` understand it; `press_fish_oil` and `cook_fish` use it
-- The old `fish` resource goes: bump `State.VERSION` by one (from whatever 0156 and 0165 left it at) with a migration that moves held `fish` into the commonest species, plus a golden at the new version - reconcile alone would drop it. Every other reader follows (`GameData.FISH`, `SELL_PRICE`, the larder group, `Names.KEYS`/`ITEM_FISH` - `tools/i18n_check.py` flags an unused key); the `fish` verb keeps its id
+- The old `fish` resource goes: bump `State.VERSION` by one (8, after 0165's 7) with a migration that moves `fish` in `held` (and `gained`) into the commonest species, plus a golden at the new version - reconcile alone would drop it. Every other reader follows (`GameData.FISH` - a dozen uses in `headless_check.gd` and four in `input_check.gd`, e.g. the press and kitchen groups -, `SELL_PRICE`, the larder group, `Names.KEYS`/`ITEM_FISH` - `tools/i18n_check.py` flags an unused key); the `fish` verb keeps its id
 - `FISHING.common_yield`/`rare_yield` give way to the table; `check_fishing` is rewritten: every species names real ponds, seasons and hours, and every pond has a catch in every season at every hour of the day
 - Rewrite `_task_0030_fishing` and `_case_0030_fishing` (the triple 'rare' fish is gone)
 - Icons draw as tinted `icon_fish` stand-ins through the placeholder road until A022 is integrated by 0205

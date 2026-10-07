@@ -58,10 +58,13 @@ TASKS = [
          deps=[149, 151, 156],
          files="src/core/farming.gd, src/core/phases.gd, src/core/sim.gd, "
                "src/core/game_data.gd, src/app/save.gd, src/core/state.gd, "
-               "src/ui/day_hud.gd, src/ui/describe.gd, "
+               "src/ui/day_hud.gd, src/ui/describe.gd, src/ui/shop_panel.gd, "
                "assets/locale/strings.csv, src/tools/perf_names.gd, "
                "src/tools/perf_check.gd, tools/perf_baseline.txt, "
                "src/tools/make_goldens.gd, tools/goldens/, "
+               "src/tools/autoplay.gd, src/tools/art_showcase.gd, "
+               "src/tools/effect_showcase.gd, src/tools/house_check.gd, "
+               "src/tools/shot.gd, "
                "src/tools/headless_check.gd, src/tools/input_check.gd, "
                "src/tools/headless_v1.gd",
          goal="Crops grow by days, the way the plan and Stardew have it: each "
@@ -80,7 +83,9 @@ TASKS = [
               "night that repeats (0153) still grows the field and a farmer "
               "who passed out (0128) is credited like one who went to bed",
               "Dry is not dead: an unwatered plot waits a day and loses "
-              "nothing. `WATER_GROWTH_BONUS` and the `soak` bank go, nothing "
+              "nothing (`TUT_WATER` - 'come up sooner watered' - is "
+              "rewritten to say so, both languages). `WATER_GROWTH_BONUS` "
+              "and the `soak` bank go, nothing "
               "grows per tick any more: take `Farming.tick` out of "
               "`Sim._tick_day` and `Farming` out of `PerfNames.DAY` "
               "(`_task_0102_budget` compares the two), its arm out of "
@@ -89,9 +94,10 @@ TASKS = [
               "`value_per_day`, `harvests_per_day`, `seconds_to_grow` and "
               "`GameData._crop_offer`/`check_crops` work in days: harvests "
               "per season of 0149's season length, value per harvest as "
-              "today; the seed strip (`DHUD_SEED_ROW`, `day_hud.gd`) and the "
-              "tooltip (`DESC_GROWS_IN`, `describe.gd`) say days, in both "
-              "languages",
+              "today; the seed strip (`DHUD_SEED_ROW` and its "
+              "`DHUD_SEED_HEADING` 'TIME /DAY', `day_hud.gd`), the stall's "
+              "seed rows (`SHOP_SEED_ROW`, `shop_panel.gd`) and the tooltip "
+              "(`DESC_GROWS_IN`, `describe.gd`) say days, in both languages",
               "A saved plot's `growth` changes units: `State.VERSION` 7 "
               "(after 0156's 6) with a step in `Save.migrations()` that turns "
               "tick growth into whole days (rounded down, a ready crop stays "
@@ -104,10 +110,16 @@ TASKS = [
               "(input_check) to the new rule, and every other reader of tick "
               "growth: `_task_0018_wheat`, `_task_0020_shop` and "
               "`_task_0039_clock` (growth paused by a panel, a crop ripe "
-              "after a day), `_case_0040_shop`, `art_showcase.gd` (it calls "
-              "`Farming.tick`), `effect_showcase.gd`, `house_check.gd`, the "
-              "autoplayer's field plan - grep `growth`, `is_ready` and "
-              "`Farming.tick` for the rest",
+              "after a day), `_task_0038_idle` (`_a_busy_day` asserts 'the "
+              "crops grew' within one idle day), `_task_0109_reactions` ('a "
+              "crop coming ready nearby puts a note up' within 12000 day "
+              "ticks - `crop_ready` now fires at the morning credit, with "
+              "him waking indoors: decide what the note means now), "
+              "`_case_0040_shop` (its seed labels print `seconds_to_grow`), "
+              "`art_showcase.gd` (it calls `Farming.tick`; `show_art.py "
+              "--check` runs in verify), `effect_showcase.gd`, "
+              "`house_check.gd`, the autoplayer's field plan - grep "
+              "`growth`, `is_ready` and `Farming.tick` for the rest",
               "Tests credit mornings by calling `Farming.morning` or "
               "`Phases.begin_day`, never by advancing whole days of ticks - a "
               "day is about to become some sixteen thousand of them (0166)",
@@ -120,13 +132,16 @@ TASKS = [
               "The migration turns a golden's half-grown plot into the "
               "matching whole days, asserted",
               "`python tools/shot.py 0165 noon --fhd` shows the field at "
-              "several stages; opened and looked at"]),
+              "several stages (the `noon` scenario gives its plots growth "
+              "days directly - a first morning is all stage 0); opened and "
+              "looked at"]),
 
     dict(id=166, phase=P12, title="A day of eight to ten minutes",
          slug="longer-day", deps=[165],
          files="src/core/game_data.gd, src/core/phases.gd, "
                "src/tools/autoplay.gd, src/tools/headless_check.gd, "
                "src/tools/input_check.gd, src/tools/headless_v1.gd, "
+               "src/tools/input_v1.gd, "
                "tools/balance.py, implementation/BALANCE.md",
          goal="The day becomes eight to ten real minutes, so the 80x65 farm "
               "has time in it: crossing it already takes 28 seconds, and the "
@@ -152,15 +167,19 @@ TASKS = [
               "Re-time the suites: no headless group or input case may "
               "advance a whole day or a whole morning of ticks. Today's are "
               "`_task_0006_phases` and `_task_0021_night_intent` (to dusk), "
-              "`_task_0030_fishing`, `_task_0031_iron`, `_task_0038_idle`, "
-              "`_task_0039_clock`, `_task_0067_autoplay`, "
-              "`_task_0068_balance`, `_case_0039_clock` and any v1 group "
-              "that does (grep `DAY_TICKS`, `DUSK_AT_TICK`): give them a "
+              "`_task_0030_fishing`, `_task_0031_iron` (`_mine_for_a_day`), "
+              "`_task_0038_idle` (`_a_busy_day`), `_task_0039_clock`, "
+              "`_task_0065_defeat`, `_task_0067_autoplay`, "
+              "`_task_0068_balance`, `_case_0039_clock`, `_case_0091_title` "
+              "and any v1 group that does (grep `DAY_TICKS`, "
+              "`DUSK_AT_TICK`, `tick_at_minute`): give them a "
               "shorter road - a rigged `day_tick`, a direct morning call - "
               "and record each suite's time before and after",
-              "`Autoplay._a_day` (as 0142 left it) spends the new day; keep "
-              "`_task_0067`/`_task_0068` inside the budget by playing fewer "
-              "days in the suite, never by shortening the lever. "
+              "`Autoplay._a_day` (as 0142 left it) spends the new day; 0142 "
+              "already plays one day and one night per policy in "
+              "`_task_0067`/`_task_0068`, so keep them inside the budget by "
+              "an earlier policy bedtime in the suite or fewer policies "
+              "there, never by shortening the lever. "
               "`tools/autoplay.py` and `tools/balance.py` still run",
               "A saved `day_tick` keeps its meaning (ticks since 06:00) and "
               "only reads earlier on the longer clock, and producer timers "
@@ -187,7 +206,10 @@ TASKS = [
                "src/tools/autoplay.gd, src/tools/determinism.gd, "
                "src/tools/make_goldens.gd, src/tools/perf_check.gd, "
                "src/tools/house_check.gd, src/tools/shot.gd, "
-               "src/tools/headless_v1.gd, src/tools/input_v1.gd",
+               "src/core/player.gd, src/tools/headless_check.gd, "
+               "src/tools/input_check.gd, "
+               "src/tools/headless_v1.gd, src/tools/input_v1.gd, "
+               "implementation/backlog/packs/A014-crop-ground.md",
          goal="Any grass can be tilled, as in Stardew, so the 60 beds become "
               "the starter garden rather than the whole of farming - and "
               "ground becomes a choice between field and fortress (plan "
@@ -198,7 +220,13 @@ TASKS = [
               "never changes**: `world_view` draws terrain once, so tilled "
               "grass is a plot over grass, drawn by `_refresh_plots`",
               "Only bare grass and soil take the hoe; path, floor, water, rock "
-              "and any occupied cell offer nothing",
+              "and any occupied cell offer nothing. A lawn that offers `till` "
+              "everywhere changes `Player.target`, whose fallback is the cell "
+              "he stands on: standing on grass and facing nothing would till "
+              "under his feet, and every press on open ground now does "
+              "something. Decide (e.g. grass offers `till` only as the faced "
+              "cell, never as the fallback), assert it, and grep the input "
+              "cases that press interact on open grass",
               "Untended ground goes back: an empty tilled plot on grass left "
               "for `TILLED_GRASS_FADES_DAYS` mornings (`# LEVER`, 1-7) returns "
               "to grass in `Farming.morning`; soil beds never fade. The plot "
@@ -221,11 +249,13 @@ TASKS = [
               "like the barriers, or a plain border) and draw it through the "
               "placeholder road with today's `tilled`/`tilled_wet` sprites "
               "until A014 is integrated by 0197",
-              "DATA moves (the lever goes into `digest()`). SIM moves only if "
+              "DATA moves (the lever goes into `digest()`, and `validate()` "
+              "holds it to 1-7). SIM moves only if "
               "the scenario's soil plots change shape: write the new plot "
               "field only on tilled grass (soil beds never fade) and it "
               "stays - say which"],
-         dod=["`_task_0167_till_grass` in `src/tools/headless_v1.gd`: the hoe "
+         dod=["`_task_0167_till_grass` in `src/tools/headless_v1.gd` "
+              "(mornings by `Farming.morning`, never a day of ticks): the hoe "
               "on grass makes a plot and leaves the terrain byte alone; an "
               "empty tilled grass plot is gone after the fade mornings and a "
               "planted one is not; a path cell refuses the hoe",
@@ -236,13 +266,16 @@ TASKS = [
               "and by night; opened and looked at",
               "the Deliverables table of "
               "`implementation/backlog/packs/A014-crop-ground.md` states the "
-              "final geometry this task settled (edge masks, canvas, pivot)"]),
+              "final geometry this task settled (edge masks, canvas, pivot), "
+              "and the pack's text names 0171, not 0170, as the owner of the "
+              "withered crop"]),
 
     dict(id=168, phase=P12, title="Nine new crops", slug="crop-data",
          deps=[165], dresses=["A015", "A016", "A017"],
          files="src/core/game_data.gd, src/ui/names.gd, "
                "assets/locale/strings.csv, src/ui/day_hud.gd, "
-               "src/ui/placeholder_art.gd, src/tools/shot.gd, "
+               "src/ui/shop_panel.gd, src/ui/placeholder_art.gd, "
+               "src/tools/shot.gd, src/tools/input_check.gd, "
                "src/tools/headless_v1.gd",
          goal="The plan's twelve crops exist as data: potato, garlic, "
               "strawberry, pepper, sunflower, melon, pumpkin, grape and beet "
@@ -266,9 +299,10 @@ TASKS = [
               "with value per day are enough. Put the table in the journal; "
               "0170 may narrow the comparison to one season",
               "Twelve rows overflow the `DayHud` seed strip and its six "
-              "`SEED_ACTIONS`. Until 0170 filters it by season, keep it "
-              "legible (page it, or six rows around the selection - view "
-              "only) and capture it",
+              "`SEED_ACTIONS`, and the stall's seed rows (`shop_panel.gd`, "
+              "which `_case_0040_shop` reads one by one). Until 0170 filters "
+              "them by season, keep both legible (page them, or six rows "
+              "around the selection - view only) and capture them",
               "Every new crop draws through the placeholder road: a tinted "
               "stand-in of an existing crop's four stages at the final canvas "
               "(the art contract's 16x16, pivot (8,14); sunflower and the "
@@ -295,8 +329,10 @@ TASKS = [
          slug="inventory", deps=[168],
          files="src/ui/inventory_panel.gd, src/core/inventory.gd, "
                "src/core/game_data.gd, src/ui/day_hud.gd, src/ui/names.gd, "
-               "src/app/input_actions.gd, assets/locale/strings.csv, "
-               "src/tools/shot.gd, src/tools/headless_v1.gd, "
+               "src/app/input_actions.gd, project.godot, "
+               "assets/locale/strings.csv, "
+               "src/tools/shot.gd, src/tools/headless_check.gd, "
+               "src/tools/input_check.gd, src/tools/headless_v1.gd, "
                "src/tools/input_v1.gd",
          goal="Task 0036's inventory was a list for fifteen things and 1.0 "
               "has about seventy. Groups become pages a player flips with a "
@@ -307,12 +343,17 @@ TASKS = [
               "ammunition, night leftovers, the farm). A group may be "
               "declared before its members exist; an empty group is not drawn",
               "`inventory_panel.gd` shows one group per page with tabs "
-              "(keyboard, mouse and pad through `InputActions`), amount and "
+              "(keyboard, mouse and pad through `InputActions`: a new "
+              "page action goes into `InputActions.ACTIONS` and "
+              "`project.godot` with a pad binding and its `ACT_*` row, or "
+              "reuse an existing one - say which), amount and "
               "sale price per row, and fits 480x270 with seventy items in "
               "all; `ROW_HEIGHT` decides how many rows a page holds. Each tab "
               "is named by a literal key (`INV_GROUP_*` rows, en and pt_BR, "
               "looked up through a literal table so `tools/i18n_check.py` "
-              "sees them)",
+              "sees them). `_case_0036_inventory` expects every resource's "
+              "`inv_<id>` row on screen at once and `_task_0036_inventory` "
+              "the reference sheet's groups: rewrite both in place for pages",
               "`DayHud.SHOWN` stays six numbers in two rows; which six is a "
               "decision written in the journal (wood, stone, iron and food, "
               "plus the two that matter most in 1.0). The bar never grows",
@@ -339,9 +380,10 @@ TASKS = [
               "no labels on top of each other; opened and looked at"]),
 
     dict(id=170, phase=P12, title="Crops keep to their seasons",
-         slug="crop-seasons", deps=[168, 149],
+         slug="crop-seasons", deps=[168, 149, 169],
          files="src/core/game_data.gd, src/core/farming.gd, src/core/shop.gd, "
-               "src/ui/day_hud.gd, src/ui/shop_panel.gd, src/ui/names.gd, "
+               "src/ui/day_hud.gd, src/ui/shop_panel.gd, src/ui/describe.gd, "
+               "src/ui/title_screen.gd, src/ui/names.gd, "
                "src/ui/placeholder_art.gd, assets/locale/strings.csv, "
                "src/tools/autoplay.gd, src/tools/determinism.gd, "
                "src/tools/make_goldens.gd, src/tools/perf_check.gd, "
@@ -349,16 +391,20 @@ TASKS = [
                "src/tools/input_check.gd, src/tools/headless_v1.gd, "
                "src/tools/input_v1.gd",
          goal="Each crop keeps to its season, so spring, summer and autumn "
-              "fields look and pay differently, and seeds are bought at the "
-              "stall when their season comes round (plan sections 3.1 and "
-              "3.6).",
+              "fields look and pay differently, and seeds become packets "
+              "bought at the stall (plan sections 3.1 and 3.6). Which "
+              "packets the stall puts out in which season is 0190's, with "
+              "the peddler.",
          req=["`CROPS` gains `seasons` (`# LEVER`): carrot, potato, garlic, "
               "strawberry in spring; corn, pepper, sunflower, melon in "
               "summer; wheat, pumpkin, grape, beet in autumn. No crop lists "
               "winter. The season is "
-              "`Calendar.season_of(Calendar.date(state))` (0149). What a "
-              "change of season does to a planted field, winter included, "
-              "is 0171's",
+              "`GameData.SEASONS[Calendar.season_of(Calendar.date(state))]` "
+              "(0149; `season_of` returns 0-3). `check_crops` refuses a crop "
+              "with no season, an unknown one or winter, and may narrow 'no "
+              "crop dominates' to crops sharing a season (0168 left it open) "
+              "- say which. What a change of season does to a planted "
+              "field, winter included, is 0171's",
               "Seeds become items, as the plan's stall and the seed packets "
               "of A015-A017 expect: a `<crop>_seed` resource per crop with a "
               "price, the seeds group, a `Names.KEYS` entry and an "
@@ -367,31 +413,58 @@ TASKS = [
               "crop instead of `seed_cost` in money (its own comment names it "
               "as the one function this changes); `selected_seed` still holds "
               "a crop id; `STARTING_RESOURCES` gives a few spring packets so "
-              "day 1 still plants",
-              "`seed_cost` stays the number `check_crops` balances on and is "
-              "what a packet costs at the stall; the packet's sell-back stays "
-              "below it so `check_stall`'s no-profit loop holds",
-              "The stall stocks this season's seeds only (a seasonal stock "
-              "table read by `Shop.restock`/`buyable`, in `digest()`); "
-              "`check_stall` covers every season",
-              "The seed strip lists this season's crops with the packets "
-              "held, inside the six `SEED_ACTIONS`; an off-season crop cannot "
-              "be selected. Packet icons draw through the placeholder road "
-              "(the crop's icon, tinted) until A015/A016/A017 are integrated "
-              "by 0198/0199/0200",
-              "Move what plants with money: `_task_0018_wheat`, "
-              "`_task_0028_crops`, `_case_0028_seeds`, the autoplayer (it "
-              "buys packets), `determinism.gd`, `make_goldens.gd`, "
-              "`perf_check.gd` and `shot.gd` (they sow on a fresh farm). "
-              "Correct `TUT_PLANT`/`TUT_SELL` and any line that says seeds "
-              "are paid at the furrow, in both languages",
+              "day 1 still plants. An old save holds no packets and buys "
+              "them: no `State.VERSION` bump - say so",
+              "The price: `Shop.buy_price` is `ceil(SELL_PRICE * "
+              "BUY_MARKUP)`, so a packet costs either `seed_cost` through a "
+              "branch there or a packet `SELL_PRICE` the markup turns into "
+              "about the seed cost - decide. `check_crops` balances on what a "
+              "packet really costs, and `check_stall`'s buy-and-sell-back "
+              "loss still holds",
+              "The stall sells every packet all year for now: they join "
+              "today's flat `DAILY_STOCK`, so `Shop.buyable()` lists them and "
+              "the buy rows show them with no new UI; the `SHOP_SEEDS` rows "
+              "of `shop_panel.gd` stop meaning 'pay at the furrow' (fold "
+              "them into the buy rows or keep them as the seed picker - say "
+              "which). **Moved to 0190:** the seasonal stock (this season's "
+              "packets only, none in winter), because 0190 reworks "
+              "`Shop.buyable`/`restock` for the peddler anyway",
+              "Only in-season crops can be chosen: a "
+              "`Farming.in_season(state)` list feeds the seed strip (with the "
+              "packets held), "
+              "`select_seed_at` and the six `SEED_ACTIONS`; `select_seed` "
+              "refuses an off-season crop. `Farming.initial()` picks "
+              "`seeds()[0]`, which after 0168 is `beet` (autumn): a new game "
+              "selects the first spring crop, and a selection that falls out "
+              "of season moves to the first in-season crop (none in "
+              "winter). Packet icons draw through the placeholder road (the "
+              "crop's icon, tinted) until A015/A016/A017 are integrated by "
+              "0198/0199/0200",
+              "Move what plants (grep `Farming.act`, `select_seed`, "
+              "`Farming.seeds()` and `seed_cost` in the suites and tools): "
+              "wheat and corn sown on day 1 - Spring 1 - are now refused "
+              "(`_task_0018_wheat`, `_task_0028_crops`, "
+              "`_task_0029_watering`, `_case_0028_seeds`); fields sown "
+              "round-robin over every crop run out of season and of packets "
+              "(`_a_busy_day`, `_a_full_farm`, `_task_0109_reactions`, "
+              "`_task_0111_house`, `determinism.gd`, `make_goldens.gd`, "
+              "`perf_check.gd`, `shot.gd`, `title_screen.gd`'s backdrop); "
+              "the autoplayer plants corn and must buy packets. Give the "
+              "suites one shared helper (in the helper script 0112 made) "
+              "that sets a date in a crop's season and hands over packets, "
+              "and route them through it; `_case_0040_shop`'s seed rows "
+              "follow the stall's change",
+              "Correct `TUT_PLANT`, `DESC_SEED_COST` (`describe.gd`) and any "
+              "line that says seeds are paid at the furrow, in both languages",
               "SIM and DATA move on purpose (twelve packet resources in "
-              "`held`/`gained`, the stall's seasonal stock in the state, the "
-              "planting rule); record both"],
-         dod=["`_task_0170_seasons` in `src/tools/headless_v1.gd`: a spring "
-              "stall stocks only spring seeds and a summer one only "
-              "summer's; planting spends one packet and no money; an "
-              "off-season crop cannot be selected",
+              "`held`/`gained`, the starting packets, the planting rule); "
+              "record both"],
+         dod=["`_task_0170_seasons` in `src/tools/headless_v1.gd`: planting "
+              "spends one packet and no money, and with no packet plants "
+              "nothing; an off-season crop can be neither selected nor "
+              "planted, and a summer date offers only summer crops; a new "
+              "game selects a spring crop; the stall sells a carrot packet "
+              "at the price the journal states",
               "`_case_0170_seeds` in `src/tools/input_v1.gd`: buy potato "
               "packets at the stall, pick them on a slot key, plant one",
               "New `spring_field` and `summer_field` scenarios: `python "
@@ -400,8 +473,9 @@ TASKS = [
 
     dict(id=171, phase=P12, title="Winter: nothing grows outside",
          slug="winter-rules", deps=[170, 159],
-         files="src/core/farming.gd, src/core/game_data.gd, "
-               "src/ui/day_hud.gd, src/ui/world_view.gd, "
+         files="src/core/farming.gd, src/core/interact.gd, "
+               "src/core/game_data.gd, "
+               "src/ui/day_hud.gd, src/ui/main.gd, src/ui/world_view.gd, "
                "src/ui/placeholder_art.gd, assets/locale/strings.csv, "
                "src/tools/shot.gd, src/tools/headless_v1.gd",
          goal="When a season ends its crops wither, and in winter nothing "
@@ -412,20 +486,26 @@ TASKS = [
               "what a season boundary does to the field: on the first "
               "morning of a season `Farming.morning` withers every planted "
               "crop whose `seasons` does not list the new one (regrowing "
-              "plants too, once 0172 has them). The plot keeps a `withered` "
-              "marker, like 0155's `trampled`, that harvest or the hoe clears "
-              "for nothing. No crop lists winter, so Winter 1 withers what "
+              "plants too, once 0172 has them). The plot loses its crop and "
+              "growth and keeps a `withered` marker naming the crop for the "
+              "view, like 0155's `trampled`: `Farming` treats it as empty "
+              "tilled ground and planting clears the marker (no new verb, so "
+              "no new sound). No crop lists winter, so Winter 1 withers what "
               "autumn left in the ground: write that in the journal",
               "A withered crop draws through the placeholder road (the "
               "crop's stage-2 frame, greyed in code) until A014's withered "
               "crop is integrated by 0197",
               "`Farming.morning` credits no growth outdoors in a season named "
-              "by `NO_GROWTH_SEASONS` (`# LEVER`, winter; in `digest()`), so "
+              "by `NO_GROWTH_SEASONS` (`# LEVER`, winter; in `digest()`; "
+              "`validate()` refuses a name not in `GameData.SEASONS`), so "
               "a crop that is in the ground in winter anyway (a test, an old "
               "save) never grows",
               "Planting in winter is refused with a reason the highlight can "
               "show (a `WHY_*` key in both languages), never a silent "
-              "nothing; tilling still works",
+              "nothing; tilling still works. Interact has no refusal road "
+              "today: give it a reason array of the shape "
+              "`Building.why_not` returns, which `Names.refusal` already "
+              "turns into words (0175 reuses it for tool tiers)",
               "The seed strip says that nothing grows in winter instead of "
               "showing an empty list (a `DHUD_*` string in both languages)",
               "Assert the rest of a winter day still runs - a check, not a "
@@ -473,7 +553,8 @@ TASKS = [
               "`RUN_DATA`); if it changes what a saved `growth` means, bump "
               "`State.VERSION` and migrate",
               "DATA moves; SIM only if the scenario harvests a regrowing crop"],
-         dod=["`_task_0172_regrow` in `src/tools/headless_v1.gd`: a strawberry "
+         dod=["`_task_0172_regrow` in `src/tools/headless_v1.gd` (mornings "
+              "by `Phases.begin_day`): a strawberry "
               "harvested when ready is ready again `regrow_days` watered "
               "mornings later without replanting; a carrot leaves an empty "
               "plot",
@@ -497,7 +578,7 @@ TASKS = [
          req=["`TOOLS` in `game_data.gd`: hoe, can, axe and pickaxe at "
               "basic/iron/gold, the rod at bamboo/fibre/iron, as tiers 0/1/2 "
               "of one ladder; each tier's cost (money + ore) and the effect "
-              "fields 0174, 0175 and 0181 read, all `# LEVER`",
+              "fields 0174, 0175, 0180 and 0181 read, all `# LEVER`",
               "The tiers held and any pending upgrade live in a `tools` "
               "dictionary (keys from code: `State.TABLES`, through a new "
               "`initial()` - e.g. `src/core/tool_tiers.gd` - and one `_adopt` "
@@ -588,8 +669,8 @@ TASKS = [
     dict(id=175, phase=P12, title="The axe and the pickaxe by tier",
          slug="axe-pickaxe", deps=[173],
          files="src/core/interact.gd, src/core/gathering.gd, "
-               "src/core/game_data.gd, assets/locale/strings.csv, "
-               "src/tools/headless_v1.gd",
+               "src/core/game_data.gd, src/ui/main.gd, "
+               "assets/locale/strings.csv, src/tools/headless_v1.gd",
          goal="The axe and the pickaxe save time by tier, and the hardest "
               "things on the farm - hardwood stumps and gold - want the iron "
               "ones.",
@@ -600,7 +681,9 @@ TASKS = [
               "A `GATHERING` entry may name a `min_tier`; below it the cell "
               "still shows its verb but the work is refused with a reason in "
               "both languages ('needs an iron axe'), never a swing that "
-              "silently does nothing",
+              "silently does nothing - through the `Interact` reason road "
+              "0171 opened (a `Building.why_not`-shaped array that "
+              "`Names.refusal` words), or open it here if 0171 has not landed",
               "The real gates arrive with their nodes - hardwood stumps "
               "(0177) want an iron axe, gold (0176) an iron pickaxe - so test "
               "the rule here with a rigged entry",
@@ -643,9 +726,10 @@ TASKS = [
               "gunpowder",
               "The gold tier's costs for the hoe, can, axe and pickaxe (money "
               "+ gold, `# LEVER`), so 0173's refused tier opens",
-              "Nodes draw through the placeholder road (tinted `ore`/`ore_b`, "
-              "16x16, pivot (8,14)) and icons as tinted stand-ins until A021 "
-              "(0204) and A020 (0203) are integrated",
+              "Nodes keep 0156's stand-ins on the placeholder road (tinted "
+              "`ore` for copper and gold, `seam` for coal; 16x16, pivot "
+              "(8,14)) and icons are tinted stand-ins until A021 (0204) and "
+              "A020 (0203) are integrated",
               "DATA moves. SIM moves on purpose: three new resources are new "
               "keys in `held`/`gained`, which the state hash folds - record "
               "both"],
@@ -660,7 +744,7 @@ TASKS = [
     dict(id=177, phase=P12, title="Hardwood", slug="hardwood",
          deps=[175, 156], dresses=["A020", "A021"],
          files="src/core/game_data.gd, src/core/gathering.gd, "
-               "src/core/interact.gd, src/ui/world_view.gd, "
+               "src/core/interact.gd, src/core/farm.gd, src/ui/world_view.gd, "
                "src/ui/names.gd, src/ui/placeholder_art.gd, "
                "assets/locale/strings.csv, src/tools/shot.gd, "
                "src/tools/headless_v1.gd",
@@ -672,7 +756,12 @@ TASKS = [
               "yield and a `regrow_ticks` (`# LEVER`) - nothing on the farm "
               "is exhausted for good - and an `Interact.OCCUPANT_VERBS` entry "
               "(`chop`). One occupant over four cells with an anchor, like "
-              "the stations: a swing at any of its cells strikes it",
+              "the stations: a swing at any of its cells strikes it. "
+              "`Gathering.strike`, `Farm.remove`/`restore` and the regrowth "
+              "in `Gathering.tick` all work one cell at a time today: the "
+              "stump leaves all four cells when it falls and comes back only "
+              "when all four are clear (the anchor's entry in `regrowing`), "
+              "asserted",
               "A chipped look after the first swing, until it falls (view, "
               "from `Gathering.swings_left`)",
               "`HARDWOOD` in `RESOURCES`, `SELL_PRICE`, the materials group, "
@@ -687,8 +776,9 @@ TASKS = [
               "placeholder road until A021 is integrated by 0204"],
          dod=["`_task_0177_hardwood` in `src/tools/headless_v1.gd`: a basic "
               "axe is refused at a big stump; an iron axe fells it in the "
-              "swings, for the hardwood, the levers say; it is back after "
-              "`regrow_ticks`",
+              "swings, for the hardwood, the levers say, from any of its four "
+              "cells; it is back on all four after `regrow_ticks`, and not "
+              "while one of them is built on",
               "A new `hardwood` scenario: `python tools/shot.py 0177 "
               "hardwood --fhd` shows a whole and a "
               "chipped stump beside a tree; opened and looked at",
@@ -745,7 +835,7 @@ TASKS = [
               "final geometry this task settled"]),
 
     dict(id=179, phase=P12, title="Fish by pond, season and hour",
-         slug="fish-species", deps=[126, 149, 156], dresses=["A022"],
+         slug="fish-species", deps=[126, 149, 156, 165], dresses=["A022"],
          files="src/core/fishing.gd, src/core/game_data.gd, "
                "src/core/crafting.gd, src/app/save.gd, src/core/state.gd, "
                "src/ui/names.gd, src/ui/placeholder_art.gd, "
@@ -765,7 +855,9 @@ TASKS = [
               "`Fishing.begin` draws the species at the cast from the run "
               "RNG, among those the pond, the season and the hour allow, "
               "weighted by rarity; the bite-delay draw stays. `Fishing.reel` "
-              "gives that species and `last_catch` names it. SIM moves",
+              "gives that species and `last_catch` names it. SIM moves on "
+              "purpose (the draw, the new resources, the version) and DATA "
+              "moves (`FISH_SPECIES`, `FISHING`, the recipes): record both",
               "Each species is a resource: `RESOURCES`, `SELL_PRICE`, a fish "
               "group, `Names.KEYS`, `ITEM_*` rows in both languages",
               "**Recipes that took `fish` accept any species**, as a rule: a "
@@ -775,10 +867,12 @@ TASKS = [
               "cheapest member) and `Crafting.missing` understand it; "
               "`press_fish_oil` and `cook_fish` use it",
               "The old `fish` resource goes: bump `State.VERSION` by one "
-              "(from whatever 0156 and 0165 left it at) with a migration that "
-              "moves held `fish` into the commonest species, plus a golden at "
-              "the new version - reconcile alone would drop it. Every other "
-              "reader follows (`GameData.FISH`, `SELL_PRICE`, the larder "
+              "(8, after 0165's 7) with a migration that moves `fish` in "
+              "`held` (and `gained`) into the commonest species, plus a "
+              "golden at the new version - reconcile alone would drop it. "
+              "Every other reader follows (`GameData.FISH` - a dozen uses in "
+              "`headless_check.gd` and four in `input_check.gd`, e.g. the "
+              "press and kitchen groups -, `SELL_PRICE`, the larder "
               "group, `Names.KEYS`/`ITEM_FISH` - `tools/i18n_check.py` flags "
               "an unused key); the `fish` verb keeps its id",
               "`FISHING.common_yield`/`rare_yield` give way to the table; "
@@ -802,10 +896,13 @@ TASKS = [
     dict(id=180, phase=P12, title="The fishing minigame",
          slug="fishing-minigame", deps=[179, 121, 173],
          dresses=["A023", "A024"],
-         files="src/core/fishing.gd, src/core/game_data.gd, "
+         files="src/core/fishing.gd, src/core/game_data.gd, src/core/sim.gd, "
                "src/ui/fishing_bar.gd (new), src/ui/main.gd, "
                "src/app/input_actions.gd, src/app/settings.gd, "
                "project.godot, src/ui/player_work.gd, src/ui/sfx.gd, "
+               "src/tools/perf_names.gd, src/tools/perf_check.gd, "
+               "src/tools/determinism.gd, src/tools/autoplay.gd, "
+               "src/tools/art_showcase.gd, "
                "src/tools/shot.gd, src/tools/headless_check.gd, "
                "src/tools/input_check.gd, src/tools/headless_v1.gd, "
                "src/tools/input_v1.gd",
@@ -834,8 +931,9 @@ TASKS = [
               "kept in sync by the existing check",
               "An assist (wider zone, slower marker) is a rule, so it lives "
               "in the state: a run flag written through an intent from a "
-              "Settings key, never read by core from `Settings`. The Options "
-              "row is 0292's",
+              "Settings key, never read by core from `Settings` (a top-level "
+              "key, or a field of a dictionary listed in `State.TABLES` - "
+              "say which). The Options row is 0292's",
               "The view draws the bar, marker, zone and hit/miss flash "
               "through the placeholder road until A023 is integrated by 0206, "
               "and the farmer on today's `fish`/`reel` strips until A024 is "
@@ -843,9 +941,12 @@ TASKS = [
               "Settle the art: the bar's piece sizes into A023, and the "
               "farmer's poses and timings (cast, wait, strike, reel loop, "
               "show the catch) into A024",
-              "SIM moves on purpose; rewrite what is left of "
-              "`_task_0030_fishing`/`_case_0030_fishing` that reels in one "
-              "press"],
+              "SIM moves on purpose and DATA moves (the bar levers): record "
+              "both. Rewrite whatever still reels in one press: what is left "
+              "of `_task_0030_fishing`/`_case_0030_fishing`, the determinism "
+              "scenario's cast, the autoplayer's fishing and the showcases "
+              "that cast and reel (`art_showcase.gd`, `effect_showcase.gd` - "
+              "`show_art.py --check` runs in verify)"],
          dod=["`_task_0180_minigame` in `src/tools/headless_v1.gd`: a press "
               "on a tick inside the zone counts and one tick outside does "
               "not; a three-hit species needs three; the assist widens the "
@@ -856,10 +957,13 @@ TASKS = [
               "A new `fishing_bar` scenario: `python tools/shot.py 0180 "
               "fishing_bar --fhd` shows the bar mid-catch; opened and looked "
               "at",
-              "the Deliverables tables of "
-              "`implementation/backlog/packs/A023-fishing-gear.md` and "
-              "`A024-farmer-fishing.md` state the final geometry and poses "
-              "this task settled"]),
+              "the Deliverables table of "
+              "`implementation/backlog/packs/A023-fishing-gear.md` states the "
+              "final geometry this task settled, and so does "
+              "`A024-farmer-fishing.md` for the poses and timings - that pack "
+              "file does not exist yet: if it is still missing, write the "
+              "settled poses into the journal under an `A024` heading for "
+              "its author, create no pack, and say so"]),
 
     dict(id=181, phase=P12, title="Rods and bait", slug="rods-bait",
          deps=[179, 173, 167], dresses=["A023"],
@@ -884,12 +988,15 @@ TASKS = [
               "recipe passes `check_chain`",
               "With the iron rod, a held bait is spent at the cast and "
               "shortens the wait or raises rarity (`# LEVER`s); which bait is "
-              "on is a choice the HUD shows; no bait means no effect, not a "
-              "refusal",
+              "on is a choice the HUD shows, kept in the state (say where; a "
+              "nested dictionary goes in `State.TABLES`); no bait means no "
+              "effect, not a refusal",
               "`WORM` and `BAIT` with prices, a group, names and strings in "
               "both languages. Zombie bait is 0225's, not here",
               "Icons through the placeholder road until A023 is integrated "
-              "by 0206"],
+              "by 0206. DATA moves (`WORM_IN`, the rod levers, the recipe) "
+              "and SIM moves on purpose (the worm draw, the bait choice): "
+              "record both"],
          dod=["`_task_0181_rods` in `src/tools/headless_v1.gd`: on a fixed "
               "seed the fibre rod's mean wait is shorter than bamboo's by "
               "what the levers say; bait is spent at an iron-rod cast and not "
@@ -909,7 +1016,9 @@ TASKS = [
               "conditions, and a fish book with a page per species - the "
               "first collection that makes a player come back.",
          req=["Four legendaries in `FISH_SPECIES` - the Old Catfish, the "
-              "Golden Queen, the Ghost Pike and the Ice Sturgeon, one per "
+              "Golden Queen, the Ghost Pike and the Ice Sturgeon (ids "
+              "`old_catfish`, `golden_queen`, `ghost_pike`, `ice_sturgeon`, "
+              "as A022 names them), one per "
               "season - each with a pond, hours and a condition "
               "(`# LEVER`s, bounded by `check_fishing`), catchable only on "
               "the iron rod and with the hardest bar of 0180",
@@ -999,6 +1108,7 @@ TASKS = [
          files="src/core/livestock.gd, src/core/farming.gd, "
                "src/core/phases.gd, src/core/game_data.gd, src/ui/names.gd, "
                "src/ui/placeholder_art.gd, assets/locale/strings.csv, "
+               "src/tools/headless_check.gd, src/tools/input_check.gd, "
                "src/tools/headless_v1.gd",
          goal="Animals are fed and give what they are kept for: chickens lay "
               "eggs, cows give milk, and both eat hay made from the wheat's "
@@ -1010,7 +1120,13 @@ TASKS = [
               "is 0193's",
               "A daily feed debit at `Phases.begin_day`: each housed animal "
               "eats `feed_per_day` hay (`# LEVER`); one not fed gives nothing "
-              "that day, and never dies or sickens",
+              "that day, and never dies or sickens. Decide and assert what "
+              "day 1 (no `begin_day` before it) and the map's loose animals "
+              "(no coop or barn yet) count as - 'unfed' would silence "
+              "`_task_0034_cooking`, `_case_0034_livestock`, "
+              "`_task_0038_idle` ('the animals produced', `_a_busy_day`) and "
+              "the determinism scenario's animals; rewrite in place what the "
+              "decision and the new products break",
               "Products: chickens give `EGG`, cows give `MILK` "
               "(`LIVESTOCK.produces`, the rate and `holds` as `# LEVER`s)",
               "Decide what happens to `MEAT` and write it in the journal: "
@@ -1027,10 +1143,11 @@ TASKS = [
               "hay and straw, A020 (0203) are integrated",
               "SIM moves (four new resources in `held`/`gained`, and the "
               "scenario's animals produce differently); DATA moves"],
-         dod=["`_task_0184_feed` in `src/tools/headless_v1.gd`: a fed coop "
-              "gives eggs the next day, an unfed one gives none and every "
-              "chicken is still there; a wheat harvest gives the straw the "
-              "lever says",
+         dod=["`_task_0184_feed` in `src/tools/headless_v1.gd` (mornings by "
+              "`Phases.begin_day`, produce by advancing `every_ticks`, never "
+              "a whole day of ticks): a fed coop gives eggs the next day, an "
+              "unfed one gives none and every chicken is still there; a "
+              "wheat harvest gives the straw the lever says",
               "The journal states the meat decision and `check_livestock` "
               "enforces it (a rigged table without a meat source fails)"]),
 
@@ -1053,8 +1170,10 @@ TASKS = [
               "deterministic - run RNG or a `(seed, day)` stream, decide; SIM "
               "moves); the farmer collects `TRUFFLE` by day with a verb in "
               "`Interact`; a spot never sits on a plot, a path or an occupied "
-              "cell, and is gone at night. A new verb goes in `DAY_ONLY` and "
-              "`all_verbs` with an `Sfx.VERB_SOUNDS` entry (borrow "
+              "cell, and is gone at night. A spot is on open grass, where "
+              "0167 offers `till`: the spot's verb wins there. A new verb "
+              "goes in `DAY_ONLY`, `all_verbs` and an `Interact.complete` "
+              "arm with an `Sfx.VERB_SOUNDS` entry (borrow "
               "`sfx/collect` until 0281), or `_task_0084_day_sounds` fails",
               "The dog is a pet from day 1 that follows the farmer by day and "
               "sleeps by the porch at night. **View only**: no state key, no "
@@ -1076,7 +1195,8 @@ TASKS = [
               "of A029 (0211) are integrated",
               "Settle the art: scales against the 32px farmer, states and "
               "frame counts into A025, A026 and A027"],
-         dod=["`_task_0185_animals` in `src/tools/headless_v1.gd`: a sheep "
+         dod=["`_task_0185_animals` in `src/tools/headless_v1.gd` (mornings "
+              "by `Phases.begin_day`, never a whole day of ticks): a sheep "
               "gives wool; a pig's dig spot can be collected and is never on "
               "a plot or a path; a text scan finds no dog in `src/core/`, so "
               "the hash cannot depend on it",
@@ -1086,9 +1206,12 @@ TASKS = [
               "barnyard --fhd` shows the barnyard with "
               "every animal and the dog following; opened and looked at",
               "the Deliverables tables of "
-              "`implementation/backlog/packs/A025-farmer-care.md`, "
-              "`A026-farm-animals.md` and `A027-cow-chicken.md` state the "
-              "scales, states and frames this task settled"]),
+              "`implementation/backlog/packs/A026-farm-animals.md` and "
+              "`A027-cow-chicken.md` state the scales, states and frames this "
+              "task settled, and so does `A025-farmer-care.md` for the tend "
+              "and pet poses - that pack file does not exist yet: if it is "
+              "still missing, write the settled poses into the journal under "
+              "an `A025` heading for its author, create no pack, and say so"]),
 
     dict(id=186, phase=P12, title="Barns at night", slug="barns-at-night",
          deps=[183, 137], dresses=["A030"],
@@ -1109,7 +1232,11 @@ TASKS = [
               "`Farm.damage` at 0 HP; it stays an occupant marked wrecked, "
               "still impassable, no longer prey (`Pathing.prey_cells` "
               "already skips 0 HP), with no rubble; decide whether "
-              "`Run.lost_a_structure` counts it and assert that",
+              "`Run.lost_a_structure` counts it and assert that. The hunt "
+              "field is cached on `grid_version` and only `Farm.remove` "
+              "bumps it today: wrecking (and mending back above 0) must "
+              "`Farm.touch`, or breakers stand at a 0-HP barn all night - "
+              "the bug `prey_cells`' own comment records",
               "A wrecked building produces nothing and offers only `repair` "
               "(by day, by the farmer, as 0134 left it); any HP above 0 "
               "brings it back; its animals stay inside, alive, throughout",
@@ -1119,8 +1246,10 @@ TASKS = [
               "placeholder road until A030 is integrated by 0212",
               "DATA moves (the new flag); SIM moves only if the scenario "
               "has a barn at night - say so"],
-         dod=["`_task_0186_barns_night` in `src/tools/headless_v1.gd`: "
-              "breakers reach a barn and wreck it; it stands, produces "
+         dod=["`_task_0186_barns_night` in `src/tools/headless_v1.gd` (a short "
+              "night with breakers set down beside the barn, mornings by "
+              "`Phases.begin_day`): breakers reach a barn and wreck it, then "
+              "leave it for other prey; it stands, produces "
               "nothing the next day, keeps every animal, and works again "
               "after a day repair",
               "A new `barn_night` scenario: `python tools/shot.py 0186 "
@@ -1130,7 +1259,8 @@ TASKS = [
 
     dict(id=187, phase=P12,
          title="Days in a barrel: the keg and the preserves jar",
-         slug="keg-and-jar", deps=[184, 168, 149], dresses=["A031", "A032"],
+         slug="keg-and-jar", deps=[184, 168, 149, 186],
+         dresses=["A031", "A032"],
          files="src/core/crafting.gd, src/core/game_data.gd, "
                "src/core/phases.gd, src/ui/workshop_panel.gd, "
                "src/ui/names.gd, src/ui/placeholder_art.gd, "
@@ -1153,15 +1283,19 @@ TASKS = [
               "`WINE`, `JUICE`, `JELLY` and `PICKLES` with prices, an artisan "
               "group, names and strings in both languages; every recipe "
               "passes `check_chain` with a margin worth the days",
-              "Decide whether breakers can hit the machines; if so they take "
-              "0186's wrecked-but-standing state, and A031 gets wreck frames",
+              "Breakers already hunt every building with no `path_cost` "
+              "(`Pathing.is_prey`), machines included: decide whether a "
+              "machine at 0 HP takes 0186's wrecked-but-standing state (then "
+              "0188 adds `<id>_wreck` rows to A031) or turns to rubble like "
+              "today's stations, and assert it",
               "Machines and goods draw through the placeholder road until "
               "A031 (0213) and A032 (0214) are integrated",
               "`Names.KEYS` with `BLD_*`/`REC_*` rows for the machines and "
               "every recipe, both languages. DATA moves; SIM moves on "
               "purpose (four resources in `held`/`gained`, two stations in "
               "`selected_recipe`) - record both"],
-         dod=["`_task_0187_keg` in `src/tools/headless_v1.gd`: grapes in a "
+         dod=["`_task_0187_keg` in `src/tools/headless_v1.gd` (mornings by "
+              "`Phases.begin_day`): grapes in a "
               "keg are wine after the recipe's mornings and not one before; "
               "a day spent elsewhere still counts; every new recipe has a "
               "positive chain margin",
@@ -1238,7 +1372,10 @@ TASKS = [
               "and the bin empties. The line and the ledger agree, asserted",
               "A panel to choose what goes in, reusing the stall's sell rows "
               "(`shop_panel.gd`); decide whether it stops the clock like the "
-              "stall (`open_panel`) and say why; keyboard, mouse and pad",
+              "stall (`open_panel`) and say why; keyboard, mouse and pad. "
+              "`ship` opens a panel, so it joins `Interact.ONE_SHOT` beside "
+              "`trade` - a repeating verb reopens its panel on the tick after "
+              "it closes",
               "Decide what a lost night does to the bin (the horde takes 25% "
               "of the stock): what is in the bin is sold, not stock, or it "
               "is taken - write it down and assert it",
@@ -1269,25 +1406,34 @@ TASKS = [
                "src/tools/autoplay.gd, src/tools/determinism.gd, "
                "src/tools/shot.gd, src/tools/headless_v1.gd, "
                "src/tools/input_v1.gd",
-         goal="The stall gets a peddler who keeps hours, 08:00 to 17:00, and "
-              "sells what the farm cannot make for itself: animals and tool "
-              "upgrades.",
+         goal="The stall gets a peddler who keeps hours, 08:00 to 17:00, "
+              "whose seed packets change with the season (plan section 3.6), "
+              "and who sells what the farm cannot make for itself: animals "
+              "and tool upgrades.",
          req=["`trade` is offered only from `STALL_OPENS` to `STALL_CLOSES` "
               "(`# LEVER`s in game minutes, 08:00 and 17:00, read through "
-              "0126's `Phases.clock_minute`; in `digest()`); outside them the "
+              "0126's `Phases.clock_minute`; in `digest()`; `validate()` "
+              "keeps them in order inside 0126's day); outside them the "
               "stall shows a closed state and the verb is refused with a "
               "reason in both languages. Gate the verb, not "
               "`Shop.buy`/`sell`: an open panel stops the clock, so the "
               "stall never closes under the player",
-              "Stock beyond 0170's seeds: chickens, cows, sheep and pigs, "
+              "**Moved here from 0170:** the stock becomes seasonal. A "
+              "per-season stock table (`# LEVER`, in `digest()`) puts out "
+              "this season's packets only (0170 left all twelve in the flat "
+              "`DAILY_STOCK`; none in winter) beside the materials; "
+              "`Shop._fresh_stock`/`restock` read the date's season and "
+              "`Shop.buyable()` takes the state (move its callers: "
+              "`shop_panel.gd`, the autoplayer, the suites). `check_stall` "
+              "covers every season. 0193 adds straw and hay before autumn",
+              "Animals and upgrades: chickens, cows, sheep and pigs, "
               "delivered into a coop or barn with room (refused, money kept, "
               "without one), and 0173's tool upgrades at the same money + "
               "ore price through the same order path, so the rule exists "
               "once. Neither is a resource: `Shop.buy`, the stall's stock "
-              "and `check_stall` (resources only today) get a branch",
-              "The stock is seasonal through 0170's table; `Shop.buyable` and "
-              "`restock` read it; `check_stall` covers animals (a price, no "
-              "buy-and-sell-back profit) in every season. The four animals "
+              "and `check_stall` (resources only today) get a branch, and "
+              "`check_stall` gives each animal a price with no "
+              "buy-and-sell-back profit. The four animals "
               "get `Names.KEYS` entries and `ANIMAL_*` rows in both languages "
               "(the stall lists them by name)",
               "Move what trades through the verb before 08:00 to opening "
@@ -1302,9 +1448,13 @@ TASKS = [
               "the closed stall is a dimmed stand-in until A034 is "
               "integrated by 0216",
               "DATA moves; SIM moves on purpose (the stall's stock in the "
-              "state gains animals and upgrades) - record both"],
-         dod=["`_task_0190_peddler` in `src/tools/headless_v1.gd`: trade is "
-              "refused at 07:59 and at 17:00 and offered at 08:00; a cow "
+              "state turns seasonal and gains animals and upgrades) - record "
+              "both"],
+         dod=["`_task_0190_peddler` in `src/tools/headless_v1.gd` (hours by "
+              "a rigged `day_tick`): trade is "
+              "refused at 07:59 and at 17:00 and offered at 08:00; a spring "
+              "stall stocks only spring packets, a summer one only summer's "
+              "and a winter one none; a cow "
               "bought with a barn arrives in it, and without one is refused "
               "with the money kept",
               "`_case_0190_peddler` in `src/tools/input_v1.gd`: buy a chicken "
@@ -1345,7 +1495,9 @@ TASKS = [
               "or a tab in the workshop panel) and test it; the new tier "
               "holds from the next night. A new verb goes in `DAY_ONLY` and "
               "`all_verbs` with an `Sfx.VERB_SOUNDS` entry (borrow "
-              "`sfx/trade` until 0281), or `_task_0084_day_sounds` fails",
+              "`sfx/trade` until 0281), or `_task_0084_day_sounds` fails. "
+              "The tier names and the buying row are `strings.csv` rows in "
+              "both languages, through literal keys",
               "Same 6x4 footprint and pivot; tiers II and III draw as today's "
               "house with a code-drawn mark through the placeholder road "
               "until A035 is integrated by 0217",
@@ -1400,12 +1552,14 @@ TASKS = [
          goal="No defence, round, repair meal or feed may depend on a crop "
               "whose season has not come yet: every season can make what it "
               "needs.",
-         req=["`check_seasonal_supply()` in `GameData.validate()`: for each "
+         req=["`check_seasonal_supply(...)` in `GameData.validate()`, taking "
+              "its tables as arguments like `check_chain(recipes, prices)` so "
+              "a test can hand it a broken one: for each "
               "season S, everything unlocked in S - defence kits, "
               "ammunition, repair food, animal feed - is makeable from the "
               "crops of seasons up to S plus fish, ore, wood, stone and what "
-              "the stall sells in S; it walks the recipe graph, and a test "
-              "shows it a broken table",
+              "the stall sells in S (0190's seasonal stock table); it walks "
+              "the recipe graph",
               "What 'unlocked in S' means: a `season` field on `DEFENCES` "
               "entries, default spring. Plan section 5 puts the flamethrower "
               "in summer and the mortar in autumn, but moving them is 0234's "
@@ -1413,7 +1567,8 @@ TASKS = [
               "Fix the known breaks: gunpowder in spring (a recipe from coal "
               "and oil pressed from fish by `press_fish_oil`, since corn is "
               "summer), a meal in spring (0192's, checked here), straw and "
-              "hay sold by the peddler before autumn",
+              "hay sold by the peddler before autumn (rows in 0190's "
+              "seasonal stock)",
               "Pepper and sunflower get their plan roles: pepper makes "
               "incendiary rounds at a better yield than wood (a recipe, not "
               "a new ammunition rule), and sunflower is pressed into oil",
@@ -1476,8 +1631,12 @@ TASKS = [
               "Tips live in the view: `src/ui/` reads the state for the "
               "trigger and the profile (`Save.read_profile`/`write_profile`) "
               "for what was shown, through a pure `due(state, profile)` the "
-              "headless group can call. `src/core/` never learns of them, so "
-              "SIM must not move; they never gate or pause anything",
+              "headless group can call. No rule in `src/core/` reads them "
+              "(their table may sit in `game_data.gd` beside `TUTORIAL`, as "
+              "data), so SIM must not move; they never gate or pause "
+              "anything. The day-one lines remember themselves in the "
+              "`gameplay/tutorial_seen` Settings key (`tutorial_prompt.gd`): "
+              "say why the tips use the profile instead, or use Settings too",
               "`check_tutorial` (or a new check) covers the tip table in "
               "`game_data.gd`: unique, short, naming a string key that "
               "exists. List it in `digest()` (DATA moves) or exempt it in "
@@ -1514,7 +1673,8 @@ TASKS = [
               "on) before they run, and say which",
               "If the answer is no, mark this task blocked with the reason, "
               "so phase 13 does not start on a day that does not work",
-              "Change no rule here: fixes go into later prompts or new tasks"],
+              "Change no rule here, so neither hash moves: fixes go into "
+              "later prompts or new tasks"],
          dod=["The journal says, with numbers, how a spring day and a summer "
               "day each made their money - and that they differ",
               "The journal answers the question in one paragraph a reader "
@@ -1946,13 +2106,15 @@ TASKS = [
               _promote("buildings", "`tools/check_house_art.py`, which "
                        "hard-codes `house`/`house_hurt` and their window "
                        "points today - extend it per tier"),
-              "Runtime names: each tier whole and hurt with its slices, "
-              "`windows_xy`, `window_rects_xywh`, `light_xy` and `smoke_xy` "
-              "on the same 6x4 footprint and pivot conventions as today's "
-              "house; follow the density 0191 wrote into the pack "
-              "(`ArtPlacement.visual_scale` doubles every file whose name "
-              "starts `house_`, so a tier named `house_2` is doubled too - "
-              "rename or extend the rule on purpose)",
+              "Runtime names: `house`, `house_hurt`, `house_2`, "
+              "`house_2_hurt`, `house_3`, `house_3_hurt` with their slices "
+              "(`house_<c>_<r>`, `house_2_<c>_<r>`...), `windows_xy`, "
+              "`window_rects_xywh`, `light_xy` and `smoke_xy` on the same 6x4 "
+              "footprint as today's house. The pack draws them at full "
+              "density (128x128, pivot (64,120): today's 64x64 at 2.0), so "
+              "take `house` out of `ArtPlacement.visual_scale`'s 2.0 list - "
+              "it matches every file whose name starts `house_`, the tiers "
+              "too - unless 0191 wrote a different density into the pack",
               "Replace 0191's code-marked stand-ins and flip A035's "
               "placeholder-registry entries to raster",
               _integrated("A035")],

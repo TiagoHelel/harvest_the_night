@@ -3,7 +3,7 @@
 - **Phase:** 12 - The day that pays
 - **Status:** todo
 - **Depends on:** 0175, 0156
-- **Likely files:** src/core/game_data.gd, src/core/gathering.gd, src/core/interact.gd, src/ui/world_view.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd
+- **Likely files:** src/core/game_data.gd, src/core/gathering.gd, src/core/interact.gd, src/core/farm.gd, src/ui/world_view.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd
 
 ## Goal
 
@@ -19,7 +19,7 @@ task 0120 until each pack is integrated - or with the pack's art if
 
 ## Requirements
 
-- The 2x2 stumps 0156 put on the map (`hardwood_stump`, or the id its journal names) become a `GATHERING` node with `min_tier` 1 (iron axe), more swings than a tree, a `HARDWOOD` yield and a `regrow_ticks` (`# LEVER`) - nothing on the farm is exhausted for good - and an `Interact.OCCUPANT_VERBS` entry (`chop`). One occupant over four cells with an anchor, like the stations: a swing at any of its cells strikes it
+- The 2x2 stumps 0156 put on the map (`hardwood_stump`, or the id its journal names) become a `GATHERING` node with `min_tier` 1 (iron axe), more swings than a tree, a `HARDWOOD` yield and a `regrow_ticks` (`# LEVER`) - nothing on the farm is exhausted for good - and an `Interact.OCCUPANT_VERBS` entry (`chop`). One occupant over four cells with an anchor, like the stations: a swing at any of its cells strikes it. `Gathering.strike`, `Farm.remove`/`restore` and the regrowth in `Gathering.tick` all work one cell at a time today: the stump leaves all four cells when it falls and comes back only when all four are clear (the anchor's entry in `regrowing`), asserted
 - A chipped look after the first swing, until it falls (view, from `Gathering.swings_left`)
 - `HARDWOOD` in `RESOURCES`, `SELL_PRICE`, the materials group, names and strings in both languages; its icon is a tinted stand-in until A020 is integrated by 0203
 - Its use is 0231's strong wall; here it only sells, and the journal says so. DATA moves; SIM moves on purpose (a new resource in `held`/`gained`) - record both
@@ -28,7 +28,7 @@ task 0120 until each pack is integrated - or with the pack's art if
 
 ## Done when
 
-- [ ] `_task_0177_hardwood` in `src/tools/headless_v1.gd`: a basic axe is refused at a big stump; an iron axe fells it in the swings, for the hardwood, the levers say; it is back after `regrow_ticks`
+- [ ] `_task_0177_hardwood` in `src/tools/headless_v1.gd`: a basic axe is refused at a big stump; an iron axe fells it in the swings, for the hardwood, the levers say, from any of its four cells; it is back on all four after `regrow_ticks`, and not while one of them is built on
 - [ ] A new `hardwood` scenario: `python tools/shot.py 0177 hardwood --fhd` shows a whole and a chipped stump beside a tree; opened and looked at
 - [ ] the Deliverables table of `implementation/backlog/packs/A021-ore-hardwood.md` states the final geometry this task settled (the node canvas and variants, the stump's canvas, pivot and states)
 - [ ] `python tools/verify.py` prints PASS

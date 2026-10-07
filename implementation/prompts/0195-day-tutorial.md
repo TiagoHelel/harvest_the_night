@@ -12,7 +12,7 @@ The new day explains itself once: tilling grass, the seasons, the shipping bin, 
 ## Requirements
 
 - Tips, not day-one lines: `MAX_TUTORIAL_LINES` still caps the first day. A tip fires from the state (the first stand on open grass with the hoe, the first morning of a new season, the first stand by the bin, the first bite, the first animal bought) and is remembered in the profile so it never shows twice
-- Tips live in the view: `src/ui/` reads the state for the trigger and the profile (`Save.read_profile`/`write_profile`) for what was shown, through a pure `due(state, profile)` the headless group can call. `src/core/` never learns of them, so SIM must not move; they never gate or pause anything
+- Tips live in the view: `src/ui/` reads the state for the trigger and the profile (`Save.read_profile`/`write_profile`) for what was shown, through a pure `due(state, profile)` the headless group can call. No rule in `src/core/` reads them (their table may sit in `game_data.gd` beside `TUTORIAL`, as data), so SIM must not move; they never gate or pause anything. The day-one lines remember themselves in the `gameplay/tutorial_seen` Settings key (`tutorial_prompt.gd`): say why the tips use the profile instead, or use Settings too
 - `check_tutorial` (or a new check) covers the tip table in `game_data.gd`: unique, short, naming a string key that exists. List it in `digest()` (DATA moves) or exempt it in `_task_0112_digest` as view text - say which
 - Strings in both languages, each fitting its control (`tools/i18n_check.py`); a tip sits on the thing it describes (`tutorial_prompt.gd`)
 - The guided Spring 1-7 is 0293's, not here

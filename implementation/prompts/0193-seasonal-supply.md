@@ -11,9 +11,9 @@ No defence, round, repair meal or feed may depend on a crop whose season has not
 
 ## Requirements
 
-- `check_seasonal_supply()` in `GameData.validate()`: for each season S, everything unlocked in S - defence kits, ammunition, repair food, animal feed - is makeable from the crops of seasons up to S plus fish, ore, wood, stone and what the stall sells in S; it walks the recipe graph, and a test shows it a broken table
+- `check_seasonal_supply(...)` in `GameData.validate()`, taking its tables as arguments like `check_chain(recipes, prices)` so a test can hand it a broken one: for each season S, everything unlocked in S - defence kits, ammunition, repair food, animal feed - is makeable from the crops of seasons up to S plus fish, ore, wood, stone and what the stall sells in S (0190's seasonal stock table); it walks the recipe graph
 - What 'unlocked in S' means: a `season` field on `DEFENCES` entries, default spring. Plan section 5 puts the flamethrower in summer and the mortar in autumn, but moving them is 0234's (with the new defences), so today's eight stay spring here
-- Fix the known breaks: gunpowder in spring (a recipe from coal and oil pressed from fish by `press_fish_oil`, since corn is summer), a meal in spring (0192's, checked here), straw and hay sold by the peddler before autumn
+- Fix the known breaks: gunpowder in spring (a recipe from coal and oil pressed from fish by `press_fish_oil`, since corn is summer), a meal in spring (0192's, checked here), straw and hay sold by the peddler before autumn (rows in 0190's seasonal stock)
 - Pepper and sunflower get their plan roles: pepper makes incendiary rounds at a better yield than wood (a recipe, not a new ammunition rule), and sunflower is pressed into oil
 - Every new recipe passes `check_chain` and `check_ammo` and has a `Names.KEYS` entry and a `REC_*` row in both languages
 - DATA moves; SIM moves if the stall's stock or a station's default recipe (both in the state) changes - say which

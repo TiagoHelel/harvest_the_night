@@ -24,7 +24,7 @@ task 0120 until each pack is integrated - or with the pack's art if
 - `COPPER`, `COAL` and `GOLD` in `RESOURCES`, `SELL_PRICE`, the materials group, `Names.KEYS` and `ITEM_*` rows in both languages (0169's check wants all four)
 - Coal is fuel (plan section 3.3): the generator may burn it instead of oil - decide and say so; 0193 uses coal for spring gunpowder
 - The gold tier's costs for the hoe, can, axe and pickaxe (money + gold, `# LEVER`), so 0173's refused tier opens
-- Nodes draw through the placeholder road (tinted `ore`/`ore_b`, 16x16, pivot (8,14)) and icons as tinted stand-ins until A021 (0204) and A020 (0203) are integrated
+- Nodes keep 0156's stand-ins on the placeholder road (tinted `ore` for copper and gold, `seam` for coal; 16x16, pivot (8,14)) and icons are tinted stand-ins until A021 (0204) and A020 (0203) are integrated
 - DATA moves. SIM moves on purpose: three new resources are new keys in `held`/`gained`, which the state hash folds - record both
 
 ## Done when

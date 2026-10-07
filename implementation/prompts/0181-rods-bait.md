@@ -22,9 +22,9 @@ task 0120 until each pack is integrated - or with the pack's art if
 - Rod effects read from `TOOLS` (`# LEVER`s): the fibre rod shortens the bite range and raises rare weights; the iron rod opens a bait slot and is the gate 0182 checks
 - Worms: tilling (`Farming._till`) finds a `WORM` one time in `WORM_IN` (`# LEVER`, in `digest()`), drawn from the run RNG - SIM moves on purpose (the determinism scenario tills) and the journal records it
 - A fish-scrap bait recipe (a `RECIPES` entry, so a `Names.KEYS` entry and a `REC_*` row): a common fish into several `BAIT` at the workshop or the kitchen - decide. Bait has a sale price like every resource since 0169, and the recipe passes `check_chain`
-- With the iron rod, a held bait is spent at the cast and shortens the wait or raises rarity (`# LEVER`s); which bait is on is a choice the HUD shows; no bait means no effect, not a refusal
+- With the iron rod, a held bait is spent at the cast and shortens the wait or raises rarity (`# LEVER`s); which bait is on is a choice the HUD shows, kept in the state (say where; a nested dictionary goes in `State.TABLES`); no bait means no effect, not a refusal
 - `WORM` and `BAIT` with prices, a group, names and strings in both languages. Zombie bait is 0225's, not here
-- Icons through the placeholder road until A023 is integrated by 0206
+- Icons through the placeholder road until A023 is integrated by 0206. DATA moves (`WORM_IN`, the rod levers, the recipe) and SIM moves on purpose (the worm draw, the bait choice): record both
 
 ## Done when
 

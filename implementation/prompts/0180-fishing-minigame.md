@@ -3,7 +3,7 @@
 - **Phase:** 12 - The day that pays
 - **Status:** todo
 - **Depends on:** 0179, 0121, 0173
-- **Likely files:** src/core/fishing.gd, src/core/game_data.gd, src/ui/fishing_bar.gd (new), src/ui/main.gd, src/app/input_actions.gd, src/app/settings.gd, project.godot, src/ui/player_work.gd, src/ui/sfx.gd, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd
+- **Likely files:** src/core/fishing.gd, src/core/game_data.gd, src/core/sim.gd, src/ui/fishing_bar.gd (new), src/ui/main.gd, src/app/input_actions.gd, src/app/settings.gd, project.godot, src/ui/player_work.gd, src/ui/sfx.gd, src/tools/perf_names.gd, src/tools/perf_check.gd, src/tools/determinism.gd, src/tools/autoplay.gd, src/tools/art_showcase.gd, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd
 
 ## Goal
 
@@ -23,17 +23,17 @@ task 0120 until each pack is integrated - or with the pack's art if
 - Presses are intents (the `interact` edge or a dedicated one), judged against the marker on the tick they are consumed; 1-3 hits by species land the fish; misses allowed and how long the bar runs are `# LEVER`s, and running out loses the fish and nothing else
 - If the bar adds or retires a verb, `_task_0084_day_sounds` still passes: every `Interact.DAY_ONLY` verb keeps an `Sfx.VERB_SOUNDS` entry (borrow `sfx/reel` until 0282 gives the bar its sounds) and `water` stays the only instant verb. A new `X.tick(state)` call in `sim.gd` joins `PerfNames.DAY` and `perf_check.gd`
 - Keyboard, mouse and pad write the same intent: a new action in `InputActions.ACTIONS` and `project.godot` with a pad binding, kept in sync by the existing check
-- An assist (wider zone, slower marker) is a rule, so it lives in the state: a run flag written through an intent from a Settings key, never read by core from `Settings`. The Options row is 0292's
+- An assist (wider zone, slower marker) is a rule, so it lives in the state: a run flag written through an intent from a Settings key, never read by core from `Settings` (a top-level key, or a field of a dictionary listed in `State.TABLES` - say which). The Options row is 0292's
 - The view draws the bar, marker, zone and hit/miss flash through the placeholder road until A023 is integrated by 0206, and the farmer on today's `fish`/`reel` strips until A024 is integrated by 0207
 - Settle the art: the bar's piece sizes into A023, and the farmer's poses and timings (cast, wait, strike, reel loop, show the catch) into A024
-- SIM moves on purpose; rewrite what is left of `_task_0030_fishing`/`_case_0030_fishing` that reels in one press
+- SIM moves on purpose and DATA moves (the bar levers): record both. Rewrite whatever still reels in one press: what is left of `_task_0030_fishing`/`_case_0030_fishing`, the determinism scenario's cast, the autoplayer's fishing and the showcases that cast and reel (`art_showcase.gd`, `effect_showcase.gd` - `show_art.py --check` runs in verify)
 
 ## Done when
 
 - [ ] `_task_0180_minigame` in `src/tools/headless_v1.gd`: a press on a tick inside the zone counts and one tick outside does not; a three-hit species needs three; the assist widens the zone; a replay with the same presses lands the same fish
 - [ ] `_case_0180_minigame` in `src/tools/input_v1.gd`: land a fish with the keyboard, with the mouse and with a synthetic pad button
 - [ ] A new `fishing_bar` scenario: `python tools/shot.py 0180 fishing_bar --fhd` shows the bar mid-catch; opened and looked at
-- [ ] the Deliverables tables of `implementation/backlog/packs/A023-fishing-gear.md` and `A024-farmer-fishing.md` state the final geometry and poses this task settled
+- [ ] the Deliverables table of `implementation/backlog/packs/A023-fishing-gear.md` states the final geometry this task settled, and so does `A024-farmer-fishing.md` for the poses and timings - that pack file does not exist yet: if it is still missing, write the settled poses into the journal under an `A024` heading for its author, create no pack, and say so
 - [ ] `python tools/verify.py` prints PASS
 - [ ] the determinism hash is unchanged, or the change is deliberate and both
       the old and the new number are in the journal

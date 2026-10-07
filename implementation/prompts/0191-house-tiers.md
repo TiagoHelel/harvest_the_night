@@ -22,7 +22,7 @@ task 0120 until each pack is integrated - or with the pack's art if
 - `HOUSE_TIERS` (`# LEVER`s): a price in money (and materials if wanted), an `hp_bonus` and a repair discount per tier, bought by day; tier I is the house a new game has. `validate()` checks it (bonuses never fall from one tier to the next, the discount within 0-100) and it goes into `digest()`
 - The tier is a top-level `house_tier` int: reconcile fills it for old saves (no version bump), but the state hash folds it. `Phases.house_full` adds the tier's HP, so every reader 0114 routed through it follows; the house repair in `Repair` applies the discount and composes with what 0113 decided for 'a full larder' on the house
 - **There is no storage limit today** and section 3.8's 'more room to keep things' is not invented here; say so in the journal
-- Pick one input path for buying (the house's door, the stall, or a tab in the workshop panel) and test it; the new tier holds from the next night. A new verb goes in `DAY_ONLY` and `all_verbs` with an `Sfx.VERB_SOUNDS` entry (borrow `sfx/trade` until 0281), or `_task_0084_day_sounds` fails
+- Pick one input path for buying (the house's door, the stall, or a tab in the workshop panel) and test it; the new tier holds from the next night. A new verb goes in `DAY_ONLY` and `all_verbs` with an `Sfx.VERB_SOUNDS` entry (borrow `sfx/trade` until 0281), or `_task_0084_day_sounds` fails. The tier names and the buying row are `strings.csv` rows in both languages, through literal keys
 - Same 6x4 footprint and pivot; tiers II and III draw as today's house with a code-drawn mark through the placeholder road until A035 is integrated by 0217
 - DATA moves; SIM moves on purpose (the `house_tier` key) - record both
 

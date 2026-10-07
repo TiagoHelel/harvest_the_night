@@ -21,7 +21,7 @@ task 0120 until each pack is integrated - or with the pack's art if
 
 - Animals sleep in their building at night (the view hides them; livestock already ticks only by day)
 - Breakers hunt coops and barns: `Pathing.is_prey` counts a `BUILDINGS` entry with no `path_cost` already - assert it
-- A wrecked-but-standing state: an entry that declares it (e.g. `wrecks: true` on coop and barn) is not removed by `Farm.damage` at 0 HP; it stays an occupant marked wrecked, still impassable, no longer prey (`Pathing.prey_cells` already skips 0 HP), with no rubble; decide whether `Run.lost_a_structure` counts it and assert that
+- A wrecked-but-standing state: an entry that declares it (e.g. `wrecks: true` on coop and barn) is not removed by `Farm.damage` at 0 HP; it stays an occupant marked wrecked, still impassable, no longer prey (`Pathing.prey_cells` already skips 0 HP), with no rubble; decide whether `Run.lost_a_structure` counts it and assert that. The hunt field is cached on `grid_version` and only `Farm.remove` bumps it today: wrecking (and mending back above 0) must `Farm.touch`, or breakers stand at a 0-HP barn all night - the bug `prey_cells`' own comment records
 - A wrecked building produces nothing and offers only `repair` (by day, by the farmer, as 0134 left it); any HP above 0 brings it back; its animals stay inside, alive, throughout
 - `Crafting.forget_cell` and `Livestock`'s cache must not forget a wrecked building's residents or queue
 - Hurt and wrecked looks are tints of the stand-in through the placeholder road until A030 is integrated by 0212
@@ -29,7 +29,7 @@ task 0120 until each pack is integrated - or with the pack's art if
 
 ## Done when
 
-- [ ] `_task_0186_barns_night` in `src/tools/headless_v1.gd`: breakers reach a barn and wreck it; it stands, produces nothing the next day, keeps every animal, and works again after a day repair
+- [ ] `_task_0186_barns_night` in `src/tools/headless_v1.gd` (a short night with breakers set down beside the barn, mornings by `Phases.begin_day`): breakers reach a barn and wreck it, then leave it for other prey; it stands, produces nothing the next day, keeps every animal, and works again after a day repair
 - [ ] A new `barn_night` scenario: `python tools/shot.py 0186 barn_night --fhd` shows a hurt and a wrecked barn at night and the next morning; opened and looked at
 - [ ] `python tools/verify.py` prints PASS
 - [ ] the determinism hash is unchanged, or the change is deliberate and both
