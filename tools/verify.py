@@ -785,10 +785,16 @@ def main():
         check_script("headless_check", "src/tools/headless_check.gd",
                      "not written yet - task 0004",
                      pattern=r"\d+ asserts?, \d+ failed")
+        check_script("headless_v1", "src/tools/headless_v1.gd",
+                     "not written yet - task 0112",
+                     pattern=r"\d+ asserts?, \d+ failed")
     check_determinism(accept)
     if not hashes_only:
         check_script("input_check", "src/tools/input_check.gd",
                      "not written yet - task 0011",
+                     pattern=r"\d+ cases?, \d+ failed")
+        check_script("input_v1", "src/tools/input_v1.gd",
+                     "not written yet - task 0112",
                      pattern=r"\d+ cases?, \d+ failed")
         if fast:
             skip("exports", "--fast")

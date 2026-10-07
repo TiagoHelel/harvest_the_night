@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`#########...............`  **110 / 296 done**
+`#########...............`  **111 / 296 done**
 
-0 doing / 186 todo / 0 blocked across 18 phases.
+0 doing / 185 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0112 - Room in the test suites**. The whole of what is left is
+First up: **0113 - Repairs mend to the real maximum**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,46 +26,13 @@ which rewrites this file for you.
 
 ## What is open
 
-186 task(s) left, the ready ones first, then what they
+185 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
-### 0112 - Room in the test suites
-
-Ready to pick up.  Likely files: `src/tools/headless_v1.gd, src/tools/input_v1.gd, tools/verify.py, src/core/game_data.gd`.
-
-`headless_check` and `input_check` already take about 74 s each of the 120 s verify allows a script, and some 180 tasks are coming. Give 1.0 its own pair of suites, so a new rule never has to choose between being tested and the suite finishing.
-
-- `src/tools/headless_v1.gd` copies `headless_check`'s harness: `expect()`, `passed`/`failed`, its own `GROUPS` constant with `_completed += 1` as each group's last line and `_finish()` failing a short count, the `_process()` watchdog (`WATCHDOG_SECONDS`) for an `_initialize()` that never returns, and a last line `N asserts, M failed` with a non-zero exit on any failure
-- `src/tools/input_v1.gd` does the same for `input_check`: `MAIN_SCENE`, its own `CASES`, the 20 s stall watchdog that every `expect()` resets, the last line `N cases, M failed`; its first case boots Main and presses one real action, so the harness itself is tested
-- Wire both into `tools/verify.py` through `check_script()` with the same patterns as the old suites (`\d+ asserts?, \d+ failed`, `\d+ cases?, \d+ failed`), skipped by `--hashes` like them, each run bounded by `SCRIPT_TIMEOUT_S` as the old two are
-- Move nothing: every existing `_task_NNNN_*` group and `_case_NNNN_*` case stays put and `GROUPS := 103` / `CASES := 61` do not change. A plain helper the new files need (`_stand_the_farmer`, `_moved`, ...) is shared, not copied: move it into one small static script under `src/tools/` that both suites call - moving a helper is allowed, a group is not. An input helper that needs the running tree (`click_control`, `until`) takes the tree as an argument, or `input_v1` reuses `input_check`'s script some other way that keeps the two counters apart; say which
-- Say in both new file headers that every group and case from task 0112 on lives here (`00-RUNNER-LOOP.md` already says so), and that a defence a test puts down, upgrades or sells is handled in PREPARATION, never by day (0132 forbids it by day and 0119 moves the old suites the same way)
-- `_task_0112_digest` in `headless_v1`: read `src/core/game_data.gd` as text, collect every top-level `const` whose value is a Dictionary or Array literal (typed ones too, `const X: Array[Vector2i] = [`), and fail on any that is neither named inside `GameData.digest()` nor in an exemption list in the assert with a one-line reason each (derived enum lists such as `TARGETING`, `SHAPES`, `AIMS`, `DAMAGE_TYPES`; geometry helpers such as `NEIGHBOUR_STEPS`; view-only data). Scalar consts are not its business
-- Run it on today's file before deciding: `MAP_LEGEND`, for one, is not in the digest. A table that is balance goes into `digest()` - DATA then moves on purpose: `python tools/verify.py --accept` and both numbers in the journal; one that is not gets its exemption and its reason. SIM does not move: this task changes no rule and no state key
-- Write the four suite rows' times and the whole run against `BUDGET_S` in the journal
-
-  - done when: verify prints a `headless_v1` row ending `N asserts, 0 failed` and an `input_v1` row ending `N cases, 0 failed`, each timed, while `headless_check` still finishes 103 groups and `input_check` 61 cases
-  - done when: A scratch `const TEST_TABLE := {}` in `game_data.gd` makes `_task_0112_digest` fail and removing it passes again - tried and said so in the journal
-  - done when: A deliberate early `return` before `_completed += 1` in a `headless_v1` group makes verify fail on the group count; then put back
-
-### 0117 - Three stale documents
-
-Ready to pick up.  Likely files: `CHANGELOG.md, docs/PLAYTEST.md, assets/locale/strings.csv`.
-
-Three places tell a player something the game does not do. Fix the words and nothing else.
-
-- `CHANGELOG.md` 0.1.0 says 'Sixteen crops'; there are three (`GameData.CROPS`: wheat, corn, carrot). Say three, and read the rest of that section against the game while there
-- `docs/PLAYTEST.md` 'What to ignore' says 'Anything after night ten. It stops.' - it does not: the run carries on into generated endless nights (`Endless`, `Run.go_endless`). Say what really happens. Keep the headings `_task_0105_playtest` looks for ('What to try', 'What to ignore', 'What to report') and the line that names the note key
-- `TUT_SELL` says the stall 'sells seeds'; it does not - seeds are paid for at planting (`CROPS[...]["seed_cost"]`) and `DAILY_STOCK` has none. Rewrite the line in English and Brazilian Portuguese, about as long as today's: its `width` column is 0, so `tools/i18n_check.py` checks that both languages are there and agree on `%` specifiers, and `MAX_TUTORIAL_LINE_LENGTH` measures the key, not the words
-- Words only, no rule changes: the day-barricade allowance is 0132's, the can's '/8' is 0174's, and seeds sold by season arrive with 0170 (the line moves again then). `TUTORIAL` holds the key, not the text, so neither hash moves
-
-  - done when: A grep of `CHANGELOG.md` and `docs/PLAYTEST.md` finds no 'Sixteen' and no 'It stops'
-  - done when: `python tools/i18n_check.py` passes with the new `TUT_SELL` in both languages
-
 ### 0113 - Repairs mend to the real maximum
 
-Waits on 0112.  Likely files: `src/core/repair.gd, src/core/building.gd, src/core/game_data.gd, src/ui/world_view.gd, assets/locale/strings.csv, src/tools/headless_v1.gd, src/tools/headless_check.gd`.
+Ready to pick up.  Likely files: `src/core/repair.gd, src/core/building.gd, src/core/game_data.gd, src/ui/world_view.gd, assets/locale/strings.csv, src/tools/headless_v1.gd, src/tools/headless_check.gd`.
 
 Mending stops at the wrong number: the house comes back only to 100 when 'stout timbers' made it 140, and an upgraded tower only to its level-one hit points. A repair should put back what the thing really has when it is whole.
 
@@ -84,7 +51,7 @@ Mending stops at the wrong number: the house comes back only to 100 when 'stout 
 
 ### 0115 - Spawn ground that cannot be built shut
 
-Waits on 0112.  Likely files: `src/core/waves.gd, src/core/enemies.gd, src/core/building.gd, src/core/state.gd, assets/locale/strings.csv, src/tools/headless_v1.gd`.
+Ready to pick up.  Likely files: `src/core/waves.gd, src/core/enemies.gd, src/core/building.gd, src/core/state.gd, assets/locale/strings.csv, src/tools/headless_v1.gd`.
 
 The plan suspects that fencing every cell of a spawn line makes that side's zombies vanish: `Enemies.spawn` returns 0 when no cell is free and `Waves.tick` counts the member as sent anyway. About seventeen fences would win a night. Prove it, and if it is real, no wave member is ever lost without a trace.
 
@@ -103,7 +70,7 @@ The plan suspects that fencing every cell of a spawn line makes that side's zomb
 
 ### 0116 - The mortar and the flamethrower, empty and upgraded
 
-Waits on 0112.  Likely files: `src/core/towers.gd, src/core/ammo.gd, src/core/game_data.gd, src/tools/headless_v1.gd, src/tools/headless_check.gd`.
+Ready to pick up.  Likely files: `src/core/towers.gd, src/core/ammo.gd, src/core/game_data.gd, src/tools/headless_v1.gd, src/tools/headless_check.gd`.
 
 Two towers may not do what their tables say. An empty mortar may lob a rock that hits nobody, and the flamethrower may ignore the tree's damage and range bonuses while burning two incendiary rounds a second. Reproduce each and fix only what is real.
 
@@ -120,9 +87,23 @@ Two towers may not do what their tables say. An empty mortar may lob a rock that
   - done when: A flame tower firing for 10 s on a full pool spends 5 rounds (10 s / `ammo_every_ticks`), not 20
   - done when: The journal says which of the three suspicions were real, with the autoplay table before and after
 
+### 0117 - Three stale documents
+
+Ready to pick up.  Likely files: `CHANGELOG.md, docs/PLAYTEST.md, assets/locale/strings.csv`.
+
+Three places tell a player something the game does not do. Fix the words and nothing else.
+
+- `CHANGELOG.md` 0.1.0 says 'Sixteen crops'; there are three (`GameData.CROPS`: wheat, corn, carrot). Say three, and read the rest of that section against the game while there
+- `docs/PLAYTEST.md` 'What to ignore' says 'Anything after night ten. It stops.' - it does not: the run carries on into generated endless nights (`Endless`, `Run.go_endless`). Say what really happens. Keep the headings `_task_0105_playtest` looks for ('What to try', 'What to ignore', 'What to report') and the line that names the note key
+- `TUT_SELL` says the stall 'sells seeds'; it does not - seeds are paid for at planting (`CROPS[...]["seed_cost"]`) and `DAILY_STOCK` has none. Rewrite the line in English and Brazilian Portuguese, about as long as today's: its `width` column is 0, so `tools/i18n_check.py` checks that both languages are there and agree on `%` specifiers, and `MAX_TUTORIAL_LINE_LENGTH` measures the key, not the words
+- Words only, no rule changes: the day-barricade allowance is 0132's, the can's '/8' is 0174's, and seeds sold by season arrive with 0170 (the line moves again then). `TUTORIAL` holds the key, not the text, so neither hash moves
+
+  - done when: A grep of `CHANGELOG.md` and `docs/PLAYTEST.md` finds no 'Sixteen' and no 'It stops'
+  - done when: `python tools/i18n_check.py` passes with the new `TUT_SELL` in both languages
+
 ### 0118 - One road into the waves
 
-Waits on 0112.  Likely files: `src/core/phases.gd, src/core/sim.gd, src/tools/night_road.gd (new), src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd, src/tools/shot.gd, src/tools/autoplay.gd, src/tools/determinism.gd, src/tools/make_goldens.gd, src/tools/perf_check.gd, src/tools/play_nights.gd, src/tools/art_showcase.gd, src/tools/capture_dawn.gd`.
+Ready to pick up.  Likely files: `src/core/phases.gd, src/core/sim.gd, src/tools/night_road.gd (new), src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd, src/tools/shot.gd, src/tools/autoplay.gd, src/tools/determinism.gd, src/tools/make_goldens.gd, src/tools/perf_check.gd, src/tools/play_nights.gd, src/tools/art_showcase.gd, src/tools/capture_dawn.gd`.
 
 About sixty-five places in the tests and tools start a night the same way: `begin_preparation`, then wait out `PREPARATION_TICKS`. Phase 10 changes how the build step ends twice (0136's START, 0137's dawn). Put the road into the waves in one place first, so those tasks change it once.
 
@@ -141,7 +122,7 @@ About sixty-five places in the tests and tools start a night the same way: `begi
 
 ### 0120 - One road for art that has not arrived
 
-Waits on 0112.  Likely files: `src/ui/placeholder_art.gd (new), src/ui/art_placement.gd, src/ui/house_view.gd, src/ui/pixel_effects.gd, src/ui/player_view.gd, src/ui/player_art.gd, src/ui/world_view.gd, src/ui/README.md, tools/placeholders.py (new), tools/verify.py, src/tools/headless_v1.gd`.
+Ready to pick up.  Likely files: `src/ui/placeholder_art.gd (new), src/ui/art_placement.gd, src/ui/house_view.gd, src/ui/pixel_effects.gd, src/ui/player_view.gd, src/ui/player_art.gd, src/ui/world_view.gd, src/ui/README.md, tools/placeholders.py (new), tools/verify.py, src/tools/headless_v1.gd`.
 
 From here on code tasks put new things on screen long before Codex has drawn them. Give them one road: a stand-in with the real pack's canvas and pivot, found through the lookup the views already use, so the leaf that brings the real art for a new thing only deletes its entry and no view code changes.
 
@@ -160,7 +141,7 @@ From here on code tasks put new things on screen long before Codex has drawn the
 
 ### 0121 - A controller for every action
 
-Waits on 0112.  Likely files: `project.godot, src/app/input_actions.gd, src/ui/main.gd, src/ui/options_controls.gd, src/ui/pause_menu.gd, src/ui/title_screen.gd, src/ui/studio_intro.gd, assets/locale/strings.csv, src/tools/input_v1.gd, src/tools/headless_v1.gd`.
+Ready to pick up.  Likely files: `project.godot, src/app/input_actions.gd, src/ui/main.gd, src/ui/options_controls.gd, src/ui/pause_menu.gd, src/ui/title_screen.gd, src/ui/studio_intro.gd, assets/locale/strings.csv, src/tools/input_v1.gd, src/tools/headless_v1.gd`.
 
 The plan promises a night played on a controller, and `project.godot` has not one joypad binding: only the pause menu, the title and the ident read raw pad buttons. Bind every action now, before phase 10's cursor and hotbar are built on top of them.
 
@@ -179,7 +160,7 @@ The plan promises a night played on a controller, and `project.godot` has not on
 
 ### 0114 - Untouched means the house the night started with
 
-Waits on 0112, 0113.  Likely files: `src/core/rewards.gd, src/core/tech.gd, src/core/sim.gd, src/core/enemies.gd, src/ui/night_hud.gd, src/ui/result_screen.gd, src/tools/play_nights.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd, src/tools/input_check.gd`.
+Waits on 0113.  Likely files: `src/core/rewards.gd, src/core/tech.gd, src/core/sim.gd, src/core/enemies.gd, src/ui/night_hud.gd, src/ui/result_screen.gd, src/tools/play_nights.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd, src/tools/input_check.gd`.
 
 With 'stout timbers' the house starts the night at 140, yet four rules still measure it against 100: it can lose 40 and still pay the untouched bonus, and the skip refusal and the danger bar read the wrong share. Every 'how whole is the house' question is asked of the house the night started with.
 
@@ -3562,18 +3543,18 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0107** [Store assets](prompts/0107-store-assets.md)
 - [x] **0108** [The devlog and a trailer clip](prompts/0108-devlog.md)
 
-## 9 - v1.0 groundwork  (0/14)
+## 9 - v1.0 groundwork  (1/14)
 
-- [ ] **0112** [Room in the test suites](prompts/0112-suite-headroom.md)
-- [ ] **0113** [Repairs mend to the real maximum](prompts/0113-repairs-full-max.md) - needs 0112
-- [ ] **0114** [Untouched means the house the night started with](prompts/0114-untouched-house.md) - needs 0112, 0113
-- [ ] **0115** [Spawn ground that cannot be built shut](prompts/0115-spawn-room.md) - needs 0112
-- [ ] **0116** [The mortar and the flamethrower, empty and upgraded](prompts/0116-mortar-flame-ammo.md) - needs 0112
+- [x] **0112** [Room in the test suites](prompts/0112-suite-headroom.md)
+- [ ] **0113** [Repairs mend to the real maximum](prompts/0113-repairs-full-max.md)
+- [ ] **0114** [Untouched means the house the night started with](prompts/0114-untouched-house.md) - needs 0113
+- [ ] **0115** [Spawn ground that cannot be built shut](prompts/0115-spawn-room.md)
+- [ ] **0116** [The mortar and the flamethrower, empty and upgraded](prompts/0116-mortar-flame-ammo.md)
 - [ ] **0117** [Three stale documents](prompts/0117-stale-docs.md)
-- [ ] **0118** [One road into the waves](prompts/0118-one-road-into-night.md) - needs 0112
+- [ ] **0118** [One road into the waves](prompts/0118-one-road-into-night.md)
 - [ ] **0119** [Tests and tools build in the build step](prompts/0119-build-in-preparation.md) - needs 0118
-- [ ] **0120** [One road for art that has not arrived](prompts/0120-placeholder-road.md) - needs 0112
-- [ ] **0121** [A controller for every action](prompts/0121-gamepad-bindings.md) - needs 0112
+- [ ] **0120** [One road for art that has not arrived](prompts/0120-placeholder-road.md)
+- [ ] **0121** [A controller for every action](prompts/0121-gamepad-bindings.md)
 - [ ] **0122** [Art: the farmer's run](prompts/0122-art-farmer-run.md) - needs 0120 - waits for art A006
 - [ ] **0123** [Art: the farmer tilling, planting, watering and harvesting](prompts/0123-art-farmer-field-work.md) - needs 0120 - waits for art A007
 - [ ] **0124** [Art: the farmer chopping, mining, collecting and carrying](prompts/0124-art-farmer-gather-work.md) - needs 0120 - waits for art A008

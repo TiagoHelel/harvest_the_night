@@ -2573,6 +2573,10 @@ static func digest() -> int:
 		"house": [HOUSE_SIZE, SHOP_SIZE, HOUSE_ROOM, HOUSE_DOOR,
 			HOUSE_SPAWN, HOUSE_FURNITURE],
 		"map": FARM_MAP,
+		# **The legend is half the map.** Which character is soil, water, a
+		# rock or a vein of ore decides the farm as much as the characters
+		# do; until task 0112 it could be redrawn with the guard quiet.
+		"legend": MAP_LEGEND,
 		"resources": RESOURCES,
 		"sell_price": SELL_PRICE,
 		"starting": STARTING_RESOURCES,

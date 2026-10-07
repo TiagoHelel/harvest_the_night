@@ -12766,3 +12766,43 @@ at the stall (0170), the generic fish resource gives way to species (0179),
 sleeping early neither lives nor credits the skipped hours (0127), the house
 tier I is redrawn at full density (A035). The owner can veto any of them before
 the loop gets there.
+
+## 0112 - Room in the test suites - done 2026-10-07
+
+What changed: 1.0 has its own pair of suites. `src/tools/headless_v1.gd` copies
+headless_check's harness (expect, GROUPS with `_completed` as each group's last
+line, `_finish()`, the 5 s watchdog); `src/tools/input_v1.gd` **extends
+input_check.gd** - that is the "some other way" the prompt asked to name: every
+tree helper (open_scene, until, click_control, hold_key, expect...) is inherited
+with the running tree and the opened scene, while `_run()`, `_finish()` and the
+watchdog are overridden, so it runs only its own cases against `V1_CASES` (not
+`CASES`: GDScript refuses a constant its parent already declares). Each suite is
+its own process, so the counters never meet. Plain helpers moved, not copied,
+into `src/tools/suite_kit.gd` (`SuiteKit.stand_the_farmer`, `SuiteKit.moved` -
+the latter was in both old suites, identical): 7 + 31 call sites repointed. No
+group or case moved; GROUPS 103 and CASES 61 untouched. Both headers say every
+group/case from 0112 lives there and that defences are handled in PREPARATION.
+`_task_0112_digest` reads game_data.gd as text and fails on any top-level
+Array/Dictionary const (typed ones too) neither named in `digest()` nor exempted
+with a reason. Run on today's file it found exactly one: **MAP_LEGEND**, which
+decides which map character is soil, water, rock or ore - design, so it went
+into `digest()` under "legend". Exempted: TARGETING, SHAPES, AIMS, DAMAGE_TYPES
+(derived enum lists) and NEIGHBOUR_STEPS (geometry). The group also fails a
+stale exemption. `_case_0112_harness` boots Main, holds a real key and checks
+the farmer turned and the world ticked.
+Files: src/tools/{headless_v1,input_v1,suite_kit}.gd, src/tools/{headless_check,input_check}.gd,
+src/tools/README.md, src/core/game_data.gd, tools/verify.py, tools/determinism_data_hash.txt
+Verify: **58 passed, 0 skipped, 0 failed in 557s** against BUDGET_S 300 (OVER BUDGET, as before: 565s last run).
+Rows: headless_check 88.4s (16173 asserts), headless_v1 0.9s (16 asserts),
+input_check 90.1s (1074 cases), input_v1 2.6s (3 cases). Sim 2728872771
+unchanged; **data 2015186086 -> 1968527100** (MAP_LEGEND joined the digest, on
+purpose, accepted with --accept).
+Tried: a scratch `const TEST_TABLE := {}` at the end of game_data.gd made
+`_task_0112_digest` fail ("not hashed: TEST_TABLE"), removing it passed again; a
+planted `return` before `_completed += 1` in the group printed "a check group did
+not finish 0 of 1 completed" and exited 1 (what verify's check_script reads),
+then removed - both run with the suite directly, not through a full verify.
+Notes: the old suites now take ~88-90 s each of the 120 s SCRIPT_TIMEOUT_S on
+this machine (the prompt measured 74 s) - nothing more goes into them. A
+headless_v1 group that needs another headless_check helper moves it into
+SuiteKit; an input_v1 case simply inherits input_check's.

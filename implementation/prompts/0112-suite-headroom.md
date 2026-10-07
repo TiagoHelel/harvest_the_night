@@ -1,7 +1,7 @@
 # 0112 - Room in the test suites
 
 - **Phase:** 9 - v1.0 groundwork
-- **Status:** todo
+- **Status:** done
 - **Depends on:** nothing
 - **Likely files:** src/tools/headless_v1.gd, src/tools/input_v1.gd, tools/verify.py, src/core/game_data.gd
 
