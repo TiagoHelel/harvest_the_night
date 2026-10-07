@@ -386,7 +386,10 @@ func _input(event: InputEvent) -> void:
 	# and both end at the same place because both go through the router.
 	if _router == null or not event.is_action_pressed(&"cancel"):
 		return
-	if _router.here() == _router.STATS or _router.here() == _router.OPTIONS:
+	# **The options screen answers its own escape** (2026-10-07): it may have
+	# something to end first - a key being listened for, a new window size
+	# waiting to be kept - and this runs before it would hear the key.
+	if _router.here() == _router.STATS:
 		_router.back()
 		MenuFocus.backed_out(self)
 		get_viewport().set_input_as_handled()

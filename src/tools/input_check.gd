@@ -5481,9 +5481,9 @@ func _case_0092_router() -> void:
 	expect(frame != null and frame.visible, "and the frame is up")
 	var options: OptionsScreen = frame as OptionsScreen
 	if options != null:
-		expect(options.tabs() == [&"game", &"access", &"video", &"audio",
+		expect(options.tabs() == [&"game", &"video", &"audio", &"access",
 			&"controls"],
-			"with the five tabs tasks 0093 to 0098 registered, in TABS order",
+			"with the five pages tasks 0093 to 0098 built, in TABS order",
 			str(options.tabs()))
 
 	await click_control("OptionsBack")
@@ -5561,6 +5561,9 @@ func _case_0093_video() -> void:
 	var was_size: String = String(settings.get_string(&"video/size"))
 	var was_cap: int = settings.get_int(&"video/max_fps")
 	var was_crisp: bool = settings.get_bool(&"video/integer_scaling")
+	settings.set_value(&"video/window_mode", 0)
+	settings.set_value(&"video/scale", 4)
+	settings.set_value(&"video/size", "")
 
 	await frames(4)
 	await tap_key(KEY_X)
@@ -5568,14 +5571,24 @@ func _case_0093_video() -> void:
 	await click_control("Menu_options")
 	await frames(4)
 	var frame: OptionsScreen = require_control("OptionsScreen") as OptionsScreen
-	await click_control("OptionsTab_video")
+	if frame == null:
+		await close_scene()
+		_completed += 1
+		return
+
+	# **Opened on the strip, on the first page** - WELCOME BACK, HERO's way in,
+	# so the first thing the keys do is choose a page.
+	expect(frame.open_tab() == &"game", "the options open on their first page",
+		String(frame.open_tab()))
+	expect(_focused() == "OptionsTab_game", "with the selection on the strip",
+		_focused())
+	# **Right along the strip turns the page.**
+	await tap_key(KEY_RIGHT)
 	await frames(3)
-	expect(frame != null and frame.tabs().has(&"video"),
-		"the options screen has a video tab",
-		str(frame.tabs()) if frame != null else "no frame")
+	expect(frame.open_tab() == &"video", "right along the strip turns to video",
+		String(frame.open_tab()))
 	var tab: OptionsVideo = locate_control("OptionsVideo") as OptionsVideo
-	expect(tab != null and tab.visible,
-		"and clicking it brings it up")
+	expect(tab != null and tab.visible, "and the video page comes up")
 	if tab == null:
 		await close_scene()
 		_completed += 1
@@ -5588,50 +5601,89 @@ func _case_0093_video() -> void:
 	expect(tab.marked_sizes() == 4, "and all four marked as multiples",
 		str(tab.marked_sizes()))
 
+	# Down from the strip is the first row.
+	await tap_key(KEY_DOWN)
+	await frames(2)
+	expect(_focused() == "VideoWindow", "down from the strip is the first row",
+		_focused())
+
 	# A frame cap is the one control with no countdown, and it lands on the
 	# engine rather than only in a file.
-	await click_control("VideoCap_120")
+	(locate_control("VideoCap") as Control).grab_focus()
 	await frames(2)
-	expect(Engine.max_fps == 120, "picking a cap caps the engine",
+	for _i in 6:
+		if Engine.max_fps == 120:
+			break
+		await tap_key(KEY_RIGHT)
+		await frames(1)
+	expect(Engine.max_fps == 120, "stepping the cap caps the engine",
 		str(Engine.max_fps))
 	expect(not tab.countdown_showing(),
 		"and asks nothing, because a cap cannot hide the screen")
-
 	expect(not tab.warning_showing(),
 		"with square pixels on, the note is the key to the marks")
 
 	# **A size is provisional.** It applies at once and asks to be kept.
-	await click_control("VideoSize_960x540")
+	var size_row := locate_control("VideoSize") as OptionRow
+	expect(size_row != null and not size_row.disabled,
+		"the size row is on while the game is in a window")
+	size_row.grab_focus()
 	await frames(2)
-	expect(settings.get_int(&"video/scale") == 2,
-		"picking a size applies it at once",
+	await tap_key(KEY_LEFT)
+	await frames(2)
+	expect(settings.get_int(&"video/scale") == 3,
+		"left on the size row picks the next size down at once",
 		str(settings.get_int(&"video/scale")))
 	expect(video.waiting(), "and starts a countdown")
-	expect(tab.countdown_showing(), "which the screen shows")
+	expect(tab.countdown_showing(), "which the page shows")
+	expect(_focused() == "VideoKeep",
+		"with the caret on KEEP, the answer for a player who can see it",
+		_focused())
 	await click_control("VideoKeep")
 	await frames(2)
 	expect(not video.waiting(), "KEEP ends it")
 	expect(not tab.countdown_showing(), "and the question goes away")
+	expect(_focused() == "VideoSize",
+		"and the selection goes back to the row that asked", _focused())
 
 	# Nobody answers this one, so it puts itself back.
-	await click_control("VideoSize_1440x810")
+	await tap_key(KEY_LEFT)
 	await frames(2)
-	expect(settings.get_int(&"video/scale") == 3, "a second size applies too",
+	expect(settings.get_int(&"video/scale") == 2, "a second size applies too",
 		str(settings.get_int(&"video/scale")))
 	video._process(video.REVERT_SECONDS + 0.5)
-	await frames(2)
-	expect(settings.get_int(&"video/scale") == 2,
+	await frames(3)
+	expect(settings.get_int(&"video/scale") == 3,
 		"and comes back on its own when nobody keeps it",
 		str(settings.get_int(&"video/scale")))
 	expect(not tab.countdown_showing(), "with the question gone with it")
 
-	# **Square pixels go last, and go back without a click.** Measured: with
+	# **Escape puts it back too** - the one key a player who cannot see the
+	# screen will press - and leaves the options up.
+	(locate_control("VideoSize") as Control).grab_focus()
+	await frames(2)
+	await tap_key(KEY_LEFT)
+	await frames(2)
+	expect(video.waiting(), "a third size waits to be kept")
+	await tap_key(KEY_ESCAPE)
+	await frames(3)
+	var router: Node = root.get_node_or_null(^"App")
+	expect(not video.waiting() and settings.get_int(&"video/scale") == 3,
+		"escape puts the old size back",
+		str(settings.get_int(&"video/scale")))
+	expect(router != null and router.here() == router.OPTIONS,
+		"and does not also close the options",
+		router.name_of(router.here()) if router != null else "no router")
+
+	# **Square pixels go last, and go back without a key.** Measured: with
 	# no window at all the viewport's transform is the identity while the
 	# stretch is INTEGER and a 0.13 scale with a 14px offset the moment it is
 	# FRACTIONAL, so every coordinate this harness clicks after that lands
 	# somewhere else. The press that turns it off is real; the one that would
-	# turn it back is the setting, which is the same path the button takes.
-	await click_control("VideoCrisp")
+	# turn it back is the setting, which is the same path the row takes.
+	(locate_control("VideoCrisp") as Control).grab_focus()
+	await frames(2)
+	await tap_key(KEY_ENTER)
 	await frames(2)
 	expect(root.content_scale_stretch
 		== Window.CONTENT_SCALE_STRETCH_FRACTIONAL,
@@ -5669,6 +5721,8 @@ func _case_0094_audio() -> void:
 			&"audio/ambience"]:
 		was[key] = float(settings.get_float(key))
 	var was_muted: bool = settings.get_bool(&"audio/muted")
+	settings.set_value(&"audio/music", 0.6)
+	settings.set_value(&"audio/ambience", 0.5)
 
 	await frames(4)
 	await tap_key(KEY_X)
@@ -5676,31 +5730,33 @@ func _case_0094_audio() -> void:
 	await click_control("Menu_options")
 	await frames(4)
 	var frame: OptionsScreen = require_control("OptionsScreen") as OptionsScreen
-	expect(frame != null and frame.tabs() == [&"game", &"access",
-			&"video", &"audio", &"controls"],
-		"the strip has all five tabs, in the order the frame names them",
+	expect(frame != null and frame.tabs() == [&"game", &"video", &"audio",
+			&"access", &"controls"],
+		"the strip has all five pages, in the order the frame names them",
 		str(frame.tabs()) if frame != null else "no frame")
 
 	await click_control("OptionsTab_audio")
 	await frames(4)
 	var tab: OptionsAudio = locate_control("OptionsAudio") as OptionsAudio
-	expect(tab != null and tab.visible, "the audio tab opens")
+	expect(tab != null and tab.visible, "the audio page opens")
 	if tab == null:
 		await close_scene()
 		_completed += 1
 		return
 
-	# **A slider writes its own key and nothing else.** Clicking the middle
-	# of one is a press and a release, which is what `drag_ended` wants.
+	# **A level steps by twentieths and writes its own key and nothing else.**
 	var others: Array = [&"audio/master", &"audio/sfx", &"audio/ambience"]
 	var untouched: Dictionary = {}
 	for key in others:
 		untouched[key] = float(settings.get_float(key))
 	audio.forget_counts()
-	await click_control("AudioLevel_music")
-	await frames(3)
+	(locate_control("Audio_music") as Control).grab_focus()
+	await frames(2)
+	await tap_key(KEY_LEFT)
+	await tap_key(KEY_LEFT)
+	await frames(2)
 	expect(is_equal_approx(settings.get_float(&"audio/music"), 0.5),
-		"the middle of the music slider is half",
+		"two steps left from sixty per cent is half",
 		"%.2f" % settings.get_float(&"audio/music"))
 	var moved: Array = []
 	for key in others:
@@ -5709,46 +5765,74 @@ func _case_0094_audio() -> void:
 	expect(moved.is_empty(), "and the other three do not move",
 		", ".join(moved))
 	expect(is_equal_approx(tab.level_shown(&"audio/music"), 0.5),
-		"the slider shows it", "%.2f" % tab.level_shown(&"audio/music"))
+		"the row shows it", "%.2f" % tab.level_shown(&"audio/music"))
 	expect(tab.value_shown(&"audio/music") == "50%",
-		"and so does the number beside it", tab.value_shown(&"audio/music"))
+		"and so does the number on it", tab.value_shown(&"audio/music"))
 
-	# **Letting go plays that slider's own bus.** Counted rather than read
-	# off `last_played()`: the ambience puts a bird in the air on its own
-	# schedule, and a check that asked what was most recent would be a check
-	# that failed on a Tuesday.
+	# **The level is heard once it stops moving** - one sound for the two
+	# steps, not two. Counted rather than read off `last_played()`: the
+	# ambience puts a bird in the air on its own schedule.
 	var want: StringName = audio.TEST_SOUNDS[&"audio/music"]
+	await until(func() -> bool: return tab.auditioning() == &"",
+		"the music level to settle")
 	expect(audio.plays_of(want) == 1,
-		"letting go of it plays the music test sound, once",
+		"and then the music test sound plays, once",
 		"%d of %s" % [audio.plays_of(want), want])
 
+	# **The right half of a value is its right arrow**, for the pointer.
 	audio.forget_counts()
-	await click_control("AudioLevel_ambience")
-	await frames(3)
+	var row := locate_control("Audio_ambience") as Control
+	await click_at(row.global_position + Vector2(row.size.x - 6.0, row.size.y * 0.5))
+	await frames(2)
+	expect(is_equal_approx(settings.get_float(&"audio/ambience"), 0.55),
+		"clicking the right of the ambience value turns it up a step",
+		"%.2f" % settings.get_float(&"audio/ambience"))
+	await until(func() -> bool: return tab.auditioning() == &"",
+		"the ambience level to settle")
 	want = audio.TEST_SOUNDS[&"audio/ambience"]
 	expect(audio.plays_of(want) == 1,
-		"and the ambience slider plays the ambience one",
+		"and the ambience bus is the one heard",
 		"%d of %s" % [audio.plays_of(want), want])
 
-	# **Mute is a state over the levels.** The done-when, through the button.
+	# **Mute is a state over the levels.** The done-when, through the row.
 	var master := AudioServer.get_bus_index("Master")
-	await click_control("AudioMute")
+	(locate_control("AudioMute") as Control).grab_focus()
+	await frames(2)
+	await tap_key(KEY_ENTER)
 	await frames(3)
-	expect(settings.get_bool(&"audio/muted"), "the mute button mutes")
+	expect(settings.get_bool(&"audio/muted"), "the mute row mutes")
 	expect(AudioServer.is_bus_mute(master), "and the master bus with it")
-	expect(tab.mute_showing(), "and the button says so")
+	expect(tab.mute_showing(), "and the row says so")
 	expect(is_equal_approx(settings.get_float(&"audio/music"), 0.5),
 		"while every level is left exactly where it was",
 		"%.2f" % settings.get_float(&"audio/music"))
-	expect(is_equal_approx(tab.level_shown(&"audio/music"), 0.5),
+	expect(tab.value_shown(&"audio/music") == "50%",
 		"including on the screen, which does not drop to nought")
 
-	await click_control("AudioMute")
+	await tap_key(KEY_ENTER)
 	await frames(3)
 	expect(not settings.get_bool(&"audio/muted"), "and unmuting unmutes")
 	expect(not AudioServer.is_bus_mute(master), "the master bus comes back")
 	expect(is_equal_approx(settings.get_float(&"audio/music"), 0.5),
 		"with the levels it left", "%.2f" % settings.get_float(&"audio/music"))
+
+	# **The page goes back the way it shipped, asked twice.**
+	var reset := tab.find_child("ResetPage", true, false) as OptionRow
+	expect(reset != null, "the page has a row that puts it back")
+	if reset != null:
+		reset.grab_focus()
+		await frames(2)
+		await tap_key(KEY_ENTER)
+		await frames(2)
+		expect(tab.reset_asking(), "the first press only asks")
+		expect(is_equal_approx(settings.get_float(&"audio/music"), 0.5),
+			"and changes nothing yet")
+		await tap_key(KEY_ENTER)
+		await frames(2)
+		expect(not tab.reset_asking(), "the second does it")
+		expect(is_equal_approx(settings.get_float(&"audio/music"), 0.8),
+			"and the music is back at its shipped level",
+			"%.2f" % settings.get_float(&"audio/music"))
 
 	for key in was:
 		settings.set_value(key, float(was[key]))
@@ -5776,7 +5860,7 @@ func _case_0095_controls() -> void:
 	await frames(4)
 	var tab: OptionsControls = locate_control(
 		"OptionsControls") as OptionsControls
-	expect(tab != null and tab.visible, "the controls tab opens")
+	expect(tab != null and tab.visible, "the controls page opens")
 	if tab == null:
 		await close_scene()
 		_completed += 1
@@ -5787,75 +5871,88 @@ func _case_0095_controls() -> void:
 		"and MOVE UP on both keys the game ships it with",
 		tab.binding_shown(&"move_up"))
 
-	# **Pressing the button is a mode, and it says so.**
-	await click_control("Bind_move_up")
+	# **Enter listens.**
+	var up := locate_control("Bind_move_up") as OptionRow
+	up.grab_focus()
 	await frames(2)
-	expect(tab.waiting_for() == &"move_up", "clicking a binding waits for one",
+	await tap_key(KEY_ENTER)
+	await frames(2)
+	expect(tab.waiting_for() == &"move_up", "Enter on a binding listens for one",
 		String(tab.waiting_for()))
 	expect(tab.binding_shown(&"move_up") == "PRESS A KEY",
-		"and the row says it is waiting", tab.binding_shown(&"move_up"))
+		"and the row says it is listening", tab.binding_shown(&"move_up"))
 
-	# **A clash is refused with the clash named**, through the screen.
+	# **A taken key is refused by name, and the row goes on listening** for
+	# another, so a clash costs one key and not a trip back to Enter.
 	await tap_key(KEY_B)
 	await frames(3)
-	expect(tab.waiting_for() == &"", "a key ends the wait")
 	expect(tab.message_shown().contains("BUILD MODE"),
-		"and a taken key is refused by name", tab.message_shown())
-	expect(tab.binding_shown(&"move_up") == "W / UP",
-		"with the old binding still on the row",
-		tab.binding_shown(&"move_up"))
+		"a taken key is refused by name", tab.message_shown())
+	expect(tab.waiting_for() == &"move_up",
+		"and the row is still listening", String(tab.waiting_for()))
 
-	# **BACK gets out of a rebind without closing the screen**, which is why
-	# the tab listens before the options frame does.
+	# **Escape gives up** - and leaves the options screen up rather than
+	# going back through it.
 	var router: Node = root.get_node_or_null(^"App")
-	await click_control("Bind_move_up")
-	await frames(2)
 	await tap_key(KEY_ESCAPE)
 	await frames(3)
-	expect(tab.waiting_for() == &"", "BACK ends the wait")
+	expect(tab.waiting_for() == &"", "escape ends the listening")
 	expect(router != null and router.here() == router.OPTIONS,
 		"and leaves the options screen up rather than going back through it",
 		router.name_of(router.here()) if router != null else "no router")
 	expect(tab.binding_shown(&"move_up") == "W / UP", "binding nothing")
 
-	# A free key is taken, and the row offers to put it back.
+	# **A free key is taken**, here by the pointer: a click on a binding
+	# listens the same as Enter does.
 	await click_control("Bind_move_up")
 	await frames(2)
+	expect(tab.waiting_for() == &"move_up", "a click on a binding listens too")
 	await tap_key(KEY_G)
 	await frames(3)
-	expect(tab.binding_shown(&"move_up") == "G",
-		"a free key is taken", tab.binding_shown(&"move_up"))
-	expect(tab.reset_showing(&"move_up"),
-		"and the row that moved offers to go back")
+	expect(tab.binding_shown(&"move_up") == "G *",
+		"a free key is taken, and the row is marked as moved",
+		tab.binding_shown(&"move_up"))
+	expect(tab.reset_showing(&"move_up"), "the moved row says so")
 	expect(not tab.reset_showing(&"move_down"),
-		"while a row that did not does not - absent, not greyed")
+		"while a row that did not move does not")
 	expect(tab.reset_all_showing(), "and RESET ALL is there now")
+	expect(tab.message_shown() == I18n.t(&"CTL_RESET_HINT"),
+		"with the line under the page saying how to undo it",
+		tab.message_shown())
 
-	# **And it is somewhere a player can see it.** The list is a scrolling one
-	# inside a frame that grows to fit, so a scroll given the whole height
-	# does not overflow the frame - it makes the frame taller, and pushes the
-	# message line and this button off the bottom of a 270 pixel screen. So
-	# the question is the viewport, not the panel. A picture cannot answer it
-	# either, because neither part is visible until something is rebound.
+	# **Everything is on the screen**, and the bottom of a list that scrolls
+	# comes into it when the selection gets there.
 	var screen := Rect2(Vector2.ZERO, Vector2(get_viewport_size()))
-	for named in ["OptionsFrame", "ControlsResetAll", "ControlsMessage",
-			"OptionsBack"]:
-		var part := require_control(named) as Control
+	for named in ["OptionsFrame", "PageNote", "OptionsBack"]:
+		var part := locate_control(named) as Control
+		if named == "PageNote":
+			part = tab.find_child("PageNote", true, false) as Control
 		expect(part != null and screen.encloses(part.get_global_rect()),
 			"'%s' is on the screen, not off the bottom of it" % named,
 			"%s in %s" % [str(part.get_global_rect()) if part != null
 				else "?", str(screen)])
+	var everything := locate_control("ControlsResetAll") as Control
+	everything.grab_focus()
+	await frames(4)
+	var scroll := tab.find_child("PageScroll", true, false) as Control
+	expect(scroll != null and scroll.get_global_rect().grow(1.0).encloses(
+			everything.get_global_rect()),
+		"RESET ALL scrolls into view when the selection reaches it",
+		"%s in %s" % [str(everything.get_global_rect()),
+			str(scroll.get_global_rect()) if scroll != null else "?"])
 
-	await click_control("Reset_move_up")
+	# **Left or right on a moved row puts it back.**
+	up.grab_focus()
+	await frames(4)
+	await tap_key(KEY_LEFT)
 	await frames(3)
 	expect(tab.binding_shown(&"move_up") == "W / UP", "and it goes back",
 		tab.binding_shown(&"move_up"))
 	expect(not tab.reset_all_showing(), "with nothing left to reset")
 	await close_scene()
 
-	# **A rebound key works immediately**, which is the done-when - and the
-	# only honest way to answer it is to press the new key at the game and
-	# watch the game do the thing.
+	# **The key it was given works in a run**, through the router, and
+	# keeps working after the input map is rebuilt from the settings.
 	actions.bind(&"stats", _key_event(KEY_G))
 	await open_scene(MAIN_SCENE)
 	router = root.get_node_or_null(^"App")
@@ -5874,7 +5971,6 @@ func _case_0095_controls() -> void:
 		"while the key it used to be on now does nothing",
 		router.name_of(router.here()))
 
-	# And after the input map is built again, which is the other half.
 	InputMap.action_erase_events("stats")
 	actions.apply()
 	await tap_key(KEY_G)
@@ -5889,6 +5985,12 @@ func _case_0095_controls() -> void:
 	await frames(2)
 	await close_scene()
 	_completed += 1
+
+
+## The name of whatever has the keyboard, or "".
+func _focused() -> String:
+	var owner := root.gui_get_focus_owner()
+	return String(owner.name) if owner != null else ""
 
 
 ## The size the game is drawn at, off the viewport rather than typed here.
@@ -6177,27 +6279,30 @@ func _case_0097_language() -> void:
 	await click_control("Menu_options")
 	await frames(4)
 	var tab: OptionsGame = locate_control("OptionsGame") as OptionsGame
-	expect(tab != null and tab.visible, "the game tab opens first")
+	expect(tab != null and tab.visible, "the game page opens first")
 	if tab == null:
 		await close_scene()
 		_completed += 1
 		return
 	expect(tab.choices() == I18n.LOCALES.size(),
-		"with one button per language", str(tab.choices()))
+		"with every language to step through", str(tab.choices()))
 	expect(tab.language_shown() == "en", "and English on",
 		tab.language_shown())
 
-	# **Switching language updates every visible screen**, which is the
-	# done-when. Not a restart, not a reload: `Locale` walks the tree and
-	# asks everything that can relabel to do it.
-	await click_control("Language_pt_BR")
+	# **Right on the language row is the next language**, and the whole game
+	# changes with it - the row that was just changed included.
+	(locate_control("GameLanguage") as Control).grab_focus()
+	await frames(2)
+	await tap_key(KEY_RIGHT)
 	await frames(4)
 	expect(String(settings.get_string(&"gameplay/language")) == "pt_BR",
-		"picking Portuguese writes the setting",
+		"stepping the language writes the setting",
 		String(settings.get_string(&"gameplay/language")))
 	expect(I18n.locale() == "pt_BR", "and the table follows", I18n.locale())
-	expect(tab.language_shown() == "pt_BR", "and the tab says so",
+	expect(tab.language_shown() == "pt_BR", "and the page says so",
 		tab.language_shown())
+	expect(_focused() == "GameLanguage",
+		"with the selection still on the row it changed", _focused())
 
 	var back: Button = require_control("OptionsBack")
 	expect(back != null and back.text == "VOLTAR",
@@ -6207,8 +6312,6 @@ func _case_0097_language() -> void:
 	expect(title != null and title.text == "OPÇÕES",
 		"and the heading with it", title.text if title else "")
 
-	# **A screen that was not open when the language changed**, which is the
-	# other half of "every visible screen": the menu underneath.
 	await click_control("OptionsBack")
 	await frames(4)
 	new_run = require_control("Menu_new")
@@ -6216,7 +6319,6 @@ func _case_0097_language() -> void:
 		"the menu behind it came back in Portuguese too",
 		new_run.text if new_run else "")
 
-	# And the run's own screens, which were never on screen at all.
 	settings.set_value(&"gameplay/language", "pt_BR")
 	await close_scene()
 	await open_scene(MAIN_SCENE)
@@ -6231,6 +6333,18 @@ func _case_0097_language() -> void:
 	expect(night_button != null and night_button.text == "SWITCH TO NIGHT",
 		"and back again without reloading anything",
 		night_button.text if night_button else "")
+
+	# **The night speed on the game page is the one the run uses**, and it
+	# reaches a run that is up behind the options.
+	var driver: SimDriver = _scene.get_node("%SimDriver")
+	var was_speed: int = settings.get_int(&"gameplay/night_speed")
+	settings.set_value(&"gameplay/night_speed", 1)
+	await frames(2)
+	settings.set_value(&"gameplay/night_speed", 2)
+	await frames(2)
+	expect(driver.speed == 2, "a speed written to the setting is the run's speed",
+		str(driver.speed))
+	settings.set_value(&"gameplay/night_speed", was_speed)
 	await close_scene()
 	_completed += 1
 func _case_0098_access() -> void:
@@ -6252,27 +6366,29 @@ func _case_0098_access() -> void:
 	await click_control("OptionsTab_access")
 	await frames(4)
 	var tab: OptionsA11y = locate_control("OptionsA11y") as OptionsA11y
-	expect(tab != null and tab.visible, "the access tab opens")
+	expect(tab != null and tab.visible, "the access page opens")
 	if tab == null:
 		await close_scene()
 		_completed += 1
 		return
-	expect(tab.rows() == A11y.KEYS.size(),
-		"with a row for every setting it owns", str(tab.rows()))
+	expect(tab.rows_count() == A11y.KEYS.size(),
+		"with a row for every setting it owns", str(tab.rows_count()))
 
-	# **Shake off is shake off**, read where it is used rather than where it
-	# was written.
-	await click_control("Access_screen_shake_0")
+	# **Past the end of a list is its start**, so FULL steps round to OFF.
+	(locate_control("Access_screen_shake") as Control).grab_focus()
+	await frames(2)
+	await tap_key(KEY_RIGHT)
 	await frames(3)
 	expect(is_equal_approx(settings.get_float(&"a11y/screen_shake"), 0.0),
-		"turning the shake off writes nought",
+		"stepping the shake past FULL comes round to OFF",
 		"%.2f" % settings.get_float(&"a11y/screen_shake"))
 	expect(is_equal_approx(tab.chosen(&"a11y/screen_shake"), 0.0),
 		"and the row says so", "%.2f" % tab.chosen(&"a11y/screen_shake"))
 
-	# **High contrast reaches the kit**, and the kit reaches every screen.
 	var was_dim := UiKit.colour(UiKit.DIM)
-	await click_control("Access_high_contrast")
+	(locate_control("Access_high_contrast") as Control).grab_focus()
+	await frames(2)
+	await tap_key(KEY_ENTER)
 	await frames(4)
 	expect(UiKit.high_contrast(), "the contrast switch reaches the kit")
 	expect(UiKit.colour(UiKit.DIM) != was_dim,
@@ -6282,12 +6398,16 @@ func _case_0098_access() -> void:
 		"by getting brighter, not by changing hue",
 		"%.2f against %.2f" % [UiKit.colour(UiKit.DIM).get_luminance(),
 			was_dim.get_luminance()])
-	await click_control("Access_high_contrast")
+	(locate_control("Access_high_contrast") as Control).grab_focus()
+	await frames(2)
+	await tap_key(KEY_ENTER)
 	await frames(4)
 	expect(not UiKit.high_contrast(), "and back again")
 
-	# The slow speed, through the button.
-	await click_control("Access_slow_50")
+	# Left from NORMAL is the other end: the slowest.
+	(locate_control("Access_slow") as Control).grab_focus()
+	await frames(2)
+	await tap_key(KEY_LEFT)
 	await frames(3)
 	expect(is_equal_approx(settings.get_float(&"a11y/slow"), 0.5),
 		"the slowest speed writes a half",
@@ -6295,18 +6415,12 @@ func _case_0098_access() -> void:
 	settings.reset(&"a11y/slow")
 	await close_scene()
 
-	# **Playable with shake and flashing off.** The done-when, as far as a
-	# harness can answer it: the night still begins, still ticks and still
-	# ends, with both of the things that make a screen hard to look at gone.
 	settings.set_value(&"a11y/screen_shake", 0.0)
 	settings.set_value(&"a11y/flashing", false)
 	await open_scene(MAIN_SCENE)
 	await frames(6)
 	var driver: SimDriver = _scene.get_node("%SimDriver")
 	(driver.state["intent"] as Dictionary)["begin_night"] = true
-	# The day hands over to the preparation, which hands over to the night on
-	# its own clock - so what is waited for here is the farm leaving the day,
-	# which is what the button actually does.
 	await until(func() -> bool:
 		return int(driver.state["phase"]) != Phases.DAY,
 		"the farm leaves the day")

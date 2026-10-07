@@ -1,101 +1,79 @@
 class_name OptionsGame
-extends Control
+extends OptionsPage
 
-## The game tab. One row so far, and it is the one this task is about.
+## The game page: which language the game speaks, and how fast a night runs.
 ##
-## ## The language names itself
+## **The language applies the moment it changes**, like everything else on
+## this screen - `Locale` relabels every screen that is up, this one included,
+## so the row a player just changed is already in the language they chose.
 ##
-## PORTUGUÊS, not "Portuguese". Somebody looking for their own language is
-## looking for the word they would write, and a player who has ended up in a
-## language they cannot read needs the way out to be in a language they can.
-##
-## Changing it applies at once: `Locale` hears `Settings.changed`, loads the
-## other column of the table and walks the tree calling `relabel()` on
-## everything that has one - including this screen, which is why the buttons
-## come back in the new language rather than the one they were built in.
+## **Night speed is the HUD's speed button, written down** (2026-10-07).
+## WELCOME BACK, HERO keeps its playback speed with its other settings; this
+## game's lives on the night HUD as well, and both are the same setting, so a
+## speed chosen here is the one the button starts from - and a run that is up
+## behind the options picks it up at once (`SimDriver` listens).
 
-var _settings: Node
-
-var _label: Label
-var _choices: HBoxContainer
+var _language: OptionRow
+var _speed: OptionRow
 
 
-func _ready() -> void:
-	_settings = get_node_or_null(^"/root/Settings")
-	set_anchors_preset(Control.PRESET_FULL_RECT)
-	if _settings != null:
-		_settings.changed.connect(_on_setting)
+func _init() -> void:
+	resets = [&"gameplay/language", &"gameplay/night_speed"]
+	title_key = &"OPT_TAB_GAME"
 
-	var column := VBoxContainer.new()
-	column.name = "GameColumn"
-	column.theme_type_variation = UiKit.SPACED
-	column.set_anchors_preset(Control.PRESET_FULL_RECT)
-	add_child(column)
 
-	var row := HBoxContainer.new()
-	row.name = "GameLanguageRow"
-	row.theme_type_variation = UiKit.SPACED
-	column.add_child(row)
-
-	_label = Label.new()
-	_label.name = "GameLanguageLabel"
-	_label.custom_minimum_size = Vector2(86, 0)
-	_label.theme_type_variation = UiKit.DIM
-	row.add_child(_label)
-
-	_choices = HBoxContainer.new()
-	_choices.name = "GameLanguageChoices"
-	_choices.theme_type_variation = UiKit.SPACED
-	row.add_child(_choices)
-
-	relabel()
+func _build() -> void:
+	_language = choice_row("GameLanguage", _step_language, _language_text)
+	_speed = choice_row("GameNightSpeed", _step_speed, _speed_text)
 
 
 func relabel() -> void:
-	if _label == null:
+	if _language == null:
 		return
-	_label.text = I18n.t(&"GAME_LANGUAGE")
-	_fill()
+	_language.text = I18n.t(&"GAME_LANGUAGE")
+	_speed.text = I18n.t(&"GAME_NIGHT_SPEED")
+	say("")
+	super()
 
 
-func _fill() -> void:
-	for child in _choices.get_children():
-		_choices.remove_child(child)
-		child.queue_free()
+func _step_language(delta: int) -> void:
+	if _settings == null:
+		return
+	var next: String = String(stepped(I18n.LOCALES, I18n.locale(), delta))
+	_settings.set_value(&"gameplay/language", next)
+
+
+func _language_text() -> String:
 	var now := I18n.locale()
-	for locale in I18n.LOCALES:
-		var button := Button.new()
-		button.name = "Language_%s" % locale
-		# **Its own name, in its own language.** The only string in the game
-		# that is deliberately the same in every language.
-		button.text = String(I18n.NAMES.get(locale, locale))
-		button.toggle_mode = true
-		button.button_pressed = String(locale) == now
-		button.theme_type_variation = UiKit.TAB
-		button.custom_minimum_size = Vector2(96, 14)
-		button.focus_mode = Control.FOCUS_ALL
-		button.pressed.connect(_pick.bind(String(locale)))
-		_choices.add_child(button)
+	return String(I18n.NAMES.get(now, now))
 
 
-func _pick(locale: String) -> void:
-	if _settings != null:
-		_settings.set_value(&"gameplay/language", locale)
+func _step_speed(delta: int) -> void:
+	if _settings == null:
+		return
+	var now := int(_settings.get_int(&"gameplay/night_speed"))
+	_settings.set_value(&"gameplay/night_speed",
+		int(stepped(GameData.SPEEDS, now, delta)))
+
+
+func _speed_text() -> String:
+	var now := int(_settings.get_int(&"gameplay/night_speed")) \
+		if _settings != null else 1
+	return I18n.f(&"NHUD_SPEED", [now])
 
 
 func _on_setting(key: StringName) -> void:
-	if key == &"gameplay/language":
-		_fill()
+	if String(key).begins_with("gameplay/"):
+		refresh()
 
 
 # ------------------------------------------------------------ for the checks
 
+## The language the row says, as a locale id.
 func language_shown() -> String:
-	for child in _choices.get_children():
-		if (child as Button).button_pressed:
-			return String(child.name).replace("Language_", "")
-	return ""
+	return I18n.locale() if _language != null else ""
 
 
+## How many languages there are to step through.
 func choices() -> int:
-	return _choices.get_child_count()
+	return I18n.LOCALES.size()

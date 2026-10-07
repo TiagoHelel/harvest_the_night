@@ -12529,3 +12529,66 @@ assert "a wall falling costs less than the tick it falls on" (40875 us against
 headless reruns straight after passed 16160/16160, and nothing here touches
 the path code. input_check 1051 cases, 0 failed; sim 1242708873 and data
 2015186086 unchanged.
+
+## 2026-10-07 — An options screen like WELCOME BACK, HERO's
+
+The last part of the owner's request: an options menu with that game's
+functions and feel. Everything tasks 0093 to 0098 made settable is still
+settable; what changed is how it is laid out and walked.
+
+**One card, a strip of pages, and every setting a row.** OptionsScreen is now
+WBH's shape: the screen dimmed behind a centred card, OPTIONS, a strip of
+pages - GAME, VIDEO, AUDIO, ACCESS, CONTROLS (video and audio moved ahead of
+access) - and under it a column of `OptionRow`s (src/ui/option_row.gd): the
+name on the left, the value on the right as `< WINDOWED >`, a bar and a
+percentage for a level, the key for a binding. Up and down walk the rows (they
+flow from the strip to the rows to BACK and back), left and right change the
+row with the caret on it, Enter takes it; on the strip left and right turn the
+page, and the options always open on the first page with the selection on the
+strip, as that game's do. The pointer clicks either half of a value for its
+two arrows. The selected row is washed, its name gold, its arrows lit, with
+the caret drawn inside it (a page scrolls and would clip one outside). A line
+at the bottom says escape goes back; escape first ends whatever a page is in
+the middle of. Each page is an `OptionsPage` (src/ui/options_page.gd); a page
+that owns settings ends with RESET <PAGE> TO DEFAULTS, which asks once (the row
+turns into the question, in the warning colour) and acts on the second press.
+
+**The pages.** GAME: language (applies at once) and - new here - NIGHT SPEED,
+the night HUD's 1x/2x/4x speed written down where WBH keeps its playback
+speed; SimDriver now follows the setting while a run is up. VIDEO: window,
+size (switched off unless windowed, since borderless and fullscreen are the
+monitor's size), square pixels, vsync, frame cap, and the note that explains
+the xN marks or warns when square pixels are off. A new window or size still
+goes through `Video.try_mode`: the rows step aside for KEEP and PUT IT BACK
+with the countdown, the caret on KEEP, escape puts it back, and the answer
+returns the selection to the row that asked. AUDIO: the four levels in
+twentieths and MUTE (which keeps them); a level plays its bus's test sound
+once it has stopped moving for 0.35 s, so a run of steps is one sound. ACCESS:
+the eight A11y rows, unchanged. CONTROLS: every action under its group
+heading; Enter or a click listens for five seconds; a key another action has
+is refused by name and the row goes on listening; escape gives up; a moved
+binding is marked with a star and left or right on it puts it back (the line
+under the page says so), replacing the little X buttons; RESET ALL appears
+only when something is moved.
+
+**Escape belongs to the options screen.** The title used to close the options
+from its own `_input`, which runs before the screen could end a key listen or
+a window trial; it now leaves OPTIONS to the screen (it still closes the
+records).
+
+Checks: input_check 0092-0098 rewritten for rows - the strip and its wrap,
+down into the rows, the video trial kept, left to time out and put back by
+escape (with the options still up), the selection returning to the asking
+row, levels stepping by twentieths with one audition, a click on a value's
+right half, mute keeping the levels, the reset asking twice, a refused key
+still listening, the star and its undo, RESET ALL scrolling into view, the
+language stepping with the selection kept, night speed reaching a running
+driver, the access rows stepping round their ends. capture_menus.gd now shoots
+every page with the first row selected.
+
+Files: src/ui/{option_row,options_page,options_screen,options_game,
+options_video,options_audio,options_a11y,options_controls,menu_focus,ui_kit,
+sim_driver,title_screen}.gd, assets/locale/strings.csv (6 new rows, CTL_RESET_ONE
+gone with the X buttons, AUD_NOTE_TRY reworded), src/tools/{input_check,
+capture_menus}.gd, implementation/shots/menus/.
+Verify: **55 passed, 0 skipped, 0 failed** in 534 s; 16162 headless asserts, 1069 input cases, 405 strings that fit; sim 1242708873 and data 2015186086 unchanged.

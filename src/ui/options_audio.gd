@@ -1,35 +1,22 @@
 class_name OptionsAudio
-extends Control
+extends OptionsPage
 
-## The audio tab: four levels, a mute, and a sound on each of them.
+## The audio page: four levels and a mute.
 ##
-## Like the video tab it owns no policy. `Audio` already had all of it - the
-## four keys, which bus each turns, the rule that zero is silence rather than
-## eighty decibels down, and re-applying on every change since task 0083. What
-## was missing was somewhere to turn them.
+## **One row per bus, and the bus is heard as it moves.** A level is a number
+## nobody can judge in silence, so each one plays its own test sound - the
+## sound that bus carries - a moment after the level stops moving, so a run of
+## twenty steps is one sound and not twenty. Which sound is `Audio`'s
+## (`TEST_SOUNDS`); this only says when.
 ##
-## ## A number with no sound on it is a number nobody can set
-##
-## "Ambience 0.4" means nothing on its own: the only way to know whether it is
-## right is to hear it against the other three. So letting go of a slider
-## plays that slider's own bus, which is the difference between a settings
-## screen and a form.
-##
-## ## Mute is not a zero slider
-##
-## They silence the same speaker and they are not the same thing. A zero
-## slider is a level, and comes back as zero. Mute is a state over the top of
-## whatever the levels are, and comes back to them - so the sliders stay live
-## while muted, and the numbers stay on the screen rather than dropping to
-## nought. `Audio.is_silent` is where that actually lives; this draws it.
+## **Mute keeps the levels.** It is a switch over the top of them, not four
+## sliders sent to zero - turning it off brings back exactly the mix that was
+## there, which is what anybody who muted for a phone call wants.
 
-## The four, in the order they belong in: the one that governs the others
-## first, then loudest to quietest.
+## The levels this page shows, in the order it shows them.
 const KEYS: Array = [&"audio/master", &"audio/music", &"audio/sfx",
 	&"audio/ambience"]
 
-## What each is called on the screen. `audio/sfx` is "EFFECTS" because that is
-## what the task calls it and what a player would.
 const LABELS: Dictionary = {
 	&"audio/master": &"AUD_MASTER",
 	&"audio/music": &"AUD_MUSIC",
@@ -37,148 +24,82 @@ const LABELS: Dictionary = {
 	&"audio/ambience": &"AUD_AMBIENCE",
 }
 
-## Twenty notches across. Fine enough to find a level, coarse enough that a
-## keyboard can cross the slider without holding the key down.
+## One step of a level: twenty steps from silent to full.
 const STEP := 0.05
 
+## How long a level has to stop moving before its test sound plays.
+const SETTLE_SECONDS := 0.35
+
 var _audio: Node
-var _settings: Node
+var _levels: Dictionary = {}
+var _mute: OptionRow
 
-var _sliders: Dictionary = {}
-var _readouts: Dictionary = {}
-var _mute: Button
-var _note: Label
+## The level waiting to be heard, and how long until it is.
+var _audition_key := &""
+var _audition_left := 0.0
 
 
-func _ready() -> void:
+func _init() -> void:
+	resets = KEYS + [&"audio/muted"]
+	title_key = &"OPT_TAB_AUDIO"
+
+
+func _build() -> void:
 	_audio = get_node_or_null(^"/root/Audio")
-	_settings = get_node_or_null(^"/root/Settings")
-	set_anchors_preset(Control.PRESET_FULL_RECT)
-	if _settings != null:
-		_settings.changed.connect(_on_setting)
-		_settings.reloaded.connect(_fill)
-
-	var column := VBoxContainer.new()
-	column.name = "AudioColumn"
-	column.set_anchors_preset(Control.PRESET_FULL_RECT)
-	add_child(column)
-
 	for key in KEYS:
-		_build_row(column, key)
-
-	var muting := HBoxContainer.new()
-	muting.name = "AudioMuteRow"
-	muting.theme_type_variation = UiKit.SPACED
-	column.add_child(muting)
-	var label := Label.new()
-	label.text = I18n.t(&"AUD_MUTE")
-	label.custom_minimum_size = Vector2(76, 0)
-	label.theme_type_variation = UiKit.DIM
-	muting.add_child(label)
-	_mute = Button.new()
-	_mute.name = "AudioMute"
-	_mute.toggle_mode = true
-	_mute.custom_minimum_size = Vector2(40, 14)
-	_mute.focus_mode = Control.FOCUS_ALL
-	_mute.pressed.connect(_toggle_mute)
-	muting.add_child(_mute)
-
-	_note = Label.new()
-	_note.name = "AudioNote"
-	_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	_note.custom_minimum_size = Vector2(330, 16)
-	_note.theme_type_variation = UiKit.DIM
-	column.add_child(_note)
-
-	_fill()
+		var bare := String(key).get_slice("/", 1)
+		_levels[key] = slider_row("Audio_%s" % bare, _step_level.bind(key),
+			_level_text.bind(key), _level.bind(key))
+	_mute = toggle_row("AudioMute", &"audio/muted")
 
 
-func _build_row(column: VBoxContainer, key: StringName) -> void:
-	var bare := String(key).get_slice("/", 1)
-	var row := HBoxContainer.new()
-	row.name = "Audio%sRow" % bare.capitalize()
-	row.theme_type_variation = UiKit.SPACED
-	column.add_child(row)
-
-	var label := Label.new()
-	label.text = I18n.t(LABELS[key])
-	label.custom_minimum_size = Vector2(76, 0)
-	label.theme_type_variation = UiKit.DIM
-	row.add_child(label)
-
-	var slider := HSlider.new()
-	slider.name = "AudioLevel_%s" % bare
-	slider.min_value = 0.0
-	slider.max_value = 1.0
-	slider.step = STEP
-	slider.custom_minimum_size = Vector2(180, 12)
-	slider.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-	slider.focus_mode = Control.FOCUS_ALL
-	slider.value_changed.connect(_moved.bind(key))
-	# **On release, not on every notch.** A slider dragged from nought to one
-	# would otherwise fire twenty test sounds, and `Audio`'s same-frame dedupe
-	# would not stop them because they are twenty different frames.
-	slider.drag_ended.connect(_let_go.bind(key))
-	row.add_child(slider)
-	_sliders[key] = slider
-
-	var readout := Label.new()
-	readout.name = "AudioValue_%s" % bare
-	readout.custom_minimum_size = Vector2(28, 0)
-	readout.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-	row.add_child(readout)
-	_readouts[key] = readout
+func relabel() -> void:
+	if _mute == null:
+		return
+	for key in KEYS:
+		(_levels[key] as OptionRow).text = I18n.t(LABELS[key])
+	_mute.text = I18n.t(&"AUD_MUTE")
+	super()
 
 
-# ---------------------------------------------------------------- the state
-
-func _fill() -> void:
-	if _settings == null:
+func refresh() -> void:
+	super()
+	if _mute == null or _settings == null:
 		return
 	var muted := bool(_settings.get_bool(&"audio/muted"))
 	for key in KEYS:
-		var level := float(_settings.get_float(key))
-		var slider: HSlider = _sliders[key]
-		if not is_equal_approx(slider.value, level):
-			slider.set_value_no_signal(level)
-		var readout: Label = _readouts[key]
-		readout.text = "%d%%" % int(round(level * 100.0))
-		# **The numbers stay** while muted, faint rather than gone: they are
-		# still what the game will sound like the moment it comes back.
-		readout.theme_type_variation = UiKit.FAINT if muted else UiKit.DIM
-	_mute.button_pressed = muted
-	_mute.text = I18n.t(&"OPT_ON") if muted else I18n.t(&"OPT_OFF")
-	_note.text = I18n.t(&"AUD_NOTE_MUTED" if muted else &"AUD_NOTE_TRY")
+		(_levels[key] as OptionRow).urgent = false
+	say(I18n.t(&"AUD_NOTE_MUTED" if muted else &"AUD_NOTE_TRY"))
 
 
-func _on_setting(key: StringName) -> void:
-	if String(key).begins_with("audio/"):
-		_fill()
-
-
-# --------------------------------------------------------------- the clicks
-
-func _moved(value: float, key: StringName) -> void:
-	if _settings != null:
-		_settings.set_value(key, snappedf(value, STEP))
-
-
-## Letting go plays the bus that was being adjusted.
-func _let_go(changed: bool, key: StringName) -> void:
-	if not changed:
+func _process(delta: float) -> void:
+	if _audition_key == &"":
 		return
-	_audition(key)
+	_audition_left -= delta
+	if _audition_left <= 0.0:
+		var key := _audition_key
+		_audition_key = &""
+		_audition(key)
 
 
-## Unmuting says so out loud; muting has nothing to say.
-func _toggle_mute() -> void:
+func _step_level(delta: int, key: StringName) -> void:
 	if _settings == null:
 		return
-	_settings.set_value(&"audio/muted", _mute.button_pressed)
-	if not _mute.button_pressed:
-		_audition(&"audio/master")
+	var level := clampf(_level(key) + STEP * float(delta), 0.0, 1.0)
+	_settings.set_value(key, snappedf(level, STEP))
+	_audition_key = key
+	_audition_left = SETTLE_SECONDS
 
 
+func _level(key: StringName) -> float:
+	return float(_settings.get_float(key)) if _settings != null else 0.0
+
+
+func _level_text(key: StringName) -> String:
+	return "%d%%" % int(round(_level(key) * 100.0))
+
+
+## Play the sound a bus carries, so a level is heard rather than read.
 func _audition(key: StringName) -> void:
 	if _audio == null:
 		return
@@ -187,29 +108,26 @@ func _audition(key: StringName) -> void:
 		_audio.play(id)
 
 
-# ----------------------------------------------------------- for the checks
+func _on_setting(key: StringName) -> void:
+	if String(key).begins_with("audio/"):
+		refresh()
+
+
+# ---------------------------------------------------------- for the checks
 
 func level_shown(key: StringName) -> float:
-	var slider: HSlider = _sliders.get(key, null)
-	return slider.value if slider != null else -1.0
+	return _level(key) if _levels.has(key) else -1.0
 
 
 func value_shown(key: StringName) -> String:
-	var readout: Label = _readouts.get(key, null)
-	return readout.text if readout != null else ""
+	var row: OptionRow = _levels.get(key, null)
+	return row.value_text() if row != null else ""
 
 
 func mute_showing() -> bool:
-	return _mute != null and _mute.button_pressed
+	return _settings != null and bool(_settings.get_bool(&"audio/muted"))
 
 
-## Say it all again in whatever language is up now.
-func relabel() -> void:
-	if _mute == null:
-		return
-	for key in KEYS:
-		var row := _sliders[key].get_parent() as HBoxContainer
-		(row.get_child(0) as Label).text = I18n.t(LABELS[key])
-	var muting := _mute.get_parent() as HBoxContainer
-	(muting.get_child(0) as Label).text = I18n.t(&"AUD_MUTE")
-	_fill()
+## Which level is waiting to be heard, for a check that wants to watch it.
+func auditioning() -> StringName:
+	return _audition_key

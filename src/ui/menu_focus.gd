@@ -50,6 +50,7 @@ static func wire(nodes: Array, wrap: bool = true) -> void:
 			button.set_meta(WIRED, true)
 			button.mouse_entered.connect(_point.bind(button))
 			button.focus_entered.connect(_selected.bind(button))
+			button.focus_exited.connect(_left.bind(button))
 			button.pressed.connect(_taken.bind(button))
 		# **A switched-off entry is passed over**, by the keys and the pointer
 		# both - it is still on the list, so the player can read what it is.
@@ -76,6 +77,12 @@ static func select_first(nodes: Array) -> void:
 		if button != null and button.visible and not button.disabled:
 			button.grab_focus()
 			return
+
+
+## The tick of a value changing under the keys or the pointer - a row of the
+## options screen stepping - which is the same small sound as the caret moving.
+static func changed(from: Node) -> void:
+	_play(from, MOVE)
 
 
 ## The sound of backing out, for whoever handles `cancel`.
@@ -113,7 +120,18 @@ static func _selected(button: Button) -> void:
 		button.add_child(caret)
 	caret.position = Vector2(-CARET_GAP - CARET_SIZE.x,
 		floorf((button.size.y - CARET_SIZE.y) * 0.5))
-	caret.visible = true
+	# A row that draws its own pointer - an options row, inside a page that
+	# scrolls - keeps this one hidden; the sounds are the same either way.
+	caret.visible = not button.has_method(&"draws_own_caret")
+
+
+## **The caret is where the focus is, and nowhere else.** A screen with two
+## columns - a page of rows and a Back button under it - would otherwise keep
+## a caret on the row the selection just left.
+static func _left(button: Button) -> void:
+	var caret := button.get_node_or_null(^"Caret") as Control
+	if caret != null:
+		caret.visible = false
 
 
 static func _taken(button: Button) -> void:

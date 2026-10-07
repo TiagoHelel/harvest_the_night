@@ -202,6 +202,20 @@ const SPACED := &"Spaced"
 const OWNED := &"Owned"
 const PORCH_HINT := &"PorchHint"
 
+## A line of the options screen (`OptionRow`): no frame until it is pointed at
+## or selected, then a quiet wash, with the caret in the margin and the
+## value's arrows lit. Its own variation because a row is the whole width of
+## the card, and a drawn key that wide would be a slab.
+const OPTION := &"OptionRow"
+
+## How far an options row holds its name in from its left edge - room for the
+## caret it draws there.
+const OPTION_INDENT := 8
+
+## A heading between rows of options - a group of controls: gold words, no
+## frame, not a thing to stand on.
+const OPTION_HEADING := &"OptionHeading"
+
 ## A column of menu entries - the title's, the pause menu's - with a little
 ## air between them. See `MENU_GAP`.
 const STACKED := &"Stacked"
@@ -385,6 +399,37 @@ static func _dress_buttons(out: Theme) -> void:
 	out.set_color(&"font_hover_pressed_color", &"Button",
 		PaletteData.COLOURS[&"ink"])
 	out.set_color(&"font_disabled_color", &"Button", colour(FAINT))
+
+	# **An options row** - see `OPTION`. The wash is the selection; the name
+	# is dim until the row is stood on, then the body colour, then gold.
+	var nothing := Color(0, 0, 0, 0)
+	out.set_type_variation(OPTION, &"Button")
+	# Eight pixels in on the left, so the caret the row draws for itself sits
+	# inside it: a page scrolls, and a scroll clips anything left of its rows.
+	for state in ["normal", "disabled", "hover", "pressed", "focus"]:
+		var fill := nothing
+		match state:
+			"hover":
+				fill = _wash(&"night_light", 0.55)
+			"pressed":
+				fill = _wash(&"night_light", 0.95)
+			"focus":
+				fill = _wash(&"night_light", 0.80)
+		var box := _flat(fill) as StyleBoxFlat
+		box.content_margin_left = OPTION_INDENT
+		out.set_stylebox(StringName(state), OPTION, box)
+	out.set_color(&"font_color", OPTION, colour(DIM))
+	out.set_color(&"font_hover_color", OPTION, colour())
+	out.set_color(&"font_focus_color", OPTION, colour(WARM))
+	out.set_color(&"font_pressed_color", OPTION, colour(WARM))
+	out.set_color(&"font_hover_pressed_color", OPTION, colour(WARM))
+	out.set_color(&"font_disabled_color", OPTION, colour(FAINT))
+	out.set_type_variation(OPTION_HEADING, &"Button")
+	for state in BUTTON_STATES + ["focus"]:
+		out.set_stylebox(StringName(state), OPTION_HEADING, _flat(nothing))
+	for colour_name in [&"font_color", &"font_hover_color", &"font_focus_color",
+			&"font_pressed_color", &"font_disabled_color"]:
+		out.set_color(colour_name, OPTION_HEADING, colour(MONEY))
 
 	# **The button that does something that cannot be undone.** Red letters on
 	# the same key, so the one entry in a question that throws a run away does

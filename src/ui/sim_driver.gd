@@ -69,8 +69,20 @@ var _accumulator := 0.0
 var _hold := 0.0
 
 
-## The remembered speed, or the one the game ships with.
+## The remembered speed, or the one the game ships with - and, since the
+## options page writes the same setting (2026-10-07), whatever it is changed
+## to while a run is up.
 func _take_speed() -> void:
+	var settings := _settings()
+	if settings != null:
+		set_speed(int(settings.get_int(&"gameplay/night_speed")))
+		if not settings.changed.is_connected(_on_setting):
+			settings.changed.connect(_on_setting)
+
+
+func _on_setting(key: StringName) -> void:
+	if key != &"gameplay/night_speed":
+		return
 	var settings := _settings()
 	if settings != null:
 		set_speed(int(settings.get_int(&"gameplay/night_speed")))

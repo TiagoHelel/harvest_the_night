@@ -82,6 +82,12 @@ func _run() -> void:
 	if options != null and options.has_method("tab_names"):
 		for tab in options.tab_names():
 			options.show_tab(StringName(tab))
+			await _settle(2)
+			# The selection on the page's first row, the way a player who
+			# pressed down from the strip sees it.
+			var rows: Array = options.page().entries()
+			if not rows.is_empty():
+				(rows[0] as Control).grab_focus()
 			await _settle(3)
 			await _shoot(folder, "options_%s" % tab)
 	root.remove_child(main)
