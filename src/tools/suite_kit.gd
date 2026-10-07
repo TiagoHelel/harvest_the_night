@@ -28,3 +28,13 @@ static func stand_the_farmer(state: Dictionary, cell: Vector2i) -> void:
 ## the horde.
 static func moved(cell: Vector2i) -> Vector2i:
 	return cell + GameData.PLAYER_START - Vector2i(16, 8)
+
+
+## The first cell in reading order a defence could go on, skipping tilled
+## soil; `(-1, -1)` when there is none.
+static func any_buildable(state: Dictionary) -> Vector2i:
+	for idx in Grid.CELLS:
+		var cell := Grid.cell(idx)
+		if Farm.buildable(state, cell) and not Farming.is_tilled(state, cell):
+			return cell
+	return Vector2i(-1, -1)

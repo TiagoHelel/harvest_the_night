@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 1
+const GROUPS := 2
 
 var passed := 0
 var failed := 0
@@ -68,6 +68,7 @@ func _process(delta: float) -> bool:
 
 func _run() -> void:
 	_task_0112_digest()
+	_task_0113_repairs()
 
 
 func _finish() -> void:
@@ -157,4 +158,104 @@ func _task_0112_digest() -> void:
 		expect(tables.has(name), "exemption %s still names a table" % name)
 		expect(RegEx.create_from_string("\\b%s\\b" % name).search(body) == null,
 			"exemption %s is not also in the digest" % name)
+	_completed += 1
+
+
+## 0113 - a repair puts back what the thing really has when it is whole.
+func _task_0113_repairs() -> void:
+	# **The house, raised by 'stout timbers'.** It used to mend to the base
+	# 100 and stop, so forty of its hit points could only ever be lost.
+	var state := State.create(113113)
+	var house: Vector2i = Farm.cells_with(state, &"house")[0]
+	(state["tech_owned"] as Array).append(&"stout timbers")
+	var full := Phases.house_full(state)
+	expect(full == GameData.HOUSE_HP + 40, "stout timbers makes the house 140",
+		str(full))
+	Resources.gain(state, {GameData.FOOD: 500, GameData.WOOD: 500})
+	state["house_hp"] = GameData.HOUSE_HP
+	expect(Repair.needs_repair(state, house),
+		"a house at its old 100 of 140 is a house that wants mending")
+	expect(Interact.verb_at(state, house) == &"repair",
+		"and the farmer is offered the verb, which follows by itself",
+		str(Interact.verb_at(state, house)))
+	state["house_hp"] = full - 50
+	var back := Repair.apply_all(state, house)
+	expect(back == 50, "90 of 140 mends by exactly 50", str(back))
+	expect(int(state["house_hp"]) == full, "back to 140, not 100",
+		str(state["house_hp"]))
+	expect(not Repair.needs_repair(state, house), "and then wants nothing")
+	expect(Interact.verb_at(state, house) != &"repair",
+		"and stops offering to be mended")
+
+	# **A level three gun tower.** Placed and upgraded twice in PREPARATION,
+	# the way 0132 will still allow it, with the defence branch owned.
+	var towers := State.create(113114)
+	(towers["tech_owned"] as Array).append_array(
+		[&"true sights", &"oiled works"])
+	Resources.gain(towers, {GameData.WOOD: 500, GameData.STONE: 500,
+		GameData.IRON: 500, GameData.GUNPOWDER: 500, GameData.FOOD: 500})
+	Phases.begin_preparation(towers)
+	var top := SuiteKit.any_buildable(towers)
+	expect(Building.place(towers, &"gun_tower", top), "a gun tower goes down",
+		str(top))
+	expect(Building.upgrade(towers, top) and Building.upgrade(towers, top),
+		"and goes up twice", str(Building.level_at(towers, top)))
+	var low := SuiteKit.any_buildable(towers)
+	expect(Building.place(towers, &"gun_tower", low), "a level one beside it",
+		str(low))
+	var top_full := Repair.full_hp_at(towers, top)
+	var base_hp := int((GameData.DEFENCES[&"gun_tower"] as Dictionary)["hp"])
+	expect(top_full == 120 and base_hp == 60,
+		"level three has 120 to the table's 60", "%d, %d" % [top_full, base_hp])
+	var on := Farm.occupant(towers, top)
+	on["hp"] = top_full / 2
+	expect(Repair.damage_at(towers, top) == top_full / 2,
+		"60 of 120 is 60 missing, not none", str(Repair.damage_at(towers, top)))
+	expect(Repair.apply_all(towers, top) == top_full / 2
+		and int(on["hp"]) == top_full, "and it is mended to 120",
+		str(on["hp"]))
+	var plain := Farm.occupant(towers, low)
+	plain["hp"] = base_hp / 2
+	Repair.apply_all(towers, low)
+	expect(int(plain["hp"]) == base_hp, "a level one still stops at its 60",
+		str(plain["hp"]))
+
+	# **One full mend costs REPAIR_PERCENT of the build, at any level.** The
+	# price is shared over the levelled maximum, so a level three's hit point
+	# is cheaper and the whole of it costs the same - its own wood and iron,
+	# not the gunpowder that bought the level.
+	var build: Dictionary = (GameData.DEFENCES[&"gun_tower"] as Dictionary)["cost"]
+	for cell in [top, low]:
+		var bill := Repair.cost_at(towers, cell, Repair.full_hp_at(towers, cell))
+		for res in GameData.sorted_names(build.keys()):
+			var fair := int(build[res]) * GameData.REPAIR_PERCENT / 100
+			expect(int(bill.get(res, 0)) <= fair and int(bill.get(res, 0)) >= fair - 1,
+				"a full mend at level %d costs %d%% of the build in %s"
+				% [Building.level_at(towers, cell), GameData.REPAIR_PERCENT, res],
+				"%d against %d" % [int(bill.get(res, 0)), fair])
+		expect(not bill.has(GameData.GUNPOWDER), "and no gunpowder", str(bill))
+
+	# **'A full larder' discounts the house too.** Its note promises mending
+	# two fifths cheaper, with no exception, and it is on the house's branch.
+	var larder := State.create(113115)
+	var door: Vector2i = Farm.cells_with(larder, &"house")[0]
+	var plain_rate := Repair.per_hp_hundredths(larder, door)
+	(larder["tech_owned"] as Array).append(&"a full larder")
+	var cheap_rate := Repair.per_hp_hundredths(larder, door)
+	var pct := Tech.bonus(larder, "repair_percent", 100)
+	expect(pct == 60, "the larder's lever is 60 percent", str(pct))
+	for res in GameData.sorted_names(GameData.REPAIR_COST_PER_HP.keys()):
+		var base := int(GameData.REPAIR_COST_PER_HP[res]) \
+			* GameData.HOUSE_REPAIR_PERCENT
+		expect(int(plain_rate[res]) == base,
+			"without the larder the house pays its full rate in %s" % res,
+			str(plain_rate))
+		expect(int(cheap_rate[res]) == base * pct / 100,
+			"with it, two fifths less in %s" % res, str(cheap_rate))
+	var note := ""
+	for row in GameData.TECH_TREE:
+		if StringName((row as Dictionary)["id"]) == &"a full larder":
+			note = String((row as Dictionary).get("note", ""))
+	expect(note.contains("mending") and not note.contains("house"),
+		"and the note promises every mend, the house's included", note)
 	_completed += 1

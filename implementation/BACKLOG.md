@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`#########...............`  **111 / 296 done**
+`#########...............`  **112 / 296 done**
 
-0 doing / 185 todo / 0 blocked across 18 phases.
+0 doing / 184 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0113 - Repairs mend to the real maximum**. The whole of what is left is
+First up: **0114 - Untouched means the house the night started with**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,28 +26,26 @@ which rewrites this file for you.
 
 ## What is open
 
-185 task(s) left, the ready ones first, then what they
+184 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
-### 0113 - Repairs mend to the real maximum
+### 0114 - Untouched means the house the night started with
 
-Ready to pick up.  Likely files: `src/core/repair.gd, src/core/building.gd, src/core/game_data.gd, src/ui/world_view.gd, assets/locale/strings.csv, src/tools/headless_v1.gd, src/tools/headless_check.gd`.
+Ready to pick up.  Likely files: `src/core/rewards.gd, src/core/tech.gd, src/core/sim.gd, src/core/enemies.gd, src/ui/night_hud.gd, src/ui/result_screen.gd, src/tools/play_nights.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd, src/tools/input_check.gd`.
 
-Mending stops at the wrong number: the house comes back only to 100 when 'stout timbers' made it 140, and an upgraded tower only to its level-one hit points. A repair should put back what the thing really has when it is whole.
+With 'stout timbers' the house starts the night at 140, yet four rules still measure it against 100: it can lose 40 and still pay the untouched bonus, and the skip refusal and the danger bar read the wrong share. Every 'how whole is the house' question is asked of the house the night started with.
 
-- `Repair.damage_at`: the house is missing `Phases.house_full(state) - house_hp`, not `GameData.HOUSE_HP - house_hp`
-- A structure's maximum is its levelled one - `Building.entry_at(state, cell)`, the base row with `TOWER_LEVELS` laid over it - not `Building.entry_of(id)`, in `damage_at` and in the cap inside `Repair.apply`
-- `per_hp_hundredths` shares a structure's price over the same levelled maximum, so a full mend of a level-3 tower costs `REPAIR_PERCENT` of its build cost like any other; or the journal says why the base hit points stay the divisor. Either way the cost of one full repair is asserted
-- 'a full larder' (`repair_percent` 60, note `TECHNOTE_A_FULL_LARDER` 'mending costs two fifths less') reaches structures through `Tech.bonus` but the house branch of `per_hp_hundredths` ignores it. Decide whether the house gets the discount, make the code, the `note` in `TECH_TREE` and both languages of `TECHNOTE_A_FULL_LARDER` agree, and assert the decision. The `note` is inside `TECH_TREE`, which `digest()` hashes: rewording it moves DATA on purpose (accept it and write both numbers); leaving it alone moves nothing
-- View: `world_view.gd` `_wear_of` tints by the base-table hp while `_is_hurt` uses `WorldView.levelled_stat`; make the tint read the levelled maximum too (view only)
-- Asserts go in `headless_v1`. `Interact` offers repair through `Repair.can_mend`, so the verb follows the fix by itself - check rather than assume. An old assert that pinned the base maximum or price (`_task_0034_cooking`, `_task_0053_repair`, `_task_0057_structures` call `Repair`) is rewritten in place in `headless_check` with a comment pointing at 0113
-- Run `python tools/autoplay.py` before and after: the robot repairs everything it can, so its nights may change. SIM can only move if the determinism scenario repairs (it does not) - say which happened
+- Route through `Phases.house_full(state)`: the 'the house untouched' line in `rewards.gd` (`house_hp >= GameData.HOUSE_HP`), `Tech._earned` `&"house untouched"`, the percentage `Sim.why_not_skip` compares with `SKIP_MIN_HOUSE_PERCENT`, and `Enemies.house_fraction`
+- The view reads the same number: the night HUD house bar, its text and its `HOUSE_DANGER_PERCENT` pulse (`night_hud.gd`, `full := maxi(GameData.HOUSE_HP, 1)`), the result screen's `RES_HOUSE` line, and `play_nights.gd`'s report
+- If the tree can change between the night and its result screen, `Rewards.settle` records the full value in the payout and the screen prints that instead of recomputing it - check and say which
+- `GameData.HOUSE_HP` outside `game_data.gd` is left only in `Phases.house_full` and `Farm.initial` (a new run's house, before any tree); 0113 (a dependency) has already taken it out of `repair.gd`. `_task_0114_untouched` in `headless_v1` reads the code lines of `src/core/` and `src/ui/` as text and keeps it so, the way `_task_0095_controls` scans for raw keys
+- Update `input_check`'s house-bar case (~l.3350, it reads `str(GameData.HOUSE_HP)`) only if it now fails; its no-tree house is still 100
+- No new number: 0191's house tiers build on `house_full`. The determinism scenario owns no tech, so the comparisons give the same answers and SIM should not move - but a new key in the payout (above) is hashed and moves it if the scenario's night settles; if SIM moves, say which and accept it with both numbers. DATA does not move
 
-  - done when: `_task_0113_repairs` in `headless_v1`: with 'stout timbers' owned, food enough and the house at 90 of 140, `Repair.apply_all` on a house cell puts back exactly 50 and `needs_repair` is then false
-  - done when: A level-3 gun tower (placed and upgraded twice in PREPARATION, where 0132 will still allow it; the upgrades need 'true sights' then 'oiled works' owned - or set the occupant's `level` to 3) at 60 of 120 is mended to 120; a level-1 tower still stops at its table hp (60)
-  - done when: The house-discount decision is asserted with and without 'a full larder', and `python tools/i18n_check.py` passes
-  - done when: The journal has the autoplay table before and after
+  - done when: `_task_0114_untouched`: with 'stout timbers', a night ending at 120 of 140 pays no 'the house untouched' money and earns no 'house untouched' tech; one ending at 140 earns both
+  - done when: `Sim.why_not_skip` with 'stout timbers' allows a skip at 75 of 140 (53 %) and refuses at 65 of 140 with `[&"WHY_HOUSE_LOW", 46]`
+  - done when: `_case_0114_house_bar` in `input_v1`: a 140 house reads `140/140` on the night HUD with no danger pulse
 
 ### 0115 - Spawn ground that cannot be built shut
 
@@ -157,23 +155,6 @@ The plan promises a night played on a controller, and `project.godot` has not on
   - done when: Rebinding interact to another key keeps its pad button, and rebinding its pad button keeps the key - asserted, then reset
   - done when: `_task_0121_pad` in `headless_v1`: every action in `ACTIONS` has a joypad event in `project.godot` except the ones the assert names with a reason, every `ACT_PAD_*` key `label_of` can return is in the strings table, and no code line in `src/ui/` names a `JOY_` constant
   - done when: `python tools/i18n_check.py` passes; `python tools/shot.py 0121 options_controls` opened: the pad labels fit
-
-### 0114 - Untouched means the house the night started with
-
-Waits on 0113.  Likely files: `src/core/rewards.gd, src/core/tech.gd, src/core/sim.gd, src/core/enemies.gd, src/ui/night_hud.gd, src/ui/result_screen.gd, src/tools/play_nights.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd, src/tools/input_check.gd`.
-
-With 'stout timbers' the house starts the night at 140, yet four rules still measure it against 100: it can lose 40 and still pay the untouched bonus, and the skip refusal and the danger bar read the wrong share. Every 'how whole is the house' question is asked of the house the night started with.
-
-- Route through `Phases.house_full(state)`: the 'the house untouched' line in `rewards.gd` (`house_hp >= GameData.HOUSE_HP`), `Tech._earned` `&"house untouched"`, the percentage `Sim.why_not_skip` compares with `SKIP_MIN_HOUSE_PERCENT`, and `Enemies.house_fraction`
-- The view reads the same number: the night HUD house bar, its text and its `HOUSE_DANGER_PERCENT` pulse (`night_hud.gd`, `full := maxi(GameData.HOUSE_HP, 1)`), the result screen's `RES_HOUSE` line, and `play_nights.gd`'s report
-- If the tree can change between the night and its result screen, `Rewards.settle` records the full value in the payout and the screen prints that instead of recomputing it - check and say which
-- `GameData.HOUSE_HP` outside `game_data.gd` is left only in `Phases.house_full` and `Farm.initial` (a new run's house, before any tree); 0113 (a dependency) has already taken it out of `repair.gd`. `_task_0114_untouched` in `headless_v1` reads the code lines of `src/core/` and `src/ui/` as text and keeps it so, the way `_task_0095_controls` scans for raw keys
-- Update `input_check`'s house-bar case (~l.3350, it reads `str(GameData.HOUSE_HP)`) only if it now fails; its no-tree house is still 100
-- No new number: 0191's house tiers build on `house_full`. The determinism scenario owns no tech, so the comparisons give the same answers and SIM should not move - but a new key in the payout (above) is hashed and moves it if the scenario's night settles; if SIM moves, say which and accept it with both numbers. DATA does not move
-
-  - done when: `_task_0114_untouched`: with 'stout timbers', a night ending at 120 of 140 pays no 'the house untouched' money and earns no 'house untouched' tech; one ending at 140 earns both
-  - done when: `Sim.why_not_skip` with 'stout timbers' allows a skip at 75 of 140 (53 %) and refuses at 65 of 140 with `[&"WHY_HOUSE_LOW", 46]`
-  - done when: `_case_0114_house_bar` in `input_v1`: a 140 house reads `140/140` on the night HUD with no danger pulse
 
 ### 0119 - Tests and tools build in the build step
 
@@ -515,7 +496,7 @@ The build step has no clock. The night waits while the player builds and starts 
 
 ### 0134 - Repairing by cursor
 
-Waits on 0131, 0113, 0133.  Likely files: `src/core/interact.gd, src/core/building.gd, src/core/repair.gd, src/ui/guardian_cursor.gd, src/ui/night_hud.gd, src/ui/build_mode.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Waits on 0131, 0133.  Likely files: `src/core/interact.gd, src/core/building.gd, src/core/repair.gd, src/ui/guardian_cursor.gd, src/ui/night_hud.gd, src/ui/build_mode.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
 Repairs at night are made by pointing, not by walking. A damaged defence or the house is mended by selecting it with the cursor, paid as today, and defences are mended no other way.
 
@@ -3543,11 +3524,11 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0107** [Store assets](prompts/0107-store-assets.md)
 - [x] **0108** [The devlog and a trailer clip](prompts/0108-devlog.md)
 
-## 9 - v1.0 groundwork  (1/14)
+## 9 - v1.0 groundwork  (2/14)
 
 - [x] **0112** [Room in the test suites](prompts/0112-suite-headroom.md)
-- [ ] **0113** [Repairs mend to the real maximum](prompts/0113-repairs-full-max.md)
-- [ ] **0114** [Untouched means the house the night started with](prompts/0114-untouched-house.md) - needs 0113
+- [x] **0113** [Repairs mend to the real maximum](prompts/0113-repairs-full-max.md)
+- [ ] **0114** [Untouched means the house the night started with](prompts/0114-untouched-house.md)
 - [ ] **0115** [Spawn ground that cannot be built shut](prompts/0115-spawn-room.md)
 - [ ] **0116** [The mortar and the flamethrower, empty and upgraded](prompts/0116-mortar-flame-ammo.md)
 - [ ] **0117** [Three stale documents](prompts/0117-stale-docs.md)
@@ -3570,7 +3551,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0131** [The guardian's cursor](prompts/0131-guardian-cursor.md) - needs 0130, 0121, 0120
 - [ ] **0132** [Defences go down only at night](prompts/0132-defences-at-night.md) - needs 0131, 0119
 - [ ] **0133** [The hotbar of defences](prompts/0133-hotbar.md) - needs 0132
-- [ ] **0134** [Repairing by cursor](prompts/0134-repair-by-cursor.md) - needs 0131, 0113, 0133
+- [ ] **0134** [Repairing by cursor](prompts/0134-repair-by-cursor.md) - needs 0131, 0133
 - [ ] **0135** [The flare goes where you aim it](prompts/0135-aimed-flare.md) - needs 0131
 - [ ] **0136** [The build step waits for START](prompts/0136-start-button.md) - needs 0118, 0132, 0128
 - [ ] **0137** [The night ends at 06:00](prompts/0137-dawn-ends-night.md) - needs 0136

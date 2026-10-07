@@ -42,6 +42,22 @@ extends RefCounted
 ## nailing a plank back onto a fence, and a player who wants the wall up before
 ## the next wave should be out there rather than indoors.
 ##
+## **'A full larder' discounts the house too** (task 0113). Its note says
+## mending costs two fifths less, with no exception, and the survival branch
+## that sells it is the house's own branch - a discount that skipped the one
+## thing the branch exists to keep standing would be a note that lies.
+##
+## ## Whole means whole as it is now
+##
+## A repair puts back what the thing has when it is whole **today**: the house
+## up to `Phases.house_full()` once 'stout timbers' has raised it, a tower up
+## to its levelled hit points through `Building.entry_at()`. Until task 0113 both
+## stopped at the base table's number, so a house of 140 mended to 100 and a
+## level three gun tower to a level one's 60. A structure's price is shared
+## over that same levelled maximum, so one full mend of anything costs
+## `REPAIR_PERCENT` of what building it cost - its own materials, not the
+## upgrades': the gunpowder that bought level three is not in its walls.
+##
 ## ## All or nothing, per hit point
 ##
 ## `max_affordable()` works out how many hit points the ledger can cover and
@@ -85,31 +101,30 @@ static func percent_at(state: Dictionary, cell: Vector2i) -> int:
 ## What one hit point of this cell costs, **in hundredths of each resource**.
 ##
 ## The house answers in hundredths of its flat rate; everything else answers
-## in hundredths of its own build cost, shared out over its hit points.
+## in hundredths of its own build cost, shared out over its levelled hit
+## points. 'A full larder' takes its share off both.
 static func per_hp_hundredths(state: Dictionary,
 		cell: Vector2i) -> Dictionary:
 	var out := {}
+	var discount := Tech.bonus(state, "repair_percent", 100)
 	if is_house(state, cell):
 		for res in GameData.sorted_names(GameData.REPAIR_COST_PER_HP.keys()):
-			out[res] = int(GameData.REPAIR_COST_PER_HP[res]) \
-				* GameData.HOUSE_REPAIR_PERCENT
+			out[res] = maxi(int(GameData.REPAIR_COST_PER_HP[res])
+				* GameData.HOUSE_REPAIR_PERCENT * discount / 100, 1)
 		return out
 
-	var on := Farm.occupant(state, cell)
-	if on.is_empty():
+	var entry := Building.entry_at(state, cell)
+	if entry.is_empty():
 		return out
-	var entry: Variant = Building.entry_of(StringName(on["id"]))
-	if entry == null:
-		return out
-	var full := maxi(int((entry as Dictionary).get("hp", 0)), 1)
-	var cost: Dictionary = (entry as Dictionary)["cost"]
+	var full := maxi(int(entry.get("hp", 0)), 1)
+	var cost: Dictionary = entry["cost"]
 	for res in GameData.sorted_names(cost.keys()):
 		# `cost * 100 * percent / 100 / full`, with the hundreds cancelled.
 		# **At least one hundredth**, so nothing on the farm is free to keep
 		# standing - a wall that cost nothing to hold would make a night a
 		# contest of patience rather than of resources.
 		out[res] = maxi(int(cost[res]) * GameData.REPAIR_PERCENT
-			* Tech.bonus(state, "repair_percent", 100) / 100 / full, 1)
+			* discount / 100 / full, 1)
 	return out
 
 
@@ -139,19 +154,23 @@ static func can_mend(state: Dictionary, cell: Vector2i) -> bool:
 	return max_affordable(state, cell) > 0
 
 
-## How much is missing from whatever is on this cell. The house answers for
-## every cell it stands on.
+## How much is missing from whatever is on this cell, against what it has
+## when whole today. The house answers for every cell it stands on.
 static func damage_at(state: Dictionary, cell: Vector2i) -> int:
 	var on := Farm.occupant(state, cell)
 	if on.is_empty():
 		return 0
 	if StringName(on["id"]) == HOUSE:
-		return maxi(GameData.HOUSE_HP - int(state["house_hp"]), 0)
-	var entry: Variant = Building.entry_of(on["id"])
-	if entry == null:
-		return 0
-	var full := int((entry as Dictionary).get("hp", 0))
+		return maxi(Phases.house_full(state) - int(state["house_hp"]), 0)
+	var full := full_hp_at(state, cell)
 	return maxi(full - int(on.get("hp", full)), 0)
+
+
+## What the thing on this cell has when it is whole: its levelled hit points,
+## or 0 for nothing mendable. Not the house, whose answer is
+## `Phases.house_full()`.
+static func full_hp_at(state: Dictionary, cell: Vector2i) -> int:
+	return int(Building.entry_at(state, cell).get("hp", 0))
 
 
 ## Whether there is anything here worth spending food on.
@@ -216,8 +235,7 @@ static func apply(state: Dictionary, cell: Vector2i, hp: int) -> int:
 		state["house_hp"] = int(state["house_hp"]) + doing
 		return doing
 
-	var entry: Dictionary = Building.entry_of(on["id"])
-	var full := int(entry.get("hp", 0))
+	var full := full_hp_at(state, cell)
 	on["hp"] = mini(int(on.get("hp", full)) + doing, full)
 	return doing
 

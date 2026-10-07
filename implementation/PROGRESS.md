@@ -12806,3 +12806,48 @@ Notes: the old suites now take ~88-90 s each of the 120 s SCRIPT_TIMEOUT_S on
 this machine (the prompt measured 74 s) - nothing more goes into them. A
 headless_v1 group that needs another headless_check helper moves it into
 SuiteKit; an input_v1 case simply inherits input_check's.
+
+## 0113 - Repairs mend to the real maximum - done 2026-10-07
+
+What changed: a repair now puts back what the thing has when whole today.
+`Repair.damage_at` measures the house against `Phases.house_full()` (140 with
+'stout timbers', was the base 100) and a structure against its levelled hit
+points through a new `Repair.full_hp_at()` (`Building.entry_at`); `apply()` caps
+at the same number. `per_hp_hundredths` shares a structure's build cost over the
+levelled maximum, so one full mend costs `REPAIR_PERCENT` of the build at any
+level, in the tower's own materials (no gunpowder: the upgrades' price is not in
+its walls) - a level-3 gun tower's hit point is cheaper, its whole mend the same
+4 wood / 6 iron as a level 1's. **Decision: 'a full larder' discounts the house
+too** - its note "mending costs two fifths less" / "consertar custa dois quintos
+a menos" makes no exception and it sits on the house's own survival branch, so
+the code now matches the note; the note and both languages are unchanged and
+DATA does not move. View: `_wear_of` reads `levelled_stat(on, "hp")` like
+`_is_hurt` - but **`_wear_of` has no caller** (the `_hurt` sprites replaced the
+tint); fixed as asked, worth deleting or wiring in a later view task.
+Interact needed nothing: it offers "repair" off `Repair.can_mend`, and the new
+group checks a house at 100 of 140 is now offered the verb and stops being
+offered at 140. No old assert pinned the base maximum or price -
+`_task_0034_cooking`, `_0053_repair`, `_0057_structures` never own the tech or
+upgrade a tower before repairing - so headless_check is unchanged apart from
+`_any_buildable` moving into `SuiteKit.any_buildable` (13 call sites) for the
+new group.
+Files: src/core/repair.gd, src/ui/world_view.gd, src/tools/headless_v1.gd,
+src/tools/suite_kit.gd, src/tools/headless_check.gd
+Verify: **58 passed, 0 failed in 548s** (OVER BUDGET 300, as before); headless_check
+16173, headless_v1 42 (+26: `_task_0113_repairs`), input_check 1074, input_v1 3;
+sim 2728872771 and data 1968527100 unchanged. i18n_check: OK, 405 keys.
+Autoplay before and after - **identical**, 100 runs each (1412 s / 1410 s):
+
+    policy     won  killed by      avg night  avg house  gathered
+    balanced     0  night 8 (21x)       6.9        0.0      5281
+    economy      0  night 2 (21x)       1.8        0.0       556
+    towers       0  night 8 (20x)       6.8        0.0      5627
+    walls        0  night 8 (21x)       8.2        0.0      5426
+
+The robot repairs (autoplay.gd `Repair.apply_all`) but never owns 'stout
+timbers' or 'a full larder' while the house is hurt, nor mends an upgraded
+tower below its old cap, so none of its nights changed; SIM did not move
+because the determinism scenario does not repair. The ALARM "no policy won a
+single run" was already there before this task (it is the robot against the
+current map and curve, not this fix) - the 1.0 balance tasks (0142 the sleeping
+robot, phase 15) own it.

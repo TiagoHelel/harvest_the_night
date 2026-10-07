@@ -1708,7 +1708,7 @@ func _task_0110_refusals() -> void:
 	# A short purse names the resources, sorted, as a pile and not a sentence.
 	var broke := State.create(110002)
 	var short := Building.why_not(broke, &"gun_tower",
-		_any_buildable(broke))
+		SuiteKit.any_buildable(broke))
 	expect(_refused(short) == &"WHY_SHORT",
 		"an empty purse says what is short", str(short))
 	expect(short.size() == 2 and short[1] is Dictionary,
@@ -2229,7 +2229,7 @@ func _task_0008_farm() -> void:
 	# **Found, not written down.** This used to be a hardcoded cell, and task
 	# 0019 put the workshop on it - so the test failed for a reason that had
 	# nothing to do with what it was checking.
-	var spot := _any_buildable(state)
+	var spot := SuiteKit.any_buildable(state)
 	expect(spot != Vector2i(-1, -1), "there is somewhere to build")
 	expect(Farm.buildable(state, spot), "an empty patch of grass is buildable")
 	# **The farm, not the whole state.** Since task 0025 the farm carries a
@@ -2261,7 +2261,7 @@ func _task_0008_farm() -> void:
 	Farm.remove(state, spot)
 
 	# One grid, both realities: the night sees exactly what the day built.
-	var walled := _any_buildable(state)
+	var walled := SuiteKit.any_buildable(state)
 	Farm.place(state, walled, {"id": &"wall"})
 	Phases.begin_preparation(state)
 	Sim.advance(state, GameData.PREPARATION_TICKS)
@@ -2430,7 +2430,7 @@ func _task_0010_save() -> void:
 	Sim.advance(state, 900)
 	Resources.add(state, GameData.IRON, 17)
 	Resources.pay(state, {GameData.WOOD: 5})
-	var built_on := _any_buildable(state)
+	var built_on := SuiteKit.any_buildable(state)
 	Farm.place(state, built_on, {"id": &"gun_tower", "hp": 60})
 	Phases.begin_preparation(state)
 	Sim.advance(state, GameData.PREPARATION_TICKS + 500)
@@ -2925,14 +2925,6 @@ func _farm_hash(state: Dictionary) -> int:
 	})
 
 
-func _any_buildable(state: Dictionary) -> Vector2i:
-	for idx in Grid.CELLS:
-		var cell := Grid.cell(idx)
-		if Farm.buildable(state, cell) and not Farming.is_tilled(state, cell):
-			return cell
-	return Vector2i(-1, -1)
-
-
 ## 0019 - the workshop: wood and stone stop being things you sell.
 func _task_0019_workshop() -> void:
 	var state := State.create(81)
@@ -3239,7 +3231,7 @@ func _task_0022_reality() -> void:
 
 	# Build something and note the whole farm, so that "nothing moved" can be
 	# checked rather than eyeballed.
-	var spot := _any_buildable(state)
+	var spot := SuiteKit.any_buildable(state)
 	Farm.place(state, spot, {"id": &"gun_tower", "hp": 60})
 	var tilled: Vector2i = Farm.cells_of(state, Farm.Terrain.SOIL)[0]
 	Interact.complete(state, tilled, &"till")
@@ -3331,7 +3323,7 @@ func _task_0023_building() -> void:
 	expect(not Building.place(state, &"wall", pond), "and placing is refused")
 
 	# On grass it goes, and the cost comes out of the ledger.
-	var spot := _any_buildable(state)
+	var spot := SuiteKit.any_buildable(state)
 	var cost := Building.cost_of(&"gun_tower")
 	var wood_before := Resources.amount(state, GameData.WOOD)
 	var iron_before := Resources.amount(state, GameData.IRON)
@@ -3350,7 +3342,7 @@ func _task_0023_building() -> void:
 
 	# **Place and sell in a loop is always a loss**, never a money printer.
 	var before_loop := State.hash_of(state)
-	var loop_cell := _any_buildable(state)
+	var loop_cell := SuiteKit.any_buildable(state)
 	for _i in 5:
 		Building.place(state, &"wall", loop_cell)
 		Building.sell(state, loop_cell)
@@ -3362,7 +3354,7 @@ func _task_0023_building() -> void:
 	expect(before_loop != State.hash_of(state), "the loop was not free")
 
 	# The refund is a fraction, rounded down so the round trip always loses.
-	var refund_cell := _any_buildable(state)
+	var refund_cell := SuiteKit.any_buildable(state)
 	Building.place(state, &"wall", refund_cell)
 	var stone_before := Resources.amount(state, GameData.STONE)
 	var back := Building.sell(state, refund_cell)
@@ -3393,7 +3385,7 @@ func _task_0023_building() -> void:
 	Sim.advance(banker, int((GameData.RECIPES[&"wall_kit"] as Dictionary)["ticks"]))
 	expect(Crafting.kits(banker, &"wall") == 1, "a wall is banked")
 	var stone_banked := Resources.amount(banker, GameData.STONE)
-	var kit_cell := _any_buildable(banker)
+	var kit_cell := SuiteKit.any_buildable(banker)
 	expect(Building.place(banker, &"wall", kit_cell), "and goes down")
 	expect(Crafting.kits(banker, &"wall") == 0, "spending the kit")
 	expect(Resources.amount(banker, GameData.STONE) == stone_banked,
@@ -3414,11 +3406,11 @@ func _task_0023_building() -> void:
 	expect(Building.allowed_in_phase(nightly, &"barricade"),
 		"but a barricade can")
 	expect(_refused(Building.why_not(nightly, &"wall",
-		_any_buildable(nightly))) == &"WHY_NOT_AT_NIGHT",
+		SuiteKit.any_buildable(nightly))) == &"WHY_NOT_AT_NIGHT",
 		"and it says why")
 
 	# A barricade expires rather than quietly becoming a wall.
-	var quick := _any_buildable(nightly)
+	var quick := SuiteKit.any_buildable(nightly)
 	expect(Building.place(nightly, &"barricade", quick), "one goes down")
 	var life := int((GameData.DEFENCES[&"barricade"] as Dictionary)["lifetime_ticks"])
 	Sim.advance(nightly, life - 2)
@@ -3431,7 +3423,7 @@ func _task_0023_building() -> void:
 	# Through the intent, which is the road the autoplayer takes.
 	var driven := State.create(124)
 	Resources.gain(driven, {GameData.WOOD: 100, GameData.IRON: 100})
-	var target := _any_buildable(driven)
+	var target := SuiteKit.any_buildable(driven)
 	Building.select(driven, &"gun_tower")
 	var intent: Dictionary = driven["intent"]
 	intent["build_cell"] = [target.x, target.y]
@@ -3643,7 +3635,7 @@ func _task_0025_zombies() -> void:
 		"thirty quiet ticks rebuild nothing", str(state["flow_version"]))
 	# Through `Farm` rather than `Building`: a wall may not go up mid-wave, and
 	# what is checked here is the field noticing, not the phase rule.
-	Farm.place(state, _any_buildable(state), {"id": &"wall", "hp": 120})
+	Farm.place(state, SuiteKit.any_buildable(state), {"id": &"wall", "hp": 120})
 	Pathing.refresh(state)
 	expect(int(state["flow_version"]) > version,
 		"and a wall going up does", str(state["flow_version"]))

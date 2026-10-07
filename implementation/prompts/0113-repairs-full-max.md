@@ -1,7 +1,7 @@
 # 0113 - Repairs mend to the real maximum
 
 - **Phase:** 9 - v1.0 groundwork
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0112
 - **Likely files:** src/core/repair.gd, src/core/building.gd, src/core/game_data.gd, src/ui/world_view.gd, assets/locale/strings.csv, src/tools/headless_v1.gd, src/tools/headless_check.gd
 

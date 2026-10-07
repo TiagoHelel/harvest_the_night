@@ -1815,10 +1815,11 @@ func _pose_of(one: Dictionary) -> StringName:
 ## them - and because the shade is continuous, so a wall at a third reads
 ## differently from a wall at two thirds.
 func _wear_of(on: Dictionary, id: StringName) -> Color:
-	var entry: Variant = Building.entry_of(id)
-	if entry == null:
+	if Building.entry_of(id) == null:
 		return Color.WHITE
-	var full := int((entry as Dictionary).get("hp", 0))
+	# Against the levelled maximum, like `_is_hurt`: a level three tower at
+	# its level one hit points is a tower at half (task 0113).
+	var full := levelled_stat(on, "hp")
 	if full <= 0:
 		return Color.WHITE
 	var share := clampf(float(int(on.get("hp", full))) / float(full), 0.0, 1.0)
