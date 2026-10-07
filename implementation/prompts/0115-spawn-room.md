@@ -1,7 +1,7 @@
 # 0115 - Spawn ground that cannot be built shut
 
 - **Phase:** 9 - v1.0 groundwork
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0112
 - **Likely files:** src/core/waves.gd, src/core/enemies.gd, src/core/building.gd, src/core/state.gd, assets/locale/strings.csv, src/tools/headless_v1.gd
 

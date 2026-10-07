@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 3
+const GROUPS := 4
 
 var passed := 0
 var failed := 0
@@ -70,6 +70,7 @@ func _run() -> void:
 	_task_0112_digest()
 	_task_0113_repairs()
 	_task_0114_untouched()
+	_task_0115_spawn_room()
 
 
 func _finish() -> void:
@@ -332,3 +333,116 @@ func _task_0114_untouched() -> void:
 	expect(is_equal_approx(Enemies.house_fraction(skip), 0.5),
 		"70 of 140 is half a house", str(Enemies.house_fraction(skip)))
 	_completed += 1
+
+
+## 0115 - a spawn line cannot be built shut.
+func _task_0115_spawn_room() -> void:
+	# **The suspicion, measured before the fix**: ten fences on the east line
+	# and night 1 sent none of its twelve walkers - `Enemies.spawn` found no
+	# free cell, returned 0, and `Waves.tick` counted them as sent anyway.
+	var seed_value := 115
+	var state := State.create(seed_value)
+	Resources.gain(state, {GameData.WOOD: 5000, GameData.STONE: 5000})
+	Phases.begin_preparation(state)
+	var east := _spawn_line(0)
+	var fenced := 0
+	for cell in east:
+		if Building.place(state, &"fence", cell):
+			fenced += 1
+	expect(fenced == east.size(), "the whole east line fences over in PREPARATION",
+		"%d of %d" % [fenced, east.size()])
+
+	# A sealed line answers the free ground beyond it, never the line itself
+	# and never a cell nearer the house than the line cell it is beside.
+	# A copy: the stream is an Array, held by reference.
+	var rng_before: Array = (state["rng"] as Array).duplicate()
+	var options := Enemies.spawn_cells(state, 0)
+	expect(state["rng"] == rng_before, "asking where draws nothing from the run")
+	expect(not options.is_empty(), "a sealed line still has somewhere to stand",
+		str(options))
+	var beyond := true
+	for cell in options:
+		var c: Vector2i = cell
+		var nearest := 1 << 30
+		for line_cell in east:
+			if Grid.chebyshev(c, line_cell) <= 1:
+				nearest = mini(nearest, Pathing.distance(state, line_cell))
+		if east.has(c) or not Farm.walkable(state, c) \
+				or not Pathing.reachable(state, c) \
+				or Pathing.distance(state, c) <= nearest:
+			beyond = false
+	expect(beyond, "every one of them free, reachable and beyond the fence",
+		str(options))
+
+	# **The night accounts for every member** and ends: killed, breached,
+	# alive or still to come adds up to the night's size.
+	var guard := 0
+	while int(state["phase"]) != Phases.NIGHT and guard < 2000:
+		Sim.tick(state)
+		guard += 1
+	expect(int(state["phase"]) == Phases.NIGHT, "night falls")
+	state["house_hp"] = 100000      # so the night is won, and ends by the rule
+	var size := Waves.size_of(1, seed_value)
+	var limit := 20000
+	var ticks := 0
+	while int(state["phase"]) == Phases.NIGHT and ticks < limit:
+		Sim.tick(state)
+		ticks += 1
+	expect(int(state["phase"]) != Phases.NIGHT,
+		"and ends within %d ticks" % limit, str(ticks))
+	var to_come := Waves.remaining(state) - Entities.count(state)
+	var counted := int(state["killed"]) + int(state["breaches"]) \
+		+ Entities.count(state) + to_come
+	expect(counted == size, "killed + breached + alive + to come = the night",
+		"%d + %d + %d + %d against %d" % [int(state["killed"]),
+			int(state["breaches"]), Entities.count(state), to_come, size])
+	expect(int(state["next_entity_id"]) - 1 == size,
+		"and every member was actually placed", str(int(state["next_entity_id"]) - 1))
+
+	# **The south east line too**, seven cells.
+	var south := State.create(1151)
+	Resources.gain(south, {GameData.WOOD: 5000, GameData.STONE: 5000})
+	Phases.begin_preparation(south)
+	var line := _spawn_line(1)
+	var sealed := 0
+	for cell in line:
+		if Building.place(south, &"fence", cell):
+			sealed += 1
+	var there := Enemies.spawn_cells(south, 1)
+	expect(sealed == line.size() and not there.is_empty()
+		and there.all(func(c: Vector2i) -> bool: return not line.has(c)),
+		"a sealed south east line answers the ground beside it",
+		"%d sealed, %s" % [sealed, str(there)])
+
+	# **Part blocked is not sealed.** Nine of ten fenced: only the tenth.
+	var part := State.create(1152)
+	Resources.gain(part, {GameData.WOOD: 5000, GameData.STONE: 5000})
+	Phases.begin_preparation(part)
+	for cell in east.slice(0, east.size() - 1):
+		Building.place(part, &"fence", cell)
+	var last: Vector2i = east[east.size() - 1]
+	var left := Enemies.spawn_cells(part, 0)
+	expect(left == [last], "nine fenced leaves exactly the tenth to stand on",
+		str(left))
+
+	# **A save with a region already sealed** answers by the same rule: the
+	# rule is in the code, not in a key.
+	var loaded: Dictionary = bytes_to_var(var_to_bytes(state))
+	var fresh := State.create(seed_value)
+	Resources.gain(fresh, {GameData.WOOD: 5000, GameData.STONE: 5000})
+	Phases.begin_preparation(fresh)
+	for cell in east:
+		Building.place(fresh, &"fence", cell)
+	var saved: Dictionary = bytes_to_var(var_to_bytes(fresh))
+	expect(Enemies.spawn_cells(saved, 0) == Enemies.spawn_cells(fresh, 0)
+		and State.reconcile(loaded).is_empty(),
+		"a saved sealed farm spawns where the live one does")
+	_completed += 1
+
+
+## The cells of one `GameData.SPAWNS` region.
+func _spawn_line(where: int) -> Array:
+	var out: Array = []
+	for entry in (GameData.SPAWNS[where] as Array):
+		out.append(Vector2i(int(entry[0]), int(entry[1])))
+	return out

@@ -71,6 +71,12 @@ static func initial() -> Dictionary:
 static func spawn(state: Dictionary, kind: StringName, where: int) -> int:
 	var options := spawn_cells(state, where)
 	if options.is_empty():
+		# Nowhere on the whole farm can reach the house - which the porch,
+		# never buildable and always beside the door, makes impossible while
+		# there is a house. Loud, because a member lost here is a member lost
+		# without a trace, and that is what task 0115 closed.
+		if where >= 0 and where < GameData.SPAWNS.size():
+			push_error("Enemies.spawn: nowhere to put a %s from spawn %d" % [kind, where])
 		return 0
 	var cell: Vector2i = options[Rng.int_between(
 		state["rng"], 0, options.size() - 1)]
@@ -79,6 +85,23 @@ static func spawn(state: Dictionary, kind: StringName, where: int) -> int:
 
 ## The cells a given spawn point can use: the ones in its region that something
 ## can actually stand on and get to the house from.
+##
+## ## A spawn line cannot be built shut
+##
+## Until task 0115 a region with no free cell answered nothing, `spawn()`
+## returned 0 and `Waves.tick()` counted the member as sent anyway: ten fences
+## along the east line won night 1, every one of its twelve walkers gone. Now a
+## sealed region answers **the nearest free ground around it** - ring by ring
+## outwards, the first ring with anywhere to stand - and of that ring only the
+## cells **farther from the house than the line cell they are beside**, by the
+## flow field, when there are any. So a fence across the line is a fence they
+## arrive behind and have to come through, not a door they skip, and a ring of
+## towers around it is a ring they arrive outside. The search ends at the porch
+## at the latest, which is never buildable and is always next to the house.
+##
+## Only a sealed region does this; a region with one free cell left still
+## answers exactly that cell, so the spawn draw - one `Rng` call when somebody
+## is placed - is the one it always was.
 static func spawn_cells(state: Dictionary, where: int) -> Array:
 	# **The field first.** This asks whether a cell can reach the house, and
 	# the field is only rebuilt when something needs it - so the first spawn of
@@ -97,7 +120,42 @@ static func spawn_cells(state: Dictionary, where: int) -> Array:
 		var cell := Vector2i(int(entry[0]), int(entry[1]))
 		if Farm.walkable(state, cell) and Pathing.reachable(state, cell):
 			out.append(cell)
+	if out.is_empty():
+		return _beside_the_line(state, regions[where] as Array)
 	return out
+
+
+## The free ground nearest a sealed spawn region. See `spawn_cells`.
+static func _beside_the_line(state: Dictionary, region: Array) -> Array:
+	var line: Array = []
+	for entry in region:
+		line.append(Vector2i(int(entry[0]), int(entry[1])))
+	for radius in range(1, maxi(Grid.WIDTH, Grid.HEIGHT) + 1):
+		var seen := {}
+		var free: Array = []
+		var far: Array = []
+		for centre in line:
+			# The bar is the line cell this ring is drawn around: a fenced
+			# cell still has a field value, the cost of going home from it.
+			# One bar for the whole line was measured and is too low - two
+			# east cells sit on the road home and let the near side in.
+			var bar := Pathing.distance(state, centre) \
+				if Pathing.reachable(state, centre) else -1
+			for cell in Grid.within(centre, radius):
+				if seen.has(cell) or Grid.chebyshev(centre, cell) != radius:
+					continue
+				seen[cell] = true
+				if not Farm.walkable(state, cell) \
+						or not Pathing.reachable(state, cell):
+					continue
+				free.append(cell)
+				if bar >= 0 and Pathing.distance(state, cell) > bar:
+					far.append(cell)
+		if not far.is_empty():
+			return far
+		if not free.is_empty():
+			return free
+	return []
 
 
 # ------------------------------------------------------------------ the tick

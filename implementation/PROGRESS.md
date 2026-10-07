@@ -12883,3 +12883,49 @@ Notes: from here, a test that writes Python through a Bash heredoc can have its
 `\n` escapes turned into real newlines on this setup - task 0114's first edit of
 sim.gd came out with a literal `\n` in the code. GDScript edits go through the
 editor tool.
+
+## 0115 - Spawn ground that cannot be built shut - done 2026-10-07
+
+**The suspicion was real, and cheaper than the plan guessed: ten fences, not
+seventeen.** Before the fix, with a fence on every cell of `SPAWNS[0]` (x=68,
+y 22-31) placed in PREPARATION and night 1 run to its end, seeds 115, 2024 and
+777 all read: `Waves.size_of` 12 (all twelve from the east), spawned 0, killed 0,
+breaches 0, alive 0 - and the night **won** after 1093 ticks. `Enemies.spawn`
+found no free cell, returned 0, and `Waves.tick` counted each member as sent.
+Fix chosen: **the deterministic fallback, inside `Enemies.spawn_cells`** (still
+the one place that answers where one can stand). A region with no free reachable
+cell answers the nearest free ground around it, ring by ring outwards, and of
+the first ring with anywhere to stand only the cells farther from the house, by
+the flow field, than the line cell they are beside (when there are any). Why
+this over the alternatives: a placement refusal only covers fences *on* the
+line - a ring of impassable towers around it seals it just as well - and a
+member that waits for a free cell needs a new state key and a bound; the
+fallback closes both ways of sealing with no new state, no new string and no
+wait. One bar for the whole line was tried first and was too low: (68,22) and
+(68,23) sit on the road home at field distance 26, which let the house side
+(x=67, distances 27-31) in; per-cell bars leave exactly the 12 cells of x=69
+plus the two ends (68,21) and (68,32). After the fix the same three seeds
+spawned all 12; the undefended house fell at the tenth breach (begin_night
+resets it to `house_full`, so the reproduction's 100000 did not survive
+nightfall) with 2 still alive - 0 + 10 + 2 = 12. The search always ends at the
+porch at worst (never buildable, beside the door); `spawn()` returning 0 is now
+only "nowhere on the farm reaches the house" and it `push_error`s rather than
+losing the member quietly. A region with one free cell left answers exactly
+that cell, so the spawn draw (one `Rng` call per member placed) is unchanged
+and the determinism scenario, which seals nothing, gives the same SIM. No state
+key, so nothing for `initial()`, reconcile or `State.TABLES`: a save with a
+sealed region spawns by the same rule (asserted through a var_to_bytes trip).
+Files: src/core/enemies.gd, src/tools/headless_v1.gd
+Verify: **58 passed, 0 failed in 563s** (OVER BUDGET 300, as before); headless_check
+16173 (90.4 s - the old suite keeps creeping towards its 120 s), headless_v1 65
+(+11: `_task_0115_spawn_room` - the east line sealed accounts for all 12 within
+20000 ticks with the house held up, asking where draws nothing from the RNG,
+every answer free, reachable and beyond the fence, the seven-cell south-east
+line sealed answers beside it, nine of ten fenced leaves exactly the tenth, a
+saved sealed farm spawns where the live one does), input_check 1074, input_v1 11;
+sim 2728872771 and data 1968527100 unchanged. No refusal key was added, so no
+strings and no i18n change.
+Notes: a sealed line is still worth something to the player - the twelve arrive
+behind the fence and have to chew or walk round it - which is the "blocks and
+delays" design.md wants rather than a win button. 0157's extra regions inherit
+this through `spawn_cells`.

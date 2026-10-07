@@ -40,7 +40,7 @@ is the sort of thing this list exists to say out loud.
 
 ## What it turned out to be
 
-115 tasks over 5 days,  to 2026-10-07. One at a time, each one finished and checked before the next was started.
+116 tasks over 5 days,  to 2026-10-07. One at a time, each one finished and checked before the next was started.
 
 | # | What was built | Finished |
 |---|---|---|
@@ -159,6 +159,7 @@ is the sort of thing this list exists to say out loud.
 | 0112 | Room in the test suites | 2026-10-07 |
 | 0113 | Repairs mend to the real maximum | 2026-10-07 |
 | 0114 | Untouched means the house the night started with | 2026-10-07 |
+| 0115 | Spawn ground that cannot be built shut | 2026-10-07 |
 
 ## Every time the game changed underneath itself
 

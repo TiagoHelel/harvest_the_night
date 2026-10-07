@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`#########...............`  **113 / 296 done**
+`#########...............`  **114 / 296 done**
 
-0 doing / 183 todo / 0 blocked across 18 phases.
+0 doing / 182 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0115 - Spawn ground that cannot be built shut**. The whole of what is left is
+First up: **0116 - The mortar and the flamethrower, empty and upgraded**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,28 +26,9 @@ which rewrites this file for you.
 
 ## What is open
 
-183 task(s) left, the ready ones first, then what they
+182 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
-
-### 0115 - Spawn ground that cannot be built shut
-
-Ready to pick up.  Likely files: `src/core/waves.gd, src/core/enemies.gd, src/core/building.gd, src/core/state.gd, assets/locale/strings.csv, src/tools/headless_v1.gd`.
-
-The plan suspects that fencing every cell of a spawn line makes that side's zombies vanish: `Enemies.spawn` returns 0 when no cell is free and `Waves.tick` counts the member as sent anyway. About seventeen fences would win a night. Prove it, and if it is real, no wave member is ever lost without a trace.
-
-- Reproduce first, headless: in PREPARATION, `Building.place` a fence on every cell of `GameData.SPAWNS[0]` (ten cells on x=68), run night 1 to its end and compare `Waves.size_of(1, seed)` with `state["killed"]` plus `Entities.count`. Write the numbers in the journal whether or not the suspicion holds
-- If it holds, pick one fix and say why: `Building.why_not` refuses the last free cells of a spawn region (a new `WHY_*` key, en and pt_BR rows in `assets/locale/strings.csv`, shown by the red ghost); or a member with nowhere to stand waits in `Waves.tick` without counting as sent; or it falls back deterministically to another cell or region
-- Whatever is chosen draws from the run RNG only when it places somebody, exactly as `Enemies.spawn` does now
-- No softlock: a member that never finds a cell must not hold the night open for ever. 0137's dawn will end nights, but this task cannot lean on it
-- A save written with a region already sealed behaves by the same rule. A new state key gets a default in `initial()` and reconcile, with no `State.VERSION` bump: inside `wave` (already in `State.TABLES`) if it can live there, and a new nested Dictionary is listed in `State.TABLES` or `State.RUN_DATA`
-- Check `SPAWNS[1]` (seven cells) and a part-blocked region too: spawning still picks only among free reachable cells, and `Enemies.spawn_cells` stays the one place that answers where one can stand (0157 adds regions on this rule)
-- Hashes: the determinism scenario seals no region, so the rule alone changes nothing there - but `State.hash_of` hashes every key, so a new state key moves SIM by itself. If it moves, it is on purpose: accept it and write both numbers and why. A refusal key moves nothing; DATA does not move
-
-  - done when: `_task_0115_spawn_room` in `headless_v1`: with the east line built over as far as the rules now allow, night 1 run to its end accounts for every member - killed plus alive plus still waiting equals `Waves.size_of(1, seed)`
-  - done when: The same night ends within a bounded number of ticks in the assert, whichever fix was chosen
-  - done when: If a refusal was added, it reads in both languages and `python tools/i18n_check.py` passes
-  - done when: The journal says whether the suspicion was real, with the before numbers
 
 ### 0116 - The mortar and the flamethrower, empty and upgraded
 
@@ -917,7 +898,7 @@ Losing costs what the plan says and nothing more: the calendar moves on, the hor
 
 ### 0157 - A new side every season
 
-Waits on 0156, 0115.  Likely files: `src/core/game_data.gd (SPAWNS, SPAWN_SIDES, SIDES_BY_SEASON, check_nights), src/core/calendar.gd, src/core/endless.gd, src/core/enemies.gd, src/ui/build_mode.gd, src/ui/world_view.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/shot.gd`.
+Waits on 0156.  Likely files: `src/core/game_data.gd (SPAWNS, SPAWN_SIDES, SIDES_BY_SEASON, check_nights), src/core/calendar.gd, src/core/endless.gd, src/core/enemies.gd, src/ui/build_mode.gd, src/ui/world_view.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/shot.gd`.
 
 The farm is surrounded one side at a time: spring comes from the east, summer adds the south-east, autumn the north, and in winter they come from everywhere.
 
@@ -3507,12 +3488,12 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0107** [Store assets](prompts/0107-store-assets.md)
 - [x] **0108** [The devlog and a trailer clip](prompts/0108-devlog.md)
 
-## 9 - v1.0 groundwork  (3/14)
+## 9 - v1.0 groundwork  (4/14)
 
 - [x] **0112** [Room in the test suites](prompts/0112-suite-headroom.md)
 - [x] **0113** [Repairs mend to the real maximum](prompts/0113-repairs-full-max.md)
 - [x] **0114** [Untouched means the house the night started with](prompts/0114-untouched-house.md)
-- [ ] **0115** [Spawn ground that cannot be built shut](prompts/0115-spawn-room.md)
+- [x] **0115** [Spawn ground that cannot be built shut](prompts/0115-spawn-room.md)
 - [ ] **0116** [The mortar and the flamethrower, empty and upgraded](prompts/0116-mortar-flame-ammo.md)
 - [ ] **0117** [Three stale documents](prompts/0117-stale-docs.md)
 - [ ] **0118** [One road into the waves](prompts/0118-one-road-into-night.md)
@@ -3560,7 +3541,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0154** [The calm night after a boss](prompts/0154-calm-night.md) - needs 0153
 - [ ] **0155** [Losing a night when the calendar moves on](prompts/0155-losing-calendar.md) - needs 0151, 0153
 - [ ] **0156** [The 1.0 farm map](prompts/0156-farm-map-v1.md) - needs 0151
-- [ ] **0157** [A new side every season](prompts/0157-attack-sides.md) - needs 0156, 0115
+- [ ] **0157** [A new side every season](prompts/0157-attack-sides.md) - needs 0156
 - [ ] **0158** [The forecast](prompts/0158-forecast.md) - needs 0151, 0152, 0153, 0154, 0157
 - [ ] **0159** [Seasons on screen](prompts/0159-seasons-on-screen.md) - needs 0149
 - [ ] **0160** [The end of the year](prompts/0160-year-end.md) - needs 0153, 0151, 0154
