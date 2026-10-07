@@ -23,6 +23,11 @@
 .PARAMETER DelaySeconds
     Pause between tasks. Default 5.
 
+.PARAMETER GodotPath
+    The Godot console binary every task's verify runs with, exported as
+    $env:GODOT for the whole loop (tools/verify.py's own default points at
+    another machine).
+
 .EXAMPLE
     .\implementation\loop.ps1 -Tasks 20
 .EXAMPLE
@@ -31,12 +36,14 @@
 param(
     [int]$Tasks = 8,
     [switch]$Yolo,
-    [int]$DelaySeconds = 5
+    [int]$DelaySeconds = 5,
+    [string]$GodotPath = "C:\Users\Helel\Documents\godot\Godot_v4.7.1-stable_win64_console.exe"
 )
 
 $ErrorActionPreference = "Stop"
 $repo = Split-Path -Parent $PSScriptRoot
 Set-Location $repo
+if (Test-Path $GodotPath) { $env:GODOT = $GodotPath }
 
 $claude = Get-Command claude -ErrorAction SilentlyContinue
 if (-not $claude) {

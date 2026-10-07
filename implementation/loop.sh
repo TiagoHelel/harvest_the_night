@@ -16,6 +16,9 @@ TASKS="${1:-8}"
 YOLO="${2:-}"
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$REPO"
+# Every task's verify needs Godot; tools/verify.py's own default is another
+# machine's path. Keep one already set, otherwise use this machine's.
+export GODOT="${GODOT:-C:/Users/Helel/Documents/godot/Godot_v4.7.1-stable_win64_console.exe}"
 
 if ! command -v claude >/dev/null 2>&1; then
   echo "The Claude Code CLI is not on PATH."

@@ -1,0 +1,114 @@
+# A057 - The morning report header (optional)
+
+- **Status:** todo
+- **For game task:** 0289
+- **Dressed by game tasks:** 0138
+- **Spec after game task:** 0138
+- **Family:** ui
+- **Mode:** A - raw ImageGen sources, Claude reduces them to the 42-colour palette
+- **Size of the job:** 1 opaque header picture, 1 frame
+
+## What it is for
+
+Every night, won or lost, ends on the morning report: what came in, what was lost,
+how many walked off at dawn, then the farmer gets out of bed at 06:00 (game task
+0138). This small picture heads that report: the sun coming up behind the farmhouse
+over the fields - the night is over. It sits at the top of the report panel on a
+480x270 screen, above lines of text, so it is a short wide band, quiet enough not to
+compete with the numbers, and it must read at 1x as "sunrise at our farm" without
+any text. It is optional: 0138 draws a code band as the stand-in, and if the owner
+declines this pack that band ships.
+
+**Ask first.** Before claiming the pack, ask the owner the first question below. If
+the owner declines, run
+`python implementation/backlog/assets.py set A057 blocked "owner declined: <the owner's words verbatim>"`
+and stop; nothing is generated and game task 0289 closes on its decline path.
+
+## Deliverables
+
+The table is provisional: game task 0138 settles the final canvas/footprint/states and updates it; start only when `python implementation/backlog/assets.py next` offers this pack.
+
+| Runtime name | Native canvas | Pivot | Frames / seconds / loop | Notes |
+|---|---|---|---|---|
+| `report_header` | 206x40 | (103,40) | 1 / 1.0 / static | Fully opaque rectangle, edge to edge (the report rows are 206 px wide today). Direction `none`, `mirror: "none"`. Runtime file `sprites/ui/report_header.png`. The same picture after a won and after a lost night. |
+
+**Composition (native pixels):**
+
+- Horizon at about row 26. Above it the dawn sky in 4-5 flat, stepped bands, from
+  `night_light` at the top through `cloth_light`/`water_light` and `roof_light` to
+  `flame` near the horizon - clustered steps, never a smooth gradient.
+- The sun: a `flame_hot`/`gold_light` half-disc about 14 px wide rising on the
+  horizon left of the house, so the house's lit faces are on the upper left as in the
+  game. No rays of glow, no bloom.
+- Today's farmhouse, small and distant, centre-right: about 40-48 px wide,
+  terracotta roof with tile clusters, warm timber walls, stone foundation, chimney,
+  window panes as dark separate shapes (not lit). No smoke.
+- Below the horizon: a grass strip with two or three tilled crop rows and the path to
+  the door, in the `grass`, `soil` and `wood` ramps. Lowest contrast at the edges.
+- No people, zombies, animals, text, numbers, border or frame (the panel draws the
+  border). `palette_keys` `null`.
+
+## Match these
+
+- `sprites/buildings/house.png` (64x64, visible 56x55, drawn at 2.0 in the world) and
+  `assets/art_source/masters/house.png`: the farmhouse's identity - roof, door,
+  windows, chimney, foundation.
+- `assets/art_source/masters/style-day.png`: the materials and the warm daylight;
+  `docs/reference-sheet.png` (the day half): fields, crop rows and the path.
+- `sprites/terrain/grass.png`, `soil.png`, `path.png` and `sprites/crops/wheat_3.png`:
+  the ground and crop colours at native density (1 art px = 1 logical px).
+- `sprites/ui/panel.png`: the report panel that frames it (border `ink` and
+  `gold_dark`, centre `night` #1a1830).
+
+## How to make it
+
+1. One call, `transparent_background=false` (an opaque scene), one candidate per
+   call. Prompt = BASE with "Final native canvas is 206x40 pixels" and contact pivot
+   103,40, the HOUSE section's identity lines, and: "A wide panoramic pixel-art
+   vignette of sunrise over the farmhouse: the whole picture fits in one horizontal
+   strip of about 5:1 across the middle of the image, with plain margins above and
+   below that will be cropped away. Flat stepped sky bands, a half sun on the horizon
+   to the left of a small distant farmhouse, fields and crop rows in front. Clean
+   square pixel blocks about 1/200 of the image width. No text, no frame, no people."
+2. Inputs: Image 1 `assets/art_source/masters/house.png` (identity master for the
+   house); Image 2 `assets/art_source/masters/style-day.png` (style reference);
+   Image 3 `docs/reference-sheet.png` (style reference).
+3. **Export:** `crop_xywh` = the measured strip in the raw with the exact aspect
+   206:40; `content_scale` = 206 / crop width (the height must come out 40);
+   `content_anchor_xy` = (103,40), which places it at (0,0). Every pixel opaque.
+4. If reduction turns the house into noise or the sky bands into speckle, regenerate
+   with bigger, simpler shapes. Never patch pixels.
+
+## Review with the owner
+
+The page shows the header at 1x and 4x; inside a mock morning report at the game's
+size (a 480x270 dimmed screen, the 224 px wide panel at (128,30), grey bars for the
+text rows); beside `sprites/buildings/house.png` drawn at 2x for identity; and the
+contract's night preview, labelled "world relight, for reference only" (the report is
+on the UI layer, which is not relit).
+
+Questions for the owner:
+
+1. "Este cabeçalho (o sol nascendo atrás da casa, sem texto) é opcional. Você quer que eu faça, ou prefere ficar com a faixa simples que o jogo já desenha?"
+2. "Lê como o amanhecer na nossa fazenda, no tamanho real, sem disputar com os números do relatório?"
+3. "Serve igual depois de uma noite perdida, ou você quer uma versão diferente para a derrota?"
+
+## Acceptance
+
+- [ ] 1 file, 206x40, pivot (103,40), every pixel opaque (alpha 255).
+- [ ] Only the 42 colours through `render_source`; `importer_recipe_matches` true.
+- [ ] No text, numbers, border, people, smoke, glow or bloom; sky in flat stepped bands.
+- [ ] The house reads as today's farmhouse (terracotta roof, timber, chimney) at 1x.
+- [ ] Quiet enough under the report's text: no single area brighter than the sun.
+- [ ] `build.py` twice gives identical bytes, `--check` passes, checks.json all `true`.
+
+## Delivery
+
+`implementation/backlog/deliveries/A057-morning-report/` with the files of contract
+9.1: `raw/` (each return with `.prompt.txt` and `.call.json`),
+`native/report_header/none/01.png`, `preview/`, `rejected/`, `contract.json`
+(`palette_mode` "A"), `checks.json`, `build.py`, `index.html`, `review-log.txt`.
+After the owner approves in words: `APPROVAL.json`, `CLAUDE-A057-PROMPT.txt` (mapping
+`native/report_header/none/01.png -> sprites/ui/report_header.png  206x40 pivot (103,40) draw 1.0  static`,
+replacing 0138's code-drawn band for game task 0289), then
+`python implementation/backlog/assets.py set A057 approved`.

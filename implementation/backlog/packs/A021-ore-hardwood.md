@@ -1,0 +1,140 @@
+# A021 - Copper, coal, gold and hardwood in the world
+
+- **Status:** todo
+- **For game task:** 0204
+- **Dressed by game tasks:** 0176, 0177
+- **Spec after game task:** 0177
+- **Family:** props
+- **Mode:** A - raw ImageGen sources, Claude reduces them to the 42-colour palette
+- **Size of the job:** 6 ore nodes (3 masters + 3 `_b` variants) and 1 big stump in 2 states = 8 frames
+
+## What it is for
+
+The north-west quarry gets copper and coal for sprinklers, tools and the
+generator, and gold from autumn for the top tool tier (game task 0176); big 2x2
+stumps give hardwood to an iron axe (0177). The player sees the nodes all day in
+the rock face beside today's stone seams and iron ore, and must tell the four
+metals and the coal apart at a glance, at 1x and after the night relight. The
+hardwood stump stands among the trees; it must read as an old, much harder
+stump than the 1x1 `stump` a felled tree leaves, and the chipped state must
+show that the axe has bitten.
+
+## Deliverables
+
+The table is provisional: game task 0177 settles the final canvas/footprint/states and updates it; start only when `python implementation/backlog/assets.py next` offers this pack.
+
+| Runtime name | Native canvas | Pivot | Frames / seconds / loop | Notes |
+|---|---|---|---|---|
+| `copper_ore` | 16x16 | (8,14) | 1 / 0.55 / static | Boulder in the `ore` envelope: visible at most 14 x 11, top row at least 3, lowest row 13. Grey stone with salmon-terracotta metal clusters and verdigris spots. |
+| `copper_ore_b` | 16x16 | (8,14) | 1 / 0.55 / static | `_b` of `copper_ore`: same canvas, pivot, `content_scale` and `palette_keys`; the masses arranged differently. |
+| `coal_seam` | 16x16 | (8,14) | 1 / 0.55 / static | Low layered seam in the `seam` envelope: visible at most 14 x 8, top row at least 6, lowest row 13. Grey strata with glossy black coal lumps. |
+| `coal_seam_b` | 16x16 | (8,14) | 1 / 0.55 / static | `_b` of `coal_seam`, as above. |
+| `gold_ore` | 16x16 | (8,14) | 1 / 0.55 / static | Boulder in the `ore` envelope (at most 14 x 11). Darker stone with 2-3 bright, larger gold nugget clusters and one pale glint. |
+| `gold_ore_b` | 16x16 | (8,14) | 1 / 0.55 / static | `_b` of `gold_ore`, as above. |
+| `hardwood_stump` | 32x32 | (16,30) | 1 / 0.55 / static | One thing over a 2x2 footprint. An old broad oak stump: flat cut top with rings, thick dark ridged bark, roots reaching both sides. Visible 26-30 wide x 16-18 tall (top at rows 12-14), lowest row 29, centred on x 16 - the envelope of 0156's stand-in (`stump` scaled 2x: 28x16 on rows 14-29), so A013's `snow_cap_2x2` still rests on it. |
+| `hardwood_stump_chipped` | 32x32 | (16,30) | 1 / 0.55 / static | Same canvas, pivot, `content_scale`, crop and anchor as `hardwood_stump`. One deep wedge-shaped axe notch in the front bark at about a third of its height, pale fresh wood inside, and one split across the cut top. Silhouette otherwise unchanged. |
+
+- Directions: `none`. No mirrors. No points.
+- Ids follow 0156's examples (`copper_ore`, `coal_seam`, `gold_ore`,
+  `hardwood_stump`); 0177 corrects them here if 0156 chose others.
+- **Tell the materials apart.** Today's iron `ore` already uses rust and gold
+  flecks (gold_dark, flame, flame_hot) on mid-grey stone, so: copper uses
+  `roof_light`, `skin_dark`, `skin` metal with `leaf_light` verdigris and no
+  flame colours; gold uses large `gold_light` / `flame_hot` nuggets with a
+  `bone` glint on `stone_dark` / `ink_soft` stone, clearly brighter and bigger
+  than iron's flecks; coal uses `ink`, `ink_soft` lumps with a `stone_light`
+  glint between `stone` / `bone_dark` strata, and no warm colour.
+- `palette_keys` (record what was used): copper `ink, ink_soft, stone_dark,
+  stone, stone_light, roof_dark, skin_dark, roof_light, skin, leaf_light`;
+  coal `ink, ink_soft, night, stone_dark, stone, stone_light, bone_dark`; gold
+  `ink, ink_soft, night, stone_dark, stone, gold_dark, gold, gold_light,
+  flame_hot, bone`; stump `ink, soil_dark, soil, wood_dark, wood, wood_light,
+  gold_dark, gold, bone_dark`.
+- Staying inside the `ore` / `seam` envelopes lets A013's generic 16x16 snow
+  caps fit these nodes too.
+- Never baked: grass, soil or rubble base, wood chips or splinters on the
+  ground, a shadow, a gem-crystal fantasy look, text.
+
+## Match these
+
+- `sprites/props/ore.png` (visible 14x11, rows 3-13), `sprites/props/ore_b.png`
+  (14x10) and raws `assets/art_source/props/ore.png`, `ore_b.png`
+  (1254x1254, `content_scale` 0.0187): boulder masses, camera, scale, outline.
+- `sprites/props/seam.png`, `seam_b.png` (visible 13-14 x 7, rows 7-13) and raws
+  `assets/art_source/props/seam.png`, `seam_b.png`: the low layered seam.
+- `sprites/props/rock.png`, `rock_b.png`: the plain stone the nodes must not be
+  confused with.
+- `sprites/props/stump.png` (16x16, visible 14x8) and raw
+  `assets/art_source/props/stump.png`; `sprites/props/tree.png` (40x48, pivot
+  (20,44)) and `assets/art_source/masters/tree.png`: bark and cut-wood ramp.
+  The hardwood stump is a different, older and much broader trunk, not a 2x
+  enlargement of `stump`.
+- `implementation/sprites/generation/0009-ore_b.prompt.txt`: how a `_b` was made
+  as a controlled ImageGen edit of its master.
+- Farmer `implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down/01.png`
+  (body 16x32): the stump reaches about his knee; it is broad, not tall.
+
+## How to make it
+
+1. Prompt = PROMPTS.md BASE + RESOURCE_PROP (braces: `{copper ore boulder |
+   coal seam | gold ore boulder | hardwood stump}`, target 16x16 pivot 8,14, or
+   32x32 pivot 16,30 for the stump) + CORRECTION for revisions. Add the
+   material line from the bullet above and: "Same camera and lighting as Image
+   2; no crystals, no glow, no grass or soil base." For the stump add the TREE
+   section's stump line: "show the cut surface", with "old hardwood oak, a trunk
+   about twice as broad as the reference stump, roots reaching out".
+2. `transparent_background=true`, one subject per call. Attach `assets/art_source/props/ore.png`
+   (boulders) or `seam.png` (coal) as "camera, scale and style reference";
+   `assets/art_source/props/stump.png` and `assets/art_source/masters/tree.png`
+   for the stump.
+3. Masters first (`copper_ore`, `coal_seam`, `gold_ore`, `hardwood_stump`), 2
+   candidates each; pick by the 16x16 / 32x32 reduction, not the raw.
+4. Each `_b` is an ImageGen edit of its accepted master (edit target): "second
+   controlled variation, rearrange the masses, keep material, framing and
+   scale". `hardwood_stump_chipped` is an edit of the accepted stump raw: "add
+   only the notch and the split".
+5. Export with the mode A recipe. A master and its `_b` / chipped state share
+   `content_scale` and `palette_keys`; set the scale so the visible size meets
+   the table (a boulder about 14 wide like `ore`). Crop tight to the opaque
+   bbox so the default anchor puts the lowest row on `pivot_y - 1`; the stump
+   and its chipped state share one crop box and anchor.
+
+## Review with the owner
+
+`index.html` shows every node at 1x and 4x, by day and in the night preview,
+in one row with today's `ore`, `ore_b`, `seam`, `seam_b`, `rock` for
+comparison, over `sprites/terrain/grass.png` and `sprites/terrain/rock.png`
+tiles; the stump whole and chipped beside `sprites/props/tree.png`,
+`sprites/props/stump.png` and the farmer frame on one ground line, over a 2x2
+cell outline; a blink compare of whole vs chipped.
+
+Ask the owner:
+- "Dá para distinguir cobre, carvão e ouro do ferro e da pedra de hoje, de dia e na prévia noturna?"
+- "O toco grande parece madeira de lei, bem mais duro que o toco comum, e o estado lascado fica claro?"
+
+## Acceptance
+
+- [ ] 8 frames, canvases and pivots exactly as the table; lowest opaque row `pivot_y - 1`, centred on `pivot_x` (±1).
+- [ ] Nodes inside their envelopes (boulders at most 14x11 from row 3; coal at most 14x8 from row 6); stump 26-30 x 16-18 with its top at rows 12-14.
+- [ ] Each `_b` and the chipped stump share canvas, pivot, `content_scale` and `palette_keys` with their master.
+- [ ] Copper, coal, gold, iron and stone are distinguishable at 1x and in the night preview; no metal reads as iron's flecks.
+- [ ] Binary alpha, true transparency; no base, chips, shadow, glow or text.
+- [ ] Mode A only: 42 colours, `importer_recipe_matches`, one scale per master/variant pair.
+- [ ] `build.py` twice is byte-identical and `--check` passes; checks.json all `true`.
+
+## Delivery
+
+Folder `implementation/backlog/deliveries/A021-ore-hardwood/` with `raw/`,
+`native/<id>/none/01.png` (e.g. `native/coal_seam_b/none/01.png`,
+`native/hardwood_stump_chipped/none/01.png`), `preview/`, `rejected/`,
+`contract.json`, `checks.json`, `build.py`, `index.html`, `review-log.txt`.
+
+`CLAUDE-A021-PROMPT.txt` maps
+`native/<node>/none/01.png -> sprites/props/<node>.png 16x16 pivot (8,14) draw 1.0 static`
+for the six nodes (each `_b` with `variant_of` its master, like `ore_b`), and
+`native/hardwood_stump[_chipped]/none/01.png -> sprites/props/hardwood_stump[_chipped].png 32x32 pivot (16,30) draw 1.0 static`,
+placed at the bottom centre of the 2x2 footprint. They replace the stand-ins of
+0176 and 0177 in game task 0204.
+
+Last step, only after the owner approves in words recorded verbatim in
+`APPROVAL.json`: `python implementation/backlog/assets.py set A021 approved`.

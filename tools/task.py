@@ -24,6 +24,26 @@ STATUSES = ("todo", "doing", "done", "blocked")
 
 RE_STATUS = re.compile(r"^- \*\*Status:\*\* (\w+)(.*)$", re.M)
 RE_DEPS = re.compile(r"^- \*\*Depends on:\*\* (.+)$", re.M)
+RE_ART = re.compile(r"^- \*\*Art packs:\*\* (.+)$", re.M)
+
+## **Art tasks wait for their art.** A task with an `Art packs:` line puts a
+## Codex delivery into the game, and it is not ready until every pack it
+## names is approved in implementation/backlog/packs/. Without this the loop
+## spent a whole turn on each one just to find the art missing.
+PACKS = os.path.join(ROOT, "implementation", "backlog", "packs")
+ART_READY = ("approved", "integrated")
+
+
+def pack_states():
+    out = {}
+    for path in glob.glob(os.path.join(PACKS, "A*.md")):
+        m = RE_STATUS.search(open(path, encoding="utf-8").read())
+        out[os.path.basename(path)[:4]] = m.group(1) if m else "todo"
+    return out
+
+
+def art_waiting(t, packs):
+    return [a for a in t["art"] if packs.get(a, "todo") not in ART_READY]
 
 
 def load():
@@ -35,6 +55,7 @@ def load():
         text = open(path, encoding="utf-8").read()
         m = RE_STATUS.search(text)
         d = RE_DEPS.search(text)
+        a = RE_ART.search(text)
         deps = []
         if d and "nothing" not in d.group(1):
             deps = [int(x) for x in re.findall(r"\d+", d.group(1))]
@@ -49,6 +70,7 @@ def load():
             "status": m.group(1) if m else "todo",
             "note": (m.group(2) or "").strip() if m else "",
             "deps": deps,
+            "art": re.findall(r"A\d{3}", a.group(1)) if a else [],
         })
     return tasks
 
@@ -91,12 +113,13 @@ def next_task():
     for t in tasks:
         if t["status"] == "doing":
             return t, "resume (was left doing)"
+    packs = pack_states()
     for t in tasks:
         if t["status"] != "todo":
             continue
         pending = [d for d in t["deps"]
                    if d in ids and ids[d]["status"] != "done"]
-        if pending:
+        if pending or art_waiting(t, packs):
             continue
         return t, "ready"
     return None, "nothing actionable"
@@ -109,10 +132,18 @@ def main():
     if cmd == "next":
         t, why = next_task()
         if t is None:
-            blocked = [x for x in load() if x["status"] == "blocked"]
-            print("nothing actionable. blocked: %d" % len(blocked))
+            everything = load()
+            blocked = [x for x in everything if x["status"] == "blocked"]
+            packs = pack_states()
+            art = [x for x in everything
+                   if x["status"] == "todo" and art_waiting(x, packs)]
+            print("nothing actionable. blocked: %d, waiting for Codex art: %d"
+                  % (len(blocked), len(art)))
             for b in blocked:
                 print("  %04d %s - %s" % (b["id"], b["title"], b["note"]))
+            for w in art:
+                print("  %04d %s - waits for %s" % (
+                    w["id"], w["title"], ", ".join(art_waiting(w, packs))))
             return
         print("%04d %s  [%s]" % (t["id"], t["title"], why))
         print(os.path.relpath(t["path"], ROOT).replace("\\", "/"))
@@ -132,9 +163,14 @@ def main():
             counts[t["status"]] = counts.get(t["status"], 0) + 1
         total = len(tasks)
         done = counts["done"]
+        packs = pack_states()
+        waiting = sum(1 for t in tasks
+                      if t["status"] == "todo" and art_waiting(t, packs))
         print("%d tasks: %d done, %d doing, %d todo, %d blocked  (%.0f%%)" % (
             total, done, counts["doing"], counts["todo"], counts["blocked"],
-            100.0 * done / max(1, total)))
+            100.0 * done / max(1, total))
+              + ("  - %d of the todo wait for Codex art" % waiting
+                 if waiting else ""))
     elif cmd in STATUSES:
         if len(sys.argv) < 3:
             sys.exit("usage: task.py %s <id> [note]" % cmd)

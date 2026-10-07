@@ -19,7 +19,18 @@ import sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "tools"))
 
-from backlog import part1, part2, part3, part4  # noqa: E402
+import importlib  # noqa: E402
+import glob  # noqa: E402
+
+## **Every part file, found rather than listed.** The import line used to
+## name part1..part4 by hand, and a part added without editing it was a set
+## of tasks nobody could see - verify compiled the file and printed PASS. Now
+## a `tools/backlog/partN.py` is part of the backlog by existing, in N order.
+PARTS = [importlib.import_module("backlog." + os.path.basename(p)[:-3])
+         for p in sorted(glob.glob(os.path.join(ROOT, "tools", "backlog",
+                                                "part*.py")),
+                         key=lambda p: int(re.sub(r"\D", "",
+                                                  os.path.basename(p))))]
 
 GAME = "HARVEST THE NIGHT"
 OUT = os.path.join(ROOT, "implementation", "prompts")
@@ -27,17 +38,22 @@ INDEX = os.path.join(ROOT, "implementation", "BACKLOG.md")
 
 RE_STATUS = re.compile(r"^- \*\*Status:\*\* (\w+)(.*)$", re.M)
 
+## The Codex art queue (implementation/backlog/packs/A001-*.md). An art task
+## names its packs, and the index says when one is still waiting for them.
+PACKS = os.path.join(ROOT, "implementation", "backlog", "packs")
+ART_READY = ("approved", "integrated")
+
 TEMPLATE = """# {id:04d} - {title}
 
 - **Phase:** {phase}
 - **Status:** todo
 - **Depends on:** {deps}
-- **Likely files:** {files}
+- **Likely files:** {files}{art_line}
 
 ## Goal
 
 {goal}
-
+{dresses_block}
 ## Requirements
 
 {req}
@@ -57,22 +73,36 @@ no iterating an unordered Dictionary without sorting the keys first. `src/ui/`
 draws and reads input and owns no rules.
 
 Every number a designer might want to turn lives in `src/core/game_data.gd`
-with `# LEVER` on it. A new rule ships with an assert in
-`src/tools/headless_check.gd` and a new input path with a case in
-`src/tools/input_check.gd` - same pass, not later.
+with `# LEVER` on it. A new rule ships with an assert and a new input path with
+a case, in the same pass - from task 0112 on in `src/tools/headless_v1.gd` and
+`src/tools/input_v1.gd` once 0112 has made them (the older suites are full).
 
-Code, identifiers, comments and every player-facing string are in English.
-Art is generated from ASCII maps in `tools/gen_sprites.py`: do not hand-author
-PNGs, edit the map and regenerate.
+Code, identifiers, comments and player-facing strings are in English; every
+new string is a row in `assets/locale/strings.csv` with its pt_BR text. Art
+comes only from the Codex packs in `implementation/backlog/` through the raster
+pipeline (`assets/art_source/`, `tools/import_art.py`): never hand-paint or
+generate PNGs in a game task.
 
-`design.md` is the source of truth for intent and `docs/reference-sheet.png`
-for the look. If this task contradicts either, follow the task and say so in
-the journal.
+`docs/PLANO-DO-JOGO.md` is the source of truth for intent in 1.0 (its section
+12 says what it changes in `design.md`); `docs/reference-sheet.png` and the
+approved 32px farmer are the look. If this task contradicts either, follow the
+task and say so in the journal.
+"""
+
+## The paragraph every code task gets when Codex art will dress it later.
+DRESSES = """
+## Art
+
+What this task puts on screen will be dressed by Codex art pack(s) {packs}
+(`implementation/backlog/packs/`). Draw it through the placeholder road of
+task 0120 until each pack is integrated - or with the pack's art if
+`python implementation/backlog/assets.py status <pack>` already says
+`integrated`. Never wait for art and never draw or generate PNGs here.
 """
 
 
 def all_tasks():
-    tasks = part1.TASKS + part2.TASKS + part3.TASKS + part4.TASKS
+    tasks = [t for part in PARTS for t in part.TASKS]
     ids = [t["id"] for t in tasks]
     assert len(ids) == len(set(ids)), "duplicate ids: %s" % sorted(
         set(i for i in ids if ids.count(i) > 1))
@@ -102,10 +132,29 @@ def render(t):
     deps = ", ".join("%04d" % d for d in t.get("deps", [])) or "nothing"
     req = "\n".join("- " + r for r in t["req"])
     dod = "\n".join("- [ ] " + d for d in t["dod"])
+    art = t.get("art", [])
+    dresses = t.get("dresses", [])
     return TEMPLATE.format(
         id=t["id"], title=t["title"], phase=t["phase"], deps=deps,
         files=t.get("files", "-"), goal=t["goal"], req=req, dod=dod,
+        art_line=("\n- **Art packs:** " + ", ".join(art)) if art else "",
+        dresses_block=DRESSES.format(packs=", ".join(dresses))
+        if dresses else "",
     )
+
+
+def pack_states():
+    """Status of every Codex art pack, by id, from its Status line."""
+    out = {}
+    for path in glob.glob(os.path.join(PACKS, "A*.md")):
+        m = RE_STATUS.search(open(path, encoding="utf-8").read())
+        out[os.path.basename(path)[:4]] = m.group(1) if m else "todo"
+    return out
+
+
+def art_waiting(t, packs):
+    """The packs an art task still waits for, or an empty list."""
+    return [a for a in t.get("art", []) if packs.get(a, "todo") not in ART_READY]
 
 
 ## **What to pick up first**: the open tasks, the ready ones ahead of what
@@ -132,6 +181,7 @@ def unlock_order(open_ones):
 def write_index(tasks):
     """BACKLOG.md: one checkbox per task, ticked from the real Status line."""
     states = {t["id"]: read_status(t) for t in tasks}
+    packs = pack_states()
     counts = {"todo": 0, "doing": 0, "done": 0, "blocked": 0}
     for st, _ in states.values():
         counts[st] = counts.get(st, 0) + 1
@@ -203,6 +253,10 @@ def write_index(tasks):
             pending = [d for d in t.get("deps", [])
                        if states.get(d, ("todo", ""))[0] != "done"]
             head = "Ready to pick up."
+            waiting_art = art_waiting(t, packs)
+            if waiting_art:
+                head = ("Waits for Codex art "
+                        + ", ".join(waiting_art) + ".")
             if pending:
                 head = ("Waits on "
                         + ", ".join("%04d" % d for d in pending) + ".")
@@ -243,6 +297,8 @@ def write_index(tasks):
                 tail.append("**BLOCKED**" + ((": " + note) if note else ""))
             elif pending:
                 tail.append("needs " + ", ".join("%04d" % d for d in pending))
+            if st != "done" and art_waiting(t, packs):
+                tail.append("waits for art " + ", ".join(art_waiting(t, packs)))
             if tail:
                 line += " - " + " - ".join(tail)
             L.append(line)

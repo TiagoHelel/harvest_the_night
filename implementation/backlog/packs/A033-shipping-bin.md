@@ -1,0 +1,115 @@
+# A033 - The shipping bin
+
+- **Status:** todo
+- **For game task:** 0215
+- **Dressed by game tasks:** 0189
+- **Spec after game task:** 0189
+- **Family:** props
+- **Mode:** A - raw ImageGen sources, Claude reduces them to the 42-colour palette
+- **Size of the job:** 1 prop: closed + a lid-opening strip of 3 frames = 4 frames; 1 master + 1 four-cell sheet
+
+## What it is for
+
+A shipping bin like Stardew's (game task 0189): the farmer drops goods in at
+any hour of the day by the porch and is paid the next morning, so selling no
+longer waits on the stall's hours. The player passes it every day; its lid
+lifts when the bin's panel opens and drops again when it closes (the view plays
+the strip forward, then backward). At 1080p it is a sturdy wooden bin about
+half the farmer's height, warm and friendly by the house, and it must
+read as "the place you put things to sell", not as a storage chest or a crate
+of goods.
+
+## Deliverables
+
+The table is provisional: game task 0189 settles the final canvas/footprint/states and updates it; start only when `python implementation/backlog/assets.py next` offers this pack.
+
+| Runtime name | Native canvas | Pivot | Frames / seconds / loop | Notes |
+|---|---|---|---|---|
+| `shipping_bin` | 24x24 | (12,22) | 1 / 0.55 / static | Footprint 1x1. Closed. A slatted wooden bin on four short feet with iron corner straps and a hinged plank lid, hinge at the back. Visible 18-20 wide x 14-16 tall, lowest row 21, centred on x 12. |
+| `shipping_bin_open_0..2` | 24x24 | (12,22) | 3 / 0.1 / one-shot | Lid opening: 0 = lid lifted about 30 degrees (a dark gap shows), 1 = about 60 degrees, 2 = fully open, standing upright behind the box with the dark empty inside showing. The box below the hinge is on the same pixels in all 4 frames; only the lid moves. Frame 2 is held while the panel is open. Visible at most 20 wide x 22 tall (the open lid may reach row 0). |
+
+- Directions: `none`. No mirrors. No points (the morning coin payout is code).
+- Ends: the strip is a one-shot that ends on frame 2. Closing is the same strip
+  played 2, 1, 0, then `shipping_bin`; no separate close frames.
+- The inside of the open bin is an empty dark well (`ink`, `soil_dark`,
+  `wood_dark`): no goods, coins or produce inside or on top.
+- `palette_keys` (record what was used): `ink, ink_soft, soil_dark, soil,
+  wood_dark, wood, wood_light, gold_dark, gold, stone_dark, stone,
+  stone_light`.
+- Never baked: a sign, a label or any text, coins, goods, a ground patch, grass,
+  a shadow, a glow.
+
+## Match these
+
+- `sprites/props/well.png` (24x32, pivot (12,30), visible 20x24): a bin-sized
+  farm prop beside the house; scale, outline and wood/stone ramps.
+- `sprites/props/shop.png` and raw `assets/art_source/buildings/shop/master.png`:
+  the stall's timber, which the bin should share.
+- `sprites/interior/storage.png` (40x76): the storage furniture the bin must
+  **not** look like.
+- `sprites/buildings/house.png` (64x64 at draw 2.0): the porch it stands by.
+- Farmer `implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down/01.png`
+  (body 16x32): the closed bin reaches about his waist.
+- `docs/reference-sheet.png`: farm wood and materials.
+
+## How to make it
+
+1. Prompt = PROMPTS.md BASE (braces: canvas 24x24, pivot 12,22) + these lines
+   in place of a family section, + STRIP for the sheet, + CORRECTION for
+   revisions: `Primary request: shipping_bin, a sturdy farm shipping bin: a
+   slatted wooden box on four short feet, iron corner straps, a hinged plank
+   lid with the hinge at the back, three-quarter top-down, about 18-20 native
+   px wide on a 16 px cell. Empty, no goods, no sign or text, no ground.`
+2. Master (closed), `transparent_background=true`, 2 candidates, with
+   `assets/art_source/buildings/well/master.png` attached as "material, camera
+   and scale style reference". Pick by the 24x24 reduction.
+3. One STRIP call of exactly 4 cells, left to right `closed, lid 30 degrees,
+   lid 60 degrees, lid fully open upright`, the accepted master attached as
+   "identity master and precise geometry reference": "the box, feet and straps
+   are identical in every cell; only the lid rotates about its back hinge".
+   Gutters at least a quarter of a cell, with headroom above each cell for the
+   open lid.
+4. Export with the mode A recipe: `shipping_bin` and `shipping_bin_open_0..2`
+   all come from that one sheet with one `content_scale`, measured
+   `sheet_cell_xywh`, and a `content_anchor_xy` at the box's bottom-centre (the
+   lid changes the bbox top, never the anchor). The master is the identity
+   reference only; it is not an exported frame.
+
+## Review with the owner
+
+`index.html` shows the closed bin and the opening strip at 1x and 4x, playing
+forward at 0.1 s, holding frame 2 for a second, then backward to closed, and as
+a still strip; by day and in the night preview; beside the farmer frame and
+`sprites/props/well.png`, feet on one ground line; over tiled
+`sprites/terrain/grass.png` and `sprites/terrain/path.png` with the cell
+outlined; a blink compare showing the box rows unchanged.
+
+Ask the owner:
+- "Ela lê como caixa de envio, e não como baú ou caixote de mercadorias, ao lado da varanda?"
+- "A tampa abrindo em 3 quadros (e fechando ao contrário) está boa?"
+
+## Acceptance
+
+- [ ] 4 frames, all 24x24 / (12,22); lowest opaque row 21; box centred on x 12 (±1).
+- [ ] Closed visible 18-20 x 14-16; open frames at most 20 x 22, nothing clipped at row 0.
+- [ ] Box, feet and straps on identical pixels in all 4 frames; only the lid differs.
+- [ ] One `content_scale` for all four (`one_scale_per_animation`); mode A only 42 colours; `importer_recipe_matches`.
+- [ ] Empty inside; no goods, coins, sign, text, ground, shadow or glow; binary alpha.
+- [ ] Readable at 1x and in the night preview.
+- [ ] `build.py` twice is byte-identical and `--check` passes; checks.json all `true`.
+
+## Delivery
+
+Folder `implementation/backlog/deliveries/A033-shipping-bin/` with `raw/`,
+`native/shipping_bin/none/01.png`, `native/shipping_bin_open/none/01..03.png`,
+`preview/`, `rejected/`, `contract.json`, `checks.json`, `build.py`,
+`index.html`, `review-log.txt`.
+
+`CLAUDE-A033-PROMPT.txt` maps
+`native/shipping_bin/none/01.png -> sprites/props/shipping_bin.png 24x24 pivot (12,22) draw 1.0 static` and
+`native/shipping_bin_open/none/01..03.png -> sprites/props/shipping_bin_open_0..2.png 24x24 pivot (12,22) draw 1.0 0.1 s one-shot`,
+and says the view plays the strip backward to close. They replace 0189's
+stand-in in game task 0215.
+
+Last step, only after the owner approves in words recorded verbatim in
+`APPROVAL.json`: `python implementation/backlog/assets.py set A033 approved`.

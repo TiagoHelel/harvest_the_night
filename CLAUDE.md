@@ -26,18 +26,26 @@ current scope".
    lighting and damage numbers must be invisible to the determinism hash. A
    view-layer task that moves the hash is a bug, not a new baseline.
 3. **Every tunable number is in `src/core/game_data.gd`** with `# LEVER` on it.
-4. **Tests ship with the change.** A new rule gets an assert in
-   `src/tools/headless_check.gd`; a new input path gets a case in
-   `src/tools/input_check.gd`. Same pass, not later.
+4. **Tests ship with the change.** A new rule gets an assert and a new input
+   path gets a case, same pass, not later: in `src/tools/headless_check.gd` /
+   `input_check.gd` up to task 0111, and from 0112 on in
+   `src/tools/headless_v1.gd` / `input_v1.gd` (made by task 0112).
 
 ## Conventions
 
-- Everything is in **English**: identifiers, comments, commit messages and
-  player-facing strings. Portuguese is a translation file at task 0097 - never a
-  hardcoded string before it.
+- Everything in the repository is in **English**: identifiers, comments,
+  commit messages and player-facing strings, whose Portuguese lives in
+  `assets/locale/strings.csv` (never hardcoded). The owner writes in Brazilian
+  Portuguese: answer them in pt-BR.
 - Tabs, `snake_case`, `##` doc comments on public functions.
-- Art comes from ASCII maps in `tools/gen_sprites.py`, sound from
-  `tools/gen_sfx.py`. Do not hand-author PNGs or WAVs.
+- New art comes from **Codex packs** in `implementation/backlog/` (requests,
+  contract, deliveries) promoted through the raster pipeline
+  (`assets/art_source/`, `tools/import_art.py`); until a pack is integrated a
+  game task draws through the placeholder road (task 0120). Sound comes from
+  `tools/gen_sfx.py`, `gen_music.py`, `gen_ambience.py`. Do not hand-author
+  PNGs or WAVs.
+- Before any Godot run or verify: `export GODOT="C:/Users/Helel/Documents/godot/Godot_v4.7.1-stable_win64_console.exe"`.
+  Never run `tools/devlog.py` without `--check`.
 - Changed something visible? `python tools/shot.py <task-id>` puts the game in
   five known states and photographs them into `implementation/shots/<id>/`.
   **Open the files.** The suite has passed with the wrong tab highlighted and
@@ -62,7 +70,13 @@ To change the backlog itself, edit `tools/backlog/part*.py` and run
 
 ## Sources of truth
 
-- `design.md` - intent, scope, and what is deliberately **not** in the MVP.
+- `docs/PLANO-DO-JOGO.md` - the approved 1.0 plan (Portuguese): day earns the
+  money, the farmer sleeps and the player defends by cursor, 4 seasons x 14
+  days. It overrides `design.md` where its section 12 says so.
+- `design.md` - the MVP's intent, scope, and what was deliberately **not** in
+  the MVP.
+- `implementation/backlog/` - the art requests for Codex (`INDEX.md`,
+  `ART-CONTRACT.md`, `packs/`) and their deliveries.
 - `docs/reference-sheet.png` - the look. Open it on any task that draws
   something.
 - `implementation/PROGRESS.md` - what was done, what broke, and every time the

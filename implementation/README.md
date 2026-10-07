@@ -1,5 +1,37 @@
 # implementation/ - the build backlog
 
+## Version 1.0: the second queue (tasks 0112-0297)
+
+The MVP's 110 tasks are done. The owner approved the 1.0 plan in
+[`docs/PLANO-DO-JOGO.md`](../docs/PLANO-DO-JOGO.md): the day earns the money,
+the farmer goes to bed and the player defends the farm by cursor, one year of
+four seasons x 14 days. Its tasks are generated from `tools/backlog/part5.py`
+to `part13.py` into `prompts/` like every other task, and the same runner
+executes them:
+
+```
+/loop Read and execute implementation/prompts/00-RUNNER-LOOP.md
+```
+
+| # | Phase | Tasks | What it is |
+|---|---|---|---|
+| 9 | v1.0 groundwork | 0112-0125 | test headroom, confirmed bugs, one road into the waves, placeholders, the controller |
+| 10 | Sleep is the night | 0126-0148 | the clock, the bed, the guardian's cursor, START, dawn at 06:00 - **checkpoint 0148** |
+| 11 | Calendar and seasons | 0149-0164 | 4 x 14 days, Full Moon, bosses, the forecast, the 1.0 map |
+| 12 | The day that pays | 0165-0217 | crops by days, 12 crops, tools, fishing, animals, machines - **checkpoint 0196** |
+| 13 | Weapons of the night | 0218-0245 | essence, loot, six new defences, powers |
+| 14 | Enemies and bosses | 0246-0269 | six enemies, three bosses, fog, rain, the Blood Moon |
+| 15 | Fifty-six nights and balance | 0270-0280 | the year as data, the autoplayer, balance - **checkpoint 0280** |
+| 16 | Sound, collections and polish | 0281-0290 | sounds, music, collections, the visual gate |
+| 17 | Ship 1.0 | 0291-0297 | saves, options, translation, playtest, release |
+
+**Art is not drawn by the loop.** Everything new on screen is requested from
+Codex as a pack in [`backlog/`](backlog/README.md) (57 packs, A001-A057). A
+code task draws a placeholder (task 0120's road) and a separate art task
+integrates each pack. `python tools/task.py next` only offers an art task once
+its pack is approved, so the loop never stalls on missing art: it carries on
+with the rest and picks the art up on a later turn.
+
 ## Sprite production backlog
 
 The game implementation queue is complete (110 tasks). The new visual overhaul

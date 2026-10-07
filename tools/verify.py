@@ -123,6 +123,16 @@ def check_backlog():
     return check("backlog index", code == 0, tail(out, 3) if code else "")
 
 
+def check_art_requests():
+    """The Codex art queue (implementation/backlog): unique packs, a valid
+    Status on each, and every pack named by the game task that integrates
+    it - so an art task can never wait for a pack that does not exist."""
+    if not os.path.exists(rel("implementation", "backlog", "assets.py")):
+        return skip("art requests", "no art queue yet")
+    code, out = run([sys.executable, "implementation/backlog/assets.py", "check"])
+    return check("art requests", code == 0, tail(out, 3))
+
+
 def check_godot_present():
     if not os.path.exists(rel("project.godot")):
         return skip("godot project", "no project.godot yet - task 0001")
@@ -721,6 +731,7 @@ def main():
 
     check_python()
     check_backlog()
+    check_art_requests()
     check_godot_present()
     check_scripts_parse()
     check_core_is_pure()
