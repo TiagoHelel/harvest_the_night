@@ -41,7 +41,7 @@ const OptionsAudioScript := preload("res://src/ui/options_audio.gd")
 const ActionsScript := preload("res://src/app/input_actions.gd")
 const PauseScript := preload("res://src/ui/pause_menu.gd")
 const OptionsA11yScript := preload("res://src/ui/options_a11y.gd")
-const BootIdentScript := preload("res://src/ui/boot_ident.gd")
+const StudioIntroScript := preload("res://src/ui/studio_intro.gd")
 const OptionsScript := preload("res://src/ui/options_screen.gd")
 const AudioScript := preload("res://src/app/audio.gd")
 const SfxScript := preload("res://src/ui/sfx.gd")
@@ -15319,11 +15319,16 @@ func _task_0090_log() -> void:
 ## 0091 - the title screen.
 func _task_0091_title() -> void:
 	# **The game boots into a game.** The done-when, asked of the one line
-	# that decides it.
+	# that decides it - through the studio ident since 2026-10-07, which is a
+	# scene of its own and hands over to the title and nowhere else.
 	expect(str(ProjectSettings.get_setting("application/run/main_scene", ""))
-		== "res://scenes/Title.tscn",
-		"booting lands on the title screen and not in a run",
+		== "res://scenes/StudioIntro.tscn",
+		"booting opens on the studio ident",
 		str(ProjectSettings.get_setting("application/run/main_scene", "")))
+	expect(StudioIntroScript.NEXT_SCENE == "res://scenes/Title.tscn"
+		and str(AppScript.SCENES[AppScript.TITLE]) == StudioIntroScript.NEXT_SCENE,
+		"which hands over to the title screen and not to a run",
+		StudioIntroScript.NEXT_SCENE)
 	expect(ResourceLoader.exists("res://scenes/Title.tscn"),
 		"and that scene is there")
 	expect(ResourceLoader.exists("res://scenes/Main.tscn"),
@@ -16488,17 +16493,67 @@ func _task_0099_icon() -> void:
 		expect(not project.contains('icon="res://%s' % named),
 			"with nothing of the engine's left in the path")
 
-	# **The ident is short and gets out of the way.**
-	expect(BootIdentScript.SECONDS > 0.0 and BootIdentScript.SECONDS <= 3.0,
-		"the ident is over in a couple of seconds",
-		"%.2f" % BootIdentScript.SECONDS)
-	expect(BootIdentScript.IN + BootIdentScript.HOLD < 1.0,
-		"with time left at the end of it to fade out",
-		"%.2f" % (BootIdentScript.IN + BootIdentScript.HOLD))
-	expect(BootIdentScript.MARK % 16 == 0,
-		"and it draws the mark at a whole multiple of sixteen",
-		str(BootIdentScript.MARK))
+	_studio_ident()
 	_completed += 1
+
+
+## **The studio ident** (2026-10-07): WELCOME BACK, HERO's DEF4ULT STUDIO
+## ident, carried across rather than redrawn - so what is held here is that it
+## is still that one, and that nothing in front of it shows a seam.
+func _studio_ident() -> void:
+	# The boot splash is the ident's own black, or the first frame clicks.
+	var splash: Color = ProjectSettings.get_setting(
+		"application/boot_splash/bg_color", Color.WHITE)
+	expect(splash.is_equal_approx(StudioIntroScript.C_BLACK),
+		"the boot splash is the studio ident's black, so the hand-off has no seam",
+		str(splash))
+
+	# **Byte for byte what that game ships.** assets/studio/README.md says
+	# where each came from; a "small fix" here is a different ident.
+	var carried := {
+		"res://assets/studio/def4ult_studio.png":
+			"628a86e8818ec567a3fd04a194737b2045821dd06260dcf0d5101a22f6146675",
+		"res://assets/studio/ident_power.wav":
+			"1fe089d7b43756504f65444f54ddf44b34ffcf3ec5f4d871e780f3d44a52ff41",
+		"res://assets/studio/ident_sting.wav":
+			"79bc238c9b9c006899e4541792ecaaf5335b8fe3c7e94db30656408f5a073689",
+		"res://assets/studio/one_room_pixel.fnt":
+			"8a1efc4b88d96be659e23ecceeddadf711b1d3160e74360451b0af32304fce13",
+		"res://assets/studio/one_room_pixel.png":
+			"04ccb174dbb42703c38e222319f431abacf982bf7a532a17bef899a07dd4ff6f",
+	}
+	for path in carried:
+		var got := FileAccess.get_sha256(String(path))
+		expect(got == String(carried[path]),
+			"%s is the studio's own file, unchanged" % String(path).get_file(), got)
+	expect(StudioIntroScript.CREST.get_width() == 300
+		and StudioIntroScript.CREST.get_height() == 300,
+		"the crest is 300 square, so it is drawn at a whole 1.0 and stays crisp")
+	expect(StudioIntroScript.PLATE_FONT is FontFile,
+		"the plate's face loads as a font")
+	for sound in [StudioIntroScript.POWER_SOUND, StudioIntroScript.STING_SOUND]:
+		expect(sound is AudioStreamWAV, "both of its sounds load as samples")
+
+	# **The plate is one language.** A tagline that picked up a translation
+	# would be a thing nobody notices until they launch in Portuguese.
+	expect(StudioIntroScript.STUDIO_NAME == "DEF4ULT STUDIO"
+		and StudioIntroScript.TAGLINE == "PRESENTS",
+		"the plate says DEF4ULT STUDIO PRESENTS, in English in every language")
+	expect(StudioIntroScript.FRAME == Vector2i(1280, 720),
+		"and it is laid out on that game's 1280x720 frame")
+
+	# **The cue table runs forwards** - every beat after the one before it.
+	var beats := [0.0, StudioIntroScript.T_POWER, StudioIntroScript.T_CREST,
+		StudioIntroScript.T_IGNITE, StudioIntroScript.T_NAME,
+		StudioIntroScript.T_TAG, StudioIntroScript.T_HOLD,
+		StudioIntroScript.T_OUT, StudioIntroScript.T_BLACK]
+	var ordered := true
+	for i in range(1, beats.size()):
+		ordered = ordered and float(beats[i]) > float(beats[i - 1])
+	expect(ordered, "the ident's beats come in order", str(beats))
+	expect(is_equal_approx(StudioIntroScript.T_LEAD + StudioIntroScript.T_BLACK, 8.45),
+		"and the whole of it is that game's eight and a half seconds",
+		"%.2f" % (StudioIntroScript.T_LEAD + StudioIntroScript.T_BLACK))
 ## 0100 - two builds, and the config that decides what is in them.
 ##
 ## **What can be checked without the export templates installed**, which is

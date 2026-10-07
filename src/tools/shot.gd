@@ -209,9 +209,6 @@ func _initialize() -> void:
 		quit(1 if _failed > 0 else 0)
 		return
 
-	# The title is photographed without its ident in front of it.
-	BootIdent.played()
-
 	seed(SPARK_SEED)
 	var main: Node = load("res://scenes/Main.tscn").instantiate()
 	root.add_child(main)
@@ -464,28 +461,28 @@ func _take_the_switch(folder: String) -> void:
 
 ## The two pictures of the front of the game.
 ##
-## The ident is caught **half way through its hold**, because the interesting
-## frame is the one with the mark at full brightness rather than the first or
-## the last - and it is driven by hand, a fixed number of fixed steps, so two
-## runs catch the same frame.
+## The studio ident is caught **with its plate complete** - the crest lit, the
+## name and PRESENTS settled - because that is the frame that says whose it
+## is; its clock is set rather than waited for and then stopped, so two runs
+## catch the same frame. It is its own scene ahead of the title, and taking it
+## away puts this game's 480x270 frame back on the window.
 func _take_the_front(folder: String) -> void:
-	BootIdent.forget()
+	var ident := load("res://scenes/StudioIntro.tscn").instantiate() as StudioIntro
+	root.add_child(ident)
+	await process_frame
+	ident.set_process(false)
+	ident.set_clock(StudioIntro.T_HOLD - 0.4)
+	await process_frame
+	await process_frame
+	await _shoot("ident", folder)
+	root.remove_child(ident)
+	ident.free()
+
 	var title: Node = load("res://scenes/Title.tscn").instantiate()
 	root.add_child(title)
 	await process_frame
 	await process_frame
 	_say_it_in(title)
-
-	var ident := _find(title, "BootIdent") as BootIdent
-	if ident != null:
-		var step := BootIdent.SECONDS / float(SETTLE)
-		var held := int(SETTLE * (BootIdent.IN + BootIdent.HOLD * 0.5))
-		for i in held:
-			ident._process(step)
-		await process_frame
-		await _shoot("ident", folder)
-		while ident.running():
-			ident._process(step)
 	await process_frame
 	await process_frame
 	await _shoot("title", folder)
@@ -503,7 +500,6 @@ func _take_the_front(folder: String) -> void:
 ## in `_ready` and never again - and it is taken away afterwards, because a
 ## picture is not a reason to leave a crash report on somebody's disk.
 func _take_the_crash(folder: String) -> void:
-	BootIdent.played()
 	var state := State.create(SEED)
 	Sim.advance(state, 5400)
 	var made := Crash.report(state,
@@ -538,7 +534,6 @@ func _say_it_in(scene: Node) -> void:
 ## `user://run.sav` to make the picture, and the machine taking the picture
 ## is somebody's machine with somebody's farm on it.
 func _take_the_save_trouble(folder: String) -> void:
-	BootIdent.played()
 	var theirs := PackedByteArray()
 	if FileAccess.file_exists(Save.RUN_PATH):
 		theirs = FileAccess.get_file_as_bytes(Save.RUN_PATH)

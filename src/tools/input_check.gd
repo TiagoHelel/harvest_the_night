@@ -76,11 +76,6 @@ func _process(delta: float) -> bool:
 
 
 func _run() -> void:
-	# **The ident is a launch thing, not a scene thing.** This file opens the
-	# title a dozen times and a second and a half of black in front of each
-	# of them would be a slower suite testing nothing. `_case_0099_ident`
-	# calls `BootIdent.forget()` and watches it happen properly.
-	BootIdent.played()
 	if OS.get_cmdline_user_args().has("--house-visit-only"):
 		await _case_0111_farm_house()
 		print("HOUSE INPUT: %d cases, %d failed" % [passed + failed, failed])
@@ -3067,10 +3062,18 @@ func _case_0053_repair() -> void:
 		"and it costs %s, banked or paid" % paid_in,
 		"%d hundredths" % spent)
 
-	# **Walking away stops it**, the same as every other job.
+	# **Walking away stops it**, the same as every other job. Read from the
+	# tick the step away lands on, not from the frame the key goes down: a
+	# stroke the job was already due on a tick in between is the job finishing
+	# what it had started before the sim heard about the key, and reading the
+	# wall one frame early made this case fail about one run in three.
+	await press_key(KEY_A, true)
+	await until(func() -> bool: return not Player.is_busy(state),
+		"the step away to reach the sim")
 	var at_release := int(Farm.occupant(state, spot).get("hp", 0))
-	await hold_key(KEY_A, 6)
-	await frames(6)
+	await frames(5)
+	await press_key(KEY_A, false)
+	await frames(8)
 	expect(not Player.is_busy(state),
 		"stepping away gives up on the job")
 	expect(int(Farm.occupant(state, spot).get("hp", 0)) == at_release,
@@ -6213,46 +6216,107 @@ func _case_0098_access() -> void:
 	await frames(2)
 	_completed += 1
 func _case_0099_ident() -> void:
-	# **Once per launch**, so this is the one place that asks for it again.
-	BootIdent.forget()
-	await open_scene("res://scenes/Title.tscn")
-	await frames(2)
-	var ident: BootIdent = locate_control("BootIdent") as BootIdent
-	expect(ident != null, "the title scene has an ident on it")
-	if ident == null:
-		await close_scene()
-		BootIdent.played()
+	# **The studio ident is the boot scene** (2026-10-07): WELCOME BACK, HERO's
+	# DEF4ULT STUDIO ident, a scene of its own ahead of the title. Opened here
+	# the way the engine opens it - from the router's BOOT - and every way out
+	# of it is walked: a skip, a second press, the black lead, the timeline.
+	_forget_any_loaded_scene()
+	var router: Node = root.get_node_or_null(^"App")
+	expect(router != null, "the router is there for the ident to hand over to")
+	if router == null:
 		_completed += 1
 		return
-	expect(ident.running(), "and it is running when the game is opened")
-	expect(ident.visible, "and it is over everything")
+	var ours := root.content_scale_size
+	var ours_stretch := root.content_scale_stretch
+	router.reset(router.BOOT)
+	await open_scene("res://scenes/StudioIntro.tscn")
+	var ident := _scene as StudioIntro
+	expect(ident != null, "the boot scene is the studio ident")
+	if ident == null:
+		await close_scene()
+		_completed += 1
+		return
+	expect(root.content_scale_size == StudioIntro.FRAME,
+		"it lays the window out as that game's 1280x720 frame",
+		str(root.content_scale_size))
+	expect(root.content_scale_stretch == Window.CONTENT_SCALE_STRETCH_FRACTIONAL,
+		"stretched smoothly, the way that game draws it")
+	expect(ident.clock() < 0.0 and not ident.leaving(),
+		"and it opens on its black lead, running", "%.2f" % ident.clock())
 
-	# **Any input skips it.** Not a named action - whatever is under a hand.
+	# **Its two sounds land on their beats.**
+	ident.set_clock(StudioIntro.T_IGNITE - 0.05)
+	await frames(2)
+	expect(ident.sounds_fired() == [true, true],
+		"the tube strike and the sting have both fired by the ignition",
+		str(ident.sounds_fired()))
+
+	# **The first press collapses; it does not leave.** Pressed by reflex on
+	# the launch where somebody did want to see it, the collapse still reads
+	# as "yes, skipped" without slamming the door.
+	ident.set_clock(StudioIntro.T_CREST)
 	await tap_key(KEY_Z)
-	await frames(3)
-	expect(not ident.running(), "any key at all gets past it")
-	expect(not ident.visible, "and it goes away rather than hanging about")
+	await frames(2)
+	expect(not ident.leaving() and ident.clock() >= StudioIntro.T_HOLD,
+		"the first key skips to the collapse rather than out",
+		"%.2f" % ident.clock())
 
-	# And the title is behind it, working, with nothing eaten on the way.
-	var router: Node = root.get_node_or_null(^"App")
-	expect(router != null and router.here() == router.TITLE,
-		"the title is where it was",
-		router.name_of(router.here()) if router != null else "no router")
-	await tap_key(KEY_X)
-	await frames(3)
-	expect(router.here() == router.MENU,
-		"and the next key opens the menu, as it always did",
+	# **The second leaves at once, and does not rise.**
+	await tap_key(KEY_Z)
+	await frames(10)
+	expect(ident.leaving(), "the second key leaves")
+	expect(router.here() == router.TITLE
+		and router.last_scene() == StudioIntro.NEXT_SCENE,
+		"for the title, through the router",
+		"%s / %s" % [router.name_of(router.here()), router.last_scene()])
+	expect(root.content_scale_size == ours
+		and root.content_scale_stretch == ours_stretch,
+		"with this game's own frame back on the window",
+		str(root.content_scale_size))
+	expect(not bool(router.rise_from_black),
+		"and a skip asks for no rise out of black")
+	var brought: Node = current_scene
+	expect(brought is TitleScreen, "the router loaded the title by itself",
+		str(brought))
+	expect(brought != null and brought.find_child("RiseFromBlack", true, false) == null,
+		"which comes up at once after a skip")
+	_forget_any_loaded_scene()
+	await close_scene()
+
+	# **The timeline running out hands over by itself, and rises.**
+	router.reset(router.BOOT)
+	await open_scene("res://scenes/StudioIntro.tscn")
+	ident = _scene as StudioIntro
+	ident.set_clock(StudioIntro.T_BLACK - 0.01)
+	await frames(10)
+	expect(ident.leaving(), "the end of the timeline hands over on its own")
+	brought = current_scene
+	expect(brought is TitleScreen, "to the title", str(brought))
+	expect(brought != null and brought.find_child("RiseFromBlack", true, false) != null,
+		"which comes up out of the ident's black")
+	expect(not bool(router.rise_from_black),
+		"and taking that once clears it, so the next title is not dark")
+	expect(router.here() == router.TITLE,
+		"with PRESS ANY KEY up, as the title always opened",
 		router.name_of(router.here()))
+	_forget_any_loaded_scene()
 	await close_scene()
 
-	# **Not again this launch.** Which is what stops it being a second and a
-	# half in front of every scene this file opens.
-	await open_scene("res://scenes/Title.tscn")
-	await frames(3)
-	ident = locate_control("BootIdent") as BootIdent
-	expect(ident != null and not ident.running(),
-		"opening the title again does not play it again")
+	# **A key in the black lead leaves at once**: nothing has been shown, so
+	# there is nothing to collapse.
+	router.reset(router.BOOT)
+	await open_scene("res://scenes/StudioIntro.tscn")
+	ident = _scene as StudioIntro
+	await tap_key(KEY_Z)
+	await frames(10)
+	expect(ident.leaving() and router.here() == router.TITLE,
+		"a key during the black lead goes straight to the title",
+		router.name_of(router.here()))
+	_forget_any_loaded_scene()
 	await close_scene()
+	expect(root.content_scale_size == ours,
+		"and nothing of the ident's frame is left behind",
+		str(root.content_scale_size))
 	_completed += 1
 func _case_0100_version() -> void:
 	await open_scene("res://scenes/Title.tscn")

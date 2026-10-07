@@ -13,9 +13,9 @@ config_version=5
 config/name="HARVEST THE NIGHT"
 config/description="A cozy farming game where your farm is also your fortress. By day, plant, fish, mine and produce. When you choose, switch reality: the same farm becomes the map you defend against the horde."
 config/version="0.1.0"
-run/main_scene="res://scenes/Title.tscn"
+run/main_scene="res://scenes/StudioIntro.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
-boot_splash/bg_color=Color(0.054902, 0.047059, 0.098039, 1)
+boot_splash/bg_color=Color(0.016, 0.02, 0.033, 1)
 boot_splash/show_image=false
 config/icon="res://assets/icon.png"
 

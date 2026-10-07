@@ -12403,3 +12403,67 @@ assets/art_source/manifest.json, assets/art_source/player-fhd/walk-blue-32px/
 (output folder and row length as variables), walk-approved-integration/
 (README, capture.gd, playback.py), implementation/shots/walk-approved-1080/.
 Verify: **55 passed, 0 skipped, 0 failed** in 516 s; sim 1242708873 and data 2015186086 unchanged. An earlier full run, made while other Godot captures were running on the machine, failed perf (every timing about 3x) and one timing-sensitive input case (a wall still mending just after release); both passed on this rerun on a quiet machine, and nothing they measure changed in between.
+
+## 2026-10-07 — The DEF4ULT STUDIO ident, and the game opening like WELCOME BACK, HERO
+
+The owner asked for this game to open the way WELCOME BACK, HERO (one_room_dg)
+does: the same intro, and the same way of starting it from Godot. Pause, options
+and a button redesign follow in their own commits.
+
+**The ident is that game's, not one like it.** scenes/StudioIntro.tscn and
+src/ui/studio_intro.gd port its DEF4ULT STUDIO ident - the cue table, easings,
+cyan, crest, the two studio sounds and the 5x7 face of the plate - and the five
+files it needs are carried byte for byte into assets/studio/ (README there with
+their sources and hashes; headless_check holds the hashes). assets/README.md
+says why that folder is the one thing under assets/ that is not generated: a
+studio ident belongs to the studio. The plate keeps that game's face because
+this game's harvest_heading is wider and squarer and the plate would not be the
+same plate.
+
+**It is laid out on that game's frame.** The ident was composed for a 1280x720
+canvas stretched to the window; this game is 480x270 at whole multiples, and a
+300 pixel crest does not fit in 270. So while it runs it puts a 1280x720
+fractional frame on the window, with its own black as the clear colour, and
+hands this game's frame back the moment it leaves (and in `_exit_tree`, so a
+check freeing it halfway cannot strand the window). The proof that it is the
+same: src/tools/capture_intro.gd shoots that game's ten capture beats, and at
+1280x720 every one of them is pixel-identical to WELCOME BACK, HERO's own
+capture_intro.gd - 0 differing pixels in ten frames.
+
+**How it opens.** project.godot's main scene is the ident now and the boot
+splash is its black (the two are asserted equal, so the first frame has no
+colour click). The ident hands over through the router (`App.goto(TITLE)`), and
+when its timeline runs out - not on either skip - the title rises out of the
+same black over 0.9 s (`App.rise_from_black`, runtime only). Any key in the
+black lead leaves at once; the first key later collapses the tube, the second
+leaves; `--skip-intro` skips it. The old 1.6 s icon ident on the title
+(boot_ident.gd) is gone - the studio ident replaces it - so the title opens on
+PRESS ANY KEY as before, and the crash dialogue no longer waits for an ident.
+In the editor, `.godot/editor/project_metadata.cfg` now has
+`embed_on_play=false`, the setting WELCOME BACK, HERO has: F5 opens the game in
+its own window instead of inside the editor's Game tab. That file is per
+machine and not versioned.
+
+Checks: headless asserts the boot chain (main scene -> ident -> title), the
+splash colour, the five hashes, the plate's words and the cue order; input_check
+case 0099 now walks the ident's four ways out - first key collapses, second
+leaves without a rise, a key in the lead leaves at once, the timeline hands over
+by itself and the title rises - and that the window gets this game's frame
+back. shot.py --title photographs the ident with its plate complete.
+
+**A flaky case fixed on the way.** input_check 0053 ("nothing more goes into
+the wall") read the wall one frame before the step away reached the sim, so a
+repair stroke already due on the tick in between failed it about one run in
+three (it failed twice on 2026-10-06/07 with no repair code touched). It now
+reads the wall from the tick the player stops being busy; three consecutive
+runs passed, 1029 cases each. No rule changed.
+
+Files: scenes/StudioIntro.tscn, src/ui/studio_intro.gd, assets/studio/ (crest,
+two WAVs, font + import settings, README), assets/README.md, project.godot (main
+scene, splash colour), src/app/app.gd (rise flag), src/ui/title_screen.gd and
+scenes/Title.tscn (old ident out, rise in), src/ui/boot_ident.gd removed,
+src/tools/{headless_check,input_check,shot,capture_intro}.gd, the 32px pilot's
+scenes.gd (a dead BootIdent call), implementation/shots/studio-intro/ (ten FHD
+beats and the hand-over as playback.gif).
+Verify: **55 passed, 0 skipped, 0 failed** in 545 s; 16142 headless asserts,
+1029 input cases; sim 1242708873 and data 2015186086 unchanged.

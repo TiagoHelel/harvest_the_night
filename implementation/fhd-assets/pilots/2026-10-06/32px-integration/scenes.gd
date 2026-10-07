@@ -39,7 +39,6 @@ var _report: Array = []
 
 func _initialize() -> void:
 	CaptureSize.configure(root, true)
-	BootIdent.played()
 	seed(SPARK_SEED)
 	var main: Node = load("res://scenes/Main.tscn").instantiate()
 	root.add_child(main)

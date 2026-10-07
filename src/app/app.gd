@@ -89,6 +89,14 @@ var _stack: Array = []
 ## one test leaking into the next one.
 var _resume := false
 
+## **The studio ident asks the title to come up out of black.**
+##
+## Set by `StudioIntro` on the one handover it earns - its timeline running
+## out, not either skip - and taken by the title, which clears it. **Runtime
+## only**: it describes one launch rather than a preference, so it is never
+## written to a settings file.
+var rise_from_black := false
+
 ## How many times a scene change has been asked for, and the last one asked
 ## for. Read by the checks, which have no business changing scenes.
 var _changes := 0

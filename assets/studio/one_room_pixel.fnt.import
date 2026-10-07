@@ -1,0 +1,17 @@
+[remap]
+
+importer="font_data_bmfont"
+type="FontFile"
+uid="uid://b7nh6st2og6il"
+path="res://.godot/imported/one_room_pixel.fnt-5d915d0b579d209eb0584f58e97b566b.fontdata"
+
+[deps]
+
+source_file="res://assets/studio/one_room_pixel.fnt"
+dest_files=["res://.godot/imported/one_room_pixel.fnt-5d915d0b579d209eb0584f58e97b566b.fontdata"]
+
+[params]
+
+fallbacks=[]
+compress=true
+scaling_mode=2

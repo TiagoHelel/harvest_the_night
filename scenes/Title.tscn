@@ -1,6 +1,5 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="Script" path="res://src/ui/boot_ident.gd" id="90_ident"]
 [ext_resource type="Script" path="res://src/ui/crash_dialog.gd" id="91_crash"]
 [ext_resource type="Script" path="res://src/ui/title_screen.gd" id="1_title"]
 [ext_resource type="PackedScene" path="res://scenes/World.tscn" id="2_world"]
@@ -90,17 +89,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("6_options")
-
-[node name="BootIdent" type="Control" parent="UI/Screen"]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-script = ExtResource("90_ident")
 
 [node name="Version" type="Label" parent="UI/Screen"]
 unique_name_in_owner = true

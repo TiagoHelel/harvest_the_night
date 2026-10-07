@@ -90,7 +90,6 @@ func _ready() -> void:
 
 	_options = get_node_or_null(^"UI/Screen/OptionsScreen") as OptionsScreen
 	_crash = get_node_or_null(^"UI/Screen/CrashDialog") as CrashDialog
-	_ident_node = get_node_or_null(^"UI/Screen/BootIdent") as BootIdent
 
 	# **Task 0103: a crash that took the window is announced here.** A dead
 	# process cannot draw a dialogue, so "rather than vanishing" is kept one
@@ -117,7 +116,36 @@ func _ready() -> void:
 	_wear_version()
 	if _router != null:
 		_router.reset(_router.TITLE)
+		# **Out of the studio ident's black**, when its timeline handed over
+		# rather than a skip - taken once and cleared, like the resume.
+		if bool(_router.get(&"rise_from_black")):
+			_router.set(&"rise_from_black", false)
+			_rise_from_black()
 	_wear(_router.here() if _router != null else 0)
+
+
+## How long the title takes to come up out of the ident's black. The same
+## second that game gives its title.
+const RISE_SECONDS := 0.9
+
+
+## A sheet of the ident's own black over everything, faded away: the ident
+## went dark on purpose, and a title that arrived at full strength the next
+## frame would undo it.
+func _rise_from_black() -> void:
+	var layer := CanvasLayer.new()
+	layer.name = "RiseFromBlack"
+	layer.layer = 100
+	var sheet := ColorRect.new()
+	sheet.color = StudioIntro.C_BLACK
+	sheet.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	sheet.set_anchors_preset(Control.PRESET_FULL_RECT)
+	layer.add_child(sheet)
+	add_child(layer)
+	var tween := create_tween()
+	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(sheet, "color:a", 0.0, RISE_SECONDS)
+	tween.tween_callback(layer.queue_free)
 
 
 ## Say it all again in whatever language is up now.
@@ -384,19 +412,15 @@ func backdrop_tick() -> int:
 var _to_announce := ""
 
 var _crash: CrashDialog
-var _ident_node: BootIdent
 
 
-## Put the crash dialogue up once the ident has finished playing.
+## Put the crash dialogue up on the first frame of the title.
 ##
-## **Not in `_ready`.** The boot ident covers the whole screen for its first
-## few seconds, so a dialogue put up underneath it is a dialogue a player
-## dismisses by pressing the key that skips the ident. It waits, and then it
-## is the first thing on the screen.
+## **Not in `_ready`**, so it lands on a title that is already built. The
+## studio ident is a scene of its own ahead of this one now, so there is no
+## ident on this screen for a key meant for the dialogue to skip.
 func _announce_a_crash() -> void:
 	if _to_announce == "" or _crash == null:
-		return
-	if _ident_node != null and _ident_node.running():
 		return
 	var folder := _to_announce
 	_to_announce = ""
