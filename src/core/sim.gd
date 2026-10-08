@@ -119,7 +119,7 @@ static func _tick_preparation(state: Dictionary) -> void:
 	Building.tick(state)
 	Player.tick(state)
 	if int(state["phase_tick"]) >= GameData.PREPARATION_TICKS:
-		Phases.begin_night(state)
+		Phases.start_waves(state)
 
 
 ## The dangerous half. Spawning, walking, shooting, dying.

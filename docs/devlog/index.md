@@ -40,7 +40,7 @@ is the sort of thing this list exists to say out loud.
 
 ## What it turned out to be
 
-118 tasks over 5 days,  to 2026-10-07. One at a time, each one finished and checked before the next was started.
+119 tasks over 5 days,  to 2026-10-07. One at a time, each one finished and checked before the next was started.
 
 | # | What was built | Finished |
 |---|---|---|
@@ -162,6 +162,7 @@ is the sort of thing this list exists to say out loud.
 | 0115 | Spawn ground that cannot be built shut | 2026-10-07 |
 | 0116 | The mortar and the flamethrower, empty and upgraded | 2026-10-07 |
 | 0117 | Three stale documents | 2026-10-07 |
+| 0118 | One road into the waves | 2026-10-07 |
 
 ## Every time the game changed underneath itself
 

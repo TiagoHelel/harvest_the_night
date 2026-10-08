@@ -13008,3 +13008,49 @@ while verify was running: 16173, 0 failed), headless_v1 87, input_check 1074,
 input_v1 11; sim 2728872771 and data 1968527100 unchanged - `TUTORIAL` holds
 the key, not the text. A grep of both documents finds no "Sixteen" and no
 "It stops".
+
+## 0118 - One road into the waves - done 2026-10-07
+
+What changed: a refactor - one road into the night, so 0136 (START) and 0137
+(dawn) change it once. Core: `Phases.start_waves(state)` is the single
+PREPARATION -> NIGHT door (refuses any other phase with `push_error`, like the
+other transitions) and `Sim._tick_preparation`'s timer calls it;
+`begin_night` stays as the transition behind it. Tools: new
+`src/tools/night_road.gd` (`class_name NightRoad`, static) - `into_build`,
+`build_ticks_left` (`PREPARATION_TICKS - phase_tick` in the build step, 0
+outside), `through_build`, `to_night`, `run_night(state, cap = 40000)` and
+`park` (the old `_park_the_waves`, whose doc comment says 0137 holds dawn back
+there; no state key added). Routed: 44 sites in headless_check (its helpers
+`_scheduled_night`, `_fresh_night`, `_night_falls`, `_armed_prep`,
+`_defended_night` and the rest are among them; `_park_the_waves` gone, 8 call
+sites -> `NightRoad.park`), 19 in input_check, 1 in input_v1 (0114's case),
+shot.gd (its two `+ 1`s become `to_night` + `Sim.advance(state, 1)`),
+autoplay.gd (its 40000-tick loop is `run_night`), make_goldens, perf_check,
+play_nights; determinism.gd folds through `NightRoad.build_ticks_left`, so the
+build step samples on the same ticks. art_showcase and capture_dawn no longer
+call `Phases.begin_night` (they ask `start_waves`), and `_task_0006_phases`'
+refused transition asks `start_waves` too. **Left on purpose**: the 0006 timer
+assert ("then the night begins" after `PREPARATION_TICKS - 1`), commented that
+0136 rewrites it; the 0055 generator check now steps
+`build_ticks_left - 1` instead of naming the lever.
+**Ticks identical**: a temporary probe in `through_build` (removed) ran all four
+suites and flagged every call not made on a fresh build step - only two, both
+in input_check, both after clicking the night button with the driver running
+in real time (phase_tick 1 and 49, load-dependent before); they now stop on
+the night's first tick, and assert what they always did.
+`_task_0118_road` in headless_v1: scans the code lines of src/tools and src/ui
+(the needles built in pieces so the file is not one of them) - the lever only in
+the road and `_task_0006_phases` (and it proves it sees both), `begin_night(`
+nowhere; a planted stray in perf_names.gd was caught by file and function and
+removed; `start_waves` from DAY and from NIGHT refused with the state hash
+unchanged; a fresh `through_build` is exactly the ticks counted one by one and
+ends in the same state; a parked night survives the runner's cap.
+Files: src/core/{phases,sim}.gd, src/tools/night_road.gd (new),
+src/tools/{headless_check,input_check,headless_v1,input_v1,shot,autoplay,
+determinism,make_goldens,perf_check,play_nights,art_showcase,capture_dawn}.gd
+Verify: **58 passed, 0 failed in 551s** (OVER BUDGET 300, as before); headless_check
+16173, headless_v1 96 (+9), input_check 1074, input_v1 11; sim 2728872771 and
+data 1968527100 unchanged; parse 157 scripts (re-run after the last autoplay.gd
+edit). perf: night tick 667us before, 615us after (7% of 8333), path rebuild
+7907 -> 7964us - within tolerance. Autoplay after: **identical** to the table
+before (0116's after-run; 0117 changed only words).

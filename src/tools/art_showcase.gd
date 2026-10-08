@@ -1815,7 +1815,7 @@ func _reactions() -> void:
 	await _shoot("event_fishing_bite", "Actual fishing bite -> bang while keeping the rod in hand")
 	# Existing night transition and damage/destruction priority.
 	_reaction_fixture()
-	expect(Phases.begin_preparation(_state) and Phases.begin_night(_state), "Existing phase transitions begin night")
+	expect(Phases.begin_preparation(_state) and Phases.start_waves(_state), "Existing phase transitions begin night")
 	Reactions.tick(_state)
 	expect(Reactions.now(_state) == &"bang", "Night boundary selects the existing bang")
 	await _reaction_settle(view)

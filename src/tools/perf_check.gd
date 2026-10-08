@@ -159,8 +159,7 @@ func _the_worst_case() -> Dictionary:
 	# game dressed up as the hardest.
 	state["day"] = GameData.MVP_NIGHTS
 	state["nights_won"] = GameData.MVP_NIGHTS - 1
-	Phases.begin_preparation(state)
-	Sim.advance(state, GameData.PREPARATION_TICKS)
+	NightRoad.to_night(state)
 
 	# **Stopped at the busiest moment, not at a fixed tick.** Advance until
 	# the field is as full as it gets, then stop - a fixed number of ticks

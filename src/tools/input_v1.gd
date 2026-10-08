@@ -109,8 +109,7 @@ func _case_0114_house_bar() -> void:
 	(state["tech_owned"] as Array).append(&"stout timbers")
 	var full := Phases.house_full(state)
 	state["house_hp"] = full
-	Phases.begin_preparation(state)
-	Sim.advance(state, GameData.PREPARATION_TICKS)
+	NightRoad.to_night(state)
 	await frames(3)
 	expect(int(state["phase"]) == Phases.NIGHT and night_hud.visible,
 		"it is night and the night HUD is up")

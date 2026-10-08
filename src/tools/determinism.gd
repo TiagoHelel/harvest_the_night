@@ -81,8 +81,9 @@ func _run() -> void:
 	Shop.close(state)
 
 	rolling = _advance_sampling(state, 1500, rolling)   # and the afternoon
-	Phases.begin_preparation(state)
-	rolling = _advance_sampling(state, GameData.PREPARATION_TICKS, rolling)
+	NightRoad.into_build(state)
+	rolling = _advance_sampling(state, NightRoad.build_ticks_left(state),
+		rolling)
 	rolling = _advance_sampling(state, 3000, rolling)   # a night being fought
 	Phases.enter_result(state, true)
 	rolling = _advance_sampling(state, 200, rolling)    # the payout on screen

@@ -59,7 +59,7 @@ func _run() -> void:
 	# Straight into the dark with a crowd already in the yard, and once it
 	# has been seen closing in, a house one bite from falling.
 	Phases.begin_preparation(state)
-	Phases.begin_night(state)
+	Phases.start_waves(state)
 	var home := Farm.house_centre(state)
 	for entry in YARD:
 		var cell: Vector2i = home + (entry[1] as Vector2i)

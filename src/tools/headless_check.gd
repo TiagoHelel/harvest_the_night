@@ -631,8 +631,7 @@ func _task_0104_saves() -> void:
 	Resources.gain(played, {GameData.WOOD: 600, GameData.STONE: 600,
 		GameData.MONEY: 600, GameData.CORN: 300})
 	Sim.advance(played, 900)
-	Phases.begin_preparation(played)
-	Sim.advance(played, GameData.PREPARATION_TICKS)
+	NightRoad.to_night(played)
 	Sim.advance(played, 3000)
 	Sim.advance(played, 600)
 	var invented: Array = []
@@ -2017,6 +2016,9 @@ func _task_0006_phases() -> void:
 	expect(int(state["phase"]) == Phases.PREPARATION, "it lands in preparation")
 
 	# Preparation ends itself after its lever's worth of ticks.
+	# **The timer itself is the subject here**, so this reads the lever
+	# rather than going through `NightRoad` - and task 0136 (START) rewrites
+	# it when the build step stops ending on a timer.
 	Sim.advance(state, GameData.PREPARATION_TICKS - 1)
 	expect(int(state["phase"]) == Phases.PREPARATION,
 		"preparation lasts as long as the lever says")
@@ -2066,7 +2068,7 @@ func _task_0006_phases() -> void:
 	# this prints are deliberate: they are the refusals being tested.
 	print("  (the ERROR lines below are deliberate - refused transitions)")
 	var guard := State.create(3)
-	expect(not Phases.begin_night(guard), "no night straight from the day")
+	expect(not Phases.start_waves(guard), "no night straight from the day")
 	expect(not Phases.enter_result(guard, true), "no result without a night")
 	expect(not Phases.begin_day(guard), "no dawn without a result")
 	expect(int(guard["phase"]) == Phases.DAY,
@@ -2250,8 +2252,7 @@ func _task_0008_farm() -> void:
 	# One grid, both realities: the night sees exactly what the day built.
 	var walled := SuiteKit.any_buildable(state)
 	Farm.place(state, walled, {"id": &"wall"})
-	Phases.begin_preparation(state)
-	Sim.advance(state, GameData.PREPARATION_TICKS)
+	NightRoad.to_night(state)
 	expect(int(state["phase"]) == Phases.NIGHT, "night fell")
 	expect(Farm.occupant(state, walled)["id"] == &"wall",
 		"and the wall built by day is in the same cell by night")
@@ -2419,8 +2420,8 @@ func _task_0010_save() -> void:
 	Resources.pay(state, {GameData.WOOD: 5})
 	var built_on := SuiteKit.any_buildable(state)
 	Farm.place(state, built_on, {"id": &"gun_tower", "hp": 60})
-	Phases.begin_preparation(state)
-	Sim.advance(state, GameData.PREPARATION_TICKS + 500)
+	NightRoad.to_night(state)
+	Sim.advance(state, 500)
 	expect(int(state["phase"]) == Phases.NIGHT, "we are mid-night")
 
 	# **The round trip is exact**, which is the whole reason the state is plain
@@ -2635,8 +2636,7 @@ func _task_0016_gathering() -> void:
 	var night_tree: Vector2i = Farm.cells_with(nocturnal, &"tree")[5]
 	for _i in swings:
 		Gathering.strike(nocturnal, night_tree)
-	Phases.begin_preparation(nocturnal)
-	Sim.advance(nocturnal, GameData.PREPARATION_TICKS)
+	NightRoad.to_night(nocturnal)
 	var pending_at_dusk := Gathering.regrowing(nocturnal)
 	Sim.advance(nocturnal, wait)
 	expect(Gathering.regrowing(nocturnal) == pending_at_dusk,
@@ -2844,8 +2844,8 @@ func _task_0018_wheat() -> void:
 	var growth_at_dusk := int(Farming.plot(overnight, bed)["growth"])
 	expect(growth_at_dusk == 300, "it grew all afternoon", str(growth_at_dusk))
 
-	Phases.begin_preparation(overnight)
-	Sim.advance(overnight, GameData.PREPARATION_TICKS + 2000)
+	NightRoad.to_night(overnight)
+	Sim.advance(overnight, 2000)
 	expect(int(Farming.plot(overnight, bed)["growth"]) == growth_at_dusk,
 		"and not one tick during the whole night",
 		str(Farming.plot(overnight, bed)["growth"]))
@@ -3232,7 +3232,7 @@ func _task_0022_reality() -> void:
 	# **The switch is a transition, not a new world.**
 	expect(Phases.begin_preparation(state), "the day can end")
 	expect(int(state["phase"]) == Phases.PREPARATION, "into preparation")
-	Sim.advance(state, GameData.PREPARATION_TICKS)
+	NightRoad.through_build(state)
 	expect(int(state["phase"]) == Phases.NIGHT, "and then the night")
 
 	expect(Farm.occupant(state, spot)["id"] == &"gun_tower",
@@ -3272,8 +3272,8 @@ func _task_0022_reality() -> void:
 	# **Switching twice gives back the same day, one number further on.**
 	var cycled := State.create(113)
 	var morning := State.copy(cycled)
-	Phases.begin_preparation(cycled)
-	Sim.advance(cycled, GameData.PREPARATION_TICKS + 500)
+	NightRoad.to_night(cycled)
+	Sim.advance(cycled, 500)
 	Phases.enter_result(cycled, true)
 	Phases.begin_day(cycled)
 
@@ -3385,9 +3385,9 @@ func _task_0023_building() -> void:
 	Phases.begin_preparation(nightly)
 	expect(Building.allowed_in_phase(nightly, &"wall"),
 		"preparation takes anything")
-	Sim.advance(nightly, GameData.PREPARATION_TICKS)
+	NightRoad.through_build(nightly)
 	expect(int(nightly["phase"]) == Phases.NIGHT, "and then it is night")
-	_park_the_waves(nightly)
+	NightRoad.park(nightly)
 	expect(not Building.allowed_in_phase(nightly, &"wall"),
 		"a wall cannot go up mid-wave")
 	expect(Building.allowed_in_phase(nightly, &"barricade"),
@@ -3534,9 +3534,8 @@ func _night_with_tower(at_night: bool) -> Dictionary:
 		cell.x += 1
 	Building.place(state, &"gun_tower", cell)
 	if at_night:
-		Phases.begin_preparation(state)
-		Sim.advance(state, GameData.PREPARATION_TICKS)
-		_park_the_waves(state)
+		NightRoad.to_night(state)
+		NightRoad.park(state)
 	return {"state": state, "tower": cell}
 
 
@@ -3548,9 +3547,8 @@ func _shooting_log(seed_value: int) -> Array:
 	while not Farm.buildable(state, cell) and cell.x < SuiteKit.moved(Vector2i(34, 9)).x:
 		cell.x += 1
 	Building.place(state, &"gun_tower", cell)
-	Phases.begin_preparation(state)
-	Sim.advance(state, GameData.PREPARATION_TICKS)
-	_park_the_waves(state)
+	NightRoad.to_night(state)
+	NightRoad.park(state)
 	for offset in [Vector2i(1, 0), Vector2i(2, 0), Vector2i(-1, 1)]:
 		Entities.spawn(state, &"walker", cell + offset)
 
@@ -3572,9 +3570,8 @@ func _shots_in(ticks: int, reload: int) -> int:
 	while not Farm.buildable(state, cell) and cell.x < SuiteKit.moved(Vector2i(34, 9)).x:
 		cell.x += 1
 	Building.place(state, &"gun_tower", cell)
-	Phases.begin_preparation(state)
-	Sim.advance(state, GameData.PREPARATION_TICKS)
-	_park_the_waves(state)
+	NightRoad.to_night(state)
+	NightRoad.park(state)
 
 	# A target that cannot die, so the count is about the reload and nothing
 	# else. Its hit points are topped up every tick.
@@ -3777,25 +3774,15 @@ func _task_0025_zombies() -> void:
 ## started. Tests that are about waves use `_scheduled_night()`.
 func _fresh_night(seed_value: int) -> Dictionary:
 	var state := _scheduled_night(seed_value)
-	_park_the_waves(state)
+	NightRoad.park(state)
 	return state
 
 
 ## A farm at night with its real schedule running.
 func _scheduled_night(seed_value: int) -> Dictionary:
 	var state := State.create(seed_value)
-	Phases.begin_preparation(state)
-	Sim.advance(state, GameData.PREPARATION_TICKS)
+	NightRoad.to_night(state)
 	return state
-
-
-## Stop the night sending anything, and stop it deciding it is finished.
-func _park_the_waves(state: Dictionary) -> void:
-	var wave: Dictionary = state["wave"]
-	wave["done"] = false
-	wave["index"] = 0
-	wave["left"] = 0
-	wave["wait"] = 1 << 30
 
 
 ## Where every zombie is at tick 1000, for a given seed.
@@ -4147,8 +4134,7 @@ func _defended_night(seed_value: int) -> Dictionary:
 	Resources.gain(state, {GameData.WOOD: 200, GameData.IRON: 200,
 		GameData.STONE: 200})
 	_arm_the_farm(state, 4)
-	Phases.begin_preparation(state)
-	Sim.advance(state, GameData.PREPARATION_TICKS)
+	NightRoad.to_night(state)
 	return state
 
 
@@ -4720,8 +4706,7 @@ func _task_0030_fishing() -> void:
 	var night_shore := _a_shore(nightly)
 	var night_pond := _water_beside(nightly, night_shore)
 	expect(Interact.verb_at(nightly, night_pond) == &"fish", "by day, a cast")
-	Phases.begin_preparation(nightly)
-	Sim.advance(nightly, GameData.PREPARATION_TICKS)
+	NightRoad.to_night(nightly)
 	expect(Interact.verb_at(nightly, night_pond) == &"",
 		"and after dark the pond offers nothing",
 		str(Interact.verb_at(nightly, night_pond)))
@@ -5388,8 +5373,7 @@ func _task_0033_power() -> void:
 	# of oil lasts a minute - the generator would outlive the wave and there
 	# would be no brown-out to watch.
 	_fight_night(night, 8)
-	Phases.begin_preparation(night)
-	Sim.advance(night, GameData.PREPARATION_TICKS)
+	NightRoad.to_night(night)
 	expect(int(night["phase"]) == Phases.NIGHT, "a long night, with the lights on")
 	Sim.advance(night, 1)           # the first night tick is what lights it
 	expect(Power.is_running(night, gen), "the generator is turning")
@@ -5432,7 +5416,7 @@ func _task_0033_power() -> void:
 	Resources.gain(waiting, {GameData.OIL: 10})
 	Phases.begin_preparation(waiting)
 	var oil_at_dusk := Resources.amount(waiting, GameData.OIL)
-	Sim.advance(waiting, GameData.PREPARATION_TICKS - 1)
+	Sim.advance(waiting, NightRoad.build_ticks_left(waiting) - 1)
 	expect(Resources.amount(waiting, GameData.OIL) == oil_at_dusk,
 		"a generator burns nothing while the player is deciding where to build",
 		str(Resources.amount(waiting, GameData.OIL)))
@@ -5552,8 +5536,7 @@ func _task_0034_cooking() -> void:
 	var nightly := State.create(1601)
 	var hen: Vector2i = Farm.cells_with(nightly, &"chicken")[0]
 	var hen_entry: Dictionary = GameData.LIVESTOCK[&"chicken"]
-	Phases.begin_preparation(nightly)
-	Sim.advance(nightly, GameData.PREPARATION_TICKS)
+	NightRoad.to_night(nightly)
 	Sim.advance(nightly, int(hen_entry["every_ticks"]) * 2)
 	expect(Livestock.ready_at(nightly, hen) == 0,
 		"a chicken lays nothing during a wave",
@@ -5600,8 +5583,7 @@ func _task_0034_cooking() -> void:
 
 	var hurt := State.create(1603)
 	var house: Vector2i = Farm.cells_with(hurt, &"house")[0]
-	Phases.begin_preparation(hurt)
-	Sim.advance(hurt, GameData.PREPARATION_TICKS)
+	NightRoad.to_night(hurt)
 	expect(int(hurt["phase"]) == Phases.NIGHT, "it is night")
 	expect(Repair.damage_at(hurt, house) == 0, "the house is whole")
 	expect(not Repair.needs_repair(hurt, house), "so there is nothing to mend")
@@ -5918,8 +5900,7 @@ func _mixed_night(seed_value: int, rounds: int) -> Dictionary:
 	# has the tanks that mortars are for, which is what it wanted a late
 	# night for in the first place.
 	_fight_night(state, 5)
-	Phases.begin_preparation(state)
-	Sim.advance(state, GameData.PREPARATION_TICKS)
+	NightRoad.to_night(state)
 	expect(guns == 4 and mortars == 4,
 		"the scripted night has the towers it thinks it has",
 		"%d guns, %d mortars" % [guns, mortars])
@@ -6476,8 +6457,7 @@ func _a_full_farm(seed_value: int) -> Dictionary:
 
 	# A night, with everything the table sends.
 	state["day"] = GameData.MVP_NIGHTS
-	Phases.begin_preparation(state)
-	Sim.advance(state, GameData.PREPARATION_TICKS)
+	NightRoad.to_night(state)
 	return state
 
 
@@ -6609,8 +6589,7 @@ func _task_0039_clock() -> void:
 	# **Night and the payout are not the day clock.** Stopping for a menu is a
 	# daytime rule; a wave does not wait for anybody.
 	var nightly := State.create(2104)
-	Phases.begin_preparation(nightly)
-	Sim.advance(nightly, GameData.PREPARATION_TICKS)
+	NightRoad.to_night(nightly)
 	var night_tick := int(nightly["night_tick"])
 	Sim.advance(nightly, 30)
 	expect(int(nightly["night_tick"]) == night_tick + 30,
@@ -6748,8 +6727,7 @@ func _task_0040_shop() -> void:
 		"and asking for a restock on the same day refuses")
 
 	# A night, and the morning after.
-	Phases.begin_preparation(visits)
-	Sim.advance(visits, GameData.PREPARATION_TICKS)
+	NightRoad.to_night(visits)
 	expect(Shop.stock_of(visits, GameData.WOOD) == left,
 		"the night puts nothing back either",
 		str(Shop.stock_of(visits, GameData.WOOD)))
@@ -6970,7 +6948,7 @@ func _task_0041_tutorial() -> void:
 
 	(armed["intent"] as Dictionary)["begin_night"] = true
 	Sim.advance(armed, 1)
-	Sim.advance(armed, GameData.PREPARATION_TICKS)
+	NightRoad.through_build(armed)
 	for _t in 12000:
 		Sim.advance(armed, 1)
 		if int(armed["phase"]) != Phases.NIGHT:
@@ -7149,8 +7127,7 @@ func _three_in_a_row(seed_value: int) -> Dictionary:
 	while not Farm.buildable(state, tower) and tower.x < Grid.WIDTH - 1:
 		tower.x += 1
 	Building.place(state, &"gun_tower", tower)
-	Phases.begin_preparation(state)
-	Sim.advance(state, GameData.PREPARATION_TICKS)
+	NightRoad.to_night(state)
 
 	var house := Farm.house_centre(state)
 	var near := Entities.spawn(state, &"walker", tower + Vector2i(2, 0))
@@ -7165,8 +7142,7 @@ func _three_in_a_row(seed_value: int) -> Dictionary:
 ## Fire one splash shot into a huddle and report what it did.
 func _splash_test(seed_value: int, entry: Dictionary) -> Dictionary:
 	var state := State.create(seed_value)
-	Phases.begin_preparation(state)
-	Sim.advance(state, GameData.PREPARATION_TICKS)
+	NightRoad.to_night(state)
 
 	# A middle, two at one tile, and one well outside the radius.
 	var middle_cell := Farm.house_centre(state) + Vector2i(4, 4)
@@ -7376,8 +7352,7 @@ func _a_crowd(seed_value: int) -> Dictionary:
 		GameData.OIL: 400, GameData.INCENDIARY: 400})
 	var tower := _room_for(state, Vector2i(1, 1))
 	Building.place(state, &"flame_tower", tower)
-	Phases.begin_preparation(state)
-	Sim.advance(state, GameData.PREPARATION_TICKS)
+	NightRoad.to_night(state)
 
 	# Straight out to the east, well inside the range.
 	var in_line: Array = []
@@ -7556,9 +7531,8 @@ func _mortar_field(seed_value: int) -> Dictionary:
 		GameData.GUNPOWDER: 400})
 	var tower := _room_for(state, Vector2i(1, 1))
 	Building.place(state, &"mortar", tower)
-	Phases.begin_preparation(state)
-	Sim.advance(state, GameData.PREPARATION_TICKS)
-	_park_the_waves(state)
+	NightRoad.to_night(state)
+	NightRoad.park(state)
 	return {"state": state, "tower": tower}
 
 
@@ -8104,8 +8078,7 @@ func _task_0047_barricades() -> void:
 	Phases.enter_result(night, true)
 	(night["intent"] as Dictionary)["confirm_result"] = true
 	Sim.advance(night, 2)
-	Phases.begin_preparation(night)
-	Sim.advance(night, GameData.PREPARATION_TICKS)
+	NightRoad.to_night(night)
 	expect(int(night["phase"]) == Phases.NIGHT, "another night")
 	expect(Building.left_tonight(night, &"barricade") == limit,
 		"which allows the whole limit again",
@@ -8198,9 +8171,8 @@ func _armed_night(seed_value: int) -> Dictionary:
 	var state := State.create(seed_value)
 	Resources.gain(state, {GameData.WOOD: 400, GameData.STONE: 400,
 		GameData.IRON: 400})
-	Phases.begin_preparation(state)
-	Sim.advance(state, GameData.PREPARATION_TICKS)
-	_park_the_waves(state)
+	NightRoad.to_night(state)
+	NightRoad.park(state)
 	return state
 
 
@@ -8491,8 +8463,8 @@ func _armed_prep(seed_value: int) -> Dictionary:
 
 ## ...and then let it get dark, with no wave due.
 func _night_falls(state: Dictionary) -> void:
-	Sim.advance(state, GameData.PREPARATION_TICKS)
-	_park_the_waves(state)
+	NightRoad.through_build(state)
+	NightRoad.park(state)
 
 
 ## Set one mine off under a line of walkers and report what each ring took.
@@ -9937,8 +9909,7 @@ func _task_0054_ability() -> void:
 	# looking at a flare that is not ready for a reason they cannot see.
 	(carried["intent"] as Dictionary)["confirm_result"] = true
 	Sim.advance(carried, 2)
-	Phases.begin_preparation(carried)
-	Sim.advance(carried, GameData.PREPARATION_TICKS)
+	NightRoad.to_night(carried)
 	expect(int(carried["phase"]) == Phases.NIGHT, "another night")
 	expect(Ability.ready(carried),
 		"which begins with the flare charged",
@@ -10053,8 +10024,7 @@ func _flare_a_line(seed_value: int) -> Dictionary:
 ## Run one whole night and count how many flares its length pays for.
 func _count_the_flares(seed_value: int) -> Dictionary:
 	var state := State.create(seed_value)
-	Phases.begin_preparation(state)
-	Sim.advance(state, GameData.PREPARATION_TICKS)
+	NightRoad.to_night(state)
 	# The house cannot fall, or the night ends early and the count is of a
 	# short night rather than of a night.
 	state["house_hp"] = 1 << 20
@@ -10255,7 +10225,7 @@ func _a_night_to_run(seed_value: int) -> Dictionary:
 		GameData.IRON: 400, GameData.GUNPOWDER: 400, GameData.OIL: 400})
 	Phases.begin_preparation(state)
 	_line_of_towers(state, &"gun_tower", 3)
-	Sim.advance(state, GameData.PREPARATION_TICKS)
+	NightRoad.through_build(state)
 	return state
 
 
@@ -11078,8 +11048,7 @@ func _all_reward() -> int:
 func _what_a_night_sends(night: int) -> Dictionary:
 	var state := State.create(4400 + night)
 	_fight_night(state, night)
-	Phases.begin_preparation(state)
-	Sim.advance(state, GameData.PREPARATION_TICKS)
+	NightRoad.to_night(state)
 	state["house_hp"] = 1 << 20
 
 	var kinds: Dictionary = {}
@@ -11240,7 +11209,7 @@ func _play_a_night(night: int, build: Array) -> Dictionary:
 	for pair in build:
 		_line_of_towers(state, StringName((pair as Array)[0]),
 			int((pair as Array)[1]))
-	Sim.advance(state, GameData.PREPARATION_TICKS)
+	NightRoad.through_build(state)
 
 	for _tick in 40000:
 		if int(state["phase"]) != Phases.NIGHT:
@@ -11258,8 +11227,7 @@ func _play_a_night(night: int, build: Array) -> Dictionary:
 func _run_a_night_out(night: int) -> Dictionary:
 	var state := State.create(5200 + night)
 	_fight_night(state, night)
-	Phases.begin_preparation(state)
-	Sim.advance(state, GameData.PREPARATION_TICKS)
+	NightRoad.to_night(state)
 	state["house_hp"] = 1 << 20
 
 	var seen: Dictionary = {}
@@ -11680,8 +11648,7 @@ func _task_0063_tech_tree() -> void:
 
 	# **Never during a wave.** The requirement.
 	var night := _a_day_with_points(6302, 20)
-	Phases.begin_preparation(night)
-	Sim.advance(night, GameData.PREPARATION_TICKS)
+	NightRoad.to_night(night)
 	expect(int(night["phase"]) == Phases.NIGHT, "it is night")
 	expect(_refused(Tech.why_not_buy(night, first)) == &"WHY_AFTER_DARK",
 		"the tree is shut after dark", str(Tech.why_not_buy(night, first)))
@@ -11990,8 +11957,7 @@ func _task_0065_defeat() -> void:
 		str(Phases.nights_won(run)))
 	(run["intent"] as Dictionary)["confirm_result"] = true
 	Sim.advance(run, 2)
-	Phases.begin_preparation(run)
-	Sim.advance(run, GameData.PREPARATION_TICKS)
+	NightRoad.to_night(run)
 	expect(int(run["night"]) == 4, "and the next one is four",
 		str(run["night"]))
 
@@ -12109,8 +12075,7 @@ func _task_0065_defeat() -> void:
 	Sim.advance(yard, GameData.SECONDS * 30)
 	expect(Entities.count(yard) == 0, "nobody comes back while the sun is up",
 		str(Entities.count(yard)))
-	Phases.begin_preparation(yard)
-	Sim.advance(yard, GameData.PREPARATION_TICKS)
+	NightRoad.to_night(yard)
 	expect(int(yard["phase"]) == Phases.NIGHT and int(yard["night"]) == 1,
 		"the same night comes back", "%s night %d"
 			% [Phases.name_of(int(yard["phase"])), int(yard["night"])])
@@ -12144,8 +12109,7 @@ func _a_run_at_night(seed_value: int, night: int) -> Dictionary:
 	state["day"] = night
 	Resources.gain(state, {GameData.WOOD: 400, GameData.STONE: 400,
 		GameData.IRON: 400, GameData.FOOD: 200, GameData.TECH: 6})
-	Phases.begin_preparation(state)
-	Sim.advance(state, GameData.PREPARATION_TICKS)
+	NightRoad.to_night(state)
 	return state
 
 
@@ -12160,8 +12124,7 @@ func _lose_the_night(state: Dictionary) -> void:
 func _to_the_next_night(state: Dictionary) -> void:
 	(state["intent"] as Dictionary)["confirm_result"] = true
 	Sim.advance(state, 2)
-	Phases.begin_preparation(state)
-	Sim.advance(state, GameData.PREPARATION_TICKS)
+	NightRoad.to_night(state)
 
 
 ## Lose a night and compare the itemised list against the ledger.
@@ -12370,8 +12333,7 @@ func _play_a_whole_run(seed_value: int) -> Dictionary:
 			Building.place(state, &"generator",
 				_room_for(state, Building.size_of(&"generator")))
 
-		Phases.begin_preparation(state)
-		Sim.advance(state, GameData.PREPARATION_TICKS)
+		NightRoad.to_night(state)
 		# The house is mended between nights, which is what a day is for.
 		state["house_hp"] = Phases.house_full(state)
 
@@ -12517,8 +12479,7 @@ func _task_0068_balance() -> void:
 		expect(up >= 1, "%s builds what its plan names first: %s"
 			% [name, first], "%d of them" % up)
 
-		Phases.begin_preparation(state)
-		Sim.advance(state, GameData.PREPARATION_TICKS)
+		NightRoad.to_night(state)
 		for _t in 40000:
 			if int(state["phase"]) != Phases.NIGHT:
 				break
@@ -12590,8 +12551,7 @@ func _task_0069_stats() -> void:
 	# **Killing ten zombies increments by exactly ten.** The done-when, and
 	# the reason the counter hangs off `Combat._kill()` rather than off
 	# anything that might fire twice for one corpse.
-	Phases.begin_preparation(state)
-	Sim.advance(state, GameData.PREPARATION_TICKS)
+	NightRoad.to_night(state)
 	var before := int(Stats.of_run(state)["killed"])
 	var killed := 0
 	for _i in 10:
@@ -12860,8 +12820,7 @@ func _task_0070_endless() -> void:
 	state["endless"] = true
 	state["nights_won"] = 24
 	state["night"] = 25
-	Phases.begin_preparation(state)
-	Sim.advance(state, GameData.PREPARATION_TICKS)
+	NightRoad.to_night(state)
 	expect(int(state["phase"]) == Phases.NIGHT, "night 25 starts")
 	var ever_out := 0
 	var ticks := 0

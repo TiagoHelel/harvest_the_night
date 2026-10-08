@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`#########...............`  **116 / 296 done**
+`#########...............`  **117 / 296 done**
 
-0 doing / 180 todo / 0 blocked across 18 phases.
+0 doing / 179 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -17,7 +17,7 @@ Keep going until it is all ticked:
 /loop /next-task
 ```
 
-First up: **0118 - One road into the waves**. The whole of what is left is
+First up: **0119 - Tests and tools build in the build step**. The whole of what is left is
 spelled out under *What is open* below, ready ones first.
 
 The boxes below are **generated** from the `Status:` line inside each
@@ -26,28 +26,28 @@ which rewrites this file for you.
 
 ## What is open
 
-180 task(s) left, the ready ones first, then what they
+179 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
-### 0118 - One road into the waves
+### 0119 - Tests and tools build in the build step
 
-Ready to pick up.  Likely files: `src/core/phases.gd, src/core/sim.gd, src/tools/night_road.gd (new), src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd, src/tools/shot.gd, src/tools/autoplay.gd, src/tools/determinism.gd, src/tools/make_goldens.gd, src/tools/perf_check.gd, src/tools/play_nights.gd, src/tools/art_showcase.gd, src/tools/capture_dawn.gd`.
+Ready to pick up.  Likely files: `src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd, src/tools/autoplay.gd, src/tools/determinism.gd, src/tools/shot.gd, src/tools/make_goldens.gd, src/tools/perf_check.gd, src/tools/play_nights.gd, src/tools/tower_showcase.gd, src/tools/barrier_showcase.gd, src/tools/effect_showcase.gd, src/tools/enemy_showcase.gd, src/tools/giant_showcase.gd`.
 
-About sixty-five places in the tests and tools start a night the same way: `begin_preparation`, then wait out `PREPARATION_TICKS`. Phase 10 changes how the build step ends twice (0136's START, 0137's dawn). Put the road into the waves in one place first, so those tasks change it once.
+0132 will forbid defences by day. Before it does, move every defence the tests and tools put down into the build step, where they are allowed today, so that rule change is a rule change and not a hundred broken set-ups.
 
-- A refactor: both hashes stay where they are and no test changes what it asserts
-- One core entry starts the waves: `Phases.start_waves(state)`, PREPARATION to NIGHT, refusing any other phase with `push_error` like the other transitions; `Sim._tick_preparation`'s timer calls it. 0136's START intent and 0128's 30 s pass-out step will be its other callers
-- Nothing in `src/tools/` or `src/ui/` calls `Phases.begin_night` directly any more (`art_showcase.gd` and `capture_dawn.gd` do today); `_task_0006_phases`' refused-transition check (`not Phases.begin_night(guard)`, ~l.2089) asks `start_waves` instead, or stays as an allowed exception
-- A shared tool/test helper, e.g. `src/tools/night_road.gd` (`class_name NightRoad`, static): into the build step (`begin_preparation`); through it (the rest of the build step, `PREPARATION_TICKS - phase_tick`: on a fresh one exactly today's `Sim.advance(state, GameData.PREPARATION_TICKS)`, so the ticks are identical); both together; the night runner (step until the phase leaves NIGHT, with a cap - autoplay's 40000 loop); and the park (today's `_park_the_waves`)
-- The park is where 0137 will also hold back dawn: say so in its doc comment, and add no state key for it now (any new key moves SIM)
-- Route every site through it: `headless_check`'s `_scheduled_night`, `_fresh_night`, `_night_falls`, `_a_run_at_night`, `_to_the_next_night`, `_armed_prep`, `_defended_night` and the inline ones; the 19 lines in `input_check`; anything 0113-0117 put in the v1 suites; `shot.gd` (its `PREPARATION_TICKS + 1` too), `autoplay.gd`, `make_goldens.gd`, `perf_check.gd`, `play_nights.gd`. `determinism.gd` folds the state into SIM every `SAMPLE_EVERY` ticks through `_advance_sampling`: its build step must keep folding at the same ticks (the road tells it how many ticks are left, or takes the stepper), or SIM moves
-- Leave the asserts whose subject is the timer itself (`_task_0006_phases`, 'then the night begins' after `PREPARATION_TICKS - 1`), each with a comment that 0136 rewrites it
-- A brand-new `class_name` is invisible to `--script` runs until `--import` refreshes the cache: run verify, not the scripts by hand
+- Every set-up `Building.place` of a defence (an id in `GameData.DEFENCES`) happens in PREPARATION, after the road's 'into the build step' and before the waves: `_arm_the_farm`/`_defended_night` and the rest of `headless_check`'s ~62 place sites, `input_check`'s ~10, the v1 suites' groups from 0113-0118, `shot.gd`'s scenarios, `determinism.gd` `_set_the_farm_going`, `make_goldens.gd`, `perf_check.gd`, `play_nights.gd`. The same for every set-up `Building.upgrade` and `Building.sell` of a defence (~11 in `headless_check`): 0132 makes them follow the same rule
+- The art gates verify runs place real defences after setting `phase` to DAY: `tower_showcase.gd`, `barrier_showcase.gd`, `effect_showcase.gd`, `enemy_showcase.gd`, `giant_showcase.gd`. They set PREPARATION around the placement, upgrade and sale instead, and their `show_art.py ... --check` rows still pass (`art_showcase.gd`'s stations are buildings and stay by day)
+- Production buildings (`GameData.BUILDINGS`: press, generator, kitchen...) stay by day: decision #4 keeps them a day job
+- `Autoplay`: `_a_day` still gathers, crafts, buys tech and puts up production buildings; a new build step between `begin_preparation` and the waves places, upgrades and repairs defences off the same plan cursor (`_wants`, `_room_for`, `_next_step`)
+- `_task_0068_balance` asserts 'builds what its plan names first' straight after `_a_day`: rewrite it to look after the build step
+- Leave the asserts whose subject is the day-placement rule itself - e.g. `_task_0022`'s 'built by day', `_task_0047`'s night barricade, the tutorial's day `build` step in `_task_0041` - with a comment at each pointing at 0132
+- In `input_check`, a defence placed through the real build mode goes down after the night button; if build mode cannot open in PREPARATION, that is a bug to fix here and say so
+- Only SIM may move, because the determinism scenario's towers and walls now go down in PREPARATION: accept it and write both numbers and why in the journal. DATA does not move
 
-  - done when: `_task_0118_road` in `headless_v1` reads the code lines (comments skipped) of `src/tools/*.gd` and `src/ui/*.gd`: `PREPARATION_TICKS` appears only in the road and in an allow-list of timer asserts named in the assert, and `Phases.begin_night(` nowhere outside `src/core/` but its allowed exceptions (the assert's own needles excluded)
-  - done when: `Phases.start_waves` from DAY or NIGHT returns false and changes nothing - asserted
-  - done when: `python tools/autoplay.py` prints the same table as before the refactor, and `python tools/perf.py` stays within tolerance
+  - done when: With a scratch edit to `Building.allowed_in_phase` and `why_not_upgrade` refusing every `DEFENCES` id by day (reverted before the end), a full `python tools/verify.py` fails only on the day-rule asserts this task leaves for 0132, in `headless_check` and `input_check` - listed in the journal; the v1 suites, the art showcases, autoplay and the tools pass
+  - done when: `python tools/autoplay.py` runs, and the journal has the nights held per policy before and after
+  - done when: `python tools/shot.py 0119` taken and opened: `wave` and `refused` still show their towers and walls
 
 ### 0120 - One road for art that has not arrived
 
@@ -87,24 +87,22 @@ The plan promises a night played on a controller, and `project.godot` has not on
   - done when: `_task_0121_pad` in `headless_v1`: every action in `ACTIONS` has a joypad event in `project.godot` except the ones the assert names with a reason, every `ACT_PAD_*` key `label_of` can return is in the strings table, and no code line in `src/ui/` names a `JOY_` constant
   - done when: `python tools/i18n_check.py` passes; `python tools/shot.py 0121 options_controls` opened: the pad labels fit
 
-### 0119 - Tests and tools build in the build step
+### 0126 - The clock: 06:00 to 02:00
 
-Waits on 0118.  Likely files: `src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd, src/tools/autoplay.gd, src/tools/determinism.gd, src/tools/shot.gd, src/tools/make_goldens.gd, src/tools/perf_check.gd, src/tools/play_nights.gd, src/tools/tower_showcase.gd, src/tools/barrier_showcase.gd, src/tools/effect_showcase.gd, src/tools/enemy_showcase.gd, src/tools/giant_showcase.gd`.
+Ready to pick up.  Likely files: `src/core/phases.gd, src/core/game_data.gd, src/ui/day_hud.gd, src/ui/world_view.gd, assets/locale/strings.csv, src/tools/headless_v1.gd`.
 
-0132 will forbid defences by day. Before it does, move every defence the tests and tools put down into the build step, where they are allowed today, so that rule change is a rule change and not a hundred broken set-ups.
+The day gets an hour. Today's `DAY_TICKS` is mapped onto a clock that runs from 06:00 to 02:00, dusk falls at 18:00, and the light and the HUD read the hour, so every later task can speak in times of day.
 
-- Every set-up `Building.place` of a defence (an id in `GameData.DEFENCES`) happens in PREPARATION, after the road's 'into the build step' and before the waves: `_arm_the_farm`/`_defended_night` and the rest of `headless_check`'s ~62 place sites, `input_check`'s ~10, the v1 suites' groups from 0113-0118, `shot.gd`'s scenarios, `determinism.gd` `_set_the_farm_going`, `make_goldens.gd`, `perf_check.gd`, `play_nights.gd`. The same for every set-up `Building.upgrade` and `Building.sell` of a defence (~11 in `headless_check`): 0132 makes them follow the same rule
-- The art gates verify runs place real defences after setting `phase` to DAY: `tower_showcase.gd`, `barrier_showcase.gd`, `effect_showcase.gd`, `enemy_showcase.gd`, `giant_showcase.gd`. They set PREPARATION around the placement, upgrade and sale instead, and their `show_art.py ... --check` rows still pass (`art_showcase.gd`'s stations are buildings and stay by day)
-- Production buildings (`GameData.BUILDINGS`: press, generator, kitchen...) stay by day: decision #4 keeps them a day job
-- `Autoplay`: `_a_day` still gathers, crafts, buys tech and puts up production buildings; a new build step between `begin_preparation` and the waves places, upgrades and repairs defences off the same plan cursor (`_wants`, `_room_for`, `_next_step`)
-- `_task_0068_balance` asserts 'builds what its plan names first' straight after `_a_day`: rewrite it to look after the build step
-- Leave the asserts whose subject is the day-placement rule itself - e.g. `_task_0022`'s 'built by day', `_task_0047`'s night barricade, the tutorial's day `build` step in `_task_0041` - with a comment at each pointing at 0132
-- In `input_check`, a defence placed through the real build mode goes down after the night button; if build mode cannot open in PREPARATION, that is a bug to fix here and say so
-- Only SIM may move, because the determinism scenario's towers and walls now go down in PREPARATION: accept it and write both numbers and why in the journal. DATA does not move
+- Clock levers in `game_data.gd`: `DAY_START_MINUTE := 6 * 60` (`# LEVER`, 05:00-08:00), `DAY_END_MINUTE := 26 * 60` (02:00 the next morning, `# LEVER`, 24:00-27:00) and `DUSK_MINUTE := 18 * 60` (`# LEVER`, 16:00-20:00). `DUSK_AT_TICK` becomes a constant derived from them, so none of its callers change
+- Integer helpers in `Phases`: `clock_minute(state)` (minutes since midnight of the day that began: 360 at `day_tick` 0, 1560 at `DAY_TICKS`), `tick_at_minute(minute)` (the inverse, for tests and tools), and `is_dusk` reading the dusk minute. Outside DAY they answer for the moment the day ended. Until 0128 the clock keeps counting past 02:00 rather than clamping
+- `GameData.validate()` (through a `check_clock(start, dusk, end, day_ticks)` that takes its numbers as arguments, like `check_tutorial(steps)`, so a test can feed it a bad clock; it replaces today's `DUSK_AT_TICK > DAY_TICKS` line): start < dusk < end, and `DAY_TICKS` is a whole number of ticks per game minute (6 today, 12-15 after 0166), so the clock never shows a minute twice or skips one
+- `DHUD_DAY` (today `DAY %d   %d:%02d%s`, elapsed m:ss) shows the hour as 24-hour HH:MM in both languages (`assets/locale/strings.csv`), wrapping after midnight (01:30, never 25:30); keep `DHUD_DUSK` read or delete its row, so `tools/i18n_check.py` finds no unused key. 0140 gives the clock its final look
+- `WorldView._daylight_now` and `_ramp_now` read the hour: dawn to noon, noon to dusk at 18:00, the dusk light deepening until 02:00. The night ramp does not change
+- No rule changes: `day_percent` and `overtime_percent` keep their meaning (overtime now starts at 18:00), and the real length of the day is 0166's
+- SIM must not move. DATA moves on purpose - dusk goes from 192 s to 144 s of the 240 s day (22:00 to 18:00 on the new clock) and the clock levers join the `time` row of `digest()`; write both numbers in PROGRESS
 
-  - done when: With a scratch edit to `Building.allowed_in_phase` and `why_not_upgrade` refusing every `DEFENCES` id by day (reverted before the end), a full `python tools/verify.py` fails only on the day-rule asserts this task leaves for 0132, in `headless_check` and `input_check` - listed in the journal; the v1 suites, the art showcases, autoplay and the tools pass
-  - done when: `python tools/autoplay.py` runs, and the journal has the nights held per policy before and after
-  - done when: `python tools/shot.py 0119` taken and opened: `wave` and `refused` still show their towers and walls
+  - done when: `_task_0126_clock` in `src/tools/headless_v1.gd` asserts 06:00 at tick 0, 16:00 at `DAY_TICKS / 2`, 18:00 at `DUSK_AT_TICK`, 02:00 at `DAY_TICKS`, `tick_at_minute(clock_minute(t)) == t` on minute boundaries, and that `check_clock` refuses a dusk after the end of the day and a day that is not a whole number of ticks per minute
+  - done when: `python tools/shot.py 0126 noon dusk` opened: the HUD reads HH:MM and the evening light starts at 18:00, not later
 
 ### 0122 - Art: the farmer's run
 
@@ -182,23 +180,6 @@ The last three legacy strips: A009's craft, trade and repair in the 32px body. R
   - done when: `python tools/placeholders.py` no longer lists A009
   - done when: FHD captures (`python tools/shot.py 0125 --fhd`, with an earlier leaf's mid-verb scenario or a new one) of craft at the workshop, trade at the stall and repair on the house, by day and in the dark, in `implementation/shots/0125/`, opened
   - done when: The sim and data hashes are unchanged (art never moves them)
-
-### 0126 - The clock: 06:00 to 02:00
-
-Waits on 0118.  Likely files: `src/core/phases.gd, src/core/game_data.gd, src/ui/day_hud.gd, src/ui/world_view.gd, assets/locale/strings.csv, src/tools/headless_v1.gd`.
-
-The day gets an hour. Today's `DAY_TICKS` is mapped onto a clock that runs from 06:00 to 02:00, dusk falls at 18:00, and the light and the HUD read the hour, so every later task can speak in times of day.
-
-- Clock levers in `game_data.gd`: `DAY_START_MINUTE := 6 * 60` (`# LEVER`, 05:00-08:00), `DAY_END_MINUTE := 26 * 60` (02:00 the next morning, `# LEVER`, 24:00-27:00) and `DUSK_MINUTE := 18 * 60` (`# LEVER`, 16:00-20:00). `DUSK_AT_TICK` becomes a constant derived from them, so none of its callers change
-- Integer helpers in `Phases`: `clock_minute(state)` (minutes since midnight of the day that began: 360 at `day_tick` 0, 1560 at `DAY_TICKS`), `tick_at_minute(minute)` (the inverse, for tests and tools), and `is_dusk` reading the dusk minute. Outside DAY they answer for the moment the day ended. Until 0128 the clock keeps counting past 02:00 rather than clamping
-- `GameData.validate()` (through a `check_clock(start, dusk, end, day_ticks)` that takes its numbers as arguments, like `check_tutorial(steps)`, so a test can feed it a bad clock; it replaces today's `DUSK_AT_TICK > DAY_TICKS` line): start < dusk < end, and `DAY_TICKS` is a whole number of ticks per game minute (6 today, 12-15 after 0166), so the clock never shows a minute twice or skips one
-- `DHUD_DAY` (today `DAY %d   %d:%02d%s`, elapsed m:ss) shows the hour as 24-hour HH:MM in both languages (`assets/locale/strings.csv`), wrapping after midnight (01:30, never 25:30); keep `DHUD_DUSK` read or delete its row, so `tools/i18n_check.py` finds no unused key. 0140 gives the clock its final look
-- `WorldView._daylight_now` and `_ramp_now` read the hour: dawn to noon, noon to dusk at 18:00, the dusk light deepening until 02:00. The night ramp does not change
-- No rule changes: `day_percent` and `overtime_percent` keep their meaning (overtime now starts at 18:00), and the real length of the day is 0166's
-- SIM must not move. DATA moves on purpose - dusk goes from 192 s to 144 s of the 240 s day (22:00 to 18:00 on the new clock) and the clock levers join the `time` row of `digest()`; write both numbers in PROGRESS
-
-  - done when: `_task_0126_clock` in `src/tools/headless_v1.gd` asserts 06:00 at tick 0, 16:00 at `DAY_TICKS / 2`, 18:00 at `DUSK_AT_TICK`, 02:00 at `DAY_TICKS`, `tick_at_minute(clock_minute(t)) == t` on minute boundaries, and that `check_clock` refuses a dusk after the end of the day and a day that is not a whole number of ticks per minute
-  - done when: `python tools/shot.py 0126 noon dusk` opened: the HUD reads HH:MM and the evening light starts at 18:00, not later
 
 ### 0127 - Going to bed starts the night
 
@@ -410,7 +391,7 @@ The night's shop window: a hotbar of every defence with its price, picked with a
 
 ### 0136 - The build step waits for START
 
-Waits on 0118, 0132, 0128.  Likely files: `src/core/sim.gd, src/core/phases.gd, src/core/game_data.gd, src/core/player.gd, src/ui/night_hud.gd, project.godot, src/app/input_actions.gd, assets/locale/strings.csv, src/tools/night_road.gd, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Waits on 0132, 0128.  Likely files: `src/core/sim.gd, src/core/phases.gd, src/core/game_data.gd, src/core/player.gd, src/ui/night_hud.gd, project.godot, src/app/input_actions.gd, assets/locale/strings.csv, src/tools/night_road.gd, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
 The build step has no clock. The night waits while the player builds and starts when they press START - except after a pass-out, when the horde is already at the gate and gives thirty seconds.
 
@@ -3455,7 +3436,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0107** [Store assets](prompts/0107-store-assets.md)
 - [x] **0108** [The devlog and a trailer clip](prompts/0108-devlog.md)
 
-## 9 - v1.0 groundwork  (6/14)
+## 9 - v1.0 groundwork  (7/14)
 
 - [x] **0112** [Room in the test suites](prompts/0112-suite-headroom.md)
 - [x] **0113** [Repairs mend to the real maximum](prompts/0113-repairs-full-max.md)
@@ -3463,8 +3444,8 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0115** [Spawn ground that cannot be built shut](prompts/0115-spawn-room.md)
 - [x] **0116** [The mortar and the flamethrower, empty and upgraded](prompts/0116-mortar-flame-ammo.md)
 - [x] **0117** [Three stale documents](prompts/0117-stale-docs.md)
-- [ ] **0118** [One road into the waves](prompts/0118-one-road-into-night.md)
-- [ ] **0119** [Tests and tools build in the build step](prompts/0119-build-in-preparation.md) - needs 0118
+- [x] **0118** [One road into the waves](prompts/0118-one-road-into-night.md)
+- [ ] **0119** [Tests and tools build in the build step](prompts/0119-build-in-preparation.md)
 - [ ] **0120** [One road for art that has not arrived](prompts/0120-placeholder-road.md)
 - [ ] **0121** [A controller for every action](prompts/0121-gamepad-bindings.md)
 - [ ] **0122** [Art: the farmer's run](prompts/0122-art-farmer-run.md) - needs 0120 - waits for art A006
@@ -3474,7 +3455,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 
 ## 10 - Sleep is the night  (0/23)
 
-- [ ] **0126** [The clock: 06:00 to 02:00](prompts/0126-clock.md) - needs 0118
+- [ ] **0126** [The clock: 06:00 to 02:00](prompts/0126-clock.md)
 - [ ] **0127** [Going to bed starts the night](prompts/0127-bed.md) - needs 0126
 - [ ] **0128** [Passing out at 02:00](prompts/0128-pass-out.md) - needs 0127
 - [ ] **0129** [He stays in bed all night](prompts/0129-asleep-all-night.md) - needs 0127, 0120, 0128
@@ -3484,7 +3465,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0133** [The hotbar of defences](prompts/0133-hotbar.md) - needs 0132
 - [ ] **0134** [Repairing by cursor](prompts/0134-repair-by-cursor.md) - needs 0131, 0133
 - [ ] **0135** [The flare goes where you aim it](prompts/0135-aimed-flare.md) - needs 0131
-- [ ] **0136** [The build step waits for START](prompts/0136-start-button.md) - needs 0118, 0132, 0128
+- [ ] **0136** [The build step waits for START](prompts/0136-start-button.md) - needs 0132, 0128
 - [ ] **0137** [The night ends at 06:00](prompts/0137-dawn-ends-night.md) - needs 0136
 - [ ] **0138** [Waking up: the morning report](prompts/0138-morning-report.md) - needs 0137
 - [ ] **0139** [The night HUD for the guardian](prompts/0139-night-hud-guardian.md) - needs 0133, 0134, 0135, 0136, 0137

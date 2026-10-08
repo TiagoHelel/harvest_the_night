@@ -939,8 +939,8 @@ func _set_dusk(state: Dictionary) -> void:
 
 func _set_wave(state: Dictionary) -> void:
 	_a_defended_farm(state)
-	Phases.begin_preparation(state)
-	Sim.advance(state, GameData.PREPARATION_TICKS + 1)
+	NightRoad.to_night(state)
+	Sim.advance(state, 1)
 	# **Spawned by hand rather than waited for.** A wave arriving on its own
 	# schedule would make the picture depend on how long the preparation ran,
 	# which is the sort of thing that drifts a tick and moves every zombie.
@@ -958,8 +958,8 @@ func _set_wave(state: Dictionary) -> void:
 
 func _set_result(state: Dictionary) -> void:
 	_a_defended_farm(state)
-	Phases.begin_preparation(state)
-	Sim.advance(state, GameData.PREPARATION_TICKS + 1)
+	NightRoad.to_night(state)
+	Sim.advance(state, 1)
 	# **The night is played, not declared.** Calling `enter_result` straight
 	# out gave a panel with a title and a button and nothing between them -
 	# there was no night for it to itemise. `skip_night` is the game's own

@@ -1322,9 +1322,7 @@ func _case_0027_the_loop() -> void:
 	# **The build step runs in real time at any speed** - it is the stretch
 	# the player is promised no hurry in - so its twenty seconds are run off
 	# here rather than waited for.
-	if int(state["phase"]) == Phases.PREPARATION:
-		Sim.advance(state, maxi(GameData.PREPARATION_TICKS
-			- int(state["phase_tick"]), 0))
+	NightRoad.through_build(state)
 	expect(int(state["phase"]) == Phases.NIGHT, "the build step gives way to the night",
 		Phases.name_of(int(state["phase"])))
 
@@ -3024,8 +3022,7 @@ func _case_0053_repair() -> void:
 
 	Farm.place(state, spot, {"id": &"wall",
 		"hp": int((GameData.DEFENCES[&"wall"] as Dictionary)["hp"])})
-	Phases.begin_preparation(state)
-	Sim.advance(state, GameData.PREPARATION_TICKS)
+	NightRoad.to_night(state)
 	expect(int(state["phase"]) == Phases.NIGHT, "it is night")
 
 	Farm.damage(state, spot, 60)
@@ -3105,8 +3102,7 @@ func _case_0054_ability() -> void:
 		"pressing it in daylight does nothing",
 		str(Ability.flares_used(state)))
 
-	Phases.begin_preparation(state)
-	Sim.advance(state, GameData.PREPARATION_TICKS)
+	NightRoad.to_night(state)
 	expect(int(state["phase"]) == Phases.NIGHT, "it is night")
 	expect(Ability.ready(state), "and the flare is charged")
 
@@ -3194,7 +3190,7 @@ func _case_0055_speed() -> void:
 	Phases.begin_preparation(state)
 	expect(driver.effective_speed() == 1,
 		"and the build step too", str(driver.effective_speed()))
-	Sim.advance(state, GameData.PREPARATION_TICKS)
+	NightRoad.through_build(state)
 	expect(driver.effective_speed() == 4,
 		"and it takes hold when the night does",
 		str(driver.effective_speed()))
@@ -3205,8 +3201,7 @@ func _case_0055_speed() -> void:
 	expect(int(state["phase"]) == Phases.DAY, "back in daylight for the rest",
 		Phases.name_of(int(state["phase"])))
 
-	Phases.begin_preparation(state)
-	Sim.advance(state, GameData.PREPARATION_TICKS)
+	NightRoad.to_night(state)
 	await frames(2)
 	expect(int(state["phase"]) == Phases.NIGHT, "it is night")
 	expect(speed_line.is_visible_in_tree() and skip_line.visible,
@@ -3256,8 +3251,7 @@ func _case_0055_speed() -> void:
 	# with before there is another night to refuse to skip.
 	(state["intent"] as Dictionary)["confirm_result"] = true
 	Sim.advance(state, 2)
-	Phases.begin_preparation(state)
-	Sim.advance(state, GameData.PREPARATION_TICKS)
+	NightRoad.to_night(state)
 	state["house_hp"] = 1
 	await frames(2)
 	expect(int(state["phase"]) == Phases.NIGHT, "another night")
@@ -3320,8 +3314,7 @@ func _case_0056_night_hud() -> void:
 	expect(not night_hud.visible, "the night HUD is down in daylight")
 	expect(hud.shows_day(), "and the day's own chrome is up")
 
-	Phases.begin_preparation(state)
-	Sim.advance(state, GameData.PREPARATION_TICKS)
+	NightRoad.to_night(state)
 	await frames(2)
 	expect(int(state["phase"]) == Phases.NIGHT, "it is night")
 	expect(night_hud.visible, "the night HUD replaces it")
@@ -3513,8 +3506,7 @@ func _case_0063_tech_tree() -> void:
 		"and the one behind it has come alive", next_one.tooltip_text)
 
 	# **Never during a wave.** The panel shuts itself when the night starts.
-	Phases.begin_preparation(state)
-	Sim.advance(state, GameData.PREPARATION_TICKS)
+	NightRoad.to_night(state)
 	await frames(3)
 	expect(int(state["phase"]) == Phases.NIGHT, "it is night")
 	expect(not panel.is_open(),
@@ -3565,8 +3557,7 @@ func _case_0069_stats() -> void:
 	# **It shows what the run has done.** Kill three and the number is three.
 	var run_killed: Label = locate_control("StatsRun_killed") as Label
 	expect(run_killed != null, "there is a kill count")
-	Phases.begin_preparation(state)
-	Sim.advance(state, GameData.PREPARATION_TICKS)
+	NightRoad.to_night(state)
 	var down := 0
 	for _i in 3:
 		var id := Enemies.spawn(state, &"walker", 0)
@@ -3632,8 +3623,7 @@ func _case_0070_endless() -> void:
 	state["nights_won"] = GameData.MVP_NIGHTS
 	state["night"] = GameData.MVP_NIGHTS
 	expect(Run.is_over(state), "the run is over")
-	Phases.begin_preparation(state)
-	Sim.advance(state, GameData.PREPARATION_TICKS)
+	NightRoad.to_night(state)
 	for _t in 40000:
 		if int(state["phase"]) != Phases.NIGHT:
 			break
@@ -4008,8 +3998,7 @@ func _case_0074_zombie_art() -> void:
 		return
 
 	var state := driver.state
-	Phases.begin_preparation(state)
-	Sim.advance(state, GameData.PREPARATION_TICKS)
+	NightRoad.to_night(state)
 	await frames(3)
 
 	var kinds := GameData.sorted_names(GameData.ENEMIES.keys())
@@ -4154,8 +4143,7 @@ func _night_with_lights(driver: SimDriver, lights: Lighting,
 	var at := Player.cell(state)
 	for i in 4:
 		Building.place(state, &"gun_tower", Vector2i(at.x + 2 + i * 2, at.y + 1))
-	Phases.begin_preparation(state)
-	Sim.advance(state, GameData.PREPARATION_TICKS)
+	NightRoad.to_night(state)
 	for chunk in 20:
 		Sim.advance(state, 30)
 		await frames(1)
@@ -4190,8 +4178,7 @@ func _case_0077_particles() -> void:
 	bits.set_density(1.0)
 	bits.set_cap(40)
 	var state := driver.state
-	Phases.begin_preparation(state)
-	Sim.advance(state, GameData.PREPARATION_TICKS)
+	NightRoad.to_night(state)
 	for _one in 60:
 		Enemies.spawn(state, &"walker", 0)
 	for _f in 30:
@@ -4231,8 +4218,7 @@ func _night_with_particles(driver: SimDriver, bits: Particles,
 	var at := Player.cell(state)
 	for i in 4:
 		Building.place(state, &"gun_tower", Vector2i(at.x + 2 + i * 2, at.y + 1))
-	Phases.begin_preparation(state)
-	Sim.advance(state, GameData.PREPARATION_TICKS)
+	NightRoad.to_night(state)
 	for chunk in 20:
 		Sim.advance(state, 30)
 		await frames(1)
@@ -4449,8 +4435,8 @@ func _case_0082_shots() -> void:
 		if put >= 12:
 			break
 	expect(put >= 8, "the farm has something defending it", "%d up" % put)
-	Phases.begin_preparation(state)
-	Sim.advance(state, GameData.PREPARATION_TICKS + 1)
+	NightRoad.to_night(state)
+	Sim.advance(state, 1)
 	Sim.skip_night(state)
 	await frames(6)
 	expect(int(state["phase"]) == Phases.RESULT, "the result screen is up",
@@ -4807,8 +4793,8 @@ func _case_0085_night_sounds() -> void:
 		if put >= 4:
 			break
 	expect(put >= 2, "there are guns on the farm", "%d up" % put)
-	Phases.begin_preparation(state)
-	Sim.advance(state, GameData.PREPARATION_TICKS + 1)
+	NightRoad.to_night(state)
+	Sim.advance(state, 1)
 	await frames(3)
 	expect(int(state["phase"]) == Phases.NIGHT, "and it is night",
 		Phases.name_of(int(state["phase"])))
@@ -4937,7 +4923,8 @@ func _case_0086_music() -> void:
 	expect(String(audio.layer_playing()) == "",
 		"the first wave is not the urgent one",
 		"'%s'" % audio.layer_playing())
-	Sim.advance(state, GameData.PREPARATION_TICKS + 2)
+	NightRoad.through_build(state)
+	Sim.advance(state, 2)
 	await frames(4)
 	expect(int(state["phase"]) == Phases.NIGHT, "the wave is actually coming",
 		Phases.name_of(int(state["phase"])))
@@ -5090,8 +5077,8 @@ func _case_0088_juice() -> void:
 	# hurt at once, and the pool is the pool.
 	driver.running = false
 	await frames(2)
-	Phases.begin_preparation(held)
-	Sim.advance(held, GameData.PREPARATION_TICKS + 1)
+	NightRoad.to_night(held)
+	Sim.advance(held, 1)
 	await frames(2)
 	for i in 60:
 		Enemies.spawn(held, &"walker", i % GameData.SPAWNS.size())
@@ -5325,8 +5312,8 @@ func _case_0090_log() -> void:
 				put += 1
 		if put >= 6:
 			break
-	Phases.begin_preparation(state)
-	Sim.advance(state, GameData.PREPARATION_TICKS + 2)
+	NightRoad.to_night(state)
+	Sim.advance(state, 2)
 	await frames(3)
 	expect(int(state["phase"]) == Phases.NIGHT, "the night has begun",
 		Phases.name_of(int(state["phase"])))

@@ -184,7 +184,7 @@ func _play(night: int, budget: int) -> Dictionary:
 			draw += wants
 			if id != &"wall":
 				towers += 1
-	Sim.advance(state, GameData.PREPARATION_TICKS)
+	NightRoad.through_build(state)
 
 	var ticks := 0
 	for tick in 40000:

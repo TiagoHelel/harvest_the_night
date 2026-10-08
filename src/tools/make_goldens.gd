@@ -101,8 +101,7 @@ func _a_played_farm() -> Dictionary:
 	# **And a night, because a run that has never been at night is half a
 	# run.** The wave counter, the events and what the night did to the
 	# fences are all state a reconcile must not touch.
-	Phases.begin_preparation(state)
-	Sim.advance(state, GameData.PREPARATION_TICKS)
+	NightRoad.to_night(state)
 	for _i in 200:
 		Sim.advance(state, 30)
 		if int(state["phase"]) != Phases.NIGHT:

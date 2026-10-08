@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 5
+const GROUPS := 6
 
 var passed := 0
 var failed := 0
@@ -72,6 +72,7 @@ func _run() -> void:
 	_task_0114_untouched()
 	_task_0115_spawn_room()
 	_task_0116_ammo()
+	_task_0118_road()
 
 
 func _finish() -> void:
@@ -587,3 +588,92 @@ func _tower_night(seed_value: int, id: StringName, techs: Array) -> Dictionary:
 	var cell := SuiteKit.any_buildable(state)
 	expect(Building.place(state, id, cell), "a %s goes down" % id, str(cell))
 	return {"state": state, "tower": cell}
+
+
+## 0118 - one road into the waves.
+func _task_0118_road() -> void:
+	# **Read the code, not the hope.** The build step's length and the door
+	# into the night may only be named by `NightRoad` and the core; a test
+	# that starts a night by hand would be one more line for 0136 and 0137 to
+	# find. The needles are built in pieces so this file is not one of them.
+	var timer := "PREPARATION" + "_TICKS"
+	var door := "Phases.begin" + "_night("
+	# Where the build step's lever may still be named, and why.
+	var allowed := {
+		"res://src/tools/night_road.gd": "the road itself",
+		"res://src/tools/headless_check.gd:_task_0006_phases":
+			"the timer is the subject of the assert; 0136 rewrites it",
+	}
+	var timers: Array = []
+	var doors: Array = []
+	var seen := {}
+	for folder in ["res://src/tools", "res://src/ui"]:
+		for file in DirAccess.get_files_at(folder):
+			if not String(file).ends_with(".gd"):
+				continue
+			var path: String = String(folder).path_join(file)
+			var where := ""
+			for line in SuiteKit.code_lines_of(path).split("\n"):
+				var code := String(line)
+				if code.begins_with("func "):
+					where = code.trim_prefix("func ").get_slice("(", 0)
+				var comment := code.find("#")
+				if comment >= 0:
+					code = code.substr(0, comment)
+				if code.contains(timer):
+					if allowed.has(path) or allowed.has(path + ":" + where):
+						seen[path] = true
+					else:
+						timers.append("%s:%s" % [path, where])
+				if code.contains(door):
+					doors.append("%s:%s" % [path, where])
+	expect(seen.has("res://src/tools/night_road.gd")
+		and seen.has("res://src/tools/headless_check.gd"),
+		"the scan sees the road and the 0006 timer assert", str(seen.keys()))
+	expect(timers.is_empty(),
+		"nothing in src/tools or src/ui names the build step's length but the road",
+		str(timers))
+	expect(doors.is_empty(),
+		"and nothing outside src/core opens the night by hand", str(doors))
+
+	# **The door refuses every other phase, and changes nothing doing it.**
+	var day := State.create(1181)
+	var before := State.hash_of(day)
+	expect(not Phases.start_waves(day) and State.hash_of(day) == before,
+		"start_waves from the day is refused and leaves the day alone")
+	var night := State.create(1182)
+	expect(NightRoad.to_night(night) and int(night["phase"]) == Phases.NIGHT,
+		"the road leads into the night")
+	var during := State.hash_of(night)
+	expect(not Phases.start_waves(night) and State.hash_of(night) == during,
+		"and start_waves during it is refused and leaves it alone")
+
+	# **The same ticks as before the road.** On a fresh build step it runs off
+	# exactly the lever's worth, and the night starts on the last of them.
+	# The lever's worth, measured the long way: one tick at a time.
+	var counted := State.create(1183)
+	Phases.begin_preparation(counted)
+	var by_hand := 0
+	while int(counted["phase"]) == Phases.PREPARATION and by_hand < 100000:
+		Sim.tick(counted)
+		by_hand += 1
+	var fresh := State.create(1183)
+	NightRoad.into_build(fresh)
+	var tick := int(fresh["tick"])
+	var left := NightRoad.build_ticks_left(fresh)
+	NightRoad.through_build(fresh)
+	expect(int(fresh["tick"]) - tick == left and left == by_hand
+		and int(fresh["phase"]) == Phases.NIGHT
+		and State.hash_of(fresh) == State.hash_of(counted),
+		"a fresh build step is the lever's ticks, ending in the night",
+		"%d ticks, %d left at the start" % [int(fresh["tick"]) - tick, left])
+	expect(NightRoad.build_ticks_left(fresh) == 0, "and nothing is left of it")
+
+	# The night runner stops when the night does, and the park holds one open.
+	var parked := State.create(1184)
+	NightRoad.to_night(parked)
+	NightRoad.park(parked)
+	expect(NightRoad.run_night(parked, 300) == 300
+		and int(parked["phase"]) == Phases.NIGHT,
+		"a parked night is still a night when the runner's cap comes")
+	_completed += 1

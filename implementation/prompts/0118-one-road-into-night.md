@@ -1,7 +1,7 @@
 # 0118 - One road into the waves
 
 - **Phase:** 9 - v1.0 groundwork
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0112
 - **Likely files:** src/core/phases.gd, src/core/sim.gd, src/tools/night_road.gd (new), src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd, src/tools/shot.gd, src/tools/autoplay.gd, src/tools/determinism.gd, src/tools/make_goldens.gd, src/tools/perf_check.gd, src/tools/play_nights.gd, src/tools/art_showcase.gd, src/tools/capture_dawn.gd
 

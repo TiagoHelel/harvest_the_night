@@ -97,12 +97,8 @@ static func play(seed_value: int, policy_name: StringName,
 		var spent_before := _worth_of_stock(state)
 		_a_day(state, policy)
 
-		Phases.begin_preparation(state)
-		Sim.advance(state, GameData.PREPARATION_TICKS)
-		for _tick in 40000:
-			if int(state["phase"]) != Phases.NIGHT:
-				break
-			Sim.advance(state, 1)
+		NightRoad.to_night(state)
+		NightRoad.run_night(state, 40000)
 
 		var held := int(state["house_hp"]) > 0
 		nights.append({

@@ -86,15 +86,27 @@ static func begin_preparation(state: Dictionary) -> bool:
 	return true
 
 
-## PREPARATION -> NIGHT. The first zombie is now allowed to exist.
-##
-## Called by the player ending the build step early, and by `Sim.tick()` when
-## `GameData.PREPARATION_TICKS` have passed.
 ## What a whole house is worth tonight, the tree included.
 static func house_full(state: Dictionary) -> int:
 	return GameData.HOUSE_HP + Tech.bonus(state, "house_hp_bonus", 0)
 
 
+## PREPARATION -> NIGHT: **the one road into the waves** (task 0118).
+##
+## `Sim._tick_preparation()` calls it when the build step's time is up; 0136's
+## START intent and 0128's pass-out step will be its other callers. Nothing
+## outside `src/core/` starts a night any other way - the tools and tests go
+## through `NightRoad`, which ends here.
+static func start_waves(state: Dictionary) -> bool:
+	if int(state["phase"]) != PREPARATION:
+		push_error("start_waves from %s" % name_of(int(state["phase"])))
+		return false
+	return begin_night(state)
+
+
+## PREPARATION -> NIGHT. The first zombie is now allowed to exist.
+##
+## The transition itself; `start_waves()` is the door to it.
 static func begin_night(state: Dictionary) -> bool:
 	if int(state["phase"]) != PREPARATION:
 		push_error("begin_night from %s" % name_of(int(state["phase"])))
