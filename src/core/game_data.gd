@@ -1706,6 +1706,12 @@ const DEFEAT_LOSS_PERCENT := 25         # LEVER: percent of the stock, 10-40
 const DEFEAT_KEEPS_MONEY := true
 const DEFEAT_KEEPS_TECH := true
 
+## **How wide the horde tramples** (task 0155): when the house falls, every
+## crop on the cells the horde walked to it is lost, and this many tiles
+## either side of those cells too. The routes are the flow field's, never
+## dice - see `Pathing.horde_routes`.
+const TRAMPLE_REACH := 0                # LEVER: tiles either side of a route, 0-2
+
 
 # ====================================================================== the map
 
@@ -1881,6 +1887,8 @@ static func validate() -> Array:
 	errors.append_array(check_calendar(SEASONS, SEASON_DAYS, FULL_MOON_DAYS,
 		FULL_MOON_HORDE_PERCENT, FULL_MOON_REWARD_PERCENT, SEASON_BOSSES))
 	errors.append_array(check_gift(CALM_NIGHT_GIFT))
+	if TRAMPLE_REACH < 0 or TRAMPLE_REACH > 2:
+		errors.append("TRAMPLE_REACH is %d tiles, outside 0-2" % TRAMPLE_REACH)
 	if PASS_OUT_PREPARATION_TICKS <= 0 \
 			or PASS_OUT_PREPARATION_TICKS >= Sim.MOST_TICKS_IN_A_NIGHT:
 		errors.append("the build step after passing out is %d ticks, outside 1..%d"
@@ -2821,7 +2829,7 @@ static func digest() -> int:
 		"spawns": SPAWNS,
 		"rewards": REWARDS,
 		"defeat": [DEFEAT_LOSS_PERCENT, DEFEAT_KEEPS_MONEY,
-			DEFEAT_KEEPS_TECH],
+			DEFEAT_KEEPS_TECH, TRAMPLE_REACH],
 		"tech": [TECH_BONUSES, TECH_TREE, TECH_REFUND_PERCENT],
 		"levels": [TOWER_LEVELS, TOP_TOWER_LEVEL],
 	})

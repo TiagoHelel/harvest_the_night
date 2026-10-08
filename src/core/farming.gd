@@ -277,6 +277,32 @@ static func _plant(state: Dictionary, cell: Vector2i) -> void:
 	var here: Dictionary = (state["plots"] as Dictionary)[Grid.index(cell)]
 	here["crop"] = seed_id
 	here["growth"] = 0
+	# Something planted where a crop was trampled (task 0155): the mark goes.
+	here.erase("trampled")
+
+
+## **The horde walked through it** (task 0155): every crop on these cells is
+## lost. The plot stays tilled - turned earth a farmer can plant again - with
+## its crop and growth gone and a `trampled` marker naming what was there,
+## for the view, until something is planted. Walked in the order given
+## (`Pathing.horde_routes` sorts them). Returns how many crops went.
+static func trample(state: Dictionary, cells: Array) -> int:
+	var plots: Dictionary = state["plots"]
+	var lost := 0
+	for found in cells:
+		var idx := Grid.index(found as Vector2i)
+		if not plots.has(idx):
+			continue
+		var here: Dictionary = plots[idx]
+		var crop := StringName(here.get("crop", &""))
+		if crop == &"":
+			continue
+		here["crop"] = &""
+		here["growth"] = 0
+		here["soak"] = 0
+		here["trampled"] = crop
+		lost += 1
+	return lost
 
 
 ## One tile off the can. **Never fatal and never wasted**: a tile that is

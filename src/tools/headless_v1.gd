@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 27
+const GROUPS := 28
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -96,6 +96,7 @@ func _run() -> void:
 	_task_0152_full_moon()
 	_task_0153_boss_nights()
 	_task_0154_calm()
+	_task_0155_losing()
 
 
 func _finish() -> void:
@@ -2497,3 +2498,155 @@ func _task_0154_calm() -> void:
 		"it pays exactly the gift, no technology, and the date is written down as paid",
 		"%s against %s" % [str(moved), str(GameData.CALM_NIGHT_GIFT)])
 	_completed += 1
+
+
+## 0155 - losing costs what the plan says and nothing more: the calendar moves
+## on (a boss night excepted), a quarter of the stock, the crops on the
+## horde's routes, and what it broke stays broken.
+func _task_0155_losing() -> void:
+	# **The calendar moves on**, beside 0153's exception.
+	var ordinary := _a_planted_route(1550, 5)
+	_lose_now(ordinary)
+	(ordinary["intent"] as Dictionary)["confirm_result"] = true
+	Sim.advance(ordinary, 2)
+	NightRoad.to_night(ordinary)
+	expect(int(ordinary["night"]) == 6, "a lost night on day 5 leads to night 6",
+		str(ordinary["night"]))
+	var boss := _a_boss_night_near_dawn(1551, 600)
+	_lose_now(boss)
+	expect(Calendar.date(boss) == GameData.SEASON_DAYS,
+		"and a lost Spring 14 with the boss alive leads to Spring 14 again",
+		str(Calendar.date(boss)))
+
+	# **A quarter of each stock, as before** (`_loss`, untouched).
+	var taxed := _a_planted_route(1552, 3)
+	var held: Dictionary = (taxed["held"] as Dictionary).duplicate()
+	_lose_now(taxed)
+	var off: Array = []
+	for id in GameData.sorted_names(held.keys()):
+		var keep: bool = id == GameData.ENERGY or (id == GameData.MONEY and GameData.DEFEAT_KEEPS_MONEY) \
+			or (id == GameData.TECH and GameData.DEFEAT_KEEPS_TECH)
+		var want: int = int(held[id]) if keep \
+			else int(held[id]) - int(held[id]) * GameData.DEFEAT_LOSS_PERCENT / 100
+		if int((taxed["held"] as Dictionary)[id]) != want:
+			off.append(id)
+	expect(off.is_empty(), "a quarter of each stock is taken, money and technology kept",
+		str(off))
+
+	# **Trampled on the route, and only there**: the east route worked out
+	# here the way the rules do - down the flow field from every spawn cell
+	# - with nobody on the farm to add a cell.
+	var farm := _a_planted_route(1553, 1)
+	var route := _route_cells(farm, [0])
+	_lose_now(farm)
+	var wrong: Array = []
+	var trampled := 0
+	var spared := 0
+	var plotted: Array = (farm["plots"] as Dictionary).keys()
+	plotted.sort()
+	for idx in plotted:
+		var here: Dictionary = (farm["plots"] as Dictionary)[idx]
+		var on := route.has(int(idx))
+		if on and (StringName(here["crop"]) != &"" or StringName(here.get("trampled", &"")) != &"carrot"):
+			wrong.append(["kept", Grid.cell(int(idx))])
+		elif not on and StringName(here["crop"]) != &"carrot":
+			wrong.append(["lost", Grid.cell(int(idx))])
+		if on:
+			trampled += 1
+		else:
+			spared += 1
+	expect(wrong.is_empty() and trampled > 0 and spared > 0
+		and int(Rewards.last(farm).get("trampled", -1)) == trampled,
+		"every plot on the east route is trampled (%d) and none beside it (%d)"
+			% [trampled, spared], str(wrong.slice(0, 4)))
+	var flat := -1
+	for idx in route.keys():
+		if (farm["plots"] as Dictionary).has(int(idx)):
+			flat = int(idx)
+			break
+	expect(flat >= 0 and Farming.is_tilled(farm, Grid.cell(flat))
+		and Farming.crop_on(farm, Grid.cell(flat)) == &"",
+		"a trampled plot is still tilled, empty ground, ready to plant again")
+
+	# **Two copies, the same cells.**
+	var one := _a_planted_route(1554, 1)
+	var two: Dictionary = one.duplicate(true)
+	_lose_now(one)
+	_lose_now(two)
+	expect(str(one["plots"]) == str(two["plots"]), "two copies of a state trample the same cells")
+
+	# **A won night tramples nothing.**
+	var won := _a_planted_route(1555, 1)
+	var before := str(won["plots"])
+	Rewards.settle(won, true)
+	Phases.enter_result(won, true)
+	expect(str(won["plots"]) == before, "a won night tramples nothing")
+
+	# **What it broke stays broken**: a wall destroyed in the night is gone
+	# in the morning - the rubble swept, nothing refunded.
+	var walled := _a_planted_route(1556, 2)
+	var spot := SuiteKit.any_buildable(walled)
+	Farm.place(walled, spot, {"id": &"wall", "hp": 30})
+	Farm.damage(walled, spot, 999)
+	var wood := Resources.amount(walled, GameData.WOOD)
+	_lose_now(walled)
+	(walled["intent"] as Dictionary)["confirm_result"] = true
+	Sim.advance(walled, 2)
+	expect(int(walled["phase"]) == Phases.DAY and Farm.occupant(walled, spot).is_empty()
+		and Farm.rubble_at(walled, spot) == &""
+		and Resources.amount(walled, GameData.WOOD) <= wood,
+		"a wall destroyed in the night is still gone the next morning, unrefunded")
+
+	expect(GameData.TRAMPLE_REACH >= 0 and GameData.TRAMPLE_REACH <= 2,
+		"TRAMPLE_REACH is inside 0-2", str(GameData.TRAMPLE_REACH))
+	_completed += 1
+
+
+## A night begun through `NightRoad` on `day`, parked with nobody on the farm,
+## and carrots planted on every cell of the east route and on every cell
+## beside it.
+func _a_planted_route(seed_value: int, day: int) -> Dictionary:
+	var state := State.create(seed_value)
+	state["day"] = day
+	state["nights_won"] = day - 1
+	Resources.gain(state, {GameData.WOOD: 100, GameData.STONE: 80,
+		GameData.IRON: 40, GameData.FOOD: 40, GameData.MONEY: 60})
+	NightRoad.to_night(state)
+	NightRoad.park(state)
+	var plots: Dictionary = state["plots"]
+	var route := _route_cells(state, [0])
+	var beside := {}
+	for idx in route.keys():
+		var c := Grid.cell(int(idx))
+		for step in [Vector2i(0, 1), Vector2i(0, -1), Vector2i(1, 0), Vector2i(-1, 0)]:
+			var n: Vector2i = c + step
+			if Grid.in_bounds(n) and not route.has(Grid.index(n)):
+				beside[Grid.index(n)] = true
+	for idx in route.keys() + beside.keys():
+		if Farm.is_empty(state, Grid.cell(int(idx))):
+			plots[int(idx)] = {"crop": &"carrot", "growth": 30, "watered": false, "soak": 0}
+	return state
+
+
+## The east route as the rules work it out: down the flow field from every
+## spawn cell of the regions, to the house. A set of cell indices.
+func _route_cells(state: Dictionary, regions: Array) -> Dictionary:
+	Pathing.refresh(state)
+	var out := {}
+	for where in regions:
+		for start in Enemies.spawn_cells(state, int(where)):
+			var c: Vector2i = start
+			for _i in Grid.CELLS:
+				out[Grid.index(c)] = true
+				var next := Pathing.step_from(state, c)
+				if next == c:
+					break
+				c = next
+	return out
+
+
+## The house down, now: the loss, through the rules' own road.
+func _lose_now(state: Dictionary) -> void:
+	state["house_hp"] = 0
+	Rewards.settle(state, false)
+	Phases.enter_result(state, false)

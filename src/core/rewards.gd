@@ -89,6 +89,13 @@ static func settle(state: Dictionary, survived: bool, escaped: bool = false) -> 
 		for id in _sorted(lines):
 			Resources.spend(state, id, int(lines[id]))
 		summary["lost"] = lines
+		# **The horde tramples the field on its way to the house** (task
+		# 0155): the crops on its routes, from tonight's sides, and where it
+		# stands now. What it broke stays broken (`Farm` sweeps the rubble and
+		# refunds nothing).
+		var routes := Pathing.horde_routes(state,
+			Waves.spawns_in(Waves.tonight(state)), GameData.TRAMPLE_REACH)
+		summary["trampled"] = Farming.trample(state, routes)
 
 	state["payout"] = summary
 	return summary

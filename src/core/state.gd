@@ -189,7 +189,7 @@ static func reconcile(state: Dictionary) -> Array:
 	if House.repair_position(state):
 		notes.append("moved indoor player off revised furniture")
 	# A zombie on a sunny afternoon: a lost night used to leave its winners
-	# in the yard until the same night came back.
+	# in the yard into the next night.
 	var withdrawn := Enemies.withdraw_in_daylight(state)
 	if withdrawn > 0:
 		notes.append("sent home %d zombies a lost night left in daylight"

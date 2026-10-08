@@ -122,6 +122,9 @@ const SCARECROW := {"canvas": Vector2i(32, 48), "pivot": Vector2i(16, 44), "draw
 const CELL_CURSOR := {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 8), "draw_scale": 1.0}
 const HOTBAR_ICON := {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 8), "draw_scale": 1.0}
 
+## A014's crop states: one 16x16 tile, pivot at its foot (task 0155).
+const CROP_TILE := {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 14), "draw_scale": 1.0}
+
 ## A057's morning report header: a 206x40 band, the width of the report's
 ## rows, pivot at its bottom centre, drawn at 1.0 (task 0138).
 const REPORT_HEADER := {"canvas": Vector2i(206, 40), "pivot": Vector2i(103, 40), "draw_scale": 1.0}
@@ -160,6 +163,7 @@ const ART := {
 	&"icon_mine": {"pack": "A005", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"buildings/mine", "geometry": HOTBAR_ICON, "final": HOTBAR_ICON, "bare": true},
 	&"icon_mortar": {"pack": "A005", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"buildings/mortar", "geometry": HOTBAR_ICON, "final": HOTBAR_ICON, "bare": true},
 	&"icon_wall": {"pack": "A005", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"buildings/wall", "geometry": HOTBAR_ICON, "final": HOTBAR_ICON, "bare": true},
+	&"trampled": {"pack": "A014", "dir": "res://sprites/crops/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": CROP_TILE, "final": CROP_TILE, "bare": true},
 	&"report_header": {"pack": "A057", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": REPORT_HEADER, "final": REPORT_HEADER, "bare": true},
 }
 

@@ -351,6 +351,47 @@ static func _step_in(field: PackedInt32Array, cost: PackedInt32Array,
 	return best
 
 
+## **The cells the horde walked to the house** (task 0155), for trampling:
+## from every spawn cell of `regions` (`Waves.spawns_in` of tonight), the flow
+## field's steps down to the house; every cell an enemy stands on now; and
+## `reach` tiles either side of all of them. Cells, never randomness - two
+## farms in the same state get the same answer - and sorted by index.
+static func horde_routes(state: Dictionary, regions: Array, reach: int = 0) -> Array:
+	refresh(state)
+	var walked := {}
+	for where in regions:
+		for start in Enemies.spawn_cells(state, int(where)):
+			var cell: Vector2i = start
+			# A field value strictly falls on every step, so this ends; the
+			# bound is only a guard against a field that is not built.
+			for _step in Grid.CELLS:
+				walked[Grid.index(cell)] = true
+				var next := step_from(state, cell)
+				if next == cell:
+					break
+				cell = next
+	for id in Entities.ids(state):
+		var at := Grid.index(Entities.cell_of(state, int(id)))
+		if at >= 0:
+			walked[at] = true
+	var out := {}
+	var keys: Array = walked.keys()
+	keys.sort()
+	for idx in keys:
+		var here := Grid.cell(int(idx))
+		for dy in range(-reach, reach + 1):
+			for dx in range(-reach, reach + 1):
+				var near := here + Vector2i(dx, dy)
+				if Grid.in_bounds(near):
+					out[Grid.index(near)] = true
+	var cells: Array = out.keys()
+	cells.sort()
+	var result: Array = []
+	for idx in cells:
+		result.append(Grid.cell(int(idx)))
+	return result
+
+
 ## Whether anything can get from this cell to the house at all.
 static func reachable(state: Dictionary, cell: Vector2i) -> bool:
 	return distance(state, cell) != UNREACHABLE

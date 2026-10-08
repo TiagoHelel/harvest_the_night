@@ -15789,3 +15789,112 @@ Verify: **PASS**, 60 passed in 596 s (OVER BUDGET as before), then
 `--hashes` after the payout fix. headless_check 16288, headless_v1 375
 (+8), input_check 1066, input_v1 184 (+6), strings 479 keys; the night
 tick 1853 us (22%).
+
+## 0155 - Losing a night when the calendar moves on - done 2026-10-08
+
+What changed: losing costs what the plan says and nothing more. The calendar
+moves on, the horde takes a quarter of the stock, it tramples the crops it
+walked through, and what it broke stays broken. Only a boss night comes back.
+
+**What was already so, now asserted beside the rest:**
+- The calendar moving on after a loss is 0151's rule: a lost night on day 5
+  leads to night 6.
+- A lost Spring 14 with the boss alive leads to Spring 14 again (0153).
+- The stock loss is `Rewards._loss` untouched: 25% of each stock, money
+  and technology kept by the `DEFEAT_KEEPS_*` levers.
+- A wall destroyed in the night is still gone the next morning: the rubble
+  swept, nothing refunded.
+
+**Trampling, new and deterministic:**
+- `Pathing.horde_routes(state, regions, reach)` returns the sorted cells
+  the horde walked:
+  - from every spawn cell of the regions tonight used (`Waves.spawns_in` of
+    tonight's record), the flow field's steps (`step_from`) down to the
+    house;
+  - plus every cell an enemy stands on when it is asked;
+  - widened by `reach` tiles each way.
+  - It uses no randomness: two copies of a state trample the same cells.
+- `TRAMPLE_REACH := 0` (`# LEVER`, 0-2) is in `digest()`'s `defeat` row,
+  and `validate()` refuses it outside 0-2.
+- `Farming.trample(state, cells)`:
+  - a plot on the cells with a crop keeps its tilled ground and loses its
+    crop, growth and soak;
+  - it gets a `trampled` marker naming the crop, which `_plant` erases;
+  - `Farming` sees empty tilled ground.
+  - No migration: a missing marker means nothing was trampled.
+- `Rewards.settle` tramples in its loss branch, after the stock is taken,
+  and the payout's `trampled` says how many. A won night, an escape or a
+  calm night tramples nothing.
+- **On today's farm the routes cross no soil.** The fields lie west and
+  south of the house and the horde comes from the east, so for now this
+  hits crops only where somebody planted on the path. 0167 makes any grass
+  tillable, and then it will matter.
+
+**On screen:**
+- The morning report has `RES_TRAMPLED` / `.other` (%d CROP(S) TRAMPLED /
+  %d PLANTA(S) PISOTEADA(S)), in the bad colour, under "came down". The
+  bare key is the singular, as `I18n.plural` reads the table, not `.one`.
+- The trampled plot is drawn through 0120's road. `PlaceholderArt.ART`
+  gains `trampled` (pack A014, `res://sprites/crops/trampled.png`, 16x16
+  at (8,14), drawn by code), and `WorldView._trampled_sprite` draws it
+  until A014 is integrated by 0197.
+- **The stand-in is the crop's ripe frame, not its first stage**, pressed
+  to half height at its foot and darkened (`TRAMPLED_TINT`). This departs
+  from the prompt's suggestion, tried first: carrot's first stage is a
+  three-pixel sprout, and flattened it is a dash that reads as bare earth.
+  The ripe frame flattened reads as a plant somebody walked on.
+- **Text that still said the same night comes back:** `run.gd`'s header now
+  says the calendar moves on and only a boss night returns, and a
+  `state.gd` comment said "until the same night came back". `phases.gd` had
+  already been rewritten in 0151. No tutorial or report text said it.
+  `_task_0065` is 0151's and was not touched.
+
+**Tests:** `_task_0155_losing` (headless_v1):
+- a lost night on day 5, confirmed, then the road to the next night: night
+  6;
+- a lost Spring 14 with the boss alive: date 14 again;
+- every stock against `DEFEAT_LOSS_PERCENT`, money, technology and energy
+  kept;
+- on a farm with carrots on every cell of the east route and every cell
+  beside it, the route worked out in the test down the flow field from
+  each spawn cell: every plot on it trampled with the marker, none beside
+  it, the payout's count equal to it;
+- a trampled plot is empty tilled ground;
+- two copies lose and trample the same cells;
+- a won night tramples nothing;
+- a wall destroyed in the night is gone, unrefunded, the next morning;
+- `TRAMPLE_REACH` is inside 0-2.
+
+**Shot:**
+- `implementation/shots/0155/trampled.png`, FHD, opened: the morning after
+  night 3 was lost.
+- Three rows of ripe carrots lie across the east route by the house and the
+  stall, the middle row on the route. It is pressed flat and dark, the rows
+  either side stand ripe, and the log says night 3 lost.
+- The scenario count is 30.
+
+### Hashes
+
+| | from | to | why |
+|---|---|---|---|
+| sim hash | `737715291` | `3462710760` | the determinism night **is** lost, and its loss now tramples |
+| data hash | `2511241117` | `1337047335` | `TRAMPLE_REACH` entered `digest()` |
+
+**The prompt expected SIM to stay, "because the determinism night is not
+lost". It is lost.**
+- Printed from a copy of `determinism.gd`: the house falls on night tick
+  1633, `{"survived": false}`, house 0.
+- So the loss runs the trampling. No crop is on its routes (it tramples 0),
+  but the payout records `trampled: 0`, and working out the routes brings
+  the flow field up to date on that tick rather than later.
+- Both are in the state the scenario hashes. The move is the prompt's own
+  condition coming true, and it is recorded here on purpose.
+
+Files: src/core/{pathing,farming,rewards,run,state,game_data}.gd,
+src/ui/{world_view,placeholder_art,result_screen}.gd,
+assets/locale/strings.csv, src/tools/{shot,headless_check,headless_v1}.gd,
+tools/determinism_data_hash.txt, implementation/shots/0155/
+
+Verify: **PASS**, 60 passed in 585 s (OVER BUDGET as before). headless_check
+16290, headless_v1 384 (+9), input_check 1066, input_v1 184, strings 481
+keys, placeholders 57 stand-ins; the night tick 2002 us (24%).

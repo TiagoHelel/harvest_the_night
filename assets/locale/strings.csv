@@ -330,6 +330,8 @@ RES_RUN_LINE,0,"%d days, %d nights, the Giant down","%d dias, %d noites, o Gigan
 RES_STRUCTURES_LOST,0,structures lost,estruturas perdidas
 RES_SURVIVED,0,SURVIVED,VENCIDA
 RES_TAKEN,0,-%d %s,-%d %s
+RES_TRAMPLED,200,%d CROP TRAMPLED,%d PLANTA PISOTEADA
+RES_TRAMPLED.other,200,%d CROPS TRAMPLED,%d PLANTAS PISOTEADAS
 RES_UNTOUCHED,0,%d untouched,%d intactos
 RES_UNTOUCHED_ALL,0,money and the farm are untouched,o dinheiro e a fazenda estão intactos
 RES_WALKED,200,%d walked off at dawn,%d foi embora ao amanhecer

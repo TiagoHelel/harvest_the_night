@@ -257,6 +257,10 @@ func _build(payout: Dictionary) -> void:
 	var fell := int(payout.get("structures_lost", 0))
 	if fell > 0:
 		_row(I18n.plural(&"RES_CAME_DOWN", fell, [fell]), "", UiKit.BAD)
+	# **The field the horde walked through** (task 0155).
+	var trampled := int(payout.get("trampled", 0))
+	if trampled > 0:
+		_row(I18n.plural(&"RES_TRAMPLED", trampled, [trampled]), "", UiKit.BAD)
 
 	_gap()
 	if escaped:

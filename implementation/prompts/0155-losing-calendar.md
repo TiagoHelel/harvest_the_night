@@ -1,7 +1,7 @@
 # 0155 - Losing a night when the calendar moves on
 
 - **Phase:** 11 - Calendar and seasons
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0151, 0153
 - **Likely files:** src/core/rewards.gd, src/core/farming.gd, src/core/pathing.gd, src/core/phases.gd, src/core/run.gd, src/core/game_data.gd, src/ui/world_view.gd, src/ui/placeholder_art.gd, src/ui/result_screen.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd
 

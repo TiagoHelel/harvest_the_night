@@ -93,6 +93,7 @@ const SCENARIOS: Array = [
 	["morning", "the morning report, every line it has", "ResultScreen"],
 	["boss_escaped", "the morning after Spring 14's boss got away", "ResultScreen"],
 	["calm_morning", "the morning after Summer 1's calm night", "ResultScreen"],
+	["trampled", "the morning after a loss, by the trampled crops", ""],
 	["woken", "out of bed at 06:00, beside it", ""],
 	# Last, so the pad's names do not follow the shutter into another picture.
 	["options_controls_pad", "the controls tab, a pad in hand", "OptionsScreen:controls"],
@@ -661,6 +662,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"morning": _set_morning(state)
 		"boss_escaped": _set_boss_escaped(state)
 		"calm_morning": _set_calm_morning(state)
+		"trampled": _set_trampled(state)
 		"woken": _set_woken(state)
 		"repair": _set_repair(state)
 		"aim": _set_aim(state)
@@ -1123,6 +1125,52 @@ func _set_calm_morning(state: Dictionary) -> void:
 	state["nights_won"] = GameData.SEASON_DAYS
 	NightRoad.to_night(state)
 	Sim.advance(state, 2)
+
+
+## **The morning after a loss** (task 0155): carrots planted in three rows
+## across the horde's east route by the house, the middle row on it; the
+## house falls, the report is confirmed, and he is outside looking at them.
+## The middle row is trampled and the two either side are not.
+func _set_trampled(state: Dictionary) -> void:
+	state["day"] = 3
+	state["nights_won"] = 2
+	Pathing.refresh(state)
+	var route := {}
+	for start in Enemies.spawn_cells(state, 0):
+		var c: Vector2i = start
+		for _i in Grid.CELLS:
+			route[Grid.index(c)] = true
+			var next := Pathing.step_from(state, c)
+			if next == c:
+				break
+			c = next
+	var plots: Dictionary = state["plots"]
+	var near := Farm.house_centre(state)
+	for idx in route.keys():
+		var c := Grid.cell(int(idx))
+		if c.x < near.x + 3 or c.x > near.x + 10:
+			continue
+		for dy in [-1, 0, 1]:
+			var cell := c + Vector2i(0, dy)
+			if Farm.is_empty(state, cell) and Farm.walkable(state, cell):
+				# Ripe, so the rows the horde spared stand tall beside the
+				# one it pressed flat.
+				plots[Grid.index(cell)] = {"crop": &"carrot",
+					"growth": int((GameData.CROPS[&"carrot"] as Dictionary)["growth_ticks"]),
+					"watered": false, "soak": 0}
+	NightRoad.to_night(state)
+	NightRoad.park(state)
+	state["house_hp"] = 1
+	Entities.spawn(state, &"walker", House.porch(state))
+	for _t in 300:
+		if int(state["phase"]) != Phases.NIGHT:
+			break
+		Sim.advance(state, 1)
+	(state["intent"] as Dictionary)["confirm_result"] = true
+	Sim.advance(state, 2)
+	House.leave(state)
+	Sim.advance(state, 2)
+	_look_at(near + Vector2i(6, 0))
 
 
 ## **Out of bed at 06:00** (task 0138): the report confirmed, he stands on

@@ -14525,16 +14525,16 @@ func _task_0082_shots() -> void:
 	# since 0141: day one teaching the night - the bed, START, dawn.
 	# Twenty-seven since 0152: the wave under a Full Moon. Twenty-eight since
 	# 0153: the morning a boss got away. Twenty-nine since 0154: the morning
-	# after a calm night.
-	expect(names.size() == 29,
-		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the Full Moon, the boss's escape and the calm night",
+	# after a calm night. Thirty since 0155: the trampled field.
+	expect(names.size() == 30,
+		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the Full Moon, the boss's escape, the calm night and the trampled field",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",
 			"options_access", "options_video", "options_audio",
 			"options_controls", "house_interior", "farm_extension", "larger_stations",
 			"passed_out", "build_day", "repair", "aim", "morning", "woken", "bedtime",
 			"tutorial_bed", "tutorial_start", "tutorial_dawn", "full_moon",
-			"boss_escaped", "calm_morning", "options_controls_pad"]:
+			"boss_escaped", "calm_morning", "trampled", "options_controls_pad"]:
 		expect(names.has(wanted), "there is a '%s' scenario" % wanted)
 
 	# Every one has a builder, so a scenario added to the table and not

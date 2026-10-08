@@ -10,8 +10,9 @@ extends RefCounted
 ## ## Over, rather than lost
 ##
 ## A run ends one way: the year's last night survived (task 0151). Losing
-## costs a night and never the run, so there is no losing end - `is_over()`
-## asks whether the last night has been beaten and nothing else.
+## costs a night and never the run - the calendar moves on, and only a boss
+## night comes back (0153) - so there is no losing end: `is_over()` asks
+## whether the last night has been beaten and nothing else.
 ##
 ## ## Carrying on
 ##

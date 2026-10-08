@@ -1623,6 +1623,37 @@ func _refresh_plots() -> void:
 		if crop != &"":
 			_plot_sprite("%s_%d" % [crop, Farming.stage(_state, cell)],
 				cell)
+		elif here.has("trampled"):
+			_trampled_sprite(StringName(here["trampled"]), cell)
+
+
+## **A crop the horde walked through** (task 0155). A014 draws it; until the
+## pack lands it is drawn here (0120's road, `PlaceholderArt.is_drawn`): the
+## crop's ripe frame, pressed flat against the soil and darkened, so it reads
+## as damage beside the rows that were spared. The ripe frame rather than the
+## first stage: a sprout three pixels tall pressed to half is a dash that
+## reads as bare earth, not as a plant somebody walked on.
+func _trampled_sprite(crop: StringName, cell: Vector2i) -> void:
+	var path := CROP_DIR + "trampled.png"
+	if not PlaceholderArt.is_drawn(path):
+		_plot_sprite("trampled", cell)
+		return
+	var ripe := int((GameData.CROPS.get(crop, {}) as Dictionary).get("stages", 1)) - 1
+	var texture := _crop_texture("%s_%d" % [crop, maxi(ripe, 0)])
+	if texture == null:
+		return
+	var sprite := Sprite2D.new()
+	sprite.texture = texture
+	sprite.centered = false
+	ArtPlacement.place(sprite, cell)
+	# Flattened onto the ground: half as tall. `place` puts the origin at the
+	# sprite's foot, so its foot stays where it stood.
+	sprite.scale = Vector2(sprite.scale.x, sprite.scale.y * 0.5)
+	sprite.modulate = TRAMPLED_TINT
+	sprite.set_meta("plot_cell", Grid.index(cell))
+	sprite.set_meta("plot_art", "trampled")
+	_plots.add_child(sprite)
+	_plot_sprites.append(sprite)
 
 
 ## One sprite on one plot. Two of them stack on a watered tile with something
@@ -1710,6 +1741,9 @@ const BUILDING_DIR := "res://sprites/buildings/"
 ## balance-neutral tweak failed the guard.
 const ENEMY_WALK_TICKS := 6
 const CROP_DIR := "res://sprites/crops/"
+## The trampled stand-in's darkening (task 0155): brown and dim, the colour of
+## leaves pressed into mud.
+const TRAMPLED_TINT := Color(0.55, 0.42, 0.32)
 
 
 func _build_terrain_tileset() -> TileSet:
