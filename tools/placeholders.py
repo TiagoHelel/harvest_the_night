@@ -4,8 +4,10 @@
     python tools/placeholders.py            the packs still on stand-ins
     python tools/placeholders.py --check    fail on a stale or wrong entry
 
-Reads `src/ui/placeholder_art.gd`'s `POSES`, one entry per line, the way the
-registry's header asks them to be written. `--check` (run by verify) fails on
+Reads `src/ui/placeholder_art.gd`'s `POSES` and `ART`, one entry per line, the
+way the registry's header asks them to be written. An `ART` entry names the
+folder its pack delivers to (`dir`), and an empty stand-in is drawn by code
+(task 0131), so it has no frame on disk to look for. `--check` (run by verify) fails on
 an entry that names a pack with no request in `implementation/backlog/packs/`,
 a pack that is already `integrated` - its leaf forgot to delete the entry - a
 runtime path that is already raster-owned in `assets/art_source/ownership.json`,
@@ -26,8 +28,9 @@ ACTORS = "sprites/actors/"
 sys.path.insert(0, os.path.join(ROOT, "implementation", "backlog"))
 import assets  # noqa: E402  - the art queue's own loader
 
-ENTRY = re.compile(r'^\t&"([a-z0-9_]+)": \{"pack": "(A\d{3})", "frames": (\d+),'
-                   r'.*"stand_in": &"([a-z0-9_]+)"')
+ENTRY = re.compile(r'^\t&"([a-z0-9_]+)": \{"pack": "(A\d{3})", '
+                   r'(?:"dir": "res://([a-z0-9_/]+)", )?"frames": (\d+),'
+                   r'.*"stand_in": &"([a-z0-9_]*)"')
 
 
 def entries():
@@ -36,7 +39,8 @@ def entries():
         m = ENTRY.match(line)
         if m:
             out.append({"name": m.group(1), "pack": m.group(2),
-                        "frames": int(m.group(3)), "stand_in": m.group(4)})
+                        "dir": m.group(3) or ACTORS,
+                        "frames": int(m.group(4)), "stand_in": m.group(5)})
     return out
 
 
@@ -58,10 +62,12 @@ def check(rows, packs):
             problems.append("%s names %s, which is already integrated - delete "
                             "the entry" % (row["name"], row["pack"]))
         for i in range(row["frames"]):
-            path = "%s%s_%d.png" % (ACTORS, row["name"], i)
+            path = "%s%s_%d.png" % (row["dir"], row["name"], i)
             if path in owned:
                 problems.append("%s is raster-owned and still has a stand-in"
                                 % path)
+        if not row["stand_in"]:
+            continue        # drawn by code until the pack lands
         first = os.path.join(ROOT, ACTORS, "%s_0.png" % row["stand_in"])
         if not os.path.exists(first):
             problems.append("%s's stand-in %s has no frame on disk"

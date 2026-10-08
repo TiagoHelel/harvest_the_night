@@ -138,6 +138,12 @@ func _follow_cursor() -> void:
 	if at.x < 0.0:
 		at = get_viewport().get_mouse_position()
 	var cell := _view.screen_to_cell(at)
+	# **The guardian's cursor, while there is one** (task 0131): from the build
+	# step to the morning the ghost and its route preview go where it is, so
+	# a pad that steps it places exactly where the mouse would.
+	var cursor := _view.cursor()
+	if cursor != null and cursor.is_active():
+		cell = cursor.cell()
 	_hovered = cell
 	var id := Building.selected(_state)
 	(_state["intent"] as Dictionary)["build_cell"] = [cell.x, cell.y]

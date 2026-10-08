@@ -22,6 +22,11 @@ extends RefCounted
 ## thing *is*, not how much of it you have. That keeps it out of the way of
 ## the determinism hash entirely and makes every line of it testable without
 ## building a game.
+##
+## **One exception, read-only: `under_cursor`** (task 0131). The guardian's
+## cursor says how this wall is doing tonight - its hit points against its
+## levelled maximum - and that is the live state's to say. It reads, never
+## writes, so the hash still cannot tell it was asked.
 
 ## The kinds a key can name, and what each one looks up.
 const KINDS: Array = [
@@ -184,6 +189,33 @@ static func enemy(id: StringName) -> String:
 		lines.append(I18n.t(&"DESC_WINDS_UP"))
 	lines.append(I18n.f(&"DESC_WORTH", [int(one.get("reward", 0))]))
 	return "\n".join(lines)
+
+
+## What is under the guardian's cursor (task 0131): an enemy first - it is
+## what matters at night - then a structure with its hit points against its
+## levelled maximum and its level, or open ground. Empty for what has no name
+## to give (a tree, a rock).
+static func under_cursor(state: Dictionary, cell: Vector2i) -> String:
+	if state.is_empty() or not Grid.in_bounds(cell):
+		return ""
+	for id in Entities.ids(state):
+		if Entities.cell_of(state, id) == cell:
+			var one := Entities.get_one(state, id)
+			return I18n.f(&"CURSOR_ENEMY", [Names.of(StringName(one["kind"])).to_upper(),
+				int(one["hp"])])
+	var anchor := Building.anchor_of(state, cell)
+	var on := Farm.occupant(state, anchor)
+	if on.is_empty():
+		return I18n.t(&"CURSOR_GROUND")
+	var id := StringName(on["id"])
+	if id == Repair.HOUSE:
+		return I18n.f(&"CURSOR_STRUCTURE", [I18n.t(&"CURSOR_HOUSE"),
+			int(state["house_hp"]), Phases.house_full(state), Building.level_at(state, anchor)])
+	if Building.entry_of(id) == null:
+		return ""
+	var full := Repair.full_hp_at(state, anchor)
+	return I18n.f(&"CURSOR_STRUCTURE", [Names.of(id).to_upper(),
+		int(on.get("hp", full)), full, Building.level_at(state, anchor)])
 
 
 static func crop(id: StringName) -> String:

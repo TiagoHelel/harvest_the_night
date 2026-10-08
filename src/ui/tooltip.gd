@@ -42,8 +42,19 @@ const EDGE := 3.0
 ## The meta a control carries to say what it is.
 const META := &"describes"
 
+## **The night's free band** (task 0131), where the cursor's tooltip may go:
+## below the night HUD's 24 pixel strip and above the lines and buttons along
+## the bottom, which start at 240. A tooltip over the house bar or the
+## REPAIR button would hide the thing the player is about to read or press.
+const WORLD_AREA := Rect2(3.0, 26.0, 474.0, 212.0)
+
 var _key := &""
 var _showing := &""
+## What is under the guardian's cursor, and where its cell is on screen. Set
+## every frame by `Main` while there is a cursor; a control under the pointer
+## or with the focus still wins.
+var _world_text := ""
+var _world_at := Vector2.ZERO
 var _waited := 0.0
 var _panel: PanelContainer
 var _label: Label
@@ -68,6 +79,8 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	var wanted := _what_is_pointed_at()
+	if wanted == &"" and not _world_text.is_empty():
+		wanted = StringName("world:" + _world_text)
 	if wanted != _key:
 		_key = wanted
 		# **The delay only applies to the first one.** Once a tooltip is up,
@@ -116,7 +129,8 @@ func _key_of(from: Node) -> StringName:
 
 
 func _show(key: StringName) -> void:
-	var text := Describe.of(key)
+	var world := String(key).begins_with("world:")
+	var text := _world_text if world else Describe.of(key)
 	if text.is_empty():
 		_hide()
 		return
@@ -124,7 +138,25 @@ func _show(key: StringName) -> void:
 		_showing = key
 		_label.text = text
 	_panel.visible = true
+	if world:
+		# Beside the cell, inside the night's free band.
+		_panel.position = place_within(_world_at,
+			_panel.get_combined_minimum_size(), WORLD_AREA)
+		return
 	_panel.position = _place(_panel.get_combined_minimum_size())
+
+
+## What the guardian's cursor is over (task 0131): `text` from
+## `Describe.under_cursor`, `at` the cell's place on screen. Empty clears it.
+func show_world(text: String, at: Vector2) -> void:
+	_world_text = text
+	_world_at = at
+
+
+## Like `place_at`, inside an area rather than the whole screen.
+static func place_within(cursor: Vector2, panel: Vector2, area: Rect2) -> Vector2:
+	var at := place_at(cursor - area.position, panel, area.size)
+	return (at + area.position).round()
 
 
 ## Where the panel goes: beside the cursor, and never off the screen.

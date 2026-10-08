@@ -38,6 +38,10 @@ extends RefCounted
 ## move when it arrives. **Keep each entry on one line**: `tools/placeholders.py`
 ## reads them line by line.
 ##
+## Art that is not the farmer's - A003's guardian, A004's cursor (task 0131) -
+## goes in `ART` instead, with the folder its pack delivers to; an empty
+## `stand_in` there means the view draws it in code (`is_drawn`).
+##
 ## ## Deleting an entry
 ##
 ## When the pack's raster outputs land at the runtime paths, the leaf that
@@ -122,6 +126,37 @@ const POSES := {
 	&"react_zzz": {"pack": "A002", "frames": 3, "seconds": 0.4, "loop": true, "stand_in": &"react_note", "geometry": LEGACY_STRIP, "final": WORK_FRAME},
 }
 
+## A003's porch guardian: 32x48 at (16,44), drawn at 1.0 (task 0131).
+const SCARECROW := {"canvas": Vector2i(32, 48), "pivot": Vector2i(16, 44), "draw_scale": 1.0}
+
+## A004's cell cursor: one 16x16 cell at its centre, drawn at 1.0 (task 0131).
+const CELL_CURSOR := {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 8), "draw_scale": 1.0}
+
+## The guardian's eyes in every lit frame, native pixels: the viewer-left eye
+## first. What `lighting.gd` puts a glow on (A003's `light_xy` / `lights_xy`).
+const GUARDIAN_EYES := [Vector2i(13, 12), Vector2i(18, 12)]
+
+## **Stand-ins outside the farmer's folder** (task 0131), by runtime name, with
+## the folder the pack delivers to (`dir`). `"stand_in": &""` is **drawn by
+## code** in the entry's box until the pack lands - `is_drawn(path)` - so the
+## view keeps a drawn branch and a texture branch, and the leaf that
+## integrates the pack deletes these lines and then the drawn branch. `lights`
+## are emission points on every frame from `lit_from` on. One line each, like
+## `POSES`.
+const ART := {
+	&"guardian_day": {"pack": "A003", "dir": "res://sprites/props/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": SCARECROW, "final": SCARECROW},
+	&"guardian_wake": {"pack": "A003", "dir": "res://sprites/props/", "frames": 4, "seconds": 0.12, "loop": false, "stand_in": &"", "geometry": SCARECROW, "final": SCARECROW, "lights": GUARDIAN_EYES, "lit_from": 1},
+	&"guardian_night": {"pack": "A003", "dir": "res://sprites/props/", "frames": 4, "seconds": 0.25, "loop": true, "stand_in": &"", "geometry": SCARECROW, "final": SCARECROW, "lights": GUARDIAN_EYES, "lit_from": 0},
+	&"guardian_point": {"pack": "A003", "dir": "res://sprites/props/", "frames": 3, "seconds": 0.1, "loop": false, "stand_in": &"", "geometry": SCARECROW, "final": SCARECROW, "lights": GUARDIAN_EYES, "lit_from": 0},
+	&"cursor_neutral": {"pack": "A004", "dir": "res://sprites/ui/", "frames": 2, "seconds": 0.4, "loop": true, "stand_in": &"", "geometry": CELL_CURSOR, "final": CELL_CURSOR},
+	&"cursor_place": {"pack": "A004", "dir": "res://sprites/ui/", "frames": 2, "seconds": 0.4, "loop": true, "stand_in": &"", "geometry": CELL_CURSOR, "final": CELL_CURSOR},
+	&"cursor_blocked": {"pack": "A004", "dir": "res://sprites/ui/", "frames": 2, "seconds": 0.4, "loop": true, "stand_in": &"", "geometry": CELL_CURSOR, "final": CELL_CURSOR},
+	&"cursor_upgrade": {"pack": "A004", "dir": "res://sprites/ui/", "frames": 2, "seconds": 0.4, "loop": true, "stand_in": &"", "geometry": CELL_CURSOR, "final": CELL_CURSOR},
+	&"cursor_sell": {"pack": "A004", "dir": "res://sprites/ui/", "frames": 2, "seconds": 0.4, "loop": true, "stand_in": &"", "geometry": CELL_CURSOR, "final": CELL_CURSOR},
+	&"cursor_repair": {"pack": "A004", "dir": "res://sprites/ui/", "frames": 2, "seconds": 0.4, "loop": true, "stand_in": &"", "geometry": CELL_CURSOR, "final": CELL_CURSOR},
+	&"cursor_aim": {"pack": "A004", "dir": "res://sprites/ui/", "frames": 2, "seconds": 0.4, "loop": true, "stand_in": &"", "geometry": CELL_CURSOR, "final": CELL_CURSOR},
+}
+
 
 # ---------------------------------------------------------------- the lookup
 
@@ -134,9 +169,9 @@ static func frame(path: String) -> Dictionary:
 	var at := _registered(path)
 	if at.is_empty():
 		return {}
-	var entry: Dictionary = POSES[at[0]]
+	var entry := _entry(at[0])
 	var shape: Dictionary = entry["geometry"]
-	return {
+	var answer := {
 		"canvas": shape["canvas"],
 		"pivot": shape["pivot"],
 		"cell_offset": Vector2i.ZERO,
@@ -145,6 +180,13 @@ static func frame(path: String) -> Dictionary:
 		"draw_scale": shape["draw_scale"],
 		"stand_in": entry["pack"],
 	}
+	# The emission points the real frames will carry (A003's `light_xy` and
+	# `lights_xy`), on the frames that are lit.
+	var lights: Array = entry.get("lights", [])
+	if not lights.is_empty() and int(at[1]) >= int(entry.get("lit_from", 0)):
+		answer["light"] = lights[0]
+		answer["lights"] = lights.duplicate()
+	return answer
 
 
 ## Whether anything - real art or a stand-in - answers for this path.
@@ -160,7 +202,31 @@ static func texture_path(path: String) -> String:
 	var at := _registered(path)
 	if at.is_empty():
 		return path
+	if ART.has(at[0]):
+		# Drawn by code: there is no file to load (`is_drawn`).
+		return ""
 	return stand_in_path(at[0], int(at[1]))
+
+
+## Whether this runtime path is drawn by code until its pack lands (task
+## 0131): the view draws its shape instead of loading a file.
+static func is_drawn(path: String) -> bool:
+	if RasterArt.FRAMES.has(path):
+		return false
+	var at := _registered(path)
+	return not at.is_empty() and ART.has(at[0]) \
+		and StringName(ART[at[0]]["stand_in"]) == &""
+
+
+## The runtime path of one frame of an `ART` animation - where its pack will
+## deliver it - for the lookups above.
+static func art_path(name: StringName, frame_index: int) -> String:
+	return "%s%s_%d.png" % [str(ART[name]["dir"]), name, frame_index]
+
+
+## The `ART` entry for a name, or empty.
+static func art(name: StringName) -> Dictionary:
+	return ART.get(name, {})
 
 
 ## Whether a farmer animation is drawn by a stand-in.
@@ -197,7 +263,7 @@ static func stand_in_turn(name: StringName, frame_index: int) -> float:
 
 ## `[name, frame]` for a registered runtime path, or empty.
 static func _registered(path: String) -> Array:
-	if not path.begins_with(DIR) or not path.ends_with(".png"):
+	if not path.ends_with(".png"):
 		return []
 	var stem := path.get_file().get_basename()
 	var cut := stem.rfind("_")
@@ -205,6 +271,15 @@ static func _registered(path: String) -> Array:
 		return []
 	var name := StringName(stem.substr(0, cut))
 	var index := int(stem.substr(cut + 1))
-	if not POSES.has(name) or index < 0 or index >= int(POSES[name]["frames"]):
+	var entry := _entry(name)
+	if entry.is_empty() or path.get_base_dir() + "/" != str(entry.get("dir", DIR)) \
+			or index < 0 or index >= int(entry["frames"]):
 		return []
 	return [name, index]
+
+
+## A name's entry in either table: the farmer's `POSES`, or `ART`.
+static func _entry(name: StringName) -> Dictionary:
+	if POSES.has(name):
+		return POSES[name]
+	return ART.get(name, {})

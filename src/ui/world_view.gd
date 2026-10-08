@@ -205,6 +205,10 @@ var _zzz: Sprite2D
 var _zzz_time := 0.0
 var _zzz_textures: Dictionary = {}
 
+## The guardian's cursor and the porch guardian (task 0131).
+var _cursor: GuardianCursor
+var _guardian: GuardianView
+
 
 func _ready() -> void:
 	_terrain.tile_set = _build_terrain_tileset()
@@ -274,11 +278,12 @@ func _ready() -> void:
 	add_child(_shots)
 
 	# **Out of the night's tint**, the way the particles' warm effects are:
-	# its own layer following the camera, so world pixels still place it and
-	# it stays the lightest thing over the dark house. Created here, before
-	# `HouseView`, so the bed beat's room still covers it.
+	# its own layer following the camera, so world pixels still place them -
+	# the Zzz stays the lightest thing over the dark house and the cursor
+	# reads over dark ground. Created here, before `HouseView`, so the bed
+	# beat's room still covers them.
 	var cue_layer := CanvasLayer.new()
-	cue_layer.name = "SleepCue"
+	cue_layer.name = "NightCues"
 	cue_layer.layer = 2
 	cue_layer.follow_viewport_enabled = true
 	add_child(cue_layer)
@@ -288,6 +293,16 @@ func _ready() -> void:
 	_zzz.region_enabled = true
 	_zzz.visible = false
 	cue_layer.add_child(_zzz)
+	_cursor = GuardianCursor.new()
+	_cursor.name = "GuardianCursor"
+	_cursor.setup(self)
+	cue_layer.add_child(_cursor)
+
+	# The porch guardian stands in the world, lit by the ramp like the house
+	# it guards; only its eyes glow (`lighting.gd`).
+	_guardian = GuardianView.new()
+	_guardian.name = "Guardian"
+	_occupants.add_child(_guardian)
 
 	_ghost = Sprite2D.new()
 	_ghost.name = "Ghost"
@@ -331,6 +346,8 @@ func show_state(state: Dictionary) -> void:
 		_mine_cells.clear()
 		_clear_mine_cues()
 	_state = state
+	if _guardian != null:
+		_guardian.show_state(state)
 	_remember_towers(state)
 	_dirty = true
 	_draw_terrain()
@@ -874,6 +891,28 @@ func pan_camera(direction: Vector2, seconds: float) -> void:
 ## Where the camera is looking, in world pixels - for the tests and the shots.
 func camera_centre() -> Vector2:
 	return _camera.position
+
+
+## Move the camera just enough that `point` is at least `margin` world pixels
+## inside the view - how the camera follows a pad-stepped cursor (task 0131).
+func keep_in_view(point: Vector2, margin: float) -> void:
+	var half := get_viewport_rect().size * 0.5 - Vector2.ONE * margin
+	var centre := _camera.position
+	var wanted := Vector2(clampf(centre.x, point.x - half.x, point.x + half.x),
+		clampf(centre.y, point.y - half.y, point.y + half.y))
+	if wanted != centre:
+		_camera.position = _camera_bounds(wanted)
+		_camera.force_update_scroll()
+
+
+## The guardian's cursor (task 0131).
+func cursor() -> GuardianCursor:
+	return _cursor
+
+
+## The porch guardian (task 0131).
+func guardian() -> GuardianView:
+	return _guardian
 
 
 ## Put the camera's centre on a world point, clamped - the shots' hook.

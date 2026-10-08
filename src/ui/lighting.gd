@@ -66,12 +66,17 @@ const STOVE_COLOUR := Color(1.00, 0.70, 0.34)
 const GENERATOR_COLOUR := Color(0.72, 0.88, 1.00)
 const MUZZLE_COLOUR := Color(1.00, 0.90, 0.62)
 const BURNING_COLOUR := Color(1.00, 0.56, 0.24)
+## The porch guardian's eyes (task 0131): small and warm, two points and never
+## a halo over the house.
+const EYE_RADIUS := 0.45
+const EYE_COLOUR := Color(1.00, 0.78, 0.40)
 
 var _state: Dictionary = {}
 var _glow: Texture2D
 var _quality := FULL
 var _flicker := 0.0
 var _window_cores: Array[Vector2] = []
+var _eye_cores: Array[Vector2] = []
 var _cores: Node2D
 
 
@@ -153,6 +158,7 @@ func _process(delta: float) -> void:
 
 func _draw() -> void:
 	_window_cores.clear()
+	_eye_cores.clear()
 	if is_instance_valid(_cores):
 		_cores.queue_redraw()
 	if _state.is_empty() or _quality == OFF or _glow == null:
@@ -210,6 +216,13 @@ func _draw() -> void:
 				else:
 					_glow_at(at, MUZZLE_RADIUS * tile, MUZZLE_COLOUR, 0.95)
 
+	# **The porch guardian's eyes** (task 0131): a glow on each emission point
+	# its lit frames carry, and a one-pixel core so they read through the
+	# night's ramp the way the windows do.
+	for eye in GuardianView.eyes(_state):
+		_eye_cores.append(get_viewport().get_canvas_transform() * eye)
+		_glow_at(eye, EYE_RADIUS * tile, EYE_COLOUR, 0.30)
+
 	# **What is on fire.** The one light that moves, and the reason the whole
 	# thing is redrawn rather than cached.
 	for where in burning_lights():
@@ -220,6 +233,14 @@ func _draw() -> void:
 func _draw_window_cores() -> void:
 	for at in _window_cores:
 		_cores.draw_rect(Rect2(at.floor()-Vector2.ONE,Vector2(2,2)),PaletteData.COLOURS[&"flame_hot"],true)
+	for at in _eye_cores:
+		_cores.draw_rect(Rect2(at.floor(), Vector2.ONE), PaletteData.COLOURS[&"flame_hot"], true)
+
+
+## Where the guardian's eye cores were drawn this frame, in screen pixels -
+## for the tests.
+func eye_cores() -> Array[Vector2]:
+	return _eye_cores
 
 
 ## Nearby burning actors share a subdued halo; every actor still keeps its

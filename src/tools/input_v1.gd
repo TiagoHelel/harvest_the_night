@@ -36,7 +36,7 @@ extends "res://src/tools/input_check.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V1_CASES := 6
+const V1_CASES := 7
 
 
 func _process(delta: float) -> bool:
@@ -56,6 +56,7 @@ func _run() -> void:
 	await _case_0127_bed()
 	await _case_0129_asleep()
 	await _case_0130_night_camera()
+	await _case_0131_cursor()
 	_finish()
 
 
@@ -525,5 +526,119 @@ func _case_0130_night_camera() -> void:
 	expect(world.camera_centre().distance_to(world._camera_bounds(on)) < float(GameData.TILE_SIZE),
 		"after the morning the camera is back on the farmer",
 		"%s against %s" % [world.camera_centre(), world._camera_bounds(on)])
+	await close_scene()
+	_completed += 1
+
+
+## 0131 - the guardian's cursor: the mouse puts it, the pad steps it, a
+## placement lands on it, and by day there is none.
+func _case_0131_cursor() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var world: WorldView = require_control("WorldView")
+	if driver == null or world == null:
+		await close_scene()
+		_completed += 1
+		return
+	var state := driver.state
+	var cursor := world.cursor()
+	await frames(4)
+	expect(not cursor.is_active() and not cursor.visible, "there is no cursor by day")
+	await click_control("NightButton")
+	await until(func() -> bool: return int(state["phase"]) == Phases.PREPARATION,
+		"GO TO BED to start the night")
+	var house_view: HouseView = require_control("HouseView")
+	await until(func() -> bool: return not house_view.is_showing_bedtime(),
+		"the bed beat to end", 100000)
+	await frames(2)
+	expect(cursor.is_active() and cursor.visible, "the cursor is up in the build step")
+
+	# **A mouse move puts it on the cell under the pointer.**
+	var target := world.screen_to_cell(Vector2(240.0, 140.0))
+	var motion := InputEventMouseMotion.new()
+	motion.position = world.cell_to_screen(target)
+	motion.global_position = motion.position
+	root.push_input(motion)
+	await frames(2)
+	expect(cursor.cell() == target and not cursor.by_pad(),
+		"a mouse move puts the cursor on that cell", "%s against %s" % [cursor.cell(), target])
+	expect((state["intent"] as Dictionary)["build_cell"] == [target.x, target.y],
+		"and it writes build_cell")
+
+	# **The dpad steps it, one cell a press, and repeats when held.**
+	await _pad_button(JOY_BUTTON_DPAD_RIGHT, true)
+	await frames(1)
+	await _pad_button(JOY_BUTTON_DPAD_RIGHT, false)
+	await frames(2)
+	expect(cursor.cell() == target + Vector2i(1, 0) and cursor.by_pad(),
+		"one dpad press steps one cell", str(cursor.cell()))
+	var from := cursor.cell()
+	var camera := world.camera_centre()
+	await _pad_button(JOY_BUTTON_DPAD_UP, true)
+	var started := Time.get_ticks_usec()
+	var long := GameData.CURSOR_REPEAT_DELAY + 4.0 * GameData.CURSOR_REPEAT_RATE
+	await until(func() -> bool: return float(Time.get_ticks_usec() - started) / 1000000.0 > long,
+		"a held dpad", 100000)
+	await _pad_button(JOY_BUTTON_DPAD_UP, false)
+	await frames(2)
+	expect(from.y - cursor.cell().y >= 3 and cursor.cell().x == from.x,
+		"held, it repeats", "%s to %s" % [from, cursor.cell()])
+	expect(world.camera_centre() == camera
+		or world.camera_centre().y < camera.y,
+		"and the camera follows it up, if anywhere", "%s to %s" % [camera, world.camera_centre()])
+
+	# **A placement at the cursor lands on that cell**: a wall, put down with
+	# the pad's trigger wherever the pad left the cursor.
+	Resources.gain(state, {GameData.WOOD: 600, GameData.STONE: 600})
+	Building.set_active(state, true)
+	(state["build"] as Dictionary)["selected"] = &"wall"
+	var spot := Vector2i(-1, -1)
+	for radius in 6:
+		for candidate in Grid.within(cursor.cell(), radius):
+			if spot.x < 0 and Building.why_not(state, &"wall", candidate).is_empty():
+				spot = candidate
+	cursor.place_at(spot)
+	await frames(3)
+	expect(cursor.look() == &"place", "over a free cell with a wall in hand it reads place",
+		String(cursor.look()))
+	await _pad_axis(JOY_AXIS_TRIGGER_RIGHT, 1.0)
+	await _pad_axis(JOY_AXIS_TRIGGER_RIGHT, 0.0)
+	await until(func() -> bool: return StringName(Farm.occupant(state, spot).get("id", &"")) == &"wall",
+		"the wall to go down")
+	expect(StringName(Farm.occupant(state, spot).get("id", &"")) == &"wall",
+		"a placement at the cursor lands on that cell", str(spot))
+	await frames(3)
+	expect(cursor.look() == &"blocked", "and the cell it filled now reads blocked",
+		String(cursor.look()))
+
+	# **What is under it**, through the tooltip, inside the night's free band.
+	var tooltip: Tooltip = require_control("Tooltip")
+	await until(func() -> bool: return tooltip.text_showing().contains(Names.of(&"wall").to_upper()),
+		"the tooltip over the wall", 100000)
+	expect(tooltip.text_showing().contains(Names.of(&"wall").to_upper()),
+		"the tooltip says what is under the cursor", tooltip.text_showing())
+	expect(Tooltip.WORLD_AREA.encloses(tooltip.panel_rect()),
+		"and stays off the HUD", str(tooltip.panel_rect()))
+
+	# **The guardian is awake**, its eyes lit.
+	var guardian := world.guardian()
+	var lighting: Lighting = require_control("Lighting")
+	await frames(2)
+	expect(guardian.playing() == &"guardian_night" or guardian.playing() == &"guardian_wake",
+		"the guardian woke for the night", String(guardian.playing()))
+	expect(lighting.eye_cores().size() == 2, "with two lit eyes", str(lighting.eye_cores()))
+
+	# **And by day there is none again.**
+	Building.set_active(state, false)
+	NightRoad.through_build(state)
+	NightRoad.park(state)
+	Phases.enter_result(state, true)
+	Phases.begin_day(state)
+	await frames(4)
+	expect(not cursor.is_active() and not cursor.visible
+		and tooltip.text_showing().is_empty(),
+		"by day there is no cursor and nothing it describes")
+	expect(guardian.playing() == &"guardian_day", "and the guardian is still again",
+		String(guardian.playing()))
 	await close_scene()
 	_completed += 1

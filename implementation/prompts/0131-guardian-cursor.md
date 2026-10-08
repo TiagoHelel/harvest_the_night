@@ -1,7 +1,7 @@
 # 0131 - The guardian's cursor
 
 - **Phase:** 10 - Sleep is the night
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0130, 0121, 0120
 - **Likely files:** src/ui/guardian_cursor.gd (new), src/ui/guardian_view.gd (new), src/ui/main.gd, src/ui/world_view.gd, src/ui/build_mode.gd, src/ui/tooltip.gd, src/ui/describe.gd, src/ui/lighting.gd, src/ui/placeholder_art.gd, src/app/input_actions.gd, project.godot, assets/locale/strings.csv, src/tools/headless_v1.gd, src/tools/input_v1.gd, implementation/backlog/packs/
 

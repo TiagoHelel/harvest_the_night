@@ -1358,6 +1358,12 @@ const TRANSITION_SECONDS := 1.6         # LEVER: seconds, 0.4-4.0
 const CAMERA_PAN_SPEED := 240.0         # LEVER: world pixels a second at full tilt, 120-480
 const CAMERA_EDGE_PIXELS := 8           # LEVER: world pixels from the window's edge that pan, 4-16
 
+## **The guardian's cursor on a pad** (task 0131): one cell per press, and a
+## held direction repeats after the delay at the rate. View feel, out of
+## `digest()` like the camera's; real seconds.
+const CURSOR_REPEAT_DELAY := 0.3        # LEVER: seconds before a held step repeats, 0.15-0.6
+const CURSOR_REPEAT_RATE := 0.08        # LEVER: seconds between repeated steps, 0.04-0.2
+
 ## Task 0109: the little bubble over the farmer's head.
 ##
 ## **Off is a supported state.** The done-when is that turning every reaction

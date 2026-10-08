@@ -97,6 +97,7 @@ var _pointer_at := Vector2(-1, -1)
 @onready var _driver: SimDriver = %SimDriver
 @onready var _playtest: PlaytestBadge = %PlaytestBadge
 @onready var _debug: CanvasLayer = %DebugOverlay
+@onready var _tooltip: Tooltip = %Tooltip
 
 
 ## **The theme goes on before anything is built against it**, which is why
@@ -342,6 +343,42 @@ func _process(_delta: float) -> void:
 			or int(_driver.state["phase"]) != Phases.DAY
 		else _target_cell())
 	_steer_camera(_delta, indoors)
+	_drive_cursor(_delta)
+
+
+## **The guardian's cursor** (task 0131): from the build step to the morning,
+## the cell every night action points at. Here it is stepped, written into
+## the levels the rules read (`build_cell`), given its look, and described.
+func _drive_cursor(delta: float) -> void:
+	var cursor := _world.cursor()
+	var phase := int(_driver.state["phase"])
+	var on := phase == Phases.PREPARATION or phase == Phases.NIGHT
+	cursor.set_active(on)
+	if not on:
+		_tooltip.show_world("", Vector2.ZERO)
+		return
+	var step := Vector2i.ZERO
+	if not _was_paused:
+		step = Vector2i(int(signf(Input.get_axis(&"move_left", &"move_right"))),
+			int(signf(Input.get_axis(&"move_up", &"move_down"))))
+	cursor.advance(delta, step)
+	if cursor.by_pad():
+		# The camera follows a stepped cursor near the edge of the view.
+		_world.keep_in_view(cursor.centre(), 2.0 * float(GameData.TILE_SIZE))
+	var cell := cursor.cell()
+	(_driver.state["intent"] as Dictionary)["build_cell"] = [cell.x, cell.y]
+	cursor.set_look(_cursor_look(cell))
+	_tooltip.show_world(Describe.under_cursor(_driver.state, cell),
+		_world.cell_to_screen(cell) + Vector2(0.0, float(GameData.TILE_SIZE) * 0.5))
+
+
+## What confirming would do at the cursor: place, refused, or nothing to do.
+## Upgrade, sell, repair and aim are 0133-0135's to switch on.
+func _cursor_look(cell: Vector2i) -> StringName:
+	var id := Building.selected(_driver.state)
+	if not Building.is_active(_driver.state) or id == &"":
+		return &"neutral"
+	return &"place" if Building.why_not(_driver.state, id, cell).is_empty() else &"blocked"
 
 
 ## **Whose camera it is** (task 0130). By day it follows the farmer. From the
@@ -377,8 +414,12 @@ func aim_night_camera(point: Vector2) -> void:
 ## left stick bound to them), the right stick's `pan_*`, and the pointer in
 ## the edge band of a focused window. Up to 1 a side.
 func pan_direction() -> Vector2:
-	var direction := Vector2(Input.get_axis(&"move_left", &"move_right"),
-		Input.get_axis(&"move_up", &"move_down"))
+	var direction := Vector2.ZERO
+	# **A pad's move axes step the cursor instead** (task 0131); the keyboard
+	# keeps panning, because the last device touched decides.
+	if not _world.cursor().by_pad():
+		direction = Vector2(Input.get_axis(&"move_left", &"move_right"),
+			Input.get_axis(&"move_up", &"move_down"))
 	direction += Vector2(Input.get_axis(&"pan_left", &"pan_right"),
 		Input.get_axis(&"pan_up", &"pan_down"))
 	if edge_pan and _window_focused and _pointer_in_window:

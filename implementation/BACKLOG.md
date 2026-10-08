@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`##########..............`  **125 / 296 done**
+`##########..............`  **126 / 296 done**
 
-0 doing / 171 todo / 0 blocked across 18 phases.
+0 doing / 170 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-171 task(s) left, the ready ones first, then what they
+170 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -107,25 +107,38 @@ The last three legacy strips: A009's craft, trade and repair in the 32px body. R
   - done when: FHD captures (`python tools/shot.py 0125 --fhd`, with an earlier leaf's mid-verb scenario or a new one) of craft at the workshop, trade at the stall and repair on the house, by day and in the dark, in `implementation/shots/0125/`, opened
   - done when: The sim and data hashes are unchanged (art never moves them)
 
-### 0131 - The guardian's cursor
+### 0132 - Defences go down only at night
 
-Ready to pick up.  Likely files: `src/ui/guardian_cursor.gd (new), src/ui/guardian_view.gd (new), src/ui/main.gd, src/ui/world_view.gd, src/ui/build_mode.gd, src/ui/tooltip.gd, src/ui/describe.gd, src/ui/lighting.gd, src/ui/placeholder_art.gd, src/app/input_actions.gd, project.godot, assets/locale/strings.csv, src/tools/headless_v1.gd, src/tools/input_v1.gd, implementation/backlog/packs/`.
+Ready to pick up.  Likely files: `src/core/building.gd, src/core/game_data.gd, src/core/phases.gd, src/core/tutorial.gd, src/core/sim.gd, src/ui/build_mode.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd`.
 
-The player's hand at night: a cell cursor that the mouse or the pad drives, that says what is under it, and that every night action points at - held by the porch scarecrow, who wakes up to be the guardian.
+The plan's decision 4: defences are placed, upgraded and sold only at night, by cursor, and production buildings only by day. The day earns and the night spends.
 
-- A cell cursor in PREPARATION and NIGHT only. With the mouse it is the cell under the pointer (`WorldView.screen_to_cell`); with a pad the dpad and the left stick step it one cell per press with a hold-repeat (delay and rate are view levers) and the camera follows it near the edge. The last device used decides, as 0121's glyphs do, so the keyboard keeps panning (0130) while a pad steps
-- It writes the levels the rules read - `build_cell` now, `ability_cell` from 0135 - and BuildMode's ghost and its `Pathing.route_if_blocked` preview follow the cursor instead of the raw pointer
-- A tooltip of what is under it through `tooltip.gd` and `Describe`: a structure (name, HP against its levelled maximum, level), an enemy (kind, HP) or empty ground, with strings in both languages
-- Seven highlight states, all registered now in 0120's placeholder registry so later tasks only switch them on: neutral, can place, blocked, upgrade, sell, repair, aim - a code-drawn outline with a 2-frame pulse until A004 is integrated by 0146. This task uses neutral, can place and blocked
-- Any new pad action (a confirm or back for the cursor, if 0121 left `place` and `remove` without a pad button) goes into `project.godot` and `InputActions.ACTIONS` with `ACT_*` strings and is rebindable on the controls page; the clash check passes
-- The porch guardian: a view-only prop at a fixed offset from `House.porch`, on a cell nothing can ever be built on (the house's own footprint beside the door is one) - not an occupant and not in the state, so the hash cannot see it. States: day (still), wake (plays at the reality switch), night (idle, the eyes lit as emission points `lighting.gd` reads) and point; placeholder until A003 is integrated by 0145. This task registers all four and plays the first three; 0133 makes it point when a defence goes down
-- Settle A003's and A004's geometry from what this task drew: canvas, pivot, frames per state, seconds per frame, emission points
-- View only: neither hash moves
+- `Building.allowed_in_phase`: a `DEFENCES` id only in PREPARATION and NIGHT, a `BUILDINGS` id only in DAY. `why_not` answers `WHY_ONLY_AT_NIGHT` for a defence by day (the string exists) and `WHY_NOT_AT_NIGHT` for a building after dark; `why_not_upgrade` and `sell` follow the same rule; `catalogue()` keeps following `allowed_in_phase`. The plan (4.3) lets upgrades go on during the waves, so `why_not_upgrade`'s `WHY_MID_NIGHT` refusal goes: rewrite `_task_0064_tower_levels` (~11931), and delete the `WHY_MID_NIGHT` row if nothing reads it any more (`tools/i18n_check.py` fails on an unused key)
+- `placeable_at_night` goes: drop it from the barricade and drop the `check_defences` rule that tied it to a lifetime and a nightly limit. The barricade keeps `lifetime_ticks` and `per_night_limit` as its own identity (cheap, temporary, limited). Section 13's bug must not come back in the build step, which has no clock after 0136: a barricade placed in PREPARATION counts against tonight's limit (`Building.forget_tonight` moves from `begin_night` to `begin_preparation`) and its lifetime starts with the waves, not when it went down
+- At night upgrade and sell go through the cursor: BuildMode's `upgrade` and `remove` write `build_upgrade` and `build_sell` at the cursor cell, and the cursor shows its upgrade and sell states (0131's registry)
+- By day `B` lists only production buildings; at night the palette lists only defences (0133 turns it into the hotbar)
+- The tutorial's `build` step moves to the night: it follows `night` in `TUTORIAL`, `Tutorial.tick` also runs on its beat in `_tick_preparation`, and `TUT_BUILD` says it happens at night, in both languages. 0141 writes the rest of the night's steps
+- Rewrite `_task_0047_barricades` ('only the barricade goes down at night' becomes 'every defence goes down at night and none by day; buildings only by day'), `_task_0022_reality`'s 'built by day' wording and `_task_0041_tutorial`'s build step; any input_check case still placing a defence by day moves to the build step (0119 should already have moved them)
+- A rule change: if SIM moves, record both numbers and why (0119 moved the determinism scenario's placements into PREPARATION, so it may not). DATA moves (the barricade and the tutorial)
 
-  - done when: `_case_0131_cursor` in `input_v1.gd`: a synthetic mouse move puts the cursor on that cell; synthetic dpad presses step it one cell each and repeat when held; a placement at the cursor in PREPARATION lands on that cell; there is no cursor by day
-  - done when: `_task_0131_guardian` in `headless_v1.gd`: the guardian's cell is never buildable (`Farm.buildable` false) on a new farm
-  - done when: The Deliverables tables of `implementation/backlog/packs/A003-guardian.md` and `implementation/backlog/packs/A004-cursor.md` state the final geometry this task settled
-  - done when: `python tools/shot.py 0131 dusk wave` and `--fhd` captures opened: the cursor reads over dark ground, the tooltip does not cover the HUD, the guardian stands by the porch with its eyes lit at night
+  - done when: `_task_0132_night_build` in `headless_v1.gd`: for every `DEFENCES` id, `can_place` is false by day with the night refusal and true in PREPARATION and NIGHT on a clear cell; the reverse for every `BUILDINGS` id; upgrade and sell follow, and a tower upgrades mid-wave; the barricade still expires and still has its nightly limit, and one placed in PREPARATION counts against that limit and still stands for `lifetime_ticks` after the waves begin
+  - done when: `python tools/shot.py 0132 refused` and a day build-mode capture opened: by day the list holds buildings only, at night defences only
+
+### 0135 - The flare goes where you aim it
+
+Ready to pick up.  Likely files: `src/core/ability.gd, src/core/player.gd, src/ui/main.gd, src/ui/guardian_cursor.gd, src/ui/world_view.gd, src/ui/night_hud.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+
+The flare goes off where the player aims it, not where somebody is standing. It is the night's one power today and the first of the plan's aimed powers.
+
+- A level intent `ability_cell` (`[-1, -1]` is nowhere), written every frame from the cursor like `build_cell`; a new field of `intent`, filled in old saves by reconcile
+- `Ability.use` centres on `ability_cell`. Nowhere or off the farm is refused and spends nothing - no cooldown, no `flares` count. 0129's interim house centre goes
+- Aiming: while the flare is ready, holding the ability key or arming the FLARE button shows the radius around the cursor (`ABILITY.radius_tiles`, a Chebyshev square, the way `Ability.use` measures it) and the cursor's aim state. The key fires on press at the cursor; the armed button fires on the next confirm; `cancel` disarms. The pad uses the same actions through 0121's bindings
+- Final `_task_0054_ability` and `_case_0054_ability`: the flare lands on the aimed cell; rewrite the flare half of 0129's `_task_0129_asleep` (it asserted the interim house centre)
+- SIM moves on purpose: `intent` gains `ability_cell`, and every state key is hashed (more if the determinism scenario fires a flare - say which). Record both numbers. DATA does not move
+
+  - done when: `_task_0135_aimed_flare` in `headless_v1.gd`: with one zombie by the aimed cell and one by the house, only the first is hit and slowed; a flare at nowhere is refused and keeps its charge
+  - done when: `_case_0135_flare_aim` in `input_v1.gd`: moving the cursor and pressing the ability key flares that cell; arming the button and clicking flares the clicked cell
+  - done when: A capture of the aiming preview, opened: the square matches what the flare hits
 
 ### 0140 - The day HUD: the hour and bedtime
 
@@ -176,42 +189,9 @@ The farmer's reactions at the 32px detail of his new body, and the Zzz that rise
   - done when: FHD (1920x1080) captures by day and by night of the art in the real game - a reaction by day, the Zzz at night - opened and looked at, in `implementation/shots/0144/`
   - done when: The sim and data hashes are unchanged (art never moves them)
 
-### 0132 - Defences go down only at night
-
-Waits on 0131.  Likely files: `src/core/building.gd, src/core/game_data.gd, src/core/phases.gd, src/core/tutorial.gd, src/core/sim.gd, src/ui/build_mode.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd`.
-
-The plan's decision 4: defences are placed, upgraded and sold only at night, by cursor, and production buildings only by day. The day earns and the night spends.
-
-- `Building.allowed_in_phase`: a `DEFENCES` id only in PREPARATION and NIGHT, a `BUILDINGS` id only in DAY. `why_not` answers `WHY_ONLY_AT_NIGHT` for a defence by day (the string exists) and `WHY_NOT_AT_NIGHT` for a building after dark; `why_not_upgrade` and `sell` follow the same rule; `catalogue()` keeps following `allowed_in_phase`. The plan (4.3) lets upgrades go on during the waves, so `why_not_upgrade`'s `WHY_MID_NIGHT` refusal goes: rewrite `_task_0064_tower_levels` (~11931), and delete the `WHY_MID_NIGHT` row if nothing reads it any more (`tools/i18n_check.py` fails on an unused key)
-- `placeable_at_night` goes: drop it from the barricade and drop the `check_defences` rule that tied it to a lifetime and a nightly limit. The barricade keeps `lifetime_ticks` and `per_night_limit` as its own identity (cheap, temporary, limited). Section 13's bug must not come back in the build step, which has no clock after 0136: a barricade placed in PREPARATION counts against tonight's limit (`Building.forget_tonight` moves from `begin_night` to `begin_preparation`) and its lifetime starts with the waves, not when it went down
-- At night upgrade and sell go through the cursor: BuildMode's `upgrade` and `remove` write `build_upgrade` and `build_sell` at the cursor cell, and the cursor shows its upgrade and sell states (0131's registry)
-- By day `B` lists only production buildings; at night the palette lists only defences (0133 turns it into the hotbar)
-- The tutorial's `build` step moves to the night: it follows `night` in `TUTORIAL`, `Tutorial.tick` also runs on its beat in `_tick_preparation`, and `TUT_BUILD` says it happens at night, in both languages. 0141 writes the rest of the night's steps
-- Rewrite `_task_0047_barricades` ('only the barricade goes down at night' becomes 'every defence goes down at night and none by day; buildings only by day'), `_task_0022_reality`'s 'built by day' wording and `_task_0041_tutorial`'s build step; any input_check case still placing a defence by day moves to the build step (0119 should already have moved them)
-- A rule change: if SIM moves, record both numbers and why (0119 moved the determinism scenario's placements into PREPARATION, so it may not). DATA moves (the barricade and the tutorial)
-
-  - done when: `_task_0132_night_build` in `headless_v1.gd`: for every `DEFENCES` id, `can_place` is false by day with the night refusal and true in PREPARATION and NIGHT on a clear cell; the reverse for every `BUILDINGS` id; upgrade and sell follow, and a tower upgrades mid-wave; the barricade still expires and still has its nightly limit, and one placed in PREPARATION counts against that limit and still stands for `lifetime_ticks` after the waves begin
-  - done when: `python tools/shot.py 0132 refused` and a day build-mode capture opened: by day the list holds buildings only, at night defences only
-
-### 0135 - The flare goes where you aim it
-
-Waits on 0131.  Likely files: `src/core/ability.gd, src/core/player.gd, src/ui/main.gd, src/ui/guardian_cursor.gd, src/ui/world_view.gd, src/ui/night_hud.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
-
-The flare goes off where the player aims it, not where somebody is standing. It is the night's one power today and the first of the plan's aimed powers.
-
-- A level intent `ability_cell` (`[-1, -1]` is nowhere), written every frame from the cursor like `build_cell`; a new field of `intent`, filled in old saves by reconcile
-- `Ability.use` centres on `ability_cell`. Nowhere or off the farm is refused and spends nothing - no cooldown, no `flares` count. 0129's interim house centre goes
-- Aiming: while the flare is ready, holding the ability key or arming the FLARE button shows the radius around the cursor (`ABILITY.radius_tiles`, a Chebyshev square, the way `Ability.use` measures it) and the cursor's aim state. The key fires on press at the cursor; the armed button fires on the next confirm; `cancel` disarms. The pad uses the same actions through 0121's bindings
-- Final `_task_0054_ability` and `_case_0054_ability`: the flare lands on the aimed cell; rewrite the flare half of 0129's `_task_0129_asleep` (it asserted the interim house centre)
-- SIM moves on purpose: `intent` gains `ability_cell`, and every state key is hashed (more if the determinism scenario fires a flare - say which). Record both numbers. DATA does not move
-
-  - done when: `_task_0135_aimed_flare` in `headless_v1.gd`: with one zombie by the aimed cell and one by the house, only the first is hit and slowed; a flare at nowhere is refused and keeps its charge
-  - done when: `_case_0135_flare_aim` in `input_v1.gd`: moving the cursor and pressing the ability key flares that cell; arming the button and clicking flares the clicked cell
-  - done when: A capture of the aiming preview, opened: the square matches what the flare hits
-
 ### 0146 - Art: the guardian's cursor
 
-Waits on 0131.  Likely files: `assets/art_source/ui/, assets/art_source/manifest.json, assets/art_source/ownership.json, src/ui/raster_art.gd, src/ui/placeholder_art.gd, src/ui/guardian_cursor.gd, tools/check_ui_art.py, tools/show_art.py`.
+Waits for Codex art A004.  Likely files: `assets/art_source/ui/, assets/art_source/manifest.json, assets/art_source/ownership.json, src/ui/raster_art.gd, src/ui/placeholder_art.gd, src/ui/guardian_cursor.gd, tools/check_ui_art.py, tools/show_art.py`.
 
 The cursor's seven states in drawn pixels, from Codex pack A004, replacing 0131's code-drawn outline.
 
@@ -262,7 +242,7 @@ The build step has no clock. The night waits while the player builds and starts 
 
 ### 0134 - Repairing by cursor
 
-Waits on 0131, 0133.  Likely files: `src/core/interact.gd, src/core/building.gd, src/core/repair.gd, src/ui/guardian_cursor.gd, src/ui/night_hud.gd, src/ui/build_mode.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Waits on 0133.  Likely files: `src/core/interact.gd, src/core/building.gd, src/core/repair.gd, src/ui/guardian_cursor.gd, src/ui/night_hud.gd, src/ui/build_mode.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
 Repairs at night are made by pointing, not by walking. A damaged defence or the house is mended by selecting it with the cursor, paid as today, and defences are mended no other way.
 
@@ -299,7 +279,7 @@ The night has an end you know in advance: 06:00. A house still standing at dawn 
 
 ### 0145 - Art: the porch guardian
 
-Waits on 0131, 0133.  Likely files: `assets/art_source/guardian/, assets/art_source/manifest.json, assets/art_source/ownership.json, src/ui/raster_art.gd, src/ui/placeholder_art.gd, src/ui/guardian_view.gd, src/ui/lighting.gd, tools/check_prop_art.py, tools/show_art.py, tools/verify.py`.
+Waits on 0133.  Likely files: `assets/art_source/guardian/, assets/art_source/manifest.json, assets/art_source/ownership.json, src/ui/raster_art.gd, src/ui/placeholder_art.gd, src/ui/guardian_view.gd, src/ui/lighting.gd, tools/check_prop_art.py, tools/show_art.py, tools/verify.py`.
 
 The porch scarecrow that becomes the guardian at night, from Codex pack A003, replacing 0131's placeholder.
 
@@ -1295,7 +1275,7 @@ The farmer casts, waits, strikes, reels and shows the catch at the 32px detail, 
 
 ### 0292 - Options for the new controls
 
-Waits on 0131, 0180, 0158.  Likely files: `src/app/settings.gd, src/app/input_actions.gd, src/ui/options_controls.gd, src/ui/options_game.gd, src/ui/guardian_cursor.gd, src/ui/main.gd, src/ui/world_view.gd, src/ui/forecast_panel.gd, src/ui/day_hud.gd, assets/locale/strings.csv, src/tools/input_v1.gd, src/tools/headless_v1.gd`.
+Waits on 0180, 0158.  Likely files: `src/app/settings.gd, src/app/input_actions.gd, src/ui/options_controls.gd, src/ui/options_game.gd, src/ui/guardian_cursor.gd, src/ui/main.gd, src/ui/world_view.gd, src/ui/forecast_panel.gd, src/ui/day_hud.gd, assets/locale/strings.csv, src/tools/input_v1.gd, src/tools/headless_v1.gd`.
 
 The guardian's cursor, the night camera and the fishing bar each get the knob a player reaches for: how fast the cursor moves, whether the screen edge pans, how far a stick must tilt, a kinder fishing bar, and a forecast that stays up all day.
 
@@ -3307,18 +3287,18 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0124** [Art: the farmer chopping, mining, collecting and carrying](prompts/0124-art-farmer-gather-work.md) - waits for art A008
 - [ ] **0125** [Art: the farmer crafting, trading and repairing](prompts/0125-art-farmer-make-work.md) - waits for art A009
 
-## 10 - Sleep is the night  (5/23)
+## 10 - Sleep is the night  (6/23)
 
 - [x] **0126** [The clock: 06:00 to 02:00](prompts/0126-clock.md)
 - [x] **0127** [Going to bed starts the night](prompts/0127-bed.md)
 - [x] **0128** [Passing out at 02:00](prompts/0128-pass-out.md)
 - [x] **0129** [He stays in bed all night](prompts/0129-asleep-all-night.md)
 - [x] **0130** [The night camera](prompts/0130-night-camera.md)
-- [ ] **0131** [The guardian's cursor](prompts/0131-guardian-cursor.md)
-- [ ] **0132** [Defences go down only at night](prompts/0132-defences-at-night.md) - needs 0131
+- [x] **0131** [The guardian's cursor](prompts/0131-guardian-cursor.md)
+- [ ] **0132** [Defences go down only at night](prompts/0132-defences-at-night.md)
 - [ ] **0133** [The hotbar of defences](prompts/0133-hotbar.md) - needs 0132
-- [ ] **0134** [Repairing by cursor](prompts/0134-repair-by-cursor.md) - needs 0131, 0133
-- [ ] **0135** [The flare goes where you aim it](prompts/0135-aimed-flare.md) - needs 0131
+- [ ] **0134** [Repairing by cursor](prompts/0134-repair-by-cursor.md) - needs 0133
+- [ ] **0135** [The flare goes where you aim it](prompts/0135-aimed-flare.md)
 - [ ] **0136** [The build step waits for START](prompts/0136-start-button.md) - needs 0132
 - [ ] **0137** [The night ends at 06:00](prompts/0137-dawn-ends-night.md) - needs 0136
 - [ ] **0138** [Waking up: the morning report](prompts/0138-morning-report.md) - needs 0137
@@ -3328,8 +3308,8 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0142** [The autoplayer sleeps too](prompts/0142-autoplay-sleep.md) - needs 0137, 0132, 0138
 - [ ] **0143** [Art: going to bed, sleeping, waking, passing out](prompts/0143-art-farmer-bed.md) - waits for art A001
 - [ ] **0144** [Art: the farmer's reactions and Zzz](prompts/0144-art-reactions.md) - waits for art A002
-- [ ] **0145** [Art: the porch guardian](prompts/0145-art-guardian.md) - needs 0131, 0133 - waits for art A003
-- [ ] **0146** [Art: the guardian's cursor](prompts/0146-art-cursor.md) - needs 0131 - waits for art A004
+- [ ] **0145** [Art: the porch guardian](prompts/0145-art-guardian.md) - needs 0133 - waits for art A003
+- [ ] **0146** [Art: the guardian's cursor](prompts/0146-art-cursor.md) - waits for art A004
 - [ ] **0147** [Art: the night hotbar and HUD icons](prompts/0147-art-night-icons.md) - needs 0133, 0139 - waits for art A005
 - [ ] **0148** [Checkpoint: is the night better with him asleep?](prompts/0148-checkpoint-sleep.md) - needs 0137, 0138, 0139, 0140, 0141, 0142
 
@@ -3496,7 +3476,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 ## 17 - Ship 1.0  (0/7)
 
 - [ ] **0291** [Saves into 1.0](prompts/0291-saves-v1.md) - needs 0151, 0156, 0165, 0279, 0287
-- [ ] **0292** [Options for the new controls](prompts/0292-options-v1.md) - needs 0131, 0180, 0158
+- [ ] **0292** [Options for the new controls](prompts/0292-options-v1.md) - needs 0180, 0158
 - [ ] **0293** [The first week, taught](prompts/0293-onboarding-v1.md) - needs 0195, 0141, 0158, 0180
 - [ ] **0294** [Every new word in Portuguese](prompts/0294-translation-v1.md) - needs 0287, 0293, 0291, 0292
 - [ ] **0295** [A playtest build of the year](prompts/0295-playtest-v1.md) - needs 0280, 0291, 0292, 0293, 0294

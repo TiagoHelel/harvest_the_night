@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 12
+const GROUPS := 13
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -81,6 +81,7 @@ func _run() -> void:
 	_task_0127_bed()
 	_task_0128_pass_out()
 	_task_0129_asleep()
+	_task_0131_guardian()
 
 
 func _finish() -> void:
@@ -1161,4 +1162,100 @@ func _task_0129_asleep() -> void:
 	expect(int(day["house_hp"]) == hp_day
 		and (day["intent"] as Dictionary)["repair_cell"] == [-1, -1],
 		"by day repair_cell is dropped unread")
+	_completed += 1
+
+
+## 0131 - the porch guardian and the cursor's registry.
+func _task_0131_guardian() -> void:
+	# **The guardian's cell is never buildable** on a new farm, by day or in
+	# the build step, with the means to build anything.
+	for seed_value in [1311, 1312, 1313]:
+		var state := State.create(seed_value)
+		var cell := GuardianView.cell_of(state)
+		var house := Farm.house_bounds(state)
+		expect(Grid.in_bounds(cell) and house.has_point(cell) and cell != House.porch(state),
+			"seed %d: the guardian stands in the house's footprint, beside the door" % seed_value,
+			"%s in %s" % [cell, house])
+		expect(not Farm.buildable(state, cell),
+			"seed %d: the guardian's cell is never buildable" % seed_value, str(cell))
+		Resources.gain(state, {GameData.WOOD: 900, GameData.STONE: 900,
+			GameData.IRON: 900, GameData.GUNPOWDER: 900})
+		NightRoad.into_build(state)
+		var refused := 0
+		for id in GameData.sorted_names(GameData.DEFENCES.keys()):
+			if not Building.why_not(state, id, cell).is_empty():
+				refused += 1
+		expect(refused == GameData.DEFENCES.size(),
+			"seed %d: and nothing can be built there in the build step" % seed_value,
+			"%d of %d refused" % [refused, GameData.DEFENCES.size()])
+
+	# **Its eyes**: none by day, two at night, on its own lit frames' points.
+	var watch := State.create(1314)
+	expect(GuardianView.eyes(watch).is_empty(), "by day the guardian's eyes are shut")
+	NightRoad.into_build(watch)
+	var eyes := GuardianView.eyes(watch)
+	var feet := GuardianView.feet_of(watch)
+	expect(eyes.size() == 2 and eyes[0].x < eyes[1].x
+		and eyes[0].y < feet.y and eyes[0].distance_to(feet) < 48.0,
+		"at night two lit eyes, in its head", "%s, feet %s" % [str(eyes), feet])
+
+	# **The registry** (0120's road): the four guardian states and the seven
+	# cursor looks, drawn by code in their packs' boxes; lit frames carry the
+	# emission points and the unlit ones do not.
+	var wrong: Array = []
+	for name in GameData.sorted_names(PlaceholderArt.ART.keys()):
+		var entry: Dictionary = PlaceholderArt.ART[name]
+		var shape: Dictionary = entry["geometry"]
+		for i in int(entry["frames"]):
+			var path := PlaceholderArt.art_path(name, i)
+			var answer := PlaceholderArt.frame(path)
+			var lit := entry.has("lights") and i >= int(entry.get("lit_from", 0))
+			if not PlaceholderArt.has_frame(path) or not PlaceholderArt.is_drawn(path) \
+					or answer.get("canvas") != shape["canvas"] \
+					or answer.get("pivot") != shape["pivot"] \
+					or answer.has("lights") != lit:
+				wrong.append(path)
+	expect(PlaceholderArt.ART.size() == 11 and wrong.is_empty(),
+		"the guardian's four states and the cursor's seven looks are registered",
+		"%d entries, wrong: %s" % [PlaceholderArt.ART.size(), str(wrong.slice(0, 4))])
+	for look in GuardianCursor.LOOKS:
+		expect(PlaceholderArt.ART.has(StringName("cursor_%s" % look)),
+			"the cursor's '%s' look is registered" % look)
+	expect(PlaceholderArt.frame(PlaceholderArt.art_path(&"guardian_day", 0)).get("lights", []).is_empty()
+		and not PlaceholderArt.frame(PlaceholderArt.art_path(&"guardian_wake", 0)).has("lights")
+		and PlaceholderArt.frame(PlaceholderArt.art_path(&"guardian_wake", 1)).has("lights"),
+		"the eyes light on the second frame of the wake, not before")
+	expect(GameData.CURSOR_REPEAT_RATE > 0.0
+		and GameData.CURSOR_REPEAT_RATE < GameData.CURSOR_REPEAT_DELAY,
+		"a held cursor repeats faster than it waits to start")
+
+	# **What the cursor says**, read-only: open ground, a wall, an enemy.
+	var said := State.create(1315)
+	NightRoad.into_build(said)
+	var before := State.hash_of(said)
+	var ground := SuiteKit.any_buildable(said)
+	expect(Describe.under_cursor(said, ground) == I18n.t(&"CURSOR_GROUND"),
+		"over an empty cell it says open ground", Describe.under_cursor(said, ground))
+	Resources.gain(said, {GameData.WOOD: 400, GameData.STONE: 400})
+	Building.place(said, &"wall", ground)
+	Farm.damage(said, ground, 7)
+	var full := Repair.full_hp_at(said, ground)
+	var wall_text := Describe.under_cursor(said, ground)
+	expect(wall_text.contains(Names.of(&"wall").to_upper())
+		and wall_text.contains("%d/%d" % [full - 7, full]),
+		"over a wall it says the wall and its hit points against its maximum", wall_text)
+	var near := ground + Vector2i(0, 1) if Grid.in_bounds(ground + Vector2i(0, 1)) else ground - Vector2i(0, 1)
+	var one := Entities.spawn(said, &"walker", near)
+	var walker_text := Describe.under_cursor(said, near)
+	expect(walker_text.contains(Names.of(&"walker").to_upper())
+		and walker_text.contains(str(int(Entities.get_one(said, one)["hp"]))),
+		"over an enemy it says the enemy and its hit points", walker_text)
+	var house_text := Describe.under_cursor(said, Farm.house_centre(said))
+	expect(house_text.contains(I18n.t(&"CURSOR_HOUSE")),
+		"and over the farmhouse, the farmhouse", house_text)
+	var again := State.hash_of(said)
+	Describe.under_cursor(said, ground)
+	GuardianView.eyes(said)
+	expect(State.hash_of(said) == again and before != 0,
+		"asking what is under the cursor changes nothing")
 	_completed += 1

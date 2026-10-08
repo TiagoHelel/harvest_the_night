@@ -121,6 +121,10 @@ DEF_GUN_TOWER,0,gun tower,torre de tiro
 DEF_MINE,0,mine,mina
 DEF_MORTAR,0,mortar,morteiro
 DEF_WALL,0,wall,muro
+CURSOR_ENEMY,0,%s - %d HP,%s - %d de vida
+CURSOR_GROUND,0,open ground,terreno livre
+CURSOR_HOUSE,0,FARMHOUSE,CASA
+CURSOR_STRUCTURE,0,%s - %d/%d HP - level %d,%s - %d/%d de vida - nível %d
 DESC_AFTER,0,after %s,depois de %s
 DESC_AMMO,0,loaded into towers,carregada nas torres
 DESC_AMOUNT,0,%d %s,%d %s

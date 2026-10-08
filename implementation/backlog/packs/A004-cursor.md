@@ -22,7 +22,7 @@ code.
 
 ## Deliverables
 
-The table is provisional: game task 0131 settles the final canvas/footprint/states and updates it; start only when `python implementation/backlog/assets.py next` offers this pack.
+**Settled by game task 0131** (2026-10-08) from its code-drawn stand-in (`PlaceholderArt.ART`, `src/ui/guardian_cursor.gd`): the geometry below is final. The cursor is drawn **above the night ramp**: it is unlit, on `WorldView`'s `NightCues` layer, so review it unlit. It is centred on the cell (pivot (8,8) on the cell's middle) at 1.0, and it is up in the build step and the night only. The seven looks keep the table's names: 0131 switches on neutral, place and blocked, and game tasks 0133-0135 the rest. Start only when `python implementation/backlog/assets.py next` offers this pack.
 
 Every state: canvas 16x16, pivot (8,8), 2 frames at 0.4 s, loop, direction `none`,
 `mirror: "none"`, runtime file `sprites/ui/<runtime name>.png`.

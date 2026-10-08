@@ -22,7 +22,7 @@ unique on the farm: the straw decoy defence (A037) and the Scarecrow King boss
 
 ## Deliverables
 
-The table is provisional: game task 0131 settles the final canvas/footprint/states and updates it; start only when `python implementation/backlog/assets.py next` offers this pack.
+**Settled by game task 0131** (2026-10-08) from the stand-in it draws (`PlaceholderArt.ART`, `src/ui/guardian_view.gd`): the table below is final. The guardian stands on the house's own footprint, on its front-left corner cell (`House.porch` + (-3,-1), clear of the door and most of the lit windows). Its pivot is on that cell's bottom middle, drawn at 1.0 in the world, lit by the night ramp like the house and y-sorted one pixel in front of it. The states play as the table says: `day` by day; `wake` once when the night begins, then `night`; `point` once when game task 0133 asks for it, then `night`. On every lit frame the stand-in's eyes are native (13,12) and (18,12), the points `lighting.gd` puts its glow and one-pixel cores on today. The delivered frames carry their own measured points, which replace these. Start only when `python implementation/backlog/assets.py next` offers this pack.
 
 | Runtime name | Native canvas | Pivot | Frames / seconds / loop | Notes |
 |---|---|---|---|---|
@@ -55,8 +55,8 @@ The table is provisional: game task 0131 settles the final canvas/footprint/stat
   gold_dark, gold, gold_light, wood_dark, wood, wood_light, soil_dark, soil,
   soil_light, bone_dark, bone, cloth_dark, cloth, cloth_light, roof_dark, roof,
   flame, flame_hot`.
-- Runtime files go to `sprites/props/guardian_<anim>_<i>.png` unless 0131 registers
-  another folder.
+- Runtime files go to `sprites/props/guardian_<anim>_<i>.png`, the folder 0131
+  registered.
 
 ## Match these
 

@@ -13513,3 +13513,106 @@ Shots 0130 `wave dusk result passed_out options_controls` opened:
 - `passed_out` is on him lying where he fell;
 - the controls tab still opens on MOVING (the four LOOK rows are under NIGHT,
   and the strings check says they fit).
+
+## 0131 - The guardian's cursor - done 2026-10-08
+
+What changed: the player has a hand at night, and the porch scarecrow wakes
+to hold it.
+
+**The cursor** (`src/ui/guardian_cursor.gd`, new; on `WorldView`'s unlit
+`NightCues` layer, renamed from 0129's `SleepCue`, so it reads over dark ground).
+- It is up in PREPARATION and NIGHT only, with one cell.
+- The pointer puts it on the cell under it. A pad's dpad and left stick (the
+  `move_*` actions) step it one cell per press and repeat when held, through two
+  new view levers, `CURSOR_REPEAT_DELAY` (0.3 s) and `CURSOR_REPEAT_RATE`
+  (0.08 s), out of `digest()`. `WorldView.keep_in_view` makes the camera follow
+  a stepped cursor near the view's edge.
+- The last device touched decides, read from its own `_input`. While a pad
+  steps, the move keys stop panning: `pan_direction` drops them. A key or the
+  mouse hands it back to the pointer and the keyboard pans again (0130).
+- `main._drive_cursor` writes `intent.build_cell` from it every frame. The look
+  is neutral, place (the selected defence fits) or blocked; upgrade, sell,
+  repair and aim are registered for 0133-0135.
+- `BuildMode` puts the ghost and the `route_if_blocked` preview on the cursor's
+  cell while the cursor is up (by day it keeps the raw pointer). A pad that
+  steps the cursor therefore places with RT exactly where a mouse would: RT is
+  `place` and RB `remove` since 0121, so no new pad action was needed.
+
+**What is under it**: `Describe.under_cursor(state, cell)`.
+- It says, in order: an enemy (kind, HP); a structure (name, HP against its
+  levelled maximum, level); the farmhouse; or open ground. A tree or a rock has
+  no name, so it says nothing there.
+- It is the one `Describe` function that reads state, read-only (asserted: the
+  state hash does not move).
+- Strings: `CURSOR_ENEMY`, `CURSOR_STRUCTURE`, `CURSOR_HOUSE`, `CURSOR_GROUND`,
+  in both languages.
+- `Tooltip.show_world` puts it beside the cell, inside `Tooltip.WORLD_AREA`.
+  That is the night's free band, between the 24 px strip and the lines from
+  y 240, so it never covers the house bar or REPAIR. A hovered or focused
+  control still wins.
+
+**The porch guardian** (`src/ui/guardian_view.gd`, new).
+- A view-only prop in the y-sorted occupants layer: not an occupant, not in
+  the state.
+- It stands on the house footprint's front-left corner cell, `House.porch` +
+  (-3,-1). That keeps it clear of the door and mostly of the lit windows, and
+  nothing can be built there.
+- It plays `day` by day, `wake` once when the night begins, then the `night`
+  loop. `point()` is there for 0133.
+- Its eyes are emission points on its lit frames. `lighting.gd` puts a small
+  warm glow and a one-pixel `flame_hot` core on each (`GuardianView.eyes`).
+
+**The registry**: a second table, `PlaceholderArt.ART`, for art outside the
+farmer's folder.
+- Each entry names its pack's folder (`dir`); an empty `stand_in` means
+  code-drawn (`is_drawn`); `lights` + `lit_from` are the emission points.
+- It holds the guardian's four states (32x48 at (16,44), `sprites/props/`) and
+  the cursor's seven looks (16x16 at (8,8), 2 frames at 0.4 s, `sprites/ui/`),
+  both drawn in code in their packs' geometry until A003 (0145) and A004
+  (0146) land.
+- `tools/placeholders.py` reads `ART` lines and skips the disk check for code
+  drawing: 60 stand-ins over 8 packs, 0 problems.
+- **A003's and A004's Deliverables are settled**: the "provisional" paragraph
+  became the settled geometry, the guardian's cell and eye points, and the
+  cursor drawn unlit.
+
+`shot.gd`'s night pictures put the cursor on the open ground nearest the
+camera's point.
+
+Files: src/ui/{guardian_cursor,guardian_view}.gd (+ .uid, new), src/ui/{main,
+world_view,build_mode,tooltip,describe,lighting,placeholder_art}.gd,
+src/core/game_data.gd, assets/locale/strings.csv, tools/placeholders.py,
+src/tools/{headless_v1,input_v1,shot}.gd,
+implementation/backlog/packs/{A003-guardian,A004-cursor}.md,
+implementation/shots/0131/
+
+Verify: **59 passed, 0 failed in 522s** (OVER BUDGET 300, as before). Suite
+times: headless_check 78.2 s, headless_v1 2.2 s, input_check 89.2 s, input_v1
+9.8 s. Counts:
+- headless_check 16199 (+2);
+- headless_v1 192 (+26). The guardian's cell is in the footprint, not the
+  porch, never buildable and refused for every defence in the build step,
+  on three seeds. No eyes by day and two at night in its head. The 11 `ART`
+  entries resolve drawn, with the lights on lit frames only, and all seven
+  looks are registered. The wake's eyes light on its second frame. The repeat
+  rate is faster than the delay. `under_cursor` says open ground, a damaged
+  wall's 113/120, an enemy and its HP, and the farmhouse, and asking changes
+  nothing.
+- input_check 1074;
+- input_v1 63 (+16). No cursor by day; up in the build step. A mouse move puts
+  it on that cell and writes `build_cell`. One dpad press steps one cell, and
+  held it repeats with the camera following. Over a free cell with a wall in
+  hand it reads place, RT lands the wall on that cell, and then it reads
+  blocked. The tooltip names the wall inside the free band. The guardian
+  woke, with two eye cores. By day again: no cursor, no tooltip, the guardian
+  still.
+
+**sim 1212869859 and data 954093946 unchanged** (view only).
+
+Shots 0131 `dusk wave`, and `dusk-fhd` / `wave-fhd` from `--fhd`. `--fhd` writes
+over the same names, so they were renamed and the 1x pair retaken. Opened:
+- by day the scarecrow stands at the house's front-left corner, hat, blue
+  shirt and post;
+- at night its two eyes are warm points;
+- the cursor's bone brackets read over the dark grass east of the stall;
+- "open ground" sits under it, clear of the night strip and the buttons.

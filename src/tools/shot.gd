@@ -637,6 +637,10 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 	else:
 		var at := _camera_at if _camera_at.x >= 0 else Farm.house_centre(state)
 		main.aim_night_camera((Vector2(at) + Vector2.ONE * 0.5) * float(GameData.TILE_SIZE))
+		# **The guardian's cursor** (task 0131) on the open ground nearest the
+		# picture's middle: the question these pictures answer is whether it
+		# reads over dark ground.
+		main.get_node("%WorldView").cursor().place_at(_open_ground_near(state, at))
 	_only_showing(main, str(entry[2]))
 
 	for i in SETTLE:
@@ -1074,6 +1078,16 @@ func _put_up_the_defence(state: Dictionary) -> void:
 ## depend on one. Bounded, because a farmer walked at a rock would otherwise
 ## push against it until the heat death of the universe - and a shot tool
 ## that hangs is worse than one that takes a slightly wrong picture.
+## The nearest cell to `cell` with nothing on it and nobody in it.
+func _open_ground_near(state: Dictionary, cell: Vector2i) -> Vector2i:
+	for radius in 8:
+		for candidate in Grid.within(cell, radius):
+			if Grid.in_bounds(candidate) and Farm.walkable(state, candidate) \
+					and Describe.under_cursor(state, candidate) == I18n.t(&"CURSOR_GROUND"):
+				return candidate
+	return cell
+
+
 ## **The camera hook** (task 0130): what a scenario wants in the picture. By
 ## day the farmer is walked there and the camera follows him; from the
 ## build step to the morning the night camera is put on it.
