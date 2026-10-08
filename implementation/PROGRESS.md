@@ -14798,3 +14798,104 @@ differs. Its farm goes to bed, builds and fights, so `done` now ends
 bed, build, start where it ended night, build. `start` is seen by the
 night's own beat, which is new. Its night is lost, so `dawn` stays open.
 **data 898358060 -> 3047858822**: `TUTORIAL` (nine steps) is in `digest()`.
+
+## 0142 - The autoplayer sleeps too - done 2026-10-08
+
+What changed: the autoplayer plays the game as it now is, and keeps playing
+after a loss. A night of it is:
+- the day;
+- to bed;
+- the build step, through the intent road;
+- START;
+- the night to its own end;
+- the morning report confirmed.
+
+The balance tools measure the real loop again.
+
+**The loop** (`src/tools/autoplay.gd`):
+- **`_a_day`.** The day starts from 0138's wake: out of the door first.
+  - It gathers, crafts, buys technology and puts up stations by day only.
+  - It goes to bed through the `sleep` intent, at the policy's `bed_minute`,
+    or sooner if nothing is left worth doing.
+  - Every policy now declares `bed_minute`. All four use
+    `DEFAULT_BED_MINUTE`, 01:30, the pass-out warning's minute. It is before
+    02:00, so the robot never passes out by accident, which 0128 had only
+    avoided by stopping one tick short.
+- **`_a_build_step`.** The defence goes down through the intent road, a tick
+  a press: `repair_cell`; `Building.select` and then `build_cell` with
+  `build_place`; `build_cell` with `build_upgrade`.
+  - Each press is checked to have done something, so a refused one is
+    planned around rather than spun on.
+  - Then `start_waves`. The build step has no clock after a bedtime, so the
+    ticks cost nothing.
+- **`_a_night`.** `NightRoad.run_night`, capped at `NIGHT_TICKS` and a margin
+  of one more night. The margin is for a Giant holding dawn back.
+- **`_one_night`** puts the three together and confirms the report. It
+  returns the night's row: `night`, `held`, `ended` (`dawn`, `cleared` -
+  everything dead first - `house`, or `cap`), `house`, `walked`, `spent` and
+  `towers`.
+- **`play`** plays `nights_wanted` nights and carries on after a loss.
+  - `died_on` is the first night lost, and `nights_won` how far it got
+    anyway.
+  - `won` means no loss over the nights asked for.
+  - It stops only when the run is over or a night is still going at the cap.
+- Nothing is placed by day: the policies keep their lists, and their
+  defences wait for the build step.
+
+**The report** (`autoplay_run.gd`) keeps what `tools/balance.py` reads:
+- the won column and the killer;
+- `nights:` as the first night each run lost, or how many it played - the
+  same meaning as before, now that a run goes on after a loss.
+
+It adds:
+- `won all`: the mean nights won per run over its ten nights;
+- under each policy, how its nights ended (dawn, everything dead, house down)
+  and how many walked off a night.
+
+**Tests:**
+- `_task_0067_autoplay`: one night per policy, down from three runs of four.
+  - Each policy declares `bed_minute`, before 02:00.
+  - The same seed plays the same night, to the kill, and a different policy is
+    a different run.
+  - Every row reports `ended` and `walked`, ending at dawn, cleared or house -
+    never at the cap.
+  - A tower goes up on day one.
+  - **A lost night does not end the run.** The robot's own day ends in bed,
+    not passed out, and its build step ends with START. A house at 1 HP
+    falls. Confirmed, the robot plays day 2, and night 1 comes back.
+- `_task_0068_balance`: still one day and one night per policy, through the
+  new day, build step and night. All four end the tutorial night cleared, on
+  10 house.
+
+**Group times**, measured alone: `_task_0067_autoplay` 7.1 s and
+`_task_0068_balance` 7.1 s, 115 asserts between them. `headless_check` as a
+whole went from 87.6 s to 72.6 s, most of it 0067's old three runs of four
+nights.
+
+**`python tools/autoplay.py`**, the same 100 runs (25 seeds of each policy,
+ten nights a run), took 1,411 s before and 2,366 s after.
+- First loss: `balanced` night 8 (13x), `economy` night 3 (19x), `towers`
+  night 8 (17x), `walls` night 8 (21x). No policy wins all ten, as before.
+- Nights won over ten: 6.9 / 6.7 / 6.8 / 7.2.
+- Of 1,000 nights, none ended at dawn. Every night held was cleared first:
+  167-179 a policy. 71-83 were lost a policy.
+- Survival per night is identical for `economy`, `towers` and `walls`.
+  `balanced` drops from 84% to 52% at night 7.
+- **The cause is the bed hour, verified.** On seed 9000, a 01:30 bedtime
+  loses night 7 twice running. A 01:59 bedtime, the old robot's last tick,
+  clears it on 85 house. The last half hour of a day is worth a night to
+  `balanced`.
+- The table and the reading are in `implementation/BALANCE.md`.
+
+**`python tools/balance.py 4 "house hp"`** finished, the house hp lever
+from 80 to 140 (80 kills night 1 for everyone). `game_data.gd` was left
+clean and the lock removed. `tools/nights.py` and `tools/play_nights.py`
+still run; neither uses the autoplayer.
+
+Files: src/tools/{autoplay,autoplay_run,headless_check}.gd,
+implementation/BALANCE.md
+
+Verify: **PASS**, 59 passed in 581 s (OVER BUDGET as before). Counts:
+headless_check 16234 (-6: 0067 is now one night per policy, plus the
+lost-night check), headless_v1 287, input_check 1064, input_v1 158. Sim
+3911863006 and data 3047858822 are unchanged: tools only.

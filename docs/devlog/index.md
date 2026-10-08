@@ -40,7 +40,7 @@ is the sort of thing this list exists to say out loud.
 
 ## What it turned out to be
 
-139 tasks over 6 days,  to 2026-10-08. One at a time, each one finished and checked before the next was started.
+140 tasks over 6 days,  to 2026-10-08. One at a time, each one finished and checked before the next was started.
 
 | # | What was built | Finished |
 |---|---|---|
@@ -183,6 +183,7 @@ is the sort of thing this list exists to say out loud.
 | 0139 | The night HUD for the guardian | 2026-10-08 |
 | 0140 | The day HUD: the hour and bedtime | 2026-10-08 |
 | 0141 | Teaching the new night | 2026-10-08 |
+| 0142 | The autoplayer sleeps too | 2026-10-08 |
 
 ## Every time the game changed underneath itself
 

@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-139 tarefas em 6 dias, de  a 2026-10-08. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+140 tarefas em 6 dias, de  a 2026-10-08. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -182,6 +182,7 @@ voz alta.
 | 0139 | The night HUD for the guardian | 2026-10-08 |
 | 0140 | The day HUD: the hour and bedtime | 2026-10-08 |
 | 0141 | Teaching the new night | 2026-10-08 |
+| 0142 | The autoplayer sleeps too | 2026-10-08 |
 
 ## Toda vez que o jogo mudou por baixo
 

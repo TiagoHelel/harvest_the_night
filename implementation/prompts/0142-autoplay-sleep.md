@@ -1,7 +1,7 @@
 # 0142 - The autoplayer sleeps too
 
 - **Phase:** 10 - Sleep is the night
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0137, 0132, 0138
 - **Likely files:** src/tools/autoplay.gd, src/tools/autoplay_run.gd, src/tools/nights.gd, src/tools/play_nights.gd, tools/autoplay.py, tools/nights.py, tools/balance.py, tools/play_nights.py, implementation/BALANCE.md, src/tools/headless_check.gd
 

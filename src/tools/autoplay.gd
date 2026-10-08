@@ -29,14 +29,20 @@ extends RefCounted
 ## which night kills each policy, and whether one of them wins everything -
 ## which is the dominant-strategy alarm the task asks for.
 
+## When a policy goes to bed if it does not say: half past one, the pass-out
+## warning's minute, half an hour before he would collapse.
+const DEFAULT_BED_MINUTE := 25 * 60 + 30
+
+
 ## The four ways to play, as lists of wants.
 ##
 ## `gather` is what the day goes looking for, `build` is what it puts up when
 ## it can afford to, `tech` is the branch it walks down. A policy is those
-## three lists and nothing else.
+## three lists and the hour it goes to bed (`bed_minute`, task 0142).
 const POLICIES: Dictionary = {
 	&"towers": {
 		"note": "everything into guns",
+		"bed_minute": DEFAULT_BED_MINUTE,
 		"gather": [&"wood", &"iron", &"stone"],
 		"build": [&"gun_tower", &"auto_crossbow", &"gun_tower", &"mortar",
 			&"auto_crossbow", &"generator"],
@@ -45,6 +51,7 @@ const POLICIES: Dictionary = {
 	},
 	&"walls": {
 		"note": "a maze, and just enough to shoot with",
+		"bed_minute": DEFAULT_BED_MINUTE,
 		"gather": [&"stone", &"wood", &"iron"],
 		"build": [&"gun_tower", &"wall", &"wall", &"fence", &"wall",
 			&"auto_crossbow", &"wall", &"fence"],
@@ -53,6 +60,7 @@ const POLICIES: Dictionary = {
 	},
 	&"economy": {
 		"note": "the farm first, the guns later",
+		"bed_minute": DEFAULT_BED_MINUTE,
 		"gather": [&"wood", &"stone", &"iron"],
 		# **Two towers before anything else**, in every plan. Night two's own
 		# note in `GameData.NIGHTS` reads "the same again from two sides, so
@@ -67,6 +75,7 @@ const POLICIES: Dictionary = {
 	},
 	&"balanced": {
 		"note": "a bit of each, which is what a player actually does",
+		"bed_minute": DEFAULT_BED_MINUTE,
 		"gather": [&"wood", &"iron", &"stone"],
 		"build": [&"gun_tower", &"gun_tower", &"generator", &"auto_crossbow",
 			&"wall", &"mortar", &"wall", &"auto_crossbow"],
@@ -80,12 +89,18 @@ static func names() -> Array:
 	return GameData.sorted_names(POLICIES.keys())
 
 
-## Play one seeded run of one policy, and report every night of it.
+## Play one seeded run of one policy, `nights_wanted` nights of it, and
+## report every one.
 ##
-## `nights` stops it early. The balance sweep wants all ten; the check suite
-## wants to know that a seed plays the same way twice, and that is as true
-## over three nights as over ten - and three nights is where it fits inside
-## the suite's two-minute budget.
+## **A lost night does not end it** (task 0142). The morning comes, the same
+## night comes back, and the robot plays on, the way a player does - so a run
+## is `nights_wanted` nights played, not the nights until the first loss.
+## `died_on` is still the first night lost, which is what the win rate per
+## night is read from; `nights_won` is how far it got anyway.
+##
+## `nights_wanted` stops it early. The balance sweep wants all ten; the check
+## suite wants one day and one night per policy, which is what fits inside
+## its two-minute budget.
 static func play(seed_value: int, policy_name: StringName,
 		nights_wanted: int = GameData.MVP_NIGHTS) -> Dictionary:
 	var policy: Dictionary = POLICIES[policy_name]
@@ -93,68 +108,112 @@ static func play(seed_value: int, policy_name: StringName,
 	var nights: Array = []
 	var died_on := 0
 
-	for night in range(1, mini(nights_wanted, GameData.MVP_NIGHTS) + 1):
-		var spent_before := _worth_of_stock(state)
-		_a_day(state, policy)
-		_a_build_step(state, policy)
-		NightRoad.run_night(state, 40000)
-
-		var held := int(state["house_hp"]) > 0
-		nights.append({
-			"night": night,
-			"held": held,
-			"house": int(state["house_hp"]),
-			"spent": maxi(spent_before - _worth_of_stock(state), 0),
-			"towers": _towers_standing(state),
-		})
-		if not held:
-			died_on = night
+	for _attempt in mini(nights_wanted, GameData.MVP_NIGHTS * 2):
+		if Run.is_over(state):
 			break
-		(state["intent"] as Dictionary)["confirm_result"] = true
-		Sim.advance(state, 2)
+		var row := _one_night(state, policy)
+		nights.append(row)
+		if StringName(row["ended"]) == &"house" and died_on == 0:
+			died_on = int(row["night"])
+		# A night still running at the cap cannot be confirmed into a
+		# morning: there is nothing more this run can play.
+		if StringName(row["ended"]) == &"cap":
+			break
 
 	return {
 		"policy": policy_name,
 		"seed": seed_value,
 		"nights": nights,
 		"died_on": died_on,
-		"won": died_on == 0,
+		"nights_won": Phases.nights_won(state),
+		"won": died_on == 0 and nights.size() >= mini(nights_wanted, GameData.MVP_NIGHTS)
+			and StringName((nights.back() as Dictionary)["ended"]) != &"cap",
 		"killed": int(state["killed_all_run"]),
 		"gathered": _worth_of_gathered(state),
 	}
 
 
+## **One day and one night of the loop as it is now** (task 0142): out of bed
+## and the day's work, to bed through the `sleep` intent, the defence in the
+## build step through the intent road, START, the night to its end, and the
+## morning report confirmed. Returns the night's row:
+## `{night, held, ended, house, walked, spent, towers}`, `ended` being
+## `&"dawn"`, `&"cleared"` (everything dead first), `&"house"` (lost) or
+## `&"cap"` (still running at `NIGHT_TICKS` and a margin).
+static func _one_night(state: Dictionary, policy: Dictionary) -> Dictionary:
+	var spent_before := _worth_of_stock(state)
+	_a_day(state, policy)
+	_a_build_step(state, policy)
+	_a_night(state)
+	var ended := _how_it_ended(state)
+	var row := {
+		"night": int(state["night"]),
+		"held": ended == &"dawn" or ended == &"cleared",
+		"ended": ended,
+		"house": int(state["house_hp"]),
+		"walked": int(Rewards.last(state).get("walked", 0)) if ended != &"cap" else 0,
+		"spent": maxi(spent_before - _worth_of_stock(state), 0),
+		"towers": _towers_standing(state),
+	}
+	if int(state["phase"]) == Phases.RESULT:
+		(state["intent"] as Dictionary)["confirm_result"] = true
+		Sim.advance(state, 1)
+	return row
+
+
+## How long a night may run before the robot stops waiting for it: a whole
+## night past dawn, for a Giant that holds dawn back (task 0137).
+const NIGHT_MARGIN_TICKS := GameData.NIGHT_TICKS
+
+
+## The night, tick by tick, to its own end - dawn, everything dead, or the
+## house - or the cap.
+static func _a_night(state: Dictionary) -> int:
+	return NightRoad.run_night(state, GameData.NIGHT_TICKS + NIGHT_MARGIN_TICKS)
+
+
+## How the night ended, read off the state after it.
+static func _how_it_ended(state: Dictionary) -> StringName:
+	if int(state["phase"]) == Phases.NIGHT:
+		return &"cap"
+	var result: Dictionary = state["last_result"]
+	if not bool(result.get("survived", false)):
+		return &"house"
+	var dawn := int((state["wave"] as Dictionary).get("dawn_at", GameData.NIGHT_TICKS))
+	return &"dawn" if int(result.get("ticks", 0)) >= dawn else &"cleared"
+
+
 # ---------------------------------------------------------------- the day
 
-## Spend a day's worth of work on the policy's wants, then let the day run.
+## Spend the day on the policy's wants, then go to bed.
+##
+## **To bed through the `sleep` intent** (task 0142), the road the bed and
+## GO TO BED take: at the policy's `bed_minute`, or sooner when the day has
+## nothing left worth doing. Never at 02:00 - `bed_minute` is before
+## `DAY_END_MINUTE`, so the robot does not pass out by accident. Sleeping
+## early is the player's trade too: the hours skipped are neither lived nor
+## credited.
 static func _a_day(state: Dictionary, policy: Dictionary) -> void:
 	# **Out of the door first** (task 0138): every morning after the first
 	# starts with him beside his bed, and nothing is built from in there.
 	House.leave(state)
-	# **One tick short of 02:00** (task 0128): a whole `DAY_TICKS` would pass
-	# him out into a night; the robot goes to bed instead. 0142 rewrites this.
-	# Counted from where the day is, which after a confirmed result is a tick
-	# or two past dawn.
-	var left := GameData.DAY_TICKS - 1 - int(state["day_tick"])
+	var bed := mini(Phases.tick_at_minute(int(policy.get("bed_minute",
+		DEFAULT_BED_MINUTE))), GameData.DAY_TICKS - 1)
 	var guard := 0
-	while left > 0 and guard < 900:
+	while int(state["day_tick"]) < bed and guard < 900:
 		guard += 1
 		var spent := _one_thing(state, policy)
 		if spent <= 0:
-			break           # nothing left worth doing today
+			break           # nothing left worth doing today: to bed
 		# **Time passes while the work happens.** An earlier version counted
 		# the ticks an action cost and then advanced the whole day in one go
 		# at the end - so every action happened at tick zero, the ore never
 		# regrew, the crops never grew, and the robot spent four hundred and
 		# sixty-eight actions waiting for a cliff that could not come back.
-		# Never past the end of the day: the last thing started is cut short
-		# rather than carried over 02:00 into a pass-out (task 0128).
-		var step := mini(maxi(spent, 1), left)
-		Sim.advance(state, step)
-		left -= step
-	# The rest of the day: crops finish, the press runs, the animals fill up.
-	if left > 0:
-		Sim.advance(state, left)
+		# Never past bedtime: the last thing started is cut short.
+		Sim.advance(state, mini(maxi(spent, 1), bed - int(state["day_tick"])))
+	(state["intent"] as Dictionary)["sleep"] = true
+	Sim.advance(state, 1)
 
 
 ## Do the next thing the policy wants, and say what it cost in ticks.
@@ -320,21 +379,21 @@ static func _one_thing(state: Dictionary, policy: Dictionary) -> int:
 	return 0
 
 
-## The build step: the night button, then the defence - placed, upgraded and
-## mended off the same plan cursor the day saved for - then the rest of the
-## build step, to the first tick of the night.
+## The build step: the defence - mended, placed and upgraded off the same plan
+## cursor the day saved for - then START.
 ##
-## **Task 0119 split the robot's day in two.** 0132 forbids defences by day,
+## **Task 0119 split the robot's day in two**: 0132 forbids defences by day,
 ## so the day gathers, crafts, buys technology and puts up the stations, and
-## this is where the towers and walls go up. The work here costs no ticks of
-## its own: placing is instant in the rules, and the build step runs its
-## whole length after it either way.
+## this is where the towers and walls go up. **Through the intent road**
+## since task 0142 - `build_cell` with `build_place` and `build_upgrade`,
+## `repair_cell` - a tick a press, as the cursor's clicks go; the build step
+## has no clock after a bedtime, so the ticks cost it nothing.
 static func _a_build_step(state: Dictionary, policy: Dictionary) -> void:
-	NightRoad.into_build(state)
 	for _guard in 200:
 		if not _one_defence_thing(state, policy):
 			break
-	NightRoad.through_build(state)
+	(state["intent"] as Dictionary)["start_waves"] = true
+	Sim.advance(state, 1)
 
 
 ## One thing for the defence, in the order the day used to do them: mend,
@@ -345,7 +404,10 @@ static func _one_defence_thing(state: Dictionary, policy: Dictionary) -> bool:
 		var cell := Grid.cell(int(idx))
 		if not _is_defence(state, cell) or Repair.max_affordable(state, cell) <= 0:
 			continue
-		if Repair.apply_all(state, cell) > 0:
+		var anchor := Building.anchor_of(state, cell)
+		var hurt := int(Farm.occupant(state, anchor).get("hp", 0))
+		_press(state, &"repair_cell", anchor)
+		if int(Farm.occupant(state, anchor).get("hp", 0)) > hurt:
 			return true
 
 	var want := _wants(state, policy)
@@ -353,7 +415,8 @@ static func _one_defence_thing(state: Dictionary, policy: Dictionary) -> bool:
 			and Resources.missing(state, Building.cost_of(want)).is_empty():
 		var where := _room_for(state, want)
 		if where.x >= 0:
-			Building.place(state, want, where)
+			Building.select(state, want)
+			_press(state, &"build_place", where)
 		# Placed, or nowhere to put it, or a rule says no: plan around it,
 		# exactly as the day did.
 		_next_step(state)
@@ -364,10 +427,25 @@ static func _one_defence_thing(state: Dictionary, policy: Dictionary) -> bool:
 	# that gates an upgrade and then never upgrading anything.
 	for idx in _sorted_occupants(state):
 		var cell := Grid.cell(int(idx))
-		if Building.can_upgrade(state, cell):
-			Building.upgrade(state, cell)
+		if not Building.can_upgrade(state, cell):
+			continue
+		var level := int(Farm.occupant(state, cell).get("level", 1))
+		_press(state, &"build_upgrade", cell)
+		if int(Farm.occupant(state, cell).get("level", 1)) > level:
 			return true
 	return false
+
+
+## One press through the intent road and the tick that reads it: a cell in
+## `build_cell` with `build_place` or `build_upgrade`, or `repair_cell`.
+static func _press(state: Dictionary, press: StringName, cell: Vector2i) -> void:
+	var intent: Dictionary = state["intent"]
+	if press == &"repair_cell":
+		intent["repair_cell"] = [cell.x, cell.y]
+	else:
+		intent["build_cell"] = [cell.x, cell.y]
+		intent[press] = true
+	Sim.advance(state, 1)
 
 
 ## Whether the thing standing on this cell is part of the defence.

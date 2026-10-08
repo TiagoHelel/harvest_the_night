@@ -12484,14 +12484,19 @@ func _play_a_whole_run(seed_value: int) -> Dictionary:
 
 ## 0067 - the robot that plays, so balance is measured.
 func _task_0067_autoplay() -> void:
-	# **Four policies, and each is three lists and nothing else.**
+	# **Four policies, each three lists and the hour it goes to bed.**
 	expect(Autoplay.names().size() == 4,
 		"four ways to play", str(Autoplay.names()))
 	for name in Autoplay.names():
 		var policy: Dictionary = Autoplay.POLICIES[name]
-		for field in ["note", "gather", "build", "tech"]:
+		for field in ["note", "gather", "build", "tech", "bed_minute"]:
 			expect(policy.has(field),
 				"%s declares its %s" % [name, field], str(policy))
+		# **Task 0142: to bed before 02:00**, so the robot never passes out
+		# by accident.
+		expect(int(policy.get("bed_minute", GameData.DAY_END_MINUTE))
+			< GameData.DAY_END_MINUTE,
+			"%s goes to bed before 02:00" % name, str(policy.get("bed_minute")))
 		expect(not (policy["build"] as Array).is_empty(),
 			"%s builds something" % name)
 		for id in (policy["build"] as Array):
@@ -12505,21 +12510,15 @@ func _task_0067_autoplay() -> void:
 				"%s gathers a real resource: %s" % [name, res])
 
 	# **The same seed is the same run.** An instrument that cannot be
-	# repeated measures nothing.
-	# Four nights, not ten: this group played three full runs and was most of
-	# the reason the suite ran past its budget. Nothing asserted below needs
-	# the back half.
-	var once := Autoplay.play(6700, &"towers", 4)
-	var twice := Autoplay.play(6700, &"towers", 4)
-	expect(int(once["died_on"]) == int(twice["died_on"]),
-		"the same seed dies on the same night",
-		"%d against %d" % [once["died_on"], twice["died_on"]])
-	expect(int(once["killed"]) == int(twice["killed"]),
-		"having killed the same number", "%d against %d"
-			% [once["killed"], twice["killed"]])
-	expect((once["nights"] as Array).size()
-		== (twice["nights"] as Array).size(),
-		"over the same nights")
+	# repeated measures nothing. One day and one night per policy since task
+	# 0142: the whole loop - the day, to bed, the build step, START, the
+	# night to its end - is in the one night.
+	var once := Autoplay.play(6700, &"towers", 1)
+	var twice := Autoplay.play(6700, &"towers", 1)
+	expect(once["nights"] == twice["nights"]
+		and int(once["killed"]) == int(twice["killed"]),
+		"the same seed plays the same night, to the kill",
+		"%s against %s" % [once["nights"], twice["nights"]])
 	# **And the pair above must not be passing on a constant.** The obvious
 	# guard is a second seed, and it does not work: task 0068 played seeds
 	# 6700, 6701, 6702, 6710, 6800, 9000 and 9007 over three nights and every
@@ -12535,7 +12534,7 @@ func _task_0067_autoplay() -> void:
 	#
 	# So the guard is a different *policy* instead, which must differ because
 	# it builds different things.
-	var other := Autoplay.play(6700, &"walls", 4)
+	var other := Autoplay.play(6700, &"walls", 1)
 	expect(int(other["gathered"]) != int(once["gathered"])
 		or int(other["killed"]) != int(once["killed"]),
 		"and a different policy is a different run - the pair above would "
@@ -12544,12 +12543,16 @@ func _task_0067_autoplay() -> void:
 			% [other["gathered"], other["killed"], once["gathered"],
 				once["killed"]])
 
-	# **It reports what the task asks for, per night.**
+	# **It reports what the task asks for, per night** - and since task 0142
+	# how the night ended and how many walked off.
 	for row in (once["nights"] as Array):
 		var night: Dictionary = row
-		for field in ["night", "held", "house", "spent", "towers"]:
+		for field in ["night", "held", "ended", "house", "walked", "spent", "towers"]:
 			expect(night.has(field),
 				"every night reports its %s" % field, str(night))
+		expect([&"dawn", &"cleared", &"house"].has(StringName(night["ended"])),
+			"and the night ended the way a night ends, not at the cap",
+			str(night["ended"]))
 		expect(int(night["spent"]) >= 0,
 			"and what was spent is a number", str(night["spent"]))
 
@@ -12559,9 +12562,9 @@ func _task_0067_autoplay() -> void:
 	# a whole day of mining yields thirteen iron, so at fifteen the first
 	# tower could not be built on the first day at all.
 	var day_one: Dictionary = (once["nights"] as Array)[0]
-	print("  night one, played by the robot: %s, house %d, %d tower(s)"
-		% ["held" if day_one["held"] else "lost", int(day_one["house"]),
-			int(day_one["towers"])])
+	print("  night one, played by the robot: %s at %s, house %d, %d tower(s), %d walked off"
+		% ["held" if day_one["held"] else "lost", day_one["ended"],
+			int(day_one["house"]), int(day_one["towers"]), int(day_one["walked"])])
 	expect(int(day_one["towers"]) >= 1,
 		"a day's work buys the tower the tutorial asks for",
 		str(day_one["towers"]))
@@ -12571,11 +12574,29 @@ func _task_0067_autoplay() -> void:
 		"because the tower costs no more iron than a day of mining makes",
 		"%d against 13" % iron)
 
-	# **The alarm can fire.** A detector that cannot say "no" detects nothing.
-	print("  the robot plays %d of the four nights it was asked for"
-		% (once["nights"] as Array).size())
-	expect((once["nights"] as Array).size() >= 4,
-		"the robot gets past the early nights", str(once["nights"].size()))
+	# **A lost night does not end the run** (task 0142). The robot's own day
+	# and build step, then a house one bite from falling: lost - and the next
+	# morning it plays on, and the same night comes back.
+	var policy: Dictionary = Autoplay.POLICIES[&"towers"]
+	var lost := State.create(6702)
+	Autoplay._a_day(lost, policy)
+	expect(int(lost["phase"]) == Phases.PREPARATION and House.asleep(lost)
+		and not House.passed_out(lost),
+		"the robot's day ends in bed, through the sleep intent, not passed out")
+	Autoplay._a_build_step(lost, policy)
+	expect(int(lost["phase"]) == Phases.NIGHT, "and its build step ends with START")
+	lost["house_hp"] = 1
+	Entities.spawn(lost, &"walker", House.porch(lost))
+	Autoplay._a_night(lost)
+	expect(Autoplay._how_it_ended(lost) == &"house", "a house at one hit point falls",
+		str(Autoplay._how_it_ended(lost)))
+	(lost["intent"] as Dictionary)["confirm_result"] = true
+	Sim.advance(lost, 1)
+	var again := Autoplay._one_night(lost, policy)
+	expect(int(again["night"]) == 1 and int(lost["day"]) == 3
+		and StringName(again["ended"]) != &"cap",
+		"the robot plays the next day, and the lost night comes back",
+		"%s on day %d" % [again, int(lost["day"])])
 
 	_completed += 1     # last line: an abandoned group never gets here
 
@@ -12585,6 +12606,8 @@ func _task_0068_balance() -> void:
 	# **Every policy plays its own plan, and survives the night it is taught
 	# on.** One day and one night for each, not ten: this group used to play
 	# four whole runs and took the suite past its two-minute budget on its own.
+	# Since task 0142 that day ends in bed and the build step's defence goes
+	# down through the intent road, as a player's does.
 	#
 	# The `walls` policy used to build the first thing it could *afford*
 	# rather than the first thing its plan asked for, and since a fence is
@@ -12613,9 +12636,9 @@ func _task_0068_balance() -> void:
 		expect(up >= 1, "%s builds what its plan names first: %s"
 			% [name, first], "%d of them" % up)
 
-		NightRoad.run_night(state, 40000)
-		print("  %-9s ends the tutorial night on %d house"
-			% [name, int(state["house_hp"])])
+		Autoplay._a_night(state)
+		print("  %-9s ends the tutorial night at %s, on %d house"
+			% [name, Autoplay._how_it_ended(state), int(state["house_hp"])])
 		expect(int(state["house_hp"]) > 0,
 			"%s survives the tutorial night" % name,
 			"house %d" % int(state["house_hp"]))

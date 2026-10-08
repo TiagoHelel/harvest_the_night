@@ -4,10 +4,15 @@ extends SceneTree
 ##
 ##     python tools/autoplay.py [runs]
 ##
-## Four policies, `runs / 4` seeds each. It prints which night kills each one,
-## how far they get, and **whether one of them wins everything** - which is
-## the dominant-strategy alarm task 0067 asks for, and the thing a balance
-## pass most needs to be told.
+## Four policies, `runs / 4` seeds each, ten nights a run. It prints which
+## night kills each one first, how far they get, and **whether one of them
+## wins everything** - which is the dominant-strategy alarm task 0067 asks
+## for, and the thing a balance pass most needs to be told.
+##
+## **A run plays on after a loss** since task 0142, as a player does: the
+## `nights:` list is still the first night each run lost (or ten), which is
+## what `tools/balance.py` reads its win rate from, and `won all` counts the
+## nights won over the whole run. Under each policy, how its nights ended.
 
 ## How many runs in total when nobody says otherwise. Four policies, so
 ## twenty-five seeds each.
@@ -40,13 +45,13 @@ func _init() -> void:
 		report[name] = _sweep(StringName(name), each)
 	var spent := float(Time.get_ticks_usec() - started) / 1000000.0
 
-	print("  policy     won  killed by      avg night  avg house  gathered")
+	print("  policy     won  killed by      avg night  avg house  gathered  won all")
 	for name in policies:
 		var row: Dictionary = report[name]
-		print("  %-10s %3d  %-13s %9.1f %10.1f  %8d"
+		print("  %-10s %3d  %-13s %9.1f %10.1f  %8d  %7.1f"
 			% [name, int(row["won"]), str(row["killer"]),
 				float(row["mean_night"]), float(row["mean_house"]),
-				int(row["mean_gathered"])])
+				int(row["mean_gathered"]), float(row["mean_won"])])
 
 	print("")
 	for name in policies:
@@ -54,6 +59,12 @@ func _init() -> void:
 		print("  %-10s %s" % [name,
 			(Autoplay.POLICIES[name] as Dictionary)["note"]])
 		print("             nights: %s" % str(row["reached"]))
+		var ends: Dictionary = row["ends"]
+		print("             ended: dawn %d, everything dead %d, house down %d%s; %.1f walked off a night"
+			% [int(ends.get(&"dawn", 0)), int(ends.get(&"cleared", 0)),
+				int(ends.get(&"house", 0)),
+				(", still going at the cap %d" % int(ends[&"cap"])) if ends.has(&"cap") else "",
+				float(row["mean_walked"])])
 
 	_alarm(report, policies, each)
 	print("")
@@ -69,6 +80,10 @@ func _sweep(name: StringName, runs: int) -> Dictionary:
 	var nights := 0
 	var house := 0
 	var gathered := 0
+	var won_all := 0
+	var ends: Dictionary = {}
+	var walked := 0
+	var played := 0
 	for i in runs:
 		var out := Autoplay.play(9000 + i * 7, name)
 		if bool(out["won"]):
@@ -77,11 +92,20 @@ func _sweep(name: StringName, runs: int) -> Dictionary:
 			var on := int(out["died_on"])
 			deaths[on] = int(deaths.get(on, 0)) + 1
 		var got := (out["nights"] as Array).size()
-		nights += got
-		reached.append(got)
+		# How far it got before its first loss - the run plays on after one.
+		var first_loss := int(out["died_on"])
+		var far := first_loss if first_loss > 0 else got
+		nights += far
+		reached.append(far)
 		gathered += int(out["gathered"])
+		won_all += int(out["nights_won"])
 		var last: Dictionary = (out["nights"] as Array)[got - 1]
 		house += int(last["house"])
+		for row in (out["nights"] as Array):
+			var kind := StringName((row as Dictionary)["ended"])
+			ends[kind] = int(ends.get(kind, 0)) + 1
+			walked += int((row as Dictionary)["walked"])
+			played += 1
 
 	# **The night that kills it most often**, which is what the report is for.
 	var killer := "nothing - it wins"
@@ -97,6 +121,9 @@ func _sweep(name: StringName, runs: int) -> Dictionary:
 		"mean_night": float(nights) / float(maxi(runs, 1)),
 		"mean_house": float(house) / float(maxi(runs, 1)),
 		"mean_gathered": gathered / maxi(runs, 1),
+		"mean_won": float(won_all) / float(maxi(runs, 1)),
+		"ends": ends,
+		"mean_walked": float(walked) / float(maxi(played, 1)),
 	}
 
 

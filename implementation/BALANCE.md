@@ -261,3 +261,68 @@ or unmeasurable levers are named, the single most powerful lever in the game
 is identified and bounded, and the back half moved from "no policy survives
 night 8" to "three policies reach night 9 and one reaches night 10" with two
 lever changes.
+
+---
+
+## The new loop - task 0142
+
+The autoplayer now plays the game as it is:
+- out of bed (0138), and the day's work;
+- to bed through the `sleep` intent at its policy's `bed_minute` (01:30 for
+  all four);
+- the defence put down in the build step through the intent road;
+- START;
+- the night to its own end, and the morning report confirmed.
+
+**A run no longer stops at its first loss**: it plays its ten nights, the
+same night coming back after a loss.
+
+The same 100 runs as before - `python tools/autoplay.py`, 25 seeds
+(`9000 + 7i`) of each policy - before the change and after it. **Survival per
+night** is the share of runs still unbeaten at the end of night N (the first
+loss, which is what `tools/balance.py` reads); night 10 is the `won` column.
+
+| policy | loop | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| balanced | before | 84% | 84% | 84% | 84% | 84% | 84% | 84% | 0% | 0% | 0% |
+|  | after | 84% | 84% | 84% | 84% | 84% | 84% | 52% | 0% | 0% | 0% |
+| economy | before | 84% | 76% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 0% |
+|  | after | 84% | 76% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 0% |
+| towers | before | 84% | 84% | 84% | 84% | 84% | 84% | 68% | 0% | 0% | 0% |
+|  | after | 84% | 84% | 84% | 84% | 84% | 84% | 68% | 0% | 0% | 0% |
+| walls | before | 100% | 100% | 100% | 100% | 100% | 100% | 100% | 16% | 0% | 0% |
+|  | after | 100% | 100% | 100% | 100% | 100% | 100% | 100% | 16% | 0% | 0% |
+
+**What changed:**
+- **Three of the four curves are identical, seed for seed.** Bed by intent,
+  defences through the intent road, START and the morning report are the
+  same game as the shortcuts they replaced, and that is the check that they
+  are.
+- **`balanced` loses night 7 on eight more seeds, and its bedtime is why.**
+  The old robot worked until one tick before 02:00; this one goes to bed at
+  01:30. Seed 9000 was played both ways with nothing else changed:
+  - with a 01:30 bedtime it loses night 7, and loses it again the next day;
+  - with a 01:59 bedtime it clears night 7 on 85 house.
+
+  **The last half hour of every day is worth a night to `balanced`**, which
+  makes night 7 a knife edge for it rather than a wall. It is a finding about
+  the game, not the instrument, and the bed hour is now a policy lever to
+  turn when that is the question.
+- **What the new loop adds to the picture**:
+  - **No night ended at dawn in a thousand.** Every night held was held by
+    killing everything first: the robot's towers finish each night long
+    before 06:00. Dawn (0137) is a backstop the current curve never reaches.
+  - Over ten nights the policies win 6.7 (`economy`) to 7.2 (`walls`) nights
+    a run on average, and how they get there differs:
+    - **`economy` recovers.** Its first loss is on night 3, yet it wins 6.7
+      nights: the days after a loss pay for what night 3 asked.
+    - **The other three stall where they first fell.** Their mean first loss
+      and their nights won are within one night of each other. Night 7 or 8,
+      once lost, is lost again.
+  - Between 1.5 and 4.1 zombies a night walk off at the morning: the ones
+    still standing when a lost night ended.
+- **Gathered** went up (5,671 to 8,018 for `balanced`) only because every
+  run now plays all ten days instead of stopping at its first loss.
+
+The time: 100 runs in 2,366 s, against 1,411 s before - every run now plays
+ten nights.

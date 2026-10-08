@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`###########.............`  **137 / 296 done**
+`###########.............`  **138 / 296 done**
 
-0 doing / 159 todo / 0 blocked across 18 phases.
+0 doing / 158 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-159 task(s) left, the ready ones first, then what they
+158 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -87,24 +87,6 @@ The last three legacy strips: A009's craft, trade and repair in the 32px body. R
   - done when: `python tools/placeholders.py` no longer lists A009
   - done when: FHD captures (`python tools/shot.py 0125 --fhd`, with an earlier leaf's mid-verb scenario or a new one) of craft at the workshop, trade at the stall and repair on the house, by day and in the dark, in `implementation/shots/0125/`, opened
   - done when: The sim and data hashes are unchanged (art never moves them)
-
-### 0142 - The autoplayer sleeps too
-
-Ready to pick up.  Likely files: `src/tools/autoplay.gd, src/tools/autoplay_run.gd, src/tools/nights.gd, src/tools/play_nights.gd, tools/autoplay.py, tools/nights.py, tools/balance.py, tools/play_nights.py, implementation/BALANCE.md, src/tools/headless_check.gd`.
-
-The autoplayer plays the game as it now is - a day, bed, building by cursor, START, the night to dawn - and keeps playing after a loss, so the balance tools measure the real loop again.
-
-- `Autoplay.play`, per night: `_a_day` (gathering, crafting and production buildings by day only, starting from 0138's wake in bed); the `sleep` intent at a policy hour or when the day's plan is done, never passing out by accident (0128 only made it stop short of 02:00); the policy's defences in PREPARATION through the intent road (`build_cell` with `build_place`, `build_upgrade`, `repair_cell`); `start_waves`; ticks until RESULT, capped at `NIGHT_TICKS` plus a margin; then `confirm_result`
-- It carries on after a loss instead of stopping; the per-night report adds how the night ended (dawn, everything dead, house down), the house left and how many walked off
-- Policies keep their lists; nothing is placed by day (it would be refused)
-- `tools/autoplay.py`, `tools/nights.py`, `tools/balance.py` and `tools/play_nights.py` still run; `balance.py` still restores `game_data.gd` and still refuses a dirty tree
-- `_task_0067_autoplay` and `_task_0068_balance` are rewritten to the new loop and kept inside the suite's time (one day and one night per policy); report the group times
-- A note in `implementation/BALANCE.md`: survival per night for the four policies over the same seeds before and after the new loop, and what changed
-- Tools only: neither hash moves
-
-  - done when: `_task_0067_autoplay` and `_task_0068_balance` pass, with their times in the journal
-  - done when: `python tools/autoplay.py` plays ten nights for every policy and prints the table; the numbers are in the journal and in BALANCE.md
-  - done when: `python tools/balance.py` with a short sweep finishes and leaves the git tree clean
 
 ### 0143 - Art: going to bed and sleeping
 
@@ -191,6 +173,23 @@ The icons of the night - the eight defences, the flare, START, speed and the moo
   - done when: FHD (1920x1080) captures by day and by night of the art in the real game - the hotbar and the night HUD in the build step and mid-wave - opened and looked at, in `implementation/shots/0147/`
   - done when: The sim and data hashes are unchanged (art never moves them)
 
+### 0148 - Checkpoint: is the night better with him asleep?
+
+Ready to pick up.  Likely files: `implementation/PROGRESS.md, implementation/shots/0148/, implementation/prompts/`.
+
+**The plan's Phase 1 test.** Play the new night - the farmer asleep, the cursor, START, dawn - with a mouse and with a pad, and answer honestly whether it is better than the MVP's night. Every later phase waits on the answer.
+
+- Play at least three whole days and nights by hand with mouse and keyboard and at least one with only a pad (a real one if attached; say honestly if it was synthetic): bed, cursor building, START, a repair, a flare, an upgrade and a sale by cursor, speed and skip, dawn, the morning report - and one night that follows a pass-out
+- Run the autoplayer for every policy over ten nights and note how the nights end: at dawn, with everything dead, or with the house down
+- FHD captures of one night from START to dawn - the build step with the cursor and the hotbar, the first wave, a repair, the flare aimed, the walk-off at dawn, the morning report - in `implementation/shots/0148/`, opened and looked at
+- Answer the plan's question in the journal, 'is the night better with him asleep?', against the MVP's night: what is better, what is worse, what is missing, and what is slow or fiddly (the camera, the cursor, the pad)
+- Fix here only what is small and inside this phase's rules; anything bigger becomes an edit to a later prompt or a note for the phase it belongs to
+- Every later phase depends on this task. If the answer is no, run `python tools/task.py blocked 0148 "<the reason>"` and edit the later prompts that must change before any content is produced; never tick or untick a box by hand
+
+  - done when: The journal has the answer, the nights played (device, how each ended, house left), the autoplayer's numbers, and every later prompt edited and why
+  - done when: The captures in `implementation/shots/0148/` exist and were opened
+  - done when: Either the task is done on a yes, or it is blocked with the reason and the later prompts are edited
+
 ### 0289 - Art: the morning report
 
 Waits for Codex art A057.  Likely files: `assets/art_source/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_ui_art.py, src/tools/ui_art_showcase.gd, src/ui/placeholder_art.gd, src/ui/result_screen.gd`.
@@ -209,23 +208,6 @@ A small sunrise over the farmhouse heads 0138's morning report. Optional: if the
   - done when: FHD (1920x1080) captures of the morning report after a won and after a lost night, and of the farm around it by day and by night, opened and looked at, in `implementation/shots/0289/`
   - done when: The sim and data hashes are unchanged (art never moves them)
   - done when: On the decline path instead: `python tools/placeholders.py` no longer lists A057, a capture of the morning report shows the band drawn directly, and the journal quotes the owner's words
-
-### 0148 - Checkpoint: is the night better with him asleep?
-
-Waits on 0142.  Likely files: `implementation/PROGRESS.md, implementation/shots/0148/, implementation/prompts/`.
-
-**The plan's Phase 1 test.** Play the new night - the farmer asleep, the cursor, START, dawn - with a mouse and with a pad, and answer honestly whether it is better than the MVP's night. Every later phase waits on the answer.
-
-- Play at least three whole days and nights by hand with mouse and keyboard and at least one with only a pad (a real one if attached; say honestly if it was synthetic): bed, cursor building, START, a repair, a flare, an upgrade and a sale by cursor, speed and skip, dawn, the morning report - and one night that follows a pass-out
-- Run the autoplayer for every policy over ten nights and note how the nights end: at dawn, with everything dead, or with the house down
-- FHD captures of one night from START to dawn - the build step with the cursor and the hotbar, the first wave, a repair, the flare aimed, the walk-off at dawn, the morning report - in `implementation/shots/0148/`, opened and looked at
-- Answer the plan's question in the journal, 'is the night better with him asleep?', against the MVP's night: what is better, what is worse, what is missing, and what is slow or fiddly (the camera, the cursor, the pad)
-- Fix here only what is small and inside this phase's rules; anything bigger becomes an edit to a later prompt or a note for the phase it belongs to
-- Every later phase depends on this task. If the answer is no, run `python tools/task.py blocked 0148 "<the reason>"` and edit the later prompts that must change before any content is produced; never tick or untick a box by hand
-
-  - done when: The journal has the answer, the nights played (device, how each ended, house left), the autoplayer's numbers, and every later prompt edited and why
-  - done when: The captures in `implementation/shots/0148/` exist and were opened
-  - done when: Either the task is done on a yes, or it is blocked with the reason and the later prompts are edited
 
 ### 0149 - The calendar: four seasons of fourteen days
 
@@ -2748,7 +2730,7 @@ The benchmark's worst case is still Spring 14, where 0153 moved the MVP's night 
 
 ### 0276 - The autoplayer plays a whole year
 
-Waits on 0142, 0194, 0233, 0234, 0275, 0166, 0171, 0180, 0186, 0191, 0221.  Likely files: `src/tools/autoplay.gd, src/tools/autoplay_run.gd, tools/autoplay.py, src/tools/play_nights.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd`.
+Waits on 0194, 0233, 0234, 0275, 0166, 0171, 0180, 0186, 0191, 0221.  Likely files: `src/tools/autoplay.gd, src/tools/autoplay_run.gd, tools/autoplay.py, src/tools/play_nights.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd`.
 
 0142 taught the robot to sleep; this teaches it the rest of 1.0, so balance can be measured over a whole year: crops by days and season, the fishing minigame, animals and machines, the bin and the peddler, cursor building and repairs, the powers, and carrying on through losses and boss repeats.
 
@@ -3097,7 +3079,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0124** [Art: the farmer chopping, mining, collecting and carrying](prompts/0124-art-farmer-gather-work.md) - waits for art A008
 - [ ] **0125** [Art: the farmer crafting, trading and repairing](prompts/0125-art-farmer-make-work.md) - waits for art A009
 
-## 10 - Sleep is the night  (16/23)
+## 10 - Sleep is the night  (17/23)
 
 - [x] **0126** [The clock: 06:00 to 02:00](prompts/0126-clock.md)
 - [x] **0127** [Going to bed starts the night](prompts/0127-bed.md)
@@ -3115,13 +3097,13 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0139** [The night HUD for the guardian](prompts/0139-night-hud-guardian.md)
 - [x] **0140** [The day HUD: the hour and bedtime](prompts/0140-day-hud-clock.md)
 - [x] **0141** [Teaching the new night](prompts/0141-tutorial-sleep.md)
-- [ ] **0142** [The autoplayer sleeps too](prompts/0142-autoplay-sleep.md)
+- [x] **0142** [The autoplayer sleeps too](prompts/0142-autoplay-sleep.md)
 - [ ] **0143** [Art: going to bed and sleeping](prompts/0143-art-farmer-bed.md) - waits for art A001
 - [ ] **0144** [Art: the farmer's reactions and Zzz](prompts/0144-art-reactions.md) - waits for art A002
 - [ ] **0145** [Art: the porch guardian](prompts/0145-art-guardian.md) - waits for art A003
 - [ ] **0146** [Art: the guardian's cursor](prompts/0146-art-cursor.md) - waits for art A004
 - [ ] **0147** [Art: the night hotbar and HUD icons](prompts/0147-art-night-icons.md) - waits for art A005
-- [ ] **0148** [Checkpoint: is the night better with him asleep?](prompts/0148-checkpoint-sleep.md) - needs 0142
+- [ ] **0148** [Checkpoint: is the night better with him asleep?](prompts/0148-checkpoint-sleep.md)
 
 ## 11 - Calendar and seasons  (0/16)
 
@@ -3264,7 +3246,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0273** [Autumn's fourteen nights](prompts/0273-autumn-nights.md) - needs 0270, 0249, 0250, 0254, 0259, 0272
 - [ ] **0274** [Winter's fourteen nights](prompts/0274-winter-nights.md) - needs 0270, 0251, 0252, 0255, 0259, 0273
 - [ ] **0275** [The worst night of the year, within budget](prompts/0275-perf-year.md) - needs 0274, 0234, 0248, 0233
-- [ ] **0276** [The autoplayer plays a whole year](prompts/0276-autoplay-year.md) - needs 0142, 0194, 0233, 0234, 0275, 0166, 0171, 0180, 0186, 0191, 0221
+- [ ] **0276** [The autoplayer plays a whole year](prompts/0276-autoplay-year.md) - needs 0194, 0233, 0234, 0275, 0166, 0171, 0180, 0186, 0191, 0221
 - [ ] **0277** [Balancing the year](prompts/0277-balance-year.md) - needs 0271, 0272, 0273, 0274, 0276, 0259
 - [ ] **0278** [The economy across a year](prompts/0278-economy-seasons.md) - needs 0277
 - [ ] **0279** [Year 2](prompts/0279-year-two.md) - needs 0160, 0277
