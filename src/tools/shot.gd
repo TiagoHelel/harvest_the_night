@@ -286,11 +286,10 @@ const HORDE := 60
 ## ## Four beats and one cut
 ##
 ## Day, switch, night, and something falling. There is **one cut**, and it is
-## the twenty seconds of preparation between sending for the night and the
-## night arriving: `GameData.PREPARATION_TICKS` is two thirds of the whole
-## clip, and a trailer that spent it watching a farmer stand still would be a
-## trailer nobody finished. The cut is between the light going over and the
-## first wave, which is where a viewer expects one anyway.
+## the build step between sending for the night and the night arriving: since
+## task 0136 it waits for START, so the cut is START pressed off camera. The
+## cut is between the light going over and the first wave, which is where a
+## viewer expects one anyway.
 ##
 ## ## It says whether the beats actually happened
 ##
@@ -330,9 +329,9 @@ func _take_the_trailer(folder: String) -> void:
 	for _i in BEAT_SWITCH:
 		shot = await _reel_frame(state, shot, folder)
 
-	# **The cut.** The rest of the preparation, off camera.
-	while int(state["phase"]) == Phases.PREPARATION:
-		Sim.advance(state, 30)
+	# **The cut.** START, off camera (task 0136: the build step has no clock,
+	# so a loop waiting it out would wait for ever).
+	NightRoad.through_build(state)
 
 	# ------------------------------------------------- a night holding
 	#

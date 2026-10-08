@@ -69,9 +69,6 @@ const DUSK_MINUTE := 18 * 60            # LEVER: minutes, 16:00-20:00
 const DUSK_AT_TICK := (DUSK_MINUTE - DAY_START_MINUTE) * DAY_TICKS \
 	/ (DAY_END_MINUTE - DAY_START_MINUTE)
 
-## The build window between pressing the night button and the first spawn.
-const PREPARATION_TICKS := 20 * SECONDS # LEVER: ticks, 10-45 seconds worth
-
 ## **The short build step after passing out** (task 0128). A farmer still up
 ## at 02:00 collapses where he stands and the night begins anyway, with this
 ## much time to build: staying up late is allowed, and it costs preparation,
@@ -2627,7 +2624,7 @@ static func check_nights(nights: Array) -> Array:
 ## whatever was added last.
 static func digest() -> int:
 	return State.hash_of({
-		"time": [TICK_HZ, DAY_TICKS, DUSK_AT_TICK, PREPARATION_TICKS,
+		"time": [TICK_HZ, DAY_TICKS, DUSK_AT_TICK,
 			DAY_START_MINUTE, DAY_END_MINUTE, DUSK_MINUTE,
 			PASS_OUT_PREPARATION_TICKS,
 			MAX_CATCH_UP_TICKS],

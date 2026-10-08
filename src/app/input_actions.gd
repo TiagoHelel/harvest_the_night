@@ -59,6 +59,9 @@ const ACTIONS: Array = [
 	[&"upgrade", &"ACT_UPGRADE", &"ACT_GROUP_BUILD"],
 
 	[&"night", &"ACT_NIGHT", &"ACT_GROUP_NIGHT"],
+	# START (task 0136): the build step waits for it. Not the GO TO BED key,
+	# so a double press cannot skip the build step.
+	[&"start_waves", &"ACT_START", &"ACT_GROUP_NIGHT"],
 	[&"ability", &"ACT_ABILITY", &"ACT_GROUP_NIGHT"],
 	[&"speed", &"ACT_SPEED", &"ACT_GROUP_NIGHT"],
 	[&"skip_night", &"ACT_SKIP_NIGHT", &"ACT_GROUP_NIGHT"],

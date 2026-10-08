@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`###########.............`  **130 / 296 done**
+`###########.............`  **131 / 296 done**
 
-0 doing / 166 todo / 0 blocked across 18 phases.
+0 doing / 165 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-166 task(s) left, the ready ones first, then what they
+165 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -107,22 +107,24 @@ The last three legacy strips: A009's craft, trade and repair in the 32px body. R
   - done when: FHD captures (`python tools/shot.py 0125 --fhd`, with an earlier leaf's mid-verb scenario or a new one) of craft at the workshop, trade at the stall and repair on the house, by day and in the dark, in `implementation/shots/0125/`, opened
   - done when: The sim and data hashes are unchanged (art never moves them)
 
-### 0136 - The build step waits for START
+### 0137 - The night ends at 06:00
 
-Ready to pick up.  Likely files: `src/core/sim.gd, src/core/phases.gd, src/core/game_data.gd, src/core/player.gd, src/ui/night_hud.gd, project.godot, src/app/input_actions.gd, assets/locale/strings.csv, src/tools/night_road.gd, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Ready to pick up.  Likely files: `src/core/sim.gd, src/core/phases.gd, src/core/waves.gd, src/core/game_data.gd, src/core/events.gd, src/ui/night_hud.gd, src/ui/log_panel.gd, assets/locale/strings.csv, src/tools/determinism.gd, src/tools/night_road.gd, src/tools/nights.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, tools/nights.py`.
 
-The build step has no clock. The night waits while the player builds and starts when they press START - except after a pass-out, when the horde is already at the gate and gives thirty seconds.
+The night has an end you know in advance: 06:00. A house still standing at dawn is a won night and whatever is left walks off into the light; killing everything sooner still wins.
 
-- `Sim._tick_preparation` no longer starts the night by itself: a new edge intent `start_waves` (consumed by the tick, ignored outside PREPARATION) calls 0118's `Phases.start_waves`; after a pass-out the night also starts by itself at `PASS_OUT_PREPARATION_TICKS` (0128), and that timer is the only one left
-- `PREPARATION_TICKS` leaves `game_data.gd` and `digest()`; the day clock stays stopped through the build step
-- A START button on the night HUD (`StartButton`, `NHUD_START` 'START' / 'COMEÇAR') and a `start_waves` action in `project.godot` and `InputActions.ACTIONS`, with a pad button (0121) and a default key that is not the GO TO BED key, so a double press cannot skip the build step; `ACT_START` in both languages. After a pass-out the button counts down (`NHUD_START_IN`)
-- 0118's road (the `NightRoad` helper, or whatever 0118 named it) now writes `start_waves` instead of advancing `PREPARATION_TICKS`, so autoplay, determinism, shot, perf_check, play_nights and make_goldens change nowhere else. A loop that waits the build step out without naming the constant would now spin for ever - `shot.gd`'s trailer (~322, `while ... == Phases.PREPARATION`) is one: route it through the road too
-- Rewrite `_task_0006_phases` ('preparation ends itself' becomes 'preparation waits for START') and every assert 0118 left on the timer with a comment pointing here; input cases that waited out the build step use the road. 0118's `_task_0118_road` text scan allowed `PREPARATION_TICKS` in the road: it now allows it nowhere. Check 0128's `_task_0128_pass_out` ordinary-bedtime half still holds
-- SIM moves on purpose (`intent` gains `start_waves`, and the determinism scenario's build step is one tick instead of 600): record both numbers. DATA moves (`PREPARATION_TICKS` leaves `digest()`)
+- `NIGHT_TICKS := 240 * SECONDS` (`# LEVER`, 180-300 seconds worth: the plan's three to five real minutes) is the waves' length from `begin_night` to dawn, the same after a 21:00 bedtime and after a pass-out. `validate()`: below `Sim.MOST_TICKS_IN_A_NIGHT`
+- `begin_night` writes the dawn tick into the state (e.g. `wave.dawn_at`, a TABLES field whose `initial()` is `NIGHT_TICKS`, so an old save gets a whole night) and `Phases.ticks_to_dawn(state)` reads it. The park of 0118's `NightRoad` (today's `_park_the_waves`) parks dawn too (`dawn_at` out of reach), so parked nights still never end
+- In `Sim._tick_night`, after `Combat.tick`: still NIGHT and `night_tick >= dawn_at` -> `Rewards.settle(state, true)` and `Phases.enter_result(state, true)` with the survivors still on the farm; `begin_day`'s `Enemies.withdraw` and `EnemyRetreats` walk them off. A `dawn` event (a new `Events.KINDS` entry with a severity in `log_panel.gd` and a sample in `_task_0090_log`) with `LOG_DAWN` ('dawn - %d walked off', en and pt_BR). The house at 0 still loses and `_test_for_the_end` still wins early
+- Interim until 0153: dawn does not end a night while a boss is on the farm (`Combat.boss_here`), so night 10 still ends only with the Giant or the house down, and the run can never end with the Giant standing
+- `check_nights`: every night's schedule (the opening, each wave's members x `SPAWN_INTERVAL_TICKS`, the gaps) ends at least a margin `# LEVER` before `NIGHT_TICKS`; a headless assert samples the endless curve (nights 11-40, a few seeds) against the same rule, from the schedule functions and without playing a night; `tools/nights.py` (through `src/tools/nights.gd`) prints each night's schedule against the night
+- The night HUD shows the time left to dawn as a countdown (`NHUD_DAWN`), never a wall clock - after a pass-out a 22:00-06:00 mapping would lie - holding at 0:00 while a boss keeps the night going. Skip and 1x/2x/4x simply run to dawn
+- Owns `_task_0027_the_loop` ('ends by itself' becomes 'ends at dawn or when everything is dead'), `_task_0055_speed` (skip runs to dawn) and the `Sim.skip_night` in input_check's `_case_0082_shots` (~4461). `determinism.gd` stops calling `enter_result` directly and fights until the night ends itself: SIM moves on purpose (that, and `wave` gains `dawn_at`), record both numbers. DATA moves too: `NIGHT_TICKS` and the margin join the `time` row of `digest()`. A bounty only for kills is 0219's
 
-  - done when: `_task_0136_start` in `headless_v1.gd`: two minutes of ticks in PREPARATION (past the old 20 s and the 30 s pass-out timer) stay in PREPARATION; `start_waves` begins the night on the next tick; `start_waves` by day or at night changes nothing; after a pass-out the night begins at exactly `PASS_OUT_PREPARATION_TICKS`, or sooner on START
-  - done when: `_case_0136_start` in `input_v1.gd`: clicking `StartButton` and pressing the START key each begin the waves
-  - done when: A capture of the build step with START on screen, opened
+  - done when: `_task_0137_dawn` in `headless_v1.gd` (write a near `dawn_at` into the test's state rather than playing 240 s, so the group stays a few seconds): a night whose horde cannot reach the house ends at exactly `dawn_at` with `survived` true, and the survivors are gone after `begin_day`; killing everything ends it sooner; a house at 0 before dawn loses; `check_nights` refuses a schedule longer than the night
+  - done when: `Sim.skip_night` from mid-night takes at most the ticks left to dawn and lands in RESULT
+  - done when: `python tools/nights.py` shows all ten nights inside the night with their margins; the numbers are in the journal
+  - done when: `python tools/shot.py 0137 wave` opened: the dawn countdown is on screen
 
 ### 0140 - The day HUD: the hour and bedtime
 
@@ -207,25 +209,6 @@ The cursor's seven states in drawn pixels, from Codex pack A004, replacing 0131'
   - done when: FHD (1920x1080) captures by day and by night of the art in the real game - the cursor in each state over dark ground - opened and looked at, in `implementation/shots/0146/`
   - done when: The sim and data hashes are unchanged (art never moves them)
 
-### 0137 - The night ends at 06:00
-
-Waits on 0136.  Likely files: `src/core/sim.gd, src/core/phases.gd, src/core/waves.gd, src/core/game_data.gd, src/core/events.gd, src/ui/night_hud.gd, src/ui/log_panel.gd, assets/locale/strings.csv, src/tools/determinism.gd, src/tools/night_road.gd, src/tools/nights.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, tools/nights.py`.
-
-The night has an end you know in advance: 06:00. A house still standing at dawn is a won night and whatever is left walks off into the light; killing everything sooner still wins.
-
-- `NIGHT_TICKS := 240 * SECONDS` (`# LEVER`, 180-300 seconds worth: the plan's three to five real minutes) is the waves' length from `begin_night` to dawn, the same after a 21:00 bedtime and after a pass-out. `validate()`: below `Sim.MOST_TICKS_IN_A_NIGHT`
-- `begin_night` writes the dawn tick into the state (e.g. `wave.dawn_at`, a TABLES field whose `initial()` is `NIGHT_TICKS`, so an old save gets a whole night) and `Phases.ticks_to_dawn(state)` reads it. The park of 0118's `NightRoad` (today's `_park_the_waves`) parks dawn too (`dawn_at` out of reach), so parked nights still never end
-- In `Sim._tick_night`, after `Combat.tick`: still NIGHT and `night_tick >= dawn_at` -> `Rewards.settle(state, true)` and `Phases.enter_result(state, true)` with the survivors still on the farm; `begin_day`'s `Enemies.withdraw` and `EnemyRetreats` walk them off. A `dawn` event (a new `Events.KINDS` entry with a severity in `log_panel.gd` and a sample in `_task_0090_log`) with `LOG_DAWN` ('dawn - %d walked off', en and pt_BR). The house at 0 still loses and `_test_for_the_end` still wins early
-- Interim until 0153: dawn does not end a night while a boss is on the farm (`Combat.boss_here`), so night 10 still ends only with the Giant or the house down, and the run can never end with the Giant standing
-- `check_nights`: every night's schedule (the opening, each wave's members x `SPAWN_INTERVAL_TICKS`, the gaps) ends at least a margin `# LEVER` before `NIGHT_TICKS`; a headless assert samples the endless curve (nights 11-40, a few seeds) against the same rule, from the schedule functions and without playing a night; `tools/nights.py` (through `src/tools/nights.gd`) prints each night's schedule against the night
-- The night HUD shows the time left to dawn as a countdown (`NHUD_DAWN`), never a wall clock - after a pass-out a 22:00-06:00 mapping would lie - holding at 0:00 while a boss keeps the night going. Skip and 1x/2x/4x simply run to dawn
-- Owns `_task_0027_the_loop` ('ends by itself' becomes 'ends at dawn or when everything is dead'), `_task_0055_speed` (skip runs to dawn) and the `Sim.skip_night` in input_check's `_case_0082_shots` (~4461). `determinism.gd` stops calling `enter_result` directly and fights until the night ends itself: SIM moves on purpose (that, and `wave` gains `dawn_at`), record both numbers. DATA moves too: `NIGHT_TICKS` and the margin join the `time` row of `digest()`. A bounty only for kills is 0219's
-
-  - done when: `_task_0137_dawn` in `headless_v1.gd` (write a near `dawn_at` into the test's state rather than playing 240 s, so the group stays a few seconds): a night whose horde cannot reach the house ends at exactly `dawn_at` with `survived` true, and the survivors are gone after `begin_day`; killing everything ends it sooner; a house at 0 before dawn loses; `check_nights` refuses a schedule longer than the night
-  - done when: `Sim.skip_night` from mid-night takes at most the ticks left to dawn and lands in RESULT
-  - done when: `python tools/nights.py` shows all ten nights inside the night with their margins; the numbers are in the journal
-  - done when: `python tools/shot.py 0137 wave` opened: the dawn countdown is on screen
-
 ### 0138 - Waking up: the morning report
 
 Waits on 0137.  Likely files: `src/core/phases.gd, src/core/house.gd, src/ui/result_screen.gd, src/ui/house_view.gd, src/ui/main.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/autoplay.gd, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd, implementation/backlog/packs/A057-morning-report.md`.
@@ -246,7 +229,7 @@ Every night, won or lost, closes on a morning report, and confirming it starts t
 
 ### 0139 - The night HUD for the guardian
 
-Waits on 0136, 0137.  Likely files: `src/ui/night_hud.gd, src/ui/day_hud.gd, src/ui/hotbar.gd, src/ui/ui_kit.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/input_v1.gd`.
+Waits on 0137.  Likely files: `src/ui/night_hud.gd, src/ui/day_hud.gd, src/ui/hotbar.gd, src/ui/ui_kit.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/input_v1.gd`.
 
 One night HUD built for the guardian rather than for a farmer in the yard: the time to dawn, the house, the wave, START, speed, skip, the flare and the hotbar, all reachable by mouse and by pad.
 
@@ -3219,7 +3202,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0124** [Art: the farmer chopping, mining, collecting and carrying](prompts/0124-art-farmer-gather-work.md) - waits for art A008
 - [ ] **0125** [Art: the farmer crafting, trading and repairing](prompts/0125-art-farmer-make-work.md) - waits for art A009
 
-## 10 - Sleep is the night  (10/23)
+## 10 - Sleep is the night  (11/23)
 
 - [x] **0126** [The clock: 06:00 to 02:00](prompts/0126-clock.md)
 - [x] **0127** [Going to bed starts the night](prompts/0127-bed.md)
@@ -3231,10 +3214,10 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0133** [The hotbar of defences](prompts/0133-hotbar.md)
 - [x] **0134** [Repairing by cursor](prompts/0134-repair-by-cursor.md)
 - [x] **0135** [The flare goes where you aim it](prompts/0135-aimed-flare.md)
-- [ ] **0136** [The build step waits for START](prompts/0136-start-button.md)
-- [ ] **0137** [The night ends at 06:00](prompts/0137-dawn-ends-night.md) - needs 0136
+- [x] **0136** [The build step waits for START](prompts/0136-start-button.md)
+- [ ] **0137** [The night ends at 06:00](prompts/0137-dawn-ends-night.md)
 - [ ] **0138** [Waking up: the morning report](prompts/0138-morning-report.md) - needs 0137
-- [ ] **0139** [The night HUD for the guardian](prompts/0139-night-hud-guardian.md) - needs 0136, 0137
+- [ ] **0139** [The night HUD for the guardian](prompts/0139-night-hud-guardian.md) - needs 0137
 - [ ] **0140** [The day HUD: the hour and bedtime](prompts/0140-day-hud-clock.md)
 - [ ] **0141** [Teaching the new night](prompts/0141-tutorial-sleep.md) - needs 0139, 0140
 - [ ] **0142** [The autoplayer sleeps too](prompts/0142-autoplay-sleep.md) - needs 0137, 0138

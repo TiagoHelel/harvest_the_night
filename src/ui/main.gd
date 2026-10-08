@@ -334,6 +334,10 @@ func _process(_delta: float) -> void:
 	# the night's first tick, wherever the cursor happened to be.
 	if live and ability and Ability.ready(_driver.state):
 		intent["ability"] = true
+	# **START** (task 0136): an edge the build step spends and every other
+	# phase drops.
+	if live and _just_pressed(&"start_waves"):
+		intent["start_waves"] = true
 	if live and interact:
 		intent["interact"] = true
 	# **The level as well as the edge.** Holding the key is how a row gets

@@ -972,6 +972,9 @@ func _task_0105_playtest() -> void:
 	expect(marked == 1, "the note key leaves the first marker", str(marked))
 	expect(Playtest.note() == 2, "and the next one is the second")
 	for _i in 200:
+		# START when the build step is up (task 0136): it waits for it.
+		if int(state["phase"]) == Phases.PREPARATION:
+			NightRoad.press_start(state)
 		Sim.advance(state, 30)
 		Playtest.watch(state)
 		if int(state["phase"]) != Phases.NIGHT \
@@ -1551,6 +1554,8 @@ func _task_0109_reactions() -> void:
 	Phases.begin_preparation(night)
 	for y in range(3, 14):
 		Building.place(night, &"fence", SuiteKit.moved(Vector2i(29, y)))
+	# START, which the build step waits for since task 0136.
+	NightRoad.press_start(night)
 	var announced := false
 	for _i in 2000:
 		Sim.advance(night, 1)
@@ -2021,15 +2026,15 @@ func _task_0006_phases() -> void:
 	expect(Phases.begin_preparation(state), "the night button works")
 	expect(int(state["phase"]) == Phases.PREPARATION, "it lands in preparation")
 
-	# Preparation ends itself after its lever's worth of ticks.
-	# **The timer itself is the subject here**, so this reads the lever
-	# rather than going through `NightRoad` - and task 0136 (START) rewrites
-	# it when the build step stops ending on a timer.
-	Sim.advance(state, GameData.PREPARATION_TICKS - 1)
+	# **Preparation waits for START** (task 0136; it used to end itself on a
+	# timer). Two minutes of it are still the build step; START begins the
+	# night on the next tick.
+	Sim.advance(state, 120 * GameData.SECONDS)
 	expect(int(state["phase"]) == Phases.PREPARATION,
-		"preparation lasts as long as the lever says")
+		"preparation waits for START, however long it takes")
+	(state["intent"] as Dictionary)["start_waves"] = true
 	Sim.advance(state, 1)
-	expect(int(state["phase"]) == Phases.NIGHT, "then the night begins",
+	expect(int(state["phase"]) == Phases.NIGHT, "then START begins the night",
 		Phases.name_of(int(state["phase"])))
 	expect(int(state["night"]) == 1, "it is night 1", str(state["night"]))
 
@@ -4135,6 +4140,8 @@ func _task_0027_the_loop() -> void:
 	Sim.advance(run, 1)
 	expect(int(run["phase"]) == Phases.PREPARATION, "the night is asked for")
 	_arm_the_farm(run, 4)     # in the build step, since task 0119
+	# START, which the build step waits for since task 0136.
+	NightRoad.press_start(run)
 	var ticks := 0
 	for _i in 12000:
 		Sim.advance(run, 1)
@@ -5446,7 +5453,8 @@ func _task_0033_power() -> void:
 	Phases.begin_preparation(waiting)
 	_line_of_towers(waiting, &"auto_crossbow", 4)    # since task 0119
 	var oil_at_dusk := Resources.amount(waiting, GameData.OIL)
-	Sim.advance(waiting, NightRoad.build_ticks_left(waiting) - 1)
+	# A long build step, which has no clock since task 0136.
+	Sim.advance(waiting, 30 * GameData.SECONDS)
 	expect(Resources.amount(waiting, GameData.OIL) == oil_at_dusk,
 		"a generator burns nothing while the player is deciding where to build",
 		str(Resources.amount(waiting, GameData.OIL)))
@@ -16103,7 +16111,7 @@ func _task_0095_controls() -> void:
 
 	# A free key is taken, and the input map moves with it.
 	var g := InputEventKey.new()
-	g.keycode = KEY_G
+	g.keycode = KEY_J
 	var taken: Dictionary = actions.bind(&"interact", g)
 	expect(bool(taken["ok"]), "a free key is taken",
 		String(taken.get("why", "")))
@@ -16111,7 +16119,7 @@ func _task_0095_controls() -> void:
 		"and the input map has it at once - which is all 'works immediately' "
 		+ "can mean, there being nothing else to wait for")
 	expect(actions.rebound(&"interact"), "the row knows it has been moved")
-	expect(actions.text_of(&"interact") == "G",
+	expect(actions.text_of(&"interact") == "J",
 		"and says what it is on now", actions.text_of(&"interact"))
 
 	# **A mouse button, the same way.** Not a special case anywhere.
@@ -16137,7 +16145,7 @@ func _task_0095_controls() -> void:
 	var restarted: Node = SettingsScript.new()
 	restarted.load_from_disk()
 	var saved: Dictionary = restarted.get_dict(ActionsScript.KEY)
-	expect(String(saved.get("interact", "")) == "key:%d" % KEY_G,
+	expect(String(saved.get("interact", "")) == "key:%d" % KEY_J,
 		"the binding is on the disk", str(saved.get("interact", "")))
 	expect(String(saved.get("ability", "")) == "mouse:%d"
 		% MOUSE_BUTTON_WHEEL_UP,

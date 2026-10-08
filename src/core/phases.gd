@@ -100,13 +100,15 @@ static func pass_out(state: Dictionary) -> bool:
 	return true
 
 
-## How long the build step runs before the waves start: the short one after a
-## pass-out, the ordinary one after going to bed - which 0136's START button
-## replaces. `phase_tick` is the counter.
+## How long the build step runs before the waves start by themselves, or 0
+## for **no clock at all** (task 0136): after going to bed it waits for
+## START (`intent.start_waves`). Only a pass-out has a timer - the horde is
+## already at the gate - and START may still come sooner. `phase_tick` is
+## the counter.
 static func build_step_ticks(state: Dictionary) -> int:
 	if bool((state.get("house_visit", {}) as Dictionary).get("passed_out", false)):
 		return GameData.PASS_OUT_PREPARATION_TICKS
-	return GameData.PREPARATION_TICKS
+	return 0
 
 
 ## DAY -> PREPARATION. The farmer went to bed.
@@ -148,8 +150,8 @@ static func house_full(state: Dictionary) -> int:
 
 ## PREPARATION -> NIGHT: **the one road into the waves** (task 0118).
 ##
-## `Sim._tick_preparation()` calls it when the build step's time is up; 0136's
-## START intent and 0128's pass-out step will be its other callers. Nothing
+## `Sim._tick_preparation()` calls it on START (task 0136) and when a
+## pass-out's build step runs out (0128). Nothing
 ## outside `src/core/` starts a night any other way - the tools and tests go
 ## through `NightRoad`, which ends here.
 static func start_waves(state: Dictionary) -> bool:

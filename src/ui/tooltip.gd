@@ -137,6 +137,10 @@ func _show(key: StringName) -> void:
 	if key != _showing:
 		_showing = key
 		_label.text = text
+		# **Back to the new text's size.** A container grows to its content
+		# and never shrinks by itself, so "open ground" after a long refusal
+		# sat in the refusal's box (found in task 0136's pictures).
+		_panel.reset_size()
 	_panel.visible = true
 	if world:
 		# Beside the cell, inside the night's free band.

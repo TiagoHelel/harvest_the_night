@@ -36,7 +36,7 @@ extends "res://src/tools/input_check.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V1_CASES := 10
+const V1_CASES := 11
 
 
 func _process(delta: float) -> bool:
@@ -60,6 +60,7 @@ func _run() -> void:
 	await _case_0133_hotbar()
 	await _case_0134_repair()
 	await _case_0135_flare_aim()
+	await _case_0136_start()
 	_finish()
 
 
@@ -260,14 +261,14 @@ func _case_0121_pad() -> void:
 	# **Rebinding keeps the devices apart.** A new key keeps the pad button;
 	# a new pad input keeps the key.
 	var g := InputEventKey.new()
-	g.keycode = KEY_G
+	g.keycode = KEY_J
 	var a := InputEventJoypadButton.new()
 	a.button_index = JOY_BUTTON_A
 	var keyed: Dictionary = actions.bind(&"interact", g)
 	expect(bool(keyed.get("ok", false))
 		and InputMap.action_has_event("interact", g)
 		and InputMap.action_has_event("interact", a),
-		"interact on G keeps its A", str(keyed))
+		"interact on J keeps its A", str(keyed))
 	var up := InputEventJoypadMotion.new()
 	up.axis = JOY_AXIS_RIGHT_Y
 	up.axis_value = -1.0
@@ -880,4 +881,37 @@ func _case_0135_flare_aim() -> void:
 	expect(Ability.flare_at(state) == [target.x, target.y] and not cursor.is_armed(),
 		"and the next click flares the clicked cell", str(Ability.flare_at(state)))
 	await close_scene()
+	_completed += 1
+
+
+## 0136 - START: the button and the key each begin the waves.
+func _case_0136_start() -> void:
+	for way in ["button", "key"]:
+		await open_scene(MAIN_SCENE)
+		var driver: SimDriver = require_control("SimDriver")
+		if driver == null:
+			await close_scene()
+			_completed += 1
+			return
+		var state := driver.state
+		await frames(4)
+		await click_control("NightButton")
+		await until(func() -> bool: return int(state["phase"]) == Phases.PREPARATION,
+			"GO TO BED to start the build step")
+		var start: Button = require_control("StartButton") as Button
+		await frames(3)
+		expect(start != null and start.is_visible_in_tree() and start.text == I18n.t(&"NHUD_START"),
+			"the build step shows START", start.text if start != null else "")
+		if way == "button":
+			await click_control("StartButton")
+		else:
+			await tap_key(KEY_G)
+		await until(func() -> bool: return int(state["phase"]) == Phases.NIGHT,
+			"START to begin the waves")
+		expect(int(state["phase"]) == Phases.NIGHT,
+			"%s begins the waves" % ("clicking StartButton" if way == "button"
+				else "pressing the START key"))
+		await frames(2)
+		expect(not start.is_visible_in_tree(), "and START goes with the build step")
+		await close_scene()
 	_completed += 1

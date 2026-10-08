@@ -424,7 +424,9 @@ func _case_0105_playtest() -> void:
 	var driver: SimDriver = _scene.get_node("%SimDriver")
 	var before := int(driver.state["tick"])
 	await tap_key(KEY_B)
-	await frames(3)
+	# Waited for, not counted: three headless frames can fall inside one tick.
+	await until(func() -> bool: return int(driver.state["tick"]) > before,
+		"the run to carry on")
 	expect(int(driver.state["tick"]) > before, "and the run carries on")
 
 	await close_scene()
@@ -5924,9 +5926,9 @@ func _case_0095_controls() -> void:
 	await click_control("Bind_move_up")
 	await frames(2)
 	expect(tab.waiting_for() == &"move_up", "a click on a binding listens too")
-	await tap_key(KEY_G)
+	await tap_key(KEY_J)
 	await frames(3)
-	expect(tab.binding_shown(&"move_up") == "G *",
+	expect(tab.binding_shown(&"move_up") == "J *",
 		"a free key is taken, and the row is marked as moved",
 		tab.binding_shown(&"move_up"))
 	expect(tab.reset_showing(&"move_up"), "the moved row says so")
@@ -5970,16 +5972,16 @@ func _case_0095_controls() -> void:
 
 	# **The key it was given works in a run**, through the router, and
 	# keeps working after the input map is rebuilt from the settings.
-	actions.bind(&"stats", _key_event(KEY_G))
+	actions.bind(&"stats", _key_event(KEY_J))
 	await open_scene(MAIN_SCENE)
 	router = root.get_node_or_null(^"App")
 	await frames(6)
-	await tap_key(KEY_G)
+	await tap_key(KEY_J)
 	await frames(4)
 	expect(router.here() == router.STATS,
 		"the key the player chose opens the records",
 		router.name_of(router.here()))
-	await tap_key(KEY_G)
+	await tap_key(KEY_J)
 	await frames(4)
 	expect(router.here() == router.RUN, "and closes them again")
 	await tap_key(KEY_R)
@@ -5990,12 +5992,12 @@ func _case_0095_controls() -> void:
 
 	InputMap.action_erase_events("stats")
 	actions.apply()
-	await tap_key(KEY_G)
+	await tap_key(KEY_J)
 	await frames(4)
 	expect(router.here() == router.STATS,
 		"and it still does after a fresh boot of the input map",
 		router.name_of(router.here()))
-	await tap_key(KEY_G)
+	await tap_key(KEY_J)
 	await frames(4)
 
 	actions.reset_all()

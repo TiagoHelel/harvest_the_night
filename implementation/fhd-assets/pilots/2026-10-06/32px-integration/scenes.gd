@@ -85,7 +85,9 @@ func _scene(main: Node, entry: Array, folder: String) -> void:
 	if name.ends_with("_night"):
 		_walk_to(state, _standing_at)
 		Phases.begin_preparation(state)
-		Sim.advance(state, GameData.PREPARATION_TICKS + 1)
+		# START, then one tick of the night (task 0136: no build-step clock).
+		NightRoad.through_build(state)
+		Sim.advance(state, 1)
 	elif name.ends_with("_noon"):
 		Sim.advance(state, maxi(GameData.DAY_TICKS / 2 - int(state["tick"]), 1))
 	_walk_to(state, _standing_at)

@@ -87,6 +87,9 @@ static func initial() -> Dictionary:
 			# from the guardian's cursor like `build_cell`. `[-1, -1]` is
 			# nowhere, and a flare at nowhere is refused.
 			"ability_cell": [-1, -1],
+			# **START the night** (task 0136): an edge, read once per tick by
+			# `Sim.tick` and spent only in the build step.
+			"start_waves": false,
 			"build_place": false,
 			"build_sell": false,
 			# **Upgrading a tower in place**, task 0064. A third verb on the

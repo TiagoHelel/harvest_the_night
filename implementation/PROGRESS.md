@@ -14035,3 +14035,100 @@ The determinism scenario fires no flare, so that is all of it. **data
 Shot 0135 `aim` opened: the 7x7 reach square sits round the cursor's aim
 look, the walkers inside it are the ones a flare there would hit, and nothing
 covers the hotbar or the night HUD.
+
+## 0136 - The build step waits for START - done 2026-10-08
+
+What changed: the build step has no clock. It waits for START, except after a
+pass-out, when the horde is at the gate and gives thirty seconds.
+
+**The rule:**
+- `intent` gains the edge `start_waves`.
+- `Sim.tick` reads it and clears it on every tick, so a press by day or at
+  night is simply gone. `_tick_preparation` spends it through 0118's
+  `Phases.start_waves`.
+- `Phases.build_step_ticks` is now 0 ("no clock") after going to bed, and
+  `PASS_OUT_PREPARATION_TICKS` after a pass-out. That timer is the only one
+  left, and START may still come sooner.
+- `PREPARATION_TICKS` left `game_data.gd` and `digest()`. The day clock stays
+  stopped through the build step, as it was.
+
+**START on the night HUD**:
+- `StartButton` (`NHUD_START` "START" / "COMEÇAR") takes the place REPAIR left
+  in the bar.
+- The night HUD is up in the build step now, with START alone; its read-outs,
+  FLARE and the speed wait for the night.
+- After a pass-out it counts down (`NHUD_START_IN` "START %d" / "AGORA %d").
+  "INÍCIO %d" was 51 px against the button's 46, which `i18n_check` caught.
+
+**The `start_waves` action** (`ACT_START` "START THE NIGHT" / "COMEÇAR A
+NOITE"):
+- **G** on the keyboard: not the GO TO BED key, so a double press cannot skip
+  the build step.
+- **L3** on the pad, which `tech` gave up as the prompt allowed: Back is the
+  GO TO BED key, and no focus-only action had a button to give.
+- `_task_0121_pad` names `tech` as reached by its key, or by 0139's HUD focus.
+- The rebind tests that used G as a free key use J now: the
+  `headless_check` controls group, `_case_0095` and 0121's
+  "interact on J keeps its A".
+- `project.godot`'s commit copy is HEAD plus these changes; the owner's
+  unstaged `run` change stays in the working copy only.
+
+**The road**: `NightRoad.through_build` presses START (`press_start`) and steps
+the one tick it lands on. `build_ticks_left` is that one tick, or zero
+outside the build step.
+- The determinism scenario presses START before stepping it, so its build
+  step is one tick instead of 600.
+- `shot.gd`'s trailer, whose loop would now spin for ever, goes through the
+  road. So does a tracked pilot that waited the old clock out
+  (`implementation/fhd-assets/pilots/2026-10-06/32px-integration/scenes.gd`,
+  caught by the parse check).
+- `_task_0118_road` allows the old lever nowhere, and checks that it is gone
+  from `GameData`. Its "same ticks as before" half is now "START and one
+  tick, the same as by hand".
+
+**Tests moved to START:**
+- `_task_0006_phases`' "preparation ends itself" became "preparation waits
+  for START, however long it takes" (two minutes), then "START begins the
+  night".
+- 0128's ordinary-bedtime half now says the build step waits for START.
+- 0129's test presses START between its build-step leg and its night leg.
+- 0132's barricade rests through a build step longer than its lifetime.
+- The idle-generator check (`_task_0033`) waits 30 s.
+- Four loops press START while they are in the build step: 0115's spawn
+  room, the whole cycle in `_task_0027_the_loop`, the playtest log, and the night's
+  reaction.
+
+**Fixed on the way:**
+- `_case_0105_playtest`'s "and the run carries on" counted three headless
+  frames for a tick. It now waits with `until`.
+- The cursor tooltip kept a long text's box after it shortened ("terreno
+  livre" in the refusal's width, seen in this task's pictures). `Tooltip`
+  now resets the panel's size when the text changes.
+
+Files: src/core/{sim,phases,player,game_data}.gd, src/ui/{night_hud,main,
+tooltip}.gd, src/app/input_actions.gd, project.godot, assets/locale/strings.csv,
+src/tools/{night_road,determinism,shot,headless_check,input_check,headless_v1,
+input_v1}.gd, implementation/fhd-assets/pilots/2026-10-06/32px-integration/scenes.gd,
+tools/determinism_{sim,data}_hash.txt, implementation/shots/0136/
+
+Verify: **59 passed, 0 failed in 548s** (OVER BUDGET 300, as before). Suite
+times: headless_check 78.4 s, headless_v1 3.1 s, input_check 89.9 s, input_v1
+15.6 s. Counts:
+- headless_check 16217 (+3);
+- headless_v1 233 (+10). Two minutes in, it is still the build step, with no
+  clock, and START begins the night on the next tick. START by day and at
+  night each match a twin that never pressed it, and the edge is dropped.
+  02:00 passes him out: one tick short of the timer he is still building, at
+  exactly `PASS_OUT_PREPARATION_TICKS` the night begins, or sooner on START.
+- input_check 1057;
+- input_v1 93 (+6). The build step shows START; clicking it begins the waves,
+  and so does the START key; START goes with the build step.
+
+**sim 204996281 -> 2903453887**: `intent` gains `start_waves`, and the
+determinism scenario's build step is one tick instead of 600. **data
+2599455698 -> 2689203136**: `PREPARATION_TICKS` left `digest()`.
+
+Shots 0136 `refused` / `passed_out`, in English and pt_BR, opened. In the
+build step START sits bottom right, where REPAIR was, with nothing over it.
+After a pass-out it counts down, "AGORA 28". The cursor's tooltip is the size
+of its text.

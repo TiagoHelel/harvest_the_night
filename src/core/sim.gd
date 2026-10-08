@@ -22,12 +22,17 @@ extends RefCounted
 static func tick(state: Dictionary) -> void:
 	state["tick"] = int(state["tick"]) + 1
 	state["phase_tick"] = int(state["phase_tick"]) + 1
+	# **START, an edge** (task 0136): read once and cleared on every tick, so
+	# a press by day or at night is gone rather than waiting for a build step.
+	var intent: Dictionary = state["intent"]
+	var start := bool(intent.get("start_waves", false))
+	intent["start_waves"] = false
 
 	match int(state["phase"]):
 		Phases.DAY:
 			_tick_day(state)
 		Phases.PREPARATION:
-			_tick_preparation(state)
+			_tick_preparation(state, start)
 		Phases.NIGHT:
 			_tick_night(state)
 		Phases.RESULT:
@@ -121,14 +126,17 @@ static func _tick_day(state: Dictionary) -> void:
 
 
 ## The build step. The clock does not run and nothing attacks: this is the one
-## stretch of the game where the player is not being asked to hurry.
-static func _tick_preparation(state: Dictionary) -> void:
+## stretch of the game where the player is not being asked to hurry - and
+## since task 0136 **it waits for START**. Only after a pass-out does it end
+## by itself, at `PASS_OUT_PREPARATION_TICKS`.
+static func _tick_preparation(state: Dictionary, start: bool = false) -> void:
 	Building.tick(state)
 	# The tutorial's `build` step happens here now (task 0132): defences go
 	# down at night. On its own beat, watching, never gating.
 	Tutorial.tick(state)
 	Player.tick(state)
-	if int(state["phase_tick"]) >= Phases.build_step_ticks(state):
+	var timer := Phases.build_step_ticks(state)
+	if start or (timer > 0 and int(state["phase_tick"]) >= timer):
 		Phases.start_waves(state)
 
 

@@ -56,6 +56,7 @@ var _boss_back: ColorRect
 var _boss_fill: ColorRect
 var _boss_name: Label
 var _bar: Control
+var _start: Button
 var _flare: Button
 var _speed: Button
 
@@ -144,8 +145,11 @@ func _build_controls() -> void:
 	add_child(_bar)
 
 	# **No REPAIR here since task 0134**: the guardian's cursor mends whatever
-	# it confirms on. The flare and the speed keep their places until 0139
+	# it confirms on. **START takes its place** (task 0136), shown in the
+	# build step only. The flare and the speed keep their places until 0139
 	# lays the bar out again.
+	_start = _button("StartButton", I18n.t(&"NHUD_START"), Vector2(0, 1))
+	_start.pressed.connect(_do_start)
 	_flare = _button("FlareButton", I18n.t(&"NHUD_FLARE"),
 		Vector2(50, 1))
 	_flare.pressed.connect(_do_flare)
@@ -194,9 +198,22 @@ func show_state(state: Dictionary) -> void:
 func _process(delta: float) -> void:
 	if _state.is_empty():
 		return
-	var after_dark := int(_state["phase"]) == Phases.NIGHT
-	visible = after_dark
-	if not after_dark:
+	var phase := int(_state["phase"])
+	var after_dark := phase == Phases.NIGHT
+	# **Up in the build step too, for START alone** (task 0136): the night's
+	# read-outs and its two controls wait for the night.
+	var building := phase == Phases.PREPARATION
+	visible = after_dark or building
+	if not visible:
+		return
+	for child in get_children():
+		if child is CanvasItem and child != _bar:
+			(child as CanvasItem).visible = after_dark
+	_start.visible = building
+	_flare.visible = after_dark
+	_speed.visible = after_dark
+	if building:
+		_refresh_start()
 		return
 	_pulse += delta
 	_refresh()
@@ -296,6 +313,24 @@ func _refresh_controls() -> void:
 ## **Every one of these writes an intent or asks the driver.** None of them
 ## changes the state itself, so the button, the key and the autoplayer of task
 ## 0067 all take the same road into the rules.
+## START (task 0136): the build step waits for it.
+func _do_start() -> void:
+	if not _state.is_empty():
+		(_state["intent"] as Dictionary)["start_waves"] = true
+
+
+## START's label: plain after going to bed, a countdown after a pass-out,
+## when the horde is at the gate and the night starts by itself.
+func _refresh_start() -> void:
+	var timer := Phases.build_step_ticks(_state)
+	if timer <= 0:
+		_start.text = I18n.t(&"NHUD_START")
+		return
+	var left := maxi(timer - int(_state["phase_tick"]), 0)
+	_start.text = I18n.f(&"NHUD_START_IN",
+		[ceili(float(left) / float(GameData.SECONDS))])
+
+
 func _do_flare() -> void:
 	# **Armed, not fired** (task 0135): the flare goes where it is aimed, so
 	# the button hands the aim to the cursor and the next confirm lets it go.

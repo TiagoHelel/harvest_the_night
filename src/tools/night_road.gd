@@ -10,13 +10,14 @@ extends RefCounted
 ## those lines would have had to change both times. Now they ask this, and
 ## those tasks change it once.
 ##
-## **Same ticks as before.** `through_build()` runs off what is *left* of the
-## build step, which on a fresh one is exactly `PREPARATION_TICKS` - so a test
-## routed through here steps the same ticks it always did, and the hashes do
-## not move.
+## **START, not a clock** (task 0136). The build step waits for the player, so
+## `through_build()` presses START (`intent.start_waves`) and steps the one
+## tick it lands on. A test that wants to stay in the build step simply does
+## not go through it; one that waited the old twenty seconds out waits for
+## nothing now.
 ##
-## The rules have their own single road: `Phases.start_waves()`, which the
-## build step's timer calls. Nothing outside `src/core/` calls
+## The rules have their own single road: `Phases.start_waves()`, which START
+## and a pass-out's short timer call. Nothing outside `src/core/` calls
 ## `Phases.begin_night()`; `_task_0118_road` in `headless_v1` reads the code
 ## to keep it so.
 
@@ -36,19 +37,24 @@ static func to_build(state: Dictionary) -> bool:
 	return int(state["phase"]) == Phases.PREPARATION
 
 
-## How many ticks of the build step are still to run. Zero outside it.
+## Press START, without the button (task 0136).
+static func press_start(state: Dictionary) -> void:
+	(state["intent"] as Dictionary)["start_waves"] = true
+
+
+## How many ticks the road takes to leave the build step once START is
+## pressed: the one it lands on. Zero outside it.
 static func build_ticks_left(state: Dictionary) -> int:
-	if int(state["phase"]) != Phases.PREPARATION:
-		return 0
-	# The build step's own length - the short one after a pass-out (0128).
-	return maxi(Phases.build_step_ticks(state) - int(state["phase_tick"]), 0)
+	return 1 if int(state["phase"]) == Phases.PREPARATION else 0
 
 
-## Through the rest of the build step, to the tick the waves start on.
+## Through the build step to the first tick of the night: START, and the tick
+## it lands on.
 static func through_build(state: Dictionary) -> void:
-	var left := build_ticks_left(state)
-	if left > 0:
-		Sim.advance(state, left)
+	if int(state["phase"]) != Phases.PREPARATION:
+		return
+	press_start(state)
+	Sim.advance(state, 1)
 
 
 ## Both: from the day - or from a build step already open, where the farm was

@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 16
+const GROUPS := 17
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -85,6 +85,7 @@ func _run() -> void:
 	_task_0132_night_build()
 	_task_0134_cursor_repair()
 	_task_0135_aimed_flare()
+	_task_0136_start()
 
 
 func _finish() -> void:
@@ -392,6 +393,9 @@ func _task_0115_spawn_room() -> void:
 	# alive or still to come adds up to the night's size.
 	var guard := 0
 	while int(state["phase"]) != Phases.NIGHT and guard < 2000:
+		# The build step waits for START since task 0136.
+		if int(state["phase"]) == Phases.PREPARATION:
+			NightRoad.press_start(state)
 		Sim.tick(state)
 		guard += 1
 	expect(int(state["phase"]) == Phases.NIGHT, "night falls")
@@ -611,14 +615,9 @@ func _task_0118_road() -> void:
 	var timer := "PREPARATION" + "_TICKS"
 	var door := "Phases.begin" + "_night("
 	var lever := RegEx.create_from_string("\\b" + timer + "\\b")
-	# Where the build step's lever may still be named, and why.
-	var allowed := {
-		"res://src/tools/night_road.gd": "the road itself",
-		"res://src/tools/headless_check.gd:_task_0006_phases":
-			"the timer is the subject of the assert; 0136 rewrites it",
-		"res://src/tools/headless_v1.gd:_task_0128_pass_out":
-			"the ordinary length is compared with the pass-out one",
-	}
+	# **Allowed nowhere** since task 0136: the build step waits for START,
+	# and its lever left `GameData`.
+	var allowed := {}
 	var timers: Array = []
 	var doors: Array = []
 	var seen := {}
@@ -643,10 +642,9 @@ func _task_0118_road() -> void:
 						timers.append("%s:%s" % [path, where])
 				if code.contains(door):
 					doors.append("%s:%s" % [path, where])
-	# Since 0128 the road asks `Phases.build_step_ticks()`, so only the 0006
-	# timer assert names the lever - and the scan has to see it.
-	expect(seen.has("res://src/tools/headless_check.gd"),
-		"the scan sees the 0006 timer assert", str(seen.keys()))
+	expect(not FileAccess.get_file_as_string("res://src/core/game_data.gd")
+		.contains("const " + timer), "the build step's lever is gone from GameData")
+	expect(seen.is_empty(), "and nothing is allowed to name it", str(seen.keys()))
 	expect(timers.is_empty(),
 		"nothing in src/tools or src/ui names the build step's length but the road",
 		str(timers))
@@ -665,15 +663,13 @@ func _task_0118_road() -> void:
 	expect(not Phases.start_waves(night) and State.hash_of(night) == during,
 		"and start_waves during it is refused and leaves it alone")
 
-	# **The same ticks as before the road.** On a fresh build step it runs off
-	# exactly the lever's worth, and the night starts on the last of them.
-	# The lever's worth, measured the long way: one tick at a time.
+	# **The road is START** (task 0136): on a fresh build step it presses it
+	# and steps the tick it lands on - the same as doing it by hand.
 	var counted := State.create(1183)
 	Phases.begin_preparation(counted)
-	var by_hand := 0
-	while int(counted["phase"]) == Phases.PREPARATION and by_hand < 100000:
-		Sim.tick(counted)
-		by_hand += 1
+	(counted["intent"] as Dictionary)["start_waves"] = true
+	Sim.tick(counted)
+	var by_hand := 1
 	var fresh := State.create(1183)
 	NightRoad.into_build(fresh)
 	var tick := int(fresh["tick"])
@@ -682,7 +678,7 @@ func _task_0118_road() -> void:
 	expect(int(fresh["tick"]) - tick == left and left == by_hand
 		and int(fresh["phase"]) == Phases.NIGHT
 		and State.hash_of(fresh) == State.hash_of(counted),
-		"a fresh build step is the lever's ticks, ending in the night",
+		"a fresh build step is START and one tick, ending in the night",
 		"%d ticks, %d left at the start" % [int(fresh["tick"]) - tick, left])
 	expect(NightRoad.build_ticks_left(fresh) == 0, "and nothing is left of it")
 
@@ -785,6 +781,7 @@ func _task_0121_pad() -> void:
 		&"skip_night": "a focusable night HUD button, like speed",
 		&"stats": "a read-only screen no play depends on, and no button left over",
 		&"log": "a read-only screen, like stats",
+		&"tech": "L3 went to START (task 0136); a screen, reached by its key or 0139's HUD focus",
 	}
 	var project := FileAccess.get_file_as_string("res://project.godot")
 	var section := project.substr(project.find("\n[input]\n"))
@@ -1049,8 +1046,8 @@ func _task_0128_pass_out() -> void:
 	Sim.advance(bedtime, 1)
 	expect(int(bedtime["phase"]) == Phases.PREPARATION
 		and not bool((bedtime["house_visit"] as Dictionary)["passed_out"])
-		and Phases.build_step_ticks(bedtime) == GameData.PREPARATION_TICKS,
-		"going to bed at 01:59 is an ordinary night with the ordinary build step")
+		and Phases.build_step_ticks(bedtime) == 0,
+		"going to bed at 01:59 is an ordinary night, whose build step waits for START")
 
 	# **The clock and the overtime stop at 02:00.**
 	var clamp := State.create(1284)
@@ -1071,9 +1068,9 @@ func _task_0128_pass_out() -> void:
 
 ## 0129 - he stays in bed all night.
 func _task_0129_asleep() -> void:
-	# **Move and interact held for the whole build step**, then 600 ticks of
-	# the night (parked, so nothing bites): nothing about him changes. The
-	# build step is `PREPARATION_TICKS` long, so its 600 end in the night.
+	# **Move and interact held for 600 ticks of the build step**, then START,
+	# then 600 ticks of the night (parked, so nothing bites): nothing about
+	# him changes. The build step waits for START since task 0136.
 	var state := State.create(1291)
 	NightRoad.into_build(state)
 	var before: Array = (state["player"]["pos"] as Array).duplicate()
@@ -1082,6 +1079,7 @@ func _task_0129_asleep() -> void:
 	var phases_seen := {}
 	for leg in 2:
 		if leg == 1:
+			NightRoad.through_build(state)
 			NightRoad.park(state)
 		for _tick in 600:
 			phases_seen[int(state["phase"])] = true
@@ -1363,7 +1361,8 @@ func _task_0132_night_build() -> void:
 	expect(Building.place(cheap, &"barricade", first), "a barricade goes down in the build step")
 	expect(Building.left_tonight(cheap, &"barricade") == limit - 1,
 		"and counts against tonight's limit", str(Building.left_tonight(cheap, &"barricade")))
-	Sim.advance(cheap, mini(NightRoad.build_ticks_left(cheap) - 1, life + 30))
+	# Longer than its lifetime: the build step has no clock (task 0136).
+	Sim.advance(cheap, life + 30)
 	expect(int(cheap["phase"]) == Phases.PREPARATION
 		and StringName(Farm.occupant(cheap, first).get("id", &"")) == &"barricade",
 		"it does not rot while the build step lasts")
@@ -1520,4 +1519,59 @@ func _task_0135_aimed_flare() -> void:
 	State.reconcile(old)
 	expect((old["intent"] as Dictionary).get("ability_cell", null) == [-1, -1],
 		"reconcile fills in ability_cell as nowhere", str((old["intent"] as Dictionary).get("ability_cell")))
+	_completed += 1
+
+
+## 0136 - the build step waits for START.
+func _task_0136_start() -> void:
+	# **Two minutes of build step stay the build step** - past the old twenty
+	# seconds and the thirty of a pass-out.
+	var waiting := State.create(1360)
+	NightRoad.into_build(waiting)
+	Sim.advance(waiting, 120 * GameData.SECONDS)
+	expect(int(waiting["phase"]) == Phases.PREPARATION,
+		"two minutes in, it is still the build step", Phases.name_of(int(waiting["phase"])))
+	expect(Phases.build_step_ticks(waiting) == 0, "it has no clock")
+	# **START begins the night on the next tick.**
+	(waiting["intent"] as Dictionary)["start_waves"] = true
+	Sim.advance(waiting, 1)
+	expect(int(waiting["phase"]) == Phases.NIGHT, "START begins the night on the next tick",
+		Phases.name_of(int(waiting["phase"])))
+
+	# **START by day or at night changes nothing** - the same tick as a twin
+	# that never pressed it, and the edge is gone.
+	for setting in ["day", "night"]:
+		var pressed := State.create(1361)
+		var twin := State.create(1361)
+		if setting == "night":
+			for one in [pressed, twin]:
+				NightRoad.to_night(one)
+				NightRoad.park(one)
+		(pressed["intent"] as Dictionary)["start_waves"] = true
+		Sim.advance(pressed, 1)
+		Sim.advance(twin, 1)
+		expect(State.hash_of(pressed) == State.hash_of(twin)
+			and not bool((pressed["intent"] as Dictionary)["start_waves"]),
+			"START %s changes nothing, and is dropped" % ("by day" if setting == "day" else "at night"))
+
+	# **After a pass-out**: the night begins at exactly the short timer, or
+	# sooner on START.
+	var late := State.create(1362)
+	late["day_tick"] = GameData.DAY_TICKS - 1
+	Sim.advance(late, 1)
+	expect(House.passed_out(late) and int(late["phase"]) == Phases.PREPARATION,
+		"02:00 passes him out into the build step")
+	Sim.advance(late, GameData.PASS_OUT_PREPARATION_TICKS - 1)
+	expect(int(late["phase"]) == Phases.PREPARATION, "one tick short, still building")
+	Sim.advance(late, 1)
+	expect(int(late["phase"]) == Phases.NIGHT,
+		"and at exactly PASS_OUT_PREPARATION_TICKS the night begins by itself")
+	var early := State.create(1363)
+	early["day_tick"] = GameData.DAY_TICKS - 1
+	Sim.advance(early, 1)
+	Sim.advance(early, 60)
+	(early["intent"] as Dictionary)["start_waves"] = true
+	Sim.advance(early, 1)
+	expect(int(early["phase"]) == Phases.NIGHT and int(early["night_tick"]) <= 1,
+		"or sooner, on START", str(early["night_tick"]))
 	_completed += 1

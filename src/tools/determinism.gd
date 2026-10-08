@@ -83,6 +83,8 @@ func _run() -> void:
 	rolling = _advance_sampling(state, 1500, rolling)   # and the afternoon
 	NightRoad.into_build(state)
 	_arm_the_farm(state)        # the defences go up in the build step
+	# START (task 0136): the build step waits for it, one tick instead of 600.
+	NightRoad.press_start(state)
 	rolling = _advance_sampling(state, NightRoad.build_ticks_left(state),
 		rolling)
 	rolling = _advance_sampling(state, 3000, rolling)   # a night being fought

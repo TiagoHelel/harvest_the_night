@@ -1,7 +1,7 @@
 # 0136 - The build step waits for START
 
 - **Phase:** 10 - Sleep is the night
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0118, 0132, 0128
 - **Likely files:** src/core/sim.gd, src/core/phases.gd, src/core/game_data.gd, src/core/player.gd, src/ui/night_hud.gd, project.godot, src/app/input_actions.gd, assets/locale/strings.csv, src/tools/night_road.gd, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd
 
