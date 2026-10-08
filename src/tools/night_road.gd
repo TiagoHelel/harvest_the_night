@@ -92,3 +92,5 @@ static func park(state: Dictionary) -> void:
 	wave["index"] = 0
 	wave["left"] = 0
 	wave["wait"] = 1 << 30
+	# Dawn held back too (task 0137), so a parked night never ends.
+	wave["dawn_at"] = 1 << 30

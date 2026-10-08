@@ -4443,6 +4443,7 @@ func _case_0082_shots() -> void:
 	expect(put >= 8, "the farm has something defending it", "%d up" % put)
 	NightRoad.to_night(state)
 	Sim.advance(state, 1)
+	# To the end of the night - dawn at the latest since task 0137.
 	Sim.skip_night(state)
 	await frames(6)
 	expect(int(state["phase"]) == Phases.RESULT, "the result screen is up",

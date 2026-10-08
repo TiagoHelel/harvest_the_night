@@ -86,12 +86,33 @@ static func night(seed_value: int, night_number: int) -> Dictionary:
 	var rows := _lay_out(rng, bodies, waves)
 	_put_the_giants_in(rows, curve, night_number)
 
-	return {
+	var one := {
 		"note": _note(night_number, giants_on(night_number)),
 		"opening_ticks": int(curve["opening_ticks"]),
 		"gap_ticks": int(curve["gap_ticks"]),
 		"waves": rows,
 	}
+	_fit_before_dawn(one)
+	return one
+
+
+## **Sent inside the night** (task 0137). A generated night grows every
+## night and dawn does not move, so one that would still be sending at
+## `NIGHT_TICKS - DAWN_MARGIN_TICKS` sends its members closer together: the
+## largest `interval_ticks` that fits, down to one a tick. The authored ten
+## keep the house pace, and `check_nights` holds them to the same rule.
+static func _fit_before_dawn(one: Dictionary) -> void:
+	var budget := GameData.NIGHT_TICKS - GameData.DAWN_MARGIN_TICKS
+	if Waves.schedule_ticks(one) <= budget:
+		return
+	var waits := 0
+	var spaced := 0
+	var rows: Array = one["waves"]
+	for i in rows.size():
+		waits += Waves._delay_in(one, i) + 1
+		spaced += int((rows[i] as Array)[1]) - 1
+	var each := (budget - waits) / maxi(spaced, 1) - 1
+	one["interval_ticks"] = clampi(each, 0, GameData.SPAWN_INTERVAL_TICKS)
 
 
 ## How many bodies a generated night sends, before the Giants are added.

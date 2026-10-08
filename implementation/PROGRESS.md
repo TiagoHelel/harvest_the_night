@@ -14132,3 +14132,110 @@ Shots 0136 `refused` / `passed_out`, in English and pt_BR, opened. In the
 build step START sits bottom right, where REPAIR was, with nothing over it.
 After a pass-out it counts down, "AGORA 28". The cursor's tooltip is the size
 of its text.
+
+## 0137 - The night ends at 06:00 - done 2026-10-08
+
+What changed: the night has an end known in advance. A house still standing
+at dawn wins, and killing everything sooner still does.
+
+**The rule:**
+- `NIGHT_TICKS := 240 * SECONDS` (`# LEVER` 180-300 s) is the waves' length,
+  the same after a bedtime and after a pass-out. `validate()` keeps it below
+  `Sim.MOST_TICKS_IN_A_NIGHT`.
+- `Waves.begin` writes `wave.dawn_at`. Its `initial()` is `NIGHT_TICKS`, so an
+  old save gets a whole night; `Phases.ticks_to_dawn(state)` reads it.
+  `NightRoad.park` puts dawn out of reach, so parked nights never end.
+- `Sim._tick_night` ends the night last, after `Combat.tick`
+  (`_test_for_dawn`): still NIGHT at `dawn_at` gives a `dawn` event (`walked`
+  = how many are still on the farm), `Rewards.settle(true)` and
+  `enter_result(true)`, with the survivors left on the farm.
+  `begin_day`'s `Enemies.withdraw` walks them off.
+- A house at 0 still loses on its own tick, and `_test_for_the_end` still
+  wins early. **Interim until 0153:** dawn does not end a night while
+  `Combat.boss_here`, and the countdown holds at 0:00.
+- The `dawn` event is a new `Events.KINDS` entry, `good` in `log_panel.gd`,
+  with `LOG_DAWN` ("dawn - %d walked off" / "amanheceu - %d foram embora")
+  and a sample in `_task_0090_log`.
+
+**Inside the night:**
+- `Waves.schedule_ticks(record)` is a night's sending time, counted the way
+  `Waves.tick` spends it.
+- `check_nights` refuses any night still sending within `DAWN_MARGIN_TICKS`
+  (`# LEVER` 60 s, 30-120) of dawn. Both levers joined the `time` row of
+  `digest()`.
+- **The endless curve did not fit.** At the house pace, night 28 sent until
+  206 s and night 40 until 302 s, past dawn itself. A generated night that
+  would still be sending at `NIGHT_TICKS - DAWN_MARGIN_TICKS` now carries
+  its own `interval_ticks` (`Endless._fit_before_dawn`): the largest member
+  spacing that fits, down to one a tick. `Waves` reads it through
+  `interval_in`, and the authored ten keep the house pace.
+- Nights 11-40 on seeds 0/1/7 now all send by 179 s, which `_task_0137_dawn`
+  samples from the schedule functions alone.
+
+**`python tools/nights.py`** prints each night against the night. Dawn is at
+240 s and every night must be sent 60 s before it:
+
+| Night | Sent by | Before dawn |
+|---|---|---|
+| 1 | 36 s | 203 s |
+| 2 | 42 s | 198 s |
+| 3 | 56 s | 183 s |
+| 4 | 67 s | 172 s |
+| 5 | 77 s | 162 s |
+| 6 | 82 s | 157 s |
+| 7 | 78 s | 161 s |
+| 8 | 84 s | 155 s |
+| 9 | 82 s | 158 s |
+| 10 | 78 s | 161 s |
+
+**The night HUD** counts down `NHUD_DAWN` ("DAWN 3:54" / "AMANHECER 3:54") on
+the strip's right, never as a wall clock. It is capped at a whole night, so a
+parked fixture does not show nonsense. Skip and 1x/2x/4x simply run to dawn.
+
+**Tests:**
+- `_task_0027_the_loop`: "the night ended at dawn or with everything dead,
+  and no later than dawn".
+- `_task_0055_speed`: "skipping never runs past dawn".
+- `_case_0082_shots`' `Sim.skip_night` says it runs to dawn at the latest.
+
+**The determinism scenario** no longer calls `enter_result`; it fights in
+samples until the night ends itself.
+- **Finding:** its night 1 ends lost at night tick 1633, with **0 kills** and
+  the house at 0. The old forced `enter_result(true)` at tick 3000 had been
+  refused ("enter_result from RESULT") for exactly that reason.
+- A defended scripted farm killing nothing is the same symptom as 0132's
+  `play_nights` finding. That task was replaced with one that covers both
+  ("Find why scripted defences kill nothing").
+
+Files: src/core/{game_data,waves,endless,phases,sim,events}.gd, src/ui/{night_hud,
+log_panel}.gd, src/tools/{night_road,determinism,nights,headless_check,
+input_check,headless_v1}.gd, assets/locale/strings.csv,
+tools/determinism_{sim,data}_hash.txt, implementation/shots/0137/
+
+Verify: the full run gave **57 passed and both hashes moved as intended**;
+`verify.py --hashes --accept` then recorded them. OVER BUDGET 300, as before.
+Suite times: headless_check 81.5 s, headless_v1 3.3 s, input_check 92.1 s,
+input_v1 16.0 s. Counts:
+- headless_check 16225 (+8: the dawn event's log checks, "no later than
+  dawn" and "never past dawn");
+- headless_v1 244 (+11):
+  - a horde that cannot reach the house ends the night at exactly `dawn_at`,
+    won, its 3 survivors still on the farm, the log saying dawn and 3 walked
+    off, and the morning sends them off;
+  - everything dead before dawn wins sooner, and a house at 0 before dawn
+    loses;
+  - a Giant holds the night past dawn;
+  - `Sim.skip_night` from mid-night takes at most the ticks left to dawn and
+    lands in RESULT;
+  - `check_nights` refuses an overlong night and passes the ten shipped
+    ones; endless nights 11-40 are all inside.
+- input_check 1057;
+- input_v1 93.
+
+**sim 2903453887 -> 40581503**: `wave` gains `dawn_at`, and the scenario
+fights its night to its own end instead of ending it at tick 3000. **data
+2689203136 -> 898358060**: `NIGHT_TICKS` and `DAWN_MARGIN_TICKS` joined
+`digest()`.
+
+Shot 0137 `wave` (and `-pt_BR`) opened: "DAWN 3:54" / "AMANHECER 3:54" on the
+night strip's right, clear of the other labels.

@@ -57,6 +57,7 @@ var _boss_fill: ColorRect
 var _boss_name: Label
 var _bar: Control
 var _start: Button
+var _dawn: Label
 var _flare: Button
 var _speed: Button
 
@@ -81,6 +82,9 @@ func _ready() -> void:
 	_night = _label("NightNumber", Vector2(4, 2), UiKit.WARM)
 	_wave = _label("WaveCounter", Vector2(120, 2), UiKit.WARM)
 	_left = _label("ZombiesLeft", Vector2(240, 2), UiKit.DIM)
+	# **The time left to dawn** (task 0137): a countdown and never a wall clock
+	# - after a pass-out a 22:00-06:00 mapping would lie.
+	_dawn = _label("DawnCountdown", Vector2(360, 2), UiKit.WARM)
 
 	# **The house bar, and it is the biggest thing up there.** A number is easy
 	# to miss and this is the one that ends the run.
@@ -225,6 +229,11 @@ func _refresh() -> void:
 	var at: Array = Waves.progress(_state)
 	_wave.text = I18n.f(&"NHUD_WAVE", [int(at[0]), int(at[1])])
 	_left.text = I18n.f(&"NHUD_LEFT", [Waves.remaining(_state)])
+	# Holding at 0:00 while a boss keeps the night going, and never more than
+	# a whole night (a parked one has its dawn out of reach).
+	var to_dawn := mini(Phases.ticks_to_dawn(_state), GameData.NIGHT_TICKS)
+	var dawn_seconds := ceili(float(to_dawn) / float(GameData.SECONDS))
+	_dawn.text = I18n.f(&"NHUD_DAWN", [dawn_seconds / 60, dawn_seconds % 60])
 
 	# **The house bar.** Width is the fraction, colour is the warning, and the
 	# pulse is what makes it impossible to look past.

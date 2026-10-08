@@ -32,6 +32,9 @@ static func initial() -> Dictionary:
 			# the space between two of its members.
 			"wait": 0,
 			"done": false,
+			# **The night tick dawn falls on** (task 0137), written by
+			# `begin()`. A whole night for a save from before it.
+			"dawn_at": GameData.NIGHT_TICKS,
 		},
 	}
 
@@ -124,6 +127,27 @@ static func _delay_in(one: Dictionary, index: int) -> int:
 	return int(one.get("gap_ticks", GameData.WAVE_GAP_TICKS))
 
 
+## **How long a night takes to send everything** (task 0137): ticks from the
+## night's first to the tick its last member is sent, counted exactly as
+## `tick()` spends them - a wave's delay, then a member every
+## `SPAWN_INTERVAL_TICKS` + 1. What `check_nights` holds inside the night.
+static func schedule_ticks(one: Dictionary) -> int:
+	if one.is_empty():
+		return 0
+	var rows: Array = one["waves"]
+	var ticks := 0
+	for i in rows.size():
+		ticks += _delay_in(one, i) + 1
+		ticks += (int((rows[i] as Array)[1]) - 1) * (interval_in(one) + 1)
+	return ticks
+
+
+## The ticks between two members of a wave: the house pace, or a night's own
+## (`interval_ticks`) - which a generated night sets so it fits before dawn.
+static func interval_in(one: Dictionary) -> int:
+	return int(one.get("interval_ticks", GameData.SPAWN_INTERVAL_TICKS))
+
+
 ## Start a night. Called by `Phases.begin_night()`.
 static func begin(state: Dictionary) -> void:
 	var rows := table_tonight(state)
@@ -133,6 +157,8 @@ static func begin(state: Dictionary) -> void:
 	wave["done"] = rows.is_empty()
 	wave["wait"] = 0 if rows.is_empty() \
 		else _delay_in(tonight(state), 0)
+	# Dawn, counted on `night_tick` from this night's first.
+	wave["dawn_at"] = GameData.NIGHT_TICKS
 
 
 ## One tick of things arriving. Called from `Sim._tick_night()`.
@@ -175,7 +201,7 @@ static func tick(state: Dictionary) -> void:
 	wave["left"] = int(wave["left"]) - 1
 
 	if int(wave["left"]) > 0:
-		wave["wait"] = GameData.SPAWN_INTERVAL_TICKS
+		wave["wait"] = interval_in(tonight(state))
 		return
 
 	# That wave is all out. Move to the next one and wait its gap.

@@ -75,6 +75,15 @@ const DUSK_AT_TICK := (DUSK_MINUTE - DAY_START_MINUTE) * DAY_TICKS \
 ## not the run.
 const PASS_OUT_PREPARATION_TICKS := 30 * SECONDS  # LEVER: ticks, 15-60 seconds worth
 
+## **The night ends at 06:00** (task 0137): the waves' length from the build
+## step's end to dawn - the plan's three to five real minutes - the same
+## after a 21:00 bedtime and after a pass-out. A house still standing at
+## dawn wins the night; killing everything sooner still does.
+const NIGHT_TICKS := 240 * SECONDS     # LEVER: ticks, 180-300 seconds worth
+## Every night sends its last member at least this long before dawn, so the
+## last wave has time to arrive and be fought (`check_nights`).
+const DAWN_MARGIN_TICKS := 60 * SECONDS  # LEVER: ticks, 30-120 seconds worth
+
 
 # ===================================================================== the farm
 
@@ -1824,6 +1833,14 @@ static func validate() -> Array:
 			or PASS_OUT_PREPARATION_TICKS >= Sim.MOST_TICKS_IN_A_NIGHT:
 		errors.append("the build step after passing out is %d ticks, outside 1..%d"
 			% [PASS_OUT_PREPARATION_TICKS, Sim.MOST_TICKS_IN_A_NIGHT - 1])
+	# **Dawn comes before the bound that catches a night that never ends**
+	# (task 0137), and leaves the night some room after its margin.
+	if NIGHT_TICKS <= 0 or NIGHT_TICKS >= Sim.MOST_TICKS_IN_A_NIGHT:
+		errors.append("the night is %d ticks to dawn, outside 1..%d"
+			% [NIGHT_TICKS, Sim.MOST_TICKS_IN_A_NIGHT - 1])
+	if DAWN_MARGIN_TICKS < 0 or DAWN_MARGIN_TICKS >= NIGHT_TICKS:
+		errors.append("the margin before dawn is %d ticks of a %d-tick night"
+			% [DAWN_MARGIN_TICKS, NIGHT_TICKS])
 
 	return errors
 
@@ -2572,6 +2589,16 @@ static func check_nights(nights: Array) -> Array:
 				errors.append("night %d wave %d waits less than no time"
 					% [n + 1, w + 1])
 
+	# **Every night is sent inside the night** (task 0137): its schedule ends
+	# `DAWN_MARGIN_TICKS` before dawn, so the last wave has time to arrive.
+	for n in nights.size():
+		if typeof(nights[n]) != TYPE_DICTIONARY or not (nights[n] as Dictionary).has("waves"):
+			continue
+		var sent := Waves.schedule_ticks(nights[n])
+		if sent + DAWN_MARGIN_TICKS > NIGHT_TICKS:
+			errors.append(("night %d takes %d ticks to send, which leaves less "
+				+ "than DAWN_MARGIN_TICKS before dawn at %d") % [n + 1, sent, NIGHT_TICKS])
+
 	# **The endless curve may not invent an enemy**, which is task 0070's own
 	# requirement, and may not name a boss: the Giant arrives on the schedule
 	# in `ENDLESS.giant_every`, and one rolled out of the weighted mix would
@@ -2624,7 +2651,7 @@ static func check_nights(nights: Array) -> Array:
 ## whatever was added last.
 static func digest() -> int:
 	return State.hash_of({
-		"time": [TICK_HZ, DAY_TICKS, DUSK_AT_TICK,
+		"time": [TICK_HZ, DAY_TICKS, DUSK_AT_TICK, NIGHT_TICKS, DAWN_MARGIN_TICKS,
 			DAY_START_MINUTE, DAY_END_MINUTE, DUSK_MINUTE,
 			PASS_OUT_PREPARATION_TICKS,
 			MAX_CATCH_UP_TICKS],

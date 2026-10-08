@@ -218,6 +218,7 @@ ITEM_WOOD,0,wood,madeira
 LOG_BOSS,0,the giant is coming,o gigante está vindo
 LOG_CRAFT_DONE,0,%s finished,%s ficou pronto
 LOG_CROP_READY,0,%s is ready,%s está pronto
+LOG_DAWN,0,dawn - %d walked off,amanheceu - %d foram embora
 LOG_HOUSE_HIT,0,the house is hit - %d left,a casa foi atingida - %d de vida
 LOG_NIGHT_BEGAN,0,night %d begins,a noite %d começa
 LOG_NIGHT_LOST,0,night %d lost,noite %d perdida
@@ -227,6 +228,7 @@ LOG_STRUCTURE_LOST,0,%s destroyed,%s destruído
 LOG_TITLE,0,WHAT HAPPENED,O QUE ACONTECEU
 LOG_WAVE_BEGAN,0,wave %d of %d: %s,onda %d de %d: %s
 NHUD_BOSS,0,%s  %d/%d,%s  %d/%d
+NHUD_DAWN,110,DAWN %d:%02d,AMANHECER %d:%02d
 NHUD_FLARE,46,FLARE,SINAL
 NHUD_FLARE_CHARGE,46,%d%%,%d%%
 NHUD_HOUSE,120,HOUSE %d/%d,CASA %d/%d

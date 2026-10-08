@@ -54,6 +54,7 @@ const SEVERITY := {
 	&"night_won": &"good",
 	&"night_lost": &"bad",
 	&"passed_out": &"warn",
+	&"dawn": &"good",
 }
 
 ## Severity -> the theme role it is written in.
@@ -257,6 +258,8 @@ static func line_for(event: Dictionary) -> String:
 			return I18n.f(&"LOG_NIGHT_LOST", [int(event.get("night", 0))])
 		&"passed_out":
 			return I18n.t(&"LOG_PASSED_OUT")
+		&"dawn":
+			return I18n.f(&"LOG_DAWN", [int(event.get("walked", 0))])
 	return ""
 
 

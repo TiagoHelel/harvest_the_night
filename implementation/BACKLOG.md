@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`###########.............`  **131 / 296 done**
+`###########.............`  **132 / 296 done**
 
-0 doing / 165 todo / 0 blocked across 18 phases.
+0 doing / 164 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-165 task(s) left, the ready ones first, then what they
+164 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -107,24 +107,40 @@ The last three legacy strips: A009's craft, trade and repair in the 32px body. R
   - done when: FHD captures (`python tools/shot.py 0125 --fhd`, with an earlier leaf's mid-verb scenario or a new one) of craft at the workshop, trade at the stall and repair on the house, by day and in the dark, in `implementation/shots/0125/`, opened
   - done when: The sim and data hashes are unchanged (art never moves them)
 
-### 0137 - The night ends at 06:00
+### 0138 - Waking up: the morning report
 
-Ready to pick up.  Likely files: `src/core/sim.gd, src/core/phases.gd, src/core/waves.gd, src/core/game_data.gd, src/core/events.gd, src/ui/night_hud.gd, src/ui/log_panel.gd, assets/locale/strings.csv, src/tools/determinism.gd, src/tools/night_road.gd, src/tools/nights.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, tools/nights.py`.
+Ready to pick up.  Likely files: `src/core/phases.gd, src/core/house.gd, src/ui/result_screen.gd, src/ui/house_view.gd, src/ui/main.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/autoplay.gd, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd, implementation/backlog/packs/A057-morning-report.md`.
 
-The night has an end you know in advance: 06:00. A house still standing at dawn is a won night and whatever is left walks off into the light; killing everything sooner still wins.
+Every night, won or lost, closes on a morning report, and confirming it starts the day with the farmer getting out of bed at 06:00.
 
-- `NIGHT_TICKS := 240 * SECONDS` (`# LEVER`, 180-300 seconds worth: the plan's three to five real minutes) is the waves' length from `begin_night` to dawn, the same after a 21:00 bedtime and after a pass-out. `validate()`: below `Sim.MOST_TICKS_IN_A_NIGHT`
-- `begin_night` writes the dawn tick into the state (e.g. `wave.dawn_at`, a TABLES field whose `initial()` is `NIGHT_TICKS`, so an old save gets a whole night) and `Phases.ticks_to_dawn(state)` reads it. The park of 0118's `NightRoad` (today's `_park_the_waves`) parks dawn too (`dawn_at` out of reach), so parked nights still never end
-- In `Sim._tick_night`, after `Combat.tick`: still NIGHT and `night_tick >= dawn_at` -> `Rewards.settle(state, true)` and `Phases.enter_result(state, true)` with the survivors still on the farm; `begin_day`'s `Enemies.withdraw` and `EnemyRetreats` walk them off. A `dawn` event (a new `Events.KINDS` entry with a severity in `log_panel.gd` and a sample in `_task_0090_log`) with `LOG_DAWN` ('dawn - %d walked off', en and pt_BR). The house at 0 still loses and `_test_for_the_end` still wins early
-- Interim until 0153: dawn does not end a night while a boss is on the farm (`Combat.boss_here`), so night 10 still ends only with the Giant or the house down, and the run can never end with the Giant standing
-- `check_nights`: every night's schedule (the opening, each wave's members x `SPAWN_INTERVAL_TICKS`, the gaps) ends at least a margin `# LEVER` before `NIGHT_TICKS`; a headless assert samples the endless curve (nights 11-40, a few seeds) against the same rule, from the schedule functions and without playing a night; `tools/nights.py` (through `src/tools/nights.gd`) prints each night's schedule against the night
-- The night HUD shows the time left to dawn as a countdown (`NHUD_DAWN`), never a wall clock - after a pass-out a 22:00-06:00 mapping would lie - holding at 0:00 while a boss keeps the night going. Skip and 1x/2x/4x simply run to dawn
-- Owns `_task_0027_the_loop` ('ends by itself' becomes 'ends at dawn or when everything is dead'), `_task_0055_speed` (skip runs to dawn) and the `Sim.skip_night` in input_check's `_case_0082_shots` (~4461). `determinism.gd` stops calling `enter_result` directly and fights until the night ends itself: SIM moves on purpose (that, and `wave` gains `dawn_at`), record both numbers. DATA moves too: `NIGHT_TICKS` and the margin join the `time` row of `digest()`. A bounty only for kills is 0219's
+- `begin_day` wakes him in bed: `House.wake(state)` puts him inside on the floor cell beside the bed - `inside` true, `asleep` and `passed_out` false, `outside_pos` the porch - so he walks out of the door into the day, and the clock reads 06:00. The wake animation 0129 registered plays (A001 stand-in until 0143)
+- Tests and tools that walk the farmer outside after a night step him out with `House.leave` or a helper (the determinism scenario's second day, `Autoplay._a_day`, the suites' `_to_the_next_night`-style helpers); list the ones touched in the journal. The autoplayer keeps working
+- `result_screen.gd` becomes the morning report: a heading with the day, what came in (the `Rewards` lines), what was lost (stock taken on a loss, structures lost), how many walked off at dawn, a line when the night began with a pass-out, and a leftovers line that says nothing is on the farm yet (phase 13's bones and moon stones fill it). Confirming is the same `confirm_result` intent. The ending and endless branches stay as they are (0160 reworks them)
+- An optional header, a sunrise over the farmhouse, through the placeholder road (a code-drawn band is enough) until A057 is integrated by 0289; if the owner declines A057 the band stays
+- `main._bank_if_a_night_ended` banks every night's end, won or lost (key it on `day` or `last_result`, not `nights_won`), without `Stats.fold` counting a night twice
+- Strings in both languages, and the report fits 480x270 in both; a row nothing prints any more leaves strings.csv. The input cases that read `ResultScreen` keep passing: `_case_0027_the_loop` (~1303), `_case_0070_endless` (~3616) and `_case_0082_shots`' crowding check (~4466). SIM moves on purpose (where `begin_day` leaves the farmer): record both numbers
 
-  - done when: `_task_0137_dawn` in `headless_v1.gd` (write a near `dawn_at` into the test's state rather than playing 240 s, so the group stays a few seconds): a night whose horde cannot reach the house ends at exactly `dawn_at` with `survived` true, and the survivors are gone after `begin_day`; killing everything ends it sooner; a house at 0 before dawn loses; `check_nights` refuses a schedule longer than the night
-  - done when: `Sim.skip_night` from mid-night takes at most the ticks left to dawn and lands in RESULT
-  - done when: `python tools/nights.py` shows all ten nights inside the night with their margins; the numbers are in the journal
-  - done when: `python tools/shot.py 0137 wave` opened: the dawn countdown is on screen
+  - done when: `_task_0138_morning` in `headless_v1.gd`: after a won and after a lost night, `confirm_result` leaves him inside beside the bed, awake, at `day_tick` 0 and 06:00; a state saved and loaded in RESULT confirms into the same
+  - done when: `_case_0138_morning` in `input_v1.gd`: the report shows its lines; confirming brings up the house view; a lost night writes the run save (the saved `day` matches)
+  - done when: The Deliverables table of `implementation/backlog/packs/A057-morning-report.md` states the final geometry this task settled
+  - done when: `python tools/shot.py 0138 result` opened, also with `--pt_BR`: nothing clipped or overlapping
+
+### 0139 - The night HUD for the guardian
+
+Ready to pick up.  Likely files: `src/ui/night_hud.gd, src/ui/day_hud.gd, src/ui/hotbar.gd, src/ui/ui_kit.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/input_v1.gd`.
+
+One night HUD built for the guardian rather than for a farmer in the yard: the time to dawn, the house, the wave, START, speed, skip, the flare and the hotbar, all reachable by mouse and by pad.
+
+- Top strip: the night, wave x/y, the dawn countdown (0137) and the house bar against `Phases.house_full` (the boss bar stays where it is). Bottom: the hotbar (0133). Bottom right: START in the build step; speed, skip and the flare with its charge during the waves
+- A mode hint line says what a confirm does now - place, upgrade, sell, repair or aim - with the key or the pad glyph from 0121, following the cursor's state
+- Skip becomes a button whose tooltip is its refusal (`Sim.why_not_skip`), and the day HUD's `SkipLine` read-out goes. The farmer-centric REPAIR button is gone (0134). The day HUD's `NightButton` belongs to 0127 and 0140 and is not touched here
+- Every control writes an intent or asks the driver, as today; on a pad each one is reachable by focus or by its own action
+- Icons through the placeholder road until A005 is integrated by 0147
+- Rewrite `_case_0056_night_hud` (and `_task_0056_night_hud` where it reads the old layout) and the `SkipLine` read in `_case_0055_speed` (~3178); remove strings nothing reads any more (`DHUD_SKIP` and `DHUD_SKIP_NO`; 0134 already took `NHUD_REPAIR`) so `tools/i18n_check.py` stays clean
+- View only: neither hash moves
+
+  - done when: `_case_0139_night_hud` in `input_v1.gd`: START is up in the build step and starts the waves; speed cycles 1/2/4; skip is refused under `SKIP_MIN_HOUSE_PERCENT` with its reason and allowed above it; the flare shows its charge; no `RepairButton` exists; the hint changes with what is under the cursor
+  - done when: `python tools/shot.py 0139 dusk wave` and `--fhd` captures opened, also with `--pt_BR`: no two labels on top of each other and nothing over the hotbar
 
 ### 0140 - The day HUD: the hour and bedtime
 
@@ -209,41 +225,6 @@ The cursor's seven states in drawn pixels, from Codex pack A004, replacing 0131'
   - done when: FHD (1920x1080) captures by day and by night of the art in the real game - the cursor in each state over dark ground - opened and looked at, in `implementation/shots/0146/`
   - done when: The sim and data hashes are unchanged (art never moves them)
 
-### 0138 - Waking up: the morning report
-
-Waits on 0137.  Likely files: `src/core/phases.gd, src/core/house.gd, src/ui/result_screen.gd, src/ui/house_view.gd, src/ui/main.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/autoplay.gd, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd, implementation/backlog/packs/A057-morning-report.md`.
-
-Every night, won or lost, closes on a morning report, and confirming it starts the day with the farmer getting out of bed at 06:00.
-
-- `begin_day` wakes him in bed: `House.wake(state)` puts him inside on the floor cell beside the bed - `inside` true, `asleep` and `passed_out` false, `outside_pos` the porch - so he walks out of the door into the day, and the clock reads 06:00. The wake animation 0129 registered plays (A001 stand-in until 0143)
-- Tests and tools that walk the farmer outside after a night step him out with `House.leave` or a helper (the determinism scenario's second day, `Autoplay._a_day`, the suites' `_to_the_next_night`-style helpers); list the ones touched in the journal. The autoplayer keeps working
-- `result_screen.gd` becomes the morning report: a heading with the day, what came in (the `Rewards` lines), what was lost (stock taken on a loss, structures lost), how many walked off at dawn, a line when the night began with a pass-out, and a leftovers line that says nothing is on the farm yet (phase 13's bones and moon stones fill it). Confirming is the same `confirm_result` intent. The ending and endless branches stay as they are (0160 reworks them)
-- An optional header, a sunrise over the farmhouse, through the placeholder road (a code-drawn band is enough) until A057 is integrated by 0289; if the owner declines A057 the band stays
-- `main._bank_if_a_night_ended` banks every night's end, won or lost (key it on `day` or `last_result`, not `nights_won`), without `Stats.fold` counting a night twice
-- Strings in both languages, and the report fits 480x270 in both; a row nothing prints any more leaves strings.csv. The input cases that read `ResultScreen` keep passing: `_case_0027_the_loop` (~1303), `_case_0070_endless` (~3616) and `_case_0082_shots`' crowding check (~4466). SIM moves on purpose (where `begin_day` leaves the farmer): record both numbers
-
-  - done when: `_task_0138_morning` in `headless_v1.gd`: after a won and after a lost night, `confirm_result` leaves him inside beside the bed, awake, at `day_tick` 0 and 06:00; a state saved and loaded in RESULT confirms into the same
-  - done when: `_case_0138_morning` in `input_v1.gd`: the report shows its lines; confirming brings up the house view; a lost night writes the run save (the saved `day` matches)
-  - done when: The Deliverables table of `implementation/backlog/packs/A057-morning-report.md` states the final geometry this task settled
-  - done when: `python tools/shot.py 0138 result` opened, also with `--pt_BR`: nothing clipped or overlapping
-
-### 0139 - The night HUD for the guardian
-
-Waits on 0137.  Likely files: `src/ui/night_hud.gd, src/ui/day_hud.gd, src/ui/hotbar.gd, src/ui/ui_kit.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/input_v1.gd`.
-
-One night HUD built for the guardian rather than for a farmer in the yard: the time to dawn, the house, the wave, START, speed, skip, the flare and the hotbar, all reachable by mouse and by pad.
-
-- Top strip: the night, wave x/y, the dawn countdown (0137) and the house bar against `Phases.house_full` (the boss bar stays where it is). Bottom: the hotbar (0133). Bottom right: START in the build step; speed, skip and the flare with its charge during the waves
-- A mode hint line says what a confirm does now - place, upgrade, sell, repair or aim - with the key or the pad glyph from 0121, following the cursor's state
-- Skip becomes a button whose tooltip is its refusal (`Sim.why_not_skip`), and the day HUD's `SkipLine` read-out goes. The farmer-centric REPAIR button is gone (0134). The day HUD's `NightButton` belongs to 0127 and 0140 and is not touched here
-- Every control writes an intent or asks the driver, as today; on a pad each one is reachable by focus or by its own action
-- Icons through the placeholder road until A005 is integrated by 0147
-- Rewrite `_case_0056_night_hud` (and `_task_0056_night_hud` where it reads the old layout) and the `SkipLine` read in `_case_0055_speed` (~3178); remove strings nothing reads any more (`DHUD_SKIP` and `DHUD_SKIP_NO`; 0134 already took `NHUD_REPAIR`) so `tools/i18n_check.py` stays clean
-- View only: neither hash moves
-
-  - done when: `_case_0139_night_hud` in `input_v1.gd`: START is up in the build step and starts the waves; speed cycles 1/2/4; skip is refused under `SKIP_MIN_HOUSE_PERCENT` with its reason and allowed above it; the flare shows its charge; no `RepairButton` exists; the hint changes with what is under the cursor
-  - done when: `python tools/shot.py 0139 dusk wave` and `--fhd` captures opened, also with `--pt_BR`: no two labels on top of each other and nothing over the hotbar
-
 ### 0141 - Teaching the new night
 
 Waits on 0139, 0140.  Likely files: `src/core/game_data.gd, src/core/tutorial.gd, src/core/sim.gd, src/ui/tutorial_prompt.gd, src/tools/perf_names.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
@@ -263,7 +244,7 @@ Day one teaches the new night - go to bed, build with the cursor, press START, h
 
 ### 0142 - The autoplayer sleeps too
 
-Waits on 0137, 0138.  Likely files: `src/tools/autoplay.gd, src/tools/autoplay_run.gd, src/tools/nights.gd, src/tools/play_nights.gd, tools/autoplay.py, tools/nights.py, tools/balance.py, tools/play_nights.py, implementation/BALANCE.md, src/tools/headless_check.gd`.
+Waits on 0138.  Likely files: `src/tools/autoplay.gd, src/tools/autoplay_run.gd, src/tools/nights.gd, src/tools/play_nights.gd, tools/autoplay.py, tools/nights.py, tools/balance.py, tools/play_nights.py, implementation/BALANCE.md, src/tools/headless_check.gd`.
 
 The autoplayer plays the game as it now is - a day, bed, building by cursor, START, the night to dawn - and keeps playing after a loss, so the balance tools measure the real loop again.
 
@@ -317,7 +298,7 @@ A small sunrise over the farmhouse heads 0138's morning report. Optional: if the
 
 ### 0148 - Checkpoint: is the night better with him asleep?
 
-Waits on 0137, 0138, 0139, 0140, 0141, 0142.  Likely files: `implementation/PROGRESS.md, implementation/shots/0148/, implementation/prompts/`.
+Waits on 0138, 0139, 0140, 0141, 0142.  Likely files: `implementation/PROGRESS.md, implementation/shots/0148/, implementation/prompts/`.
 
 **The plan's Phase 1 test.** Play the new night - the farmer asleep, the cursor, START, dawn - with a mouse and with a pad, and answer honestly whether it is better than the MVP's night. Every later phase waits on the answer.
 
@@ -517,7 +498,7 @@ Days 7 and 14 of every season are Full Moon nights: a bigger horde, double the p
 
 ### 0153 - Boss nights repeat until the boss falls
 
-Waits on 0151, 0137.  Likely files: `src/core/waves.gd, src/core/phases.gd, src/core/calendar.gd, src/core/rewards.gd, src/core/sim.gd, src/core/game_data.gd, src/ui/result_screen.gd, src/ui/night_hud.gd, assets/locale/strings.csv, src/tools/perf_check.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/shot.gd`.
+Waits on 0151.  Likely files: `src/core/waves.gd, src/core/phases.gd, src/core/calendar.gd, src/core/rewards.gd, src/core/sim.gd, src/core/game_data.gd, src/ui/result_screen.gd, src/ui/night_hud.gd, assets/locale/strings.csv, src/tools/perf_check.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/shot.gd`.
 
 Day 14 of every season is the season's boss night, and the season does not end until that boss is down. A boss alive at dawn walks off with the rest and is back the next night - without the loss penalty, and without the farm losing a day of crops and animals.
 
@@ -856,7 +837,7 @@ The one pond becomes three with about twelve species, each with its place, seaso
 
 ### 0186 - Barns at night
 
-Waits on 0183, 0137.  Likely files: `src/core/farm.gd, src/core/livestock.gd, src/core/repair.gd, src/core/pathing.gd, src/core/run.gd, src/core/crafting.gd, src/core/interact.gd, src/core/game_data.gd, src/ui/world_view.gd, src/ui/placeholder_art.gd, src/tools/shot.gd, src/tools/headless_v1.gd`.
+Waits on 0183.  Likely files: `src/core/farm.gd, src/core/livestock.gd, src/core/repair.gd, src/core/pathing.gd, src/core/run.gd, src/core/crafting.gd, src/core/interact.gd, src/core/game_data.gd, src/ui/world_view.gd, src/ui/placeholder_art.gd, src/tools/shot.gd, src/tools/headless_v1.gd`.
 
 At night the animals sleep inside and the barn becomes something to defend: breakers go for it, and a wrecked barn stands useless until it is mended. No animal ever dies.
 
@@ -1634,7 +1615,7 @@ Nothing changes for the player. The decoy, the bait, the digger and the rat swar
 
 ### 0219 - Essence
 
-Waits on 0196, 0137, 0152.  Likely files: `src/core/rewards.gd, src/core/tech.gd, src/core/game_data.gd, src/ui/night_hud.gd, src/ui/result_screen.gd, src/ui/tech_panel.gd, assets/locale/strings.csv, implementation/BALANCE.md, src/tools/headless_check.gd, src/tools/headless_v1.gd`.
+Waits on 0196, 0152.  Likely files: `src/core/rewards.gd, src/core/tech.gd, src/core/game_data.gd, src/ui/night_hud.gd, src/ui/result_screen.gd, src/ui/tech_panel.gd, assets/locale/strings.csv, implementation/BALANCE.md, src/tools/headless_check.gd, src/tools/headless_v1.gd`.
 
 The night stops paying like a day. It hands over essence - today's technology points under a new name - for holding the farm, and a smaller purse, so money is what the day earns and the night spends (plan section 4.6).
 
@@ -3202,7 +3183,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0124** [Art: the farmer chopping, mining, collecting and carrying](prompts/0124-art-farmer-gather-work.md) - waits for art A008
 - [ ] **0125** [Art: the farmer crafting, trading and repairing](prompts/0125-art-farmer-make-work.md) - waits for art A009
 
-## 10 - Sleep is the night  (11/23)
+## 10 - Sleep is the night  (12/23)
 
 - [x] **0126** [The clock: 06:00 to 02:00](prompts/0126-clock.md)
 - [x] **0127** [Going to bed starts the night](prompts/0127-bed.md)
@@ -3215,18 +3196,18 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0134** [Repairing by cursor](prompts/0134-repair-by-cursor.md)
 - [x] **0135** [The flare goes where you aim it](prompts/0135-aimed-flare.md)
 - [x] **0136** [The build step waits for START](prompts/0136-start-button.md)
-- [ ] **0137** [The night ends at 06:00](prompts/0137-dawn-ends-night.md)
-- [ ] **0138** [Waking up: the morning report](prompts/0138-morning-report.md) - needs 0137
-- [ ] **0139** [The night HUD for the guardian](prompts/0139-night-hud-guardian.md) - needs 0137
+- [x] **0137** [The night ends at 06:00](prompts/0137-dawn-ends-night.md)
+- [ ] **0138** [Waking up: the morning report](prompts/0138-morning-report.md)
+- [ ] **0139** [The night HUD for the guardian](prompts/0139-night-hud-guardian.md)
 - [ ] **0140** [The day HUD: the hour and bedtime](prompts/0140-day-hud-clock.md)
 - [ ] **0141** [Teaching the new night](prompts/0141-tutorial-sleep.md) - needs 0139, 0140
-- [ ] **0142** [The autoplayer sleeps too](prompts/0142-autoplay-sleep.md) - needs 0137, 0138
+- [ ] **0142** [The autoplayer sleeps too](prompts/0142-autoplay-sleep.md) - needs 0138
 - [ ] **0143** [Art: going to bed, sleeping, waking, passing out](prompts/0143-art-farmer-bed.md) - waits for art A001
 - [ ] **0144** [Art: the farmer's reactions and Zzz](prompts/0144-art-reactions.md) - waits for art A002
 - [ ] **0145** [Art: the porch guardian](prompts/0145-art-guardian.md) - waits for art A003
 - [ ] **0146** [Art: the guardian's cursor](prompts/0146-art-cursor.md) - waits for art A004
 - [ ] **0147** [Art: the night hotbar and HUD icons](prompts/0147-art-night-icons.md) - needs 0139 - waits for art A005
-- [ ] **0148** [Checkpoint: is the night better with him asleep?](prompts/0148-checkpoint-sleep.md) - needs 0137, 0138, 0139, 0140, 0141, 0142
+- [ ] **0148** [Checkpoint: is the night better with him asleep?](prompts/0148-checkpoint-sleep.md) - needs 0138, 0139, 0140, 0141, 0142
 
 ## 11 - Calendar and seasons  (0/16)
 
@@ -3234,7 +3215,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0150** [Nights looked up by the calendar](prompts/0150-calendar-lookup.md) - needs 0149
 - [ ] **0151** [The night is the calendar day](prompts/0151-night-is-calendar.md) - needs 0150
 - [ ] **0152** [Full Moon nights](prompts/0152-full-moon.md) - needs 0151
-- [ ] **0153** [Boss nights repeat until the boss falls](prompts/0153-boss-nights.md) - needs 0151, 0137
+- [ ] **0153** [Boss nights repeat until the boss falls](prompts/0153-boss-nights.md) - needs 0151
 - [ ] **0154** [The calm night after a boss](prompts/0154-calm-night.md) - needs 0153
 - [ ] **0155** [Losing a night when the calendar moves on](prompts/0155-losing-calendar.md) - needs 0151, 0153
 - [ ] **0156** [The 1.0 farm map](prompts/0156-farm-map-v1.md) - needs 0151
@@ -3270,7 +3251,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0183** [The coop and the barn](prompts/0183-coop-barn.md) - needs 0156
 - [ ] **0184** [Feeding, eggs and milk](prompts/0184-feeding-products.md) - needs 0183, 0168
 - [ ] **0185** [Sheep, pigs and the dog](prompts/0185-sheep-pigs-dog.md) - needs 0184
-- [ ] **0186** [Barns at night](prompts/0186-barns-at-night.md) - needs 0183, 0137
+- [ ] **0186** [Barns at night](prompts/0186-barns-at-night.md) - needs 0183
 - [ ] **0187** [Days in a barrel: the keg and the preserves jar](prompts/0187-keg-and-jar.md) - needs 0184, 0168, 0149, 0186
 - [ ] **0188** [The dairy, the loom and the mill](prompts/0188-dairy-loom-mill.md) - needs 0187, 0185
 - [ ] **0189** [The shipping bin](prompts/0189-shipping-bin.md) - needs 0148, 0138, 0156
@@ -3306,7 +3287,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 ## 13 - Weapons of the night  (0/28)
 
 - [ ] **0218** [Room for more fields and more bodies](prompts/0218-perf-groundwork.md) - needs 0196
-- [ ] **0219** [Essence](prompts/0219-essence.md) - needs 0196, 0137, 0152
+- [ ] **0219** [Essence](prompts/0219-essence.md) - needs 0196, 0152
 - [ ] **0220** [The technology tree by season](prompts/0220-tech-by-season.md) - needs 0219, 0149
 - [ ] **0221** [What the night leaves behind](prompts/0221-night-loot.md) - needs 0219, 0152
 - [ ] **0222** [Bone meal](prompts/0222-bone-meal.md) - needs 0221, 0165

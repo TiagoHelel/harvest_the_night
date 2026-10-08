@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 17
+const GROUPS := 18
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -86,6 +86,7 @@ func _run() -> void:
 	_task_0134_cursor_repair()
 	_task_0135_aimed_flare()
 	_task_0136_start()
+	_task_0137_dawn()
 
 
 func _finish() -> void:
@@ -1575,3 +1576,102 @@ func _task_0136_start() -> void:
 	expect(int(early["phase"]) == Phases.NIGHT and int(early["night_tick"]) <= 1,
 		"or sooner, on START", str(early["night_tick"]))
 	_completed += 1
+
+
+## 0137 - the night ends at 06:00. A near `dawn_at` is written into each
+## state rather than playing four minutes.
+func _task_0137_dawn() -> void:
+	# **A horde that cannot reach the house: the night ends at exactly dawn,
+	# won, and whoever is left walks off with the morning.**
+	var held := _a_night_near_dawn(1370, 45)
+	var far: Vector2i = Enemies.spawn_cells(held, 0)[0]
+	for _i in 3:
+		Entities.set_hp(held, Entities.spawn(held, &"walker", far), 9999)
+	var dawn := int((held["wave"] as Dictionary)["dawn_at"])
+	var guard := 0
+	while int(held["phase"]) == Phases.NIGHT and guard < 200:
+		Sim.advance(held, 1)
+		guard += 1
+	var result: Dictionary = held["last_result"]
+	expect(int(held["phase"]) == Phases.RESULT and int(held["night_tick"]) == dawn
+		and bool(result.get("survived", false)),
+		"the night ends at exactly dawn_at, won",
+		"%s at %d against %d" % [Phases.name_of(int(held["phase"])), int(held["night_tick"]), dawn])
+	expect(Entities.count(held) == 3, "with its survivors still on the farm",
+		str(Entities.count(held)))
+	var logged := false
+	for event in (held["events"] as Array):
+		if StringName((event as Dictionary).get("kind", &"")) == &"dawn":
+			logged = int((event as Dictionary).get("walked", -1)) == 3
+	expect(logged, "and the log says dawn came, and how many walked off")
+	Phases.begin_day(held)
+	expect(Entities.count(held) == 0, "and the morning sends them off",
+		str(Entities.count(held)))
+
+	# **Killing everything ends it sooner.**
+	var cleared := _a_night_near_dawn(1371, 600)
+	(cleared["wave"] as Dictionary)["done"] = true
+	Sim.advance(cleared, 1)
+	expect(int(cleared["phase"]) == Phases.RESULT
+		and int(cleared["night_tick"]) < int((cleared["wave"] as Dictionary)["dawn_at"])
+		and bool((cleared["last_result"] as Dictionary)["survived"]),
+		"everything dead before dawn is a won night, sooner")
+
+	# **A house at 0 before dawn still loses.**
+	var lost := _a_night_near_dawn(1372, 600)
+	lost["house_hp"] = 1
+	Entities.spawn(lost, &"walker", House.porch(lost))
+	guard = 0
+	while int(lost["phase"]) == Phases.NIGHT and guard < 600:
+		Sim.advance(lost, 1)
+		guard += 1
+	expect(int(lost["phase"]) == Phases.RESULT
+		and not bool((lost["last_result"] as Dictionary)["survived"]),
+		"a house at 0 before dawn loses", str(lost["last_result"]))
+
+	# **A boss holds the night past dawn** (until 0153).
+	var giant := _a_night_near_dawn(1373, 5)
+	Entities.spawn(giant, &"giant", Enemies.spawn_cells(giant, 0)[0])
+	Sim.advance(giant, 30)
+	expect(int(giant["phase"]) == Phases.NIGHT and Phases.ticks_to_dawn(giant) == 0,
+		"dawn does not end a night while a boss is on the farm",
+		Phases.name_of(int(giant["phase"])))
+
+	# **Skip runs to dawn at the latest**, from the middle of a real night.
+	var skipping := State.create(1374)
+	NightRoad.to_night(skipping)
+	skipping["house_hp"] = 1 << 20
+	Sim.advance(skipping, 200)
+	var left := Phases.ticks_to_dawn(skipping)
+	var took := Sim.skip_night(skipping)
+	expect(took > 0 and took <= left and int(skipping["phase"]) == Phases.RESULT,
+		"Sim.skip_night takes at most the ticks left to dawn and lands in RESULT",
+		"%d of %d left" % [took, left])
+
+	# **The schedule check**: a night that is still sending at dawn is refused.
+	var long: Dictionary = (GameData.NIGHTS[0] as Dictionary).duplicate(true)
+	long["waves"] = [[&"walker", GameData.NIGHT_TICKS / GameData.SPAWN_INTERVAL_TICKS + 5, 0]]
+	expect(not GameData.check_nights([long]).is_empty(),
+		"check_nights refuses a schedule longer than the night",
+		str(GameData.check_nights([long])))
+	expect(GameData.check_nights(GameData.NIGHTS).is_empty(),
+		"and the ten shipped nights are all inside it", str(GameData.check_nights(GameData.NIGHTS)))
+	# The endless curve against the same rule, from the schedule alone.
+	var outside: Array = []
+	for night in range(11, 41):
+		for seed_value in [0, 1, 7]:
+			var sent := Waves.schedule_ticks(Waves.night_of(night, seed_value))
+			if sent + GameData.DAWN_MARGIN_TICKS > GameData.NIGHT_TICKS:
+				outside.append("%d/%d:%d" % [night, seed_value, sent])
+	expect(outside.is_empty(), "endless nights 11-40 are all sent a margin before dawn",
+		str(outside.slice(0, 4)))
+	_completed += 1
+
+
+## A night with nothing scheduled and dawn `ticks` away.
+func _a_night_near_dawn(seed_value: int, ticks: int) -> Dictionary:
+	var state := State.create(seed_value)
+	NightRoad.to_night(state)
+	NightRoad.park(state)
+	(state["wave"] as Dictionary)["dawn_at"] = int(state["night_tick"]) + ticks
+	return state

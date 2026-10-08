@@ -1,7 +1,7 @@
 # 0137 - The night ends at 06:00
 
 - **Phase:** 10 - Sleep is the night
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0136
 - **Likely files:** src/core/sim.gd, src/core/phases.gd, src/core/waves.gd, src/core/game_data.gd, src/core/events.gd, src/ui/night_hud.gd, src/ui/log_panel.gd, assets/locale/strings.csv, src/tools/determinism.gd, src/tools/night_road.gd, src/tools/nights.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, tools/nights.py
 

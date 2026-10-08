@@ -87,8 +87,12 @@ func _run() -> void:
 	NightRoad.press_start(state)
 	rolling = _advance_sampling(state, NightRoad.build_ticks_left(state),
 		rolling)
-	rolling = _advance_sampling(state, 3000, rolling)   # a night being fought
-	Phases.enter_result(state, true)
+	# **A night fought until it ends itself** (task 0137): everything killed,
+	# or dawn, or the house - never `enter_result` by hand.
+	var fought := 0
+	while int(state["phase"]) == Phases.NIGHT and fought < Sim.MOST_TICKS_IN_A_NIGHT:
+		rolling = _advance_sampling(state, SAMPLE_EVERY, rolling)
+		fought += SAMPLE_EVERY
 	rolling = _advance_sampling(state, 200, rolling)    # the payout on screen
 	Phases.begin_day(state)
 

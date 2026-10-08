@@ -47,8 +47,17 @@ func _init() -> void:
 	var enemies := 0
 	var money := 0
 	var seen: Dictionary = {}
+	# **Each night against the night** (task 0137): when its last member is
+	# sent, and how long that leaves before dawn - which `check_nights` holds
+	# at `DAWN_MARGIN_TICKS` or more.
+	print("  dawn at %ds; every night must be sent %ds before it"
+		% [GameData.NIGHT_TICKS / GameData.SECONDS,
+			GameData.DAWN_MARGIN_TICKS / GameData.SECONDS])
+	print("")
 	for night in range(1, last + 1):
-		print("  " + Waves.summary_of(night, seed_value))
+		var sent := Waves.schedule_ticks(Waves.night_of(night, seed_value))
+		print("  %s   sent by %ds, %ds before dawn" % [Waves.summary_of(night, seed_value),
+			sent / GameData.SECONDS, (GameData.NIGHT_TICKS - sent) / GameData.SECONDS])
 		enemies += Waves.size_of(night, seed_value)
 		money += Waves.reward_of(night, seed_value)
 		for id in GameData.sorted_names(Waves.kinds_of(night,

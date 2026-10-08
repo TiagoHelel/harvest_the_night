@@ -4037,9 +4037,13 @@ func _task_0027_the_loop() -> void:
 		"and never all at once - they walk out of the dark in a line",
 		str(most_at_once))
 
-	# **The night ends by itself**, one way or the other.
+	# **The night ends at dawn or when everything is dead** (task 0137), one
+	# way or the other - and never later than dawn.
 	expect(int(sent["phase"]) == Phases.RESULT,
-		"the night ended on its own", Phases.name_of(int(sent["phase"])))
+		"the night ended at dawn or with everything dead",
+		Phases.name_of(int(sent["phase"])))
+	expect(int(sent["night_tick"]) <= GameData.NIGHT_TICKS,
+		"and no later than dawn", str(sent["night_tick"]))
 
 	# **An undefended farm loses.** Twelve walkers at five damage against a
 	# hundred hit points, and nothing shooting back.
@@ -10278,6 +10282,9 @@ func _task_0055_speed() -> void:
 		"%d against %d" % [watched["house_hp"], skipped["house_hp"]])
 	expect(int(skipped["phase"]) != Phases.NIGHT,
 		"and the night is over", str(skipped["phase"]))
+	# **Skip runs to dawn at the latest** (task 0137).
+	expect(skipped_ticks <= GameData.NIGHT_TICKS,
+		"and skipping never runs past dawn", str(skipped_ticks))
 
 	# **And at 4x as well**, which is the same claim through the other door.
 	var quick := _a_night_to_run(3703)
@@ -15381,6 +15388,7 @@ func _task_0090_log() -> void:
 		&"night_won": {"night": 3},
 		&"night_lost": {"night": 4},
 		&"passed_out": {"day": 3},       # task 0128
+		&"dawn": {"walked": 4},          # task 0137
 	}
 	for kind in Events.KINDS:
 		expect(samples.has(kind),

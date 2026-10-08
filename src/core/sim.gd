@@ -173,6 +173,23 @@ static func _tick_night(state: Dictionary) -> void:
 	Traps.tick(state)
 	Towers.tick(state)
 	Combat.tick(state)
+	_test_for_dawn(state)
+
+
+## **Dawn** (task 0137): a house still standing at 06:00 has won the night,
+## and whatever is still on the farm walks off into the light when the day
+## begins (`Enemies.withdraw`). Last in the night's order, so a house that
+## fell this tick has already lost. **Not while a boss is here** - until
+## 0153 the Giant's night ends with the Giant or the house.
+static func _test_for_dawn(state: Dictionary) -> void:
+	if int(state["phase"]) != Phases.NIGHT:
+		return
+	var dawn := int((state["wave"] as Dictionary).get("dawn_at", GameData.NIGHT_TICKS))
+	if int(state["night_tick"]) < dawn or Combat.boss_here(state) != 0:
+		return
+	Events.add(state, &"dawn", {"walked": Entities.count(state)})
+	Rewards.settle(state, true)
+	Phases.enter_result(state, true)
 
 
 # ------------------------------------------------------------- skipping ahead

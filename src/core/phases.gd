@@ -143,6 +143,15 @@ static func begin_preparation(state: Dictionary) -> bool:
 	return true
 
 
+## Ticks left until dawn ends the night (task 0137), or 0. A parked night
+## (`NightRoad.park`) has its dawn out of reach.
+static func ticks_to_dawn(state: Dictionary) -> int:
+	if int(state["phase"]) != NIGHT:
+		return 0
+	var dawn := int((state["wave"] as Dictionary).get("dawn_at", GameData.NIGHT_TICKS))
+	return maxi(dawn - int(state["night_tick"]), 0)
+
+
 ## What a whole house is worth tonight, the tree included.
 static func house_full(state: Dictionary) -> int:
 	return GameData.HOUSE_HP + Tech.bonus(state, "house_hp_bonus", 0)
