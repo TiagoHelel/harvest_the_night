@@ -1,7 +1,7 @@
 # 0149 - The calendar: four seasons of fourteen days
 
 - **Phase:** 11 - Calendar and seasons
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0148
 - **Likely files:** src/core/calendar.gd (new), src/core/game_data.gd, src/ui/day_hud.gd, src/ui/names.gd, assets/locale/strings.csv, src/tools/headless_v1.gd, src/tools/input_v1.gd, src/tools/input_check.gd
 

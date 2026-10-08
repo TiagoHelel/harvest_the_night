@@ -36,7 +36,7 @@ extends "res://src/tools/input_check.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V1_CASES := 15
+const V1_CASES := 16
 
 
 func _process(delta: float) -> bool:
@@ -65,6 +65,7 @@ func _run() -> void:
 	await _case_0139_night_hud()
 	await _case_0140_bedtime()
 	await _case_0141_tutorial()
+	await _case_0149_date()
 	_finish()
 
 
@@ -1474,5 +1475,80 @@ func _case_0141_tutorial() -> void:
 		and arrow.position.y >= countdown.get_global_rect().end.y,
 		"in the night, dawn's line, its pointer up at the countdown",
 		"%s against %s" % [arrow.position, countdown.get_global_rect() if countdown else Rect2()])
+	await close_scene()
+	_completed += 1
+
+
+## 0149 - the date beside the clock: SPRING 3, SUMMER 1, in both languages;
+## its widest before the purse; and from Year 2 the year on the line under
+## it, until the evening needs that line.
+func _case_0149_date() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var day: Label = require_control("Day") as Label
+	var evening: Label = require_control("DayStatus") as Label
+	var purse: Control = require_control("icon_money") as Control
+	if driver == null or day == null or evening == null or purse == null:
+		await close_scene()
+		_completed += 1
+		return
+	var state := driver.state
+	await frames(4)
+	driver.running = false
+	state["day_tick"] = Phases.tick_at_minute(12 * 60)
+
+	# **SPRING 3 on day 3, SUMMER 1 on day 15**, in English and Portuguese.
+	for row in [[3, "SPRING 3", "PRIMAVERA 3"], [15, "SUMMER 1", "VERÃO 1"]]:
+		state["day"] = row[0]
+		for locale in ["en", "pt_BR"]:
+			I18n.use(locale)
+			await frames(3)
+			var want: String = row[1] if locale == "en" else row[2]
+			expect(day.text == want, "day %d reads %s (%s)" % [row[0], want, locale], day.text)
+		I18n.use("en")
+	expect(evening.text.is_empty(), "and in Year 1 the line under it is empty by day",
+		evening.text)
+
+	# **The widest date ends before the purse**: every season's last day,
+	# both languages.
+	var font := day.get_theme_font(&"font")
+	var font_size := day.get_theme_font_size(&"font_size")
+	var widest := 0.0
+	var widest_text := ""
+	for locale in ["en", "pt_BR"]:
+		I18n.use(locale)
+		for season in GameData.SEASONS:
+			var text := I18n.f(&"DHUD_DATE", [Names.of(season), GameData.SEASON_DAYS])
+			var wide := font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1,
+				font_size).x
+			if wide > widest:
+				widest = wide
+				widest_text = text
+	I18n.use("en")
+	expect(day.global_position.x + widest < purse.global_position.x,
+		"the widest date ends before the purse",
+		"%s: %.0f from %.0f, the purse at %.0f" % [widest_text, widest,
+			day.global_position.x, purse.global_position.x])
+
+	# **Year 2**: SPRING 1 beside the clock, YEAR 2 under it - and at dusk
+	# the evening's line takes the row back.
+	state["day"] = Calendar.year_days() + 1
+	for locale in ["en", "pt_BR"]:
+		I18n.use(locale)
+		await frames(3)
+		var year := I18n.f(&"DHUD_YEAR", [2])
+		var date := I18n.f(&"DHUD_DATE", [Names.of(&"spring"), 1])
+		expect(day.text == date and evening.text == year,
+			"on day 57 the HUD reads %s and %s under it (%s)" % [date, year, locale],
+			"%s / %s" % [day.text, evening.text])
+		expect(evening.global_position.x + font.get_string_size(year,
+			HORIZONTAL_ALIGNMENT_LEFT, -1, font_size).x < 206.0,
+			"and the year ends before the resource grid (%s)" % locale)
+	I18n.use("en")
+	state["day_tick"] = GameData.DUSK_AT_TICK
+	await frames(3)
+	expect(evening.text == I18n.t(&"DHUD_DUSK"), "at dusk the line is the evening's",
+		evening.text)
+	state["day"] = 1
 	await close_scene()
 	_completed += 1

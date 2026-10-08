@@ -100,6 +100,12 @@ const KEYS: Dictionary = {
 
 	# ---- where a recipe is made
 	&"workbench": &"STATION_WORKBENCH",
+
+	# ---- the seasons of the calendar (task 0149)
+	&"spring": &"SEASON_SPRING",
+	&"summer": &"SEASON_SUMMER",
+	&"autumn": &"SEASON_AUTUMN",
+	&"winter": &"SEASON_WINTER",
 }
 
 ## And what each tech node promises, which is a sentence rather than a name.

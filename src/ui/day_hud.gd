@@ -90,8 +90,8 @@ const FLASH_SECONDS := 0.45
 ## HUD had six colour constants to keep in step.
 const LIT_TINT := Color(1.55, 1.45, 1.10)
 
-## The clock, the day beside it and the evening's line under the day: the
-## clock is in the heading face across both rows of the bar.
+## The clock, the date beside it (task 0149) and the evening's line under
+## the date: the clock is in the heading face across both rows of the bar.
 const CLOCK_AT := Vector2(4, 2)
 const DAY_AT := Vector2(68, 3)
 const STATUS_AT := Vector2(68, 14)
@@ -149,10 +149,12 @@ func _ready() -> void:
 	_clock = _label("Clock", CLOCK_AT, UiKit.HEADING)
 	_clock.text = I18n.f(&"DHUD_CLOCK", [6, 0])
 	_day = _label("Day", DAY_AT, UiKit.WARM)
-	_day.text = I18n.t(&"DHUD_DAY_FIRST")
+	_day.text = I18n.f(&"DHUD_DATE", [Names.of(GameData.SEASONS[0]), 1])
 	_status = _label("DayStatus", STATUS_AT, UiKit.DIM)
 
-	# Reserve the full Portuguese dusk label before the money group.
+	# **The date ends before the money group**: its widest, PRIMAVERA 14, is
+	# 69 of the 74 pixels up to the purse (`DHUD_DATE`'s width, measured by
+	# 0149's case). The year never shares that row - it has the line below.
 	_icon(GameData.MONEY, Vector2(144, 3))
 	_money = _label("Money", Vector2(156, 3), UiKit.WARM)
 	_money.text = I18n.t(&"DHUD_MONEY_FIRST")
@@ -361,8 +363,12 @@ func _refresh(force: bool) -> void:
 	_clock.theme_type_variation = UiKit.CLOCK_LATE if late else UiKit.HEADING
 	_clock.modulate = LIT_TINT if Phases.is_dusk(_state) and not late \
 		else Color.WHITE
-	_day.text = I18n.f(&"DHUD_DAY", [int(_state["day"])])
-	_refresh_evening(minute)
+	# **The date, not a count of days** (task 0149): SPRING 3, one number
+	# for the day.
+	var today := Calendar.date(_state)
+	_day.text = I18n.f(&"DHUD_DATE",
+		[Names.of(Calendar.season_id(today)), Calendar.day_of_season(today)])
+	_refresh_evening(minute, Calendar.year_of(today))
 	var money := Resources.amount(_state, GameData.MONEY)
 	if force or money != int(_last.get(GameData.MONEY, -1)):
 		if not force and _last.has(GameData.MONEY):
@@ -417,11 +423,16 @@ func _refresh(force: bool) -> void:
 		if minute >= GameData.BEDTIME_REMINDER_MINUTE else UiKit.BED
 
 
-## **The evening's line**, under the day (task 0140): dusk; then, from the
+## **The evening's line**, under the date (task 0140): dusk; then, from the
 ## reminder hour, a quiet time for bed naming the GO TO BED key (0121's
 ## names, for the device in hand); then, from the warning minute, the minutes
-## left before he passes out, in the warn colour. Nothing before dusk.
-func _refresh_evening(minute: int) -> void:
+## left before he passes out, in the warn colour.
+##
+## **Before dusk it is the year's**, from Year 2 on (task 0149). SPRING 3
+## YEAR 2 on one row is 93 pixels in English and 105 in Portuguese, and the
+## date has 74 before the purse, so the year takes the free line under it
+## and gives it up to the evening.
+func _refresh_evening(minute: int, year: int) -> void:
 	var text := ""
 	var role := UiKit.DIM
 	if minute >= GameData.PASS_OUT_WARNING_MINUTE:
@@ -434,6 +445,8 @@ func _refresh_evening(minute: int) -> void:
 			[actions.text_of(&"night") if actions != null else ""])
 	elif Phases.is_dusk(_state):
 		text = I18n.t(&"DHUD_DUSK")
+	elif year > 1:
+		text = I18n.f(&"DHUD_YEAR", [year])
 	_status.text = text
 	_status.theme_type_variation = role
 

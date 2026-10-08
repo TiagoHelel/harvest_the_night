@@ -15076,3 +15076,92 @@ implementation/prompts/{0148,0271,0272,0273,0274}-*.md,
 tools/backlog/part11.py
 
 Verify: **PASS**, 59 passed in 563 s (OVER BUDGET as before). Counts are unchanged: headless_check 16234, headless_v1 287, input_check 1064, input_v1 158.
+
+## 0149 - The calendar: four seasons of fourteen days - done 2026-10-08
+
+What changed: the farm knows what day of the year it is, and says so beside
+the clock. No rule reads it yet.
+
+**The rule** (`src/core/calendar.gd`, `class_name Calendar`, node-free,
+static):
+- `date(state)` is the calendar day. It reads `state["day"]` until 0153 holds
+  the calendar still on a boss night, and it is the only place that does.
+- The pure helpers are `year_days()`, `year_of(day)`, `season_of(day)` (0-3),
+  `day_of_season(day)` (1-14) and `season_id(day)` (`&"spring"` ...). Each
+  takes an optional season length, so a test proves a seven-day season
+  without turning the lever.
+- `season_id` was not in the prompt. It is there so the HUD and every later
+  table keyed by season ask one function, not
+  `GameData.SEASONS[season_of(day)]` again and again.
+- Day 1 is Spring 1 of Year 1, day 14 Spring 14, day 15 Summer 1, day 56
+  Winter 14, and day 57 Spring 1 of Year 2. There is no new State key.
+
+**The data** (`game_data.gd`):
+- `SEASON_DAYS := 14` (`# LEVER`, 7-28).
+- `SEASONS`: the four ids. These are names, not a lever.
+- `check_calendar()` in `validate()` refuses anything but four seasons, a
+  season named twice, and a season of fewer than two days.
+- Both are in `digest()`'s new `calendar` row.
+
+**On screen** (`day_hud.gd`): `SPRING 3` takes the day count's place beside
+the clock, one number for the day. `DHUD_DAY` and `DHUD_DAY_FIRST` are gone.
+The seasons are named through `Names.KEYS` (`SEASON_SPRING` ...).
+
+**The prompt said `SPRING 3  YEAR 2` on one row. Measured, it does not fit.**
+- The date's row has 74 pixels from the label to the purse's icon at 144.
+- `PRIMAVERA 14`, the widest date, is 69.
+- With the year it is 93 in English and 105 in Portuguese, deep into the
+  purse.
+- So the year has the line under the date, from Year 2 on: `DHUD_YEAR`,
+  "YEAR %d" / "ANO %d". That line is empty by day in Year 1. From dusk the
+  evening's line takes it back: dusk, bedtime and the pass-out warning
+  matter more than the year.
+- There is no `DHUD_DATE_YEAR`. The prompts that named it now say what
+  exists: 0158 (the night strip shows the year where it has room) and 0279
+  (`SPRING 3` and `YEAR 2` under it), each with its source in
+  `tools/backlog/part7.py` / `part11.py`.
+- `DHUD_DATE`'s width column is the real 74.
+- `i18n_check` measures a format string unfilled, so the real fit is
+  `_case_0149_date`'s.
+
+**Tests:**
+- `_task_0149_calendar` (headless_v1):
+  - the five mappings;
+  - a seven-day season through the argument (day 8 Summer 1, day 28
+    Winter 7, day 29 Year 2);
+  - `year_days() == 56`;
+  - day 20 read off a state as Summer 6, with the hash the same after
+    asking every helper;
+  - `check_calendar` passing the shipped calendar and refusing three
+    seasons, a season named twice and a one-day season.
+- `_case_0149_date` (input_v1):
+  - `SPRING 3` on day 3 and `SUMMER 1` on day 15, as `PRIMAVERA 3` and
+    `VERÃO 1` in Portuguese;
+  - nothing under the date in Year 1;
+  - the widest date, every season's day 14 in both languages, ends before
+    the purse;
+  - day 57 reads `SPRING 1` with `YEAR 2` / `ANO 2` under it, which ends
+    before the resource grid;
+  - at dusk the line is the evening's.
+- `_case_0021_day_hud` and `_case_0039_clock` (input_check) read `SPRING 1`
+  where they read `DAY 1`.
+
+**Shots:** `implementation/shots/0149/`, noon and dusk, FHD, in English and
+Portuguese, opened. `PRIMAVERA 1` / `SPRING 1` sits beside the clock, with
+`ANOITECER` / `DUSK` under it at dusk, and the purse clear of both.
+
+### Hashes
+
+| | from | to | why |
+|---|---|---|---|
+| sim hash | `3911863006` | `3911863006` | **unchanged**: no rule reads the calendar yet |
+| data hash | `3047858822` | `32942786` | `SEASONS` and `SEASON_DAYS` entered `digest()` |
+
+Files: src/core/{calendar,game_data}.gd, src/ui/{day_hud,names}.gd,
+assets/locale/strings.csv, src/tools/{headless_v1,input_v1,input_check}.gd,
+tools/determinism_data_hash.txt,
+implementation/prompts/{0158,0279}-*.md, tools/backlog/{part7,part11}.py
+
+Verify: **PASS**, 59 passed in 575 s (OVER BUDGET as before). headless_check
+16234, headless_v1 300 (+13), input_check 1064, input_v1 169 (+11), strings
+471 keys.

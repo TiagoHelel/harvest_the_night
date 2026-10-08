@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 21
+const GROUPS := 22
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -90,6 +90,7 @@ func _run() -> void:
 	_task_0138_morning()
 	_task_0140_bedtime()
 	_task_0141_tutorial()
+	_task_0149_calendar()
 
 
 func _finish() -> void:
@@ -1919,3 +1920,52 @@ func _same_but_the_lesson(a: Dictionary, b: Dictionary) -> bool:
 	left["tutorial"] = {}
 	right["tutorial"] = {}
 	return State.hash_of(left) == State.hash_of(right)
+
+
+## 0149 - the calendar: a day becomes a date through one set of pure helpers,
+## and asking them changes nothing.
+func _task_0149_calendar() -> void:
+	# **The five mappings**: [day, year, season, day of season].
+	var named := {0: &"spring", 1: &"summer", 2: &"autumn", 3: &"winter"}
+	for row in [[1, 1, 0, 1], [14, 1, 0, 14], [15, 1, 1, 1], [56, 1, 3, 14],
+			[57, 2, 0, 1]]:
+		var day: int = row[0]
+		var got := [Calendar.year_of(day), Calendar.season_of(day),
+			Calendar.day_of_season(day)]
+		expect(got == [row[1], row[2], row[3]] and Calendar.season_id(day) == named[row[2]],
+			"day %d is %s %d of year %d" % [day, named[row[2]], row[3], row[1]],
+			"%s, %s" % [got, Calendar.season_id(day)])
+	expect(Calendar.year_days() == 56 and GameData.SEASON_DAYS == 14
+		and GameData.SEASONS == [&"spring", &"summer", &"autumn", &"winter"],
+		"a year is four seasons of fourteen days, 56 in all",
+		str(Calendar.year_days()))
+
+	# **A seven-day season**, through the optional argument, not the lever.
+	expect(Calendar.year_days(7) == 28 and Calendar.season_of(7, 7) == 0
+		and Calendar.season_of(8, 7) == 1 and Calendar.day_of_season(8, 7) == 1
+		and Calendar.day_of_season(28, 7) == 7 and Calendar.season_of(28, 7) == 3
+		and Calendar.year_of(28, 7) == 1 and Calendar.year_of(29, 7) == 2,
+		"seven-day seasons: day 8 is Summer 1, day 28 Winter 7, day 29 Year 2")
+
+	# **The date is the day the run keeps**, and asking never moves a hash.
+	var state := State.create(1490)
+	state["day"] = 20
+	var before := State.hash_of(state)
+	var today := Calendar.date(state)
+	var asked := [Calendar.year_days(), Calendar.year_of(today),
+		Calendar.season_of(today), Calendar.day_of_season(today),
+		Calendar.season_id(today), Calendar.year_of(today, 7)]
+	expect(today == 20 and asked[2] == 1 and asked[3] == 6,
+		"the date is state.day: day 20 is Summer 6", str(asked))
+	expect(State.hash_of(state) == before, "and asking every helper leaves the hash alone")
+
+	# **The shape is checked.**
+	expect(GameData.check_calendar(GameData.SEASONS, GameData.SEASON_DAYS).is_empty(),
+		"the shipped calendar passes its check")
+	expect(not GameData.check_calendar([&"spring", &"summer", &"autumn"], 14).is_empty(),
+		"three seasons are refused")
+	var twice := [&"spring", &"spring", &"autumn", &"winter"]
+	expect(not GameData.check_calendar(twice, 14).is_empty(), "so is a season named twice")
+	expect(not GameData.check_calendar(GameData.SEASONS, 1).is_empty(),
+		"and a season of one day")
+	_completed += 1

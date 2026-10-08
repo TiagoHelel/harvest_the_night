@@ -628,8 +628,9 @@ TASKS = [
               "Lord ends his year with a line in the morning report "
               "(`result_screen.gd`): a new `RES_YEAR_SURVIVED` row "
               "(key,width,en,pt_BR: YEAR %d SURVIVED / ANO %d SOBREVIVIDO, "
-              "width measured). The HUD's 'SPRING 3  YEAR 2' is already 0149's "
-              "`DHUD_DATE_YEAR`; add a `year_two` scenario (a Year 2 day) to "
+              "width measured). The HUD's year is already 0149's: `SPRING 3` "
+              "beside the clock and `YEAR 2` on the line under it until dusk "
+              "(`DHUD_YEAR`); add a `year_two` scenario (a Year 2 day) to "
               "`src/tools/shot.gd` to see it",
               "`python tools/nights.py --years 3` prints Years 1-3 by season "
               "with sizes, bosses and events; generation stays a fresh "

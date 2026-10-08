@@ -69,6 +69,15 @@ const DUSK_MINUTE := 18 * 60            # LEVER: minutes, 16:00-20:00
 const DUSK_AT_TICK := (DUSK_MINUTE - DAY_START_MINUTE) * DAY_TICKS \
 	/ (DAY_END_MINUTE - DAY_START_MINUTE)
 
+## **The calendar** (task 0149): a year is the `SEASONS` in order, each
+## `SEASON_DAYS` days long, and day 1 is Spring 1 of Year 1. `Calendar`
+## (`src/core/calendar.gd`) is the one place that turns a day into a date;
+## `check_calendar()` holds the shape.
+const SEASON_DAYS := 14                 # LEVER: days a season, 7-28
+## The seasons of a year, in order. Names, not a lever: `Names.KEYS` says
+## them in the player's language.
+const SEASONS: Array = [&"spring", &"summer", &"autumn", &"winter"]
+
 ## **The short build step after passing out** (task 0128). A farmer still up
 ## at 02:00 collapses where he stands and the night begins anyway, with this
 ## much time to build: staying up late is allowed, and it costs preparation,
@@ -1849,6 +1858,7 @@ static func validate() -> Array:
 		DAY_END_MINUTE, DAY_TICKS))
 	errors.append_array(check_bedtime(DUSK_MINUTE, BEDTIME_REMINDER_MINUTE,
 		PASS_OUT_WARNING_MINUTE, DAY_END_MINUTE))
+	errors.append_array(check_calendar(SEASONS, SEASON_DAYS))
 	if PASS_OUT_PREPARATION_TICKS <= 0 \
 			or PASS_OUT_PREPARATION_TICKS >= Sim.MOST_TICKS_IN_A_NIGHT:
 		errors.append("the build step after passing out is %d ticks, outside 1..%d"
@@ -1888,6 +1898,21 @@ static func check_bedtime(dusk: int, reminder: int, warning: int, end: int) -> A
 		return []
 	return ["bedtime runs dusk %d, reminder %d, warning %d, end %d - not in that order"
 		% [dusk, reminder, warning, end]]
+
+
+## The calendar's shape (task 0149): four seasons, each named once, and a
+## season long enough to have a first day and a last.
+static func check_calendar(seasons: Array, season_days: int) -> Array:
+	var errors: Array = []
+	if seasons.size() != 4:
+		errors.append("a year has %d seasons, not four" % seasons.size())
+	for i in seasons.size():
+		if seasons.find(seasons[i]) != i:
+			errors.append("the season '%s' is in the year twice" % seasons[i])
+	if season_days < 2:
+		errors.append("a season of %d days has no first day and last day apart"
+			% season_days)
+	return errors
 
 
 ## The cost field has to be able to represent every step it can be asked to
@@ -2684,6 +2709,7 @@ static func digest() -> int:
 			DAY_START_MINUTE, DAY_END_MINUTE, DUSK_MINUTE,
 			PASS_OUT_PREPARATION_TICKS,
 			MAX_CATCH_UP_TICKS],
+		"calendar": [SEASONS, SEASON_DAYS],
 		"farm": [GRID_WIDTH, GRID_HEIGHT, TILE_SIZE, HOUSE_HP,
 			PLAYER_SPEED],
 		"house": [HOUSE_SIZE, SHOP_SIZE, HOUSE_ROOM, HOUSE_DOOR,

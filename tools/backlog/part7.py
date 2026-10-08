@@ -704,7 +704,10 @@ TASKS = [
               "all day is an option of 0292's",
               "Moved here from 0151: the night HUD's top strip (0139) names "
               "the date beside its night label with 0149's helper and "
-              "`DHUD_DATE`/`DHUD_DATE_YEAR` (`SPRING 3`), through the waves "
+              "`DHUD_DATE` (`SPRING 3`) - and from Year 2 the year, "
+              "`DHUD_YEAR`, wherever the strip has room for it (0149 measured "
+              "`SPRING 3  YEAR 2` at 93 px in English and 105 in Portuguese, "
+              "too wide for the day HUD's row) - through the waves "
               "too, so the plan's 'season, night and wave' is on screen",
               "Pure functions and view only: SIM and DATA must not move"],
          dod=["`_task_0158_forecast` in `src/tools/headless_v1.gd`: for a "

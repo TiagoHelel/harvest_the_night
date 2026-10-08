@@ -1029,7 +1029,8 @@ func _case_0021_day_hud() -> void:
 	# asks each what it is for rather than what it happened to read the day
 	# it was written.
 	var clock_label: Label = require_control("Clock")
-	expect(day_label != null and day_label.text.begins_with("DAY 1"),
+	# The date since task 0149: day 1 is Spring 1.
+	expect(day_label != null and day_label.text == "SPRING 1",
 		"it says which day", day_label.text if day_label else "")
 	expect(clock_label != null and clock_label.text.contains(":"),
 		"and what time it is", clock_label.text if clock_label else "")
@@ -2635,7 +2636,7 @@ func _case_0039_clock() -> void:
 	var evening_line: Label = require_control("DayStatus")
 	expect(clock != null, "there is a clock")
 	await frames(2)
-	expect(day_label != null and day_label.text.begins_with("DAY 1"),
+	expect(day_label != null and day_label.text == "SPRING 1",
 		"saying which day", day_label.text if day_label else "")
 	# The hour since task 0126: the day starts at 06:00 on a 24-hour clock.
 	expect(clock != null and clock.text.contains("06:0"),

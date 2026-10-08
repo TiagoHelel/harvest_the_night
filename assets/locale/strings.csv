@@ -166,8 +166,7 @@ DHUD_AMMO_ONE,0,%s %d,%s %d
 DHUD_BEDTIME,140,time for bed - %s,hora de dormir - %s
 DHUD_BITE,0,A BITE - PRESS SPACE,FISGOU - APERTE ESPAÇO
 DHUD_CLOCK,0,%02d:%02d,%02d:%02d
-DHUD_DAY,70,DAY %d,DIA %d
-DHUD_DAY_FIRST,0,DAY 1,DIA 1
+DHUD_DATE,74,%s %d,%s %d
 DHUD_DUSK,140,DUSK,ANOITECER
 DHUD_HELD,0,%s %d,%s %d
 DHUD_MONEY,0,$ %d,$ %d
@@ -182,6 +181,7 @@ DHUD_TO_NIGHT,0,GO TO BED,IR DORMIR
 DHUD_WAITING,0,waiting for a bite,esperando fisgar
 DHUD_WATER,0,WATER %d/%d,ÁGUA %d/%d
 DHUD_WATER_EMPTY,0,WATER  fill at the well,ÁGUA  encha no poço
+DHUD_YEAR,140,YEAR %d,ANO %d
 DMG_EXPLOSIVE,0,explosive,explosivo
 DMG_FIRE,0,fire,fogo
 DMG_IMPACT,0,impact,impacto
@@ -337,6 +337,10 @@ SAVE_NO_MIGRATION,0,this version cannot bring that run forward,esta versão não
 SAVE_TOO_SHORT,0,the file is too small to be a save,o arquivo é pequeno demais para ser um save
 SAVE_TRUNCATED,0,the file was cut short,o arquivo foi cortado pela metade
 SAVE_UNREADABLE,0,THE SAVED RUN COULD NOT BE READ,A PARTIDA SALVA NÃO PÔDE SER LIDA
+SEASON_AUTUMN,0,AUTUMN,OUTONO
+SEASON_SPRING,0,SPRING,PRIMAVERA
+SEASON_SUMMER,0,SUMMER,VERÃO
+SEASON_WINTER,0,WINTER,INVERNO
 SHOP_ALL,0,all,tudo
 SHOP_BUY,0,BUY,COMPRAR
 SHOP_BUY_ROW,0,%s  @ $%d   %d left,%s  @ $%d   %d restam

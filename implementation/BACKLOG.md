@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`###########.............`  **139 / 296 done**
+`###########.............`  **140 / 296 done**
 
-0 doing / 157 todo / 0 blocked across 18 phases.
+0 doing / 156 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-157 task(s) left, the ready ones first, then what they
+156 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -173,23 +173,44 @@ The icons of the night - the eight defences, the flare, START, speed and the moo
   - done when: FHD (1920x1080) captures by day and by night of the art in the real game - the hotbar and the night HUD in the build step and mid-wave - opened and looked at, in `implementation/shots/0147/`
   - done when: The sim and data hashes are unchanged (art never moves them)
 
-### 0149 - The calendar: four seasons of fourteen days
+### 0150 - Nights looked up by the calendar
 
-Ready to pick up.  Likely files: `src/core/calendar.gd (new), src/core/game_data.gd, src/ui/day_hud.gd, src/ui/names.gd, assets/locale/strings.csv, src/tools/headless_v1.gd, src/tools/input_v1.gd, src/tools/input_check.gd`.
+Ready to pick up.  Likely files: `src/core/waves.gd, src/core/endless.gd, src/core/run.gd, src/core/tech.gd, src/core/rewards.gd, src/core/game_data.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd`.
 
-The farm learns what day of the year it is. Every rule of this phase hangs off one small set of pure helpers, and the player sees 'SPRING 3' beside the clock - before a single rule reads it.
+Before the night number changes meaning, every question about which night is which goes through one lookup, and nothing in the rules asks `MVP_NIGHTS` any more. A port: the same ten nights, the same Endless past them, the same hashes.
 
-- `src/core/calendar.gd` (`class_name Calendar`, node-free, static): `date(state)` - the calendar day, which is `state["day"]` until 0153 adds the boss hold, and the one place that knows it - plus pure `year_of(date)`, `season_of(date)` (0-3), `day_of_season(date)` (1-14) and `year_days()`. Each pure helper takes an optional season length, so a test can prove a seven-day season without editing the lever
-- `GameData.SEASON_DAYS := 14  # LEVER: days a season, 7-28` and `SEASONS: Array` of the ids `spring`, `summer`, `autumn`, `winter` (names, not a lever); `validate()` gains `check_calendar` (four seasons, a season of at least two days), and both go into `digest()` (0112's coverage assert)
-- No new State key and no rule reads the calendar yet: day 1 is Spring 1 of Year 1, day 14 Spring 14, day 15 Summer 1, day 56 Winter 14, day 57 Spring 1 of Year 2
-- The day HUD shows the date beside 0126's HH:MM clock: `SPRING 3`, and `SPRING 3  YEAR 2` from the second year on. It takes the place of the day count in the clock line (`DAY %d` in `DHUD_DAY` / `DHUD_DAY_FIRST`, as 0126 and 0140 left them): one number for the day, not two. Rewrite in place the input_check cases that read `DAY 1` (`_case_0021_day_hud`, `_case_0039_clock`) and drop any row nothing reads any more. Season names go through `Names.KEYS` (`spring` -> `SEASON_SPRING`, ...) so `tools/i18n_check.py` sees literal keys
-- `assets/locale/strings.csv` rows, both languages: `SEASON_SPRING` SPRING / PRIMAVERA, `SEASON_SUMMER` SUMMER / VERÃO, `SEASON_AUTUMN` AUTUMN / OUTONO, `SEASON_WINTER` WINTER / INVERNO, `DHUD_DATE` `%s %d` / `%s %d`, `DHUD_DATE_YEAR` `%s %d  YEAR %d` / `%s %d  ANO %d`; the width is the label's real width, measured
-- The night HUD keeps its night number for now: `night` is not the date until 0151, and 0158 names the date there
-- Hashes: SIM must not move. DATA moves once, because the calendar levers enter `digest()` - both numbers in the journal
+- Split the lookup in two in `src/core/waves.gd`: `Waves.plain_night(night, seed)` is the record as written - the authored row for days `1..Waves.authored_count()` (today's ten, `NIGHTS.size()`), `Endless.night(seed, day)` after them, defined for every day of every year - and `Waves.night_of(night, seed)` is the record the night actually fights: `plain_night` plus the calendar's rules. There are none yet; 0152-0154 add theirs there and nowhere else. With no rule, `night_of` hands back the authored row itself, not a copy
+- Every pure question keeps going through `night_of` (`table`, `size_of`, `kinds_of`, `spawns_of`, `reward_of`, `summary_of`, `delay_before`, `tonight`); tests of the authored curve and of the endless curve (`_task_0059`, `_task_0060`, and `_task_0070`'s 'it grows', 'deals out every body it promised' and 'both sides') read `plain_night`, so the Full Moon, boss and calm rules of 0152-0154 do not fight them. No new record format: 0270 owns that
+- Core readers of `MVP_NIGHTS` ask a named question instead: `Endless.is_generated`, `step_of` and `_size` use `Waves.authored_count()`, and `_size`'s base is the last authored night's plain size (through `plain_night`, not `Waves.size_of`), so a calendar rule on that date never moves the whole curve; `Run.is_over`, `is_final_night` and `go_endless` use a new `Run.final_night()` (the last authored night in this task; 0151 makes it the year's last day, 0160 the winter boss); `Tech.total_available()` and `least_available()` count `Run.final_night()` nights
+- `Rewards._lines` and `_money_from` scale with `state["night"]`, which becomes the calendar day in 0151: read it through one helper (e.g. `Rewards.night_step(state)`) so 0219 and 0278 retune a 56-night year in one place; nights 1-10 pay exactly what they pay today
+- `check_nights`' `nights.size() != MVP_NIGHTS` rule becomes: at least one authored night and no more than `Calendar.year_days()`
+- The other test reads of `MVP_NIGHTS` that only mean 'the authored nights' become `Waves.authored_count()` as a plain rename: `_task_0003_game_data` ('ten nights'), `_a_full_farm` (for `_task_0038_idle`), `_task_0058_giant` and `_task_0068_balance`. `MVP_NIGHTS` then survives only for `_task_0066_run_end` and input_check's `_case_0070_endless` (both about the run's end, which 0151 changes), the tools (`autoplay.gd`, `nights.gd`, `play_nights.gd`, `perf_check.gd`) and its line in `digest()`; its comment says 0151 deletes it
+- Rewrite `_task_0059`, `_task_0060`, `_task_0061`, `_task_0062` and `_task_0070` in `src/tools/headless_check.gd` over the lookup and the named questions: `_ten_of` becomes one copy per authored night, 'the Giant on night ten' becomes 'on the last authored night', the endless asserts compare `plain_night` with `Endless.night` and read 'past the authored nights'. Keep what each asserted and its run time
+- Hashes: SIM and DATA both stay where they are. If either moves, find out why before going on
 
-  - done when: `_task_0149_calendar` in `src/tools/headless_v1.gd` asserts the five mappings above, a seven-day season through the optional argument, `year_days() == 56`, and that a state's hash is the same before and after asking every helper
-  - done when: `_case_0149_date` in `src/tools/input_v1.gd` reads `SPRING 3` on day 3 and `SUMMER 1` on day 15 from the day HUD, in English and in Portuguese (`PRIMAVERA 3`, `VERÃO 1`)
-  - done when: `python tools/shot.py 0149 noon dusk --fhd` and the same with `--pt_BR`, opened: the date sits by the clock and nothing overlaps
+  - done when: `grep -rn MVP_NIGHTS src/core` finds only its declaration and the `digest()` line
+  - done when: The five rewritten groups pass, and the journal has one line per group on what changed in it
+  - done when: `python tools/nights.py 20` prints the same twenty lines as before the change (diff the two outputs; the result goes in the journal)
+  - done when: `_task_0150_lookup` in `src/tools/headless_v1.gd`: every day 1-112 resolves to a non-empty record for seeds 0 and 424242; `night_of(1)` is the same object as `GameData.NIGHTS[0]` (`is_same`); `Tech.least_available()` is `tech_points` x `Run.final_night()`, and `Run.final_night()` equals `Waves.authored_count()` - the one line 0151 changes to `Calendar.year_days()`
+
+### 0159 - Seasons on screen
+
+Ready to pick up.  Likely files: `src/ui/season_view.gd (new), src/ui/season_remap.gdshader (new), src/ui/ambient_motion.gdshader, tools/palette.py, tools/gen_sprites.py, src/ui/palette_data.gd (generated), src/ui/world_view.gd, src/ui/particles.gd, src/ui/placeholder_art.gd, src/tools/shot.gd, src/tools/input_v1.gd, src/tools/headless_v1.gd`.
+
+The same farm through the year: today's green in spring, warmer in summer, ochre and rust in autumn, snow in winter - all of it in the view, with not one rule touched.
+
+- A palette remap shader (`src/ui/season_remap.gdshader`) on the terrain, edge and prop layers: each season maps the grass and foliage palette entries onto other palette entries (spring is today's art, summer warmer, autumn ochre and rust). The tables live in `tools/palette.py` and reach `PaletteData` through `python tools/gen_sprites.py` (its `palette_gd()` writes only `COLOURS` and `RAMPS` today: extend it); a uniform switches the season, and the terrain - drawn once - is never redrawn for it. A CanvasItem has one material and the trees already carry `ambient_motion.gdshader` for the wind: put the remap inside that shader (or a shared include) for them
+- Winter stand-in until A012 and A013 are integrated by 0163 and 0164: the remap turns grass and foliage to the palette's pale colours (`bone`, `bone_dark`, `moon`, `stone_light`). No new `COLOURS` entry: the raster importer maps sources onto that palette, so a new colour could change imported art. Register the winter paths the seasonal lookup asks for (`terrain/<name>_winter`, `props/tree_<season>`, the caps) in 0120's registry under A012 and A013, resolving to the base frame, so `python tools/placeholders.py` lists both packs until 0163 and 0164 delete the entries
+- Hooks so those leaves only add frames: a seasonal lookup (e.g. `SeasonView.frame_for(name, season)`) returns `<name>_<season>` when the art lookup of 0120 has it and the base name otherwise; a seasonal terrain atlas, when one exists, is swapped onto the terrain `TileMapLayer`'s tile set; the remap leaves alone a raster frame that already carries its season, and still remaps a registered stand-in
+- Snowfall in winter in `src/ui/particles.gd`, honouring `a11y/particle_density` and the `video/max_particles` cap
+- Snow on roofs by a code mask: in winter the top rows of the house's, the stations' and the stall's opaque roof pixels draw in `bone`/`moon` (the occupant sprites in `world_view.gd`; `house_view.gd` is the interior and has no roof). No new art: if the shots fail, say so in the journal and propose a pack rather than drawing one
+- The season comes from `Calendar.season_of(Calendar.date(state))` and changes on the morning of a season's first day, behind 0138's wake-up, never mid-frame
+- New shot scenarios `season_summer`, `season_autumn`, `season_winter` and `season_winter_night`: a date in each season, framed like `noon`
+- View only: nothing in `src/core/` changes, and SIM and DATA must not move
+
+  - done when: `_case_0159_seasons` in `src/tools/input_v1.gd`: the remap's season and the snowfall follow the date (off in spring, on in winter), and the terrain layer is not redrawn when the season changes
+  - done when: `python tools/gen_sprites.py --check` (or a `_task_0159_palette` group in `src/tools/headless_v1.gd`) checks that every grass or foliage colour used by `terrain/` and the trees has a mapping in every season: it passes, and a scratch table missing one mapping makes it fail (tried, reverted, said so in the journal)
+  - done when: `python tools/shot.py 0159 noon season_summer season_autumn season_winter season_winter_night --fhd`, opened against `docs/reference-sheet.png`: each season reads at a glance and the night ramp still works over it
 
 ### 0173 - Five tools, three tiers
 
@@ -247,78 +268,6 @@ A small sunrise over the farmhouse heads 0138's morning report. Optional: if the
   - done when: The sim and data hashes are unchanged (art never moves them)
   - done when: On the decline path instead: `python tools/placeholders.py` no longer lists A057, a capture of the morning report shows the band drawn directly, and the journal quotes the owner's words
 
-### 0150 - Nights looked up by the calendar
-
-Waits on 0149.  Likely files: `src/core/waves.gd, src/core/endless.gd, src/core/run.gd, src/core/tech.gd, src/core/rewards.gd, src/core/game_data.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd`.
-
-Before the night number changes meaning, every question about which night is which goes through one lookup, and nothing in the rules asks `MVP_NIGHTS` any more. A port: the same ten nights, the same Endless past them, the same hashes.
-
-- Split the lookup in two in `src/core/waves.gd`: `Waves.plain_night(night, seed)` is the record as written - the authored row for days `1..Waves.authored_count()` (today's ten, `NIGHTS.size()`), `Endless.night(seed, day)` after them, defined for every day of every year - and `Waves.night_of(night, seed)` is the record the night actually fights: `plain_night` plus the calendar's rules. There are none yet; 0152-0154 add theirs there and nowhere else. With no rule, `night_of` hands back the authored row itself, not a copy
-- Every pure question keeps going through `night_of` (`table`, `size_of`, `kinds_of`, `spawns_of`, `reward_of`, `summary_of`, `delay_before`, `tonight`); tests of the authored curve and of the endless curve (`_task_0059`, `_task_0060`, and `_task_0070`'s 'it grows', 'deals out every body it promised' and 'both sides') read `plain_night`, so the Full Moon, boss and calm rules of 0152-0154 do not fight them. No new record format: 0270 owns that
-- Core readers of `MVP_NIGHTS` ask a named question instead: `Endless.is_generated`, `step_of` and `_size` use `Waves.authored_count()`, and `_size`'s base is the last authored night's plain size (through `plain_night`, not `Waves.size_of`), so a calendar rule on that date never moves the whole curve; `Run.is_over`, `is_final_night` and `go_endless` use a new `Run.final_night()` (the last authored night in this task; 0151 makes it the year's last day, 0160 the winter boss); `Tech.total_available()` and `least_available()` count `Run.final_night()` nights
-- `Rewards._lines` and `_money_from` scale with `state["night"]`, which becomes the calendar day in 0151: read it through one helper (e.g. `Rewards.night_step(state)`) so 0219 and 0278 retune a 56-night year in one place; nights 1-10 pay exactly what they pay today
-- `check_nights`' `nights.size() != MVP_NIGHTS` rule becomes: at least one authored night and no more than `Calendar.year_days()`
-- The other test reads of `MVP_NIGHTS` that only mean 'the authored nights' become `Waves.authored_count()` as a plain rename: `_task_0003_game_data` ('ten nights'), `_a_full_farm` (for `_task_0038_idle`), `_task_0058_giant` and `_task_0068_balance`. `MVP_NIGHTS` then survives only for `_task_0066_run_end` and input_check's `_case_0070_endless` (both about the run's end, which 0151 changes), the tools (`autoplay.gd`, `nights.gd`, `play_nights.gd`, `perf_check.gd`) and its line in `digest()`; its comment says 0151 deletes it
-- Rewrite `_task_0059`, `_task_0060`, `_task_0061`, `_task_0062` and `_task_0070` in `src/tools/headless_check.gd` over the lookup and the named questions: `_ten_of` becomes one copy per authored night, 'the Giant on night ten' becomes 'on the last authored night', the endless asserts compare `plain_night` with `Endless.night` and read 'past the authored nights'. Keep what each asserted and its run time
-- Hashes: SIM and DATA both stay where they are. If either moves, find out why before going on
-
-  - done when: `grep -rn MVP_NIGHTS src/core` finds only its declaration and the `digest()` line
-  - done when: The five rewritten groups pass, and the journal has one line per group on what changed in it
-  - done when: `python tools/nights.py 20` prints the same twenty lines as before the change (diff the two outputs; the result goes in the journal)
-  - done when: `_task_0150_lookup` in `src/tools/headless_v1.gd`: every day 1-112 resolves to a non-empty record for seeds 0 and 424242; `night_of(1)` is the same object as `GameData.NIGHTS[0]` (`is_same`); `Tech.least_available()` is `tech_points` x `Run.final_night()`, and `Run.final_night()` equals `Waves.authored_count()` - the one line 0151 changes to `Calendar.year_days()`
-
-### 0159 - Seasons on screen
-
-Waits on 0149.  Likely files: `src/ui/season_view.gd (new), src/ui/season_remap.gdshader (new), src/ui/ambient_motion.gdshader, tools/palette.py, tools/gen_sprites.py, src/ui/palette_data.gd (generated), src/ui/world_view.gd, src/ui/particles.gd, src/ui/placeholder_art.gd, src/tools/shot.gd, src/tools/input_v1.gd, src/tools/headless_v1.gd`.
-
-The same farm through the year: today's green in spring, warmer in summer, ochre and rust in autumn, snow in winter - all of it in the view, with not one rule touched.
-
-- A palette remap shader (`src/ui/season_remap.gdshader`) on the terrain, edge and prop layers: each season maps the grass and foliage palette entries onto other palette entries (spring is today's art, summer warmer, autumn ochre and rust). The tables live in `tools/palette.py` and reach `PaletteData` through `python tools/gen_sprites.py` (its `palette_gd()` writes only `COLOURS` and `RAMPS` today: extend it); a uniform switches the season, and the terrain - drawn once - is never redrawn for it. A CanvasItem has one material and the trees already carry `ambient_motion.gdshader` for the wind: put the remap inside that shader (or a shared include) for them
-- Winter stand-in until A012 and A013 are integrated by 0163 and 0164: the remap turns grass and foliage to the palette's pale colours (`bone`, `bone_dark`, `moon`, `stone_light`). No new `COLOURS` entry: the raster importer maps sources onto that palette, so a new colour could change imported art. Register the winter paths the seasonal lookup asks for (`terrain/<name>_winter`, `props/tree_<season>`, the caps) in 0120's registry under A012 and A013, resolving to the base frame, so `python tools/placeholders.py` lists both packs until 0163 and 0164 delete the entries
-- Hooks so those leaves only add frames: a seasonal lookup (e.g. `SeasonView.frame_for(name, season)`) returns `<name>_<season>` when the art lookup of 0120 has it and the base name otherwise; a seasonal terrain atlas, when one exists, is swapped onto the terrain `TileMapLayer`'s tile set; the remap leaves alone a raster frame that already carries its season, and still remaps a registered stand-in
-- Snowfall in winter in `src/ui/particles.gd`, honouring `a11y/particle_density` and the `video/max_particles` cap
-- Snow on roofs by a code mask: in winter the top rows of the house's, the stations' and the stall's opaque roof pixels draw in `bone`/`moon` (the occupant sprites in `world_view.gd`; `house_view.gd` is the interior and has no roof). No new art: if the shots fail, say so in the journal and propose a pack rather than drawing one
-- The season comes from `Calendar.season_of(Calendar.date(state))` and changes on the morning of a season's first day, behind 0138's wake-up, never mid-frame
-- New shot scenarios `season_summer`, `season_autumn`, `season_winter` and `season_winter_night`: a date in each season, framed like `noon`
-- View only: nothing in `src/core/` changes, and SIM and DATA must not move
-
-  - done when: `_case_0159_seasons` in `src/tools/input_v1.gd`: the remap's season and the snowfall follow the date (off in spring, on in winter), and the terrain layer is not redrawn when the season changes
-  - done when: `python tools/gen_sprites.py --check` (or a `_task_0159_palette` group in `src/tools/headless_v1.gd`) checks that every grass or foliage colour used by `terrain/` and the trees has a mapping in every season: it passes, and a scratch table missing one mapping makes it fail (tried, reverted, said so in the journal)
-  - done when: `python tools/shot.py 0159 noon season_summer season_autumn season_winter season_winter_night --fhd`, opened against `docs/reference-sheet.png`: each season reads at a glance and the night ramp still works over it
-
-### 0175 - The axe and the pickaxe by tier
-
-Waits on 0173.  Likely files: `src/core/interact.gd, src/core/gathering.gd, src/core/game_data.gd, src/ui/main.gd, assets/locale/strings.csv, src/tools/headless_v1.gd`.
-
-The axe and the pickaxe save time by tier, and the hardest things on the farm - hardwood stumps and gold - want the iron ones.
-
-- Fewer swings by tier: the tool's tier scales the swing in `Interact.ticks_for` or the `hits` `Gathering.strike` counts - pick one, keep it integer, and make it compose with 'sharp tools' (`gather_percent`) rather than replace it
-- A `GATHERING` entry may name a `min_tier`; below it the cell still shows its verb but the work is refused with a reason in both languages ('needs an iron axe'), never a swing that silently does nothing - through the `Interact` reason road 0171 opened (a `Building.why_not`-shaped array that `Names.refusal` words), or open it here if 0171 has not landed
-- The real gates arrive with their nodes - hardwood stumps (0177) want an iron axe, gold (0176) an iron pickaxe - so test the rule here with a rigged entry
-- `validate()` checks `min_tier` against the `TOOLS` ladder; `check_iron` and `check_reachable` still pass
-- DATA moves; SIM only if the scenario gathers with an upgraded tool
-
-  - done when: `_task_0175_swings` in `src/tools/headless_v1.gd`: an iron axe fells a tree in fewer ticks than a basic one, by the percent the lever claims; a rigged `min_tier` node refuses a basic pickaxe and yields to an iron one
-  - done when: The refusal fits its control in both languages (`tools/i18n_check.py`)
-
-### 0217 - Art: the house in three tiers
-
-Waits on 0191.  Likely files: `assets/art_source/buildings/, assets/art_source/manifest.json, tools/check_house_art.py, src/ui/art_placement.gd, src/ui/house_view.gd`.
-
-House tiers I, II and III get their approved exteriors, whole and hurt; tier III reads as a small fortified farmhouse.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A035` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A035-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/buildings/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_house_art.py`, which hard-codes `house`/`house_hurt` and their window points today - extend it per tier).
-- Runtime names: `house`, `house_hurt`, `house_2`, `house_2_hurt`, `house_3`, `house_3_hurt` with their slices (`house_<c>_<r>`, `house_2_<c>_<r>`...), `windows_xy`, `window_rects_xywh`, `light_xy` and `smoke_xy` on the same 6x4 footprint as today's house. The pack draws them at full density (128x128, pivot (64,120): today's 64x64 at 2.0), so take `house` out of `ArtPlacement.visual_scale`'s 2.0 list - it matches every file whose name starts `house_`, the tiers too - unless 0191 wrote a different density into the pack
-- Replace 0191's code-marked stand-ins and flip A035's placeholder-registry entries to raster
-- Set the pack to integrated: `python implementation/backlog/assets.py set A035 integrated`.
-
-  - done when: `python tools/check_house_art.py` and `python tools/show_art.py --house --check` pass
-  - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0217/`
-  - done when: the sim and data hashes are unchanged (art never moves them)
-
 ### 0151 - The night is the calendar day
 
 Waits on 0150.  Likely files: `src/core/phases.gd, src/core/run.gd, src/core/state.gd, src/core/tech.gd, src/core/endless.gd, src/app/save.gd, src/core/game_data.gd, src/app/playtest.gd, src/tools/nights.gd, tools/nights.py, tools/verify.py, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/autoplay.gd, src/tools/play_nights.gd, src/tools/perf_check.gd, tools/goldens/`.
@@ -354,6 +303,39 @@ Winter gets real snow on the ground: the approved snowy grass, path, soil, tille
   - done when: `python tools/check_terrain_art.py`, `python tools/check_crop_art.py` and `python tools/show_art.py --check` pass, and `python tools/import_art.py --check` passes
   - done when: FHD (1920x1080) captures by day and by night in the real game - `python tools/shot.py 0163 season_winter season_winter_night --fhd` - in `implementation/shots/0163/`, opened and looked at: no seam, edge or shore breaks the snow
   - done when: The sim and data hashes are unchanged (art never moves them)
+
+### 0175 - The axe and the pickaxe by tier
+
+Waits on 0173.  Likely files: `src/core/interact.gd, src/core/gathering.gd, src/core/game_data.gd, src/ui/main.gd, assets/locale/strings.csv, src/tools/headless_v1.gd`.
+
+The axe and the pickaxe save time by tier, and the hardest things on the farm - hardwood stumps and gold - want the iron ones.
+
+- Fewer swings by tier: the tool's tier scales the swing in `Interact.ticks_for` or the `hits` `Gathering.strike` counts - pick one, keep it integer, and make it compose with 'sharp tools' (`gather_percent`) rather than replace it
+- A `GATHERING` entry may name a `min_tier`; below it the cell still shows its verb but the work is refused with a reason in both languages ('needs an iron axe'), never a swing that silently does nothing - through the `Interact` reason road 0171 opened (a `Building.why_not`-shaped array that `Names.refusal` words), or open it here if 0171 has not landed
+- The real gates arrive with their nodes - hardwood stumps (0177) want an iron axe, gold (0176) an iron pickaxe - so test the rule here with a rigged entry
+- `validate()` checks `min_tier` against the `TOOLS` ladder; `check_iron` and `check_reachable` still pass
+- DATA moves; SIM only if the scenario gathers with an upgraded tool
+
+  - done when: `_task_0175_swings` in `src/tools/headless_v1.gd`: an iron axe fells a tree in fewer ticks than a basic one, by the percent the lever claims; a rigged `min_tier` node refuses a basic pickaxe and yields to an iron one
+  - done when: The refusal fits its control in both languages (`tools/i18n_check.py`)
+
+### 0217 - Art: the house in three tiers
+
+Waits on 0191.  Likely files: `assets/art_source/buildings/, assets/art_source/manifest.json, tools/check_house_art.py, src/ui/art_placement.gd, src/ui/house_view.gd`.
+
+House tiers I, II and III get their approved exteriors, whole and hurt; tier III reads as a small fortified farmhouse.
+
+- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A035` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
+- Use only the folder named in the pack's `CLAUDE-A035-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
+- Promote through the raster pipeline: versioned sources under `assets/art_source/buildings/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_house_art.py`, which hard-codes `house`/`house_hurt` and their window points today - extend it per tier).
+- Runtime names: `house`, `house_hurt`, `house_2`, `house_2_hurt`, `house_3`, `house_3_hurt` with their slices (`house_<c>_<r>`, `house_2_<c>_<r>`...), `windows_xy`, `window_rects_xywh`, `light_xy` and `smoke_xy` on the same 6x4 footprint as today's house. The pack draws them at full density (128x128, pivot (64,120): today's 64x64 at 2.0), so take `house` out of `ArtPlacement.visual_scale`'s 2.0 list - it matches every file whose name starts `house_`, the tiers too - unless 0191 wrote a different density into the pack
+- Replace 0191's code-marked stand-ins and flip A035's placeholder-registry entries to raster
+- Set the pack to integrated: `python implementation/backlog/assets.py set A035 integrated`.
+
+  - done when: `python tools/check_house_art.py` and `python tools/show_art.py --house --check` pass
+  - done when: `python tools/import_art.py --check` passes
+  - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0217/`
+  - done when: the sim and data hashes are unchanged (art never moves them)
 
 ### 0152 - Full Moon nights
 
@@ -492,7 +474,7 @@ Blossom in spring, colour in autumn, bare branches under snow in winter: the app
 
 ### 0165 - Crops grow by days
 
-Waits on 0149, 0151, 0156.  Likely files: `src/core/farming.gd, src/core/phases.gd, src/core/sim.gd, src/core/game_data.gd, src/app/save.gd, src/core/state.gd, src/ui/day_hud.gd, src/ui/describe.gd, src/ui/shop_panel.gd, assets/locale/strings.csv, src/tools/perf_names.gd, src/tools/perf_check.gd, tools/perf_baseline.txt, src/tools/make_goldens.gd, tools/goldens/, src/tools/autoplay.gd, src/tools/art_showcase.gd, src/tools/effect_showcase.gd, src/tools/house_check.gd, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd`.
+Waits on 0151, 0156.  Likely files: `src/core/farming.gd, src/core/phases.gd, src/core/sim.gd, src/core/game_data.gd, src/app/save.gd, src/core/state.gd, src/ui/day_hud.gd, src/ui/describe.gd, src/ui/shop_panel.gd, assets/locale/strings.csv, src/tools/perf_names.gd, src/tools/perf_check.gd, tools/perf_baseline.txt, src/tools/make_goldens.gd, tools/goldens/, src/tools/autoplay.gd, src/tools/art_showcase.gd, src/tools/effect_showcase.gd, src/tools/house_check.gd, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd`.
 
 Crops grow by days, the way the plan and Stardew have it: each morning a plot that was watered the day before moves one day along. A field becomes something you plan a week around, not a minute.
 
@@ -595,7 +577,7 @@ At dusk the farmer learns what is coming: from which sides, how many and of what
 - Strings in both languages, widths measured: `FCAST_TITLE` (TONIGHT / ESTA NOITE), `FCAST_FROM` (from the %s / pelo %s), `SIDE_EAST`, `SIDE_SOUTH_EAST`, `SIDE_NORTH`, `SIDE_WEST`, `SIDE_SOUTH` (EAST / LESTE, SOUTH-EAST / SUDESTE, NORTH / NORTE, WEST / OESTE, SOUTH / SUL), `FCAST_EVERY_SIDE` (from every side / por todos os lados), `FCAST_WAVES.one`/`.other` (%d WAVE / %d WAVES; %d ONDA / %d ONDAS), `FCAST_FULL_MOON` (FULL MOON / LUA CHEIA), `FCAST_BOSS` (%s IS COMING / %s ESTÁ VINDO), `FCAST_CALM` (A CALM NIGHT / NOITE CALMA). 0157's side ids get literal `Names.KEYS` entries (`east` -> `SIDE_EAST`, ...) so the panel names a side with `Names.of` and `tools/i18n_check.py` sees the keys; kinds through `Names.of` and the plural enemy keys
 - Stand-ins through 0120's placeholder road until A010 is integrated by 0161 and A011 by 0162: each enemy's first walk frame cropped into a 16x16 head box, and code-drawn moon, boss and season marks at 16x16 and 10x10
 - No new input path: the panel is information, and showing it all day is an option of 0292's
-- Moved here from 0151: the night HUD's top strip (0139) names the date beside its night label with 0149's helper and `DHUD_DATE`/`DHUD_DATE_YEAR` (`SPRING 3`), through the waves too, so the plan's 'season, night and wave' is on screen
+- Moved here from 0151: the night HUD's top strip (0139) names the date beside its night label with 0149's helper and `DHUD_DATE` (`SPRING 3`) - and from Year 2 the year, `DHUD_YEAR`, wherever the strip has room for it (0149 measured `SPRING 3  YEAR 2` at 93 px in English and 105 in Portuguese, too wide for the day HUD's row) - through the waves too, so the plan's 'season, night and wave' is on screen
 - Pure functions and view only: SIM and DATA must not move
 
   - done when: `_task_0158_forecast` in `src/tools/headless_v1.gd`: for a plain, a Full Moon and a calm date, the forecast's kinds, count and sides equal what the night sends (count `Enemies.spawn` through a parked run that only steps until every wave is out, keeping the group to a few seconds), and a boss date names the season's boss; 1000 calls to `Forecast.tonight` leave `state["rng"]` and the state hash unchanged
@@ -697,7 +679,7 @@ Sprinklers automate the chore: copper, iron and gold ones water the plots around
 
 ### 0179 - Fish by pond, season and hour
 
-Waits on 0149, 0156, 0165.  Likely files: `src/core/fishing.gd, src/core/game_data.gd, src/core/crafting.gd, src/app/save.gd, src/core/state.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/make_goldens.gd, tools/goldens/, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd`.
+Waits on 0156, 0165.  Likely files: `src/core/fishing.gd, src/core/game_data.gd, src/core/crafting.gd, src/app/save.gd, src/core/state.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/make_goldens.gd, tools/goldens/, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd`.
 
 The one pond becomes three with about twelve species, each with its place, season, hours and rarity, so fishing asks where and when as well as whether (plan section 3.2).
 
@@ -943,7 +925,7 @@ The coop and the barn get their approved art - whole, hurt and wrecked-but-stand
 
 ### 0170 - Crops keep to their seasons
 
-Waits on 0168, 0149, 0169.  Likely files: `src/core/game_data.gd, src/core/farming.gd, src/core/shop.gd, src/ui/day_hud.gd, src/ui/shop_panel.gd, src/ui/describe.gd, src/ui/title_screen.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/autoplay.gd, src/tools/determinism.gd, src/tools/make_goldens.gd, src/tools/perf_check.gd, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Waits on 0168, 0169.  Likely files: `src/core/game_data.gd, src/core/farming.gd, src/core/shop.gd, src/ui/day_hud.gd, src/ui/shop_panel.gd, src/ui/describe.gd, src/ui/title_screen.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/autoplay.gd, src/tools/determinism.gd, src/tools/make_goldens.gd, src/tools/perf_check.gd, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
 Each crop keeps to its season, so spring, summer and autumn fields look and pay differently, and seeds become packets bought at the stall (plan sections 3.1 and 3.6). Which packets the stall puts out in which season is 0190's, with the peddler.
 
@@ -998,7 +980,7 @@ The barn fills out: sheep give wool, pigs dig truffles, and a dog follows the fa
 
 ### 0187 - Days in a barrel: the keg and the preserves jar
 
-Waits on 0184, 0168, 0149, 0186.  Likely files: `src/core/crafting.gd, src/core/game_data.gd, src/core/phases.gd, src/ui/workshop_panel.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Waits on 0184, 0168, 0186.  Likely files: `src/core/crafting.gd, src/core/game_data.gd, src/core/phases.gd, src/ui/workshop_panel.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
 The first artisan machines: a keg and a preserves jar that turn fruit into wine, juice, jelly and pickles over days - the road for a player who wants to farm money (plan section 3.5).
 
@@ -1634,7 +1616,7 @@ The minigame of 0180 can be played by ear as well as by eye: a tick from the bar
 
 ### 0220 - The technology tree by season
 
-Waits on 0219, 0149.  Likely files: `src/core/game_data.gd, src/core/tech.gd, src/core/calendar.gd, src/ui/tech_panel.gd, src/ui/names.gd, assets/locale/strings.csv, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Waits on 0219.  Likely files: `src/core/game_data.gd, src/core/tech.gd, src/core/calendar.gd, src/ui/tech_panel.gd, src/ui/names.gd, assets/locale/strings.csv, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
 Each season opens a new floor of the tree, so summer's essence buys something spring could not and the tree grows with the year instead of being finished in the first fortnight (plan section 7).
 
@@ -2026,7 +2008,7 @@ The frost zombie as Codex drew it, in place of 0251's stand-in, with the ice sha
 
 ### 0234 - The arsenal grows with the seasons
 
-Waits on 0224, 0225, 0226, 0227, 0228, 0229, 0230, 0231, 0149, 0220, 0223.  Likely files: `src/core/game_data.gd, src/core/building.gd, src/ui/hotbar.gd, src/ui/build_mode.gd, src/ui/night_hud.gd, src/ui/world_view.gd, src/ui/transition.gd, assets/locale/strings.csv, implementation/BALANCE.md, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Waits on 0224, 0225, 0226, 0227, 0228, 0229, 0230, 0231, 0220, 0223.  Likely files: `src/core/game_data.gd, src/core/building.gd, src/ui/hotbar.gd, src/ui/build_mode.gd, src/ui/night_hud.gd, src/ui/world_view.gd, src/ui/transition.gd, assets/locale/strings.csv, implementation/BALANCE.md, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
 The arsenal arrives with the calendar - spring's six, then summer's, autumn's and winter's - and every defence costs money as well as materials, so the day's purse is what the night is built with (plan sections 2, 5 and 7).
 
@@ -2781,7 +2763,7 @@ After the Winter Lord the farm carries on, and today that means the MVP's endles
 - Later years have no introductions; the Full Moons on 7 and 14 stay - Year 1's records scaled, or generated with the Full Moon percent: decide one and assert it
 - Sides and events keep to their season as in Year 1, so each season keeps its character; the Blood Moon comes earlier only if a lever says so
 - Retire the MVP curve: `Endless` and the `ENDLESS` table, `giant_every` levers included (0153 left them to this task), leave `plain_night`, `check_nights` and `digest()` (a reader of `Endless._stream_for`, such as 0256's `Weather`, keeps the helper in its new home); `_task_0070_endless` in `src/tools/headless_check.gd` is rewritten over the later years or removed with the reason in the journal; 0160's carry-on lands in Year 2 of the calendar, and `Run`'s `endless` flag means 'past Year 1' or goes. A saved key that changes meaning gets a `State.VERSION` bump, a migration and a golden (never a key named `moon_phase`); otherwise no bump. `validate()` checks the new levers' ranges
-- 0160's ending screen shows once, after Year 1; a later Winter Lord ends his year with a line in the morning report (`result_screen.gd`): a new `RES_YEAR_SURVIVED` row (key,width,en,pt_BR: YEAR %d SURVIVED / ANO %d SOBREVIVIDO, width measured). The HUD's 'SPRING 3  YEAR 2' is already 0149's `DHUD_DATE_YEAR`; add a `year_two` scenario (a Year 2 day) to `src/tools/shot.gd` to see it
+- 0160's ending screen shows once, after Year 1; a later Winter Lord ends his year with a line in the morning report (`result_screen.gd`): a new `RES_YEAR_SURVIVED` row (key,width,en,pt_BR: YEAR %d SURVIVED / ANO %d SOBREVIVIDO, width measured). The HUD's year is already 0149's: `SPRING 3` beside the clock and `YEAR 2` on the line under it until dusk (`DHUD_YEAR`); add a `year_two` scenario (a Year 2 day) to `src/tools/shot.gd` to see it
 - `python tools/nights.py --years 3` prints Years 1-3 by season with sizes, bosses and events; generation stays a fresh `(seed, day)` stream
 - The curve stays sane to Year 3: `perf_check.gd` takes a date (e.g. `--date=<n>`, forwarded by `tools/perf.py`, which compares and accepts nothing on such a run) and times 0275's case on Year 3's heaviest night; the `balanced` policy plays into Year 2 on one seed with `Autoplay.play(seed, policy, days)`
 - Hashes: DATA moves (the new levers; `ENDLESS` leaves the digest). SIM should not - the determinism night is day 1 - unless a state key goes (e.g. `endless`), which moves it on purpose; both numbers in `implementation/PROGRESS.md`
@@ -3089,10 +3071,10 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0147** [Art: the night hotbar and HUD icons](prompts/0147-art-night-icons.md) - waits for art A005
 - [x] **0148** [Checkpoint: is the night better with him asleep?](prompts/0148-checkpoint-sleep.md)
 
-## 11 - Calendar and seasons  (0/16)
+## 11 - Calendar and seasons  (1/16)
 
-- [ ] **0149** [The calendar: four seasons of fourteen days](prompts/0149-calendar.md)
-- [ ] **0150** [Nights looked up by the calendar](prompts/0150-calendar-lookup.md) - needs 0149
+- [x] **0149** [The calendar: four seasons of fourteen days](prompts/0149-calendar.md)
+- [ ] **0150** [Nights looked up by the calendar](prompts/0150-calendar-lookup.md)
 - [ ] **0151** [The night is the calendar day](prompts/0151-night-is-calendar.md) - needs 0150
 - [ ] **0152** [Full Moon nights](prompts/0152-full-moon.md) - needs 0151
 - [ ] **0153** [Boss nights repeat until the boss falls](prompts/0153-boss-nights.md) - needs 0151
@@ -3101,7 +3083,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0156** [The 1.0 farm map](prompts/0156-farm-map-v1.md) - needs 0151
 - [ ] **0157** [A new side every season](prompts/0157-attack-sides.md) - needs 0156
 - [ ] **0158** [The forecast](prompts/0158-forecast.md) - needs 0151, 0152, 0153, 0154, 0157
-- [ ] **0159** [Seasons on screen](prompts/0159-seasons-on-screen.md) - needs 0149
+- [ ] **0159** [Seasons on screen](prompts/0159-seasons-on-screen.md)
 - [ ] **0160** [The end of the year](prompts/0160-year-end.md) - needs 0153, 0151, 0154
 - [ ] **0161** [Art: seasons and moons](prompts/0161-art-calendar-icons.md) - needs 0158 - waits for art A010
 - [ ] **0162** [Art: forecast heads](prompts/0162-art-forecast-heads.md) - needs 0158 - waits for art A011
@@ -3110,12 +3092,12 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 
 ## 12 - The day that pays  (0/53)
 
-- [ ] **0165** [Crops grow by days](prompts/0165-crops-by-days.md) - needs 0149, 0151, 0156
+- [ ] **0165** [Crops grow by days](prompts/0165-crops-by-days.md) - needs 0151, 0156
 - [ ] **0166** [A day of eight to ten minutes](prompts/0166-longer-day.md) - needs 0165
 - [ ] **0167** [Any grass can be tilled](prompts/0167-till-grass.md) - needs 0165
 - [ ] **0168** [Nine new crops](prompts/0168-crop-data.md) - needs 0165
 - [ ] **0169** [An inventory for many things](prompts/0169-inventory.md) - needs 0168
-- [ ] **0170** [Crops keep to their seasons](prompts/0170-crop-seasons.md) - needs 0168, 0149, 0169
+- [ ] **0170** [Crops keep to their seasons](prompts/0170-crop-seasons.md) - needs 0168, 0169
 - [ ] **0171** [Winter: nothing grows outside](prompts/0171-winter-rules.md) - needs 0170, 0159
 - [ ] **0172** [Crops that grow back](prompts/0172-regrowing-crops.md) - needs 0168
 - [ ] **0173** [Five tools, three tiers](prompts/0173-tool-tiers.md)
@@ -3124,7 +3106,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0176** [Copper, coal and gold](prompts/0176-copper-coal-gold.md) - needs 0175, 0156
 - [ ] **0177** [Hardwood](prompts/0177-hardwood.md) - needs 0175, 0156
 - [ ] **0178** [Sprinklers](prompts/0178-sprinklers.md) - needs 0176, 0165
-- [ ] **0179** [Fish by pond, season and hour](prompts/0179-fish-species.md) - needs 0149, 0156, 0165
+- [ ] **0179** [Fish by pond, season and hour](prompts/0179-fish-species.md) - needs 0156, 0165
 - [ ] **0180** [The fishing minigame](prompts/0180-fishing-minigame.md) - needs 0179, 0173
 - [ ] **0181** [Rods and bait](prompts/0181-rods-bait.md) - needs 0179, 0173, 0167
 - [ ] **0182** [Legendary fish and the fish book](prompts/0182-legendary-book.md) - needs 0181
@@ -3132,7 +3114,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0184** [Feeding, eggs and milk](prompts/0184-feeding-products.md) - needs 0183, 0168
 - [ ] **0185** [Sheep, pigs and the dog](prompts/0185-sheep-pigs-dog.md) - needs 0184
 - [ ] **0186** [Barns at night](prompts/0186-barns-at-night.md) - needs 0183
-- [ ] **0187** [Days in a barrel: the keg and the preserves jar](prompts/0187-keg-and-jar.md) - needs 0184, 0168, 0149, 0186
+- [ ] **0187** [Days in a barrel: the keg and the preserves jar](prompts/0187-keg-and-jar.md) - needs 0184, 0168, 0186
 - [ ] **0188** [The dairy, the loom and the mill](prompts/0188-dairy-loom-mill.md) - needs 0187, 0185
 - [ ] **0189** [The shipping bin](prompts/0189-shipping-bin.md) - needs 0156
 - [ ] **0190** [The peddler and his hours](prompts/0190-peddler.md) - needs 0170, 0183, 0185, 0173
@@ -3168,7 +3150,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 
 - [ ] **0218** [Room for more fields and more bodies](prompts/0218-perf-groundwork.md) - needs 0196
 - [ ] **0219** [Essence](prompts/0219-essence.md) - needs 0196, 0152
-- [ ] **0220** [The technology tree by season](prompts/0220-tech-by-season.md) - needs 0219, 0149
+- [ ] **0220** [The technology tree by season](prompts/0220-tech-by-season.md) - needs 0219
 - [ ] **0221** [What the night leaves behind](prompts/0221-night-loot.md) - needs 0219, 0152
 - [ ] **0222** [Bone meal](prompts/0222-bone-meal.md) - needs 0221, 0165
 - [ ] **0223** [Defences sleep under tarps](prompts/0223-defence-tarps.md) - needs 0196
@@ -3182,7 +3164,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0231** [Hardwood walls and sandbags](prompts/0231-strong-walls.md) - needs 0196, 0177, 0188, 0226
 - [ ] **0232** [Powers as a list](prompts/0232-powers-refactor.md) - needs 0196
 - [ ] **0233** [Three new powers](prompts/0233-new-powers.md) - needs 0232, 0185, 0220, 0230
-- [ ] **0234** [The arsenal grows with the seasons](prompts/0234-arsenal-by-season.md) - needs 0224, 0225, 0226, 0227, 0228, 0229, 0230, 0231, 0149, 0220, 0223
+- [ ] **0234** [The arsenal grows with the seasons](prompts/0234-arsenal-by-season.md) - needs 0224, 0225, 0226, 0227, 0228, 0229, 0230, 0231, 0220, 0223
 - [ ] **0235** [Art: bones, moon stones and essence](prompts/0235-art-night-loot.md) - needs 0221, 0222, 0219 - waits for art A036
 - [ ] **0236** [Art: the scarecrow decoy and zombie bait](prompts/0236-art-decoy.md) - needs 0224, 0225 - waits for art A037
 - [ ] **0237** [Art: the beehive](prompts/0237-art-beehive.md) - needs 0226 - waits for art A038
