@@ -15165,3 +15165,114 @@ implementation/prompts/{0158,0279}-*.md, tools/backlog/{part7,part11}.py
 Verify: **PASS**, 59 passed in 575 s (OVER BUDGET as before). headless_check
 16234, headless_v1 300 (+13), input_check 1064, input_v1 169 (+11), strings
 471 keys.
+
+## 0150 - Nights looked up by the calendar - done 2026-10-08
+
+What changed: every question about which night is which goes through one
+lookup. No rule in `src/core/` asks `MVP_NIGHTS` any more. It is a port: the
+same ten nights, the same Endless after them, the same hashes.
+
+**The lookup** (`src/core/waves.gd`):
+- `Waves.authored_count()`: how many nights a person wrote, the rows of
+  `GameData.NIGHTS`.
+- `Waves.plain_night(night, seed)`: the record as written. That is the
+  authored row up to `authored_count()`, then `Endless.night` for every day
+  of every year.
+- `Waves.night_of(night, seed)`: the record the night fights. It is
+  `plain_night` plus the calendar's rules, and there are none yet, so it
+  hands back the authored row itself. 0152-0154 add their rules there and
+  nowhere else.
+- Every pure question still goes through `night_of`: `table`, `size_of`,
+  `kinds_of`, `spawns_of`, `reward_of`, `summary_of`, `delay_before` and
+  `tonight`. `tonight` now passes the run's seed for authored nights too,
+  which changes nothing.
+- Each counting question now has a form for a record already in hand:
+  `size_in`, `kinds_in`, `reward_in`, `spawns_in`. The `_of` forms are those
+  over `night_of`.
+  - These were not in the prompt. They are how the curve's tests and
+    `Endless` read a night as written without copying `Waves`' arithmetic.
+
+**The named questions:**
+- `Endless.is_generated` and `step_of` count from `Waves.authored_count()`.
+- `Endless._size` takes its base from the last authored night as written:
+  `Waves.size_in(Waves.plain_night(authored_count()))`, so a calendar rule
+  on that date never moves the curve.
+- `Run.final_night()` (new) is the last authored night. `is_over`,
+  `is_final_night` and `go_endless` ask it. 0151 makes it the year's last day.
+- `Tech.total_available()` and `least_available()` count `Run.final_night()`
+  nights: 10 and 40 at best, as before.
+- `Rewards.night_step(state)` (new) is where `_lines` and `_money_from` read
+  how far the pay has climbed. Today it is `state["night"]`, so nights 1-10
+  pay exactly what they did. While in there, the bounty sum is back on
+  continued lines; an old edit had flattened it onto one line with tabs in
+  the middle.
+- `check_nights`' `nights.size() != MVP_NIGHTS` became "at least one written
+  night and no more than `Calendar.year_days()`".
+- `MVP_NIGHTS` keeps its declaration, now commented as read by no rule and
+  deleted by 0151, and its `digest()` line. `grep -rn MVP_NIGHTS src/core`
+  finds exactly those two.
+
+**The five rewritten groups** (`src/tools/headless_check.gd`):
+- `_task_0059_wave_data`:
+  - reads each authored night through `plain_night`;
+  - `_ten_of` became `_one_per_night` (one copy per authored night) over a
+    new `_copies_of`;
+  - `_all_enemies` and `_all_reward` add up the nights as written;
+  - "one new thing a night" and "the Giant on the last authored night" read
+    `kinds_in(plain_night)`;
+  - three asserts are new for the relaxed count: one written night is legal,
+    none is refused, a table longer than a year is refused.
+- `_task_0060_ten_nights`:
+  - the three climbing curves, the gaps, the first-seen table and "the
+    night after a new thing" read `plain_night` (`size_in`, `reward_in`,
+    `_hit_points_in` - which was `_hit_points_sent`, now over a record -
+    and `kinds_in`);
+  - the Giant is expected on `Waves.authored_count()`;
+  - the nights run start to finish still count against `night_of`, the
+    night fought.
+- `_task_0061_rewards` gains two asserts:
+  - night 9 pays exactly eight steps of `money_per_night` more than night 1
+    for the same fight;
+  - for every authored night, `night_step` is the night's number and "for
+    the night" is `base_money + money_per_night x night`.
+- `_task_0062_tech`: the floor and ceiling are a point a night times
+  `Run.final_night()`. `_ten_nights` became `_every_night` over
+  `Run.final_night()` nights.
+- `_task_0070_endless`:
+  - the generated records are read with `plain_night` and compared with
+    `Endless.night`;
+  - its nights are named as steps past `Waves.authored_count()` (11, 12,
+    15, ... as before);
+  - "it grows" starts from the last authored night as written;
+  - the seed asserts compare `size_in` and `kinds_in` of the plain records.
+- Run times are as they were: `headless_check` 72.3 s whole. 0061's new loop
+  builds ten states and runs no ticks.
+
+The plain renames to `Waves.authored_count()` are in `_task_0003_game_data`
+("ten nights" is now `authored_count() == 10`), `_a_full_farm`,
+`_task_0058_giant` and `_task_0068_balance`. `MVP_NIGHTS` is left for
+`_task_0066_run_end`, input_check's `_case_0070_endless`, the tools and
+`digest()`, as the prompt says.
+
+**`_task_0150_lookup`** (headless_v1):
+- every day 1-112 resolves to a record with waves for seeds 0 and 424242;
+- with no rule yet, `night_of` equals `plain_night` on every one;
+- `night_of(1)` and `plain_night(1)` are `GameData.NIGHTS[0]` (`is_same`);
+- the curve takes over the night after the last authored one;
+- `Run.final_night() == Waves.authored_count()`, the line 0151 changes;
+- `Tech.least_available()` is `tech_points x Run.final_night()`;
+- `night_step` reads the night.
+
+**`python tools/nights.py 20`**: the before and after outputs were diffed.
+They are identical, all 50 lines (twenty nights, the totals and the
+technology lines).
+
+### Hashes
+
+No rule or lever moved: SIM 3911863006 and DATA 32942786 are unchanged.
+
+Files: src/core/{waves,endless,run,tech,rewards,game_data}.gd,
+src/tools/{headless_check,headless_v1}.gd
+
+Verify: **PASS**, 59 passed in 549 s (OVER BUDGET as before). headless_check
+16239 (+5), headless_v1 307 (+7), input_check 1064, input_v1 169.

@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 22
+const GROUPS := 23
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -91,6 +91,7 @@ func _run() -> void:
 	_task_0140_bedtime()
 	_task_0141_tutorial()
 	_task_0149_calendar()
+	_task_0150_lookup()
 
 
 func _finish() -> void:
@@ -1968,4 +1969,48 @@ func _task_0149_calendar() -> void:
 	expect(not GameData.check_calendar(twice, 14).is_empty(), "so is a season named twice")
 	expect(not GameData.check_calendar(GameData.SEASONS, 1).is_empty(),
 		"and a season of one day")
+	_completed += 1
+
+
+## 0150 - every question about which night is which goes through one lookup:
+## `plain_night` as written, `night_of` as fought, and the run's end and its
+## technology asked of `Run.final_night()`.
+func _task_0150_lookup() -> void:
+	# **Every day of two years resolves**, for two seeds.
+	var empty: Array = []
+	var differ: Array = []
+	for seed_value in [0, 424242]:
+		for day in range(1, 2 * Calendar.year_days() + 1):
+			var fought := Waves.night_of(day, seed_value)
+			if fought.is_empty() or (fought.get("waves", []) as Array).is_empty():
+				empty.append([seed_value, day])
+			# No calendar rule yet: what is fought is what is written.
+			if str(fought) != str(Waves.plain_night(day, seed_value)):
+				differ.append([seed_value, day])
+	expect(empty.is_empty(), "every day 1-112 has a night for seeds 0 and 424242",
+		str(empty))
+	expect(differ.is_empty(), "and with no calendar rule yet it is the night as written",
+		str(differ))
+
+	# **The authored row itself, not a copy**: 0152-0154 add their rules on
+	# top, and until they do nothing is built per question.
+	expect(is_same(Waves.night_of(1), GameData.NIGHTS[0])
+		and is_same(Waves.plain_night(1), GameData.NIGHTS[0]),
+		"night_of(1) is GameData.NIGHTS[0], the same object")
+	expect(Waves.authored_count() == GameData.NIGHTS.size()
+		and Endless.is_generated(Waves.authored_count() + 1)
+		and not Endless.is_generated(Waves.authored_count()),
+		"the curve takes over the night after the last authored one")
+
+	# **The run's last night, asked in one place.** 0151 changes this line to
+	# `Calendar.year_days()`.
+	expect(Run.final_night() == Waves.authored_count(),
+		"Run.final_night() is the last authored night", str(Run.final_night()))
+	expect(Tech.least_available() == int(GameData.REWARDS["tech_points"]) * Run.final_night(),
+		"and the least technology a run pays is a point for each of its nights",
+		str(Tech.least_available()))
+	var state := State.create(1500)
+	state["night"] = 7
+	expect(Rewards.night_step(state) == 7, "Rewards.night_step reads the night",
+		str(Rewards.night_step(state)))
 	_completed += 1

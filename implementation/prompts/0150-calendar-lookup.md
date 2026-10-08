@@ -1,7 +1,7 @@
 # 0150 - Nights looked up by the calendar
 
 - **Phase:** 11 - Calendar and seasons
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0149
 - **Likely files:** src/core/waves.gd, src/core/endless.gd, src/core/run.gd, src/core/tech.gd, src/core/rewards.gd, src/core/game_data.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd
 

@@ -1944,9 +1944,10 @@ func _task_0003_game_data() -> void:
 		expect(GameData.RESOURCES.has(res), "a priced thing is a resource",
 			str(res))
 
-	# Ten nights, per design.md, and each one has at least one wave.
-	expect(GameData.NIGHTS.size() == GameData.MVP_NIGHTS, "ten nights",
-		str(GameData.NIGHTS.size()))
+	# Ten nights, per design.md, and each one has at least one wave. Counted
+	# by `Waves.authored_count()` since task 0150, the one question for it.
+	expect(Waves.authored_count() == 10, "ten nights",
+		str(Waves.authored_count()))
 	# **Through `Waves`, not into the table.** A night became a record at task
 	# 0059 and the shape of one is that module's business.
 	for n in GameData.NIGHTS.size():
@@ -6512,7 +6513,7 @@ func _a_full_farm(seed_value: int) -> Dictionary:
 				built += 1
 
 	# A night, with everything the table sends.
-	state["day"] = GameData.MVP_NIGHTS
+	state["day"] = Waves.authored_count()
 	NightRoad.to_night(state)
 	return state
 
@@ -10730,7 +10731,7 @@ func _task_0058_giant() -> void:
 	# **It arrives with company**, so the player cannot aim everything at it.
 	# Through `Waves`, not into the table: task 0059 made a night a record
 	# and the shape of it is that module's business, not this test's.
-	var last: Array = Waves.table(GameData.MVP_NIGHTS)
+	var last: Array = Waves.table(Waves.authored_count())
 	var with_it := 0
 	var boss_waves := 0
 	for row in last:
@@ -10743,9 +10744,9 @@ func _task_0058_giant() -> void:
 	expect(with_it >= 20,
 		"and a crowd of ordinary zombies around it", str(with_it))
 	var seen := 0
-	for night in range(1, GameData.MVP_NIGHTS + 1):
+	for night in range(1, Waves.authored_count() + 1):
 		seen += int(Waves.kinds_of(night).get(&"giant", 0))
-	expect(seen == 1, "and it appears once in the ten nights", str(seen))
+	expect(seen == 1, "and it appears once in the authored nights", str(seen))
 
 	# **One readable telegraph before the heavy blow.** The requirement.
 	var wind := _giant_winds_up(4300)
@@ -10995,9 +10996,11 @@ func _giant_walk_in(seed_value: int) -> int:
 
 ## 0059 - a night is a table a designer edits, not code.
 func _task_0059_wave_data() -> void:
-	# **Every night is a record with its own pace.**
-	for night in range(1, GameData.MVP_NIGHTS + 1):
-		var one := Waves.night_of(night)
+	# **Every night is a record with its own pace.** Read as written (task
+	# 0150): this is the authored curve's test, so it asks `plain_night`,
+	# which the calendar's rules (0152-0154) never touch.
+	for night in range(1, Waves.authored_count() + 1):
+		var one := Waves.plain_night(night)
 		expect(not one.is_empty(), "night %d is authored" % night)
 		# `gap_ticks` is deliberately not in this list. Task 0068 found that
 		# writing it out on all ten nights left `GameData.WAVE_GAP_TICKS`
@@ -11008,11 +11011,11 @@ func _task_0059_wave_data() -> void:
 		for field in ["note", "opening_ticks", "waves"]:
 			expect(one.has(field),
 				"night %d declares its own %s" % [night, field], str(one))
-		expect(not Waves.note_for(night).is_empty(),
+		expect(not str(one.get("note", "")).is_empty(),
 			"and says what it is for", str(night))
-		expect(not Waves.table(night).is_empty(),
+		expect(not (one.get("waves", []) as Array).is_empty(),
 			"and sends something", str(night))
-		for row in Waves.table(night):
+		for row in (one.get("waves", []) as Array):
 			expect((row as Array).size() == 3 or (row as Array).size() == 4,
 				"a wave is enemy, count, spawn, and a delay if it wants one",
 				str(row))
@@ -11034,9 +11037,9 @@ func _task_0059_wave_data() -> void:
 		"gap_ticks": 11,
 		"waves": [[&"walker", 1, 0], [&"walker", 1, 0, 99]],
 	}
-	expect(GameData.check_nights(_ten_of(own)).is_empty(),
+	expect(GameData.check_nights(_one_per_night(own)).is_empty(),
 		"a night with a per-wave delay is a legal night",
-		str(GameData.check_nights(_ten_of(own))))
+		str(GameData.check_nights(_one_per_night(own))))
 
 	# **Editing the table changes the night, with no code edit.** The
 	# done-when, put the only way it can be put honestly: what the table says
@@ -11056,14 +11059,14 @@ func _task_0059_wave_data() -> void:
 		"%s against %s" % [str(sent["spawns"]), str(Waves.spawns_of(1))])
 
 	# **Total count and total reward without running it.**
-	print("  ten nights: %d enemies worth $%d"
+	print("  the authored nights: %d enemies worth $%d"
 		% [_all_enemies(), _all_reward()])
 	expect(_all_enemies() == 290 or _all_enemies() > 0,
-		"the ten nights add up", str(_all_enemies()))
+		"the authored nights add up", str(_all_enemies()))
 	expect(sent["reward"] == Waves.reward_of(1),
 		"and killing a night through pays exactly what the table said",
 		"$%d against $%d" % [sent["reward"], Waves.reward_of(1)])
-	for night in range(1, GameData.MVP_NIGHTS + 1):
+	for night in range(1, Waves.authored_count() + 1):
 		var by_hand := 0
 		for row in Waves.table(night):
 			by_hand += int((GameData.ENEMIES[(row as Array)[0]]
@@ -11079,7 +11082,7 @@ func _task_0059_wave_data() -> void:
 		"gap_ticks": 30,
 		"waves": [[&"wakler", 3, 0]],
 	}
-	var caught := GameData.check_nights(_ten_of(typo))
+	var caught := GameData.check_nights(_one_per_night(typo))
 	expect(not caught.is_empty(),
 		"a misspelled enemy is refused", str(caught))
 	expect(str(caught[0]).contains("wakler"),
@@ -11102,63 +11105,79 @@ func _task_0059_wave_data() -> void:
 				"waves": [[&"walker", 3, 0]]},
 		]:
 		var one_bad: Dictionary = bad
-		expect(not GameData.check_nights(_ten_of(one_bad)).is_empty(),
+		expect(not GameData.check_nights(_one_per_night(one_bad)).is_empty(),
 			"refused: %s" % str(one_bad.get("note", "no note")),
-			str(GameData.check_nights(_ten_of(one_bad))))
+			str(GameData.check_nights(_one_per_night(one_bad))))
 	expect(GameData.check_nights(GameData.NIGHTS).is_empty(),
 		"and the shipped ten pass their own check",
 		str(GameData.check_nights(GameData.NIGHTS)))
 
+	# **How many are written is no longer ten exactly** (task 0150): at least
+	# one, and no more than a year has days.
+	expect(GameData.check_nights(_copies_of(own, 1)).is_empty(),
+		"one written night is a legal table",
+		str(GameData.check_nights(_copies_of(own, 1))))
+	expect(not GameData.check_nights([]).is_empty(),
+		"none is refused")
+	expect(not GameData.check_nights(_copies_of(own, Calendar.year_days() + 1))
+		.is_empty(), "and so is a table longer than a year")
+
 	# **One new thing a night**, which `design.md` section 10 asks for and the
 	# summary prints.
 	var seen: Dictionary = {}
-	for night in range(1, GameData.MVP_NIGHTS + 1):
+	for night in range(1, Waves.authored_count() + 1):
 		var fresh := 0
-		for id in GameData.sorted_names(Waves.kinds_of(night).keys()):
+		for id in GameData.sorted_names(Waves.kinds_in(Waves.plain_night(night)).keys()):
 			if not seen.has(id):
 				seen[id] = night
 				fresh += 1
 		expect(fresh <= 1,
 			"night %d introduces at most one new kind" % night, str(fresh))
 	expect(seen.size() == GameData.ENEMIES.size(),
-		"and every enemy in the table turns up in the ten nights",
+		"and every enemy in the table turns up in the authored nights",
 		str(seen))
-	expect(int(seen[&"giant"]) == GameData.MVP_NIGHTS,
-		"with the Giant on the last one", str(seen))
+	expect(int(seen[&"giant"]) == Waves.authored_count(),
+		"with the Giant on the last authored night", str(seen))
 
 	# The summary line, which is what `tools/nights.py` prints.
-	print("  " + Waves.summary_of(GameData.MVP_NIGHTS))
+	print("  " + Waves.summary_of(Waves.authored_count()))
 	expect(Waves.summary_of(1).contains("night"), "a night summarises")
 	# Task 0070 gave the nights past the tenth a curve to come from, so this
 	# used to read "nothing authored" and now reads like a night, which is the
 	# whole of that task's integration.
 	expect(Waves.summary_of(99).contains("past the ten"),
-		"and one past the end is generated rather than empty",
+		"and one past the authored nights is generated rather than empty",
 		Waves.summary_of(99))
 
 	_completed += 1     # last line: an abandoned group never gets here
 
 
-## Ten copies of one night, so `check_nights()` sees a table the right length
-## and complains about the night rather than about the count.
-func _ten_of(night: Dictionary) -> Array:
+## One copy of a night per authored night, so `check_nights()` sees a table
+## the shipped one's length and complains about the night rather than about
+## the count.
+func _one_per_night(night: Dictionary) -> Array:
+	return _copies_of(night, Waves.authored_count())
+
+
+func _copies_of(night: Dictionary, count: int) -> Array:
 	var out: Array = []
-	for _i in GameData.MVP_NIGHTS:
+	for _i in count:
 		out.append(night)
 	return out
 
 
+## What the authored nights send, as written.
 func _all_enemies() -> int:
 	var total := 0
-	for night in range(1, GameData.MVP_NIGHTS + 1):
-		total += Waves.size_of(night)
+	for night in range(1, Waves.authored_count() + 1):
+		total += Waves.size_in(Waves.plain_night(night))
 	return total
 
 
 func _all_reward() -> int:
 	var total := 0
-	for night in range(1, GameData.MVP_NIGHTS + 1):
-		total += Waves.reward_of(night)
+	for night in range(1, Waves.authored_count() + 1):
+		total += Waves.reward_in(Waves.plain_night(night))
 	return total
 
 
@@ -11214,10 +11233,13 @@ func _task_0060_ten_nights() -> void:
 	var counts: Array = []
 	var purses: Array = []
 	var weights: Array = []
-	for night in range(1, GameData.MVP_NIGHTS + 1):
-		var now_sent := Waves.size_of(night)
-		var now_money := Waves.reward_of(night)
-		var now_meat := _hit_points_sent(night)
+	# **The curve as written** (task 0150): `plain_night`, which the
+	# calendar's rules never change.
+	for night in range(1, Waves.authored_count() + 1):
+		var as_written := Waves.plain_night(night)
+		var now_sent := Waves.size_in(as_written)
+		var now_money := Waves.reward_in(as_written)
+		var now_meat := _hit_points_in(as_written)
 		counts.append(now_sent)
 		purses.append(now_money)
 		weights.append(now_meat)
@@ -11239,27 +11261,27 @@ func _task_0060_ten_nights() -> void:
 	# **The gap tightens as the run goes on**, which is difficulty that costs
 	# no extra enemies: the same crowd with less room to breathe.
 	var gaps: Array = []
-	for night in range(1, GameData.MVP_NIGHTS + 1):
-		gaps.append(int((Waves.night_of(night) as Dictionary)
+	for night in range(1, Waves.authored_count() + 1):
+		gaps.append(int((Waves.plain_night(night) as Dictionary)
 			.get("gap_ticks", GameData.WAVE_GAP_TICKS)))
 	print("  gaps:    %s ticks" % str(gaps))
-	for night in range(2, GameData.MVP_NIGHTS + 1):
+	for night in range(2, Waves.authored_count() + 1):
 		expect(int(gaps[night - 1]) <= int(gaps[night - 2]),
 			"night %d gives no more room than night %d" % [night, night - 1],
 			"%d against %d" % [gaps[night - 1], gaps[night - 2]])
-	expect(int(gaps[GameData.MVP_NIGHTS - 1]) < int(gaps[0]) / 2,
+	expect(int(gaps[gaps.size() - 1]) < int(gaps[0]) / 2,
 		"and the last night is under half the room of the first",
-		"%d against %d" % [gaps[GameData.MVP_NIGHTS - 1], gaps[0]])
+		"%d against %d" % [gaps[gaps.size() - 1], gaps[0]])
 
 	# **Section 10 exactly**: one new thing a night, on the night it says.
 	var arrives: Dictionary = {}
-	for night in range(1, GameData.MVP_NIGHTS + 1):
-		for id in GameData.sorted_names(Waves.kinds_of(night).keys()):
+	for night in range(1, Waves.authored_count() + 1):
+		for id in GameData.sorted_names(Waves.kinds_in(Waves.plain_night(night)).keys()):
 			if not arrives.has(id):
 				arrives[id] = night
 	print("  first seen: %s" % str(arrives))
 	for pair in [[&"walker", 1], [&"runner", 3], [&"tank", 5],
-			[&"breaker", 7], [&"giant", 10]]:
+			[&"breaker", 7], [&"giant", Waves.authored_count()]]:
 		var id: StringName = (pair as Array)[0]
 		expect(int(arrives.get(id, 0)) == int((pair as Array)[1]),
 			"the %s arrives on night %d, as design.md section 10 says"
@@ -11270,10 +11292,10 @@ func _task_0060_ten_nights() -> void:
 	# new problem while they can still afford to get it wrong.
 	for id in GameData.sorted_names(arrives.keys()):
 		var first := int(arrives[id])
-		if first >= GameData.MVP_NIGHTS:
+		if first >= Waves.authored_count():
 			continue
-		var then := int(Waves.kinds_of(first).get(id, 0))
-		var after := int(Waves.kinds_of(first + 1).get(id, 0))
+		var then := int(Waves.kinds_in(Waves.plain_night(first)).get(id, 0))
+		var after := int(Waves.kinds_in(Waves.plain_night(first + 1)).get(id, 0))
 		expect(after > then,
 			"more %s on night %d than on the night it arrived"
 				% [id, first + 1], "%d against %d" % [after, then])
@@ -11296,8 +11318,9 @@ func _task_0060_ten_nights() -> void:
 	expect(not bare["held"],
 		"an undefended farm loses night one", str(bare))
 
-	# **Every night plays start to finish.** No night that cannot end.
-	for night in range(1, GameData.MVP_NIGHTS + 1):
+	# **Every night plays start to finish.** No night that cannot end. These
+	# are fought, so they are counted against `night_of`, the night fought.
+	for night in range(1, Waves.authored_count() + 1):
 		var ran := _run_a_night_out(night)
 		expect(ran["ended"],
 			"night %d ends on its own" % night, str(ran))
@@ -11308,10 +11331,10 @@ func _task_0060_ten_nights() -> void:
 	_completed += 1     # last line: an abandoned group never gets here
 
 
-## Everything a night sends, weighed by hit points.
-func _hit_points_sent(night: int) -> int:
+## Everything a night record sends, weighed by hit points.
+func _hit_points_in(one: Dictionary) -> int:
 	var total := 0
-	for row in Waves.table(night):
+	for row in (one.get("waves", []) as Array):
 		var kind: Dictionary = GameData.ENEMIES[(row as Array)[0]]
 		total += int(kind["hp"]) * int((row as Array)[1])
 	return total
@@ -11393,6 +11416,28 @@ func _task_0061_rewards() -> void:
 			> int((quiet["gained"] as Dictionary)[id]),
 			"and more %s with it" % id,
 			str((later["gained"] as Dictionary)[id]))
+
+	# **Through one helper** (task 0150): how far the pay has climbed is
+	# `Rewards.night_step`, which 0151 points at the calendar day. The same
+	# fight eight nights later pays eight steps of `money_per_night` more,
+	# and every authored night pays what it always did.
+	expect(int((later["gained"] as Dictionary)[GameData.MONEY])
+		- int((quiet["gained"] as Dictionary)[GameData.MONEY])
+		== int(table["money_per_night"]) * 8,
+		"night 9 pays eight steps of money_per_night more than night 1",
+		"%d against %d" % [(later["gained"] as Dictionary)[GameData.MONEY],
+			(quiet["gained"] as Dictionary)[GameData.MONEY]])
+	var drifted: Array = []
+	for night in range(1, Waves.authored_count() + 1):
+		var at := State.create(6150)
+		_fight_night(at, night)
+		var for_the_night := int(Rewards._money_from(at)["for the night"])
+		if Rewards.night_step(at) != night or for_the_night \
+				!= int(table["base_money"]) + int(table["money_per_night"]) * night:
+			drifted.append(night)
+	expect(drifted.is_empty(),
+		"night_step is the night's number, and nights 1-%d pay as before"
+			% Waves.authored_count(), str(drifted))
 
 	# **The same night defended two ways pays differently**, in the right
 	# direction. The done-when: same seed, same night, same kills - the only
@@ -11544,12 +11589,12 @@ func _task_0062_tech() -> void:
 	var bonus_points := 0
 	for row in GameData.TECH_BONUSES:
 		bonus_points += int((row as Dictionary)["points"])
-	print("  ten nights pay %d technology at worst and %d at best: %d a "
-		% [least, most, each] + "night, and %d more for a night played well"
-		% bonus_points)
-	expect(least == each * GameData.MVP_NIGHTS,
-		"one a night, ten nights", str(least))
-	expect(most == (each + bonus_points) * GameData.MVP_NIGHTS,
+	print("  the run's %d nights pay %d technology at worst and %d at best: "
+		% [Run.final_night(), least, most] + "%d a night, and %d more for a "
+		% [each, bonus_points] + "night played well")
+	expect(least == each * Run.final_night(),
+		"one a night, every night of the run", str(least))
+	expect(most == (each + bonus_points) * Run.final_night(),
 		"and every bonus every night is the ceiling", str(most))
 	expect(most > least,
 		"there is something to play well for",
@@ -11590,17 +11635,18 @@ func _task_0062_tech() -> void:
 	expect(Tech.award(again, 5) > 0,
 		"but the next night still does", str(Tech.held(again)))
 
-	# **Ten nights yield exactly what the journal claims.** The done-when,
-	# run rather than argued: ten perfect nights against ten scruffy ones.
-	var best := _ten_nights(6203, true)
-	var worst := _ten_nights(6204, false)
-	print("  ten nights played perfectly: %d technology. Ten played badly: %d"
+	# **The run's nights yield exactly what the journal claims.** The
+	# done-when, run rather than argued: every night perfect against every
+	# night scruffy.
+	var best := _every_night(6203, true)
+	var worst := _every_night(6204, false)
+	print("  every night played perfectly: %d technology. Played badly: %d"
 		% [best, worst])
 	expect(best == most,
-		"ten perfect nights pay exactly the ceiling",
+		"perfect nights pay exactly the ceiling",
 		"%d against %d" % [best, most])
 	expect(worst == least,
-		"and ten scruffy ones exactly the floor",
+		"and scruffy ones exactly the floor",
 		"%d against %d" % [worst, least])
 
 	# **Points survive a save and a reload.** The done-when.
@@ -11655,11 +11701,12 @@ func _a_won_night(seed_value: int, night: int,
 	return {"state": state, "points": points, "paid": paid}
 
 
-## Ten nights, all won, all in the same condition. Returns the technology.
-func _ten_nights(seed_value: int, clean: bool) -> int:
+## Every night of the run (`Run.final_night()` of them), all won, all in
+## the same condition. Returns the technology.
+func _every_night(seed_value: int, clean: bool) -> int:
 	var state := State.create(seed_value)
 	Phases.begin_preparation(state)
-	for night in range(1, GameData.MVP_NIGHTS + 1):
+	for night in range(1, Run.final_night() + 1):
 		_fight_night(state, night)
 		if clean:
 			state["house_hp"] = GameData.HOUSE_HP
@@ -12674,7 +12721,7 @@ func _task_0068_balance() -> void:
 	# one: an ordinary night is paced by the lever, and a night that wants a
 	# different pace still overrides it.
 	var ordinary := -1
-	for n in range(1, GameData.MVP_NIGHTS + 1):
+	for n in range(1, Waves.authored_count() + 1):
 		if not (Waves.night_of(n) as Dictionary).has("gap_ticks"):
 			ordinary = n
 			break
@@ -12686,7 +12733,7 @@ func _task_0068_balance() -> void:
 			"%d against %d" % [Waves.delay_before(ordinary, 1),
 				GameData.WAVE_GAP_TICKS])
 	var tightened := -1
-	for n in range(1, GameData.MVP_NIGHTS + 1):
+	for n in range(1, Waves.authored_count() + 1):
 		if (Waves.night_of(n) as Dictionary).has("gap_ticks"):
 			tightened = n
 			break
@@ -12853,20 +12900,24 @@ func _task_0070_endless() -> void:
 	# **A generated night is the same record a person would have written.**
 	# That is the whole integration: everything downstream of `night_of()`
 	# carries on without a line about endless.
-	var twenty_five := Waves.night_of(25, 777)
+	# The curve as written (task 0150): `plain_night`, past the authored
+	# nights, is `Endless`'s, and the calendar's rules never touch it.
+	var past := Waves.authored_count()
+	var twenty_five := Waves.plain_night(25, 777)
 	expect(not twenty_five.is_empty(), "night 25 is generated")
 	for field in ["note", "opening_ticks", "gap_ticks", "waves"]:
 		expect(twenty_five.has(field),
 			"and it has the same '%s' an authored night has" % field,
 			str(twenty_five.keys()))
-	expect(Endless.is_generated(25) and not Endless.is_generated(10),
-		"the tenth is authored and the twenty-fifth is not")
+	expect(Endless.is_generated(past + 1) and not Endless.is_generated(past),
+		"the last authored night is written and the one after it generated")
 
 	# **It never invents an enemy**, which is the requirement, and every wave
 	# is a real row: a kind that exists, a count above zero, a spawn point
 	# that is on the map.
-	for night in [11, 12, 15, 20, 25, 40, 99]:
-		var rows := Waves.table(night, 777)
+	for step in [1, 2, 5, 10, 15, 30, 89]:
+		var night: int = past + step
+		var rows: Array = Waves.plain_night(night, 777).get("waves", [])
 		expect(not rows.is_empty(), "night %d sends something" % night)
 		for row in rows:
 			var wave: Array = row
@@ -12881,7 +12932,7 @@ func _task_0070_endless() -> void:
 	# **The same seed generates the same night 25 twice.** The done-when.
 	expect(str(Endless.night(777, 25)) == str(Endless.night(777, 25)),
 		"the same seed generates the same night 25 twice")
-	expect(str(Waves.night_of(25, 777)) == str(Endless.night(777, 25)),
+	expect(str(Waves.plain_night(25, 777)) == str(Endless.night(777, 25)),
 		"and Waves hands back exactly what Endless made")
 
 	# **And different seeds are different nights.** Not asserted on one pair:
@@ -12895,15 +12946,17 @@ func _task_0070_endless() -> void:
 
 	# **What comes is the curve's, not the seed's.** A night that was harder
 	# on an unlucky seed would make "how far did you get" mean nothing.
-	expect(Waves.size_of(25, 700) == Waves.size_of(25, 729),
+	var size_700 := Waves.size_in(Waves.plain_night(25, 700))
+	var size_729 := Waves.size_in(Waves.plain_night(25, 729))
+	expect(size_700 == size_729,
 		"every seed's night 25 sends the same number",
-		"%d against %d" % [Waves.size_of(25, 700), Waves.size_of(25, 729)])
+		"%d against %d" % [size_700, size_729])
 	# **Compared by contents, not by `str()`.** `kinds_of()` fills its
 	# dictionary in wave order and the seed shuffles that order, so two
 	# identical tallies print differently - which is the trap the state hash
 	# sorts its keys to avoid, met again from the other end.
-	var one_mix := Waves.kinds_of(25, 700)
-	var other_mix := Waves.kinds_of(25, 729)
+	var one_mix := Waves.kinds_in(Waves.plain_night(25, 700))
+	var other_mix := Waves.kinds_in(Waves.plain_night(25, 729))
 	expect(GameData.sorted_names(one_mix.keys())
 		== GameData.sorted_names(other_mix.keys()),
 		"of the same kinds", "%s against %s"
@@ -12916,9 +12969,10 @@ func _task_0070_endless() -> void:
 
 	# **The table sends exactly what it promises.** The dealing rounds, and
 	# the leftovers have to land somewhere rather than quietly vanishing.
-	for night in [11, 17, 25, 50]:
+	for step in [1, 7, 15, 40]:
+		var night: int = past + step
 		var total := 0
-		for row in Waves.table(night, 777):
+		for row in (Waves.plain_night(night, 777).get("waves", []) as Array):
 			total += int((row as Array)[1])
 		var promised := Endless.size_of(night) + Endless.giants_on(night)
 		expect(total == promised,
@@ -12926,17 +12980,17 @@ func _task_0070_endless() -> void:
 			"%d against %d" % [total, promised])
 
 	# **It grows.** Each generated night is at least as big as the one before,
-	# and bigger than the authored tenth.
-	var last := Waves.size_of(GameData.MVP_NIGHTS)
-	for night in range(GameData.MVP_NIGHTS + 1, 40):
-		var size := Waves.size_of(night, 777)
+	# and than the last authored night.
+	var last := Waves.size_in(Waves.plain_night(past))
+	for night in range(past + 1, 40):
+		var size := Waves.size_in(Waves.plain_night(night, 777))
 		expect(size >= last, "night %d is no smaller than night %d"
 			% [night, night - 1], "%d against %d" % [size, last])
 		last = size
 
 	# **A Giant every fifth night, scaling.** The requirement, exactly.
 	var every := int((GameData.ENDLESS as Dictionary)["giant_every"])
-	for night in range(GameData.MVP_NIGHTS + 1, 46):
+	for night in range(past + 1, 46):
 		var giants := Endless.giants_on(night)
 		if night % every == 0:
 			expect(giants >= 1, "night %d brings a Giant" % night,
@@ -12950,8 +13004,8 @@ func _task_0070_endless() -> void:
 	# **The mix shifts and then settles.** A walker weight left to drift for
 	# ever reached its floor and the night sent one of them against 386
 	# breakers, which is the kind narrowing this was supposed to prevent.
-	var early: Dictionary = Waves.kinds_of(12, 777)
-	var late: Dictionary = Waves.kinds_of(60, 777)
+	var early: Dictionary = Waves.kinds_in(Waves.plain_night(12, 777))
+	var late: Dictionary = Waves.kinds_in(Waves.plain_night(60, 777))
 	expect(int(late.get(&"tank", 0)) * int(early.get(&"walker", 1))
 		> int(early.get(&"tank", 0)) * int(late.get(&"walker", 1)),
 		"a late night is heavier than an early one, not merely bigger",
@@ -12964,11 +13018,11 @@ func _task_0070_endless() -> void:
 	# **Both sides, always.** Rolling each wave's side on its own gave night
 	# 20 seven waves all on the east edge, which is a night half a farm
 	# answers.
-	for night in [11, 13, 20, 25, 33]:
-		expect(Waves.spawns_of(night, 777).size()
-			== (GameData.SPAWNS as Array).size(),
-			"night %d comes from every side" % night,
-			str(Waves.spawns_of(night, 777)))
+	for step in [1, 3, 10, 15, 23]:
+		var night: int = past + step
+		var sides := Waves.spawns_in(Waves.plain_night(night, 777))
+		expect(sides.size() == (GameData.SPAWNS as Array).size(),
+			"night %d comes from every side" % night, str(sides))
 
 	# **Night 25 is playable.** The other done-when: it begins, it sends, and
 	# it ends.

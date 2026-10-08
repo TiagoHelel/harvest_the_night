@@ -44,15 +44,22 @@ static func initial() -> Dictionary:
 
 # ------------------------------------------------------------------- asking
 
-## Whether the run has been beaten. The tenth night survived, and no other way.
+## The night that ends the run (task 0150): the last authored one. 0151
+## makes it the year's last day and 0160 the winter boss; everything that
+## asks which night is the last asks here.
+static func final_night() -> int:
+	return Waves.authored_count()
+
+
+## Whether the run has been beaten. The final night survived, and no other way.
 static func is_over(state: Dictionary) -> bool:
-	return Phases.nights_won(state) >= GameData.MVP_NIGHTS \
+	return Phases.nights_won(state) >= final_night() \
 		and not bool(state["endless"])
 
 
 ## Whether this is the last authored night about to be fought.
 static func is_final_night(state: Dictionary) -> bool:
-	return int(state["night"]) == GameData.MVP_NIGHTS
+	return int(state["night"]) == final_night()
 
 
 static func is_endless(state: Dictionary) -> bool:
@@ -137,7 +144,7 @@ static func _worth_gathering(state: Dictionary) -> Dictionary:
 ## Carry on past the authored nights. Task 0070 makes night eleven worth
 ## playing; this is the switch that lets a player ask for it.
 static func go_endless(state: Dictionary) -> bool:
-	if Phases.nights_won(state) < GameData.MVP_NIGHTS:
+	if Phases.nights_won(state) < final_night():
 		return false
 	state["endless"] = true
 	return true

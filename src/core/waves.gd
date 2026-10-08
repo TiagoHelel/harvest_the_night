@@ -39,21 +39,38 @@ static func initial() -> Dictionary:
 	}
 
 
-## The whole record for a night: written by a person up to `MVP_NIGHTS`, and
-## written by `Endless` past it.
+## How many nights are written by a person (task 0150): the rows of
+## `GameData.NIGHTS`. Past them, `Endless` writes the night.
+static func authored_count() -> int:
+	return (GameData.NIGHTS as Array).size()
+
+
+## **The record as written**: a person's row for nights 1 to
+## `authored_count()`, the `Endless` curve past them, for every night of
+## every year. The curve's own tests read this, so the calendar's rules
+## (0152-0154) never fight them.
 ##
 ## **The seed is optional and that is deliberate.** An authored night does not
 ## have one, and a tool asking "what does night 25 look like" without naming a
 ## run is asking a reasonable question - seed 0 is as real a curve as any. The
 ## functions that have a state to hand pass its seed, so the night a run
 ## actually fights is the night that run's seed generates.
-static func night_of(night: int, seed_value: int = 0) -> Dictionary:
-	var nights: Array = GameData.NIGHTS
+static func plain_night(night: int, seed_value: int = 0) -> Dictionary:
 	if night < 1:
 		return {}
-	if night <= nights.size():
-		return nights[night - 1]
+	if night <= authored_count():
+		return GameData.NIGHTS[night - 1]
 	return Endless.night(seed_value, night)
+
+
+## **The record a night actually fights** (task 0150): `plain_night` with
+## the calendar's rules on top. Every pure question below asks this one.
+##
+## **There are no rules yet.** 0152 (the Full Moon), 0153 (the boss) and
+## 0154 (the calm night) add theirs here and nowhere else; until then the
+## authored row comes back itself, not a copy.
+static func night_of(night: int, seed_value: int = 0) -> Dictionary:
+	return plain_night(night, seed_value)
 
 
 ## The record for the night being fought, generated once and kept.
@@ -66,8 +83,8 @@ static func night_of(night: int, seed_value: int = 0) -> Dictionary:
 ## put on the state, where it saves, loads and hashes with everything else.
 static func tonight(state: Dictionary) -> Dictionary:
 	var night := int(state["night"])
-	if night <= (GameData.NIGHTS as Array).size():
-		return night_of(night)
+	if night <= authored_count():
+		return night_of(night, int(state["seed"]))
 	var wave: Dictionary = state["wave"]
 	var kept: Dictionary = wave.get("tonight", {})
 	if int(kept.get("for_night", 0)) != night:
@@ -256,10 +273,21 @@ static func remaining(state: Dictionary) -> int:
 
 ## Everything a night will send, before it sends any of it.
 static func size_of(night: int, seed_value: int = 0) -> int:
+	return size_in(night_of(night, seed_value))
+
+
+## The same count off a record already in hand: `Endless` sizes its curve
+## from the last authored night as written, never as the calendar changes it.
+static func size_in(one: Dictionary) -> int:
 	var total := 0
-	for row in table(night, seed_value):
+	for row in _rows_in(one):
 		total += int((row as Array)[1])
 	return total
+
+
+## A record's waves, or none for an empty record.
+static func _rows_in(one: Dictionary) -> Array:
+	return [] if one.is_empty() else (one["waves"] as Array)
 
 
 ## What killing all of it would pay, before any of it is sent.
@@ -267,8 +295,14 @@ static func size_of(night: int, seed_value: int = 0) -> int:
 ## **Computable without running the night**, which is the requirement and is
 ## what task 0060 needs to plot a reward curve and task 0068 to sweep one.
 static func reward_of(night: int, seed_value: int = 0) -> int:
+	return reward_in(night_of(night, seed_value))
+
+
+## The purse off a record already in hand (task 0150), so the authored
+## curve's tests can weigh a night as written.
+static func reward_in(one: Dictionary) -> int:
 	var total := 0
-	for row in table(night, seed_value):
+	for row in _rows_in(one):
 		var kind: Variant = GameData.ENEMIES.get((row as Array)[0], null)
 		if kind == null:
 			continue
@@ -278,8 +312,13 @@ static func reward_of(night: int, seed_value: int = 0) -> int:
 
 ## How many of each kind a night sends, for the summary.
 static func kinds_of(night: int, seed_value: int = 0) -> Dictionary:
+	return kinds_in(night_of(night, seed_value))
+
+
+## The same tally off a record already in hand.
+static func kinds_in(one: Dictionary) -> Dictionary:
 	var out := {}
-	for row in table(night, seed_value):
+	for row in _rows_in(one):
 		var id: StringName = StringName((row as Array)[0])
 		out[id] = int(out.get(id, 0)) + int((row as Array)[1])
 	return out
@@ -287,8 +326,13 @@ static func kinds_of(night: int, seed_value: int = 0) -> Dictionary:
 
 ## Which spawn points a night comes from, in order.
 static func spawns_of(night: int, seed_value: int = 0) -> Array:
+	return spawns_in(night_of(night, seed_value))
+
+
+## The same sides off a record already in hand.
+static func spawns_in(one: Dictionary) -> Array:
 	var out: Array = []
-	for row in table(night, seed_value):
+	for row in _rows_in(one):
 		var where := int((row as Array)[2])
 		if not out.has(where):
 			out.append(where)

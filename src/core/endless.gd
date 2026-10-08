@@ -64,12 +64,13 @@ extends RefCounted
 
 ## Whether this night is written by the curve rather than by a person.
 static func is_generated(night: int) -> bool:
-	return night > GameData.MVP_NIGHTS
+	return night > Waves.authored_count()
 
 
-## How far past the authored ten this night is. Night 11 is the first step.
+## How far past the authored nights this night is. The first night after
+## them is the first step.
 static func step_of(night: int) -> int:
-	return maxi(night - GameData.MVP_NIGHTS, 0)
+	return maxi(night - Waves.authored_count(), 0)
 
 
 ## The whole record for a generated night: the same shape `GameData.NIGHTS`
@@ -137,7 +138,10 @@ static func giants_on(night_number: int) -> int:
 # ------------------------------------------------------------------ the curve
 
 static func _size(curve: Dictionary, night_number: int) -> int:
-	var base := Waves.size_of(GameData.MVP_NIGHTS)
+	# **The last authored night as written** (task 0150), never as a calendar
+	# rule changes it on its date: a Full Moon on that day must not move the
+	# whole curve after it.
+	var base := Waves.size_in(Waves.plain_night(Waves.authored_count()))
 	var grown := 100 + int(curve["growth_percent"]) * step_of(night_number)
 	return maxi(base * grown / 100, 1)
 

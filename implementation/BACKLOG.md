@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`###########.............`  **140 / 296 done**
+`###########.............`  **141 / 296 done**
 
-0 doing / 156 todo / 0 blocked across 18 phases.
+0 doing / 155 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-156 task(s) left, the ready ones first, then what they
+155 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -173,25 +173,24 @@ The icons of the night - the eight defences, the flare, START, speed and the moo
   - done when: FHD (1920x1080) captures by day and by night of the art in the real game - the hotbar and the night HUD in the build step and mid-wave - opened and looked at, in `implementation/shots/0147/`
   - done when: The sim and data hashes are unchanged (art never moves them)
 
-### 0150 - Nights looked up by the calendar
+### 0151 - The night is the calendar day
 
-Ready to pick up.  Likely files: `src/core/waves.gd, src/core/endless.gd, src/core/run.gd, src/core/tech.gd, src/core/rewards.gd, src/core/game_data.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd`.
+Ready to pick up.  Likely files: `src/core/phases.gd, src/core/run.gd, src/core/state.gd, src/core/tech.gd, src/core/endless.gd, src/app/save.gd, src/core/game_data.gd, src/app/playtest.gd, src/tools/nights.gd, tools/nights.py, tools/verify.py, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/autoplay.gd, src/tools/play_nights.gd, src/tools/perf_check.gd, tools/goldens/`.
 
-Before the night number changes meaning, every question about which night is which goes through one lookup, and nothing in the rules asks `MVP_NIGHTS` any more. A port: the same ten nights, the same Endless past them, the same hashes.
+The meaning change. The night fought at the end of a day is that day's night in the calendar, so difficulty follows the calendar, a lost night is never fought again, and the year has fifty-six of them.
 
-- Split the lookup in two in `src/core/waves.gd`: `Waves.plain_night(night, seed)` is the record as written - the authored row for days `1..Waves.authored_count()` (today's ten, `NIGHTS.size()`), `Endless.night(seed, day)` after them, defined for every day of every year - and `Waves.night_of(night, seed)` is the record the night actually fights: `plain_night` plus the calendar's rules. There are none yet; 0152-0154 add theirs there and nowhere else. With no rule, `night_of` hands back the authored row itself, not a copy
-- Every pure question keeps going through `night_of` (`table`, `size_of`, `kinds_of`, `spawns_of`, `reward_of`, `summary_of`, `delay_before`, `tonight`); tests of the authored curve and of the endless curve (`_task_0059`, `_task_0060`, and `_task_0070`'s 'it grows', 'deals out every body it promised' and 'both sides') read `plain_night`, so the Full Moon, boss and calm rules of 0152-0154 do not fight them. No new record format: 0270 owns that
-- Core readers of `MVP_NIGHTS` ask a named question instead: `Endless.is_generated`, `step_of` and `_size` use `Waves.authored_count()`, and `_size`'s base is the last authored night's plain size (through `plain_night`, not `Waves.size_of`), so a calendar rule on that date never moves the whole curve; `Run.is_over`, `is_final_night` and `go_endless` use a new `Run.final_night()` (the last authored night in this task; 0151 makes it the year's last day, 0160 the winter boss); `Tech.total_available()` and `least_available()` count `Run.final_night()` nights
-- `Rewards._lines` and `_money_from` scale with `state["night"]`, which becomes the calendar day in 0151: read it through one helper (e.g. `Rewards.night_step(state)`) so 0219 and 0278 retune a 56-night year in one place; nights 1-10 pay exactly what they pay today
-- `check_nights`' `nights.size() != MVP_NIGHTS` rule becomes: at least one authored night and no more than `Calendar.year_days()`
-- The other test reads of `MVP_NIGHTS` that only mean 'the authored nights' become `Waves.authored_count()` as a plain rename: `_task_0003_game_data` ('ten nights'), `_a_full_farm` (for `_task_0038_idle`), `_task_0058_giant` and `_task_0068_balance`. `MVP_NIGHTS` then survives only for `_task_0066_run_end` and input_check's `_case_0070_endless` (both about the run's end, which 0151 changes), the tools (`autoplay.gd`, `nights.gd`, `play_nights.gd`, `perf_check.gd`) and its line in `digest()`; its comment says 0151 deletes it
-- Rewrite `_task_0059`, `_task_0060`, `_task_0061`, `_task_0062` and `_task_0070` in `src/tools/headless_check.gd` over the lookup and the named questions: `_ten_of` becomes one copy per authored night, 'the Giant on night ten' becomes 'on the last authored night', the endless asserts compare `plain_night` with `Endless.night` and read 'past the authored nights'. Keep what each asserted and its run time
-- Hashes: SIM and DATA both stay where they are. If either moves, find out why before going on
+- `Phases.begin_night` sets `night = Calendar.date(state)` instead of `nights_won + 1`; `enter_result` still moves `day` every time and `nights_won` only on a win - a count now, not an index. Fix every reader that means 'the next night is nights_won + 1': `src/app/playtest.gd` (~l.221), the `perf_check.gd` and `play_nights.gd` fixtures, and test fixtures that set `nights_won` to pick a night (`_a_run_at_night`, `_task_0070_endless`'s 'night 25 is playable'), which now set `day`
+- `Run.final_night()` becomes `Calendar.year_days()` (update `_task_0150_lookup`'s line that pins it to `Waves.authored_count()`). `Run.is_over` is 'the year's last night has been won', read from a stable fact (`Tech.already_paid(state, Run.final_night())` or equivalent), never from a count of wins, and `go_endless` opens on that same fact (0160 reworks the door). `Tech.total_available()` now counts a year (56 x 4 = 224 at best) and the whole tree costs 45, so `_task_0063_tech_tree`'s 'the tree costs more than the best run earns' fails: give `total_available`/`least_available` an optional night count and keep that assert on the first `Waves.authored_count()` nights, commented that 0220 re-prices the tree against the year
+- `State.VERSION` 5 with `Save.migrations()[4]`: `day` is kept and becomes the date (no v4 save ever held a day back); a night in progress keeps its `night` until it ends and the calendar takes over at the next `begin_night`; `nights_paid` keeps its entries unchanged (an old night number is below the date, a date the calendar has left behind, so none can pay twice) and gains nothing - padding it with lost dates would make `already_paid(56)` lie to `Run.is_over`; `endless` becomes false (the year carries the run on; 0160 offers it again) except on an endless save already past `year_days()`, which stays endless so it is not 'over' on load (0291 settles those shapes). Saves can be written in any phase (the pause menu's save and quit): handle all four
+- Test the step on a real v4 save: if `tools/goldens/run-v4.sav` does not exist, make it from the MVP commit `bea89a88` in a `git worktree` outside the repository (`--import`, `src/tools/make_goldens.gd` with `GODOT` set, copy back only the v4 goldens, remove the worktree); after the bump write `run-v5*.sav` from this build. Never name a key `moon_phase` (the newer golden's dropped key)
+- Delete `MVP_NIGHTS` everywhere (code, tools, tests, `digest()`): after 0150 it is left in `_task_0066`, input_check's `_case_0070_endless`, `autoplay.gd`, `nights.gd`, `play_nights.gd` and `perf_check.gd`. The autoplayer's and `play_nights`' night counts become explicit arguments (default: the first ten calendar nights, so `implementation/BALANCE.md` keeps its meaning)
+- Rewrite `_task_0065` (a lost night is not fought again: losing day 3's night leads to night 4 on day 4, and `nights_won` holds), `_task_0066` (not over mid-year, not ended by a loss, over once the year's last night is won - by a fixture on that date, not by playing 56 nights - then carrying on and the profile) and `_case_0070_endless` (the ending offers PLAY ON after a fixture wins date 56, and the next night is 57). The in-suite played run is at most three nights
+- The whole-year assertion moves to a tool: `python tools/nights.py --check` resolves every date 1..`year_days()` for seeds 0 and 424242 and exits 1 on an empty record or any `check_nights` error; `tools/verify.py` runs it as a gate (through `check_script()` on `src/tools/nights.gd` with `verify.GODOT` - `tools/nights.py` has its own hard-coded `GODOT` default). If a generated night breaks 0137's night-length rule, fix the generator's pacing (an `ENDLESS` lever, DATA moving on purpose), not the check
+- Hashes: SIM moves (the version is in the state) and DATA moves (`MVP_NIGHTS` leaves the digest), both on purpose - both numbers in the journal. The night HUD keeps printing `NIGHT %d`, now the date's number; naming the date there (`SPRING 3`) moved to 0158, whose captures show it
 
-  - done when: `grep -rn MVP_NIGHTS src/core` finds only its declaration and the `digest()` line
-  - done when: The five rewritten groups pass, and the journal has one line per group on what changed in it
-  - done when: `python tools/nights.py 20` prints the same twenty lines as before the change (diff the two outputs; the result goes in the journal)
-  - done when: `_task_0150_lookup` in `src/tools/headless_v1.gd`: every day 1-112 resolves to a non-empty record for seeds 0 and 424242; `night_of(1)` is the same object as `GameData.NIGHTS[0]` (`is_same`); `Tech.least_available()` is `tech_points` x `Run.final_night()`, and `Run.final_night()` equals `Waves.authored_count()` - the one line 0151 changes to `Calendar.year_days()`
+  - done when: `_task_0065`, `_task_0066`, `_task_0063_tech_tree` and `_case_0070_endless` rewritten as above and passing; `grep -rn MVP_NIGHTS src` and `grep -n MVP_NIGHTS tools/*.py` find nothing (the prompts in `tools/backlog/` may still name it)
+  - done when: `python tools/nights.py --check` passes and prints 56 nights; a deliberately broken record makes it exit 1 (tried, reverted, said so in the journal)
+  - done when: `_task_0151_migration` in `src/tools/headless_v1.gd` steps a v4 state in DAY, PREPARATION, NIGHT and RESULT up to v5, brings each to its next night through 0118's road and the sleep intent (never by playing a day out) and asserts the night number, the paid list and that no date pays twice; an endless v4 state past day 56 stays endless and a non-endless one there is not over either; every golden (v1, v4, v5) loads and plays
 
 ### 0159 - Seasons on screen
 
@@ -268,75 +267,6 @@ A small sunrise over the farmhouse heads 0138's morning report. Optional: if the
   - done when: The sim and data hashes are unchanged (art never moves them)
   - done when: On the decline path instead: `python tools/placeholders.py` no longer lists A057, a capture of the morning report shows the band drawn directly, and the journal quotes the owner's words
 
-### 0151 - The night is the calendar day
-
-Waits on 0150.  Likely files: `src/core/phases.gd, src/core/run.gd, src/core/state.gd, src/core/tech.gd, src/core/endless.gd, src/app/save.gd, src/core/game_data.gd, src/app/playtest.gd, src/tools/nights.gd, tools/nights.py, tools/verify.py, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/autoplay.gd, src/tools/play_nights.gd, src/tools/perf_check.gd, tools/goldens/`.
-
-The meaning change. The night fought at the end of a day is that day's night in the calendar, so difficulty follows the calendar, a lost night is never fought again, and the year has fifty-six of them.
-
-- `Phases.begin_night` sets `night = Calendar.date(state)` instead of `nights_won + 1`; `enter_result` still moves `day` every time and `nights_won` only on a win - a count now, not an index. Fix every reader that means 'the next night is nights_won + 1': `src/app/playtest.gd` (~l.221), the `perf_check.gd` and `play_nights.gd` fixtures, and test fixtures that set `nights_won` to pick a night (`_a_run_at_night`, `_task_0070_endless`'s 'night 25 is playable'), which now set `day`
-- `Run.final_night()` becomes `Calendar.year_days()` (update `_task_0150_lookup`'s line that pins it to `Waves.authored_count()`). `Run.is_over` is 'the year's last night has been won', read from a stable fact (`Tech.already_paid(state, Run.final_night())` or equivalent), never from a count of wins, and `go_endless` opens on that same fact (0160 reworks the door). `Tech.total_available()` now counts a year (56 x 4 = 224 at best) and the whole tree costs 45, so `_task_0063_tech_tree`'s 'the tree costs more than the best run earns' fails: give `total_available`/`least_available` an optional night count and keep that assert on the first `Waves.authored_count()` nights, commented that 0220 re-prices the tree against the year
-- `State.VERSION` 5 with `Save.migrations()[4]`: `day` is kept and becomes the date (no v4 save ever held a day back); a night in progress keeps its `night` until it ends and the calendar takes over at the next `begin_night`; `nights_paid` keeps its entries unchanged (an old night number is below the date, a date the calendar has left behind, so none can pay twice) and gains nothing - padding it with lost dates would make `already_paid(56)` lie to `Run.is_over`; `endless` becomes false (the year carries the run on; 0160 offers it again) except on an endless save already past `year_days()`, which stays endless so it is not 'over' on load (0291 settles those shapes). Saves can be written in any phase (the pause menu's save and quit): handle all four
-- Test the step on a real v4 save: if `tools/goldens/run-v4.sav` does not exist, make it from the MVP commit `bea89a88` in a `git worktree` outside the repository (`--import`, `src/tools/make_goldens.gd` with `GODOT` set, copy back only the v4 goldens, remove the worktree); after the bump write `run-v5*.sav` from this build. Never name a key `moon_phase` (the newer golden's dropped key)
-- Delete `MVP_NIGHTS` everywhere (code, tools, tests, `digest()`): after 0150 it is left in `_task_0066`, input_check's `_case_0070_endless`, `autoplay.gd`, `nights.gd`, `play_nights.gd` and `perf_check.gd`. The autoplayer's and `play_nights`' night counts become explicit arguments (default: the first ten calendar nights, so `implementation/BALANCE.md` keeps its meaning)
-- Rewrite `_task_0065` (a lost night is not fought again: losing day 3's night leads to night 4 on day 4, and `nights_won` holds), `_task_0066` (not over mid-year, not ended by a loss, over once the year's last night is won - by a fixture on that date, not by playing 56 nights - then carrying on and the profile) and `_case_0070_endless` (the ending offers PLAY ON after a fixture wins date 56, and the next night is 57). The in-suite played run is at most three nights
-- The whole-year assertion moves to a tool: `python tools/nights.py --check` resolves every date 1..`year_days()` for seeds 0 and 424242 and exits 1 on an empty record or any `check_nights` error; `tools/verify.py` runs it as a gate (through `check_script()` on `src/tools/nights.gd` with `verify.GODOT` - `tools/nights.py` has its own hard-coded `GODOT` default). If a generated night breaks 0137's night-length rule, fix the generator's pacing (an `ENDLESS` lever, DATA moving on purpose), not the check
-- Hashes: SIM moves (the version is in the state) and DATA moves (`MVP_NIGHTS` leaves the digest), both on purpose - both numbers in the journal. The night HUD keeps printing `NIGHT %d`, now the date's number; naming the date there (`SPRING 3`) moved to 0158, whose captures show it
-
-  - done when: `_task_0065`, `_task_0066`, `_task_0063_tech_tree` and `_case_0070_endless` rewritten as above and passing; `grep -rn MVP_NIGHTS src` and `grep -n MVP_NIGHTS tools/*.py` find nothing (the prompts in `tools/backlog/` may still name it)
-  - done when: `python tools/nights.py --check` passes and prints 56 nights; a deliberately broken record makes it exit 1 (tried, reverted, said so in the journal)
-  - done when: `_task_0151_migration` in `src/tools/headless_v1.gd` steps a v4 state in DAY, PREPARATION, NIGHT and RESULT up to v5, brings each to its next night through 0118's road and the sleep intent (never by playing a day out) and asserts the night number, the paid list and that no date pays twice; an endless v4 state past day 56 stays endless and a non-endless one there is not over either; every golden (v1, v4, v5) loads and plays
-
-### 0163 - Art: winter ground
-
-Waits on 0159.  Likely files: `assets/art_source/terrain/, assets/art_source/crops/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_terrain_art.py, tools/check_crop_art.py, tools/gen_sprites.py, src/ui/world_view.gd, src/ui/season_view.gd, src/ui/placeholder_art.gd`.
-
-Winter gets real snow on the ground: the approved snowy grass, path, soil, tilled ground, edges and shores replace the remapped stand-in of 0159.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A012` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A012-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/terrain/` (and `crops/` for the tilled tiles), manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_terrain_art.py`, `tools/check_crop_art.py`, `ArtPlacement` if needed).
-- Runtime names: `terrain/<name>_winter` for `grass`, `grass_b`-`grass_d`, `path` and `soil`, the winter `edge_*`/`shore_*` sides and corners, and `crops/tilled_winter` / `tilled_wet_winter` - 16x16, opaque, seamless, the same set as today's (the wet tile still at least 20 RGB darker, `check_crop_art.py`). The 256x80 atlas is ASCII-owned and built by `tools/gen_sprites.py` from the raster recipes (and asserted against it): build the winter atlas there the way the handoff says (new rows or a second atlas) and let 0159's hook swap it in
-- Winter's ground stops going through 0159's remap (the remap stays for anything this pack does not cover); delete the stand-in entries from `src/ui/placeholder_art.gd`, so `python tools/placeholders.py` no longer lists A012
-- Set the pack to integrated: `python implementation/backlog/assets.py set A012 integrated`.
-
-  - done when: `python tools/check_terrain_art.py`, `python tools/check_crop_art.py` and `python tools/show_art.py --check` pass, and `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night in the real game - `python tools/shot.py 0163 season_winter season_winter_night --fhd` - in `implementation/shots/0163/`, opened and looked at: no seam, edge or shore breaks the snow
-  - done when: The sim and data hashes are unchanged (art never moves them)
-
-### 0175 - The axe and the pickaxe by tier
-
-Waits on 0173.  Likely files: `src/core/interact.gd, src/core/gathering.gd, src/core/game_data.gd, src/ui/main.gd, assets/locale/strings.csv, src/tools/headless_v1.gd`.
-
-The axe and the pickaxe save time by tier, and the hardest things on the farm - hardwood stumps and gold - want the iron ones.
-
-- Fewer swings by tier: the tool's tier scales the swing in `Interact.ticks_for` or the `hits` `Gathering.strike` counts - pick one, keep it integer, and make it compose with 'sharp tools' (`gather_percent`) rather than replace it
-- A `GATHERING` entry may name a `min_tier`; below it the cell still shows its verb but the work is refused with a reason in both languages ('needs an iron axe'), never a swing that silently does nothing - through the `Interact` reason road 0171 opened (a `Building.why_not`-shaped array that `Names.refusal` words), or open it here if 0171 has not landed
-- The real gates arrive with their nodes - hardwood stumps (0177) want an iron axe, gold (0176) an iron pickaxe - so test the rule here with a rigged entry
-- `validate()` checks `min_tier` against the `TOOLS` ladder; `check_iron` and `check_reachable` still pass
-- DATA moves; SIM only if the scenario gathers with an upgraded tool
-
-  - done when: `_task_0175_swings` in `src/tools/headless_v1.gd`: an iron axe fells a tree in fewer ticks than a basic one, by the percent the lever claims; a rigged `min_tier` node refuses a basic pickaxe and yields to an iron one
-  - done when: The refusal fits its control in both languages (`tools/i18n_check.py`)
-
-### 0217 - Art: the house in three tiers
-
-Waits on 0191.  Likely files: `assets/art_source/buildings/, assets/art_source/manifest.json, tools/check_house_art.py, src/ui/art_placement.gd, src/ui/house_view.gd`.
-
-House tiers I, II and III get their approved exteriors, whole and hurt; tier III reads as a small fortified farmhouse.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A035` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A035-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/buildings/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_house_art.py`, which hard-codes `house`/`house_hurt` and their window points today - extend it per tier).
-- Runtime names: `house`, `house_hurt`, `house_2`, `house_2_hurt`, `house_3`, `house_3_hurt` with their slices (`house_<c>_<r>`, `house_2_<c>_<r>`...), `windows_xy`, `window_rects_xywh`, `light_xy` and `smoke_xy` on the same 6x4 footprint as today's house. The pack draws them at full density (128x128, pivot (64,120): today's 64x64 at 2.0), so take `house` out of `ArtPlacement.visual_scale`'s 2.0 list - it matches every file whose name starts `house_`, the tiers too - unless 0191 wrote a different density into the pack
-- Replace 0191's code-marked stand-ins and flip A035's placeholder-registry entries to raster
-- Set the pack to integrated: `python implementation/backlog/assets.py set A035 integrated`.
-
-  - done when: `python tools/check_house_art.py` and `python tools/show_art.py --house --check` pass
-  - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0217/`
-  - done when: the sim and data hashes are unchanged (art never moves them)
-
 ### 0152 - Full Moon nights
 
 Waits on 0151.  Likely files: `src/core/calendar.gd, src/core/waves.gd, src/core/rewards.gd, src/core/game_data.gd, tools/palette.py, src/ui/palette_data.gd (generated), src/ui/world_view.gd, src/ui/day_hud.gd, src/ui/result_screen.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
@@ -396,6 +326,56 @@ Every change the 1.0 farm needs on its map, made once so a save migrates once: g
   - done when: `_task_0156_map_v1` in `src/tools/headless_v1.gd`: `GameData.validate()` is clean; every spawn band cell is walkable and `Pathing.reachable` on a new farm; each new node id is on the map; `Farm.pond_of` names three ponds and nothing on land
   - done when: The v5 golden steps up to v6 with every plot and every player-placed occupant where it was, the new nodes only on cells that were empty, and plays 600 ticks; every golden loads
   - done when: New shot scenarios standing at the north band, the new ore and a stump: `python tools/shot.py 0156 <them> --fhd`, opened
+
+### 0163 - Art: winter ground
+
+Waits on 0159.  Likely files: `assets/art_source/terrain/, assets/art_source/crops/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_terrain_art.py, tools/check_crop_art.py, tools/gen_sprites.py, src/ui/world_view.gd, src/ui/season_view.gd, src/ui/placeholder_art.gd`.
+
+Winter gets real snow on the ground: the approved snowy grass, path, soil, tilled ground, edges and shores replace the remapped stand-in of 0159.
+
+- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A012` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
+- Use only the folder named in the pack's `CLAUDE-A012-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
+- Promote through the raster pipeline: versioned sources under `assets/art_source/terrain/` (and `crops/` for the tilled tiles), manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_terrain_art.py`, `tools/check_crop_art.py`, `ArtPlacement` if needed).
+- Runtime names: `terrain/<name>_winter` for `grass`, `grass_b`-`grass_d`, `path` and `soil`, the winter `edge_*`/`shore_*` sides and corners, and `crops/tilled_winter` / `tilled_wet_winter` - 16x16, opaque, seamless, the same set as today's (the wet tile still at least 20 RGB darker, `check_crop_art.py`). The 256x80 atlas is ASCII-owned and built by `tools/gen_sprites.py` from the raster recipes (and asserted against it): build the winter atlas there the way the handoff says (new rows or a second atlas) and let 0159's hook swap it in
+- Winter's ground stops going through 0159's remap (the remap stays for anything this pack does not cover); delete the stand-in entries from `src/ui/placeholder_art.gd`, so `python tools/placeholders.py` no longer lists A012
+- Set the pack to integrated: `python implementation/backlog/assets.py set A012 integrated`.
+
+  - done when: `python tools/check_terrain_art.py`, `python tools/check_crop_art.py` and `python tools/show_art.py --check` pass, and `python tools/import_art.py --check` passes
+  - done when: FHD (1920x1080) captures by day and by night in the real game - `python tools/shot.py 0163 season_winter season_winter_night --fhd` - in `implementation/shots/0163/`, opened and looked at: no seam, edge or shore breaks the snow
+  - done when: The sim and data hashes are unchanged (art never moves them)
+
+### 0175 - The axe and the pickaxe by tier
+
+Waits on 0173.  Likely files: `src/core/interact.gd, src/core/gathering.gd, src/core/game_data.gd, src/ui/main.gd, assets/locale/strings.csv, src/tools/headless_v1.gd`.
+
+The axe and the pickaxe save time by tier, and the hardest things on the farm - hardwood stumps and gold - want the iron ones.
+
+- Fewer swings by tier: the tool's tier scales the swing in `Interact.ticks_for` or the `hits` `Gathering.strike` counts - pick one, keep it integer, and make it compose with 'sharp tools' (`gather_percent`) rather than replace it
+- A `GATHERING` entry may name a `min_tier`; below it the cell still shows its verb but the work is refused with a reason in both languages ('needs an iron axe'), never a swing that silently does nothing - through the `Interact` reason road 0171 opened (a `Building.why_not`-shaped array that `Names.refusal` words), or open it here if 0171 has not landed
+- The real gates arrive with their nodes - hardwood stumps (0177) want an iron axe, gold (0176) an iron pickaxe - so test the rule here with a rigged entry
+- `validate()` checks `min_tier` against the `TOOLS` ladder; `check_iron` and `check_reachable` still pass
+- DATA moves; SIM only if the scenario gathers with an upgraded tool
+
+  - done when: `_task_0175_swings` in `src/tools/headless_v1.gd`: an iron axe fells a tree in fewer ticks than a basic one, by the percent the lever claims; a rigged `min_tier` node refuses a basic pickaxe and yields to an iron one
+  - done when: The refusal fits its control in both languages (`tools/i18n_check.py`)
+
+### 0217 - Art: the house in three tiers
+
+Waits on 0191.  Likely files: `assets/art_source/buildings/, assets/art_source/manifest.json, tools/check_house_art.py, src/ui/art_placement.gd, src/ui/house_view.gd`.
+
+House tiers I, II and III get their approved exteriors, whole and hurt; tier III reads as a small fortified farmhouse.
+
+- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A035` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
+- Use only the folder named in the pack's `CLAUDE-A035-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
+- Promote through the raster pipeline: versioned sources under `assets/art_source/buildings/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_house_art.py`, which hard-codes `house`/`house_hurt` and their window points today - extend it per tier).
+- Runtime names: `house`, `house_hurt`, `house_2`, `house_2_hurt`, `house_3`, `house_3_hurt` with their slices (`house_<c>_<r>`, `house_2_<c>_<r>`...), `windows_xy`, `window_rects_xywh`, `light_xy` and `smoke_xy` on the same 6x4 footprint as today's house. The pack draws them at full density (128x128, pivot (64,120): today's 64x64 at 2.0), so take `house` out of `ArtPlacement.visual_scale`'s 2.0 list - it matches every file whose name starts `house_`, the tiers too - unless 0191 wrote a different density into the pack
+- Replace 0191's code-marked stand-ins and flip A035's placeholder-registry entries to raster
+- Set the pack to integrated: `python implementation/backlog/assets.py set A035 integrated`.
+
+  - done when: `python tools/check_house_art.py` and `python tools/show_art.py --house --check` pass
+  - done when: `python tools/import_art.py --check` passes
+  - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0217/`
+  - done when: the sim and data hashes are unchanged (art never moves them)
 
 ### 0154 - The calm night after a boss
 
@@ -3071,11 +3051,11 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0147** [Art: the night hotbar and HUD icons](prompts/0147-art-night-icons.md) - waits for art A005
 - [x] **0148** [Checkpoint: is the night better with him asleep?](prompts/0148-checkpoint-sleep.md)
 
-## 11 - Calendar and seasons  (1/16)
+## 11 - Calendar and seasons  (2/16)
 
 - [x] **0149** [The calendar: four seasons of fourteen days](prompts/0149-calendar.md)
-- [ ] **0150** [Nights looked up by the calendar](prompts/0150-calendar-lookup.md)
-- [ ] **0151** [The night is the calendar day](prompts/0151-night-is-calendar.md) - needs 0150
+- [x] **0150** [Nights looked up by the calendar](prompts/0150-calendar-lookup.md)
+- [ ] **0151** [The night is the calendar day](prompts/0151-night-is-calendar.md)
 - [ ] **0152** [Full Moon nights](prompts/0152-full-moon.md) - needs 0151
 - [ ] **0153** [Boss nights repeat until the boss falls](prompts/0153-boss-nights.md) - needs 0151
 - [ ] **0154** [The calm night after a boss](prompts/0154-calm-night.md) - needs 0153

@@ -106,7 +106,7 @@ static func _lines(state: Dictionary, survived: bool) -> Dictionary:
 	if not survived:
 		return _loss(state)
 
-	var night := int(state["night"])
+	var step := night_step(state)
 	var table: Dictionary = GameData.REWARDS
 	var out := {}
 
@@ -123,18 +123,25 @@ static func _lines(state: Dictionary, survived: bool) -> Dictionary:
 	for id in _sorted(table["resources"] as Dictionary):
 		var base := int((table["resources"] as Dictionary)[id])
 		var extra := int((table["resources_per_night"] as Dictionary).get(id, 0))
-		out[id] = base + extra * (night - 1)
+		out[id] = base + extra * (step - 1)
 	return out
+
+
+## **How far into the run tonight's pay has climbed** (task 0150): the
+## night's number, read in this one place. 0151 makes `night` the calendar
+## day, and 0219 and 0278 retune a 56-night year here rather than in every
+## line that scales.
+static func night_step(state: Dictionary) -> int:
+	return int(state["night"])
 
 
 ## Where the money came from. **The one place that knows**, so the total on
 ## the ledger and the lines on the screen are the same arithmetic.
 static func _money_from(state: Dictionary) -> Dictionary:
 	var table: Dictionary = GameData.REWARDS
-	var night := int(state["night"])
 	var out := {
 		"for the night": int(table["base_money"])
-			+ int(table["money_per_night"]) * night,
+			+ int(table["money_per_night"]) * night_step(state),
 		"bounty": 0,
 		"nothing touched": 0,
 		"still standing": 0,
@@ -143,7 +150,9 @@ static func _money_from(state: Dictionary) -> Dictionary:
 	for kind in _sorted(state["killed_by_kind"] as Dictionary):
 		var data: Variant = GameData.ENEMIES.get(kind, null)
 		if data != null:
-			out["bounty"] = int(out["bounty"]) 				+ int((data as Dictionary)["reward"]) 				* int((state["killed_by_kind"] as Dictionary)[kind])
+			out["bounty"] = int(out["bounty"]) \
+				+ int((data as Dictionary)["reward"]) \
+				* int((state["killed_by_kind"] as Dictionary)[kind])
 
 	var intact := _intact(state)
 	out["nothing touched"] = int(table["intact_structure_bonus"]) * intact

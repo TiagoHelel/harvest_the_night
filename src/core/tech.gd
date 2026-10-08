@@ -27,20 +27,21 @@ extends RefCounted
 ## the ten are the run. Technology is permanent, so it is the one that has to
 ## be defended.
 
-## What the ten nights pay in total, if every bonus is taken every time. The
-## number `tools/nights.py` prints and task 0063 budgets the tree against.
+## What the run's nights pay in total, if every bonus is taken every time:
+## `Run.final_night()` of them. The number `tools/nights.py` prints and task
+## 0063 budgets the tree against.
 static func total_available() -> int:
 	var most := 0
-	for _night in range(1, GameData.MVP_NIGHTS + 1):
+	for _night in range(1, Run.final_night() + 1):
 		most += int(GameData.REWARDS["tech_points"])
 		for row in GameData.TECH_BONUSES:
 			most += int((row as Dictionary)["points"])
 	return most
 
 
-## The least the ten nights pay: one a night, no bonuses at all.
+## The least the run's nights pay: one a night, no bonuses at all.
 static func least_available() -> int:
-	return int(GameData.REWARDS["tech_points"]) * GameData.MVP_NIGHTS
+	return int(GameData.REWARDS["tech_points"]) * Run.final_night()
 
 
 static func initial() -> Dictionary:

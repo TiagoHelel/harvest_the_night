@@ -1418,7 +1418,10 @@ const REACTION_TICKS := 45              # LEVER: ticks, 20-120
 ## standing at the pond can see.
 const REACTION_NEAR := 6                # LEVER: tiles, 3-12
 
-## How many nights the MVP has. Past this, `Endless` generates them.
+## How many nights the MVP had. **Nothing in the rules reads it** since task
+## 0150 - they ask `Waves.authored_count()` and `Run.final_night()` - and it
+## is left for the run's-end tests, the tools and `digest()`, which task 0151
+## moves off it and then deletes it.
 const MVP_NIGHTS := 10
 
 ## The curve that writes night eleven and everything after it.
@@ -2685,9 +2688,12 @@ static func check_nights(nights: Array) -> Array:
 			errors.append("the endless curve's '%s' must be at least one, "
 				% field + "or it divides by zero or sends nothing")
 
-	if nights.size() != MVP_NIGHTS:
-		errors.append("MVP_NIGHTS is %d but %d nights are written"
-			% [MVP_NIGHTS, nights.size()])
+	# **At least one written night and no more than a year of them** (task
+	# 0150): past the written ones the curve takes over, and a year has
+	# `Calendar.year_days()`.
+	if nights.is_empty() or nights.size() > Calendar.year_days():
+		errors.append("%d nights are written, outside 1..%d"
+			% [nights.size(), Calendar.year_days()])
 	return errors
 
 
