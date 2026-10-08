@@ -17,7 +17,7 @@ Summer opens the second side and brings the first enemies that change what a spr
 - Day 28 is the Full Moon with the Harvester in company, so it cannot be focused alone: the Harvester is the row 0153's rule adds from `SEASON_BOSSES` (0253 put it there), and this task writes its company
 - Read 0259's `implementation/MATCHUPS.md` first: every night's mix has an answer in what summer's arsenal (0234) has unlocked by that day - the flamethrower, the decoy, the beehive and the bait arrive this season - and the journal says which weapon each new enemy is meant to teach
 - Rats are many bodies: print the peak entity count of the largest rat night and compare it with what the swarm scenario of 0218/0248 in `perf_check.gd` measured; the year's worst case is 0275's
-- Author against `python tools/nights.py 15 28` and `python tools/play_nights.py 15 28` (0271's range), starting from spring's final numbers; notes in the authored voice; every night fits the night length (0137); DATA moves on purpose, SIM only if a day the determinism scenario fights changed
+- Author against `python tools/nights.py 15 28` and `python tools/play_nights.py 15 28` (0271's range), starting from spring's final numbers; notes in the authored voice; every night fits and fills the night (0137, 0271's `NIGHT_FILL_TICKS`); DATA moves on purpose, SIM only if a day the determinism scenario fights changed
 
 ## Done when
 

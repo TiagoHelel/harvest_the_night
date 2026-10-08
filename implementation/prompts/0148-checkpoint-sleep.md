@@ -1,7 +1,7 @@
 # 0148 - Checkpoint: is the night better with him asleep?
 
 - **Phase:** 10 - Sleep is the night
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0137, 0138, 0139, 0140, 0141, 0142
 - **Likely files:** implementation/PROGRESS.md, implementation/shots/0148/, implementation/prompts/
 

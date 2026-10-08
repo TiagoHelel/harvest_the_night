@@ -17,11 +17,12 @@ Winter is the exam: every side open, the frost zombie that slows the towers it d
 - Day 56 is the Full Moon with the Winter Lord in company - 0153's row from `SEASON_BOSSES`, which 0255 set; this task writes the company - and the largest night of Year 1; 0160's ending hook fires when he falls
 - Nothing grows outdoors in winter (the plan; the rule is 0171), so the money for these nights was made in autumn: prefer a climb in variety - sides, kinds, events - over a climb in bodies
 - Read 0259's `implementation/MATCHUPS.md`: every night has an answer in what winter's arsenal (0234) has unlocked by that day (`python tools/play_nights.py 43 56`) - the searchlight and the electric fence - and the journal says which weapon each new enemy is meant to teach
-- Notes in the authored voice; every night fits the night length (0137); DATA moves on purpose, SIM only if a day the determinism scenario fights changed
+- Notes in the authored voice; every night fits and fills the night (0137, 0271's `NIGHT_FILL_TICKS`); DATA moves on purpose, SIM only if a day the determinism scenario fights changed
+- With all four seasons authored, `GameData.check_nights` refuses a night whose last wave is sent before 0271's fill line (`NIGHT_FILL_TICKS`), for every date `python tools/nights.py --check` resolves: 0148 found a night that is over in a minute leaves dawn nothing to do
 
 ## Done when
 
-- [ ] `_task_0274_winter_nights` in `src/tools/headless_v1.gd`: days 44-56 send only kinds introduced by that day; the frost zombie and the wraith are first sent on their introduction days, on different nights; the Winter Lord is on day 56 and nowhere else; day 56 is the largest night of days 1-56 in hit points
+- [ ] `_task_0274_winter_nights` in `src/tools/headless_v1.gd`: days 44-56 send only kinds introduced by that day; the frost zombie and the wraith are first sent on their introduction days, on different nights; the Winter Lord is on day 56 and nowhere else; day 56 is the largest night of days 1-56 in hit points; a copy of a night with its last wave moved before 0271's fill line is refused by `check_nights`
 - [ ] `python tools/nights.py 43 56` and `python tools/play_nights.py 43 56` output in the journal, with the matchup line for each new enemy and the night each side first opens
 - [ ] `python tools/nights.py` for the whole year, after all four seasons, is in the journal: the year's curve in one table
 - [ ] `python tools/verify.py` prints PASS

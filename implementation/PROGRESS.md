@@ -14899,3 +14899,180 @@ Verify: **PASS**, 59 passed in 581 s (OVER BUDGET as before). Counts:
 headless_check 16234 (-6: 0067 is now one night per policy, plus the
 lost-night check), headless_v1 287, input_check 1064, input_v1 158. Sim
 3911863006 and data 3047858822 are unchanged: tools only.
+
+## 0148 - Checkpoint: is the night better with him asleep? - done 2026-10-08
+
+**The answer: yes - as a night to play. Not yet as a night that lasts.**
+
+Asleep, the farmer hands the whole night to one cursor, and everything the
+night asks for is under it. What the night does not do yet is fill the time
+the plan gives it: every night played here was over, everything dead, about
+a minute into a four-minute night. That is the nights' content, which
+0271-0274 write, so their prompts now ask for it (below).
+
+And the same caveat as 0066: **I have played this through synthetic input,
+not with hands.** The verdict on how it *feels* - the camera, the cursor at
+a desk and on a sofa, whether watching the waves is a pleasure - is still
+owed by a person. If that person says no, this task reopens and blocks.
+
+### The nights played
+
+**How.** `src/tools/night_session.gd` (new) drives the real `Main` with
+`InputEvent`s - clicks, keys and pad buttons - and never calls a rule in
+place of a press. It extends `input_v1.gd` for its harness.
+- **The pad is synthetic too.** No pad was attached; the presses are
+  `InputEventJoypadButton`/`Motion` through `Input.parse_input_event`.
+- **The days are handed over, not played.** Each day's work arrives as a gain
+  (60 wood, 40 stone, 40 iron, 30 food, 40 money, 3 tech), because the day is
+  not what this checkpoint asks about. So these are four whole nights, not
+  four whole days.
+
+One run, seed 20260927, four nights in a row. Played twice, identical both
+times, 21 checks and none failed:
+
+| Night | Device | What was done | Ended | House |
+|---|---|---|---|---|
+| 1 | mouse and keyboard | GO TO BED; two gun towers and two walls from the hotbar by click; START; SPEED to 2x; a hurt wall mended by click; FLARE armed and fired by click; a tower upgraded by middle click mid-wave; a wall sold by right click; SKIP; the report confirmed | everything dead (skipped), 54 s in, 12 killed | 100/100 |
+| 2 | mouse and keyboard | walked to the bed, SPACE; towers and walls by click, upgraded by middle click where allowed; START by G; 4x | everything dead, 60 s in, 20 killed | 100/100 |
+| 3 | mouse and keyboard | still up at 02:00: passed out, a black screen, the 30 s build step; two towers by click; the step ran out on its own; 4x | everything dead, 61 s in, 22 killed | **87/100** |
+| 4 | pad only | Back to bed; RB to the gun tower; the D-pad to two cells and A on each; LT upgraded the tower under the cursor; L3 START; Back onto the bar, right to SPEED, A, B; RT's flare at the cursor; 4x; A on the report | everything dead, 72 s in, 40 killed | 100/100 |
+
+- **Nothing walked off and nothing came down** in any of the four.
+- **Every report was confirmed,** by click or by the pad's A, and he woke
+  inside, beside the bed, each time.
+- **The only night the house was touched is the one after passing out.** The
+  30-second build step is the cost of staying up, and it shows.
+
+### The autoplayer
+
+`python tools/autoplay.py`, run again for this task: 25 seeds of each
+policy, ten nights a run, 1,000 nights in 2,288 s. Seed for seed it is 0142's
+table, as it should be on unchanged rules:
+
+| Policy | Ended at dawn | Everything dead | House down | Walked off a night | First loss | Won of ten |
+|---|---|---|---|---|---|---|
+| balanced | 0 | 172 | 78 | 3.6 | night 8 (13x) | 6.9 |
+| economy | 0 | 167 | 83 | 1.5 | night 3 (19x) | 6.7 |
+| towers | 0 | 171 | 79 | 3.7 | night 8 (17x) | 6.8 |
+| walls | 0 | 179 | 71 | 4.1 | night 8 (21x) | 7.2 |
+
+- **No night ended at dawn.** Every night held was held by killing
+  everything first.
+- **What walks off walks off after a loss.** It is what is still on the
+  farm when the house falls.
+- **The alarm stands:** no policy wins all ten. That is 0068's curve, not
+  this phase's.
+
+### The captures
+
+In `implementation/shots/0148/`, all FHD, all opened:
+- `tutorial_start.png`: the build step with the cursor and the hotbar;
+- `wave.png`: the first wave;
+- `repair.png`: a repair, with the tooltip's price;
+- `aim.png`: the flare aimed, its reach drawn;
+- `dawn_walk_off.png`: the walk-off at dawn, from `capture_dawn.gd`;
+- `morning.png`: the morning report.
+
+They are the shot tool's states (`python tools/shot.py 0148 tutorial_start
+wave repair aim morning --fhd`) plus one frame of `capture_dawn.gd`, not one
+continuous night. No night played here reached dawn, so there was none to
+photograph.
+
+### Against the MVP's night
+
+**Better:**
+- **One way in to everything.** Placing, upgrading, selling, mending, the
+  flare, the speed, SKIP and START are each a cursor action or a bar button.
+  The session reached every one, by mouse and by pad, without the farmer
+  taking a step. The MVP's night needed him walked to a wall to mend it, a
+  plank at a time (0053), and let only the barricade go down once the waves
+  began.
+- **The build step is the player's.** After a bedtime it has no clock, and
+  START is a decision rather than a timer running out.
+- **Staying up has a price you can see.** The short build step after a
+  pass-out is the one night the house was hit.
+- **A pad plays it all.** Night 4 used nothing else, with no dead end.
+- **The morning is one screen.** The report says what happened, and he is up
+  and walking the moment it is confirmed.
+
+**Worse:**
+- **The night promises dawn and ends a minute in.** The strip counts down
+  `DAWN 4:00` and the tutorial says "keep the house standing until dawn". But
+  today's ten nights send everything by 36-84 s of a 240 s night (0137's
+  table). Every night played here ended with everything dead at 54-72 s, and
+  none of the autoplayer's thousand reached dawn.
+  - The plan (4.5) wants the opposite: "a night whose length you know in
+    advance" and "holding until sunrise is worth as much as killing
+    everything", in three to five minutes of waves.
+  - Today, dawn and the wall's delaying job (the plan's third reason) do
+    nothing.
+- **Little to do once the defence is down.** On these early nights the
+  house was never hurt except after the pass-out. The one repair here was a
+  wall the script knocked about itself. This is the curve's early end more
+  than the sleep, and it is the same finding as above.
+
+**Missing:**
+- **The walk-off at dawn is never seen.** 0137 walks the survivors off in
+  `begin_day`, after the report. 0138 then wakes him inside, behind the house
+  view. The plan has it the other way round: they walk off, then the report.
+  A player who stays in the house misses it. It does not matter today, when
+  no night reaches dawn; it will once 0271 fills the nights. A note for that
+  phase: whoever makes dawn reachable should make the walk-off visible.
+- **The forecast (0158)** and the guardian's and cursor's art (0145-0147, and
+  their packs) are still ahead, as planned.
+
+**Slow or fiddly:**
+- **The camera: not judged.** Synthetic input cannot say whether the edge pan
+  (8 px) and the pad's pan are comfortable.
+- **The pad's cursor** steps a cell a press and repeats after 0.3 s, every
+  0.08 s. Crossing twenty cells is under two seconds held; whether that is
+  quick enough on a sofa is the hands' question.
+- **Found and measured, not a player's problem:**
+  - The bar swaps START for FLARE/SPEED/SKIP a couple of frames after START.
+  - The hotbar rebuilds its row on the tick after anything is bought, so a
+    press and release that straddle that tick select nothing. That takes
+    clicking within a thirtieth of a second of a purchase. Measured over
+    night 2's waves: no rebuilds in 60 s, because nothing is bought.
+  - The session waits for both, and says why in a comment.
+
+### Fixed here
+
+Nothing in the game: no small thing came up that was a bug. The new file is
+`src/tools/night_session.gd`, the record of these nights, which can be run
+again (`-- --first-night` for the first only).
+
+### Later prompts edited, and why
+
+**The nights must fill the night, not just fit in it.** 0137 only made sure a
+night ends sending before dawn. Nothing asks the last wave to come near it.
+
+- **0271 (spring):** fits *and fills*.
+  - The last wave is sent no earlier than `NIGHT_TICKS - DAWN_MARGIN_TICKS -
+    NIGHT_FILL_TICKS`. That is a new `# LEVER` (60 s, 30-120) in `digest()`'s
+    `time` row, and `tools/nights.py` prints each night's last send against
+    it.
+  - Spread the waves rather than cut the night below the plan's three
+    minutes, day 1 included.
+  - Its test checks every spring day against the line.
+- **0272, 0273:** "fits the night length" becomes "fits and fills the night".
+- **0274 (winter):** the same. With the year authored, `check_nights` also
+  refuses a night under the fill line on every date, and the test feeds it a
+  broken copy.
+
+`tools/backlog/part11.py` holds the same edits. The four rendered prompts
+match the files on disk, apart from their status line.
+
+The rule is not in 0270. That task drafts the year from today's ten nights,
+which are all under the line, and a refusal there would fail them before
+0271 rewrites them.
+
+### Hashes
+
+No rule, lever or night moved: SIM 3911863006 and DATA 3047858822 are
+unchanged.
+
+Files: src/tools/night_session.gd, implementation/shots/0148/,
+implementation/prompts/{0148,0271,0272,0273,0274}-*.md,
+tools/backlog/part11.py
+
+Verify: **PASS**, 59 passed in 563 s (OVER BUDGET as before). Counts are unchanged: headless_check 16234, headless_v1 287, input_check 1064, input_v1 158.

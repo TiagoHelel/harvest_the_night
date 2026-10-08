@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`###########.............`  **138 / 296 done**
+`###########.............`  **139 / 296 done**
 
-0 doing / 158 todo / 0 blocked across 18 phases.
+0 doing / 157 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-158 task(s) left, the ready ones first, then what they
+157 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -173,22 +173,60 @@ The icons of the night - the eight defences, the flare, START, speed and the moo
   - done when: FHD (1920x1080) captures by day and by night of the art in the real game - the hotbar and the night HUD in the build step and mid-wave - opened and looked at, in `implementation/shots/0147/`
   - done when: The sim and data hashes are unchanged (art never moves them)
 
-### 0148 - Checkpoint: is the night better with him asleep?
+### 0149 - The calendar: four seasons of fourteen days
 
-Ready to pick up.  Likely files: `implementation/PROGRESS.md, implementation/shots/0148/, implementation/prompts/`.
+Ready to pick up.  Likely files: `src/core/calendar.gd (new), src/core/game_data.gd, src/ui/day_hud.gd, src/ui/names.gd, assets/locale/strings.csv, src/tools/headless_v1.gd, src/tools/input_v1.gd, src/tools/input_check.gd`.
 
-**The plan's Phase 1 test.** Play the new night - the farmer asleep, the cursor, START, dawn - with a mouse and with a pad, and answer honestly whether it is better than the MVP's night. Every later phase waits on the answer.
+The farm learns what day of the year it is. Every rule of this phase hangs off one small set of pure helpers, and the player sees 'SPRING 3' beside the clock - before a single rule reads it.
 
-- Play at least three whole days and nights by hand with mouse and keyboard and at least one with only a pad (a real one if attached; say honestly if it was synthetic): bed, cursor building, START, a repair, a flare, an upgrade and a sale by cursor, speed and skip, dawn, the morning report - and one night that follows a pass-out
-- Run the autoplayer for every policy over ten nights and note how the nights end: at dawn, with everything dead, or with the house down
-- FHD captures of one night from START to dawn - the build step with the cursor and the hotbar, the first wave, a repair, the flare aimed, the walk-off at dawn, the morning report - in `implementation/shots/0148/`, opened and looked at
-- Answer the plan's question in the journal, 'is the night better with him asleep?', against the MVP's night: what is better, what is worse, what is missing, and what is slow or fiddly (the camera, the cursor, the pad)
-- Fix here only what is small and inside this phase's rules; anything bigger becomes an edit to a later prompt or a note for the phase it belongs to
-- Every later phase depends on this task. If the answer is no, run `python tools/task.py blocked 0148 "<the reason>"` and edit the later prompts that must change before any content is produced; never tick or untick a box by hand
+- `src/core/calendar.gd` (`class_name Calendar`, node-free, static): `date(state)` - the calendar day, which is `state["day"]` until 0153 adds the boss hold, and the one place that knows it - plus pure `year_of(date)`, `season_of(date)` (0-3), `day_of_season(date)` (1-14) and `year_days()`. Each pure helper takes an optional season length, so a test can prove a seven-day season without editing the lever
+- `GameData.SEASON_DAYS := 14  # LEVER: days a season, 7-28` and `SEASONS: Array` of the ids `spring`, `summer`, `autumn`, `winter` (names, not a lever); `validate()` gains `check_calendar` (four seasons, a season of at least two days), and both go into `digest()` (0112's coverage assert)
+- No new State key and no rule reads the calendar yet: day 1 is Spring 1 of Year 1, day 14 Spring 14, day 15 Summer 1, day 56 Winter 14, day 57 Spring 1 of Year 2
+- The day HUD shows the date beside 0126's HH:MM clock: `SPRING 3`, and `SPRING 3  YEAR 2` from the second year on. It takes the place of the day count in the clock line (`DAY %d` in `DHUD_DAY` / `DHUD_DAY_FIRST`, as 0126 and 0140 left them): one number for the day, not two. Rewrite in place the input_check cases that read `DAY 1` (`_case_0021_day_hud`, `_case_0039_clock`) and drop any row nothing reads any more. Season names go through `Names.KEYS` (`spring` -> `SEASON_SPRING`, ...) so `tools/i18n_check.py` sees literal keys
+- `assets/locale/strings.csv` rows, both languages: `SEASON_SPRING` SPRING / PRIMAVERA, `SEASON_SUMMER` SUMMER / VERÃO, `SEASON_AUTUMN` AUTUMN / OUTONO, `SEASON_WINTER` WINTER / INVERNO, `DHUD_DATE` `%s %d` / `%s %d`, `DHUD_DATE_YEAR` `%s %d  YEAR %d` / `%s %d  ANO %d`; the width is the label's real width, measured
+- The night HUD keeps its night number for now: `night` is not the date until 0151, and 0158 names the date there
+- Hashes: SIM must not move. DATA moves once, because the calendar levers enter `digest()` - both numbers in the journal
 
-  - done when: The journal has the answer, the nights played (device, how each ended, house left), the autoplayer's numbers, and every later prompt edited and why
-  - done when: The captures in `implementation/shots/0148/` exist and were opened
-  - done when: Either the task is done on a yes, or it is blocked with the reason and the later prompts are edited
+  - done when: `_task_0149_calendar` in `src/tools/headless_v1.gd` asserts the five mappings above, a seven-day season through the optional argument, `year_days() == 56`, and that a state's hash is the same before and after asking every helper
+  - done when: `_case_0149_date` in `src/tools/input_v1.gd` reads `SPRING 3` on day 3 and `SUMMER 1` on day 15 from the day HUD, in English and in Portuguese (`PRIMAVERA 3`, `VERÃO 1`)
+  - done when: `python tools/shot.py 0149 noon dusk --fhd` and the same with `--pt_BR`, opened: the date sits by the clock and nothing overlaps
+
+### 0173 - Five tools, three tiers
+
+Ready to pick up.  Likely files: `src/core/tool_tiers.gd (new), src/core/state.gd, src/core/game_data.gd, src/core/crafting.gd, src/core/phases.gd, src/ui/workshop_panel.gd, src/ui/player_work.gd, src/ui/names.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+
+Hoe, watering can, axe, pickaxe and rod, each in three tiers bought at the workshop with money and ore: the first thing day money buys that makes every later day better (plan section 3.7).
+
+- `TOOLS` in `game_data.gd`: hoe, can, axe and pickaxe at basic/iron/gold, the rod at bamboo/fibre/iron, as tiers 0/1/2 of one ladder; each tier's cost (money + ore) and the effect fields 0174, 0175, 0180 and 0181 read, all `# LEVER`
+- The tiers held and any pending upgrade live in a `tools` dictionary (keys from code: `State.TABLES`, through a new `initial()` - e.g. `src/core/tool_tiers.gd` - and one `_adopt` line), all tier 0 in a new game. **Tools are not resources**: `Rewards._loss` iterates `RESOURCES` and must never take one
+- An upgrade is a workshop recipe whose output names a tool tier: a new branch in `Crafting._deliver` (and in `check_recipes`, which accepts only resources and defences today) records it as pending, and `Phases.begin_day` hands it over - ready the next morning. The tool keeps its old tier until then, so no day is spent without a can
+- This task ships tier 1 for all five (iron hoe, can, axe and pickaxe; fibre rod) and the rod's tier 2 (iron). The gold costs arrive with 0176; until then gold is listed and refused with a reason
+- Rebalance the tech nodes that did a tool's job: 'sharp tools' (`gather_percent`) and 'full cans' (`water_can_bonus`) keep their ids, get smaller numbers or a new role, and their `note` and `TECHNOTE_*` rows change in both languages; arithmetic in the journal. `_task_0063_tech_tree` asserts 'sharp tools' makes chopping quicker: keep that true or rewrite it in place
+- The tool in the farmer's hand is not tiered by art (decision): the work frames keep one fixed head ramp and `player_work.gd` tints it per tier, view only. Tool icons in the workshop panel and the inventory use the placeholder road until A019 is integrated by 0202
+- Names and strings for every tool and tier, and a `Names.KEYS` entry with a `REC_*` row for every upgrade recipe (every `RECIPES` id needs one), in both languages; `validate()` checks every tier cost names a real resource; `TOOLS` goes into `digest()`
+- DATA moves (TOOLS, TECH_TREE). SIM moves on purpose: the new `tools` key is in the state and `State.hash_of` folds every key - record both
+
+  - done when: `_task_0173_tools` in `src/tools/headless_v1.gd`: an iron axe queued with the money and iron is still basic that evening and iron the next morning; a lost night takes 25% of the iron and no tool
+  - done when: `_case_0173_upgrade` in `src/tools/input_v1.gd`: open the workshop and order an upgrade with the keyboard and with the mouse; it shows as pending
+  - done when: A new `tool_upgrades` scenario: `python tools/shot.py 0173 tool_upgrades --fhd` shows the upgrade list and the farmer chopping with a tinted iron head; opened and looked at
+
+### 0191 - The house in three tiers
+
+Ready to pick up.  Likely files: `src/core/phases.gd, src/core/house.gd, src/core/repair.gd, src/core/interact.gd, src/core/game_data.gd, src/ui/house_view.gd, src/ui/world_view.gd, src/ui/sfx.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+
+Money buys a stronger house - tiers I, II and III, each more hit points and cheaper repairs - because the house is what keeps the sleeping farmer safe (plan section 3.8).
+
+- `HOUSE_TIERS` (`# LEVER`s): a price in money (and materials if wanted), an `hp_bonus` and a repair discount per tier, bought by day; tier I is the house a new game has. `validate()` checks it (bonuses never fall from one tier to the next, the discount within 0-100) and it goes into `digest()`
+- The tier is a top-level `house_tier` int: reconcile fills it for old saves (no version bump), but the state hash folds it. `Phases.house_full` adds the tier's HP, so every reader 0114 routed through it follows; the house repair in `Repair` applies the discount and composes with what 0113 decided for 'a full larder' on the house
+- **There is no storage limit today** and section 3.8's 'more room to keep things' is not invented here; say so in the journal
+- Pick one input path for buying (the house's door, the stall, or a tab in the workshop panel) and test it; the new tier holds from the next night. A new verb goes in `DAY_ONLY` and `all_verbs` with an `Sfx.VERB_SOUNDS` entry (borrow `sfx/trade` until 0281), or `_task_0084_day_sounds` fails. The tier names and the buying row are `strings.csv` rows in both languages, through literal keys
+- Same 6x4 footprint and pivot; tiers II and III draw as today's house with a code-drawn mark through the placeholder road until A035 is integrated by 0217
+- DATA moves; SIM moves on purpose (the `house_tier` key) - record both
+
+  - done when: `_task_0191_house` in `src/tools/headless_v1.gd`: tier II raises `house_full` by its bonus with and without 'stout timbers'; a house repair costs the discounted price; the untouched-house bonus (0114) reads the new full
+  - done when: `_case_0191_house` in `src/tools/input_v1.gd`: buy tier II by day
+  - done when: A new `house_tiers` scenario: `python tools/shot.py 0191 house_tiers --fhd` shows tiers I to III; opened and looked at
+  - done when: the Deliverables table of `implementation/backlog/packs/A035-house-tiers.md` states the final geometry this task settled
 
 ### 0289 - Art: the morning report
 
@@ -208,61 +246,6 @@ A small sunrise over the farmhouse heads 0138's morning report. Optional: if the
   - done when: FHD (1920x1080) captures of the morning report after a won and after a lost night, and of the farm around it by day and by night, opened and looked at, in `implementation/shots/0289/`
   - done when: The sim and data hashes are unchanged (art never moves them)
   - done when: On the decline path instead: `python tools/placeholders.py` no longer lists A057, a capture of the morning report shows the band drawn directly, and the journal quotes the owner's words
-
-### 0149 - The calendar: four seasons of fourteen days
-
-Waits on 0148.  Likely files: `src/core/calendar.gd (new), src/core/game_data.gd, src/ui/day_hud.gd, src/ui/names.gd, assets/locale/strings.csv, src/tools/headless_v1.gd, src/tools/input_v1.gd, src/tools/input_check.gd`.
-
-The farm learns what day of the year it is. Every rule of this phase hangs off one small set of pure helpers, and the player sees 'SPRING 3' beside the clock - before a single rule reads it.
-
-- `src/core/calendar.gd` (`class_name Calendar`, node-free, static): `date(state)` - the calendar day, which is `state["day"]` until 0153 adds the boss hold, and the one place that knows it - plus pure `year_of(date)`, `season_of(date)` (0-3), `day_of_season(date)` (1-14) and `year_days()`. Each pure helper takes an optional season length, so a test can prove a seven-day season without editing the lever
-- `GameData.SEASON_DAYS := 14  # LEVER: days a season, 7-28` and `SEASONS: Array` of the ids `spring`, `summer`, `autumn`, `winter` (names, not a lever); `validate()` gains `check_calendar` (four seasons, a season of at least two days), and both go into `digest()` (0112's coverage assert)
-- No new State key and no rule reads the calendar yet: day 1 is Spring 1 of Year 1, day 14 Spring 14, day 15 Summer 1, day 56 Winter 14, day 57 Spring 1 of Year 2
-- The day HUD shows the date beside 0126's HH:MM clock: `SPRING 3`, and `SPRING 3  YEAR 2` from the second year on. It takes the place of the day count in the clock line (`DAY %d` in `DHUD_DAY` / `DHUD_DAY_FIRST`, as 0126 and 0140 left them): one number for the day, not two. Rewrite in place the input_check cases that read `DAY 1` (`_case_0021_day_hud`, `_case_0039_clock`) and drop any row nothing reads any more. Season names go through `Names.KEYS` (`spring` -> `SEASON_SPRING`, ...) so `tools/i18n_check.py` sees literal keys
-- `assets/locale/strings.csv` rows, both languages: `SEASON_SPRING` SPRING / PRIMAVERA, `SEASON_SUMMER` SUMMER / VERÃO, `SEASON_AUTUMN` AUTUMN / OUTONO, `SEASON_WINTER` WINTER / INVERNO, `DHUD_DATE` `%s %d` / `%s %d`, `DHUD_DATE_YEAR` `%s %d  YEAR %d` / `%s %d  ANO %d`; the width is the label's real width, measured
-- The night HUD keeps its night number for now: `night` is not the date until 0151, and 0158 names the date there
-- Hashes: SIM must not move. DATA moves once, because the calendar levers enter `digest()` - both numbers in the journal
-
-  - done when: `_task_0149_calendar` in `src/tools/headless_v1.gd` asserts the five mappings above, a seven-day season through the optional argument, `year_days() == 56`, and that a state's hash is the same before and after asking every helper
-  - done when: `_case_0149_date` in `src/tools/input_v1.gd` reads `SPRING 3` on day 3 and `SUMMER 1` on day 15 from the day HUD, in English and in Portuguese (`PRIMAVERA 3`, `VERÃO 1`)
-  - done when: `python tools/shot.py 0149 noon dusk --fhd` and the same with `--pt_BR`, opened: the date sits by the clock and nothing overlaps
-
-### 0173 - Five tools, three tiers
-
-Waits on 0148.  Likely files: `src/core/tool_tiers.gd (new), src/core/state.gd, src/core/game_data.gd, src/core/crafting.gd, src/core/phases.gd, src/ui/workshop_panel.gd, src/ui/player_work.gd, src/ui/names.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
-
-Hoe, watering can, axe, pickaxe and rod, each in three tiers bought at the workshop with money and ore: the first thing day money buys that makes every later day better (plan section 3.7).
-
-- `TOOLS` in `game_data.gd`: hoe, can, axe and pickaxe at basic/iron/gold, the rod at bamboo/fibre/iron, as tiers 0/1/2 of one ladder; each tier's cost (money + ore) and the effect fields 0174, 0175, 0180 and 0181 read, all `# LEVER`
-- The tiers held and any pending upgrade live in a `tools` dictionary (keys from code: `State.TABLES`, through a new `initial()` - e.g. `src/core/tool_tiers.gd` - and one `_adopt` line), all tier 0 in a new game. **Tools are not resources**: `Rewards._loss` iterates `RESOURCES` and must never take one
-- An upgrade is a workshop recipe whose output names a tool tier: a new branch in `Crafting._deliver` (and in `check_recipes`, which accepts only resources and defences today) records it as pending, and `Phases.begin_day` hands it over - ready the next morning. The tool keeps its old tier until then, so no day is spent without a can
-- This task ships tier 1 for all five (iron hoe, can, axe and pickaxe; fibre rod) and the rod's tier 2 (iron). The gold costs arrive with 0176; until then gold is listed and refused with a reason
-- Rebalance the tech nodes that did a tool's job: 'sharp tools' (`gather_percent`) and 'full cans' (`water_can_bonus`) keep their ids, get smaller numbers or a new role, and their `note` and `TECHNOTE_*` rows change in both languages; arithmetic in the journal. `_task_0063_tech_tree` asserts 'sharp tools' makes chopping quicker: keep that true or rewrite it in place
-- The tool in the farmer's hand is not tiered by art (decision): the work frames keep one fixed head ramp and `player_work.gd` tints it per tier, view only. Tool icons in the workshop panel and the inventory use the placeholder road until A019 is integrated by 0202
-- Names and strings for every tool and tier, and a `Names.KEYS` entry with a `REC_*` row for every upgrade recipe (every `RECIPES` id needs one), in both languages; `validate()` checks every tier cost names a real resource; `TOOLS` goes into `digest()`
-- DATA moves (TOOLS, TECH_TREE). SIM moves on purpose: the new `tools` key is in the state and `State.hash_of` folds every key - record both
-
-  - done when: `_task_0173_tools` in `src/tools/headless_v1.gd`: an iron axe queued with the money and iron is still basic that evening and iron the next morning; a lost night takes 25% of the iron and no tool
-  - done when: `_case_0173_upgrade` in `src/tools/input_v1.gd`: open the workshop and order an upgrade with the keyboard and with the mouse; it shows as pending
-  - done when: A new `tool_upgrades` scenario: `python tools/shot.py 0173 tool_upgrades --fhd` shows the upgrade list and the farmer chopping with a tinted iron head; opened and looked at
-
-### 0191 - The house in three tiers
-
-Waits on 0148.  Likely files: `src/core/phases.gd, src/core/house.gd, src/core/repair.gd, src/core/interact.gd, src/core/game_data.gd, src/ui/house_view.gd, src/ui/world_view.gd, src/ui/sfx.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
-
-Money buys a stronger house - tiers I, II and III, each more hit points and cheaper repairs - because the house is what keeps the sleeping farmer safe (plan section 3.8).
-
-- `HOUSE_TIERS` (`# LEVER`s): a price in money (and materials if wanted), an `hp_bonus` and a repair discount per tier, bought by day; tier I is the house a new game has. `validate()` checks it (bonuses never fall from one tier to the next, the discount within 0-100) and it goes into `digest()`
-- The tier is a top-level `house_tier` int: reconcile fills it for old saves (no version bump), but the state hash folds it. `Phases.house_full` adds the tier's HP, so every reader 0114 routed through it follows; the house repair in `Repair` applies the discount and composes with what 0113 decided for 'a full larder' on the house
-- **There is no storage limit today** and section 3.8's 'more room to keep things' is not invented here; say so in the journal
-- Pick one input path for buying (the house's door, the stall, or a tab in the workshop panel) and test it; the new tier holds from the next night. A new verb goes in `DAY_ONLY` and `all_verbs` with an `Sfx.VERB_SOUNDS` entry (borrow `sfx/trade` until 0281), or `_task_0084_day_sounds` fails. The tier names and the buying row are `strings.csv` rows in both languages, through literal keys
-- Same 6x4 footprint and pivot; tiers II and III draw as today's house with a code-drawn mark through the placeholder road until A035 is integrated by 0217
-- DATA moves; SIM moves on purpose (the `house_tier` key) - record both
-
-  - done when: `_task_0191_house` in `src/tools/headless_v1.gd`: tier II raises `house_full` by its bonus with and without 'stout timbers'; a house repair costs the discounted price; the untouched-house bonus (0114) reads the new full
-  - done when: `_case_0191_house` in `src/tools/input_v1.gd`: buy tier II by day
-  - done when: A new `house_tiers` scenario: `python tools/shot.py 0191 house_tiers --fhd` shows tiers I to III; opened and looked at
-  - done when: the Deliverables table of `implementation/backlog/packs/A035-house-tiers.md` states the final geometry this task settled
 
 ### 0150 - Nights looked up by the calendar
 
@@ -581,7 +564,7 @@ Animals get homes: a coop and a barn, built by day, that hold them, shelter them
 
 ### 0189 - The shipping bin
 
-Waits on 0148, 0156.  Likely files: `src/core/shipping.gd (new), src/core/interact.gd, src/core/phases.gd, src/core/state.gd, src/core/farm.gd, src/core/game_data.gd, src/app/save.gd, src/ui/shop_panel.gd, src/ui/result_screen.gd, src/ui/sfx.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/make_goldens.gd, tools/goldens/, src/tools/shot.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
+Waits on 0156.  Likely files: `src/core/shipping.gd (new), src/core/interact.gd, src/core/phases.gd, src/core/state.gd, src/core/farm.gd, src/core/game_data.gd, src/app/save.gd, src/ui/shop_panel.gd, src/ui/result_screen.gd, src/ui/sfx.gd, src/ui/names.gd, src/ui/placeholder_art.gd, assets/locale/strings.csv, src/tools/make_goldens.gd, tools/goldens/, src/tools/shot.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
 A shipping bin like Stardew's: drop things in at any hour of the day and be paid the next morning, so selling no longer waits on the stall's hours (plan section 3.6).
 
@@ -2538,12 +2521,12 @@ Spring is the season that teaches: the walker, the runner, the tank and the brea
 - The plan's rhythm: days 1-6 grow gently, day 7 is a Full Moon of the kinds already met, days 8-13 grow again with the season's novelty - the breaker, 'Primavera (fim)' - and day 14 is the Full Moon with the Giant (0153's row) in company. A starting map: today's 1-6 to days 1-6, today's 7 (breakers) to day 8, today's 8-9 spread over 9-13, today's 10 to day 14 - change it if the numbers say so
 - One new thing a night at most, and the night after an introduction is where it bites (0060's rule): the walker on 1, the runner and the tank in days 2-6, the breaker in 8-13. The introductions, day 7 and day 14 are `KEY_NIGHTS`; the other days come from spring's template
 - Day 1 stays the tutorial night: a normal night 1 (the calm night only follows a fallen boss), winnable with what the tutorial (0141) gives; the tutorial asserts of 0041/0141 stay green
-- Every night fits the night length (0137) with room for the last wave to be fought before dawn
+- Every night fits the night length (0137) with room for the last wave to be fought before dawn, **and fills it** (moved here by 0148): its last wave is sent no earlier than `NIGHT_TICKS - DAWN_MARGIN_TICKS - NIGHT_FILL_TICKS`, a new `# LEVER` in `src/core/game_data.gd` (60 s, 30-120) in `digest()`'s `time` row, and `tools/nights.py` prints each night's last send against that line. 0148 measured today's ten sending everything by 36-84 s of a 240 s night: every night it played was over, everything dead, about a minute in, and none of a thousand autoplayed nights reached dawn, so the plan's 'holding on until sunrise is worth as much as killing everything' (4.5) and its three to five minutes of waves never happen. Spread the waves - a later last wave, gaps that leave quiet stretches between them - rather than shortening `NIGHT_TICKS` below the plan's three minutes; day 1 too, still winnable with the tutorial's tower
 - Notes in the voice of the authored ten, English, one line each - they are what `tools/nights.py` prints
 - Author against `python tools/nights.py 1 14` (count, hit points and reward climb, peaking on 7 and 14) and `python tools/play_nights.py 1 14` at its three incomes
 - DATA moves on purpose; SIM moves if day 1 changed, because the determinism scenario fights it - both numbers in `implementation/PROGRESS.md`
 
-  - done when: `_task_0271_spring_nights` in `src/tools/headless_v1.gd`: days 1-14 send only the walker, runner, tank, breaker and the Giant, only from the east; each kind is first sent on its authored introduction day; day 7 is the largest of days 1-7 and day 14 the largest of spring in hit points; the Giant is on day 14 and nowhere else
+  - done when: `_task_0271_spring_nights` in `src/tools/headless_v1.gd`: days 1-14 send only the walker, runner, tank, breaker and the Giant, only from the east; each kind is first sent on its authored introduction day; day 7 is the largest of days 1-7 and day 14 the largest of spring in hit points; the Giant is on day 14 and nowhere else; every day 1-14 sends its last wave after the fill line (`NIGHT_FILL_TICKS`) and before the dawn margin
   - done when: `python tools/play_nights.py 1 14` output is in the journal: night 1 holds at the lowest income, and every night that falls is named with what the curve does there; `python tools/play_nights.py 15 20` runs on 0270's summer draft and buys nothing summer has not unlocked
   - done when: Spring's table from `python tools/nights.py 1 14` is in the journal beside the old ten nights' numbers
 
@@ -2632,7 +2615,7 @@ Summer opens the second side and brings the first enemies that change what a spr
 - Day 28 is the Full Moon with the Harvester in company, so it cannot be focused alone: the Harvester is the row 0153's rule adds from `SEASON_BOSSES` (0253 put it there), and this task writes its company
 - Read 0259's `implementation/MATCHUPS.md` first: every night's mix has an answer in what summer's arsenal (0234) has unlocked by that day - the flamethrower, the decoy, the beehive and the bait arrive this season - and the journal says which weapon each new enemy is meant to teach
 - Rats are many bodies: print the peak entity count of the largest rat night and compare it with what the swarm scenario of 0218/0248 in `perf_check.gd` measured; the year's worst case is 0275's
-- Author against `python tools/nights.py 15 28` and `python tools/play_nights.py 15 28` (0271's range), starting from spring's final numbers; notes in the authored voice; every night fits the night length (0137); DATA moves on purpose, SIM only if a day the determinism scenario fights changed
+- Author against `python tools/nights.py 15 28` and `python tools/play_nights.py 15 28` (0271's range), starting from spring's final numbers; notes in the authored voice; every night fits and fills the night (0137, 0271's `NIGHT_FILL_TICKS`); DATA moves on purpose, SIM only if a day the determinism scenario fights changed
 
   - done when: `_task_0272_summer_nights` in `src/tools/headless_v1.gd`: days 16-28 send only kinds introduced by that day, only from the east and the south-east; the spitter and the rats are first sent on their introduction days, on different nights; the Harvester is on day 28 and nowhere else; days 21 and 28 are the largest of their halves in hit points
   - done when: `python tools/nights.py 15 28` and `python tools/play_nights.py 15 28` output in the journal, with the matchup line for each new enemy and the peak rat count
@@ -2667,7 +2650,7 @@ Autumn opens the north and brings the two enemies that ignore the shape of a maz
 - Day 42 is the Full Moon with the Scarecrow King in company - 0153's row from `SEASON_BOSSES`, which 0254 set; this task writes the company. The crows he summons come from his rule, not from rows, so the forecast's count leaves them out by design (0254): day 42's note says he calls crows, and the journal gives the peak count of crows alive on day 42 in `play_nights`
 - The Blood Moon (0257) may roll from autumn: list which autumn days roll it for seeds 0-4 in `tools/nights.py`, and pin `event` off on an introduction night it would drown (0270's field)
 - Read 0259's `implementation/MATCHUPS.md`: every night has an answer in what autumn's arsenal (0234) has unlocked by that day - the mortar, the pumpkin catapult and the garlic braid - and the journal says which weapon each new enemy is meant to teach
-- The template keeps climbing from summer's final numbers (`python tools/play_nights.py 29 42`); notes in the authored voice; every night fits the night length (0137); DATA moves on purpose, SIM only if a day the determinism scenario fights changed
+- The template keeps climbing from summer's final numbers (`python tools/play_nights.py 29 42`); notes in the authored voice; every night fits and fills the night (0137, 0271's `NIGHT_FILL_TICKS`); DATA moves on purpose, SIM only if a day the determinism scenario fights changed
 
   - done when: `_task_0273_autumn_nights` in `src/tools/headless_v1.gd`: days 30-42 send only kinds introduced by that day, only from the east, south-east and north; the crow and the digger are first sent on their introduction days, on different nights; the Scarecrow King is on day 42 and nowhere else; days 35 and 42 are the largest of their halves in hit points
   - done when: `python tools/nights.py 29 42` and `python tools/play_nights.py 29 42` output in the journal, with the Blood Moon days for seeds 0-4 and the matchup line for each new enemy
@@ -2703,9 +2686,10 @@ Winter is the exam: every side open, the frost zombie that slows the towers it d
 - Day 56 is the Full Moon with the Winter Lord in company - 0153's row from `SEASON_BOSSES`, which 0255 set; this task writes the company - and the largest night of Year 1; 0160's ending hook fires when he falls
 - Nothing grows outdoors in winter (the plan; the rule is 0171), so the money for these nights was made in autumn: prefer a climb in variety - sides, kinds, events - over a climb in bodies
 - Read 0259's `implementation/MATCHUPS.md`: every night has an answer in what winter's arsenal (0234) has unlocked by that day (`python tools/play_nights.py 43 56`) - the searchlight and the electric fence - and the journal says which weapon each new enemy is meant to teach
-- Notes in the authored voice; every night fits the night length (0137); DATA moves on purpose, SIM only if a day the determinism scenario fights changed
+- Notes in the authored voice; every night fits and fills the night (0137, 0271's `NIGHT_FILL_TICKS`); DATA moves on purpose, SIM only if a day the determinism scenario fights changed
+- With all four seasons authored, `GameData.check_nights` refuses a night whose last wave is sent before 0271's fill line (`NIGHT_FILL_TICKS`), for every date `python tools/nights.py --check` resolves: 0148 found a night that is over in a minute leaves dawn nothing to do
 
-  - done when: `_task_0274_winter_nights` in `src/tools/headless_v1.gd`: days 44-56 send only kinds introduced by that day; the frost zombie and the wraith are first sent on their introduction days, on different nights; the Winter Lord is on day 56 and nowhere else; day 56 is the largest night of days 1-56 in hit points
+  - done when: `_task_0274_winter_nights` in `src/tools/headless_v1.gd`: days 44-56 send only kinds introduced by that day; the frost zombie and the wraith are first sent on their introduction days, on different nights; the Winter Lord is on day 56 and nowhere else; day 56 is the largest night of days 1-56 in hit points; a copy of a night with its last wave moved before 0271's fill line is refused by `check_nights`
   - done when: `python tools/nights.py 43 56` and `python tools/play_nights.py 43 56` output in the journal, with the matchup line for each new enemy and the night each side first opens
   - done when: `python tools/nights.py` for the whole year, after all four seasons, is in the journal: the year's curve in one table
 
@@ -3079,7 +3063,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0124** [Art: the farmer chopping, mining, collecting and carrying](prompts/0124-art-farmer-gather-work.md) - waits for art A008
 - [ ] **0125** [Art: the farmer crafting, trading and repairing](prompts/0125-art-farmer-make-work.md) - waits for art A009
 
-## 10 - Sleep is the night  (17/23)
+## 10 - Sleep is the night  (18/23)
 
 - [x] **0126** [The clock: 06:00 to 02:00](prompts/0126-clock.md)
 - [x] **0127** [Going to bed starts the night](prompts/0127-bed.md)
@@ -3103,11 +3087,11 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0145** [Art: the porch guardian](prompts/0145-art-guardian.md) - waits for art A003
 - [ ] **0146** [Art: the guardian's cursor](prompts/0146-art-cursor.md) - waits for art A004
 - [ ] **0147** [Art: the night hotbar and HUD icons](prompts/0147-art-night-icons.md) - waits for art A005
-- [ ] **0148** [Checkpoint: is the night better with him asleep?](prompts/0148-checkpoint-sleep.md)
+- [x] **0148** [Checkpoint: is the night better with him asleep?](prompts/0148-checkpoint-sleep.md)
 
 ## 11 - Calendar and seasons  (0/16)
 
-- [ ] **0149** [The calendar: four seasons of fourteen days](prompts/0149-calendar.md) - needs 0148
+- [ ] **0149** [The calendar: four seasons of fourteen days](prompts/0149-calendar.md)
 - [ ] **0150** [Nights looked up by the calendar](prompts/0150-calendar-lookup.md) - needs 0149
 - [ ] **0151** [The night is the calendar day](prompts/0151-night-is-calendar.md) - needs 0150
 - [ ] **0152** [Full Moon nights](prompts/0152-full-moon.md) - needs 0151
@@ -3134,7 +3118,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0170** [Crops keep to their seasons](prompts/0170-crop-seasons.md) - needs 0168, 0149, 0169
 - [ ] **0171** [Winter: nothing grows outside](prompts/0171-winter-rules.md) - needs 0170, 0159
 - [ ] **0172** [Crops that grow back](prompts/0172-regrowing-crops.md) - needs 0168
-- [ ] **0173** [Five tools, three tiers](prompts/0173-tool-tiers.md) - needs 0148
+- [ ] **0173** [Five tools, three tiers](prompts/0173-tool-tiers.md)
 - [ ] **0174** [The can and the hoe by tier](prompts/0174-can-and-hoe.md) - needs 0173, 0167
 - [ ] **0175** [The axe and the pickaxe by tier](prompts/0175-axe-pickaxe.md) - needs 0173
 - [ ] **0176** [Copper, coal and gold](prompts/0176-copper-coal-gold.md) - needs 0175, 0156
@@ -3150,9 +3134,9 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0186** [Barns at night](prompts/0186-barns-at-night.md) - needs 0183
 - [ ] **0187** [Days in a barrel: the keg and the preserves jar](prompts/0187-keg-and-jar.md) - needs 0184, 0168, 0149, 0186
 - [ ] **0188** [The dairy, the loom and the mill](prompts/0188-dairy-loom-mill.md) - needs 0187, 0185
-- [ ] **0189** [The shipping bin](prompts/0189-shipping-bin.md) - needs 0148, 0156
+- [ ] **0189** [The shipping bin](prompts/0189-shipping-bin.md) - needs 0156
 - [ ] **0190** [The peddler and his hours](prompts/0190-peddler.md) - needs 0170, 0183, 0185, 0173
-- [ ] **0191** [The house in three tiers](prompts/0191-house-tiers.md) - needs 0148
+- [ ] **0191** [The house in three tiers](prompts/0191-house-tiers.md)
 - [ ] **0192** [Cooking with the new harvest](prompts/0192-cooking-v2.md) - needs 0188, 0184
 - [ ] **0193** [Every season can make what it needs](prompts/0193-seasonal-supply.md) - needs 0170, 0176, 0188, 0190, 0192
 - [ ] **0194** [The day's economy](prompts/0194-day-economy.md) - needs 0193, 0189, 0171, 0172, 0174, 0177, 0178, 0180, 0182, 0186, 0191

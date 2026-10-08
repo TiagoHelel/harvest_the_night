@@ -161,7 +161,20 @@ TASKS = [
               "only follows a fallen boss), winnable with what the tutorial "
               "(0141) gives; the tutorial asserts of 0041/0141 stay green",
               "Every night fits the night length (0137) with room for the last "
-              "wave to be fought before dawn",
+              "wave to be fought before dawn, **and fills it** (moved here by "
+              "0148): its last wave is sent no earlier than `NIGHT_TICKS - "
+              "DAWN_MARGIN_TICKS - NIGHT_FILL_TICKS`, a new `# LEVER` in "
+              "`src/core/game_data.gd` (60 s, 30-120) in `digest()`'s `time` "
+              "row, and `tools/nights.py` prints each night's last send against "
+              "that line. 0148 measured today's ten sending everything by 36-84 "
+              "s of a 240 s night: every night it played was over, everything "
+              "dead, about a minute in, and none of a thousand autoplayed nights "
+              "reached dawn, so the plan's 'holding on until sunrise is worth as "
+              "much as killing everything' (4.5) and its three to five minutes "
+              "of waves never happen. Spread the waves - a later last wave, gaps "
+              "that leave quiet stretches between them - rather than shortening "
+              "`NIGHT_TICKS` below the plan's three minutes; day 1 too, still "
+              "winnable with the tutorial's tower",
               "Notes in the voice of the authored ten, English, one line each - "
               "they are what `tools/nights.py` prints",
               "Author against `python tools/nights.py 1 14` (count, hit points "
@@ -175,7 +188,8 @@ TASKS = [
               "only from the east; each kind is first sent on its authored "
               "introduction day; day 7 is the largest of days 1-7 and day 14 the "
               "largest of spring in hit points; the Giant is on day 14 and "
-              "nowhere else",
+              "nowhere else; every day 1-14 sends its last wave after the fill "
+              "line (`NIGHT_FILL_TICKS`) and before the dawn margin",
               "`python tools/play_nights.py 1 14` output is in the journal: "
               "night 1 holds at the lowest income, and every night that falls "
               "is named with what the curve does there; `python "
@@ -219,7 +233,8 @@ TASKS = [
               "Author against `python tools/nights.py 15 28` and `python "
               "tools/play_nights.py 15 28` (0271's range), starting from "
               "spring's final numbers; notes in the authored voice; every "
-              "night fits the night length (0137); DATA moves on purpose, SIM "
+              "night fits and fills the night (0137, 0271's "
+              "`NIGHT_FILL_TICKS`); DATA moves on purpose, SIM "
               "only if a day the determinism scenario fights changed"],
          dod=["`_task_0272_summer_nights` in `src/tools/headless_v1.gd`: days "
               "16-28 send only kinds introduced by that day, only from the east "
@@ -267,7 +282,8 @@ TASKS = [
               "which weapon each new enemy is meant to teach",
               "The template keeps climbing from summer's final numbers "
               "(`python tools/play_nights.py 29 42`); notes in the authored "
-              "voice; every night fits the night length (0137); DATA moves on "
+              "voice; every night fits and fills the night (0137, 0271's "
+              "`NIGHT_FILL_TICKS`); DATA moves on "
               "purpose, SIM only if a day the determinism scenario fights "
               "changed"],
          dod=["`_task_0273_autumn_nights` in `src/tools/headless_v1.gd`: days "
@@ -312,14 +328,21 @@ TASKS = [
               "(`python tools/play_nights.py 43 56`) - the "
               "searchlight and the electric fence - and the journal says which "
               "weapon each new enemy is meant to teach",
-              "Notes in the authored voice; every night fits the night length "
-              "(0137); DATA moves on purpose, SIM only if a day the determinism "
-              "scenario fights changed"],
+              "Notes in the authored voice; every night fits and fills the night "
+              "(0137, 0271's `NIGHT_FILL_TICKS`); DATA moves on purpose, SIM "
+              "only if a day the determinism scenario fights changed",
+              "With all four seasons authored, `GameData.check_nights` refuses a "
+              "night whose last wave is sent before 0271's fill line "
+              "(`NIGHT_FILL_TICKS`), for every date `python tools/nights.py "
+              "--check` resolves: 0148 found a night that is over in a minute "
+              "leaves dawn nothing to do"],
          dod=["`_task_0274_winter_nights` in `src/tools/headless_v1.gd`: days "
               "44-56 send only kinds introduced by that day; the frost zombie "
               "and the wraith are first sent on their introduction days, on "
               "different nights; the Winter Lord is on day 56 and nowhere else; "
-              "day 56 is the largest night of days 1-56 in hit points",
+              "day 56 is the largest night of days 1-56 in hit points; a copy "
+              "of a night with its last wave moved before 0271's fill line is "
+              "refused by `check_nights`",
               "`python tools/nights.py 43 56` and `python tools/play_nights.py "
               "43 56` output in the journal, with the matchup line for each new "
               "enemy and the night each side first opens",
