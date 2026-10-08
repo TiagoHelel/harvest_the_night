@@ -18,6 +18,8 @@ import re
 import subprocess
 import sys
 
+from textfile import write_text
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROMPTS = os.path.join(ROOT, "implementation", "prompts")
 STATUSES = ("todo", "doing", "done", "blocked")
@@ -101,7 +103,7 @@ def set_status(tid, status, note=""):
     text, n = RE_STATUS.subn(line.replace("\\", "\\\\"), text, count=1)
     if n == 0:
         sys.exit("%s has no Status line" % t["path"])
-    open(t["path"], "w", encoding="utf-8", newline="\n").write(text)
+    write_text(t["path"], text)
     print("%04d %s -> %s%s" % (tid, t["title"], status,
                                (" (%s)" % note) if note else ""))
     refresh_index()

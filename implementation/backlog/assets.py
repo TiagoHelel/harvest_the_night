@@ -32,6 +32,9 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
+sys.path.insert(0, os.path.join(ROOT, "tools"))
+
+from textfile import write_text  # noqa: E402
 PACKS = os.path.join(HERE, "packs")
 INDEX = os.path.join(HERE, "INDEX.md")
 GAME_PROMPTS = os.path.join(ROOT, "implementation", "prompts")
@@ -115,7 +118,7 @@ def write_index(packs):
             ", ".join("%04d" % t for t in p["for"]) or "-",
             os.path.basename(p["path"]), os.path.basename(p["path"])))
     lines.append("")
-    open(INDEX, "w", encoding="utf-8", newline="\n").write("\n".join(lines))
+    write_text(INDEX, "\n".join(lines))
 
 
 def set_status(pid, status, note=""):
@@ -132,7 +135,7 @@ def set_status(pid, status, note=""):
     text, n = RE_STATUS.subn(line.replace("\\", "\\\\"), text, count=1)
     if n == 0:
         sys.exit("%s has no Status line" % p["path"])
-    open(p["path"], "w", encoding="utf-8", newline="\n").write(text)
+    write_text(p["path"], text)
     print("%s %s -> %s%s" % (pid, p["title"], status, (" (%s)" % note) if note else ""))
     write_index(load())
 

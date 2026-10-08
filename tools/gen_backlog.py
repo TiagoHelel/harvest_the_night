@@ -21,6 +21,7 @@ sys.path.insert(0, os.path.join(ROOT, "tools"))
 
 import importlib  # noqa: E402
 import glob  # noqa: E402
+from textfile import write_text  # noqa: E402
 
 ## **Every part file, found rather than listed.** The import line used to
 ## name part1..part4 by hand, and a part added without editing it was a set
@@ -304,8 +305,7 @@ def write_index(tasks):
             L.append(line)
         L.append("")
 
-    with open(INDEX, "w", encoding="utf-8", newline="\n") as f:
-        f.write("\n".join(L))
+    write_text(INDEX, "\n".join(L))
     return counts, total
 
 
@@ -322,8 +322,7 @@ def main():
             if os.path.exists(p) and not force:
                 kept += 1
                 continue
-            with open(p, "w", encoding="utf-8", newline="\n") as f:
-                f.write(render(t))
+            write_text(p, render(t))
             written += 1
 
     counts, total = write_index(tasks)
