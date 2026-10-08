@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`###########.............`  **135 / 296 done**
+`###########.............`  **136 / 296 done**
 
-0 doing / 161 todo / 0 blocked across 18 phases.
+0 doing / 160 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-161 task(s) left, the ready ones first, then what they
+160 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -88,20 +88,22 @@ The last three legacy strips: A009's craft, trade and repair in the 32px body. R
   - done when: FHD captures (`python tools/shot.py 0125 --fhd`, with an earlier leaf's mid-verb scenario or a new one) of craft at the workshop, trade at the stall and repair on the house, by day and in the dark, in `implementation/shots/0125/`, opened
   - done when: The sim and data hashes are unchanged (art never moves them)
 
-### 0140 - The day HUD: the hour and bedtime
+### 0141 - Teaching the new night
 
-Ready to pick up.  Likely files: `src/ui/day_hud.gd, src/core/game_data.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/input_v1.gd`.
+Ready to pick up.  Likely files: `src/core/game_data.gd, src/core/tutorial.gd, src/core/sim.gd, src/ui/tutorial_prompt.gd, src/tools/perf_names.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
 
-The day HUD tells the time and says when it is time for bed: an HH:MM clock, a GO TO BED button that looks like the way into the night, a reminder from 22:00 and a warning before the 02:00 pass-out.
+Day one teaches the new night - go to bed, build with the cursor, press START, hold until dawn - by watching the state and never gating anything.
 
-- The HH:MM clock (0126's format) gets its final place and look, tinted from dusk; it reads the `Phases` clock helpers and nothing else
-- The GO TO BED button (`NightButton`) is dressed with the UI kit and lights up from the reminder hour
-- `BEDTIME_REMINDER_MINUTE := 22 * 60` and `PASS_OUT_WARNING_MINUTE := 25 * 60 + 30` (01:30) as `# LEVER`s with ranges; `validate()`: dusk <= reminder < warning < `DAY_END_MINUTE`. They are view thresholds, not balance, so they stay out of `digest()` and neither hash moves (0112's coverage assert reads only Dictionary and Array tables)
-- From 22:00 a quiet 'time for bed' line naming the GO TO BED key (the `night` action through `InputActions.label_of`, so a pad player reads 0121's glyph); from 01:30 a warning in the warn colour with the minutes left before he passes out (`DHUD_BEDTIME`, `DHUD_PASS_OUT_SOON`, both languages, inside `tools/i18n_check.py`'s widths)
-- A `bedtime` scenario in `shot.gd` (the farm at 22:30) beside `noon` and `dusk`
+- `TUTORIAL` has seven steps today (chop, plant, water, sell, craft, then 0132's night and build) and `MAX_TUTORIAL_LINES := 7` with a 3-9 range, so seven plus three does not fit: the `night` step becomes the bed step (`TUT_NIGHT` - 'N, or the button' - is replaced by `TUT_BED` and its row leaves strings.csv), START and dawn follow the night `build` step, and the lever goes to 9 - or two day steps merge; say which. `check_tutorial` still passes
+- `Tutorial._happened` arms that read the state only: asleep seen, a defence placed in a build step, NIGHT reached, a night that ended at dawn or by a win
+- `Tutorial.tick` runs on its beat in NIGHT too (0132 added PREPARATION; never indoors). `PerfNames.NIGHT` gains `Tutorial`: `_task_0102_budget` only compares the union of the two lists, so it would not notice a night system the benchmark does not time. `points_at` aims each step at something real: the bed (in the house view), a cell between the house and the spawn, the START button, the dawn countdown
+- `TUT_BED`, `TUT_BUILD` (rewritten), `TUT_START` and `TUT_DAWN` in both languages, inside the widths `tools/i18n_check.py` measures - practical lines, not a description of the reality switch
+- Rewrite `_task_0041_tutorial` and `_case_0041_tutorial` for the new steps
+- DATA moves (`TUTORIAL`); SIM moves only if the tutorial state differs in the determinism scenario - say which
 
-  - done when: `_case_0140_bedtime` in `input_v1.gd`: no reminder at 21:59, the reminder at 22:00, the warning at 01:30; clicking GO TO BED at 23:00 starts the night
-  - done when: `python tools/shot.py 0140 noon dusk bedtime` opened, also with `--pt_BR`
+  - done when: `_task_0141_tutorial` in `headless_v1.gd` (jump `day_tick` and `dawn_at` rather than playing whole spans): a scripted first day and night completes every step in order; ignoring the prompts reaches the same night with the same state apart from `tutorial`
+  - done when: `_case_0141_tutorial` in `input_v1.gd`: the bed line shows on day one after the day steps, the START line in the build step
+  - done when: Captures of the bed, START and dawn prompts, opened
 
 ### 0142 - The autoplayer sleeps too
 
@@ -225,26 +227,9 @@ A small sunrise over the farmhouse heads 0138's morning report. Optional: if the
   - done when: The sim and data hashes are unchanged (art never moves them)
   - done when: On the decline path instead: `python tools/placeholders.py` no longer lists A057, a capture of the morning report shows the band drawn directly, and the journal quotes the owner's words
 
-### 0141 - Teaching the new night
-
-Waits on 0140.  Likely files: `src/core/game_data.gd, src/core/tutorial.gd, src/core/sim.gd, src/ui/tutorial_prompt.gd, src/tools/perf_names.gd, assets/locale/strings.csv, src/tools/headless_check.gd, src/tools/input_check.gd, src/tools/headless_v1.gd, src/tools/input_v1.gd`.
-
-Day one teaches the new night - go to bed, build with the cursor, press START, hold until dawn - by watching the state and never gating anything.
-
-- `TUTORIAL` has seven steps today (chop, plant, water, sell, craft, then 0132's night and build) and `MAX_TUTORIAL_LINES := 7` with a 3-9 range, so seven plus three does not fit: the `night` step becomes the bed step (`TUT_NIGHT` - 'N, or the button' - is replaced by `TUT_BED` and its row leaves strings.csv), START and dawn follow the night `build` step, and the lever goes to 9 - or two day steps merge; say which. `check_tutorial` still passes
-- `Tutorial._happened` arms that read the state only: asleep seen, a defence placed in a build step, NIGHT reached, a night that ended at dawn or by a win
-- `Tutorial.tick` runs on its beat in NIGHT too (0132 added PREPARATION; never indoors). `PerfNames.NIGHT` gains `Tutorial`: `_task_0102_budget` only compares the union of the two lists, so it would not notice a night system the benchmark does not time. `points_at` aims each step at something real: the bed (in the house view), a cell between the house and the spawn, the START button, the dawn countdown
-- `TUT_BED`, `TUT_BUILD` (rewritten), `TUT_START` and `TUT_DAWN` in both languages, inside the widths `tools/i18n_check.py` measures - practical lines, not a description of the reality switch
-- Rewrite `_task_0041_tutorial` and `_case_0041_tutorial` for the new steps
-- DATA moves (`TUTORIAL`); SIM moves only if the tutorial state differs in the determinism scenario - say which
-
-  - done when: `_task_0141_tutorial` in `headless_v1.gd` (jump `day_tick` and `dawn_at` rather than playing whole spans): a scripted first day and night completes every step in order; ignoring the prompts reaches the same night with the same state apart from `tutorial`
-  - done when: `_case_0141_tutorial` in `input_v1.gd`: the bed line shows on day one after the day steps, the START line in the build step
-  - done when: Captures of the bed, START and dawn prompts, opened
-
 ### 0148 - Checkpoint: is the night better with him asleep?
 
-Waits on 0140, 0141, 0142.  Likely files: `implementation/PROGRESS.md, implementation/shots/0148/, implementation/prompts/`.
+Waits on 0141, 0142.  Likely files: `implementation/PROGRESS.md, implementation/shots/0148/, implementation/prompts/`.
 
 **The plan's Phase 1 test.** Play the new night - the farmer asleep, the cursor, START, dawn - with a mouse and with a pad, and answer honestly whether it is better than the MVP's night. Every later phase waits on the answer.
 
@@ -3129,7 +3114,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0124** [Art: the farmer chopping, mining, collecting and carrying](prompts/0124-art-farmer-gather-work.md) - waits for art A008
 - [ ] **0125** [Art: the farmer crafting, trading and repairing](prompts/0125-art-farmer-make-work.md) - waits for art A009
 
-## 10 - Sleep is the night  (14/23)
+## 10 - Sleep is the night  (15/23)
 
 - [x] **0126** [The clock: 06:00 to 02:00](prompts/0126-clock.md)
 - [x] **0127** [Going to bed starts the night](prompts/0127-bed.md)
@@ -3145,15 +3130,15 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0137** [The night ends at 06:00](prompts/0137-dawn-ends-night.md)
 - [x] **0138** [Waking up: the morning report](prompts/0138-morning-report.md)
 - [x] **0139** [The night HUD for the guardian](prompts/0139-night-hud-guardian.md)
-- [ ] **0140** [The day HUD: the hour and bedtime](prompts/0140-day-hud-clock.md)
-- [ ] **0141** [Teaching the new night](prompts/0141-tutorial-sleep.md) - needs 0140
+- [x] **0140** [The day HUD: the hour and bedtime](prompts/0140-day-hud-clock.md)
+- [ ] **0141** [Teaching the new night](prompts/0141-tutorial-sleep.md)
 - [ ] **0142** [The autoplayer sleeps too](prompts/0142-autoplay-sleep.md)
 - [ ] **0143** [Art: going to bed and sleeping](prompts/0143-art-farmer-bed.md) - waits for art A001
 - [ ] **0144** [Art: the farmer's reactions and Zzz](prompts/0144-art-reactions.md) - waits for art A002
 - [ ] **0145** [Art: the porch guardian](prompts/0145-art-guardian.md) - waits for art A003
 - [ ] **0146** [Art: the guardian's cursor](prompts/0146-art-cursor.md) - waits for art A004
 - [ ] **0147** [Art: the night hotbar and HUD icons](prompts/0147-art-night-icons.md) - waits for art A005
-- [ ] **0148** [Checkpoint: is the night better with him asleep?](prompts/0148-checkpoint-sleep.md) - needs 0140, 0141, 0142
+- [ ] **0148** [Checkpoint: is the night better with him asleep?](prompts/0148-checkpoint-sleep.md) - needs 0141, 0142
 
 ## 11 - Calendar and seasons  (0/16)
 

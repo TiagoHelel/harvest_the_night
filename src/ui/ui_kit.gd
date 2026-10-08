@@ -235,6 +235,15 @@ const SLOT_LINE_SPACING := -2
 ## that keeps things as they are.
 const DANGER := &"Danger"
 
+## **The day HUD's clock, late** (task 0140): the heading face in the warn
+## colour, from the minutes before he passes out.
+const CLOCK_LATE := &"ClockLate"
+
+## **GO TO BED** (task 0140): the way into the night wears the moon's letters,
+## and from the reminder hour the whole key is lit, as if it were pointed at.
+const BED := &"BedButton"
+const BED_LIT := &"BedButtonLit"
+
 
 
 ## The same nine roles, pushed apart. **Task 0098.**
@@ -353,6 +362,8 @@ static func _dress_text(out: Theme) -> void:
 	var big := heading_font()
 	if big != null:
 		out.set_font(&"font", HEADING, big)
+	out.set_type_variation(CLOCK_LATE, HEADING)
+	out.set_color(&"font_color", CLOCK_LATE, colour(WARN))
 
 	# Godot draws tooltips through these two types and nothing else, so a
 	# tooltip not named here would be the one control still wearing the
@@ -470,6 +481,17 @@ static func _dress_buttons(out: Theme) -> void:
 	# second set of four frames to keep in step.
 	out.set_type_variation(OWNED, &"Button")
 	out.set_color(&"font_disabled_color", OWNED, colour(GOOD))
+
+	# **GO TO BED, and GO TO BED when it is time.** The moon's letters on the
+	# usual key, then the warm face pointing gives a key, with the body
+	# colour on it - gold on wood is the pair that does not read.
+	out.set_type_variation(BED, &"Button")
+	for name in [&"font_color", &"font_hover_color", &"font_focus_color"]:
+		out.set_color(name, BED, colour(COOL))
+	out.set_type_variation(BED_LIT, &"Button")
+	out.set_stylebox(&"normal", BED_LIT, _padded(button("hover"), ROW_PAD, 0))
+	for name in [&"font_color", &"font_hover_color", &"font_focus_color"]:
+		out.set_color(name, BED_LIT, colour())
 
 	# Open-bottom tabs retain their three-pixel side margins. A gold underline
 	# identifies the selected page; hover and disabled have their own fields.

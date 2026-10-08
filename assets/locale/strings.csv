@@ -163,14 +163,17 @@ DESC_WORTH,0,worth $%d,vale $%d
 DHUD_AMMO,0,AMMO  %s,MUNIÇÃO  %s
 DHUD_AMMO_NONE,0,AMMO  none needed,MUNIÇÃO  nenhuma precisa
 DHUD_AMMO_ONE,0,%s %d,%s %d
+DHUD_BEDTIME,140,time for bed - %s,hora de dormir - %s
 DHUD_BITE,0,A BITE - PRESS SPACE,FISGOU - APERTE ESPAÇO
-DHUD_DAY,0,DAY %d   %02d:%02d%s,DIA %d   %02d:%02d%s
+DHUD_CLOCK,0,%02d:%02d,%02d:%02d
+DHUD_DAY,70,DAY %d,DIA %d
 DHUD_DAY_FIRST,0,DAY 1,DIA 1
-DHUD_DUSK,0,  DUSK,  ANOITECER
+DHUD_DUSK,140,DUSK,ANOITECER
 DHUD_HELD,0,%s %d,%s %d
 DHUD_MONEY,0,$ %d,$ %d
 DHUD_MONEY_FIRST,0,$ 0,$ 0
 DHUD_NIGHT_WAITING,0,GO TO BED - NIGHT %d,IR DORMIR - NOITE %d
+DHUD_PASS_OUT_SOON,140,passes out in %d min,desmaia em %d min
 DHUD_POWER,0,POWER %d/%d,ENERGIA %d/%d
 DHUD_POWER_SHORT,0,POWER %d/%d  everything at %d%%,ENERGIA %d/%d  tudo a %d%%
 DHUD_SEED_HEADING,168,# CROP    $  TIME  /DAY,# PLANTA  $  TEMPO /DIA

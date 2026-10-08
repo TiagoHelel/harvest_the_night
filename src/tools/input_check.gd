@@ -1025,12 +1025,14 @@ func _case_0021_day_hud() -> void:
 	var day_label: Label = require_control("Day")
 	var money_label: Label = require_control("Money")
 	var wood_label: Label = require_control("res_wood")
-	# The label carries the clock as well as the day now, so this asks what it
-	# is for rather than what it happened to read the day it was written.
+	# The clock has its own label beside the day since task 0140, so this
+	# asks each what it is for rather than what it happened to read the day
+	# it was written.
+	var clock_label: Label = require_control("Clock")
 	expect(day_label != null and day_label.text.begins_with("DAY 1"),
 		"it says which day", day_label.text if day_label else "")
-	expect(day_label != null and day_label.text.contains(":"),
-		"and what time it is", day_label.text if day_label else "")
+	expect(clock_label != null and clock_label.text.contains(":"),
+		"and what time it is", clock_label.text if clock_label else "")
 	expect(money_label != null and money_label.text.contains("25"),
 		"and what is in the purse",
 		money_label.text if money_label else "")
@@ -2626,11 +2628,15 @@ func _case_0039_clock() -> void:
 		return
 
 	var state := driver.state
-	var clock: Label = require_control("Day")
+	# The day and the hour, each its own label since task 0140, and the
+	# evening's line under the day.
+	var day_label: Label = require_control("Day")
+	var clock: Label = require_control("Clock")
+	var evening_line: Label = require_control("DayStatus")
 	expect(clock != null, "there is a clock")
 	await frames(2)
-	expect(clock != null and clock.text.begins_with("DAY 1"),
-		"saying which day", clock.text if clock else "")
+	expect(day_label != null and day_label.text.begins_with("DAY 1"),
+		"saying which day", day_label.text if day_label else "")
 	# The hour since task 0126: the day starts at 06:00 on a 24-hour clock.
 	expect(clock != null and clock.text.contains("06:0"),
 		"and starting near the top of it", clock.text if clock else "")
@@ -2667,8 +2673,9 @@ func _case_0039_clock() -> void:
 	expect(int(state["phase"]) == Phases.DAY,
 		"but the night has not started itself",
 		Phases.name_of(int(state["phase"])))
-	expect(clock != null and clock.text.to_lower().contains("dusk"),
-		"and the clock says so too", clock.text if clock else "")
+	expect(evening_line != null and evening_line.text.to_lower().contains("dusk"),
+		"and the line under the day says so too",
+		evening_line.text if evening_line else "")
 
 	Sim.advance(state, 600)
 	await frames(4)

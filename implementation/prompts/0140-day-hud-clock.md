@@ -1,7 +1,7 @@
 # 0140 - The day HUD: the hour and bedtime
 
 - **Phase:** 10 - Sleep is the night
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0126, 0127, 0128
 - **Likely files:** src/ui/day_hud.gd, src/core/game_data.gd, assets/locale/strings.csv, src/tools/shot.gd, src/tools/input_v1.gd
 

@@ -14593,3 +14593,90 @@ Counts: headless_check 16230, headless_v1 274, input_check 1064 (+6: the
 skip button and the countdown in the old cases), input_v1 144 (+28:
 `_case_0139_night_hud`). Sim 1222657941 and data 898358060 are unchanged:
 it is view only, and `night_ahead` numbers the night exactly as before.
+
+## 0140 - The day HUD: the hour and bedtime - done 2026-10-08
+
+What changed: the day HUD now tells the time and says when it is time for
+bed.
+
+**The clock** (`day_hud.gd`):
+- It is its own label now, `Clock`, at the top left in the heading face,
+  across both rows of the bar. It shows HH:MM off `Phases.clock_minute` and
+  wraps after midnight, so 01:30 never reads 25:30.
+- `DHUD_CLOCK` is new. `DHUD_DAY` is now only "DAY n" / "DIA n", beside the
+  clock.
+- From dusk it is tinted (`LIT_TINT`, as the old day label was). From the
+  pass-out warning it is in the warn colour, through a new
+  `UiKit.CLOCK_LATE`, which is the heading face in `Warn`.
+
+**The evening's line**, `DayStatus`, sits under the day:
+- "DUSK" / "ANOITECER" from dusk;
+- from 22:00, a quiet "time for bed - N" / "hora de dormir - N". It names the
+  GO TO BED key with `Actions.text_of(&"night")`, so a pad reads "BACK" /
+  "VOLTAR";
+- from 01:30, "passes out in 30 min" / "desmaia em 30 min" in the warn colour.
+  It counts the clock minutes to `DAY_END_MINUTE`.
+
+It lives in the bar's second row, under the day, rather than above the
+button. The tutorial's line floats over the world down to y 236, and there it
+could sit on top of one at the bottom right. The bar is never under it.
+
+**GO TO BED is dressed with the UI kit:**
+- `UiKit.BED`: the moon's letters on the usual key.
+- `UiKit.BED_LIT`: from the reminder hour, the warm face pointing gives a key,
+  with body-colour letters - the pair the kit says reads on wood. It used to
+  light up at dusk.
+- Past dusk it still names the night, but now the night it actually starts,
+  `Phases.night_ahead` (0139). Before, it showed the day's number, which says
+  NIGHT 3 on the day after night 2 was lost.
+
+**The levers** (`game_data.gd`):
+- `BEDTIME_REMINDER_MINUTE := 22 * 60` (`# LEVER` 20:00-24:00).
+- `PASS_OUT_WARNING_MINUTE := 25 * 60 + 30` (`# LEVER` 00:30-01:50).
+- A new `check_bedtime`, run by `validate()`, holds dusk <= reminder <
+  warning < `DAY_END_MINUTE`.
+- They are view thresholds, so they stay out of `digest()`, and DATA did not
+  move.
+
+**Shot `bedtime`** is new: the farm at 22:30, beside `noon` and `dusk`. That
+makes 23 scenarios, and `headless_check`'s count and list are updated.
+
+**Tests:**
+- `_case_0140_bedtime` (input_v1), with the driver held so each minute is the
+  one asked for:
+  - 21:59: the clock, "DUSK", and the button unlit.
+  - 22:00: the line names the GO TO BED key, quietly, and the button is lit.
+    With a pad in hand the line names Back.
+  - 01:30: 30 minutes in the warn colour, with the clock gone `ClockLate`.
+  - The clock ends before the day label. The evening's widest line - both
+    languages, both devices - ends before the resource grid.
+  - At 23:00, clicking GO TO BED starts the night.
+- `_task_0140_bedtime` (headless_v1): the shipped thresholds pass
+  `check_bedtime`. A reminder before dusk, a warning before the reminder and a
+  warning at the end of the day are refused.
+- The old tests that read the time or "dusk" out of the `Day` label now read
+  `Clock` and `DayStatus`: input_check's day HUD case and its light case, and
+  headless_v1's 0126 clock lines.
+
+Shot 0140 `noon`, `dusk` and `bedtime` (and `-pt_BR`) were opened:
+- noon: "12:15" in gold beside "DAY 1", and GO TO BED unlit with moon
+  letters;
+- dusk: "18:25" lit, with "ANOITECER" under "DIA 1", and the button still
+  unlit;
+- bedtime: "22:45" lit, with "hora de dormir - N" under "DIA 1", and "IR
+  DORMIR - NOITE 1" on the lit key;
+- nothing overlaps the money or the resource grid.
+
+Files:
+- src/ui/{day_hud,ui_kit}.gd
+- src/core/game_data.gd
+- src/tools/{shot,input_v1,input_check,headless_v1,headless_check}.gd
+- assets/locale/strings.csv
+- implementation/shots/0140/
+
+Verify: **PASS**, 59 passed in 562 s (OVER BUDGET as before). Suite times:
+headless_check 81.2 s, headless_v1 3.7 s, input_check 89.0 s, input_v1 21.0 s.
+Counts: headless_check 16232 (+2: the bedtime scenario's name and count),
+headless_v1 278 (+4: `_task_0140_bedtime`), input_check 1064,
+input_v1 151 (+7: `_case_0140_bedtime`). Sim 1222657941 and data 898358060
+are unchanged: the two levers are view thresholds outside `digest()`.

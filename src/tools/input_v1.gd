@@ -36,7 +36,7 @@ extends "res://src/tools/input_check.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V1_CASES := 13
+const V1_CASES := 14
 
 
 func _process(delta: float) -> bool:
@@ -63,6 +63,7 @@ func _run() -> void:
 	await _case_0136_start()
 	await _case_0138_morning()
 	await _case_0139_night_hud()
+	await _case_0140_bedtime()
 	_finish()
 
 
@@ -1292,5 +1293,101 @@ func _case_0139_night_hud() -> void:
 	expect(int(state["phase"]) == Phases.RESULT, "and a click runs the night to its end",
 		Phases.name_of(int(state["phase"])))
 	driver.set_speed(1)
+	await close_scene()
+	_completed += 1
+
+
+## 0140 - the day HUD tells the time and says when it is time for bed.
+func _case_0140_bedtime() -> void:
+	await open_scene(MAIN_SCENE)
+	var driver: SimDriver = require_control("SimDriver")
+	var actions := root.get_node_or_null(^"Actions")
+	if driver == null or actions == null:
+		await close_scene()
+		_completed += 1
+		return
+	var state := driver.state
+	await frames(4)
+	var clock: Label = require_control("Clock") as Label
+	var day: Label = require_control("Day") as Label
+	var evening: Label = require_control("DayStatus") as Label
+	var bed: Button = require_control("NightButton") as Button
+	if clock == null or day == null or evening == null or bed == null:
+		await close_scene()
+		_completed += 1
+		return
+	# The clock held where it is put, so a minute is the minute asked for.
+	driver.running = false
+
+	# **21:59: dusk, nothing more.**
+	state["day_tick"] = Phases.tick_at_minute(21 * 60 + 59)
+	await frames(3)
+	expect(clock.text == I18n.f(&"DHUD_CLOCK", [21, 59])
+		and evening.text == I18n.t(&"DHUD_DUSK")
+		and bed.theme_type_variation == UiKit.BED,
+		"at 21:59 the clock says so, the line says dusk and GO TO BED is not lit",
+		"%s / %s / %s" % [clock.text, evening.text, bed.theme_type_variation])
+
+	# **22:00: a quiet time for bed, naming the key, and the button lit.**
+	state["day_tick"] = Phases.tick_at_minute(GameData.BEDTIME_REMINDER_MINUTE)
+	await frames(3)
+	expect(evening.text == I18n.f(&"DHUD_BEDTIME", [actions.text_of(&"night")])
+		and evening.theme_type_variation == UiKit.DIM
+		and bed.theme_type_variation == UiKit.BED_LIT,
+		"at 22:00 a quiet line names the GO TO BED key, and the button lights up",
+		evening.text)
+	# On a pad it names the pad's button (0121's names).
+	actions.set(&"using_pad", true)
+	await frames(2)
+	expect(evening.text == I18n.f(&"DHUD_BEDTIME", [I18n.t(&"ACT_PAD_BACK")]),
+		"with a pad in hand it names Back", evening.text)
+	actions.set(&"using_pad", false)
+
+	# **01:30: the warning, with the minutes he has left.**
+	state["day_tick"] = Phases.tick_at_minute(GameData.PASS_OUT_WARNING_MINUTE)
+	await frames(3)
+	var left := GameData.DAY_END_MINUTE - GameData.PASS_OUT_WARNING_MINUTE
+	expect(evening.text == I18n.f(&"DHUD_PASS_OUT_SOON", [left])
+		and evening.theme_type_variation == UiKit.WARN
+		and clock.theme_type_variation == UiKit.CLOCK_LATE
+		and clock.text == I18n.f(&"DHUD_CLOCK", [1, 30]),
+		"at 01:30 the line counts the minutes left in the warn colour, the clock too",
+		"%s / %s" % [evening.text, clock.text])
+
+	# **It all fits**: the clock left of the day, and the evening's widest
+	# line - both languages, both devices - before the resource grid at 210.
+	expect(clock.get_global_rect().end.x <= day.get_global_rect().position.x,
+		"the clock ends before the day begins",
+		"%s against %s" % [clock.get_global_rect(), day.get_global_rect()])
+	var font := evening.get_theme_font(&"font")
+	var font_size := evening.get_theme_font_size(&"font_size")
+	var widest := 0.0
+	var widest_text := ""
+	for locale in ["en", "pt_BR"]:
+		I18n.use(locale)
+		for text in [I18n.t(&"DHUD_DUSK"),
+				I18n.f(&"DHUD_BEDTIME", [I18n.t(&"ACT_PAD_BACK")]),
+				I18n.f(&"DHUD_BEDTIME", ["N"]),
+				I18n.f(&"DHUD_PASS_OUT_SOON", [left])]:
+			var wide := font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1,
+				font_size).x
+			if wide > widest:
+				widest = wide
+				widest_text = text
+	I18n.use("en")
+	expect(evening.position.x + widest <= 206.0,
+		"the evening's widest line ends before the resource grid",
+		"%s: %.0f from %.0f" % [widest_text, widest, evening.position.x])
+
+	# **23:00: GO TO BED starts the night.**
+	state["day_tick"] = Phases.tick_at_minute(23 * 60)
+	driver.running = true
+	await frames(3)
+	await click_control("NightButton")
+	await until(func() -> bool: return int(state["phase"]) == Phases.PREPARATION,
+		"GO TO BED at 23:00")
+	expect(int(state["phase"]) == Phases.PREPARATION,
+		"clicking GO TO BED at 23:00 starts the night",
+		Phases.name_of(int(state["phase"])))
 	await close_scene()
 	_completed += 1

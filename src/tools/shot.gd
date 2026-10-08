@@ -68,6 +68,7 @@ const OUT := "res://implementation/shots/"
 const SCENARIOS: Array = [
 	["noon", "the farm at noon", ""],
 	["dusk", "the same farm at dusk", ""],
+	["bedtime", "the same farm at 22:30, time for bed", ""],
 	["wave", "a wave mid-fight", ""],
 	["result", "the night's result", "ResultScreen"],
 	["tech", "the tech tree", "TechPanel"],
@@ -631,6 +632,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 	match name:
 		"noon": _set_noon(state)
 		"dusk": _set_dusk(state)
+		"bedtime": _set_bedtime(state)
 		"wave": _set_wave(state)
 		"result": _set_result(state)
 		"tech": _set_tech(state)
@@ -1098,6 +1100,14 @@ func _set_woken(state: Dictionary) -> void:
 	(state["intent"] as Dictionary)["confirm_result"] = true
 	Sim.advance(state, 1)
 	_standing_at = Player.cell(state)
+
+
+## **The farm at 22:30** (task 0140): the clock lit, GO TO BED lit, and
+## the evening's line saying it is time for bed.
+func _set_bedtime(state: Dictionary) -> void:
+	_a_sown_field(state)
+	Sim.advance(state, maxi(Phases.tick_at_minute(22 * 60 + 30)
+		- int(state["day_tick"]), 1))
 
 
 func _set_dusk(state: Dictionary) -> void:

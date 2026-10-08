@@ -75,6 +75,14 @@ const DUSK_AT_TICK := (DUSK_MINUTE - DAY_START_MINUTE) * DAY_TICKS \
 ## not the run.
 const PASS_OUT_PREPARATION_TICKS := 30 * SECONDS  # LEVER: ticks, 15-60 seconds worth
 
+## **Bedtime, on the day HUD** (task 0140): from the reminder minute a quiet
+## line says it is time for bed and GO TO BED lights up; from the warning
+## minute the line counts what is left before he passes out at
+## `DAY_END_MINUTE`. View thresholds, not balance: they stay out of
+## `digest()`, and `check_bedtime` holds them in order.
+const BEDTIME_REMINDER_MINUTE := 22 * 60       # LEVER: minutes, 20:00-24:00
+const PASS_OUT_WARNING_MINUTE := 25 * 60 + 30  # LEVER: minutes, 00:30-01:50
+
 ## **The night ends at 06:00** (task 0137): the waves' length from the build
 ## step's end to dawn - the plan's three to five real minutes - the same
 ## after a 21:00 bedtime and after a pass-out. A house still standing at
@@ -1829,6 +1837,8 @@ static func validate() -> Array:
 
 	errors.append_array(check_clock(DAY_START_MINUTE, DUSK_MINUTE,
 		DAY_END_MINUTE, DAY_TICKS))
+	errors.append_array(check_bedtime(DUSK_MINUTE, BEDTIME_REMINDER_MINUTE,
+		PASS_OUT_WARNING_MINUTE, DAY_END_MINUTE))
 	if PASS_OUT_PREPARATION_TICKS <= 0 \
 			or PASS_OUT_PREPARATION_TICKS >= Sim.MOST_TICKS_IN_A_NIGHT:
 		errors.append("the build step after passing out is %d ticks, outside 1..%d"
@@ -1859,6 +1869,15 @@ static func check_clock(start: int, dusk: int, end: int, day_ticks: int) -> Arra
 		errors.append("%d ticks are not a whole number of ticks per minute over %d minutes"
 			% [day_ticks, span])
 	return errors
+
+
+## The day HUD's bedtime thresholds in their order (task 0140): the reminder
+## no earlier than dusk, the warning after it, and both before the day ends.
+static func check_bedtime(dusk: int, reminder: int, warning: int, end: int) -> Array:
+	if dusk <= reminder and reminder < warning and warning < end:
+		return []
+	return ["bedtime runs dusk %d, reminder %d, warning %d, end %d - not in that order"
+		% [dusk, reminder, warning, end]]
 
 
 ## The cost field has to be able to represent every step it can be asked to

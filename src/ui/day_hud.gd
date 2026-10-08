@@ -54,11 +54,21 @@ extends Control
 ## powder mid-wave is something the player has to be able to see happening, and
 ## everything else in this panel belongs to the day.
 ##
+## ## The clock and bedtime (task 0140)
+##
+## Top left, in the heading face: the hour is what the day is spent against
+## now that 02:00 ends it. Beside it the day, and under the day one line for
+## the evening - dusk, then from `BEDTIME_REMINDER_MINUTE` a quiet "time for
+## bed" naming the GO TO BED key, then from `PASS_OUT_WARNING_MINUTE` the
+## minutes left before he passes out, in the warn colour, with the clock
+## gone the same colour.
+##
 ## ## The night button
 ##
 ## Bottom right, and it says what it will do rather than just "night". It is a
 ## real focusable `Button`, so the keyboard reaches it; `N` does the same thing
-## without having to find it.
+## without having to find it. It wears the moon's letters (`UiKit.BED`) and
+## lights up from the reminder hour (`UiKit.BED_LIT`).
 
 ## What the top bar shows, in two rows. Not all thirteen: the bar has 480
 ## pixels and the inventory panel of task 0036 is where everything lives.
@@ -80,6 +90,12 @@ const FLASH_SECONDS := 0.45
 ## HUD had six colour constants to keep in step.
 const LIT_TINT := Color(1.55, 1.45, 1.10)
 
+## The clock, the day beside it and the evening's line under the day: the
+## clock is in the heading face across both rows of the bar.
+const CLOCK_AT := Vector2(4, 2)
+const DAY_AT := Vector2(68, 3)
+const STATUS_AT := Vector2(68, 14)
+
 ## The actions that pick a seed, in `Farming.seeds()` order.
 ##
 ## **Six slots, not one per crop.** That was the objection when these were
@@ -92,7 +108,9 @@ const SEED_ACTIONS: Array = [&"slot_1", &"slot_2", &"slot_3", &"slot_4",
 
 
 var _state: Dictionary = {}
+var _clock: Label
 var _day: Label
+var _status: Label
 var _money: Label
 var _night: Button
 
@@ -127,8 +145,12 @@ func _ready() -> void:
 	strip.size = Vector2(480, 27)   # tall enough for both rows
 	add_child(strip)
 
-	_day = _label("Day", Vector2(4, 3), UiKit.WARM)
+	# **The clock first** (task 0140), its own label in the heading face.
+	_clock = _label("Clock", CLOCK_AT, UiKit.HEADING)
+	_clock.text = I18n.f(&"DHUD_CLOCK", [6, 0])
+	_day = _label("Day", DAY_AT, UiKit.WARM)
 	_day.text = I18n.t(&"DHUD_DAY_FIRST")
+	_status = _label("DayStatus", STATUS_AT, UiKit.DIM)
 
 	# Reserve the full Portuguese dusk label before the money group.
 	_icon(GameData.MONEY, Vector2(144, 3))
@@ -174,6 +196,7 @@ func _ready() -> void:
 	_night.position = Vector2(352, 248)
 	_night.size = Vector2(124, 18)
 	_night.focus_mode = Control.FOCUS_ALL          # the keyboard can reach it
+	_night.theme_type_variation = UiKit.BED
 	_night.pressed.connect(_ask_for_night)
 	add_child(_night)
 
@@ -329,16 +352,17 @@ func _refresh(force: bool) -> void:
 	# the one thing it is for.
 	#
 	# **The hour, since task 0126**: 24-hour HH:MM off `Phases.clock_minute`,
-	# wrapping after midnight - 01:30, never 25:30. Task 0140 gives the clock
-	# its final look.
+	# wrapping after midnight - 01:30, never 25:30. Its own label in the
+	# heading face since task 0140, tinted from dusk and in the warn colour
+	# from the pass-out warning.
 	var minute := Phases.clock_minute(_state)
-	_day.text = I18n.f(&"DHUD_DAY", [
-		int(_state["day"]),
-		(minute / 60) % 24,
-		minute % 60,
-		I18n.t(&"DHUD_DUSK") if Phases.is_dusk(_state) else "",
-	])
-	_day.modulate = LIT_TINT if Phases.is_dusk(_state) else Color.WHITE
+	var late := minute >= GameData.PASS_OUT_WARNING_MINUTE
+	_clock.text = I18n.f(&"DHUD_CLOCK", [(minute / 60) % 24, minute % 60])
+	_clock.theme_type_variation = UiKit.CLOCK_LATE if late else UiKit.HEADING
+	_clock.modulate = LIT_TINT if Phases.is_dusk(_state) and not late \
+		else Color.WHITE
+	_day.text = I18n.f(&"DHUD_DAY", [int(_state["day"])])
+	_refresh_evening(minute)
 	var money := Resources.amount(_state, GameData.MONEY)
 	if force or money != int(_last.get(GameData.MONEY, -1)):
 		if not force and _last.has(GameData.MONEY):
@@ -383,10 +407,35 @@ func _refresh(force: bool) -> void:
 		_line.theme_type_variation = UiKit.WARM if biting else UiKit.DIM
 
 	# **Past dusk the button asks.** It never presses itself: `design.md`
-	# promises the player switches reality when they want to.
-	_night.text = I18n.f(&"DHUD_NIGHT_WAITING", [int(_state["day"])]) \
+	# promises the player switches reality when they want to. It names the
+	# night it starts - the one after the last won, which is not the day's
+	# number once a night has been lost - and lights up from the reminder
+	# hour (task 0140).
+	_night.text = I18n.f(&"DHUD_NIGHT_WAITING", [Phases.night_ahead(_state)]) \
 		if Phases.is_dusk(_state) else I18n.t(&"DHUD_TO_NIGHT")
-	_night.modulate = LIT_TINT if Phases.is_dusk(_state) else Color.WHITE
+	_night.theme_type_variation = UiKit.BED_LIT \
+		if minute >= GameData.BEDTIME_REMINDER_MINUTE else UiKit.BED
+
+
+## **The evening's line**, under the day (task 0140): dusk; then, from the
+## reminder hour, a quiet time for bed naming the GO TO BED key (0121's
+## names, for the device in hand); then, from the warning minute, the minutes
+## left before he passes out, in the warn colour. Nothing before dusk.
+func _refresh_evening(minute: int) -> void:
+	var text := ""
+	var role := UiKit.DIM
+	if minute >= GameData.PASS_OUT_WARNING_MINUTE:
+		text = I18n.f(&"DHUD_PASS_OUT_SOON",
+			[maxi(GameData.DAY_END_MINUTE - minute, 0)])
+		role = UiKit.WARN
+	elif minute >= GameData.BEDTIME_REMINDER_MINUTE:
+		var actions := get_node_or_null(^"/root/Actions")
+		text = I18n.f(&"DHUD_BEDTIME",
+			[actions.text_of(&"night") if actions != null else ""])
+	elif Phases.is_dusk(_state):
+		text = I18n.t(&"DHUD_DUSK")
+	_status.text = text
+	_status.theme_type_variation = role
 
 
 ## Say it all again in whatever language is up now.

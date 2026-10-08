@@ -37,7 +37,7 @@ const WATCHDOG_SECONDS := 5.0
 
 ## How many `_task_NNNN_*` groups `_run()` is expected to finish.
 ## **Adding a group means bumping this.**
-const GROUPS := 19
+const GROUPS := 20
 
 const ActionsScript := preload("res://src/app/input_actions.gd")
 
@@ -88,6 +88,7 @@ func _run() -> void:
 	_task_0136_start()
 	_task_0137_dawn()
 	_task_0138_morning()
+	_task_0140_bedtime()
 
 
 func _finish() -> void:
@@ -915,10 +916,10 @@ func _task_0126_clock() -> void:
 
 	# **The HUD line is 24-hour HH:MM, wrapping after midnight.**
 	var late := 25 * 60 + 30
-	var line := I18n.f(&"DHUD_DAY", [3, (late / 60) % 24, late % 60, ""])
+	var line := I18n.f(&"DHUD_CLOCK", [(late / 60) % 24, late % 60])
 	expect(line.contains("01:30") and not line.contains("25:30"),
 		"01:30, never 25:30", line)
-	var morning := I18n.f(&"DHUD_DAY", [1, 6, 0, ""])
+	var morning := I18n.f(&"DHUD_CLOCK", [6, 0])
 	expect(morning.contains("06:00"), "and 06:00 with its zero", morning)
 	_completed += 1
 
@@ -1790,3 +1791,17 @@ func _wakes_in_bed(state: Dictionary, after: String) -> void:
 	House.leave(state)
 	expect(not House.inside(state) and Player.cell(state) == House.porch(state),
 		"and the door lets him out onto the porch %s" % after, str(Player.cell(state)))
+
+
+## 0140 - bedtime on the day HUD: two view thresholds, held in their order.
+func _task_0140_bedtime() -> void:
+	expect(GameData.check_bedtime(GameData.DUSK_MINUTE, GameData.BEDTIME_REMINDER_MINUTE,
+		GameData.PASS_OUT_WARNING_MINUTE, GameData.DAY_END_MINUTE).is_empty(),
+		"the shipped reminder and warning sit between dusk and the end of the day")
+	expect(not GameData.check_bedtime(18 * 60, 17 * 60, 25 * 60, 26 * 60).is_empty(),
+		"a reminder before dusk is refused")
+	expect(not GameData.check_bedtime(18 * 60, 22 * 60, 21 * 60, 26 * 60).is_empty(),
+		"so is a warning before the reminder")
+	expect(not GameData.check_bedtime(18 * 60, 22 * 60, 26 * 60, 26 * 60).is_empty(),
+		"and a warning no earlier than the pass-out itself")
+	_completed += 1
